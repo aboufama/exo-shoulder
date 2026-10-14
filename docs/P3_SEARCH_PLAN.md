@@ -2,6 +2,13 @@
 
 Written 2026-10-14 after P0 (docs/P0_BASE_MOUNT.md). Nothing here has run yet; this is the plan and the reasons.
 
+**Blocking decision first (user):** P0 section 7 shows that, for published girdle motion, no rigid chain on a thorax back
+plate within the DOF cap holds the band. The base model of the whole search follows the user's choice in
+docs/P0_BASE_MOUNT.md "Decision" item 6: **A** girdle-riding base, 3 DOF (the search then runs in the girdle frame,
+with acromion skin slip as the error model), **B** thorax plate + passive girdle (5 DOF), **C** thorax plate + 3 rigid
+offset-axis DOF (only if the user's measured girdle rise is near the rig's). Everything below is written for C and
+carries over to A by replacing "thorax-fixed base" with "girdle-riding base + slip".
+
 ## 1. What changes after P0
 
 | belief the r13 search relied on | what P0 measured on the rig | consequence for P3 |
