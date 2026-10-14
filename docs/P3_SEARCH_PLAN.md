@@ -9,7 +9,10 @@ Written 2026-10-14 after P0 (docs/P0_BASE_MOUNT.md). Nothing here has run yet; t
 | the base rides the scapula | the base bolts to the thorax; the scapula frame turns up to 58 deg and the GH centre rises up to 25 mm vs the thorax | every candidate is evaluated with a **thorax-fixed base**; the base part is checked against the moving scapular skin |
 | all joint axes meet at the GH centre (spherical chain) | a thorax-fixed spherical chain misaligns the GH centre by 25 mm (12.7 mm with the best fixed centre) - wider than the whole 2-10 mm band, so no surface shaping can rescue it | axes may be **offset from the GH centre**; for given axis directions the best axis points are a closed-form minimax LP (`pipeline/girdle/girdle.py`) - the search only explores directions |
 | 4 DOF (4R or 3R + cuff) | 3-DOF chains with offset axes leave ~5-7 mm worst-case misalignment on the rig law (P0 section 4) | **3 DOF is the primary family** (user, 2026-10-14): (a) 2R shoulder + humeral-rotation open ring on the upper arm, (b) 3R with offset axes; the 4R reference stays as the comparison |
-| any link arc is fine (r13 used 6-90 deg) | link 1 of the reference has no arm (24 deg, 1.7 mm between seats) | hard constraint `min_arc` 35 deg (search code, P3 agent change) |
+| any link arc is fine (r13 used 6-90 deg) | link 1 of the reference has no arm (24 deg, 1.7 mm between seats) | hard constraints `min_arc` 35 deg and `min_arm_mm` 10 mm (band_impl.py, merged) |
+| the rig's girdle law is right | published bone-pin data: GH rises 2-3x more (35 mm at 90 deg scaption vs 12.7), plus 5-24 mm posterior and 10-28 mm medial, plane-dependent; +-7-12 mm (1 SD) is not a function of arm angle (docs/research/gh_translation_literature.md) | every objective is the **worst over two girdle laws** (rig, literature `girdle.lift_literature`); the non-repeatable part is reported, never fitted |
+| a joint can sit anywhere on the shoulder | skin within ~170 mm of GH moves >= 6 mm vs the thorax in 99.8 % of directions; <= 4 mm only 175-280 mm out toward spine / neck base / sternum (`base_sites.json`) | a **thorax-fixed** hub must sit on that stable skin, or the base must ride the girdle (decision for the user, see P0) |
+| P0's 3R fit is a design | its J1 axis points where the arm goes overhead: the L1 build puts the J1 hub 160 mm out, 690 of 1337 frames blocked (`pipeline/girdle/hug.py`) | kinematic fits are seeds, not designs: hub sites and skin hug are in the loop from the first evaluation |
 
 ## 2. Families searched
 
@@ -19,7 +22,12 @@ Written 2026-10-14 after P0 (docs/P0_BASE_MOUNT.md). Nothing here has run yet; t
 | B. 3R, offset axes | 3 | J1 direction (2), J3 arm-fixed direction (2), a1, a2, branch, link orders | axis points = minimax LP |
 | C. 4R spherical (r13 family) on a thorax base | 4 | as r13 | reference only |
 
-Stack and hardware per family come from `docs/research/ring_and_shell_hardware.md` (ring rail section, carriage length, shell-on-shell liner) and docs/HARDWARE.md (v4 hub).
+Stack and hardware per family come from `docs/research/ring_and_shell_hardware.md` and docs/HARDWARE.md: hubs = the v4
+plain stack (10.47 mm; thin crossed-roller alternative ~9.0-9.2 mm needs a O50 boss); ring = custom caged-ball wire-race
+slide (~10 mm radial, ~86 g for 150 deg + carriage) or iglidur C-band with a long shoe (8.5-10.5 mm) - no catalogue
+curved guide fits R 46-65 mm. Ring travel is cheap to cut: 196 -> 71 deg costs 0.3 mm of misalignment
+(`ring_pareto.json`), so family A searches with travel <= ~75 deg (an arm-fixed arc of ~95 deg incl. the carriage vs
+the 82 deg trunk-free window). Rail station near the deltoid cap (the only round section: `ring_roundness.json`).
 
 ## 3. Objectives (Pareto, not one blended score)
 
@@ -35,7 +43,7 @@ Method: NSGA-II-style non-dominated sorting + crowding inside the existing evolu
 
 ## 4. Robust across body shapes
 
-Until SMPL-X is licensed (user action, `data/raw/README.md`): the rig at three uniform scales S x {0.92, 1.00, 1.08} (roughly 5th-percentile female to 95th-percentile male stature) and two girdle laws - the rig's and the literature law from `docs/research/gh_translation_literature.md`. A design's objective value is its **worst** over the training bodies (minimax robustness), not the mean. After the licence: 8 SMPL-X shapes spanning the first 3 shape components (+-2 SD), registered to the rig's skeleton, same rule.
+Until SMPL-X is licensed (user action, `data/raw/README.md`): the rig at three uniform scales S x {0.92, 1.00, 1.08} (roughly 5th-percentile female to 95th-percentile male stature) and two girdle laws - the rig's and the literature law (`girdle.lift_literature`, from `docs/research/gh_translation_literature.md`). The rig's skin follows the rig law; fixing the rig's girdle (clavicle chain, scapula pivoting at the AC joint - the data wins, P2) comes before trusting any skin-hug number near the shoulder top. A design's objective value is its **worst** over the training bodies (minimax robustness), not the mean. After the licence: 8 SMPL-X shapes spanning the first 3 shape components (+-2 SD), registered to the rig's skeleton, same rule.
 
 ## 5. Held-out split (decided before any search runs; to be committed as `data/raw/split.json`)
 
