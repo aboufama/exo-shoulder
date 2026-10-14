@@ -11,6 +11,7 @@ scripts that happened to get written:
 |---|---|
 | What exactly must be true, as numbers? | [`REQUIREMENTS.md`](REQUIREMENTS.md) - R1-R15, each with a pass/fail threshold |
 | What would an expert do that the brief doesn't ask for, from what raw material, with which tools? | [`docs/PLAN.md`](docs/PLAN.md) - the depth reframing and phases P0-P6 |
+| How do we work? | [`docs/METHOD.md`](docs/METHOD.md) - altitude, depth, range (Felix Rieseberg's essay, applied) |
 | What, other than the designer, shows it's right? | [`judge/`](judge/) - geometry judges + scorecard; ultimately a printed prototype on real bodies (R15) |
 | What has been learned so far? | [`docs/FINDINGS.md`](docs/FINDINGS.md) |
 | How do I run it? | [`docs/PIPELINE.md`](docs/PIPELINE.md), [`CLAUDE.md`](CLAUDE.md) for agents |

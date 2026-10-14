@@ -2,7 +2,7 @@
 
 Reframed with the "depth" questions (Felix Rieseberg, *How to be more ambitious*, Oct 2026): what would a field-leading
 wearable-robotics engineer do, from what raw material, with which instruments, and what outside the model and the user
-shows the result is right.
+shows the result is right. The full method (altitude and range too) is in docs/METHOD.md.
 
 ## 1. What a top professional would do that the brief does not ask for
 
