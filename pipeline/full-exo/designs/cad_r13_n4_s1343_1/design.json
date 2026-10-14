@@ -1,0 +1,29 @@
+{
+ "id": "cad_r13_n4_s1343_1",
+ "source": "pipeline/conformal/band_cad/inputs/r13_n4_s1343_1.json",
+ "n_joints": 4,
+ "sliding_cuff": false,
+ "dof": 4,
+ "kinematics": {
+  "az": 61.04469551507999,
+  "el": 57.767622533024216,
+  "a": [
+   23.875177356312374,
+   56.1273295125282,
+   29.59713237077311
+  ],
+  "w": [
+   84.07553783574085,
+   -10.840085164130999
+  ],
+  "branch": -1,
+  "order": [
+   1,
+   0,
+   1,
+   1
+  ]
+ },
+ "built_with": "pipeline/conformal/fair_cad/fair_pipeline.sh (swept-band links, turned JN hub, v4 joint, conformal saddle cuff)",
+ "note": "J1-J2 hubs 24.7 mm apart (1.7 mm between seats): link 1 has no arm - see docs/FINDINGS.md"
+}

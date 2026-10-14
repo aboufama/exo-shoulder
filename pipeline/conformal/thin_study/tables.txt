@@ -1,0 +1,116 @@
+AS BUILT (V0)
+part               kind   hubs            D1 body  SF_y    D2  D1+D2    SF seat D1 k soft  M@1.5     g
+4c_best base       base   up5.05              548  1.61   313    862  1.02     333  17.91   26.8  17.0
+4c_best link 1     short  low3.5/up5.05       984  0.89   531   1515  0.58     336  10.99   14.9  43.7
+4c_best link 2     long   low3.5/low3.5      1147  0.77   660   1807  0.49     376   2.37   12.8  47.4
+4c_best link 3     short  up5.05/up5.05     15984  0.06 10834  26818  0.03     404   0.66    0.9  18.7
+5r_thin base       base   low3.5             1120  0.79   510   1630  0.54     732   7.32   13.1  15.8
+5r_thin link 1     short  up5.05/up5.05      1036  0.85   544   1580  0.56     341   9.42   14.2  22.9
+5r_thin link 2     long   low3.5/low3.5      1752  0.50   971   2723  0.32     549   4.52    8.4  33.7
+5r_thin link 3     short  up5.05/low3.5       916  0.96   542   1455  0.60     325   9.20   16.0  29.3
+5r_thin link 4     long   up5.05/up5.05       987  0.89   680   1657  0.53     341   5.98   14.9  26.4
+4r_thin base       base   low3.5             1120  0.79   560   1680  0.52     733   7.37   13.1  17.0
+4r_thin link 1     short  up5.05/up5.05       534  1.65   288    822  1.07     328  12.88   27.5  18.8
+4r_thin link 2     long   low3.5/low3.5      2225  0.40  1098   3323  0.26     576   2.21    6.6  48.0
+4r_thin link 3     short  up5.05/up5.05       529  1.66   341    869  1.01     325  11.07   27.7  23.3
+
+TRADE CURVES (U-series: ribbon = lower plate = t, upper hub = t + 0.05)
+4c_best base U
+   t 2.5: D1 body  2252 (SF 0.39, M_allow@1.5 6.5 N.m, inf-life 5.6)  D1+D2  3489 (SF 0.25)  seat D1 1249 des 1931  k  3.03/ 5.26    8.7 g
+   t 3.0: D1 body  1493 (SF 0.59, M_allow@1.5 9.8 N.m, inf-life 8.4)  D1+D2  2323 (SF 0.38)  seat D1  866 des 1344  k  4.90/ 8.05   10.4 g
+   t 3.5: D1 body  1117 (SF 0.79, M_allow@1.5 13.1 N.m, inf-life 11.2)  D1+D2  1741 (SF 0.51)  seat D1  644 des 1005  k  7.30/11.37   12.1 g
+   t 4.0: D1 body   854 (SF 1.03, M_allow@1.5 17.2 N.m, inf-life 14.6)  D1+D2  1337 (SF 0.66)  seat D1  500 des  783  k 10.32/15.17   13.7 g
+   t 5.0: D1 body   545 (SF 1.62, M_allow@1.5 26.9 N.m, inf-life 22.9)  D1+D2   860 (SF 1.02)  seat D1  328 des  517  k 18.41/23.86   17.0 g
+   t 6.0: D1 body   386 (SF 2.28, M_allow@1.5 38.0 N.m, inf-life 32.4)  D1+D2   612 (SF 1.44)  seat D1  234 des  373  k 29.26/33.52   20.4 g
+   power fits: body_D1 ~ t^-2.00, body_des ~ t^-1.98, seat_D1 ~ t^-1.91, seat_des ~ t^-1.88, k_link_soft ~ t^2.59, mass_mesh_g ~ t^0.98
+   min t: t_body_SF15_D1 4.83, t_body_SF12_des 5.43, t_body_inf_life_D1 5.24, t_seat_SF15_D1 3.69, t_seat_SF12_des 4.16
+4c_best link 1 U
+   t 2.5: D1 body  2455 (SF 0.36, M_allow@1.5 6.0 N.m, inf-life 5.1)  D1+D2  3750 (SF 0.23)  seat D1 1194 des 1794  k  2.64/ 5.10   21.6 g
+   t 3.0: D1 body  1685 (SF 0.52, M_allow@1.5 8.7 N.m, inf-life 7.4)  D1+D2  2577 (SF 0.34)  seat D1  830 des 1260  k  4.23/ 7.81   24.4 g
+   t 3.5: D1 body  1262 (SF 0.70, M_allow@1.5 11.6 N.m, inf-life 9.9)  D1+D2  1939 (SF 0.45)  seat D1  614 des  935  k  6.26/11.11   27.1 g
+   t 4.0: D1 body   978 (SF 0.90, M_allow@1.5 15.0 N.m, inf-life 12.8)  D1+D2  1506 (SF 0.58)  seat D1  481 des  736  k  8.69/14.98   29.8 g
+   t 5.0: D1 body   644 (SF 1.37, M_allow@1.5 22.8 N.m, inf-life 19.4)  D1+D2   996 (SF 0.88)  seat D1  317 des  489  k 14.92/24.43   35.4 g
+   t 6.0: D1 body   454 (SF 1.94, M_allow@1.5 32.3 N.m, inf-life 27.5)  D1+D2   706 (SF 1.25)  seat D1  226 des  352  k 23.07/35.92   41.1 g
+   power fits: body_D1 ~ t^-1.91, body_des ~ t^-1.89, seat_D1 ~ t^-1.89, seat_des ~ t^-1.86, k_link_soft ~ t^2.47, mass_mesh_g ~ t^0.74
+   min t: t_body_SF15_D1 5.24, t_body_SF12_des 5.87, t_body_inf_life_D1 5.70, t_seat_SF15_D1 3.61, t_seat_SF12_des 4.02
+4c_best link 1 W9
+   t 3.0: D1 body  1360 (SF 0.65, M_allow@1.5 10.8 N.m, inf-life 9.2)  D1+D2  2081 (SF 0.42)  seat D1  717 des 1086  k  5.10/10.26   26.1 g
+   t 4.0: D1 body   780 (SF 1.13, M_allow@1.5 18.8 N.m, inf-life 16.0)  D1+D2  1202 (SF 0.73)  seat D1  422 des  646  k 10.47/19.61   32.0 g
+4c_best link 2 U
+   t 2.5: D1 body  2181 (SF 0.40, M_allow@1.5 6.7 N.m, inf-life 5.7)  D1+D2  3424 (SF 0.26)  seat D1  504 des  746  k  0.77/ 2.14   32.1 g
+   t 3.0: D1 body  1541 (SF 0.57, M_allow@1.5 9.5 N.m, inf-life 8.1)  D1+D2  2423 (SF 0.36)  seat D1  420 des  622  k  1.30/ 3.42   36.5 g
+   t 3.5: D1 body  1152 (SF 0.76, M_allow@1.5 12.7 N.m, inf-life 10.9)  D1+D2  1814 (SF 0.49)  seat D1  354 des  525  k  2.01/ 5.01   40.9 g
+   t 4.0: D1 body   896 (SF 0.98, M_allow@1.5 16.4 N.m, inf-life 14.0)  D1+D2  1419 (SF 0.62)  seat D1  301 des  448  k  2.94/ 6.93   45.2 g
+   t 5.0: D1 body   626 (SF 1.41, M_allow@1.5 23.4 N.m, inf-life 20.0)  D1+D2   991 (SF 0.89)  seat D1  225 des  336  k  5.36/11.51   53.9 g
+   t 6.0: D1 body   514 (SF 1.71, M_allow@1.5 28.6 N.m, inf-life 24.3)  D1+D2   742 (SF 1.19)  seat D1  174 des  260  k  8.92/17.08   62.8 g
+   power fits: body_D1 ~ t^-1.68, body_des ~ t^-1.75, seat_D1 ~ t^-1.22, seat_des ~ t^-1.21, k_link_soft ~ t^2.79, mass_mesh_g ~ t^0.77
+   min t: t_body_SF15_D1 5.32, t_body_SF12_des 5.95, t_body_inf_life_D1 5.85, t_seat_SF15_D1 2.27, t_seat_SF12_des 2.61
+4c_best link 2 W9
+   t 3.0: D1 body  1267 (SF 0.69, M_allow@1.5 11.6 N.m, inf-life 9.9)  D1+D2  1992 (SF 0.44)  seat D1  401 des  595  k  1.67/ 4.78   40.4 g
+   t 4.0: D1 body   732 (SF 1.20, M_allow@1.5 20.0 N.m, inf-life 17.1)  D1+D2  1154 (SF 0.76)  seat D1  287 des  427  k  3.72/ 9.87   50.2 g
+5r_thin base U
+   t 2.5: D1 body  2274 (SF 0.39, M_allow@1.5 6.4 N.m, inf-life 5.5)  D1+D2  3304 (SF 0.27)  seat D1 1442 des 2087  k  2.93/ 4.99   10.7 g
+   t 3.0: D1 body  1528 (SF 0.58, M_allow@1.5 9.6 N.m, inf-life 8.2)  D1+D2  2224 (SF 0.40)  seat D1  988 des 1432  k  4.86/ 7.78   12.9 g
+   t 3.5: D1 body  1118 (SF 0.79, M_allow@1.5 13.1 N.m, inf-life 11.2)  D1+D2  1626 (SF 0.54)  seat D1  725 des 1053  k  7.41/11.18   15.0 g
+   t 4.0: D1 body   844 (SF 1.04, M_allow@1.5 17.4 N.m, inf-life 14.8)  D1+D2  1230 (SF 0.72)  seat D1  556 des  809  k 10.72/15.13   17.1 g
+   t 5.0: D1 body   527 (SF 1.67, M_allow@1.5 27.9 N.m, inf-life 23.7)  D1+D2   770 (SF 1.14)  seat D1  381 des  555  k 19.78/24.34   21.2 g
+   t 6.0: D1 body   361 (SF 2.44, M_allow@1.5 40.6 N.m, inf-life 34.6)  D1+D2   531 (SF 1.66)  seat D1  280 des  410  k 32.28/34.68   25.4 g
+   power fits: body_D1 ~ t^-2.10, body_des ~ t^-2.08, seat_D1 ~ t^-1.87, seat_des ~ t^-1.86, k_link_soft ~ t^2.74, mass_mesh_g ~ t^0.98
+   min t: t_body_SF15_D1 4.75, t_body_SF12_des 5.13, t_body_inf_life_D1 5.13, t_seat_SF15_D1 3.97, t_seat_SF12_des 4.31
+5r_thin link 3 U
+   t 2.5: D1 body  2243 (SF 0.39, M_allow@1.5 6.5 N.m, inf-life 5.6)  D1+D2  3539 (SF 0.25)  seat D1 1316 des 2051  k  2.15/ 4.78   18.4 g
+   t 3.0: D1 body  1550 (SF 0.57, M_allow@1.5 9.5 N.m, inf-life 8.1)  D1+D2  2452 (SF 0.36)  seat D1  897 des 1404  k  3.52/ 7.18   21.3 g
+   t 3.5: D1 body  1145 (SF 0.77, M_allow@1.5 12.8 N.m, inf-life 10.9)  D1+D2  1815 (SF 0.48)  seat D1  652 des 1027  k  5.31/10.04   24.1 g
+   t 4.0: D1 body   877 (SF 1.00, M_allow@1.5 16.7 N.m, inf-life 14.3)  D1+D2  1393 (SF 0.63)  seat D1  505 des  797  k  7.54/13.34   26.9 g
+   t 5.0: D1 body   577 (SF 1.52, M_allow@1.5 25.4 N.m, inf-life 21.7)  D1+D2   923 (SF 0.95)  seat D1  332 des  527  k 13.29/21.11   32.7 g
+   t 6.0: D1 body   413 (SF 2.13, M_allow@1.5 35.5 N.m, inf-life 30.3)  D1+D2   661 (SF 1.33)  seat D1  234 des  373  k 20.98/30.27   38.6 g
+   power fits: body_D1 ~ t^-1.93, body_des ~ t^-1.92, seat_D1 ~ t^-1.96, seat_des ~ t^-1.94, k_link_soft ~ t^2.60, mass_mesh_g ~ t^0.84
+   min t: t_body_SF15_D1 4.97, t_body_SF12_des 5.64, t_body_inf_life_D1 5.39, t_seat_SF15_D1 3.73, t_seat_SF12_des 4.21
+5r_thin link 4 U
+   t 2.5: D1 body  2329 (SF 0.38, M_allow@1.5 6.3 N.m, inf-life 5.4)  D1+D2  3934 (SF 0.22)  seat D1 1462 des 2320  k  1.07/ 3.04   13.9 g
+   t 3.0: D1 body  1704 (SF 0.52, M_allow@1.5 8.6 N.m, inf-life 7.3)  D1+D2  2882 (SF 0.31)  seat D1 1002 des 1596  k  1.81/ 4.79   16.6 g
+   t 3.5: D1 body  1315 (SF 0.67, M_allow@1.5 11.2 N.m, inf-life 9.5)  D1+D2  2227 (SF 0.40)  seat D1  730 des 1165  k  2.81/ 6.95   19.3 g
+   t 4.0: D1 body  1072 (SF 0.82, M_allow@1.5 13.7 N.m, inf-life 11.7)  D1+D2  1790 (SF 0.49)  seat D1  555 des  889  k  4.12/ 9.53   22.0 g
+   t 5.0: D1 body   830 (SF 1.06, M_allow@1.5 17.7 N.m, inf-life 15.1)  D1+D2  1340 (SF 0.66)  seat D1  353 des  569  k  7.64/15.71   27.1 g
+   t 6.0: D1 body  1040 (SF 0.85, M_allow@1.5 14.1 N.m, inf-life 12.0)  D1+D2  1675 (SF 0.53)  seat D1  246 des  399  k 12.80/23.05   32.4 g
+   power fits: body_D1 ~ t^-1.04, body_des ~ t^-1.10, seat_D1 ~ t^-2.04, seat_des ~ t^-2.01, k_link_soft ~ t^2.83, mass_mesh_g ~ t^0.96
+   min t: t_body_SF15_D1 8.25, t_body_SF12_des 10.19, t_body_inf_life_D1 9.62, t_seat_SF15_D1 3.90, t_seat_SF12_des 4.42
+
+NECK (straight bar, clamp at the lap edge, load at the hub)
+   w 30 L 50 t 3.5: D1 514 D2 342 des 839 (SF 1.05; clamp edge 702)  k 5.2 N.m/deg  defl 0.66 mm  29.3 g
+   w 30 L 50 t 4.5: D1 316 D2 209 des 514 (SF 1.71; clamp edge 436)  k 11.1 N.m/deg  defl 0.31 mm  37.7 g
+   w 30 L 50 t 5.5: D1 215 D2 141 des 348 (SF 2.53; clamp edge 299)  k 20.1 N.m/deg  defl 0.17 mm  46.0 g
+   w 30 L 50 t 6.5: D1 155 D2 102 des 251 (SF 3.50; clamp edge 218)  k 33.0 N.m/deg  defl 0.11 mm  54.4 g
+   w 30 L 70 t 3.5: D1 517 D2 368 des 861 (SF 1.02; clamp edge 749)  k 3.5 N.m/deg  defl 1.81 mm  38.6 g
+   w 30 L 70 t 4.5: D1 318 D2 225 des 526 (SF 1.67; clamp edge 468)  k 7.5 N.m/deg  defl 0.86 mm  49.6 g
+   w 30 L 70 t 5.5: D1 216 D2 153 des 355 (SF 2.48; clamp edge 322)  k 13.5 N.m/deg  defl 0.47 mm  60.7 g
+   w 30 L 70 t 6.5: D1 156 D2 111 des 256 (SF 3.44; clamp edge 236)  k 22.3 N.m/deg  defl 0.29 mm  71.7 g
+   w 30 L 90 t 3.5: D1 518 D2 402 des 890 (SF 0.99; clamp edge 797)  k 2.6 N.m/deg  defl 3.87 mm  47.9 g
+   w 30 L 90 t 4.5: D1 318 D2 246 des 546 (SF 1.61; clamp edge 501)  k 5.6 N.m/deg  defl 1.83 mm  61.6 g
+   w 30 L 90 t 5.5: D1 216 D2 167 des 369 (SF 2.38; clamp edge 346)  k 10.2 N.m/deg  defl 1.00 mm  75.3 g
+   w 30 L 90 t 6.5: D1 156 D2 122 des 267 (SF 3.30; clamp edge 254)  k 16.8 N.m/deg  defl 0.61 mm  89.0 g
+   w 20 L 70 t 3.5: D1 718 D2 554 des 1272 (SF 0.69; clamp edge 1145)  k 2.3 N.m/deg  defl 2.76 mm  25.7 g
+   w 20 L 70 t 4.5: D1 436 D2 341 des 778 (SF 1.13; clamp edge 711)  k 4.9 N.m/deg  defl 1.30 mm  33.1 g
+   w 20 L 70 t 5.5: D1 292 D2 232 des 524 (SF 1.68; clamp edge 485)  k 9.0 N.m/deg  defl 0.72 mm  40.4 g
+   w 20 L 70 t 6.5: D1 209 D2 168 des 376 (SF 2.34; clamp edge 352)  k 14.8 N.m/deg  defl 0.44 mm  47.8 g
+TRACK (ring segment, cantilever arc S, keel depth D)
+   S 50 D 4: D1 1178 D2 768 des 1946  SF Ti 0.45 17-4 0.60 7075 0.26  k(Ti) 2.4  defl 1.64  mass Ti 13 g
+   S 50 D 7: D1 503 D2 325 des 828  SF Ti 1.06 17-4 1.41 7075 0.61  k(Ti) 11.6  defl 0.32  mass Ti 21 g
+   S 50 D 10: D1 357 D2 226 des 583  SF Ti 1.51 17-4 2.01 7075 0.86  k(Ti) 20.2  defl 0.14  mass Ti 28 g
+   S 50 D 13: D1 282 D2 175 des 457  SF Ti 1.92 17-4 2.56 7075 1.10  k(Ti) 28.9  defl 0.11  mass Ti 36 g
+   S 50 D 16: D1 241 D2 151 des 392  SF Ti 2.25 17-4 2.99 7075 1.28  k(Ti) 37.3  defl 0.09  mass Ti 44 g
+   S 50 D 19: D1 223 D2 141 des 364  SF Ti 2.42 17-4 3.22 7075 1.38  k(Ti) 45.2  defl 0.08  mass Ti 52 g
+   S 65 D 4: D1 1167 D2 754 des 1921  SF Ti 0.46 17-4 0.61 7075 0.26  k(Ti) 1.8  defl 3.48  mass Ti 16 g
+   S 65 D 7: D1 517 D2 332 des 849  SF Ti 1.04 17-4 1.38 7075 0.59  k(Ti) 8.8  defl 0.66  mass Ti 25 g
+   S 65 D 10: D1 369 D2 231 des 600  SF Ti 1.47 17-4 1.95 7075 0.84  k(Ti) 15.4  defl 0.28  mass Ti 34 g
+   S 65 D 13: D1 293 D2 181 des 474  SF Ti 1.86 17-4 2.47 7075 1.06  k(Ti) 21.9  defl 0.22  mass Ti 44 g
+   S 65 D 16: D1 248 D2 155 des 398  SF Ti 2.21 17-4 2.94 7075 1.26  k(Ti) 28.3  defl 0.19  mass Ti 53 g
+   S 65 D 19: D1 229 D2 145 des 375  SF Ti 2.35 17-4 3.12 7075 1.34  k(Ti) 34.4  defl 0.16  mass Ti 62 g
+   S 80 D 4: D1 1124 D2 741 des 1865  SF Ti 0.47 17-4 0.63 7075 0.27  k(Ti) 1.4  defl 6.29  mass Ti 18 g
+   S 80 D 7: D1 494 D2 319 des 813  SF Ti 1.08 17-4 1.44 7075 0.62  k(Ti) 7.0  defl 1.18  mass Ti 29 g
+   S 80 D 10: D1 341 D2 215 des 556  SF Ti 1.58 17-4 2.10 7075 0.90  k(Ti) 12.3  defl 0.51  mass Ti 40 g
+   S 80 D 13: D1 282 D2 179 des 461  SF Ti 1.91 17-4 2.54 7075 1.09  k(Ti) 17.4  defl 0.40  mass Ti 51 g
+   S 80 D 16: D1 246 D2 154 des 400  SF Ti 2.20 17-4 2.93 7075 1.26  k(Ti) 22.3  defl 0.33  mass Ti 62 g
+   S 80 D 19: D1 229 D2 146 des 374  SF Ti 2.35 17-4 3.12 7075 1.34  k(Ti) 27.1  defl 0.28  mass Ti 73 g
+
+wrote results.json

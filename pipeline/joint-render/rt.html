@@ -1,0 +1,204 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>EXO joint path traced</title>
+<style>
+  html, body { margin: 0; height: 100%; background: #e6e4e0; overflow: hidden; }
+  canvas { position: absolute; inset: 0; margin: auto; max-width: 100%; max-height: 100%; }
+  #s { position: fixed; left: 8px; top: 6px; font: 12px/1.3 Helvetica, Arial, sans-serif; color: #444; z-index: 2; }
+</style>
+<script type="importmap">
+{ "imports": {
+  "three": "https://cdn.jsdelivr.net/npm/three@0.165.0/build/three.module.js",
+  "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.165.0/examples/jsm/",
+  "three/examples/jsm/": "https://cdn.jsdelivr.net/npm/three@0.165.0/examples/jsm/",
+  "three-mesh-bvh": "https://cdn.jsdelivr.net/npm/three-mesh-bvh@0.7.6/build/index.module.js",
+  "three-gpu-pathtracer": "https://cdn.jsdelivr.net/npm/three-gpu-pathtracer@0.0.23/build/index.module.js" } }
+</script>
+</head>
+<body>
+<div id="s">loading</div>
+<script type="module">
+import * as THREE from 'three';
+import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+import { WebGLPathTracer } from 'three-gpu-pathtracer';
+
+const Q = new URLSearchParams(location.search);
+const W = +(Q.get('w') || 1280), H = +(Q.get('h') || 720);
+const FPS = 30, DUR = 12.2;
+const SPP = +(Q.get('spp') || 192);                  // samples per output frame (split across motion-blur subframes)
+const status = document.getElementById('s');
+
+const renderer = new THREE.WebGLRenderer({ antialias: false, preserveDrawingBuffer: true });
+renderer.setPixelRatio(1); renderer.setSize(W, H, false);
+renderer.toneMapping = THREE.ACESFilmicToneMapping; renderer.toneMappingExposure = 1.05;
+renderer.outputColorSpace = THREE.SRGBColorSpace;
+document.body.appendChild(renderer.domElement);
+const fit = () => { const k = Math.min(innerWidth / W, innerHeight / H); renderer.domElement.style.width = W * k + 'px'; renderer.domElement.style.height = H * k + 'px'; };
+addEventListener('resize', fit); fit();
+
+const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera(26, W / H, 0.01, 20);
+
+// studio environment: soft grey dome, big warm key softbox, cool strip rim, low fill
+function studio(w = 1024, h = 512) {
+  const d = new Float32Array(w * h * 4);
+  const box = (lon, lat, lon0, lat0, dl, dt, soft) => {
+    let a = Math.abs(((lon - lon0 + Math.PI * 3) % (Math.PI * 2)) - Math.PI) / dl, b = Math.abs(lat - lat0) / dt;
+    const e = Math.max(a, b); return e < 1 ? 1 : Math.exp(-(((e - 1) / soft) ** 2));
+  };
+  for (let y = 0; y < h; y++) for (let x = 0; x < w; x++) {
+    const lon = (x / w) * 2 * Math.PI - Math.PI, lat = Math.PI / 2 - (y / h) * Math.PI;
+    const up = Math.max(0, Math.sin(lat));
+    let r = 0.36 + 0.3 * up, g = r, b = r * 1.03;
+    if (lat < 0) { r = g = b = 0.3; }
+    const key = 8.0 * box(lon, lat, -0.9, 0.8, 0.65, 0.42, 0.35);
+    const rim = 5.0 * box(lon, lat, 2.3, 0.35, 0.2, 0.5, 0.3);
+    const fill = 1.8 * box(lon, lat, 0.9, 0.25, 0.5, 0.18, 0.4);
+    r += key * 1.0 + rim * 0.88 + fill; g += key * 0.97 + rim * 0.93 + fill; b += key * 0.92 + rim * 1.0 + fill;
+    const k = (y * w + x) * 4; d[k] = r; d[k + 1] = g; d[k + 2] = b; d[k + 3] = 1;
+  }
+  const t = new THREE.DataTexture(d, w, h, THREE.RGBAFormat, THREE.FloatType);
+  t.mapping = THREE.EquirectangularReflectionMapping; t.minFilter = t.magFilter = THREE.LinearFilter; t.needsUpdate = true;
+  return t;
+}
+scene.environment = studio();
+scene.background = new THREE.Color(0xe7e6e3);
+
+// fine orange-peel normal map for the powder coat
+function peel(size = 512) {
+  const hgt = new Float32Array(size * size); let seed = 11;
+  const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+  for (const [cells, amp] of [[48, 0.6], [96, 0.3], [192, 0.1]]) {
+    const L = Array.from({ length: cells * cells }, rnd);
+    for (let y = 0; y < size; y++) for (let x = 0; x < size; x++) {
+      const fx = x / size * cells, fy = y / size * cells, x0 = Math.floor(fx), y0 = Math.floor(fy), tx = fx - x0, ty = fy - y0;
+      const s = t => t * t * (3 - 2 * t), v = (i, j) => L[(j % cells) * cells + (i % cells)];
+      const a = v(x0, y0) + (v(x0 + 1, y0) - v(x0, y0)) * s(tx), b = v(x0, y0 + 1) + (v(x0 + 1, y0 + 1) - v(x0, y0 + 1)) * s(tx);
+      hgt[y * size + x] += amp * (a + (b - a) * s(ty));
+    }
+  }
+  const px = new Uint8Array(size * size * 4);
+  for (let y = 0; y < size; y++) for (let x = 0; x < size; x++) {
+    const hx = hgt[y * size + (x + 1) % size] - hgt[y * size + (x - 1 + size) % size];
+    const hy = hgt[((y + 1) % size) * size + x] - hgt[((y - 1 + size) % size) * size + x];
+    let nx = -hx * 3, ny = -hy * 3, nz = 1; const L = Math.hypot(nx, ny, nz); nx /= L; ny /= L; nz /= L;
+    const k = (y * size + x) * 4; px[k] = (nx * 0.5 + 0.5) * 255; px[k + 1] = (ny * 0.5 + 0.5) * 255; px[k + 2] = (nz * 0.5 + 0.5) * 255; px[k + 3] = 255;
+  }
+  const t = new THREE.DataTexture(px, size, size); t.wrapS = t.wrapT = THREE.RepeatWrapping; t.needsUpdate = true; return t;
+}
+// raw 7075, bead blasted: a fully metallic surface with a fine, even, satin roughness (no coating)
+const powder = new THREE.MeshPhysicalMaterial({ color: 0xb9bdc3, metalness: 1, roughness: 0.4 });
+const M = {
+  BOTTOM: powder, MIDDLE: powder, TOP: powder,
+  BEARING: new THREE.MeshPhysicalMaterial({ color: 0xd2d4d7, metalness: 1, roughness: 0.16 }),
+  SHIELDS: new THREE.MeshPhysicalMaterial({ color: 0xadb0b5, metalness: 1, roughness: 0.3 }),
+  WASHER_LO: new THREE.MeshPhysicalMaterial({ color: 0xd99a12, metalness: 0, roughness: 0.42 }),
+  MAGNET: new THREE.MeshPhysicalMaterial({ color: 0xdedcd8, metalness: 1, roughness: 0.14 }),
+  SCREW: new THREE.MeshPhysicalMaterial({ color: 0x8e9197, metalness: 1, roughness: 0.22 }),
+};
+M.WASHER_UP = M.WASHER_LO;
+
+const floor = new THREE.Mesh(new THREE.PlaneGeometry(8, 8), new THREE.MeshPhysicalMaterial({ color: 0xf3f2ef, roughness: 0.95 }));
+floor.rotation.x = -Math.PI / 2; floor.position.y = -0.026; scene.add(floor);
+
+// ------------------------------------------------------------------ motion
+const P = 0.7, ENGAGE = 4.85;                         // thread pitch and engaged length in BOTTOM's boss (mm)
+const LIFT = { MAGNET: -15, BOTTOM: 0, WASHER_LO: 13, MIDDLE: 26, BEARING: 42, SHIELDS: 42, WASHER_UP: 57, TOP: 70 };
+const ORDER = { TOP: 0, WASHER_UP: 1, BEARING: 2, SHIELDS: 2, MIDDLE: 3, WASHER_LO: 4, MAGNET: 4.5 };
+const SCREW_FREE = 88;                                 // final screw lift (mm above seated)
+const ease = t => t <= 0 ? 0 : t >= 1 ? 1 : t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+const smooth = t => t <= 0 ? 0 : t >= 1 ? 1 : t * t * (3 - 2 * t);
+const c01 = t => Math.max(0, Math.min(1, t));
+const nodes = {};
+
+function screwRise(t) {                                // mm above seated
+  if (t < 0.6) return 0;
+  if (t < 2.4) return ENGAGE * smooth((t - 0.6) / 1.8);                       // backing out on the thread
+  if (t < 5.6) return ENGAGE + (SCREW_FREE - ENGAGE) * ease(c01((t - 2.4) / 1.6));
+  if (t < 7.6) return ENGAGE + (SCREW_FREE - ENGAGE) * (1 - ease(c01((t - 6.0) / 1.6)));
+  if (t < 9.4) return ENGAGE * (1 - smooth((t - 7.6) / 1.8));                 // driving in on the thread
+  return 0;
+}
+
+function pose(t) {
+  for (const [n, o] of Object.entries(nodes)) {
+    if (n.startsWith('SCREW')) {
+      const rise = screwRise(t);
+      o.position.y = o.userData.y0 + rise / 1000;
+      o.rotation.y = 2 * Math.PI * Math.min(rise, ENGAGE) / P;    // locked to the 0.7 mm pitch while engaged
+      continue;
+    }
+    const d = (ORDER[n] || 0) * 0.17;
+    const up = ease(c01((t - 2.6 - d) / 1.5)), down = ease(c01((t - 5.6 - (4.5 - (ORDER[n] || 0)) * 0.17) / 1.4));
+    o.position.y = o.userData.y0 + (LIFT[n] || 0) / 1000 * (up - down);
+    o.rotation.y = 0;
+  }
+  const flex = t < 9.7 ? 0 : Math.sin(Math.PI * c01((t - 9.7) / 2.3));
+  nodes.MIDDLE.rotation.y = THREE.MathUtils.degToRad(95) * ease(flex);
+  const az = THREE.MathUtils.degToRad(26 + 36 * (t / DUR));
+  const ex = ease(c01((t - 2.4) / 2.0)) - ease(c01((t - 5.8) / 2.0));
+  const el = THREE.MathUtils.degToRad(25 + 7 * ex);
+  const r = 0.30 + 0.02 * ex, target = new THREE.Vector3(-0.02, 0.006 + 0.036 * ex, 0.0);
+  camera.position.set(target.x + r * Math.cos(el) * Math.sin(az), target.y + r * Math.sin(el), target.z + r * Math.cos(el) * Math.cos(az));
+  camera.lookAt(target); camera.updateMatrixWorld();
+}
+
+// ------------------------------------------------------------------ path tracer
+const pt = new WebGLPathTracer(renderer);
+pt.renderDelay = 0; pt.fadeDuration = 0; pt.minSamples = 1; pt.dynamicLowRes = false; pt.rasterizeScene = false;
+pt.bounces = 6; pt.filterGlossyFactor = 0.4; pt.tiles.set(2, 2);
+const yieldNow = () => new Promise(r => { const c = new MessageChannel(); c.port1.onmessage = () => r(); c.port2.postMessage(0); });
+
+async function trace(t, spp, K) {
+  // K motion-blur subframes over a 180-degree shutter, averaged in linear 8-bit space
+  const gl = renderer.getContext(), acc = new Float32Array(W * H * 4), buf = new Uint8Array(W * H * 4);
+  for (let k = 0; k < K; k++) {
+    pose(K === 1 ? t : t + ((k + 0.5) / K - 0.5) * 0.5 / FPS);
+    pt.setScene(scene, camera); pt.reset();
+    const n = Math.ceil(spp / K);
+    while (pt.samples < n) { pt.renderSample(); if ((pt.samples | 0) % 8 === 0) await yieldNow(); }
+    gl.readPixels(0, 0, W, H, gl.RGBA, gl.UNSIGNED_BYTE, buf);
+    for (let i = 0; i < buf.length; i++) acc[i] += buf[i];
+  }
+  const out = new ImageData(W, H);
+  for (let y = 0; y < H; y++) for (let x = 0; x < W * 4; x++) out.data[(H - 1 - y) * W * 4 + x] = acc[y * W * 4 + x] / K;
+  return out;
+}
+
+const cv = document.createElement('canvas'); cv.width = W; cv.height = H; const cx = cv.getContext('2d');
+async function frameBlob(t, spp, K) { cx.putImageData(await trace(t, spp, K), 0, 0); return new Promise(r => cv.toBlob(r, 'image/png')); }
+
+function blurCount(t) {                                 // subframes only where something moves fast
+  const a = screwRise(t - 0.5 / FPS), b = screwRise(t + 0.5 / FPS);
+  const spin = Math.abs(Math.min(a, ENGAGE) - Math.min(b, ENGAGE)) / P * 360;   // degrees per frame
+  if (spin > 1) return Math.min(8, Math.max(3, Math.ceil(spin / 8)));
+  return 1;
+}
+
+new GLTFLoader().load('joint.glb?t=' + Date.now(), async (g) => {
+  g.scene.traverse(o => { if (o.isMesh) { o.material = M[o.name.startsWith('SCREW') ? 'SCREW' : o.name] || powder; nodes[o.name] = o; o.userData.y0 = o.position.y; } });
+  scene.add(g.scene);
+  if (Q.has('render')) {
+    const N = Math.round(FPS * DUR), start = +(Q.get('from') || 0);
+    for (let i = start; i < N; i++) {
+      const t0 = performance.now();
+      const blob = await frameBlob(i / FPS, SPP, blurCount(i / FPS));
+      await fetch('/frame?i=' + i, { method: 'POST', body: blob });
+      status.textContent = `frame ${i + 1}/${N}  ${((performance.now() - t0) / 1000).toFixed(1)} s`;
+    }
+    await fetch('/done', { method: 'POST', body: String(N) });
+    status.textContent = 'done';
+  } else {
+    const t = +(Q.get('t') || 0), t0 = performance.now();
+    cx.putImageData(await trace(t, SPP, +(Q.get('k') || 1)), 0, 0);
+    renderer.domElement.style.display = 'none'; cv.style.cssText = renderer.domElement.style.cssText; cv.style.display = ''; document.body.appendChild(cv); fit();
+    cv.style.width = renderer.domElement.style.width; cv.style.height = renderer.domElement.style.height;
+    status.textContent = `t=${t}  ${SPP} spp  ${((performance.now() - t0) / 1000).toFixed(1)} s`;
+    window.STILL_DONE = true;
+  }
+});
+</script>
+</body>
+</html>

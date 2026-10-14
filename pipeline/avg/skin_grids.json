@@ -1,0 +1,1 @@
+{"N": 71, "H": 175.0, "STEP": 5.0, "scale": 1.0556638846119553, "elevs": [0, 15, 30, 45, 60, 75, 90, 105, 120, 135, 150, 165, 180], "order": "trunk per elev, then arm (humerus frame)", "body": "BodyParts3D mesh, bone-owned inside test", "frame": "thorax mm: x anterior, y up, z right, origin right GH; axis order i=x j=y k=z"}

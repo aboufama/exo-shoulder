@@ -1,0 +1,8 @@
+Raise overhead           links min   3.0 p5   3.0 | base min   2.7 | frames<1mm 0/31
+Drink from a cup         links min   7.2 p5   7.2 | base min   2.8 | frames<1mm 0/30
+Comb hair                links min   8.7 p5   8.7 | base min   3.4 | frames<1mm 0/34
+Reach a high shelf       links min   7.6 p5   7.6 | base min   2.7 | frames<1mm 0/27
+Wash opposite shoulder   links min   8.0 p5   8.0 | base min   3.0 | frames<1mm 0/33
+Reach back pocket        links min   7.6 p5   7.6 | base min   3.2 | frames<1mm 0/25
+Wave                     links min   4.5 p5   4.5 | base min   3.1 | frames<1mm 0/31
+Walking arm swing        links min   7.4 p5   7.4 | base min   3.5 | frames<1mm 0/17

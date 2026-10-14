@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Encoder Joint v4</title>
+<style>
+  :root { --bg: #ecebe8; --ink: #1c1d20; --dim: #6e7076; --panel: rgba(255,255,255,.78); --line: rgba(0,0,0,.09); --accent: #cc6b08; }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --bg: #141518; --ink: #ececef; --dim: #9a9ca3; --panel: rgba(28,29,33,.8); --line: rgba(255,255,255,.1); } }
+  html, body { margin: 0; height: 100%; background: var(--bg); color: var(--ink); overflow: hidden;
+    font: 13px/1.45 -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", sans-serif; }
+  #view { position: fixed; inset: 0; }
+  .panel { position: fixed; background: var(--panel); border: 1px solid var(--line); border-radius: 14px; backdrop-filter: blur(14px); padding: 14px 16px; }
+  #info { left: 16px; top: 16px; width: 300px; max-height: calc(100% - 140px); overflow: auto; }
+  h1 { font-size: 17px; margin: 0 0 2px; letter-spacing: -.01em; }
+  .sub { color: var(--dim); margin-bottom: 10px; }
+  .row { display: flex; justify-content: space-between; gap: 8px; padding: 3px 0; border-top: 1px solid var(--line); cursor: default; }
+  .row:hover { color: var(--accent); }
+  .row b { font-weight: 500; } .row span { color: var(--dim); font-variant-numeric: tabular-nums; white-space: nowrap; }
+  #ctl { left: 50%; transform: translateX(-50%); bottom: 16px; display: flex; gap: 14px; align-items: center; padding: 8px 14px; }
+  button { all: unset; cursor: pointer; padding: 6px 10px; border-radius: 8px; }
+  button[aria-pressed=true] { background: var(--ink); color: var(--bg); }
+  input[type=range] { width: 180px; accent-color: var(--accent); }
+  #sec { right: 16px; top: 16px; width: 320px; }
+  #sec svg { width: 100%; height: auto; display: block; }
+  @media (max-width: 760px) { #sec { display: none; } #info { width: calc(100% - 64px); max-height: 38%; } }
+</style>
+</head>
+<body>
+<div id="view"></div>
+<div class="panel" id="info"><h1>Encoder joint v4</h1><div class="sub">Ø23 hub · 10.47 mm above the skin face · position sensed on axis</div><div id="parts"></div></div>
+<div class="panel" id="sec"><div class="sub" style="margin:0 0 6px">Half section along the joint axis (mm)</div><div id="svg"></div></div>
+<div class="panel" id="ctl">
+  <button id="cut" aria-pressed="false">Section</button>
+  <label>Explode <input id="exp" type="range" min="0" max="1" step="0.01" value="0"></label>
+  <button id="spin" aria-pressed="false">Turn joint</button>
+</div>
+<script type="importmap">{ "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.165.0/build/three.module.js", "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.165.0/examples/jsm/" } }</script>
+<script type="module">
+import * as THREE from 'three';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
+const $ = id => document.getElementById(id); const bust = '?t=' + Date.now();
+const LV = await (await fetch('designs/joint_v4/levels.json' + bust)).json();
+const renderer = new THREE.WebGLRenderer({ antialias: true }); renderer.setPixelRatio(Math.min(2, devicePixelRatio)); renderer.toneMapping = THREE.AgXToneMapping;
+renderer.localClippingEnabled = true; $('view').appendChild(renderer.domElement);
+const scene = new THREE.Scene(); const bgc = () => getComputedStyle(document.documentElement).getPropertyValue('--bg').trim(); scene.background = new THREE.Color(bgc());
+scene.environment = new THREE.PMREMGenerator(renderer).fromScene(new RoomEnvironment(renderer), 0.04).texture;
+const sun = new THREE.DirectionalLight(0xffffff, 1.6); sun.position.set(-40, 80, 60); scene.add(sun); scene.add(new THREE.HemisphereLight(0xffffff, 0x9a948a, 1.1)); scene.environmentIntensity = 1.2;
+const camera = new THREE.PerspectiveCamera(30, 1, 0.5, 2000); const controls = new OrbitControls(camera, renderer.domElement); controls.enableDamping = true;
+function resize() { renderer.setSize(innerWidth, innerHeight); camera.aspect = innerWidth / innerHeight; camera.updateProjectionMatrix(); } addEventListener('resize', resize); resize();
+const clip = new THREE.Plane(new THREE.Vector3(0, 0, -1), 0.001);              // keeps z <= 0 (the axis is y): cuts through the axis
+const M = (o) => new THREE.MeshPhysicalMaterial(Object.assign({ side: THREE.DoubleSide, clippingPlanes: [clip] }, o));
+const mats = { ti: M({ color: 0x9a9da2, metalness: 1, roughness: 0.38 }), iglide: M({ color: 0xcc6b08, roughness: 0.42, clearcoat: 0.2 }), magnet: M({ color: 0xccc7bd, metalness: 1, roughness: 0.14 }),
+  pcb: M({ color: 0x1f5e3a, roughness: 0.5, clearcoat: 0.4 }), ic: M({ color: 0x2a2b2e, roughness: 0.45 }), flex: M({ color: 0xc98a1a, roughness: 0.35, transmission: 0.0 }),
+  screw: M({ color: 0xc4c4c8, metalness: 1, roughness: 0.12 }) };
+const kind = n => /washer|sleeve|igus/i.test(n) ? 'iglide' : /magnet/i.test(n) ? 'magnet' : /pcb/i.test(n) ? 'pcb' : /sensor ic/i.test(n) ? 'ic' : /flex/i.test(n) ? 'flex' : /M1\.6/.test(n) ? 'screw' : 'ti';
+// explode order along the axis (assembly order)
+const ORDER = [['lower member', 0], ['washer A', 1], ['magnet', 1.4], ['upper member', 2.2], ['sleeve', 2.6], ['washer B', 3.3], ['ring nut', 4.0], ['position PCB', 5.4], ['angle sensor', 5.4], ['flex', 5.4], ['cap', 6.6], ['(cap)', 7.4]];
+const gl = await new GLTFLoader().loadAsync('designs/joint_v4/joint_v4.glb' + bust);
+const root = new THREE.Group(); root.rotation.x = -Math.PI / 2; scene.add(root);    // CAD z (joint axis) -> up
+const parts = []; gl.scene.traverse(o => { if (o.isMesh) parts.push(o); });
+const list = $('parts'); const items = [];
+for (const o of parts) {
+  const nm = (o.name || o.parent?.name || '').replace(/_/g, ' ').split('|'), name = (nm[1] || nm[0]).replace(/\s+\d+$/, ''), grp = nm[0];
+  o.geometry.applyMatrix4(o.matrixWorld); o.position.set(0, 0, 0); o.rotation.set(0, 0, 0); o.scale.set(1, 1, 1);
+  if (!o.geometry.attributes.normal) o.geometry.computeVertexNormals();
+  o.material = mats[kind(name)].clone(); o.userData = { name, grp, base: 0, off: (ORDER.find(([k]) => name.includes(k)) || [0, 0])[1] };
+  root.add(o); items.push(o);
+}
+const rows = items.slice().sort((a, b) => a.userData.off - b.userData.off);
+list.innerHTML = rows.map((o, i) => `<div class="row" data-i="${items.indexOf(o)}"><b>${o.userData.name}</b><span>${o.userData.grp}</span></div>`).join('');
+list.querySelectorAll('.row').forEach(r => { const o = items[+r.dataset.i];
+  r.onmouseenter = () => { o.material.emissive = new THREE.Color(0xcc6b08); o.material.emissiveIntensity = 0.45; };
+  r.onmouseleave = () => { o.material.emissiveIntensity = 0; }; });
+// section diagram (half section, r 0..12, z 0..11) from the levels
+const L = LV, W = 320, H = 360, sx = r => 20 + r * 22, sz = z => H - 26 - z * 29;
+const rect = (r0, r1, z0, z1, fill, t) => `<rect x="${sx(r0)}" y="${sz(z1)}" width="${sx(r1) - sx(r0)}" height="${sz(z0) - sz(z1)}" fill="${fill}" stroke="rgba(0,0,0,.35)" stroke-width=".6"><title>${t}</title></rect>`;
+const ti = '#a9acb1', ig = '#cc6b08';
+let g = '';
+g += rect(5, 11.5, L.F, L.S, ti, 'lower plate 3.0') + rect(0, 5, L.F, L.z0, ti, 'integral pin Ø10 h9') + rect(0, 4, L.z0, L.R1, ti, 'M8x0.5 stub') ;
+g += rect(5, 9, L.rec, L.rec + 0.5, ig, 'washer A 0.5') + rect(6, 11.5, L.U0, L.U1, ti, 'upper hub 4.05') + rect(5, 6, L.U0, L.U0 + 4, ig, 'sleeve GSM-1012-04');
+g += rect(5, 9, L.B0, L.B0 + 0.5, ig, 'washer B 0.5') + rect(4, 9, L.z0, L.R1, '#8f9297', 'ring nut M8x0.5') + rect(0, 2, L.M0, L.M1, '#d8d3c8', 'magnet Ø4x2 N52');
+g += rect(0, 1.5, L.IC0, L.P0, '#2a2b2e', 'sensor IC 3x3') + rect(0, 8, L.P0, L.P1, '#1f5e3a', 'PCB Ø16 x 0.6');
+g += `<path d="M ${sx(9.3)} ${sz(L.U1)} L ${sx(11)} ${sz(L.U1)} L ${sx(11)} ${sz(L.U1 + 0.45)} Q ${sx(10.6)} ${sz(L.top)} ${sx(0)} ${sz(L.top)} L ${sx(0)} ${sz(L.P1)} L ${sx(9.3)} ${sz(L.P1)} Z" fill="${ti}" stroke="rgba(0,0,0,.35)" stroke-width=".6"><title>cap Ø22</title></path>`;
+const dim = (z, t) => `<line x1="${sx(11.6)}" x2="${sx(12.6)}" y1="${sz(z)}" y2="${sz(z)}" stroke="currentColor" stroke-width=".6"/><text x="${sx(12.7)}" y="${sz(z) + 3}" font-size="9" fill="currentColor">${t}</text>`;
+g += dim(L.F, 'skin face 0') + dim(L.S, `seat ${L.S.toFixed(2)}`) + dim(L.U1, `hub top ${L.U1.toFixed(2)}`) + dim(L.z0, `pin shoulder ${L.z0.toFixed(2)}`) + dim(L.top, `top ${L.top.toFixed(2)}`);
+g += `<line x1="${sx(0)}" x2="${sx(0)}" y1="${sz(-0.5)}" y2="${sz(11.2)}" stroke="currentColor" stroke-dasharray="4 3" stroke-width=".6"/>`;
+g += `<text x="${sx(0) + 3}" y="${sz(L.M0) + 12}" font-size="9" fill="currentColor">gap 0.40 → IC</text>`;
+$('svg').innerHTML = `<svg viewBox="0 0 ${W + 70} ${H}" style="color:var(--ink)">${g}</svg>`;
+// camera
+camera.position.set(95, 75, 115); controls.target.set(6, 5, 0); controls.update();
+let cut = false, spin = false, ang = 0; for (const o of items) o.material.clippingPlanes = [];
+$('cut').onclick = e => { cut = !cut; e.target.setAttribute('aria-pressed', cut); for (const o of items) o.material.clippingPlanes = cut ? [clip] : []; };
+$('spin').onclick = e => { spin = !spin; e.target.setAttribute('aria-pressed', spin); };
+$('exp').oninput = () => {};
+const upperNames = /upper member|sleeve|position PCB|angle sensor|flex|cap/i;
+renderer.setAnimationLoop(() => {
+  const ex = +$('exp').value * 4.0;
+  if (spin) ang += 0.01;
+  for (const o of items) {
+    o.position.set(0, 0, o.userData.off * ex);                                          // along CAD z (the joint axis)
+    o.rotation.set(0, 0, upperNames.test(o.userData.name) ? Math.sin(ang) * 0.9 : 0);
+  }
+  controls.update(); renderer.render(scene, camera);
+});
+</script>
+</body>
+</html>

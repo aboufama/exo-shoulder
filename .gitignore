@@ -1,0 +1,24 @@
+# caches and bulk outputs - regenerated (docs/PIPELINE.md)
+.cache/
+__pycache__/
+*.pyc
+.DS_Store
+*.log
+.flash/
+pipeline/conformal/gpu/body_mesh.json
+pipeline/conformal/gpu/deploy*.log
+pipeline/full-exo/film_render/
+pipeline/full-exo/designs/*/parts/
+pipeline/full-exo/designs/*/judge/body_contact.json.tmp
+pipeline/conformal/fair_cad/out_*/exo.glb
+pipeline/conformal/fair_cad/out_*/step/
+pipeline/conformal/fair_cad/out_debug/
+pipeline/conformal/fair_cad/out_cuff/*.npz
+pipeline/conformal/fair_cad/out_cuff/*.npy
+pipeline/conformal/fair_cad/out_cuff/*.glb
+pipeline/joint-render/out*/
+*.pt
+# personal data never goes in git: body scans / mocap of a person stay in data/raw/private/ (ignored)
+data/raw/private/
+.env
+*.key

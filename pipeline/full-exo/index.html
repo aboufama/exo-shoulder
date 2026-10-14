@@ -1,0 +1,248 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>EXO Right Arm</title>
+<style>
+  :root { --bg: #ecebe8; --ink: #1d1d1f; --mute: #6e6e73; --glass: rgba(255,255,255,.72); --line: rgba(0,0,0,.08);
+          --ok: #1f9d55; --warn: #d97706; --chip: rgba(0,0,0,.05); --chipOn: #1d1d1f; --chipOnInk: #fff; }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --bg: #161617; --ink: #f5f5f7; --mute: #a1a1a6;
+          --glass: rgba(30,30,32,.72); --line: rgba(255,255,255,.1); --chip: rgba(255,255,255,.08); --chipOn: #f5f5f7; --chipOnInk: #1d1d1f; } }
+  :root[data-theme="dark"] { --bg: #161617; --ink: #f5f5f7; --mute: #a1a1a6; --glass: rgba(30,30,32,.72); --line: rgba(255,255,255,.1);
+          --chip: rgba(255,255,255,.08); --chipOn: #f5f5f7; --chipOnInk: #1d1d1f; }
+  html, body { margin: 0; height: 100%; background: var(--bg); color: var(--ink); overflow: hidden;
+               font: 13px/1.35 -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", Helvetica, Arial, sans-serif; }
+  #view { position: fixed; inset: 0; }
+  .title { position: fixed; top: 16px; left: 16px; background: var(--glass); backdrop-filter: saturate(1.6) blur(18px); -webkit-backdrop-filter: saturate(1.6) blur(18px);
+           border: 1px solid var(--line); border-radius: 14px; padding: 10px 12px; max-width: calc(100vw - 56px); }
+  .title h1 { margin: 0; font-size: 17px; font-weight: 600; letter-spacing: -.01em; }
+  .title p { margin: 2px 0 0; color: var(--mute); }
+  .panel { position: fixed; left: 16px; right: 16px; bottom: 16px; max-width: 760px; margin: 0 auto; background: var(--glass);
+           backdrop-filter: saturate(1.6) blur(18px); -webkit-backdrop-filter: saturate(1.6) blur(18px);
+           border: 1px solid var(--line); border-radius: 16px; padding: 12px 14px; box-shadow: 0 8px 30px rgba(0,0,0,.08); }
+  .row { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+  .chips { overflow-x: auto; flex-wrap: nowrap; scrollbar-width: none; padding-bottom: 2px; }
+  .chip { border: 0; background: var(--chip); color: var(--ink); padding: 6px 11px; border-radius: 999px; font: inherit; cursor: pointer; white-space: nowrap; }
+  .chip[aria-pressed="true"] { background: var(--chipOn); color: var(--chipOnInk); }
+  .play { width: 34px; height: 34px; border-radius: 50%; border: 0; background: var(--chipOn); color: var(--chipOnInk); cursor: pointer; flex: none; display: grid; place-items: center; }
+  .play svg { width: 14px; height: 14px; fill: currentColor; }
+  input[type=range] { flex: 1; min-width: 120px; accent-color: var(--ink); }
+  .time { color: var(--mute); font-variant-numeric: tabular-nums; min-width: 64px; text-align: right; }
+  .seg { display: inline-flex; background: var(--chip); border-radius: 999px; padding: 2px; }
+  .seg button { border: 0; background: transparent; color: var(--ink); padding: 4px 10px; border-radius: 999px; font: inherit; cursor: pointer; }
+  .seg button[aria-pressed="true"] { background: var(--glass); box-shadow: 0 1px 3px rgba(0,0,0,.12); }
+  .read { display: grid; grid-template-columns: repeat(auto-fit, minmax(110px, 1fr)); gap: 6px 14px; margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--line); }
+  .read div { display: flex; flex-direction: column; }
+  .read b { font-weight: 600; font-variant-numeric: tabular-nums; }
+  .read span { color: var(--mute); font-size: 11px; }
+  .status { display: inline-flex; align-items: center; gap: 6px; font-weight: 600; }
+  .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--ok); }
+  .status.held .dot { background: var(--warn); }
+  .legend { position: fixed; top: 16px; right: 16px; background: var(--glass); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--line); border-radius: 12px; padding: 8px 10px; display: none; }
+  .legend.on { display: block; }
+  .legend i { display: inline-block; width: 10px; height: 3px; border-radius: 2px; margin-right: 6px; vertical-align: middle; }
+  .spacer { flex: 1; }
+  .title .seg { margin-top: 8px; }
+  @media (max-width: 560px) { .panel { left: 8px; right: 8px; bottom: 8px; padding: 10px; } .title { top: 10px; left: 12px; } }
+  #pick { margin-top: 8px; width: 100%; font: inherit; font-size: 12px; color: inherit; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.14); border-radius: 8px; padding: 5px 6px; }
+</style>
+</head>
+<body>
+<div id="view"></div>
+<div class="title"><h1>EXO · right arm</h1><p id="sub">Loading…</p><select id="pick" aria-label="Design" hidden></select></div>
+<div class="legend" id="legend"></div>
+<div class="panel">
+  <div class="row chips" id="clips"></div>
+  <div class="row" style="margin-top:10px">
+    <button class="play" id="play" aria-label="Play"><svg viewBox="0 0 14 14" id="ico"><path d="M3 1.5v11l9-5.5z"/></svg></button>
+    <input type="range" id="scrub" min="0" max="1" step="1" value="0" aria-label="Clip position">
+    <span class="time" id="time">0.0 s</span>
+  </div>
+  <div class="row" style="margin-top:10px">
+    <div class="seg" id="bodym"><button data-m="0" aria-pressed="true">Skin</button><button data-m="2">X-ray</button><button data-m="1">Muscle</button><button data-m="-1">Exo only</button></div>
+    <span class="spacer"></span>
+    <div class="seg"><button id="axes" aria-pressed="false">Joint axes</button></div>
+    <div class="seg"><button id="speed" aria-pressed="false">½×</button></div>
+  </div>
+  <div class="read">
+    <div><b class="status" id="status"><i class="dot"></i>Following</b><span id="statusNote">exo tracks the arm</span></div>
+    <div><b id="r_pose">–</b><span>elevation · plane · axial</span></div>
+    <div><b id="r_elbow">–</b><span>elbow flexion</span></div>
+    <div><b id="r_q">–</b><span>spare joint J1</span></div>
+    <div><b id="r_clr">–</b><span>closest skin gap</span></div>
+    <div><b id="r_med">–</b><span>typical gap (median)</span></div>
+  </div>
+</div>
+<script type="importmap">
+{ "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.165.0/build/three.module.js",
+               "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.165.0/examples/jsm/" } }
+</script>
+<script type="module">
+import * as THREE from 'three';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
+import { loadBody, segmentTransforms, scapulaRot } from './body.js';
+const $ = id => document.getElementById(id);
+const bust = '?t=' + Date.now();
+
+// ---------------------------------------------------------------- scene
+const renderer = new THREE.WebGLRenderer({ antialias: true });
+renderer.setPixelRatio(Math.min(2, devicePixelRatio)); renderer.toneMapping = THREE.AgXToneMapping;
+$('view').appendChild(renderer.domElement);
+const scene = new THREE.Scene();
+const bg = () => getComputedStyle(document.documentElement).getPropertyValue('--bg').trim();
+scene.background = new THREE.Color(bg());
+matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => { scene.background = new THREE.Color(bg()); dirty = true; });
+scene.environment = new THREE.PMREMGenerator(renderer).fromScene(new RoomEnvironment(renderer), 0.04).texture;
+scene.environmentIntensity = 0.9;
+scene.add(new THREE.HemisphereLight(0xffffff, 0xb8b2a8, 0.5));
+const sun = new THREE.DirectionalLight(0xffffff, 1.5); sun.position.set(-1.2, 2.2, 1.6); scene.add(sun);
+const camera = new THREE.PerspectiveCamera(30, 1, 0.01, 30);
+const controls = new OrbitControls(camera, renderer.domElement); controls.enableDamping = true;
+let dirty = true; controls.addEventListener('change', () => { dirty = true; });
+function resize() { renderer.setSize(innerWidth, innerHeight); camera.aspect = innerWidth / innerHeight; camera.updateProjectionMatrix(); dirty = true; }
+addEventListener('resize', resize); resize();
+
+// thorax mm (x anterior, y up, z right, origin right shoulder centre) -> three metres
+const frameM = lift => new THREE.Matrix4().makeScale(1e-3, 1e-3, 1e-3).multiply(new THREE.Matrix4().makeTranslation(lift[0], lift[1], lift[2]));
+const ANA = await loadBody(THREE, 'body_mesh.json');
+scene.add(ANA.group);
+const L = ANA.landmarks;
+const qs = new URLSearchParams(location.search); const design = qs.get('d') || 'final';
+const base = id => `designs/${id}/`;
+const DATA = await (await fetch(base(design) + 'clips.json' + bust)).json();
+$('sub').textContent = DATA.subtitle;
+// design picker (designs/index.json: [{id, label}])
+fetch('designs/index.json' + bust).then(r => r.ok ? r.json() : []).then(list => {
+  if (!list.length) return; const s = $('pick'); s.hidden = false;
+  for (const it of list) { const o = document.createElement('option'); o.value = it.id; o.textContent = it.label; if (it.id === design) o.selected = true; s.appendChild(o); }
+  s.onchange = () => { location.search = '?d=' + encodeURIComponent(s.value); };
+}).catch(() => {});
+
+// exo: nodes are named "<group>|<part>"; groups S:base/l1..lN (shoulder, thorax mm at pose 0), H (humerus, body rest mm), F (forearm, body rest mm)
+const exoRoot = new THREE.Group(); exoRoot.matrixAutoUpdate = false; scene.add(exoRoot);
+const groups = {};
+const gltf = await new GLTFLoader().loadAsync(base(design) + 'exo.glb' + bust);
+gltf.scene.updateMatrixWorld(true);
+// materials after the user's Blender look: raw 7075 bead blasted (satin metal + fine blast grain), polished stainless
+// screws, iglide polymer bearings, nickel magnet, bearing steel
+function blasted(color, rough) {
+  const m = new THREE.MeshPhysicalMaterial({ color, metalness: 1.0, roughness: rough });
+  m.onBeforeCompile = sh => {
+    sh.vertexShader = sh.vertexShader.replace('#include <common>', '#include <common>\nvarying vec3 vBP;').replace('#include <begin_vertex>', '#include <begin_vertex>\nvBP = position;');
+    sh.fragmentShader = sh.fragmentShader.replace('#include <common>', `#include <common>
+      varying vec3 vBP;
+      float h3(vec3 p) { p = fract(p * 0.3183099 + 0.1); p *= 17.0; return fract(p.x * p.y * p.z * (p.x + p.y + p.z)); }
+      float vn(vec3 x) { vec3 i = floor(x), f = fract(x); f = f * f * (3.0 - 2.0 * f);
+        return mix(mix(mix(h3(i), h3(i + vec3(1,0,0)), f.x), mix(h3(i + vec3(0,1,0)), h3(i + vec3(1,1,0)), f.x), f.y),
+                   mix(mix(h3(i + vec3(0,0,1)), h3(i + vec3(1,0,1)), f.x), mix(h3(i + vec3(0,1,1)), h3(i + vec3(1,1,1)), f.x), f.y), f.z); }`)
+      .replace('#include <roughnessmap_fragment>', `#include <roughnessmap_fragment>
+      float g = vn(vBP * 6.0) * 0.6 + vn(vBP * 17.0) * 0.4; roughnessFactor = clamp(roughnessFactor + (g - 0.5) * 0.10, 0.05, 1.0);`)
+      .replace('#include <normal_fragment_maps>', `#include <normal_fragment_maps>
+      { vec3 e = vec3(0.07, 0.0, 0.0); float c0 = vn(vBP * 14.0);
+        vec3 gr = vec3(vn(vBP * 14.0 + e.xyy) - c0, vn(vBP * 14.0 + e.yxy) - c0, vn(vBP * 14.0 + e.yyx) - c0);
+        normal = normalize(normal + 0.35 * gr); }`);
+  };
+  return m;
+}
+const mats = {
+  alu: blasted(0x9a9da2, 0.38),
+  stainless: new THREE.MeshPhysicalMaterial({ color: 0xcccccf, metalness: 1, roughness: 0.09 }),
+  steel: new THREE.MeshPhysicalMaterial({ color: 0xd1d4d9, metalness: 1, roughness: 0.13 }),
+  iglide: new THREE.MeshPhysicalMaterial({ color: 0xcc6b08, metalness: 0, roughness: 0.42, clearcoat: 0.2 }),
+  nickel: new THREE.MeshPhysicalMaterial({ color: 0xccc7bd, metalness: 1, roughness: 0.12 }),
+};
+const meshes = []; gltf.scene.traverse(o => { if (o.isMesh) meshes.push(o); });
+for (const o of meshes) {
+  const name = (o.name || o.parent?.name || ''), g = name.split('|')[0];
+  o.geometry.applyMatrix4(o.matrixWorld); o.position.set(0, 0, 0); o.rotation.set(0, 0, 0); o.scale.set(1, 1, 1);
+  const n = name.toLowerCase();
+  o.material = n.includes('screw') ? mats.stainless : (n.includes('igus') || n.includes('iglid') || n.includes('washer') || n.includes('sleeve')) ? mats.iglide
+             : n.includes('magnet') ? mats.nickel : (n.includes('cirpattern') || n.includes('revolve')) ? mats.steel : mats.alu;
+  (groups[g] ||= Object.assign(new THREE.Group(), { matrixAutoUpdate: false })).add(o);
+}
+for (const g of Object.values(groups)) exoRoot.add(g);
+
+// joint axes (shoulder J1-J4 through the shoulder centre; elbow)
+const axesGroup = new THREE.Group(); axesGroup.visible = false; exoRoot.add(axesGroup);
+const AXC = [0xff453a, 0xff9f0a, 0xffd60a, 0x30d158, 0x64d2ff, 0x0a84ff, 0x5e5ce6, 0xbf5af2];
+const rodGeo = new THREE.CylinderGeometry(1.1, 1.1, 1, 12); rodGeo.translate(0, 0.5, 0);
+const NAX = (DATA.axes ? DATA.axes.length : 4) + 1;               // shoulder joints + the elbow
+const axisRods = [...Array(NAX).keys()].map(k => { const m = new THREE.Mesh(rodGeo, new THREE.MeshBasicMaterial({ color: k === NAX - 1 ? AXC[7] : AXC[k % 7], depthTest: false, transparent: true, opacity: 0.9 }));
+  m.renderOrder = 20; m.matrixAutoUpdate = false; axesGroup.add(m); return m; });
+function setRod(m, a, b) {                       // rod from point a to point b (thorax mm)
+  const A = new THREE.Vector3(...a), B = new THREE.Vector3(...b), d = B.clone().sub(A), L = d.length();
+  const q = new THREE.Quaternion().setFromUnitVectors(new THREE.Vector3(0, 1, 0), d.normalize());
+  m.matrix.compose(A, q, new THREE.Vector3(1, L, 1));
+}
+$('legend').innerHTML = ['J1 scapula', 'J2', 'J3', 'J4 upper arm', 'elbow'].map((t, k) => `<div><i style="background:#${AXC[k].toString(16).padStart(6, '0')}"></i>${t}</div>`).join('');
+
+const toM4 = (R, t = [0, 0, 0]) => new THREE.Matrix4().set(R[0][0], R[0][1], R[0][2], t[0], R[1][0], R[1][1], R[1][2], t[1], R[2][0], R[2][1], R[2][2], t[2], 0, 0, 0, 1);
+const mul = (A, B) => A.map(r => [0, 1, 2].map(j => r[0] * B[0][j] + r[1] * B[1][j] + r[2] * B[2][j]));
+const mv = (A, v) => [0, 1, 2].map(i => A[i][0] * v[0] + A[i][1] * v[1] + A[i][2] * v[2]);
+const R9 = a => [[a[0], a[1], a[2]], [a[3], a[4], a[5]], [a[6], a[7], a[8]]];
+
+// ---------------------------------------------------------------- playback
+let clip = 0, f = 0, playing = true, speed = 1, last = performance.now(), acc = 0, bodyMode = 0;
+const fmt = (v, d = 0) => (Math.round(v * 10 ** d) / 10 ** d).toFixed(d);
+function show() {
+  const C = DATA.clips[clip], F = C.frames[Math.min(f, C.frames.length - 1)];
+  const [plane, elev, axial, flex, pron] = F.p, pose = { plane, elev, axial, flex, pron };
+  const { segs, lift } = segmentTransforms(L, pose, { girdle: true, scale: ANA.scale });
+  const M = frameM(lift);
+  if (bodyMode >= 0) { ANA.group.visible = true; ANA.update(pose, bodyMode, { girdle: true }); } else ANA.group.visible = false;
+  ANA.setFrame(M); exoRoot.matrix.copy(M); exoRoot.matrixWorldNeedsUpdate = true;
+  for (const k of Object.keys(F.G)) if (groups[k]) groups[k].matrix.copy(toM4(R9(F.G[k])));        // base, l1 .. l(N-1)
+  if (groups.H) groups.H.matrix.copy(toM4(segs[2].R, segs[2].t));
+  if (groups.F) groups.F.matrix.copy(toM4(segs[3].R, segs[3].t));
+  // joint axes
+  let dirs;
+  if (DATA.axes) dirs = DATA.axes.map(([g, p]) => mv(R9(F.G[g]), p));                         // [group, pin in its frame] per joint
+  else { const ax = [F.G.base, F.G.l1, F.G.l2, F.G.l3].map(R9), pins = DATA.pins;
+         dirs = [mv(ax[0], pins.b), mv(ax[1], pins.c2), mv(ax[3], pins.c3), mv(ax[3], pins.u4)]; }
+  dirs.forEach((d, k) => setRod(axisRods[k], [0, 0, 0], [d[0] * 150, d[1] * 150, d[2] * 150]));
+  const E = [segs[2].R, segs[2].t], ec = [0, 1, 2].map(i => mv(E[0], L.elbow)[i] + E[1][i]), ea = mv(segs[2].R, L.elbow_axis);
+  setRod(axisRods[NAX - 1], [ec[0] - ea[0] * 90, ec[1] - ea[1] * 90, ec[2] - ea[2] * 90], [ec[0] + ea[0] * 90, ec[1] + ea[1] * 90, ec[2] + ea[2] * 90]);
+  // readout
+  $('status').className = 'status' + (F.held ? ' held' : '');
+  $('status').innerHTML = `<i class="dot"></i>${F.held ? 'Held at exo limit' : 'Following'}`;
+  $('statusNote').textContent = F.held ? `wants ${fmt(F.want[1])}° elev · ${fmt(F.want[0])}° plane` : 'exo tracks the arm';
+  $('r_pose').textContent = `${fmt(elev)}° · ${fmt(plane)}° · ${fmt(axial)}°`;
+  $('r_elbow').textContent = `${fmt(flex)}°`;
+  $('r_q').textContent = `${fmt(F.q)}°`;
+  $('r_clr').textContent = F.clr == null ? '—' : `${fmt(F.clr, 1)} mm`;
+  $('r_med').textContent = F.med == null ? '—' : `${fmt(F.med, 1)} mm`;
+  $('scrub').value = f; $('time').textContent = `${fmt(f / C.fps, 1)} s`;
+  dirty = true;
+}
+function setClip(k) {
+  clip = k; f = 0; const C = DATA.clips[k]; $('scrub').max = C.frames.length - 1;
+  document.querySelectorAll('#clips .chip').forEach((b, i) => b.setAttribute('aria-pressed', i === k));
+  show();
+}
+$('clips').innerHTML = DATA.clips.map((c, i) => `<button class="chip" aria-pressed="${i === 0}">${c.name}</button>`).join('');
+document.querySelectorAll('#clips .chip').forEach((b, i) => b.onclick = () => { setClip(i); playing = true; ico(); });
+const ico = () => { $('ico').innerHTML = playing ? '<path d="M3 1.5h3v11H3zM8 1.5h3v11H8z"/>' : '<path d="M3 1.5v11l9-5.5z"/>'; $('play').setAttribute('aria-label', playing ? 'Pause' : 'Play'); };
+$('play').onclick = () => { playing = !playing; ico(); };
+$('scrub').oninput = e => { playing = false; ico(); f = +e.target.value; show(); };
+$('speed').onclick = e => { speed = speed === 1 ? 0.5 : 1; e.target.setAttribute('aria-pressed', speed !== 1); };
+$('axes').onclick = e => { axesGroup.visible = !axesGroup.visible; e.target.setAttribute('aria-pressed', axesGroup.visible); $('legend').classList.toggle('on', axesGroup.visible); dirty = true; };
+document.querySelectorAll('#bodym button').forEach(b => b.onclick = () => { bodyMode = +b.dataset.m; document.querySelectorAll('#bodym button').forEach(x => x.setAttribute('aria-pressed', x === b)); show(); });
+addEventListener('keydown', e => { if (e.code === 'Space') { playing = !playing; ico(); e.preventDefault(); } });
+
+// camera: behind-right of the right shoulder
+const target = new THREE.Vector3(0, -0.08, 0.02); controls.target.copy(target);
+camera.position.set(-0.95, 0.35, 1.05); controls.update();
+ico(); setClip(0);
+window.__view = { camera, controls, scene, groups, exoRoot, setMode: m => document.querySelector(`#bodym button[data-m="${m}"]`).click(), go: (k, fr) => { setClip(k); f = fr; playing = false; ico(); show(); } };
+renderer.setAnimationLoop(() => {
+  const t = performance.now(), dt = Math.min(0.1, (t - last) / 1000); last = t;
+  if (playing) { const C = DATA.clips[clip]; acc += dt * C.fps * speed; const n = Math.floor(acc); if (n) { acc -= n; f = ((f + n) % C.frames.length + C.frames.length) % C.frames.length; show(); } }
+  controls.update(); if (dirty) { renderer.render(scene, camera); dirty = false; }
+});
+</script>
+</body>
+</html>

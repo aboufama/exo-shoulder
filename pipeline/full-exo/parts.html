@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>EXO Part Review</title>
+<style>
+  :root { --bg: #ecebe8; --ink: #1d1d1f; --mute: #6e6e73; --glass: rgba(255,255,255,.76); --line: rgba(0,0,0,.08); --chip: rgba(0,0,0,.05); --on: #1d1d1f; --onInk: #fff; }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --bg: #161617; --ink: #f5f5f7; --mute: #a1a1a6; --glass: rgba(30,30,32,.76); --line: rgba(255,255,255,.1); --chip: rgba(255,255,255,.08); --on: #f5f5f7; --onInk: #1d1d1f; } }
+  :root[data-theme="dark"] { --bg: #161617; --ink: #f5f5f7; --mute: #a1a1a6; --glass: rgba(30,30,32,.76); --line: rgba(255,255,255,.1); --chip: rgba(255,255,255,.08); --on: #f5f5f7; --onInk: #1d1d1f; }
+  html, body { margin: 0; height: 100%; background: var(--bg); color: var(--ink); overflow: hidden; font: 13px/1.35 -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", Arial, sans-serif; }
+  #view { position: fixed; inset: 0; }
+  .panel { position: fixed; top: 16px; left: 16px; width: 300px; max-width: calc(100vw - 32px); max-height: calc(100vh - 32px); overflow: auto; background: var(--glass);
+           backdrop-filter: saturate(1.6) blur(18px); -webkit-backdrop-filter: saturate(1.6) blur(18px); border: 1px solid var(--line); border-radius: 14px; padding: 12px; box-sizing: border-box; }
+  h1 { margin: 0 0 2px; font-size: 17px; font-weight: 600; letter-spacing: -.01em; } .sub { color: var(--mute); margin: 0 0 10px; }
+  .part { display: block; width: 100%; text-align: left; border: 1px solid transparent; background: var(--chip); color: var(--ink); border-radius: 10px; padding: 8px 10px; margin: 0 0 6px; cursor: pointer; font: inherit; }
+  .part[aria-pressed="true"] { background: var(--on); color: var(--onInk); }
+  .part b { display: block; font-weight: 600; } .part span { opacity: .7; font-size: 12px; }
+  .row { display: flex; gap: 6px; margin: 4px 0 10px; } .row button { flex: 1; border: 0; background: var(--chip); color: var(--ink); border-radius: 8px; padding: 6px 0; font: inherit; cursor: pointer; }
+  .row button[aria-pressed="true"] { background: var(--on); color: var(--onInk); }
+  @media (max-width: 600px) { .panel { width: auto; right: 16px; max-height: 42vh; } }
+</style>
+</head>
+<body>
+<div id="view"></div>
+<div class="panel">
+  <h1>Part review</h1>
+  <p class="sub" id="sub">custom parts, one at a time</p>
+  <div class="row" id="look"><button data-m="0" aria-pressed="true">Bead blasted</button><button data-m="1" aria-pressed="false">Zebra</button><button data-m="2" aria-pressed="false">Edges</button></div>
+  <div id="list"></div>
+</div>
+<script type="importmap">
+{ "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.165.0/build/three.module.js",
+               "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.165.0/examples/jsm/" } }
+</script>
+<script type="module">
+import * as THREE from 'three';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
+const $ = id => document.getElementById(id);
+const design = new URLSearchParams(location.search).get('d') || 'cad_r13_n4_s1343_1';
+const base = `designs/${design}/parts/`, bust = '?t=' + Date.now();
+const renderer = new THREE.WebGLRenderer({ antialias: true }); renderer.setPixelRatio(Math.min(2, devicePixelRatio)); renderer.toneMapping = THREE.AgXToneMapping;
+$('view').appendChild(renderer.domElement);
+const scene = new THREE.Scene(); const bg = () => getComputedStyle(document.documentElement).getPropertyValue('--bg').trim(); scene.background = new THREE.Color(bg());
+scene.environment = new THREE.PMREMGenerator(renderer).fromScene(new RoomEnvironment(renderer), 0.04).texture; scene.environmentIntensity = 0.9;
+scene.add(new THREE.HemisphereLight(0xffffff, 0xb8b2a8, 0.5)); const sun = new THREE.DirectionalLight(0xffffff, 1.4); sun.position.set(-1.2, 2.2, 1.6); scene.add(sun);
+const camera = new THREE.PerspectiveCamera(28, 1, 0.1, 5000); const controls = new OrbitControls(camera, renderer.domElement); controls.enableDamping = true;
+const alu = new THREE.MeshPhysicalMaterial({ color: 0x9a9da2, metalness: 1, roughness: 0.38 });
+const zebra = new THREE.ShaderMaterial({ uniforms: {}, vertexShader: `varying vec3 vN; varying vec3 vV; void main(){ vec4 p = modelViewMatrix * vec4(position,1.0); vN = normalize(normalMatrix * normal); vV = -p.xyz; gl_Position = projectionMatrix * p; }`,
+  fragmentShader: `varying vec3 vN; varying vec3 vV; void main(){ vec3 r = reflect(-normalize(vV), normalize(vN)); float s = step(0.5, fract(r.y * 9.0)); gl_FragColor = vec4(vec3(0.08 + 0.86 * s), 1.0); }` });
+let mesh = null, edges = null, mode = 0, dirty = true;
+function setMode(m) { mode = m; document.querySelectorAll('#look button').forEach(b => b.setAttribute('aria-pressed', +b.dataset.m === m)); if (mesh) { mesh.material = m === 1 ? zebra : alu; edges.visible = m === 2; } dirty = true; }
+document.querySelectorAll('#look button').forEach(b => b.onclick = () => setMode(+b.dataset.m));
+const rows = await (await fetch(base + 'parts.json' + bust)).json();
+$('sub').textContent = `${design.replace('cad_', '')} · ${rows.length} parts I designed`;
+$('list').innerHTML = rows.map((r, i) => `<button class="part" aria-pressed="${i === 0}"><b>${r.name}</b><span>${r.material || ''}${r.mass_g ? ' · ' + r.mass_g.toFixed(1) + ' g' : ''} · ${r.faces} faces · ${r.size.join(' × ')} mm${r.valid ? '' : ' · INVALID'}</span></button>`).join('');
+const loader = new GLTFLoader();
+async function show(i) {
+  document.querySelectorAll('.part').forEach((b, k) => b.setAttribute('aria-pressed', k === i));
+  const g = await loader.loadAsync(base + rows[i].file + bust); let geo = null; g.scene.traverse(o => { if (o.isMesh && !geo) geo = o.geometry; });
+  if (mesh) { scene.remove(mesh); scene.remove(edges); }
+  geo = geo.clone(); geo.deleteAttribute('normal'); const { mergeVertices } = await import('three/addons/utils/BufferGeometryUtils.js'); geo = mergeVertices(geo, 1e-4); geo.computeVertexNormals();
+  mesh = new THREE.Mesh(geo, mode === 1 ? zebra : alu); scene.add(mesh);
+  edges = new THREE.LineSegments(new THREE.EdgesGeometry(geo, 25), new THREE.LineBasicMaterial({ color: 0xff453a })); edges.visible = mode === 2; scene.add(edges);
+  geo.computeBoundingSphere(); const r = geo.boundingSphere.radius; controls.target.copy(geo.boundingSphere.center);
+  camera.position.copy(geo.boundingSphere.center).add(new THREE.Vector3(0.9, 0.6, 1.2).normalize().multiplyScalar(r / Math.tan(THREE.MathUtils.degToRad(14)) * 1.15)); controls.update(); dirty = true;
+}
+document.querySelectorAll('.part').forEach((b, i) => b.onclick = () => show(i));
+function size() { const w = innerWidth, h = innerHeight; renderer.setSize(w, h); camera.aspect = w / h; camera.updateProjectionMatrix(); dirty = true; }
+addEventListener('resize', size); size(); controls.addEventListener('change', () => dirty = true);
+await show(0); window.__parts = { show, setMode, camera, controls };
+renderer.setAnimationLoop(() => { controls.update(); if (dirty) { renderer.render(scene, camera); dirty = false; } });
+</script>
+</body>
+</html>

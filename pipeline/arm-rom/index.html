@@ -1,0 +1,666 @@
+<meta charset="utf-8">
+<title>Exo Shoulder Reach</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+  /* one full-screen 3D stage with a floating instrument panel on the left (bottom sheet on phones) */
+  :root { --bg: #e9e8e4; --stage: #e9e8e4; --panel: rgba(255,255,255,.92); --ink: #1c1d1f; --mute: #6b6d70; --line: #d6d4cf;
+          --ok: #2f9e5b; --warn: #c9962a; --bad: #d14b4b; --chip: #f2f1ee;
+          --sans: "IBM Plex Sans", -apple-system, "Helvetica Neue", Arial, sans-serif; --mono: "IBM Plex Mono", ui-monospace, Menlo, monospace; }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --bg: #1b1c1e; --stage: #1b1c1e; --panel: rgba(34,35,38,.94); --ink: #ecebe8;
+          --mute: #9c9ea2; --line: #3a3b3f; --ok: #4cc27c; --warn: #e0b34a; --bad: #ef6b6b; --chip: #2a2b2e; color-scheme: dark } }
+  :root[data-theme="dark"] { --bg: #1b1c1e; --stage: #1b1c1e; --panel: rgba(34,35,38,.94); --ink: #ecebe8; --mute: #9c9ea2; --line: #3a3b3f;
+          --ok: #4cc27c; --warn: #e0b34a; --bad: #ef6b6b; --chip: #2a2b2e; color-scheme: dark }
+  html, body { height: 100%; overflow: hidden; }
+  body { margin: 0; background: var(--bg); color: var(--ink); font: 13px/1.45 var(--sans); }
+  #view { position: absolute; inset: 0; }
+  .panel { position: absolute; top: 12px; left: 12px; width: 300px; max-height: calc(100% - 24px); overflow: auto; background: var(--panel);
+           border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px; box-sizing: border-box; }
+  h1 { font-size: 14px; margin: 0 0 2px; } .sub { color: var(--mute); margin: 0 0 10px; }
+  h2 { font-size: 11px; letter-spacing: .06em; text-transform: uppercase; color: var(--mute); margin: 14px 0 6px; }
+  label { display: grid; grid-template-columns: 1fr auto; gap: 2px 8px; margin: 6px 0; }
+  label input { grid-column: 1 / 3; width: 100%; }
+  .v { font: 12px var(--mono); font-variant-numeric: tabular-nums; color: var(--mute); }
+  #status { margin-top: 10px; padding: 8px 10px; border-radius: 8px; background: var(--chip); }
+  #status .note { display: block; margin-top: 2px; }
+  #status b { display: block; } .ok { color: var(--ok); } .bad { color: var(--bad); }
+  button { font: inherit; color: var(--ink); padding: 5px 9px; border: 1px solid var(--line); background: var(--chip); border-radius: 7px; cursor: pointer; }
+  button:hover { border-color: var(--mute); } button:focus-visible, input:focus-visible { outline: 2px solid var(--ok); outline-offset: 2px; }
+  .row { display: flex; flex-wrap: wrap; gap: 4px; }
+  .seg button[aria-pressed="true"] { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+  table { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; }
+  #cmp td, #ceil td { text-align: right; font-family: var(--mono); font-size: 12px; } #cmp td:first-child, #ceil td:first-child { text-align: left; font-family: var(--sans); font-size: 13px; }
+  td { padding: 3px 0; border-bottom: 1px solid var(--line); vertical-align: top; } td:last-child { text-align: right; font-family: var(--mono); font-size: 12px; padding-left: 8px; }
+  .legend span { display: inline-block; width: 10px; height: 10px; border-radius: 2px; margin: 0 4px 0 8px; vertical-align: -1px; }
+  .note { color: var(--mute); font-size: 12px; }
+  @media (max-width: 640px) { .panel { left: 16px; width: calc(100% - 32px); max-height: 48%; top: auto; bottom: calc(12px + env(safe-area-inset-bottom, 0px)); } }
+</style>
+<script type="importmap">
+{ "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.165.0/build/three.module.js",
+               "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.165.0/examples/jsm/" } }
+</script>
+<div id="view"></div>
+<div class="panel">
+  <h1>Right arm exo: range of motion</h1>
+  <p class="sub">Drag the arm with the sliders. The solid arm stops where the exo stops; the ghost shows where you wanted to go.</p>
+  <div class="row seg" id="fams">
+    <button data-f="A" aria-pressed="true">A · Current scissor</button><button data-f="B" aria-pressed="false">B · Scissor, re-optimised</button>
+    <button data-f="C" aria-pressed="false">C · 3 pivots</button><button data-f="D" aria-pressed="false">D · 4 pivots</button><button data-f="E" aria-pressed="false">E · Five-bar</button></div>
+  <div class="fam-only"><h2>Shell radius (profile above the shoulder)</h2>
+  <div class="row seg" id="radii"><button data-r="124" aria-pressed="true">124 mm (as now)</button><button data-r="136" aria-pressed="false">136 mm</button><button data-r="148" aria-pressed="false">148 mm</button></div>
+  <h2>Links</h2>
+  <div class="row seg" id="links"><button data-l="std" aria-pressed="true">12 mm bars</button><button data-l="thin" aria-pressed="false">Thin skin-riding strips</button></div>
+  <p class="note" id="lnote"></p></div>
+  <p class="note" id="mnote"></p>
+  <h2>Body</h2>
+  <div class="row seg" id="bodym"><button data-b="0" aria-pressed="true">Skin</button><button data-b="1" aria-pressed="false">Muscles</button><button data-b="2" aria-pressed="false">Muscles under skin</button></div>
+  <h2>Shoulder (ISB angles)</h2>
+  <label>Plane of elevation <span class="v" id="v_plane"></span><input id="plane" type="range" min="-60" max="140" step="1" value="30"></label>
+  <label>Elevation <span class="v" id="v_elev"></span><input id="elev" type="range" min="0" max="180" step="1" value="20"></label>
+  <label>Axial rotation (+ internal) <span class="v" id="v_axial"></span><input id="axial" type="range" min="-90" max="80" step="1" value="0"></label>
+  <h2>Elbow and forearm</h2>
+  <label>Elbow flexion <span class="v" id="v_flex"></span><input id="flex" type="range" min="0" max="150" step="1" value="60"></label>
+  <label>Pronation (+) / supination <span class="v" id="v_pron"></span><input id="pron" type="range" min="-85" max="85" step="1" value="0"></label>
+  <div id="status"></div>
+  <h2>Try</h2>
+  <div class="row"><button data-p="flex">Flexion</button><button data-p="abd">Abduction</button><button data-p="scap">Scaption</button><button data-p="ext">Extension</button>
+       <button data-p="rot">Rotation at 90°</button><button data-p="mouth">Hand to mouth</button><button data-p="head">Hand behind head</button></div>
+  <h2>Reach map</h2>
+  <label style="display:flex;gap:8px;align-items:center"><input type="checkbox" id="map" checked style="width:auto"> show arm directions the exo allows</label>
+  <div class="legend note"><span style="background:#2f9e5b"></span>all rotations<span style="background:#e3b23c"></span>some<span style="background:#d64545"></span>none</div>
+  <h2>Coverage</h2>
+  <table id="cov"></table>
+  <h2>All families, same rules</h2>
+  <table id="cmp"></table>
+  <p class="note">Share of 3,993 natural shoulder poses the exo follows, against the anatomical body. Same rules for all: base pivot(s) on the scapula (A: its back mount), pivots only, 12° singularity margins, one assembly branch, upper-arm post ±90° (C thin: limited only by contact), every shell link clear of the skin (trunk, shoulder girdle and upper arm, with girdle elevation).</p>
+  <h2>Research: the physical ceiling</h2>
+  <p class="note">Best any mechanism could do, of any shape or joint count: is there a clear path through the free space around the shoulder from a scapula-mounted base to an attachment on the upper arm, pose by pose?</p>
+  <table id="ceil"><tr><td>Link-to-skin clearance</td><td>140</td><td>160</td><td>180 mm</td></tr>
+    <tr><td>11 mm (12 mm bars)</td><td>77%</td><td>81%</td><td>85–90%</td></tr><tr><td>6 mm (thin strips)</td><td>90%</td><td>90%</td><td>93%</td></tr></table>
+  <p class="note">The unreachable poses are almost all the arm pressed against the body (across the chest, behind the back), where the attachment itself is buried, so 100% is impossible for any exo with a rigid arm attachment. D with thin strips reaches about 94% of the ceiling.</p>
+  <h2>Research: the Orbit Joint</h2>
+  <svg id="oj" viewBox="-150 -150 300 300" style="width:100%;max-width:260px;display:block;margin:4px auto" aria-label="Orbit Joint animation"></svg>
+  <p class="note">A ring-free joint that turns the cuff exactly about the humerus axis. Crank (dark) on the upper-arm bar; coupler (blue) held level by tendon loop 1, so it only translates; cuff bracket (green) on the coupler, turned 1:1 by tendon loop 2. Because the crank vector equals the bracket's offset from the arm axis, the cuff motion is a pure rotation about that axis: 0.0 mm error over ±120°. Three pivots and two tendon loops, nothing encircles the arm, no dead points. On the body it touches the trunk in about 1.5% of poses. It removes the reason every fixed-post shoulder is capped: humeral rotation no longer drags the chain around the shoulder.</p>
+  <p class="note" id="ojangle"></p>
+  <div class="cur-only"><h2>Mount on the back</h2>
+  <p class="note">The CAD does not fix how the base sits on the body. Rotate it about the shoulder centre to see how the reachable range moves.</p>
+  <label>Yaw (about vertical) <span class="v" id="v_yaw"></span><input id="yaw" type="range" min="-90" max="90" step="1" value="0"></label>
+  <label>Pitch (about lateral) <span class="v" id="v_pitch"></span><input id="pitch" type="range" min="-60" max="60" step="1" value="0"></label>
+  <label>Roll (about forward) <span class="v" id="v_roll"></span><input id="roll" type="range" min="-60" max="60" step="1" value="0"></label>
+  <div class="row"><button id="opt">Find the best mount</button><button id="reset">CAD mount</button> <span class="note" id="optmsg"></span></div>
+  <h2>Upper-arm post</h2>
+  <p class="note">Redesigned post: 180° of travel. Move its centre to see where it pays off.</p>
+  <label>Range centre <span class="v" id="v_postc"></span><input id="postc" type="range" min="-180" max="180" step="5" value="-40"></label></div>
+  <h2>Assumptions</h2>
+  <p class="note" id="assume"></p>
+</div>
+<script type="module">
+import * as THREE from 'three';
+import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
+import { loadBody } from './body.js';
+
+const $ = id => document.getElementById(id);
+const D2R = Math.PI / 180;
+// ---------------------------------------------------------------- small 3x3 / vector helpers (CAD frame, mm)
+const mul = (A, B) => A.map((r, i) => [0, 1, 2].map(j => r[0] * B[0][j] + r[1] * B[1][j] + r[2] * B[2][j]));
+const T = A => [0, 1, 2].map(i => [A[0][i], A[1][i], A[2][i]]);
+const mv = (A, v) => [A[0][0] * v[0] + A[0][1] * v[1] + A[0][2] * v[2], A[1][0] * v[0] + A[1][1] * v[1] + A[1][2] * v[2], A[2][0] * v[0] + A[2][1] * v[1] + A[2][2] * v[2]];
+const add = (a, b) => [a[0] + b[0], a[1] + b[1], a[2] + b[2]], sub = (a, b) => [a[0] - b[0], a[1] - b[1], a[2] - b[2]];
+const sc = (a, k) => [a[0] * k, a[1] * k, a[2] * k], dot = (a, b) => a[0] * b[0] + a[1] * b[1] + a[2] * b[2];
+const cross = (a, b) => [a[1] * b[2] - a[2] * b[1], a[2] * b[0] - a[0] * b[2], a[0] * b[1] - a[1] * b[0]];
+const nrm = a => sc(a, 1 / Math.hypot(...a));
+function rot(ax, ang) { const a = nrm(ax), c = Math.cos(ang), s = Math.sin(ang), t = 1 - c, [x, y, z] = a;
+  return [[c + x * x * t, x * y * t - z * s, x * z * t + y * s], [y * x * t + z * s, c + y * y * t, y * z * t - x * s], [z * x * t - y * s, z * y * t + x * s, c + z * z * t]]; }
+const cols = (a, b, c) => [[a[0], b[0], c[0]], [a[1], b[1], c[1]], [a[2], b[2], c[2]]];
+const ortho = R => { const x = nrm([R[0][0], R[1][0], R[2][0]]); let y = [R[0][1], R[1][1], R[2][1]]; y = nrm(sub(y, sc(x, dot(x, y)))); return cols(x, y, cross(x, y)); };
+
+const J = await (await fetch('arm_rom.json')).json();
+// anatomical skin (anatomy.js) sampled on grids around the shoulder (make_skin_grids.mjs): trunk per arm elevation, arm in the humerus frame
+const SG = await (await fetch('skin_grids_i8.json')).json();
+const SGD = Uint8Array.from(atob(SG.data), c => c.charCodeAt(0)), SGN = SG.N, SGV = SGN ** 3;
+function skinAt(gi, p) {                                        // trilinear, mm; 100 outside the grid (as scipy map_coordinates, constant)
+  const f = p.map(v => (v + SG.H) / SG.STEP);
+  if (f.some(v => v < 0 || v > SGN - 1)) return 100;
+  const i = f.map(v => Math.min(SGN - 2, Math.floor(v))), t = f.map((v, k) => v - i[k]);
+  let d = 0;
+  for (let c = 0; c < 8; c++) { const o = [c & 1, (c >> 1) & 1, (c >> 2) & 1];
+    const w = (o[0] ? t[0] : 1 - t[0]) * (o[1] ? t[1] : 1 - t[1]) * (o[2] ? t[2] : 1 - t[2]); if (!w) continue;
+    const raw = SGD[gi * SGV + ((i[0] + o[0]) * SGN + (i[1] + o[1])) * SGN + (i[2] + o[2])];
+    d += w * ((raw > 127 ? raw - 256 : raw) / 2); }
+  return d;
+}
+const elevBin = e => SG.elevs.reduce((b, v, k) => Math.abs(v - e) < Math.abs(SG.elevs[b] - e) ? k : b, 0);
+const ARM_GRID = SG.elevs.length;
+function armRadius(along) {                                       // outer skin radius of the upper arm at a distance along it (humerus frame)
+  let r = 0;
+  for (let k = 0; k < 12; k++) { const a = k * Math.PI / 6, d = [Math.sin(a), 0, Math.cos(a)];
+    for (let q = 30; q < 130; q += 1) if (skinAt(ARM_GRID, [d[0] * q, -along, d[2] * q]) > 0) { r = Math.max(r, q); break; } }
+  return r;
+}
+const X = J.X;
+const AX = [1, 0, 0];
+const M = cols([-1, 0, 0], [0, 0, 1], [0, 1, 0]);               // thorax (anterior, up, right) in CAD
+const E = J.elbow, EA = nrm(E.axis), EH = E.human;
+const H_LEN = Math.hypot(...sub(EH, X));
+const H_CAD = (() => { const y = nrm(sub(X, EH)); let z = sub(EA, sc(y, dot(EA, y))); z = nrm(z); return cols(cross(y, z), y, z); })();
+const FLEX_CAD = Math.acos(dot(nrm(sub(EH, X)), E.forearm_dir)) / D2R;      // elbow flexion in the CAD pose
+// which way about the elbow axis is flexion?
+const FLEX_SIGN = (() => { const f2 = mv(rot(EA, 0.1), E.forearm_dir); return Math.acos(dot(nrm(sub(EH, X)), f2)) > Math.acos(dot(nrm(sub(EH, X)), E.forearm_dir)) ? 1 : -1; })();
+
+// ---------------------------------------------------------------- exo inverse kinematics (port of rom.py)
+const S = J.sigma, TH = J.theta0;
+function sigmaOf(th) {
+  if (th > TH[0] + 1e-9 && th > TH[TH.length - 1] && th > Math.max(...[TH[0], TH[TH.length - 1]])) return null;
+  for (let i = 0; i < S.length - 1; i++) {
+    const a = TH[i], b = TH[i + 1];
+    if ((th <= a && th >= b) || (th >= a && th <= b)) { const t = (th - a) / (b - a || 1); return { s: S[i] + (S[i + 1] - S[i]) * t, i, t }; }
+  }
+  return null;
+}
+const lerpM = (A, B, t) => ortho(A.map((r, i) => r.map((v, j) => v + (B[i][j] - v) * t)));
+function linkR(link, k) { return lerpM(J.R[link][k.i], J.R[link][Math.min(k.i + 1, S.length - 1)], k.t); }
+function gWin(s) {
+  const G = J.gamma; let i = 1; while (i < G.length - 1 && G[i][0] < s) i++;
+  const a = G[i - 1], b = G[i], t = Math.max(0, Math.min(1, (s - a[0]) / (b[0] - a[0] || 1)));
+  return [a[1] + (b[1] - a[1]) * t, a[2] + (b[2] - a[2]) * t];
+}
+let MOUNT = rot([0, 0, 1], 0);
+let POST_C = -40;                                               // BOTTOM's redesigned post: a 180 deg range centred here (deg from the output links' midline)
+const wrap180 = x => ((x + 180) % 360 + 360) % 360 - 180;                                   // exo base orientation relative to the body
+function setMount(yaw, pitch, roll) { MOUNT = mul(rot([0, 0, 1], yaw * D2R), mul(rot([0, 1, 0], pitch * D2R), rot([-1, 0, 0], roll * D2R))); }
+function humerus(plane, elev, axial) {
+  return mul(M, mul(rot([0, 1, 0], plane * D2R), mul(rot([1, 0, 0], -elev * D2R), rot([0, 1, 0], axial * D2R))));
+}
+function solve(plane, elev, axial, withBody = true) {
+  const Hw = humerus(plane, elev, axial);
+  const He = mul(T(MOUNT), Hw);                                 // in the exo's own frame
+  const RB = mul(He, T(H_CAD));
+  const u0 = mv(RB, J.U0.p0);
+  const th = Math.acos(Math.max(-1, Math.min(1, u0[0]))) / D2R;
+  const k = sigmaOf(th);
+  const lo = Math.min(...TH), hi = Math.max(...TH);
+  if (!k) return { ok: false, why: th < lo ? 'scissor fully closed: inner output link (I9) hits the long inner link' : 'scissor fully open: inner base link (I12) hits the long inner link', RB };
+  const RI9s = linkR('I9', k), u0s = mv(RI9s, J.U0.p0);
+  const psi = Math.atan2(u0[2], u0[1]) - Math.atan2(u0s[2], u0s[1]);
+  const Rpsi = rot(AX, psi);
+  const R = {}; for (const L of ['O3', 'O4', 'OL5', 'I9', 'I12', 'IL25']) R[L] = mul(Rpsi, linkR(L, k));
+  const Rg = mul(RB, T(R.I9));
+  const g = Math.atan2(dot(u0, [Rg[2][1] - Rg[1][2], Rg[0][2] - Rg[2][0], Rg[1][0] - Rg[0][1]]), Rg[0][0] + Rg[1][1] + Rg[2][2] - 1) / D2R;
+  const w = gWin(k.s);
+  const out = { R, RB, sigma: k.s, psi: psi / D2R, gamma: g, win: w };
+  const Rd = mul(R.O4, T(R.I9));                                 // O4 relative to I9 about the output pin
+  const dl = Math.atan2(dot(u0, [Rd[2][1] - Rd[1][2], Rd[0][2] - Rd[2][0], Rd[1][0] - Rd[0][1]]), Rd[0][0] + Rd[1][1] + Rd[2][2] - 1) / D2R;
+  const off = wrap180(g - dl / 2 - POST_C); out.post = off;
+  if (off > 90) return { ...out, ok: false, why: 'upper-arm post at the end of its 180° range (I9 side)' };
+  if (off < -90) return { ...out, ok: false, why: 'upper-arm post at the end of its 180° range (O4 side)' };
+  if (withBody) { const hit = bodyHit(R, RB, elev); if (hit) return { ...out, ok: false, why: `exo presses on the ${hit}` }; }
+  return { ...out, ok: true, why: 'exo follows' };
+}
+// ---------------------------------------------------------------- pivot-only families (design_search_*.py, scapula-mounted)
+let MODE = 'A';
+const SH = 124, RHO_ARM = Math.asin(Math.min(0.99, (46 * (H_LEN / 310) + 4) / SH)) / D2R + Math.asin(7 / SH) / D2R, SING = 12 * D2R;
+const toCad = p => add(X, mv(M, p));                            // thorax-frame mm (from the shoulder centre) -> CAD
+const RyT = a => rot([0, 1, 0], a), RxT = a => rot([1, 0, 0], a), RzT = a => rot([0, 0, 1], a);
+function scap(elev) { const n = [Math.cos(30 * D2R), 0, -Math.sin(30 * D2R)]; return mul(RzT(0.12 * elev * D2R), rot(n, -0.36 * Math.max(0, elev - 20) * D2R)); }
+const slerp = (a, b, n) => { const w = Math.acos(Math.max(-1, Math.min(1, dot(a, b)))), s = Math.sin(w) + 1e-9;
+  return Array.from({ length: n }, (_, i) => { const u = i / (n - 1); return add(sc(a, Math.sin((1 - u) * w) / s), sc(b, Math.sin(u * w) / s)); }); };
+const ang = (a, b) => Math.acos(Math.max(-1, Math.min(1, dot(a, b))));
+const bdir = (az, el) => [-Math.cos(el * D2R) * Math.cos(az * D2R), Math.sin(el * D2R), Math.cos(el * D2R) * Math.sin(az * D2R)];
+const wdir = (delta, az) => [Math.sin(delta * D2R) * Math.sin(az * D2R), -Math.cos(delta * D2R), Math.sin(delta * D2R) * Math.cos(az * D2R)];
+function circInt(c1, r1, c2, r2, sign) {                       // point at arc r1 from c1 and r2 from c2 (unit vectors)
+  const d = Math.max(-1, Math.min(1, dot(c1, c2))); let n = cross(c1, c2); const s = Math.hypot(...n); n = sc(n, 1 / (s + 1e-12));
+  const den = 1 - d * d + 1e-12, a = (Math.cos(r1) - d * Math.cos(r2)) / den, b = (Math.cos(r2) - d * Math.cos(r1)) / den;
+  const p = add(sc(c1, a), sc(c2, b)), h2 = 1 - dot(p, p);
+  return { p: add(p, sc(n, sign * Math.sqrt(Math.max(0, h2)))), ok: h2 > 0 };
+}
+const triOK = (x, y, a, b) => { const t = ang(x, y); return t >= Math.abs(a - b) + SING && t <= Math.min(a + b, 2 * Math.PI - a - b) - SING; };
+const tang = (v, u) => nrm(sub(v, sc(u, dot(v, u))));
+const about = (from, to, u) => { const a = tang(from, u), b = tang(to, u); return Math.atan2(dot(cross(a, b), u), dot(a, b)) / D2R; };
+let CLEAR = 9; const POST_CLEAR = 6, POST_EXCL = 15;
+function clash(links, sol, R) {                                 // links: arrays of unit vectors on the shell (scapula frame)
+  const { Rs, Hg, elev } = sol, eb = elevBin(elev), post = sol.pins.post;
+  for (const pts of links) for (const p of pts) {
+    const P = sc(p, R - 5), Pt = mv(Rs, P), Ph = mv(T(Hg), P);
+    if (skinAt(eb, Pt) < CLEAR) return Pt[1] > 55 * BODY.s ? 'exo would press on the trapezius / neck' : Pt[0] < -40 * BODY.s ? 'exo would press on the scapula / back' : 'exo would press on the chest / shoulder';
+    if (ang(p, post) / D2R >= POST_EXCL && skinAt(ARM_GRID, Ph) < CLEAR) return 'a link would press on the upper arm (deltoid)';
+  }
+  if (skinAt(ARM_GRID, mv(T(Hg), sc(post, R))) < POST_CLEAR) return 'upper-arm post bearing sits in the deltoid';
+  return null;
+}
+const postWin = (post, c) => Math.abs(wrap180(post - c)) <= 90;
+const FAM = {
+  B: { name: 'Scissor, re-optimised', b: bdir(340, 70), alpha: 35, delta: 70, waz: 0, postc: -170, score: 90.2,
+       pivots: '7 scissor pins + upper-arm post', drives: '3: base swing and scissor spread (scapula), post (upper arm)',
+       note: 'Your two-rhombus scissor (35° links), base pivot on top of the scapula, output pin = the upper-arm post. Same topology, pins only.' },
+  C: { name: '3 pivots', b: bdir(80, 85), a1: 75, a2: 90, br: -1, delta: 40, waz: -30, postc: 150, score: 91.0,
+       pivots: '3 large bearings', drives: '3: scapula, mid-shoulder, upper arm',
+       note: 'Serial spherical 3R: scapula pivot on top of the shoulder, 75° link (inner shell), mid pivot, 90° link (outer shell), post on the upper arm 40° off its axis. Fewest, biggest pivots.' },
+  D: { name: '4 pivots', b: bdir(40, 70), a1: 60, a2: 90, a3: 90, br: -1, delta: 55, waz: -45, postc: 140, score: 99.1,
+       pivots: '4 large bearings', drives: '4 (one redundant): scapula, two mid-shoulder, upper arm',
+       note: 'Serial spherical 4R with one spare DOF: J1 on the scapula top, 60°, 90°, 90° links, post 55° off the arm. The spare joint is used to steer around singularities and the body.' },
+  E: { name: 'Five-bar', b1: [-0.61237, 0.70711, 0.35355], b2: [-0.22414, 0.96593, -0.12941], p: 70, d: 90, delta: 55, waz: 0, modes: [1, -1], postc: -180, score: 72.7,
+       pivots: '5 pins + upper-arm post', drives: '3: two on the scapula, post on the upper arm',
+       note: 'Parallel spherical five-bar: two scapula pivots drive 70° proximal links, two 90° distal links meet at the upper-arm post. Both main drives sit on the scapula, but it loses range to type-II singularities.' },
+};
+const ALL = await (await fetch('families_all.json')).json();      // best design per family, shell radius and link type (design_search_anat.py)
+const FA = ALL.std, THIN = ALL.thin; let LINKS = 'std';
+let RADIUS = 124;
+const azel = b => { const el = Math.asin(b[1]) / D2R, az = Math.atan2(b[2], -b[0]) / D2R; return [((az % 360) + 360) % 360, el]; };
+function applyVariant() {
+  for (const f of ['B', 'C', 'D', 'E']) {
+    const v = (LINKS === 'thin' && THIN[f] ? THIN[f] : FA[f])[RADIUS]; Object.assign(FAM[f], v.params, { R: RADIUS, score: v.cov, postc: v.post_centre, postHalf: v.post_half || 90 });
+    if (f === 'C' || f === 'D') FAM[f].br = v.branch;
+    if (f === 'E') FAM[f].modes = v.modes;
+  }
+}
+function famNote(f) {
+  const F = FAM[f], where = b => { const [az, el] = azel(b); return `${el > 60 ? 'on top of the shoulder' : el > 25 ? 'on the upper back' : 'on the back'} (az ${az.toFixed(0)}°, el ${el.toFixed(0)}°)`; };
+  if (f === 'B') return `Your two-rhombus scissor, ${F.alpha}° links, base pivot ${where(F.b)}; output pin = the upper-arm post, ${F.delta}° off the arm axis.`;
+  if (f === 'C') return `Serial spherical 3R: scapula pivot ${where(F.b)}, ${F.a1}° link (inner shell), mid pivot, ${F.a2}° link (outer shell), post ${F.delta}° off the arm axis. Fewest, biggest pivots.`;
+  if (f === 'D') return `Serial spherical 4R with one spare DOF: J1 ${where(F.b)}, ${F.a1}°, ${F.a2}° and ${F.a3}° links, post ${F.delta}° off the arm. The spare joint steers around singularities and the body.`;
+  return `Parallel spherical five-bar: two scapula pivots (${where(F.b1)}; ${where(F.b2)}) drive ${F.p}° proximal links; two ${F.d}° distal links meet at the upper-arm post. Both main drives sit on the scapula.`;
+}
+let D_Q = null;                                                 // D: last spare-joint angle, for continuity
+function solveFam(plane, elev, axial, track = false) {
+  const F = FAM[MODE], Ht = mul(RyT(plane * D2R), mul(RxT(-elev * D2R), RyT(axial * D2R))), Rs = scap(elev), Hg = mul(T(Rs), Ht);
+  const h = mv(Hg, [0, -1, 0]), base = { Rs, h, Hg, elev }, RR = F.R || SH;
+  if (MODE === 'B') {
+    const b = F.b, u0 = mv(Hg, wdir(F.delta, F.waz)), al = F.alpha * D2R, th = ang(b, u0), tq = Math.tan(th / 4) / Math.tan(al);
+    if (Math.abs(tq) > 1) return { ...base, ok: false, why: 'scissor fully stretched: arm post out of reach' };
+    const phi = Math.acos(tq), w = Math.asin(Math.min(1, Math.sin(al) * Math.sin(phi)));
+    const t1 = tang(u0, b), side = cross(b, t1), along = s => add(sc(b, Math.cos(s)), sc(t1, Math.sin(s)));
+    const off = (c, sg) => { const sd = nrm(cross(cross(c, side), c)); return add(sc(c, Math.cos(w)), sc(sd, sg * Math.sin(w))); };
+    const c1 = along(th / 4), c2 = along(3 * th / 4), d1 = along(th / 2), B1 = off(c1, 1), C1 = off(c1, -1), B2 = off(c2, 1), C2 = off(c2, -1);
+    const pins = { base: [b], mid: [B1, C1, d1, B2, C2], post: u0 };
+    const links = [[b, B1, 1], [b, C1, -1], [B1, d1, -1], [C1, d1, 1], [d1, C2, 1], [d1, B2, -1], [B2, u0, 1], [C2, u0, -1]];
+    const out = { ...base, pins, links };
+    if (th / D2R < 14) return { ...out, ok: false, why: 'scissor fully folded' };
+    if (2 * w / D2R < 8) return { ...out, ok: false, why: 'scissor fully stretched' };
+    const hit = clash(links.map(([p, q]) => slerp(p, q, 5)), out, RR); if (hit) return { ...out, ok: false, why: hit };
+    out.post = wrap180(about(b, h, u0) - F.postc);
+    if (Math.abs(out.post) > (F.postHalf || 90)) return { ...out, ok: false, why: `upper-arm post at the end of its ${2 * (F.postHalf || 90)}° range` };
+    return { ...out, ok: true, why: 'exo follows', info: `scissor opening ${(th / D2R).toFixed(0)}°, post ${out.post.toFixed(0)}° of ±${F.postHalf || 90}°` };
+  }
+  if (MODE === 'C') {
+    const b = F.b, u = mv(Hg, wdir(F.delta, F.waz)), a1 = F.a1 * D2R, a2 = F.a2 * D2R;
+    if (Math.abs(dot(b, u)) > Math.cos(SING)) return { ...base, ok: false, why: 'arm post lines up with the scapula pivot (gimbal lock)' };
+    const ci = circInt(b, a1, u, a2, F.br);
+    if (!ci.ok || !triOK(b, u, a1, a2)) return { ...base, ok: false, why: 'links folded or fully stretched (singular)' };
+    const c = ci.p, links = [[b, c, -1], [c, u, 1]], out = { ...base, pins: { base: [b], mid: [c], post: u }, links };
+    const hit = clash(links.map(([p, q]) => slerp(p, q, 7)), out, RR); if (hit) return { ...out, ok: false, why: hit };
+    out.post = wrap180(about(c, h, u) - F.postc);
+    if (Math.abs(out.post) > (F.postHalf || 90)) return { ...out, ok: false, why: `upper-arm post at the end of its ${2 * (F.postHalf || 90)}° range` };
+    return { ...out, ok: true, why: 'exo follows', info: `chain bend ${(ang(b, u) / D2R).toFixed(0)}°, post ${out.post.toFixed(0)}° of ±${F.postHalf || 90}°` };
+  }
+  if (MODE === 'D') {
+    const b = F.b, u = mv(Hg, wdir(F.delta, F.waz)), a1 = F.a1 * D2R, a2 = F.a2 * D2R, a3 = F.a3 * D2R;
+    if (Math.abs(dot(b, u)) > Math.cos(SING)) return { ...base, ok: false, why: 'arm post lines up with the scapula pivot' };
+    const e = nrm(cross(b, [0, 1, 0])), f = cross(b, e);
+    let best = null, firstFail = null;
+    const tryQ = q => {
+      const c2 = add(sc(b, Math.cos(a1)), sc(add(sc(e, Math.cos(q)), sc(f, Math.sin(q))), Math.sin(a1)));
+      const ci = circInt(c2, a2, u, a3, F.br);
+      const links = [[b, c2, -1], [c2, ci.p, 1], [ci.p, u, -1]], out = { ...base, pins: { base: [b], mid: [c2, ci.p], post: u }, links, q };
+      if (!ci.ok || !triOK(c2, u, a2, a3) || !triOK(b, ci.p, a1, a2)) return { ...out, ok: false, why: 'links folded or fully stretched (singular) for every spare-joint angle' };
+      const hit = clash(links.map(([p, r]) => slerp(p, r, 7)), out, RR); if (hit) return { ...out, ok: false, why: hit };
+      out.post = wrap180(about(ci.p, h, u) - F.postc);
+      if (Math.abs(out.post) > (F.postHalf || 90)) return { ...out, ok: false, why: `upper-arm post at the end of its ${2 * (F.postHalf || 90)}° range` };
+      return { ...out, ok: true, why: 'exo follows' };
+    };
+    const qs = []; for (let k = 0; k < 36; k++) qs.push(k * 10 * D2R);
+    if (track && D_Q !== null) qs.sort((x, y) => Math.abs(wrap180((x - D_Q) / D2R)) - Math.abs(wrap180((y - D_Q) / D2R)));
+    for (const q of qs) { const r = tryQ(q); if (r.ok) { best = r; break; } firstFail ??= r; }
+    if (!best) return firstFail;
+    if (track) D_Q = best.q;
+    return { ...best, info: `spare joint J1 at ${(best.q / D2R).toFixed(0)}°, post ${best.post.toFixed(0)}° of ±${F.postHalf || 90}°` };
+  }
+  if (MODE === 'E') {
+    const u = mv(Hg, wdir(F.delta, F.waz)), p = F.p * D2R, d = F.d * D2R;
+    const i1 = circInt(F.b1, p, u, d, F.modes[0]), i2 = circInt(F.b2, p, u, d, F.modes[1]);
+    if (!i1.ok || !i2.ok || !triOK(F.b1, u, p, d) || !triOK(F.b2, u, p, d)) return { ...base, ok: false, why: 'a leg folded or fully stretched (type-I singularity)' };
+    const e1 = i1.p, e2 = i2.p, links = [[F.b1, e1, -1], [e1, u, 1], [F.b2, e2, 1], [e2, u, -1]];
+    const out = { ...base, pins: { base: [F.b1, F.b2], mid: [e1, e2], post: u }, links };
+    const t1 = tang(e1, u), t2 = tang(e2, u);
+    if (Math.abs(dot(t1, t2)) > Math.cos(1.5 * SING)) return { ...out, ok: false, why: 'distal links line up at the arm post (type-II singularity)' };
+    const hit = clash(links.map(([a, c]) => slerp(a, c, 7)), out, RR); if (hit) return { ...out, ok: false, why: hit };
+    out.post = wrap180(about(add(t1, t2), h, u) - F.postc);
+    if (Math.abs(out.post) > (F.postHalf || 90)) return { ...out, ok: false, why: `upper-arm post at the end of its ${2 * (F.postHalf || 90)}° range` };
+    return { ...out, ok: true, why: 'exo follows', info: `distal links ${(ang(t1, t2) / D2R).toFixed(0)}° apart at the post, post ${out.post.toFixed(0)}° of ±${F.postHalf || 90}°` };
+  }
+}
+const solveAny = (p, e, a, wb, track) => MODE === 'A' ? solve(p, e, a, wb) : solveFam(p, e, a, track);
+function humanOK(plane, elev, axial) {
+  if (elev < 0 || elev > 180 || plane < -60 || plane > 140) return false;
+  if (plane < 0 && elev > 120) return false;
+  const [lo, hi] = elev < 30 ? [-80, 80] : [-90, 70];
+  return axial >= lo && axial <= hi;
+}
+
+// ---------------------------------------------------------------- body (sized so its upper arm matches the exo)
+const SCALE = H_LEN / 310;                                       // 310 mm = shoulder-elbow of a 1.8 m adult
+const BODY = (() => {                                            // landmarks in the thorax frame (anterior, up, right), mm, from the right GH
+  const s = SCALE, mid = -180 * s;
+  const th = (a, u, r) => add(X, mv(M, [a, u, r]));
+  return { s, mid, torso: { c: th(-15 * s, -215 * s, mid), r: [112 * s, 250 * s, 138 * s] },
+           neck: [th(-20 * s, 40 * s, mid), th(-10 * s, 175 * s, mid)], neckR: 55 * s,
+           head: { c: th(5 * s, 300 * s, mid), r: [102 * s, 122 * s, 88 * s] }, th };
+})();
+const insideEllipsoid = (p, e, m) => { const d = mv(T(M), sub(p, e.c)); return (d[0] / (e.r[0] + m)) ** 2 + (d[1] / (e.r[1] + m)) ** 2 + (d[2] / (e.r[2] + m)) ** 2 < 1; };
+function segDist(p, a, b) { const ab = sub(b, a), t = Math.max(0, Math.min(1, dot(sub(p, a), ab) / dot(ab, ab))); return Math.hypot(...sub(p, add(a, sc(ab, t)))); }
+const SAMPLES = {}; for (const [k, pts] of Object.entries(J.samples)) SAMPLES[k] = pts;
+let SAMPLE_STEP = 1;
+function bodyHit(R, RB, elev) {                                  // exo parts vs the anatomical trunk skin (not the arm: CAD collisions cover it)
+  const eb = elevBin(elev);
+  for (const [k, pts] of Object.entries(SAMPLES)) {
+    if (k === 'BOTTOM') continue;
+    const Rk = R[k]; if (!Rk) continue;
+    const W = mul(MOUNT, Rk);
+    for (let i = 0; i < pts.length; i += SAMPLE_STEP) {
+      const p = add(X, mv(W, sub(pts[i], X))), q = mv(T(M), sub(p, X));
+      if (skinAt(eb, q) < 3) return q[1] > 55 * BODY.s ? 'trapezius / neck' : 'back';
+    }
+  }
+  return null;
+}
+
+// ---------------------------------------------------------------- three.js scene (everything authored in CAD mm)
+let dirty = true;
+const renderer = new THREE.WebGLRenderer({ antialias: true });
+renderer.setPixelRatio(Math.min(1.5, devicePixelRatio)); renderer.toneMapping = THREE.AgXToneMapping;
+$('view').appendChild(renderer.domElement);
+const scene = new THREE.Scene();
+const stageColor = () => new THREE.Color(getComputedStyle(document.documentElement).getPropertyValue('--stage').trim() || '#e9e8e4');
+scene.background = stageColor();
+matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => { scene.background = stageColor(); });
+new MutationObserver(() => { scene.background = stageColor(); }).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+scene.environment = new THREE.PMREMGenerator(renderer).fromScene(new RoomEnvironment(renderer), 0.04).texture;
+scene.environmentIntensity = 0.8;
+scene.add(new THREE.HemisphereLight(0xffffff, 0xbbb6ad, 0.6));
+const sun = new THREE.DirectionalLight(0xffffff, 1.6); sun.position.set(1, 2, 1.2); scene.add(sun);
+const root = new THREE.Group(); root.matrixAutoUpdate = false;    // CAD (mm, z up) -> three (m, y up)
+root.matrix.set(1e-3, 0, 0, 0, 0, 0, 1e-3, 0, 0, -1e-3, 0, 0, 0, 0, 0, 1); scene.add(root);
+const camera = new THREE.PerspectiveCamera(35, 1, 0.01, 50);
+const gh3 = new THREE.Vector3(X[0], X[1], X[2]).applyMatrix4(root.matrix);
+const controls = new OrbitControls(camera, renderer.domElement); controls.target.copy(gh3).add(new THREE.Vector3(0, -0.05, 0.15)); controls.addEventListener('change', () => { dirty = true; });
+camera.position.set(gh3.x + 2.1, gh3.y + 0.7, gh3.z - 2.35); controls.update();   // behind and to the right: mount and arm face the camera
+function resize() { const w = innerWidth, h = innerHeight; renderer.setSize(w, h); camera.aspect = w / h; camera.updateProjectionMatrix(); dirty = true; }
+addEventListener('resize', resize); resize();
+
+const skin = new THREE.MeshPhysicalMaterial({ color: 0xd9d6d0, roughness: 0.75, metalness: 0 });
+const ghostM = new THREE.MeshPhysicalMaterial({ color: 0xd64545, roughness: 0.6, transparent: true, opacity: 0.16, depthWrite: false });
+const alu = new THREE.MeshPhysicalMaterial({ color: 0xa9adb3, roughness: 0.4, metalness: 1 });
+const aluBad = new THREE.MeshPhysicalMaterial({ color: 0xd64545, roughness: 0.5, metalness: 0.3 });
+function place(obj, R, pivot = X) {                              // rotation R about the pivot point, CAD frame
+  const m = new THREE.Matrix4().set(R[0][0], R[0][1], R[0][2], 0, R[1][0], R[1][1], R[1][2], 0, R[2][0], R[2][1], R[2][2], 0, 0, 0, 0, 1);
+  const t1 = new THREE.Matrix4().makeTranslation(pivot[0], pivot[1], pivot[2]), t0 = new THREE.Matrix4().makeTranslation(-pivot[0], -pivot[1], -pivot[2]);
+  obj.matrixAutoUpdate = false; obj.matrix.copy(t1).multiply(m).multiply(t0);
+}
+function capsule(a, b, r, mat) {                                 // capsule between two CAD points
+  const L = Math.hypot(...sub(b, a)), g = new THREE.CapsuleGeometry(r, Math.max(1, L), 8, 24), m = new THREE.Mesh(g, mat);
+  const mid = sc(add(a, b), 0.5); m.position.set(...mid);
+  m.quaternion.setFromUnitVectors(new THREE.Vector3(0, 1, 0), new THREE.Vector3(...nrm(sub(b, a)))); return m;
+}
+function ellipsoid(e, mat) { const m = new THREE.Mesh(new THREE.SphereGeometry(1, 48, 32), mat); m.position.set(...e.c);
+  const R = M; m.matrixAutoUpdate = false; const k = new THREE.Matrix4().set(R[0][0] * e.r[0], R[0][1] * e.r[1], R[0][2] * e.r[2], e.c[0], R[1][0] * e.r[0], R[1][1] * e.r[1], R[1][2] * e.r[2], e.c[1], R[2][0] * e.r[0], R[2][1] * e.r[1], R[2][2] * e.r[2], e.c[2], 0, 0, 0, 1); m.matrix.copy(k); return m; }
+// anatomical body (body.js: BodyParts3D meshes, rigged): thorax mm from the right shoulder centre -> CAD -> three
+const s = BODY.s;
+const ANA = await loadBody(THREE, 'body_mesh.json');
+function placeBody(liftCad) { const o = add(X, liftCad);
+  ANA.setFrame(new THREE.Matrix4().copy(root.matrix).multiply(new THREE.Matrix4().set(M[0][0], M[0][1], M[0][2], o[0], M[1][0], M[1][1], M[1][2], o[1], M[2][0], M[2][1], M[2][2], o[2], 0, 0, 0, 1))); }
+placeBody([0, 0, 0]);
+// the shoulder complex (B-E: exo on the scapula, the arm) rises with the girdle; the trunk stays put
+const shoulder = new THREE.Group(); shoulder.matrixAutoUpdate = false; root.add(shoulder);
+scene.add(ANA.group);
+let BODY_MODE = 0;
+// moving arm (actual + ghost)
+function makeArm(mat) { const g = new THREE.Group(); g.userData = { mat }; shoulder.add(g); return g; }
+const ghost = makeArm(ghostM);
+function drawArm(g, Hw, flex, pron) {
+  g.clear(); const mat = g.userData.mat;
+  const RB = mul(mul(T(MOUNT), Hw), T(H_CAD));
+  const W = mul(MOUNT, RB);
+  const elbow = add(X, mv(W, sub(EH, X)));
+  const ax = mv(W, EA);
+  const fdir = mv(rot(ax, FLEX_SIGN * (flex - FLEX_CAD) * D2R), mv(W, E.forearm_dir));
+  const wrist = add(elbow, sc(fdir, 255 * s));
+  g.add(capsule(X, elbow, 36 * s, mat), capsule(elbow, wrist, 27 * s, mat), capsule(add(wrist, sc(fdir, 20 * s)), add(wrist, sc(fdir, 140 * s)), 22 * s, mat));
+  return { W, ax, fdir };
+}
+// exo meshes
+const groups = {};
+const gltf = await new GLTFLoader().loadAsync('arm_exo.gltf.json');
+const inv = new THREE.Matrix4().copy(root.matrix).invert();
+gltf.scene.updateMatrixWorld(true);
+const meshes = []; gltf.scene.traverse(o => { if (o.isMesh) meshes.push(o); });
+for (const o of meshes) {
+  const key = o.name.split('__')[0]; o.geometry.applyMatrix4(o.matrixWorld); o.geometry.applyMatrix4(inv);
+  o.position.set(0, 0, 0); o.rotation.set(0, 0, 0); o.scale.set(1, 1, 1); o.material = alu;
+  (groups[key] ||= new THREE.Group()).add(o);
+}
+const exo = new THREE.Group(); root.add(exo);
+const forearmPivot = new THREE.Group();
+for (const [k, g] of Object.entries(groups)) { if (k === 'FOREARM') forearmPivot.add(g); else exo.add(g); }
+groups.BOTTOM.add(forearmPivot);
+function setExoMaterial(bad) { exo.traverse(o => { if (o.isMesh) o.material = bad ? aluBad : alu; }); }
+
+// ---------------------------------------------------------------- family geometry (procedural, on the ~124 mm shell)
+const prop = new THREE.Group(); prop.visible = false; shoulder.add(prop);
+const propM = new THREE.MeshPhysicalMaterial({ color: 0xa9adb3, roughness: 0.4, metalness: 1 });
+const jointM = new THREE.MeshPhysicalMaterial({ color: 0x3d7bd6, roughness: 0.35, metalness: 0.4 });
+const driveM = new THREE.MeshPhysicalMaterial({ color: 0x23262b, roughness: 0.5, metalness: 0.6 });
+const cuffM = new THREE.MeshPhysicalMaterial({ color: 0x9aa0a8, roughness: 0.55, metalness: 0.2 });
+function tube(pts, r, mat) { const curve = new THREE.CatmullRomCurve3(pts.map(p => new THREE.Vector3(...p))); return new THREE.Mesh(new THREE.TubeGeometry(curve, Math.max(8, pts.length * 3), r, 10), mat); }
+function disc(c, axis, r, h, mat) { const m = new THREE.Mesh(new THREE.CylinderGeometry(r, r, h, 40), mat); m.position.set(...c);
+  m.quaternion.setFromUnitVectors(new THREE.Vector3(0, 1, 0), new THREE.Vector3(...nrm(axis))); return m; }
+function bearing(p, Rs, r, mat, drive) {                          // pivot on the shell: axis through the shoulder centre
+  const c = toCad(mv(Rs, sc(p, FAM[MODE].R || SH))), ax = mv(M, mv(Rs, p));
+  prop.add(disc(c, ax, r, 10, mat));
+  if (drive) prop.add(disc(add(c, sc(ax, 7)), ax, r * 0.82, 5, driveM));          // tendon pulley on the driven pivots
+}
+const CUFF_R = armRadius(0.42 * H_LEN) + 6, ELBOW_R = Math.hypot(...sub(ANA.landmarks.epi_l, ANA.landmarks.elbow)) + 14;   // lateral epicondyle + skin
+function drawFamily(sol, show) {
+  exo.visible = false; prop.visible = true; prop.clear();
+  if (!sol.pins) return;
+  const Rs = sol.Rs, mat = sol.ok ? propM : aluBad, W = (p, r) => toCad(mv(Rs, sc(p, r))), RR = FAM[MODE].R || SH;
+  for (const [p, q, shell] of sol.links) prop.add(tube(slerp(p, q, 16).map(v => W(v, RR + shell * 5)), 6, mat));
+  const F = FAM[MODE], driven = MODE === 'D' || MODE === 'C' ? sol.pins.mid : [];
+  for (const b of sol.pins.base) bearing(b, Rs, 26, jointM, true);
+  for (const m of sol.pins.mid) bearing(m, Rs, MODE === 'B' ? 13 : 21, jointM, MODE !== 'E' && MODE !== 'B' && driven.includes(m));
+  bearing(sol.pins.post, Rs, 22, jointM, true);
+  // rigid upper-arm link: post -> cuff on the upper arm -> lateral elbow joint -> forearm link
+  const Hw = humerus(show.plane, show.elev, show.axial), hC = mv(Hw, [0, -1, 0]), zl = mv(Hw, [0, 0, 1]);
+  const postC = W(sol.pins.post, RR + 8), cuffC = add(X, sc(hC, 0.42 * H_LEN)), cuffR = CUFF_R;
+  const toPost = nrm(sub(sub(postC, X), sc(hC, dot(sub(postC, X), hC)))), cuffP = add(cuffC, sc(toPost, cuffR));
+  prop.add(tube([postC, add(sc(add(postC, cuffP), 0.5), sc(toPost, 6)), cuffP], 6, propM));
+  const band = new THREE.Mesh(new THREE.TorusGeometry(cuffR, 4, 10, 64), cuffM); band.position.set(...cuffC);
+  band.quaternion.setFromUnitVectors(new THREE.Vector3(0, 0, 1), new THREE.Vector3(...hC)); prop.add(band);
+  const elbowC = add(X, sc(hC, H_LEN)), joint = add(elbowC, sc(zl, ELBOW_R)), cuffLat = add(cuffC, sc(zl, cuffR));
+  prop.add(tube([cuffLat, joint], 6, propM), disc(joint, zl, 20, 9, jointM));
+  const fdir = mv(rot(zl, show.flex * D2R), hC);
+  prop.add(tube([joint, add(joint, sc(fdir, 150))], 6, propM));
+}
+
+// ---------------------------------------------------------------- reach map
+const mapGroup = new THREE.Group(); root.add(mapGroup);
+const dotGeo = new THREE.SphereGeometry(7 * s, 8, 6);
+function buildMap() {
+  mapGroup.clear(); dirty = true; if (!$('map').checked) return;
+  SAMPLE_STEP = 6;
+  const cnt = { tot: 0, ok: 0 };
+  const mats = { g: new THREE.MeshBasicMaterial({ color: 0x2f9e5b }), y: new THREE.MeshBasicMaterial({ color: 0xe3b23c }), r: new THREE.MeshBasicMaterial({ color: 0xd64545 }) };
+  const inst = { g: [], y: [], r: [] };
+  for (let pl = -60; pl <= 140; pl += 8) for (let el = 4; el <= 180; el += 8) {
+    let n = 0, k = 0;
+    for (let a = -90; a <= 80; a += 20) { if (!humanOK(pl, el, a)) continue; n++; if (solveAny(pl, el, a).ok) k++; }
+    if (!n) continue; cnt.tot += n; cnt.ok += k;
+    const d = mv(humerus(pl, el, 0), [0, -1, 0]); const p = add(X, sc(d, H_LEN * 0.62));
+    inst[k === n ? 'g' : k ? 'y' : 'r'].push(p);
+  }
+  for (const [c, ps] of Object.entries(inst)) {
+    const im = new THREE.InstancedMesh(dotGeo, mats[c], ps.length);
+    ps.forEach((p, i) => im.setMatrixAt(i, new THREE.Matrix4().makeTranslation(p[0], p[1], p[2])));
+    mapGroup.add(im);
+  }
+  SAMPLE_STEP = 1;
+}
+function coverage() {
+  SAMPLE_STEP = 4;
+  let tot = 0, ok = 0;
+  for (let pl = -60; pl <= 140; pl += 10) for (let el = 0; el <= 180; el += 10) for (let a = -90; a <= 80; a += 15) {
+    if (!humanOK(pl, el, a)) continue; tot++; if (solveAny(pl, el, a).ok) ok++; }
+  const range = (pl, a) => { let lo = null, hi = null; for (let e = 0; e <= 180; e += 2) if (solveAny(pl, e, a).ok) { lo ??= e; hi = e; } return lo === null ? 'none' : `${lo}–${hi}°`; };
+  const rotr = (pl, el) => { let lo = null, hi = null; for (let a = -90; a <= 80; a += 2) if (humanOK(pl, el, a) && solveAny(pl, el, a).ok) { lo ??= a; hi = a; } return lo === null ? 'none' : `${lo}…${hi}°`; };
+  $('cov').innerHTML = [
+    ['Natural shoulder range the exo follows', `${Math.round(100 * ok / tot)}%`],
+    ['Flexion (elevation, sagittal)', range(90, 0)], ['Scaption (30° plane)', range(30, 0)], ['Abduction (frontal)', range(0, 0)],
+    ['Extension side (−60° plane)', range(-60, 0)], ['Rotation, arm down', rotr(30, 10)], ['Rotation at 90° abduction', rotr(0, 90)],
+    ['Elbow flexion', `0–${Math.min(145, Math.round(J.elbow.exo_flex_limit))}° (exo stop ${J.elbow.exo_flex_limit}°)`],
+    ['Pronation / supination', 'no exo DOF (rigid cuff)']].map(([k, v]) => `<tr><td>${k}</td><td>${v}</td></tr>`).join('');
+  SAMPLE_STEP = 1;
+  return ok / tot;
+}
+
+// ---------------------------------------------------------------- interaction
+const ids = ['plane', 'elev', 'axial', 'flex', 'pron'];
+const val = id => +$(id).value;
+let actual = null;
+function feasible(p) { return solveAny(p.plane, p.elev, p.axial).ok && p.flex <= (MODE === 'A' ? J.elbow.exo_flex_limit : 150); }
+function update() {
+  for (const id of [...ids, 'yaw', 'pitch', 'roll', 'postc']) $('v_' + id).textContent = `${$(id).value}°`;
+  const want = Object.fromEntries(ids.map(id => [id, val(id)]));
+  if (!humanOK(want.plane, want.elev, want.axial)) $('status').innerHTML = '<b>Outside a natural shoulder range</b>';
+  if (!actual || !feasible(actual)) actual = feasible(want) ? { ...want } : actual;
+  let reason = 'exo follows';
+  if (feasible(want)) actual = { ...want };
+  else if (actual) {                                             // walk from the last good pose toward the request, stop at the limit
+    let lo = 0, hi = 1;
+    for (let i = 0; i < 18; i++) { const t = (lo + hi) / 2; const p = Object.fromEntries(ids.map(id => [id, actual[id] + (want[id] - actual[id]) * t])); feasible(p) ? lo = t : hi = t; }
+    actual = Object.fromEntries(ids.map(id => [id, actual[id] + (want[id] - actual[id]) * lo]));
+    const r = solveAny(want.plane, want.elev, want.axial); reason = MODE === 'A' && want.flex > J.elbow.exo_flex_limit ? 'elbow joint stop (MIDDLE hits BOTTOM)' : r.why;
+  }
+  const show = actual || want;
+  ANA.update(show, BODY_MODE, { girdle: MODE !== 'A' }); dirty = true;
+  const liftCad = mv(M, ANA.lift); placeBody(liftCad); shoulder.matrix.makeTranslation(...liftCad);
+  const blocked = !feasible(want);
+  ghost.visible = blocked;
+  if (blocked) drawArm(ghost, humerus(want.plane, want.elev, want.axial), want.flex, want.pron);
+  if (MODE !== 'A') {
+    const sol = solveFam(show.plane, show.elev, show.axial, true); drawFamily(sol, show);
+    $('status').innerHTML = blocked ? `<b class="bad">Exo stops the arm</b>${reason}` : `<b class="ok">Exo follows</b><span class="note">${sol.info || ''}</span>`;
+    return;
+  }
+  exo.visible = true; prop.visible = false;
+  const sol = solve(show.plane, show.elev, show.axial);
+  // exo pose
+  if (sol.R) { for (const L of ['O3', 'O4', 'OL5', 'I9', 'I12', 'IL25']) place(groups[L], mul(MOUNT, sol.R[L])); }
+  place(groups.BOTTOM, mul(MOUNT, sol.RB));
+  place(forearmPivot, rot(EA, FLEX_SIGN * (show.flex - FLEX_CAD) * D2R), E.centre);
+  setExoMaterial(!sol.ok);
+  const pr = Math.abs(want.pron) > 25 ? `<br><span class="note">Pronation ${want.pron}°: the exo has no forearm-rotation joint and the rigid cuff grips the forearm near the elbow, so this has to come from the forearm below the cuff.</span>` : '';
+  $('status').innerHTML = blocked ? `<b class="bad">Exo stops the arm</b>${reason}${pr}`
+    : `<b class="ok">Exo follows</b><span class="note">scissor ${sol.sigma?.toFixed(0)}°, base swing ${sol.psi?.toFixed(0)}°, post ${sol.post >= 0 ? '+' : ''}${sol.post?.toFixed(0)}° of ±90°</span>${pr}`;
+}
+for (const id of ids) $(id).addEventListener('input', update);
+function remount() { setMount(val('yaw'), val('pitch'), val('roll')); actual = null; update(); buildMap(); coverage(); }
+for (const id of ['yaw', 'pitch', 'roll']) $(id).addEventListener('input', () => { $('v_' + id).textContent = `${$(id).value}°`; });
+for (const id of ['yaw', 'pitch', 'roll']) $(id).addEventListener('change', remount);
+$('postc').addEventListener('input', () => { $('v_postc').textContent = `${$('postc').value}°`; });
+$('postc').addEventListener('change', () => { POST_C = +$('postc').value; actual = null; update(); buildMap(); coverage(); });
+$('map').addEventListener('change', buildMap);
+function setMode(m) {
+  MODE = m; D_Q = null;
+  document.querySelectorAll('#fams button').forEach(b => b.setAttribute('aria-pressed', b.dataset.f === m));
+  document.querySelectorAll('.cur-only').forEach(el => el.hidden = m !== 'A');
+  document.querySelectorAll('.fam-only').forEach(el => el.hidden = m === 'A');
+  $('mnote').innerHTML = m === 'A' ? 'Your CAD: two-stage scissor, BOTTOM on the output pin, base fixed to the back (mount adjustable below).'
+    : `${famNote(m)}<br><b>Pivots</b> ${FAM[m].pivots}. <b>Drives</b> ${FAM[m].drives}.`;
+  actual = null; update(); buildMap(); coverage();
+}
+document.querySelectorAll('#fams button').forEach(b => b.onclick = () => setMode(b.dataset.f));
+document.querySelectorAll('#bodym button').forEach(b => b.onclick = () => {
+  BODY_MODE = +b.dataset.b; document.querySelectorAll('#bodym button').forEach(x => x.setAttribute('aria-pressed', x === b)); update(); });
+function compareTable() {
+  const pc = v => `${(100 * v).toFixed(0)}%`;
+  $('cmp').innerHTML = `<tr><td></td><td>124</td><td>136</td><td>148 mm</td></tr>` +
+    `<tr><td>A · Current scissor</td><td>${FA.A}</td><td>–</td><td>–</td></tr>` +
+    [['B', 'Scissor, re-optimised'], ['C', '3 pivots'], ['D', '4 pivots (1 spare)'], ['E', 'Five-bar']]
+      .map(([f, n]) => `<tr><td>${f} · ${n}</td>${[124, 136, 148].map(r => `<td>${pc(FA[f][r].cov)}</td>`).join('')}</tr>`).join('') +
+    `<tr><td colspan="4"><b>Thin skin-riding strips</b></td></tr>` +
+    [['C', '3 pivots, post by contact'], ['D', '4 pivots (1 spare)']]
+      .map(([f, n]) => `<tr><td>${f} · ${n}</td>${[124, 136, 148].map(r => `<td>${pc(THIN[f][r].cov)}</td>`).join('')}</tr>`).join('');
+}
+applyVariant(); compareTable();
+function setLinks(l) {
+  LINKS = l; CLEAR = l === 'thin' ? 4 : 9;
+  document.querySelectorAll('#links button').forEach(x => x.setAttribute('aria-pressed', x.dataset.l === l));
+  $('lnote').textContent = l === 'thin' ? 'Thin titanium or carbon strips riding about 4 mm off the skin (inner face). Families C and D were re-searched for this; B and E keep their bar designs.'
+    : 'Standard bars: inner face at least 9 mm off the skin.';
+  applyVariant(); setMode(MODE);
+}
+document.querySelectorAll('#links button').forEach(b => b.onclick = () => setLinks(b.dataset.l));
+$('lnote').textContent = 'Standard bars: inner face at least 9 mm off the skin.';
+// Orbit Joint animation (cross-section of the upper arm; same construction as orbit_joint.py)
+(() => {
+  const svg = $('oj'), NS = 'http://www.w3.org/2000/svg', rho = 62, d = rho + 12, P = [rho + 12, 0], c = [d, 0], off = [-P[0], -P[1]];
+  const el = (t, at) => { const e = document.createElementNS(NS, t); for (const k in at) e.setAttribute(k, at[k]); svg.appendChild(e); return e; };
+  const ink = getComputedStyle(document.documentElement).getPropertyValue('--ink') || '#1c1d1f';
+  el('circle', { cx: 0, cy: 0, r: rho, fill: 'none', stroke: 'var(--mute)', 'stroke-width': 2, 'stroke-dasharray': '4 3' });
+  el('circle', { cx: 0, cy: 0, r: 3, fill: 'var(--mute)' });
+  el('text', { x: 0, y: -rho - 8, 'text-anchor': 'middle', 'font-size': 11, fill: 'var(--mute)' }).textContent = 'upper arm';
+  const bar = el('rect', { x: P[0] - 6, y: -40, width: 46, height: 80, rx: 6, fill: 'var(--chip)', stroke: 'var(--line)' });
+  const trace = el('path', { d: '', fill: 'none', stroke: '#2f9e5b', 'stroke-width': 1.2, 'stroke-dasharray': '2 3' });
+  const crank = el('line', { stroke: 'var(--ink)', 'stroke-width': 6, 'stroke-linecap': 'round' });
+  const coup = el('line', { stroke: '#3d7bd6', 'stroke-width': 6, 'stroke-linecap': 'round' });
+  const cuff = el('path', { fill: 'none', stroke: '#2f9e5b', 'stroke-width': 7, 'stroke-linecap': 'round' });
+  const pins = [0, 1, 2].map(() => el('circle', { r: 5, fill: 'var(--bg)', stroke: 'var(--ink)', 'stroke-width': 2 }));
+  let pts = []; for (let k = -110; k <= 110; k += 5) { const t = k * Math.PI / 180; pts.push(`${d * Math.cos(t)},${d * Math.sin(t)}`); }
+  trace.setAttribute('d', 'M' + pts.join(' L'));
+  const t0 = performance.now();
+  const step = () => {
+    const t = 110 * Math.sin((performance.now() - t0) / 1600) * Math.PI / 180, ct = Math.cos(t), st = Math.sin(t);
+    const E = [P[0] + ct * c[0] - st * c[1], P[1] + st * c[0] + ct * c[1]], G = [E[0] + off[0], E[1] + off[1]];
+    crank.setAttribute('x1', P[0]); crank.setAttribute('y1', P[1]); crank.setAttribute('x2', E[0]); crank.setAttribute('y2', E[1]);
+    coup.setAttribute('x1', E[0]); coup.setAttribute('y1', E[1]); coup.setAttribute('x2', G[0]); coup.setAttribute('y2', G[1]);
+    const a0 = t - 0.55, a1 = t + 0.55, r = rho + 4;                        // cuff arc, rigid with the arm
+    cuff.setAttribute('d', `M${r * Math.cos(a0)},${r * Math.sin(a0)} A${r},${r} 0 0 1 ${r * Math.cos(a1)},${r * Math.sin(a1)} M${r * Math.cos(t)},${r * Math.sin(t)} L${G[0]},${G[1]}`);
+    [P, E, G].forEach((p, i) => { pins[i].setAttribute('cx', p[0]); pins[i].setAttribute('cy', p[1]); });
+    $('ojangle').textContent = `cuff rotation about the humerus axis: ${(t * 180 / Math.PI).toFixed(0)}°`;
+    requestAnimationFrame(step);
+  };
+  step();
+})();
+document.querySelectorAll('#radii button').forEach(b => b.onclick = () => {
+  RADIUS = +b.dataset.r; document.querySelectorAll('#radii button').forEach(x => x.setAttribute('aria-pressed', x === b)); applyVariant(); setMode(MODE); });
+$('reset').onclick = () => { $('yaw').value = 0; $('pitch').value = 0; $('roll').value = 0; remount(); };
+$('opt').onclick = async () => {
+  $('optmsg').textContent = 'searching…'; await new Promise(r => setTimeout(r, 30));
+  SAMPLE_STEP = 8; let best = null;
+  const poses = []; for (let pl = -60; pl <= 140; pl += 20) for (let el = 0; el <= 180; el += 20) for (let a = -90; a <= 80; a += 30) if (humanOK(pl, el, a)) poses.push([pl, el, a]);
+  for (let y = -90; y <= 90; y += 15) { for (let p = -60; p <= 60; p += 15) for (let r = -60; r <= 60; r += 15) {
+      setMount(y, p, r); let k = 0; for (const q of poses) if (solve(...q).ok) k++;
+      if (!best || k > best.k) best = { k, y, p, r }; }
+    $('optmsg').textContent = `searching… yaw ${y}°`; await new Promise(r => setTimeout(r, 0)); }
+  SAMPLE_STEP = 1;
+  $('yaw').value = best.y; $('pitch').value = best.p; $('roll').value = best.r; remount();
+  $('optmsg').textContent = `best on a 15° grid: yaw ${best.y}°, pitch ${best.p}°, roll ${best.r}°`;
+};
+// presets: animate a sweep
+let anim = null;
+const PRE = { flex: [{ plane: 90, elev: [0, 180], axial: 0, flex: 20 }], abd: [{ plane: 0, elev: [0, 180], axial: 0, flex: 20 }],
+  scap: [{ plane: 30, elev: [0, 180], axial: 0, flex: 20 }], ext: [{ plane: -60, elev: [0, 70], axial: 0, flex: 20 }],
+  rot: [{ plane: 0, elev: 90, axial: [-90, 70], flex: 90 }], mouth: [{ plane: 70, elev: [10, 40], axial: [0, 40], flex: [20, 140] }],
+  head: [{ plane: 10, elev: [20, 140], axial: [0, -80], flex: [20, 130] }] };
+document.querySelectorAll('[data-p]').forEach(b => b.onclick = () => {
+  const P = PRE[b.dataset.p][0]; const t0 = performance.now(); actual = null;
+  cancelAnimationFrame(anim);
+  const step = () => { const u = Math.min(1, (performance.now() - t0) / 3500), e = u < .5 ? 2 * u * u : 1 - (-2 * u + 2) ** 2 / 2;
+    for (const id of ids) { const v = P[id]; if (v === undefined) continue; $(id).value = Array.isArray(v) ? v[0] + (v[1] - v[0]) * e : v; }
+    update(); if (u < 1) anim = requestAnimationFrame(step); };
+  step();
+});
+$('assume').innerHTML = `<b>Body.</b> Real anatomy: the bone, muscle and skin meshes of BodyParts3D (a CT/MRI-based male model), about 400 named muscles and 220 bones, decimated for the web and rigged to the same joints as the analysis. Scaled ×${ANA.scale.toFixed(2)} to the height of a person whose upper arm matches the exo (${Math.round(H_LEN)} mm), with the upper arms stretched to exactly that length. <b>Muscles.</b> The 70 muscles that cross the right shoulder or elbow are skinned to the bones they attach to (anatomical origin and insertion). A length change of the muscle-tendon unit goes into its fibres (tendon ~inextensible; fibre and tendon lengths and pennation from the Holzbaur 2005 upper-limb model); fibres keep their volume, so a fusiform belly thickens as 1/√(fibre stretch), a flat muscle as 1/stretch in thickness only, pennate muscles less (cos² of pennation), and a gravity-loaded muscle firms up by ~4%. Only the belly changes; tendons keep their shape; the skin over them follows. The forearm twists progressively from elbow to wrist in pronation. <b>Shoulder.</b> Scapulohumeral rhythm (upward rotation 0.36 × (elevation − 20°), posterior tilt 0.12 × elevation) and girdle elevation (the shoulder centre rises 0.2 mm per degree past 30°); bases B–E ride on the scapula. <b>Collisions.</b> Shell links (inner face) must stay ≥ 9 mm off this skin (4 mm for thin strips); inside/outside is decided by tissue, arm versus trunk by the nearest bone (trunk and girdle per elevation, and the upper arm), except where the rigid upper-arm link meets the arm. A keeps its CAD back mount (adjustable). <b>Joints.</b> Pivots only, every upper-arm post limited to 180°, 12° singularity margins, one assembly branch for the whole range. Human limits are typical healthy-adult values.<br><span class="note">Anatomy: BodyParts3D, © The Database Center for Life Science, CC BY-SA 2.1 Japan (modified: decimated, rigged, scaled). This viewer is shared under the same licence.</span>`;
+setMount(0, 0, 0); setMode('A');
+window.__v = { camera, controls, setMode, gh3, ANA, solveFam, FAM, get mode() { return MODE; }, redraw: () => { dirty = true; } };
+renderer.setAnimationLoop(() => { controls.update(); if (dirty) { renderer.render(scene, camera); dirty = false; } });
+</script>

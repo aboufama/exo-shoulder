@@ -1,0 +1,36 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>Body test</title>
+<style>html,body{margin:0;height:100%;background:#e9e8e4;overflow:hidden;font:12px sans-serif} #ui{position:fixed;left:8px;top:8px;background:#fff;padding:8px;border-radius:8px;z-index:2}</style>
+<div id="ui">
+  plane <input id="plane" type="range" min="-60" max="140" value="10"> elev <input id="elev" type="range" min="0" max="180" value="6"><br>
+  axial <input id="axial" type="range" min="-90" max="80" value="0"> flex <input id="flex" type="range" min="0" max="150" value="12"><br>
+  pron <input id="pron" type="range" min="-85" max="85" value="0"> <select id="mode"><option value="0">skin</option><option value="1">muscles</option><option value="2">x-ray</option></select> <span id="fps"></span>
+</div>
+<script type="importmap">{ "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.165.0/build/three.module.js", "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.165.0/examples/jsm/" } }</script>
+<script type="module">
+import * as THREE from 'three';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
+const { loadBody } = await import('./body.js?v=' + Date.now());
+const r = new THREE.WebGLRenderer({ antialias: true }); r.setPixelRatio(Math.min(2, devicePixelRatio)); r.toneMapping = THREE.AgXToneMapping; document.body.appendChild(r.domElement);
+const scene = new THREE.Scene(); scene.background = new THREE.Color(0xe9e8e4);
+scene.environment = new THREE.PMREMGenerator(r).fromScene(new RoomEnvironment(r), 0.04).texture; scene.environmentIntensity = 0.7;
+scene.add(new THREE.HemisphereLight(0xffffff, 0xb8b0a5, 0.5));
+const sun = new THREE.DirectionalLight(0xffffff, 1.8); sun.position.set(2, 3, 2); scene.add(sun);
+const fill = new THREE.DirectionalLight(0xdfe8ff, 0.6); fill.position.set(-2, 1, -1.5); scene.add(fill);
+const cam = new THREE.PerspectiveCamera(35, 1, 0.01, 50); const ctl = new OrbitControls(cam, r.domElement);
+const B = await loadBody(THREE); B.setFrame(new THREE.Matrix4().makeScale(1e-3, 1e-3, 1e-3)); scene.add(B.group);
+const VIEWS = { front: [[3.2, -0.2, -0.25], [0, -0.55, -0.25]], back: [[-3.2, -0.2, -0.25], [0, -0.55, -0.25]], side: [[0, -0.2, 3.2], [0, -0.55, -0.25]],
+  three: [[2.4, 0.2, 1.7], [0, -0.55, -0.25]], shoulder: [[0.9, 0.3, 0.8], [0, -0.1, -0.1]], shoulderback: [[-0.9, 0.35, 0.7], [0, -0.1, -0.1]], torso: [[1.6, 0.0, 0.6], [0, -0.25, -0.22]], head: [[0.8, 0.45, 0.15], [0.05, 0.36, -0.25]] };
+let dirty = true; ctl.addEventListener('change', () => dirty = true);
+const resize = () => { r.setSize(innerWidth, innerHeight); cam.aspect = innerWidth / innerHeight; cam.updateProjectionMatrix(); dirty = true; }; addEventListener('resize', resize); resize();
+const pose = () => Object.fromEntries(['plane', 'elev', 'axial', 'flex', 'pron'].map(k => [k, +document.getElementById(k).value]));
+const upd = () => { const t = performance.now(); B.update(pose(), +document.getElementById('mode').value); document.getElementById('fps').textContent = `update ${(performance.now() - t).toFixed(0)} ms`; dirty = true; };
+document.querySelectorAll('input,select').forEach(e => { e.addEventListener('input', upd); e.addEventListener('change', upd); }); upd();
+window.__view = (k, p, mode) => { const [a, b] = VIEWS[k]; cam.position.set(...a); ctl.target.set(...b); ctl.update();
+  if (p) for (const [kk, v] of Object.entries(p)) document.getElementById(kk).value = v; if (mode !== undefined) document.getElementById('mode').value = mode; resize(); upd(); };
+__view('three');
+r.setAnimationLoop(() => { ctl.update(); if (dirty) { r.render(scene, cam); dirty = false; } });
+window.__B = B;
+</script>

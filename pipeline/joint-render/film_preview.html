@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>EXO film v7 preview</title>
+<style>
+  html, body { margin: 0; height: 100%; background: #dcdad6; overflow: hidden; }
+  canvas { position: absolute; inset: 0; margin: auto; max-width: 100%; max-height: 100%; }
+</style>
+<script type="importmap">
+{ "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.165.0/build/three.module.js",
+               "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.165.0/examples/jsm/" } }
+</script>
+</head>
+<body>
+<script type="module">
+// Motion preview for film_v7.json: quick raster, no depth of field. The final look is the Cycles render.
+import * as THREE from 'three';
+import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
+
+const Q = new URLSearchParams(location.search);
+const W = +(Q.get('w') || 960), H = +(Q.get('h') || 540);
+const renderer = new THREE.WebGLRenderer({ antialias: true, preserveDrawingBuffer: true });
+renderer.setPixelRatio(1); renderer.setSize(W, H, false);
+renderer.toneMapping = THREE.AgXToneMapping; renderer.outputColorSpace = THREE.SRGBColorSpace;
+document.body.appendChild(renderer.domElement);
+const fit = () => { const k = Math.min(innerWidth / W, innerHeight / H); renderer.domElement.style.width = W * k + 'px'; renderer.domElement.style.height = H * k + 'px'; };
+addEventListener('resize', fit); fit();
+
+const scene = new THREE.Scene();
+{ // seamless studio backdrop: soft vertical gradient
+  const c = document.createElement('canvas'); c.width = 2; c.height = 256; const g = c.getContext('2d');
+  const gr = g.createLinearGradient(0, 0, 0, 256); gr.addColorStop(0, '#ecebe8'); gr.addColorStop(1, '#c9c7c2');
+  g.fillStyle = gr; g.fillRect(0, 0, 2, 256);
+  const t = new THREE.CanvasTexture(c); t.colorSpace = THREE.SRGBColorSpace; scene.background = t;
+}
+scene.environment = new THREE.PMREMGenerator(renderer).fromScene(new RoomEnvironment(renderer), 0.04).texture;
+scene.environmentIntensity = 0.7;
+const key = new THREE.DirectionalLight(0xfff4e8, 2.2); key.position.set(-0.3, 0.8, 0.4); scene.add(key);
+const under = new THREE.DirectionalLight(0xeef2ff, 1.4); under.position.set(0.2, -0.9, -0.3); scene.add(under);
+const rim = new THREE.DirectionalLight(0xdfe8ff, 1.0); rim.position.set(0.6, 0.3, -0.7); scene.add(rim);
+
+const alu = new THREE.MeshPhysicalMaterial({ color: 0xb9bdc3, metalness: 1, roughness: 0.42 });
+const stainless = new THREE.MeshPhysicalMaterial({ color: 0xd4d6d9, metalness: 1, roughness: 0.12 });
+const steel = new THREE.MeshPhysicalMaterial({ color: 0xc4c7cb, metalness: 1, roughness: 0.2 });
+const iglide = new THREE.MeshPhysicalMaterial({ color: 0xdc9f16, metalness: 0, roughness: 0.48 });
+const nickel = new THREE.MeshPhysicalMaterial({ color: 0xdad8d3, metalness: 1, roughness: 0.18 });
+const mat = n => n.includes('SCREW') ? stainless : n.startsWith('BEARING') || n === 'SHIELDS' ? steel
+  : n.startsWith('WASHER') || n === 'SLEEVE' ? iglide : n === 'MAGNET' ? nickel : alu;
+const keyOf = n => (n.startsWith('BEARING') || n === 'SHIELDS') ? 'BEARING' : n;
+const flexes = n => n === 'MIDDLE' || n === 'CUFF' || n.startsWith('CSCREW');
+
+const camera = new THREE.PerspectiveCamera(30, W / H, 0.005, 20);
+const label = document.createElement('div'); label.style.cssText = 'position:fixed;left:8px;bottom:6px;font:13px Helvetica,Arial;color:#333';
+document.body.appendChild(label);
+let F = null; const nodes = {};
+const g2m = (p) => new THREE.Vector3(p[0] / 1000, p[2] / 1000, -p[1] / 1000);   // CAD mm -> glTF m
+
+function pose(i) {
+  const f = F.frames[Math.max(0, Math.min(F.frames.length - 1, i))], t = i / F.fps;
+  for (const [n, o] of Object.entries(nodes)) {
+    const p0 = o.userData.p0, a = flexes(n) ? THREE.MathUtils.degToRad(f.flex) : 0;
+    o.position.set(p0.x * Math.cos(a) + p0.z * Math.sin(a), p0.y + (f.z[keyOf(n)] || 0) / 1000, -p0.x * Math.sin(a) + p0.z * Math.cos(a));
+    o.rotation.y = a + (f.spin[n] !== undefined ? THREE.MathUtils.degToRad(f.spin[n]) : 0);
+    o.visible = !(f.hidden || []).includes(n);
+  }
+  camera.position.copy(g2m(f.cam.pos)); camera.fov = f.cam.fov; camera.updateProjectionMatrix(); camera.lookAt(g2m(f.cam.target));
+  let shot = ''; for (const [s, t0] of F.shots) if (t >= t0 - 1e-6) shot = s;
+  label.textContent = `${t.toFixed(2)} s   ${shot}`;
+}
+
+const frameIdx = () => Q.has('t') ? Math.round(+Q.get('t') * F.fps) : 0;
+fetch('film_v7.json?t=' + Date.now()).then(r => r.json()).then(j => { F = j;
+  new GLTFLoader().load('joint_v7.glb?t=' + Date.now(), async (g) => {
+    g.scene.traverse(o => { if (o.isMesh) { o.material = mat(o.name); nodes[o.name] = o; o.userData.p0 = o.position.clone(); } });
+    scene.add(g.scene);
+    if (!Q.has('render')) {
+      const t0 = performance.now();
+      const loop = () => { pose(Q.has('t') ? frameIdx() : Math.floor((performance.now() - t0) / 1000 * F.fps) % F.frames.length); renderer.render(scene, camera); requestAnimationFrame(loop); };
+      loop(); return;
+    }
+    const c2 = document.createElement('canvas'); c2.width = W; c2.height = H; const x2 = c2.getContext('2d');
+    for (let i = +(Q.get('from') || 0); i < F.frames.length; i++) {
+      pose(i); renderer.render(scene, camera);
+      x2.drawImage(renderer.domElement, 0, 0); x2.font = `${Math.round(H / 32)}px Helvetica, Arial`; x2.fillStyle = '#333';
+      x2.fillText(label.textContent, Math.round(H / 40), H - Math.round(H / 40));
+      await fetch('/frame?i=' + i, { method: 'POST', body: await new Promise(r => c2.toBlob(r, 'image/png')) });
+    }
+    await fetch('/done', { method: 'POST', body: String(F.frames.length) });
+  });
+});
+</script>
+</body>
+</html>

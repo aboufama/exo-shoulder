@@ -1,0 +1,868 @@
+Aalborg Universitet
+A compact 3-DOF shoulder mechanism constructed with scissors linkages for
+exoskeleton applications
+Castro, Miguel Nobre; Rasmussen, John; Andersen, Michael Skipper; Bai, Shaoping
+Published in:
+Mechanism and Machine Theory
+DOI (link to publication from Publisher):
+10.1016/j.mechmachtheory.2018.11.007
+Creative Commons License
+CC BY-NC-ND 4.0
+Publication date:
+2019
+Document Version
+Accepted author manuscript, peer reviewed version
+Link to publication from Aalborg University
+Citation for published version (APA):
+Castro, M. N., Rasmussen, J., Andersen, M. S., & Bai, S. (2019). A compact 3-DOF shoulder mechanism
+constructed with scissors linkages for exoskeleton applications. Mechanism and Machine Theory, 132, 264-278.
+https://doi.org/10.1016/j.mechmachtheory.2018.11.007
+General rights
+Copyright and moral rights for the publications made accessible in the public portal are retained by the authors and/or other copyright owners
+and it is a condition of accessing publications that users recognise and abide by the legal requirements associated with these rights.
+            - Users may download and print one copy of any publication from the public portal for the purpose of private study or research.
+            - You may not further distribute the material or use it for any profit-making activity or commercial gain
+            - You may freely distribute the URL identifying the publication in the public portal -
+Take down policy
+If you believe that this document breaches copyright please contact us at vbn@aub.aau.dk providing details, and we will remove access to
+the work immediately and investigate your claim.
+Downloaded from vbn.aau.dk on: 10 13, 2026
+
+A compact 3-DOF shoulder mechanism constructed with scissors linkages for 
+exoskeleton applications 
+Miguel Nobre Castroa,1(), John Rasmussena,2, Michael Skipper Andersena,3, Shaoping 
+Baia,4 
+Department of Materials and Production, Aalborg University, Aalborg East, Denmark 
+1mnc@mp.aau.dk, 2jr@mp.aau.dk, 3msa@mp.aau.dk, 4shb@mp.aau.dk 
+ 
+Corresponding Author: () Miguel Nobre Castro 
+ 
+Abstract 
+A novel 3 -degrees-of-freedom (DOF) spherical mec hanism, singularity -free in the 
+anatomical shoulder joint workspace, is described. The use of curved scissor s linkages 
+interconnected by revolute joints, whose axes share the same remote centre -of-motion, 
+achieves the most  compact design of its kind.  The kinematics of this scissor s shoulder 
+mechanism (SSM) are derived and presented. A design equation restricting the linkage’s 
+curvature by the central/pitch angle of the fully stretched scissors is obtained.  Motion-
+captured data are used for validating the r eachable 3-d workspace while a test -subject is 
+wearing a null protraction/retraction constrained exoskeleton. The embodiment of the SSM 
+as a shoulder joint  for an exoskeleton  device does not compromise the upper extremity 
+function within the anatomical reachable 3-d workspace. It operates within a volume of 
+0.236 m3, corresponding to 68.09% and 94.97% of the volumes of the full active (0.350 
+m3) and null protraction/retraction constrained active (0.223 m 3) reachable workspaces of 
+the test -subject, respectively. Thus, the SSM represents a simplification of a spatial 
+spherical mechanism design and overcomes the need for the use of redundant links and 
+optimization routines. 
+ 
+Keywords 
+Scissors spherical mechanism, Compact shoulder mechanism; Scissors linkages; 
+Kinematics; Exoskeleton; Reachable Workspace. 
+  
+
+2 
+ 
+1. Introduction 
+The need for spherical mechanisms and robotic spherical manipulators is increasing. 
+The conventional industrial serial manipulators, composed of consecutive revolute joints, 
+can work around an object but they often require a change of configuration when the robot 
+approaches a singularity [1]. From that point, changing the configuration of a manipulator 
+with straight links can be problematic, as it must be simultaneously ensured that the robot 
+does not collide with objects. For this reason, the creation of serial spherical mechanisms 
+with curved links is advantageous , as they work on a spherical surface around the object.  
+Most of the spherical shoulders are composed of three perpendicular rot ation axes (3R), 
+thus behaving like a gimbal mechanism  [2–4]. An inherent disadvantage of this class of 
+mechanisms is locking in inevitable singular configurations. To avoid the complic ations 
+related with the singularity, some improvements and workarounds were made in the past : 
+for example, the use of extra/redundant linkages [5] and design optimization on linkages’ 
+lengths [6] were reported. 
+Spherical mechanisms are critically important for building an exoskeleton’s shoulder 
+joint, since it  has to  surround the anatomi cal shoulder structure while pairing with its 
+motions. Since the anatomical shoulder joint is a spherical ball -and-socket joint itself, the 
+surrounding biological structures (bones, muscles and skin) will occupy the workspace of 
+the shoulder mechanism. Additionally, both joint centres must coincide to avoid discomfort 
+[7]. Attempts were made to meet these requirements.  In some works [2–4], the spherical 
+serial mechanism was configured in such way that the singular configurations lie outside 
+the anatomic al reachable workspace. Lo and Xie  [5] also suggested a 4R shoulder 
+mechanism with the addiction of an extra revolute joint, but this extra joint creates 
+kinematic redundancy. The double parallelogram mechanism proposed by Christensen and 
+Bai [8] is able to produce singularity -free rotations in the anatomica l shoulder joint 
+workspace, which is a variation and a down -scaled version of the classic double 
+parallelogram mechanism [9]. On the other hand, despite its singularity-free characteristic, 
+the mechanism protrudes out of the shoulder region and its lack of compactness 
+compromises its wearability, which is usually a challenging and relevant design feature in 
+these devices [10,11]. 
+In this work, we attempt to achieve a mechanism which is both singularity -free in the 
+anatomical shoulder joint workspace and as compact as a serial spherical mechanism by 
+means of scissors with curved linkages. The traditional scissor s mechanism can be found 
+in lifting and tongue mechanisms [9] and has also been used to generate deployable spatial 
+structures [12,13]. A famous  case is the one proposed by Charles Hoberman, a radially 
+deploying structure, which resulted in a well-known children’s toy, the Hoberman Sphere 
+[14]. A few years ago, the use of curved scissor s linkages in a so called “symmetrical 
+parallelogram mechanical network” was presented by Kocabas [15] as a 1 -DOF gripper 
+mechanism. Other authors, Watson et al.  [16], also referred to these as  spherical 
+pantographs. To the authors’ knowledge , the extension of curved scissors linkages to a 
+spatial shoulder joint has never been explored. 
+In this paper, a novel serial spherical scissor s mechanism with crossing, curved 
+linkages is proposed and described. Its kinematics are  derived and the respective 
+manipulability measure will be used to evaluate the performance of the mechanism an d 
+eventual singular points in its workspace. An application case of the mechanism as a 
+spherical joint for an upper extremity exoskeleton is presented. The device’s performance 
+
+3 
+ 
+is evaluated by experimentally measuring the  reachable 3-D workspace on a participant 
+while wearing and not wearing  a real prototype . The paper will be concluded with the 
+discussion of these results. 
+ 
+2. Mechanism Kinematics 
+2.1. Conceptual development 
+The anatomical shoulder complex is an intricate joint which is mainly cap able of 
+performing three rotations (flexion/extension, internal/external rotation and 
+abduction/adduction) about three different axis perpendicular to three distinct planes  and 
+has two translation directions (elevation/depression and protraction/retraction ), as 
+exemplified in Figure 1. Designing mechanical shoulder joints that are singularity-free in 
+the anatomical shoulder joint workspace is a problem that has been addressed repeatedly, 
+either by repositioning the axes of the typical curved serial linkages shoulder configuration 
+or by using redundant linkages. The problem for one particular case was comprehensively 
+dissected by Lo and Xie  [17]. For the configuration presented in Figure 2-A, the existing 
+singularity of the system coincides with the posture of a 90º shoulder flexion as represented 
+in Figure 2-B. At this singularity point, the mechanism’s internal/external rotation axis 
+aligns with its abduction/adduction axis, resulting in the loss of a DOF. The practical 
+consequence is that the mechanism no longer allows shoulder movements in the direction 
+of abduction/adduction, hence compromising its functionality. 
+ 
+ 
+ 
+Figure 1. The anatomical shoulder complex is capable of three rotations about three 
+different axis perpendicular to three distinct planes  (colored planes) and two translation 
+movements (black arrows). 
+
+
+4 
+ 
+To solve this singularity problem, an attempt was made to create a similar mechanism 
+with the exact same rotational properties but without the kinematic constraint imposed by 
+the singularity. Taking Figure 2-B as the starting point, it is possible to substitute the fi rst 
+curved link of the shoulder mechanism by a sliding element such that enables avoiding the 
+singularity problem when the arm attains a 90 degree shoulder flexion. Such a sliding 
+element was designed as a rhombus mechanism, as shown in Figure 2-C, and it allows the 
+abduction/adduction movements to be performed. T he introduction of this  rhombus 
+mechanism results in the addi tion of an extra revolute joint in the spherical jo int, which 
+allows removal of the very last of the original joints (along the longitudinal axis of the arm) 
+given its redundancy as depicted in the final Figure 2-D. 
+ 
+ 
+ 
+Figure 2. (A) The original configuration of the spherical shoulder mechanism discussed 
+by Xo & Lie [17]; (B) The posture in which the configuration presents a singularity with a 
+loss of a DOF as result of the alignment between the mechanism’s internal/external rotation 
+axis (green arrow) and its abduction/adduction axis (blue arrow) . (C) By introducing the 
+first linkage in the joint by the simplest spherical scissor mechanism (one rhomb us), the 
+mechanism recovers the missing DOF. (D) The original sliding mechanism corresponding 
+to the third rotation axis, longitudinal to the segment, then becomes redundant. 
+ 
+The obtained spherical joint is, however, still not useful in the context of an exoskeleton 
+due to the interference of the edges in the big diagonal with both musculatures of the arm 
+and of the clavicle region  when the mechanism is collapsed . Figure 3-A illustrates this 
+problem. The solution is presented in Figure 3-B as the single rhombus is discretized into 
+smaller rhombi as it will be explained in the following section. 
+ 
+2.2. The scissors shoulder mechanism 
+Curved linkages with known, constant curvature (fixed radius), will make all linkages 
+of the rhombus move on a spherical surface, as illustrated in Figure 4. This occurs since all 
+revolute joints’ axes share a common remote centre-of-motion (RC M). In a spherical 
+mechanism, a link is characterized by its great circle arc – i.e. the geodesic – between two 
+joints at the sphere centre [18]. Thus, this spherical shoulder mechanism with three DOF 
+will be hereinafter designated as the scissors shoulder mechanism (SSM)1. One of its key 
+features is that its linkages lay and move always on a spherical surface with a pre -defined 
+                                                 
+1 The mechanism has been also named as ‘CXD’, short for Compact X-scissors Device. 
+
+
+5 
+ 
+radius, which is essential to the achievement of a compact design in a spherical shoulder 
+mechanism. 
+ 
+ 
+ 
+Figure 3. (A) The configuration of the spherical scissor mechanism with one rhombus still 
+interferes with the upper arm anatomy by penetrating within its volume; (B) Therefore, the 
+initial single rhombus can be discretized in smaller rhombi, in this case two rhombi. 
+ 
+Kinematically, the SSM is equivalent to a serial manipulator. This makes the modelling 
+of the mechanism straightforward.  Figure 4 shows the setup of coordinate systems and 
+motion parameters of the three rotations on a single and simplified rhombus. 
+In the case of  multiple rhombi composing the SSM  as exemplified in Figure 5, the 
+smallest linkages have one half of the arc length, which is defined as the product between 
+the linkage curvature angle  and the spherical radius,  while the longer crossing linkages 
+maintain their original  arc length. This can be of importance in assemb lies where it is 
+desired to minimize the spherical area occupied by the mechanism , i.e. the total area 
+enclosed by the linkages. In comparison, the area enclosed by the linkages of both rhombi 
+ABCD and DEFG shown in Figure 5 represents half of that enclosed by the linkages of the 
+rhombus ABCD shown in Figure 4. 
+The kinematics of many spherical mechanisms were previously presented [19]. The 
+derivation of the kinematics of a similar spherical gripper mechanism was presented by 
+Kocabas [15] using a set of projection angles to describe the mechanism’s capability of 
+grabbing objects. A new kinematic formulation for this SSM will be derived for the simpler 
+single rhombus version,  showing the ease of driving this mechanism from its b ase joint 
+like a pure spherical shoulder mechanism. 
+ 
+2.2.1.Forward Kinematics 
+To model the single rhombus shown in Figure 4, the RCM was chosen as the common 
+origin for all reference frames of the links comprising the mechanism. This helps 
+simplifying the use of a  Denavit-Hartenberg [20] angle convention for lower -pairs since 
+radial distances and elevation parameters are not included. According to  Ouerfelli and 
+Kumar [21], the spherical mechanism with a closed loo p is separated into two distinct 
+chains: an upper and a lower chain with even and odd indexing, respectively. That said, the 
+inter-linkage joint angles set 𝜑𝑖 and the associated linkages’ twist/curvature angles 𝛼𝑖−1 
+are presented for the upper chain linkages II and IV of the SSM in Figure 6 and in Table 1. 
+An extra linkage six is added to represent the rotations of an end -effector link. The z-axis 
+
+
+6 
+ 
+of the reference frame in each linkage points along its proximal revolute joint axes while 
+the x -axis points to the left, perpendicularly to the great ci rcle where that linkage lies 
+(denoted by the dashed lines in Figure 6). 
+ 
+ 
+Figure 4. The principle of the novel SSM – a spherical mechanism. Each linkage describes 
+a great circle arc, between two revolute joints , on a spherical surface. The mechanism 
+rotations are described by the Euler  angles of Z -X-Z convention:  𝜃1, 𝜃2 and 𝜃3, 
+respectively. 
+ 
+Table 1. Denavit-Hartenberg parameters of the SSM. 
+Link 𝜶𝒊−𝟏 𝝋𝒊 
+I 0 𝜑1 
+II 0 𝜑2 
+IV 𝛼 −𝜑2 
+VI 𝛼 𝜑6 
+ 
+The rotation matrix 𝐑𝐞, corresponding to the transformation from the end -effector 
+coordinates to the global reference frame, is readily obtained as  
+ 
+ 𝐑e = 𝐑𝐙(𝜑1)𝐑𝐙(𝜑2)𝐑𝐗(𝛼)𝐑𝐙(−𝜑2)𝐑𝐗(𝛼)𝐑𝐙(𝜑6) (1) 
+ 
+𝐑e can also be found by resorting to three sequential rotations with three Euler angles 
+𝜃𝑗 following the ZXZ-angle convention. This is valuable to relate the scissor s’ internal 
+angle 𝜑2 with the pitch angle 𝜃2 of the end-effector of the manipulator. Hence, two of the 
+relations can be directly derived from known angular quantities shown in Figure 6, while 
+the third relation can be obtained from the spherical law of cosines shown in Equation (2). 
+ 
+ cos 𝜃2 = cos2 𝛼 + sin2 𝛼 cos(𝜋 − 𝜑2) (2) 
+ 
+These relations are described through Equations (3), (4) and (5). 
+ 
+
+
+7 
+ 
+ 
+Figure 5. A SSM constructed with two rhombi/scissors. This enables decreasing the 
+spherical surface occupied by the mechanism, which can be advantageous in some 
+situations. 
+ 
+ 
+                                                  𝜃1 = 𝜑1 +
+𝜑2
+2   (3) 
+                                                  𝜃2 = arccos(cos2 𝛼 − sin2 𝛼 cos 𝜑2) (4) 
+                                                  𝜃3 = 𝜑6 −
+𝜑2
+2   (5) 
+ 
+Finally, rotation matrix 𝐑e entries are presented in the following Equation (6), 
+ 
+ 𝐑e = 𝐑𝐙(𝜃1)𝐑𝐗(𝜃2)𝐑𝐙(𝜃3) = 
+ [
+c 𝜃1 c 𝜃3 − s 𝜃1 c 𝜃2 s 𝜃3 − c 𝜃1 s 𝜃3 − s 𝜃1 c 𝜃2 c 𝜃3 s 𝜃1 s 𝜃2
+s 𝜃1 c 𝜃3 + c 𝜃1 c 𝜃2 s 𝜃3 − s 𝜃1 s 𝜃3 − c 𝜃1 c 𝜃2 c 𝜃3 − c 𝜃1 s 𝜃2
+s 𝜃2 s 𝜃3 s 𝜃2 c 𝜃3 c 𝜃2
+] (6) 
+ 
+where c𝜃𝑗 and s𝜃𝑗 correspond to the cosine and sine functions of a 𝜃𝑗 angle, respectively. 
+ 
+
+
+8 
+ 
+ 
+Figure 6. Description of the SSM in terms of the inter -linkages angles. Two angles sets 
+can help describing the kinematics of the mechanism: the inter-linkage joint angles set 𝜑𝑖 
+and an Euler angles set 𝜃𝑗 following the ZXZ-angle convention. A curvature angle  𝛼 is 
+associated to each linkage. 
+ 
+ 
+Figure 7 shows the scissor s’ internal angle 𝜑2 with the pitch angle 𝜃2 of the end -
+effector (the most distant vertex of the scissors), where an inverse proportionality between 
+the pitch angle 𝜃2 and scissors’ internal angle 𝜑2 can be observed. Moreover, for a closed 
+and stretched scissors (𝜑2 = 0°), the pitch angle 𝜃2 is twice that of the curvature angle 𝛼 
+corresponding to the arc length of each linkage. 
+ 
+
+
+9 
+ 
+ 
+Figure 7. End-effector pitch angle 𝜃2 - internal scissors angle 𝜑2 relationship for different 
+values of links curvature angle. On a single rhombus SSM, for a given curvature angle 
+curvature angle 𝛼 corresponds a pitch angle 𝜃2 with twice its value. 
+ 
+ 
+2.2.2.Inverse Kinematics 
+The inverse problem consists of computing the three Euler angles 𝜃𝑗 from a given final 
+positions of the end -effector of the manipulator. This can be achieved by initially 
+calculating the value of the pitch angle 𝜃2 directly from the last entry of the rotation matrix 
+𝐑𝐞 as in Equation (7). The 𝑟𝑖𝑗 represents the matrix element in the ith row and jth column. 
+Since the mechanism operates in the range of 𝜃2 ∈ [0, 2𝛼], only the positive angle from 
+Equation (7) is of interest. 
+ 
+ cos 𝜃2 = 𝑟33 (7) 
+ 
+Once the pitch angle 𝜃2 is known, the remaining elements in the last row and last 
+column of the rotation matrix 𝐑e can be paired in terms of the remaining 𝜃1 and 𝜃3 angles 
+and trivially obtained by the geometrical tangent function as in Equations (8) and (9).  
+ 
+    𝜃1 = arctan2(𝑟13 s 𝜃2⁄ , − 𝑟23 s 𝜃2⁄ ) (8) 
+ 𝜃3 = arctan2(𝑟31 s 𝜃2⁄ , 𝑟32 s 𝜃2⁄ ) (9) 
+ 
+Upon these solutions, the mechanism’s joint angles 𝜑𝑖 can be obtained using Equations 
+(3), (4) and (5). 
+ 
+ 
+2.2.3.Manipulability Analysis 
+A manipulator’s Jacobian matrix  𝐉(𝛉) relates the mechanism’s joint velocities 𝛉̇  with 
+the angular velocity 𝛚e of its last reference frame, i.e. the angular velocity of its end -
+effector 
+
+
+10 
+ 
+ 
+ 𝛚e = 𝐉(𝛉) 𝛉̇  (10) 
+ 
+where the generalized velocity vector is 𝛉̇ = [𝜃̇1 𝜃̇2 𝜃̇3]𝑇, and the end-effector angular-
+velocity vector is 𝛚e = [𝜔𝑥 𝜔𝑦 𝜔𝑧]𝑇.  
+According to Euler’s rotation theorem, any sequence of rotations can be described by 
+a unit vector 𝐤̂  – the instantaneous axis of rotation – which is then scaled by the amount of 
+rotation θ about that same axis. The theorem can then be extended such that, at any time 
+instant, the angular-velocity vector 𝛚e is equal to the speed of rotation 𝜃̇ about that same 
+instantaneous axis of rotation 𝐤̂  – see equation (11). 
+ 
+ 𝛚e = 𝜃̇𝐤̂  (11) 
+ 
+Likewise, the angular -velocity vector 𝛚e can be derived from the skew -symmetric 
+matrix 𝑺 of the angular-velocities for the particular rotation matrix 𝐑e of the mechanism 
+[22]. This is achieved by solving the matrix Equation (12), which corresponds to the three 
+independent Equations (13), (14) and (15). 
+ 
+ 𝐒 = 𝐑̇ e𝐑e𝑇 = [
+0 −𝜔z 𝜔y
+𝜔z 0 −𝜔x
+−𝜔y 𝜔x 0
+] (12) 
+ 𝜔x = 𝑟̇31𝑟21 + 𝑟̇32𝑟22 + 𝑟̇33𝑟23 (13) 
+ 𝜔y = 𝑟̇11𝑟31 + 𝑟̇12𝑟32 + 𝑟̇13𝑟33 (14) 
+ 𝜔z = 𝑟̇21𝑟11 + 𝑟̇22𝑟12 + 𝑟̇23𝑟13 (15) 
+ 
+By solving these equations for the generalized velocity vector 𝛉̇ , it is then possible to 
+obtain the following Jacobian matrix 𝐉(𝛉) for the mechanism – Equation (16). 
+ 
+ 𝐉(𝛉) = [
+0 c 𝜃1 s 𝜃1 s 𝜃2
+0 s 𝜃1 − c 𝜃1 s 𝜃2
+1 0 c 𝜃2
+] (16) 
+ 
+The manipulability, 𝑤(𝛉), accesses whether the maximum rank of the Jacobian matrix 
+is, at a given point, lower than the number of DOFs of the mechanism [23]. For this 
+spherical joint, the manipulability is found as 
+ 
+ 𝑤(𝛉) = √det(𝐉(𝛉)𝐉𝑇(𝛉)) = |det (𝐉(𝛉))| = |s 𝜃2| (17) 
+ 
+For the sake of enabling actua tion of  this mechanism in future applications, the 
+manipulability can also be expressed in term s of the inter-linkages angles 𝜑 and linkage 
+curvature angle 𝛼, i.e. 𝑤(𝛗, 𝛼). This can be quickly achie ved by recursively deriving the 
+Jacobian matrix 𝐉(𝛗, 𝛼) in the end-effector frame, by propagating the angular velocity from 
+link to link [22]. Thus, 
+ 
+
+11 
+ 
+ 𝛚e
+e = [𝐉𝟏(𝛗, 𝛼) 𝐉𝟐(𝛗, 𝛼) 𝐉𝟑(𝛗, 𝛼)] [
+𝜑̇ 1
+𝜑̇ 2
+𝜑̇ 6
+] (18) 
+ 
+where  
+ 
+                 𝐉𝟏(𝛗, 𝛼) = (𝐑𝐙(𝜑2)𝐑𝐗(𝛼)𝐑𝐙(−𝜑2)𝐑𝐗(𝛼)𝐑𝐙(𝜑6))𝑻 [
+0
+0
+1
+] (19) 
+ 𝐉𝟐(𝛗, 𝛼) = (𝐑𝐗(𝛼)𝐑𝐙(−𝜑2)𝐑𝐗(𝛼)𝐑𝐙(𝜑6))
+𝑻
+[
+0
+0
+1
+] − (𝐑𝐗(𝛼)𝐑𝐙(𝜑6))
+𝑻
+[
+0
+0
+1
+] (20) 
+                 𝐉𝟑(𝛗, 𝛼) = [
+0
+0
+1
+]  (21) 
+ 
+Consequently, the following manipulability result is obtained 
+ 
+ 𝑤(𝛗, 𝛼) = √det(𝐉(𝛗, 𝛼)𝐉𝑇(𝛗, 𝛼)) = |det (𝐉(𝛗, 𝛼))| = |s 𝜑2 s2 𝛼| (22) 
+ 
+A vanishing manipulability implies a singular configuration.  Apart from  the trivial 
+requirement imposed by the linkage curvature angle 𝛼, which must be greater than zero , 
+both Equations (17) and (22) show that the singularities of the mechanism are only 
+dependent on the SSM’s rhombus angles, i.e. either on the pitch angle 𝜃2 or on the scissors’ 
+internal angle 𝜑2 depending on the chosen angle formulation. These  occur at 
+configurations where the first and last rotation axes are aligned as represented in Figure 8: 
+the folded scissors configuration ( 𝜃2 = 0°, 𝜑2 = 180°) and the fully stretched scissor s 
+configuration ( 𝜃2 = 180°, 𝜑2 = 0°). In order to grant stability to the mechanism and 
+create a minimum lever arm distance to facilitate the motion near the kinematic range 
+limits, the following general design Equation (23) relating the maximum pitch angle 𝜃2
+𝑚𝑎𝑥 
+with the chosen linkages’ curvature angle 𝛼 and the 𝑛 number of rhombi in the mechanism 
+has been derived. 
+ 
+ 𝜃2
+𝑚𝑎𝑥 = 2𝛼𝑛 < 180°, 𝑛 ∈ ℕ (23) 
+ 
+2.2.4.Practical Design Considerations 
+From a practical point-of-view, the joint and linkages of the mechanism do not behave 
+as point or line entities. This means that, on a real manufactured mechanism, material exists 
+around each joint ax is, for example to accommodate bearings. The bearings themselves 
+occupy some of the effective spherical surface on which the mechanism works. As 
+illustrated in Figure 9, as the mechanism reaches its singular configurations, the boundaries 
+of the parts composing the SSM will collide. This naturally occurs for both situations 
+mentioned above, of the most folded and most stretched scissor s configurations. An 
+intrusive angle 𝛽 is defined as the angle from the joint axis C to an imaginary axis M 
+passing through the collision point . This spherical triangle ACM allows defining the real 
+mechanism’s angular limits in its most stretched configuration by the spherical law of 
+cosines as in Equation (2). Since the  cosine of the right an gle at the vertex M is zero, the 
+spherical law of cosines is simplified to Equation (24). 
+
+12 
+ 
+ 
+Figure 8. The two singular configurations obtained from the manipulability analyses for 
+the SSM: (A) the folded and (B) the stretched scissors configurations. These correspond 
+to 90º of shoulder external rotation and to 90º of shoulder internal rotation, respectively. 
+ 
+ cos 𝜃2
+′ = cos α cos β⁄  (24) 
+ 
+where 𝜃2
+′ represents the portion of the scissor s’ pitch angle spanned between the 
+mechanism’s base joint axis A and the tangential imaginary axis  M from which the 
+intrusive angle 𝛽 is measured. Thus, the maximum pitch angle is effectively 𝜃2
+𝑚𝑎𝑥 =
+2𝑛𝜃2
+′  . On the other hand, by reasoning on the same intrusive angle 𝛽 for the most folded 
+configuration, the minimum pitch angle is 𝜃2
+𝑚𝑖𝑛 = 2𝑛𝛽. Such mechanical stop arises from 
+design constraints imposed by housing bearings and grants stability by providing a small 
+lever arm distance, which is suitable for facilitating the motion of shoulder mechanisms. 
+ 
+3. Prototype design and development 
+3.1. Design of an exoskeleton shoulder 
+As arm assistive devices run in parallel with the human body segments, they must not 
+violate the physical constraints imposed by the anatomical shape of the user, and they must 
+be kinematically compatible with the natural motions of the human, else they can cause 
+discomfort or limit the range-of-motion of the user. As illustrated in the preceding section, 
+constraints of the folded confi gurations may also limit the range -of-motion beyond the 
+theoretical limits. These considerations call for prototype tests, which are performed in 
+experiments. 
+A exoskeleton  prototype (see Figure 10) was designed with the specifications 
+mentioned in Table 2. A small intrusive centre angle 𝛽 = 8° generated around each axis for 
+housing bearings prevents th e mechanism from reaching any of the singular points. The 
+SSM can fold to a minimum pitch angle of 𝜃2 = 32° and extend to a maximum pitch angle 
+of 𝜃2 = 136°. These enables 58º of external shoulder rotation and 46º of internal shoulder 
+rotation, respectively. The designed exoskeleton has a total of five DOFs, thus allowing for 
+shoulder elevation (one DOF), three shoulder rotations provided by the SSM (three DOFs) 
+and elbow flexion (one DOF). 
+
+
+13 
+ 
+  
+Figure 9. Maximum stretched configuration of the SSM illustrating the collision point  
+between revolute joints ’ bearings represented by the two circular  symbols. An intrusive 
+angle 𝛽 is defined as the angle from the joint axis to an axis M passing through that collision 
+point. The spherical law of cosines applied to the triangle ACM enables relating 𝛽 with 𝛼 
+and 𝜃2
+′. 
+ 
+Figure 11 shows the SSM  prototype with steel 3D -printed parts of curved links. The 
+remaining parts of the exoskeleton were manufactured in aluminium. Once every part was 
+assembled, the exoskeleton was tested on the subject. 
+ 
+ 
+Table 2. Specifications of the built SSM prototype. 
+Sphere Radius 60 mm 
+Linkage curvature angle 𝛼 35° 
+Intrusive angle 𝛽 8° 
+Minimum SSM pitch angle 𝜃2 (shoulder external rotation) 32° 
+Maximum SSM pitch angle 𝜃2 (shoulder internal rotation) 136° 
+ 
+
+
+14 
+ 
+ 
+ 
+Figure 10. (Right) The lateral view of the curved linkage elements used in the built SSM 
+prototype. The included specifications are: the inner sphere radius, linkage curvature angle 
+𝛼 and intrusive centre angle 𝛽. (Left) CAD representation of the 5-DOF exoskeleton with 
+the assembled SSM. 
+ 
+ 
+Figure 11. A detailed view of the steel 3-D printed version of the SSM prototype. On the 
+right, a closer view of the mechanism when assembled on the manufactured version of the 
+aluminum exoskeleton, while the latter is being worn. 
+ 
+3.2. Kinematic validation using the reachable 3-D workspace 
+An exoskeleton device is meant to assist or enhance strength of its user while 
+performing common activities of the daily living (ADL). As it may not be feasible to test 
+such device for every ADL, an alternative is to use the reachable 3-D workspace that gives 
+a global approximation of the working ranges of the mechanism  and can account for 
+extreme cases too. Thus, the full anatomical reachable 3-D workspace was estimated based 
+
+
+15 
+ 
+on the five-tasks protocol created in our previous work, Castro et al. [24]. These five tasks 
+are capable of capturing the close-to-torso (through the ‘shower’, ‘curls’ and ‘free-motion’ 
+tasks) and far -from-torso (through the ‘vertical’ and ‘horizontal’ tasks) regions of the 
+reachable 3-D workspace, allowing estimation of its envelope shape and volume.  On top 
+of that, given the distinct nature  of these five -tasks, the upper extremity posture 
+redundancy, with regards to the reachable 3 -D workspace, is also captured. Hence, the 
+AnyBody Modelling System  v.6.1 (AnyBody Technology A/S, Aalborg, Denmark)  
+software was used to model  the upper extremity  from the ‘MocapModel’ (AnyBody 
+Managed Model Repository v.1.6.3). The full model comprised: a lumbar spine model, 
+based on the work of De Zee et al. [25], and arm and shoulder models, based on the work 
+of the Delft Shoulder Group [26–28]. In total, 7-DOF were allowed: three on the shoulder 
+girdle, three on the shoulder  joint and two on the elbow  joint (flexion/extension and 
+forearm pronation/supination). Wrist motions were disregarded and kept constant at neutral 
+angles. The pelvis segment was fixed to the thorax such that both behave d as a single 
+segment. The scapula was also kinematically constrained to slide on the surface of the rib 
+cage. 
+To experimentally evaluate the reachable 3 -D workspace, the test -subject was 
+instrumented with reflective markers, according to the marker-set presented in [24] as 
+exemplified in Figure 12. Firstly, all segments’ length and hand breadth in the model were 
+geometrically scaled to one  test-subject (male, age 27, body mass 80 kg, height 1.75 m , 
+upper-extremity length 0.642 m ) from a static calibration trial using the method by 
+Andersen et al. [29]. Afterwards, the participant was instructed to perform the five -tasks 
+protocol for the kinematic assessment of the reachable workspace [24] three times: the first 
+time consisted on recording the full active  reachable workspace; keeping in mind the 
+exoskeleton’s mechanical constraint preventing shoulder protraction/retraction motion, the 
+participant was instructed to perform the protocol a second time without protracting or 
+retracting the shoulder (null angle); last ly, the protocol was performed while  wearing the 
+exoskeleton prototype. The recorded kinematic data was then used to drive the skeletal 
+model by optimizing all model’s marker trajectories as formulated by Andersen et al. [30]. 
+Later, a point cloud set including all hand palm points (the end-effector of the upper 
+extremity), for each of the two five -tasks protocols performed, was recorded relative to a 
+thorax reference frame  located on top of the sternum bone . The non -convex sh aped 
+envelopes of each of the three reachable workspaces were obtained resorting to the alpha-
+shape algorithm [31] according to the processing steps described on our previous work 
+[24]. This algorithm works on a mesh of the point cloud as a  “carving” sphere shaping its 
+envelope and enables to capture its non -convex nature. Subsequently, the radius of that 
+sphere was defined according to the convex shape of the human torso, which corresponds 
+to the non-convex region of the envelope. Thus, such alpha-radius was defined as the semi-
+minor (smallest) radius of the cross-sectional area of the ellipsoid used to wrap the serratus 
+anterior muscle around the thorax segment – as modelled by van der Helm et al. [26]: a 
+value of 0.132 m was obtained in the case of this participant. The volumes of each reachable 
+workspace’s envelope were trivially calculated on MATLAB® (MathWorks, Natick, MA 
+USA) and compared afterwards. 
+ 
+ 
+ 
+
+16 
+ 
+4. Experimental results 
+The participant’s upper extremity reachable workspace point clouds and respective 
+envelopes are presented below on Figure 13 and Figure 14. Without the exoskele ton, the 
+volume obtained for the full active reachable workspace was 0.350 m 3 and when the 
+shoulder protraction/retraction angle was forced to be zero, the volume decreased to 0.223 
+m3. Once the participant worn the exoskeleton, the obtained reachable work space volume 
+was measured as 0.236 m 3. This value represents a n intersection volume percentage of 
+68.09% in relation to the full active reachable workspace and a percentage of 94.97% in 
+relation to the constrained active reachable workspace. Moreover, the shape difference and 
+volume reduction observed in Figure 13 affects mostly the counter -lateral and frontal 
+aspects of the full active reachable workspace. 
+ 
+ 
+Figure 12. The reflective marker set presented in [24] for motion capture of the reachable 
+workspace movement tasks while the subject was wearing and not wearing the exoskeleton 
+with the SSM assembled. 
+ 
+5. Discussion 
+In this paper, a novel spherical SSM was described, highlighting its singularity -free 
+characteristic in the anatomical shoulder joint workspace and its compactness as its 
+linkages are constrained to a spherical surface with pre -defined radius. The mechanism’s 
+forward and inverse kinematics w ere derived and it was found that the mechanism 
+comprises the three typical yaw-pitch-roll rotation axes known from gimbal mechanisms, 
+but it is practically singularity -free. Moreover, the analysis of the performance of the 
+mechanism through a manipulabili ty metric enabled also to discover that there are only 
+two configurations in which the SSM reaches a singularity: both when the scissor s 
+mechanism is completely folded or completely stretched. Nevertheless, the SSM can 
+theoretically nearly work in the full  spherical surface. A design constraint equation was 
+derived to describe and detect the fully stretched scissors singularity. The design constraint 
+states that the curvature angle 𝛼 of the smallest of the linkages must be smaller than 90 º 
+divided by the n umber of rhombi/parallelograms in the mechanism. This finding agrees 
+
+
+17 
+ 
+with the previously reported by  Kocabas [15] after the creation of a 1 -DOF spherical 
+gripper mechanism, also using scissors linkages. 
+The use of the SSM as a shoulder joint for an exoskeleton appears to be an improvement 
+compared to what was previously presented in the literature. Lo and Xie [5] showed that 
+most of the spherical serial mechanism’s assemblies used to create valuable shoulder joints 
+for exoskeletons cannot avoid singularities within the useful anatomical shoulder ROM. 
+Most authors tend to work around the problem by moving the singularities to postures that 
+are not reached very often [5–7] and the linkages of these serial spherical shoulders often 
+have a curvature angle 𝛼 = 90°. Lo and Xie [5] also proposed the use of a redundant link 
+through optimization. That leads afterwards to more required actuation. The SSM is 
+therefore capable to overcome this limitation avoiding the computation expense inherent 
+from that optimization step. 
+ 
+ 
+Figure 13. Comparison of the experimentally obtained reachable workspaces’ point clouds 
+and volumes while the participant was not wearing (green shape) and wearing (red shape) 
+the exoskeleton. The obtained volumes were 0.350 m3 and 0.236 m3 respectively, 
+corresponding to an intersection volume percentage of 68.09%. 
+ 
+
+
+18 
+ 
+Christensen and Bai [8] recently presented a double parallelogram shoulder mechanism 
+which can equally solve that singularity problem. However, since exoskeletons are meant 
+to be wearable [10,11], the protruding portion of the double parallelogram can now be 
+eliminated by the use of the presented SSM. Thus, this work contributes with more 
+wearability, compactness for lighter exoskeletons. 
+It is also important to mention that the only singularities in the human shoulder for this 
+SSM with near full workspace occur both at 90 º of shoulder internal ( 𝜃2 ≈ 180°, 𝜑2 =
+0°) and external (𝜃2 = 0°, 𝜑2 = 180°) rotations. The first is not attainable since it would 
+mean penetrating the torso  or performing an unusual maximal shoulder internal rotation, 
+which resultant hand rotation can also be accomplished  by pronating the  forearm. The 
+second corresponds to a point in the vicinity of the human upper extremity rea chable 
+workspace which is not within the 95 th percentile maximum shoulder external rotation 
+angle (55º) for healthy individuals [32]. After manufacturing and testing the prototype of 
+the SSM it was possible to assess that is has a good fit to the shoulder anatomy. However, 
+the mechanism still interferes with the collar bone while performing extreme shoulder 
+abduction movements about the frontal (anatomical) plane. Whether this limitation is 
+relevant depends on the application of the exoskeleton but it is not expected to cause issues 
+as the exoskeleton enables the ROM required for common ADL [33]. Furthermore, the 
+actual void spaces within the spherical area spanned by the SSM might need some shielding 
+to avoid harming the user, for example, through finger impingement. 
+The manufactured prototype showed that having an intrusive angle, as described 
+earlier, helps to avoid the fully folded and fully stretched scissors configurations, granting 
+stability to the mechanism. The exclusive use of revolute joints may represent an advantage 
+from a fabrication point -of-view, in the sense that revolute joints can be realised with 
+standard bearings of low cost and high reliability. While common serial chain spherical 
+shoulder manipulators inherently have low stiffness relative to the parallel ones  [21,34], 
+the presence of closed -loops in the scissor s shoulder  grants the mechanism a higher 
+stiffness when compared to its purely serial relatives. Nevertheless, its stiffness when 
+compared to a normal parallel spherical manipulator r emains to be investigated. Another 
+advantage of this mechanism is that, similarly to parallel spherical manipulators, it can be 
+actuated from its base . Thus, it avoids the need for the proximal actuators to carry their 
+distal counterparts. 
+The slight misma tch observed between volumes on Figure 13, more precisely the 
+68.09% intersection volume percentage, can be explained by  the protraction/retraction 
+DOF that the exoskeleton is missing, not enabling the test subject reaching that far. On top 
+of that, it was later proven that removing such DOF from the active reachable workspace, 
+as seen in Figure 14, leads to a 94.97% intersection volume percentage. Such phenomenon 
+was previously observed by Schiele and van der Helm [35] while testing the reachable 
+workspace of another wearable exoskeleton. Typically, such devices still compromise the 
+complexity and all known DOFs of the shoulder girdle. However, even though the back 
+and left hemispheres have reduced reachability, most activities of the daily living fall  on 
+the frontal hemisphere and when objects need to be manipulated on the left hemisphere, 
+the left arm can cover that volume. 
+ 
+
+19 
+ 
+ 
+Figure 14. Comparison of the experimentally obtained reachable workspaces’ point clouds 
+and volumes while the participant was instructed to keep the shoulder protraction/retraction 
+angle null without wearing the exoskeleton  (green shape) and when freely moving the 
+shoulder while wearing it (red shape). The obtained volumes were 0.223 m3 and 0.236 m3 
+respectively, corresponding to an intersection volume percentage of 94.97%. 
+ 
+Last but not least, it must be highlighted that the mechanism allows a  spherical 
+coordinate space, as opposed to the Cartesian coordinate spa ce of most robotic 
+manipulators. Besides exoskeleton applications, and as an extension of its functionality, a 
+spherical coordinate positioning  tool can be advantageous, for instance , in the medical 
+field. The currently available robots for minimally invasive surgery tend to require large  
+spaces [36]. Many of these surgery tools are required to be confined to a small space, such 
+as that of an imaging scanner, w hen performing intraoperative navigation [37]. The 
+spherical scissors shoulder can potentially provide a stiff surgical support tool which could 
+otherwise only be achieved by larger, parallel robots.  Other potential application areas of 
+this mechanism are 3d -printing, haptic devices, laser welding/cutting tools and camera 
+inspection structures for quality control , but all of these applications require further 
+investigation. 
+ 
+
+
+20 
+ 
+6. Conclusion 
+In conclusion, t he presented mechanism enables simplifying  the design of spherical 
+shoulder mechanisms by overcoming both  the need for the use of redundant links or 
+optimization routines. In its current state, t he SSM can be used on a shoulder stabilizing 
+brace for rehabilitating a traumatic dislocation or stroke-related subluxation of the 
+shoulder, without requiring a n actuation system. The mechanism is able to hold  the 
+humerus bone head in place as the upper extremity moves. With regards to the exoskeletons 
+research field, its compactness can enable devices that can fit underneath clothing. This 
+inconspicuousness will be a major improvement to overcome the stigmatization and low 
+acceptance that these devices still have.  
+ 
+Acknowledgements 
+The authors would like to thank to Søren Erik Bruun for the help on manufacturing the 
+remaining parts of the exoskeleton. 
+ 
+Funding 
+This work was inserted within the st rategic platform for research and innovation 
+Patient@Home, which was supported by the Danish Agency for Science, Technology and 
+Innovation. 
+ 
+Declaration of Conflicting Interests 
+The authors report a pending patent application PA 2017 70789, filed on October 17th, 
+2017. 
+ 
+References 
+[1] R.P. Paul, C.N. Stevenson, Kinematics of Robot Wrists, Int. J. Rob. Res. 2 (1983) 
+31–38. doi:10.1177/027836498300200103. 
+[2] C. Carignan, J. Tang, S. Roderick, Development of an exoskeleton haptic interface 
+for virtual task training, in: 2009 IEEE/RSJ Int. Conf. Intell. Robot. Syst., IEEE, 
+2009: pp. 3697–3702. doi:10.1109/IROS.2009.5354834. 
+[3] S.J. Ball, I.E. Brown, S.H. Scott, MEDARM: a rehabilitation robot with 5DOF at 
+the shoulder complex, in: 2007 IEEE/ASME Int. Conf. Adv. Intell. Mechatronics, 
+IEEE, Zurich, Switzerland, 2007: pp. 1–6. doi:10.1109/AIM.2007.4412446. 
+[4] J.C. Perry, J. Rosen, S. Burns, Upper-Limb Powered Exoskeleton Design, 
+IEEE/ASME Trans. Mechatronics. 12 (2007) 408–417. 
+doi:10.1109/TMECH.2007.901934. 
+[5] Ho Shing Lo, S.S.Q. Xie, Optimization of a redundant 4R robot for a shoulder 
+exoskeleton, in: 2013 IEEE/ASME Int. Conf. Adv. Intell. Mechatronics, IEEE, 
+Wollongong, Australia, 2013: pp. 798–803. doi:10.1109/AIM.2013.6584191. 
+[6] M.J.H. Lum, J. Rosen, M.N. Sinanan, Hannaford B, Kinematic optimization of a 
+spherical mechanism for a minimally invasive surgical robot, in: IEEE Int. Conf. 
+Robot. Autom. 2004. Proceedings. ICRA ’04. 2004, IEEE, New Orleans, LA, 
+USA, 2004: pp. 829–834. doi:10.1109/ROBOT.2004.1307252. 
+[7] H.S. Lo, S.Q. Xie, Exoskeleton robots for upper-limb rehabilitation: State of the 
+
+21 
+ 
+art and future prospects, Med. Eng. Phys. 34 (2012) 261–268. 
+doi:10.1016/j.medengphy.2011.10.004. 
+[8] S. Christensen, S. Bai, Kinematic Analysis and Design of a Novel Shoulder 
+Exoskeleton Using a Double Parallelogram Linkage, J. Mech. Robot. 10 (2018) 
+041008. doi:10.1115/1.4040132. 
+[9] N. Sclater, N.P. Chironis, Mechanisms and Mechanical Devices Sourcebook, 4th 
+ed., McGaw-Hill, New York, USA, 2007. 
+[10] R.A.R.C. Gopura, K. Kiguchi, D.S. V Bandara, A brief review on upper extremity 
+robotic exoskeleton systems, in: 2011 6th Int. Conf. Ind. Inf. Syst., IEEE, 2011: 
+pp. 346–351. doi:10.1109/ICIINFS.2011.6038092. 
+[11] A.G. Dunning, J.L. Herder, A review of assistive devices for arm balancing, in: 
+2013 IEEE 13th Int. Conf. Rehabil. Robot., IEEE, Seattle, Washington, USA, 
+2013: pp. 1–6. doi:10.1109/ICORR.2013.6650485. 
+[12] F. Maden, K. Korkmaz, Y. Akgün, A review of planar scissor structural 
+mechanisms: geometric principles and design methods, Archit. Sci. Rev. 54 (2011) 
+246–257. doi:10.1080/00038628.2011.590054. 
+[13] G.E. Fenci, N.G. Currie, Deployable structures classification: A review, Int. J. Sp. 
+Struct. 32 (2017) 112–130. doi:10.1177/0266351117711290. 
+[14] C. Hoberman, Reversibly expandable doubly-curved truss structure, US4942700 
+A, 1990. 
+[15] H. Kocabas, Gripper Design With Spherical Parallelogram Mechanism, J. Mech. 
+Des. 131 (2009) 075001. doi:10.1115/1.3125891. 
+[16] I.T. Watson, B. Gangadhara Prusty, J. Olsen, D. Farrell, A Parameter Investigation 
+Into the Thompson Constant-Velocity Coupling, J. Mech. Des. 133 (2011) 124501. 
+doi:10.1115/1.4005229. 
+[17] H.S. Lo, S. Xie, Optimization and analysis of a redundant 4R spherical wrist 
+mechanism for a shoulder exoskeleton, Robotica. 32 (2014) 1191–1211. 
+doi:10.1017/S0263574714001945. 
+[18] C.H. Chiang, Spherical kinematics in contrast to planar kinematics, Mech. Mach. 
+Theory. 27 (1992) 243–250. doi:10.1016/0094-114X(92)90014-9. 
+[19] C.H. Chiang, Kinematics of Spherical Mechanisms, 1st ed., Cambridge University 
+Press, Cambridge, UK, 1988. 
+https://books.google.dk/books/about/Kinematics_of_Spherical_Mechanisms.html?
+id=kVEOAAAACAAJ&redir_esc=y. 
+[20] J. Denavit, R.S. Hartenberg, A kinematic notation for lower-pair mechanisms 
+based on matrices, ASME J. Appl. Mech. 22 (1955) 215–221. doi:citeulike-article-
+id:7153318. 
+[21] M. Ouerfelli, V. Kumar, Optimization of a spherical five-bar parallel drive linkage, 
+J. Mech. Des. 116 (1994) 166–173. doi:10.1115/1.2919341. 
+[22] J.J. Craig, Introduction to Robotics: Mechanics and Control, 3rd ed., Pearson 
+Prentice Hall, NJ, USA, 2005. 
+[23] T. Yoshikawa, Manipulability of Robotic Mechanisms, Int. J. Rob. Res. 4 (1985) 
+3–9. doi:10.1177/027836498500400201. 
+[24] M.N. Castro, J. Rasmussen, S. Bai, M.S. Andersen, The reachable 3-D workspace 
+volume is a measure of payload and body-mass-index: A quasi-static kinetic 
+assessment, Appl. Ergon. 75 (2019) 108–119. doi:10.1016/j.apergo.2018.09.010. 
+
+22 
+ 
+[25] M. de Zee, L. Hansen, C. Wong, J. Rasmussen, E.B. Simonsen, A generic detailed 
+rigid-body lumbar spine model, J. Biomech. 40 (2007) 1219–1227. 
+doi:10.1016/j.jbiomech.2006.05.030. 
+[26] F.C.T. Van der Helm, H.E.J. Veeger, G.M. Pronk, L.H.V. Van der Woude, R.H. 
+Rozendal, Geometry parameters for musculoskeletal modelling of the shoulder 
+system, J. Biomech. 25 (1992) 129–144. doi:10.1016/0021-9290(92)90270-B. 
+[27] H.E.J. Veeger, F.C.T. Van Der Helm, L.H.V. Van Der Woude, G.M. Pronk, R.H. 
+Rozendal, Inertia and muscle contraction parameters for musculoskeletal 
+modelling of the shoulder mechanism, J. Biomech. 24 (1991) 615–629. 
+doi:10.1016/0021-9290(91)90294-W. 
+[28] H.E.J. Veeger, B. Yu, K.-N. An, R.H. Rozendal, Parameters for modeling the 
+upper extremity, J. Biomech. 30 (1997) 647–652. doi:10.1016/S0021-
+9290(97)00011-0. 
+[29] M.S. Andersen, M. Damsgaard, B. MacWilliams, J. Rasmussen, A 
+computationally efficient optimisation-based method for parameter identification 
+of kinematically determinate and over-determinate biomechanical systems., 
+Comput. Methods Biomech. Biomed. Engin. 13 (2010) 171–183. 
+doi:10.1080/10255840903067080. 
+[30] M.S. Andersen, M. Damsgaard, J. Rasmussen, Kinematic analysis of over-
+determinate biomechanical systems., Comput. Methods Biomech. Biomed. Engin. 
+12 (2009) 371–384. doi:10.1080/10255840802459412. 
+[31] H. Edelsbrunner, D. Kirkpatrick, R. Seidel, On the shape of a set of points in the 
+plane, IEEE Trans. Inf. Theory. 29 (1983) 551–559. 
+doi:10.1109/TIT.1983.1056714. 
+[32] D.B. Chaffin, G.B.J. Andersson, B.J. Martin, Occupational Biomechanics, 4th ed., 
+Wiley, New Jersey, USA, 2006. 
+[33] J. Rosen, J.C. Perry, N. Manning, S. Burns, B. Hannaford, The human arm 
+kinematics and dynamics during daily activities - toward a 7 DOF upper limb 
+powered exoskeleton, in: ICAR ’05. Proceedings., 12th Int. Conf. Adv. Robot. 
+2005., IEEE, Seattle, WA, United States, 2005: pp. 532–539. 
+doi:10.1109/ICAR.2005.1507460. 
+[34] C.M. Gosselin, E. Lavoie, On the Kinematic Design of Spherical Three-Degree-of- 
+Freedom Parallel Manipulators, Int. J. Rob. Res. 12 (1993) 394–402. 
+doi:10.1177/027836499301200406. 
+[35] A. Schiele, F.C.T. van der Helm, Kinematic design to improve ergonomics in 
+human machine interaction., IEEE Trans. Neural Syst. Rehabil. Eng. 14 (2006) 
+456–69. doi:10.1109/TNSRE.2006.881565. 
+[36] M.J.H. Lum, J. Rosen, M.N. Sinanan, B. Hannaford, Optimization of a spherical 
+mechanism for a minimally invasive surgical robot: Theoretical and experimental 
+approaches, IEEE Trans. Biomed. Eng. 53 (2006) 1440–1445. 
+doi:10.1109/TBME.2006.875716. 
+[37] V. Vitiello, Su-Lin Lee, T.P. Cundy, Guang-Zhong Yang, Emerging Robotic 
+Platforms for Minimally Invasive Surgery, IEEE Rev. Biomed. Eng. 6 (2013) 111–
+126. doi:10.1109/RBME.2012.2236311. 
+ 

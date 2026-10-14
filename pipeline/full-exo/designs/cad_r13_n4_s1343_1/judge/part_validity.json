@@ -1,0 +1,89 @@
+{
+ "parts": [
+  {
+   "file": "BOTTOM.step",
+   "valid": true,
+   "solids": 1,
+   "faces": 142,
+   "bad_faces": 0,
+   "watertight": false,
+   "volume_cm3": 33.055,
+   "bbox_mm": [
+    44.7,
+    355.0,
+    48.9
+   ]
+  },
+  {
+   "file": "D4-01.step",
+   "valid": true,
+   "solids": 1,
+   "faces": 22,
+   "bad_faces": 0,
+   "watertight": true,
+   "volume_cm3": 3.811,
+   "bbox_mm": [
+    12.4,
+    37.4,
+    23.5
+   ]
+  },
+  {
+   "file": "D4-02.step",
+   "valid": true,
+   "solids": 1,
+   "faces": 19,
+   "bad_faces": 0,
+   "watertight": true,
+   "volume_cm3": 3.44,
+   "bbox_mm": [
+    14.5,
+    50.6,
+    26.1
+   ]
+  },
+  {
+   "file": "D4-03.step",
+   "valid": true,
+   "solids": 1,
+   "faces": 39,
+   "bad_faces": 0,
+   "watertight": true,
+   "volume_cm3": 6.32,
+   "bbox_mm": [
+    37.2,
+    80.4,
+    23.1
+   ]
+  },
+  {
+   "file": "D4-04.step",
+   "valid": true,
+   "solids": 1,
+   "faces": 24,
+   "bad_faces": 0,
+   "watertight": false,
+   "volume_cm3": 4.038,
+   "bbox_mm": [
+    18.4,
+    64.8,
+    24.6
+   ]
+  },
+  {
+   "file": "UPPER.step",
+   "valid": true,
+   "solids": 1,
+   "faces": 17,
+   "bad_faces": 0,
+   "watertight": true,
+   "volume_cm3": 15.174,
+   "bbox_mm": [
+    87.2,
+    82.2,
+    45.6
+   ]
+  }
+ ],
+ "all_ok": true
+}

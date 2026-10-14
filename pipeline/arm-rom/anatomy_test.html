@@ -1,0 +1,35 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>Anatomy test</title>
+<style>html,body{margin:0;height:100%;background:#e9e8e4;overflow:hidden;font:12px sans-serif} #ui{position:fixed;left:8px;top:8px;background:#fff;padding:8px;border-radius:8px}</style>
+<div id="ui">
+  plane <input id="plane" type="range" min="-60" max="140" value="30"> elev <input id="elev" type="range" min="0" max="180" value="20"><br>
+  axial <input id="axial" type="range" min="-90" max="80" value="0"> flex <input id="flex" type="range" min="0" max="150" value="40"><br>
+  pron <input id="pron" type="range" min="-85" max="85" value="0"> <select id="mode"><option value="0">skin</option><option value="1">muscles</option><option value="2">x-ray</option></select> <span id="np"></span> <span id="fps"></span>
+</div>
+<script type="importmap">{ "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.165.0/build/three.module.js", "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.165.0/examples/jsm/" } }</script>
+<script type="module">
+import * as THREE from 'three';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+import { buildAnatomy } from './anatomy.js';
+const r = new THREE.WebGLRenderer({ antialias: false }); r.setPixelRatio(1); r.toneMapping = THREE.AgXToneMapping; r.toneMappingExposure = 1.0; document.body.appendChild(r.domElement);
+const scene = new THREE.Scene(); scene.background = new THREE.Color(0xe9e8e4);
+const cam = new THREE.PerspectiveCamera(35, 1, 0.01, 50); const ctl = new OrbitControls(cam, r.domElement);
+const A = buildAnatomy(THREE, { scale: 411 / 310 });
+// thorax mm -> world m (x anterior, y up, z right) -> three (x, y, z) with 1e-3
+const W = new THREE.Matrix4().makeScale(1e-3, 1e-3, 1e-3);
+A.setFrame(W); scene.add(A.mesh);
+cam.position.set(3.2, 0.1, 1.2); ctl.target.set(0, -0.5, -0.25); ctl.update();
+const resize = () => { r.setSize(innerWidth, innerHeight); cam.aspect = innerWidth / innerHeight; cam.updateProjectionMatrix(); }; addEventListener('resize', resize); resize();
+const pose = () => Object.fromEntries(['plane', 'elev', 'axial', 'flex', 'pron'].map(k => [k, +document.getElementById(k).value]));
+const upd = () => { document.getElementById('np').textContent = A.update(pose(), +document.getElementById('mode').value) + ' prims'; };
+document.querySelectorAll('input,select').forEach(e => { e.addEventListener('input', upd); e.addEventListener('change', upd); }); upd();
+let last = performance.now(), fr = 0;
+r.setAnimationLoop(() => { ctl.update(); r.render(scene, cam); fr++; const t = performance.now(); if (t - last > 1000) { document.getElementById('fps').textContent = fr + ' fps'; fr = 0; last = t; } });
+window.__A = A;
+const VIEWS = { front: [[3.0, 0.0, -0.25], [0, -0.45, -0.25]], back: [[-3.0, 0.0, -0.25], [0, -0.45, -0.25]], side: [[0, 0.0, 3.0], [0, -0.45, -0.25]],
+  three: [[2.4, 0.3, 1.6], [0, -0.45, -0.25]], shoulder: [[0.9, 0.25, 0.8], [0, -0.1, -0.1]], shoulderback: [[-0.9, 0.3, 0.7], [0, -0.1, -0.1]], torso: [[1.5, 0.1, 0.5], [0, -0.2, -0.22]], head: [[0.75, 0.36, 0.15], [0.05, 0.3, -0.25]] };
+window.__view = (k, pose, mode) => { const [p, t] = VIEWS[k]; cam.position.set(...p); ctl.target.set(...t); ctl.update();
+  if (pose) for (const [kk, v] of Object.entries(pose)) document.getElementById(kk).value = v;
+  if (mode !== undefined) document.getElementById('mode').value = mode; resize(); upd(); };
+</script>

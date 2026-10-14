@@ -1,0 +1,84 @@
+{
+ "overall": 0.8052624431107566,
+ "follow": 0.9800376550692492,
+ "in_band": 0.8216647992508582,
+ "clips": [
+  {
+   "name": "Raise overhead",
+   "frames": 181,
+   "score": 0.7880121083653806,
+   "follow": 1.0,
+   "in_band_when_following": 0.7880121083653806,
+   "median_gap": 6.222696172970553,
+   "min_gap": 1.9663867360895089
+  },
+  {
+   "name": "Drink from a cup",
+   "frames": 178,
+   "score": 0.8766976835162203,
+   "follow": 1.0,
+   "in_band_when_following": 0.8766976835162203,
+   "median_gap": 6.239285330217015,
+   "min_gap": 1.9303855677159174
+  },
+  {
+   "name": "Comb hair",
+   "frames": 202,
+   "score": 0.9033022145019117,
+   "follow": 1.0,
+   "in_band_when_following": 0.9033022145019117,
+   "median_gap": 5.498632998245911,
+   "min_gap": 1.9864339448797683
+  },
+  {
+   "name": "Reach a high shelf",
+   "frames": 157,
+   "score": 0.855008245373552,
+   "follow": 1.0,
+   "in_band_when_following": 0.855008245373552,
+   "median_gap": 5.821212509945369,
+   "min_gap": 1.6785361423268734
+  },
+  {
+   "name": "Wash opposite shoulder",
+   "frames": 193,
+   "score": 0.6496703053049868,
+   "follow": 1.0,
+   "in_band_when_following": 0.6496703053049868,
+   "median_gap": 7.028452649210495,
+   "min_gap": 1.856349360657407
+  },
+  {
+   "name": "Reach back pocket",
+   "frames": 145,
+   "score": 0.9127231394836546,
+   "follow": 1.0,
+   "in_band_when_following": 0.9127231394836546,
+   "median_gap": 5.881946572406559,
+   "min_gap": 1.783160305916144
+  },
+  {
+   "name": "Wave",
+   "frames": 172,
+   "score": 0.5917254904803181,
+   "follow": 0.8448275862068966,
+   "in_band_when_following": 0.7004097642420092,
+   "median_gap": 7.363671755776666,
+   "min_gap": 1.9874489005240372
+  },
+  {
+   "name": "Walking arm swing",
+   "frames": 109,
+   "score": 0.9334142825176105,
+   "follow": 1.0,
+   "in_band_when_following": 0.9334142825176105,
+   "median_gap": 5.51066769869145,
+   "min_gap": 1.96699469066958
+  }
+ ],
+ "band": [
+  2.0,
+  10.0
+ ],
+ "step": 3
+}

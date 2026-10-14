@@ -1,0 +1,3 @@
+BOTTOM: cut at s = 249 mm from the elbow axis (user's bar + cuff group 94-154 kept), neck + J4 hub plate; valid True
+BOTTOM (modified: closest skin 0.2 mm (rest pose)
+UPPER ARM CUFF: closest skin 0.5 mm (rest pose)

@@ -1,0 +1,23 @@
+design: base az 337.1 el 70.9, arcs 64.1/66.2/67.5 deg, post delta 46.8 az -0.1 -> searched coverage 67.8%
+display pose: arm hanging, spare joint J1 at 246 deg (middle of its 94 deg valid band)
+stack (radius from the shoulder centre): inner links 119.00-124.00, washer A 123.62-124.62, outer links 124.57-130.02 (shell gap 0.57), washer B 129.66-130.66, cap 130.68-133.18  -> joint height 14.18 mm above the skin-side face
+B-rep validity: all parts valid
+interference (> 0.5 mm^3): none  [4 expected M4 thread engagements: Ø4 screw in Ø3.3 tap drill, 21.5 mm^3 each]
+hardware sweep (400 random natural poses, spare joint chosen per pose): 266/400 kinematically valid poses keep every shoulder part >= 2 mm off the skin with no same-shell link overlap; 0 lost to link overlap; skin-limited by {'D4-04 link 3 (Ti-6Al-4V)': 78, 'D4-03 link 2 (Ti-6Al-4V)': 34, 'D4-02 link 1 (Ti-6Al-4V)': 12, 'J4 retaining cap (Ti-6Al-4V)': 7}
+FEA (fea_link.py, hex8, validated vs beam theory within 3%): 14 mm strip, Ø34 hubs, 25 N.m in the worst direction:
+   t 3.5 mm: von Mises max 1315 MPa (SF yield 0.67), softest single-link stiffness 0.8 N.m/deg
+   t 4.0 mm: von Mises max 1027 MPa (SF yield 0.86), softest single-link stiffness 1.2 N.m/deg
+   t 4.5 mm: von Mises max 806 MPa (SF yield 1.09), softest single-link stiffness 1.7 N.m/deg
+   t 5.0 mm: von Mises max 675 MPa (SF yield 1.30), softest single-link stiffness 2.3 N.m/deg
+   chosen: inner 5.0 mm (SF 1.30 at the 25 N.m limit, 405 MPa at 15 N.m working), outer 5.45 mm (SF ~1.55)
+joint at 25 N.m / 200 N radial / 200 N axial: washer face p_max 48 MPa (iglidur G 80 MPa), sleeve 4.0 MPa, couple force ~2315 N through cap + M4 (12.9 proof ~9 kN)
+load paths: radial -> sleeve; axial + -> washer B -> cap -> M4 -> pin; axial - -> washer A -> inner hub; moment -> A/B face couple
+mass: 378 g total incl. stub (mesh volumes; Ti-6Al-4V 4.43, iglidur G 1.46, steel 7.9 g/cc)
+
+BOM (per shoulder):
+  4x igus iglidur G sleeve bearing GSM-1012-05 (10 ID x 12 OD x 5) - igus / RS / TME
+  8x igus iglidur G thrust washer GTM-1018-010 (10 x 18 x 1.0) - igus / RS
+  4x M4 x 6 ultra-low-profile socket head screw (as RIGHT ARM SUBASSY), threadlocker
+  4x M4 socket head screw (base flange to back plate, Ø34 PCD); 4x M4 (arm component to D4-05 pad)
+  Ti-6Al-4V: D4-01 base (turned + milled), D4-02 / D4-04 outer links (5-axis, 5.45), D4-03 inner link (5.0),
+    D4-05 arm stub, 4x D4-06 retaining cap; pins and running faces electroless nickel / Nedox

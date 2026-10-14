@@ -1,0 +1,22 @@
+[
+ {
+  "id": "cad_r13_n4_s1343_1",
+  "label": "4 joints (r13), fair CAD - current reference"
+ },
+ {
+  "id": "band_4c_best",
+  "label": "4 joints + sliding cuff \u2014 80.5% (best, 84% at 11 mm)"
+ },
+ {
+  "id": "band_r10a_0",
+  "label": "4 joints + sliding cuff (before polish) \u2014 78.7%"
+ },
+ {
+  "id": "band_r8_3",
+  "label": "5 joints, thin \u2014 76% (82% at 11 mm)"
+ },
+ {
+  "id": "final",
+  "label": "current CAD design \u2014 18%"
+ }
+]

@@ -1,0 +1,1 @@
+{"shape": [61, 86, 101], "lo": [-240.0, -480.0, -320.0], "STEP": 8.0, "scale": 1.0556638846119553, "elevs": [0, 15, 30, 45, 60, 75, 90, 105, 120, 135, 150, 165, 180], "order": "trunk per elev, then arm (humerus frame)", "body": "BodyParts3D mesh, bone-owned inside test"}

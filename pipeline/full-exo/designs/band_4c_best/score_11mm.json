@@ -1,0 +1,84 @@
+{
+ "overall": 0.841129183500033,
+ "follow": 0.9800376550692492,
+ "in_band": 0.858262107735645,
+ "clips": [
+  {
+   "name": "Raise overhead",
+   "frames": 181,
+   "score": 0.8274039530245615,
+   "follow": 1.0,
+   "in_band_when_following": 0.8274039530245615,
+   "median_gap": 6.222696172970553,
+   "min_gap": 1.9663867360895089
+  },
+  {
+   "name": "Drink from a cup",
+   "frames": 178,
+   "score": 0.9135297760459855,
+   "follow": 1.0,
+   "in_band_when_following": 0.9135297760459855,
+   "median_gap": 6.239285330217015,
+   "min_gap": 1.9303855677159174
+  },
+  {
+   "name": "Comb hair",
+   "frames": 202,
+   "score": 0.9323033908968955,
+   "follow": 1.0,
+   "in_band_when_following": 0.9323033908968955,
+   "median_gap": 5.498632998245911,
+   "min_gap": 1.9864339448797683
+  },
+  {
+   "name": "Reach a high shelf",
+   "frames": 157,
+   "score": 0.876392759066162,
+   "follow": 1.0,
+   "in_band_when_following": 0.876392759066162,
+   "median_gap": 5.821212509945369,
+   "min_gap": 1.6785361423268734
+  },
+  {
+   "name": "Wash opposite shoulder",
+   "frames": 193,
+   "score": 0.6907316262182829,
+   "follow": 1.0,
+   "in_band_when_following": 0.6907316262182829,
+   "median_gap": 7.028452649210495,
+   "min_gap": 1.856349360657407
+  },
+  {
+   "name": "Reach back pocket",
+   "frames": 145,
+   "score": 0.9508495911258981,
+   "follow": 1.0,
+   "in_band_when_following": 0.9508495911258981,
+   "median_gap": 5.881946572406559,
+   "min_gap": 1.783160305916144
+  },
+  {
+   "name": "Wave",
+   "frames": 172,
+   "score": 0.6474675368873684,
+   "follow": 0.8448275862068966,
+   "in_band_when_following": 0.7663901457034157,
+   "median_gap": 7.363671755776666,
+   "min_gap": 1.9874489005240372
+  },
+  {
+   "name": "Walking arm swing",
+   "frames": 109,
+   "score": 0.9518673729664358,
+   "follow": 1.0,
+   "in_band_when_following": 0.9518673729664358,
+   "median_gap": 5.51066769869145,
+   "min_gap": 1.96699469066958
+  }
+ ],
+ "band": [
+  2.0,
+  11.0
+ ],
+ "step": 3
+}

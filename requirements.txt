@@ -1,0 +1,10 @@
+# Python 3.9-3.11. CAD kernel: cadquery 2.5 (pulls cadquery-ocp 7.7). Versions as used on the reference machine.
+cadquery==2.5.2
+numpy>=1.26,<2.1
+scipy==1.13.1
+trimesh==4.12.2
+scikit-image==0.24.0
+matplotlib==3.9.4
+torch>=2.2          # CPU build is enough for the local evaluator / map cache
+# optional
+# runpod-flash==1.20.1   # GPU search + renders on RunPod (install as a uv tool: uv tool install runpod-flash)

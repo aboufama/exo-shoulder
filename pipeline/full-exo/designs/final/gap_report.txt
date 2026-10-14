@@ -1,0 +1,14 @@
+rest (raise-overhead frame 0, pose [30.0, 3.0, -30.0]):
+  base skin->metal gap  min  3.6  median 12.5  p90 19.3  share <= 10 mm  36%
+  l3   skin->metal gap  min  9.9  median 15.1  p90 20.5  share <= 10 mm   0%
+  l2   skin->metal gap  min 16.2  median 19.6  p90 22.4  share <= 10 mm   0%
+  l1   skin->metal gap  min 19.0  median 21.6  p90 23.1  share <= 10 mm   0%
+  links together: median 17.7, 0% of the underside within 10 mm
+  Raise overhead           underside median over the clip 15.6 (range 15.5-17.7)
+  Drink from a cup         underside median over the clip 19.7 (range 15.1-21.6)
+  Comb hair                underside median over the clip 19.3 (range 18.7-19.3)
+  Reach a high shelf       underside median over the clip 16.2 (range 14.4-16.2)
+  Wash opposite shoulder   underside median over the clip 21.7 (range 17.3-24.6)
+  Reach back pocket        underside median over the clip 18.3 (range 16.1-19.2)
+  Wave                     underside median over the clip 14.5 (range 14.5-16.7)
+  Walking arm swing        underside median over the clip 14.5 (range 14.3-14.8)

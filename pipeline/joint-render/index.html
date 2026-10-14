@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>EXO joint render</title>
+<style>
+  html, body { margin: 0; height: 100%; background: #e9e8e5; overflow: hidden; }
+  canvas { position: absolute; inset: 0; margin: auto; max-width: 100%; max-height: 100%; }
+  #s { position: fixed; left: 8px; top: 6px; font: 12px/1.3 Helvetica, Arial, sans-serif; color: #555; }
+</style>
+<script type="importmap">
+{ "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+               "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/" } }
+</script>
+</head>
+<body>
+<div id="s">loading</div>
+<script type="module">
+import * as THREE from 'three';
+import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
+
+const Q = new URLSearchParams(location.search);
+const RENDER = Q.has('render');
+const W = +(Q.get('w') || 2560), H = +(Q.get('h') || 1440), FPS = 30, DUR = 10;
+const status = document.getElementById('s');
+
+const renderer = new THREE.WebGLRenderer({ antialias: true, preserveDrawingBuffer: true });
+renderer.setPixelRatio(1);
+renderer.setSize(W, H, false);
+renderer.toneMapping = THREE.ACESFilmicToneMapping;
+renderer.toneMappingExposure = 1.0;
+renderer.outputColorSpace = THREE.SRGBColorSpace;
+renderer.shadowMap.enabled = true;
+renderer.shadowMap.type = THREE.VSMShadowMap;
+document.body.appendChild(renderer.domElement);
+const fit = () => { const k = Math.min(innerWidth / W, innerHeight / H); renderer.domElement.style.width = W * k + 'px'; renderer.domElement.style.height = H * k + 'px'; };
+addEventListener('resize', fit); fit();
+
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(0xe9e8e5);
+const pmrem = new THREE.PMREMGenerator(renderer);
+scene.environment = pmrem.fromScene(new RoomEnvironment(renderer), 0.04).texture;
+scene.environmentIntensity = 0.85;
+
+const camera = new THREE.PerspectiveCamera(26, W / H, 0.01, 10);
+
+// key light with soft shadow, plus a cool rim from behind
+const key = new THREE.DirectionalLight(0xfff6ec, 2.4);
+key.castShadow = true;
+key.shadow.mapSize.set(4096, 4096);
+key.shadow.radius = 9; key.shadow.blurSamples = 24; key.shadow.bias = -0.0002; key.shadow.normalBias = 0.0004;
+Object.assign(key.shadow.camera, { left: -0.3, right: 0.3, top: 0.3, bottom: -0.3, near: 0.05, far: 2 });
+scene.add(key, key.target);
+const rim = new THREE.DirectionalLight(0xdfe8ff, 1.1); scene.add(rim);
+
+const ground = new THREE.Mesh(new THREE.PlaneGeometry(4, 4), new THREE.ShadowMaterial({ opacity: 0.16 }));
+ground.rotation.x = -Math.PI / 2; ground.position.y = -0.024; ground.receiveShadow = true; scene.add(ground);
+
+// powder-coat grain: tileable multi-octave value noise -> bump + slight roughness variation
+function grain(size = 512) {
+  const c = document.createElement('canvas'); c.width = c.height = size;
+  const g = c.getContext('2d'), img = g.createImageData(size, size);
+  let seed = 7; const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+  const octave = (cells) => { const L = []; for (let i = 0; i < cells * cells; i++) L.push(rnd());
+    return (x, y) => { const fx = x * cells, fy = y * cells, x0 = Math.floor(fx), y0 = Math.floor(fy), tx = fx - x0, ty = fy - y0;
+      const s = t => t * t * (3 - 2 * t), v = (i, j) => L[((j % cells + cells) % cells) * cells + ((i % cells + cells) % cells)];
+      const a = v(x0, y0) + (v(x0 + 1, y0) - v(x0, y0)) * s(tx), b = v(x0, y0 + 1) + (v(x0 + 1, y0 + 1) - v(x0, y0 + 1)) * s(tx);
+      return a + (b - a) * s(ty); }; };
+  const o = [[octave(24), 0.45], [octave(64), 0.35], [octave(128), 0.2]];
+  for (let y = 0; y < size; y++) for (let x = 0; x < size; x++) {
+    let h = 0; for (const [f, w] of o) h += w * f(x / size, y / size);
+    const k = (y * size + x) * 4; img.data[k] = img.data[k + 1] = img.data[k + 2] = h * 255; img.data[k + 3] = 255;
+  }
+  g.putImageData(img, 0, 0);
+  const t = new THREE.CanvasTexture(c); t.wrapS = t.wrapT = THREE.RepeatWrapping; t.anisotropy = 8; return t;
+}
+const tex = grain();
+const powder = new THREE.MeshPhysicalMaterial({ color: 0x16171a, roughness: 0.6, metalness: 0.0, clearcoat: 0.3,
+  clearcoatRoughness: 0.38, bumpMap: tex, bumpScale: 0.45, sheen: 0.12, sheenRoughness: 0.9, sheenColor: 0x8a9098 });
+const steel = new THREE.MeshPhysicalMaterial({ color: 0xbfc2c6, metalness: 1, roughness: 0.26 });
+const shieldM = new THREE.MeshPhysicalMaterial({ color: 0xa7aaae, metalness: 1, roughness: 0.38 });
+const iglide = new THREE.MeshPhysicalMaterial({ color: 0xdc9f16, metalness: 0, roughness: 0.48, clearcoat: 0.1 });
+const titanium = new THREE.MeshPhysicalMaterial({ color: 0x8d9095, metalness: 1, roughness: 0.32 });
+const nickel = new THREE.MeshPhysicalMaterial({ color: 0xdad8d3, metalness: 1, roughness: 0.18 });
+const MAT = { BOTTOM: powder, MIDDLE: powder, TOP: powder, BEARING: steel, SHIELDS: shieldM, WASHER_LO: iglide,
+              WASHER_UP: iglide, MAGNET: nickel, SCREW0: titanium, SCREW1: titanium, SCREW2: titanium };
+
+// explode: lift (mm, +up) and cascade order (top parts leave first, return last)
+const LIFT = { MAGNET: -15, BOTTOM: 0, WASHER_LO: 13, MIDDLE: 26, BEARING: 42, SHIELDS: 42, WASHER_UP: 57, TOP: 70,
+               SCREW0: 88, SCREW1: 88, SCREW2: 88 };
+const ORDER = { SCREW0: 0, SCREW1: 0.15, SCREW2: 0.3, TOP: 1, WASHER_UP: 2, BEARING: 3, SHIELDS: 3, MIDDLE: 4, WASHER_LO: 5, MAGNET: 5.5, BOTTOM: 0 };
+const ease = t => t <= 0 ? 0 : t >= 1 ? 1 : t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+const clamp01 = t => Math.max(0, Math.min(1, t));
+
+const nodes = {};
+new GLTFLoader().load('joint.glb?t=' + Date.now(), (g) => {
+  g.scene.traverse(o => { if (o.isMesh) { o.material = MAT[o.name] || powder; o.castShadow = o.receiveShadow = true; nodes[o.name] = o; o.userData.y0 = o.position.y; } });
+  for (const n of ['SCREW0', 'SCREW1', 'SCREW2']) {                 // pivot each screw on its own axis
+    const o = nodes[n]; o.geometry.computeBoundingBox();
+    const c = o.geometry.boundingBox.getCenter(new THREE.Vector3());
+    o.geometry.translate(-c.x, 0, -c.z); o.position.x += c.x; o.position.z += c.z;
+  }
+  scene.add(g.scene);
+  status.textContent = RENDER ? 'rendering' : '';
+  RENDER ? renderAll() : requestAnimationFrame(loop);
+});
+
+function pose(t) {
+  // 0-1 assembled, 1-3.4 explode (cascade), 3.4-5 hold, 5-7.4 collapse, 7.4-10 elbow flex
+  for (const [n, o] of Object.entries(nodes)) {
+    const d = (ORDER[n] || 0) * 0.16;
+    const up = ease(clamp01((t - 1.0 - d) / 1.5));
+    const down = ease(clamp01((t - 5.0 - (5.5 - (ORDER[n] || 0)) * 0.16) / 1.5));
+    o.position.y = o.userData.y0 + (LIFT[n] || 0) / 1000 * (up - down);
+    if (n.startsWith('SCREW')) {                                    // right-hand thread: CCW (seen from above) to back out
+      const outA = ease(clamp01((t - 0.55 - d) / 1.2)), inA = ease(clamp01((t - 5.45 - (5.5 - ORDER[n]) * 0.16) / 1.3));
+      o.rotation.y = 2 * Math.PI * 4 * (outA - inA);
+    }
+  }
+  const flex = t < 7.4 ? 0 : Math.sin(Math.PI * clamp01((t - 7.4) / 2.6));
+  const ang = THREE.MathUtils.degToRad(95) * ease(flex);
+  nodes.MIDDLE.rotation.y = ang;                                    // the joint axis is the glTF Y axis through the origin
+  // camera: slow orbit around the joint, rising a little while exploded
+  const az = THREE.MathUtils.degToRad(28 + 34 * (t / DUR));
+  const el = THREE.MathUtils.degToRad(24 + 8 * Math.sin(Math.PI * clamp01((t - 0.5) / 7)));
+  const r = 0.31, target = new THREE.Vector3(-0.022, 0.034 * (ease(clamp01((t - 1) / 2)) - ease(clamp01((t - 5.2) / 2))) + 0.006, 0.0);
+  camera.position.set(target.x + r * Math.cos(el) * Math.sin(az), target.y + r * Math.sin(el), target.z + r * Math.cos(el) * Math.cos(az));
+  camera.lookAt(target);
+  key.position.set(camera.position.x * 0.4 - 0.25, 0.6, camera.position.z * 0.4 + 0.2); key.target.position.copy(target);
+  rim.position.set(-camera.position.x, 0.25, -camera.position.z);
+}
+
+function loop(ms) { pose(Q.has('t') ? +Q.get('t') : (ms / 1000) % DUR); renderer.render(scene, camera); requestAnimationFrame(loop); }
+
+async function renderAll() {
+  const N = FPS * DUR;
+  for (let i = 0; i < N; i++) {
+    pose(i / FPS); renderer.render(scene, camera);
+    const blob = await new Promise(r => renderer.domElement.toBlob(r, 'image/png'));
+    await fetch('/frame?i=' + i, { method: 'POST', body: blob });
+    status.textContent = `frame ${i + 1}/${N}`;
+  }
+  await fetch('/done', { method: 'POST', body: String(N) });
+  status.textContent = 'done';
+}
+window.pose = (t) => { pose(t); renderer.render(scene, camera); };
+</script>
+</body>
+</html>
