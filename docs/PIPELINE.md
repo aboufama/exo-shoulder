@@ -22,9 +22,9 @@ Run Python from the directory of the script unless noted. Use the Python that ha
 ```bash
 # setup (once): python deps + the dense skin-map cache
 bash tools/setup.sh
-python3 tools/build_maps.py            # -> .cache/maps_s1.pt (~860 MB; CPU, slow) - needed by fair_cad/envelope.py and detail_local.py
+python3 tools/build_maps.py            # -> .cache/maps_s1.pt (~860 MB) - needed by ANY CAD build (fair_cad/envelope.py: the neck and stacking read it) and detail_local.py; P0 analysis and the judges do not need it
 
-# re-assemble the reference design from its committed member fields (no search, no maps needed)
+# re-assemble the reference design from its committed member fields (no search; needs .cache/maps_s1.pt)
 cd pipeline/conformal/fair_cad && python3 fair_build.py r13_n4_s1343_1 assemble && cd -
 bash tools/publish_design.sh r13_n4_s1343_1   # exo.glb + step/ + parts into pipeline/full-exo/designs/cad_<key>/
 
