@@ -1,0 +1,131 @@
+{
+ "step": 6,
+ "tol_mm": 0.5,
+ "frames_checked": 228,
+ "seconds": 29,
+ "jobs": 4,
+ "parts": {
+  "l2|link 2 slab keep-out (5.5 mm Ti, 14 wide)": {
+   "max_depth": 24.94,
+   "frames": 96,
+   "worst": [
+    "Wash opposite shoulder",
+    138,
+    [
+     141,
+     58,
+     -53,
+     115,
+     0
+    ]
+   ]
+  },
+  "l1|link 1 slab keep-out (5.5 mm Ti, 14 wide)": {
+   "max_depth": 24.98,
+   "frames": 58,
+   "worst": [
+    "Reach a high shelf",
+    36,
+    [
+     76,
+     92,
+     -76,
+     23,
+     0
+    ]
+   ]
+  },
+  "l2|J3 upper hub + cap keep-out (O23 x 7.32)": {
+   "max_depth": 23.96,
+   "frames": 10,
+   "worst": [
+    "Raise overhead",
+    48,
+    [
+     30,
+     107,
+     -51,
+     12,
+     0
+    ]
+   ]
+  },
+  "cuff|J3 lower plate keep-out (O23 x 3.0)": {
+   "max_depth": 24.4,
+   "frames": 13,
+   "worst": [
+    "Raise overhead",
+    132,
+    [
+     30,
+     107,
+     -51,
+     12,
+     0
+    ]
+   ]
+  },
+  "l2|J2 upper hub + cap keep-out (O23 x 7.32)": {
+   "max_depth": 24.91,
+   "frames": 33,
+   "worst": [
+    "Wash opposite shoulder",
+    96,
+    [
+     141,
+     58,
+     -53,
+     115,
+     0
+    ]
+   ]
+  },
+  "l1|J2 lower plate keep-out (O23 x 3.0)": {
+   "max_depth": 24.77,
+   "frames": 33,
+   "worst": [
+    "Reach a high shelf",
+    120,
+    [
+     77,
+     105,
+     -77,
+     12,
+     0
+    ]
+   ]
+  },
+  "l1|J1 upper hub + cap keep-out (O23 x 7.32)": {
+   "max_depth": 24.49,
+   "frames": 22,
+   "worst": [
+    "Comb hair",
+    102,
+    [
+     78,
+     143,
+     -67,
+     118,
+     0
+    ]
+   ]
+  },
+  "base|J1 lower plate keep-out (O23 x 3.0)": {
+   "max_depth": 24.22,
+   "frames": 22,
+   "worst": [
+    "Comb hair",
+    96,
+    [
+     74,
+     140,
+     -65,
+     117,
+     0
+    ]
+   ]
+  }
+ },
+ "worst_part": "l1|link 1 slab keep-out (5.5 mm Ti, 14 wide)",
+ "max_depth": 24.98
+}
