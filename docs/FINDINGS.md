@@ -19,13 +19,26 @@ numbers on 2026-10-13. Always report a score change with its cause.
 The search evaluator (`pipeline/conformal/gpu/band_impl.py`) is optimistic against real CAD: 4 mm slabs, sparse
 samples, no stacks/neck early on. The honest scorer on built CAD is the reference.
 
-## The base mount (open, the biggest one) -> R10
+## The base mount -> R10 (measured 2026-10-14, docs/P0_BASE_MOUNT.md)
 
-The pipeline holds the base fixed in the **scapula** frame (`band_cad/make_cad_design.py`: one fixed frame per design
-in the scapula frame). Physically the base bolts to a back plate on the **thorax**, and the scapula slides under the
-skin. In the rig the GH centre rises relative to the thorax by `lift(elev)` (`avg/body_pose.py`, `segs()`), and the
-scapula rotates (`scap(elev)`). So every design so far assumes a base that tracks the scapula, which no strapped plate
-does. Quantify the misalignment for a thorax-fixed base (P0) before trusting any overhead number.
+The pipeline held the base fixed in the **scapula** frame; physically it bolts to a back plate on the **thorax**. On the
+rig's girdle law (GH lift 0.2 mm/deg above 30 deg, scapula rotating about GH), all 1337 frames:
+- GH rises up to **25.3 mm** vs the thorax (4 mm at 49 deg elevation, 10 mm at 77 deg); the scapula turns up to 58 deg.
+- The reference base on a thorax plate: **enters the body in 197 of 446 frames, up to 44 mm** (Raise overhead) - every
+  design so far was shaped against skin that moved with its base.
+- **Bound**: any chain whose axes meet at one thorax-fixed point misaligns the GH centre by >= half the GH range =
+  **12.7 mm** > the 8 mm band. The fixed-centre family on a back plate cannot meet the 1 cm rule overhead.
+- **Offset axes absorb it without a joint**: for fixed axis directions, the GH point a serial chain carries is linear in
+  the axis points (`pipeline/girdle/girdle.py`), so the best points are an exact minimax LP. 3-DOF on a thorax plate:
+  3R **5.8 mm**, 2R shoulder + humeral-rotation ring **6.8 mm** (vs 25.3). Not yet <= 4 mm (R10 proposed). Sensitive to
+  the girdle law: +25 % slope -> 10.8 / 12.5 mm. The residual is flat in elevation: no chain reproduces the rig's
+  0-then-linear kink.
+- 3R's singular margin: 20 deg on fitting clips, **12.5 deg on held-out** clips. The 2R pointing shoulder: the arm never
+  comes within **45 deg** of one axis over the 8 clips -> its singularity has a home (55 deg margin held-out).
+- **Humeral-rotation ring**: travel can be 67 deg (87 with held-out Wave; floor 59 deg = twist the clips use at the same
+  arm direction). A circular rail on link 2 sees **13.5-25 mm of skin-radius spread** over 120 deg at every station
+  80-280 mm down the arm (only the deltoid cap, ~60 mm, is round: 4.7 mm) -> the rail must be arm-fixed and shaped.
+- Judge: `judge/base_mount.py` (R10 on every scorecard). Still the rig's law: OpenSim Seth 2016 / OpenCap must replace it.
 
 ## The human model is wrong in measurable places -> P2
 
