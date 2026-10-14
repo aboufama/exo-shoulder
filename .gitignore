@@ -24,3 +24,5 @@ data/raw/private/
 *.key
 # agent worktrees (parallel subagents)
 .claude/worktrees/
+pipeline/redteam/results/jam_ws.npz
+pipeline/redteam/results/pressure_base_frames.json
