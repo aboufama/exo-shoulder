@@ -165,6 +165,20 @@ the published girdle models (5-16 mm in AP / ML), not a limit of the mechanism**
 user's own girdle (ruler test, OpenCap - data/raw/README.md items 0 and 2), and the design is then fitted to that person
 (with the population spread handled by the slider + liner compliance, and checked on SMPL-X bodies later).
 
+### 8c. Over the whole plausible workspace (`p0_selfalign_ws.py` -> `p0_selfalign_ws.json`)
+
+Fitting the self-aligning 2R + ring + slider over the red team's plausible everyday workspace (49,543 poses: plane
+-90..150, elevation 0..170, humeral rotation +-90 about the twist-free neutral; fitted on a 10 deg grid, rig + literature
+laws): **worst 8.7 / 9.0 mm** over the whole 5 deg workspace (p95 7.2), clips 5.7 / 7.9 (fitting) and **5.0 / 3.5
+(held-out - no longer overfitted)**; closes everywhere; slider travel 74 mm. Two limits that are geometry, not tuning:
+- Over the workspace the arm comes within **8.6 deg** of every axis (best: down-medial into the trunk): a 2R pointing
+  shoulder cannot hide its singularity from everyday ROM (min margin 6.5 deg, 1st percentile 13 deg).
+- **The ring must turn a full circle over the workspace** (covering arc 357-360 deg even with humeral rotation limited
+  to +-30 deg; 115 deg over the 8 clips): link 2's roll about the arm winds 360 deg around the pointing singularity,
+  and everyday arm directions encircle it. Physiological humeral rotation at the side alone is ~150-180 deg (why
+  CADEN-7 uses a 180 deg guide). An open ring that must also clear the trunk (82 deg arm-fixed window) cannot cover that:
+  **the 2R + ring follows the 8 everyday clips, not full humeral-rotation ROM.**
+
 ## Decision
 
 1. **A thorax back plate with a chain whose axes all meet at the GH centre is ruled out** (section 3: >= 12.7 mm

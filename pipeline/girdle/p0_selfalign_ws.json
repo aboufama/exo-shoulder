@@ -1,0 +1,88 @@
+{
+ "params": {
+  "b": [
+   75.00345784269305,
+   49.09061333308394
+  ],
+  "a1": 89.9980478151706,
+  "a2": 89.99780182479108,
+  "branch": -1,
+  "w": null
+ },
+ "e": [
+  -0.379,
+  0.752,
+  -0.539
+ ],
+ "axis_points": [
+  -10.242628190952209,
+  60.0,
+  50.944740653951044,
+  60.0,
+  5.911646177318669,
+  17.277459217154355,
+  0.0,
+  0.0,
+  0.0
+ ],
+ "margin_required": 15.0,
+ "workspace_5deg": {
+  "rig": {
+   "max": 8.73,
+   "p95": 7.28,
+   "over_4mm": 0.367
+  },
+  "literature": {
+   "max": 9.0,
+   "p95": 7.16,
+   "over_4mm": 0.501
+  },
+  "closes": 1.0,
+  "margin_min": 6.5,
+  "margin_p1": 13.0
+ },
+ "clips_fitting": {
+  "rig": {
+   "max": 5.65,
+   "p95": 5.45,
+   "over_4mm": 0.202
+  },
+  "literature": {
+   "max": 7.86,
+   "p95": 6.29,
+   "over_4mm": 0.433
+  },
+  "closes": 1.0,
+  "margin_min": 14.7,
+  "margin_p1": 14.8
+ },
+ "clips_held_out": {
+  "rig": {
+   "max": 5.0,
+   "p95": 5.0,
+   "over_4mm": 0.391
+  },
+  "literature": {
+   "max": 3.45,
+   "p95": 3.41,
+   "over_4mm": 0.0
+  },
+  "closes": 1.0,
+  "margin_min": 39.2,
+  "margin_p1": 39.2
+ },
+ "slider_travel_literature_mm": 74.4,
+ "ring_travel": {
+  "min": -180.0,
+  "max": 180.0,
+  "span": 360.0
+ },
+ "never_points_workspace": {
+  "dir": [
+   0.203,
+   -0.734,
+   -0.648
+  ],
+  "deg": 8.6
+ }
+}
