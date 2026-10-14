@@ -32,7 +32,7 @@ except ImportError:
     np = None
 
 _CACHE = {}
-CODE_VERSION = "band-2026-10-15s (real geometry + FEA-sized: 5.5 links, v3.2 stack, 9 mm rail)"
+CODE_VERSION = "band-2026-10-15t (min link arc 35 deg + min arm 10 mm between hub seats; pure 3R chain)"
 RESD = 0.25; NWD, NHD = 1440, 720; LAT_LO, LAT_HI = -75.0, 90.0; CLEAR = 3.0
 ROW0, ROW1 = int((LAT_LO + 90) / RESD), int((LAT_HI + 90) / RESD)
 HUB_R, HW, T_LINK, STACK, T_W, T_BOT = 17.0, 7.0, 5.5, 6.0, 1.0, 6.5
