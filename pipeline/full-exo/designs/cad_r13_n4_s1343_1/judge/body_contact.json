@@ -1,0 +1,481 @@
+{
+ "step": 2,
+ "tol_mm": 0.5,
+ "frames_checked": 671,
+ "seconds": 3262,
+ "jobs": 4,
+ "parts": {
+  "H|M4x6 ISO 10642 countersunk (upper cuff)": {
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null
+  },
+  "H|UPPER ARM CUFF (conformal G2 shell, AlSi10Mg bead blasted)": {
+   "max_depth": 0.07,
+   "frames": 0,
+   "worst": [
+    "Wash opposite shoulder",
+    66,
+    [
+     131,
+     37,
+     -76,
+     121,
+     0
+    ]
+   ]
+  },
+  "H|CirPattern1[13]": {
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null
+  },
+  "H|CirPattern1[17]": {
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null
+  },
+  "H|CirPattern1[3]": {
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null
+  },
+  "H|CirPattern1[6]": {
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null
+  },
+  "H|CirPattern1[1]": {
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null
+  },
+  "H|Revolve1[3]": {
+   "max_depth": 0.61,
+   "frames": 132,
+   "worst": [
+    "Comb hair",
+    172,
+    [
+     63,
+     100,
+     -56,
+     86,
+     0
+    ]
+   ]
+  },
+  "H|CirPattern1[9]": {
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null
+  },
+  "H|CirPattern1[2]": {
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null
+  },
+  "H|Revolve3": {
+   "max_depth": 0.43,
+   "frames": 0,
+   "worst": [
+    "Raise overhead",
+    0,
+    [
+     30,
+     3,
+     -30,
+     12,
+     0
+    ]
+   ]
+  },
+  "H|CirPattern1[4]": {
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null
+  },
+  "H|CirPattern1[10]": {
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null
+  },
+  "H|CirPattern1[8]": {
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null
+  },
+  "H|CirPattern1[14]": {
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null
+  },
+  "H|CirPattern1[12]": {
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null
+  },
+  "H|CirPattern1[16]": {
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null
+  },
+  "H|CirPattern1[7]": {
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null
+  },
+  "H|Revolve1[1]": {
+   "max_depth": 1.09,
+   "frames": 487,
+   "worst": [
+    "Comb hair",
+    170,
+    [
+     66,
+     109,
+     -58,
+     93,
+     0
+    ]
+   ]
+  },
+  "H|CirPattern1[5]": {
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null
+  },
+  "H|Revolve4": {
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null
+  },
+  "H|CirPattern1[11]": {
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null
+  },
+  "H|Revolve1[2]": {
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null
+  },
+  "H|CirPattern1[15]": {
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null
+  },
+  "H|M4 ULTRA LOW PROFILE SOCKET HEAD SCREW, 6mm L, HS STEEL": {
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null
+  },
+  "H|5mm D, 2.5mm H, N42 MAGNET": {
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null
+  },
+  "F|Hex socket head countersunk screw grade C M4x0.7 x 8": {
+   "max_depth": 8.37,
+   "frames": 671,
+   "worst": [
+    "Comb hair",
+    172,
+    [
+     63,
+     100,
+     -56,
+     86,
+     0
+    ]
+   ]
+  },
+  "H|IGUS THRUST WASHER, 30mm ID, 39mm OD, 1.5mm T, IGLIDE J": {
+   "max_depth": 2.82,
+   "frames": 671,
+   "worst": [
+    "Comb hair",
+    162,
+    [
+     76,
+     136,
+     -65,
+     113,
+     0
+    ]
+   ]
+  },
+  "F|MIDDLE": {
+   "max_depth": 5.79,
+   "frames": 671,
+   "worst": [
+    "Comb hair",
+    68,
+    [
+     60,
+     121,
+     -59,
+     119,
+     0
+    ]
+   ]
+  },
+  "H|TOP": {
+   "max_depth": 2.34,
+   "frames": 14,
+   "worst": [
+    "Drink from a cup",
+    128,
+    [
+     91,
+     47,
+     -58,
+     123,
+     0
+    ]
+   ]
+  },
+  "F|FOREARM CUFF": {
+   "max_depth": 24.15,
+   "frames": 671,
+   "worst": [
+    "Wash opposite shoulder",
+    42,
+    [
+     115,
+     29,
+     -76,
+     114,
+     0
+    ]
+   ]
+  },
+  "H|J4 ring nut M8x0.5 18x1 (Ti-6Al-4V)": {
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null
+  },
+  "H|J4 magnet \u00d84x2 N52 diametric": {
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null
+  },
+  "H|J4 washer B (igus GTM-1018-005)": {
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null
+  },
+  "H|J4 washer A (igus GTM-1018-005, recessed)": {
+   "max_depth": 24.43,
+   "frames": 21,
+   "worst": [
+    "Drink from a cup",
+    108,
+    [
+     95,
+     69,
+     -48,
+     132,
+     0
+    ]
+   ]
+  },
+  "H|BOTTOM + neck + JN hub (one 5-axis part, 7075-T6 bead blasted)": {
+   "max_depth": 13.57,
+   "frames": 671,
+   "worst": [
+    "Wash opposite shoulder",
+    40,
+    [
+     112,
+     28,
+     -74,
+     110,
+     0
+    ]
+   ]
+  },
+  "l3|D4-04 link 3 (Ti-6Al-4V)": {
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null
+  },
+  "l3|J4 M1.6x3 ISO 10642 Ti (cap)": {
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null
+  },
+  "l3|J4 cap \u00d822 G2 dome (Ti-6Al-4V)": {
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null
+  },
+  "l3|J4 angle sensor IC (placeholder)": {
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null
+  },
+  "l3|J4 position PCB \u00d816 (placeholder)": {
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null
+  },
+  "l3|J4 sleeve (igus GSM-1012-04)": {
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null
+  },
+  "l3|J3 M1.6x3 ISO 10642 Ti (cap)": {
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null
+  },
+  "l3|J3 cap \u00d822 G2 dome (Ti-6Al-4V)": {
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null
+  },
+  "l3|J3 angle sensor IC (placeholder)": {
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null
+  },
+  "l3|J3 position PCB \u00d816 (placeholder)": {
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null
+  },
+  "l3|J3 sleeve (igus GSM-1012-04)": {
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null
+  },
+  "l2|D4-03 link 2 (Ti-6Al-4V)": {
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null
+  },
+  "l2|J3 ring nut M8x0.5 18x1 (Ti-6Al-4V)": {
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null
+  },
+  "l2|J3 magnet \u00d84x2 N52 diametric": {
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null
+  },
+  "l2|J3 washer B (igus GTM-1018-005)": {
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null
+  },
+  "l2|J3 washer A (igus GTM-1018-005, recessed)": {
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null
+  },
+  "l2|J2 ring nut M8x0.5 18x1 (Ti-6Al-4V)": {
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null
+  },
+  "l2|J2 magnet \u00d84x2 N52 diametric": {
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null
+  },
+  "l2|J2 washer B (igus GTM-1018-005)": {
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null
+  },
+  "l2|J2 washer A (igus GTM-1018-005, recessed)": {
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null
+  },
+  "l1|D4-02 link 1 (Ti-6Al-4V)": {
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null
+  },
+  "l1|J2 M1.6x3 ISO 10642 Ti (cap)": {
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null
+  },
+  "l1|J2 cap \u00d822 G2 dome (Ti-6Al-4V)": {
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null
+  },
+  "l1|J2 angle sensor IC (placeholder)": {
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null
+  },
+  "l1|J2 position PCB \u00d816 (placeholder)": {
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null
+  },
+  "l1|J2 sleeve (igus GSM-1012-04)": {
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null
+  },
+  "l1|J1 M1.6x3 ISO 10642 Ti (cap)": {
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null
+  },
+  "l1|J1 cap \u00d822 G2 dome (Ti-6Al-4V)": {
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null
+  },
+  "l1|J1 angle sensor IC (placeholder)": {
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null
+  },
+  "l1|J1 position PCB \u00d816 (placeholder)": {
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null
+  },
+  "l1|J1 sleeve (igus GSM-1012-04)": {
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null
+  },
+  "base|D4-01 scapula base (Ti-6Al-4V)": {
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null
+  },
+  "base|J1 ring nut M8x0.5 18x1 (Ti-6Al-4V)": {
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null
+  },
+  "base|J1 magnet \u00d84x2 N52 diametric": {
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null
+  },
+  "base|J1 washer B (igus GTM-1018-005)": {
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null
+  },
+  "base|J1 washer A (igus GTM-1018-005, recessed)": {
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null
+  }
+ },
+ "worst_part": "H|J4 washer A (igus GTM-1018-005, recessed)",
+ "max_depth": 24.43
+}

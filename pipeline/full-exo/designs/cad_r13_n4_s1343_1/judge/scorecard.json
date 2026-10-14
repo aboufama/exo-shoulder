@@ -10,9 +10,9 @@
  {
   "id": "R2",
   "name": "No part enters the body, any frame of any clip",
-  "value": null,
+  "value": 24.43,
   "target": "<= 0.5 mm",
-  "status": "NOT RUN",
+  "status": "FAIL",
   "judge": "judge/body_contact.py (exact signed distance)"
  },
  {
@@ -42,9 +42,9 @@
  {
   "id": "R6",
   "name": "No interference between parts that move relative to each other",
-  "value": null,
+  "value": 18.52,
   "target": "<= 0.15 mm",
-  "status": "NOT RUN",
+  "status": "FAIL",
   "judge": "judge/part_contact.py (geometry only)"
  },
  {
@@ -73,11 +73,11 @@
  },
  {
   "id": "R10",
-  "name": "Base mounts to a thorax-fixed back plate; shoulder-centre misalignment bounded",
-  "value": null,
-  "target": "",
-  "status": "OPEN",
-  "judge": "OpenSim (Seth 2016 thoracoscapular model): today the base is modelled scapula-fixed"
+  "name": "Base on a thorax back plate: worst GH misalignment (proposed: half the 2-10 mm band)",
+  "value": 25.34,
+  "target": "<= 4.0 mm",
+  "status": "FAIL",
+  "judge": "judge/base_mount.py (thorax-fixed base, rig girdle law until OpenSim Seth 2016 / OpenCap replace it)"
  },
  {
   "id": "R11",
