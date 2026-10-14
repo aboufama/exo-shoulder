@@ -119,6 +119,35 @@ for published girdle motion** (best 10.7 mm on the fitting clips, 22-26 mm held 
 moves far less than published (ruler test / OpenCap, data/raw/README.md items 0 and 2), the thorax-plate premise of R10
 and the 4-DOF cap cannot both hold with the 1 cm rule.
 
+## 8. The user's exception: one torque-free passive joint (self-aligning slider)
+
+User, 2026-10-14: DOF are counted kinematically, but one joint that is unpowered and needs no torque over the full ROM
+is allowed. That is the self-aligning principle of Stienen et al. 2009 (decouple the exoskeleton's rotations from its
+translations): a passive slider between the thorax plate and the shoulder chain transmits every moment, so the assist
+reaches the plate as a pure couple and nothing pushes along the slide; the rotation centre goes wherever the girdle takes
+it. Residual misalignment = the part perpendicular to the slide (still linear in the axis points: exact minimax LP).
+`p0_selfalign.py` -> `p0_selfalign.json`:
+
+| design | slider direction e (thorax) | worst, rig law: fit / held-out mm | worst, literature: fit / held-out mm | slider travel mm | singular margin fit / held-out deg |
+|---|---|---|---|---|---|
+| spherical + slider, fitted to rig | [0.0, 1.0, -0.0] | 0.0 / 0.0 | 32.6 / 26.21 | 55.4 | - |
+| spherical + slider, fitted to literature | [-0.264, 0.926, -0.272] | 13.15 / 8.75 | 7.85 / 6.0 | 63.4 | - |
+| spherical + slider, fitted to rig+literature | [0.481, -0.726, 0.491] | 9.73 / 7.7 | 9.73 / 7.31 | 62.3 | - |
+| 2R+ring offset axes + slider, fitted to literature | [-0.316, 0.826, -0.468] | 12.48 / 3.4 | 2.81 / 9.11 | 52.0 | [24.5, 33.5] |
+| 2R+ring offset axes + slider, fitted to rig+literature | [-0.384, 0.76, -0.524] | 3.99 / 4.85 | 3.99 / 7.79 | 56.0 | [22.4, 38.7] |
+| 3R offset axes + slider, fitted to literature | [-0.439, 0.723, -0.533] | 7.94 / 6.27 | 2.34 / 7.77 | 50.0 | [34.6, 43.1] |
+| 3R offset axes + slider, fitted to rig+literature | [-0.412, 0.769, -0.49] | 4.66 / 5.1 | 4.66 / 7.72 | 57.0 | [25.8, 24.0] |
+
+- **2R shoulder + humeral-rotation ring + offset axes + one passive slider, fitted to both laws: 3.99 mm worst on the
+  fitting clips under both laws** (the proposed R10 is 4 mm), 4.9 / 7.8 mm on the held-out clips (overfitting the 6
+  clips: fit on the whole workspace next). Slider travel ~56 mm.
+- The slider direction comes out the same in every fit: **up, medial and slightly posterior** (~(-0.4, 0.76, -0.5)) -
+  the line along which clavicle elevation carries the shoulder. The search reinvented a passive clavicle.
+- "No torque" in practice: low-friction slide (the ring/shell hardware note's caged-ball or iglidur options) and a
+  ~1-2 N gravity-balance spring for the ~150 g chain; it then needs no effort from the wearer.
+- A pure-vertical 15 mm shrug still leaves 11-14 mm (it is off the slide axis); a real shrug moves along clavicle
+  elevation, close to the slide - to be checked against the OpenSim Seth model and the user's OpenCap.
+
 ## Decision
 
 1. **A thorax back plate with a chain whose axes all meet at the GH centre is ruled out** (section 3: >= 12.7 mm
@@ -150,3 +179,8 @@ and the 4-DOF cap cannot both hold with the 1 cm rule.
      3 actuators, 5 DOF in total - over the cap of 4.
    - **C. Thorax plate + 3 rigid offset-axis DOF** (this P0's design): only if the user's measured girdle motion is
      close to the rig law (residual 5.8-6.8 mm), i.e. the ruler test shows ~13 mm, not ~35 mm, of acromion rise at 90 deg.
+7. **After the user's counting rule (section 8), the recommended architecture is B': thorax plate on stable skin
+   (>= ~175 mm medial of GH: spine / neck base) + one gravity-balanced, torque-free passive slider along the clavicle
+   line + the user's 3-DOF shoulder (2R pointing with offset axes + humeral-rotation ring on the upper arm).** It keeps
+   3 kinematic DOF + the one allowed exception, and is the only family so far that holds ~4 mm under both girdle laws.
+   Next: re-fit over the whole workspace and the OpenSim Seth-model law, then P3 with skin hug (L1 builds).
