@@ -33,7 +33,7 @@
  },
  {
   "id": "R5",
-  "name": "At most 4 DOF (3R + sliding cuff, or 4R)",
+  "name": "At most 4 DOF, counted kinematically (target 3; a torque-free passive self-aligning joint is the one exception)",
   "value": 4,
   "target": "<= 4",
   "status": "PASS",
@@ -74,7 +74,7 @@
  {
   "id": "R10",
   "name": "Base on a thorax back plate: worst GH misalignment (proposed: half the 2-10 mm band)",
-  "value": 25.34,
+  "value": 64.89,
   "target": "<= 4.0 mm",
   "status": "FAIL",
   "judge": "judge/base_mount.py (thorax-fixed base, rig girdle law until OpenSim Seth 2016 / OpenCap replace it)"

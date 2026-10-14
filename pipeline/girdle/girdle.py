@@ -130,3 +130,15 @@ def lift_literature(P):
         a = np.where(pl <= 40, ev(0, k) + (ev(40, k) - ev(0, k)) * pl / 40, ev(40, k) + (ev(90, k) - ev(40, k)) * (pl - 40) / 50)
         out[:, k] = a
     return out
+
+
+# ------------------------------------------------------------------ all girdle laws at once
+SETH_SCALE = 1.2238          # rig SC-GH distance / the generic Seth model's (opensim_seth/compare.json): the rig's body size
+
+
+def lift_laws(P, M=None):
+    """GH displacement vs the thorax (T,3) under every girdle law: 'rig' (body_pose segs), 'literature' (bone-pin chain,
+    docs/research/gh_translation_literature.md), 'seth' (OpenSim Seth 2016 model + published angles, scaled to the rig)"""
+    sys.path.insert(0, os.path.join(HERE, "opensim_seth")); from seth_law import lift_seth
+    P = np.asarray(P, float)
+    return dict(rig=(M if M is not None else Motion(P)).lift, literature=lift_literature(P), seth=lift_seth(P, scale=SETH_SCALE))

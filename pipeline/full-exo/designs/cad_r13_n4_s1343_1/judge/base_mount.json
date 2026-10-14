@@ -1,5 +1,5 @@
 {
- "girdle_law": "avg/body_pose.py (rig) - not yet OpenSim/OpenCap",
+ "girdle_law": "worst of rig / literature / OpenSim Seth (girdle.lift_laws) - not yet the user's OpenCap",
  "base": {
   "mount": "thorax",
   "chain": "spherical",
@@ -11,18 +11,23 @@
  },
  "frames_checked": 451,
  "step": 3,
- "max_mm": 25.34,
- "p95_mm": 23.77,
- "share_over_4mm": 0.466,
+ "per_law_max_mm": {
+  "rig": 25.34,
+  "literature": 64.89,
+  "seth": 62.86
+ },
+ "max_mm": 64.89,
+ "p95_mm": 56.95,
+ "share_over_4mm": 0.825,
  "per_clip": {
-  "Raise overhead": 25.34,
-  "Drink from a cup": 8.17,
-  "Comb hair": 23.88,
-  "Reach a high shelf": 21.54,
-  "Wash opposite shoulder": 6.25,
-  "Reach back pocket": 2.13,
-  "Wave": 13.72,
-  "Walking arm swing": 0.0
+  "Raise overhead": 64.89,
+  "Drink from a cup": 18.79,
+  "Comb hair": 56.36,
+  "Reach a high shelf": 49.54,
+  "Wash opposite shoulder": 15.25,
+  "Reach back pocket": 25.88,
+  "Wave": 46.92,
+  "Walking arm swing": 5.19
  },
  "base_part_enters_body_mm": 43.91,
  "base_part_worst": [
