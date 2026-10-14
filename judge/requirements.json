@@ -9,7 +9,7 @@
  "R7":  {"name": "Every custom part is one valid closed solid", "metric": "part_validity.all_ok", "op": "==", "value": true, "judge": "judge/part_validity.py (OCC BRepCheck on the exported STEP)"},
  "R8":  {"name": "Custom-part mass budget (proposed)", "metric": "mass.custom_g", "op": "<=", "value": 300, "unit": "g", "judge": "parts_full.json (mesh volume x density)"},
  "R9":  {"name": "Strength: SF >= 1.5 at 25 N.m worst direction; deflection and fatigue bounded", "status": "UNVERIFIED", "judge": "independent FEA (CalculiX) - only the in-house hex8 study exists (pipeline/conformal/thin_study)"},
- "R10": {"name": "Base mounts to a thorax-fixed back plate; shoulder-centre misalignment bounded", "status": "OPEN", "judge": "OpenSim (Seth 2016 thoracoscapular model): today the base is modelled scapula-fixed"},
+ "R10": {"name": "Base on a thorax back plate: worst GH misalignment (proposed: half the 2-10 mm band)", "metric": "base_mount.max_mm", "op": "<=", "value": 4.0, "unit": "mm", "judge": "judge/base_mount.py (thorax-fixed base, rig girdle law until OpenSim Seth 2016 / OpenCap replace it)"},
  "R11": {"name": "Interface pressure under ISO/TS 15066 body-region limits", "status": "NOT MEASURED", "judge": "coupled human-exo contact sim (MuJoCo/Drake) then pressure film / FSRs on a prototype"},
  "R12": {"name": "CAD standard: G2 surfaces, flat seats under every seat, no visible screws or seams", "status": "PARTIAL", "judge": "zebra / curvature check (full-exo/parts.html) + user review"},
  "R13": {"name": "Manufacturable", "status": "NOT DONE", "judge": "supplier DFM review + quote (CNC Ti / 7075, SLM AlSi10Mg)"},

@@ -8,7 +8,7 @@ def load(p):
     try: return json.load(open(p))
     except Exception: return None
 src = dict(score=load(os.path.join(dd, "score.json")), body_contact=load(os.path.join(J, "body_contact.json")), part_contact=load(os.path.join(J, "part_contact.json")),
-           part_validity=load(os.path.join(J, "part_validity.json")), design=load(os.path.join(dd, "design.json")), parts=load(os.path.join(dd, "parts_full.json")))
+           part_validity=load(os.path.join(J, "part_validity.json")), base_mount=load(os.path.join(J, "base_mount.json")), design=load(os.path.join(dd, "design.json")), parts=load(os.path.join(dd, "parts_full.json")))
 def metric(m):
     s, k = m.split(".", 1); d = src.get(s if s != "mass" else "parts")
     if d is None: return None

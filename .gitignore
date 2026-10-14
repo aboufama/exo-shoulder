@@ -22,3 +22,5 @@ pipeline/joint-render/out*/
 data/raw/private/
 .env
 *.key
+# agent worktrees (parallel subagents)
+.claude/worktrees/
