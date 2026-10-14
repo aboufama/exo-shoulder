@@ -11,7 +11,7 @@
 | R7 | Every custom part is one valid closed solid | True | == True | **PASS** | judge/part_validity.py (OCC BRepCheck on the exported STEP) |
 | R8 | Custom-part mass budget (proposed) | 244.6 | <= 300 g | **PASS** | parts_full.json (mesh volume x density) |
 | R9 | Strength: SF >= 1.5 at 25 N.m worst direction; deflection and fatigue bounded | - |  | **UNVERIFIED** | independent FEA (CalculiX) - only the in-house hex8 study exists (pipeline/conformal/thin_study) |
-| R10 | Base on a thorax back plate: worst GH misalignment (proposed: half the 2-10 mm band) | 64.89 | <= 4.0 mm | **FAIL** | judge/base_mount.py (thorax-fixed base, rig girdle law until OpenSim Seth 2016 / OpenCap replace it) |
+| R10 | Base on a thorax back plate: worst GH misalignment (proposed: half the 2-10 mm band) | 64.89 | <= 4.0 mm | **FAIL** | judge/base_mount.py (thorax-fixed base; worst of the rig, published bone-pin chain and OpenSim Seth 2016 girdle laws until the user's OpenCap exists) |
 | R11 | Interface pressure under ISO/TS 15066 body-region limits | - |  | **NOT MEASURED** | coupled human-exo contact sim (MuJoCo/Drake) then pressure film / FSRs on a prototype |
 | R12 | CAD standard: G2 surfaces, flat seats under every seat, no visible screws or seams | - |  | **PARTIAL** | zebra / curvature check (full-exo/parts.html) + user review |
 | R13 | Manufacturable | - |  | **NOT DONE** | supplier DFM review + quote (CNC Ti / 7075, SLM AlSi10Mg) |
