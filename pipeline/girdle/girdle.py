@@ -110,3 +110,23 @@ def fit_lsq(A, y, coax=False, lam=1e-3):
 
 
 def residual(A, x, y): return np.linalg.norm(np.einsum("tij,j->ti", A, x) - y, axis=1)
+
+
+# ------------------------------------------------------------------ a second girdle law: published data
+# docs/research/gh_translation_literature.md section "literature law": GH displacement from the arm-hanging posture,
+# bone-pin clavicle / scapula angles (Ludewig 2009) through a rigid chain (154 mm clavicle, Xu 2016), mm, thorax frame
+# x anterior, y superior, z lateral; quadratics in elevation theta (deg) for planes 0 (abduction), 40 (scaption),
+# 90 (flexion), linear in the plane between them, plane clamped to 0..90.
+LIT = {0: ((-0.482, 0.00232), (0.456, -0.000385), (-0.285, 0.000453)),
+       40: ((0.032, -0.00099), (0.441, -0.0005), (-0.086, -0.00055)),
+       90: ((0.082, -0.00153), (0.177, 0.00102), (-0.045, -0.00082))}
+
+
+def lift_literature(P):
+    """(T,3) GH displacement vs the thorax for poses P (plane, elev, ...) from the literature law"""
+    P = np.asarray(P, float); pl = np.clip(P[:, 0], 0, 90); th = np.clip(P[:, 1], 0, None); out = np.zeros((len(P), 3))
+    ev = lambda p, k: LIT[p][k][0] * th + LIT[p][k][1] * th ** 2
+    for k in range(3):
+        a = np.where(pl <= 40, ev(0, k) + (ev(40, k) - ev(0, k)) * pl / 40, ev(40, k) + (ev(90, k) - ev(40, k)) * (pl - 40) / 50)
+        out[:, k] = a
+    return out
