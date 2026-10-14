@@ -179,6 +179,17 @@ laws): **worst 8.7 / 9.0 mm** over the whole 5 deg workspace (p95 7.2), clips 5.
   CADEN-7 uses a 180 deg guide). An open ring that must also clear the trunk (82 deg arm-fixed window) cannot cover that:
   **the 2R + ring follows the 8 everyday clips, not full humeral-rotation ROM.**
 
+### 8d. Can any 3-DOF rotation chain keep its singularity out of the full everyday ROM? (`singular_free.py`)
+
+A 3R chain (a1 = a2 = 90) locks when its arm-fixed axis w lines up with the base axis b (R_arm w || +-b). Searching all
+(b, w) pairs over the plausible workspace (49,543 poses, humeral rotation +-90 deg at every arm direction): the best
+3R stays only **8.7 deg** from singular (b = [-0.288, 0.537, 0.793], w along the humerus); w = the humerus axis (the
+2R + ring) gives 8.2 deg. **Counter-example from the data: no 3-DOF rotation chain is singularity-free
+with a useful margin over that full ROM.** 3 DOF can follow everyday motion with its singularity parked at a rarely used
+extreme (to be weighed with real ADL distributions: AMASS / OpenCap); a margin over the full ROM needs the 4th joint the
+cap allows (4R + the slider exception). The plausible-ROM box is generous (+-90 deg rotation everywhere); real joint
+limits shrink it, which is exactly what the user's OpenCap / AMASS data must decide.
+
 ## Decision
 
 1. **A thorax back plate with a chain whose axes all meet at the GH centre is ruled out** (section 3: >= 12.7 mm
