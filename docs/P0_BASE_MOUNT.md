@@ -97,6 +97,28 @@ A design fitted to one girdle law loses 1-6 mm when the law changes by plausible
 move from the rig law to measured trajectories (OpenSim Seth 2016; the user's OpenCap shoulder markers) before any
 3-DOF design is committed to CAD at L2, and why P3 fits against several laws at once (minimax).
 
+## 7. Against published girdle motion (the literature law, not the rig)
+
+`docs/research/gh_translation_literature.md`: bone-pin clavicle / scapula angles (Ludewig 2009) through a rigid
+clavicle chain put the GH centre 35 mm up at 90 deg scaption (rig 12.7), plus 5-24 mm posterior and 10-28 mm medial,
+plane-dependent; +-7-12 mm (1 SD) of it is not a function of arm orientation. `girdle.lift_literature` +
+`p0_literature.py` (`p0_literature.json`):
+
+| design on a thorax plate | fitted to | worst, rig law (fit / held-out) | worst, literature law (fit / held-out) |
+|---|---|---|---|
+| spherical chain (the reference) | - | 25.3 | **64.9** |
+| P0 3R / 2R + ring (rig-fitted) | rig | 5.8 / 6.8 | **47.0 / 47.1** |
+| 3R, offset axes | literature | 39.6 / 23.7 | 10.7 / **25.9** |
+| 2R + ring, offset axes | literature | 32.8 / 26.0 | 19.2 / 21.7 |
+| 3R, offset axes | both laws | 23.3 / 15.9 | 22.9 / 31.9 |
+| 2R + ring, offset axes | both laws | 23.0 / 19.4 | 22.8 / 26.4 |
+
+plus the non-repeatable +-7-12 mm, which no chain without a girdle joint can follow. **Counter-example from the data:
+no rigid chain on a thorax back plate with at most 4 DOF and no girdle joint keeps the GH misalignment under the band
+for published girdle motion** (best 10.7 mm on the fitting clips, 22-26 mm held out). Unless the user's own girdle
+moves far less than published (ruler test / OpenCap, data/raw/README.md items 0 and 2), the thorax-plate premise of R10
+and the 4-DOF cap cannot both hold with the 1 cm rule.
+
 ## Decision
 
 1. **A thorax back plate with a chain whose axes all meet at the GH centre is ruled out** (section 3: >= 12.7 mm
@@ -117,3 +139,14 @@ move from the rig law to measured trajectories (OpenSim Seth 2016; the user's Op
    design fails it at 25.3 mm, and its base part enters the body by 44 mm on a thorax plate.
 5. Before L2 CAD of any 3-DOF design: the girdle law from OpenSim Seth 2016 and the user's OpenCap (data/raw/README.md
    items 1-2).
+6. **Section 7 overturns item 2 if the literature holds** (it is the better evidence: bone pins vs a hand-made law).
+   Three ways forward, for the user to choose (they change R10 or R5):
+   - **A. 3 DOF on a girdle-riding base** (a strapped saddle over the acromion / clavicle / scapular spine; no rigid
+     back plate, or one joined through a soft tether): the base follows the girdle, which is what every design so far
+     assumed (scapula frame). Error = skin slip over the acromion: ~5-7 deg below 100-120 deg elevation, up to 25 deg
+     above (literature) - small below shoulder height, large overhead. Reaction loads go through the girdle skin (R11).
+     Keeps 3 DOF; R10 is rewritten as "base tracks the girdle within X mm".
+   - **B. Thorax plate + a passive girdle mechanism** (elevation + protraction, unactuated) + 3 actuated shoulder DOF:
+     3 actuators, 5 DOF in total - over the cap of 4.
+   - **C. Thorax plate + 3 rigid offset-axis DOF** (this P0's design): only if the user's measured girdle motion is
+     close to the rig law (residual 5.8-6.8 mm), i.e. the ruler test shows ~13 mm, not ~35 mm, of acromion rise at 90 deg.
