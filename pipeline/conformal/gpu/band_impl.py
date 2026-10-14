@@ -320,7 +320,10 @@ class Band:
         """pins (Pn, C, N, 3) in the scapula frame + validity (Pn, C) for poses with humerus rotations HG (Pn,3,3).
         Optional sliding cuff (d["cuff"] = {"range": deg, "branch": +-1}): JN's axis W turns about the humerus axis by
         phi (the cuff slides round the arm). N >= 4: phi is one more spare coordinate of the grid. N == 3: phi closes the
-        chain (p3 on W's cone round the humerus with angle a2 to p2), the base joint angle is the spare."""
+        chain (p3 on W's cone round the humerus with angle a2 to p2), the base joint angle is the spare.
+        N == 3 without a cuff is the pure 3R chain (3 DOF): m = 0, a single configuration (C = 1, Q of shape (1, 0)),
+        p2 from the two-circle closure of b and HG W on the design's branch; tri_ok keeps J2 sing_deg away from the
+        3R singularity (all three axes coplanar). Nothing else is spare, so joint speeds are not limited (max_rate)."""
         t = self.t; N = d["n"]; A = [x * D2R for x in d["a"]]; cuff = d.get("cuff")
         b = t.tensor(bvec(d["az"], d["el"]), device=self.dev, dtype=self.f32)
         W0 = t.tensor(w_dir(*d["w"]), device=self.dev, dtype=self.f32); hA = t.tensor([0.0, -1.0, 0.0], device=self.dev)
