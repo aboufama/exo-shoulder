@@ -19,6 +19,16 @@ _c = os.getcwd(); os.chdir(os.path.join(EXO, "avg")); import design_search as DS
 D2R = math.pi / 180; HUB_R, T_LO, T_LINK, T_BOT = 17.0, 5.0, 5.5, 6.5; RESUME = 4.0
 SRC, IDX, NAME = sys.argv[1], int(sys.argv[2]), sys.argv[3]; SUB = sys.argv[4] if len(sys.argv) > 4 else NAME
 R = json.load(open(SRC))["results"][IDX]; N = R["n"]; A = [x * D2R for x in R["a"]]; m = N - 3
+if R.get("err"): sys.exit(f"band_to_design: result {IDX} of {SRC} was rejected by the evaluator: {R['err']}")
+ARM_MM = None
+if __name__ == "__main__":                                                          # every link a real arm (docs/FINDINGS.md "Short link")
+    sys.path.insert(0, os.path.join(EXO, "conformal", "gpu")); import band_impl as BI
+    if "faces" in R and "lower" in R:                                               # clear gap between each link's hub seats, mm
+        ARM_MM = [round(c, 2) for c in BI.arms_ok(R["a"], BI.hub_heights(N, R["faces"], R["lower"], float(R.get("stack", BI.STACK))), 0.0, float(R.get("hub_r", HUB_R)))[2]]
+    _probs = BI.design_link_report(R, ARM_MM, float(os.environ.get("MIN_ARC", BI.MIN_ARC)), float(os.environ.get("MIN_ARM_MM", BI.MIN_ARM_MM)), hub_r=float(R.get("hub_r", HUB_R)))
+    if _probs:                                                                      # a scoring proxy is fine; CAD is refused downstream
+        print("\n" + "!" * 110 + f"\nWARNING band_to_design ({SRC} #{IDX} -> {NAME}): a link without a real arm\n  " + "\n  ".join(_probs)
+              + "\n  usable as a scoring proxy only: make_cad_design.py refuses it (override: --allow-short-link / ALLOW_SHORT_LINK=1)\n" + "!" * 110 + "\n", file=sys.stderr, flush=True)
 Z = np.load(io.BytesIO(gzip.decompress(base64.b64decode(open(os.path.join(EXO, "conformal", "band_poses.b64")).read()))))
 POSE, CID, FI, NAMES, FPS = Z["POSE"], Z["CID"], Z["FI"], [str(x) for x in Z["NAMES"]], float(Z["FPS"])
 ST = int(R.get("stride", 1)); POSE, CID, FI = POSE[::ST], CID[::ST], FI[::ST]; FPS = FPS / ST          # frames the evaluator saw
@@ -264,6 +274,7 @@ else:
     sc.add_geometry(blk, node_name="H|BOTTOM JN hub block (proxy)|0", geom_name="H|hubblock")
 sc.export(os.path.join(DD, "exo.glb"))
 axes = [["base", [1.0, 0, 0]]] + [[f"l{k}", [1.0, 0, 0]] for k in range(1, N)] + [[f"l{N - 1}", [math.cos(A[N - 2]), math.sin(A[N - 2]), 0.0]]]
-json.dump(dict(subtitle=SUB, clips=clips, axes=axes, design={k: R[k] for k in ("n", "az", "el", "a", "w", "branch", "order", "zj4", "score", "follow", "in_band")}),
+json.dump(dict(subtitle=SUB, clips=clips, axes=axes, design=dict({k: R[k] for k in ("n", "az", "el", "a", "w", "branch", "order", "zj4", "score", "follow", "in_band")},
+                                                                  hub_r=float(R.get("hub_r", HUB_R)), arm_mm=ARM_MM)),
           open(os.path.join(DD, "clips.json"), "w"), separators=(",", ":"))
 print("wrote", DD)
