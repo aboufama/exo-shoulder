@@ -148,6 +148,23 @@ it. Residual misalignment = the part perpendicular to the slide (still linear in
 - A pure-vertical 15 mm shrug still leaves 11-14 mm (it is off the slide axis); a real shrug moves along clavicle
   elevation, close to the slide - to be checked against the OpenSim Seth model and the user's OpenCap.
 
+### 8b. Against all three girdle laws (rig, literature chain, OpenSim Seth model) - `p0_selfalign3.json`
+
+The OpenSim Seth 2016 model driven by published angles (docs/research/opensim_seth2016_gh.md) lands between the rig and
+the literature chain (superior GH at 90 deg: rig 12.7, Seth 20-29, chain 24-38 mm; much less posterior / medial than the
+chain), and +-1 SD of the published angles moves GH by 19-22 mm. Fitting one design to all three laws at once:
+
+| design (thorax plate + one torque-free slider) | worst over the 3 laws, fitting clips | held-out: rig / literature | slider travel | singular margin fit / held-out |
+|---|---|---|---|---|
+| spherical chain | 11.1 mm | 6.6 / 10.6 | 63 mm | - |
+| **2R + ring, offset axes** | **6.8 mm** | 4.7 / 10.1 | 52 mm | 23.5 / 17.0 deg |
+| 3R, offset axes | 6.3 mm | 5.8 / 12.2 | 58 mm | 20.0 / 25.8 deg |
+
+Fitted to ONE law the same families reach 2.3-4.0 mm (section 8). **The remaining ~6.5 mm is the disagreement between
+the published girdle models (5-16 mm in AP / ML), not a limit of the mechanism**: the next number has to come from the
+user's own girdle (ruler test, OpenCap - data/raw/README.md items 0 and 2), and the design is then fitted to that person
+(with the population spread handled by the slider + liner compliance, and checked on SMPL-X bodies later).
+
 ## Decision
 
 1. **A thorax back plate with a chain whose axes all meet at the GH centre is ruled out** (section 3: >= 12.7 mm
