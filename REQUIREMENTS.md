@@ -19,13 +19,23 @@ Added by the user on 2026-10-14 (their words):
 So: **3 DOF is the target** (the cap stays 4); **10 mm stays the target band**, 14 mm is allowed where it is really
 needed (e.g. nested links) and is always reported separately (score_design.py `BAND_HI=14`).
 
+And later the same day (their words): "Yes you can download, I mean kinematicly 3dof so nothing is powered we view all
+joints as the same. Unless you can find a way to leave one joint unpowered and not require torque to it to use full ROM
+that is an exception if you know what I'm saying you can make it as thin as possible, we're using titanium after all".
+So: **DOF are counted kinematically - every joint counts, powered or not.** **One exception**: a joint that is left
+unpowered and needs no torque (no effort from the wearer) over the full ROM, e.g. a gravity-balanced, self-aligning
+passive slider that only lets the rotation centre follow the girdle. **Links as thin as titanium allows** (thickness is
+a design variable sized by FEA, not a fixed 5.5 mm). The user approved downloading OpenSim and the Seth 2016 model and
+accepted its CC BY-NC-SA 3.0 licence (the experimental bone-pin data in that archive is restricted to verifying the
+Seth model and was not used).
+
 | ID | Requirement | Threshold | Judge | Why this threshold |
 |---|---|---|---|---|
 | R1 | Proximity: share of the covered skin that is 2-10 mm from the metal, while following | >= 90 % | `pipeline/full-exo/score_design.py` (exact posed skin, 30 fps) | the 1 cm rule; 2 mm keeps the liner/clearance, 10 mm is the user's limit |
 | R2 | No part enters the body, any frame of any clip | <= 0.5 mm | `judge/body_contact.py` (exact signed distance to the posed, closed body mesh) | 0.5 mm = tessellation tolerance; anything more is visible pass-through |
 | R3 | The exo follows the arm (frames tracked rather than held at a joint limit) | >= 95 % of frames | `score_design.py` | a held frame means the user's arm is blocked |
 | R4 | Overhead works: "Raise overhead" clip score | >= 80 % | `score_design.py` | the user called earlier designs "unusable" overhead |
-| R5 | Degrees of freedom | <= 4 | `design.json` | user cap (2026-10-14) |
+| R5 | Degrees of freedom, counted kinematically (every joint, powered or not) | <= 4 (target 3; one torque-free passive self-aligning joint is the only exception) | `design.json` | user cap and counting rule (2026-10-14) |
 | R6 | No interference between parts that move relative to each other | <= 0.15 mm | `judge/part_contact.py` (geometry only) | designed coaxial fits (pin in sleeve, washer on seat) sit inside 0.15 mm |
 | R7 | Every custom part is one valid, closed solid | all | `judge/part_validity.py` (OCC BRepCheck on the exported STEP) | a supplier must be able to read and machine it |
 | R8 | Custom-part mass | <= 300 g (proposed) | `parts_full.json` (mesh volume x density) | placeholder budget, **confirm with the user** |
