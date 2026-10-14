@@ -1,0 +1,308 @@
+{
+ "rest (Raise overhead f0)": {
+  "pose": [
+   30,
+   3,
+   -30,
+   12,
+   0
+  ],
+  "parts": {
+   "UPPER ARM CUFF (conforma s<250 (neck+hub, ours)": {
+    "depth_mm": 0.0,
+    "min_sd": 4.51,
+    "region": "upper arm",
+    "s": 204
+   },
+   "IGUS THRUST WASHER, 30mm s>=250 (user's original elbow end)": {
+    "depth_mm": 0.91,
+    "min_sd": -0.91,
+    "region": "forearm/hand",
+    "s": 342
+   },
+   "MIDDLE": {
+    "depth_mm": 2.74,
+    "min_sd": -2.74,
+    "region": "forearm/hand"
+   },
+   "TOP s>=250 (user's original elbow end)": {
+    "depth_mm": 0.0,
+    "min_sd": 3.26,
+    "region": "forearm/hand",
+    "s": 344
+   },
+   "FOREARM CUFF": {
+    "depth_mm": 9.1,
+    "min_sd": -9.1,
+    "region": "forearm/hand"
+   },
+   "BOTTOM + neck + JN hub ( s<250 (neck+hub, ours)": {
+    "depth_mm": 0.0,
+    "min_sd": 5.77,
+    "region": "upper arm",
+    "s": 64
+   },
+   "BOTTOM + neck + JN hub ( s>=250 (user's original elbow end)": {
+    "depth_mm": 1.86,
+    "min_sd": -1.86,
+    "region": "forearm/hand",
+    "s": 345
+   }
+  }
+ },
+ "Comb hair f67 (flex 120)": {
+  "pose": [
+   60,
+   120,
+   -59,
+   120,
+   0
+  ],
+  "parts": {
+   "UPPER ARM CUFF (conforma s<250 (neck+hub, ours)": {
+    "depth_mm": 0.0,
+    "min_sd": 3.31,
+    "region": "upper arm",
+    "s": 230
+   },
+   "IGUS THRUST WASHER, 30mm s>=250 (user's original elbow end)": {
+    "depth_mm": 2.65,
+    "min_sd": -2.65,
+    "region": "forearm/hand",
+    "s": 309
+   },
+   "MIDDLE": {
+    "depth_mm": 5.79,
+    "min_sd": -5.79,
+    "region": "forearm/hand"
+   },
+   "TOP s>=250 (user's original elbow end)": {
+    "depth_mm": 0.0,
+    "min_sd": 0.56,
+    "region": "forearm/hand",
+    "s": 308
+   },
+   "FOREARM CUFF": {
+    "depth_mm": 17.24,
+    "min_sd": -17.24,
+    "region": "forearm/hand"
+   },
+   "BOTTOM + neck + JN hub ( s<250 (neck+hub, ours)": {
+    "depth_mm": 0.0,
+    "min_sd": 4.51,
+    "region": "upper arm",
+    "s": 25
+   },
+   "BOTTOM + neck + JN hub ( s>=250 (user's original elbow end)": {
+    "depth_mm": 7.71,
+    "min_sd": -7.71,
+    "region": "forearm/hand",
+    "s": 280
+   }
+  }
+ },
+ "Drink f125 (flex 124)": {
+  "pose": [
+   91,
+   51,
+   -57,
+   124,
+   0
+  ],
+  "parts": {
+   "UPPER ARM CUFF (conforma s<250 (neck+hub, ours)": {
+    "depth_mm": 0.0,
+    "min_sd": 4.0,
+    "region": "upper arm",
+    "s": 229
+   },
+   "IGUS THRUST WASHER, 30mm s>=250 (user's original elbow end)": {
+    "depth_mm": 2.24,
+    "min_sd": -2.24,
+    "region": "forearm/hand",
+    "s": 309
+   },
+   "MIDDLE": {
+    "depth_mm": 5.23,
+    "min_sd": -5.23,
+    "region": "forearm/hand"
+   },
+   "TOP s>=250 (user's original elbow end)": {
+    "depth_mm": 2.24,
+    "min_sd": -2.24,
+    "region": "forearm/hand",
+    "s": 308
+   },
+   "FOREARM CUFF": {
+    "depth_mm": 20.0,
+    "min_sd": -20.0,
+    "region": "forearm/hand"
+   },
+   "BOTTOM + neck + JN hub ( s<250 (neck+hub, ours)": {
+    "depth_mm": 0.0,
+    "min_sd": 10.4,
+    "region": "upper arm",
+    "s": 239
+   },
+   "BOTTOM + neck + JN hub ( s>=250 (user's original elbow end)": {
+    "depth_mm": 3.19,
+    "min_sd": -3.19,
+    "region": "forearm/hand",
+    "s": 295
+   }
+  }
+ },
+ "Wash opposite shoulder f68": {
+  "pose": [
+   131,
+   37,
+   -76,
+   121,
+   0
+  ],
+  "parts": {
+   "UPPER ARM CUFF (conforma s<250 (neck+hub, ours)": {
+    "depth_mm": 0.07,
+    "min_sd": -0.07,
+    "region": "chest",
+    "s": 197
+   },
+   "IGUS THRUST WASHER, 30mm s>=250 (user's original elbow end)": {
+    "depth_mm": 2.26,
+    "min_sd": -2.26,
+    "region": "forearm/hand",
+    "s": 309
+   },
+   "MIDDLE": {
+    "depth_mm": 5.31,
+    "min_sd": -5.31,
+    "region": "forearm/hand"
+   },
+   "TOP s>=250 (user's original elbow end)": {
+    "depth_mm": 0.0,
+    "min_sd": 1.0,
+    "region": "forearm/hand",
+    "s": 308
+   },
+   "FOREARM CUFF": {
+    "depth_mm": 22.34,
+    "min_sd": -22.34,
+    "region": "chest"
+   },
+   "BOTTOM + neck + JN hub ( s<250 (neck+hub, ours)": {
+    "depth_mm": 0.0,
+    "min_sd": 7.71,
+    "region": "chest",
+    "s": 198
+   },
+   "BOTTOM + neck + JN hub ( s>=250 (user's original elbow end)": {
+    "depth_mm": 5.65,
+    "min_sd": -5.65,
+    "region": "forearm/hand",
+    "s": 280
+   }
+  }
+ },
+ "Walking f0": {
+  "pose": [
+   90,
+   4,
+   -90,
+   18,
+   0
+  ],
+  "parts": {
+   "UPPER ARM CUFF (conforma s<250 (neck+hub, ours)": {
+    "depth_mm": 0.0,
+    "min_sd": 4.32,
+    "region": "upper arm",
+    "s": 204
+   },
+   "IGUS THRUST WASHER, 30mm s>=250 (user's original elbow end)": {
+    "depth_mm": 0.9,
+    "min_sd": -0.9,
+    "region": "forearm/hand",
+    "s": 340
+   },
+   "MIDDLE": {
+    "depth_mm": 2.78,
+    "min_sd": -2.78,
+    "region": "forearm/hand"
+   },
+   "TOP s>=250 (user's original elbow end)": {
+    "depth_mm": 0.0,
+    "min_sd": 3.28,
+    "region": "forearm/hand",
+    "s": 343
+   },
+   "FOREARM CUFF": {
+    "depth_mm": 19.39,
+    "min_sd": -19.39,
+    "region": "other trunk"
+   },
+   "BOTTOM + neck + JN hub ( s<250 (neck+hub, ours)": {
+    "depth_mm": 0.0,
+    "min_sd": 5.55,
+    "region": "upper arm",
+    "s": 64
+   },
+   "BOTTOM + neck + JN hub ( s>=250 (user's original elbow end)": {
+    "depth_mm": 1.94,
+    "min_sd": -1.94,
+    "region": "forearm/hand",
+    "s": 342
+   }
+  }
+ },
+ "Reach a high shelf f75": {
+  "pose": [
+   82,
+   132,
+   -82,
+   6,
+   0
+  ],
+  "parts": {
+   "UPPER ARM CUFF (conforma s<250 (neck+hub, ours)": {
+    "depth_mm": 0.0,
+    "min_sd": 2.86,
+    "region": "upper arm",
+    "s": 169
+   },
+   "IGUS THRUST WASHER, 30mm s>=250 (user's original elbow end)": {
+    "depth_mm": 0.56,
+    "min_sd": -0.56,
+    "region": "forearm/hand",
+    "s": 343
+   },
+   "MIDDLE": {
+    "depth_mm": 2.45,
+    "min_sd": -2.45,
+    "region": "forearm/hand"
+   },
+   "TOP s>=250 (user's original elbow end)": {
+    "depth_mm": 0.0,
+    "min_sd": 3.62,
+    "region": "forearm/hand",
+    "s": 346
+   },
+   "FOREARM CUFF": {
+    "depth_mm": 8.85,
+    "min_sd": -8.85,
+    "region": "forearm/hand"
+   },
+   "BOTTOM + neck + JN hub ( s<250 (neck+hub, ours)": {
+    "depth_mm": 0.0,
+    "min_sd": 3.41,
+    "region": "upper arm",
+    "s": 19
+   },
+   "BOTTOM + neck + JN hub ( s>=250 (user's original elbow end)": {
+    "depth_mm": 1.58,
+    "min_sd": -1.58,
+    "region": "forearm/hand",
+    "s": 345
+   }
+  }
+ }
+}

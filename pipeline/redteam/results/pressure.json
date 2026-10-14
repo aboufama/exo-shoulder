@@ -1,0 +1,2633 @@
+{
+ "step": 6,
+ "frames": 223,
+ "near_filter_mm": 15.0,
+ "parts": {
+  "F|FOREARM CUFF": {
+   "owner": "user",
+   "frames_near": 223,
+   "min_sd_mm": -14.93,
+   "worst": {
+    "region": "forearm/hand",
+    "clip": "Comb hair",
+    "frame": 67,
+    "pose": [
+     60,
+     120,
+     -59,
+     120
+    ],
+    "held": false,
+    "world": [
+     184,
+     145,
+     114
+    ],
+    "theta_arm": -40,
+    "s_arm": 260
+   },
+   "frames_within_2mm": 223,
+   "frames_inside_0p5": 223,
+   "regions_within_2mm": {
+    "forearm/hand": 161,
+    "upper arm": 33,
+    "chest": 23,
+    "other trunk": 6
+   },
+   "clips_within_2mm": {
+    "Raise overhead": 31,
+    "Drink from a cup": 29,
+    "Comb hair": 34,
+    "Reach a high shelf": 26,
+    "Wash opposite shoulder": 32,
+    "Reach back pocket": 24,
+    "Wave": 29,
+    "Walking arm swing": 18
+   },
+   "max_vertices_within_2mm": 1566,
+   "share_frames_within_2mm": 1.0
+  },
+  "F|Hex socket head countersunk screw grade C M4x0.7 x 8": {
+   "owner": "user",
+   "frames_near": 223,
+   "min_sd_mm": -8.32,
+   "worst": {
+    "region": "forearm/hand",
+    "clip": "Comb hair",
+    "frame": 169,
+    "pose": [
+     68,
+     114,
+     -59,
+     96
+    ],
+    "held": false,
+    "world": [
+     233,
+     198,
+     105
+    ],
+    "theta_arm": -52,
+    "s_arm": 314
+   },
+   "frames_within_2mm": 223,
+   "frames_inside_0p5": 223,
+   "regions_within_2mm": {
+    "forearm/hand": 223
+   },
+   "clips_within_2mm": {
+    "Raise overhead": 31,
+    "Drink from a cup": 29,
+    "Comb hair": 34,
+    "Reach a high shelf": 26,
+    "Wash opposite shoulder": 32,
+    "Reach back pocket": 24,
+    "Wave": 29,
+    "Walking arm swing": 18
+   },
+   "max_vertices_within_2mm": 3089,
+   "share_frames_within_2mm": 1.0
+  },
+  "H|BOTTOM + neck + JN hub (one 5-axis part, 7075-T6 bead blasted)": {
+   "owner": "BOTTOM (user part, modifiable)",
+   "frames_near": 223,
+   "min_sd_mm": -7.71,
+   "worst": {
+    "region": "forearm/hand",
+    "clip": "Comb hair",
+    "frame": 67,
+    "pose": [
+     60,
+     120,
+     -59,
+     120
+    ],
+    "held": false,
+    "world": [
+     173,
+     173,
+     149
+    ],
+    "theta_arm": -12,
+    "s_arm": 280
+   },
+   "frames_within_2mm": 223,
+   "frames_inside_0p5": 223,
+   "regions_within_2mm": {
+    "forearm/hand": 216,
+    "upper arm": 7
+   },
+   "clips_within_2mm": {
+    "Raise overhead": 31,
+    "Drink from a cup": 29,
+    "Comb hair": 34,
+    "Reach a high shelf": 26,
+    "Wash opposite shoulder": 32,
+    "Reach back pocket": 24,
+    "Wave": 29,
+    "Walking arm swing": 18
+   },
+   "max_vertices_within_2mm": 106,
+   "share_frames_within_2mm": 1.0
+  },
+  "F|MIDDLE": {
+   "owner": "user",
+   "frames_near": 223,
+   "min_sd_mm": -5.77,
+   "worst": {
+    "region": "forearm/hand",
+    "clip": "Comb hair",
+    "frame": 67,
+    "pose": [
+     60,
+     120,
+     -59,
+     120
+    ],
+    "held": false,
+    "world": [
+     183,
+     193,
+     143
+    ],
+    "theta_arm": -28,
+    "s_arm": 295
+   },
+   "frames_within_2mm": 223,
+   "frames_inside_0p5": 223,
+   "regions_within_2mm": {
+    "forearm/hand": 223
+   },
+   "clips_within_2mm": {
+    "Raise overhead": 31,
+    "Drink from a cup": 29,
+    "Comb hair": 34,
+    "Reach a high shelf": 26,
+    "Wash opposite shoulder": 32,
+    "Reach back pocket": 24,
+    "Wave": 29,
+    "Walking arm swing": 18
+   },
+   "max_vertices_within_2mm": 1664,
+   "share_frames_within_2mm": 1.0
+  },
+  "H|IGUS THRUST WASHER, 30mm ID, 39mm OD, 1.5mm T, IGLIDE J": {
+   "owner": "user",
+   "frames_near": 223,
+   "min_sd_mm": -2.79,
+   "worst": {
+    "region": "forearm/hand",
+    "clip": "Comb hair",
+    "frame": 163,
+    "pose": [
+     75,
+     134,
+     -65,
+     111
+    ],
+    "held": false,
+    "world": [
+     185,
+     235,
+     99
+    ],
+    "theta_arm": -5,
+    "s_arm": 310
+   },
+   "frames_within_2mm": 223,
+   "frames_inside_0p5": 223,
+   "regions_within_2mm": {
+    "forearm/hand": 223
+   },
+   "clips_within_2mm": {
+    "Raise overhead": 31,
+    "Drink from a cup": 29,
+    "Comb hair": 34,
+    "Reach a high shelf": 26,
+    "Wash opposite shoulder": 32,
+    "Reach back pocket": 24,
+    "Wave": 29,
+    "Walking arm swing": 18
+   },
+   "max_vertices_within_2mm": 258,
+   "share_frames_within_2mm": 1.0
+  },
+  "H|TOP": {
+   "owner": "user",
+   "frames_near": 223,
+   "min_sd_mm": -2.24,
+   "worst": {
+    "region": "forearm/hand",
+    "clip": "Drink from a cup",
+    "frame": 125,
+    "pose": [
+     91,
+     51,
+     -57,
+     124
+    ],
+    "held": false,
+    "world": [
+     261,
+     -168,
+     45
+    ],
+    "theta_arm": 1,
+    "s_arm": 308
+   },
+   "frames_within_2mm": 70,
+   "frames_inside_0p5": 3,
+   "regions_within_2mm": {
+    "forearm/hand": 70
+   },
+   "clips_within_2mm": {
+    "Drink from a cup": 21,
+    "Comb hair": 23,
+    "Wash opposite shoulder": 26
+   },
+   "max_vertices_within_2mm": 276,
+   "share_frames_within_2mm": 0.314
+  },
+  "H|Revolve1[1]": {
+   "owner": "user",
+   "frames_near": 223,
+   "min_sd_mm": -1.03,
+   "worst": {
+    "region": "upper arm",
+    "clip": "Comb hair",
+    "frame": 169,
+    "pose": [
+     68,
+     114,
+     -59,
+     96
+    ],
+    "held": false,
+    "world": [
+     240,
+     158,
+     144
+    ],
+    "theta_arm": -7,
+    "s_arm": 317
+   },
+   "frames_within_2mm": 223,
+   "frames_inside_0p5": 162,
+   "regions_within_2mm": {
+    "forearm/hand": 14,
+    "upper arm": 209
+   },
+   "clips_within_2mm": {
+    "Raise overhead": 31,
+    "Drink from a cup": 29,
+    "Comb hair": 34,
+    "Reach a high shelf": 26,
+    "Wash opposite shoulder": 32,
+    "Reach back pocket": 24,
+    "Wave": 29,
+    "Walking arm swing": 18
+   },
+   "max_vertices_within_2mm": 662,
+   "share_frames_within_2mm": 1.0
+  },
+  "H|Revolve1[3]": {
+   "owner": "user",
+   "frames_near": 223,
+   "min_sd_mm": -0.59,
+   "worst": {
+    "region": "upper arm",
+    "clip": "Raise overhead",
+    "frame": 0,
+    "pose": [
+     30,
+     3,
+     -30,
+     12
+    ],
+    "held": false,
+    "world": [
+     16,
+     -336,
+     68
+    ],
+    "theta_arm": -8,
+    "s_arm": 339
+   },
+   "frames_within_2mm": 223,
+   "frames_inside_0p5": 44,
+   "regions_within_2mm": {
+    "upper arm": 212,
+    "forearm/hand": 11
+   },
+   "clips_within_2mm": {
+    "Raise overhead": 31,
+    "Drink from a cup": 29,
+    "Comb hair": 34,
+    "Reach a high shelf": 26,
+    "Wash opposite shoulder": 32,
+    "Reach back pocket": 24,
+    "Wave": 29,
+    "Walking arm swing": 18
+   },
+   "max_vertices_within_2mm": 284,
+   "share_frames_within_2mm": 1.0
+  },
+  "H|Revolve3": {
+   "owner": "user",
+   "frames_near": 223,
+   "min_sd_mm": -0.43,
+   "worst": {
+    "region": "upper arm",
+    "clip": "Raise overhead",
+    "frame": 0,
+    "pose": [
+     30,
+     3,
+     -30,
+     12
+    ],
+    "held": false,
+    "world": [
+     17,
+     -333,
+     68
+    ],
+    "theta_arm": -8,
+    "s_arm": 337
+   },
+   "frames_within_2mm": 223,
+   "frames_inside_0p5": 0,
+   "regions_within_2mm": {
+    "upper arm": 160,
+    "forearm/hand": 63
+   },
+   "clips_within_2mm": {
+    "Raise overhead": 31,
+    "Drink from a cup": 29,
+    "Comb hair": 34,
+    "Reach a high shelf": 26,
+    "Wash opposite shoulder": 32,
+    "Reach back pocket": 24,
+    "Wave": 29,
+    "Walking arm swing": 18
+   },
+   "max_vertices_within_2mm": 667,
+   "share_frames_within_2mm": 1.0
+  },
+  "H|UPPER ARM CUFF (conformal G2 shell, AlSi10Mg bead blasted)": {
+   "owner": "custom",
+   "frames_near": 223,
+   "min_sd_mm": -0.07,
+   "worst": {
+    "region": "chest",
+    "clip": "Wash opposite shoulder",
+    "frame": 68,
+    "pose": [
+     131,
+     37,
+     -76,
+     121
+    ],
+    "held": false,
+    "world": [
+     144,
+     -136,
+     -58
+    ],
+    "theta_arm": -20,
+    "s_arm": 197
+   },
+   "frames_within_2mm": 21,
+   "frames_inside_0p5": 0,
+   "regions_within_2mm": {
+    "chest": 21
+   },
+   "clips_within_2mm": {
+    "Wash opposite shoulder": 21
+   },
+   "max_vertices_within_2mm": 217,
+   "share_frames_within_2mm": 0.094
+  },
+  "H|M4 ULTRA LOW PROFILE SOCKET HEAD SCREW, 6mm L, HS STEEL": {
+   "owner": "user",
+   "frames_near": 223,
+   "min_sd_mm": 0.24,
+   "worst": {
+    "region": "upper arm",
+    "clip": "Reach a high shelf",
+    "frame": 75,
+    "pose": [
+     82,
+     132,
+     -82,
+     6
+    ],
+    "held": false,
+    "world": [
+     231,
+     233,
+     85
+    ],
+    "theta_arm": -5,
+    "s_arm": 335
+   },
+   "frames_within_2mm": 159,
+   "frames_inside_0p5": 0,
+   "regions_within_2mm": {
+    "upper arm": 154,
+    "forearm/hand": 5
+   },
+   "clips_within_2mm": {
+    "Raise overhead": 31,
+    "Drink from a cup": 11,
+    "Comb hair": 13,
+    "Reach a high shelf": 26,
+    "Wash opposite shoulder": 7,
+    "Reach back pocket": 24,
+    "Wave": 29,
+    "Walking arm swing": 18
+   },
+   "max_vertices_within_2mm": 594,
+   "share_frames_within_2mm": 0.713
+  },
+  "H|5mm D, 2.5mm H, N42 MAGNET": {
+   "owner": "user",
+   "frames_near": 223,
+   "min_sd_mm": 0.25,
+   "worst": {
+    "region": "upper arm",
+    "clip": "Raise overhead",
+    "frame": 0,
+    "pose": [
+     30,
+     3,
+     -30,
+     12
+    ],
+    "held": false,
+    "world": [
+     11,
+     -326,
+     68
+    ],
+    "theta_arm": -3,
+    "s_arm": 329
+   },
+   "frames_within_2mm": 146,
+   "frames_inside_0p5": 0,
+   "regions_within_2mm": {
+    "upper arm": 146
+   },
+   "clips_within_2mm": {
+    "Raise overhead": 31,
+    "Drink from a cup": 6,
+    "Comb hair": 8,
+    "Reach a high shelf": 26,
+    "Wash opposite shoulder": 4,
+    "Reach back pocket": 24,
+    "Wave": 29,
+    "Walking arm swing": 18
+   },
+   "max_vertices_within_2mm": 423,
+   "share_frames_within_2mm": 0.655
+  },
+  "H|CirPattern1[6]": {
+   "owner": "user",
+   "frames_near": 223,
+   "min_sd_mm": 0.32,
+   "worst": {
+    "region": "upper arm",
+    "clip": "Reach back pocket",
+    "frame": 133,
+    "pose": [
+     -8,
+     8,
+     10,
+     20
+    ],
+    "held": false,
+    "world": [
+     6,
+     -326,
+     97
+    ],
+    "theta_arm": -10,
+    "s_arm": 335
+   },
+   "frames_within_2mm": 146,
+   "frames_inside_0p5": 0,
+   "regions_within_2mm": {
+    "upper arm": 137,
+    "forearm/hand": 9
+   },
+   "clips_within_2mm": {
+    "Raise overhead": 31,
+    "Drink from a cup": 6,
+    "Comb hair": 8,
+    "Reach a high shelf": 26,
+    "Wash opposite shoulder": 4,
+    "Reach back pocket": 24,
+    "Wave": 29,
+    "Walking arm swing": 18
+   },
+   "max_vertices_within_2mm": 2236,
+   "share_frames_within_2mm": 0.655
+  },
+  "H|CirPattern1[11]": {
+   "owner": "user",
+   "frames_near": 223,
+   "min_sd_mm": 0.36,
+   "worst": {
+    "region": "upper arm",
+    "clip": "Comb hair",
+    "frame": 169,
+    "pose": [
+     68,
+     114,
+     -59,
+     96
+    ],
+    "held": false,
+    "world": [
+     241,
+     157,
+     146
+    ],
+    "theta_arm": -5,
+    "s_arm": 318
+   },
+   "frames_within_2mm": 67,
+   "frames_inside_0p5": 0,
+   "regions_within_2mm": {
+    "upper arm": 14,
+    "forearm/hand": 53
+   },
+   "clips_within_2mm": {
+    "Drink from a cup": 13,
+    "Comb hair": 26,
+    "Wash opposite shoulder": 28
+   },
+   "max_vertices_within_2mm": 2087,
+   "share_frames_within_2mm": 0.3
+  },
+  "H|CirPattern1[7]": {
+   "owner": "user",
+   "frames_near": 223,
+   "min_sd_mm": 0.43,
+   "worst": {
+    "region": "upper arm",
+    "clip": "Reach a high shelf",
+    "frame": 3,
+    "pose": [
+     60,
+     4,
+     -60,
+     35
+    ],
+    "held": false,
+    "world": [
+     32,
+     -328,
+     66
+    ],
+    "theta_arm": -12,
+    "s_arm": 332
+   },
+   "frames_within_2mm": 149,
+   "frames_inside_0p5": 0,
+   "regions_within_2mm": {
+    "upper arm": 146,
+    "forearm/hand": 3
+   },
+   "clips_within_2mm": {
+    "Raise overhead": 31,
+    "Drink from a cup": 7,
+    "Comb hair": 9,
+    "Reach a high shelf": 26,
+    "Wash opposite shoulder": 5,
+    "Reach back pocket": 24,
+    "Wave": 29,
+    "Walking arm swing": 18
+   },
+   "max_vertices_within_2mm": 2088,
+   "share_frames_within_2mm": 0.668
+  },
+  "H|CirPattern1[9]": {
+   "owner": "user",
+   "frames_near": 223,
+   "min_sd_mm": 0.47,
+   "worst": {
+    "region": "upper arm",
+    "clip": "Drink from a cup",
+    "frame": 155,
+    "pose": [
+     67,
+     26,
+     -51,
+     73
+    ],
+    "held": false,
+    "world": [
+     153,
+     -272,
+     103
+    ],
+    "theta_arm": -11,
+    "s_arm": 323
+   },
+   "frames_within_2mm": 88,
+   "frames_inside_0p5": 0,
+   "regions_within_2mm": {
+    "upper arm": 84,
+    "forearm/hand": 4
+   },
+   "clips_within_2mm": {
+    "Drink from a cup": 8,
+    "Comb hair": 9,
+    "Reach a high shelf": 9,
+    "Wash opposite shoulder": 4,
+    "Reach back pocket": 20,
+    "Wave": 26,
+    "Walking arm swing": 12
+   },
+   "max_vertices_within_2mm": 2004,
+   "share_frames_within_2mm": 0.395
+  },
+  "H|CirPattern1[5]": {
+   "owner": "user",
+   "frames_near": 215,
+   "min_sd_mm": 0.47,
+   "worst": {
+    "region": "upper arm",
+    "clip": "Raise overhead",
+    "frame": 0,
+    "pose": [
+     30,
+     3,
+     -30,
+     12
+    ],
+    "held": false,
+    "world": [
+     16,
+     -335,
+     69
+    ],
+    "theta_arm": -7,
+    "s_arm": 338
+   },
+   "frames_within_2mm": 141,
+   "frames_inside_0p5": 0,
+   "regions_within_2mm": {
+    "upper arm": 100,
+    "forearm/hand": 41
+   },
+   "clips_within_2mm": {
+    "Raise overhead": 31,
+    "Drink from a cup": 4,
+    "Comb hair": 6,
+    "Reach a high shelf": 26,
+    "Wash opposite shoulder": 3,
+    "Reach back pocket": 24,
+    "Wave": 29,
+    "Walking arm swing": 18
+   },
+   "max_vertices_within_2mm": 1972,
+   "share_frames_within_2mm": 0.632
+  },
+  "H|CirPattern1[10]": {
+   "owner": "user",
+   "frames_near": 223,
+   "min_sd_mm": 0.48,
+   "worst": {
+    "region": "upper arm",
+    "clip": "Comb hair",
+    "frame": 31,
+    "pose": [
+     48,
+     71,
+     -48,
+     84
+    ],
+    "held": false,
+    "world": [
+     210,
+     -66,
+     239
+    ],
+    "theta_arm": -9,
+    "s_arm": 320
+   },
+   "frames_within_2mm": 32,
+   "frames_inside_0p5": 0,
+   "regions_within_2mm": {
+    "upper arm": 17,
+    "forearm/hand": 15
+   },
+   "clips_within_2mm": {
+    "Drink from a cup": 8,
+    "Comb hair": 18,
+    "Reach a high shelf": 2,
+    "Wash opposite shoulder": 4
+   },
+   "max_vertices_within_2mm": 1986,
+   "share_frames_within_2mm": 0.143
+  },
+  "H|CirPattern1[8]": {
+   "owner": "user",
+   "frames_near": 223,
+   "min_sd_mm": 0.48,
+   "worst": {
+    "region": "upper arm",
+    "clip": "Comb hair",
+    "frame": 181,
+    "pose": [
+     47,
+     52,
+     -43,
+     51
+    ],
+    "held": false,
+    "world": [
+     191,
+     -162,
+     219
+    ],
+    "theta_arm": -12,
+    "s_arm": 328
+   },
+   "frames_within_2mm": 145,
+   "frames_inside_0p5": 0,
+   "regions_within_2mm": {
+    "upper arm": 141,
+    "forearm/hand": 4
+   },
+   "clips_within_2mm": {
+    "Raise overhead": 31,
+    "Drink from a cup": 9,
+    "Comb hair": 11,
+    "Reach a high shelf": 17,
+    "Wash opposite shoulder": 6,
+    "Reach back pocket": 24,
+    "Wave": 29,
+    "Walking arm swing": 18
+   },
+   "max_vertices_within_2mm": 2034,
+   "share_frames_within_2mm": 0.65
+  },
+  "H|CirPattern1[12]": {
+   "owner": "user",
+   "frames_near": 223,
+   "min_sd_mm": 0.8,
+   "worst": {
+    "region": "upper arm",
+    "clip": "Comb hair",
+    "frame": 163,
+    "pose": [
+     75,
+     134,
+     -65,
+     111
+    ],
+    "held": false,
+    "world": [
+     191,
+     237,
+     103
+    ],
+    "theta_arm": -1,
+    "s_arm": 317
+   },
+   "frames_within_2mm": 69,
+   "frames_inside_0p5": 0,
+   "regions_within_2mm": {
+    "upper arm": 58,
+    "forearm/hand": 11
+   },
+   "clips_within_2mm": {
+    "Drink from a cup": 20,
+    "Comb hair": 23,
+    "Wash opposite shoulder": 26
+   },
+   "max_vertices_within_2mm": 1393,
+   "share_frames_within_2mm": 0.309
+  },
+  "H|CirPattern1[4]": {
+   "owner": "user",
+   "frames_near": 160,
+   "min_sd_mm": 1.23,
+   "worst": {
+    "region": "upper arm",
+    "clip": "Reach a high shelf",
+    "frame": 75,
+    "pose": [
+     82,
+     132,
+     -82,
+     6
+    ],
+    "held": false,
+    "world": [
+     236,
+     236,
+     86
+    ],
+    "theta_arm": -4,
+    "s_arm": 340
+   },
+   "frames_within_2mm": 56,
+   "frames_inside_0p5": 0,
+   "regions_within_2mm": {
+    "forearm/hand": 47,
+    "upper arm": 9
+   },
+   "clips_within_2mm": {
+    "Raise overhead": 31,
+    "Drink from a cup": 2,
+    "Comb hair": 4,
+    "Reach a high shelf": 11,
+    "Wash opposite shoulder": 2,
+    "Reach back pocket": 3,
+    "Walking arm swing": 3
+   },
+   "max_vertices_within_2mm": 782,
+   "share_frames_within_2mm": 0.251
+  },
+  "H|CirPattern1[13]": {
+   "owner": "user",
+   "frames_near": 223,
+   "min_sd_mm": 1.57,
+   "worst": {
+    "region": "upper arm",
+    "clip": "Drink from a cup",
+    "frame": 119,
+    "pose": [
+     93,
+     61,
+     -52,
+     128
+    ],
+    "held": false,
+    "world": [
+     294,
+     -128,
+     29
+    ],
+    "theta_arm": 3,
+    "s_arm": 317
+   },
+   "frames_within_2mm": 20,
+   "frames_inside_0p5": 0,
+   "regions_within_2mm": {
+    "upper arm": 20
+   },
+   "clips_within_2mm": {
+    "Drink from a cup": 15,
+    "Comb hair": 4,
+    "Wash opposite shoulder": 1
+   },
+   "max_vertices_within_2mm": 363,
+   "share_frames_within_2mm": 0.09
+  },
+  "H|CirPattern1[3]": {
+   "owner": "user",
+   "frames_near": 179,
+   "min_sd_mm": 2.36,
+   "worst": {
+    "region": "forearm/hand",
+    "clip": "Reach a high shelf",
+    "frame": 75,
+    "pose": [
+     82,
+     132,
+     -82,
+     6
+    ],
+    "held": false,
+    "world": [
+     239,
+     233,
+     87
+    ],
+    "theta_arm": 0,
+    "s_arm": 341
+   },
+   "frames_within_2mm": 0,
+   "frames_inside_0p5": 0,
+   "regions_within_2mm": {},
+   "clips_within_2mm": {},
+   "max_vertices_within_2mm": 0,
+   "share_frames_within_2mm": 0.0
+  },
+  "H|Revolve1[2]": {
+   "owner": "user",
+   "frames_near": 223,
+   "min_sd_mm": 2.5,
+   "worst": {
+    "region": "upper arm",
+    "clip": "Comb hair",
+    "frame": 169,
+    "pose": [
+     68,
+     114,
+     -59,
+     96
+    ],
+    "held": false,
+    "world": [
+     239,
+     159,
+     148
+    ],
+    "theta_arm": -5,
+    "s_arm": 318
+   },
+   "frames_within_2mm": 0,
+   "frames_inside_0p5": 0,
+   "regions_within_2mm": {},
+   "clips_within_2mm": {},
+   "max_vertices_within_2mm": 0,
+   "share_frames_within_2mm": 0.0
+  },
+  "base|D4-01 scapula base (Ti-6Al-4V)": {
+   "owner": "custom",
+   "frames_near": 223,
+   "min_sd_mm": 2.63,
+   "worst": {
+    "region": "acromion / top of shoulder",
+    "clip": "Comb hair",
+    "frame": 79,
+    "pose": [
+     62,
+     132,
+     -60,
+     115
+    ],
+    "held": false,
+    "world": [
+     -41,
+     34,
+     7
+    ],
+    "theta_arm": -32,
+    "s_arm": -2
+   },
+   "frames_within_2mm": 0,
+   "frames_inside_0p5": 0,
+   "regions_within_2mm": {},
+   "clips_within_2mm": {},
+   "max_vertices_within_2mm": 0,
+   "share_frames_within_2mm": 0.0
+  },
+  "l2|D4-03 link 2 (Ti-6Al-4V)": {
+   "owner": "custom",
+   "frames_near": 202,
+   "min_sd_mm": 2.78,
+   "worst": {
+    "region": "back over the scapula",
+    "clip": "Raise overhead",
+    "frame": 36,
+    "pose": [
+     30,
+     56,
+     -41,
+     12
+    ],
+    "held": true,
+    "world": [
+     -49,
+     -8,
+     53
+    ],
+    "theta_arm": 45,
+    "s_arm": 22
+   },
+   "frames_within_2mm": 0,
+   "frames_inside_0p5": 0,
+   "regions_within_2mm": {},
+   "clips_within_2mm": {},
+   "max_vertices_within_2mm": 0,
+   "share_frames_within_2mm": 0.0
+  },
+  "H|CirPattern1[14]": {
+   "owner": "user",
+   "frames_near": 223,
+   "min_sd_mm": 3.28,
+   "worst": {
+    "region": "upper arm",
+    "clip": "Drink from a cup",
+    "frame": 77,
+    "pose": [
+     95,
+     69,
+     -48,
+     132
+    ],
+    "held": false,
+    "world": [
+     311,
+     -86,
+     19
+    ],
+    "theta_arm": 7,
+    "s_arm": 319
+   },
+   "frames_within_2mm": 0,
+   "frames_inside_0p5": 0,
+   "regions_within_2mm": {},
+   "clips_within_2mm": {},
+   "max_vertices_within_2mm": 0,
+   "share_frames_within_2mm": 0.0
+  },
+  "H|CirPattern1[2]": {
+   "owner": "user",
+   "frames_near": 214,
+   "min_sd_mm": 3.89,
+   "worst": {
+    "region": "forearm/hand",
+    "clip": "Reach a high shelf",
+    "frame": 75,
+    "pose": [
+     82,
+     132,
+     -82,
+     6
+    ],
+    "held": false,
+    "world": [
+     240,
+     230,
+     88
+    ],
+    "theta_arm": 4,
+    "s_arm": 340
+   },
+   "frames_within_2mm": 0,
+   "frames_inside_0p5": 0,
+   "regions_within_2mm": {},
+   "clips_within_2mm": {},
+   "max_vertices_within_2mm": 0,
+   "share_frames_within_2mm": 0.0
+  },
+  "H|J4 washer A (igus GTM-1018-005, recessed)": {
+   "owner": "custom",
+   "frames_near": 153,
+   "min_sd_mm": 4.39,
+   "worst": {
+    "region": "upper arm",
+    "clip": "Comb hair",
+    "frame": 103,
+    "pose": [
+     78,
+     143,
+     -67,
+     118
+    ],
+    "held": false,
+    "world": [
+     -15,
+     38,
+     69
+    ],
+    "theta_arm": 5,
+    "s_arm": 30
+   },
+   "frames_within_2mm": 0,
+   "frames_inside_0p5": 0,
+   "regions_within_2mm": {},
+   "clips_within_2mm": {},
+   "max_vertices_within_2mm": 0,
+   "share_frames_within_2mm": 0.0
+  },
+  "H|M4x6 ISO 10642 countersunk (upper cuff)": {
+   "owner": "custom",
+   "frames_near": 223,
+   "min_sd_mm": 5.21,
+   "worst": {
+    "region": "chest",
+    "clip": "Wash opposite shoulder",
+    "frame": 68,
+    "pose": [
+     131,
+     37,
+     -76,
+     121
+    ],
+    "held": false,
+    "world": [
+     143,
+     -146,
+     -55
+    ],
+    "theta_arm": -12,
+    "s_arm": 203
+   },
+   "frames_within_2mm": 0,
+   "frames_inside_0p5": 0,
+   "regions_within_2mm": {},
+   "clips_within_2mm": {},
+   "max_vertices_within_2mm": 0,
+   "share_frames_within_2mm": 0.0
+  },
+  "l3|D4-04 link 3 (Ti-6Al-4V)": {
+   "owner": "custom",
+   "frames_near": 189,
+   "min_sd_mm": 5.52,
+   "worst": {
+    "region": "back over the scapula",
+    "clip": "Raise overhead",
+    "frame": 36,
+    "pose": [
+     30,
+     56,
+     -41,
+     12
+    ],
+    "held": true,
+    "world": [
+     -51,
+     -8,
+     55
+    ],
+    "theta_arm": 45,
+    "s_arm": 23
+   },
+   "frames_within_2mm": 0,
+   "frames_inside_0p5": 0,
+   "regions_within_2mm": {},
+   "clips_within_2mm": {},
+   "max_vertices_within_2mm": 0,
+   "share_frames_within_2mm": 0.0
+  },
+  "H|CirPattern1[1]": {
+   "owner": "user",
+   "frames_near": 223,
+   "min_sd_mm": 5.63,
+   "worst": {
+    "region": "forearm/hand",
+    "clip": "Reach a high shelf",
+    "frame": 75,
+    "pose": [
+     82,
+     132,
+     -82,
+     6
+    ],
+    "held": false,
+    "world": [
+     241,
+     226,
+     89
+    ],
+    "theta_arm": 8,
+    "s_arm": 337
+   },
+   "frames_within_2mm": 0,
+   "frames_inside_0p5": 0,
+   "regions_within_2mm": {},
+   "clips_within_2mm": {},
+   "max_vertices_within_2mm": 0,
+   "share_frames_within_2mm": 0.0
+  },
+  "l2|J3 washer A (igus GTM-1018-005, recessed)": {
+   "owner": "custom",
+   "frames_near": 189,
+   "min_sd_mm": 5.9,
+   "worst": {
+    "region": "back over the scapula",
+    "clip": "Wash opposite shoulder",
+    "frame": 2,
+    "pose": [
+     30,
+     4,
+     -30,
+     15
+    ],
+    "held": false,
+    "world": [
+     -48,
+     -15,
+     55
+    ],
+    "theta_arm": 42,
+    "s_arm": 17
+   },
+   "frames_within_2mm": 0,
+   "frames_inside_0p5": 0,
+   "regions_within_2mm": {},
+   "clips_within_2mm": {},
+   "max_vertices_within_2mm": 0,
+   "share_frames_within_2mm": 0.0
+  },
+  "H|CirPattern1[15]": {
+   "owner": "user",
+   "frames_near": 223,
+   "min_sd_mm": 6.46,
+   "worst": {
+    "region": "forearm/hand",
+    "clip": "Drink from a cup",
+    "frame": 77,
+    "pose": [
+     95,
+     69,
+     -48,
+     132
+    ],
+    "held": false,
+    "world": [
+     314,
+     -89,
+     20
+    ],
+    "theta_arm": 9,
+    "s_arm": 322
+   },
+   "frames_within_2mm": 0,
+   "frames_inside_0p5": 0,
+   "regions_within_2mm": {},
+   "clips_within_2mm": {},
+   "max_vertices_within_2mm": 0,
+   "share_frames_within_2mm": 0.0
+  },
+  "base|J1 washer A (igus GTM-1018-005, recessed)": {
+   "owner": "custom",
+   "frames_near": 223,
+   "min_sd_mm": 6.83,
+   "worst": {
+    "region": "acromion / top of shoulder",
+    "clip": "Comb hair",
+    "frame": 79,
+    "pose": [
+     62,
+     132,
+     -60,
+     115
+    ],
+    "held": false,
+    "world": [
+     -45,
+     35,
+     5
+    ],
+    "theta_arm": -34,
+    "s_arm": -4
+   },
+   "frames_within_2mm": 0,
+   "frames_inside_0p5": 0,
+   "regions_within_2mm": {},
+   "clips_within_2mm": {},
+   "max_vertices_within_2mm": 0,
+   "share_frames_within_2mm": 0.0
+  },
+  "l1|D4-02 link 1 (Ti-6Al-4V)": {
+   "owner": "custom",
+   "frames_near": 223,
+   "min_sd_mm": 6.85,
+   "worst": {
+    "region": "acromion / top of shoulder",
+    "clip": "Reach a high shelf",
+    "frame": 75,
+    "pose": [
+     82,
+     132,
+     -82,
+     6
+    ],
+    "held": false,
+    "world": [
+     -26,
+     52,
+     23
+    ],
+    "theta_arm": -56,
+    "s_arm": 18
+   },
+   "frames_within_2mm": 0,
+   "frames_inside_0p5": 0,
+   "regions_within_2mm": {},
+   "clips_within_2mm": {},
+   "max_vertices_within_2mm": 0,
+   "share_frames_within_2mm": 0.0
+  },
+  "H|Revolve4": {
+   "owner": "user",
+   "frames_near": 223,
+   "min_sd_mm": 7.06,
+   "worst": {
+    "region": "forearm/hand",
+    "clip": "Reach a high shelf",
+    "frame": 75,
+    "pose": [
+     82,
+     132,
+     -82,
+     6
+    ],
+    "held": false,
+    "world": [
+     240,
+     222,
+     89
+    ],
+    "theta_arm": 10,
+    "s_arm": 334
+   },
+   "frames_within_2mm": 0,
+   "frames_inside_0p5": 0,
+   "regions_within_2mm": {},
+   "clips_within_2mm": {},
+   "max_vertices_within_2mm": 0,
+   "share_frames_within_2mm": 0.0
+  },
+  "l2|J2 washer A (igus GTM-1018-005, recessed)": {
+   "owner": "custom",
+   "frames_near": 197,
+   "min_sd_mm": 7.17,
+   "worst": {
+    "region": "acromion / top of shoulder",
+    "clip": "Reach a high shelf",
+    "frame": 75,
+    "pose": [
+     82,
+     132,
+     -82,
+     6
+    ],
+    "held": false,
+    "world": [
+     -28,
+     52,
+     21
+    ],
+    "theta_arm": -58,
+    "s_arm": 16
+   },
+   "frames_within_2mm": 0,
+   "frames_inside_0p5": 0,
+   "regions_within_2mm": {},
+   "clips_within_2mm": {},
+   "max_vertices_within_2mm": 0,
+   "share_frames_within_2mm": 0.0
+  },
+  "l3|J3 M1.6x3 ISO 10642 Ti (cap)": {
+   "owner": "custom",
+   "frames_near": 153,
+   "min_sd_mm": 7.35,
+   "worst": {
+    "region": "back over the scapula",
+    "clip": "Wash opposite shoulder",
+    "frame": 2,
+    "pose": [
+     30,
+     4,
+     -30,
+     15
+    ],
+    "held": false,
+    "world": [
+     -48,
+     -17,
+     57
+    ],
+    "theta_arm": 41,
+    "s_arm": 19
+   },
+   "frames_within_2mm": 0,
+   "frames_inside_0p5": 0,
+   "regions_within_2mm": {},
+   "clips_within_2mm": {},
+   "max_vertices_within_2mm": 0,
+   "share_frames_within_2mm": 0.0
+  },
+  "l3|J3 sleeve (igus GSM-1012-04)": {
+   "owner": "custom",
+   "frames_near": 170,
+   "min_sd_mm": 7.49,
+   "worst": {
+    "region": "back over the scapula",
+    "clip": "Wash opposite shoulder",
+    "frame": 2,
+    "pose": [
+     30,
+     4,
+     -30,
+     15
+    ],
+    "held": false,
+    "world": [
+     -48,
+     -12,
+     56
+    ],
+    "theta_arm": 42,
+    "s_arm": 14
+   },
+   "frames_within_2mm": 0,
+   "frames_inside_0p5": 0,
+   "regions_within_2mm": {},
+   "clips_within_2mm": {},
+   "max_vertices_within_2mm": 0,
+   "share_frames_within_2mm": 0.0
+  },
+  "H|CirPattern1[16]": {
+   "owner": "user",
+   "frames_near": 223,
+   "min_sd_mm": 7.55,
+   "worst": {
+    "region": "upper arm",
+    "clip": "Reach a high shelf",
+    "frame": 75,
+    "pose": [
+     82,
+     132,
+     -82,
+     6
+    ],
+    "held": false,
+    "world": [
+     234,
+     216,
+     89
+    ],
+    "theta_arm": 11,
+    "s_arm": 326
+   },
+   "frames_within_2mm": 0,
+   "frames_inside_0p5": 0,
+   "regions_within_2mm": {},
+   "clips_within_2mm": {},
+   "max_vertices_within_2mm": 0,
+   "share_frames_within_2mm": 0.0
+  },
+  "H|CirPattern1[17]": {
+   "owner": "user",
+   "frames_near": 223,
+   "min_sd_mm": 7.74,
+   "worst": {
+    "region": "upper arm",
+    "clip": "Reach a high shelf",
+    "frame": 75,
+    "pose": [
+     82,
+     132,
+     -82,
+     6
+    ],
+    "held": false,
+    "world": [
+     237,
+     219,
+     89
+    ],
+    "theta_arm": 11,
+    "s_arm": 330
+   },
+   "frames_within_2mm": 0,
+   "frames_inside_0p5": 0,
+   "regions_within_2mm": {},
+   "clips_within_2mm": {},
+   "max_vertices_within_2mm": 0,
+   "share_frames_within_2mm": 0.0
+  },
+  "l1|J1 sleeve (igus GSM-1012-04)": {
+   "owner": "custom",
+   "frames_near": 223,
+   "min_sd_mm": 7.84,
+   "worst": {
+    "region": "acromion / top of shoulder",
+    "clip": "Comb hair",
+    "frame": 79,
+    "pose": [
+     62,
+     132,
+     -60,
+     115
+    ],
+    "held": false,
+    "world": [
+     -46,
+     35,
+     1
+    ],
+    "theta_arm": -37,
+    "s_arm": -6
+   },
+   "frames_within_2mm": 0,
+   "frames_inside_0p5": 0,
+   "regions_within_2mm": {},
+   "clips_within_2mm": {},
+   "max_vertices_within_2mm": 0,
+   "share_frames_within_2mm": 0.0
+  },
+  "l1|J2 sleeve (igus GSM-1012-04)": {
+   "owner": "custom",
+   "frames_near": 195,
+   "min_sd_mm": 8.44,
+   "worst": {
+    "region": "acromion / top of shoulder",
+    "clip": "Reach a high shelf",
+    "frame": 117,
+    "pose": [
+     79,
+     115,
+     -79,
+     10
+    ],
+    "held": false,
+    "world": [
+     -32,
+     45,
+     29
+    ],
+    "theta_arm": -45,
+    "s_arm": -5
+   },
+   "frames_within_2mm": 0,
+   "frames_inside_0p5": 0,
+   "regions_within_2mm": {},
+   "clips_within_2mm": {},
+   "max_vertices_within_2mm": 0,
+   "share_frames_within_2mm": 0.0
+  },
+  "l1|J1 M1.6x3 ISO 10642 Ti (cap)": {
+   "owner": "custom",
+   "frames_near": 223,
+   "min_sd_mm": 8.58,
+   "worst": {
+    "region": "acromion / top of shoulder",
+    "clip": "Comb hair",
+    "frame": 79,
+    "pose": [
+     62,
+     132,
+     -60,
+     115
+    ],
+    "held": false,
+    "world": [
+     -46,
+     37,
+     7
+    ],
+    "theta_arm": -32,
+    "s_arm": -3
+   },
+   "frames_within_2mm": 0,
+   "frames_inside_0p5": 0,
+   "regions_within_2mm": {},
+   "clips_within_2mm": {},
+   "max_vertices_within_2mm": 0,
+   "share_frames_within_2mm": 0.0
+  },
+  "H|J4 washer B (igus GTM-1018-005)": {
+   "owner": "custom",
+   "frames_near": 54,
+   "min_sd_mm": 8.76,
+   "worst": {
+    "region": "upper arm",
+    "clip": "Comb hair",
+    "frame": 103,
+    "pose": [
+     78,
+     143,
+     -67,
+     118
+    ],
+    "held": false,
+    "world": [
+     -17,
+     39,
+     73
+    ],
+    "theta_arm": 5,
+    "s_arm": 31
+   },
+   "frames_within_2mm": 0,
+   "frames_inside_0p5": 0,
+   "regions_within_2mm": {},
+   "clips_within_2mm": {},
+   "max_vertices_within_2mm": 0,
+   "share_frames_within_2mm": 0.0
+  },
+  "H|J4 ring nut M8x0.5 18x1 (Ti-6Al-4V)": {
+   "owner": "custom",
+   "frames_near": 35,
+   "min_sd_mm": 9.25,
+   "worst": {
+    "region": "upper arm",
+    "clip": "Comb hair",
+    "frame": 103,
+    "pose": [
+     78,
+     143,
+     -67,
+     118
+    ],
+    "held": false,
+    "world": [
+     -17,
+     40,
+     74
+    ],
+    "theta_arm": 5,
+    "s_arm": 31
+   },
+   "frames_within_2mm": 0,
+   "frames_inside_0p5": 0,
+   "regions_within_2mm": {},
+   "clips_within_2mm": {},
+   "max_vertices_within_2mm": 0,
+   "share_frames_within_2mm": 0.0
+  },
+  "H|J4 magnet \u00d84x2 N52 diametric": {
+   "owner": "custom",
+   "frames_near": 32,
+   "min_sd_mm": 9.38,
+   "worst": {
+    "region": "upper arm",
+    "clip": "Comb hair",
+    "frame": 103,
+    "pose": [
+     78,
+     143,
+     -67,
+     118
+    ],
+    "held": false,
+    "world": [
+     -22,
+     35,
+     72
+    ],
+    "theta_arm": 4,
+    "s_arm": 24
+   },
+   "frames_within_2mm": 0,
+   "frames_inside_0p5": 0,
+   "regions_within_2mm": {},
+   "clips_within_2mm": {},
+   "max_vertices_within_2mm": 0,
+   "share_frames_within_2mm": 0.0
+  },
+  "l3|J3 cap \u00d822 G2 dome (Ti-6Al-4V)": {
+   "owner": "custom",
+   "frames_near": 140,
+   "min_sd_mm": 9.5,
+   "worst": {
+    "region": "back over the scapula",
+    "clip": "Raise overhead",
+    "frame": 36,
+    "pose": [
+     30,
+     56,
+     -41,
+     12
+    ],
+    "held": true,
+    "world": [
+     -54,
+     -8,
+     57
+    ],
+    "theta_arm": 45,
+    "s_arm": 23
+   },
+   "frames_within_2mm": 0,
+   "frames_inside_0p5": 0,
+   "regions_within_2mm": {},
+   "clips_within_2mm": {},
+   "max_vertices_within_2mm": 0,
+   "share_frames_within_2mm": 0.0
+  },
+  "l2|J3 washer B (igus GTM-1018-005)": {
+   "owner": "custom",
+   "frames_near": 136,
+   "min_sd_mm": 10.17,
+   "worst": {
+    "region": "back over the scapula",
+    "clip": "Raise overhead",
+    "frame": 36,
+    "pose": [
+     30,
+     56,
+     -41,
+     12
+    ],
+    "held": true,
+    "world": [
+     -55,
+     -6,
+     56
+    ],
+    "theta_arm": 44,
+    "s_arm": 21
+   },
+   "frames_within_2mm": 0,
+   "frames_inside_0p5": 0,
+   "regions_within_2mm": {},
+   "clips_within_2mm": {},
+   "max_vertices_within_2mm": 0,
+   "share_frames_within_2mm": 0.0
+  },
+  "l3|J4 sleeve (igus GSM-1012-04)": {
+   "owner": "custom",
+   "frames_near": 39,
+   "min_sd_mm": 10.61,
+   "worst": {
+    "region": "upper arm",
+    "clip": "Comb hair",
+    "frame": 109,
+    "pose": [
+     77,
+     143,
+     -67,
+     118
+    ],
+    "held": false,
+    "world": [
+     -22,
+     22,
+     74
+    ],
+    "theta_arm": 10,
+    "s_arm": 14
+   },
+   "frames_within_2mm": 0,
+   "frames_inside_0p5": 0,
+   "regions_within_2mm": {},
+   "clips_within_2mm": {},
+   "max_vertices_within_2mm": 0,
+   "share_frames_within_2mm": 0.0
+  },
+  "l2|J3 ring nut M8x0.5 18x1 (Ti-6Al-4V)": {
+   "owner": "custom",
+   "frames_near": 131,
+   "min_sd_mm": 10.65,
+   "worst": {
+    "region": "back over the scapula",
+    "clip": "Raise overhead",
+    "frame": 36,
+    "pose": [
+     30,
+     56,
+     -41,
+     12
+    ],
+    "held": true,
+    "world": [
+     -55,
+     -6,
+     57
+    ],
+    "theta_arm": 44,
+    "s_arm": 21
+   },
+   "frames_within_2mm": 0,
+   "frames_inside_0p5": 0,
+   "regions_within_2mm": {},
+   "clips_within_2mm": {},
+   "max_vertices_within_2mm": 0,
+   "share_frames_within_2mm": 0.0
+  },
+  "l1|J2 M1.6x3 ISO 10642 Ti (cap)": {
+   "owner": "custom",
+   "frames_near": 195,
+   "min_sd_mm": 10.7,
+   "worst": {
+    "region": "acromion / top of shoulder",
+    "clip": "Reach a high shelf",
+    "frame": 75,
+    "pose": [
+     82,
+     132,
+     -82,
+     6
+    ],
+    "held": false,
+    "world": [
+     -38,
+     48,
+     22
+    ],
+    "theta_arm": -58,
+    "s_arm": 6
+   },
+   "frames_within_2mm": 0,
+   "frames_inside_0p5": 0,
+   "regions_within_2mm": {},
+   "clips_within_2mm": {},
+   "max_vertices_within_2mm": 0,
+   "share_frames_within_2mm": 0.0
+  },
+  "l1|J2 cap \u00d822 G2 dome (Ti-6Al-4V)": {
+   "owner": "custom",
+   "frames_near": 185,
+   "min_sd_mm": 11.01,
+   "worst": {
+    "region": "acromion / top of shoulder",
+    "clip": "Reach a high shelf",
+    "frame": 75,
+    "pose": [
+     82,
+     132,
+     -82,
+     6
+    ],
+    "held": false,
+    "world": [
+     -29,
+     56,
+     23
+    ],
+    "theta_arm": -57,
+    "s_arm": 18
+   },
+   "frames_within_2mm": 0,
+   "frames_inside_0p5": 0,
+   "regions_within_2mm": {},
+   "clips_within_2mm": {},
+   "max_vertices_within_2mm": 0,
+   "share_frames_within_2mm": 0.0
+  },
+  "l1|J1 cap \u00d822 G2 dome (Ti-6Al-4V)": {
+   "owner": "custom",
+   "frames_near": 223,
+   "min_sd_mm": 11.09,
+   "worst": {
+    "region": "acromion / top of shoulder",
+    "clip": "Comb hair",
+    "frame": 127,
+    "pose": [
+     63,
+     133,
+     -60,
+     115
+    ],
+    "held": false,
+    "world": [
+     -48,
+     38,
+     7
+    ],
+    "theta_arm": -33,
+    "s_arm": -3
+   },
+   "frames_within_2mm": 0,
+   "frames_inside_0p5": 0,
+   "regions_within_2mm": {},
+   "clips_within_2mm": {},
+   "max_vertices_within_2mm": 0,
+   "share_frames_within_2mm": 0.0
+  },
+  "base|J1 magnet \u00d84x2 N52 diametric": {
+   "owner": "custom",
+   "frames_near": 223,
+   "min_sd_mm": 11.15,
+   "worst": {
+    "region": "acromion / top of shoulder",
+    "clip": "Comb hair",
+    "frame": 79,
+    "pose": [
+     62,
+     132,
+     -60,
+     115
+    ],
+    "held": false,
+    "world": [
+     -47,
+     37,
+     -2
+    ],
+    "theta_arm": -41,
+    "s_arm": -6
+   },
+   "frames_within_2mm": 0,
+   "frames_inside_0p5": 0,
+   "regions_within_2mm": {},
+   "clips_within_2mm": {},
+   "max_vertices_within_2mm": 0,
+   "share_frames_within_2mm": 0.0
+  },
+  "l2|J3 magnet \u00d84x2 N52 diametric": {
+   "owner": "custom",
+   "frames_near": 132,
+   "min_sd_mm": 11.2,
+   "worst": {
+    "region": "acromion / top of shoulder",
+    "clip": "Drink from a cup",
+    "frame": 155,
+    "pose": [
+     67,
+     26,
+     -51,
+     73
+    ],
+    "held": false,
+    "world": [
+     -26,
+     -13,
+     71
+    ],
+    "theta_arm": 41,
+    "s_arm": 13
+   },
+   "frames_within_2mm": 0,
+   "frames_inside_0p5": 0,
+   "regions_within_2mm": {},
+   "clips_within_2mm": {},
+   "max_vertices_within_2mm": 0,
+   "share_frames_within_2mm": 0.0
+  },
+  "base|J1 washer B (igus GTM-1018-005)": {
+   "owner": "custom",
+   "frames_near": 223,
+   "min_sd_mm": 11.36,
+   "worst": {
+    "region": "acromion / top of shoulder",
+    "clip": "Comb hair",
+    "frame": 79,
+    "pose": [
+     62,
+     132,
+     -60,
+     115
+    ],
+    "held": false,
+    "world": [
+     -48,
+     38,
+     5
+    ],
+    "theta_arm": -35,
+    "s_arm": -4
+   },
+   "frames_within_2mm": 0,
+   "frames_inside_0p5": 0,
+   "regions_within_2mm": {},
+   "clips_within_2mm": {},
+   "max_vertices_within_2mm": 0,
+   "share_frames_within_2mm": 0.0
+  },
+  "l3|J4 M1.6x3 ISO 10642 Ti (cap)": {
+   "owner": "custom",
+   "frames_near": 34,
+   "min_sd_mm": 11.5,
+   "worst": {
+    "region": "upper arm",
+    "clip": "Reach a high shelf",
+    "frame": 69,
+    "pose": [
+     82,
+     130,
+     -82,
+     8
+    ],
+    "held": false,
+    "world": [
+     -1,
+     13,
+     82
+    ],
+    "theta_arm": 6,
+    "s_arm": 17
+   },
+   "frames_within_2mm": 0,
+   "frames_inside_0p5": 0,
+   "regions_within_2mm": {},
+   "clips_within_2mm": {},
+   "max_vertices_within_2mm": 0,
+   "share_frames_within_2mm": 0.0
+  },
+  "l2|J2 washer B (igus GTM-1018-005)": {
+   "owner": "custom",
+   "frames_near": 179,
+   "min_sd_mm": 11.51,
+   "worst": {
+    "region": "acromion / top of shoulder",
+    "clip": "Reach a high shelf",
+    "frame": 75,
+    "pose": [
+     82,
+     132,
+     -82,
+     6
+    ],
+    "held": false,
+    "world": [
+     -30,
+     56,
+     21
+    ],
+    "theta_arm": -59,
+    "s_arm": 18
+   },
+   "frames_within_2mm": 0,
+   "frames_inside_0p5": 0,
+   "regions_within_2mm": {},
+   "clips_within_2mm": {},
+   "max_vertices_within_2mm": 0,
+   "share_frames_within_2mm": 0.0
+  },
+  "l2|J2 magnet \u00d84x2 N52 diametric": {
+   "owner": "custom",
+   "frames_near": 185,
+   "min_sd_mm": 11.77,
+   "worst": {
+    "region": "acromion / top of shoulder",
+    "clip": "Reach a high shelf",
+    "frame": 117,
+    "pose": [
+     79,
+     115,
+     -79,
+     10
+    ],
+    "held": false,
+    "world": [
+     -34,
+     48,
+     27
+    ],
+    "theta_arm": -48,
+    "s_arm": -6
+   },
+   "frames_within_2mm": 0,
+   "frames_inside_0p5": 0,
+   "regions_within_2mm": {},
+   "clips_within_2mm": {},
+   "max_vertices_within_2mm": 0,
+   "share_frames_within_2mm": 0.0
+  },
+  "base|J1 ring nut M8x0.5 18x1 (Ti-6Al-4V)": {
+   "owner": "custom",
+   "frames_near": 201,
+   "min_sd_mm": 11.86,
+   "worst": {
+    "region": "acromion / top of shoulder",
+    "clip": "Comb hair",
+    "frame": 79,
+    "pose": [
+     62,
+     132,
+     -60,
+     115
+    ],
+    "held": false,
+    "world": [
+     -48,
+     39,
+     5
+    ],
+    "theta_arm": -35,
+    "s_arm": -4
+   },
+   "frames_within_2mm": 0,
+   "frames_inside_0p5": 0,
+   "regions_within_2mm": {},
+   "clips_within_2mm": {},
+   "max_vertices_within_2mm": 0,
+   "share_frames_within_2mm": 0.0
+  },
+  "l2|J2 ring nut M8x0.5 18x1 (Ti-6Al-4V)": {
+   "owner": "custom",
+   "frames_near": 164,
+   "min_sd_mm": 12.01,
+   "worst": {
+    "region": "acromion / top of shoulder",
+    "clip": "Reach a high shelf",
+    "frame": 75,
+    "pose": [
+     82,
+     132,
+     -82,
+     6
+    ],
+    "held": false,
+    "world": [
+     -30,
+     56,
+     21
+    ],
+    "theta_arm": -59,
+    "s_arm": 18
+   },
+   "frames_within_2mm": 0,
+   "frames_inside_0p5": 0,
+   "regions_within_2mm": {},
+   "clips_within_2mm": {},
+   "max_vertices_within_2mm": 0,
+   "share_frames_within_2mm": 0.0
+  },
+  "l3|J3 position PCB \u00d816 (placeholder)": {
+   "owner": "custom",
+   "frames_near": 124,
+   "min_sd_mm": 12.03,
+   "worst": {
+    "region": "back over the scapula",
+    "clip": "Raise overhead",
+    "frame": 36,
+    "pose": [
+     30,
+     56,
+     -41,
+     12
+    ],
+    "held": true,
+    "world": [
+     -56,
+     -5,
+     57
+    ],
+    "theta_arm": 43,
+    "s_arm": 21
+   },
+   "frames_within_2mm": 0,
+   "frames_inside_0p5": 0,
+   "regions_within_2mm": {},
+   "clips_within_2mm": {},
+   "max_vertices_within_2mm": 0,
+   "share_frames_within_2mm": 0.0
+  },
+  "l3|J4 cap \u00d822 G2 dome (Ti-6Al-4V)": {
+   "owner": "custom",
+   "frames_near": 31,
+   "min_sd_mm": 12.91,
+   "worst": {
+    "region": "upper arm",
+    "clip": "Comb hair",
+    "frame": 109,
+    "pose": [
+     77,
+     143,
+     -67,
+     118
+    ],
+    "held": false,
+    "world": [
+     -21,
+     27,
+     78
+    ],
+    "theta_arm": 9,
+    "s_arm": 19
+   },
+   "frames_within_2mm": 0,
+   "frames_inside_0p5": 0,
+   "regions_within_2mm": {},
+   "clips_within_2mm": {},
+   "max_vertices_within_2mm": 0,
+   "share_frames_within_2mm": 0.0
+  },
+  "l1|J1 position PCB \u00d816 (placeholder)": {
+   "owner": "custom",
+   "frames_near": 63,
+   "min_sd_mm": 13.11,
+   "worst": {
+    "region": "acromion / top of shoulder",
+    "clip": "Comb hair",
+    "frame": 79,
+    "pose": [
+     62,
+     132,
+     -60,
+     115
+    ],
+    "held": false,
+    "world": [
+     -49,
+     39,
+     4
+    ],
+    "theta_arm": -35,
+    "s_arm": -5
+   },
+   "frames_within_2mm": 0,
+   "frames_inside_0p5": 0,
+   "regions_within_2mm": {},
+   "clips_within_2mm": {},
+   "max_vertices_within_2mm": 0,
+   "share_frames_within_2mm": 0.0
+  },
+  "l1|J2 position PCB \u00d816 (placeholder)": {
+   "owner": "custom",
+   "frames_near": 18,
+   "min_sd_mm": 13.36,
+   "worst": {
+    "region": "acromion / top of shoulder",
+    "clip": "Reach a high shelf",
+    "frame": 75,
+    "pose": [
+     82,
+     132,
+     -82,
+     6
+    ],
+    "held": false,
+    "world": [
+     -31,
+     57,
+     21
+    ],
+    "theta_arm": -59,
+    "s_arm": 17
+   },
+   "frames_within_2mm": 0,
+   "frames_inside_0p5": 0,
+   "regions_within_2mm": {},
+   "clips_within_2mm": {},
+   "max_vertices_within_2mm": 0,
+   "share_frames_within_2mm": 0.0
+  },
+  "l3|J3 angle sensor IC (placeholder)": {
+   "owner": "custom",
+   "frames_near": 61,
+   "min_sd_mm": 13.5,
+   "worst": {
+    "region": "back over the scapula",
+    "clip": "Comb hair",
+    "frame": 31,
+    "pose": [
+     48,
+     71,
+     -48,
+     84
+    ],
+    "held": false,
+    "world": [
+     -46,
+     -3,
+     65
+    ],
+    "theta_arm": 42,
+    "s_arm": 10
+   },
+   "frames_within_2mm": 0,
+   "frames_inside_0p5": 0,
+   "regions_within_2mm": {},
+   "clips_within_2mm": {},
+   "max_vertices_within_2mm": 0,
+   "share_frames_within_2mm": 0.0
+  },
+  "l1|J1 angle sensor IC (placeholder)": {
+   "owner": "custom",
+   "frames_near": 44,
+   "min_sd_mm": 13.51,
+   "worst": {
+    "region": "acromion / top of shoulder",
+    "clip": "Comb hair",
+    "frame": 79,
+    "pose": [
+     62,
+     132,
+     -60,
+     115
+    ],
+    "held": false,
+    "world": [
+     -49,
+     38,
+     -3
+    ],
+    "theta_arm": -41,
+    "s_arm": -7
+   },
+   "frames_within_2mm": 0,
+   "frames_inside_0p5": 0,
+   "regions_within_2mm": {},
+   "clips_within_2mm": {},
+   "max_vertices_within_2mm": 0,
+   "share_frames_within_2mm": 0.0
+  },
+  "l1|J2 angle sensor IC (placeholder)": {
+   "owner": "custom",
+   "frames_near": 8,
+   "min_sd_mm": 14.13,
+   "worst": {
+    "region": "acromion / top of shoulder",
+    "clip": "Reach a high shelf",
+    "frame": 117,
+    "pose": [
+     79,
+     115,
+     -79,
+     10
+    ],
+    "held": false,
+    "world": [
+     -36,
+     49,
+     28
+    ],
+    "theta_arm": -48,
+    "s_arm": -7
+   },
+   "frames_within_2mm": 0,
+   "frames_inside_0p5": 0,
+   "regions_within_2mm": {},
+   "clips_within_2mm": {},
+   "max_vertices_within_2mm": 0,
+   "share_frames_within_2mm": 0.0
+  }
+ },
+ "base_mount": {
+  "thorax": {
+   "frames": 223,
+   "min_sd": -44.0,
+   "worst": {
+    "part": "D4-01 scapula base (Ti-6Al-4V)",
+    "clip": "Raise overhead",
+    "i": 78,
+    "want": [
+     30.0,
+     150.0,
+     -60.0
+    ],
+    "region": "acromion / top of shoulder",
+    "at_mm": [
+     -9,
+     15,
+     33
+    ],
+    "lift": 25.335933230686926,
+    "inside_share": 0.5162509448223734
+   },
+   "first_elev_inside_0p5": 52.4,
+   "first_elev_within_2mm": 44.4,
+   "inside_vertex_regions": {
+    "acromion / top of shoulder": 615031,
+    "back over the scapula": 6090,
+    "upper arm": 8616,
+    "front of shoulder (anterior deltoid)": 5764
+   },
+   "by_elevation": {
+    "0-30": {
+     "min_sd": 4.1,
+     "frames": 385,
+     "inside_frames": 0,
+     "region_of_deepest": "acromion / top of shoulder"
+    },
+    "30-50": {
+     "min_sd": -0.3,
+     "frames": 210,
+     "inside_frames": 0,
+     "region_of_deepest": "acromion / top of shoulder"
+    },
+    "50-70": {
+     "min_sd": -7.9,
+     "frames": 140,
+     "inside_frames": 25,
+     "region_of_deepest": "acromion / top of shoulder"
+    },
+    "70-90": {
+     "min_sd": -17.7,
+     "frames": 45,
+     "inside_frames": 39,
+     "region_of_deepest": "acromion / top of shoulder"
+    },
+    "90-110": {
+     "min_sd": -25.8,
+     "frames": 110,
+     "inside_frames": 110,
+     "region_of_deepest": "acromion / top of shoulder"
+    },
+    "110-130": {
+     "min_sd": -34.1,
+     "frames": 65,
+     "inside_frames": 65,
+     "region_of_deepest": "acromion / top of shoulder"
+    },
+    "130-151": {
+     "min_sd": -44.0,
+     "frames": 160,
+     "inside_frames": 149,
+     "region_of_deepest": "acromion / top of shoulder"
+    }
+   },
+   "per_part": {
+    "D4-01 scapula base (Ti-6Al-4V)": {
+     "min_sd": -44.0,
+     "region": "acromion / top of shoulder",
+     "clip": "Raise overhead",
+     "want": [
+      30.0,
+      150.0,
+      -60.0
+     ],
+     "at_mm": [
+      -9,
+      15,
+      33
+     ]
+    },
+    "J1 ring nut M8x0.5 18x1 (Ti-6Al-4V)": {
+     "min_sd": -38.6,
+     "region": "upper arm",
+     "clip": "Raise overhead",
+     "want": [
+      30.0,
+      150.0,
+      -60.0
+     ],
+     "at_mm": [
+      -13,
+      23,
+      36
+     ]
+    },
+    "J1 magnet \u00d84x2 N52 diametric": {
+     "min_sd": -25.5,
+     "region": "acromion / top of shoulder",
+     "clip": "Comb hair",
+     "want": [
+      77.9,
+      143.0,
+      -67.0
+     ],
+     "at_mm": [
+      -14,
+      27,
+      28
+     ]
+    },
+    "J1 washer B (igus GTM-1018-005)": {
+     "min_sd": -38.8,
+     "region": "upper arm",
+     "clip": "Raise overhead",
+     "want": [
+      30.0,
+      150.0,
+      -60.0
+     ],
+     "at_mm": [
+      -13,
+      23,
+      36
+     ]
+    },
+    "J1 washer A (igus GTM-1018-005, recessed)": {
+     "min_sd": -40.3,
+     "region": "acromion / top of shoulder",
+     "clip": "Raise overhead",
+     "want": [
+      30.0,
+      150.0,
+      -60.0
+     ],
+     "at_mm": [
+      -13,
+      19,
+      34
+     ]
+    }
+   }
+  },
+  "scapula": {
+   "frames": 223,
+   "min_sd": 0.2,
+   "worst": {
+    "part": "D4-01 scapula base (Ti-6Al-4V)",
+    "clip": "Raise overhead",
+    "i": 78,
+    "want": [
+     30.0,
+     150.0,
+     -60.0
+    ],
+    "region": "acromion / top of shoulder",
+    "at_mm": [
+     -44,
+     31,
+     3
+    ],
+    "lift": 25.335933230686926,
+    "inside_share": 0.0
+   },
+   "first_elev_inside_0p5": null,
+   "first_elev_within_2mm": 87.7,
+   "inside_vertex_regions": {},
+   "by_elevation": {
+    "0-30": {
+     "min_sd": 3.7,
+     "frames": 385,
+     "inside_frames": 0,
+     "region_of_deepest": "acromion / top of shoulder"
+    },
+    "30-50": {
+     "min_sd": 3.2,
+     "frames": 210,
+     "inside_frames": 0,
+     "region_of_deepest": "acromion / top of shoulder"
+    },
+    "50-70": {
+     "min_sd": 2.6,
+     "frames": 140,
+     "inside_frames": 0,
+     "region_of_deepest": "acromion / top of shoulder"
+    },
+    "70-90": {
+     "min_sd": 2.0,
+     "frames": 45,
+     "inside_frames": 0,
+     "region_of_deepest": "acromion / top of shoulder"
+    },
+    "90-110": {
+     "min_sd": 1.6,
+     "frames": 110,
+     "inside_frames": 0,
+     "region_of_deepest": "acromion / top of shoulder"
+    },
+    "110-130": {
+     "min_sd": 1.1,
+     "frames": 65,
+     "inside_frames": 0,
+     "region_of_deepest": "acromion / top of shoulder"
+    },
+    "130-151": {
+     "min_sd": 0.2,
+     "frames": 160,
+     "inside_frames": 0,
+     "region_of_deepest": "acromion / top of shoulder"
+    }
+   },
+   "per_part": {
+    "D4-01 scapula base (Ti-6Al-4V)": {
+     "min_sd": 0.2,
+     "region": "acromion / top of shoulder",
+     "clip": "Raise overhead",
+     "want": [
+      30.0,
+      149.4,
+      -59.9
+     ],
+     "at_mm": [
+      -44,
+      31,
+      3
+     ]
+    },
+    "J1 ring nut M8x0.5 18x1 (Ti-6Al-4V)": {
+     "min_sd": 9.5,
+     "region": "acromion / top of shoulder",
+     "clip": "Raise overhead",
+     "want": [
+      30.0,
+      149.4,
+      -59.9
+     ],
+     "at_mm": [
+      -51,
+      35,
+      0
+     ]
+    },
+    "J1 magnet \u00d84x2 N52 diametric": {
+     "min_sd": 9.5,
+     "region": "acromion / top of shoulder",
+     "clip": "Raise overhead",
+     "want": [
+      30.0,
+      149.4,
+      -59.9
+     ],
+     "at_mm": [
+      -49,
+      33,
+      -6
+     ]
+    },
+    "J1 washer B (igus GTM-1018-005)": {
+     "min_sd": 9.0,
+     "region": "acromion / top of shoulder",
+     "clip": "Raise overhead",
+     "want": [
+      30.0,
+      149.4,
+      -59.9
+     ],
+     "at_mm": [
+      -51,
+      35,
+      0
+     ]
+    },
+    "J1 washer A (igus GTM-1018-005, recessed)": {
+     "min_sd": 4.6,
+     "region": "acromion / top of shoulder",
+     "clip": "Raise overhead",
+     "want": [
+      30.0,
+      149.4,
+      -59.9
+     ],
+     "at_mm": [
+      -47,
+      33,
+      1
+     ]
+    }
+   }
+  }
+ },
+ "seconds": 662
+}
