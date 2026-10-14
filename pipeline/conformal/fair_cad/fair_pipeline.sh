@@ -2,7 +2,10 @@
 # full fair-CAD pipeline for one searched design: <key> (band_cad/inputs/<key>.json must exist)
 K=$1; L=${2:-"CAD $1"}; cd "$(dirname "$0")"; FX=../../full-exo
 ${PY:-python3} -W ignore $FX/band_to_design.py ../band_cad/inputs/$K.json 0 band_$K "$L" > out_$K.b2d.log 2>&1 || { echo "band_to_design failed"; tail -5 out_$K.b2d.log; exit 1; }
-(cd ../band_cad && ${PY:-python3} -W ignore make_cad_design.py $K band_$K "$L" | grep "base tab")
+grep -A4 "^WARNING band_to_design" out_$K.b2d.log
+# refuses a link without a real arm (docs/FINDINGS.md "Short link"); ALLOW_SHORT_LINK=1 overrides, only with the user's OK
+(cd ../band_cad && ${PY:-python3} -W ignore make_cad_design.py $K band_$K "$L") > out_$K.mcd.log 2>&1 || { echo "make_cad_design refused / failed:"; tail -8 out_$K.mcd.log; exit 1; }
+grep "base tab" out_$K.mcd.log
 mkdir -p out_$K; cp $FX/designs/cad_$K/clips.json out_$K/clips_before_replan.json; rm -f out_$K/exclude.json
 for i in 1 2 3 4 5; do
   cp out_$K/clips_before_replan.json $FX/designs/cad_$K/clips.json

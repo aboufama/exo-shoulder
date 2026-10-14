@@ -18,6 +18,12 @@ lower bounds over the frames kept, dropping the frames that force the shape up t
 
 Job: {"mode": "band_eval" | "band_search", "skin": <b64 gz json from avg/radial_maps_v2.py>, "poses": <b64 from
 pack_band.py>, "designs": [...] | search params, "n": N, "q_step": deg, ...}
+
+Every link must have a real arm (docs/FINDINGS.md "Short link"): job keys "min_arc" (deg, default MIN_ARC = 35; raises
+the lower end of "arc_range" in the search and rejects shorter links in evaluate before any work) and "min_arm_mm" (mm,
+default MIN_ARM_MM = 10; clear gap between a link's two hub seats at the fitted hub heights, checked after the shape
+fit). A rejected design scores -1 with "err" saying why; 0 switches a rule off (to re-score an old design).
+N = 3 without a cuff is the pure 3R chain: no spare DOF (one configuration per pose, p2 from the two-circle closure).
 """
 import base64, gzip, io, json, math, time, random, hashlib
 try:
@@ -26,12 +32,118 @@ except ImportError:
     np = None
 
 _CACHE = {}
-CODE_VERSION = "band-2026-10-15s (real geometry + FEA-sized: 5.5 links, v3.2 stack, 9 mm rail)"
+CODE_VERSION = "band-2026-10-15t (min link arc 35 deg + min arm 10 mm between hub seats; pure 3R chain)"
 RESD = 0.25; NWD, NHD = 1440, 720; LAT_LO, LAT_HI = -75.0, 90.0; CLEAR = 3.0
 ROW0, ROW1 = int((LAT_LO + 90) / RESD), int((LAT_HI + 90) / RESD)
 HUB_R, HW, T_LINK, STACK, T_W, T_BOT = 17.0, 7.0, 5.5, 6.0, 1.0, 6.5
 T_LO, HUB_UP, CAP_UP, RAIL_D = 3.5, 5.05, 3.62, 4.0          # lower plate under the seat, upper hub, cap crown over it, cuff rail depth
 D2R = math.pi / 180
+# every link needs a real arm (docs/FINDINGS.md "Short link": r13's link 1 spanned 23.9 deg, its two hubs side by side).
+# Job keys "min_arc" (deg) and "min_arm_mm" (mm); 0 switches a rule off (e.g. to re-score an old design).
+MIN_ARC = 35.0          # smallest link arc, deg (the user's rule, ~35 deg at R ~60 mm)
+MIN_ARM_MM = 10.0       # smallest clear gap between a link's two hub seats at the fitted hub heights, mm
+
+
+# ---------------------------------------------------------------- link-arm guard (pure python: no torch, no maps)
+def arm_clear_mm(a_deg, r0, r1=None, hub_r=None):
+    """clear gap (mm) between the two hub seats of a link of arc a_deg whose hub centres sit r0 and r1 mm from the GH
+    centre on their axes: straight distance between the hub centres minus two seat radii. This is how docs/FINDINGS.md
+    measured the r13 short link (hub centres 24.7 mm apart, 1.7 mm between the O23 seats of radius 11.5)."""
+    r1 = r0 if r1 is None else r1; hub_r = HUB_R if hub_r is None else hub_r
+    return math.sqrt(max(0.0, r0 * r0 + r1 * r1 - 2 * r0 * r1 * math.cos(a_deg * D2R))) - 2 * hub_r
+
+
+def arc_for_arm(arm_mm, r, hub_r=None):
+    """smallest arc (deg) that leaves arm_mm clear between the hub seats with both hub centres r mm from GH"""
+    hub_r = HUB_R if hub_r is None else hub_r
+    x = (arm_mm + 2 * hub_r) / (2 * r)
+    return 180.0 if x >= 1 else 2 * math.degrees(math.asin(x))
+
+
+def link_arcs_ok(design, min_arc=MIN_ARC, r_ref=None, hub_r=None):
+    """(ok, err) for the kinematic rule: every link (the N-1 arcs of design["a"]; plain N-R and sliding-cuff variants
+    alike) spans >= min_arc deg. design: a design dict or the list of arcs. err names each short link and, for scale,
+    its clear arm at r_ref (default 65 mm, the evaluator's R_REF) with seat radius hub_r (default HUB_R)."""
+    a = design["a"] if isinstance(design, dict) else design
+    if isinstance(design, dict) and "n" in design and len(a) != int(design["n"]) - 1:
+        return False, f"design has {len(a)} link arcs for n = {design['n']} joints (needs n - 1)"
+    bad = [(k + 1, float(x)) for k, x in enumerate(a) if float(x) < float(min_arc) - 1e-9]
+    if not bad: return True, ""
+    r_ref = 65.0 if r_ref is None else r_ref; hub_r = HUB_R if hub_r is None else hub_r
+    return False, ("short link: " + ", ".join(f"link {k} arc {x:.1f} deg ({arm_clear_mm(x, r_ref, hub_r=hub_r):.1f} mm between hub seats at R {r_ref:g})"
+                                              for k, x in bad) + f" < min_arc {float(min_arc):g} deg (docs/FINDINGS.md 'Short link'; min_arc=0 scores it anyway)")
+
+
+def hub_heights(n, faces, lower, stack=None):
+    """[(z_start, z_end)] per link k = 1..n-1: distance from GH of the link's hub plane at either joint, the way
+    fit_shape lays the stack out (lower member at the joint face F_J, upper member at F_J + STACK; link n-1 rides on
+    BOTTOM's hub at face F_n). faces / lower: the evaluator's fitted faces and lower-member map (int or str keys)."""
+    stack = STACK if stack is None else stack
+    F = {int(k): float(v) for k, v in faces.items() if str(k).isdigit() and v is not None}
+    L = {int(k): int(v) for k, v in lower.items()}
+    def z(mi, J): return F[n] if J == n else F[J] + (0.0 if L.get(J) == mi else stack)
+    return [(z(mi, mi), z(mi, mi + 1)) for mi in range(1, n)]
+
+
+def arms_ok(a, heights, min_arm_mm=MIN_ARM_MM, hub_r=None):
+    """(ok, err, clear) for the physical rule: the clear gap between each link's hub seats (arm_clear_mm at the fitted
+    hub heights) is >= min_arm_mm (<= 0: rule off). clear: mm per link."""
+    hub_r = HUB_R if hub_r is None else hub_r
+    clear = [arm_clear_mm(float(x), z0, z1, hub_r) for x, (z0, z1) in zip(a, heights)]
+    bad = [(k + 1, c) for k, c in enumerate(clear) if float(min_arm_mm) > 0 and c < float(min_arm_mm) - 1e-9]
+    if not bad: return True, "", clear
+    return False, ("short arm: " + ", ".join(f"link {k} {c:.1f} mm between hub seats (arc {float(a[k - 1]):.1f} deg, hubs {heights[k - 1][0]:.1f} / "
+                                             f"{heights[k - 1][1]:.1f} mm from GH, seat r {hub_r:g})" for k, c in bad)
+                   + f" < min_arm_mm {float(min_arm_mm):g} (min_arm_mm=0 scores it anyway)"), clear
+
+
+def design_link_report(design, arm_mm=None, min_arc=MIN_ARC, min_arm_mm=MIN_ARM_MM, r_ref=65.0, hub_r=None):
+    """problems (list of str, empty = fine) of a searched design before it becomes CAD: links below min_arc deg and,
+    when the clear gaps between hub seats are known (arm_mm, mm per link), arms below min_arm_mm"""
+    probs = []
+    ok, err = link_arcs_ok(design, min_arc, r_ref, hub_r)
+    if not ok: probs.append(err)
+    if arm_mm is not None and float(min_arm_mm) > 0:
+        bad = [(k + 1, float(c)) for k, c in enumerate(arm_mm) if float(c) < float(min_arm_mm) - 1e-9]
+        if bad: probs.append("short arm: " + ", ".join(f"link {k} {c:.1f} mm between hub seats" for k, c in bad) + f" < min_arm_mm {float(min_arm_mm):g}")
+    return probs
+
+
+def arc_bounds(job):
+    """(lo, hi) arc bounds (deg) for the search samplers: arc_range with its lower end raised to min_arc"""
+    amin, amax = [float(x) for x in job.get("arc_range", [20.0, 100.0])]
+    lo = max(amin, float(job.get("min_arc", MIN_ARC)))
+    if lo > amax: raise ValueError(f"min_arc / arc_range leave no arcs: [{lo:g}, {amax:g}] deg")
+    return lo, amax
+
+
+def make_samplers(job, rng):
+    """the evolutionary search's (rand_d, mutate) for job["n"] joints: every arc they return lies in arc_bounds(job)"""
+    N = int(job["n"]); free_w = job.get("free_w", True); amin, amax = arc_bounds(job)
+    crange = job.get("cuff_range")                                    # sliding cuff on the upper arm (deg either way)
+    def rand_d():
+        g = dict(n=N, az=rng.uniform(0, 360), el=rng.uniform(-10, 90), a=[rng.uniform(amin, amax) for _ in range(N - 1)],
+                 w=[rng.uniform(40, 140), rng.uniform(-90, 90)] if free_w else list(job.get("w0", [85.9, 0.0])),
+                 branch=rng.choice([-1, 1]), order=[rng.randint(0, 1) for _ in range(N)])
+        if crange: g["cuff"] = dict(range=float(rng.uniform(15, crange)) if job.get("search_range") else float(crange), branch=rng.choice([-1, 1]))
+        if crange and job.get("w_range"): g["w"][0] = rng.uniform(*job["w_range"])
+        return g
+    def mutate(g, s):
+        n = json.loads(json.dumps(g))
+        n["az"] = (n["az"] + rng.gauss(0, 25 * s)) % 360; n["el"] = min(90, max(-10, n["el"] + rng.gauss(0, 10 * s)))
+        n["a"] = [min(amax, max(amin, x + rng.gauss(0, 8 * s))) for x in n["a"]]
+        if free_w: n["w"] = [min(170, max(10, n["w"][0] + rng.gauss(0, 10 * s))), n["w"][1] + rng.gauss(0, 20 * s)]
+        if rng.random() < 0.1 * s: n["branch"] = -n["branch"]
+        for k in range(N):
+            if rng.random() < 0.08 * s: n["order"][k] = 1 - n["order"][k]
+        if job.get("search_hm"): n["hm"] = min(4.0, max(0.8, n.get("hm", job.get("hub_margin", 2.0)) + rng.gauss(0, 0.4 * s)))
+        if crange:
+            n.setdefault("cuff", dict(range=float(crange), branch=1))
+            n["cuff"]["range"] = (min(float(crange), max(10.0, n["cuff"]["range"] + rng.gauss(0, 8 * s))) if job.get("search_range") else float(crange))
+            if job.get("w_range"): n["w"][0] = min(job["w_range"][1], max(job["w_range"][0], n["w"][0]))
+            if rng.random() < 0.1 * s: n["cuff"]["branch"] = -n["cuff"].get("branch", 1)
+        return n
+    return rand_d, mutate
 
 
 # ---------------------------------------------------------------- per-frame skin maps (GPU, exact)
@@ -159,6 +271,7 @@ class Band:
         self.zbar = float(bar.get("z0", 67.5)); self.jog = (float(bar.get("jog0", 34.0)), float(bar.get("jog1", 56.0)), float(bar.get("jog", 8.6)))
         self.WT = self.P["WT"]
         self.b_ant_max = float(job.get("b_ant_max", 0.15)); self.neck_cfg = job.get("neck"); self.mount_dir = job.get("mount_dir", [0.0, 0.6, -0.8])
+        self.min_arc = float(job.get("min_arc", MIN_ARC)); self.min_arm = float(job.get("min_arm_mm", MIN_ARM_MM))   # every link has a real arm
 
     # -- helpers
     def _unit(self, x): return x / (self.t.linalg.norm(x, dim=-1, keepdim=True) + 1e-12)
@@ -207,7 +320,10 @@ class Band:
         """pins (Pn, C, N, 3) in the scapula frame + validity (Pn, C) for poses with humerus rotations HG (Pn,3,3).
         Optional sliding cuff (d["cuff"] = {"range": deg, "branch": +-1}): JN's axis W turns about the humerus axis by
         phi (the cuff slides round the arm). N >= 4: phi is one more spare coordinate of the grid. N == 3: phi closes the
-        chain (p3 on W's cone round the humerus with angle a2 to p2), the base joint angle is the spare."""
+        chain (p3 on W's cone round the humerus with angle a2 to p2), the base joint angle is the spare.
+        N == 3 without a cuff is the pure 3R chain (3 DOF): m = 0, a single configuration (C = 1, Q of shape (1, 0)),
+        p2 from the two-circle closure of b and HG W on the design's branch; tri_ok keeps J2 sing_deg away from the
+        3R singularity (all three axes coplanar). Nothing else is spare, so joint speeds are not limited (max_rate)."""
         t = self.t; N = d["n"]; A = [x * D2R for x in d["a"]]; cuff = d.get("cuff")
         b = t.tensor(bvec(d["az"], d["el"]), device=self.dev, dtype=self.f32)
         W0 = t.tensor(w_dir(*d["w"]), device=self.dev, dtype=self.f32); hA = t.tensor([0.0, -1.0, 0.0], device=self.dev)
@@ -253,10 +369,17 @@ class Band:
             ok &= tri_ok(t, P[:, :, k - 1], P[:, :, k + 1], A[k - 1], A[k], self.SING)
         return P, ok, Q
 
+    @staticmethod
+    def _reject(err, **extra):
+        """result of a design that is infeasible before / regardless of the score"""
+        return dict(dict(score=-1.0, follow=0.0, in_band=0.0, score_plain=0.0, score_unweighted=0.0, follow_unweighted=0.0, zj4=0.0, C=0, clips={}, err=err), **extra)
+
     def evaluate(self, d, detail=False):
         self.hub_margin = float(d.get("hm", self.hub_margin0))                # per-design contour margin (searched)
+        ok_, err_ = link_arcs_ok(d, self.min_arc, self.R_REF, HUB_R)          # every link a real arm (FINDINGS "Short link")
+        if not ok_: return self._reject(err_)
         if bvec(d["az"], d["el"])[0] > self.b_ant_max:                       # J1 on the front of the shoulder: no back anchor
-            return dict(score=-1.0, follow=0.0, in_band=0.0, score_plain=0.0, score_unweighted=0.0, follow_unweighted=0.0, zj4=0.0, C=0, clips={}, err="J1 anterior")
+            return self._reject("J1 anterior")
         t = self.t; N = d["n"]; A = [x * D2R for x in d["a"]]; order = d.get("order", [1] * N)
         HG, RS = self.P["HG"], self.P["RS"]; NP = HG.shape[0]
         # members: 0 = base (hub at J1 only), k = 1..N-1 links. lower[J] = which member is lower at joint J (1..N-1)
@@ -390,9 +513,14 @@ class Band:
                 best = dict(score=score, follow=follow, h=h.clone(), zj4=zj4, bot_under=self._bot_under.clone(), faces=dict(self._faces),
                             rail_under=(self._faces_full["rail_under"].clone() if self._rail is not None else None), frame=frame.clone(), cfg=path.clone(), feas=fe.clone(),
                             feas_all=feas.clone() if detail else None, share_all=share.clone() if detail else None)
+        # the physical arm rule at the fitted hub heights: the deg rule alone lets hubs near GH (or big hubs) touch
+        arm_ok_, arm_err, arm_mm = arms_ok(d["a"], hub_heights(N, best["faces"], lower, STACK), self.min_arm, HUB_R)
+        arm_mm = [round(c, 2) for c in arm_mm]
+        if not arm_ok_: return self._reject(arm_err, arm_mm=arm_mm, score_unchecked=best["score"], follow_unchecked=best["follow"])
         out = dict(score=best["score"], follow=best["follow"], score_plain=float((best["frame"] * WT).sum() / WT.sum()),
                    score_unweighted=float(best["frame"].mean()), follow_unweighted=float(best["feas"].float().mean()),
-                   in_band=float(best["frame"][best["feas"]].mean()) if bool(best["feas"].any()) else 0.0, zj4=float(best["zj4"]), C=C)
+                   in_band=float(best["frame"][best["feas"]].mean()) if bool(best["feas"].any()) else 0.0, zj4=float(best["zj4"]), C=C, arm_mm=arm_mm,
+                   min_arc=self.min_arc, min_arm_mm=self.min_arm)
         names = self.P["NAMES"]; cid = self.P["CID"]
         out["clips"] = {names[k]: dict(score=float(best["frame"][cid == k].mean()), follow=float(best["feas"][cid == k].float().mean())) for k in range(len(names))}
         if detail or d.get("diag"):
@@ -721,36 +849,18 @@ def run(job):
         res = [dict(d, **B.evaluate(d, detail=job.get("detail", False))) for d in job["designs"]]
         return {"results": res, "secs": time.time() - t0, "device": devname, "version": CODE_VERSION}
     # evolutionary search for one chain length
-    rng = random.Random(job.get("seed", 1)); N = int(job["n"]); free_w = job.get("free_w", True)
-    amin, amax = job.get("arc_range", [20.0, 100.0])
+    rng = random.Random(job.get("seed", 1)); N = int(job["n"])
     crange = job.get("cuff_range")                                    # sliding cuff on the upper arm (deg either way)
-    def rand_d():
-        g = dict(n=N, az=rng.uniform(0, 360), el=rng.uniform(-10, 90), a=[rng.uniform(amin, amax) for _ in range(N - 1)],
-                 w=[rng.uniform(40, 140), rng.uniform(-90, 90)] if free_w else list(job.get("w0", [85.9, 0.0])),
-                 branch=rng.choice([-1, 1]), order=[rng.randint(0, 1) for _ in range(N)])
-        if crange: g["cuff"] = dict(range=float(rng.uniform(15, crange)) if job.get("search_range") else float(crange), branch=rng.choice([-1, 1]))
-        if crange and job.get("w_range"): g["w"][0] = rng.uniform(*job["w_range"])
-        return g
-    def mutate(g, s):
-        n = json.loads(json.dumps(g))
-        n["az"] = (n["az"] + rng.gauss(0, 25 * s)) % 360; n["el"] = min(90, max(-10, n["el"] + rng.gauss(0, 10 * s)))
-        n["a"] = [min(amax, max(amin, x + rng.gauss(0, 8 * s))) for x in n["a"]]
-        if free_w: n["w"] = [min(170, max(10, n["w"][0] + rng.gauss(0, 10 * s))), n["w"][1] + rng.gauss(0, 20 * s)]
-        if rng.random() < 0.1 * s: n["branch"] = -n["branch"]
-        for k in range(N):
-            if rng.random() < 0.08 * s: n["order"][k] = 1 - n["order"][k]
-        if job.get("search_hm"): n["hm"] = min(4.0, max(0.8, n.get("hm", job.get("hub_margin", 2.0)) + rng.gauss(0, 0.4 * s)))
-        if crange:
-            n.setdefault("cuff", dict(range=float(crange), branch=1))
-            n["cuff"]["range"] = (min(float(crange), max(10.0, n["cuff"]["range"] + rng.gauss(0, 8 * s))) if job.get("search_range") else float(crange))
-            if job.get("w_range"): n["w"][0] = min(job["w_range"][1], max(job["w_range"][0], n["w"][0]))
-            if rng.random() < 0.1 * s: n["cuff"]["branch"] = -n["cuff"].get("branch", 1)
-        return n
+    rand_d, mutate = make_samplers(job, rng); amin, amax = arc_bounds(job)
+    print(f"link arcs searched in [{amin:g}, {amax:g}] deg (min_arc {B.min_arc:g}), min arm {B.min_arm:g} mm between hub seats", flush=True)
     def fit(g):
         try: r = B.evaluate(g)
         except Exception as e: r = dict(score=-1.0, err=str(e)[:200])
         return r
-    inits = [dict(x, n=N) for x in job.get("init", []) if len(x.get("a", [])) == N - 1]
+    inits = [json.loads(json.dumps(dict(x, n=N))) for x in job.get("init", []) if len(x.get("a", [])) == N - 1]
+    for x in inits:                                                   # seeds from older searches: arcs into the searched range
+        a0 = list(x["a"]); x["a"] = [min(amax, max(amin, float(v))) for v in a0]
+        if x["a"] != a0: print(f"init arcs {[round(v, 1) for v in a0]} -> {[round(v, 1) for v in x['a']]} (arc bounds)", flush=True)
     if crange:
         for x in inits: x.setdefault("cuff", dict(range=float(crange), branch=1))
     pop = [dict(g=g, r=fit(g)) for g in (inits + [rand_d() for _ in range(job.get("pop", 64))])]
