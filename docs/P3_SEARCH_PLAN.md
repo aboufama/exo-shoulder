@@ -50,7 +50,12 @@ The band evaluator (`pipeline/conformal/gpu/band_impl.py`) is direction-only: ev
 2. Clearance: the same per-frame radial maps, looked up at each posed point's direction and radius (as `make_clips_full.map_clear` already does) - valid where the skin is star-shaped from the GH centre, which the maps' re-entry sheets (r2c) already guard.
 3. Zero spare DOF (families A, B): no spare-angle grid, so one 3-DOF evaluation is ~1/30 of a 4R evaluation (r13 scanned 30 spare angles) - CPU search becomes realistic.
 4. Base part: evaluated thorax-fixed against the moving scapular skin (judge/base_mount.py logic).
-5. Cross-check every Pareto design with the honest scorer and the judges on built CAD (`tools/judge_all.sh`), since the evaluator has been optimistic before (FINDINGS).
+5. Cross-check every Pareto design with the honest scorer and the judges on built CAD (`tools/judge_all.sh`), since the
+   evaluator has been optimistic before (FINDINGS). The CAD for that is **L1 keep-out CAD** (CAD_STANDARD.md scope, user
+   2026-10-14): a fast builder that turns a design into hubs = cylinders of the real v4 stack (O23 x 10.47 mm), links =
+   constant 5.5 mm slabs at the evaluator's heights over the skin, ring rail + carriage envelopes, one valid solid each,
+   written as `exo.glb` + STEP for the judges - minutes per design, no fairing. L2 (the user's standard, fair G2 CAD)
+   only for the design the user picks from the Pareto front.
 
 ## 7. Compute (this machine's CPUs, no paid compute)
 

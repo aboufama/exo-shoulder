@@ -1,5 +1,11 @@
 # CAD standard
 
+**Scope (user, 2026-10-14):** this standard is level **L2** - the CAD of a design that already passed the motion judges
+(R1-R6, R10) on held-out data and that the user chose (phase P4). Every iteration before that uses **L1 keep-out CAD**:
+joint keep-outs (hub diameter x real stack height), links as constant-thickness slabs at their real height over the
+skin, rail / carriage envelopes, one valid solid per part - no fillets, G2 blends, fairing or zebra checks. Fidelity
+that matters for the judges (heights, clearances, keep-outs, mass) must be right at L1; looks wait for L2.
+
 The user's own parts (`data/user_cad/RIGHT ARM SUBASSY.step`: TOP, MIDDLE, BOTTOM, FOREARM CUFF) set the bar: clean
 feature CAD, few faces (TOP = 17), planes / cylinders / cones + G2 B-spline blends.
 

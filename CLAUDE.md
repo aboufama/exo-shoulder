@@ -31,8 +31,13 @@ Never relax the 1 cm rule or the DOF cap to buy range without asking.
 - **Downloads and licences**: ask first; licences (AMASS, SMPL-X) are accepted by the user, not the agent.
 - **Renders/films**: show a cheap motion preview and get approval before any paid render. Mannequin: matte black,
   faceless (not uncanny), muscles OK. Parts: bead blasted metal, polished screws, iglidur orange; no black parts.
-- **CAD**: follow docs/CAD_STANDARD.md; every part passes `judge/part_validity.py` and the zebra check in
-  `pipeline/full-exo/parts.html` before it is shown.
+- **CAD has two levels** (user, 2026-10-14: "you dont need to make high quality CAD with smoothing for each iteration
+  and testing ... Just a basic CAD that has the expected keep outs of the joint, expected link height"). **L1 keep-out
+  CAD** for every iteration and test: joint keep-outs (hub diameter x the real stack height), links as constant-thickness
+  slabs at their real height over the skin, rail/carriage envelopes; one valid solid per part (`judge/part_validity.py`)
+  and the motion judges (R1-R6, R10) - no fillets, no G2, no zebra. **L2 user-standard CAD** (docs/CAD_STANDARD.md,
+  zebra check in `pipeline/full-exo/parts.html`) only for a design that passed the L1 judges on held-out data and that
+  the user chose (phase P4).
 - **Git**: commit and push after each meaningful, judged step; never commit caches, keys or personal data. Use the
   commit attribution your environment specifies.
 - Compute: use the machine's own CPUs (check `nproc`, parallelise searches across cores); GPU on RunPod only for final Blender renders, after cost approval. Keep local CPU jobs to <= 4 workers on the user's laptop (it overheats); no limit in the cloud.

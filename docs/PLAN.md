@@ -69,7 +69,7 @@ reported.
 | P1 | **Raw data.** Capture protocol in `data/raw/README.md`; ingest scans + OpenCap; define the held-out split | scans, OpenCap videos, AMASS / SMPL-X licences | data in `data/raw`, split committed |
 | P2 | **Human model validation.** Register the rig (or SMPL-X) to the user's scans in each pose; fix the bulge / overlap artifacts | - | scan registration error reported per region |
 | P3 | **Synthesis.** Multi-objective, robust across bodies, constraint: every link has a real arm (arc >= ~35 deg, see FINDINGS "short link"), Jacobian conditioning as an objective | GPU spend approval (state cost first) | Pareto front; scorecard R1-R6 on held-out data |
-| P4 | **CAD** at the user's standard for the chosen design(s) | user review in `parts.html` | R7, R12 |
+| P4 | **CAD** at the user's standard (L2) for the chosen design(s); every earlier phase iterates on L1 keep-out CAD (CAD_STANDARD.md scope) | user review in `parts.html` | R7, R12 |
 | P5 | **Structure + DFM.** CalculiX, tolerance stack, supplier quote | supplier account / quote request (user sends) | R9, R13 |
 | P6 | **Prototype test.** Print, assemble, test on two bodies | printer / print service, a second person | R11, R15 |
 
