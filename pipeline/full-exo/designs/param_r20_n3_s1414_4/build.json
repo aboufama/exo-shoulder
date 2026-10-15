@@ -1,0 +1,574 @@
+{
+ "faces": {
+  "J1": 53.37790421905751,
+  "J2": 93.17675018310547,
+  "J3": 71.84564208984375
+ },
+ "link 1": {
+  "under_mm": [
+   53.38,
+   53.42,
+   53.54,
+   53.73,
+   54.01,
+   54.37,
+   53.88,
+   54.38,
+   55.41,
+   55.94,
+   56.97,
+   57.25,
+   58.12,
+   58.91,
+   59.69,
+   60.69,
+   61.16,
+   61.53,
+   61.94,
+   62.44,
+   62.84,
+   63.56,
+   63.69,
+   64.19,
+   64.75,
+   64.75,
+   65.38,
+   69.46,
+   74.33,
+   79.2,
+   84.06,
+   88.93,
+   93.8,
+   93.45,
+   93.25,
+   93.18
+  ],
+  "need_mm": [
+   50.78,
+   51.16,
+   51.72,
+   52.38,
+   52.88,
+   53.41,
+   53.88,
+   54.38,
+   55.41,
+   55.94,
+   56.97,
+   57.25,
+   58.12,
+   58.91,
+   59.69,
+   60.69,
+   61.16,
+   61.53,
+   61.94,
+   62.44,
+   62.84,
+   63.56,
+   63.69,
+   64.19,
+   64.75,
+   64.75,
+   65.38,
+   65.56,
+   66.31,
+   66.69,
+   67.5,
+   68.19,
+   69.25,
+   69.94,
+   71.25,
+   72.31
+  ],
+  "arc_deg": 76.9,
+  "rise_over_skin_mm": 24.55
+ },
+ "link 2": {
+  "under_mm": [
+   96.33,
+   96.38,
+   96.54,
+   96.81,
+   91.87,
+   86.93,
+   81.99,
+   77.05,
+   72.12,
+   71.5,
+   71.38,
+   70.94,
+   71.12,
+   70.56,
+   70.38,
+   69.94,
+   69.38,
+   69.06,
+   68.62,
+   68.5,
+   68.0,
+   67.25,
+   66.81,
+   66.44,
+   66.06,
+   65.38,
+   64.62,
+   64.06,
+   63.5,
+   65.79,
+   70.73,
+   75.67,
+   75.37,
+   75.16,
+   75.04,
+   75.0
+  ],
+  "need_mm": [
+   71.56,
+   71.5,
+   71.69,
+   71.75,
+   72.31,
+   71.88,
+   71.5,
+   71.5,
+   71.81,
+   71.5,
+   71.38,
+   70.94,
+   71.12,
+   70.56,
+   70.38,
+   69.94,
+   69.38,
+   69.06,
+   68.62,
+   68.5,
+   68.0,
+   67.25,
+   66.81,
+   66.44,
+   66.06,
+   65.38,
+   64.62,
+   64.06,
+   63.5,
+   62.91,
+   63.06,
+   63.62,
+   64.19,
+   64.75,
+   65.25,
+   65.62
+  ],
+  "arc_deg": 66.75,
+  "rise_over_skin_mm": 25.06
+ },
+ "neck": {
+  "length_mm": 61.3
+ },
+ "parts": [
+  {
+   "group": "base",
+   "name": "D5-01 scapula base: J1 boss + handler tab, 2x M4 (Ti-6Al-4V)",
+   "valid": true,
+   "volume_mm3": 3257.0
+  },
+  {
+   "group": "base",
+   "name": "J1 bearing 1 MR117-2RS 7x11x3",
+   "valid": true,
+   "volume_mm3": 169.6
+  },
+  {
+   "group": "base",
+   "name": "J1 bearing 2 MR117-2RS 7x11x3",
+   "valid": true,
+   "volume_mm3": 169.6
+  },
+  {
+   "group": "base",
+   "name": "J1 outer spacer 17-4PH",
+   "valid": true,
+   "volume_mm3": 11.8
+  },
+  {
+   "group": "l1",
+   "name": "J1 inner spacer (ground, preload)",
+   "valid": true,
+   "volume_mm3": 8.6
+  },
+  {
+   "group": "l1",
+   "name": "J1 ring nut M7x0.5 (Ti-6Al-4V)",
+   "valid": true,
+   "volume_mm3": 17.6
+  },
+  {
+   "group": "base",
+   "name": "J1 cap O20 G2 dome, threaded (Ti-6Al-4V)",
+   "valid": true,
+   "volume_mm3": 453.8
+  },
+  {
+   "group": "l2",
+   "name": "J2 bearing 1 MR117-2RS 7x11x3",
+   "valid": true,
+   "volume_mm3": 169.6
+  },
+  {
+   "group": "l2",
+   "name": "J2 bearing 2 MR117-2RS 7x11x3",
+   "valid": true,
+   "volume_mm3": 169.6
+  },
+  {
+   "group": "l2",
+   "name": "J2 outer spacer 17-4PH",
+   "valid": true,
+   "volume_mm3": 11.8
+  },
+  {
+   "group": "l1",
+   "name": "J2 inner spacer (ground, preload)",
+   "valid": true,
+   "volume_mm3": 8.6
+  },
+  {
+   "group": "l1",
+   "name": "J2 ring nut M7x0.5 (Ti-6Al-4V)",
+   "valid": true,
+   "volume_mm3": 17.6
+  },
+  {
+   "group": "l2",
+   "name": "J2 cap O20 G2 dome, threaded (Ti-6Al-4V)",
+   "valid": true,
+   "volume_mm3": 453.8
+  },
+  {
+   "group": "H",
+   "name": "D5-04 arm end: J3 pad + pin + neck + lap plate on BOTTOM (Ti-6Al-4V)",
+   "valid": true,
+   "volume_mm3": 4511.4
+  },
+  {
+   "group": "l2",
+   "name": "J3 bearing 1 MR117-2RS 7x11x3",
+   "valid": true,
+   "volume_mm3": 169.6
+  },
+  {
+   "group": "l2",
+   "name": "J3 bearing 2 MR117-2RS 7x11x3",
+   "valid": true,
+   "volume_mm3": 169.6
+  },
+  {
+   "group": "l2",
+   "name": "J3 outer spacer 17-4PH",
+   "valid": true,
+   "volume_mm3": 11.8
+  },
+  {
+   "group": "H",
+   "name": "J3 inner spacer (ground, preload)",
+   "valid": true,
+   "volume_mm3": 8.6
+  },
+  {
+   "group": "H",
+   "name": "J3 ring nut M7x0.5 (Ti-6Al-4V)",
+   "valid": true,
+   "volume_mm3": 17.6
+  },
+  {
+   "group": "l2",
+   "name": "J3 cap O20 G2 dome, threaded (Ti-6Al-4V)",
+   "valid": true,
+   "volume_mm3": 453.8
+  },
+  {
+   "group": "l1",
+   "name": "D5-02 link 1: strap + J1/J2 pads + integral pins (Ti-6Al-4V)",
+   "valid": true,
+   "volume_mm3": 4227.2
+  },
+  {
+   "group": "l2",
+   "name": "D5-03 link 2: strap + J2/J3 bosses (Ti-6Al-4V)",
+   "valid": true,
+   "volume_mm3": 4822.5
+  },
+  {
+   "group": "H",
+   "name": "M4 ULTRA LOW PROFILE SOCKET HEAD SCREW, 6mm L, HS STEEL",
+   "valid": true,
+   "volume_mm3": 106.3
+  },
+  {
+   "group": "H",
+   "name": "BOTTOM (user's bar, cut at s 265, 4x M3 countersunk for the neck tongue)",
+   "valid": true,
+   "volume_mm3": 25063.3
+  },
+  {
+   "group": "F",
+   "name": "FOREARM CUFF",
+   "valid": true,
+   "volume_mm3": 132891.0
+  },
+  {
+   "group": "F",
+   "name": "Hex socket head countersunk screw grade C M4x0.7 x 8",
+   "valid": true,
+   "volume_mm3": 139.0
+  },
+  {
+   "group": "H",
+   "name": "TOP",
+   "valid": true,
+   "volume_mm3": 2195.7
+  },
+  {
+   "group": "F",
+   "name": "Hex socket head countersunk screw grade C M4x0.7 x 8",
+   "valid": true,
+   "volume_mm3": 139.0
+  },
+  {
+   "group": "F",
+   "name": "Hex socket head countersunk screw grade C M4x0.7 x 8",
+   "valid": true,
+   "volume_mm3": 139.0
+  },
+  {
+   "group": "H",
+   "name": "M4 ULTRA LOW PROFILE SOCKET HEAD SCREW, 6mm L, HS STEEL",
+   "valid": true,
+   "volume_mm3": 106.3
+  },
+  {
+   "group": "H",
+   "name": "IGUS THRUST WASHER, 30mm ID, 39mm OD, 1.5mm T, IGLIDE J",
+   "valid": true,
+   "volume_mm3": 731.6
+  },
+  {
+   "group": "F",
+   "name": "MIDDLE",
+   "valid": true,
+   "volume_mm3": 12203.3
+  },
+  {
+   "group": "H",
+   "name": "IGUS THRUST WASHER, 30mm ID, 39mm OD, 1.5mm T, IGLIDE J",
+   "valid": true,
+   "volume_mm3": 731.6
+  },
+  {
+   "group": "F",
+   "name": "Hex socket head countersunk screw grade C M4x0.7 x 8",
+   "valid": true,
+   "volume_mm3": 139.0
+  },
+  {
+   "group": "F",
+   "name": "Hex socket head countersunk screw grade C M4x0.7 x 8",
+   "valid": true,
+   "volume_mm3": 139.0
+  },
+  {
+   "group": "F",
+   "name": "Hex socket head countersunk screw grade C M4x0.7 x 8",
+   "valid": true,
+   "volume_mm3": 139.0
+  },
+  {
+   "group": "H",
+   "name": "5mm D, 2.5mm H, N42 MAGNET",
+   "valid": true,
+   "volume_mm3": 48.7
+  },
+  {
+   "group": "H",
+   "name": "M4 ULTRA LOW PROFILE SOCKET HEAD SCREW, 6mm L, HS STEEL",
+   "valid": true,
+   "volume_mm3": 106.3
+  },
+  {
+   "group": "H",
+   "name": "CirPattern1[15]",
+   "valid": true,
+   "volume_mm3": 6.9
+  },
+  {
+   "group": "H",
+   "name": "Revolve1[2]",
+   "valid": true,
+   "volume_mm3": 42.3
+  },
+  {
+   "group": "H",
+   "name": "CirPattern1[11]",
+   "valid": true,
+   "volume_mm3": 6.9
+  },
+  {
+   "group": "H",
+   "name": "Revolve4",
+   "valid": true,
+   "volume_mm3": 6.9
+  },
+  {
+   "group": "H",
+   "name": "CirPattern1[5]",
+   "valid": true,
+   "volume_mm3": 6.9
+  },
+  {
+   "group": "H",
+   "name": "Revolve1[1]",
+   "valid": true,
+   "volume_mm3": 275.0
+  },
+  {
+   "group": "H",
+   "name": "CirPattern1[7]",
+   "valid": true,
+   "volume_mm3": 6.9
+  },
+  {
+   "group": "H",
+   "name": "CirPattern1[16]",
+   "valid": true,
+   "volume_mm3": 6.9
+  },
+  {
+   "group": "H",
+   "name": "CirPattern1[12]",
+   "valid": true,
+   "volume_mm3": 6.9
+  },
+  {
+   "group": "H",
+   "name": "CirPattern1[14]",
+   "valid": true,
+   "volume_mm3": 6.9
+  },
+  {
+   "group": "H",
+   "name": "CirPattern1[8]",
+   "valid": true,
+   "volume_mm3": 6.9
+  },
+  {
+   "group": "H",
+   "name": "CirPattern1[10]",
+   "valid": true,
+   "volume_mm3": 6.9
+  },
+  {
+   "group": "H",
+   "name": "CirPattern1[4]",
+   "valid": true,
+   "volume_mm3": 6.9
+  },
+  {
+   "group": "H",
+   "name": "Revolve3",
+   "valid": true,
+   "volume_mm3": 219.9
+  },
+  {
+   "group": "H",
+   "name": "CirPattern1[2]",
+   "valid": true,
+   "volume_mm3": 6.9
+  },
+  {
+   "group": "H",
+   "name": "CirPattern1[9]",
+   "valid": true,
+   "volume_mm3": 6.9
+  },
+  {
+   "group": "H",
+   "name": "Revolve1[3]",
+   "valid": true,
+   "volume_mm3": 42.3
+  },
+  {
+   "group": "H",
+   "name": "CirPattern1[1]",
+   "valid": true,
+   "volume_mm3": 6.9
+  },
+  {
+   "group": "H",
+   "name": "CirPattern1[6]",
+   "valid": true,
+   "volume_mm3": 6.9
+  },
+  {
+   "group": "H",
+   "name": "CirPattern1[3]",
+   "valid": true,
+   "volume_mm3": 6.9
+  },
+  {
+   "group": "H",
+   "name": "CirPattern1[17]",
+   "valid": true,
+   "volume_mm3": 6.9
+  },
+  {
+   "group": "H",
+   "name": "CirPattern1[13]",
+   "valid": true,
+   "volume_mm3": 6.9
+  },
+  {
+   "group": "H",
+   "name": "UPPER ARM CUFF (conformal G2 shell, AlSi10Mg bead blasted)",
+   "valid": true,
+   "volume_mm3": 15755.7
+  },
+  {
+   "group": "H",
+   "name": "M4x6 ISO 10642 countersunk (upper cuff)",
+   "valid": true,
+   "volume_mm3": 130.0
+  },
+  {
+   "group": "H",
+   "name": "M4x6 ISO 10642 countersunk (upper cuff)",
+   "valid": true,
+   "volume_mm3": 130.0
+  },
+  {
+   "group": "H",
+   "name": "M4x6 ISO 10642 countersunk (upper cuff)",
+   "valid": true,
+   "volume_mm3": 130.0
+  },
+  {
+   "group": "H",
+   "name": "M4x6 ISO 10642 countersunk (upper cuff)",
+   "valid": true,
+   "volume_mm3": 130.0
+  },
+  {
+   "group": "H",
+   "name": "M4x6 ISO 10642 countersunk (upper cuff)",
+   "valid": true,
+   "volume_mm3": 130.0
+  },
+  {
+   "group": "H",
+   "name": "M4x6 ISO 10642 countersunk (upper cuff)",
+   "valid": true,
+   "volume_mm3": 130.0
+  }
+ ]
+}

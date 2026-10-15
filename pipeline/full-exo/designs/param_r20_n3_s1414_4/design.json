@@ -1,0 +1,32 @@
+{
+ "id": "param_r20_n3_s1414_4",
+ "source": "pipeline/conformal/band_cad/inputs/r20_n3_s1414_4.json (= gpu_client/band_eval_det20d0.json #1)",
+ "n_joints": 3,
+ "sliding_cuff": false,
+ "dof": 3,
+ "kinematics": {
+  "az": 2.4305071427308924,
+  "el": 80.67633718429899,
+  "a": [
+   76.90180446920043,
+   66.74921235407174
+  ],
+  "w": [
+   86.32769021001913,
+   21.829657347343378
+  ],
+  "branch": -1,
+  "order": [
+   0,
+   1,
+   1
+  ]
+ },
+ "base": {
+  "mount": "girdle",
+  "chain": "spherical",
+  "note": "base rides the scapula on the user's scapula handler"
+ },
+ "built_with": "pipeline/conformal/param_cad/param_build.py (parametric B-rep, v5 joints, 8x3 straps)",
+ "label": "3R champion r20_n3_s1414_4, parametric CAD"
+}
