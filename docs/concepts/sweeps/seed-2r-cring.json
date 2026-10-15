@@ -1,0 +1,46 @@
+[
+ {
+  "k": 0,
+  "t": "2026-10-15T18:32:42Z",
+  "params": {
+   "az": 125.0,
+   "el": 45.0,
+   "a1": 90.0,
+   "a2": 90.0,
+   "sigma": 1,
+   "margin": 10.0,
+   "L": 100.0,
+   "tilt": 18.0,
+   "tilt_a": -30.0,
+   "c_target": 0.0,
+   "clr": 2.5,
+   "q_ring": 0.5,
+   "cov": 0.95,
+   "slide_side": 1,
+   "width": 10.0,
+   "t_link": 3.0,
+   "q": 0.97
+  },
+  "inband14": 0.0699,
+  "inband10": 0.0405,
+  "reach": 0.1812,
+  "follow": 0.4167,
+  "contact": 0.7453,
+  "gap": 282.75,
+  "closure": 0.9636,
+  "mass_g": 1368.3,
+  "ring_R": 72.7,
+  "opening": 141.3,
+  "flips": 0,
+  "collide": 0.0,
+  "inband_member": {
+   "hub1": 0.0983,
+   "hub2": 0.0,
+   "link1": 0.0,
+   "link2": 0.0,
+   "ring": 0.183,
+   "carriage": 0.0,
+   "slide": 0.0
+  }
+ }
+]
