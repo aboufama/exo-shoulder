@@ -35,15 +35,18 @@ const OUT = opt('--out', path.join(REPO, 'docs', 'dashboard', 'data', 'motion.js
 const N = Number(opt('--n', 40));
 const SHEET = opt('--sheet', null);
 const STATS = flag('--stats');
+const CAM_ARG = opt('--cam', null);       // tuning only: dx,dy,dz,pan_right,pan_down,half
 const ONLY = args.filter((a) => !a.startsWith('--'));
 
 // ---------------------------------------------------------------- the one camera (orthographic)
-// From front-right-above: x anterior, y up, z lateral (right shoulder). Centre and half-width in mm around GH, tuned
-// so the overhead arm, the cuff in every pose and the scapular bases stay inside the frame.
-const CAM = { dir: V.unit([0.42, 0.5, 0.76]), centre: [0, 18, -18], half: 185, view: 100 };
+// From front-right-above: x anterior, y up, z lateral (right shoulder). `pan` moves the frame (mm on the screen: right,
+// down) off GH, `half` is its half-width in mm: tuned on every concept's drawn points so the overhead arm, the cuff in
+// every pose and the scapular bases stay inside the frame (thumbs.mjs --stats prints what still falls outside).
+const CAM = { dir: V.unit([0.42, 0.5, 0.76]), pan: [0, 0], half: 185, view: 100 };
+if (CAM_ARG) { const v = CAM_ARG.split(',').map(Number); CAM.dir = V.unit(v.slice(0, 3)); CAM.pan = v.slice(3, 5); CAM.half = v[5]; }
 const Zc = CAM.dir, Xc = V.unit(V.cross([0, 1, 0], Zc)), Yc = V.cross(Zc, Xc);
 const S = CAM.view / (2 * CAM.half);
-const proj = (p) => { const d = V.sub(p, CAM.centre); return [CAM.view / 2 + V.dot(d, Xc) * S, CAM.view / 2 - V.dot(d, Yc) * S]; };
+const proj = (p) => [CAM.view / 2 + (V.dot(p, Xc) - CAM.pan[0]) * S, CAM.view / 2 + (-V.dot(p, Yc) - CAM.pan[1]) * S];
 
 // ---------------------------------------------------------------- compact path writer
 const q = (x) => Math.round(x);
@@ -200,7 +203,7 @@ if (STATS && ext.length) {
 
 // contact sheet (SVG) for a look without a browser: one row per concept, `cols` frames across
 if (SHEET) {
-  const cols = 8, cell = 64, pad = 8, lab = 120, idxs = Array.from({ length: cols }, (_, k) => Math.round(k * N / cols));
+  const cols = 8, cell = 56, pad = 8, lab = 150, idxs = Array.from({ length: cols }, (_, k) => Math.round(k * N / cols));
   const sh = rows.find((r) => r.id === '_shoulder').body.split('|'), body = rows.filter((r) => r.kind === 'mechanism');
   let s = `<svg xmlns="http://www.w3.org/2000/svg" width="${lab + cols * (cell + pad)}" height="${body.length * (cell + pad) + pad}" font-family="monospace" font-size="9"><rect width="100%" height="100%" fill="#fff"/>`;
   body.forEach((r, j) => {
