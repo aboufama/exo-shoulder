@@ -27,7 +27,7 @@ unit = SH.unit
 FAIR = __import__("os").environ.get("FAIR", "1") == "1"                               # fair surfaces (stiff shrink-wrap) instead of local lifts/ramps
 FAIR_LAM = float(__import__("os").environ.get("FAIR_LAM", 300.0)); FAIR_BLEND = 4.0
 FIELD_MODE = __import__("os").environ.get("FIELD_MODE", "swept")                    # "swept": arms = swept constant-section bands (designed look); "fair": 2D fair fields
-RAMP_TOP = 35.0                                                                       # max ramp out of a hub plane (deg)
+RAMP_TOP = float(__import__("os").environ.get("RAMP_TOP", 35.0))                      # max ramp out of a hub plane (deg); fair_build sets the input's ramp_deg
 L_FLAT = float(__import__("os").environ.get("L_FLAT", 0.0))                          # hub planes continue flat this far along the arm (stacked plates leave the joint parallel)   # bending weight; G2 blend into the hub planes (mm)
 def _fair1d(m, end0, end1, dt, lam, a0=0.02, iters=20):
     """1-D stiff shrink-wrap: h >= m (where finite), h clamped to end0 = (h[0], h[1]) and end1 = (h[-1], h[-2]) (value + slope)"""

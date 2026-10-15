@@ -48,7 +48,7 @@ iglide = principled("iglide", (0.80, 0.42, 0.03), 0.0, 0.42); steel = principled
 black = principled("mannequin", (0.012, 0.012, 0.013), 0.0, 0.62, coat=0.12, sheen=0.35)
 def mat_for(n):
     l = n.lower()
-    if any(k in l for k in ("din 7984", "dowel", "screw")): return stainless
+    if any(k in l for k in ("din 7984", "iso 10642", "dowel", "screw")): return stainless           # every screw polished (user look)
     if any(k in l for k in ("igus", "iglidur", "liner", "gib")): return iglide
     if "bearing" in l and "igus" not in l: return steel
     return alu

@@ -47,7 +47,7 @@ skin = principled("mannequin", (0.018, 0.018, 0.02), 0.0, 0.55, coat=0.15)
 def mat_for(n):
     l = n.lower()
     if l.startswith("body"): return skin
-    if any(k in l for k in ("din 7984", "dowel", "screw", "set screw")): return stainless
+    if any(k in l for k in ("din 7984", "iso 10642", "dowel", "screw", "set screw")): return stainless   # every screw polished (user look)
     if "bearing" in l and "igus" not in l: return steel
     if any(k in l for k in ("igus", "iglidur", "liner", "gib", "washer", "sleeve")): return iglide
     return alu

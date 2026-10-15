@@ -49,6 +49,22 @@ for cl in C["clips"]:
         Rs = DS.scapula(f["p"][1]); f["G"]["base"] = (Rs @ Fb).round(6).ravel().tolist(); f["clr"] = 0.0; f["med"] = None
 C["subtitle"] = LABEL
 json.dump(C, open(os.path.join(DD, "clips.json"), "w"), separators=(",", ":"))
+_ws = os.path.join(FX, "designs", SRC, "workspace.json")                             # R16 poses (judge/workspace.py) with the same fixed base
+if os.path.exists(_ws):
+    W = json.load(open(_ws))
+    for w in W["poses"]:
+        if "G" in w: w["G"]["base"] = (DS.scapula(w["p"][1]) @ Fb).round(6).ravel().tolist()
+    json.dump(W, open(os.path.join(DD, "workspace.json"), "w"), separators=(",", ":")); print(f"workspace.json: {len(W['poses'])} poses, base re-framed")
+_inp = os.path.join(HERE, "inputs", f"{KEY}.json")                                    # design.json (R5 count, base mount, R17 kinematics)
+if os.path.exists(_inp):
+    Ri = json.load(open(_inp))["results"][0]; cuff = Ri.get("cuff")
+    json.dump(dict(id=NAME, source=f"pipeline/conformal/band_cad/inputs/{KEY}.json" + (f" (= {Ri['_eval_src']})" if "_eval_src" in Ri else ""),
+                   n_joints=Ri["n"], sliding_cuff=bool(cuff), dof=Ri["n"] + (1 if cuff else 0),
+                   kinematics={k: Ri[k] for k in ("az", "el", "a", "w", "branch", "order") if k in Ri}, **({"cuff": cuff} if cuff else {}),
+                   base=dict(mount="girdle", chain="spherical", note="base rides the scapula on the user's scapula handler"),
+                   built_with=f"pipeline/conformal/fair_cad/fair_pipeline.sh (POSES_FILE={Ri.get('poses_file', 'band_poses.b64')}; t_link {Ri.get('t_link')}, "
+                              f"ramp {Ri.get('ramp_deg', 35)} deg; v4 joint stacks)", label=LABEL),
+              open(os.path.join(DD, "design.json"), "w"), indent=1)
 idx = json.load(open(os.path.join(FX, "designs", "index.json"))); idx = [e for e in idx if e["id"] != NAME]
 idx.insert(0, dict(id=NAME, label=LABEL)); json.dump(idx, open(os.path.join(FX, "designs", "index.json"), "w"), indent=1)
 print("wrote", DD)

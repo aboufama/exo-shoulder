@@ -449,9 +449,16 @@ def build_hub_neck_v2(E):
     hub = BB.G.revolve_profile(prof, W0, ref=dh); print("  JN hub (turned): valid", hub.isValid(), round(hub.Volume() / 1000, 2), "cm3", flush=True)
     al = math.atan((MB.HUB_R + 3.0) / 65.0); tw = unit(unit(P_bar) - (unit(P_bar) @ W0) * W0)
     P0 = W0 * (ZJ4 + T_BOT / 2) + (MB.HUB_R - 4.0) * dh; prof0 = BB.rr_prof(2 * BB.HW, T_BOT - 0.6); acr0 = unit(np.cross(W0, dh))
-    secs = hugging_neck(E, P0, dh, W0, prof0, math.cos(al) * W0 + math.sin(al) * tw, ZJ4, n_end_blend=0.4, hold_mm=4.0 + 1.5)                        # P0 is 4 mm inside the rim: thin until 1.5 mm outside
-    secs = [BB.sec3d(P0 - 2.0 * dh, acr0, W0, prof0), BB.sec3d(P0, acr0, W0, prof0)] + secs                 # starts 6 mm inside the hub
-    neck = BB.loft(secs); print("  neck sweep: valid", neck.isValid(), "self-intersecting", self_x(neck), flush=True)
+    sd = math.cos(al) * W0 + math.sin(al) * tw
+    for appr in (0.0, 12.0, 16.0, 20.0):
+        # 0: great circle + Bezier ends (r13 n4). A short neck (r16 3R: JN hub beside BOTTOM's cut, 44 mm chord, 55 deg
+        # turn, hugging floor up to 9 mm over the chord) folds that path -> the rail neck's smoothing spline; first loft
+        # that does not fold wins, else the last (20 mm: the widest bend, 11.8 mm on r16) and the BOTTOM merge + R7 decide
+        secs = hugging_neck(E, P0, dh, W0, prof0, sd, ZJ4, n_end_blend=0.4, hold_mm=4.0 + 1.5, approach=appr)    # P0 is 4 mm inside the rim: thin until 1.5 mm outside
+        secs = [BB.sec3d(P0 - 2.0 * dh, acr0, W0, prof0), BB.sec3d(P0, acr0, W0, prof0)] + secs             # starts 6 mm inside the hub
+        neck = BB.loft(secs); sx = self_x(neck)
+        print(f"  neck sweep (approach {appr:.0f} mm): valid {neck.isValid()}, self-intersecting {sx}" + ("  (WARNING: folded loft kept - check R7 / the merge)" if sx and appr == 20.0 else ""), flush=True)
+        if neck.isValid() and not sx: break
     body = None
     for tol in (0.0, 0.01, 0.05):
         b = CH.fuzzy_fuse(hub, neck, tol=tol)

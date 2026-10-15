@@ -11,6 +11,13 @@ KEY = sys.argv[1]; STAGE = sys.argv[2] if len(sys.argv) > 2 else "all"
 CAD_DIR = os.path.join(EXO, "full-exo", "designs", f"cad_{KEY}")                    # clips with the scapula-fixed base frame
 R = json.load(open(os.path.join(CONF, "band_cad", "inputs", f"{KEY}.json")))["results"][0]
 OUT = os.path.join(HERE, f"out_{KEY}"); os.makedirs(OUT, exist_ok=True)
+# build with the geometry the evaluator scored (job keys copied into the input: t_link, ramp_deg, hw); r13 inputs carry
+# t_link 5.5 = the old constant and no ramp_deg, so their builds do not change. Env RAMP_DEG / RAMP_TOP still override.
+if "t_link" in R: MB.T_LINK = float(R["t_link"])
+if "hw" in R: MB.HW = float(R["hw"])
+if "ramp_deg" in R:
+    if "RAMP_DEG" not in os.environ: MB.RAMP_DEG = float(R["ramp_deg"])                  # band floor cap out of every hub plane
+    if "RAMP_TOP" not in os.environ: MB.RAMP_TOP = float(R["ramp_deg"])                  # ramp out of a hub plane before a joint is raised
 N = R["n"]; A = [x * math.pi / 180 for x in R["a"]]; ZJ4 = float(R["zj4"])
 FACES = {int(k): v for k, v in R["faces"].items() if k.isdigit()}; LOWER = {int(k): v for k, v in R["lower"].items()}
 if os.environ.get("SWAP_J1") == "1" and LOWER[1] != 0:                              # base under link 1 at J1 (skin side), same stack height

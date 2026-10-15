@@ -5,12 +5,13 @@ motion file per chunk (frames a..b): camera, which design shows and its swap sca
 (viewer metres), the mannequin's posed vertices (int16, 0.05 mm) and the body faces. Egg head as in film.html.
 
     python3 film_frames.py [chunk=12]
+env FILM=<plan json> (default designs/film.json), FILM_RENDER=<out dir> (default film_render/)
 """
 import base64, gzip, json, math, os, sys
 import numpy as np, trimesh
 HERE = os.path.dirname(os.path.abspath(__file__)); sys.path.insert(0, os.path.join(HERE, "..", "avg")); import body_pose as BP
 CH = int(sys.argv[1]) if len(sys.argv) > 1 else 12
-FILM = json.load(open(os.path.join(HERE, "designs", "film.json"))); OUT = os.path.join(HERE, "film_render"); os.makedirs(OUT, exist_ok=True)
+FILM = json.load(open(os.environ.get("FILM", os.path.join(HERE, "designs", "film.json")))); OUT = os.environ.get("FILM_RENDER", os.path.join(HERE, "film_render")); os.makedirs(OUT, exist_ok=True)
 J = json.load(open(os.path.join(HERE, "..", "avg", "body_mesh.json"))); L, S = J["landmarks"], J["scale"]; HD = J["head"]
 # ---- designs into one GLB
 sc = trimesh.Scene(); DATA = []; GRID = float(os.environ.get('GRID', 0.25))

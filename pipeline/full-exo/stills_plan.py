@@ -25,7 +25,7 @@ def cam(dirv, fov, tight=1.0, tgt=None):
     d = np.array(dirv, float); d /= np.linalg.norm(d); t = c if tgt is None else np.array(tgt); dist = tight * r / math.tan(math.radians(fov) / 2) * 1.15
     return dict(pos=(t + d * dist).tolist(), target=t.tolist(), fov=fov, focus=float(dist), fstop=5.6)
 # rig frame: x anterior, y up, z right (lateral)
-stack = np.array([sc.geometry[g].vertices.mean(0) for n in sc.graph.nodes_geometry for g in [sc.graph[n][1]] if "cap (" in n])
+stack = np.array([sc.geometry[g].vertices.mean(0) for n in sc.graph.nodes_geometry for g in [sc.graph[n][1]] if "cap (" in n or "cap Ø" in n])                  # v3 "cap (Ti..." / v4 "cap Ø22 G2 dome"
 jt = stack[np.argmin(np.linalg.norm(stack - c, axis=1))] if len(stack) else c
 frames = [dict(cam=cam((-0.55, 0.50, 0.68), 24)), dict(cam=cam((-0.35, 0.65, 0.68), 18, tight=0.45, tgt=jt)), dict(cam=cam((0.15, 0.25, 1.0), 24))]
 json.dump(dict(fps=1, frames=frames, lights_centre=c.tolist(), light_scale=max(0.6, r / 90.0), exposure=-0.1), open(os.path.join(OUT, "motion.json"), "w"), indent=1)
