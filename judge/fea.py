@@ -106,8 +106,10 @@ FACES = np.array([[0, 1, 2], [0, 3, 1], [1, 3, 2], [2, 3, 0]])                  
 FACE_MID = np.array([[4, 5, 6], [7, 8, 4], [8, 9, 5], [9, 7, 6]])                       # their mid-side nodes (ccx order)
 
 def wall_thickness(step, h_probe=1.0):
-    """thinnest wall: area-weighted 5th percentile of the inward ray thickness from the surface triangles. The ray is
-    marched with the exact signed distance (judge/sdist.py; a step of |d| never crosses the surface) until it exits"""
+    """wall thickness from the surface: for every surface triangle the inward ray is marched with the exact signed
+    distance (judge/sdist.py; a step of |d| never crosses the surface) until it exits. Returns (thin = area-weighted 10th
+    percentile, median, centroids, thickness per centroid). The 10th percentile skips the edge rounds and chamfers
+    (rays there exit early) but sees a thinned strap (cad_r18 link 2: 2.2-2.5 mm over its middle)"""
     import gmsh, trimesh
     from sdist import mesh as sd_mesh
     gmsh.initialize(); gmsh.option.setNumber("General.Terminal", 0)
@@ -127,31 +129,37 @@ def wall_thickness(step, h_probe=1.0):
         done[np.nonzero(live)[0][ex]] = True
         done |= s > 60.0
     ok = done & (s < 60.0) & (s > 0.05); w = m.area_faces[ok]; ts = s[ok]; o_ = np.argsort(ts); cw = np.cumsum(w[o_]) / w.sum()
-    return float(ts[o_][np.searchsorted(cw, 0.05)]), float(np.median(ts))
+    return float(ts[o_][np.searchsorted(cw, 0.10)]), float(np.median(ts)), c[ok], ts
 
-def mesh_step(step, h, out_msh=None, fine_ball=None, h_far=None):
-    """tet10 mesh of the STEP solid: nodes (n,3), tets (m,10) in C3D10 order (0-based). fine_ball=(centre, R): h inside,
-    h_far outside (big parts: the far field gets coarser)"""
+def mesh_step(step, h, out_msh=None, local=None):
+    """tet10 mesh of the STEP solid: nodes (n,3), tets (m,10) in C3D10 order (0-based). h: uniform size, or with
+    local = (centroids, thickness, k, h_min, h_max) the size at x is the wall thickness at the nearest surface sample / k"""
     import gmsh
     gmsh.initialize(); gmsh.option.setNumber("General.Terminal", 0)
     try:
         gmsh.model.occ.importShapes(step); gmsh.model.occ.synchronize()
         vols = gmsh.model.getEntities(3)
         if len(vols) != 1: raise RuntimeError(f"{step}: {len(vols)} volumes (one solid expected)")
-        gmsh.option.setNumber("Mesh.MeshSizeMax", h if fine_ball is None else max(h, h_far)); gmsh.option.setNumber("Mesh.MeshSizeMin", 0.15 * h)
-        gmsh.option.setNumber("Mesh.MeshSizeFromCurvature", 12); gmsh.option.setNumber("Mesh.MeshSizeExtendFromBoundary", 1)
-        if fine_ball is not None:
-            f = gmsh.model.mesh.field.add("Ball"); c, R = fine_ball
-            for k, v in zip(("XCenter", "YCenter", "ZCenter", "Radius", "VIn", "VOut", "Thickness"), (*c, R, h, h_far, 0.5 * R)): gmsh.model.mesh.field.setNumber(f, k, float(v))
-            gmsh.model.mesh.field.setAsBackgroundMesh(f); gmsh.option.setNumber("Mesh.MeshSizeExtendFromBoundary", 0)
+        if local is None:
+            gmsh.option.setNumber("Mesh.MeshSizeMax", h); gmsh.option.setNumber("Mesh.MeshSizeMin", 0.15 * h)
+            gmsh.option.setNumber("Mesh.MeshSizeFromCurvature", 12)
+        else:
+            from scipy.spatial import cKDTree
+            C, t, k, hmin, hmax = local; tree = cKDTree(C); sz = np.clip(t / k, hmin, hmax)
+            # a point's size: the smallest of its 8 nearest samples (both walls of a thin section are near it)
+            def cb(dim, tag, x, y, z, lc):
+                _, i = tree.query((x, y, z), k=8); return float(min(lc, sz[i].min()))
+            gmsh.model.mesh.setSizeCallback(cb)
+            gmsh.option.setNumber("Mesh.MeshSizeMax", hmax); gmsh.option.setNumber("Mesh.MeshSizeMin", hmin)
+            gmsh.option.setNumber("Mesh.MeshSizeExtendFromBoundary", 0); gmsh.option.setNumber("Mesh.MeshSizeFromPoints", 0)
         gmsh.option.setNumber("Mesh.ElementOrder", 2); gmsh.option.setNumber("Mesh.HighOrderOptimize", 1)
         gmsh.option.setNumber("Mesh.Optimize", 1); gmsh.option.setNumber("Mesh.Algorithm3D", 1)
         gmsh.model.mesh.generate(3)
         tags, X, _ = gmsh.model.mesh.getNodes(); X = X.reshape(-1, 3)
         et, _, en = gmsh.model.mesh.getElements(3)
-        k = list(et).index(11)                                                           # 11 = 10-node tetrahedron
+        k_ = list(et).index(11)                                                          # 11 = 10-node tetrahedron
         idx = np.full(int(tags.max()) + 1, -1); idx[tags] = np.arange(len(tags))
-        T = idx[np.asarray(en[k]).reshape(-1, 10)][:, GMSH2CCX]
+        T = idx[np.asarray(en[k_]).reshape(-1, 10)][:, GMSH2CCX]
         if out_msh: gmsh.write(out_msh)
     finally: gmsh.finalize()
     used = np.unique(T); remap = np.full(len(X), -1); remap[used] = np.arange(len(used))
@@ -291,50 +299,59 @@ def part_setup(step, name, kind, hub_idx=None, cuff_centres=None):
     for h in hubs: h["zc"] = 0.5 * (h["z"][0] + h["z"][1])
     return dict(hubs=hubs, cyls=cy, vol_mm3=vol, com=com)
 
-def run_part(step, name, mat, kind, work, h, cuff_centres=None, fine_ball_R=None, threads=2, dry=False):
-    """mesh at size h, 6 unit load cases at the load hub, return the per-node data the post needs"""
-    os.makedirs(work, exist_ok=True); G = part_setup(step, name, kind); hubs = G["hubs"]
-    if kind == "base":
-        load = hubs[0]
-    elif kind == "link":
-        hubs = sorted(hubs, key=lambda h: -abs(h["a"][0]))                              # proximal hub axis = the member frame's x
-        load = hubs[1]
-    else:
-        load = hubs[0]
-    fb = None
-    if fine_ball_R: fb = (load["a"] * load["zc"], fine_ball_R)
-    X, T = mesh_step(step, h, fine_ball=fb, h_far=2.5 * h if fb else None)
+H_RANGE = {2: (0.4, 3.0), 3: (0.3, 2.0), 2.5: (0.35, 2.5)}                          # size clamp per k (mm)
+def prepare_part(step, name, kind, k, wall, cuff_centres=None):
+    """mesh (size = local wall / k), the load hub's joint surfaces and the support nodes"""
+    G = part_setup(step, name, kind); hubs = G["hubs"]
+    if kind == "link": hubs = sorted(hubs, key=lambda h: -abs(h["a"][0]))                 # proximal hub axis = the member frame's x
+    load = hubs[1] if kind == "link" else hubs[0]
+    if kind == "link" and len(hubs) != 2: raise RuntimeError(f"{name}: {len(hubs)} hubs found (2 expected)")
+    hmin, hmax = H_RANGE[k]; C, tw = wall[2], wall[3]
+    X, T = mesh_step(step, None, local=(C, tw, k, hmin, hmax))
     vol = tet_volumes(X, T)
     if (vol <= 0).any(): raise RuntimeError(f"{name}: {int((vol <= 0).sum())} inverted tets")
-    el, fc = boundary_faces(T); bn = np.zeros(len(X), bool); bn[np.unique(T[el][np.arange(len(el))[:, None], FACES[fc]])] = True
-    bn_mid = np.zeros(len(X), bool); bn_mid[np.unique(T[el][np.arange(len(el))[:, None], FACE_MID[fc]])] = True; bn |= bn_mid
+    el, fc = boundary_faces(T); bn = np.zeros(len(X), bool); bn[np.unique(T[el][np.arange(len(el))[:, None], np.c_[FACES, FACE_MID][fc]])] = True
     ld_sel, ld_ref = hub_nodes(X, bn, load)
-    if kind == "base": fx_sel, fx_ref = tab_nodes(X, bn, hubs[0]); fx_info = "mount tab, last 6 mm"
-    elif kind == "link": fx_sel, fx_ref = hub_nodes(X, bn, hubs[0]); fx_info = f"proximal hub ({hubs[0]['ver']} {hubs[0]['role']})"
+    if kind == "base": fx_sel, fx_ref = tab_nodes(X, bn, hubs[0]); fx_info = "mount tab, last 6 mm (encastre)"
+    elif kind == "link": fx_sel, fx_ref = hub_nodes(X, bn, hubs[0]); fx_info = f"proximal hub joint surfaces ({hubs[0]['ver']} {hubs[0]['role']}, encastre)"
     else:
-        fx_sel, fx_ref, nh = hole_nodes(X, bn, G["cyls"], cuff_centres); fx_info = f"{nh} upper-cuff M4 tapped holes"
+        fx_sel, fx_ref, nh = hole_nodes(X, bn, G["cyls"], cuff_centres); fx_info = f"{nh} upper-cuff M4 tapped hole walls (encastre)"
         if nh == 0: raise RuntimeError(f"{name}: no cuff holes found")
-    cpl = {"LD": (len(X) + 1, ld_ref, coupling_faces(T, el, fc, ld_sel))}
-    if len(cpl["LD"][2]) < 6: raise RuntimeError(f"{name}: load coupling has {len(cpl['LD'][2])} faces")
+    ef = coupling_faces(T, el, fc, ld_sel)
+    if len(ef) < 6: raise RuntimeError(f"{name}: load coupling has {len(ef)} faces")
     if fx_sel.sum() < 6: raise RuntimeError(f"{name}: support has {int(fx_sel.sum())} nodes")
-    a, e1, e2 = frame_of(load["a"]); B = [a, e1, e2]; rid = len(X) + 1
-    steps = [[(rid, 4 + j, UNIT_M * B[i][j]) for j in range(3)] for i in range(3)] + [[(rid, 1 + j, UNIT_F * B[i][j]) for j in range(3)] for i in range(3)]
-    job = "part"; write_inp(os.path.join(work, job + ".inp"), X, T, mat, cpl, steps, np.nonzero(fx_sel)[0])
-    res = dict(n_nodes=len(X), n_tets=len(T), h=h, load_hub=dict(ver=load["ver"], role=load["role"], axis=np.round(load["a"], 4).tolist(), ref=np.round(ld_ref, 2).tolist()),
-               support=fx_info, support_ref=np.round(fx_ref, 2).tolist(), n_load_faces=len(cpl["LD"][2]), n_support_nodes=int(fx_sel.sum()),
-               mesh_volume_mm3=float(vol.sum()), brep_volume_mm3=float(G["vol_mm3"]), com=G["com"].tolist())
-    if dry: return res, None
-    res["ccx_s"] = round(run_ccx(work, job, threads), 1)
-    R = read_frd(os.path.join(work, job + ".frd"), len(X))
-    if len(R) != 6: raise RuntimeError(f"{name}: {len(R)} result steps")
-    U = np.stack([r[0] for r in R]); S = np.stack([r[1] for r in R])                    # (6, n, 3), (6, n, 6)
-    # idealised zones: within one element size of either coupling surface
+    # idealised zones: within the coarse (k = 2) local element size of the support / of the load hub's joint surfaces
     from scipy.spatial import cKDTree
-    d_fx, _ = cKDTree(X[fx_sel]).query(X, k=1); d_ld, _ = cKDTree(X[ld_sel]).query(X, k=1); bcz = (d_fx <= h) | (d_ld <= h); ldz = (d_ld <= h) & ~(d_fx <= h)
-    # load-hub rigid motion per unit case -> motion of the point at GH (d_GH = t + phi x (GH - c))
-    t_ph = [rigid_fit(X[ld_sel], U[k][ld_sel]) for k in range(6)]
+    _, i8 = cKDTree(C).query(X, k=8); dex = np.clip(tw[i8].min(1) / 2.0, *H_RANGE[2])
+    d_fx, _ = cKDTree(X[fx_sel]).query(X, k=1); d_ld, _ = cKDTree(X[ld_sel]).query(X, k=1)
+    supz = d_fx <= dex; ldz = (d_ld <= dex) & ~supz
+    a, e1, e2 = frame_of(load["a"])
+    info = dict(n_nodes=len(X), n_tets=len(T), k=k, h_range=[hmin, hmax], load_hub=dict(ver=load["ver"], role=load["role"], axis=np.round(load["a"], 4).tolist(), ref=np.round(ld_ref, 2).tolist()),
+                hubs=[dict(ver=h["ver"], role=h["role"], axis=np.round(h["a"], 4).tolist()) for h in G["hubs"]],
+                support=fx_info, support_ref=np.round(fx_ref, 2).tolist(), n_load_faces=len(ef), n_support_nodes=int(fx_sel.sum()),
+                mesh_volume_mm3=round(float(vol.sum()), 1), brep_volume_mm3=round(float(G["vol_mm3"]), 1))
+    return dict(X=X, T=T, ld_sel=ld_sel, fx_sel=fx_sel, ld_ref=ld_ref, ef=ef, supz=supz, ldz=ldz, bcz=supz | ldz, B=np.array([a, e1, e2]),
+                vol_mm3=float(vol.sum()), com=G["com"], info=info)
+
+def solve(P, mat, steps, work, threads=2):
+    """steps: list of (moment N.mm (3), force N (3)) at the load hub's reference point -> U (k,n,3), S (k,n,6), seconds"""
+    os.makedirs(work, exist_ok=True); X = P["X"]; rid = len(X) + 1
+    loads = [[(rid, 4 + j, m[j]) for j in range(3) if abs(m[j]) > 0] + [(rid, 1 + j, f[j]) for j in range(3) if abs(f[j]) > 0] for m, f in steps]
+    write_inp(os.path.join(work, "part.inp"), X, P["T"], mat, {"LD": (rid, P["ld_ref"], P["ef"])}, loads, np.nonzero(P["fx_sel"])[0])
+    sec = run_ccx(work, "part", threads); R = read_frd(os.path.join(work, "part.frd"), len(X))
+    if len(R) != len(steps): raise RuntimeError(f"{len(R)} result steps for {len(steps)} load cases")
+    for f in os.listdir(work):                                                           # keep the deck + log, drop the bulk
+        if f.endswith((".frd", ".12d", ".cvg", ".sta", ".out")): os.remove(os.path.join(work, f))
+    return np.stack([r[0] for r in R]), np.stack([r[1] for r in R]), sec
+
+def unit_data(P, mat, work, threads=2):
+    """the six unit cases (moments, then forces, along the load hub's axis and two perpendiculars)"""
+    B = P["B"]; steps = [(UNIT_M * B[i], np.zeros(3)) for i in range(3)] + [(np.zeros(3), UNIT_F * B[i]) for i in range(3)]
+    U, S, sec = solve(P, mat, steps, work, threads)
+    t_ph = [rigid_fit(P["X"][P["ld_sel"]], U[k][P["ld_sel"]]) for k in range(6)]
     dGH = np.array([t + np.cross(ph, GH - c) for t, ph, c in t_ph]); rot = np.array([ph for _, ph, _ in t_ph])
-    return res, dict(X=X, U=U, S=S, bcz=bcz, ldz=ldz, B=np.array(B), ld_ref=ld_ref, dGH=dGH, rot=rot, mass_g=float(vol.sum()) * mat["rho"] / 1000.0, com=G["com"])
+    return dict(X=P["X"], U=U, S=S, bcz=P["bcz"], ldz=P["ldz"], supz=P["supz"], B=B, ld_ref=P["ld_ref"], dGH=dGH, rot=rot,
+                mass_g=P["vol_mm3"] * mat["rho"] / 1000.0, com=P["com"]), sec
 
 # ================================================================ post: design cases
 def fib_sphere(n):
@@ -374,6 +391,8 @@ def post_part(name, mat, res, D):
     cand = np.argsort(-np.where(judged, bound, 0))[:600]; cand_bc = np.argsort(-np.where(D["ldz"], bound, 0))[:200]; cand_s = np.argsort(-np.where(D["bcz"] & ~D["ldz"], bound, 0))[:100]
     idx = np.unique(np.r_[cand, cand_bc, cand_s]); d1f = np.zeros(len(bound)); d1f[idx] = worst_pair(LM[idx], LF[idx])[0]
     w = np.where(judged)[0]
+    kj = w[np.argmax(d1f[w])]; _, argw = worst_pair(LM[[kj]], LF[[kj]]); f_star, m_star = argw[0]
+    m1 = np.linalg.svd(LM[kj])[2][0] * M_DESIGN                                              # D1's worst moment at that node
     def peak(v, mask):
         i = np.nonzero(mask)[0]; k = i[np.argmax(v[i])]; return float(v[k]), k
     out = {}
@@ -398,7 +417,8 @@ def post_part(name, mat, res, D):
     cU = np.argsort(-np.linalg.norm(LU[0], axis=(1, 2)))[:200]
     UF = LU[1][cU] + np.einsum("ncj,jk->nck", LU[0][cU], -np.array([[0, -D["ld_ref"][2], D["ld_ref"][1]], [D["ld_ref"][2], 0, -D["ld_ref"][0]], [-D["ld_ref"][1], D["ld_ref"][0], 0]]))
     Umax = float(worst_pair(LU[0][cU], UF, nf=200, nphi=24)[0].max())
-    return dict(material=mat_name_of(mat), Sy_MPa=mat["Sy"], cases=out, fatigue=fat,
+    gov = dict(node=int(kj), m_about_GH_Nmm=np.round(m_star, 1).tolist(), f_through_GH_N=np.round(F_CUFF * f_star, 2).tolist(), m_D1_Nmm=np.round(m1, 1).tolist())
+    return dict(material=mat_name_of(mat), Sy_MPa=mat["Sy"], cases=out, fatigue=fat, governing_wrench=gov,
                 deflection=dict(d_GH_mm=round(dgh, 3), max_point_disp_mm=round(Umax, 3), k_rot_Nm_per_deg=np.round(k_rot, 2).tolist(),
                                 note="d_GH: motion of the GH point carried by the load hub relative to the support under D1F (the radial = skin-gap part of every point's motion); max_point: largest |u| of any node (incl. tangential)"),
                 mass_g=round(D["mass_g"], 2))
@@ -431,40 +451,68 @@ def min_skin_gap(dd):
         except Exception: pass
     return None, None
 
-def judge_design(dd, only=None, fast=False, threads=2):
-    did = os.path.basename(os.path.normpath(dd)); pf = json.load(open(os.path.join(dd, "parts_full.json")))
-    work0 = os.path.join(REPO, ".cache", "fea", did); centres = cuff_screw_centres(dd); t_all = time.time()
-    out = dict(version=VERSION, design=did, loads=dict(M_design_Nm=M_DESIGN / 1e3, F_cuff_N=F_CUFF, cuff_mm=CUFF_MM, mvp1_scale=MVP1_SCALE, own_weight_g=G_MULT),
-               thresholds=dict(SF_min=SF_MIN, fatigue_SF_min=FATIGUE_MIN, floor_mm=FLOOR_MM), materials={k: {kk: vv for kk, vv in v.items()} for k, v in MAT.items()}, parts={})
-    for pre, kind in PARTS:
-        step = os.path.join(dd, "step", pre + ".step")
-        if not os.path.exists(step) or (only and pre not in only): continue
-        mat = material_for(pf, pre); t_wall, t_med = wall_thickness(step)
-        sizes = [round(t_wall / 2.5, 3)] if fast else [round(t_wall / 2.0, 3), round(t_wall / 3.0, 3)]
-        sizes = [max(s, 0.45) for s in sizes]
-        log(f"{pre}: {mat_name_of(mat)}, thinnest wall {t_wall:.2f} mm (median {t_med:.2f}); mesh sizes {sizes}")
-        runs = []
-        for h in sizes:
-            work = os.path.join(work0, f"{pre}_h{h:.3f}"); t0 = time.time()
-            res, D = run_part(step, pre, mat, kind, work, h, cuff_centres=centres, fine_ball_R=(70.0 if kind == "bottom" else None), threads=threads)
-            p = post_part(pre, mat, res, D); p.update(mesh=res); p["seconds"] = round(time.time() - t0, 1); runs.append(p)
-            log(f"  h {h:.2f}: {res['n_nodes']} nodes, ccx {res['ccx_s']} s; D1 {p['cases']['D1']['vm_MPa']} MPa, D1F {p['cases']['D1F']['vm_MPa']} MPa (SF {p['cases']['D1F']['SF']}) at {p['cases']['D1F']['at_mm']}; d_GH {p['deflection']['d_GH_mm']} mm")
-        fin = runs[-1]; fin["convergence"] = None
-        if len(runs) > 1:
-            a_, b_ = runs[0]["cases"]["D1F"]["vm_MPa"], runs[1]["cases"]["D1F"]["vm_MPa"]
-            fin["convergence"] = dict(h=sizes, D1F_vm_MPa=[a_, b_], change=round(abs(b_ - a_) / b_, 3), d_GH_mm=[runs[0]["deflection"]["d_GH_mm"], runs[1]["deflection"]["d_GH_mm"]])
-        fin["thinnest_wall_mm"] = round(t_wall, 2); fin["coarse"] = {k: runs[0][k] for k in ("cases", "deflection", "mesh")} if len(runs) > 1 else None
-        out["parts"][pre] = fin
+def wrench_at_hub(m_gh, f, c):
+    """a wrench given about GH (moment m, force f through GH) as moment / force at the hub reference point c"""
+    return np.asarray(m_gh, float) - np.cross(c, f), np.asarray(f, float)
+
+def judged_peak(S, mask):
+    v = vm(S); i = np.nonzero(mask)[0]; k = i[np.argmax(v[i])]; return float(v[k]), int(k)
+
+def part_fea(step, pre, kind, mat, work0, fast=False, centres=None, threads=2):
+    t0 = time.time(); wall = wall_thickness(step)
+    log(f"{pre}: {mat_name_of(mat)}, wall thickness p10 {wall[0]:.2f} mm, median {wall[1]:.2f}")
+    k0 = 2.5 if fast else 2
+    P = prepare_part(step, pre, kind, k0, wall, centres)
+    D, sec = unit_data(P, mat, os.path.join(work0, f"{pre}_k{k0}"), threads)
+    p = post_part(pre, mat, P["info"], D); p["mesh"] = dict(P["info"], ccx_s=round(sec, 1)); p["wall_mm"] = dict(p10=round(wall[0], 2), median=round(wall[1], 2))
+    log(f"  k {k0}: {P['info']['n_nodes']} nodes, ccx {sec:.0f} s; D1 {p['cases']['D1']['vm_MPa']} MPa, D1F {p['cases']['D1F']['vm_MPa']} MPa (SF {p['cases']['D1F']['SF']}) at {p['cases']['D1F']['at_mm']}; d_GH {p['deflection']['d_GH_mm']} mm")
+    p["convergence"] = None
+    if not fast:
+        # the governing wrench again on the t/3 mesh: same exclusion zones (coarse size), one factorisation
+        gw = p["governing_wrench"]; m_s, f_s = wrench_at_hub(gw["m_about_GH_Nmm"], gw["f_through_GH_N"], P["ld_ref"])
+        S_c = np.einsum("k,knc->nc", np.r_[m_s @ D["B"].T / UNIT_M, f_s @ D["B"].T / UNIT_F], D["S"])   # the same wrench on the coarse mesh
+        vc, kc = judged_peak(S_c, ~D["bcz"])
+        P3 = prepare_part(step, pre, kind, 3, wall, centres)
+        U3, S3, sec3 = solve(P3, mat, [(m_s, f_s)], os.path.join(work0, f"{pre}_k3"), threads)
+        vf, kf = judged_peak(S3[0], ~P3["bcz"]); ratio = vf / vc
+        t_, ph_, c_ = rigid_fit(P3["X"][P3["ld_sel"]], U3[0][P3["ld_sel"]]); dgh_f = float(np.linalg.norm(t_ + np.cross(ph_, GH - c_)))
+        t_, ph_, c_ = rigid_fit(D["X"][P["ld_sel"]], np.einsum("k,knc->nc", np.r_[m_s @ D["B"].T / UNIT_M, f_s @ D["B"].T / UNIT_F], D["U"])[P["ld_sel"]]); dgh_c = float(np.linalg.norm(t_ + np.cross(ph_, GH - c_)))
+        p["convergence"] = dict(wrench="governing D1F wrench", nodes=[P["info"]["n_nodes"], P3["info"]["n_nodes"]], vm_MPa=[round(vc, 1), round(vf, 1)], change=round(ratio - 1, 3),
+                                at_mm=[np.round(D["X"][kc], 1).tolist(), np.round(P3["X"][kf], 1).tolist()], d_GH_mm=[round(dgh_c, 3), round(dgh_f, 3)], ccx_s=round(sec3, 1),
+                                rule="judged D1F = coarse worst-wrench peak x max(1, fine / coarse) under the governing wrench")
+        log(f"  k 3: {P3['info']['n_nodes']} nodes, ccx {sec3:.0f} s; governing wrench {vc:.1f} -> {vf:.1f} MPa ({100 * (ratio - 1):+.1f} %), d_GH {dgh_c:.3f} -> {dgh_f:.3f} mm")
+        if ratio > 1.0:                                                                   # never let the coarse mesh flatter the part
+            for nm in ("D1", "D1_perp", "D1_axial", "D2_force_50N", "D1F"):
+                c_ = p["cases"][nm]; c_["vm_coarse_MPa"] = c_["vm_MPa"]; c_["vm_MPa"] = round(c_["vm_MPa"] * ratio, 1); c_["SF"] = round(mat["Sy"] / c_["vm_MPa"], 2)
+            p["cases"]["MVP1"]["vm_MPa"] = round(p["cases"]["MVP1"]["vm_MPa"] * ratio, 2); p["cases"]["MVP1"]["SF"] = round(mat["Sy"] / p["cases"]["MVP1"]["vm_MPa"], 1)
+            s_ = p["cases"]["D1F"]["vm_MPa"]; p["fatigue"].update(sigma_a_MPa=s_, SF_fully_reversed=round(mat["Se"] / s_, 2), SF_R0_goodman=round(1.0 / ((s_ / 2) / mat["Se"] + (s_ / 2) / mat["Su"]), 2))
+        if dgh_f > dgh_c: p["deflection"]["d_GH_mm"] = round(p["deflection"]["d_GH_mm"] * dgh_f / dgh_c, 3)
+    p["seconds"] = round(time.time() - t0, 1); return p
+
+def summarise(out, dd):
     gap, gsrc = min_skin_gap(dd); P = out["parts"]
-    if not P: raise RuntimeError("no parts analysed")
     sf = min(p["cases"]["D1F"]["SF"] for p in P.values()); worst = min(P, key=lambda k: P[k]["cases"]["D1F"]["SF"])
     fsf = min(p["fatigue"]["SF_fully_reversed"] for p in P.values()); dsum = sum(p["deflection"]["d_GH_mm"] for p in P.values())
     defl_ok = dsum <= FLOOR_MM and (gap is None or dsum < gap)
+    chain = [k for k, _ in PARTS if os.path.exists(os.path.join(dd, "step", k + ".step"))]
     out["summary"] = dict(min_SF=sf, worst_part=worst, min_SF_D1=min(p["cases"]["D1"]["SF"] for p in P.values()), min_SF_MVP1=min(p["cases"]["MVP1"]["SF"] for p in P.values()),
                           fatigue_min_SF=fsf, chain_d_GH_mm=round(dsum, 3), min_skin_gap_mm=None if gap is None else round(gap, 2), gap_source=gsrc,
                           floor_kept=None if gap is None else bool(dsum <= gap - FLOOR_MM), deflection_ok=bool(defl_ok),
-                          all_parts=sorted(P), complete=all(k in P for k in ("D4-01", "D4-02", "BOTTOM")),
-                          passes=bool(sf >= SF_MIN and fsf >= FATIGUE_MIN and defl_ok), seconds=round(time.time() - t_all, 1))
+                          parts=sorted(P), complete=all(k in P for k in chain),
+                          passes=bool(sf >= SF_MIN and fsf >= FATIGUE_MIN and defl_ok and all(k in P for k in chain)))
+    return out
+
+def judge_design(dd, only=None, fast=False, threads=2):
+    did = os.path.basename(os.path.normpath(dd)); pf = json.load(open(os.path.join(dd, "parts_full.json")))
+    work0 = os.path.join(REPO, ".cache", "fea", did); centres = cuff_screw_centres(dd); t_all = time.time()
+    out = dict(version=VERSION, design=did, fast=fast, loads=dict(M_design_Nm=M_DESIGN / 1e3, F_cuff_N=F_CUFF, cuff_mm=CUFF_MM, mvp1_scale=MVP1_SCALE, own_weight_g=G_MULT),
+               thresholds=dict(SF_min=SF_MIN, fatigue_SF_min=FATIGUE_MIN, floor_mm=FLOOR_MM), materials=MAT, parts={})
+    for pre, kind in PARTS:
+        step = os.path.join(dd, "step", pre + ".step")
+        if not os.path.exists(step) or (only and pre not in only): continue
+        out["parts"][pre] = part_fea(step, pre, kind, material_for(pf, pre), work0, fast, centres, threads)
+    if not out["parts"]: raise RuntimeError("no parts analysed")
+    out["seconds"] = round(time.time() - t_all, 1)
     return out
 
 # ================================================================ validation (analytic cases through the same chain)
@@ -542,7 +590,7 @@ if __name__ == "__main__":
     os.makedirs(os.path.join(dd, "judge"), exist_ok=True); fn = os.path.join(dd, "judge", "fea.json")
     if A.parts and os.path.exists(fn):                                                     # partial re-run: merge into the existing result
         old = json.load(open(fn)); old["parts"].update(out["parts"]); out["parts"] = old["parts"]
-    json.dump(out, open(fn, "w"), indent=1)
+    summarise(out, dd); json.dump(out, open(fn, "w"), indent=1)
     S_ = out["summary"]
     for k, p in out["parts"].items():
         c = p["cases"]; print(f"{k:7s} {p['material']:10s} D1 {c['D1']['vm_MPa']:7.1f} MPa  D1F {c['D1F']['vm_MPa']:7.1f} MPa SF {c['D1F']['SF']:5.2f}  fatigue SF {p['fatigue']['SF_fully_reversed']:5.2f}  d_GH {p['deflection']['d_GH_mm']:.3f} mm")
