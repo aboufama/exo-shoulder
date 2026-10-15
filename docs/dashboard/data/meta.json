@@ -1,1 +1,1 @@
-[{"built_at":"2026-10-15T23:34:24Z","commit":"18be6f1","n_warnings":0,"warnings":""}]
+[{"built_at":"2026-10-15T23:42:06Z","commit":"4e77c28","n_warnings":1,"warnings":"docs/concepts/sweeps/offset-axis-skin-hubs.json k=432: file gap 275.0 != recomputed 375.0; recomputed kept"}]

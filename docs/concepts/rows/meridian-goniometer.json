@@ -7,7 +7,7 @@
  "passive_dof": 0,
  "status": "screened",
  "t_ideated": null,
- "t_screened": "2026-10-15T23:20:58Z",
+ "t_screened": "2026-10-15T23:42:11Z",
  "reach": 0.775,
  "follow": 0.9167,
  "inband14": 0.1154,
@@ -19,10 +19,10 @@
  "v_inband14": null,
  "v_inband10": null,
  "v_gap": null,
- "n_configs": 1,
- "verdict": "screening in progress (first measured config)",
- "limiter": "rail is one circle about a2 that must clear the highest skin under its whole arc in every pose: 153 mm at the champion's axes, 0 % in band",
- "note": "Bench(60,160) fast grid, K3 march, K2 dense, K6 (+ by-construction bearing pairs), audit clean (honest); best k 0 of 1; GATE passed (2nd-half gain 0.0, last-third gain 0.0, top-5 spread 0.0 score points). first config only; farm Sobol sweep running",
+ "n_configs": 195,
+ "verdict": "screened, NOT converged (gate fails on the top-5 spread 5.8 points): best honest gap 102.5 (score 62.7) on Bench(60,160) fast - far behind the spherical 3R champion (68.93) and the verified leaders (rail-elbow 64.7, seed-offset-3r-slides 66.47 on Bench(110,360)). The spec (pointer + C-slide) scores 112.24 (reach 0.46). The arc rail is 0-6 % in band in every honest configuration: replacing a J2 hub by a virtual-axis rail makes J2 worse, not better",
+ "limiter": "the rail is ONE circle about the virtual axis a2 (a rigid 30-50 deg carriage needs a true circle; the spec's skin-following Rr(phi) is kinematically wrong), so it sits at the worst pose's skin height over its whole 125-150 deg arc: K3 q95 requirement 57 mm at the overhead end vs 137 mm at the rest end (champion axes), 93-150 mm on the spec's pointer; fitted rails 116-173 mm, rail in band <= 0.06 and carriage <= 0.0006 in all 75 honest configs; in 119 of 194 Sobol configs a rail sample has no clearance within 220 mm (its rest end passes through the arm / torso at abduction 60-105, plane -15..60). Spec variant also capped by pointer-cslide's twist window (reach 0.46)",
+ "note": "Bench(60,160) fast grid, K3 march, K2 dense, K6 (+ by-construction bearing pairs), audit clean (honest); best k 0 of 195; GATE NOT passed (2nd-half gain 0.0, last-third gain 0.0, top-5 spread 5.81 score points). Sweep: 1 local + 194 farm Sobol (128 hub-J3 3R, 64 spec C-slide, 2 seeds); 110 entries flagged honest:false after the run (rail parked at the 400 mm fallback; numbers unchanged); CMA-ES from k0 running on the farm (python3 docs/concepts/models/meridian-goniometer.py farmcma '{}' 6 24 0.2 hub), appends to the sweep. Red team (k0): overhead flexion (90,165,-90) hub3 -2.8 / neck -3.7 mm (contact); root 1.7 mm at (0,60,-60); behind-back (-75,30,165) and abduction-ER (-15,75,90) singular (closure margin 8.3 / 1.3 deg); rail nearest skin 8.4 mm at abd 90 / extension, median > 31 mm (beyond the grid) in every pose. Mass 318 g Ti.",
  "doc": "docs/concepts/meridian-goniometer.md",
  "model_file": "docs/concepts/models/meridian-goniometer.py",
  "best_params": {},
@@ -40,8 +40,8 @@
  "gate": {
   "half_gain": 0.0,
   "third_gain": 0.0,
-  "top5_spread": 0.0,
-  "converged": true,
-  "n": 1
+  "top5_spread": 5.81,
+  "converged": false,
+  "n": 195
  }
 }
