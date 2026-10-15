@@ -4,7 +4,9 @@ chain configuration the design takes there: the chain must close, no shoulder-ex
 as R2: exact closest point + winding number, judge/sdist.py) and no two parts that move relative to each other may
 interpenetrate (as R6). Independent of the evaluator's own feasibility flags (reported alongside for comparison).
 Only the shoulder mechanism is judged against the body: the links and base (their own groups) and, on the arm, the
-parts this project builds - BOTTOM (+ neck, JN hub) and the L1 proxies. The user's own arm parts (forearm group F, and
+parts this project builds - BOTTOM (+ neck, JN hub) and the L1 proxies - within ARM_NEAR (110 mm) of the GH centre,
+as R1 counts arm-side metal (the user's BOTTOM bar runs down the arm, inside the rig's arm in every pose). A part pair
+that interferes in >= 95 % of poses is a static fit, left to R6 (e.g. the v4 J3 ring nut 0.62 mm into its cap). The user's own arm parts (forearm group F, and
 the cuffs / elbow hardware in H) are left out: the rig's arm is a size mismatch with them in every pose (R2 reports it).
     python3 judge/workspace.py <design dir|id> [--step 1] [--jobs N]  -> <design>/judge/workspace.json"""
 import argparse, contextlib, json, multiprocessing as mp, os, time
@@ -15,6 +17,8 @@ from sdist import Mesh
 ap = argparse.ArgumentParser(); ap.add_argument("design"); ap.add_argument("--step", type=int, default=1); ap.add_argument("--jobs", type=int, default=min(4, os.cpu_count() or 1))
 ap.add_argument("--tol_body", type=float, default=0.5); ap.add_argument("--tol_parts", type=float, default=0.15); ap.add_argument("--skip_groups", default="F")
 OURS_IN_ARM = ("(proxy)", "BOTTOM", "neck", "JN hub")                            # arm-group parts this project builds
+ARM_NEAR = 110.0                     # of arm-group parts only the shoulder region counts (as score_design.py's R1): the user's BOTTOM bar runs down the arm
+STATIC = 0.95                        # a part pair interfering in >= this share of poses is a static fit (R6's business), not a motion failure
 a = ap.parse_args(); dd = design_dir(a.design); SKIP = set(x for x in a.skip_groups.split(",") if x)
 import body_pose as BP, scene_export as SE, trimesh
 W = json.load(open(os.path.join(dd, "workspace.json"))); poses = W["poses"][::a.step]
@@ -31,7 +35,9 @@ def judge_pose(k):
     V = BP.posed(pose); vt = cKDTree(V); Q = {}
     for x in info:
         if x["g"] in SKIP or x["g"] not in Wx or (x["g"] == "H" and not any(k in x["n"] for k in OURS_IN_ARM)): continue
-        R, t = Wx[x["g"]]; P = x["V"] @ R.T + t; near = vt.query(P, distance_upper_bound=25.0)[0] < 25.0
+        V0 = x["V"][np.linalg.norm(x["V"], axis=1) <= ARM_NEAR] if x["g"] == "H" else x["V"]
+        if not len(V0): continue
+        R, t = Wx[x["g"]]; P = V0 @ R.T + t; near = vt.query(P, distance_upper_bound=25.0)[0] < 25.0
         if near.any(): Q[(x["g"], x["n"])] = P[near]
     bd, bp = 0.0, None
     if Q:
@@ -39,26 +45,32 @@ def judge_pose(k):
         for key, P in Q.items():
             d = M.max_depth(P, a.tol_body)[0]
             if d > bd: bd, bp = d, f"{key[0]}|{key[1]}"
-    pd, pp = 0.0, None
+    pd, pp = 0.0, None; per = {}
     for i, j in pairs:
         A_, B_ = info[i], info[j]
         if A_["g"] not in Wx or B_["g"] not in Wx: continue
         Ra, ta = Wx[A_["g"]]; Rb, tb = Wx[B_["g"]]; P = ((A_["Vs"] @ Ra.T + ta) - tb) @ Rb; m = np.all((P >= B_["lo"]) & (P <= B_["hi"]), axis=1)
         if not m.any(): continue
         d = B_["M"].max_depth(P[m], a.tol_parts)[0]
+        if d > a.tol_parts: per[f"{A_['n'][:40]} IN {B_['n'][:40]}"] = round(d, 2)
         if d > pd: pd, pp = d, f"{A_['n'][:40]} IN {B_['n'][:40]}"
-    res.update(body_mm=round(bd, 2), body_part=bp, parts_mm=round(pd, 2), parts_pair=pp); return res
+    res.update(body_mm=round(bd, 2), body_part=bp, parts_mm=round(pd, 2), parts_pair=pp, pairs=per); return res
 
 if __name__ == "__main__":
     BP.posed(dict(plane=0, elev=0, axial=0, flex=90, pron=0)); t0 = time.time()
     with (mp.get_context("fork").Pool(a.jobs) if a.jobs > 1 else contextlib.nullcontext()) as pool:
         out = list(pool.imap(judge_pose, range(len(poses)), chunksize=4) if pool else map(judge_pose, range(len(poses))))
-    ok = [r["closes"] and r["body_mm"] <= a.tol_body and r["parts_mm"] <= a.tol_parts for r in out]
+    import collections
+    cnt = collections.Counter(k for r in out if r["closes"] for k in (r.get("pairs") or {})); nclose = max(1, sum(r["closes"] for r in out))
+    static = sorted(k for k, c in cnt.items() if c / nclose >= STATIC)                     # present in (nearly) every pose: a fit, judged by R6
+    for r in out:
+        if r["closes"]: r["parts_motion_mm"] = max([v for k, v in (r.get("pairs") or {}).items() if k not in static], default=0.0)
+    ok = [r["closes"] and r["body_mm"] <= a.tol_body and r["parts_motion_mm"] <= a.tol_parts for r in out]
     n = len(out); share = float(np.mean(ok)) if n else 0.0
     why = dict(chain_does_not_close=float(np.mean([not r["closes"] for r in out])), body_contact=float(np.mean([r["closes"] and r["body_mm"] > a.tol_body for r in out])),
-               part_interference=float(np.mean([r["closes"] and r["parts_mm"] > a.tol_parts for r in out])))
+               part_interference=float(np.mean([r["closes"] and r["parts_motion_mm"] > a.tol_parts for r in out])))
     agree = float(np.mean([bool(o) == bool(r["eval_feasible"]) for o, r in zip(ok, out)]))
-    res = dict(poses=n, step=a.step, share_passing=round(share, 4), fails=dict((k, round(v, 4)) for k, v in why.items()), evaluator_agreement=round(agree, 3),
+    res = dict(poses=n, step=a.step, share_passing=round(share, 4), static_fits_left_to_R6=static, arm_near_mm=ARM_NEAR, fails=dict((k, round(v, 4)) for k, v in why.items()), evaluator_agreement=round(agree, 3),
                skip_groups=sorted(SKIP), tol_body_mm=a.tol_body, tol_parts_mm=a.tol_parts, seconds=round(time.time() - t0), per_pose=out)
     os.makedirs(os.path.join(dd, "judge"), exist_ok=True); json.dump(res, open(os.path.join(dd, "judge", "workspace.json"), "w"), indent=1)
     print(f"workspace (R16): {n} functional-workspace poses, {100 * share:.1f} % pass (chain closes, body <= {a.tol_body} mm, parts <= {a.tol_parts} mm); "
