@@ -1,0 +1,84 @@
+{
+ "overall": 0.12062675363687013,
+ "follow": 0.6294997552775138,
+ "in_band": 0.19162319385444726,
+ "clips": [
+  {
+   "name": "Raise overhead",
+   "frames": 181,
+   "score": 0.07961725377714526,
+   "follow": 0.3442622950819672,
+   "in_band_when_following": 0.23126916573361245,
+   "median_gap": 14.281097414150189,
+   "min_gap": 3.8338298076203317
+  },
+  {
+   "name": "Drink from a cup",
+   "frames": 178,
+   "score": 0.13562077375225826,
+   "follow": 1.0,
+   "in_band_when_following": 0.13562077375225826,
+   "median_gap": 18.762428318373097,
+   "min_gap": 3.6131953873575506
+  },
+  {
+   "name": "Comb hair",
+   "frames": 202,
+   "score": 0.0535353207436726,
+   "follow": 0.25,
+   "in_band_when_following": 0.2141412829746904,
+   "median_gap": 15.388394937703044,
+   "min_gap": 3.7404604504850263
+  },
+  {
+   "name": "Reach a high shelf",
+   "frames": 157,
+   "score": 0.26502491781386744,
+   "follow": 1.0,
+   "in_band_when_following": 0.26502491781386744,
+   "median_gap": 15.151000017299879,
+   "min_gap": 2.647079901532735
+  },
+  {
+   "name": "Wash opposite shoulder",
+   "frames": 193,
+   "score": 0.10779469514480272,
+   "follow": 1.0,
+   "in_band_when_following": 0.10779469514480272,
+   "median_gap": 21.680153383836455,
+   "min_gap": 3.675186831246136
+  },
+  {
+   "name": "Reach back pocket",
+   "frames": 145,
+   "score": 0.09401431475450922,
+   "follow": 0.32653061224489793,
+   "in_band_when_following": 0.2879188389356844,
+   "median_gap": 11.59032258354335,
+   "min_gap": 3.854069399678058
+  },
+  {
+   "name": "Wave",
+   "frames": 172,
+   "score": 0.06351887699526412,
+   "follow": 0.25862068965517243,
+   "in_band_when_following": 0.245606324381688,
+   "median_gap": 13.154670320488696,
+   "min_gap": 3.7981326242496323
+  },
+  {
+   "name": "Walking arm swing",
+   "frames": 109,
+   "score": 0.2288257194348151,
+   "follow": 1.0,
+   "in_band_when_following": 0.2288257194348151,
+   "median_gap": 13.392795789992912,
+   "min_gap": 3.8872007348313056
+  }
+ ],
+ "band": [
+  2.0,
+  10.0
+ ],
+ "step": 3
+}

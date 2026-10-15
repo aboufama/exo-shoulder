@@ -25,5 +25,10 @@
   ]
  },
  "built_with": "pipeline/conformal/fair_cad/fair_pipeline.sh (swept-band links, turned JN hub, v4 joint, conformal saddle cuff)",
- "note": "J1-J2 hubs 24.7 mm apart (1.7 mm between seats): link 1 has no arm - see docs/FINDINGS.md"
+ "note": "J1-J2 hubs 24.7 mm apart (1.7 mm between seats): link 1 has no arm - see docs/FINDINGS.md",
+ "base": {
+  "mount": "girdle",
+  "chain": "spherical",
+  "note": "base rides the scapula on the user's scapula handler (user decision 2026-10-15); the design was always built in the scapula frame"
+ }
 }

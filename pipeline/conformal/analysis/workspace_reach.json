@@ -1,0 +1,60 @@
+{
+ "r16": [
+  {
+   "seed": 1371,
+   "a": [
+    61.9,
+    66.5
+   ],
+   "workspace_kin": 0.757,
+   "clips_kin": 1.0,
+   "evaluator_envelope_follow": 0.4,
+   "arcs_80_80_same_axes": 0.944,
+   "arcs_90_90_same_axes": 0.988
+  },
+  {
+   "seed": 1372,
+   "a": [
+    68.6,
+    68.7
+   ],
+   "workspace_kin": 0.864,
+   "clips_kin": 1.0,
+   "evaluator_envelope_follow": 0.399,
+   "arcs_80_80_same_axes": 0.953,
+   "arcs_90_90_same_axes": 0.987
+  },
+  {
+   "seed": 1373,
+   "a": [
+    77.7,
+    72.3
+   ],
+   "workspace_kin": 0.885,
+   "clips_kin": 1.0,
+   "evaluator_envelope_follow": 0.432,
+   "arcs_80_80_same_axes": 0.94,
+   "arcs_90_90_same_axes": 0.994
+  },
+  {
+   "seed": 1374,
+   "a": [
+    55.8,
+    61.9
+   ],
+   "workspace_kin": 0.688,
+   "clips_kin": 1.0,
+   "evaluator_envelope_follow": 0.443,
+   "arcs_80_80_same_axes": 0.947,
+   "arcs_90_90_same_axes": 0.988
+  }
+ ],
+ "best_possible": {
+  "60/60": 0.974,
+  "65/65": 0.993,
+  "70/70": 0.999,
+  "75/75": 1.0,
+  "80/80": 1.0,
+  "90/90": 0.996
+ }
+}

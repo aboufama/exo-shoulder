@@ -1,0 +1,21 @@
+{
+ "step": 12,
+ "tol_mm": 0.15,
+ "frames_checked": 117,
+ "pairs": 348,
+ "seconds": 14,
+ "jobs": 4,
+ "violations": {
+  "l2|D4 member l2 (proxy)  IN  l1|D4 member l1 (proxy)": {
+   "max_depth": 0.72,
+   "frames": 15,
+   "worst": [
+    "Comb hair",
+    120
+   ]
+  }
+ },
+ "open_parts_not_tested_as_container": [],
+ "inside": "integer winding number on welded tessellations (grid + segment crossings), depth = exact distance (judge/sdist.py)",
+ "max_depth": 0.72
+}

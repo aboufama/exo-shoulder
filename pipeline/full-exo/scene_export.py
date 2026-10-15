@@ -11,7 +11,8 @@ def frame_xforms(fr):
     pose = dict(zip(["plane", "elev", "axial", "flex", "pron"], fr["p"]))
     L = json.load(open(os.path.join(HERE, "..", "avg", "body_mesh.json")))
     sg, _ = BP.segs(L["landmarks"], L["scale"], pose)
-    X = {g: (np.array(G).reshape(3, 3), np.zeros(3)) for g, G in fr["G"].items()}
+    T = fr.get("T", {})                                                    # optional per-group translation (mm): chains with offset axes
+    X = {g: (np.array(G).reshape(3, 3), np.array(T.get(g, (0.0, 0.0, 0.0)), float)) for g, G in fr["G"].items()}
     X["H"] = (np.array(sg[2][0]), np.array(sg[2][1])); X["F"] = (np.array(sg[3][0]), np.array(sg[3][1]))
     return X, pose
 def posed_scene(DD, ci, fi, body=False):

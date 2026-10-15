@@ -1,0 +1,65 @@
+[
+ {
+  "n": 3,
+  "az": 61.11396484246086,
+  "el": 84.79012323988644,
+  "a": [
+   72.89803435585966,
+   60.006082882592224
+  ],
+  "w": [
+   100.0,
+   -7.084132311065103
+  ],
+  "branch": -1,
+  "order": [
+   1,
+   1,
+   0
+  ],
+  "hm": 1.3510164347072071,
+  "_src": "agent D W-boxed local search rank 0 (CPU clips-only fit 0.615, follow 0.804, in band 0.714); rank 0 = cad_agD_n3_wbox_1"
+ },
+ {
+  "n": 3,
+  "az": 75.15922449296013,
+  "el": 83.31282815866477,
+  "a": [
+   71.5449919169616,
+   60.0
+  ],
+  "w": [
+   100.17552738582043,
+   -5.0002760047699955
+  ],
+  "branch": -1,
+  "order": [
+   1,
+   0,
+   1
+  ],
+  "hm": 0.8,
+  "_src": "agent D W-boxed local search rank 1 (CPU clips-only fit 0.615, follow 0.804, in band 0.713); rank 0 = cad_agD_n3_wbox_1"
+ },
+ {
+  "n": 3,
+  "az": 77.98772746040576,
+  "el": 84.00794567587927,
+  "a": [
+   72.30018350683906,
+   60.0
+  ],
+  "w": [
+   100.4525440674535,
+   -5.345270066146947
+  ],
+  "branch": -1,
+  "order": [
+   1,
+   0,
+   1
+  ],
+  "hm": 0.8,
+  "_src": "agent D W-boxed local search rank 2 (CPU clips-only fit 0.613, follow 0.804, in band 0.709); rank 0 = cad_agD_n3_wbox_1"
+ }
+]

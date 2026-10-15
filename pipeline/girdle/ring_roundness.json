@@ -1,0 +1,265 @@
+{
+ "note": "Is the upper arm round enough for a humeral-rotation ring centred on the humerus axis? Rig skin (avg/body_pose.py),",
+ "flex": [
+  0,
+  30,
+  60,
+  90,
+  120,
+  140
+ ],
+ "stations": {
+  "60": {
+   "radius_min": 54.9,
+   "radius_max": 89.2,
+   "bulge_max": 0.0,
+   "bulge_at_theta": 90.0,
+   "travel_90": {
+    "skin_spread_mm": 3.7,
+    "window_centre_deg": 170.0,
+    "ring_radius_min": 91.2
+   },
+   "travel_120": {
+    "skin_spread_mm": 4.7,
+    "window_centre_deg": -175.0,
+    "ring_radius_min": 91.2
+   },
+   "travel_160": {
+    "skin_spread_mm": 9.9,
+    "window_centre_deg": -155.0,
+    "ring_radius_min": 91.2
+   }
+  },
+  "80": {
+   "radius_min": 52.4,
+   "radius_max": 80.6,
+   "bulge_max": 0.9,
+   "bulge_at_theta": 95.0,
+   "travel_90": {
+    "skin_spread_mm": 8.8,
+    "window_centre_deg": -100.0,
+    "ring_radius_min": 82.6
+   },
+   "travel_120": {
+    "skin_spread_mm": 10.7,
+    "window_centre_deg": -105.0,
+    "ring_radius_min": 82.6
+   },
+   "travel_160": {
+    "skin_spread_mm": 13.7,
+    "window_centre_deg": -115.0,
+    "ring_radius_min": 82.6
+   }
+  },
+  "100": {
+   "radius_min": 24.0,
+   "radius_max": 74.0,
+   "bulge_max": 15.9,
+   "bulge_at_theta": -75.0,
+   "travel_90": {
+    "skin_spread_mm": 18.7,
+    "window_centre_deg": 65.0,
+    "ring_radius_min": 58.7
+   },
+   "travel_120": {
+    "skin_spread_mm": 24.9,
+    "window_centre_deg": -35.0,
+    "ring_radius_min": 76.0
+   },
+   "travel_160": {
+    "skin_spread_mm": 27.9,
+    "window_centre_deg": 130.0,
+    "ring_radius_min": 53.7
+   }
+  },
+  "120": {
+   "radius_min": 36.2,
+   "radius_max": 72.3,
+   "bulge_max": 6.9,
+   "bulge_at_theta": 65.0,
+   "travel_90": {
+    "skin_spread_mm": 17.4,
+    "window_centre_deg": 160.0,
+    "ring_radius_min": 52.2
+   },
+   "travel_120": {
+    "skin_spread_mm": 19.2,
+    "window_centre_deg": 105.0,
+    "ring_radius_min": 54.1
+   },
+   "travel_160": {
+    "skin_spread_mm": 19.2,
+    "window_centre_deg": 125.0,
+    "ring_radius_min": 54.1
+   }
+  },
+  "140": {
+   "radius_min": 35.6,
+   "radius_max": 65.3,
+   "bulge_max": 13.9,
+   "bulge_at_theta": 90.0,
+   "travel_90": {
+    "skin_spread_mm": 14.2,
+    "window_centre_deg": -75.0,
+    "ring_radius_min": 67.3
+   },
+   "travel_120": {
+    "skin_spread_mm": 17.8,
+    "window_centre_deg": -75.0,
+    "ring_radius_min": 67.3
+   },
+   "travel_160": {
+    "skin_spread_mm": 21.1,
+    "window_centre_deg": -70.0,
+    "ring_radius_min": 67.3
+   }
+  },
+  "160": {
+   "radius_min": 34.1,
+   "radius_max": 69.9,
+   "bulge_max": 7.8,
+   "bulge_at_theta": 90.0,
+   "travel_90": {
+    "skin_spread_mm": 12.7,
+    "window_centre_deg": 45.0,
+    "ring_radius_min": 55.6
+   },
+   "travel_120": {
+    "skin_spread_mm": 16.3,
+    "window_centre_deg": 55.0,
+    "ring_radius_min": 55.8
+   },
+   "travel_160": {
+    "skin_spread_mm": 21.4,
+    "window_centre_deg": 80.0,
+    "ring_radius_min": 55.6
+   }
+  },
+  "180": {
+   "radius_min": 32.9,
+   "radius_max": 68.4,
+   "bulge_max": 5.6,
+   "bulge_at_theta": 80.0,
+   "travel_90": {
+    "skin_spread_mm": 10.9,
+    "window_centre_deg": 45.0,
+    "ring_radius_min": 54.3
+   },
+   "travel_120": {
+    "skin_spread_mm": 18.7,
+    "window_centre_deg": 60.0,
+    "ring_radius_min": 54.3
+   },
+   "travel_160": {
+    "skin_spread_mm": 20.2,
+    "window_centre_deg": 85.0,
+    "ring_radius_min": 53.8
+   }
+  },
+  "200": {
+   "radius_min": 32.8,
+   "radius_max": 63.1,
+   "bulge_max": 14.0,
+   "bulge_at_theta": -75.0,
+   "travel_90": {
+    "skin_spread_mm": 9.7,
+    "window_centre_deg": 40.0,
+    "ring_radius_min": 54.1
+   },
+   "travel_120": {
+    "skin_spread_mm": 13.7,
+    "window_centre_deg": 65.0,
+    "ring_radius_min": 52.1
+   },
+   "travel_160": {
+    "skin_spread_mm": 17.5,
+    "window_centre_deg": 85.0,
+    "ring_radius_min": 52.1
+   }
+  },
+  "220": {
+   "radius_min": 30.2,
+   "radius_max": 62.1,
+   "bulge_max": 8.9,
+   "bulge_at_theta": -75.0,
+   "travel_90": {
+    "skin_spread_mm": 12.0,
+    "window_centre_deg": 30.0,
+    "ring_radius_min": 56.3
+   },
+   "travel_120": {
+    "skin_spread_mm": 16.4,
+    "window_centre_deg": -55.0,
+    "ring_radius_min": 64.1
+   },
+   "travel_160": {
+    "skin_spread_mm": 19.0,
+    "window_centre_deg": -45.0,
+    "ring_radius_min": 64.1
+   }
+  },
+  "240": {
+   "radius_min": 35.7,
+   "radius_max": 59.8,
+   "bulge_max": 12.7,
+   "bulge_at_theta": 145.0,
+   "travel_90": {
+    "skin_spread_mm": 13.5,
+    "window_centre_deg": -65.0,
+    "ring_radius_min": 61.8
+   },
+   "travel_120": {
+    "skin_spread_mm": 16.2,
+    "window_centre_deg": -65.0,
+    "ring_radius_min": 61.8
+   },
+   "travel_160": {
+    "skin_spread_mm": 18.7,
+    "window_centre_deg": 120.0,
+    "ring_radius_min": 46.5
+   }
+  },
+  "260": {
+   "radius_min": 34.9,
+   "radius_max": 58.0,
+   "bulge_max": 12.1,
+   "bulge_at_theta": -155.0,
+   "travel_90": {
+    "skin_spread_mm": 11.8,
+    "window_centre_deg": -60.0,
+    "ring_radius_min": 60.0
+   },
+   "travel_120": {
+    "skin_spread_mm": 14.4,
+    "window_centre_deg": -55.0,
+    "ring_radius_min": 60.0
+   },
+   "travel_160": {
+    "skin_spread_mm": 20.0,
+    "window_centre_deg": 100.0,
+    "ring_radius_min": 48.9
+   }
+  },
+  "280": {
+   "radius_min": 31.6,
+   "radius_max": 56.2,
+   "bulge_max": 13.3,
+   "bulge_at_theta": 40.0,
+   "travel_90": {
+    "skin_spread_mm": 10.8,
+    "window_centre_deg": -55.0,
+    "ring_radius_min": 58.2
+   },
+   "travel_120": {
+    "skin_spread_mm": 13.5,
+    "window_centre_deg": -55.0,
+    "ring_radius_min": 58.2
+   },
+   "travel_160": {
+    "skin_spread_mm": 20.6,
+    "window_centre_deg": 115.0,
+    "ring_radius_min": 47.1
+   }
+  }
+ }
+}

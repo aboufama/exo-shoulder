@@ -19,8 +19,19 @@ _c = os.getcwd(); os.chdir(os.path.join(EXO, "avg")); import design_search as DS
 D2R = math.pi / 180; HUB_R, T_LO, T_LINK, T_BOT = 17.0, 5.0, 5.5, 6.5; RESUME = 4.0
 SRC, IDX, NAME = sys.argv[1], int(sys.argv[2]), sys.argv[3]; SUB = sys.argv[4] if len(sys.argv) > 4 else NAME
 R = json.load(open(SRC))["results"][IDX]; N = R["n"]; A = [x * D2R for x in R["a"]]; m = N - 3
-Z = np.load(io.BytesIO(gzip.decompress(base64.b64decode(open(os.path.join(EXO, "conformal", "band_poses.b64")).read()))))
+if R.get("err"): sys.exit(f"band_to_design: result {IDX} of {SRC} was rejected by the evaluator: {R['err']}")
+ARM_MM = None
+if __name__ == "__main__":                                                          # every link a real arm (docs/FINDINGS.md "Short link")
+    sys.path.insert(0, os.path.join(EXO, "conformal", "gpu")); import band_impl as BI
+    if "faces" in R and "lower" in R:                                               # clear gap between each link's hub seats, mm
+        ARM_MM = [round(c, 2) for c in BI.arms_ok(R["a"], BI.hub_heights(N, R["faces"], R["lower"], float(R.get("stack", BI.STACK))), 0.0, float(R.get("hub_r", HUB_R)))[2]]
+    _probs = BI.design_link_report(R, ARM_MM, float(os.environ.get("MIN_ARC", BI.MIN_ARC)), float(os.environ.get("MIN_ARM_MM", BI.MIN_ARM_MM)), hub_r=float(R.get("hub_r", HUB_R)))
+    if _probs:                                                                      # a scoring proxy is fine; CAD is refused downstream
+        print("\n" + "!" * 110 + f"\nWARNING band_to_design ({SRC} #{IDX} -> {NAME}): a link without a real arm\n  " + "\n  ".join(_probs)
+              + "\n  usable as a scoring proxy only: make_cad_design.py refuses it (override: --allow-short-link / ALLOW_SHORT_LINK=1)\n" + "!" * 110 + "\n", file=sys.stderr, flush=True)
+Z = np.load(io.BytesIO(gzip.decompress(base64.b64decode(open(os.path.join(EXO, "conformal", os.environ.get("POSES_FILE", "band_poses.b64"))).read()))))   # the payload the eval used
 POSE, CID, FI, NAMES, FPS = Z["POSE"], Z["CID"], Z["FI"], [str(x) for x in Z["NAMES"]], float(Z["FPS"])
+ENVELOPE = set(str(x) for x in Z["ENVELOPE"]) if "ENVELOPE" in Z.files else set()                        # workspace poses: shaped, never clips
 ST = int(R.get("stride", 1)); POSE, CID, FI = POSE[::ST], CID[::ST], FI[::ST]; FPS = FPS / ST          # frames the evaluator saw
 P_, C_ = R["PC"]; FEAS = np.unpackbits(np.frombuffer(base64.b64decode(R["feas_all"]), np.uint8))[:P_ * C_].reshape(P_, C_).astype(bool)
 SHARE = np.frombuffer(base64.b64decode(R["share_all"]), np.uint8).reshape(P_, C_) / 255.0
@@ -130,6 +141,7 @@ def path_of(ix):
     return out
 clips = []; nfol = 0; ntot = 0
 for ci, name in enumerate(NAMES):
+    if name in ENVELOPE: continue
     ix = np.nonzero(CID == ci)[0]; ix = ix[np.argsort(FI[ix])]; path = path_of(ix) if os.environ.get("OWN_DP") != "1" else dp(ix)
     frames = []
     if not path:                                                                         # never followed: hold the clip's first pose at a closing config
@@ -225,12 +237,14 @@ for mi in range(N):
 
 # ---------------------------------------------------------------- write the design dir
 DD = os.path.join(HERE, "designs", NAME); os.makedirs(DD, exist_ok=True)
-sc = trimesh.Scene(); src = trimesh.load(os.path.join(HERE, "designs", "final", "exo.glb"))
+sc = trimesh.Scene(); _fin = os.environ.get("ARM_SRC", os.path.join(HERE, "designs", "final", "exo.glb"))   # the user's arm parts (ARM_SRC: another design's)
+src = trimesh.load(_fin) if os.path.exists(_fin) else trimesh.Scene()
+ARM_SKIP = [x for x in os.environ.get("ARM_SKIP", "").split(",") if x]                  # e.g. that design's own custom arm-end parts
 for g, mesh in meshes.items(): sc.add_geometry(mesh, node_name=f"{g}|D4 member {g} (proxy)|0", geom_name=f"{g}|proxy")
 moved_w = abs(R["w"][0] - 85.9) > 0.5 or abs(R["w"][1]) > 0.5
 for node in src.graph.nodes_geometry:                                                  # the user's arm parts ride on
     T_, gname = src.graph[node]; g = node.split("|")[0]
-    if g not in ("H", "F") or "J4 " in node: continue
+    if g not in ("H", "F") or "J4 " in node or any(k in node for k in ARM_SKIP): continue
     mm = src.geometry[gname].copy(); mm.apply_transform(T_); sc.add_geometry(mm, node_name=node, geom_name=node)
 HR = np.array(json.load(open(os.path.join(EXO, "avg", "body_mesh.json")))["landmarks"]["rest_humerus"]); U_, _, Vt_ = np.linalg.svd(HR); HR = U_ @ Vt_
 ib = np.nonzero(IS_BOT)[0]
@@ -264,6 +278,18 @@ else:
     sc.add_geometry(blk, node_name="H|BOTTOM JN hub block (proxy)|0", geom_name="H|hubblock")
 sc.export(os.path.join(DD, "exo.glb"))
 axes = [["base", [1.0, 0, 0]]] + [[f"l{k}", [1.0, 0, 0]] for k in range(1, N)] + [[f"l{N - 1}", [math.cos(A[N - 2]), math.sin(A[N - 2]), 0.0]]]
-json.dump(dict(subtitle=SUB, clips=clips, axes=axes, design={k: R[k] for k in ("n", "az", "el", "a", "w", "branch", "order", "zj4", "score", "follow", "in_band")}),
+if ENVELOPE:                                                                         # R16: every workspace pose, independently (judge/workspace.py)
+    wsp = []
+    for ci, name in enumerate(NAMES):
+        if name not in ENVELOPE: continue
+        for f in np.nonzero(CID == ci)[0]:
+            pose = POSE[f]; HG, Rs = pose_mats(*pose[:3]); pins = chain(HG, qrad(int(CFG[f])))
+            rec = dict(p=[round(float(x), 2) for x in pose], want=[round(float(x), 2) for x in pose], held=False, eval_feasible=bool(FEA[f]), closes=pins is not None)
+            if pins is not None: rec["G"] = {g: (Rs @ F_).round(6).ravel().tolist() for g, F_ in zip(GRP, frames_of_members(pins))}
+            wsp.append(rec)
+    os.makedirs(DD, exist_ok=True); json.dump(dict(envelope=sorted(ENVELOPE), poses=wsp), open(os.path.join(DD, "workspace.json"), "w"), separators=(",", ":"))
+    print(f"workspace.json: {len(wsp)} poses, chain closes in {100 * np.mean([w['closes'] for w in wsp]):.1f} %, evaluator-feasible {100 * np.mean([w['eval_feasible'] for w in wsp]):.1f} %")
+json.dump(dict(subtitle=SUB, clips=clips, axes=axes, design=dict({k: R[k] for k in ("n", "az", "el", "a", "w", "branch", "order", "zj4", "score", "follow", "in_band")},
+                                                                  hub_r=float(R.get("hub_r", HUB_R)), arm_mm=ARM_MM)),
           open(os.path.join(DD, "clips.json"), "w"), separators=(",", ":"))
 print("wrote", DD)

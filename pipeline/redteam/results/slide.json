@@ -1,0 +1,74 @@
+{
+ "rig": {
+  "spherical 4R + slide (x = 0)": {
+   "clips_max": 16.47,
+   "slide_range_mm": 25.1
+  },
+  "ring + slide": {
+   "shrug15_clips_max": 17.68,
+   "depressed10_clips_max": 11.48,
+   "clips_max": 4.3,
+   "clips_heldout_max": 4.13,
+   "workspace_max": 15.58,
+   "workspace_p95": 9.63,
+   "workspace_refit_max": 6.31,
+   "slide_range_mm": 15.2
+  },
+  "3R + slide": {
+   "shrug15_clips_max": 18.32,
+   "depressed10_clips_max": 11.28,
+   "clips_max": 4.26,
+   "clips_heldout_max": 4.26,
+   "workspace_max": 19.63,
+   "workspace_p95": 14.1,
+   "workspace_refit_max": 6.8,
+   "slide_range_mm": 16.2
+  },
+  "ring_mt + slide": {
+   "shrug15_clips_max": 22.3,
+   "depressed10_clips_max": 11.91,
+   "clips_max": 7.55,
+   "clips_heldout_max": 7.55,
+   "workspace_max": 11.55,
+   "workspace_p95": 7.45,
+   "workspace_refit_max": 5.77,
+   "slide_range_mm": 16.8
+  }
+ },
+ "literature (lead's girdle.lift_literature)": {
+  "spherical 4R + slide (x = 0)": {
+   "clips_max": 57.03,
+   "slide_range_mm": 58.8
+  },
+  "ring + slide": {
+   "shrug15_clips_max": 25.49,
+   "depressed10_clips_max": 23.57,
+   "clips_max": 15.25,
+   "clips_heldout_max": 10.68,
+   "workspace_max": 45.87,
+   "workspace_p95": 26.42,
+   "workspace_refit_max": 22.82,
+   "slide_range_mm": 53.4
+  },
+  "3R + slide": {
+   "shrug15_clips_max": 35.21,
+   "depressed10_clips_max": 25.73,
+   "clips_max": 22.79,
+   "clips_heldout_max": 22.79,
+   "workspace_max": 75.73,
+   "workspace_p95": 51.93,
+   "workspace_refit_max": 33.99,
+   "slide_range_mm": 29.5
+  },
+  "ring_mt + slide": {
+   "shrug15_clips_max": 59.26,
+   "depressed10_clips_max": 41.5,
+   "clips_max": 47.69,
+   "clips_heldout_max": 47.69,
+   "workspace_max": 64.93,
+   "workspace_p95": 32.1,
+   "workspace_refit_max": 34.4,
+   "slide_range_mm": 99.4
+  }
+ }
+}

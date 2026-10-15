@@ -1,0 +1,84 @@
+{
+ "overall": 0.21230299032547476,
+ "follow": 0.6095321543201572,
+ "in_band": 0.3483048249723056,
+ "clips": [
+  {
+   "name": "Raise overhead",
+   "frames": 181,
+   "score": 0.20530217762806965,
+   "follow": 0.639344262295082,
+   "in_band_when_following": 0.3211136624439038,
+   "median_gap": 13.696803169385921,
+   "min_gap": 2.5402782609408114
+  },
+  {
+   "name": "Drink from a cup",
+   "frames": 178,
+   "score": 0.2907119456370007,
+   "follow": 1.0,
+   "in_band_when_following": 0.2907119456370007,
+   "median_gap": 12.867960580389717,
+   "min_gap": 2.4264005557234296
+  },
+  {
+   "name": "Comb hair",
+   "frames": 202,
+   "score": 0.12775525022501086,
+   "follow": 0.47058823529411764,
+   "in_band_when_following": 0.2714799067281481,
+   "median_gap": 14.395889831205656,
+   "min_gap": 1.05209218078125
+  },
+  {
+   "name": "Reach a high shelf",
+   "frames": 157,
+   "score": 0.17780615965195168,
+   "follow": 0.4528301886792453,
+   "in_band_when_following": 0.3926552692313933,
+   "median_gap": 18.245494362161566,
+   "min_gap": 0.16534224263947075
+  },
+  {
+   "name": "Wash opposite shoulder",
+   "frames": 193,
+   "score": 0.06541361958231597,
+   "follow": 0.13846153846153847,
+   "in_band_when_following": 0.47243169698339305,
+   "median_gap": 11.66771973288162,
+   "min_gap": 2.6268929312827396
+  },
+  {
+   "name": "Reach back pocket",
+   "frames": 145,
+   "score": 0.16235018229636478,
+   "follow": 0.32653061224489793,
+   "in_band_when_following": 0.4971974332826171,
+   "median_gap": 10.32770573438772,
+   "min_gap": 3.207755882702467
+  },
+  {
+   "name": "Wave",
+   "frames": 172,
+   "score": 0.3003870498059313,
+   "follow": 1.0,
+   "in_band_when_following": 0.3003870498059313,
+   "median_gap": 11.462013551531133,
+   "min_gap": 0.1491062466998937
+  },
+  {
+   "name": "Walking arm swing",
+   "frames": 109,
+   "score": 0.48980158166334226,
+   "follow": 1.0,
+   "in_band_when_following": 0.48980158166334226,
+   "median_gap": 10.475057163597342,
+   "min_gap": 0.3401844092677881
+  }
+ ],
+ "band": [
+  2.0,
+  10.0
+ ],
+ "step": 3
+}

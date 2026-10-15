@@ -1,0 +1,35 @@
+{
+ "name": "l1_3r_offset",
+ "arch": "3 DOF: 3R, offset axes",
+ "frames": 446,
+ "fitting_frames": 352,
+ "station_mm": 80.0,
+ "link1": {
+  "length_mm": 191.5,
+  "underside_mm": [
+   96.7,
+   165.1
+  ],
+  "blocked_frames_fit": 152,
+  "blocked_frames_held_out": 14,
+  "in_band_2_10_fit": 0.004,
+  "in_band_2_10_held_out": 0.0,
+  "in_band_2_14_fit": 0.019,
+  "median_gap": 43.0
+ },
+ "link2": {
+  "length_mm": 187.2,
+  "underside_mm": [
+   145.2,
+   168.0
+  ],
+  "blocked_frames_fit": 177,
+  "blocked_frames_held_out": 38,
+  "in_band_2_10_fit": 0.102,
+  "in_band_2_10_held_out": 0.0,
+  "in_band_2_14_fit": 0.17,
+  "median_gap": 36.4
+ },
+ "mass_custom_g": 172.8,
+ "all_watertight": true
+}

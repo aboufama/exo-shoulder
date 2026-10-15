@@ -1,0 +1,17 @@
+[
+ {
+  "family": "baseline spherical 3R",
+  "variant": "r20 s1414 #4",
+  "active_dof": 3,
+  "passive_dof": 0,
+  "reach": 0.775,
+  "follow": 1.0,
+  "inband14": 0.4381,
+  "inband10": 0.2789,
+  "contact": 0.1024,
+  "gap": 68.93,
+  "verdict": "baseline",
+  "notes": "profile percentile p95; bench fast, {'clip': 60, 'ws': 160}; real judged CAD of this design: R1 35.0 % (strap links), R3 98.2 %",
+  "is_baseline": true
+ }
+]

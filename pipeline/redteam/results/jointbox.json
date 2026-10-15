@@ -1,0 +1,176 @@
+[
+ {
+  "src": "search n3 seed 1351 rank 0 (fit score 0.414)",
+  "joint_stop_box_deg": [
+   [
+    -43.9,
+    94.5
+   ],
+   [
+    -14.6,
+    59.6
+   ],
+   [
+    -56.7,
+    94.9
+   ]
+  ],
+  "spans_deg": [
+   138.4,
+   74.2,
+   151.6
+  ],
+  "share_of_box_beyond_plausible": {
+   "10": 0.125,
+   "20": 0.052,
+   "30": 0.02,
+   "45": 0.002
+  },
+  "worst_beyond_deg": 54.4
+ },
+ {
+  "src": "search n3 seed 1351 rank 1 (fit score 0.414)",
+  "joint_stop_box_deg": [
+   [
+    -40.6,
+    98.6
+   ],
+   [
+    -17.9,
+    69.6
+   ],
+   [
+    -60.3,
+    91.8
+   ]
+  ],
+  "spans_deg": [
+   139.2,
+   87.5,
+   152.1
+  ],
+  "share_of_box_beyond_plausible": {
+   "10": 0.164,
+   "20": 0.072,
+   "30": 0.023,
+   "45": 0.002
+  },
+  "worst_beyond_deg": 54.5
+ },
+ {
+  "src": "r15 seed 1361 rank 0 (fit 0.418)",
+  "joint_stop_box_deg": [
+   [
+    -36.9,
+    100.6
+   ],
+   [
+    -21.7,
+    57.5
+   ],
+   [
+    -60.2,
+    99.8
+   ]
+  ],
+  "spans_deg": [
+   137.4,
+   79.2,
+   160.1
+  ],
+  "share_of_box_beyond_plausible": {
+   "10": 0.176,
+   "20": 0.075,
+   "30": 0.023,
+   "45": 0.001
+  },
+  "worst_beyond_deg": 51.6
+ },
+ {
+  "src": "r15 seed 1362 rank 0 (fit 0.423)",
+  "joint_stop_box_deg": [
+   [
+    -40.7,
+    97.7
+   ],
+   [
+    -20.2,
+    56.7
+   ],
+   [
+    -58.7,
+    95.8
+   ]
+  ],
+  "spans_deg": [
+   138.4,
+   76.9,
+   154.5
+  ],
+  "share_of_box_beyond_plausible": {
+   "10": 0.147,
+   "20": 0.06,
+   "30": 0.023,
+   "45": 0.002
+  },
+  "worst_beyond_deg": 55.3
+ },
+ {
+  "src": "r15 seed 1363 rank 0 (fit 0.427)",
+  "joint_stop_box_deg": [
+   [
+    -35.2,
+    105.8
+   ],
+   [
+    -34.3,
+    49.6
+   ],
+   [
+    -59.2,
+    99.0
+   ]
+  ],
+  "spans_deg": [
+   140.9,
+   83.9,
+   158.2
+  ],
+  "share_of_box_beyond_plausible": {
+   "10": 0.209,
+   "20": 0.101,
+   "30": 0.043,
+   "45": 0.007
+  },
+  "worst_beyond_deg": 61.2
+ },
+ {
+  "src": "r15 seed 1364 rank 0 (fit 0.427)",
+  "joint_stop_box_deg": [
+   [
+    -36.1,
+    106.3
+   ],
+   [
+    -39.7,
+    42.6
+   ],
+   [
+    -60.3,
+    102.3
+   ]
+  ],
+  "spans_deg": [
+   142.5,
+   82.3,
+   162.6
+  ],
+  "share_of_box_beyond_plausible": {
+   "10": 0.224,
+   "20": 0.116,
+   "30": 0.057,
+   "45": 0.013
+  },
+  "worst_beyond_deg": 67.2
+ }
+]

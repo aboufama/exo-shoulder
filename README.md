@@ -16,17 +16,26 @@ scripts that happened to get written:
 | What has been learned so far? | [`docs/FINDINGS.md`](docs/FINDINGS.md) |
 | How do I run it? | [`docs/PIPELINE.md`](docs/PIPELINE.md), [`CLAUDE.md`](CLAUDE.md) for agents |
 
-## Status (2026-10-14)
+## Status (2026-10-15, morning)
 
-Reference design: **`cad_r13_n4_s1343_1`**, 4 revolute joints, base on top/back of the shoulder, v4 encoder joints,
-swept-band Ti links, BOTTOM + neck + J4 hub as one 7075 part, conformal AlSi10Mg saddle cuff on the upper arm.
-Scorecard: [`pipeline/full-exo/designs/cad_r13_n4_s1343_1/judge/scorecard.md`](pipeline/full-exo/designs/cad_r13_n4_s1343_1/judge/scorecard.md).
+**Final design of the night, built and rendered: `cad_r18_n3_s1392_1_f300`** - a 3-joint chain (the user's 3-DOF
+minimum) from the range-first GPU search r18, full fair CAD with smooth fair-field links (FAIR_LAM 300), the scapula
+base on the user's handler, unpowered (MVP1, rolling bearings). Scorecard:
+[pipeline/full-exo/designs/cad_r18_n3_s1392_1_f300/judge/scorecard.md](pipeline/full-exo/designs/cad_r18_n3_s1392_1_f300/judge/scorecard.md);
+film and stills: [renders/2026-10-15_final_3R/](renders/2026-10-15_final_3R/).
 
-What it means in one paragraph: the CAD is collision-free and buildable-looking, but the design only covers about a
-third of the goal (honest score ~30 %, overhead far from usable), and three things outrank more polishing - the base is
-modelled as riding the scapula although it bolts to a thorax back plate (R10, the likely reason overhead is so hard),
-the human model has measurable artifacts (R14 / P2), and nothing has been checked by an independent solver, a supplier
-or a real body yet (R9, R13, R15). **Next: phase P0** in docs/PLAN.md.
+- Moves freely unpowered (R17), 3 DOF (R5), every part one valid solid (R7), 234 g of custom parts (R8).
+- Follows 80 % of motion frames (R3); Raise overhead to 138 deg of elevation (scapular plane), then holds; Comb hair,
+  Drink, Reach a high shelf, Wash opposite shoulder and Walking 100 %; Reach back pocket 22 %, Wave 40 %.
+- Proximity is the big gap: 41 % of the covered skin within 14 mm (R1, target 90 %), 19 % within 10 mm.
+- No design reaches the 90 % range target: the best compact designs cover 65-75 % of the functional workspace in the
+  evaluator, the built CAD 47 % (R16; link 2 meets the arm-end neck in half the poses outside the clips).
+
+What the night established (docs/FINDINGS.md): range first makes the search hold joints off the skin (stand-off
+designs, now flagged by the builder); joint size is worth ~20 points of workspace (O17 vs the O23 the CAD builds);
+the fair CAD's links ride 3-7 mm above the fitted shape (fair-field links recover part of it). Next levers: a smaller
+joint stack (needle bearings, O17 hub), the neck clearance over the whole workspace, links that follow the fitted
+shape.
 
 ## Quickstart
 

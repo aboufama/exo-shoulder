@@ -70,7 +70,10 @@ def joint_parts(axis, lv, z_skin, J):
 
 
 # ---------------------------------------------------------------- v4 (encoder-ready, Ø23): delegates to joint_v4.py
+JOINT = __import__("os").environ.get("JOINT", "v4")                                   # "v5": O20 hub, 2x MR117-2RS preloaded (joint_v5.py)
+
 def v4_lower_features(body, axis, lv):
+    if JOINT == "v5": return v5_lower_features(body, axis, lv)                              # armend_fair calls the v4 names: JOINT=v5 routes them
     import joint_v4 as J4
     a = np.asarray(axis, float)
     import cad_helpers as CH
@@ -98,13 +101,15 @@ def _frame(a, yref):
         y_ = np.asarray(yref, float) - (np.asarray(yref, float) @ n_) * n_; y_ /= np.linalg.norm(y_); x_ = np.cross(y_, n_)
     return n_, x_, y_
 def v4_upper_features(body, axis, lv, yref=None):
+    if JOINT == "v5": return v5_upper_features(body, axis, lv, yref)
     import joint_v4 as J4, cad_helpers as CH
     a = np.asarray(axis, float); body = body.cut(CH.bore_tool(a, lv["U0"], lv["U1"], 6.0))
     n_, x_, y_ = _frame(a, yref)
-    for s_ in (1, -1): body = body.cut(cq.Solid.makeCylinder(0.625, 2.7, cq.Vector(*(y_ * s_ * 10.15 + a * (lv["U1"] - 2.7))), cq.Vector(*a)))   # 2.7 deep: the M1.6x3 goes in 2.54, clear of the lower edge round
+    for s_ in (1, -1): body = body.cut(cq.Solid.makeCylinder(0.625, 3.7, cq.Vector(*(y_ * s_ * 10.15 + a * (lv["U1"] - 2.7))), cq.Vector(*a)))   # 2.7 deep: the M1.6x3 goes in 2.54, clear of the lower edge round; the drill runs 1 mm out of the seat face (a tool ending ON the face broke the solid)
     return body
 def v4_joint_parts(axis, lv, J, yref=None):
     """lower-member group: washers, magnet, ring nut; upper-member group: sleeve, PCB + IC, cap, 2 cap screws"""
+    if JOINT == "v5": return v5_joint_parts(axis, lv, J, yref)
     import joint_v4 as J4, cad_helpers as CH
     a = np.asarray(axis, float); n_, x_, y_ = _frame(a, yref)
     lower = [(f"J{J} washer A (igus GTM-1018-005, recessed)", J4.washer(a, lv["rec"])), (f"J{J} washer B (igus GTM-1018-005)", J4.washer(a, lv["B0"])),
@@ -114,3 +119,28 @@ def v4_joint_parts(axis, lv, J, yref=None):
              (f"J{J} cap Ø22 G2 dome (Ti-6Al-4V)", J4.cap_noslot(a, lv))]
     for s_ in (1, -1): upper.append((f"J{J} M1.6x3 ISO 10642 Ti (cap)", J4.m16_cs(a, y_ * s_ * 10.15, lv["U1"] + 0.46, 3.0)))
     return lower, upper
+
+
+# ---------------------------------------------------------------- v5 (O20, 2x MR117-2RS preloaded, threaded G2 cap): delegates to joint_v5.py
+def v5_lower_features(body, axis, lv):
+    """lower member: integral O7 pin with the O8.2 collar fused (crosses the seat transversally), sensor pockets cut"""
+    import joint_v5 as J5
+    b = J5.lower_features(body, axis, lv)
+    if not b.isValid():
+        from OCP.ShapeFix import ShapeFix_Shape
+        sf = ShapeFix_Shape(b.wrapped); sf.Perform(); b = cq.Shape.cast(sf.Shape())
+    return b
+def v5_upper_features(body, axis, lv, yref=None):
+    """upper member: threaded spigot fused on the boss top (H1), lip + bearing bore cut. No screw holes (the cap threads on)"""
+    import joint_v5 as J5
+    b = J5.upper_features(body, axis, lv)
+    if not b.isValid():
+        from OCP.ShapeFix import ShapeFix_Shape
+        sf = ShapeFix_Shape(b.wrapped); sf.Perform(); b = cq.Shape.cast(sf.Shape())
+    return b
+def v5_joint_parts(axis, lv, J, yref=None):
+    """lower group (turns with the pin): inner rings, inner spacer, ring nut, magnet; upper group: outer rings + seals,
+    outer spacer, cap, PCB, IC"""
+    import joint_v5 as J5
+    return J5.joint_parts(axis, lv, J)
+lower_features, upper_features, joint_parts = v4_lower_features, v4_upper_features, v4_joint_parts   # version-neutral names (JOINT decides)

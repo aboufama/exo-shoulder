@@ -1,0 +1,320 @@
+[
+ {
+  "src": "search n3 seed 1351 rank 0 (fit score 0.414)",
+  "a": [
+   72.2,
+   56.8
+  ],
+  "theta_window": [
+   15.3,
+   129.0
+  ],
+  "clips": {
+   "Raise overhead": {
+    "kin_follow": 1.0,
+    "theta_min": 46.1,
+    "theta_max": 94.7
+   },
+   "Drink from a cup": {
+    "kin_follow": 1.0,
+    "theta_min": 79.3,
+    "theta_max": 94.3
+   },
+   "Comb hair": {
+    "kin_follow": 1.0,
+    "theta_min": 67.5,
+    "theta_max": 93.9
+   },
+   "Reach a high shelf": {
+    "kin_follow": 1.0,
+    "theta_min": 88.5,
+    "theta_max": 96.5
+   },
+   "Wash opposite shoulder": {
+    "kin_follow": 1.0,
+    "theta_min": 81.6,
+    "theta_max": 105.3
+   },
+   "Reach back pocket": {
+    "kin_follow": 1.0,
+    "theta_min": 76.9,
+    "theta_max": 94.1
+   },
+   "Wave": {
+    "kin_follow": 1.0,
+    "theta_min": 49.2,
+    "theta_max": 93.5
+   },
+   "Walking arm swing": {
+    "kin_follow": 1.0,
+    "theta_min": 97.5,
+    "theta_max": 99.4
+   }
+  }
+ },
+ {
+  "src": "search n3 seed 1351 rank 1 (fit score 0.414)",
+  "a": [
+   72.2,
+   54.7
+  ],
+  "theta_window": [
+   17.5,
+   127.0
+  ],
+  "clips": {
+   "Raise overhead": {
+    "kin_follow": 1.0,
+    "theta_min": 48.1,
+    "theta_max": 102.6
+   },
+   "Drink from a cup": {
+    "kin_follow": 1.0,
+    "theta_min": 87.7,
+    "theta_max": 102.2
+   },
+   "Comb hair": {
+    "kin_follow": 1.0,
+    "theta_min": 71.8,
+    "theta_max": 101.8
+   },
+   "Reach a high shelf": {
+    "kin_follow": 1.0,
+    "theta_min": 96.0,
+    "theta_max": 103.4
+   },
+   "Wash opposite shoulder": {
+    "kin_follow": 1.0,
+    "theta_min": 90.7,
+    "theta_max": 113.8
+   },
+   "Reach back pocket": {
+    "kin_follow": 1.0,
+    "theta_min": 84.1,
+    "theta_max": 100.9
+   },
+   "Wave": {
+    "kin_follow": 1.0,
+    "theta_min": 54.3,
+    "theta_max": 101.4
+   },
+   "Walking arm swing": {
+    "kin_follow": 1.0,
+    "theta_min": 105.4,
+    "theta_max": 107.4
+   }
+  }
+ },
+ {
+  "src": "r15 seed 1361 rank 0 (fit 0.418)",
+  "a": [
+   70.2,
+   57.3
+  ],
+  "theta_window": [
+   12.9,
+   127.5
+  ],
+  "clips": {
+   "Raise overhead": {
+    "kin_follow": 1.0,
+    "theta_min": 53.6,
+    "theta_max": 99.6
+   },
+   "Drink from a cup": {
+    "kin_follow": 1.0,
+    "theta_min": 88.5,
+    "theta_max": 99.4
+   },
+   "Comb hair": {
+    "kin_follow": 1.0,
+    "theta_min": 76.4,
+    "theta_max": 98.9
+   },
+   "Reach a high shelf": {
+    "kin_follow": 1.0,
+    "theta_min": 96.0,
+    "theta_max": 104.2
+   },
+   "Wash opposite shoulder": {
+    "kin_follow": 1.0,
+    "theta_min": 87.5,
+    "theta_max": 113.9
+   },
+   "Reach back pocket": {
+    "kin_follow": 1.0,
+    "theta_min": 78.3,
+    "theta_max": 97.9
+   },
+   "Wave": {
+    "kin_follow": 1.0,
+    "theta_min": 57.2,
+    "theta_max": 98.5
+   },
+   "Walking arm swing": {
+    "kin_follow": 1.0,
+    "theta_min": 102.7,
+    "theta_max": 106.5
+   }
+  }
+ },
+ {
+  "src": "r15 seed 1362 rank 0 (fit 0.423)",
+  "a": [
+   69.4,
+   55.2
+  ],
+  "theta_window": [
+   14.2,
+   124.7
+  ],
+  "clips": {
+   "Raise overhead": {
+    "kin_follow": 1.0,
+    "theta_min": 48.2,
+    "theta_max": 93.1
+   },
+   "Drink from a cup": {
+    "kin_follow": 1.0,
+    "theta_min": 80.2,
+    "theta_max": 92.8
+   },
+   "Comb hair": {
+    "kin_follow": 1.0,
+    "theta_min": 68.7,
+    "theta_max": 92.4
+   },
+   "Reach a high shelf": {
+    "kin_follow": 1.0,
+    "theta_min": 88.5,
+    "theta_max": 97.5
+   },
+   "Wash opposite shoulder": {
+    "kin_follow": 1.0,
+    "theta_min": 79.7,
+    "theta_max": 106.8
+   },
+   "Reach back pocket": {
+    "kin_follow": 1.0,
+    "theta_min": 73.3,
+    "theta_max": 91.5
+   },
+   "Wave": {
+    "kin_follow": 1.0,
+    "theta_min": 51.6,
+    "theta_max": 92.0
+   },
+   "Walking arm swing": {
+    "kin_follow": 1.0,
+    "theta_min": 96.0,
+    "theta_max": 98.9
+   }
+  }
+ },
+ {
+  "src": "r15 seed 1363 rank 0 (fit 0.427)",
+  "a": [
+   66.6,
+   58.8
+  ],
+  "theta_window": [
+   7.9,
+   125.4
+  ],
+  "clips": {
+   "Raise overhead": {
+    "kin_follow": 1.0,
+    "theta_min": 48.7,
+    "theta_max": 89.3
+   },
+   "Drink from a cup": {
+    "kin_follow": 1.0,
+    "theta_min": 81.4,
+    "theta_max": 89.2
+   },
+   "Comb hair": {
+    "kin_follow": 1.0,
+    "theta_min": 69.3,
+    "theta_max": 88.6
+   },
+   "Reach a high shelf": {
+    "kin_follow": 1.0,
+    "theta_min": 86.8,
+    "theta_max": 101.4
+   },
+   "Wash opposite shoulder": {
+    "kin_follow": 1.0,
+    "theta_min": 78.2,
+    "theta_max": 112.5
+   },
+   "Reach back pocket": {
+    "kin_follow": 1.0,
+    "theta_min": 66.2,
+    "theta_max": 87.5
+   },
+   "Wave": {
+    "kin_follow": 1.0,
+    "theta_min": 51.5,
+    "theta_max": 88.1
+   },
+   "Walking arm swing": {
+    "kin_follow": 1.0,
+    "theta_min": 92.4,
+    "theta_max": 97.5
+   }
+  }
+ },
+ {
+  "src": "r15 seed 1364 rank 0 (fit 0.427)",
+  "a": [
+   65.9,
+   56.5
+  ],
+  "theta_window": [
+   9.5,
+   122.4
+  ],
+  "clips": {
+   "Raise overhead": {
+    "kin_follow": 1.0,
+    "theta_min": 47.4,
+    "theta_max": 81.8
+   },
+   "Drink from a cup": {
+    "kin_follow": 1.0,
+    "theta_min": 74.5,
+    "theta_max": 83.5
+   },
+   "Comb hair": {
+    "kin_follow": 1.0,
+    "theta_min": 64.2,
+    "theta_max": 85.3
+   },
+   "Reach a high shelf": {
+    "kin_follow": 1.0,
+    "theta_min": 80.2,
+    "theta_max": 101.4
+   },
+   "Wash opposite shoulder": {
+    "kin_follow": 1.0,
+    "theta_min": 71.3,
+    "theta_max": 108.8
+   },
+   "Reach back pocket": {
+    "kin_follow": 1.0,
+    "theta_min": 58.1,
+    "theta_max": 80.0
+   },
+   "Wave": {
+    "kin_follow": 1.0,
+    "theta_min": 48.0,
+    "theta_max": 80.7
+   },
+   "Walking arm swing": {
+    "kin_follow": 1.0,
+    "theta_min": 85.0,
+    "theta_max": 90.9
+   }
+  }
+ }
+]

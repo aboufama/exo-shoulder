@@ -1,0 +1,98 @@
+[
+ {
+  "G_fit": 14.0,
+  "G": 14.0,
+  "faces": {
+   "1": 50.76511001586914,
+   "2": 77.62625885009766,
+   "3": 85.8780746459961,
+   "zj4": 79.22807312011719
+  },
+  "score": 0.44818899035453796,
+  "follow": 0.7397379875183105,
+  "follow_fit": 0.7842931747436523,
+  "in_band": 0.5860316753387451,
+  "clips": {
+   "Raise overhead": 0.459,
+   "Drink from a cup": 1.0,
+   "Comb hair": 1.0,
+   "Reach a high shelf": 1.0,
+   "Wash opposite shoulder": 1.0,
+   "Reach back pocket": 0.245,
+   "Wave": 0.207,
+   "Walking arm swing": 1.0
+  }
+ },
+ {
+  "G_fit": 20.0,
+  "G": 14.0,
+  "faces": {
+   "1": 50.76511001586914,
+   "2": 78.55038452148438,
+   "3": 85.8780746459961,
+   "zj4": 79.22807312011719
+  },
+  "score": 0.4466187059879303,
+  "follow": 0.7484716176986694,
+  "follow_fit": 0.7947643995285034,
+  "in_band": 0.5767306685447693,
+  "clips": {
+   "Raise overhead": 0.492,
+   "Drink from a cup": 1.0,
+   "Comb hair": 1.0,
+   "Reach a high shelf": 1.0,
+   "Wash opposite shoulder": 1.0,
+   "Reach back pocket": 0.265,
+   "Wave": 0.207,
+   "Walking arm swing": 1.0
+  }
+ },
+ {
+  "G_fit": 30.0,
+  "G": 14.0,
+  "faces": {
+   "1": 50.88832473754883,
+   "2": 87.1139144897461,
+   "3": 85.8780746459961,
+   "zj4": 79.22807312011719
+  },
+  "score": 0.38099953532218933,
+  "follow": 0.7973799109458923,
+  "follow_fit": 0.8408377170562744,
+  "in_band": 0.4597911834716797,
+  "clips": {
+   "Raise overhead": 0.623,
+   "Drink from a cup": 1.0,
+   "Comb hair": 1.0,
+   "Reach a high shelf": 1.0,
+   "Wash opposite shoulder": 1.0,
+   "Reach back pocket": 0.388,
+   "Wave": 0.31,
+   "Walking arm swing": 1.0
+  }
+ },
+ {
+  "G_fit": 60.0,
+  "G": 14.0,
+  "faces": {
+   "1": 50.91912841796875,
+   "2": 104.79544830322266,
+   "3": 85.8780746459961,
+   "zj4": 79.22807312011719
+  },
+  "score": 0.3004480004310608,
+  "follow": 0.9109170436859131,
+  "follow_fit": 0.9518324732780457,
+  "in_band": 0.3143770098686218,
+  "clips": {
+   "Raise overhead": 1.0,
+   "Drink from a cup": 1.0,
+   "Comb hair": 1.0,
+   "Reach a high shelf": 1.0,
+   "Wash opposite shoulder": 1.0,
+   "Reach back pocket": 0.531,
+   "Wave": 0.517,
+   "Walking arm swing": 1.0
+  }
+ }
+]

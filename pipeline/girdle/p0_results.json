@@ -1,0 +1,453 @@
+{
+ "design": "cad_r13_n4_s1343_1",
+ "frames": 1337,
+ "clips": [
+  "Raise overhead",
+  "Drink from a cup",
+  "Comb hair",
+  "Reach a high shelf",
+  "Wash opposite shoulder",
+  "Reach back pocket",
+  "Wave",
+  "Walking arm swing"
+ ],
+ "hold_out": [
+  "Wave",
+  "Walking arm swing"
+ ],
+ "rig": "avg/body_pose.py segs()/scap()",
+ "frame": "thorax, mm: x anterior, y up, z right, origin = right GH centre at rest",
+ "human": {
+  "gh_translation_mm": {
+   "max": 25.34,
+   "p95": 23.78,
+   "mean": 7.53
+  },
+  "gh_direction": "pure +y (superior) in the rig: lift = 0.2*S*max(0, elev-30) mm, S=1.0557",
+  "scapula_rotation_deg": {
+   "max": 57.82,
+   "p95": 54.66,
+   "mean": 20.01
+  },
+  "per_clip": {
+   "Raise overhead": {
+    "elev_max": 150.0,
+    "gh_max_mm": 25.3,
+    "scap_max_deg": 57.8
+   },
+   "Drink from a cup": {
+    "elev_max": 68.7,
+    "gh_max_mm": 8.2,
+    "scap_max_deg": 22.8
+   },
+   "Comb hair": {
+    "elev_max": 143.1,
+    "gh_max_mm": 23.9,
+    "scap_max_deg": 54.9
+   },
+   "Reach a high shelf": {
+    "elev_max": 132.0,
+    "gh_max_mm": 21.5,
+    "scap_max_deg": 50.1
+   },
+   "Wash opposite shoulder": {
+    "elev_max": 59.6,
+    "gh_max_mm": 6.2,
+    "scap_max_deg": 18.9
+   },
+   "Reach back pocket": {
+    "elev_max": 40.1,
+    "gh_max_mm": 2.1,
+    "scap_max_deg": 10.5
+   },
+   "Wave": {
+    "elev_max": 95.0,
+    "gh_max_mm": 13.7,
+    "scap_max_deg": 34.1
+   },
+   "Walking arm swing": {
+    "elev_max": 24.0,
+    "gh_max_mm": 0.0,
+    "scap_max_deg": 3.8
+   }
+  },
+  "elev_at_gh_4mm": 48.9,
+  "elev_at_gh_10mm": 77.4
+ },
+ "base": {
+  "part_vertices": 6172,
+  "displacement_mm": {
+   "max": 57.62,
+   "p95": 55.16,
+   "mean": 20.95
+  },
+  "closest_skin_mm": {
+   "scapula_fixed": {
+    "min": 0.2,
+    "max": 4.64,
+    "p95": 4.47,
+    "mean": 3.5
+   },
+   "thorax_fixed": {
+    "min": -43.99,
+    "max": 5.01,
+    "p95": 4.57,
+    "mean": -7.83
+   }
+  },
+  "thorax_fixed_enters_body": {
+   "frames": 197,
+   "of": 446,
+   "depth_mm": 44.0,
+   "worst": [
+    "Raise overhead",
+    78,
+    [
+     30,
+     150,
+     -60
+    ]
+   ]
+  }
+ },
+ "reference_chain": {
+  "misalignment_mm": {
+   "all": {
+    "max": 25.34,
+    "p95": 23.78,
+    "mean": 7.53
+   },
+   "Raise overhead": 25.3,
+   "Drink from a cup": 8.2,
+   "Comb hair": 23.9,
+   "Reach a high shelf": 21.5,
+   "Wash opposite shoulder": 6.2,
+   "Reach back pocket": 2.1,
+   "Wave": 13.7,
+   "Walking arm swing": 0.0
+  },
+  "share_frames_over_mm": {
+   "2": 0.564,
+   "4": 0.476,
+   "10": 0.332
+  },
+  "closure_exists": {
+   "scapula_fixed": 1.0,
+   "thorax_fixed": 1.0
+  },
+  "clips_followed_share": 0.642,
+  "note": "misalignment = GH centre vs the spherical chain's fixed centre; closure = kinematics only, before any skin check"
+ },
+ "never_points": {
+  "direction_thorax": [
+   -0.525,
+   -0.253,
+   0.812
+  ],
+  "min_angle_to_arm_axis_deg": 45.4,
+  "note": "the axis (either sense) farthest from every humerus direction of the 8 clips: best J1 for a 2R pointing shoulder at a1 = a2 = 90"
+ },
+ "architectures": {
+  "spherical chain, scapula-fixed base (the pipeline's model; no back plate can do this)": {
+   "dof": "N",
+   "residual_mm": {
+    "max": 0.0,
+    "p95": 0.0,
+    "mean": 0.0
+   }
+  },
+  "spherical chain, thorax-fixed base, centre at GH rest (the reference as built)": {
+   "dof": "N",
+   "residual_mm": {
+    "max": 25.34,
+    "p95": 23.78,
+    "mean": 7.53
+   }
+  },
+  "spherical chain, thorax-fixed base, best fixed centre": {
+   "dof": "N",
+   "residual_mm": {
+    "max": 12.67,
+    "p95": 12.67,
+    "mean": 9.16
+   },
+   "centre_mm": [
+    0.0,
+    12.7,
+    0.0
+   ]
+  },
+  "spherical chain + passive vertical base slide": {
+   "dof": "N+1",
+   "residual_mm": {
+    "max": 0.0,
+    "p95": 0.0,
+    "mean": 0.0
+   },
+   "note": "0 only because the rig's GH lift is purely vertical"
+  },
+  "3 DOF: 2R shoulder (offset axes) + humeral-rotation ring": {
+   "dof": 3,
+   "note": "J3 = the humerus axis (open ring on the upper arm); J1, J2 need not meet at GH",
+   "params": {
+    "b": [
+     38.6,
+     -4.6
+    ],
+    "a1": 88.7,
+    "a2": 99.8,
+    "branch": 1.0,
+    "w": null
+   },
+   "fit_clips": {
+    "residual_mm": {
+     "max": 6.58,
+     "p95": 6.33,
+     "mean": 3.95
+    },
+    "singular_margin_deg_min": 28.1,
+    "closes": 1.0
+   },
+   "held_out_clips": {
+    "residual_mm": {
+     "max": 6.79,
+     "p95": 6.59,
+     "mean": 3.82
+    },
+    "singular_margin_deg_min": 55.4,
+    "closes": 1.0
+   },
+   "all": {
+    "residual_mm": {
+     "max": 6.79,
+     "p95": 6.46,
+     "mean": 3.92
+    },
+    "singular_margin_deg_min": 28.1,
+    "closes": 1.0
+   },
+   "residual_by_elevation_mm": {
+    "0-30": 5.19,
+    "30-60": 6.69,
+    "60-90": 6.79,
+    "90-120": 5.84,
+    "120-181": 6.58
+   },
+   "axis_closest_point_to_GH_mm": [
+    [
+     -3.2,
+     9.4,
+     -2.8
+    ],
+    [
+     -1.3,
+     5.7,
+     -0.2
+    ],
+    [
+     0.0,
+     0.0,
+     0.0
+    ]
+   ],
+   "axis_offset_from_GH_mm": [
+    10.3,
+    5.8,
+    0.0
+   ],
+   "offset_max_mm": 10.3,
+   "joint_travel_deg": {
+    "J1": {
+     "min": -18.9,
+     "max": 150.2,
+     "span": 169.1
+    },
+    "J2": {
+     "min": -38.3,
+     "max": 59.0,
+     "span": 97.3
+    },
+    "J3": {
+     "min": -84.3,
+     "max": 79.5,
+     "span": 163.8
+    }
+   },
+   "_x": [
+    60.0,
+    15.86517748142242,
+    -53.194454025111234,
+    43.20730699038007,
+    18.59907042408316,
+    60.0,
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "3 DOF: 3R, offset axes": {
+   "dof": 3,
+   "note": "all three axes free in direction and position",
+   "params": {
+    "b": [
+     163.5,
+     61.0
+    ],
+    "a1": 106.9,
+    "a2": 107.1,
+    "branch": 1.0,
+    "w": [
+     121.5,
+     93.4
+    ]
+   },
+   "fit_clips": {
+    "residual_mm": {
+     "max": 4.68,
+     "p95": 4.68,
+     "mean": 2.94
+    },
+    "singular_margin_deg_min": 20.0,
+    "closes": 1.0
+   },
+   "held_out_clips": {
+    "residual_mm": {
+     "max": 5.82,
+     "p95": 5.79,
+     "mean": 3.28
+    },
+    "singular_margin_deg_min": 12.5,
+    "closes": 1.0
+   },
+   "all": {
+    "residual_mm": {
+     "max": 5.82,
+     "p95": 5.63,
+     "mean": 3.01
+    },
+    "singular_margin_deg_min": 12.5,
+    "closes": 1.0
+   },
+   "residual_by_elevation_mm": {
+    "0-30": 4.5,
+    "30-60": 4.68,
+    "60-90": 5.63,
+    "90-120": 5.82,
+    "120-181": 4.68
+   },
+   "axis_closest_point_to_GH_mm": [
+    [
+     -4.5,
+     2.5,
+     -0.4
+    ],
+    [
+     5.7,
+     4.4,
+     -2.5
+    ],
+    [
+     -2.8,
+     4.6,
+     0.0
+    ]
+   ],
+   "axis_offset_from_GH_mm": [
+    5.2,
+    7.6,
+    5.4
+   ],
+   "offset_max_mm": 7.6,
+   "joint_travel_deg": {
+    "J1": {
+     "min": 2.3,
+     "max": 163.0,
+     "span": 160.7
+    },
+    "J2": {
+     "min": -20.6,
+     "max": 90.2,
+     "span": 110.8
+    },
+    "J3": {
+     "min": -173.4,
+     "max": 17.0,
+     "span": 190.5
+    }
+   },
+   "_x": [
+    25.981252422507737,
+    60.0,
+    8.704171731997375,
+    34.47462379309541,
+    2.1618480894462255,
+    60.0,
+    60.0,
+    43.217772926070815,
+    -3.68871337425845
+   ]
+  },
+  "3 DOF: 2R shoulder through GH + ring (no offsets)": {
+   "dof": 3,
+   "residual_mm": {
+    "max": 25.34,
+    "p95": 23.78,
+    "mean": 7.53
+   },
+   "singular_margin_deg_min": 28.1
+  }
+ },
+ "search_seconds": 1256,
+ "sensitivity_synthetic": {
+  "2R+ring | slope x0.75": {
+   "max": 7.6,
+   "p95": 7.11,
+   "mean": 3.94
+  },
+  "2R+ring | slope x1.25": {
+   "max": 12.48,
+   "p95": 11.32,
+   "mean": 5.04
+  },
+  "2R+ring | onset 20 deg": {
+   "max": 8.48,
+   "p95": 7.68,
+   "mean": 4.38
+  },
+  "2R+ring | onset 40 deg": {
+   "max": 7.63,
+   "p95": 7.03,
+   "mean": 3.84
+  },
+  "2R+ring | +8 mm anterior in flexion": {
+   "max": 10.66,
+   "p95": 9.03,
+   "mean": 4.29
+  },
+  "3R offset | slope x0.75": {
+   "max": 5.77,
+   "p95": 5.55,
+   "mean": 3.26
+  },
+  "3R offset | slope x1.25": {
+   "max": 10.83,
+   "p95": 8.79,
+   "mean": 4.16
+  },
+  "3R offset | onset 20 deg": {
+   "max": 7.12,
+   "p95": 7.07,
+   "mean": 3.33
+  },
+  "3R offset | onset 40 deg": {
+   "max": 6.56,
+   "p95": 5.86,
+   "mean": 3.16
+  },
+  "3R offset | +8 mm anterior in flexion": {
+   "max": 11.03,
+   "p95": 9.36,
+   "mean": 3.72
+  }
+ }
+}

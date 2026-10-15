@@ -1,0 +1,61 @@
+{
+ "step": 12,
+ "tol_mm": 0.15,
+ "frames_checked": 117,
+ "pairs": 2500,
+ "seconds": 336,
+ "jobs": 4,
+ "violations": {
+  "l2|J2 M1.6x3 ISO 10642 Ti (cap)  IN  l1|J2 washer B (igus GTM-1018-005)": {
+   "max_depth": 0.17,
+   "frames": 117,
+   "worst": [
+    "Walking arm swing",
+    108
+   ]
+  },
+  "l1|J1 M1.6x3 ISO 10642 Ti (cap)  IN  base|J1 washer B (igus GTM-1018-005)": {
+   "max_depth": 0.18,
+   "frames": 117,
+   "worst": [
+    "Comb hair",
+    48
+   ]
+  },
+  "H|J3 washer B (igus GTM-1018-005)  IN  l2|D4-03 link 2 (Ti-6Al-4V)": {
+   "max_depth": 0.28,
+   "frames": 65,
+   "worst": [
+    "Wash opposite shoulder",
+    120
+   ]
+  },
+  "l2|D4-03 link 2 (Ti-6Al-4V)  IN  H|J3 washer B (igus GTM-1018-005)": {
+   "max_depth": 0.25,
+   "frames": 66,
+   "worst": [
+    "Raise overhead",
+    48
+   ]
+  },
+  "l2|D4-03 link 2 (Ti-6Al-4V)  IN  H|BOTTOM + neck + JN hub (one 5-axis part, 7075-T6 bead blasted)": {
+   "max_depth": 0.29,
+   "frames": 27,
+   "worst": [
+    "Reach a high shelf",
+    96
+   ]
+  },
+  "H|BOTTOM + neck + JN hub (one 5-axis part, 7075-T6 bead blasted)  IN  l2|D4-03 link 2 (Ti-6Al-4V)": {
+   "max_depth": 0.26,
+   "frames": 16,
+   "worst": [
+    "Reach a high shelf",
+    72
+   ]
+  }
+ },
+ "open_parts_not_tested_as_container": [],
+ "inside": "integer winding number on welded tessellations (grid + segment crossings), depth = exact distance (judge/sdist.py)",
+ "max_depth": 0.29
+}

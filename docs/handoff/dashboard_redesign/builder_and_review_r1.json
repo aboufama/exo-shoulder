@@ -1,0 +1,230 @@
+[
+ {
+  "result": "I built and tested the redesigned page, its data builder and a local test harness. I committed and pushed only `tools/dash_build.py` (3f8016b). The live dashboard is untouched.\n\n**Test results.** All nine screenshots per data set (each tab at 1400 px, 420 px and 1400 px dark) load with no page errors and no sideways scroll. In a separate check, hover tooltips, the measure switch, table sort and search, the CAD-tab toggles and the loading/error placeholders all worked. All 57 data marks point to a row that exists.\n\n**Files**\n- `/home/user/exo-shoulder/tools/dash_build.py` builds `morphs`, `sweeps`, `judged`, `events`, `reqs`, `cov3d`. Gap and the verifier's gap (`v_gap`) are computed here. `--sample` writes test-only data. Missing inputs give empty lists.\n- `/tmp/claude-0/-home-user-exo-shoulder/83445525-dbfd-5a74-afa6-eaabc370b170/scratchpad/dash2/index.html` is the page (126.5 KB, limit 256 KB):\n  - **Swarm tab:** a header sentence naming the leader; a leader card that gets a blue top border when it beats the baseline, with verified/claimed/NEW badges, three meters against target and baseline, and runners-up; a record-over-time chart with a best-so-far line, the baseline zone shaded, record setters labelled and a measure switch; reach vs in-band scatter; optimisation traces per morphology; a claimed-vs-re-measured chart; a pipeline funnel; a sortable, searchable table.\n  - **Built CAD tab:** seven requirement charts over time (3 DOF by default, 4-DOF behind a toggle, colour by DOF or CAD level); the 19-requirement board; the 3-D arm coverage view, ported.\n  - **Log tab:** events newest first, filterable by kind.\n  - Calculations: `ranking`, `summary`, `records`, `funnel`, `freshness`, `judged_stats`, `reqs_summary`, `cov3d_share`.\n- `/tmp/claude-0/-home-user-exo-shoulder/83445525-dbfd-5a74-afa6-eaabc370b170/scratchpad/dash2/harness/` contains `build.py` (writes `index.html` and `dark.html` with the `window.dash` shim; `?status=loading|error` forces those states), `shot.mjs`, `probe.mjs` (the hover/state/mark check), plus `app.css` and `d3.min.js`.\n- `/tmp/claude-0/-home-user-exo-shoulder/83445525-dbfd-5a74-afa6-eaabc370b170/scratchpad/dash2/shoot.sh [data dir] [tag]` builds the harness, serves it on a free port, screenshots and prints page errors.\n\n**Dataset summaries**\n- Real data (`dash2/data`):\n\n  | Dataset | Rows | Notes |\n  |---|---|---|\n  | morphs | 0 | |\n  | sweeps | 0 | |\n  | judged | 18 | 15 with 3 DOF; newest cad_r20_n3_s1414_4_f300 |\n  | events | 19 | newest Oct 15 13:05 UTC |\n  | reqs | 19 | 8 pass |\n  | cov3d | 916 | 6 designs |\n\n- Sample (`dash2/sample_data`, never publish): 41 morphs (28 screened, baseline gap 65.0, leader gap 30.35), 880 sweep rows, 27 events.\n\n**Screenshots** are in `/tmp/claude-0/-home-user-exo-shoulder/83445525-dbfd-5a74-afa6-eaabc370b170/scratchpad/dash2/shots/`:\n- `real_{swarm,cad,log}_{1400,420,1400_dark}.png`\n- `sample_data_{swarm,cad,log}_{1400,420,1400_dark}.png`\n- `hover_record.png`, `record_inband14.png`, `cad_level_4dof.png`, `state_loading.png`, `state_error.png`\n\n**Known issues**\n1. There is no swarm data in the repo yet (no `catalogue.json`, `families.json`, `rows/`, `sweeps/` or `events.jsonl`), so the real Swarm tab shows its empty-state messages.\n2. `tools/judged_history.py` dates each design by the commit that added its `score.json`. Seven builds committed together at 13:33 were therefore all bunched at that time. The builder corrects this by using the earlier of the commit time and the file's modified time; `judged_history.py` itself is unchanged.\n3. Legacy `families.json` rows have no time of their own. The builder uses the commit that first added the family's name (falling back to the file's modified time).\n4. I assumed calculation functions receive their inputs in order, per the type's SKILL.md. `summary` and `freshness` take several inputs, and several calculations take `ranking` (another calculation) as input. Only the harness shim tested this, not the real platform.\n5. The platform's mark checker may flag formatted values as mismatches (e.g. \"70.6%\" shown for 0.706, or \"yes\" for `moves_freely: true`).\n6. \"Latest activity\" is the newest timestamp anywhere in the data, not when the files were rebuilt. The NEW badge uses the reader's clock (within 3 hours).\n7. The requirement board counts 3-DOF designs only and keeps only the newest judge's numbers when a judge changed. R6 shows a best of \"0 mm\" from cad_r20_n3_s1414_4 (its overlap judge reports 0.0); worth confirming that is real.\n8. At 420 px the table shows rank, name, status chips and gap; the other bar columns scroll sideways.\n9. I left an untracked `docs/concepts/models/` that someone else created alone."
+ },
+ {
+  "result": {
+   "verdict": "fix",
+   "issues": [
+    {
+     "severity": "major",
+     "where": "tools/dash_build.py morphs() (lines 134-157), together with tools/concept_baseline.py --write",
+     "problem": "concept_baseline.py --write (the swarm's bar) writes the baseline twice: rows/baseline-3r.json (id baseline-3r) and a families.json row (family 'baseline spherical 3R', variant 'r20 s1414 #4'). The builder slugs these to two different ids. I reproduced it with those two files in a scratch copy: morphs() returns two rows with is_baseline true ('baseline-3r' and 'baseline-spherical-3r-r20-s1414-4'). On the first real run the table will show two baseline rows and the scatter will draw two '3R baseline' diamonds and labels. If the two copies ever differ, nobody can tell which one is the bar.",
+     "fix": "Keep exactly one baseline. Prefer a rows/ entry with is_baseline true and drop the families.json baseline row when one exists, or map the families baseline row to id 'baseline-3r' so the rows/ file overrides it. Assert len([m for m in M if m['is_baseline']]) <= 1 and print a warning otherwise."
+    },
+    {
+     "severity": "major",
+     "where": "tools/dash_build.py cov3d() and the Built CAD tab's 3-D 'Where your arm can go' card",
+     "problem": "The builder copies a stale scratch file (cov3d.json from 13:45) and does not regenerate it. The 3-D view therefore lacks cad_r20_n3_s1414_4, the design that holds the best R16 (85.0 %) on the requirement board directly above it. The view opens on r18 c1 at 78.3 %. It will also never pick up new judged designs, which goes against the user's 'needs to be updated more often'. tools/coverage3d.py already rebuilds it from the repo in about 2 s. I ran it to scratch: 7 designs including cad_r20_n3_s1414_4 at 85.0 %.",
+     "fix": "In cov3d(), run `python3 tools/coverage3d.py -o <out>/cov3d.json` the way judged() runs judged_history.py, and fall back to the scratch copy only if that fails. The page already defaults to the last (newest) design, so r20 will open first. Optionally keep only the newest ~8 designs so the dataset stays small."
+    },
+    {
+     "severity": "minor",
+     "where": "Swarm tab, Record over time, measure switch (In-band 14 / 10 mm, Reach, Follow)",
+     "problem": "Dot colour always means 'beats the baseline on GAP', but the shaded band means 'better than the baseline on this measure'. In record_inband14.png, grey 'does not beat it' dots at 44-45 % sit inside the blue 'better than the baseline' zone above the 40 % baseline. The chart contradicts itself, and the user asked for charts that explain themselves.",
+     "fix": "In non-gap modes, rename the key entries to 'beats the baseline overall (gap)\u2026' and the band to 'better than the baseline on this measure'. Alternatively, colour by the selected measure in those modes and say so in the note."
+    },
+    {
+     "severity": "minor",
+     "where": "Swarm tab, Record over time y-axis (both widths)",
+     "problem": "Two refuted outliers near 150 stretch the axis to 160. The progress that matters (record 37.3 -> 30.4) becomes a step of about 16 px at 1400 px and about 10 px at 420 px. This is the 'scale hides the change' problem the user reported. The y-axis also has no unit label ('gap, points' / '%'), and the record labels collide: at 420, 'Helical humeral sle\u2026' is drawn on top of the record line far from its dot, and 'Exo-tendon strap ch\u2026' sits over dots.",
+     "fix": "Compute the y-domain from live (non-refuted) dots, the record, the baseline and the target. Clip refuted/dead outliers to the top edge with the existing \u25b2 'off the scale' mark. Add a small axis title ('gap to targets (points)', or the measure name with %). Use the same label placement as the scatter so each record label sits next to its own dot."
+    },
+    {
+     "severity": "minor",
+     "where": "Swarm tab, All morphologies table",
+     "problem": "The table box has max-height 36rem with inner scroll, so only 10 of 41 rows show while the counter says '41 of 41 shown'. Nothing hints that more rows exist. The baseline row has rank null and sorts to the very bottom, so the table never shows where the bar to beat sits. At 420 px the in-band/reach/follow columns scroll sideways with no hint.",
+     "fix": "When sorted by rank or gap, draw the baseline as a full-width divider at its gap position (e.g. '\u2014 3R baseline, gap 65.0: everything above beats it \u2014'). Either drop the inner max-height or add a fade plus a 'scroll for N more' line. At narrow widths, show a 'swipe for more columns \u2192' hint."
+    },
+    {
+     "severity": "minor",
+     "where": "Swarm tab, Current leader card, Runners-up list",
+     "problem": "Claimed (not re-measured) winners such as #3 Watt-linkage and #5 Offset-axis have the same solid blue gap as verified winners. Only the small grey caption differs. The spec says unverified winners should be visibly weaker.",
+     "fix": "Give claimed runners a lighter or dashed treatment matching the table's dashed 'beats baseline?' chip, e.g. accent at 50 % opacity plus a small 'claimed' chip."
+    },
+    {
+     "severity": "minor",
+     "where": "Swarm tab, Optimisation inside each morphology",
+     "problem": "Refuted/dead sweeps are drawn dashed, but the key does not explain the dashes. The '3R baseline 65.0' label is drawn over the tangle of lines and is hard to read, especially at 420 px. The y-domain tops out near 170 because of early configurations, which squeezes the 25-65 band where the winners plateau into the lower third.",
+     "fix": "Add 'refuted or dropped (dashed)' to the key. Put the baseline label at the right end above the line with a panel-coloured halo (paint-order stroke). Cap the domain at about 1.5x the baseline and clip the starts with the existing '\u25b2 N sweeps start above the top' note."
+    },
+    {
+     "severity": "minor",
+     "where": "Swarm tab, Where each morphology lands (scatter)",
+     "problem": "The 'both targets met' corner is a barely visible sliver: the domain stops around 92-95 %, so only the label box shows. Some labels overlap dots ('Hoberman ring around the\u2026' runs through a blue dot, 'Helical humeral sleeve +\u2026' touches its ring).",
+     "fix": "Always extend both axes to 100 % so the target corner is a visible shaded square. Pass every dot as an obstacle to placeLabels, not only the labelled ones."
+    },
+    {
+     "severity": "minor",
+     "where": "Built CAD tab, 'Colour by: CAD level' with 'Show 4-DOF designs' on (cad_level_4dof.png)",
+     "problem": "In this mode the line joins 4-DOF and 3-DOF designs of the same CAD level. For example, the R1 Full-CAD line starts at the 4-DOF r13 (80 %) and falls into the 3-DOF designs. This brings back the 'going from 4 to 3 looks like regression' effect the user complained about.",
+     "fix": "Whatever the colouring, never connect designs with different DOF. In CAD-level mode, draw 4-DOF designs as a separate dashed line with hollow markers and say '4 DOF: dashed' in the key."
+    },
+    {
+     "severity": "minor",
+     "where": "Built CAD tab, All 19 requirements board",
+     "problem": "Unsettled cards (R9, R13, R14 'not measured'; R12, R15 'needs you') still print 'best unverified / not done / no data' plus a design id (cad_r18_n3_s1392_1_f300). That suggests the design was assessed. For R6, 'best 0 mm' may be a judge artefact (the builder already flags it). If unsure, show the value with a '?' note.",
+     "fix": "For unsettled states, show '\u2014' with no design line and keep only the state label. Mark R6's 0.00 mm as 'to confirm' until checked."
+    },
+    {
+     "severity": "minor",
+     "where": "Built CAD tab, R17 'Moves freely unpowered' chart",
+     "problem": "A full-size chart shows a flat 'yes' line, and it sits alone in a row that leaves two-thirds of the width empty. It is clutter, and it is exactly the kind of flat line that tells the user nothing.",
+     "fix": "Turn R17 (a yes/no requirement) into a compact strip of yes/no chips over time, or fold it into the R16 card's row, so the grid ends cleanly at six charts."
+    },
+    {
+     "severity": "minor",
+     "where": "Header 'latest activity' and the Log tab",
+     "problem": "Freshness is the newest timestamp in the data, not when the data was rebuilt. When the swarm is quiet, the user cannot tell an idle swarm from a stale page, yet 'updated more often' was the user's request. In the error state the header shows 'none yet' with a green dot.",
+     "fix": "Have dash_build.py also write the build time (e.g. a one-row 'meta' dataset {built_at}) and show 'data refreshed N min ago \u00b7 last activity M min ago'. Turn the dot amber after 30 min without a rebuild and grey/red on load errors."
+    },
+    {
+     "severity": "minor",
+     "where": "Built CAD tab, 3-D view at 420 px",
+     "problem": "The 'across' direction label is cut off at the right edge of the sphere view.",
+     "fix": "Inset the direction labels by their measured width, or reduce the sphere radius slightly at narrow widths."
+    }
+   ]
+  }
+ },
+ {
+  "result": {
+   "verdict": "fix",
+   "issues": [
+    {
+     "severity": "major",
+     "where": "index.html drawTimeX (lines 575-585), used by Record over time and every Built-CAD mini chart",
+     "problem": "Time tick labels pile up when the screened span is short. d3's x.ticks(n) can return about twice the n requested, and nothing thins the result. With one screened morphology (the first state the real Swarm tab will reach), the record chart's x axis prints 40 one-minute labels from 05:41 to 06:20 that touch each other, with the \u00b120 min pad. Reproduced with baseline plus one row: /tmp/claude-0/-home-user-exo-shoulder/83445525-dbfd-5a74-afa6-eaabc370b170/scratchpad/revCC/shots/one_swarm_1400.png (zoom: revCC/one_ticks.png).",
+     "fix": "Thin the ticks to fit. Let maxN = floor(inner / w). Call t = x.ticks(n) and lower n until t.length <= maxN, or keep every ceil(t.length / maxN)-th tick. Use the same helper for the CAD minis. Also widen the pad when there are only one or two points, e.g. pad = max(span*0.04, 2 h), so a lone dot sits on a sensible hourly axis."
+    },
+    {
+     "severity": "major",
+     "where": "index.html drawTuning: connectors (line 938) and x domain (line 907)",
+     "problem": "The chart is meant to answer 'does tuning plateau?', and it misleads in two ways. (1) The end labels sit in a right-hand gutter at the domain's last configuration. Each highlighted sweep is joined to its label by a blue diagonal line, so a 10-25-config sweep gets a line running out to config ~57. In the sample data that line looks like the sweep continued and plateaued for 30-45 more configs, and the connectors cross the other traces. (2) The x domain is the longest sweep, even when that sweep is entirely off the y scale. In the stress set, a 300-config sweep with every value above the top is invisible but squeezes all the other sweeps into the left sixth, and the connectors then span 250 configs (revCC/shots/stress_swarm_1400.png). A long GPU-search trace added to sweeps would do the same.",
+     "fix": "Label each highlighted line at its real end (x_end + 6 px), push labels apart vertically only among labels whose x ranges overlap, and mark the end with the dot. If the gutter stays, draw the connector only inside the gutter and never across the plot. Build the x domain only from sweeps with at least one visible point. For very uneven lengths, cap x near 1.5x the 90th-percentile length and mark longer sweeps with '\u2192 continues to k=N', or use a log x scale, which also spreads out the early configurations where most of the gain happens."
+    },
+    {
+     "severity": "minor",
+     "where": "index.html drawLands (lines 855-858, 875)",
+     "problem": "The scatter's upper bounds are max(x1, 0.95) and max(y1, 0.95), so the shaded 'both targets' corner is a 90-95 % sliver largely covered by its own label. Outliers are silently clamped to the domain edge: in the stress set, reach 2 % is drawn at about 32 % with no clip marker. The brief asks for clips to be marked.",
+     "fix": "Use 1.0 as the upper bound on both axes so the target corner is a visible box. Draw clamped points as edge triangles, as the record chart does, and add a 'N off the scale' item to the key."
+    },
+    {
+     "severity": "minor",
+     "where": "index.html placeLabels (552-567) and its callers (record, lands, tuning)",
+     "problem": "Labels collide with marks. The second pass ignores dots, so a label can cover its own dot: 'Hoberman ring around the \u2026' hides its dot at 1400, and 'Back-mounted 3R\u2026' does the same at 420. A label can sit up to 28 px from its dot with no leader line: in the stress scatter, three names are stacked left of the leader dot and it is unclear which dot each belongs to. The record line is not an obstacle, so 'Helical humeral sleeve + 2R' is drawn on top of the step line (sample at 420, stress at 1400). The tuning chart's '3R baseline 65.0' label sits on the traces, and the record chart's '3R baseline 65.0 pts' overlaps a dot at 420.",
+     "fix": "Treat the label's own dot and the record path's segments as hard obstacles. Draw a thin leader line whenever the label is not at its first-choice spot. Drop a label that has no clean spot (the tooltip still names it). Move the baseline labels into the right margin, outside the data."
+    },
+    {
+     "severity": "minor",
+     "where": "index.html drawRecord clip note (line 833)",
+     "problem": "The note '\u25b2 N off the scale' is drawn inside the plot at its top-left corner, which is where clipped triangles land for early times. At 420 the note's \u25b2 glyph overlaps the real marker (stress set).",
+     "fix": "Put the clip note in the key row (KEYS.clip already exists) and only when nclip > 0. Keep the plot area for marks."
+    },
+    {
+     "severity": "minor",
+     "where": "index.html table (CSS .sw-tablebox max-height 36rem, drawTable sort)",
+     "problem": "The table shows about 10 of 41 rows inside an inner scroll box with no visual hint of more, while the counter reads '41 of 41 shown'. Rank-null rows sort last, so the baseline row lands at the very bottom below the refuted ones, and the bar to beat is not visible in the ranking. At 420 the In-band, Reach and Follow bar columns scroll sideways inside the box and the header is cut to 'In-b'.",
+     "fix": "Drop the max-height, or show the top 15 with a 'Show all 41' button. Insert the baseline row at its gap position as a divider ('3R baseline 65.0: everything above beats it'). Under 40rem, collapse In-band 14, Reach and Follow into one compact cell of three small numbers or mini-bars so there is no sideways scrolling."
+    },
+    {
+     "severity": "minor",
+     "where": "index.html drawTuning: data vs the rest of the page",
+     "problem": "The traces plot the agents' claimed best_gap, while the leader card, record chart and table use the verifier's gap. The leader's trace ends at 26.5 but the card shows 30.4, with nothing saying why.",
+     "fix": "Say 'as its own agent measured it' in the note and the tooltip, and draw the verified gap as a small hollow marker at the end of each re-measured trace."
+    },
+    {
+     "severity": "minor",
+     "where": "index.html drawVerifier (lines 966-973) and its key",
+     "problem": "The key says a filled black dot means 're-measured', but verified winners are drawn as filled blue dots. The key's hollow 'claimed' dot uses the fg stroke while the chart uses the muted stroke. The axis title 'gap (pts)' is right-aligned against the '0' tick and reads as part of the tick row.",
+     "fix": "Add a 'beats the baseline (re-measured)' blue dot to the key and match the hollow dot's stroke. Centre the axis title under the axis, or put it at the right end after the last tick."
+    },
+    {
+     "severity": "minor",
+     "where": "index.html records calc + drawRecord record path",
+     "problem": "The record line steps down for an unverified claim exactly as it does for a verified result. The brief wants claims shown visually weaker.",
+     "fix": "Draw the segment set by a claimed (not re-measured) record holder dashed, or at lower opacity, and add 'record set by a claim' to the key."
+    },
+    {
+     "severity": "minor",
+     "where": "index.html CAD minis clip labels (lines 1130-1136)",
+     "problem": "In the 4-DOF CAD-level view of R6, the clip labels '50.8 mm' and '11.1 mm' overlap the neighbouring triangle and the line (shots/cad_level_4dof.png).",
+     "fix": "Add the triangle boxes and the neighbouring points to the clipLabs collision list, and place each label above-right of its own triangle, nudged clear."
+    },
+    {
+     "severity": "minor",
+     "where": "whole page: number formats and colour meaning",
+     "problem": "Percentages appear as both '90 %' (notes, record key 'target 90 %', 'pass: 90 %') and '90%' (meters, axes, stats). Blue means 'beats the baseline' on the Swarm tab but '3 DOF' on the CAD tab's default 'Degrees of freedom' view. The tuning chart's one-sweep note reads '1 sweeps start above the top'.",
+     "fix": "Choose one percent style. Give 3 DOF a hue other than the winner accent, or the fg colour, so blue keeps one meaning across tabs. Pluralise the sweep note."
+    }
+   ]
+  }
+ },
+ {
+  "result": {
+   "verdict": "fix",
+   "issues": [
+    {
+     "severity": "major",
+     "where": "tools/dash_build.py cov3d() and DEF_COV3D (lines 24, 310-316)",
+     "problem": "The cov3d dataset is a copy of a scratchpad file written at 13:45. It has 6 designs and is missing cad_r20_n3_s1414_4 (its judge/workspace.json is from 14:28, R16 85.0 %). The page's own requirement board names that design as the R16 best ('85.0 %, cad_r20_n3_s1414_4'), while the 3-D view defaults to cad_r18_n3_s1392_1_c1 at 78.3 %, so the page contradicts itself. The 3-D view the user liked will never pick up newly judged designs, which goes against 'needs to be updated more often'. In a fresh session the scratch path is gone and the builder silently writes [] over the dataset.",
+     "fix": "Build cov3d from the repo with the existing tool: run `python3 tools/coverage3d.py -o <out>/cov3d.json` through subprocess, the way judged_history.py is run. I checked it: about 2 s, 1036 rows, 7 designs including cad_r20_n3_s1414_4 at 85.0 %. Use --cov3d only as a fallback if that fails. Never replace a non-empty dataset with an empty one silently: print a warning and exit non-zero (or keep the old file)."
+    },
+    {
+     "severity": "major",
+     "where": "tools/dash_build.py morphs(), families.json loop (lines 134-151) plus the rows/ loop",
+     "problem": "The baseline gets duplicated. tools/concept_baseline.py --write is the committed producer of the swarm's bar, and it writes two things: rows/baseline-3r.json (id 'baseline-3r') and a families.json row {family:'baseline spherical 3R', variant:'r20 s1414 #4', is_baseline:true} with no id. The builder gives that row the id 'baseline-spherical-3r-r20-s1414-4', so the output has two is_baseline rows. I reproduced this with the exact files the tool writes. In the harness, the table shows two baseline rows and the 'Where each morphology lands' chart prints '3R baseline' twice. ranking and summary then silently use whichever row sorts first. Two more paths make extra baselines: any families row whose family or variant text contains 'baseline' becomes one (concept_brief.md told every family agent to run the same bench on their own baseline version, so differing baselines are likely), and is_baseline:\"false\" as a string becomes True through bool().",
+     "fix": "Allow exactly one baseline. Prefer rows/baseline-3r.json. Merge a families row with a truthy is_baseline onto id 'baseline-3r' (rows win), or drop it. Parse is_baseline with the same truthy set finish() uses. Stop inferring baseline status from names. If several remain, keep the newest t_screened, set is_baseline false on the others, and print a warning."
+    },
+    {
+     "severity": "minor",
+     "where": "tools/dash_build.py morphs()/merge() against the real docs/concepts/catalogue.json (commit 895a91c)",
+     "problem": "Two entries carry duplicate_of (pointing-gimbal-humeral-crail -> seed-2r-cring, open-ring-joints -> annular-ring-3r) but are still counted, so the page says 22 ideated instead of 20. 16 of the 22 entries have lenses [''] and no lens or family, so lens and family come out blank. merge() would also let lenses [''] overwrite a non-empty lens.",
+     "fix": "Skip duplicate_of entries, or set status 'dead' with note 'duplicate of X'. Join only non-empty lenses and never overwrite a non-empty lens with an empty one. Fall back to the entry's source (e.g. 'ideation A') when lens is empty."
+    },
+    {
+     "severity": "minor",
+     "where": "tools/dash_build.py sweep_rows() lines 170-172 (and the per-file loops)",
+     "problem": "The spec says 'never a crash', but one malformed sweep file kills the whole build. A k like 'x' raises TypeError in the sort ('<' between float and str) and in int(). I reproduced this. When it happens, no dataset gets refreshed. Also, a row with t_screened:'yesterday' gets t_screened null, skips the mtime fallback, and drops out of the record chart.",
+     "fix": "Coerce k with a safe float or int and fall back to the index. Wrap each file's processing in try/except that prints the file name and skips it. Apply the mtime fallback after norm_time when the parsed time is null."
+    },
+    {
+     "severity": "minor",
+     "where": "index.html drawBoard() line 1158, drawHero() line 729, drawTable() name/status/verdict cells",
+     "problem": "Several marks show text that differs from the data, and the platform reports these. My audit against the harness found: reqs.state shows '\u2713 pass' / '\u2717 fail' / 'needs you' for 'pass' / 'fail' / 'needs the user' (17 marks). The hero shows 'lens: biology' for lens 'biology'. In the marked table, the name cells include family \u00b7 lens and the narrow-mode chips (41 cells), the status cells show 'GPU search' / 'dropped' / 'beats baseline' (11 cells), and empty verdicts show '\u2013' (12 cells).",
+     "fix": "Put the glyph or prefix outside the marked span, e.g. `<span>\u2713 </span><span data-field=state>pass</span>` and `lens: <span data-field=lens>biology</span>`. Show the raw state value, or map 'needs the user' only in an unmarked label. In the table, render family \u00b7 lens and the chips in a separate unmarked column, or accept that these cells cite only the name or status. Leave verdict cells empty when the verdict is empty."
+    },
+    {
+     "severity": "minor",
+     "where": "index.html drawHero() lines 730-731, 769, 723; drawTable() table-count; drawLog() log-fresh; markup line 337",
+     "problem": "Some data values have no mark: the hero's '3 active DOF + 1 passive' and '39 configurations tried', the '#2'\u2026 runner-up ranks, the 'NEW \u00b7 took the lead 85 min ago' age, '28 of 41 shown', and the Log tab's 'latest activity X ago'. The h2 'All 19 requirements: best so far' hard-codes a count in markup.",
+     "fix": "Wrap each value in a span carrying data-source=\"ranking\", data-field active_dof / passive_dof / n_configs / rank, and data-where=\"id=\u2026\". Mark the NEW age span with summary.leader_since and the Log age with freshness.t_last. Fill the requirement count from reqs_summary.n_total in a marked span, or drop the number from the heading."
+    },
+    {
+     "severity": "minor",
+     "where": "index.html drawRecord() line 786 and the leader note line 246",
+     "problem": "The record note says 'The black line is the record', but the line is var(--color-fg), which is light in dark mode. The 'blue badge' and 'blue where it beats the baseline' wording only holds while dash.colors[0] is blue.",
+     "fix": "Say 'the solid step line' and 'the accent-coloured badge', or draw the swatch inline and drop the colour words."
+    },
+    {
+     "severity": "minor",
+     "where": "tools/dash_build.py reqs() lines 284-305 (board 'best so far') and the CAD tab 'best so far' stats",
+     "problem": "'Best so far' mixes measurements taken before and after judging-rule changes. R1 best is 70.6 % from cad_r16_n3_s1373_1_fair, whose score_14mm.json is from 07:10, before the 11:55 'held-out leak in CAD fixed' measurement event; R1 for the 20 mm hub designs is 35-46 %. R3 best is 100 % from l1_r14_3r_s1351_1 at 01:33, before the 02:44 contact-judge fix. Only scorecard entries get the 'newest judge only' filter; judged-history rows are all kept. The pass/fail states happen to stay right, but the headline values overstate where the design stands.",
+     "fix": "For judged-history values, count only rows judged after the latest 'measurement' event (or prefer complete designs), or show 'best under current rules' next to 'latest'. At minimum, label older values on the board as 'older rules'."
+    },
+    {
+     "severity": "minor",
+     "where": "tools/dash_build.py DEF_EVENTS_OLD / SCRATCH (lines 21-24)",
+     "problem": "The committed repo tool hard-codes this session's /tmp scratchpad paths. In any other session the older event history (19 rows) silently disappears from the events dataset.",
+     "fix": "Make the paths overridable through environment variables and print a clear warning when the old-events file is missing. Better, have the lead commit the old history to docs/concepts/ and read it from there."
+    },
+    {
+     "severity": "minor",
+     "where": "index.html ranking calc line 404 and tools/dash_build.py finish() lines 121-123",
+     "problem": "A row only counts as verified when all three of v_inband14, v_follow and v_reach are present, because v_gap needs all three. A row with status 'verified' whose verifier wrote partial or no v_ numbers shows as 'claimed'. contact null is treated as 0 in gap, which is optimistic. families.json rows get t_screened from the file's mtime when uncommitted, and git -S on the family name gives every variant of a family the same time, so their record-chart dots move whenever any agent rewrites the file.",
+     "fix": "Treat status verified/gpu/cad/judged as verified, and use v_ values where present with claimed values as fallback for v_gap. Either print a warning for gap computed without contact, or leave gap null when contact is unknown for swarm rows. Prefer a t/t_screened field in the families row and fall back to the git time of the row's own line."
+    }
+   ]
+  }
+ }
+]

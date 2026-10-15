@@ -1,18 +1,25 @@
 #!/bin/bash
 # full fair-CAD pipeline for one searched design: <key> (band_cad/inputs/<key>.json must exist)
 K=$1; L=${2:-"CAD $1"}; cd "$(dirname "$0")"; FX=../../full-exo
+# the pose payload the detail eval ran on (band_to_design + replan index FEAS by it): POSES_FILE, else the input's poses_file
+[ -z "$POSES_FILE" ] && export POSES_FILE=$(${PY:-python3} -c "import json,sys; print(json.load(open(sys.argv[1]))['results'][0].get('poses_file', 'band_poses.b64'))" ../band_cad/inputs/$K.json)
+echo "[$(date -u +%H:%M:%S)] $K: poses $POSES_FILE"
 ${PY:-python3} -W ignore $FX/band_to_design.py ../band_cad/inputs/$K.json 0 band_$K "$L" > out_$K.b2d.log 2>&1 || { echo "band_to_design failed"; tail -5 out_$K.b2d.log; exit 1; }
-(cd ../band_cad && ${PY:-python3} -W ignore make_cad_design.py $K band_$K "$L" | grep "base tab")
-mkdir -p out_$K; cp $FX/designs/cad_$K/clips.json out_$K/clips_before_replan.json; rm -f out_$K/exclude.json
+grep -A4 "^WARNING band_to_design" out_$K.b2d.log
+# refuses a link without a real arm (docs/FINDINGS.md "Short link"); ALLOW_SHORT_LINK=1 overrides, only with the user's OK
+(cd ../band_cad && ${PY:-python3} -W ignore make_cad_design.py $K band_$K "$L") > out_$K.mcd.log 2>&1 || { echo "make_cad_design refused / failed:"; tail -8 out_$K.mcd.log; exit 1; }
+grep "base tab" out_$K.mcd.log
+echo "[$(date -u +%H:%M:%S)] replan / members loop"; mkdir -p out_$K; cp $FX/designs/cad_$K/clips.json out_$K/clips_before_replan.json; rm -f out_$K/exclude.json
 for i in 1 2 3 4 5; do
   cp out_$K/clips_before_replan.json $FX/designs/cad_$K/clips.json
-  OMP_NUM_THREADS=2 ${PY:-python3} -W ignore replan.py $K 2>&1 | grep "hard coll\|overall"
-  OMP_NUM_THREADS=2 ${PY:-python3} -W ignore fair_build.py $K members 2>&1 | grep -c "solid valid True" | sed 's/^/valid members: /'
+  OMP_NUM_THREADS=2 ${PY:-python3} -W ignore replan.py $K 2>&1 | tee out_$K/replan_$i.log | grep "hard coll\|overall"
+  OMP_NUM_THREADS=2 ${PY:-python3} -W ignore fair_build.py $K members 2>&1 | tee out_$K/members_$i.log | grep -c "solid valid True" | sed 's/^/valid members: /'
   out=$(OMP_NUM_THREADS=2 ${PY:-python3} -W ignore verify_members.py $K 2>&1 | tail -3); echo "$out"
   echo "$out" | grep -q "no member interpenetration" && { echo "members clean after round $i"; break; }
 done
 OMP_NUM_THREADS=2 ${PY:-python3} -W ignore verify_members.py $K 2>&1 | tail -2; ${PY:-python3} -W ignore hold_bad.py $K
-OMP_NUM_THREADS=2 ${PY:-python3} -W ignore fair_build.py $K assemble 2>&1 | tail -2
+echo "[$(date -u +%H:%M:%S)] assemble"; OMP_NUM_THREADS=2 ${PY:-python3} -W ignore fair_build.py $K assemble 2>&1 | tee out_$K/assemble.log | tail -2
 cp out_$K/exo.glb $FX/designs/cad_$K/exo.glb
 OMP_NUM_THREADS=2 ${PY:-python3} -W ignore verify_armend.py $K 2>&1 | tail -6
-(cd $FX && ${PY:-python3} -W ignore score_design.py designs/cad_$K 3 | tail -1)
+[ "$SKIP_SCORE" == "1" ] || { echo "[$(date -u +%H:%M:%S)] score"; (cd $FX && ${PY:-python3} -W ignore score_design.py designs/cad_$K 3 | tail -1); }   # SKIP_SCORE=1: tools/judge_all.sh scores it anyway (~8 min)
+echo "[$(date -u +%H:%M:%S)] done"

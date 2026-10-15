@@ -1,0 +1,31 @@
+{
+ "id": "cad_r13_n3_s1331_0",
+ "source": "pipeline/conformal/band_cad/inputs/r13_n3_s1331_0.json",
+ "n_joints": 3,
+ "sliding_cuff": true,
+ "dof": 4,
+ "kinematics": {
+  "az": 30.208601335791045,
+  "el": 11.429733171279626,
+  "a": [
+   64.12539526595543,
+   62.87735409044908
+  ],
+  "w": [
+   55.20268418861862,
+   4.737473376913537
+  ],
+  "branch": -1,
+  "order": [
+   0,
+   1,
+   1
+  ]
+ },
+ "cuff": {
+  "branch": 1,
+  "range": 45.61508396403566
+ },
+ "built_with": "pipeline/conformal/fair_cad/fair_pipeline.sh (swept-band links, v4 joints, dovetail arc slide: exact-revolve rail head + skin-following keel, dovetail saddle)",
+ "note": "iteration CAD (keep-outs and heights, no surface polish); the JN plate sits ~35 mm above the skin along its axis (zj4 112 mm), the keel fills the gap"
+}
