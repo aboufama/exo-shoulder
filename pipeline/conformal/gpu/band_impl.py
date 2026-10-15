@@ -32,7 +32,7 @@ except ImportError:
     np = None
 
 _CACHE = {}
-CODE_VERSION = "band-2026-10-15x (workspace envelope + why poses are lost; poses given up at a price; fit_clips; min link arc 35 deg + min arm 10 mm; pure 3R chain)"
+CODE_VERSION = "band-2026-10-15y (range first: score x min(1, workspace share / target)^w; why poses are lost; fit_clips; min link arc + min arm guards; pure 3R chain)"
 RESD = 0.25; NWD, NHD = 1440, 720; LAT_LO, LAT_HI = -75.0, 90.0; CLEAR = 3.0
 ROW0, ROW1 = int((LAT_LO + 90) / RESD), int((LAT_HI + 90) / RESD)
 HUB_R, HW, T_LINK, STACK, T_W, T_BOT = 17.0, 7.0, 5.5, 6.0, 1.0, 6.5
@@ -260,6 +260,7 @@ class Band:
         self.clip_frames = [np.nonzero(cid == k)[0][np.argsort(fi[cid == k])].tolist() for k in range(len(self.P["NAMES"])) if k not in self.env_ids]
         self.env_mask = (sum((self.P["CID"] == k) for k in self.env_ids) > 0) if self.env_ids else self.t.zeros(len(self.P["CID"]), dtype=self.t.bool, device=dev)
         self.env_weight = float(job.get("env_weight", 1.0))                # score x (share of envelope poses feasible) ** env_weight
+        self.env_target = float(job.get("env_target", 1.0))                # user: "90% range first" -> share / target, capped at 1
         self.P["FPS_EFF"] = 10.0 / self.stride; self.max_rate = float(job.get("max_rate", 180.0))       # deg/s per spare joint
         self.G = float(job.get("G", 10.0)); self.R_REF = float(job.get("r_ref", 65.0)); self.RAMP = math.tan(math.radians(float(job.get("ramp_deg", 35.0))))
         self.SING = float(job.get("sing_deg", 10.0)) * D2R; self.q_step = float(job.get("q_step", 10.0))
@@ -525,7 +526,7 @@ class Band:
             if self.balance > 0:                                                                       # favour designs good in every clip
                 cs_ = sorted(float(frame[t.tensor(fr_, device=self.dev)].mean()) for fr_ in self.clip_frames)
                 score = (1 - self.balance) * score + self.balance * sum(cs_[:3]) / 3
-            if env_follow is not None: score = score * env_follow ** self.env_weight                # must work over the whole workspace
+            if env_follow is not None: score = score * min(1.0, env_follow / self.env_target) ** self.env_weight   # range first: full credit from the target up
             if __import__('os').environ.get('BAND_DEBUG'): print(f'  iter {it_}: fit {sc:.3f} -> path score {score:.3f} follow {follow:.3f} valid-any {float(VALID.any(1).float().mean()):.2f} feas-any {float(feas.any(1).float().mean()):.2f} zj4 {zj4:.1f}', flush=True)
             fm = self.fit_mask; sel = float((frame * WT)[fm].sum() / WT[fm].sum()) if self.fit_clips else score
             if best is None or sel > best["sel"]:
@@ -547,7 +548,7 @@ class Band:
             out["follow_fit"] = float((best["feas"].float() * WT)[fm].sum() / WT[fm].sum())
         names = self.P["NAMES"]; cid = self.P["CID"]
         out["clips"] = {names[k]: dict(score=float(best["frame"][cid == k].mean()), follow=float(best["feas"][cid == k].float().mean())) for k in range(len(names)) if k not in self.env_ids}
-        if self.env_ids: out["envelope"] = dict(poses=int(self.env_mask.sum()), follow=best["env_follow"], weight=self.env_weight, lost_because=best["env_why"])
+        if self.env_ids: out["envelope"] = dict(poses=int(self.env_mask.sum()), follow=best["env_follow"], weight=self.env_weight, target=self.env_target, lost_because=best["env_why"])
         if detail or d.get("diag"):
             # where the in-band share is lost: per sample class, over the followed frames of the best path
             hb = best["h"]; cfgb = best["cfg"]; fe = best["feas"]
@@ -738,7 +739,7 @@ class Band:
                 inb = inb + ((u_[None] <= ax_["CAP"] + 1e-3).float() * ax_["w"]).sum(-1); ok = ok & (ax_["LO"] <= u_[None] + 1e-3).all(-1); den = den + ax_["w"].sum()
             inb = inb / den
             sc_ = float((t.where(ok, inb, t.zeros_like(inb)) * WT).sum() / WT.sum())
-            if bool(envm.any()): sc_ *= (float((ok & envm).sum()) / float(envm.sum())) ** self.env_weight     # share of the workspace it can move through
+            if bool(envm.any()): sc_ *= min(1.0, float((ok & envm).sum()) / float(envm.sum()) / self.env_target) ** self.env_weight     # workspace share vs target
             return sc_
         # coherent drops first: frames ranked by how far they push the envelope above the typical frame
         med = t.where(keep[:, None], Lsel, t.full_like(Lsel, float("nan"))).nanmedian(0).values

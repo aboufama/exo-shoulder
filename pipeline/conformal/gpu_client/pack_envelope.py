@@ -8,7 +8,13 @@ filtered here: an arm-fixed hub can truly press into the chest in extreme cross-
 BOTTOM's hub 268 mm out), and the rig's upper arm already overlaps its trunk at low elevation, so a self-intersection
 test cannot tell impossible poses from natural ones. The evaluator (band_impl w) gives such poses up instead, at a
 price: the score is multiplied by the share of the workspace the design can move through.
-    python3 pack_envelope.py <in poses .b64> <out poses .b64> [step=15]"""
+    python3 pack_envelope.py <in poses .b64> <out poses .b64> [step=15] [--functional]
+--functional (user 2026-10-15: "Functional range"): the plausible envelope narrowed to everyday function until the
+user's OpenCap max-ROM exists - daily-living studies need about 60 deg external / 100 deg internal rotation and
+120-130 deg elevation (Namdari et al. 2012, J Shoulder Elbow Surg 21:1177); elevation is kept to 170 deg in the
+forward / side planes (overhead matters most to the user), humeral rotation r = ax + plane is limited to -65..90 deg up
+to 100 deg elevation, -45..30 deg above it (the overhead clips use -30..11), -20..90 deg in extension planes (< -30,
+behind the back) and -30..90 deg across the body (> 120). Every clip pose lies inside (checked at run time)."""
 import base64, gzip, io, os, sys
 import numpy as np
 HERE = os.path.dirname(os.path.abspath(__file__)); EXO = os.path.join(HERE, "..", "..")
@@ -17,11 +23,21 @@ os.environ.setdefault("CLEAR", "4"); os.environ.setdefault("POST_HALF", "180"); 
 _c = os.getcwd(); os.chdir(os.path.join(EXO, "avg")); import design_search as D; os.chdir(_c)
 from rt_common import plausible
 NAME = "Workspace (envelope)"
-src, dst = sys.argv[1], sys.argv[2]; step = float(sys.argv[3]) if len(sys.argv) > 3 else 15.0
+args = [a for a in sys.argv[1:] if not a.startswith("--")]; FUNC = "--functional" in sys.argv
+src, dst = args[0], args[1]; step = float(args[2]) if len(args) > 2 else 15.0
+def functional(pl, el, r):
+    lo = np.where(pl < -30, -20.0, np.where(pl > 120, -30.0, np.where(el > 100, -45.0, -65.0)))
+    hi = np.where((pl >= -30) & (pl <= 120) & (el > 100), 30.0, 90.0)
+    return (r >= lo) & (r <= hi)
 Z = dict(np.load(io.BytesIO(gzip.decompress(base64.b64decode(open(src).read()))), allow_pickle=False))
 names = [str(x) for x in Z["NAMES"]]; assert NAME not in names, "already has an envelope clip"
 pl, el, r = np.meshgrid(np.arange(-90, 151, step), np.arange(0, 171, step), np.arange(-90, 91, step), indexing="ij")
-pl, el, r = pl.ravel(), el.ravel(), r.ravel(); k = plausible(pl, el); pl, el, ax = pl[k], el[k], r[k] - pl[k]
+pl, el, r = pl.ravel(), el.ravel(), r.ravel(); k = plausible(pl, el)
+if FUNC:
+    k &= functional(pl, el, r)
+    cp = Z["POSE"]; inside = plausible(cp[:, 0], cp[:, 1]) & functional(cp[:, 0], cp[:, 1], cp[:, 2] + cp[:, 0])
+    print(f"functional range: {100 * inside.mean():.1f} % of the {len(cp)} clip poses inside it")
+pl, el, ax = pl[k], el[k], r[k] - pl[k]
 HG, RS = [], []
 for p, e, a in zip(pl, el, ax):
     H = D.Ry(p * D.D2R) @ D.Rx(-e * D.D2R) @ D.Ry(a * D.D2R); Rs = D.scapula(e); HG.append(Rs.T @ H); RS.append(Rs)

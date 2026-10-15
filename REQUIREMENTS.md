@@ -54,6 +54,12 @@ shoulder; fit a larger male - the user is 6'1" (185 cm) with a 6'4" (193 cm) win
 fully working, and see how close we can get"; worn for hours, most of the day (sustained-pressure limits); custom-part
 mass 500 g for the shoulder ("mass is not really a huge driver I just want low DOF and low profile"); R10 4 mm confirmed.
 
+**Range first, user 2026-10-15 (after r16's diagnosis):** "maybe 90% range first?" - the chain must follow >= 90 % of
+a FUNCTIONAL everyday workspace (published ADL ranges until the user's OpenCap max-ROM exists), then be as close as
+possible (R1 on the clips). New requirement R16 below. Overnight GPU cap raised to $20; one 4-joint comparison batch
+allowed ("Yes, as a comparison"); scaling the rig to the user is low priority ("any design can be scaled by a few
+percent").
+
 | ID | Requirement | Threshold | Judge | Why this threshold |
 |---|---|---|---|---|
 | R1 | Proximity: share of the covered skin that is 2-14 mm from the metal, while following | >= 90 % (aim: the same at 2-10 mm, reported as R1-aim) | `pipeline/full-exo/score_design.py` with BAND_HI=14 (exact posed skin, 30 fps) | the 1 cm rule with the user's allowance: pass at 14 mm, aim for 10 (2026-10-15); 2 mm keeps the liner/clearance |
@@ -71,5 +77,6 @@ mass 500 g for the shoulder ("mass is not really a huge driver I just want low D
 | R13 | Manufacturable | - | supplier DFM review and quote (CNC Ti-6Al-4V / 7075, SLM AlSi10Mg) | only a supplier can say yes |
 | R14 | Generalises to motions and bodies never used to design it | - | held-out OpenCap / AMASS clips and SMPL-X bodies (`data/raw/`) | the 8 design clips are synthetic and were optimised against |
 | R15 | Works on real bodies | - | printed prototype on the user + one very different body: OpenCap reach vs bare arm, zero contact on skin FSR strips | the final judge |
+| R16 | Follows the functional everyday workspace: share of its poses the chain moves through without skin contact, squeeze or part collision | >= 90 % (user 2026-10-15) | the band evaluator's envelope (`pack_envelope.py --functional`) today; an L1-CAD judge over the same poses next | "full range of motion": six clips are not the range (r16 followed only 40-44 % of the workspace) |
 
 R1-R8 and R10 are measured today. R9-R15 are the work that turns this from a simulation result into an engineering result.
