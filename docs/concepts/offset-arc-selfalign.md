@@ -98,3 +98,24 @@ stay small (<= 4 mm). Neither part is the problem. The rigid circular band is.
 
 Files: `docs/concepts/models/offset-arc-selfalign.py` (`python3 ... sweep N`), `docs/concepts/sweeps/offset-arc-selfalign.json`,
 `docs/concepts/rows/offset-arc-selfalign.json`.
+
+## Audit (2026-10-15T19:50:48Z)
+
+Independent attempt to refute the death. Result: **the death stands** (not refuted).
+
+- **Re-measurement.** Best config k=38 (pct 94, o2w -6, dza +6, LP offsets, stage +-25/+-10/+-5) on Bench(60,160), fast grid:
+  reach 0.606, follow 0.733, in-band14 0.296, in-band10 0.159, contact 0.217, **gap 133.12**. This matches the claim exactly.
+  The 39 contact poses break down by part: band 37, rail 3, ring 1. Per-part in-band: band 0.7 %, guide 0 %, connector 0 % (median > 31 mm),
+  rail 67 %, ring 61 %, carriage 42 %.
+- **Conventions compared with tools/concept_baseline.py.** The rigid height is the p-th percentile over the kinematically valid poses, and poses above it are scored
+  as contact. That is the same as the baseline. The red() rule leaves out poses where the trace saturates, which makes this model *more* lenient than the baseline, not stricter.
+  This model adds checks that the baseline idealisation lacks: continuity (0 flips here), slide range (0), part clearance (0 at best) and the guide-on-arc check (38 workspace poses).
+  Removing them would not close the gap. None of them is a bug.
+- **The obvious missed region (a tight band) was checked.** Lowering the percentile brings the circle in from rho 114 mm to about 72 mm (p40-80).
+  The gap then rises to 224-249: contact 42-63 %, part-clearance failures 13-93 (the band drops onto the J1 ring and the stage), and in-band14 stays at 0.37 or below.
+  No percentile, from p40 to p99, gets within 10 of the 68.93 baseline.
+- **Measured reason, one line:** the rigid circular band must be one circle, because all of it passes the guide. Its tail past the guide lies inside the neck/trapezius
+  in the overhead clip at any radius (37 of 39 contact poses). At rho 114 mm it clears but sits more than 31 mm off the skin (band, guide and connector have 0-0.7 % in band).
+  At rho about 72 mm the tail collides. Either way the gap is 133 or more.
+- **What next:** the successor is the one the original agent named (stow or flex the tail past the guide). A cheaper variant is untested:
+  invert the trombone (an L1-fixed arc with the guide on the arm side), which moves the tail from the neck side to the arm side.
