@@ -14,11 +14,11 @@
  "inband10": 0.1849,
  "contact": 0.0,
  "gap": 89.13,
- "v_reach": null,
- "v_follow": null,
- "v_inband14": null,
- "v_inband10": null,
- "v_gap": null,
+ "v_reach": 0.6312,
+ "v_follow": 0.8833,
+ "v_inband14": 0.3442,
+ "v_inband10": 0.1849,
+ "v_gap": 89.13,
  "n_configs": 20,
  "verdict": "not worth a GPU sweep: best gap 89.13 vs the champion 3R 68.93 (Bench(60,160), march, K2 dense, K6); the skin-aware prefilter over ~17 000 configurations shows the same reach-vs-proximity front, worse than the 3R's (4 rigid arcs + 2 elbows over the cap instead of 2 arcs + 1 elbow)",
  "note": "best sweep entry k=13 {'u1az': 94.73248043278903, 'u1el': 83.69955944451229, 'u2az': 94.73248043278903, 'u2el': 83.69955944451229, 'coax': True, 'a1': 75.0, 'a2': 90.0, 'c1': 60.0, 'c2': 45.0, 'wd': 90, 'wa': 0, 's1': -1, 's2': -1, 'margin': 5.0, 'par': 8.0, 'sep': 17.0, 'wc': 10.0, 'q': 1.0}; leg margin 5 deg / parallel 8 deg (at the spec's 8 / 12: gap 90.30, k=6); honest flag false only for coupler 2 sampled at 4.03 mm (kit layout at r_ref 70, coupler at 141 mm; threshold 4.0) - it is 0 % in band, denser sampling only lowers in-band; elbows are P14 pins (declared hubless); mass 231 g Ti",
@@ -37,5 +37,6 @@
  "hubless": [
   "B1",
   "B2"
- ]
+ ],
+ "audit_verdict": "death stands (auditor reproduced gap 89.13 on Bench(60,160), march, K2 dense, K6): even with the part-part stacking (over) and K6 both switched off - physically impossible - the best config only reaches 66.64; the honest stacking of 4 rigid arcs + 2 elbow pins over the cap (pins 99/129 mm, couplers 0 % in band) is the limiter, not a bug"
 }

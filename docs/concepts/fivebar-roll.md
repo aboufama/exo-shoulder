@@ -66,3 +66,16 @@ rigid links clearing the highest skin they pass over. It doubles the problem. Ne
 pointer that must cover this W cloud (cone radius >= 82 deg about any base) needs arcs totalling at least ~120 deg per
 leg. This holds for any parallel spherical pointer with rigid links (SPM legs included), so those families inherit
 the same front unless their links move with the skin.
+
+## Audit
+
+An independent auditor re-ran the claimed best configuration (sweep k=13) on Bench(60,160) with the kit's honest checks (K3 march, dense K2, K6). It looked for a modelling bug, a convention that differs from the baseline's, or a check that is stricter than it needs to be.
+
+- **Reproduced exactly:** gap 89.13, reach 0.631, follow 0.883, inband14 0.344, inband10 0.185, contact 0. Closure 0.768, 0 flips, and 8.9 % of closing poses collide.
+- **Conventions:** the model uses the shared kit. The kit reproduces the baseline row exactly in `outer` mode. With the honest checks it puts the champion at 70.27, so the fair kit-to-kit gap is about 19.
+- **Ablations on the same configuration** (none of them physical; they only bound how much a check costs):
+  - K6 collisions off: 79.75. Reach rises to 0.725, in-band is unchanged.
+  - Stacking off (`over` = []) with K6 on: 275. Every pose collides, so the stacking is necessary.
+  - Each `over` pair dropped one at a time: coupler over neck changes nothing. Dropping coupler over crank 1, crank 2 or coupler 1 gives 148 to 275, so each of those pairs is needed.
+  - Stacking and K6 both off: 66.64. This is the dishonest upper bound. Couplers reach only 20-22 % in band even there, and the elbow pins stay at 99 / 129 mm with 0 % in band.
+- **Verdict: the death stands.** The measured reason: even with zero part-part clearance this configuration only ties the champion (66.6 against 68.9). Once the couplers stack honestly over the cranks and each other they lose all in-band (0 %), and the elbow pins climb to 99-129 mm over the cap. This is the proximity limiter of the morphology, not a modelling bug or an over-strict check. The prefilter covered about 17 k configurations, so the region tested was not the problem.
