@@ -46,7 +46,8 @@ BP = CB.BP
 
 ID = "seed-spm-3rrr"
 HUB_R, HUB_H, STACK, T_LINK, HW = 10.0, 12.25, 3.15, 3.0, 4.0     # O20 v5 joint; 8 x 3 straps (r20 evaluator: t_link 3, hw 4)
-PART_CLEAR = 1.0                                                  # >= 1 mm between parts
+PART_CLEAR = 1.0                                                  # >= 1 mm between non-adjacent parts
+ADJ_GAP = 0.1                                                     # adjacent members of one joint: running gap (v5: 0.15)
 COND_MAX = 50.0
 SP = 2.0                                                          # sample spacing: 1 point / 4 mm2
 LAND, SLOPE = 2.0, 1.0                                            # flat land outside a hub, then <= 45 deg ramp
@@ -431,14 +432,15 @@ class Model:
                 g1, g2 = names[a_], names[b_]
                 P1, P2 = gpts[g1], gpts[g2]
                 hs = shared.get(frozenset((g1, g2)), [])
-                if hs:                                            # adjacent: exclude the shared hubs' zones
-                    m1 = np.ones(len(P1), bool); m2 = np.ones(len(P2), bool)
-                    for h in hs: m1 &= ~near_hub(P1, h, 4.0); m2 &= ~near_hub(P2, h, 4.0)
-                    P1, P2 = P1[m1], P2[m2]
+                th_ = thr
+                if hs:                                            # adjacent: exclude the shared hubs' zones; they are the two
+                    m1 = np.ones(len(P1), bool); m2 = np.ones(len(P2), bool)   # members of one v5 joint, stacked with its
+                    for h in hs: m1 &= ~near_hub(P1, h, 4.0); m2 &= ~near_hub(P2, h, 4.0)   # 0.15 running gap: they may
+                    P1, P2 = P1[m1], P2[m2]                       # overlap outside the hub but never interpenetrate
                     if not len(P1) or not len(P2): continue
-                    t2 = cKDTree(P2)
+                    t2 = cKDTree(P2); th_ = T_LINK + ADJ_GAP
                 else: t2 = trees[g2]
-                dd, _ = t2.query(P1, distance_upper_bound=thr)
+                dd, _ = t2.query(P1, distance_upper_bound=th_)
                 if np.isfinite(dd).any():
                     return ("collide", g1, g2) if detail else None
         # hubs vs straps of other groups
@@ -727,6 +729,116 @@ def sketch(pp, path, B=None):
     fig.savefig(path, dpi=90, bbox_inches="tight"); plt.close(fig)
 
 
+# ------------------------------------------------------------------------------------------------ staged sweep (v2)
+def kscore(p, rig, maps):
+    """kinematic + accessibility screen: share of clip / workspace poses where every leg closes with cond(J) <= 50 on a
+    continuous path AND every one of the 9 hub axes points at skin that is within 140 mm of GH with >= 25 mm free above
+    it (an axis pointing into the trunk or the arm-trunk gap cannot carry a hub)"""
+    p = dict(PARAMS, **p); K = kinematics(p, rig, n_sub=3); kin = K["kin"]; n = len(kin); I = np.arange(n)
+    acc = np.ones(n, bool)
+    for key in "UWV":
+        D = K[key]                                                        # (n, 3, 3)
+        r = maps.rm(I, D); c = maps.rm(I, D, ceil=True)
+        with np.errstate(invalid="ignore"): acc &= (np.isfinite(r) & (r < 140) & ~(c - r < 25)).all(1)
+    ok = kin & acc; cl = rig.kind == "clip"
+    return 0.5 * float(ok[cl].mean()) + 0.5 * float(ok[~cl].mean())
+
+
+def sweep2(nA=500, n_start=6, n_hill=50, n_bench=18, n_ref=40, seed=3, n_clip=60, n_ws=160, budget_s=None):
+    """A: random kinematic/accessibility screen; B: hill-climb on the quick screen from the best A configurations;
+    C: the best distinct B configurations on the bench, then neighbours of the running best on the bench. Every bench
+    evaluation is appended to sweeps/<id>.json as it finishes; each new best gap is logged to events.jsonl."""
+    T0 = time.time()
+    B = CB.Bench(n_clip=n_clip, n_ws=n_ws); rig = Rig(B); maps = SkinMaps(B, verbose=False)
+    print("bench", B.mode, len(B.poses), flush=True)
+    rng = np.random.default_rng(seed); A = []
+    for n in range(nA):
+        pp = rand_params(rng); A.append((kscore(pp, rig, maps), pp))
+    A.sort(key=lambda x: -x[0]); print(f"A: {nA} in {time.time() - T0:.0f} s, best kin/acc {[round(a[0], 3) for a in A[:n_start]]}", flush=True)
+    pool = []
+    for k0, p0 in A[:n_start]:
+        best = None
+        for q in (0.9, 0.95, 1.0):
+            pp = dict(p0, q=q); r = quick(pp, rig, maps); pool.append((r["gap"], pp, r))
+            if best is None or r["gap"] < best[0]: best = (r["gap"], pp, r)
+        for h in range(n_hill):
+            pp = perturb(best[1], rng, 0.10 if h < n_hill // 2 else 0.04); r = quick(pp, rig, maps); pool.append((r["gap"], pp, r))
+            if r["gap"] < best[0]: best = (r["gap"], pp, r)
+        print(f"B: start kin {k0:.3f} -> quick {best[0]} {best[2]} ({time.time() - T0:.0f} s)", flush=True)
+    pool.sort(key=lambda x: x[0])
+    out = os.path.join(REPO, "docs", "concepts", "sweeps", f"{ID}.json")
+    SW = json.load(open(out)) if os.path.exists(out) else []
+    ev = os.path.join(REPO, "docs", "concepts", "events.jsonl")
+    state = dict(best=min([e["gap"] for e in SW], default=1e9))
+    def bench(pp, stage):
+        r, M = evaluate(pp, B, rig, maps)
+        e = dict(k=len(SW), t=time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()), params=jsonable(pp), inband14=r["inband14"], inband10=r["inband10"],
+                 reach=r["reach"], follow=r["follow"], contact=r["contact"], gap=r["gap"], stage=stage, mode=r["mode"], why=r["why"])
+        SW.append(e); json.dump(SW, open(out + ".tmp", "w"), indent=0); os.replace(out + ".tmp", out)
+        print(f"  bench {e['k']} [{stage}] gap {e['gap']} reach {e['reach']} follow {e['follow']} ib14 {e['inband14']} ib10 {e['inband10']} contact {e['contact']} why {r['why']} {r['secs']} s", flush=True)
+        if e["gap"] < state["best"]:
+            state["best"] = e["gap"]
+            with open(ev, "a") as f:
+                f.write(json.dumps(dict(time=e["t"], kind="milestone", event=f"seed-spm-3rrr new best gap {e['gap']} (reach {e['reach']}, follow {e['follow']}, inband14 {e['inband14']}, inband10 {e['inband10']}, contact {e['contact']}; config {e['k']}, {stage})")) + "\n")
+        return e
+    seen = []
+    for g, pp, r in pool:
+        if len([x for x in seen]) >= n_bench: break
+        if any(all(abs(pp[k] - s_[k]) < 1e-9 for k in ("b_th", "b_ph", "a1", "a2", "p_cone")) for s_ in seen): continue
+        seen.append(pp); bench(pp, "screen")
+    for n in range(n_ref):
+        if budget_s and time.time() - T0 > budget_s: break
+        best = min(SW, key=lambda e: e["gap"])
+        bench(perturb(detuple(best["params"]), rng, 0.08 if n < n_ref // 2 else 0.03), "refine")
+    best = min(SW, key=lambda e: e["gap"]); print("BEST", best, flush=True)
+    return SW, best, dict(nA=nA, n_quick=len(pool))
+
+
+def redteam(pp, B=None):
+    """the red team on one configuration: the named poses (rest, overhead, across the body, behind the back) and, over
+    every bench pose, why poses are lost (leg closure, singularity, path, which parts collide) and where the metal pinches
+    (the part and pose with the least skin distance, the parts inside the body)"""
+    from collections import Counter
+    B = B or CB.Bench(n_clip=60, n_ws=160); rig = Rig(B); maps = SkinMaps(B, verbose=False)
+    M = Model(detuple(pp), B, rig, maps); K = M.K; out = dict(lines=[])
+    def why(i):
+        if not K["reach_ok"][i]:
+            d = K["disc"][i]; 
+            if (d <= 1e-6).any(): return f"leg {int(np.argmin(d))} cannot close (cones apart)"
+            return f"singular: cond(J) {K['cond'][i]:.0f} > {COND_MAX:.0f}"
+        if not K["path_ok"][i]: return "path from the previous clip frame crosses a singularity / opens a leg"
+        r = M.metal(i, detail=True)
+        if isinstance(r, tuple) and isinstance(r[0], str): return f"{r[0]} {r[1]}-{r[2]}"
+        worst = (1e9, None)
+        for nm, st in M.straps.items():
+            d = B.dist(i, st["D"][i] * st["rho"][:, None]); 
+            if d.min() < worst[0]: worst = (float(d.min()), nm)
+        for h, a in M.hub_axes(i).items():
+            P, _, _ = disk_dirs(a[None], M.hub[h]); d = B.dist(i, P[0])
+            if d.min() < worst[0]: worst = (float(d.min()), h)
+        return f"taken, closest metal {worst[0]:.1f} mm ({worst[1]})" if worst[0] >= 0 else f"CONTACT {worst[0]:.1f} mm ({worst[1]})"
+    cl = [j for j, k in enumerate(B.kind) if k == "clip"]
+    named = dict(rest=min(range(len(B.poses)), key=lambda j: B.poses[j]["elev"]),
+                 overhead=max(cl, key=lambda j: B.poses[j]["elev"]),
+                 overhead_ws=max([j for j, k in enumerate(B.kind) if k == "ws"], key=lambda j: B.poses[j]["elev"]),
+                 across_body=max([j for j in cl if B.clip[j] == "Wash opposite shoulder"], key=lambda j: B.poses[j]["plane"]),
+                 behind_back=min([j for j in cl if B.clip[j] == "Reach back pocket"], key=lambda j: B.poses[j]["plane"]))
+    for nm, i in named.items():
+        ps = B.poses[i]; out["lines"].append(f"{nm} ({B.clip[i]}, plane {ps['plane']:.0f} elev {ps['elev']:.0f} axial {ps['axial']:.0f}): {why(i)}")
+    c = Counter(); worst = []
+    for i in range(len(B.poses)):
+        w = why(i); c["taken" if w.startswith("taken") else "contact" if w.startswith("CONTACT") else w.split(" (")[0].split(": cond")[0]] += 1
+        if w.startswith("CONTACT") or w.startswith("taken"):
+            v = float(w.split()[3 if w.startswith("taken") else 1]); worst.append((v, i, w))
+    out["lines"].append("over all poses: " + "; ".join(f"{k}: {v}" for k, v in c.most_common(10)))
+    worst.sort()
+    for v, i, w in worst[:4]:
+        ps = B.poses[i]; out["lines"].append(f"pinch: {B.clip[i]} plane {ps['plane']:.0f} elev {ps['elev']:.0f} axial {ps['axial']:.0f}: {w}")
+    out["hubs"] = {k: round(v, 1) for k, v in M.hub.items()}
+    out["straps"] = {nm: dict(len=round(st["len"]), rho=np.percentile(st["rho"], [0, 50, 100]).round(1).tolist()) for nm, st in M.straps.items()}
+    return out
+
+
 if __name__ == "__main__":
     a = sys.argv[1:]
     if a and a[0] == "check":
@@ -737,6 +849,12 @@ if __name__ == "__main__":
     elif a and a[0] == "sketch":
         SW = json.load(open(os.path.join(REPO, "docs", "concepts", "sweeps", f"{ID}.json")))
         sketch(min(SW, key=lambda e: e["gap"])["params"], os.path.join(REPO, "docs", "concepts", "img", f"{ID}.png"))
+    elif a and a[0] == "redteam":
+        SW = json.load(open(os.path.join(REPO, "docs", "concepts", "sweeps", f"{ID}.json")))
+        o = redteam(min(SW, key=lambda e: e["gap"])["params"]); print("\n".join(o["lines"])); print(o["hubs"]); print(o["straps"])
+    elif a and a[0] == "sweep2":
+        kw = dict(nA=int(a[1])) if len(a) > 1 else {}
+        sweep2(**kw, budget_s=float(a[2]) if len(a) > 2 else None)
     elif a and a[0] == "sweep":
         kw = dict(n0=int(a[1])) if len(a) > 1 else {}
         sweep(**kw)
