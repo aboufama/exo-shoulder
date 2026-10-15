@@ -29,6 +29,10 @@
       const m = C.margin(ctx);
       if (m < 0) return 'J2 cannot close: the arm axis is out of the chain\'s reach';
       if (m < P.margin) return `J2 within ${m.toFixed(0)} deg of its fold`;
+      // the front route can swing J2 over the arm: report when its hub centre falls inside the arm envelope
+      const j2 = V.scale(C.fk(q, ctx).p2, P.faces[1]), s = Math.max(0, V.dot(j2, ctx.armAxis));
+      const d = V.norm(V.sub(j2, V.scale(ctx.armAxis, s)));
+      if (s > 0 && d < P.r_env) return `J2 hub inside the arm envelope (${d.toFixed(0)} mm from the arm axis)`;
       return null;
     },
     parts: (q, ctx) => {
