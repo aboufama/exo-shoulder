@@ -149,11 +149,15 @@ def build(B, F, p):
                            over=[("rail1", ROOF + 1.0)] if p.get("l2over", 1) else [])
     neck = K.neck_member(F, F.HG(tab_end), joints=("N3",))
     q = np.stack([k["q1"], k["q2"], k["q3"]], -1)
+    # a rail is an OPEN arc (it needs a gap for its mount) and a shoe cannot wrap more than a quarter of its circle
+    span_bad = ((span1[1] - span1[0]) / D2R > 330 or (span3[1] - span3[0]) / D2R > 330 or
+                Lc / (R1 * math.sin(ar1)) / D2R > 90 or Lc / (R3 * math.sin(ar3)) / D2R > 90)
+    if span_bad: ok = np.zeros_like(ok)
     res = K.closure_residual(a1, a3, a2, p["a12"], p["a23"])
     info = dict(residual_deg=round(float(res[ok].max()), 5) if ok.any() else None,
                 min_margin=round(float(k["margin"][ok].min()), 2) if ok.any() else None,
                 rail1_deg=round((span1[1] - span1[0]) / D2R, 1), rail1_mm=round((span1[1] - span1[0]) * R1 * math.sin(ar1), 1),
-                rail3_deg=round((span3[1] - span3[0]) / D2R, 1), rail3_mm=round((span3[1] - span3[0]) * R3 * math.sin(ar3), 1),
+                rail3_deg=round((span3[1] - span3[0]) / D2R, 1), span_bad=bool(span_bad), rail3_mm=round((span3[1] - span3[0]) * R3 * math.sin(ar3), 1),
                 same_body=[["rail1", "car1"], ["car1", "bridge1"], ["car1", "hub2"], ["bridge1", "hub2"], ["link2", "car3"],
                            ["car3", "rail3"], ["rail3", "neck"]])
     members = [rail1, car1, bridge, hub2, link2, car3, rail3, neck]
@@ -201,6 +205,11 @@ def park(B):
 
 def evaluate(B, p, **kw):
     p = dict(PARAMS, **p); r = K.evaluate(B, build, p, **kw); r.update(park(B)); return r
+
+
+def bench_eval(B, p):
+    """tools/concept_sweep.py hook: the kit report + the parking rule"""
+    return evaluate(B, p)
 
 
 def metal(pose, frames, params):
