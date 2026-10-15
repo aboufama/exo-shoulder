@@ -58,6 +58,7 @@ SEED = dict(az=2.4305071427308924, el=80.67633718429899, a=[76.90180446920043, 6
 PARAMS = dict(o1a=0.0, o1c=0.0, o2a=0.0, o2c=0.0, o3a=0.0, o3c=0.0,   # axis offsets (mm): along / across the link
               S_a=15.0, S_t=15.0, R_r=0.5,                            # slide half-ranges (mm); R_r 0.5 = the spec's 2 slides
               drop=1,                                                 # greedy pose dropping on the skin envelope (0/1)
+              S_auto=0,                                               # 1: slide ranges = needed travel + 0.5 mm
               slides=1)                                               # 0: spherical reference (offsets ignored, arm-fixed hub 3)
 SWEEP = dict(o1a=[-20, -10, 0, 10, 20], o1c=[-20, -10, 0, 10, 20], o2a=[-20, -10, 0, 10, 20], o2c=[-20, -10, 0, 10, 20],
              o3a=[-20, -10, 0, 10, 20], o3c=[-20, -10, 0, 10, 20], S_a=[10, 15, 25], S_t=[10, 15, 25], R_r=[0.5, 2, 5, 10])
@@ -109,8 +110,10 @@ def pose_rots(POSE):
 class Design:
     def __init__(self, params=None):
         P = dict(PARAMS); P.update(params or {}); self.p = P
-        s = SEED; self.branch = s["branch"]
-        u1 = bvec(s["az"], s["el"]); u3 = w_dir(*s["w"]); A = [x * D2R for x in s["a"]]
+        s = SEED; self.branch = s["branch"]                       # axis directions: the seed + sweepable deltas (deg)
+        u1 = bvec(s["az"] + P.get("d_az", 0.0), s["el"] + P.get("d_el", 0.0))
+        u3 = w_dir(s["w"][0] + P.get("d_wd", 0.0), s["w"][1] + P.get("d_wa", 0.0))
+        A = [(s["a"][0] + P.get("d_a1", 0.0)) * D2R, (s["a"][1] + P.get("d_a2", 0.0)) * D2R]
         u2 = circ_int(u1, A[0], u3, A[1], self.branch)
         self.u = [unit(u1), unit(u2), unit(u3)]; self.A = A
         self.h0 = np.array([0.0, -1.0, 0.0])                      # humerus axis at rest (GH -> elbow)
@@ -239,6 +242,12 @@ class Model:
         Z = CB._poses_all(); self.Z = Z
         self.RS = Z["RS"][B.idx].astype(float); self.Q = Z["HG"][B.idx].astype(float)   # = concept_baseline.py's rotations
         q, ok, X1, X2, X3, s = self.D.ik(self.Q)
+        if self.p.get("S_auto") and self.p.get("slides", 1):         # slide ranges = the travel the fit set needs (+0.5 mm)
+            names = list(Z["NAMES"]); ii = np.nonzero(np.isin(Z["CID"], [names.index(n) for n in CB.FIT]))[0]
+            _, okc, _, _, _, sc = self.D.ik(Z["HG"][ii].astype(float))
+            sa = np.abs(np.r_[s[ok], sc[okc]]); m = sa.max(0) if len(sa) else np.zeros(3)
+            self.p["S_a"] = round(max(2.0, float(m[0]) + 0.5), 1); self.p["S_t"] = round(max(2.0, float(m[1]) + 0.5), 1)
+            self.p["R_r"] = round(max(0.5, float(m[2]) + 0.5), 1)
         self.q, self.X = q, {1: X1, 2: X2, 3: X3}; self.s = s
         self.why = np.array([""] * len(B.idx), dtype=object)
         okf = ok.copy(); self.why[~ok] = "fold"
@@ -600,44 +609,87 @@ SWEEP_FILE = os.path.join(REPO, "docs", "concepts", "sweeps", ID + ".json")
 
 
 def sweep(B, budget=110, seed=7):
-    """coarse (references, one offset at a time, random combinations) then coordinate refinement around the best"""
+    """coarse (references, one offset at a time, random combinations) then coordinate refinement around the best.
+    Slide ranges are sized automatically (S_auto: the travel the fit set needs + 0.5 mm), so the sweep is over the six
+    axis offsets; the log records the resolved ranges."""
     os.makedirs(os.path.dirname(SWEEP_FILE), exist_ok=True)
     log = json.load(open(SWEEP_FILE)) if os.path.exists(SWEEP_FILE) else []
-    done = {json.dumps(e["params"], sort_keys=True) for e in log}
+    done = {json.dumps(e.get("asked", e["params"]), sort_keys=True): e for e in log}
+    best_gap = [min([e["gap"] for e in log], default=1e9)]
     def run(par):
         P = dict(PARAMS); P.update(par); key = json.dumps(P, sort_keys=True)
-        if key in done: return next(e for e in log if json.dumps(e["params"], sort_keys=True) == key)
+        if key in done: return done[key]
         if len(log) >= budget: return None
-        t = time.time(); r, M = evaluate(B, P, log); done.add(key)
+        t = time.time(); r, M = evaluate(B, dict(P), log); log[-1]["asked"] = json.loads(key); done[key] = log[-1]
         json.dump(log, open(SWEEP_FILE + ".tmp", "w"), indent=1); os.replace(SWEEP_FILE + ".tmp", SWEEP_FILE)
         print(f"[{len(log):3d}] gap {r['gap']:6.2f} reach {r['reach']:.3f} follow {r['follow']:.3f} ib14 {r['inband14']:.3f} "
-              f"ib10 {r['inband10']:.3f} contact {r['contact']:.3f} why {r['why']} {par} ({time.time() - t:.0f} s)", flush=True)
+              f"ib10 {r['inband10']:.3f} contact {r['contact']:.3f} why {r['why']} S {[M.p['S_a'], M.p['S_t'], M.p['R_r']]} "
+              f"f {r['f']} ib/part {r['parts_ib14']} {par} ({time.time() - t:.0f} s)", flush=True)
+        if r["gap"] < best_gap[0] - 1e-9:
+            best_gap[0] = r["gap"]
+            with open(os.path.join(REPO, "docs", "concepts", "events.jsonl"), "a") as fh:
+                fh.write(json.dumps(dict(time=now(), kind="milestone", event=f"{ID}: new best gap {r['gap']} (reach {r['reach']}, follow {r['follow']}, "
+                                         f"inband14 {r['inband14']}, contact {r['contact']}) at {par}")) + "\n")
         return log[-1]
-    # stage 0: references (the spherical chain with the champion's arm-fixed hub-3 block; zero offsets + the slide stack)
-    run(dict(slides=0)); run(dict()); run(dict(S_a=5.0, S_t=5.0))
-    # stage 1: one offset at a time. R3 offsets need no radial slide (their drift stays in the slide plane: s = (R3^T - I) c3);
-    # R1 / R2 offsets need one (kinematics scan: with the spec's 2 slides, +-5 mm on R1 or R2 already loses > 40 % of poses)
-    for k in ("o3a", "o3c"):
-        for v in (-10, -5, 5, 10): run({k: v})
-    for k in ("o1a", "o1c", "o2a", "o2c"):
-        for v in (-10, -5, 5, 10): run({k: v, "R_r": 5.0})
-        for v in (-10, 10): run({k: v, "R_r": 10.0})
-    # stage 2: random small combinations (larger offsets run the slides out of range: dev scan, +-20 mm -> reach < 0.3)
+    OFF = ("o1a", "o1c", "o2a", "o2c", "o3a", "o3c")
+    run(dict(slides=0)); run(dict(S_auto=1))
+    for k in OFF:
+        for v in (-10, -5, 5, 10): run({k: v, "S_auto": 1})
     rng = np.random.default_rng(seed)
-    for _ in range(40):
-        par = {k: round(float(rng.uniform(-10, 10)), 1) for k in ("o1a", "o1c", "o2a", "o2c")}
-        par.update(o3a=round(float(rng.uniform(-6, 6)), 1), o3c=round(float(rng.uniform(-6, 6)), 1), R_r=float(rng.choice([2.0, 5.0, 10.0])),
-                   S_a=float(rng.choice([10.0, 15.0, 25.0])), S_t=float(rng.choice([10.0, 15.0, 25.0])))
+    for _ in range(26):
+        par = {k: round(float(rng.uniform(-10, 10)), 1) for k in OFF}; par["S_auto"] = 1
         run(par)
-    # stage 3: coordinate refinement around the best slide design (slides=1)
-    steps = dict(o1a=2.5, o1c=2.5, o2a=2.5, o2c=2.5, o3a=2.5, o3c=2.5, R_r=2.0, S_a=5.0, S_t=5.0)
-    lo = dict(R_r=0.5, S_a=5.0, S_t=5.0)
-    for rnd in range(3):
+    steps = {k: 2.5 for k in OFF}
+    for rnd in range(4):
         cand = [e for e in log if e["params"].get("slides", 1)]
         best = min(cand, key=lambda e: e["gap"]); improved = False
         for k, st in steps.items():
             for sg in (-1, 1):
-                par = {kk: best["params"][kk] for kk in steps}; par[k] = max(lo.get(k, -40.0), par[k] + sg * st)
+                par = {kk: best["asked"][kk] for kk in OFF}; par[k] = par[k] + sg * st; par["S_auto"] = 1
+                e = run(par)
+                if e is None: return log
+                if e["gap"] < best["gap"] - 1e-9: improved = True
+        if not improved: break
+    return log
+
+
+DIRS = ("d_az", "d_el", "d_a1", "d_a2", "d_wd", "d_wa")
+
+
+def sweep2(B, budget=200, seed=11):
+    """stage 2: axis DIRECTIONS (spec: 'axis offsets and directions') around the seed, with and without offsets, then
+    coordinate refinement of directions + offsets around the best slide design"""
+    log = json.load(open(SWEEP_FILE)); done = {json.dumps(e.get("asked", e["params"]), sort_keys=True): e for e in log}
+    best_gap = [min([e["gap"] for e in log if e["params"].get("slides", 1)], default=1e9)]
+    OFF = ("o1a", "o1c", "o2a", "o2c", "o3a", "o3c")
+    def run(par):
+        P = dict(PARAMS); P.update(par); key = json.dumps(P, sort_keys=True)
+        if key in done: return done[key]
+        if len(log) >= budget: return None
+        t = time.time(); r, M = evaluate(B, dict(P), log); log[-1]["asked"] = json.loads(key); done[key] = log[-1]
+        json.dump(log, open(SWEEP_FILE + ".tmp", "w"), indent=1); os.replace(SWEEP_FILE + ".tmp", SWEEP_FILE)
+        print(f"[{len(log):3d}] gap {r['gap']:6.2f} reach {r['reach']:.3f} follow {r['follow']:.3f} ib14 {r['inband14']:.3f} "
+              f"ib10 {r['inband10']:.3f} contact {r['contact']:.3f} why {r['why']} S {[M.p['S_a'], M.p['S_t'], M.p['R_r']]} "
+              f"f {r['f']} ib/part {r['parts_ib14']} {par} ({time.time() - t:.0f} s)", flush=True)
+        if par.get("slides", 1) and r["gap"] < best_gap[0] - 1e-9:
+            best_gap[0] = r["gap"]
+            with open(os.path.join(REPO, "docs", "concepts", "events.jsonl"), "a") as fh:
+                fh.write(json.dumps(dict(time=now(), kind="milestone", event=f"{ID}: new best gap {r['gap']} (reach {r['reach']}, follow {r['follow']}, "
+                                         f"inband14 {r['inband14']}, contact {r['contact']}) at {par}")) + "\n")
+        return log[-1]
+    for k in DIRS:
+        for v in (-10, -5, 5, 10): run({k: v, "S_auto": 1})
+    rng = np.random.default_rng(seed)
+    for _ in range(30):
+        par = {k: round(float(rng.uniform(-10, 10)), 1) for k in DIRS}
+        par.update({k: round(float(rng.uniform(-6, 6)), 1) for k in OFF}); par["S_auto"] = 1
+        run(par)
+    for rnd in range(4):
+        cand = [e for e in log if e["params"].get("slides", 1)]
+        best = min(cand, key=lambda e: e["gap"]); improved = False
+        for k in DIRS + OFF:
+            for sg in (-1, 1):
+                par = {kk: best["asked"].get(kk, 0.0) for kk in DIRS + OFF}; par[k] = par[k] + sg * (4.0 if k in DIRS else 2.5); par["S_auto"] = 1
                 e = run(par)
                 if e is None: return log
                 if e["gap"] < best["gap"] - 1e-9: improved = True
@@ -672,10 +724,51 @@ if __name__ == "__main__":
         for par in (dict(slides=0), dict(), dict(o3a=5), dict(o1a=5), dict(o1a=5, R_r=5.0), dict(o2c=5), dict(o2c=5, R_r=5.0)):
             print(par, kin_scan(B, par))
         sys.exit()
+    if mode == "redteam":                                         # the best slide config of the sweep log (or slides=0 with 'ref')
+        B = CB.Bench(n_clip=60, n_ws=160); log = json.load(open(SWEEP_FILE))
+        cand = [e for e in log if e["params"].get("slides", 1)] if "ref" not in sys.argv else [e for e in log if not e["params"].get("slides", 1)]
+        e = min(cand, key=lambda e: e["gap"]); P = dict(e["asked"]); M = Model(B, P); r = M.run()
+        print("config", e["k"], {k: v for k, v in M.p.items() if v}, {k: r[k] for k in ("gap", "reach", "follow", "inband14", "inband10", "contact")})
+        print("parts in band 2-14 [share, median mm, samples]:", r["parts_ib14"]); print("reasons not taken:", r["why"], r["parts_pairs"])
+        print("slide travel max |s| (along, across, radial):", r["s_abs_max"], "ranges", [M.p["S_a"], M.p["S_t"], M.p["R_r"]], "faces f1 f2 f3", r["f"])
+        def lab(i):
+            p = B.poses[i]; return f"#{i} {B.kind[i]} {B.clip[i][:22]:22s} plane {p['plane']:6.1f} elev {p['elev']:6.1f} axial {p['axial']:6.1f}"
+        print("\n-- poses that JAM (not taken) --")
+        for i in range(len(B.idx)):
+            if M.why[i]: print(f"  {M.why[i]:7s} {lab(i)}" + (f" clear {M.clear[i]:.1f} ({M.last_pair.get(i)})" if M.why[i] == 'parts' else ""))
+        # the point that pinches: lowest metal sample over taken poses, by part
+        names = list(M.rigid) + list(M.link_pts); sizes = [len(X) for _, X in M.rigid.values()] + [len(X) for _, X in M.link_pts.values()]
+        cut = np.cumsum([0] + sizes); low = []
+        for i in range(len(B.idx)):
+            d = B.res[i]
+            if d is None or float(np.min(d)) < 0: continue
+            j = int(np.argmin(d[:cut[-1]])); part = names[int(np.searchsorted(cut, j, side="right") - 1)]; low.append((float(d[j]), i, part))
+        low.sort(); print("\n-- closest metal over taken poses (the point that pinches) --")
+        for dd, i, part in low[:8]: print(f"  {dd:5.2f} mm  {part:5s} {lab(i)}")
+        # named checks: rest, overhead, across the body, behind the back
+        taken = lambda i: B.res[i] is not None and float(np.min(B.res[i])) >= 0
+        el = np.array([p["elev"] for p in B.poses]); pl = np.array([p["plane"] for p in B.poses])
+        groups = dict(rest=np.argsort(el)[:5], overhead=np.nonzero(el >= 120)[0], across=np.nonzero((pl >= 100) & (el >= 40))[0],
+                      behind=np.array([i for i in range(len(B.idx)) if "back" in B.clip[i].lower() or (pl[i] < -30 and el[i] > 20)], int))
+        print("\n-- named pose groups: taken / total, median metal-skin mm --")
+        for g, ii in groups.items():
+            ii = list(ii); tk = [i for i in ii if taken(i)]
+            med = float(np.median(np.concatenate([B.res[i] for i in tk]))) if tk else float("nan")
+            print(f"  {g:9s} {len(tk)}/{len(ii)}  median {med:.1f} mm  not taken: {[(int(i), M.why[i]) for i in ii if not taken(i)][:10]}")
+        # hub 2: which poses set its face height
+        H2 = M.Hneed["hub2"]; top = np.argsort(-H2.max(1))[:6]
+        print("\n-- hub 2 face: poses that set it (needed face height mm) --")
+        for a in top: print(f"  {H2[a].max():6.1f}  {lab(int(M.poses_fit[a]))}  dropped {bool(M.drop[a])}")
+        print("  median need over taken poses", round(float(np.median(H2[~M.drop].max(1))), 1), "fitted", round(M.f[1], 1))
+        os.makedirs(os.path.join(REPO, "docs", "concepts", "img"), exist_ok=True)
+        if "ref" not in sys.argv: sketch(M, os.path.join(REPO, "docs", "concepts", "img", ID + ".png")); print("sketch written")
+        sys.exit()
     nc, nw = (20, 40) if mode == "check" else (60, 160)
     B = CB.Bench(n_clip=nc, n_ws=nw); print("bench", B.mode, len(B.idx), flush=True)
     if mode == "sweep":
         sweep(B, budget=int(sys.argv[2]) if len(sys.argv) > 2 else 110)
+    elif mode == "sweep2":
+        sweep2(B, budget=int(sys.argv[2]) if len(sys.argv) > 2 else 200)
     else:
         r, M = evaluate(B, dict(PARAMS))
         print(json.dumps({k: v for k, v in r.items()}, default=str))
