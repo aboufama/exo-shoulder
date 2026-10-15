@@ -92,7 +92,8 @@ python3 /home/user/exo-shoulder/tools/runpod_guard.py enforce && python3 /home/u
 Stills (exo only, three cameras on the shoulder, `render_stills.py`):
 ```bash
 cd /home/user/exo-shoulder/pipeline/full-exo
-python3 stills_plan.py designs/cad_<key> "Raise overhead" 0.45 ../joint-render/out_stills_cad_<key>/raise    # 1.4 s
+python3 stills_plan.py designs/cad_<key> "Raise overhead" 0.30 ../joint-render/out_stills_cad_<key>/raise    # 1.4 s; r16: frame 54, 124 deg, last followed
+#   frame before the hold (63-116) - pick a fraction whose frame is not held (clips.json "held")
 cd ../joint-render
 RUNPOD_API_KEY=$(cat ~/.runpod_key) ~/.local/share/uv/tools/runpod-flash/bin/python film_client.py stills out_stills_cad_<key>/raise/scene.glb out_stills_cad_<key>/raise/motion.json out_stills_cad_<key>/raise --spp 256
 ```
@@ -111,6 +112,11 @@ job setup; ~60 s cold start per worker; 4 workers):
 | default plan (4 clips), any number of designs | 712 | 4,400-6,300 | $1.35-1.95 | 20-28 min |
 | stills, 3 cameras, one design | 3 | ~110 | ~$0.03-0.05 | ~2 min |
 | worst case (15 s/frame), default plan | 712 | ~11,600 | ~$3.60 | ~50 min |
+
+**Clips.** Held frames freeze the whole arm at the exo's limit (honest, but it reads as a stall on film). r16 s1373
+follows Drink, Comb hair, Reach a high shelf, Wash and Walking 100 %, Raise overhead 70 % (held 63-116, the top of the
+lift), Reach back pocket 33 % (24-122), Wave 40 % (33-137). The default plan includes Raise overhead and Wave; choose
+with `CLIPS=` once the picks' clips.json are known (`python3 -c` over `frames[i]["held"]`).
 
 Order for the 12:30 deadline: picks at 08:00 -> detail re-eval (lead, GPU) -> build + publish (~5 min/design) ->
 judges -> preview (~3 min) -> yes -> calibration chunk -> film + stills (~30 min) -> enforce/audit.
