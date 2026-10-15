@@ -72,6 +72,15 @@ docs/EVOLUTION.md (and its snapshot to pipeline/evolution/) as part of the judge
   Blender 4.2.3 at /opt/blender are installed); licences (AMASS, SMPL-X) are still accepted by the user, not the agent.
 - **Renders/films**: show a cheap motion preview and get approval before any paid render. Mannequin: matte black,
   faceless (not uncanny), muscles OK. Parts: bead blasted metal, polished screws, iglidur orange; no black parts.
+- **Manufacturable joints only** (user, 2026-10-15: "I do not think I am able to make a 3 dof translating passive device
+  ... two is probably the most I can make ... Make sure that all designs are thought of with manufacturability in mind, is
+  there actually a component that can be designed which serves these degrees of freedom for the size they are
+  presented at?"): at most **2 passive translations** anywhere in a design (unless a buildable 3rd is shown and the user
+  agrees); every joint, active or passive, maps to a real component - a catalogue part number (bearing, miniature guide,
+  bushing) or a simple machinable design - and the model carries that component's REAL envelope (assembly height,
+  footprint, rail length = travel + block length, mass) as sampled metal. A radial (skin-normal) slide counts as
+  standing up by its travel + block length. A few mm of radial play may go to the cuff liner's compliance, stated as
+  such. No virtual slides, no zero-height stages; the verifier rejects a design whose joints have no component.
 - **No lofts, ever** (user, 2026-10-15: "for all the design you do, lofts look horrible and introduce geometric problems, you
   can combine arcs, but no lofts!"): every surface comes from sketches of lines and tangent arcs - extrudes, revolves,
   sweeps of ONE constant section along a line/arc path, fillets. No lofts, no surfaces fitted or shrink-wrapped to skin
