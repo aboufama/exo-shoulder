@@ -32,7 +32,7 @@ ID = "posterior-max-margin-cardan"
 NAME = "Posterior max-margin Cardan"
 SWEEP_JSON = os.path.join(REPO, "docs", "concepts", "sweeps", f"{ID}.json")
 PARAMS = dict(b_az=-28.0, b_el=-19.0, w_d=42.0, w_a=-64.0, a1=90.0, a2=90.0, sigma=1, margin=5.0,
-              seat="wedge", stack="A", q=1.0, width=12.0, t_link=3.0)
+              seat="wedge", stack="B", q=1.0, drop=0, width=12.0, t_link=3.0)
 SWEEP = dict(seat=["wedge", "flat"], stack=["A", "B"], q=[1.0, 0.95], sigma=[1, -1])
 CAL_KEYS = ("rk_link1", "rk_link2", "rk_neck", "h_hub1", "h_hub2", "h_hub3", "wh_hub1", "wh_hub2", "wh_hub3")
 NK = 13                                                      # radius knots along a strap (calibration)
@@ -48,6 +48,8 @@ def fit_profiles(B, chain, fit, q=1.0, mode="march"):
     The kit applies `over` then the climb: the climb lifts samples near a hub ramp that `over` left alone (they were at
     a lower radius, inside the shared-joint exemption) back into the member they must clear (measured: 67-80 link2 /
     neck poses rejected by K6 on this design). Raising only, so every part stays at or above the kit's level."""
+    drop = int(chain.info.get("drop", 0) or 0)
+    if drop > 0: fit = drop_poses(B, chain, fit, drop, mode)
     raw = K._levels(B, chain, fit, q, mode); prof = {}; level = {}
 
     def climb(m, r):
@@ -66,6 +68,23 @@ def fit_profiles(B, chain, fit, q=1.0, mode="march"):
             r = r2
         prof[m.name] = r; level[m.name] = float(r.max())
     return prof
+
+
+def drop_poses(B, chain, fit, n, mode="march"):
+    """pose-consistent alternative to the per-sample quantile: leave the n fit poses whose skin stands highest above
+    the chain's typical skin (score = max over every member sample of requirement - its median over the fit poses)
+    out of the FIT. They stay in the evaluation and are measured honestly: metal inside the body there is contact
+    (100 x contact + the lost reach / follow). The per-sample quantile drops a different 5-7 % of poses per sample,
+    and their union made 19-20 % of the poses contact poses (measured)."""
+    Pi = np.nonzero(fit)[0]; score = np.zeros(len(Pi))
+    for m in chain.members:
+        Dm = m.D[Pi]; s_ = Dm.shape[1]
+        R = K.requirement(B, np.repeat(Pi, s_), Dm.reshape(-1, 3), mode=mode).reshape(len(Pi), s_)
+        R = np.where(np.isfinite(R), R, 400.0)
+        if m.kind == "flat": R = R * np.einsum("pmd,pd->pm", Dm, m.K[Pi])
+        score = np.maximum(score, (R - np.median(R, 0)).max(1))
+    out = np.asarray(fit, bool).copy(); out[Pi[np.argsort(-score)[:n]]] = False
+    return out
 
 
 K.fit_profiles = fit_profiles          # evaluate() looks it up in the kit module
@@ -101,6 +120,8 @@ def hub(name, axis, joint, p, seat):
     thickness = wedge height + 12.25 (crown)"""
     h = float(p.get("h_" + name, 90.0))
     if seat == "flat": return K.hub_member(name, axis, joint, h0=h)
+    h = max(30.0, h - float(p.get("wh_" + name, 0.0)))      # lay the disc out at the wedge's LOWEST underside, so the
+    # radial sample rays still span the full O20 disc there (at F the footprint is then larger than 20 mm: conservative)
     k = K.unit(axis); a, b = K.plane_frame(k); xy = K.disc_xy(K.HUB_R, 2.0)
     D = K.unit(h * k[:, None] + xy[None, :, :1] * a[:, None] + xy[None, :, 1:] * b[:, None])
     return K.Member(name, D, kind="free", t=K.CROWN + float(p.get("wh_" + name, 0.0)), width=2 * K.HUB_R, joints=(joint,),
@@ -129,7 +150,7 @@ def build(B, F, p):
     res = K.closure_residual(p1, p3, p2, p["a1"], p["a2"])
     return K.Chain(members=hubs + [l1, l2, nk], ok=ok, q=q, joints=dict(J1=p1, J2=p2, J3=p3),
                    info=dict(residual_deg=round(float(res[ok].max()), 5) if ok.any() else None,
-                             min_margin=round(float(margin[ok].min()), 2) if ok.any() else None))
+                             min_margin=round(float(margin[ok].min()), 2) if ok.any() else None, drop=int(p.get("drop", 0))))
 
 
 def calibrate(B, p, passes=2):
@@ -177,7 +198,7 @@ def my_sweep(B, configs, out=SWEEP_JSON, resume=True, tag=""):
             print("FAIL", p, ex); continue
         e = dict(k=len(rows), t=K.now(), params={k: v for k, v in p.items() if k not in CAL_KEYS},
                  **{x: r[x] for x in ("inband14", "inband10", "reach", "follow", "contact", "gap")}, closure=r["closure"],
-                 mass_g=r["mass_g"], flips=r["flips"], collide=r["collide"], min_margin=r.get("min_margin"),
+                 mass_g=r["mass_g"], honest=r.get("honest"), audit=r.get("audit"), flips=r["flips"], collide=r["collide"], min_margin=r.get("min_margin"),
                  inband_member=r["inband_member"], levels={k: pc[k] for k in ("h_hub1", "h_hub2", "h_hub3", "wh_hub1", "wh_hub2", "wh_hub3")})
         rows.append(e); json.dump(rows, open(out + ".tmp", "w"), indent=1); os.replace(out + ".tmp", out)
         if best is None or e["gap"] < best["gap"]:
@@ -207,6 +228,20 @@ if __name__ == "__main__":
         else:                  # explicit list of param overrides on a base
             base = json.loads(a[2]); cfg = [dict(base, **o) for o in json.loads(a[3])]
         my_sweep(B, cfg, tag=f"stage {stage}")
+    elif a[0] == "redteam":   # the best swept config: every pose not taken, why, and the part that pinches
+        rows = json.load(open(SWEEP_JSON)); best = min(rows, key=lambda e: e["gap"]); pc, r = run(B, best["params"])
+        L = B._kit_last; ch, pts, ok, take = L["chain"], L["pts"], L["ok"], L["take"]; out = []
+        print("BEST", best["k"], r)
+        for i in range(len(ok)):
+            if take[i] and ok[i]:
+                worst = {m.name: float(K.dist_many(B, np.full(pts[m.name].shape[1], i), pts[m.name][i]).min()) for m in ch.members}
+                bad = {k: round(v, 1) for k, v in worst.items() if v < 0}
+                why = "contact " + str(bad) if bad else None
+            else:
+                why = "no closure" if not ch.ok[i] else ("flip" if not ok[i] else "collision")
+            if why: out.append((B.kind[i], B.clip[i], {k: round(v) for k, v in B.poses[i].items() if k in ("plane", "elev", "axial")}, why))
+        for o in out: print(*o)
+        print(len(out), "poses not taken of", len(ok))
     elif a[0] == "check":
         p = dict(PARAMS)
         for kv in a[1:]:
