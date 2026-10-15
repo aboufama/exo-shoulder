@@ -425,6 +425,8 @@ PAD_E = {"upper": (0.4, 0.3), "lower": (0.8, 0.4)}                              
 GUSSET = float(_os.environ.get("GUSSET_MM", 7.0)); STRAP_RMIN = float(_os.environ.get("STRAP_RMIN", 25.0))
 FILLET_K = 4.0; STRAP_FAIR = float(_os.environ.get("STRAP_FAIR", 1500.0)); DIMPLE_MAX = float(_os.environ.get("DIMPLE_MAX", 8.0)); DIMPLE_BW = 1.5
 TAB_RMIN = 8.0                                                                           # the base's short mount tab may bend tighter than a link
+FLOOR_TOL = 0.12                                                                         # a spine may dip this far into the need's 0.5 mm margin (joint raises start at 0.1)
+REACH_K = 1.6                                                                            # the reach cap's bend radius / STRAP_RMIN (room for the G2 lead-in)
 L_FLAT_UP = float(_os.environ.get("L_FLAT_UP", 2.0))                                     # an upper link runs flat this far past its pad (clear of the cap skirt)
 
 def _ss(x): return smootherstep((np.asarray(x, float) + 1.0) / 2.0)                    # 0 at x <= -1, 1 at x >= 1, C2
@@ -557,6 +559,21 @@ class Strap(Member):
             r, c = self._r_at(dirs, k, self._zb(h)); out = np.where(r <= HUB_R + 0.5, np.minimum(out, self._zb(h) / c), out)
         return out
 
+    def _reach(self, d):
+        """height a spine can gain d mm past its bend start: flat, then a bend of radius REACH_R (G2 lead-in included),
+        then the RAMP_TOP slope"""
+        d = np.maximum(np.asarray(d, float), 0.0); b = RAMP_TOP * D2R; R = REACH_K * STRAP_RMIN; d1 = R * math.sin(b)
+        return np.where(d <= d1, R - np.sqrt(np.maximum(R * R - np.minimum(d, d1) ** 2, 0.0)), R * (1 - math.cos(b)) + (d - d1) * math.tan(b))
+    def _w0(self, h): return max(HUB_R + (L_FLAT_UP if h["role"] == "upper" else 0.3), h.get("flat_r", 0.0))   # flat_r: stays flat under a top-mounted base disc
+    def ramp_cap(self):
+        """the evaluator's ribbon floor capped by what the strap can reach out of every pad (flat run, bend radius, ramp):
+        the evaluator ramps its free ribbon straight out of the hub rim; a fair G2 spine cannot (r20 s1411 #2: the capped
+        floor rose at 60 deg from J1's rim after a 1 mm joint raise -> no feasible spine). The skin envelope stays hard."""
+        cap = np.full(self.D.shape[:-1], np.inf)
+        for k, h in enumerate(self.hubs):
+            r, c = self._r_at(self.D, k, self._zb(h)); cap = np.minimum(cap, self._zb(h) / c + self._reach(r - self._w0(h)))
+        return cap
+
     # ---- the spine fit
     def _floor(self, need, valid):
         """per polar angle: the lowest skin-side spine radius Q(phi) that keeps the extruded strap on or above need across
@@ -576,7 +593,7 @@ class Strap(Member):
         for k, h in enumerate(self.hubs):
             dph = np.abs(bins - self.phik[k]); m = np.isfinite(fl) & (dph < math.pi / 2)
             rho = fl * np.sin(dph); zax = fl * np.cos(dph); d = rho - HUB_R; sel = m & (d > -0.5) & (d <= 12.0)
-            out[h["joint"]] = float(np.max(zax[sel] - (self._zb(h) + k_ * np.maximum(d[sel], 0.0)))) if sel.any() else -1.0
+            out[h["joint"]] = float(np.max(zax[sel] - (self._zb(h) + self._reach(rho[sel] - self._w0(h))))) if sel.any() else -1.0
         return out
     def fit_spine(self, bins, fl, ks=(2, 3, 4, 5)):
         from scipy.interpolate import BSpline
@@ -587,7 +604,7 @@ class Strap(Member):
         ok_f = np.isfinite(fl); flv = np.where(ok_f, fl, -1e9)
         def floor_at(ph): return np.interp(ph, bins, flv)
         sR, kR = math.sin(RAMP_TOP * D2R), math.tan(RAMP_TOP * D2R); u = np.linspace(0, 1, 260)
-        w0A = HUB_R + (L_FLAT_UP if h[0]["role"] == "upper" else 0.3); w0B = w0A if free else HUB_R + (L_FLAT_UP if h[1]["role"] == "upper" else 0.3)
+        w0A = self._w0(h[0]); w0B = w0A if free else self._w0(h[1])
         lowers = [(k, hh) for k, hh in enumerate(h) if hh["role"] == "lower"]
         def ctrl(p, k):
             I = p[6:].reshape(k, 2)
@@ -601,16 +618,18 @@ class Strap(Member):
             P, T, kap, sp = curve(p, k); ph = np.arctan2(P[:, 1], P[:, 0]); Q = np.hypot(P[:, 0], P[:, 1])
             wl = np.r_[np.linspace(HUB_R + 0.3, p[0], 10)]; PA = LA(wl); wl2 = np.linspace(HUB_R + 0.3, p[3], 10); PB = PA[:0] if free else LB(wl2)
             Ps = np.vstack([P, PA, PB]); phs = np.arctan2(Ps[:, 1], Ps[:, 0]); Qs = np.hypot(Ps[:, 0], Ps[:, 1]); fs = floor_at(phs)
-            g_floor = np.where(fs > -1e8, Qs - fs, 10.0)
+            g_floor = np.where(fs > -1e8, Qs - fs + FLOOR_TOL, 10.0)                       # FLOOR_TOL into the 0.5 margin: below fair_build's 0.1 raise threshold
+            self._gfloor_at = (np.degrees(phs), Qs, fs, len(P), len(PA))
             g_kap = 1.0 / (TAB_RMIN if free else STRAP_RMIN) - np.abs(kap)
             er = np.c_[np.cos(ph), np.sin(ph)]; g_ramp = sR - np.abs((T * er).sum(1))
             g_mono = np.diff(ph) * 1e3
             g_ceil = []
             for k_, hh in lowers:                                                         # the lower link leaves under its seat + ramp
                 dph = np.abs(ph - self.phik[k_]); rho = (Q + T_LINK) * np.sin(dph); m = rho < HUB_R + 25.0
-                g_ceil.append(np.where(m, hh["lv"]["S"] + kR * np.maximum(rho - HUB_R, 0.0) - (Q + T_LINK) * np.cos(dph), 5.0))
+                g_ceil.append(np.where(m, hh["lv"]["S"] + self._reach(rho - self._w0(hh)) - (Q + T_LINK) * np.cos(dph), 5.0))
             g_end = [np.array([ph[-1] - (th + (HW + 1.0) / zA)]) * 100.0] if free else []     # the spine reaches past the tab's round end
-            g = np.concatenate([g_floor, g_kap, g_ramp, g_mono] + g_ceil + g_end)
+            blocks = [("floor", g_floor), ("bend", g_kap), ("ramp", g_ramp), ("mono", g_mono)] + [(f"ceil{i}", c_) for i, c_ in enumerate(g_ceil)] + [("end", e_) for e_ in g_end]
+            g = np.concatenate([b_ for _, b_ in blocks]); self._gblocks = [(nm_, float(b_.min())) for nm_, b_ in blocks]
             ds = sp / (len(u) - 1); f_ = floor_at(ph); gap = np.where(f_ > -1e8, Q - f_, 0.0)
             J = float(np.sum(gap * ds) + STRAP_FAIR * np.sum(kap ** 2 * ds))
             return J, g, dict(P=P, T=T, kap=kap, ph=ph, Q=Q, gap=gap, ds=ds)
@@ -639,13 +658,18 @@ class Strap(Member):
                 p = res.x if max(0.0, -parts(res.x, k)[1].min()) <= max(0.05, max(0.0, -parts(p1, k)[1].min())) else p1
             except Exception as ex_:
                 print(f"  strap fit k={k}: {ex_}", flush=True); p = p1; res = type("r", (), dict(nit=0, message=str(ex_)))
-            J, g, info = parts(p, k); viol = float(max(0.0, -g.min()))
-            key = (viol > 0.05, J if viol <= 0.05 else viol)
+            J, g, info = parts(p, k); viol = float(max(0.0, -g.min())); worst = min(self._gblocks, key=lambda t: t[1])
+            hard = max(0.0, -min(v_ for n_, v_ in self._gblocks if n_ in ("bend", "mono")) * (STRAP_RMIN if True else 1.0))
+            key = (hard > 0.02, viol > 0.05, J if viol <= 0.05 else viol)
             print(f"  {self.group} spine k={k}: J {J:.1f}  viol {viol:.3f}  gap med {np.median(info['gap'][info['gap'] != 0]) if (info['gap'] != 0).any() else 0:.2f}  "
-                  f"min R {1 / max(np.abs(info['kap']).max(), 1e-6):.1f} mm  ({res.nit} it, {res.message})", flush=True)
-            if best is None or key < best[0] or (not key[0] and not best[0][0] and J < best[0][1] * 0.97): best = (key, k, p, info)
+                  f"min R {1 / max(np.abs(info['kap']).max(), 1e-6):.1f} mm  ({res.nit} it, {res.message})" + (f"  worst: {worst[0]} {worst[1]:.2f}" if viol > 0.05 else ""), flush=True)
+            if viol > 0.05 and worst[0] == "floor":
+                t_ = self._gfloor_at; i_ = int(np.argmin(np.where(t_[2] > -1e8, t_[1] - t_[2], 1e9)))
+                print(f"    floor worst at {t_[0][i_]:.1f} deg (sample {i_}: spine 0..{t_[3] - 1}, line A ..{t_[3] + t_[4] - 1}, line B after), Q {t_[1][i_]:.2f} floor {t_[2][i_]:.2f}", flush=True)
+            if best is None or key < best[0] or (not key[0] and not key[1] and not best[0][0] and not best[0][1] and J < best[0][2] * 0.97): best = (key, k, p, info)
         key, k, p, info = best
-        return k, p, ctrl(p, k), info, key[0]
+        if key[0]: raise ValueError(f"{self.name}: no spine meets the bend radius {STRAP_RMIN} mm (STRAP_RMIN / ramp / floor incompatible)")
+        return k, p, ctrl(p, k), info, key[1]
     def fit_tab(self, bins, fl, Lb=6.0):
         """the base's mount tab: straight off the pad line to w0, one G2 bend (curvature sin^2 over Lb mm) of angle beta
         away from the skin, straight after; the smallest (w0, beta) that clears the floor, brute force"""
