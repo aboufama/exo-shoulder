@@ -241,3 +241,8 @@ other 6 clips are followed in full. Workspace (1432 poses): the chain closes on 
 | R3 follows | 88.7 % | 98.2 % |
 | R4 Raise overhead (14 mm) | 36.4 % (follows 55.7 %, in band 65.2 %) | 48.7 % |
 | per clip (14 mm) | drink 54.8, comb 57.7, shelf 63.8, wash 34.3, back pocket 79.4, wave 41.5, walking 77.7 % | |
+
+### Loop result (unattended finisher, 2026-10-15T23:37:27Z)
+
+* CMA-ES main population (VModel checks + riser, Bench(60,160) fast, farm): 192 tries, best gap 54.35 (score 80.24, k 591); gate: +0.22 over the second half, +0.22 over the last third, top-5 within 0.26 -> **converged**.
+* Variant branch +1 (hub 2 on the other side of the u1-w plane): 80 tries, best gap 86.91 (score 68.4).
