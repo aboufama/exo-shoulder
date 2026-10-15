@@ -9,7 +9,8 @@
  * offset: the best entry has |o| = 0 (the cuff-sleeve-3r limit, where the slide is idle and the U angles constant);
  * this preview moves O 10 mm toward the acromion top along bvec(14.2, 68.4) (the swept direction) so the slide and the
  * U visibly do their job. Hub faces are schematic (58 / 80 mm from O); the bar's run is fitted outward over the loop
- * against a cylinder arm (the model fits it to the bench skin). */
+ * against a cylinder arm (the model fits it to the bench skin). The bar is link-2-fixed and does not follow the arm's
+ * spin, so at the loop's extreme internal rotation (hand behind the back) it crosses the arm: reported out of range. */
 (function () {
   const K = (typeof window !== 'undefined' ? window : globalThis).KIN, V = K.V, M = K.M;
   const P = { o: 10, o_az: 14.2, o_el: 68.4, a1_az: 77.5, a1_el: 78.0, branch: -1, s: 189, caz: -2, hC: 12.9, r_out: 44,
@@ -44,22 +45,29 @@
   outs.sort((x, y) => x - y);
   const psiB = outs[outs.length >> 1] + P.dpsi, xTop = lo - 15, xBot = Math.min(hi + 15, xTop + P.rod_cap);
   // the bar's run along the rod line, link-2-fixed: offset rho(x) along uk, fitted OUTWARD (as the model) so it clears
-  // a cylinder arm (radius 50 -> 44 mm down to the cuff, + 3 mm) over every frame of the loop
+  // a cylinder arm (radius 50 -> 44 mm down to the cuff, + 3 mm): p95 over the frames where it faces away from the arm
   const thk0 = P.th_k * K.D2R, xs = [], rho = [], NB = 9, x0 = P.r_cap * Math.cos(thk0), x1 = xTop - 5;
   for (let i = 0; i <= NB; i++) { xs.push(x0 + (x1 - x0) * i / NB); rho.push(P.r_cap * Math.sin(thk0) + (7 - P.r_cap * Math.sin(thk0)) * i / NB); }
   const barFrame = (q, S) => {
     const R12 = fk(q).R12, dh = M.mulv(S, M.mulv(R12, dh0)), j2 = M.mulv(S, M.mulv(R12, j20)), nb = V.cross(dh, j2);
     return { dh, uk: V.add(V.scale(j2, Math.cos(psiB * K.D2R)), V.scale(nb, Math.sin(psiB * K.D2R))) };
   };
+  const need = xs.map(() => []);
   for (const fr of K.motion(240)) {
     const ctx = K.makeCtx(fr.pose), q = solve(ctx), bf = barFrame(q, ctx.S), Ow = M.mulv(ctx.S, O), ax = ctx.armAxis;
     xs.forEach((x, i) => {
+      const p0 = V.madd(Ow, bf.dh, x), out = V.unit(V.reject(p0, ax));
+      if (V.dot(bf.uk, out) < 0.2) return;                    // the bar faces the arm in this pose: contact, as the model's quantile
       for (let r = rho[i]; r < 140; r += 1) {
-        const p = V.madd(V.madd(Ow, bf.dh, x), bf.uk, r), sa = V.dot(p, ax), d = V.norm(V.sub(p, V.scale(ax, Math.max(0, sa))));
-        if (sa < 0 || d >= 50 - 6 * Math.min(1, sa / P.s) + 3) { rho[i] = r; break; }
+        const p = V.madd(p0, bf.uk, r), sa = V.dot(p, ax), d = V.norm(V.sub(p, V.scale(ax, Math.max(0, sa))));
+        if (sa < 0 || d >= 50 - 6 * Math.min(1, sa / P.s) + 3) { need[i].push(r); break; }
       }
     });
   }
+  need.forEach((n, i) => { n.sort((x, y) => x - y); if (n.length) rho[i] = Math.max(rho[i], n[Math.floor(0.95 * (n.length - 1))]); });
+  const barPts = (q, S) => { const bf = barFrame(q, S), Ow = M.mulv(S, O); return xs.map((x, i) => V.madd(V.madd(Ow, bf.dh, x), bf.uk, rho[i])); };
+  /** smallest distance (mm) of the bar's run from the arm axis: under ~40 the bar crosses the arm */
+  const barClear = (q, ctx) => Math.min(...barPts(q, ctx.S).map(p => { const s = Math.max(0, V.dot(p, ctx.armAxis)); return V.norm(V.sub(p, V.scale(ctx.armAxis, s))); }));
 
   K.register({
     id: 'offset-pointer-slip-sleeve',
@@ -79,6 +87,8 @@
       if (a < P.sing || a > 180 - P.sing) return `pointer within ${Math.min(a, 180 - a).toFixed(0)} deg of J1's axis`;
       if (Math.hypot(q[4], q[5]) > P.u_lim) return 'cuff U past its tilt';
       if (q[3] < xTop + 12.5 || q[3] > xBot - 12.5) return 'sleeve past the rod end';
+      const bc = barClear(q, ctx);
+      if (bc < 40) return `bar crosses the arm (${bc.toFixed(0)} mm from its axis): link 2 does not follow the arm's spin`;
       return null;
     },
     parts: (q, ctx) => {
@@ -94,7 +104,7 @@
         { kind: 'arc', role: 'link', name: 'link 1 (90 deg about O)', pts: about(A1, J2, P.R1 + 7, P.R2 + 2), r: 2.5 },
         { kind: 'hub', role: 'active', name: 'J2 (axis through O)', c: V.madd(Ow, J2, P.R2), axis: J2, p0: Ow, r: P.hub_r, h },
         { kind: 'arc', role: 'link', name: 'bar cap', pts: about(J2, vend, P.R2 + 9, rCap), r: 2.5 },
-        { kind: 'arc', role: 'link', name: 'bar along the rod (fitted outward)', pts: xs.map((x, i) => V.madd(V.madd(Ow, dh, x), uk, rho[i])), r: 2.5 },
+        { kind: 'arc', role: 'link', name: 'bar along the rod (fitted outward)', pts: barPts(q, S), r: 2.5 },
         { kind: 'hub', role: 'link', name: 'rod boss', c: boss, axis: dh, p0: boss, r: 6, h: 10 },
         { kind: 'slider', role: 'passive', name: 'O6 rod + sleeve slide', a: V.madd(Ow, dh, xTop), b: V.madd(Ow, dh, xBot), at: Cw, z: uk, size: [25, 12, 12] },
         { kind: 'ring', role: 'active', name: 'J3: sleeve spin about the rod', c: Cw, axis: dh, r: 7 },
