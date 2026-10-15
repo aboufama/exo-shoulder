@@ -1,0 +1,186 @@
+{
+ "version": "fea-2026-10-15a (CalculiX 2.21 C3D10, gmsh tet10, distributing couplings)",
+ "rows": [
+  {
+   "case": "beam end moment 10 N.m: bending stress mid-span",
+   "h": 1.5,
+   "nodes": 9923,
+   "fe": 666.66242,
+   "analytic": 666.66667,
+   "err": -0.0,
+   "ccx_s": 9.0
+  },
+  {
+   "case": "beam end moment: tip rotation (rad)",
+   "h": 1.5,
+   "nodes": 9923,
+   "fe": 0.38836,
+   "analytic": 0.38986,
+   "err": -0.0038,
+   "ccx_s": 9.0
+  },
+  {
+   "case": "beam tip force 50 N: bending stress mid-span",
+   "h": 1.5,
+   "nodes": 9923,
+   "fe": 166.75767,
+   "analytic": 166.66667,
+   "err": 0.0005,
+   "ccx_s": 9.0
+  },
+  {
+   "case": "beam tip force: tip deflection (mm, + shear)",
+   "h": 1.5,
+   "nodes": 9923,
+   "fe": 6.43393,
+   "analytic": 6.50243,
+   "err": -0.0105,
+   "ccx_s": 9.0
+  },
+  {
+   "case": "beam torque 10 N.m: max shear mid-span (warping free ends)",
+   "h": 1.5,
+   "nodes": 9923,
+   "fe": 403.42435,
+   "analytic": 407.50163,
+   "err": -0.01,
+   "ccx_s": 9.0
+  },
+  {
+   "case": "beam torque: twist (rad)",
+   "h": 1.5,
+   "nodes": 9923,
+   "fe": 0.31608,
+   "analytic": 0.32211,
+   "err": -0.0187,
+   "ccx_s": 9.0
+  },
+  {
+   "case": "beam end moment 10 N.m: bending stress mid-span",
+   "h": 1.0,
+   "nodes": 28788,
+   "fe": 666.66162,
+   "analytic": 666.66667,
+   "err": -0.0,
+   "ccx_s": 42.4
+  },
+  {
+   "case": "beam end moment: tip rotation (rad)",
+   "h": 1.0,
+   "nodes": 28788,
+   "fe": 0.38848,
+   "analytic": 0.38986,
+   "err": -0.0036,
+   "ccx_s": 42.4
+  },
+  {
+   "case": "beam tip force 50 N: bending stress mid-span",
+   "h": 1.0,
+   "nodes": 28788,
+   "fe": 166.59519,
+   "analytic": 166.66667,
+   "err": -0.0004,
+   "ccx_s": 42.4
+  },
+  {
+   "case": "beam tip force: tip deflection (mm, + shear)",
+   "h": 1.0,
+   "nodes": 28788,
+   "fe": 6.43687,
+   "analytic": 6.50243,
+   "err": -0.0101,
+   "ccx_s": 42.4
+  },
+  {
+   "case": "beam torque 10 N.m: max shear mid-span (warping free ends)",
+   "h": 1.0,
+   "nodes": 28788,
+   "fe": 406.32138,
+   "analytic": 407.50163,
+   "err": -0.0029,
+   "ccx_s": 42.4
+  },
+  {
+   "case": "beam torque: twist (rad)",
+   "h": 1.0,
+   "nodes": 28788,
+   "fe": 0.31845,
+   "analytic": 0.32211,
+   "err": -0.0113,
+   "ccx_s": 42.4
+  },
+  {
+   "case": "ring 100 MPa: von Mises at the bore",
+   "h": 2.75,
+   "nodes": 1050,
+   "fe": 233.352924,
+   "analytic": 240.909476,
+   "err": -0.0314,
+   "ccx_s": 0.2
+  },
+  {
+   "case": "ring: hoop stress at the outer wall",
+   "h": 2.75,
+   "nodes": 1050,
+   "fe": 74.629926,
+   "analytic": 74.805195,
+   "err": -0.0023,
+   "ccx_s": 0.2
+  },
+  {
+   "case": "ring: radial displacement at the bore (mm)",
+   "h": 2.75,
+   "nodes": 1050,
+   "fe": 0.010962,
+   "analytic": 0.01099,
+   "err": -0.0026,
+   "ccx_s": 0.2
+  },
+  {
+   "case": "ring: radial displacement outside (mm)",
+   "h": 2.75,
+   "nodes": 1050,
+   "fe": 0.007528,
+   "analytic": 0.007546,
+   "err": -0.0024,
+   "ccx_s": 0.2
+  },
+  {
+   "case": "ring 100 MPa: von Mises at the bore",
+   "h": 1.833,
+   "nodes": 2677,
+   "fe": 237.219396,
+   "analytic": 240.909476,
+   "err": -0.0153,
+   "ccx_s": 0.7
+  },
+  {
+   "case": "ring: hoop stress at the outer wall",
+   "h": 1.833,
+   "nodes": 2677,
+   "fe": 74.816601,
+   "analytic": 74.805195,
+   "err": 0.0002,
+   "ccx_s": 0.7
+  },
+  {
+   "case": "ring: radial displacement at the bore (mm)",
+   "h": 1.833,
+   "nodes": 2677,
+   "fe": 0.010982,
+   "analytic": 0.01099,
+   "err": -0.0007,
+   "ccx_s": 0.7
+  },
+  {
+   "case": "ring: radial displacement outside (mm)",
+   "h": 1.833,
+   "nodes": 2677,
+   "fe": 0.007543,
+   "analytic": 0.007546,
+   "err": -0.0005,
+   "ccx_s": 0.7
+  }
+ ],
+ "finer_mesh_all_within_3pct": true
+}
