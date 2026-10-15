@@ -212,6 +212,30 @@ def sweeps():
     return rows
 
 
+SWEEP_CAP = 1500                                     # rows per morphology in the published sweeps dataset (8 MB limit)
+
+
+def thin(rows, cap=SWEEP_CAP):
+    """Published copy of sweeps(): per morphology keep every row that set a running best or the record, its 300 best gaps
+    and an even sample of the rest up to `cap` rows (scapular-race alone had 8737). Bests, records and n_configs are
+    computed on the full set before this, so no number on the page changes; only the scatter gets sparser."""
+    per = {}
+    for i, r in enumerate(rows): per.setdefault(r["id"], []).append(i)
+    keep = set()
+    for mid, ix in per.items():
+        if len(ix) <= cap: keep.update(ix); continue
+        must, prev = set(), None
+        for i in ix:
+            if rows[i]["is_record"] or rows[i]["best_gap"] != prev: must.add(i)
+            prev = rows[i]["best_gap"]
+        must.update(sorted((i for i in ix if rows[i]["gap"] is not None), key=lambda i: rows[i]["gap"])[:300])
+        rest = [i for i in ix if i not in must]; n = max(0, cap - len(must))
+        if rest and n: must.update(rest[int(j * len(rest) / n)] for j in range(min(n, len(rest))))
+        keep.update(must)
+        print(f"sweeps: {mid} thinned {len(ix)} -> {len(must)} rows for the page", file=sys.stderr)
+    return [r for i, r in enumerate(rows) if i in keep]
+
+
 def blank(mid):
     return dict(id=mid, name=mid, family="", lens="", status="ideated", is_baseline=False, active_dof=None, passive_dof=None,
                 t_ideated=None, t_screened=None, reach=None, follow=None, inband14=None, inband10=None, contact=None, gap=None,
@@ -613,7 +637,7 @@ def motion(out_dir):
 # ---------------------------------------------------------------- main
 DESC = {
     "morphs": ("Concept bench morphologies", "One row per morphology in the swarm's catalogue: status, the agent's claimed bench numbers, the verifier's re-measured numbers (v_), its best sweep configuration so far, and the 3R baseline once (is_baseline). Built from docs/concepts/catalogue.json, families.json, rows/*.json and sweeps/*.json."),
-    "sweeps": ("Concept bench sweeps", "Every configuration a morphology agent evaluated on the concept bench, with its time, gap, its morphology's best gap so far (best_gap) and the record over all morphologies so far (record_gap); passed_over marks a configuration its agent measured before its claimed row and rejected (better than the claim), which counts for no best. Built from docs/concepts/sweeps/*.json."),
+    "sweeps": ("Concept bench sweeps", "Every configuration a morphology agent evaluated on the concept bench, with its time, gap, its morphology's best gap so far (best_gap) and the record over all morphologies so far (record_gap); passed_over marks a configuration its agent measured before its claimed row and rejected (better than the claim), which counts for no best. Built from docs/concepts/sweeps/*.json; a morphology with more than 1500 configurations is thinned for the page (every running-best and record row, its 300 best gaps and an even sample of the rest), while best_gap, record_gap and n_configs come from the full set."),
     "cad": ("Built CAD judge results", "One row per judged design and requirement: value, threshold and pass from the outside judges, timed by the judge output (score files: the earliest of their commit, their file time and the first commit whose docs report the design; scorecard-only values: the scorecard's commit). Built from tools/judged_history.py, judge/scorecard.json files and judge/requirements.json."),
     "gpu_evals": ("GPU evaluator detail runs", "Every GPU band-evaluator detail evaluation of a search candidate (in-band 14 mm, follow, workspace share, overhead follow). Time is the git commit that added the result file, not the run itself. Built from pipeline/conformal/gpu_client/band_eval_*.json via tools/judged_history.py --evals."),
     "gpu_searches": ("GPU band searches", "One row per GPU search job: its final best fitness, follow, generations, evaluations and seconds. Time is the git commit that added the result file. Built from pipeline/conformal/gpu_client/band_search_*.json."),
@@ -641,7 +665,7 @@ def main():
     C = cad([]); E = events(C)
     C = cad(E)                                       # with any rule change the log adds
     R = reqs(C, E)
-    data = dict(morphs=M, sweeps=S, cad=C, gpu_evals=gpu_evals(), gpu_searches=gpu_searches(), reqs=R, events=E, spend=spend(), cov3d=cov3d())
+    data = dict(morphs=M, sweeps=thin(S), cad=C, gpu_evals=gpu_evals(), gpu_searches=gpu_searches(), reqs=R, events=E, spend=spend(), cov3d=cov3d())
     data["motion"] = motion(a.out)                   # raw bytes as thumbs.mjs wrote them (not re-serialised)
     old = {d["id"]: d for d in (load(a.manifest, []) or [])}
     man = []
