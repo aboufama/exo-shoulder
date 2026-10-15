@@ -174,3 +174,8 @@ before this number is compared with the champion's.
 **What limits it:** the bar's roll is set by a1 x dh, not by the arm, so its run down the arm clears every axial angle
 and floats; the J2 hub sweeps the posterior-lateral cap filled by the elevated arm. Contact (19 poses) is the rest of
 the gap: 100 x 0.086 = 8.6 of the 58.9.
+
+**Red team of k 306 (partial).** The model's own checks stayed on in every polish evaluation: closure 1.0, 0 flips
+(K2 dense on values and axes), 0 part collisions, 0 singular / U / slide failures; 19 of 220 poses lost to skin contact.
+The full `red` pose list (rest / overhead / across-the-body / behind-the-back, pinch point) and the CB_EXACT re-run
+were sent to the farm but did not return within the time box - still owed before this number is promoted.
