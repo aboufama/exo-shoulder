@@ -190,8 +190,8 @@ See the "CPU farm" section of `docs/RUNPOD_COSTS.md` for the measured run: R2 bo
 - `judge` works: `cloud_run.py judge cad_r13_n4_s1343_1 fast` -> rc 0 in 1226 s on one worker ($0.10), full scorecard;
   R1-R8 values equal the tree's scorecard (14 h old); R10 / R11 now measured because the judges gained them since then
   (a measurement change, not a design change); R9 not run (SKIP_FEA on the farm).
-- Concurrency and queue (2026-10-15 21:43-22:00 UTC): 12 `sleep 20` jobs on the 4 workers ran 3 per worker strictly in
+- Concurrency and queue (2026-10-15 21:43-22:07 UTC): 12 `sleep 20` jobs on the 4 workers ran 3 per worker strictly in
   sequence (max 1 concurrent per worker, wall 121 s; 4 jobs per worker would take ~25 s). At 21:50-22:00 the farm held
-  4 long jobs in progress with 12-15 queued: a 0-s diagnostic job waited 102 s and the farm-3 canary (a 2-s job) waited
-  > 10 min. Every agent's sweep, upload (`have` / `put`) and ping shares these 4 slots. That is the case for the
+  4 long jobs in progress with 12-15 queued: a 0-s diagnostic job waited 102 s, and the on-farm canary (a 2-s job,
+  submitted 21:50) was still queued when its client gave up at 900 s. Every agent's sweep, upload (`have` / `put`) and ping shares these 4 slots. That is the case for the
   16-slot fix.
