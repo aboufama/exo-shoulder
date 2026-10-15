@@ -1,0 +1,209 @@
+<style>
+/* One page, read top to bottom: who is winning, why the others fail, progress, what is happening, the built prototype. */
+.sx { --sx-accent: var(--cds-chart-status-critical, #c2410c); display: grid; gap: var(--cds-gap-xl, 28px); font-family: var(--font-anthropic-sans); color: var(--color-fg); max-width: 1100px; margin-inline: auto; }
+.sx h1 { font-family: var(--font-anthropic-serif); font-weight: 400; font-size: var(--cds-font-size-title, 28px); margin: 0; text-wrap: balance; }
+.sx h2 { font-size: var(--cds-font-size-heading, 18px); font-weight: var(--cds-font-weight-medium, 500); margin: 0 0 4px; }
+.sx p { margin: 0; line-height: 1.5; max-width: 70ch; }
+.sx .muted { color: var(--color-fg-muted); font-size: var(--cds-font-size-caption, 13px); }
+.sx .lede { font-size: 17px; margin-top: 8px; }
+.sx .kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 14rem), 1fr)); gap: var(--cds-gap-md, 12px); margin-top: 16px; }
+.sx .kpi { background: var(--color-panel); border: 1px solid var(--color-border-line); border-radius: var(--cds-radius, 10px); padding: var(--cds-pad-lg, 16px); display: grid; gap: 4px; }
+.sx .kpi.lead { border: 2px solid var(--color-ok); }
+.sx .kpi .big { font-family: var(--font-anthropic-serif); font-size: 40px; line-height: 1; font-variant-numeric: tabular-nums; }
+.sx .kpi .lab { font-size: var(--cds-font-size-caption, 13px); color: var(--color-fg-muted); }
+.sx .card { background: var(--color-panel); border: 1px solid var(--color-border-line); border-radius: var(--cds-radius, 10px); padding: var(--cds-pad-lg, 16px); min-width: 0; }
+.sx .chart { position: relative; min-height: 340px; }
+.sx svg text { fill: var(--color-fg-muted); font-size: 12px; font-family: var(--font-anthropic-sans); }
+.sx svg .lbl { fill: var(--color-fg); font-size: 12px; }
+.sx .tip { position: absolute; pointer-events: none; background: var(--cds-surface-popover, var(--color-panel)); border: 1px solid var(--cds-border, var(--color-border-line)); border-radius: var(--cds-radius, 8px); box-shadow: var(--cds-shadow-popover, none); padding: 6px 10px; font-size: 12px; max-width: 260px; }
+.sx table { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; font-size: 14px; }
+.sx th { text-align: left; font-weight: var(--cds-font-weight-medium, 500); color: var(--color-fg-muted); font-size: 12px; padding: 6px 8px; border-bottom: 1px solid var(--color-border-line); }
+.sx td { padding: 8px; border-bottom: 1px solid var(--color-border-line); vertical-align: middle; }
+.sx td.num, .sx th.num { text-align: right; }
+.sx .meter { display: inline-block; width: 60px; height: 6px; border-radius: 3px; background: var(--color-border-line); vertical-align: middle; margin-right: 6px; overflow: hidden; }
+.sx .meter > i { display: block; height: 100%; background: var(--color-fg-muted); }
+.sx .meter > i.ok { background: var(--color-ok); }
+.sx .pill { display: inline-block; padding: 1px 8px; border-radius: 999px; font-size: 12px; border: 1px solid var(--color-border-line); white-space: nowrap; }
+.sx .pill.ver { border-color: var(--color-ok); color: var(--color-ok); }
+.sx .pill.dead { color: var(--color-fg-muted); }
+.sx .pill.run { border-color: var(--color-warn); color: var(--color-warn); }
+.sx .scroll { overflow-x: auto; }
+.sx .events { list-style: none; padding: 0; margin: 8px 0 0; display: grid; gap: 8px; }
+.sx .events li { display: grid; grid-template-columns: 52px 1fr; gap: 8px; font-size: 14px; }
+.sx .events time { color: var(--color-fg-muted); font-variant-numeric: tabular-nums; }
+.sx .chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+.sx .chip { padding: 4px 10px; border-radius: 999px; font-size: 12px; border: 1px solid var(--color-border-line); }
+.sx .chip.pass { border-color: var(--color-ok); color: var(--color-ok); }
+.sx .chip.fail { border-color: var(--color-bad); color: var(--color-bad); }
+.sx .chip.none { color: var(--color-fg-muted); border-style: dashed; }
+@media (max-width: 640px) { .sx .hide-sm { display: none; } .sx .kpi .big { font-size: 32px; } }
+</style>
+
+<div class="sx">
+  <header id="top">
+    <h1>Shoulder exo: who is winning</h1>
+    <p class="lede" id="lede" data-source="leader">—</p>
+    <div class="kpis">
+      <div class="kpi lead" id="kpi-best"><span class="lab">Best design so far</span><span class="big" data-source="leader" data-field="gap">—</span><span id="kpi-best-name" class="muted" data-source="leader" data-field="short">—</span></div>
+      <div class="kpi"><span class="lab">Bar to beat: today's 3-joint chain</span><span class="big" data-source="morphs" data-field="gap" data-where="id=baseline-3r">—</span><span class="muted">the design you have seen rendered</span></div>
+      <div class="kpi"><span class="lab">Goal</span><span class="big">0</span><span class="muted">every bench target met</span></div>
+    </div>
+    <p class="muted" style="margin-top:12px">Gap = how far a design is from the targets, lower is better. It adds up the shortfalls in staying 2-14 mm from the skin (target 90 % of the metal), following the arm (95 % of motion frames) and reaching everyday poses (90 %), plus any pose where metal would touch the skin.</p>
+  </header>
+
+  <section class="card" id="camps">
+    <h2>Two ways to fail</h2>
+    <p class="muted">Each dot is a design. Right = moves with the arm everywhere; up = stays close to the skin. A winner sits in the green corner. Most designs do one or the other.</p>
+    <div class="chart" id="scatter" data-source="board"></div>
+  </section>
+
+  <section class="card" id="board-sec">
+    <h2>Leaderboard</h2>
+    <p class="muted">Every design that has a measured number, best first. "Checking" means an independent agent is re-measuring it. Names: R = a hinge (revolute joint), P = a slider; "3R" = three hinges in a row (3 degrees of freedom); "spherical" = all hinge axes meet at the centre of the shoulder joint; "offset" = they do not; "3-RRR" = three hinged legs side by side.</p>
+    <div class="scroll"><table id="board" data-source="board" data-row-key="id">
+      <thead><tr><th data-field="short">Design</th><th class="num" data-field="gap">Gap</th><th data-field="close">Close to skin</th><th data-field="follows" class="hide-sm">Follows arm</th><th data-field="reaches" class="hide-sm">Reaches</th><th data-field="state">Status</th></tr></thead>
+      <tbody></tbody>
+    </table></div>
+  </section>
+
+  <section class="card" id="progress">
+    <h2>Best gap over time</h2>
+    <p class="muted">The best number any design has reached, as the agents sweep. The dashed line is the bar to beat.</p>
+    <div class="chart" id="record" data-source="sweeps morphs" style="min-height:260px"></div>
+  </section>
+
+  <section class="card" id="now">
+    <h2>What just happened</h2>
+    <ul class="events" id="events" data-source="events"></ul>
+  </section>
+
+  <section class="card" id="built">
+    <h2>The built prototype design vs the 19 requirements</h2>
+    <p class="muted" id="reqline" data-source="reqsum">—</p>
+    <div class="chips" id="chips" data-source="reqs"></div>
+  </section>
+</div>
+
+<script>
+const live = (m) => !m.is_baseline && !['dead', 'refuted', 'duplicate'].includes(m.status);
+dash.calc('board', {
+  inputs: ['morphs'], title: 'Designs with a number',
+  description: 'Every morphology with a measured bench number: the verified number if one exists, else the agent\'s claim, else its best sweep so far; best (lowest gap) first.',
+  fn: (morphs) => morphs.filter((m) => m.empty !== true && m.status !== 'duplicate').map((m) => {
+    const v = m.v_gap !== null && m.v_gap !== undefined, c = m.gap !== null && m.gap !== undefined, s = m.sweep_gap !== null && m.sweep_gap !== undefined;
+    if (!v && !c && !s) return null;
+    const p = v ? 'v_' : c ? '' : 'sweep_';
+    const state = m.is_baseline ? 'Bar to beat' : m.status === 'verified' ? 'Verified' : m.status === 'refuted' ? 'Refuted' : m.status === 'dead' ? 'Dead end' : c ? 'Checking' : 'Sweeping';
+    const short = m.is_baseline ? "Today's 3-hinge chain" : String(m.name || m.id).split(/[:(;]| with | - /)[0].trim().slice(0, 44);
+    return { id: m.id, short, gap: m[p + 'gap'], close: m[p + 'inband14'], follows: m[p + 'follow'], reaches: m[p + 'reach'], contact: m[p + 'contact'], state, is_baseline: !!m.is_baseline };
+  }).filter(Boolean).sort((a, b) => a.gap - b.gap)
+});
+dash.calc('leader', {
+  inputs: ['board', 'morphs'], title: 'Best design so far',
+  description: 'The lowest-gap design that is not the baseline and not a dead end, with the baseline gap for comparison.',
+  fn: (board, morphs) => {
+    const b = board.find((r) => !r.is_baseline && !['Dead end', 'Refuted'].includes(r.state)) || {};
+    const base = morphs.find((m) => m.is_baseline) || {};
+    return [{ id: b.id ?? null, short: b.short ?? null, gap: b.gap ?? null, state: b.state ?? null, base_gap: base.gap ?? null, delta: b.gap != null && base.gap != null ? Math.round((base.gap - b.gap) * 100) / 100 : null }];
+  }
+});
+dash.calc('reqsum', {
+  inputs: ['reqs'], title: 'Requirements passing',
+  description: 'How many of the 19 requirements the best judged built design passes.',
+  fn: (reqs) => [{ pass: reqs.filter((r) => r.state === 'pass').length, total: reqs.filter((r) => r.empty !== true).length, design: (reqs.find((r) => r.design) || {}).design ?? null }]
+});
+
+const pct = d3.format('.0%'), g1 = d3.format('.1f');
+const ok = (s) => s === 'ok';
+function tipper(box) { let t = box.querySelector('.tip'); if (!t) { t = document.createElement('div'); t.className = 'tip'; t.hidden = true; box.appendChild(t); } return t; }
+
+function drawScatter(rows) {
+  const box = document.getElementById('scatter'); box.querySelectorAll('svg').forEach((n) => n.remove());
+  if (!rows.length) return;
+  const W = Math.max(320, box.clientWidth), H = 340, m = { l: 48, r: 16, t: 12, b: 40 };
+  const x = d3.scaleLinear([0, 1], [m.l, W - m.r]), y = d3.scaleLinear([0, 1], [H - m.b, m.t]);
+  const svg = d3.select(box).append('svg').attr('width', '100%').attr('viewBox', `0 0 ${W} ${H}`);
+  svg.append('rect').attr('x', x(0.925)).attr('y', y(1)).attr('width', x(1) - x(0.925)).attr('height', y(0.9) - y(1)).attr('fill', 'var(--color-ok)').attr('opacity', 0.18);
+  svg.append('text').attr('x', x(1) - 4).attr('y', y(1) + 14).attr('text-anchor', 'end').text('goal');
+  svg.append('g').attr('transform', `translate(0,${H - m.b})`).call(d3.axisBottom(x).ticks(5).tickFormat(pct)).attr('font-size', null).attr('font-family', null);
+  svg.append('g').attr('transform', `translate(${m.l},0)`).call(d3.axisLeft(y).ticks(5).tickFormat(pct)).attr('font-size', null).attr('font-family', null);
+  svg.append('text').attr('x', (m.l + W - m.r) / 2).attr('y', H - 6).attr('text-anchor', 'middle').text('moves with the arm (average of follow and reach)');
+  svg.append('text').attr('transform', `translate(12,${(H - m.b + m.t) / 2}) rotate(-90)`).attr('text-anchor', 'middle').text('metal 2-14 mm from skin');
+  const col = (r) => r.is_baseline ? 'var(--color-fg)' : r.state === 'Verified' ? 'var(--color-ok)' : r.state === 'Dead end' || r.state === 'Refuted' ? 'var(--cds-chart-muted, var(--color-fg-muted))' : dash.colors[0];
+  const tip = tipper(box), mv = (r) => (r.follows + r.reaches) / 2;
+  const best = rows.filter((r) => !r.is_baseline && !['Dead end', 'Refuted'].includes(r.state))[0];
+  svg.append('g').selectAll('circle').data(rows).join('circle').attr('cx', (r) => x(mv(r))).attr('cy', (r) => y(r.close)).attr('r', (r) => (r === best || r.is_baseline ? 8 : 6))
+    .attr('fill', col).attr('fill-opacity', (r) => (r.state === 'Dead end' ? 0.45 : 0.9)).attr('stroke', 'var(--color-panel)').attr('stroke-width', 1.5)
+    .on('mousemove', (ev, r) => { tip.hidden = false; tip.textContent = `${r.short} - gap ${g1(r.gap)} (${r.state}). Close to skin ${pct(r.close)}, follows ${pct(r.follows)}, reaches ${pct(r.reaches)}.`; const b = box.getBoundingClientRect(); tip.style.left = Math.min(ev.clientX - b.left + 12, b.width - 270) + 'px'; tip.style.top = (ev.clientY - b.top + 12) + 'px'; })
+    .on('mouseleave', () => { tip.hidden = true; });
+  const lab = rows.filter((r) => r.is_baseline || r === best || r.close >= 0.7 || mv(r) >= 0.85).slice(0, 7);
+  const used = [];
+  lab.forEach((r) => {
+    const px = x(mv(r)), left = px > W - 190; let py = y(r.close) + 4;
+    while (used.some((u) => Math.abs(u - py) < 14)) py += 14;
+    used.push(py);
+    svg.append('text').attr('class', 'lbl').attr('x', left ? px - 10 : px + 10).attr('y', py).attr('text-anchor', left ? 'end' : 'start').text(r.short.slice(0, 26));
+  });
+}
+
+function drawBoard(rows) {
+  const tb = document.querySelector('#board tbody'); tb.replaceChildren();
+  const meter = (v, target) => { const s = document.createElement('span'); const mtr = document.createElement('span'); mtr.className = 'meter'; const i = document.createElement('i'); i.style.width = Math.max(0, Math.min(1, v)) * 100 + '%'; if (v >= target) i.className = 'ok'; mtr.appendChild(i); s.append(mtr, pct(v)); return s; };
+  rows.forEach((r) => {
+    const tr = document.createElement('tr'); tr.dataset.key = r.id;
+    const td = (c, cls) => { const e = document.createElement('td'); if (cls) e.className = cls; if (c instanceof Node) e.appendChild(c); else e.textContent = c; tr.appendChild(e); return e; };
+    td(r.short); td(g1(r.gap), 'num'); td(meter(r.close, 0.9)); td(meter(r.follows, 0.95), 'hide-sm'); td(meter(r.reaches, 0.9), 'hide-sm');
+    const p = document.createElement('span'); p.className = 'pill ' + (r.state === 'Verified' ? 'ver' : r.state === 'Dead end' || r.state === 'Refuted' ? 'dead' : r.state === 'Bar to beat' ? '' : 'run'); p.textContent = r.state; td(p);
+    tb.appendChild(tr);
+  });
+}
+
+function drawRecord(sweeps, base) {
+  const box = document.getElementById('record'); box.querySelectorAll('svg').forEach((n) => n.remove());
+  const rec = sweeps.filter((s) => s.is_record && !s.passed_over && s.record_gap != null).map((s) => ({ t: new Date(s.t), g: s.record_gap })).sort((a, b) => a.t - b.t);
+  const on = rec.findIndex((p) => p.g <= 150); if (on < 0) return; rec.splice(0, on);
+  const now = new Date(Math.max(rec[rec.length - 1].t, ...sweeps.map((s) => +new Date(s.t))));
+  const W = Math.max(320, box.clientWidth), H = 260, m = { l: 44, r: 16, t: 12, b: 28 }, top = 150;
+  const x = d3.scaleUtc([rec[0].t, now], [m.l, W - m.r]), y = d3.scaleLinear([0, top], [H - m.b, m.t]);
+  const svg = d3.select(box).append('svg').attr('width', '100%').attr('viewBox', `0 0 ${W} ${H}`);
+  svg.append('g').attr('transform', `translate(0,${H - m.b})`).call(d3.axisBottom(x).ticks(Math.max(2, Math.floor(W / 120)))).attr('font-size', null).attr('font-family', null);
+  svg.append('g').attr('transform', `translate(${m.l},0)`).call(d3.axisLeft(y).ticks(4)).attr('font-size', null).attr('font-family', null);
+  if (base != null) { svg.append('line').attr('x1', m.l).attr('x2', W - m.r).attr('y1', y(base)).attr('y2', y(base)).attr('stroke', 'var(--cds-chart-reference, var(--color-fg-muted))').attr('stroke-dasharray', '4 4'); svg.append('text').attr('x', W - m.r).attr('y', y(base) - 6).attr('text-anchor', 'end').text("today's 3-hinge chain"); }
+  const pts = [...rec, { t: now, g: rec[rec.length - 1].g }].map((p) => ({ t: p.t, g: Math.min(p.g, top) }));
+  svg.append('path').attr('d', d3.line().curve(d3.curveStepAfter).x((p) => x(p.t)).y((p) => y(p.g))(pts)).attr('fill', 'none').attr('stroke', dash.colors[0]).attr('stroke-width', 2).attr('stroke-linejoin', 'round');
+  const last = rec[rec.length - 1]; svg.append('circle').attr('cx', x(last.t)).attr('cy', y(Math.min(last.g, top))).attr('r', 4).attr('fill', dash.colors[0]);
+  svg.append('text').attr('class', 'lbl').attr('x', Math.min(x(last.t) + 8, W - 60)).attr('y', y(Math.min(last.g, top)) + 16).text(g1(last.g));
+}
+
+function drawEvents(ev) {
+  const ul = document.getElementById('events'); ul.replaceChildren();
+  ev.filter((e) => e.event).sort((a, b) => (a.time < b.time ? 1 : -1)).slice(0, 7).forEach((e) => {
+    const li = document.createElement('li'); const t = document.createElement('time'); t.textContent = d3.utcFormat('%H:%M')(new Date(e.time));
+    const s = document.createElement('span'); const txt = String(e.event).replace(/\{[^}]*\}/g, '').replace(/\([^)]*\)/g, '').replace(/\s+/g, ' ').replace(/ at( config \S+)?$/, '').trim(); s.textContent = txt.length > 170 ? txt.slice(0, 167) + '...' : txt;
+    li.append(t, s); ul.appendChild(li);
+  });
+}
+
+function drawReqs(reqs) {
+  const box = document.getElementById('chips'); box.replaceChildren();
+  reqs.filter((r) => r.req).forEach((r) => { const c = document.createElement('span'); c.className = 'chip ' + (r.state === 'pass' ? 'pass' : r.state === 'fail' ? 'fail' : 'none'); c.textContent = `${r.req} ${r.name}`.slice(0, 48); box.appendChild(c); });
+}
+
+dash.onData(() => {
+  const B = dash.data('board'), L = dash.data('leader'), S = dash.data('sweeps'), E = dash.data('events'), R = dash.data('reqs'), RS = dash.data('reqsum'), M = dash.data('morphs');
+  const okd = (d) => d && d.status === 'ok';
+  if (okd(L) && L.data[0] && L.data[0].gap != null) {
+    const l = L.data[0];
+    document.getElementById('lede').textContent = l.delta > 0
+      ? `${l.short} leads at gap ${g1(l.gap)}, ${g1(l.delta)} better than today's 3-hinge chain (${g1(l.base_gap)}). Status: ${l.state.toLowerCase()}. Nothing is near the goal of 0 yet.`
+      : `No design beats today's 3-hinge chain (gap ${g1(l.base_gap)}) yet; the closest is ${l.short} at ${g1(l.gap)}.`;
+  }
+  if (okd(L) && L.data[0]) { const l = L.data[0]; document.querySelector('#kpi-best .big').textContent = l.gap == null ? '—' : g1(l.gap); document.getElementById('kpi-best-name').textContent = l.short ? `${l.short} (${String(l.state).toLowerCase()})` : '—'; }
+  if (okd(M)) { const b = M.data.find((m) => m.is_baseline); document.querySelector('[data-where="id=baseline-3r"]').textContent = b && b.gap != null ? g1(b.gap) : '—'; }
+  if (okd(B)) { const rows = B.data.filter((r) => r.empty !== true); drawScatter(rows); drawBoard(rows); }
+  if (okd(S) && okd(M)) drawRecord(S.data.filter((r) => r.empty !== true), (M.data.find((m) => m.is_baseline) || {}).gap);
+  if (okd(E)) drawEvents(E.data.filter((r) => r.empty !== true));
+  if (okd(R)) drawReqs(R.data.filter((r) => r.empty !== true));
+  if (okd(RS) && RS.data[0]) { const q = RS.data[0]; document.getElementById('reqline').textContent = `${q.pass} of ${q.total} pass on the best judged design (${q.design}). Green = pass, red = fail, dashed = not measured yet.`; }
+});
+</script>

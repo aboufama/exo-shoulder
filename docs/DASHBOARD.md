@@ -211,3 +211,14 @@ and cannot load offline, so the harness renders the serif in a fallback face.
 - `morphs` maps the catalogue status `modelling-interrupted` to `ideated` (with a note), because a partial model file
   is not a modelled morphology. A morphology counts as modelled once its sweep file exists.
 - The time axis is UTC throughout.
+
+## The published page is the one-page summary (user, 2026-10-15: "very confusing ... needs to be very easily digestible")
+
+The artifact now shows `docs/dashboard/simple/index.html` - one page read top to bottom: the leader in one sentence
+and three numbers (best design, today's 3-hinge chain = the bar, the goal 0), "two ways to fail" (each design as a dot:
+moves with the arm vs stays 2-14 mm from the skin, the goal corner), the leaderboard (gap, close-to-skin / follows /
+reaches meters against their targets, status: checking / verified / sweeping / dead end) with a plain-words glossary of
+the joint names, the best gap over time, the latest events and the built prototype's 19 requirements as chips. It
+reads only four datasets (morphs, sweeps, events, reqs; the calcs board / leader / reqsum are defined in the page).
+The detailed multi-tab page above (docs/dashboard/*.js) stays in the repo for deeper dives; it is not published.
+Refresh: the lead's watchdog runs tools/dash_build.py and uploads only those four datasets when their sha256 changes.
