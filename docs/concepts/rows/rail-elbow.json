@@ -111,7 +111,21 @@
     "neck": 0.6846
    }
   },
-  "at_k2221": 51.33
+  "at_k2221": 51.33,
+  "big_at_k1530": {
+   "bench": "Bench(110,360) exact, K6 1 mm radial, frozen from (60,160) exact",
+   "gap": 60.03,
+   "score": 78.17,
+   "reach": 0.8167,
+   "follow": 1.0,
+   "inband14": 0.3928,
+   "inband10": 0.2257,
+   "contact": 0.0098,
+   "closure": 0.8766,
+   "collide": 0.0097,
+   "honest": true,
+   "fit_60_160_exact": 51.99
+  }
  },
  "variant_rigid_rail": {
   "k": 1841,

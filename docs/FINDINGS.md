@@ -464,6 +464,9 @@ The rail stages stayed 0 % in band through all of it; the whole gain was the arm
   - Axes: b az 0.65 el 76.82, a1 80.71, a2 62.93, W (93.82, -4.20), sigma -1.
   - reach 0.888, follow 1.0, in-band 14 0.393, contact 0.
 * At every rail-elbow axis set the hub beats the rail by 4-5 points.
+* On the large bench (Bench(110,360), exact, 1 mm radial, geometry frozen from (60,160)), the 3R at these axes scores
+  **60.03**. The champion scores 75.94 and the rail-elbow 64.52 at the same axes.
+* At the rail's other basin (k2221), the 3R scores 51.33 on Bench(60,160).
 * Two lessons:
   - A concept's bench gain must be checked against the champion topology at the concept's own axes before it is
     credited to the morphology.

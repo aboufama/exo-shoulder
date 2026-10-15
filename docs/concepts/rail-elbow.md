@@ -371,7 +371,17 @@ collapsed at **k2221: gap 56.25 (score 79.55)**, honest, audit clean, r_lay 127 
   closure 0.877, K6 0.2 %, honest.
 * Refit: 97.53, degenerate (q 1.0 with no-clearance poses, dishonest sampling).
 * That is 11.4 points ahead of the champion's 75.94 on the same bench and checks. k2221's large-bench run was not made
-  (the morphology is refuted by the control); the 3R control at k1530's axes on the large bench is in the farm queue.
+  (the morphology is refuted by the control).
+
+**The 3R control at k1530's axes on the same large bench** (farm, `_template.py`, q 1.0, exact, 1 mm radial):
+* (60,160) exact fit: 51.99.
+* **Frozen on Bench(110,360): 60.03** (score 78.17). reach 0.817, follow 1.000, in-band 14 0.393, in-band 10 0.226,
+  contact 0.010, closure 0.877, K6 1.0 %, honest. Per member: hub 3 0.76, neck 0.68, link 1 0.32, link 2 0.06, hub 2
+  0.00.
+* Refit: 90.96, degenerate (q 1.0 with no-clearance poses).
+
+Against the rail-elbow at the same axes (64.52) and the champion (75.94), all on the same large bench and checks: the
+plain 3R at the new axes is the best number this bench has measured for a 3-DOF chain.
 
 ### Verdict (stage 1)
 
