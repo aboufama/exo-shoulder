@@ -43,12 +43,12 @@
   {
    "k": 3,
    "group": "H",
-   "name": "D6-04 arm end: J3 pad + pin + S-strap, twist, tongue in BOTTOM's channel (Ti-6Al-4V)",
-   "vol_cm3": 3.99,
-   "material": "Ti-6Al-4V",
-   "mass_g": 17.67,
+   "name": "D6-04 BOTTOM + arm end, one 5-axis part (user's bar cut at s 255, strap fused into its channel; 7075-T6)",
+   "vol_cm3": 28.086,
+   "material": "7075-T6 (BOTTOM merged with the arm end)",
+   "mass_g": 78.92,
    "valid": true,
-   "faces": 54,
+   "faces": 155,
    "solids": 1
   },
   {
@@ -262,17 +262,6 @@
   },
   {
    "k": 23,
-   "group": "H",
-   "name": "BOTTOM (user's bar, cut at s 255, 2x M3 countersunk for the arm-end tongue)",
-   "vol_cm3": 24.287,
-   "material": "user part",
-   "mass_g": null,
-   "valid": true,
-   "faces": 103,
-   "solids": 1
-  },
-  {
-   "k": 24,
    "group": "F",
    "name": "FOREARM CUFF",
    "vol_cm3": 114.9,
@@ -283,7 +272,7 @@
    "solids": 1
   },
   {
-   "k": 25,
+   "k": 24,
    "group": "F",
    "name": "Hex socket head countersunk screw grade C M4x0.7 x 8",
    "vol_cm3": 0.139,
@@ -294,7 +283,7 @@
    "solids": 1
   },
   {
-   "k": 26,
+   "k": 25,
    "group": "H",
    "name": "TOP",
    "vol_cm3": 2.159,
@@ -302,6 +291,17 @@
    "mass_g": null,
    "valid": true,
    "faces": 17,
+   "solids": 1
+  },
+  {
+   "k": 26,
+   "group": "F",
+   "name": "Hex socket head countersunk screw grade C M4x0.7 x 8",
+   "vol_cm3": 0.139,
+   "material": "user part",
+   "mass_g": null,
+   "valid": true,
+   "faces": 20,
    "solids": 1
   },
   {
@@ -317,17 +317,6 @@
   },
   {
    "k": 28,
-   "group": "F",
-   "name": "Hex socket head countersunk screw grade C M4x0.7 x 8",
-   "vol_cm3": 0.139,
-   "material": "user part",
-   "mass_g": null,
-   "valid": true,
-   "faces": 20,
-   "solids": 1
-  },
-  {
-   "k": 29,
    "group": "H",
    "name": "M4 ULTRA LOW PROFILE SOCKET HEAD SCREW, 6mm L, HS STEEL",
    "vol_cm3": 0.106,
@@ -338,7 +327,7 @@
    "solids": 1
   },
   {
-   "k": 30,
+   "k": 29,
    "group": "H",
    "name": "IGUS THRUST WASHER, 30mm ID, 39mm OD, 1.5mm T, IGLIDE J",
    "vol_cm3": 0.727,
@@ -349,7 +338,7 @@
    "solids": 1
   },
   {
-   "k": 31,
+   "k": 30,
    "group": "F",
    "name": "MIDDLE",
    "vol_cm3": 12.203,
@@ -360,7 +349,7 @@
    "solids": 1
   },
   {
-   "k": 32,
+   "k": 31,
    "group": "H",
    "name": "IGUS THRUST WASHER, 30mm ID, 39mm OD, 1.5mm T, IGLIDE J",
    "vol_cm3": 0.727,
@@ -368,6 +357,17 @@
    "mass_g": null,
    "valid": true,
    "faces": 4,
+   "solids": 1
+  },
+  {
+   "k": 32,
+   "group": "F",
+   "name": "Hex socket head countersunk screw grade C M4x0.7 x 8",
+   "vol_cm3": 0.139,
+   "material": "user part",
+   "mass_g": null,
+   "valid": true,
+   "faces": 20,
    "solids": 1
   },
   {
@@ -394,17 +394,6 @@
   },
   {
    "k": 35,
-   "group": "F",
-   "name": "Hex socket head countersunk screw grade C M4x0.7 x 8",
-   "vol_cm3": 0.139,
-   "material": "user part",
-   "mass_g": null,
-   "valid": true,
-   "faces": 20,
-   "solids": 1
-  },
-  {
-   "k": 36,
    "group": "H",
    "name": "5mm D, 2.5mm H, N42 MAGNET",
    "vol_cm3": 0.048,
@@ -415,7 +404,7 @@
    "solids": 1
   },
   {
-   "k": 37,
+   "k": 36,
    "group": "H",
    "name": "M4 ULTRA LOW PROFILE SOCKET HEAD SCREW, 6mm L, HS STEEL",
    "vol_cm3": 0.106,
@@ -426,7 +415,7 @@
    "solids": 1
   },
   {
-   "k": 38,
+   "k": 37,
    "group": "H",
    "name": "CirPattern1[15]",
    "vol_cm3": 0.007,
@@ -437,7 +426,7 @@
    "solids": 1
   },
   {
-   "k": 39,
+   "k": 38,
    "group": "H",
    "name": "Revolve1[2]",
    "vol_cm3": 0.042,
@@ -448,7 +437,7 @@
    "solids": 1
   },
   {
-   "k": 40,
+   "k": 39,
    "group": "H",
    "name": "CirPattern1[11]",
    "vol_cm3": 0.007,
@@ -459,7 +448,7 @@
    "solids": 1
   },
   {
-   "k": 41,
+   "k": 40,
    "group": "H",
    "name": "Revolve4",
    "vol_cm3": 0.007,
@@ -470,7 +459,7 @@
    "solids": 1
   },
   {
-   "k": 42,
+   "k": 41,
    "group": "H",
    "name": "CirPattern1[5]",
    "vol_cm3": 0.007,
@@ -481,7 +470,7 @@
    "solids": 1
   },
   {
-   "k": 43,
+   "k": 42,
    "group": "H",
    "name": "Revolve1[1]",
    "vol_cm3": 0.274,
@@ -492,7 +481,7 @@
    "solids": 1
   },
   {
-   "k": 44,
+   "k": 43,
    "group": "H",
    "name": "CirPattern1[7]",
    "vol_cm3": 0.007,
@@ -503,7 +492,7 @@
    "solids": 1
   },
   {
-   "k": 45,
+   "k": 44,
    "group": "H",
    "name": "CirPattern1[16]",
    "vol_cm3": 0.007,
@@ -514,7 +503,7 @@
    "solids": 1
   },
   {
-   "k": 46,
+   "k": 45,
    "group": "H",
    "name": "CirPattern1[12]",
    "vol_cm3": 0.007,
@@ -525,7 +514,7 @@
    "solids": 1
   },
   {
-   "k": 47,
+   "k": 46,
    "group": "H",
    "name": "CirPattern1[14]",
    "vol_cm3": 0.007,
@@ -536,7 +525,7 @@
    "solids": 1
   },
   {
-   "k": 48,
+   "k": 47,
    "group": "H",
    "name": "CirPattern1[8]",
    "vol_cm3": 0.007,
@@ -547,7 +536,7 @@
    "solids": 1
   },
   {
-   "k": 49,
+   "k": 48,
    "group": "H",
    "name": "CirPattern1[10]",
    "vol_cm3": 0.007,
@@ -558,7 +547,7 @@
    "solids": 1
   },
   {
-   "k": 50,
+   "k": 49,
    "group": "H",
    "name": "CirPattern1[4]",
    "vol_cm3": 0.007,
@@ -569,7 +558,7 @@
    "solids": 1
   },
   {
-   "k": 51,
+   "k": 50,
    "group": "H",
    "name": "Revolve3",
    "vol_cm3": 0.219,
@@ -580,7 +569,7 @@
    "solids": 1
   },
   {
-   "k": 52,
+   "k": 51,
    "group": "H",
    "name": "CirPattern1[2]",
    "vol_cm3": 0.007,
@@ -591,7 +580,7 @@
    "solids": 1
   },
   {
-   "k": 53,
+   "k": 52,
    "group": "H",
    "name": "CirPattern1[9]",
    "vol_cm3": 0.007,
@@ -602,7 +591,7 @@
    "solids": 1
   },
   {
-   "k": 54,
+   "k": 53,
    "group": "H",
    "name": "Revolve1[3]",
    "vol_cm3": 0.042,
@@ -613,7 +602,7 @@
    "solids": 1
   },
   {
-   "k": 55,
+   "k": 54,
    "group": "H",
    "name": "CirPattern1[1]",
    "vol_cm3": 0.007,
@@ -624,7 +613,7 @@
    "solids": 1
   },
   {
-   "k": 56,
+   "k": 55,
    "group": "H",
    "name": "CirPattern1[6]",
    "vol_cm3": 0.007,
@@ -635,7 +624,7 @@
    "solids": 1
   },
   {
-   "k": 57,
+   "k": 56,
    "group": "H",
    "name": "CirPattern1[3]",
    "vol_cm3": 0.007,
@@ -646,7 +635,7 @@
    "solids": 1
   },
   {
-   "k": 58,
+   "k": 57,
    "group": "H",
    "name": "CirPattern1[17]",
    "vol_cm3": 0.007,
@@ -657,7 +646,7 @@
    "solids": 1
   },
   {
-   "k": 59,
+   "k": 58,
    "group": "H",
    "name": "CirPattern1[13]",
    "vol_cm3": 0.007,
@@ -668,21 +657,32 @@
    "solids": 1
   },
   {
-   "k": 60,
+   "k": 59,
    "group": "H",
-   "name": "UPPER ARM CUFF (conformal G2 shell, AlSi10Mg bead blasted)",
-   "vol_cm3": 15.223,
+   "name": "UPPER ARM CUFF (lines and arcs: flat land + inner R arc + outer arc, extruded; AlSi10Mg bead blasted)",
+   "vol_cm3": 42.368,
    "material": "user part",
    "mass_g": null,
    "valid": true,
-   "faces": 17,
+   "faces": 50,
+   "solids": 1
+  },
+  {
+   "k": 60,
+   "group": "H",
+   "name": "M4x6 ISO 10642 countersunk (upper cuff), polished",
+   "vol_cm3": 0.106,
+   "material": "user part",
+   "mass_g": null,
+   "valid": true,
+   "faces": 4,
    "solids": 1
   },
   {
    "k": 61,
    "group": "H",
-   "name": "M4x6 ISO 10642 countersunk (upper cuff)",
-   "vol_cm3": 0.129,
+   "name": "M4x6 ISO 10642 countersunk (upper cuff), polished",
+   "vol_cm3": 0.106,
    "material": "user part",
    "mass_g": null,
    "valid": true,
@@ -692,8 +692,8 @@
   {
    "k": 62,
    "group": "H",
-   "name": "M4x6 ISO 10642 countersunk (upper cuff)",
-   "vol_cm3": 0.129,
+   "name": "M4x6 ISO 10642 countersunk (upper cuff), polished",
+   "vol_cm3": 0.106,
    "material": "user part",
    "mass_g": null,
    "valid": true,
@@ -703,8 +703,8 @@
   {
    "k": 63,
    "group": "H",
-   "name": "M4x6 ISO 10642 countersunk (upper cuff)",
-   "vol_cm3": 0.129,
+   "name": "M4x6 ISO 10642 countersunk (upper cuff), polished",
+   "vol_cm3": 0.106,
    "material": "user part",
    "mass_g": null,
    "valid": true,
@@ -714,8 +714,8 @@
   {
    "k": 64,
    "group": "H",
-   "name": "M4x6 ISO 10642 countersunk (upper cuff)",
-   "vol_cm3": 0.129,
+   "name": "M4x6 ISO 10642 countersunk (upper cuff), polished",
+   "vol_cm3": 0.106,
    "material": "user part",
    "mass_g": null,
    "valid": true,
@@ -725,19 +725,8 @@
   {
    "k": 65,
    "group": "H",
-   "name": "M4x6 ISO 10642 countersunk (upper cuff)",
-   "vol_cm3": 0.129,
-   "material": "user part",
-   "mass_g": null,
-   "valid": true,
-   "faces": 4,
-   "solids": 1
-  },
-  {
-   "k": 66,
-   "group": "H",
-   "name": "M4x6 ISO 10642 countersunk (upper cuff)",
-   "vol_cm3": 0.129,
+   "name": "M4x6 ISO 10642 countersunk (upper cuff), polished",
+   "vol_cm3": 0.106,
    "material": "user part",
    "mass_g": null,
    "valid": true,
