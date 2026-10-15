@@ -2,14 +2,17 @@
  * models/cam-coupled-4r.py; modelling interrupted, no sweep yet: the model's defaults). The r13 4R axes with every
  * arc >= 35 deg; link 2 carries a short tail (tail_r 30 deg, straight back past J2) whose roller pin runs in a circular
  * slot on an S-fixed plate. The slot is the small circle through the pin at three key poses (rest / overhead / behind
- * the back) at the J1 angles `keys` (pin representation: azimuth of p2 about p1). Mobility 3 x 4 - 2 x 4 - 1 = 3:
+ * the back) at the J1 angles `keys` (pin representation: azimuth of p2 about p1). The model's default keys build the
+ * slot through unassembled configurations; keys [-120, -66, 150] on mode -1 are the best of a 1728-point scan on the
+ * loop with NO branch flip (a flip-tolerant slot closes more frames but snaps through overhead / behind the back: the
+ * catalogue's main risk, one schedule for both, measured here). Mobility 3 x 4 - 2 x 4 - 1 = 3:
  * J1, J3, J4 ACTIVE; J2, the pin's slide and its roll PASSIVE, set by the slot. Closed form = the model's IK: a 1-D
  * root scan of G(theta) = pi . n_s - cos beta_s over the J1 azimuth, bisection, root on the design's mode (sign of
  * dG/dtheta) nearest the previous frame. Joint values are measured from the rest pose. Hub faces are schematic. */
 (function () {
   const K = (typeof window !== 'undefined' ? window : globalThis).KIN, V = K.V, M = K.M;
   const P = { az: 61.04, el: 57.77, a: [35.0, 56.13, 35.0], w: [84.08, -10.84], branch: -1, tail_r: 30, tail_phi: 180,
-              keys: [-170, -170, 60], sigma: 1, pa_min: 0.25, hold_min: 0.1, sing: 10,
+              keys: [-120, -66, 150], sigma: -1, pa_min: 0.25, hold_min: 0.1, sing: 10,
               faces: [55, 64, 70, 66], hub_r: 10, stack: 12.25, pin_r: 5, slot_w: 14, neck_deg: 25, cuff_at: 165 };
   const p1 = K.bvec(P.az, P.el), W0 = K.wdir(P.w[0], P.w[1]), e = V.unit(V.cross(p1, [0, 1, 0]));
   /** pin-representation state for J1 azimuth th (deg) and arm axis p4 (scapula frame) */
