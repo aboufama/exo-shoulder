@@ -95,6 +95,26 @@ def _level(B, name):
     lk = B._kit_last; return float(lk["prof"][name].max())
 
 
+def park_check(B, lim=140.0, free=25.0):
+    """the swarm's parking rule: every joint part's level <= ~140 mm from GH, and >= 25 mm free above it (dist >= 0 on
+    the axis-parallel line from its level F to F + 25 through its centre - for the ring 8 points on the pitch circle)
+    in every taken pose. Returns park (name: [level, min dist on the line]) and park_ok."""
+    lk = B._kit_last; ch, prof, take = lk["chain"], lk["prof"], lk["take"]; Ti = np.nonzero(take)[0]; out = {}; good = True
+    if not len(Ti): return dict(park={}, park_ok=False)
+    for m in ch.members:
+        if m.kind != "flat": continue
+        F = float(prof[m.name].max()); kk = m.K[Ti]; rad = max(0.0, float(np.median(np.linalg.norm(m.xy, axis=1))) if m.name.startswith("ring") else 0.0)
+        ang = np.linspace(0, 2 * np.pi, 8, endpoint=False) if rad > 0 else np.zeros(1)
+        t = np.arange(F, F + free + 1e-6, 1.0); pts = []
+        for g in ang:
+            c = rad * (np.cos(g) * m.A[Ti] + np.sin(g) * m.Bv[Ti])
+            pts.append(c[:, None, :] + t[None, :, None] * kk[:, None, :])
+        X = np.concatenate(pts, 1); I = np.repeat(Ti, X.shape[1])
+        d = K.dist_many(B, I, X.reshape(-1, 3)); dmin = float(d.min())
+        out[m.name] = [round(F, 1), round(dmin, 2)]; good &= (F <= lim) and dmin >= 0
+    return dict(park=out, park_ok=bool(good))
+
+
 def bench_eval(B, params, verbose=False):
     """two passes when J1 is a ring: the lug root of link 1 is placed at the ring's FITTED level (pass 1 -> h1)"""
     p = dict(PARAMS, **params)
@@ -106,6 +126,7 @@ def bench_eval(B, params, verbose=False):
         r["h1_used"] = p["h1"]; r["ring1_F"] = round(_level(B, "ring1"), 1)
     prof = B._kit_last["prof"]
     r["levels"] = {k: round(float(v.max()), 1) for k, v in prof.items()}
+    r.update(park_check(B))
     r = json.loads(json.dumps(r, default=lambda o: o.tolist() if hasattr(o, "tolist") else str(o)))
     if verbose: print(json.dumps({k: r[k] for k in r if k not in ("sample_mm",)}))
     return r
