@@ -102,3 +102,23 @@ carriage outside C, 12 contact, 2 part-part; clip 11 / 3 / 2.
 
 Model: `docs/concepts/models/seed-2r-cring.py` (`check`, `sweep2`, `refine`, `refine2`); sweep:
 `docs/concepts/sweeps/seed-2r-cring.json`; row: `docs/concepts/rows/seed-2r-cring.json`.
+
+## Audit (2026-10-15T19:25:00Z)
+
+Verdict: **the death stands** (not refuted). Re-measured on Bench(60,160), fast grid, PARAMS = sweep entry 8.
+
+* Reproduced exactly: gap 129.98 (reach 0.4437, follow 0.7333, in-band 14 0.3886, in-band 10 0.2552, contact 0.1154),
+  closure 0.61, 0 flips, part-part 0.03. Per member in-band 14: link 2 0.73, link 1 0.50, track 0.13, hubs 0.06 / 0.11,
+  carriage 0.00.
+* Code checked against tools/concept_baseline.py and the kit: two-cone closure and residual are the kit's; the
+  carriage azimuth = p2's azimuth round d3 + a constant is correct kinematics (link 2 carries both p2 and the carriage);
+  the track-radius march stops at the first clear radius (does not punch through the torso), so it does not inflate R;
+  the carriage counted as skin-facing metal follows the baseline's convention for stacked members; the outer-face torso
+  check is a real-size check, not an over-strict one. No bug found.
+* Ablation that isolates the limiter: the same config with the C covering all of the travel (cov 1.0) needs track
+  R 94.7 mm and gives gap 325.24 (reach 0.12, follow 0.07, contact 0.85, track in band 0.01). Short C loses ~40% of
+  closing poses to "carriage outside the C"; long C floats far from the arm and runs into the torso. No point of the
+  cov axis comes near 79.
+* One-line reason: a circular, humerus-fixed track round GH must cover ~222 deg of carriage travel but fits the arm
+  only over its lateral +-60 deg, so coverage and proximity cannot both be met (measured: cov 0.6 -> 129.98,
+  cov 1.0 -> 325.24).

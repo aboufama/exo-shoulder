@@ -14,11 +14,11 @@
  "inband10": 0.2552,
  "contact": 0.1154,
  "gap": 129.98,
- "v_reach": null,
- "v_follow": null,
- "v_inband14": null,
- "v_inband10": null,
- "v_gap": null,
+ "v_reach": 0.4437,
+ "v_follow": 0.7333,
+ "v_inband14": 0.3886,
+ "v_inband10": 0.2552,
+ "v_gap": 129.98,
  "n_configs": 25,
  "verdict": "dead: gap 129.98 vs 68.93 for the spherical 3R on the same bench (25 configurations); not worth a GPU sweep - the limiter is structural: the C-track's carriage must travel ~220 deg round the arm (axial rotation turns p2's azimuth 1:1) but a circular track about any GH-through humerus-fixed axis hugs the arm only over its lateral +-60 deg",
  "note": "best = sweep entry 8; Bench(60,160) fast grid cache, kit conventions (march, K2 dense, K6 + by-construction track/carriage/slide), audit clean; branch sigma -1 essential (sigma +1: links 0 in band); red team: rest taken 2.7 mm, overhead contact hub1 -6.0 mm, abd75+ext90 / int90 jam (carriage outside C), across-body taken 5.5 mm, behind-back taken 1.3 mm; pinches link2 0.26 mm, track 0.31 mm; cam-track variant indicative only (track in-band 0.88, contact in most poses); baseline 3R 68.93",
@@ -63,7 +63,20 @@
   "collide": true,
   "q": 0.95
  },
- "audit": [],
+ "audit": {
+  "t": "2026-10-15T19:25:00Z",
+  "refuted": false,
+  "v_contact": 0.1154,
+  "cov1_ablation": {
+   "gap": 325.24,
+   "reach": 0.1187,
+   "follow": 0.0667,
+   "inband14": 0.1648,
+   "contact": 0.8526,
+   "ring_R": 94.67
+  },
+  "reason": "reproduced 129.98 exactly on Bench(60,160); no modelling bug or convention mismatch found; full-travel C needs R 94.7 mm and gives contact 0.85 (gap 325) - circular track cannot both cover the axial travel and hug the arm"
+ },
  "hubless": [
   "J3"
  ]
