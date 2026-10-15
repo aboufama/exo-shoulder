@@ -67,7 +67,7 @@
       const neckA = V.madd(V.scale(f.d3, s + hw + 4), f.shoe, P.rho + 4), neckB = V.madd(V.scale(f.d3, P.neck_to - 12), f.shoe, 49);
       return [
         { kind: 'plate', role: 'fixed-scapula', name: 'bracket (anterior acromion)', c: V.scale(f.a1, P.R1 - 3), z: f.a1, x: ctx.attach.scapDir([1, 0, 0]), size: [44, 40], t: 3 },
-        { kind: 'ring', role: 'active', name: 'J1 donut (KAA10)', c: V.scale(f.a1, P.R1 + P.donut_t / 2), axis: f.a1, r: P.donut_r, w: 9.5, t: P.donut_t },
+        { kind: 'ring', role: 'active', name: 'J1 donut (KAA10)', c: V.scale(f.a1, P.R1 + P.donut_t / 2), axis: f.a1, r: P.donut_r, w: 9.5, h: P.donut_t, t: P.donut_t / 2 },
         { kind: 'link', role: 'link', name: 'rail root (on the J1 rotor)', a: rootA, b: rootB, r: 3 },
         { kind: 'rail', role: 'link', name: 'J2 arc rail (cradle about virtual a2)', c: V.scale(f.a2, P.side * ca * P.Rr), axis: f.a2, ref: f.a1, rho: sa * P.Rr, a0: lo, a1: hi, r: 3, w: 6 },
         { kind: 'point', role: 'link', name: 'virtual J2 axis a2 (no hub)', p: V.scale(f.a2, P.side * 40), r: 2 },

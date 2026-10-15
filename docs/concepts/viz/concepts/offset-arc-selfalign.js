@@ -79,7 +79,7 @@
       const zA = P.lam + 3.5, zC = zA + 3;
       return [
         { kind: 'plate', role: 'fixed-scapula', name: 'base', c: Wp(V.add(o1, V.scale(b, P.z1 - 2))), z: Wd(b), x: Wd([1, 0, 0]), size: [58, 58], t: 2 },
-        { kind: 'ring', role: 'active', name: 'J1 thin-section ring (offset line)', c: Wp(V.add(o1, V.scale(b, P.z1 + P.ring[2] / 2))), axis: Wd(b), r: (P.ring[0] + P.ring[1]) / 2, w: P.ring[1] - P.ring[0], t: P.ring[2] },
+        { kind: 'ring', role: 'active', name: 'J1 thin-section ring (offset line)', c: Wp(V.add(o1, V.scale(b, P.z1 + P.ring[2] / 2))), axis: Wd(b), r: (P.ring[0] + P.ring[1]) / 2, w: P.ring[1] - P.ring[0], h: P.ring[2], t: (P.ring[1] - P.ring[0]) / 2 },
         { kind: 'link', role: 'link', name: 'L1 post (ring upper race to the guide)', a: Wp(ap(X1, V.add(ringTop, V.scale(m1, P.ring[1] - 4)))), b: Wp(ap(X1, V.sub(gc, V.scale(uG, P.guide[2] / 2)))), r: 3.5 },
         { kind: 'carriage', role: 'active', name: 'J2 guide (L1): the band slides through it', c: Wp(ap(X1, gc)), x: Wd(M.mulv(X1[0], tG)), z: Wd(M.mulv(X1[0], uG)), size: P.guide },
         { kind: 'rail', role: 'link', name: 'band (L2): circle about the offset J2 line', c: Wp(ap(X2, V.add(o2, V.scale(p2, za)))), axis: Wd(M.mulv(X2[0], p2)),

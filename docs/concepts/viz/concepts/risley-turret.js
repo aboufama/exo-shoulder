@@ -35,7 +35,7 @@
       const r2 = P.j2hub ? P.hub_r : P.r_out, h2 = P.j2hub ? P.h2 - 10.5 : P.h2;
       const ring2 = P.j2hub
         ? { kind: 'hub', role: 'active', name: 'J2 hub (k42 subtype)', c: V.scale(f.p2, h2), axis: f.p2, r: P.hub_r, h }
-        : { kind: 'ring', role: 'active', name: 'J2 ring', c: V.scale(f.p2, h2 + P.ring_h / 2), axis: f.p2, r: rm, w: P.r_out - P.r_in, t: P.ring_h };
+        : { kind: 'ring', role: 'active', name: 'J2 ring', c: V.scale(f.p2, h2 + P.ring_h / 2), axis: f.p2, r: rm, w: P.r_out - P.r_in, h: P.ring_h, t: Math.max(P.r_out - P.r_in, P.ring_h) / 2 };
       const bridgeA = lug(f.p1, P.h1 + P.ring_h * 0.75, f.p2, P.r_out + 2);          // J1 upper race, toward p2
       const bridgeB = lug(f.p2, h2 + 2, f.p1, r2 + 2);                               // J2 lower race, toward b
       const l2From = lug(f.p2, h2 + (P.j2hub ? h : P.ring_h / 2), f.p3, r2 + 2);     // J2 upper race lug, toward W
@@ -45,7 +45,7 @@
       const cuffTop = V.madd(cuffC, V.unit(V.reject(neckEnd, harm)), 47);
       return [
         { kind: 'plate', role: 'fixed-scapula', name: 'base (J1 lower race)', c: V.scale(f.p1, P.h1 - 2), z: f.p1, x: ctx.attach.scapDir([1, 0, 0]), size: [56, 56], t: 2 },
-        { kind: 'ring', role: 'active', name: 'J1 ring', c: V.scale(f.p1, P.h1 + P.ring_h / 2), axis: f.p1, r: rm, w: P.r_out - P.r_in, t: P.ring_h },
+        { kind: 'ring', role: 'active', name: 'J1 ring', c: V.scale(f.p1, P.h1 + P.ring_h / 2), axis: f.p1, r: rm, w: P.r_out - P.r_in, h: P.ring_h, t: Math.max(P.r_out - P.r_in, P.ring_h) / 2 },
         { kind: 'link', role: 'link', name: 'L1 bridge (J1 upper race to J2 lower race)', a: bridgeA, b: bridgeB, r: 3 },
         ring2,
         { kind: 'arc', role: 'link', name: 'link 2 (ring-2 lug to J3)', pts: K.greatArc(l2From, f.p3, V.norm(l2From), P.F3 + h + 1), r: 2.5 },

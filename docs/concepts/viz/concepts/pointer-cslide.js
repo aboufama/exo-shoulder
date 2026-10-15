@@ -65,9 +65,9 @@
       const neckA = V.madd(V.scale(f.d3, s + hw + 4), f.shoe, P.rho + 4), neckB = V.madd(V.scale(f.d3, P.neck_to - 12), f.shoe, 49);
       return [
         { kind: 'plate', role: 'fixed-scapula', name: 'bracket (anterior acromion)', c: V.scale(f.a1, P.R1 - 3), z: f.a1, x: ctx.attach.scapDir([1, 0, 0]), size: [44, 40], t: 3 },
-        { kind: 'ring', role: 'active', name: 'J1 donut (KAA10)', c: V.scale(f.a1, P.R1 + P.donut_t / 2), axis: f.a1, r: P.donut_r, w: 9.5, t: P.donut_t },
+        { kind: 'ring', role: 'active', name: 'J1 donut (KAA10)', c: V.scale(f.a1, P.R1 + P.donut_t / 2), axis: f.a1, r: P.donut_r, w: 9.5, h: P.donut_t, t: P.donut_t / 2 },
         { kind: 'arc', role: 'link', name: 'link 1 (90 deg)', u: f.a1, v: f.p2, r0: P.R1 + P.donut_t, r1: P.R2, r: 2.5 },
-        { kind: 'ring', role: 'active', name: 'J2 donut (KAA10)', c: V.scale(f.p2, P.R2 + P.donut_t / 2), axis: f.p2, r: P.donut_r, w: 9.5, t: P.donut_t },
+        { kind: 'ring', role: 'active', name: 'J2 donut (KAA10)', c: V.scale(f.p2, P.R2 + P.donut_t / 2), axis: f.p2, r: P.donut_r, w: 9.5, h: P.donut_t, t: P.donut_t / 2 },
         { kind: 'arc', role: 'link', name: 'link 2 (pointing link)', pts: K.greatArc(f.p2, att, P.R2 + P.donut_t, V.norm(att)), r: 2.5 },
         { kind: 'rail', role: 'link', name: 'C-rail (wire-race band on link 2)', c: V.scale(f.d3, s), axis: f.d3, ref: f.xP, rho: rB + P.band_t / 2, a0: lo, a1: hi, r: 3, w: P.band_w },
         { kind: 'carriage', role: 'active', name: 'J3 shoe (arm-fixed)', c: shoeC, x: tang, z: f.shoe, size: [P.Ls * K.D2R * P.rho, 16, 10] },
