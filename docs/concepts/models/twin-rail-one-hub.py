@@ -71,6 +71,7 @@ def travel(B, p):
     """design step: carriage travel (deg about each virtual axis) over the closing bench poses, central share cov"""
     key = tuple(round(float(p[k]), 6) for k in ("az1", "el1", "a12", "wd", "wa", "a23", "sigma", "margin", "cov"))
     if key in _TRAVEL: return _TRAVEL[key]
+    p = dict(p, cov=float(min(1.0, max(0.5, p["cov"]))))
     FA = getattr(B, "_kitF", None) or K.frames(B); B._kitF = FA
     k = kin(FA, p); ok = k["ok"]; out = {}
     for n in ("q1", "q3"):
@@ -128,7 +129,7 @@ def build(B, F, p):
     ar1 = (p["a12"] + p["d1"]) * D2R; ar3 = p["ar3"] * D2R
     e1 = K.unit(a2 - (a2 * a1).sum(-1, keepdims=True) * a1); e3 = K.unit(a2 - (a2 * a3).sum(-1, keepdims=True) * a3)
     c1 = np.cos(ar1) * a1 + np.sin(ar1) * e1; c3 = np.cos(ar3) * a3 + np.sin(ar3) * e3
-    R1, R3, W1, W3, Lc = p["R1"], p["R3"], p["W1"], p["W3"], p["Lc"]
+    R1, R3, W1, W3, Lc = p["R1"], p["R3"], p["W1"], p["W3"], max(24.0, p["Lc"])   # shoe >= 24 mm (2 rows of 3 mm balls)
     r1L = K.unit(np.cross(k["a1L"], [0.0, 0.0, 1.0]) + 1e-9); r3L = K.unit(np.cross(k["a3L"], [1.0, 0.0, 0.0]) + 1e-9)
     rail1, _, _, span1 = rail("rail1", F.S, k["a1L"], r1L, ar1, T["q1"], R1, W1, Lc, "C1")
     # arm rail: the neck tab at the end nearest BOTTOM's bar start
@@ -149,9 +150,9 @@ def build(B, F, p):
                            over=[("rail1", ROOF + 1.0)] if p.get("l2over", 1) else [])
     neck = K.neck_member(F, F.HG(tab_end), joints=("N3",))
     q = np.stack([k["q1"], k["q2"], k["q3"]], -1)
-    # a rail is an OPEN arc (it needs a gap for its mount) and a shoe cannot wrap more than a quarter of its circle
+    # a rail is an OPEN arc (it needs a gap for its mount) and a shoe cannot wrap more than a third of its circle
     span_bad = ((span1[1] - span1[0]) / D2R > 330 or (span3[1] - span3[0]) / D2R > 330 or
-                Lc / (R1 * math.sin(ar1)) / D2R > 90 or Lc / (R3 * math.sin(ar3)) / D2R > 90)
+                Lc / (R1 * math.sin(ar1)) / D2R > 120 or Lc / (R3 * math.sin(ar3)) / D2R > 120)
     if span_bad: ok = np.zeros_like(ok)
     res = K.closure_residual(a1, a3, a2, p["a12"], p["a23"])
     info = dict(residual_deg=round(float(res[ok].max()), 5) if ok.any() else None,
@@ -204,8 +205,18 @@ def park(B):
 
 
 def evaluate(B, p, **kw):
-    """-> (params, report): the kit report + the parking rule (tools/concept_cma.py contract)"""
-    p = dict(PARAMS, **p); r = K.evaluate(B, build, p, **kw); r.update(park(B)); return p, r
+    """-> (params, report): the kit report + the parking rule (tools/concept_cma.py contract). The rails' layout radii
+    R1 / R3 are a fix point: set to the lowest fitted row of each rail (at most 2 re-runs), so the band is never laid
+    out at a radius above its real one (that would make it narrower than W and its end stops shorter: optimistic)."""
+    p = dict(PARAMS, **p); it = []
+    for n in range(3):
+        r = K.evaluate(B, build, p, **kw); prof = B._kit_last["prof"]
+        f1, f3 = float(np.min(prof["rail1"])), float(np.min(prof["rail3"])); it.append((p["R1"], round(f1, 1), p["R3"], round(f3, 1)))
+        if (p["R1"] <= f1 + 1.0 and p["R1"] >= f1 - 4.0 and p["R3"] <= f3 + 1.0 and p["R3"] >= f3 - 4.0) or n == 2 or f1 > 300 or f3 > 300: break
+        p = dict(p, R1=float(np.clip(math.floor(f1), 30, 300)), R3=float(np.clip(math.floor(f3), 30, 300)))
+    r.update(park(B)); r["layout_iter"] = it
+    r["layout_ok"] = bool(p["R1"] <= it[-1][1] + 1.0 and p["R3"] <= it[-1][3] + 1.0)
+    return p, r
 
 
 def bench_eval(B, p):
