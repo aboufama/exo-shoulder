@@ -134,3 +134,43 @@ An independent audit on Bench(60,160) with the fast grid cache, using the same m
   At o = 0 this is still the cuff-sleeve-3r limit, and the centre offset that gives the morphology its name stays
   harmful. A GPU sweep is worth it only for the o = 0 / dpsi 0 / q 0.97-0.98 region, and only together with a fix for
   the J2 hub.
+
+## Polish (2026-10-15, convergence check of the "dead" verdict)
+
+**Why.** The screening sweep stopped while still climbing (best found on its last try, +6.5 points in its second half),
+so the death verdict could have been a sampling false negative. Model, honesty checks and geometry rules unchanged;
+only parameters searched, on the same bench (Bench(60,160) fast grid cache), evaluated with the model's own
+`setup()` + `evaluate()` on the CPU farm (16 slots, ~$0.1 in all).
+
+**Method.** Local search from the screening's top configurations (k 113 / 101 / 111 / 98, all o = 0): one-at-a-time
+coordinate steps on a1_az, a1_el, dpsi, th_k, s, caz, hC, q, width, sing, t_link (round 1), then coordinate steps
+around each new incumbent with shrinking steps (rounds 2-4, 6) and Gaussian sampling around the incumbent (rounds 5,
+7, 8; sd shrinking from a1 6 deg / s 4 mm / hC 0.4 mm / q 0.006 to 2 deg / 1.5 mm / 0.1 mm / 0.002). No range was
+widened (width 10 is the lower end the screening already used; not taken below, a strap rule). o kept at 0 (the
+screening measured the offset monotonically harmful). **252 new evaluations** (entries k 114-365, stage "polish").
+
+**Best-so-far curve** (score = 100 (1 - gap / 275)): before 74.13 (gap 71.15) -> after 22 evals 75.03 -> 64: 77.72 ->
+127: 78.32 -> 190: 78.47 -> 252: **78.58 (gap 58.90, k 306)**. Per round best gap: 68.67, 67.19, 61.27, 60.72, 59.93,
+59.62, 59.32, 58.90. The jump came from leaving q = 1 (q 0.98: the fit sacrifices 2 % of poses per sample instead of
+floating the shoulder side at the 400 mm cap) with the 10 mm strap and a more posterior J1 axis (a1_az 75-78).
+
+**Best (k 306):** o 0, a1 bvec(77.5, 78), s 189, caz -2, hC 12.9, dpsi 60, th_k 45, width 10, q 0.98 (rest as PARAMS):
+gap 58.90, reach 0.90, follow 0.95, in-band 14 0.397, in-band 10 0.287, contact 0.086 (19 poses lost to contact; 0 to
+singularity, U, slide, flip or part collision), closure 1.0. Per part (in-band 14, median mm): hub 1 1.00 / 5.9;
+**hub 2 0.04 / >= 32**; **link 1 0.34 / >= 32**; **bar cap 0.05 / >= 32**; **bar arm run 0.13 / >= 32** (390 samples);
+boss 0.97 / 5.1; sleeve 0.85 / 10.5; rod 0.69 / 12.2; U ring 0.90 / 8.2; cheeks 0.87 / 2.4.
+
+**Convergence gate:** best gain over the second half 0.26 (< 1: pass); top-5 within 0.12 (< 3: pass); best found at
+eval 193 of 252, inside the last third (from 169): **fail -> not converged by the gate**. It is a flat ridge: the
+last 125 evaluations gained 0.26 points in steps of 0.05-0.15 (a1_az, s, hC trading against each other).
+
+**Screened, with a caveat.** 78.58 clears the 74.9 bar on this bench (and 76.3 on honest kit geometry), so the
+status goes back to "screened". But the score is carried by the cuff end (boss, sleeve, rod, ring, cheeks 0.69-0.97 in
+band, hub 1 1.00); hub 2, the bar cap and the bar's arm run are 4-13 % in band with medians at the grid clamp
+(>= 32 mm off the skin), i.e. the rigid pointer still floats - limiter (2) and (3) above are unchanged. The 1 cm rule
+is not met by the shoulder half of this mechanism; a verifier should cap or penalise parts > ~30 mm off the skin
+before this number is compared with the champion's.
+
+**What limits it:** the bar's roll is set by a1 x dh, not by the arm, so its run down the arm clears every axial angle
+and floats; the J2 hub sweeps the posterior-lateral cap filled by the elevated arm. Contact (19 poses) is the rest of
+the gap: 100 x 0.086 = 8.6 of the 58.9.
