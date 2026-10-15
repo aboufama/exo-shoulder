@@ -333,7 +333,45 @@ def build_hub_neck(E):
 HUB_DEPTH_MAX = float(os.environ.get("HUB_DEPTH_MAX", 8.0))                              # the turned skin side drops at most this far below F
 HUB_D1, HUB_D2 = 2.0, 1.0                                                                # G2 blend setbacks: centre flat -> cone, cone -> wall
 
-def hub_need(E, dh, lat, F_, r0, margin=None, nth=120, dr=0.25):
+def CAD_DIR_OF(E): return getattr(E, "dir", None) or os.path.join(HERE, "..", "..", "full-exo", "designs", f"cad_{KEY}")
+class WorkspaceSkin:
+    """the arm-fixed parts' skin over the FUNCTIONAL WORKSPACE poses the design follows (workspace.json of the CAD
+    design: closes and evaluator-feasible), exact: rays from the GH centre against the posed body mesh (judge/R16's
+    body), in the canonical humerus frame. The clip-frame Envelope (maps_s1.pt) has no maps for these poses; the JN
+    hub's turned skin side fitted to the clips alone entered the body 0.5-1.1 mm in 3 of 120 workspace poses of
+    cad_r18_n3_s1392_1_c1 (R16; elevation 90-165, the dimple 78-79 mm from GH). WS_SKIN=0: clips only (old)."""
+    def __init__(self, cad_dir, near=40.0):
+        sys.path.insert(0, os.path.join(HERE, "..", "..", "avg")); _c = os.getcwd(); os.chdir(os.path.join(HERE, "..", "..", "avg"))
+        import design_search as DS, body_pose as BP
+        os.chdir(_c); W = json.load(open(os.path.join(cad_dir, "workspace.json")))["poses"]
+        self.poses = [w for w in W if w.get("closes") and w.get("eval_feasible")]; self.near = near; self.BP, self.DS = BP, DS
+        self._cache = {}
+        print(f"  workspace skin: {len(self.poses)} followed workspace poses (of {len(W)})", flush=True)
+    def _tris(self, k, c):
+        """triangles of pose k's posed skin within `near` of the canonical point c (canonical frame)"""
+        if k not in self._cache:
+            pl, el, ax = self.poses[k]["p"][:3]; DS = self.DS
+            H = DS.Ry(pl * D2R) @ DS.Rx(-el * D2R) @ DS.Ry(ax * D2R)                         # canonical humerus -> thorax
+            pose = dict(zip(["plane", "elev", "axial", "flex", "pron"], self.poses[k]["p"]))
+            self._cache[k] = (self.BP.posed(pose) @ H)                                     # vertices in the canonical frame (row v H = H^T v)
+        V = self._cache[k]; F = self.BP.F; T = V[F]; m = (np.linalg.norm(T - c, axis=2).min(1) < self.near) | (np.linalg.norm(T.mean(1) - c, axis=1) < self.near)
+        return T[m]
+    def min_radius(self, dirs, clear=2.0):
+        """per canonical direction: max over the workspace poses of (first skin exit radius along it + clear), -inf if none"""
+        D = rows(np.asarray(dirs, float)); c = D.mean(0) * 90.0; out = np.full(len(D), -np.inf)
+        for k in range(len(self.poses)):
+            T = self._tris(k, c)
+            if not len(T): continue
+            A, B, C = T[:, 0], T[:, 1], T[:, 2]; e1, e2 = B - A, C - A
+            for i0 in range(0, len(D), 512):                                                  # Moller-Trumbore, rays from the origin
+                d = D[i0:i0 + 512][:, None, :]; pv = np.cross(d, e2[None]); det = (pv * e1[None]).sum(-1)
+                ok = np.abs(det) > 1e-9; inv = np.where(ok, 1.0 / np.where(ok, det, 1.0), 0.0); tv = -A[None]
+                u = (tv * pv).sum(-1) * inv; qv = np.cross(tv, e1[None]); v = (d * qv).sum(-1) * inv; tt = (e2[None] * qv).sum(-1) * inv
+                hit = ok & (u >= 0) & (v >= 0) & (u + v <= 1) & (tt > 20.0)
+                r1 = np.where(hit, tt, np.inf).min(1); out[i0:i0 + 512] = np.maximum(out[i0:i0 + 512], np.where(np.isfinite(r1), r1 + clear, -np.inf))
+        return out
+
+def hub_need(E, dh, lat, F_, r0, margin=None, nth=120, dr=0.25, WS=None):
     """per ring radius r (0..r0): the axial height (along W0) the hub's skin side must stay above = max over the ring and
     over every followed frame of the dense envelope (skin + 2 mm, envelope.py) + margin. -inf where no skin."""
     margin = MB.MARGIN if margin is None else margin
@@ -342,6 +380,7 @@ def hub_need(E, dh, lat, F_, r0, margin=None, nth=120, dr=0.25):
     for _ in range(3):                                                                    # the direction depends on the height: iterate
         P = W0[None, None] * z[..., None] + rr[:, None, None] * U[None]
         env = E.min_radius("can", rows(P.reshape(-1, 3))).reshape(z.shape) + margin
+        if WS is not None: env = np.maximum(env, WS.min_radius(rows(P.reshape(-1, 3))).reshape(z.shape) + margin)   # + the workspace poses
         z = np.where(env > 20, np.sqrt(np.maximum(env ** 2 - rr[:, None] ** 2, 0.0)), -np.inf)
         z = np.where(np.isfinite(z), z, F_ - 50.0)
     z = np.where(env > 20, z, -np.inf)
@@ -471,7 +510,11 @@ def build_hub_neck_v2(E):
         prof = [("line", (0.0, F_), (r0 - e_, F_)), ("arc", (r0 - e_, F_), (r0 - e_ + e_ * math.sin(math.pi / 4), F_ + e_ - e_ * math.cos(math.pi / 4)), (r0, F_ + e_)),
                 ("line", (r0, F_ + e_), (r0, S_ - e_))] + top + [("line", (0.0, S_), (0.0, F_))]
     else:
-        rr, need, _ = hub_need(E, dh, lat, F_, r0)
+        WS = WorkspaceSkin(CAD_DIR_OF(E)) if os.environ.get("WS_SKIN", "1") == "1" and os.path.exists(os.path.join(CAD_DIR_OF(E), "workspace.json")) else None
+        rr, need, _ = hub_need(E, dh, lat, F_, r0, WS=WS)
+        if WS is not None:
+            _, need0, _ = hub_need(E, dh, lat, F_, r0)
+            print(f"  JN hub skin side over the clips + workspace: need raised by up to {np.nanmax(np.where(np.isfinite(need) & np.isfinite(need0), need - need0, 0)):.2f} mm vs clips only", flush=True)
         fit = fit_underside(rr, need, F_, r0); zc = fit["zc"]
         print(f"  JN hub turned skin side: need below F by {np.round(F_ - need[::8], 2)} (r = {np.round(rr[::8], 1)})", flush=True)
         print(f"  fitted sketch ({fit['family']}): centre flat {F_ - zc:.2f} mm under F out to r {fit['r1']:.2f}, cone {math.degrees(fit['al']):+.0f} deg, "

@@ -115,12 +115,12 @@ def build(verbose=True):
     J = json.load(open(os.path.join(HERE, "..", "avg", "body_mesh.json"))); S = J["scale"]; hm = np.array(J["head"]["mid"])
     V0, F0 = BP.V0.astype(float), BP.F.astype(int); nb = len(V0)
     zc = hm[2]
-    Y_STITCH = hm[1] - 111 * S                      # 96 mm: lower neck, above the trapezius flare, below the old seam (115)
+    Y_STITCH = hm[1] - 120 * S                      # 86 mm: neck root (the cut also takes the top of the trapezius), below the old seam (115)
     GAP = 5.0 * S                                   # body cut loop -> new surface loop
     C = np.array([hm[0] - 48 * S, hm[1] + 2 * S, zc])   # cranium centre: every head and upper-neck point is seen from it
     def s_band(x, y): return y - (hm[1] - 105 * S + 0.46 * (hm[0] - 16 * S - x))   # height over the jaw-occiput line (front: chin-throat corner, back: occiput)
     B0, B1 = -10 * S, 5 * S                         # neck field below B0, head field above B1
-    L_CRANIUM, L_JAW = float(os.environ.get("MQ_LC", 13)), float(os.environ.get("MQ_LJ", 18))
+    L_CRANIUM, L_JAW = 7.0, 15.0                    # SH degree at half attenuation: face (coarse) / rest of the head (fine)
     # ---- 1. head: radial function about C, first exit along rays cast from inside
     import torch
     torch.set_num_threads(2)
@@ -147,7 +147,7 @@ def build(verbose=True):
     def box(a, a0, a1, e, e0, e1_, soft=6.0):
         sm = lambda x: np.clip(x / soft, 0, 1)
         return sm(a - a0) * sm(a1 - a) * sm(e - e0) * sm(e1_ - e)
-    face = box(azi, -50, 50, ele, -46, 15)                                   # eyes (to the outer corners), nose, mouth; keeps forehead, chin, jaw
+    face = box(azi, -50, 50, ele, -51, 15)                                   # eyes (to the outer corners), nose, mouth; keeps forehead, chin, jaw
     ears = np.maximum(box(azi, 62, 128, ele, -36, 22), box(azi, -128, -62, ele, -36, 22))
     w = data * (1 - np.maximum(face, ears))
     Rd = np.where(data, R, 0.0)
@@ -162,12 +162,16 @@ def build(verbose=True):
     ct = (1 / (s_c * dA) ** 2)[:, None] * np.ones((1, NTH))
     add(I, up, cn); add(I, dn, cs); add(I, lf, ct); add(I, rt, ct); add(I, I, -(cn + cs + 2 * ct))
     Lap = sparse.csr_matrix((np.concatenate(vals), (np.concatenate(rows), np.concatenate(cols))), shape=(n, n))
-    Ar = np.repeat(s_c * dA * dA, NTH); lc = lambda l: 1.0 / (l * (l + 1)) ** 2   # SH degree at half attenuation
-    jaw = np.clip((-25 - ele) / 15, 0, 1) * (s_band(Ph[:, 0], Ph[:, 1]) > B1)    # jaw line and chin: finer (sharper) than the cranium
-    lam = lc(L_CRANIUM) + jaw * (lc(L_JAW) - lc(L_CRANIUM))
-    M = sparse.diags(w * Ar) + Lap.T @ sparse.diags(lam * Ar) @ Lap
-    r_s = spsolve(M.tocsc(), w * Ar * Rd).reshape(NPH, NTH)
-    if os.environ.get("MQ_DEBUG"): np.savez(os.environ["MQ_DEBUG"], R=R.reshape(NPH, NTH), r_s=r_s, w=w.reshape(NPH, NTH), data=data.reshape(NPH, NTH), C=C)
+    Ar = np.repeat(s_c * dA * dA, NTH); LtL = (Lap.T @ sparse.diags(Ar) @ Lap).tocsc()
+    solve = lambda l: spsolve((sparse.diags(w * Ar) + LtL / (l * (l + 1)) ** 2).tocsc(), w * Ar * Rd)    # l: SH degree at half attenuation
+    r_c, r_f = solve(L_CRANIUM), solve(L_JAW)
+    # two scales: the face, temples and forehead take the coarse fit (a smooth oval face: no orbital rims, cheek folds or
+    # lip remains), the rest - cranium, jaw line, chin, behind the jaw, nape - the fine one (the rig's own head)
+    sm = lambda x: np.clip(x, 0, 1) ** 2 * (3 - 2 * np.clip(x, 0, 1))
+    el_lim = -50 - 10 * sm((np.abs(azi) - 70) / 15)                          # front: above the chin; behind the jaw: a little lower
+    coarse = sm((120 - np.abs(azi)) / 16) * sm((ele - el_lim) / 12)
+    r_s = (r_f + coarse * (r_c - r_f)).reshape(NPH, NTH)
+    if os.environ.get("MQ_DEBUG"): np.savez(os.environ["MQ_DEBUG"], R=R.reshape(NPH, NTH), r_s=r_s, r_c=r_c.reshape(NPH, NTH), r_f=r_f.reshape(NPH, NTH), w=w.reshape(NPH, NTH), data=data.reshape(NPH, NTH), C=C)
     log(f"thin-plate head, l_c {L_CRANIUM}/{L_JAW}: r {r_s.min():.0f}..{r_s.max():.0f} mm, data residual p95 {np.percentile(np.abs(r_s.ravel() - R)[w > 0.99], 95):.1f} mm")
     nod = (~data).reshape(NPH, NTH)                 # rays that leave below the band (down the neck): the head's closure stays inside
     r_s[nod] = np.maximum(r_s[nod], np.minimum(R.reshape(NPH, NTH)[nod], 400.0))
@@ -200,7 +204,13 @@ def build(verbose=True):
         if m1.any(): fh[m1] = f_head(P[m1])
         return (1 - b) * fn + b * fh
     Fv = field(G).reshape(*shape)
+    # round every crease left by the blend (jaw underside over the neck) with a 2.5 mm Gaussian of the whole field;
+    # untouched near the stitch, so the new surface still meets the rig's neck there
+    g = np.clip((ax[1] - (Y_STITCH + 10 * S)) / (12 * S), 0, 1)[None, :, None]
+    Fv = (1 - g) * Fv + g * ndimage.gaussian_filter(Fv, 2.5 * S / h)
     Fv[:, 0, :] = np.maximum(Fv[:, 0, :], 1.0)       # open bottom: closed below, cut away later
+    Fc = ndimage.spline_filter(Fv, order=3)
+    field = lambda P: ndimage.map_coordinates(Fc, list(((P - lo) / h).T), order=3, prefilter=False, mode="nearest")
     vv, ff, _, _ = marching_cubes(Fv, 0.0, spacing=(h, h, h), step_size=2, allow_degenerate=False)
     vv = vv + lo
     log("marching cubes", len(vv), "verts", len(ff), "faces")

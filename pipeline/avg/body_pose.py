@@ -16,6 +16,10 @@ the muscles and the humeral-head guard. The only thing left out is the GPU-only 
 Frame: thorax mm, x anterior, y up, z right, origin = right GH centre; the trunk moved by -lift exactly like
 radial_maps.posed() (segs()[0] = (I, -lift)), the arm about the GH centre.
 Optional: posed(pose, act=dict(shoulder=, flexor=, extensor=)) overrides the gravity activation, as body.js does.
+Option (environment, default off - the rig as is): BODY_FIT=user -> the user-fitted rig: after everything above, arm skin
+vertices are pulled radially towards the forearm / humerus axis just far enough to sit BODY_FIT_LAYER (0.5) mm inside
+the user's own arm parts (forearm cuff, MIDDLE, cuff screws, elbow stack), which bound the user's limb (user_fit.py,
+tables in user_fit.npz). Nothing moves where the rig already fits.
 Check against the browser rig: node ../arm-rom/export_posed_skin.mjs body_mesh.json poses.json out (see __main__).
 """
 import base64, json, math, os
@@ -24,6 +28,9 @@ from scipy.sparse import csr_matrix
 
 D2R = math.pi / 180
 HERE = os.path.dirname(os.path.abspath(__file__))
+BODY_FIT = os.environ.get("BODY_FIT", "")                 # "" (the rig) | "user" (bounded by the user's arm parts, user_fit.py)
+BODY_FIT_LAYER = float(os.environ.get("BODY_FIT_LAYER", 0.5))
+if BODY_FIT not in ("", "user"): raise ValueError(f"BODY_FIT={BODY_FIT!r}: expected '' or 'user'")
 MUSH_IT = 10
 dec = lambda s, t: np.frombuffer(base64.b64decode(s), dtype=t)
 
@@ -384,9 +391,31 @@ class Rig:
         # humeral-head guard
         g = sk["guard"]; r = np.linalg.norm(P[g], axis=1); rmin = sk["guardR"]; w = 4 * self.s
         m_ = (r < rmin + w) & (r >= 1e-6); fct = (rmin[m_] + w * np.exp((r[m_] - rmin[m_]) / w - 1)) / r[m_]; P[g[m_]] *= fct[:, None]
+        if BODY_FIT == "user": P = self._user_fit(P, ctx)
         self.last = dict(lift=ctx["lift"], act=ctx["ACT"], relax=al)
         if muscles: return P, {d["name"]: out[id(d)][0] for d in self.dyn if d is not sk}
         return P
+
+
+    def _user_fit(self, P, ctx):
+        """BODY_FIT=user: pull arm skin radially inside the user's arm parts (tables from user_fit.py), in the F and H frames"""
+        if not hasattr(self, "_uf"):
+            T = np.load(os.path.join(HERE, "user_fit.npz")); d = self.skin; n = d["n"]
+            W = np.zeros((n, 5)); np.add.at(W, (np.repeat(np.arange(n), 4), d["wi"].ravel()), d["ww"].ravel())
+            self._uf = dict(T={k: T[k] for k in T.files}, idx=np.flatnonzero(W[:, 2:].sum(1) > 0.01),
+                            own=dict(F=W[:, 3:].sum(1) > 0.3, H=W[:, 2] > 0.3))       # each table bounds its own limb's skin only
+            self._uf["own"] = {k: v[self._uf["idx"]] for k, v in self._uf["own"].items()}
+        T = self._uf["T"]; idx = self._uf["idx"]; X = P[idx]
+        for key, seg in (("F", 3), ("H", 2)):
+            R, t = ctx["segs"][seg]; Xl = (X - t) @ R                              # rest coordinates of that segment
+            O, a, u = T[f"{key}_O"], T[f"{key}_a"], T[f"{key}_u"]; v = np.cross(a, u); q = Xl - O; s_ = q @ a
+            rad = q - np.outer(s_, a); r = np.linalg.norm(rad, axis=1); th = np.degrees(np.arctan2(rad @ v, rad @ u))
+            B = T[f"{key}_R"]; i = np.floor((s_ - float(T[f"{key}_s0"])) / float(T["ds"])).astype(int); j = np.floor((th + 180) / float(T["dth"])).astype(int) % B.shape[1]
+            ok = (i >= 0) & (i < B.shape[0]); b = np.full(len(X), np.inf); b[ok] = B[i[ok], j[ok]] - BODY_FIT_LAYER
+            m = (r > b) & (r < b + 30.0) & self._uf["own"][key]                 # this limb's cross-section only
+            if m.any():
+                Xl[m] = O + np.outer(s_[m], a) + rad[m] * (b[m] / r[m])[:, None]; X = Xl @ R.T + t
+        P = P.copy(); P[idx] = X; return P
 
 
 _RIG = None
