@@ -9,7 +9,7 @@
 | R4 | Overhead works (Raise overhead clip score) (14 mm band) | 79.9% | >= 0.8 | **FAIL** | full-exo/score_design.py |
 | R5 | Shoulder-chain DOF from the scapula base to the arm, counted kinematically (cap 4; the user's scapula handler is a separate part) | 4 | <= 4 | **PASS** | design.json |
 | R5-aim | Aim: exactly 3 DOF, the minimum (user 2026-10-15) | 4 | <= 3 | **FAIL** | design.json |
-| R6 | No interference between parts that move relative to each other | 0.0 mm | <= 0.15 mm | **PASS** | judge/part_contact.py (geometry only; exact depth, inside = winding number) |
+| R6 | No interference between parts that move relative to each other | 1.99 mm | <= 0.15 mm | **FAIL** | judge/part_contact.py (geometry only; exact depth, inside = winding number) |
 | R7 | Every custom part is one valid closed solid | False | == True | **FAIL** | judge/part_validity.py (OCC BRepCheck on the exported STEP) |
 | R8 | Custom-part mass budget (proposed) | - | <= 300 g | **NOT RUN** | parts_full.json (mesh volume x density) |
 | R9 | Strength: SF >= 1.5 at 25 N.m worst direction; deflection and fatigue bounded | - |  | **UNVERIFIED** | independent FEA (CalculiX) - only the in-house hex8 study exists (pipeline/conformal/thin_study) |
@@ -20,4 +20,4 @@
 | R14 | Generalises: holds on motions and body shapes never used to design it | - |  | **NO DATA** | held-out OpenCap / AMASS clips and SMPL-X bodies (data/raw) |
 | R15 | Works on real bodies | - |  | **NOT DONE** | printed prototype on the user + one very different body: OpenCap reach vs bare arm, zero skin-contact on FSR strips |
 
-3 of 17 requirements pass.
+2 of 17 requirements pass.

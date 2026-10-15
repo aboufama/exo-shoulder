@@ -6,7 +6,8 @@ are a complete candidate set (one ball query; a thin shell except in concave poc
 number (Mesh.build_grid / winding_at; signed_distance, max_depth and every judge use it): it needs no closest feature,
 holds where the posed body self-intersects, and on an open mesh (a hole or non-manifold edge after welding) is a
 majority over rays along x, y and z with the generalized winding number where they disagree. Vertices are welded first
-(a glb tessellation is split at every B-rep seam). Mesh.signed_pseudonormal keeps the angle-weighted pseudo-normal sign
+(a glb tessellation is split at every B-rep seam) and faces oriented consistently outward (orient: the band builds'
+proxies come mixed or inside out). Mesh.signed_pseudonormal keeps the angle-weighted pseudo-normal sign
 (Baerentzen & Aanaes 2005) for comparison: exact only on a closed, manifold, non-self-intersecting mesh (posed body:
 ~2 % of near-surface points wrong). unsigned_distance when only |d| is needed (no grid).
 History (docs/FINDINGS.md "Infrastructure"): until 2026-10-15 the sign came from the nearest face's own normal over the
@@ -21,7 +22,7 @@ _TOPO = {}                                                                   # p
 _NORM = {}                                                                   # per (vertices, faces): pseudo-normals (small LRU)
 def _key(V, F):
     sub = np.ascontiguousarray(V[:: max(1, len(V) // 64)]).tobytes()          # content checksum: a reused buffer cannot alias
-    return (V.ctypes.data, V.shape, F.ctypes.data, F.shape, hash(sub))
+    return (V.ctypes.data, V.shape, F.ctypes.data, F.shape, hash(sub), hash(np.ascontiguousarray(F).tobytes()))
 
 
 def closest_on_tri(P, A, B, C, region=False):
@@ -50,6 +51,33 @@ def weld(V, F, tol=1e-4):
     return np.asarray(V, float)[first], inv.reshape(-1)[np.asarray(F)]
 
 
+def orient(V, F):
+    """consistent, outward faces: two faces sharing an edge must run it opposite ways (a breadth-first walk over the
+    two-face edges flips the ones that do not), then every CLOSED connected piece whose signed volume is negative is
+    turned inside out (an open piece has no inside to point away from: left as walked). The band builds' proxy members
+    come mixed and some proxies wholly inverted; a winding number (or any normal-based sign) is meaningless on them until
+    this is done. Returns the faces and the number flipped."""
+    from scipy.sparse import coo_matrix
+    from scipy.sparse.csgraph import connected_components, breadth_first_order
+    m = len(F); E = np.stack([F[:, [0, 1]], F[:, [1, 2]], F[:, [2, 0]]], 1).reshape(-1, 2)
+    _, inv, cnt = np.unique(np.sort(E, 1), axis=0, return_inverse=True, return_counts=True); inv = inv.reshape(-1)
+    two = np.where(cnt[inv] == 2)[0]; two = two[np.argsort(inv[two], kind="stable")]; a, b = two[0::2], two[1::2]
+    fa, fb = a // 3, b // 3; same = E[a, 0] == E[b, 0]                       # both run the edge the same way: flip one
+    _, first = np.unique(np.minimum(fa, fb).astype(np.int64) * m + np.maximum(fa, fb), return_index=True)
+    fa, fb, same = fa[first], fb[first], same[first]                          # one link per face pair
+    G = coo_matrix((np.r_[same, same].astype(np.int8) + 1, (np.r_[fa, fb], np.r_[fb, fa])), shape=(m, m)).tocsr()
+    nc, lab = connected_components(G, directed=False); flip = np.zeros(m, bool)
+    for c in np.unique(lab[fa[same]]):                                        # pieces with a mismatch: walk them
+        order, pred = breadth_first_order(G, int(np.argmax(lab == c)), directed=False)
+        rel = np.asarray(G[pred[order[1:]], order[1:]]).ravel() == 2
+        for f, p, r in zip(order[1:], pred[order[1:]], rel): flip[f] = flip[p] ^ r
+    F = np.where(flip[:, None], F[:, [0, 2, 1]], F); T = V[F]
+    vol = np.bincount(lab, weights=np.einsum("ij,ij->i", T[:, 0], np.cross(T[:, 1], T[:, 2])), minlength=nc)
+    open_piece = np.zeros(nc, bool); open_piece[lab[np.where(cnt[inv] != 2)[0] // 3]] = True
+    inside_out = ((vol < 0) & ~open_piece)[lab]; F = np.where(inside_out[:, None], F[:, [0, 2, 1]], F)
+    return F, int((flip ^ inside_out).sum())
+
+
 def _topology(F):
     """edge id per (face, local edge AB / AC / BC), the two faces of every edge (-1 on a boundary) and the face count of
     every edge (2 on a closed manifold)"""
@@ -72,7 +100,7 @@ def pseudo_normals(V, F):
     if key in _NORM: return _NORM[key]
     T = V[F]; Nf = np.cross(T[:, 1] - T[:, 0], T[:, 2] - T[:, 0]); Nf /= np.linalg.norm(Nf, axis=1, keepdims=True) + 1e-18
     eid, adj, _ = _topology(F)
-    Ne =Nf[np.maximum(adj[:, 0], 0)] + np.where(adj[:, 1:] >= 0, Nf[np.maximum(adj[:, 1], 0)], 0)
+    Ne = Nf[np.maximum(adj[:, 0], 0)] + np.where(adj[:, 1:] >= 0, Nf[np.maximum(adj[:, 1], 0)], 0)
     Nv = np.zeros_like(V)
     for k in range(3):
         a, b, c = T[:, k], T[:, (k + 1) % 3], T[:, (k + 2) % 3]
@@ -84,10 +112,15 @@ def pseudo_normals(V, F):
 
 class Mesh:
     """exact closest point and signed distance to one triangle mesh, in its own frame (build once per rigid part). The
-    vertices are welded first (weld; faces that collapse to a segment are dropped); closed = every edge has exactly two
-    faces, each running it the other way round"""
+    vertices are welded first when the mesh has boundary edges (weld: a glb tessellation; faces that collapse to a
+    segment are dropped - a mesh that is already closed, like the body, is left alone: its quantised vertices can
+    coincide) and the faces oriented consistently outward (orient; self.flipped counts the faces it turned);
+    closed = every edge has exactly two faces, each running it the other way round"""
     def __init__(self, V, F, h=0.6):
-        V, F = weld(V, F); F = F[(F[:, 0] != F[:, 1]) & (F[:, 1] != F[:, 2]) & (F[:, 2] != F[:, 0])]
+        V, F = np.asarray(V, float), np.asarray(F)
+        if (_topology(F)[2] != 2).any():
+            V, F = weld(V, F); F = F[(F[:, 0] != F[:, 1]) & (F[:, 1] != F[:, 2]) & (F[:, 2] != F[:, 0])]
+        F, self.flipped = orient(V, F)
         T = V[F]; self.V, self.F, self.T, self.h = V, F, T, h
         self.Nf, self.Ne, self.eid, self.Nv = pseudo_normals(V, F)
         _, _, ecount = _topology(F); D = np.stack([F[:, [0, 1]], F[:, [1, 2]], F[:, [2, 0]]], 1).reshape(-1, 2)

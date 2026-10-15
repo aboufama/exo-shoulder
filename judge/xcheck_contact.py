@@ -1,7 +1,9 @@
 """Outside check of the contact judges (R2 judge/body_contact.py, R6 judge/part_contact.py): re-measures the top entries
-of a design's judge output at their worst frame with nothing from judge/sdist.py. Inside = winding number by signed ray
-crossings (sum of sign(n . d) over the hits t > 0) along 3 random directions on the RAW glb tessellation (unwelded),
-majority vote; ray parity is reported alongside (it differs where the posed body overlaps itself). Depth = exact closest
+of a design's judge output at their worst frame with nothing from judge/sdist.py. Rays along 3 random directions on the
+RAW glb tessellation (unwelded), majority vote. Inside a PART (R6) = ray parity (odd hit count): independent of how its
+faces are oriented (the band builds' proxies come mixed / inside out). Inside the BODY (R2) = winding number by signed
+crossings (sum of sign(n . d) over the hits t > 0): the posed body overlaps itself (winding 2, even parity) and is
+consistently oriented. The other count is reported alongside. Depth = exact closest
 point by brute force over all triangles (inside points only, deepest first, pruned by the distance to the nearest vertex,
 an upper bound). R2 entries of the merged BOTTOM are split into the user's bar (s < 265 along the bar, arm_fit.json) and
 the new neck / arm end.
@@ -65,16 +67,18 @@ def ray_crossings(P, V, F, d, cell=2.0):
     return np.rint(W).astype(int), np.rint(H).astype(int)
 
 
-def measure(P, V, F, seed=1):
-    """deepest point of P inside (V, F): depth (mm), points inside (winding majority / parity majority), rays unanimous (%)"""
-    if not len(P): return dict(depth=0.0, inside=0, inside_parity=0, rays_agree_pct=100.0)
+def measure(P, V, F, rule, seed=1):
+    """deepest point of P inside (V, F) by rule 'parity' (a part) or 'winding' (the body): depth (mm), points inside by
+    each rule (3-ray majority), rays unanimous (%)"""
+    if not len(P): return dict(depth=0.0, rule=rule, inside_winding=0, inside_parity=0, rays_agree_pct=100.0)
     R = [ray_crossings(P, V, F, d) for d in np.random.default_rng(seed).normal(size=(3, 3))]
-    Wd = np.stack([r[0] for r in R]); win = np.median(Wd, 0) >= 1; par = np.stack([r[1] % 2 for r in R]).sum(0) >= 2
-    ub = cKDTree(V).query(P)[0]; ins = np.where(win)[0]; ins = ins[np.argsort(-ub[ins])]; best = 0.0
+    Wd = np.stack([r[0] for r in R]); Hd = np.stack([r[1] % 2 for r in R]); win = np.median(Wd, 0) >= 1; par = Hd.sum(0) >= 2
+    use = par if rule == "parity" else win; agree = ((Hd == Hd[0]).all(0) if rule == "parity" else (Wd == Wd[0]).all(0)).mean()
+    ub = cKDTree(V).query(P)[0]; ins = np.where(use)[0]; ins = ins[np.argsort(-ub[ins])]; best = 0.0
     for i0 in range(0, len(ins), 32):
         if ub[ins[i0]] <= best: break
         best = max(best, float(brute_dist(P[ins[i0:i0 + 32]], V, F).max()))
-    return dict(depth=round(best, 2), inside=int(win.sum()), inside_parity=int(par.sum()), rays_agree_pct=round(100 * float((Wd == Wd[0]).all(0).mean()), 2))
+    return dict(depth=round(best, 2), rule=rule, inside_winding=int(win.sum()), inside_parity=int(par.sum()), rays_agree_pct=round(100 * float(agree), 2))
 
 
 if __name__ == "__main__":
@@ -88,9 +92,10 @@ if __name__ == "__main__":
         if not v["worst"]: continue
         clip, fi = v["worst"][:2]; X, pose = SE.frame_xforms(C[clip][fi]); g, V0, _ = parts[k]; R, t = (np.asarray(x) for x in X[g])
         P = V0 @ R.T + t; Vb = BP.posed(pose); near = cKDTree(Vb).query(P, distance_upper_bound=25.0)[0] < 25.0
-        r = dict(entry=k, frame=[clip, fi], judge=v["max_depth"], **measure(P[near], Vb, BP.F))
+        r = dict(entry=k, frame=[clip, fi], judge=v["max_depth"], **measure(P[near], Vb, BP.F, "winding"))
         if "BOTTOM" in k:
-            s = (V0[near] - CB) @ UB; r["bar_s_lt_265"] = measure(P[near][s < S_CUT], Vb, BP.F)["depth"]; r["neck_arm_end"] = measure(P[near][s >= S_CUT], Vb, BP.F)["depth"]
+            s = (V0[near] - CB) @ UB; r["bar_s_lt_265"] = measure(P[near][s < S_CUT], Vb, BP.F, "winding")["depth"]
+            r["neck_arm_end"] = measure(P[near][s >= S_CUT], Vb, BP.F, "winding")["depth"]
         out["r2"].append(r); print(f"R2 {k[:60]:60s} {clip} {fi}: judge {v['max_depth']:6.2f}  check {r['depth']:6.2f} mm"
                                     + (f"  (bar {r['bar_s_lt_265']:.2f}, neck / arm end {r['neck_arm_end']:.2f})" if "BOTTOM" in k else ""), flush=True)
     pc = json.load(open(os.path.join(dd, "judge", "part_contact.json")))
@@ -98,7 +103,7 @@ if __name__ == "__main__":
         clip, fi = v["worst"]; X, _ = SE.frame_xforms(C[clip][fi]); ka, kb = [s.strip() for s in k.split("  IN  ")]
         (ga, Va, _), (gb, Vb, Fb) = parts[ka], parts[kb]; Ra, ta = (np.asarray(x) for x in X[ga]); Rb, tb = (np.asarray(x) for x in X[gb])
         P = ((Va[::2] @ Ra.T + ta) - tb) @ Rb; m = np.all((P >= Vb.min(0) - 1) & (P <= Vb.max(0) + 1), 1)
-        r = dict(entry=k, frame=[clip, fi], judge=v["max_depth"], **measure(P[m], Vb, Fb)); out["r6"].append(r)
+        r = dict(entry=k, frame=[clip, fi], judge=v["max_depth"], **measure(P[m], Vb, Fb, "parity")); out["r6"].append(r)
         print(f"R6 {k[:100]:100s} {clip} {fi}: judge {v['max_depth']:6.2f}  check {r['depth']:6.2f} mm", flush=True)
     E = [abs(r["judge"] - r["depth"]) for r in out["r2"] + out["r6"]]; out["max_abs_diff_mm"] = round(max(E, default=0.0), 2)
     json.dump(out, open(os.path.join(dd, "judge", "xcheck_contact.json"), "w"), indent=1)

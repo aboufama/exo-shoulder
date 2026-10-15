@@ -1,5 +1,5 @@
 {
- "method": "Outside check of the contact judges (R2 judge/body_contact.py, R6 judge/part_contact.py): re-measures the top entries\nof a design's judge output at their worst frame with nothing from judge/sdist.py. Inside = winding number by signed ray\ncrossings (sum of sign(n . d) over the hits t > 0) along 3 random directions on the RAW glb tessellation (unwelded),\nmajority vote; ray parity is reported alongside (it differs where the posed body overlaps itself). Depth = exact closest\npoint by brute force over all triangles (inside points only, deepest first, pruned by the distance to the nearest vertex,\nan upper bound). R2 entries of the merged BOTTOM are split into the user's bar (s < 265 along the bar, arm_fit.json) and\nthe new neck / arm end.",
+ "method": "Outside check of the contact judges (R2 judge/body_contact.py, R6 judge/part_contact.py): re-measures the top entries\nof a design's judge output at their worst frame with nothing from judge/sdist.py. Rays along 3 random directions on the\nRAW glb tessellation (unwelded), majority vote. Inside a PART (R6) = ray parity (odd hit count): independent of how its\nfaces are oriented (the band builds' proxies come mixed / inside out). Inside the BODY (R2) = winding number by signed\ncrossings (sum of sign(n . d) over the hits t > 0): the posed body overlaps itself (winding 2, even parity) and is\nconsistently oriented. The other count is reported alongside. Depth = exact closest\npoint by brute force over all triangles (inside points only, deepest first, pruned by the distance to the nearest vertex,\nan upper bound). R2 entries of the merged BOTTOM are split into the user's bar (s < 265 along the bar, arm_fit.json) and\nthe new neck / arm end.",
  "r2": [
   {
    "entry": "F|FOREARM CUFF",
@@ -9,7 +9,8 @@
    ],
    "judge": 24.87,
    "depth": 24.87,
-   "inside": 22507,
+   "rule": "winding",
+   "inside_winding": 22507,
    "inside_parity": 21491,
    "rays_agree_pct": 100.0
   },
@@ -21,7 +22,8 @@
    ],
    "judge": 8.35,
    "depth": 8.35,
-   "inside": 11622,
+   "rule": "winding",
+   "inside_winding": 11622,
    "inside_parity": 11622,
    "rays_agree_pct": 100.0
   },
@@ -33,7 +35,8 @@
    ],
    "judge": 5.78,
    "depth": 5.78,
-   "inside": 2622,
+   "rule": "winding",
+   "inside_winding": 2622,
    "inside_parity": 2622,
    "rays_agree_pct": 100.0
   },
@@ -45,7 +48,8 @@
    ],
    "judge": 2.82,
    "depth": 2.82,
-   "inside": 92,
+   "rule": "winding",
+   "inside_winding": 92,
    "inside_parity": 92,
    "rays_agree_pct": 100.0
   },
@@ -57,7 +61,8 @@
    ],
    "judge": 0.98,
    "depth": 0.98,
-   "inside": 84,
+   "rule": "winding",
+   "inside_winding": 84,
    "inside_parity": 84,
    "rays_agree_pct": 100.0
   },
@@ -69,11 +74,78 @@
    ],
    "judge": 0.51,
    "depth": 0.51,
-   "inside": 34,
+   "rule": "winding",
+   "inside_winding": 34,
    "inside_parity": 34,
    "rays_agree_pct": 100.0
   }
  ],
- "r6": [],
+ "r6": [
+  {
+   "entry": "l2|D4 member l2 (proxy)  IN  l3|D4 member l3 (proxy)",
+   "frame": [
+    "Raise overhead",
+    108
+   ],
+   "judge": 1.99,
+   "depth": 1.99,
+   "rule": "parity",
+   "inside_winding": 0,
+   "inside_parity": 1,
+   "rays_agree_pct": 100.0
+  },
+  {
+   "entry": "l3|D4 member l3 (proxy)  IN  l2|D4 member l2 (proxy)",
+   "frame": [
+    "Raise overhead",
+    108
+   ],
+   "judge": 1.94,
+   "depth": 1.94,
+   "rule": "parity",
+   "inside_winding": 1,
+   "inside_parity": 1,
+   "rays_agree_pct": 100.0
+  },
+  {
+   "entry": "l1|D4 member l1 (proxy)  IN  l2|D4 member l2 (proxy)",
+   "frame": [
+    "Reach back pocket",
+    60
+   ],
+   "judge": 0.93,
+   "depth": 0.93,
+   "rule": "parity",
+   "inside_winding": 0,
+   "inside_parity": 3,
+   "rays_agree_pct": 100.0
+  },
+  {
+   "entry": "base|D4 member base (proxy)  IN  l1|D4 member l1 (proxy)",
+   "frame": [
+    "Raise overhead",
+    0
+   ],
+   "judge": 0.46,
+   "depth": 0.46,
+   "rule": "parity",
+   "inside_winding": 0,
+   "inside_parity": 3,
+   "rays_agree_pct": 100.0
+  },
+  {
+   "entry": "l2|D4 member l2 (proxy)  IN  l1|D4 member l1 (proxy)",
+   "frame": [
+    "Walking arm swing",
+    108
+   ],
+   "judge": 0.32,
+   "depth": 0.32,
+   "rule": "parity",
+   "inside_winding": 5,
+   "inside_parity": 6,
+   "rays_agree_pct": 100.0
+  }
+ ],
  "max_abs_diff_mm": 0.0
 }

@@ -1,5 +1,5 @@
 {
- "method": "Outside check of the contact judges (R2 judge/body_contact.py, R6 judge/part_contact.py): re-measures the top entries\nof a design's judge output at their worst frame with nothing from judge/sdist.py. Inside = winding number by signed ray\ncrossings (sum of sign(n . d) over the hits t > 0) along 3 random directions on the RAW glb tessellation (unwelded),\nmajority vote; ray parity is reported alongside (it differs where the posed body overlaps itself). Depth = exact closest\npoint by brute force over all triangles (inside points only, deepest first, pruned by the distance to the nearest vertex,\nan upper bound). R2 entries of the merged BOTTOM are split into the user's bar (s < 265 along the bar, arm_fit.json) and\nthe new neck / arm end.",
+ "method": "Outside check of the contact judges (R2 judge/body_contact.py, R6 judge/part_contact.py): re-measures the top entries\nof a design's judge output at their worst frame with nothing from judge/sdist.py. Rays along 3 random directions on the\nRAW glb tessellation (unwelded), majority vote. Inside a PART (R6) = ray parity (odd hit count): independent of how its\nfaces are oriented (the band builds' proxies come mixed / inside out). Inside the BODY (R2) = winding number by signed\ncrossings (sum of sign(n . d) over the hits t > 0): the posed body overlaps itself (winding 2, even parity) and is\nconsistently oriented. The other count is reported alongside. Depth = exact closest\npoint by brute force over all triangles (inside points only, deepest first, pruned by the distance to the nearest vertex,\nan upper bound). R2 entries of the merged BOTTOM are split into the user's bar (s < 265 along the bar, arm_fit.json) and\nthe new neck / arm end.",
  "r2": [],
  "r6": [
   {
@@ -10,7 +10,8 @@
    ],
    "judge": 2.39,
    "depth": 2.39,
-   "inside": 7,
+   "rule": "parity",
+   "inside_winding": 7,
    "inside_parity": 7,
    "rays_agree_pct": 100.0
   },
@@ -22,7 +23,8 @@
    ],
    "judge": 2.23,
    "depth": 2.23,
-   "inside": 5,
+   "rule": "parity",
+   "inside_winding": 5,
    "inside_parity": 5,
    "rays_agree_pct": 100.0
   },
@@ -34,7 +36,8 @@
    ],
    "judge": 2.15,
    "depth": 2.15,
-   "inside": 3,
+   "rule": "parity",
+   "inside_winding": 3,
    "inside_parity": 3,
    "rays_agree_pct": 100.0
   },
@@ -46,7 +49,8 @@
    ],
    "judge": 2.05,
    "depth": 2.05,
-   "inside": 6,
+   "rule": "parity",
+   "inside_winding": 6,
    "inside_parity": 6,
    "rays_agree_pct": 100.0
   },
@@ -58,7 +62,8 @@
    ],
    "judge": 2.0,
    "depth": 2.0,
-   "inside": 5,
+   "rule": "parity",
+   "inside_winding": 5,
    "inside_parity": 5,
    "rays_agree_pct": 100.0
   },
@@ -70,7 +75,8 @@
    ],
    "judge": 1.57,
    "depth": 1.57,
-   "inside": 1,
+   "rule": "parity",
+   "inside_winding": 1,
    "inside_parity": 1,
    "rays_agree_pct": 100.0
   },
@@ -82,7 +88,8 @@
    ],
    "judge": 1.49,
    "depth": 1.49,
-   "inside": 11,
+   "rule": "parity",
+   "inside_winding": 11,
    "inside_parity": 11,
    "rays_agree_pct": 100.0
   },
@@ -94,7 +101,8 @@
    ],
    "judge": 1.34,
    "depth": 1.34,
-   "inside": 9,
+   "rule": "parity",
+   "inside_winding": 9,
    "inside_parity": 9,
    "rays_agree_pct": 100.0
   }

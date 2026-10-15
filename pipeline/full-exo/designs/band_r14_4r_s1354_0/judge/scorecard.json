@@ -65,10 +65,10 @@
  {
   "id": "R6",
   "name": "No interference between parts that move relative to each other",
-  "value": 0.0,
+  "value": 1.99,
   "unit": "mm",
   "target": "<= 0.15 mm",
-  "status": "PASS",
+  "status": "FAIL",
   "judge": "judge/part_contact.py (geometry only; exact depth, inside = winding number)"
  },
  {

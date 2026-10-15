@@ -1,5 +1,5 @@
 {
- "method": "Outside check of the contact judges (R2 judge/body_contact.py, R6 judge/part_contact.py): re-measures the top entries\nof a design's judge output at their worst frame with nothing from judge/sdist.py. Inside = winding number by signed ray\ncrossings (sum of sign(n . d) over the hits t > 0) along 3 random directions on the RAW glb tessellation (unwelded),\nmajority vote; ray parity is reported alongside (it differs where the posed body overlaps itself). Depth = exact closest\npoint by brute force over all triangles (inside points only, deepest first, pruned by the distance to the nearest vertex,\nan upper bound). R2 entries of the merged BOTTOM are split into the user's bar (s < 265 along the bar, arm_fit.json) and\nthe new neck / arm end.",
+ "method": "Outside check of the contact judges (R2 judge/body_contact.py, R6 judge/part_contact.py): re-measures the top entries\nof a design's judge output at their worst frame with nothing from judge/sdist.py. Rays along 3 random directions on the\nRAW glb tessellation (unwelded), majority vote. Inside a PART (R6) = ray parity (odd hit count): independent of how its\nfaces are oriented (the band builds' proxies come mixed / inside out). Inside the BODY (R2) = winding number by signed\ncrossings (sum of sign(n . d) over the hits t > 0): the posed body overlaps itself (winding 2, even parity) and is\nconsistently oriented. The other count is reported alongside. Depth = exact closest\npoint by brute force over all triangles (inside points only, deepest first, pruned by the distance to the nearest vertex,\nan upper bound). R2 entries of the merged BOTTOM are split into the user's bar (s < 265 along the bar, arm_fit.json) and\nthe new neck / arm end.",
  "r2": [
   {
    "entry": "l2|link 2 slab keep-out (5.5 mm Ti, 14 wide)",
@@ -9,7 +9,8 @@
    ],
    "judge": 24.94,
    "depth": 24.94,
-   "inside": 337,
+   "rule": "winding",
+   "inside_winding": 337,
    "inside_parity": 337,
    "rays_agree_pct": 100.0
   },
@@ -21,7 +22,8 @@
    ],
    "judge": 24.91,
    "depth": 24.91,
-   "inside": 87,
+   "rule": "winding",
+   "inside_winding": 87,
    "inside_parity": 87,
    "rays_agree_pct": 100.0
   },
@@ -33,7 +35,8 @@
    ],
    "judge": 24.89,
    "depth": 24.89,
-   "inside": 120,
+   "rule": "winding",
+   "inside_winding": 120,
    "inside_parity": 120,
    "rays_agree_pct": 100.0
   },
@@ -45,7 +48,8 @@
    ],
    "judge": 24.77,
    "depth": 24.77,
-   "inside": 70,
+   "rule": "winding",
+   "inside_winding": 70,
    "inside_parity": 70,
    "rays_agree_pct": 100.0
   },
@@ -57,7 +61,8 @@
    ],
    "judge": 24.49,
    "depth": 24.49,
-   "inside": 76,
+   "rule": "winding",
+   "inside_winding": 76,
    "inside_parity": 76,
    "rays_agree_pct": 100.0
   },
@@ -69,7 +74,8 @@
    ],
    "judge": 24.4,
    "depth": 24.4,
-   "inside": 46,
+   "rule": "winding",
+   "inside_winding": 46,
    "inside_parity": 46,
    "rays_agree_pct": 100.0
   },
@@ -81,7 +87,8 @@
    ],
    "judge": 24.22,
    "depth": 24.22,
-   "inside": 85,
+   "rule": "winding",
+   "inside_winding": 85,
    "inside_parity": 85,
    "rays_agree_pct": 100.0
   },
@@ -93,7 +100,8 @@
    ],
    "judge": 23.96,
    "depth": 23.96,
-   "inside": 24,
+   "rule": "winding",
+   "inside_winding": 24,
    "inside_parity": 24,
    "rays_agree_pct": 100.0
   }
@@ -107,7 +115,8 @@
    ],
    "judge": 2.4,
    "depth": 2.4,
-   "inside": 10,
+   "rule": "parity",
+   "inside_winding": 10,
    "inside_parity": 10,
    "rays_agree_pct": 100.0
   },
@@ -119,7 +128,8 @@
    ],
    "judge": 1.92,
    "depth": 1.92,
-   "inside": 10,
+   "rule": "parity",
+   "inside_winding": 10,
    "inside_parity": 10,
    "rays_agree_pct": 100.0
   },
@@ -131,7 +141,8 @@
    ],
    "judge": 1.47,
    "depth": 1.47,
-   "inside": 8,
+   "rule": "parity",
+   "inside_winding": 8,
    "inside_parity": 8,
    "rays_agree_pct": 100.0
   },
@@ -143,7 +154,8 @@
    ],
    "judge": 1.28,
    "depth": 1.28,
-   "inside": 3,
+   "rule": "parity",
+   "inside_winding": 3,
    "inside_parity": 3,
    "rays_agree_pct": 100.0
   },
@@ -155,7 +167,8 @@
    ],
    "judge": 1.28,
    "depth": 1.28,
-   "inside": 7,
+   "rule": "parity",
+   "inside_winding": 7,
    "inside_parity": 7,
    "rays_agree_pct": 100.0
   },
@@ -167,7 +180,8 @@
    ],
    "judge": 1.27,
    "depth": 1.27,
-   "inside": 3,
+   "rule": "parity",
+   "inside_winding": 3,
    "inside_parity": 3,
    "rays_agree_pct": 100.0
   },
@@ -179,7 +193,8 @@
    ],
    "judge": 0.98,
    "depth": 0.98,
-   "inside": 3,
+   "rule": "parity",
+   "inside_winding": 3,
    "inside_parity": 3,
    "rays_agree_pct": 100.0
   },
@@ -191,7 +206,8 @@
    ],
    "judge": 0.72,
    "depth": 0.72,
-   "inside": 5,
+   "rule": "parity",
+   "inside_winding": 5,
    "inside_parity": 5,
    "rays_agree_pct": 100.0
   }

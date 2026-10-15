@@ -24,7 +24,7 @@
   "unit": "mm",
   "target": "<= 0.5 mm",
   "status": "FAIL",
-  "judge": "judge/body_contact.py (exact signed distance)"
+  "judge": "judge/body_contact.py (exact depth; inside = winding number)"
  },
  {
   "id": "R3",
@@ -69,7 +69,7 @@
   "unit": "mm",
   "target": "<= 0.15 mm",
   "status": "FAIL",
-  "judge": "judge/part_contact.py (geometry only)"
+  "judge": "judge/part_contact.py (geometry only; exact depth, inside = winding number)"
  },
  {
   "id": "R7",

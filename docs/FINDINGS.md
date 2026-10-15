@@ -200,14 +200,24 @@ rig's girdle law (GH lift 0.2 mm/deg above 30 deg, scapula rotating about GH), a
 
     | design | R2 before -> after | R6 before -> after |
     |---|---|---|
-    | `band_r14_4r_s1354_0` | 24.15 -> 24.87 mm (the user's forearm cuff) | 14.80 -> **0.00 mm: passes** (3 open parts, now tested) |
+    | `band_r14_4r_s1354_0` | 24.15 -> 24.87 mm (the user's forearm cuff) | 14.80 -> 1.99 mm (member l2 / l3; after re-orienting, below) |
+    | `band_r14_3r_s1351_1` (R6 step 4) | (24.87 mm, upstream re-judge) | 1.09 -> 1.09 mm (+ base in l1 1.00 mm, missed before) |
     | `l1_3r_offset` | 24.98 -> 24.94 mm (real: keep-out slabs in the arm) | 50.84 -> 2.40 mm |
     | `l1_r14_3r_s1351_1` | 24.89 -> **0.00 mm: passes** | 11.09 -> 2.39 mm |
 
     `l1_r14_3r` R2: its three old entries (24.89 / 24.71 / 17.28 mm) have 0 vertices inside by brute force, and the
     reverse test (skin vertices inside its coarse keep-out meshes, every 6th frame) is 0 too, so nothing hides between
-    the part's vertices. `band_r14_3r_s1351_1` was re-judged upstream with the winding judge and has no open part: the
-    open-mesh change leaves it as is. Only README's historical first run (R2 24.4, R6 18.5 mm) keeps old-rule numbers.
+    the part's vertices. Only README's historical first run (R2 24.4, R6 18.5 mm) keeps old-rule numbers.
+  - **Face orientation.** The band builds' proxies (`D4 member ... (proxy)`, `BOTTOM JN hub block`, the carriage) come
+    watertight but with mixed face orientation, some wholly inside out (negative volume) - in every `band_*` design.
+    A winding number (and any normal-based sign) is meaningless there: an inside-out proxy never contains anything, a
+    mixed one is wrong in patches. So `band_r14_4r` read R6 0.00 mm (fast) / 2.0 mm (upstream full run) with the
+    proxies as they came. `Mesh` now re-orients (`sdist.orient`: consistent across every two-face edge, then each closed
+    piece outward); the outside check takes R6's inside from ray parity, which does not depend on orientation. Only R6
+    of the `band_*` builds moves: their R2 / R10 container is the body (consistent), and every CAD / L1 part re-orients
+    0 faces. Tests: 30 % of a real part's faces flipped / the part inside out -> 0 % wrong. Also: Mesh welds only a
+    mesh with boundary edges - the body is closed as given, and welding merged 16 coincident (quantised) vertex pairs
+    into non-manifold edges; it had sent R2 down the open-mesh path (still exact, slower). R2 re-ran identical.
   - `signed_distance` (red team, P0) now takes its sign from the winding number too: on the posed body the
     pseudo-normal sign was 1.9 % wrong near the surface (self-overlap), now 0 % (`judge/test_sdist.py`); ~2-4 s more
     per whole-body call. `unsigned_distance` for |d| only (rt_ring's open trunk / forearm patches). Results that

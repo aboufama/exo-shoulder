@@ -4,7 +4,8 @@ the exact closest point over all triangles. Cases: a cube (sharp edges and corne
 fails), a closed sphere, a real part (the J2 cap of the reference design, a welded glb tessellation with long facets -
 where a 10-nearest-centroid search missed the closest triangle: the R6 false penetrations of 2026-10-15) and the posed
 body mesh of the rig (the R2 judge's target; it self-intersects in deep poses, where inside is defined by the winding
-number only). Also the same part as a RAW glb tessellation (unwelded: Mesh welds it) and two OPEN meshes - a sphere with
+number only). Also the same part as a RAW glb tessellation (unwelded: Mesh welds it), with 30 % of its faces flipped and
+inside out (Mesh re-orients: the band builds' proxies come so), and two OPEN meshes - a sphere with
 4 holes and the 3R design's BOTTOM + rail (holes / non-manifold edges after welding) - where one ray direction can pass
 a hole: x-rays alone vs the x / y / z majority + generalized winding number. Also reports the pseudo-normal sign and
 the old sign rule (the nearest triangle's own normal over 10 centroids) for comparison.
@@ -86,6 +87,13 @@ if __name__ == "__main__":
           f"max depth {md:.4f} vs exact {md_ref:.4f} mm", flush=True)
     res["grid"] = (gerr + cerr, 0.0, abs(md - md_ref))
     res["part raw"] = check("same part, RAW glb (unwelded; Mesh welds)", *cap, Pk)
+    Fmix = Fc.copy(); fl = rng.random(len(Fc)) < 0.3; Fmix[fl] = Fmix[fl][:, [0, 2, 1]]; truth = winding_inside(Pk, Vc, Fc)
+    for nm, Fx in (("same part, 30 % of faces flipped", Fmix), ("same part, inside out", Fc[:, [0, 2, 1]])):
+        Mx = sdist.Mesh(Vc, Fx).build_grid(); e = float(((Mx.winding_at(Pk) >= 1) != truth).mean())
+        es = float(((sdist.signed_distance(Pk, Vc, Fx) < 0) != truth).mean())          # the band proxies come like this
+        print(f"{nm:40s} {len(Pk):5d} pts: {Mx.flipped} faces re-oriented; winding wrong {100 * e:.2f}%, signed_distance wrong "
+              f"{100 * es:.2f}%", flush=True)
+        res[nm] = (max(e, es), 0.0, 0.0)
 
     def open_case(name, V, F, P):
         """open mesh: truth = generalized winding number > 0.5 where it is clear (|w - round(w)| < 0.25; next to a hole

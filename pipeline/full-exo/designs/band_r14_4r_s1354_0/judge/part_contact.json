@@ -3,14 +3,51 @@
  "tol_mm": 0.15,
  "frames_checked": 117,
  "pairs": 414,
- "seconds": 18,
+ "seconds": 15,
  "jobs": 4,
- "violations": {},
- "open_parts": [
-  "l3|D4 member l3 (proxy)",
-  "l2|D4 member l2 (proxy)",
-  "l1|D4 member l1 (proxy)"
- ],
+ "violations": {
+  "l2|D4 member l2 (proxy)  IN  l1|D4 member l1 (proxy)": {
+   "max_depth": 0.32,
+   "frames": 117,
+   "worst": [
+    "Walking arm swing",
+    108
+   ]
+  },
+  "l1|D4 member l1 (proxy)  IN  l2|D4 member l2 (proxy)": {
+   "max_depth": 0.93,
+   "frames": 115,
+   "worst": [
+    "Reach back pocket",
+    60
+   ]
+  },
+  "base|D4 member base (proxy)  IN  l1|D4 member l1 (proxy)": {
+   "max_depth": 0.46,
+   "frames": 117,
+   "worst": [
+    "Raise overhead",
+    0
+   ]
+  },
+  "l3|D4 member l3 (proxy)  IN  l2|D4 member l2 (proxy)": {
+   "max_depth": 1.94,
+   "frames": 9,
+   "worst": [
+    "Raise overhead",
+    108
+   ]
+  },
+  "l2|D4 member l2 (proxy)  IN  l3|D4 member l3 (proxy)": {
+   "max_depth": 1.99,
+   "frames": 9,
+   "worst": [
+    "Raise overhead",
+    108
+   ]
+  }
+ },
+ "open_parts": [],
  "inside": "integer winding number on welded tessellations (grid + segment crossings; open parts: x/y/z ray majority + generalized winding number where they disagree), depth = exact distance (judge/sdist.py)",
- "max_depth": 0.0
+ "max_depth": 1.99
 }
