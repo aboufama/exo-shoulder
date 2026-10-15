@@ -49,11 +49,12 @@ ID = "crossed-skin-tracks"
 D2R = math.pi / 180
 SP = 2.0                       # mm sample grid (1 point / 4 mm2)
 R_REF = 65.0                   # mm, reference radius for the fine (pre-fit) direction grids
-RAIL_W, RAIL_H = 8.0, 5.0      # rail section (width, radial height)
-CAR_L, CAR_W = 20.0, 16.0      # carriage footprint
-A_UP = 4.0                     # carriage A plate above its rail's running surface
-B_DN = 4.0                     # carriage B plate below the outer rail's underside
-BRG_R = 11.0                   # swivel ring bearing outer radius (OD 22)
+RAIL_W, RAIL_H = 10.0, 3.0     # track section: a Ti strip 10 wide x 3 radial (the strip IS the guide: no separate rail)
+CAR_L, CAR_W = 20.0, 14.0      # carriage footprint: iglidur C-slider, 2 mm walls each side of the strip
+A_UP = 2.0                     # carriage A plate above the inner strip's top (running surface)
+B_DN = 2.0                     # carriage B plate below the outer strip's underside
+LIP = 1.5                      # slider lips hooking under the inner strip's edges (A) / over the outer strip's edges (B)
+BRG_R = 9.0                    # swivel: 6700 bearing (10 x 15 x 4) in a 18 mm housing; hb = stack - A_UP - B_DN - RAIL_H
 NECK_W, NECK_T = 14.0, 6.0     # neck strap (K7)
 CLEAR = 2.0                    # K3 clearance
 FREE = 15.0                    # K3: no skin over the next 15 mm of the ray
@@ -69,8 +70,8 @@ BAR_P = 40.0 * BAR_DB + 67.5 * BAR_WB
 
 PARAMS = dict(thr=13, el_off=0.0, f1c=0.0, f1s=0.0, f2c=0.0, f2s=0.0, trim_S=1,
               th="circle", W_d=115.0, W_a=-18.0, a2=55.0, o_d=95.0, o_a=-10.0, o_A=30.0, o_B=60.0,
-              sigma=1, stack=17.0, Lmax=25.0, q=1.0, qH=1.0, slope=SLOPE, order="S_in")
-SWEEP = dict(thr=(13, 20), el_off=(0, 8), W_d=(75, 120), W_a=(-40, 55), a2=(45, 120), sigma=(-1, 1), stack=(15, 19),
+              sigma=1, stack=11.0, Lmax=25.0, q=0.95, qH=0.95, slope=SLOPE, order="S_in", rmax=90.0)
+SWEEP = dict(thr=(13, 20), el_off=(-6, 8), W_d=(0, 150), W_a=(-40, 55), a2=(55, 130), sigma=(-1, 1), stack=(11, 13),
              q=(0.93, 1.0), qH=(0.93, 1.0), trim_S=(0, 1), th=("circle", "oval"))
 
 
@@ -308,10 +309,17 @@ class Model:
                  H=dict(C=CH, frame="H", R=self.RHb, key="t", tan="tH", m=inH(CH.s), arc=D["arcH"], q=p["qH"],
                         ck=("H", p["th"], p["W_d"], p["W_a"], p["a2"], p["o_d"], p["o_a"], p["o_A"], p["o_B"])))
         D["T"] = T
+        if p.get("rmax"):            # trim each track to its frame's safe zone: samples whose fitted requirement <= rmax mm
+            for nm in ("S", "H"):
+                Tk = T[nm]; C = Tk["C"]; w_ = CAR_W if nm == inn else RAIL_W
+                rq = np.quantile(self.req_strip(Tk["ck"] + (w_,), C, w_, Tk["frame"])[vi].max(2), Tk["q"], axis=0)
+                a_ = longest_run((rq <= p["rmax"]) & Tk["m"], C)
+                if a_ is None: D["fail"] = f"T_{nm} has no safe arc"; return D
+                D["arc" + nm] = a_; Tk["arc"] = a_; Tk["m"] = (inS if nm == "S" else inH)(C.s)
         I, O = T[inn], T[out_]
         # inner radius: K3 over the carriage width (16), quantile over the closing poses, + rail height, slope-limited
         Rq = self.req_strip(I["ck"] + (CAR_W,), I["C"], CAR_W, I["frame"])
-        rho_i = np.quantile(Rq[vi].max(2), I["q"], axis=0) + RAIL_H
+        rho_i = np.quantile(Rq[vi].max(2), I["q"], axis=0) + LIP + RAIL_H         # lips under the strip edges at the requirement
         closed_i = I["arc"] is None
         rho_i = slope_limit(rho_i, I["C"].per * R_REF / I["C"].n, closed=closed_i, mask=None if closed_i else I["m"], slope=p["slope"])
         I["rho"] = rho_i
@@ -406,8 +414,8 @@ class Model:
         cov = (np.abs(xb * rr) <= CAR_L / 2) & (np.abs(yb * rr) <= CAR_W / 2) & (u @ P2 > 0)
         out[nmO] = X[~cov]
         # carriage A: cheeks beside its rail (|across| 4..8), bogie-shaped to the rail radius
-        al = np.arange(-CAR_L / 2, CAR_L / 2 + 1e-6, SP); ac = np.r_[np.arange(-CAR_W / 2, -RAIL_W / 2 + 1e-6, SP), np.arange(RAIL_W / 2, CAR_W / 2 + 1e-6, SP)]
-        rA = I["C"].val(I["rho"], c[I["key"]] + al / (aTop - A_UP)) - RAIL_H
+        al = np.arange(-CAR_L / 2, CAR_L / 2 + 1e-6, SP); ac = np.array([-6.0, -4.0, 4.0, 6.0])   # walls + lips span |across| 3.5..7: two columns each side (2 mm grid)
+        rA = I["C"].val(I["rho"], c[I["key"]] + al / (aTop - A_UP)) - RAIL_H - LIP     # walls + lips: underside 1.5 below the strip
         dA = unit(P2[None, None] + (al[:, None, None] * ta + ac[None, :, None] * na) / rA[:, None, None])
         out["car_A"] = (dA * rA[:, None, None]).reshape(-1, 3)
         # swivel ring + slide frame (bearing underside at A top), only the part outside A's footprint
@@ -449,9 +457,25 @@ class Model:
         dang = np.arccos(np.clip(Un @ c["p"], -1, 1)) * 60.0                      # neck vs the swivel block
         close = dang <= NECK_W / 2 + CAR_L / 2 * 1.42 + GAP
         if close.any():
-            lo = aTop - A_UP - RAIL_H; hi = bBot + B_DN + RAIL_H + rod                  # + the slide rods over B
+            lo = aTop - A_UP - RAIL_H - LIP; hi = bBot + B_DN + RAIL_H + rod                  # + the slide rods over B
             if ((rn[close] < hi + GAP) & (rn[close] + NECK_T > lo - GAP)).any(): return "neck/swivel"
         return ""
+
+
+def longest_run(m, C):
+    """(start arc angle, length) of the longest circular run of True samples of curve C, or None"""
+    m = np.asarray(m, bool); n = len(m)
+    if m.sum() < 3: return None
+    if m.all(): return (0.0, C.per - 10 * D2R)
+    k0 = int(np.argmin(m)); mm = np.roll(m, -k0); best = (0, 0); cur = 0; st = 0
+    for j in range(n):
+        if mm[j]:
+            if cur == 0: st = j
+            cur += 1
+            if cur > best[1]: best = (st, cur)
+        else: cur = 0
+    if best[1] < 3: return None
+    return (float(C.s[(best[0] + k0) % n]), (best[1] - 1) * C.per / C.n)
 
 
 def slope_limit(r, ds, closed, mask=None, slope=SLOPE):
@@ -676,7 +700,7 @@ def sweep(stages=("kin", "coarse", "refine")):
 def short(p):
     s = f"thr{p['thr']} el{p['el_off']:+.0f} " + (f"W({p['W_d']:.0f},{p['W_a']:.0f}) a2 {p['a2']:.0f}" if p["th"] == "circle" else
                                                   f"oval({p['o_d']:.0f},{p['o_a']:.0f},{p['o_A']:.0f},{p['o_B']:.0f})")
-    return s + f" sg{p['sigma']:+d} st{p['stack']:.0f} q{p['q']} qH{p['qH']} trim{p['trim_S']}"
+    return s + f" sg{p['sigma']:+d} st{p['stack']:.0f} q{p['q']} qH{p['qH']} trim{p['trim_S']} rmax{p.get('rmax')} {p.get('order')}"
 
 
 if __name__ == "__main__":
