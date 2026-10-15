@@ -1,95 +1,198 @@
-"""Concept model: FLOATING-CENTRE 3R (id floating-centre-3r) - the champion spherical 3R (every joint axis through the
-GH centre, tools/concept_baseline.py kinematics, parts and sampling) whose J1 hub sits on a passive 3-axis FLOAT on
-the scapula base plate, with a RIGID arm member on the user's cuff (no cuff slides).
+"""Concept model: FLOATING-CENTRE 3R (id floating-centre-3r), rebuilt on the shared kit (tools/concept_kit.py).
+
+The champion spherical 3R (every joint axis through the GH centre) whose J1 hub sits on a passive 3-axis FLOAT on the
+scapula base plate, with a RIGID arm member on the user's cuff (no cuff slides).
 
 Chain (scapula handler -> user's upper-arm cuff):
-    base plate on the handler --[X slide]--[Y slide] (tangent plane, normal = J1's axis b) --[normal slide along b]-->
-    J1 lower member --J1 R--> link 1 --J2 R--> link 2 --J3 R--> arm member, rigid on the cuff.
-DOF: 3 ACTIVE (J1-J3) + 3 PASSIVE (the float). A spherical 3R with concurrent axes, rigid on the arm, is mobile only
-if its centre c sits on the arm's rotation centre; the float's 3 translations are exactly the 3 equations c = GH, so
-the serial chain (3 P + 3 R = 6) matches the cuff's 6 DOF relative to the handler one to one: no spare coordinate,
-the float is set by closure (it cannot sag on its own: gravity on the chain is carried through the cuff by the arm).
+    base plate (contoured underside, flat slide face normal to J1's axis b) --[X slide]--[Y slide]--[normal slide
+    along b]--> J1 lower member (O20 hub) --J1 R--> link 1 --J2 R--> link 2 --J3 R--> arm member (K7 neck), rigid on
+    the cuff.
+DOF: 3 ACTIVE (J1-J3) + 3 PASSIVE (the float). A spherical 3R rigid on the arm is mobile only if its centre c sits on
+the arm's rotation centre; the float's 3 translations are the 3 equations c = GH, so the serial chain (3P + 3R = 6)
+matches the cuff's 6 DOF relative to the handler one to one: no free coordinate (R17), the float is set by closure.
 
-Parts at real size (mm) - the parent's parts exactly as tools/concept_baseline.py (O20 hubs r 10 at r_ref 70, 6.15
-per stacked level, 8 x 3 straps on the great circles, the 25 deg humerus-fixed neck; profiles = p-th percentile of
-the outermost skin radius under each sample over the valid poses + 2 mm) plus what the float adds:
-  * float LOWER PLATE (on the handler, fixed in the scapula frame): a disc about b of lateral radius
-    plate_r = hub_r + 4 (moving top plate around the hub) + trav_t (tangent travel). Its underside is contoured to
-    the skin like a link (p-th percentile + clear, sampled at the baseline's hub density: 2.5 mm at r_ref 70), its
-    upper face is the flat slide face normal to b at h_s = max(underside height along b) + t_low (1.5).
-  * the XY stage on it: h_xy (5.5: two V-groove ball slides on a shared middle plate - 0.8 gap + 2.2 plate + 0.8 gap
-    + 1.7 top plate, 2 mm balls; a catalogue crossed-roller XY table is ~12-16 mm), occupying the plate's footprint.
-  * the NORMAL slide: J1's hub rests n_down + 0.5 above the XY top, so it can descend n_down along b.
-  -> J1's hub underside (the O20 skin face) at L_j = h_s + h_xy + n_down + 0.5 along b (the spec's '5 mm raise' is
-     t_low + h_xy + n_down + 0.5 ~ 14 mm once the travel the slip law needs is in; both are swept).
-  * link 1 over the float footprint (lateral <= plate_r + 1, optionally + trav_t) clears the XY top by 1 mm with J1
-    at its lowest: underside height along b >= h_s + h_xy + n_down + 1.
-Metal sampled: as the baseline (strap / hub undersides at its density) + the lower plate's underside.
-Taken iff (per pose): the parent's closure on its branch with the evaluator's 10 deg fold margin; along each fit clip
-at full rate no joint steps > 25 deg between consecutive frames (a flip = that frame not followed); no metal of a part
-not adjacent to the float (link 1, hub 2, link 2, hub 3, neck) inside the float's volume (footprint + 1 mm, below the
-XY top + 1 mm), with the float displaced by the pose's slip; with pp=1 also no two non-adjacent chain parts closer
-than 1 mm (radial slabs: straps 3 mm, hubs 12.25 mm); with slip, the float inside its travel; then the bench's
-contact rule.
+Parts at real size (kit conventions: K4 flat O20 hubs with the 12.25 stack, K5 12 x 3 straps with the 60 deg climb,
+K7 14 x 6 neck to BOTTOM's bar, K3 march, K2 dense continuity, K6 collisions + `over`) plus the float:
+  * PLATE: a disc about b of lateral radius plate_r = HUB_R + 4 + trav_t, laid out at its true height (2 mm grid in
+    mm at h0), skin-contoured underside (K3, free member), flat slide face at plate_top = max_j(rho_j cos alpha_j) +
+    t_low along b. Its K6 slab thickness is the whole float stack above its lowest underside point:
+    t = plate_top + h_xy - min_j(rho_j cos alpha_j) (conservative where the underside is high).
+  * XY stage (h_xy: two crossed miniature slides) and the NORMAL slide: J1's hub skin face sits >= plate_top + h_xy +
+    n_down + 0.5 along b (it can descend n_down) -> hub1 ramp on the plate; link 1 (and link 2) pass over the plate
+    + stage with n_down + 1 mm (`over`).
+  The plate top needs the fitted plate profile, so evaluate() runs the kit fit twice: pass 1 measures the two plate
+  constants (the radial-vs-axial correction and the slab thickness), pass 2 is the scored one; a post-check confirms
+  hub1's F clears the true stage top + n_down + 0.5 in the scored fit.
 
-SLIP EXTENSION (the rig has no GH-vs-handler translation): judge/base_slip.py's error angles th (about the ISB scapula
-axes Xs, Ys, Zs) and slip d for each pose's (plane, elevation), lever r = base_slip.lever()[0]; ISB -> bench scapula
-frame: Zs = unit(0.5, 0, 0.87), Ys = y, Xs = Ys x Zs. delta = (Rx(th0) Ry(th1) Rz(th2) - I) r + d t_hat (t_hat
-superior), all + signs ('central'), or per pose the worst of the 8 sign patterns ('high'). Each sample is classed by
-the skin it rides (its skin point's nearest posed vertex in BP.ARMV = arm skin; else scapula / trunk skin, which slips
-with the handler). mode 'parent' (rigid base + cuff slides): chain samples over arm skin +delta, others 0; mode
-'float': the lower plate 0, chain samples over scapula / trunk skin -delta, over arm skin 0, and the pose is not taken
-if the float leaves its travel (|delta tangent| > trav_t, delta along b outside [-n_up, n_down]).
+SLIP EXTENSION (spec; the rig has no GH-vs-handler translation): judge/base_slip.py's error angles about the ISB
+scapula axes and translation d, lever r = base_slip.lever()[0]; ISB -> bench scapula frame Zs = unit(0.5, 0, 0.87),
+Ys = y, Xs = Ys x Zs; delta = (Rx(th0) Ry(th1) Rz(th2) - I) r + d t_hat (t_hat superior), + signs ('central') or the
+worst of 8 sign patterns ('high'). Each sample is classed by the skin it rides (nearest posed skin vertex of its
+point in BP.ARMV = arm skin, else scapula / trunk skin, which slips with the handler). mode 'parent' (rigid base +
+cuff slides): chain samples over arm skin +delta; mode 'float': plate 0, chain samples over scapula / trunk skin
+-delta, arm skin 0, pose not taken outside the float travel. The offsets are applied BEFORE the K3 fit (ray origins
+shifted), so the undersides are fitted to the skin they really meet; K6 uses the chain-frame points (+delta on the
+plate in float mode: the plate moves under the chain).
 
-    OMP_NUM_THREADS=1 nice -n 5 python3 docs/concepts/models/floating-centre-3r.py [check|sweep|sketch|slipstats]
+    OMP_NUM_THREADS=1 nice -n 10 python3 docs/concepts/models/floating-centre-3r.py [check|sweep|slip|redteam|sketch]
 """
-import json, math, os, sys, time
+import itertools, json, math, os, sys
 import numpy as np
-from scipy.spatial import cKDTree
-
-HERE = os.path.dirname(os.path.abspath(__file__)); REPO = os.path.abspath(os.path.join(HERE, "..", "..", ".."))
+REPO = os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
 sys.path.insert(0, os.path.join(REPO, "tools")); sys.path.insert(0, os.path.join(REPO, "judge"))
-import concept_bench as CB                                   # noqa: E402
-import concept_baseline as BL                                # noqa: E402
+import concept_kit as K                                      # noqa: E402
 import base_slip as BS                                       # noqa: E402
-BP = CB.BP
 
-ID = "floating-centre-3r"; NAME = "Floating-centre 3R: the spherical chain on a closure-set 3-axis float under J1"
-D2R = math.pi / 180
+ID = "floating-centre-3r"
+NAME = "Floating-centre 3R: the spherical chain on a closure-set 3-axis float under J1, rigid cuff"
 SWEEP_JSON = os.path.join(REPO, "docs", "concepts", "sweeps", f"{ID}.json")
-SING, JUMP = 10.0, 25.0                   # fold margin (deg), largest joint step between full-rate frames (deg)
-HUB_STACK = 12.25                         # O20 v5 hub: skin face F to the cap crown (docs/HARDWARE.md)
-R_REF = 70.0                              # the baseline's nominal radius of its direction grids
+D2R = math.pi / 180
 
-# parents: the top band / CAD 3R picks (pipeline/conformal/band_cad/inputs/*.json, kinematics only)
+# parents: the top band / CAD 3R picks (kinematics only; sigma = branch)
 PARENTS = {
-    "r20_s1414_4": dict(az=2.4305071427308924, el=80.67633718429899, a=[76.90180446920043, 66.74921235407174], w=[86.32769021001913, 21.829657347343378], branch=-1),
-    "r18_s1392_1": dict(az=32.55159237005438, el=80.5631251310032, a=[77.40737955825345, 81.44799921589232], w=[71.38254048198503, 4.778729451604692], branch=-1),
-    "r20_s1414_0": dict(az=14.334325229499703, el=82.3438225055715, a=[73.14527820556887, 66.11369579887129], w=[85.02889058725152, 26.032150845040853], branch=-1),
-    "r20_s1411_2": dict(az=77.7131348211075, el=85.10998577949123, a=[76.60886566496094, 77.72756967198949], w=[69.22974128541614, 4.398159892313142], branch=-1),
-    "r17_s1381_0": dict(az=21.572004256164064, el=74.65677070921748, a=[76.6942876679089, 77.02221721376192], w=[72.53676340483199, 19.169823974377792], branch=-1),
-    "r18_s1394_1": dict(az=57.9420534734179, el=78.4471717690747, a=[69.3505972727849, 80.165684701384], w=[66.87006930589727, 4.083931436659226], branch=-1),
+    "r20_s1414_4": dict(az=2.4305071427308924, el=80.67633718429899, a1=76.90180446920043, a2=66.74921235407174, wd=86.32769021001913, wa=21.829657347343378, sigma=-1),
+    "r18_s1392_1": dict(az=32.55159237005438, el=80.5631251310032, a1=77.40737955825345, a2=81.44799921589232, wd=71.38254048198503, wa=4.778729451604692, sigma=-1),
+    "r20_s1414_0": dict(az=14.334325229499703, el=82.3438225055715, a1=73.14527820556887, a2=66.11369579887129, wd=85.02889058725152, wa=26.032150845040853, sigma=-1),
+    "r20_s1411_2": dict(az=77.7131348211075, el=85.10998577949123, a1=76.60886566496094, a2=77.72756967198949, wd=69.22974128541614, wa=4.398159892313142, sigma=-1),
+    "r17_s1381_0": dict(az=21.572004256164064, el=74.65677070921748, a1=76.6942876679089, a2=77.02221721376192, wd=72.53676340483199, wa=19.169823974377792, sigma=-1),
+    "r18_s1394_1": dict(az=57.9420534734179, el=78.4471717690747, a1=69.3505972727849, a2=80.165684701384, wd=66.87006930589727, wa=4.083931436659226, sigma=-1),
 }
-PARAMS = dict(parent="r20_s1414_4", mode="float", slip="none", pct=95.0, hub_r=10.0, stack=3.15, t_link=3.0, width=8.0, clear=2.0,
-              neck_deg=25.0, trav_t=20.0, n_down=6.8, n_up=8.0, h_xy=5.5, t_low=1.5, cover=1, pp=1)
-SWEEP = dict(parent=list(PARENTS), pct=[60, 70, 80, 90, 95, 98, 100], trav_t=[8, 12, 16, 20], n_down=[0, 4, 6.8], h_xy=[3.5, 5.5, 8],
-             cover=[0, 1], slip=["none", "central", "high"], mode=["parent", "float"])
+PARAMS = dict(parent="r20_s1414_4", **PARENTS["r20_s1414_4"], margin=10.0, width=12.0, t_link=3.0, q=0.95,
+              float=1, trav_t=12.0, n_down=4.0, h_xy=5.5, t_low=1.5, h0=56.0, slip="none", smode="float",
+              plane="fit", stage="under", az_s=0.0, el_s=45.0, _dz=10.0, _tplate=7.0, _n=None, _rl1=70.0, _rl2=70.0)
+SWEEP = dict(parent=list(PARENTS), q=[0.9, 0.95, 0.97, 1.0], trav_t=[8.0, 12.0, 15.0], n_down=[2.0, 4.0, 6.0], h_xy=[3.5, 5.5])
 
 
-def unit(x): return x / (np.linalg.norm(x, axis=-1, keepdims=True) + 1e-12)
-def now(): return time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())
-def plog(*a): print(*a, flush=True)
+def strap(name, u, v, joints, width, t, ramp_to, over, r_lay=70.0, climb_deg=60.0, end_mm=K.HUB_R + 2.0):
+    """K.strap_member with its 2 mm grid laid out at r_lay (the link's true radius) instead of 70 mm, so a link the
+    float pushes out keeps ~1 sample / 4 mm2 (K.strap_member's layout at 70 mm thins to > 4 mm spacing above ~140 mm)"""
+    import math
+    D = K.strap_dirs(u, v, None, width=width, r_ref=r_lay); ns, nc = D.shape[1:3]
+    n_end = int(math.ceil(end_mm / 2.0)) + 1; s_ = np.repeat(np.arange(ns), nc); ramps = []
+    for (h, dz), m in zip(ramp_to, (s_ < n_end, s_ >= ns - n_end)):
+        if h: ramps.append((m, h, dz))
+    return K.Member(name, D.reshape(len(D), -1, 3), t=t, width=width, joints=tuple(joints), grid=(ns, nc), climb_deg=climb_deg,
+                    ramps=ramps, strap=True, over=over, r_ref=r_lay, cell=4.0)
 
 
-# ---- slip law (judge/base_slip.py, mapped to the bench scapula frame) ----------------------------------------------------
-ZS = unit(np.array([0.5, 0.0, 0.87])); YS = np.array([0.0, 1.0, 0.0]); XS = np.cross(YS, ZS)
+def with_parent(p, name): return dict(p, parent=name, **PARENTS[name])
+
+
+def build(B, F, p):
+    p1 = F.S(K.bvec(p["az"], p["el"]))                        # J1 fixed in the scapula (on the float: c = GH by closure)
+    p3 = F.HG(K.wdir(p["wd"], p["wa"]))                       # J3 fixed in the humerus (rigid cuff)
+    p2, ok, margin = K.closure(p1, p3, p["a1"], p["a2"], p["sigma"], margin_deg=p["margin"])
+    q = np.stack([K.axis_angle(p1, F.S([1.0, 0, 0]), p2), K.axis_angle(p2, p1, p3),
+                  K.axis_angle(p3, F.HG([0.0, -1, 0]), p2)], -1)
+    hubs = [K.hub_member("hub1", p1, "J1"), K.hub_member("hub2", p2, "J2"), K.hub_member("hub3", p3, "J3")]
+    w, t = p["width"], p["t_link"]
+    l1_over, l2_over = [], [("link1", 1.0), ("neck", 1.0)]
+    mem = []
+    joints = dict(J1=p1, J2=p2, J3=p3); hubless = ()
+    if p["float"]:
+        plate_r = K.HUB_R + 4.0 + p["trav_t"]; h0 = p["h0"]
+        pc = p1 if p["stage"] == "under" else F.S(K.bvec(p["az_s"], p["el_s"]))   # stage centre direction
+        a, bb = K.plane_frame(pc); xy = K.disc_xy(plate_r, 2.0)
+        D = K.unit(h0 * pc[:, None] + xy[None, :, :1] * a[:, None] + xy[None, :, 1:] * bb[:, None])
+        tpl = max(p["_tplate"], p["t_low"] + p["h_xy"])          # K6 slab: plate + XY stage above its lowest point
+        jf = "J1" if p["stage"] == "under" else "JF"
+        mem.append(K.Member("plate", D, kind="free", t=tpl, width=2 * plate_r, joints=(jf,), r_ref=h0, cell=4.0))
+        if p["stage"] == "under":
+            # hub1 skin face >= stage top + normal travel + 0.5 under its whole disc (_dz from plate_consts: required F
+            # minus the plate's radial max, since a ramp compares with the other member's max radius)
+            hubs[0].ramps.append((np.ones(len(hubs[0].xy), bool), "plate", p["_dz"]))
+        else:
+            # the stage sits BESIDE J1 on flatter skin; a 12 x 3 bracket (the top carriage's arm, J1's lower member)
+            # runs from the stage over its top (+ normal travel + 1) down to hub 1 at the parent's level
+            joints["JF"] = pc; hubless = ("JF",)
+            mem.append(strap("bracket", pc, p1, ("JF", "J1"), 12.0, 3.0, ((None, 0), ("hub1", 0.0)), [("plate", p["n_down"] + 1.0)], r_lay=h0))
+        l1_over = [("plate", p["n_down"] + 1.0)]
+        l2_over = l2_over + [("plate", p["n_down"] + 1.0)]
+    links = [strap("link1", p1, p2, ("J1", "J2"), w, t, (("hub1", K.STACK), ("hub2", 0.0)), l1_over, r_lay=p["_rl1"]),
+             strap("link2", p2, p3, ("J2", "J3"), w, t, (("hub2", K.STACK), ("hub3", K.STACK)), l2_over, r_lay=p["_rl2"]),
+             K.neck_member(F, p3, joints=("J3",), ramps=(("hub3", 0.0), (None, 0)))]
+    return K.Chain(members=mem + hubs + links, ok=ok, q=q, joints=joints, hubless=hubless,
+                   info=dict(residual_deg=round(float(K.closure_residual(p1, p3, p2, p["a1"], p["a2"])[ok].max()), 5) if ok.any() else None,
+                             min_margin=round(float(margin[ok].min()), 2) if ok.any() else None))
+
+
+def kin_ok(B, F, p):
+    """closure + K2 dense continuity (the float changes no kinematics: cached per chain)"""
+    key = tuple(round(float(p[k]), 6) for k in ("az", "el", "a1", "a2", "wd", "wa", "sigma", "margin"))
+    C = B.__dict__.setdefault("_fc_ok", {})
+    if key not in C:
+        ch = build(B, F, dict(p, float=0)); C[key] = K.continuity_dense(B, F, build, dict(p, float=0), ch.ok)
+    return C[key]
+
+
+def plate_consts(B, F, p, fit, rho=None):
+    """the float's flat slide face: plane normal n (scapula frame; 'fit' = least-squares plane of the contoured
+    underside, 'b' = normal to J1's axis), its top along n, the hub-1 level that clears the XY stage + normal travel
+    under the whole O20 disc, and the K6 slab thickness. rho = a fitted plate underside (else fitted here, K3 march)."""
+    ch = build(B, F, p); m = ch.members[0]; Pi = np.nonzero(fit)[0]; i0 = int(Pi[0]); n_s = len(m.D[0])
+    if rho is None:
+        R = K.requirement(B, np.repeat(Pi, n_s), m.D[Pi].reshape(-1, 3)).reshape(len(Pi), n_s); rho = K.quantile(R, p["q"])
+    RS = F.RS[i0]; Ds = m.D[i0] @ RS; Xs = Ds * rho[:, None]; bS = K.bvec(p["az"], p["el"])
+    if p["stage"] != "under": bS = K.bvec(p["az_s"], p["el_s"])
+    if p["plane"] == "fit":
+        c = Xs.mean(0); n = np.linalg.svd(Xs - c)[2][-1]; n = n if n @ bS > 0 else -n
+    else: n = bS
+    h = Xs @ n; top = float(h.max()) + p["t_low"]
+    if p["stage"] == "under":
+        hb = [x for x in ch.members if x.name == "hub1"][0]; Os = (hb.xy[:, :1] * hb.A[i0] + hb.xy[:, 1:] * hb.Bv[i0]) @ RS
+        F_req = float(((top + p["h_xy"] + p["n_down"] + 0.5 - Os @ n) / (bS @ n)).max())
+    else: F_req = -1e9
+    t_slab = float(((top + p["h_xy"]) / (Ds @ n) - rho).max())
+    return dict(n=n, top=top, F_req=F_req, dz=F_req - float(rho.max()), t_slab=t_slab, tilt=float(np.degrees(np.arccos(np.clip(n @ bS, -1, 1)))))
+
+
+def chain_only(B):
+    """in-band over the clip frames taken WITHOUT the float plate's samples (the plate hugs the skin by construction, so
+    its many samples lift the share metric while the chain itself moves away: report both)"""
+    L = B._kit_last; names = [m.name for m in L["chain"].members]; take = np.nonzero(L["take"])[0]
+    sizes = [L["pts"][n].shape[1] for n in names]; o = np.cumsum([0] + sizes)
+    keep = np.concatenate([np.arange(o[k], o[k + 1]) for k, n in enumerate(names) if n != "plate"])
+    D = [B.res[i][keep] for i in take if B.kind[i] == "clip" and B.res[i] is not None and float(np.min(B.res[i])) >= 0]
+    if not D: return dict(inband14_chain=0.0, inband10_chain=0.0)
+    D = np.concatenate(D); return dict(inband14_chain=round(float(np.mean((D >= 2) & (D <= 14))), 4), inband10_chain=round(float(np.mean((D >= 2) & (D <= 10))), 4))
+
+
+def evaluate(B, p, verbose=False):
+    """the kit's evaluate (honest defaults); with the float on, the slide-face constants are measured first on the same
+    fit poses (closure + K2), then checked again in the scored fit"""
+    p = dict(p)
+    F = getattr(B, "_kitF", None) or K.frames(B); B._kitF = F
+    if p["float"]:
+        ok, _ = kin_ok(B, F, p); c = plate_consts(B, F, p, ok)
+        p["_dz"] = c["dz"]; p["_tplate"] = c["t_slab"]; p["_n"] = c["n"].tolist()
+    r = K.evaluate(B, build, p, verbose=verbose)
+    for _ in range(2):                                        # links pushed out (audit: > 4 mm spacing): re-lay at the true radius
+        if not any("sparse" in a for a in r["audit"]): break
+        L = B._kit_last; i0 = int(np.nonzero(L["take"] if L["take"].any() else L["ok"])[0][0])
+        rl = {k: max(70.0, float(np.median(np.linalg.norm(L["pts"][k][i0], axis=-1)))) for k in ("link1", "link2")}
+        p["_rl1"], p["_rl2"] = round(rl["link1"], 0), round(rl["link2"], 0)
+        if p["float"]:
+            c = plate_consts(B, F, p, kin_ok(B, F, p)[0]); p["_dz"] = c["dz"]; p["_tplate"] = c["t_slab"]
+        r = K.evaluate(B, build, p, verbose=verbose)
+    r["layout_r"] = [p["_rl1"], p["_rl2"]]
+    r.update(chain_only(B))
+    if p["float"]:                                            # post-check in the scored fit
+        L = B._kit_last
+        c2 = plate_consts(B, F, p, L["ok"], rho=L["prof"]["plate"]); F1 = float(L["prof"]["hub1"].max())
+        r.update(float_check_mm=round(F1 - c2["F_req"], 2) if p["stage"] == "under" else None, plate_top=round(c2["top"], 1), hub1_F=round(F1, 1),
+                 plane_tilt_deg=round(c2["tilt"], 1), plate_slab=round(c2["t_slab"], 1))
+    return r
+
+
+# ---- slip extension -----------------------------------------------------------------------------------------------
+ZS = K.unit(np.array([0.5, 0.0, 0.87])); YS = np.array([0.0, 1.0, 0.0]); XS = np.cross(YS, ZS)
 ISB2S = np.c_[XS, YS, ZS]
 
 
 def slip_delta(poses, law="central", t_hat=YS):
-    """(n, 3) handler-vs-bone offset of the chain centre in the bench SCAPULA frame for each pose (plane, elev)"""
-    P = np.array([[p["plane"], p["elev"]] for p in poses]); r = ISB2S @ BS.lever()[0]
-    th, d = BS.angles(P, "central" if law == "central" else "high"); th = th * D2R; out = np.zeros((len(P), 3))
+    """(n, 3) handler-vs-bone offset of the chain centre in the bench SCAPULA frame per pose (plane, elev)"""
+    P = np.array([[q["plane"], q["elev"]] for q in poses]); r = ISB2S @ BS.lever()[0]
+    th, d = BS.angles(P, law); th = th * D2R; out = np.zeros((len(P), 3))
     signs = [np.ones(3)] if law == "central" else [np.array(s) for s in np.array(np.meshgrid([-1, 1], [-1, 1], [-1, 1])).T.reshape(-1, 3)]
     for k in range(len(P)):
         best = None
@@ -101,338 +204,215 @@ def slip_delta(poses, law="central", t_hat=YS):
     return out
 
 
-# ---- kinematics + continuity (baseline pins(); joint angles for the branch-flip check) -----------------------------------
-def kin_S(d, HG):
-    A = [x * D2R for x in d["a"]]; b = BL.bvec(d["az"], d["el"]); W0 = BL.w_dir(*d["w"]); n = len(HG)
-    p1 = np.ascontiguousarray(np.broadcast_to(b, (n, 3))); p3 = HG @ W0
-    p2, ok = BL.circ_int(p1, A[0], p3, A[1], float(d["branch"])); ok = ok & BL.tri_ok(p1, p3, A[0], A[1], SING * D2R)
-
-    def ang(ax, a, c):
-        a_ = a - (a * ax).sum(-1, keepdims=True) * ax; c_ = c - (c * ax).sum(-1, keepdims=True) * ax
-        return np.arctan2((np.cross(a_, c_) * ax).sum(-1), (a_ * c_).sum(-1))
-    r1 = np.broadcast_to(unit(np.cross(b, [1.0, 0.0, 0.0])), (n, 3)); hv = HG @ unit(np.cross(W0, [0.0, 1.0, 0.0]))
-    return ok, np.stack([ang(p1, r1, p2), ang(p2, p1, p3), ang(p3, p2, hv)], 1)
-
-
-def continuity(d, Z, idx):
-    names = list(Z["NAMES"]); cid = Z["CID"]; good = {}; flips = 0
-    for nm in CB.FIT:
-        ii = np.nonzero(cid == names.index(nm))[0]; ii = ii[np.argsort(Z["FI"][ii], kind="stable")]
-        ok, q = kin_S(d, Z["HG"][ii].astype(float)); prev = None
-        for j, gi in enumerate(ii):
-            g = bool(ok[j])
-            if g and prev is not None:
-                dq = np.degrees(np.abs((q[j] - q[prev] + np.pi) % (2 * np.pi) - np.pi))
-                if dq.max() > JUMP: g = False; flips += 1
-            good[int(gi)] = g; prev = j if ok[j] else None
-    return np.array([good.get(int(g), True) for g in idx]), flips
+def _arm_class(B, ch, prof, Pi):
+    """(P, m) bool per member: the sample's skin point (nearest posed vertex) is arm skin"""
+    from scipy.spatial import cKDTree
+    import body_pose as BP
+    ARMV = np.asarray(BP.ARMV); cls = {m.name: np.zeros((len(m.D), len(m.xy) if m.kind == "flat" else m.D.shape[1]), bool) for m in ch.members}
+    pts = {m.name: K.member_points(m, prof[m.name]) for m in ch.members}
+    for i in Pi:
+        V = np.asarray(B.skin(int(i))[0]); near = np.linalg.norm(V, axis=1) < 320; tr = cKDTree(V[near]); av = ARMV[near]
+        for m in ch.members:
+            _, j = tr.query(pts[m.name][i]); cls[m.name][i] = av[j]
+    return cls
 
 
-# ---- per parent precompute: directions, skin radii under every sample, skin class ---------------------------------------
-class Pre:
-    PARTS = ("link1", "link2", "neck", "hub1", "hub2", "hub3", "plate")
-
-    def __init__(self, B, parent, hub_r=10.0, width=8.0, neck_deg=25.0, plate_max=40.0, log=plog, limit=None):
-        t0 = time.time(); Z = CB._poses_all(); self.B = B; d = dict(PARENTS[parent], sing_deg=SING); self.d = d
-        HG = Z["HG"][B.idx].astype(float); RS = Z["RS"][B.idx].astype(float); self.RS = RS; n = len(B.idx)
-        Pt, ok, harm = BL.pins(d, HG, RS)
-        cont, flips = continuity(d, Z, B.idx); self.ok_kin = ok.copy(); self.cont = cont; self.flips = flips
-        self.ok = ok & cont
-        if limit is not None: self.ok &= limit
-        self.Pt = Pt; A = [x * D2R for x in d["a"]]; self.A = A
-        self.bT = Pt[:, 0]                                    # J1 axis b in the thorax frame per pose (= RS b)
-        D = {}
-        D["link1"] = BL.arc_dirs(Pt[:, 0], Pt[:, 1], A[0], width=width); D["link2"] = BL.arc_dirs(Pt[:, 1], Pt[:, 2], A[1], width=width)
-        ng = neck_deg * D2R
-        nk_v = unit(np.cos(ng) * Pt[:, 2] + np.sin(ng) * unit(harm - (harm * Pt[:, 2]).sum(-1, keepdims=True) * Pt[:, 2]))
-        D["neck"] = BL.arc_dirs(Pt[:, 2], nk_v, ng, width=width)
-        self.ns = {k: D[k].shape[1] for k in ("link1", "link2", "neck")}
-        for k in range(3): D[f"hub{k + 1}"] = BL.disc_dirs(Pt[:, k], hub_r)
-        # float lower plate: directions on the hub's angular grid out to plate_max lateral at the plate's height
-        i0 = int(np.argmax(self.ok)); h0 = float(BL.skin_radius(B, i0, Pt[i0, 0][None])[0]) + 4.0; self.h0 = h0
-        rad = plate_max * R_REF / h0
-        D["plate"] = BL.disc_dirs(Pt[:, 0], rad, r_ref=R_REF, step=2.5)
-        self.plate_lat = h0 * np.tan(np.arccos(np.clip((D["plate"][i0] * Pt[i0, 0]).sum(-1), -1, 1)))   # lateral mm at h0
-        self.D = {k: v.reshape(n, -1, 3) for k, v in D.items()}
-        # link-1 samples: angle from b (fixed in link 1, which turns about b)
-        self.l1_alpha = np.arccos(np.clip((self.D["link1"][i0] * Pt[i0, 0]).sum(-1), -1, 1))
-        self.R = {k: np.zeros(v.shape[:2]) for k, v in self.D.items()}; self.arm = {k: np.zeros(v.shape[:2], bool) for k, v in self.D.items()}
-        valid = np.nonzero(self.ok)[0]
-        for i in valid:
-            allD = np.concatenate([self.D[k][i] for k in self.PARTS]); rr = BL.skin_radius(B, int(i), allD)
-            V = np.asarray(B.skin(int(i))[0]); near = np.linalg.norm(V, axis=1) < 300
-            tree = cKDTree(V[near]); armv = np.asarray(BP.ARMV)[near]
-            _, j = tree.query(allD * rr[:, None]); cls = armv[j] & (rr > 0)
-            o = 0
-            for k in self.PARTS:
-                m = self.D[k].shape[1]; self.R[k][i] = rr[o:o + m]; self.arm[k][i] = cls[o:o + m]; o += m
-        self.valid = valid; self.slip = {}
-        log(f"  pre {parent}: {len(valid)}/{n} poses valid (fold {int((~ok).sum())}, flips {int((ok & ~cont).sum())} bench / {flips} full-rate), "
-            f"plate h0 {h0:.1f} mm, arm-skin share link1 {self.arm['link1'][valid].mean():.2f} link2 {self.arm['link2'][valid].mean():.2f} "
-            f"neck {self.arm['neck'][valid].mean():.2f} hub2 {self.arm['hub2'][valid].mean():.2f} hub3 {self.arm['hub3'][valid].mean():.2f}, "
-            f"{time.time() - t0:.0f} s ({B.mode})")
-
-    def delta(self, law):
-        """(n, 3) slip offset in the THORAX frame per bench pose"""
-        if law not in self.slip:
-            dS = slip_delta(self.B.poses, law); self.slip[law] = np.einsum("pij,pj->pi", self.RS, dS)
-        return self.slip[law]
-
-
-# ---- one configuration --------------------------------------------------------------------------------------------------
-def design(pre, prm):
-    """fixed part shapes (radial profiles) for the configuration: {part: (radius per sample, slab thickness)} + float"""
-    v = pre.valid; p = prm["pct"]; up = prm["stack"] + prm["t_link"]
-    prof = {k: np.percentile(pre.R[k][v], p, axis=0) + prm["clear"] for k in pre.PARTS}
-    for k in ("hub1", "hub2", "hub3"): prof[k] = np.full_like(prof[k], prof[k].max())
-    off = dict(link1=0.0, link2=up, neck=2 * up, hub1=0.0, hub2=0.0, hub3=up, plate=0.0)
-    fl = None
-    if prm["mode"] == "float":
-        plate_r = prm["hub_r"] + 4.0 + prm["trav_t"]
-        sel = pre.plate_lat <= plate_r + 1e-6
-        alpha = np.arccos(np.clip((pre.D["plate"][pre.valid[0]] * pre.bT[pre.valid[0]]).sum(-1), -1, 1))
-        under = prof["plate"]; h_s = float((under * np.cos(alpha))[sel].max()) + prm["t_low"]
-        top = h_s + prm["h_xy"]; L_j = top + prm["n_down"] + 0.5
-        a_hub = math.atan(prm["hub_r"] / R_REF)
-        prof["hub1"] = np.full_like(prof["hub1"], max(prof["hub1"].max(), L_j / math.cos(a_hub)))
-        # link 1 over the float footprint clears the XY top by 1 mm with J1 at its lowest
-        lat = L_j * np.tan(pre.l1_alpha); cov = plate_r + 1 + (prm["trav_t"] if prm["cover"] else 0)
-        need = (top + prm["n_down"] + 1.0) / np.cos(np.minimum(pre.l1_alpha, 1.4))
-        prof["link1"] = np.where(lat <= cov, np.maximum(prof["link1"], need), prof["link1"])
-        fl = dict(plate_r=plate_r, sel=sel, h_s=h_s, top=top, L_j=L_j)
-    hub_of = {"link1": ("hub1", "hub2"), "link2": ("hub2", "hub3"), "neck": ("hub3", None)}
-    for nm, (h0, h1) in hub_of.items():                      # link ends sit on their hubs (distal link on top) - baseline
-        n_s = pre.ns[nm]; nc = prof[nm].size // n_s; pr = prof[nm].reshape(n_s, nc).copy(); end = max(2, n_s // 6)
-        pr[:end] = np.maximum(pr[:end], prof[h0].max() + off[nm] - off[h0])
-        if h1: pr[-end:] = np.maximum(pr[-end:], prof[h1].max() + off[nm] - off[h1])
-        prof[nm] = pr.reshape(-1)
-    parts = [k for k in pre.PARTS if k != "plate" or fl is not None]
-    th = dict(link1=prm["t_link"], link2=prm["t_link"], neck=prm["t_link"], hub1=HUB_STACK, hub2=HUB_STACK, hub3=HUB_STACK)
-    return dict(prof=prof, off=off, fl=fl, parts=parts, th=th)
+def evaluate_slip(B, p, law, smode, verbose=False):
+    """slip-extension report (see module doc): the same chain, per-sample offsets by the skin each rides, K3 refit
+    with shifted ray origins, K2 dense (kinematics unchanged by slip), K6 in the chain frame (+delta on the plate)"""
+    p = dict(p, slip=law, smode=smode, float=1 if smode == "float" else 0)
+    F = getattr(B, "_kitF", None) or K.frames(B); B._kitF = F
+    ok, flips = kin_ok(B, F, p); ok = ok.copy()
+    if p["float"]:
+        c = plate_consts(B, F, p, ok); p["_dz"] = c["dz"]; p["_tplate"] = c["t_slab"]; p["_n"] = c["n"].tolist()
+    ch = build(B, F, p); prof0 = K.fit_profiles(B, ch, ok, p["q"], "march")
+    Pi = np.nonzero(ok)[0]; cls = _arm_class(B, ch, prof0, Pi)
+    eS = slip_delta(B.poses, law); e = np.einsum("pij,pj->pi", F.RS, eS)          # thorax frame
+    off = {}
+    for m in ch.members:
+        if smode == "parent": off[m.name] = np.where(cls[m.name][..., None], e[:, None, :], 0.0)
+        elif m.name == "plate": off[m.name] = np.zeros(cls[m.name].shape + (3,))
+        else: off[m.name] = np.where(cls[m.name][..., None], 0.0, -e[:, None, :])
+    if smode == "float":                                      # travel: the chain relative to the plate is -e
+        b = F.S(np.asarray(p["_n"])); en = -(e * b).sum(-1); et = np.linalg.norm(-e - en[:, None] * b, axis=1)
+        trav = (et <= p["trav_t"] + 1e-9) & (en >= -p["n_down"] - 1e-9) & (en <= p["n_down"] + 1e-9)
+        ok = ok & trav
+    # K3 fit with shifted origins (copy of K.fit_profiles' level pass, offsets added to the ray origins)
+    Pf = np.nonzero(ok)[0]; raw = {}
+    for m in ch.members:
+        if m.kind == "flat":
+            n = len(m.xy); Dm = np.broadcast_to(m.K[Pf][:, None, :], (len(Pf), n, 3))
+            Om = m.xy[None, :, :1] * m.A[Pf][:, None, :] + m.xy[None, :, 1:] * m.Bv[Pf][:, None, :] + off[m.name][Pf]
+        else:
+            Dm = m.D[Pf]; Om = off[m.name][Pf]
+        R = K.requirement(B, np.repeat(Pf, Dm.shape[1]), Dm.reshape(-1, 3), O=Om.reshape(-1, 3)).reshape(len(Pf), -1)
+        raw[m.name] = K.quantile(R, p["q"])
+    _levels0 = K._levels
+    try:                                                      # reuse fit_profiles' ordering/ramps/over/climb on these levels
+        K._levels = lambda B_, ch_, fit_, q_, mode_: raw
+        prof = K.fit_profiles(B, ch, ok, p["q"], "march")
+    finally:
+        K._levels = _levels0
+    pts = {m.name: K.member_points(m, prof[m.name]) for m in ch.members}          # chain frame
+    cpts = dict(pts)
+    if smode == "float": cpts["plate"] = pts["plate"] + e[:, None, :]           # plate moves by +e under the chain
+    hit = K.collisions(ch, cpts, ok)
+    take = ok & ~hit; Pt = np.nonzero(take)[0]
+    allp = np.concatenate([(pts[m.name] + off[m.name])[Pt] for m in ch.members], 1)
+    d = K.dist_many(B, np.repeat(Pt, allp.shape[1]), allp.reshape(-1, 3)).reshape(len(Pt), allp.shape[1])
+    B.reset()
+    for j, i in enumerate(Pt): B.res[i] = d[j]
+    r = B.report(); r.update(law=law, smode=smode, slip_max_mm=round(float(np.linalg.norm(eS, axis=1).max()), 1),
+                             travel_out=int((~trav).sum()) if smode == "float" else 0, collide=int(hit.sum()), flips=int(flips),
+                             arm_share={m.name: round(float(cls[m.name][Pi].mean()), 2) for m in ch.members})
+    if verbose: print(r)
+    return r
 
 
-# non-adjacent chain pairs (members: hub1+lower J1 | link1 (J1 upper, J2 lower) | hub2 | link2 | hub3 | neck)
-NONADJ = [("hub1", "link2"), ("hub1", "hub3"), ("hub1", "neck"), ("link1", "hub3"), ("link1", "neck"), ("hub2", "neck")]
+# ---- runs -----------------------------------------------------------------------------------------------------------
+def entry_of(k, p, r, tag):
+    return dict(k=k, t=K.now(), params={a: b for a, b in p.items() if not a.startswith("_")}, **{x: r[x] for x in ("inband14", "inband10", "reach", "follow", "contact", "gap")},
+                closure=r.get("closure"), mass_g=r.get("mass_g"), honest=r.get("honest"), kmode=r.get("kmode", "march"),
+                inband_member=r.get("inband_member"), float_check_mm=r.get("float_check_mm"), tag=tag,
+                inband14_chain=r.get("inband14_chain"), inband10_chain=r.get("inband10_chain"), hub1_F=r.get("hub1_F"), layout_r=r.get("layout_r"))
 
 
-def pp_clash(R0, Dirs, th):
-    """non-adjacent chain parts closer than 1 mm: footprints overlapping (directions within 2 mm at the radius - the
-    sample grids are ~2.6-3.2 mm apart) and radial slabs [r, r + thickness] within 1 mm"""
-    for a, b in NONADJ:
-        ta = cKDTree(Dirs[a]); r = 2.0 / max(80.0, float(np.median(R0[a])))
-        hits = ta.query_ball_point(Dirs[b], r)
-        for jb, js in enumerate(hits):
-            if not js: continue
-            ra = R0[a][js]; rb = R0[b][jb]
-            if np.any((rb < ra + th[a] + 1.0) & (ra < rb + th[b] + 1.0)): return f"{a}-{b}"
-    return None
-
-
-def pose_metal(pre, des, prm, i, dl=None):
-    """metal of bench pose i for a configuration: ({part: (k, 3) points}, None) or (None, reason not taken)"""
-    fl = des["fl"]
-    if not pre.ok[i]: return None, ("fold" if not pre.ok_kin[i] else "flip")
-    bT = pre.bT[i]; e = np.zeros(3) if dl is None else dl[i]; slip = prm["slip"] != "none"
-    pts = {}; Dirs = {}; R0 = {}
-    for k in des["parts"]:
-        Dk = pre.D[k][i]; prof = des["prof"][k]; arm = pre.arm[k][i]
-        if k == "plate": Dk = Dk[fl["sel"]]; prof = prof[fl["sel"]]; arm = arm[fl["sel"]]
-        r0 = prof + des["off"][k]; X = Dk * r0[:, None]
-        if slip:                                             # offset relative to the skin each sample rides
-            if prm["mode"] == "parent": X = X + np.where(arm[:, None], e[None], 0.0)
-            elif k != "plate": X = X - np.where(arm[:, None], 0.0, e[None])
-        pts[k] = X; Dirs[k] = Dk; R0[k] = r0
-    if fl is not None and slip:                              # float travel: J1 moves by -delta relative to the plate
-        en = -float(e @ bT); et = float(np.linalg.norm(-e - en * bT))
-        if et > prm["trav_t"] + 1e-9 or en < -prm["n_down"] - 1e-9 or en > prm["n_up"] + 1e-9: return None, "travel"
-    if fl is not None:                                       # chain parts not adjacent to the float vs its volume
-        ech = -e if slip else np.zeros(3)                    # chain displacement relative to the plate
-        for k in ("link1", "hub2", "link2", "hub3", "neck"):
-            Y = Dirs[k] * R0[k][:, None] + ech[None]
-            hgt = Y @ bT; lat = np.linalg.norm(Y - hgt[:, None] * bT[None], axis=1)
-            if np.any((lat <= fl["plate_r"] + 1.0) & (hgt < fl["top"] + 1.0 - 1e-6) & (hgt >= fl["h_s"] - 25.0)): return None, "float-clash " + k
-    if prm["pp"]:
-        c = pp_clash(R0, Dirs, des["th"])
-        if c: return None, "pp " + c
-    return pts, None
-
-
-_BOUND = {}
-def bind(B, pre, prm):
-    """make metal(pose, frames, params) answer for this bench / precompute (the bench API of the swarm)"""
-    _BOUND.update(B=B, pre=pre, prm=dict(prm), des=design(pre, prm),
-                  dl=pre.delta(prm["slip"]) if prm["slip"] != "none" else None)
-
-
-def metal(pose, frames, params):
-    """(k, 3) metal sample points (thorax frame, mm) of a bench pose for configuration params, or None if not taken.
-    The pose is located in the bound bench (bind(); the chain needs the pose file's scapula / humerus rotations and the
-    profiles need every valid pose, so a lone pose cannot be evaluated in isolation)."""
-    B = _BOUND["B"]
-    if dict(params) != _BOUND["prm"]: bind(B, _BOUND["pre"], dict(PARAMS, **params))
-    i = next(j for j, p in enumerate(B.poses) if p == pose)
-    pts, _ = pose_metal(_BOUND["pre"], _BOUND["des"], _BOUND["prm"], i, _BOUND["dl"])
-    return None if pts is None else np.concatenate(list(pts.values()))
-
-
-def evaluate(B, pre, prm, details=False):
-    des = design(pre, prm); fl = des["fl"]; B.reset(); why = {}; keep = {}
-    dl = pre.delta(prm["slip"]) if prm["slip"] != "none" else None
-    for i in range(len(B.idx)):
-        pts, w = pose_metal(pre, des, prm, i, dl)
-        if pts is None: why[w] = why.get(w, 0) + 1; B.record(i, None); continue
-        d = B.record(i, np.concatenate(list(pts.values())))
-        if details: keep[i] = (pts, d)
-        if float(d.min()) < 0: why["contact"] = why.get("contact", 0) + 1
-    r = B.report(); r["why"] = why
-    if fl is not None: r["float"] = {k: round(float(v), 1) for k, v in fl.items() if k in ("plate_r", "h_s", "top", "L_j")}
-    r["hub1_r"] = round(float(des["prof"]["hub1"].max()), 1)
-    return (r, keep) if details else r
-
-
-# ---- sweep bookkeeping -----------------------------------------------------------------------------------------------
 class Runner:
-    def __init__(self, B, fresh=True, log=plog):
-        self.B = B; self.log = log; self.pres = {}
-        self.entries = [] if fresh or not os.path.exists(SWEEP_JSON) else json.load(open(SWEEP_JSON))
+    def __init__(self, B, resume=True):
+        self.B = B; self.rows = json.load(open(SWEEP_JSON)) if resume and os.path.exists(SWEEP_JSON) else []
+        self.best = min((e for e in self.rows if e["params"].get("float") and e["params"].get("slip", "none") == "none"),
+                        key=lambda e: e["gap"], default=None)
 
-    def pre(self, prm):
-        key = (prm["parent"], prm["hub_r"], prm["width"], prm["neck_deg"])
-        if key not in self.pres:
-            if len(self.pres) > 2: self.pres.pop(next(iter(self.pres)))
-            self.pres[key] = Pre(self.B, prm["parent"], prm["hub_r"], prm["width"], prm["neck_deg"], log=self.log)
-        return self.pres[key]
-
-    def run(self, over, tag=""):
-        prm = dict(PARAMS); prm.update(over)
-        for e in self.entries:
-            if e["params"] == prm: return e
-        t = time.time(); r = evaluate(self.B, self.pre(prm), prm)
-        e = dict(k=len(self.entries), t=now(), params=prm, inband14=r["inband14"], inband10=r["inband10"], reach=r["reach"],
-                 follow=r["follow"], contact=r["contact"], gap=r["gap"], why=r["why"], float=r.get("float"), hub1_r=r["hub1_r"], tag=tag)
-        self.entries.append(e)
-        os.makedirs(os.path.dirname(SWEEP_JSON), exist_ok=True)
-        json.dump(self.entries, open(SWEEP_JSON + ".tmp", "w"), indent=0); os.replace(SWEEP_JSON + ".tmp", SWEEP_JSON)
-        short = {k: v for k, v in prm.items() if v != PARAMS[k]}
-        self.log(f"[{e['k']:3d}] gap {e['gap']:6.2f} ib14 {e['inband14']:.3f} ib10 {e['inband10']:.3f} reach {e['reach']:.3f} follow {e['follow']:.3f} "
-                 f"contact {e['contact']:.3f} {short} {tag} ({time.time() - t:.1f} s) {e['why']} {e['float']}")
+    def run(self, p, tag="", slip=None):
+        key = {a: b for a, b in p.items() if not a.startswith("_")}
+        for e in self.rows:
+            if e["params"] == key and e.get("tag", "").split(":")[0] == tag.split(":")[0]: return e
+        r = evaluate_slip(self.B, p, *slip) if slip else evaluate(self.B, p)
+        if slip: key = dict(key, slip=slip[0], smode=slip[1], float=1 if slip[1] == "float" else 0)
+        e = entry_of(len(self.rows), key, r, tag); self.rows.append(e)
+        json.dump(self.rows, open(SWEEP_JSON + ".tmp", "w"), indent=1); os.replace(SWEEP_JSON + ".tmp", SWEEP_JSON)
+        print(f"[{e['k']}] {tag} gap {e['gap']} reach {e['reach']} follow {e['follow']} ib14 {e['inband14']} ib10 {e['inband10']} "
+              f"contact {e['contact']} chk {e.get('float_check_mm')} per {e.get('inband_member')}", flush=True)
+        if key.get("float") and not slip and (self.best is None or e["gap"] < self.best["gap"]):
+            self.best = e
+            K.log_event(f"{ID} new best gap {e['gap']} (reach {e['reach']}, follow {e['follow']}, in-band 14 {e['inband14']}, "
+                        f"contact {e['contact']}; config k={e['k']}, parent {key['parent']}, q {key['q']}, float +-{key['trav_t']}/{key['n_down']} mm, XY {key['h_xy']})")
         return e
-
-    def best(self, filt=lambda e: True):
-        c = [e for e in self.entries if filt(e)]; return min(c, key=lambda e: e["gap"]) if c else None
-
-
-def is_float_plain(e): return e["params"]["mode"] == "float" and e["params"]["slip"] == "none"
 
 
 def sweep(B):
-    R = Runner(B)
-    # A: the parent itself on this model (no float, no slip, baseline rules + the part-part check on/off) vs the float
-    for pct in (80, 90, 95, 98, 100):
-        R.run(dict(mode="parent", pct=pct, pp=0), "A parent, baseline rules")
-        R.run(dict(mode="parent", pct=pct), "A parent + pp check")
-        R.run(dict(pct=pct), "A float, honest stack")
-    # B: float stack and travel at the best percentile
-    pbest = R.best(is_float_plain)["params"]["pct"]
-    for h_xy in (3.5, 5.5, 8.0):
-        for n_down in (0.0, 4.0, 6.8):
-            for trav in (8.0, 12.0, 16.0, 20.0):
-                R.run(dict(pct=pbest, h_xy=h_xy, n_down=n_down, trav_t=trav), "B stack/travel")
-    for cover in (0,): R.run(dict(pct=pbest, cover=cover), "B cover")
-    # C: parents
-    for par in PARENTS:
-        for pct in (90, 95, 98):
-            R.run(dict(parent=par, mode="parent", pct=pct), "C parents (parent)")
-            R.run(dict(parent=par, pct=pct), "C parents (float)")
-    # D: the slip extension - (a) parent with cuff slides vs (b) float, central and high laws
-    cand = sorted({e["params"]["parent"] for e in R.entries if e["tag"].startswith("C")},
-                  key=lambda p: R.best(lambda e: e["params"]["parent"] == p and is_float_plain(e))["gap"])[:2]
-    for par in cand:
-        for law in ("central", "high"):
-            for pct in (90, 95, 98, 100):
-                R.run(dict(parent=par, mode="parent", slip=law, pct=pct), "D slip (a) parent")
-                for trav, nd in ((12.0, 4.0), (20.0, 6.8)):
-                    R.run(dict(parent=par, slip=law, pct=pct, trav_t=trav, n_down=nd), "D slip (b) float")
-    plog("BEST float plain", json.dumps(R.best(is_float_plain)))
-    plog("BEST parent plain", json.dumps(R.best(lambda e: e["params"]["mode"] == "parent" and e["params"]["slip"] == "none")))
-    for law in ("central", "high"):
-        plog(f"BEST float {law}", json.dumps(R.best(lambda e: e["params"]["mode"] == "float" and e["params"]["slip"] == law)))
-        plog(f"BEST parent {law}", json.dumps(R.best(lambda e: e["params"]["mode"] == "parent" and e["params"]["slip"] == law)))
+    R = Runner(B); base = with_parent(PARAMS, "r20_s1414_4")
+    for q in (1.0, 0.95):                                     # A: the parent on these conventions (no float)
+        R.run(dict(base, q=q, float=0), "A parent")
+    for q in (1.0, 0.95):                                     # B: float travel x slide-face orientation
+        for trav in (4.0, 8.0, 12.0, 20.0):
+            for plane in ("b", "fit"):
+                R.run(dict(base, q=q, trav_t=trav, plane=plane, n_down=4.0 if trav < 20 else 8.0), "B float")
+    pb = min((e for e in R.rows if e["params"]["float"]), key=lambda e: e["gap"])["params"]
+    for par in PARENTS:                                       # C: other parents at the best float setting
+        if par != "r20_s1414_4":
+            R.run(dict(PARAMS, **dict(pb, **PARENTS[par], parent=par)), "C parent pick")
+            R.run(dict(PARAMS, **dict(pb, **PARENTS[par], parent=par, float=0)), "C parent pick (no float)")
     return R
 
 
-def check(B, prm=None, limit=None):
-    prm = dict(PARAMS, **(prm or {})); pre = Pre(B, prm["parent"], log=plog, limit=limit)
-    for over in (dict(mode="parent", pp=0), dict(mode="parent"), dict(), dict(slip="central"), dict(mode="parent", slip="central")):
-        p2 = dict(prm, **over); r, keep = evaluate(B, pre, p2, details=True)
-        plog(json.dumps(over), json.dumps(r, default=str))
-        taken = list(keep)
-        if not taken: continue
-        el = np.array([B.poses[i]["elev"] for i in taken]); pl = np.array([B.poses[i]["plane"] for i in taken])
-        named = dict(rest=taken[int(np.argmin(el))], overhead=taken[int(np.argmax(el))], across=taken[int(np.argmax(pl))])
-        bb = [i for i in taken if B.clip[i] == "Reach back pocket"]
-        if bb: named["behind back"] = bb[len(bb) // 2]
-        for nm, i in named.items():
-            pts, d = keep[i]; o = 0; s = []
-            for k, X in pts.items():
-                dk = d[o:o + len(X)]; o += len(X); s.append(f"{k} {np.median(dk):.1f}/{dk.min():.1f}")
-            plog(f"   {nm:12s} plane {B.poses[i]['plane']:.0f} elev {B.poses[i]['elev']:.0f}: in band 14 {np.mean((d >= 2) & (d <= 14)):.2f}  "
-                 f"(median/min mm) " + ", ".join(s))
-    return pre
+def beside(B):
+    """the variant that removes the measured limiter (J1 raised over a flat slide face on the sloped skin under it):
+    the stage moves off J1 onto flatter scapula skin, a bracket carries J1 at the parent's level"""
+    R = Runner(B); base = with_parent(PARAMS, "r20_s1414_4")
+    for q in (1.0, 0.95):
+        for (az_s, el_s) in ((0.0, 45.0), (-45.0, 50.0), (45.0, 45.0), (0.0, 30.0)):
+            R.run(dict(base, q=q, stage="beside", az_s=az_s, el_s=el_s, trav_t=12.0, n_down=4.0), "D beside")
+    pb = min((e for e in R.rows if e["params"].get("stage") == "beside"), key=lambda e: e["gap"])["params"]
+    for trav, nd in ((8.0, 4.0), (20.0, 8.0)):
+        R.run(dict(PARAMS, **dict(pb, trav_t=trav, n_down=nd)), "D beside travel")
+    R.run(dict(PARAMS, **dict(pb, plane="b")), "D beside plane")
+    return R
 
 
-def slipstats(B):
-    Z = CB._poses_all(); pre_b = {}
+def slip_runs(B, R=None):
+    R = R or Runner(B); b = R.best["params"]; p = dict(PARAMS, **b)
     for law in ("central", "high"):
-        dS = slip_delta(B.poses, law)
-        for par, d in PARENTS.items():
-            b = BL.bvec(d["az"], d["el"]); n = dS @ b; t = np.linalg.norm(dS - n[:, None] * b, axis=1)
-            plog(f"{law:8s} {par}: |delta| max {np.linalg.norm(dS, axis=1).max():.1f}, tangent max {t.max():.1f} (p90 {np.percentile(t, 90):.1f}), "
-                 f"along b min {n.min():.1f} max {n.max():.1f}; tangent > 12: {np.mean(t > 12):.3f}, > 16: {np.mean(t > 16):.3f}")
+        R.run(dict(p, float=0), f"S {law} parent+cuff slides", slip=(law, "parent"))
+        R.run(p, f"S {law} float", slip=(law, "float"))
+        for trav, nd in ((15.0, 6.0), (20.0, 8.0)):
+            R.run(dict(p, trav_t=trav, n_down=nd), f"S {law} float wide", slip=(law, "float"))
+    return R
 
 
-def sketch(B, prm, path):
+def redteam(B, p):
+    """named poses + the worst ones: per member min / median distance; the pose that jams; the point that pinches"""
+    r = evaluate(B, p); L = B._kit_last; take = L["take"]; ok = L["ok"]; ch = L["chain"]; pts = L["pts"]
+    poses = B.poses; el = np.array([q["elev"] for q in poses]); pl = np.array([q["plane"] for q in poses])
+    out = dict(report={k: r[k] for k in ("gap", "reach", "follow", "inband14", "inband10", "contact", "inband_member", "float_check_mm", "plate_top", "hub1_F")})
+    named = dict(rest=int(np.argmin(np.where(take, el, 1e9))), overhead=int(np.argmax(np.where(take, el, -1e9))),
+                 across=int(np.argmax(np.where(take, pl, -1e9))), behind=int(np.argmin(np.where(take, pl, 1e9))))
+    clip = np.array(B.clip, dtype=object) if hasattr(B, "clip") else None
+    rows = {}
+    for nm, i in named.items():
+        s = {}
+        for m in ch.members:
+            dm = B.dist(i, pts[m.name][i]); s[m.name] = (round(float(dm.min()), 1), round(float(np.median(dm)), 1))
+        rows[nm] = dict(pose={k: round(v) for k, v in poses[i].items()}, members=s)
+    out["named"] = rows
+    lost = np.nonzero(~take)[0]
+    why = {}
+    for i in lost:
+        w = "fold/flip" if not ok[i] else ("collision" if L["hit"][i] else "contact")
+        why.setdefault(w, []).append(i)
+    out["lost"] = {w: dict(n=len(v), elev=[round(float(el[i])) for i in v[:8]], plane=[round(float(pl[i])) for i in v[:8]]) for w, v in why.items()}
+    ci = [i for i in np.nonzero(take)[0] if B.res[i] is not None]
+    worst = None
+    for i in np.nonzero(take)[0]:
+        for m in ch.members:
+            dm = B.dist(int(i), pts[m.name][i]); j = int(np.argmin(dm))
+            if worst is None or dm[j] < worst[0]: worst = (float(dm[j]), m.name, int(i))
+    if worst: out["pinch"] = dict(min_mm=round(worst[0], 2), member=worst[1], pose={k: round(v) for k, v in poses[worst[2]].items()})
+    return out
+
+
+def sketch(B, p, path):
     import matplotlib; matplotlib.use("Agg"); import matplotlib.pyplot as plt
-    prm = dict(PARAMS, **prm); pre = Pre(B, prm["parent"], log=plog); r, keep = evaluate(B, pre, prm, details=True)
-    taken = [i for i in keep if float(np.min(B.res[i])) >= 0]
-    rest = min(taken, key=lambda i: B.poses[i]["elev"]); top = max(taken, key=lambda i: B.poses[i]["elev"])
+    r = evaluate(B, p); L = B._kit_last; take = np.nonzero(L["take"])[0]; el = np.array([B.poses[i]["elev"] for i in take])
+    sel = (int(take[np.argmin(el)]), int(take[np.argmax(el)]))
     cols = dict(plate="#d1495b", hub1="#edae49", hub2="#e07a5f", hub3="#00798c", link1="#66a182", link2="#8d6a9f", neck="#30638e")
     fig = plt.figure(figsize=(12, 5.6))
-    for k, i in enumerate((rest, top)):
+    for k, i in enumerate(sel):
         ax = fig.add_subplot(1, 2, k + 1, projection="3d"); V = np.asarray(B.skin(i)[0])
-        near = V[np.linalg.norm(V, axis=1) < 150][::6]; ax.scatter(near[:, 2], near[:, 0], near[:, 1], s=0.3, c="#bbbbbb", alpha=0.3)
-        pts, d = keep[i]
-        for nm, X in pts.items(): ax.scatter(X[:, 2], X[:, 0], X[:, 1], s=1.0, c=cols[nm], label=nm)
-        p = B.poses[i]; ax.set_title(f"{'rest' if k == 0 else 'highest pose taken'}: plane {p['plane']:.0f}, elev {p['elev']:.0f}, axial {p['axial']:.0f}", fontsize=9)
+        near = V[np.linalg.norm(V, axis=1) < 150][::5]; ax.scatter(near[:, 2], near[:, 0], near[:, 1], s=0.3, c="#bbbbbb", alpha=0.3)
+        for nm, X in L["pts"].items(): ax.scatter(X[i][:, 2], X[i][:, 0], X[i][:, 1], s=1.0, c=cols.get(nm, "k"), label=nm)
+        q = B.poses[i]; ax.set_title(f"{'rest' if k == 0 else 'highest pose taken'}: plane {q['plane']:.0f}, elev {q['elev']:.0f}, axial {q['axial']:.0f}", fontsize=9)
         ax.view_init(elev=22, azim=-50 if k == 0 else -30); ax.set_xlabel("z lateral"); ax.set_ylabel("x anterior"); ax.set_zlabel("y up")
         ax.set_box_aspect((1, 1, 1)); ax.set_xlim(-80, 120); ax.set_ylim(-110, 90); ax.set_zlim(-90, 110)
         if k == 0: ax.legend(fontsize=7, markerscale=5, loc="upper left")
-    fig.suptitle(f"{ID}: parent {prm['parent']}, p{prm['pct']:.0f}, float +-{prm['trav_t']:.0f} / {prm['n_down']} mm, XY {prm['h_xy']} mm; "
-                 f"gap {r['gap']}, in band 14 {r['inband14']}, reach {r['reach']}, follow {r['follow']}", fontsize=9)
+    fig.suptitle(f"{ID}: parent {p['parent']}, q {p['q']}, float +-{p['trav_t']:.0f}/{p['n_down']} mm, XY {p['h_xy']} mm; gap {r['gap']}, "
+                 f"in band 14 {r['inband14']}, reach {r['reach']}, follow {r['follow']}", fontsize=9)
     fig.tight_layout(); fig.savefig(path, dpi=110); plt.close(fig); return r
 
 
-def dev_bench(n_clip=60, n_ws=160):
-    """the bench, on the partial cache while it builds (poses whose grid is written), else as is"""
-    B = CB.Bench(n_clip=n_clip, n_ws=n_ws); lim = None
-    if B.grid is None:
-        tmp = os.path.join(CB.CACHE, B.key, "grid.tmp.npy")
-        if os.path.exists(tmp):
-            g = np.load(tmp, mmap_mode="r"); B.grid = g; B.mode = "fast-partial"; lim = np.array([g[j, 0, 0, 0] != 0 for j in range(len(g))])
-    return B, lim
+def metal(pose, frames, params):
+    """bench API: (k, 3) metal points of a bench pose for configuration params, or None if not taken (evaluates the
+    configuration on the bench that holds the pose: undersides are fitted over all its poses, so a lone pose cannot be)"""
+    B = metal.__dict__.setdefault("B", K.bench(60, 160)); key = json.dumps(params, sort_keys=True, default=str)
+    if metal.__dict__.get("key") != key:
+        evaluate(B, dict(PARAMS, **params)); L = B._kit_last; metal.L = L; metal.key = key
+    L = metal.L; i = next(j for j, q in enumerate(B.poses) if q == pose)
+    if not L["take"][i]: return None
+    return np.concatenate([L["pts"][m.name][i] for m in L["chain"].members])
 
 
 if __name__ == "__main__":
-    mode = sys.argv[1] if len(sys.argv) > 1 else "check"
-    if mode == "dev":
-        B, lim = dev_bench(); plog("bench", B.mode, len(B.idx), "written", None if lim is None else int(lim.sum()))
-        check(B, json.loads(sys.argv[2]) if len(sys.argv) > 2 else None, limit=lim)
-    elif mode == "check":
-        B = CB.Bench(n_clip=60, n_ws=160); plog("bench", B.mode, len(B.idx)); check(B, json.loads(sys.argv[2]) if len(sys.argv) > 2 else None)
-    elif mode == "slipstats":
-        B = CB.Bench(n_clip=60, n_ws=160); slipstats(B)
-    elif mode == "sweep":
-        B = CB.Bench(n_clip=60, n_ws=160); plog("bench", B.mode, len(B.idx)); sweep(B)
+    a = sys.argv[1:]; mode = a[0] if a else "check"
+    B = K.bench(60, 160); print("bench", B.mode, len(B.idx), flush=True)
+    if mode == "check":
+        for over in (dict(), dict(float=0)):
+            print(over, json.dumps(evaluate(B, dict(PARAMS, **over)), default=str), flush=True)
+    elif mode == "sweep": sweep(B)
+    elif mode == "slip": slip_runs(B)
+    elif mode == "beside": beside(B)
+    elif mode == "redteam":
+        p = dict(PARAMS, **(json.loads(a[1]) if len(a) > 1 else Runner(B).best["params"]))
+        print(json.dumps(redteam(B, p), indent=1, default=str))
     elif mode == "sketch":
-        B = CB.Bench(n_clip=60, n_ws=160); prm = json.loads(sys.argv[2]) if len(sys.argv) > 2 else {}
-        plog(sketch(B, prm, os.path.join(REPO, "docs", "concepts", "img", f"{ID}.png")))
+        p = dict(PARAMS, **(json.loads(a[1]) if len(a) > 1 else Runner(B).best["params"]))
+        print(sketch(B, p, os.path.join(REPO, "docs", "concepts", "img", f"{ID}.png")))
