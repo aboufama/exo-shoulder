@@ -24,7 +24,7 @@ def analyse(B, d):
         else: wt = WT
         ww = (w * sel_s.float())[None] * wt[:, None]
         return float((ok * ww).sum() / ww.sum()) if float(ww.sum()) > 0 else float("nan")
-    out = dict(score=r["score"], follow=r["follow"], in_band=r["in_band"], achieved=share(h, m), ceiling=share(hmin, m),
+    out = dict(score=r["score"], follow=r["follow"], in_band=r["in_band"], clip_eval=r.get("clips"), achieved=share(h, m), ceiling=share(hmin, m),
                mean_lift_mm=float(((h - hmin)[m] * w[m]).sum() / w[m].sum()), members={}, clips={})
     for mi in sorted(set(S["memA"].tolist())):
         mm = m & (S["memA"] == mi); rib = mm & (S["kindA"] == 0)
@@ -44,9 +44,11 @@ if __name__ == "__main__":
         for k in ("HUB_R", "T_LINK", "STACK", "T_W", "T_BOT", "T_LO", "HUB_UP", "CAP_UP", "RAIL_D"):
             if k.lower() in job: setattr(BI, k, float(job[k.lower()]))
         t0 = time.time(); B = BI.Band(job, torch.device("cpu"))
+        torch.set_num_threads(int(os.environ.get("THREADS", 4)))
         for d in designs:
             a = analyse(B, d); a["G"] = G; a["_src"] = d.get("_src"); res.append(a)
             print(f"G {G:g} mm  {d.get('_src', '')[:60]}: score {a.get('score', 0):.3f}  in-band achieved {a.get('achieved', 0):.3f} / ceiling {a.get('ceiling', 0):.3f}"
                   f"  (shape sits {a.get('mean_lift_mm', 0):.1f} mm above its lowest legal underside)  {time.time() - t0:.0f}s", flush=True)
             for k, v in a.get("members", {}).items(): print(f"     {k}: area {v['area']:.2f}  achieved {v['achieved']:.3f}  ceiling {v['ceiling']:.3f}")
+            for k, v in (a.get("clip_eval") or {}).items(): print(f"       {k:24s} follow {100 * v['follow']:5.1f}%  score {100 * v['score']:5.1f}%   in-band achieved {100 * a['clips'].get(k, {}).get('achieved', float('nan')):5.1f}% / ceiling {100 * a['clips'].get(k, {}).get('ceiling', float('nan')):5.1f}%")
     json.dump(res, open(os.path.join(HERE, "inband_ceiling.json"), "w"), indent=1)

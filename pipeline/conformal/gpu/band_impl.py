@@ -32,7 +32,7 @@ except ImportError:
     np = None
 
 _CACHE = {}
-CODE_VERSION = "band-2026-10-15u (fit_clips: held-out frames never shape the design; min link arc 35 deg + min arm 10 mm; pure 3R chain)"
+CODE_VERSION = "band-2026-10-15v (workspace envelope: links clear the skin over the plausible ROM; fit_clips; min link arc 35 deg + min arm 10 mm; pure 3R chain)"
 RESD = 0.25; NWD, NHD = 1440, 720; LAT_LO, LAT_HI = -75.0, 90.0; CLEAR = 3.0
 ROW0, ROW1 = int((LAT_LO + 90) / RESD), int((LAT_HI + 90) / RESD)
 HUB_R, HW, T_LINK, STACK, T_W, T_BOT = 17.0, 7.0, 5.5, 6.0, 1.0, 6.5
@@ -232,6 +232,7 @@ def load_poses(b64, dev):
     Z = np.load(io.BytesIO(gzip.decompress(base64.b64decode(b64))), allow_pickle=False)
     P = {k: torch.tensor(Z[k], device=dev) for k in ("HG", "RS", "EL", "CID", "FI", "WT")}
     P["POSE"] = Z["POSE"]; P["NAMES"] = [str(x) for x in Z["NAMES"]]
+    P["ENVELOPE"] = [str(x) for x in Z["ENVELOPE"]] if "ENVELOPE" in Z.files else []    # pack_envelope.py: clear, don't score
     return P
 
 
@@ -255,7 +256,10 @@ class Band:
             _CACHE.clear(); _CACHE[key] = (M, P); print(f"frame maps built in {time.time() - t0:.0f}s", flush=True)
         self.M, self.P = _CACHE[key]; self.S = MH * MW; self.stride = int(job.get("stride") or 1)
         cid, fi = self.P["CID"].cpu().numpy(), self.P["FI"].cpu().numpy()
-        self.clip_frames = [np.nonzero(cid == k)[0][np.argsort(fi[cid == k])].tolist() for k in range(len(self.P["NAMES"]))]
+        env = set(self.P.get("ENVELOPE", [])); self.env_ids = [k for k, n in enumerate(self.P["NAMES"]) if n in env]
+        self.clip_frames = [np.nonzero(cid == k)[0][np.argsort(fi[cid == k])].tolist() for k in range(len(self.P["NAMES"])) if k not in self.env_ids]
+        self.env_mask = (sum((self.P["CID"] == k) for k in self.env_ids) > 0) if self.env_ids else self.t.zeros(len(self.P["CID"]), dtype=self.t.bool, device=dev)
+        self.env_weight = float(job.get("env_weight", 1.0))                # score x (share of envelope poses feasible) ** env_weight
         self.P["FPS_EFF"] = 10.0 / self.stride; self.max_rate = float(job.get("max_rate", 180.0))       # deg/s per spare joint
         self.G = float(job.get("G", 10.0)); self.R_REF = float(job.get("r_ref", 65.0)); self.RAMP = math.tan(math.radians(float(job.get("ramp_deg", 35.0))))
         self.SING = float(job.get("sing_deg", 10.0)) * D2R; self.q_step = float(job.get("q_step", 10.0))
@@ -263,6 +267,7 @@ class Band:
         fc = job.get("fit_clips")                                          # held-out split: shape, BOTTOM face and the kept
         nm = list(self.P["NAMES"]); self.fit_clips = [n for n in nm if n in fc] if fc else None     # iteration see these clips only
         self.fit_mask = (sum((self.P["CID"] == k) for k, n in enumerate(nm) if n in fc) > 0) if fc else self.t.ones(len(self.P["CID"]), dtype=self.t.bool, device=dev)
+        self.fit_mask = self.fit_mask | self.env_mask                     # the envelope always shapes the design
         self.hub_relief = float(job.get("hub_relief", 0.0))                # mm the contoured hub underside may drop below the flat face
         self.balance = float(job.get("balance", 0.0))                      # blend in the mean of the 3 worst clips
         self.hub_margin0 = float(job.get("hub_margin", 2.0))               # contoured undersides keep this much spare clearance
@@ -508,13 +513,15 @@ class Band:
             path = self.dp_path(val, NBR)
             fe = feas[ar, path]; frame = t.where(fe, share[ar, path], t.zeros_like(share[:, 0]))
             score = float((frame * WT).sum() / WT.sum()); follow = float((fe.float() * WT).sum() / WT.sum())
+            env_follow = float(fe[self.env_mask].float().mean()) if bool(self.env_mask.any()) else None
             if self.balance > 0:                                                                       # favour designs good in every clip
                 cs_ = sorted(float(frame[t.tensor(fr_, device=self.dev)].mean()) for fr_ in self.clip_frames)
                 score = (1 - self.balance) * score + self.balance * sum(cs_[:3]) / 3
+            if env_follow is not None: score = score * env_follow ** self.env_weight                # must work over the whole workspace
             if __import__('os').environ.get('BAND_DEBUG'): print(f'  iter {it_}: fit {sc:.3f} -> path score {score:.3f} follow {follow:.3f} valid-any {float(VALID.any(1).float().mean()):.2f} feas-any {float(feas.any(1).float().mean()):.2f} zj4 {zj4:.1f}', flush=True)
             fm = self.fit_mask; sel = float((frame * WT)[fm].sum() / WT[fm].sum()) if self.fit_clips else score
             if best is None or sel > best["sel"]:
-                best = dict(sel=sel, score=score, follow=follow, h=h.clone(), zj4=zj4, bot_under=self._bot_under.clone(), faces=dict(self._faces),
+                best = dict(sel=sel, score=score, follow=follow, env_follow=env_follow, h=h.clone(), zj4=zj4, bot_under=self._bot_under.clone(), faces=dict(self._faces),
                             rail_under=(self._faces_full["rail_under"].clone() if self._rail is not None else None), frame=frame.clone(), cfg=path.clone(), feas=fe.clone(),
                             feas_all=feas.clone() if detail else None, share_all=share.clone() if detail else None)
         if __import__('os').environ.get('BAND_STASH'):                                             # analysis hook (pipeline/conformal/inband_ceiling.py)
@@ -524,14 +531,15 @@ class Band:
         arm_mm = [round(c, 2) for c in arm_mm]
         if not arm_ok_: return self._reject(arm_err, arm_mm=arm_mm, score_unchecked=best["score"], follow_unchecked=best["follow"])
         out = dict(score=best["score"], follow=best["follow"], score_plain=float((best["frame"] * WT).sum() / WT.sum()),
-                   score_unweighted=float(best["frame"].mean()), follow_unweighted=float(best["feas"].float().mean()),
-                   in_band=float(best["frame"][best["feas"]].mean()) if bool(best["feas"].any()) else 0.0, zj4=float(best["zj4"]), C=C, arm_mm=arm_mm,
+                   score_unweighted=float(best["frame"][~self.env_mask].mean()), follow_unweighted=float(best["feas"][~self.env_mask].float().mean()),
+                   in_band=float(best["frame"][best["feas"] & ~self.env_mask].mean()) if bool((best["feas"] & ~self.env_mask).any()) else 0.0, zj4=float(best["zj4"]), C=C, arm_mm=arm_mm,
                    min_arc=self.min_arc, min_arm_mm=self.min_arm)
         if self.fit_clips:
             fm = self.fit_mask; out["fit_clips"] = self.fit_clips; out["score_fit"] = best["sel"]
             out["follow_fit"] = float((best["feas"].float() * WT)[fm].sum() / WT[fm].sum())
         names = self.P["NAMES"]; cid = self.P["CID"]
-        out["clips"] = {names[k]: dict(score=float(best["frame"][cid == k].mean()), follow=float(best["feas"][cid == k].float().mean())) for k in range(len(names))}
+        out["clips"] = {names[k]: dict(score=float(best["frame"][cid == k].mean()), follow=float(best["feas"][cid == k].float().mean())) for k in range(len(names)) if k not in self.env_ids}
+        if self.env_ids: out["envelope"] = dict(poses=int(self.env_mask.sum()), follow=best["env_follow"], weight=self.env_weight)
         if detail or d.get("diag"):
             # where the in-band share is lost: per sample class, over the followed frames of the best path
             hb = best["h"]; cfgb = best["cfg"]; fe = best["feas"]
@@ -586,6 +594,7 @@ class Band:
                 cand = V[NBR]; bv, bi = cand.max(1); ptrs.append(NBR.gather(1, bi[:, None])[:, 0]); V = bv + val[f]
             c = int(V.argmax()); path[fr[-1]] = c
             for k in range(len(fr) - 2, -1, -1): c = int(ptrs[k][c]); path[fr[k]] = c
+        if bool(self.env_mask.any()): path = t.where(self.env_mask, val.argmax(1), path)        # no time order: best per pose
         return path
 
     def aux_parts(self, d, lower):
@@ -724,9 +733,11 @@ class Band:
         # coherent drops first: frames ranked by how far they push the envelope above the typical frame
         med = t.where(keep[:, None], Lsel, t.full_like(Lsel, float("nan"))).nanmedian(0).values
         diff = ((Lsel - med[None]).clamp(min=0) * wS).sum(1); diff = t.where(keep, diff, t.full_like(diff, float("inf")))
+        envm = self.env_mask & keep; diff = t.where(envm, t.full_like(diff, -float("inf")), diff)    # the envelope is never dropped
+        dk = keep & ~envm
         best = None
         for tau in (1.0, 0.97, 0.94, 0.9, 0.85, 0.8, 0.75, 0.7, 0.65, 0.6, 0.5, 0.4, 0.3):
-            thr = t.quantile(diff[keep], tau) if int(keep.sum()) > 1 else diff.max()
+            thr = t.quantile(diff[dk], tau) if int(dk.sum()) > 1 else diff.max()
             St = keep & (diff <= thr + 1e-6)
             if int(St.sum()) == 0: continue
             h, faces = shape_of(St); s = score_of(h, St, faces)
@@ -737,7 +748,10 @@ class Band:
             Lm = t.where(S[:, None], Lsel, t.full_like(Lsel, -1e4))
             top2 = Lm.topk(2, dim=0); excess = (top2.values[0] - top2.values[1]) * wS             # how far each arg-max frame pushes
             push = t.zeros(NP, device=self.dev).index_add_(0, top2.indices[0], excess)
-            p_drop = int((push / WT).argmax()); S[p_drop] = False
+            pr = t.where(envm, t.full_like(push, -float("inf")), push / t.clamp(WT, min=1e-6))
+            p_drop = int(pr.argmax())
+            if envm[p_drop] or not S[p_drop]: break
+            S[p_drop] = False
             h, faces = shape_of(S); s = score_of(h, S, faces)
             if s > best[0] + 1e-5: best = (s, h, S.clone(), faces); stall = 0
             else:

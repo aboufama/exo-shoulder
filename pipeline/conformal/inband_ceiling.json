@@ -1,0 +1,370 @@
+[
+ {
+  "score": 0.35694919725259144,
+  "follow": 0.9353711605072021,
+  "in_band": 0.4355155825614929,
+  "clip_eval": {
+   "Raise overhead": {
+    "score": 0.4912164509296417,
+    "follow": 1.0
+   },
+   "Drink from a cup": {
+    "score": 0.3995295464992523,
+    "follow": 1.0
+   },
+   "Comb hair": {
+    "score": 0.5041847825050354,
+    "follow": 1.0
+   },
+   "Reach a high shelf": {
+    "score": 0.4891524314880371,
+    "follow": 1.0
+   },
+   "Wash opposite shoulder": {
+    "score": 0.2684685289859772,
+    "follow": 1.0
+   },
+   "Reach back pocket": {
+    "score": 0.11973022669553757,
+    "follow": 0.26530611515045166
+   },
+   "Wave": {
+    "score": 0.4697074592113495,
+    "follow": 0.982758641242981
+   },
+   "Walking arm swing": {
+    "score": 0.42155593633651733,
+    "follow": 1.0
+   }
+  },
+  "achieved": 0.448713481426239,
+  "ceiling": 0.7402826547622681,
+  "mean_lift_mm": 6.154864311218262,
+  "members": {
+   "member 1": {
+    "area": 0.6264820694923401,
+    "achieved": 0.6330516338348389,
+    "ceiling": 0.756049394607544,
+    "ribbon_ceiling": 0.8201836347579956
+   },
+   "member 2": {
+    "area": 0.37351804971694946,
+    "achieved": 0.13953280448913574,
+    "ceiling": 0.7138375639915466,
+    "ribbon_ceiling": 0.7861812114715576
+   }
+  },
+  "clips": {
+   "Raise overhead": {
+    "achieved": 0.4910029470920563,
+    "ceiling": 0.7915157079696655
+   },
+   "Drink from a cup": {
+    "achieved": 0.39990001916885376,
+    "ceiling": 0.68349289894104
+   },
+   "Comb hair": {
+    "achieved": 0.5039634704589844,
+    "ceiling": 0.8393880128860474
+   },
+   "Reach a high shelf": {
+    "achieved": 0.488653302192688,
+    "ceiling": 0.823593258857727
+   },
+   "Wash opposite shoulder": {
+    "achieved": 0.2685677111148834,
+    "ceiling": 0.4461406469345093
+   },
+   "Reach back pocket": {
+    "achieved": 0.4507303833961487,
+    "ceiling": 0.8104013800621033
+   },
+   "Wave": {
+    "achieved": 0.4779755771160126,
+    "ceiling": 0.6907466053962708
+   },
+   "Walking arm swing": {
+    "achieved": 0.42098650336265564,
+    "ceiling": 0.7796391844749451
+   }
+  },
+  "G": 10.0,
+  "_src": "search n3 seed 1351 rank 1 (fit score 0.414)"
+ },
+ {
+  "score": 0.31503363053003947,
+  "follow": 1.0,
+  "in_band": 0.33811619877815247,
+  "clip_eval": {
+   "Raise overhead": {
+    "score": 0.35041359066963196,
+    "follow": 1.0
+   },
+   "Drink from a cup": {
+    "score": 0.27356594800949097,
+    "follow": 1.0
+   },
+   "Comb hair": {
+    "score": 0.3790293335914612,
+    "follow": 1.0
+   },
+   "Reach a high shelf": {
+    "score": 0.3955727219581604,
+    "follow": 1.0
+   },
+   "Wash opposite shoulder": {
+    "score": 0.21340766549110413,
+    "follow": 1.0
+   },
+   "Reach back pocket": {
+    "score": 0.42423906922340393,
+    "follow": 1.0
+   },
+   "Wave": {
+    "score": 0.36656418442726135,
+    "follow": 1.0
+   },
+   "Walking arm swing": {
+    "score": 0.32545751333236694,
+    "follow": 1.0
+   }
+  },
+  "achieved": 0.3278298079967499,
+  "ceiling": 0.5674576759338379,
+  "mean_lift_mm": 5.43408727645874,
+  "members": {
+   "member 1": {
+    "area": 0.598253607749939,
+    "achieved": 0.4648739695549011,
+    "ceiling": 0.7013492584228516,
+    "ribbon_ceiling": 0.8800292015075684
+   },
+   "member 2": {
+    "area": 0.40174663066864014,
+    "achieved": 0.12375301122665405,
+    "ceiling": 0.3680754601955414,
+    "ribbon_ceiling": 0.27445414662361145
+   }
+  },
+  "clips": {
+   "Raise overhead": {
+    "achieved": 0.33455368876457214,
+    "ceiling": 0.5526272654533386
+   },
+   "Drink from a cup": {
+    "achieved": 0.27330482006073,
+    "ceiling": 0.4930410087108612
+   },
+   "Comb hair": {
+    "achieved": 0.3555949926376343,
+    "ceiling": 0.611452579498291
+   },
+   "Reach a high shelf": {
+    "achieved": 0.3655492663383484,
+    "ceiling": 0.6453279852867126
+   },
+   "Wash opposite shoulder": {
+    "achieved": 0.2134619653224945,
+    "ceiling": 0.38906341791152954
+   },
+   "Reach back pocket": {
+    "achieved": 0.39567700028419495,
+    "ceiling": 0.6990458965301514
+   },
+   "Wave": {
+    "achieved": 0.3625938594341278,
+    "ceiling": 0.5694848895072937
+   },
+   "Walking arm swing": {
+    "achieved": 0.2930597960948944,
+    "ceiling": 0.5843859314918518
+   }
+  },
+  "G": 10.0,
+  "_src": "search n3 seed 1363 rank 0 (fit score 0.427)"
+ },
+ {
+  "score": 0.46534775495529174,
+  "follow": 0.9353711605072021,
+  "in_band": 0.5578819513320923,
+  "clip_eval": {
+   "Raise overhead": {
+    "score": 0.6028248071670532,
+    "follow": 1.0
+   },
+   "Drink from a cup": {
+    "score": 0.5275424122810364,
+    "follow": 1.0
+   },
+   "Comb hair": {
+    "score": 0.6259870529174805,
+    "follow": 1.0
+   },
+   "Reach a high shelf": {
+    "score": 0.6072635054588318,
+    "follow": 1.0
+   },
+   "Wash opposite shoulder": {
+    "score": 0.4107814133167267,
+    "follow": 1.0
+   },
+   "Reach back pocket": {
+    "score": 0.15352845191955566,
+    "follow": 0.26530611515045166
+   },
+   "Wave": {
+    "score": 0.5665990710258484,
+    "follow": 0.982758641242981
+   },
+   "Walking arm swing": {
+    "score": 0.5594526529312134,
+    "follow": 1.0
+   }
+  },
+  "achieved": 0.5692508220672607,
+  "ceiling": 0.8252681493759155,
+  "mean_lift_mm": 6.1561479568481445,
+  "members": {
+   "member 1": {
+    "area": 0.6264820694923401,
+    "achieved": 0.7765786051750183,
+    "ceiling": 0.8014711141586304,
+    "ribbon_ceiling": 0.8413476943969727
+   },
+   "member 2": {
+    "area": 0.37351804971694946,
+    "achieved": 0.22151097655296326,
+    "ceiling": 0.8651818037033081,
+    "ribbon_ceiling": 0.9079132080078125
+   }
+  },
+  "clips": {
+   "Raise overhead": {
+    "achieved": 0.6023817658424377,
+    "ceiling": 0.8638255596160889
+   },
+   "Drink from a cup": {
+    "achieved": 0.5271338224411011,
+    "ceiling": 0.7946938872337341
+   },
+   "Comb hair": {
+    "achieved": 0.6253541707992554,
+    "ceiling": 0.8970057368278503
+   },
+   "Reach a high shelf": {
+    "achieved": 0.6064643263816833,
+    "ceiling": 0.8738677501678467
+   },
+   "Wash opposite shoulder": {
+    "achieved": 0.41062644124031067,
+    "ceiling": 0.6017451286315918
+   },
+   "Reach back pocket": {
+    "achieved": 0.577907383441925,
+    "ceiling": 0.8402567505836487
+   },
+   "Wave": {
+    "achieved": 0.5761599540710449,
+    "ceiling": 0.8222500085830688
+   },
+   "Walking arm swing": {
+    "achieved": 0.5586639046669006,
+    "ceiling": 0.8375856280326843
+   }
+  },
+  "G": 14.0,
+  "_src": "search n3 seed 1351 rank 1 (fit score 0.414)"
+ },
+ {
+  "score": 0.47127718329429624,
+  "follow": 1.0,
+  "in_band": 0.4917953610420227,
+  "clip_eval": {
+   "Raise overhead": {
+    "score": 0.5216878652572632,
+    "follow": 1.0
+   },
+   "Drink from a cup": {
+    "score": 0.4337999224662781,
+    "follow": 1.0
+   },
+   "Comb hair": {
+    "score": 0.5211058259010315,
+    "follow": 1.0
+   },
+   "Reach a high shelf": {
+    "score": 0.546771764755249,
+    "follow": 1.0
+   },
+   "Wash opposite shoulder": {
+    "score": 0.3630276024341583,
+    "follow": 1.0
+   },
+   "Reach back pocket": {
+    "score": 0.5947092771530151,
+    "follow": 1.0
+   },
+   "Wave": {
+    "score": 0.491054892539978,
+    "follow": 1.0
+   },
+   "Walking arm swing": {
+    "score": 0.49502506852149963,
+    "follow": 1.0
+   }
+  },
+  "achieved": 0.4713919758796692,
+  "ceiling": 0.7417307496070862,
+  "mean_lift_mm": 5.43408727645874,
+  "members": {
+   "member 1": {
+    "area": 0.598253607749939,
+    "achieved": 0.6394379138946533,
+    "ceiling": 0.8074347972869873,
+    "ribbon_ceiling": 0.8951092958450317
+   },
+   "member 2": {
+    "area": 0.40174663066864014,
+    "achieved": 0.2211492657661438,
+    "ceiling": 0.643888533115387,
+    "ribbon_ceiling": 0.5677947998046875
+   }
+  },
+  "clips": {
+   "Raise overhead": {
+    "achieved": 0.49740785360336304,
+    "ceiling": 0.7645727396011353
+   },
+   "Drink from a cup": {
+    "achieved": 0.41238653659820557,
+    "ceiling": 0.6959545016288757
+   },
+   "Comb hair": {
+    "achieved": 0.48394671082496643,
+    "ceiling": 0.7570993900299072
+   },
+   "Reach a high shelf": {
+    "achieved": 0.5081902742385864,
+    "ceiling": 0.7883073091506958
+   },
+   "Wash opposite shoulder": {
+    "achieved": 0.35415181517601013,
+    "ceiling": 0.58458012342453
+   },
+   "Reach back pocket": {
+    "achieved": 0.5620939135551453,
+    "ceiling": 0.8430286645889282
+   },
+   "Wave": {
+    "achieved": 0.4714866578578949,
+    "ceiling": 0.7072188258171082
+   },
+   "Walking arm swing": {
+    "achieved": 0.45331159234046936,
+    "ceiling": 0.7942243218421936
+   }
+  },
+  "G": 14.0,
+  "_src": "search n3 seed 1363 rank 0 (fit score 0.427)"
+ }
+]
