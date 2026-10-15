@@ -5,7 +5,7 @@
  "family": "spherical 3R",
  "active_dof": 3,
  "passive_dof": 0,
- "status": "screened",
+ "status": "refuted",
  "t_ideated": null,
  "t_screened": "2026-10-15T18:59:42Z",
  "reach": 0.8938,
@@ -14,11 +14,11 @@
  "inband10": 0.1334,
  "contact": 0.0469,
  "gap": 72.67,
- "v_reach": null,
- "v_follow": null,
- "v_inband14": null,
- "v_inband10": null,
- "v_gap": null,
+ "v_reach": 0.8167,
+ "v_follow": 1.0,
+ "v_inband14": 0.2226,
+ "v_inband10": 0.126,
+ "v_gap": 87.47,
  "n_configs": 16,
  "verdict": "not worth its own GPU sweep: the Cardan itself scores 80.2 at best (k6; 81.87 after the hub-footprint fix, k15) and the global max-margin placement 103.7; the best number (72.67, honest audit) is the shorter-arc variant a1=a2=75 at the posterior seed, still worse than the champion 3R (68.93 baseline row, kit template 70.19, 65.05 on the kit's honest flat-hub geometry per FINDINGS). Hand to the spherical-3R GPU sweep only the observation that a posterior chain with ~75 deg arcs and ~10 deg margin follows every clip frame (0 flips) with reach 0.89",
  "limiter": "links float: link 1 (infraspinatus) 2 % and link 2 (posterior deltoid) 6 % of samples in band, median skin distance 26-30 mm in every config - a rigid great-circle arc at ~110 mm must clear the highest posterior skin it sweeps over; end hubs on 49 deg oblique skin need 35-39 mm wedges (hub 3 at 174 mm, 1 % in band). Contact poses: across-body with internal rotation (plane 90-120, axial -120..-165: trunk over hub 3 / link 2 / neck, up to 32 mm inside), behind-back (plane -75 elev 60 axial 60: hub 2 + link 1), overhead elbow-flexed (plane 0 elev 150: forearm onto hub 2)",
@@ -41,5 +41,6 @@
   "drop": 15,
   "width": 12.0,
   "t_link": 3.0
- }
+ },
+ "verification": "adversarial verifier 2026-10-15: DOF 3 active / 0 passive confirmed, closure residual 0, 0 flips (dense K2), kit audit clean, grid artefact none (same 220 poses, exact path 73.51 vs grid 73.54). One modelling error: the wedge seats' skin-fitted underside was laid out in a thorax-referenced azimuth frame, not in the member that carries it (base at J1, link 2 at J2 / J3 rotate -11..24, -122..110, -171..166 deg about the hub axis relative to that frame); fixed in the material frame: 72.67 -> 73.54 (hub 2 in band 0.237 -> 0.156). Large bench Bench(110,360), exact signed distance, the rigid geometry fitted on Bench(60,160) frozen (250 poses unseen by the fit), non-adjacent parts >= 1 mm: gap 87.47 (reach 0.817, contact 0.114: 52 contact poses, across-body internal rotation plane 60-150 and behind-back plane -90..-60 and overhead elev 135-165 plane -15..15). A refit on the 470 poses was not run (exact K3 march ~1-2 CPU h at load 12-15). Worse than 68.93 on every measure: refuted."
 }
