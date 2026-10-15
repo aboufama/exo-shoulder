@@ -1,0 +1,380 @@
+[
+ {
+  "src": "search n3 seed 1351 rank 0 (fit score 0.414)",
+  "n": 3,
+  "alpha_star_min_deg": 16.5,
+  "alpha_star_p5_deg": 18.9,
+  "mu_crit_min": 0.296,
+  "mu_crit_p5": 0.342,
+  "share_of_frames_self_locking": {
+   "0.1": 0.0,
+   "0.15": 0.0,
+   "0.2": 0.0,
+   "0.3": 0.007,
+   "0.37": 0.198
+  },
+  "humeral_axis_moment_per_Nm_joint_friction": {
+   "p50": 0.95,
+   "p95": 2.67,
+   "max": 2.96
+  },
+  "clips": {
+   "Raise overhead": {
+    "alpha_star_min_deg": 22.9,
+    "mu_crit": 0.422
+   },
+   "Drink from a cup": {
+    "alpha_star_min_deg": 21.7,
+    "mu_crit": 0.398
+   },
+   "Comb hair": {
+    "alpha_star_min_deg": 20.1,
+    "mu_crit": 0.366
+   },
+   "Reach a high shelf": {
+    "alpha_star_min_deg": 19.4,
+    "mu_crit": 0.351
+   },
+   "Wash opposite shoulder": {
+    "alpha_star_min_deg": 16.5,
+    "mu_crit": 0.296
+   },
+   "Reach back pocket": {
+    "alpha_star_min_deg": 20.1,
+    "mu_crit": 0.365
+   },
+   "Wave": {
+    "alpha_star_min_deg": 19.4,
+    "mu_crit": 0.352
+   },
+   "Walking arm swing": {
+    "alpha_star_min_deg": 18.6,
+    "mu_crit": 0.336
+   }
+  }
+ },
+ {
+  "src": "search n3 seed 1351 rank 1 (fit score 0.414)",
+  "n": 3,
+  "alpha_star_min_deg": 12.1,
+  "alpha_star_p5_deg": 15.1,
+  "mu_crit_min": 0.215,
+  "mu_crit_p5": 0.27,
+  "share_of_frames_self_locking": {
+   "0.1": 0.0,
+   "0.15": 0.0,
+   "0.2": 0.0,
+   "0.3": 0.138,
+   "0.37": 0.385
+  },
+  "humeral_axis_moment_per_Nm_joint_friction": {
+   "p50": 0.76,
+   "p95": 2.57,
+   "max": 3.1
+  },
+  "clips": {
+   "Raise overhead": {
+    "alpha_star_min_deg": 16.7,
+    "mu_crit": 0.299
+   },
+   "Drink from a cup": {
+    "alpha_star_min_deg": 18.6,
+    "mu_crit": 0.336
+   },
+   "Comb hair": {
+    "alpha_star_min_deg": 16.9,
+    "mu_crit": 0.305
+   },
+   "Reach a high shelf": {
+    "alpha_star_min_deg": 17.9,
+    "mu_crit": 0.322
+   },
+   "Wash opposite shoulder": {
+    "alpha_star_min_deg": 12.1,
+    "mu_crit": 0.215
+   },
+   "Reach back pocket": {
+    "alpha_star_min_deg": 16.5,
+    "mu_crit": 0.297
+   },
+   "Wave": {
+    "alpha_star_min_deg": 17.1,
+    "mu_crit": 0.307
+   },
+   "Walking arm swing": {
+    "alpha_star_min_deg": 15.0,
+    "mu_crit": 0.267
+   }
+  }
+ },
+ {
+  "src": "r15 seed 1361 rank 0 (fit 0.418)",
+  "n": 3,
+  "alpha_star_min_deg": 12.4,
+  "alpha_star_p5_deg": 16.1,
+  "mu_crit_min": 0.221,
+  "mu_crit_p5": 0.288,
+  "share_of_frames_self_locking": {
+   "0.1": 0.0,
+   "0.15": 0.0,
+   "0.2": 0.0,
+   "0.3": 0.128,
+   "0.37": 0.291
+  },
+  "humeral_axis_moment_per_Nm_joint_friction": {
+   "p50": 0.94,
+   "p95": 2.73,
+   "max": 3.43
+  },
+  "clips": {
+   "Raise overhead": {
+    "alpha_star_min_deg": 27.7,
+    "mu_crit": 0.525
+   },
+   "Drink from a cup": {
+    "alpha_star_min_deg": 19.0,
+    "mu_crit": 0.345
+   },
+   "Comb hair": {
+    "alpha_star_min_deg": 18.2,
+    "mu_crit": 0.328
+   },
+   "Reach a high shelf": {
+    "alpha_star_min_deg": 16.4,
+    "mu_crit": 0.293
+   },
+   "Wash opposite shoulder": {
+    "alpha_star_min_deg": 12.4,
+    "mu_crit": 0.221
+   },
+   "Reach back pocket": {
+    "alpha_star_min_deg": 18.3,
+    "mu_crit": 0.331
+   },
+   "Wave": {
+    "alpha_star_min_deg": 21.9,
+    "mu_crit": 0.401
+   },
+   "Walking arm swing": {
+    "alpha_star_min_deg": 15.6,
+    "mu_crit": 0.279
+   }
+  }
+ },
+ {
+  "src": "r15 seed 1362 rank 0 (fit 0.423)",
+  "n": 3,
+  "alpha_star_min_deg": 14.3,
+  "alpha_star_p5_deg": 17.3,
+  "mu_crit_min": 0.254,
+  "mu_crit_p5": 0.312,
+  "share_of_frames_self_locking": {
+   "0.1": 0.0,
+   "0.15": 0.0,
+   "0.2": 0.0,
+   "0.3": 0.02,
+   "0.37": 0.244
+  },
+  "humeral_axis_moment_per_Nm_joint_friction": {
+   "p50": 0.98,
+   "p95": 2.67,
+   "max": 3.24
+  },
+  "clips": {
+   "Raise overhead": {
+    "alpha_star_min_deg": 24.0,
+    "mu_crit": 0.446
+   },
+   "Drink from a cup": {
+    "alpha_star_min_deg": 20.4,
+    "mu_crit": 0.373
+   },
+   "Comb hair": {
+    "alpha_star_min_deg": 19.2,
+    "mu_crit": 0.347
+   },
+   "Reach a high shelf": {
+    "alpha_star_min_deg": 17.6,
+    "mu_crit": 0.317
+   },
+   "Wash opposite shoulder": {
+    "alpha_star_min_deg": 14.3,
+    "mu_crit": 0.254
+   },
+   "Reach back pocket": {
+    "alpha_star_min_deg": 19.2,
+    "mu_crit": 0.347
+   },
+   "Wave": {
+    "alpha_star_min_deg": 20.4,
+    "mu_crit": 0.372
+   },
+   "Walking arm swing": {
+    "alpha_star_min_deg": 16.9,
+    "mu_crit": 0.303
+   }
+  }
+ },
+ {
+  "src": "r15 seed 1363 rank 0 (fit 0.427)",
+  "n": 3,
+  "alpha_star_min_deg": 12.2,
+  "alpha_star_p5_deg": 16.8,
+  "mu_crit_min": 0.216,
+  "mu_crit_p5": 0.302,
+  "share_of_frames_self_locking": {
+   "0.1": 0.0,
+   "0.15": 0.0,
+   "0.2": 0.0,
+   "0.3": 0.04,
+   "0.37": 0.202
+  },
+  "humeral_axis_moment_per_Nm_joint_friction": {
+   "p50": 0.87,
+   "p95": 2.7,
+   "max": 3.4
+  },
+  "clips": {
+   "Raise overhead": {
+    "alpha_star_min_deg": 25.4,
+    "mu_crit": 0.474
+   },
+   "Drink from a cup": {
+    "alpha_star_min_deg": 20.4,
+    "mu_crit": 0.373
+   },
+   "Comb hair": {
+    "alpha_star_min_deg": 21.4,
+    "mu_crit": 0.392
+   },
+   "Reach a high shelf": {
+    "alpha_star_min_deg": 16.6,
+    "mu_crit": 0.299
+   },
+   "Wash opposite shoulder": {
+    "alpha_star_min_deg": 12.2,
+    "mu_crit": 0.216
+   },
+   "Reach back pocket": {
+    "alpha_star_min_deg": 20.9,
+    "mu_crit": 0.381
+   },
+   "Wave": {
+    "alpha_star_min_deg": 22.0,
+    "mu_crit": 0.404
+   },
+   "Walking arm swing": {
+    "alpha_star_min_deg": 18.0,
+    "mu_crit": 0.326
+   }
+  }
+ },
+ {
+  "src": "r15 seed 1364 rank 0 (fit 0.427)",
+  "n": 3,
+  "alpha_star_min_deg": 12.4,
+  "alpha_star_p5_deg": 16.2,
+  "mu_crit_min": 0.22,
+  "mu_crit_p5": 0.29,
+  "share_of_frames_self_locking": {
+   "0.1": 0.0,
+   "0.15": 0.0,
+   "0.2": 0.0,
+   "0.3": 0.067,
+   "0.37": 0.178
+  },
+  "humeral_axis_moment_per_Nm_joint_friction": {
+   "p50": 0.96,
+   "p95": 2.84,
+   "max": 3.69
+  },
+  "clips": {
+   "Raise overhead": {
+    "alpha_star_min_deg": 24.4,
+    "mu_crit": 0.454
+   },
+   "Drink from a cup": {
+    "alpha_star_min_deg": 20.9,
+    "mu_crit": 0.382
+   },
+   "Comb hair": {
+    "alpha_star_min_deg": 20.5,
+    "mu_crit": 0.373
+   },
+   "Reach a high shelf": {
+    "alpha_star_min_deg": 15.4,
+    "mu_crit": 0.276
+   },
+   "Wash opposite shoulder": {
+    "alpha_star_min_deg": 12.4,
+    "mu_crit": 0.22
+   },
+   "Reach back pocket": {
+    "alpha_star_min_deg": 21.8,
+    "mu_crit": 0.399
+   },
+   "Wave": {
+    "alpha_star_min_deg": 20.5,
+    "mu_crit": 0.373
+   },
+   "Walking arm swing": {
+    "alpha_star_min_deg": 18.8,
+    "mu_crit": 0.341
+   }
+  }
+ },
+ {
+  "src": "search n4 seed 1354 rank 0 (fit score 0.477)",
+  "n": 4,
+  "alpha_star_min_deg": 6.8,
+  "alpha_star_p5_deg": 13.2,
+  "mu_crit_min": 0.12,
+  "mu_crit_p5": 0.234,
+  "share_of_frames_self_locking": {
+   "0.1": 0.0,
+   "0.15": 0.01,
+   "0.2": 0.03,
+   "0.3": 0.44,
+   "0.37": 0.807
+  },
+  "humeral_axis_moment_per_Nm_joint_friction": {
+   "p50": 0.89,
+   "p95": 3.23,
+   "max": 3.49
+  },
+  "clips": {
+   "Raise overhead": {
+    "alpha_star_min_deg": 13.5,
+    "mu_crit": 0.24
+   },
+   "Drink from a cup": {
+    "alpha_star_min_deg": 16.9,
+    "mu_crit": 0.304
+   },
+   "Comb hair": {
+    "alpha_star_min_deg": 10.3,
+    "mu_crit": 0.181
+   },
+   "Reach a high shelf": {
+    "alpha_star_min_deg": 13.9,
+    "mu_crit": 0.247
+   },
+   "Wash opposite shoulder": {
+    "alpha_star_min_deg": 12.0,
+    "mu_crit": 0.213
+   },
+   "Reach back pocket": {
+    "alpha_star_min_deg": 6.8,
+    "mu_crit": 0.12
+   },
+   "Wave": {
+    "alpha_star_min_deg": 13.5,
+    "mu_crit": 0.241
+   },
+   "Walking arm swing": {
+    "alpha_star_min_deg": 17.2,
+    "mu_crit": 0.31
+   }
+  }
+ }
+]
