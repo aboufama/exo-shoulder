@@ -90,12 +90,12 @@
       const pin = s => V.madd(Cw, u2w, s * (P.ring_r + 2)), foot = s => V.madd(pin(s), V.unit(V.reject(V.sub(Cw, V.scale(ctx.armAxis, V.dot(Cw, ctx.armAxis))), ctx.armAxis)), -12);
       return [
         { kind: 'plate', role: 'fixed-scapula', c: V.madd(Ow, A1, P.R1 - 3), z: A1, x: ctx.attach.scapDir([1, 0, 0]), size: [40, 30], t: 3 },
-        { kind: 'hub', role: 'active', name: 'J1 (axis through O)', c: V.madd(Ow, A1, P.R1), axis: A1, r: P.hub_r, h },
+        { kind: 'hub', role: 'active', name: 'J1 (axis through O)', c: V.madd(Ow, A1, P.R1), axis: A1, p0: Ow, r: P.hub_r, h },
         { kind: 'arc', role: 'link', name: 'link 1 (90 deg about O)', pts: about(A1, J2, P.R1 + 7, P.R2 + 2), r: 2.5 },
-        { kind: 'hub', role: 'active', name: 'J2 (axis through O)', c: V.madd(Ow, J2, P.R2), axis: J2, r: P.hub_r, h },
+        { kind: 'hub', role: 'active', name: 'J2 (axis through O)', c: V.madd(Ow, J2, P.R2), axis: J2, p0: Ow, r: P.hub_r, h },
         { kind: 'arc', role: 'link', name: 'bar cap', pts: about(J2, vend, P.R2 + 9, rCap), r: 2.5 },
         { kind: 'arc', role: 'link', name: 'bar along the rod (fitted outward)', pts: xs.map((x, i) => V.madd(V.madd(Ow, dh, x), uk, rho[i])), r: 2.5 },
-        { kind: 'hub', role: 'link', name: 'rod boss', c: boss, axis: dh, r: 6, h: 10 },
+        { kind: 'hub', role: 'link', name: 'rod boss', c: boss, axis: dh, p0: boss, r: 6, h: 10 },
         { kind: 'slider', role: 'passive', name: 'O6 rod + sleeve slide', a: V.madd(Ow, dh, xTop), b: V.madd(Ow, dh, xBot), at: Cw, z: uk, size: [25, 12, 12] },
         { kind: 'ring', role: 'active', name: 'J3: sleeve spin about the rod', c: Cw, axis: dh, r: 7 },
         { kind: 'ring', role: 'passive', name: 'U ring (inner axis)', c: Cw, axis: Wd(M.mulv(f.Rr, dh0)), r: P.ring_r },

@@ -78,3 +78,36 @@ bvec(120, 40) (the spec's p* = bvec(120, 46): 29-31 deg). The J1 hub sits on +a1
 below: hub 1 -8.5 mm, link 1 -11.9 mm in abduction 150 at q 0.9). The antipodal hub site (-a1 = bvec(300, -46),
 posterior over the scapula, where the base is) is worse: the ray runs under the scapula over the chest wall, hub 1
 sits 92 mm inside the body in abduction 90 (local red-team run).
+
+## Spec fixes and improvements made while modelling (each measured)
+
+- **Neck down the arm, not to BOTTOM's bar start.** The kit's K7 neck runs to BOTTOM's bar start at the lateral arm
+  root (67.5 mm lateral, 40 mm down); with the band at s 100-160 it must cross back over the band and link 2
+  (measured: band-neck and link2-neck K6 collisions at rest, abduction 90, across-body in every config). The spec's
+  neck (shoe's distal wall -> along the arm to s = max(180, s + 40), BOTTOM cut / merged there) is used, fitted
+  per sample by a radial march from the twist axis (a GH-ray fit of a strap that runs along the arm finds no clearance
+  in 220 mm and parks it at 400 mm - measured, then replaced): neck in band 0.82-1.0.
+- **Saddle band** (`saddle=1`): the band's body under its circular wire track is skin-fitted per sample (each sample at
+  the max over the closing poses of its own radial requirement, q_ring ~ 1); the track and the shoe sit at the body's
+  highest point. The spec's cylinder (one radius for the whole band, `saddle=0`) floats: rho 78-103 mm vs the
+  41-64 mm median skin; band in band 0.00-0.09 in all 212 coarse configs. With the saddle: band in band 0.77-0.89.
+  Cost: mass (the band body fills down to the skin: 690 g Ti for the best config, ~5x the champion's 125 g; MVP1 would
+  print it).
+- **The shoe cannot hug.** It rides the track at the band's highest point: 24-30 mm off the lateral arm in every
+  config (in band 0.00). This is structural for a rotary C-slide in a swing frame: the track is a circle about the
+  twist axis, its radius is set by the fattest skin it ever passes over.
+- Window and radius fitted on the bench poses (not the spec's 60-90 deg), branch and pole swept (sigma -1 essential:
+  with sigma +1 the J2 axis points into the neck / chest in > 5 % of the poses and hub 2 is parked at 400 mm).
+
+## Sweep (Bench(60, 160), fast grid, K3 march, K2 dense, K6, outer faces contact-checked)
+
+| stage | configs | where | best gap | note |
+|---|---|---|---|---|
+| coarse Sobol, spec cylinder band, K7 neck | 212 (k 0-211) | farm | 173.65 (honest best 177.73) | band floats 30 mm, rho 80-103 |
+| local CMA, saddle band, neck down the arm | 30 (k 212-241) | local, 1 process (farm queue 12-19 jobs) | 115.84 | |
+| local CMA restart from best, 13 dims | 112 (k 242-353) | local | **73.48** (k 341) | still improving |
+| local CMA restart, step 0.07 | see sweep | local | see row | |
+| focused farm batch (64, spec cylinder, K7 neck, v1 model) | queued 20+ min | farm | - | not recorded: superseded model version |
+
+The farm queue held 12-19 jobs from other agents for the whole time box (a 212-config batch took 858 s wall for
+265 s of compute), so the CMA ran locally as one niced process (~2-7 s per configuration).

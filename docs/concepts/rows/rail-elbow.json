@@ -124,5 +124,25 @@
   "gain_2nd_half": 2.39,
   "gain_last_third": 1.51,
   "top5_spread": 0.48
+ },
+ "v_big_k172": {
+  "bench": "Bench(110,360) exact, K6 1 mm radial, geometry frozen from Bench(60,160) exact",
+  "gap": 72.84,
+  "score": 73.51,
+  "reach": 0.8167,
+  "follow": 0.9909,
+  "inband14": 0.2647,
+  "inband10": 0.1529,
+  "contact": 0.0098,
+  "closure": 0.8851,
+  "collide": 0.0216,
+  "honest": true,
+  "refit": {
+   "gap": 86.63,
+   "honest": false,
+   "why": "q 1.0 on 470 poses: no-clearance poses push bridge/neck to 400 mm"
+  },
+  "fit_60_160_exact": 64.7,
+  "champion_same_bench": 75.94
  }
 }

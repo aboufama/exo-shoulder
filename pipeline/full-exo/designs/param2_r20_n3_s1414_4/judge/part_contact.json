@@ -1,0 +1,14 @@
+{
+ "step": 12,
+ "tol_mm": 0.15,
+ "frames_checked": 117,
+ "pairs": 1707,
+ "seconds": 25,
+ "jobs": 4,
+ "violations": {},
+ "open_parts_not_tested_as_container": [
+  "l2|D6-03 link 2: bent bar 8x3 + J2/J3 hubs (Ti-6Al-4V)"
+ ],
+ "inside": "integer winding number on welded tessellations (grid + segment crossings), depth = exact distance (judge/sdist.py)",
+ "max_depth": 0.0
+}

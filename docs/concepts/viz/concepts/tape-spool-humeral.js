@@ -77,11 +77,11 @@
         { kind: 'hub', role: 'active', name: 'J2 (posterior shoulder)', c: V.scale(f.p2, P.F2), axis: f.p2, r: P.hub_r, h },
         { kind: 'arc', role: 'link', name: 'link 2 (down the posterolateral deltoid)', u: f.p2, v: V.unit(mount), r0: P.F2 + 9, r1: V.norm(mount) + 4, r: 2.5 },
         { kind: 'slider', role: 'passive', name: 'radial slide', a: V.madd(mount, d, 3), b: V.madd(mount, d, -9 - P.slide), at: V.madd(pc, d, 8), z: f.h, size: [8, 8, 4] },
-        { kind: 'hub', role: 'passive', name: 'yaw pivot (parallel to the humerus)', c: V.madd(pc, d, 6), axis: f.h, r: 4, h: 3 },
+        { kind: 'hub', role: 'passive', name: 'yaw pivot (parallel to the humerus)', c: V.madd(pc, d, 6), axis: f.h, p0: V.madd(pc, d, 6), r: 4, h: 3 },
         { kind: 'carriage', role: 'active', name: 'carriage on the tape (humeral DOF)', c: V.madd(pc, d, 3.9), x: tan, z: V.unit(V.cross(tan, ax)), size: [22, 20, 7] },
         { kind: 'arc', role: 'fixed-arm', name: 'NiTi tape (anchor -> carriage)', pts: tape, r: 1.2 },
         { kind: 'plate', role: 'fixed-arm', name: 'tape anchor', c: tapePt(ctx, P.anchor), z: armDir(ctx, P.anchor), x: ax, size: [10, 20], t: 3 },
-        { kind: 'hub', role: 'passive', name: 'O14 constant-force spool', c: spC, axis: ax, r: P.r_spool, h: 18 },
+        { kind: 'hub', role: 'passive', name: 'O14 constant-force spool', c: spC, axis: ax, p0: spC, r: P.r_spool, h: 18 },
         { kind: 'strap', role: 'fixed-arm', name: 'upper-arm cuff (BOTTOM side)', c: cuffC, axis: ax, r: 46, w: 24 },
         { kind: 'point', role: 'link', name: 'GH centre', p: [0, 0, 0], r: 4 }
       ];

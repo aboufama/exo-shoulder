@@ -477,11 +477,11 @@ CUFF = dict(t_land=2.8, t_shell=2.0, land_hw=15.6, wrap_deg=110.0, s0=83.85, s1=
 
 
 def upper_cuff(E):
-    """Upper-arm cuff from one sketch of lines and arcs, extruded straight along BOTTOM (no loft, no fitted shell): a flat
-    land under the bar (BOTTOM's skin-side plane, 2.8 mm), an inner arc about the arm (radius and centre chosen as the
-    tightest circle that keeps the skin envelope + 2 mm clear over every followed frame of the fit clips) wrapping
-    +-110 deg, and an outer arc through the land's ends that thins to 2 mm at the wrap ends; 6x M4 countersunk from
-    inside into BOTTOM's tapped holes. Built in the arm's rest frame (group H). Returns ([(group, name, solid)], report)."""
+    """Upper-arm cuff from one sketch of lines and arcs, extruded straight along BOTTOM (no loft, no fitted shell): a U
+    of constant 2 mm wall - a flat top flush with BOTTOM's skin side (the bar sits on it) and two side arcs tangent to it,
+    wrapping 110 deg each - whose centre, flat width and arc radius are the smallest that keep the upper-arm skin (the
+    posed rig skin weighted to the humerus, every 4th followed frame of the fit clips) 2 mm (the liner) inside it.
+    6x M4 countersunk from inside into BOTTOM's tapped holes. Built in the arm's rest frame (group H)."""
     from scipy.optimize import fsolve
     import body_pose as BP
     CB, uB, vB, axB = AE.CB, AE.uB, AE.vB, AE.axB; c = CUFF
@@ -489,62 +489,62 @@ def upper_cuff(E):
     # the upper-arm skin in the arm's rest frame over every 4th followed frame of the fit clips (perpendicular distances
     # matter here, so the posed skin itself rather than the GH-radial maps)
     C_, _ = FR.load(PB.BAND); L = json.load(open(os.path.join(FR.REPO, "pipeline", "avg", "body_mesh.json"))); pts = []
+    sk = BP._rig().skin; arm = ((sk["wi"] == 2) * sk["ww"]).sum(1) >= 0.6               # upper-arm skin only (skinning weight on the humerus)
     for _, _, f in FR.followed(C_, every=4):
         pose = dict(zip(["plane", "elev", "axial", "flex", "pron"], f["p"])); Vw = BP.posed(pose)
         sg, _ = BP.segs(L["landmarks"], L["scale"], pose); Rh, th = np.array(sg[2][0]), np.array(sg[2][1])
-        Q = (Vw - th) @ Rh - CB; sq = Q @ uB
+        Q = (Vw[arm] - th) @ Rh - CB; sq = Q @ uB
         m = (sq > c["s0"] - 5) & (sq < c["s1"] + 5) & (np.abs(Q @ vB) < 90) & (Q @ axB < 0) & (Q @ axB > -130)
         pts.append(np.stack([Q[m] @ vB, Q[m] @ axB], 1))
     P2 = np.concatenate(pts); liner = 2.0
-    def fits(Rin, vc):
-        C2 = np.array([vc, zt - c["t_land"] - Rin]); d = P2 - C2; ang = np.arctan2(d[:, 0], d[:, 1])
-        sel = np.abs(ang) <= W_ + math.radians(8); r = np.linalg.norm(d[sel], axis=1)
-        return float((Rin - liner - r).min()) if sel.any() else 99.0
+    T2_ = c["t_shell"]; zi = zt - T2_                                                    # constant 2 mm shell: top flush with the bar's skin side
+    def fits(R, vc, hw):
+        """margin (mm) of the U profile (flat top of half width hw at vc, side arcs of radius R tangent to it) over the skin + liner"""
+        v, z = P2[:, 0] - vc, P2[:, 1]; m = np.full(len(v), 99.0)
+        top = np.abs(v) <= hw; m[top] = (zi - liner) - z[top]
+        for sg in (-1, 1):
+            sd = (sg * v > hw); cx, cz = sg * hw, zi - R; dx, dz = v[sd] - cx, z[sd] - cz
+            ang = np.arctan2(sg * dx, dz); inw = ang <= W_ + math.radians(8)
+            r = np.hypot(dx, dz); mm = np.where(inw, R - liner - r, 99.0); m[sd] = mm
+        return float(m.min())
     best = None
     for vc in np.arange(-14.0, 14.1, 2.0):
-        lo, hi = 25.0, 140.0
-        if fits(hi, vc) < 0: continue
-        for _ in range(30):
-            mid = (lo + hi) / 2; lo, hi = (lo, mid) if fits(mid, vc) >= 0 else (mid, hi)
-        Rin = math.ceil(hi)                                                                  # a round radius, clear by construction
-        if best is None or Rin < best[0]: best = (Rin, vc)
-    assert best, "cuff: no circle clears the arm"
-    Rin, vc = best; zc = zt - c["t_land"] - Rin
-    print(f"cuff: {len(P2)} skin samples; inner arc R{Rin:g} centred {vc:+.0f} mm across the bar, {fits(Rin, vc):.2f} mm beyond skin + 2 mm liner at the closest point")
-    # outer arc: through the land ends, 2 mm from the inner arc at the wrap ends
-    wl = c["land_hw"]; ue = np.array([math.sin(W_), math.cos(W_)]); Pi = np.array([vc, zc]) + Rin * ue
-    def eqs(x):
-        zc2, Ro = x
-        return [math.hypot(wl - vc, zt - zc2) - Ro, Ro - np.linalg.norm(Pi - np.array([vc, zc2])) - c["t_shell"]]
-    zc2, Ro = fsolve(eqs, [zc - 1.0, Rin + c["t_land"] + 1.0])
-    C1, C2 = np.array([vc, zc]), np.array([vc, zc2])
-    pt = lambda C, R, a: C + R * np.array([math.sin(a), math.cos(a)])
-    ao_l = math.atan2(wl - vc, zt - zc2); Po = C2 + Ro * (Pi - C2) / np.linalg.norm(Pi - C2); ao_e = math.atan2(*(Po - C2))
+        for hw in np.arange(15.0, 36.0, 2.5):
+            if fits(140.0, vc, hw) < 0: continue
+            lo, hi = 10.0, 140.0
+            for _ in range(28):
+                mid = (lo + hi) / 2; lo, hi = (lo, mid) if fits(mid, vc, hw) >= 0 else (mid, hi)
+            R = math.ceil(hi); score = R + 0.5 * hw
+            if best is None or score < best[0]: best = (score, R, vc, hw)
+    assert best, "cuff: no U profile clears the arm"
+    _, Rin, vc, hw = best
+    print(f"cuff: {len(P2)} skin samples; U profile: flat {2 * hw:g} mm, side arcs R{Rin:g}, centred {vc:+.0f} mm across the bar, "
+          f"{fits(Rin, vc, hw):.2f} mm beyond skin + 2 mm liner at the closest point")
     pl = cq.Plane(origin=tuple(map(float, CB + c["s0"] * uB)), xDir=tuple(map(float, vB)), normal=tuple(map(float, uB)))
     q = lambda xy: (float(xy[0]), float(xy[1]))
-    wp = (cq.Workplane(pl).moveTo(-wl + 2 * vc - vc, zt).lineTo(wl, zt) if False else cq.Workplane(pl).moveTo(vc - (wl - vc), zt))
-    # outline: land (line) -> outer arc right -> end cap -> inner arc over the top -> end cap -> outer arc left -> close
-    L = np.array([2 * vc - wl, zt]); Rr = np.array([wl, zt])
-    wp = (cq.Workplane(pl).moveTo(*q(L)).lineTo(*q(Rr))
-          .threePointArc(q(pt(C2, Ro, (ao_l + ao_e) / 2)), q(pt(C2, Ro, ao_e)))
-          .lineTo(*q(pt(C1, Rin, W_)))
-          .threePointArc(q(pt(C1, Rin, 0.0)), q(pt(C1, Rin, -W_)))
-          .lineTo(*q(pt(C2, Ro, -ao_e)))
-          .threePointArc(q(pt(C2, Ro, -(ao_l + ao_e) / 2)), q(L)).close())
+    def arcp(sg, R, a): return np.array([vc + sg * hw + sg * R * math.sin(a), zi - Rin + R * math.cos(a)])
+    Ro = Rin + T2_
+    # outline: outer top line -> right outer arc -> end cap -> right inner arc -> inner top line -> left inner arc -> cap -> left outer arc
+    wp = (cq.Workplane(pl).moveTo(*q(arcp(-1, Ro, 0.0))).lineTo(*q(arcp(1, Ro, 0.0)))
+          .threePointArc(q(arcp(1, Ro, W_ / 2)), q(arcp(1, Ro, W_))).lineTo(*q(arcp(1, Rin, W_)))
+          .threePointArc(q(arcp(1, Rin, W_ / 2)), q(arcp(1, Rin, 0.0))).lineTo(*q(arcp(-1, Rin, 0.0)))
+          .threePointArc(q(arcp(-1, Rin, W_ / 2)), q(arcp(-1, Rin, W_))).lineTo(*q(arcp(-1, Ro, W_)))
+          .threePointArc(q(arcp(-1, Ro, W_ / 2)), q(arcp(-1, Ro, 0.0))).close())
+    zc = zi - Rin; Ro_rep = Ro
     cuff = wp.extrude(c["s1"] - c["s0"]).val()
     cuff = rounded(cuff, r=c["round"])
     scr = []
     for s_ in (94.25, 124.25, 154.25):
         for y_ in (-8.75, 8.75):
-            p = CB + s_ * uB + y_ * vB + zt * axB; zi = zc + math.sqrt(Rin ** 2 - (y_ - vc) ** 2)   # inner face under the screw
+            p = CB + s_ * uB + y_ * vB + zt * axB
             cuff = cuff.cut(cq.Solid.makeCylinder(2.25, 12.0, V(p - 10 * axB), V(axB)))
-            hd = (zt - zi)                                                                      # head sits flush with the inner face
+            hd = T2_                                                                            # head sits flush with the inner face
             cuff = cuff.cut(cq.Solid.makeCone(4.2, 0.0, 4.2, V(p - hd * axB), V(axB)))
             head = PB.revolved([(0, 0), (3.95, 0), (2.0, 1.95), (2.0, 6.0), (0, 6.0)], np.array([0, 0, 1.0]), 0.0)
             Rz = PB.axis_frame(axB); scr.append(("H", "M4x6 ISO 10642 countersunk (upper cuff), polished", xform(head, Rz, p - hd * axB)))
     cuff = cuff.clean() if cuff.clean().isValid() else cuff
-    rep = dict(inner_R=Rin, centre_across_bar=vc, outer_R=float(Ro), wrap_deg=c["wrap_deg"], length=c["s1"] - c["s0"], valid=cuff.isValid())
-    print(f"  cuff valid {cuff.isValid()}, faces {len(cuff.Faces())}, outer arc R{Ro:.1f}")
+    rep = dict(side_arc_R=Rin, flat_width=2 * hw, centre_across_bar=vc, shell=T2_, wrap_deg=c["wrap_deg"], length=c["s1"] - c["s0"], valid=cuff.isValid())
+    print(f"  cuff valid {cuff.isValid()}, faces {len(cuff.Faces())}")
     return [("H", "UPPER ARM CUFF (lines and arcs: flat land + inner R arc + outer arc, extruded; AlSi10Mg bead blasted)", cuff)] + scr, rep
 
 

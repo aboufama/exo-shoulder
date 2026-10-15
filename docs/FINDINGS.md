@@ -453,3 +453,23 @@ dense branch continuity, part-part collisions - the SAME champion kinematics sco
 (a measurement change). So a morphology must beat **~65**, not 68.93, before it beats the 3R family; screened rows
 below 68.93 are compared against both numbers. Models built on kit flat hubs before the K4 fix (commit 03bb5bf)
 must be re-measured.
+
+## The champion's axes were not optimal: the 3R scores 51.97 at axes a rail concept's CMA found (2026-10-15, rail-elbow stage 1)
+
+A farm CMA-ES of rail-elbow (`tools/concept_cma.py`, 1410 tries, converged by the gate) moved it from 63.72 to 57.19.
+The rail stages stayed 0 % in band through all of it; the whole gain was the arm end (hub 3 0.36 -> 0.75, neck
+0.51 -> 0.68). The in-model control settles where that gain lives:
+* The plain spherical 3R with honest flat O20 hubs (`docs/concepts/models/_template.py`, q 1.0, dense K2, K6), at the
+  same axes, scores **51.97** (score 81.1). At the champion's axes it scores 65.05, on the same bench and checks.
+  - Axes: b az 0.65 el 76.82, a1 80.71, a2 62.93, W (93.82, -4.20), sigma -1.
+  - reach 0.888, follow 1.0, in-band 14 0.393, contact 0.
+* At every rail-elbow axis set the hub beats the rail by 4-5 points.
+* Two lessons:
+  - A concept's bench gain must be checked against the champion topology at the concept's own axes before it is
+    credited to the morphology.
+  - The 3R family itself has at least 13 points (gap) left in the axis choice.
+* MVP1 rule hit by the concept: a 2-stage telescopic rail needs a synchronising 2:1 drive (cable loop, rack, or a
+  creeping roller cage). The first two are forbidden in MVP1; a floating stage is an undriven coordinate (R17).
+  - The legal rigid rail at the same axes needs 209 mm.
+  - Its own CMA shrinks the rail into a 21 mm ring around the J2 axis, which is a hub.
+  - docs/concepts/rail-elbow.md, "Convergence and red team".

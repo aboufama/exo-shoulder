@@ -333,6 +333,14 @@ axes on Bench(110,360), exact, 1 mm radial, is queued on the farm (`bigbench-3r-
    * (b) The brief says rail-elbow "beats the champion on the same large bench" at v_gap 64.70. That 64.70 is
      **Bench(60,160)** exact, not Bench(110,360). The large-bench re-measure (k172 and k1530, exact, 1 mm radial part
      clearance, refit and frozen; `tools/concept_bigbench.py`) is queued on the farm.
+   * (b2) **Measured on the farm: k172 on Bench(110,360), exact, 1 mm radial (`tools/concept_bigbench.py`).**
+     * Its own (60,160) exact fit reproduces the verifier's 64.70.
+     * **Frozen** (geometry fitted on (60,160), scored on the 470 poses): **gap 72.84** (score 73.51). reach 0.817,
+       follow 0.991, in-band 14 0.265, in-band 10 0.153, contact 0.010, closure 0.885, K6 2.2 %, honest.
+     * **Refit** on (110,360) is degenerate: 86.63, dishonest. At q 1.0, poses with no clearance push the bridge and
+       the neck to 400 mm (11.5 mm sampling).
+     * Against the champion's 75.94 (same bench and checks), k172 is still 3.1 points ahead on the large bench, but
+       the large bench costs it 8.1 points over the brief's 64.70.
    * (c) The rail hardware:
      * The centreline radius is 54 mm at k1530 (40 mm at k172). docs/research/ring_and_shell_hardware.md finds no
        catalogue curved guide at 45-65 mm: THK HCR needs R >= 100, and the Hepco R12-93 is rated 1.25 N.m against the
