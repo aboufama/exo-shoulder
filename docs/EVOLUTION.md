@@ -21,4 +21,7 @@ iglidur orange) for every snapshot; numbers from the outside judges only; measur
 | 10-15 02:55 | `band_r14_4r_s1354_0` | 4 | GPU-searched 4R, L1 build | 49.7 % | 75.1 % | follows every clip |
 | 10-15 05:10 | `band_r16_3r_s1373_1` | 3 | links must clear the skin over the plausible ROM (workspace envelope), L1 | 42.6 % | 55.3 % | 46.6 % of the functional workspace (R16); moves freely (R17) |
 | 10-15 06:50 | r18 s1394 #1 (not kept) | 3 | range first (functional workspace, weight 4) | - | - | stand-off: J3 169 mm over the skin, link 2 twisted in CAD (counter-example) |
-| 10-15 07:30 | `cad_r18_n3_s1394_0` (as built) | 3 | first fair CAD of a range-first design; scored at O17 hubs, built O23 | 13.2 % | - | judge stopped after R1: follows 76 %, 17 % in band at 10 mm |
+| 10-15 07:30 | `cad_r18_n3_s1394_0` (as built, not kept) | 3 | first fair CAD of a range-first design; scored at O17 hubs, built O23 | 13.2 % | - | judge stopped after R1: follows 76 %, 17 % in band at 10 mm |
+| 10-15 07:50 | `cad_r17_n3_s1381_0` (as built, not kept) | 3 | balanced pick (64.7 % workspace, 38.9 % in band in the evaluator) | 12.1 % | - | judge stopped after R1: l1 x l2 collisions cut follow to 63 % (dominated) |
+| 10-15 08:34 | `cad_r18_n3_s1392_1` | 3 | range pick at the real O23 hub, swept links | 13.5 % | 27.3 % | moves freely; follows 76 %; R16 45.8 % |
+| 10-15 08:50 | **`cad_r18_n3_s1392_1_f300`** | 3 | same chain, smooth fair-field links (FAIR_LAM 300): **the rendered final of the night** | 15.3 % | 32.6 % | follows 80 %, overhead to 138 deg; R16 46.7 %; film in renders/2026-10-15_final_3R |

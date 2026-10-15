@@ -30,3 +30,15 @@ pipeline/redteam/results/pressure_base_frames.json
 pipeline/conformal/fair_cad/out_r16_n3_*/
 pipeline/full-exo/designs/band_r16_n3_*/
 pipeline/full-exo/designs/cad_r16_n3_*/
+# 2026-10-15 morning picks not kept (documented in docs/EVOLUTION.md; regenerable from band_cad/inputs/*.json)
+pipeline/conformal/fair_cad/out_r18_n3_s1394_*/
+pipeline/conformal/fair_cad/out_r17_n3_s1381_0/
+pipeline/conformal/fair_cad/out_r18_n3_s1392_1/
+pipeline/full-exo/designs/band_r18_n3_s1394_*/
+pipeline/full-exo/designs/cad_r18_n3_s1394_*/
+pipeline/full-exo/designs/band_r17_n3_s1381_0/
+pipeline/full-exo/designs/cad_r17_n3_s1381_0/
+# viewer previews and test film plans (the final renders live in renders/)
+pipeline/full-exo/designs/*/preview/
+pipeline/full-exo/designs/*/preview_test/
+pipeline/full-exo/designs/*/film_test.json

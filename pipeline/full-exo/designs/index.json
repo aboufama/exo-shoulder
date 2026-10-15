@@ -1,15 +1,11 @@
 [
  {
-  "id": "cad_r16_n3_s1373_1_fair",
-  "label": "CAD r16 3R s1373 #1, 2-D fair fields, FAIR_LAM 30 (proximity test)"
+  "id": "cad_r18_n3_s1392_1_f300",
+  "label": "FINAL 2026-10-15: 3R range first, fair links (r18 s1392 #1)"
  },
  {
-  "id": "cad_r16_n3_s1374_0",
-  "label": "CAD r16 3R s1374 #0 (robustness test, ramp 35)"
- },
- {
-  "id": "cad_r16_n3_s1373_1",
-  "label": "CAD r16 3R s1373 #1 (dry run)"
+  "id": "cad_r18_n3_s1392_1",
+  "label": "3R range first, swept links (r18 s1392 #1)"
  },
  {
   "id": "cad_r13_n4_s1343_1",

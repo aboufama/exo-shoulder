@@ -16,23 +16,26 @@ scripts that happened to get written:
 | What has been learned so far? | [`docs/FINDINGS.md`](docs/FINDINGS.md) |
 | How do I run it? | [`docs/PIPELINE.md`](docs/PIPELINE.md), [`CLAUDE.md`](CLAUDE.md) for agents |
 
-## Status (2026-10-14, evening)
+## Status (2026-10-15, morning)
 
-Reference design: **`cad_r13_n4_s1343_1`** (4R, all axes through the GH centre). Full scorecard, first complete judge
-run (R2, R6, R10 measured for the first time): 3 of 15 pass - R1 45.9 %, R2 24.4 mm, R3 64.5 %, R4 18.8 %, R6 18.5 mm,
-**R10 25.3 mm** ([scorecard](pipeline/full-exo/designs/cad_r13_n4_s1343_1/judge/scorecard.md)).
+**Final design of the night, built and rendered: `cad_r18_n3_s1392_1_f300`** - a 3-joint chain (the user's 3-DOF
+minimum) from the range-first GPU search r18, full fair CAD with smooth fair-field links (FAIR_LAM 300), the scapula
+base on the user's handler, unpowered (MVP1, rolling bearings). Scorecard:
+[pipeline/full-exo/designs/cad_r18_n3_s1392_1_f300/judge/scorecard.md](pipeline/full-exo/designs/cad_r18_n3_s1392_1_f300/judge/scorecard.md);
+film and stills: [renders/2026-10-15_final_3R/](renders/2026-10-15_final_3R/).
 
-**P0 answered the base question ([docs/P0_BASE_MOUNT.md](docs/P0_BASE_MOUNT.md)):** the base bolts to a thorax plate
-but every design assumed it rides the scapula. On a thorax plate the reference base enters the body by 44 mm, and no
-chain whose axes meet at one thorax-fixed point can hold the 2-10 mm band (>= 12.7 mm on the rig law). Offset axes help
-on the rig law (3-DOF: 5.8 / 6.8 mm), but published girdle motion is 2-3x the rig's and 3-D
-([docs/research/gh_translation_literature.md](docs/research/gh_translation_literature.md)): any rigid thorax-plate chain
-within the cap misaligns >= 11-26 mm, plus +-7-12 mm that no arm-angle function follows; the red team
-([pipeline/redteam/REPORT.md](pipeline/redteam/REPORT.md)) finds the same over the whole workspace and for a shrug.
-**Waiting on the user:** base option A (3 DOF on a girdle-riding base) / B (thorax plate + passive girdle, 5 DOF) /
-C (thorax plate + 3 rigid DOF, only if the user's girdle moves like the rig - the 1-minute ruler test in
-[data/raw/README.md](data/raw/README.md) decides). Then P3 ([docs/P3_SEARCH_PLAN.md](docs/P3_SEARCH_PLAN.md)) with
-L1 keep-out CAD (CAD_STANDARD.md scope) and the held-out split in `data/raw/split.json`.
+- Moves freely unpowered (R17), 3 DOF (R5), every part one valid solid (R7), 234 g of custom parts (R8).
+- Follows 80 % of motion frames (R3); Raise overhead to 138 deg of elevation (scapular plane), then holds; Comb hair,
+  Drink, Reach a high shelf, Wash opposite shoulder and Walking 100 %; Reach back pocket 22 %, Wave 40 %.
+- Proximity is the big gap: 41 % of the covered skin within 14 mm (R1, target 90 %), 19 % within 10 mm.
+- No design reaches the 90 % range target: the best compact designs cover 65-75 % of the functional workspace in the
+  evaluator, the built CAD 47 % (R16; link 2 meets the arm-end neck in half the poses outside the clips).
+
+What the night established (docs/FINDINGS.md): range first makes the search hold joints off the skin (stand-off
+designs, now flagged by the builder); joint size is worth ~20 points of workspace (O17 vs the O23 the CAD builds);
+the fair CAD's links ride 3-7 mm above the fitted shape (fair-field links recover part of it). Next levers: a smaller
+joint stack (needle bearings, O17 hub), the neck clearance over the whole workspace, links that follow the fitted
+shape.
 
 ## Quickstart
 

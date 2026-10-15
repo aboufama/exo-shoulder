@@ -52,6 +52,8 @@ docs/EVOLUTION.md (and its snapshot to pipeline/evolution/) as part of the judge
 
 ## Where things stand
 
-See README "Status" and `pipeline/full-exo/designs/cad_r13_n4_s1343_1/judge/scorecard.md`. P0 is decided (base on the
-scapula, docs/P0_BASE_MOUNT.md). Next: a 3-DOF shoulder chain that follows every clip (the GPU 3R designs fail
-"Reach back pocket"), judged at 14 mm with 10 mm reported; then the base skin-slip judge (R10).
+See README "Status" and `pipeline/full-exo/designs/cad_r18_n3_s1392_1_f300/judge/scorecard.md` (the 3R final rendered
+2026-10-15; renders/2026-10-15_final_3R). Next levers, in order: a smaller joint stack (O17 hub: ~20 points of
+workspace, docs/FINDINGS.md), the arm-end neck clear of link 2 over the whole workspace (R16 part interference), links
+that follow the evaluator's fitted shape (R1), then the base skin-slip judge (R10). Evaluate picks at hub_r 11.5 until
+the CAD builds a smaller joint.
