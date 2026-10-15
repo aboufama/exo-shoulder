@@ -16,11 +16,11 @@ Topology (scapula handler -> user's upper-arm cuff), every joint axis through th
 DOF: phi (J1), q2, q3 from the two-circle closure of a1 and p3 with arcs gamma, alpha23 on branch sigma: a spherical 3R
 whose first bearing is spread along a circle. 3 active, 0 passive, nothing undetermined.
 
-Members (every part at real size, kit sampling): race = rail arc (2 mm grid, 10 wide) + carriage footprint (26 x 22,
-2 mm grid) at ONE radius R (kind cap, t 8 = the carriage height, conservative for the 4 mm rail), hub2 (O20 flat disc,
-ramped to R + 5), L2, hub3, neck. Variant stem=1: the rail is a T: its 10 mm head (running surface, with the rollers and
-the carriage) stays at R, a 4 mm stem under it reaches down to its own skin-fitted level per station (scapula-fixed,
-milled to the skin like the base) - the rail head edge rows stay at R.
+Members (every part at real size, kit sampling): race = the rail (10 wide x 4, 5 rows on a 2 mm grid, scapula-fixed)
++ the carriage's V-roller strips (5..9 mm either side of the rail centre, +-8 mm along, moving) at ONE radius R (kind cap);
+hub2 = the carriage plate = the J2 O20 lower plate (flat disc, F = R + 4.5: 0.5 mm over the rail top), crown F + 12.25;
+link2 = 12 x 3 strap, ramps to hub2 / hub3 + 3.15 over its first / last 16 mm, `over` the race and the neck (+1 mm);
+hub3 (O20, arm); neck (K7). link2 is listed first so K6 measures its pairs at link2's radius, as `over` builds them.
 
 Design step (outside build, so build stays pose-local): `travel()` takes the carriage azimuths of the closing bench
 poses -> the J1 range [phi_lo, phi_hi] (central share cov, + tmarg) and the rail extent. Poses outside it are not taken.
@@ -40,11 +40,11 @@ RAIL_W, RAIL_T = 10.0, 4.0
 CAR_L, CAR_W, CAR_T = 26.0, 22.0, 8.0
 END_STOP = 3.0
 J2_F = CAR_T - 3.0                                           # O20 lower plate = the carriage's top 3 mm
-STEM_W = 6.0                                                 # stem rows: the middle 3 of the 5 rail rows
+STEM_W = 6.0
 
 # spec seed: a1 = sdir(0, 20) = bvec(70, 0), gamma 50, alpha23 80, J3 ~20 deg off the arm axis, posterolateral
 PARAMS = dict(az1=70.0, el1=0.0, gamma=50.0, a23=80.0, wd=86.3, wa=21.8, sigma=1, margin=8.0, q=0.95, rmax=70.0, tmarg=3.0,
-              r_lay=55.0, stem=0, q_l2=None)
+              r_lay=55.0, q_l2=None)
 
 
 def wrap(x): return (np.asarray(x, float) + 180.0) % 360.0 - 180.0
@@ -104,7 +104,7 @@ def travel(B, F, p):
 
 
 def rail_dirs(p):
-    """scapula-frame directions of the rail samples (m, 3) and a mask of the head-edge rows (stem=1 keeps those at R)"""
+    """scapula-frame directions of the rail samples (m, 3), a mask of the outer rows, grid, span (deg), length (mm at r_lay)"""
     a1, m, n = race_frame(p); g = p["gamma"] * D2R; RL = p["r_lay"]; rr = RL * math.sin(g)
     e = (CAR_L / 2 + END_STOP) / rr
     lo = (p["phi_c"] + p["phi_lo"]) * D2R - e; hi = (p["phi_c"] + p["phi_hi"]) * D2R + e
@@ -150,25 +150,30 @@ def full(B, p):
     p.update(travel(B, F, p)); return p
 
 
-def bench_eval(B, params):
-    """farm hook: design step + kit evaluate; if the fitted race radius is below the layout radius (the rail would be
-    narrower than 10 mm), re-lay it out at the fitted radius (parts only ever grow)"""
-    p = full(B, params)
-    if p["phi_hi"] - p["phi_lo"] < 2.0:                       # no quiet rail run holds any closing pose
-        B.reset(); r = B.report(); r.update(race_R=None, r_lay=p["r_lay"], phi_c=p["phi_c"], phi_lo=p["phi_lo"], phi_hi=p["phi_hi"],
-                                            rail_req=p.get("rail_req"), honest=True, note="no quiet rail run"); return r
-    r = K.evaluate(B, build, p)
-    R = race_radius(B)
-    if R is not None and R < p["r_lay"] - 0.5:
-        p["r_lay"] = math.floor(R); p.update(travel(B, B._kitF, p)); r = K.evaluate(B, build, p); R = race_radius(B)
-    r = {k: v for k, v in r.items() if _jsonable(v)}
+def evaluate(B, params, **kw):
+    """design step + kit evaluate -> (full params, report). r_lay (the layout radius of the rail and roller samples) is a
+    fix point at the fitted race radius R (at most 2 re-runs): r_lay > R would make the rail narrower than 10 mm and
+    its end stops shorter (optimistic), r_lay << R a wider rail than the real one. tools/concept_cma.py calls this."""
+    p = dict(PARAMS, **params)
+    for it in range(3):
+        p = full(B, p)
+        if p["phi_hi"] - p["phi_lo"] < 2.0:                   # no quiet rail run holds any closing pose
+            B.reset(); r = B.report(); r.update(honest=True, audit=[], note="no quiet rail run", closure=None); return p, r
+        r = K.evaluate(B, build, p, **kw); R = race_radius(B)
+        if R is None or abs(R - p["r_lay"]) <= 1.5 or it == 2: break
+        p = dict(p, r_lay=float(math.floor(R)))
+    if R is not None and p["r_lay"] > R + 1.5:
+        r["honest"] = False; r["audit"] = list(r.get("audit", [])) + [f"rail laid out at {p['r_lay']} > fitted R {R}"]
     L = B._kit_last
-    if "stem" in L["prof"]:                                   # the stem hangs under the head: it may never sit above R
-        ex = float(L["prof"]["stem"].max() - L["prof"]["race"].max()); r["stem_excess"] = round(ex, 2)
-        if ex > 0.5: r["honest"] = False; r["audit"] = list(r.get("audit", [])) + [f"stem above the rail head by {ex:.1f} mm"]
     r.update(race_R=R, r_lay=p["r_lay"], phi_c=p["phi_c"], phi_lo=p["phi_lo"], phi_hi=p["phi_hi"], rail_req=p.get("rail_req"),
              levels=levels(B))
-    return r
+    return p, r
+
+
+def bench_eval(B, params):
+    """farm hook (tools/concept_sweep.py): the report of evaluate()"""
+    p, r = evaluate(B, params)
+    return {k: v for k, v in r.items() if _jsonable(v)}
 
 
 def _jsonable(v):
@@ -190,8 +195,8 @@ if __name__ == "__main__":
     a = sys.argv[1:] or ["check"]
     B = K.bench(60, 160)
     if a[0] == "check":
-        ov = {k: (int(v) if k in ("sigma", "stem") else float(v)) for k, v in (x.split("=") for x in a[1:] if "=" in x)}
+        ov = {k: (int(v) if k in ("sigma",) else float(v)) for k, v in (x.split("=") for x in a[1:] if "=" in x)}
         r = bench_eval(B, dict(PARAMS, **ov))
         print(json.dumps({k: r.get(k) for k in ("gap", "reach", "follow", "inband14", "inband10", "contact", "closure", "flips", "collide",
                                                 "inband_member", "mass_g", "honest", "audit", "rail_span_deg", "race_R", "r_lay",
-                                                "phi_lo", "phi_hi", "rail_req", "residual_deg", "levels", "stem_excess")}))
+                                                "phi_lo", "phi_hi", "rail_req", "residual_deg", "levels")}))

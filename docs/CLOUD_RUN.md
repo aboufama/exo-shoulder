@@ -147,8 +147,9 @@ strictly back to back per worker (worker A: 5 jobs 771.5-852.1 s, worker B: 3 jo
 ~13 min in the queue; the audit showed 4 running / 9-19 queued on 4 workers (6 / 8 on 6 workers at 22:31). Parity: a
 fresh 16-config `concept_baseline_sweep` on the farm (2 chunks x 8, 27 s + 17 s run, wall 1365 s of which 871 s queued
 upload) gives reports byte-identical to 2 local configs and to the 8 champion results of 19:33 UTC. Between 22:18 and
-22:31 someone else moved exo-band23 workersMax 2 -> 0 and exo-cpu1 4 -> 6 (the rebalance); workersMin 0 everywhere,
-exo-blender-cycles unchanged (0/4).
+22:31 the lead session moved exo-band23 workersMax 2 -> 0 and exo-cpu1 4 -> 6 (the rebalance, ~22:28 UTC, its own
+watchdog: band23 idle with an empty queue, 14 farm jobs queued; reported to the user; revert = band23 2, cpu1 4);
+workersMin 0 everywhere, exo-blender-cycles unchanged (0/4).
 
 ## Endpoint, cost, hygiene
 

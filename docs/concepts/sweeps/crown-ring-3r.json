@@ -46,7 +46,9 @@
    "neck": 0.3936
   },
   "audit": [],
-  "stage": "coarse grid: a1 x ring size x alpha12"
+  "stage": "coarse grid: a1 x ring size x alpha12",
+  "park_ok": null,
+  "park_proxy": false
  },
  {
   "k": 1,
@@ -98,7 +100,9 @@
    "link1: sparse sampling (4.54 mm median spacing > 4 mm)",
    "link2: sparse sampling (4.63 mm median spacing > 4 mm)"
   ],
-  "stage": "coarse grid: a1 x ring size x alpha12"
+  "stage": "coarse grid: a1 x ring size x alpha12",
+  "park_ok": null,
+  "park_proxy": false
  },
  {
   "k": 2,
@@ -150,7 +154,9 @@
    "link1: sparse sampling (4.87 mm median spacing > 4 mm)",
    "link2: sparse sampling (4.6 mm median spacing > 4 mm)"
   ],
-  "stage": "coarse grid: a1 x ring size x alpha12"
+  "stage": "coarse grid: a1 x ring size x alpha12",
+  "park_ok": null,
+  "park_proxy": false
  },
  {
   "k": 3,
@@ -201,7 +207,9 @@
   "audit": [
    "link1: sparse sampling (4.33 mm median spacing > 4 mm)"
   ],
-  "stage": "coarse grid: a1 x ring size x alpha12"
+  "stage": "coarse grid: a1 x ring size x alpha12",
+  "park_ok": null,
+  "park_proxy": false
  },
  {
   "k": 4,
@@ -253,7 +261,9 @@
    "link1: sparse sampling (4.7 mm median spacing > 4 mm)",
    "link2: sparse sampling (4.63 mm median spacing > 4 mm)"
   ],
-  "stage": "coarse grid: a1 x ring size x alpha12"
+  "stage": "coarse grid: a1 x ring size x alpha12",
+  "park_ok": null,
+  "park_proxy": false
  },
  {
   "k": 5,
@@ -305,7 +315,9 @@
    "link1: sparse sampling (5.11 mm median spacing > 4 mm)",
    "link2: sparse sampling (4.6 mm median spacing > 4 mm)"
   ],
-  "stage": "coarse grid: a1 x ring size x alpha12"
+  "stage": "coarse grid: a1 x ring size x alpha12",
+  "park_ok": null,
+  "park_proxy": false
  },
  {
   "k": 6,
@@ -356,7 +368,9 @@
   "audit": [
    "link1: sparse sampling (4.34 mm median spacing > 4 mm)"
   ],
-  "stage": "coarse grid: a1 x ring size x alpha12"
+  "stage": "coarse grid: a1 x ring size x alpha12",
+  "park_ok": null,
+  "park_proxy": false
  },
  {
   "k": 7,
@@ -408,7 +422,9 @@
    "link1: sparse sampling (4.79 mm median spacing > 4 mm)",
    "link2: sparse sampling (4.63 mm median spacing > 4 mm)"
   ],
-  "stage": "coarse grid: a1 x ring size x alpha12"
+  "stage": "coarse grid: a1 x ring size x alpha12",
+  "park_ok": null,
+  "park_proxy": false
  },
  {
   "k": 8,
@@ -460,7 +476,9 @@
    "link1: sparse sampling (5.14 mm median spacing > 4 mm)",
    "link2: sparse sampling (4.69 mm median spacing > 4 mm)"
   ],
-  "stage": "coarse grid: a1 x ring size x alpha12"
+  "stage": "coarse grid: a1 x ring size x alpha12",
+  "park_ok": null,
+  "park_proxy": false
  },
  {
   "k": 9,
@@ -511,7 +529,9 @@
   "audit": [
    "link1: sparse sampling (4.39 mm median spacing > 4 mm)"
   ],
-  "stage": "coarse grid: a1 x ring size x alpha12"
+  "stage": "coarse grid: a1 x ring size x alpha12",
+  "park_ok": null,
+  "park_proxy": false
  },
  {
   "k": 10,
@@ -563,7 +583,9 @@
    "link1: sparse sampling (4.81 mm median spacing > 4 mm)",
    "link2: sparse sampling (4.63 mm median spacing > 4 mm)"
   ],
-  "stage": "coarse grid: a1 x ring size x alpha12"
+  "stage": "coarse grid: a1 x ring size x alpha12",
+  "park_ok": null,
+  "park_proxy": false
  },
  {
   "k": 11,
@@ -615,7 +637,9 @@
    "link1: sparse sampling (5.13 mm median spacing > 4 mm)",
    "link2: sparse sampling (4.69 mm median spacing > 4 mm)"
   ],
-  "stage": "coarse grid: a1 x ring size x alpha12"
+  "stage": "coarse grid: a1 x ring size x alpha12",
+  "park_ok": null,
+  "park_proxy": false
  },
  {
   "k": 12,
@@ -664,7 +688,9 @@
    "neck": 0.3936
   },
   "audit": [],
-  "stage": "coarse grid: a1 x ring size x alpha12"
+  "stage": "coarse grid: a1 x ring size x alpha12",
+  "park_ok": null,
+  "park_proxy": false
  },
  {
   "k": 13,
@@ -715,7 +741,9 @@
   "audit": [
    "link2: sparse sampling (4.02 mm median spacing > 4 mm)"
   ],
-  "stage": "coarse grid: a1 x ring size x alpha12"
+  "stage": "coarse grid: a1 x ring size x alpha12",
+  "park_ok": null,
+  "park_proxy": false
  },
  {
   "k": 14,
@@ -767,7 +795,9 @@
    "link1: sparse sampling (4.37 mm median spacing > 4 mm)",
    "link2: sparse sampling (4.23 mm median spacing > 4 mm)"
   ],
-  "stage": "coarse grid: a1 x ring size x alpha12"
+  "stage": "coarse grid: a1 x ring size x alpha12",
+  "park_ok": null,
+  "park_proxy": false
  },
  {
   "k": 15,
@@ -816,7 +846,9 @@
    "neck": 0.4204
   },
   "audit": [],
-  "stage": "coarse grid: a1 x ring size x alpha12"
+  "stage": "coarse grid: a1 x ring size x alpha12",
+  "park_ok": null,
+  "park_proxy": false
  },
  {
   "k": 16,
@@ -865,7 +897,9 @@
    "neck": 0.4337
   },
   "audit": [],
-  "stage": "coarse grid: a1 x ring size x alpha12"
+  "stage": "coarse grid: a1 x ring size x alpha12",
+  "park_ok": null,
+  "park_proxy": false
  },
  {
   "k": 17,
@@ -917,7 +951,9 @@
    "link1: sparse sampling (4.54 mm median spacing > 4 mm)",
    "link2: sparse sampling (4.27 mm median spacing > 4 mm)"
   ],
-  "stage": "coarse grid: a1 x ring size x alpha12"
+  "stage": "coarse grid: a1 x ring size x alpha12",
+  "park_ok": null,
+  "park_proxy": false
  },
  {
   "k": 18,
@@ -966,7 +1002,9 @@
    "neck": 0.4204
   },
   "audit": [],
-  "stage": "coarse grid: a1 x ring size x alpha12"
+  "stage": "coarse grid: a1 x ring size x alpha12",
+  "park_ok": null,
+  "park_proxy": false
  },
  {
   "k": 19,
@@ -1015,7 +1053,9 @@
    "neck": 0.4337
   },
   "audit": [],
-  "stage": "coarse grid: a1 x ring size x alpha12"
+  "stage": "coarse grid: a1 x ring size x alpha12",
+  "park_ok": null,
+  "park_proxy": false
  },
  {
   "k": 20,
@@ -1067,7 +1107,9 @@
    "link1: sparse sampling (4.6 mm median spacing > 4 mm)",
    "link2: sparse sampling (4.22 mm median spacing > 4 mm)"
   ],
-  "stage": "coarse grid: a1 x ring size x alpha12"
+  "stage": "coarse grid: a1 x ring size x alpha12",
+  "park_ok": null,
+  "park_proxy": false
  },
  {
   "k": 21,
@@ -1116,7 +1158,9 @@
    "neck": 0.4204
   },
   "audit": [],
-  "stage": "coarse grid: a1 x ring size x alpha12"
+  "stage": "coarse grid: a1 x ring size x alpha12",
+  "park_ok": null,
+  "park_proxy": false
  },
  {
   "k": 22,
@@ -1165,7 +1209,9 @@
    "neck": 0.4337
   },
   "audit": [],
-  "stage": "coarse grid: a1 x ring size x alpha12"
+  "stage": "coarse grid: a1 x ring size x alpha12",
+  "park_ok": null,
+  "park_proxy": false
  },
  {
   "k": 23,
@@ -1217,7 +1263,9 @@
    "link1: sparse sampling (4.6 mm median spacing > 4 mm)",
    "link2: sparse sampling (4.23 mm median spacing > 4 mm)"
   ],
-  "stage": "coarse grid: a1 x ring size x alpha12"
+  "stage": "coarse grid: a1 x ring size x alpha12",
+  "park_ok": null,
+  "park_proxy": false
  },
  {
   "k": 24,
@@ -1266,7 +1314,9 @@
    "neck": 0.4024
   },
   "audit": [],
-  "stage": "coarse grid: a1 x ring size x alpha12"
+  "stage": "coarse grid: a1 x ring size x alpha12",
+  "park_ok": null,
+  "park_proxy": false
  },
  {
   "k": 25,
@@ -1315,7 +1365,9 @@
    "neck": 0.4337
   },
   "audit": [],
-  "stage": "coarse grid: a1 x ring size x alpha12"
+  "stage": "coarse grid: a1 x ring size x alpha12",
+  "park_ok": null,
+  "park_proxy": false
  },
  {
   "k": 26,
@@ -1364,7 +1416,9 @@
    "neck": 0.4463
   },
   "audit": [],
-  "stage": "coarse grid: a1 x ring size x alpha12"
+  "stage": "coarse grid: a1 x ring size x alpha12",
+  "park_ok": null,
+  "park_proxy": false
  },
  {
   "k": 27,
@@ -1413,7 +1467,9 @@
    "neck": 0.4294
   },
   "audit": [],
-  "stage": "coarse grid: a1 x ring size x alpha12"
+  "stage": "coarse grid: a1 x ring size x alpha12",
+  "park_ok": null,
+  "park_proxy": false
  },
  {
   "k": 28,
@@ -1462,7 +1518,9 @@
    "neck": 0.4337
   },
   "audit": [],
-  "stage": "coarse grid: a1 x ring size x alpha12"
+  "stage": "coarse grid: a1 x ring size x alpha12",
+  "park_ok": null,
+  "park_proxy": false
  },
  {
   "k": 29,
@@ -1511,7 +1569,9 @@
    "neck": 0.4463
   },
   "audit": [],
-  "stage": "coarse grid: a1 x ring size x alpha12"
+  "stage": "coarse grid: a1 x ring size x alpha12",
+  "park_ok": null,
+  "park_proxy": false
  },
  {
   "k": 30,
@@ -1560,7 +1620,9 @@
    "neck": 0.4294
   },
   "audit": [],
-  "stage": "coarse grid: a1 x ring size x alpha12"
+  "stage": "coarse grid: a1 x ring size x alpha12",
+  "park_ok": null,
+  "park_proxy": false
  },
  {
   "k": 31,
@@ -1609,7 +1671,9 @@
    "neck": 0.4337
   },
   "audit": [],
-  "stage": "coarse grid: a1 x ring size x alpha12"
+  "stage": "coarse grid: a1 x ring size x alpha12",
+  "park_ok": null,
+  "park_proxy": false
  },
  {
   "k": 32,
@@ -1658,7 +1722,9 @@
    "neck": 0.4463
   },
   "audit": [],
-  "stage": "coarse grid: a1 x ring size x alpha12"
+  "stage": "coarse grid: a1 x ring size x alpha12",
+  "park_ok": null,
+  "park_proxy": false
  },
  {
   "k": 33,
@@ -1709,7 +1775,9 @@
   "audit": [
    "link2: sparse sampling (4.13 mm median spacing > 4 mm)"
   ],
-  "stage": "coarse grid: a1 x ring size x alpha12"
+  "stage": "coarse grid: a1 x ring size x alpha12",
+  "park_ok": null,
+  "park_proxy": false
  },
  {
   "k": 34,
@@ -1758,7 +1826,9 @@
    "neck": 0.4337
   },
   "audit": [],
-  "stage": "coarse grid: a1 x ring size x alpha12"
+  "stage": "coarse grid: a1 x ring size x alpha12",
+  "park_ok": null,
+  "park_proxy": false
  },
  {
   "k": 35,
@@ -1807,7 +1877,9 @@
    "neck": 0.4463
   },
   "audit": [],
-  "stage": "coarse grid: a1 x ring size x alpha12"
+  "stage": "coarse grid: a1 x ring size x alpha12",
+  "park_ok": null,
+  "park_proxy": false
  },
  {
   "k": 36,
@@ -1856,7 +1928,9 @@
    "neck": 0.4188
   },
   "audit": [],
-  "stage": "coarse grid: a1 x ring size x alpha12"
+  "stage": "coarse grid: a1 x ring size x alpha12",
+  "park_ok": null,
+  "park_proxy": false
  },
  {
   "k": 37,
@@ -1908,7 +1982,9 @@
    "link1: sparse sampling (4.23 mm median spacing > 4 mm)",
    "link2: sparse sampling (4.31 mm median spacing > 4 mm)"
   ],
-  "stage": "coarse grid: a1 x ring size x alpha12"
+  "stage": "coarse grid: a1 x ring size x alpha12",
+  "park_ok": null,
+  "park_proxy": false
  },
  {
   "k": 38,
@@ -1960,7 +2036,9 @@
    "link1: sparse sampling (10.65 mm median spacing > 4 mm)",
    "link2: sparse sampling (11.05 mm median spacing > 4 mm)"
   ],
-  "stage": "coarse grid: a1 x ring size x alpha12"
+  "stage": "coarse grid: a1 x ring size x alpha12",
+  "park_ok": null,
+  "park_proxy": false
  },
  {
   "k": 39,
@@ -2011,7 +2089,9 @@
   "audit": [
    "link1: sparse sampling (4.03 mm median spacing > 4 mm)"
   ],
-  "stage": "coarse grid: a1 x ring size x alpha12"
+  "stage": "coarse grid: a1 x ring size x alpha12",
+  "park_ok": null,
+  "park_proxy": false
  },
  {
   "k": 40,
@@ -2063,7 +2143,9 @@
    "link1: sparse sampling (4.59 mm median spacing > 4 mm)",
    "link2: sparse sampling (4.31 mm median spacing > 4 mm)"
   ],
-  "stage": "coarse grid: a1 x ring size x alpha12"
+  "stage": "coarse grid: a1 x ring size x alpha12",
+  "park_ok": null,
+  "park_proxy": false
  },
  {
   "k": 41,
@@ -2115,7 +2197,9 @@
    "link1: sparse sampling (11.13 mm median spacing > 4 mm)",
    "link2: sparse sampling (11.05 mm median spacing > 4 mm)"
   ],
-  "stage": "coarse grid: a1 x ring size x alpha12"
+  "stage": "coarse grid: a1 x ring size x alpha12",
+  "park_ok": null,
+  "park_proxy": false
  },
  {
   "k": 42,
@@ -2166,7 +2250,9 @@
   "audit": [
    "link1: sparse sampling (4.13 mm median spacing > 4 mm)"
   ],
-  "stage": "coarse grid: a1 x ring size x alpha12"
+  "stage": "coarse grid: a1 x ring size x alpha12",
+  "park_ok": null,
+  "park_proxy": false
  },
  {
   "k": 43,
@@ -2218,7 +2304,9 @@
    "link1: sparse sampling (4.6 mm median spacing > 4 mm)",
    "link2: sparse sampling (4.31 mm median spacing > 4 mm)"
   ],
-  "stage": "coarse grid: a1 x ring size x alpha12"
+  "stage": "coarse grid: a1 x ring size x alpha12",
+  "park_ok": null,
+  "park_proxy": false
  },
  {
   "k": 44,
@@ -2270,7 +2358,9 @@
    "link1: sparse sampling (11.23 mm median spacing > 4 mm)",
    "link2: sparse sampling (11.05 mm median spacing > 4 mm)"
   ],
-  "stage": "coarse grid: a1 x ring size x alpha12"
+  "stage": "coarse grid: a1 x ring size x alpha12",
+  "park_ok": null,
+  "park_proxy": false
  },
  {
   "k": 45,
@@ -2321,7 +2411,9 @@
   "audit": [
    "link1: sparse sampling (4.23 mm median spacing > 4 mm)"
   ],
-  "stage": "coarse grid: a1 x ring size x alpha12"
+  "stage": "coarse grid: a1 x ring size x alpha12",
+  "park_ok": null,
+  "park_proxy": false
  },
  {
   "k": 46,
@@ -2373,7 +2465,9 @@
    "link1: sparse sampling (4.6 mm median spacing > 4 mm)",
    "link2: sparse sampling (4.31 mm median spacing > 4 mm)"
   ],
-  "stage": "coarse grid: a1 x ring size x alpha12"
+  "stage": "coarse grid: a1 x ring size x alpha12",
+  "park_ok": null,
+  "park_proxy": false
  },
  {
   "k": 47,
@@ -2425,7 +2519,9 @@
    "link1: sparse sampling (11.26 mm median spacing > 4 mm)",
    "link2: sparse sampling (11.05 mm median spacing > 4 mm)"
   ],
-  "stage": "coarse grid: a1 x ring size x alpha12"
+  "stage": "coarse grid: a1 x ring size x alpha12",
+  "park_ok": null,
+  "park_proxy": false
  },
  {
   "k": 48,
@@ -2474,7 +2570,9 @@
    "neck": 0.4337
   },
   "audit": [],
-  "stage": "coarse grid: a1 x ring size x alpha12"
+  "stage": "coarse grid: a1 x ring size x alpha12",
+  "park_ok": null,
+  "park_proxy": false
  },
  {
   "k": 49,
@@ -2523,7 +2621,9 @@
    "neck": 0.4463
   },
   "audit": [],
-  "stage": "coarse grid: a1 x ring size x alpha12"
+  "stage": "coarse grid: a1 x ring size x alpha12",
+  "park_ok": null,
+  "park_proxy": false
  },
  {
   "k": 50,
@@ -2575,7 +2675,9 @@
    "link1: sparse sampling (5.14 mm median spacing > 4 mm)",
    "link2: sparse sampling (4.91 mm median spacing > 4 mm)"
   ],
-  "stage": "coarse grid: a1 x ring size x alpha12"
+  "stage": "coarse grid: a1 x ring size x alpha12",
+  "park_ok": null,
+  "park_proxy": false
  },
  {
   "k": 51,
@@ -2624,7 +2726,9 @@
    "neck": 0.446
   },
   "audit": [],
-  "stage": "coarse grid: a1 x ring size x alpha12"
+  "stage": "coarse grid: a1 x ring size x alpha12",
+  "park_ok": null,
+  "park_proxy": false
  },
  {
   "k": 52,
@@ -2673,7 +2777,9 @@
    "neck": 0.0
   },
   "audit": [],
-  "stage": "coarse grid: a1 x ring size x alpha12"
+  "stage": "coarse grid: a1 x ring size x alpha12",
+  "park_ok": null,
+  "park_proxy": false
  },
  {
   "k": 53,
@@ -2725,7 +2831,9 @@
    "link1: sparse sampling (5.4 mm median spacing > 4 mm)",
    "link2: sparse sampling (4.87 mm median spacing > 4 mm)"
   ],
-  "stage": "coarse grid: a1 x ring size x alpha12"
+  "stage": "coarse grid: a1 x ring size x alpha12",
+  "park_ok": null,
+  "park_proxy": false
  },
  {
   "k": 54,
@@ -2774,7 +2882,9 @@
    "neck": 0.4463
   },
   "audit": [],
-  "stage": "coarse grid: a1 x ring size x alpha12"
+  "stage": "coarse grid: a1 x ring size x alpha12",
+  "park_ok": null,
+  "park_proxy": false
  },
  {
   "k": 55,
@@ -2823,7 +2933,9 @@
    "neck": 0.3502
   },
   "audit": [],
-  "stage": "coarse grid: a1 x ring size x alpha12"
+  "stage": "coarse grid: a1 x ring size x alpha12",
+  "park_ok": null,
+  "park_proxy": false
  },
  {
   "k": 56,
@@ -2875,7 +2987,9 @@
    "link1: sparse sampling (5.43 mm median spacing > 4 mm)",
    "link2: sparse sampling (4.89 mm median spacing > 4 mm)"
   ],
-  "stage": "coarse grid: a1 x ring size x alpha12"
+  "stage": "coarse grid: a1 x ring size x alpha12",
+  "park_ok": null,
+  "park_proxy": false
  },
  {
   "k": 57,
@@ -2924,7 +3038,9 @@
    "neck": 0.4463
   },
   "audit": [],
-  "stage": "coarse grid: a1 x ring size x alpha12"
+  "stage": "coarse grid: a1 x ring size x alpha12",
+  "park_ok": null,
+  "park_proxy": false
  },
  {
   "k": 58,
@@ -2973,7 +3089,9 @@
    "neck": 0.4463
   },
   "audit": [],
-  "stage": "coarse grid: a1 x ring size x alpha12"
+  "stage": "coarse grid: a1 x ring size x alpha12",
+  "park_ok": null,
+  "park_proxy": false
  },
  {
   "k": 59,
@@ -3025,7 +3143,9 @@
    "link1: sparse sampling (5.47 mm median spacing > 4 mm)",
    "link2: sparse sampling (4.91 mm median spacing > 4 mm)"
   ],
-  "stage": "coarse grid: a1 x ring size x alpha12"
+  "stage": "coarse grid: a1 x ring size x alpha12",
+  "park_ok": null,
+  "park_proxy": false
  },
  {
   "k": 60,
@@ -3074,7 +3194,9 @@
    "neck": 0.4188
   },
   "audit": [],
-  "stage": "coarse grid: a1 x ring size x alpha12"
+  "stage": "coarse grid: a1 x ring size x alpha12",
+  "park_ok": null,
+  "park_proxy": false
  },
  {
   "k": 61,
@@ -3123,7 +3245,9 @@
    "neck": 0.4463
   },
   "audit": [],
-  "stage": "coarse grid: a1 x ring size x alpha12"
+  "stage": "coarse grid: a1 x ring size x alpha12",
+  "park_ok": null,
+  "park_proxy": false
  },
  {
   "k": 62,
@@ -3172,7 +3296,9 @@
    "neck": 0.4463
   },
   "audit": [],
-  "stage": "coarse grid: a1 x ring size x alpha12"
+  "stage": "coarse grid: a1 x ring size x alpha12",
+  "park_ok": null,
+  "park_proxy": false
  },
  {
   "k": 63,
@@ -3221,7 +3347,9 @@
    "neck": 0.4463
   },
   "audit": [],
-  "stage": "coarse grid: a1 x ring size x alpha12"
+  "stage": "coarse grid: a1 x ring size x alpha12",
+  "park_ok": null,
+  "park_proxy": false
  },
  {
   "k": 64,
@@ -3270,7 +3398,9 @@
    "neck": 0.4463
   },
   "audit": [],
-  "stage": "coarse grid: a1 x ring size x alpha12"
+  "stage": "coarse grid: a1 x ring size x alpha12",
+  "park_ok": null,
+  "park_proxy": false
  },
  {
   "k": 65,
@@ -3319,7 +3449,9 @@
    "neck": 0.4463
   },
   "audit": [],
-  "stage": "coarse grid: a1 x ring size x alpha12"
+  "stage": "coarse grid: a1 x ring size x alpha12",
+  "park_ok": null,
+  "park_proxy": false
  },
  {
   "k": 66,
@@ -3368,7 +3500,9 @@
    "neck": 0.4463
   },
   "audit": [],
-  "stage": "coarse grid: a1 x ring size x alpha12"
+  "stage": "coarse grid: a1 x ring size x alpha12",
+  "park_ok": null,
+  "park_proxy": false
  },
  {
   "k": 67,
@@ -3417,7 +3551,9 @@
    "neck": 0.4463
   },
   "audit": [],
-  "stage": "coarse grid: a1 x ring size x alpha12"
+  "stage": "coarse grid: a1 x ring size x alpha12",
+  "park_ok": null,
+  "park_proxy": false
  },
  {
   "k": 68,
@@ -3466,7 +3602,9 @@
    "neck": 0.4463
   },
   "audit": [],
-  "stage": "coarse grid: a1 x ring size x alpha12"
+  "stage": "coarse grid: a1 x ring size x alpha12",
+  "park_ok": null,
+  "park_proxy": false
  },
  {
   "k": 69,
@@ -3517,7 +3655,9 @@
   "audit": [
    "link2: sparse sampling (4.09 mm median spacing > 4 mm)"
   ],
-  "stage": "coarse grid: a1 x ring size x alpha12"
+  "stage": "coarse grid: a1 x ring size x alpha12",
+  "park_ok": null,
+  "park_proxy": false
  },
  {
   "k": 70,
@@ -3566,7 +3706,9 @@
    "neck": 0.4463
   },
   "audit": [],
-  "stage": "coarse grid: a1 x ring size x alpha12"
+  "stage": "coarse grid: a1 x ring size x alpha12",
+  "park_ok": null,
+  "park_proxy": false
  },
  {
   "k": 71,
@@ -3615,7 +3757,9 @@
    "neck": 0.4463
   },
   "audit": [],
-  "stage": "coarse grid: a1 x ring size x alpha12"
+  "stage": "coarse grid: a1 x ring size x alpha12",
+  "park_ok": null,
+  "park_proxy": false
  },
  {
   "k": 72,
@@ -3667,7 +3811,9 @@
    "link1: sparse sampling (4.51 mm median spacing > 4 mm)",
    "link2: sparse sampling (4.48 mm median spacing > 4 mm)"
   ],
-  "stage": "coarse grid: a1 x ring size x alpha12"
+  "stage": "coarse grid: a1 x ring size x alpha12",
+  "park_ok": null,
+  "park_proxy": false
  },
  {
   "k": 73,
@@ -3719,7 +3865,9 @@
    "link1: sparse sampling (9.36 mm median spacing > 4 mm)",
    "link2: sparse sampling (9.92 mm median spacing > 4 mm)"
   ],
-  "stage": "coarse grid: a1 x ring size x alpha12"
+  "stage": "coarse grid: a1 x ring size x alpha12",
+  "park_ok": null,
+  "park_proxy": false
  },
  {
   "k": 74,
@@ -3771,7 +3919,9 @@
    "link1: sparse sampling (10.99 mm median spacing > 4 mm)",
    "link2: sparse sampling (11.31 mm median spacing > 4 mm)"
   ],
-  "stage": "coarse grid: a1 x ring size x alpha12"
+  "stage": "coarse grid: a1 x ring size x alpha12",
+  "park_ok": null,
+  "park_proxy": false
  },
  {
   "k": 75,
@@ -3823,7 +3973,9 @@
    "link1: sparse sampling (4.6 mm median spacing > 4 mm)",
    "link2: sparse sampling (4.42 mm median spacing > 4 mm)"
   ],
-  "stage": "coarse grid: a1 x ring size x alpha12"
+  "stage": "coarse grid: a1 x ring size x alpha12",
+  "park_ok": null,
+  "park_proxy": false
  },
  {
   "k": 76,
@@ -3875,7 +4027,9 @@
    "link1: sparse sampling (10.46 mm median spacing > 4 mm)",
    "link2: sparse sampling (9.94 mm median spacing > 4 mm)"
   ],
-  "stage": "coarse grid: a1 x ring size x alpha12"
+  "stage": "coarse grid: a1 x ring size x alpha12",
+  "park_ok": null,
+  "park_proxy": false
  },
  {
   "k": 77,
@@ -3927,7 +4081,9 @@
    "link1: sparse sampling (11.33 mm median spacing > 4 mm)",
    "link2: sparse sampling (11.31 mm median spacing > 4 mm)"
   ],
-  "stage": "coarse grid: a1 x ring size x alpha12"
+  "stage": "coarse grid: a1 x ring size x alpha12",
+  "park_ok": null,
+  "park_proxy": false
  },
  {
   "k": 78,
@@ -3979,7 +4135,9 @@
    "link1: sparse sampling (4.6 mm median spacing > 4 mm)",
    "link2: sparse sampling (4.32 mm median spacing > 4 mm)"
   ],
-  "stage": "coarse grid: a1 x ring size x alpha12"
+  "stage": "coarse grid: a1 x ring size x alpha12",
+  "park_ok": null,
+  "park_proxy": false
  },
  {
   "k": 79,
@@ -4031,7 +4189,9 @@
    "link1: sparse sampling (10.58 mm median spacing > 4 mm)",
    "link2: sparse sampling (9.94 mm median spacing > 4 mm)"
   ],
-  "stage": "coarse grid: a1 x ring size x alpha12"
+  "stage": "coarse grid: a1 x ring size x alpha12",
+  "park_ok": null,
+  "park_proxy": false
  },
  {
   "k": 80,
@@ -4083,7 +4243,9 @@
    "link1: sparse sampling (11.42 mm median spacing > 4 mm)",
    "link2: sparse sampling (11.25 mm median spacing > 4 mm)"
   ],
-  "stage": "coarse grid: a1 x ring size x alpha12"
+  "stage": "coarse grid: a1 x ring size x alpha12",
+  "park_ok": null,
+  "park_proxy": false
  },
  {
   "k": 81,
@@ -4135,7 +4297,9 @@
    "link1: sparse sampling (4.6 mm median spacing > 4 mm)",
    "link2: sparse sampling (4.38 mm median spacing > 4 mm)"
   ],
-  "stage": "coarse grid: a1 x ring size x alpha12"
+  "stage": "coarse grid: a1 x ring size x alpha12",
+  "park_ok": null,
+  "park_proxy": false
  },
  {
   "k": 82,
@@ -4187,7 +4351,9 @@
    "link1: sparse sampling (10.47 mm median spacing > 4 mm)",
    "link2: sparse sampling (9.92 mm median spacing > 4 mm)"
   ],
-  "stage": "coarse grid: a1 x ring size x alpha12"
+  "stage": "coarse grid: a1 x ring size x alpha12",
+  "park_ok": null,
+  "park_proxy": false
  },
  {
   "k": 83,
@@ -4239,7 +4405,9 @@
    "link1: sparse sampling (11.43 mm median spacing > 4 mm)",
    "link2: sparse sampling (11.25 mm median spacing > 4 mm)"
   ],
-  "stage": "coarse grid: a1 x ring size x alpha12"
+  "stage": "coarse grid: a1 x ring size x alpha12",
+  "park_ok": null,
+  "park_proxy": false
  },
  {
   "k": 84,
@@ -4288,7 +4456,9 @@
    "neck": 0.4463
   },
   "audit": [],
-  "stage": "coarse grid: a1 x ring size x alpha12"
+  "stage": "coarse grid: a1 x ring size x alpha12",
+  "park_ok": null,
+  "park_proxy": false
  },
  {
   "k": 85,
@@ -4340,7 +4510,9 @@
    "link1: sparse sampling (4.59 mm median spacing > 4 mm)",
    "link2: sparse sampling (4.69 mm median spacing > 4 mm)"
   ],
-  "stage": "coarse grid: a1 x ring size x alpha12"
+  "stage": "coarse grid: a1 x ring size x alpha12",
+  "park_ok": null,
+  "park_proxy": false
  },
  {
   "k": 86,
@@ -4392,7 +4564,9 @@
    "link1: sparse sampling (7.37 mm median spacing > 4 mm)",
    "link2: sparse sampling (5.34 mm median spacing > 4 mm)"
   ],
-  "stage": "coarse grid: a1 x ring size x alpha12"
+  "stage": "coarse grid: a1 x ring size x alpha12",
+  "park_ok": null,
+  "park_proxy": false
  },
  {
   "k": 87,
@@ -4441,7 +4615,9 @@
    "neck": 0.4383
   },
   "audit": [],
-  "stage": "coarse grid: a1 x ring size x alpha12"
+  "stage": "coarse grid: a1 x ring size x alpha12",
+  "park_ok": null,
+  "park_proxy": false
  },
  {
   "k": 88,
@@ -4493,7 +4669,9 @@
    "link1: sparse sampling (4.64 mm median spacing > 4 mm)",
    "link2: sparse sampling (4.69 mm median spacing > 4 mm)"
   ],
-  "stage": "coarse grid: a1 x ring size x alpha12"
+  "stage": "coarse grid: a1 x ring size x alpha12",
+  "park_ok": null,
+  "park_proxy": false
  },
  {
   "k": 89,
@@ -4545,7 +4723,9 @@
    "link1: sparse sampling (7.83 mm median spacing > 4 mm)",
    "link2: sparse sampling (5.34 mm median spacing > 4 mm)"
   ],
-  "stage": "coarse grid: a1 x ring size x alpha12"
+  "stage": "coarse grid: a1 x ring size x alpha12",
+  "park_ok": null,
+  "park_proxy": false
  },
  {
   "k": 90,
@@ -4596,7 +4776,9 @@
   "audit": [
    "link1: sparse sampling (4.03 mm median spacing > 4 mm)"
   ],
-  "stage": "coarse grid: a1 x ring size x alpha12"
+  "stage": "coarse grid: a1 x ring size x alpha12",
+  "park_ok": null,
+  "park_proxy": false
  },
  {
   "k": 91,
@@ -4648,7 +4830,9 @@
    "link1: sparse sampling (4.77 mm median spacing > 4 mm)",
    "link2: sparse sampling (4.69 mm median spacing > 4 mm)"
   ],
-  "stage": "coarse grid: a1 x ring size x alpha12"
+  "stage": "coarse grid: a1 x ring size x alpha12",
+  "park_ok": null,
+  "park_proxy": false
  },
  {
   "k": 92,
@@ -4700,7 +4884,9 @@
    "link1: sparse sampling (8.05 mm median spacing > 4 mm)",
    "link2: sparse sampling (5.34 mm median spacing > 4 mm)"
   ],
-  "stage": "coarse grid: a1 x ring size x alpha12"
+  "stage": "coarse grid: a1 x ring size x alpha12",
+  "park_ok": null,
+  "park_proxy": false
  },
  {
   "k": 93,
@@ -4751,7 +4937,9 @@
   "audit": [
    "link1: sparse sampling (4.08 mm median spacing > 4 mm)"
   ],
-  "stage": "coarse grid: a1 x ring size x alpha12"
+  "stage": "coarse grid: a1 x ring size x alpha12",
+  "park_ok": null,
+  "park_proxy": false
  },
  {
   "k": 94,
@@ -4803,7 +4991,9 @@
    "link1: sparse sampling (4.73 mm median spacing > 4 mm)",
    "link2: sparse sampling (4.69 mm median spacing > 4 mm)"
   ],
-  "stage": "coarse grid: a1 x ring size x alpha12"
+  "stage": "coarse grid: a1 x ring size x alpha12",
+  "park_ok": null,
+  "park_proxy": false
  },
  {
   "k": 95,
@@ -4855,7 +5045,9 @@
    "link1: sparse sampling (8.03 mm median spacing > 4 mm)",
    "link2: sparse sampling (5.34 mm median spacing > 4 mm)"
   ],
-  "stage": "coarse grid: a1 x ring size x alpha12"
+  "stage": "coarse grid: a1 x ring size x alpha12",
+  "park_ok": null,
+  "park_proxy": false
  },
  {
   "k": 96,
@@ -4904,7 +5096,9 @@
    "neck": 0.4188
   },
   "audit": [],
-  "stage": "coarse grid: a1 x ring size x alpha12"
+  "stage": "coarse grid: a1 x ring size x alpha12",
+  "park_ok": null,
+  "park_proxy": false
  },
  {
   "k": 97,
@@ -4953,7 +5147,9 @@
    "neck": 0.4463
   },
   "audit": [],
-  "stage": "coarse grid: a1 x ring size x alpha12"
+  "stage": "coarse grid: a1 x ring size x alpha12",
+  "park_ok": null,
+  "park_proxy": false
  },
  {
   "k": 98,
@@ -5005,7 +5201,9 @@
    "link1: sparse sampling (4.36 mm median spacing > 4 mm)",
    "link2: sparse sampling (4.22 mm median spacing > 4 mm)"
   ],
-  "stage": "coarse grid: a1 x ring size x alpha12"
+  "stage": "coarse grid: a1 x ring size x alpha12",
+  "park_ok": null,
+  "park_proxy": false
  },
  {
   "k": 99,
@@ -5054,7 +5252,9 @@
    "neck": 0.4463
   },
   "audit": [],
-  "stage": "coarse grid: a1 x ring size x alpha12"
+  "stage": "coarse grid: a1 x ring size x alpha12",
+  "park_ok": null,
+  "park_proxy": false
  },
  {
   "k": 100,
@@ -5103,7 +5303,9 @@
    "neck": 0.4463
   },
   "audit": [],
-  "stage": "coarse grid: a1 x ring size x alpha12"
+  "stage": "coarse grid: a1 x ring size x alpha12",
+  "park_ok": null,
+  "park_proxy": false
  },
  {
   "k": 101,
@@ -5155,7 +5357,9 @@
    "link1: sparse sampling (4.59 mm median spacing > 4 mm)",
    "link2: sparse sampling (4.22 mm median spacing > 4 mm)"
   ],
-  "stage": "coarse grid: a1 x ring size x alpha12"
+  "stage": "coarse grid: a1 x ring size x alpha12",
+  "park_ok": null,
+  "park_proxy": false
  },
  {
   "k": 102,
@@ -5204,7 +5408,9 @@
    "neck": 0.4463
   },
   "audit": [],
-  "stage": "coarse grid: a1 x ring size x alpha12"
+  "stage": "coarse grid: a1 x ring size x alpha12",
+  "park_ok": null,
+  "park_proxy": false
  },
  {
   "k": 103,
@@ -5253,7 +5459,9 @@
    "neck": 0.4463
   },
   "audit": [],
-  "stage": "coarse grid: a1 x ring size x alpha12"
+  "stage": "coarse grid: a1 x ring size x alpha12",
+  "park_ok": null,
+  "park_proxy": false
  },
  {
   "k": 104,
@@ -5305,7 +5513,9 @@
    "link1: sparse sampling (4.6 mm median spacing > 4 mm)",
    "link2: sparse sampling (4.22 mm median spacing > 4 mm)"
   ],
-  "stage": "coarse grid: a1 x ring size x alpha12"
+  "stage": "coarse grid: a1 x ring size x alpha12",
+  "park_ok": null,
+  "park_proxy": false
  },
  {
   "k": 105,
@@ -5354,7 +5564,9 @@
    "neck": 0.4463
   },
   "audit": [],
-  "stage": "coarse grid: a1 x ring size x alpha12"
+  "stage": "coarse grid: a1 x ring size x alpha12",
+  "park_ok": null,
+  "park_proxy": false
  },
  {
   "k": 106,
@@ -5403,7 +5615,9 @@
    "neck": 0.4463
   },
   "audit": [],
-  "stage": "coarse grid: a1 x ring size x alpha12"
+  "stage": "coarse grid: a1 x ring size x alpha12",
+  "park_ok": null,
+  "park_proxy": false
  },
  {
   "k": 107,
@@ -5455,7 +5669,9 @@
    "link1: sparse sampling (4.6 mm median spacing > 4 mm)",
    "link2: sparse sampling (4.22 mm median spacing > 4 mm)"
   ],
-  "stage": "coarse grid: a1 x ring size x alpha12"
+  "stage": "coarse grid: a1 x ring size x alpha12",
+  "park_ok": null,
+  "park_proxy": false
  },
  {
   "k": 108,
@@ -5507,7 +5723,9 @@
    "link1: sparse sampling (5.32 mm median spacing > 4 mm)",
    "link2: sparse sampling (5.8 mm median spacing > 4 mm)"
   ],
-  "stage": "coarse grid: a1 x ring size x alpha12"
+  "stage": "coarse grid: a1 x ring size x alpha12",
+  "park_ok": null,
+  "park_proxy": false
  },
  {
   "k": 109,
@@ -5559,7 +5777,9 @@
    "link1: sparse sampling (9.94 mm median spacing > 4 mm)",
    "link2: sparse sampling (10.03 mm median spacing > 4 mm)"
   ],
-  "stage": "coarse grid: a1 x ring size x alpha12"
+  "stage": "coarse grid: a1 x ring size x alpha12",
+  "park_ok": null,
+  "park_proxy": false
  },
  {
   "k": 110,
@@ -5611,7 +5831,9 @@
    "link1: sparse sampling (11.0 mm median spacing > 4 mm)",
    "link2: sparse sampling (10.49 mm median spacing > 4 mm)"
   ],
-  "stage": "coarse grid: a1 x ring size x alpha12"
+  "stage": "coarse grid: a1 x ring size x alpha12",
+  "park_ok": null,
+  "park_proxy": false
  },
  {
   "k": 111,
@@ -5663,7 +5885,9 @@
    "link1: sparse sampling (5.65 mm median spacing > 4 mm)",
    "link2: sparse sampling (5.8 mm median spacing > 4 mm)"
   ],
-  "stage": "coarse grid: a1 x ring size x alpha12"
+  "stage": "coarse grid: a1 x ring size x alpha12",
+  "park_ok": null,
+  "park_proxy": false
  },
  {
   "k": 112,
@@ -5715,7 +5939,9 @@
    "link1: sparse sampling (10.65 mm median spacing > 4 mm)",
    "link2: sparse sampling (10.03 mm median spacing > 4 mm)"
   ],
-  "stage": "coarse grid: a1 x ring size x alpha12"
+  "stage": "coarse grid: a1 x ring size x alpha12",
+  "park_ok": null,
+  "park_proxy": false
  },
  {
   "k": 113,
@@ -5767,7 +5993,9 @@
    "link1: sparse sampling (11.33 mm median spacing > 4 mm)",
    "link2: sparse sampling (10.49 mm median spacing > 4 mm)"
   ],
-  "stage": "coarse grid: a1 x ring size x alpha12"
+  "stage": "coarse grid: a1 x ring size x alpha12",
+  "park_ok": null,
+  "park_proxy": false
  },
  {
   "k": 114,
@@ -5819,7 +6047,9 @@
    "link1: sparse sampling (5.76 mm median spacing > 4 mm)",
    "link2: sparse sampling (5.73 mm median spacing > 4 mm)"
   ],
-  "stage": "coarse grid: a1 x ring size x alpha12"
+  "stage": "coarse grid: a1 x ring size x alpha12",
+  "park_ok": null,
+  "park_proxy": false
  },
  {
   "k": 115,
@@ -5871,7 +6101,9 @@
    "link1: sparse sampling (10.83 mm median spacing > 4 mm)",
    "link2: sparse sampling (10.03 mm median spacing > 4 mm)"
   ],
-  "stage": "coarse grid: a1 x ring size x alpha12"
+  "stage": "coarse grid: a1 x ring size x alpha12",
+  "park_ok": null,
+  "park_proxy": false
  },
  {
   "k": 116,
@@ -5923,7 +6155,9 @@
    "link1: sparse sampling (11.37 mm median spacing > 4 mm)",
    "link2: sparse sampling (10.49 mm median spacing > 4 mm)"
   ],
-  "stage": "coarse grid: a1 x ring size x alpha12"
+  "stage": "coarse grid: a1 x ring size x alpha12",
+  "park_ok": null,
+  "park_proxy": false
  },
  {
   "k": 117,
@@ -5975,7 +6209,9 @@
    "link1: sparse sampling (5.75 mm median spacing > 4 mm)",
    "link2: sparse sampling (5.8 mm median spacing > 4 mm)"
   ],
-  "stage": "coarse grid: a1 x ring size x alpha12"
+  "stage": "coarse grid: a1 x ring size x alpha12",
+  "park_ok": null,
+  "park_proxy": false
  },
  {
   "k": 118,
@@ -6027,7 +6263,9 @@
    "link1: sparse sampling (10.9 mm median spacing > 4 mm)",
    "link2: sparse sampling (10.1 mm median spacing > 4 mm)"
   ],
-  "stage": "coarse grid: a1 x ring size x alpha12"
+  "stage": "coarse grid: a1 x ring size x alpha12",
+  "park_ok": null,
+  "park_proxy": false
  },
  {
   "k": 119,
@@ -6079,7 +6317,9 @@
    "link1: sparse sampling (11.43 mm median spacing > 4 mm)",
    "link2: sparse sampling (10.49 mm median spacing > 4 mm)"
   ],
-  "stage": "coarse grid: a1 x ring size x alpha12"
+  "stage": "coarse grid: a1 x ring size x alpha12",
+  "park_ok": null,
+  "park_proxy": false
  },
  {
   "k": 120,
@@ -6128,7 +6368,9 @@
    "neck": 0.4463
   },
   "audit": [],
-  "stage": "coarse grid: a1 x ring size x alpha12"
+  "stage": "coarse grid: a1 x ring size x alpha12",
+  "park_ok": null,
+  "park_proxy": false
  },
  {
   "k": 121,
@@ -6180,7 +6422,9 @@
    "link1: sparse sampling (4.78 mm median spacing > 4 mm)",
    "link2: sparse sampling (4.84 mm median spacing > 4 mm)"
   ],
-  "stage": "coarse grid: a1 x ring size x alpha12"
+  "stage": "coarse grid: a1 x ring size x alpha12",
+  "park_ok": null,
+  "park_proxy": false
  },
  {
   "k": 122,
@@ -6232,7 +6476,9 @@
    "link1: sparse sampling (7.52 mm median spacing > 4 mm)",
    "link2: sparse sampling (4.98 mm median spacing > 4 mm)"
   ],
-  "stage": "coarse grid: a1 x ring size x alpha12"
+  "stage": "coarse grid: a1 x ring size x alpha12",
+  "park_ok": null,
+  "park_proxy": false
  },
  {
   "k": 123,
@@ -6283,7 +6529,9 @@
   "audit": [
    "link1: sparse sampling (4.34 mm median spacing > 4 mm)"
   ],
-  "stage": "coarse grid: a1 x ring size x alpha12"
+  "stage": "coarse grid: a1 x ring size x alpha12",
+  "park_ok": null,
+  "park_proxy": false
  },
  {
   "k": 124,
@@ -6335,7 +6583,9 @@
    "link1: sparse sampling (5.01 mm median spacing > 4 mm)",
    "link2: sparse sampling (4.84 mm median spacing > 4 mm)"
   ],
-  "stage": "coarse grid: a1 x ring size x alpha12"
+  "stage": "coarse grid: a1 x ring size x alpha12",
+  "park_ok": null,
+  "park_proxy": false
  },
  {
   "k": 125,
@@ -6387,7 +6637,9 @@
    "link1: sparse sampling (8.01 mm median spacing > 4 mm)",
    "link2: sparse sampling (4.98 mm median spacing > 4 mm)"
   ],
-  "stage": "coarse grid: a1 x ring size x alpha12"
+  "stage": "coarse grid: a1 x ring size x alpha12",
+  "park_ok": null,
+  "park_proxy": false
  },
  {
   "k": 126,
@@ -6438,7 +6690,9 @@
   "audit": [
    "link1: sparse sampling (4.37 mm median spacing > 4 mm)"
   ],
-  "stage": "coarse grid: a1 x ring size x alpha12"
+  "stage": "coarse grid: a1 x ring size x alpha12",
+  "park_ok": null,
+  "park_proxy": false
  },
  {
   "k": 127,
@@ -6490,7 +6744,9 @@
    "link1: sparse sampling (5.07 mm median spacing > 4 mm)",
    "link2: sparse sampling (4.85 mm median spacing > 4 mm)"
   ],
-  "stage": "coarse grid: a1 x ring size x alpha12"
+  "stage": "coarse grid: a1 x ring size x alpha12",
+  "park_ok": null,
+  "park_proxy": false
  },
  {
   "k": 128,
@@ -6542,7 +6798,9 @@
    "link1: sparse sampling (7.89 mm median spacing > 4 mm)",
    "link2: sparse sampling (4.98 mm median spacing > 4 mm)"
   ],
-  "stage": "coarse grid: a1 x ring size x alpha12"
+  "stage": "coarse grid: a1 x ring size x alpha12",
+  "park_ok": null,
+  "park_proxy": false
  },
  {
   "k": 129,
@@ -6593,7 +6851,9 @@
   "audit": [
    "link1: sparse sampling (4.37 mm median spacing > 4 mm)"
   ],
-  "stage": "coarse grid: a1 x ring size x alpha12"
+  "stage": "coarse grid: a1 x ring size x alpha12",
+  "park_ok": null,
+  "park_proxy": false
  },
  {
   "k": 130,
@@ -6645,7 +6905,9 @@
    "link1: sparse sampling (5.15 mm median spacing > 4 mm)",
    "link2: sparse sampling (4.76 mm median spacing > 4 mm)"
   ],
-  "stage": "coarse grid: a1 x ring size x alpha12"
+  "stage": "coarse grid: a1 x ring size x alpha12",
+  "park_ok": null,
+  "park_proxy": false
  },
  {
   "k": 131,
@@ -6697,7 +6959,9 @@
    "link1: sparse sampling (8.13 mm median spacing > 4 mm)",
    "link2: sparse sampling (4.98 mm median spacing > 4 mm)"
   ],
-  "stage": "coarse grid: a1 x ring size x alpha12"
+  "stage": "coarse grid: a1 x ring size x alpha12",
+  "park_ok": null,
+  "park_proxy": false
  },
  {
   "k": 132,
@@ -6749,7 +7013,9 @@
    "link1: sparse sampling (10.14 mm median spacing > 4 mm)",
    "link2: sparse sampling (10.55 mm median spacing > 4 mm)"
   ],
-  "stage": "coarse grid: a1 x ring size x alpha12"
+  "stage": "coarse grid: a1 x ring size x alpha12",
+  "park_ok": null,
+  "park_proxy": false
  },
  {
   "k": 133,
@@ -6798,7 +7064,9 @@
    "neck": 0.4463
   },
   "audit": [],
-  "stage": "coarse grid: a1 x ring size x alpha12"
+  "stage": "coarse grid: a1 x ring size x alpha12",
+  "park_ok": null,
+  "park_proxy": false
  },
  {
   "k": 134,
@@ -6850,7 +7118,9 @@
    "link1: sparse sampling (4.49 mm median spacing > 4 mm)",
    "link2: sparse sampling (4.22 mm median spacing > 4 mm)"
   ],
-  "stage": "coarse grid: a1 x ring size x alpha12"
+  "stage": "coarse grid: a1 x ring size x alpha12",
+  "park_ok": null,
+  "park_proxy": false
  },
  {
   "k": 135,
@@ -6902,7 +7172,9 @@
    "link1: sparse sampling (10.64 mm median spacing > 4 mm)",
    "link2: sparse sampling (10.55 mm median spacing > 4 mm)"
   ],
-  "stage": "coarse grid: a1 x ring size x alpha12"
+  "stage": "coarse grid: a1 x ring size x alpha12",
+  "park_ok": null,
+  "park_proxy": false
  },
  {
   "k": 136,
@@ -6951,7 +7223,9 @@
    "neck": 0.4463
   },
   "audit": [],
-  "stage": "coarse grid: a1 x ring size x alpha12"
+  "stage": "coarse grid: a1 x ring size x alpha12",
+  "park_ok": null,
+  "park_proxy": false
  },
  {
   "k": 137,
@@ -7003,7 +7277,9 @@
    "link1: sparse sampling (4.57 mm median spacing > 4 mm)",
    "link2: sparse sampling (4.22 mm median spacing > 4 mm)"
   ],
-  "stage": "coarse grid: a1 x ring size x alpha12"
+  "stage": "coarse grid: a1 x ring size x alpha12",
+  "park_ok": null,
+  "park_proxy": false
  },
  {
   "k": 138,
@@ -7055,7 +7331,9 @@
    "link1: sparse sampling (10.74 mm median spacing > 4 mm)",
    "link2: sparse sampling (10.55 mm median spacing > 4 mm)"
   ],
-  "stage": "coarse grid: a1 x ring size x alpha12"
+  "stage": "coarse grid: a1 x ring size x alpha12",
+  "park_ok": null,
+  "park_proxy": false
  },
  {
   "k": 139,
@@ -7104,7 +7382,9 @@
    "neck": 0.4463
   },
   "audit": [],
-  "stage": "coarse grid: a1 x ring size x alpha12"
+  "stage": "coarse grid: a1 x ring size x alpha12",
+  "park_ok": null,
+  "park_proxy": false
  },
  {
   "k": 140,
@@ -7156,7 +7436,9 @@
    "link1: sparse sampling (4.57 mm median spacing > 4 mm)",
    "link2: sparse sampling (4.09 mm median spacing > 4 mm)"
   ],
-  "stage": "coarse grid: a1 x ring size x alpha12"
+  "stage": "coarse grid: a1 x ring size x alpha12",
+  "park_ok": null,
+  "park_proxy": false
  },
  {
   "k": 141,
@@ -7208,7 +7490,9 @@
    "link1: sparse sampling (10.74 mm median spacing > 4 mm)",
    "link2: sparse sampling (10.55 mm median spacing > 4 mm)"
   ],
-  "stage": "coarse grid: a1 x ring size x alpha12"
+  "stage": "coarse grid: a1 x ring size x alpha12",
+  "park_ok": null,
+  "park_proxy": false
  },
  {
   "k": 142,
@@ -7257,7 +7541,9 @@
    "neck": 0.4463
   },
   "audit": [],
-  "stage": "coarse grid: a1 x ring size x alpha12"
+  "stage": "coarse grid: a1 x ring size x alpha12",
+  "park_ok": null,
+  "park_proxy": false
  },
  {
   "k": 143,
@@ -7309,7 +7595,9 @@
    "link1: sparse sampling (4.57 mm median spacing > 4 mm)",
    "link2: sparse sampling (4.09 mm median spacing > 4 mm)"
   ],
-  "stage": "coarse grid: a1 x ring size x alpha12"
+  "stage": "coarse grid: a1 x ring size x alpha12",
+  "park_ok": null,
+  "park_proxy": false
  },
  {
   "k": 144,
@@ -7358,7 +7646,22 @@
    "neck": 0.7172
   },
   "audit": [],
-  "stage": "cma1 gen 0: ring, o20-control"
+  "stage": "cma1 gen 0: ring, o20-control",
+  "park": {
+   "ring1": [
+    97.0,
+    4.99
+   ],
+   "hub2": [
+    116.0,
+    -0.31
+   ],
+   "hub3": [
+    66.0,
+    2.48
+   ]
+  },
+  "park_ok": false
  },
  {
   "k": 145,
@@ -7410,7 +7713,22 @@
    "link1: sparse sampling (10.24 mm median spacing > 4 mm)",
    "link2: sparse sampling (10.45 mm median spacing > 4 mm)"
   ],
-  "stage": "cma1 gen 0: ring, o20-control"
+  "stage": "cma1 gen 0: ring, o20-control",
+  "park": {
+   "ring1": [
+    101.0,
+    8.26
+   ],
+   "hub2": [
+    400.0,
+    58.9
+   ],
+   "hub3": [
+    78.0,
+    5.35
+   ]
+  },
+  "park_ok": false
  },
  {
   "k": 146,
@@ -7459,7 +7777,22 @@
    "neck": 0.4618
   },
   "audit": [],
-  "stage": "cma1 gen 0: ring, o20-control"
+  "stage": "cma1 gen 0: ring, o20-control",
+  "park": {
+   "ring1": [
+    103.0,
+    6.74
+   ],
+   "hub2": [
+    137.8,
+    10.1
+   ],
+   "hub3": [
+    72.0,
+    5.75
+   ]
+  },
+  "park_ok": true
  },
  {
   "k": 147,
@@ -7510,7 +7843,9 @@
   "audit": [
    "link2: sparse sampling (4.03 mm median spacing > 4 mm)"
   ],
-  "stage": "cma1 gen 0: ring, o20-control"
+  "stage": "cma1 gen 0: ring, o20-control",
+  "park": {},
+  "park_ok": false
  },
  {
   "k": 148,
@@ -7559,7 +7894,9 @@
    "neck": 0.0
   },
   "audit": [],
-  "stage": "cma1 gen 0: ring, o20-control"
+  "stage": "cma1 gen 0: ring, o20-control",
+  "park": {},
+  "park_ok": false
  },
  {
   "k": 149,
@@ -7611,7 +7948,22 @@
    "link1: sparse sampling (9.94 mm median spacing > 4 mm)",
    "link2: sparse sampling (9.96 mm median spacing > 4 mm)"
   ],
-  "stage": "cma1 gen 0: ring, o20-control"
+  "stage": "cma1 gen 0: ring, o20-control",
+  "park": {
+   "ring1": [
+    108.0,
+    7.55
+   ],
+   "hub2": [
+    400.0,
+    51.63
+   ],
+   "hub3": [
+    73.1,
+    5.21
+   ]
+  },
+  "park_ok": false
  },
  {
   "k": 150,
@@ -7660,7 +8012,9 @@
    "neck": 0.0
   },
   "audit": [],
-  "stage": "cma1 gen 0: ring, o20-control"
+  "stage": "cma1 gen 0: ring, o20-control",
+  "park": {},
+  "park_ok": false
  },
  {
   "k": 151,
@@ -7711,7 +8065,22 @@
   "audit": [
    "link2: sparse sampling (4.42 mm median spacing > 4 mm)"
   ],
-  "stage": "cma1 gen 0: ring, o20-control"
+  "stage": "cma1 gen 0: ring, o20-control",
+  "park": {
+   "ring1": [
+    113.0,
+    6.58
+   ],
+   "hub2": [
+    174.9,
+    11.57
+   ],
+   "hub3": [
+    71.0,
+    5.06
+   ]
+  },
+  "park_ok": false
  },
  {
   "k": 152,
@@ -7760,7 +8129,22 @@
    "neck": 0.5129
   },
   "audit": [],
-  "stage": "cma1 gen 0: ring, o20-control"
+  "stage": "cma1 gen 0: ring, o20-control",
+  "park": {
+   "ring1": [
+    112.0,
+    6.16
+   ],
+   "hub2": [
+    151.0,
+    10.59
+   ],
+   "hub3": [
+    73.0,
+    5.67
+   ]
+  },
+  "park_ok": false
  },
  {
   "k": 153,
@@ -7809,7 +8193,22 @@
    "neck": 0.5464
   },
   "audit": [],
-  "stage": "cma1 gen 0: ring, o20-control"
+  "stage": "cma1 gen 0: ring, o20-control",
+  "park": {
+   "ring1": [
+    91.0,
+    8.26
+   ],
+   "hub2": [
+    137.5,
+    9.37
+   ],
+   "hub3": [
+    71.0,
+    4.61
+   ]
+  },
+  "park_ok": true
  },
  {
   "k": 154,
@@ -7858,7 +8257,22 @@
    "neck": 0.6377
   },
   "audit": [],
-  "stage": "cma1 gen 0: ring, o20-control"
+  "stage": "cma1 gen 0: ring, o20-control",
+  "park": {
+   "ring1": [
+    113.0,
+    6.34
+   ],
+   "hub2": [
+    134.7,
+    8.76
+   ],
+   "hub3": [
+    67.0,
+    4.24
+   ]
+  },
+  "park_ok": true
  },
  {
   "k": 155,
@@ -7910,7 +8324,9 @@
    "link1: sparse sampling (4.1 mm median spacing > 4 mm)",
    "link2: sparse sampling (4.26 mm median spacing > 4 mm)"
   ],
-  "stage": "cma1 gen 0: ring, o20-control"
+  "stage": "cma1 gen 0: ring, o20-control",
+  "park": {},
+  "park_ok": false
  },
  {
   "k": 156,
@@ -7961,7 +8377,22 @@
   "audit": [
    "link2: sparse sampling (4.12 mm median spacing > 4 mm)"
   ],
-  "stage": "cma1 gen 0: ring, o20-control"
+  "stage": "cma1 gen 0: ring, o20-control",
+  "park": {
+   "ring1": [
+    107.0,
+    6.93
+   ],
+   "hub2": [
+    174.8,
+    5.39
+   ],
+   "hub3": [
+    71.0,
+    5.35
+   ]
+  },
+  "park_ok": false
  },
  {
   "k": 157,
@@ -8010,7 +8441,22 @@
    "neck": 0.4279
   },
   "audit": [],
-  "stage": "cma1 gen 0: ring, o20-control"
+  "stage": "cma1 gen 0: ring, o20-control",
+  "park": {
+   "ring1": [
+    107.0,
+    6.26
+   ],
+   "hub2": [
+    135.8,
+    10.08
+   ],
+   "hub3": [
+    78.0,
+    5.82
+   ]
+  },
+  "park_ok": true
  },
  {
   "k": 158,
@@ -8059,7 +8505,9 @@
    "neck": 0.0
   },
   "audit": [],
-  "stage": "cma1 gen 0: ring, o20-control"
+  "stage": "cma1 gen 0: ring, o20-control",
+  "park": {},
+  "park_ok": false
  },
  {
   "k": 159,
@@ -8111,7 +8559,22 @@
    "link1: sparse sampling (4.02 mm median spacing > 4 mm)",
    "link2: sparse sampling (4.16 mm median spacing > 4 mm)"
   ],
-  "stage": "cma1 gen 0: ring, o20-control"
+  "stage": "cma1 gen 0: ring, o20-control",
+  "park": {
+   "ring1": [
+    123.0,
+    6.74
+   ],
+   "hub2": [
+    158.9,
+    9.7
+   ],
+   "hub3": [
+    73.7,
+    5.44
+   ]
+  },
+  "park_ok": false
  },
  {
   "k": 160,
@@ -8160,7 +8623,22 @@
    "neck": 0.5351
   },
   "audit": [],
-  "stage": "cma1 gen 0: ring, o20-control"
+  "stage": "cma1 gen 0: ring, o20-control",
+  "park": {
+   "hub1": [
+    52.0,
+    5.04
+   ],
+   "hub2": [
+    157.7,
+    9.38
+   ],
+   "hub3": [
+    71.0,
+    5.02
+   ]
+  },
+  "park_ok": false
  },
  {
   "k": 161,
@@ -8209,7 +8687,22 @@
    "neck": 0.5228
   },
   "audit": [],
-  "stage": "cma1 gen 0: ring, o20-control"
+  "stage": "cma1 gen 0: ring, o20-control",
+  "park": {
+   "hub1": [
+    55.0,
+    6.01
+   ],
+   "hub2": [
+    128.8,
+    8.93
+   ],
+   "hub3": [
+    70.0,
+    4.99
+   ]
+  },
+  "park_ok": true
  },
  {
   "k": 162,
@@ -8260,7 +8753,22 @@
   "audit": [
    "link2: sparse sampling (4.24 mm median spacing > 4 mm)"
   ],
-  "stage": "cma1 gen 0: ring, o20-control"
+  "stage": "cma1 gen 0: ring, o20-control",
+  "park": {
+   "hub1": [
+    54.0,
+    6.16
+   ],
+   "hub2": [
+    172.0,
+    11.67
+   ],
+   "hub3": [
+    72.0,
+    5.47
+   ]
+  },
+  "park_ok": false
  },
  {
   "k": 163,
@@ -8309,7 +8817,22 @@
    "neck": 0.6377
   },
   "audit": [],
-  "stage": "cma1 gen 0: ring, o20-control"
+  "stage": "cma1 gen 0: ring, o20-control",
+  "park": {
+   "hub1": [
+    52.0,
+    4.66
+   ],
+   "hub2": [
+    112.9,
+    7.3
+   ],
+   "hub3": [
+    67.0,
+    4.36
+   ]
+  },
+  "park_ok": true
  },
  {
   "k": 164,
@@ -8358,7 +8881,22 @@
    "neck": 0.7037
   },
   "audit": [],
-  "stage": "cma1 gen 0: ring, o20-control"
+  "stage": "cma1 gen 0: ring, o20-control",
+  "park": {
+   "hub1": [
+    52.0,
+    4.06
+   ],
+   "hub2": [
+    130.6,
+    4.5
+   ],
+   "hub3": [
+    68.0,
+    3.27
+   ]
+  },
+  "park_ok": true
  },
  {
   "k": 165,
@@ -8407,7 +8945,22 @@
    "neck": 0.5285
   },
   "audit": [],
-  "stage": "cma1 gen 0: ring, o20-control"
+  "stage": "cma1 gen 0: ring, o20-control",
+  "park": {
+   "hub1": [
+    54.0,
+    5.59
+   ],
+   "hub2": [
+    126.4,
+    8.22
+   ],
+   "hub3": [
+    68.7,
+    3.0
+   ]
+  },
+  "park_ok": true
  },
  {
   "k": 166,
@@ -8456,7 +9009,22 @@
    "neck": 0.4302
   },
   "audit": [],
-  "stage": "cma1 gen 0: ring, o20-control"
+  "stage": "cma1 gen 0: ring, o20-control",
+  "park": {
+   "hub1": [
+    53.0,
+    4.87
+   ],
+   "hub2": [
+    139.4,
+    9.05
+   ],
+   "hub3": [
+    69.4,
+    4.37
+   ]
+  },
+  "park_ok": true
  },
  {
   "k": 167,
@@ -8505,7 +9073,22 @@
    "neck": 0.4827
   },
   "audit": [],
-  "stage": "cma1 gen 0: ring, o20-control"
+  "stage": "cma1 gen 0: ring, o20-control",
+  "park": {
+   "hub1": [
+    58.0,
+    6.88
+   ],
+   "hub2": [
+    140.5,
+    9.97
+   ],
+   "hub3": [
+    68.8,
+    4.81
+   ]
+  },
+  "park_ok": false
  },
  {
   "k": 168,
@@ -8554,7 +9137,22 @@
    "neck": 0.4339
   },
   "audit": [],
-  "stage": "cma1 gen 0: ring, o20-control"
+  "stage": "cma1 gen 0: ring, o20-control",
+  "park": {
+   "hub1": [
+    53.0,
+    5.77
+   ],
+   "hub2": [
+    122.7,
+    9.76
+   ],
+   "hub3": [
+    72.0,
+    5.95
+   ]
+  },
+  "park_ok": true
  },
  {
   "k": 169,
@@ -8603,7 +9201,22 @@
    "neck": 0.62
   },
   "audit": [],
-  "stage": "cma1 gen 0: ring, o20-control"
+  "stage": "cma1 gen 0: ring, o20-control",
+  "park": {
+   "hub1": [
+    52.0,
+    5.59
+   ],
+   "hub2": [
+    140.3,
+    2.96
+   ],
+   "hub3": [
+    68.7,
+    2.32
+   ]
+  },
+  "park_ok": false
  },
  {
   "k": 170,
@@ -8655,7 +9268,22 @@
    "link1: sparse sampling (9.54 mm median spacing > 4 mm)",
    "link2: sparse sampling (10.5 mm median spacing > 4 mm)"
   ],
-  "stage": "cma1 gen 0: ring, o20-control"
+  "stage": "cma1 gen 0: ring, o20-control",
+  "park": {
+   "hub1": [
+    54.0,
+    5.57
+   ],
+   "hub2": [
+    400.0,
+    31.75
+   ],
+   "hub3": [
+    75.0,
+    6.34
+   ]
+  },
+  "park_ok": false
  },
  {
   "k": 171,
@@ -8704,7 +9332,22 @@
    "neck": 0.4143
   },
   "audit": [],
-  "stage": "cma1 gen 0: ring, o20-control"
+  "stage": "cma1 gen 0: ring, o20-control",
+  "park": {
+   "hub1": [
+    56.0,
+    6.32
+   ],
+   "hub2": [
+    159.7,
+    11.35
+   ],
+   "hub3": [
+    69.7,
+    4.19
+   ]
+  },
+  "park_ok": false
  },
  {
   "k": 172,
@@ -8757,7 +9400,22 @@
    "link1: sparse sampling (5.77 mm median spacing > 4 mm)",
    "link2: sparse sampling (6.01 mm median spacing > 4 mm)"
   ],
-  "stage": "local checks: lateral-tilt ring seats; smallest ring (KAA10 pitch 15.1) and lug-root variant at the best O20-control axes"
+  "stage": "local checks: lateral-tilt ring seats; smallest ring (KAA10 pitch 15.1) and lug-root variant at the best O20-control axes",
+  "park": {
+   "ring1": [
+    66.9,
+    -0.91
+   ],
+   "hub2": [
+    212.5,
+    7.93
+   ],
+   "hub3": [
+    69.9,
+    3.43
+   ]
+  },
+  "park_ok": false
  },
  {
   "k": 173,
@@ -8807,7 +9465,22 @@
    "neck": 0.0093
   },
   "audit": [],
-  "stage": "local checks: lateral-tilt ring seats; smallest ring (KAA10 pitch 15.1) and lug-root variant at the best O20-control axes"
+  "stage": "local checks: lateral-tilt ring seats; smallest ring (KAA10 pitch 15.1) and lug-root variant at the best O20-control axes",
+  "park": {
+   "ring1": [
+    64.9,
+    14.16
+   ],
+   "hub2": [
+    139.0,
+    31.75
+   ],
+   "hub3": [
+    69.0,
+    5.44
+   ]
+  },
+  "park_ok": true
  },
  {
   "k": 174,
@@ -8857,7 +9530,9 @@
    "neck": 0.0
   },
   "audit": [],
-  "stage": "local checks: lateral-tilt ring seats; smallest ring (KAA10 pitch 15.1) and lug-root variant at the best O20-control axes"
+  "stage": "local checks: lateral-tilt ring seats; smallest ring (KAA10 pitch 15.1) and lug-root variant at the best O20-control axes",
+  "park": {},
+  "park_ok": false
  },
  {
   "k": 175,
@@ -8907,7 +9582,22 @@
    "neck": 0.6296
   },
   "audit": [],
-  "stage": "local checks: lateral-tilt ring seats; smallest ring (KAA10 pitch 15.1) and lug-root variant at the best O20-control axes"
+  "stage": "local checks: lateral-tilt ring seats; smallest ring (KAA10 pitch 15.1) and lug-root variant at the best O20-control axes",
+  "park": {
+   "ring1": [
+    64.6,
+    -3.1
+   ],
+   "hub2": [
+    112.9,
+    7.3
+   ],
+   "hub3": [
+    67.0,
+    4.36
+   ]
+  },
+  "park_ok": false
  },
  {
   "k": 176,
@@ -8957,7 +9647,22 @@
    "neck": 0.6296
   },
   "audit": [],
-  "stage": "local checks: lateral-tilt ring seats; smallest ring (KAA10 pitch 15.1) and lug-root variant at the best O20-control axes"
+  "stage": "local checks: lateral-tilt ring seats; smallest ring (KAA10 pitch 15.1) and lug-root variant at the best O20-control axes",
+  "park": {
+   "ring1": [
+    109.2,
+    5.56
+   ],
+   "hub2": [
+    112.9,
+    7.3
+   ],
+   "hub3": [
+    67.0,
+    4.36
+   ]
+  },
+  "park_ok": true
  },
  {
   "k": 177,
@@ -9007,7 +9712,22 @@
    "neck": 0.6296
   },
   "audit": [],
-  "stage": "local checks: lateral-tilt ring seats; smallest ring (KAA10 pitch 15.1) and lug-root variant at the best O20-control axes"
+  "stage": "local checks: lateral-tilt ring seats; smallest ring (KAA10 pitch 15.1) and lug-root variant at the best O20-control axes",
+  "park": {
+   "ring1": [
+    125.7,
+    7.19
+   ],
+   "hub2": [
+    112.9,
+    7.3
+   ],
+   "hub3": [
+    67.0,
+    4.36
+   ]
+  },
+  "park_ok": true
  },
  {
   "k": 178,
@@ -9057,7 +9777,22 @@
    "neck": 0.4463
   },
   "audit": [],
-  "stage": "local: spec seed (KA025 at c*, champion closure) and its O20-hub control (first run before the coarse grid, re-run for the record)"
+  "stage": "local: spec seed (KA025 at c*, champion closure) and its O20-hub control (first run before the coarse grid, re-run for the record)",
+  "park": {
+   "ring1": [
+    91.0,
+    8.16
+   ],
+   "hub2": [
+    160.0,
+    10.91
+   ],
+   "hub3": [
+    72.0,
+    5.55
+   ]
+  },
+  "park_ok": false
  },
  {
   "k": 179,
@@ -9107,6 +9842,1871 @@
    "neck": 0.4463
   },
   "audit": [],
-  "stage": "local: spec seed (KA025 at c*, champion closure) and its O20-hub control (first run before the coarse grid, re-run for the record)"
+  "stage": "local: spec seed (KA025 at c*, champion closure) and its O20-hub control (first run before the coarse grid, re-run for the record)",
+  "park": {
+   "hub1": [
+    54.0,
+    4.5
+   ],
+   "hub2": [
+    160.0,
+    10.91
+   ],
+   "hub3": [
+    72.0,
+    5.55
+   ]
+  },
+  "park_ok": false
+ },
+ {
+  "k": 180,
+  "t": "2026-10-15T22:32:41Z",
+  "params": {
+   "az1": 4.2403,
+   "el1": 75.1338,
+   "p1": 34.5935,
+   "a12": 77.7659,
+   "a23": 72.5644,
+   "wd": 95.3421,
+   "wa": 14.9537,
+   "sigma": -1,
+   "margin": 10.0,
+   "width": 14.0,
+   "t_link": 3.0,
+   "w2": 12.0,
+   "q": 0.9953,
+   "h1": 60.0,
+   "lug": 0.0
+  },
+  "inband14": 0.0085,
+  "inband10": 0.0024,
+  "reach": 0.8938,
+  "follow": 1.0,
+  "contact": 0.0333,
+  "gap": 93.1,
+  "closure": 0.9545,
+  "mass_g": 536.3,
+  "honest": false,
+  "kmode": "march",
+  "ring1_F": 116.0,
+  "levels": {
+   "ring1": 116.0,
+   "hub2": 145.0,
+   "hub3": 220.2,
+   "neck": 220.2,
+   "link1": 151.1,
+   "link2": 227.2
+  },
+  "inband_member": {
+   "ring1": 0.0141,
+   "hub2": 0.0053,
+   "hub3": 0.0,
+   "link1": 0.0111,
+   "link2": 0.0,
+   "neck": 0.0
+  },
+  "audit": [
+   "link2: sparse sampling (5.21 mm median spacing > 4 mm)",
+   "neck: sparse sampling (5.4 mm median spacing > 4 mm)"
+  ],
+  "stage": "cma2 gen 0: ring, o20-control",
+  "park": {
+   "ring1": [
+    116.0,
+    6.78
+   ],
+   "hub2": [
+    145.0,
+    10.07
+   ],
+   "hub3": [
+    220.2,
+    -26.93
+   ]
+  },
+  "park_ok": false
+ },
+ {
+  "k": 181,
+  "t": "2026-10-15T22:32:41Z",
+  "params": {
+   "az1": 15.7973,
+   "el1": 81.9644,
+   "p1": 40.6181,
+   "a12": 90.03,
+   "a23": 65.4051,
+   "wd": 100.8094,
+   "wa": 0.4185,
+   "sigma": -1,
+   "margin": 10.0,
+   "width": 14.0,
+   "t_link": 3.0,
+   "w2": 12.0,
+   "q": 0.9786,
+   "h1": 60.0,
+   "lug": 0.0
+  },
+  "inband14": 0.1477,
+  "inband10": 0.0712,
+  "reach": 0.7438,
+  "follow": 0.9667,
+  "contact": 0.0328,
+  "gap": 94.13,
+  "closure": 0.9136,
+  "mass_g": 322.0,
+  "honest": true,
+  "kmode": "march",
+  "ring1_F": 126.3,
+  "levels": {
+   "ring1": 126.3,
+   "hub2": 134.1,
+   "hub3": 65.0,
+   "neck": 98.0,
+   "link1": 145.0,
+   "link2": 138.1
+  },
+  "inband_member": {
+   "ring1": 0.0099,
+   "hub2": 0.014,
+   "hub3": 0.8216,
+   "link1": 0.0155,
+   "link2": 0.0842,
+   "neck": 0.7447
+  },
+  "audit": [],
+  "stage": "cma2 gen 0: ring, o20-control",
+  "park": {
+   "ring1": [
+    126.3,
+    6.08
+   ],
+   "hub2": [
+    134.1,
+    -0.37
+   ],
+   "hub3": [
+    65.0,
+    3.62
+   ]
+  },
+  "park_ok": false
+ },
+ {
+  "k": 182,
+  "t": "2026-10-15T22:32:41Z",
+  "params": {
+   "az1": -0.4487,
+   "el1": 71.1295,
+   "p1": 35.7472,
+   "a12": 92.5588,
+   "a23": 65.6501,
+   "wd": 86.7554,
+   "wa": 10.0642,
+   "sigma": -1,
+   "margin": 10.0,
+   "width": 14.0,
+   "t_link": 3.0,
+   "w2": 12.0,
+   "q": 0.9848,
+   "h1": 60.0,
+   "lug": 0.0
+  },
+  "inband14": 0.1028,
+  "inband10": 0.0448,
+  "reach": 0.8625,
+  "follow": 0.9167,
+  "contact": 0.0398,
+  "gap": 90.78,
+  "closure": 0.9182,
+  "mass_g": 311.3,
+  "honest": true,
+  "kmode": "march",
+  "ring1_F": 116.0,
+  "levels": {
+   "ring1": 116.0,
+   "hub2": 151.9,
+   "hub3": 70.0,
+   "neck": 97.0,
+   "link1": 164.0,
+   "link2": 155.9
+  },
+  "inband_member": {
+   "ring1": 0.0104,
+   "hub2": 0.0,
+   "hub3": 0.492,
+   "link1": 0.0,
+   "link2": 0.0333,
+   "neck": 0.67
+  },
+  "audit": [],
+  "stage": "cma2 gen 0: ring, o20-control",
+  "park": {
+   "ring1": [
+    116.0,
+    7.38
+   ],
+   "hub2": [
+    151.9,
+    7.15
+   ],
+   "hub3": [
+    70.0,
+    3.92
+   ]
+  },
+  "park_ok": false
+ },
+ {
+  "k": 183,
+  "t": "2026-10-15T22:32:41Z",
+  "params": {
+   "az1": 16.3918,
+   "el1": 71.3808,
+   "p1": 30.3009,
+   "a12": 87.9499,
+   "a23": 65.1706,
+   "wd": 84.2584,
+   "wa": 9.328,
+   "sigma": -1,
+   "margin": 10.0,
+   "width": 14.0,
+   "t_link": 3.0,
+   "w2": 12.0,
+   "q": 0.9905,
+   "h1": 60.0,
+   "lug": 0.0
+  },
+  "inband14": 0.0948,
+  "inband10": 0.0407,
+  "reach": 0.8875,
+  "follow": 0.9167,
+  "contact": 0.0199,
+  "gap": 87.09,
+  "closure": 0.9136,
+  "mass_g": 299.6,
+  "honest": true,
+  "kmode": "march",
+  "ring1_F": 100.0,
+  "levels": {
+   "ring1": 100.0,
+   "hub2": 164.7,
+   "hub3": 72.0,
+   "neck": 97.2,
+   "link1": 202.1,
+   "link2": 168.7
+  },
+  "inband_member": {
+   "ring1": 0.0077,
+   "hub2": 0.0,
+   "hub3": 0.398,
+   "link1": 0.0,
+   "link2": 0.0261,
+   "neck": 0.6301
+  },
+  "audit": [],
+  "stage": "cma2 gen 0: ring, o20-control",
+  "park": {
+   "ring1": [
+    100.0,
+    7.56
+   ],
+   "hub2": [
+    164.7,
+    8.14
+   ],
+   "hub3": [
+    72.0,
+    4.66
+   ]
+  },
+  "park_ok": false
+ },
+ {
+  "k": 184,
+  "t": "2026-10-15T22:32:41Z",
+  "params": {
+   "az1": 9.6516,
+   "el1": 88.1315,
+   "p1": 41.9659,
+   "a12": 81.3562,
+   "a23": 71.1118,
+   "wd": 91.4162,
+   "wa": -8.3557,
+   "sigma": -1,
+   "margin": 10.0,
+   "width": 14.0,
+   "t_link": 3.0,
+   "w2": 12.0,
+   "q": 0.991,
+   "h1": 60.0,
+   "lug": 0.0
+  },
+  "inband14": 0.1232,
+  "inband10": 0.0572,
+  "reach": 0.9,
+  "follow": 1.0,
+  "contact": 0.0097,
+  "gap": 78.65,
+  "closure": 0.9364,
+  "mass_g": 379.3,
+  "honest": false,
+  "kmode": "march",
+  "ring1_F": 143.0,
+  "levels": {
+   "ring1": 143.0,
+   "hub2": 174.5,
+   "hub3": 69.2,
+   "neck": 101.0,
+   "link1": 193.8,
+   "link2": 178.5
+  },
+  "inband_member": {
+   "ring1": 0.0047,
+   "hub2": 0.0,
+   "hub3": 0.7593,
+   "link1": 0.0044,
+   "link2": 0.0434,
+   "neck": 0.7356
+  },
+  "audit": [
+   "link1: sparse sampling (4.31 mm median spacing > 4 mm)",
+   "link2: sparse sampling (4.21 mm median spacing > 4 mm)"
+  ],
+  "stage": "cma2 gen 0: ring, o20-control",
+  "park": {
+   "ring1": [
+    143.0,
+    7.31
+   ],
+   "hub2": [
+    174.5,
+    0.64
+   ],
+   "hub3": [
+    69.2,
+    4.4
+   ]
+  },
+  "park_ok": false
+ },
+ {
+  "k": 185,
+  "t": "2026-10-15T22:32:41Z",
+  "params": {
+   "az1": 12.7725,
+   "el1": 76.6839,
+   "p1": 33.1706,
+   "a12": 84.8067,
+   "a23": 66.7099,
+   "wd": 96.7947,
+   "wa": -6.1457,
+   "sigma": -1,
+   "margin": 10.0,
+   "width": 14.0,
+   "t_link": 3.0,
+   "w2": 12.0,
+   "q": 0.9648,
+   "h1": 60.0,
+   "lug": 0.0
+  },
+  "inband14": 0.1741,
+  "inband10": 0.0943,
+  "reach": 0.8125,
+  "follow": 1.0,
+  "contact": 0.0594,
+  "gap": 87.28,
+  "closure": 0.9318,
+  "mass_g": 286.4,
+  "honest": true,
+  "kmode": "march",
+  "ring1_F": 107.0,
+  "levels": {
+   "ring1": 107.0,
+   "hub2": 136.8,
+   "hub3": 66.0,
+   "neck": 99.0,
+   "link1": 141.3,
+   "link2": 140.8
+  },
+  "inband_member": {
+   "ring1": 0.0253,
+   "hub2": 0.006,
+   "hub3": 0.8656,
+   "link1": 0.0168,
+   "link2": 0.089,
+   "neck": 0.7841
+  },
+  "audit": [],
+  "stage": "cma2 gen 0: ring, o20-control",
+  "park": {
+   "ring1": [
+    107.0,
+    3.52
+   ],
+   "hub2": [
+    136.8,
+    -7.72
+   ],
+   "hub3": [
+    66.0,
+    3.39
+   ]
+  },
+  "park_ok": false
+ },
+ {
+  "k": 186,
+  "t": "2026-10-15T22:32:41Z",
+  "params": {
+   "az1": 6.4173,
+   "el1": 69.7622,
+   "p1": 33.4546,
+   "a12": 71.1807,
+   "a23": 64.1093,
+   "wd": 90.6847,
+   "wa": 7.8191,
+   "sigma": -1,
+   "margin": 10.0,
+   "width": 14.0,
+   "t_link": 3.0,
+   "w2": 12.0,
+   "q": 0.9994,
+   "h1": 60.0,
+   "lug": 0.0
+  },
+  "inband14": 0.0999,
+  "inband10": 0.0402,
+  "reach": 0.8688,
+  "follow": 1.0,
+  "contact": 0.0,
+  "gap": 83.13,
+  "closure": 0.9091,
+  "mass_g": 281.2,
+  "honest": true,
+  "kmode": "march",
+  "ring1_F": 107.0,
+  "levels": {
+   "ring1": 107.0,
+   "hub2": 136.9,
+   "hub3": 70.0,
+   "neck": 98.9,
+   "link1": 141.0,
+   "link2": 140.9
+  },
+  "inband_member": {
+   "ring1": 0.02,
+   "hub2": 0.0,
+   "hub3": 0.3759,
+   "link1": 0.0,
+   "link2": 0.0193,
+   "neck": 0.5586
+  },
+  "audit": [],
+  "stage": "cma2 gen 0: ring, o20-control",
+  "park": {
+   "ring1": [
+    107.0,
+    6.51
+   ],
+   "hub2": [
+    136.9,
+    9.5
+   ],
+   "hub3": [
+    70.0,
+    5.63
+   ]
+  },
+  "park_ok": true
+ },
+ {
+  "k": 187,
+  "t": "2026-10-15T22:32:41Z",
+  "params": {
+   "az1": 15.7948,
+   "el1": 71.6014,
+   "p1": 41.5497,
+   "a12": 97.1019,
+   "a23": 59.0694,
+   "wd": 102.1538,
+   "wa": 9.683,
+   "sigma": -1,
+   "margin": 10.0,
+   "width": 14.0,
+   "t_link": 3.0,
+   "w2": 12.0,
+   "q": 0.9952,
+   "h1": 60.0,
+   "lug": 0.0
+  },
+  "inband14": 0.0053,
+  "inband10": 0.001,
+  "reach": 0.8063,
+  "follow": 0.8167,
+  "contact": 0.022,
+  "gap": 114.37,
+  "closure": 0.8273,
+  "mass_g": 1439.6,
+  "honest": false,
+  "kmode": "march",
+  "ring1_F": 110.0,
+  "levels": {
+   "ring1": 110.0,
+   "hub2": 127.2,
+   "hub3": 400.0,
+   "neck": 400.0,
+   "link1": 130.3,
+   "link2": 407.0
+  },
+  "inband_member": {
+   "ring1": 0.0104,
+   "hub2": 0.0,
+   "hub3": 0.0,
+   "link1": 0.0011,
+   "link2": 0.0,
+   "neck": 0.0
+  },
+  "audit": [
+   "link2: sparse sampling (10.94 mm median spacing > 4 mm)",
+   "neck: sparse sampling (10.34 mm median spacing > 4 mm)"
+  ],
+  "stage": "cma2 gen 0: ring, o20-control",
+  "park": {
+   "ring1": [
+    110.0,
+    6.36
+   ],
+   "hub2": [
+    127.2,
+    6.71
+   ],
+   "hub3": [
+    400.0,
+    31.75
+   ]
+  },
+  "park_ok": false
+ },
+ {
+  "k": 188,
+  "t": "2026-10-15T22:32:41Z",
+  "params": {
+   "az1": 12.1153,
+   "el1": 70.0404,
+   "p1": 40.5594,
+   "a12": 97.2029,
+   "a23": 68.8518,
+   "wd": 99.371,
+   "wa": 12.8689,
+   "sigma": -1,
+   "margin": 10.0,
+   "width": 14.0,
+   "t_link": 3.0,
+   "w2": 12.0,
+   "q": 1.0,
+   "h1": 60.0,
+   "lug": 0.0
+  },
+  "inband14": 0.006,
+  "inband10": 0.0014,
+  "reach": 0.9062,
+  "follow": 0.8833,
+  "contact": 0.0149,
+  "gap": 97.56,
+  "closure": 0.9136,
+  "mass_g": 1464.0,
+  "honest": false,
+  "kmode": "march",
+  "ring1_F": 109.0,
+  "levels": {
+   "ring1": 109.0,
+   "hub2": 161.0,
+   "hub3": 400.0,
+   "neck": 400.0,
+   "link1": 167.0,
+   "link2": 407.0
+  },
+  "inband_member": {
+   "ring1": 0.0125,
+   "hub2": 0.0,
+   "hub3": 0.0,
+   "link1": 0.0,
+   "link2": 0.0,
+   "neck": 0.0
+  },
+  "audit": [
+   "link2: sparse sampling (10.64 mm median spacing > 4 mm)",
+   "neck: sparse sampling (10.44 mm median spacing > 4 mm)"
+  ],
+  "stage": "cma2 gen 0: ring, o20-control",
+  "park": {
+   "ring1": [
+    109.0,
+    6.35
+   ],
+   "hub2": [
+    161.0,
+    9.99
+   ],
+   "hub3": [
+    400.0,
+    31.75
+   ]
+  },
+  "park_ok": false
+ },
+ {
+  "k": 189,
+  "t": "2026-10-15T22:32:41Z",
+  "params": {
+   "az1": 9.8354,
+   "el1": 71.5293,
+   "p1": 31.3317,
+   "a12": 83.2809,
+   "a23": 63.4229,
+   "wd": 96.3394,
+   "wa": 11.9801,
+   "sigma": -1,
+   "margin": 10.0,
+   "width": 14.0,
+   "t_link": 3.0,
+   "w2": 12.0,
+   "q": 0.9961,
+   "h1": 60.0,
+   "lug": 0.0
+  },
+  "inband14": 0.0046,
+  "inband10": 0.0009,
+  "reach": 0.8438,
+  "follow": 0.9167,
+  "contact": 0.05,
+  "gap": 103.49,
+  "closure": 0.9091,
+  "mass_g": 580.0,
+  "honest": false,
+  "kmode": "march",
+  "ring1_F": 105.0,
+  "levels": {
+   "ring1": 105.0,
+   "hub2": 121.0,
+   "hub3": 244.8,
+   "neck": 244.8,
+   "link1": 124.2,
+   "link2": 251.8
+  },
+  "inband_member": {
+   "ring1": 0.0103,
+   "hub2": 0.0,
+   "hub3": 0.0,
+   "link1": 0.0005,
+   "link2": 0.0,
+   "neck": 0.0
+  },
+  "audit": [
+   "link2: sparse sampling (6.2 mm median spacing > 4 mm)",
+   "neck: sparse sampling (6.1 mm median spacing > 4 mm)"
+  ],
+  "stage": "cma2 gen 0: ring, o20-control",
+  "park": {
+   "ring1": [
+    105.0,
+    6.51
+   ],
+   "hub2": [
+    121.0,
+    8.06
+   ],
+   "hub3": [
+    244.8,
+    -31.58
+   ]
+  },
+  "park_ok": false
+ },
+ {
+  "k": 190,
+  "t": "2026-10-15T22:32:41Z",
+  "params": {
+   "az1": 15.666,
+   "el1": 70.5693,
+   "p1": 36.135,
+   "a12": 86.1182,
+   "a23": 74.4833,
+   "wd": 96.3232,
+   "wa": 6.4292,
+   "sigma": -1,
+   "margin": 10.0,
+   "width": 14.0,
+   "t_link": 3.0,
+   "w2": 12.0,
+   "q": 0.9953,
+   "h1": 60.0,
+   "lug": 0.0
+  },
+  "inband14": 0.0682,
+  "inband10": 0.0277,
+  "reach": 0.9375,
+  "follow": 1.0,
+  "contact": 0.0094,
+  "gap": 84.12,
+  "closure": 0.9636,
+  "mass_g": 328.7,
+  "honest": true,
+  "kmode": "march",
+  "ring1_F": 105.0,
+  "levels": {
+   "ring1": 105.0,
+   "hub2": 161.0,
+   "hub3": 76.7,
+   "neck": 99.0,
+   "link1": 172.0,
+   "link2": 165.0
+  },
+  "inband_member": {
+   "ring1": 0.0147,
+   "hub2": 0.0,
+   "hub3": 0.037,
+   "link1": 0.0008,
+   "link2": 0.0,
+   "neck": 0.4776
+  },
+  "audit": [],
+  "stage": "cma2 gen 0: ring, o20-control",
+  "park": {
+   "ring1": [
+    105.0,
+    6.92
+   ],
+   "hub2": [
+    161.0,
+    7.9
+   ],
+   "hub3": [
+    76.7,
+    -3.56
+   ]
+  },
+  "park_ok": false
+ },
+ {
+  "k": 191,
+  "t": "2026-10-15T22:32:41Z",
+  "params": {
+   "az1": 0.2279,
+   "el1": 71.0245,
+   "p1": 33.9073,
+   "a12": 85.7128,
+   "a23": 73.7278,
+   "wd": 87.5438,
+   "wa": -0.4732,
+   "sigma": -1,
+   "margin": 10.0,
+   "width": 14.0,
+   "t_link": 3.0,
+   "w2": 12.0,
+   "q": 0.9845,
+   "h1": 60.0,
+   "lug": 0.0
+  },
+  "inband14": 0.1047,
+  "inband10": 0.0488,
+  "reach": 0.9187,
+  "follow": 1.0,
+  "contact": 0.0143,
+  "gap": 80.96,
+  "closure": 0.9545,
+  "mass_g": 916.3,
+  "honest": false,
+  "kmode": "march",
+  "ring1_F": 113.0,
+  "levels": {
+   "ring1": 113.0,
+   "hub2": 356.7,
+   "hub3": 71.0,
+   "neck": 99.0,
+   "link1": 400.0,
+   "link2": 383.2
+  },
+  "inband_member": {
+   "ring1": 0.0205,
+   "hub2": 0.0,
+   "hub3": 0.5088,
+   "link1": 0.0,
+   "link2": 0.0,
+   "neck": 0.6679
+  },
+  "audit": [
+   "link1: sparse sampling (8.95 mm median spacing > 4 mm)",
+   "link2: sparse sampling (9.2 mm median spacing > 4 mm)"
+  ],
+  "stage": "cma2 gen 0: ring, o20-control",
+  "park": {
+   "ring1": [
+    113.0,
+    7.03
+   ],
+   "hub2": [
+    356.7,
+    31.75
+   ],
+   "hub3": [
+    71.0,
+    5.1
+   ]
+  },
+  "park_ok": false
+ },
+ {
+  "k": 192,
+  "t": "2026-10-15T22:32:41Z",
+  "params": {
+   "az1": 25.987,
+   "el1": 68.32,
+   "p1": 41.6312,
+   "a12": 84.9889,
+   "a23": 64.405,
+   "wd": 90.073,
+   "wa": 9.672,
+   "sigma": -1,
+   "margin": 10.0,
+   "width": 14.0,
+   "t_link": 3.0,
+   "w2": 12.0,
+   "q": 0.9919,
+   "h1": 60.0,
+   "lug": 0.0
+  },
+  "inband14": 0.1003,
+  "inband10": 0.041,
+  "reach": 0.8875,
+  "follow": 0.9167,
+  "contact": 0.0101,
+  "gap": 85.56,
+  "closure": 0.9136,
+  "mass_g": 316.1,
+  "honest": true,
+  "kmode": "march",
+  "ring1_F": 99.0,
+  "levels": {
+   "ring1": 99.0,
+   "hub2": 139.4,
+   "hub3": 69.0,
+   "neck": 97.8,
+   "link1": 145.8,
+   "link2": 143.4
+  },
+  "inband_member": {
+   "ring1": 0.0092,
+   "hub2": 0.0,
+   "hub3": 0.501,
+   "link1": 0.0,
+   "link2": 0.0343,
+   "neck": 0.6429
+  },
+  "audit": [],
+  "stage": "cma2 gen 0: ring, o20-control",
+  "park": {
+   "ring1": [
+    99.0,
+    6.17
+   ],
+   "hub2": [
+    139.4,
+    8.57
+   ],
+   "hub3": [
+    69.0,
+    4.55
+   ]
+  },
+  "park_ok": true
+ },
+ {
+  "k": 193,
+  "t": "2026-10-15T22:32:41Z",
+  "params": {
+   "az1": 23.7515,
+   "el1": 69.4972,
+   "p1": 40.0676,
+   "a12": 88.2282,
+   "a23": 66.5167,
+   "wd": 79.2005,
+   "wa": 8.2024,
+   "sigma": -1,
+   "margin": 10.0,
+   "width": 14.0,
+   "t_link": 3.0,
+   "w2": 12.0,
+   "q": 0.9974,
+   "h1": 60.0,
+   "lug": 0.0
+  },
+  "inband14": 0.0606,
+  "inband10": 0.026,
+  "reach": 0.9125,
+  "follow": 0.9167,
+  "contact": 0.0147,
+  "gap": 88.74,
+  "closure": 0.9273,
+  "mass_g": 1079.8,
+  "honest": false,
+  "kmode": "march",
+  "ring1_F": 102.0,
+  "levels": {
+   "ring1": 102.0,
+   "hub2": 400.0,
+   "hub3": 77.0,
+   "neck": 99.0,
+   "link1": 400.0,
+   "link2": 404.0
+  },
+  "inband_member": {
+   "ring1": 0.0074,
+   "hub2": 0.0,
+   "hub3": 0.2153,
+   "link1": 0.0,
+   "link2": 0.0,
+   "neck": 0.5577
+  },
+  "audit": [
+   "link1: sparse sampling (10.14 mm median spacing > 4 mm)",
+   "link2: sparse sampling (10.55 mm median spacing > 4 mm)"
+  ],
+  "stage": "cma2 gen 0: ring, o20-control",
+  "park": {
+   "ring1": [
+    102.0,
+    7.17
+   ],
+   "hub2": [
+    400.0,
+    31.75
+   ],
+   "hub3": [
+    77.0,
+    6.53
+   ]
+  },
+  "park_ok": false
+ },
+ {
+  "k": 194,
+  "t": "2026-10-15T22:32:41Z",
+  "params": {
+   "az1": 22.7514,
+   "el1": 65.4202,
+   "p1": 39.7647,
+   "a12": 93.0008,
+   "a23": 71.4233,
+   "wd": 92.3365,
+   "wa": 20.6391,
+   "sigma": -1,
+   "margin": 10.0,
+   "width": 14.0,
+   "t_link": 3.0,
+   "w2": 12.0,
+   "q": 0.9813,
+   "h1": 60.0,
+   "lug": 0.0
+  },
+  "inband14": 0.1098,
+  "inband10": 0.0452,
+  "reach": 0.8562,
+  "follow": 0.9167,
+  "contact": 0.0542,
+  "gap": 92.15,
+  "closure": 0.9364,
+  "mass_g": 320.7,
+  "honest": true,
+  "kmode": "march",
+  "ring1_F": 96.0,
+  "levels": {
+   "ring1": 96.0,
+   "hub2": 146.3,
+   "hub3": 66.0,
+   "neck": 96.0,
+   "link1": 163.2,
+   "link2": 150.3
+  },
+  "inband_member": {
+   "ring1": 0.0092,
+   "hub2": 0.0072,
+   "hub3": 0.5446,
+   "link1": 0.0012,
+   "link2": 0.0401,
+   "neck": 0.6669
+  },
+  "audit": [],
+  "stage": "cma2 gen 0: ring, o20-control",
+  "park": {
+   "ring1": [
+    96.0,
+    7.6
+   ],
+   "hub2": [
+    146.3,
+    6.51
+   ],
+   "hub3": [
+    66.0,
+    2.64
+   ]
+  },
+  "park_ok": false
+ },
+ {
+  "k": 195,
+  "t": "2026-10-15T22:32:41Z",
+  "params": {
+   "az1": 12.8464,
+   "el1": 69.0802,
+   "p1": 39.4185,
+   "a12": 86.9783,
+   "a23": 60.9217,
+   "wd": 101.7708,
+   "wa": 14.4903,
+   "sigma": -1,
+   "margin": 10.0,
+   "width": 14.0,
+   "t_link": 3.0,
+   "w2": 12.0,
+   "q": 0.9987,
+   "h1": 60.0,
+   "lug": 0.0
+  },
+  "inband14": 0.0057,
+  "inband10": 0.0013,
+  "reach": 0.8812,
+  "follow": 0.8833,
+  "contact": 0.0202,
+  "gap": 100.0,
+  "closure": 0.9,
+  "mass_g": 1429.3,
+  "honest": false,
+  "kmode": "march",
+  "ring1_F": 107.0,
+  "levels": {
+   "ring1": 107.0,
+   "hub2": 111.0,
+   "hub3": 400.0,
+   "neck": 400.0,
+   "link1": 126.6,
+   "link2": 407.0
+  },
+  "inband_member": {
+   "ring1": 0.0117,
+   "hub2": 0.0,
+   "hub3": 0.0,
+   "link1": 0.0001,
+   "link2": 0.0,
+   "neck": 0.0
+  },
+  "audit": [
+   "link2: sparse sampling (10.94 mm median spacing > 4 mm)",
+   "neck: sparse sampling (10.34 mm median spacing > 4 mm)"
+  ],
+  "stage": "cma2 gen 0: ring, o20-control",
+  "park": {
+   "ring1": [
+    107.0,
+    6.75
+   ],
+   "hub2": [
+    111.0,
+    10.6
+   ],
+   "hub3": [
+    400.0,
+    31.75
+   ]
+  },
+  "park_ok": false
+ },
+ {
+  "k": 196,
+  "t": "2026-10-15T22:32:41Z",
+  "params": {
+   "az1": 19.8269,
+   "el1": 88.7721,
+   "p1": 0,
+   "a12": 88.5383,
+   "a23": 60.5692,
+   "wd": 100.2124,
+   "wa": 3.7692,
+   "sigma": -1,
+   "margin": 10.0,
+   "width": 14.0,
+   "t_link": 3.0,
+   "w2": 12.0,
+   "q": 0.979,
+   "h1": 60.0,
+   "lug": 0.0
+  },
+  "inband14": 0.4391,
+  "inband10": 0.2669,
+  "reach": 0.7812,
+  "follow": 0.9167,
+  "contact": 0.0426,
+  "gap": 65.56,
+  "closure": 0.8909,
+  "mass_g": 139.9,
+  "honest": true,
+  "kmode": "march",
+  "ring1_F": null,
+  "levels": {
+   "hub1": 51.0,
+   "hub2": 109.0,
+   "hub3": 65.0,
+   "link1": 111.0,
+   "neck": 98.0,
+   "link2": 113.0
+  },
+  "inband_member": {
+   "hub1": 1.0,
+   "hub2": 0.0,
+   "hub3": 0.7679,
+   "link1": 0.3798,
+   "link2": 0.0763,
+   "neck": 0.7461
+  },
+  "audit": [],
+  "stage": "cma2 gen 0: ring, o20-control",
+  "park": {
+   "hub1": [
+    51.0,
+    4.31
+   ],
+   "hub2": [
+    109.0,
+    1.0
+   ],
+   "hub3": [
+    65.0,
+    3.63
+   ]
+  },
+  "park_ok": true
+ },
+ {
+  "k": 197,
+  "t": "2026-10-15T22:32:41Z",
+  "params": {
+   "az1": 35.1165,
+   "el1": 85.8823,
+   "p1": 0,
+   "a12": 84.6264,
+   "a23": 64.0982,
+   "wd": 94.0363,
+   "wa": 1.8947,
+   "sigma": -1,
+   "margin": 10.0,
+   "width": 14.0,
+   "t_link": 3.0,
+   "w2": 12.0,
+   "q": 0.9912,
+   "h1": 60.0,
+   "lug": 0.0
+  },
+  "inband14": 0.3925,
+  "inband10": 0.2458,
+  "reach": 0.8438,
+  "follow": 1.0,
+  "contact": 0.0201,
+  "gap": 58.38,
+  "closure": 0.9136,
+  "mass_g": 151.8,
+  "honest": true,
+  "kmode": "march",
+  "ring1_F": null,
+  "levels": {
+   "hub1": 51.0,
+   "hub2": 128.0,
+   "hub3": 68.0,
+   "link1": 132.0,
+   "neck": 99.2,
+   "link2": 132.0
+  },
+  "inband_member": {
+   "hub1": 1.0,
+   "hub2": 0.0,
+   "hub3": 0.6146,
+   "link1": 0.3886,
+   "link2": 0.0429,
+   "neck": 0.6597
+  },
+  "audit": [],
+  "stage": "cma2 gen 0: ring, o20-control",
+  "park": {
+   "hub1": [
+    51.0,
+    4.85
+   ],
+   "hub2": [
+    128.0,
+    5.76
+   ],
+   "hub3": [
+    68.0,
+    4.36
+   ]
+  },
+  "park_ok": true
+ },
+ {
+  "k": 198,
+  "t": "2026-10-15T22:32:41Z",
+  "params": {
+   "az1": 18.8387,
+   "el1": 88.5258,
+   "p1": 0,
+   "a12": 76.2539,
+   "a23": 68.5172,
+   "wd": 95.1655,
+   "wa": 22.7448,
+   "sigma": -1,
+   "margin": 10.0,
+   "width": 14.0,
+   "t_link": 3.0,
+   "w2": 12.0,
+   "q": 0.9686,
+   "h1": 60.0,
+   "lug": 0.0
+  },
+  "inband14": 0.4247,
+  "inband10": 0.2473,
+  "reach": 0.7188,
+  "follow": 0.9167,
+  "contact": 0.0608,
+  "gap": 75.06,
+  "closure": 0.95,
+  "mass_g": 139.8,
+  "honest": true,
+  "kmode": "march",
+  "ring1_F": null,
+  "levels": {
+   "hub1": 52.0,
+   "hub2": 117.4,
+   "hub3": 64.0,
+   "link1": 119.9,
+   "neck": 96.0,
+   "link2": 121.4
+  },
+  "inband_member": {
+   "hub1": 1.0,
+   "hub2": 0.0,
+   "hub3": 0.6272,
+   "link1": 0.4389,
+   "link2": 0.0536,
+   "neck": 0.7185
+  },
+  "audit": [],
+  "stage": "cma2 gen 0: ring, o20-control",
+  "park": {
+   "hub1": [
+    52.0,
+    4.45
+   ],
+   "hub2": [
+    117.4,
+    -11.02
+   ],
+   "hub3": [
+    64.0,
+    1.67
+   ]
+  },
+  "park_ok": false
+ },
+ {
+  "k": 199,
+  "t": "2026-10-15T22:32:41Z",
+  "params": {
+   "az1": 9.2753,
+   "el1": 85.5241,
+   "p1": 0,
+   "a12": 92.8744,
+   "a23": 62.4091,
+   "wd": 92.0687,
+   "wa": 18.2149,
+   "sigma": -1,
+   "margin": 10.0,
+   "width": 14.0,
+   "t_link": 3.0,
+   "w2": 12.0,
+   "q": 0.9188,
+   "h1": 60.0,
+   "lug": 0.0
+  },
+  "inband14": 0.5508,
+  "inband10": 0.3847,
+  "reach": 0.6125,
+  "follow": 0.8,
+  "contact": 0.1098,
+  "gap": 89.65,
+  "closure": 0.9045,
+  "mass_g": 127.6,
+  "honest": true,
+  "kmode": "march",
+  "ring1_F": null,
+  "levels": {
+   "hub1": 52.0,
+   "hub2": 100.1,
+   "hub3": 64.0,
+   "link1": 100.1,
+   "neck": 94.9,
+   "link2": 104.1
+  },
+  "inband_member": {
+   "hub1": 1.0,
+   "hub2": 0.0,
+   "hub3": 0.7292,
+   "link1": 0.7007,
+   "link2": 0.0799,
+   "neck": 0.7833
+  },
+  "audit": [],
+  "stage": "cma2 gen 0: ring, o20-control",
+  "park": {
+   "hub1": [
+    52.0,
+    5.14
+   ],
+   "hub2": [
+    100.1,
+    12.44
+   ],
+   "hub3": [
+    64.0,
+    0.86
+   ]
+  },
+  "park_ok": true
+ },
+ {
+  "k": 200,
+  "t": "2026-10-15T22:32:41Z",
+  "params": {
+   "az1": 27.1106,
+   "el1": 88.6518,
+   "p1": 0,
+   "a12": 83.6688,
+   "a23": 68.8662,
+   "wd": 100.8823,
+   "wa": 12.2987,
+   "sigma": -1,
+   "margin": 10.0,
+   "width": 14.0,
+   "t_link": 3.0,
+   "w2": 12.0,
+   "q": 0.9691,
+   "h1": 60.0,
+   "lug": 0.0
+  },
+  "inband14": 0.4095,
+  "inband10": 0.2571,
+  "reach": 0.7188,
+  "follow": 0.9167,
+  "contact": 0.0556,
+  "gap": 76.06,
+  "closure": 0.9455,
+  "mass_g": 146.6,
+  "honest": true,
+  "kmode": "march",
+  "ring1_F": null,
+  "levels": {
+   "hub1": 51.0,
+   "hub2": 118.0,
+   "hub3": 64.6,
+   "link1": 123.0,
+   "neck": 97.0,
+   "link2": 122.0
+  },
+  "inband_member": {
+   "hub1": 1.0,
+   "hub2": 0.0072,
+   "hub3": 0.6013,
+   "link1": 0.3993,
+   "link2": 0.0501,
+   "neck": 0.7096
+  },
+  "audit": [],
+  "stage": "cma2 gen 0: ring, o20-control",
+  "park": {
+   "hub1": [
+    51.0,
+    4.45
+   ],
+   "hub2": [
+    118.0,
+    -12.7
+   ],
+   "hub3": [
+    64.6,
+    3.36
+   ]
+  },
+  "park_ok": false
+ },
+ {
+  "k": 201,
+  "t": "2026-10-15T22:32:41Z",
+  "params": {
+   "az1": 26.4588,
+   "el1": 87.7491,
+   "p1": 0,
+   "a12": 83.0591,
+   "a23": 58.2763,
+   "wd": 88.8967,
+   "wa": 7.8176,
+   "sigma": -1,
+   "margin": 10.0,
+   "width": 14.0,
+   "t_link": 3.0,
+   "w2": 12.0,
+   "q": 0.976,
+   "h1": 60.0,
+   "lug": 0.0
+  },
+  "inband14": 0.426,
+  "inband10": 0.2736,
+  "reach": 0.775,
+  "follow": 1.0,
+  "contact": 0.0707,
+  "gap": 66.97,
+  "closure": 0.9045,
+  "mass_g": 134.6,
+  "honest": true,
+  "kmode": "march",
+  "ring1_F": null,
+  "levels": {
+   "hub1": 51.0,
+   "hub2": 115.2,
+   "hub3": 69.2,
+   "link1": 115.2,
+   "neck": 97.2,
+   "link2": 119.2
+  },
+  "inband_member": {
+   "hub1": 0.9994,
+   "hub2": 0.0,
+   "hub3": 0.4942,
+   "link1": 0.4951,
+   "link2": 0.0384,
+   "neck": 0.667
+  },
+  "audit": [],
+  "stage": "cma2 gen 0: ring, o20-control",
+  "park": {
+   "hub1": [
+    51.0,
+    4.98
+   ],
+   "hub2": [
+    115.2,
+    0.91
+   ],
+   "hub3": [
+    69.2,
+    4.31
+   ]
+  },
+  "park_ok": true
+ },
+ {
+  "k": 202,
+  "t": "2026-10-15T22:32:41Z",
+  "params": {
+   "az1": 16.5908,
+   "el1": 81.5001,
+   "p1": 0,
+   "a12": 78.5303,
+   "a23": 59.7267,
+   "wd": 98.1077,
+   "wa": 24.4706,
+   "sigma": -1,
+   "margin": 10.0,
+   "width": 14.0,
+   "t_link": 3.0,
+   "w2": 12.0,
+   "q": 0.9096,
+   "h1": 60.0,
+   "lug": 0.0
+  },
+  "inband14": 0.6051,
+  "inband10": 0.428,
+  "reach": 0.5563,
+  "follow": 0.7667,
+  "contact": 0.1401,
+  "gap": 96.2,
+  "closure": 0.9,
+  "mass_g": 118.8,
+  "honest": true,
+  "kmode": "march",
+  "ring1_F": null,
+  "levels": {
+   "hub1": 52.0,
+   "hub2": 77.2,
+   "hub3": 61.0,
+   "link1": 80.2,
+   "neck": 94.0,
+   "link2": 101.0
+  },
+  "inband_member": {
+   "hub1": 0.9995,
+   "hub2": 0.0714,
+   "hub3": 0.8076,
+   "link1": 0.7706,
+   "link2": 0.0978,
+   "neck": 0.8356
+  },
+  "audit": [],
+  "stage": "cma2 gen 0: ring, o20-control",
+  "park": {
+   "hub1": [
+    52.0,
+    4.89
+   ],
+   "hub2": [
+    77.2,
+    -5.01
+   ],
+   "hub3": [
+    61.0,
+    0.51
+   ]
+  },
+  "park_ok": false
+ },
+ {
+  "k": 203,
+  "t": "2026-10-15T22:32:41Z",
+  "params": {
+   "az1": 23.4297,
+   "el1": 85.7709,
+   "p1": 0,
+   "a12": 79.3137,
+   "a23": 59.1649,
+   "wd": 99.334,
+   "wa": 18.9922,
+   "sigma": -1,
+   "margin": 10.0,
+   "width": 14.0,
+   "t_link": 3.0,
+   "w2": 12.0,
+   "q": 0.9917,
+   "h1": 60.0,
+   "lug": 0.0
+  },
+  "inband14": 0.2261,
+  "inband10": 0.1529,
+  "reach": 0.8625,
+  "follow": 0.9167,
+  "contact": 0.035,
+  "gap": 77.97,
+  "closure": 0.9091,
+  "mass_g": 1249.9,
+  "honest": false,
+  "kmode": "march",
+  "ring1_F": null,
+  "levels": {
+   "hub1": 52.0,
+   "hub2": 97.3,
+   "hub3": 400.0,
+   "link1": 97.7,
+   "neck": 400.0,
+   "link2": 407.0
+  },
+  "inband_member": {
+   "hub1": 1.0,
+   "hub2": 0.0,
+   "hub3": 0.0,
+   "link1": 0.4658,
+   "link2": 0.0,
+   "neck": 0.0
+  },
+  "audit": [
+   "link2: sparse sampling (11.03 mm median spacing > 4 mm)",
+   "neck: sparse sampling (10.39 mm median spacing > 4 mm)"
+  ],
+  "stage": "cma2 gen 0: ring, o20-control",
+  "park": {
+   "hub1": [
+    52.0,
+    5.49
+   ],
+   "hub2": [
+    97.3,
+    6.01
+   ],
+   "hub3": [
+    400.0,
+    31.75
+   ]
+  },
+  "park_ok": false
+ },
+ {
+  "k": 204,
+  "t": "2026-10-15T22:32:41Z",
+  "params": {
+   "az1": 17.0228,
+   "el1": 88.9979,
+   "p1": 0,
+   "a12": 71.661,
+   "a23": 65.4562,
+   "wd": 89.6145,
+   "wa": 20.6183,
+   "sigma": -1,
+   "margin": 10.0,
+   "width": 14.0,
+   "t_link": 3.0,
+   "w2": 12.0,
+   "q": 0.9999,
+   "h1": 60.0,
+   "lug": 0.0
+  },
+  "inband14": 0.2753,
+  "inband10": 0.1646,
+  "reach": 0.8812,
+  "follow": 1.0,
+  "contact": 0.0,
+  "gap": 64.35,
+  "closure": 0.9227,
+  "mass_g": 157.0,
+  "honest": true,
+  "kmode": "march",
+  "ring1_F": null,
+  "levels": {
+   "hub1": 52.0,
+   "hub2": 136.9,
+   "hub3": 70.0,
+   "link1": 142.9,
+   "neck": 97.0,
+   "link2": 140.9
+  },
+  "inband_member": {
+   "hub1": 1.0,
+   "hub2": 0.0078,
+   "hub3": 0.2037,
+   "link1": 0.2892,
+   "link2": 0.0132,
+   "neck": 0.4417
+  },
+  "audit": [],
+  "stage": "cma2 gen 0: ring, o20-control",
+  "park": {
+   "hub1": [
+    52.0,
+    3.9
+   ],
+   "hub2": [
+    136.9,
+    10.72
+   ],
+   "hub3": [
+    70.0,
+    5.19
+   ]
+  },
+  "park_ok": true
+ },
+ {
+  "k": 205,
+  "t": "2026-10-15T22:32:41Z",
+  "params": {
+   "az1": 24.0073,
+   "el1": 88.9009,
+   "p1": 0,
+   "a12": 86.654,
+   "a23": 58.2454,
+   "wd": 91.781,
+   "wa": -0.078,
+   "sigma": -1,
+   "margin": 10.0,
+   "width": 14.0,
+   "t_link": 3.0,
+   "w2": 12.0,
+   "q": 0.9818,
+   "h1": 60.0,
+   "lug": 0.0
+  },
+  "inband14": 0.4013,
+  "inband10": 0.2513,
+  "reach": 0.7875,
+  "follow": 1.0,
+  "contact": 0.0363,
+  "gap": 64.75,
+  "closure": 0.8773,
+  "mass_g": 141.2,
+  "honest": true,
+  "kmode": "march",
+  "ring1_F": null,
+  "levels": {
+   "hub1": 51.0,
+   "hub2": 117.5,
+   "hub3": 69.0,
+   "link1": 119.0,
+   "neck": 99.0,
+   "link2": 121.5
+  },
+  "inband_member": {
+   "hub1": 0.9996,
+   "hub2": 0.0,
+   "hub3": 0.5928,
+   "link1": 0.3844,
+   "link2": 0.0463,
+   "neck": 0.6822
+  },
+  "audit": [],
+  "stage": "cma2 gen 0: ring, o20-control",
+  "park": {
+   "hub1": [
+    51.0,
+    4.18
+   ],
+   "hub2": [
+    117.5,
+    2.48
+   ],
+   "hub3": [
+    69.0,
+    4.63
+   ]
+  },
+  "park_ok": true
+ },
+ {
+  "k": 206,
+  "t": "2026-10-15T22:32:41Z",
+  "params": {
+   "az1": 3.8418,
+   "el1": 85.1292,
+   "p1": 0,
+   "a12": 86.9142,
+   "a23": 57.0444,
+   "wd": 97.6292,
+   "wa": 18.4855,
+   "sigma": -1,
+   "margin": 10.0,
+   "width": 14.0,
+   "t_link": 3.0,
+   "w2": 12.0,
+   "q": 0.9915,
+   "h1": 60.0,
+   "lug": 0.0
+  },
+  "inband14": 0.2518,
+  "inband10": 0.1564,
+  "reach": 0.8,
+  "follow": 0.8833,
+  "contact": 0.0163,
+  "gap": 83.12,
+  "closure": 0.8727,
+  "mass_g": 290.8,
+  "honest": false,
+  "kmode": "march",
+  "ring1_F": null,
+  "levels": {
+   "hub1": 52.4,
+   "hub2": 101.4,
+   "hub3": 190.5,
+   "link1": 102.1,
+   "neck": 190.5,
+   "link2": 197.5
+  },
+  "inband_member": {
+   "hub1": 1.0,
+   "hub2": 0.0,
+   "hub3": 0.0,
+   "link1": 0.4862,
+   "link2": 0.0,
+   "neck": 0.0267
+  },
+  "audit": [
+   "link2: sparse sampling (5.21 mm median spacing > 4 mm)",
+   "neck: sparse sampling (4.45 mm median spacing > 4 mm)"
+  ],
+  "stage": "cma2 gen 0: ring, o20-control",
+  "park": {
+   "hub1": [
+    52.4,
+    5.31
+   ],
+   "hub2": [
+    101.4,
+    12.68
+   ],
+   "hub3": [
+    190.5,
+    -31.75
+   ]
+  },
+  "park_ok": false
+ },
+ {
+  "k": 207,
+  "t": "2026-10-15T22:32:41Z",
+  "params": {
+   "az1": 14.887,
+   "el1": 88.7336,
+   "p1": 0,
+   "a12": 83.8147,
+   "a23": 59.735,
+   "wd": 91.9701,
+   "wa": 29.645,
+   "sigma": -1,
+   "margin": 10.0,
+   "width": 14.0,
+   "t_link": 3.0,
+   "w2": 12.0,
+   "q": 0.9945,
+   "h1": 60.0,
+   "lug": 0.0
+  },
+  "inband14": 0.3525,
+  "inband10": 0.1919,
+  "reach": 0.8688,
+  "follow": 0.9167,
+  "contact": 0.0102,
+  "gap": 62.22,
+  "closure": 0.9091,
+  "mass_g": 138.5,
+  "honest": true,
+  "kmode": "march",
+  "ring1_F": null,
+  "levels": {
+   "hub1": 52.0,
+   "hub2": 114.8,
+   "hub3": 67.9,
+   "link1": 114.8,
+   "neck": 97.0,
+   "link2": 118.8
+  },
+  "inband_member": {
+   "hub1": 1.0,
+   "hub2": 0.0,
+   "hub3": 0.1899,
+   "link1": 0.4667,
+   "link2": 0.0145,
+   "neck": 0.4709
+  },
+  "audit": [],
+  "stage": "cma2 gen 0: ring, o20-control",
+  "park": {
+   "hub1": [
+    52.0,
+    4.19
+   ],
+   "hub2": [
+    114.8,
+    10.92
+   ],
+   "hub3": [
+    67.9,
+    4.49
+   ]
+  },
+  "park_ok": true
  }
 ]

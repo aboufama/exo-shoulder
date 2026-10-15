@@ -456,8 +456,9 @@
     const fit = () => {
       const w = stageEl.clientWidth, h = stageEl.clientHeight; if (!w || !h) return;
       renderer.setSize(w, h, false); camera.aspect = w / h; camera.updateProjectionMatrix();
-      if (!framed) {                                           // shoulder close-up from front-right-above; farther on narrow screens
-        framed = true; const d = 960 / Math.min(1, camera.aspect * 1.15), dir = V.unit([0.5, 0.4, 0.77]), t = controls.target;
+      if (!framed) {                                           // shoulder close-up from lateral-above, a little posterior (the
+        // mechanisms ride the top / back of the shoulder; a front view hides them behind the raised arm); farther on narrow screens
+        framed = true; const d = 960 / Math.min(1, camera.aspect * 1.15), dir = V.unit([-0.1, 0.6, 0.8]), t = controls.target;
         camera.position.set(t.x + dir[0] * d, t.y + dir[1] * d, t.z + dir[2] * d); controls.update();
       }
       renderer.render(scene, camera);
