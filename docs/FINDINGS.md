@@ -56,7 +56,8 @@ rig's girdle law (GH lift 0.2 mm/deg above 30 deg, scapula rotating about GH), a
   arm-forward pose near walking (a1 ~ a2); the least-travel ring has a 21 deg closure hole at the T-pose; the elevation
   assist never lands on the rigid saddle - the knit band carries all of it (25 N.m on the saddle = 18 kPa mean).
 - **Kinematic optima are not designs**: P0's 3R built as L1 keep-out CAD (`designs/l1_3r_offset`) scores R1 0.1 %,
-  R2 25 mm, R6 51 mm - its thorax-fixed J1 hub sits where the raised arm goes.
+  R2 25 mm, R6 51 mm - its thorax-fixed J1 hub sits where the raised arm goes. (Fixed contact judges, 2026-10-15: R2
+  24.9 mm holds, R6 2.4 mm - the 51 mm was a sign error.)
 - **Rig vs the user's parts**: the user's forearm cuff (24 mm) and BOTTOM sit inside the rig's arm in every frame - the
   rig's forearm / elbow is likely too big (P2 scans).
 
@@ -193,5 +194,20 @@ rig's girdle law (GH lift 0.2 mm/deg above 30 deg, scapula rotating about GH), a
     both designs (a stack overlap just over tol). 3R: the cuff's flank liner in the BOTTOM + rail 0.55 mm ('Wash
     opposite shoulder' 192, a held frame; 32 of 117 frames) - likely the end-of-travel graze of "Still wrong on the 3R
     build" above; invisible while the judge skipped the open BOTTOM (that version: 3R R6 0.17 mm).
-  - Not re-judged, measured with the old rule: README's first full run (R2 24.4, R6 18.5 mm), `designs/l1_3r_offset`
-    (R2 25, R6 51 mm), the `band_r14_*` scorecards.
+  - The other designs judged with the old rule, re-judged the same night (fast: R2 step 6, R6 step 12; the outside
+    check agrees with every top entry to 0.00 mm):
+
+    | design | R2 before -> after | R6 before -> after |
+    |---|---|---|
+    | `band_r14_4r_s1354_0` | 24.15 -> 24.87 mm (the user's forearm cuff) | 14.80 -> **0.00 mm: passes** (3 open parts, now tested) |
+    | `l1_3r_offset` | 24.98 -> 24.94 mm (real: keep-out slabs in the arm) | 50.84 -> 2.40 mm |
+    | `l1_r14_3r_s1351_1` | 24.89 -> **0.00 mm: passes** | 11.09 -> 2.39 mm |
+
+    `l1_r14_3r` R2: its three old entries (24.89 / 24.71 / 17.28 mm) have 0 vertices inside by brute force, and the
+    reverse test (skin vertices inside its coarse keep-out meshes, every 6th frame) is 0 too, so nothing hides between
+    the part's vertices. `band_r14_3r_s1351_1` was re-judged upstream with the winding judge and has no open part: the
+    open-mesh change leaves it as is. Only README's historical first run (R2 24.4, R6 18.5 mm) keeps old-rule numbers.
+  - `signed_distance` (red team, P0) now takes its sign from the winding number too: on the posed body the
+    pseudo-normal sign was 1.9 % wrong near the surface (self-overlap), now 0 % (`judge/test_sdist.py`); ~2-4 s more
+    per whole-body call. `unsigned_distance` for |d| only (rt_ring's open trunk / forearm patches). Results that
+    `rt_pressure`, `rt_bottom`, `rt_ring` and `p0_base_mount` computed with the old rule are NOT re-run yet.

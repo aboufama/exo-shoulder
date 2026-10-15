@@ -2,8 +2,9 @@
  "step": 6,
  "tol_mm": 0.5,
  "frames_checked": 228,
- "seconds": 154,
+ "seconds": 191,
  "jobs": 4,
+ "inside": "integer winding number (grid + segment crossings), depth = exact distance to the nearest surface (judge/sdist.py)",
  "parts": {
   "H|BOTTOM JN hub block (proxy)": {
    "max_depth": 0.0,
@@ -16,16 +17,16 @@
    "worst": null
   },
   "F|FOREARM CUFF": {
-   "max_depth": 24.15,
+   "max_depth": 24.87,
    "frames": 228,
    "worst": [
     "Wash opposite shoulder",
-    42,
+    150,
     [
-     115,
-     29,
-     -76,
-     114,
+     138,
+     59,
+     -50,
+     112,
      0
     ]
    ]
@@ -111,16 +112,16 @@
    "worst": null
   },
   "H|Revolve1[1]": {
-   "max_depth": 1.1,
-   "frames": 173,
+   "max_depth": 0.98,
+   "frames": 142,
    "worst": [
     "Wave",
-    42,
+    126,
     [
      15,
-     91,
-     -59,
-     94,
+     92,
+     -60,
+     95,
      0
     ]
    ]
@@ -161,19 +162,9 @@
    "worst": null
   },
   "H|Revolve3": {
-   "max_depth": 0.43,
+   "max_depth": 0.0,
    "frames": 0,
-   "worst": [
-    "Raise overhead",
-    0,
-    [
-     30,
-     3,
-     -30,
-     12,
-     0
-    ]
-   ]
+   "worst": null
   },
   "H|CirPattern1[2]": {
    "max_depth": 0.0,
@@ -186,16 +177,16 @@
    "worst": null
   },
   "H|Revolve1[3]": {
-   "max_depth": 0.61,
-   "frames": 57,
+   "max_depth": 0.51,
+   "frames": 10,
    "worst": [
-    "Reach a high shelf",
-    72,
+    "Wave",
+    42,
     [
-     82,
-     132,
-     -82,
-     6,
+     15,
+     91,
+     -59,
+     94,
      0
     ]
    ]
@@ -247,5 +238,5 @@
   }
  },
  "worst_part": "F|FOREARM CUFF",
- "max_depth": 24.15
+ "max_depth": 24.87
 }

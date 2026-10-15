@@ -6,8 +6,8 @@ where a 10-nearest-centroid search missed the closest triangle: the R6 false pen
 body mesh of the rig (the R2 judge's target; it self-intersects in deep poses, where inside is defined by the winding
 number only). Also the same part as a RAW glb tessellation (unwelded: Mesh welds it) and two OPEN meshes - a sphere with
 4 holes and the 3R design's BOTTOM + rail (holes / non-manifold edges after welding) - where one ray direction can pass
-a hole: x-rays alone vs the x / y / z majority + generalized winding number. Also reports the old sign rule (the nearest
-triangle's own normal over 10 centroids) for comparison.
+a hole: x-rays alone vs the x / y / z majority + generalized winding number. Also reports the pseudo-normal sign and
+the old sign rule (the nearest triangle's own normal over 10 centroids) for comparison.
     python3 judge/test_sdist.py"""
 import os, sys, time
 import numpy as np, trimesh
@@ -56,9 +56,11 @@ def old_sign(P, V, F, k=10):
 
 def check(name, V, F, P, dist=True):
     t0 = time.time(); truth = winding_inside(P, V, F); par = ray_parity_inside(P, V, F); sd = sdist.signed_distance(P, V, F); t1 = time.time() - t0
-    new = sd < 0; old = old_sign(P, V, F); derr = float(np.abs(np.abs(sd) - brute_dist(P, V, F)).max()) if dist else float("nan")
+    new = sd < 0; old = old_sign(P, V, F); pn = sdist.mesh(V, F).signed_pseudonormal(P) < 0
+    derr = float(np.abs(np.abs(sd) - brute_dist(P, V, F)).max()) if dist else float("nan")
     print(f"{name:40s} {len(P):5d} pts ({truth.mean() * 100:4.1f}% in; parity disagrees {100 * (par != truth).mean():4.1f}%): "
-          f"new sign wrong {100 * (new != truth).mean():5.2f}%  old {100 * (old != truth).mean():5.2f}%  |d| err {derr:.1e} mm  ({t1:.0f}s)", flush=True)
+          f"sign (winding) wrong {100 * (new != truth).mean():5.2f}%  pseudo-normal {100 * (pn != truth).mean():5.2f}%  "
+          f"old {100 * (old != truth).mean():5.2f}%  |d| err {derr:.1e} mm  ({t1:.0f}s)", flush=True)
     return float((new != truth).mean()), float((old != truth).mean()), derr
 
 
@@ -110,5 +112,5 @@ if __name__ == "__main__":
     print(f"  body winding grid + segment crossings (the R2 / R10 inside test): wrong {100 * berr:.2f}% vs the generalized winding number "
           f"(grid max winding {wmax}: self-overlap), {tb:.0f}s", flush=True)
     res["body winding"] = (berr, 0.0, 0.0)
-    bad = [k for k, (n, o, d) in res.items() if (n > 0.002 and k != "body") or d > 1e-6]
-    print("PASS (body: the pseudo-normal sign is only reported, the mesh self-intersects; R2 uses the winding number)" if not bad else f"FAIL: {bad}")
+    bad = [k for k, (n, o, d) in res.items() if n > 0.002 or d > 1e-6]
+    print("PASS (the pseudo-normal sign is only reported: it fails where the posed body self-intersects)" if not bad else f"FAIL: {bad}")

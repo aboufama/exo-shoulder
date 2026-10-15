@@ -18,7 +18,7 @@ import numpy as np
 from scipy.spatial import cKDTree
 import rt_common as RC
 from rt_common import GD, BP, D2R
-from sdist import signed_distance
+from sdist import signed_distance, unsigned_distance
 
 STEP = int(next((a for a in sys.argv[1:] if a.isdigit()), 4)); t0 = time.time()
 LINER, TRACK_T, TRACK_W, WC, CLEAR = 3.0, 6.0, 12.0, 12.0, 15.0
@@ -65,12 +65,12 @@ for n_, k in ([] if "--reuse" in sys.argv and os.path.exists(CACHE) else enumera
         P = pts(TT, SG, env + dr).reshape(-1, 3) @ Rh.T
         # magnitude: unsigned distance to the trunk (forearm) faces; sign: inside the CLOSED body and the nearest skin vertex is trunk (forearm)
         sfull = signed_distance(P, V, F, tree=call); _, vn = vt.query(P); dn = dom[vn]; ins = sfull < 0
-        dT = np.abs(signed_distance(P, V, TRF, tree=ct)); dF = np.abs(signed_distance(P, V, FOF, tree=cf))
+        dT = unsigned_distance(P, V, TRF); dF = unsigned_distance(P, V, FOF)               # open patches: |d| only
         DT[n_, L_] = np.where(ins & (dn <= 1), sfull, np.where(ins & (dn == 2), np.minimum(dT, 0.0) + dT, dT)).reshape(TT.shape)
         DF[n_, L_] = np.where(ins & (dn >= 3), sfull, dF).reshape(TT.shape)
     # the bare upper arm (s >= 110 mm) touching the trunk in this frame: unsigned distance of its skin vertices to trunk faces
     X = V[UA] @ Rh; th = theta_of(X); s = -X[:, 1]; it = np.round((th + 180) / DTH).astype(int) % len(TH); is_ = np.round((s - SS[0]) / 10).astype(int)
-    m = (is_ >= 0) & (is_ < len(SS)); d = np.abs(signed_distance(V[UA][m], V, TRF, tree=ct)); b = np.full(TT.shape, 99.0, np.float32); np.minimum.at(b, (it[m], is_[m]), d)
+    m = (is_ >= 0) & (is_ < len(SS)); d = unsigned_distance(V[UA][m], V, TRF); b = np.full(TT.shape, 99.0, np.float32); np.minimum.at(b, (it[m], is_[m]), d)
     BASE[n_] = b
     if n_ % 40 == 0: print(f"{n_}/{len(idx)} {time.time() - t0:.0f}s", flush=True)
 if "--reuse" not in sys.argv: np.savez_compressed(CACHE, DT=DT, DF=DF, BASE=BASE, env=env, idx=np.array(idx))

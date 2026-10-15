@@ -3,7 +3,7 @@
  "tol_mm": 0.15,
  "frames_checked": 117,
  "pairs": 44,
- "seconds": 3,
+ "seconds": 2,
  "jobs": 4,
  "violations": {
   "l2|link 2 slab keep-out (5.5 mm Ti, 14 wide)  IN  cuff|J3 lower plate keep-out (O23 x 3.0)": {
@@ -23,11 +23,11 @@
    ]
   },
   "l1|link 1 slab keep-out (5.5 mm Ti, 14 wide)  IN  l2|link 2 slab keep-out (5.5 mm Ti, 14 wide)": {
-   "max_depth": 50.84,
+   "max_depth": 1.28,
    "frames": 117,
    "worst": [
-    "Wave",
-    144
+    "Reach back pocket",
+    120
    ]
   },
   "l1|link 1 slab keep-out (5.5 mm Ti, 14 wide)  IN  l2|J2 upper hub + cap keep-out (O23 x 7.32)": {
@@ -55,11 +55,11 @@
    ]
   },
   "l1|J2 lower plate keep-out (O23 x 3.0)  IN  l2|link 2 slab keep-out (5.5 mm Ti, 14 wide)": {
-   "max_depth": 2.7,
+   "max_depth": 0.98,
    "frames": 117,
    "worst": [
-    "Wash opposite shoulder",
-    60
+    "Raise overhead",
+    24
    ]
   },
   "base|J1 lower plate keep-out (O23 x 3.0)  IN  l1|link 1 slab keep-out (5.5 mm Ti, 14 wide)": {
@@ -71,37 +71,15 @@
    ]
   },
   "l2|link 2 slab keep-out (5.5 mm Ti, 14 wide)  IN  l1|link 1 slab keep-out (5.5 mm Ti, 14 wide)": {
-   "max_depth": 2.21,
-   "frames": 41,
+   "max_depth": 0.45,
+   "frames": 14,
    "worst": [
-    "Reach back pocket",
-    120
-   ]
-  },
-  "l2|J3 upper hub + cap keep-out (O23 x 7.32)  IN  cuff|J3 lower plate keep-out (O23 x 3.0)": {
-   "max_depth": 0.15,
-   "frames": 1,
-   "worst": [
-    "Wash opposite shoulder",
-    48
-   ]
-  },
-  "l1|J1 upper hub + cap keep-out (O23 x 7.32)  IN  base|J1 lower plate keep-out (O23 x 3.0)": {
-   "max_depth": 0.15,
-   "frames": 1,
-   "worst": [
-    "Reach back pocket",
-    120
-   ]
-  },
-  "base|J1 lower plate keep-out (O23 x 3.0)  IN  l1|J1 upper hub + cap keep-out (O23 x 7.32)": {
-   "max_depth": 0.15,
-   "frames": 1,
-   "worst": [
-    "Reach back pocket",
+    "Reach a high shelf",
     120
    ]
   }
  },
- "max_depth": 50.84
+ "open_parts": [],
+ "inside": "integer winding number on welded tessellations (grid + segment crossings; open parts: x/y/z ray majority + generalized winding number where they disagree), depth = exact distance (judge/sdist.py)",
+ "max_depth": 2.4
 }

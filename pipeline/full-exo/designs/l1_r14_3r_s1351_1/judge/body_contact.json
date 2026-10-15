@@ -2,38 +2,19 @@
  "step": 6,
  "tol_mm": 0.5,
  "frames_checked": 228,
- "seconds": 29,
+ "seconds": 61,
  "jobs": 4,
+ "inside": "integer winding number (grid + segment crossings), depth = exact distance to the nearest surface (judge/sdist.py)",
  "parts": {
   "l2|link 2 slab keep-out (5.5 mm Ti, 14 wide)": {
-   "max_depth": 24.71,
-   "frames": 14,
-   "worst": [
-    "Wash opposite shoulder",
-    126,
-    [
-     145,
-     46,
-     -69,
-     119,
-     0
-    ]
-   ]
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null
   },
   "l1|link 1 slab keep-out (5.5 mm Ti, 14 wide)": {
-   "max_depth": 24.89,
-   "frames": 7,
-   "worst": [
-    "Wash opposite shoulder",
-    72,
-    [
-     140,
-     43,
-     -72,
-     120,
-     0
-    ]
-   ]
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null
   },
   "l2|J3 upper hub + cap keep-out (O23 x 7.32)": {
    "max_depth": 0.0,
@@ -56,19 +37,9 @@
    "worst": null
   },
   "l1|J1 upper hub + cap keep-out (O23 x 7.32)": {
-   "max_depth": 17.28,
-   "frames": 8,
-   "worst": [
-    "Comb hair",
-    144,
-    [
-     74,
-     140,
-     -65,
-     117,
-     0
-    ]
-   ]
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null
   },
   "base|J1 lower plate keep-out (O23 x 3.0)": {
    "max_depth": 0.0,
@@ -76,6 +47,6 @@
    "worst": null
   }
  },
- "worst_part": "l1|link 1 slab keep-out (5.5 mm Ti, 14 wide)",
- "max_depth": 24.89
+ "worst_part": "l2|link 2 slab keep-out (5.5 mm Ti, 14 wide)",
+ "max_depth": 0.0
 }

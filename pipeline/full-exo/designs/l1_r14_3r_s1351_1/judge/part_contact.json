@@ -3,7 +3,7 @@
  "tol_mm": 0.15,
  "frames_checked": 117,
  "pairs": 44,
- "seconds": 2,
+ "seconds": 1,
  "jobs": 4,
  "violations": {
   "l2|link 2 slab keep-out (5.5 mm Ti, 14 wide)  IN  l1|link 1 slab keep-out (5.5 mm Ti, 14 wide)": {
@@ -31,11 +31,11 @@
    ]
   },
   "l1|link 1 slab keep-out (5.5 mm Ti, 14 wide)  IN  l2|link 2 slab keep-out (5.5 mm Ti, 14 wide)": {
-   "max_depth": 11.09,
-   "frames": 116,
+   "max_depth": 1.57,
+   "frames": 117,
    "worst": [
-    "Wave",
-    36
+    "Wash opposite shoulder",
+    12
    ]
   },
   "l1|link 1 slab keep-out (5.5 mm Ti, 14 wide)  IN  l2|J2 upper hub + cap keep-out (O23 x 7.32)": {
@@ -79,5 +79,7 @@
    ]
   }
  },
- "max_depth": 11.09
+ "open_parts": [],
+ "inside": "integer winding number on welded tessellations (grid + segment crossings; open parts: x/y/z ray majority + generalized winding number where they disagree), depth = exact distance (judge/sdist.py)",
+ "max_depth": 2.39
 }

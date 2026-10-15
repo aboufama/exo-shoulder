@@ -2,13 +2,13 @@
 triangle is covered by surface samples (its vertices, shared, plus a barycentric grid on long triangles: no point of a
 triangle is farther than h from one of its samples). With s = the distance to the nearest sample (an upper bound: the
 sample is on the surface), the closest triangle has a sample within s + h, so the triangles of the samples in that ball
-are a complete candidate set (one ball query; a thin shell except in concave pockets). The SIGN comes from the angle-weighted pseudo-normal of that closest feature (Baerentzen & Aanaes 2005,
-"Signed distance computation using the angle weighted pseudonormal"): the face normal inside a face, the sum of the two
-adjacent face normals on an edge, the angle-weighted vertex normal at a vertex - exact for a closed, consistently
-oriented mesh, IF the closest feature is the true one (vertices are welded first: a glb tessellation is split at every
-B-rep seam). The judges' INSIDE test is the integer winding number instead (Mesh.build_grid / winding_at / max_depth):
-it needs no closest feature, holds where the posed body self-intersects, and on an open mesh (a hole or non-manifold
-edge after welding) is a majority over rays along x, y and z with the generalized winding number where they disagree.
+are a complete candidate set (one ball query; a thin shell except in concave pockets). INSIDE = the integer winding
+number (Mesh.build_grid / winding_at; signed_distance, max_depth and every judge use it): it needs no closest feature,
+holds where the posed body self-intersects, and on an open mesh (a hole or non-manifold edge after welding) is a
+majority over rays along x, y and z with the generalized winding number where they disagree. Vertices are welded first
+(a glb tessellation is split at every B-rep seam). Mesh.signed_pseudonormal keeps the angle-weighted pseudo-normal sign
+(Baerentzen & Aanaes 2005) for comparison: exact only on a closed, manifold, non-self-intersecting mesh (posed body:
+~2 % of near-surface points wrong). unsigned_distance when only |d| is needed (no grid).
 History (docs/FINDINGS.md "Infrastructure"): until 2026-10-15 the sign came from the nearest face's own normal over the
 10 nearest centroids - wrong near edges, and wrong whenever the true closest triangle was not among those 10 (long glb
 facets): false R2 / R6 penetrations up to 90 mm where ray parity and the winding number find no point inside.
@@ -131,7 +131,17 @@ class Mesh:
         return best, bj, breg, bQ
 
     def signed(self, P):
-        """signed distance (negative = inside), sign from the closest feature's angle-weighted pseudo-normal"""
+        """signed distance (negative = inside): exact distance, inside = integer winding number (winding_at), right where
+        the mesh self-intersects (the posed body) or is open; the grid is (re)built over P's box when P leaves it"""
+        P = np.asarray(P, float); best = self.closest(P)[0]
+        lo = np.maximum(P.min(0) - 3.0, self.lo - 1.0); hi = np.minimum(P.max(0) + 3.0, self.hi + 1.0)
+        if np.any(lo > hi): return best                                         # every point outside the mesh's box
+        if not hasattr(self, "W") or np.any(lo < self.glo) or np.any(hi > self.glo + self.g * (self.gn - 1)): self.build_grid(lo=lo, hi=hi)
+        return np.where(self.winding_at(P) >= 1, -best, best)
+
+    def signed_pseudonormal(self, P):
+        """signed distance, sign from the closest feature's angle-weighted pseudo-normal (exact on a closed, manifold,
+        non-self-intersecting mesh only; kept for comparison - judge/test_sdist.py)"""
         P = np.asarray(P, float); best, bj, breg, bQ = self.closest(P); N = self.Nf[bj].copy()
         for code, kv in ((1, 0), (2, 1), (3, 2)):
             m = breg == code; N[m] = self.Nv[self.F[bj[m], kv]]
@@ -235,8 +245,14 @@ def mesh(V, F, h=0.6):
 
 
 def signed_distance(P, V, F, k=None, tree=None, normals=None, h=0.6):
-    """exact signed distance (negative = inside). k / tree / normals: accepted for the old call signature, ignored"""
+    """exact signed distance (negative = inside; inside = winding number >= 1). k / tree / normals: accepted for the old
+    call signature, ignored"""
     return mesh(V, F, h).signed(P)
+
+
+def unsigned_distance(P, V, F, h=0.6):
+    """exact distance to the surface (no inside test: no winding grid, any mesh - open patches too)"""
+    return mesh(V, F, h).closest(P)[0]
 
 
 def winding_number(P, V, F, chunk=32):
