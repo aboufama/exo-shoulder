@@ -24,7 +24,10 @@ Parts at real size (honesty rule 1):
 Checks: K3 march, K2 dense continuity (joint values + axes), K6 collisions, kit audit; serial singular margin >= 5 deg
 and the closure's fold / stretch margin >= `margin` deg.
 
-    OMP_NUM_THREADS=1 nice -n 10 python3 docs/concepts/models/back-anchored-ring-3r.py [--sweep STAGE] [--write]
+    OMP_NUM_THREADS=1 nice -n 10 python3 docs/concepts/models/back-anchored-ring-3r.py [--seed] [--small]
+        evaluates BEST (or the catalogue seed with --seed) on Bench(60, 160) (Bench(20, 40) with --small)
+    ... --sweep j3,j1,hub,arc,q,combo,final   appends the stages (in that order they were run, j3 cut after k7) to the
+        sweep file, skipping configurations already in it
 """
 import itertools, json, math, os, sys
 import numpy as np
@@ -46,6 +49,9 @@ PARAMS = dict(lat1=-10.0, lon1=-120.0, R1=110.0, p1=24.6, a12=90.0, a23=90.0, d3
 # d3 = angle of the J3 axis from the humerus axis (the spec's arm point (s, th, 60) has d3 = atan(60 / s): s 120 -> 26.6,
 # s 100-160 -> 31-21 deg). The spec places J3 there; an axis through GH then meets the arm skin ~63 deg off its normal, so a
 # flat ring stands on edge (measured: ring 3 at a median 138 mm, worst > 189 mm). d3 near 90 puts J3 at the GH level.
+# best honest configuration of the sweep (k18, gap 116.31; docs/concepts/back-anchored-ring-3r.md). PARAMS is the
+# catalogue seed (spec J1 / J3 sites, rings) the sweep started from.
+BEST = dict(PARAMS, p1=0.0, p3=0.0, d3=50.0, th3=30.0, q=0.92)
 SWEEPS = {   # stages (coarse then refined); configs() expands one stage
     "seed": [dict()],
     "j3": [dict(d3=[26.6, 50.0, 70.0, 88.0], th3=[0.0, 30.0, 60.0])],
@@ -100,7 +106,9 @@ def build(B, F, p):
     v, ok, fold = K.closure(u, w, p["a12"], p["a23"], p["br"], margin_deg=p["margin"])   # J2 by closure
     serial = np.degrees(np.arcsin(np.clip(np.abs((u * np.cross(v, w)).sum(-1)) / math.sin(p["a23"] * D2R), 0, 1)))
     ok = ok & (serial >= 5.0)
-    q = np.stack([K.axis_angle(u, F.S([0.0, 1.0, 0.0]), v), K.axis_angle(v, u, w), K.axis_angle(w, F.H([0.0, 0.0, 1.0]), v)], -1)
+    # joint values (K2): J3 measured from the humerus axis (>= d3 away from w, so never degenerate; the sweep's runs
+    # before this line read F.H([0, 0, 1]), >= 20 deg from w for every configuration run, same geometry)
+    q = np.stack([K.axis_angle(u, F.S([0.0, 1.0, 0.0]), v), K.axis_angle(v, u, w), K.axis_angle(w, F.H(arm_frame()[0]), v)], -1)
 
     j1, r1 = joint_member("ring1" if p["p1"] > 0 else "hub1", u, "J1", p["p1"])
     j2 = K.hub_member("hub2", v, "J2")
@@ -127,11 +135,37 @@ def build(B, F, p):
                              serial_min=round(float(serial[ok].min()), 1) if ok.any() else None, bar_off_deg=round(off, 1)))
 
 
+SWEEPS.update({   # refined stages start from the best configuration in the sweep file so far
+    "hub": [dict(p1=0.0, p3=0.0), dict(p1=0.0, p3=24.6), dict(p1=24.6, p3=0.0)],
+    "arc": [dict(a12=72.0, a23=[75.0, 90.0]), dict(d3=88.0)],
+    # J1 where the ray from GH meets the skin squarely (obliquity map in the doc: 52 deg at the spec's lat -10 / lon -120,
+    # 12-22 deg at lat 20-50 / lon -60..-75, the posterosuperior shoulder over the scapular spine)
+    "j1": [dict(lat1=[35.0, 45.0], lon1=[-100.0, -75.0])],
+    "q": [dict(q=[0.92])],
+    # the variant aimed at both measured limiters: J1 on its square, still seat AND a shorter link 1 that keeps J2
+    # lateral overhead; O20 hubs (small seats) and rings compared
+    "combo": [dict(d3=50.0, th3=30.0, a23=90.0, q=0.92, lon1=-75.0, lat1=[35.0, 45.0], a12=[66.0, 75.0], p1=0.0, p3=0.0),
+              dict(d3=50.0, th3=30.0, a23=90.0, q=0.92, lon1=-75.0, lat1=45.0, a12=[66.0, 75.0], p1=24.6, p3=24.6)],
+    # closure range vs seat: in-band reaches the champion's level at the posterosuperior seat, reach / follow fall with
+    # the closure share, so widen the closure range (a12 + a23 large, |a12 - a23| small) and trade q
+    "final": [dict(d3=50.0, th3=30.0, p1=0.0, p3=0.0, lat1=-10.0, lon1=-120.0, a12=90.0, a23=90.0, q=0.95),
+              dict(d3=50.0, th3=30.0, p1=0.0, p3=0.0, lat1=35.0, lon1=-75.0, a12=90.0, a23=90.0, q=0.92),
+              dict(d3=50.0, th3=30.0, p1=0.0, p3=0.0, lat1=35.0, lon1=-75.0, a12=85.0, a23=105.0, q=0.92),
+              dict(d3=50.0, th3=30.0, p1=0.0, p3=0.0, lat1=20.0, lon1=-90.0, a12=90.0, a23=90.0, q=0.95)],
+})
+
+
+def best_so_far():
+    try: rows = json.load(open(SWEEP_JSON))
+    except (OSError, ValueError): return dict(PARAMS)
+    return dict(min(rows, key=lambda e: e["gap"])["params"]) if rows else dict(PARAMS)
+
+
 def configs(stage):
-    out = []
+    out = []; start = dict(PARAMS) if stage in ("seed", "j3") else best_so_far()
     for d in SWEEPS[stage]:
         keys = [k for k in d if isinstance(d[k], list)]
-        base = dict(PARAMS, **{k: d[k] for k in d if k not in keys})
+        base = dict(start, **{k: d[k] for k in d if k not in keys})
         for vals in itertools.product(*(d[k] for k in keys)):
             out.append(dict(base, **dict(zip(keys, vals))))
     return out
@@ -142,8 +176,10 @@ if __name__ == "__main__":
     nc, nw = (60, 160) if "--small" not in a else (20, 40)
     B = K.bench(nc, nw)
     if "--sweep" in a:
-        stage = a[a.index("--sweep") + 1]
-        best, rows = K.sweep(B, build, configs(stage), SWEEP_JSON, resume=True)
-        print("BEST", best)
+        for stage in a[a.index("--sweep") + 1].split(","):
+            done = [e["params"] for e in (json.load(open(SWEEP_JSON)) if os.path.exists(SWEEP_JSON) else [])]
+            cf = [c for c in configs(stage) if c not in done]
+            best, rows = K.sweep(B, build, cf, SWEEP_JSON, resume=True)
+            print("BEST", stage, best)
     else:
-        r = K.evaluate(B, build, PARAMS); print(json.dumps({k: r[k] for k in r if k not in ("sample_mm",)}, default=str))
+        r = K.evaluate(B, build, BEST if "--seed" not in a else PARAMS); print(json.dumps({k: r[k] for k in r if k not in ("sample_mm",)}, default=str))
