@@ -156,3 +156,48 @@ Verdict: **the death stands** (refuted = false). Measured reason: 98 of the 220 
 - **Over-strict check?** The extra checks (transversality 20 deg, 10 fps continuity, the 1 mm interference rule, carriages on track) refuse only 19 poses. The binding refusal is the kinematic one. Suppose every crossing pose were taken in band: reach would be at most about 0.55 and follow at most about 0.55 (clip closure 0.548). That alone is about 75 gap points, before any in-band shortfall.
 - **Missed parameter region?** The tracks were not trimmed to the safe zones in k 0-5 (rmax None), and the zones were widened in k 95-108 (rmax 105/120). Neither raised coverage enough: the best untrimmed result was reach 0.34 and follow 0.68, with in-band about 0.00 because the tracks sit 180-240 mm out. Coverage and closeness pull against each other in this topology. A 2-D follower would break that trade-off, and two crossing 1-D tracks cannot.
 - **What to keep** (unchanged from the screen): the scapula-fixed halo at el 35 deg (in band 0.94, mean 10 mm) and carriage A (0.99). They are worth reusing as the base stage of a morphology whose second stage follows the meeting point in 2-D.
+
+## Polish (convergence check, 2026-10-15)
+
+**Why.** The 179-try sweep was still climbing (+26.9 points in its second half), so the death at score 60.4 could
+have been bad luck in sampling rather than a property of the mechanism.
+
+**Method.** CMA-ES (popsize 8, box-normalised) on 12 continuous parameters: halo_el, the halo's Fourier terms
+f1c / f1s / f2c / f2s, the arm oval o_d / o_a / o_A / o_B, the quantiles q / qH, and rmax (80-100). Discrete choices
+were fixed (sigma -1, oval arm track, stack 11 = the physical minimum, S_in). Same model, same honesty checks, same
+Bench(60,160) fast cache. Round 1: sigma 0.12 from k 138, 154 and 160 (48 tries each). Round 2: sigma 0.06 from
+k 309 and 261 (32 tries each). In total, 208 new configurations (k 179-386, stage "polish"). No parameter range
+was widened: o_B runs to the lower edge (2 mm) but the best uses 3.
+
+**Best so far** (score = 100 (1 - gap/275)):
+
+| Polish try | 1 | 53 | 104 | 157 | 208 |
+|---|---|---|---|---|---|
+| Score | 60.4 | 61.2 | 62.7 | 64.1 | 65.6 |
+
+**Best: k 338, gap 94.55, score 65.6.**
+- Reach 0.469, follow 0.650, in band 2-14 0.703, in band 2-10 0.407, contact 0.017. Ti mass 86 g.
+- Settings: halo el 31.9 with f1s -4.75; arm oval (101.7, -6.9, 54.1, 3.0), longer than before; q 0.905 / qH 0.91;
+  rmax 89.3.
+- Refusals: no crossing 65 (was 98), off track 24, neck/swivel 7, tangent 5, flip 3, contact 2.
+- Per part, in band 2-14: T_S 0.93, carriage A 0.98, neck 0.63, T_H 0.24, carriage B 0.05.
+
+**Convergence gate: NOT converged.**
+- The second half gained +2.96 points. The gate requires < 1.
+- The best came at try 160 of 208, inside the last third.
+- The top 5 are within 2.0 points (94.55-100.12). This part passes.
+
+**Limit.** Even unconverged, the bar looks out of reach.
+- The kinematic screen of the best (no geometry at all) gives reach_kin 0.65 and follow_kin 0.72. That is a
+  reach/follow gap of 48 before any in-band loss.
+- The geometry then loses about 18 percentage points of reach and 7 of follow. These are mostly poses where the
+  crossing exists but leaves the 93 deg arm track, plus the neck/swivel interference.
+- Red team, with the model's own closure / contact / continuity checks on:
+  - rest is taken;
+  - overhead (elev 160), across-the-body, behind-the-back, abd90 and flex90 now all *have* a crossing
+    (transversal, 51-77 deg) but it lies off the trimmed arm track.
+- So the growth comes from a longer arm track. The arm track is capped by the humerus-safe patch (rmax ~90 mm).
+  The outer track and carriage B are still out of band (0.24 / 0.05), because they ride on the 11 mm stack.
+
+**Verdict.** Still dead (65.6 < 74.9), but not converged. The next lever is the arm-track length against rmax, not
+more sampling of the halo.
