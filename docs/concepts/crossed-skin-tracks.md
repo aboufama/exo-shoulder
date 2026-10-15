@@ -146,3 +146,13 @@ That lifted the outer track to 180-230 mm, so those numbers are pessimistic. The
 - A design that needs a scapula-side guide (for example a 3R whose J1 is a track) should copy this halo.
 
 Image: `docs/concepts/img/crossed-skin-tracks.png` (rest and overhead, skin in grey).
+
+## Audit (independent re-check, 2026-10-15)
+
+Verdict: **the death stands** (refuted = false). Measured reason: 98 of the 220 bench poses have no crossing of the two tracks at all, so even with every other check removed the gap stays at about 75 or more, against the baseline's 68.93.
+
+- **Reproduced.** `python3 docs/concepts/models/crossed-skin-tracks.py check` on Bench(60, 160) (fast cache) gives the same numbers: reach 0.4562, follow 0.4667, inband14 0.7585, inband10 0.3907, contact 0.0194, gap 108.8. Refusals: no crossing 98, tangent 3, neck/swivel interference 8, off track 8, contact 2. The 10 fps clip closure share is 0.548.
+- **Modelling bug?** None found. I checked the crossing finder against a brute-force minimum distance over 3000 random relative rotations. Of 422 rotations where the curves come within 0.3 deg, it missed 1 (a tangent touch) and returned 0 false crossings. The way the bench poses, frames and skin distance are taken matches the conventions of `tools/concept_baseline.py`.
+- **Over-strict check?** The extra checks (transversality 20 deg, 10 fps continuity, the 1 mm interference rule, carriages on track) refuse only 19 poses. The binding refusal is the kinematic one. Suppose every crossing pose were taken in band: reach would be at most about 0.55 and follow at most about 0.55 (clip closure 0.548). That alone is about 75 gap points, before any in-band shortfall.
+- **Missed parameter region?** The tracks were not trimmed to the safe zones in k 0-5 (rmax None), and the zones were widened in k 95-108 (rmax 105/120). Neither raised coverage enough: the best untrimmed result was reach 0.34 and follow 0.68, with in-band about 0.00 because the tracks sit 180-240 mm out. Coverage and closeness pull against each other in this topology. A 2-D follower would break that trade-off, and two crossing 1-D tracks cannot.
+- **What to keep** (unchanged from the screen): the scapula-fixed halo at el 35 deg (in band 0.94, mean 10 mm) and carriage A (0.99). They are worth reusing as the base stage of a morphology whose second stage follows the meeting point in 2-D.
