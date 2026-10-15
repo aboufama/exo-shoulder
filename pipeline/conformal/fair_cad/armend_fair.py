@@ -499,6 +499,7 @@ def build_hub_neck_v2(E):
     into the wall; its skin side a turned sketch - centre flat + cone + G2 blends - fitted over the dense skin envelope,
     HUB_FLAT=1 for the old flat face), the neck a constant 14 x 6.5 section swept along the skin-hugging path from inside
     the hub (embedded, so the union is a clean intersection) and tapering into BOTTOM's outline over its last part"""
+    if JN_LINK: return build_hub_neck_upper(E)                                              # link N-1 under the arm hub (jn_low = link)
     import cad_helpers as CH
     P_bar = BB.bar_pt(BB.S_CUT, BB.BAR_Y0, BB.BAR_Z0); hub_c = W0 * ZJ4
     dh = unit((P_bar - hub_c) - ((P_bar - hub_c) @ W0) * W0); lat = unit(np.cross(W0, dh))
@@ -557,8 +558,45 @@ def build_hub_neck_v2(E):
     return BB.solid_ok(b3), jn_hardware_rest(lv)
 
 
+JN_LINK = str(BB.R.get("jn_low", os.environ.get("JN_LOW", "arm"))) == "link"
+def build_hub_neck_upper(E):
+    """jn_low = link (evaluator band-2026-10-15m+, analysis/jn_flip_patch.py): link N-1 is the LOWER member at JN (its
+    plate F..S on the skin side, turned skin side, the pin) and the arm part's hub is the UPPER member: a turned disc
+    U0..U1 with the upper-member features (bearing bore / cap seat), the neck leaving it at that level and never
+    dropping below U0 on its way to BOTTOM's cut (a bridge over link N-1, which only descends from its plate). The arm
+    part then carries the cap / sensor (upper parts, group H in the rest frame); the lower parts (washers, magnet, ring
+    nut) ride link N-1 (fair_build: role lower at JN). Needs fair_build's role(N-1, N) = lower and joint_lv(N) =
+    stack_levels(ZJ4) (no T_BOT) - agent B's files."""
+    import cad_helpers as CH
+    P_bar = BB.bar_pt(BB.S_CUT, BB.BAR_Y0, BB.BAR_Z0); hub_c = W0 * ZJ4
+    dh = unit((P_bar - hub_c) - ((P_bar - hub_c) @ W0) * W0)
+    lv = MB.stack_levels(ZJ4); U0, U1, r0, e_ = lv["U0"], lv.get("H1", lv["U1"]), MB.HUB_R, 0.8
+    prof = [("line", (0.0, U0), (r0 - e_, U0)), ("arc", (r0 - e_, U0), (r0 - e_ + e_ * math.sin(math.pi / 4), U0 + e_ - e_ * math.cos(math.pi / 4)), (r0, U0 + e_)),
+            ("line", (r0, U0 + e_), (r0, U1 - e_)), ("arc", (r0, U1 - e_), (r0 - e_ + e_ * math.sin(math.pi / 4), U1 - e_ + e_ * math.cos(math.pi / 4)), (r0 - e_, U1)),
+            ("line", (r0 - e_, U1), (0.0, U1)), ("line", (0.0, U1), (0.0, U0))]
+    hub = BB.G.revolve_profile(prof, W0, ref=dh); print(f"  JN upper hub (arm part over link {BB.N - 1}): {U0:.2f}..{U1:.2f} from GH, valid {hub.isValid()}", flush=True)
+    al = math.atan((MB.HUB_R + 3.0) / 65.0); tw = unit(unit(P_bar) - (unit(P_bar) @ W0) * W0)
+    dn, rot = neck_exit(E, dh); tw = rot(tw); acr0 = unit(np.cross(W0, dn))
+    t_root = max(2.0, (U1 - U0) - 0.6); zc = 0.5 * (U0 + U1)                                  # root section 0.3 inside both hub faces
+    P0 = W0 * zc + (MB.HUB_R - 4.0) * dn; prof0 = BB.rr_prof(2 * BB.HW, t_root); sd = math.cos(al) * W0 + math.sin(al) * tw
+    for appr in (0.0, 12.0, 16.0, 20.0):
+        secs = hugging_neck(E, P0, dn, W0, prof0, sd, U0, n_end_blend=0.4, hold_mm=4.0 + 1.5, approach=appr, floor=U0)
+        secs = [BB.sec3d(P0 - 2.0 * dn, acr0, W0, prof0), BB.sec3d(P0, acr0, W0, prof0)] + secs
+        neck = BB.loft(secs); sx = self_x(neck)
+        print(f"  neck sweep (approach {appr:.0f} mm): valid {neck.isValid()}, self-intersecting {sx}", flush=True)
+        if neck.isValid() and not sx: break
+    body = None
+    for tol in (0.0, 0.01, 0.05):
+        b_ = CH.fuzzy_fuse(hub, neck, tol=tol)
+        if b_.isValid() and len(b_.Solids()) == 1: body = b_; break
+    if body is None: body = BB.solid_ok(CH.fuzzy_fuse(hub, neck, tol=0.0))
+    b3 = HWR.v4_upper_features(body, W0, lv, yref=np.cross(W0, dh)); print("  after upper-member features: valid", b3.isValid(), flush=True)
+    up = HWR.v4_joint_parts(W0, lv, BB.N, yref=np.cross(W0, dh))[1]
+    return BB.solid_ok(b3), [("H", n_, BB.AE.can_to_rest(s_)) for n_, s_ in up]
+
+
 # ================================================================ v5 neck: the evaluator's neck, built (skin-hugging)
-def hugging_neck(E, P0, T0, up0, prof0, start_dir, h_start, n_end_blend=0.3, hold_mm=None, approach=0.0, exit_len=0.0):
+def hugging_neck(E, P0, T0, up0, prof0, start_dir, h_start, n_end_blend=0.3, hold_mm=None, approach=0.0, exit_len=0.0, floor=None):
     """sections from a part's last section (centre P0, travel T0, up0, profile prof0) to BOTTOM's cut face, along the band
     evaluator's neck: great circle from start_dir to the bar end direction; underside = dense skin envelope (all followed
     frames) + hub margin, ramped <= 35 deg out of its start height and into the bar's skin side; 14 x 6.5 G2 section"""
@@ -572,6 +610,7 @@ def hugging_neck(E, P0, T0, up0, prof0, start_dir, h_start, n_end_blend=0.3, hol
     env = E.min_radius("can", R3).reshape(3, -1).max(0) + hm
     dA, dB = us * L, (1 - us) * L
     u_ = np.maximum.reduce([env, h_start - RAMP * np.maximum(0, dA - 6.0), float(nk["r_under"]) - RAMP * np.maximum(0, dB - 6.0)])
+    if floor is not None: u_ = np.maximum(u_, float(floor))                                # jn_low link: the neck bridges link N-1 (never below its floor)
     u_ = np.maximum(gaussian_filter1d(u_, 1.2), u_)
     C = D * (u_ + T_BOT / 2)[:, None]
     # tangent-continuous ends: Bezier from the part (P0, T0) into the path and from the path into the bar (P3, T3)

@@ -51,7 +51,7 @@ def hooked_band_impl():
          "                hit |= over.any(-1); _rec(f'm{i}-bar', over.any(-1))\n            out.append(hit)\n"),
     ]
     if os.environ.get("JN_LOW") == "link":                                           # proposed evaluator change (jn_flip_patch.py)
-        sys.path.insert(0, HERE); import jn_flip_patch as JP; src = JP.patch(src)
+        sys.path.insert(0, HERE); import jn_flip_patch as JP; src = JP.patch(src, v2=os.environ.get("JP_V2", "1") == "1")
     for a, b in reps:
         assert src.count(a) == 1, f"band_impl changed: hook anchor not unique / missing:\n{a}"
         src = src.replace(a, b)

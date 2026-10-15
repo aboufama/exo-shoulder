@@ -4,15 +4,14 @@ upper arm passes ~90 mm into the chest in "Wash opposite shoulder", its forearm 
 
 The rig's render skin is split into three regions by its skinning weights (trunk = thorax + scapula, upper arm =
 humerus, forearm = forearm + hand). A part that rides on a limb (group H: upper arm, F: forearm) is judged against
-  - its OWN limb: any depth inside it counts in full (the part enters the limb it is strapped to; depth = the larger of
-    the plain depth and the depth below the own limb's skin);
+  - its OWN limb: any depth inside it counts in full (the part enters the limb it is strapped to; the plain depth);
   - every OTHER region: only the depth beyond the depth of its own limb's skin under it,
         attributable(P) = d_other(P) - d_other(Q),   Q = the nearest point of the own limb's skin to P,
     where d_other = exact distance to the other regions' surface, and d_other(Q) counts only where Q is buried (the
     point just outside the own skin at Q is inside the body). Where the own skin under the part is on the visible
     surface (not buried) the full depth counts, so in a pose where the rig does not self-intersect nothing changes.
-Triangle inequality: d_other(P) - d_other(Q) <= |P - Q|, so outside its own limb attributable <= the plain depth
-(judge/sdist.py).
+Triangle inequality: d_other(P) - d_other(Q) <= |P - Q|, so attributable <= the plain depth (judge/sdist.py) always:
+the attribution can only take away depth that lies inside the rig's own self-intersection.
 Where Q lies on the edge of the own region's patch (the region boundary, where the sign of the open patch is not
 defined) the plain depth counts (conservative). Parts that ride no limb (base, links) are judged with the plain depth.
 Validated on synthetic self-intersecting bodies in judge/test_body_contact.py."""
@@ -66,8 +65,8 @@ class Regions:
 def attributable_depth(M, R, own, P, d, tol=0.5, eps=0.3, edge_mm=3.0, batch=256):
     """deepest attributable point of one part: M = the full body Mesh with a winding grid (sdist), R = Regions of the same
     posed body, own = the part's own region (None: plain depth), P = its points inside the body, d = their plain depth.
-    Inside its own limb a point counts with max(plain depth, depth below the own limb's skin) - the plain depth (to the
-    nearest surface of any region) can be smaller there when another region's buried skin passes nearby.
+    Inside its own limb a point counts with its plain depth (the depth below the own skin is not used: near the
+    elbow and armpit folds the open patch's sign is not reliable, and the attribution must never exceed the plain judge).
     Returns (depth mm, index into P, kind) with kind 'own limb' | 'other region, own skin visible' | 'other region,
     beyond the buried own skin' | 'region edge (plain depth)' | 'plain' (no own limb)."""
     P = np.asarray(P, float); d = np.asarray(d, float)
@@ -77,9 +76,8 @@ def attributable_depth(M, R, own, P, d, tol=0.5, eps=0.3, edge_mm=3.0, batch=256
     Mo, Bt = R.own(own); s_own = Mo.signed(P); best, bi, bk = 0.0, None, None
     ins = np.where(s_own < 0)[0]
     if len(ins):                                                                # inside the limb it rides on: counts in full
-        Qi = Mo.closest(P[ins])[3]; edge = Bt.query(Qi)[0] < edge_mm             # at the patch edge the sign is not defined: plain depth
-        a = np.where(edge, d[ins], np.maximum(d[ins], -s_own[ins])); j = int(np.argmax(a))
-        if a[j] > best: best, bi, bk = float(a[j]), int(ins[j]), ("region edge (plain depth)" if edge[j] else "own limb")
+        j = int(np.argmax(d[ins]))                                              # (plain depth: never more than the plain judge)
+        if d[ins][j] > best: best, bi, bk = float(d[ins][j]), int(ins[j]), "own limb"
     out = np.where(s_own >= 0)[0]; out = out[np.argsort(-d[out])]; Mt = None
     for i0 in range(0, len(out), batch):                                        # elsewhere: attributable <= plain depth
         idx = out[i0:i0 + batch]

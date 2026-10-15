@@ -46,6 +46,7 @@ def metric(m):
     return d
 OPS = {">=": lambda a, b: a >= b, "<=": lambda a, b: a <= b, "==": lambda a, b: a == b}
 src["interface_pressure"] = interface_pressure(src["dynamics"])                    # derived from dynamics.json (R11)
+src["fea"] = load(os.path.join(J, "fea.json"))                                      # R9 (judge/fea.py)
 rows = []
 for rid, r in REQ.items():
     if rid.startswith("_"): continue
@@ -80,6 +81,12 @@ if ip:
                  f"{ip['total_with_strap_kPa_worst']} kPa with the strap vs {ip['sustained_budget_kPa']} kPa all-day; ISO/TS 15066 {ip['iso']['force_N_worst']} / {ip['iso']['force_limit_N']} N, "
                  f"edge peak ~{ip['iso']['local_peak_kPa_est']} / {ip['iso']['pressure_limit_kPa']} kPa; aim {ip['aim_capillary_kPa']} kPa (capillary) {'met' if ip['exo_under_capillary'] else 'not met'}; "
                  f"a plain-bearing build would reach {ip['plain_bearing_worst_kPa']} kPa; the prototype pressure-film check remains")
+fe = src["fea"]
+if fe and fe.get("summary"):
+    sm = fe["summary"]; wp = fe["parts"][sm["worst_part"]]; c = wp["cases"]["D1F"]
+    notes.append(f"- R9 (CalculiX FEA, 10 N.m + 50 N cuff wrench): min SF {sm['min_SF']} on {sm['worst_part']} ({c['vm_MPa']} MPa at {c['at_mm']}, {wp['material']}); "
+                 f"pure 10 N.m worst direction SF {sm['min_SF_D1']}; MVP1 (R17 envelope) SF {sm['min_SF_MVP1']}; fatigue SF {sm['fatigue_min_SF']}; "
+                 f"chain GH-point deflection {sm['chain_d_GH_mm']} mm vs 2 mm floor / {sm['min_skin_gap_mm']} mm min skin gap; parts " + ", ".join(f"{k} SF {v['cases']['D1F']['SF']}" for k, v in fe["parts"].items()))
 if notes: md += ["", "Notes:", ""] + notes
 open(os.path.join(J if os.path.isdir(J) else dd, "scorecard.md"), "w").write("\n".join(md) + "\n"); json.dump(rows, open(os.path.join(J if os.path.isdir(J) else dd, "scorecard.json"), "w"), indent=1)
 print("\n".join(md))

@@ -44,10 +44,27 @@ REPS = [
 ]
 
 
-def patch(src):
-    for a, b in REPS:
-        assert src.count(a) == 1, f"band_impl changed, anchor not unique / missing:\n{a}"
-        src = src.replace(a, b)
+# v2 (2026-10-15 12:45, after the first GPU runs on band-2026-10-15m): with link N-1 under the hub the neck must also
+# STAY above it - v1 let the neck's underside ramp down from the upper hub to the skin envelope like the old hugging
+# neck, so it still met link N-1's ribbon wherever both hug the skin: analysis/ws_collisions.py on r20 s1414 #0 found
+# every workspace part collision (14.2 % of the poses, 'link 2-neck') unchanged by jn_low=link. Now the neck leaves the
+# upper hub level and never drops below it on its way to the bar (a bridge over link N-1's sweep).
+REPS2 = [
+    ("                u_ = t.maximum(La, hs0 - self.RAMP * t.clamp(ax_[\"dA\"] - 6.0, min=0))\n",
+     "                u_ = t.maximum(La, (t.maximum(hs0, zb + T_LO + 0.65) + 0.0 * ax_[\"dA\"]) if (self.jn_link and ax_[\"start\"] == \"hub\") else hs0 - self.RAMP * t.clamp(ax_[\"dA\"] - 6.0, min=0))   # jn_low link: the neck bridges link N-1 (0.65 over its plate: collisions() wants 0.6 between them)\n"),
+]
+
+
+def patch(src, v2=True):
+    """v1 (REPS; deployed in band-2026-10-15m) unless already in src, then v2 (REPS2) unless already in src"""
+    if "self.jn_link" not in src:
+        for a, b in REPS:
+            assert src.count(a) == 1, f"band_impl changed, anchor not unique / missing:\n{a}"
+            src = src.replace(a, b)
+    if v2 and "the neck bridges link N-1" not in src:
+        for a, b in REPS2:
+            assert src.count(a) == 1, f"band_impl changed, anchor not unique / missing:\n{a}"
+            src = src.replace(a, b)
     return src
 
 

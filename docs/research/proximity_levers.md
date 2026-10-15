@@ -138,7 +138,25 @@ All shape / hardware levers together are worth about +6-10 points in the evaluat
 - GH translation: the rig moves the trunk by -lift and rotates the scapula about GH, so in this rig the chain sees no
   GH translation; passive cuff slides cannot change R1 here (they matter for real bodies, R10 / R14).
 
-## 7. Results still running at hand-off / not done
+## 7. CAD confirmation (real judges, clean worktree at commit 3d9f67f = the final's CAD code)
+
+`agD_n3_wbox_1` = the W-boxed chain above, CPU detail eval (`cpu_detail.py`: clips-only fit, filled maps, padded to the
+wsf payload so band_to_design writes workspace.json), built with `fair_pipeline.sh` exactly as the final (FIELD_MODE
+fair, FAIR_LAM 300, ramp 60, hw 5, O23 v4 hubs): 0 member collisions, 245 g. Judged with tools/judge_all.sh's fast
+settings (one process).
+
+| | R1 (2-14) | R1-aim (2-10) | R3 follow | R4 overhead | Raise overhead follow | Reach back pocket follow |
+|---|---|---|---|---|---|---|
+| final `cad_r18_n3_s1392_1_f300` (wsf fit, range first) | 40.9 % | 19.1 % | 79.8 % | 28.9 % | 70.5 % | 22.4 % |
+| `cad_agD_n3_wbox_1` (JN on low-motion skin, clips-only fit) | **58.2 %** | **25.3 %** | **83.4 %** | 28.8 % | **44.3 %** | 100 % |
+
+Per clip in band while following: Comb hair 44.9 -> 67.7 %, Reach a high shelf 49.1 -> 62.8, Walking 51.6 -> 68.4,
+Drink 34.3 -> 46.5, Wash opposite shoulder 25.9 -> 30.5, Raise overhead 41.0 -> 65.0 (on fewer frames).
+**Not a clean win**: overhead is followed to fewer frames (R4 unchanged), and the fit ignored the workspace, so the
+range (R16) and the share of the gain due to the fit rather than the JN move need the control build
+(`cad_r18_n3_s1392_1_d1`: the final's chain with the same clips-only CPU fit) - see the scorecards below.
+
+## 8. Results still running at hand-off / not done
 
 - `local_w_search.py` boxed vs free: see `local_w_search_wbox.json` / `local_w_search_wfree.json` (first 60 boxed
   evals: fit score 0.548 vs the baseline's 0.533, in band 75.0 % vs 67.5 %, follow 69.0 % vs 74.1 % - not yet a

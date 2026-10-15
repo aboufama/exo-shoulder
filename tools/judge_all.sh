@@ -8,4 +8,5 @@ $PY -W ignore judge/part_contact.py $ID --step $P | head -8
 $PY -W ignore judge/base_mount.py $ID --step $((S + 1)) | tail -1
 [ -f pipeline/full-exo/designs/$ID/workspace.json ] && $PY -W ignore judge/workspace.py $ID --step $((S * 2)) | tail -1
 $PY -W ignore judge/dynamics.py $ID | tail -1
+[ -d pipeline/full-exo/designs/$ID/step ] && [ "$SKIP_FEA" != "1" ] && OMP_NUM_THREADS=2 $PY -W ignore judge/fea.py $ID $([ "$2" == "fast" ] && echo --fast) 2>&1 | tail -1   # R9 CalculiX FEA (RUNTIME; fast: t/2.5 mesh, no refinement check; SKIP_FEA=1 skips)
 $PY judge/scorecard.py $ID

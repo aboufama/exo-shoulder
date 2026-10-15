@@ -146,7 +146,8 @@ def mesh_step(step, h, out_msh=None, local=None):
         else:
             # background size field: a coarse linear tet mesh carries the size (wall at the nearest surface samples / k)
             from scipy.spatial import cKDTree
-            C, t, k, hmin, hmax = local; sz = np.clip(t / k, hmin, hmax)
+            C, t, k, hmin, hmax = local[:5]; focus = local[5] if len(local) > 5 else None   # focus: (point, R, k outside, hmin, hmax)
+            sz = np.clip(t / k, hmin, hmax)
             for hb_ in (2.0, 1.2, 0.8, 0.5):                                                    # thin twisted straps: a coarse PLC can self-intersect
                 try:
                     gmsh.model.mesh.clear(); gmsh.option.setNumber("Mesh.MeshSizeMax", hb_); gmsh.option.setNumber("Mesh.MeshSizeMin", 0.25 * hb_); gmsh.model.mesh.generate(3); break
@@ -155,6 +156,10 @@ def mesh_step(step, h, out_msh=None, local=None):
             _, Xb, _ = gmsh.model.mesh.getNodes(); Xb = Xb.reshape(-1, 3); tg, _, _ = gmsh.model.mesh.getNodes()
             et, _, en = gmsh.model.mesh.getElements(3); ib = np.full(int(tg.max()) + 1, -1); ib[tg] = np.arange(len(tg)); Tb = ib[np.asarray(en[list(et).index(4)]).reshape(-1, 4)]
             _, i8 = cKDTree(C).query(Xb, k=8); hb = sz[i8].min(1)                       # both walls of a thin section are among the 8 nearest
+            if focus is not None:                                                            # outside the focus ball: the coarser size
+                fp, fR, fk, fmin, fmax = focus; out_ = np.linalg.norm(Xb - fp, axis=1) > fR
+                hb[out_] = np.clip(t / fk, fmin, fmax)[i8[out_]].min(1)
+                hmax = max(hmax, fmax)
             data = np.c_[Xb[Tb][:, :, 0], Xb[Tb][:, :, 1], Xb[Tb][:, :, 2], hb[Tb]].ravel()
             v = gmsh.view.add("size"); gmsh.view.addListData(v, "SS", len(Tb), data.tolist())
             gmsh.model.mesh.clear()
@@ -312,14 +317,16 @@ def part_setup(step, name, kind, hub_idx=None, cuff_centres=None):
     return dict(hubs=hubs, cyls=cy, vol_mm3=vol, com=com)
 
 H_RANGE = {2: (0.4, 3.0), 3: (0.3, 2.0), 2.5: (0.35, 2.5)}                          # size clamp per k (mm)
-def prepare_part(step, name, kind, k, wall, cuff_centres=None):
-    """mesh (size = local wall / k), the load hub's joint surfaces and the support nodes"""
+FOCUS_ABOVE, FOCUS_R = 60000, 30.0                                                     # parts with more coarse nodes: t/3 only near the peak
+def prepare_part(step, name, kind, k, wall, cuff_centres=None, focus=None):
+    """mesh (size = local wall / k; with focus = (point, R): k only within R of the point, k = 2 elsewhere), the load
+    hub's joint surfaces and the support nodes"""
     G = part_setup(step, name, kind); hubs = G["hubs"]
     if kind == "link": hubs = sorted(hubs, key=lambda h: -abs(h["a"][0]))                 # proximal hub axis = the member frame's x
     load = hubs[1] if kind == "link" else hubs[0]
     if kind == "link" and len(hubs) != 2: raise RuntimeError(f"{name}: {len(hubs)} hubs found (2 expected)")
     hmin, hmax = H_RANGE[k]; C, tw = wall[2], wall[3]
-    X, T = mesh_step(step, None, local=(C, tw, k, hmin, hmax))
+    X, T = mesh_step(step, None, local=(C, tw, k, hmin, hmax) + (((np.asarray(focus[0], float), focus[1], 2, *H_RANGE[2]),) if focus is not None else ()))
     vol = tet_volumes(X, T)
     if (vol <= 0).any(): raise RuntimeError(f"{name}: {int((vol <= 0).sum())} inverted tets")
     el, fc = boundary_faces(T); bn = np.zeros(len(X), bool); bn[np.unique(T[el][np.arange(len(el))[:, None], np.c_[FACES, FACE_MID][fc]])] = True
@@ -490,12 +497,13 @@ def part_fea(step, pre, kind, mat, work0, fast=False, centres=None, threads=2):
         gw = p["governing_wrench"]; m_s, f_s = wrench_at_hub(gw["m_about_GH_Nmm"], gw["f_through_GH_N"], P["ld_ref"])
         S_c = np.einsum("k,knc->nc", np.r_[m_s @ D["B"].T / UNIT_M, f_s @ D["B"].T / UNIT_F], D["S"])   # the same wrench on the coarse mesh
         vc, kc = judged_peak(S_c, ~D["bcz"])
-        P3 = prepare_part(step, pre, kind, 3, wall, centres)
+        focus = None if P["info"]["n_nodes"] < FOCUS_ABOVE else (D["X"][gw["node"]], FOCUS_R)    # big parts: t/3 around the governing peak only
+        P3 = prepare_part(step, pre, kind, 3, wall, centres, focus)
         U3, S3, sec3 = solve(P3, mat, [(m_s, f_s)], os.path.join(work0, f"{pre}_k3"), threads)
         vf, kf = judged_peak(S3[0], ~P3["bcz"]); ratio = vf / vc
         t_, ph_, c_ = rigid_fit(P3["X"][P3["ld_sel"]], U3[0][P3["ld_sel"]]); dgh_f = float(np.linalg.norm(t_ + np.cross(ph_, GH - c_)))
         t_, ph_, c_ = rigid_fit(D["X"][P["ld_sel"]], np.einsum("k,knc->nc", np.r_[m_s @ D["B"].T / UNIT_M, f_s @ D["B"].T / UNIT_F], D["U"])[P["ld_sel"]]); dgh_c = float(np.linalg.norm(t_ + np.cross(ph_, GH - c_)))
-        p["convergence"] = dict(wrench="governing D1F wrench", nodes=[P["info"]["n_nodes"], P3["info"]["n_nodes"]], vm_MPa=[round(vc, 1), round(vf, 1)], change=round(ratio - 1, 3),
+        p["convergence"] = dict(wrench="governing D1F wrench", refined="everywhere" if focus is None else f"within {FOCUS_R:.0f} mm of the governing peak", nodes=[P["info"]["n_nodes"], P3["info"]["n_nodes"]], vm_MPa=[round(vc, 1), round(vf, 1)], change=round(ratio - 1, 3),
                                 at_mm=[np.round(D["X"][kc], 1).tolist(), np.round(P3["X"][kf], 1).tolist()], d_GH_mm=[round(dgh_c, 3), round(dgh_f, 3)], ccx_s=round(sec3, 1),
                                 rule="judged D1F = coarse worst-wrench peak x max(1, fine / coarse) under the governing wrench")
         log(f"  k 3: {P3['info']['n_nodes']} nodes, ccx {sec3:.0f} s; governing wrench {vc:.1f} -> {vf:.1f} MPa ({100 * (ratio - 1):+.1f} %), d_GH {dgh_c:.3f} -> {dgh_f:.3f} mm")
@@ -506,6 +514,14 @@ def part_fea(step, pre, kind, mat, work0, fast=False, centres=None, threads=2):
             p["cases"]["MVP1"]["vm_MPa"] = round(p["cases"]["MVP1"]["vm_MPa"] * ratio, 2); p["cases"]["MVP1"]["SF"] = round(mat["Sy"] / p["cases"]["MVP1"]["vm_MPa"], 1)
             s_ = p["cases"]["D1F"]["vm_MPa"]; p["fatigue"].update(sigma_a_MPa=s_, SF_fully_reversed=round(mat["Se"] / s_, 2), SF_R0_goodman=round(1.0 / ((s_ / 2) / mat["Se"] + (s_ / 2) / mat["Su"]), 2))
         if dgh_f > dgh_c: p["deflection"]["d_GH_mm"] = round(p["deflection"]["d_GH_mm"] * dgh_f / dgh_c, 3)
+    # sizing (what fixes a failing part): the local wall at the peak, and the scale factors to SF 1.5 by thickness
+    # (sigma ~ t^-1.9, thin_study's fit on these Ti links; bending / torsion of a strap ~ t^-2) or by width (~ w^-1)
+    from scipy.spatial import cKDTree
+    pk = np.asarray(p["cases"]["D1F"]["at_mm"], float); _, i8 = cKDTree(wall[2]).query(pk, k=8); t_pk = float(wall[3][i8].min())
+    sf = p["cases"]["D1F"]["SF"]; need = SF_MIN / sf
+    p["sizing"] = dict(wall_at_peak_mm=round(t_pk, 2), M_allow_at_SF_1_5_Nm=round(M_DESIGN / 1e3 * sf / SF_MIN, 2),
+                       thickness_for_SF_1_5_mm=round(t_pk * max(1.0, need) ** (1 / 1.9), 2), width_factor_for_SF_1_5=round(max(1.0, need), 2),
+                       rule="linear: allowable moment = 10 N.m x SF / 1.5; t_req = t_peak x (1.5 / SF)^(1/1.9) (thin_study exponent), width-only = x 1.5 / SF")
     p["seconds"] = round(time.time() - t0, 1); return p
 
 def summarise(out, dd):
@@ -521,6 +537,20 @@ def summarise(out, dd):
                           passes=bool(sf >= SF_MIN and fsf >= FATIGUE_MIN and defl_ok and all(k in P for k in chain)))
     return out
 
+def cut_beyond_support(step, centres, out, margin=12.0):
+    """BOTTOM runs on past the upper-cuff screws to the elbow ring. With the support at the cuff screws and the load at
+    the JN hub, that free end carries no load (zero stress in linear statics), so it is cut off 12 mm past the last screw"""
+    import cadquery as cq
+    sh = cq.importers.importStep(step).val(); C = np.asarray(centres, float); hub = None
+    G = part_setup(step, "BOTTOM", "bottom"); hub = G["hubs"][0]; hc = hub["a"] * hub["zc"]
+    u = C.mean(0) - hc; u /= np.linalg.norm(u); far = C[np.argmax((C - hc) @ u)]; o = far + margin * u
+    x_ = np.cross(u, [0, 0, 1.0] if abs(u[2]) < 0.9 else [1.0, 0, 0]); x_ /= np.linalg.norm(x_)
+    big = cq.Workplane(cq.Plane(origin=tuple(o), xDir=tuple(x_), normal=tuple(u))).rect(1000, 1000).extrude(1000).val()
+    kept = sh.cut(big)
+    if len(kept.Solids()) != 1: raise RuntimeError(f"BOTTOM cut gave {len(kept.Solids())} solids")
+    os.makedirs(os.path.dirname(out), exist_ok=True); cq.exporters.export(cq.Workplane().add(kept), out)
+    return out, f"cut {margin:.0f} mm past the last upper-cuff screw (free end, no load): {sh.Volume() / 1000:.1f} -> {kept.Volume() / 1000:.1f} cm3"
+
 def judge_design(dd, only=None, fast=False, threads=2):
     did = os.path.basename(os.path.normpath(dd)); pf = json.load(open(os.path.join(dd, "parts_full.json")))
     work0 = os.path.join(REPO, ".cache", "fea", did); centres = cuff_screw_centres(dd); t_all = time.time()
@@ -529,7 +559,11 @@ def judge_design(dd, only=None, fast=False, threads=2):
     for pre, kind in PARTS:
         step = os.path.join(dd, "step", pre + ".step")
         if not os.path.exists(step) or (only and pre not in only): continue
+        note = None
+        if kind == "bottom" and centres:
+            step, note = cut_beyond_support(step, centres, os.path.join(work0, "BOTTOM_cut.step"))
         out["parts"][pre] = part_fea(step, pre, kind, material_for(pf, pre), work0, fast, centres, threads)
+        if note: out["parts"][pre]["geometry_note"] = note
     if not out["parts"]: raise RuntimeError("no parts analysed")
     out["seconds"] = round(time.time() - t_all, 1)
     return out
@@ -540,64 +574,65 @@ def _cq_step(shape, path):
     cq.exporters.export(cq.Workplane().add(shape), path); return path
 
 def validate(threads=2):
+    """the production chain (wall_thickness -> local-size tet10 at k = 2 and 3 -> six unit cases through the distributing
+    load coupling -> superposition -> worst-direction SVD) on two analytic cases"""
     import cadquery as cq
     work = os.path.join(REPO, ".cache", "fea", "_validate"); os.makedirs(work, exist_ok=True); mat = MAT["Ti-6Al-4V"]; E, nu = mat["E"], mat["nu"]
     rows = []
-    # 1) cantilever 100 x 10 x 3 (Ti): fixed end face (distributing coupling, ref fixed), end moment / tip force / torque
+    def add(case, k, n, fe, an, sec):
+        rows.append(dict(case=case, k=k, nodes=n, fe=round(fe, 6), analytic=round(an, 6), err=round(fe / an - 1, 4), ccx_s=round(sec, 1)))
+    # 1) cantilever 100 x 10 x 3 (Ti), encastre at x = 0, distributing coupling on the end face x = L (as the load hubs)
     L, b, t = 100.0, 10.0, 3.0; step = _cq_step(cq.Solid.makeBox(L, b, t, cq.Vector(0, -b / 2, -t / 2)), os.path.join(work, "beam.step"))
     I = b * t ** 3 / 12; G = E / (2 * (1 + nu))
-    # torsion of a b x t rectangle (Timoshenko & Goodier series): J, tau_max
-    ser = lambda f: sum(f(n) for n in range(1, 61, 2))
+    ser = lambda f: sum(f(n) for n in range(1, 61, 2))                                   # Timoshenko & Goodier, b x t rectangle
     J = (1 / 3) * b * t ** 3 * (1 - (192 / math.pi ** 5) * (t / b) * ser(lambda n: math.tanh(n * math.pi * b / (2 * t)) / n ** 5))
     k_tau = 1 - (8 / math.pi ** 2) * ser(lambda n: 1 / (n ** 2 * math.cosh(n * math.pi * b / (2 * t))))
-    for h in (t / 2, t / 3):
-        X, T = mesh_step(step, h); el, fc = boundary_faces(T)
+    wall = wall_thickness(step); rows.append(dict(case="beam: thinnest wall (p10) from the ray march", k=None, nodes=None, fe=round(wall[0], 4), analytic=t, err=round(wall[0] / t - 1, 4), ccx_s=None))
+    M, F = 1.0e4, 50.0; s_m_an = 6 * M / (b * t ** 2); tau_an = M * t * k_tau / J
+    for k in (2, 3):
+        X, T = mesh_step(step, None, local=(wall[2], wall[3], k, *H_RANGE[k])); el, fc = boundary_faces(T)
         bn = np.zeros(len(X), bool); bn[np.unique(T[el][np.arange(len(el))[:, None], np.c_[FACES, FACE_MID][fc]])] = True
-        end0, end1 = bn & (X[:, 0] < 1e-6), bn & (X[:, 0] > L - 1e-6)
-        cpl = {"LD": (len(X) + 1, np.array([L, 0, 0]), coupling_faces(T, el, fc, end1))}
-        M, F, Tq = 1.0e4, 50.0, 1.0e4; rid = len(X) + 1
-        wd = os.path.join(work, f"beam_h{h:.2f}"); os.makedirs(wd, exist_ok=True)
-        write_inp(os.path.join(wd, "v.inp"), X, T, mat, cpl, [[(rid, 5, M)], [(rid, 3, F)], [(rid, 4, Tq)]], np.nonzero(end0)[0])
-        sec = run_ccx(wd, "v", threads); R = read_frd(os.path.join(wd, "v.frd"), len(X))
-        mid = (np.abs(X[:, 0] - L / 2) < 0.6 * h) & (np.abs(X[:, 1]) < b / 2 - 1.0)
-        top = mid & (X[:, 2] > t / 2 - 1e-6)
-        s_m = float(np.mean(np.abs(R[0][1][top, 0]))); s_m_an = 6 * M / (b * t ** 2)
-        tip = end1; th_m = float(np.mean(rigid_fit(X[tip], R[0][0][tip])[1][1])); th_an = M * L / (E * I)
-        s_f = float(np.mean(np.abs(R[1][1][top, 0]))); s_f_an = 6 * F * (L / 2) / (b * t ** 2)
-        w_f = float(np.mean(R[1][0][tip, 2])); w_an = F * L ** 3 / (3 * E * I) + F * L / (5 / 6 * G * b * t)
-        # torsion: max shear at mid-length, middle of the long side (y = 0, z = +-t/2)
-        sideM = (np.abs(X[:, 0] - L / 2) < 0.6 * h) & (np.abs(X[:, 1]) < 0.6 * h) & (np.abs(np.abs(X[:, 2]) - t / 2) < 1e-6)
-        tau = float(np.mean(vm(R[2][1][sideM]) / math.sqrt(3))); tau_an = Tq * t * k_tau / J
-        phi = float(rigid_fit(X[tip], R[2][0][tip])[1][0]); phi_an = Tq * L / (G * J)
-        for case, fe, an in (("beam end moment 10 N.m: bending stress mid-span", s_m, s_m_an), ("beam end moment: tip rotation (rad)", th_m, th_an),
-                             ("beam tip force 50 N: bending stress mid-span", s_f, s_f_an), ("beam tip force: tip deflection (mm, + shear)", w_f, w_an),
-                             ("beam torque 10 N.m: max shear mid-span (warping free ends)", tau, tau_an), ("beam torque: twist (rad)", phi, phi_an)):
-            rows.append(dict(case=case, h=round(h, 3), nodes=len(X), fe=round(fe, 5), analytic=round(an, 5), err=round(fe / an - 1, 4), ccx_s=round(sec, 1)))
+        end0, end1 = bn & (X[:, 0] < 1e-6), bn & (X[:, 0] > L - 1e-6); a_, e1, e2 = frame_of(np.array([1.0, 0, 0]))
+        P = dict(X=X, T=T, ld_sel=end1, fx_sel=end0, ld_ref=np.array([L, 0, 0.0]), ef=coupling_faces(T, el, fc, end1), B=np.array([a_, e1, e2]),
+                 bcz=np.zeros(len(X), bool), ldz=np.zeros(len(X), bool), supz=np.zeros(len(X), bool), vol_mm3=L * b * t, com=np.array([L / 2, 0, 0]))
+        D, sec = unit_data(P, mat, os.path.join(work, f"beam_k{k}"), threads)
+        SM = np.einsum("knc,kj->ncj", D["S"][:3], D["B"]) / UNIT_M; UM = np.einsum("knc,kj->ncj", D["U"][:3], D["B"]) / UNIT_M   # per N.mm about x, y, z
+        UFh = np.einsum("knc,kj->ncj", D["U"][3:], D["B"]) / UNIT_F; SFh = np.einsum("knc,kj->ncj", D["S"][3:], D["B"]) / UNIT_F
+        mid = np.abs(X[:, 0] - L / 2) < 0.75; top = mid & (np.abs(X[:, 1]) < b / 2 - 1.0) & (X[:, 2] > t / 2 - 1e-6)
+        side = mid & (np.abs(X[:, 1]) < 0.75) & (np.abs(np.abs(X[:, 2]) - t / 2) < 1e-6)
+        add("beam end moment 10 N.m (weak axis): bending stress mid-span", k, len(X), float(np.mean(np.abs(SM[top, 0, 1]))) * M, s_m_an, sec)
+        add("beam end moment: tip rotation (rad)", k, len(X), float(rigid_fit(X[end1], UM[end1, :, 1])[1][1]) * M, M * L / (E * I), sec)
+        add("beam tip force 50 N: bending stress mid-span", k, len(X), float(np.mean(np.abs(SFh[top, 0, 2]))) * F, 6 * F * (L / 2) / (b * t ** 2), sec)
+        add("beam tip force: tip deflection (mm, Timoshenko)", k, len(X), float(np.mean(UFh[end1, 2, 2])) * F, F * L ** 3 / (3 * E * I) + F * L / (5 / 6 * G * b * t), sec)
+        add("beam torque 10 N.m: max shear mid-span (Saint-Venant)", k, len(X), float(np.mean(vm(SM[side, :, 0]) / math.sqrt(3))) * M, tau_an, sec)
+        add("beam torque: twist (rad, warping held at the root)", k, len(X), float(rigid_fit(X[end1], UM[end1, :, 0])[1][0]) * M, M * L / (G * J), sec)
+        LM = np.einsum("ic,ncj->nij", _L, SM); d1 = M * np.linalg.svd(LM, compute_uv=False)[:, 0]
+        add("beam 10 N.m WORST direction (judge's SVD): von Mises mid-span", k, len(X), float(np.max(d1[mid])), max(s_m_an, math.sqrt(3) * tau_an), sec)
     # 2) thick-walled ring (hub): ri 6, ro 11.5, 4 long, internal pressure 100 MPa, symmetry plane at z = 0 (= an 8 mm ring)
     ri, ro, H, p = 6.0, 11.5, 4.0, 100.0
-    step = _cq_step(cq.Solid.makeCylinder(ro, H).cut(cq.Solid.makeCylinder(ri, H)), os.path.join(work, "ring.step"))
-    for h in ((ro - ri) / 2, (ro - ri) / 3):
-        X, T = mesh_step(step, h); el, fc = boundary_faces(T); corners = T[el][np.arange(len(el))[:, None], FACES[fc]]
+    step = _cq_step(cq.Solid.makeCylinder(ro, H).cut(cq.Solid.makeCylinder(ri, H)), os.path.join(work, "ring.step")); wall = wall_thickness(step)
+    for k in (2, 3):
+        X, T = mesh_step(step, None, local=(wall[2], wall[3], k, *H_RANGE[k])); el, fc = boundary_faces(T); corners = T[el][np.arange(len(el))[:, None], FACES[fc]]
         r_ = np.linalg.norm(X[:, :2], axis=1); bore = (np.abs(r_[corners] - ri) < 1e-3).all(1)
         dl = "*DLOAD\n" + "".join(f"{e + 1},P{f_ + 1},{p:.3f}\n" for e, f_ in zip(el[bore], fc[bore]))
         bot = np.nonzero(np.abs(X[:, 2]) < 1e-6)[0]; ix = bot[np.argmin(np.abs(X[bot, 1]) + np.abs(X[bot, 0] - ro))]; iy = bot[np.argmin(np.abs(X[bot, 0]) + np.abs(X[bot, 1] - ro))]
         ix2 = bot[np.argmin(np.abs(X[bot, 1]) + np.abs(X[bot, 0] + ro))]
         bc = "*BOUNDARY\n" + "".join(f"{i + 1},3,3\n" for i in bot) + f"{ix + 1},2,2\n{ix2 + 1},2,2\n{iy + 1},1,1\n"
-        wd = os.path.join(work, f"ring_h{h:.2f}"); os.makedirs(wd, exist_ok=True)
+        wd = os.path.join(work, f"ring_k{k}"); os.makedirs(wd, exist_ok=True)
         write_inp(os.path.join(wd, "v.inp"), X, T, mat, {}, [dl], None, extra=bc)
         sec = run_ccx(wd, "v", threads); U, S = read_frd(os.path.join(wd, "v.frd"), len(X))[0]
         inner = np.abs(r_ - ri) < 1e-3; outer = np.abs(r_ - ro) < 1e-3
         st_an = p * (ro ** 2 + ri ** 2) / (ro ** 2 - ri ** 2); vm_an = math.sqrt(st_an ** 2 + p ** 2 + st_an * p)
-        ur_an = ri / E * (st_an + nu * p); ur_o_an = ro / E * (2 * p * ri ** 2 / (ro ** 2 - ri ** 2))
         ur = np.einsum("ij,ij->i", U[inner][:, :2], X[inner][:, :2] / ri); ur_o = np.einsum("ij,ij->i", U[outer][:, :2], X[outer][:, :2] / ro)
-        for case, fe, an in (("ring 100 MPa: von Mises at the bore", float(np.mean(vm(S[inner]))), vm_an), ("ring: hoop stress at the outer wall", float(np.mean(
-                [np.array([-y, x, 0]) @ np.array([[s[0], s[3], s[5]], [s[3], s[1], s[4]], [s[5], s[4], s[2]]]) @ np.array([-y, x, 0]) / ro ** 2 for (x, y, _), s in zip(X[outer], S[outer])])), 2 * p * ri ** 2 / (ro ** 2 - ri ** 2)),
-                             ("ring: radial displacement at the bore (mm)", float(np.mean(ur)), ur_an), ("ring: radial displacement outside (mm)", float(np.mean(ur_o)), ur_o_an)):
-            rows.append(dict(case=case, h=round(h, 3), nodes=len(X), fe=round(fe, 6), analytic=round(an, 6), err=round(fe / an - 1, 4), ccx_s=round(sec, 1)))
-    ok = all(abs(r["err"]) <= 0.03 for r in rows if r["h"] in (round(1.0, 3), round((ro - ri) / 3, 3)))
-    out = dict(version=VERSION, rows=rows, finer_mesh_all_within_3pct=ok)
+        hoop_o = np.mean([np.array([-y, x, 0]) @ np.array([[s_[0], s_[3], s_[5]], [s_[3], s_[1], s_[4]], [s_[5], s_[4], s_[2]]]) @ np.array([-y, x, 0]) / ro ** 2 for (x, y, _), s_ in zip(X[outer], S[outer])])
+        add("ring 100 MPa: von Mises at the bore (Lame)", k, len(X), float(np.mean(vm(S[inner]))), vm_an, sec)
+        add("ring: hoop stress at the outer wall", k, len(X), float(hoop_o), 2 * p * ri ** 2 / (ro ** 2 - ri ** 2), sec)
+        add("ring: radial displacement at the bore (mm)", k, len(X), float(np.mean(ur)), ri / E * (st_an + nu * p), sec)
+        add("ring: radial displacement outside (mm)", k, len(X), float(np.mean(ur_o)), ro / E * (2 * p * ri ** 2 / (ro ** 2 - ri ** 2)), sec)
+    fine = [r for r in rows if r["k"] == 3]
+    out = dict(version=VERSION, rows=rows, fine_mesh_max_abs_err=max(abs(r["err"]) for r in fine), fine_mesh_all_within_3pct=all(abs(r["err"]) <= 0.03 for r in fine))
     json.dump(out, open(os.path.join(REPO, "judge", "fea_validation.json"), "w"), indent=1)
-    for r in rows: print(f"  {r['case']:<62} h {r['h']:<6} FE {r['fe']:<12} analytic {r['analytic']:<12} err {100 * r['err']:+.2f} %")
+    for r in rows: print(f"  {r['case']:<66} k {str(r['k']):<4} FE {r['fe']:<12} analytic {r['analytic']:<12} err {100 * r['err']:+.2f} %")
     return out
 
 if __name__ == "__main__":
