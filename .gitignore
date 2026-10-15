@@ -26,3 +26,7 @@ data/raw/private/
 .claude/worktrees/
 pipeline/redteam/results/jam_ws.npz
 pipeline/redteam/results/pressure_base_frames.json
+# CAD + render pipeline dry run, 2026-10-15 (rehearsal builds, ~370 MB, regenerable from band_cad/inputs/r16_n3_*.json)
+pipeline/conformal/fair_cad/out_r16_n3_*/
+pipeline/full-exo/designs/band_r16_n3_*/
+pipeline/full-exo/designs/cad_r16_n3_*/
