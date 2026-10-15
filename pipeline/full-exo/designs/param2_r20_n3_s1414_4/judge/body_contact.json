@@ -1,23 +1,23 @@
 {
- "step": 6,
+ "step": 2,
  "tol_mm": 0.5,
- "frames_checked": 228,
- "seconds": 115,
+ "frames_checked": 671,
+ "seconds": 280,
  "jobs": 4,
  "body_model": "rig",
  "inside": "integer winding number (grid + segment crossings), depth = exact distance to the nearest surface (judge/sdist.py)",
  "parts": {
-  "H|M4x6 ISO 10642 countersunk (upper cuff)": {
+  "H|M4x6 ISO 10642 countersunk (upper cuff), polished": {
    "owner": "user",
-   "max_depth": 17.59,
-   "frames": 8,
+   "max_depth": 17.67,
+   "frames": 25,
    "worst": [
     "Wash opposite shoulder",
-    78,
+    80,
     [
      145,
      46,
-     -70,
+     -69,
      119,
      0
     ]
@@ -27,25 +27,35 @@
    "attributable_worst": null,
    "attributable_kind": null
   },
-  "H|UPPER ARM CUFF (conformal G2 shell, AlSi10Mg bead blasted)": {
+  "H|UPPER ARM CUFF (lines and arcs: flat land + inner R arc + outer arc, extruded; AlSi10Mg bead blasted)": {
    "owner": "user",
-   "max_depth": 19.83,
-   "frames": 14,
+   "max_depth": 24.88,
+   "frames": 176,
    "worst": [
     "Wash opposite shoulder",
-    78,
+    40,
     [
-     145,
-     46,
-     -70,
-     119,
+     112,
+     28,
+     -74,
+     110,
      0
     ]
    ],
-   "attributable_depth": 0.0,
-   "attributable_frames": 0,
-   "attributable_worst": null,
-   "attributable_kind": null
+   "attributable_depth": 23.41,
+   "attributable_frames": 141,
+   "attributable_worst": [
+    "Drink from a cup",
+    72,
+    [
+     95,
+     69,
+     -48,
+     132,
+     0
+    ]
+   ],
+   "attributable_kind": "other region, own skin visible"
   },
   "H|CirPattern1[13]": {
    "owner": "user",
@@ -99,29 +109,29 @@
   },
   "H|Revolve1[3]": {
    "owner": "user",
-   "max_depth": 0.51,
-   "frames": 2,
+   "max_depth": 0.62,
+   "frames": 6,
    "worst": [
-    "Wave",
-    42,
+    "Comb hair",
+    172,
     [
-     15,
-     91,
-     -59,
-     94,
+     63,
+     100,
+     -56,
+     86,
      0
     ]
    ],
-   "attributable_depth": 0.51,
-   "attributable_frames": 2,
+   "attributable_depth": 0.62,
+   "attributable_frames": 6,
    "attributable_worst": [
-    "Wave",
-    42,
+    "Comb hair",
+    172,
     [
-     15,
-     91,
-     -59,
-     94,
+     63,
+     100,
+     -56,
+     86,
      0
     ]
    ],
@@ -229,29 +239,29 @@
   },
   "H|Revolve1[1]": {
    "owner": "user",
-   "max_depth": 0.99,
-   "frames": 132,
+   "max_depth": 1.06,
+   "frames": 380,
    "worst": [
-    "Wave",
-    42,
+    "Comb hair",
+    172,
     [
-     15,
-     91,
-     -59,
-     94,
+     63,
+     100,
+     -56,
+     86,
      0
     ]
    ],
-   "attributable_depth": 0.99,
-   "attributable_frames": 132,
+   "attributable_depth": 1.06,
+   "attributable_frames": 380,
    "attributable_worst": [
-    "Wave",
-    42,
+    "Comb hair",
+    172,
     [
-     15,
-     91,
-     -59,
-     94,
+     63,
+     100,
+     -56,
+     86,
      0
     ]
    ],
@@ -329,29 +339,29 @@
   },
   "F|Hex socket head countersunk screw grade C M4x0.7 x 8": {
    "owner": "user",
-   "max_depth": 8.33,
-   "frames": 228,
+   "max_depth": 8.37,
+   "frames": 671,
    "worst": [
-    "Wave",
-    42,
+    "Comb hair",
+    172,
     [
-     15,
-     91,
-     -59,
-     94,
+     63,
+     100,
+     -56,
+     86,
      0
     ]
    ],
-   "attributable_depth": 8.33,
-   "attributable_frames": 228,
+   "attributable_depth": 8.37,
+   "attributable_frames": 671,
    "attributable_worst": [
-    "Wave",
-    42,
+    "Comb hair",
+    172,
     [
-     15,
-     91,
-     -59,
-     94,
+     63,
+     100,
+     -56,
+     86,
      0
     ]
    ],
@@ -359,29 +369,29 @@
   },
   "H|IGUS THRUST WASHER, 30mm ID, 39mm OD, 1.5mm T, IGLIDE J": {
    "owner": "user",
-   "max_depth": 2.75,
-   "frames": 220,
+   "max_depth": 2.78,
+   "frames": 648,
    "worst": [
     "Comb hair",
-    84,
+    38,
     [
-     63,
-     133,
-     -60,
-     115,
+     53,
+     92,
+     -54,
+     106,
      0
     ]
    ],
-   "attributable_depth": 2.75,
-   "attributable_frames": 220,
+   "attributable_depth": 2.78,
+   "attributable_frames": 648,
    "attributable_worst": [
     "Comb hair",
-    84,
+    38,
     [
-     63,
-     133,
-     -60,
-     115,
+     53,
+     92,
+     -54,
+     106,
      0
     ]
    ],
@@ -389,29 +399,29 @@
   },
   "F|MIDDLE": {
    "owner": "user",
-   "max_depth": 5.76,
-   "frames": 228,
+   "max_depth": 5.77,
+   "frames": 671,
    "worst": [
     "Comb hair",
-    150,
+    68,
     [
-     78,
-     143,
-     -67,
-     118,
+     60,
+     121,
+     -59,
+     119,
      0
     ]
    ],
-   "attributable_depth": 5.76,
-   "attributable_frames": 228,
+   "attributable_depth": 5.77,
+   "attributable_frames": 671,
    "attributable_worst": [
     "Comb hair",
-    150,
+    68,
     [
-     78,
-     143,
-     -67,
-     118,
+     60,
+     121,
+     -59,
+     119,
      0
     ]
    ],
@@ -430,7 +440,7 @@
   "F|FOREARM CUFF": {
    "owner": "user",
    "max_depth": 24.87,
-   "frames": 228,
+   "frames": 671,
    "worst": [
     "Wash opposite shoulder",
     150,
@@ -443,7 +453,7 @@
     ]
    ],
    "attributable_depth": 24.0,
-   "attributable_frames": 228,
+   "attributable_frames": 671,
    "attributable_worst": [
     "Wash opposite shoulder",
     42,
@@ -456,36 +466,6 @@
     ]
    ],
    "attributable_kind": "other region, beyond the buried own skin"
-  },
-  "H|BOTTOM (user's bar, cut at s 255, 2x M3 countersunk for the arm-end tongue)": {
-   "owner": "user",
-   "max_depth": 17.59,
-   "frames": 228,
-   "worst": [
-    "Wash opposite shoulder",
-    126,
-    [
-     145,
-     46,
-     -69,
-     119,
-     0
-    ]
-   ],
-   "attributable_depth": 4.71,
-   "attributable_frames": 228,
-   "attributable_worst": [
-    "Comb hair",
-    162,
-    [
-     76,
-     136,
-     -65,
-     113,
-     0
-    ]
-   ],
-   "attributable_kind": "own limb"
   },
   "l2|J3 cap O20 G2 dome, threaded (Ti-6Al-4V)": {
    "owner": "ours",
@@ -667,15 +647,35 @@
    "attributable_worst": null,
    "attributable_kind": null
   },
-  "H|D6-04 arm end: J3 pad + pin + S-strap, twist, tongue in BOTTOM's channel (Ti-6Al-4V)": {
+  "H|D6-04 BOTTOM + arm end, one 5-axis part (user's bar cut at s 255, strap fused into its channel; 7075-T6)": {
    "owner": "ours",
-   "max_depth": 0.0,
-   "frames": 0,
-   "worst": null,
-   "attributable_depth": 0.0,
-   "attributable_frames": 0,
-   "attributable_worst": null,
-   "attributable_kind": null
+   "max_depth": 17.62,
+   "frames": 671,
+   "worst": [
+    "Wash opposite shoulder",
+    80,
+    [
+     145,
+     46,
+     -69,
+     119,
+     0
+    ]
+   ],
+   "attributable_depth": 4.96,
+   "attributable_frames": 671,
+   "attributable_worst": [
+    "Comb hair",
+    164,
+    [
+     74,
+     131,
+     -64,
+     109,
+     0
+    ]
+   ],
+   "attributable_kind": "own limb"
   },
   "S|D6-01 scapula base: J1 hub + tab, 2x M4 counterbored (Ti-6Al-4V)": {
    "owner": "ours",
@@ -708,16 +708,16 @@
    "attributable_kind": null
   }
  },
- "worst_part": "F|FOREARM CUFF",
- "max_depth": 24.87,
- "max_depth_ours": 0.0,
- "max_depth_user": 24.87,
+ "worst_part": "H|UPPER ARM CUFF (lines and arcs: flat land + inner R arc + outer arc, extruded; AlSi10Mg bead blasted)",
+ "max_depth": 24.88,
+ "max_depth_ours": 17.62,
+ "max_depth_user": 24.88,
  "attributable": {
   "rule": "depth beyond the rig's own self-intersection (judge/body_regions.py): in full inside the part's own limb, elsewhere only below its own limb's skin",
   "max_depth": 24.0,
   "worst_part": "F|FOREARM CUFF",
-  "max_depth_ours": 0.0,
-  "worst_part_ours": "l2|J3 cap O20 G2 dome, threaded (Ti-6Al-4V)",
+  "max_depth_ours": 4.96,
+  "worst_part_ours": "H|D6-04 BOTTOM + arm end, one 5-axis part (user's bar cut at s 255, strap fused into its channel; 7075-T6)",
   "max_depth_user": 24.0,
   "worst_part_user": "F|FOREARM CUFF"
  }

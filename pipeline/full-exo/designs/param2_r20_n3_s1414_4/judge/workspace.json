@@ -1,21 +1,21 @@
 {
- "poses": 120,
- "step": 12,
- "share_passing": 0.7417,
+ "poses": 358,
+ "step": 4,
+ "share_passing": 0.8017,
  "static_fits_left_to_R6": [],
  "arm_near_mm": 110.0,
  "fails": {
-  "chain_does_not_close": 0.0333,
-  "body_contact": 0.1083,
-  "part_interference": 0.175
+  "chain_does_not_close": 0.081,
+  "body_contact": 0.1173,
+  "part_interference": 0.067
  },
- "evaluator_agreement": 0.867,
+ "evaluator_agreement": 0.799,
  "skip_groups": [
   "F"
  ],
  "tol_body_mm": 0.5,
  "tol_parts_mm": 0.15,
- "seconds": 47,
+ "seconds": 134,
  "per_pose": [
   {
    "k": 0,
@@ -37,7 +37,7 @@
    "k": 1,
    "p": [
     -90.0,
-    15.0,
+    0.0,
     135.0
    ],
    "eval_feasible": true,
@@ -53,40 +53,40 @@
    "k": 2,
    "p": [
     -90.0,
-    45.0,
+    15.0,
     75.0
    ],
-   "eval_feasible": false,
+   "eval_feasible": true,
    "closes": true,
-   "body_mm": 4.58,
-   "body_part": "l1|D6-02 link 1: bent bar 8x3 + J1/J2 pads + integral O7 pins (Ti-6Al-4V)",
-   "parts_mm": 1.49,
-   "parts_pair": "D6-03 link 2: bent bar 8x3 + J2/J3 hubs  IN D6-04 arm end: J3 pad + pin + S-strap, t",
-   "pairs": {
-    "D6-03 link 2: bent bar 8x3 + J2/J3 hubs  IN D6-04 arm end: J3 pad + pin + S-strap, t": 1.49
-   },
-   "parts_motion_mm": 1.49
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
   },
   {
    "k": 3,
    "p": [
     -90.0,
-    60.0,
+    15.0,
     135.0
    ],
-   "eval_feasible": false,
-   "closes": false,
-   "body_mm": null,
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
    "body_part": null,
-   "parts_mm": null,
-   "parts_pair": null
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
   },
   {
    "k": 4,
    "p": [
-    -75.0,
-    15.0,
-    60.0
+    -90.0,
+    30.0,
+    75.0
    ],
    "eval_feasible": true,
    "closes": true,
@@ -100,11 +100,11 @@
   {
    "k": 5,
    "p": [
-    -75.0,
+    -90.0,
     30.0,
-    120.0
+    135.0
    ],
-   "eval_feasible": true,
+   "eval_feasible": false,
    "closes": true,
    "body_mm": 0.0,
    "body_part": null,
@@ -116,77 +116,71 @@
   {
    "k": 6,
    "p": [
-    -75.0,
-    60.0,
-    60.0
+    -90.0,
+    45.0,
+    75.0
    ],
    "eval_feasible": false,
    "closes": true,
-   "body_mm": 24.13,
+   "body_mm": 4.58,
    "body_part": "l1|D6-02 link 1: bent bar 8x3 + J1/J2 pads + integral O7 pins (Ti-6Al-4V)",
-   "parts_mm": 1.53,
-   "parts_pair": "D6-03 link 2: bent bar 8x3 + J2/J3 hubs  IN D6-04 arm end: J3 pad + pin + S-strap, t",
-   "pairs": {
-    "D6-03 link 2: bent bar 8x3 + J2/J3 hubs  IN D6-04 arm end: J3 pad + pin + S-strap, t": 1.53
-   },
-   "parts_motion_mm": 1.53
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
   },
   {
    "k": 7,
    "p": [
-    -60.0,
-    0.0,
-    105.0
+    -90.0,
+    45.0,
+    135.0
    ],
-   "eval_feasible": true,
-   "closes": true,
-   "body_mm": 0.0,
+   "eval_feasible": false,
+   "closes": false,
+   "body_mm": null,
    "body_part": null,
-   "parts_mm": 0.0,
-   "parts_pair": null,
-   "pairs": {},
-   "parts_motion_mm": 0.0
+   "parts_mm": null,
+   "parts_pair": null
   },
   {
    "k": 8,
    "p": [
-    -60.0,
-    30.0,
-    45.0
+    -90.0,
+    60.0,
+    75.0
    ],
    "eval_feasible": false,
    "closes": true,
-   "body_mm": 0.0,
-   "body_part": null,
-   "parts_mm": 0.23,
-   "parts_pair": "D6-03 link 2: bent bar 8x3 + J2/J3 hubs  IN D6-04 arm end: J3 pad + pin + S-strap, t",
+   "body_mm": 24.27,
+   "body_part": "l1|D6-02 link 1: bent bar 8x3 + J1/J2 pads + integral O7 pins (Ti-6Al-4V)",
+   "parts_mm": 1.49,
+   "parts_pair": "D6-03 link 2: bent bar 8x3 + J2/J3 hubs  IN D6-04 BOTTOM + arm end, one 5-axis part ",
    "pairs": {
-    "D6-03 link 2: bent bar 8x3 + J2/J3 hubs  IN D6-04 arm end: J3 pad + pin + S-strap, t": 0.23
+    "D6-03 link 2: bent bar 8x3 + J2/J3 hubs  IN D6-04 BOTTOM + arm end, one 5-axis part ": 1.49
    },
-   "parts_motion_mm": 0.23
+   "parts_motion_mm": 1.49
   },
   {
    "k": 9,
    "p": [
-    -60.0,
-    45.0,
-    105.0
+    -90.0,
+    60.0,
+    135.0
    ],
    "eval_feasible": false,
-   "closes": true,
-   "body_mm": 0.0,
+   "closes": false,
+   "body_mm": null,
    "body_part": null,
-   "parts_mm": 0.0,
-   "parts_pair": null,
-   "pairs": {},
-   "parts_motion_mm": 0.0
+   "parts_mm": null,
+   "parts_pair": null
   },
   {
    "k": 10,
    "p": [
-    -45.0,
+    -75.0,
     0.0,
-    30.0
+    60.0
    ],
    "eval_feasible": true,
    "closes": true,
@@ -200,6 +194,356 @@
   {
    "k": 11,
    "p": [
+    -75.0,
+    0.0,
+    120.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 12,
+   "p": [
+    -75.0,
+    15.0,
+    60.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 13,
+   "p": [
+    -75.0,
+    15.0,
+    120.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 14,
+   "p": [
+    -75.0,
+    30.0,
+    60.0
+   ],
+   "eval_feasible": false,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 15,
+   "p": [
+    -75.0,
+    30.0,
+    120.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 16,
+   "p": [
+    -75.0,
+    45.0,
+    60.0
+   ],
+   "eval_feasible": false,
+   "closes": true,
+   "body_mm": 5.53,
+   "body_part": "l1|D6-02 link 1: bent bar 8x3 + J1/J2 pads + integral O7 pins (Ti-6Al-4V)",
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 17,
+   "p": [
+    -75.0,
+    45.0,
+    120.0
+   ],
+   "eval_feasible": false,
+   "closes": false,
+   "body_mm": null,
+   "body_part": null,
+   "parts_mm": null,
+   "parts_pair": null
+  },
+  {
+   "k": 18,
+   "p": [
+    -75.0,
+    60.0,
+    60.0
+   ],
+   "eval_feasible": false,
+   "closes": true,
+   "body_mm": 24.13,
+   "body_part": "l1|D6-02 link 1: bent bar 8x3 + J1/J2 pads + integral O7 pins (Ti-6Al-4V)",
+   "parts_mm": 1.5,
+   "parts_pair": "D6-03 link 2: bent bar 8x3 + J2/J3 hubs  IN D6-04 BOTTOM + arm end, one 5-axis part ",
+   "pairs": {
+    "D6-03 link 2: bent bar 8x3 + J2/J3 hubs  IN D6-04 BOTTOM + arm end, one 5-axis part ": 1.5
+   },
+   "parts_motion_mm": 1.5
+  },
+  {
+   "k": 19,
+   "p": [
+    -75.0,
+    60.0,
+    120.0
+   ],
+   "eval_feasible": false,
+   "closes": false,
+   "body_mm": null,
+   "body_part": null,
+   "parts_mm": null,
+   "parts_pair": null
+  },
+  {
+   "k": 20,
+   "p": [
+    -60.0,
+    0.0,
+    45.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 21,
+   "p": [
+    -60.0,
+    0.0,
+    105.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 22,
+   "p": [
+    -60.0,
+    15.0,
+    45.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 23,
+   "p": [
+    -60.0,
+    15.0,
+    105.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 24,
+   "p": [
+    -60.0,
+    30.0,
+    45.0
+   ],
+   "eval_feasible": false,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 25,
+   "p": [
+    -60.0,
+    30.0,
+    105.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 26,
+   "p": [
+    -60.0,
+    45.0,
+    45.0
+   ],
+   "eval_feasible": false,
+   "closes": true,
+   "body_mm": 4.34,
+   "body_part": "l1|D6-02 link 1: bent bar 8x3 + J1/J2 pads + integral O7 pins (Ti-6Al-4V)",
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 27,
+   "p": [
+    -60.0,
+    45.0,
+    105.0
+   ],
+   "eval_feasible": false,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 28,
+   "p": [
+    -60.0,
+    60.0,
+    45.0
+   ],
+   "eval_feasible": false,
+   "closes": true,
+   "body_mm": 21.38,
+   "body_part": "l1|D6-02 link 1: bent bar 8x3 + J1/J2 pads + integral O7 pins (Ti-6Al-4V)",
+   "parts_mm": 1.49,
+   "parts_pair": "D6-03 link 2: bent bar 8x3 + J2/J3 hubs  IN D6-04 BOTTOM + arm end, one 5-axis part ",
+   "pairs": {
+    "D6-03 link 2: bent bar 8x3 + J2/J3 hubs  IN D6-04 BOTTOM + arm end, one 5-axis part ": 1.49
+   },
+   "parts_motion_mm": 1.49
+  },
+  {
+   "k": 29,
+   "p": [
+    -60.0,
+    60.0,
+    105.0
+   ],
+   "eval_feasible": false,
+   "closes": false,
+   "body_mm": null,
+   "body_part": null,
+   "parts_mm": null,
+   "parts_pair": null
+  },
+  {
+   "k": 30,
+   "p": [
+    -45.0,
+    0.0,
+    30.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 31,
+   "p": [
+    -45.0,
+    0.0,
+    90.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 32,
+   "p": [
+    -45.0,
+    15.0,
+    30.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 33,
+   "p": [
     -45.0,
     15.0,
     90.0
@@ -214,7 +558,39 @@
    "parts_motion_mm": 0.0
   },
   {
-   "k": 12,
+   "k": 34,
+   "p": [
+    -45.0,
+    30.0,
+    30.0
+   ],
+   "eval_feasible": false,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 35,
+   "p": [
+    -45.0,
+    30.0,
+    90.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 36,
    "p": [
     -45.0,
     45.0,
@@ -224,15 +600,47 @@
    "closes": true,
    "body_mm": 1.47,
    "body_part": "l1|D6-02 link 1: bent bar 8x3 + J1/J2 pads + integral O7 pins (Ti-6Al-4V)",
-   "parts_mm": 1.49,
-   "parts_pair": "D6-03 link 2: bent bar 8x3 + J2/J3 hubs  IN D6-04 arm end: J3 pad + pin + S-strap, t",
-   "pairs": {
-    "D6-03 link 2: bent bar 8x3 + J2/J3 hubs  IN D6-04 arm end: J3 pad + pin + S-strap, t": 1.49
-   },
-   "parts_motion_mm": 1.49
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
   },
   {
-   "k": 13,
+   "k": 37,
+   "p": [
+    -45.0,
+    45.0,
+    90.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 38,
+   "p": [
+    -45.0,
+    60.0,
+    30.0
+   ],
+   "eval_feasible": false,
+   "closes": true,
+   "body_mm": 17.11,
+   "body_part": "l1|D6-02 link 1: bent bar 8x3 + J1/J2 pads + integral O7 pins (Ti-6Al-4V)",
+   "parts_mm": 1.5,
+   "parts_pair": "D6-03 link 2: bent bar 8x3 + J2/J3 hubs  IN D6-04 BOTTOM + arm end, one 5-axis part ",
+   "pairs": {
+    "D6-03 link 2: bent bar 8x3 + J2/J3 hubs  IN D6-04 BOTTOM + arm end, one 5-axis part ": 1.5
+   },
+   "parts_motion_mm": 1.5
+  },
+  {
+   "k": 39,
    "p": [
     -45.0,
     60.0,
@@ -248,7 +656,39 @@
    "parts_motion_mm": 0.0
   },
   {
-   "k": 14,
+   "k": 40,
+   "p": [
+    -30.0,
+    0.0,
+    -30.0
+   ],
+   "eval_feasible": false,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 41,
+   "p": [
+    -30.0,
+    0.0,
+    30.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 42,
    "p": [
     -30.0,
     0.0,
@@ -264,7 +704,39 @@
    "parts_motion_mm": 0.0
   },
   {
-   "k": 15,
+   "k": 43,
+   "p": [
+    -30.0,
+    15.0,
+    -15.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 44,
+   "p": [
+    -30.0,
+    15.0,
+    45.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 45,
    "p": [
     -30.0,
     15.0,
@@ -280,7 +752,39 @@
    "parts_motion_mm": 0.0
   },
   {
-   "k": 16,
+   "k": 46,
+   "p": [
+    -30.0,
+    30.0,
+    0.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 47,
+   "p": [
+    -30.0,
+    30.0,
+    60.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 48,
    "p": [
     -30.0,
     30.0,
@@ -296,7 +800,39 @@
    "parts_motion_mm": 0.0
   },
   {
-   "k": 17,
+   "k": 49,
+   "p": [
+    -30.0,
+    45.0,
+    15.0
+   ],
+   "eval_feasible": false,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 50,
+   "p": [
+    -30.0,
+    45.0,
+    75.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 51,
    "p": [
     -30.0,
     60.0,
@@ -306,582 +842,6 @@
    "closes": true,
    "body_mm": 1.71,
    "body_part": "l1|D6-02 link 1: bent bar 8x3 + J1/J2 pads + integral O7 pins (Ti-6Al-4V)",
-   "parts_mm": 1.49,
-   "parts_pair": "D6-03 link 2: bent bar 8x3 + J2/J3 hubs  IN D6-04 arm end: J3 pad + pin + S-strap, t",
-   "pairs": {
-    "D6-03 link 2: bent bar 8x3 + J2/J3 hubs  IN D6-04 arm end: J3 pad + pin + S-strap, t": 1.49
-   },
-   "parts_motion_mm": 1.49
-  },
-  {
-   "k": 18,
-   "p": [
-    -15.0,
-    0.0,
-    -30.0
-   ],
-   "eval_feasible": true,
-   "closes": true,
-   "body_mm": 0.0,
-   "body_part": null,
-   "parts_mm": 0.0,
-   "parts_pair": null,
-   "pairs": {},
-   "parts_motion_mm": 0.0
-  },
-  {
-   "k": 19,
-   "p": [
-    -15.0,
-    15.0,
-    -15.0
-   ],
-   "eval_feasible": true,
-   "closes": true,
-   "body_mm": 0.0,
-   "body_part": null,
-   "parts_mm": 0.0,
-   "parts_pair": null,
-   "pairs": {},
-   "parts_motion_mm": 0.0
-  },
-  {
-   "k": 20,
-   "p": [
-    -15.0,
-    30.0,
-    0.0
-   ],
-   "eval_feasible": true,
-   "closes": true,
-   "body_mm": 0.0,
-   "body_part": null,
-   "parts_mm": 0.0,
-   "parts_pair": null,
-   "pairs": {},
-   "parts_motion_mm": 0.0
-  },
-  {
-   "k": 21,
-   "p": [
-    -15.0,
-    45.0,
-    15.0
-   ],
-   "eval_feasible": false,
-   "closes": true,
-   "body_mm": 0.0,
-   "body_part": null,
-   "parts_mm": 1.01,
-   "parts_pair": "D6-03 link 2: bent bar 8x3 + J2/J3 hubs  IN D6-04 arm end: J3 pad + pin + S-strap, t",
-   "pairs": {
-    "D6-03 link 2: bent bar 8x3 + J2/J3 hubs  IN D6-04 arm end: J3 pad + pin + S-strap, t": 1.01
-   },
-   "parts_motion_mm": 1.01
-  },
-  {
-   "k": 22,
-   "p": [
-    -15.0,
-    60.0,
-    30.0
-   ],
-   "eval_feasible": false,
-   "closes": true,
-   "body_mm": 0.0,
-   "body_part": null,
-   "parts_mm": 1.49,
-   "parts_pair": "D6-03 link 2: bent bar 8x3 + J2/J3 hubs  IN D6-04 arm end: J3 pad + pin + S-strap, t",
-   "pairs": {
-    "D6-03 link 2: bent bar 8x3 + J2/J3 hubs  IN D6-04 arm end: J3 pad + pin + S-strap, t": 1.49
-   },
-   "parts_motion_mm": 1.49
-  },
-  {
-   "k": 23,
-   "p": [
-    -15.0,
-    75.0,
-    45.0
-   ],
-   "eval_feasible": false,
-   "closes": true,
-   "body_mm": 1.84,
-   "body_part": "l1|D6-02 link 1: bent bar 8x3 + J1/J2 pads + integral O7 pins (Ti-6Al-4V)",
-   "parts_mm": 1.49,
-   "parts_pair": "D6-03 link 2: bent bar 8x3 + J2/J3 hubs  IN D6-04 arm end: J3 pad + pin + S-strap, t",
-   "pairs": {
-    "D6-03 link 2: bent bar 8x3 + J2/J3 hubs  IN D6-04 arm end: J3 pad + pin + S-strap, t": 1.49
-   },
-   "parts_motion_mm": 1.49
-  },
-  {
-   "k": 24,
-   "p": [
-    -15.0,
-    90.0,
-    60.0
-   ],
-   "eval_feasible": false,
-   "closes": true,
-   "body_mm": 0.0,
-   "body_part": null,
-   "parts_mm": 1.49,
-   "parts_pair": "D6-03 link 2: bent bar 8x3 + J2/J3 hubs  IN D6-04 arm end: J3 pad + pin + S-strap, t",
-   "pairs": {
-    "D6-03 link 2: bent bar 8x3 + J2/J3 hubs  IN D6-04 arm end: J3 pad + pin + S-strap, t": 1.49
-   },
-   "parts_motion_mm": 1.49
-  },
-  {
-   "k": 25,
-   "p": [
-    0.0,
-    0.0,
-    -30.0
-   ],
-   "eval_feasible": true,
-   "closes": true,
-   "body_mm": 0.0,
-   "body_part": null,
-   "parts_mm": 0.0,
-   "parts_pair": null,
-   "pairs": {},
-   "parts_motion_mm": 0.0
-  },
-  {
-   "k": 26,
-   "p": [
-    0.0,
-    15.0,
-    -15.0
-   ],
-   "eval_feasible": true,
-   "closes": true,
-   "body_mm": 0.0,
-   "body_part": null,
-   "parts_mm": 0.0,
-   "parts_pair": null,
-   "pairs": {},
-   "parts_motion_mm": 0.0
-  },
-  {
-   "k": 27,
-   "p": [
-    0.0,
-    30.0,
-    0.0
-   ],
-   "eval_feasible": true,
-   "closes": true,
-   "body_mm": 0.0,
-   "body_part": null,
-   "parts_mm": 0.0,
-   "parts_pair": null,
-   "pairs": {},
-   "parts_motion_mm": 0.0
-  },
-  {
-   "k": 28,
-   "p": [
-    0.0,
-    45.0,
-    15.0
-   ],
-   "eval_feasible": false,
-   "closes": true,
-   "body_mm": 0.0,
-   "body_part": null,
-   "parts_mm": 0.28,
-   "parts_pair": "D6-03 link 2: bent bar 8x3 + J2/J3 hubs  IN D6-04 arm end: J3 pad + pin + S-strap, t",
-   "pairs": {
-    "D6-03 link 2: bent bar 8x3 + J2/J3 hubs  IN D6-04 arm end: J3 pad + pin + S-strap, t": 0.28
-   },
-   "parts_motion_mm": 0.28
-  },
-  {
-   "k": 29,
-   "p": [
-    0.0,
-    60.0,
-    30.0
-   ],
-   "eval_feasible": false,
-   "closes": true,
-   "body_mm": 0.0,
-   "body_part": null,
-   "parts_mm": 1.17,
-   "parts_pair": "D6-03 link 2: bent bar 8x3 + J2/J3 hubs  IN D6-04 arm end: J3 pad + pin + S-strap, t",
-   "pairs": {
-    "D6-03 link 2: bent bar 8x3 + J2/J3 hubs  IN D6-04 arm end: J3 pad + pin + S-strap, t": 1.17
-   },
-   "parts_motion_mm": 1.17
-  },
-  {
-   "k": 30,
-   "p": [
-    0.0,
-    75.0,
-    45.0
-   ],
-   "eval_feasible": false,
-   "closes": true,
-   "body_mm": 0.0,
-   "body_part": null,
-   "parts_mm": 1.49,
-   "parts_pair": "D6-03 link 2: bent bar 8x3 + J2/J3 hubs  IN D6-04 arm end: J3 pad + pin + S-strap, t",
-   "pairs": {
-    "D6-03 link 2: bent bar 8x3 + J2/J3 hubs  IN D6-04 arm end: J3 pad + pin + S-strap, t": 1.49
-   },
-   "parts_motion_mm": 1.49
-  },
-  {
-   "k": 31,
-   "p": [
-    0.0,
-    90.0,
-    60.0
-   ],
-   "eval_feasible": false,
-   "closes": true,
-   "body_mm": 0.0,
-   "body_part": null,
-   "parts_mm": 1.49,
-   "parts_pair": "D6-03 link 2: bent bar 8x3 + J2/J3 hubs  IN D6-04 arm end: J3 pad + pin + S-strap, t",
-   "pairs": {
-    "D6-03 link 2: bent bar 8x3 + J2/J3 hubs  IN D6-04 arm end: J3 pad + pin + S-strap, t": 1.49
-   },
-   "parts_motion_mm": 1.49
-  },
-  {
-   "k": 32,
-   "p": [
-    0.0,
-    120.0,
-    0.0
-   ],
-   "eval_feasible": false,
-   "closes": true,
-   "body_mm": 24.81,
-   "body_part": "l2|J2 cap O20 G2 dome, threaded (Ti-6Al-4V)",
-   "parts_mm": 0.0,
-   "parts_pair": null,
-   "pairs": {},
-   "parts_motion_mm": 0.0
-  },
-  {
-   "k": 33,
-   "p": [
-    0.0,
-    150.0,
-    0.0
-   ],
-   "eval_feasible": false,
-   "closes": true,
-   "body_mm": 24.94,
-   "body_part": "l2|J2 cap O20 G2 dome, threaded (Ti-6Al-4V)",
-   "parts_mm": 0.0,
-   "parts_pair": null,
-   "pairs": {},
-   "parts_motion_mm": 0.0
-  },
-  {
-   "k": 34,
-   "p": [
-    15.0,
-    0.0,
-    -30.0
-   ],
-   "eval_feasible": true,
-   "closes": true,
-   "body_mm": 0.0,
-   "body_part": null,
-   "parts_mm": 0.0,
-   "parts_pair": null,
-   "pairs": {},
-   "parts_motion_mm": 0.0
-  },
-  {
-   "k": 35,
-   "p": [
-    15.0,
-    15.0,
-    -15.0
-   ],
-   "eval_feasible": true,
-   "closes": true,
-   "body_mm": 0.0,
-   "body_part": null,
-   "parts_mm": 0.0,
-   "parts_pair": null,
-   "pairs": {},
-   "parts_motion_mm": 0.0
-  },
-  {
-   "k": 36,
-   "p": [
-    15.0,
-    30.0,
-    0.0
-   ],
-   "eval_feasible": true,
-   "closes": true,
-   "body_mm": 0.0,
-   "body_part": null,
-   "parts_mm": 0.0,
-   "parts_pair": null,
-   "pairs": {},
-   "parts_motion_mm": 0.0
-  },
-  {
-   "k": 37,
-   "p": [
-    15.0,
-    45.0,
-    15.0
-   ],
-   "eval_feasible": true,
-   "closes": true,
-   "body_mm": 0.0,
-   "body_part": null,
-   "parts_mm": 0.0,
-   "parts_pair": null,
-   "pairs": {},
-   "parts_motion_mm": 0.0
-  },
-  {
-   "k": 38,
-   "p": [
-    15.0,
-    60.0,
-    30.0
-   ],
-   "eval_feasible": false,
-   "closes": true,
-   "body_mm": 0.0,
-   "body_part": null,
-   "parts_mm": 0.65,
-   "parts_pair": "D6-03 link 2: bent bar 8x3 + J2/J3 hubs  IN D6-04 arm end: J3 pad + pin + S-strap, t",
-   "pairs": {
-    "D6-03 link 2: bent bar 8x3 + J2/J3 hubs  IN D6-04 arm end: J3 pad + pin + S-strap, t": 0.65
-   },
-   "parts_motion_mm": 0.65
-  },
-  {
-   "k": 39,
-   "p": [
-    15.0,
-    75.0,
-    45.0
-   ],
-   "eval_feasible": false,
-   "closes": true,
-   "body_mm": 0.0,
-   "body_part": null,
-   "parts_mm": 1.17,
-   "parts_pair": "D6-03 link 2: bent bar 8x3 + J2/J3 hubs  IN D6-04 arm end: J3 pad + pin + S-strap, t",
-   "pairs": {
-    "D6-03 link 2: bent bar 8x3 + J2/J3 hubs  IN D6-04 arm end: J3 pad + pin + S-strap, t": 1.17
-   },
-   "parts_motion_mm": 1.17
-  },
-  {
-   "k": 40,
-   "p": [
-    15.0,
-    90.0,
-    60.0
-   ],
-   "eval_feasible": false,
-   "closes": true,
-   "body_mm": 0.0,
-   "body_part": null,
-   "parts_mm": 1.17,
-   "parts_pair": "D6-03 link 2: bent bar 8x3 + J2/J3 hubs  IN D6-04 arm end: J3 pad + pin + S-strap, t",
-   "pairs": {
-    "D6-03 link 2: bent bar 8x3 + J2/J3 hubs  IN D6-04 arm end: J3 pad + pin + S-strap, t": 1.17
-   },
-   "parts_motion_mm": 1.17
-  },
-  {
-   "k": 41,
-   "p": [
-    15.0,
-    120.0,
-    0.0
-   ],
-   "eval_feasible": false,
-   "closes": true,
-   "body_mm": 24.76,
-   "body_part": "l1|D6-02 link 1: bent bar 8x3 + J1/J2 pads + integral O7 pins (Ti-6Al-4V)",
-   "parts_mm": 1.28,
-   "parts_pair": "D6-03 link 2: bent bar 8x3 + J2/J3 hubs  IN D6-04 arm end: J3 pad + pin + S-strap, t",
-   "pairs": {
-    "D6-03 link 2: bent bar 8x3 + J2/J3 hubs  IN D6-04 arm end: J3 pad + pin + S-strap, t": 1.28
-   },
-   "parts_motion_mm": 1.28
-  },
-  {
-   "k": 42,
-   "p": [
-    15.0,
-    150.0,
-    0.0
-   ],
-   "eval_feasible": false,
-   "closes": true,
-   "body_mm": 24.87,
-   "body_part": "l2|J2 cap O20 G2 dome, threaded (Ti-6Al-4V)",
-   "parts_mm": 0.0,
-   "parts_pair": null,
-   "pairs": {},
-   "parts_motion_mm": 0.0
-  },
-  {
-   "k": 43,
-   "p": [
-    30.0,
-    0.0,
-    -30.0
-   ],
-   "eval_feasible": true,
-   "closes": true,
-   "body_mm": 0.0,
-   "body_part": null,
-   "parts_mm": 0.0,
-   "parts_pair": null,
-   "pairs": {},
-   "parts_motion_mm": 0.0
-  },
-  {
-   "k": 44,
-   "p": [
-    30.0,
-    15.0,
-    -15.0
-   ],
-   "eval_feasible": true,
-   "closes": true,
-   "body_mm": 0.0,
-   "body_part": null,
-   "parts_mm": 0.0,
-   "parts_pair": null,
-   "pairs": {},
-   "parts_motion_mm": 0.0
-  },
-  {
-   "k": 45,
-   "p": [
-    30.0,
-    30.0,
-    0.0
-   ],
-   "eval_feasible": true,
-   "closes": true,
-   "body_mm": 0.0,
-   "body_part": null,
-   "parts_mm": 0.0,
-   "parts_pair": null,
-   "pairs": {},
-   "parts_motion_mm": 0.0
-  },
-  {
-   "k": 46,
-   "p": [
-    30.0,
-    45.0,
-    15.0
-   ],
-   "eval_feasible": true,
-   "closes": true,
-   "body_mm": 0.0,
-   "body_part": null,
-   "parts_mm": 0.0,
-   "parts_pair": null,
-   "pairs": {},
-   "parts_motion_mm": 0.0
-  },
-  {
-   "k": 47,
-   "p": [
-    30.0,
-    60.0,
-    30.0
-   ],
-   "eval_feasible": false,
-   "closes": true,
-   "body_mm": 0.0,
-   "body_part": null,
-   "parts_mm": 0.0,
-   "parts_pair": null,
-   "pairs": {},
-   "parts_motion_mm": 0.0
-  },
-  {
-   "k": 48,
-   "p": [
-    30.0,
-    75.0,
-    45.0
-   ],
-   "eval_feasible": false,
-   "closes": true,
-   "body_mm": 0.0,
-   "body_part": null,
-   "parts_mm": 0.69,
-   "parts_pair": "D6-03 link 2: bent bar 8x3 + J2/J3 hubs  IN D6-04 arm end: J3 pad + pin + S-strap, t",
-   "pairs": {
-    "D6-03 link 2: bent bar 8x3 + J2/J3 hubs  IN D6-04 arm end: J3 pad + pin + S-strap, t": 0.69
-   },
-   "parts_motion_mm": 0.69
-  },
-  {
-   "k": 49,
-   "p": [
-    30.0,
-    90.0,
-    60.0
-   ],
-   "eval_feasible": false,
-   "closes": true,
-   "body_mm": 0.0,
-   "body_part": null,
-   "parts_mm": 1.14,
-   "parts_pair": "D6-03 link 2: bent bar 8x3 + J2/J3 hubs  IN D6-04 arm end: J3 pad + pin + S-strap, t",
-   "pairs": {
-    "D6-03 link 2: bent bar 8x3 + J2/J3 hubs  IN D6-04 arm end: J3 pad + pin + S-strap, t": 1.14
-   },
-   "parts_motion_mm": 1.14
-  },
-  {
-   "k": 50,
-   "p": [
-    30.0,
-    120.0,
-    0.0
-   ],
-   "eval_feasible": false,
-   "closes": true,
-   "body_mm": 17.87,
-   "body_part": "l1|D6-02 link 1: bent bar 8x3 + J1/J2 pads + integral O7 pins (Ti-6Al-4V)",
-   "parts_mm": 1.5,
-   "parts_pair": "D6-03 link 2: bent bar 8x3 + J2/J3 hubs  IN D6-04 arm end: J3 pad + pin + S-strap, t",
-   "pairs": {
-    "D6-03 link 2: bent bar 8x3 + J2/J3 hubs  IN D6-04 arm end: J3 pad + pin + S-strap, t": 1.5
-   },
-   "parts_motion_mm": 1.5
-  },
-  {
-   "k": 51,
-   "p": [
-    30.0,
-    150.0,
-    0.0
-   ],
-   "eval_feasible": false,
-   "closes": true,
-   "body_mm": 24.77,
-   "body_part": "l2|D6-03 link 2: bent bar 8x3 + J2/J3 hubs (Ti-6Al-4V)",
    "parts_mm": 0.0,
    "parts_pair": null,
    "pairs": {},
@@ -890,27 +850,29 @@
   {
    "k": 52,
    "p": [
-    45.0,
-    0.0,
-    -30.0
+    -30.0,
+    60.0,
+    30.0
    ],
-   "eval_feasible": true,
+   "eval_feasible": false,
    "closes": true,
-   "body_mm": 0.0,
-   "body_part": null,
-   "parts_mm": 0.0,
-   "parts_pair": null,
-   "pairs": {},
-   "parts_motion_mm": 0.0
+   "body_mm": 7.65,
+   "body_part": "l1|D6-02 link 1: bent bar 8x3 + J1/J2 pads + integral O7 pins (Ti-6Al-4V)",
+   "parts_mm": 0.57,
+   "parts_pair": "D6-03 link 2: bent bar 8x3 + J2/J3 hubs  IN D6-04 BOTTOM + arm end, one 5-axis part ",
+   "pairs": {
+    "D6-03 link 2: bent bar 8x3 + J2/J3 hubs  IN D6-04 BOTTOM + arm end, one 5-axis part ": 0.57
+   },
+   "parts_motion_mm": 0.57
   },
   {
    "k": 53,
    "p": [
-    45.0,
-    15.0,
-    -15.0
+    -30.0,
+    60.0,
+    90.0
    ],
-   "eval_feasible": true,
+   "eval_feasible": false,
    "closes": true,
    "body_mm": 0.0,
    "body_part": null,
@@ -922,9 +884,9 @@
   {
    "k": 54,
    "p": [
-    45.0,
-    30.0,
-    0.0
+    -15.0,
+    0.0,
+    -30.0
    ],
    "eval_feasible": true,
    "closes": true,
@@ -938,9 +900,9 @@
   {
    "k": 55,
    "p": [
-    45.0,
-    45.0,
-    15.0
+    -15.0,
+    0.0,
+    30.0
    ],
    "eval_feasible": true,
    "closes": true,
@@ -954,9 +916,9 @@
   {
    "k": 56,
    "p": [
-    45.0,
-    60.0,
-    30.0
+    -15.0,
+    0.0,
+    90.0
    ],
    "eval_feasible": true,
    "closes": true,
@@ -970,29 +932,27 @@
   {
    "k": 57,
    "p": [
-    45.0,
-    75.0,
-    45.0
+    -15.0,
+    15.0,
+    -15.0
    ],
-   "eval_feasible": false,
+   "eval_feasible": true,
    "closes": true,
    "body_mm": 0.0,
    "body_part": null,
-   "parts_mm": 0.4,
-   "parts_pair": "D6-03 link 2: bent bar 8x3 + J2/J3 hubs  IN D6-04 arm end: J3 pad + pin + S-strap, t",
-   "pairs": {
-    "D6-03 link 2: bent bar 8x3 + J2/J3 hubs  IN D6-04 arm end: J3 pad + pin + S-strap, t": 0.4
-   },
-   "parts_motion_mm": 0.4
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
   },
   {
    "k": 58,
    "p": [
-    45.0,
-    105.0,
-    -90.0
+    -15.0,
+    15.0,
+    45.0
    ],
-   "eval_feasible": false,
+   "eval_feasible": true,
    "closes": true,
    "body_mm": 0.0,
    "body_part": null,
@@ -1004,11 +964,11 @@
   {
    "k": 59,
    "p": [
-    45.0,
-    135.0,
-    -90.0
+    -15.0,
+    15.0,
+    105.0
    ],
-   "eval_feasible": false,
+   "eval_feasible": true,
    "closes": true,
    "body_mm": 0.0,
    "body_part": null,
@@ -1020,11 +980,11 @@
   {
    "k": 60,
    "p": [
-    45.0,
-    165.0,
-    -90.0
+    -15.0,
+    30.0,
+    0.0
    ],
-   "eval_feasible": false,
+   "eval_feasible": true,
    "closes": true,
    "body_mm": 0.0,
    "body_part": null,
@@ -1036,9 +996,9 @@
   {
    "k": 61,
    "p": [
-    60.0,
-    0.0,
-    -30.0
+    -15.0,
+    30.0,
+    60.0
    ],
    "eval_feasible": true,
    "closes": true,
@@ -1052,11 +1012,11 @@
   {
    "k": 62,
    "p": [
-    60.0,
-    15.0,
-    -15.0
+    -15.0,
+    45.0,
+    -45.0
    ],
-   "eval_feasible": true,
+   "eval_feasible": false,
    "closes": true,
    "body_mm": 0.0,
    "body_part": null,
@@ -1068,11 +1028,11 @@
   {
    "k": 63,
    "p": [
-    60.0,
-    30.0,
-    0.0
+    -15.0,
+    45.0,
+    15.0
    ],
-   "eval_feasible": true,
+   "eval_feasible": false,
    "closes": true,
    "body_mm": 0.0,
    "body_part": null,
@@ -1084,9 +1044,9 @@
   {
    "k": 64,
    "p": [
-    60.0,
+    -15.0,
     45.0,
-    15.0
+    75.0
    ],
    "eval_feasible": true,
    "closes": true,
@@ -1100,11 +1060,11 @@
   {
    "k": 65,
    "p": [
+    -15.0,
     60.0,
-    60.0,
-    30.0
+    -30.0
    ],
-   "eval_feasible": true,
+   "eval_feasible": false,
    "closes": true,
    "body_mm": 0.0,
    "body_part": null,
@@ -1116,9 +1076,9 @@
   {
    "k": 66,
    "p": [
+    -15.0,
     60.0,
-    90.0,
-    -120.0
+    30.0
    ],
    "eval_feasible": false,
    "closes": true,
@@ -1132,11 +1092,11 @@
   {
    "k": 67,
    "p": [
+    -15.0,
     60.0,
-    105.0,
-    -90.0
+    90.0
    ],
-   "eval_feasible": true,
+   "eval_feasible": false,
    "closes": true,
    "body_mm": 0.0,
    "body_part": null,
@@ -1148,30 +1108,32 @@
   {
    "k": 68,
    "p": [
-    60.0,
-    135.0,
-    -90.0
+    -15.0,
+    75.0,
+    -15.0
    ],
    "eval_feasible": false,
    "closes": true,
-   "body_mm": 0.0,
-   "body_part": null,
-   "parts_mm": 0.0,
-   "parts_pair": null,
-   "pairs": {},
-   "parts_motion_mm": 0.0
+   "body_mm": 15.96,
+   "body_part": "l1|D6-02 link 1: bent bar 8x3 + J1/J2 pads + integral O7 pins (Ti-6Al-4V)",
+   "parts_mm": 1.5,
+   "parts_pair": "D6-03 link 2: bent bar 8x3 + J2/J3 hubs  IN D6-04 BOTTOM + arm end, one 5-axis part ",
+   "pairs": {
+    "D6-03 link 2: bent bar 8x3 + J2/J3 hubs  IN D6-04 BOTTOM + arm end, one 5-axis part ": 1.5
+   },
+   "parts_motion_mm": 1.5
   },
   {
    "k": 69,
    "p": [
-    60.0,
-    165.0,
-    -90.0
+    -15.0,
+    75.0,
+    45.0
    ],
    "eval_feasible": false,
    "closes": true,
-   "body_mm": 0.0,
-   "body_part": null,
+   "body_mm": 1.84,
+   "body_part": "l1|D6-02 link 1: bent bar 8x3 + J1/J2 pads + integral O7 pins (Ti-6Al-4V)",
    "parts_mm": 0.0,
    "parts_pair": null,
    "pairs": {},
@@ -1180,43 +1142,43 @@
   {
    "k": 70,
    "p": [
+    -15.0,
     75.0,
-    0.0,
-    -30.0
+    105.0
    ],
-   "eval_feasible": true,
-   "closes": true,
-   "body_mm": 0.0,
+   "eval_feasible": false,
+   "closes": false,
+   "body_mm": null,
    "body_part": null,
-   "parts_mm": 0.0,
-   "parts_pair": null,
-   "pairs": {},
-   "parts_motion_mm": 0.0
+   "parts_mm": null,
+   "parts_pair": null
   },
   {
    "k": 71,
    "p": [
-    75.0,
-    15.0,
-    -15.0
+    -15.0,
+    90.0,
+    0.0
    ],
-   "eval_feasible": true,
+   "eval_feasible": false,
    "closes": true,
-   "body_mm": 0.0,
-   "body_part": null,
-   "parts_mm": 0.0,
-   "parts_pair": null,
-   "pairs": {},
-   "parts_motion_mm": 0.0
+   "body_mm": 24.65,
+   "body_part": "l1|D6-02 link 1: bent bar 8x3 + J1/J2 pads + integral O7 pins (Ti-6Al-4V)",
+   "parts_mm": 1.49,
+   "parts_pair": "D6-03 link 2: bent bar 8x3 + J2/J3 hubs  IN D6-04 BOTTOM + arm end, one 5-axis part ",
+   "pairs": {
+    "D6-03 link 2: bent bar 8x3 + J2/J3 hubs  IN D6-04 BOTTOM + arm end, one 5-axis part ": 1.49
+   },
+   "parts_motion_mm": 1.49
   },
   {
    "k": 72,
    "p": [
-    75.0,
-    30.0,
-    0.0
+    -15.0,
+    90.0,
+    60.0
    ],
-   "eval_feasible": true,
+   "eval_feasible": false,
    "closes": true,
    "body_mm": 0.0,
    "body_part": null,
@@ -1228,41 +1190,45 @@
   {
    "k": 73,
    "p": [
-    75.0,
-    45.0,
-    15.0
+    -15.0,
+    105.0,
+    -30.0
    ],
-   "eval_feasible": true,
+   "eval_feasible": false,
    "closes": true,
-   "body_mm": 0.0,
-   "body_part": null,
-   "parts_mm": 0.0,
-   "parts_pair": null,
-   "pairs": {},
-   "parts_motion_mm": 0.0
+   "body_mm": 24.82,
+   "body_part": "l1|D6-02 link 1: bent bar 8x3 + J1/J2 pads + integral O7 pins (Ti-6Al-4V)",
+   "parts_mm": 1.49,
+   "parts_pair": "D6-03 link 2: bent bar 8x3 + J2/J3 hubs  IN D6-04 BOTTOM + arm end, one 5-axis part ",
+   "pairs": {
+    "D6-03 link 2: bent bar 8x3 + J2/J3 hubs  IN D6-04 BOTTOM + arm end, one 5-axis part ": 1.49
+   },
+   "parts_motion_mm": 1.49
   },
   {
    "k": 74,
    "p": [
-    75.0,
-    75.0,
-    -135.0
+    -15.0,
+    105.0,
+    30.0
    ],
-   "eval_feasible": true,
+   "eval_feasible": false,
    "closes": true,
-   "body_mm": 0.0,
-   "body_part": null,
-   "parts_mm": 0.0,
-   "parts_pair": null,
-   "pairs": {},
-   "parts_motion_mm": 0.0
+   "body_mm": 24.68,
+   "body_part": "l1|D6-02 link 1: bent bar 8x3 + J1/J2 pads + integral O7 pins (Ti-6Al-4V)",
+   "parts_mm": 1.49,
+   "parts_pair": "D6-03 link 2: bent bar 8x3 + J2/J3 hubs  IN D6-04 BOTTOM + arm end, one 5-axis part ",
+   "pairs": {
+    "D6-03 link 2: bent bar 8x3 + J2/J3 hubs  IN D6-04 BOTTOM + arm end, one 5-axis part ": 1.49
+   },
+   "parts_motion_mm": 1.49
   },
   {
    "k": 75,
    "p": [
-    75.0,
-    90.0,
-    -120.0
+    0.0,
+    0.0,
+    -30.0
    ],
    "eval_feasible": true,
    "closes": true,
@@ -1276,9 +1242,9 @@
   {
    "k": 76,
    "p": [
-    75.0,
-    105.0,
-    -90.0
+    0.0,
+    0.0,
+    30.0
    ],
    "eval_feasible": true,
    "closes": true,
@@ -1292,9 +1258,9 @@
   {
    "k": 77,
    "p": [
-    75.0,
-    135.0,
-    -90.0
+    0.0,
+    0.0,
+    90.0
    ],
    "eval_feasible": true,
    "closes": true,
@@ -1308,39 +1274,7 @@
   {
    "k": 78,
    "p": [
-    75.0,
-    165.0,
-    -90.0
-   ],
-   "eval_feasible": false,
-   "closes": true,
-   "body_mm": 0.0,
-   "body_part": null,
-   "parts_mm": 0.0,
-   "parts_pair": null,
-   "pairs": {},
-   "parts_motion_mm": 0.0
-  },
-  {
-   "k": 79,
-   "p": [
-    90.0,
     0.0,
-    -30.0
-   ],
-   "eval_feasible": true,
-   "closes": true,
-   "body_mm": 0.0,
-   "body_part": null,
-   "parts_mm": 0.0,
-   "parts_pair": null,
-   "pairs": {},
-   "parts_motion_mm": 0.0
-  },
-  {
-   "k": 80,
-   "p": [
-    90.0,
     15.0,
     -15.0
    ],
@@ -1354,9 +1288,41 @@
    "parts_motion_mm": 0.0
   },
   {
+   "k": 79,
+   "p": [
+    0.0,
+    15.0,
+    45.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 80,
+   "p": [
+    0.0,
+    30.0,
+    -60.0
+   ],
+   "eval_feasible": false,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
    "k": 81,
    "p": [
-    90.0,
+    0.0,
     30.0,
     0.0
    ],
@@ -1372,6 +1338,2654 @@
   {
    "k": 82,
    "p": [
+    0.0,
+    30.0,
+    60.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 83,
+   "p": [
+    0.0,
+    45.0,
+    -45.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 84,
+   "p": [
+    0.0,
+    45.0,
+    15.0
+   ],
+   "eval_feasible": false,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 85,
+   "p": [
+    0.0,
+    45.0,
+    75.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 86,
+   "p": [
+    0.0,
+    60.0,
+    -30.0
+   ],
+   "eval_feasible": false,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 87,
+   "p": [
+    0.0,
+    60.0,
+    30.0
+   ],
+   "eval_feasible": false,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 88,
+   "p": [
+    0.0,
+    60.0,
+    90.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 89,
+   "p": [
+    0.0,
+    75.0,
+    -15.0
+   ],
+   "eval_feasible": false,
+   "closes": true,
+   "body_mm": 3.27,
+   "body_part": "l1|D6-02 link 1: bent bar 8x3 + J1/J2 pads + integral O7 pins (Ti-6Al-4V)",
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 90,
+   "p": [
+    0.0,
+    75.0,
+    45.0
+   ],
+   "eval_feasible": false,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 91,
+   "p": [
+    0.0,
+    90.0,
+    -60.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 92,
+   "p": [
+    0.0,
+    90.0,
+    0.0
+   ],
+   "eval_feasible": false,
+   "closes": true,
+   "body_mm": 16.05,
+   "body_part": "l1|D6-02 link 1: bent bar 8x3 + J1/J2 pads + integral O7 pins (Ti-6Al-4V)",
+   "parts_mm": 1.5,
+   "parts_pair": "D6-03 link 2: bent bar 8x3 + J2/J3 hubs  IN D6-04 BOTTOM + arm end, one 5-axis part ",
+   "pairs": {
+    "D6-03 link 2: bent bar 8x3 + J2/J3 hubs  IN D6-04 BOTTOM + arm end, one 5-axis part ": 1.5
+   },
+   "parts_motion_mm": 1.5
+  },
+  {
+   "k": 93,
+   "p": [
+    0.0,
+    90.0,
+    60.0
+   ],
+   "eval_feasible": false,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 94,
+   "p": [
+    0.0,
+    105.0,
+    -30.0
+   ],
+   "eval_feasible": false,
+   "closes": true,
+   "body_mm": 24.8,
+   "body_part": "l1|D6-02 link 1: bent bar 8x3 + J1/J2 pads + integral O7 pins (Ti-6Al-4V)",
+   "parts_mm": 1.49,
+   "parts_pair": "D6-03 link 2: bent bar 8x3 + J2/J3 hubs  IN D6-04 BOTTOM + arm end, one 5-axis part ",
+   "pairs": {
+    "D6-03 link 2: bent bar 8x3 + J2/J3 hubs  IN D6-04 BOTTOM + arm end, one 5-axis part ": 1.49
+   },
+   "parts_motion_mm": 1.49
+  },
+  {
+   "k": 95,
+   "p": [
+    0.0,
+    105.0,
+    30.0
+   ],
+   "eval_feasible": false,
+   "closes": true,
+   "body_mm": 17.29,
+   "body_part": "l1|D6-02 link 1: bent bar 8x3 + J1/J2 pads + integral O7 pins (Ti-6Al-4V)",
+   "parts_mm": 1.49,
+   "parts_pair": "D6-03 link 2: bent bar 8x3 + J2/J3 hubs  IN D6-04 BOTTOM + arm end, one 5-axis part ",
+   "pairs": {
+    "D6-03 link 2: bent bar 8x3 + J2/J3 hubs  IN D6-04 BOTTOM + arm end, one 5-axis part ": 1.49
+   },
+   "parts_motion_mm": 1.49
+  },
+  {
+   "k": 96,
+   "p": [
+    0.0,
+    120.0,
+    0.0
+   ],
+   "eval_feasible": false,
+   "closes": true,
+   "body_mm": 24.81,
+   "body_part": "l2|J2 cap O20 G2 dome, threaded (Ti-6Al-4V)",
+   "parts_mm": 1.2,
+   "parts_pair": "D6-03 link 2: bent bar 8x3 + J2/J3 hubs  IN D6-04 BOTTOM + arm end, one 5-axis part ",
+   "pairs": {
+    "D6-03 link 2: bent bar 8x3 + J2/J3 hubs  IN D6-04 BOTTOM + arm end, one 5-axis part ": 1.2
+   },
+   "parts_motion_mm": 1.2
+  },
+  {
+   "k": 97,
+   "p": [
+    0.0,
+    135.0,
+    -30.0
+   ],
+   "eval_feasible": false,
+   "closes": true,
+   "body_mm": 24.38,
+   "body_part": "l1|D6-02 link 1: bent bar 8x3 + J1/J2 pads + integral O7 pins (Ti-6Al-4V)",
+   "parts_mm": 1.43,
+   "parts_pair": "D6-03 link 2: bent bar 8x3 + J2/J3 hubs  IN D6-04 BOTTOM + arm end, one 5-axis part ",
+   "pairs": {
+    "D6-03 link 2: bent bar 8x3 + J2/J3 hubs  IN D6-04 BOTTOM + arm end, one 5-axis part ": 1.43
+   },
+   "parts_motion_mm": 1.43
+  },
+  {
+   "k": 98,
+   "p": [
+    0.0,
+    135.0,
+    30.0
+   ],
+   "eval_feasible": false,
+   "closes": true,
+   "body_mm": 24.79,
+   "body_part": "l2|D6-03 link 2: bent bar 8x3 + J2/J3 hubs (Ti-6Al-4V)",
+   "parts_mm": 1.49,
+   "parts_pair": "D6-03 link 2: bent bar 8x3 + J2/J3 hubs  IN D6-04 BOTTOM + arm end, one 5-axis part ",
+   "pairs": {
+    "D6-03 link 2: bent bar 8x3 + J2/J3 hubs  IN D6-04 BOTTOM + arm end, one 5-axis part ": 1.49
+   },
+   "parts_motion_mm": 1.49
+  },
+  {
+   "k": 99,
+   "p": [
+    0.0,
+    150.0,
+    0.0
+   ],
+   "eval_feasible": false,
+   "closes": true,
+   "body_mm": 24.94,
+   "body_part": "l2|J2 cap O20 G2 dome, threaded (Ti-6Al-4V)",
+   "parts_mm": 1.49,
+   "parts_pair": "D6-03 link 2: bent bar 8x3 + J2/J3 hubs  IN D6-04 BOTTOM + arm end, one 5-axis part ",
+   "pairs": {
+    "D6-03 link 2: bent bar 8x3 + J2/J3 hubs  IN D6-04 BOTTOM + arm end, one 5-axis part ": 1.49
+   },
+   "parts_motion_mm": 1.49
+  },
+  {
+   "k": 100,
+   "p": [
+    0.0,
+    165.0,
+    -30.0
+   ],
+   "eval_feasible": false,
+   "closes": true,
+   "body_mm": 12.36,
+   "body_part": "l1|D6-02 link 1: bent bar 8x3 + J1/J2 pads + integral O7 pins (Ti-6Al-4V)",
+   "parts_mm": 0.58,
+   "parts_pair": "D6-03 link 2: bent bar 8x3 + J2/J3 hubs  IN D6-04 BOTTOM + arm end, one 5-axis part ",
+   "pairs": {
+    "D6-03 link 2: bent bar 8x3 + J2/J3 hubs  IN D6-04 BOTTOM + arm end, one 5-axis part ": 0.58
+   },
+   "parts_motion_mm": 0.58
+  },
+  {
+   "k": 101,
+   "p": [
+    0.0,
+    165.0,
+    30.0
+   ],
+   "eval_feasible": false,
+   "closes": true,
+   "body_mm": 24.83,
+   "body_part": "l2|D6-03 link 2: bent bar 8x3 + J2/J3 hubs (Ti-6Al-4V)",
+   "parts_mm": 1.49,
+   "parts_pair": "D6-03 link 2: bent bar 8x3 + J2/J3 hubs  IN D6-04 BOTTOM + arm end, one 5-axis part ",
+   "pairs": {
+    "D6-03 link 2: bent bar 8x3 + J2/J3 hubs  IN D6-04 BOTTOM + arm end, one 5-axis part ": 1.49
+   },
+   "parts_motion_mm": 1.49
+  },
+  {
+   "k": 102,
+   "p": [
+    15.0,
+    0.0,
+    -30.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 103,
+   "p": [
+    15.0,
+    0.0,
+    30.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 104,
+   "p": [
+    15.0,
+    15.0,
+    -75.0
+   ],
+   "eval_feasible": false,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 105,
+   "p": [
+    15.0,
+    15.0,
+    -15.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 106,
+   "p": [
+    15.0,
+    15.0,
+    45.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 107,
+   "p": [
+    15.0,
+    30.0,
+    -60.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 108,
+   "p": [
+    15.0,
+    30.0,
+    0.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 109,
+   "p": [
+    15.0,
+    30.0,
+    60.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 110,
+   "p": [
+    15.0,
+    45.0,
+    -45.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 111,
+   "p": [
+    15.0,
+    45.0,
+    15.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 112,
+   "p": [
+    15.0,
+    45.0,
+    75.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 113,
+   "p": [
+    15.0,
+    60.0,
+    -30.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 114,
+   "p": [
+    15.0,
+    60.0,
+    30.0
+   ],
+   "eval_feasible": false,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 115,
+   "p": [
+    15.0,
+    75.0,
+    -75.0
+   ],
+   "eval_feasible": false,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 116,
+   "p": [
+    15.0,
+    75.0,
+    -15.0
+   ],
+   "eval_feasible": false,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 117,
+   "p": [
+    15.0,
+    75.0,
+    45.0
+   ],
+   "eval_feasible": false,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 118,
+   "p": [
+    15.0,
+    90.0,
+    -60.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 119,
+   "p": [
+    15.0,
+    90.0,
+    0.0
+   ],
+   "eval_feasible": false,
+   "closes": true,
+   "body_mm": 4.82,
+   "body_part": "l1|D6-02 link 1: bent bar 8x3 + J1/J2 pads + integral O7 pins (Ti-6Al-4V)",
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 120,
+   "p": [
+    15.0,
+    90.0,
+    60.0
+   ],
+   "eval_feasible": false,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 121,
+   "p": [
+    15.0,
+    105.0,
+    -30.0
+   ],
+   "eval_feasible": false,
+   "closes": true,
+   "body_mm": 8.1,
+   "body_part": "l1|D6-02 link 1: bent bar 8x3 + J1/J2 pads + integral O7 pins (Ti-6Al-4V)",
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 122,
+   "p": [
+    15.0,
+    120.0,
+    -60.0
+   ],
+   "eval_feasible": false,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 123,
+   "p": [
+    15.0,
+    120.0,
+    0.0
+   ],
+   "eval_feasible": false,
+   "closes": true,
+   "body_mm": 24.76,
+   "body_part": "l1|D6-02 link 1: bent bar 8x3 + J1/J2 pads + integral O7 pins (Ti-6Al-4V)",
+   "parts_mm": 1.49,
+   "parts_pair": "D6-03 link 2: bent bar 8x3 + J2/J3 hubs  IN D6-04 BOTTOM + arm end, one 5-axis part ",
+   "pairs": {
+    "D6-03 link 2: bent bar 8x3 + J2/J3 hubs  IN D6-04 BOTTOM + arm end, one 5-axis part ": 1.49
+   },
+   "parts_motion_mm": 1.49
+  },
+  {
+   "k": 124,
+   "p": [
+    15.0,
+    135.0,
+    -30.0
+   ],
+   "eval_feasible": false,
+   "closes": true,
+   "body_mm": 24.6,
+   "body_part": "l1|D6-02 link 1: bent bar 8x3 + J1/J2 pads + integral O7 pins (Ti-6Al-4V)",
+   "parts_mm": 1.49,
+   "parts_pair": "D6-03 link 2: bent bar 8x3 + J2/J3 hubs  IN D6-04 BOTTOM + arm end, one 5-axis part ",
+   "pairs": {
+    "D6-03 link 2: bent bar 8x3 + J2/J3 hubs  IN D6-04 BOTTOM + arm end, one 5-axis part ": 1.49
+   },
+   "parts_motion_mm": 1.49
+  },
+  {
+   "k": 125,
+   "p": [
+    15.0,
+    150.0,
+    -60.0
+   ],
+   "eval_feasible": false,
+   "closes": false,
+   "body_mm": null,
+   "body_part": null,
+   "parts_mm": null,
+   "parts_pair": null
+  },
+  {
+   "k": 126,
+   "p": [
+    15.0,
+    150.0,
+    0.0
+   ],
+   "eval_feasible": false,
+   "closes": true,
+   "body_mm": 24.87,
+   "body_part": "l2|J2 cap O20 G2 dome, threaded (Ti-6Al-4V)",
+   "parts_mm": 1.49,
+   "parts_pair": "D6-03 link 2: bent bar 8x3 + J2/J3 hubs  IN D6-04 BOTTOM + arm end, one 5-axis part ",
+   "pairs": {
+    "D6-03 link 2: bent bar 8x3 + J2/J3 hubs  IN D6-04 BOTTOM + arm end, one 5-axis part ": 1.49
+   },
+   "parts_motion_mm": 1.49
+  },
+  {
+   "k": 127,
+   "p": [
+    15.0,
+    165.0,
+    -30.0
+   ],
+   "eval_feasible": false,
+   "closes": true,
+   "body_mm": 3.83,
+   "body_part": "l2|J3 cap O20 G2 dome, threaded (Ti-6Al-4V)",
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 128,
+   "p": [
+    30.0,
+    0.0,
+    -90.0
+   ],
+   "eval_feasible": false,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 129,
+   "p": [
+    30.0,
+    0.0,
+    -30.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 130,
+   "p": [
+    30.0,
+    0.0,
+    30.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 131,
+   "p": [
+    30.0,
+    15.0,
+    -75.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 132,
+   "p": [
+    30.0,
+    15.0,
+    -15.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 133,
+   "p": [
+    30.0,
+    15.0,
+    45.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 134,
+   "p": [
+    30.0,
+    30.0,
+    -60.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 135,
+   "p": [
+    30.0,
+    30.0,
+    0.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 136,
+   "p": [
+    30.0,
+    30.0,
+    60.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 137,
+   "p": [
+    30.0,
+    45.0,
+    -45.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 138,
+   "p": [
+    30.0,
+    45.0,
+    15.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 139,
+   "p": [
+    30.0,
+    60.0,
+    -90.0
+   ],
+   "eval_feasible": false,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 140,
+   "p": [
+    30.0,
+    60.0,
+    -30.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 141,
+   "p": [
+    30.0,
+    60.0,
+    30.0
+   ],
+   "eval_feasible": false,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 142,
+   "p": [
+    30.0,
+    75.0,
+    -75.0
+   ],
+   "eval_feasible": false,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 143,
+   "p": [
+    30.0,
+    75.0,
+    -15.0
+   ],
+   "eval_feasible": false,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 144,
+   "p": [
+    30.0,
+    75.0,
+    45.0
+   ],
+   "eval_feasible": false,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 145,
+   "p": [
+    30.0,
+    90.0,
+    -60.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 146,
+   "p": [
+    30.0,
+    90.0,
+    0.0
+   ],
+   "eval_feasible": false,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 147,
+   "p": [
+    30.0,
+    90.0,
+    60.0
+   ],
+   "eval_feasible": false,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 148,
+   "p": [
+    30.0,
+    105.0,
+    -30.0
+   ],
+   "eval_feasible": false,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 149,
+   "p": [
+    30.0,
+    120.0,
+    -60.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 150,
+   "p": [
+    30.0,
+    120.0,
+    0.0
+   ],
+   "eval_feasible": false,
+   "closes": true,
+   "body_mm": 17.87,
+   "body_part": "l1|D6-02 link 1: bent bar 8x3 + J1/J2 pads + integral O7 pins (Ti-6Al-4V)",
+   "parts_mm": 1.49,
+   "parts_pair": "D6-03 link 2: bent bar 8x3 + J2/J3 hubs  IN D6-04 BOTTOM + arm end, one 5-axis part ",
+   "pairs": {
+    "D6-03 link 2: bent bar 8x3 + J2/J3 hubs  IN D6-04 BOTTOM + arm end, one 5-axis part ": 1.49
+   },
+   "parts_motion_mm": 1.49
+  },
+  {
+   "k": 151,
+   "p": [
+    30.0,
+    135.0,
+    -30.0
+   ],
+   "eval_feasible": false,
+   "closes": true,
+   "body_mm": 22.8,
+   "body_part": "l1|D6-02 link 1: bent bar 8x3 + J1/J2 pads + integral O7 pins (Ti-6Al-4V)",
+   "parts_mm": 1.49,
+   "parts_pair": "D6-03 link 2: bent bar 8x3 + J2/J3 hubs  IN D6-04 BOTTOM + arm end, one 5-axis part ",
+   "pairs": {
+    "D6-03 link 2: bent bar 8x3 + J2/J3 hubs  IN D6-04 BOTTOM + arm end, one 5-axis part ": 1.49
+   },
+   "parts_motion_mm": 1.49
+  },
+  {
+   "k": 152,
+   "p": [
+    30.0,
+    150.0,
+    -60.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 153,
+   "p": [
+    30.0,
+    150.0,
+    0.0
+   ],
+   "eval_feasible": false,
+   "closes": true,
+   "body_mm": 24.77,
+   "body_part": "l2|D6-03 link 2: bent bar 8x3 + J2/J3 hubs (Ti-6Al-4V)",
+   "parts_mm": 1.49,
+   "parts_pair": "D6-03 link 2: bent bar 8x3 + J2/J3 hubs  IN D6-04 BOTTOM + arm end, one 5-axis part ",
+   "pairs": {
+    "D6-03 link 2: bent bar 8x3 + J2/J3 hubs  IN D6-04 BOTTOM + arm end, one 5-axis part ": 1.49
+   },
+   "parts_motion_mm": 1.49
+  },
+  {
+   "k": 154,
+   "p": [
+    30.0,
+    165.0,
+    -30.0
+   ],
+   "eval_feasible": false,
+   "closes": false,
+   "body_mm": null,
+   "body_part": null,
+   "parts_mm": null,
+   "parts_pair": null
+  },
+  {
+   "k": 155,
+   "p": [
+    45.0,
+    0.0,
+    -90.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 156,
+   "p": [
+    45.0,
+    0.0,
+    -30.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 157,
+   "p": [
+    45.0,
+    0.0,
+    30.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 158,
+   "p": [
+    45.0,
+    15.0,
+    -75.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 159,
+   "p": [
+    45.0,
+    15.0,
+    -15.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 160,
+   "p": [
+    45.0,
+    15.0,
+    45.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 161,
+   "p": [
+    45.0,
+    30.0,
+    -60.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 162,
+   "p": [
+    45.0,
+    30.0,
+    0.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 163,
+   "p": [
+    45.0,
+    45.0,
+    -105.0
+   ],
+   "eval_feasible": false,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 164,
+   "p": [
+    45.0,
+    45.0,
+    -45.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 165,
+   "p": [
+    45.0,
+    45.0,
+    15.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 166,
+   "p": [
+    45.0,
+    60.0,
+    -90.0
+   ],
+   "eval_feasible": false,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 167,
+   "p": [
+    45.0,
+    60.0,
+    -30.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 168,
+   "p": [
+    45.0,
+    60.0,
+    30.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 169,
+   "p": [
+    45.0,
+    75.0,
+    -75.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 170,
+   "p": [
+    45.0,
+    75.0,
+    -15.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 171,
+   "p": [
+    45.0,
+    75.0,
+    45.0
+   ],
+   "eval_feasible": false,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 172,
+   "p": [
+    45.0,
+    90.0,
+    -60.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 173,
+   "p": [
+    45.0,
+    90.0,
+    0.0
+   ],
+   "eval_feasible": false,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 174,
+   "p": [
+    45.0,
+    105.0,
+    -90.0
+   ],
+   "eval_feasible": false,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 175,
+   "p": [
+    45.0,
+    105.0,
+    -30.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 176,
+   "p": [
+    45.0,
+    120.0,
+    -60.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 177,
+   "p": [
+    45.0,
+    135.0,
+    -90.0
+   ],
+   "eval_feasible": false,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 178,
+   "p": [
+    45.0,
+    135.0,
+    -30.0
+   ],
+   "eval_feasible": false,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 179,
+   "p": [
+    45.0,
+    150.0,
+    -60.0
+   ],
+   "eval_feasible": false,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 180,
+   "p": [
+    45.0,
+    165.0,
+    -90.0
+   ],
+   "eval_feasible": false,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 181,
+   "p": [
+    45.0,
+    165.0,
+    -30.0
+   ],
+   "eval_feasible": false,
+   "closes": false,
+   "body_mm": null,
+   "body_part": null,
+   "parts_mm": null,
+   "parts_pair": null
+  },
+  {
+   "k": 182,
+   "p": [
+    60.0,
+    0.0,
+    -90.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 183,
+   "p": [
+    60.0,
+    0.0,
+    -30.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 184,
+   "p": [
+    60.0,
+    0.0,
+    30.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 185,
+   "p": [
+    60.0,
+    15.0,
+    -75.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 186,
+   "p": [
+    60.0,
+    15.0,
+    -15.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 187,
+   "p": [
+    60.0,
+    30.0,
+    -120.0
+   ],
+   "eval_feasible": false,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 188,
+   "p": [
+    60.0,
+    30.0,
+    -60.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 189,
+   "p": [
+    60.0,
+    30.0,
+    0.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 190,
+   "p": [
+    60.0,
+    45.0,
+    -105.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 191,
+   "p": [
+    60.0,
+    45.0,
+    -45.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 192,
+   "p": [
+    60.0,
+    45.0,
+    15.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 193,
+   "p": [
+    60.0,
+    60.0,
+    -90.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 194,
+   "p": [
+    60.0,
+    60.0,
+    -30.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 195,
+   "p": [
+    60.0,
+    60.0,
+    30.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 196,
+   "p": [
+    60.0,
+    75.0,
+    -75.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 197,
+   "p": [
+    60.0,
+    75.0,
+    -15.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 198,
+   "p": [
+    60.0,
+    90.0,
+    -120.0
+   ],
+   "eval_feasible": false,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 199,
+   "p": [
+    60.0,
+    90.0,
+    -60.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 200,
+   "p": [
+    60.0,
+    90.0,
+    0.0
+   ],
+   "eval_feasible": false,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 201,
+   "p": [
+    60.0,
+    105.0,
+    -90.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 202,
+   "p": [
+    60.0,
+    105.0,
+    -30.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 203,
+   "p": [
+    60.0,
+    120.0,
+    -60.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 204,
+   "p": [
+    60.0,
+    135.0,
+    -90.0
+   ],
+   "eval_feasible": false,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 205,
+   "p": [
+    60.0,
+    135.0,
+    -30.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 206,
+   "p": [
+    60.0,
+    150.0,
+    -60.0
+   ],
+   "eval_feasible": false,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 207,
+   "p": [
+    60.0,
+    165.0,
+    -90.0
+   ],
+   "eval_feasible": false,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 208,
+   "p": [
+    60.0,
+    165.0,
+    -30.0
+   ],
+   "eval_feasible": false,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 209,
+   "p": [
+    75.0,
+    0.0,
+    -90.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 210,
+   "p": [
+    75.0,
+    0.0,
+    -30.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 211,
+   "p": [
+    75.0,
+    15.0,
+    -135.0
+   ],
+   "eval_feasible": false,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 212,
+   "p": [
+    75.0,
+    15.0,
+    -75.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 213,
+   "p": [
+    75.0,
+    15.0,
+    -15.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 214,
+   "p": [
+    75.0,
+    30.0,
+    -120.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 215,
+   "p": [
+    75.0,
+    30.0,
+    -60.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 216,
+   "p": [
+    75.0,
+    30.0,
+    0.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 217,
+   "p": [
+    75.0,
+    45.0,
+    -105.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 218,
+   "p": [
+    75.0,
+    45.0,
+    -45.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 219,
+   "p": [
+    75.0,
+    45.0,
+    15.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 220,
+   "p": [
+    75.0,
+    60.0,
+    -90.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 221,
+   "p": [
+    75.0,
+    60.0,
+    -30.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 222,
+   "p": [
+    75.0,
+    75.0,
+    -135.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 223,
+   "p": [
+    75.0,
+    75.0,
+    -75.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 224,
+   "p": [
+    75.0,
+    75.0,
+    -15.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 225,
+   "p": [
+    75.0,
+    90.0,
+    -120.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 226,
+   "p": [
+    75.0,
+    90.0,
+    -60.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 227,
+   "p": [
+    75.0,
+    90.0,
+    0.0
+   ],
+   "eval_feasible": false,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 228,
+   "p": [
+    75.0,
+    105.0,
+    -90.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 229,
+   "p": [
+    75.0,
+    120.0,
+    -120.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 230,
+   "p": [
+    75.0,
+    120.0,
+    -60.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 231,
+   "p": [
+    75.0,
+    135.0,
+    -90.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 232,
+   "p": [
+    75.0,
+    150.0,
+    -120.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 233,
+   "p": [
+    75.0,
+    150.0,
+    -60.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 234,
+   "p": [
+    75.0,
+    165.0,
+    -90.0
+   ],
+   "eval_feasible": false,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 235,
+   "p": [
+    90.0,
+    0.0,
+    -150.0
+   ],
+   "eval_feasible": false,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 236,
+   "p": [
+    90.0,
+    0.0,
+    -90.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 237,
+   "p": [
+    90.0,
+    0.0,
+    -30.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 238,
+   "p": [
+    90.0,
+    15.0,
+    -135.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 239,
+   "p": [
+    90.0,
+    15.0,
+    -75.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 240,
+   "p": [
+    90.0,
+    15.0,
+    -15.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 241,
+   "p": [
+    90.0,
+    30.0,
+    -120.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 242,
+   "p": [
+    90.0,
+    30.0,
+    -60.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 243,
+   "p": [
+    90.0,
+    30.0,
+    0.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 244,
+   "p": [
+    90.0,
+    45.0,
+    -105.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 245,
+   "p": [
+    90.0,
+    45.0,
+    -45.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 246,
+   "p": [
     90.0,
     60.0,
     -150.0
@@ -1386,7 +4000,39 @@
    "parts_motion_mm": 0.0
   },
   {
-   "k": 83,
+   "k": 247,
+   "p": [
+    90.0,
+    60.0,
+    -90.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 248,
+   "p": [
+    90.0,
+    60.0,
+    -30.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 249,
    "p": [
     90.0,
     75.0,
@@ -1402,7 +4048,39 @@
    "parts_motion_mm": 0.0
   },
   {
-   "k": 84,
+   "k": 250,
+   "p": [
+    90.0,
+    75.0,
+    -75.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 251,
+   "p": [
+    90.0,
+    75.0,
+    -15.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 252,
    "p": [
     90.0,
     90.0,
@@ -1418,7 +4096,39 @@
    "parts_motion_mm": 0.0
   },
   {
-   "k": 85,
+   "k": 253,
+   "p": [
+    90.0,
+    90.0,
+    -60.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 254,
+   "p": [
+    90.0,
+    90.0,
+    0.0
+   ],
+   "eval_feasible": false,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 255,
    "p": [
     90.0,
     105.0,
@@ -1434,7 +4144,39 @@
    "parts_motion_mm": 0.0
   },
   {
-   "k": 86,
+   "k": 256,
+   "p": [
+    90.0,
+    120.0,
+    -120.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 257,
+   "p": [
+    90.0,
+    120.0,
+    -60.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 258,
    "p": [
     90.0,
     135.0,
@@ -1450,7 +4192,39 @@
    "parts_motion_mm": 0.0
   },
   {
-   "k": 87,
+   "k": 259,
+   "p": [
+    90.0,
+    150.0,
+    -120.0
+   ],
+   "eval_feasible": false,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 260,
+   "p": [
+    90.0,
+    150.0,
+    -60.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 1.59,
+   "body_part": "S|D6-01 scapula base: J1 hub + tab, 2x M4 counterbored (Ti-6Al-4V)",
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 261,
    "p": [
     90.0,
     165.0,
@@ -1466,7 +4240,39 @@
    "parts_motion_mm": 0.0
   },
   {
-   "k": 88,
+   "k": 262,
+   "p": [
+    105.0,
+    0.0,
+    -150.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 263,
+   "p": [
+    105.0,
+    0.0,
+    -90.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 264,
    "p": [
     105.0,
     0.0,
@@ -1482,7 +4288,39 @@
    "parts_motion_mm": 0.0
   },
   {
-   "k": 89,
+   "k": 265,
+   "p": [
+    105.0,
+    15.0,
+    -135.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 266,
+   "p": [
+    105.0,
+    15.0,
+    -75.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 267,
    "p": [
     105.0,
     15.0,
@@ -1498,7 +4336,39 @@
    "parts_motion_mm": 0.0
   },
   {
-   "k": 90,
+   "k": 268,
+   "p": [
+    105.0,
+    30.0,
+    -120.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 269,
+   "p": [
+    105.0,
+    30.0,
+    -60.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 270,
    "p": [
     105.0,
     45.0,
@@ -1514,7 +4384,39 @@
    "parts_motion_mm": 0.0
   },
   {
-   "k": 91,
+   "k": 271,
+   "p": [
+    105.0,
+    45.0,
+    -105.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 272,
+   "p": [
+    105.0,
+    45.0,
+    -45.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 273,
    "p": [
     105.0,
     60.0,
@@ -1530,7 +4432,39 @@
    "parts_motion_mm": 0.0
   },
   {
-   "k": 92,
+   "k": 274,
+   "p": [
+    105.0,
+    60.0,
+    -90.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 275,
+   "p": [
+    105.0,
+    60.0,
+    -30.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 276,
    "p": [
     105.0,
     75.0,
@@ -1546,7 +4480,39 @@
    "parts_motion_mm": 0.0
   },
   {
-   "k": 93,
+   "k": 277,
+   "p": [
+    105.0,
+    75.0,
+    -75.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 278,
+   "p": [
+    105.0,
+    75.0,
+    -15.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 279,
    "p": [
     105.0,
     90.0,
@@ -1562,7 +4528,37 @@
    "parts_motion_mm": 0.0
   },
   {
-   "k": 94,
+   "k": 280,
+   "p": [
+    105.0,
+    90.0,
+    -60.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 281,
+   "p": [
+    105.0,
+    105.0,
+    -150.0
+   ],
+   "eval_feasible": false,
+   "closes": false,
+   "body_mm": null,
+   "body_part": null,
+   "parts_mm": null,
+   "parts_pair": null
+  },
+  {
+   "k": 282,
    "p": [
     105.0,
     105.0,
@@ -1578,7 +4574,37 @@
    "parts_motion_mm": 0.0
   },
   {
-   "k": 95,
+   "k": 283,
+   "p": [
+    105.0,
+    120.0,
+    -120.0
+   ],
+   "eval_feasible": false,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 284,
+   "p": [
+    105.0,
+    135.0,
+    -150.0
+   ],
+   "eval_feasible": false,
+   "closes": false,
+   "body_mm": null,
+   "body_part": null,
+   "parts_mm": null,
+   "parts_pair": null
+  },
+  {
+   "k": 285,
    "p": [
     105.0,
     135.0,
@@ -1594,7 +4620,35 @@
    "parts_motion_mm": 0.0
   },
   {
-   "k": 96,
+   "k": 286,
+   "p": [
+    105.0,
+    150.0,
+    -120.0
+   ],
+   "eval_feasible": false,
+   "closes": false,
+   "body_mm": null,
+   "body_part": null,
+   "parts_mm": null,
+   "parts_pair": null
+  },
+  {
+   "k": 287,
+   "p": [
+    105.0,
+    165.0,
+    -150.0
+   ],
+   "eval_feasible": false,
+   "closes": false,
+   "body_mm": null,
+   "body_part": null,
+   "parts_mm": null,
+   "parts_pair": null
+  },
+  {
+   "k": 288,
    "p": [
     105.0,
     165.0,
@@ -1610,7 +4664,39 @@
    "parts_motion_mm": 0.0
   },
   {
-   "k": 97,
+   "k": 289,
+   "p": [
+    120.0,
+    0.0,
+    -150.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 290,
+   "p": [
+    120.0,
+    0.0,
+    -90.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 291,
    "p": [
     120.0,
     0.0,
@@ -1626,7 +4712,39 @@
    "parts_motion_mm": 0.0
   },
   {
-   "k": 98,
+   "k": 292,
+   "p": [
+    120.0,
+    15.0,
+    -135.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 293,
+   "p": [
+    120.0,
+    15.0,
+    -75.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 294,
    "p": [
     120.0,
     30.0,
@@ -1642,7 +4760,39 @@
    "parts_motion_mm": 0.0
   },
   {
-   "k": 99,
+   "k": 295,
+   "p": [
+    120.0,
+    30.0,
+    -120.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 296,
+   "p": [
+    120.0,
+    30.0,
+    -60.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 297,
    "p": [
     120.0,
     45.0,
@@ -1658,7 +4808,39 @@
    "parts_motion_mm": 0.0
   },
   {
-   "k": 100,
+   "k": 298,
+   "p": [
+    120.0,
+    45.0,
+    -105.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 299,
+   "p": [
+    120.0,
+    45.0,
+    -45.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 300,
    "p": [
     120.0,
     60.0,
@@ -1674,7 +4856,39 @@
    "parts_motion_mm": 0.0
   },
   {
-   "k": 101,
+   "k": 301,
+   "p": [
+    120.0,
+    60.0,
+    -90.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 302,
+   "p": [
+    120.0,
+    60.0,
+    -30.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 303,
    "p": [
     120.0,
     75.0,
@@ -1690,7 +4904,37 @@
    "parts_motion_mm": 0.0
   },
   {
-   "k": 102,
+   "k": 304,
+   "p": [
+    120.0,
+    75.0,
+    -75.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 305,
+   "p": [
+    120.0,
+    90.0,
+    -180.0
+   ],
+   "eval_feasible": false,
+   "closes": false,
+   "body_mm": null,
+   "body_part": null,
+   "parts_mm": null,
+   "parts_pair": null
+  },
+  {
+   "k": 306,
    "p": [
     120.0,
     90.0,
@@ -1706,7 +4950,37 @@
    "parts_motion_mm": 0.0
   },
   {
-   "k": 103,
+   "k": 307,
+   "p": [
+    120.0,
+    90.0,
+    -60.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 1.0,
+   "body_part": "S|D6-01 scapula base: J1 hub + tab, 2x M4 counterbored (Ti-6Al-4V)",
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 308,
+   "p": [
+    120.0,
+    105.0,
+    -150.0
+   ],
+   "eval_feasible": false,
+   "closes": false,
+   "body_mm": null,
+   "body_part": null,
+   "parts_mm": null,
+   "parts_pair": null
+  },
+  {
+   "k": 309,
    "p": [
     120.0,
     105.0,
@@ -1722,7 +4996,35 @@
    "parts_motion_mm": 0.0
   },
   {
-   "k": 104,
+   "k": 310,
+   "p": [
+    120.0,
+    120.0,
+    -120.0
+   ],
+   "eval_feasible": false,
+   "closes": false,
+   "body_mm": null,
+   "body_part": null,
+   "parts_mm": null,
+   "parts_pair": null
+  },
+  {
+   "k": 311,
+   "p": [
+    120.0,
+    135.0,
+    -150.0
+   ],
+   "eval_feasible": false,
+   "closes": false,
+   "body_mm": null,
+   "body_part": null,
+   "parts_mm": null,
+   "parts_pair": null
+  },
+  {
+   "k": 312,
    "p": [
     120.0,
     135.0,
@@ -1738,7 +5040,35 @@
    "parts_motion_mm": 0.0
   },
   {
-   "k": 105,
+   "k": 313,
+   "p": [
+    120.0,
+    150.0,
+    -120.0
+   ],
+   "eval_feasible": false,
+   "closes": false,
+   "body_mm": null,
+   "body_part": null,
+   "parts_mm": null,
+   "parts_pair": null
+  },
+  {
+   "k": 314,
+   "p": [
+    120.0,
+    165.0,
+    -150.0
+   ],
+   "eval_feasible": false,
+   "closes": false,
+   "body_mm": null,
+   "body_part": null,
+   "parts_mm": null,
+   "parts_pair": null
+  },
+  {
+   "k": 315,
    "p": [
     120.0,
     165.0,
@@ -1754,7 +5084,39 @@
    "parts_motion_mm": 0.0
   },
   {
-   "k": 106,
+   "k": 316,
+   "p": [
+    135.0,
+    0.0,
+    -120.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 317,
+   "p": [
+    135.0,
+    0.0,
+    -60.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 318,
    "p": [
     135.0,
     15.0,
@@ -1770,7 +5132,39 @@
    "parts_motion_mm": 0.0
   },
   {
-   "k": 107,
+   "k": 319,
+   "p": [
+    135.0,
+    15.0,
+    -75.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 320,
+   "p": [
+    135.0,
+    30.0,
+    -150.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 321,
    "p": [
     135.0,
     30.0,
@@ -1786,7 +5180,39 @@
    "parts_motion_mm": 0.0
   },
   {
-   "k": 108,
+   "k": 322,
+   "p": [
+    135.0,
+    45.0,
+    -165.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 323,
+   "p": [
+    135.0,
+    45.0,
+    -105.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 324,
    "p": [
     135.0,
     45.0,
@@ -1802,7 +5228,39 @@
    "parts_motion_mm": 0.0
   },
   {
-   "k": 109,
+   "k": 325,
+   "p": [
+    135.0,
+    60.0,
+    -120.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 326,
+   "p": [
+    135.0,
+    60.0,
+    -60.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 327,
    "p": [
     135.0,
     75.0,
@@ -1816,7 +5274,37 @@
    "parts_pair": null
   },
   {
-   "k": 110,
+   "k": 328,
+   "p": [
+    135.0,
+    75.0,
+    -75.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 329,
+   "p": [
+    135.0,
+    90.0,
+    -150.0
+   ],
+   "eval_feasible": false,
+   "closes": false,
+   "body_mm": null,
+   "body_part": null,
+   "parts_mm": null,
+   "parts_pair": null
+  },
+  {
+   "k": 330,
    "p": [
     135.0,
     90.0,
@@ -1832,7 +5320,37 @@
    "parts_motion_mm": 0.0
   },
   {
-   "k": 111,
+   "k": 331,
+   "p": [
+    135.0,
+    105.0,
+    -165.0
+   ],
+   "eval_feasible": false,
+   "closes": false,
+   "body_mm": null,
+   "body_part": null,
+   "parts_mm": null,
+   "parts_pair": null
+  },
+  {
+   "k": 332,
+   "p": [
+    135.0,
+    105.0,
+    -105.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 333,
    "p": [
     135.0,
     105.0,
@@ -1848,7 +5366,37 @@
    "parts_motion_mm": 0.0
   },
   {
-   "k": 112,
+   "k": 334,
+   "p": [
+    135.0,
+    120.0,
+    -120.0
+   ],
+   "eval_feasible": false,
+   "closes": false,
+   "body_mm": null,
+   "body_part": null,
+   "parts_mm": null,
+   "parts_pair": null
+  },
+  {
+   "k": 335,
+   "p": [
+    135.0,
+    120.0,
+    -60.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 7.93,
+   "body_part": "S|D6-01 scapula base: J1 hub + tab, 2x M4 counterbored (Ti-6Al-4V)",
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 336,
    "p": [
     135.0,
     135.0,
@@ -1862,7 +5410,39 @@
    "parts_pair": null
   },
   {
-   "k": 113,
+   "k": 337,
+   "p": [
+    135.0,
+    135.0,
+    -75.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 1.97,
+   "body_part": "S|D6-01 scapula base: J1 hub + tab, 2x M4 counterbored (Ti-6Al-4V)",
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 338,
+   "p": [
+    150.0,
+    0.0,
+    -165.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 339,
    "p": [
     150.0,
     0.0,
@@ -1878,7 +5458,39 @@
    "parts_motion_mm": 0.0
   },
   {
-   "k": 114,
+   "k": 340,
+   "p": [
+    150.0,
+    15.0,
+    -180.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 341,
+   "p": [
+    150.0,
+    15.0,
+    -120.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 342,
    "p": [
     150.0,
     15.0,
@@ -1894,7 +5506,39 @@
    "parts_motion_mm": 0.0
   },
   {
-   "k": 115,
+   "k": 343,
+   "p": [
+    150.0,
+    30.0,
+    -135.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 344,
+   "p": [
+    150.0,
+    30.0,
+    -75.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 345,
    "p": [
     150.0,
     45.0,
@@ -1910,7 +5554,37 @@
    "parts_motion_mm": 0.0
   },
   {
-   "k": 116,
+   "k": 346,
+   "p": [
+    150.0,
+    45.0,
+    -90.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 347,
+   "p": [
+    150.0,
+    60.0,
+    -165.0
+   ],
+   "eval_feasible": false,
+   "closes": false,
+   "body_mm": null,
+   "body_part": null,
+   "parts_mm": null,
+   "parts_pair": null
+  },
+  {
+   "k": 348,
    "p": [
     150.0,
     60.0,
@@ -1926,7 +5600,37 @@
    "parts_motion_mm": 0.0
   },
   {
-   "k": 117,
+   "k": 349,
+   "p": [
+    150.0,
+    75.0,
+    -180.0
+   ],
+   "eval_feasible": false,
+   "closes": false,
+   "body_mm": null,
+   "body_part": null,
+   "parts_mm": null,
+   "parts_pair": null
+  },
+  {
+   "k": 350,
+   "p": [
+    150.0,
+    75.0,
+    -120.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 351,
    "p": [
     150.0,
     75.0,
@@ -1942,7 +5646,37 @@
    "parts_motion_mm": 0.0
   },
   {
-   "k": 118,
+   "k": 352,
+   "p": [
+    150.0,
+    90.0,
+    -135.0
+   ],
+   "eval_feasible": false,
+   "closes": false,
+   "body_mm": null,
+   "body_part": null,
+   "parts_mm": null,
+   "parts_pair": null
+  },
+  {
+   "k": 353,
+   "p": [
+    150.0,
+    90.0,
+    -75.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 8.83,
+   "body_part": "S|D6-01 scapula base: J1 hub + tab, 2x M4 counterbored (Ti-6Al-4V)",
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 354,
    "p": [
     150.0,
     105.0,
@@ -1956,7 +5690,37 @@
    "parts_pair": null
   },
   {
-   "k": 119,
+   "k": 355,
+   "p": [
+    150.0,
+    105.0,
+    -90.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 2.43,
+   "body_part": "S|D6-01 scapula base: J1 hub + tab, 2x M4 counterbored (Ti-6Al-4V)",
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 356,
+   "p": [
+    150.0,
+    120.0,
+    -165.0
+   ],
+   "eval_feasible": false,
+   "closes": false,
+   "body_mm": null,
+   "body_part": null,
+   "parts_mm": null,
+   "parts_pair": null
+  },
+  {
+   "k": 357,
    "p": [
     150.0,
     120.0,

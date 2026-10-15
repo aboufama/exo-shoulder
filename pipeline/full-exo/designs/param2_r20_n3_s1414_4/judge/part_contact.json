@@ -1,14 +1,31 @@
 {
- "step": 12,
+ "step": 4,
  "tol_mm": 0.15,
- "frames_checked": 117,
- "pairs": 1707,
- "seconds": 25,
+ "frames_checked": 339,
+ "pairs": 1664,
+ "seconds": 64,
  "jobs": 4,
- "violations": {},
+ "violations": {
+  "H|UPPER ARM CUFF (lines and arcs: flat land + inner R arc + outer arc, extruded; AlSi10Mg bead blasted)  IN  F|FOREARM CUFF": {
+   "max_depth": 4.38,
+   "frames": 87,
+   "worst": [
+    "Drink from a cup",
+    64
+   ]
+  },
+  "F|FOREARM CUFF  IN  H|UPPER ARM CUFF (lines and arcs: flat land + inner R arc + outer arc, extruded; AlSi10Mg bead blasted)": {
+   "max_depth": 0.99,
+   "frames": 27,
+   "worst": [
+    "Drink from a cup",
+    72
+   ]
+  }
+ },
  "open_parts_not_tested_as_container": [
   "l2|D6-03 link 2: bent bar 8x3 + J2/J3 hubs (Ti-6Al-4V)"
  ],
  "inside": "integer winding number on welded tessellations (grid + segment crossings), depth = exact distance (judge/sdist.py)",
- "max_depth": 0.0
+ "max_depth": 4.38
 }
