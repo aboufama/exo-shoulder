@@ -7,7 +7,10 @@
  * g(psi) = R(s0, psi) g0 (the joint's moving axis). 3 ACTIVE (q1, psi, q3), 0 passive. Closed form as the model:
  * theta = angle(b, arm W); psi = the root of angle(b, M(psi) w2) = theta on the monotone segment of theta(psi) that
  * holds psi = 0 (unique, no branch flips), the 10 deg margin at a fold end; then q1 about b, q3 about W. Rims span the
- * contact range used on the loop +- 10 deg of psi; hub faces / rim radius schematic. */
+ * contact range used on the loop +- 10 deg of psi; hub faces / rim radius schematic. Measured here: 185 / 239 loop
+ * frames close in the window, psi spans 25..141 deg, and the planet rim then passes ~20 mm from the humerus axis line
+ * (inside the deltoid) near lateral abduction; phases gamma -180 / gamma2 45 keep the rims >= 60 mm off it but close only
+ * ~58 % of the loop: the model's gamma / gamma2 sweep trades the two. */
 (function () {
   const K = (typeof window !== 'undefined' ? window : globalThis).KIN, V = K.V, M = K.M;
   const P = { az: 2.43, el: 80.68, wd: 86.33, wa: 21.83, a1: 40, a2: 40, beta1: 30, beta2: 30, gamma: 0, gamma2: 180,
