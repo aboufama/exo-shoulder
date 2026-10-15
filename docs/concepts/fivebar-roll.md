@@ -17,3 +17,52 @@
 4. **What, other than me, shows the number is right.** The bench (tools/concept_bench.py, Bench(60,160) on the fast
    grid cache, K3 march mode), the kit's audit (honest flag), the adversarial verifier on the exact path, and a
    red-team pose list (rest, overhead, across-body, behind-back, the pose with the least clearance on the best config).
+
+## Result (Bench(60,160), fast grid cache, K3 march, K2 dense, K6 on)
+
+**Dead: best gap 89.13** against the champion 3R's 68.93. Reach 0.631, follow 0.883, in-band 14 0.344, in-band 10
+0.185, contact 0. Sweep entry k=13: a coaxial base at bvec(94.7, 83.7) (top of the shoulder, one double-row hub),
+cranks 75 / 90, couplers 60 / 45, W = wdir(90, 0), branches -1 / -1, leg margin 5 deg, parallel margin 8 deg, q 1.0.
+With the spec's margins (8 / 12 deg) the same design scores 90.30 (k=6). The model uses 231 g of Ti. Closure residual
+is 0, there are 0 flips along the clips, and 8.9 % of the closing poses collide.
+
+The 20 bench configurations are in `sweeps/fivebar-roll.json`. They were chosen by a skin-aware prefilter
+(`prefilter` in the model) over about 17 000 random configurations, after a 6 000-configuration kinematic-only screen.
+
+## What I changed from the spec, and why
+
+- **The spec's base pair cannot be built.** Its preferred bases, bvec(-60,40) and bvec(-40,40), are 15 deg apart.
+  At about 60 mm that puts two O20 hubs 16 mm apart, so K6 rejects every pose. The sweep therefore keeps the bases at
+  least 22 deg apart, or makes them coaxial. The coaxial variant won.
+- **The spec's arcs (crank 60 / coupler 120) are not wearable.** A 120 deg coupler passes over the neck or the torso in
+  some closing pose, so its rigid level goes to 400 mm (the seed config scored gap 313). Without skin, kinematics is a
+  bad guide here. The kinematic-only screen preferred bases on the anterior-inferior chest, which are buried under
+  the skin. That is why the prefilter is built on the posed skin itself: a 3-deg scapula-frame map of the K3
+  requirement in all 220 poses.
+- The arm hub at W has two bearing rows (r 11.9, crown 16.3). The arm plate is at F, coupler 1 at F + 3.15 and
+  coupler 2 at F + 6.3. The elbows are P14 pins (r 7, crown 8, one MR126 each), declared hubless. The couplers pass
+  over the cranks, the neck and each other by construction, and K6 still checks every pair.
+
+## Measured limiter (red team on the best config)
+
+- **Proximity.** Coupler 1 sits at 82-137 mm and coupler 2 at 99-141 mm, with pins at 129 and 99 mm. Each of these
+  is 0-1 % in band. When the arm goes overhead the elbows climb over the cap, and a rigid arc must clear the highest
+  skin it ever passes over. Only the coaxial base hub (100 %), the W hub (56 %), the neck (68 %) and the cranks'
+  near-base halves (24-42 %) are in band.
+- **Reach dies overhead.** Workspace poses taken: 0.88 at elevation 0-60, 0.48 at 60-100, 0.38 at 100-140, 0.17 above
+  140. Of the 160 workspace poses, 32 are lost to leg singularities (W leaves the annulus |a-c| .. a+c), 9 to the
+  loop's parallel singularity and 15 to part-part collisions.
+- **Pinch.** Crank 1 comes to 2.0 mm at plane 0, elevation 60, axial -60. That is the clearance rule exactly, not a
+  contact.
+- **The trade-off is structural.** On the prefilter front, the configurations with in-band >= 0.6 reach only 0.25-0.4
+  of the workspace, and those that reach >= 0.8 put a coupler or an elbow at 120-400 mm. The W cloud in the scapula
+  frame has a cone radius of 82-118 deg, so each leg's annulus must be at least that wide. That forces
+  a + c >= ~120 deg per leg: four long rigid arcs over the moving cap, against the 3R's two.
+
+## Verdict
+
+Not worth a GPU sweep. Spreading the J2 load onto two two-force couplers does not remove the 3R's limiter, which is
+rigid links clearing the highest skin they pass over. It doubles the problem. New knowledge: a 2-DOF spherical
+pointer that must cover this W cloud (cone radius >= 82 deg about any base) needs arcs totalling at least ~120 deg per
+leg. This holds for any parallel spherical pointer with rigid links (SPM legs included), so those families inherit
+the same front unless their links move with the skin.

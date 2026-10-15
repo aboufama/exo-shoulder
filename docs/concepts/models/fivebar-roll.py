@@ -105,6 +105,62 @@ def evaluate(B, p, **kw):
     return K.evaluate(B, build, p, **kw)
 
 
+# ---- skin-aware kinematic prefilter (how the bench configurations were chosen; not a judge) ------------------------
+def prefilter(B, n=9000, seed=7, out=None):
+    """random configurations scored by a cheap surrogate: the K3 march requirement on a 3-deg scapula-frame direction
+    grid in every bench pose (the posed skin itself), member centre lines + strap edges looked up per pose, rigid level
+    = max over the closing poses, 'in band' = level - requirement + 2 in [2, 14]; + 1 per mm of any member level over
+    110 mm (an over-high member drags the couplers up through `over`). Returns the sorted list."""
+    F = K.frames(B); P = len(F.RS); pi = np.arange(P); AZ = np.arange(-180, 180, 3.0); EL = np.arange(-60, 90.1, 3.0)
+    A_, E_ = np.meshgrid(AZ, EL, indexing="ij"); D = K.bvec(A_.ravel(), E_.ravel())
+    R = K.requirement(B, np.repeat(pi, len(D)), F.S(D).reshape(-1, 3), t1=200.0).reshape(P, len(D)); R[~np.isfinite(R)] = 400.0
+    HGs = np.einsum("pji,pjk->pik", F.RS, F.RHG); BAR = np.einsum("pji,pjk->pik", F.RS, F.RH) @ K.unit(K.BAR0_H)
+
+    def look(v):
+        el = np.degrees(np.arcsin(np.clip(v[..., 1], -1, 1))); az = np.degrees(np.arctan2(v[..., 2], -v[..., 0]))
+        ia = np.round((az + 180) / 3).astype(int) % len(AZ); ie = np.clip(np.round((el + 60) / 3).astype(int), 0, len(EL) - 1)
+        return R[pi[:, None], ia * len(EL) + ie]
+
+    def arc(u, v):
+        u, v = K.unit(u), K.unit(v); ang = np.arccos(np.clip((u * v).sum(-1), -1, 1)); m = max(3, int(np.degrees(np.median(ang)) / 3) + 1)
+        th = np.linspace(0, 1, m)[None] * ang[:, None]; e2 = K.unit(np.cross(np.cross(u, v), u))
+        return np.cos(th)[..., None] * u[:, None] + np.sin(th)[..., None] * e2[:, None]
+
+    def surrogate(p):
+        l1 = K.bvec(p["u1az"], p["u1el"]); l2 = l1 if p["coax"] else K.bvec(p["u2az"], p["u2el"])
+        u1, u2 = np.broadcast_to(l1, (P, 3)), np.broadcast_to(l2, (P, 3)); W = HGs @ K.wdir(p["wd"], p["wa"])
+        e1, o1, _ = K.closure(u1, W, p["a1"], p["c1"], p["s1"], p["margin"]); e2, o2, _ = K.closure(u2, W, p["a2"], p["c2"], p["s2"], p["margin"])
+        n1, n2 = K.unit(np.cross(e1, W)), K.unit(np.cross(e2, W))
+        ok = o1 & o2 & (np.linalg.norm(np.cross(n1, n2), axis=-1) >= np.sin(np.radians(p["par"]))) & \
+            (np.degrees(np.arccos(np.clip((e1 * e2).sum(-1), -1, 1))) >= p["sep"])
+        if ok.sum() < 10: return None
+        ib, lv = [], []
+        for j, m in enumerate([arc(u1, e1), arc(u2, e2), arc(e1, W), arc(e2, W), arc(W, BAR), u1[:, None], u2[:, None], e1[:, None], e2[:, None], W[:, None]]):
+            r = look(m)
+            if j < 5:
+                nrm = K.unit(np.cross(m[:, :1], m[:, -1:]))
+                for sg in (-1, 1): r = np.maximum(r, look(K.unit(m + sg * 0.086 * nrm)))
+            lev = r[ok].max(0); d = lev[None] - r[ok] + 2; ib.append(((d <= 14) & (d >= 2)).reshape(ok.sum(), -1)); lv.append(float(lev.mean()))
+        i14 = float(np.concatenate(ib, 1)[F.clip[ok]].mean()); ws, cl = float(ok[F.ws].mean()), float(ok[F.clip].mean())
+        return dict(ws=ws, clip=cl, ib=i14, lv=lv, gap=100 * (max(0, .9 - i14) + max(0, .95 - cl) + max(0, .9 - ws)) + sum(max(0.0, x - 110) for x in lv))
+
+    rng = np.random.default_rng(seed); res = []
+    Ws = [(60, 30), (71.38, 4.78), (86.3, 21.8), (90, 0), (100, 20), (112, -15), (75, -20), (80, 45), (60, 0), (100, -30)]
+    for _ in range(n):
+        p = dict(PARAMS, coax=bool(rng.random() < 0.3), u1az=float(rng.uniform(-180, 180)), u1el=float(rng.uniform(-30, 85)),
+                 u2az=float(rng.uniform(-180, 180)), u2el=float(rng.uniform(-30, 85)), a1=float(rng.choice(np.arange(25, 95, 5))),
+                 a2=float(rng.choice(np.arange(25, 95, 5))), c1=float(rng.choice(np.arange(25, 115, 5))), c2=float(rng.choice(np.arange(25, 115, 5))),
+                 s1=int(rng.choice([-1, 1])), s2=int(rng.choice([-1, 1])))
+        p["wd"], p["wa"] = Ws[rng.integers(len(Ws))]
+        if p["coax"]: p.update(u2az=p["u1az"], u2el=p["u1el"])
+        elif np.degrees(np.arccos(np.clip(K.bvec(p["u1az"], p["u1el"]) @ K.bvec(p["u2az"], p["u2el"]), -1, 1))) < 22: continue   # two O20 hubs overlap
+        sc = surrogate(p)
+        if sc: res.append(dict(sc, p=p))
+    res.sort(key=lambda x: x["gap"])
+    if out: json.dump(res[:300], open(out, "w"))
+    return res
+
+
 if __name__ == "__main__":
     a = sys.argv[1:]
     B = K.bench(60, 160)
@@ -114,6 +170,9 @@ if __name__ == "__main__":
         cfg = [dict(PARAMS, **c) for c in json.load(open(a[1]))]
         best, rows = K.sweep(B, build, cfg, SWEEP_JSON, resume=True)
         print("BEST", best)
+    elif a[0] == "prefilter":                      # prefilter <out.json> [n] [seed]
+        r = prefilter(B, int(a[2]) if len(a) > 2 else 9000, int(a[3]) if len(a) > 3 else 7, a[1])
+        for e in r[:15]: print(round(e["gap"], 1), round(e["ws"], 3), round(e["clip"], 3), round(e["ib"], 3), e["p"])
     elif a[0] == "write":                          # write <k>: re-evaluate sweep entry k and write the row
         rows = json.load(open(SWEEP_JSON)); e = rows[int(a[1])]
         r = evaluate(B, e["params"]); print(json.dumps({x: r[x] for x in r if x not in ("sample_mm",)}, default=str))

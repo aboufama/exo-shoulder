@@ -1,0 +1,41 @@
+{
+ "id": "fivebar-roll",
+ "name": "Spherical five-bar pointer plus an active arm roll",
+ "lens": "closed-loop",
+ "family": "spherical five-bar + roll",
+ "active_dof": 3,
+ "passive_dof": 3,
+ "status": "dead",
+ "t_ideated": null,
+ "t_screened": "2026-10-15T19:08:53Z",
+ "reach": 0.6312,
+ "follow": 0.8833,
+ "inband14": 0.3442,
+ "inband10": 0.1849,
+ "contact": 0.0,
+ "gap": 89.13,
+ "v_reach": null,
+ "v_follow": null,
+ "v_inband14": null,
+ "v_inband10": null,
+ "v_gap": null,
+ "n_configs": 20,
+ "verdict": "not worth a GPU sweep: best gap 89.13 vs the champion 3R 68.93 (Bench(60,160), march, K2 dense, K6); the skin-aware prefilter over ~17 000 configurations shows the same reach-vs-proximity front, worse than the 3R's (4 rigid arcs + 2 elbows over the cap instead of 2 arcs + 1 elbow)",
+ "note": "best sweep entry k=13 {'u1az': 94.73248043278903, 'u1el': 83.69955944451229, 'u2az': 94.73248043278903, 'u2el': 83.69955944451229, 'coax': True, 'a1': 75.0, 'a2': 90.0, 'c1': 60.0, 'c2': 45.0, 'wd': 90, 'wa': 0, 's1': -1, 's2': -1, 'margin': 5.0, 'par': 8.0, 'sep': 17.0, 'wc': 10.0, 'q': 1.0}; leg margin 5 deg / parallel 8 deg (at the spec's 8 / 12: gap 90.30, k=6); honest flag false only for coupler 2 sampled at 4.03 mm (kit layout at r_ref 70, coupler at 141 mm; threshold 4.0) - it is 0 % in band, denser sampling only lowers in-band; elbows are P14 pins (declared hubless); mass 231 g Ti",
+ "doc": "docs/concepts/fivebar-roll.md",
+ "limiter": "couplers and elbow pins ride high: coupler 1 level 82-137 mm, coupler 2 99-141 mm, pin B1 129 mm, pin B2 99 mm (0-1 % in band) because the elbows climb over the cap when the arm goes overhead and every rigid arc must clear the highest skin it ever passes over; reach lost overhead (ws taken 0.38 at elevation 100-140, 0.17 above 140) to leg singularities (32/160 ws poses), parallel singularity (9), collisions (15)",
+ "honest": false,
+ "checks": {
+  "mode": "march",
+  "cont": true,
+  "collide": true,
+  "q": 1.0
+ },
+ "audit": [
+  "coupler2: sparse sampling (4.03 mm median spacing > 4 mm)"
+ ],
+ "hubless": [
+  "B1",
+  "B2"
+ ]
+}
