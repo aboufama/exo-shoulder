@@ -69,6 +69,16 @@ a local run), `--env K=V`, `--timeout S`, `--bench-cache` (ship `.cache/concept_
 Every job prints: return code, run seconds, CPU, the $ it cost, the last log lines; the full log is in
 `~/.cache/cloud_run/logs/<tag>.log`. The batch line gives wall-clock, the parallel speed-up and the billed worker-seconds.
 
+
+**farm-3 LIVE and verified 2026-10-15 23:54 UTC.** The in-place deploy (build cmva64ybx002jbu48uukfimxc, 23:27) did not
+reach the busy farm-2 workers (a rolling release replaces a worker only when it frees up; the queue never emptied). After
+the container restart orphaned every client, the queue was purged (11 jobs) and workersMax set 0 -> 6 to recycle the
+workers: ping then said farm-3, and 8 sleep-20 jobs ran 4 at once on one worker and 3 at once on another (wall 38 s).
+Parity: 8 configurations of docs/concepts/models/_template.py, local (4 processes) vs farm-3 (2 processes per job):
+max |difference| 0 over reach, follow, inband14, inband10, contact and gap. `CLOUD_JOBS_PER_WORKER` now defaults to 4
+in tools/cloud_run.py: 6 workers x 4 = 24 job slots, 2 vCPU each. Rollback: tools/farm_redeploy.py rollback
+cmv9uml2f0014ra2zvjvp63f2 (then CLOUD_JOBS_PER_WORKER=1).
+
 ## When to use it (user, 2026-10-15: "as cheap as possible if it provides a big speed up")
 
 - Send work here only when the batch saves >= 3x wall-clock over this box: judge_all on a design, a concept sweep,
