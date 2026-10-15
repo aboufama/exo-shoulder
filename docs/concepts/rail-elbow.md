@@ -267,8 +267,34 @@ dishonest: strap 1 and the bridge ramp up to it, sampled at 4.8-4.9 mm).
 * Its per-pose need: p50 70, p90 103, p95 121, max 209 mm.
 * Laid out at 70 mm, some stations find no clearance at all (400).
 
-The CMA of the rigid variant (stream R, sigma 0.6, seed 21, d_off scale 8) is queued on the farm; its result goes
-below.
+**Result (stream R, farm, sigma 0.6, seed 21, d_off scale 8, 249 tries, $0.08, stage `cma2-R`, k1601-k1849): best
+k1841, gap 59.34 (score 78.42).** That is honest, MVP1-legal, contact 0, reach 0.900, follow 1.000, in-band 14 0.307,
+in-band 10 0.187. Parameters: az 6.88, el 77.46, a1 77.51, a2 65.87, W (94.73, 6.76), d_off -57.51, r_lay 145.
+
+What the search did with the rail:
+* It drove the rail almost onto the J2 pole. Polar alpha is 8.4 deg, so the rail is a ring 21 mm in radius around p2,
+  sitting 145 mm from GH (about 87 mm off the skin).
+* It is still 0 % in band, but it now carries only a small share of the samples.
+
+In other words, the legal rail converges toward the champion's J2 hub. The stream is not converged: it gained 2.39 pt
+over its second half and 1.51 pt over its last third, and its top 5 are within 0.48 pt.
+
+### Control: the plain spherical 3R at the same axes (the decisive red-team test)
+
+The kit's honest champion model is `docs/concepts/models/_template.py`: flat O20 hubs at J1, J2 and J3, 12 x 3 links,
+K7 neck, q 1.0, dense K2, K6. It reproduces 65.05 at the champion's axes. Run at each rail-elbow configuration's own
+b / W / a1 / a2 / sigma (local, Bench(60,160) fast), it is better every time:
+
+| axes from | rail-elbow | plain 3R, same axes | 3R in band per member |
+|---|---|---|---|
+| k172 (polish best) | 63.72 | **59.46** (honest, contact 0) | hub3 0.35, link1 0.37, neck 0.49, hub2 0.00 |
+| k1530 (CMA best, telescopic) | 57.19 | **51.97** (honest, contact 0, reach 0.888, follow 1.0, in-band 14 0.393, in-band 10 0.224) | hub3 0.75, link1 0.32, neck 0.68, link2 0.06, hub2 0.00 |
+| k1841 (CMA best, rigid rail) | 59.34 | **55.40** (honest, contact 0) | hub3 0.49, link1 0.36, neck 0.58 |
+
+**The rail costs 4-5 gap points against an O20 hub at the same axes.** Everything that put this morphology ahead of
+the champion came from the axes the CMA found (J1 axis b, W, a1, a2), and those axes are worth more in the champion's
+own topology: **51.97 (score 81.1) vs the champion's 65.05**, both on honest kit geometry. The 3R control at k1530's
+axes on Bench(110,360), exact, 1 mm radial, is queued on the farm (`bigbench-3r-at-railA`).
 
 ### Red team
 
@@ -317,3 +343,20 @@ below.
    * (d) Not modelled, all of which would make it worse: the 2:1 drive and its parts, the roller housings, the stage-2
      end stops' strikers, and the 1 mm radial part clearance. The last costs nothing at k172 on Bench(60,160): K6 is
      1.96 % at both 0.5 and 1 mm.
+
+### Verdict (stage 1)
+
+**Refuted as a morphology; the axis search it triggered is the finding.**
+* The sweep is converged in its best basin: 57.19 at k1530, gate passed over 1533 CMA tries.
+* That number needs a cable-driven telescope, which MVP1 forbids.
+* The MVP1-legal rail reaches 59.34 (not converged) by shrinking into a hub.
+* At the same axes, the plain spherical 3R beats every one of them by 4-5 points (51.97 / 55.40 / 59.46).
+
+Do not take rail-elbow to L1 CAD. What should happen next (the loop):
+1. CMA of the plain 3R (`_template.py`, or the champion's own builder) from k1530's axes, with width, t_link and
+   neck_deg free.
+2. The Bench(110,360) exact re-measure of the converged 3R.
+3. L1 keep-out CAD of that 3R (the champion pipeline: `pipeline/full-exo/designs/...`, `tools/judge_all.sh`).
+4. The outside judges (R1 aim 2-10 mm >= 90 %).
+
+The arm-end in-band (hub 3 0.75, neck 0.68) is where the new axes win, so the CAD should check those parts first.
