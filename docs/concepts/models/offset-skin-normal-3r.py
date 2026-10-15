@@ -47,7 +47,9 @@ PARAMS.update(remote=1, ramp=1, neck=13.0, S_auto=1, jam_contact=1, drop=1, slid
               az2=24.1, el2=48.5, b2=0.0,       # J2 home seat (posterior acromion / deltoid); b2 0 = exact
               wd=75.2, wa=-13.0, b3=0.6,        # J3 seat on the arm (band humerus frame w_dir), axis tilted to the skin normal by b3
               S_max=25.0, centre=1,             # slide travel cap (mm each); ranges centred on the mid travel
-              R_tol=0.5)                        # the radial (hub-3 normal) closure tolerance = the honesty rule; NO radial slide
+              R_tol=0.5,                        # the radial (hub-3 normal) closure tolerance = the honesty rule; NO radial slide
+              inv=1)                            # 1: INVERTED along-guide - its short carriage is fixed on the cuff and its rail
+                                                #    rides with carriage A (member 4), so nothing arm-fixed reaches under the neck
 
 # ---- the rest pose and its skin (bench independent; as skin-normal-hubs-selfaligning.py) ------------------------------
 _REST = {}
@@ -111,6 +113,31 @@ class Design(S.Design):
         return (np.abs(d[:, 0]) <= P["S_a"]) & (np.abs(d[:, 1]) <= P["S_t"]) & (np.abs(d[:, 2]) <= P["R_r"])
 
 
+class Geometry(S.Geometry):
+    """inv=1: the along-guide upside down. Arm-fixed (member 5) = the guide's carriage, a CAR_L x CAR_W x RAIL_H block at
+    the stage centre (mid travel); member 4 = carriage A + the along rail (RAIL_W x CAR_L + 2 S_a, overhanging carriage A
+    along the arm) in one layer at RAIL_H + RUN. Same stack height as the seed's stage. The rail's proximal end stays at
+    the neck end (it follows member 3 along the arm), the arm-fixed block never comes nearer than the neck end + 0, so the
+    member-3 neck and hub 3 never pass over arm-fixed metal (the seed's neck-rail / hub3-rail jams, measured here: 55-103
+    poses with the arm-fixed long rail)."""
+    def __init__(self, D):
+        super().__init__(D)
+        P = D.p
+        if not (P.get("inv") and P.get("slides", 1)): return
+        cs = D.stage_c(); sa, st, sn = D.sa, D.st, D.sn; Sa, St = P["S_a"], P["S_t"]
+        g = {x["name"]: x for x in self.groups}
+        def put(r): return cs[None] + r[:, :1] * sa + r[:, 1:] * st
+        Bb = put(S.rect(S.CAR_L, S.CAR_W)); g["rail"].update(B=Bb, N=np.broadcast_to(sn, Bb.shape).copy(), off=np.zeros(len(Bb)))
+        Bc = put(S.rect(S.CAR_L, S.CAR_W + 2 * St)); g["carA"].update(B=Bc, N=np.broadcast_to(sn, Bc.shape).copy(), off=np.full(len(Bc), S.RAIL_H + S.RUN))
+        r = S.rect(S.CAR_L + 2 * Sa, S.RAIL_W); r = r[np.abs(r[:, 0]) > S.CAR_L / 2]
+        if len(r):
+            Br = put(r); self.groups.append(dict(name="strip", mem=4, B=Br, N=np.broadcast_to(sn, Br.shape).copy(), shared="stack",
+                                                 off=np.full(len(Br), S.RAIL_H + S.RUN)))
+
+
+S.Geometry = Geometry          # this module's private copy of the seed model builds the inverted stage when inv=1
+
+
 class Model(S.VModel):
     """S.VModel (the verifier's checks) on this Design; R_r is the closure tolerance (no radial slide)"""
     def __init__(self, B, params=None, verbose=False):
@@ -146,6 +173,41 @@ class Model(S.VModel):
             return Q, Q @ loc
         return super().T(m, i)
 
+    def _inv(self): return bool(self.p.get("inv")) and bool(self.p.get("slides", 1))
+
+    def _boxes_at(self, i):
+        out = super()._boxes_at(i)
+        if not self._inv(): return out
+        D = self.D; P = D.p; tr = self._tr_fit; cs = D.stage_c(); sn = D.sn; Rst = np.stack([D.sa, D.st, sn], 1)
+        spec = {"rail": (5, cs + (tr + S.RAIL_H / 2) * sn, np.array([S.CAR_L / 2, S.CAR_W / 2, S.RAIL_H / 2])),
+                "carA": (4, cs + (tr + S.RAIL_H + S.RUN + S.CAR_H / 2) * sn, np.array([S.CAR_L / 2 + P["S_a"], (S.CAR_W + 2 * P["S_t"]) / 2, S.CAR_H / 2]))}
+        for nm, (m, cen, half) in spec.items():                     # carA here = the bounding box of carriage A + the rail (link 2 avoids it)
+            R, t = self.T(m, i); out[nm] = (R @ cen + t, R @ Rst, half)
+        return out
+
+    def _contact_only(self):
+        super()._contact_only()
+        if not self._inv(): return
+        D = self.D; P = D.p; tr = self.tr; sa, st, sn = D.sa, D.st, D.sn
+        def box_edges(mem, L, W, z0, z1):
+            pts = []
+            for z in (z0, z1):
+                for x in np.arange(-L / 2, L / 2 + 1e-6, S.SPACING): pts += [(x, -W / 2, z), (x, W / 2, z)]
+                for y in np.arange(-W / 2, W / 2 + 1e-6, S.SPACING): pts += [(-L / 2, y, z), (L / 2, y, z)]
+            a = np.array(pts); return (mem, D.stage_c() + a[:, :1] * sa + a[:, 1:2] * st + a[:, 2:] * sn)
+        z1 = tr + S.RAIL_H + S.RUN
+        self.contact = self.contact[:-3] + [box_edges(5, S.CAR_L, S.CAR_W, tr, tr + S.RAIL_H),
+                                            box_edges(4, S.CAR_L, S.CAR_W + 2 * P["S_t"], z1, z1 + S.CAR_H),
+                                            box_edges(4, S.CAR_L + 2 * P["S_a"], S.RAIL_W, z1, z1 + S.CAR_H),
+                                            box_edges(3, S.CAR_L, S.CAR_W, self.zb, self.zb + S.CAR_H)]
+
+    def _solids(self):
+        super()._solids()
+        if not self._inv() or not self.box: return
+        D = self.D; P = D.p; tr = self.tr; cs = D.stage_c(); sn = D.sn
+        self.box["rail"] = (5, cs + (tr + S.RAIL_H / 2) * sn, np.array([S.CAR_L / 2, S.CAR_W / 2, S.RAIL_H / 2]))
+        self.box_strip = (4, cs + (tr + S.RAIL_H + S.RUN + S.CAR_H / 2) * sn, np.array([S.CAR_L / 2 + P["S_a"], S.RAIL_W / 2, S.CAR_H / 2]))
+
     def hub12(self):
         """hub 1 vs hub 2 cylinders (both in member 1: one static check)"""
         if not hasattr(self, "_h12"):
@@ -157,8 +219,17 @@ class Model(S.VModel):
         return self._h12
 
     def collide(self, i):
-        m0 = super().collide(i); self.last_clear["hub1-hub2"] = round(self.hub12(), 1)
-        return min(m0, self.hub12())
+        m0 = super().collide(i); self.last_clear["hub1-hub2"] = round(self.hub12(), 1); out = [m0, self.hub12()]
+        if self._inv() and self.box:                                  # the moving along-rail (member 4) vs every non-adjacent part
+            D = self.D; Rst = np.stack([D.sa, D.st, D.sn], 1); mb, cen, half = self.box_strip; Rb, tb = self.T(mb, i)
+            cw, Rw = Rb @ cen + tb, Rb @ Rst
+            def tf(m, P): R, t = self.T(m, i); return P @ R.T + t
+            for nm in ("hub1", "hub2"):
+                m, P = self.cyl_surf[nm]; v = float(self.sd_box(tf(m, P), cw, Rw, half).min()); out.append(v); self.last_clear[f"strip-{nm}"] = round(v, 1)
+            for nm in ("L1", "L2"):
+                m, P = self.strap[nm]
+                if len(P): v = float(self.sd_box(tf(m, P), cw, Rw, half).min()) - S.T_LINK / 2; out.append(v); self.last_clear[f"strip-{nm}"] = round(v, 1)
+        return min(out)
 
 
 def _report(B, params):
