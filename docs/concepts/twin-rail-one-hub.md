@@ -104,3 +104,78 @@ the arm) is never honest: in every one J2's axis finds no skin to sit on within 
 * **The variant that removes the crown-rail limiter** (`revolve=0`: crown rail shaped per station, a cam track with a
   radial float in carriage 1; an optimistic bound, the float's own height not charged): crown rail 0.64 in band,
   in-band 14 0.42, but **gap 97.64** (reach 0.54, follow 0.82, the same pose losses). Still 29 behind the champion.
+
+## CMA-ES on the farm (tools/concept_cma.py, popsize 8, sigma 0.3; 4 streams; 1712 s wall, $0.19)
+
+Parameters: az1, el1 (crown-rail axis a1), wd, wa (arm-rail axis a3), a12, a23, d1 (rail-to-hub cone offset), ar3,
+cov, Lc; W1 = W3 = 20, margin 10, q 1.0, constant-section rails. Every try is in the sweep log, in order.
+
+| stream (start) | tries | best honest gap | note |
+|---|---|---|---|
+| A (coarse leader k64) | 1105 | **91.97** (k1091) | converged (sigma 0.3 -> collapse); top 5 within 0.02 gap |
+| B (k94) | 81 | none honest | link 2 floats > 140 mm (sparse), best dishonest 103.05 |
+| C (k124, crown rail 0.34 in the coarse) | 97 | none honest | bridge + link 2 float, best dishonest 106.56 |
+| D (k134, arm rail lower on the arm, ar3 31) | 57 | none honest | crown rail, bridge, link 2 float, best dishonest 114.54 |
+
+**Convergence gate (variant a, all 1509 tries in order, score points): gain over the 2nd half 0.10 (< 1), over the
+last third 0.02 (< 0.5), top-5 spread 0.01 (<= 3): CONVERGED** (stream A's basin; stream A alone: 0.10 / 0.05 / 0.01).
+
+**Best k1091** (Bench(60,160), fast grid, march, K2 dense, K6, audit clean; re-run locally: identical 91.97, honest):
+gap **91.97** (score **66.6**): reach 0.744, follow 0.950, in-band 14 0.137, in-band 10 0.084, contact 0. Crown rail
+about a1 = bvec(97.7, 65.3) at cone 31.2 deg (rows 93-108 mm, 216 deg, 184 mm long); J2 at a12 53.4 (level 92 mm,
+15.6 mm free above it: parking rule OK); arm rail a near-closed ring (329 deg, cone 11.2 deg about a3 = wdir(49.0,
+-28.8), rows 112-128 mm, ~22 mm ring radius) - a ring bearing round a lateral humeral pole, not a rail along the
+arm; a23 88.8, sigma -1, cov 0.966, shoe 24 mm (the clamp; CMA asked 23.1). Layout fix point: R1 94 / fitted 93,
+R3 108 / fitted 112 (bands at or above their nominal width). Ti mass 298 g (335 g with 5.5 mm straps).
+Per member in band: crown rail **0.0006**, carriage-1 lips 0.99, bridge 0.0, **hub 2 0.0009**, **link 2 0.0002**,
+carriage-3 lips 0.04, arm rail 0.23, neck 0.97.
+
+## Red team of the best (k1091)
+
+* **Pose groups taken**: rest 57 / 57; **overhead 6 / 17** (3 closure, 4 beyond the rails, 4 part collisions);
+  across the body 20 / 27 (3 closure, 4 beyond the rails); behind the back 18 / 21 (3 beyond the rails).
+* **The pose that jams** (measured per lost overhead pose): the *Raise overhead* clip frames at plane 30, elevation
+  135-150, axial -45..-60: the arm-fixed K7 neck runs into the S-fixed crown rail (K6). Plane 0-30, elevation 150,
+  axial 0: the J2 fold (closure margin -17..-20 deg). Plane 90-120, elevation 150-165, axial -90..-135: beyond the
+  rails' travel. Plane 105, elevation 165: carriage 3 against the neck.
+* **The pose that sets the crown rail**: plane 45, elevation 165, axial -90: rows 93-108 mm against a median skin
+  requirement of **51 mm** along the arc. The arm rail is set by plane 45, elevation 15, axial -105 (strong internal
+  rotation): rows 112-128 mm against a median 90.
+* **The point that pinches**: the neck at 2.02 mm (hand behind the back, plane -90, elev 45, axial 120; and full
+  elevation, plane 60, elev 165) and the arm rail at 2.02 mm (plane 45, elev 15, axial -105): taken, on the 2 mm rule.
+* **The optimistic numbers**: (1) the carriage-1 lips (0.99 in band) and the neck (0.97) carry the whole in-band
+  share; the morphology's own rails and the middle joint are ~0. (2) The shaped crown-rail bound (97.64 at the coarse
+  leader) does not charge the radial float's height. (3) The arm "rail" is legal only because a 24 mm shoe may wrap
+  up to 120 deg of its circle; with the spec's 40-60 mm shoe it would not close at this ring radius.
+
+## Verdict
+
+**Dead, with the gate converged.** Best honest gap 91.97 (score 66.6), against the spherical champion's 68.93 and
+the verified leaders 64.7 / 66.47 on the same idea of a 3R. Measured reasons:
+1. **The rails attack the wrong limiter.** The pole hubs were never the problem (O20 hubs at J1 / J3 sit 98-100 % in
+   band in every verified 3R). The spherical family's limiter, J2 and link 2 over the deltoid, is untouched: here
+   hub 2 is 0.0009 and link 2 0.0002 in band.
+2. **A long arc rail cannot hug.** The 3R's carriage travels are >= ~300 deg in sum over every valid axis set, so
+   each rail spans 120-190 deg plus the shoe. One constant section must clear the highest skin anywhere on that arc
+   in any pose: the crown rail sits 93-108 mm over skin whose median requirement along the arc is 51 mm (set by full
+   elevation, where the arm passes under the S-fixed arc). It is never in band.
+3. **The arm rail cannot be a rail.** To span the humeral rotation range it must wrap 210-330 deg; the search
+   collapses it into a 22 mm ring bearing round a lateral humeral pole, the J3 hub again, and reach is still capped
+   at 0.74 (cov 1.0 would need 420 deg).
+4. **The variant that removes limiter 2** (crown rail shaped per station: a cam track with a radial float, which
+   costs height that was not charged) still scores only 97.64 at the coarse leader's axes: the reach and J2 / link 2
+   losses remain.
+
+What predicts beyond this morphology: any joint realised as an arc rail on a body segment inherits the 3R's joint
+travel (here >= ~300 deg summed), and a rigid constant section on a 120-190 deg arc is set by the single highest
+skin point along the arc over all poses. Rails pay only where the travel is short (< ~60 deg) or where the rail
+follows a body-fixed path whose skin radius is constant along it. Neither holds at J1 or J3 of a shoulder 3R.
+
+## Files
+
+* model: docs/concepts/models/twin-rail-one-hub.py (`check k=v ...`, `redteam k=v ...`; `bench_eval` / `evaluate`
+  hooks for tools/concept_sweep.py and tools/concept_cma.py)
+* sweep log: docs/concepts/sweeps/twin-rail-one-hub.json (1510 entries in order; `stage` says coarse / local / bound
+  / cma-A..D)
+* row: docs/concepts/rows/twin-rail-one-hub.json; sketch: docs/concepts/img/twin-rail-one-hub.png (best k1091,
+  lowest and highest elevation taken)
