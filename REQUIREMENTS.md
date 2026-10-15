@@ -78,5 +78,6 @@ percent").
 | R14 | Generalises to motions and bodies never used to design it | - | held-out OpenCap / AMASS clips and SMPL-X bodies (`data/raw/`) | the 8 design clips are synthetic and were optimised against |
 | R15 | Works on real bodies | - | printed prototype on the user + one very different body: OpenCap reach vs bare arm, zero contact on skin FSR strips | the final judge |
 | R16 | Follows the functional everyday workspace: share of its poses the chain moves through without skin contact, squeeze or part collision | >= 90 % (user 2026-10-15) | the band evaluator's envelope (`pack_envelope.py --functional`) today; an L1-CAD judge over the same poses next | "full range of motion": six clips are not the range (r16 followed only 40-44 % of the workspace) |
+| R17 | Moves freely unpowered (MVP1): the arm drives the chain through every clip | peak <= 1 N.m about the shoulder (0.5 rms), <= 5 N and <= 5 deg twist at the cuff, no stall, no undriven spare joint (proposed) | `judge/dynamics.py` (MuJoCo, rolling bearings, load-dependent friction; `judge/test_dynamics.py`) | 1 N.m ~ one just-noticeable difference of the arm's own ~10 N.m (Jones 1986); MVP1 is unpowered (user) - a 4R's spare joint falls under its own weight |
 
 R1-R8 and R10 are measured today. R9-R15 are the work that turns this from a simulation result into an engineering result.

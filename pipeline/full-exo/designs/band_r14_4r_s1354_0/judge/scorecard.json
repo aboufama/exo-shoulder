@@ -145,5 +145,23 @@
   "target": "",
   "status": "NOT DONE",
   "judge": "printed prototype on the user + one very different body: OpenCap reach vs bare arm, zero skin-contact on FSR strips"
+ },
+ {
+  "id": "R16",
+  "name": "Follows the functional everyday workspace (built design: chain closes, no body contact, no part interference)",
+  "value": null,
+  "unit": null,
+  "target": ">= 0.9",
+  "status": "NOT RUN",
+  "judge": "judge/workspace.py (L1 CAD over the functional workspace poses; user: 90 % range first)"
+ },
+ {
+  "id": "R17",
+  "name": "Moves freely unpowered (MVP1): the arm drives the chain through every clip, peak <= 1 N.m about the shoulder, <= 5 N and <= 5 deg at the cuff, no stall, no undriven spare joint",
+  "value": false,
+  "unit": null,
+  "target": "== True",
+  "status": "FAIL",
+  "judge": "judge/dynamics.py (MuJoCo 3.16; rolling bearings mu 0.005; load-dependent friction; validated in judge/test_dynamics.py)"
  }
 ]

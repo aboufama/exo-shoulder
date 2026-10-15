@@ -19,5 +19,7 @@
 | R13 | Manufacturable | - |  | **NOT DONE** | supplier DFM review + quote (CNC Ti / 7075, SLM AlSi10Mg) |
 | R14 | Generalises: holds on motions and body shapes never used to design it | - |  | **NO DATA** | held-out OpenCap / AMASS clips and SMPL-X bodies (data/raw) |
 | R15 | Works on real bodies | - |  | **NOT DONE** | printed prototype on the user + one very different body: OpenCap reach vs bare arm, zero skin-contact on FSR strips |
+| R16 | Follows the functional everyday workspace (built design: chain closes, no body contact, no part interference) | - | >= 0.9 | **NOT RUN** | judge/workspace.py (L1 CAD over the functional workspace poses; user: 90 % range first) |
+| R17 | Moves freely unpowered (MVP1): the arm drives the chain through every clip, peak <= 1 N.m about the shoulder, <= 5 N and <= 5 deg at the cuff, no stall, no undriven spare joint | False | == True | **FAIL** | judge/dynamics.py (MuJoCo 3.16; rolling bearings mu 0.005; load-dependent friction; validated in judge/test_dynamics.py) |
 
-2 of 17 requirements pass.
+2 of 19 requirements pass.

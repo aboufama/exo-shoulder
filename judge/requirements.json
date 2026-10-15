@@ -17,5 +17,6 @@
  "R13": {"name": "Manufacturable", "status": "NOT DONE", "judge": "supplier DFM review + quote (CNC Ti / 7075, SLM AlSi10Mg)"},
  "R14": {"name": "Generalises: holds on motions and body shapes never used to design it", "status": "NO DATA", "judge": "held-out OpenCap / AMASS clips and SMPL-X bodies (data/raw)"},
  "R15": {"name": "Works on real bodies", "status": "NOT DONE", "judge": "printed prototype on the user + one very different body: OpenCap reach vs bare arm, zero skin-contact on FSR strips"},
- "R16": {"name": "Follows the functional everyday workspace (built design: chain closes, no body contact, no part interference)", "metric": "workspace.share_passing", "op": ">=", "value": 0.90, "judge": "judge/workspace.py (L1 CAD over the functional workspace poses; user: 90 % range first)"}
+ "R16": {"name": "Follows the functional everyday workspace (built design: chain closes, no body contact, no part interference)", "metric": "workspace.share_passing", "op": ">=", "value": 0.90, "judge": "judge/workspace.py (L1 CAD over the functional workspace poses; user: 90 % range first)"},
+ "R17": {"name": "Moves freely unpowered (MVP1): the arm drives the chain through every clip, peak <= 1 N.m about the shoulder, <= 5 N and <= 5 deg at the cuff, no stall, no undriven spare joint", "metric": "dynamics.verdict.moves_freely_nominal", "op": "==", "value": true, "judge": "judge/dynamics.py (MuJoCo 3.16; rolling bearings mu 0.005; load-dependent friction; validated in judge/test_dynamics.py)"}
 }

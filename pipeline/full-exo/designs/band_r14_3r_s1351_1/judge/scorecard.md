@@ -11,13 +11,15 @@
 | R5-aim | Aim: exactly 3 DOF, the minimum (user 2026-10-15) | 3 | <= 3 | **PASS** | design.json |
 | R6 | No interference between parts that move relative to each other | 1.09 mm | <= 0.15 mm | **FAIL** | judge/part_contact.py (geometry only) |
 | R7 | Every custom part is one valid closed solid | False | == True | **FAIL** | judge/part_validity.py (OCC BRepCheck on the exported STEP) |
-| R8 | Custom-part mass budget (proposed) | - | <= 300 g | **NOT RUN** | parts_full.json (mesh volume x density) |
+| R8 | Custom-part mass budget (user: 500 g for the shoulder) | - | <= 500 g | **NOT RUN** | parts_full.json (mesh volume x density) |
 | R9 | Strength: SF >= 1.5 at 25 N.m worst direction; deflection and fatigue bounded | - |  | **UNVERIFIED** | independent FEA (CalculiX) - only the in-house hex8 study exists (pipeline/conformal/thin_study) |
-| R10 | Base rides the scapula on the user's scapula handler: worst GH misalignment from base slip over the bone (proposed) | - | <= 4.0 mm | **NOT RUN** | judge/base_mount.py (girdle mount: skin-slip model to build; the thorax-plate check stays for designs with a thorax base) |
+| R10 | Base rides the scapula on the user's scapula handler: worst GH misalignment from base slip over the bone (4 mm, confirmed) | - | <= 4.0 mm | **NOT RUN** | judge/base_mount.py (girdle mount: skin-slip model to build; the thorax-plate check stays for designs with a thorax base) |
 | R11 | Interface pressure under ISO/TS 15066 body-region limits | - |  | **NOT MEASURED** | coupled human-exo contact sim (MuJoCo/Drake) then pressure film / FSRs on a prototype |
 | R12 | CAD standard: G2 surfaces, flat seats under every seat, no visible screws or seams | - |  | **PARTIAL** | zebra / curvature check (full-exo/parts.html) + user review |
 | R13 | Manufacturable | - |  | **NOT DONE** | supplier DFM review + quote (CNC Ti / 7075, SLM AlSi10Mg) |
 | R14 | Generalises: holds on motions and body shapes never used to design it | - |  | **NO DATA** | held-out OpenCap / AMASS clips and SMPL-X bodies (data/raw) |
 | R15 | Works on real bodies | - |  | **NOT DONE** | printed prototype on the user + one very different body: OpenCap reach vs bare arm, zero skin-contact on FSR strips |
+| R16 | Follows the functional everyday workspace (built design: chain closes, no body contact, no part interference) | - | >= 0.9 | **NOT RUN** | judge/workspace.py (L1 CAD over the functional workspace poses; user: 90 % range first) |
+| R17 | Moves freely unpowered (MVP1): the arm drives the chain through every clip, peak <= 1 N.m about the shoulder, <= 5 N and <= 5 deg at the cuff, no stall, no undriven spare joint | True | == True | **PASS** | judge/dynamics.py (MuJoCo 3.16; rolling bearings mu 0.005; load-dependent friction; validated in judge/test_dynamics.py) |
 
-2 of 17 requirements pass.
+3 of 19 requirements pass.

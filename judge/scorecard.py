@@ -8,13 +8,15 @@ def load(p):
     try: return json.load(open(p))
     except Exception: return None
 src = dict(score=load(os.path.join(dd, "score.json")), score14=load(os.path.join(dd, "score_14mm.json")), body_contact=load(os.path.join(J, "body_contact.json")), part_contact=load(os.path.join(J, "part_contact.json")),
-           part_validity=load(os.path.join(J, "part_validity.json")), base_mount=load(os.path.join(J, "base_mount.json")), workspace=load(os.path.join(J, "workspace.json")), design=load(os.path.join(dd, "design.json")), parts=load(os.path.join(dd, "parts_full.json")))
+           part_validity=load(os.path.join(J, "part_validity.json")), base_mount=load(os.path.join(J, "base_mount.json")), workspace=load(os.path.join(J, "workspace.json")), dynamics=load(os.path.join(J, "dynamics.json")), design=load(os.path.join(dd, "design.json")), parts=load(os.path.join(dd, "parts_full.json")))
 def metric(m):
     s, k = m.split(".", 1); d = src.get(s if s != "mass" else "parts")
     if d is None: return None
     if s in ("score", "score14") and k.startswith("clip:"): return next((c["score"] for c in d["clips"] if c["name"] == k[5:]), None)
     if s == "mass": return round(sum(p["mass_g"] or 0 for p in d["parts"] if p.get("material") != "user part"), 1)
-    return d.get(k)
+    for part in k.split("."):                                                       # nested keys (dynamics.verdict.x)
+        d = d.get(part) if isinstance(d, dict) else None
+    return d
 OPS = {">=": lambda a, b: a >= b, "<=": lambda a, b: a <= b, "==": lambda a, b: a == b}
 rows = []
 for rid, r in REQ.items():
