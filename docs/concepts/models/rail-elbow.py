@@ -50,7 +50,8 @@ R_REF = 70.0                                                 # layout radius of 
 SEED_C = dict(az=2.4305, el=80.6763, a1=76.9018, a2=66.7492, wd=86.3277, wa=21.8297, sigma=-1)   # champion r20 s1414 #4
 SEED_A = dict(az=32.55, el=80.56, a1=77.41, a2=81.45, wd=71.38, wa=4.78, sigma=-1)                 # r18 s1392 #1 (spec)
 SEED_B = dict(SEED_A, wd=112.0, wa=-15.0)                                                          # spec seed B
-PARAMS = dict(SEED_C, margin=10.0, d_off=-25.0, q=1.0, cov=1.0, tmarg=5.0, tele=0)
+PARAMS = dict(SEED_C, margin=10.0, d_off=-40.0, q=1.0, cov=1.0, tmarg=5.0, tele=1, r_lay=142.5)   # best (sweep k64, gap 71.15)
+# the spec's rigid rail: dict(PARAMS, tele=0, r_lay=70.0); the cam-track rail: dict(PARAMS, tele=0, cam=1, q_rail=0.95, cam_climb=45.0)
 SWEEP = dict(d_off=[-25.0, -20.0, 20.0, 25.0], q=[0.95, 1.0], cov=[0.9, 1.0])
 
 
@@ -86,7 +87,7 @@ def travel(B, F, p):
 
 def rail_layout(p):
     """rail stations (azimuth rad about p2, relative to the J1 meridian) and which end holds the tab"""
-    alpha = (p["a2"] + p["d_off"]) * D2R; rr = R_REF * math.sin(alpha)
+    alpha = (p["a2"] + p["d_off"]) * D2R; rr = p.get("r_lay", R_REF) * math.sin(alpha)
     e_stop = (CAR_L / 2 + END_STOP) / rr; e_tab = e_stop + TAB / rr
     lo, hi = (p["psi_c"] + p["psi_lo"]) * D2R, (p["psi_c"] + p["psi_hi"]) * D2R
     rb = wrap(-p["psi_c"]) * D2R                              # J1's meridian relative to the travel centre
@@ -98,6 +99,7 @@ def rail_layout(p):
 
 def build(B, F, p):
     p1, p2, p3, ok, margin, ref, tt, psi = kin(F, p)
+    RL = p.get("r_lay", R_REF)                                # layout radius of the rail parts (2 mm samples there)
     rel = wrap(psi - p["psi_c"]); ok = ok & (rel >= p["psi_lo"]) & (rel <= p["psi_hi"])       # J2 range = the rail
     q = np.stack([K.axis_angle(p1, F.S([1.0, 0, 0]), p2), psi, K.axis_angle(p3, F.HG([0.0, -1, 0]), p2)], -1)
     alpha, rr, st, s_tab = rail_layout(p); P = len(p1); sg = 1.0 if p["d_off"] >= 0 else -1.0   # sg: the hub lies at -sg (polar)
@@ -107,29 +109,29 @@ def build(B, F, p):
         # the carriage rolls on it, its radial position (and pitch) set by the track; link 2 takes the radius change in a
         # radial guide (6 x 6 foot beside the carriage, reaching down to the carriage's lowest radius): determined by the
         # track, no free coordinate. Rail section kept rigid (max across its width per station).
-        ac = np.arange(-RAIL_W / 2, RAIL_W / 2 + 1e-6, 2.0) / R_REF
+        ac = np.arange(-RAIL_W / 2, RAIL_W / 2 + 1e-6, 2.0) / RL
         pol = np.broadcast_to((alpha + ac)[None, :], (len(st), len(ac))).ravel(); az = np.repeat(st, len(ac))
         Dr = on_cone(p2, ref, tt, np.broadcast_to(pol, (P, len(pol))), np.broadcast_to(az, (P, len(az))))
-        ys = np.array([-8.0, -6.0, 6.0, 8.0]) / R_REF; X, Y = np.meshgrid(xs, ys, indexing="ij")
+        ys = np.array([-8.0, -6.0, 6.0, 8.0]) / RL; X, Y = np.meshgrid(xs, ys, indexing="ij")
         caz = psi[:, None] * D2R + X.ravel()[None, :]
         Dc = on_cone(p2, ref, tt, alpha + Y.ravel()[None, :] + 0 * psi[:, None], caz)
         dst = (st[-1] - st[0]) / (len(st) - 1)
-        rail_m = K.Member("rail", Dr, kind="free", t=RAIL_T, width=RAIL_W, joints=("L1r", "J2car"), grid=(len(st), len(ac)),
-                          climb_deg=p.get("cam_climb", 25.0), step_mm=dst * R_REF)
-        car_m = K.Member("car", Dc, kind="free", t=CAR_T, width=CAR_W, joints=("J2car",))
+        rail_m = K.Member("rail", Dr, kind="free", r_ref=RL, t=RAIL_T, width=RAIL_W, joints=("L1r", "J2car"), grid=(len(st), len(ac)),
+                          climb_deg=p.get("cam_climb", 25.0), step_mm=dst * RL)
+        car_m = K.Member("car", Dc, kind="free", r_ref=RL, t=CAR_T, width=CAR_W, joints=("J2car",))
         car_m.idx = np.clip(np.round((M_wrap_rad(caz - st[0])) / dst).astype(int), 0, len(st) - 1)
-        gx, gy = np.meshgrid(np.array([-2.0, 0.0, 2.0]) / rr, np.array([1.0, 3.0, 5.0]) / R_REF, indexing="ij")
-        Dg = on_cone(p2, ref, tt, alpha - sg * (CAR_W / 2) / R_REF - sg * gy.ravel()[None, :] + 0 * psi[:, None], psi[:, None] * D2R + gx.ravel()[None, :])
-        guide = K.Member("guide", Dg, kind="free", t=CAR_T, width=6.0, joints=("J2car",))
+        gx, gy = np.meshgrid(np.array([-2.0, 0.0, 2.0]) / rr, np.array([1.0, 3.0, 5.0]) / RL, indexing="ij")
+        Dg = on_cone(p2, ref, tt, alpha - sg * (CAR_W / 2) / RL - sg * gy.ravel()[None, :] + 0 * psi[:, None], psi[:, None] * D2R + gx.ravel()[None, :])
+        guide = K.Member("guide", Dg, kind="free", r_ref=RL, t=CAR_T, width=6.0, joints=("J2car",))
         rails = [rail_m, car_m, guide]; car_w = CAR_W / 2 + 6.0
         cam = dict(tab_station=0 if s_tab == st[0] else len(st) - 1)
     elif not p.get("tele"):        # spec: ONE rigid rail over the whole travel; carriage 16 wide = 8 rail + 4 mm overhang each side
-        ac = np.arange(-RAIL_W / 2, RAIL_W / 2 + 1e-6, 2.0) / R_REF
+        ac = np.arange(-RAIL_W / 2, RAIL_W / 2 + 1e-6, 2.0) / RL
         pol = np.broadcast_to((alpha + ac)[None, :], (len(st), len(ac))).ravel(); az = np.repeat(st, len(ac))
         Dr = on_cone(p2, ref, tt, np.broadcast_to(pol, (P, len(pol))), np.broadcast_to(az, (P, len(az))))
-        ys = np.array([-8.0, -6.0, 6.0, 8.0]) / R_REF; X, Y = np.meshgrid(xs, ys, indexing="ij")
+        ys = np.array([-8.0, -6.0, 6.0, 8.0]) / RL; X, Y = np.meshgrid(xs, ys, indexing="ij")
         Dc = on_cone(p2, ref, tt, alpha + Y.ravel()[None, :] + 0 * psi[:, None], psi[:, None] * D2R + X.ravel()[None, :])
-        rails = [K.Member("rail", np.concatenate([Dr, Dc], 1), kind="cap", t=CAR_T, width=RAIL_W, joints=("L1r", "J2car"))]
+        rails = [K.Member("rail", np.concatenate([Dr, Dc], 1), kind="cap", r_ref=RL, t=CAR_T, width=RAIL_W, joints=("L1r", "J2car"))]
         car_w = CAR_W / 2
     else:                          # variant: 2-stage geared (2:1) telescopic rail, stages side by side (8 + 8 wide):
         # stage 1 fixed on link 1 from the anchor (tab) end over half the travel; stage 2 rides beside it, driven at half
@@ -142,18 +144,18 @@ def build(B, F, p):
         n1 = max(3, int(math.ceil((e_tab + T / 2 + e_stop) * rr / 2.0)) + 1); n2 = max(3, int(math.ceil((T / 2 + 2 * e_stop) * rr / 2.0)) + 1)
         s1 = s_tab + g * np.linspace(0, e_tab + T / 2 + e_stop, n1)
         s2 = s_tab + g * (e_tab - e_stop + xcar[:, None] / 2 + np.linspace(0, T / 2 + 2 * e_stop, n2)[None, :])
-        ac = np.arange(-RAIL_W / 2, RAIL_W / 2 + 1e-6, 2.0) / R_REF; h = -sg
-        o1, o2 = alpha - h * (RAIL_W / 2) / R_REF, alpha + h * (RAIL_W / 2) / R_REF
+        ac = np.arange(-RAIL_W / 2, RAIL_W / 2 + 1e-6, 2.0) / RL; h = -sg
+        o1, o2 = alpha - h * (RAIL_W / 2) / RL, alpha + h * (RAIL_W / 2) / RL
         D1 = on_cone(p2, ref, tt, np.broadcast_to(np.tile(o1 + ac, n1), (P, n1 * len(ac))), np.broadcast_to(np.repeat(s1, len(ac)), (P, n1 * len(ac))))
         D2 = on_cone(p2, ref, tt, np.broadcast_to(np.tile(o2 + ac, n2)[None], (P, n2 * len(ac))), np.repeat(s2, len(ac), axis=1))
-        ys = (o2 - alpha) + h * np.array([6.0, 8.0]) / R_REF; X, Y = np.meshgrid(xs, ys, indexing="ij")
+        ys = (o2 - alpha) + h * np.array([6.0, 8.0]) / RL; X, Y = np.meshgrid(xs, ys, indexing="ij")
         Dc = on_cone(p2, ref, tt, alpha + Y.ravel()[None, :] + 0 * psi[:, None], psi[:, None] * D2R + X.ravel()[None, :])
-        rails = [K.Member("rail", D1, kind="cap", t=RAIL_T, width=RAIL_W, joints=("L1r",)),
-                 K.Member("stage2", np.concatenate([D2, Dc], 1), kind="cap", t=CAR_T, width=RAIL_W, joints=("J2car",))]
+        rails = [K.Member("rail", D1, kind="cap", r_ref=RL, t=RAIL_T, width=RAIL_W, joints=("L1r",)),
+                 K.Member("stage2", np.concatenate([D2, Dc], 1), kind="cap", r_ref=RL, t=CAR_T, width=RAIL_W, joints=("J2car",))]
         car_w = RAIL_W / 2 + 4.0; alpha = o2
-    x_tab = on_cone(p2, ref, tt, np.full(P, (p["a2"] + p["d_off"]) * D2R + (sg * RAIL_W / 2 / R_REF if p.get("tele") else 0)), np.full(P, s_tab))
+    x_tab = on_cone(p2, ref, tt, np.full(P, (p["a2"] + p["d_off"]) * D2R + (sg * RAIL_W / 2 / RL if p.get("tele") else 0)), np.full(P, s_tab))
     car_c = on_cone(p2, ref, tt, np.full(P, alpha), psi * D2R)
-    b_from = on_cone(p2, ref, tt, np.full(P, alpha - sg * car_w / R_REF), psi * D2R)
+    b_from = on_cone(p2, ref, tt, np.full(P, alpha - sg * car_w / RL), psi * D2R)
     hubs = [K.hub_member("hub1", p1, "J1"), K.hub_member("hub3", p3, "J3")]
     strap1 = K.strap_member("strap1", p1, x_tab, ("J1", "L1r"), ramp_to=(("hub1", K.STACK), (None if cam else "rail", 0.0)))
     bridge = K.strap_member("bridge", b_from, p3, ("J3", "J2car"), ramp_to=((None, 0.0), ("hub3", K.STACK)),
@@ -240,7 +242,7 @@ def metal(pose, frames, params):
 def configs(stage):
     seeds = dict(C=SEED_C, A=SEED_A, B=SEED_B)
     if stage == "rigid":           # the spec: one rigid rail over the whole travel (slow: far rail stations run into the body)
-        return [dict(PARAMS, **seeds[s], d_off=d, q=0.93, tele=0) for s, d in (("C", -25.0), ("C", 20.0), ("B", -25.0))]
+        return [dict(PARAMS, **seeds[s], d_off=d, q=0.93, tele=0) for s, d in (("C", -25.0), ("C", 20.0))]
     if stage == "coarse":          # the 2-stage telescopic rail (the variant that removes the measured limiter)
         return [dict(PARAMS, **seeds[s], d_off=d, q=q, cov=c, tele=1)
                 for s, d, q, c in itertools.product("CAB", (-35.0, -25.0, -15.0, 20.0), (0.9, 0.95, 1.0), (0.9, 1.0))]
@@ -248,11 +250,10 @@ def configs(stage):
         return [dict(PARAMS, **seeds[s], d_off=d, q=1.0, q_rail=qr, cov=1.0, tele=1)
                 for s, d, qr in itertools.product("CAB", (-45.0, -35.0, -25.0), (0.95, 0.98, 1.0))]
     if stage == "cam":             # cam-track rail (rigid section), per-station radius, rail quantile below 1
-        return [dict(PARAMS, **SEED_C, d_off=d, q=1.0, q_rail=qr, cam=1, cam_climb=45.0) for d, qr in ((-35.0, 0.95), (-25.0, 0.9))]
+        return [dict(PARAMS, **SEED_C, d_off=d, q=1.0, q_rail=qr, cam=1, cam_climb=45.0) for d, qr in ((-35.0, 0.95),)]
     if stage.startswith("refine:"):  # refine:<json of a base config>
         b = json.loads(stage[7:]); out = []
-        for k, dv in (("d_off", (-5, 5)), ("q_rail", (-0.02, 0.01)), ("q_hub3", (-0.03,)), ("a1", (-6, 6)), ("a2", (-6, 6)),
-                      ("el", (-8, 8)), ("az", (-20, 20)), ("wd", (-8, 8)), ("wa", (-15, 15)), ("cov", (-0.03,))):
+        for k, dv in (("q_hub3", (-0.03,)), ("d_off", (-5, 5)), ("wd", (-8, 8)), ("a2", (-6, 6))):
             for d in dv:
                 c = dict(b); c[k] = round((c.get(k) if c.get(k) is not None else 1.0) + d, 4)
                 if k.startswith("q") and not 0.8 <= c[k] <= 1.0: continue
