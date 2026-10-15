@@ -197,3 +197,5 @@
 {"time": "2026-10-15T21:41:30Z", "kind": "milestone", "event": "skin-normal-hubs-selfaligning: modelling Skin-normal hubs + passive cuff translation stage (non-concurrent 3R) on the verified seed-offset-3r-slides closure"}
 {"time": "2026-10-15T21:45:28Z", "kind": "milestone", "event": "seed-offset-3r-slides CMA (main, VModel checks, Bench(60,160) fast, farm): new best gap 58.15 at gen 1"}
 {"time": "2026-10-15T21:46:31Z", "kind": "milestone", "event": "modelling pointer-cslide (the user's split: 2R pointer + shoulder-side C-slide); first measure: the shoe must travel 165 deg for 90 % of the bench poses (193 deg for 95 %; clips alone 65 deg) with the spec pole p*"}
+{"time": "2026-10-15T21:48:25Z", "kind": "milestone", "event": "seed-offset-3r-slides CMA (main, VModel checks, Bench(60,160) fast, farm): new best gap 54.95 at gen 3"}
+{"time": "2026-10-15T21:48:35Z", "kind": "milestone", "event": "crown-ring-3r new best gap 64.33 (score 76.61) at k26: p1 0, a1 az 10.0 el 75.0, a12 88.0, a23 66.8; reach 0.9187 follow 0.9167 ib14 0.29 contact 0.0 (Bench(60,160) fast, march/K2/K6)"}
