@@ -133,6 +133,7 @@ See the "CPU farm" section of `docs/RUNPOD_COSTS.md` for the measured run: R2 bo
 | workload | local (`concept_sweep --jobs 2`, nice 10) | farm job (compute / wall incl. setup, queue-free) | speed-up | $ per chunk (cpu3c, whole worker) |
 |---|---|---|---|---|
 | 20 configs, champion 3R (concept_baseline_sweep, pcts 90/95/100) | 515 s | 89 s / 109 s (2 processes, before the 1-job-per-worker finding) | 4.7x | $0.0087 |
+| same, 8 processes on one worker (the `sweep` default since 19:05) | 515 s | **35 s / 37 s** | **14.7x** | $0.0037 |
 | same, before the libigl thread fix | - | 692 s / 705 s | 0.7x | $0.057 |
 | 20 configs, docs/concepts/models/baseline-3r-kit.py | 100 s | 17.5 s / 31 s on the worker (2 processes) | 3.2x on the worker | $0.0032 |
 
@@ -140,4 +141,12 @@ See the "CPU farm" section of `docs/RUNPOD_COSTS.md` for the measured run: R2 bo
 - Overheads that decide whether the farm pays: job setup 2 s (sweep file set, 29 MB) or 11-13 s (whole repo); first job
   on a worker +2.2 s (package tar) + ~3 s (bench grids copy); cold start of a worker 5-40 s; uploads of new files go
   through `have`/`put` jobs that wait in the same queue as everybody's compute (kit5: 17 min behind a 31-job batch).
-- Same numbers: 50 configurations local vs farm, every metric identical (max abs difference 0).
+- Same numbers: 70 configuration runs local vs farm (champion 3R: 5 + 20 + 20 at 8 processes; baseline-3r-kit: 5 + 20),
+  every metric identical (max abs difference 0).
+- The real bottleneck is the shared queue, not compute: the c20 chunk above computed in 35 s but its wall was 1103 s,
+  because its `have` / `put` upload jobs waited 17 min behind another agent's 31-job batch on the same 4 workers. Keep
+  the shipped files unchanged between sweeps (uploads are then skipped) and do not start a sweep while a big batch runs
+  (`RUNPOD_API_KEY="$(cat ~/.runpod_key)" python3 tools/runpod_guard.py audit` shows the exo-cpu1 queue).
+- `judge` works: `cloud_run.py judge cad_r13_n4_s1343_1 fast` -> rc 0 in 1226 s on one worker ($0.10), full scorecard;
+  R1-R8 values equal the tree's scorecard (14 h old); R10 / R11 now measured because the judges gained them since then
+  (a measurement change, not a design change); R9 not run (SKIP_FEA on the farm).

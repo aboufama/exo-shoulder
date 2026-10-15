@@ -129,8 +129,9 @@ $1.40/month (holds the CAS, 562 MB bench grids + the 425 MB py312 package tar + 
 | 18:40 | kit20: 20 configs of baseline-3r-kit | ~40 | 0.003 | 17.5 s, identical |
 | 18:41-19:00 | kit5: 5 configs of baseline-3r-kit (queued 17 min behind another agent's 31-job batch) | ~39 | 0.003 | identical |
 | 19:01 | slot test: 16 x sleep 20 | ~330 | 0.026 | 1 job per worker at a time (not 4) |
-| 19:05-19:20 | c20 chunk with 8 processes + judge_all fast on cad_r13_n4_s1343_1 | queued behind other agents | <= 0.05 | see the session report |
+| 19:05-19:22 | c20 chunk with 8 processes on one worker (queued 17 min) | ~46 | 0.004 | 35 s, identical (14.7x vs local 515 s) |
+| 18:53-19:21 | judge_all fast on cad_r13_n4_s1343_1 (queued ~8 min) | ~1247 | 0.100 | rc 0, scorecard; R1-R8 = tree |
 
-Session total for this track: ~$0.21 of worker time + cold starts (balance 37.21 at 17:49 -> 36.24 at 19:14, the rest
+Session total for this track: ~$0.31 of worker time + cold starts (balance 37.21 at 17:49 -> 36.24 at 19:14, the rest
 of that drop is other agents' map batches on the same endpoint). Hygiene at 19:14: workersMin 0 on every endpoint,
 exo-cpu1 idle 10 s; executionTimeoutMs still 0 (the PATCH / redeploy needs the user's go, docs/CLOUD_RUN.md).
