@@ -1,22 +1,32 @@
 // thumbs.mjs - tiny monochrome motion previews of every concept for the dashboard leaderboard
 // (docs/DASHBOARD.md, "Motion previews"). Node only, no browser.
 //
-//   node docs/concepts/viz/thumbs.mjs [--out docs/dashboard/data/motion.json] [--n 40] [--sheet file.svg] [--stats] [id ...]
-//   (tools/dash_build.py runs it when kin.js, this file or a concepts/*.js is newer than motion.json)
+//   node docs/concepts/viz/thumbs.mjs [--out docs/dashboard/data/motion.json] [--n 56] [--sheet file.svg] [--stats] [id ...]
+//   (tools/dash_build.py runs it when kin.js, this file or a concepts/*.js is newer than motion.json, or a concept
+//    module has no row)
 //
-// Each concept runs exactly as the gallery runs it (viewer.js: KIN.run over KIN.motion(240), so the numeric IK keeps
-// its continuity from frame to frame); --n evenly spaced frames of that loop (rest -> forward raise -> overhead ->
-// abduction -> across -> behind -> rest) are projected with ONE fixed orthographic camera shared by every concept
-// (same direction, centre and scale, so designs compare) into a 0..100 viewBox, quantised to integers and written as
-// compact SVG path strings, one per frame, frames separated by '|':
-//   mech   links, arcs, rails, straps / rings (the cuff), plate and carriage outlines: single strokes
+// Each concept runs as the gallery runs it (viewer.js: KIN.run over KIN.motion(240), the numeric IK warm-started from
+// frame to frame), over two laps so the warm start carries across the loop's wrap (an IK branch that drifts during
+// lap 1 would otherwise jump back at every repeat); lap 2 is drawn. The loop (rest -> forward raise -> overhead ->
+// abduction -> across -> behind -> rest) is sampled at --n frames spaced by equal ARM TRAVEL, not equal time
+// (KIN.motion holds at each key pose and moves fast in between: equal-time frames jump up to half the thumbnail in one
+// tick): every key pose is shown twice (one short hold) and the frames between two keys are spread evenly over the
+// distance the upper arm (its end 200 mm down and four points around it) moves; a frame that falls between two loop
+// frames is solved there, warm-started from the loop frame before it. ONE fixed orthographic camera, shared by every
+// concept (same direction, centre and scale, so designs compare), projects into a 0..100 viewBox, quantised to
+// integers and written as compact SVG path strings, one per frame, frames separated by '|':
+//   mech   links, arcs, rails, straps / rings (the cuff), plate and carriage outlines: single strokes. Construction
+//          geometry (a part named "construction line", "not metal" or "trace", or a link / arc / rail thinner than
+//          1.5 mm) is not metal and is not drawn.
 //   joint  hubs as short bars along their axis (a dot when the axis faces the camera), slider blocks, telescope splits
 //   body   the shoulder only (one shared row, id "_shoulder"): deltoid circle, the upper arm clipped 200 mm down the
 //          arm, the shoulder line toward the neck (moves with ctx.lift)
-// Output: an array of row objects, all with the same columns {id, kind, n, still, view, closes, body, mech, joint},
-// sorted by id (deterministic: unchanged sources -> unchanged bytes). `still` is the sampled frame nearest the
-// overhead key pose (what a reduced-motion reader sees); `closes` has one character per frame, 1 = the chain closes.
-// A concept whose module or run throws is skipped and listed on stderr (exit code stays 0 unless nothing was drawn).
+// Output: an array of row objects, all with the same columns {id, kind, n, still, view, closes, body, mech, joint,
+// note}, sorted by id (deterministic: unchanged sources -> unchanged bytes). `still` is the frame a reduced-motion
+// reader sees (on the way up to overhead); `closes` has one character per frame, 1 = the chain closes. A concept whose
+// module or run throws gets a row of kind "skipped" with the reason in `note` (no drawing), so a reader sees which
+// modules have no preview and tools/dash_build.py does not re-run for an unchanged broken module. The file's mtime is
+// set to the newest source it read, so a source written during a run is newer and triggers the next build.
 import { createRequire } from 'module';
 import fs from 'fs';
 import path from 'path';
@@ -26,28 +36,20 @@ import vm from 'vm';
 const HERE = path.dirname(url.fileURLToPath(import.meta.url));
 const REPO = path.resolve(HERE, '..', '..', '..');
 const require = createRequire(import.meta.url);
-const KIN = require(path.join(HERE, 'kin.js'));
+export const KIN = require(path.join(HERE, 'kin.js'));
 const V = KIN.V;
 
-const args = process.argv.slice(2);
-const opt = (k, d) => { const i = args.indexOf(k); if (i < 0) return d; const v = args[i + 1]; args.splice(i, 2); return v; };
-const flag = (k) => { const i = args.indexOf(k); if (i < 0) return false; args.splice(i, 1); return true; };
-const OUT_ARG = opt('--out', null), OUT = OUT_ARG || path.join(REPO, 'docs', 'dashboard', 'data', 'motion.json');
-const N = Number(opt('--n', 40));
-const SHEET = opt('--sheet', null);
-const STATS = flag('--stats');
-const CAM_ARG = opt('--cam', null);       // tuning only: dx,dy,dz,pan_right,pan_down,half
-const ONLY = args.filter((a) => !a.startsWith('--'));
-
 // ---------------------------------------------------------------- the one camera (orthographic)
-// From front-right-above: x anterior, y up, z lateral (right shoulder). `pan` moves the frame (mm on the screen: right,
-// down) off GH, `half` is its half-width in mm: tuned on every concept's drawn points so the overhead arm, the cuff in
-// every pose and the scapular bases stay inside the frame (thumbs.mjs --stats prints what still falls outside).
-const CAM = { dir: V.unit([0.42, 0.5, 0.76]), pan: [5, 10], half: 175, view: 100 };
-if (CAM_ARG) { const v = CAM_ARG.split(',').map(Number); CAM.dir = V.unit(v.slice(0, 3)); CAM.pan = v.slice(3, 5); CAM.half = v[5]; }
-const Zc = CAM.dir, Xc = V.unit(V.cross([0, 1, 0], Zc)), Yc = V.cross(Zc, Xc);
-const S = CAM.view / (2 * CAM.half);
-const proj = (p) => [CAM.view / 2 + (V.dot(p, Xc) - CAM.pan[0]) * S, CAM.view / 2 + (-V.dot(p, Yc) - CAM.pan[1]) * S];
+// From the front, right and a little above: x anterior, y up, z lateral (right shoulder). Low enough that the
+// overhead arm points up the thumbnail (not at the viewer), turned enough to the front that abduction is not seen
+// end-on. `pan` moves the frame (mm on the screen: right, down) off GH, `half` is its half-width in mm: fitted so every
+// leaderboard design's drawing stays inside the frame in every sampled pose (thumbs.mjs --stats prints what falls out).
+export const CAM = { dir: [0.62, 0.27, 0.74], pan: [8, 22], half: 180, view: 100 };
+export function camera(spec = CAM) {
+  const Zc = V.unit(spec.dir), Xc = V.unit(V.cross([0, 1, 0], Zc)), Yc = V.cross(Zc, Xc), S = spec.view / (2 * spec.half);
+  const proj = (p) => [spec.view / 2 + (V.dot(p, Xc) - spec.pan[0]) * S, spec.view / 2 + (-V.dot(p, Yc) - spec.pan[1]) * S];
+  return { ...spec, Xc, Yc, Zc, S, proj };
+}
 
 // ---------------------------------------------------------------- compact path writer
 const q = (x) => Math.round(x);
@@ -69,163 +71,246 @@ function rdp(pts, eps) {
   if (dm <= eps) return [a, b];
   return rdp(pts.slice(0, k + 1), eps).slice(0, -1).concat(rdp(pts.slice(k), eps));
 }
-/** polyline (screen pts) -> "M x y l dx dy ..." on the integer grid; closed adds z */
 let dropped = 0;                          // parts whose points are not finite (a concept's own NaN: the gallery hides them too)
+/** polyline (screen pts) -> "M x y l dx dy ..." on the integer grid; closed adds z */
 function poly(pts, closed) {
   if (pts.some((p) => !Number.isFinite(p[0]) || !Number.isFinite(p[1]))) { dropped++; return ''; }
   let P = rdp(pts, 0.45).map(([x, y]) => [q(x), q(y)]);
   P = P.filter((p, i) => i === 0 || p[0] !== P[i - 1][0] || p[1] !== P[i - 1][1]);
   if (closed && P.length > 1 && P[0][0] === P[P.length - 1][0] && P[0][1] === P[P.length - 1][1]) P.pop();
   if (!P.length) return '';
-  let s = 'M' + nums(P[0]);
+  const s = 'M' + nums(P[0]);
   if (P.length === 1) return s + 'l0 0';
   const d = [];
   for (let i = 1; i < P.length; i++) d.push(P[i][0] - P[i - 1][0], P[i][1] - P[i - 1][1]);
   return s + 'l' + nums(d) + (closed ? 'z' : '');
 }
-const seg = (a, b) => poly([proj(a), proj(b)], false);
 
-// circle of radius r about unit axis k at c (a0..a1 deg from ref, full when absent), as projected screen points
-function circlePts(c, axis, ref, r, a0, a1) {
+// ---------------------------------------------------------------- 3-D line geometry of the parts (camera-free)
+// circle of radius r about unit axis k at c (a0..a1 deg from ref, full when absent)
+function circle3(c, axis, ref, r, a0, a1) {
   const k = V.unit(axis), e = V.unit(V.reject(ref && V.norm(V.reject(ref, k)) > 1e-6 ? ref : V.perp(k), k)), f = V.cross(k, e);
   const full = a0 == null || a1 == null, A0 = full ? 0 : a0, A1 = full ? 360 : a1, n = Math.max(4, Math.ceil(Math.abs(A1 - A0) / 20));
-  const out = [];
+  const pts = [];
   for (let i = 0; i <= (full ? n - 1 : n); i++) {
     const a = (A0 + (A1 - A0) * i / n) * KIN.D2R;
-    out.push(proj(V.add(c, V.add(V.scale(e, r * Math.cos(a)), V.scale(f, r * Math.sin(a))))));
+    pts.push(V.add(c, V.add(V.scale(e, r * Math.cos(a)), V.scale(f, r * Math.sin(a)))));
   }
-  return { pts: out, full };
+  return { pts, closed: full };
 }
-const arcPts = (d) => (d.pts || KIN.greatArc(d.u, d.v, d.r0, d.r1, Math.max(3, Math.ceil(V.angle(d.u, d.v) / 8))).map((p) => V.add(p, d.c || [0, 0, 0]))).map(proj);
-function railPts(d) {
+const arc3 = (d) => d.pts || KIN.greatArc(d.u, d.v, d.r0, d.r1, Math.max(3, Math.ceil(V.angle(d.u, d.v) / 8))).map((p) => V.add(p, d.c || [0, 0, 0]));
+function rail3(d) {
   const k = V.unit(d.axis), e = V.unit(V.reject(d.ref, k)), f = V.cross(k, e), n = Math.max(3, Math.ceil(Math.abs(d.a1 - d.a0) / 8)), o = [];
-  for (let i = 0; i <= n; i++) { const a = (d.a0 + (d.a1 - d.a0) * i / n) * KIN.D2R; o.push(proj(V.add(d.c, V.add(V.scale(e, d.rho * Math.cos(a)), V.scale(f, d.rho * Math.sin(a)))))); }
+  for (let i = 0; i <= n; i++) { const a = (d.a0 + (d.a1 - d.a0) * i / n) * KIN.D2R; o.push(V.add(d.c, V.add(V.scale(e, d.rho * Math.cos(a)), V.scale(f, d.rho * Math.sin(a))))); }
   return o;
 }
 /** basis of a box: z normal, x in-plane reference (viewer.js basisZX) */
 function basisZX(z, x) { const ez = V.unit(z), ex = V.unit(V.norm(V.reject(x, ez)) > 1e-6 ? V.reject(x, ez) : V.perp(ez)); return [ex, V.cross(ez, ex), ez]; }
-function rectPts(c, ex, ey, sx, sy) {
-  return [[-1, -1], [1, -1], [1, 1], [-1, 1]].map(([i, j]) => proj(V.add(c, V.add(V.scale(ex, i * sx / 2), V.scale(ey, j * sy / 2)))));
-}
+const rect3 = (c, ex, ey, sx, sy) => [[-1, -1], [1, -1], [1, 1], [-1, 1]].map(([i, j]) => V.add(c, V.add(V.scale(ex, i * sx / 2), V.scale(ey, j * sy / 2))));
 
 const BIG_HUB = 18;               // mm: a hub this wide is a sleeve around the arm: drawn as its ring, not a dot
-/** one frame of a concept -> {mech, joint} path strings */
-function drawParts(parts) {
-  const mech = [], joint = [];
+const THIN = 0.75;                // mm: a link / arc / rail thinner than this (radius) is a drawn guide, not a part
+/** construction geometry the gallery draws as hairlines (axis lines, coupler traces): not metal, not in the preview */
+export const isConstruction = (d) => /construction|not metal|\btrace\b/i.test(d.name || '') || (['link', 'arc', 'rail'].includes(d.kind) && d.r != null && d.r < THIN);
+/** one frame's parts -> 3-D polylines {pts, closed}: mech (strokes) and joint (bars / dots) */
+export function partLines(parts) {
+  const mech = [], joint = [], L = (pts, closed = false) => ({ pts, closed });
   for (const d of parts) {
+    if (isConstruction(d)) continue;
     switch (d.kind) {
-      case 'link': mech.push(seg(d.a, d.b)); break;
-      case 'arc': mech.push(poly(arcPts(d), false)); break;
-      case 'rail': mech.push(poly(railPts(d), false)); break;
-      case 'strap': case 'ring': { const c = circlePts(d.c, d.axis, d.ref, d.r, d.kind === 'strap' ? d.a0 : null, d.kind === 'strap' ? d.a1 : null); mech.push(poly(c.pts, c.full)); break; }
-      case 'plate': case 'carriage': {
-        const [ex, ey] = basisZX(d.z, d.x), s = d.size || [20, 16];
-        mech.push(poly(rectPts(d.c, ex, ey, s[0], s[1]), true)); break;
-      }
+      case 'link': mech.push(L([d.a, d.b])); break;
+      case 'arc': mech.push(L(arc3(d))); break;
+      case 'rail': mech.push(L(rail3(d))); break;
+      case 'strap': case 'ring': mech.push(circle3(d.c, d.axis, d.ref, d.r, d.kind === 'strap' ? d.a0 : null, d.kind === 'strap' ? d.a1 : null)); break;
+      case 'plate': case 'carriage': { const [ex, ey] = basisZX(d.z, d.x), s = d.size || [20, 16]; mech.push(L(rect3(d.c, ex, ey, s[0], s[1]), true)); break; }
       case 'hub': {
         const ax = V.unit(d.axis), h = d.h || 12, r = d.r || 10;
-        if (r > BIG_HUB) { const c = circlePts(V.madd(d.c, ax, h / 2), ax, null, r); mech.push(poly(c.pts, true)); }
-        else joint.push(seg(d.c, V.madd(d.c, ax, h)));
+        if (r > BIG_HUB) mech.push(circle3(V.madd(d.c, ax, h / 2), ax, null, r));
+        else joint.push(L([d.c, V.madd(d.c, ax, h)]));
         break;
       }
-      case 'slider': mech.push(seg(d.a, d.b)); joint.push(seg(d.at, d.at)); break;
-      case 'telescope': { mech.push(seg(d.a, d.b)); joint.push(seg(V.madd(d.a, V.unit(V.sub(d.b, d.a)), d.split), V.madd(d.a, V.unit(V.sub(d.b, d.a)), d.split))); break; }
+      case 'slider': mech.push(L([d.a, d.b])); joint.push(L([d.at])); break;
+      case 'telescope': { mech.push(L([d.a, d.b])); joint.push(L([V.madd(d.a, V.unit(V.sub(d.b, d.a)), d.split)])); break; }
       default: break;                // point: markers (the GH centre), not metal
     }
   }
-  return { mech: mech.filter(Boolean).join(''), joint: joint.filter(Boolean).join('') };
+  return { mech, joint };
 }
+const linesPath = (lines, cam) => lines.map((l) => poly(l.pts.map(cam.proj), l.closed)).join('');
 
 // ---------------------------------------------------------------- the shoulder (shared by every concept)
-const ARM = { s0: 8, s1: 200, r0: 41, r1: 34, delt: 45 };
+export const ARM = { s0: 8, s1: 200, r0: 41, r1: 34, delt: 45 };
 // trunk-fixed points of the shoulder line: lateral trapezius edge -> neck base -> up the side of the neck
 const TRAP = [[-8, 46, -48], [-4, 70, -108], [2, 128, -124]];
-function drawBody(ctx) {
-  const ax = ctx.armAxis, c = proj(V.scale(ax, 6)), r = ARM.delt * S;
+/** the shoulder in 3-D: deltoid centre + radius (drawn as a screen circle), the arm axis ends, the shoulder line */
+export function bodyGeom(ctx) {
+  return { c: V.scale(ctx.armAxis, 6), r: ARM.delt, p0: V.scale(ctx.armAxis, ARM.s0), p1: V.scale(ctx.armAxis, ARM.s1), trap: TRAP.map((p) => V.sub(p, ctx.lift)) };
+}
+function bodyPath(ctx, cam) {
+  const b = bodyGeom(ctx), S = cam.S, c = cam.proj(b.c), r = b.r * S;
   const circle = `M${nums([q(c[0] - r), q(c[1])])}a${nums([q(r), q(r), 0, 1, 0, q(2 * r), 0])}a${nums([q(r), q(r), 0, 1, 0, -q(2 * r), 0])}`;
-  const p0 = proj(V.scale(ax, ARM.s0)), p1 = proj(V.scale(ax, ARM.s1));
+  const p0 = cam.proj(b.p0), p1 = cam.proj(b.p1);
   let dx = p1[0] - p0[0], dy = p1[1] - p0[1]; const L = Math.hypot(dx, dy) || 1e-9; dx /= L; dy /= L;
   const nx = -dy, ny = dx, side = (s) => poly([[p0[0] + s * nx * ARM.r0 * S, p0[1] + s * ny * ARM.r0 * S], [p1[0] + s * nx * ARM.r1 * S, p1[1] + s * ny * ARM.r1 * S]], false);
-  const trap = poly(TRAP.map((p) => proj(V.sub(p, ctx.lift))), false);
-  return circle + side(1) + side(-1) + trap;
+  return circle + side(1) + side(-1) + poly(b.trap.map(cam.proj), false);
+}
+
+// ---------------------------------------------------------------- the sampled loop (shared by every concept)
+// probe points on the upper arm (arm frame, mm): its end 200 mm down and four points around it 160 mm down
+const PROBE = [[0, -200, 0], [40, -160, 0], [-40, -160, 0], [0, -160, 40], [0, -160, -40]];
+/** --n frames of KIN.motion(240) spaced by equal arm travel, every key pose twice (a short hold). Returns
+ * {frames (the loop), samples: [{i, f, pose, t, key}] (between loop frames i and i+1 at fraction f), still, travel} */
+export function samplePlan(N, frames = KIN.motion(240)) {
+  const M = frames.length, P = frames.map((fr) => { const c = KIN.makeCtx(fr.pose, fr.t); return PROBE.map((p) => c.attach.armPt(p)); });
+  const step = (i, j) => Math.max(...P[i].map((p, k) => V.norm(V.sub(p, P[j][k]))));
+  const D = [0]; for (let i = 1; i < M; i++) D.push(D[i - 1] + step(i - 1, i));
+  const total = D[M - 1] + step(M - 1, 0), Dx = (i) => (i === M ? total : D[i]);
+  const keys = []; frames.forEach((fr, i) => { if (fr.key && (i === 0 || frames[i - 1].key !== fr.key)) keys.push(i); });
+  const K = keys.length, len = keys.map((i, k) => Dx(k + 1 < K ? keys[k + 1] : M) - D[i]), n = keys.map(() => 0);
+  if (N < 2 * K + 1) throw new Error(`--n ${N}: at least ${2 * K + 1} frames for ${K} key poses`);
+  for (let left = N - 2 * K; left > 0; left--) {   // each extra frame to the stretch with the longest step (ties: first)
+    let b = 0; for (let k = 1; k < K; k++) if (len[k] / (n[k] + 1) > len[b] / (n[b] + 1) + 1e-9) b = k;
+    n[b]++;
+  }
+  const lerp = (a, b, f) => a + (b - a) * f, samples = [];
+  const at = (target) => {                         // loop frame i and fraction f where the travel reaches `target`
+    let i = 0; while (i + 1 <= M - 1 && D[i + 1] <= target) i++;
+    const j = (i + 1) % M, span = Dx(i + 1) - D[i], f = span > 1e-9 ? (target - D[i]) / span : 0;
+    if (f < 1e-6) return { i, f: 0 };
+    if (f > 1 - 1e-6) return j === 0 ? { i: 0, f: 0 } : { i: j, f: 0 };
+    return { i, f };
+  };
+  keys.forEach((i, k) => {
+    const key = { i, f: 0, key: frames[i].key }; samples.push(key, { ...key });
+    for (let s = 1; s <= n[k]; s++) samples.push(at(D[i] + len[k] * s / (n[k] + 1)));
+  });
+  samples.forEach((s) => {
+    const a = frames[s.i], b = frames[(s.i + 1) % M], tb = s.i + 1 === M ? 1 : b.t;
+    s.pose = s.f ? Object.fromEntries(Object.keys(a.pose).map((k) => [k, lerp(a.pose[k], b.pose[k], s.f)])) : a.pose;
+    s.t = s.f ? lerp(a.t, tb, s.f) : a.t;
+  });
+  // the reduced-motion still: on the way up to overhead (arm and cuff both clear of the shoulder), not the overhead
+  // key itself, which from any camera that also shows abduction stacks the cuff on the shoulder
+  const kOver = samples.findIndex((s) => s.key === 'overhead'), still = Math.max(0, kOver - Math.max(1, Math.round(n[keys.findIndex((i) => frames[i].key === 'reach')] * 0.3)));
+  return { frames, samples, still, travel: { total, len, n, keys } };
+}
+/** one concept over the plan: two laps of KIN.run (lap 2 kept), in-between samples solved warm from the loop frame before */
+export function runConcept(c, plan) {
+  const { frames, samples } = plan, M = frames.length, r = KIN.run(c, frames.concat(frames)), sol = r.frames.slice(M);
+  const warm = []; let last = r.frames[M - 1].nan ? r.q0 : r.frames[M - 1].q;
+  sol.forEach((s, i) => { if (!s.nan) last = s.q; warm[i] = last; });
+  return samples.map((s) => {
+    if (!s.f) return sol[s.i];
+    const ctx = KIN.makeCtx(s.pose, s.t), x = KIN.solveFrame(c, ctx, warm[s.i], r.q0); x.ctx = ctx; return x;
+  });
 }
 
 // ---------------------------------------------------------------- run
-const files = fs.readdirSync(path.join(HERE, 'concepts')).filter((f) => f.endsWith('.js')).sort();
-const skipped = [];
-for (const f of files) {
-  const id = f.replace(/\.js$/, '');
-  if (ONLY.length && !ONLY.includes(id)) continue;
-  try { vm.runInThisContext(fs.readFileSync(path.join(HERE, 'concepts', f), 'utf8'), { filename: f }); }
-  catch (e) { skipped.push(`${id}: module threw ${e.message}`); }
+/** load every concept module (or the given ids); returns [{id, file, reason}] for modules that threw or registered nothing */
+export function loadConcepts(only = []) {
+  const files = fs.readdirSync(path.join(HERE, 'concepts')).filter((f) => f.endsWith('.js')).sort(), bad = [];
+  for (const f of files) {
+    const id = f.replace(/\.js$/, '');
+    if (only.length && !only.includes(id)) continue;
+    const before = KIN.order.length;
+    try { vm.runInThisContext(fs.readFileSync(path.join(HERE, 'concepts', f), 'utf8'), { filename: f }); }
+    catch (e) { bad.push({ id, reason: `module threw: ${String(e.message || e).split('\n')[0]}` }); continue; }
+    if (KIN.order.length === before && !KIN.concepts[id]) bad.push({ id, reason: 'module registered no concept' });
+  }
+  return { files, bad };
 }
-const frames = KIN.motion(240);
-const pick = []; for (let i = 0; i < N; i++) pick.push(Math.round(i * frames.length / N));
-const keyIdx = frames.map((f, i) => (f.key === 'overhead' ? i : -1)).filter((i) => i >= 0);
-const overheadAt = keyIdx.length ? keyIdx[Math.floor(keyIdx.length / 2)] : 0;
-const still = pick.reduce((b, f, i) => (Math.abs(f - overheadAt) < Math.abs(pick[b] - overheadAt) ? i : b), 0);
-const base = { n: N, still, view: `0 0 ${CAM.view} ${CAM.view}` };
+const srcMtime = (files) => Math.max(...[path.join(HERE, 'kin.js'), url.fileURLToPath(import.meta.url), ...files.map((f) => path.join(HERE, 'concepts', f))]
+  .map((f) => { try { return fs.statSync(f).mtimeMs; } catch { return 0; } }));
 
-const rows = [];
-rows.push({ id: '_shoulder', kind: 'shoulder', ...base, closes: '', body: pick.map((i) => drawBody(KIN.makeCtx(frames[i].pose, frames[i].t))).join('|'), mech: '', joint: '' });
-const notes = [];
-const t0 = Date.now();
-for (const id of [...KIN.order].sort()) {
-  if (ONLY.length && !ONLY.includes(id)) continue;
-  const c = KIN.concepts[id], t1 = Date.now(); dropped = 0;
-  try {
-    const sol = KIN.run(c, frames).frames, mech = [], joint = [], closes = [];
-    for (const i of pick) {
-      const s = sol[i], parts = c.parts(s.q, s.ctx), d = drawParts(parts);
-      if (/NaN|Infinity/.test(d.mech + d.joint)) throw new Error(`frame ${i}: NaN in the drawing`);
-      mech.push(d.mech); joint.push(d.joint); closes.push(s.closes ? '1' : '0');
-    }
-    rows.push({ id, kind: 'mechanism', ...base, closes: closes.join(''), body: '', mech: mech.join('|'), joint: joint.join('|') });
-    if (dropped) { notes.push(`${id}: ${dropped} part drawing(s) with non-finite points left out`); dropped = 0; }
-    if (STATS) process.stderr.write(`${id} ${Date.now() - t1} ms\n`);
-  } catch (e) { skipped.push(`${id}: ${String(e.message || e).split('\n')[0]}`); }
+function main() {
+  const args = process.argv.slice(2);
+  const opt = (k, d) => { const i = args.indexOf(k); if (i < 0) return d; const v = args[i + 1]; args.splice(i, 2); return v; };
+  const flag = (k) => { const i = args.indexOf(k); if (i < 0) return false; args.splice(i, 1); return true; };
+  const OUT_ARG = opt('--out', null), OUT = OUT_ARG || path.join(REPO, 'docs', 'dashboard', 'data', 'motion.json');
+  const N = Number(opt('--n', 56));
+  const SHEET = opt('--sheet', null);
+  const STATS = flag('--stats');
+  const CAM_ARG = opt('--cam', null);       // tuning only: dx,dy,dz,pan_right,pan_down,half
+  const ONLY = args.filter((a) => !a.startsWith('--'));
+  const cam = camera(CAM_ARG ? (() => { const v = CAM_ARG.split(',').map(Number); return { dir: v.slice(0, 3), pan: v.slice(3, 5), half: v[5], view: CAM.view }; })() : CAM);
+
+  const t0 = Date.now(), { files, bad } = loadConcepts(ONLY), mtime = srcMtime(files);   // mtime read BEFORE the run
+  const plan = samplePlan(N), still = plan.still;
+  const base = { n: N, still, view: `0 0 ${cam.view} ${cam.view}` }, blank = { closes: '', body: '', mech: '', joint: '', note: '' };
+  const rows = [{ id: '_shoulder', kind: 'shoulder', ...base, ...blank, body: plan.samples.map((s) => bodyPath(KIN.makeCtx(s.pose, s.t), cam)).join('|') }];
+  const skipped = bad.map((b) => ({ id: b.id, kind: 'skipped', ...base, ...blank, note: b.reason }));
+  const notes = [];
+  for (const id of [...KIN.order].sort()) {
+    if (ONLY.length && !ONLY.includes(id)) continue;
+    const c = KIN.concepts[id], t1 = Date.now(); dropped = 0;
+    try {
+      const sol = runConcept(c, plan), mech = [], joint = [], closes = [];
+      for (const s of sol) {
+        const L = partLines(c.parts(s.q, s.ctx)), m = linesPath(L.mech, cam), j = linesPath(L.joint, cam);
+        if (/NaN|Infinity/.test(m + j)) throw new Error('NaN in the drawing');
+        mech.push(m); joint.push(j); closes.push(s.closes ? '1' : '0');
+      }
+      rows.push({ id, kind: 'mechanism', ...base, ...blank, closes: closes.join(''), mech: mech.join('|'), joint: joint.join('|') });
+      if (dropped) { notes.push(`${id}: ${dropped} part drawing(s) with non-finite points left out`); dropped = 0; }
+      if (STATS) process.stderr.write(`${id} ${Date.now() - t1} ms\n`);
+    } catch (e) { skipped.push({ id, kind: 'skipped', ...base, ...blank, note: `run threw: ${String(e.message || e).split('\n')[0]}` }); }
+  }
+  const all = rows.concat(skipped).sort((a, b) => (a.id < b.id ? -1 : a.id > b.id ? 1 : 0));
+  const raw = JSON.stringify(all), nDrawn = rows.length - 1;
+  // a run on chosen ids never overwrites the dashboard's file unless --out names one; the file's mtime is the newest
+  // source read at the start, so anything written during the run is newer (tools/dash_build.py re-runs then)
+  const write = nDrawn > 0 && (!ONLY.length || OUT_ARG);
+  if (write) {
+    fs.mkdirSync(path.dirname(OUT), { recursive: true }); fs.writeFileSync(OUT, raw);
+    const t = new Date(mtime); fs.utimesSync(OUT, t, t);
+  }
+  const tr = plan.travel;
+  console.log(`motion previews: ${nDrawn} concept(s), ${N} frames each (arm travel ${tr.total.toFixed(0)} mm, longest step ${Math.max(...tr.len.map((l, k) => l / (tr.n[k] + 1))).toFixed(0)} mm), still = frame ${still}, ${raw.length} bytes${write ? ' -> ' + path.relative(process.cwd(), OUT) : ' (not written)'} (${((Date.now() - t0) / 1000).toFixed(1)} s)`);
+  if (skipped.length) console.log(`skipped ${skipped.length}:\n` + skipped.map((s) => `  ${s.id}: ${s.note}`).join('\n'));
+  if (notes.length) console.log(notes.join('\n'));
+  if (STATS) stats(all, cam, still);
+  if (SHEET) sheet(all, SHEET);
+  if (nDrawn <= 0) process.exit(1);
 }
-rows.sort((a, b) => (a.id < b.id ? -1 : a.id > b.id ? 1 : 0));
-const raw = JSON.stringify(rows);
-// always (re)written, so its mtime says when it was last built (tools/dash_build.py re-runs this when a source is newer);
-// a run on chosen ids (--only style args) never overwrites the dashboard's file unless --out names one
-const write = rows.length > 1 && (!ONLY.length || OUT_ARG);
-if (write) { fs.mkdirSync(path.dirname(OUT), { recursive: true }); fs.writeFileSync(OUT, raw); }
-console.log(`motion previews: ${rows.length - 1} concept(s), ${N} frames each, still = frame ${still}, ${raw.length} bytes${write ? ' -> ' + path.relative(process.cwd(), OUT) : ' (not written: ids given without --out)'} (${((Date.now() - t0) / 1000).toFixed(1)} s)`);
-if (skipped.length) console.log(`skipped ${skipped.length}:\n  ` + skipped.join('\n  '));
 
-if (notes.length) console.log(notes.join('\n'));
-// --stats: how much of the drawing the fixed camera keeps (overhead frames of every concept, whole frames, points)
-if (STATS) {
-  const pts = (d) => { const o = []; let x = 0, y = 0; for (const m of d.matchAll(/([Ml])([^Mlaz]*)/g)) { const n = (m[2].match(/-?\d+/g) || []).map(Number);
-    if (m[1] === 'M') { x = n[0]; y = n[1]; o.push([x, y]); } else for (let i = 0; i + 1 < n.length; i += 2) { x += n[i]; y += n[i + 1]; o.push([x, y]); } } return o; };
-  const inside = ([x, y]) => x >= 0 && x <= CAM.view && y >= 0 && y <= CAM.view;
-  let oh = 0, nc = 0, ff = 0, nf = 0, pin = 0, np = 0; const out = {};
+// --stats: how much of the drawing the fixed camera keeps, the largest step between frames, the wrap jump
+const pathPts = (d) => { const o = []; let x = 0, y = 0; for (const m of d.matchAll(/([Ml])([^Mlaz]*)/g)) { const n = (m[2].match(/-?\d+/g) || []).map(Number);
+  if (m[1] === 'M') { x = n[0]; y = n[1]; o.push([x, y]); } else for (let i = 0; i + 1 < n.length; i += 2) { x += n[i]; y += n[i + 1]; o.push([x, y]); } } return o; };
+function stats(rows, cam, still) {
+  const inside = ([x, y]) => x >= 0 && x <= cam.view && y >= 0 && y <= cam.view;
+  let nc = 0, ff = 0, nf = 0, pin = 0, np = 0, okStill = 0; const out = {}, big = [];
   for (const r of rows) {
     if (r.kind !== 'mechanism') continue;
-    nc++; const m = r.mech.split('|'), j = r.joint.split('|'), F = m.map((d, k) => pts(d).concat(pts(j[k])));
-    if ([still - 1, still, still + 1].every((k) => F[(k + N) % N].every(inside))) oh++;
+    nc++; const m = r.mech.split('|'), j = r.joint.split('|'), F = m.map((d, k) => pathPts(d).concat(pathPts(j[k])));
+    if (F[still].every(inside)) okStill++;
     F.forEach((P) => { nf++; if (P.every(inside)) ff++; else out[r.id] = (out[r.id] || 0) + 1; P.forEach((p) => { np++; if (inside(p)) pin++; }); });
+    // the largest frame-to-frame move of the drawing (mean point shift, same point count only) and the wrap
+    let worst = 0, at = -1;
+    for (let k = 0; k < F.length; k++) { const A = F[k], B = F[(k + 1) % F.length]; if (A.length !== B.length || !A.length) continue;
+      const d = A.reduce((s, p, i) => s + Math.hypot(p[0] - B[i][0], p[1] - B[i][1]), 0) / A.length; if (d > worst) { worst = d; at = k; } }
+    big.push([r.id, Math.round(worst), at]);
   }
-  console.log(`inside the frame: overhead (3 frames) of ${oh}/${nc} concepts, ${(100 * ff / nf).toFixed(1)} % of frames whole, ${(100 * pin / np).toFixed(1)} % of points`);
+  console.log(`inside the frame: still frame of ${okStill}/${nc} concepts, ${(100 * ff / nf).toFixed(1)} % of frames whole, ${(100 * pin / np).toFixed(1)} % of points`);
   console.log('frames with something outside, by concept:', JSON.stringify(out));
+  big.sort((a, b) => b[1] - a[1]);
+  console.log('largest mean drawing shift between consecutive frames (units, frame):', big.slice(0, 8).map((b) => `${b[0]} ${b[1]} @${b[2]}`).join(', '));
 }
-
 // contact sheet (SVG) for a look without a browser: one row per concept, `cols` frames across
-if (SHEET) {
-  const cols = 8, cell = 56, pad = 8, lab = 150, idxs = Array.from({ length: cols }, (_, k) => Math.round(k * N / cols));
-  const sh = rows.find((r) => r.id === '_shoulder').body.split('|'), body = rows.filter((r) => r.kind === 'mechanism');
-  let s = `<svg xmlns="http://www.w3.org/2000/svg" width="${lab + cols * (cell + pad)}" height="${body.length * (cell + pad) + pad}" font-family="monospace" font-size="9"><rect width="100%" height="100%" fill="#fff"/>`;
-  body.forEach((r, j) => {
+function sheet(rows, file) {
+  const sh = rows.find((r) => r.id === '_shoulder'), N = sh.n, cols = 8, cell = 56, pad = 8, lab = 150, idxs = Array.from({ length: cols }, (_, k) => Math.round(k * N / cols));
+  const body = sh.body.split('|'), mechs = rows.filter((r) => r.kind === 'mechanism');
+  let s = `<svg xmlns="http://www.w3.org/2000/svg" width="${lab + cols * (cell + pad)}" height="${mechs.length * (cell + pad) + pad}" font-family="monospace" font-size="9"><rect width="100%" height="100%" fill="#fff"/>`;
+  mechs.forEach((r, j) => {
     const m = r.mech.split('|'), jt = r.joint.split('|'), y = pad + j * (cell + pad);
     s += `<text x="4" y="${y + cell / 2}">${r.id.slice(0, 22)}</text>`;
     idxs.forEach((k, i) => {
       s += `<svg x="${lab + i * (cell + pad)}" y="${y}" width="${cell}" height="${cell}" viewBox="${r.view}"><rect width="100" height="100" fill="none" stroke="#ddd"/>`
-        + `<g fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="${sh[k]}" stroke="#777" stroke-opacity=".5" stroke-width="1" vector-effect="non-scaling-stroke"/>`
+        + `<g fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="${body[k]}" stroke="#777" stroke-opacity=".6" stroke-width="1" vector-effect="non-scaling-stroke"/>`
         + `<path d="${m[k]}" stroke="#111" stroke-width="1.2" vector-effect="non-scaling-stroke"/><path d="${jt[k]}" stroke="#111" stroke-width="3" vector-effect="non-scaling-stroke"/></g></svg>`;
     });
   });
-  fs.writeFileSync(SHEET, s + '</svg>');
-  console.log('sheet ->', SHEET);
+  fs.writeFileSync(file, s + '</svg>');
+  console.log('sheet ->', file);
 }
-if (rows.length <= 1) process.exit(1);
+
+if (process.argv[1] && path.resolve(process.argv[1]) === url.fileURLToPath(import.meta.url)) main();

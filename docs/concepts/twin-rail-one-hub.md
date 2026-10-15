@@ -71,3 +71,36 @@ sets, I placed both rails at their 90 % travel and fitted them as constant secti
   lateral humeral pole on the deltoid cap**, i.e. a ring bearing at J3, not a rail along the arm. Arm rails on the
   lateral upper arm (a3 near the humerus axis, ar3 18-35 deg, the spec's intent) are <= 0.2 in band: the rail must
   span the humeral rotation range (210-320 deg with the shoe) round the arm.
+
+## Coarse sweep (farm, 166 configurations, 243 s wall, $0.012)
+
+Configurations: the prescreen's 80 best axis sets (by both rails' in-band share), each with two rail offsets and
+widths, the spec's own family as far as the prescreen found any rail of it clear of the body (crown headband + arm
+rail on the lateral arm, a3 within 35 deg of the humerus axis, ar3 >= 18 deg: 4 configurations), and 60
+perturbations of the top 20. Only 38 of the 166 pass the open-arc and shoe-wrap
+rules at all (the rest need a rail that closes on itself). Best honest (k64): **gap 122.14** (score 55.6): reach
+0.563, follow 0.833, in-band 14 0.133, contact 0. Re-run with the layout fix point (rails at their fitted radius:
+R1 94, R3 108 instead of the prescreen's 100 / 113): **gap 119.62**, reach 0.563, follow 0.85, in-band 14 0.141,
+in-band 10 0.082. The spec's family (arm rail along the lateral arm: k102-105, and k134-135 with ar3 27-31 lower on
+the arm) is never honest: in every one J2's axis finds no skin to sit on within 220 mm in some taken pose (hub level
+400 = infinite), so hub 2 and link 2 float; best of them gap 211.8 (k104, dishonest).
+
+## Red team (coarse leader k64, fix-pointed; `python3 ... redteam <params>`)
+
+* **Named pose groups taken**: rest 54 / 57 (3 lost to closure), **overhead 2 / 17** (7 beyond the rails' travel, 5
+  part collisions, 3 closure), **across the body 9 / 27** (10 beyond the rails, 4 closure, 2 continuity, 2 collisions),
+  behind the back 15 / 21 (5 beyond the rails, 1 closure).
+* **The pose that sets the crown rail**: plane 45, elevation 165, axial -90 (workspace): the elevated arm passes
+  under the S-fixed arc. Its rows sit at 94-111 mm against a median skin requirement of **52 mm** along the arc, so
+  the crown rail is **0.0 in band** in every pose. The arm rail is set by the arm at the side (plane -15, elev 0,
+  axial -30): rows 107-124 mm against a median 88 mm; 0.26 in band.
+* **The rail that cannot be long enough**: at cov 1.0 (every closing pose on the rail) the arm rail would span 420
+  deg (it must cover the humeral rotation range plus the shoe): impossible. At cov 0.8: gap 133.1 (reach 0.49). The
+  90 % cut is the trade, and it caps reach.
+* **The point that pinches**: the K7 neck at 2.02 mm (plane -80, elev 39, axial 101, a clip frame: hand behind the
+  back) and the arm rail at 2.06 mm (arm at the side, axial -75): taken by the bench rule, on the 2 mm edge.
+* **The member that floats**: link 2 (0.0007 in band) and hub 2 (0.09; level 73 mm, 17.9 mm free above it, parking
+  rule OK) - the same J2 / link 2 limiter as the spherical family: the rails replaced the poles, not the middle.
+* **The variant that removes the crown-rail limiter** (`revolve=0`: crown rail shaped per station, a cam track with a
+  radial float in carriage 1; an optimistic bound, the float's own height not charged): crown rail 0.64 in band,
+  in-band 14 0.42, but **gap 97.64** (reach 0.54, follow 0.82, the same pose losses). Still 29 behind the champion.
