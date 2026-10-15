@@ -59,7 +59,7 @@
     q0: ctx => legs.map(g => legSolve(g, ctx, g.L).th),
     qNames: ['crank 1 (top)', 'crank 2 (spine)', 'crank 3 (clavicle)'], qUnits: ['deg', 'deg', 'deg'],
     resUnits: ['mm', 'mm', 'mm'],
-    solve: ctx => legs.map(g => legSolve(g, ctx, g.L).th),
+    solve: (ctx, qp) => legs.map((g, k) => { const th = legSolve(g, ctx, g.L).th; return qp ? qp[k] + K.wrap180(th - qp[k]) : th; }),
     residual: (q, ctx) => legs.map((g, k) => V.norm(V.sub(M.mulv(ctx.Hb, g.q), tip(g, ctx.S, q[k]))) - g.L),
     check: (q, ctx) => {
       for (let k = 0; k < 3; k++) if (trans(legs[k], ctx, q[k]) < Math.sin(P.trans * D2R)) return `crank ${k + 1} near its dead centre`;
@@ -75,13 +75,15 @@
         const T = tip(g, S, q[k]), Q = M.mulv(ctx.Hb, g.q), ax = M.mulv(S, g.c), rr = P.faces[k] + 4.6;
         out.push({ kind: 'hub', role: 'active', name: `crank hub ${k + 1}`, c: hubC[k], axis: ax, r: P.hub_r, h });
         out.push({ kind: 'arc', role: 'link', name: `crank ${k + 1}`, u: ax, v: V.unit(T), r0: rr, r1: rr, r: 3 });
-        out.push({ kind: 'hub', role: 'passive', name: `U-joint ${k + 1}`, c: V.madd(T, V.unit(T), -4), axis: V.unit(T), r: 6, h: 8 });
-        out.push({ kind: 'link', role: 'link', name: `rod ${k + 1}`, a: T, b: Q, r: 2.5 });
-        out.push({ kind: 'point', role: 'passive', name: `ball ${k + 1}`, p: Q, r: 6 });
+        out.push({ kind: 'hub', role: 'passive', name: `U-joint ${k + 1}`, c: V.madd(T, V.unit(T), -4), axis: V.unit(T), p0: T, r: 6, h: 8 });
+        const E = V.madd(T, V.unit(V.sub(Q, T)), g.L);     // the rod keeps its length: a leg that cannot close shows the gap
+        out.push({ kind: 'link', role: 'link', name: `rod ${k + 1}`, a: T, b: E, r: 2.5 });
+        out.push({ kind: 'point', role: 'passive', name: `ball ${k + 1}`, p: E, r: 6 });
         const foot = k === 0 ? V.add(V.scale(WB, BAR_Z + 6), V.scale(DB, P.s1)) : armPt(P.studs[k - 1][0], P.studs[k - 1][1], P.skin + P.sad_t);
         out.push({ kind: 'link', role: 'fixed-arm', name: `stud ${k + 1}`, a: M.mulv(ctx.Hb, foot), b: Q, r: 3.5 });
       });
-      out.push({ kind: 'strap', role: 'fixed-arm', name: 'arm saddle', c: M.mulv(ctx.Hb, V.scale(AX, 105)), axis: ctx.armAxis, r: P.skin + 2, w: 14 });
+      out.push({ kind: 'strap', role: 'fixed-arm', name: 'arm saddle', c: M.mulv(ctx.Hb, V.scale(AX, 105)), axis: M.mulv(ctx.Hb, AX),
+                 ref: M.mulv(ctx.Hb, ZL), a0: -25, a1: 55, r: P.skin + 2, w: 14 });
       out.push({ kind: 'link', role: 'fixed-arm', name: 'BOTTOM bar (user part)', a: M.mulv(ctx.Hb, V.add(V.scale(WB, BAR_Z + 3), V.scale(DB, 40))),
                  b: M.mulv(ctx.Hb, V.add(V.scale(WB, BAR_Z + 3), V.scale(DB, 170))), r: 4 });
       out.push({ kind: 'point', role: 'link', name: 'GH centre (the wearer\'s joint closes the loop)', p: [0, 0, 0], r: 4 });
