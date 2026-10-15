@@ -1,8 +1,8 @@
 {
- "step": 6,
+ "step": 2,
  "tol_mm": 0.5,
- "frames_checked": 228,
- "seconds": 253,
+ "frames_checked": 671,
+ "seconds": 698,
  "jobs": 4,
  "inside": "integer winding number (grid + segment crossings), depth = exact distance to the nearest surface (judge/sdist.py)",
  "parts": {
@@ -43,14 +43,14 @@
   },
   "H|Revolve1[3]": {
    "max_depth": 0.51,
-   "frames": 10,
+   "frames": 31,
    "worst": [
     "Wave",
-    42,
+    44,
     [
      15,
      91,
-     -59,
+     -60,
      94,
      0
     ]
@@ -107,16 +107,16 @@
    "worst": null
   },
   "H|Revolve1[1]": {
-   "max_depth": 0.98,
-   "frames": 140,
+   "max_depth": 0.99,
+   "frames": 397,
    "worst": [
     "Wave",
-    126,
+    44,
     [
      15,
-     92,
+     91,
      -60,
-     95,
+     94,
      0
     ]
    ]
@@ -158,7 +158,7 @@
   },
   "F|Hex socket head countersunk screw grade C M4x0.7 x 8": {
    "max_depth": 8.35,
-   "frames": 228,
+   "frames": 671,
    "worst": [
     "Wave",
     42,
@@ -172,31 +172,31 @@
    ]
   },
   "H|IGUS THRUST WASHER, 30mm ID, 39mm OD, 1.5mm T, IGLIDE J": {
-   "max_depth": 2.77,
-   "frames": 228,
+   "max_depth": 2.79,
+   "frames": 671,
    "worst": [
     "Comb hair",
-    42,
+    40,
     [
-     56,
-     101,
-     -57,
-     116,
+     54,
+     97,
+     -55,
+     111,
      0
     ]
    ]
   },
   "F|MIDDLE": {
-   "max_depth": 5.77,
-   "frames": 228,
+   "max_depth": 5.79,
+   "frames": 671,
    "worst": [
     "Comb hair",
-    66,
+    68,
     [
      60,
-     118,
+     121,
      -59,
-     120,
+     119,
      0
     ]
    ]
@@ -208,7 +208,7 @@
   },
   "F|FOREARM CUFF": {
    "max_depth": 21.94,
-   "frames": 228,
+   "frames": 671,
    "worst": [
     "Drink from a cup",
     72,
@@ -267,15 +267,15 @@
    "worst": null
   },
   "H|BOTTOM + neck + curved dovetail rail (one 5-axis part, Ti-6Al-4V)": {
-   "max_depth": 5.89,
-   "frames": 228,
+   "max_depth": 5.98,
+   "frames": 671,
    "worst": [
     "Wave",
-    60,
+    62,
     [
      15,
      95,
-     -79,
+     -80,
      95,
      0
     ]

@@ -29,62 +29,62 @@
    "entry": "H|BOTTOM + neck + curved dovetail rail (one 5-axis part, Ti-6Al-4V)",
    "frame": [
     "Wave",
-    60
+    62
    ],
-   "judge": 5.89,
-   "depth": 5.89,
-   "inside": 440,
-   "inside_parity": 440,
+   "judge": 5.98,
+   "depth": 5.98,
+   "inside": 444,
+   "inside_parity": 444,
    "rays_agree_pct": 100.0,
-   "bar_s_lt_265": 5.89,
-   "neck_arm_end": 1.03
+   "bar_s_lt_265": 5.98,
+   "neck_arm_end": 1.16
   },
   {
    "entry": "F|MIDDLE",
    "frame": [
     "Comb hair",
-    66
+    68
    ],
-   "judge": 5.77,
-   "depth": 5.77,
-   "inside": 2598,
-   "inside_parity": 2598,
+   "judge": 5.79,
+   "depth": 5.79,
+   "inside": 2618,
+   "inside_parity": 2618,
    "rays_agree_pct": 100.0
   },
   {
    "entry": "H|IGUS THRUST WASHER, 30mm ID, 39mm OD, 1.5mm T, IGLIDE J",
    "frame": [
     "Comb hair",
-    42
+    40
    ],
-   "judge": 2.77,
-   "depth": 2.77,
-   "inside": 88,
-   "inside_parity": 88,
+   "judge": 2.79,
+   "depth": 2.79,
+   "inside": 98,
+   "inside_parity": 98,
    "rays_agree_pct": 100.0
   },
   {
    "entry": "H|Revolve1[1]",
    "frame": [
     "Wave",
-    126
+    44
    ],
-   "judge": 0.98,
-   "depth": 0.98,
-   "inside": 84,
-   "inside_parity": 84,
+   "judge": 0.99,
+   "depth": 0.99,
+   "inside": 87,
+   "inside_parity": 87,
    "rays_agree_pct": 100.0
   },
   {
    "entry": "H|Revolve1[3]",
    "frame": [
     "Wave",
-    42
+    44
    ],
    "judge": 0.51,
    "depth": 0.51,
-   "inside": 34,
-   "inside_parity": 34,
+   "inside": 32,
+   "inside_parity": 32,
    "rays_agree_pct": 100.0
   }
  ],
@@ -102,6 +102,18 @@
    "rays_agree_pct": 100.0
   },
   {
+   "entry": "base|J1 M1.6x3 ISO 10642 Ti (cap)  IN  l1|J1 washer B (igus GTM-1018-005)",
+   "frame": [
+    "Drink from a cup",
+    56
+   ],
+   "judge": 0.18,
+   "depth": 0.18,
+   "inside": 48,
+   "inside_parity": 48,
+   "rays_agree_pct": 100.0
+  },
+  {
    "entry": "l2|J3 M1.6x3 ISO 10642 Ti (cap)  IN  cuff|J3 washer B (igus GTM-1018-005)",
    "frame": [
     "Walking arm swing",
@@ -115,18 +127,6 @@
   },
   {
    "entry": "l2|J2 M1.6x3 ISO 10642 Ti (cap)  IN  l1|J2 washer B (igus GTM-1018-005)",
-   "frame": [
-    "Walking arm swing",
-    108
-   ],
-   "judge": 0.17,
-   "depth": 0.17,
-   "inside": 48,
-   "inside_parity": 48,
-   "rays_agree_pct": 100.0
-  },
-  {
-   "entry": "base|J1 M1.6x3 ISO 10642 Ti (cap)  IN  l1|J1 washer B (igus GTM-1018-005)",
    "frame": [
     "Walking arm swing",
     108

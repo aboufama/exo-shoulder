@@ -1,14 +1,14 @@
 {
- "step": 12,
+ "step": 4,
  "tol_mm": 0.15,
- "frames_checked": 117,
+ "frames_checked": 339,
  "pairs": 3320,
- "seconds": 233,
+ "seconds": 711,
  "jobs": 4,
  "violations": {
   "l2|J3 M1.6x3 ISO 10642 Ti (cap)  IN  cuff|J3 washer B (igus GTM-1018-005)": {
    "max_depth": 0.17,
-   "frames": 117,
+   "frames": 339,
    "worst": [
     "Walking arm swing",
     108
@@ -16,23 +16,23 @@
   },
   "l2|J2 M1.6x3 ISO 10642 Ti (cap)  IN  l1|J2 washer B (igus GTM-1018-005)": {
    "max_depth": 0.17,
-   "frames": 117,
+   "frames": 339,
    "worst": [
     "Walking arm swing",
     108
    ]
   },
   "base|J1 M1.6x3 ISO 10642 Ti (cap)  IN  l1|J1 washer B (igus GTM-1018-005)": {
-   "max_depth": 0.17,
-   "frames": 117,
+   "max_depth": 0.18,
+   "frames": 339,
    "worst": [
-    "Walking arm swing",
-    108
+    "Drink from a cup",
+    56
    ]
   },
   "cuff|flank liner (iglidur J 0.5)  IN  H|BOTTOM + neck + curved dovetail rail (one 5-axis part, Ti-6Al-4V)": {
    "max_depth": 0.55,
-   "frames": 32,
+   "frames": 83,
    "worst": [
     "Wash opposite shoulder",
     192
