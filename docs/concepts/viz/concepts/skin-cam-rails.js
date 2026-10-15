@@ -94,8 +94,8 @@
       return [
         { kind: 'arc', role: 'fixed-scapula', name: 'rail 1: profiled acromial arch (exo-scapula)', pts: pts1, r: 3 },
         { kind: 'carriage', role: 'active', name: 'J1: carriage 1 on the arch', c: V.scale(p2, R1 + 3), x: c.t1, z: p2, size: P.car },
-        { kind: 'hub', role: 'active', name: 'J2: crossing bearing', c: V.scale(p2, R1 + 6), axis: p2, r: P.hub_r, h: 4 },
-        { kind: 'telescope', role: 'passive', name: 'J2 radial ball-spline slide (set by the profiles)', a: V.scale(p2, R1 + 10), b: V.scale(p2, R2 - 3), split: 4 + Math.max(0, q[3]) / 2, r0: 6, r1: 4 },
+        { kind: 'hub', role: 'active', name: 'J2: crossing bearing', c: V.scale(p2, R1 + 6), axis: p2, r: 8, h: 2.5 },
+        { kind: 'telescope', role: 'passive', name: 'J2 radial ball-spline slide (set by the profiles)', a: V.scale(p2, R1 + 3), b: V.scale(p2, R2 - 3), split: 4 + Math.max(0, q[3]) / 2, r0: 5, r1: 3.2 },
         { kind: 'carriage', role: 'active', name: 'J3: carriage 2 on the collar', c: V.scale(p2, R2 - 3), x: c.t3, z: p2, size: P.car },
         { kind: 'arc', role: 'fixed-arm', name: 'rail 2: profiled humeral-head collar (arm piece)', pts: pts2, r: 3 },
         { kind: 'arc', role: 'fixed-arm', name: 'collar runs on to BOTTOM', u: V.unit(end), v: V.unit(bar), r0: V.norm(end), r1: V.norm(bar), r: 3 },

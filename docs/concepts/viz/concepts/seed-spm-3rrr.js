@@ -62,8 +62,8 @@
     parts: (q, ctx) => {
       const f = frame(ctx), S = d => M.mulv(ctx.S, d), h = P.stack, out = [];
       const Uw = U.map(S), Ww = [0, 1, 2].map(i => S(elbow(q, i))), Vw = f.Vs.map(S);
-      out.push({ kind: 'arc', role: 'fixed-scapula', name: 'base frame 1-2', u: Uw[0], v: Uw[1], r0: P.rB - 2, r1: P.rB - 2, r: 3 },
-        { kind: 'arc', role: 'fixed-scapula', name: 'base frame 2-3', u: Uw[1], v: Uw[2], r0: P.rB - 2, r1: P.rB - 2, r: 3 });
+      out.push({ kind: 'arc', role: 'fixed-scapula', name: 'base frame 1-2', u: Uw[0], v: Uw[1], r0: P.rB[0] - 2, r1: P.rB[1] - 2, r: 3 },
+        { kind: 'arc', role: 'fixed-scapula', name: 'base frame 2-3', u: Uw[1], v: Uw[2], r0: P.rB[1] - 2, r1: P.rB[2] - 2, r: 3 });
       for (let i = 0; i < 3; i++) {
         const rb = P.rB[i], rw = P.rW[i], rv = P.rV[i];
         out.push({ kind: 'hub', role: 'active', name: `base hub ${i + 1} (leg ${i + 1})`, c: V.scale(Uw[i], rb), axis: Uw[i], r: P.hub_r, h },
