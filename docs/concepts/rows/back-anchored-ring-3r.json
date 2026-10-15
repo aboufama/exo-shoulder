@@ -14,11 +14,11 @@
  "inband10": 0.1606,
  "contact": 0.1858,
  "gap": 116.31,
- "v_reach": null,
- "v_follow": null,
- "v_inband14": null,
- "v_inband10": null,
- "v_gap": null,
+ "v_reach": 0.6438,
+ "v_follow": 0.7667,
+ "v_inband14": 0.3622,
+ "v_inband10": 0.1606,
+ "v_gap": 116.31,
  "n_configs": 29,
  "verdict": "dead, not worth a GPU sweep. Best honest gap 116.31 (k18) vs 68.93 for the champion 3R. k18: spec J1 site as an O20 hub, J3 hub at d3 50 / th3 30, a12 = a23 = 90, q 0.92. The lowest number in the sweep (82.26, k12, q 0.97) parks hub 2 and the links at the 400 mm never-clears cap, which the kit audit flags; it is not a design. The variant aimed at both limiters (J1 on its square, still posterosuperior seat + O20 hubs + a12 66-75) brings in-band 14 up to the champion's level (0.43, k19), but J2 then swings over the top to the front overhead and reach / follow fall to 0.44 / 0.58. Rings lose to O20 hubs at both ends (k12 82.26 vs k4 86.84).",
  "note": "Rebuilt on the shared kit (tools/concept_kit.py): K3 march, K2 dense continuity, K6 collisions, audit. Bench(60,160) fast grid cache, 29 configurations. Rings are flat housed 4.76-section annuli (9 x 8 mm) fitted along their axes; links are 14 x 5.5 Ti straps rooted on 4.5 mm lugs outside the ring races; a 14 x 6 bracket to BOTTOM's bar when J3 is off it. Spec corrections: the arm ring at s 100-160 has its axis 21-31 deg from the humerus axis and stands ~63 deg to the arm skin, so J3 is parametrised by d3 instead; branch -1 puts J2 inside the trunk. Obliquity and skin-motion maps for J1 seats are in the doc.",
@@ -62,5 +62,6 @@
   "q": 0.92
  },
  "audit": [],
- "hubless": []
+ "hubless": [],
+ "audit_note": "Audit 2026-10-15T20:36:47Z: death stands. k18 reproduced exactly on Bench(60,160) (gap 116.31, honest). Conventions: the kit reproduces the baseline row exactly (KIT.md). 14 random configurations over a wider box (lat1 -25..50, lon1 -170..-55, a12/a23 60-110, d3 35-92, th3 -40..100, q .90-.97, margin 5/10): best 113.69 (not audit-honest), best honest 128.15. Control with the baseline's 8x3 straps instead of 14x5.5: honest 89.02 (q .92), 78.02 only with parts at the 400 mm cap (q .97) - still > 78.93. Reason: a back-anchored J1 forces link 1 over the whole posterior shoulder and into the body overhead; not a bug, convention or missed range."
 }

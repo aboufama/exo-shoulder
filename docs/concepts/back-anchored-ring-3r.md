@@ -199,3 +199,25 @@ Per member at k18 (clip frames taken, kit `inband_member`): bracket 0.92, hub 3 
 champion. In the combo variant (J1 on its square, still seat + hubs + shorter link 1), the parts reach the champion's
 in-band (0.43, k19), but J2 swings over the top and the chain loses reach and follow (0.44 / 0.58). The idea that
 survives as knowledge is the J1 seat map, not this chain. Not worth a GPU sweep.
+
+## Audit (adversarial, 2026-10-15T20:36:47Z)
+
+Question: is the death caused by a modelling bug, a convention mismatch with tools/concept_baseline.py, a parameter range
+that missed the obvious region, or an over-strict check? Every number below is on Bench(60, 160), fast grid cache.
+
+- **Reproduction**: k18 (BEST) re-run gives reach 0.6438, follow 0.7667, in-band 14 0.3622, in-band 10 0.1606, contact
+  0.1858, gap 116.31, audit-honest: identical to the row.
+- **Conventions**: the model is built on tools/concept_kit.py, which reproduces the baseline row to 4 decimals with the
+  baseline's conventions (KIT.md, baseline-3r-kit) and costs the champion only 68.93 -> 70.27 under the honest checks.
+  The model's J1 / J3 directions, closure and joint values go through the kit's tested helpers. No convention bug found.
+- **Range**: 14 random configurations in a wider box than the sweep (lat1 -25..50, lon1 -170..-55, a12 and a23 60-110,
+  d3 35-92, th3 -40..100, q 0.90-0.97, margin 5 / 10, O20 hubs): best 113.69 (not audit-honest: parts at the cap), best
+  honest 128.15. Nothing near the champion.
+- **Strictness control**: the spec's 14 x 5.5 straps are wider and thicker than the baseline's 8 x 3. With 8 x 3 straps
+  on k18: honest 89.02 at q 0.92 (in-band 14 0.417, reach 0.71, follow 0.92); 78.02 at q 0.97 only with parts parked at
+  the 400 mm cap. Even on the baseline's own strap size the honest gap is 20 points behind 68.93 (bar for refuting:
+  78.93).
+
+**Verdict: the death stands.** Measured reason: with J1 anchored on the back, link 1 must span from the posterior seat
+to a J2 that roams the whole posterior/superior shoulder, so it is either far off the skin or inside the body overhead
+(contact 0.18); no bug, convention, missed range or over-strict check explains the gap.
