@@ -1,0 +1,491 @@
+[
+{
+"k": 0,
+"t": "2026-10-15T17:53:58Z",
+"params": {
+"u_az": 123.0,
+"u_el": 44.4,
+"a12": 90.0,
+"a23": 90.0,
+"branch": 1,
+"rho1": 90.0,
+"phi1": 90.0,
+"rho2": 90.0,
+"phi2": 75.0,
+"rho3": 50.0,
+"ring_c": 0.0,
+"ring_on": "cuff",
+"cuff_az": 90.0,
+"cov": 0.95,
+"p": 90.0,
+"br_up": 1,
+"R_est": 60.0,
+"w_delta": 0.0,
+"w_az": 0.0
+},
+"inband14": 0.0,
+"inband10": 0.0,
+"reach": 0.0,
+"follow": 0.0,
+"contact": 0.0,
+"gap": 275.0,
+"why": {
+"no radius": 186,
+"off rail": 34
+},
+"shape": {
+"R1": 999.0,
+"R2": 999.0,
+"R3": 999.0,
+"L1": null,
+"L2": [
+1007.0,
+1007.0
+],
+"span": {
+"rail1": 177.2,
+"rail2": 110.5,
+"ring": 204.0
+},
+"kin_valid": 0.845,
+"closure": 1.0
+},
+"mode": "fast",
+"stage": "A"
+},
+{
+"k": 1,
+"t": "2026-10-15T17:53:58Z",
+"params": {
+"u_az": 123.0,
+"u_el": 44.4,
+"a12": 90.0,
+"a23": 90.0,
+"branch": 1,
+"rho1": 90.0,
+"phi1": 90.0,
+"rho2": 90.0,
+"phi2": 75.0,
+"rho3": 50.0,
+"ring_c": 0.0,
+"ring_on": "cuff",
+"cuff_az": 90.0,
+"cov": 0.95,
+"p": 95.0,
+"br_up": 1,
+"R_est": 60.0,
+"w_delta": 0.0,
+"w_az": 0.0
+},
+"inband14": 0.0,
+"inband10": 0.0,
+"reach": 0.0,
+"follow": 0.0,
+"contact": 0.0,
+"gap": 275.0,
+"why": {
+"no radius": 186,
+"off rail": 34
+},
+"shape": {
+"R1": 999.0,
+"R2": 999.0,
+"R3": 999.0,
+"L1": null,
+"L2": [
+1007.0,
+1007.0
+],
+"span": {
+"rail1": 177.2,
+"rail2": 110.5,
+"ring": 204.0
+},
+"kin_valid": 0.845,
+"closure": 1.0
+},
+"mode": "fast",
+"stage": "A"
+},
+{
+"k": 2,
+"t": "2026-10-15T17:53:58Z",
+"params": {
+"u_az": 123.0,
+"u_el": 44.4,
+"a12": 90.0,
+"a23": 90.0,
+"branch": 1,
+"rho1": 90.0,
+"phi1": 90.0,
+"rho2": 90.0,
+"phi2": 75.0,
+"rho3": 50.0,
+"ring_c": 0.0,
+"ring_on": "cuff",
+"cuff_az": 90.0,
+"cov": 0.95,
+"p": 100.0,
+"br_up": 1,
+"R_est": 60.0,
+"w_delta": 0.0,
+"w_az": 0.0
+},
+"inband14": 0.0,
+"inband10": 0.0,
+"reach": 0.0,
+"follow": 0.0,
+"contact": 0.0,
+"gap": 275.0,
+"why": {
+"no radius": 186,
+"off rail": 34
+},
+"shape": {
+"R1": 999.0,
+"R2": 999.0,
+"R3": 999.0,
+"L1": null,
+"L2": [
+1007.0,
+1007.0
+],
+"span": {
+"rail1": 177.2,
+"rail2": 110.5,
+"ring": 204.0
+},
+"kin_valid": 0.845,
+"closure": 1.0
+},
+"mode": "fast",
+"stage": "A"
+},
+{
+"k": 3,
+"t": "2026-10-15T17:54:10Z",
+"params": {
+"u_az": 123.0,
+"u_el": 44.4,
+"a12": 90.0,
+"a23": 90.0,
+"branch": -1,
+"rho1": 90.0,
+"phi1": 90.0,
+"rho2": 90.0,
+"phi2": 75.0,
+"rho3": 50.0,
+"ring_c": 0.0,
+"ring_on": "cuff",
+"cuff_az": 90.0,
+"cov": 0.95,
+"p": 90.0,
+"br_up": 1,
+"R_est": 60.0,
+"w_delta": 0.0,
+"w_az": 0.0
+},
+"inband14": 0.0,
+"inband10": 0.0,
+"reach": 0.0,
+"follow": 0.0,
+"contact": 0.0,
+"gap": 275.0,
+"why": {
+"no radius": 186,
+"off rail": 34
+},
+"shape": {
+"R1": 999.0,
+"R2": 999.0,
+"R3": 999.0,
+"L1": null,
+"L2": [
+1007.0,
+1007.0
+],
+"span": {
+"rail1": 177.2,
+"rail2": 110.5,
+"ring": 204.0
+},
+"kin_valid": 0.845,
+"closure": 1.0
+},
+"mode": "fast",
+"stage": "A"
+},
+{
+"k": 4,
+"t": "2026-10-15T17:54:10Z",
+"params": {
+"u_az": 123.0,
+"u_el": 44.4,
+"a12": 90.0,
+"a23": 90.0,
+"branch": -1,
+"rho1": 90.0,
+"phi1": 90.0,
+"rho2": 90.0,
+"phi2": 75.0,
+"rho3": 50.0,
+"ring_c": 0.0,
+"ring_on": "cuff",
+"cuff_az": 90.0,
+"cov": 0.95,
+"p": 95.0,
+"br_up": 1,
+"R_est": 60.0,
+"w_delta": 0.0,
+"w_az": 0.0
+},
+"inband14": 0.0,
+"inband10": 0.0,
+"reach": 0.0,
+"follow": 0.0,
+"contact": 0.0,
+"gap": 275.0,
+"why": {
+"no radius": 186,
+"off rail": 34
+},
+"shape": {
+"R1": 999.0,
+"R2": 999.0,
+"R3": 999.0,
+"L1": null,
+"L2": [
+1007.0,
+1007.0
+],
+"span": {
+"rail1": 177.2,
+"rail2": 110.5,
+"ring": 204.0
+},
+"kin_valid": 0.845,
+"closure": 1.0
+},
+"mode": "fast",
+"stage": "A"
+},
+{
+"k": 5,
+"t": "2026-10-15T17:54:10Z",
+"params": {
+"u_az": 123.0,
+"u_el": 44.4,
+"a12": 90.0,
+"a23": 90.0,
+"branch": -1,
+"rho1": 90.0,
+"phi1": 90.0,
+"rho2": 90.0,
+"phi2": 75.0,
+"rho3": 50.0,
+"ring_c": 0.0,
+"ring_on": "cuff",
+"cuff_az": 90.0,
+"cov": 0.95,
+"p": 100.0,
+"br_up": 1,
+"R_est": 60.0,
+"w_delta": 0.0,
+"w_az": 0.0
+},
+"inband14": 0.0,
+"inband10": 0.0,
+"reach": 0.0,
+"follow": 0.0,
+"contact": 0.0,
+"gap": 275.0,
+"why": {
+"no radius": 186,
+"off rail": 34
+},
+"shape": {
+"R1": 999.0,
+"R2": 999.0,
+"R3": 999.0,
+"L1": null,
+"L2": [
+1007.0,
+1007.0
+],
+"span": {
+"rail1": 177.2,
+"rail2": 110.5,
+"ring": 204.0
+},
+"kin_valid": 0.845,
+"closure": 1.0
+},
+"mode": "fast",
+"stage": "A"
+},
+{
+"k": 6,
+"t": "2026-10-15T17:54:31Z",
+"params": {
+"u_az": 2.4,
+"u_el": 80.7,
+"a12": 90.0,
+"a23": 90.0,
+"branch": 1,
+"rho1": 90.0,
+"phi1": 90.0,
+"rho2": 90.0,
+"phi2": 75.0,
+"rho3": 50.0,
+"ring_c": 0.0,
+"ring_on": "cuff",
+"cuff_az": 90.0,
+"cov": 0.95,
+"p": 90.0,
+"br_up": 1,
+"R_est": 60.0,
+"w_delta": 0.0,
+"w_az": 0.0
+},
+"inband14": 0.0,
+"inband10": 0.0,
+"reach": 0.0,
+"follow": 0.0,
+"contact": 0.0,
+"gap": 275.0,
+"why": {
+"closure": 35,
+"no radius": 162,
+"off rail": 23
+},
+"shape": {
+"R1": 999.0,
+"R2": 999.0,
+"R3": 999.0,
+"L1": null,
+"L2": [
+1007.0,
+1007.0
+],
+"span": {
+"rail1": 259.9,
+"rail2": 99.9,
+"ring": 315.7
+},
+"kin_valid": 0.736,
+"closure": 0.841
+},
+"mode": "fast",
+"stage": "A"
+},
+{
+"k": 7,
+"t": "2026-10-15T17:54:31Z",
+"params": {
+"u_az": 2.4,
+"u_el": 80.7,
+"a12": 90.0,
+"a23": 90.0,
+"branch": 1,
+"rho1": 90.0,
+"phi1": 90.0,
+"rho2": 90.0,
+"phi2": 75.0,
+"rho3": 50.0,
+"ring_c": 0.0,
+"ring_on": "cuff",
+"cuff_az": 90.0,
+"cov": 0.95,
+"p": 95.0,
+"br_up": 1,
+"R_est": 60.0,
+"w_delta": 0.0,
+"w_az": 0.0
+},
+"inband14": 0.0,
+"inband10": 0.0,
+"reach": 0.0,
+"follow": 0.0,
+"contact": 0.0,
+"gap": 275.0,
+"why": {
+"closure": 35,
+"no radius": 162,
+"off rail": 23
+},
+"shape": {
+"R1": 999.0,
+"R2": 999.0,
+"R3": 999.0,
+"L1": null,
+"L2": [
+1007.0,
+1007.0
+],
+"span": {
+"rail1": 259.9,
+"rail2": 99.9,
+"ring": 315.7
+},
+"kin_valid": 0.736,
+"closure": 0.841
+},
+"mode": "fast",
+"stage": "A"
+},
+{
+"k": 8,
+"t": "2026-10-15T17:54:31Z",
+"params": {
+"u_az": 2.4,
+"u_el": 80.7,
+"a12": 90.0,
+"a23": 90.0,
+"branch": 1,
+"rho1": 90.0,
+"phi1": 90.0,
+"rho2": 90.0,
+"phi2": 75.0,
+"rho3": 50.0,
+"ring_c": 0.0,
+"ring_on": "cuff",
+"cuff_az": 90.0,
+"cov": 0.95,
+"p": 100.0,
+"br_up": 1,
+"R_est": 60.0,
+"w_delta": 0.0,
+"w_az": 0.0
+},
+"inband14": 0.0,
+"inband10": 0.0,
+"reach": 0.0,
+"follow": 0.0,
+"contact": 0.0,
+"gap": 275.0,
+"why": {
+"closure": 35,
+"no radius": 162,
+"off rail": 23
+},
+"shape": {
+"R1": 999.0,
+"R2": 999.0,
+"R3": 999.0,
+"L1": null,
+"L2": [
+1007.0,
+1007.0
+],
+"span": {
+"rail1": 259.9,
+"rail2": 99.9,
+"ring": 315.7
+},
+"kin_valid": 0.736,
+"closure": 0.841
+},
+"mode": "fast",
+"stage": "A"
+}
+]

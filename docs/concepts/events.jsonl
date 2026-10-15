@@ -10,3 +10,10 @@
 {"time": "2026-10-15T17:40:47Z", "kind": "milestone", "event": "modelling scapula-halo-track (Scapula halo track): resuming the interrupted model, bench check then sweep"}
 {"time": "2026-10-15T17:40:54Z", "kind": "milestone", "event": "modelling seed-spm-3rrr (low-profile spherical parallel 3-RRR, 3 active base R + 6 passive R closed by the loops)"}
 {"time": "2026-10-15T17:46:08Z", "kind": "infra", "event": "new session: deps on py3.11 + libigl, bench grid cache Bench(60,160) rebuilt in 10 min, baseline reproduces gap 68.93 (reach 0.775, follow 1.000, in-band14 0.438) in 32 s"}
+{"time": "2026-10-15T17:49:15Z", "kind": "milestone", "event": "seed-offset-3r-slides: new best gap 63.26 (reach 0.7438, follow 0.9167, inband14 0.5737, contact 0.1168) at {'slides': 0}"}
+{"time": "2026-10-15T17:50:41Z", "kind": "milestone", "event": "seed-spm-3rrr new best gap 228.54 (reach 0.1125, follow 0.3167, inband14 0.1749, inband10 0.1375, contact 0.1395; config 0, screen)"}
+{"time": "2026-10-15T17:52:26Z", "kind": "milestone", "event": "seed-offset-3r-slides: new best gap 69.23 (reach 0.7188, follow 0.9167, inband14 0.5549, contact 0.1327) at {'d_az': 5, 'S_auto': 1}"}
+{"time": "2026-10-15T17:52:44Z", "kind": "milestone", "event": "seed-offset-3r-slides: new best gap 67.62 (reach 0.725, follow 0.9167, inband14 0.5641, contact 0.132) at {'d_el': 10, 'S_auto': 1}"}
+{"time": "2026-10-15T17:53:23Z", "kind": "milestone", "event": "seed-spm-3rrr new best gap 221.09 (reach 0.2125, follow 0.3167, inband14 0.1116, inband10 0.0802, contact 0.1017; config 8, screen)"}
+{"time": "2026-10-15T17:53:30Z", "kind": "milestone", "event": "seed-offset-3r-slides: new best gap 67.13 (reach 0.7312, follow 0.9167, inband14 0.5532, contact 0.1224) at {'d_wd': 10, 'S_auto': 1}"}
+{"time": "2026-10-15T17:53:40Z", "kind": "milestone", "event": "seed-offset-3r-slides: new best gap 67.12 (reach 0.7562, follow 0.9167, inband14 0.517, contact 0.1111) at {'d_wa': 5, 'S_auto': 1}"}

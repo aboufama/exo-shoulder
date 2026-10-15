@@ -63,7 +63,7 @@ Z_ARM = np.array([0.0, 0.0, 1.0])               # azimuth reference on the C-rin
 
 # spec layout: great-circle rail 1, meridian rail 2 through carriage 1 (a12 = 90, phi1 = 90, rho2 = 90)
 PARAMS = dict(u_az=123.0, u_el=44.4, a12=90.0, a23=90.0, branch=1, rho1=90.0, phi1=90.0, rho2=90.0, phi2=75.0, rho3=50.0,
-              ring_c=None, ring_on="cuff", cuff_az=90.0, cov=0.95, p=100.0, br_up=1, R_est=60.0)
+              ring_c=None, ring_on="cuff", cuff_az=90.0, cov=0.95, p=100.0, br_up=1, R_est=60.0, w_delta=0.0, w_az=0.0)
 SWEEP = dict(u_az=(0, 360), u_el=(-90, 90), a12=(60, 100), a23=(60, 100), branch=(-1, 1), rho1=(15, 90), phi1=(-90, 90),
              rho2=(15, 90), phi2=(-180, 180), rho3=(25, 65), ring_c=(-90, 90), ring_on=("cuff", "body2"), cuff_az=(-180, 180),
              cov=(0.8, 1.0), p=(50, 100), br_up=(0, 1))
@@ -71,6 +71,11 @@ SWEEP = dict(u_az=(0, 360), u_el=(-90, 90), a12=(60, 100), a23=(60, 100), branch
 
 def bvec(az, el):                               # concept_baseline.bvec: az from posterior(-x) toward lateral(+z)
     return np.array([-math.cos(el * D2R) * math.cos(az * D2R), math.sin(el * D2R), math.cos(el * D2R) * math.sin(az * D2R)])
+
+
+def w_dir(delta, az):                            # concept_baseline.w_dir: humerus-fixed axis, delta from the long axis
+    d, a = delta * D2R, az * D2R
+    return np.array([math.sin(d) * math.sin(a), -math.cos(d), math.sin(d) * math.cos(a)])
 
 
 def unit(v):
@@ -149,6 +154,8 @@ _TOK = itertools.count()
 class Design:
     def __init__(self, p, B, HG, RS, status_clip, passes=1):
         self.p = p = dict(PARAMS, **p); self.B = B; self.HG = HG; self.RS = RS; self.n = len(HG); self.status_clip = status_clip
+        self.W = w_dir(p["w_delta"], p["w_az"])                                 # rail-3 axis fixed in the humerus (0 = long axis: C-ring)
+        self.Z = Z_ARM if p["w_delta"] < 45 else perp(Y_ARM, self.W)             # azimuth reference about W (arm frame)
         self.u1 = bvec(p["u_az"], p["u_el"])
         ref = np.array([0.0, 1.0, 0.0]) if abs(self.u1[1]) < 0.9 else np.array([1.0, 0.0, 0.0])
         e1 = perp(ref, self.u1); a12, a23 = p["a12"] * D2R, p["a23"] * D2R
@@ -160,7 +167,7 @@ class Design:
         self.d2 = rod(self.u2, np.array([p["phi2"] * D2R]))[0] @ (math.cos(r2) * self.u2 + math.sin(r2) * self.e2)
         self.g0 = unit(math.cos(r3) * self.p3 + math.sin(r3) * perp(self.d2, self.p3))   # C-ring carriage (body 2)
         ca = p["cuff_az"] * D2R                                                  # ring_on = body2: cuff carriage on the arm (arm frame)
-        self.c_arm = math.cos(r3) * Y_ARM + math.sin(r3) * (math.cos(ca) * Z_ARM + math.sin(ca) * np.cross(Y_ARM, Z_ARM))
+        self.c_arm = math.cos(r3) * self.W + math.sin(r3) * (math.cos(ca) * self.Z + math.sin(ca) * np.cross(self.W, self.Z))
         if p["ring_c"] is not None and p["ring_on"] == "cuff":                    # turn the ring carriage about the arm axis so the
             K0 = self.ik()                                                       # ring's span is centred at ring_c (arm frame, 0 =
             c0 = circ_range(K0["q"][K0["ok"], 2], 1.0)[0]                         # lateral at rest): the C opens on the far side
@@ -179,7 +186,7 @@ class Design:
     def ik(self, HG=None):
         """two-circle closure on the design branch -> q (deg: q1, q2, ring azimuth), a2 (carriage-2 azimuth), ok"""
         store = HG is None; HG = self.HG if HG is None else HG; p = self.p
-        u1 = self.u1; d = HG @ Y_ARM; a1, a2 = p["a12"] * D2R, p["a23"] * D2R
+        u1 = self.u1; d = HG @ self.W; a1, a2 = p["a12"] * D2R, p["a23"] * D2R
         c = np.clip(d @ u1, -1, 1); s2 = 1 - c * c + 1e-12
         al = (math.cos(a1) - c * math.cos(a2)) / s2; be = (math.cos(a2) - c * math.cos(a1)) / s2
         pp = al[:, None] * u1 + be[:, None] * d; h2 = 1 - (pp * pp).sum(-1)
@@ -192,7 +199,7 @@ class Design:
         A2 = A1 @ rod(self.u2, q2)
         N = np.swapaxes(A2, 1, 2) @ HG                                           # arm frame -> body-2 zero frame
         rc = np.einsum("nji,j->ni", N, self.g0)                                  # ring carriage in the arm frame
-        tr = ang_about(Y_ARM, Z_ARM, rc)
+        tr = ang_about(self.W, self.Z, rc)
         if p["ring_on"] == "body2":                                              # cuff carriage azimuth on the body-2 ring, from the mount
             tr = ang_about(self.p3, self.g0, N @ self.c_arm)
         out = dict(q=np.stack([q1, q2, tr], 1) / D2R, ok=ok, A1=A1, A2=A2)
@@ -259,10 +266,10 @@ class Design:
         rt = unit(np.cross(self.p3, self.g0))
         if p["ring_on"] == "body2":                                              # ring on body 2, carriage on the cuff (arm frame)
             S["ring"] = arc_dirs(self.p3, perp(self.g0, self.p3), p["rho3"] * D2R, self.ring[0] * D2R, self.ring[1] * D2R, R3, RAIL_W)
-            S["ringcar"] = block_dirs(self.c_arm, unit(np.cross(Y_ARM, self.c_arm)), perp(Y_ARM, self.c_arm), R3)
+            S["ringcar"] = block_dirs(self.c_arm, unit(np.cross(self.W, self.c_arm)), perp(self.W, self.c_arm), R3)
         else:
             S["ringcar"] = block_dirs(self.g0, rt, perp(self.p3, self.g0), R3)
-            S["ring"] = arc_dirs(Y_ARM, Z_ARM, p["rho3"] * D2R, self.ring[0] * D2R, self.ring[1] * D2R, R3, RAIL_W)   # arm frame
+            S["ring"] = arc_dirs(self.W, self.Z, p["rho3"] * D2R, self.ring[0] * D2R, self.ring[1] * D2R, R3, RAIL_W)   # arm frame
         self._static = S; return S
 
     def dirs(self, i):
@@ -396,7 +403,7 @@ class ClipStatus:
         return self.cache[D.token].get(j, (False, "missing"))
 
 
-def run(p, B, HG, RS, cs, passes=1, ps=None):
+def run(p, B, HG, RS, cs, passes=2, ps=None):
     """evaluate one geometry at one or several profile percentiles ps (the fit is shared) -> [(report, params)], Design"""
     t = time.time(); D = Design(p, B, HG, RS, cs, passes); out = []
     for q in (ps or [p["p"]]):
@@ -428,10 +435,10 @@ def metal(pose, frames, params, _cache={}):
 
 
 SWEEP_OUT = os.path.join(REPO, "docs", "concepts", "sweeps", ID + ".json")
-KEYS = ('u_az', 'u_el', 'a12', 'a23', 'branch', 'rho1', 'phi1', 'rho2', 'phi2', 'rho3', 'ring_c', 'ring_on', 'cuff_az', 'cov', 'p', 'br_up')
+KEYS = ('u_az', 'u_el', 'a12', 'a23', 'w_delta', 'w_az', 'branch', 'rho1', 'phi1', 'rho2', 'phi2', 'rho3', 'ring_c', 'ring_on', 'cuff_az', 'cov', 'p', 'br_up')
 
 
-def sweep(configs, B, out=SWEEP_OUT, tag="", passes=1, ps=None):
+def sweep(configs, B, out=SWEEP_OUT, tag="", passes=2, ps=None):
     Z = CB._poses_all(); HG = Z["HG"][B.idx].astype(float); RS = Z["RS"][B.idx].astype(float); cs = ClipStatus()
     rows = json.load(open(out)) if os.path.exists(out) else []
     for p in configs:
