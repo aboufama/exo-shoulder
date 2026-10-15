@@ -56,9 +56,13 @@ Spec changes (each stated):
   (the spec's sdir(lat, lon) = bvec(90 - lon, lat)).
 * `r_lay` (the layout radius of the rail and roller samples) is a fix point at the fitted R (|R - r_lay| <= 1.5 mm, at
   most 2 re-runs); a layout above the fitted R would draw a rail narrower than 10 mm and is flagged dishonest.
-* link 2's hub ramps run over its first / last 16 mm (kit default 12): with 12 mm the kit's `over` (which measures at
-  the pre-climb radius) left L2 0.15 mm over the rail just outside the J2 zone in 85 % of poses (found and fixed here);
-  link 2 is listed first among the members so K6 measures its pairs at its own radius, as `over` builds them.
+* link 2's hub ramps run over the kit default 12 mm. This model found the kit's `over` / K6 mismatch (`over` measured
+  at the pre-climb radius and at the upper member's radius, K6 at the climbed radius and the first-listed member's:
+  L2 0.15 mm over the rail just outside the J2 zone in 80-85 % of closing poses); it first worked round it (16 mm
+  ramps, link 2 listed first), then the kit was fixed (docs/concepts/KIT.md, bug 4) and the workarounds removed: at
+  PARAMS gap 159.65 without them, 159.64 with them, 0 K6 hits either way (155.40 with them on the old kit: 4 % of the
+  poses were rejected as collisions there, and they are contact poses). The coarse farm sweep in
+  docs/concepts/sweeps/scapular-race-j2-carriage.json ran on the old kit with the 16 mm ramps.
 
 ## The ceiling, from the raw skin (why the race cannot reach gap 0)
 

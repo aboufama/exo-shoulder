@@ -74,8 +74,8 @@ K.log_event(f"screened <name>: gap {rep['gap']} (baseline 68.93)")
   member thickness 12.25 (F to crown) for collisions and mass. Lower member skin face at F,
   upper member underside at F + 3.15 (`K.STACK`): say which with `ramp_to=((hub, dz), (hub, dz))`. The nominal
   directions `D` (laid out at `h0` = 70 mm) are no longer used for the fit (see Verification, bug 1).
-- **K5 straps.** 12 x 3 mm default, climb limit 60 deg applied AFTER the hub ramps (raises only), mass also reported at
-  5.5 mm.
+- **K5 straps.** 12 x 3 mm default, climb limit 60 deg applied AFTER the hub ramps and BEFORE `over`, then `over` and
+  the climb repeat until no sample rises (raises only; bug 4), mass also reported at 5.5 mm.
 - **K2 continuity.** The spec rule (25 deg between consecutive bench frames, `cont='frames'`) is wrong on this bench:
   60 clip frames over 6 clips are ~10 per clip, so real fast motion exceeds 25 deg between frames - it flags 25 of 60
   frames of the champion, which never flips (follow 1.00 -> 0.58). The kit default `cont=True` interpolates the motion
@@ -84,12 +84,16 @@ K.log_event(f"screened <name>: gap {rep['gap']} (baseline 68.93)")
   flip or a pass through a singularity): champion 0 flips, a constructed branch switch is caught (test). The same
   25 deg-per-step test runs on every joint AXIS in `Chain.joints`, so a flip is caught even if `q` omits a joint
   (champion: max 3.1 deg joint value and 2.5 deg axis motion per step along all 6 clips).
-- **K6 collisions.** Every member pair: samples nearer than hw_a + hw_b + 1 mm (arc at radius) with radial intervals
-  [r, r + t] closer than 0.5 mm (the spec's "+0.5 mm"; so K6 itself enforces 1 mm lateral but only 0.5 mm radial
-  part-part clearance, `over` builds 1 mm) -> the pose is not taken; joint partners exempt within HUB_R + 2 mm
-  of the shared joint. To avoid collisions by construction, give the upper part `over=[(name, 1.0)]`: its underside is
-  raised to the other's top + 1 mm wherever they meet in any fit pose (the template's link 2 over link 1 and the neck:
-  without it 34 % of the template's closing poses collide; link 2 then pays for it: 5 % in band).
+- **K6 collisions.** Every member pair: samples nearer than hw_a + hw_b + 1 mm (arc at the SMALLER of the two
+  samples' radii, each half extent at its own radius: symmetric, so the order of `Chain.members` does not matter) with
+  radial intervals [r, r + t] closer than 0.5 mm (the spec's "+0.5 mm"; so K6 itself enforces 1 mm lateral but only
+  0.5 mm radial part-part clearance, `over` builds 1 mm) -> the pose is not taken; joint partners exempt within
+  HUB_R + 2 mm of the shared joint (each sample at its own radius, so a sample that rises can leave the zone). The
+  smaller radius is the wider cone (conservative); the lateral distance at the pair's common radius would use the
+  larger, a 3-5 % narrower cone where straps meet (it changes 0-2 % of poses on the models measured, bug 4). To avoid
+  collisions by construction, give the upper part `over=[(name, 1.0)]`: its underside is raised to the other's top
+  + 1 mm wherever they meet in any fit pose, on the final climbed underside (the template's link 2 over link 1 and the
+  neck: without it 34 % of the template's closing poses collide; link 2 then pays for it: 5 % in band).
 - **K7.** `neck_member(F, p_from)`: 14 x 6 strap from the arm-end plate (direction p_from) to the start of BOTTOM's bar
   (RH @ (67.5 Wb + 40 Db)), K3 underside, K5 climb.
 
@@ -116,8 +120,11 @@ K.log_event(f"screened <name>: gap {rep['gap']} (baseline 68.93)")
 | rows/baseline-3r.json | concept_baseline.py | 68.93 | 0.775 | 1.000 | 0.4381 | 0.2789 | 0.1024 | | |
 | baseline-3r-kit | baseline (`outer`, no K2/K6) | **68.93** | 0.775 | 1.000 | 0.4381 | 0.2789 | 0.1024 | 0.6 | 1.2-1.8 |
 | baseline-3r-kit | kit checks (`march`, K2 dense, K6) | 70.27 | 0.775 | 1.000 | 0.4247 | 0.2665 | 0.1024 | 0.7 | 1.3-2.5 |
-| _template | kit conventions (flat O20 hubs, 12x3 straps, K7 neck, `over`), q 0.95 | 69.29 | 0.7625 | 1.000 | 0.4568 | 0.2975 | 0.1122 | 1.2-1.3 | 1.8-2.0 |
-| _template | same, q 1.0 | 65.05 | 0.9062 | 1.000 | 0.2495 | 0.1575 | 0.0 | 1.2 | 1.6 |
+| _template | kit conventions (flat O20 hubs, 12x3 straps, K7 neck, `over`), q 0.95 | 69.27 | 0.7625 | 1.000 | 0.4570 | 0.2976 | 0.1122 | 1.2-1.3 | 1.8-2.0 |
+| _template | same, q 1.0 | 65.04 | 0.9062 | 1.000 | 0.2496 | 0.1575 | 0.0 | 1.2 | 1.6 |
+
+The template rows moved with the `over` / K6 fix (bug 4): 69.29 -> 69.27 and 65.05 -> 65.04 (in-band +0.0001-0.0002);
+before it they read 69.29 / 0.4568 / 0.2975 and 65.05 / 0.2495, still reproduced by the old kit on this bench.
 
 The kit reproduces the baseline row exactly (every metric to 4 decimals). The template is the same design at real
 part sizes: in-band 14 rises (wider straps and the neck sit closer), reach drops (12 mm straps, neck); Ti mass 127 g
@@ -131,11 +138,12 @@ covers 56 % of an O20 disc, reaches 7.5 mm: the audit flags it); no continuity o
 
 ## Tests
 
-`OMP_NUM_THREADS=1 python3 -m pytest -q tools/test_concept_kit.py` (22 tests, ~35-45 s): directions vs band_impl, frames
+`OMP_NUM_THREADS=1 python3 -m pytest -q tools/test_concept_kit.py` (23 tests, ~20-45 s): directions vs band_impl, frames
 vs Bench, closure vs a brute-force circle scan on random vectors (both branches) and near-degenerate cases (b ~ w,
 tangent circles), K3 march vs a brute 1 mm march on real poses, `outer` vs concept_baseline, `dist_many` vs
-`B.dist` (incl. points outside the grid box), collisions on constructed hit / miss / exempt cases, `over`, K2 on a
-constructed flip (frames rule and dense rule), and the baseline row reproduction.
+`B.dist` (incl. points outside the grid box), collisions on constructed hit / miss / exempt cases, `over`, `over` on
+the climbed underside of a strap ramped off a hub over a member that shares the joint, in every member order, and
+`_near` symmetry (bug 4), K2 on a constructed flip (frames rule and dense rule), and the baseline row reproduction.
 
 ## Verification (adversarial verifier, 2026-10-15)
 
@@ -167,6 +175,51 @@ Bugs found and fixed (each with a test):
    chain does not close in) for every pose, so a strap whose arc varies did not end on its axis, and the layout
    changed with the pose set (dense K2 rebuilds on other frames). Now each pose uses its own angle, the sample count
    the median. No number changed for closure-built links (constant arc).
+4. **`over` and K6 disagreed (2026-10-15; numbers of models using `over` moved, table below).** Found on
+   scapular-race-j2-carriage: link 2 (`over` the race) collided with the race in 80 % of closing poses at its PARAMS
+   (85 % in the run that found it). Two causes. (a) `fit_profiles` ran `over` on the underside BEFORE the K5 climb
+   limit raised it, and a shared joint's exempt zone (HUB_R + 2 mm) is measured at each sample's own radius: a row
+   just outside link 2's hub ramp sat at its raw ~55 mm, 11 mm (arc) from J2 -> exempt, so `over` skipped it; the
+   climb then lifted it to ~73 mm, ~14 mm from J2 -> not exempt in K6, which found it 0.15 mm over the race.
+   (b) `_near` measured the arc at member A's radius (with B's largest half extent): `_over` passes the upper member
+   as A, `collisions` whichever comes first in `Chain.members`, so the two used different cones. Now the climb runs
+   before `over`, then `over` + climb repeat until no sample rises (after the first pass only the samples that moved
+   are re-tested: their verdict depends on their own radius only; 2-4 passes, bit-identical to re-testing all), and
+   `_near` is symmetric (per pair hw_a + hw_b + 1 mm at the smaller radius; a per-row bound prefilters, the exact
+   test runs on the candidates). Test: `test_over_sees_the_climbed_underside` (fails on the old kit at the K6
+   assertion, and with only (a) fixed at the symmetry assertion). Outside check: an independent brute-force K6 (per
+   pose, exact arccos, no prefilter or chunks) agrees with the kit pose for pose on 8 models after the fix, and no
+   `over` pair is left in contact in any of them (with the larger radius instead of the smaller, 0-2 % fewer poses
+   collide). The scapular-race workarounds (link 2 ramped over 16 mm instead of
+   12, and listed first) are removed: at its PARAMS the model now reads 159.65 without them, 159.64 with them.
+   posterior-max-margin-cardan carries its own workaround for (a) (a `fit_profiles` override with the climb first,
+   and r_ref = 0.8 x its layout radius so the exemption never shrinks); left as is, its numbers do not move. Cost:
+   the template 1.4 -> 1.6 s per evaluation, floating-centre-3r 6.0 -> 7.0 s (single process, idle machine).
+
+   **Numbers of models using `over` moved.** Every kit model with `over` at its PARAMS, Bench(60, 160), fast grid
+   cache, through the model's own entry point (`bench_eval` > `evaluate` > `K.evaluate`), old kit -> new kit (rows,
+   sweeps and write-ups measured before this fix are on the old kit: re-measure before comparing with new numbers):
+
+   | model (PARAMS) | gap | reach | follow | in-band 14 | contact | K6 collide |
+   |---|---|---|---|---|---|---|
+   | floating-centre-3r | 219.11 -> **84.82** | 0.2938 -> 0.7438 | 0.1333 -> 0.9167 | 0.2724 -> 0.3581 | 0.1406 -> 0.1168 | 0.6878 -> 0.0390 |
+   | scapular-race-j2-carriage, without the workarounds (the model now) | 225.30 -> **159.65** | 0.0625 -> 0.3500 | 0.1333 -> 0.5500 | 0.3538 -> 0.3067 | 0.0526 -> 0.0532 | 0.7979 -> 0.0 |
+   | scapular-race-j2-carriage, with the workarounds (as it was) | 155.40 -> **159.64** | 0.35 | 0.55 | 0.3071 -> 0.3068 | 0.0111 -> 0.0532 | 0.0426 -> 0.0 |
+   | seed-2r-cring | 129.98 -> **126.00** | 0.4437 -> 0.4500 | 0.7333 -> 0.7667 | 0.3886 -> 0.3927 | 0.1154 -> 0.1194 | 0.0299 -> 0.0 |
+   | annular-ring-3r | 104.91 -> **101.12** | 0.7625 -> 0.7688 | 0.9167 -> 0.9500 | 0.1278 -> 0.1245 | 0.1061 -> 0.1045 | 0.0341 -> 0.0195 |
+   | crown-ring-3r | 88.17 -> **86.91** | 0.8875 -> 0.9125 | 0.9167 | 0.0641 -> 0.0642 | 0.0 | 0.0248 -> 0.0050 |
+   | risley-turret | 94.73 -> **94.67** | 0.65 | 0.90 | 0.2527 -> 0.2533 | 0.0 | 0.0 |
+   | _template, q 0.95 / q 1.0 | 69.29 -> **69.27** / 65.05 -> **65.04** | 0.7625 / 0.9062 | 1.0 | 0.4568 -> 0.4570 / 0.2495 -> 0.2496 | 0.1122 / 0.0 | 0.0 |
+
+   Unchanged on every metric: back-anchored-ring-3r 90.95, clavicular-front-route 141.38, fivebar-roll 297.38,
+   pointer-cslide 270.0, posterior-max-margin-cardan 91.16, rail-elbow 71.15, seed-pauldron-shells 79.46,
+   trombone-arc 91.08, baseline-3r-kit (no `over`: 68.93 baseline conventions, 70.27 kit checks); the template
+   without `over` still collides in 34.15 % of its closing poses. Most gaps fell: poses K6 used to reject wrongly are
+   taken. The scapular race's rose because the 4 % of poses K6 rejected there are contact poses at q 0.95: still not
+   taken, now counted as contact (the gap weighs contact, not collisions). annular-ring-3r and seed-2r-cring wrap
+   `K.collisions` (they drop their by-construction pairs) and get the fix through it. A model's K6 can also move
+   without `over` (the symmetric cone, B's half extent per pair): the two cases measured (baseline-3r-kit, the
+   template without `over`) did not.
 
 Honesty holes closed (`audit`, run by every `evaluate`; `honest` = march + K2 + K6 + clean audit):
 skipped hub -> ValueError unless the joint is declared in `Chain.hubless` (listed in the report); hub smaller than O20

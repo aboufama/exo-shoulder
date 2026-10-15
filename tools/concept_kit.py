@@ -11,7 +11,7 @@ Conventions are those of tools/concept_baseline.py (the champion 3R), so a kit m
 identically: strap samples every 2 mm along / across at r_ref = 70 mm, cap hubs every 2.5 mm, profile = quantile q over
 the fit poses of the per-sample skin requirement (+ 2 mm clearance), contact decided by B.dist on every metal sample.
 """
-import datetime, json, math, os, sys
+import datetime, json, math, os, sys, warnings
 from dataclasses import dataclass, field
 import numpy as np
 
@@ -256,7 +256,8 @@ class Member:
     off: level added to the fitted underside (hub stack); grid (ns, nc) + climb_deg: strap climb limit along axis 0
     (step_mm apart); ramps: [(mask (m,), other member name, dz)]: final underside >= the other's level + dz there;
     over: [(other member name, gap)]: wherever it passes over that member (in any fit pose), underside >= the
-    other's top + gap (the K6 clearance by construction; the other must not itself have `over`).
+    other's top + gap (the K6 clearance by construction, on the final climbed underside; the other must not itself
+    have `over`).
     joints: names of the joints it carries (K6 partners are exempt within HUB_R + 2 mm of a shared joint)."""
     name: str
     D: np.ndarray
@@ -313,8 +314,18 @@ def _levels(B, chain, fit, q, mode):
     return out
 
 
-def fit_profiles(B, chain, fit, q=1.0, mode="march"):
-    """underside radius per sample (final, with offsets, flat levels, climb limit and ramps) -> {name: rho (m,)}"""
+def _climb(m, r):
+    """K5: |d underside / d s| <= tan(climb) along a strap's axis 0 (raises only)"""
+    if not (m.climb_deg and m.grid): return r
+    ns, nc = m.grid; R2 = r.reshape(ns, nc); x = np.arange(ns) * m.step_mm; sl = math.tan(m.climb_deg * D2R)
+    return (R2[None, :, :] - sl * np.abs(x[:, None, None] - x[None, :, None])).max(1).ravel()
+
+
+def fit_profiles(B, chain, fit, q=1.0, mode="march", over_iter=25):
+    """underside radius per sample (final, with offsets, flat levels, climb limit and ramps) -> {name: rho (m,)}.
+    `over` runs on the climbed underside and is iterated with the climb limit to a fixed point: a climb that lifts a
+    sample out of a shared joint's exempt zone (it is measured at the sample's radius) makes it a K6 partner of the
+    member below, which the next `over` pass then clears (docs/concepts/KIT.md, Verification, bug 4)."""
     raw = _levels(B, chain, fit, q, mode); prof = {}; level = {}
     order = sorted(chain.members, key=lambda m: (len(m.over) > 0, len(m.ramps) > 0))
     for m in order:
@@ -322,10 +333,13 @@ def fit_profiles(B, chain, fit, q=1.0, mode="march"):
         if m.kind in ("cap", "flat"): r[:] = r.max()
         r = r + m.off
         for mask, other, dz in m.ramps: r[mask] = np.maximum(r[mask], level[other] + dz)
-        if m.over: r = _over(chain, m, r, prof, fit)
-        if m.climb_deg and m.grid:                            # K5: |d underside / d s| <= tan(climb) (raises only)
-            ns, nc = m.grid; R2 = r.reshape(ns, nc); x = np.arange(ns) * m.step_mm; sl = math.tan(m.climb_deg * D2R)
-            R2 = (R2[None, :, :] - sl * np.abs(x[:, None, None] - x[None, :, None])).max(1); r = R2.ravel()
+        r = _climb(m, r); sel = None
+        for _ in range(over_iter if m.over else 0):           # raises only: stops when a pass lifts nothing
+            r2 = _climb(m, _over(chain, m, r, prof, fit, sel=sel)); moved = r2 - r > 1e-9; r = r2
+            if not moved.any(): break
+            sel = np.nonzero(moved)[0]                        # a sample's verdict depends on its own r only: re-test the moved
+        else:
+            if m.over: warnings.warn(f"{m.name}: over + climb not at a fixed point after {over_iter} passes (K6 still checks it)")
         prof[m.name] = r; level[m.name] = float(r.max())
     return prof
 
@@ -365,9 +379,12 @@ def _scale(m, x):
 
 
 def _near(A, Bm, da, db, xa, xb, joints, shared, P, clear):
-    """near mask of two members' samples on poses P: arc distance (angle * A's radius) < hw_a + hw_b + clear, the
-    samples within HUB_R + 2 mm of a shared joint axis exempt. Returns (k, near (len(k), m, n)) for the poses k of P
-    whose two sample cones can touch at all, or None. Squared chords instead of arccos (error < 0.05 % below 0.1 rad)."""
+    """near mask of two members' samples on poses P: arc distance (angle * the SMALLER of the two samples' radii) <
+    hw_a + hw_b + clear (each half extent scaled at its own radius), the samples within HUB_R + 2 mm of a shared joint
+    axis (each at its own radius) exempt. Symmetric in A and Bm, so `_over` (A = the upper member) and `collisions`
+    (A = whichever is listed first) agree; the smaller radius is the wider cone (conservative). Returns (k, near
+    (len(k), m, n)) for the poses k of P whose two sample cones can touch at all, or None. Squared chords instead of
+    arccos (error < 0.05 % below 0.1 rad)."""
     ma = np.ones(xa.shape, bool); mb = np.ones(xb.shape, bool); sa, sb = _scale(A, xa), _scale(Bm, xb)   # layouts made at r_ref grow with radius
     for j in shared:
         k = unit(joints[j][P])
@@ -381,17 +398,22 @@ def _near(A, Bm, da, db, xa, xb, joints, shared, P, clear):
     k = np.nonzero((sep <= ra + rb + reach + 1e-6) & ma.any(1) & mb.any(1))[0]
     if not len(k): return None
     dot = np.matmul(da[k].astype(np.float32), db[k].astype(np.float32).transpose(0, 2, 1))
-    thr = ha[k] + hb[k].max(1)[:, None] + clear                 # (k, m): B's largest sample half extent (conservative)
-    cmin = (1.0 - 0.5 * (thr / xa[k]) ** 2).astype(np.float32)  # chord^2 = 2 (1 - dot) < (thr / rho_a)^2
-    near = (dot > cmin[:, :, None]) & mb[k][:, None, :]
+    ha, hb, xa, xb = ha[k], hb[k], xa[k], xb[k]                 # chord^2 = 2 (1 - dot) < (thr / rho)^2:
+    lo = (ha + hb.max(1)[:, None] + clear) / np.minimum(xa, xb.min(1)[:, None])    # per row, a bound on every pair's
+    near = dot > (1.0 - 0.5 * lo ** 2 - 1e-6).astype(np.float32)[:, :, None]       # thr / rho: a superset (B's largest
+    near &= mb[k][:, None, :]                                   # extent, the smallest radius; margin > float32 rounding)
     near &= ma[k][:, :, None]
+    m, n = near.shape[1:]; f = np.flatnonzero(near); fi, fj = f // n, (f // (m * n)) * n + f % n
+    t = (ha.ravel()[fi] + hb.ravel()[fj] + clear) / np.minimum(xa.ravel()[fi], xb.ravel()[fj])   # exact on the candidates:
+    np.put(near, f, dot.ravel()[f] > 1.0 - 0.5 * t ** 2)       # thr = ha + hb + clear per pair, rho = the smaller radius
     return k, near
 
 
 def collisions(chain, pts, ok, clear=1.0, overlap=0.5, chunk=24):
-    """(P,) bool: any two members collide (arc distance < hw1 + hw2 + clear, and radial intervals [r, r + t] closer
-    than `overlap` = 0.5 mm: the spec's K6, so the radial part-part clearance it enforces is 0.5 mm, the lateral 1 mm;
-    `over` builds 1 mm); joint partners are exempt within HUB_R + 2 mm of a shared joint axis"""
+    """(P,) bool: any two members collide (arc distance at the smaller radius < hw1 + hw2 + clear, and radial intervals
+    [r, r + t] closer than `overlap` = 0.5 mm: the spec's K6, so the radial part-part clearance it enforces is 0.5 mm,
+    the lateral 1 mm; `over` builds 1 mm); joint partners are exempt within HUB_R + 2 mm of a shared joint axis. The
+    member order in Chain.members does not matter (`_near` is symmetric)."""
     hit = np.zeros(len(ok), bool); M = chain.members; Pi = np.nonzero(ok)[0]
     if not len(Pi): return hit
     nr = {m.name: np.linalg.norm(pts[m.name], axis=-1) for m in M}; dr = {m.name: pts[m.name] / nr[m.name][..., None] for m in M}
@@ -409,25 +431,28 @@ def collisions(chain, pts, ok, clear=1.0, overlap=0.5, chunk=24):
     return hit
 
 
-def _over(chain, m, r, prof, fit, clear=1.0, chunk=24):
+def _over(chain, m, r, prof, fit, clear=1.0, chunk=24, sel=None):
     """K6 by construction: raise member m's underside r (m,) to >= other top + gap wherever it passes over the members
     listed in m.over [(name, gap)] (max over the fit poses: one violated sample would reject the pose; the shared-joint
-    zone is left to the hub stack)"""
-    Pi = np.nonzero(fit)[0]; O = {o.name: o for o in chain.members}; need = np.full((len(Pi), len(r)), -np.inf)
-    if not len(Pi): return r
-    xa_all = np.broadcast_to(r, (len(m.D), len(r)))
+    zone is left to the hub stack). The same `_near` test as `collisions`, at m's current r: fit_profiles calls it on
+    the climbed underside until climb + `over` stop raising, so the exempt zone and the near cone are those K6 sees.
+    sel: indices of the samples to test (default all); the others are returned unchanged."""
+    Pi = np.nonzero(fit)[0]; O = {o.name: o for o in chain.members}
+    Dm = m.D if sel is None else m.D[:, sel]; sel = np.arange(len(r)) if sel is None else np.asarray(sel)
+    if not len(Pi) or not len(sel): return r
+    need = np.full((len(Pi), len(sel)), -np.inf); xa_all = np.broadcast_to(r[sel], (len(m.D), len(sel)))
     for name, gap in m.over:
         o = O[name]; po = member_points(o, prof[name]); xo = np.linalg.norm(po, axis=-1); do = po / xo[..., None]
         shared = set(m.joints) & set(o.joints)
         for c0 in range(0, len(Pi), chunk):
             P = Pi[c0:c0 + chunk]
-            res = _near(m, o, m.D[P], do[P], xa_all[P], xo[P], chain.joints, shared, P, clear)
+            res = _near(m, o, Dm[P], do[P], xa_all[P], xo[P], chain.joints, shared, P, clear)
             if res is None: continue
             k, nm = res
             top = np.where(nm, (xo[P][k] + o.t + gap)[:, None, :], -np.inf).max(2)
             need[c0 + k] = np.maximum(need[c0 + k], top)
     need = np.where(np.isfinite(need), need, 0.0)
-    return np.maximum(r, need.max(0))
+    out = np.array(r, float); out[sel] = np.maximum(out[sel], need.max(0)); return out
 
 
 # ---- K7 neck to BOTTOM ---------------------------------------------------------------------------------------------

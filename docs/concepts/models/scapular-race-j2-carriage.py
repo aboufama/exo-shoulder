@@ -19,8 +19,8 @@ whose first bearing is spread along a circle. 3 active, 0 passive, nothing undet
 Members (every part at real size, kit sampling): race = the rail (10 wide x 4, 5 rows on a 2 mm grid, scapula-fixed)
 + the carriage's V-roller strips (5..9 mm either side of the rail centre, +-8 mm along, moving) at ONE radius R (kind cap);
 hub2 = the carriage plate = the J2 O20 lower plate (flat disc, F = R + 4.5: 0.5 mm over the rail top), crown F + 12.25;
-link2 = 12 x 3 strap, ramps to hub2 / hub3 + 3.15 over its first / last 16 mm, `over` the race and the neck (+1 mm);
-hub3 (O20, arm); neck (K7). link2 is listed first so K6 measures its pairs at link2's radius, as `over` builds them.
+link2 = 12 x 3 strap, ramps to hub2 / hub3 + 3.15 over its first / last 12 mm, `over` the race and the neck (+1 mm);
+hub3 (O20, arm); neck (K7).
 
 Design step (outside build, so build stays pose-local): `travel()` takes the carriage azimuths of the closing bench
 poses -> the J1 range [phi_lo, phi_hi] (central share cov, + tmarg) and the rail extent. Poses outside it are not taken.
@@ -134,11 +134,11 @@ def build(B, F, p):
     # J2 O20 hub = the carriage plate (its lower member), riding 0.5 mm over the rail top: F = R + 4.5
     hub2 = K.hub_member("hub2", u2, "J2", ref=tdir); hub2.ramps = [(np.ones(len(hub2.xy), bool), "race", RAIL_T + 0.5)]
     hub3 = K.hub_member("hub3", p3, "J3")
-    l2 = K.strap_member("link2", u2, p3, ("J2", "J3"), ramp_to=(("hub2", K.STACK), ("hub3", K.STACK)), end_mm=16.0,
+    l2 = K.strap_member("link2", u2, p3, ("J2", "J3"), ramp_to=(("hub2", K.STACK), ("hub3", K.STACK)),
                         over=[("race", 1.0), ("neck", 1.0)], q=p.get("q_l2"))
     neck = K.neck_member(F, p3, joints=("J3",), ramps=(("hub3", 0.0), (None, 0)))
     res = K.closure_residual(A1, p3, u2, p["gamma"], p["a23"])
-    return K.Chain(members=[l2] + rails + [hub2, hub3, neck],   # l2 first: K6 then measures its pairs at l2's radius, as the kit's `over` construction does
+    return K.Chain(members=rails + [hub2, hub3, l2, neck],
                    ok=ok, q=q, joints=dict(J1=A1, J2=u2, J3=p3), hubless=("J1",),
                    info=dict(residual_deg=round(float(res[ok].max()), 6) if ok.any() else None,
                              min_margin=round(float(margin[ok].min()), 2) if ok.any() else None,

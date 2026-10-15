@@ -1,6 +1,6 @@
 """pytest for tools/concept_kit.py: each kit helper against a brute-force reference.
     OMP_NUM_THREADS=1 python3 -m pytest -q tools/test_concept_kit.py"""
-import math, os, sys
+import math, os, sys, warnings
 import numpy as np
 import pytest
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
@@ -171,6 +171,49 @@ def test_over_clears_by_construction():
     assert np.allclose(r, 74.0)                              # A's top (70 + 3) + 1 mm
     pts = {"A": D * 70.0, "B": D * r[None, :, None]}
     assert not K.collisions(ch, pts, ch.ok).any() and K.collisions(ch, {"A": D * 70.0, "B": D * 71.0}, ch.ok).all()
+
+
+class BallB:
+    """a bench stand-in whose skin is a ball of radius rs about GH (no grid cache: requirement marches B.dist)"""
+    grid = None
+    def __init__(self, rs=52.5): self.rs = rs                # raw underside 55 (2.5 mm clear: off the 1 mm lattice edge)
+    def dist(self, i, P): return np.linalg.norm(np.asarray(P, float), axis=-1) - self.rs
+
+
+def test_over_sees_the_climbed_underside():
+    """KIT.md bug 4: a strap ramped off a hub (upper member of J2) passes over a cap member that shares J2, just outside
+    the J2 exempt zone. On the ball skin (raw underside 55 mm) the rows 12-15 mm along are exempt at their ramp / raw
+    radius but not at the radius the climb limit lifts them to once `over` has raised the rows over the cap. `over` on
+    the pre-climb underside left them in K6 contact with the cap; now 0 K6 hits, in either member order."""
+    P = 2; c, s = math.cos(0.5), math.sin(0.5); Rx = np.array([[1, 0, 0], [0, c, -s], [0, s, c]])   # pose 1: all rotated
+    k = np.stack([[0, 1.0, 0], Rx @ [0, 1.0, 0]]); e = np.stack([[0, 0, 1.0], Rx @ [0, 0, 1.0]])    # e: across k, to v
+    on = lambda mm: math.cos(mm / 70) * k + math.sin(mm / 70) * e                 # on the strap's centre line, mm at r_ref
+    hub = K.hub_member("hub", k, "J2")
+    link = K.strap_member("link", k, on(73.3), ("J2", "J3"), ramp_to=(("hub", K.STACK), (None, 0)), over=[("cap", 1.0)])
+    cap = K.Member("cap", K.strap_dirs(on(9.5), on(20.5), width=16.0).reshape(P, -1, 3), kind="cap", t=4.0, off=14.0,
+                   joints=("J1", "J2"))                                          # 16 wide, 9.5-20.5 mm along, at 55 + 14
+    ok = np.ones(P, bool); ch = K.Chain(members=[hub, cap, link], ok=ok, joints=dict(J2=k))
+    with warnings.catch_warnings():
+        warnings.simplefilter("error")                                           # the fixed point is reached
+        prof = K.fit_profiles(BallB(), ch, ok)
+    pts = lambda pr: {m.name: K.member_points(m, pr[m.name]) for m in ch.members}
+    assert np.allclose(prof["cap"], 69.0) and np.isclose(prof["hub"][0], 55.0) and prof["link"].min() == 55.0
+    # the old construction: `over` on the ramped underside, then the climb
+    ch0 = K.Chain(members=[hub, cap, K.Member(**dict(vars(link), over=[]))], ok=ok, joints=ch.joints)
+    pre = K.fit_profiles(BallB(), ch0, ok); old = dict(pre, link=K._climb(link, K._over(ch, link, pre["link"], pre, ok)))
+    ang = np.arccos(np.clip(np.einsum("pmd,pd->pm", link.D, k), -1, 1))         # exempt: ang * min(r, r_ref) <= 12
+    lifted = (ang * np.minimum(pre["link"], 70) <= K.HUB_R + 2) & (ang * np.minimum(old["link"], 70) > K.HUB_R + 2)
+    assert lifted.any()                                                          # the case is really there
+    for order in ([hub, cap, link], [link, cap, hub], [cap, link, hub]):
+        cho = K.Chain(members=order, ok=ok, joints=ch.joints)
+        assert K.collisions(cho, pts(old), ok).all()                             # old: K6 hit in every pose
+        assert not K.collisions(cho, pts(prof), ok).any()                        # now: none
+    # _near is symmetric (over and collisions call it with the members in either order)
+    po = pts(old); x = {n: np.linalg.norm(v, axis=-1) for n, v in po.items()}
+    nr = lambda a, b: K._near(a, b, po[a.name] / x[a.name][..., None], po[b.name] / x[b.name][..., None], x[a.name],
+                              x[b.name], ch.joints, {"J2"}, np.arange(P), 1.0)
+    (k1, n1), (k2, n2) = nr(link, cap), nr(cap, link)
+    assert np.array_equal(k1, k2) and n1.any() and np.array_equal(n1, n2.transpose(0, 2, 1))
 
 
 def test_template_runs_on_kit_conventions(B):
