@@ -352,16 +352,37 @@ axes on Bench(110,360), exact, 1 mm radial, is queued on the farm (`bigbench-3r-
      end stops' strikers, and the 1 mm radial part clearance. The last costs nothing at k172 on Bench(60,160): K6 is
      1.96 % at both 0.5 and 1 mm.
 
+### Update: stream C, the final gate, and k1530 on the large bench
+
+**Stream C** continued B's basin from its best (sigma 0.2, seed 13, 393 tries, $0.02, stage `cma2-C`, k1850-k2242). It
+collapsed at **k2221: gap 56.25 (score 79.55)**, honest, audit clean, r_lay 127 (fix point holds).
+* Metrics: reach 0.900, follow 1.000, in-band 14 0.338, in-band 10 0.209, contact 0, K6 0.5 %, fold margin 10.1, 170 g.
+* Parameters: az 28.66, el 80.93, a1 82.50, a2 65.43, W (94.18, -0.99), d_off -54.26.
+* Rail stages are again 0 % in band; hub 3 0.68, neck 0.66.
+* The plain 3R at these axes scores **51.33** (score 81.3; reach 0.894, in-band 14 0.393, in-band 10 0.240, contact 0).
+
+**Final gate over all 1926 CMA tries** (polish, then A and B interleaved by generation, then C): the best gained
+0.48 pt over the second half (< 1), 0.38 pt over the last third (< 0.5), and the top 5 are within 0.01 pt.
+**Converged** at 56.25.
+
+**k1530 on Bench(110,360), exact, 1 mm radial (farm, `tools/concept_bigbench.py`):**
+* Its own (60,160) exact fit: 57.85 (grid 57.19, +0.66).
+* **Frozen: 64.52** (score 76.54). reach 0.828, follow 1.000, in-band 14 0.334, in-band 10 0.195, contact 0.007,
+  closure 0.877, K6 0.2 %, honest.
+* Refit: 97.53, degenerate (q 1.0 with no-clearance poses, dishonest sampling).
+* That is 11.4 points ahead of the champion's 75.94 on the same bench and checks. k2221's large-bench run was not made
+  (the morphology is refuted by the control); the 3R control at k1530's axes on the large bench is in the farm queue.
+
 ### Verdict (stage 1)
 
 **Refuted as a morphology; the axis search it triggered is the finding.**
-* The sweep is converged in its best basin: 57.19 at k1530, gate passed over 1533 CMA tries.
+* The sweep is converged: 56.25 at k2221 (57.19 at k1530 in the other basin), gate passed over 1926 CMA tries.
 * That number needs a cable-driven telescope, which MVP1 forbids.
 * The MVP1-legal rail reaches 59.34 (not converged) by shrinking into a hub.
-* At the same axes, the plain spherical 3R beats every one of them by 4-5 points (51.97 / 55.40 / 59.46).
+* At the same axes, the plain spherical 3R beats every one of them by 4-5 points (51.33 / 51.97 / 55.40 / 59.46).
 
 Do not take rail-elbow to L1 CAD. What should happen next (the loop):
-1. CMA of the plain 3R (`_template.py`, or the champion's own builder) from k1530's axes, with width, t_link and
+1. CMA of the plain 3R (`_template.py`, or the champion's own builder) from k2221's and k1530's axes, with width, t_link and
    neck_deg free.
 2. The Bench(110,360) exact re-measure of the converged 3R.
 3. L1 keep-out CAD of that 3R (the champion pipeline: `pipeline/full-exo/designs/...`, `tools/judge_all.sh`).
