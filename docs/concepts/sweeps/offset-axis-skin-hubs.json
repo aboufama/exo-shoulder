@@ -1,0 +1,70 @@
+[
+{
+"k": 0,
+"t": "2026-10-15T22:49:11Z",
+"params": {
+"az1": 108.7248,
+"el1": 62.147,
+"az2": 32.3489,
+"el2": 53.7198,
+"wd": 80.7871,
+"wa": -11.2591,
+"o1x": -4.5545,
+"o1y": -2.3172,
+"o2x": -6.0912,
+"o2y": 2.3828,
+"o3x": -5.8372,
+"o3y": 4.0874,
+"S_max": 21.22,
+"centre": 1,
+"pin1": 0,
+"neck": 5.0,
+"S_res": [
+7.8,
+8.1,
+6.7
+]
+},
+"inband14": 0.8991,
+"inband10": 0.5187,
+"reach": 0.1688,
+"follow": 0.2667,
+"contact": 0.0652,
+"gap": 148.06,
+"label": "k722 lines (skin-normal-hubs-selfaligning best) under the verifier checks, neck 5: riser-rail jams 120 poses, hub3-rail 3"
+},
+{
+"k": 1,
+"t": "2026-10-15T22:49:11Z",
+"params": {
+"az1": 108.7248,
+"el1": 62.147,
+"az2": 32.3489,
+"el2": 53.7198,
+"wd": 80.7871,
+"wa": -11.2591,
+"o1x": -4.5545,
+"o1y": -2.3172,
+"o2x": -6.0912,
+"o2y": 2.3828,
+"o3x": -5.8372,
+"o3y": 4.0874,
+"S_max": 21.22,
+"centre": 1,
+"pin1": 0,
+"neck": 13.0,
+"S_res": [
+7.8,
+8.1,
+6.7
+]
+},
+"inband14": 0.7839,
+"inband10": 0.3236,
+"reach": 0.6562,
+"follow": 1.0,
+"contact": 0.0179,
+"gap": 37.78,
+"label": "k722 lines, neck 13 (riser 5.3 mm): the honest start"
+}
+]
