@@ -102,3 +102,26 @@ this again". So:
 - **Brief agents fully up front.** A message sent to an agent that a workflow is running can start a second copy of it
   (2026-10-15: two cloud-farm agents built the same endpoint in parallel and collided). Put every constraint in the
   first prompt; to change a running agent's brief, say which instance keeps the work and which stops.
+
+## The brief template (every agent prompt, from the essay's own words - lead and subagents)
+
+Read the essay itself, not only this paraphrase (2026-10-15: the lead's first fetch returned a summary; the full text
+was then read). Every brief to an agent carries these parts, in this order:
+
+1. **Altitude - the outcome and what happens next.** "Keep the apps crash-free", not "fix this crash": name the
+   outcome (all 19 requirements on a mechanism the wearer does not feel), the loop the result feeds (idea -> bench ->
+   verifier -> GPU sweep -> L1 CAD -> judges -> dashboard) and what runs unattended afterwards.
+2. **Depth - the essay's prompt, answered before any work starts:** "I want a deeper version of this task, not a
+   bigger one. Before rewriting it: (1) say what a top professional in this field would do here that I'm not asking
+   for; (2) name the rawest material they would start from instead of what has already been digested for me; (3) name
+   the specific methods and tools they would use; (4) say what, other than you or me, would show the result is right.
+   Then rewrite my prompt to ask for exactly that." The agent writes its four answers at the top of its report.
+3. **An unreasonable goal, stated as reasonable.** "You need your website to load in 5s instead of 10s? Ask for
+   200ms." Here: bench gap 0, R1-aim >= 90 %, a 5 s evaluation. When it looks impossible: it is solvable, keep going -
+   change the morphology, prove the impossibility from data only as the last resort.
+4. **Challenge what we know** from the raw data, and **produce new knowledge** that predicts on data it has not seen.
+5. **Outside judge:** a tool the agent can run for immediate feedback, then an adversarial verifier; never self-grading.
+6. **Range:** the verbs of the task (follow a translating joint, hug a moving surface, carry load through soft tissue,
+   never pinch), the fields that own them, and a red team - doing what each field does, never role-play.
+7. **Fast:** a tight time box and permission to fail early with the measured reason (self-efficacy: specific hard
+   goals and tight deadlines beat "do your best").
