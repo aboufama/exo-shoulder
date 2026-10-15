@@ -422,8 +422,8 @@ import os as _os
 LINK_STYLE = _os.environ.get("LINK_STYLE", "sheet")
 STRAP_E = float(_os.environ.get("STRAP_E", 1.2))                                         # strap edge rounds (user: 1-1.5)
 PAD_E = {"upper": (0.4, 0.1), "lower": (0.8, 0.4)}                                       # (skin-side, outer) rounds at a pad: boss top 0.1 sits under the cap skirt
-GUSSET = float(_os.environ.get("GUSSET_MM", 7.0)); STRAP_RMIN = float(_os.environ.get("STRAP_RMIN", 8.0))
-FILLET_K = 4.0; STRAP_FAIR = float(_os.environ.get("STRAP_FAIR", 30.0)); DIMPLE_MAX = float(_os.environ.get("DIMPLE_MAX", 8.0)); DIMPLE_BW = 1.5
+GUSSET = float(_os.environ.get("GUSSET_MM", 7.0)); STRAP_RMIN = float(_os.environ.get("STRAP_RMIN", 20.0))
+FILLET_K = 4.0; STRAP_FAIR = float(_os.environ.get("STRAP_FAIR", 300.0)); DIMPLE_MAX = float(_os.environ.get("DIMPLE_MAX", 8.0)); DIMPLE_BW = 1.5
 L_FLAT_UP = float(_os.environ.get("L_FLAT_UP", 2.0))                                     # an upper link runs flat this far past its pad (clear of the cap skirt)
 
 def _ss(x): return smootherstep((np.asarray(x, float) + 1.0) / 2.0)                    # 0 at x <= -1, 1 at x >= 1, C2
