@@ -25,6 +25,11 @@ feature CAD, few faces (TOP = 17), planes / cylinders / cones + G2 B-spline blen
 
 ## Construction rules learned the hard way
 
+0. **No lofts** (user, 2026-10-15, binding for every design): "lofts look horrible and introduce geometric problems, you
+   can combine arcs, but no lofts". Allowed: line/arc sketches extruded, revolved, or swept as one constant section along
+   a line/arc path; bends (an arc in the cross-section) and planform turns; fillets. Not allowed: lofts through
+   sections, twisted or variable-section sweeps, shrink-wrapped or data-fitted freeform shells.
+
 1. **Outlines are sketches**: lines + tangent arcs with set radii (the cuff saddle: 5 lines + 5 arcs; links: O23 hub
    circles + a 14 mm strip). Never a level set of a data field.
 2. **Surfaces are fair by construction**: a swept constant section along one fair profile (links), a revolve (hubs), or

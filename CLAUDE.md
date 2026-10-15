@@ -72,6 +72,10 @@ docs/EVOLUTION.md (and its snapshot to pipeline/evolution/) as part of the judge
   Blender 4.2.3 at /opt/blender are installed); licences (AMASS, SMPL-X) are still accepted by the user, not the agent.
 - **Renders/films**: show a cheap motion preview and get approval before any paid render. Mannequin: matte black,
   faceless (not uncanny), muscles OK. Parts: bead blasted metal, polished screws, iglidur orange; no black parts.
+- **No lofts, ever** (user, 2026-10-15: "for all the design you do, lofts look horrible and introduce geometric problems, you
+  can combine arcs, but no lofts!"): every surface comes from sketches of lines and tangent arcs - extrudes, revolves,
+  sweeps of ONE constant section along a line/arc path, fillets. No lofts, no surfaces fitted or shrink-wrapped to skin
+  data, no twisted sweeps. Change direction with bends (an arc in the cross-section) and planform turns instead.
 - **CAD has two levels** (user, 2026-10-14: "you dont need to make high quality CAD with smoothing for each iteration
   and testing ... Just a basic CAD that has the expected keep outs of the joint, expected link height"). **L1 keep-out
   CAD** for every iteration and test: joint keep-outs (hub diameter x the real stack height), links as constant-thickness
