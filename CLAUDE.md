@@ -82,7 +82,8 @@ docs/EVOLUTION.md (and its snapshot to pipeline/evolution/) as part of the judge
   translation passive is not, its way more subtle!"): the test is PER JOINT - does a real component exist that gives
   exactly that freedom at that size? Rotations are cheap: pin / bearing pair (1 rot), miniature U-joint (2 rot), ball and
   socket / rod end / ball stud / spherical plain bearing (3 rot), rod in a linear-rotary bushing (1 rot + 1 trans).
-  Translations are expensive: a linear rail / miniature guide (1 trans) is fine at its real length; two crossed rails
+  Translations: a single slider / linear rail / miniature guide (1 trans) is cheap ("a slider is super easy for me to
+  fit") at its real length; two crossed rails
   (2 trans) are bulky and must be shown to fit; a 3-translation passive joint does not exist as a compact part - never.
   Prefer 0 passive translations, then 1; 2 is the hard maximum. Rank designs that tie on the bench by fewer passive
   translations. Every joint, active or passive, maps to a real component - a catalogue part number (bearing, miniature guide,
