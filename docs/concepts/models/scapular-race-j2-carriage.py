@@ -123,22 +123,19 @@ def build(B, F, p):
     rel = wrap(phi - p["phi_c"]); ok = ok & (rel >= p["phi_lo"]) & (rel <= p["phi_hi"])        # J1 range = the rail
     q = np.stack([phi, K.axis_angle(u2, A1, p3), K.axis_angle(p3, F.HG([0.0, -1, 0]), u2)], -1)
     P = len(u2); RL = p["r_lay"]
-    Ds, edge, grid, span, _ = rail_dirs(p); Dr = F.S(Ds)                                      # (P, mr, 3) scapula-fixed
-    tdir = K.unit(np.cross(A1, u2)); pdir = np.cross(u2, tdir)                                 # carriage frame
-    cx = np.arange(-CAR_L / 2 + 1, CAR_L / 2, 2.0) / RL; cy = np.arange(-CAR_W / 2 + 1, CAR_W / 2, 2.0) / RL
+    Ds, edge, grid, span, _ = rail_dirs(p); Dr = F.S(Ds)                                      # (P, mr, 3) scapula-fixed rail
+    tdir = K.unit(np.cross(A1, u2)); pdir = np.cross(u2, tdir)                                 # carriage frame (along, across)
+    # V-rollers (2 per side, 5 mm OD) hang beside the rail head down to R: the strips 5..9 mm either side of the rail
+    # centre, +-8 mm along (all within HUB_R + 2 of J2, the carriage is one body with the J2 lower plate)
+    cx = np.arange(-8.0, 8.01, 2.0) / RL; cy = np.array([-8.0, -6.0, 6.0, 8.0]) / RL
     X, Y = np.meshgrid(cx, cy, indexing="ij"); X, Y = X.ravel(), Y.ravel()
     Dc = K.unit(u2[:, None] + X[None, :, None] * tdir[:, None] + Y[None, :, None] * pdir[:, None])
-    if p.get("stem"):
-        race = K.Member("race", np.concatenate([Dr[:, edge], Dc], 1), kind="cap", t=CAR_T, width=CAR_W, joints=("J1", "J2"),
-                        r_ref=RL, cell=4.0)
-        stem = K.Member("stem", Dr[:, ~edge], kind="free", t=RAIL_T, width=STEM_W, joints=("J1",), r_ref=RL, cell=4.0)
-        rails = [race, stem]
-    else:
-        rails = [K.Member("race", np.concatenate([Dr, Dc], 1), kind="cap", t=CAR_T, width=CAR_W, joints=("J1", "J2"), r_ref=RL, cell=4.0)]
-    hub2 = K.hub_member("hub2", u2, "J2"); hub2.ramps = [(np.ones(len(hub2.xy), bool), "race", J2_F)]
+    rails = [K.Member("race", np.concatenate([Dr, Dc], 1), kind="cap", t=RAIL_T, width=RAIL_W, joints=("J1", "J2"), r_ref=RL, cell=4.0)]
+    # J2 O20 hub = the carriage plate (its lower member), riding 0.5 mm over the rail top: F = R + 4.5
+    hub2 = K.hub_member("hub2", u2, "J2", ref=tdir); hub2.ramps = [(np.ones(len(hub2.xy), bool), "race", RAIL_T + 0.5)]
     hub3 = K.hub_member("hub3", p3, "J3")
     l2 = K.strap_member("link2", u2, p3, ("J2", "J3"), ramp_to=(("hub2", K.STACK), ("hub3", K.STACK)),
-                        over=[("race", 1.0), ("neck", 1.0)] + ([("stem", 1.0)] if p.get("stem") else []), q=p.get("q_l2"))
+                        over=[("race", 1.0), ("neck", 1.0)], q=p.get("q_l2"))
     neck = K.neck_member(F, p3, joints=("J3",), ramps=(("hub3", 0.0), (None, 0)))
     res = K.closure_residual(A1, p3, u2, p["gamma"], p["a23"])
     return K.Chain(members=rails + [hub2, l2, hub3, neck], ok=ok, q=q, joints=dict(J1=A1, J2=u2, J3=p3), hubless=("J1",),
