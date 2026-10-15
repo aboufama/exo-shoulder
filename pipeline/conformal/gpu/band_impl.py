@@ -32,7 +32,7 @@ except ImportError:
     np = None
 
 _CACHE = {}
-CODE_VERSION = "band-2026-10-15n (jn_low v2: the neck bridges link N-1; fill_holes; job key hw; range first; why poses are lost; fit_clips; guards; pure 3R chain)"
+CODE_VERSION = "band-2026-10-15o (jn_low v3: the neck bridges link N-1 0.65 over its plate; fill_holes; job key hw; range first; why poses are lost; fit_clips; guards; pure 3R chain)"
 RESD = 0.25; NWD, NHD = 1440, 720; LAT_LO, LAT_HI = -75.0, 90.0; CLEAR = 3.0
 ROW0, ROW1 = int((LAT_LO + 90) / RESD), int((LAT_HI + 90) / RESD)
 HUB_R, HW, T_LINK, STACK, T_W, T_BOT = 17.0, 7.0, 5.5, 6.0, 1.0, 6.5
@@ -755,7 +755,7 @@ class Band:
             for ax_ in self._aux:                                                                 # neck / tab: hug the kept frames, ramp out of their start
                 La = t.where(S[:, None], ax_["LO"], t.full_like(ax_["LO"], -1e4)).max(0).values + self.hub_margin
                 hs0 = (zb + (STACK if self.jn_link else 0.0)) if ax_["start"] == "hub" else ((rail_under.max() + 4.0 - 4.0) if (ax_["start"] == "rail" and rail_under is not None) else (Fj[1] if 1 in Fj else zb))
-                u_ = t.maximum(La, (hs0 + 0.0 * ax_["dA"]) if (self.jn_link and ax_["start"] == "hub") else hs0 - self.RAMP * t.clamp(ax_["dA"] - 6.0, min=0))   # jn_low link: the neck bridges link N-1
+                u_ = t.maximum(La, (t.maximum(hs0, zb + T_LO + 0.65) + 0.0 * ax_["dA"]) if (self.jn_link and ax_["start"] == "hub") else hs0 - self.RAMP * t.clamp(ax_["dA"] - 6.0, min=0))   # jn_low link: the neck bridges link N-1 (0.65 over its plate: collisions() wants 0.6 between them)
                 if ax_["h_end"] is not None: u_ = t.maximum(u_, t.tensor(ax_["h_end"], device=self.dev) - self.RAMP * t.clamp(ax_["dB"] - 6.0, min=0))
                 aux_u.append(u_)
             faces["aux_under"] = aux_u

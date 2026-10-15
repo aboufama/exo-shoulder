@@ -131,7 +131,7 @@ def wall_thickness(step, h_probe=1.0):
     ok = done & (s < 60.0) & (s > 0.05); w = m.area_faces[ok]; ts = s[ok]; o_ = np.argsort(ts); cw = np.cumsum(w[o_]) / w.sum()
     return float(ts[o_][np.searchsorted(cw, 0.10)]), float(np.median(ts)), c[ok], ts
 
-def mesh_step(step, h, out_msh=None, local=None):
+def mesh_step(step, h, out_msh=None, local=None, return_curves=False):
     """tet10 mesh of the STEP solid: nodes (n,3), tets (m,10) in C3D10 order (0-based). h: uniform size, or with
     local = (centroids, thickness, k, h_min, h_max) the size at x is the wall thickness at the nearest surface sample / k"""
     import gmsh
@@ -177,10 +177,33 @@ def mesh_step(step, h, out_msh=None, local=None):
         k_ = list(et).index(11)                                                          # 11 = 10-node tetrahedron
         idx = np.full(int(tags.max()) + 1, -1); idx[tags] = np.arange(len(tags))
         T = idx[np.asarray(en[k_]).reshape(-1, 10)][:, GMSH2CCX]
+        on_curve = np.zeros(len(X), bool)                                                 # nodes on B-rep edges (model curves)
+        for _, ct in gmsh.model.getEntities(1):
+            nt = gmsh.model.mesh.getNodes(1, ct, includeBoundary=True)[0]
+            if len(nt): on_curve[idx[nt]] = True
         if out_msh: gmsh.write(out_msh)
     finally: gmsh.finalize()
     used = np.unique(T); remap = np.full(len(X), -1); remap[used] = np.arange(len(used))
+    if return_curves: return X[used], remap[T], on_curve[used]
     return X[used], remap[T]
+
+def reentrant_edge_nodes(X, T, el, fc, on_curve, min_angle=60.0):
+    """nodes on sharp RE-ENTRANT B-rep edges: boundary mesh edges on model curves whose two faces' outward normals differ
+    by more than min_angle (60 deg: material angle >= 240 deg, a strong singularity; the 30-45 deg creases of fair-field
+    sheets stay judged) and fold inward (concave). In unfilleted L1 CAD (a fused neck end, a drill-point bottom) the FE
+    stress there grows without bound under refinement; the L2 part fillets them"""
+    C = T[el][np.arange(len(el))[:, None], FACES[fc]]                                     # boundary triangles (corner nodes)
+    opp = T[el, [({0, 1, 2, 3} - set(FACES[f])).pop() for f in fc]]
+    n = np.cross(X[C[:, 1]] - X[C[:, 0]], X[C[:, 2]] - X[C[:, 0]]); n /= np.linalg.norm(n, axis=1, keepdims=True)
+    cen = X[C].mean(1); n *= np.sign(np.einsum("ij,ij->i", n, cen - X[opp]))[:, None]     # outward: away from the tet's 4th node
+    E = np.sort(np.concatenate([C[:, [0, 1]], C[:, [1, 2]], C[:, [2, 0]]]), 1); F_ = np.tile(np.arange(len(C)), 3)
+    ok = on_curve[E].all(1); E, F_ = E[ok], F_[ok]
+    key = E[:, 0].astype(np.int64) * (len(X) + 1) + E[:, 1]; o = np.argsort(key); key, E, F_ = key[o], E[o], F_[o]
+    pair = np.nonzero(key[1:] == key[:-1])[0]; f1, f2 = F_[pair], F_[pair + 1]
+    ang = np.degrees(np.arccos(np.clip(np.einsum("ij,ij->i", n[f1], n[f2]), -1, 1)))
+    concave = np.einsum("ij,ij->i", cen[f2] - cen[f1], n[f1]) > 0
+    sel = (ang > min_angle) & concave; m = np.zeros(len(X), bool); m[E[pair[sel]].ravel()] = True
+    return m
 
 def tet_volumes(X, T):
     a, b, c, d = (X[T[:, i]] for i in range(4)); return np.einsum("ij,ij->i", np.cross(b - a, c - a), d - a) / 6.0
@@ -326,7 +349,7 @@ def prepare_part(step, name, kind, k, wall, cuff_centres=None, focus=None):
     load = hubs[1] if kind == "link" else hubs[0]
     if kind == "link" and len(hubs) != 2: raise RuntimeError(f"{name}: {len(hubs)} hubs found (2 expected)")
     hmin, hmax = H_RANGE[k]; C, tw = wall[2], wall[3]
-    X, T = mesh_step(step, None, local=(C, tw, k, hmin, hmax) + (((np.asarray(focus[0], float), focus[1], 2, *H_RANGE[2]),) if focus is not None else ()))
+    X, T, on_curve = mesh_step(step, None, local=(C, tw, k, hmin, hmax) + (((np.asarray(focus[0], float), focus[1], 2, *H_RANGE[2]),) if focus is not None else ()), return_curves=True)
     vol = tet_volumes(X, T)
     if (vol <= 0).any(): raise RuntimeError(f"{name}: {int((vol <= 0).sum())} inverted tets")
     el, fc = boundary_faces(T); bn = np.zeros(len(X), bool); bn[np.unique(T[el][np.arange(len(el))[:, None], np.c_[FACES, FACE_MID][fc]])] = True
@@ -344,12 +367,15 @@ def prepare_part(step, name, kind, k, wall, cuff_centres=None, focus=None):
     _, i8 = cKDTree(C).query(X, k=8); dex = np.clip(tw[i8].min(1) / 2.0, *H_RANGE[2])
     d_fx, _ = cKDTree(X[fx_sel]).query(X, k=1); d_ld, _ = cKDTree(X[ld_sel]).query(X, k=1)
     supz = d_fx <= dex; ldz = (d_ld <= dex) & ~supz
+    re_ = reentrant_edge_nodes(X, T, el, fc, on_curve); sgz = np.zeros(len(X), bool)
+    if re_.any(): d_re, _ = cKDTree(X[re_]).query(X, k=1); sgz = (d_re <= dex) & ~supz & ~ldz
     a, e1, e2 = frame_of(load["a"])
     info = dict(n_nodes=len(X), n_tets=len(T), k=k, h_range=[hmin, hmax], load_hub=dict(ver=load["ver"], role=load["role"], axis=np.round(load["a"], 4).tolist(), ref=np.round(ld_ref, 2).tolist()),
                 hubs=[dict(ver=h["ver"], role=h["role"], axis=np.round(h["a"], 4).tolist()) for h in G["hubs"]],
                 support=fx_info, support_ref=np.round(fx_ref, 2).tolist(), n_load_faces=len(ef), n_support_nodes=int(fx_sel.sum()),
                 mesh_volume_mm3=round(float(vol.sum()), 1), brep_volume_mm3=round(float(G["vol_mm3"]), 1))
-    return dict(X=X, T=T, ld_sel=ld_sel, fx_sel=fx_sel, ld_ref=ld_ref, ef=ef, supz=supz, ldz=ldz, bcz=supz | ldz, B=np.array([a, e1, e2]),
+    info["reentrant_edge_nodes"] = int(re_.sum())
+    return dict(X=X, T=T, ld_sel=ld_sel, fx_sel=fx_sel, ld_ref=ld_ref, ef=ef, supz=supz, ldz=ldz, sgz=sgz, bcz=supz | ldz | sgz, B=np.array([a, e1, e2]),
                 vol_mm3=float(vol.sum()), com=G["com"], info=info)
 
 def solve(P, mat, steps, work, threads=2):
@@ -375,7 +401,7 @@ def unit_data(P, mat, work, threads=2):
     U, S, sec = solve(P, mat, steps, work, threads)
     t_ph = [rigid_fit(P["X"][P["ld_sel"]], U[k][P["ld_sel"]]) for k in range(6)]
     dGH = np.array([t + np.cross(ph, GH - c) for t, ph, c in t_ph]); rot = np.array([ph for _, ph, _ in t_ph])
-    return dict(X=P["X"], U=U, S=S, bcz=P["bcz"], ldz=P["ldz"], supz=P["supz"], B=B, ld_ref=P["ld_ref"], dGH=dGH, rot=rot,
+    return dict(X=P["X"], U=U, S=S, bcz=P["bcz"], ldz=P["ldz"], supz=P["supz"], sgz=P.get("sgz", np.zeros(len(P["X"]), bool)), B=B, ld_ref=P["ld_ref"], dGH=dGH, rot=rot,
                 mass_g=P["vol_mm3"] * mat["rho"] / 1000.0, com=P["com"]), sec
 
 # ================================================================ post: design cases
@@ -413,7 +439,7 @@ def post_part(name, mat, res, D):
     d1_perp = M_DESIGN * np.linalg.svd(LM @ P, compute_uv=False)[:, 0]; d1_ax = M_DESIGN * np.linalg.norm(LM @ a, axis=1)
     d2 = F_CUFF * np.linalg.svd(LF, compute_uv=False)[:, 0]
     bound = d1 + d2; judged = ~D["bcz"]
-    cand = np.argsort(-np.where(judged, bound, 0))[:600]; cand_bc = np.argsort(-np.where(D["ldz"], bound, 0))[:200]; cand_s = np.argsort(-np.where(D["bcz"] & ~D["ldz"], bound, 0))[:100]
+    cand = np.argsort(-np.where(judged, bound, 0))[:600]; cand_bc = np.argsort(-np.where(D["ldz"], bound, 0))[:200]; cand_s = np.argsort(-np.where(D["supz"] | D["sgz"], bound, 0))[:200]
     idx = np.unique(np.r_[cand, cand_bc, cand_s]); d1f = np.zeros(len(bound)); d1f[idx] = worst_pair(LM[idx], LF[idx])[0]
     w = np.where(judged)[0]
     kj = w[np.argmax(d1f[w])]; _, argw = worst_pair(LM[[kj]], LF[[kj]]); f_star, m_star = argw[0]
@@ -422,9 +448,11 @@ def post_part(name, mat, res, D):
         i = np.nonzero(mask)[0]; k = i[np.argmax(v[i])]; return float(v[k]), k
     out = {}
     for nm, v in (("D1", d1), ("D1_perp", d1_perp), ("D1_axial", d1_ax), ("D2_force_50N", d2), ("D1F", d1f)):
-        s, k = peak(v, judged); sl, kl = peak(v, D["ldz"]) if D["ldz"].any() else (0.0, 0); ss, ks = peak(v, D["bcz"] & ~D["ldz"]) if (D["bcz"] & ~D["ldz"]).any() else (0.0, 0)
+        s, k = peak(v, judged); sl, kl = peak(v, D["ldz"]) if D["ldz"].any() else (0.0, 0); ss, ks = peak(v, D["supz"]) if D["supz"].any() else (0.0, 0)
+        sg, kg = peak(v, D["sgz"]) if D["sgz"].any() else (0.0, 0)
         out[nm] = dict(vm_MPa=round(s, 1), SF=round(mat["Sy"] / max(s, 1e-9), 2), at_mm=np.round(D["X"][k], 1).tolist(), r_from_GH_mm=round(float(np.linalg.norm(D["X"][k])), 1),
-                       load_hub_zone_vm_MPa=round(sl, 1), load_hub_zone_at_mm=np.round(D["X"][kl], 1).tolist(), support_zone_vm_MPa=round(ss, 1), raw_vm_MPa=round(max(s, sl, ss), 1))
+                       load_hub_zone_vm_MPa=round(sl, 1), load_hub_zone_at_mm=np.round(D["X"][kl], 1).tolist(), support_zone_vm_MPa=round(ss, 1),
+                       reentrant_edge_vm_MPa=round(sg, 1), reentrant_edge_at_mm=np.round(D["X"][kg], 1).tolist(), raw_vm_MPa=round(max(s, sl, ss, sg), 1))
     # MVP1: D1F / 10 plus the own weight x G_MULT as a force at the COM carried to the load hub (bound)
     W = D["mass_g"] * 1e-3 * 9.81 * G_MULT; lever = np.linalg.norm(D["com"] - D["ld_ref"])
     s_w = W * np.max(np.linalg.svd(LF[w], compute_uv=False)[:, 0]) + W * lever * np.max(sM[w])
@@ -510,22 +538,30 @@ def part_fea(step, pre, kind, mat, work0, fast=False, centres=None, threads=2):
         if ratio > 1.0:                                                                   # never let the coarse mesh flatter the part
             for nm in ("D1", "D1_perp", "D1_axial", "D2_force_50N", "D1F"):
                 c_ = p["cases"][nm]; c_["vm_coarse_MPa"] = c_["vm_MPa"]; c_["vm_MPa"] = round(c_["vm_MPa"] * ratio, 1); c_["SF"] = round(mat["Sy"] / c_["vm_MPa"], 2)
-                for z_ in ("load_hub_zone_vm_MPa", "support_zone_vm_MPa", "raw_vm_MPa"): c_[z_] = round(c_[z_] * ratio, 1)
+                for z_ in ("load_hub_zone_vm_MPa", "support_zone_vm_MPa", "reentrant_edge_vm_MPa", "raw_vm_MPa"): c_[z_] = round(c_[z_] * ratio, 1)
             p["cases"]["MVP1"]["vm_MPa"] = round(p["cases"]["MVP1"]["vm_MPa"] * ratio, 2); p["cases"]["MVP1"]["SF"] = round(mat["Sy"] / p["cases"]["MVP1"]["vm_MPa"], 1)
             s_ = p["cases"]["D1F"]["vm_MPa"]; p["fatigue"].update(sigma_a_MPa=s_, SF_fully_reversed=round(mat["Se"] / s_, 2), SF_R0_goodman=round(1.0 / ((s_ / 2) / mat["Se"] + (s_ / 2) / mat["Su"]), 2))
         if dgh_f > dgh_c: p["deflection"]["d_GH_mm"] = round(p["deflection"]["d_GH_mm"] * dgh_f / dgh_c, 3)
     # sizing (what fixes a failing part): the local wall at the peak, and the scale factors to SF 1.5 by thickness
     # (sigma ~ t^-1.9, thin_study's fit on these Ti links; bending / torsion of a strap ~ t^-2) or by width (~ w^-1)
     from scipy.spatial import cKDTree
-    pk = np.asarray(p["cases"]["D1F"]["at_mm"], float); _, i8 = cKDTree(wall[2]).query(pk, k=8); t_pk = float(wall[3][i8].min())
+    pk = np.asarray(p["cases"]["D1F"]["at_mm"], float); near = cKDTree(wall[2]).query_ball_point(pk, 3.0)
+    t_pk = float(np.percentile(wall[3][near], 30)) if len(near) >= 3 else float(wall[3][cKDTree(wall[2]).query(pk, k=8)[1]].min())   # p30: skips edge-round rays, below the width
     sf = p["cases"]["D1F"]["SF"]; need = SF_MIN / sf
     p["sizing"] = dict(wall_at_peak_mm=round(t_pk, 2), M_allow_at_SF_1_5_Nm=round(M_DESIGN / 1e3 * sf / SF_MIN, 2),
                        thickness_for_SF_1_5_mm=round(t_pk * max(1.0, need) ** (1 / 1.9), 2), width_factor_for_SF_1_5=round(max(1.0, need), 2),
-                       rule="linear: allowable moment = 10 N.m x SF / 1.5; t_req = t_peak x (1.5 / SF)^(1/1.9) (thin_study exponent), width-only = x 1.5 / SF")
+                       rule="linear: allowable moment = 10 N.m x SF / 1.5; t_peak = 30th percentile of the ray thickness within 3 mm of the peak; t_req = t_peak x (1.5 / SF)^(1/1.9) (thin_study exponent), width-only = x 1.5 / SF")
     p["seconds"] = round(time.time() - t0, 1); return p
 
 def summarise(out, dd):
     gap, gsrc = min_skin_gap(dd); P = out["parts"]
+    mvp1 = None                                                                          # the measured MVP1 loads (judge/dynamics.py nominal case)
+    try:
+        dy = json.load(open(os.path.join(dd, "judge", "dynamics.json"))); c = dy["cases"][dy["nominal"]]
+        sc = max(c["moment_gh_peak_Nm"] * 1e3 / M_DESIGN, c["force_peak_N"] / F_CUFF)
+        mvp1 = dict(moment_gh_peak_Nm=c["moment_gh_peak_Nm"], force_peak_N=c["force_peak_N"], scale_of_D1F=round(sc, 4),
+                    chain_d_GH_mm=round(sc * sum(p["deflection"]["d_GH_mm"] for p in P.values()), 3), min_SF=round(min(p["cases"]["D1F"]["SF"] for p in P.values()) / sc, 1))
+    except Exception: pass
     sf = min(p["cases"]["D1F"]["SF"] for p in P.values()); worst = min(P, key=lambda k: P[k]["cases"]["D1F"]["SF"])
     fsf = min(p["fatigue"]["SF_fully_reversed"] for p in P.values()); dsum = sum(p["deflection"]["d_GH_mm"] for p in P.values())
     defl_ok = dsum <= FLOOR_MM and (gap is None or dsum < gap)
@@ -534,6 +570,9 @@ def summarise(out, dd):
                           fatigue_min_SF=fsf, chain_d_GH_mm=round(dsum, 3), min_skin_gap_mm=None if gap is None else round(gap, 2), gap_source=gsrc,
                           floor_kept=None if gap is None else bool(dsum <= gap - FLOOR_MM), deflection_ok=bool(defl_ok),
                           parts=sorted(P), complete=all(k in P for k in chain),
+                          M_allow_at_SF_1_5_Nm=round(min(p["sizing"]["M_allow_at_SF_1_5_Nm"] for p in P.values() if "sizing" in p), 2) if all("sizing" in p for p in P.values()) else None,
+                          thickness_scale_for_floor=round(max(1.0, dsum / FLOOR_MM) ** (1 / 2.7), 2), mvp1_measured=mvp1,
+                          sizing_note="M_allow: the design moment the weakest part carries at SF 1.5 (linear); thickness_scale_for_floor: uniform wall scale that brings the chain d_GH to 2 mm (stiffness ~ t^2.7, thin_study)",
                           passes=bool(sf >= SF_MIN and fsf >= FATIGUE_MIN and defl_ok and all(k in P for k in chain)))
     return out
 

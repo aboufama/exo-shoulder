@@ -65,7 +65,18 @@ def patch(src, v2=True):
         for a, b in REPS2:
             assert src.count(a) == 1, f"band_impl changed, anchor not unique / missing:\n{a}"
             src = src.replace(a, b)
+    if v2 and "0.65 over its plate" not in src:                                         # band-2026-10-15n deployed the bridge without
+        for a, b in REPS3:                                                               # the clearance: still 14.2 % 'link 2-neck'
+            assert src.count(a) == 1, f"band_impl changed, anchor not unique / missing:\n{a}"
+            src = src.replace(a, b)
     return src
+
+
+# v3: band-2026-10-15n carries the bridge at hs0 = zb + STACK, only 0.15 over link N-1's plate top (zb + T_LO), while
+# collisions() wants 0.6 between a link and the neck -> the bridge must sit >= 0.65 over the plate (GPU: 15n gave
+# exactly the v1 numbers; CPU ws_collisions with this line: 14.2 -> 0.0 %)
+DEPLOYED_15N = "                u_ = t.maximum(La, (hs0 + 0.0 * ax_[\"dA\"]) if (self.jn_link and ax_[\"start\"] == \"hub\") else hs0 - self.RAMP * t.clamp(ax_[\"dA\"] - 6.0, min=0))   # jn_low link: the neck bridges link N-1\n"
+REPS3 = [(DEPLOYED_15N, REPS2[0][1])]
 
 
 if __name__ == "__main__":

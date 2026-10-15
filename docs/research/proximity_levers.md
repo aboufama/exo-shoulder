@@ -156,6 +156,18 @@ Drink 34.3 -> 46.5, Wash opposite shoulder 25.9 -> 30.5, Raise overhead 41.0 -> 
 range (R16) and the share of the gain due to the fit rather than the JN move need the control build
 (`cad_r18_n3_s1392_1_d1`: the final's chain with the same clips-only CPU fit) - see the scorecards below.
 
+**The range check (GPU, run by the lead from his session under the user's approval; exo-band22 band-2026-10-15n,
+wsf payload, fill_holes, relief 3.65, `gpu_client/band_eval_agD_wbox.json`)**: the same chain fitted range first
+follows only 59.1 % of the clip frames (Comb hair 28 %, Raise overhead 30 %) at 61.5 % in band, and **46.2 % of the
+functional workspace** (final 69.5 %); workspace poses lost to kinematics 18.9 % (final 6.8 %), skin above the shape
+34.1 %. So the CPU clips-only search bought its R1 with range. Why (`jn_reach.py`, pure kinematics over the wsf
+poses): the low-motion W itself does not cost reach - with the final's b and arcs, W (112, -15) closes the chain in
+94.1 % of the workspace poses (the final's W 93.2 %; 90/90 arcs 98.7 %) - but the clips-only search shortened link 2
+to the 60 deg floor, whose closure window [23, 123] deg covers only 81 % of the workspace. Moving W alone on the
+final chain (arcs kept) is worse on the clips (CPU: follow 52-68 %, in band 40-60 % vs 74 / 67.5 %): the chain has
+to be re-optimised around the new JN, with the workspace in the fit. The lead's W-fixed range-first GPU search
+(`wfix_cfgs_fill_relief365.json` -> `gpu_client/band_search_agD_wfix.json`) is that test.
+
 ## 8. Results still running at hand-off / not done
 
 - `local_w_search.py` boxed vs free: see `local_w_search_wbox.json` / `local_w_search_wfree.json` (first 60 boxed

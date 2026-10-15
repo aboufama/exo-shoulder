@@ -348,17 +348,19 @@ class WorkspaceSkin:
         self._cache = {}
         print(f"  workspace skin: {len(self.poses)} followed workspace poses (of {len(W)})", flush=True)
     def _tris(self, k, c):
-        """triangles of pose k's posed skin within `near` of the canonical point c (canonical frame)"""
+        """triangles of pose k's posed skin within `near` of the canonical point c (canonical frame; cached per pose for
+        the first c asked - the JN hub's rays all start near it)"""
         if k not in self._cache:
             pl, el, ax = self.poses[k]["p"][:3]; DS = self.DS
             H = DS.Ry(pl * D2R) @ DS.Rx(-el * D2R) @ DS.Ry(ax * D2R)                         # canonical humerus -> thorax
             pose = dict(zip(["plane", "elev", "axial", "flex", "pron"], self.poses[k]["p"]))
-            self._cache[k] = (self.BP.posed(pose) @ H)                                     # vertices in the canonical frame (row v H = H^T v)
-        V = self._cache[k]; F = self.BP.F; T = V[F]; m = (np.linalg.norm(T - c, axis=2).min(1) < self.near) | (np.linalg.norm(T.mean(1) - c, axis=1) < self.near)
-        return T[m]
+            V = self.BP.posed(pose) @ H; F = self.BP.F                                       # vertices in the canonical frame (row v H = H^T v)
+            T = V[F]; m = (np.linalg.norm(T - c, axis=2).min(1) < self.near) | (np.linalg.norm(T.mean(1) - c, axis=1) < self.near)
+            self._cache[k] = T[m]
+        return self._cache[k]
     def min_radius(self, dirs, clear=2.0):
         """per canonical direction: max over the workspace poses of (first skin exit radius along it + clear), -inf if none"""
-        D = rows(np.asarray(dirs, float)); c = D.mean(0) * 90.0; out = np.full(len(D), -np.inf)
+        D = rows(np.asarray(dirs, float)); c = getattr(self, 'c0', None); c = self.c0 = (D.mean(0) * 85.0 if c is None else c); out = np.full(len(D), -np.inf)
         for k in range(len(self.poses)):
             T = self._tris(k, c)
             if not len(T): continue
