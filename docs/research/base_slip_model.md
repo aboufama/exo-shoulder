@@ -154,7 +154,14 @@ about 20 mm above".
 2. **A torque-free passive slider (the user's exception).** Put it on the handler along the dominant error direction.
    The best single direction is (0.56, 0.01, -0.83) in ISB scapula axes, anterior-medial in the scapular plane. A
    numerical search over 4000 directions puts it there, and it cuts the central worst frame from 15.2 to 7.0 mm. It is
-   still over 4 mm, so it is not a fix on its own.
+   still over 4 mm, so it is not a fix on its own. **Update 2026-10-15 (`judge/base_stage.py`, design side; this model
+   unchanged):** 7.0 mm assumes the slider is set perfectly. Set by the arm through the chain's closure (the only thing
+   that can set it), it is 10 mm: an arm brace knows the GH centre along the humerus only (Hamming 2012 cuff errors 0-4
+   deg on a 325 mm lever). A 3-axis stage set by a spring-loaded follower on the lateral acromion (bone, 32 mm above GH)
+   removes the IR/ER swing: 7.3 mm. With the user's systematic slip calibrated out (f ~ 0.32, double-calibration
+   literature) it is **2.3 mm** (4.6 mm if only the angles are repeatable). No uncalibrated skin reference passes:
+   the 4.2 mm slip at 150 deg is over 4 mm on its own. Table and caveats in docs/FINDINGS.md ("R10 on the scapula
+   handler").
 3. **A threshold change.** That is the user's call, never the agent's. 4 mm is "half the 2-10 mm band", and the user
    confirmed it on 2026-10-15.
 

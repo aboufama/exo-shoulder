@@ -1,0 +1,595 @@
+{
+ "design": "cad_r18_n3_s1392_1_f300",
+ "frames": 1337,
+ "fit_frames": 1056,
+ "law": "central",
+ "rows": {
+  "fixed (base_slip R10)": {
+   "fit_max": 15.21,
+   "held_out_max": 7.49,
+   "all_max": 15.21,
+   "p95": 13.8,
+   "share_over_4": 0.408,
+   "max_elev_le_120": 9.96,
+   "worst": [
+    "Raise overhead",
+    [
+     30,
+     150,
+     -60
+    ]
+   ]
+  },
+  "slider_ideal (best u, set perfectly)": {
+   "fit_max": 6.97,
+   "held_out_max": 5.4,
+   "all_max": 6.97,
+   "p95": 6.86,
+   "share_over_4": 0.334,
+   "max_elev_le_120": 6.63,
+   "worst": [
+    "Raise overhead",
+    [
+     30,
+     150,
+     -60
+    ]
+   ],
+   "u": [
+    -0.59,
+    -0.04,
+    0.8
+   ]
+  },
+  "stage2_ideal (best plane normal n)": {
+   "fit_max": 2.43,
+   "held_out_max": 1.59,
+   "all_max": 2.43,
+   "p95": 2.33,
+   "share_over_4": 0.0,
+   "max_elev_le_120": 2.0,
+   "worst": [
+    "Raise overhead",
+    [
+     30,
+     150,
+     -60
+    ]
+   ],
+   "n": [
+    0.55,
+    -0.75,
+    0.37
+   ]
+  },
+  "stage3_brace (3-axis stage set by the arm brace)": {
+   "fit_max": 23.57,
+   "held_out_max": 16.16,
+   "all_max": 23.57,
+   "p95": 22.72,
+   "share_over_4": 0.687,
+   "max_elev_le_120": 19.92,
+   "worst": [
+    "Raise overhead",
+    [
+     30,
+     150,
+     -60
+    ]
+   ]
+  },
+  "slider_brace rho 0.02": {
+   "fit_max": 9.97,
+   "held_out_max": 6.53,
+   "all_max": 9.97,
+   "p95": 9.81,
+   "share_over_4": 0.512,
+   "max_elev_le_120": 9.42,
+   "worst": [
+    "Reach a high shelf",
+    [
+     82,
+     132,
+     -82
+    ]
+   ],
+   "u": [
+    -0.32,
+    0.26,
+    0.91
+   ],
+   "uh_overhead": 0.93
+  },
+  "slider_brace rho 0.1": {
+   "fit_max": 9.97,
+   "held_out_max": 6.18,
+   "all_max": 9.97,
+   "p95": 9.73,
+   "share_over_4": 0.431,
+   "max_elev_le_120": 9.07,
+   "worst": [
+    "Comb hair",
+    [
+     78,
+     143,
+     -67
+    ]
+   ],
+   "u": [
+    -0.32,
+    0.2,
+    0.93
+   ],
+   "uh_overhead": 0.94
+  },
+  "slider_brace rho 0.3": {
+   "fit_max": 10.4,
+   "held_out_max": 6.14,
+   "all_max": 10.4,
+   "p95": 9.89,
+   "share_over_4": 0.405,
+   "max_elev_le_120": 8.9,
+   "worst": [
+    "Comb hair",
+    [
+     78,
+     143,
+     -67
+    ]
+   ],
+   "u": [
+    -0.32,
+    0.2,
+    0.93
+   ],
+   "uh_overhead": 0.94
+  },
+  "follower (best point, 25-40 mm from GH)": {
+   "fit_max": 6.35,
+   "held_out_max": 4.73,
+   "all_max": 6.35,
+   "p95": 6.2,
+   "share_over_4": 0.319,
+   "max_elev_le_120": 5.75,
+   "worst": [
+    "Raise overhead",
+    [
+     30,
+     150,
+     -60
+    ]
+   ],
+   "GH_minus_P_dir": [
+    0.09,
+    0.99,
+    0.05
+   ],
+   "dist_mm": 25.0
+  },
+  "follower lateral acromion (32 mm above GH)": {
+   "fit_max": 7.28,
+   "held_out_max": 5.66,
+   "all_max": 7.28,
+   "p95": 7.17,
+   "share_over_4": 0.341,
+   "max_elev_le_120": 6.83,
+   "worst": [
+    "Raise overhead",
+    [
+     30,
+     150,
+     -60
+    ]
+   ]
+  },
+  "calibrated f_ang 0.32 f_slip 1.0: fixed": {
+   "fit_max": 6.31,
+   "held_out_max": 3.48,
+   "all_max": 6.31,
+   "p95": 5.83,
+   "share_over_4": 0.198,
+   "max_elev_le_120": 4.51,
+   "worst": [
+    "Raise overhead",
+    [
+     30,
+     150,
+     -60
+    ]
+   ]
+  },
+  "calibrated f_ang 0.32 f_slip 1.0: + slider_ideal": {
+   "fit_max": 3.92,
+   "held_out_max": 2.69,
+   "all_max": 3.92,
+   "p95": 3.77,
+   "share_over_4": 0.0,
+   "max_elev_le_120": 3.32,
+   "worst": [
+    "Raise overhead",
+    [
+     30,
+     150,
+     -60
+    ]
+   ],
+   "u": [
+    -0.71,
+    -0.04,
+    0.71
+   ]
+  },
+  "calibrated f_ang 0.32 f_slip 1.0: + slider_brace rho 0.1": {
+   "fit_max": 5.17,
+   "held_out_max": 3.46,
+   "all_max": 5.17,
+   "p95": 5.09,
+   "share_over_4": 0.18,
+   "max_elev_le_120": 4.27,
+   "worst": [
+    "Raise overhead",
+    [
+     30,
+     150,
+     -60
+    ]
+   ],
+   "u": [
+    0.02,
+    0.13,
+    0.99
+   ]
+  },
+  "calibrated f_ang 0.32 f_slip 0.32: fixed": {
+   "fit_max": 4.89,
+   "held_out_max": 2.4,
+   "all_max": 4.89,
+   "p95": 4.43,
+   "share_over_4": 0.089,
+   "max_elev_le_120": 3.19,
+   "worst": [
+    "Raise overhead",
+    [
+     30,
+     150,
+     -60
+    ]
+   ]
+  },
+  "calibrated f_ang 0.32 f_slip 0.32: + slider_ideal": {
+   "fit_max": 2.19,
+   "held_out_max": 1.73,
+   "all_max": 2.19,
+   "p95": 2.15,
+   "share_over_4": 0.0,
+   "max_elev_le_120": 2.07,
+   "worst": [
+    "Raise overhead",
+    [
+     30,
+     150,
+     -60
+    ]
+   ],
+   "u": [
+    -0.71,
+    -0.04,
+    0.71
+   ]
+  },
+  "calibrated f_ang 0.32 f_slip 0.32: + slider_brace rho 0.1": {
+   "fit_max": 4.0,
+   "held_out_max": 2.49,
+   "all_max": 4.0,
+   "p95": 3.78,
+   "share_over_4": 0.0,
+   "max_elev_le_120": 3.29,
+   "worst": [
+    "Comb hair",
+    [
+     78,
+     143,
+     -67
+    ]
+   ],
+   "u": [
+    -0.12,
+    0.23,
+    0.97
+   ]
+  },
+  "calibrated f_ang 0.5 f_slip 1.0: fixed": {
+   "fit_max": 8.46,
+   "held_out_max": 4.4,
+   "all_max": 8.46,
+   "p95": 7.74,
+   "share_over_4": 0.304,
+   "max_elev_le_120": 5.77,
+   "worst": [
+    "Raise overhead",
+    [
+     30,
+     150,
+     -60
+    ]
+   ]
+  },
+  "calibrated f_ang 0.5 f_slip 1.0: + slider_ideal": {
+   "fit_max": 4.55,
+   "held_out_max": 3.29,
+   "all_max": 4.55,
+   "p95": 4.41,
+   "share_over_4": 0.172,
+   "max_elev_le_120": 4.02,
+   "worst": [
+    "Raise overhead",
+    [
+     30,
+     150,
+     -60
+    ]
+   ],
+   "u": [
+    -0.71,
+    -0.04,
+    0.71
+   ]
+  },
+  "calibrated f_ang 0.5 f_slip 1.0: + slider_brace rho 0.1": {
+   "fit_max": 6.47,
+   "held_out_max": 4.15,
+   "all_max": 6.47,
+   "p95": 6.17,
+   "share_over_4": 0.295,
+   "max_elev_le_120": 5.42,
+   "worst": [
+    "Comb hair",
+    [
+     78,
+     143,
+     -67
+    ]
+   ],
+   "u": [
+    -0.12,
+    0.23,
+    0.97
+   ]
+  },
+  "calibrated f_ang 0.32 f_slip 1.0: + follower lateral acromion": {
+   "fit_max": 4.61,
+   "held_out_max": 3.1,
+   "all_max": 4.61,
+   "p95": 4.43,
+   "share_over_4": 0.159,
+   "max_elev_le_120": 3.86,
+   "worst": [
+    "Raise overhead",
+    [
+     30,
+     150,
+     -60
+    ]
+   ]
+  },
+  "calibrated f_ang 0.32 f_slip 0.32: + follower lateral acromion": {
+   "fit_max": 2.33,
+   "held_out_max": 1.81,
+   "all_max": 2.33,
+   "p95": 2.29,
+   "share_over_4": 0.0,
+   "max_elev_le_120": 2.19,
+   "worst": [
+    "Raise overhead",
+    [
+     30,
+     150,
+     -60
+    ]
+   ]
+  },
+  "[low law] fixed": {
+   "fit_max": 5.53,
+   "held_out_max": 5.25,
+   "all_max": 5.53,
+   "p95": 5.53,
+   "share_over_4": 0.342,
+   "max_elev_le_120": 5.53,
+   "worst": [
+    "Raise overhead",
+    [
+     30,
+     101,
+     -50
+    ]
+   ]
+  },
+  "[low law] slider_ideal u=[-0.59, -0.04, 0.8]": {
+   "fit_max": 3.91,
+   "held_out_max": 3.72,
+   "all_max": 3.91,
+   "p95": 3.91,
+   "share_over_4": 0.0,
+   "max_elev_le_120": 3.91,
+   "worst": [
+    "Raise overhead",
+    [
+     30,
+     101,
+     -50
+    ]
+   ]
+  },
+  "[low law] stage2_ideal n=[0.55, -0.75, 0.37]": {
+   "fit_max": 0.38,
+   "held_out_max": 0.37,
+   "all_max": 0.38,
+   "p95": 0.38,
+   "share_over_4": 0.0,
+   "max_elev_le_120": 0.38,
+   "worst": [
+    "Raise overhead",
+    [
+     30,
+     101,
+     -50
+    ]
+   ]
+  },
+  "[low law] follower lateral acromion": {
+   "fit_max": 3.95,
+   "held_out_max": 3.75,
+   "all_max": 3.95,
+   "p95": 3.95,
+   "share_over_4": 0.0,
+   "max_elev_le_120": 3.95,
+   "worst": [
+    "Raise overhead",
+    [
+     30,
+     101,
+     -50
+    ]
+   ]
+  },
+  "[high law angles, RSS] fixed": {
+   "fit_max": 15.21,
+   "held_out_max": 7.83,
+   "all_max": 15.21,
+   "p95": 13.8,
+   "share_over_4": 1.0,
+   "max_elev_le_120": 9.96,
+   "worst": [
+    "Raise overhead",
+    [
+     30,
+     150,
+     -60
+    ]
+   ]
+  },
+  "[high law angles, RSS] slider_ideal u=[-0.59, -0.04, 0.8]": {
+   "fit_max": 6.97,
+   "held_out_max": 5.64,
+   "all_max": 6.97,
+   "p95": 6.86,
+   "share_over_4": 0.892,
+   "max_elev_le_120": 6.63,
+   "worst": [
+    "Raise overhead",
+    [
+     30,
+     150,
+     -60
+    ]
+   ]
+  },
+  "[high law angles, RSS] stage2_ideal n=[0.55, -0.75, 0.37]": {
+   "fit_max": 2.43,
+   "held_out_max": 1.59,
+   "all_max": 2.43,
+   "p95": 2.33,
+   "share_over_4": 0.0,
+   "max_elev_le_120": 2.0,
+   "worst": [
+    "Raise overhead",
+    [
+     30,
+     150,
+     -60
+    ]
+   ]
+  },
+  "[high law angles, RSS] follower lateral acromion": {
+   "fit_max": 7.28,
+   "held_out_max": 5.9,
+   "all_max": 7.28,
+   "p95": 7.17,
+   "share_over_4": 0.933,
+   "max_elev_le_120": 6.83,
+   "worst": [
+    "Raise overhead",
+    [
+     30,
+     150,
+     -60
+    ]
+   ]
+  },
+  "ACROSS HUMERUS fixed": {
+   "fit_max": 11.81,
+   "held_out_max": 6.08,
+   "all_max": 11.81,
+   "p95": 10.49,
+   "share_over_4": 0.393,
+   "max_elev_le_120": 8.9,
+   "worst": [
+    "Comb hair",
+    [
+     78,
+     143,
+     -67
+    ]
+   ]
+  },
+  "ACROSS HUMERUS slider_ideal": {
+   "fit_max": 6.37,
+   "held_out_max": 5.31,
+   "all_max": 6.37,
+   "p95": 6.1,
+   "share_over_4": 0.325,
+   "max_elev_le_120": 6.33,
+   "worst": [
+    "Raise overhead",
+    [
+     30,
+     122,
+     -54
+    ]
+   ]
+  },
+  "ACROSS HUMERUS stage2_ideal": {
+   "fit_max": 2.32,
+   "held_out_max": 1.38,
+   "all_max": 2.32,
+   "p95": 1.99,
+   "share_over_4": 0.0,
+   "max_elev_le_120": 1.74,
+   "worst": [
+    "Raise overhead",
+    [
+     30,
+     150,
+     -60
+    ]
+   ]
+  },
+  "ACROSS HUMERUS follower lateral acromion": {
+   "fit_max": 5.91,
+   "held_out_max": 4.41,
+   "all_max": 5.91,
+   "p95": 5.65,
+   "share_over_4": 0.308,
+   "max_elev_le_120": 5.49,
+   "worst": [
+    "Raise overhead",
+    [
+     30,
+     150,
+     -60
+    ]
+   ]
+  }
+ },
+ "worst_fixed_components_mm": {
+  "UR": 4.4,
+  "IR": 12.62,
+  "PT": 5.92,
+  "slip": 4.2,
+  "h_scapula": [
+   -0.02,
+   0.07,
+   1.0
+  ]
+ }
+}

@@ -42,6 +42,57 @@ rig's girdle law (GH lift 0.2 mm/deg above 30 deg, scapula rotating about GH), a
   80-280 mm down the arm (only the deltoid cap, ~60 mm, is round: 4.7 mm) -> the rail must be arm-fixed and shaped.
 - Judge: `judge/base_mount.py` (R10 on every scorecard). Still the rig's law: OpenSim Seth 2016 / OpenCap must replace it.
 
+## R10 on the scapula handler: what passive elements can and cannot do (2026-10-15, `judge/base_stage.py`)
+
+The measurement is unchanged: `judge/base_slip.py`'s central law (handler = acromion cluster, Karduna / van Andel /
+Lempereur angles, 4.2 mm slip) still gives **15.2 mm** worst frame (Raise overhead, 150 deg) for a base rigid on the
+handler. `judge/base_stage.py` (new, design side) keeps those sources and changes only the mechanism that turns them into
+a chain-centre error; all numbers are worst frame over the 6 fitting clips (held-out Wave + Walking in brackets),
+central law, every frame of cad_r18_n3_s1392_1_f300's clips. No design here adds an active DOF: every passive element
+is set by closure (the arm or a bone contact), the user's handler is untouched, only how J1 sits on it changes.
+
+| mechanism between handler and J1 | worst frame (mm) | across the humerus (R1-relevant) |
+|---|---|---|
+| rigid on the handler (today, R10's number) | **15.2** (7.5) | 11.8 |
+| 3-axis stage set by the arm brace (elbow-referenced; Hamming 2012 cuff errors 0-4 deg x 325 mm) | 23.6 (16.2) | - |
+| 1 slider set by the brace along the humerus, cuff slides across it | 10.0 (6.2) | - |
+| 1 torque-free slider, set perfectly (earlier P0 idealisation) | 7.0 (5.4) | 6.4 |
+| **3-axis stage set by a bony follower on the lateral acromion** (32 mm above GH) | **7.3** (5.7) | 5.9 |
+| 2-axis stage across the handler's lever, set perfectly (no such reference exists) | 2.4 (1.6) | 2.3 |
+| per-user calibrated law (f 0.32 on angles and slip), rigid | 4.9 (2.4) | 4.0 |
+| **follower stage + per-user calibrated law (f 0.32 on angles and slip)** | **2.3** (1.8) | 1.9 |
+| follower stage + calibrated angles only (slip not repeatable) | 4.6 (3.1) | 3.8 |
+| follower stage, low law (review best case, no slip) | 3.95 (3.75) | - |
+
+What this shows (new knowledge, with the reason):
+- **A skin-held body knows the GH centre along its lever, not across it.** Its error is (rotation error) x (lever) plus
+  its slip; the rotation part is perpendicular to the lever. The handler's lever is GH - acromion (45 mm), so a perfect
+  2-axis stage across it leaves 2.4 mm (the stage-2 normal found by search, (0.55, -0.75, 0.37), is 8 deg from the
+  lever). The arm brace's lever is the humerus (325 mm): it knows GH along the arm (elbow, bony) and is 6 mm off across
+  it per degree of cuff error. The two good directions span a plane; the third (lever x humerus, anterior overhead)
+  has no good skin reference, so **none of the handler + arm combinations tried reaches 4 mm** (best 10 mm: a slider
+  set by the brace), and the "slider set perfectly" of P0 (7.0 mm) has no physical reference that sets it.
+- **A bony follower moves the lever, not the slip.** A spring-loaded pad on the lateral acromion, directly above GH,
+  setting a 3-axis torque-free stage under J1, makes the lever vertical, so the dominant overhead error (handler
+  IR/ER, 25 deg about the superior axis, 12.6 of the 15.2 mm) no longer moves the chain centre: 15.2 -> 7.3 mm.
+- **Proof that no uncalibrated skin reference passes R10 under the central law:** every skin contact over the scapula
+  slips 4.2 mm at 150 deg (McQuade & Smidt), already > 4 mm with zero lever (averaging several contacts helps only if
+  they slip independently; a skin sheet does not). "Impossible" here is conditional on the
+  literature law; it fails only if the user's skin slips less (measure it) or the slip is repeatable (calibrate it).
+- **The path to <= 4 mm:** follower stage + the user's systematic slip removed by a calibrated motion law
+  (double / multiple calibration of an acromion cluster cut max errors 44.8 -> 14.2 deg in cadavers, f ~ 0.32;
+  Brochard 2011 matched palpation on 5 of 6 axes): **2.3 mm (1.8 held out)**, or 4.6 mm if the slip itself is not
+  repeatable. The law costs no part: it is carried by offset (non-concurrent) axes, as P0 did for the thorax base
+  (`girdle.fit_minimax`), fitted to the user's measured c(pose). It needs the user's own data first (handler + bony
+  landmarks at 3-4 elevations, base_slip_model.md section 6.1).
+- **It helps R1 as much:** R1 is judged with the chain centred on GH; on the body the links are offset by the misalignment
+  across the arm - 11.8 mm today (the whole 10 mm band), 5.9 with the follower, 1.9 with follower + calibration.
+- **Red team / costs:** a pad on a bony prominence worn for hours (keep it torque-free and gravity-balanced so it
+  carries < 0.5 N, soft liner); it must fit beside the user's handler footprint (unknown: ask); stage travel >= 15 mm
+  (23 mm under the high law) adds height under J1 (R1 near the base); the stage passes every moment, so MVP2's assist
+  still lands on the handler (Stienen 2009). Model limits: brace errors are Hamming's averages, elbow slip 3 mm assumed,
+  the follower's slip = the handler's slip law, the calibration factor is a cadaver ratio.
+
 ## Published girdle motion and the red team (2026-10-14)
 
 - **The rig's girdle law is 2-3x too small and 1-D** (docs/research/gh_translation_literature.md): bone-pin clavicle /
@@ -103,6 +154,20 @@ rig's girdle law (GH lift 0.2 mm/deg above 30 deg, scapula rotating about GH), a
   M1.6 screws (r 10.15) overhung the round - a fit error and an invalid sliver face.
 - **v4 joint** (`fair_cad/joint_v4.py`, docs/HARDWARE.md): O23 hub, 10.47 mm above the skin face; magnet + sensor PCB
   placeholders under a O22 G2 dome cap.
+- **Strap links ride high because of their bend radius, not their section** (2026-10-15, r20 s1414 #4, strap vs fair
+  links on the same chart grids, skin side minus the band evaluator's fitted ribbon underside, off the hubs): l1 median
+  3.55 mm (fair 1.34), l2 9.58 mm (fair 0.13) -> R1 2-14 mm 35.0 % (strap) vs 46.2 % (fair). The cross-slope the
+  constant section cannot follow is only 2-3 mm edge to edge; the excess is along the spine: l2's hubs sit 21.3 / 11.5
+  mm over the need (both upper), and an S-bend at the old R >= 25 mm + 60 deg ramp needs ~45 mm to drop 21 mm, so the
+  B-spline (<= 5 control points, bending weight 1500) stayed 8.4 mm over its own floor (median). The fair link drops
+  with ~5 mm bends (smootherstep over Lt 8-25 mm). At R >= 10 mm (3.3 t of the 3.0 Ti strap: hot-formed or 5-axis
+  machined), bending weight 150 and 3-6 control points the offline refit on the same floors gives 0.36 (l1) / 0.49
+  (l2) mm. Rule: a link's bend radius must be small next to the height its hubs sit over the skin (here R <~ drop / 2).
+- **A clamping cap must not bottom on its housing** (v5 joint, docs/HARDWARE.md "Preload by construction"): the cap
+  flange sat on the outer ring and the spigot top in one plane, so with bearing rings at the low end of their width
+  tolerance (0/-120 um, P0) the cap bottoms on the spigot and the outer rings float up to 0.24 mm - the loose bearing
+  again. The spigot now tops out 0.03 under the ring (`joint_v5.CLAMP_GAP`); spacerO (select-ground) and spacerI
+  (matched, delta shorter) set the preload, the cap and ring nut clamp the two stacks.
 
 ## Arm end (BOTTOM + neck + J4 hub, one 7075 part)
 
