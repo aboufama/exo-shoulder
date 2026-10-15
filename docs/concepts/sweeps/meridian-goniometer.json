@@ -1,0 +1,16 @@
+[
+ {
+  "k": 0,
+  "t": "2026-10-15T23:19:39Z",
+  "params": {},
+  "inband14": 0.1154,
+  "inband10": 0.0773,
+  "reach": 0.775,
+  "follow": 0.9167,
+  "contact": 0.0821,
+  "gap": 102.5,
+  "honest": true,
+  "rail_r": 152.9,
+  "where": "local-check (PARAMS defaults)"
+ }
+]
