@@ -236,3 +236,5 @@
 {"time": "2026-10-15T22:30:26Z", "kind": "milestone", "event": "skin-normal-hubs-selfaligning: new best gap 37.73 (score 86.28; reach 0.7, follow 0.9667, inband14 0.74, contact 0.0173) at k 569"}
 {"time": "2026-10-15T22:31:16Z", "kind": "milestone", "event": "skin-normal-hubs-selfaligning: new best gap 37.73 (score 86.28; reach 0.7, follow 0.9667, inband14 0.74, contact 0.0173) at k 569"}
 {"time": "2026-10-15T22:34:15Z", "kind": "milestone", "event": "seed-offset-3r-slides CMA (branchp1, VModel checks, Bench(60,160) fast, farm): new best gap 139.56 at gen 2"}
+{"time": "2026-10-15T22:35:45Z", "kind": "milestone", "event": "crown-ring-3r new best gap 56.04 (score 79.62) at k235: p1 0, a1 az 29.9 el 89.0, a12 82.6, a23 66.8; reach 0.9 follow 1.0 ib14 0.3445 contact 0.0049 (Bench(60,160) fast, march/K2/K6)"}
+{"time": "2026-10-15T22:35:48Z", "kind": "milestone", "event": "rail-elbow k172 on Bench(110,360) exact, 1 mm radial, geometry frozen from (60,160): gap 72.84 (score 73.51) vs champion 75.94 on the same bench; refit degenerate (86.63, dishonest)"}
