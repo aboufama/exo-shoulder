@@ -44,7 +44,7 @@ python3 tools/concept_sweep.py docs/concepts/models/<id>.py --configs configs.js
   cold start, queue behind other agents' jobs - the farm is shared, 4 jobs at once in all). Rule of thumb from the measurements
   below (champion 3R via concept_baseline_sweep, ~25 s per config here; kit models ~1-5 s): a sweep whose local time is > ~2 min (e.g. >= 50 kit configs, or >= 10 configs of a 10-s model) goes to the
   farm; a handful of 1-3 s configs stays local. Never more than one sweep per agent at a time (the 4 workers are shared).
-- **Same numbers**: 45 configurations compared local vs farm (5 + 20 of the champion 3R via concept_baseline_sweep, 20
+- **Same numbers**: 70 configuration runs compared local vs farm (45 of the champion 3R via concept_baseline_sweep, 25
   of docs/concepts/models/baseline-3r-kit.py): max abs difference 0 on every metric (reach, follow, inband14, inband10,
   contact, gap, pct, mass_g, closure, flips, collide, residual_deg) - the reports are byte-identical.
 
