@@ -5,7 +5,7 @@
  "family": "spherical 3R (J2 as a rail)",
  "active_dof": 3,
  "passive_dof": 0,
- "status": "screened",
+ "status": "verified",
  "t_ideated": null,
  "t_screened": "2026-10-15T19:02:35Z",
  "reach": 0.8875,
@@ -14,13 +14,13 @@
  "inband10": 0.1562,
  "contact": 0.0,
  "gap": 63.72,
- "v_reach": 0.9062,
- "v_follow": 1.0,
- "v_inband14": 0.2057,
- "v_inband10": 0.1311,
- "v_gap": 69.43,
+ "v_reach": 0.8875,
+ "v_follow": 0.9667,
+ "v_inband14": 0.2655,
+ "v_inband10": 0.1532,
+ "v_gap": 64.7,
  "n_configs": 191,
- "verdict": "screened after polish: best honest gap 63.72 (score 76.8) vs bar 68.93 (74.9) and 65.05 (76.3) on honest kit geometry; the earlier 'dead' (71.15) was a sampling false negative - the original sweep never moved the J1 axis or W elevation. Sweep NOT converged by the gate (best found in the last third); rail stages still ~0 % in band, the gain came from hub 3, strap 1 and the neck",
+ "verdict": "screened after polish: best honest gap 63.72 (score 76.8) vs bar 68.93 (74.9) and 65.05 (76.3) on honest kit geometry; the earlier 'dead' (71.15) was a sampling false negative - the original sweep never moved the J1 axis or W elevation. Sweep NOT converged by the gate (best found in the last third); rail stages still ~0 % in band, the gain came from hub 3, strap 1 and the neck; VERIFIED exact gap 64.70 (score 76.47)",
  "note": "Bench(60,160) fast grid, kit checks on (march, dense K2, K6, audit clean). Polish 2026-10-15: CMA-ES on az, el, a1, a2, wd, wa, d_off from k64, k59, seed A (k44, all audit-dishonest, stopped at 10) + a sigma-0.3 restart from k130; 126 new configs (k65-k190), r_lay set to the fitted stage radius per config (k64 re-laid at 128 mm: 70.87). Gate: best-so-far gained 0.69 pt over the 2nd half of the polish (1.92 over the whole sweep), best at polish try 108/126 (last third: FAIL), top-5 within 0.6 pt. Ti 151 g.",
  "doc": "docs/concepts/rail-elbow.md",
  "limiter": "rail stages: one radius each (~100-105 mm over skin at 50-60) -> rail 0.3 %, stage 2 0 % in band; overhead 11/17 (4 closure folds, 2 K6 collisions at elev 150 flex 90); strap 1 at 1.34 mm in pose plane 45 elev 165 axial -90",
@@ -64,5 +64,8 @@
   "gain_2nd_half_pts": 0.69,
   "best_try": 108,
   "top5_spread_pts": 0.6
- }
+ },
+ "v_contact": 0.0,
+ "v_score": 76.47,
+ "v_note": "Checker 2026-10-15: k172 re-measured with CB_EXACT=1 on Bench(60,160), model file unchanged since 3442cf2 (no diff over the polish): gap 64.70 (score 76.47) vs grid 63.72 (76.83), -0.36 pt; audit clean, honest, march, 0 contact, 0 flips, closure 0.927, K6 2.0 %, 151 g; per member exact hub3 0.27 (grid 0.36), strap1 0.41, neck 0.49, rail 0.003, stage2 0.00. Grid path reproduces 63.72 exactly. Convergence numbers reproduced from the sweep file (2nd-half gain 0.69, top-5 spread 0.60, best in last third): NOT converged, as claimed. k120-122 in the polish range are another agent's 'audit' entries."
 }
