@@ -1,0 +1,47 @@
+{
+ "step": 12,
+ "tol_mm": 0.15,
+ "frames_checked": 117,
+ "pairs": 1703,
+ "seconds": 9,
+ "jobs": 4,
+ "violations": {
+  "l1|D5-02 link 1: strap + J1/J2 pads + integral pins (Ti-6Al-4V)  IN  l2|D5-03 link 2: strap + J2/J3 bosses (Ti-6Al-4V)": {
+   "max_depth": 0.79,
+   "frames": 117,
+   "worst": [
+    "Raise overhead",
+    60
+   ]
+  },
+  "l1|D5-02 link 1: strap + J1/J2 pads + integral pins (Ti-6Al-4V)  IN  base|D5-01 scapula base: J1 boss + handler tab, 2x M4 (Ti-6Al-4V)": {
+   "max_depth": 0.5,
+   "frames": 117,
+   "worst": [
+    "Wave",
+    168
+   ]
+  },
+  "H|D5-04 arm end: J3 pad + pin + neck + lap plate on BOTTOM (Ti-6Al-4V)  IN  l2|D5-03 link 2: strap + J2/J3 bosses (Ti-6Al-4V)": {
+   "max_depth": 0.68,
+   "frames": 117,
+   "worst": [
+    "Walking arm swing",
+    96
+   ]
+  },
+  "l2|D5-03 link 2: strap + J2/J3 bosses (Ti-6Al-4V)  IN  H|D5-04 arm end: J3 pad + pin + neck + lap plate on BOTTOM (Ti-6Al-4V)": {
+   "max_depth": 1.03,
+   "frames": 7,
+   "worst": [
+    "Reach back pocket",
+    36
+   ]
+  }
+ },
+ "open_parts_not_tested_as_container": [
+  "l1|D5-02 link 1: strap + J1/J2 pads + integral pins (Ti-6Al-4V)"
+ ],
+ "inside": "integer winding number on welded tessellations (grid + segment crossings), depth = exact distance (judge/sdist.py)",
+ "max_depth": 1.03
+}
