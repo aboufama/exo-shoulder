@@ -93,6 +93,77 @@
    72.0
   ]
  },
+ "clips": {
+  "Raise overhead": {
+   "frames": 181,
+   "held": 83,
+   "follow": 0.541,
+   "reasons": {
+    "parts": 4,
+    "fold": 79
+   },
+   "min_skin_mm": 0.83
+  },
+  "Drink from a cup": {
+   "frames": 178,
+   "held": 0,
+   "follow": 1.0,
+   "reasons": {},
+   "min_skin_mm": 2.43
+  },
+  "Comb hair": {
+   "frames": 202,
+   "held": 0,
+   "follow": 1.0,
+   "reasons": {},
+   "min_skin_mm": 2.08
+  },
+  "Reach a high shelf": {
+   "frames": 157,
+   "held": 0,
+   "follow": 1.0,
+   "reasons": {},
+   "min_skin_mm": 2.2
+  },
+  "Wash opposite shoulder": {
+   "frames": 193,
+   "held": 0,
+   "follow": 1.0,
+   "reasons": {},
+   "min_skin_mm": 2.5
+  },
+  "Reach back pocket": {
+   "frames": 145,
+   "held": 0,
+   "follow": 1.0,
+   "reasons": {},
+   "min_skin_mm": 1.57
+  },
+  "Wave": {
+   "frames": 172,
+   "held": 74,
+   "follow": 0.57,
+   "reasons": {
+    "parts": 21,
+    "held": 9,
+    "flip": 26,
+    "skin": 18
+   },
+   "min_skin_mm": -8.58
+  },
+  "Walking arm swing": {
+   "frames": 109,
+   "held": 0,
+   "follow": 1.0,
+   "reasons": {},
+   "min_skin_mm": 2.67
+  }
+ },
+ "workspace": {
+  "poses": 1432,
+  "closes": 0.8422,
+  "feasible_kin_parts": 0.8373
+ },
  "check": [
   {
    "bench_pose": 0,
@@ -101,11 +172,11 @@
     3.0,
     -30.0
    ],
-   "max_mm": 3.15,
+   "max_mm": 0.0,
    "per_part": {
     "hub1": [
-     3.15,
-     3.15
+     0.0,
+     0.0
     ],
     "hub2": [
      0.0,
@@ -149,11 +220,11 @@
     0.0,
     -75.0
    ],
-   "max_mm": 3.15,
+   "max_mm": 0.0,
    "per_part": {
     "hub1": [
-     3.15,
-     3.15
+     0.0,
+     0.0
     ],
     "hub2": [
      0.0,
@@ -197,11 +268,11 @@
     165.0,
     -90.0
    ],
-   "max_mm": 3.15,
+   "max_mm": 0.0,
    "per_part": {
     "hub1": [
-     3.15,
-     3.15
+     0.0,
+     0.0
     ],
     "hub2": [
      0.0,

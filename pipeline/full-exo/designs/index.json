@@ -1,5 +1,9 @@
 [
  {
+  "id": "l1_seed-offset-3r-slides",
+  "label": "seed-offset-3r-slides k403 (offset 3R + 3 passive cuff slides), L1 keep-out"
+ },
+ {
   "id": "param_r20_n3_s1414_4",
   "label": "3R champion r20 s1414 #4, parametric B-rep CAD (v5 joints, 8x3 straps)"
  },

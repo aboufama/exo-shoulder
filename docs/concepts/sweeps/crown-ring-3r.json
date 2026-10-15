@@ -11708,5 +11708,1836 @@
    ]
   },
   "park_ok": true
+ },
+ {
+  "k": 208,
+  "t": "2026-10-15T22:35:45Z",
+  "params": {
+   "az1": 14.4838,
+   "el1": 68.8718,
+   "p1": 40.176,
+   "a12": 86.7922,
+   "a23": 58.5429,
+   "wd": 91.969,
+   "wa": 3.6612,
+   "sigma": -1,
+   "margin": 10.0,
+   "width": 14.0,
+   "t_link": 3.0,
+   "w2": 12.0,
+   "q": 0.999,
+   "h1": 60.0,
+   "lug": 0.0
+  },
+  "inband14": 0.1091,
+  "inband10": 0.0446,
+  "reach": 0.8562,
+  "follow": 0.9167,
+  "contact": 0.0052,
+  "gap": 87.32,
+  "closure": 0.8909,
+  "mass_g": 303.2,
+  "honest": true,
+  "kmode": "march",
+  "ring1_F": 106.0,
+  "levels": {
+   "ring1": 106.0,
+   "hub2": 128.6,
+   "hub3": 69.0,
+   "neck": 99.8,
+   "link1": 129.8,
+   "link2": 132.6
+  },
+  "inband_member": {
+   "ring1": 0.0116,
+   "hub2": 0.0004,
+   "hub3": 0.5443,
+   "link1": 0.0,
+   "link2": 0.0456,
+   "neck": 0.6462
+  },
+  "audit": [],
+  "stage": "cma2 gen 1: ring, o20-control",
+  "park": {
+   "ring1": [
+    106.0,
+    6.44
+   ],
+   "hub2": [
+    128.6,
+    9.96
+   ],
+   "hub3": [
+    69.0,
+    4.78
+   ]
+  },
+  "park_ok": true
+ },
+ {
+  "k": 209,
+  "t": "2026-10-15T22:35:45Z",
+  "params": {
+   "az1": 20.7787,
+   "el1": 72.0125,
+   "p1": 29.6935,
+   "a12": 83.9067,
+   "a23": 65.9727,
+   "wd": 85.962,
+   "wa": 11.6999,
+   "sigma": -1,
+   "margin": 10.0,
+   "width": 14.0,
+   "t_link": 3.0,
+   "w2": 12.0,
+   "q": 0.9955,
+   "h1": 60.0,
+   "lug": 0.0
+  },
+  "inband14": 0.0861,
+  "inband10": 0.0359,
+  "reach": 0.9125,
+  "follow": 0.9167,
+  "contact": 0.005,
+  "gap": 85.22,
+  "closure": 0.9182,
+  "mass_g": 290.7,
+  "honest": true,
+  "kmode": "march",
+  "ring1_F": 97.0,
+  "levels": {
+   "ring1": 97.0,
+   "hub2": 161.0,
+   "hub3": 72.0,
+   "neck": 98.0,
+   "link1": 191.2,
+   "link2": 165.0
+  },
+  "inband_member": {
+   "ring1": 0.007,
+   "hub2": 0.0,
+   "hub3": 0.3008,
+   "link1": 0.0,
+   "link2": 0.0182,
+   "neck": 0.5701
+  },
+  "audit": [],
+  "stage": "cma2 gen 1: ring, o20-control",
+  "park": {
+   "ring1": [
+    97.0,
+    7.79
+   ],
+   "hub2": [
+    161.0,
+    9.13
+   ],
+   "hub3": [
+    72.0,
+    5.25
+   ]
+  },
+  "park_ok": false
+ },
+ {
+  "k": 210,
+  "t": "2026-10-15T22:35:45Z",
+  "params": {
+   "az1": 12.1657,
+   "el1": 64.8657,
+   "p1": 34.6271,
+   "a12": 89.6318,
+   "a23": 65.9976,
+   "wd": 86.4154,
+   "wa": 11.1638,
+   "sigma": -1,
+   "margin": 10.0,
+   "width": 14.0,
+   "t_link": 3.0,
+   "w2": 12.0,
+   "q": 0.988,
+   "h1": 60.0,
+   "lug": 0.0
+  },
+  "inband14": 0.1012,
+  "inband10": 0.0424,
+  "reach": 0.8875,
+  "follow": 0.9167,
+  "contact": 0.015,
+  "gap": 85.96,
+  "closure": 0.9091,
+  "mass_g": 308.5,
+  "honest": true,
+  "kmode": "march",
+  "ring1_F": 99.0,
+  "levels": {
+   "ring1": 99.0,
+   "hub2": 159.0,
+   "hub3": 70.0,
+   "neck": 97.0,
+   "link1": 182.4,
+   "link2": 163.0
+  },
+  "inband_member": {
+   "ring1": 0.011,
+   "hub2": 0.0,
+   "hub3": 0.4842,
+   "link1": 0.0,
+   "link2": 0.0321,
+   "neck": 0.6566
+  },
+  "audit": [],
+  "stage": "cma2 gen 1: ring, o20-control",
+  "park": {
+   "ring1": [
+    99.0,
+    7.84
+   ],
+   "hub2": [
+    159.0,
+    9.57
+   ],
+   "hub3": [
+    70.0,
+    3.67
+   ]
+  },
+  "park_ok": false
+ },
+ {
+  "k": 211,
+  "t": "2026-10-15T22:35:45Z",
+  "params": {
+   "az1": 31.5035,
+   "el1": 67.8747,
+   "p1": 40.6833,
+   "a12": 68.2274,
+   "a23": 62.5716,
+   "wd": 96.0317,
+   "wa": 23.9992,
+   "sigma": -1,
+   "margin": 10.0,
+   "width": 14.0,
+   "t_link": 3.0,
+   "w2": 12.0,
+   "q": 0.9803,
+   "h1": 60.0,
+   "lug": 0.0
+  },
+  "inband14": 0.1148,
+  "inband10": 0.0478,
+  "reach": 0.6687,
+  "follow": 0.8167,
+  "contact": 0.0127,
+  "gap": 116.25,
+  "closure": 0.8909,
+  "mass_g": 286.4,
+  "honest": true,
+  "kmode": "march",
+  "ring1_F": 95.0,
+  "levels": {
+   "ring1": 95.0,
+   "hub2": 107.5,
+   "hub3": 65.0,
+   "neck": 96.0,
+   "link1": 116.3,
+   "link2": 120.3
+  },
+  "inband_member": {
+   "ring1": 0.0072,
+   "hub2": 0.0,
+   "hub3": 0.488,
+   "link1": 0.0,
+   "link2": 0.028,
+   "neck": 0.6613
+  },
+  "audit": [],
+  "stage": "cma2 gen 1: ring, o20-control",
+  "park": {
+   "ring1": [
+    95.0,
+    7.42
+   ],
+   "hub2": [
+    107.5,
+    12.86
+   ],
+   "hub3": [
+    65.0,
+    2.8
+   ]
+  },
+  "park_ok": true
+ },
+ {
+  "k": 212,
+  "t": "2026-10-15T22:35:45Z",
+  "params": {
+   "az1": 10.2059,
+   "el1": 67.0499,
+   "p1": 41.86,
+   "a12": 75.6068,
+   "a23": 67.3881,
+   "wd": 92.4972,
+   "wa": 18.4098,
+   "sigma": -1,
+   "margin": 10.0,
+   "width": 14.0,
+   "t_link": 3.0,
+   "w2": 12.0,
+   "q": 0.9991,
+   "h1": 60.0,
+   "lug": 0.0
+  },
+  "inband14": 0.0814,
+  "inband10": 0.0321,
+  "reach": 0.8875,
+  "follow": 0.9167,
+  "contact": 0.0051,
+  "gap": 86.95,
+  "closure": 0.9273,
+  "mass_g": 321.1,
+  "honest": true,
+  "kmode": "march",
+  "ring1_F": 108.0,
+  "levels": {
+   "ring1": 108.0,
+   "hub2": 138.3,
+   "hub3": 68.8,
+   "neck": 97.8,
+   "link1": 144.0,
+   "link2": 142.3
+  },
+  "inband_member": {
+   "ring1": 0.0131,
+   "hub2": 0.0,
+   "hub3": 0.2952,
+   "link1": 0.0,
+   "link2": 0.015,
+   "neck": 0.5137
+  },
+  "audit": [],
+  "stage": "cma2 gen 1: ring, o20-control",
+  "park": {
+   "ring1": [
+    108.0,
+    7.14
+   ],
+   "hub2": [
+    138.3,
+    9.64
+   ],
+   "hub3": [
+    68.8,
+    3.54
+   ]
+  },
+  "park_ok": true
+ },
+ {
+  "k": 213,
+  "t": "2026-10-15T22:35:45Z",
+  "params": {
+   "az1": 8.8721,
+   "el1": 68.5322,
+   "p1": 32.6194,
+   "a12": 76.8007,
+   "a23": 68.0868,
+   "wd": 93.5637,
+   "wa": 15.5339,
+   "sigma": -1,
+   "margin": 10.0,
+   "width": 14.0,
+   "t_link": 3.0,
+   "w2": 12.0,
+   "q": 0.9996,
+   "h1": 60.0,
+   "lug": 0.0
+  },
+  "inband14": 0.1002,
+  "inband10": 0.039,
+  "reach": 0.8938,
+  "follow": 0.9167,
+  "contact": 0.0,
+  "gap": 83.93,
+  "closure": 0.9182,
+  "mass_g": 280.2,
+  "honest": true,
+  "kmode": "march",
+  "ring1_F": 103.0,
+  "levels": {
+   "ring1": 103.0,
+   "hub2": 138.2,
+   "hub3": 68.0,
+   "neck": 97.9,
+   "link1": 144.9,
+   "link2": 142.2
+  },
+  "inband_member": {
+   "ring1": 0.0123,
+   "hub2": 0.0,
+   "hub3": 0.4065,
+   "link1": 0.0,
+   "link2": 0.0212,
+   "neck": 0.5502
+  },
+  "audit": [],
+  "stage": "cma2 gen 1: ring, o20-control",
+  "park": {
+   "ring1": [
+    103.0,
+    6.45
+   ],
+   "hub2": [
+    138.2,
+    9.12
+   ],
+   "hub3": [
+    68.0,
+    2.73
+   ]
+  },
+  "park_ok": true
+ },
+ {
+  "k": 214,
+  "t": "2026-10-15T22:35:45Z",
+  "params": {
+   "az1": 16.2807,
+   "el1": 66.9878,
+   "p1": 40.9016,
+   "a12": 85.679,
+   "a23": 75.6148,
+   "wd": 85.5964,
+   "wa": -11.3112,
+   "sigma": -1,
+   "margin": 10.0,
+   "width": 14.0,
+   "t_link": 3.0,
+   "w2": 12.0,
+   "q": 0.9909,
+   "h1": 60.0,
+   "lug": 0.0
+  },
+  "inband14": 0.1091,
+  "inband10": 0.0525,
+  "reach": 0.925,
+  "follow": 1.0,
+  "contact": 0.0095,
+  "gap": 80.04,
+  "closure": 0.9545,
+  "mass_g": 1110.0,
+  "honest": false,
+  "kmode": "march",
+  "ring1_F": 102.0,
+  "levels": {
+   "ring1": 102.0,
+   "hub2": 400.0,
+   "hub3": 73.0,
+   "neck": 102.0,
+   "link1": 400.0,
+   "link2": 404.0
+  },
+  "inband_member": {
+   "ring1": 0.0211,
+   "hub2": 0.0,
+   "hub3": 0.5636,
+   "link1": 0.0,
+   "link2": 0.0,
+   "neck": 0.7265
+  },
+  "audit": [
+   "link1: sparse sampling (10.14 mm median spacing > 4 mm)",
+   "link2: sparse sampling (10.16 mm median spacing > 4 mm)"
+  ],
+  "stage": "cma2 gen 1: ring, o20-control",
+  "park": {
+   "ring1": [
+    102.0,
+    5.72
+   ],
+   "hub2": [
+    400.0,
+    31.75
+   ],
+   "hub3": [
+    73.0,
+    5.63
+   ]
+  },
+  "park_ok": false
+ },
+ {
+  "k": 215,
+  "t": "2026-10-15T22:35:45Z",
+  "params": {
+   "az1": 11.7937,
+   "el1": 72.1175,
+   "p1": 34.435,
+   "a12": 78.2881,
+   "a23": 61.1774,
+   "wd": 83.6583,
+   "wa": -6.4492,
+   "sigma": -1,
+   "margin": 10.0,
+   "width": 14.0,
+   "t_link": 3.0,
+   "w2": 12.0,
+   "q": 0.9998,
+   "h1": 60.0,
+   "lug": 0.0
+  },
+  "inband14": 0.1044,
+  "inband10": 0.0457,
+  "reach": 0.8688,
+  "follow": 1.0,
+  "contact": 0.0,
+  "gap": 82.68,
+  "closure": 0.9045,
+  "mass_g": 311.6,
+  "honest": true,
+  "kmode": "march",
+  "ring1_F": 107.0,
+  "levels": {
+   "ring1": 107.0,
+   "hub2": 163.4,
+   "hub3": 74.0,
+   "neck": 102.0,
+   "link1": 182.7,
+   "link2": 167.4
+  },
+  "inband_member": {
+   "ring1": 0.0175,
+   "hub2": 0.0,
+   "hub3": 0.4508,
+   "link1": 0.0,
+   "link2": 0.0264,
+   "neck": 0.6448
+  },
+  "audit": [],
+  "stage": "cma2 gen 1: ring, o20-control",
+  "park": {
+   "ring1": [
+    107.0,
+    6.17
+   ],
+   "hub2": [
+    163.4,
+    10.76
+   ],
+   "hub3": [
+    74.0,
+    6.35
+   ]
+  },
+  "park_ok": false
+ },
+ {
+  "k": 216,
+  "t": "2026-10-15T22:35:45Z",
+  "params": {
+   "az1": 11.7842,
+   "el1": 71.4964,
+   "p1": 40.351,
+   "a12": 88.5057,
+   "a23": 67.0173,
+   "wd": 85.5275,
+   "wa": 0.5648,
+   "sigma": -1,
+   "margin": 10.0,
+   "width": 14.0,
+   "t_link": 3.0,
+   "w2": 12.0,
+   "q": 0.9926,
+   "h1": 60.0,
+   "lug": 0.0
+  },
+  "inband14": 0.0914,
+  "inband10": 0.0398,
+  "reach": 0.8938,
+  "follow": 1.0,
+  "contact": 0.0146,
+  "gap": 82.94,
+  "closure": 0.9364,
+  "mass_g": 368.1,
+  "honest": true,
+  "kmode": "march",
+  "ring1_F": 112.0,
+  "levels": {
+   "ring1": 112.0,
+   "hub2": 180.4,
+   "hub3": 72.0,
+   "neck": 100.0,
+   "link1": 216.0,
+   "link2": 184.4
+  },
+  "inband_member": {
+   "ring1": 0.015,
+   "hub2": 0.0,
+   "hub3": 0.4609,
+   "link1": 0.0,
+   "link2": 0.0146,
+   "neck": 0.6337
+  },
+  "audit": [],
+  "stage": "cma2 gen 1: ring, o20-control",
+  "park": {
+   "ring1": [
+    112.0,
+    7.19
+   ],
+   "hub2": [
+    180.4,
+    8.56
+   ],
+   "hub3": [
+    72.0,
+    5.26
+   ]
+  },
+  "park_ok": false
+ },
+ {
+  "k": 217,
+  "t": "2026-10-15T22:35:45Z",
+  "params": {
+   "az1": 28.3189,
+   "el1": 59.398,
+   "p1": 38.8083,
+   "a12": 82.0529,
+   "a23": 63.6096,
+   "wd": 95.3052,
+   "wa": 1.035,
+   "sigma": -1,
+   "margin": 10.0,
+   "width": 14.0,
+   "t_link": 3.0,
+   "w2": 12.0,
+   "q": 1.0,
+   "h1": 60.0,
+   "lug": 0.0
+  },
+  "inband14": 0.1241,
+  "inband10": 0.0507,
+  "reach": 0.9,
+  "follow": 0.9167,
+  "contact": 0.0,
+  "gap": 80.92,
+  "closure": 0.9045,
+  "mass_g": 303.3,
+  "honest": true,
+  "kmode": "march",
+  "ring1_F": 81.0,
+  "levels": {
+   "ring1": 81.0,
+   "hub2": 141.0,
+   "hub3": 68.0,
+   "neck": 100.0,
+   "link1": 141.0,
+   "link2": 145.0
+  },
+  "inband_member": {
+   "ring1": 0.0116,
+   "hub2": 0.0,
+   "hub3": 0.6193,
+   "link1": 0.0001,
+   "link2": 0.0516,
+   "neck": 0.6705
+  },
+  "audit": [],
+  "stage": "cma2 gen 1: ring, o20-control",
+  "park": {
+   "ring1": [
+    81.0,
+    4.04
+   ],
+   "hub2": [
+    141.0,
+    10.76
+   ],
+   "hub3": [
+    68.0,
+    1.92
+   ]
+  },
+  "park_ok": false
+ },
+ {
+  "k": 218,
+  "t": "2026-10-15T22:35:45Z",
+  "params": {
+   "az1": 17.9834,
+   "el1": 63.7524,
+   "p1": 33.058,
+   "a12": 85.2928,
+   "a23": 66.0368,
+   "wd": 89.6469,
+   "wa": -4.0832,
+   "sigma": -1,
+   "margin": 10.0,
+   "width": 14.0,
+   "t_link": 3.0,
+   "w2": 12.0,
+   "q": 0.9981,
+   "h1": 60.0,
+   "lug": 0.0
+  },
+  "inband14": 0.1264,
+  "inband10": 0.0537,
+  "reach": 0.9062,
+  "follow": 0.9667,
+  "contact": 0.0098,
+  "gap": 78.34,
+  "closure": 0.9318,
+  "mass_g": 311.0,
+  "honest": true,
+  "kmode": "march",
+  "ring1_F": 91.0,
+  "levels": {
+   "ring1": 91.0,
+   "hub2": 165.3,
+   "hub3": 70.0,
+   "neck": 101.0,
+   "link1": 174.3,
+   "link2": 169.3
+  },
+  "inband_member": {
+   "ring1": 0.0159,
+   "hub2": 0.0,
+   "hub3": 0.6362,
+   "link1": 0.0,
+   "link2": 0.0482,
+   "neck": 0.683
+  },
+  "audit": [],
+  "stage": "cma2 gen 1: ring, o20-control",
+  "park": {
+   "ring1": [
+    91.0,
+    8.66
+   ],
+   "hub2": [
+    165.3,
+    5.82
+   ],
+   "hub3": [
+    70.0,
+    5.17
+   ]
+  },
+  "park_ok": false
+ },
+ {
+  "k": 219,
+  "t": "2026-10-15T22:35:45Z",
+  "params": {
+   "az1": 15.3262,
+   "el1": 66.5577,
+   "p1": 37.4322,
+   "a12": 79.8585,
+   "a23": 65.5468,
+   "wd": 88.8309,
+   "wa": 6.9489,
+   "sigma": -1,
+   "margin": 10.0,
+   "width": 14.0,
+   "t_link": 3.0,
+   "w2": 12.0,
+   "q": 0.9986,
+   "h1": 60.0,
+   "lug": 0.0
+  },
+  "inband14": 0.0922,
+  "inband10": 0.0374,
+  "reach": 0.9,
+  "follow": 0.95,
+  "contact": 0.005,
+  "gap": 81.28,
+  "closure": 0.9182,
+  "mass_g": 308.1,
+  "honest": true,
+  "kmode": "march",
+  "ring1_F": 100.0,
+  "levels": {
+   "ring1": 100.0,
+   "hub2": 149.4,
+   "hub3": 71.0,
+   "neck": 98.7,
+   "link1": 159.4,
+   "link2": 153.4
+  },
+  "inband_member": {
+   "ring1": 0.0137,
+   "hub2": 0.0,
+   "hub3": 0.3723,
+   "link1": 0.0,
+   "link2": 0.0241,
+   "neck": 0.5829
+  },
+  "audit": [],
+  "stage": "cma2 gen 1: ring, o20-control",
+  "park": {
+   "ring1": [
+    100.0,
+    6.5
+   ],
+   "hub2": [
+    149.4,
+    10.07
+   ],
+   "hub3": [
+    71.0,
+    5.94
+   ]
+  },
+  "park_ok": false
+ },
+ {
+  "k": 220,
+  "t": "2026-10-15T22:35:45Z",
+  "params": {
+   "az1": 17.2412,
+   "el1": 68.8026,
+   "p1": 39.7902,
+   "a12": 70.2164,
+   "a23": 64.4236,
+   "wd": 83.4302,
+   "wa": 3.9756,
+   "sigma": -1,
+   "margin": 10.0,
+   "width": 14.0,
+   "t_link": 3.0,
+   "w2": 12.0,
+   "q": 0.9052,
+   "h1": 60.0,
+   "lug": 0.0
+  },
+  "inband14": 0.1394,
+  "inband10": 0.0861,
+  "reach": 0.6188,
+  "follow": 0.8,
+  "contact": 0.2304,
+  "gap": 142.22,
+  "closure": 0.9,
+  "mass_g": 271.2,
+  "honest": true,
+  "kmode": "march",
+  "ring1_F": 95.0,
+  "levels": {
+   "ring1": 95.0,
+   "hub2": 94.6,
+   "hub3": 68.0,
+   "neck": 96.3,
+   "link1": 115.9,
+   "link2": 119.9
+  },
+  "inband_member": {
+   "ring1": 0.0116,
+   "hub2": 0.0622,
+   "hub3": 0.7744,
+   "link1": 0.0098,
+   "link2": 0.0811,
+   "neck": 0.8184
+  },
+  "audit": [],
+  "stage": "cma2 gen 1: ring, o20-control",
+  "park": {
+   "ring1": [
+    95.0,
+    0.38
+   ],
+   "hub2": [
+    94.6,
+    -25.63
+   ],
+   "hub3": [
+    68.0,
+    0.58
+   ]
+  },
+  "park_ok": false
+ },
+ {
+  "k": 221,
+  "t": "2026-10-15T22:35:45Z",
+  "params": {
+   "az1": 10.3024,
+   "el1": 81.8024,
+   "p1": 36.8596,
+   "a12": 86.4178,
+   "a23": 59.1206,
+   "wd": 92.5375,
+   "wa": -4.9788,
+   "sigma": -1,
+   "margin": 10.0,
+   "width": 14.0,
+   "t_link": 3.0,
+   "w2": 12.0,
+   "q": 0.9631,
+   "h1": 60.0,
+   "lug": 0.0
+  },
+  "inband14": 0.1523,
+  "inband10": 0.0794,
+  "reach": 0.7625,
+  "follow": 1.0,
+  "contact": 0.0667,
+  "gap": 95.19,
+  "closure": 0.8909,
+  "mass_g": 289.1,
+  "honest": true,
+  "kmode": "march",
+  "ring1_F": 116.6,
+  "levels": {
+   "ring1": 116.6,
+   "hub2": 124.4,
+   "hub3": 68.0,
+   "neck": 99.0,
+   "link1": 134.5,
+   "link2": 128.4
+  },
+  "inband_member": {
+   "ring1": 0.0265,
+   "hub2": 0.0,
+   "hub3": 0.7899,
+   "link1": 0.0062,
+   "link2": 0.0706,
+   "neck": 0.7704
+  },
+  "audit": [],
+  "stage": "cma2 gen 1: ring, o20-control",
+  "park": {
+   "ring1": [
+    116.6,
+    1.53
+   ],
+   "hub2": [
+    124.4,
+    6.56
+   ],
+   "hub3": [
+    68.0,
+    4.24
+   ]
+  },
+  "park_ok": true
+ },
+ {
+  "k": 222,
+  "t": "2026-10-15T22:35:45Z",
+  "params": {
+   "az1": 11.8572,
+   "el1": 72.4371,
+   "p1": 34.6131,
+   "a12": 75.6585,
+   "a23": 58.9874,
+   "wd": 78.0638,
+   "wa": 11.365,
+   "sigma": -1,
+   "margin": 10.0,
+   "width": 14.0,
+   "t_link": 3.0,
+   "w2": 12.0,
+   "q": 0.9996,
+   "h1": 60.0,
+   "lug": 0.0
+  },
+  "inband14": 0.0602,
+  "inband10": 0.0242,
+  "reach": 0.8438,
+  "follow": 1.0,
+  "contact": 0.0,
+  "gap": 89.6,
+  "closure": 0.8864,
+  "mass_g": 318.6,
+  "honest": false,
+  "kmode": "march",
+  "ring1_F": 108.0,
+  "levels": {
+   "ring1": 108.0,
+   "hub2": 171.9,
+   "hub3": 77.9,
+   "neck": 97.9,
+   "link1": 200.4,
+   "link2": 175.9
+  },
+  "inband_member": {
+   "ring1": 0.0157,
+   "hub2": 0.0,
+   "hub3": 0.1516,
+   "link1": 0.0,
+   "link2": 0.0025,
+   "neck": 0.4909
+  },
+  "audit": [
+   "link2: sparse sampling (4.23 mm median spacing > 4 mm)"
+  ],
+  "stage": "cma2 gen 1: ring, o20-control",
+  "park": {
+   "ring1": [
+    108.0,
+    6.63
+   ],
+   "hub2": [
+    171.9,
+    11.71
+   ],
+   "hub3": [
+    77.9,
+    6.4
+   ]
+  },
+  "park_ok": false
+ },
+ {
+  "k": 223,
+  "t": "2026-10-15T22:35:45Z",
+  "params": {
+   "az1": 5.6264,
+   "el1": 79.4884,
+   "p1": 34.9454,
+   "a12": 85.9976,
+   "a23": 60.1872,
+   "wd": 95.6215,
+   "wa": 10.0063,
+   "sigma": -1,
+   "margin": 10.0,
+   "width": 14.0,
+   "t_link": 3.0,
+   "w2": 12.0,
+   "q": 0.9997,
+   "h1": 60.0,
+   "lug": 0.0
+  },
+  "inband14": 0.0026,
+  "inband10": 0.0002,
+  "reach": 0.8688,
+  "follow": 0.9167,
+  "contact": 0.0102,
+  "gap": 97.21,
+  "closure": 0.8909,
+  "mass_g": 1226.6,
+  "honest": false,
+  "kmode": "march",
+  "ring1_F": 121.0,
+  "levels": {
+   "ring1": 121.0,
+   "hub2": 117.9,
+   "hub3": 380.4,
+   "neck": 380.4,
+   "link1": 138.0,
+   "link2": 387.4
+  },
+  "inband_member": {
+   "ring1": 0.0056,
+   "hub2": 0.0,
+   "hub3": 0.0,
+   "link1": 0.0,
+   "link2": 0.0,
+   "neck": 0.0
+  },
+  "audit": [
+   "link2: sparse sampling (10.28 mm median spacing > 4 mm)",
+   "neck: sparse sampling (9.98 mm median spacing > 4 mm)"
+  ],
+  "stage": "cma2 gen 1: ring, o20-control",
+  "park": {
+   "ring1": [
+    121.0,
+    6.8
+   ],
+   "hub2": [
+    117.9,
+    8.55
+   ],
+   "hub3": [
+    380.4,
+    31.75
+   ]
+  },
+  "park_ok": false
+ },
+ {
+  "k": 224,
+  "t": "2026-10-15T22:35:45Z",
+  "params": {
+   "az1": 14.3161,
+   "el1": 88.9318,
+   "p1": 0,
+   "a12": 81.8503,
+   "a23": 62.1286,
+   "wd": 92.8289,
+   "wa": 21.3549,
+   "sigma": -1,
+   "margin": 10.0,
+   "width": 14.0,
+   "t_link": 3.0,
+   "w2": 12.0,
+   "q": 0.9859,
+   "h1": 60.0,
+   "lug": 0.0
+  },
+  "inband14": 0.4142,
+  "inband10": 0.2378,
+  "reach": 0.8562,
+  "follow": 0.9167,
+  "contact": 0.0204,
+  "gap": 58.33,
+  "closure": 0.9091,
+  "mass_g": 138.8,
+  "honest": true,
+  "kmode": "march",
+  "ring1_F": null,
+  "levels": {
+   "hub1": 51.2,
+   "hub2": 118.2,
+   "hub3": 66.2,
+   "link1": 118.2,
+   "neck": 96.2,
+   "link2": 122.2
+  },
+  "inband_member": {
+   "hub1": 1.0,
+   "hub2": 0.0,
+   "hub3": 0.5021,
+   "link1": 0.4747,
+   "link2": 0.0323,
+   "neck": 0.6489
+  },
+  "audit": [],
+  "stage": "cma2 gen 1: ring, o20-control",
+  "park": {
+   "hub1": [
+    51.2,
+    4.09
+   ],
+   "hub2": [
+    118.2,
+    9.08
+   ],
+   "hub3": [
+    66.2,
+    2.92
+   ]
+  },
+  "park_ok": true
+ },
+ {
+  "k": 225,
+  "t": "2026-10-15T22:35:45Z",
+  "params": {
+   "az1": 20.0533,
+   "el1": 86.7053,
+   "p1": 0,
+   "a12": 80.7594,
+   "a23": 64.2587,
+   "wd": 81.2024,
+   "wa": 16.4054,
+   "sigma": -1,
+   "margin": 10.0,
+   "width": 14.0,
+   "t_link": 3.0,
+   "w2": 12.0,
+   "q": 0.9956,
+   "h1": 60.0,
+   "lug": 0.0
+  },
+  "inband14": 0.2697,
+  "inband10": 0.1766,
+  "reach": 0.8938,
+  "follow": 1.0,
+  "contact": 0.0049,
+  "gap": 64.14,
+  "closure": 0.9318,
+  "mass_g": 184.0,
+  "honest": true,
+  "kmode": "march",
+  "ring1_F": null,
+  "levels": {
+   "hub1": 52.0,
+   "hub2": 164.0,
+   "hub3": 74.1,
+   "link1": 180.2,
+   "neck": 97.1,
+   "link2": 168.0
+  },
+  "inband_member": {
+   "hub1": 1.0,
+   "hub2": 0.0,
+   "hub3": 0.1969,
+   "link1": 0.2733,
+   "link2": 0.0092,
+   "neck": 0.4976
+  },
+  "audit": [],
+  "stage": "cma2 gen 1: ring, o20-control",
+  "park": {
+   "hub1": [
+    52.0,
+    5.61
+   ],
+   "hub2": [
+    164.0,
+    8.27
+   ],
+   "hub3": [
+    74.1,
+    5.29
+   ]
+  },
+  "park_ok": false
+ },
+ {
+  "k": 226,
+  "t": "2026-10-15T22:35:45Z",
+  "params": {
+   "az1": 35.241,
+   "el1": 88.4763,
+   "p1": 0,
+   "a12": 84.0728,
+   "a23": 52.6699,
+   "wd": 88.829,
+   "wa": 10.0294,
+   "sigma": -1,
+   "margin": 10.0,
+   "width": 14.0,
+   "t_link": 3.0,
+   "w2": 12.0,
+   "q": 0.9979,
+   "h1": 60.0,
+   "lug": 0.0
+  },
+  "inband14": 0.3993,
+  "inband10": 0.2362,
+  "reach": 0.8125,
+  "follow": 0.9167,
+  "contact": 0.0,
+  "gap": 62.15,
+  "closure": 0.8409,
+  "mass_g": 133.7,
+  "honest": true,
+  "kmode": "march",
+  "ring1_F": null,
+  "levels": {
+   "hub1": 51.0,
+   "hub2": 113.5,
+   "hub3": 71.0,
+   "link1": 116.6,
+   "neck": 98.6,
+   "link2": 117.5
+  },
+  "inband_member": {
+   "hub1": 1.0,
+   "hub2": 0.0,
+   "hub3": 0.3315,
+   "link1": 0.4899,
+   "link2": 0.0257,
+   "neck": 0.5745
+  },
+  "audit": [],
+  "stage": "cma2 gen 1: ring, o20-control",
+  "park": {
+   "hub1": [
+    51.0,
+    4.63
+   ],
+   "hub2": [
+    113.5,
+    7.82
+   ],
+   "hub3": [
+    71.0,
+    5.81
+   ]
+  },
+  "park_ok": true
+ },
+ {
+  "k": 227,
+  "t": "2026-10-15T22:35:45Z",
+  "params": {
+   "az1": 15.8495,
+   "el1": 88.5192,
+   "p1": 0,
+   "a12": 92.5121,
+   "a23": 55.1153,
+   "wd": 93.4269,
+   "wa": 9.976,
+   "sigma": -1,
+   "margin": 10.0,
+   "width": 14.0,
+   "t_link": 3.0,
+   "w2": 12.0,
+   "q": 0.9828,
+   "h1": 60.0,
+   "lug": 0.0
+  },
+  "inband14": 0.4355,
+  "inband10": 0.2401,
+  "reach": 0.7812,
+  "follow": 0.8833,
+  "contact": 0.022,
+  "gap": 67.2,
+  "closure": 0.8409,
+  "mass_g": 133.7,
+  "honest": true,
+  "kmode": "march",
+  "ring1_F": null,
+  "levels": {
+   "hub1": 51.8,
+   "hub2": 107.0,
+   "hub3": 67.8,
+   "link1": 111.2,
+   "neck": 97.0,
+   "link2": 111.0
+  },
+  "inband_member": {
+   "hub1": 1.0,
+   "hub2": 0.0,
+   "hub3": 0.542,
+   "link1": 0.4604,
+   "link2": 0.0475,
+   "neck": 0.6935
+  },
+  "audit": [],
+  "stage": "cma2 gen 1: ring, o20-control",
+  "park": {
+   "hub1": [
+    51.8,
+    4.46
+   ],
+   "hub2": [
+    107.0,
+    4.71
+   ],
+   "hub3": [
+    67.8,
+    4.53
+   ]
+  },
+  "park_ok": true
+ },
+ {
+  "k": 228,
+  "t": "2026-10-15T22:35:45Z",
+  "params": {
+   "az1": 21.3913,
+   "el1": 86.486,
+   "p1": 0,
+   "a12": 76.2682,
+   "a23": 74.9773,
+   "wd": 102.8299,
+   "wa": -0.3365,
+   "sigma": -1,
+   "margin": 10.0,
+   "width": 14.0,
+   "t_link": 3.0,
+   "w2": 12.0,
+   "q": 0.988,
+   "h1": 60.0,
+   "lug": 0.0
+  },
+  "inband14": 0.1596,
+  "inband10": 0.1079,
+  "reach": 0.8938,
+  "follow": 1.0,
+  "contact": 0.0379,
+  "gap": 78.45,
+  "closure": 0.9591,
+  "mass_g": 1059.8,
+  "honest": false,
+  "kmode": "march",
+  "ring1_F": null,
+  "levels": {
+   "hub1": 52.0,
+   "hub2": 400.0,
+   "hub3": 102.4,
+   "link1": 400.0,
+   "neck": 102.4,
+   "link2": 404.0
+  },
+  "inband_member": {
+   "hub1": 1.0,
+   "hub2": 0.0,
+   "hub3": 0.0,
+   "link1": 0.0,
+   "link2": 0.0,
+   "neck": 0.3997
+  },
+  "audit": [
+   "link1: sparse sampling (10.74 mm median spacing > 4 mm)",
+   "link2: sparse sampling (10.53 mm median spacing > 4 mm)"
+  ],
+  "stage": "cma2 gen 1: ring, o20-control",
+  "park": {
+   "hub1": [
+    52.0,
+    5.59
+   ],
+   "hub2": [
+    400.0,
+    -132.57
+   ],
+   "hub3": [
+    102.4,
+    -25.43
+   ]
+  },
+  "park_ok": false
+ },
+ {
+  "k": 229,
+  "t": "2026-10-15T22:35:45Z",
+  "params": {
+   "az1": 29.9707,
+   "el1": 88.5945,
+   "p1": 0,
+   "a12": 82.7538,
+   "a23": 66.566,
+   "wd": 82.276,
+   "wa": 11.314,
+   "sigma": -1,
+   "margin": 10.0,
+   "width": 14.0,
+   "t_link": 3.0,
+   "w2": 12.0,
+   "q": 0.9865,
+   "h1": 60.0,
+   "lug": 0.0
+  },
+  "inband14": 0.3404,
+  "inband10": 0.2248,
+  "reach": 0.8812,
+  "follow": 1.0,
+  "contact": 0.0243,
+  "gap": 60.27,
+  "closure": 0.9409,
+  "mass_g": 163.8,
+  "honest": true,
+  "kmode": "march",
+  "ring1_F": null,
+  "levels": {
+   "hub1": 51.0,
+   "hub2": 147.7,
+   "hub3": 72.2,
+   "link1": 147.7,
+   "neck": 97.0,
+   "link2": 151.7
+  },
+  "inband_member": {
+   "hub1": 0.9996,
+   "hub2": 0.0,
+   "hub3": 0.372,
+   "link1": 0.3741,
+   "link2": 0.0208,
+   "neck": 0.6103
+  },
+  "audit": [],
+  "stage": "cma2 gen 1: ring, o20-control",
+  "park": {
+   "hub1": [
+    51.0,
+    4.51
+   ],
+   "hub2": [
+    147.7,
+    -4.51
+   ],
+   "hub3": [
+    72.2,
+    3.93
+   ]
+  },
+  "park_ok": false
+ },
+ {
+  "k": 230,
+  "t": "2026-10-15T22:35:45Z",
+  "params": {
+   "az1": 24.5781,
+   "el1": 88.8172,
+   "p1": 0,
+   "a12": 81.8465,
+   "a23": 55.1015,
+   "wd": 88.3376,
+   "wa": 3.4642,
+   "sigma": -1,
+   "margin": 10.0,
+   "width": 14.0,
+   "t_link": 3.0,
+   "w2": 12.0,
+   "q": 0.9971,
+   "h1": 60.0,
+   "lug": 0.0
+  },
+  "inband14": 0.3833,
+  "inband10": 0.2212,
+  "reach": 0.8063,
+  "follow": 1.0,
+  "contact": 0.0,
+  "gap": 61.04,
+  "closure": 0.8636,
+  "mass_g": 139.6,
+  "honest": true,
+  "kmode": "march",
+  "ring1_F": null,
+  "levels": {
+   "hub1": 52.0,
+   "hub2": 121.4,
+   "hub3": 71.0,
+   "link1": 123.8,
+   "neck": 100.0,
+   "link2": 125.4
+  },
+  "inband_member": {
+   "hub1": 1.0,
+   "hub2": 0.0,
+   "hub3": 0.4202,
+   "link1": 0.4238,
+   "link2": 0.03,
+   "neck": 0.5964
+  },
+  "audit": [],
+  "stage": "cma2 gen 1: ring, o20-control",
+  "park": {
+   "hub1": [
+    52.0,
+    4.13
+   ],
+   "hub2": [
+    121.4,
+    8.02
+   ],
+   "hub3": [
+    71.0,
+    5.42
+   ]
+  },
+  "park_ok": true
+ },
+ {
+  "k": 231,
+  "t": "2026-10-15T22:35:45Z",
+  "params": {
+   "az1": 43.6746,
+   "el1": 88.5236,
+   "p1": 0,
+   "a12": 88.085,
+   "a23": 62.0179,
+   "wd": 93.2728,
+   "wa": 7.5856,
+   "sigma": -1,
+   "margin": 10.0,
+   "width": 14.0,
+   "t_link": 3.0,
+   "w2": 12.0,
+   "q": 1.0,
+   "h1": 60.0,
+   "lug": 0.0
+  },
+  "inband14": 0.3664,
+  "inband10": 0.2218,
+  "reach": 0.8625,
+  "follow": 1.0,
+  "contact": 0.0,
+  "gap": 57.11,
+  "closure": 0.9045,
+  "mass_g": 149.5,
+  "honest": true,
+  "kmode": "march",
+  "ring1_F": null,
+  "levels": {
+   "hub1": 51.0,
+   "hub2": 127.0,
+   "hub3": 68.0,
+   "link1": 130.0,
+   "neck": 99.0,
+   "link2": 131.0
+  },
+  "inband_member": {
+   "hub1": 1.0,
+   "hub2": 0.0,
+   "hub3": 0.5058,
+   "link1": 0.3786,
+   "link2": 0.0384,
+   "neck": 0.5776
+  },
+  "audit": [],
+  "stage": "cma2 gen 1: ring, o20-control",
+  "park": {
+   "hub1": [
+    51.0,
+    4.54
+   ],
+   "hub2": [
+    127.0,
+    8.79
+   ],
+   "hub3": [
+    68.0,
+    4.61
+   ]
+  },
+  "park_ok": true
+ },
+ {
+  "k": 232,
+  "t": "2026-10-15T22:35:45Z",
+  "params": {
+   "az1": 24.9271,
+   "el1": 87.7994,
+   "p1": 0,
+   "a12": 85.3518,
+   "a23": 52.471,
+   "wd": 92.481,
+   "wa": 23.6814,
+   "sigma": -1,
+   "margin": 10.0,
+   "width": 14.0,
+   "t_link": 3.0,
+   "w2": 12.0,
+   "q": 0.9974,
+   "h1": 60.0,
+   "lug": 0.0
+  },
+  "inband14": 0.411,
+  "inband10": 0.2204,
+  "reach": 0.7937,
+  "follow": 0.8833,
+  "contact": 0.0,
+  "gap": 66.2,
+  "closure": 0.8636,
+  "mass_g": 128.4,
+  "honest": true,
+  "kmode": "march",
+  "ring1_F": null,
+  "levels": {
+   "hub1": 52.0,
+   "hub2": 101.5,
+   "hub3": 68.5,
+   "link1": 101.5,
+   "neck": 97.0,
+   "link2": 105.5
+  },
+  "inband_member": {
+   "hub1": 1.0,
+   "hub2": 0.0,
+   "hub3": 0.2357,
+   "link1": 0.5767,
+   "link2": 0.0201,
+   "neck": 0.4936
+  },
+  "audit": [],
+  "stage": "cma2 gen 1: ring, o20-control",
+  "park": {
+   "hub1": [
+    52.0,
+    5.29
+   ],
+   "hub2": [
+    101.5,
+    13.69
+   ],
+   "hub3": [
+    68.5,
+    4.65
+   ]
+  },
+  "park_ok": true
+ },
+ {
+  "k": 233,
+  "t": "2026-10-15T22:35:45Z",
+  "params": {
+   "az1": 21.0991,
+   "el1": 88.8531,
+   "p1": 0,
+   "a12": 85.8382,
+   "a23": 69.518,
+   "wd": 96.8848,
+   "wa": 8.2496,
+   "sigma": -1,
+   "margin": 10.0,
+   "width": 14.0,
+   "t_link": 3.0,
+   "w2": 12.0,
+   "q": 0.9873,
+   "h1": 60.0,
+   "lug": 0.0
+  },
+  "inband14": 0.3533,
+  "inband10": 0.2125,
+  "reach": 0.8812,
+  "follow": 0.95,
+  "contact": 0.0149,
+  "gap": 58.04,
+  "closure": 0.9318,
+  "mass_g": 166.9,
+  "honest": true,
+  "kmode": "march",
+  "ring1_F": null,
+  "levels": {
+   "hub1": 51.0,
+   "hub2": 137.4,
+   "hub3": 66.4,
+   "link1": 144.0,
+   "neck": 98.0,
+   "link2": 141.4
+  },
+  "inband_member": {
+   "hub1": 1.0,
+   "hub2": 0.0,
+   "hub3": 0.6095,
+   "link1": 0.2753,
+   "link2": 0.0428,
+   "neck": 0.6737
+  },
+  "audit": [],
+  "stage": "cma2 gen 1: ring, o20-control",
+  "park": {
+   "hub1": [
+    51.0,
+    4.22
+   ],
+   "hub2": [
+    137.4,
+    9.72
+   ],
+   "hub3": [
+    66.4,
+    4.1
+   ]
+  },
+  "park_ok": true
+ },
+ {
+  "k": 234,
+  "t": "2026-10-15T22:35:45Z",
+  "params": {
+   "az1": 25.3557,
+   "el1": 87.9434,
+   "p1": 0,
+   "a12": 71.8078,
+   "a23": 60.3119,
+   "wd": 98.6808,
+   "wa": 19.7057,
+   "sigma": -1,
+   "margin": 10.0,
+   "width": 14.0,
+   "t_link": 3.0,
+   "w2": 12.0,
+   "q": 0.9667,
+   "h1": 60.0,
+   "lug": 0.0
+  },
+  "inband14": 0.4607,
+  "inband10": 0.2915,
+  "reach": 0.6875,
+  "follow": 0.95,
+  "contact": 0.0565,
+  "gap": 70.83,
+  "closure": 0.9182,
+  "mass_g": 123.8,
+  "honest": true,
+  "kmode": "march",
+  "ring1_F": null,
+  "levels": {
+   "hub1": 51.0,
+   "hub2": 95.0,
+   "hub3": 64.0,
+   "link1": 95.9,
+   "neck": 95.3,
+   "link2": 102.3
+  },
+  "inband_member": {
+   "hub1": 1.0,
+   "hub2": 0.0069,
+   "hub3": 0.5766,
+   "link1": 0.5262,
+   "link2": 0.0553,
+   "neck": 0.7093
+  },
+  "audit": [],
+  "stage": "cma2 gen 1: ring, o20-control",
+  "park": {
+   "hub1": [
+    51.0,
+    4.99
+   ],
+   "hub2": [
+    95.0,
+    -15.31
+   ],
+   "hub3": [
+    64.0,
+    3.06
+   ]
+  },
+  "park_ok": false
+ },
+ {
+  "k": 235,
+  "t": "2026-10-15T22:35:45Z",
+  "params": {
+   "az1": 29.8521,
+   "el1": 88.9813,
+   "p1": 0,
+   "a12": 82.6286,
+   "a23": 66.7771,
+   "wd": 92.219,
+   "wa": 6.8399,
+   "sigma": -1,
+   "margin": 10.0,
+   "width": 14.0,
+   "t_link": 3.0,
+   "w2": 12.0,
+   "q": 0.9976,
+   "h1": 60.0,
+   "lug": 0.0
+  },
+  "inband14": 0.3445,
+  "inband10": 0.2027,
+  "reach": 0.9,
+  "follow": 1.0,
+  "contact": 0.0049,
+  "gap": 56.04,
+  "closure": 0.9409,
+  "mass_g": 162.2,
+  "honest": true,
+  "kmode": "march",
+  "ring1_F": null,
+  "levels": {
+   "hub1": 52.0,
+   "hub2": 139.5,
+   "hub3": 69.0,
+   "link1": 143.6,
+   "neck": 99.0,
+   "link2": 143.5
+  },
+  "inband_member": {
+   "hub1": 1.0,
+   "hub2": 0.0,
+   "hub3": 0.4473,
+   "link1": 0.3472,
+   "link2": 0.028,
+   "neck": 0.5869
+  },
+  "audit": [],
+  "stage": "cma2 gen 1: ring, o20-control",
+  "park": {
+   "hub1": [
+    52.0,
+    3.94
+   ],
+   "hub2": [
+    139.5,
+    8.35
+   ],
+   "hub3": [
+    69.0,
+    5.2
+   ]
+  },
+  "park_ok": true
  }
 ]

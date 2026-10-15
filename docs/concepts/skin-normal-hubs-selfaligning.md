@@ -36,7 +36,7 @@
   about linearly with beta (table below), so beta 1 is out of the spec's +-25 mm and its 145 mm rail lands on the arm
   (gap 150, rail median 28 mm). The model therefore sweeps beta in [0, 1] per hub (0 = through GH).
 * **Centre the slide ranges.** The drift is one-sided (along-slide -23..+1 mm at the first optimum): an arm-fixed rail
-  centred on the mid travel halves its length. Every reported number from k 291 on uses `centre=1`.
+  centred on the mid travel halves its length. Entries from k 303 on with `centre: 1` use it (348 of them; the 302 before are the symmetric stage).
 * **Missing part closed**: the member-3 bridge strap between the neck and the across-carriage (the verifier's finding on
   seed-offset-3r-slides, +1.7 gap there) is in this model, scored, and checked against the rail and carriage A.
   Added a static hub 1 / hub 2 cylinder clearance (both are fixed in member 1; the seed never needed it at a1 77 deg,

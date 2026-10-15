@@ -48,7 +48,7 @@ def main():
             ax.add_collection3d(Poly3DCollection(P[m.faces][:, :, [2, 0, 1]], facecolor=col, edgecolor="none"))
         ax.set_xlim(-BOX, BOX); ax.set_ylim(-BOX, BOX); ax.set_zlim(-BOX, BOX); ax.set_box_aspect((1, 1, 1)); ax.set_axis_off()
         ax.set_title(f"{lab}{' (held)' if fr.get('held') else ''}\np = {np.round(fr['p'][:3], 0).tolist()}", fontsize=9)
-    fig.suptitle(ID, fontsize=11); fig.tight_layout(); fig.savefig(os.path.join(OUT, "snapshot.png")); print("wrote", os.path.join(OUT, "snapshot.png"))
+    fig.suptitle(ID, fontsize=11, x=0.02, y=0.99, ha="left"); fig.tight_layout(rect=(0, 0, 1, 0.94)); fig.savefig(os.path.join(OUT, "snapshot.png")); print("wrote", os.path.join(OUT, "snapshot.png"))
     sc_ = os.path.join(DD, "judge", "scorecard.json")
     if os.path.exists(sc_): json.dump(json.load(open(sc_)), open(os.path.join(OUT, "scorecard.json"), "w"), indent=1)
 
