@@ -1,504 +1,395 @@
-"""Concept model: OFFSET-CENTRE 2R POINTER + SLIDING TWIST SLEEVE AT THE CUFF, id offset-pointer-slip-sleeve.
+"""Concept model: OFFSET-CENTRE 2R POINTER + SLIDING TWIST SLEEVE AT THE CUFF (id offset-pointer-slip-sleeve).
+Rebuilt on the shared kit (tools/concept_kit.py, docs/concepts/KIT.md); the interrupted session's per-pose model was
+replaced (its fit loop was ~100x slower and its conventions differed from the kit's).
 
-Chain (docs/concepts/catalogue.json, entry offset-pointer-slip-sleeve; docs/concepts/offset-pointer-slip-sleeve.md):
-  S (scapula handler) -> J1 O20 hub, axis a1 through a centre O (|o| mm from GH, fixed in the scapula frame) -> link 1
-  (14 x 4 strap on the great circle about O from a1 to j2) -> J2 O20 hub, axis j2 through O, j2 = branch * unit(a1 x dh)
-  -> bar (14 x 4 strap) ending in a rod clamp (boss) on the line O -> C -> O6 rod on that line -> linear-rotary sleeve
-  O12 x 25 on the rod (J3 = spin about the rod, ACTIVE; slide lam = |C - O|, passive) -> Hooke U at the cuff (outer axis
-  u2 fixed in the cuff, inner axis u1 fixed in the sleeve; 2 passive) -> the user's upper-arm cuff at C (arm-fixed).
-ACTIVE DOF 3 (J1, J2, J3), PASSIVE 3 (slide, U pitch, U yaw). The cuff point C = Q C0 fixes dh = unit(C - O) (J1, J2:
-the pointer) and lam (the slide); the cuff's orientation relative to the rod fixes the two U angles and J3. Six chain
-coordinates for the cuff's six DOF, every passive one set by closure: nothing can sag.
+Chain (docs/concepts/catalogue.json entry; docs/concepts/offset-pointer-slip-sleeve.md):
+  scapula -> J1 O20 hub, axis a1 through a centre O (|o| mm from GH, fixed in the scapula) -> link 1 (12 x 3 strap on
+  the great circle about O from a1 to j2) -> J2 O20 hub, axis j2 = branch * unit(a1 x dh) through O -> bar (12 x 3
+  strap: a cap arc about O from j2 down to th_k from dh, then a run along the rod line at azimuth psi_b, fitted
+  radially FROM THE LINE) -> boss (rod clamp O12 x 10) -> O6 rod on the line O -> C, from lam_lo - 15 to lam_hi + 15
+  -> linear-rotary sleeve O12 x 25 centred at C (J3 = spin about the rod, ACTIVE; slide lam = |C - O|, PASSIVE) ->
+  Hooke U (ring around the sleeve, inner axis u1 in the sleeve, outer axis u2 on two cheeks on the cuff; 2 PASSIVE)
+  -> the user's upper-arm cuff (C fixed in the humerus).
+DOF: 3 ACTIVE (J1, J2, J3) + 3 PASSIVE (slide, U alpha, U beta). The cuff point fixes dh = unit(C - O) (J1, J2) and
+lam (slide); the cuff's orientation about the rod fixes J3 and the two U angles: six chain coordinates for the cuff's
+six DOF, every passive one set by closure (nothing sags, R17). Closed form: residual 0 by construction.
 
-Spec corrections (said in the .md): the catalogue took C0 and the humerus axis from BP.V0, the rig's BIND pose; the
-bench's rest frame (Q = I) is the posed rest pose (plane 0, elev 0, axial 0, flex 12.5), where the humerus hangs along
--y. C0 is therefore placed on that skin: station s along the humerus, azimuth caz around it (0 = lateral, + posterior),
-rod axis hC mm off the skin. The U neutral is centred on the mean rod direction in the arm frame (not the rest one), and
-the U is modelled at real size (ring around the sleeve + two cheeks on the cuff), so hC >= 11 for the ring to clear.
+Spec corrections: C0 is placed on the BENCH skin in the band humerus frame (station s down the HG -y axis, azimuth
+caz: 0 lateral, + anterior), at hC mm above the OUTERMOST skin under it over every bench pose (the spec took BP.V0,
+the bind pose). The U neutral is the mean rod direction in the arm frame. The U is modelled at real size (ring + two
+cheeks) instead of an O16 disc. Rod variant 'tilt': the prismatic axis may be tilted by rod_tilt deg in the bar
+frame toward the arm (Stanford-arm offset P) - not used unless rod_tilt != 0 (see the .md for why it was not needed).
 
-Parts at real size (mm; L1 keep-out level, docs/CAD_STANDARD.md L1), skin-facing surfaces sampled on a 2 mm grid
-(~1 point / 4 mm2, the baseline's convention, tools/concept_baseline.py):
-  J1 hub   O20 flat disc (lower face) at O + F1 a1, fixed in the scapula frame (base side of J1); wall to F1 + 12.25
-           checked for contact.
-  link 1   14 x 4 strap on the great circle about O from a1 to j2 (90 deg), underside fitted per sample radially
-           from O; upper member at J1 (>= F1 + 4.15 over the hub), lower member at J2 (its J2 end = the J2 hub face F2).
-  J2 hub   O20 flat disc at O + F2 j2 (link 1 frame).
-  bar      14 x 4 strap in the bar frame [dh, j2, dh x j2]: a cap arc about O from j2 (polar 90 deg from dh) down to
-           th_k deg from dh while turning by psi_end about dh, then a straight run along the rod line at azimuth psi_end
-           down to the rod clamp; underside fitted per sample along a direction field radial from O on the cap, radial
-           from the rod line along the arm (the spec's 'fitted radially from the humerus axis for samples > 100 mm');
-           upper member at J2 (>= F2 + 4.15 over the hub). psi_end = the circular mean, over the design poses, of the
-           arm's outward direction at the cuff seen in the bar frame (the J3 centre) + dpsi.
-  boss     O12 x 10 rod clamp at the bar's end, x in [x_top - 10, x_top], x_top = lam_lo - 15 (spec).
-  rod      O6 on the line from x_top to lam_hi + 15 (spec).
-  sleeve   O12 x 25 linear-rotary bushing centred at C.
-  U ring   annulus around the sleeve, outer radius max(9, yaw clearance + 2.5), 6 wide, at C.
-  cheeks   two 3 x 10 plates on the cuff (arm-fixed) beside the ring along u2, feet at the rest skin + 2 (cuff shell).
-Axisymmetric parts (rod, boss, sleeve, ring) are sampled on the half facing the arm in each pose (their shape does not
-change with the spin) and checked for contact on their whole circumference.
-A pose is TAKEN iff: dh is >= 12 deg from +-a1 (pointer singularity); both U angles within +-u_lim; lam inside the rod's
-travel window (<= rod_cap, the window that holds the most design poses); along each fit clip (full rate, 10 fps) no
-joint or passive coordinate steps > 25 deg between consecutive frames (branch flip); link 1 vs bar, bar vs the J1 hub
-and the arm-side parts vs the shoulder-side parts keep >= 1 mm (point clouds through the part thickness); no metal
-inside the body (else recorded as contact). Rigid heights are the p-th percentile (pct) over the kinematically valid
-bench poses - concept_baseline.py's convention: poses above it are recorded as contact.
+Every part is sampled on its skin-facing surface at ~1 pt / 4 mm2 (cap straps laid out at r_ref 70 like the kit;
+the bar's arm run, the hubs and all cylinders in true mm); hub walls, the full circumference of the rod-line parts
+and the cheek plates are checked for contact only. A pose is taken iff: dh >= sing deg from +-a1; |U angles| <= u_lim;
+lam inside the rod's travel window (<= rod_cap); K2 dense continuity (joint values and axes, 2-deg steps); >= 1 mm
+part-part clearance (KD-tree on layered point clouds through each part's thickness); no metal inside the body.
 
-    OMP_NUM_THREADS=1 nice -n 5 python3 docs/concepts/models/offset-pointer-slip-sleeve.py [kin|check|sweep|best]
+    OMP_NUM_THREADS=1 nice -n 10 python3 docs/concepts/models/offset-pointer-slip-sleeve.py [check|sweep|refine|red|plot]
 """
-import json, math, os, sys, time, datetime
+import itertools, json, math, os, sys, time
 import numpy as np
-
-HERE = os.path.dirname(os.path.abspath(__file__)); REPO = os.path.abspath(os.path.join(HERE, "..", "..", ".."))
+REPO = os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
 sys.path.insert(0, os.path.join(REPO, "tools"))
-import concept_bench as CB                                   # noqa: E402
-BP = CB.BP
+import concept_kit as K                                      # noqa: E402
+from scipy.spatial import cKDTree                            # noqa: E402
+
 ID = "offset-pointer-slip-sleeve"
-D2R = math.pi / 180
-
-# ---- hardware (docs/HARDWARE.md v5 O20 joint; catalogue spec) -----------------------------------------------------
-HUB_R, CROWN = 10.0, 12.25
-STRAP_W, STRAP_T = 14.0, 4.0                                  # link 1 and bar (spec 14 x 4)
-UP = STRAP_T + 0.15                                           # distal member over the proximal member's face at a hub
-ROD_R, BOSS_R, BOSS_L = 3.0, 6.0, 10.0
-SLV_R, SLV_L = 6.0, 25.0
-RING_RO0, RING_W, RING_SEC = 9.0, 6.0, 2.5
-CHEEK_T, CHEEK_L, CUFF_T = 3.0, 10.0, 2.0
-CLEAR, PART_CLEAR, SP = 2.0, 1.0, 2.0
-SING, JUMP = 12.0, 25.0
-REST = dict(plane=0.0, elev=0.0, axial=0.0, flex=12.5, pron=0.0)
-
-PARAMS = dict(o=20.0, o_az=14.2, o_el=68.4,      # O = o * bvec(o_az, o_el) (scapula frame); spec unit(-0.36, 0.93, 0.09)
-              a1_az=115.0, a1_el=42.8,           # J1 axis bvec(a1_az, a1_el); spec unit(0.31, 0.68, 0.67)
-              branch=-1,                         # j2 = branch * unit(a1 x dh); -1: J2 hub on the posterior cap (spec)
-              s=200.0, caz=0.0, hC=12.0,         # cuff: station along the humerus (mm), azimuth (deg, 0 lateral, + posterior), rod axis over skin
-              u_lim=40.0, rod_cap=70.0,          # U angle limit per axis (deg), slide travel cap (mm)
-              dpsi=0.0, th_k=35.0, rho_c=62.0,   # bar routing: azimuth about the rod line vs the J3 centre; cap arc end (deg from dh); nominal radius
-              pct=100.0)
-SWEEP = dict(o=[0, 5, 10, 15, 20, 30], o_az=[-60, -30, 14.2, 60, 120, 180], o_el=[20, 45, 68.4, 90],
-             a1_az=[60, 90, 115, 140, 170], a1_el=[20, 42.8, 60, 75], branch=[-1, 1],
-             s=[150, 175, 200, 225, 250], caz=[-60, -30, 0, 30, 60], hC=[11, 12, 14, 16],
-             u_lim=[30, 40, 45], rod_cap=[40, 60, 80], dpsi=[-60, -30, 0, 30, 60], th_k=[25, 35, 50], pct=[90, 95, 98, 100])
-
-
-# ---- small geometry ------------------------------------------------------------------------------------------------
-def unit(x): x = np.asarray(x, float); return x / (np.linalg.norm(x, axis=-1, keepdims=True) + 1e-12)
-def bvec(az, el): return np.array([-math.cos(el * D2R) * math.cos(az * D2R), math.sin(el * D2R), math.cos(el * D2R) * math.sin(az * D2R)])
-def now(): return datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
-def wrap(a): return (a + np.pi) % (2 * np.pi) - np.pi
-
-
-def perp(u):
-    a = unit(np.cross(u, [0.0, 0.0, 1.0]) if abs(u[2]) < 0.9 else np.cross(u, [1.0, 0.0, 0.0])); return a, np.cross(u, a)
-
-
-def disc(rad=HUB_R, sp=SP):
-    g = np.arange(-rad + sp / 2, rad, sp); X, Y = np.meshgrid(g, g); k = X ** 2 + Y ** 2 <= rad ** 2
-    return np.stack([X[k], Y[k]], 1)
-
-
-def across(w=STRAP_W, sp=SP):
-    return np.arange(-w / 2, w / 2 + 1e-6, sp)
-
-
-def resample(P, sp=SP):
-    """polyline P (m, k) -> parameter values t (on the polyline's index scale) every sp mm of arc length"""
-    seg = np.linalg.norm(np.diff(P, axis=0), axis=1); s = np.r_[0, np.cumsum(seg)]
-    n = max(2, int(s[-1] / sp) + 1); ss = np.linspace(0, s[-1], n)
-    return np.interp(ss, s, np.arange(len(P)))
-
-
-_REST_EX = None
-def rest_dist(P):
-    global _REST_EX
-    if _REST_EX is None: _REST_EX = CB._Exact(BP.posed(REST))
-    return _REST_EX(P)
-
-
-_C0_CACHE = {}
-def cuff_point(s, caz, hC):
-    """rest-frame cuff point C0 (rod axis), its outward skin direction n_C and the skin point under it"""
-    k = (round(s, 2), round(caz, 2))
-    if k not in _C0_CACHE:
-        n = np.array([-math.sin(caz * D2R), 0.0, math.cos(caz * D2R)])        # 0 = lateral (+z), + = posterior (-x)
-        a = np.array([0.0, -s, 0.0]); r = 120.0
-        for _ in range(80):
-            d = float(rest_dist((a + r * n)[None])[0])
-            if abs(d) < 0.02: break
-            r -= d
-        _C0_CACHE[k] = (a, n, r)
-    a, n, r = _C0_CACHE[k]
-    return a + (r + hC) * n, n, a + r * n
-
-
-def sd_cyl(P, c0, ax, r, h0, h1):
-    w = P - c0; z = w @ ax; rr = np.linalg.norm(w - z[:, None] * ax, axis=1)
-    dr = rr - r; dz = np.maximum(h0 - z, z - h1)
-    return np.where((dr > 0) | (dz > 0), np.hypot(np.maximum(dr, 0), np.maximum(dz, 0)), np.maximum(dr, dz))
-
-
-# ---- the model -----------------------------------------------------------------------------------------------------
-class Model:
-    def __init__(self, B, params=None):
-        P = dict(PARAMS); P.update(params or {}); self.p = P; self.B = B
-        Z = CB._poses_all(); self.Z = Z
-        self.HG = Z["HG"][B.idx].astype(float); self.RS = Z["RS"][B.idx].astype(float)
-        self.kind = np.array(B.kind); n = len(B.idx)
-        names = list(Z["NAMES"]); cid = Z["CID"]
-        self.clip_ii = {}
-        for nm in CB.FIT:
-            ii = np.nonzero(cid == names.index(nm))[0]; self.clip_ii[nm] = ii[np.argsort(Z["FI"][ii], kind="stable")]
-        self.ws_ii = np.nonzero(cid == names.index("Workspace (envelope)"))[0]
-        self.O = P["o"] * bvec(P["o_az"], P["o_el"]); self.a1 = unit(bvec(P["a1_az"], P["a1_el"]))
-        self.C0, self.nC, self.skin0 = cuff_point(P["s"], P["caz"], P["hC"])
-        self.why = np.array([""] * n, dtype=object)
-        self.design()
-
-    # ---- kinematics ------------------------------------------------------------------------------------------------
-    def kin(self, HG):
-        p, O, a1 = self.p, self.O, self.a1
-        C = HG @ self.C0; d = C - O; lam = np.linalg.norm(d, axis=1); dh = d / lam[:, None]
-        ang = np.degrees(np.arccos(np.clip(dh @ a1, -1, 1)))
-        j2 = p["branch"] * unit(np.cross(a1, dh)); nb = np.cross(dh, j2); k1 = np.cross(a1, j2)
-        r_arm = np.einsum("nji,nj->ni", HG, dh)                    # rod direction in the arm (rest) frame
-        vout = HG @ self.nC                                       # arm's outward direction at the cuff
-        psi_out = np.arctan2((vout * nb).sum(1), (vout * j2).sum(1))
-        k = dict(C=C, lam=lam, dh=dh, ang=ang, j2=j2, nb=nb, k1=k1, r_arm=r_arm, psi_out=psi_out,
-                 sing_ok=(ang >= SING) & (ang <= 180 - SING))
-        if hasattr(self, "e_r"): self._kin_u(HG, k)
-        return k
-
-    def _kin_u(self, HG, k):
-        r = k["r_arm"]; e_r, u2, e3 = self.e_r, self.u2, self.e3
-        alpha = np.arctan2(r @ e3, r @ e_r); beta = np.arcsin(np.clip(r @ u2, -1, 1))
-        u1 = unit(np.cross(u2[None], r)); u1w = np.einsum("nij,nj->ni", HG, u1)
-        J3 = np.arctan2((u1w * k["nb"]).sum(1), (u1w * k["j2"]).sum(1))
-        J1 = np.arctan2((np.cross(self.j2r, k["j2"]) @ self.a1), k["j2"] @ self.j2r)
-        J2 = np.arctan2((k["dh"] * k["k1"]).sum(1), k["dh"] @ self.a1)
-        k.update(alpha=alpha, beta=beta, J1=J1, J2=J2, J3=J3, q=np.stack([J1, J2, J3, alpha, beta], 1))
-        lim = self.p["u_lim"] * D2R
-        k["u_ok"] = (np.abs(alpha) <= lim) & (np.abs(beta) <= lim)
-
-    def design(self):
-        """design-time choices from the design poses (full-rate fit clips + every workspace pose; never held-out clips):
-        the U neutral, the J1 zero, the J3 centre (bar routing azimuth) and the rod's travel window"""
-        Z, p = self.Z, self.p
-        dz = np.r_[np.concatenate(list(self.clip_ii.values())), self.ws_ii]
-        HGd = Z["HG"][dz].astype(float); k = self.kin(HGd); ok = k["sing_ok"]
-        self.e_r = unit(k["r_arm"][ok].mean(0))
-        self.u2 = unit(np.cross(self.nC, self.e_r)); self.e3 = np.cross(self.e_r, self.u2)
-        ncl = sum(len(v) for v in self.clip_ii.values())
-        self.j2r = unit(np.median(k["j2"][:ncl][ok[:ncl]], axis=0))
-        self._kin_u(HGd, k); ok &= k["u_ok"]
-        ps = k["psi_out"][ok]; self.psi_ref = math.atan2(np.sin(ps).mean(), np.cos(ps).mean())
-        self.psi_end = self.psi_ref + p["dpsi"] * D2R
-        lam = np.sort(k["lam"][ok]); cap = p["rod_cap"]
-        if not len(lam): self.lam_lo, self.lam_hi = 0.0, 0.0; self.dead = True; return
-        if lam[-1] - lam[0] <= cap: lo, hi = lam[0], lam[-1]
-        else:
-            j = np.searchsorted(lam, lam + cap, side="right") - np.arange(len(lam)); a = int(np.argmax(j)); lo, hi = lam[a], lam[a] + cap
-        self.lam_lo, self.lam_hi = float(lo), float(hi); self.dead = False
-        okw = ok & (k["lam"] >= lo - 1e-6) & (k["lam"] <= hi + 1e-6)
-        self.beta_max = float(np.abs(k["beta"][okw]).max()) if okw.any() else 0.0
-        self.x_top = self.lam_lo - 15.0; self.x_bot = self.lam_hi + 15.0
-        yaw = 0.5 * SLV_L * math.sin(self.beta_max) + SLV_R * math.cos(self.beta_max) + 0.5
-        self.ring_ro = max(RING_RO0, yaw + RING_SEC); self.cheek_in = self.ring_ro + 0.5
-        self.design_cover = float(okw.mean())
-
-    def classify(self):
-        k = self.kin(self.HG); self.k = k
-        ok = k["sing_ok"].copy(); self.why[:] = ""; self.why[~ok] = "sing"
-        self.why[ok & ~k["u_ok"]] = "U"; ok &= k["u_ok"]
-        sl = (k["lam"] >= self.lam_lo - 1e-6) & (k["lam"] <= self.lam_hi + 1e-6)
-        self.why[ok & ~sl] = "slide"; ok &= sl
-        flip_at = {}
-        for nm, ii in self.clip_ii.items():
-            kk = self.kin(self.Z["HG"][ii].astype(float))
-            okf = kk["sing_ok"] & kk["u_ok"] & (kk["lam"] >= self.lam_lo - 1e-6) & (kk["lam"] <= self.lam_hi + 1e-6)
-            prev = None
-            for j, gi in enumerate(ii):
-                f = False
-                if okf[j] and prev is not None:
-                    f = np.degrees(np.abs(wrap(kk["q"][j] - kk["q"][prev]))).max() > JUMP
-                flip_at[int(gi)] = f; prev = j if okf[j] else None
-        flip = np.array([flip_at.get(int(gi), False) for gi in self.B.idx]) & (self.kind == "clip")
-        self.why[ok & flip] = "flip"; ok &= ~flip
-        self.kok = ok
-        return ok
-
-    # ---- part samples (body frames) --------------------------------------------------------------------------------
-    def build_parts(self):
-        """sample points of the fitted parts in their body frames: base X0 (m,3) + fit direction G (m,3) + lower bound"""
-        p = self.p; parts = {}
-        # J1 hub: scapula frame, flat disc normal a1 (centre O + F1 a1)
-        e, f = perp(self.a1); dd = disc()
-        parts["hub1"] = dict(frame="S", X=self.O + dd[:, :1] * e + dd[:, 1:] * f, G=np.broadcast_to(self.a1, (len(dd), 3)).copy(), lo=20.0)
-        # link 1 + J2 hub: link-1 local frame (x = a1, y = j2, z = a1 x j2), points relative to O
-        rr = 62.0; ns = max(3, int(0.5 * math.pi * rr / SP) + 1); s = np.linspace(0, 0.5 * math.pi, ns); cs = across() / rr
-        D = np.stack([np.cos(s), np.sin(s), np.zeros_like(s)], 1)
-        U = unit(D[:, None, :] * np.cos(cs)[None, :, None] + np.array([0, 0, 1.0])[None, None, :] * np.sin(cs)[None, :, None]).reshape(-1, 3)
-        parts["link1"] = dict(frame="L1", X=np.zeros_like(U), G=U, lo=20.0, s=np.repeat(s, len(cs)))
-        parts["hub2"] = dict(frame="L1", X=dd[:, 0, None] * np.array([1.0, 0, 0]) + dd[:, 1, None] * np.array([0, 0, 1.0]),
-                             G=np.broadcast_to(np.array([0, 1.0, 0]), (len(dd), 3)).copy(), lo=20.0)
-        # bar: bar-local frame (x = dh, y = j2, z = dh x j2)
-        th_k = p["th_k"] * D2R; pe = self.psi_end; rc = p["rho_c"]
-        th = np.linspace(0.5 * math.pi, th_k, 200); ps = np.linspace(0, pe, 200)
-        cap = rc * np.stack([np.cos(th), np.sin(th) * np.cos(ps), np.sin(th) * np.sin(ps)], 1)
-        rdir = np.array([0.0, math.cos(pe), math.sin(pe)])
-        x0, r0 = rc * math.cos(th_k), rc * math.sin(th_k); x1, r1 = self.x_top - BOSS_L, BOSS_R
-        tt = np.linspace(0, 1, 200)[1:]
-        arm = np.stack([x0 + (x1 - x0) * tt, np.zeros_like(tt), np.zeros_like(tt)], 1) + ((r0 + (r1 - r0) * tt)[:, None] * rdir)
-        line = np.r_[cap, arm]; ti = resample(line); idx = np.arange(len(line))
-        C = np.stack([np.interp(ti, idx, line[:, j]) for j in range(3)], 1)
-        T = unit(np.gradient(C, axis=0))
-        xx = C[:, 0]; w = np.clip((xx - x0) / 15.0, 0, 1) * (ti >= len(cap) - 1)       # blend radial-from-O -> radial-from-line
-        g_cap = unit(C); g_arm = np.broadcast_to(rdir, C.shape)
-        G = unit((1 - w)[:, None] * g_cap + w[:, None] * g_arm)
-        G = unit(G - (G * T).sum(1, keepdims=True) * T)                                  # keep the fit direction normal to the strap
-        A = unit(np.cross(T, G)); c = across()
-        X = (C[:, None, :] + c[None, :, None] * A[:, None, :]).reshape(-1, 3); Gb = np.repeat(G, len(c), 0)
-        rperp = np.linalg.norm(X[:, 1:], axis=1)
-        lo = np.where(np.repeat(w, len(c)) > 0, BOSS_R - rperp, 20.0 - np.linalg.norm(X, axis=1))   # stay off the rod line / O
-        parts["bar"] = dict(frame="BAR", X=X, G=Gb, lo=lo, st=np.repeat(np.arange(len(C)), len(c)), arm=np.repeat(w > 0, len(c)))
-        self.bar_center = C; self.parts = parts
-
-    def frame(self, nm, i=None):
-        k = self.k
-        if nm == "S": return None
-        if nm == "L1": R = np.stack([np.broadcast_to(self.a1, k["j2"].shape), k["j2"], k["k1"]], -1)
-        elif nm == "BAR": R = np.stack([k["dh"], k["j2"], k["nb"]], -1)
-        return R if i is None else R[i]
-
-    def place(self, nm, i, X):
-        """body-frame points -> scapula frame for pose i"""
-        if nm == "S": return X
-        return X @ self.frame(nm, i).T + self.O
-
-    def to_T(self, i, X): return X @ self.RS[i].T
-
-    # ---- fit -------------------------------------------------------------------------------------------------------
-    def _d(self, i, PT):
-        """distance for tracing: the bench grid inside its box, 'far' (31.75) outside (traced parts sit near the shoulder)"""
-        B = self.B
-        if B.grid is None: return B.dist(i, PT)
-        g = (PT + CB.HALF) / CB.H_GRID; n = B.grid.shape[1]
-        inside = np.all((g >= 0) & (g <= n - 1 - 1e-9), axis=1); out = np.full(len(PT), 31.75)
-        if inside.any(): out[inside] = B.dist(i, PT[inside])
-        return out
-
-    def trace(self, poses, names, iters=30):
-        """per pose, the height h along G at which every sample of the named parts sits CLEAR mm off the skin"""
-        parts = self.parts; sizes = [len(parts[nm]["X"]) for nm in names]; cut = np.cumsum([0] + sizes)
-        lo = np.concatenate([np.broadcast_to(parts[nm]["lo"], (len(parts[nm]["X"]),)) for nm in names])
-        out = np.zeros((len(poses), cut[-1]))
-        for a, i in enumerate(poses):
-            H = np.full(cut[-1], 90.0)
-            for _ in range(iters):
-                PS = [self.place(nm, i, parts[nm]["X"] + H[cut[k]:cut[k + 1], None] * parts[nm]["G"]) for k, nm in enumerate(names)]
-                d = self._d(i, self.to_T(i, np.concatenate(PS))) - CLEAR
-                Hn = np.maximum(H - d, lo)
-                if np.abs(Hn - H).max() < 0.05: H = Hn; break
-                H = Hn
-            out[a] = H
-        return {nm: out[:, cut[k]:cut[k + 1]] for k, nm in enumerate(names)}
-
-    def red(self, A):
-        return np.percentile(A, self.p["pct"], axis=0) if self.p["pct"] < 100 else A.max(0)
-
-    def fit(self):
-        good = self.classify(); poses = np.nonzero(good)[0]; self.poses_fit = poses
-        if len(poses) < 3: self.dead = True; return
-        self.build_parts(); P = self.parts
-        need = self.trace(poses, ["hub1", "link1", "hub2", "bar"])
-        h = {nm: self.red(v) for nm, v in need.items()}
-        self.need = need
-        F1 = float(h["hub1"].max())
-        # link 1: upper member at J1 (over the hub disc), lower member at J2 (its end = the J2 hub face)
-        L = P["link1"]; rr = np.maximum(h["link1"], 30.0); off = np.abs(L["s"]) * rr                # arc distance from a1 (mm)
-        hl = h["link1"].copy(); near1 = off < HUB_R + 2; hl[near1] = np.maximum(hl[near1], F1 + UP)
-        off2 = np.abs(0.5 * math.pi - L["s"]) * rr; near2 = off2 < HUB_R + 2
-        F2 = float(max(h["hub2"].max(), hl[near2].max())); hl[near2] = F2
-        hb = h["bar"].copy(); Bp = P["bar"]
-        Xb = Bp["X"] + hb[:, None] * Bp["G"]; ax2 = np.array([0, 1.0, 0])
-        rad = np.linalg.norm(Xb - (Xb @ ax2)[:, None] * ax2, axis=1); near = (rad < HUB_R + 2) & ((Xb @ ax2) > 0)
-        hb[near] = np.maximum(hb[near], F2 + UP)
-        self.F1, self.F2, self.h = F1, F2, dict(link1=hl, bar=hb)
-        self.dead = False
-
-    # ---- posed geometry --------------------------------------------------------------------------------------------
-    def shoulder_parts(self, i, thick=False):
-        """scapula-frame sample points of hub1, link1, hub2, bar (+ through the thickness when thick)"""
-        P = self.parts; e, f = perp(self.a1); out = {}
-        lv = (0.0, STRAP_T / 2, STRAP_T) if thick else (0.0,)
-        out["hub1"] = [P["hub1"]["X"] + self.F1 * self.a1]
-        out["link1"] = [self.place("L1", i, (self.h["link1"] + z)[:, None] * P["link1"]["G"]) for z in lv]
-        out["hub2"] = [self.place("L1", i, P["hub2"]["X"] + self.F2 * np.array([0, 1.0, 0]))]
-        out["bar"] = [self.place("BAR", i, P["bar"]["X"] + (self.h["bar"] + z)[:, None] * P["bar"]["G"]) for z in lv]
-        return {k: np.concatenate(v) for k, v in out.items()}
-
-    def cyl_pts(self, i, x0, x1, r, half=True, sp=SP):
-        """points on a cylinder about the rod line (x from O along dh), the half facing the arm (or all)"""
-        k = self.k; dh, j2, nb = k["dh"][i], k["j2"][i], k["nb"][i]
-        vin = -(self.HG[i] @ self.nC); vin = unit(vin - (vin @ dh) * dh); vb = np.cross(dh, vin)
-        nx = max(2, int((x1 - x0) / sp) + 1); xs = np.linspace(x0, x1, nx)
-        span = (0.5 if half else 1.0) * math.pi; na = max(3, int(2 * span * r / sp) + 1)
-        ph = np.linspace(-span, span, na, endpoint=not (not half))
-        R = r * (np.cos(ph)[:, None] * vin + np.sin(ph)[:, None] * vb)
-        return (self.O + xs[:, None, None] * dh + R[None]).reshape(-1, 3)
-
-    def arm_parts(self, i, half=True):
-        """rod, boss, sleeve, ring (about the rod line) and the cheeks (arm-fixed) in the scapula frame"""
-        k = self.k; lam = k["lam"][i]; out = {}
-        out["boss"] = self.cyl_pts(i, self.x_top - BOSS_L, self.x_top, BOSS_R, half)
-        out["rod"] = self.cyl_pts(i, self.x_top, self.x_bot, ROD_R, half)
-        out["sleeve"] = self.cyl_pts(i, lam - SLV_L / 2, lam + SLV_L / 2, SLV_R, half)
-        out["ring"] = self.cyl_pts(i, lam - RING_W / 2, lam + RING_W / 2, self.ring_ro, half)
-        out["cheeks"] = self.HG[i] @ self.cheek_rest().T
-        return {kk: (v.T if kk == "cheeks" else v) for kk, v in out.items()}
-
-    def cheek_rest(self):
-        if not hasattr(self, "_cheeks"):
-            g = np.arange(-CHEEK_L / 2 + 1, CHEEK_L / 2, SP); pts = []
-            for sgn in (-1, 1):
-                for t in np.arange(self.cheek_in + 1.0, self.cheek_in + CHEEK_T, SP):
-                    for a in g:
-                        X = self.C0 + sgn * t * self.u2 + a * self.e_r
-                        r = X - (X @ np.array([0, -1.0, 0])) * np.array([0, -1.0, 0])
-                        pts.append(X)
-            Q = np.array(pts); n = self.nC
-            # feet on the cuff shell: drop each point along -n to the rest skin + CUFF_T
-            for _ in range(40):
-                d = rest_dist(Q) - CUFF_T; Q = Q - d[:, None] * n
-                if np.abs(d).max() < 0.05: break
-            self._cheeks = Q
-        return self._cheeks
-
-    def scored(self, i):
-        sp = self.shoulder_parts(i); ap = self.arm_parts(i)
-        return np.concatenate(list(sp.values()) + list(ap.values()))
-
-    def contact_extra(self, i):
-        """surfaces checked for contact only: hub walls, full circumference of the rod-line parts"""
-        a1 = self.a1; e, f = perp(a1); ang = np.linspace(0, 2 * np.pi, 32, endpoint=False)
-        ring = lambda c, ax, ea, fa: np.concatenate([c + z * ax + HUB_R * (np.cos(ang)[:, None] * ea + np.sin(ang)[:, None] * fa) for z in np.linspace(0, CROWN, 4)])
-        w1 = ring(self.O + self.F1 * a1, a1, e, f)
-        j2 = self.k["j2"][i]; e2, f2 = perp(j2); w2 = ring(self.O + self.F2 * j2, j2, e2, f2)
-        ap = self.arm_parts(i, half=False)
-        return np.concatenate([w1, w2] + [v for kk, v in ap.items() if kk != "cheeks"])
-
-    def collide(self, i):
-        """min clearance (mm) between parts that must not touch; pairs: link1-bar (off the J2 hub), bar-J1 hub,
-        shoulder-side vs arm-side parts"""
-        from scipy.spatial import cKDTree
-        sp = self.shoulder_parts(i, thick=True); res = {}
-        Pb = self.parts["bar"]; nb_ = len(Pb["X"])
-        # bar samples off the J2 hub disc (the hub stack layers them there)
-        Xb = sp["bar"]; j2 = self.k["j2"][i]; rel = Xb - self.O
-        rad = np.linalg.norm(rel - (rel @ j2)[:, None] * j2, axis=1); offhub = rad > HUB_R + 3
-        L1 = sp["link1"]; rl = L1 - self.O; radl = np.linalg.norm(rl - (rl @ j2)[:, None] * j2, axis=1)
-        L1o = L1[radl > HUB_R + 3]
-        if offhub.any() and len(L1o): res["link1-bar"] = float(cKDTree(L1o).query(Xb[offhub])[0].min()) - 1.5 + PART_CLEAR
-        res["bar-hub1"] = float(sd_cyl(Xb, self.O + self.F1 * self.a1, self.a1, HUB_R, 0.0, CROWN).min())
-        ap = self.arm_parts(i, half=False); arm = np.concatenate([ap["sleeve"], ap["ring"], ap["cheeks"]])
-        sh = np.concatenate([sp["link1"], sp["hub1"], sp["hub2"], Xb])
-        res["arm-shoulder"] = float(cKDTree(sh).query(arm)[0].min()) - 1.5 + PART_CLEAR
-        cuff_side = np.concatenate([ap["sleeve"], ap["ring"]])
-        res["cheeks-bar"] = float(cKDTree(np.concatenate([Xb, ap["boss"]])).query(ap["cheeks"])[0].min()) - 1.5 + PART_CLEAR
-        kk = min(res, key=res.get); return res[kk], kk
-
-    # ---- run -------------------------------------------------------------------------------------------------------
-    def run(self):
-        B = self.B; B.reset(); t0 = time.time(); n = len(B.idx)
-        if self.dead:
-            for i in range(n): B.record(i, None)
-            r = B.report(); r["why"] = {}; return r
-        self.fit()
-        if self.dead:
-            for i in range(n): B.record(i, None)
-            r = B.report(); r["why"] = {kk: int((self.why == kk).sum()) for kk in ("sing", "U", "slide", "flip")}; return r
-        self.clear = np.full(n, np.nan); self.cpair = [""] * n; self.parts_d = {}
-        for i in range(n):
-            if not self.kok[i]: B.record(i, None); continue
-            cl, pr = self.collide(i); self.clear[i] = cl; self.cpair[i] = pr
-            if cl < PART_CLEAR: self.why[i] = "parts"; B.record(i, None); continue
-            sp = self.shoulder_parts(i); ap = self.arm_parts(i)
-            names = list(sp) + list(ap); chunks = list(sp.values()) + list(ap.values())
-            d = B.record(i, self.to_T(i, np.concatenate(chunks)))
-            o = 0
-            for nm, c in zip(names, chunks):
-                self.parts_d.setdefault(nm, {})[i] = d[o:o + len(c)]; o += len(c)
-            dc = float(B.dist(i, self.to_T(i, self.contact_extra(i))).min())
-            if dc < 0: B.res[i] = np.r_[d, dc]; self.why[i] = "contact"
-            elif float(d.min()) < 0: self.why[i] = "contact"
-        r = B.report()
-        r["why"] = {kk: int((self.why == kk).sum()) for kk in ("sing", "U", "slide", "flip", "parts", "contact")}
-        r["geom"] = dict(F1=round(self.F1 - 0, 1), F2=round(self.F2, 1), lam=[round(self.lam_lo, 1), round(self.lam_hi, 1)],
-                         beta_max=round(math.degrees(self.beta_max), 1), ring_ro=round(self.ring_ro, 1),
-                         psi_ref=round(math.degrees(self.psi_ref), 1), C0=np.round(self.C0, 1).tolist(),
-                         J3_range=self.range_deg("J3"), alpha=self.range_deg("alpha"), beta=self.range_deg("beta"))
-        r["part_inband14"] = self.part_inband()
-        r["t"] = round(time.time() - t0, 1)
-        return r
-
-    def range_deg(self, key):
-        v = self.k[key][self.kok]
-        if not len(v): return None
-        if key == "J3": c = math.atan2(np.sin(v).mean(), np.cos(v).mean()); w = wrap(v - c); return [round(math.degrees(w.min() + c), 1), round(math.degrees(w.max() + c), 1)]
-        return [round(math.degrees(v.min()), 1), round(math.degrees(v.max()), 1)]
-
-    def part_inband(self):
-        out = {}
-        cl = [j for j, kk in enumerate(self.kind) if kk == "clip" and self.B.res[j] is not None and float(np.min(self.B.res[j])) >= 0]
-        for nm, dd in self.parts_d.items():
-            v = np.concatenate([dd[j] for j in cl if j in dd]) if any(j in dd for j in cl) else np.zeros(0)
-            if len(v): out[nm] = dict(n=int(len(v) / max(1, len(cl))), inband14=round(float(np.mean((v >= 2) & (v <= 14))), 3),
-                                      med=round(float(np.median(v)), 1), p90=round(float(np.percentile(v, 90)), 1))
-        return out
-
-
-# ---- public API (swarm convention) ------------------------------------------------------------------------------------
-_MODELS = {}
-def metal(pose, frames, params, B=None, i=None):
-    """(k, 3) metal sample points (thorax frame) of bench pose i, or None when the mechanism cannot take it.
-    The idealised model needs the whole bench (rigid heights are fitted over its poses), so B and i are required."""
-    key = (id(B), json.dumps(params, sort_keys=True))
-    if key not in _MODELS:
-        M = Model(B, params); M.run(); _MODELS[key] = M
-    M = _MODELS[key]
-    if M.dead or not M.kok[i] or (M.clear[i] < PART_CLEAR): return None
-    return M.to_T(i, M.scored(i))
-
-
-def evaluate(B, params, log=None):
-    M = Model(B, params); r = M.run(); return r, M
-
-
-def kin_scan(B, params):
-    """frames-only check: design window, coverage, why poses fail"""
-    M = Model(B, params)
-    if M.dead: return dict(dead=True)
-    ok = M.classify()
-    return dict(cover=round(M.design_cover, 3), lam=[round(M.lam_lo, 1), round(M.lam_hi, 1)], beta_max=round(math.degrees(M.beta_max), 1),
-                ok_clip=round(float(ok[M.kind == "clip"].mean()), 3), ok_ws=round(float(ok[M.kind == "ws"].mean()), 3),
-                why={kk: int((M.why == kk).sum()) for kk in ("sing", "U", "slide", "flip")},
-                J1=M.range_deg("J1"), J2=M.range_deg("J2"), J3=M.range_deg("J3"), alpha=M.range_deg("alpha"), beta=M.range_deg("beta"),
-                psi_ref=round(math.degrees(M.psi_ref), 1), C0=np.round(M.C0, 1).tolist())
-
-
-# ---- sweep driver ----------------------------------------------------------------------------------------------------
+NAME = "Offset-centre 2R pointer with a sliding twist sleeve at the cuff"
 SWEEP_JSON = os.path.join(REPO, "docs", "concepts", "sweeps", f"{ID}.json")
+D2R = math.pi / 180
+HUB_R, STACK, CROWN = K.HUB_R, K.STACK, K.CROWN
+ROD_R, BOSS_R, BOSS_L, SLV_R, SLV_L = 3.0, 6.0, 10.0, 6.0, 25.0
+RING_RO0, RING_W, RING_SEC, CHEEK_T, CHEEK_L, CUFF_T = 9.0, 6.0, 2.5, 3.0, 10.0, 2.0
+SP, CLR_PARTS = 2.0, 1.0
+
+PARAMS = dict(o=20.0, o_az=14.2, o_el=68.4,        # O = o * bvec(o_az, o_el) (scapula frame); spec unit(-0.36, 0.93, 0.09)
+              a1_az=115.0, a1_el=42.8,             # J1 axis bvec(a1_az, a1_el); spec unit(0.31, 0.68, 0.67)
+              branch=-1,                           # j2 = branch * unit(a1 x dh)
+              s=200.0, caz=0.0, hC=13.0,           # cuff station (mm down the humerus), azimuth (deg, 0 lateral, + anterior), rod axis over the outermost skin
+              u_lim=40.0, rod_cap=70.0, sing=12.0, # U limit (deg), rod travel cap (mm), pointer singularity margin (deg)
+              dpsi=0.0, th_k=35.0,                 # bar azimuth about the rod line vs the arm's mean outward side (deg); cap arc end (deg from dh)
+              width=12.0, t_link=3.0, q=1.0)
+SWEEP = dict(o=[0, 10, 20, 30], o_dir=["spec", "lat", "post", "ant"], a1=["spec", "hi", "ant", "post"])
+O_DIRS = dict(spec=(14.2, 68.4), lat=(90.0, 30.0), post=(0.0, 30.0), ant=(180.0, 30.0), up=(90.0, 89.0))
+A1_DIRS = dict(spec=(115.0, 42.8), hi=(100.0, 60.0), ant=(150.0, 35.0), post=(60.0, 40.0), lat=(90.0, 20.0))
 
 
-def log_entry(entries, k, params, r):
-    entries.append(dict(k=k, t=now(), params=params, inband14=r["inband14"], inband10=r["inband10"], reach=r["reach"],
-                        follow=r["follow"], contact=r["contact"], gap=r["gap"], why=r.get("why"), geom=r.get("geom")))
-    tmp = SWEEP_JSON + ".tmp"; json.dump(entries, open(tmp, "w"), indent=1); os.replace(tmp, SWEEP_JSON)
+# ---- kinematics (geometry from F only: K2 calls it on interpolated frames) -------------------------------------------
+_DESIGN = {}
+
+
+def cuff_point(B, F, p):
+    """rest-frame (band HG) cuff point C0 and the arm's outward normal there: hC over the OUTERMOST skin under it"""
+    key = (round(p["s"], 3), round(p["caz"], 3), round(p["hC"], 3))
+    if key not in _DESIGN:
+        n = np.array([math.sin(p["caz"] * D2R), 0.0, math.cos(p["caz"] * D2R)]); a = np.array([0.0, -p["s"], 0.0])
+        Pi = np.arange(len(F.RS)); A = np.einsum("pij,j->pi", F.RHG, a); N = np.einsum("pij,j->pi", F.RHG, n)
+        rr = np.arange(10.0, 90.0, 0.5); D = K.dist_many(B, np.repeat(Pi, len(rr)), (A[:, None] + rr[None, :, None] * N[:, None]).reshape(-1, 3)).reshape(len(Pi), -1)
+        r = rr[np.argmax(D >= 0, axis=1)]                     # march OUT of the arm from its axis: first point outside the skin
+        ro = float(np.quantile(r, 0.9))                       # q90 of the arm's own outer skin (max = poses where the arm presses on the trunk)
+        _DESIGN[key] = (a + (ro + p["hC"]) * n, n, ro, float(np.median(r)))
+    return _DESIGN[key]
+
+
+def axes(p):
+    o = p["o"] * K.bvec(p["o_az"], p["o_el"]); a1 = K.unit(K.bvec(p["a1_az"], p["a1_el"])); return o, a1
+
+
+def raw_kin(F, p, C0, nC):
+    o, a1s = axes(p)
+    O = F.S(o); a1 = F.S(a1s); C = F.HG(C0); nW = F.HG(nC)
+    d = C - O; lam = np.linalg.norm(d, axis=-1); dh = d / lam[:, None]
+    ang = np.degrees(np.arccos(np.clip((dh * a1).sum(-1), -1, 1)))
+    j2 = p["branch"] * K.unit(np.cross(a1, dh)); nb = np.cross(dh, j2)
+    r_arm = np.einsum("pji,pj->pi", F.RHG, dh)               # rod direction in the arm frame
+    v = nW - (nW * dh).sum(-1, keepdims=True) * dh             # arm's outward side at C, seen about the rod line
+    psi_out = np.arctan2((v * nb).sum(-1), (v * j2).sum(-1))
+    return dict(O=O, a1=a1, C=C, nW=nW, lam=lam, dh=dh, ang=ang, j2=j2, nb=nb, r_arm=r_arm, psi_out=psi_out,
+                sing_ok=(ang >= p["sing"]) & (ang <= 180 - p["sing"]))
+
+
+def design(B, F, p):
+    """design-time constants from the bench poses (never held-out clips): U neutral, J1 zero, bar azimuth, rod window"""
+    key = json.dumps({k: p[k] for k in ("o", "o_az", "o_el", "a1_az", "a1_el", "branch", "s", "caz", "hC", "u_lim", "rod_cap", "sing", "dpsi")}, sort_keys=True)
+    if key in _DESIGN: return _DESIGN[key]
+    C0, nC, r_out, r_med = cuff_point(B, F, p); k = raw_kin(F, p, C0, nC); ok = k["sing_ok"]
+    e_r = K.unit(k["r_arm"][ok].mean(0)); u2 = K.unit(np.cross(nC, e_r)); e3 = np.cross(e_r, u2)
+    j2s = np.einsum("pji,pj->pi", F.RS, k["j2"]); j2ref = K.unit(np.median(j2s[ok], 0))
+    r = k["r_arm"]; alpha = np.degrees(np.arctan2(r @ e3, r @ e_r)); beta = np.degrees(np.arcsin(np.clip(r @ u2, -1, 1)))
+    ok = ok & (np.abs(alpha) <= p["u_lim"]) & (np.abs(beta) <= p["u_lim"])
+    ps = k["psi_out"][ok]; psi_ref = math.atan2(np.sin(ps).mean(), np.cos(ps).mean()) if ok.any() else 0.0
+    lam = np.sort(k["lam"][ok]); cap = p["rod_cap"]
+    if not len(lam): lo = hi = 0.0
+    elif lam[-1] - lam[0] <= cap: lo, hi = lam[0], lam[-1]
+    else:
+        j = np.searchsorted(lam, lam + cap, side="right") - np.arange(len(lam)); a = int(np.argmax(j)); lo, hi = lam[a], lam[a] + cap
+    okw = ok & (k["lam"] >= lo - 1e-6) & (k["lam"] <= hi + 1e-6)
+    bmax = float(np.abs(beta[okw]).max()) * D2R if okw.any() else 0.0
+    yaw = 0.5 * SLV_L * math.sin(bmax) + SLV_R * math.cos(bmax) + 0.5      # tilted sleeve inside the ring
+    ring_ro = max(RING_RO0, yaw + RING_SEC)
+    def foot_r(ax, rd, _F=F, _B=B):                                    # q90 arm skin radius along rd from the axis point ax
+        Pi = np.arange(len(_F.RS)); A = np.einsum("pij,j->pi", _F.RHG, ax); N = np.einsum("pij,j->pi", _F.RHG, rd); rr = np.arange(10.0, 90.0, 0.5)
+        D = K.dist_many(_B, np.repeat(Pi, len(rr)), (A[:, None] + rr[None, :, None] * N[:, None]).reshape(-1, 3)).reshape(len(Pi), -1)
+        return float(np.quantile(rr[np.argmax(D >= 0, axis=1)], 0.9))
+    dc = dict(foot_r=foot_r, C0=C0, nC=nC, r_out=r_out, r_med=r_med, e_r=e_r, u2=u2, e3=e3, j2ref=j2ref, psi_b=psi_ref + p["dpsi"] * D2R,
+              psi_ref=psi_ref, lam_lo=float(lo), lam_hi=float(hi), ring_ro=ring_ro, beta_max=math.degrees(bmax),
+              x_top=float(lo) - 15.0, x_bot=float(hi) + 15.0)
+    _DESIGN[key] = dc; return dc
+
+
+class Kin:
+    def __init__(self, ok, q, joints, k): self.ok, self.q, self.joints, self.k, self.q_period, self.members, self.info = ok, q, joints, k, 360.0, [], {}
+
+
+def kin(B, F, p):
+    dc = design(B, K._F0, p); k = raw_kin(F, p, dc["C0"], dc["nC"])
+    r = k["r_arm"]; alpha = np.degrees(np.arctan2(r @ dc["e3"], r @ dc["e_r"])); beta = np.degrees(np.arcsin(np.clip(r @ dc["u2"], -1, 1)))
+    u2W = F.HG(dc["u2"]); u1 = K.unit(np.cross(u2W, k["dh"]))  # U cross: inner axis fixed in the sleeve, normal to the rod
+    J1 = K.axis_angle(k["a1"], F.S(dc["j2ref"]), k["j2"]); J2 = K.axis_angle(k["j2"], k["a1"], k["dh"]); J3 = K.axis_angle(k["dh"], k["j2"], u1)
+    ok = k["sing_ok"] & (np.abs(alpha) <= p["u_lim"]) & (np.abs(beta) <= p["u_lim"])
+    ok &= (k["lam"] >= dc["lam_lo"] - 1e-6) & (k["lam"] <= dc["lam_hi"] + 1e-6)
+    k.update(alpha=alpha, beta=beta, u1=u1, u2W=u2W, J1=J1, J2=J2, J3=J3)
+    return Kin(ok, np.stack([J1, J2, J3, alpha, beta], -1), dict(J1=k["a1"], J2=k["j2"], J3=k["dh"], U1=u1), k)
+
+
+# ---- members: rays (origin X, direction G) fitted along G, or fixed points ----------------------------------------
+class M:
+    def __init__(self, name, X, G, t=3.0, tmin=0.0, grid=None, step=2.0, fixed=False, extra=None):
+        self.name, self.X, self.G, self.t, self.tmin, self.grid, self.step, self.fixed, self.extra = name, X, G, t, tmin, grid, step, fixed, extra
+        self.ramps = []          # [(mask (m,), other name, dz, axis key)]: height along that hub's axis >= other's level + dz
+
+
+def strap_rays(O, u, v, width, r_ref=70.0):
+    D = K.strap_dirs(u, v, width=width, r_ref=r_ref); P_, ns, nc, _ = D.shape
+    return np.broadcast_to(O[:, None, :], (P_, ns * nc, 3)), D.reshape(P_, -1, 3), (ns, nc)
+
+
+def disc_rays(O, k, h0=70.0):
+    a, b = K.plane_frame(k); xy = K.disc_xy(HUB_R, SP)
+    X = O[:, None, :] + xy[None, :, :1] * a[:, None, :] + xy[None, :, 1:] * b[:, None, :]
+    return X, np.broadcast_to(k[:, None, :], X.shape), xy, a, b
+
+
+def cyl_pts(O, dh, vin, x0, x1, r, half=True):
+    """points on a cylinder about the line O + x dh (P, 3), x in [x0, x1] (P,) or scalars; the half facing vin"""
+    P_ = len(dh); x0 = np.broadcast_to(np.asarray(x0, float), (P_,)); x1 = np.broadcast_to(np.asarray(x1, float), (P_,))
+    nx = max(2, int(float((x1 - x0).max()) / SP) + 1); s = np.linspace(0, 1, nx)
+    span = (0.5 if half else 1.0) * math.pi; na = max(3, int(2 * span * r / SP) + 1)
+    ph = np.linspace(-span, span, na, endpoint=half)
+    vin = K.unit(vin - (vin * dh).sum(-1, keepdims=True) * dh); vb = np.cross(dh, vin)
+    R = r * (np.cos(ph)[None, :, None] * vin[:, None, :] + np.sin(ph)[None, :, None] * vb[:, None, :])     # (P, na, 3)
+    xs = x0[:, None] + (x1 - x0)[:, None] * s[None, :]
+    return (O[:, None, None, :] + xs[:, :, None, None] * dh[:, None, None, :] + R[:, None, :, :]).reshape(P_, -1, 3)
+
+
+def members(B, F, p, kn):
+    dc = design(B, K._F0, p); k = kn.k; O, a1, j2, dh, nb = k["O"], k["a1"], k["j2"], k["dh"], k["nb"]; w, t = p["width"], p["t_link"]
+    out = []
+    X, G, xy1, A1, B1 = disc_rays(O, a1); h1 = M("hub1", X, G, t=CROWN); h1.flat = (a1, xy1); out.append(h1)
+    X, G, xy2, A2, B2 = disc_rays(O, j2); h2 = M("hub2", X, G, t=CROWN); h2.flat = (j2, xy2); out.append(h2)
+    X, G, g = strap_rays(O, a1, j2, w); l1 = M("link1", X, G, t=t, tmin=15.0, grid=g)
+    l1.ramps = [("J1", "hub1", STACK), ("J2", "hub2", 0.0)]; out.append(l1)
+    psb = dc["psi_b"]; uk = math.cos(psb) * j2 + math.sin(psb) * nb                    # bar azimuth about the rod line
+    thk = p["th_k"] * D2R; vend = math.cos(thk) * dh + math.sin(thk) * uk
+    X, G, g = strap_rays(O, j2, vend, w); bc = M("bar_cap", X, G, t=t, tmin=15.0, grid=g); bc.ramps = [("J2", "hub2", STACK)]; out.append(bc)
+    x_k = 70.0 * math.cos(thk); x_e = dc["x_top"] - BOSS_L / 2
+    ns = max(2, int((x_e - x_k) / SP) + 1); xs = np.linspace(x_k, x_e, ns); cs = np.arange(-w / 2, w / 2 + 1e-6, SP)
+    tang = np.cross(dh, uk)
+    X = O[:, None, None, :] + xs[None, :, None, None] * dh[:, None, None, :] + cs[None, None, :, None] * tang[:, None, None, :]
+    ba = M("bar_arm", X.reshape(len(O), -1, 3), np.broadcast_to(uk[:, None, :], (len(O), ns * len(cs), 3)), t=t,
+           tmin=np.where(np.repeat(xs, len(cs)) > dc["x_top"] - BOSS_L - 2, BOSS_R, ROD_R + 1.0), grid=(ns, len(cs)))
+    out.append(ba)
+    vin = -k["nW"]; lam = k["lam"]                                                        # arm side of the rod line
+    rod_lo, rod_hi = dc["x_top"], dc["x_bot"]
+    fixed = dict(boss=(dc["x_top"] - BOSS_L, dc["x_top"], BOSS_R), sleeve=(lam - SLV_L / 2, lam + SLV_L / 2, SLV_R))
+    for nm, (x0, x1, r) in fixed.items():
+        out.append(M(nm, cyl_pts(O, dh, vin, x0, x1, r), None, fixed=True, extra=cyl_pts(O, dh, vin, x0, x1, r, half=False)))
+    out.append(M("rod", cyl_pts(O, dh, vin, rod_lo, rod_hi, ROD_R), None, fixed=True,          # whole rod (the 25 mm inside the sleeve too)
+                 extra=cyl_pts(O, dh, vin, rod_lo, rod_hi, ROD_R, half=False)))
+    rw = K.unit(k["r_arm"] - (k["r_arm"] @ dc["u2"])[:, None] * dc["u2"])                       # ring axis (arm frame): rotated by alpha about u2
+    rwW = K.unit(np.einsum("pij,pj->pi", F.RHG, rw))
+    ring = cyl_pts(k["C"] - RING_W / 2 * rwW, rwW, vin, 0.0, RING_W, dc["ring_ro"])
+    out.append(M("ring", ring, None, fixed=True, extra=cyl_pts(k["C"] - RING_W / 2 * rwW, rwW, vin, 0.0, RING_W, dc["ring_ro"], half=False)))
+    if "ch_foot" not in dc: dc["ch_foot"], dc["ch_full"] = cheeks(dc, True), cheeks(dc, False)
+    out.append(M("cheeks", F.HG(dc["ch_foot"]), None, fixed=True, extra=F.HG(dc["ch_full"])))
+    return out
+
+
+def cheeks(dc, foot=True):
+    """two 3 x 10 plates on the cuff carrying the U's outer pins (arm frame), feet on the cuff shell: each foot sample
+    sits CUFF_T over the q90 (over the bench poses) of the arm's own skin under it; plates rise to the pin level"""
+    C0, n, u2 = dc["C0"], dc["nC"], dc["u2"]; y = np.array([0.0, 1.0, 0.0]); g = np.arange(-CHEEK_L / 2, CHEEK_L / 2 + 1e-6, SP); pts = []
+    piv = C0 @ n                                                       # pin level (rod axis height from the humerus axis)
+    for sg in (-1, 1):
+        for tt in np.arange(0, CHEEK_T + 1e-6, 1.5):
+            for a in g:
+                P0 = C0 + sg * (dc["ring_ro"] + 0.5 + tt) * u2 + a * y; ax = (P0 @ y) * y; rd = K.unit(P0 - ax)
+                rf = dc["foot_r"](ax, rd) + CUFF_T
+                for hh in ([0.0] if foot else np.arange(0, max(0.0, piv - rf) + 1e-6, SP)):
+                    pts.append(ax + (rf + hh) * rd)
+    return np.array(pts)
+
+
+# ---- fit / collide / score ----------------------------------------------------------------------------------------
+def fit(B, mem, fit_idx, q):
+    """per-sample heights along G (quantile q over the fit poses), hub levels, ramps, climb limit -> {name: h (m,)}"""
+    Pi = fit_idx; fm = [m for m in mem if not m.fixed]; segs = []; I, Og, Dg = [], [], []
+    for m in fm:
+        n = m.X.shape[1]; segs.append(n); tmin = np.broadcast_to(np.asarray(m.tmin, float), (n,))
+        I.append(np.repeat(Pi, n)); Og.append((m.X[Pi] + tmin[None, :, None] * m.G[Pi]).reshape(-1, 3)); Dg.append(m.G[Pi].reshape(-1, 3))
+    R = K.requirement(B, np.concatenate(I), np.concatenate(Dg), t0=0.0, O=np.concatenate(Og)) if len(Pi) else None
+    h, o = {}, 0
+    for m, n in zip(fm, segs):
+        Rm = R[o:o + len(Pi) * n].reshape(len(Pi), n) + np.broadcast_to(np.asarray(m.tmin, float), (n,))[None]; o += len(Pi) * n
+        h[m.name] = K.quantile(Rm, q)
+    for nm in ("hub1", "hub2"): h[nm][:] = h[nm].max()                         # flat O20 disc at its level F
+    lv = dict(hub1=float(h["hub1"][0]), hub2=float(h["hub2"][0]))
+    for m in fm:
+        for jn, hub, dz in m.ramps:                                            # ends at a hub: height along its axis
+            ax = dict(J1="a1", J2="j2")[jn]; kv = mem[0].ax[ax][Pi]
+            c = np.abs(np.einsum("pmd,pd->pm", m.G[Pi], kv)).min(0)            # cos(angle from the hub axis), worst pose
+            near = np.arccos(np.clip(c, -1, 1)) * 70.0 < HUB_R + 2.0
+            h[m.name][near] = np.maximum(h[m.name][near], (lv[hub] + dz) / np.maximum(c[near], 0.5))
+        if m.name == "bar_cap" and "link1" in h:                               # K6 by construction: the bar passes OVER link 1
+            h[m.name] = over(m, h[m.name], [x for x in fm if x.name == "link1"][0], h["link1"], mem[0].ax["j2"], Pi)
+        if m.grid:                                                             # K5 climb <= 60 deg (raises only)
+            ns, nc = m.grid; R2 = h[m.name].reshape(ns, nc); x = np.arange(ns) * m.step; sl = math.tan(60 * D2R)
+            h[m.name] = (R2[None] - sl * np.abs(x[:, None, None] - x[None, :, None])).max(1).ravel()
+    return h
+
+
+def over(m, hm, o, ho, j2, Pi, gap=CLR_PARTS + 1.0, chunk=16):
+    """raise member m (rays from O) to >= o's top + gap wherever o passes under it in any fit pose (angular distance x
+    radius < 1 + 1 + gap); the J2 stack zone (HUB_R + 2 of the j2 axis) is left to the hub stack"""
+    need = np.zeros(len(hm)); thr = 2.0 + gap
+    for c0 in range(0, len(Pi), chunk):
+        P = Pi[c0:c0 + chunk]; Dm, Do = m.G[P].astype(np.float32), o.G[P].astype(np.float32)
+        dot = np.matmul(Dm, Do.transpose(0, 2, 1))                            # (k, m, n)
+        rr = np.minimum(hm[None, :, None], ho[None, None, :])
+        near = dot > 1 - 0.5 * (thr / rr) ** 2
+        zone = np.arccos(np.clip(np.abs(np.einsum("pmd,pd->pm", m.G[P], j2[P])), -1, 1)) * hm[None] > HUB_R + 2.0
+        near &= zone[:, :, None]
+        top = np.where(near, (ho + o.t + gap)[None, None, :], 0.0).max(2).max(0)
+        need = np.maximum(need, top)
+    return np.maximum(hm, need)
+
+
+def points(mem, h, layers=False):
+    out = {}
+    for m in mem:
+        if m.fixed: out[m.name] = m.X
+        else:
+            P0 = m.X + h[m.name][None, :, None] * m.G
+            out[m.name] = P0 if not layers else np.concatenate([P0, P0 + m.t / 2 * m.G, P0 + m.t * m.G], 1)
+    return out
+
+
+PAIRS = [("link1", "bar_cap"), ("link1", "bar_arm"), ("hub1", "bar_cap"), ("hub1", "bar_arm")] + \
+        [(a, b) for a in ("hub1", "link1", "hub2", "bar_cap") for b in ("sleeve", "ring", "cheeks", "rod", "boss")] + \
+        [("bar_arm", "ring"), ("bar_arm", "cheeks"), ("boss", "ring"), ("boss", "cheeks"), ("boss", "sleeve"), ("hub1", "hub2")]
+
+
+def collide(mem, h, take, kn):
+    """(P,) bool: some pair of non-adjacent parts closer than 1 mm (layered clouds through the thickness; 2 mm grid ->
+    + 1.0 mm sampling slack); hub stacks: link 1 / bar samples within HUB_R + 2 of the J2 axis are the joint itself"""
+    L = points(mem, h, layers=True); Mm = {m.name: m for m in mem}
+    for nm in ("hub1", "hub2"):                                                # hub bodies: disc layers to the crown
+        m = Mm[nm]; k_ = m.ax_self; L[nm] = np.concatenate([L[nm][:, :len(m.X[0])] + z * k_[:, None, :] for z in (0, 4, 8, 12.25)], 1)
+    for nm in ("sleeve", "ring", "rod", "boss", "cheeks"): L[nm] = Mm[nm].extra
+    hit = np.zeros(len(take), bool); j2 = kn.k["j2"]; O = kn.k["O"]; why = {}
+    lo = {n: L[n].min(1) for n in L}; hi = {n: L[n].max(1) for n in L}             # AABB prefilter per pose
+    for i in np.nonzero(take)[0]:
+        for a, b in PAIRS:
+            if np.any(lo[a][i] > hi[b][i] + CLR_PARTS + 1.0) or np.any(lo[b][i] > hi[a][i] + CLR_PARTS + 1.0): continue
+            A, Bp = L[a][i], L[b][i]
+            if {a, b} & {"bar_cap", "bar_arm"} and "link1" in (a, b):              # J2 stack zone exempt
+                ra = np.linalg.norm(np.cross(A - O[i], j2[i]), axis=1); rb = np.linalg.norm(np.cross(Bp - O[i], j2[i]), axis=1)
+                A, Bp = A[ra > HUB_R + 2], Bp[rb > HUB_R + 2]
+                if not len(A) or not len(Bp): continue
+            dmin = cKDTree(A).query(Bp, distance_upper_bound=CLR_PARTS + 1.0)[0].min()
+            if dmin < CLR_PARTS + 1.0: hit[i] = True; why[i] = (a, b); break
+    return hit, why
+
+
+def evaluate(B, p, verbose=False, cont=True):
+    p = dict(PARAMS, **p); F = K._F0; t0 = time.time()
+    kn = kin(B, F, p); ok = kn.ok.copy(); flips = 0
+    if cont: ok, flips = K.continuity_dense(B, F, lambda B_, F_, p_: kin(B_, F_, p_), p, ok)
+    mem = members(B, F, p, kn)
+    mem[0].ax = dict(a1=kn.k["a1"], j2=kn.k["j2"]); mem[0].ax_self = kn.k["a1"]; mem[1].ax_self = kn.k["j2"]
+    Pi = np.nonzero(ok)[0]
+    if len(Pi) < 3:
+        B.reset(); r = B.report(); r.update(closure=round(float(kn.ok.mean()), 4), flips=flips); return r, None
+    h = fit(B, mem, Pi, p["q"])
+    hit, why = collide(mem, h, ok, kn); take = ok & ~hit; Ti = np.nonzero(take)[0]
+    pts = points(mem, h); names = [m.name for m in mem]
+    allp = np.concatenate([pts[n][Ti] for n in names], 1)
+    d = K.dist_many(B, np.repeat(Ti, allp.shape[1]), allp.reshape(-1, 3)).reshape(len(Ti), -1)
+    ex = [m.extra[Ti] for m in mem if m.extra is not None]
+    hubw = []
+    for m in mem[:2]:                                                          # hub walls to the crown (contact only)
+        k_ = m.ax_self[Ti]; a, b = K.plane_frame(k_); ang = np.linspace(0, 2 * np.pi, 32, endpoint=False)
+        ring = HUB_R * (np.cos(ang)[None, :, None] * a[:, None, :] + np.sin(ang)[None, :, None] * b[:, None, :])
+        base = kn.k["O"][Ti] + h[m.name][0] * k_
+        hubw.append(np.concatenate([base[:, None, :] + ring + z * k_[:, None, :] for z in (0, 4, 8, 12.25)], 1))
+    E = np.concatenate(ex + hubw, 1); de = K.dist_many(B, np.repeat(Ti, E.shape[1]), E.reshape(-1, 3)).reshape(len(Ti), -1).min(1)
+    B.reset()
+    for j, i in enumerate(Ti): B.res[i] = d[j] if de[j] >= 0 else np.r_[d[j], de[j]]
+    r = B.report(); clip = np.array([B.kind[i] == "clip" for i in Ti], bool); good = (d.min(1) >= 0) & (de >= 0); o = 0; per = {}
+    for n in names:
+        s = pts[n].shape[1]; dm = d[clip & good, o:o + s]; o += s
+        per[n] = [round(float(((dm >= 2) & (dm <= 14)).mean()), 3) if dm.size else 0.0, round(float(np.median(dm)), 1) if dm.size else None, s]
+    cb = {}; o = 0
+    for n in names:
+        s_ = pts[n].shape[1]; cb[n] = int((d[:, o:o + s_].min(1) < 0).sum()); o += s_
+    cb["walls/full"] = int((de < 0).sum())
+    dc = design(B, F, p); kk = kn.k
+    r.update(per=per, contact_by=cb, closure=round(float(kn.ok.mean()), 4), flips=int(flips), collide=round(float(hit[ok].mean()) if ok.any() else 0, 4),
+             residual_mm=0.0, F1=round(float(h["hub1"][0]), 1), F2=round(float(h["hub2"][0]), 1), lam=[round(dc["lam_lo"], 1), round(dc["lam_hi"], 1)],
+             ring_ro=round(dc["ring_ro"], 1), beta_max=round(dc["beta_max"], 1), hC_skin=[round(dc["r_med"], 1), round(dc["r_out"], 1)],
+             why=dict(sing=int((~kk["sing_ok"]).sum()), U=int((kk["sing_ok"] & ~((np.abs(kk["alpha"]) <= p["u_lim"]) & (np.abs(kk["beta"]) <= p["u_lim"]))).sum()),
+                      slide=int(((kk["lam"] < dc["lam_lo"] - 1e-6) | (kk["lam"] > dc["lam_hi"] + 1e-6)).sum()), flip=int(flips), parts=int(hit.sum()),
+                      contact=int(sum(1 for i in Ti if B.res[i].min() < 0))),
+             secs=round(time.time() - t0, 1))
+    B._last = dict(kn=kn, mem=mem, h=h, pts=pts, take=take, ok=ok, hit=hit, why=why, d=d, de=de, Ti=Ti, names=names)
+    if verbose: print(json.dumps(r, default=str))
+    return r, B._last
+
+
+def metal(pose, frames, params, B=None, i=None):
+    """(k, 3) metal sample points of bench pose i (thorax frame) or None. The rigid undersides are fitted over the
+    whole bench, so B and i are required (pose / frames are kept for the swarm signature)."""
+    key = json.dumps(dict(PARAMS, **params), sort_keys=True)
+    if getattr(B, "_mkey", None) != key: evaluate(B, params); B._mkey = key
+    L = B._last
+    if not L["take"][i]: return None
+    return np.concatenate([L["pts"][n][i] for n in L["names"]])
+
+
+def setup(n_clip=60, n_ws=160):
+    B = K.bench(n_clip, n_ws); K._F0 = K.frames(B); return B
+
+
+def write_entry(rows, p, r):
+    rows.append(dict(k=len(rows), t=K.now(), params=p, **{x: r[x] for x in ("inband14", "inband10", "reach", "follow", "contact", "gap")},
+                     closure=r.get("closure"), why=r.get("why"), per=r.get("per")))
+    tmp = SWEEP_JSON + ".tmp"; json.dump(rows, open(tmp, "w"), indent=1); os.replace(tmp, SWEEP_JSON)
+
+
+def run_sweep(B, cfgs, rows, best=None):
+    for p in cfgs:
+        try: r, _ = evaluate(B, p)
+        except Exception as e: print("ERR", p, e, flush=True); continue
+        write_entry(rows, p, r)
+        print(f"[{rows[-1]['k']}] gap {r['gap']} reach {r['reach']} follow {r['follow']} ib14 {r['inband14']} ib10 {r['inband10']} contact {r['contact']} "
+              f"why {r.get('why')} {r.get('secs')}s  {p}", flush=True)
+        if best is None or r["gap"] < best[0]:
+            best = (r["gap"], p, r); K.log_event(f"offset-pointer-slip-sleeve new best gap {r['gap']} (reach {r['reach']}, follow {r['follow']}, in-band 14 {r['inband14']}, contact {r['contact']}) at {json.dumps(p)}")
+    return best
 
 
 if __name__ == "__main__":
     a = sys.argv[1:]; mode = a[0] if a else "check"
     nc = int(a[a.index("--n-clip") + 1]) if "--n-clip" in a else 60; nw = int(a[a.index("--n-ws") + 1]) if "--n-ws" in a else 160
-    B = CB.Bench(nc, nw); print("bench", B.mode, len(B.idx), flush=True)
-    if mode == "kin":
-        print(json.dumps(kin_scan(B, {}), indent=1))
-    elif mode == "check":
-        r, M = evaluate(B, {}); print(json.dumps(r, indent=1, default=str))
+    B = setup(nc, nw); print("bench", B.mode, len(B.idx), flush=True)
+    if mode == "check":
+        r, _ = evaluate(B, json.loads(a[1]) if len(a) > 1 and a[1].startswith("{") else {}, verbose=True)
+    elif mode in ("sweep", "refine"):
+        rows = json.load(open(SWEEP_JSON)) if os.path.exists(SWEEP_JSON) and "--resume" in a else []
+        best = min(((e["gap"], e["params"], None) for e in rows), key=lambda x: x[0]) if rows else None
+        if mode == "sweep":                                # coarse: centre offset, J1 axis, cuff height, underside quantile
+            cfgs = []
+            for o, a1, dpsi, q in itertools.product([0.0, 10.0, 20.0], ["spec", "hi", "post", "ant"], [0.0, -45.0, 45.0], [0.9, 0.95]):
+                cfgs.append(dict(PARAMS, o=o, a1_az=A1_DIRS[a1][0], a1_el=A1_DIRS[a1][1], dpsi=dpsi, q=q))
+        else:                                              # refine around the best: bar azimuth, cuff station / azimuth, cap end, O direction
+            b = dict(best[1]); cfgs = []
+            for k_, vals in dict(dpsi=[-60, -30, 30, 60], s=[160, 180, 220, 240], caz=[-40, -20, 20, 40], th_k=[25, 45, 55],
+                                 o_dir=list(O_DIRS), branch=[1], sing=[8, 16], hC=[b["hC"] - 2, b["hC"] + 2]).items():
+                for v in vals:
+                    c = dict(b)
+                    if k_ == "o_dir": c["o_az"], c["o_el"] = O_DIRS[v]
+                    else: c[k_] = v
+                    if c != b: cfgs.append(c)
+        best = run_sweep(B, cfgs, rows, best); print("BEST", best[0], json.dumps(best[1]))
