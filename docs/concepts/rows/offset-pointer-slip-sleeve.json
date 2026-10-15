@@ -5,7 +5,7 @@
  "family": "spherical 2R pointer + cuff twist",
  "active_dof": 3,
  "passive_dof": 3,
- "status": "dead",
+ "status": "screened",
  "t_ideated": null,
  "t_screened": "2026-10-15T19:01:17Z",
  "reach": 0.95,
@@ -14,11 +14,11 @@
  "inband10": 0.1703,
  "contact": 0.05,
  "gap": 71.15,
- "v_reach": null,
- "v_follow": null,
- "v_inband14": null,
+ "v_reach": 0.8125,
+ "v_follow": 0.95,
+ "v_inband14": 0.3733,
  "v_inband10": null,
- "v_gap": null,
+ "v_gap": 76.42,
  "n_configs": 114,
  "verdict": "dead, not worth a GPU sweep: the offset centre (the idea) is monotonically harmful (gap 88.6 at o 0 -> 152 at 5 mm -> 224 at 10 -> 250 at 20); at o 0 it is the cuff-sleeve-3r limit, and its bench best 71.15 is DEGENERATE (q 1: hub 2 327 mm, link 1 199 mm, bar cap 274 mm off the skin, only the cuff end in band); best non-degenerate 88.62 vs 68.93",
  "limiter": "(1) rod line O->C converges on O at ~15 deg to the arm: the rod clamp sinks ~0.27 mm per mm of slide travel into the deltoid (boss contact 11 poses at o 0, 139/220 at o 10); (2) the bar's run down the lateral arm (a quarter of all metal samples) is 0-4 % in band, median >= 32 mm, in every config: its roll is set by a1 x dh, not by the arm, so it must clear every axial rotation; (3) J2 hub 0-4 % in band (posterior-lateral cap filled by the elevated arm); red team: 11 across-body poses (plane >= 110) lose the cuff end inside the body, pinch 0.25 mm at the rod clamp (plane 122 elev 31 axial -80 flex 122)",
@@ -44,5 +44,7 @@
   "width": 12.0,
   "t_link": 3.0,
   "q": 1.0
- }
+ },
+ "audit": "Death refuted on the number, not on the idea. The 'best non-degenerate 88.62' (k86) was a coarse-grid artifact: the bar azimuth dpsi was swept only over {-45,0,45} at q .9/.95 and later refined around +45; dpsi 0 with q 0.97-0.98 gives 79.11 / 76.42 (reach .8125, follow .95, ib14 .3733, contact .15) with hub1 (median 16.7 mm) and link1 (13.9 mm) still near the skin. The degenerate/non-degenerate line does not hold: hub2 sits 104 mm out on its axis even in k86 and is 0-4 % in band in every config, so the gap curve over q is continuous 88.6 -> 79.1 -> 76.4 -> 71.15. No modelling bug or convention error found (closure, continuity, contact, sampling match the baseline; strap width 12 vs 8 moves the gap < 1). Still behind 68.93: the J2 hub (axis a1 x dh floats >100 mm) and the bar run (roll not tied to the humerus, 1-10 % in band) are the measured limiters; the centre offset itself stays harmful (not re-measured).",
+ "v_note": "audit Bench(60,160) fast: k86 + dpsi 0 + q 0.98 -> gap 76.42; q 0.97 -> 79.11; + a1 bvec(85,78) -> 75.09 (link1 floats); v_inband10 not printed by the audit run"
 }

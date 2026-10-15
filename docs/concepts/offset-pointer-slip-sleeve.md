@@ -104,3 +104,33 @@ surface) x travel; ~0.27 mm/mm at a 200 mm cuff); (b) a long rigid run down the 
 every axial rotation): put the twist joint high, so the part that runs along the arm is humerus-fixed, rather than
 at the cuff; (c) a q = 1 fit can "win" the gap by floating whole subassemblies - the bench should cap or penalise parts more than
 ~30 mm off the skin (a verifier check).
+
+## Audit
+
+An independent audit on Bench(60,160) with the fast grid cache, using the same model file and no code changes.
+
+- **No modelling bug and no convention error found.** The closed-form closure, K2 continuity, part clearance, contact
+  on hub walls and full cylinders, and ~1 pt / 4 mm2 sampling all match the baseline's conventions. Strap width 12 vs
+  the baseline's 8 moves the gap by less than 1 (88.62 -> 86.28).
+- **The 88.62 "best non-degenerate" number was a coarse-grid miss.** Around k86, the bar azimuth was only tried at
+  -45, 0 and 45 with q 0.9 and 0.95, and the q 0.98 / 1.0 refine was run around dpsi +45. Results from k86 with
+  dpsi 0:
+  - q 0.97: gap 79.11 (reach .78, follow .92, ib14 .44, contact .18).
+  - q 0.98: gap **76.42** (reach .8125, follow .95, ib14 .3733, contact .15). Hub 1 has a median of 16.7 mm and
+    link 1 13.9 mm, so the shoulder side is still near the skin.
+  - With J1 axis bvec(85,78): 75.09, but link 1 then floats.
+- **The degenerate / non-degenerate line does not hold.** Even in k86, the J2 hub sits 104 mm out along its axis and
+  is 0-4 % in band in every configuration. The gap falls continuously with q: 88.6 -> 79.1 -> 76.4 -> 71.15.
+- **Other one-at-a-time probes from k86** (none helps):
+  - dpsi -135, -90, 90, 135, 180 -> 234, 207, 88, 80, 258.
+  - hC 9 and 11 -> 375 and 313: the cuff end is buried.
+  - s 150 / 250 -> 375 / 92.
+  - q 0.9 -> 118.
+- **Verdict: the death is refuted on the number, not on the idea.** The best honest gap, 76.42, is within 10 of 68.93
+  but still behind it. The measured limiters are:
+  - the J2 hub, whose axis a1 x dh floats more than 100 mm;
+  - the bar run down the arm, at 1-10 % in band, because its roll is not tied to the humerus.
+
+  At o = 0 this is still the cuff-sleeve-3r limit, and the centre offset that gives the morphology its name stays
+  harmful. A GPU sweep is worth it only for the o = 0 / dpsi 0 / q 0.97-0.98 region, and only together with a fix for
+  the J2 hub.
