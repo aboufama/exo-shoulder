@@ -15,7 +15,79 @@ or cables. The main case is therefore a fully passive chain on **high-quality ro
 bearings are the comparison. The motor-armature and servo cases built earlier remain as `--cases` options and are not in
 the results below.
 
-RESULTS_PLACEHOLDER
+## 1. Answer
+
+**MVP1 (passive, rolling bearings mu_eff 0.005, tau0 0.001 N.m), all 8 clips, worst clip per design:**
+
+| design | interaction moment about GH, peak (1x / 2x speed) | cuff force peak (1x / 2x) | mean cuff pressure | cuff twist | joint speed peak (x arm) | spare J1 off its planned path | links touch (beyond the plan's own overlap) | moves freely? |
+|---|---|---|---|---|---|---|---|---|
+| band_r14_3r_s1351_1 (3R) | **0.05 / 0.10 N.m** | 0.2 / 0.4 N | 0.035 kPa | 1.2 / 1.8 deg | 242 deg/s (1.6x); 504 at 2x | - | **none** (no adjacent pair ever within 2 mm) | **yes** |
+| band_r14_4r_s1354_0 (4R) | 0.13 / 0.24 N.m | 0.6 / 1.1 N | 0.08 kPa | 2.0 / 2.9 deg | 318 deg/s (2.9x) | **63-100 deg in every clip** | l2-l3, 1-5 N (10 N at 2x), most of every clip | **no**: the spare falls |
+| cad_r13_n4_s1343_1 (reference 4R) | **2.3 / 2.4 N.m** (Raise overhead) | 10.5 / 10.8 N | 1.5 kPa | 11.5 deg | 238 deg/s (3.4x) | 9-45 deg | l1-l2, l2-l3, up to **121 N** (Raise overhead, Wave) | **no**: it jams on its own links |
+
+1. **The 3R works as a passive chain on good rolling bearings.** The wearer drives it through every clip with at most
+   0.05 N.m about the shoulder at real speed (0.10 N.m at 2x), 0.2-0.4 N at the cuff, 0.035-0.065 kPa of mean cuff
+   pressure (0.5 % of the 7.5 kPa sustained budget left after the strap), no stall that misses 10 deg of joint travel,
+   never a link touching another.
+   That is 20x under the proposed "not felt" limit (1 N.m). Friction is not even visible at this level: the same motion
+   with zero friction gives 0.05 / 0.09 N.m. What the wearer carries is the links' own weight (0.03-0.05 N.m; 89 g of
+   Ti proxies) and, at 2x speed, their inertia (up to 0.11 N.m in the worst jerk, Reach back pocket's held-to-resume
+   step). Sealed bearings (tau0 0.005 N.m) give 0.07 N.m; the cuff stiffness (1-5 N/mm) does not change the moment and
+   moves the twist between 0.8 and 4 deg.
+2. **A passive 4R does not stay on the path every geometric judge assumes.** Its spare degree of freedom (J1) has no
+   stiffness: with free bearings the chain folds under its own weight within 0.1 s of standing still (54 deg in the band
+   4R, 19 deg in the reference) until two links rest on each other; with gravity switched off it still drifts 10-37 deg
+   once the arm moves (self-motion). R1 / R2 / R6 for the 4R designs judge a configuration the unpowered chain never
+   takes. With plain bearings friction holds it better but still not on the plan (per clip 11-78 deg in the band 4R,
+   19-45 deg in the reference).
+3. **The reference design jams kinematically.** After the spare has dropped, l2 runs into l3 in Raise overhead and Wave:
+   up to 121 N of link-on-link contact, and the arm needs 2.3 N.m about GH (10.5 N at the cuff) to push through. The
+   friction-free and gravity-free run needs the same 2.3 N.m, so this is geometry (the chain folding into itself), not
+   friction. It is the jam the user asked about, but caused by the free spare, not by an action angle.
+4. **With plain bearings the action angle matters, as the user suspected** (load-dependent friction, red team G6):
+
+   | mu_eff (tau0 0.05) | 3R peak about GH (tilt about GH / about the bearing) | 3R clips that lock | band 4R | reference 4R |
+   |---|---|---|---|---|
+   | 0.06 (washers carry the tilt, mu 0.06) | 0.31 / 0.30 N.m | 0 | 0.41 / 0.43 N.m | 3.0 / 2.7 N.m |
+   | 0.15 | 0.63 / 0.64 N.m | 0 | 0.49 / 0.57 N.m | 6.7 / 9.5 N.m |
+   | 0.25 | **3.1 / 4.2 N.m**, 14 / 19 N (Wash) | 0 | 0.86 / 1.87 N.m | **47 / 51 N.m, 5-6 of 8 clips lock** |
+   | 0.37 (worn: the sleeve carries the tilt) | **29 / 101 N.m**, 136 / 550 N | **2 / 4** (Wash, Reach back pocket; + Raise overhead, Wave) | 49 / 98 N.m, 1-2 lock | 74 N.m, all 8 lock |
+
+   "Lock" = the arm would need > 10 N.m about GH or > 150 N at the cuff (ISO/TS 15066). The reference's numbers include
+   its 2.3 N.m kinematic jam (item 3) and its larger friction amplification (up to 5.3, cond(U) up to 5.0). The 3R stays
+   under 1 N.m at mu_eff 0.15 (its cuff twists 8 deg),
+   near-locks in Wash at 0.25 (rt_wedge.py: self-locking from mu_eff 0.215 on the planned path; the soft cuff lets the
+   chain twist off the locking configuration, so the dynamics needs 3-4 N.m instead of infinity) and locks at 0.37. Once
+   wedged it stays wedged when the arm stops: the cuff's own restoring moment loads the bearings (Reach back pocket at
+   0.37: 83 % of its frames over 10 N.m). The tilt taken about the bearing centre (the cuff force times the hub's
+   distance from GH adds to the tilt, the red team's R x F term) makes it worse at high mu_eff (101 vs 29 N.m).
+5. **Constant friction (the brief's sweep), passive, 3R:** 0.05 N.m per joint -> 0.23 N.m about GH, 1.0 N; 0.2 -> 0.85 N.m,
+   3.9 N; 0.5 -> 2.0 N.m, 9.1 N (worst: Wash opposite shoulder, friction amplification 4.3-4.8 at cond(U) 3.1). The same at
+   2x speed (friction-dominated): of the 0.85 N.m, 0.05 is gravity + inertia, 0.80 friction x amplification.
+6. **Cuff twist is the soft spot of any friction.** The cuff's torsional stiffness about the humerus is only 0.03 N.m/deg
+   (Schiebl 2025), and every design's resistance has a component about the humerus axis (JN's axis W is 56-84 deg off
+   it). With plain bearings the cuff turns 5 / 17 / 37 deg on the arm (0.05 / 0.2 / 0.5 N.m friction), at a sustained
+   axial moment of only 0.17-1.1 N.m; the chain then lags the arm by that much (the "stalls" in dynamics.json are this
+   lag). A stiffer torsional path (x10, as the user's forearm cuff gives with the elbow bent) cuts it to 1.9 deg. With
+   rolling bearings it is 1-3 deg (3R / band 4R).
+7. **Joint speeds and accelerations** stay modest at real speed: up to 242-318 deg/s (1.6-3.4x the arm's angular speed,
+   highest in Wave, the fastest clip), 6,000-38,000 deg/s^2; 2x speed doubles the speeds and quadruples the
+   accelerations (3R: 504 deg/s, 5.6x in Wave). Nothing comes near a chain singularity (cond(U) <= 3.5 for the 3R, <= 5.0
+   for the reference). The clips' held-to-resume steps (the geometric pipeline holds the arm where the exo cannot follow,
+   then resumes within 4 deg in 0.1 s) are real accelerations in these clips and inflate the 2x inertia terms.
+8. **All-day cuff pressure is not the constraint.** Mean pressure on the cuff's 68 cm2 from the chain: 0.035 kPa (3R),
+   0.08 kPa (band 4R), 1.5 kPa (reference; 1.8 kPa with its 154 g of arm-side parts hanging on the cuff), against the
+   7.5 kPa the 14 kPa budget leaves after the strap preload. It is exceeded only where plain bearings wedge (3R at
+   mu_eff 0.37: 20-81 kPa mean).
+9. **No motors (MVP1).** The motor-armature case (0.03 kg m^2 reflected per joint) built before the scope change gave
+   2.5-5.5 N.m and 11-25 N for the 3R; it is kept only as `--cases motor`.
+
+**Verdict for the lead.** For an unpowered MVP1 the 3R is the design that can actually be driven by the arm: on
+rolling bearings it is transparent (<= 0.10 N.m, <= 0.4 N, <= 1.8 deg twist, no contact); on plain bearings the moment
+stays under the 1 N.m felt limit up to mu_eff ~0.15 but the soft cuff twists 6-8 deg, and it wedges in Wash beyond ~0.22,
+i.e. it needs bearings whose tilt is carried by rolling elements (or, second best, the thrust washers), never by a worn
+sleeve. Both 4R designs need something to hold the spare DOF (a
+detent, a spring, or a motor) before their geometric scores mean anything; the reference additionally jams on its links.
 
 ## 2. Model
 
@@ -23,7 +95,7 @@ RESULTS_PLACEHOLDER
 |---|---|---|
 | frame | body-rig thorax frame, x anterior, y up, z right, origin = right GH centre; gravity -y (standing) | `pipeline/avg/body_pose.py` |
 | scapula + base | base body on a ball joint at GH, driven along the rig's scapula law `scap(elev)` by feed-forward + PD on a 1000 kg m^2 armature: the chain sees the base's real angular velocity and acceleration, the base does not feel the chain. The base part is rigid on it (the user's scapula handler is separate). The law's 20 deg kink (`max(0, elev - 20)`) is rounded over 1.5 deg (softplus); otherwise the base would get an angular-velocity step | `body_pose.scap` |
-| links | serial hinges J1..J(N-1) with axes through GH, built from `design.json` exactly as `band_impl.chain()` (b = bvec(az, el), arcs a, closure branch); body frames = the exo.glb group frames | max 0.016 deg from every frame's G in clips.json (all three designs) |
+| links | serial hinges J1..J(N-1) with axes through GH, built from `design.json` exactly as `band_impl.chain()` (b = bvec(az, el), arcs a, closure branch); body frames = the exo.glb group frames | <= 0.024 deg from every frame's G in clips.json (all three designs) |
 | link mass | trimesh mass properties of the L1 meshes per motion group (welded, every component closed): Ti-6Al-4V 4.43 g/cm3; iglidur 1.46; magnets 7.5; PCB 1.85; steel screws 7.9; AlSi10Mg 2.67; 7075 2.81; user parts otherwise 2.8 | band proxies carry no bearing hardware (see limits) |
 | arm | the humerus follows the clip's followed pose `p` (the same frames every other judge uses) kinematically; the 30 fps poses are piecewise linear between 10 fps samples, so the path is a PCHIP through the clip's knots (C1, no overshoot, finite accelerations). Held frames hold the arm | `clips.json` |
 | cuff | the arm-side member at JN (hinge about W) is joined to the humerus bone by a 6-axis spring-damper at the cuff centre on the humerus axis, 200 mm from GH (the user's upper-arm cuff spans 165-246 mm): 3.5 N/mm across the arm, 2.1 N/mm along it, 0.20 N.m/deg bending, **0.03 N.m/deg torsion about the humerus**; damping 20 N.s/m, 0.1 / 0.02 N.m.s/rad (assumed) | Schiebl et al. 2025 medians (2.1-4.5 N/mm, 0.18-0.22 and 0.03 N.m/deg; 9 cm brace at 65 mbar); Langlois et al. 1.1-2.2 N/mm (soft cuff, 0-100 mmHg) |
@@ -63,7 +135,20 @@ once wear lets the 4 mm sleeve carry it (rt_wedge.py). The constant 0.2 and 0.5 
 
 ### 3.2 Validation
 
-VALIDATION_PLACEHOLDER
+All in `judge/test_dynamics.py` (PASS, ~40 s with `--fast`) and in each design's `dynamics.json` (`validation`,
+`validation_load_friction`).
+
+| check | case | result |
+|---|---|---|
+| Coulomb friction, analytic | single hinge driven at 0.01 and 1 rad/s through a spring, 0.2 N.m | 0.20000 N.m at both speeds (default MuJoCo settings: 0.0019 / 0.19) |
+| inertia, analytic | constant 5 rad/s^2, I_axis 4.5e-4 kg m^2 | spring torque 0.20225 = I alpha + friction 0.20225 |
+| breakaway | 0.15 N.m against 0.2 N.m | moved 3e-17 rad |
+| load-dependent friction, analytic | COM 40 mm along the axis: gravity tilt couple 0.196 N.m, tau0 0.02, mu 0.25 | mean spring torque over a turn 0.06905 = tau0 + mu x tilt 0.06905 |
+| **chain vs transmission.py** (the brief's check) | 3R band_r14_3r_s1351_1, x0.25 speed, no gravity, cuff x20 stiffer, 0.05 N.m on every joint; \|M_GH\| / friction against transmission.py's friction amplification on its own 10 fps frames | **156 frames: median error 0.09 %, p95 0.49 %, max 0.75 %**; 0 frames with a different joint-rate sign pattern. Excluded: held frames, frames within 0.15 s of a joint-rate reversal or with a joint below 5 % of the fastest one (friction is set-valued there) |
+| 4R, J1 imposed on the plan (servo as a numerical device) | band 4R / reference, same conditions; reference = the exact quasi-static moment of the three passive joints, U_p^-T sgn(qdot) | 48 frames: median 0.04 %, p95 0.14 %, max 0.54 % / 29 frames: median 0.02 %, p95 0.34 %, max 0.49 %. transmission.py's N = 4 number (least squares over all four joints, no exact equilibrium) differs from this by -49 % to +195 % (median 0.3 %): it is not a physical value for a 4R |
+| **load-dependent friction vs rt_wedge.py** | 3R, x0.25, no gravity, cuff x20, tau0 0.05 N.m, tilt about GH (rt_wedge's model), mu_eff 0.005 / 0.15 / 0.25 / 0.37 | frames well clear of a lock (tan alpha* >= 1.2 mu): 452 frames, error vs the exact quasi-static solution of u_i.M = s_i (tau0 + mu \|M_perp,i\|): median 0.12 %, p95 1.1 %. Frames rt_wedge.py calls locked (tan alpha* <= mu): 137, the dynamics needs a median **89x** the frame's constant-friction moment to drag the chain (a few already-dragged frames lower). Lock onset: 8 of 10 clip / mu cases within 0.2 s (Wash at 0.25: rt_wedge's first locked frame 48, the dynamics passes 10x at 42 as the moment diverges approaching it; Walking arm swing at 0.25 approaches but never reaches lock and passes 10x anyway; Reach a high shelf at 0.37: 30 vs 39) |
+| kinematics | this judge's chain (from design.json) vs every frame's G in clips.json | <= 0.016 deg (band designs), 0.024 deg (reference) |
+| contact reference point | `cfrc_int` vs a static hinge by hand | equal to 4 digits once referenced at `subtree_com[root]` |
 
 ## 4. Proposed thresholds
 
@@ -75,7 +160,26 @@ VALIDATION_PLACEHOLDER
 
 ## 5. Limits
 
-LIMITS_PLACEHOLDER
+- **One cuff.** The interface is the upper-arm cuff alone. The user's forearm cuff, behind the elbow hinge, also resists
+  humeral rotation when the elbow is bent (x10 torsional stiffness cuts the twist from 17 to 1.9 deg at 0.2 N.m) and
+  shares the bending load; upper-cuff forces are therefore upper bounds, the moment about GH is unchanged.
+- **Linear tissue.** Schiebl's medians, linearised; the real curves stiffen (exponential), so small loads see a softer
+  cuff (more twist) than modelled. Damping is assumed. The interface is the same for every design.
+- **No skin.** The chain can pass through the body; a 4R that has folded under gravity would in reality rest on the
+  skin (R2 is not re-run on the dynamic path; that is the red team's R19 "loaded fit").
+- **L1 masses.** The band designs' proxies have no bearing hardware; two 10 mm deep-groove bearings per joint add
+  ~ 8-12 g and ~ 5e-5 kg m^2 per joint about GH (the 3R's links are 1.5e-4 / 4.5e-4 kg m^2), not enough to change the
+  verdict. Whether such bearings fit the 23 x 10.5 mm hub (docs/HARDWARE.md) is a CAD question this judge does not ask.
+- **Primitive contact.** Cylinders and capsules from the L1 meshes; they overlap their neighbours near the joints by up
+  to 4 mm where the exact geometry (R6) has <= 0.8 mm (reference). Those pairs are reported as planned overlap and taken
+  out of the dynamic contact; a drifting 4R could reach them at other angles. Impact forces depend on the soft contact
+  (solref 4 ms).
+- **Girdle and base.** The base follows the rig's scapula law (2-3x less girdle motion than the literature,
+  docs/research/gh_translation_literature.md) rigidly; base slip on the skin is R10's question.
+- **Clips.** Eight synthetic clips at 1x and 2x, the followed motion `p` (held frames hold the arm); real motion is
+  faster and more varied (G9). The 4R results start from the planned configuration of frame 0.
+- **Friction law.** Single Coulomb coefficient (no stiction peak, no Stribeck); the plain-bearing tau0 (0.05 N.m) and
+  the rolling tau0 (0.001 N.m) are estimates, the latter checked at 0.005 (0.07 N.m).
 
 ## 6. How to run
 
