@@ -4,30 +4,30 @@
   "title": "Concept bench morphologies",
   "description": "One row per morphology in the swarm's catalogue: status, the agent's claimed bench numbers, the verifier's re-measured numbers (v_), its best sweep configuration so far, and the 3R baseline once (is_baseline). Built from docs/concepts/catalogue.json, families.json, rows/*.json and sweeps/*.json.",
   "file": "data/morphs.json",
-  "sha256": "fb2360f68e43ef67e31b820ca7a5ec9542793589a7d9c6b22bfa7b6ef35375c5",
+  "sha256": "42cf4d9d2f30ab02a10c1651db353b810e4c1600f92d86dcccb9b9fbaea9f8a9",
   "rows": 81,
-  "bytes": 76882,
-  "updated": "2026-10-15T19:44:33Z"
+  "bytes": 79635,
+  "updated": "2026-10-15T21:32:54Z"
  },
  {
   "id": "sweeps",
   "title": "Concept bench sweeps",
   "description": "Every configuration a morphology agent evaluated on the concept bench, with its time, gap, its morphology's best gap so far (best_gap) and the record over all morphologies so far (record_gap); passed_over marks a configuration its agent measured before its claimed row and rejected (better than the claim), which counts for no best. Built from docs/concepts/sweeps/*.json.",
   "file": "data/sweeps.json",
-  "sha256": "3add6ebd7ead2e34d8861516365341f0d10d2eb04a6b6acf34c3d80690ca9e69",
-  "rows": 2503,
-  "bytes": 605173,
-  "updated": "2026-10-15T19:44:33Z"
+  "sha256": "bd1eba647614632d06711404e6b5f496f4f778ed89e47d78a881fa5f70e7a15d",
+  "rows": 2735,
+  "bytes": 662992,
+  "updated": "2026-10-15T21:32:54Z"
  },
  {
   "id": "cad",
   "title": "Built CAD judge results",
   "description": "One row per judged design and requirement: value, threshold and pass from the outside judges, timed by the judge output (score files: the earliest of their commit, their file time and the first commit whose docs report the design; scorecard-only values: the scorecard's commit). Built from tools/judged_history.py, judge/scorecard.json files and judge/requirements.json.",
   "file": "data/cad.json",
-  "sha256": "ce933eba5ea4ba2275754beed6f911931591a209aadde495a09a65ca44d1b793",
-  "rows": 136,
-  "bytes": 41537,
-  "updated": "2026-10-15T18:33:51Z"
+  "sha256": "6803a400b66170d2dccb1d627bfda5c434229f033a24ba285abeff5f2936fa62",
+  "rows": 150,
+  "bytes": 46106,
+  "updated": "2026-10-15T21:32:54Z"
  },
  {
   "id": "gpu_evals",
@@ -54,20 +54,20 @@
   "title": "Requirement board",
   "description": "Latest status of R1-R17 (with R1-aim and R5-aim) for the best judged 3-DOF design (most passes on its scorecard, then R1), with the best value any 3-DOF design reached under the current judging rules. Built from judge/scorecard.json files and judge/requirements.json.",
   "file": "data/reqs.json",
-  "sha256": "1e02a98e8872d473e887af6bfc7685643ec501c045a9afb97cc46586b59708ea",
+  "sha256": "245b758ea5811128451f4064b0048e7e44015a1357e3f0046b91784cfa5e6b8b",
   "rows": 19,
-  "bytes": 8006,
-  "updated": "2026-10-15T18:33:51Z"
+  "bytes": 7937,
+  "updated": "2026-10-15T21:32:54Z"
  },
  {
   "id": "events",
   "title": "Event log",
   "description": "What happened and when: the swarm's own log (docs/concepts/events.jsonl), one milestone per judged design and every new built-CAD R1 record (from the judge outputs).",
   "file": "data/events.json",
-  "sha256": "4eebcd61a7951c0fd79d871310da0cae5f5e7899b88aacfc1b627de598e465ed",
-  "rows": 197,
-  "bytes": 59413,
-  "updated": "2026-10-15T19:44:33Z"
+  "sha256": "75a824b1e9bb3d4faecf81b1f12cf945769ffc3a03d4daecc41c86b30d956a69",
+  "rows": 215,
+  "bytes": 65128,
+  "updated": "2026-10-15T21:32:54Z"
  },
  {
   "id": "spend",
@@ -84,19 +84,19 @@
   "title": "Arm reach in 3-D",
   "description": "One row per built design and everyday arm pose of the R16 workspace judge: where the upper arm points and whether the built design reaches it, with the reason if not. Built by tools/coverage3d.py from judge/workspace.json files (newest 8 designs).",
   "file": "data/cov3d.json",
-  "sha256": "65fa40168fed8cf8a668b293ff9150ff4d4f051c226114598c2fca51ab59910b",
-  "rows": 448,
-  "bytes": 154861,
-  "updated": "2026-10-15T18:02:06Z"
+  "sha256": "7080e6f87984250452b0f1891e8bf5d8a6e2d575ffe076e49f2c12ea103c67ef",
+  "rows": 568,
+  "bytes": 199150,
+  "updated": "2026-10-15T21:32:54Z"
  },
  {
   "id": "meta",
   "title": "Data build info",
   "description": "When tools/dash_build.py last gathered the data, the repo commit, and any warnings it printed.",
   "file": "data/meta.json",
-  "sha256": "87724547f088ac32a77921e2e3ba87d67b8522dc0a990fea2364f94db14aa1a1",
+  "sha256": "1ba6c3eaf6f10baa54fc63c7e53d961cce8ab68cb280c50f5340989c6ac6ab91",
   "rows": 1,
   "bytes": 85,
-  "updated": "2026-10-15T19:44:33Z"
+  "updated": "2026-10-15T21:32:54Z"
  }
 ]
