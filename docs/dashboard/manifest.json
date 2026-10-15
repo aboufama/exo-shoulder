@@ -1,0 +1,102 @@
+[
+ {
+  "id": "morphs",
+  "title": "Concept bench morphologies",
+  "description": "One row per morphology in the swarm's catalogue: status, the agent's claimed bench numbers, the verifier's re-measured numbers (v_), its best sweep configuration so far, and the 3R baseline once (is_baseline). Built from docs/concepts/catalogue.json, families.json, rows/*.json and sweeps/*.json.",
+  "file": "data/morphs.json",
+  "sha256": "b77d18183e73647b7b1bc585c6dec1dc9d17621b40c21550c04d2da13f390189",
+  "rows": 80,
+  "bytes": 59290,
+  "updated": "2026-10-15T18:18:07Z"
+ },
+ {
+  "id": "sweeps",
+  "title": "Concept bench sweeps",
+  "description": "Every configuration a morphology agent evaluated on the concept bench, with its time, gap, its morphology's best gap so far (best_gap) and the record over all morphologies so far (record_gap). Built from docs/concepts/sweeps/*.json.",
+  "file": "data/sweeps.json",
+  "sha256": "372a8a092e84d422c41bb3ed39b5125ca0914a61ddf7ef973656386d7634cd76",
+  "rows": 1065,
+  "bytes": 235936,
+  "updated": "2026-10-15T18:18:07Z"
+ },
+ {
+  "id": "cad",
+  "title": "Built CAD judge results",
+  "description": "One row per judged design and requirement: value, threshold and pass from the outside judges, timed by the judge output (score files: the earlier of commit and file time; scorecard-only values: the scorecard's commit). Built from tools/judged_history.py, judge/scorecard.json files and judge/requirements.json.",
+  "file": "data/cad.json",
+  "sha256": "1c8149ba76b483d39b046026dce837af61291ae872211e163ce6b6cb7549a158",
+  "rows": 136,
+  "bytes": 41553,
+  "updated": "2026-10-15T18:02:06Z"
+ },
+ {
+  "id": "gpu_evals",
+  "title": "GPU evaluator detail runs",
+  "description": "Every GPU band-evaluator detail evaluation of a search candidate (in-band 14 mm, follow, workspace share, overhead follow). Time is the git commit that added the result file, not the run itself. Built from pipeline/conformal/gpu_client/band_eval_*.json via tools/judged_history.py --evals.",
+  "file": "data/gpu_evals.json",
+  "sha256": "d22fa37d9ff2f8394457c0a1b7002340bb584c2379e1d74a5f79b874d20b6bfd",
+  "rows": 101,
+  "bytes": 20586,
+  "updated": "2026-10-15T18:02:06Z"
+ },
+ {
+  "id": "gpu_searches",
+  "title": "GPU band searches",
+  "description": "One row per GPU search job: its final best fitness, follow, generations, evaluations and seconds. Time is the git commit that added the result file. Built from pipeline/conformal/gpu_client/band_search_*.json.",
+  "file": "data/gpu_searches.json",
+  "sha256": "aa29624940d9c5c20faeefab64334f0f728c23762e43e80ae0fc2c97516effc1",
+  "rows": 87,
+  "bytes": 25134,
+  "updated": "2026-10-15T18:02:06Z"
+ },
+ {
+  "id": "reqs",
+  "title": "Requirement board",
+  "description": "Latest status of R1-R17 (with R1-aim and R5-aim) for the best judged 3-DOF design (most passes on its scorecard, then R1), with the best value any 3-DOF design reached under the current judging rules. Built from judge/scorecard.json files and judge/requirements.json.",
+  "file": "data/reqs.json",
+  "sha256": "2496acb2897a649288222aa66fc8b372ff99722e59d6a54173b621aee81a2f49",
+  "rows": 19,
+  "bytes": 7993,
+  "updated": "2026-10-15T18:02:06Z"
+ },
+ {
+  "id": "events",
+  "title": "Event log",
+  "description": "What happened and when: the swarm's own log (docs/concepts/events.jsonl), one milestone per judged design and every new built-CAD R1 record (from the judge outputs).",
+  "file": "data/events.json",
+  "sha256": "c3835d3ec504012aa218f8df9c243e56f6a068396d0d777fb78111980e27cec0",
+  "rows": 79,
+  "bytes": 21130,
+  "updated": "2026-10-15T18:18:07Z"
+ },
+ {
+  "id": "spend",
+  "title": "GPU spend log",
+  "description": "RunPod balance and cumulative spend at each logged audit. Built from docs/RUNPOD_COSTS.md (audit rows only).",
+  "file": "data/spend.json",
+  "sha256": "e7459c2984c5f36a05a01ea5aae64af3555fc87b0d76a141deda0dd56e71b31e",
+  "rows": 5,
+  "bytes": 437,
+  "updated": "2026-10-15T18:02:06Z"
+ },
+ {
+  "id": "cov3d",
+  "title": "Arm reach in 3-D",
+  "description": "One row per built design and everyday arm pose of the R16 workspace judge: where the upper arm points and whether the built design reaches it, with the reason if not. Built by tools/coverage3d.py from judge/workspace.json files (newest 8 designs).",
+  "file": "data/cov3d.json",
+  "sha256": "65fa40168fed8cf8a668b293ff9150ff4d4f051c226114598c2fca51ab59910b",
+  "rows": 448,
+  "bytes": 154861,
+  "updated": "2026-10-15T18:02:06Z"
+ },
+ {
+  "id": "meta",
+  "title": "Data build info",
+  "description": "When tools/dash_build.py last gathered the data, the repo commit, and any warnings it printed.",
+  "file": "data/meta.json",
+  "sha256": "a4a5ecf88f0d85f0ab598dbbd3bc4241bc2c1e7da1e54b66271c3b585ea42127",
+  "rows": 1,
+  "bytes": 85,
+  "updated": "2026-10-15T18:18:07Z"
+ }
+]

@@ -1,48 +1,53 @@
-"""Datasets for the progress dashboard: the morphology swarm (bench numbers, optimisation traces, verifier checks) and
-the built-CAD outside-judge history. Nothing is re-measured here; this only gathers what the swarm and the judges wrote.
+"""Datasets for the progress dashboard (docs/DASHBOARD.md): every benchmark over time, gathered from what the swarm, the
+judges and the GPU searches already wrote. Nothing is re-measured here.
 
-    python3 tools/dash_build.py [--out DIR]             # real data from the repo -> DIR/<dataset>.json
-    python3 tools/dash_build.py --sample [--out DIR]    # SAMPLE data for the page's local test harness only (never publish)
+    python3 tools/dash_build.py [--out docs/dashboard/data] [--manifest docs/dashboard/manifest.json]
 
-Datasets (one JSON list of row objects each):
-  morphs  one row per morphology: docs/concepts/catalogue.json (ideated entries) < docs/concepts/families.json (legacy
-          rows incl. the baseline) < docs/concepts/rows/<id>.json (the swarm's own rows override by id)
-  sweeps  docs/concepts/sweeps/<id>.json: one row per evaluated configuration, with best_gap (best gap so far)
-  judged  tools/judged_history.py (built CAD, the real requirements)
-  events  docs/concepts/events.jsonl + the older event history (docs/concepts/events_history.json, else --events-old)
-  reqs    the 19 requirements' best status over the judged 3-DOF designs (scorecards + judged history), with the time
-          the judging rules last changed for it (RULES below, or a 'measurement' event carrying "affects": [req ids])
-  cov3d   the 3-D "where the arm can go" poses of built designs: tools/coverage3d.py (newest 8 designs; --cov3d copy
-          only if that fails)
-  meta    one row: when this build ran (built_at), the repo head, and any warnings
-A dataset that comes out empty where its file already holds rows (a failed subprocess) keeps the old file, with a WARNING.
-GAP (the bench's single ranking number, lower is better, 0 = every bench target met):
+Writes one JSON file per dataset (an array of row objects, sorted, so a file's sha256 changes only when its data does)
+and the manifest [{id, title, description, file, sha256, rows, bytes, updated}]. After a build, the lead uploads only
+the files whose sha256 changed (compare with the manifest of the last upload) and updates those datasets' url/updated.
+
+Datasets (id: sources -> builder):
+  morphs        concept bench, one row per morphology: docs/concepts/catalogue.json < families.json < rows/<id>.json,
+                plus each morphology's best sweep configuration (sweeps/<id>.json)                   -> morphs()
+  sweeps        concept bench, every configuration a morphology agent evaluated, with its time, its morphology's best
+                gap so far and the overall record so far (all morphologies)                         -> sweeps()
+  cad           built-CAD outside judges, long form: one row per (judged design, requirement) with value, threshold and
+                pass: tools/judged_history.py (score.json, score_14mm.json, judge/*.json) + judge/scorecard.json,
+                thresholds from judge/requirements.json                                              -> cad()
+  gpu_evals     GPU band-evaluator DETAIL evaluations: tools/judged_history.py --evals (time = the commit that added
+                the result file)                                                                     -> gpu_evals()
+  gpu_searches  GPU band searches, one row per search job: pipeline/conformal/gpu_client/band_search_*.json (time = the
+                commit that added the file)                                                          -> gpu_searches()
+  reqs          requirement board: R1-R17 + R1-aim + R5-aim for the best judged 3-DOF design (most passes on its
+                scorecard, then R1), with the best any 3-DOF design reached                          -> reqs()
+  events        docs/concepts/events.jsonl + one milestone per judged design (its judge time) + every new built-CAD R1
+                record                                                                               -> events()
+  spend         GPU spend from the audit log in docs/RUNPOD_COSTS.md                                 -> spend()
+  cov3d         the 3-D "where the arm can go" poses of the newest built designs: tools/coverage3d.py -> cov3d()
+  meta          one row: when this build ran, the repo head, warnings                                -> main()
+
+GAP (the concept bench's single ranking number, lower is better, 0 = every bench target met):
   gap = 100 * (max(0, 0.90 - inband14) + max(0, 0.95 - follow) + max(0, 0.90 - reach)) + 100 * contact
-Missing inputs give empty lists, never a crash."""
-import argparse, datetime as dt, glob, json, os, random, re, shutil, subprocess, sys
+A dataset with no rows is written as one marker row {empty: true} (the dashboard runtime refuses a file without
+rows); the page drops it. Missing or malformed inputs are skipped with a WARNING (listed in meta), never a crash. A subprocess-built dataset that
+comes out empty where the old file holds rows keeps the old file."""
+import argparse, datetime as dt, glob, hashlib, json, os, re, subprocess, sys
 
 REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-# session scratch paths (override with DASH_SCRATCH / DASH_OUT / DASH_EVENTS_OLD / DASH_COV3D in another session)
-SCRATCH = os.environ.get("DASH_SCRATCH", "/tmp/claude-0/-home-user-exo-shoulder/83445525-dbfd-5a74-afa6-eaabc370b170/scratchpad")
-DEF_OUT = os.environ.get("DASH_OUT", os.path.join(SCRATCH, "dash2", "data"))
-DEF_EVENTS_OLD = os.environ.get("DASH_EVENTS_OLD", os.path.join(SCRATCH, "dash", "events_1015c.json"))
-DEF_COV3D = os.environ.get("DASH_COV3D", os.path.join(SCRATCH, "cov3d"))
+CONCEPTS = os.path.join(REPO, "docs", "concepts")
+DESIGNS = os.path.join(REPO, "pipeline", "full-exo", "designs")
+GPU = os.path.join(REPO, "pipeline", "conformal", "gpu_client")
 WARN = []
+TARGETS = dict(inband14=0.90, follow=0.95, reach=0.90)
+NUMS = ("reach", "follow", "inband14", "inband10", "contact")
+STATUSES = ("ideated", "modelling", "screened", "verified", "refuted", "dead", "duplicate", "gpu", "cad")
+KINDS = ("leader", "milestone", "measurement", "infra", "method", "judged")
+BASE_ID = "baseline-3r"
 
 
 def warn(msg):
     WARN.append(msg); print("WARNING:", msg, file=sys.stderr)
-
-
-def truthy(v): return v is True or (isinstance(v, (int, float)) and not isinstance(v, bool) and v == 1) or str(v).strip().lower() in ("true", "1", "yes")
-
-
-CONCEPTS = os.path.join(REPO, "docs", "concepts")
-TARGETS = dict(inband14=0.90, follow=0.95, reach=0.90)
-STATUSES = ("ideated", "modelling", "screened", "verified", "refuted", "dead", "gpu", "cad", "judged")
-KINDS = ("leader", "milestone", "measurement", "infra", "method")
-NUMS = ("reach", "follow", "inband14", "inband10", "contact")
-BASE_ID = "baseline-3r"                                     # the one baseline row (tools/concept_baseline.py --write)
 
 
 def load(p, default=None):
@@ -51,14 +56,22 @@ def load(p, default=None):
     except Exception: return default
 
 
+def truthy(v): return v is True or (isinstance(v, (int, float)) and not isinstance(v, bool) and v == 1) or str(v).strip().lower() in ("true", "1", "yes")
+
+
 def slug(s): return re.sub(r"[^a-z0-9]+", "-", str(s).lower()).strip("-") or "x"
+
+
+def num(v):
+    try: v = float(v)
+    except (TypeError, ValueError): return None
+    return None if v != v else v
 
 
 def share(v):
     """a 0-1 share (accepts percent written as 0-100), or None"""
-    try: v = float(v)
-    except (TypeError, ValueError): return None
-    if v != v: return None
+    v = num(v)
+    if v is None: return None
     if 1.0 < v <= 100.0: v /= 100.0
     return round(max(0.0, min(1.0, v)), 4)
 
@@ -70,7 +83,6 @@ def gap(ib14, follow, reach, contact):
 
 
 def when(s):
-    """ISO time -> aware datetime (UTC if no zone), or None"""
     if not s: return None
     try: t = dt.datetime.fromisoformat(str(s).replace("Z", "+00:00"))
     except ValueError: return None
@@ -83,36 +95,6 @@ def iso(t): return t.astimezone(dt.timezone.utc).isoformat(timespec="seconds").r
 def norm_time(s): return iso(when(s))
 
 
-_GIT = {}
-
-
-def git_times(path, needle=None, last=False):
-    """commit time that first added `needle` to `path` (or the file; last=True: the newest commit touching it), else None"""
-    key = (path, needle, last)
-    if key not in _GIT:
-        args = ["git", "-C", REPO, "log", "--format=%cI"] + (["-1"] if last else []) + (["-S", needle] if needle else [] if last else ["--diff-filter=A"]) + ["--", path]
-        try: out = subprocess.run(args, capture_output=True, text=True, timeout=30).stdout.split()
-        except Exception: out = []
-        _GIT[key] = norm_time(out[0] if last else out[-1]) if out else None
-    return _GIT[key]
-
-
-def git_first(path, needle=None): return git_times(path, needle)
-
-
-_DIRTY = None
-
-
-def dirty(rel):
-    """True when the file has uncommitted changes (or is untracked)"""
-    global _DIRTY
-    if _DIRTY is None:
-        try: out = subprocess.run(["git", "-C", REPO, "status", "--porcelain"], capture_output=True, text=True, timeout=30).stdout
-        except Exception: out = ""
-        _DIRTY = {line[3:].strip() for line in out.splitlines() if len(line) > 3}
-    return rel in _DIRTY or any(rel.startswith(d.rstrip("/") + "/") for d in _DIRTY if d.endswith("/"))
-
-
 def mtime(p):
     try: return iso(dt.datetime.fromtimestamp(os.path.getmtime(p), dt.timezone.utc))
     except OSError: return None
@@ -123,12 +105,38 @@ def to_int(v, default=None):
     except (TypeError, ValueError): return default
 
 
-# ---------------------------------------------------------------- morphs
-def blank(mid):
-    return dict(id=mid, name=mid, lens="", family="", active_dof=3, passive_dof=0, status="ideated", is_baseline=False,
-                t_ideated=None, t_screened=None, reach=None, follow=None, inband14=None, inband10=None, contact=None, gap=None,
-                v_reach=None, v_follow=None, v_inband14=None, v_inband10=None, v_contact=None, v_gap=None, n_configs=None,
-                verdict="", note="", doc="", source="")
+_GIT = {}
+
+
+def git_time(rel, first=True):
+    """commit time that first added (first=True) or last touched the path, else None"""
+    key = (rel, first)
+    if key not in _GIT:
+        args = ["git", "-C", REPO, "log", "--format=%cI"] + (["--diff-filter=A"] if first else ["-1"]) + ["--", rel]
+        try: out = subprocess.run(args, capture_output=True, text=True, timeout=30).stdout.split()
+        except Exception: out = []
+        _GIT[key] = norm_time(out[-1] if first else out[0]) if out else None
+    return _GIT[key]
+
+
+_DIRTY = None
+
+
+def dirty(rel):
+    global _DIRTY
+    if _DIRTY is None:
+        try: out = subprocess.run(["git", "-C", REPO, "status", "--porcelain"], capture_output=True, text=True, timeout=30).stdout
+        except Exception: out = ""
+        _DIRTY = {line[3:].strip() for line in out.splitlines() if len(line) > 3}
+    return rel in _DIRTY or any(rel.startswith(d.rstrip("/") + "/") for d in _DIRTY if d.endswith("/"))
+
+
+def file_time(p):
+    """when a result file was written: its mtime while uncommitted, else the commit that added it (mtime if earlier)"""
+    rel = os.path.relpath(p, REPO)
+    if dirty(rel): return mtime(p)
+    g, m = git_time(rel), mtime(p)
+    return min(x for x in (g, m) if x) if (g or m) else None
 
 
 def as_list(D, *keys):
@@ -136,128 +144,24 @@ def as_list(D, *keys):
     if isinstance(D, dict):
         for k in keys:
             if isinstance(D.get(k), list): return D[k]
-        if all(isinstance(v, dict) for v in D.values()): return [dict(v, id=v.get("id", k)) for k, v in D.items()]
     return []
 
 
-def empty(v): return v is None or (isinstance(v, str) and not v.strip())
-
-
-def merge(m, src):
-    """src fields onto m; an empty value never overwrites a filled one"""
-    for k, v in src.items():
-        if k == "lenses":
-            v = ", ".join(str(x).strip() for x in (v if isinstance(v, list) else [v]) if str(x).strip())
-            k = "lens"
-        elif k == "notes": k = "note"
-        elif k in ("t", "time"):
-            if src.get("t_ideated"): continue
-            k = "t_ideated"
-        if k not in m or (empty(v) and not empty(m[k])): continue
-        m[k] = v
-    return m
-
-
-def finish(m):
-    for k in NUMS: m[k] = share(m[k]); m["v_" + k] = share(m.get("v_" + k))
-    for k in ("active_dof", "passive_dof", "n_configs"): m[k] = to_int(m[k]) if m[k] is not None else None
-    m["is_baseline"] = truthy(m["is_baseline"])
-    m["t_ideated"], m["t_screened"] = norm_time(m["t_ideated"]), norm_time(m["t_screened"])
-    st = str(m["status"] or "ideated").lower().strip()
-    st = {"modeling": "modelling", "gpu sweep": "gpu", "built": "cad", "dropped": "dead", "killed": "dead"}.get(st, st)
-    if st not in STATUSES: st = "screened" if m["reach"] is not None else "ideated"
-    if st in ("ideated", "modelling") and m["inband14"] is not None: st = "screened"
-    m["status"] = st
-    m["gap"] = gap(m["inband14"], m["follow"], m["reach"], m["contact"])
-    # the verifier's gap: its own numbers where it wrote them, the claim where it did not (none at all -> no v_gap)
-    if any(m["v_" + k] is not None for k in ("inband14", "follow", "reach", "contact")):
-        pick = lambda k: m["v_" + k] if m["v_" + k] is not None else m[k]
-        m["v_gap"] = gap(pick("inband14"), pick("follow"), pick("reach"), pick("contact"))
-    else: m["v_gap"] = None
-    for k in ("name", "lens", "family", "verdict", "note", "doc", "source"): m[k] = "" if m[k] is None else str(m[k])
-    if not m["lens"]: m["lens"] = m["source"]                       # e.g. 'ideation A' when the entry names no lens
-    m.pop("source", None)
-    return m
-
-
-def fam_time(r, fam_rel, fam_path):
-    """a families.json row's screening time: its own field, else the commit that added its variant (or family) text"""
-    for k in ("t_screened", "t", "time"):
-        if norm_time(r.get(k)): return norm_time(r.get(k))
-    needle = json.dumps(str(r.get("variant") or r.get("family") or ""))[1:-1]
-    return (git_first(fam_rel, needle) if needle else None) or mtime(fam_path)
-
-
-def morphs(sweep_counts):
-    by, dup = {}, []
-    cat = as_list(load(os.path.join(CONCEPTS, "catalogue.json")), "morphologies", "items", "catalogue")
-    for e in cat:
-        if not isinstance(e, dict) or not e.get("id"): continue
-        if e.get("duplicate_of"): dup.append(f"{e['id']} (= {e['duplicate_of']})"); continue
-        mid = slug(e["id"]); by[mid] = merge(by.get(mid) or blank(mid), dict(e, id=mid))
-    if dup: print(f"morphs: skipped {len(dup)} catalogue duplicates: {', '.join(dup)}")
-    fam_path = os.path.join(CONCEPTS, "families.json"); fam_rel = os.path.relpath(fam_path, REPO)
-    for r in as_list(load(fam_path), "families", "rows"):
-        if not isinstance(r, dict): continue
-        try:
-            fam, var = str(r.get("family") or ""), str(r.get("variant") or "")
-            isb = truthy(r.get("is_baseline"))
-            mid = BASE_ID if isb else slug(r.get("id") or (fam + "-" + var if var else fam))
-            m = merge(by.get(mid) or blank(mid), {k: v for k, v in r.items() if k not in ("variant", "id", "is_baseline")})
-            nm = fam if not var else var if fam.lower() in var.lower() else f"{fam} ({var})" if fam else var
-            if r.get("name") or m["name"] == mid: m["name"] = r.get("name") or (nm[:1].upper() + nm[1:])
-            m["is_baseline"] = isb
-            if "status" not in r:
-                m["status"] = "dead" if re.match(r"\s*(dead|killed|drop)", str(r.get("verdict") or ""), re.I) else ("screened" if r.get("inband14") is not None else m["status"])
-            if not norm_time(m.get("t_screened")) and r.get("inband14") is not None: m["t_screened"] = fam_time(r, fam_rel, fam_path)
-            if not m.get("doc"):
-                for cand in (slug(fam), fam.lower().replace(" ", "_")):
-                    if os.path.exists(os.path.join(CONCEPTS, cand + ".md")): m["doc"] = f"docs/concepts/{cand}.md"; break
-            by[mid] = m
-        except Exception as e:
-            warn(f"families.json row {r.get('family')!r}: skipped ({e})")
-    for p in sorted(glob.glob(os.path.join(CONCEPTS, "rows", "*.json"))):
-        try:
-            r = load(p)
-            if not isinstance(r, dict): warn(f"{os.path.relpath(p, REPO)}: not a JSON object, skipped"); continue
-            mid = slug(r.get("id") or os.path.splitext(os.path.basename(p))[0])
-            by[mid] = merge(by.get(mid) or blank(mid), dict(r, id=mid))
-            if not norm_time(by[mid].get("t_screened")) and r.get("inband14") is not None: by[mid]["t_screened"] = mtime(p)
-        except Exception as e:
-            warn(f"{os.path.relpath(p, REPO)}: skipped ({e})")
-    out = []
-    for mid, m in by.items():
-        try:
-            if m.get("n_configs") is None and sweep_counts.get(mid): m["n_configs"] = sweep_counts[mid]
-            out.append(finish(m))
-        except Exception as e:
-            warn(f"morphology {mid}: skipped ({e})")
-    bases = [m for m in out if m["is_baseline"]]
-    if len(bases) > 1:                                        # exactly one bar to beat: rows/baseline-3r.json, else the newest
-        keep = next((m for m in bases if m["id"] == BASE_ID), None) or max(bases, key=lambda m: m["t_screened"] or "")
-        for m in bases:
-            if m is not keep: m["is_baseline"] = False
-        warn(f"{len(bases)} rows claimed to be the baseline ({', '.join(m['id'] for m in bases)}); kept {keep['id']}")
-    assert len([m for m in out if m["is_baseline"]]) <= 1
-    nc = [m["id"] for m in out if m["gap"] is not None and m["contact"] is None and not m["is_baseline"]]
-    if nc: warn(f"{len(nc)} morphologies have no contact number; their gap counts contact as 0 (optimistic): {', '.join(nc[:6])}")
-    out.sort(key=lambda m: (not m["is_baseline"], m["t_screened"] or "~", m["t_ideated"] or "~", m["id"]))
-    return out
-
-
-# ---------------------------------------------------------------- sweeps
-def sweep_rows(mid, items):
-    rows, best = [], None
+# ---------------------------------------------------------------- concept bench
+def sweep_file_rows(mid, items, src):
+    rows = []
     items = [x for x in items if isinstance(x, dict)]
-    keyed = [(to_int(x.get("k"), i + 1), i, x) for i, x in enumerate(items)]
-    keyed.sort(key=lambda t: (t[0], t[1]))
-    for k, _, x in keyed:
-        r = dict(id=mid, k=k, t=norm_time(x.get("t") or x.get("time")))
+    for i, x in enumerate(items):
+        t = norm_time(x.get("t") or x.get("time"))
+        if not t: continue
+        r = dict(id=mid, t=t, k=to_int(x.get("k"), i), stage=str(x.get("stage") or x.get("mode") or ""))
         for f in NUMS: r[f] = share(x.get(f))
         r["gap"] = gap(r["inband14"], r["follow"], r["reach"], r["contact"])
-        if r["gap"] is not None and (best is None or r["gap"] < best): best = r["gap"]
-        r["best_gap"] = best
+        if r["gap"] is None:
+            g = num(x.get("gap"))
+            r["gap"] = round(g, 2) if g is not None else None
         rows.append(r)
+    if not rows and items: warn(f"{src}: no configuration has a time, skipped")
     return rows
 
 
@@ -267,302 +171,375 @@ def sweeps():
         try:
             D = load(p)
             if D is None: warn(f"{os.path.relpath(p, REPO)}: not valid JSON, skipped"); continue
-            rows += sweep_rows(slug(os.path.splitext(os.path.basename(p))[0]), as_list(D, "configs", "rows", "results"))
+            rows += sweep_file_rows(slug(os.path.splitext(os.path.basename(p))[0]), as_list(D, "configs", "rows", "results"), os.path.relpath(p, REPO))
         except Exception as e:
             warn(f"{os.path.relpath(p, REPO)}: skipped ({e})")
+    rows.sort(key=lambda r: (r["t"], r["id"], r["k"]))
+    best, rec = {}, None
+    for r in rows:                                   # running bests in time order
+        g = r["gap"]
+        if g is not None and (r["id"] not in best or g < best[r["id"]]): best[r["id"]] = g
+        r["best_gap"] = best.get(r["id"])
+        r["is_record"] = g is not None and (rec is None or g < rec)
+        if r["is_record"]: rec = g
+        r["record_gap"] = rec
     return rows
 
 
-# ---------------------------------------------------------------- judged, events
-def judged():
-    try:
-        out = subprocess.run([sys.executable, os.path.join(REPO, "tools", "judged_history.py")], cwd=REPO, capture_output=True, text=True, timeout=300)
-        rows = json.loads(out.stdout) if out.returncode == 0 else []
-        if out.returncode != 0: warn(f"judged_history.py exited {out.returncode}: {out.stderr.strip()[-200:]}")
-    except Exception as e:
-        warn(f"judged_history.py failed: {e}"); rows = []
-    D = os.path.join(REPO, "pipeline", "full-exo", "designs")
-    for r in rows:
-        # judged_history dates a design by the commit that added its score.json; a build judged hours before it was
-        # committed keeps its judge time in the file's mtime (git checkouts only make mtimes later), so take the earlier
-        t, dd = when(r.get("time")), os.path.join(D, str(r.get("design")))
-        fs = [f for f in (f"{dd}/score.json", f"{dd}/score_14mm.json", f"{dd}/judge/workspace.json", f"{dd}/judge/part_contact.json", f"{dd}/judge/dynamics.json") if os.path.exists(f)]
-        if fs:
-            m = when(mtime(fs[0]))
-            if m and (t is None or m < t): t = m
-        r["time"] = iso(t)
-    rows = [r for r in rows if r.get("time")]
-    rows.sort(key=lambda r: r["time"])
-    return rows
+def blank(mid):
+    return dict(id=mid, name=mid, family="", lens="", status="ideated", is_baseline=False, active_dof=None, passive_dof=None,
+                t_ideated=None, t_screened=None, reach=None, follow=None, inband14=None, inband10=None, contact=None, gap=None,
+                v_reach=None, v_follow=None, v_inband14=None, v_inband10=None, v_contact=None, v_gap=None,
+                n_configs=0, sweep_gap=None, sweep_t=None, sweep_reach=None, sweep_follow=None, sweep_inband14=None,
+                sweep_contact=None, t_last=None, verdict="", note="", duplicate_of="", doc="", source="")
 
 
-def events(old_path):
-    rows = []
-    hist = os.path.join(CONCEPTS, "events_history.json")
-    src = hist if os.path.exists(hist) else old_path
-    old = as_list(load(src), "events") if src and os.path.exists(src) else []
-    if not old: warn(f"older event history not found ({hist} or {old_path}): the log starts at docs/concepts/events.jsonl")
-    rows += [r for r in old if isinstance(r, dict)]
-    p = os.path.join(CONCEPTS, "events.jsonl")
-    if os.path.exists(p):
-        for n, line in enumerate(open(p), 1):
-            line = line.strip()
-            if not line: continue
-            try: rows.append(json.loads(line))
-            except ValueError: warn(f"events.jsonl line {n}: not JSON, skipped")
-    out, seen = [], set()
-    for r in rows:
+def merge(m, src):
+    for k, v in src.items():
+        if k == "lenses":
+            v = ", ".join(str(x).strip(" '[]\"") for x in (v if isinstance(v, list) else str(v).split(",")) if str(x).strip(" '[]\""))
+            k = "lens"
+        elif k == "notes": k = "note"
+        elif k == "limiter":
+            if v: m["note"] = (m.get("note") + " | " if m.get("note") else "") + "limiter: " + str(v)
+            continue
+        if k not in m or v is None or (isinstance(v, str) and not v.strip() and m.get(k)): continue
+        m[k] = v
+    return m
+
+
+def morphs(S):
+    by = {}
+    for e in as_list(load(os.path.join(CONCEPTS, "catalogue.json")), "morphologies", "items"):
+        if isinstance(e, dict) and e.get("id"):
+            mid = slug(e["id"]); by[mid] = merge(by.get(mid) or blank(mid), dict(e, id=mid))
+    for r in as_list(load(os.path.join(CONCEPTS, "families.json")), "families", "rows"):
         if not isinstance(r, dict): continue
-        t, ev = norm_time(r.get("time") or r.get("t")), str(r.get("event") or r.get("text") or "").strip()
-        if not t or not ev or (t, ev) in seen: continue
-        seen.add((t, ev)); k = str(r.get("kind") or "milestone").lower()
-        k = {"decision": "milestone", "measurement change": "measurement"}.get(k, k)
-        row = dict(time=t, kind=k if k in KINDS else "milestone", event=ev)
-        aff = r.get("affects")
-        if isinstance(aff, list) and aff: row["affects"] = ",".join(str(a) for a in aff)
-        out.append(row)
-    out.sort(key=lambda r: r["time"])
+        if truthy(r.get("is_baseline")): mid = BASE_ID                    # the bar: rows/baseline-3r.json wins below
+        else: mid = slug(r.get("id") or (str(r.get("family") or "") + "-" + str(r.get("variant") or "")))
+        m = merge(by.get(mid) or blank(mid), {k: v for k, v in r.items() if k not in ("variant", "id", "is_baseline", "verdict")})
+        if m["name"] == mid: m["name"] = " ".join(x for x in (r.get("family"), r.get("variant")) if x) or mid
+        m["is_baseline"] = mid == BASE_ID
+        by[mid] = m
+    for p in sorted(glob.glob(os.path.join(CONCEPTS, "rows", "*.json"))):
+        r = load(p)
+        if not isinstance(r, dict): warn(f"{os.path.relpath(p, REPO)}: not a JSON object, skipped"); continue
+        mid = slug(r.get("id") or os.path.splitext(os.path.basename(p))[0])
+        by[mid] = merge(by.get(mid) or blank(mid), dict(r, id=mid))
+        if not norm_time(by[mid].get("t_screened")) and r.get("inband14") is not None: by[mid]["t_screened"] = file_time(p)
+    per = {}
+    for s in S: per.setdefault(s["id"], []).append(s)
+    out = []
+    for mid, m in by.items():
+        try:
+            for k in NUMS: m[k] = share(m[k]); m["v_" + k] = share(m.get("v_" + k))
+            m["active_dof"], m["passive_dof"] = to_int(m["active_dof"]), to_int(m["passive_dof"])
+            m["is_baseline"] = truthy(m["is_baseline"])
+            m["t_ideated"], m["t_screened"] = norm_time(m["t_ideated"]), norm_time(m["t_screened"])
+            st = str(m["status"] or "ideated").lower().strip()
+            if str(m["status"] or "").lower().strip() == "modelling-interrupted":
+                m["note"] = (m["note"] + " | " if m["note"] else "") + "a partial, unverified model file exists (interrupted)"
+            st = {"modelling-interrupted": "ideated", "modeling": "modelling", "dropped": "dead", "killed": "dead",
+                  "gpu sweep": "gpu", "built": "cad", "judged": "cad"}.get(st, st)
+            if m.get("duplicate_of"): st = "duplicate"
+            if st not in STATUSES: st = "screened" if m["inband14"] is not None else "ideated"
+            sw = per.get(mid, [])
+            if st == "ideated" and sw: st = "modelling"                    # its agent is sweeping it
+            if st in ("ideated", "modelling") and m["inband14"] is not None: st = "screened"
+            m["status"] = st
+            m["gap"] = gap(m["inband14"], m["follow"], m["reach"], m["contact"])
+            if m["gap"] is None and num(m.get("gap")) is not None: m["gap"] = round(num(m["gap"]), 2)
+            if any(m["v_" + k] is not None for k in ("inband14", "follow", "reach")):
+                pick = lambda k: m["v_" + k] if m["v_" + k] is not None else m[k]
+                m["v_gap"] = gap(pick("inband14"), pick("follow"), pick("reach"), pick("contact"))
+            else: m["v_gap"] = None
+            m["n_configs"] = len(sw) or to_int(m.get("n_configs"), 0) or 0
+            scored = [s for s in sw if s["gap"] is not None]
+            if scored:
+                b = min(scored, key=lambda s: (s["gap"], s["t"]))
+                m.update(sweep_gap=b["gap"], sweep_t=b["t"], sweep_reach=b["reach"], sweep_follow=b["follow"],
+                         sweep_inband14=b["inband14"], sweep_contact=b["contact"])
+            m["t_last"] = max([x for x in [m["t_ideated"], m["t_screened"]] + [s["t"] for s in sw] if x] or [None]) if (sw or m["t_screened"] or m["t_ideated"]) else None
+            if not m["lens"]: m["lens"] = str(m.get("source") or "")
+            for k in ("name", "family", "lens", "verdict", "note", "duplicate_of", "doc"): m[k] = "" if m[k] is None else str(m[k])
+            out.append({k: m[k] for k in blank(mid) if k != "source"})
+        except Exception as e:
+            warn(f"morphology {mid}: skipped ({e})")
+    bases = [m for m in out if m["is_baseline"]]
+    if len(bases) > 1:
+        keep = next((m for m in bases if m["id"] == BASE_ID), bases[0])
+        for m in bases:
+            if m is not keep: m["is_baseline"] = False
+        warn(f"{len(bases)} rows claimed to be the baseline; kept {keep['id']}")
+    if not any(m["is_baseline"] for m in out): warn("no baseline row (docs/concepts/rows/baseline-3r.json)")
+    out.sort(key=lambda m: (not m["is_baseline"], m["id"]))
     return out
 
 
-# ---------------------------------------------------------------- reqs
-# id, short name, target text, direction ('hi' / 'lo' / 'bool'), pass threshold, unit, state when nothing measured it
+# ---------------------------------------------------------------- built CAD judges
+REQ_DEF = load(os.path.join(REPO, "judge", "requirements.json"), {}) or {}
+# id, short name, direction, unit shown, judged_history column
 REQS = [
-    ("R1", "Skin 2-14 mm from the metal while following", ">= 90%", "hi", 0.90, "%", "not measured"),
-    ("R1-aim", "Skin 2-10 mm from the metal (the 1 cm aim)", ">= 90%", "hi", 0.90, "%", "not measured"),
-    ("R2", "No part enters the body", "<= 0.5 mm", "lo", 0.5, "mm", "not measured"),
-    ("R3", "Follows the arm (frames tracked)", ">= 95%", "hi", 0.95, "%", "not measured"),
-    ("R4", "Overhead works (Raise overhead, 14 mm band)", ">= 80%", "hi", 0.80, "%", "not measured"),
-    ("R5", "Shoulder-chain DOF", "<= 4", "lo", 4, "", "not measured"),
-    ("R5-aim", "Exactly 3 DOF, the minimum", "3", "lo", 3, "", "not measured"),
-    ("R6", "No interference between moving parts", "<= 0.15 mm", "lo", 0.15, "mm", "not measured"),
-    ("R7", "Every custom part is one valid solid", "all parts", "bool", True, "", "not measured"),
-    ("R8", "Custom-part mass", "<= 500 g", "lo", 500, "g", "not measured"),
-    ("R9", "Strength SF >= 1.5 (independent FEA)", "SF >= 1.5", "hi", 1.5, "", "not measured"),
-    ("R10", "Base slip on the scapula (GH-centre misalignment)", "<= 4 mm", "lo", 4.0, "mm", "not measured"),
-    ("R11", "Pressure the exo adds on the cuff", "<= 7.5 kPa", "lo", 7.5, "kPa", "not measured"),
-    ("R12", "CAD standard: G2 surfaces, no visible screws", "your review", None, None, "", "needs the user"),
-    ("R13", "Manufacturable (supplier review and quote)", "supplier yes", None, None, "", "not measured"),
-    ("R14", "Holds on motions and bodies never used to design it", "held-out data", None, None, "", "not measured"),
-    ("R15", "Works on real bodies (printed prototype)", "prototype on you", None, None, "", "needs the user"),
-    ("R16", "Everyday arm poses reached", ">= 90%", "hi", 0.90, "%", "not measured"),
-    ("R17", "Moves freely unpowered", "yes", "bool", True, "", "not measured"),
+    ("R1", "Skin 2-14 mm from the metal while following", "hi", "%", "r1_14"),
+    ("R1-aim", "Skin 2-10 mm from the metal (the 1 cm aim)", "hi", "%", "r1_10"),
+    ("R2", "No part enters the body", "lo", "mm", None),
+    ("R3", "Follows the arm (frames tracked)", "hi", "%", "follow"),
+    ("R4", "Overhead works (Raise overhead, 14 mm band)", "hi", "%", "overhead_14"),
+    ("R5", "Shoulder-chain DOF (cap 4)", "lo", "", "dof"),
+    ("R5-aim", "Exactly 3 DOF, the minimum", "lo", "", "dof"),
+    ("R6", "No interference between moving parts", "lo", "mm", "parts_mm"),
+    ("R7", "Every custom part is one valid solid", "bool", "", None),
+    ("R8", "Custom-part mass", "lo", "g", None),
+    ("R9", "Strength SF (independent FEA)", "hi", "", None),
+    ("R10", "Base slip on the scapula (GH-centre misalignment)", "lo", "mm", None),
+    ("R11", "Pressure the exo adds on the cuff", "lo", "kPa", None),
+    ("R12", "CAD standard: G2 surfaces, no visible screws", None, "", None),
+    ("R13", "Manufacturable (supplier review and quote)", None, "", None),
+    ("R14", "Holds on motions and bodies never used to design it", None, "", None),
+    ("R15", "Works on real bodies (printed prototype)", None, "", None),
+    ("R16", "Everyday arm poses reached (workspace)", "hi", "%", "range_r16"),
+    ("R17", "Moves freely unpowered", "bool", "", "moves_freely"),
 ]
-JUDGED_COL = {"R1": "r1_14", "R1-aim": "r1_10", "R3": "follow", "R4": "overhead_14", "R16": "range_r16", "R6": "parts_mm",
-              "R17": "moves_freely", "R5": "dof", "R5-aim": "dof"}
-# When the judging (or what the designs were built from) changed so that earlier numbers of a requirement are not
-# comparable with later ones - the 'measurement' events of 2026-10-15 (Log). A later event can add itself with
-# "affects": ["R1", ...] in docs/concepts/events.jsonl.
-RULES = [
-    (("R3", "R4", "R6", "R2"), "2026-10-15T02:44:38Z", "the contact-judge fix (02:44 UTC)"),
-    (("R1", "R1-aim", "R4"), "2026-10-15T11:55:00Z", "the held-out-leak fix (11:55 UTC)"),
-]
+# judging-rule changes after which earlier values of a requirement are not comparable (also: a 'measurement' event in
+# docs/concepts/events.jsonl with "affects": ["R1", ...])
+RULES = [(("R3", "R4", "R6", "R2"), "2026-10-15T02:44:38Z", "the contact-judge fix"),
+         (("R1", "R1-aim", "R4"), "2026-10-15T11:55:00Z", "the held-out-leak fix")]
 
 
-def rules_from(ev):
+def threshold(rid):
+    d = REQ_DEF.get(rid) or {}
+    op, v = d.get("op"), d.get("value")
+    if isinstance(v, bool): v = 1.0 if v else 0.0
+    return op, (float(v) if isinstance(v, (int, float)) else None), str(d.get("judge") or "")
+
+
+def passes(v, op, thr):
+    if v is None or thr is None or not op: return None
+    return {">=": v >= thr, "<=": v <= thr, "==": abs(v - thr) < 1e-9}.get(op)
+
+
+def rules_since(ev):
     out = {}
     for reqs_, t, why in RULES:
         for r in reqs_: out[r] = max(out.get(r, ("", "")), (t, why))
     for e in ev:
         if e.get("kind") == "measurement" and e.get("affects"):
             for r in str(e["affects"]).split(","):
-                r = r.strip()
-                if r: out[r] = max(out.get(r, ("", "")), (e["time"], e["event"][:90]))
+                if r.strip(): out[r.strip()] = max(out.get(r.strip(), ("", "")), (e["time"], e["event"][:80]))
     return out
 
 
-def fmt_val(v, unit):
-    if isinstance(v, bool): return "yes" if v else "no"
-    if unit == "%": return f"{100 * v:.1f}%"
-    if isinstance(v, float) and not float(v).is_integer(): return f"{v:.2f} {unit}".strip() if v < 10 else f"{v:.1f} {unit}".strip()
-    return f"{int(v)} {unit}".strip() if isinstance(v, (int, float)) else str(v)
+def judged_history():
+    try:
+        out = subprocess.run([sys.executable, os.path.join(REPO, "tools", "judged_history.py")], cwd=REPO, capture_output=True, text=True, timeout=300)
+        if out.returncode != 0: warn(f"judged_history.py exited {out.returncode}: {out.stderr.strip()[-200:]}"); return []
+        rows = json.loads(out.stdout)
+    except Exception as e:
+        warn(f"judged_history.py failed: {e}"); return []
+    for r in rows:      # a build judged hours before its commit keeps the judge time in the files' mtime: take the earlier
+        dd = os.path.join(DESIGNS, str(r.get("design")))
+        ts = [when(r.get("time"))] + [when(mtime(f)) for f in (f"{dd}/score.json", f"{dd}/score_14mm.json") if os.path.exists(f) and not dirty(os.path.relpath(f, REPO))]
+        ts = [t for t in ts if t]
+        r["time"] = iso(min(ts)) if ts else None
+    return [r for r in rows if r.get("time")]
 
 
-def passes(v, d, thr):
-    if v is None or d is None: return None
-    if d == "bool": return bool(v) is bool(thr)
-    return v >= thr if d == "hi" else v <= thr
+def cad(ev):
+    J = judged_history()
+    rules = rules_since(ev)
+    rows, seen = [], set()
+    meta = {}
+    for j in J:
+        meta[j["design"]] = (j["level"], to_int(j["dof"]))
+        for rid, name, d, unit, col in REQS:
+            if not col or j.get(col) is None: continue
+            v = j[col]
+            v = (1.0 if v else 0.0) if isinstance(v, bool) else float(v)
+            rows.append((j["time"], j["design"], rid, v, "judged_history.py"))
+            seen.add((j["design"], rid))
+    for p in sorted(glob.glob(os.path.join(DESIGNS, "*", "judge", "scorecard.json"))):
+        sc = load(p)
+        if not isinstance(sc, list): continue
+        design = p.split(os.sep)[-3]
+        dj = load(os.path.join(DESIGNS, design, "design.json"), {}) or {}
+        dof = to_int(dj.get("dof", dj.get("n")))
+        if not dof or dof > 4: continue
+        if design not in meta: meta[design] = ("Full CAD" if design.startswith("cad_") or design == "final" else "Keep-out CAD", dof)
+        rel = os.path.relpath(p, REPO)
+        t = mtime(p) if dirty(rel) else (git_time(rel, first=False) or mtime(p))
+        for r in sc:
+            if not isinstance(r, dict) or (design, r.get("id")) in seen: continue
+            v = r.get("value")
+            if isinstance(v, bool): v = 1.0 if v else 0.0
+            if not isinstance(v, (int, float)): continue
+            rows.append((t, design, r["id"], float(v), "judge/scorecard.json"))
+    out = []
+    by = {x[0]: x for x in REQS}
+    for t, design, rid, v, src in rows:
+        if rid not in by: continue
+        op, thr, judge = threshold(rid)
+        lvl, dof = meta[design]
+        since = rules.get(rid, ("", ""))[0]
+        out.append(dict(time=t, design=design, level=lvl, dof=dof, req=rid, name=by[rid][1], value=round(v, 4), op=op or "",
+                        threshold=thr, unit=by[rid][3], ok=passes(v, op, thr), rules="older" if since and t < since else "current",
+                        judge=judge[:120], src=src))
+    out.sort(key=lambda r: (r["time"], r["design"], [x[0] for x in REQS].index(r["req"])))
+    return out
 
 
-def card_time(p):
-    """when a scorecard was last written: its newest commit, or its mtime while it has uncommitted changes"""
-    rel = os.path.relpath(p, REPO)
-    return mtime(p) if dirty(rel) else (git_times(rel, last=True) or mtime(p))
-
-
-def r6_note(design):
-    pc = load(os.path.join(REPO, "pipeline", "full-exo", "designs", str(design), "judge", "part_contact.json")) or {}
-    if not isinstance(pc, dict) or pc.get("max_depth") not in (0, 0.0): return ""
-    bits = []
-    if pc.get("step") and to_int(pc["step"], 1) > 1: bits.append(f"every {to_int(pc['step'])}th frame checked")
-    opn = pc.get("open_parts_not_tested_as_container") or []
-    if opn: bits.append(f"{len(opn)} open part{'s' if len(opn) != 1 else ''} not tested as containers")
-    return "to confirm: 0 overlap found" + (" (" + "; ".join(bits) + ")" if bits else "")
-
-
-def reqs(jrows, ev):
-    rules = rules_from(ev)
-    cand = {r[0]: [] for r in REQS}                    # req -> [(value, status or None, design, time, judge)]
-    for p in glob.glob(os.path.join(REPO, "pipeline", "full-exo", "designs", "*", "judge", "scorecard.json")):
+def reqs(C, ev):
+    rules = rules_since(ev)
+    cards = {}
+    for p in glob.glob(os.path.join(DESIGNS, "*", "judge", "scorecard.json")):
         sc = load(p)
         if not isinstance(sc, list): continue
         by = {r.get("id"): r for r in sc if isinstance(r, dict)}
-        if (by.get("R5") or {}).get("value") not in (3, 3.0): continue          # the user's goal: 3-DOF designs only
-        design = p.split(os.sep)[-3]; t = card_time(p)
-        for rid in cand:
-            r = by.get(rid)
-            if r: cand[rid].append((r.get("value"), str(r.get("status") or "").upper(), design, t, str(r.get("judge") or "")))
-    for j in jrows:
-        if to_int(j.get("dof"), 0) != 3: continue
-        for rid, col in JUDGED_COL.items():
-            if j.get(col) is not None: cand[rid].append((j[col], None, j["design"], j["time"], "judged"))
+        if (by.get("R5") or {}).get("value") not in (3, 3.0): continue          # the user's goal: 3 active DOF
+        rel = os.path.relpath(p, REPO)
+        cards[p.split(os.sep)[-3]] = (by, mtime(p) if dirty(rel) else (git_time(rel, first=False) or mtime(p)))
+    def rank(item):
+        d, (by, t) = item
+        return (sum(1 for r in by.values() if str(r.get("status")).upper() == "PASS"), num((by.get("R1") or {}).get("value")) or 0, t or "")
+    best = max(cards.items(), key=rank)[0] if cards else ""
+    by, t = cards.get(best, ({}, None))
     out = []
-    for rid, name, target, d, thr, unit, idle in REQS:
-        cs = cand[rid]
-        sc = [c for c in cs if c[4] != "judged"]
-        if sc:                                          # keep only the newest judge's measurements (a judge that changed)
-            newest = max(sc, key=lambda c: c[3] or "")[4]
-            cs = [c for c in cs if c[4] in (newest, "judged")]
-        since, why = rules.get(rid, (None, ""))
-        row = dict(req=rid, name=name, target=target, best="", design="", state=idle, note="", older_best="", rules_since=since, rules_why=why)
-        num = [c for c in cs if isinstance(c[0], (int, float, bool)) and c[0] is not None]
-        if num and d:
-            def ok(c): return c[1] == "PASS" if c[1] in ("PASS", "FAIL") else passes(c[0], d, thr)
-            key = (lambda c: (bool(ok(c)), bool(c[0]))) if d == "bool" else (lambda c: (bool(ok(c)), c[0] if d == "hi" else -c[0]))
-            pick = lambda xs: max(xs, key=lambda c: (key(c), c[3] or ""))
-            cur = [c for c in num if not since or (c[3] or "") >= since]
-            b = pick(cur or num)
-            row.update(best=fmt_val(b[0], unit), design=b[2], state="pass" if ok(b) else "fail")
-            if not cur: row["note"] = "measured before " + why
-            else:
-                o = pick(num)
-                if o is not b and key(o) > key(b): row["older_best"] = f"{fmt_val(o[0], unit)} ({o[2]}, before {why})"
-            if rid == "R6" and b[0] in (0, 0.0): row["note"] = r6_note(b[2])
-        out.append(row)
+    for rid, name, d, unit, col in REQS:
+        r = by.get(rid) or {}
+        op, thr, judge = threshold(rid)
+        st = str(r.get("status") or "").upper()
+        state = {"PASS": "pass", "FAIL": "fail", "PARTIAL": "partial"}.get(st, "not measured")
+        if rid in ("R12", "R15") and state != "pass": state = "needs the user"
+        v = r.get("value")
+        v = (1.0 if v else 0.0) if isinstance(v, bool) else (float(v) if isinstance(v, (int, float)) else None)
+        cs = [c for c in C if c["req"] == rid and c["dof"] == 3]
+        cur = [c for c in cs if c["rules"] == "current"]
+        b = None
+        if cur and d in ("hi", "lo", "bool"):
+            b = max(cur, key=lambda c: ((c["value"] if d != "lo" else -c["value"]), c["time"]))
+        since = rules.get(rid, ("", ""))
+        out.append(dict(req=rid, name=name, design=best if r else "", time=t if r else None, state=state, value=None if v is None else round(v, 4),
+                        unit=unit, op=op or "", threshold=thr, target=str(r.get("target") or (f"{op} {thr:g}" if op and thr is not None else "")),
+                        judge=judge[:160], best_value=b["value"] if b else None, best_design=b["design"] if b else "",
+                        best_ok=b["ok"] if b else None, rules_since=since[0] or None, rules_why=since[1]))
     return out
 
 
-# ---------------------------------------------------------------- cov3d
-def cov3d(src, keep=8):
-    rows = None
+# ---------------------------------------------------------------- GPU searches
+def gpu_evals():
     try:
-        tmp = os.path.join(SCRATCH if os.path.isdir(SCRATCH) else REPO, ".dash_cov3d.json")
-        out = subprocess.run([sys.executable, os.path.join(REPO, "tools", "coverage3d.py"), "-o", tmp], cwd=REPO, capture_output=True, text=True, timeout=300)
-        if out.returncode == 0: rows = load(tmp)
-        else: warn(f"coverage3d.py exited {out.returncode}: {out.stderr.strip()[-200:]}")
-        if os.path.exists(tmp): os.remove(tmp)
+        out = subprocess.run([sys.executable, os.path.join(REPO, "tools", "judged_history.py"), "--evals"], cwd=REPO, capture_output=True, text=True, timeout=300)
+        rows = json.loads(out.stdout) if out.returncode == 0 else []
+        if out.returncode != 0: warn(f"judged_history.py --evals exited {out.returncode}")
     except Exception as e:
-        warn(f"coverage3d.py failed: {e}")
-    if not isinstance(rows, list) or not rows:
-        p = src
-        if src and os.path.isdir(src):
-            c = sorted(glob.glob(os.path.join(src, "**", "cov3d*.json"), recursive=True), key=os.path.getmtime)
-            p = c[-1] if c else None
-        rows = load(p, []) if p else []
-        if rows: warn(f"cov3d: copied the stale file {p} (coverage3d.py gave nothing)")
+        warn(f"judged_history.py --evals failed: {e}"); rows = []
+    res = []
+    for r in rows:
+        res.append(dict(time=norm_time(r.get("time")), candidate=str(r.get("design") or ""), dof=to_int(r.get("dof")),
+                        inband14=num(r.get("r1_14")), follow=num(r.get("follow")), workspace=num(r.get("range_r16")),
+                        overhead_follow=num(r.get("overhead_follow")), hub_r=num(r.get("hub_r")), maps=str(r.get("measurement") or "")))
+    res = [r for r in res if r["time"]]
+    res.sort(key=lambda r: (r["time"], r["candidate"]))
+    return res
+
+
+def gpu_searches():
+    rows = []
+    for p in sorted(glob.glob(os.path.join(GPU, "band_search_*.json"))):
+        D = load(p)
+        if not isinstance(D, list): continue
+        t = file_time(p); s = os.path.splitext(os.path.basename(p))[0].replace("band_search_", "")
+        for i, job in enumerate(D):
+            if not isinstance(job, dict) or not isinstance(job.get("hist"), list) or not job["hist"]: continue
+            h = job["hist"][-1]; cfg = job.get("cfg") if isinstance(job.get("cfg"), dict) else {}
+            rows.append(dict(time=t, search=s, job=i, dof=to_int(cfg.get("n")), seed=to_int(cfg.get("seed")), fit=num(h.get("best")),
+                             follow=num(h.get("follow")), gens=to_int(h.get("gen")), evals=to_int(job.get("evals")), secs=round(num(job.get("secs")) or 0),
+                             device=str(job.get("device") or "")[:60], version=str(job.get("version") or "")[:60]))
+    rows = [r for r in rows if r["time"] and r["fit"] is not None]
+    rows.sort(key=lambda r: (r["time"], r["search"], r["job"]))
+    return rows
+
+
+# ---------------------------------------------------------------- events, spend
+def events(C):
+    rows = []
+    p = os.path.join(CONCEPTS, "events.jsonl")
+    if os.path.exists(p):
+        for n, line in enumerate(open(p), 1):
+            if not line.strip(): continue
+            try: r = json.loads(line)
+            except ValueError: warn(f"events.jsonl line {n}: not JSON, skipped"); continue
+            if not isinstance(r, dict): continue
+            t, e = norm_time(r.get("time") or r.get("t")), str(r.get("event") or r.get("text") or "").strip()
+            if not t or not e: continue
+            k = str(r.get("kind") or "milestone").lower()
+            k = {"decision": "milestone", "measurement change": "measurement"}.get(k, k)
+            row = dict(time=t, kind=k if k in KINDS else "milestone", event=e, source="swarm")
+            if isinstance(r.get("affects"), list) and r["affects"]: row["affects"] = ",".join(map(str, r["affects"]))
+            rows.append(row)
+    first, rec = {}, None
+    for c in C:
+        first.setdefault(c["design"], c)
+    for d, c in first.items():
+        vals = {x["req"]: x for x in C if x["design"] == d and x["time"] == c["time"]}
+        bits = [f"{rid} {'%.1f %%' % (100 * vals[rid]['value']) if vals[rid]['unit'] == '%' else vals[rid]['value']}" for rid in ("R1", "R3", "R16") if rid in vals]
+        rows.append(dict(time=c["time"], kind="judged", event=f"Judged {d} ({c['level']}, {c['dof']} DOF)" + (": " + ", ".join(bits) if bits else ""), source="judges"))
+    for c in [x for x in C if x["req"] == "R1" and x["dof"] == 3]:
+        if rec is None or c["value"] > rec:
+            rec = c["value"]
+            rows.append(dict(time=c["time"], kind="leader", event=f"Built-CAD R1 record: {100 * rec:.1f} % ({c['design']}, {c['level']})", source="judges"))
+    out, seen = [], set()
+    for r in rows:
+        key = (r["time"], r["event"])
+        if key in seen: continue
+        seen.add(key); r.setdefault("affects", ""); out.append(r)
+    out.sort(key=lambda r: (r["time"], r["kind"], r["event"]))
+    return out
+
+
+def spend():
+    try: txt = open(os.path.join(REPO, "docs", "RUNPOD_COSTS.md")).read()
+    except OSError: return []
+    rows, start = [], None
+    for line in txt.splitlines():
+        m = re.match(r"\| (\d\d)-(\d\d) (\d\d:\d\d)(?:-(\d\d:\d\d))? \| ([^|]*)\|", line)
+        b = re.search(r"(\d+\.\d\d) -> (\d+\.\d\d)", line)
+        if not (m and b): continue
+        before, after = float(b.group(1)), float(b.group(2))
+        if start is None: start = before
+        rows.append(dict(time=f"2026-{m.group(1)}-{m.group(2)}T{m.group(4) or m.group(3)}:00Z", endpoint=m.group(5).strip()[:60],
+                         balance=after, spent=round(start - after, 2)))
+    rows.sort(key=lambda r: r["time"])
+    return rows
+
+
+def cov3d(keep=8):
+    tmp = os.path.join(REPO, ".cache", "dash_cov3d.json")
+    os.makedirs(os.path.dirname(tmp), exist_ok=True)
+    try:
+        out = subprocess.run([sys.executable, os.path.join(REPO, "tools", "coverage3d.py"), "-o", tmp], cwd=REPO, capture_output=True, text=True, timeout=300)
+        rows = load(tmp) if out.returncode == 0 else None
+        if out.returncode != 0: warn(f"coverage3d.py exited {out.returncode}: {out.stderr.strip()[-200:]}")
+    except Exception as e:
+        warn(f"coverage3d.py failed: {e}"); rows = None
     if not isinstance(rows, list): return []
-    order = list(dict.fromkeys(r.get("design") for r in rows if isinstance(r, dict)))   # judged order, newest last
+    order = list(dict.fromkeys(r.get("design") for r in rows if isinstance(r, dict)))
     keepset = set(order[-keep:])
     return [r for r in rows if isinstance(r, dict) and r.get("design") in keepset]
 
 
-# ---------------------------------------------------------------- SAMPLE (harness only)
-SAMPLE_NAMES = [
-    ("Scapular-plane 3R, tilted first axis", "spherical", "robotics"), ("Offset-axis 3R hugging the deltoid", "spherical", "anatomy"),
-    ("Remote-centre arc + 2R", "arc rail", "robotics"), ("Curved rail over the acromion + 2R", "arc rail", "aerospace"),
-    ("Double parallelogram RCM", "parallel", "surgery robots"), ("Bennett-linkage shoulder", "overconstrained", "kinematics"),
-    ("Tensegrity cap with 3 struts", "tensegrity", "biology"), ("Origami waterbomb shell", "origami", "origami"),
-    ("Scissor dome over the cap", "scissor", "deployables"), ("Gimbal ring around the humerus", "gimbal", "aerospace"),
-    ("Back-mounted 3R, axis through GH", "spherical", "robotics"), ("Clavicle-follow 3R", "spherical", "anatomy"),
-    ("Helical humeral sleeve + 2R", "sleeve", "biology"), ("Sliding-cuff 3R (passive slide)", "spherical", "robotics"),
-    ("Cable-free Sarrus cap", "overconstrained", "kinematics"), ("Pantograph over the deltoid", "parallel", "drafting tools"),
-    ("Two arcs crossing at the cap", "arc rail", "astronomy mounts"), ("Bowden-ready 3R, low hubs", "spherical", "bike mech"),
-    ("Exo-tendon strap chain", "compliant", "biology"), ("Compliant flexure shell", "compliant", "MEMS"),
-    ("Insect-wing hinge 3R", "spherical", "biology"), ("Shoulder-pad cardan", "gimbal", "sports gear"),
-    ("Belt-ring on the trunk + 2R", "ring", "rehab devices"), ("Telescoping arc link", "arc rail", "deployables"),
-    ("Watt-linkage drop link", "planar+R", "kinematics"), ("Armour-plate lames", "segmented", "history"),
-    ("Snake spine over the cap", "segmented", "biology"), ("Delta-style 3-leg cap", "parallel", "robotics"),
-    ("Hoberman ring around the arm", "scissor", "deployables"), ("Rolling-contact cap joint", "rolling", "prosthetics"),
-    ("Ball-in-socket shell, 3 sensors", "shell", "anatomy"), ("Scapula-glide + 2R", "spherical", "anatomy"),
-    ("Low-profile 3R with ring bearings", "spherical", "bearings"), ("Elastic cap, bistable", "compliant", "origami"),
-    ("Spherical 4-bar + R", "overconstrained", "kinematics"), ("Front-side 3R, axilla clear", "spherical", "robotics"),
-    ("Saddle rail behind the shoulder", "arc rail", "saddlery"), ("Pivoting epaulette", "gimbal", "tailoring"),
-    ("Cam-guided cuff slide 3R", "spherical", "cams"), ("Ring-and-arc hybrid", "ring", "aerospace"),
-]
-
-
-def sample():
-    rnd = random.Random(7)
-    now = dt.datetime.now(dt.timezone.utc).replace(microsecond=0)
-    t0 = now - dt.timedelta(hours=9, minutes=40)
-    M = [finish(merge(blank("baseline-3r"), dict(name="Spherical 3R (current champion)", family="spherical", lens="baseline", status="judged",
-                                                is_baseline=True, t_ideated=iso(t0 - dt.timedelta(hours=10)), t_screened=iso(t0),
-                                                reach=0.75, follow=0.97, inband14=0.40, inband10=0.19, contact=0.0, n_configs=None,
-                                                verdict="the bar to beat", note="same bench, simple straps", doc="docs/concepts/README.md")))]
-    S, E = [], []
-    # (status, quality 0-1, fixed screening time before now or None); quality ~0.55 is about the baseline's gap
-    plan = [("cad", .78, None), ("gpu", .72, None), ("verified", .88, 85), ("verified", .62, None), ("verified", .60, None), ("verified", .66, None),
-            ("refuted", .72, None), ("refuted", .70, None), ("refuted", .69, None), ("dead", .15, None), ("dead", .20, None),
-            ("screened", .76, 20), ("screened", .64, 50)] + [("screened", rnd.uniform(.22, .54), None) for _ in range(15)] + \
-           [("modelling", 0, None)] * 4 + [("ideated", 0, None)] * 8
-    order = list(range(len(SAMPLE_NAMES))); rnd.shuffle(order)
-    free = [rnd.uniform(25, 9 * 60 - 60) for _ in plan]
-    for n_, (st, q, ago) in enumerate(plan):
-        name, fam, lens = SAMPLE_NAMES[order[n_]]; mid = slug(name)[:40]
-        m = merge(blank(mid), dict(name=name, family=fam, lens=lens, status=st, active_dof=3, passive_dof=1 if "slide" in name.lower() else 0,
-                                   t_ideated=iso(t0 + dt.timedelta(minutes=rnd.randint(-40, 10))), doc=f"docs/concepts/{mid}.md"))
-        if st not in ("ideated", "modelling"):
-            tscr = (now - dt.timedelta(minutes=ago)) if ago else (t0 + dt.timedelta(minutes=free[n_]))
-            if st in ("cad", "gpu"): tscr = t0 + dt.timedelta(minutes=60 + 70 * (st == "gpu"))
-            ib14 = 0.18 + 0.62 * q + rnd.uniform(-0.03, 0.03); fo = min(1, 0.80 + 0.22 * q + rnd.uniform(-0.02, 0.02))
-            re_ = min(1, 0.45 + 0.45 * q + rnd.uniform(-0.04, 0.04)); co = max(0.0, rnd.uniform(-0.03, 0.03) * (1.2 - q))
-            if st == "dead": co = rnd.uniform(0.15, 0.4); ib14 *= 0.5
-            n = rnd.randint(10, 60) if st != "dead" else rnd.randint(4, 9)
-            m.update(n_configs=n)
-            tsw = when(m["t_ideated"]); dtk = (tscr - tsw) / max(n, 1)          # the sweep: noisy configurations converging on the best
-            items, bestk = [], rnd.randint(int(n * 0.4), n)
-            for k in range(1, n + 1):
-                f = (k / n) ** 0.5; noise = rnd.uniform(0.6, 1.0)
-                if k == bestk: x = dict(inband14=ib14, follow=fo, reach=re_, contact=co)
-                else: x = dict(inband14=ib14 * (0.55 + 0.4 * f) * noise, follow=fo * (0.9 + 0.08 * f * noise), reach=re_ * (0.75 + 0.22 * f * noise), contact=co + rnd.uniform(0, 0.12) * (1 - f))
-                x["inband10"] = x["inband14"] * rnd.uniform(0.42, 0.55)
-                items.append(dict(k=k, t=iso(tsw + dtk * k), **{a: round(min(1, max(0, b)), 4) for a, b in x.items()}))
-            S += sweep_rows(mid, items)
-            m.update(t_screened=iso(tscr), inband14=round(ib14, 4), inband10=round(ib14 * 0.48, 4), follow=round(fo, 4), reach=round(re_, 4), contact=round(co, 4))
-            if st in ("verified", "gpu", "cad", "refuted"):
-                k = 0.97 if st != "refuted" else 0.72
-                m.update(v_inband14=round(ib14 * k, 4), v_inband10=round(ib14 * 0.46 * k, 4), v_follow=round(fo * (0.995 if st != "refuted" else 0.93), 4),
-                         v_reach=round(re_ * (0.98 if st != "refuted" else 0.8), 4))
-            m["verdict"] = {"cad": "keep-out CAD being built", "gpu": "GPU sweep running", "verified": "verified: worth a GPU sweep",
-                            "refuted": "refuted: the bench skipped the axilla poses", "dead": "dead: links cross the neck overhead",
-                            "screened": "claimed: waiting for the verifier" if q > .6 else rnd.choice(["below baseline", "plateaued early", "needs a lower hub"])}[st]
-            m["note"] = rnd.choice(["hub stack 12 mm", "links ride 6 mm over the deltoid", "overhead blocked by the acromion", "", "passive slide sets the closure"])
-        M.append(finish(m))
-    rec = None                                          # leader changes as events
-    for m in sorted([m for m in M[1:] if m["gap"] is not None and m["status"] not in ("refuted", "dead")], key=lambda m: m["t_screened"]):
-        g = m["v_gap"] if m["v_gap"] is not None else m["gap"]
-        if rec is None or g < rec:
-            rec = g; E.append(dict(time=m["t_screened"], kind="leader", event=f"New leader: {m['name']} (gap {g:.1f})"))
-    E += [dict(time=iso(t0 - dt.timedelta(minutes=30)), kind="method", event="Swarm starts: 40 morphologies ideated across 12 lenses"),
-          dict(time=iso(t0 + dt.timedelta(minutes=5)), kind="measurement", event="Baseline 3R measured on the concept bench (gap 65.0)"),
-          dict(time=iso(now - dt.timedelta(hours=3)), kind="infra", event="Verifier agent online: re-measures every claimed winner"),
-          dict(time=iso(now - dt.timedelta(hours=2, minutes=10)), kind="milestone", event="First verified winner sent to a GPU sweep"),
-          dict(time=iso(now - dt.timedelta(minutes=50)), kind="milestone", event="Keep-out CAD build started for the old leader")]
-    E.sort(key=lambda r: r["time"])
-    return M, S, E
-
-
 # ---------------------------------------------------------------- main
-def write(out, name, rows, extra="", guard=False):
-    """guard: a subprocess-built dataset that comes out empty never replaces a file that holds rows"""
-    p = os.path.join(out, name + ".json")
-    if guard and not rows:
-        old = load(p)
-        if isinstance(old, list) and old:
-            warn(f"{name}: the new build is empty; kept the previous {len(old)} rows in {p}")
-            print(f"{name:7s} {len(old):5d} rows  KEPT (new build empty)"); return
-    with open(p, "w") as f: json.dump(rows, f, separators=(",", ":"))
-    print(f"{name:7s} {len(rows):5d} rows  {extra}".rstrip())
+DESC = {
+    "morphs": ("Concept bench morphologies", "One row per morphology in the swarm's catalogue: status, the agent's claimed bench numbers, the verifier's re-measured numbers (v_), its best sweep configuration so far, and the 3R baseline once (is_baseline). Built from docs/concepts/catalogue.json, families.json, rows/*.json and sweeps/*.json."),
+    "sweeps": ("Concept bench sweeps", "Every configuration a morphology agent evaluated on the concept bench, with its time, gap, its morphology's best gap so far (best_gap) and the record over all morphologies so far (record_gap). Built from docs/concepts/sweeps/*.json."),
+    "cad": ("Built CAD judge results", "One row per judged design and requirement: value, threshold and pass from the outside judges, timed by the judge output (score files: the earlier of commit and file time; scorecard-only values: the scorecard's commit). Built from tools/judged_history.py, judge/scorecard.json files and judge/requirements.json."),
+    "gpu_evals": ("GPU evaluator detail runs", "Every GPU band-evaluator detail evaluation of a search candidate (in-band 14 mm, follow, workspace share, overhead follow). Time is the git commit that added the result file, not the run itself. Built from pipeline/conformal/gpu_client/band_eval_*.json via tools/judged_history.py --evals."),
+    "gpu_searches": ("GPU band searches", "One row per GPU search job: its final best fitness, follow, generations, evaluations and seconds. Time is the git commit that added the result file. Built from pipeline/conformal/gpu_client/band_search_*.json."),
+    "reqs": ("Requirement board", "Latest status of R1-R17 (with R1-aim and R5-aim) for the best judged 3-DOF design (most passes on its scorecard, then R1), with the best value any 3-DOF design reached under the current judging rules. Built from judge/scorecard.json files and judge/requirements.json."),
+    "events": ("Event log", "What happened and when: the swarm's own log (docs/concepts/events.jsonl), one milestone per judged design and every new built-CAD R1 record (from the judge outputs)."),
+    "spend": ("GPU spend log", "RunPod balance and cumulative spend at each logged audit. Built from docs/RUNPOD_COSTS.md (audit rows only)."),
+    "cov3d": ("Arm reach in 3-D", "One row per built design and everyday arm pose of the R16 workspace judge: where the upper arm points and whether the built design reaches it, with the reason if not. Built by tools/coverage3d.py from judge/workspace.json files (newest 8 designs)."),
+    "meta": ("Data build info", "When tools/dash_build.py last gathered the data, the repo commit, and any warnings it printed."),
+}
 
 
 def head_commit():
@@ -572,40 +549,42 @@ def head_commit():
 
 def main():
     ap = argparse.ArgumentParser(description=__doc__.split("\n")[0])
-    ap.add_argument("--out", default=None)
-    ap.add_argument("--sample", action="store_true", help="write SAMPLE data for the test harness (never publish)")
-    ap.add_argument("--events-old", default=DEF_EVENTS_OLD)
-    ap.add_argument("--cov3d", default=DEF_COV3D)
+    ap.add_argument("--out", default=os.path.join(REPO, "docs", "dashboard", "data"))
+    ap.add_argument("--manifest", default=os.path.join(REPO, "docs", "dashboard", "manifest.json"))
     a = ap.parse_args()
-    out = a.out or (os.path.join(SCRATCH, "dash2", "sample_data") if a.sample else DEF_OUT)
-    os.makedirs(out, exist_ok=True)
-    if a.sample:
-        M, S, E = sample()
-        E = events_merge_sample(E, a.events_old)
-    else:
-        S = sweeps()
-        counts = {}
-        for r in S: counts[r["id"]] = counts.get(r["id"], 0) + 1
-        M = morphs(counts); E = events(a.events_old)
-    J = judged(); R = reqs(J, E); C = cov3d(a.cov3d)
+    os.makedirs(a.out, exist_ok=True)
+    S = sweeps(); M = morphs(S)
+    C = cad([]); E = events(C)
+    C = cad(E)                                       # with any rule change the log adds
+    R = reqs(C, E)
+    data = dict(morphs=M, sweeps=S, cad=C, gpu_evals=gpu_evals(), gpu_searches=gpu_searches(), reqs=R, events=E, spend=spend(), cov3d=cov3d())
+    old = {d["id"]: d for d in (load(a.manifest, []) or [])}
+    man = []
+    built = iso(dt.datetime.now(dt.timezone.utc))
+    data["meta"] = None
+    for k in list(data):
+        rows = data[k]
+        if k == "meta": rows = [dict(built_at=built, commit=head_commit(), n_warnings=len(WARN), warnings=" | ".join(WARN)[:2000])]
+        p = os.path.join(a.out, k + ".json")
+        if k in ("cad", "cov3d", "gpu_evals") and not rows and isinstance(load(p), list) and load(p):
+            warn(f"{k}: the new build is empty; kept the previous file"); raw = open(p, "rb").read()
+        else:
+            if not rows:      # the runtime refuses a file with no rows: one marker row the page skips (EXO.rows drops it)
+                rows = [dict(empty=True, note="no rows yet")]
+            raw = json.dumps(rows, separators=(",", ":"), ensure_ascii=False).encode()
+            with open(p, "wb") as f: f.write(raw)
+        h = hashlib.sha256(raw).hexdigest()
+        n = sum(1 for r in json.loads(raw) if not (isinstance(r, dict) and r.get("empty") is True))
+        prev = old.get(k, {})
+        man.append(dict(id=k, title=DESC[k][0], description=DESC[k][1], file=os.path.relpath(p, os.path.dirname(a.manifest)),
+                        sha256=h, rows=n, bytes=len(raw), updated=prev.get("updated") if prev.get("sha256") == h else built))
+        flag = "" if prev.get("sha256") == h else "  CHANGED"
+        print(f"{k:13s} {n:6d} rows {len(raw):9d} B{flag}")
+        if len(raw) > 8 * 1024 * 1024: warn(f"{k} is over 8 MB: the dashboard refuses it")
+    with open(a.manifest, "w") as f: json.dump(man, f, indent=1); f.write("\n")
     base = next((m for m in M if m["is_baseline"]), None)
-    scr = [m for m in M if not m["is_baseline"] and m["gap"] is not None]
-    best = min(scr, key=lambda m: m["v_gap"] if m["v_gap"] is not None else m["gap"], default=None)
-    write(out, "morphs", M, f"{len(M) - (base is not None)} morphologies, {len(scr)} screened, baseline gap {base['gap'] if base else '-'}, best {best['name'] + ' ' + str(best['v_gap'] if best['v_gap'] is not None else best['gap']) if best else '-'}" + (" (SAMPLE)" if a.sample else ""))
-    write(out, "sweeps", S, f"{len({r['id'] for r in S})} morphologies")
-    write(out, "judged", J, f"{sum(1 for r in J if r.get('dof') == 3)} with 3 DOF, newest {J[-1]['design'] if J else '-'}", guard=True)
-    write(out, "events", E, f"newest {E[-1]['time'] if E else '-'}")
-    write(out, "reqs", R, f"{sum(1 for r in R if r['state'] == 'pass')} pass")
-    write(out, "cov3d", C, f"{len({r.get('design') for r in C})} designs, newest {C[-1]['design'] if C else '-'}", guard=True)
-    meta = [dict(built_at=iso(dt.datetime.now(dt.timezone.utc)), commit=head_commit(), sample=bool(a.sample),
-                 n_warnings=len(WARN), warnings=" | ".join(WARN)[:2000])]
-    write(out, "meta", meta, f"built {meta[0]['built_at']}" + (f", {len(WARN)} warning(s)" if WARN else ""))
-    print("->", out)
-
-
-def events_merge_sample(E, old_path):
-    old = events(old_path)
-    rows = old + E; rows.sort(key=lambda r: r["time"]); return rows
+    print(f"baseline gap {base['gap'] if base else '-'}; {sum(m['status'] == 'screened' for m in M)} screened; record {S[-1]['record_gap'] if S else '-'}; {len(WARN)} warning(s)")
+    print("->", a.out)
 
 
 if __name__ == "__main__":

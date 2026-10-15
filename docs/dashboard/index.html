@@ -1,0 +1,175 @@
+<link rel="stylesheet" href="dash.css">
+<div class="sw" id="sw-page">
+  <header class="sw-head" id="top">
+    <div class="sw-top">
+      <h1 class="sw-title">Shoulder exo: progress by benchmark</h1>
+      <span class="sw-fresh" id="fresh" data-state="idle"><span>data gathered <time id="fresh-built" data-source="meta" data-field="built_at" data-row="0" class="dash-skeleton">—</time></span><span class="sw-fresh-sep">·</span><span>last result <time id="fresh-last" data-source="summary" data-field="t_last" data-row="0" class="dash-skeleton">—</time></span></span>
+    </div>
+    <p class="sw-take" id="takeaway"><span class="dash-skeleton">—</span></p>
+    <nav class="sw-tabs" role="tablist" aria-label="Pages">
+      <button type="button" class="sw-tab" role="tab" id="tab-leader" data-tab="leader" aria-controls="leader" aria-selected="true">Leader</button>
+      <button type="button" class="sw-tab" role="tab" id="tab-bench" data-tab="bench" aria-controls="bench" aria-selected="false">Concept bench</button>
+      <button type="button" class="sw-tab" role="tab" id="tab-cad" data-tab="cad" aria-controls="cad" aria-selected="false">Built CAD</button>
+      <button type="button" class="sw-tab" role="tab" id="tab-reqs" data-tab="reqs" aria-controls="reqs" aria-selected="false">Requirements</button>
+      <button type="button" class="sw-tab" role="tab" id="tab-log" data-tab="log" aria-controls="log" aria-selected="false">Log</button>
+    </nav>
+  </header>
+
+  <!-- ============================== Leader -->
+  <section class="sw-page" id="leader" role="tabpanel" aria-labelledby="tab-leader">
+    <article class="sw-card sw-hero" id="hero-card">
+      <div class="sw-card-head">
+        <div class="sw-h2row"><h2 id="hero">Concept bench leader</h2><span class="sw-dir">&#8595; lower gap is better · 0 = every bench target met</span></div>
+      </div>
+      <div class="sw-hero-in" id="hero-body" data-source="summary morphs"></div>
+    </article>
+    <div class="sw-kpis" id="kpis" data-source="summary funnel"></div>
+    <article class="sw-card" id="record-card">
+      <div class="sw-card-head">
+        <div class="sw-h2row"><h2 id="record">Concept bench record over time</h2><span class="sw-dir">&#8595; lower is better</span></div>
+        <p class="sw-note">The step line is the best gap any morphology has reached so far on the concept bench (every configuration every agent evaluated, unverified until the verifier re-measures it). It turns to the accent colour once it is below the 3R baseline; each new record is a dot on the line and the current one is named. Faint dots are single configurations; a filled diamond is a verifier's re-measured gap.</p>
+      </div>
+      <div class="sw-key" id="record-key"></div>
+      <div class="sw-chart" id="record-chart" data-source="sweeps morphs"></div>
+    </article>
+    <article class="sw-card" id="cadrec-card">
+      <div class="sw-card-head">
+        <div class="sw-h2row"><h2 id="cadrec">Built CAD record: R1 over time</h2><span class="sw-dir">&#8593; higher is better</span></div>
+        <p class="sw-note">R1 is the share of the covered skin 2-14 mm from the metal while the exo follows the arm, judged on the built CAD with the exact posed skin (pass at 90%). The step line is the best 3-DOF design so far; each dot is one judged design (filled: full CAD, hollow: keep-out CAD). Values judged before a judging-rule change are faded.</p>
+      </div>
+      <div class="sw-key" id="cadrec-key"></div>
+      <div class="sw-chart" id="cadrec-chart" data-source="cad cad_record"></div>
+    </article>
+  </section>
+
+  <!-- ============================== Concept bench -->
+  <section class="sw-page" id="bench" role="tabpanel" aria-labelledby="tab-bench" hidden>
+    <article class="sw-card" id="curves-card">
+      <div class="sw-card-head">
+        <div class="sw-h2row"><h2 id="curves">Optimisation over time, per morphology</h2><span class="sw-dir">&#8595; lower is better</span></div>
+        <p class="sw-note">Each line is one morphology's best gap so far as its agent sweeps configurations (as the agent measured it). Lines in the accent colour are below the 3R baseline now; dashed lines are dropped or refuted. The vertical scale is compressed above 30 so that every morphology fits; ticks show real gap values.</p>
+      </div>
+      <div class="sw-key" id="curves-key"></div>
+      <div class="sw-chart sw-tall" id="curves-chart" data-source="sweeps morphs"></div>
+    </article>
+    <div class="sw-grid2">
+      <article class="sw-card" id="lands-card">
+        <div class="sw-card-head">
+          <div class="sw-h2row"><h2 id="lands">Reach vs in-band 14 mm</h2><span class="sw-dir">&#8599; up and right is better</span></div>
+          <p class="sw-note">One dot per morphology at its best evidence: filled if the verifier re-measured it, a ring for the agent's claimed row, a small dot for its best sweep configuration so far. The shaded corner is both bench targets met (90% each); the diamond is the 3R baseline. Accent: its gap beats the baseline.</p>
+        </div>
+        <div class="sw-key" id="lands-key"></div>
+        <div class="sw-chart" id="lands-chart" data-source="morphs"></div>
+      </article>
+      <article class="sw-card" id="funnel-card">
+        <div class="sw-card-head">
+          <h2 id="funnel">Pipeline</h2>
+          <p class="sw-note">How far each morphology of the catalogue has gone (duplicates and the baseline left out). Modelled: its agent has a model and is sweeping it; screened: a claimed bench row; verified: re-measured by the verifier; GPU and CAD: the next stages.</p>
+        </div>
+        <div class="sw-funnel" id="funnel-bars" data-source="funnel"></div>
+      </article>
+    </div>
+    <article class="sw-card" id="table-card">
+      <div class="sw-card-head">
+        <div class="sw-h2row"><h2 id="all">Every morphology</h2><span class="sw-count" id="table-count"></span></div>
+        <p class="sw-note">Gaps: best sweep configuration (live, unreviewed), the agent's claimed row, and the verifier's re-measured value. Click a header to sort; the dashed row is the 3R baseline when sorted by a gap.</p>
+      </div>
+      <div class="sw-tools"><input class="sw-search" id="table-search" type="search" placeholder="Search name, family, lens, status" aria-label="Search morphologies"></div>
+      <div class="sw-tablebox" id="table-box"><table class="sw-table" id="table" data-source="morphs" data-row-key="id"><thead></thead><tbody></tbody></table></div>
+    </article>
+  </section>
+
+  <!-- ============================== Built CAD -->
+  <section class="sw-page" id="cad" role="tabpanel" aria-labelledby="tab-cad" hidden>
+    <article class="sw-card" id="cadtime-card">
+      <div class="sw-card-head">
+        <div class="sw-h2row"><h2 id="cadtime">Each judged requirement over time</h2><span class="sw-dir">one chart per requirement · same time axis</span></div>
+        <p class="sw-note">Every built design the outside judges scored, at the time it was judged. The dashed line is the pass threshold, the step line the best 3-DOF value so far. Filled: full CAD; hollow: keep-out CAD; faded: judged before that requirement's judging rule changed. Percent charts share one 0-100% scale.</p>
+      </div>
+      <div class="sw-controls"><button type="button" class="sw-toggle" id="cad-show4" aria-pressed="false">Show 4-DOF designs</button></div>
+      <div class="sw-key" id="cad-key"></div>
+      <div class="sw-minis" id="cad-grid" data-source="cad"></div>
+      <div class="sw-strip" id="cad-bools" data-source="cad"></div>
+    </article>
+    <article class="sw-card" id="gpu-card">
+      <div class="sw-card-head">
+        <div class="sw-h2row"><h2 id="gpu">GPU search evaluator</h2><span class="sw-dir">&#8593; higher is better</span></div>
+        <p class="sw-note">The band evaluator's own estimates for search candidates (not the CAD judges): in-band 14 mm and the share of the everyday workspace followed, per detail evaluation, and each search job's final fitness. Times are when the result file was committed, not when the job ran, so a batch shares one time.</p>
+      </div>
+      <div class="sw-key" id="gpu-key"></div>
+      <div class="sw-minis" id="gpu-grid" data-source="gpu_evals gpu_searches"></div>
+    </article>
+    <article class="sw-card c3" id="reach3d-card">
+      <div class="sw-card-head">
+        <div class="sw-h2row"><h2 id="reach3d">Where your arm can go with the exo on</h2><span class="sw-dir">more green is better</span></div>
+        <p class="sw-note">Each dot is one everyday arm pose of the R16 workspace judge, placed where your upper arm points from the right shoulder (your elbow sits on the dot). Green: the built design reaches it, judged on its CAD (the joints get there, no part presses into you, no two parts collide). Red: blocked. Drag to turn; hover or tap a dot to see your arm there and why.</p>
+      </div>
+      <div class="c3-body">
+        <div class="c3-head">
+          <label class="c3-pick"><span>Built design</span><select id="reach3d-design" data-source="cov3d"></select></label>
+          <div class="c3-big">
+            <span class="c3-num dash-skeleton" id="reach3d-share" data-source="cov3d_share" data-field="share">—</span>
+            <span class="c3-sub">of <span id="reach3d-n" data-source="cov3d_share" data-field="poses">—</span> everyday arm poses reached (pass: 90%)</span>
+            <span class="c3-level"><span id="reach3d-level" data-source="cov3d" data-field="level"></span> · <span id="reach3d-id" data-source="cov3d" data-field="design"></span></span>
+          </div>
+        </div>
+        <div class="c3-foot">
+          <div class="c3-why" id="reach3d-why">
+            <div class="c3-why-h">Blocked because (click one to show only those dots; a pose can have two reasons)</div>
+            <button type="button" class="c3-reason" data-r="parts" aria-pressed="false"><i class="c3-dot"></i><span>two parts collide</span><b id="reach3d-parts" data-source="cov3d_share" data-field="parts">—</b></button>
+            <button type="button" class="c3-reason" data-r="body" aria-pressed="false"><i class="c3-dot"></i><span>a part presses into your body</span><b id="reach3d-body" data-source="cov3d_share" data-field="body">—</b></button>
+            <button type="button" class="c3-reason" data-r="chain" aria-pressed="false"><i class="c3-dot"></i><span>the joints cannot reach the pose</span><b id="reach3d-chain" data-source="cov3d_share" data-field="chain">—</b></button>
+          </div>
+          <div class="sw-key" id="reach3d-key"></div>
+        </div>
+        <div class="c3-stage">
+          <div class="c3-tools">
+            <span class="sw-clabel">Drag or use the arrow keys to turn</span>
+            <div class="sw-seg" role="group" aria-label="Camera" id="reach3d-views">
+              <button type="button" data-v="q" aria-pressed="true">3/4</button><button type="button" data-v="front" aria-pressed="false">Front</button><button type="button" data-v="side" aria-pressed="false">Side</button><button type="button" data-v="back" aria-pressed="false">Back</button><button type="button" data-v="top" aria-pressed="false">Top</button>
+            </div>
+          </div>
+          <div class="c3-view dash-skeleton" id="reach3d-view" data-source="cov3d"></div>
+          <div class="c3-read" id="reach3d-read" aria-live="polite"></div>
+        </div>
+      </div>
+    </article>
+  </section>
+
+  <!-- ============================== Requirements -->
+  <section class="sw-page" id="reqs" role="tabpanel" aria-labelledby="tab-reqs" hidden>
+    <article class="sw-card" id="board-card">
+      <div class="sw-card-head">
+        <div class="sw-h2row"><h2 id="board">Requirement board</h2><span class="sw-sum" id="board-sum" data-source="summary"></span></div>
+        <p class="sw-note" id="board-note">Each requirement's latest status on the best judged 3-DOF design (the one passing the most requirements, then the highest R1), with its threshold and judge. Below each: the best value any 3-DOF design reached under the current judging rules.</p>
+      </div>
+      <div class="sw-board" id="board-grid" data-source="reqs"></div>
+    </article>
+  </section>
+
+  <!-- ============================== Log -->
+  <section class="sw-page" id="log" role="tabpanel" aria-labelledby="tab-log" hidden>
+    <article class="sw-card" id="log-card">
+      <div class="sw-card-head">
+        <div class="sw-h2row"><h2 id="events">What happened</h2><span class="sw-count" id="log-count"></span></div>
+        <p class="sw-note">Newest first: the swarm's own log, each judged design and each new built-CAD R1 record. Measurement changes (a judge or a bench changed) are marked, so a jump is never read as design progress.</p>
+      </div>
+      <div class="sw-ctl"><span class="sw-clabel">Show</span><div class="sw-seg" role="group" aria-label="Kind" id="log-kind"></div></div>
+      <ol class="sw-log" id="log-list" data-source="events"></ol>
+    </article>
+    <article class="sw-card" id="spend-card">
+      <div class="sw-card-head">
+        <div class="sw-h2row"><h2 id="spend">GPU spend</h2><span class="sw-dir">cumulative, US dollars</span></div>
+        <p class="sw-note">RunPod spend at each logged cost audit (docs/RUNPOD_COSTS.md); between audits nothing is known.</p>
+      </div>
+      <div class="sw-chart sw-short" id="spend-chart" data-source="spend"></div>
+    </article>
+  </section>
+</div>
+<script src="core.js"></script>
+<script src="leader.js"></script>
+<script src="bench.js"></script>
+<script src="cad.js"></script>
+<script src="board.js"></script>
+<script src="reach3d.js"></script>
+<script src="main.js"></script>
