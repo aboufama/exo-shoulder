@@ -21,5 +21,5 @@ OMP_NUM_THREADS=2 ${PY:-python3} -W ignore verify_members.py $K 2>&1 | tail -2; 
 echo "[$(date -u +%H:%M:%S)] assemble"; OMP_NUM_THREADS=2 ${PY:-python3} -W ignore fair_build.py $K assemble 2>&1 | tee out_$K/assemble.log | tail -2
 cp out_$K/exo.glb $FX/designs/cad_$K/exo.glb
 OMP_NUM_THREADS=2 ${PY:-python3} -W ignore verify_armend.py $K 2>&1 | tail -6
-echo "[$(date -u +%H:%M:%S)] score"; (cd $FX && ${PY:-python3} -W ignore score_design.py designs/cad_$K 3 | tail -1)
+[ "$SKIP_SCORE" == "1" ] || { echo "[$(date -u +%H:%M:%S)] score"; (cd $FX && ${PY:-python3} -W ignore score_design.py designs/cad_$K 3 | tail -1); }   # SKIP_SCORE=1: tools/judge_all.sh scores it anyway (~8 min)
 echo "[$(date -u +%H:%M:%S)] done"
