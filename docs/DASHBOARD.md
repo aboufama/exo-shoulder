@@ -210,7 +210,9 @@ and cannot load offline, so the harness renders the serif in a fallback face.
   not shown until docs/RUNPOD_COSTS.md gets new rows.
 - `morphs` maps the catalogue status `modelling-interrupted` to `ideated` (with a note), because a partial model file
   is not a modelled morphology. A morphology counts as modelled once its sweep file exists.
-- The time axis is UTC throughout.
+- The data carry ISO UTC times; the published page draws every axis, tick and event time in US Eastern time
+  (America/New_York: EDT in summer, EST in winter; user, 2026-10-15: "put times in EST"), shifting each date to New
+  York wall-clock time before d3's UTC scales (`et()` in the page's first script).
 
 ## The published page is the one-page summary (user, 2026-10-15: "very confusing ... needs to be very easily digestible")
 
