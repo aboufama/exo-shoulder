@@ -113,4 +113,40 @@ judges -> preview (~3 min) -> yes -> calibration chunk -> film + stills (~30 min
 
 ## 5. What broke in the dry run and how it was fixed
 
-DRYRUN_NOTES
+1. **J1 raised by 204 mm** (`fair_cad/envelope.py`). The dense skin maps put a skin sample into the first sheet's
+   clearance band whenever its pixel has no detected re-entry, and posed-mesh sampling holes near the acromion leave
+   3-7 pixel patches where only the raised arm's far side (r1 ~ 230 mm) was sampled inside a ring of shoulder skin at
+   43 mm. The CAD's dense hub grid hit those pixels in 9 overhead frames (the evaluator's 21 hub samples did not).
+   Fix: `Envelope.first_sheet_r1c` - the first sheet is the nearest skin in a 9 x 9 pixel window, an r1c more than 25 mm
+   beyond it takes the window's largest first-sheet value; it never raises a need (over a random sphere x all followed
+   frames: 1.43 % of lookups lowered, median 24 mm, 0.68 % by > 25 mm; 0.32 % of those whose raw r1c is < 130 mm).
+   `FIRST_GAP=0` restores the raw maps. After the fix J1 rises 0.72 mm. This changes the CAD builder's
+   envelope, not a judge: R2 (exact signed distance to the posed body) stays the check. The same artefact may cost the
+   evaluator workspace poses ("skin_above_shape") - not checked.
+2. **Neck fold** (`armend_fair.build_hub_neck_v2`). On a 3R chain whose JN hub sits beside BOTTOM's cut (r16 s1373:
+   44 mm chord, 55 deg turn, hugging floor up to 9 mm over the chord) the great-circle + Bezier neck folds. Now the
+   rail neck's smoothing-spline paths are tried (approach 12/16/20 mm) and the first unfolded loft wins. s1374 (the
+   robustness build): approach 12 is clean. s1373: every candidate is flagged self-intersecting by OCC's analyser;
+   the 20 mm one (widest bend, 11.8 mm) is kept - the BOTTOM merge gives one valid solid (35.4 cm3) and R7 passes, but
+   look at the neck in `parts.html` before showing it (residual for L2).
+3. **CAD built thicker / flatter than the eval scored**: `members.T_LINK` was 5.5 and the ramps 35/55 deg; the r16/r17
+   jobs use t_link 4.0 and ramp_deg 60. `fair_build.py` now takes t_link / hw / ramp_deg from the input
+   (`RAMP_DEG`, `RAMP_TOP` env still override); r13 inputs carry 5.5 and no ramp, so their builds do not change.
+4. **Pose payload**: `fair_pipeline.sh` takes `POSES_FILE` from the input's `poses_file` (band_to_design + replan index
+   the per-pose feasibility by it); `make_input.py` writes it and refuses a payload that does not start with
+   band_poses.b64 (envelope.py / hold_bad.py are hard-wired to it).
+5. `design.json` (R5/R10/R17) and the R16 `workspace.json` were missing from CAD design dirs: `make_cad_design.py`
+   writes both (workspace poses re-framed to the CAD's fixed base; the band proxy's base turns with link 1).
+6. Preview: an explicit Playwright proxy gets 405 (Chromium already uses HTTPS_PROXY); `film.html` rendered every
+   animation frame in software and screenshots timed out (30 s) on the 22 MB GLB -> `__film.stop()` / `__film.draw()`
+   render on demand.
+7. Look: `ISO 10642` screws (cap and cuff screws) were bead-blasted in `render_film.py` / `render_stills.py` /
+   `film.html` -> polished stainless. `stills_plan.py` found no v4 cap for its close-up camera -> matches `cap Ø`.
+8. **v5 joint not built**: the evaluator scored v4 stack heights (r16/r17 jobs: hub_up 4.05, cap_up 3.3); the v5 hub
+   (2x 6700-2RS, 8.5 mm tall) changes every upper hub and cap height the search assumed and needs new
+   `joint_v4.py` / `hardware.py` parts + boolean re-validation - not a small change. R17 already models rolling bearings
+   (mu 0.005) independent of the CAD hardware.
+
+Known residuals: the fair CAD's link ribbons sit higher than the evaluator's fitted shape (l2 ribbon median +7.5 mm,
+p90 +14 mm; l1 +3.4 mm) - the swept-band profile is a stiff beam clamped flat at both hub planes. `FAIR_LAM=30` (less
+stiff) gives R1-aim 23.6 % vs 19.8 % (+3.8 points). `designs/cad_<key>/exo.glb` is 22 MB and not git-ignored.

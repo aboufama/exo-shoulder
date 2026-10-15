@@ -1,5 +1,9 @@
 [
  {
+  "id": "cad_r16_n3_s1373_1_lam30",
+  "label": "CAD r16 3R s1373 #1, FAIR_LAM 30 (proximity test)"
+ },
+ {
   "id": "cad_r16_n3_s1374_0",
   "label": "CAD r16 3R s1374 #0 (robustness test, ramp 35)"
  },
