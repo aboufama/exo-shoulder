@@ -162,8 +162,7 @@ def build(B, F, p):
                 same_body=[["rail1", "car1"], ["car1", "bridge1"], ["car1", "hub2"], ["bridge1", "hub2"], ["link2", "car3"],
                            ["car3", "rail3"], ["rail3", "neck"]])
     members = [rail1, car1, bridge, hub2, link2, car3, rail3, neck]
-    if not p.get("revolve", 1):
-        for m in (rail1, rail3): m.rows = None
+    if not p.get("revolve", 1): rail1.rows = None           # variant b: crown rail shaped per station (needs a radial float)
     return K.Chain(members=members, ok=ok, q=q, info=info,
                    joints=dict(J1=a1, J2=a2, J3=a3, C1=c1, C3=c3, N3=F.HG(tab_end)), hubless=("J1", "J3", "C1", "C3", "N3"))
 
@@ -211,7 +210,7 @@ def evaluate(B, p, **kw):
     p = dict(PARAMS, **p); it = []
     for n in range(3):
         r = K.evaluate(B, build, p, **kw); prof = B._kit_last["prof"]
-        f1, f3 = float(np.min(prof["rail1"])), float(np.min(prof["rail3"])); it.append((p["R1"], round(f1, 1), p["R3"], round(f3, 1)))
+        f1 = float(np.min(prof["rail1"]) if p.get("revolve", 1) else np.median(prof["rail1"])); f3 = float(np.min(prof["rail3"])); it.append((p["R1"], round(f1, 1), p["R3"], round(f3, 1)))
         if (p["R1"] <= f1 + 1.0 and p["R1"] >= f1 - 4.0 and p["R3"] <= f3 + 1.0 and p["R3"] >= f3 - 4.0) or n == 2 or f1 > 300 or f3 > 300: break
         p = dict(p, R1=float(np.clip(math.floor(f1), 30, 300)), R3=float(np.clip(math.floor(f3), 30, 300)))
     r.update(park(B)); r["layout_iter"] = it
