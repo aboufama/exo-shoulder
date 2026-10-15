@@ -142,3 +142,21 @@ in band") holds only for the 20 mm under the carriage.
   BEYOND the contact (here p95 208 mm vs 69 mm before it): it is the part a telescope removes and a cam cannot.
 * W at (112, -15) (the "low-motion" deltoid spot of the skin-motion map) puts the J3 hub and the neck out of band on
   this bench (0.00 both); the champion's W (86, 22) stays the better arm-end spot for hub-based 3R variants.
+
+## Audit
+
+Adversarial re-check of the death (Bench(60,160), fast cache, same model file).
+
+- Reproduced the claimed best exactly: gap 71.15 (reach 0.906, follow 1.00, inband14 0.189, contact 0), audit clean,
+  residual 0, 0 flips, 0 collisions.
+- No modelling bug or convention error found: closure, march, K2 continuity, K6 (same-body exemptions limited to parts of
+  one rigid body or the rail joint itself), O20 hubs and sampling all go through the shared kit as in the baseline.
+- Parameter range: the sweep stopped at d_off -45. Moving the rail closer to the J2 pole helps a little:
+  d_off -48 / -50 / -52 read 73.19 / **69.43** / 69.73 (sweep entries k120-k122, honest, audit clean; best: inband14
+  0.206, inband10 0.131, reach 0.906, follow 1.00, contact 0). Beyond -55 the strap and stage-2 sampling turns sparse
+  (audit fails) and the gap rises again (73.2 at -60).
+- Member split at d_off -50: rail 0.00 and stage 2 0.00 in band (their closest point is 122-135 mm from GH, over skin
+  at 50-60 mm), bridge 0.01, hub3 0.15, neck 0.42, strap1 0.30, hub1 1.00.
+- Verdict: **death stands**. The corrected best (69.43) is still behind the champion's 68.93, and the reason is the
+  one claimed: the rail parts are metal over the whole J2 travel at one radius about p2 and are never in band in any
+  pose set; moving the rail toward the pole does not bring it nearer the skin.

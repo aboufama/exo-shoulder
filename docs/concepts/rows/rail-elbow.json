@@ -14,11 +14,11 @@
  "inband10": 0.1171,
  "contact": 0.0,
  "gap": 71.15,
- "v_reach": null,
- "v_follow": null,
- "v_inband14": null,
- "v_inband10": null,
- "v_gap": null,
+ "v_reach": 0.9062,
+ "v_follow": 1.0,
+ "v_inband14": 0.2057,
+ "v_inband10": 0.1311,
+ "v_gap": 69.43,
  "n_configs": 65,
  "verdict": "dead: best honest gap 71.15 vs champion 68.93 (spec rigid rail 77.7-92.2); not worth a GPU sweep - the rail is metal over the whole ~140 deg J2 travel and a rigid carriage makes it one radius about p2: rail parts 0 % in band in every low-contact config",
  "note": "Bench(60,160) fast grid, kit checks (march, dense K2, K6, audit clean); best = 2-stage geared telescopic rail, champion axes, d_off -40, rail parts laid out at their fitted radius (r_lay 142.5); same config sampled at 70 mm read 69.51 (flattering). Spec changes: strap 1 to the rail END, rail = carriage travel + ends. Ti 152 g.",
@@ -56,5 +56,6 @@
   "J2",
   "L1r",
   "J2car"
- ]
+ ],
+ "audit_note": "Audit: no modelling bug or convention error; 71.15 reproduced exactly. The d_off sweep stopped at -45; d_off -50 (alpha 16.7 deg) reads 69.43 (honest, audit clean), d_off -48/-52 read 73.19/69.73, below -55 sampling turns sparse/dishonest. The rail and stage 2 stay 0 % in band in every config (116-150 mm from GH over skin at 50-60 mm): the death stands."
 }
