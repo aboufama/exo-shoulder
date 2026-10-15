@@ -32,7 +32,9 @@ Parts (every one at real size, sampled 2 mm at r_ref 70 like the kit straps):
 Rigid joins (web1-track2, web2-carriage, ring-neck) are fake joints W1..W3 so K6 exempts the weld zone (12 mm) only.
 Taken = closure with margin, every slider/carriage inside its arc, dense continuity (K2), K6 collisions (>= 1 mm).
 
-    OMP_NUM_THREADS=1 nice -n 10 python3 docs/concepts/models/seed-pauldron-shells.py [check|sweep|redteam]
+    OMP_NUM_THREADS=1 nice -n 10 python3 docs/concepts/models/seed-pauldron-shells.py check [key=value ...]   # PARAMS
+    ... coarse                      # the coarse grid (appends to docs/concepts/sweeps/seed-pauldron-shells.json)
+    ... refine <configs.jsonl>      # any list of configurations, one JSON per line (appends)
 """
 import itertools, json, math, os, sys
 import numpy as np
@@ -46,9 +48,13 @@ TRACK_T, RING_T, RING_W = 7.0, 6.0, 8.0                      # channel stack, C-
 CAR_L, CAR_W, CAR_T = 25.0, 12.0, 6.0                        # carriage
 GAP = 1.0                                                    # running gap web over channel / carriage over track
 R0 = 70.0                                                    # kit layout radius
-# kinematics start at the champion 3R's axes (rows/baseline-3r.json); wd ~ 0 + gamma > arm = the spec's C-ring round the arm
-PARAMS = dict(az=2.4305, el=80.6763, a1=76.9018, a2=66.7492, sigma=-1, margin=10.0, wd=86.3277, wa=21.8297,
-              g1=12.0, g2=12.0, gamma=12.0, side1=0, side2=0, side3=1, band_w=12.0, slider_len=30.0, web_w=12.0, cov=1.0, q=1.0)
+# best honest configuration (sweep k = 88, gap 79.46 on Bench(60, 160)); the sweep started at the champion 3R's axes
+# (rows/baseline-3r.json). wd ~ 0 + gamma > the arm = the spec's C-ring round the humerus axis (measured impossible).
+# side1 / side2: track of J1 / J2 on the proximal (0) or distal (1) body; j2hub=1: O20 hub at J2 (hybrid);
+# neck_c=1: the neck leaves from the ring's centre over the ring (no C-gap needed); cov<j>: share of the travel the arc holds.
+PARAMS = dict(az=2.841, el=86.115, a1=83.025, a2=64.198, sigma=-1, margin=10.0, wd=83.944, wa=13.919,
+              g1=16.0, g2=14.0, gamma=16.0, side1=1, side2=1, side3=1, band_w=12.0, slider_len=30.0, web_w=12.0,
+              cov=1.0, q=0.98, cov2=1.0, cov3=0.9)
 SWEEP_COARSE = dict(az=[100.0, 123.0, 145.0], el=[35.0, 50.0, 65.0], a1=[75.0, 90.0], a2=[75.0, 90.0], sigma=[-1, 1])
 
 
@@ -111,12 +117,16 @@ def build(B, F, p):
     if F is getattr(B, "_kitF", None) or key not in _ARCS:    # travelled arcs measured on the full bench (every closing pose)
         _ARCS[key] = [arc(np.r_[az[ok, j], 0.0], np.ones(ok.sum() + 1, bool), p.get(f"cov{j + 1}", p["cov"]), hs[j]) for j in range(3)]
     arcs = _ARCS[key]
-    for j in range(3): ok = ok & in_arc(az[:, j], *arcs[j], hs[j])
+    hub2 = bool(p.get("j2hub", 0))                             # hybrid: J2 as an O20 hub (K4), rings at J1 and J3
+    for j in range(3):
+        if not (hub2 and j == 1): ok = ok & in_arc(az[:, j], *arcs[j], hs[j])
+    if hub2: g = [g[0], 0.0, g[2]]
     ok &= (g[0] + g[1] + 4 < p["a1"]) & (g[1] + g[2] + 6 < p["a2"])
 
     # ---- 2. members -------------------------------------------------------------------------------------------------
     trk = []
     for j, nm in enumerate(("track1", "track2", "ring")):
+        if hub2 and j == 1: trk.append(K.hub_member("hub2", p2, "J2")); continue
         D, _ = band_dirs(J[j][0], *fr[j], g[j], wid[j], *arcs[j])
         trk.append(K.Member(nm, D, kind="cap", t=TRACK_T if j < 2 else RING_T, width=wid[j], joints=(f"J{j + 1}",)))
     # J3's moving element = the carriage, on the body that does not carry the ring, centred at that body's azimuth
@@ -131,29 +141,35 @@ def build(B, F, p):
         'car' (the carriage edge, at its level)"""
         e = perp(ka, kb)[0]; s0, s1 = ga * K.D2R, A * K.D2R - gb * K.D2R; ramp = []
         for which, (kind, tname, w) in (("a", end_a), ("b", end_b)):
+            if kind.startswith("hub"):                      # O20 hub: lower member at F (hub_lo), upper at F + STACK
+                ramp.append((tname, 0.0 if kind == "hub_lo" else K.STACK)); continue
             off = (w / 2 + 1.0) / R0 if kind in ("weld", "car") else 0.0
             if which == "a": s0 += off
             else: s1 -= off
             ramp.append((tname, 0.0 if kind in ("weld", "car") else TRACK_T + GAP))
             if kind in ("weld", "car"): welds[f"{name}{which}"] = (tname,)
         ua = K.unit(np.cos(s0) * ka + np.sin(s0) * e); ub = K.unit(np.cos(s1) * ka + np.sin(s1) * e)
-        js = tuple(f"{name}{w}" for w in "ab" if f"{name}{w}" in welds)
-        return K.strap_member(name, ua, ub, js, ang=s1 - s0, width=p["web_w"], t=3.0, ramp_to=tuple(ramp), end_mm=lift, **kw), ua, ub
+        js = tuple(f"{name}{w}" for w in "ab" if f"{name}{w}" in welds) + (("J2",) if hub2 else ())
+        return K.strap_member(name, ua, ub, js, ang=s1 - s0, width=p["web_w"], t=3.0, ramp_to=tuple(ramp),
+                              end_mm=max(lift, K.HUB_R + 2.0) if hub2 else lift, **kw), ua, ub
 
     A1, A2 = p["a1"], p["a2"]
     w1, w1a, w1b = web("web1", p1, p2, g[0], g[1], A1, ("weld" if side[0] else "slide", "track1", p["band_w"]),
-                       ("slide" if side[1] else "weld", "track2", p["band_w"]))
+                       ("hub_lo", "hub2", 0) if hub2 else ("slide" if side[1] else "weld", "track2", p["band_w"]))
     e2b = ("car", "carriage", CAR_W) if side[2] else ("weld", "ring", RING_W)
     w2over = [("web1", GAP), ("neck", GAP)] if p.get("w2over", 0) else []
-    w2, w2a, w2b = web("web2", p2, p3, g[1], g[2], A2, ("weld" if side[1] else "slide", "track2", p["band_w"]), e2b, over=w2over)
+    w2, w2a, w2b = web("web2", p2, p3, g[1], g[2], A2, ("hub_up", "hub2", 0) if hub2 else
+                       ("weld" if side[1] else "slide", "track2", p["band_w"]), e2b, over=w2over)
     # neck (K7) from the humerus-side element of J3 (ring if side3, else the carriage) to BOTTOM's bar
     bar = F.H(K.unit(K.BAR0_H)); gr = g[2] * K.D2R
-    if side[2]:            # ring on the humerus: the neck leaves it in the middle of the C's gap (the carriage never goes there)
+    if side[2] and p.get("neck_c", 0):   # variant: the neck starts at the ring's CENTRE (a spoke at ring level inside the
+        src = "ring"; na = None          # ring, never under the carriage) and passes over the ring + carriage path: full ring OK
+    elif side[2]:          # ring on the humerus: the neck leaves it in the middle of the C's gap (the carriage never goes there)
         src = "ring"; lo, hi = arcs[2]; gz = math.radians((lo + hi) / 2 + 180.0) if hi - lo < 360 else 0.0
         na = math.cos(gz) * fr[2][0] + math.sin(gz) * fr[2][1]
         if hi - lo >= 360 - 2 * math.degrees(9.0 / (R0 * math.sin(gr))): ok = ok & False   # no gap wide enough for the 14 mm neck
     else: na = perp(p3, hl)[0]; src = "carriage"
-    nstart = K.unit(math.cos(gr) * p3 + math.sin(gr) * na)
+    nstart = p3 if na is None else K.unit(math.cos(gr) * p3 + math.sin(gr) * na)
     # K7 neck (14 x 6, = K.neck_member) passing OVER the ring and the carriage path wherever it crosses them (>= 1 mm)
     nover = [("ring", GAP), ("carriage", GAP)] if side[2] else []
     neck = K.strap_member("neck", nstart, bar, ("neck_a",), width=14.0, t=6.0, ramp_to=((src, 0.0), (None, 0)), over=nover)
@@ -164,7 +180,7 @@ def build(B, F, p):
     for wname, (other,) in welds.items(): by[other].joints = tuple(by[other].joints) + (wname,)   # weld zone: K6 exempt there only
     joints = dict(J1=p1, J2=p2, J3=p3, **{w: wpts[w] for w in welds})
     resid = K.closure_residual(p1, p3, p2, A1, A2)
-    return K.Chain(members=members, ok=ok, q=th, joints=joints, hubless=tuple(joints),   # ring bearings + weld zones, no O20 hubs
+    return K.Chain(members=members, ok=ok, q=th, joints=joints, hubless=tuple(j for j in joints if not (hub2 and j == "J2")),   # ring bearings + weld zones, no O20 hubs
                    info=dict(residual_deg=round(float(resid[ok].max()), 5) if ok.any() else None,
                              min_margin=round(float(margin[ok].min()), 2) if ok.any() else None,
                              arcs=[round(float(h - l), 1) for l, h in arcs]))
@@ -176,6 +192,8 @@ def grid(base, sw):
 
 
 SWP = os.path.join(REPO, "docs", "concepts", "sweeps", f"{ID}.json")
+# the k 0-33 grid ran with the champion's axes as base (az 2.4305, el 80.6763, a1 76.9018, a2 66.7492, wd 86.3277,
+# wa 21.8297, sigma -1, g1/g2/gamma 12, q 0.95); every entry of the sweep file holds its full params
 SWEEP = dict(g1=[12.0, 20.0], g2=[8.0, 14.0], gamma=[12.0, 20.0], cov2=[1.0, 0.9], cov3=[0.9, 0.8], sides=[(0, 0), (1, 1)])
 
 
@@ -189,14 +207,14 @@ def coarse():
 def run(B, configs, best_gap=None):
     """evaluate configs in order, appending each to the sweep file as it finishes; an event at every new best gap"""
     rows = json.load(open(SWP)) if os.path.exists(SWP) else []
-    best = min((r["gap"] for r in rows), default=None)
+    best = min((r["gap"] for r in rows if r.get("honest")), default=None)   # only configurations that pass the kit audit count
     for p in configs:
         r = K.evaluate(B, build, dict(p))
         e = dict(k=len(rows), t=K.now(), params=p, **{x: r[x] for x in ("inband14", "inband10", "reach", "follow", "contact", "gap")},
                  closure=r["closure"], collide=r["collide"], mass_g=r["mass_g"], honest=r["honest"], inband_member=r["inband_member"])
         rows.append(e); json.dump(rows, open(SWP + ".tmp", "w"), indent=1); os.replace(SWP + ".tmp", SWP)
         print(e["k"], e["gap"], e["reach"], e["follow"], e["inband14"], e["contact"], r["collide"], flush=True)
-        if best is None or e["gap"] < best:
+        if e["honest"] and (best is None or e["gap"] < best):
             best = e["gap"]
             K.log_event(f"seed-pauldron-shells new best gap {e['gap']} (reach {e['reach']}, follow {e['follow']}, in-band 14 {e['inband14']}, contact {e['contact']}; config k={e['k']})")
     return rows
