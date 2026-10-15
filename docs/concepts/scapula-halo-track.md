@@ -123,3 +123,20 @@ In band per member (2-14 mm, over the clip frames taken):
 5. **Continuity.** Continuity is checked on every 10 fps frame of each fit clip.
 
 ![sketch](img/scapula-halo-track.png)
+
+## Audit (adversarial re-check, 2026-10-15)
+
+Verdict: **the death stands.** I re-measured the best config on Bench(60,160) (fast cache) and got the same numbers: gap 87.64, reach 0.531, follow 0.783, in-band 2-14 0.559, in-band 2-10 0.341, contact 0. Most of the gap is closure (78 of 220 poses have no crossing). Link 2 in band 0.14 is the second limit.
+
+Checked against `tools/concept_baseline.py`:
+- **Conventions.** The bench, sample density (2 mm grid), O20 hub size and stack all match. The model is stricter than the baseline in three ways: clip continuity, the non-adjacent clearance check, and q=1 instead of the baseline's p95 profile with 10 % contact. All three are required by the honesty rules, so they are not over-strict. q 0.97/0.99 was swept and is worse (92-95).
+- **A real bug, but it does not move the number.** `ib_map` turns a direction with no requirement found (inf) into 400 mm. A direction at 400 in every pose then counts as "in band" (max - req = 0). About 110 such cells, all at low el. The contour only grows down from the pole and erodes, so the cells never reach the loop. They do not affect the result.
+- **Was the parameter range too narrow?** This was the real candidate. The loop (el 44.6-79.6) is much smaller than the true in-band zone: share 1.0 and top < 150 mm, which reaches el ~10-30 on the posterior side (az -36..72). An upper bound with J2 allowed anywhere in that zone (W_delta 75-120, W_az -60..90, a2 40-140, 1.5 deg margin, no transversality / clearance) gives reach 0.79 / clip 1.0 for el >= 30. The bound falls to 0.67 / 0.92 for el >= 60. The ib100 loop itself is bounded at 0.54-0.59 / 0.83-0.85. So the eroded, max-smoothed contour does cost closure.
+- **Re-measure with a loop drawn on the full zone.** Same Track fit, contour eroded only 1 or 2 az cells, 5-tap mean with no max-smoothing, top < 150 filter. I ran 8 configs (W (100,-15)/(85,-10)/(80,-10)/(90,-15), a2 75-85):
+  - eroded 1 cell: closure 0.71-0.73, but the 3-harmonic loop leaves the zone. Track 97-149 mm, link 2 and carriage 0 % in band, gap 121-148.
+  - eroded 2 cells: track 51-74 mm, but closure 0.63-0.67, link 2 1-3 % in band, and link2/armend interference in up to 22 poses. Gap 111-119.
+  - Every config was worse than 87.64.
+
+Measured reason, in one line: no smooth loop that stays inside the scapula in-band zone closes more than ~67 % of poses, and widening it either puts the track 100-150 mm out or pushes the rigid link 2 out of band.
+
+Audit script: `/tmp/claude-0/-home-user-exo-shoulder/029f38fb-570e-5d7a-bebc-fc64e6215529/scratchpad/halo_audit4.py` (not committed).
