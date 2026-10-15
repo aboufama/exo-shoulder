@@ -201,3 +201,43 @@ refit) runs on the farm, exact path. (2) The greedy pose drop makes the objectiv
 whose contact share differs by 1-2 poses): the CMA best is a selection maximum, so the exact large-bench re-measure, not
 the fast sweep number, is the claim. (3) Still unmodelled: the radial-slide guide (pins or bushing, ~2 R_r stroke +
 engagement, not skin-facing), part-part clearance of strap mid-surfaces sampled at 2 mm (not exact solids).
+
+## L1 keep-out CAD + outside judges (leader stage 2, 2026-10-15)
+
+**Built:** `pipeline/full-exo/designs/l1_seed-offset-3r-slides/` from the CMA best k 403 (`pipeline/concept_l1/build_seed_offset_l1.py
+403`; the model's own fit, VModel, on Bench(60,160) fast, reproduces gap 54.95 exactly). 14 keep-out parts, 104 g Ti: O20 hub
+keep-outs at the real v5 stack (lower plate F..F+3, upper boss + cap F+3.15..F+12.25), 8 x 3 mm link straps whose underside
+passes through the model's fitted samples, member 3 = J3 plate + ramped neck (17.6 mm, <= 60 deg) + bridge + carriage B,
+carriage A on its own group, the arm-fixed rail in the humerus group, and the user's arm parts. One closed mesh per part
+(judge/part_validity.py: all 12 non-arm parts valid; the 2 arm-side proxies are valid closed meshes too). **Kinematics
+reproduced exactly:** the model's metal samples at 3 bench poses (rest, internal rotation 75, elevation 165) lie on the posed
+exo.glb within **0.000 mm** (clips.json "G" rotation + "T" translation per group; carriage A = RS Q with the along-slide
+translation; member 3's closure residual <= 0.015 deg). The clips were built on this box and on the cloud farm: byte-identical.
+
+**Two parts the model did not have.** (1) The rail mount: the arm-fixed rail has to be fixed to the arm. The nearest arm part
+is the end of the user's BOTTOM bar, 29 mm across from the rail centre line and just past the rail's far end. Built as a
+4 mm slab (along 21.8..33.9 mm from the stage centre, across -29.1..4.0 mm, at the rail's level). (2) The bridge has to meet
+the neck: the verifier's bridge (3 mm, underside at carriage B's underside) ends 1 mm below the neck's end (the neck ramps
+onto carriage B's TOP). Built with its underside where the verifier put it and its top flush with the neck (7 mm), so
+member 3 is one body. Still not built (as in the model): the radial-slide guide (pins or bushing, +-7.6 mm stroke) and the
+base tab to the scapula handler.
+
+**Clip frames (30 fps; the 2 held-out clips judged, never fitted).** A frame is followed when the model's own rules pass
+(fold margin 10 deg, slides in range, closure, joint step <= 25 deg, non-adjacent parts >= 1 mm, no metal sample inside
+the exact posed skin); otherwise the arm is held. **Raise overhead: 83 of 181 frames held, 79 of them at the J2 fold.**
+The CMA's direction deltas did this: at the seed directions (the champion's) not one frame of any clip reaches the fold
+(0 of 1337); at k 403's (d_el -8.1, d_wd +3.7, d_a1 +3.3, d_a2 -2.7 deg) the top 44 % of Raise overhead does. The bench
+cannot see it: it samples about 10 frames of that clip among its 60 clip frames, so losing the overhead costs ~3 gap
+points while the lower hubs buy more. **Wave (held out): 74 of 172 frames held** - 26 branch flips, 21 part jams, 18 metal
+in the skin (down to -8.6 mm: the undersides were fitted on 220 poses, none of them from Wave), 9 waiting to resume. The
+other 6 clips are followed in full. Workspace (1432 poses): the chain closes on 84.2 %, 83.7 % with parts clear.
+
+**Outside judges** (judge/*.py, score_design.py on the exact posed skin, vs the built champion
+`param_r20_n3_s1414_4` = the r20 s1414 #4 chain these directions were seeded from):
+
+| | l1_seed-offset-3r-slides | champion param_r20_n3_s1414_4 |
+|---|---|---|
+| R1 (2-14 mm, x follow) | **53.7 %** (in band while following 60.5 %) | 54.1 % |
+| R3 follows | 88.7 % | 98.2 % |
+| R4 Raise overhead (14 mm) | 36.4 % (follows 55.7 %, in band 65.2 %) | 48.7 % |
+| per clip (14 mm) | drink 54.8, comb 57.7, shelf 63.8, wash 34.3, back pocket 79.4, wave 41.5, walking 77.7 % | |
