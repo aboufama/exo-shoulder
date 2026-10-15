@@ -49,10 +49,12 @@ def build(B, F, p):
     hubs = [K.hub_member("hub1", p1, "J1"), K.hub_member("hub2", p2, "J2"), K.hub_member("hub3", p3, "J3")]
     # base bridge (scapula-fixed): handler mount -> over the acromion top -> J1 seat (lower member at J1)
     b0, bw = F.S(sdir(p["br_lat"], p["br_lon"])), F.S(sdir(p["bw_lat"], p["bw_lon"]))
-    bridge = [K.strap_member("bridge_a", b0, bw, (), width=p["br_w"], t=3.0),
-              K.strap_member("bridge_b", bw, p1, ("J1",), width=p["br_w"], t=3.0, ramp_to=((None, 0), ("hub1", 0.0)))]
+    # two straps bolted at the waypoint as a lap joint: bridge_a passes OVER bridge_b there (>= 1 mm, by construction);
+    # without it K6 flagged their shared end in every pose (v1 bug: 'collide 1.0' whenever both sat at one level)
+    bridge = [K.strap_member("bridge_b", bw, p1, ("J1",), width=p["br_w"], t=3.0, ramp_to=((None, 0), ("hub1", 0.0))),
+              K.strap_member("bridge_a", b0, bw, (), width=p["br_w"], t=3.0, over=[("bridge_b", 1.0)])]
     w, t = p["width"], p["t_link"]
-    o1 = [("bridge_b", 1.0), ("bridge_a", 1.0)] if p.get("link1_over_bridge", 1) else []
+    o1 = [("bridge_b", 1.0)] if p.get("link1_over_bridge", 1) else []   # link 1 sweeps about J1: over the bridge's J1 end
     links = [K.strap_member("link1", p1, p2, ("J1", "J2"), width=w, t=t, ramp_to=(("hub1", K.STACK), ("hub2", 0.0)),
                             **({"over": o1} if o1 else {})),
              K.strap_member("link2", p2, p3, ("J2", "J3"), width=w, t=t, ramp_to=(("hub2", K.STACK), ("hub3", K.STACK)),
