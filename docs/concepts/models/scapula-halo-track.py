@@ -14,11 +14,17 @@ DOF: given the arm, w is known; s solves angle(u(s), w) = a2 (a 1-D root, transv
 w about p2 from the track tangent, q3 the twist about w. Three real joints the arm drives, nothing free, nothing sags.
 
 SPEC CHANGES (stated in docs/concepts/scapula-halo-track.md):
-  1. The track is at ONE radius from GH (a curve on a sphere). The spec gave every track sample its own radius (skin
-     requirement + 5). That is not buildable as a spherical joint: the carriage pose on the track must be a rotation
-     about GH, so its rollers sweep a constant radius; a varying radius would push the J2 bearing along its axis while
-     link 2 (rigid, both axes through GH) keeps its radius - it binds. A varying radius needs a passive radial slide
-     AND a pitch pivot in the bogie; not modelled (would add 2 closure-set passive elements).
+  1. The track's radius follows the skin under it (default mode "slide"): the spec gave every track sample its own
+     radius, which a rigid spherical joint cannot ride (link 2 keeps its radius). The model therefore gives the bogie a
+     pitch pivot and the J2 pin a radial slide through link 2's eye. Both are cam-set by s (the track's radius and slope
+     at the carriage), so they are passive but determined (the ACTIVE-DOF rule: outside the count, nothing sags). The
+     slide travel is reported ("slide", 11-13 mm on the best design). mode "sphere" = one radius, no slide.
+  1b. The track's plan shape comes from the bench itself (thr "ibNN"), not from the skin-motion map. ib_map marches
+     the K3 requirement along a 6 x 3 deg grid of scapula-frame directions in every bench pose. The zone is where a
+     part fixed at the worst-pose radius stays 2-14 mm off the skin in >= NN % of poses, eroded by the track and
+     carriage width. The loop is that zone's boundary, smoothed into the zone. The map contours (thr 13 / 20) run over
+     skin that the raised arm covers: the requirement there is 100-400 mm at elev 150-165, so the track was at
+     75-400 mm.
   2. Branch: the spec picks the root by sign((u x du/ds).w); for a convex loop both crossings of the circle about w
      have the SAME sign of that (mirror symmetry), so it cannot tell them apart. The roots alternate in the sign of
      du/ds.w (in / out of the circle), so sigma = sign(t . w) at the root.
@@ -37,7 +43,8 @@ no interference between non-adjacent members (>= 1 mm, K6 with joint partners ex
 no metal inside the body (tops / sides / crowns checked too: one inside sample is appended so the bench sees contact).
 
     python3 docs/concepts/models/scapula-halo-track.py check     # a few poses on the bench, numbers + reasons
-    python3 docs/concepts/models/scapula-halo-track.py sweep     # coarse -> refine sweep on Bench(60, 160)
+    python3 docs/concepts/models/scapula-halo-track.py sweep [out.json]  # the coarse -> refine grid actually run, Bench(60, 160)
+    python3 docs/concepts/models/scapula-halo-track.py best      # the best configuration on Bench(60, 160)
 """
 import json, math, os, sys, time
 import numpy as np
@@ -702,8 +709,27 @@ def mini(B, keep):
     return B
 
 
+BEST = dict(thr="ib100", shrink=0, W_delta=100, W_az=-15, a2=75, sigma=-1, q=1.0, closed=1)
+
+
+def grids():
+    """the sweep actually run (docs/concepts/sweeps/scapula-halo-track.json, stages coarse6 + refine1)"""
+    import itertools
+    g = [dict(thr="ib100", shrink=0, W_delta=wd, W_az=wa, a2=a2, sigma=sg, q=q, closed=0)
+         for wd, wa, a2, sg, q in itertools.product((90, 100), (-15, 5, 25), (60, 75, 90), (-1, 1), (1.0, 0.97))]
+    g += [dict(thr="ib100", shrink=0, W_delta=wd, W_az=wa, a2=a2, sigma=-1, q=1.0, closed=0)
+          for wd, wa, a2 in itertools.product((95, 100, 105), (-25, -15, -5), (70, 80, 85))]
+    g += [dict(BEST, closed=0, **e) for e in (dict(order="L"), dict(shrink=1.5), dict(closed=1), dict(q=0.99))]
+    return g
+
+
 if __name__ == "__main__":
     a = sys.argv[1:]
+    if a and a[0] == "sweep":
+        B = CB.Bench(60, 160); ctx = Ctx(B); sweep(grids(), ctx, out=a[1] if len(a) > 1 else SWEEP_OUT, tag="rerun"); sys.exit()
+    if a and a[0] == "best":
+        B = CB.Bench(60, 160); ctx = Ctx(B); r, D = run(BEST, ctx); print(json.dumps(r, default=str)); sys.exit()
+    PARAMS.update(BEST)
     if not a or a[0] == "check":
         B = CB.Bench(n_clip=20, n_ws=40)
         if "mini" in a:
