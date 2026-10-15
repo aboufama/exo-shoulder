@@ -85,3 +85,46 @@ Reach >= 0.90 needs the rail at >= ~115 mm from GH; there the one-radius rail is
 The deltoid, armpit and pectoral stations are the ones the arm enters (the spec's own 13-pose precheck found the same:
 ~45-50 % of the workspace).
 
+## Sweep (Bench(60, 160), fast grid cache, K3 march, dense K2, K6, audit clean)
+
+| stage | tries | best gap | where |
+|---|---|---|---|
+| local check, spec axis a1 = sdir(0, 20), gamma 50, alpha23 80, champion J3 | 1 | 158.84 | reach 0.31, follow 0.53 |
+| coarse, farm: 12 seeds (spec, workspace-centre, champion, ...) + 276 random | 288 | 147.61 | rail laid out at 55 mm (wider than real when R > 55: conservative) |
+| CMA-ES, farm (tools/concept_cma.py, 6 streams A-F from the coarse top + spec seed, popsize 8, ~150 generations each) | 7262 | 78.04 | stream E; A 81.17, D 82.95, B 92.23, C 95.06, F 105.83 (several basins) |
+| red-team rescore under the strict layout rule (r_lay <= R + 0.25), top 25 distinct | 25 | **78.54** | k7562 |
+CMA_STREAMS_2
+
+**Best (k7562), honest, audit clean:** gap **78.54** (score **71.44**; champion 68.93 / 74.93): reach **0.575**, follow
+**0.85**, in-band 14 **0.617**, in-band 10 **0.276**, contact **0.077**. az1 103.78, el1 71.51 (race axis a1 lateral,
+up 72 deg), gamma 37.41, alpha23 106.85, J3 wdir(51.34, -23.57), branch -1, q 0.912, rmax 83.8, r_lay 62 = R 62.0.
+The rail spans 209 deg of the circle at 62 mm from GH; J1 travel -5..156 deg. Per member in band: **rail + rollers
+0.959**, hub2 (carriage plate) 0.317, link2 0.283, hub3 0.754, neck 0.883. Ti mass 124 g.
+
+The race does what the spec promised - the rail on the quiet rim is the most in-band member any morphology has shown
+(0.96), and the in-band total (0.62) beats the champion (0.44) - but the J2 axis cannot follow the arm: closure + rail
+range take 70 % of the poses, reach 0.575.
+
+**Convergence gate** (score points, honest tries in chronological order - coarse, then the CMA streams interleaved by
+generation): best gained 0.17 over the second half, 0.06 over the last third, top 5 within 0.06 (tolerant layout rule);
+the strict-rule rescore of the top 25: top 5 within 0.66. **Converged.** GATE_2
+
+## Red team (k7562 / its twin k6367)
+
+* **Optimistic number found and removed:** the first CMA ran with a +1.5 mm layout tolerance; it parked r_lay 1 mm
+  above the fitted rail radius (rail drawn 9.84 mm wide, end stops shorter): 78.04. With r_lay <= R + 0.25 (now the
+  model's rule) the same configuration reads 80.78, and the best strict configuration 78.54.
+* **Pose classes** (taken / total; why not): rest (elev < 25) 56/58 (2 contact); overhead (elev >= 120) **17/41**
+  (14 no closure, 4 off the rail, 6 contact); across the body (plane >= 100) 12/27 (6 no closure, 9 off the rail);
+  behind the back (plane <= -40) 17/23 (3 no closure, 3 contact); abduction 60-120 deg 10/26 (15 no closure).
+* **The pose that sets the rail radius:** overhead plane 45 elev 165 axial -90 - the arm itself lies on the rail
+  stations (need 176 mm); the rail stays at 62 mm because those poses are inside the q = 0.91 tail: they are contact
+  poses (counted, 7.7 % contact).
+* **Pinch:** link 2, 23.9 mm inside the arm at overhead plane 120 elev 165 (a contact pose, counted as contact).
+* **True-3D part clearances** over the taken poses (underside and top surfaces as point clouds): link 2 over the rail
+  1.0 mm (the `over` rule, exact); link 2 vs neck 0.21 mm, 12-16 mm from the J3 axis - they are the upper and lower
+  members of J3, so the 0.15 mm running gap applies (passes); hub2 / rail vs the arm parts >= 35 mm.
+* **Not modelled, would cost more:** the rail's mounting to the scapula handler (outside the count); the rollers as
+  two strips at R (real V-rollers have a 2-3 mm deeper groove); the carriage plate is the O20 lower plate (20 mm disc)
+  - a carriage carrying four rollers is closer to 26 x 22 mm, so hub2's 0.32 would drop.
+

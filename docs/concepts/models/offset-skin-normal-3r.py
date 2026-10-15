@@ -305,3 +305,5 @@ if __name__ == "__main__":
         print("-- hub 2 face: poses that set it --")
         for a in top: print(f"  {H2[a].max():6.1f}  {lab(int(M.poses_fit[a]))}  dropped {bool(M.drop[a])}")
         print("slide travel used (along, across, radial) max |s - mid|:", [round(float(np.abs(M.s[M.kin_ok][:, k] - M.D.m[k]).max()), 1) for k in range(3)])
+        if "--png" in sys.argv:
+            S.ID = ID; S.sketch(M, os.path.join(REPO, "docs", "concepts", "img", ID + ".png")); print("sketch written")

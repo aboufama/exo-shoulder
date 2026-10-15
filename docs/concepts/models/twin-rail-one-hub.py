@@ -204,12 +204,13 @@ def park(B):
 
 
 def evaluate(B, p, **kw):
-    p = dict(PARAMS, **p); r = K.evaluate(B, build, p, **kw); r.update(park(B)); return r
+    """-> (params, report): the kit report + the parking rule (tools/concept_cma.py contract)"""
+    p = dict(PARAMS, **p); r = K.evaluate(B, build, p, **kw); r.update(park(B)); return p, r
 
 
 def bench_eval(B, p):
     """tools/concept_sweep.py hook: the kit report + the parking rule"""
-    return evaluate(B, p)
+    return evaluate(B, p)[1]
 
 
 def metal(pose, frames, params):
@@ -229,7 +230,45 @@ if __name__ == "__main__":
     a = sys.argv[1:]; mode = a[0] if a else "check"
     B = K.bench(60, 160)
     if mode == "check":
-        import time; t0 = time.time(); r = evaluate(B, _parse(a[1:]))
+        import time; t0 = time.time(); _, r = evaluate(B, _parse(a[1:]))
         print(json.dumps({x: r.get(x) for x in ("gap", "reach", "follow", "inband14", "inband10", "contact", "closure", "flips",
                                                  "collide", "inband_member", "honest", "audit", "rail1_deg", "rail1_mm", "rail3_deg",
                                                  "rail3_mm", "hub2", "park_ok", "residual_deg", "sample_mm", "mass_g")}, indent=1), round(time.time() - t0, 1), "s")
+    elif mode == "redteam":
+        p, r = evaluate(B, _parse(a[1:])); L = B._kit_last; ch = L["chain"]; take, ok, hit = L["take"], L["ok"], L["hit"]
+        F = B._kitF; k = kin(F, p); T = travel(B, p); P = len(take)
+        close = k["ok"]; rng = np.ones(P, bool)
+        for n in ("q1", "q3"):
+            c, lo, hi = T[n]; rel = wrap(k[n] - c); rng &= (rel >= lo) & (rel <= hi)
+        allp = np.concatenate([L["pts"][m.name] for m in ch.members], 1); names = np.concatenate([[m.name] * L["pts"][m.name].shape[1] for m in ch.members])
+        dmin = np.full(P, np.nan); arg = [None] * P
+        for i in range(P):
+            if ok[i]:
+                d = B.dist(i, allp[i]); j = int(np.argmin(d)); dmin[i] = d[j]; arg[i] = names[j]
+        groups = dict(rest=lambda q: q["elev"] <= 20, overhead=lambda q: q["elev"] >= 140,
+                      across=lambda q: q["plane"] >= 120 and q["elev"] >= 45, behind=lambda q: q["plane"] <= -60 or q["axial"] >= 120)
+        out = dict(report={x: r.get(x) for x in ("gap", "reach", "follow", "inband14", "inband10", "contact", "inband_member", "hub2", "park_ok")})
+        for g, f in groups.items():
+            I = [i for i in range(P) if f(B.poses[i])]
+            why = dict(closure=0, rail_range=0, continuity=0, collision=0, contact=0, taken=0)
+            for i in I:
+                if not close[i]: why["closure"] += 1
+                elif not rng[i]: why["rail_range"] += 1
+                elif not ok[i]: why["continuity"] += 1
+                elif hit[i]: why["collision"] += 1
+                elif dmin[i] < 0: why["contact"] += 1
+                else: why["taken"] += 1
+            out[g] = dict(n=len(I), **why)
+        tk = [i for i in range(P) if take[i] and dmin[i] >= 0]
+        pinch = sorted(tk, key=lambda i: dmin[i])[:5]
+        out["pinch"] = [dict(pose={x: round(float(v), 0) for x, v in B.poses[i].items()}, kind=B.kind[i], member=arg[i], d=round(float(dmin[i]), 2)) for i in pinch]
+        # the pose that sets each rail's level: per rail, the (pose, sample) whose requirement equals the fitted row level
+        for m in ch.members:
+            if getattr(m, "rows", None) is None or m.name not in ("rail1", "rail3"): continue
+            Pi = np.nonzero(ok)[0]; D = m.D[Pi].reshape(-1, 3); I = np.repeat(Pi, m.D.shape[1])
+            R = K.requirement(B, I, D).reshape(len(Pi), -1); R = np.where(np.isfinite(R), R, 400.0)
+            pi, si = np.unravel_index(int(np.argmax(R)), R.shape)
+            out[m.name + "_set_by"] = dict(pose={x: round(float(v), 0) for x, v in B.poses[int(Pi[pi])].items()}, kind=B.kind[int(Pi[pi])],
+                                          level=float(R.max()), median_req=round(float(np.median(R)), 1), level_rows=[round(float(v), 1) for v in np.unique(L["prof"][m.name])])
+        print(json.dumps(out, indent=1, default=str))
+

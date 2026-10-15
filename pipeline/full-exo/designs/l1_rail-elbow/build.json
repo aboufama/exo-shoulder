@@ -1,0 +1,183 @@
+{
+ "fit": {
+  "model": "rail-elbow",
+  "k": 2221,
+  "bench": "60,160",
+  "mode": "fast",
+  "report": {
+   "gap": 56.25,
+   "reach": 0.9,
+   "follow": 1.0,
+   "inband14": 0.3375,
+   "inband10": 0.209,
+   "contact": 0.0,
+   "closure": 0.9318,
+   "collide": 0.0049,
+   "flips": 0,
+   "honest": true,
+   "audit": [],
+   "inband_member": {
+    "hub1": 1.0,
+    "hub3": 0.6759,
+    "strap1": 0.3757,
+    "rail": 0.0,
+    "stage2": 0.0,
+    "bridge": 0.065,
+    "neck": 0.656
+   },
+   "mass_g": 169.7
+  }
+ },
+ "frames_err": {
+  "RHG_vs_bodypose_H": 5.875668152022229e-08,
+  "RS_vs_bodypose_S": 2.8769468141121024e-08
+ },
+ "pose_path_err_mm": 1.4302526188281206e-05,
+ "rigidity_mm": {
+  "strap1": 0.0,
+  "bridge": 0.0,
+  "neck": 0.0,
+  "rail[l1]": 0.0,
+  "stage2[l3]": 0.0,
+  "stage2[l2]": 0.0,
+  "hub1 axis in base": 0.0,
+  "hub1 axis in l1": 0.0,
+  "hub3 axis in H": 0.0,
+  "hub3 axis in l2": 0.0
+ },
+ "rails": {
+  "stage1": {
+   "r_mm": 143.0,
+   "stations": 35,
+   "span_deg": 158.1
+  },
+  "stage2": {
+   "r_mm": 127.0,
+   "stations": 29,
+   "span_deg": 130.1
+  },
+  "carriage": {
+   "r_mm": 127.0,
+   "psi_deg": -81.1
+  }
+ },
+ "check": [
+  {
+   "bench_pose": 0,
+   "pose": [
+    30.0,
+    3.0,
+    -30.0
+   ],
+   "max_mm": 0.15,
+   "per_member": {
+    "hub1": [
+     0.011,
+     0.008
+    ],
+    "hub3": [
+     0.012,
+     0.012
+    ],
+    "strap1": [
+     0.0,
+     0.0
+    ],
+    "rail": [
+     0.15,
+     0.15
+    ],
+    "stage2": [
+     0.015,
+     0.011
+    ],
+    "bridge": [
+     0.0,
+     0.0
+    ],
+    "neck": [
+     0.0,
+     0.0
+    ]
+   }
+  },
+  {
+   "bench_pose": 105,
+   "pose": [
+    15.0,
+    0.0,
+    -75.0
+   ],
+   "max_mm": 0.15,
+   "per_member": {
+    "hub1": [
+     0.011,
+     0.008
+    ],
+    "hub3": [
+     0.012,
+     0.011
+    ],
+    "strap1": [
+     0.0,
+     0.0
+    ],
+    "rail": [
+     0.15,
+     0.15
+    ],
+    "stage2": [
+     0.015,
+     0.011
+    ],
+    "bridge": [
+     0.0,
+     0.0
+    ],
+    "neck": [
+     0.0,
+     0.0
+    ]
+   }
+  },
+  {
+   "bench_pose": 140,
+   "pose": [
+    45.0,
+    165.0,
+    -90.0
+   ],
+   "max_mm": 0.15,
+   "per_member": {
+    "hub1": [
+     0.012,
+     0.012
+    ],
+    "hub3": [
+     0.012,
+     0.011
+    ],
+    "strap1": [
+     0.0,
+     0.0
+    ],
+    "rail": [
+     0.15,
+     0.15
+    ],
+    "stage2": [
+     0.015,
+     0.011
+    ],
+    "bridge": [
+     0.0,
+     0.0
+    ],
+    "neck": [
+     0.0,
+     0.0
+    ]
+   }
+  }
+ ]
+}

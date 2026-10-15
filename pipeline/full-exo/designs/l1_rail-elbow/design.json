@@ -1,0 +1,67 @@
+{
+ "id": "l1_rail-elbow",
+ "source": "docs/concepts/sweeps/rail-elbow.json k 2221 (cma2-C, gap 56.25), refitted on Bench(60,160) fast",
+ "n_joints": 3,
+ "sliding_cuff": false,
+ "dof": 3,
+ "kinematics": {
+  "az": 28.6645,
+  "el": 80.9335,
+  "a": [
+   82.4951,
+   65.4259
+  ],
+  "w": [
+   94.1803,
+   -0.9902
+  ],
+  "branch": -1,
+  "order": [
+   0,
+   1,
+   1
+  ]
+ },
+ "base": {
+  "mount": "girdle",
+  "chain": "spherical",
+  "note": "base rides the scapula on the user's scapula handler"
+ },
+ "built_with": "pipeline/concept_l1/build_kit_l1.py (L1 keep-out meshes from the kit model's fitted samples: O20 hub keep-outs, fitted straps, rail stages and an L-section carriage revolved about J2)",
+ "label": "rail-elbow k 2221, L1 keep-out",
+ "model": "docs/concepts/models/rail-elbow.py",
+ "params": {
+  "az": 28.6645,
+  "el": 80.9335,
+  "a1": 82.4951,
+  "a2": 65.4259,
+  "wd": 94.1803,
+  "wa": -0.9902,
+  "sigma": -1,
+  "margin": 10.0,
+  "d_off": -54.2566,
+  "q": 1.0,
+  "cov": 1.0,
+  "tmarg": 5.0,
+  "tele": 1,
+  "r_lay": 127.0,
+  "psi_c": -81.171,
+  "psi_lo": -75.153,
+  "psi_hi": 64.031
+ },
+ "bench": {
+  "gap": 56.25,
+  "reach": 0.9,
+  "follow": 1.0,
+  "inband14": 0.3375,
+  "inband10": 0.209,
+  "contact": 0.0
+ },
+ "joints": {
+  "J1": "O20 hub (base / link 1)",
+  "J2": "curved rail about the J2 axis: carriage (link 2) on a 2-stage telescopic rail (stage 2 = group l3, driven at half the carriage travel)",
+  "J3": "O20 hub (link 2 / arm end)"
+ },
+ "mvp1_legal": false,
+ "note": "NOT MVP1-legal: stage 2 of the telescopic rail must be synchronised 2:1 with the carriage (cable loop with pulleys or a rack and pinion = gearing, both ruled out for MVP1; a floating stage would be an undriven coordinate, R17). R17's dynamics judge models the orientation-equivalent spherical 3R (kinematics); stage 2 (group l3) is not in its MuJoCo model."
+}

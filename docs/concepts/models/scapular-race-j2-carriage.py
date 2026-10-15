@@ -152,17 +152,18 @@ def full(B, p):
 
 def evaluate(B, params, **kw):
     """design step + kit evaluate -> (full params, report). r_lay (the layout radius of the rail and roller samples) is a
-    fix point at the fitted race radius R (at most 2 re-runs): r_lay > R would make the rail narrower than 10 mm and
-    its end stops shorter (optimistic), r_lay << R a wider rail than the real one. tools/concept_cma.py calls this."""
+    fix point at the fitted race radius R: R - 1.5 <= r_lay <= R + 0.25 (at most 2 re-runs at floor(R)); r_lay > R draws
+    the rail narrower than 10 mm and its end stops shorter (optimistic: the red team found the first CMA exploiting a
+    +1.5 mm tolerance, 78.04 -> 80.78), r_lay << R a wider rail than the real one. tools/concept_cma.py calls this."""
     p = dict(PARAMS, **params)
     for it in range(3):
         p = full(B, p)
         if p["phi_hi"] - p["phi_lo"] < 2.0:                   # no quiet rail run holds any closing pose
             B.reset(); r = B.report(); r.update(honest=True, audit=[], note="no quiet rail run", closure=None); return p, r
         r = K.evaluate(B, build, p, **kw); R = race_radius(B)
-        if R is None or abs(R - p["r_lay"]) <= 1.5 or it == 2: break
+        if R is None or (p["r_lay"] <= R + 0.25 and p["r_lay"] >= R - 1.5) or it == 2: break
         p = dict(p, r_lay=float(math.floor(R)))
-    if R is not None and p["r_lay"] > R + 1.5:
+    if R is not None and p["r_lay"] > R + 0.25:
         r["honest"] = False; r["audit"] = list(r.get("audit", [])) + [f"rail laid out at {p['r_lay']} > fitted R {R}"]
     L = B._kit_last
     r.update(race_R=R, r_lay=p["r_lay"], phi_c=p["phi_c"], phi_lo=p["phi_lo"], phi_hi=p["phi_hi"], rail_req=p.get("rail_req"),
