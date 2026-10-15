@@ -99,20 +99,49 @@
  },
  {
   "id": "R10",
-  "name": "Base rides the scapula on the user's scapula handler: worst GH misalignment from base slip over the bone (4 mm, confirmed)",
-  "value": null,
+  "name": "Base rides the scapula on the user's scapula handler: worst GH-centre misalignment from the handler slipping over the bone (4 mm, confirmed)",
+  "value": 15.21,
   "unit": "mm",
   "target": "<= 4.0 mm",
-  "status": "NOT RUN",
-  "judge": "judge/base_mount.py (girdle mount: skin-slip model to build; the thorax-plate check stays for designs with a thorax base)"
+  "status": "FAIL",
+  "judge": "judge/base_mount.py + judge/base_slip.py (girdle mount: literature skin-slip model, central law; acromion-cluster vs bone errors Karduna 2001 / van Andel 2009 / Lempereur 2014, lever from the OpenSim Seth 2016 scapula; docs/research/base_slip_model.md). Thorax mounts keep the three-girdle-law check"
  },
  {
   "id": "R11",
-  "name": "Interface pressure under ISO/TS 15066 body-region limits",
-  "value": null,
-  "target": "",
-  "status": "NOT MEASURED",
-  "judge": "coupled human-exo contact sim (MuJoCo/Drake) then pressure film / FSRs on a prototype"
+  "name": "Interface pressure, simulation part: worst mean cuff pressure the exo adds (incl. the arm parts' weight) over the MVP1 rolling-bearing cases, within the all-day budget and the ISO/TS 15066 upper-arm limits; the prototype pressure-film check remains",
+  "value": 0.781,
+  "unit": "kPa",
+  "target": "<= 7.5 kPa and ISO/TS 15066 (150 N, 190 N/cm2 at 2x edge peak) == True",
+  "status": "PASS",
+  "judge": "judge/dynamics.py (MuJoCo cuff force) -> judge/scorecard.py interface_pressure(): 7.5 kPa = 14 kPa sustained (Kermavnar; Van Vlerken 15 kPa) - 6.5 kPa strap preload; ISO/TS 15066 Annex A Table A.2; then pressure film / FSRs on a prototype",
+  "details": {
+   "exo_kPa_worst": 0.781,
+   "worst_case": "passive|mu0.002|t0.001|s2|hub",
+   "per_case_kPa": {
+    "passive|mu0.002|t0.001|s1|hub": 0.671,
+    "passive|mu0.002|t0.001|s2|hub": 0.781,
+    "passive|mu0.005|t0.001|s1|hub": 0.672,
+    "passive|mu0.005|t0.001|s2|hub": 0.781
+   },
+   "total_with_strap_kPa_worst": 7.281,
+   "budget_exo_kPa": 7.5,
+   "sustained_budget_kPa": 14.0,
+   "strap_preload_kPa": 6.5,
+   "area_cm2": 68.0,
+   "arm_parts_weight_N": 4.26,
+   "iso_ok": true,
+   "iso": {
+    "force_N_worst": 5.31,
+    "force_limit_N": 150.0,
+    "local_peak_kPa_est": 1.562,
+    "pressure_limit_kPa": 1900.0,
+    "basis": "ISO/TS 15066:2016 Annex A Table A.2, upper arm and elbow: 150 N; deltoid 190 / humerus 220 N/cm2"
+   },
+   "aim_capillary_kPa": 4.3,
+   "exo_under_capillary": true,
+   "plain_bearing_worst_kPa": 37.96,
+   "note": "mean pressure on the cuff's skin side (dynamics.py rule); the forearm cuff shares the load (upper-cuff values are upper bounds); base-side (scapula handler) pressure is not simulated; the prototype pressure-film / FSR check remains part of R11"
+  }
  },
  {
   "id": "R12",
