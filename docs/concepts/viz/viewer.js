@@ -474,11 +474,12 @@
     }));
     $('#axes').addEventListener('change', e => { axesGroup.visible = e.target.checked; renderFrame(); });
     $('#search').addEventListener('input', groupList);
+    $('#list-toggle').addEventListener('click', () => showList($('#list-wrap').classList.contains('collapsed')));
     $('#list').addEventListener('click', e => {
       const b = e.target.closest('.item'); if (!b) return;
       if (state.mode === 'timeline') setMode('gallery');
       selectConcept(b.dataset.id);
-      if (window.matchMedia('(max-width: 760px)').matches) { $('#list-wrap').open = false; stageEl.scrollIntoView({ block: 'start' }); }
+      if (window.matchMedia('(max-width: 760px)').matches) { showList(false); stageEl.scrollIntoView({ block: 'start' }); }
     });
     $('#mode-gallery').addEventListener('click', () => setMode('gallery'));
     $('#mode-timeline').addEventListener('click', () => setMode('timeline'));
@@ -487,7 +488,7 @@
     window.addEventListener('hashchange', () => { const id = decodeURIComponent(location.hash.slice(1)); if (id && id !== state.id) selectConcept(id, { keepHash: true }); });
     if (window.matchMedia) {
       const mq = window.matchMedia('(prefers-color-scheme: dark)'); if (mq.addEventListener) mq.addEventListener('change', retheme);
-      if (window.matchMedia('(max-width: 760px)').matches) $('#list-wrap').open = false;
+      if (window.matchMedia('(max-width: 760px)').matches) showList(false);
     }
     new MutationObserver(retheme).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
     window.addEventListener('resize', drawTimeline);
@@ -499,6 +500,10 @@
     $('#built').textContent = META.built ? `Data as of ${META.built}` : '';
     requestAnimationFrame(tick);
     window.GALLERY = { select: selectConcept, setFrame: i => { state.frame = i; setPlaying(false); renderFrame(); }, keyFrame, state, frames };
+  }
+  function showList(open) {
+    $('#list-wrap').classList.toggle('collapsed', !open);
+    const t = $('#list-toggle'); t.setAttribute('aria-expanded', String(open)); t.textContent = open ? 'Hide list' : 'Show list';
   }
   function setPlaying(p) {
     state.playing = p; const b = $('#play');

@@ -164,7 +164,7 @@
     { key: 'abduct', label: 'Lateral abduction', pose: { plane: 0, elev: 90, axial: -5, flex: 15 } },
     { key: 'across', label: 'Across the body', pose: { plane: 128, elev: 88, axial: -18, flex: 70 } },
     { key: 'lower', label: '(transition)', pose: { plane: 30, elev: 22, axial: 20, flex: 60 }, via: true },
-    { key: 'behind', label: 'Hand behind the back', pose: { plane: -65, elev: 42, axial: 105, flex: 95 } },
+    { key: 'behind', label: 'Hand behind the back', pose: { plane: -65, elev: 35, axial: 140, flex: 80 } },
     { key: 'rest2', label: 'Rest', pose: { plane: 20, elev: 6, axial: -15, flex: 18 }, via: true }
   ];
   const smooth = s => s * s * s * (s * (6 * s - 15) + 10);      // smootherstep: zero speed and acceleration at the keys
