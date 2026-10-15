@@ -47,3 +47,9 @@ pipeline/conformal/fair_cad/out_joint_v5/
 pipeline/conformal/fair_cad/out_r18_n3_s1392_1_*/
 pipeline/full-exo/designs/band_r18_n3_s1392_1_*/
 pipeline/full-exo/designs/cad_r18_n3_s1392_1_*/
+pipeline/conformal/fair_cad/out_r20_*/
+pipeline/conformal/fair_cad/out_r21_*/
+pipeline/full-exo/designs/band_r20_*/
+pipeline/full-exo/designs/cad_r20_*/
+pipeline/full-exo/designs/band_r21_*/
+pipeline/full-exo/designs/cad_r21_*/
