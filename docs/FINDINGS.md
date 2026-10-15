@@ -179,6 +179,7 @@ rig's girdle law (GH lift 0.2 mm/deg above 30 deg, scapula rotating about GH), a
   | `cad_r13_n4_s1343_1` (4R), `judge_all.sh fast` (R2 step 6, R6 step 12) | 24.43 -> **24.62 mm** | 37.64 -> **0.80 mm** |
   | same, full run (R2 step 2, R6 step 4; the committed outputs) | 24.62 mm | 0.80 mm |
   | `cad_r13_n3_s1331_0` (3R + sliding cuff), `judge_all.sh fast` | 21.88 -> **21.94 mm** | 90.07 -> **0.55 mm** |
+  | same, full run (the committed outputs) | 21.94 mm | 0.55 mm |
 
   Outside check, `judge/xcheck_contact.py` (no code shared with sdist: raw unwelded glb, signed crossings on 3 random
   rays, brute-force closest point; `<design>/judge/xcheck_contact.json`): every old top R6 entry (9 per design, 37.64
@@ -187,12 +188,12 @@ rig's girdle law (GH lift 0.2 mm/deg above 30 deg, scapula rotating about GH), a
   What the corrected numbers say:
   - R2 is real body entry now. Worst: the user's FOREARM CUFF in the rig's forearm (24.6 / 21.9 mm; see "Rig vs the
     user's parts", P2) and the forearm screw / MIDDLE (8.4 / 5.8 mm). BOTTOM: 4R 4.96 mm (fast 4.71, was 13.11), all in
-    the user's bar (s < 265), neck + JN hub 0; 3R 5.89 mm in the bar, its neck + rail 1.03 mm ('Wave' 60, = the
-    ray-parity figure).
+    the user's bar (s < 265), neck + JN hub 0; 3R 5.98 mm in the bar (fast 5.89), its neck + rail 1.16 mm ('Wave' 62;
+    fast 1.03 at 'Wave' 60, = the ray-parity figure).
   - R6, 4R: only contacts at the joints remain - J4 ring nut in the J4 cap 0.80 mm, link 1 in the base 0.62, J4 cap
     screw in the ring nut 0.50, washer B in the J4 cap 0.42; the M1.6 cap screw sits 0.17 mm into washer B at J1-J3 of
     both designs (a stack overlap just over tol). 3R: the cuff's flank liner in the BOTTOM + rail 0.55 mm ('Wash
-    opposite shoulder' 192, a held frame; 32 of 117 frames) - likely the end-of-travel graze of "Still wrong on the 3R
+    opposite shoulder' 192, a held frame; 83 of 339 frames) - likely the end-of-travel graze of "Still wrong on the 3R
     build" above; invisible while the judge skipped the open BOTTOM (that version: 3R R6 0.17 mm).
   - The other designs judged with the old rule, re-judged the same night (fast: R2 step 6, R6 step 12; the outside
     check agrees with every top entry to 0.00 mm):
