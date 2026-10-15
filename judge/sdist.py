@@ -5,11 +5,14 @@ sample is on the surface), the closest triangle has a sample within s + h, so th
 are a complete candidate set (one ball query; a thin shell except in concave pockets). The SIGN comes from the angle-weighted pseudo-normal of that closest feature (Baerentzen & Aanaes 2005,
 "Signed distance computation using the angle weighted pseudonormal"): the face normal inside a face, the sum of the two
 adjacent face normals on an edge, the angle-weighted vertex normal at a vertex - exact for a closed, consistently
-oriented mesh, IF the closest feature is the true one. History (docs/FINDINGS.md "Infrastructure"): until 2026-10-15 the
-sign came from the nearest face's own normal over the 10 nearest centroids - wrong near edges, and wrong whenever the
-true closest triangle was not among those 10 (long glb facets): false R2 / R6 penetrations up to 4.8 mm where ray
-parity and the winding number find no point inside. judge/test_sdist.py checks it against both.
-Negative = inside."""
+oriented mesh, IF the closest feature is the true one (vertices are welded first: a glb tessellation is split at every
+B-rep seam). The judges' INSIDE test is the integer winding number instead (Mesh.build_grid / winding_at / max_depth):
+it needs no closest feature, holds where the posed body self-intersects, and on an open mesh (a hole or non-manifold
+edge after welding) is a majority over rays along x, y and z with the generalized winding number where they disagree.
+History (docs/FINDINGS.md "Infrastructure"): until 2026-10-15 the sign came from the nearest face's own normal over the
+10 nearest centroids - wrong near edges, and wrong whenever the true closest triangle was not among those 10 (long glb
+facets): false R2 / R6 penetrations up to 90 mm where ray parity and the winding number find no point inside.
+judge/test_sdist.py checks it against both. Negative = inside."""
 import itertools
 import numpy as np
 from scipy.spatial import cKDTree
@@ -40,9 +43,17 @@ def closest_on_tri(P, A, B, C, region=False):
     return (Q, reg) if region else Q
 
 
+def weld(V, F, tol=1e-4):
+    """merge vertices that coincide to tol mm (a glb tessellation is split at every B-rep face seam: unwelded, every seam
+    is a boundary and the edge / vertex pseudo-normals there are one face's normal). Same faces, same order."""
+    _, first, inv = np.unique(np.round(np.asarray(V, float) / tol).astype(np.int64), axis=0, return_index=True, return_inverse=True)
+    return np.asarray(V, float)[first], inv.reshape(-1)[np.asarray(F)]
+
+
 def _topology(F):
-    """edge id per (face, local edge AB / AC / BC) and the two faces of every edge (-1 on a boundary)"""
-    key = (F.ctypes.data, F.shape)
+    """edge id per (face, local edge AB / AC / BC), the two faces of every edge (-1 on a boundary) and the face count of
+    every edge (2 on a closed manifold)"""
+    key = (F.shape, hash(np.ascontiguousarray(F).tobytes()))                 # by content: a freed array's address is reused
     if key in _TOPO: return _TOPO[key]
     E = np.stack([F[:, [0, 1]], F[:, [0, 2]], F[:, [1, 2]]], 1).reshape(-1, 2); E.sort(1)
     uniq, inv = np.unique(E, axis=0, return_inverse=True); inv = inv.reshape(-1)
@@ -50,7 +61,7 @@ def _topology(F):
     order = np.argsort(inv, kind="stable"); s_inv = inv[order]; first = np.r_[True, s_inv[1:] != s_inv[:-1]]
     adj[s_inv[first], 0] = face_of[order][first]
     second = ~first; adj[s_inv[second], 1] = face_of[order][second]
-    out = (inv.reshape(-1, 3), adj)
+    out = (inv.reshape(-1, 3), adj, np.bincount(inv, minlength=len(uniq)))
     if len(_TOPO) > 256: _TOPO.clear()
     _TOPO[key] = out; return out
 
@@ -60,8 +71,8 @@ def pseudo_normals(V, F):
     key = _key(V, F)
     if key in _NORM: return _NORM[key]
     T = V[F]; Nf = np.cross(T[:, 1] - T[:, 0], T[:, 2] - T[:, 0]); Nf /= np.linalg.norm(Nf, axis=1, keepdims=True) + 1e-18
-    eid, adj = _topology(F)
-    Ne = Nf[np.maximum(adj[:, 0], 0)] + np.where(adj[:, 1:] >= 0, Nf[np.maximum(adj[:, 1], 0)], 0)
+    eid, adj, _ = _topology(F)
+    Ne =Nf[np.maximum(adj[:, 0], 0)] + np.where(adj[:, 1:] >= 0, Nf[np.maximum(adj[:, 1], 0)], 0)
     Nv = np.zeros_like(V)
     for k in range(3):
         a, b, c = T[:, k], T[:, (k + 1) % 3], T[:, (k + 2) % 3]
@@ -72,10 +83,16 @@ def pseudo_normals(V, F):
 
 
 class Mesh:
-    """exact closest point and signed distance to one triangle mesh, in its own frame (build once per rigid part)"""
+    """exact closest point and signed distance to one triangle mesh, in its own frame (build once per rigid part). The
+    vertices are welded first (weld; faces that collapse to a segment are dropped); closed = every edge has exactly two
+    faces, each running it the other way round"""
     def __init__(self, V, F, h=0.6):
-        V = np.asarray(V, float); F = np.asarray(F); T = V[F]; self.V, self.F, self.T, self.h = V, F, T, h
+        V, F = weld(V, F); F = F[(F[:, 0] != F[:, 1]) & (F[:, 1] != F[:, 2]) & (F[:, 2] != F[:, 0])]
+        T = V[F]; self.V, self.F, self.T, self.h = V, F, T, h
         self.Nf, self.Ne, self.eid, self.Nv = pseudo_normals(V, F)
+        _, _, ecount = _topology(F); D = np.stack([F[:, [0, 1]], F[:, [1, 2]], F[:, [2, 0]]], 1).reshape(-1, 2)
+        self.closed = bool((ecount == 2).all() and len(np.unique(D, axis=0)) == len(D))
+        self.open_tri = (ecount[self.eid] != 2).any(1)                         # faces on a hole / non-manifold edge
         # samples: every vertex (-> all its triangles), plus the interior points of a barycentric grid on long triangles
         # (sub-edge l = L / n, l / sqrt(3) <= h: the farthest point of a triangle from its nearest vertex is <= L / sqrt(3))
         L = np.max(np.linalg.norm(T[:, [1, 2, 0]] - T, axis=2), 1); n = np.maximum(1, np.ceil(L / (h * np.sqrt(3)))).astype(int)
@@ -123,18 +140,34 @@ class Mesh:
         sg = np.sign(((P - bQ) * N).sum(1)); sg[sg == 0] = 1
         return sg * best
 
-    def build_grid(self, g=0.5, lo=None, hi=None, max_nodes=2.5e7):
+    def build_grid(self, g=0.5, lo=None, hi=None, max_nodes=2.5e7, axes=None):
         """integer winding number at the nodes of a regular grid (over the mesh's box, or the region lo..hi): signed ray
         crossings along +x (+1 entering, -1 leaving: -sign(n_x)) on every (y, z) scanline, cumulated - exact for a closed
         mesh and still right where it self-intersects (the posed body: 2 where arm and trunk overlap). The grid is shifted
-        by irrational fractions of g so no ray meets an edge or a vertex exactly."""
+        by irrational fractions of g so no ray meets an edge or a vertex exactly.
+        An OPEN mesh (a hole or a non-manifold edge left after welding, e.g. the 3R design's BOTTOM + rail) gets the same
+        sweep along x, y and z (axes, default (0,) closed / (0, 1, 2) open): a scanline through a hole misses one crossing
+        and is off by one from there on; the other two axes' rays to the same node almost never pass that hole, so the
+        node takes the majority, and nodes where the three disagree are flagged for the generalized winding number."""
         lo0 = self.lo if lo is None else np.maximum(np.asarray(lo, float), self.lo - 1.0)
         hi0 = self.hi if hi is None else np.minimum(np.asarray(hi, float), self.hi + 1.0)
         ext = np.maximum(hi0 - lo0, 0) + 4 * g; g = float(max(g, (np.prod(ext) / max_nodes) ** (1 / 3)))
         glo = lo0 - 2 * g + g * np.array([0.1234567, 0.3141593, 0.2718282]); n = np.ceil((hi0 + 2 * g - glo) / g).astype(int) + 1
-        T = self.T; j0 = np.maximum(0, np.ceil((T[:, :, 1].min(1) - glo[1]) / g).astype(int)); j1 = np.minimum(n[1] - 1, np.floor((T[:, :, 1].max(1) - glo[1]) / g).astype(int))
+        axes = ((0,) if self.closed else (0, 1, 2)) if axes is None else tuple(axes); assert len(axes) in (1, 3)
+        Ws = [self._sweep(ax, glo, g, n) for ax in axes]
+        if len(Ws) == 1: self.W, self.Wbad = Ws[0], None
+        else:
+            Wa = np.stack(Ws); del Ws; self.W = Wa.sum(0, dtype=np.int16) - Wa.max(0) - Wa.min(0)   # median of 3 = majority
+            self.Wbad = (Wa != Wa[0]).any(0); del Wa
+        self.glo, self.g, self.gn, self.axes = glo, g, n, axes
+        return self
+
+    def _sweep(self, ax, glo, g, n):
+        """winding grid from rays along +axis ax (cumulated signed crossings), indexed [x, y, z]"""
+        p = [ax, (ax + 1) % 3, (ax + 2) % 3]; T = self.T[:, :, p]; glo = glo[p]; n = n[p]       # rotate ax to x (cyclic: same handedness)
+        j0 = np.maximum(0, np.ceil((T[:, :, 1].min(1) - glo[1]) / g).astype(int)); j1 = np.minimum(n[1] - 1, np.floor((T[:, :, 1].max(1) - glo[1]) / g).astype(int))
         k0 = np.maximum(0, np.ceil((T[:, :, 2].min(1) - glo[2]) / g).astype(int)); k1 = np.minimum(n[2] - 1, np.floor((T[:, :, 2].max(1) - glo[2]) / g).astype(int))
-        nj = np.maximum(0, j1 - j0 + 1); nk = np.maximum(0, k1 - k0 + 1); cnt = nj * nk; sx = -np.sign(self.Nf[:, 0]).astype(np.int16)
+        nj = np.maximum(0, j1 - j0 + 1); nk = np.maximum(0, k1 - k0 + 1); cnt = nj * nk; sx = -np.sign(self.Nf[:, ax]).astype(np.int16)
         D = np.zeros((n[0] + 1, n[1], n[2]), np.int16); tris = np.where(cnt > 0)[0]
         for a0 in range(0, len(tris), 100000):                                   # bounded memory on big, flat facets
             t_ = tris[a0:a0 + 100000]; ct = cnt[t_]; tri = np.repeat(t_, ct); loc = np.arange(ct.sum()) - np.repeat(np.cumsum(ct) - ct, ct)
@@ -145,18 +178,19 @@ class Mesh:
             hit = ((eA > 0) & (eB > 0) & (eC > 0)) | ((eA < 0) & (eB < 0) & (eC < 0)); tot = np.where(hit, eA + eB + eC, 1.0)
             x = (eA * A[:, 0] + eB * B[:, 0] + eC * C[:, 0]) / tot
             i = np.clip(np.ceil((x - glo[0]) / g).astype(int), 0, n[0]); np.add.at(D, (i[hit], j[hit], k[hit]), sx[tri[hit]])
-        self.W = np.cumsum(D, 0, dtype=np.int16)[:n[0]]; self.glo, self.g, self.gn = glo, g, n
-        return self
+        return np.cumsum(D, 0, dtype=np.int16)[:n[0]].transpose(np.argsort(p))
 
     def winding_at(self, P, s=None):
         """exact integer winding number at P: the nearest grid node's, plus the signed crossings of the segment node -> P
         (only where the surface can be that close: s - h <= |P - node|; candidates = triangles with a sample within
-        |P - node| + h of P, complete by the cover bound). Points outside the grid get the brute-force winding number."""
+        |P - node| + h of P, complete by the cover bound). Points outside the grid get the brute-force winding number;
+        on an open mesh so do points whose node's sweeps disagree or whose segment passes a face on a hole."""
         P = np.asarray(P, float); s = self.tree.query(P)[0] if s is None else s; W = np.zeros(len(P), int)
         idx = np.rint((P - self.glo) / self.g).astype(int); inb = np.all((idx >= 0) & (idx < self.gn), 1)
         out = np.where(~inb & np.all((P >= self.lo - 1e-6) & (P <= self.hi + 1e-6), 1))[0]
-        if len(out): W[out] = np.rint(winding_number(P[out], self.V, self.F)).astype(int)
         ii = np.where(inb)[0]; node = self.glo + self.g * idx[ii]; W[ii] = self.W[idx[ii, 0], idx[ii, 1], idx[ii, 2]]
+        brute = np.zeros(len(P), bool); brute[out] = True
+        if self.Wbad is not None: brute[ii] = self.Wbad[idx[ii, 0], idx[ii, 1], idx[ii, 2]]
         dn = np.linalg.norm(P[ii] - node, axis=1); u = np.where(s[ii] - self.h <= dn)[0]
         for c0 in range(0, len(u), 4096):
             uc = u[c0:c0 + 4096]; Pu = P[ii[uc]]; O = node[uc]; L = self.tree.query_ball_point(Pu, dn[uc] + self.h + 1e-9, return_sorted=False)
@@ -167,6 +201,9 @@ class Mesh:
             sv = O[pi] - A; uu = f * (sv * hh).sum(1); q = np.cross(sv, e1); vv = f * (Dv * q).sum(1); t = f * (e2 * q).sum(1)
             hit = ok & (uu >= 0) & (vv >= 0) & (uu + vv <= 1) & (t > 0) & (t < 1)
             sg = -np.sign((self.Nf[tj] * Dv).sum(1)); W[ii[uc]] += np.rint(np.bincount(pi, weights=hit * sg, minlength=len(uc))).astype(int)
+            if not self.closed: brute[ii[uc]] |= np.bincount(pi, weights=self.open_tri[tj], minlength=len(uc)) > 0
+        b = np.where(brute)[0]
+        if len(b): W[b] = np.rint(winding_number(P[b], self.V, self.F)).astype(int)
         return W
 
     def max_depth(self, P, tol=0.0, batch=64, confirm=None):

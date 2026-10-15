@@ -20,7 +20,9 @@ scripts that happened to get written:
 
 Reference design: **`cad_r13_n4_s1343_1`** (4R, all axes through the GH centre). Full scorecard, first complete judge
 run (R2, R6, R10 measured for the first time): 3 of 15 pass - R1 45.9 %, R2 24.4 mm, R3 64.5 %, R4 18.8 %, R6 18.5 mm,
-**R10 25.3 mm** ([scorecard](pipeline/full-exo/designs/cad_r13_n4_s1343_1/judge/scorecard.md)).
+**R10 25.3 mm** ([scorecard](pipeline/full-exo/designs/cad_r13_n4_s1343_1/judge/scorecard.md)). 2026-10-15, contact
+judges fixed (a measurement change, docs/FINDINGS.md "Infrastructure"): the old R2 / R6 numbers carried false
+penetrations (R6 was sign errors); re-judged: R2 24.6 mm (the user's forearm cuff in the rig's forearm), R6 0.80 mm.
 
 **P0 answered the base question ([docs/P0_BASE_MOUNT.md](docs/P0_BASE_MOUNT.md)):** the base bolts to a thorax plate
 but every design assumed it rides the scapula. On a thorax plate the reference base enters the body by 44 mm, and no

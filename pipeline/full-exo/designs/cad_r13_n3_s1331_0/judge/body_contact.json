@@ -2,7 +2,9 @@
  "step": 6,
  "tol_mm": 0.5,
  "frames_checked": 228,
- "seconds": 821,
+ "seconds": 253,
+ "jobs": 4,
+ "inside": "integer winding number (grid + segment crossings), depth = exact distance to the nearest surface (judge/sdist.py)",
  "parts": {
   "H|M4x6 ISO 10642 countersunk (upper cuff)": {
    "max_depth": 0.0,
@@ -40,16 +42,16 @@
    "worst": null
   },
   "H|Revolve1[3]": {
-   "max_depth": 0.59,
-   "frames": 47,
+   "max_depth": 0.51,
+   "frames": 10,
    "worst": [
-    "Raise overhead",
-    0,
+    "Wave",
+    42,
     [
-     30,
-     3,
-     -30,
-     12,
+     15,
+     91,
+     -59,
+     94,
      0
     ]
    ]
@@ -65,19 +67,9 @@
    "worst": null
   },
   "H|Revolve3": {
-   "max_depth": 0.43,
+   "max_depth": 0.0,
    "frames": 0,
-   "worst": [
-    "Raise overhead",
-    0,
-    [
-     30,
-     3,
-     -30,
-     12,
-     0
-    ]
-   ]
+   "worst": null
   },
   "H|CirPattern1[4]": {
    "max_depth": 0.0,
@@ -115,16 +107,16 @@
    "worst": null
   },
   "H|Revolve1[1]": {
-   "max_depth": 1.1,
-   "frames": 184,
+   "max_depth": 0.98,
+   "frames": 140,
    "worst": [
     "Wave",
-    42,
+    126,
     [
      15,
-     91,
-     -59,
-     94,
+     92,
+     -60,
+     95,
      0
     ]
    ]
@@ -210,22 +202,12 @@
    ]
   },
   "H|TOP": {
-   "max_depth": 2.28,
-   "frames": 5,
-   "worst": [
-    "Drink from a cup",
-    126,
-    [
-     91,
-     50,
-     -57,
-     124,
-     0
-    ]
-   ]
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null
   },
   "F|FOREARM CUFF": {
-   "max_depth": 21.88,
+   "max_depth": 21.94,
    "frames": 228,
    "worst": [
     "Drink from a cup",
@@ -285,16 +267,16 @@
    "worst": null
   },
   "H|BOTTOM + neck + curved dovetail rail (one 5-axis part, Ti-6Al-4V)": {
-   "max_depth": 15.39,
+   "max_depth": 5.89,
    "frames": 228,
    "worst": [
     "Wave",
-    36,
+    60,
     [
-     16,
-     83,
-     -56,
-     87,
+     15,
+     95,
+     -79,
+     95,
      0
     ]
    ]
@@ -431,5 +413,5 @@
   }
  },
  "worst_part": "F|FOREARM CUFF",
- "max_depth": 21.88
+ "max_depth": 21.94
 }

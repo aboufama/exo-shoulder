@@ -4,7 +4,10 @@ the exact closest point over all triangles. Cases: a cube (sharp edges and corne
 fails), a closed sphere, a real part (the J2 cap of the reference design, a welded glb tessellation with long facets -
 where a 10-nearest-centroid search missed the closest triangle: the R6 false penetrations of 2026-10-15) and the posed
 body mesh of the rig (the R2 judge's target; it self-intersects in deep poses, where inside is defined by the winding
-number only). Also reports the old sign rule (the nearest triangle's own normal over 10 centroids) for comparison.
+number only). Also the same part as a RAW glb tessellation (unwelded: Mesh welds it) and two OPEN meshes - a sphere with
+4 holes and the 3R design's BOTTOM + rail (holes / non-manifold edges after welding) - where one ray direction can pass
+a hole: x-rays alone vs the x / y / z majority + generalized winding number. Also reports the old sign rule (the nearest
+triangle's own normal over 10 centroids) for comparison.
     python3 judge/test_sdist.py"""
 import os, sys, time
 import numpy as np, trimesh
@@ -80,6 +83,23 @@ if __name__ == "__main__":
     print(f"  winding grid (g {M.g:.2f} mm): nodes wrong {100 * gerr:.2f}%; points (grid + segment crossings) wrong {100 * cerr:.2f}%; "
           f"max depth {md:.4f} vs exact {md_ref:.4f} mm", flush=True)
     res["grid"] = (gerr + cerr, 0.0, abs(md - md_ref))
+    res["part raw"] = check("same part, RAW glb (unwelded; Mesh welds)", *cap, Pk)
+
+    def open_case(name, V, F, P):
+        """open mesh: truth = generalized winding number > 0.5 where it is clear (|w - round(w)| < 0.25; next to a hole
+        inside / outside is not defined); x-ray grid alone vs the x / y / z majority (+ GWN where the rays disagree)"""
+        w = sdist.winding_number(P, V, F); clear = np.abs(w - np.rint(w)) < 0.25; truth = w > 0.5
+        M3 = sdist.Mesh(V, F).build_grid(); M1 = sdist.Mesh(V, F).build_grid(axes=(0,))
+        e1 = float(((M1.winding_at(P) >= 1) != truth)[clear].mean()); e3 = float(((M3.winding_at(P) >= 1) != truth)[clear].mean())
+        print(f"{name:40s} {len(P):5d} pts ({100 * truth.mean():4.1f}% in, {100 * (~clear).mean():.1f}% next to a hole, not counted; "
+              f"closed {M3.closed}): x-rays only wrong {100 * e1:.2f}%, x/y/z majority + GWN wrong {100 * e3:.2f}%", flush=True)
+        return e3, e1, 0.0
+    keep = np.setdiff1d(np.arange(len(Fs)), [0, 97, 211, 640])                 # 4 holes of one ~11 mm facet each
+    Po = np.r_[Ps, rng.uniform(-55, 55, (1500, 3))]; res["open sphere"] = open_case("sphere with 4 holes", Vs, Fs[keep], Po)
+    bot = [(V, F) for g, n, V, F in load_parts(design_dir("cad_r13_n3_s1331_0")) if n.startswith("BOTTOM")][0]
+    Vo, Fo = bot; lo, hi = Vo.min(0) - 3, Vo.max(0) + 3; near = rng.integers(0, len(Fo), 1500); w = rng.dirichlet((1, 1, 1), 1500)
+    Pq = np.r_[(Vo[Fo[near]] * w[..., None]).sum(1) + rng.normal(0, 1.5, (1500, 3)), lo + rng.random((1500, 3)) * (hi - lo)]
+    res["open part"] = open_case("open real part (3R BOTTOM + rail)", Vo, Fo, Pq)
     import body_pose as BP
     V = BP.posed(dict(plane=124, elev=32, axial=-79, flex=122, pron=0)); F = BP.F                 # the R2 judge's worst pose (Wash opposite shoulder)
     near = rng.integers(0, len(F), 1500); w = rng.dirichlet((1, 1, 1), 1500)
