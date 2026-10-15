@@ -27,6 +27,9 @@ BASE_TOP_MOUNT = (LOWER[1] != 0)                                              # 
 STANDOFF_MM = float(os.environ.get("STANDOFF_MM", 25.0))                              # hub plane this far over its skin need: flagged (a stand-off design)
 MOUNT_LEN = 6.0                                                                     # base arm beyond the hub, toward the back plate
 def log(*a): print(f"[{time.strftime('%H:%M:%S')}]", *a, flush=True)
+def mesh_cm3(s):
+    import trimesh
+    vs, tr = s.tessellate(0.05, 0.2); return abs(trimesh.Trimesh(np.array([[q.x, q.y, q.z] for q in vs]), tr, process=True).volume) / 1000.0
 
 def hub_axis(mi, end):
     if mi == 0: return np.array([1.0, 0, 0])
@@ -180,7 +183,9 @@ if __name__ == "__main__" and STAGE == "members":
     sol = {}
     for n in names:
         t0 = time.time(); s = mem[n].solid(); sol[n] = s
-        log(f"{n}: solid valid {s.isValid()} faces {len(s.Faces())} vol {s.Volume() / 1000:.2f} cm3 thickness {np.round(mem[n].info['thickness'], 2)} ({time.time() - t0:.1f}s)")
+        if MB.LINK_STYLE == "strap":                                                     # OCC Volume() is unreliable on sewn sheets (CAD_STANDARD 7): mesh volume;
+            log(f"{n}: solid valid {s.isValid()} faces {len(s.Faces())} mesh vol {mesh_cm3(s):.2f} cm3, side wall between the edge rounds {np.round(mem[n].info['thickness'], 2)} mm ({time.time() - t0:.1f}s)")   # strap 3.0 - 2 x 1.2 rounds = 0.6
+        else: log(f"{n}: solid valid {s.isValid()} faces {len(s.Faces())} vol {s.Volume() / 1000:.2f} cm3 thickness {np.round(mem[n].info['thickness'], 2)} ({time.time() - t0:.1f}s)")
         if s.Volume() <= 0: log(f"WARNING inside-out: {n} has volume {s.Volume() / 1000:.2f} cm3 (reversed or self-intersecting shell: contact judges would miss penetrations)")
     from OCP.BRepTools import BRepTools
     for n, s in sol.items(): BRepTools.Write_s(s.wrapped, os.path.join(OUT, f"{n}.brep"))
@@ -221,7 +226,7 @@ def assemble():
             for k in range(3):
                 ang = 2 * math.pi * k / 3; p = n_ * lv["U1"] + 12.0 * (math.cos(ang) * x_ + math.sin(ang) * y_)   # 0 / 120 / 240 deg: >= 30 deg from the cap screws, wall to the O28 disc
                 s = s.cut(cq.Solid.makeCylinder(0.8, 3.2, cq.Vector(*(p - 3.0 * n_)), cq.Vector(*n_)))
-        s = solid_fix(s); log(f"{n}: featured valid {s.isValid()} vol {s.Volume() / 1000:.2f} cm3")
+        s = solid_fix(s); log(f"{n}: featured valid {s.isValid()} " + (f"mesh vol {mesh_cm3(s):.2f} cm3" if MB.LINK_STYLE == "strap" else f"vol {s.Volume() / 1000:.2f} cm3"))
         parts.append((n, f"{m.name} (Ti-6Al-4V)", s))
     import armend_fair as AF
     E = EV.Envelope(CAD_DIR)
