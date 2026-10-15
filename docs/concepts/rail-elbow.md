@@ -160,3 +160,42 @@ Adversarial re-check of the death (Bench(60,160), fast cache, same model file).
 - Verdict: **death stands**. The corrected best (69.43) is still behind the champion's 68.93, and the reason is the
   one claimed: the rail parts are metal over the whole J2 travel at one radius about p2 and are never in band in any
   pose set; moving the rail toward the pole does not bring it nearer the skin.
+
+## Polish (2026-10-15, convergence check of the "dead" verdict)
+
+**Why.** The verdict above was taken at best 71.15 (score 74.1) with the best found on the sweep's last try, and the
+sweep had only ever moved d_off, q, wd and a2 around the champion axes (the J1 axis b, a1 and W's elevation never
+moved for the telescopic rail). A sweep is a sample of the parameter space; a best on the last try is a sign it was still
+climbing, not a property of the mechanism.
+
+**Method.** CMA-ES (popsize 6, sigma 0.6 in units of az 8 / el 4 / a1 4 / a2 4 / wd 6 / wa 6 / d_off 5 deg) on the 7
+continuous parameters (az, el, a1, a2, wd, wa, d_off); fixed: telescopic rail, sigma -1, margin 10, q 1, cov 1, tmarg 5.
+Model, honesty checks and geometry rules unchanged (K3 march, dense K2, K6, audit). One change of measurement: `r_lay`
+(layout radius of the rail parts) is set per config to the fitted stage radius (fix point, <= 2 re-runs), as k64's 142.5
+was for its own geometry; k64 re-laid at its fitted 128 mm reads **70.87** (was 71.15; measurement, not design).
+Runs: from k64 (42 tries), k59 (43), seed A k44 (10 tries, all audit-dishonest: strap 1 / bridge / neck sampled at
+10-11 mm because the straps get long; gaps 76-87; stopped), then a restart from the new best k130 at sigma 0.3 (24).
+126 new configurations, k65-k190, stage "polish" in the sweep file. No range was widened (CMA is unbounded here).
+
+**Best-so-far curve** (score = 100 (1 - gap/275), polish tries in order): 74.2 (try 1, k64 re-laid) - 74.6 (13) -
+74.9 (25) - 75.1 (49) - 76.1 (61) - 76.2 (66, k130) - 76.8 (108, k172) - 76.8 (126).
+
+**New best k172** (honest, audit clean): gap **63.72, score 76.8** (bar 74.9; the champion on honest kit geometry 76.3).
+b az -13.11 el 83.79, a1 76.84, a2 64.04, W (93.25, 17.21), d_off -41.43, r_lay 105. Reach 0.888, follow 0.967,
+in-band 14 0.275, in-band 10 0.156, contact 0.000, closure 0.927, flips 0, K6 collisions 2.0 % of closing poses, Ti 151 g.
+Per member in band: hub 1 1.00, hub 3 0.36, strap 1 0.41, rail 0.003, stage 2 0.00, bridge 0.04, neck 0.51.
+Top 5: 63.72, 64.02, 65.30, 65.34, 65.38 (scores 76.83-76.23).
+
+**Convergence gate: NOT converged.** Gain of the best over the second half of the polish 0.69 pt (< 1: pass; over the
+whole sweep 1.92: fail); best at try 108 of 126, inside the last third (fail); top 5 within 0.6 pt (pass). The restart
+from k130 was still finding better points (k172, k185) at sigma 0.3; more tries around k172 should be run before the
+number is final.
+
+**Red team (k172).** Rest (elev < 20) 57/57. Overhead (elev >= 140) 11/17: 4 closure folds, 2 K6 collisions (plane
+15-30, elev 150, flex 90) - worse than k64's 14/17, the gain is bought in in-band, not in overhead reach. Across the body
+40/48 (8 folds). Behind the back 28/29 (1 fold). Closest metal over taken poses: strap 1 1.34 mm (plane 45, elev 165,
+axial -90), neck 2.01, hub 3 2.11, stage 2 2.12, rail 2.35; no contact. **What limits it:** unchanged in kind - each rigid
+rail stage is one radius about p2 (now ~100-105 mm, lower than k64's 116-125 because the new J1 axis moves the rail over
+lower skin), still 0 % in band; the score rose through hub 3 (0.15 -> 0.36), strap 1 (0.31 -> 0.41) and the neck
+(0.42 -> 0.51). Status moves from dead to **screened** (clears 74.9 and, narrowly, 76.3); the structural argument above
+still caps it (rail stages ~40 % of the samples at ~0 % in band).
