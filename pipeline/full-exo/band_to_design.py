@@ -235,12 +235,13 @@ for mi in range(N):
 
 # ---------------------------------------------------------------- write the design dir
 DD = os.path.join(HERE, "designs", NAME); os.makedirs(DD, exist_ok=True)
-sc = trimesh.Scene(); src = trimesh.load(os.path.join(HERE, "designs", "final", "exo.glb"))
+sc = trimesh.Scene(); src = trimesh.load(os.environ.get("ARM_SRC", os.path.join(HERE, "designs", "final", "exo.glb")))   # ARM_SRC: another design's arm parts
+ARM_SKIP = [x for x in os.environ.get("ARM_SKIP", "").split(",") if x]                  # e.g. that design's own custom arm-end parts
 for g, mesh in meshes.items(): sc.add_geometry(mesh, node_name=f"{g}|D4 member {g} (proxy)|0", geom_name=f"{g}|proxy")
 moved_w = abs(R["w"][0] - 85.9) > 0.5 or abs(R["w"][1]) > 0.5
 for node in src.graph.nodes_geometry:                                                  # the user's arm parts ride on
     T_, gname = src.graph[node]; g = node.split("|")[0]
-    if g not in ("H", "F") or "J4 " in node: continue
+    if g not in ("H", "F") or "J4 " in node or any(k in node for k in ARM_SKIP): continue
     mm = src.geometry[gname].copy(); mm.apply_transform(T_); sc.add_geometry(mm, node_name=node, geom_name=node)
 HR = np.array(json.load(open(os.path.join(EXO, "avg", "body_mesh.json")))["landmarks"]["rest_humerus"]); U_, _, Vt_ = np.linalg.svd(HR); HR = U_ @ Vt_
 ib = np.nonzero(IS_BOT)[0]

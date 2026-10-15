@@ -1,0 +1,67 @@
+{
+ "step": 12,
+ "tol_mm": 0.15,
+ "frames_checked": 117,
+ "pairs": 348,
+ "seconds": 19,
+ "jobs": 4,
+ "violations": {
+  "H|TOP  IN  F|MIDDLE": {
+   "max_depth": 1.45,
+   "frames": 117,
+   "worst": [
+    "Reach a high shelf",
+    60
+   ]
+  },
+  "H|IGUS THRUST WASHER, 30mm ID, 39mm OD, 1.5mm T, IGLIDE J  IN  F|MIDDLE": {
+   "max_depth": 3.01,
+   "frames": 117,
+   "worst": [
+    "Wave",
+    132
+   ]
+  },
+  "F|MIDDLE  IN  H|TOP": {
+   "max_depth": 2.76,
+   "frames": 116,
+   "worst": [
+    "Wash opposite shoulder",
+    120
+   ]
+  },
+  "l2|D4 member l2 (proxy)  IN  H|BOTTOM JN hub block (proxy)": {
+   "max_depth": 5.65,
+   "frames": 117,
+   "worst": [
+    "Walking arm swing",
+    96
+   ]
+  },
+  "l2|D4 member l2 (proxy)  IN  l1|D4 member l1 (proxy)": {
+   "max_depth": 8.88,
+   "frames": 117,
+   "worst": [
+    "Raise overhead",
+    60
+   ]
+  },
+  "l1|D4 member l1 (proxy)  IN  base|D4 member base (proxy)": {
+   "max_depth": 1.09,
+   "frames": 117,
+   "worst": [
+    "Walking arm swing",
+    108
+   ]
+  },
+  "base|D4 member base (proxy)  IN  l1|D4 member l1 (proxy)": {
+   "max_depth": 1.0,
+   "frames": 117,
+   "worst": [
+    "Walking arm swing",
+    108
+   ]
+  }
+ },
+ "max_depth": 8.88
+}
