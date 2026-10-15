@@ -33,7 +33,9 @@ docs/EVOLUTION.md (and its snapshot to pipeline/evolution/) as part of the judge
 - **User parts**: only BOTTOM may be modified (cut / merged with the neck). Never edit the user's Onshape model.
 - **Personal data**: body scans and motion recordings stay in `data/raw/private/` (git-ignored). The user's machine
   also has a `personal-shoulder-diagnosis` folder - never read it into this repo or commit it.
-- **Paid compute**: before any RunPod job or deploy, state the GPU type and estimated cost and wait for a yes. The key
+- **Paid compute**: before any RunPod job or deploy, state the GPU type and estimated cost and wait for a yes.
+  (User 2026-10-15 ~12:45 UTC: "you can spend more, i permit everything" - spend approved without a fixed cap for
+  this push; still state GPU type + cost per batch and keep the endpoint hygiene below.) The key
   comes from the `RUNPOD_API_KEY` environment variable (or `~/.runpod_key` locally) - never print it, never commit it.
   After a search, set the endpoint's `workersMin` back to 0. Never touch the user's other pods (names starting `crl-`).
 - **Downloads and licences**: installs approved by the user 2026-10-15 ("install whatever you want": CalculiX, gmsh,
