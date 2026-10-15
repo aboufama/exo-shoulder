@@ -102,3 +102,31 @@ to a fixed point before the number is quoted (here 2 passes flattered the gap by
 
 Files: docs/concepts/models/seed-arc-rails.py, docs/concepts/sweeps/seed-arc-rails.json,
 docs/concepts/rows/seed-arc-rails.json, docs/concepts/img/seed-arc-rails.png (rest and highest taken pose, skin grey).
+
+## Audit (2026-10-15T19:12:07Z)
+
+I tried to refute the death on Bench(60, 160) fast, the same as the agent's bench.
+
+- **Reproduced.** `seed-arc-rails.py check` (PARAMS) gives gap 73.0: reach 0.894, follow 1.000, inband14 0.186,
+  inband10 0.097, contact 0.010, R1/R2/R3 61.5/170.9/74.7 mm. This matches sweep entries k436/k438/k441.
+- **Conventions vs tools/concept_baseline.py.** The model uses the same bvec/w_dir, two-circle closure, 10 deg fold
+  margin, 2 mm sampling and 2 mm clearance as the baseline. It differs from the baseline in three places:
+  (a) A rail's radius is the p-th percentile of each pose's maximum over the whole rail. The baseline's flat hub takes
+  the maximum over samples of each sample's percentile, which is a little more lenient. A rail has to be a single
+  circle, so (a) is physics, not a bias, and the sweep over p (50-100) already covers that trade-off.
+  (b) Top and edge samples also count toward contact. This rejects only 2 poses.
+  (c) Continuity is checked at 10 fps. It produced 0 flips at the best configuration.
+  None of these three is over-strict enough to move the gap by much.
+- **Kinematics and sizing.** Closure is unchanged from the baseline (15 closure failures at the fold). The links join
+  their parts' radii (rev 3), and the radius fit is iterated (the check gives the same result with 2 and 4 passes).
+  I found no modelling bug.
+- **Missed regions (6 configurations x 4 percentiles, 4 fixed-point passes, scratch only):**
+  - Hub-limit crowns (rho 6-8), at the champion u_az 2.43 and at -30: gap 81-216. The cut that stops carriage 2
+    before its rail-2 mount grows as 1/sin(rho), so a crown below about 10 deg leaves the carriage almost no travel
+    ("off rail" 101-180 poses). A hub-sized rail is a ring bearing, which is the baseline's case.
+  - Rail 2 turned with phi2 = 90 / -90 / 180: gap 85.4 at best. The other settings give no finite radius or make
+    link 2 hit rail 2.
+- **Verdict: the death stands.** The measured limiter is R2. Rail 2 has to clear the raised arm at 90-150 deg
+  abduction, so its radius is 171 mm at p98 and inband14 is 0.19 (the baseline gets 0.44). Lower percentiles trade
+  that for 5-13 % contact. Note that 73.0 is within 10 of 68.93, but the best design is the hub 3R with a different
+  base azimuth. The thing to carry forward is u_az around -30 for the 3R family, not a GPU sweep for this morphology.
