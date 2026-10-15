@@ -10,7 +10,7 @@ import asyncio, json, os, sys, time
 from runpod_flash import Endpoint
 EP = Endpoint(id=os.environ.get("BAND_EP", "ijltcmvytav2jx"))
 HERE = os.path.dirname(os.path.abspath(__file__))
-POSES = open(os.path.join(HERE, "..", "band_poses.b64")).read()
+POSES = open(os.path.join(HERE, "..", os.environ.get("POSES_FILE", "band_poses.b64"))).read()      # POSES_FILE=band_poses_fit.b64: the fitting clips only (data/raw/split.json)
 
 async def run(job, timeout=7200):
     j = await EP.run({"job": job})

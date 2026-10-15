@@ -23,6 +23,10 @@ ap = argparse.ArgumentParser(); ap.add_argument("design"); ap.add_argument("--st
 a = ap.parse_args(); dd = design_dir(a.design)
 D = json.load(open(os.path.join(dd, "design.json"))); base = D.get("base", {"mount": "thorax", "chain": "spherical", "centre_mm": [0, 0, 0]})
 FR = list(frames(dd, a.step)); W = np.array([fr["want"] for _, _, fr in FR], float); M = GD.Motion(W)
+if base.get("mount") == "girdle":                                           # option A: the base rides the girdle - its error (acromion skin slip) is not modelled yet
+    out = dict(base=base, max_mm=None, note="girdle-riding base: R10 as written (thorax plate) does not apply; skin-slip error not modelled (literature: 5-7 deg below 100-120 deg elevation, up to 25 deg above)")
+    os.makedirs(os.path.join(dd, "judge"), exist_ok=True); json.dump(out, open(os.path.join(dd, "judge", "base_mount.json"), "w"), indent=1)
+    print("base mount: girdle-riding base -> R10 NOT RUN (skin-slip model missing)"); sys.exit(0)
 LAWS = GD.lift_laws(W, M); Pe = np.eye(3)
 if base.get("slider"): e = np.asarray(base["slider"], float); e /= np.linalg.norm(e); Pe = np.eye(3) - np.outer(e, e)
 if base.get("chain") == "offset3":

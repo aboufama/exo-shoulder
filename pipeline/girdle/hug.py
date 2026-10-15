@@ -121,19 +121,30 @@ def hub_mesh(centre_axis_pt, axis, z0, z1, r=HUB_R):
 def main():
     ap = argparse.ArgumentParser(); ap.add_argument("arch", choices=["ring", "3r"]); ap.add_argument("--name"); ap.add_argument("--station", type=float, default=80.0)
     ap.add_argument("--step", type=int, default=3); ap.add_argument("--ring-centre", type=float, default=21.0, help="deg about the humerus axis, 0 lateral, + posterior (FINDINGS: rigid arm parts fit in -20..+62)")
+    ap.add_argument("--base", choices=["thorax", "girdle"], default="thorax", help="girdle: option A - the base rides the shoulder girdle (scapula frame), chain spherical about GH")
+    ap.add_argument("--design", help="girdle mode: band search/eval json and index, e.g. ../conformal/gpu_client/band_search_r14.json:0:0 (job:rank)")
     a = ap.parse_args(); name = a.name or f"l1_{a.arch}"
-    R0 = json.load(open(os.path.join(HERE, "p0_results.json")))["architectures"]
-    key = "3 DOF: 2R shoulder (offset axes) + humeral-rotation ring" if a.arch == "ring" else "3 DOF: 3R, offset axes"
-    A0 = R0[key]; pr = dict(A0["params"]); pr["b"] = tuple(pr["b"]); pr["w"] = None if pr.get("w") is None else tuple(pr["w"]); x = np.array(A0["_x"])
-    ch = GD.Chain3(pr)
     src = os.path.join(REPO, "pipeline", "full-exo", "designs", "cad_r13_n4_s1343_1", "clips.json"); C = json.load(open(src))
     names = [c["name"] for c in C["clips"] for f in c["frames"]]; W = np.array([f["want"] for c in C["clips"] for f in c["frames"]], float)
-    M = GD.Motion(W); A, mg, ok, R1, R2, RA = ch.kin(M); I = np.eye(3)
-    o1, o2, o3 = x[:3], x[3:6], x[6:9]
-    t1 = (I - R1) @ o1; t2 = t1 + (R1 - R2) @ o2; pA = t2 + (R2 - RA) @ o3        # thorax frame: link translations, chain-carried GH
-    Tn = len(W); Rb = np.repeat(I[None], Tn, 0); tb = np.zeros((Tn, 3))
+    M = GD.Motion(W); I = np.eye(3); Tn = len(W)
+    if a.base == "girdle":                                                     # option A: base = scapula frame, all axes through GH
+        f_, j_, k_ = a.design.split(":"); J_ = json.load(open(f_)); d_ = (J_[int(j_)]["best"] if "best" in J_[int(j_)] else J_[int(j_)]["results"])[int(k_)]
+        pr = dict(b=(d_["az"], d_["el"]), a1=d_["a"][0], a2=d_["a"][1], branch=d_["branch"], w=tuple(d_["w"])); key = f"band design {a.design} (girdle-riding base)"
+        A0 = dict(params={k: (list(v) if isinstance(v, tuple) else v) for k, v in pr.items()}); x = np.zeros(9); ch = GD.Chain3(pr)
+        Mrel = GD.Motion.__new__(GD.Motion); Mrel.RH = np.einsum("tji,tjk->tik", M.RS, M.RH); Mrel.lift = M.lift; Mrel.hdir = Mrel.RH @ GD.HUMERUS   # arm vs scapula
+        A, mg, ok, R1r, R2r, RAr = ch.kin(Mrel)
+        R1, R2, RA = M.RS @ R1r, M.RS @ R2r, M.RH; t1 = t2 = pA = M.lift.copy()                       # thorax frame: rotate with the scapula, ride the GH lift
+        Rb, tb = M.RS.copy(), M.lift.copy()
+    else:
+        R0 = json.load(open(os.path.join(HERE, "p0_results.json")))["architectures"]
+        key = "3 DOF: 2R shoulder (offset axes) + humeral-rotation ring" if a.arch == "ring" else "3 DOF: 3R, offset axes"
+        A0 = R0[key]; pr = dict(A0["params"]); pr["b"] = tuple(pr["b"]); pr["w"] = None if pr.get("w") is None else tuple(pr["w"]); x = np.array(A0["_x"])
+        ch = GD.Chain3(pr); A, mg, ok, R1, R2, RA = ch.kin(M)
+        o1, o2, o3 = x[:3], x[3:6], x[6:9]
+        t1 = (I - R1) @ o1; t2 = t1 + (R1 - R2) @ o2; pA = t2 + (R2 - RA) @ o3        # thorax frame: link translations, chain-carried GH
+        Rb = np.repeat(I[None], Tn, 0); tb = np.zeros((Tn, 3))
     sel = np.arange(0, Tn, a.step); fit = np.array([names[i] not in HOLD_OUT for i in sel])
-    print(f"{name}: {key}; {len(sel)} frames ({fit.sum()} fitting); misalignment worst {np.linalg.norm(pA - M.lift, axis=1).max():.2f} mm", flush=True)
+    print(f"{name}: {key}; {len(sel)} frames ({fit.sum()} fitting); misalignment worst {np.linalg.norm(pA - M.lift, axis=1).max():.2f} mm; singular margin min {float(np.min(mg)):.1f} deg", flush=True)
     P = skin_frames(W[sel]); FR = np.arange(len(sel))                                 # P indexed by position in sel
     sub = lambda X: X[sel]
     MB = dict(base=(sub(Rb), sub(tb)), l1=(sub(R1), sub(t1)), l2=(sub(R2), sub(t2)), cuff=(sub(RA), sub(pA)))
@@ -237,13 +248,14 @@ def main():
     for c in C["clips"]:
         fr = []
         for f in c["frames"]:
-            G = dict(base=I, l1=R1[k], l2=R2[k], cuff=RA[k]); T = dict(base=-M.lift[k], l1=t1[k] - M.lift[k], l2=t2[k] - M.lift[k], cuff=pA[k] - M.lift[k])
+            G = dict(base=Rb[k], l1=R1[k], l2=R2[k], cuff=RA[k]); T = dict(base=tb[k] - M.lift[k], l1=t1[k] - M.lift[k], l2=t2[k] - M.lift[k], cuff=pA[k] - M.lift[k])
             fr.append(dict(p=f["want"], want=f["want"], held=bool(blocked_all[k]), G={g: np.asarray(v).round(6).ravel().tolist() for g, v in G.items()},
                            T={g: np.asarray(v).round(3).tolist() for g, v in T.items()})); k += 1
         clips["clips"].append(dict(name=c["name"], frames=fr))
     json.dump(clips, open(os.path.join(dd, "clips.json"), "w"), separators=(",", ":"))
-    base = dict(mount="thorax", chain="offset3", prm=dict(b=list(pr["b"]), a1=pr["a1"], a2=pr["a2"], branch=pr["branch"], w=None if pr["w"] is None else list(pr["w"])),
-                axis_points_mm=[o1.tolist(), o2.tolist(), o3.tolist()])
+    base = (dict(mount="girdle", chain="spherical", note="option A: the base rides the shoulder girdle; its error is acromion skin slip, not modelled") if a.base == "girdle" else
+            dict(mount="thorax", chain="offset3", prm=dict(b=list(pr["b"]), a1=pr["a1"], a2=pr["a2"], branch=pr["branch"], w=None if pr["w"] is None else list(pr["w"])),
+                 axis_points_mm=[x[:3].tolist(), x[3:6].tolist(), x[6:9].tolist()]))
     json.dump(dict(id=name, source="pipeline/girdle/hug.py (L1 keep-out)", n_joints=3 if a.arch == "3r" else 2, sliding_cuff=a.arch == "ring", dof=3,
                    kinematics=dict(arch=key, **{k_: v for k_, v in A0["params"].items()}), base=base, built_with="L1 keep-out: cylinders + slabs, no fairing",
                    note="ring = humeral-rotation joint about the humerus axis on the upper arm" if a.arch == "ring" else "3R, offset axes"),
