@@ -78,7 +78,7 @@
       const c = chain(q, ctx), S = x => M.mulv(ctx.S, x), F = P.faces, h = P.stack, ss = q[1] * D, u = uOf(ss);
       const Fr = M.mul(c.L1, rXY(uRef - u)), node = (f, s) => [Math.cos(f * ss) * Math.cos(u), s * Math.sin(u), Math.sin(f * ss) * Math.cos(u)];
       const at = (loc, f, dz) => S(V.scale(M.mulv(Fr, loc), rf(f) + (dz || 0)));
-      const pb = S(b), p3 = S(M.col(c.L2, 0)), out = [];
+      const pb = S(b), p3 = M.mulv(ctx.H, W0), out = [];                 // J3 + stub on the ARM axis: a gap shows when the tongs cannot reach
       const plate = (L, f, nm) => {
         const ax = S(M.col(L, 0)), x = S(M.col(L, 2)), r = (f ? F[1] : F[0]) + 11.75 + 1.5;
         return { kind: 'plate', role: 'link', name: nm, c: V.scale(ax, r), z: ax, x, size: [24, 2 * 22], t: 3 };
