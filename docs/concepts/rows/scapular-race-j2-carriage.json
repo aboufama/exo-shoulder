@@ -1,0 +1,53 @@
+{
+ "id": "scapular-race-j2-carriage",
+ "name": "Scapular race: J1 is a rail on the bony rim and J2 rides its carriage",
+ "lens": "distributed-dof",
+ "family": "spherical 3R (J1 as a scapula-fixed race)",
+ "active_dof": 3,
+ "passive_dof": 0,
+ "status": "dead",
+ "t_ideated": null,
+ "t_screened": "2026-10-15T23:10:51Z",
+ "reach": 0.575,
+ "follow": 0.85,
+ "inband14": 0.617,
+ "inband10": 0.2763,
+ "contact": 0.0774,
+ "gap": 78.54,
+ "v_reach": null,
+ "v_follow": null,
+ "v_inband14": null,
+ "v_inband10": null,
+ "v_gap": null,
+ "n_configs": 8737,
+ "verdict": "dead (converged, 8737 tries): best honest gap 78.54 (score 71.44) vs champion 68.93 - a high-band, low-reach specialist (in-band14 0.62, rail 0.96, reach 0.575); gap 0 is impossible for a one-radius race (raw-skin ceiling: reach <= 0.71 at R <= 80)",
+ "note": "Bench(60,160) fast, kit honest (march, dense K2, K6, audit clean), strict layout r_lay <= R + 0.25. Best k7562: az1 103.78 el1 71.51 gamma 37.41 a23 106.85 J3 wdir(51.34,-23.57) sigma -1 q 0.912 rmax 83.8 r_lay 62 = R 62.0; rail 209 deg at 62 mm, members in band: rail 0.959, hub2 0.317, link2 0.283, hub3 0.754, neck 0.883; 124 g Ti. GATE (score pts, 8737 tries chronological): +0.06 over the 2nd half, +0.03 over the last third, top-5 within 0.06 -> converged. Red team: CMA exploited a +1.5 mm layout tolerance (78.04 -> 80.78 for the same config; rule tightened, best strict 78.54); link2-neck 0.21 mm (adjacent J3 members, >= 0.15 ok); contact poses overhead (arm on the rail, need 176 mm).",
+ "doc": "docs/concepts/scapular-race-j2-carriage.md",
+ "limiter": "closure + rail range: the J2 axis (on the one-radius race) cannot follow the arm - reach 0.575 (overhead 17/41: 14 no closure, 4 off the rail, 6 contact; across the body 12/27; abduction 60-120 10/26). Ceiling from the raw skin (24k designs, K3 march on a 3-deg scapula grid, q 0.95): rail <= 80 mm -> reach <= 0.71; reach >= 0.9 needs R >= ~115 mm where the rail is 1-2 % in band. The far basin (R 132, reach 0.88) measures 79.69 with rail 0.02 in band.",
+ "model": "docs/concepts/models/scapular-race-j2-carriage.py",
+ "best_params": {
+  "az1": 103.7817,
+  "el1": 71.51,
+  "gamma": 37.4072,
+  "a23": 106.8497,
+  "wd": 51.3352,
+  "wa": -23.5679,
+  "sigma": -1,
+  "q": 0.9118,
+  "rmax": 83.7841,
+  "tmarg": 3.0,
+  "margin": 8.0,
+  "r_lay": 62.0
+ },
+ "honest": true,
+ "checks": {
+  "mode": "march",
+  "cont": true,
+  "collide": true,
+  "q": 0.9118
+ },
+ "audit": [],
+ "hubless": [
+  "J1"
+ ]
+}

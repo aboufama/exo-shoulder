@@ -93,7 +93,10 @@ The deltoid, armpit and pectoral stations are the ones the arm enters (the spec'
 | coarse, farm: 12 seeds (spec, workspace-centre, champion, ...) + 276 random | 288 | 147.61 | rail laid out at 55 mm (wider than real when R > 55: conservative) |
 | CMA-ES, farm (tools/concept_cma.py, 6 streams A-F from the coarse top + spec seed, popsize 8, ~150 generations each) | 7262 | 78.04 | stream E; A 81.17, D 82.95, B 92.23, C 95.06, F 105.83 (several basins) |
 | red-team rescore under the strict layout rule (r_lay <= R + 0.25), top 25 distinct | 25 | **78.54** | k7562 |
-CMA_STREAMS_2
+| CMA-ES, farm, 3 more streams G-I from the reach-ceiling designs (rail budget 80-115 mm) | 1155 | 79.69 | H: rail at 132 mm, reach 0.881, follow 0.95, in-band 14 0.151 (the high-reach basin); I 83.82, G never honest |
+| strict rescore of H's top 6 | 6 | 79.69 | k8731 |
+
+8737 tries in all (8193 honest).
 
 **Best (k7562), honest, audit clean:** gap **78.54** (score **71.44**; champion 68.93 / 74.93): reach **0.575**, follow
 **0.85**, in-band 14 **0.617**, in-band 10 **0.276**, contact **0.077**. az1 103.78, el1 71.51 (race axis a1 lateral,
@@ -107,7 +110,9 @@ range take 70 % of the poses, reach 0.575.
 
 **Convergence gate** (score points, honest tries in chronological order - coarse, then the CMA streams interleaved by
 generation): best gained 0.17 over the second half, 0.06 over the last third, top 5 within 0.06 (tolerant layout rule);
-the strict-rule rescore of the top 25: top 5 within 0.66. **Converged.** GATE_2
+the strict-rule rescore of the top 25: top 5 within 0.66. **Converged.** With streams G-I (8737 tries, chronological): +0.06 over the second half, +0.03 over the last third, top 5 within
+0.06 - still converged. Two basins, both measured: the quiet-rim rail (R 62 mm, rail 0.96 in band, reach 0.575) at
+78.5 and the far rail (R 132 mm, rail 0.02 in band, reach 0.88) at 79.7 - the trade the ceiling table predicts.
 
 ## Red team (k7562 / its twin k6367)
 
@@ -128,3 +133,30 @@ the strict-rule rescore of the top 25: top 5 within 0.66. **Converged.** GATE_2
   two strips at R (real V-rollers have a 2-3 mm deeper groove); the carriage plate is the O20 lower plate (20 mm disc)
   - a carriage carrying four rollers is closer to 26 x 22 mm, so hub2's 0.32 would drop.
 
+## Verdict
+
+**Dead - not worth a GPU sweep or L1 CAD.** Converged honest best 78.54 (score 71.44) on Bench(60, 160) vs 68.93 for the
+champion 3R and 57.19 / 57.95 (screen) for the verified leaders. The gap-0 target is impossible for this morphology,
+shown from the raw skin, not from the sweep: a race is a surface of revolution about a1 (one radius R), every station
+of it is metal in every pose, and over the 24 000 designs of the ceiling table a rail within 80 mm of GH lets the J2 axis
+follow at most 71 % of the workspace; reach >= 0.9 needs R >= ~115 mm, where the rail is 1-2 % in band.
+
+**What it taught (new knowledge, beyond this morphology):**
+* The scapula-fixed quiet rim can carry metal at ONE radius (62 mm) 96 % in band through 209 deg of arc - the best
+  in-band member measured in the swarm - but only if the arm never needs the parts on it. Any member that must follow the
+  arm over the full workspace cannot live there at a constant radius.
+* Reach of any 3R with a scapula-fixed first axis is bounded by where its J2 axis must go: the J2 axis visits the
+  deltoid / armpit / pectoral directions the arm itself enters (overhead plane 45-120 elev 165 needs 176 mm there).
+  The champion's floating hub 2 (105 mm) and this race's 132 mm far basin are the same fact.
+* A "cam" race (radius varying along the rail) is not a mechanism for a GH-concentric hub: the carriage pitches by
+  atan(r' / (r sin gamma)) and tilts J2 off GH. A skin-milled rail web under a constant-radius head is legal and would
+  lift only the rail's underside (ceiling 0.53 at the reach-0.9 rail), not the rollers, carriage, hub 2 or L2: not enough.
+* Kit finding (task filed): `over` measures exemptions at pre-climb radii and `_near` at A's radius, so a strap built
+  to clear a member by 1 mm can sit 0.15 mm over it just outside the shared-joint zone (85 % of poses here before the
+  workaround).
+* Layout radius matters for rail-like cap members: a 1 mm optimistic r_lay was worth 2.7 gap points to the optimizer;
+  sweeps of cap members should hold r_lay <= R.
+
+**Next (for the loop):** none for this morphology. The quiet-rim race is worth keeping as a PART for a morphology whose
+first joint does not need to follow the full workspace (e.g. a passive self-aligning base stage outside the count, or a
+4-DOF chain if the user ever relaxes the 3-DOF rule - not without asking).
