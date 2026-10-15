@@ -3,8 +3,9 @@ pose in <design>/workspace.json (written by band_to_design.py from the workspace
 chain configuration the design takes there: the chain must close, no shoulder-exo part may enter the body (same test
 as R2: exact closest point + winding number, judge/sdist.py) and no two parts that move relative to each other may
 interpenetrate (as R6). Independent of the evaluator's own feasibility flags (reported alongside for comparison).
-The user's forearm parts (group F) are left out of the body test: the rig's forearm is a size mismatch with the
-user's cuff (R2 reports it), not part of the shoulder mechanism.
+Only the shoulder mechanism is judged against the body: the links and base (their own groups) and, on the arm, the
+parts this project builds - BOTTOM (+ neck, JN hub) and the L1 proxies. The user's own arm parts (forearm group F, and
+the cuffs / elbow hardware in H) are left out: the rig's arm is a size mismatch with them in every pose (R2 reports it).
     python3 judge/workspace.py <design dir|id> [--step 1] [--jobs N]  -> <design>/judge/workspace.json"""
 import argparse, contextlib, json, multiprocessing as mp, os, time
 import numpy as np
@@ -13,6 +14,7 @@ from common import design_dir, load_parts
 from sdist import Mesh
 ap = argparse.ArgumentParser(); ap.add_argument("design"); ap.add_argument("--step", type=int, default=1); ap.add_argument("--jobs", type=int, default=min(4, os.cpu_count() or 1))
 ap.add_argument("--tol_body", type=float, default=0.5); ap.add_argument("--tol_parts", type=float, default=0.15); ap.add_argument("--skip_groups", default="F")
+OURS_IN_ARM = ("(proxy)", "BOTTOM", "neck", "JN hub")                            # arm-group parts this project builds
 a = ap.parse_args(); dd = design_dir(a.design); SKIP = set(x for x in a.skip_groups.split(",") if x)
 import body_pose as BP, scene_export as SE, trimesh
 W = json.load(open(os.path.join(dd, "workspace.json"))); poses = W["poses"][::a.step]
@@ -28,7 +30,7 @@ def judge_pose(k):
     X, pose = SE.frame_xforms(fr); Wx = {g: (np.asarray(R), np.asarray(t)) for g, (R, t) in X.items()}
     V = BP.posed(pose); vt = cKDTree(V); Q = {}
     for x in info:
-        if x["g"] in SKIP or x["g"] not in Wx: continue
+        if x["g"] in SKIP or x["g"] not in Wx or (x["g"] == "H" and not any(k in x["n"] for k in OURS_IN_ARM)): continue
         R, t = Wx[x["g"]]; P = x["V"] @ R.T + t; near = vt.query(P, distance_upper_bound=25.0)[0] < 25.0
         if near.any(): Q[(x["g"], x["n"])] = P[near]
     bd, bp = 0.0, None
