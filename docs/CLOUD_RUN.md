@@ -141,6 +141,15 @@ is imported before `/app/handler.py` calls `start()`. **Needs the user's go**: t
 rebalance (exo-band23 workersMax 0, exo-cpu1 6: +50 % workers) were both refused by this session's permission policy
 ("Production Deploy" / "Modify Shared Resources").
 
+**Verified 2026-10-15 22:08-22:31 UTC (independent verifier):** farm-3 is NOT live (active build still farm-2 cmv9uml2f,
+exo-cpu1 executionTimeoutMs still 0). 1 job per worker confirmed from job timestamps: 8 sleep-15 jobs ran on 2 workers,
+strictly back to back per worker (worker A: 5 jobs 771.5-852.1 s, worker B: 3 jobs 803.0-850.8 s, no overlap), after
+~13 min in the queue; the audit showed 4 running / 9-19 queued on 4 workers (6 / 8 on 6 workers at 22:31). Parity: a
+fresh 16-config `concept_baseline_sweep` on the farm (2 chunks x 8, 27 s + 17 s run, wall 1365 s of which 871 s queued
+upload) gives reports byte-identical to 2 local configs and to the 8 champion results of 19:33 UTC. Between 22:18 and
+22:31 someone else moved exo-band23 workersMax 2 -> 0 and exo-cpu1 4 -> 6 (the rebalance); workersMin 0 everywhere,
+exo-blender-cycles unchanged (0/4).
+
 ## Endpoint, cost, hygiene
 
 | item | value |
