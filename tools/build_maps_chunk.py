@@ -13,6 +13,7 @@ sys.path.insert(0, GPU); sys.path.insert(0, os.path.join(ROOT, "pipeline", "avg"
 
 def chunk(a, b, out):
     import torch
+    out = os.path.abspath(out); os.makedirs(os.path.dirname(out), exist_ok=True)   # before the chdir below
     torch.set_num_threads(int(os.environ.get("THREADS", 2)))
     os.chdir(GPU); import band_impl as BI
     P = BI.load_poses(open(os.path.join(ROOT, "pipeline", "conformal", "band_poses.b64")).read(), "cpu")
