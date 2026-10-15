@@ -5,7 +5,7 @@
  "family": "spherical 3R (ring J1)",
  "active_dof": 3,
  "passive_dof": 0,
- "status": "screened",
+ "status": "refuted",
  "t_ideated": null,
  "t_screened": "2026-10-15T19:34:29Z",
  "reach": 0.7312,
@@ -14,11 +14,11 @@
  "inband10": 0.3973,
  "contact": 0.0995,
  "gap": 63.17,
- "v_reach": null,
- "v_follow": null,
- "v_inband14": null,
- "v_inband10": null,
- "v_gap": null,
+ "v_reach": 0.6528,
+ "v_follow": 0.9182,
+ "v_inband14": 0.5243,
+ "v_inband10": 0.3705,
+ "v_gap": 74.66,
  "n_configs": 66,
  "verdict": "worth a GPU sweep as a SUBTYPE of the spherical 3R: a flat J1 ring bearing on the scapula top cap (93 % in band) + O20 hubs at J2/J3, honest gap 63.17 vs the champion's 68.93 (70.27 on the same kit checks); the spec's two-ring turret itself is dead (best 75.79, ring 2 floats 80-150 mm)",
  "note": "best k 42: J2 as an O20 hub (j2hub=1), b bvec(90,75), W0 wdir(71.38,4.78), A1 45, A2 75, branch -1, margin 5, q 0.95; Bench(60,160) fast grid, kit march + dense K2 + K6, honest; J1 ring 15-24 x 8 mm 93 % in band (99.7 % at 12-18); two-ring spec version best 75.79 (k62, same axes), spec start 94.73",
@@ -66,5 +66,24 @@
   "L2",
   "L1a",
   "L1b"
- ]
+ ],
+ "verification": {
+  "bench": "Bench(110, 360) exact path (CB_EXACT=1, libigl), kit march + dense K2 + K6 with 1 mm radial part-part clearance",
+  "v_contact": 0.0919,
+  "v_closure": 0.7957,
+  "kit_k6_05mm_gap": 75.63,
+  "exact_60_160": {
+   "kit": 63.12,
+   "strict_1mm": 65.71
+  },
+  "fast_60_160": {
+   "kit": 63.17,
+   "strict_1mm": 63.74
+  },
+  "champion_same_checks_110_360": {
+   "baseline_conventions": 73.8,
+   "kit_strict_1mm": 75.94
+  },
+  "reason": "corrected gap 74.66 > 68.93: the screening axes were tuned on Bench(60,160); on the larger bench closure drops 0.87 -> 0.80 and reach 0.73 -> 0.65, J2 hub rises 72 -> 77 mm (1.5 % in band), link 2 in band 0.44 -> 0.30. No hard rule broken. On identical checks and bench it still edges the champion (74.66 vs 75.94)."
+ }
 }

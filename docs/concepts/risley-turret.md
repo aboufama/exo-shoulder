@@ -97,3 +97,55 @@ worth a short GPU sweep (b, W0, A1, A2, ring radii, q; the J1 ring is not the li
 closure are). Next lever for gap 0: overhead - 61 % of overhead poses fail (closure band or contact).
 
 Sketch: `docs/concepts/img/risley-turret.png` (frontal view, rest and overhead, every metal sample by part).
+
+## Verification (adversarial verifier, 2026-10-15)
+
+**Verdict: refuted on the stated rule.** The corrected gap on the larger exact bench is **74.66**, which is above
+68.93. The model breaks no hard rule. On identical checks and the same bench it still edges the champion
+(74.66 vs 75.94).
+
+| run | gap | reach | follow | in-band 14 | in-band 10 | contact |
+|---|---|---|---|---|---|---|
+| claim, Bench(60,160), fast grid, kit checks (reproduced exactly) | 63.17 | 0.731 | 0.917 | 0.570 | 0.397 | 0.0995 |
+| Bench(60,160), **exact** path (CB_EXACT=1), kit checks | 63.12 | 0.731 | 0.917 | 0.570 | 0.398 | 0.0995 |
+| Bench(60,160), exact, + 1 mm radial part-part clearance | 65.71 | 0.694 | 0.917 | 0.570 | 0.398 | 0.088 |
+| **Bench(110,360), exact, + 1 mm radial clearance (v_*)** | **74.66** | 0.653 | 0.918 | 0.524 | 0.371 | 0.092 |
+| Bench(110,360), exact, kit K6 (0.5 mm radial) | 75.63 | 0.653 | 0.918 | 0.524 | 0.371 | 0.102 |
+| champion 3R, Bench(110,360), exact, its own conventions | 73.80 | 0.753 | 1.000 | 0.411 | 0.264 | 0.101 |
+| champion 3R, Bench(110,360), exact, kit checks + 1 mm radial | 75.94 | 0.742 | 0.927 | 0.413 | 0.256 | 0.091 |
+
+What was checked:
+
+1. **DOF (R5 / R17).** J1 is a ring bearing about a scapula-fixed axis, J2 an O20 hub with its axis set by the K1
+   closure on a fixed branch, and J3 an O20 hub about a humerus-fixed axis. That is 3 active DOF and 0 passive, with
+   no undetermined coordinate. Pass.
+2. **Real size and sampling.** Every member is in the chain: the J1 ring (r 15-24, 8 mm section), the L1 bridge strap
+   (14 x 3), the J2 and J3 O20 hubs (12.25 stack, audit coverage OK), link 2 (14 x 3) and the K7 neck. Every member is
+   sampled at 2.0-2.4 mm over its whole skin face, with no near-skin filter. Pass. Soft note: a 30 x 48 x 8 mm ring
+   with two races is not in docs/HARDWARE.md. A 61806 deep-groove bearing (30 x 42 x 7) leaves about 1 mm axially
+   and 3 mm radially for both race housings, so the section is optimistic.
+3. **Pose-taking.** The closure residual is 0.0 deg and the band margin is >= 5.09 deg. Dense K2 runs on every joint
+   axis, including the lug joins, and finds 0 flips. The J1/J2 stack holds on the final levels (`stack_ok`).
+   **Added check: 1 mm radial part-part clearance.** The kit's K6 only rejects a pose below 0.5 mm radially. With
+   a 1 mm threshold, 9 more poses on Bench(60,160) exact (4 on 110/360) collide: link 2 runs 0.5-1 mm over the
+   bridge, J1 ring and neck where `over`, fitted at the pre-raise radius, missed them. A naive `overlap=1.0`
+   would flag 57 poses, but 51 of those are exact 1.000 mm gaps that `over` built on purpose, so they are legal.
+   The corrected check uses gap < 1 mm - 1e-4.
+4. **Bench artefacts.** None. The exact path matches the grid cache within 0.05 gap points (63.12 vs 63.17).
+5. **The larger bench is where the claim fails.** The b / W0 / A1 / A2 picked from 66 configurations on
+   Bench(60,160) do not hold up on Bench(110,360):
+   - closure share drops from 0.868 to 0.796 and reach from 0.731 to 0.653;
+   - the J2 hub refits from 72 to 77.4 mm (1.5 % in band);
+   - link 2 falls from 0.44 to 0.30 in band.
+
+   The J1 ring holds at 93.5 % in band, so that finding (new-knowledge item 1) stands. The champion also
+   degrades on the same bench (68.93 -> 73.80 with its own conventions, 75.94 with the same corrected checks),
+   so the turret subtype still edges it by about 1.3 points. The ring + hub subtype is therefore worth a GPU sweep
+   only if the sweep is scored on the larger bench or with a held-out pose split, so that it cannot overfit the
+   axes to the 220 screening poses.
+
+Method: the model's own `evaluate` on its row's `best_params`. Exact path: concept_bench's own distance definition
+(the same libigl unsigned AABB plus the winding sign), with per-pose trees kept in an LRU cache and the K3 march
+grouped by pose. The rays are independent, so the result is identical to the kit's path and the speed is usable.
+The 1 mm check wraps `K.collisions`. Champion: `docs/concepts/models/baseline-3r-kit.py` with `BASELINE` and
+`HONEST` conventions.
