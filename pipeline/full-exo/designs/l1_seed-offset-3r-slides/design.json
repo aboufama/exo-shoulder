@@ -1,0 +1,101 @@
+{
+ "id": "l1_seed-offset-3r-slides",
+ "source": "docs/concepts/seed-offset-3r-slides.md, sweep log k 403 (cma1 main g2), refitted on Bench(60,160) fast",
+ "n_joints": 3,
+ "sliding_cuff": false,
+ "dof": 3,
+ "passive": {
+  "count": 3,
+  "kind": "self-aligning slides at the cuff (along, across, radial), set by loop closure",
+  "outside_dof_count": true
+ },
+ "kinematics": {
+  "az": 0.1305071427308926,
+  "el": 72.57633718429899,
+  "a": [
+   80.20180446920043,
+   64.04921235407174
+  ],
+  "w": [
+   90.02769021001913,
+   23.62965734734338
+  ],
+  "branch": -1,
+  "order": [
+   0,
+   1,
+   1
+  ],
+  "offsets_mm": {
+   "o1a": 1.9,
+   "o1c": -5.8,
+   "o2a": 3.7,
+   "o2c": -4.0,
+   "o3a": 0.6,
+   "o3c": 4.8
+  },
+  "axis_points_mm": [
+   [
+    -5.426,
+    -1.701,
+    -2.217
+   ],
+   [
+    2.922,
+    -3.95,
+    2.355
+   ],
+   [
+    -0.423,
+    -4.815,
+    0.187
+   ]
+  ],
+  "axes": [
+   [
+    -0.299434,
+    0.954117,
+    0.000682
+   ],
+   [
+    -0.648036,
+    -0.025558,
+    0.76118
+   ],
+   [
+    0.400823,
+    0.000483,
+    0.916155
+   ]
+  ],
+  "passive_slides_mm": {
+   "along": 12.8,
+   "across": 9.9,
+   "radial": 7.6
+  },
+  "neck_mm": 17.6
+ },
+ "base": {
+  "mount": "girdle",
+  "chain": "offset3_slides",
+  "note": "base rides the scapula on the user's scapula handler"
+ },
+ "built_with": "pipeline/concept_l1/build_seed_offset_l1.py (L1 keep-out meshes: O20 hub keep-outs, fitted 8 x 3 straps, slide-stage boxes)",
+ "label": "seed-offset-3r-slides k 403, L1 keep-out",
+ "faces_mm": [
+  57.6,
+  94.37,
+  65.17
+ ],
+ "tr": 68.05,
+ "zb": 84.65,
+ "bench": {
+  "gap": 54.95,
+  "reach": 0.8,
+  "follow": 0.9167,
+  "inband14": 0.5734,
+  "inband10": 0.3115,
+  "contact": 0.0896
+ },
+ "note": "R17's dynamics judge models the orientation-equivalent spherical chain (kinematics az/el/a/w); the offsets and the 3 passive slides are not in its MuJoCo model"
+}

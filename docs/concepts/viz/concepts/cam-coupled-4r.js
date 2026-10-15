@@ -9,7 +9,7 @@
 (function () {
   const K = (typeof window !== 'undefined' ? window : globalThis).KIN, V = K.V, M = K.M;
   const P = { az: 61.04, el: 57.77, a: [35.0, 56.13, 35.0], w: [84.08, -10.84], branch: -1, tail_r: 30, tail_phi: 180,
-              keys: [0, 60, -60], sigma: 1, pa_min: 0.25, hold_min: 0.1, sing: 10,
+              keys: [-170, -170, 60], sigma: 1, pa_min: 0.25, hold_min: 0.1, sing: 10,
               faces: [55, 64, 70, 66], hub_r: 10, stack: 12.25, pin_r: 5, slot_w: 14, neck_deg: 25, cuff_at: 165 };
   const p1 = K.bvec(P.az, P.el), W0 = K.wdir(P.w[0], P.w[1]), e = V.unit(V.cross(p1, [0, 1, 0]));
   /** pin-representation state for J1 azimuth th (deg) and arm axis p4 (scapula frame) */

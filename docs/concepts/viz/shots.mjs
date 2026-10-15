@@ -34,7 +34,7 @@ const errors = [];
 async function open(viewport, scheme) {
   const ctx = await browser.newContext({ viewport, colorScheme: scheme, deviceScaleFactor: 1, reducedMotion: 'reduce' });
   const page = await ctx.newPage();
-  page.on('console', m => { if (m.type() === 'error' || m.type() === 'warning') errors.push(`[${scheme} ${viewport.width}] ${m.type()}: ${m.text().slice(0, 300)}`); });
+  page.on('console', m => { if ((m.type() === 'error' || m.type() === 'warning') && !/document\.write/.test(m.text())) errors.push(`[${scheme} ${viewport.width}] ${m.type()}: ${m.text().slice(0, 300)}`); });
   page.on('pageerror', e => errors.push(`[${scheme} ${viewport.width}] pageerror: ${e.message}`));
   page.on('requestfailed', r => errors.push(`[${scheme} ${viewport.width}] requestfailed: ${r.url()} ${r.failure() && r.failure().errorText}`));
   await page.setContent(wrapped, { waitUntil: 'networkidle', timeout: 60000 });

@@ -357,7 +357,7 @@
     const m = metaById[state.id] || { id: state.id, name: (KIN.concepts[state.id] || {}).name || state.id };
     const c = KIN.concepts[state.id];
     $('#i-name').textContent = m.name; $('#i-id').textContent = m.id;
-    $('#stage-name').textContent = m.short || m.name;
+    $('#stage-name').textContent = (c && c.name) || m.short || m.name;
     const st = $('#i-status'); st.className = `pill s-${m.status || 'ideated'}`; st.textContent = STATUS_LABEL[m.status] || m.status || '–';
     const sc = score(m.gap), vs = score(m.v_gap);
     $('#i-score').textContent = sc == null ? '–' : fmt(sc);
@@ -443,19 +443,24 @@
     renderer.setPixelRatio(Math.min(2, window.devicePixelRatio || 1));
     stageEl.prepend(renderer.domElement); renderer.domElement.id = 'gl';
     scene = new THREE.Scene(); scene.background = C.scene;
-    camera = new THREE.PerspectiveCamera(32, 1, 10, 20000);
-    camera.position.set(720, 260, 860);
+    camera = new THREE.PerspectiveCamera(30, 1, 10, 20000);
     controls = new THREE.OrbitControls(camera, renderer.domElement);
-    controls.target.set(10, -90, -90); controls.enableDamping = true; controls.dampingFactor = 0.12;
+    controls.target.set(0, -25, -40); controls.enableDamping = true; controls.dampingFactor = 0.12;
     controls.minDistance = 250; controls.maxDistance = 4000;
-    scene.add(new THREE.HemisphereLight(0xffffff, 0x8a9096, 0.75));
-    const key = new THREE.DirectionalLight(0xffffff, 0.75); key.position.set(800, 1200, 900); scene.add(key);
-    const rim = new THREE.DirectionalLight(0xffffff, 0.35); rim.position.set(-900, 400, -600); scene.add(rim);
+    scene.add(new THREE.HemisphereLight(0xffffff, 0x80878d, 0.62));
+    const key = new THREE.DirectionalLight(0xffffff, 0.5); key.position.set(900, 1100, 700); scene.add(key);
+    const rim = new THREE.DirectionalLight(0xffffff, 0.22); rim.position.set(-900, 400, -600); scene.add(rim);
     partsGroup = new THREE.Group(); axesGroup = new THREE.Group(); scene.add(partsGroup, axesGroup);
     buildMannequin();
+    let framed = false;
     const fit = () => {
       const w = stageEl.clientWidth, h = stageEl.clientHeight; if (!w || !h) return;
-      renderer.setSize(w, h, false); camera.aspect = w / h; camera.updateProjectionMatrix(); renderer.render(scene, camera);
+      renderer.setSize(w, h, false); camera.aspect = w / h; camera.updateProjectionMatrix();
+      if (!framed) {                                           // shoulder close-up from front-right-above; farther on narrow screens
+        framed = true; const d = 960 / Math.min(1, camera.aspect * 1.15), dir = V.unit([0.5, 0.4, 0.77]), t = controls.target;
+        camera.position.set(t.x + dir[0] * d, t.y + dir[1] * d, t.z + dir[2] * d); controls.update();
+      }
+      renderer.render(scene, camera);
     };
     if (window.ResizeObserver) new ResizeObserver(fit).observe(stageEl); else window.addEventListener('resize', fit);
     fit();

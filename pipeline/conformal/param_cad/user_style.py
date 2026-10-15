@@ -482,25 +482,35 @@ def upper_cuff(E):
     tightest circle that keeps the skin envelope + 2 mm clear over every followed frame of the fit clips) wrapping
     +-110 deg, and an outer arc through the land's ends that thins to 2 mm at the wrap ends; 6x M4 countersunk from
     inside into BOTTOM's tapped holes. Built in the arm's rest frame (group H). Returns ([(group, name, solid)], report)."""
-    from scipy.optimize import brentq, fsolve
-    CB, uB, vB, axB = AE.CB, AE.uB, AE.vB, AE.axB; HR = AE.HR; c = CUFF
-    zt = AE.Z_SKIN_BAR                                                                      # the bar's skin-side plane (-2.8)
-    ss = np.linspace(c["s0"], c["s1"], 28); W_ = math.radians(c["wrap_deg"])
-    def clear(Rin, vc, n_phi=61):
-        zc = zt - c["t_land"] - Rin; ph = np.linspace(-W_, W_, n_phi)
-        P = np.array([CB + s_ * uB + (vc + Rin * math.sin(p_)) * vB + (zc + Rin * math.cos(p_)) * axB for s_ in ss for p_ in ph])
-        Pc = P @ HR; nr = np.linalg.norm(Pc, axis=1)                                       # rest -> canonical (rows: HR.T @ p)
-        return float((nr - E.min_radius("can", Pc / nr[:, None])).min())
+    from scipy.optimize import fsolve
+    import body_pose as BP
+    CB, uB, vB, axB = AE.CB, AE.uB, AE.vB, AE.axB; c = CUFF
+    zt = AE.Z_SKIN_BAR; W_ = math.radians(c["wrap_deg"])                                    # the bar's skin-side plane (-2.8)
+    # the upper-arm skin in the arm's rest frame over every 4th followed frame of the fit clips (perpendicular distances
+    # matter here, so the posed skin itself rather than the GH-radial maps)
+    C_, _ = FR.load(PB.BAND); L = json.load(open(os.path.join(FR.REPO, "pipeline", "avg", "body_mesh.json"))); pts = []
+    for _, _, f in FR.followed(C_, every=4):
+        pose = dict(zip(["plane", "elev", "axial", "flex", "pron"], f["p"])); Vw = BP.posed(pose)
+        sg, _ = BP.segs(L["landmarks"], L["scale"], pose); Rh, th = np.array(sg[2][0]), np.array(sg[2][1])
+        Q = (Vw - th) @ Rh - CB; sq = Q @ uB
+        m = (sq > c["s0"] - 5) & (sq < c["s1"] + 5) & (np.abs(Q @ vB) < 90) & (Q @ axB < 0) & (Q @ axB > -130)
+        pts.append(np.stack([Q[m] @ vB, Q[m] @ axB], 1))
+    P2 = np.concatenate(pts); liner = 2.0
+    def fits(Rin, vc):
+        C2 = np.array([vc, zt - c["t_land"] - Rin]); d = P2 - C2; ang = np.arctan2(d[:, 0], d[:, 1])
+        sel = np.abs(ang) <= W_ + math.radians(8); r = np.linalg.norm(d[sel], axis=1)
+        return float((Rin - liner - r).min()) if sel.any() else 99.0
     best = None
-    for vc in np.arange(-12.0, 12.1, 3.0):
-        lo, hi = 25.0, 120.0
-        if clear(hi, vc) < 0: continue
-        Rin = brentq(lambda r: clear(r, vc), lo, hi, xtol=0.25) if clear(lo, vc) < 0 else lo
-        Rin = math.ceil(Rin + 0.25)                                                          # a round radius, clear by construction
+    for vc in np.arange(-14.0, 14.1, 2.0):
+        lo, hi = 25.0, 140.0
+        if fits(hi, vc) < 0: continue
+        for _ in range(30):
+            mid = (lo + hi) / 2; lo, hi = (lo, mid) if fits(mid, vc) >= 0 else (mid, hi)
+        Rin = math.ceil(hi)                                                                  # a round radius, clear by construction
         if best is None or Rin < best[0]: best = (Rin, vc)
     assert best, "cuff: no circle clears the arm"
     Rin, vc = best; zc = zt - c["t_land"] - Rin
-    print(f"cuff: inner arc R{Rin:g} centred {vc:+.0f} mm across the bar, clearance {clear(Rin, vc, 121):.2f} mm over the envelope (2 mm in it)")
+    print(f"cuff: {len(P2)} skin samples; inner arc R{Rin:g} centred {vc:+.0f} mm across the bar, {fits(Rin, vc):.2f} mm beyond skin + 2 mm liner at the closest point")
     # outer arc: through the land ends, 2 mm from the inner arc at the wrap ends
     wl = c["land_hw"]; ue = np.array([math.sin(W_), math.cos(W_)]); Pi = np.array([vc, zc]) + Rin * ue
     def eqs(x):
