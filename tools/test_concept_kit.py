@@ -179,3 +179,69 @@ def test_template_runs_on_kit_conventions(B):
     spec = importlib.util.spec_from_file_location("tp", p); M = importlib.util.module_from_spec(spec); spec.loader.exec_module(M)
     r = K.evaluate(B, M.build, M.PARAMS)
     assert r["collide"] == 0.0 and r["residual_deg"] < 0.5 and 0 < r["gap"] < 275 and r["mass_g"] > 50
+
+
+# ---- verification (adversarial verifier, docs/concepts/KIT.md "Verification") ----------------------------------------
+def test_flat_hub_level_vs_line_march(B):
+    """K4: h_F = the brute 1 mm march of every disc sample along the axis from its true in-plane offset (q = 1); the
+    h0 = 70 ray layout used before was 1.4 mm low at 54 mm and 400 (inf) instead of 161 mm at 108 mm"""
+    F = K.frames(B); idx = np.array([0, 20, 45, 90, 150, 200]); okm = np.zeros(len(B.kind), bool); okm[idx] = True
+    for ax in (F.S(K.bvec(2.4, 80.7)), F.HG(K.wdir(86.3, 21.8))):
+        h = K.hub_member("H", ax, "J"); ch = K.Chain(members=[h], ok=okm)
+        hF = K.fit_profiles(B, ch, okm, 1.0)["H"][0]
+        t = np.arange(15, 236, 1.0); need = []
+        for i in idx:
+            O = h.xy[:, :1] * h.A[i] + h.xy[:, 1:] * h.Bv[i]; d = B.dist(int(i), O[:, None, :] + t[None, :, None] * h.K[i])
+            good = (d[:, :206] >= 2) & np.lib.stride_tricks.sliding_window_view(d >= 0, 16, axis=1).all(-1)
+            need.append(np.where(good.any(1), t[np.argmax(good, 1)], 400.0))
+        assert abs(hF - np.max(need)) <= 1.0, (hF, np.max(need))
+
+
+def test_dense_continuity_axis_check_ignores_fake_q(B):
+    """a model that zeroes its joint values cannot hide a branch flip: the kit also follows the joint axes"""
+    F = K.frames(B); W = K.wdir(86, 22); thr = float(np.median(F.HG(W)[F.clip, 1]))
+    def build(_B, Fr, p):
+        p1 = Fr.S(K.bvec(0, 80)); p3 = Fr.HG(W)
+        pa, oka, _ = K.closure(p1, p3, 77, 67, 1, 0); pb, okb, _ = K.closure(p1, p3, 77, 67, -1, 0)
+        p2 = np.where((p3[:, 1] > thr)[:, None], pa, pb)
+        return K.Chain(members=[], ok=oka & okb, q=np.zeros((len(p1), 1)), joints=dict(J1=p1, J2=p2, J3=p3))
+    ok = build(B, F, {}).ok
+    ok1, f1 = K.continuity_dense(B, F, build, {}, ok)
+    assert f1 > 0 and ok1.sum() < ok.sum()
+
+
+def _tiny_chain_model(hub_rad=K.HUB_R, nonlocal_=False, hubless=()):
+    def build(B, F, p):
+        p1 = F.S(K.bvec(2.4, 80.7)); p3 = F.HG(K.wdir(86.3, 21.8)); p2, ok, _ = K.closure(p1, p3, 76.9, 66.7, -1, 10)
+        if nonlocal_: ok = ok & (np.arange(len(p1)) % 2 == 0)                       # depends on the pose index, not on F
+        q = np.stack([K.axis_angle(p1, F.S([1.0, 0, 0]), p2), K.axis_angle(p3, F.HG([0.0, -1, 0]), p2)], -1)
+        mem = [K.hub_member("hub1", p1, "J1", rad=hub_rad), K.hub_member("hub3", p3, "J3"),
+               K.strap_member("link1", p1, p2, ("J1", "J2"), ramp_to=(("hub1", K.STACK), (None, 0)))]
+        if "J2" not in hubless: mem.append(K.hub_member("hub2", p2, "J2"))
+        return K.Chain(members=mem, ok=ok, q=q, joints=dict(J1=p1, J2=p2, J3=p3), hubless=hubless)
+    return build
+
+
+def test_audit_closes_honesty_holes(B, tmp_path):
+    r = K.evaluate(B, _tiny_chain_model(), {})
+    assert r["honest"] and not r["audit"] and max(r["sample_mm"].values()) <= 4.0
+    assert any("smaller than O20" in x for x in K.evaluate(B, _tiny_chain_model(hub_rad=5.0), {})["audit"])
+    with pytest.raises(ValueError):                                   # a joint without any hub member
+        K.evaluate(B, lambda b, f, p: (lambda c: (c.members.pop(), c)[1])(_tiny_chain_model()(b, f, p)), {})
+    r2 = K.evaluate(B, _tiny_chain_model(hubless=("J2",)), {}); assert r2["honest"] and r2["hubless"] == ["J2"]
+    assert any("pose-local" in x for x in K.evaluate(B, _tiny_chain_model(nonlocal_=True), {})["audit"])
+    rb = K.evaluate(B, _tiny_chain_model(), {}, cont=False); assert not rb["honest"]
+    with pytest.raises(ValueError): K.write_row("x", "x", rb)
+    with pytest.raises(ValueError):                                   # K2 requested without q or joints
+        K.evaluate(B, lambda b, f, p: K.Chain(members=[], ok=np.ones(len(f.RS), bool)), {})
+    out = tmp_path / "s.json"; best, rows = K.sweep(B, _tiny_chain_model(), [{"q": 1.0}, {"q": 0.9}], str(out), log=None)
+    import json; saved = json.load(open(out))
+    assert len(saved) == 2 and all(e["gap"] == K.CB.gap_of(e["inband14"], e["follow"], e["reach"], e["contact"]) for e in saved)
+    assert all(e["honest"] for e in saved)
+
+
+def test_strap_layout_pose_local():
+    rng = np.random.default_rng(2); u = K.unit(rng.normal(size=(40, 3))); v = K.unit(u + 0.8 * K.unit(rng.normal(size=(40, 3))))
+    D = K.strap_dirs(u, v); assert np.allclose(D[:, -1, D.shape[2] // 2], v, atol=1e-9)   # each pose's strap ends on its own v
+    sub = K.strap_dirs(u[:5], v[:5], ang=np.median(np.arccos((u * v).sum(-1))))           # same count when the median is given
+    assert sub.shape[1:] == D.shape[1:]

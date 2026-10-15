@@ -117,18 +117,24 @@ def _slerp_frames(F, j0, j1, step_deg=2.0, max_sub=90):
 def continuity_dense(B, F, build, params, ok, jump_deg=25.0, step_deg=2.0):
     """K2 along the real motion: between consecutive TAKEN clip frames the pose is interpolated (scapula and humerus
     slerped, <= step_deg per step) and the chain rebuilt; the frame is followed only if the chain closes at every step
-    and no joint jumps > jump_deg between steps (a branch flip, or a pass through a singularity). build may only use F
-    for its geometry (it is called with these interpolated frames). Returns ok2 (P,), flips."""
+    and no joint value (Chain.q) and no joint AXIS (Chain.joints) moves > jump_deg between steps (a branch flip, or a
+    pass through a singularity; the axis test does not rely on the model's own q). build may only use F for its
+    geometry (it is called with these interpolated frames). Returns ok2 (P,), flips."""
     ok2 = np.asarray(ok, bool).copy(); flips = 0
     for _, js in B.clip_order().items():
         prev = None
         for j in js:
             if not ok2[j]: continue
             if prev is not None:
-                Fs = _slerp_frames(F, prev, j, step_deg); ch = build(B, Fs, params)
-                q = np.asarray(ch.q, float).reshape(len(Fs.RS), -1); d = np.diff(q, axis=0)
-                if ch.q_period: d = (d + ch.q_period / 2) % ch.q_period - ch.q_period / 2
-                if not (np.all(ch.ok) and np.abs(d).max(initial=0) <= jump_deg): ok2[j] = False; flips += 1; continue
+                Fs = _slerp_frames(F, prev, j, step_deg); ch = build(B, Fs, params); n = len(Fs.RS); jmp = 0.0
+                if ch.q is not None:
+                    d = np.diff(np.asarray(ch.q, float).reshape(n, -1), axis=0)
+                    if ch.q_period: d = (d + ch.q_period / 2) % ch.q_period - ch.q_period / 2
+                    jmp = np.abs(d).max(initial=0)
+                for ax in ch.joints.values():
+                    ax = unit(np.asarray(ax, float).reshape(n, 3))
+                    jmp = max(jmp, float(np.degrees(np.arccos(np.clip((ax[1:] * ax[:-1]).sum(-1), -1, 1))).max(initial=0)))
+                if not (np.all(ch.ok) and jmp <= jump_deg): ok2[j] = False; flips += 1; continue
             prev = j
     return ok2, flips
 
@@ -161,18 +167,20 @@ def dist_many(B, I, P):
 
 
 # ---- K3 skin requirement along rays --------------------------------------------------------------------------------
-def requirement(B, I, D, t0=15.0, t1=220.0, clr=2.0, win=15.0, mode="march"):
-    """per ray (pose I (N,), unit dir D (N, 3)): the radius metal must sit at.
+def requirement(B, I, D, t0=15.0, t1=220.0, clr=2.0, win=15.0, mode="march", O=None):
+    """per ray (pose I (N,), unit dir D (N, 3), origin O (N, 3), default GH): the distance t along the ray (x = O + t D)
+    metal must sit at (O = the in-plane offsets of a flat plate's samples, D = its normal: t is the plate height).
     mode 'march' (K3): the first t on the 1 mm lattice t0..t1 with dist(t) >= clr and dist >= 0 on t..t+win (inf if
     none); exact w.r.t. a brute 1 mm march, steps skip lattice points the 1-Lipschitz distance rules out.
     mode 'outer' (tools/concept_baseline.skin_radius + clr): sphere-trace inward from 260 mm to the OUTERMOST skin."""
     I = np.asarray(I, np.int64); D = np.asarray(D, float); N = len(D)
+    O = np.zeros_like(D) if O is None else np.asarray(O, float)
     if mode == "outer":
         r = np.full(N, 260.0); act = np.ones(N, bool); hit = np.zeros(N, bool)
         for _ in range(60):
             a = np.nonzero(act)[0]
             if not len(a): break
-            d = dist_many(B, I[a], D[a] * r[a, None]); done = d < 0.3
+            d = dist_many(B, I[a], O[a] + D[a] * r[a, None]); done = d < 0.3
             hit[a[done]] = True; act[a[done]] = False; r[a[~done]] -= np.maximum(d[~done], 0.5)
             act &= ~(r < 15)
         return np.where(hit, r, 0.0) + clr
@@ -180,7 +188,7 @@ def requirement(B, I, D, t0=15.0, t1=220.0, clr=2.0, win=15.0, mode="march"):
     for _ in range(400):
         a = np.nonzero(act)[0]
         if not len(a): break
-        x = np.where(chk[a], c[a], t[a]); d = dist_many(B, I[a], D[a] * x[:, None]); s = ~chk[a]
+        x = np.where(chk[a], c[a], t[a]); d = dist_many(B, I[a], O[a] + D[a] * x[:, None]); s = ~chk[a]
         sa, ds = a[s], d[s]; good = ds >= clr                                   # search: candidate t
         chk[sa[good]] = True; c[sa[good]] = t[sa[good]] + np.maximum(1.0, np.floor(ds[good]))
         t[sa[~good]] += np.maximum(1.0, np.ceil(clr - ds[~good] - 1e-9))
@@ -200,11 +208,13 @@ def quantile(R, q):
 
 # ---- sampling (the baseline's density) -----------------------------------------------------------------------------
 def strap_dirs(u, v, ang=None, width=8.0, step=2.0, r_ref=70.0):
-    """a strap on the great circle u -> v (P, 3), arc ang rad (default the u-v angle): (P, ns, nc, 3), 2 mm along/across"""
+    """a strap on the great circle u -> v (P, 3), arc ang rad (default: the u-v angle of each pose, the sample count
+    from its median, so the layout is pose-local): (P, ns, nc, 3), 2 mm along/across"""
     u, v = unit(u), unit(v)
-    if ang is None: ang = float(np.arccos(np.clip((u * v).sum(-1), -1, 1)).mean())
-    ns = max(3, int(ang * r_ref / step) + 1); s = np.linspace(0, 1, ns)
-    nrm = unit(np.cross(u, v)); e2 = unit(np.cross(nrm, u)); th = s[None, :] * ang
+    if ang is None: ang = np.arccos(np.clip((u * v).sum(-1), -1, 1))
+    ang = np.broadcast_to(np.asarray(ang, float), (len(u),))
+    ns = max(3, int(float(np.median(ang)) * r_ref / step) + 1); s = np.linspace(0, 1, ns)
+    nrm = unit(np.cross(u, v)); e2 = unit(np.cross(nrm, u)); th = s[None, :] * ang[:, None]
     Dd = np.cos(th)[..., None] * u[:, None] + np.sin(th)[..., None] * e2[:, None]
     cs = np.arange(-width / 2, width / 2 + 1e-6, step) / r_ref
     return unit(Dd[:, :, None, :] * np.cos(cs)[None, None, :, None] + nrm[:, None, None, :] * np.sin(cs)[None, None, :, None])
@@ -240,8 +250,9 @@ class Member:
     """one rigid part. Its skin-facing samples are unit directions D (P, m, 3) in the thorax frame per pose; kind:
       'free'  per-sample underside rho_j = quantile_q(requirement) (a rigid skin-fitted underside, K3);
       'cap'   one radius for all samples = max_j rho_j (the baseline's hub discs);
-      'flat'  a flat plate normal to K (P, 3) at height h_F = max_j quantile_q(requirement_j * D_j.K) (K4); xy (m, 2)
-              in-plane offsets along (A, Bv) (P, 3) give the samples h_F K + x A + y Bv.
+      'flat'  a flat plate normal to K (P, 3) at height h_F = max_j quantile_q(requirement_j) (K4), the requirement of
+              sample j marched along K from its in-plane offset x A + y Bv (xy (m, 2), A, Bv (P, 3)): the samples are
+              h_F K + x A + y Bv (D is only a nominal layout at h0, used by `over`).
     off: level added to the fitted underside (hub stack); grid (ns, nc) + climb_deg: strap climb limit along axis 0
     (step_mm apart); ramps: [(mask (m,), other member name, dz)]: final underside >= the other's level + dz there;
     over: [(other member name, gap)]: wherever it passes over that member (in any fit pose), underside >= the
@@ -278,21 +289,26 @@ class Chain:
     joints: dict = field(default_factory=dict)   # name -> axis (P, 3) thorax
     q_period: float = 360.0
     info: dict = field(default_factory=dict)
+    hubless: tuple = ()                     # joints declared WITHOUT an O20 hub (a rail carriage, a ring bearing...): the
+                                            # audit then does not ask for a hub there, and the report lists them
 
 
 def _levels(B, chain, fit, q, mode):
     """fit every member's underside (one batched requirement call over all members and fit poses)"""
-    Pi = np.nonzero(fit)[0]; segs = []; rays = []
+    Pi = np.nonzero(fit)[0]; segs = []; rays = []; orig = []
     for m in chain.members:
-        Dm = m.D[Pi]
-        segs.append(Dm.shape[1]); rays.append(Dm.reshape(-1, 3))
+        if m.kind == "flat":      # K4: march each plate sample along the plate normal from its true in-plane offset
+            n = len(m.xy); Dm = np.broadcast_to(m.K[Pi][:, None, :], (len(Pi), n, 3))
+            Om = m.xy[None, :, :1] * m.A[Pi][:, None, :] + m.xy[None, :, 1:] * m.Bv[Pi][:, None, :]
+        else:
+            Dm = m.D[Pi]; Om = np.zeros_like(Dm)
+        segs.append(Dm.shape[1]); rays.append(Dm.reshape(-1, 3)); orig.append(Om.reshape(-1, 3))
     I = np.concatenate([np.repeat(Pi, s) for s in segs]) if len(Pi) else np.zeros(0, int)
-    R = requirement(B, I, np.concatenate(rays) if rays else np.zeros((0, 3)), mode=mode)
+    cat = lambda L: np.concatenate(L) if L else np.zeros((0, 3))
+    R = requirement(B, I, cat(rays), mode=mode, O=cat(orig))
     out = {}; o = 0
     for m, s in zip(chain.members, segs):
         Rm = R[o:o + len(Pi) * s].reshape(len(Pi), s); o += len(Pi) * s; qq = m.q if m.q is not None else q
-        if m.kind == "flat":
-            Rm = Rm * np.einsum("pmd,pd->pm", m.D[Pi], m.K[Pi])
         out[m.name] = quantile(Rm, qq) if len(Pi) else np.full(s, 400.0)
     return out
 
@@ -323,7 +339,8 @@ def member_points(m, rho):
 
 def hub_member(name, axis, joint, t=CROWN, rad=HUB_R, step=2.0, h0=70.0, ref=None):
     """K4: the O20 hub of joint `joint` as a flat disc (radius 10, 2 mm grid) normal to axis (P, 3); its level h_F (the
-    lower member's skin face F) is fitted by K3 projected on the axis; t = 12.25 (F to the crown)"""
+    lower member's skin face F) is fitted by the K3 march of every disc sample along the axis from its true in-plane
+    offset (h0 only lays out the nominal directions D); t = 12.25 (F to the crown)"""
     k = unit(axis); a, b = plane_frame(k, ref); xy = disc_xy(rad, step)
     D = unit(h0 * k[:, None] + xy[None, :, :1] * a[:, None] + xy[None, :, 1:] * b[:, None])
     return Member(name, D, kind="flat", t=t, width=2 * rad, joints=(joint,), K=k, A=a, Bv=b, xy=xy, cell=step * step)
@@ -372,8 +389,9 @@ def _near(A, Bm, da, db, xa, xb, joints, shared, P, clear):
 
 
 def collisions(chain, pts, ok, clear=1.0, overlap=0.5, chunk=24):
-    """(P,) bool: any two members collide (arc distance < hw1 + hw2 + clear and radial intervals [r, r + t] overlap,
-    each widened by `overlap`); joint partners are exempt within HUB_R + 2 mm of a shared joint axis"""
+    """(P,) bool: any two members collide (arc distance < hw1 + hw2 + clear, and radial intervals [r, r + t] closer
+    than `overlap` = 0.5 mm: the spec's K6, so the radial part-part clearance it enforces is 0.5 mm, the lateral 1 mm;
+    `over` builds 1 mm); joint partners are exempt within HUB_R + 2 mm of a shared joint axis"""
     hit = np.zeros(len(ok), bool); M = chain.members; Pi = np.nonzero(ok)[0]
     if not len(Pi): return hit
     nr = {m.name: np.linalg.norm(pts[m.name], axis=-1) for m in M}; dr = {m.name: pts[m.name] / nr[m.name][..., None] for m in M}
@@ -430,11 +448,15 @@ def evaluate(B, model, params, q=None, mode="march", cont=True, collide=True, ju
     is the underside quantile. cont: True = K2 along the interpolated motion (continuity_dense), 'frames' = K2 between
     bench frames only (too strict on the sparse 60-frame bench: flags real fast motion as flips), False = off. Returns the bench report + per-member in-band, Ti mass, closure share and flags."""
     build = model if callable(model) else model.build
+    held = set(json.load(open(os.path.join(REPO, "data", "raw", "split.json")))["motions"]["held_out"])
+    if held & set(B.clip): raise ValueError("held-out clips in the bench")                       # honesty rule 7
     F = getattr(B, "_kitF", None) or frames(B); B._kitF = F
     ch = build(B, F, params); q = params.get("q", 1.0) if q is None else q
     ok = np.asarray(ch.ok, bool); flips = 0
+    if cont and ch.q is None and not ch.joints:
+        raise ValueError("cont requested but the Chain has neither q nor joints: K2 cannot be checked (honesty rule 6)")
     if cont == "frames" and ch.q is not None: ok, flips = continuity(B, ch.q, ok, jump_deg, ch.q_period)
-    elif cont and ch.q is not None: ok, flips = continuity_dense(B, F, build, params, ok, jump_deg)
+    elif cont and cont != "frames": ok, flips = continuity_dense(B, F, build, params, ok, jump_deg)
     prof = fit_profiles(B, ch, ok, q, mode)
     pts = {m.name: member_points(m, prof[m.name]) for m in ch.members}
     hit = collisions(ch, pts, ok) if collide else np.zeros(len(ok), bool)
@@ -453,11 +475,58 @@ def evaluate(B, model, params, q=None, mode="march", cont=True, collide=True, ju
         rho = np.linalg.norm(pts[m.name][Pi[:1]], axis=-1)[0] if len(Pi) else prof[m.name]
         area = float(m.cell * (((rho / m.r_ref) ** 2).sum() if m.kind != "flat" else rho.size))
         mass += area * m.t * TI; mass55 += area * (5.5 if m.strap else m.t) * TI
+    problems, density = audit(B, F, build, params, ch, pts, take if take.any() else ok)
+    checks = dict(mode=mode, cont=cont, collide=bool(collide), q=q)
+    honest = mode == "march" and cont in (True, "frames") and bool(collide) and not problems
     r.update(inband_member=per, mass_g=round(mass, 1), mass_g_strap55=round(mass55, 1), closure=round(float(np.mean(ch.ok)), 4),
              flips=int(flips), collide=round(float(np.mean(hit[ok])) if ok.any() else 0.0, 4), q=q, kmode=mode, **ch.info)
+    r.update(checks=checks, honest=honest, audit=problems, sample_mm=density, hubless=list(ch.hubless))
     if verbose: print(r)
     B._kit_last = dict(chain=ch, prof=prof, pts=pts, take=take, ok=ok, hit=hit)
     return r
+
+
+def audit(B, F, build, params, ch, pts, sel):
+    """honesty audit of a built chain (docs/concepts/KIT.md 'Verification'). Returns (problems [str], sample spacing
+    {member: median nearest-neighbour mm}). Raises when a joint has no member centred on it at all (a skipped hub)
+    unless it is declared in Chain.hubless. Problems (the report's `honest` turns False): a hub smaller than the O20
+    disc (< 75 % of its 314 mm2 covered within 10.5 mm of the axis, or reaching < 9.5 mm), a member sampled sparser
+    than 1 pt / 16 mm2 (median spacing > 4 mm at its real radius), a build that is not pose-local (its output on a
+    subset of poses differs from the full build: it uses B or all poses, so dense K2 sees different geometry)."""
+    problems = []; idx = np.nonzero(sel)[0]; i0 = int(idx[0]) if len(idx) else 0; density = {}
+    for m in ch.members:
+        X = np.asarray(pts[m.name][i0], float)
+        if len(X) > 1:
+            d2 = ((X[:, None, :] - X[None, :, :]) ** 2).sum(-1); np.fill_diagonal(d2, np.inf)
+            density[m.name] = round(float(np.median(np.sqrt(d2.min(1)))), 2)
+            if density[m.name] > 4.0: problems.append(f"{m.name}: sparse sampling ({density[m.name]} mm median spacing > 4 mm)")
+    for j, axis in ch.joints.items():
+        if j in ch.hubless: continue
+        k = unit(np.asarray(axis, float)[i0]); best = None
+        for m in ch.members:
+            if j not in m.joints: continue
+            X = np.asarray(pts[m.name][i0], float); L = X - (X @ k)[:, None] * k; lat = np.linalg.norm(L, axis=1)
+            u = unit(X); Lu = u - (u @ k)[:, None] * k                                      # centred: sample directions around k
+            if np.linalg.norm(Lu.mean(0)) > 0.25 * np.linalg.norm(Lu, axis=1).max() + 1e-9: continue   # (a link is not)
+            cell = np.full(len(X), m.cell, float) if m.kind == "flat" else m.cell * (np.linalg.norm(X, axis=1) / m.r_ref) ** 2
+            cov = float(cell[lat <= HUB_R + 0.5].sum() / (math.pi * HUB_R ** 2)); reach = float(lat.max())
+            if best is None or cov > best[0]: best = (cov, reach, m.name)
+        if best is None:
+            raise ValueError(f"joint {j}: no member centred on its axis (an O20 hub, honesty rule 1); declare it in Chain.hubless if it has none")
+        if best[0] < 0.75 or best[1] < HUB_R - 0.5:
+            problems.append(f"{best[2]}: hub of {j} smaller than O20 (covers {best[0]:.2f} of the disc, reaches {best[1]:.1f} mm)")
+    S = idx[np.linspace(0, len(idx) - 1, min(8, len(idx))).round().astype(int)] if len(idx) else idx
+    if len(S):                                                                              # pose locality
+        sub = Frames(RS=F.RS[S], RHG=F.RHG[S], RH=F.RH[S], clip=F.clip[S], ws=F.ws[S])
+        try:
+            c2 = build(B, sub, params)
+            same = np.array_equal(np.asarray(c2.ok, bool), np.asarray(ch.ok, bool)[S]) and len(c2.members) == len(ch.members)
+            same = same and all(np.allclose(np.asarray(c2.joints[j]), np.asarray(ch.joints[j])[S], atol=1e-6) for j in ch.joints)
+            same = same and all(np.shape(a.D) == np.shape(b.D[S]) and np.allclose(a.D, b.D[S], atol=1e-6) for a, b in zip(c2.members, ch.members))
+        except Exception as e:                                                             # noqa: BLE001
+            same = False
+        if not same: problems.append("build is not pose-local (uses B or statistics over all poses): dense K2 and the fit are not trustworthy")
+    return problems, density
 
 
 def sweep(B, model, configs, out_json, resume=False, log=print, **kw):
@@ -468,7 +537,7 @@ def sweep(B, model, configs, out_json, resume=False, log=print, **kw):
     for p in configs:
         r = evaluate(B, model, dict(p), **kw)
         e = dict(k=len(rows), t=now(), params=p, **{x: r[x] for x in ("inband14", "inband10", "reach", "follow", "contact", "gap")},
-                 closure=r["closure"], mass_g=r["mass_g"])
+                 closure=r["closure"], mass_g=r["mass_g"], honest=r["honest"], kmode=r["kmode"])
         rows.append(e); tmp = out_json + ".tmp"
         json.dump(rows, open(tmp, "w"), indent=1); os.replace(tmp, out_json)
         if best is None or e["gap"] < best["gap"]: best = e
@@ -477,8 +546,12 @@ def sweep(B, model, configs, out_json, resume=False, log=print, **kw):
 
 
 def write_row(id, name, rep, lens="", family="", active_dof=3, passive_dof=0, status="screened", n_configs=1, verdict="",
-              note="", doc=None, **extra):
-    """docs/concepts/rows/<id>.json with the fields the dashboard reads (docs/handoff/workflows/screen2.js)"""
+              note="", doc=None, force=False, **extra):
+    """docs/concepts/rows/<id>.json with the fields the dashboard reads (docs/handoff/workflows/screen2.js). Refuses a
+    report that is not `honest` (K3 march, K2 and K6 on, a clean audit) unless force=True (the row then says so)."""
+    if not rep.get("honest") and not force:
+        raise ValueError(f"not an honest report (checks {rep.get('checks')}, audit {rep.get('audit')}): fix it or pass force=True")
+    extra = dict(extra, honest=bool(rep.get("honest")), checks=rep.get("checks"), audit=rep.get("audit"), hubless=rep.get("hubless"))
     row = dict(id=id, name=name, lens=lens, family=family, active_dof=active_dof, passive_dof=passive_dof, status=status,
                t_ideated=None, t_screened=now(), **{x: rep[x] for x in ("reach", "follow", "inband14", "inband10", "contact", "gap")},
                v_reach=None, v_follow=None, v_inband14=None, v_inband10=None, v_gap=None, n_configs=n_configs, verdict=verdict,
