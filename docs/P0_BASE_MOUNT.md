@@ -226,3 +226,10 @@ limits shrink it, which is exactly what the user's OpenCap / AMASS data must dec
    line + the user's 3-DOF shoulder (2R pointing with offset axes + humeral-rotation ring on the upper arm).** It keeps
    3 kinematic DOF + the one allowed exception, and is the only family so far that holds ~4 mm under both girdle laws.
    Next: re-fit over the whole workspace and the OpenSim Seth-model law, then P3 with skin hug (L1 builds).
+8. **Decided by the user (2026-10-15): option A with the user's own scapula handler.** "It should ride the scapula,
+   as the next kinematic element is the scapula handler" - a separate part the user already designed, outside the DOF
+   count; "you only have to worry about the exactly 3 degrees of freedom found in the shoulder". So the shoulder chain
+   is searched and judged in the scapula frame (what band_impl.py already does), its target is exactly 3 DOF, and R10
+   becomes the base's slip over the bone: grip on the acromion + scapular spine (least skin slip), the handler carries
+   the reaction loads to the trunk and must be torque-free. The slip judge is the next R10 work; until then
+   `judge/base_mount.py` reports NOT RUN for girdle mounts.

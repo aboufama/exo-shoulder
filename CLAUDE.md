@@ -8,6 +8,9 @@ before touching any part, `docs/PIPELINE.md` before running anything.
 Shoulder exo, at most 4 DOF (3 joints + sliding cuff, or 4 joints), whose whole mechanism rides within ~1 cm of the
 skin over the full range of motion - overhead most of all - without ever touching the skin, at the user's CAD standard.
 Never relax the 1 cm rule or the DOF cap to buy range without asking.
+User decisions 2026-10-15 (REQUIREMENTS.md): pass at 14 mm, aim for 10; the base rides the scapula on the user's own
+scapula handler (a separate part, outside the DOF count); the shoulder chain should have exactly 3 DOF - "the minimum
+possible solution is 3 dof" - so push for 3 before settling for 4.
 
 ## Working method (docs/METHOD.md - start every session with its checklist)
 
@@ -44,6 +47,6 @@ Never relax the 1 cm rule or the DOF cap to buy range without asking.
 
 ## Where things stand
 
-See README "Status" and `pipeline/full-exo/designs/cad_r13_n4_s1343_1/judge/scorecard.md`. Next step: phase P0 in
-docs/PLAN.md (base-mount physics, R10) - it needs nothing from the user except permission to download OpenSim's
-shoulder model; the rig in `pipeline/avg/body_pose.py` already gives a first number.
+See README "Status" and `pipeline/full-exo/designs/cad_r13_n4_s1343_1/judge/scorecard.md`. P0 is decided (base on the
+scapula, docs/P0_BASE_MOUNT.md). Next: a 3-DOF shoulder chain that follows every clip (the GPU 3R designs fail
+"Reach back pocket"), judged at 14 mm with 10 mm reported; then the base skin-slip judge (R10).

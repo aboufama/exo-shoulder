@@ -29,18 +29,24 @@ a design variable sized by FEA, not a fixed 5.5 mm). The user approved downloadi
 accepted its CC BY-NC-SA 3.0 licence (the experimental bone-pin data in that archive is restricted to verifying the
 Seth model and was not used).
 
+**User decisions, 2026-10-15.** Base: "It should ride the scapula, as the next kinematic element is the scapula
+handler" - the scapula handler is "a separate part I already designed, you only have to worry about the exactly 3
+degrees of freedom found in the shoulder, the minimum possible solution is 3 dof, which is why I'm pushing so hard for
+it". Joint count: "I would REALLY like 3 joints, but just push for as low a joint count as possible, this is a huge
+reward". Proximity: pass at 14 mm, aim for 10 mm (both reported).
+
 | ID | Requirement | Threshold | Judge | Why this threshold |
 |---|---|---|---|---|
-| R1 | Proximity: share of the covered skin that is 2-10 mm from the metal, while following | >= 90 % | `pipeline/full-exo/score_design.py` (exact posed skin, 30 fps) | the 1 cm rule; 2 mm keeps the liner/clearance, 10 mm is the user's limit |
+| R1 | Proximity: share of the covered skin that is 2-14 mm from the metal, while following | >= 90 % (aim: the same at 2-10 mm, reported as R1-aim) | `pipeline/full-exo/score_design.py` with BAND_HI=14 (exact posed skin, 30 fps) | the 1 cm rule with the user's allowance: pass at 14 mm, aim for 10 (2026-10-15); 2 mm keeps the liner/clearance |
 | R2 | No part enters the body, any frame of any clip | <= 0.5 mm | `judge/body_contact.py` (exact signed distance to the posed, closed body mesh) | 0.5 mm = tessellation tolerance; anything more is visible pass-through |
 | R3 | The exo follows the arm (frames tracked rather than held at a joint limit) | >= 95 % of frames | `score_design.py` | a held frame means the user's arm is blocked |
-| R4 | Overhead works: "Raise overhead" clip score | >= 80 % | `score_design.py` | the user called earlier designs "unusable" overhead |
-| R5 | Degrees of freedom, counted kinematically (every joint, powered or not) | <= 4 (target 3; one torque-free passive self-aligning joint is the only exception) | `design.json` | user cap and counting rule (2026-10-14) |
+| R4 | Overhead works: "Raise overhead" clip score (14 mm band) | >= 80 % | `score_design.py` BAND_HI=14 | the user called earlier designs "unusable" overhead |
+| R5 | Degrees of freedom of the shoulder chain (scapula base to arm), counted kinematically (every joint, powered or not) | <= 4; **aim exactly 3** (R5-aim) | `design.json` | user cap and counting rule (2026-10-14); the user's scapula handler is a separate part outside the count, and 3 is the minimum and the goal (2026-10-15) |
 | R6 | No interference between parts that move relative to each other | <= 0.15 mm | `judge/part_contact.py` (geometry only) | designed coaxial fits (pin in sleeve, washer on seat) sit inside 0.15 mm |
 | R7 | Every custom part is one valid, closed solid | all | `judge/part_validity.py` (OCC BRepCheck on the exported STEP) | a supplier must be able to read and machine it |
 | R8 | Custom-part mass | <= 300 g (proposed) | `parts_full.json` (mesh volume x density) | placeholder budget, **confirm with the user** |
 | R9 | Strength SF >= 1.5 at 25 N.m worst direction; deflection and fatigue bounded | - | **independent FEA (CalculiX)** - today only the in-house hex8 study (`pipeline/conformal/thin_study/REPORT.md`) | 25 N.m = assist torque design load |
-| R10 | The base mounts to a thorax-fixed back plate: worst-frame GH-centre misalignment | <= 4 mm (proposed) | `judge/base_mount.py` (thorax-fixed base; worst of three girdle laws: rig, published bone-pin chain, **OpenSim Seth 2016**; the user's OpenCap next) | 4 mm = half the 2-10 mm band: a misalignment shifts the metal against the skin by up to that much (docs/P0_BASE_MOUNT.md) |
+| R10 | The base rides the scapula on the user's scapula handler: worst-frame GH-centre misalignment from the base slipping over the bone | <= 4 mm (proposed) | `judge/base_mount.py` (girdle mount: skin-slip model still to build -> NOT RUN; designs with a thorax base keep the three-girdle-law check: rig, published bone-pin chain, **OpenSim Seth 2016**) | 4 mm = half the 2-10 mm band: a misalignment shifts the metal against the skin by up to that much (docs/P0_BASE_MOUNT.md) |
 | R11 | Interface pressure under the ISO/TS 15066 body-region limits | - | coupled human-exo contact simulation, then pressure film / FSRs on a prototype | comfort and safety at the cuffs |
 | R12 | CAD standard: G2 surfaces, flat seats under every seat, no visible screws or seams | - | zebra / curvature check (`pipeline/full-exo/parts.html`) + user review | the user's own parts set the bar (docs/CAD_STANDARD.md) |
 | R13 | Manufacturable | - | supplier DFM review and quote (CNC Ti-6Al-4V / 7075, SLM AlSi10Mg) | only a supplier can say yes |
