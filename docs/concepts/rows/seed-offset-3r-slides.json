@@ -1,0 +1,76 @@
+{
+ "id": "seed-offset-3r-slides",
+ "name": "Non-spherical offset 3R with passive self-aligning slides",
+ "lens": "serial-topology",
+ "family": "offset axes",
+ "active_dof": 3,
+ "passive_dof": 3,
+ "status": "screened",
+ "t_ideated": null,
+ "t_screened": "2026-10-15T18:15:34Z",
+ "reach": 0.7688,
+ "follow": 0.9167,
+ "inband14": 0.595,
+ "inband10": 0.3496,
+ "contact": 0.11,
+ "gap": 57.95,
+ "v_reach": null,
+ "v_follow": null,
+ "v_inband14": null,
+ "v_inband10": null,
+ "v_gap": null,
+ "n_configs": 360,
+ "verdict": "not worth its own GPU sweep: net -0.84 gap vs the in-model spherical control with the same directions (57.95 vs 58.79, inside greedy-drop noise) - the slides cost 6.4, R1/R2 offsets buy back 7.3; the gain over the 68.93 baseline is the model's free-underside fit (62.58 at the champion directions) and a direction re-tune that belongs to the spherical family (hand d_el -6.4, d_wd +4.1, d_wa +3.6 to its GPU sweep)",
+ "limiter": "hub 2 (J2 hub): 2 % of its samples in band, median 28 mm off the skin in all 360 configs - its face is set by abduction/flexion 90-150 deg poses at small axial rotation (plane -15..30) where the elevated arm occupies its place (22 skin poses); the J2 fold costs 19 poses (Raise overhead elev 124-150 plane 30 axial -55..-60; behind-back plane -60..-90); the slide stage's along-carriage is 23 % in band (median 18 mm) and the stage costs +6.4 gap at fixed directions",
+ "note": "spec fixed: 3 passive translations, not 2 (3R+2P cannot close on a 3-DOF arm with offset axes; R3-only offsets are the exact exception and score 65.4); best = remote slide stage 5 mm past hub 3 with a ramped neck, all six offsets, re-tuned directions; numbers under jam_contact=1 (before the fix the same config read 49.15 because jams hid contact); pinch: link 1 0.43 mm at plane 15 elev 0 axial -75; bench fast Bench(60,160)",
+ "doc": "docs/concepts/seed-offset-3r-slides.md",
+ "model_file": "docs/concepts/models/seed-offset-3r-slides.py",
+ "best_k": 324,
+ "best_params": {
+  "o1a": 1.6,
+  "o1c": -5.6,
+  "o2a": 1.6,
+  "o2c": -4.0,
+  "o3a": -0.3,
+  "o3c": 4.8,
+  "S_a": 13.0,
+  "S_t": 9.2,
+  "R_r": 6.7,
+  "drop": 1,
+  "S_auto": 1,
+  "jam_contact": 1,
+  "remote": 1,
+  "neck": 5.0,
+  "ramp": 1,
+  "slides": 1,
+  "d_a1": 2.1,
+  "d_a2": -1.4,
+  "d_az": 1.7,
+  "d_el": -6.4,
+  "d_wa": 3.6,
+  "d_wd": 4.1
+ },
+ "controls": {
+  "bench_baseline_3r": 68.93,
+  "spherical_ref_champion_dirs": {
+   "k": 348,
+   "gap": 62.58
+  },
+  "spherical_control_best_dirs": {
+   "k": 351,
+   "gap": 58.79
+  },
+  "slides_offsets_zeroed": {
+   "k": 350,
+   "gap": 65.23
+  },
+  "r3_only_spec_2_slides": {
+   "k": 355,
+   "gap": 65.41
+  },
+  "old_jam_rule_same_config": {
+   "k": 320,
+   "gap": 49.15
+  }
+ }
+}
