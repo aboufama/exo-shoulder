@@ -99,3 +99,6 @@ this again". So:
   inventor) plus a red team; they produce artefacts (a model, a measurement, a quote request), not characters.
 - **Honest reporting**: measured numbers before/after, measurement changes separate from design changes, failures said
   plainly, and every result logged on the dashboard as it lands.
+- **Brief agents fully up front.** A message sent to an agent that a workflow is running can start a second copy of it
+  (2026-10-15: two cloud-farm agents built the same endpoint in parallel and collided). Put every constraint in the
+  first prompt; to change a running agent's brief, say which instance keeps the work and which stops.
