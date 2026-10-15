@@ -156,3 +156,48 @@ Holes that remain, not quantified:
 * The author's verdict stands, with a smaller margin: the in-model spherical control at the same directions
   (58.79 fast) is within noise of this morphology, so the gain comes from the fitting and the direction re-tune,
   not from the offsets and slides. This verification did not re-run that control on the large bench.
+
+## Convergence and red team (leader stage 1, 2026-10-15)
+
+**Objective made honest first.** The verifier's checks now live in the model (`VModel`, `bench_eval` hook for
+tools/concept_sweep.py / the farm; `vfix=1`): closure residual, hub 3 / bridge vs rail and carriage A, carriage B vs
+rail, the missing member-3 bridge strap, dropped-and-jammed poses never taken - plus the red team's **riser** (below).
+Same configuration (k 324), Bench(60,160) fast: screening model 57.95, verifier checks 59.63 (the verifier's own number,
+reproduced), verifier checks + riser **79.75**.
+
+**Convergence gate on the screening log (360 tries; staged coordinate search, two jam rules mixed): NOT converged** -
+the best gained +5.13 score points over the second half and +2.27 over the last third (top-5 within 0.34); the best,
+k 324, is try 324 of 360. The 33 tries under one rule (`jam_contact`) are re-evaluations of the top, not a search.
+So: **CMA-ES on the cloud farm** (scratch driver: 13 parameters = 6 offsets, 6 direction deltas, neck length; lambda 16,
+sigma0 2 mm / 2 deg / 4 mm; start k 324 with neck 13; objective = VModel gap on Bench(60,160) fast; every try appended
+to the sweep log with label `cma1 <population> g<gen>`). Cost: ~2 s per configuration on a worker, 18 s wall per
+generation on an idle farm, 160-400 s when the other screening agents fill the 4 shared slots (queue 14 at 21:55 UTC -
+the farm, not compute, sets the pace). First 48 tries: best **54.95** (k 403, score 80.02; reach 0.800, follow 0.917,
+in-band 14 0.573, contact 0.090; faces 57.6 / 94.4 / 65.2; neck 17.6 mm, no riser) - gate not yet passed (+1.16 over
+the second half). The loop keeps running unattended and appends its final gate numbers below.
+
+**The pose that jams (new, measured): the member-3 riser.** Member 3 at hub 3 is the LOWER plate (F..F+3; the boss and
+cap above it turn with link 2, docs/HARDWARE.md v5). The screened neck (5 mm, ramped at 60 deg down from carriage B's
+top) reaches hub 3's rim 14.4 mm above that plate, so member 3 needs a 14.4 mm vertical wall at the rim (the verifier
+noted it as "not skin-facing" and left it out). Modelled as a 3 x 8 mm box on member 3 and checked like every other
+part: the along-slide carries the arm-fixed cuff rail under hub 3's rim (2 mm off the hub) straight into it - **24 of
+220 poses jam (riser vs rail < 1 mm)**, gap 59.63 -> 79.75. Fixable by geometry: a neck >= (carriage B top - f3) /
+tan 60 deg ~ 12.3 mm ramps from the plate itself (no riser): k 324 with neck 13 = **58.59** (one adjacent riser-link 2
+pose left at 0.3 mm of riser). Every CMA try carries this check.
+
+**Variants (say which and why).** (i) `flip3` - member 3 as hub 3's UPPER member, the neck leaving the boss wall (up to
+F+7.25): attacks the riser. Neck 5: still a 7.2 mm riser, 19 poses jam, 76.22; neck 8: 61.97; neck 13: 58.54 vs 58.59
+unflipped - nothing to gain once the neck is long enough, dropped. (ii) **`branch=+1` - the one variant aimed at the
+measured limiter.** The limiter is hub 2 (0-2 % in band, median 28-37 mm; its face is set by abduction / flexion
+90-150 deg where the raised arm occupies hub 2's place) plus the J2 fold. Offsets move hub 2 by millimetres (sweep 3's
++-25 mm offsets did nothing); the other IK branch puts J2 on the mirror side of the u1-w plane. At the k 324 directions
+it is far worse: **218.54** (100 of 220 poses with metal in the skin, reach 0.20, follow 0.43): hub 2 then sits where
+the trunk and the raised arm are in most poses. A 16-per-generation CMA population (sigma 5 deg / 5 mm) runs beside
+the main one; its result is appended below.
+
+**Optimistic numbers (named; measured where finished).** (1) Fit on the scored poses: the free undersides are fitted
+to the very poses the bench scores; the frozen-shape transfer test (fit on Bench(60,160), wear on Bench(110,360), no
+refit) runs on the farm, exact path. (2) The greedy pose drop makes the objective noisy (+-1.5 gap between neighbours
+whose contact share differs by 1-2 poses): the CMA best is a selection maximum, so the exact large-bench re-measure, not
+the fast sweep number, is the claim. (3) Still unmodelled: the radial-slide guide (pins or bushing, ~2 R_r stroke +
+engagement, not skin-facing), part-part clearance of strap mid-surfaces sampled at 2 mm (not exact solids).
