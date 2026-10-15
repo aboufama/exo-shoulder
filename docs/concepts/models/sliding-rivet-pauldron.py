@@ -69,7 +69,8 @@ PARAMS = dict(AXES["r18"], sing=5.0, t=2.0, g=0.5, roller_d=8.0, roller_w=4.0, f
               n2=1, d2=6.0, D2=30.0,                         # J2: 1 slot at A1 (or 2 at A1 -+ d2), rollers D2 deg apart about p2
               n3=2, g3a=8.0, g3b=17.0, fsep3=90.0,           # J3: slot polar radii about W
               capS=0.0, cap1=0.0, wB=26.0, cap3=0.0,         # extra outline beyond the minimum (deg), band width (mm)
-              cov_ws=0.0, pct=100.0, clear=2.0, top="nested", arm_layer="env", stub_len=40.0, stub_w=14.0, stub_t=6.0)
+              cov_ws=0.0, pct=100.0, clear=2.0, top="nested", arm_layer="env", stub_len=28.0, stub_w=14.0, stub_t=6.0,
+              env="pose", trim2=0.0, rho3min=14.0, s1=0.0)
 SWEEP = dict(axes=("r18", "r20"), g1a=(6, 12), g1b=(14, 20), g3a=(6, 10), g3b=(12, 18), d2=(4, 8), D2=(20, 40),
              wB=(20, 40), t=(1.5, 2.5), cov_ws=(0.0, 0.9), pct=(90, 100), top=("nested", "post"), n1=(1, 2), n2=(1, 2), n3=(1, 2))
 
@@ -313,6 +314,7 @@ class Design:
                 if a + b < best[0]: best = (a + b, a, b)
             return lo - best[1], hi + best[2]
         self.rng1, self.rngg, self.rng3 = span(C["th1"]), span(C["phig"]), span(C["th3"])
+        if p["trim2"]: self.rngg = (self.rngg[0] + p["trim2"], self.rngg[1])    # give up the lowest-phig poses (shorter tail)
         # ---- J1: rollers on L1 at polar g1a / g1b about b, azimuths -+ fsep1/2 from p2's meridian; slots in the S cap
         sw = p["slot_w"]; rr = p["roller_d"] / 2 + 0.5
         n1 = int(p["n1"]); g1 = (p["g1a"], p["g1b"]) if n1 == 2 else (p["g1a"], p["g1a"])
@@ -320,7 +322,7 @@ class Design:
         self.slots1 = self._slots(self.j1, self.rng1, R_TOP, n1)
         # ---- J2: rollers on L1 at polar A1 (or A1 -+ d2) about p2, azimuths -+ D2/2 from b about p2; slots in the band
         n2 = int(p["n2"]); d2 = p["d2"] * D2R if n2 == 2 else 0.0
-        self.j2 = [(A1 - d2, -p["D2"] / 2), (A1 + d2, p["D2"] / 2)]
+        self.j2 = [(A1 - d2, -p["D2"] / 2 - p["s1"]), (A1 + d2, p["D2"] / 2 - p["s1"])]   # s1: rollers moved s1 deg from b toward W (L1 arm)
         self.slots2 = self._slots(self.j2, self.rngg, R_TOP, n2)
         # ---- J3: rollers on H at polar g3a / g3b about W0, azimuths alpha -+ fsep3/2 (canonical); slots in L2's arm end
         n3 = int(p["n3"]); g3 = (p["g3a"], p["g3b"]) if n3 == 2 else (p["g3a"], p["g3a"])
@@ -337,12 +339,18 @@ class Design:
         self.rhoS = max(max(s["pol"] for s in self.slots1) + (sw / 2 + rim) / R_TOP, 20 * D2R) + p["capS"] * D2R
         j2_from_b = max(math.acos(np.clip(math.cos(A1) * math.cos(pl) + math.sin(A1) * math.sin(pl) * math.cos(az * D2R), -1, 1))
                         for pl, az in self.j2)
-        self.rho1 = max(max(pl for pl, _ in self.j1), j2_from_b) + (3.0 + rim) / R_TOP + p["cap1"] * D2R      # O6 stud boss + rim
+        if p["s1"] > 0:                                                         # L1 = disc over the J1 rollers + an arm (strip about p2) to the J2 rollers
+            self.rho1 = max(pl for pl, _ in self.j1) + (3.0 + rim) / R_TOP + p["cap1"] * D2R
+            mrg = (3.0 + rim) / (R_TOP * math.sin(A1)) / D2R
+            self.arm1 = (max(abs(pl - A1) for pl, _ in self.j2) + (3.0 + rim) / R_TOP, min(az for _, az in self.j2) - mrg, max(0.0, max(az for _, az in self.j2)) + mrg)
+        else:
+            self.arm1 = None
+            self.rho1 = max(max(pl for pl, _ in self.j1), j2_from_b) + (3.0 + rim) / R_TOP + p["cap1"] * D2R      # O6 stud boss + rim
         pols2 = [s["pol"] for s in self.slots2]
         self.hwB = max(p["wB"] / 2 / R_TOP, max(abs(x - A1) for x in pols2) + (sw / 2 + rim) / R_TOP)   # band half-width (rad)
         self.bandaz = (min(s["lo"] for s in self.slots2) - rim / (R_TOP * math.sin(A1)) / D2R,
                        max(s["hi"] for s in self.slots2) + rim / (R_TOP * math.sin(A1)) / D2R)
-        self.rho3 = max(max(s["pol"] for s in self.slots3) + (sw / 2 + rim) / R_ARM, 18 * D2R) + p["cap3"] * D2R
+        self.rho3 = max(max(s["pol"] for s in self.slots3) + (sw / 2 + rim) / R_ARM, p["rho3min"] * D2R) + p["cap3"] * D2R
         self._geometry()
         self._envelope()
 
@@ -387,9 +395,14 @@ class Design:
         bS = basis(self.b); D = cap_grid(*bS, self.rhoS, R_TOP); pol, az, _ = sph(D, *bS)
         G["scap"] = ("S", D, ~self._in_slots(pol, az, self.slots1, R_TOP, sw), bS, self.rhoS)
         # L1 (L1-local: x = b, y = toward p2)
-        D = cap_grid(ex, ey, ez, self.rho1, R_TOP); G["l1"] = ("L1", D, np.ones(len(D), bool), (ex, ey, ez), self.rho1)
+        D = cap_grid(ex, ey, ez, self.rho1, R_TOP)
         self.j1_dirs = [from_sph(np.array([pl]), np.array([az]), ex, ey, ez)[0] for pl, az in self.j1]
         p2l = np.array([math.cos(A1), math.sin(A1), 0.0]); u2 = unit(ex - math.cos(A1) * p2l); v2 = np.cross(p2l, u2)
+        self.l1b = (p2l, u2, v2)
+        if self.arm1 is not None:
+            hw, alo, ahi = self.arm1; Da = band_grid(p2l, u2, v2, A1 - hw, A1 + hw, alo, ahi, R_TOP)
+            Da = Da[np.arccos(np.clip(Da @ ex, -1, 1)) > self.rho1]; D = np.r_[D, Da]
+        G["l1"] = ("L1", D, np.ones(len(D), bool), (ex, ey, ez), self.rho1)
         self.j2_dirs = [from_sph(np.array([pl]), np.array([az]), p2l, u2, v2)[0] for pl, az in self.j2]
         # L2 (L2-local: x = p2, y = toward W, W at polar A2 azimuth 0)
         lo, hi = self.bandaz
@@ -446,11 +459,14 @@ class Design:
             allD = np.concatenate([RSb[k] @ self.rot(C, k, mem) @ D.T for _, mem, D in sets], axis=1).T
             rr = skin_exit(B, k, allD); o = 0
             for nm, _, D in sets: E[nm][j] = rr[o:o + len(D)]; o += len(D)
-        self.valid = valid; self.env_secs = time.time() - t0
+        self.valid = valid; self.E = E; self.env_secs = time.time() - t0
         q = p["pct"]; c = p["clear"]
         env = {nm: (np.percentile(v, q, axis=0) if len(valid) else np.full(v.shape[1], 60.0)) for nm, v in E.items()}
         self.env = env
-        mx = lambda nm: float(env[nm].max()) if nm in env and env[nm].size else -np.inf
+        if p["env"] == "pose":                                                   # percentile over poses of the per-pose max
+            mx = lambda nm: float(np.percentile(E[nm].max(1), q)) if nm in E and E[nm].size and len(valid) else -np.inf
+        else:
+            mx = lambda nm: float(env[nm].max()) if nm in env and env[nm].size else -np.inf
         e_fl = max(mx("j1fl0"), mx("j1fl1"))
         pitch = self.pitch
         if p["top"] == "nested":
@@ -488,6 +504,11 @@ class Design:
                 def foot(u, m, A1=A1, hw=hw, lo=lo, hi=hi, bas=bas):
                     pl, az, _ = sph(u, *bas); mm = np.max(m) / D2R / math.sin(A1) if np.size(m) else 0.0
                     return (np.abs(pl - A1) <= hw + m) & in_arc(az, lo - mm, hi + mm)
+            elif nm == "l1" and self.arm1 is not None:
+                hw, alo, ahi = self.arm1; A1 = p["A1"] * D2R; lb = self.l1b
+                def foot(u, m, bas=bas, rho=rho, hw=hw, alo=alo, ahi=ahi, A1=A1, lb=lb):
+                    pl, az, _ = sph(u, *lb); mm = np.max(m) / D2R / math.sin(A1) if np.size(m) else 0.0
+                    return (sph(u, *bas)[0] <= rho + m) | ((np.abs(pl - A1) <= hw + m) & in_arc(az, alo - mm, ahi + mm))
             else:
                 foot = lambda u, m, bas=bas, rho=rho: sph(u, *bas)[0] <= rho + m
             P[nm] = shell_part(nm, mem, D, keep, R, t, foot)
@@ -601,7 +622,7 @@ def metal(pose, frames, params):
 
 # ---------------------------------------------------------------- evaluation / sweep
 SWEEP_OUT = os.path.join(REPO, "docs", "concepts", "sweeps", ID + ".json")
-KEYS = ("b_az", "b_el", "w_d", "w_az", "A1", "A2", "n1", "g1a", "g1b", "n2", "d2", "D2", "n3", "g3a", "g3b", "wB", "t", "cov_ws", "pct", "top", "arm_layer", "clear")
+KEYS = ("b_az", "b_el", "w_d", "w_az", "A1", "A2", "n1", "g1a", "g1b", "n2", "d2", "D2", "n3", "g3a", "g3b", "wB", "t", "cov_ws", "pct", "top", "arm_layer", "clear", "trim2", "s1", "env")
 
 
 def evaluate(p, B):
