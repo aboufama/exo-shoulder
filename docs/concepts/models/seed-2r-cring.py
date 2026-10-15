@@ -46,8 +46,8 @@ NAME = "2R spherical shoulder + C-ring axial bearing on the upper arm"
 TR_RAD, TR_AX = 6.0, 8.0                                     # C-track section (radial x axial)
 CAR_ARC, CAR_AX, CAR_GAP = 25.0, 12.0, 0.5                   # carriage block on the track's outer face
 SL_LEN, SL_W, SL_T = 40.0, 10.0, 6.0                         # passive slide (rail + block)
-PARAMS = dict(az=125.0, el=45.0, a1=90.0, a2=90.0, sigma=1, margin=10.0, L=100.0, tilt=18.0, tilt_a=-30.0,
-              c_target=0.0, clr=2.5, q_ring=0.8, cov=0.95, slide_side=1, width=10.0, t_link=3.0, q=0.97)
+PARAMS = dict(az=125.0, el=45.0, a1=90.0, a2=90.0, sigma=-1, margin=10.0, L=100.0, tilt=18.0, tilt_a=-30.0,
+              c_target=0.0, clr=2.5, q_ring=0.9, cov=0.6, slide_side=1, width=10.0, t_link=3.0, q=0.95)
 SWEEP = dict(q_ring=[0.5, 0.8], sigma=[1, -1], az=[125.0, 95.0], L=[100.0, 160.0])
 
 
@@ -291,4 +291,14 @@ if __name__ == "__main__":
         base = dict(PARAMS, q_ring=0.9, q=0.95)
         cf = [dict(base, az=az, el=el, cov=cov) for (az, el) in ((125.0, 45.0), (60.0, 70.0), (2.4, 80.7)) for cov in (0.6, 0.95)]
         cf += [dict(base, az=125.0, el=45.0, cov=0.6, L=160.0, tilt=12.0), dict(base, az=125.0, el=45.0, cov=0.6, sigma=-1)]
+        best, rows = sweep(B, cf); print("BEST", best)
+    elif a[0] == "refine2":                   # around the best (branch sigma -1): axial travel vs ring radius, fit quantiles, level
+        base = dict(PARAMS, sigma=-1, cov=0.6, q_ring=0.9, q=0.95)
+        cf = [dict(base, cov=0.8), dict(base, cov=0.95), dict(base, q_ring=1.0), dict(base, q=0.9), dict(base, L=160.0, tilt=12.0),
+              dict(base, cov=0.7, a1=100.0, a2=80.0), dict(base, az=95.0, el=25.0), dict(base, width=8.0), dict(base, cov=0.7)]
+        best, rows = sweep(B, cf); print("BEST", best)
+    elif a[0] == "refine":                    # contact-free fits (q = q_ring = 1), shorter / asymmetric arcs, level
+        base = dict(PARAMS, az=60.0, el=70.0, cov=0.6, q_ring=1.0, q=1.0)
+        cf = [base, dict(base, q_ring=0.95, q=0.97), dict(base, a1=75.0, a2=105.0), dict(base, a1=105.0, a2=75.0),
+              dict(base, L=160.0, tilt=12.0), dict(base, cov=0.8), dict(base, width=8.0, L=130.0, tilt=12.0)]
         best, rows = sweep(B, cf); print("BEST", best)
