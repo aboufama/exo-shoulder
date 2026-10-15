@@ -37,3 +37,44 @@ Row: `docs/concepts/rows/pointer-cslide.json`. Bench(60, 160), fast grid cache, 
   not the spec's 60-90 deg: measured with p*, the shoe must travel **165 deg for 90 % of all bench poses, 193 deg for
   95 %** (clips alone: 65 / 112 deg - the spec's 67-87 deg came from clips only).
 - Band, shoe and neck: see the model docstring (2 + 6 + 2 stack, band skin face at rho + 2, shoe lip at rho).
+
+## Measured on the raw posed skin (before any sweep)
+
+**1. The twist travel the C-slide must carry** (shoe angle in the pointing frame P over the closing bench poses, pole
+p*; the smallest arc holding a share of the poses):
+
+| share of poses held | all 220 | 60 clip frames | 160 workspace poses |
+|---|---|---|---|
+| 0.5 | 64 deg | 16 | 88 |
+| 0.7 | 109 | 32 | 125 |
+| 0.8 | 130 | 48 | 146 |
+| 0.9 | **165** | 65 | **178** |
+| 0.95 | **193** | 112 | 201 |
+| 1.0 | 255 | 123 | 255 |
+
+The spec's 67-87 deg is the clip-only number. The workspace poses span humeral rotation -165..+165 (ISB axial), so for
+the reach target (0.90 of the workspace) the band must carry ~180 deg of travel + the shoe's arc + stops, i.e.
+~235 deg of band around the arm. This is intrinsic: ring_travel.json's "intrinsic twist spread" (59 deg among clip
+frames with arm directions within 10 deg) is a floor for any 2R pointing law, and on the workspace it is far larger.
+
+**2. Where a band fixed in the pointing frame P can live** (radial march from the twist axis at stations 80/120/160 mm,
+per P-angle: median / p90 requirement and the share of poses where the ray is blocked by the torso or needs > 75 mm;
+sigma -1; sigma +1 is the same map turned 180 deg):
+
+- s 120: P-angles -60..+90 (150 deg) have <= 10 % blocked, median requirement 41-64 mm, p90 51-76 mm; the other
+  210 deg are blocked in 25-60 % of the poses (the chest, the axilla, the head overhead).
+- s 160: the free sector is -75..+105 (180 deg, <= 17 % blocked), median 40-63 mm.
+- s 80 (deltoid): only -60..+60 is free, median 52-67 mm.
+
+So **a ~235 deg band (needed for reach 0.9) cannot fit the ~150-180 deg torso-free sector of its own frame**: either
+the band hits the chest / axilla in 25-60 % of the poses, or the travel window shrinks to ~110-130 deg and reach drops
+to ~0.6-0.7. And inside the free sector the skin radius under the band still ranges 41 -> 76 mm across its arc (the arm
+is eccentric about the GH-elbow line and turns under a band that does not turn with it - the proximity atlas's
+"swing frame" finding), so a circular band at one radius floats 10-35 mm over most of its arc.
+
+**3. The pointer pole.** Best two-sided pole margin over the bench arm directions (scapula frame): 31.4 deg at
+bvec(120, 40) (the spec's p* = bvec(120, 46): 29-31 deg). The J1 hub sits on +a1 where the overhead arm comes within
+31-39 deg: at a 50-55 mm arm radius that means the hub is either > ~100 mm out or inside the deltoid overhead (red team
+below: hub 1 -8.5 mm, link 1 -11.9 mm in abduction 150 at q 0.9). The antipodal hub site (-a1 = bvec(300, -46),
+posterior over the scapula, where the base is) is worse: the ray runs under the scapula over the chest wall, hub 1
+sits 92 mm inside the body in abduction 90 (local red-team run).

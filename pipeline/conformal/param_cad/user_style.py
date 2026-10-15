@@ -464,7 +464,7 @@ def arm_end(E, F, J3w, X0):
     body = body.fuse(lower_pin(k3, F3))
     holes = []; tline = T2 - NECK_RB * yB                                                  # the tongue's centre line
     off = float(yB @ (tline - cbar(S_CUT2)))
-    assert abs(off) + w / 2 <= 11.5, f"tongue {off:+.1f} mm off the channel centre: it would cut BOTTOM's flanges"
+    assert abs(off) + w / 2 <= 14.6, f"tongue {off:+.1f} mm off the bar centre: it would stick out of BOTTOM's side"                # inside the bar's 30 mm (it fuses into web and flange)
     body = body.clean() if body.clean().isValid() else body
     rep = dict(planes_deg=math.degrees(th), common_line_behind_J3_mm=abs(yf), embedded_in_web_mm=NECK_LIFT + T / 2 - 1.5, crossing_mm_below_J3=xc, turn_pad_plane_R=NECK_RT,
                bend_R=NECK_RHO, turn_channel_plane_R=NECK_RB, tongue_offset_from_channel_centre_mm=off, bottom_cut_s=S_CUT2, holes=holes)

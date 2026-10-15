@@ -156,8 +156,19 @@ class Model(S.Model):
             self.rigid["bridge"] = (3, Bb)
             self.bridge_pts = Bb + (S.T_LINK / 2) * D.sn
 
+    def hub12(self):
+        """hub 1 vs hub 2 cylinders (both fixed in member 1, so one static check): the seed model never needed it (its
+        J1-J2 angle was 77 deg); here the J1-J2 angle can be small"""
+        if not hasattr(self, "_h12"):
+            D = self.D; u, c = D.u, D.c; C1 = c[0] + self.f[0] * u[0]; C2 = c[1] + self.f[1] * u[1]
+            e2, f2 = S.frame_of(u[1]); ang = np.linspace(0, 2 * np.pi, 72, endpoint=False); dd = S.disc(S.HUB_R, 1.0)
+            P = np.concatenate([C2 + z * u[1] + S.HUB_R * (np.cos(ang)[:, None] * e2 + np.sin(ang)[:, None] * f2) for z in np.linspace(0, S.CROWN, 13)]
+                               + [C2 + z * u[1] + dd[:, :1] * e2 + dd[:, 1:] * f2 for z in (0.0, S.CROWN)])
+            self._h12 = float(self.sd_cyl(P, C1, u[0]).min())
+        return self._h12
+
     def collide(self, i):
-        m0 = super().collide(i)
+        m0 = min(super().collide(i), self.hub12()); self.last_clear["hub1-hub2"] = round(self.hub12(), 1)
         if not hasattr(self, "bridge_pts") or not self.box: return m0
         R, t = self.T(3, i); Pb = self.bridge_pts @ R.T + t; Rst = np.stack([self.D.sa, self.D.st, self.D.sn], 1); out = []
         for b in ("rail", "carA"):
