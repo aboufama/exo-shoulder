@@ -61,7 +61,8 @@ PARAMS = dict(b_th=60.0, b_ph=40.0, b_rho=55.0, b_psi0=0.0, b_psis=110.0,   # ba
               a1=80.0, a2=80.0, br=(1, 1, 1),                     # arc angles, branch per leg
               w_lower="P",                                        # which link is the lower member at HW_i
               lay_P=0.0, lay_D=4.0,                               # extra height of the proximal / distal links over their fitted profile (mm)
-              clear=2.0, q=1.0, drop=1)                           # fit clearance (mm), fit quantile, platform drop strap to the cuff
+              clear=2.0, q=1.0, drop=1, lay_leg=0.0, acc=1)               # fit clearance (mm), fit quantile, platform drop strap to the cuff,
+                                                                  # lay_leg: leg i's links + middle hub i * lay_leg mm higher (nested shells)
 
 PERMS = [(0, 1, 2), (0, 2, 1), (1, 0, 2), (1, 2, 0), (2, 0, 1), (2, 1, 0)]
 SWEEP = dict(b_th=(20, 100), b_ph=(-60, 150), b_rho=(25, 75), b_psi0=(0, 360), b_psis=(60, 150),
@@ -319,6 +320,12 @@ class Model:
         self.maps = maps or SkinMaps(B)
         self.K = kinematics(self.p, self.rig)
         self.kin = self.K["kin"].copy()
+        if self.p.get("acc", 1):                                  # a hub axis must point at skin it can sit on: first exit
+            n = len(self.kin); I = np.arange(n); acc = np.ones(n, bool)   # < 140 mm from GH, >= 25 mm free above it
+            for key in "UWV":                                     # (else the part would be fitted around the trunk/neck)
+                r = self.maps.rm(I, self.K[key]); c = self.maps.rm(I, self.K[key], ceil=True)
+                with np.errstate(invalid="ignore"): acc &= (np.isfinite(r) & (r < 140) & ~(c - r < 25)).all(1)
+            self.K["acc"] = acc; self.kin &= acc
         self.fit()
 
     # ---- parts: list of (name, kind, endpoints-getter, frame-fit poses)
@@ -356,7 +363,7 @@ class Model:
             Ax = K[key][poses, li]; P, _, _ = disk_dirs(Ax, 60.0); D = unit(P)
             R = self.maps.rm(poses, D)                                                       # (np, m)
             R = np.where(np.isfinite(R), R, 400.0)
-            hubs[nm] = float(np.max(agg(R))) + p["clear"]
+            hubs[nm] = float(np.max(agg(R))) + p["clear"] + (p.get("lay_leg", 0.0) * int(nm[2]) if nm.startswith("HW") else 0.0)
         self.hub = hubs
         # strap profiles
         lv = self.levels()
@@ -373,6 +380,7 @@ class Model:
                     R = self.maps.rm(poses, D)
                     R = np.where(np.isfinite(R), R, 400.0)
                     fitted = agg(R) + p["clear"] + (p["lay_P"] if nm[0] == "P" and nm[1].isdigit() else p["lay_D"] if nm[0] == "D" else 0.0)
+                    if nm[0] in "PD" and nm[1].isdigit(): fitted = fitted + p.get("lay_leg", 0.0) * int(nm[1])   # leg i on its own shell
                     rho = np.maximum.reduce([fitted, e0 - np.maximum(0, l0 - HUB_R - LAND) * SLOPE, e1 - np.maximum(0, l1 - HUB_R - LAND) * SLOPE])
                     rho = np.where(l0 < HUB_R + LAND, np.maximum(rho, e0), rho); rho = np.where(l1 < HUB_R + LAND, np.maximum(rho, e1), rho)
                     us, inv = np.unique(s, return_inverse=True)
@@ -793,6 +801,58 @@ def sweep2(nA=500, n_start=6, n_hill=50, n_bench=18, n_ref=40, seed=3, n_clip=60
     best = min(SW, key=lambda e: e["gap"]); print("BEST", best, flush=True)
     return SW, best, dict(nA=nA, n_quick=len(pool))
 
+KIN_KEYS = ("b_th", "b_ph", "b_rho", "b_psi0", "b_psis", "p_cone", "p_az", "p_spread", "a1", "a2", "br", "perm")
+
+
+def sweep3(nA=600, n_top=8, n_hill=120, n_start=6, n_ref=30, seed=11, n_clip=60, n_ws=160, budget_s=None):
+    """lexicographic variant of sweep2 (sweep2's quick-screen hill-climb traded kinematic reach for fewer contacts):
+    A: random + hill-climb on kscore alone (kinematic reach with every hub axis on reachable skin), kinematic keys only;
+    B: per top kinematic design, a grid of the shape choices (q, lay_P, lay_D, w_lower, clear) on the quick screen;
+    C: the two best shapes per design on the bench, then bench neighbours of the running best (small steps)."""
+    T0 = time.time()
+    B = CB.Bench(n_clip=n_clip, n_ws=n_ws); rig = Rig(B); maps = SkinMaps(B, verbose=False)
+    rng = np.random.default_rng(seed); A = []
+    for n in range(nA):
+        pp = rand_params(rng); A.append((kscore(pp, rig, maps), pp))
+    A.sort(key=lambda x: -x[0]); tops = []
+    for k0, p0 in A[:n_top]:
+        best = (k0, p0)
+        for h in range(n_hill):
+            q = perturb(best[1], rng, 0.10 if h < n_hill // 2 else 0.04)
+            q = {k: (q[k] if k in KIN_KEYS else best[1][k]) for k in q}
+            k1 = kscore(q, rig, maps)
+            if k1 >= best[0]: best = (k1, q)
+        tops.append(best); print(f"A: kin/acc {k0:.3f} -> {best[0]:.3f} ({time.time() - T0:.0f} s)", flush=True)
+    tops.sort(key=lambda x: -x[0])
+    cands = []
+    for k1, p1 in tops[:n_start]:
+        res = []
+        for q in (0.9, 0.95, 1.0):
+            for lp, ld in ((0, 0), (0, 4), (2, 6), (4, 8)):
+                for wl in ("P", "D"):
+                    pp = dict(p1, q=q, lay_P=float(lp), lay_D=float(ld), w_lower=wl, clear=2.0); r = quick(pp, rig, maps); res.append((r["gap"], pp, r))
+        res.sort(key=lambda x: x[0]); cands += [(k1,) + x for x in res[:2]]
+        print(f"B: kin {k1:.3f} best quick {res[0][0]} {res[0][2]} ({time.time() - T0:.0f} s)", flush=True)
+    out = os.path.join(REPO, "docs", "concepts", "sweeps", f"{ID}.json")
+    SW = json.load(open(out)) if os.path.exists(out) else []
+    ev = os.path.join(REPO, "docs", "concepts", "events.jsonl"); state = dict(best=min([e["gap"] for e in SW], default=1e9))
+    def bench(pp, stage):
+        r, M = evaluate(pp, B, rig, maps)
+        e = dict(k=len(SW), t=time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()), params=jsonable(pp), inband14=r["inband14"], inband10=r["inband10"],
+                 reach=r["reach"], follow=r["follow"], contact=r["contact"], gap=r["gap"], stage=stage, mode=r["mode"], why=r["why"])
+        SW.append(e); json.dump(SW, open(out + ".tmp", "w"), indent=0); os.replace(out + ".tmp", out)
+        print(f"  bench {e['k']} [{stage}] gap {e['gap']} reach {e['reach']} follow {e['follow']} ib14 {e['inband14']} ib10 {e['inband10']} contact {e['contact']} why {r['why']} {r['secs']} s", flush=True)
+        if e["gap"] < state["best"]:
+            state["best"] = e["gap"]
+            with open(ev, "a") as f:
+                f.write(json.dumps(dict(time=e["t"], kind="milestone", event=f"seed-spm-3rrr new best gap {e['gap']} (reach {e['reach']}, follow {e['follow']}, inband14 {e['inband14']}, inband10 {e['inband10']}, contact {e['contact']}; config {e['k']}, {stage})")) + "\n")
+    for k1, g, pp, r in cands: bench(pp, f"lex-screen kin{k1:.2f}")
+    for n in range(n_ref):
+        if budget_s and time.time() - T0 > budget_s: break
+        best = min(SW, key=lambda e: e["gap"]); bench(perturb(detuple(best["params"]), rng, 0.05 if n < n_ref // 2 else 0.02), "lex-refine")
+    best = min(SW, key=lambda e: e["gap"]); print("BEST", best, flush=True)
+
+
 
 def redteam(pp, B=None):
     """the red team on one configuration: the named poses (rest, overhead, across the body, behind the back) and, over
@@ -852,6 +912,8 @@ if __name__ == "__main__":
     elif a and a[0] == "redteam":
         SW = json.load(open(os.path.join(REPO, "docs", "concepts", "sweeps", f"{ID}.json")))
         o = redteam(min(SW, key=lambda e: e["gap"])["params"]); print("\n".join(o["lines"])); print(o["hubs"]); print(o["straps"])
+    elif a and a[0] == "sweep3":
+        sweep3(budget_s=float(a[1]) if len(a) > 1 else None)
     elif a and a[0] == "sweep2":
         kw = dict(nA=int(a[1])) if len(a) > 1 else {}
         sweep2(**kw, budget_s=float(a[2]) if len(a) > 2 else None)
