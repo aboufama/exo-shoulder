@@ -1,19 +1,19 @@
 {
- "poses": 208,
- "step": 10,
- "share_passing": 0.4663,
+ "poses": 174,
+ "step": 12,
+ "share_passing": 0.4598,
  "fails": {
-  "chain_does_not_close": 0.0865,
-  "body_contact": 0.3894,
-  "part_interference": 0.1394
+  "chain_does_not_close": 0.0805,
+  "body_contact": 0.4023,
+  "part_interference": 0.1264
  },
- "evaluator_agreement": 0.885,
+ "evaluator_agreement": 0.799,
  "skip_groups": [
   "F"
  ],
  "tol_body_mm": 0.5,
  "tol_parts_mm": 0.15,
- "seconds": 54,
+ "seconds": 47,
  "per_pose": [
   {
    "k": 0,
@@ -34,7 +34,7 @@
    "p": [
     -90.0,
     0.0,
-    150.0
+    180.0
    ],
    "eval_feasible": true,
    "closes": true,
@@ -48,7 +48,7 @@
    "p": [
     -90.0,
     15.0,
-    105.0
+    165.0
    ],
    "eval_feasible": true,
    "closes": true,
@@ -62,35 +62,7 @@
    "p": [
     -90.0,
     30.0,
-    60.0
-   ],
-   "eval_feasible": false,
-   "closes": true,
-   "body_mm": 7.3,
-   "body_part": "l2|D4 member l2 (proxy)",
-   "parts_mm": 0.0,
-   "parts_pair": null
-  },
-  {
-   "k": 4,
-   "p": [
-    -90.0,
-    45.0,
-    15.0
-   ],
-   "eval_feasible": false,
-   "closes": true,
-   "body_mm": 24.96,
-   "body_part": "l1|D4 member l1 (proxy)",
-   "parts_mm": 0.0,
-   "parts_pair": null
-  },
-  {
-   "k": 5,
-   "p": [
-    -90.0,
-    45.0,
-    165.0
+    150.0
    ],
    "eval_feasible": false,
    "closes": false,
@@ -100,7 +72,21 @@
    "parts_pair": null
   },
   {
-   "k": 6,
+   "k": 4,
+   "p": [
+    -90.0,
+    45.0,
+    135.0
+   ],
+   "eval_feasible": false,
+   "closes": false,
+   "body_mm": null,
+   "body_part": null,
+   "parts_mm": null,
+   "parts_pair": null
+  },
+  {
+   "k": 5,
    "p": [
     -90.0,
     60.0,
@@ -114,11 +100,25 @@
    "parts_pair": null
   },
   {
-   "k": 7,
+   "k": 6,
    "p": [
     -75.0,
     0.0,
-    60.0
+    90.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null
+  },
+  {
+   "k": 7,
+   "p": [
+    -75.0,
+    15.0,
+    75.0
    ],
    "eval_feasible": true,
    "closes": true,
@@ -131,13 +131,13 @@
    "k": 8,
    "p": [
     -75.0,
-    15.0,
-    15.0
+    30.0,
+    60.0
    ],
    "eval_feasible": false,
    "closes": true,
-   "body_mm": 11.38,
-   "body_part": "l1|D4 member l1 (proxy)",
+   "body_mm": 4.84,
+   "body_part": "l2|D4 member l2 (proxy)",
    "parts_mm": 0.0,
    "parts_pair": null
   },
@@ -145,46 +145,18 @@
    "k": 9,
    "p": [
     -75.0,
-    15.0,
-    165.0
-   ],
-   "eval_feasible": true,
-   "closes": true,
-   "body_mm": 0.0,
-   "body_part": null,
-   "parts_mm": 0.0,
-   "parts_pair": null
-  },
-  {
-   "k": 10,
-   "p": [
-    -75.0,
-    30.0,
-    120.0
-   ],
-   "eval_feasible": false,
-   "closes": false,
-   "body_mm": null,
-   "body_part": null,
-   "parts_mm": null,
-   "parts_pair": null
-  },
-  {
-   "k": 11,
-   "p": [
-    -75.0,
     45.0,
-    75.0
+    45.0
    ],
    "eval_feasible": false,
    "closes": true,
-   "body_mm": 11.98,
+   "body_mm": 15.21,
    "body_part": "l2|D4 member l2 (proxy)",
    "parts_mm": 0.0,
    "parts_pair": null
   },
   {
-   "k": 12,
+   "k": 10,
    "p": [
     -75.0,
     60.0,
@@ -198,16 +170,44 @@
    "parts_pair": null
   },
   {
-   "k": 13,
+   "k": 11,
    "p": [
     -60.0,
     0.0,
+    0.0
+   ],
+   "eval_feasible": false,
+   "closes": true,
+   "body_mm": 3.55,
+   "body_part": "l1|D4 member l1 (proxy)",
+   "parts_mm": 0.0,
+   "parts_pair": null
+  },
+  {
+   "k": 12,
+   "p": [
+    -60.0,
+    15.0,
+    -15.0
+   ],
+   "eval_feasible": false,
+   "closes": true,
+   "body_mm": 20.31,
+   "body_part": "l1|D4 member l1 (proxy)",
+   "parts_mm": 0.0,
+   "parts_pair": null
+  },
+  {
+   "k": 13,
+   "p": [
+    -60.0,
+    30.0,
     -30.0
    ],
    "eval_feasible": false,
    "closes": true,
-   "body_mm": 24.48,
-   "body_part": "l1|D4 member l1 (proxy)",
+   "body_mm": 24.96,
+   "body_part": "l2|D4 member l2 (proxy)",
    "parts_mm": 0.0,
    "parts_pair": null
   },
@@ -215,8 +215,50 @@
    "k": 14,
    "p": [
     -60.0,
-    0.0,
+    30.0,
+    150.0
+   ],
+   "eval_feasible": false,
+   "closes": false,
+   "body_mm": null,
+   "body_part": null,
+   "parts_mm": null,
+   "parts_pair": null
+  },
+  {
+   "k": 15,
+   "p": [
+    -60.0,
+    45.0,
+    135.0
+   ],
+   "eval_feasible": false,
+   "closes": false,
+   "body_mm": null,
+   "body_part": null,
+   "parts_mm": null,
+   "parts_pair": null
+  },
+  {
+   "k": 16,
+   "p": [
+    -60.0,
+    60.0,
     120.0
+   ],
+   "eval_feasible": false,
+   "closes": false,
+   "body_mm": null,
+   "body_part": null,
+   "parts_mm": null,
+   "parts_pair": null
+  },
+  {
+   "k": 17,
+   "p": [
+    -45.0,
+    0.0,
+    90.0
    ],
    "eval_feasible": true,
    "closes": true,
@@ -226,9 +268,9 @@
    "parts_pair": null
   },
   {
-   "k": 15,
+   "k": 18,
    "p": [
-    -60.0,
+    -45.0,
     15.0,
     75.0
    ],
@@ -240,119 +282,21 @@
    "parts_pair": null
   },
   {
-   "k": 16,
-   "p": [
-    -60.0,
-    30.0,
-    30.0
-   ],
-   "eval_feasible": false,
-   "closes": true,
-   "body_mm": 3.73,
-   "body_part": "l1|D4 member l1 (proxy)",
-   "parts_mm": 0.0,
-   "parts_pair": null
-  },
-  {
-   "k": 17,
-   "p": [
-    -60.0,
-    45.0,
-    -15.0
-   ],
-   "eval_feasible": false,
-   "closes": true,
-   "body_mm": 23.89,
-   "body_part": "l1|D4 member l1 (proxy)",
-   "parts_mm": 0.0,
-   "parts_pair": null
-  },
-  {
-   "k": 18,
-   "p": [
-    -60.0,
-    45.0,
-    135.0
-   ],
-   "eval_feasible": false,
-   "closes": false,
-   "body_mm": null,
-   "body_part": null,
-   "parts_mm": null,
-   "parts_pair": null
-  },
-  {
    "k": 19,
    "p": [
-    -60.0,
-    60.0,
-    90.0
+    -45.0,
+    30.0,
+    60.0
    ],
    "eval_feasible": false,
-   "closes": false,
-   "body_mm": null,
-   "body_part": null,
-   "parts_mm": null,
+   "closes": true,
+   "body_mm": 1.15,
+   "body_part": "l2|D4 member l2 (proxy)",
+   "parts_mm": 0.0,
    "parts_pair": null
   },
   {
    "k": 20,
-   "p": [
-    -45.0,
-    0.0,
-    30.0
-   ],
-   "eval_feasible": true,
-   "closes": true,
-   "body_mm": 0.0,
-   "body_part": null,
-   "parts_mm": 0.0,
-   "parts_pair": null
-  },
-  {
-   "k": 21,
-   "p": [
-    -45.0,
-    15.0,
-    -15.0
-   ],
-   "eval_feasible": false,
-   "closes": true,
-   "body_mm": 9.97,
-   "body_part": "l1|D4 member l1 (proxy)",
-   "parts_mm": 0.0,
-   "parts_pair": null
-  },
-  {
-   "k": 22,
-   "p": [
-    -45.0,
-    15.0,
-    135.0
-   ],
-   "eval_feasible": true,
-   "closes": true,
-   "body_mm": 0.0,
-   "body_part": null,
-   "parts_mm": 0.0,
-   "parts_pair": null
-  },
-  {
-   "k": 23,
-   "p": [
-    -45.0,
-    30.0,
-    90.0
-   ],
-   "eval_feasible": false,
-   "closes": true,
-   "body_mm": 0.0,
-   "body_part": null,
-   "parts_mm": 0.0,
-   "parts_pair": null
-  },
-  {
-   "k": 24,
    "p": [
     -45.0,
     45.0,
@@ -366,41 +310,27 @@
    "parts_pair": null
   },
   {
-   "k": 25,
+   "k": 21,
    "p": [
     -45.0,
     60.0,
+    30.0
+   ],
+   "eval_feasible": false,
+   "closes": true,
+   "body_mm": 14.98,
+   "body_part": "l2|D4 member l2 (proxy)",
+   "parts_mm": 0.0,
+   "parts_pair": null
+  },
+  {
+   "k": 22,
+   "p": [
+    -30.0,
+    0.0,
     0.0
    ],
    "eval_feasible": false,
-   "closes": true,
-   "body_mm": 13.46,
-   "body_part": "l1|D4 member l1 (proxy)",
-   "parts_mm": 0.0,
-   "parts_pair": null
-  },
-  {
-   "k": 26,
-   "p": [
-    -30.0,
-    0.0,
-    -60.0
-   ],
-   "eval_feasible": false,
-   "closes": true,
-   "body_mm": 24.48,
-   "body_part": "l1|D4 member l1 (proxy)",
-   "parts_mm": 0.0,
-   "parts_pair": null
-  },
-  {
-   "k": 27,
-   "p": [
-    -30.0,
-    0.0,
-    90.0
-   ],
-   "eval_feasible": true,
    "closes": true,
    "body_mm": 0.0,
    "body_part": null,
@@ -408,35 +338,35 @@
    "parts_pair": null
   },
   {
-   "k": 28,
+   "k": 23,
    "p": [
     -30.0,
     15.0,
-    45.0
-   ],
-   "eval_feasible": true,
-   "closes": true,
-   "body_mm": 0.0,
-   "body_part": null,
-   "parts_mm": 0.0,
-   "parts_pair": null
-  },
-  {
-   "k": 29,
-   "p": [
-    -30.0,
-    30.0,
-    0.0
+    -15.0
    ],
    "eval_feasible": false,
    "closes": true,
-   "body_mm": 0.8,
+   "body_mm": 1.44,
    "body_part": "l1|D4 member l1 (proxy)",
    "parts_mm": 0.0,
    "parts_pair": null
   },
   {
-   "k": 30,
+   "k": 24,
+   "p": [
+    -30.0,
+    30.0,
+    -30.0
+   ],
+   "eval_feasible": false,
+   "closes": true,
+   "body_mm": 11.85,
+   "body_part": "l1|D4 member l1 (proxy)",
+   "parts_mm": 0.0,
+   "parts_pair": null
+  },
+  {
+   "k": 25,
    "p": [
     -30.0,
     45.0,
@@ -450,11 +380,25 @@
    "parts_pair": null
   },
   {
-   "k": 31,
+   "k": 26,
    "p": [
     -30.0,
-    45.0,
-    105.0
+    60.0,
+    -60.0
+   ],
+   "eval_feasible": false,
+   "closes": true,
+   "body_mm": 24.74,
+   "body_part": "l2|D4 member l2 (proxy)",
+   "parts_mm": 0.68,
+   "parts_pair": "D4 member l2 (proxy) IN D4 member l1 (proxy)"
+  },
+  {
+   "k": 27,
+   "p": [
+    -30.0,
+    60.0,
+    120.0
    ],
    "eval_feasible": false,
    "closes": false,
@@ -464,25 +408,11 @@
    "parts_pair": null
   },
   {
-   "k": 32,
-   "p": [
-    -30.0,
-    60.0,
-    60.0
-   ],
-   "eval_feasible": false,
-   "closes": true,
-   "body_mm": 11.12,
-   "body_part": "l2|D4 member l2 (proxy)",
-   "parts_mm": 0.0,
-   "parts_pair": null
-  },
-  {
-   "k": 33,
+   "k": 28,
    "p": [
     -15.0,
     0.0,
-    0.0
+    90.0
    ],
    "eval_feasible": true,
    "closes": true,
@@ -492,25 +422,11 @@
    "parts_pair": null
   },
   {
-   "k": 34,
+   "k": 29,
    "p": [
     -15.0,
     15.0,
-    -45.0
-   ],
-   "eval_feasible": false,
-   "closes": true,
-   "body_mm": 7.63,
-   "body_part": "l1|D4 member l1 (proxy)",
-   "parts_mm": 0.0,
-   "parts_pair": null
-  },
-  {
-   "k": 35,
-   "p": [
-    -15.0,
-    15.0,
-    105.0
+    75.0
    ],
    "eval_feasible": true,
    "closes": true,
@@ -520,7 +436,7 @@
    "parts_pair": null
   },
   {
-   "k": 36,
+   "k": 30,
    "p": [
     -15.0,
     30.0,
@@ -534,77 +450,63 @@
    "parts_pair": null
   },
   {
-   "k": 37,
+   "k": 31,
    "p": [
     -15.0,
     45.0,
-    15.0
+    45.0
    ],
    "eval_feasible": false,
    "closes": true,
-   "body_mm": 2.7,
+   "body_mm": 2.64,
    "body_part": "l2|D4 member l2 (proxy)",
    "parts_mm": 0.0,
    "parts_pair": null
   },
   {
-   "k": 38,
+   "k": 32,
    "p": [
     -15.0,
     60.0,
-    -30.0
-   ],
-   "eval_feasible": false,
-   "closes": true,
-   "body_mm": 4.86,
-   "body_part": "l1|D4 member l1 (proxy)",
-   "parts_mm": 0.0,
-   "parts_pair": null
-  },
-  {
-   "k": 39,
-   "p": [
-    -15.0,
-    75.0,
-    -75.0
-   ],
-   "eval_feasible": false,
-   "closes": true,
-   "body_mm": 24.43,
-   "body_part": "l1|D4 member l1 (proxy)",
-   "parts_mm": 0.7,
-   "parts_pair": "D4 member l2 (proxy) IN D4 member l1 (proxy)"
-  },
-  {
-   "k": 40,
-   "p": [
-    -15.0,
-    75.0,
-    75.0
-   ],
-   "eval_feasible": false,
-   "closes": true,
-   "body_mm": 7.56,
-   "body_part": "l2|D4 member l2 (proxy)",
-   "parts_mm": 0.0,
-   "parts_pair": null
-  },
-  {
-   "k": 41,
-   "p": [
-    -15.0,
-    90.0,
     30.0
    ],
    "eval_feasible": false,
    "closes": true,
-   "body_mm": 20.45,
+   "body_mm": 8.3,
    "body_part": "l2|D4 member l2 (proxy)",
    "parts_mm": 0.0,
    "parts_pair": null
   },
   {
-   "k": 42,
+   "k": 33,
+   "p": [
+    -15.0,
+    75.0,
+    15.0
+   ],
+   "eval_feasible": false,
+   "closes": true,
+   "body_mm": 14.74,
+   "body_part": "l1|D4 member l1 (proxy)",
+   "parts_mm": 0.0,
+   "parts_pair": null
+  },
+  {
+   "k": 34,
+   "p": [
+    -15.0,
+    90.0,
+    0.0
+   ],
+   "eval_feasible": false,
+   "closes": true,
+   "body_mm": 21.11,
+   "body_part": "l1|D4 member l1 (proxy)",
+   "parts_mm": 0.0,
+   "parts_pair": null
+  },
+  {
+   "k": 35,
    "p": [
     -15.0,
     105.0,
@@ -618,27 +520,13 @@
    "parts_pair": "D4 member l2 (proxy) IN D4 member l1 (proxy)"
   },
   {
-   "k": 43,
+   "k": 36,
    "p": [
     0.0,
     0.0,
-    -75.0
+    -45.0
    ],
    "eval_feasible": false,
-   "closes": true,
-   "body_mm": 13.4,
-   "body_part": "l1|D4 member l1 (proxy)",
-   "parts_mm": 0.0,
-   "parts_pair": null
-  },
-  {
-   "k": 44,
-   "p": [
-    0.0,
-    0.0,
-    75.0
-   ],
-   "eval_feasible": true,
    "closes": true,
    "body_mm": 0.0,
    "body_part": null,
@@ -646,49 +534,49 @@
    "parts_pair": null
   },
   {
-   "k": 45,
+   "k": 37,
    "p": [
     0.0,
     15.0,
-    30.0
-   ],
-   "eval_feasible": true,
-   "closes": true,
-   "body_mm": 0.0,
-   "body_part": null,
-   "parts_mm": 0.0,
-   "parts_pair": null
-  },
-  {
-   "k": 46,
-   "p": [
-    0.0,
-    30.0,
-    -15.0
-   ],
-   "eval_feasible": false,
-   "closes": true,
-   "body_mm": 0.0,
-   "body_part": null,
-   "parts_mm": 0.0,
-   "parts_pair": null
-  },
-  {
-   "k": 47,
-   "p": [
-    0.0,
-    45.0,
     -60.0
    ],
    "eval_feasible": false,
    "closes": true,
-   "body_mm": 8.64,
+   "body_mm": 6.16,
    "body_part": "l1|D4 member l1 (proxy)",
    "parts_mm": 0.0,
    "parts_pair": null
   },
   {
-   "k": 48,
+   "k": 38,
+   "p": [
+    0.0,
+    30.0,
+    -75.0
+   ],
+   "eval_feasible": false,
+   "closes": true,
+   "body_mm": 16.58,
+   "body_part": "l1|D4 member l1 (proxy)",
+   "parts_mm": 0.0,
+   "parts_pair": null
+  },
+  {
+   "k": 39,
+   "p": [
+    0.0,
+    45.0,
+    -90.0
+   ],
+   "eval_feasible": false,
+   "closes": true,
+   "body_mm": 24.94,
+   "body_part": "l1|D4 member l1 (proxy)",
+   "parts_mm": 0.0,
+   "parts_pair": null
+  },
+  {
+   "k": 40,
    "p": [
     0.0,
     45.0,
@@ -702,77 +590,63 @@
    "parts_pair": null
   },
   {
-   "k": 49,
+   "k": 41,
    "p": [
     0.0,
     60.0,
-    45.0
+    75.0
    ],
    "eval_feasible": false,
    "closes": true,
-   "body_mm": 3.67,
-   "body_part": "l2|D4 member l2 (proxy)",
+   "body_mm": 0.0,
+   "body_part": null,
    "parts_mm": 0.0,
    "parts_pair": null
   },
   {
-   "k": 50,
+   "k": 42,
    "p": [
     0.0,
     75.0,
-    0.0
-   ],
-   "eval_feasible": false,
-   "closes": true,
-   "body_mm": 9.08,
-   "body_part": "l1|D4 member l1 (proxy)",
-   "parts_mm": 0.0,
-   "parts_pair": null
-  },
-  {
-   "k": 51,
-   "p": [
-    0.0,
-    90.0,
-    -45.0
-   ],
-   "eval_feasible": false,
-   "closes": true,
-   "body_mm": 3.42,
-   "body_part": "l1|D4 member l1 (proxy)",
-   "parts_mm": 0.66,
-   "parts_pair": "D4 member l2 (proxy) IN D4 member l1 (proxy)"
-  },
-  {
-   "k": 52,
-   "p": [
-    0.0,
-    105.0,
-    -90.0
-   ],
-   "eval_feasible": false,
-   "closes": true,
-   "body_mm": 20.98,
-   "body_part": "l1|D4 member l1 (proxy)",
-   "parts_mm": 0.66,
-   "parts_pair": "D4 member l2 (proxy) IN D4 member l1 (proxy)"
-  },
-  {
-   "k": 53,
-   "p": [
-    0.0,
-    105.0,
     60.0
    ],
    "eval_feasible": false,
    "closes": true,
-   "body_mm": 17.55,
+   "body_mm": 6.94,
    "body_part": "l2|D4 member l2 (proxy)",
    "parts_mm": 0.0,
    "parts_pair": null
   },
   {
-   "k": 54,
+   "k": 43,
+   "p": [
+    0.0,
+    90.0,
+    45.0
+   ],
+   "eval_feasible": false,
+   "closes": true,
+   "body_mm": 13.99,
+   "body_part": "l2|D4 member l2 (proxy)",
+   "parts_mm": 0.0,
+   "parts_pair": null
+  },
+  {
+   "k": 44,
+   "p": [
+    0.0,
+    105.0,
+    30.0
+   ],
+   "eval_feasible": false,
+   "closes": true,
+   "body_mm": 22.76,
+   "body_part": "l2|D4 member l2 (proxy)",
+   "parts_mm": 0.0,
+   "parts_pair": null
+  },
+  {
+   "k": 45,
    "p": [
     0.0,
     120.0,
@@ -786,69 +660,55 @@
    "parts_pair": null
   },
   {
-   "k": 55,
+   "k": 46,
    "p": [
     0.0,
     135.0,
-    -30.0
+    0.0
    ],
    "eval_feasible": false,
    "closes": true,
-   "body_mm": 24.79,
+   "body_mm": 25.0,
    "body_part": "l1|D4 member l1 (proxy)",
-   "parts_mm": 0.64,
-   "parts_pair": "D4 member l2 (proxy) IN D4 member l1 (proxy)"
-  },
-  {
-   "k": 56,
-   "p": [
-    0.0,
-    150.0,
-    -75.0
-   ],
-   "eval_feasible": false,
-   "closes": true,
-   "body_mm": 0.0,
-   "body_part": null,
-   "parts_mm": 0.64,
-   "parts_pair": "D4 member l2 (proxy) IN D4 member l1 (proxy)"
-  },
-  {
-   "k": 57,
-   "p": [
-    0.0,
-    150.0,
-    75.0
-   ],
-   "eval_feasible": false,
-   "closes": true,
-   "body_mm": 24.35,
-   "body_part": "l2|D4 member l2 (proxy)",
    "parts_mm": 0.0,
    "parts_pair": null
   },
   {
-   "k": 58,
+   "k": 47,
+   "p": [
+    0.0,
+    150.0,
+    -15.0
+   ],
+   "eval_feasible": false,
+   "closes": true,
+   "body_mm": 24.78,
+   "body_part": "l1|D4 member l1 (proxy)",
+   "parts_mm": 0.7,
+   "parts_pair": "D4 member l2 (proxy) IN D4 member l1 (proxy)"
+  },
+  {
+   "k": 48,
    "p": [
     0.0,
     165.0,
-    30.0
+    -30.0
    ],
    "eval_feasible": false,
    "closes": true,
-   "body_mm": 24.99,
-   "body_part": "l1|D4 member l1 (proxy)",
-   "parts_mm": 0.0,
-   "parts_pair": null
+   "body_mm": 24.89,
+   "body_part": "l2|D4 member l2 (proxy)",
+   "parts_mm": 0.65,
+   "parts_pair": "D4 member l2 (proxy) IN D4 member l1 (proxy)"
   },
   {
-   "k": 59,
+   "k": 49,
    "p": [
     15.0,
     0.0,
-    -30.0
+    -60.0
    ],
-   "eval_feasible": true,
+   "eval_feasible": false,
    "closes": true,
    "body_mm": 0.0,
    "body_part": null,
@@ -856,7 +716,7 @@
    "parts_pair": null
   },
   {
-   "k": 60,
+   "k": 50,
    "p": [
     15.0,
     15.0,
@@ -870,25 +730,39 @@
    "parts_pair": null
   },
   {
-   "k": 61,
+   "k": 51,
    "p": [
     15.0,
-    15.0,
-    75.0
+    30.0,
+    -90.0
    ],
    "eval_feasible": false,
    "closes": true,
-   "body_mm": 0.0,
-   "body_part": null,
+   "body_mm": 13.58,
+   "body_part": "l1|D4 member l1 (proxy)",
    "parts_mm": 0.0,
    "parts_pair": null
   },
   {
-   "k": 62,
+   "k": 52,
    "p": [
     15.0,
-    30.0,
-    30.0
+    45.0,
+    -105.0
+   ],
+   "eval_feasible": false,
+   "closes": true,
+   "body_mm": 22.32,
+   "body_part": "l1|D4 member l1 (proxy)",
+   "parts_mm": 0.0,
+   "parts_pair": null
+  },
+  {
+   "k": 53,
+   "p": [
+    15.0,
+    45.0,
+    75.0
    ],
    "eval_feasible": true,
    "closes": true,
@@ -898,25 +772,11 @@
    "parts_pair": null
   },
   {
-   "k": 63,
-   "p": [
-    15.0,
-    45.0,
-    -15.0
-   ],
-   "eval_feasible": false,
-   "closes": true,
-   "body_mm": 0.0,
-   "body_part": null,
-   "parts_mm": 0.0,
-   "parts_pair": null
-  },
-  {
-   "k": 64,
+   "k": 54,
    "p": [
     15.0,
     60.0,
-    -60.0
+    60.0
    ],
    "eval_feasible": false,
    "closes": true,
@@ -926,21 +786,7 @@
    "parts_pair": null
   },
   {
-   "k": 65,
-   "p": [
-    15.0,
-    75.0,
-    -105.0
-   ],
-   "eval_feasible": false,
-   "closes": true,
-   "body_mm": 20.43,
-   "body_part": "l1|D4 member l1 (proxy)",
-   "parts_mm": 0.0,
-   "parts_pair": null
-  },
-  {
-   "k": 66,
+   "k": 55,
    "p": [
     15.0,
     75.0,
@@ -954,77 +800,63 @@
    "parts_pair": null
   },
   {
-   "k": 67,
+   "k": 56,
    "p": [
     15.0,
     90.0,
-    0.0
+    30.0
    ],
    "eval_feasible": false,
    "closes": true,
-   "body_mm": 10.99,
+   "body_mm": 11.93,
    "body_part": "l1|D4 member l1 (proxy)",
    "parts_mm": 0.0,
    "parts_pair": null
   },
   {
-   "k": 68,
+   "k": 57,
    "p": [
     15.0,
     105.0,
-    -45.0
-   ],
-   "eval_feasible": false,
-   "closes": true,
-   "body_mm": 1.51,
-   "body_part": "l1|D4 member l1 (proxy)",
-   "parts_mm": 0.64,
-   "parts_pair": "D4 member l2 (proxy) IN D4 member l1 (proxy)"
-  },
-  {
-   "k": 69,
-   "p": [
-    15.0,
-    120.0,
-    -90.0
-   ],
-   "eval_feasible": false,
-   "closes": true,
-   "body_mm": 10.04,
-   "body_part": "l1|D4 member l1 (proxy)",
-   "parts_mm": 0.68,
-   "parts_pair": "D4 member l2 (proxy) IN D4 member l1 (proxy)"
-  },
-  {
-   "k": 70,
-   "p": [
-    15.0,
-    120.0,
-    60.0
-   ],
-   "eval_feasible": false,
-   "closes": true,
-   "body_mm": 20.38,
-   "body_part": "l2|D4 member l2 (proxy)",
-   "parts_mm": 0.0,
-   "parts_pair": null
-  },
-  {
-   "k": 71,
-   "p": [
-    15.0,
-    135.0,
     15.0
    ],
    "eval_feasible": false,
    "closes": true,
-   "body_mm": 24.93,
+   "body_mm": 19.71,
    "body_part": "l1|D4 member l1 (proxy)",
    "parts_mm": 0.0,
    "parts_pair": null
   },
   {
-   "k": 72,
+   "k": 58,
+   "p": [
+    15.0,
+    120.0,
+    0.0
+   ],
+   "eval_feasible": false,
+   "closes": true,
+   "body_mm": 24.98,
+   "body_part": "l1|D4 member l1 (proxy)",
+   "parts_mm": 0.0,
+   "parts_pair": null
+  },
+  {
+   "k": 59,
+   "p": [
+    15.0,
+    135.0,
+    -15.0
+   ],
+   "eval_feasible": false,
+   "closes": true,
+   "body_mm": 25.0,
+   "body_part": "l2|D4 member l2 (proxy)",
+   "parts_mm": 0.65,
+   "parts_pair": "D4 member l2 (proxy) IN D4 member l1 (proxy)"
+  },
+  {
+   "k": 60,
    "p": [
     15.0,
     150.0,
@@ -1038,66 +870,24 @@
    "parts_pair": "D4 member l2 (proxy) IN D4 member l1 (proxy)"
   },
   {
-   "k": 73,
+   "k": 61,
    "p": [
     15.0,
     165.0,
-    -75.0
+    -45.0
    ],
    "eval_feasible": false,
    "closes": true,
-   "body_mm": 3.05,
-   "body_part": "l1|D4 member l1 (proxy)",
-   "parts_mm": 0.65,
+   "body_mm": 24.93,
+   "body_part": "l2|D4 member l2 (proxy)",
+   "parts_mm": 3.05,
    "parts_pair": "D4 member l2 (proxy) IN D4 member l1 (proxy)"
   },
   {
-   "k": 74,
-   "p": [
-    15.0,
-    165.0,
-    75.0
-   ],
-   "eval_feasible": false,
-   "closes": true,
-   "body_mm": 24.66,
-   "body_part": "l1|D4 member l1 (proxy)",
-   "parts_mm": 0.0,
-   "parts_pair": null
-  },
-  {
-   "k": 75,
+   "k": 62,
    "p": [
     30.0,
     0.0,
-    15.0
-   ],
-   "eval_feasible": true,
-   "closes": true,
-   "body_mm": 0.0,
-   "body_part": null,
-   "parts_mm": 0.0,
-   "parts_pair": null
-  },
-  {
-   "k": 76,
-   "p": [
-    30.0,
-    15.0,
-    -30.0
-   ],
-   "eval_feasible": true,
-   "closes": true,
-   "body_mm": 0.0,
-   "body_part": null,
-   "parts_mm": 0.0,
-   "parts_pair": null
-  },
-  {
-   "k": 77,
-   "p": [
-    30.0,
-    30.0,
     -75.0
    ],
    "eval_feasible": false,
@@ -1108,7 +898,35 @@
    "parts_pair": null
   },
   {
-   "k": 78,
+   "k": 63,
+   "p": [
+    30.0,
+    15.0,
+    -90.0
+   ],
+   "eval_feasible": false,
+   "closes": true,
+   "body_mm": 2.77,
+   "body_part": "l1|D4 member l1 (proxy)",
+   "parts_mm": 0.0,
+   "parts_pair": null
+  },
+  {
+   "k": 64,
+   "p": [
+    30.0,
+    30.0,
+    -105.0
+   ],
+   "eval_feasible": false,
+   "closes": true,
+   "body_mm": 10.15,
+   "body_part": "l1|D4 member l1 (proxy)",
+   "parts_mm": 0.0,
+   "parts_pair": null
+  },
+  {
+   "k": 65,
    "p": [
     30.0,
     45.0,
@@ -1122,11 +940,11 @@
    "parts_pair": null
   },
   {
-   "k": 79,
+   "k": 66,
    "p": [
     30.0,
     45.0,
-    30.0
+    60.0
    ],
    "eval_feasible": true,
    "closes": true,
@@ -1136,25 +954,11 @@
    "parts_pair": null
   },
   {
-   "k": 80,
+   "k": 67,
    "p": [
     30.0,
     60.0,
-    -15.0
-   ],
-   "eval_feasible": false,
-   "closes": true,
-   "body_mm": 0.0,
-   "body_part": null,
-   "parts_mm": 0.0,
-   "parts_pair": null
-  },
-  {
-   "k": 81,
-   "p": [
-    30.0,
-    75.0,
-    -60.0
+    45.0
    ],
    "eval_feasible": true,
    "closes": true,
@@ -1164,35 +968,35 @@
    "parts_pair": null
   },
   {
-   "k": 82,
+   "k": 68,
    "p": [
     30.0,
-    90.0,
-    -105.0
+    75.0,
+    30.0
    ],
    "eval_feasible": false,
    "closes": true,
-   "body_mm": 7.24,
+   "body_mm": 3.32,
    "body_part": "l1|D4 member l1 (proxy)",
    "parts_mm": 0.0,
    "parts_pair": null
   },
   {
-   "k": 83,
+   "k": 69,
    "p": [
     30.0,
     90.0,
-    45.0
+    15.0
    ],
    "eval_feasible": false,
    "closes": true,
-   "body_mm": 7.41,
+   "body_mm": 9.13,
    "body_part": "l1|D4 member l1 (proxy)",
    "parts_mm": 0.0,
    "parts_pair": null
   },
   {
-   "k": 84,
+   "k": 70,
    "p": [
     30.0,
     105.0,
@@ -1206,11 +1010,53 @@
    "parts_pair": null
   },
   {
-   "k": 85,
+   "k": 71,
    "p": [
     30.0,
     120.0,
+    -15.0
+   ],
+   "eval_feasible": false,
+   "closes": true,
+   "body_mm": 14.66,
+   "body_part": "l1|D4 member l1 (proxy)",
+   "parts_mm": 0.66,
+   "parts_pair": "D4 member l2 (proxy) IN D4 member l1 (proxy)"
+  },
+  {
+   "k": 72,
+   "p": [
+    30.0,
+    135.0,
+    -30.0
+   ],
+   "eval_feasible": false,
+   "closes": true,
+   "body_mm": 11.2,
+   "body_part": "l1|D4 member l1 (proxy)",
+   "parts_mm": 0.7,
+   "parts_pair": "D4 member l2 (proxy) IN D4 member l1 (proxy)"
+  },
+  {
+   "k": 73,
+   "p": [
+    30.0,
+    150.0,
     -45.0
+   ],
+   "eval_feasible": false,
+   "closes": true,
+   "body_mm": 1.17,
+   "body_part": "l1|D4 member l1 (proxy)",
+   "parts_mm": 0.65,
+   "parts_pair": "D4 member l2 (proxy) IN D4 member l1 (proxy)"
+  },
+  {
+   "k": 74,
+   "p": [
+    30.0,
+    165.0,
+    -60.0
    ],
    "eval_feasible": false,
    "closes": true,
@@ -1220,63 +1066,7 @@
    "parts_pair": "D4 member l2 (proxy) IN D4 member l1 (proxy)"
   },
   {
-   "k": 86,
-   "p": [
-    30.0,
-    135.0,
-    -90.0
-   ],
-   "eval_feasible": false,
-   "closes": true,
-   "body_mm": 4.73,
-   "body_part": "l1|D4 member l1 (proxy)",
-   "parts_mm": 0.68,
-   "parts_pair": "D4 member l2 (proxy) IN D4 member l1 (proxy)"
-  },
-  {
-   "k": 87,
-   "p": [
-    30.0,
-    135.0,
-    60.0
-   ],
-   "eval_feasible": false,
-   "closes": true,
-   "body_mm": 24.77,
-   "body_part": "l2|D4 member l2 (proxy)",
-   "parts_mm": 0.0,
-   "parts_pair": null
-  },
-  {
-   "k": 88,
-   "p": [
-    30.0,
-    150.0,
-    15.0
-   ],
-   "eval_feasible": false,
-   "closes": true,
-   "body_mm": 24.91,
-   "body_part": "l2|D4 member l2 (proxy)",
-   "parts_mm": 0.21,
-   "parts_pair": "D4 member l2 (proxy) IN D4 member l1 (proxy)"
-  },
-  {
-   "k": 89,
-   "p": [
-    30.0,
-    165.0,
-    -30.0
-   ],
-   "eval_feasible": false,
-   "closes": true,
-   "body_mm": 24.83,
-   "body_part": "l1|D4 member l1 (proxy)",
-   "parts_mm": 3.04,
-   "parts_pair": "D4 member l2 (proxy) IN D4 member l1 (proxy)"
-  },
-  {
-   "k": 90,
+   "k": 75,
    "p": [
     45.0,
     0.0,
@@ -1290,77 +1080,63 @@
    "parts_pair": null
   },
   {
-   "k": 91,
+   "k": 76,
    "p": [
     45.0,
     15.0,
-    -135.0
+    -105.0
    ],
    "eval_feasible": false,
    "closes": true,
-   "body_mm": 18.16,
+   "body_mm": 1.41,
    "body_part": "l1|D4 member l1 (proxy)",
    "parts_mm": 0.0,
    "parts_pair": null
   },
   {
-   "k": 92,
-   "p": [
-    45.0,
-    15.0,
-    15.0
-   ],
-   "eval_feasible": true,
-   "closes": true,
-   "body_mm": 0.0,
-   "body_part": null,
-   "parts_mm": 0.0,
-   "parts_pair": null
-  },
-  {
-   "k": 93,
+   "k": 77,
    "p": [
     45.0,
     30.0,
-    -30.0
-   ],
-   "eval_feasible": true,
-   "closes": true,
-   "body_mm": 0.0,
-   "body_part": null,
-   "parts_mm": 0.0,
-   "parts_pair": null
-  },
-  {
-   "k": 94,
-   "p": [
-    45.0,
-    45.0,
-    -75.0
-   ],
-   "eval_feasible": true,
-   "closes": true,
-   "body_mm": 0.0,
-   "body_part": null,
-   "parts_mm": 0.0,
-   "parts_pair": null
-  },
-  {
-   "k": 95,
-   "p": [
-    45.0,
-    60.0,
     -120.0
    ],
    "eval_feasible": false,
    "closes": true,
-   "body_mm": 3.15,
+   "body_mm": 6.18,
    "body_part": "l1|D4 member l1 (proxy)",
    "parts_mm": 0.0,
    "parts_pair": null
   },
   {
-   "k": 96,
+   "k": 78,
+   "p": [
+    45.0,
+    45.0,
+    -135.0
+   ],
+   "eval_feasible": false,
+   "closes": true,
+   "body_mm": 9.56,
+   "body_part": "l1|D4 member l1 (proxy)",
+   "parts_mm": 0.0,
+   "parts_pair": null
+  },
+  {
+   "k": 79,
+   "p": [
+    45.0,
+    45.0,
+    45.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null
+  },
+  {
+   "k": 80,
    "p": [
     45.0,
     60.0,
@@ -1374,77 +1150,63 @@
    "parts_pair": null
   },
   {
-   "k": 97,
+   "k": 81,
    "p": [
     45.0,
     75.0,
-    -15.0
+    15.0
    ],
    "eval_feasible": false,
    "closes": true,
-   "body_mm": 0.0,
-   "body_part": null,
-   "parts_mm": 0.0,
-   "parts_pair": null
-  },
-  {
-   "k": 98,
-   "p": [
-    45.0,
-    90.0,
-    -60.0
-   ],
-   "eval_feasible": true,
-   "closes": true,
-   "body_mm": 0.0,
-   "body_part": null,
-   "parts_mm": 0.0,
-   "parts_pair": null
-  },
-  {
-   "k": 99,
-   "p": [
-    45.0,
-    105.0,
-    -105.0
-   ],
-   "eval_feasible": false,
-   "closes": true,
-   "body_mm": 0.0,
-   "body_part": null,
-   "parts_mm": 0.0,
-   "parts_pair": null
-  },
-  {
-   "k": 100,
-   "p": [
-    45.0,
-    105.0,
-    45.0
-   ],
-   "eval_feasible": false,
-   "closes": true,
-   "body_mm": 14.8,
+   "body_mm": 1.7,
    "body_part": "l1|D4 member l1 (proxy)",
    "parts_mm": 0.0,
    "parts_pair": null
   },
   {
-   "k": 101,
+   "k": 82,
    "p": [
     45.0,
-    120.0,
+    90.0,
     0.0
    ],
    "eval_feasible": false,
    "closes": true,
-   "body_mm": 15.15,
+   "body_mm": 4.18,
    "body_part": "l1|D4 member l1 (proxy)",
-   "parts_mm": 0.68,
+   "parts_mm": 0.0,
+   "parts_pair": null
+  },
+  {
+   "k": 83,
+   "p": [
+    45.0,
+    105.0,
+    -15.0
+   ],
+   "eval_feasible": false,
+   "closes": true,
+   "body_mm": 3.53,
+   "body_part": "l1|D4 member l1 (proxy)",
+   "parts_mm": 0.69,
    "parts_pair": "D4 member l2 (proxy) IN D4 member l1 (proxy)"
   },
   {
-   "k": 102,
+   "k": 84,
+   "p": [
+    45.0,
+    120.0,
+    -30.0
+   ],
+   "eval_feasible": false,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.64,
+   "parts_pair": "D4 member l2 (proxy) IN D4 member l1 (proxy)"
+  },
+  {
+   "k": 85,
    "p": [
     45.0,
     135.0,
@@ -1458,55 +1220,41 @@
    "parts_pair": "D4 member l2 (proxy) IN D4 member l1 (proxy)"
   },
   {
-   "k": 103,
+   "k": 86,
    "p": [
     45.0,
     150.0,
-    -90.0
+    -60.0
    ],
    "eval_feasible": false,
    "closes": true,
-   "body_mm": 2.82,
-   "body_part": "l1|D4 member l1 (proxy)",
-   "parts_mm": 0.0,
-   "parts_pair": null
-  },
-  {
-   "k": 104,
-   "p": [
-    45.0,
-    165.0,
-    -135.0
-   ],
-   "eval_feasible": false,
-   "closes": true,
-   "body_mm": 0.73,
-   "body_part": "l2|D4 member l2 (proxy)",
-   "parts_mm": 0.0,
-   "parts_pair": null
-  },
-  {
-   "k": 105,
-   "p": [
-    45.0,
-    165.0,
-    15.0
-   ],
-   "eval_feasible": false,
-   "closes": true,
-   "body_mm": 24.88,
-   "body_part": "l2|D4 member l2 (proxy)",
-   "parts_mm": 0.64,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.66,
    "parts_pair": "D4 member l2 (proxy) IN D4 member l1 (proxy)"
   },
   {
-   "k": 106,
+   "k": 87,
+   "p": [
+    45.0,
+    165.0,
+    -75.0
+   ],
+   "eval_feasible": false,
+   "closes": true,
+   "body_mm": 5.38,
+   "body_part": "l1|D4 member l1 (proxy)",
+   "parts_mm": 0.65,
+   "parts_pair": "D4 member l2 (proxy) IN D4 member l1 (proxy)"
+  },
+  {
+   "k": 88,
    "p": [
     60.0,
     0.0,
-    -45.0
+    -105.0
    ],
-   "eval_feasible": true,
+   "eval_feasible": false,
    "closes": true,
    "body_mm": 0.0,
    "body_part": null,
@@ -1514,13 +1262,13 @@
    "parts_pair": null
   },
   {
-   "k": 107,
+   "k": 89,
    "p": [
     60.0,
     15.0,
-    -90.0
+    -120.0
    ],
-   "eval_feasible": true,
+   "eval_feasible": false,
    "closes": true,
    "body_mm": 0.0,
    "body_part": null,
@@ -1528,7 +1276,7 @@
    "parts_pair": null
   },
   {
-   "k": 108,
+   "k": 90,
    "p": [
     60.0,
     30.0,
@@ -1542,10 +1290,38 @@
    "parts_pair": null
   },
   {
-   "k": 109,
+   "k": 91,
    "p": [
     60.0,
-    30.0,
+    45.0,
+    -150.0
+   ],
+   "eval_feasible": false,
+   "closes": true,
+   "body_mm": 2.9,
+   "body_part": "l1|D4 member l1 (proxy)",
+   "parts_mm": 0.0,
+   "parts_pair": null
+  },
+  {
+   "k": 92,
+   "p": [
+    60.0,
+    45.0,
+    30.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null
+  },
+  {
+   "k": 93,
+   "p": [
+    60.0,
+    60.0,
     15.0
    ],
    "eval_feasible": true,
@@ -1556,53 +1332,11 @@
    "parts_pair": null
   },
   {
-   "k": 110,
-   "p": [
-    60.0,
-    45.0,
-    -30.0
-   ],
-   "eval_feasible": true,
-   "closes": true,
-   "body_mm": 0.0,
-   "body_part": null,
-   "parts_mm": 0.0,
-   "parts_pair": null
-  },
-  {
-   "k": 111,
-   "p": [
-    60.0,
-    60.0,
-    -75.0
-   ],
-   "eval_feasible": true,
-   "closes": true,
-   "body_mm": 0.0,
-   "body_part": null,
-   "parts_mm": 0.0,
-   "parts_pair": null
-  },
-  {
-   "k": 112,
+   "k": 94,
    "p": [
     60.0,
     75.0,
-    -120.0
-   ],
-   "eval_feasible": true,
-   "closes": true,
-   "body_mm": 0.0,
-   "body_part": null,
-   "parts_mm": 0.0,
-   "parts_pair": null
-  },
-  {
-   "k": 113,
-   "p": [
-    60.0,
-    75.0,
-    30.0
+    0.0
    ],
    "eval_feasible": false,
    "closes": true,
@@ -1612,7 +1346,7 @@
    "parts_pair": null
   },
   {
-   "k": 114,
+   "k": 95,
    "p": [
     60.0,
     90.0,
@@ -1626,77 +1360,63 @@
    "parts_pair": "D4 member l2 (proxy) IN D4 member l1 (proxy)"
   },
   {
-   "k": 115,
+   "k": 96,
    "p": [
     60.0,
     105.0,
-    -60.0
+    -30.0
    ],
    "eval_feasible": true,
    "closes": true,
    "body_mm": 0.0,
    "body_part": null,
-   "parts_mm": 0.0,
-   "parts_pair": null
-  },
-  {
-   "k": 116,
-   "p": [
-    60.0,
-    120.0,
-    -105.0
-   ],
-   "eval_feasible": true,
-   "closes": true,
-   "body_mm": 0.0,
-   "body_part": null,
-   "parts_mm": 0.0,
-   "parts_pair": null
-  },
-  {
-   "k": 117,
-   "p": [
-    60.0,
-    135.0,
-    -150.0
-   ],
-   "eval_feasible": false,
-   "closes": true,
-   "body_mm": 2.38,
-   "body_part": "l2|D4 member l2 (proxy)",
-   "parts_mm": 0.0,
-   "parts_pair": null
-  },
-  {
-   "k": 118,
-   "p": [
-    60.0,
-    135.0,
-    0.0
-   ],
-   "eval_feasible": false,
-   "closes": true,
-   "body_mm": 16.06,
-   "body_part": "l1|D4 member l1 (proxy)",
-   "parts_mm": 0.67,
+   "parts_mm": 0.66,
    "parts_pair": "D4 member l2 (proxy) IN D4 member l1 (proxy)"
   },
   {
-   "k": 119,
+   "k": 97,
    "p": [
     60.0,
-    150.0,
+    120.0,
     -45.0
    ],
    "eval_feasible": true,
    "closes": true,
    "body_mm": 0.0,
    "body_part": null,
-   "parts_mm": 0.67,
+   "parts_mm": 0.65,
    "parts_pair": "D4 member l2 (proxy) IN D4 member l1 (proxy)"
   },
   {
-   "k": 120,
+   "k": 98,
+   "p": [
+    60.0,
+    135.0,
+    -60.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.68,
+   "parts_pair": "D4 member l2 (proxy) IN D4 member l1 (proxy)"
+  },
+  {
+   "k": 99,
+   "p": [
+    60.0,
+    150.0,
+    -75.0
+   ],
+   "eval_feasible": false,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null
+  },
+  {
+   "k": 100,
    "p": [
     60.0,
     165.0,
@@ -1710,69 +1430,55 @@
    "parts_pair": null
   },
   {
-   "k": 121,
+   "k": 101,
    "p": [
     75.0,
     0.0,
+    -120.0
+   ],
+   "eval_feasible": false,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null
+  },
+  {
+   "k": 102,
+   "p": [
+    75.0,
+    15.0,
+    -135.0
+   ],
+   "eval_feasible": false,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null
+  },
+  {
+   "k": 103,
+   "p": [
+    75.0,
+    30.0,
     -150.0
    ],
    "eval_feasible": false,
    "closes": true,
-   "body_mm": 13.4,
-   "body_part": "l1|D4 member l1 (proxy)",
-   "parts_mm": 0.0,
-   "parts_pair": null
-  },
-  {
-   "k": 122,
-   "p": [
-    75.0,
-    0.0,
-    0.0
-   ],
-   "eval_feasible": true,
-   "closes": true,
    "body_mm": 0.0,
    "body_part": null,
    "parts_mm": 0.0,
    "parts_pair": null
   },
   {
-   "k": 123,
-   "p": [
-    75.0,
-    15.0,
-    -45.0
-   ],
-   "eval_feasible": true,
-   "closes": true,
-   "body_mm": 0.0,
-   "body_part": null,
-   "parts_mm": 0.0,
-   "parts_pair": null
-  },
-  {
-   "k": 124,
-   "p": [
-    75.0,
-    30.0,
-    -90.0
-   ],
-   "eval_feasible": true,
-   "closes": true,
-   "body_mm": 0.0,
-   "body_part": null,
-   "parts_mm": 0.0,
-   "parts_pair": null
-  },
-  {
-   "k": 125,
+   "k": 104,
    "p": [
     75.0,
     45.0,
-    -135.0
+    -165.0
    ],
-   "eval_feasible": true,
+   "eval_feasible": false,
    "closes": true,
    "body_mm": 0.0,
    "body_part": null,
@@ -1780,7 +1486,7 @@
    "parts_pair": null
   },
   {
-   "k": 126,
+   "k": 105,
    "p": [
     75.0,
     45.0,
@@ -1794,77 +1500,63 @@
    "parts_pair": null
   },
   {
-   "k": 127,
+   "k": 106,
    "p": [
     75.0,
     60.0,
+    0.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null
+  },
+  {
+   "k": 107,
+   "p": [
+    75.0,
+    75.0,
+    -15.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null
+  },
+  {
+   "k": 108,
+   "p": [
+    75.0,
+    90.0,
     -30.0
    ],
    "eval_feasible": true,
    "closes": true,
    "body_mm": 0.0,
    "body_part": null,
-   "parts_mm": 0.0,
-   "parts_pair": null
-  },
-  {
-   "k": 128,
-   "p": [
-    75.0,
-    75.0,
-    -75.0
-   ],
-   "eval_feasible": true,
-   "closes": true,
-   "body_mm": 0.0,
-   "body_part": null,
-   "parts_mm": 0.0,
-   "parts_pair": null
-  },
-  {
-   "k": 129,
-   "p": [
-    75.0,
-    90.0,
-    -120.0
-   ],
-   "eval_feasible": true,
-   "closes": true,
-   "body_mm": 0.0,
-   "body_part": null,
-   "parts_mm": 0.0,
-   "parts_pair": null
-  },
-  {
-   "k": 130,
-   "p": [
-    75.0,
-    105.0,
-    -165.0
-   ],
-   "eval_feasible": false,
-   "closes": false,
-   "body_mm": null,
-   "body_part": null,
-   "parts_mm": null,
-   "parts_pair": null
-  },
-  {
-   "k": 131,
-   "p": [
-    75.0,
-    105.0,
-    -15.0
-   ],
-   "eval_feasible": false,
-   "closes": true,
-   "body_mm": 0.0,
-   "body_part": null,
-   "parts_mm": 0.64,
+   "parts_mm": 0.74,
    "parts_pair": "D4 member l2 (proxy) IN D4 member l1 (proxy)"
   },
   {
-   "k": 132,
+   "k": 109,
+   "p": [
+    75.0,
+    105.0,
+    -45.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.73,
+   "parts_pair": "D4 member l2 (proxy) IN D4 member l1 (proxy)"
+  },
+  {
+   "k": 110,
    "p": [
     75.0,
     120.0,
@@ -1878,11 +1570,11 @@
    "parts_pair": null
   },
   {
-   "k": 133,
+   "k": 111,
    "p": [
     75.0,
     135.0,
-    -105.0
+    -75.0
    ],
    "eval_feasible": true,
    "closes": true,
@@ -1892,108 +1584,10 @@
    "parts_pair": null
   },
   {
-   "k": 134,
+   "k": 112,
    "p": [
     75.0,
     150.0,
-    -150.0
-   ],
-   "eval_feasible": false,
-   "closes": true,
-   "body_mm": 9.76,
-   "body_part": "l2|D4 member l2 (proxy)",
-   "parts_mm": 0.0,
-   "parts_pair": null
-  },
-  {
-   "k": 135,
-   "p": [
-    75.0,
-    150.0,
-    0.0
-   ],
-   "eval_feasible": false,
-   "closes": true,
-   "body_mm": 9.5,
-   "body_part": "l1|D4 member l1 (proxy)",
-   "parts_mm": 0.64,
-   "parts_pair": "D4 member l2 (proxy) IN D4 member l1 (proxy)"
-  },
-  {
-   "k": 136,
-   "p": [
-    75.0,
-    165.0,
-    -45.0
-   ],
-   "eval_feasible": false,
-   "closes": true,
-   "body_mm": 2.74,
-   "body_part": "l1|D4 member l1 (proxy)",
-   "parts_mm": 0.64,
-   "parts_pair": "D4 member l2 (proxy) IN D4 member l1 (proxy)"
-  },
-  {
-   "k": 137,
-   "p": [
-    90.0,
-    0.0,
-    -105.0
-   ],
-   "eval_feasible": true,
-   "closes": true,
-   "body_mm": 0.0,
-   "body_part": null,
-   "parts_mm": 0.0,
-   "parts_pair": null
-  },
-  {
-   "k": 138,
-   "p": [
-    90.0,
-    15.0,
-    -150.0
-   ],
-   "eval_feasible": false,
-   "closes": true,
-   "body_mm": 0.0,
-   "body_part": null,
-   "parts_mm": 0.0,
-   "parts_pair": null
-  },
-  {
-   "k": 139,
-   "p": [
-    90.0,
-    15.0,
-    0.0
-   ],
-   "eval_feasible": true,
-   "closes": true,
-   "body_mm": 0.0,
-   "body_part": null,
-   "parts_mm": 0.0,
-   "parts_pair": null
-  },
-  {
-   "k": 140,
-   "p": [
-    90.0,
-    30.0,
-    -45.0
-   ],
-   "eval_feasible": true,
-   "closes": true,
-   "body_mm": 0.0,
-   "body_part": null,
-   "parts_mm": 0.0,
-   "parts_pair": null
-  },
-  {
-   "k": 141,
-   "p": [
-    90.0,
-    45.0,
     -90.0
    ],
    "eval_feasible": true,
@@ -2004,11 +1598,53 @@
    "parts_pair": null
   },
   {
-   "k": 142,
+   "k": 113,
+   "p": [
+    75.0,
+    165.0,
+    -105.0
+   ],
+   "eval_feasible": false,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null
+  },
+  {
+   "k": 114,
    "p": [
     90.0,
-    60.0,
+    0.0,
     -135.0
+   ],
+   "eval_feasible": false,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null
+  },
+  {
+   "k": 115,
+   "p": [
+    90.0,
+    15.0,
+    -150.0
+   ],
+   "eval_feasible": false,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null
+  },
+  {
+   "k": 116,
+   "p": [
+    90.0,
+    30.0,
+    -165.0
    ],
    "eval_feasible": true,
    "closes": true,
@@ -2018,10 +1654,10 @@
    "parts_pair": null
   },
   {
-   "k": 143,
+   "k": 117,
    "p": [
     90.0,
-    75.0,
+    45.0,
     -180.0
    ],
    "eval_feasible": false,
@@ -2032,7 +1668,35 @@
    "parts_pair": null
   },
   {
-   "k": 144,
+   "k": 118,
+   "p": [
+    90.0,
+    45.0,
+    0.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null
+  },
+  {
+   "k": 119,
+   "p": [
+    90.0,
+    60.0,
+    -15.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null
+  },
+  {
+   "k": 120,
    "p": [
     90.0,
     75.0,
@@ -2046,11 +1710,11 @@
    "parts_pair": null
   },
   {
-   "k": 145,
+   "k": 121,
    "p": [
     90.0,
     90.0,
-    -75.0
+    -45.0
    ],
    "eval_feasible": true,
    "closes": true,
@@ -2060,52 +1724,10 @@
    "parts_pair": null
   },
   {
-   "k": 146,
+   "k": 122,
    "p": [
     90.0,
     105.0,
-    -120.0
-   ],
-   "eval_feasible": true,
-   "closes": true,
-   "body_mm": 0.0,
-   "body_part": null,
-   "parts_mm": 0.0,
-   "parts_pair": null
-  },
-  {
-   "k": 147,
-   "p": [
-    90.0,
-    120.0,
-    -165.0
-   ],
-   "eval_feasible": false,
-   "closes": false,
-   "body_mm": null,
-   "body_part": null,
-   "parts_mm": null,
-   "parts_pair": null
-  },
-  {
-   "k": 148,
-   "p": [
-    90.0,
-    120.0,
-    -15.0
-   ],
-   "eval_feasible": false,
-   "closes": true,
-   "body_mm": 0.0,
-   "body_part": null,
-   "parts_mm": 0.7,
-   "parts_pair": "D4 member l2 (proxy) IN D4 member l1 (proxy)"
-  },
-  {
-   "k": 149,
-   "p": [
-    90.0,
-    135.0,
     -60.0
    ],
    "eval_feasible": true,
@@ -2116,7 +1738,35 @@
    "parts_pair": null
   },
   {
-   "k": 150,
+   "k": 123,
+   "p": [
+    90.0,
+    120.0,
+    -75.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null
+  },
+  {
+   "k": 124,
+   "p": [
+    90.0,
+    135.0,
+    -90.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null
+  },
+  {
+   "k": 125,
    "p": [
     90.0,
     150.0,
@@ -2130,193 +1780,67 @@
    "parts_pair": null
   },
   {
-   "k": 151,
+   "k": 126,
    "p": [
     90.0,
     165.0,
-    -150.0
-   ],
-   "eval_feasible": false,
-   "closes": true,
-   "body_mm": 16.35,
-   "body_part": "l2|D4 member l2 (proxy)",
-   "parts_mm": 0.0,
-   "parts_pair": null
-  },
-  {
-   "k": 152,
-   "p": [
-    90.0,
-    165.0,
-    0.0
-   ],
-   "eval_feasible": false,
-   "closes": true,
-   "body_mm": 0.0,
-   "body_part": null,
-   "parts_mm": 3.05,
-   "parts_pair": "D4 member l2 (proxy) IN D4 member l1 (proxy)"
-  },
-  {
-   "k": 153,
-   "p": [
-    105.0,
-    0.0,
-    -60.0
-   ],
-   "eval_feasible": true,
-   "closes": true,
-   "body_mm": 0.0,
-   "body_part": null,
-   "parts_mm": 0.0,
-   "parts_pair": null
-  },
-  {
-   "k": 154,
-   "p": [
-    105.0,
-    15.0,
-    -105.0
-   ],
-   "eval_feasible": true,
-   "closes": true,
-   "body_mm": 0.0,
-   "body_part": null,
-   "parts_mm": 0.0,
-   "parts_pair": null
-  },
-  {
-   "k": 155,
-   "p": [
-    105.0,
-    30.0,
-    -150.0
-   ],
-   "eval_feasible": true,
-   "closes": true,
-   "body_mm": 0.0,
-   "body_part": null,
-   "parts_mm": 0.0,
-   "parts_pair": null
-  },
-  {
-   "k": 156,
-   "p": [
-    105.0,
-    45.0,
-    -195.0
-   ],
-   "eval_feasible": false,
-   "closes": false,
-   "body_mm": null,
-   "body_part": null,
-   "parts_mm": null,
-   "parts_pair": null
-  },
-  {
-   "k": 157,
-   "p": [
-    105.0,
-    45.0,
-    -45.0
-   ],
-   "eval_feasible": true,
-   "closes": true,
-   "body_mm": 0.0,
-   "body_part": null,
-   "parts_mm": 0.0,
-   "parts_pair": null
-  },
-  {
-   "k": 158,
-   "p": [
-    105.0,
-    60.0,
-    -90.0
-   ],
-   "eval_feasible": true,
-   "closes": true,
-   "body_mm": 0.0,
-   "body_part": null,
-   "parts_mm": 0.0,
-   "parts_pair": null
-  },
-  {
-   "k": 159,
-   "p": [
-    105.0,
-    75.0,
-    -135.0
-   ],
-   "eval_feasible": false,
-   "closes": true,
-   "body_mm": 0.0,
-   "body_part": null,
-   "parts_mm": 0.0,
-   "parts_pair": null
-  },
-  {
-   "k": 160,
-   "p": [
-    105.0,
-    90.0,
-    -180.0
-   ],
-   "eval_feasible": false,
-   "closes": false,
-   "body_mm": null,
-   "body_part": null,
-   "parts_mm": null,
-   "parts_pair": null
-  },
-  {
-   "k": 161,
-   "p": [
-    105.0,
-    90.0,
-    -30.0
-   ],
-   "eval_feasible": false,
-   "closes": true,
-   "body_mm": 0.0,
-   "body_part": null,
-   "parts_mm": 0.67,
-   "parts_pair": "D4 member l2 (proxy) IN D4 member l1 (proxy)"
-  },
-  {
-   "k": 162,
-   "p": [
-    105.0,
-    105.0,
-    -75.0
-   ],
-   "eval_feasible": true,
-   "closes": true,
-   "body_mm": 0.0,
-   "body_part": null,
-   "parts_mm": 0.0,
-   "parts_pair": null
-  },
-  {
-   "k": 163,
-   "p": [
-    105.0,
-    120.0,
     -120.0
    ],
    "eval_feasible": false,
    "closes": true,
+   "body_mm": 3.62,
+   "body_part": "l2|D4 member l2 (proxy)",
+   "parts_mm": 0.0,
+   "parts_pair": null
+  },
+  {
+   "k": 127,
+   "p": [
+    105.0,
+    0.0,
+    -150.0
+   ],
+   "eval_feasible": false,
+   "closes": true,
    "body_mm": 0.0,
    "body_part": null,
    "parts_mm": 0.0,
    "parts_pair": null
   },
   {
-   "k": 164,
+   "k": 128,
    "p": [
     105.0,
-    135.0,
+    15.0,
     -165.0
+   ],
+   "eval_feasible": false,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null
+  },
+  {
+   "k": 129,
+   "p": [
+    105.0,
+    30.0,
+    -180.0
+   ],
+   "eval_feasible": false,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null
+  },
+  {
+   "k": 130,
+   "p": [
+    105.0,
+    45.0,
+    -195.0
    ],
    "eval_feasible": false,
    "closes": false,
@@ -2326,24 +1850,52 @@
    "parts_pair": null
   },
   {
-   "k": 165,
+   "k": 131,
    "p": [
     105.0,
-    135.0,
+    45.0,
     -15.0
    ],
-   "eval_feasible": false,
+   "eval_feasible": true,
    "closes": true,
    "body_mm": 0.0,
    "body_part": null,
-   "parts_mm": 0.72,
-   "parts_pair": "D4 member l2 (proxy) IN D4 member l1 (proxy)"
+   "parts_mm": 0.0,
+   "parts_pair": null
   },
   {
-   "k": 166,
+   "k": 132,
    "p": [
     105.0,
-    150.0,
+    60.0,
+    -30.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null
+  },
+  {
+   "k": 133,
+   "p": [
+    105.0,
+    75.0,
+    -45.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null
+  },
+  {
+   "k": 134,
+   "p": [
+    105.0,
+    90.0,
     -60.0
    ],
    "eval_feasible": true,
@@ -2354,21 +1906,77 @@
    "parts_pair": null
   },
   {
-   "k": 167,
+   "k": 135,
    "p": [
     105.0,
-    165.0,
+    105.0,
+    -75.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null
+  },
+  {
+   "k": 136,
+   "p": [
+    105.0,
+    120.0,
+    -90.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null
+  },
+  {
+   "k": 137,
+   "p": [
+    105.0,
+    135.0,
     -105.0
    ],
    "eval_feasible": false,
    "closes": true,
-   "body_mm": 3.45,
+   "body_mm": 0.93,
    "body_part": "l2|D4 member l2 (proxy)",
    "parts_mm": 0.0,
    "parts_pair": null
   },
   {
-   "k": 168,
+   "k": 138,
+   "p": [
+    105.0,
+    150.0,
+    -120.0
+   ],
+   "eval_feasible": false,
+   "closes": true,
+   "body_mm": 6.17,
+   "body_part": "l2|D4 member l2 (proxy)",
+   "parts_mm": 0.0,
+   "parts_pair": null
+  },
+  {
+   "k": 139,
+   "p": [
+    105.0,
+    165.0,
+    -135.0
+   ],
+   "eval_feasible": false,
+   "closes": true,
+   "body_mm": 16.88,
+   "body_part": "l2|D4 member l2 (proxy)",
+   "parts_mm": 0.0,
+   "parts_pair": null
+  },
+  {
+   "k": 140,
    "p": [
     120.0,
     0.0,
@@ -2382,27 +1990,13 @@
    "parts_pair": null
   },
   {
-   "k": 169,
+   "k": 141,
    "p": [
     120.0,
     15.0,
-    -210.0
+    -180.0
    ],
    "eval_feasible": false,
-   "closes": true,
-   "body_mm": 16.58,
-   "body_part": "l1|D4 member l1 (proxy)",
-   "parts_mm": 0.0,
-   "parts_pair": null
-  },
-  {
-   "k": 170,
-   "p": [
-    120.0,
-    15.0,
-    -60.0
-   ],
-   "eval_feasible": true,
    "closes": true,
    "body_mm": 0.0,
    "body_part": null,
@@ -2410,25 +2004,11 @@
    "parts_pair": null
   },
   {
-   "k": 171,
+   "k": 142,
    "p": [
     120.0,
     30.0,
-    -105.0
-   ],
-   "eval_feasible": true,
-   "closes": true,
-   "body_mm": 0.0,
-   "body_part": null,
-   "parts_mm": 0.0,
-   "parts_pair": null
-  },
-  {
-   "k": 172,
-   "p": [
-    120.0,
-    45.0,
-    -150.0
+    -195.0
    ],
    "eval_feasible": false,
    "closes": true,
@@ -2438,11 +2018,11 @@
    "parts_pair": null
   },
   {
-   "k": 173,
+   "k": 143,
    "p": [
     120.0,
-    60.0,
-    -195.0
+    45.0,
+    -210.0
    ],
    "eval_feasible": false,
    "closes": false,
@@ -2452,7 +2032,21 @@
    "parts_pair": null
   },
   {
-   "k": 174,
+   "k": 144,
+   "p": [
+    120.0,
+    45.0,
+    -30.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null
+  },
+  {
+   "k": 145,
    "p": [
     120.0,
     60.0,
@@ -2466,11 +2060,11 @@
    "parts_pair": null
   },
   {
-   "k": 175,
+   "k": 146,
    "p": [
     120.0,
     75.0,
-    -90.0
+    -60.0
    ],
    "eval_feasible": true,
    "closes": true,
@@ -2480,52 +2074,10 @@
    "parts_pair": null
   },
   {
-   "k": 176,
+   "k": 147,
    "p": [
     120.0,
     90.0,
-    -135.0
-   ],
-   "eval_feasible": false,
-   "closes": true,
-   "body_mm": 0.0,
-   "body_part": null,
-   "parts_mm": 0.0,
-   "parts_pair": null
-  },
-  {
-   "k": 177,
-   "p": [
-    120.0,
-    105.0,
-    -180.0
-   ],
-   "eval_feasible": false,
-   "closes": false,
-   "body_mm": null,
-   "body_part": null,
-   "parts_mm": null,
-   "parts_pair": null
-  },
-  {
-   "k": 178,
-   "p": [
-    120.0,
-    105.0,
-    -30.0
-   ],
-   "eval_feasible": false,
-   "closes": true,
-   "body_mm": 0.0,
-   "body_part": null,
-   "parts_mm": 0.64,
-   "parts_pair": "D4 member l2 (proxy) IN D4 member l1 (proxy)"
-  },
-  {
-   "k": 179,
-   "p": [
-    120.0,
-    120.0,
     -75.0
    ],
    "eval_feasible": true,
@@ -2536,7 +2088,35 @@
    "parts_pair": null
   },
   {
-   "k": 180,
+   "k": 148,
+   "p": [
+    120.0,
+    105.0,
+    -90.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null
+  },
+  {
+   "k": 149,
+   "p": [
+    120.0,
+    120.0,
+    -105.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null
+  },
+  {
+   "k": 150,
    "p": [
     120.0,
     135.0,
@@ -2550,161 +2130,133 @@
    "parts_pair": null
   },
   {
-   "k": 181,
+   "k": 151,
    "p": [
     120.0,
     150.0,
-    -165.0
+    -135.0
    ],
    "eval_feasible": false,
    "closes": true,
-   "body_mm": 7.74,
+   "body_mm": 14.35,
    "body_part": "l2|D4 member l2 (proxy)",
    "parts_mm": 0.0,
    "parts_pair": null
   },
   {
-   "k": 182,
+   "k": 152,
    "p": [
     120.0,
     165.0,
-    -210.0
-   ],
-   "eval_feasible": false,
-   "closes": true,
-   "body_mm": 21.36,
-   "body_part": "l2|D4 member l2 (proxy)",
-   "parts_mm": 0.0,
-   "parts_pair": null
-  },
-  {
-   "k": 183,
-   "p": [
-    120.0,
-    165.0,
-    -60.0
-   ],
-   "eval_feasible": false,
-   "closes": true,
-   "body_mm": 0.0,
-   "body_part": null,
-   "parts_mm": 0.0,
-   "parts_pair": null
-  },
-  {
-   "k": 184,
-   "p": [
-    135.0,
-    0.0,
-    -120.0
-   ],
-   "eval_feasible": true,
-   "closes": true,
-   "body_mm": 0.0,
-   "body_part": null,
-   "parts_mm": 0.0,
-   "parts_pair": null
-  },
-  {
-   "k": 185,
-   "p": [
-    135.0,
-    15.0,
-    -165.0
-   ],
-   "eval_feasible": true,
-   "closes": true,
-   "body_mm": 0.0,
-   "body_part": null,
-   "parts_mm": 0.0,
-   "parts_pair": null
-  },
-  {
-   "k": 186,
-   "p": [
-    135.0,
-    30.0,
-    -210.0
-   ],
-   "eval_feasible": false,
-   "closes": true,
-   "body_mm": 0.0,
-   "body_part": null,
-   "parts_mm": 0.0,
-   "parts_pair": null
-  },
-  {
-   "k": 187,
-   "p": [
-    135.0,
-    30.0,
-    -60.0
-   ],
-   "eval_feasible": true,
-   "closes": true,
-   "body_mm": 0.0,
-   "body_part": null,
-   "parts_mm": 0.0,
-   "parts_pair": null
-  },
-  {
-   "k": 188,
-   "p": [
-    135.0,
-    45.0,
-    -105.0
-   ],
-   "eval_feasible": true,
-   "closes": true,
-   "body_mm": 0.0,
-   "body_part": null,
-   "parts_mm": 0.0,
-   "parts_pair": null
-  },
-  {
-   "k": 189,
-   "p": [
-    135.0,
-    60.0,
     -150.0
    ],
    "eval_feasible": false,
-   "closes": false,
-   "body_mm": null,
-   "body_part": null,
-   "parts_mm": null,
+   "closes": true,
+   "body_mm": 14.18,
+   "body_part": "l2|D4 member l2 (proxy)",
+   "parts_mm": 0.0,
    "parts_pair": null
   },
   {
-   "k": 190,
+   "k": 153,
    "p": [
     135.0,
-    75.0,
-    -195.0
-   ],
-   "eval_feasible": false,
-   "closes": false,
-   "body_mm": null,
-   "body_part": null,
-   "parts_mm": null,
-   "parts_pair": null
-  },
-  {
-   "k": 191,
-   "p": [
-    135.0,
-    75.0,
-    -45.0
+    0.0,
+    -180.0
    ],
    "eval_feasible": false,
    "closes": true,
    "body_mm": 0.0,
    "body_part": null,
-   "parts_mm": 0.67,
-   "parts_pair": "D4 member l2 (proxy) IN D4 member l1 (proxy)"
+   "parts_mm": 0.0,
+   "parts_pair": null
   },
   {
-   "k": 192,
+   "k": 154,
+   "p": [
+    135.0,
+    15.0,
+    -195.0
+   ],
+   "eval_feasible": false,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null
+  },
+  {
+   "k": 155,
+   "p": [
+    135.0,
+    30.0,
+    -210.0
+   ],
+   "eval_feasible": false,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null
+  },
+  {
+   "k": 156,
+   "p": [
+    135.0,
+    45.0,
+    -225.0
+   ],
+   "eval_feasible": false,
+   "closes": false,
+   "body_mm": null,
+   "body_part": null,
+   "parts_mm": null,
+   "parts_pair": null
+  },
+  {
+   "k": 157,
+   "p": [
+    135.0,
+    45.0,
+    -45.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null
+  },
+  {
+   "k": 158,
+   "p": [
+    135.0,
+    60.0,
+    -60.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null
+  },
+  {
+   "k": 159,
+   "p": [
+    135.0,
+    75.0,
+    -75.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null
+  },
+  {
+   "k": 160,
    "p": [
     135.0,
     90.0,
@@ -2718,67 +2270,11 @@
    "parts_pair": null
   },
   {
-   "k": 193,
+   "k": 161,
    "p": [
     135.0,
     105.0,
-    -135.0
-   ],
-   "eval_feasible": false,
-   "closes": true,
-   "body_mm": 4.03,
-   "body_part": "l2|D4 member l2 (proxy)",
-   "parts_mm": 0.0,
-   "parts_pair": null
-  },
-  {
-   "k": 194,
-   "p": [
-    135.0,
-    120.0,
-    -180.0
-   ],
-   "eval_feasible": false,
-   "closes": true,
-   "body_mm": 19.72,
-   "body_part": "l2|D4 member l2 (proxy)",
-   "parts_mm": 0.0,
-   "parts_pair": null
-  },
-  {
-   "k": 195,
-   "p": [
-    135.0,
-    135.0,
-    -225.0
-   ],
-   "eval_feasible": false,
-   "closes": true,
-   "body_mm": 24.94,
-   "body_part": "H|BOTTOM JN hub block (proxy)",
-   "parts_mm": 0.0,
-   "parts_pair": null
-  },
-  {
-   "k": 196,
-   "p": [
-    135.0,
-    135.0,
-    -75.0
-   ],
-   "eval_feasible": false,
-   "closes": true,
-   "body_mm": 0.0,
-   "body_part": null,
-   "parts_mm": 0.0,
-   "parts_pair": null
-  },
-  {
-   "k": 197,
-   "p": [
-    150.0,
-    0.0,
-    -135.0
+    -105.0
    ],
    "eval_feasible": true,
    "closes": true,
@@ -2788,7 +2284,49 @@
    "parts_pair": null
   },
   {
-   "k": 198,
+   "k": 162,
+   "p": [
+    135.0,
+    120.0,
+    -120.0
+   ],
+   "eval_feasible": false,
+   "closes": true,
+   "body_mm": 3.58,
+   "body_part": "l2|D4 member l2 (proxy)",
+   "parts_mm": 0.0,
+   "parts_pair": null
+  },
+  {
+   "k": 163,
+   "p": [
+    135.0,
+    135.0,
+    -135.0
+   ],
+   "eval_feasible": false,
+   "closes": true,
+   "body_mm": 9.11,
+   "body_part": "l1|D4 member l1 (proxy)",
+   "parts_mm": 0.0,
+   "parts_pair": null
+  },
+  {
+   "k": 164,
+   "p": [
+    150.0,
+    0.0,
+    -165.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null
+  },
+  {
+   "k": 165,
    "p": [
     150.0,
     15.0,
@@ -2802,53 +2340,11 @@
    "parts_pair": null
   },
   {
-   "k": 199,
+   "k": 166,
    "p": [
     150.0,
     30.0,
-    -225.0
-   ],
-   "eval_feasible": false,
-   "closes": true,
-   "body_mm": 2.87,
-   "body_part": "l1|D4 member l1 (proxy)",
-   "parts_mm": 0.0,
-   "parts_pair": null
-  },
-  {
-   "k": 200,
-   "p": [
-    150.0,
-    30.0,
-    -75.0
-   ],
-   "eval_feasible": true,
-   "closes": true,
-   "body_mm": 0.0,
-   "body_part": null,
-   "parts_mm": 0.0,
-   "parts_pair": null
-  },
-  {
-   "k": 201,
-   "p": [
-    150.0,
-    45.0,
-    -120.0
-   ],
-   "eval_feasible": true,
-   "closes": true,
-   "body_mm": 0.0,
-   "body_part": null,
-   "parts_mm": 0.0,
-   "parts_pair": null
-  },
-  {
-   "k": 202,
-   "p": [
-    150.0,
-    60.0,
-    -165.0
+    -195.0
    ],
    "eval_feasible": false,
    "closes": false,
@@ -2858,10 +2354,10 @@
    "parts_pair": null
   },
   {
-   "k": 203,
+   "k": 167,
    "p": [
     150.0,
-    75.0,
+    45.0,
     -210.0
    ],
    "eval_feasible": false,
@@ -2872,7 +2368,35 @@
    "parts_pair": null
   },
   {
-   "k": 204,
+   "k": 168,
+   "p": [
+    150.0,
+    60.0,
+    -225.0
+   ],
+   "eval_feasible": false,
+   "closes": false,
+   "body_mm": null,
+   "body_part": null,
+   "parts_mm": null,
+   "parts_pair": null
+  },
+  {
+   "k": 169,
+   "p": [
+    150.0,
+    75.0,
+    -240.0
+   ],
+   "eval_feasible": false,
+   "closes": true,
+   "body_mm": 24.94,
+   "body_part": "l1|D4 member l1 (proxy)",
+   "parts_mm": 0.0,
+   "parts_pair": null
+  },
+  {
+   "k": 170,
    "p": [
     150.0,
     75.0,
@@ -2886,11 +2410,11 @@
    "parts_pair": null
   },
   {
-   "k": 205,
+   "k": 171,
    "p": [
     150.0,
     90.0,
-    -105.0
+    -75.0
    ],
    "eval_feasible": true,
    "closes": true,
@@ -2900,29 +2424,29 @@
    "parts_pair": null
   },
   {
-   "k": 206,
+   "k": 172,
    "p": [
     150.0,
     105.0,
-    -150.0
+    -90.0
    ],
-   "eval_feasible": false,
+   "eval_feasible": true,
    "closes": true,
-   "body_mm": 10.59,
-   "body_part": "l2|D4 member l2 (proxy)",
+   "body_mm": 0.0,
+   "body_part": null,
    "parts_mm": 0.0,
    "parts_pair": null
   },
   {
-   "k": 207,
+   "k": 173,
    "p": [
     150.0,
     120.0,
-    -195.0
+    -105.0
    ],
    "eval_feasible": false,
    "closes": true,
-   "body_mm": 24.94,
+   "body_mm": 0.57,
    "body_part": "l2|D4 member l2 (proxy)",
    "parts_mm": 0.0,
    "parts_pair": null
