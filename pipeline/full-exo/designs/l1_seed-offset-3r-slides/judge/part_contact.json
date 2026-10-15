@@ -1,0 +1,45 @@
+{
+ "step": 12,
+ "tol_mm": 0.15,
+ "frames_checked": 117,
+ "pairs": 1110,
+ "seconds": 4,
+ "jobs": 4,
+ "violations": {
+  "l2|link 2 strap keep-out (8 x 3 mm Ti, fitted underside)  IN  l3|J3 lower plate keep-out (O20 x 3, member 3)": {
+   "max_depth": 0.58,
+   "frames": 117,
+   "worst": [
+    "Raise overhead",
+    24
+   ]
+  },
+  "l3|J3 lower plate keep-out (O20 x 3, member 3)  IN  l2|link 2 strap keep-out (8 x 3 mm Ti, fitted underside)": {
+   "max_depth": 0.54,
+   "frames": 117,
+   "worst": [
+    "Comb hair",
+    156
+   ]
+  },
+  "l2|link 2 strap keep-out (8 x 3 mm Ti, fitted underside)  IN  l1|link 1 strap keep-out (8 x 3 mm Ti, fitted underside)": {
+   "max_depth": 0.79,
+   "frames": 17,
+   "worst": [
+    "Wave",
+    120
+   ]
+  },
+  "l1|link 1 strap keep-out (8 x 3 mm Ti, fitted underside)  IN  l2|link 2 strap keep-out (8 x 3 mm Ti, fitted underside)": {
+   "max_depth": 0.81,
+   "frames": 16,
+   "worst": [
+    "Raise overhead",
+    48
+   ]
+  }
+ },
+ "open_parts_not_tested_as_container": [],
+ "inside": "integer winding number on welded tessellations (grid + segment crossings), depth = exact distance (judge/sdist.py)",
+ "max_depth": 0.81
+}

@@ -106,6 +106,7 @@ SEED = dict(az=2.4305071427308924, el=80.67633718429899, a=[76.90180446920043, 6
 PARAMS = dict(o1a=0.0, o1c=0.0, o2a=0.0, o2c=0.0, o3a=0.0, o3c=0.0,   # axis offsets (mm); o1*, o2* forced to 0 (2 slides)
               S_a=15.0, S_t=15.0, R_r=0.0,                            # slide half-ranges (mm); no radial slide
               nblk_a=2, nblk_t=1,                                     # RSR3M blocks on the along / across guide
+              gh=0.0,                                                 # extra half-stroke (mm) per slide for GH translation (R10)
               drop=1,                                                 # greedy pose dropping on the skin envelope (0/1)
               S_auto=1,                                               # 1: slide ranges = needed travel + 0.5 mm
               jam_contact=1,                                          # 1: skin-dropped poses stay contact even if parts jam there
@@ -328,6 +329,8 @@ class Model:
             sa = np.abs(np.r_[s[ok], sc[okc]]); m = sa.max(0) if len(sa) else np.zeros(3)
             self.p["S_a"] = round(max(2.0, float(m[0]) + 0.5), 1); self.p["S_t"] = round(max(2.0, float(m[1]) + 0.5), 1)
             self.p["R_r"] = 0.0; self.s_radial_max = round(float(m[2]), 4)
+            g = float(self.p.get("gh", 0.0))                         # + stroke for the GH-vs-scapula slip the bench does not move (R10)
+            self.p["S_a"] = round(self.p["S_a"] + g, 1); self.p["S_t"] = round(self.p["S_t"] + g, 1)
         self.q, self.X = q, {1: X1, 2: X2, 3: X3}; self.s = s
         self.why = np.array([""] * len(B.idx), dtype=object)
         okf = ok.copy(); self.why[~ok] = "fold"

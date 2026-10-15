@@ -65,7 +65,11 @@ docs/EVOLUTION.md (and its snapshot to pipeline/evolution/) as part of the judge
 - **Paid compute**: before any RunPod job or deploy, state the GPU type and estimated cost and wait for a yes.
   (User 2026-10-15 ~12:45 UTC: "you can spend more, i permit everything" - spend approved without a fixed cap for
   this push; still state GPU type + cost per batch and keep the endpoint hygiene below. User 2026-10-15 ~15:00: RunPod may offload
-  work "only as cheap as possible if it provides a big speed up": cheapest worker type that works, scale to 0, keep small jobs local.) The key
+  work "only as cheap as possible if it provides a big speed up": cheapest worker type that works, scale to 0, keep small jobs local.
+  User 2026-10-15 ~23:15: "If anything could speed up research do it you don't need my approval just think about everything
+  intelligently and understand our main goal we can't just put 3 dof eveyrhwerr lol" - speed-ups (farm redeploys, more
+  slots, quota moves between our own endpoints, new tooling) need no approval; the hygiene rules here still hold, and the
+  goal is a buildable minimum-DOF exo, not more passive freedom.) The key
   comes from the `RUNPOD_API_KEY` environment variable (or `~/.runpod_key` locally) - never print it, never commit it.
   After a search, set the endpoint's `workersMin` back to 0. Never touch the user's other pods (names starting `crl-`).
 - **Downloads and licences**: installs approved by the user 2026-10-15 ("install whatever you want": CalculiX, gmsh,

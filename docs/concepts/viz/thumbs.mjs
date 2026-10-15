@@ -267,7 +267,7 @@ function main() {
   const write = nDrawn > 0 && (!ONLY.length || OUT_ARG);
   if (write) {
     fs.mkdirSync(path.dirname(OUT), { recursive: true }); fs.writeFileSync(OUT, raw);
-    const t = new Date(mtime); fs.utimesSync(OUT, t, t);
+    const t = Math.ceil(mtime) / 1000; fs.utimesSync(OUT, t, t);    // ceil to the ms: never older than a source read
   }
   const tr = plan.travel;
   console.log(`motion previews: ${nDrawn} concept(s), ${N} frames each (arm travel ${tr.total.toFixed(0)} mm, longest step ${Math.max(...tr.len.map((l, k) => l / (tr.n[k] + 1))).toFixed(0)} mm), still = frame ${still}, ${raw.length} bytes${write ? ' -> ' + path.relative(process.cwd(), OUT) : ' (not written)'} (${((Date.now() - t0) / 1000).toFixed(1)} s)`);
