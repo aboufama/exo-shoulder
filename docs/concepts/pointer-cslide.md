@@ -153,8 +153,8 @@ counted as contact (outer-face check), the 4 others are skin contacts.
 ## Verdict and what it teaches
 
 The user's split works far better than the spec drawing of it suggests - **if the band is skin-fitted** (saddle):
-gap 69.84 vs 173.65 for the spec's cylinder, level with the 3R champion on this bench, with the best in-band 14 of any
-3R-family design screened so far on Bench(60, 160) (0.67 vs 0.44). It cannot reach the workspace: **reach 0.50 is set by
+gap 69.84 vs 173.65 for the spec's cylinder, level with the 3R champion on this bench, with the second-highest in-band 14
+of all screened rows on Bench(60, 160) (0.67; crossed-skin-tracks 0.70, seed-offset-3r-slides 0.60, champion 0.44). It cannot reach the workspace: **reach 0.50 is set by
 the twist window**, and the window is set by the torso: a C-band fixed in the pointing frame (the swing frame, no
 twist) has a torso-free sector of only ~150-180 deg at s 110-160, so the band (window + shoe arc + stops) fits ~98 deg
 of travel, while the workspace needs ~150-180 (intrinsic: arm directions within 15 deg differ by a median 135 deg of
