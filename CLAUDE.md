@@ -36,7 +36,8 @@ docs/EVOLUTION.md (and its snapshot to pipeline/evolution/) as part of the judge
 - **Paid compute**: before any RunPod job or deploy, state the GPU type and estimated cost and wait for a yes. The key
   comes from the `RUNPOD_API_KEY` environment variable (or `~/.runpod_key` locally) - never print it, never commit it.
   After a search, set the endpoint's `workersMin` back to 0. Never touch the user's other pods (names starting `crl-`).
-- **Downloads and licences**: ask first; licences (AMASS, SMPL-X) are accepted by the user, not the agent.
+- **Downloads and licences**: installs approved by the user 2026-10-15 ("install whatever you want": CalculiX, gmsh,
+  Blender 4.2.3 at /opt/blender are installed); licences (AMASS, SMPL-X) are still accepted by the user, not the agent.
 - **Renders/films**: show a cheap motion preview and get approval before any paid render. Mannequin: matte black,
   faceless (not uncanny), muscles OK. Parts: bead blasted metal, polished screws, iglidur orange; no black parts.
 - **CAD has two levels** (user, 2026-10-14: "you dont need to make high quality CAD with smoothing for each iteration
