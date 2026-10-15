@@ -399,3 +399,103 @@ Do not take rail-elbow to L1 CAD. What should happen next (the loop):
 4. The outside judges (R1 aim 2-10 mm >= 90 %).
 
 The arm-end in-band (hub 3 0.75, neck 0.68) is where the new axes win, so the CAD should check those parts first.
+
+## Stage 2: L1 keep-out CAD and the outside judges (2026-10-15 23:00-00:30 UTC)
+
+**Builder.** `pipeline/concept_l1/build_kit_l1.py` is new and generic for concept-kit models (rail-elbow, `_template`).
+It refits the configuration with `K.evaluate` on Bench(60,160) fast and reproduces the sweep entry exactly
+(k2221: gap 56.25, honest, audit clean). Every part is built from the model's own fitted samples:
+- O20 hub keep-outs: the lower plate F..F+3 and the upper boss + cap F+3.15..F+12.25.
+- The strap sample grids become the strap undersides (strap1, bridge, neck).
+- Rail stage 1 (link 1) and stage 2 (its own group `l3`), 8 x 5 mm.
+- The carriage is an L section revolved about J2: the 4 mm overhang strip at full 9 mm height, plus a plate over
+  stage 2 with 0.15 mm running clearance.
+- The user's arm parts.
+
+Member frames:
+- base = RS; l1 = frame(J1, J2); l2 = frame(J2, J3). These equal `judge/dynamics.py` Chain.frame; its ik_check
+  reads 0.000 deg.
+- l3 = l1 times a Kabsch rotation about J2 on stage 2's own samples.
+- H = body_pose's humerus segment.
+
+Checks (build.json):
+- Builder pose path vs the model's points: 1.4e-5 mm. Frames vs body_pose: 6e-8.
+- Every member is rigid in its group frame (0.000 mm over all 205 taken poses).
+- The model's metal samples vs the posed exo.glb at 3 bench poses (incl. elevation 165): max 0.150 mm. That is the
+  intentional 0.15 mm running gap on stage 1's edge; every other member is <= 0.015 mm.
+
+Clips: the champion's 8 clips, the 2 held-out ones judged, never fitted.
+- Followed in full: 6 fit clips and Walking.
+- Wave (held out) is held on 32/172 frames: 26 metal-in-skin (down to -6.35 mm) and 6 folds.
+- Workspace (1432 poses): the chain closes on 85.2 %, 84.7 % with K6 clear.
+
+Cost: farm, 2 jobs in parallel (rail-elbow + the 3R control), build + `judge_all.sh fast`, 1109 s and 1003 s of
+worker time, $0.17. The wait in the queue (9 jobs, 6 workers busy) was about 15 min.
+
+**Scorecards** (`judge/scorecard.md` of each; the champion = `param_r20_n3_s1414_4`, the built r20 s1414 #4, the
+baseline the seed-offset stage 2 used):
+
+| | champion param_r20 | **l1_rail-elbow** (k2221, telescopic) | l1_3r-k2221 (plain 3R, same axes) |
+|---|---|---|---|
+| R1 2-14 mm x follow | 54.1 % | **44.9 %** | **56.1 %** |
+| R1-aim 2-10 mm | 23.0 % | 22.9 % | **27.6 %** |
+| R2 own parts in the body | 6.57 mm (base) | 0.0 mm | 0.0 mm |
+| R3 follows | 98.2 % | 97.3 % | 97.3 % |
+| R4 Raise overhead (14 mm) | 48.7 % | 33.4 % | 48.2 % |
+| R6 part interference | 1.03 mm | 2.85 mm | 2.85 mm |
+| R7 valid solids | PASS (STEP) | L1 meshes all valid (scorecard: no STEP, NOT RUN) | same |
+| R8 mass | 89.1 g | 144.2 g | 147.7 g |
+| R10 base slip | 15.21 mm | 15.21 mm | 15.21 mm (design-independent) |
+| R11 cuff pressure | 0.256 kPa | 0.797 kPa | 1.822 kPa |
+| R16 workspace | 66.7 % | 45.8 % | 39.2 % |
+| R17 unpowered | PASS | PASS | FAIL (Wave only: l1-l2 contact, 259 N for 0.63 s) |
+| passing | 7 / 19 | 6 / 19 | 5 / 19 |
+
+Per clip, 2-14 mm score:
+
+| clip | rail-elbow | 3R control | champion |
+|---|---|---|---|
+| Raise overhead | 33.4 | 48.2 | 48.7 |
+| Drink from a cup | 41.8 | 48.2 | 44.4 |
+| Comb hair | 46.4 | 64.5 | 59.1 |
+| Reach a high shelf | 64.8 | 74.2 | 64.4 |
+| Wash opposite shoulder | 26.8 | 32.4 | 28.2 |
+| Reach back pocket | 58.7 | 60.8 | 77.1 |
+| Wave | 25.9 | 37.8 | 46.2 |
+| Walking arm swing | 66.6 | 86.9 | 71.5 |
+
+**Verdict.** The outside judges confirm the bench's control.
+- The rail costs 11 R1 points against the plain 3R at the same axes (44.9 vs 56.1 %), and 15 points overhead.
+  - The rail assembly rides 127-148 mm from GH, 60-80 mm off the skin.
+  - Overhead it is the whole silhouette (median gap 19.7 mm, against 15.9 for the 3R).
+- The 3R at the CMA's axes is the first concept-bench design to beat the built champion on R1 (56.1 vs 54.1 %) and
+  R1-aim (27.6 vs 23.0 %). It is level overhead and ahead on 5 of 8 clips.
+- It loses on Reach back pocket and Wave, and its R16 (39.2 %) and R17 (Wave) are worse.
+
+**New red-team finding (the CAD showed it, the bench could not).**
+- The two telescopic stages are fitted independently: stage 1 at 143 mm, stage 2 at 127 mm.
+- That leaves an 11 mm radial gap between stage 2's top (132) and stage 1's underside (143). Nothing in the model
+  carries stage 2 on stage 1.
+- A real guide needs a bridge across that gap, or both stages at one radius (stage 2 + carriage 16 mm higher).
+- So the telescopic numbers are optimistic beyond the MVP1 drive problem.
+
+**The limiter on the built CAD (both designs, the same kit flaw): the J3 hub zone.**
+- R6 2.85 mm and most of the R16 failures come from two places, at every pose:
+  - The 6 mm neck starts at the hub plate level F inside the J3 footprint, so it overlaps the upper boss
+    (F+3.15..F+12.25) by 2.85 mm.
+  - The bridge / link 2 passes over the neck inside the shared-joint zone. The kit exempts that zone from K6 and from
+    `over`.
+- The bridge also dips 0.46 mm into the flat J3 plate. The kit's ramps compare a RADIAL distance with the flat hub's
+  AXIAL level; at 10 mm off the axis at r 71 they differ by about 0.7 mm.
+- Workspace failures: 57 + 50 of 120 judged poses (rail-elbow), 56 + 51 (3R). The rest do not close (13).
+- The fix belongs in the kit (and therefore in every model):
+  - inside HUB_R + 2.5 mm of a joint, the lower member's neck / strap root is the 3 mm plate;
+  - an upper member's ramp is checked against the plate's axial height (rho cos theta >= F + 3.15).
+- After that fix, R6 and R16 are bounded by the closure (85 %) and the Wave skin contacts, not by the parts.
+
+**Next.**
+1. Fix the hub-zone rule in tools/concept_kit.py, then re-CMA the plain 3R from k2221's axes (width, t_link and neck
+   free) on the farm.
+2. Rebuild its L1 with this builder, one command.
+3. Keep Wave out of the fit (it is held out). Widen the workspace part of the fit set instead: Wave's skin contacts
+   come from undersides fitted without such poses.

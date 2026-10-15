@@ -1,5 +1,13 @@
 [
  {
+  "id": "l1_3r-k2221",
+  "label": "plain 3R at rail-elbow k2221's axes (control), L1 keep-out: R1 56.1 %"
+ },
+ {
+  "id": "l1_rail-elbow",
+  "label": "rail-elbow k2221 (telescopic curved-rail J2), L1 keep-out: R1 44.9 %"
+ },
+ {
   "id": "l1_seed-offset-3r-slides",
   "label": "seed-offset-3r-slides k403 (offset 3R + 3 passive cuff slides), L1 keep-out"
  },

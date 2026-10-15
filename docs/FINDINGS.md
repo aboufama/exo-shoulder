@@ -476,3 +476,21 @@ The rail stages stayed 0 % in band through all of it; the whole gain was the arm
   - The legal rigid rail at the same axes needs 209 mm.
   - Its own CMA shrinks the rail into a 21 mm ring around the J2 axis, which is a hub.
   - docs/concepts/rail-elbow.md, "Convergence and red team".
+
+## Built and judged: the 3R at the CMA's axes beats the built champion on R1; the rail loses 11 points (2026-10-16, rail-elbow stage 2)
+
+* `pipeline/concept_l1/build_kit_l1.py` (new) turns any concept-kit model configuration into a judge-ready L1 design
+  dir, from the model's own fitted samples. The kinematics are reproduced exactly: the model's metal vs the posed
+  exo.glb is within 0.15 mm, and `judge/dynamics.py` ik_check reads 0.000 deg.
+* Outside judges (`judge_all.sh fast` on the farm) against the built champion `param_r20_n3_s1414_4`:
+  - `l1_3r-k2221` (plain 3R at rail-elbow k2221's axes): R1 **56.1 %** vs 54.1 %, R1-aim **27.6 %** vs 23.0 %,
+    overhead 48.2 vs 48.7 %. It is the first concept-bench design to beat the built champion on proximity.
+  - `l1_rail-elbow` (k2221): R1 44.9 %, overhead 33.4 %. The rail parts ride 127-148 mm from GH.
+* Red team from the CAD: the telescopic stages were fitted at different radii (stage 1 at 143 mm, stage 2 at 127 mm).
+  That is an 11 mm gap with nothing in the model carrying stage 2.
+* Limiter on both built designs: the kit's J3 hub zone. The 6 mm neck starts at plate level F inside the J3
+  footprint and overlaps the upper boss by 2.85 mm. The upper strap passes over the neck inside the zone the kit
+  exempts from K6 and `over`. Ramps compare a radial distance with a flat plate's axial level (0.46 mm into the
+  plate). This flaw sets R6 at 2.85 mm and fails about 107 of 120 judged workspace poses on parts (R16 39-46 %).
+  The fix goes into tools/concept_kit.py, so it reaches every model.
+* docs/concepts/rail-elbow.md, "Stage 2".

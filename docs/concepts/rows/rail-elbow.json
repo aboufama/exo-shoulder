@@ -178,5 +178,36 @@
    "honest": false
   },
   "champion_same_bench": 75.94
+ },
+ "l1": {
+  "design": "pipeline/full-exo/designs/l1_rail-elbow",
+  "judged": "2026-10-15T23:44:43Z",
+  "R1_14": 0.449,
+  "R1_10": 0.229,
+  "R3": 0.973,
+  "R4": 0.334,
+  "R6_mm": 2.85,
+  "R16": 0.458,
+  "R17": true,
+  "passing": "6/19",
+  "control_3r": {
+   "design": "pipeline/full-exo/designs/l1_3r-k2221",
+   "R1_14": 0.561,
+   "R1_10": 0.276,
+   "R4": 0.482,
+   "R6_mm": 2.85,
+   "R16": 0.392,
+   "R17": false,
+   "passing": "5/19"
+  },
+  "champion": {
+   "design": "param_r20_n3_s1414_4",
+   "R1_14": 0.541,
+   "R1_10": 0.23,
+   "R4": 0.487,
+   "R6_mm": 1.03,
+   "R16": 0.667,
+   "passing": "7/19"
+  }
  }
 }
