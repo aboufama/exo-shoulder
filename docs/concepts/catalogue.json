@@ -1776,5 +1776,30 @@
   "t_ideated": "2026-10-15T17:21:09Z",
   "source": "ideation D",
   "status": "ideated"
+ },
+ {
+  "id": "fraction-pauldron",
+  "name": "Fraction pauldron: graded telescoping lames on a gimbal (each lame turns a fixed fraction of the outer angle, rolling-cage coupled), J2 hub, twist on a cuff arc rail",
+  "lens": "proximity-atlas",
+  "family": "graded lames / distributed fraction",
+  "topology": "scapula plate S -> N-1 lames telescoping on circular tracks about one scapula-fixed axis x through GH (lame k at a fixed fraction g_k of the outer angle alpha; rollers on lame k roll between lames k-1 and k+1, bearing-cage principle) -> tip lame T (g=1) -> J2: O20 hub about z (perpendicular to x, carried by T) -> arm strap A -> J3: carriage on a humerus-fixed thin-section arc rail around the upper arm (cone gamma about the humerus axis) -> K7 neck to BOTTOM",
+  "active_dof": 3,
+  "passive_dof": 4,
+  "dof_reasoning": "alpha (the telescope total), beta (J2) and psi (the cuff arc) are the arm's 3 rotations (Fick/Cardan angles about x, then the remaining twist about the humerus axis). Every lame turns about the same axis x, so a rolling cage between k-1 and k+1 fixes k at a weighted mean of its neighbours exactly (holonomic, coaxial rotations commute): the N-1 lame positions are determined by closure, nothing sags unpowered; no gears, pulleys or cables.",
+  "description": "The proximity atlas says the cap skin moves with graded fractions of the arm swing (~0.1 over the top, ~0.8 over the deltoid). This is the realisable form of that idea: only fractions of ONE angle about ONE axis can be coupled exactly with 1-D elements, so the gimbal's outer angle is spread over telescoping lames like a lobster-tail pauldron.",
+  "model_spec": "docs/concepts/models/fraction-pauldron.py (concept kit: K3 march, continuity_dense, K6 collisions, K7 neck); lames one radius per across-column (they slide along their whole length), each stacked t + 0.6 mm on the one below; rail constant radius along its length.",
+  "sweep_params": "x (axis lat/lon), n (lames), fraction exponent, side, stroke coverage cov, rail coverage rcov, profile quantile q, rail cone gamma, width w, overlap ov",
+  "modelling_cost": "medium",
+  "lenses": [
+   "proximity-atlas",
+   "plate armour",
+   "bearing cage",
+   "telescoping arc"
+  ],
+  "t_ideated": "2026-10-15T18:07:00Z",
+  "source": "proximity atlas design rule (docs/research/proximity_atlas.md)",
+  "screening": "S1-S3",
+  "status": "dead",
+  "model_file": "docs/concepts/models/fraction-pauldron.py"
  }
 ]
