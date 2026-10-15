@@ -65,5 +65,26 @@
   "top5_spread": 0.12,
   "converged": false,
   "note": "q 0.98 + width 10 + J1 axis bvec(77.5,78) + s 189: leaving q 1 stops the 400 mm float; o kept 0; model and honesty checks unchanged; the screening's original verdict's limiter (2)/(3) unchanged"
+ },
+ "v_check_polish": {
+  "t": "2026-10-15T21:27Z",
+  "fast_gap": 58.9,
+  "fast_score": 78.58,
+  "fast_reach": 0.9,
+  "fast_follow": 0.95,
+  "fast_inband14": 0.3974,
+  "fast_inband10": 0.2871,
+  "fast_contact": 0.0864,
+  "exact_gap": null,
+  "model_diff_since_polish": "none (git diff 5d3d04b..HEAD empty)",
+  "audit": "closure 1.0, flips 0, parts 0, sing/U/slide 0, contact 19/220",
+  "gate_recomputed": {
+   "half_gain": 0.26,
+   "best_eval": 193,
+   "n": 252,
+   "top5_spread": 0.12,
+   "converged": false
+  },
+  "note": "independent fast re-measure (Bench 60/160 grid, model as committed) reproduces gap 58.90 to the digit; the CB_EXACT=1 run did not finish in 70 min on a 4-core box at load 12 (per-pose libigl path), so the exact number is still owed; v_* fields above are the earlier audit of a different config (k86 + dpsi 0 + q 0.98) and are not overwritten"
  }
 }
