@@ -15,6 +15,9 @@ VARIANTS = [("baseline", {}), ("ramp 50 deg", {"ramp_deg": 50.0}), ("ramp 65 deg
             ("hub radius 9 mm", {"hub_r": 9.0}), ("BOTTOM hub 4.5 mm thick", {"t_bot": 4.5}), ("stack 2.5 mm", {"stack": 2.5}),
             ("hub relief 20 mm", {"hub_relief": 20.0}), ("hub margin 0.8 mm", {"hm": 0.8}),
             ("all of the above", {"ramp_deg": 65.0, "hub_r": 9.0, "t_bot": 4.5, "stack": 2.5, "hub_relief": 20.0, "hm": 0.8})]
+if os.environ.get("V5"):                                       # rolling bearings + cable drum (user, 2026-10-15)
+    VARIANTS = [("baseline (v4 plain bearings)", {}), ("v5: drum hub R13", {"hub_r": 13.0}), ("v5: 2x 6700 in the hub (hub 8.5)", {"hub_up": 8.5}),
+                ("v5: drum R13 + 6700 pair", {"hub_r": 13.0, "hub_up": 8.5}), ("v5 + ramp 60", {"hub_r": 13.0, "hub_up": 8.5, "ramp_deg": 60.0})]
 rows = []
 print(f"design: {d0.get('_src', '')}", flush=True)
 for name, ch in VARIANTS:
