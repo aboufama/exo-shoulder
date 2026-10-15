@@ -106,8 +106,10 @@ FACES = np.array([[0, 1, 2], [0, 3, 1], [1, 3, 2], [2, 3, 0]])                  
 FACE_MID = np.array([[4, 5, 6], [7, 8, 4], [8, 9, 5], [9, 7, 6]])                       # their mid-side nodes (ccx order)
 
 def wall_thickness(step, h_probe=1.0):
-    """area-weighted 5th percentile of the inward ray thickness from the surface triangles (thinnest wall)"""
+    """thinnest wall: area-weighted 5th percentile of the inward ray thickness from the surface triangles. The ray is
+    marched with the exact signed distance (judge/sdist.py; a step of |d| never crosses the surface) until it exits"""
     import gmsh, trimesh
+    from sdist import mesh as sd_mesh
     gmsh.initialize(); gmsh.option.setNumber("General.Terminal", 0)
     try:
         gmsh.model.occ.importShapes(step); gmsh.model.occ.synchronize()
@@ -115,11 +117,16 @@ def wall_thickness(step, h_probe=1.0):
         tags, X, _ = gmsh.model.mesh.getNodes(); X = X.reshape(-1, 3); idx = {t: i for i, t in enumerate(tags)}
         _, _, ntag = gmsh.model.mesh.getElements(2); T = np.array([idx[t] for t in ntag[0]]).reshape(-1, 3)
     finally: gmsh.finalize()
-    m = trimesh.Trimesh(X, T, process=True); m.fix_normals()
-    c = m.triangles_center; n = m.face_normals; o = c - 1e-3 * n
-    loc, ir, _ = m.ray.intersects_location(o, -n, multiple_hits=False)
-    t = np.full(len(c), np.nan); t[ir] = np.linalg.norm(loc - o[ir], axis=1)
-    ok = np.isfinite(t) & (t > 0.05); w = m.area_faces[ok]; ts = t[ok]; o_ = np.argsort(ts); cw = np.cumsum(w[o_]) / w.sum()
+    m = trimesh.Trimesh(X, T, process=True); m.fix_normals(); M = sd_mesh(np.asarray(m.vertices, float), np.asarray(m.faces), h=0.3)
+    c = m.triangles_center; n = m.face_normals; s = np.full(len(c), 0.02); done = np.zeros(len(c), bool)
+    for _ in range(80):
+        live = ~done
+        if not live.any(): break
+        d = M.signed(c[live] - s[live, None] * n[live])
+        ex = d > -0.01; s_l = s[live]; s_l = np.where(ex, s_l, s_l + np.maximum(-d, 0.01)); s[live] = s_l
+        done[np.nonzero(live)[0][ex]] = True
+        done |= s > 60.0
+    ok = done & (s < 60.0) & (s > 0.05); w = m.area_faces[ok]; ts = s[ok]; o_ = np.argsort(ts); cw = np.cumsum(w[o_]) / w.sum()
     return float(ts[o_][np.searchsorted(cw, 0.05)]), float(np.median(ts))
 
 def mesh_step(step, h, out_msh=None, fine_ball=None, h_far=None):
