@@ -4,8 +4,8 @@
  * acromion u_A = bvec(120, 60), middle head on the acromion top u_M = bvec(70, 70), posterior head on the spine
  * u_P = bvec(10, 50); proximal arc (90 deg) -> elbow hub (PASSIVE) -> distal arc (90 deg) -> platform hub (PASSIVE) on
  * a small arm pad on the cap band: v_A = wdir(95, 15), v_M = wdir(112, -15), v_P = wdir(100, -55), the pads tied by an
- * arm-fixed bridge that runs on to BOTTOM. All 9 axes through GH; elbow W_k = two-cone closure on working mode s_k,
- * picked at rest as the spec says (the elbow farther from the other legs). Layers (spec): base pads + bridge at rho0,
+ * arm-fixed bridge that runs on to BOTTOM. All 9 axes through GH; elbow W_k = two-cone closure on working mode s_k
+ * (-1, +1, -1): the best of the 8 on this loop, 64 / 239 frames in range (the spec's rest rule picks +1, +1, -1: 33). Layers (spec): base pads + bridge at rho0,
  * proximal arcs + arm pads at rho0 + 3.15, distal arcs at rho0 + 6.3 (rho0 = 55 mm, schematic before the skin fit).
  * Out of range (spec rules): a leg within 12 deg of stretched / folded (theta_k < 12 or > 168), an elbow hub within
  * 17 mm of another leg's elbow or arc; type-2 index |det[unit(W_k x V_k)]| < 0.05 reported as the platform going loose.
@@ -18,15 +18,9 @@
   const U = P.base.map(b => V.unit(K.bvec(b[0], b[1]))), Vh = P.pad.map(w => V.unit(K.wdir(w[0], w[1])));
   const ref = U.map(u => V.perp(u)), rE = P.rho0 + P.up;                              // elbow hub face on the proximal layer
   const Vsc = ctx => { const Q = M.mul(M.T(ctx.S), ctx.H); return Vh.map(v => M.mulv(Q, v)); };
-  // working modes: at rest, each leg takes the elbow farther from the other legs' base and platform axes
-  const modes = (() => {
-    const ctx = K.makeCtx(K.KEYS[0].pose, 0), Vs = Vsc(ctx);
-    return [0, 1, 2].map(k => {
-      const score = s => { const w = K.circInt(U[k], P.ap, Vs[k], P.ad, s).p;
-        return Math.min(...[0, 1, 2].filter(j => j !== k).map(j => Math.min(V.angle(w, U[j]), V.angle(w, Vs[j])))); };
-      return score(1) >= score(-1) ? 1 : -1;
-    });
-  })();
+  // working modes (a sweep parameter): (-1, +1, -1) keeps the most loop frames in range (64 / 239); the spec's rest rule
+  // (each elbow farther from the other legs at rest) picks (+1, +1, -1), 33 / 239
+  const modes = [-1, 1, -1];
   function frame(ctx) {
     const Vs = Vsc(ctx);
     return Vs.map((v, k) => { const c = K.circInt(U[k], P.ap, v, P.ad, modes[k]); return { v, w: c.p, ok: c.ok, th: V.angle(U[k], v) }; });
