@@ -294,6 +294,14 @@ def build_saddle(info):
     parts += [("cuff", n_, s_) for n_, s_ in HWR.v4_joint_parts(W0, lv, BB.N)[0]]
     return sad, parts
 
+def jn_hardware_rest(lv):
+    """the JN lower-member hardware (washers A/B, magnet, ring nut) of the hub arm end, in group H's REST frame. Built
+    about W0 in the canonical humerus frame like the hub itself, so it is converted with the same can_to_rest as the
+    BOTTOM merge (bottom_merged). Until 2026-10-15 it was returned in the canonical frame under group H: 12.2 deg off the
+    J3 axis (HR), i.e. the washers / ring nut / magnet sat ~10-20 mm beside the joint and read as link N-1 interference
+    in R6 / R16 (cad_r18_n3_s1392_1_f300: 'J3 washer B IN link 2' in 21 of 120 workspace poses)."""
+    return [("H", n_, BB.AE.can_to_rest(s_)) for n_, s_ in HWR.v4_joint_parts(W0, lv, BB.N)[0]]
+
 def build_hub_neck(E):
     """non-cuff arm end: JN hub plate (T_BOT, skin side from the dense envelope, flat seat) + neck, one loft"""
     P_bar = BB.bar_pt(BB.S_CUT, BB.BAR_Y0, BB.BAR_Z0); hub_c = W0 * ZJ4
@@ -318,7 +326,7 @@ def build_hub_neck(E):
     b3 = HWR.v4_lower_features(body, W0, lv); print("  after v4 features faces", nfaces(b3), b3.isValid(), flush=True)
     body = BB.solid_ok(b3)
     print("  hub+neck valid", body.isValid(), flush=True)
-    return body, [("H", n_, s_) for n_, s_ in HWR.v4_joint_parts(W0, lv, BB.N)[0]]
+    return body, jn_hardware_rest(lv)
 
 
 # ---------------------------------------------------------------- turned skin side of the JN hub (a sketch, fitted to the envelope)
@@ -422,13 +430,19 @@ def hub_gap_report(E, dh, lat, zb_of_r, r0, tag, nth=72):
     print(f"  {tag}: skin gap min {np.nanmin(gap):.2f} mm, median (worst frame) {np.nanmedian(worst):.2f} mm, median (all frames) {np.nanmedian(gap):.2f} mm", flush=True)
     return dict(min=float(np.nanmin(gap)), median_worst=float(np.nanmedian(worst)), median_all=float(np.nanmedian(gap)))
 
-NECK_GAP = float(os.environ.get("NECK_GAP_DEG", 80.0))
+NECK_GAP = float(os.environ.get("NECK_GAP_DEG", 60.0))                                # 80 until 2026-10-15 (see neck_exit)
 def neck_exit(E, dh):
     """direction (in JN's plane) in which the neck leaves the hub: toward the bar (dh) unless link N-1 sweeps within
     NECK_GAP deg of it about JN in a followed frame (r16 3R: link 2 came within 46 deg; its 14 mm arm and the 14 mm neck
     overlapped 14-22 mm from the axis, 1.8 mm deep, in 32 % of the frames) - then the smallest turn away from the sweep
     that clears it. r16: 65 deg (exit +19) left 0.65 mm in 19 % of the frames next to the hub rim; 80 deg (exit +34):
-    0 of 451 frames, and the neck loft no longer folds. NECK_GAP_DEG=0: always toward the bar (old)"""
+    0 of 451 frames, and the neck loft no longer folds. NECK_GAP_DEG=0: always toward the bar (old).
+    2026-10-15: those near-rim overlaps came from the neck root climbing inside link N-1's plate radius; with the level
+    exit run (build_hub_neck_v2, NECK_LEVEL_R) the root stays under the seat plane there and 60 deg is enough for the
+    plates' half-widths (link 5 + neck 7 mm at r 12: 53 deg). r18 s1392 #1: exit +27 -> +7; the +27 exit with the level
+    run folded every neck loft (bend radius 5-10 mm), +7 builds clean. Over the functional workspace link N-1 turns
+    through every direction about JN (why_held.py), so no exit clears it there: those poses need link N-1 under the arm
+    hub (analysis/jn_flip_patch.py)."""
     lat = unit(np.cross(W0, dh)); g = f"l{BB.N - 1}"; az = []
     for p, G in E.frames:
         v = (E.RS[p] @ E.HG[p]).T @ (G[g] @ np.array([1.0, 0, 0])); v = v - (v @ W0) * W0
@@ -470,12 +484,23 @@ def build_hub_neck_v2(E):
     dn, rot = neck_exit(E, dh); tw = rot(tw)                                                # the neck leaves clear of link N-1's sweep
     P0 = W0 * (ZJ4 + T_BOT / 2) + (MB.HUB_R - 4.0) * dn; prof0 = BB.rr_prof(2 * BB.HW, T_BOT - 0.6); acr0 = unit(np.cross(W0, dn)); dh = dn
     sd = math.cos(al) * W0 + math.sin(al) * tw
+    # level exit run: link N-1's J3 plate (r <= HUB_R, underside U0 = S + 0.15) turns over the neck root in every direction,
+    # so the neck's top stays at S - 0.3 (the thin root section) until its centre is NECK_LEVEL_R from the axis; only then
+    # may it climb toward the bar. Before (2026-10-15) the hugging path rose at once: on cad_r18_n3_s1392_1_f300 the neck
+    # top reached 92.7-93.1 at r 10.6-11.8 (S 92.32, U0 92.47) -> 'link 2 IN BOTTOM + neck' 0.12-0.29 mm in ~30 of 120
+    # workspace poses the evaluator follows (R16). NECK_LEVEL_R=0: the old start.
+    lvl_r = float(os.environ.get("NECK_LEVEL_R", MB.HUB_R + 0.5)); L_lv = max(0.0, lvl_r - (MB.HUB_R - 4.0))   # section plane at r >= 12: all of it outside the O23 plate
+    P1 = P0 + L_lv * dn
     for appr in (0.0, 12.0, 16.0, 20.0):
         # 0: great circle + Bezier ends (r13 n4). A short neck (r16 3R: JN hub beside BOTTOM's cut, 44 mm chord, 55 deg
         # turn, hugging floor up to 9 mm over the chord) folds that path -> the rail neck's smoothing spline; first loft
         # that does not fold wins, else the last (20 mm: the widest bend, 11.8 mm on r16) and the BOTTOM merge + R7 decide
-        secs = hugging_neck(E, P0, dh, W0, prof0, sd, ZJ4, n_end_blend=0.4, hold_mm=4.0 + 1.5, approach=appr)    # P0 is 4 mm inside the rim: thin until 1.5 mm outside
-        secs = [BB.sec3d(P0 - 2.0 * dh, acr0, W0, prof0), BB.sec3d(P0, acr0, W0, prof0)] + secs             # starts 6 mm inside the hub
+        if L_lv > 0:
+            secs = hugging_neck(E, P1, dh, W0, prof0, sd, ZJ4, n_end_blend=0.4, hold_mm=1.0, approach=appr)    # thin root until 1 mm past the level run
+            secs = [BB.sec3d(P0 - 2.0 * dh, acr0, W0, prof0), BB.sec3d(P0, acr0, W0, prof0), BB.sec3d(P1, acr0, W0, prof0)] + secs
+        else:
+            secs = hugging_neck(E, P0, dh, W0, prof0, sd, ZJ4, n_end_blend=0.4, hold_mm=4.0 + 1.5, approach=appr)    # P0 is 4 mm inside the rim: thin until 1.5 mm outside
+            secs = [BB.sec3d(P0 - 2.0 * dh, acr0, W0, prof0), BB.sec3d(P0, acr0, W0, prof0)] + secs             # starts 6 mm inside the hub
         neck = BB.loft(secs); sx = self_x(neck)
         print(f"  neck sweep (approach {appr:.0f} mm): valid {neck.isValid()}, self-intersecting {sx}" + ("  (WARNING: folded loft kept - check R7 / the merge)" if sx and appr == 20.0 else ""), flush=True)
         if neck.isValid() and not sx: break
@@ -486,7 +511,7 @@ def build_hub_neck_v2(E):
     if body is None: body = BB.solid_ok(CH.fuzzy_fuse(hub, neck, tol=0.0))
     print("  hub + neck: valid", body.isValid(), "faces", len(body.Faces()), flush=True)
     b3 = HWR.v4_lower_features(body, W0, lv); print("  after v4 features: valid", b3.isValid(), "faces", len(b3.Faces()), flush=True)
-    return BB.solid_ok(b3), [("H", n_, s_) for n_, s_ in HWR.v4_joint_parts(W0, lv, BB.N)[0]]
+    return BB.solid_ok(b3), jn_hardware_rest(lv)
 
 
 # ================================================================ v5 neck: the evaluator's neck, built (skin-hugging)

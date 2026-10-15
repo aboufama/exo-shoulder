@@ -1,0 +1,48 @@
+--- pipeline/conformal/gpu/band_impl.py	2026-10-15 11:09:53.494249524 +0000
++++ pipeline/conformal/gpu/band_impl.py	2026-10-15 11:09:53.511099948 +0000
+@@ -227,6 +227,28 @@
+     return dict(r1=R1, r1c=R1C, r2c=R2C, cs=CS)
+ 
+ 
++def fill_pole_holes(M, lat_min=30.0):
++    """the maps' sampling holes near the pole (straight up from GH, the top of the shoulder): a 0.5 deg pixel spans
++    0.5 cos(lat) deg of longitude, so above lat ~65 most pixels get no skin sample and the 1-ring cannot fill them
++    (r1 = 0: no clearance constraint there, never in band). Measured on maps_s1 (analysis/map_holes.py): 37 / 58 / 87 %
++    of the pixels at lat 70 / 80 / 88 had no skin; every one checked by an exact ray cast hits skin 40-70 mm out, and
++    the fill below agrees with it to 0.2 mm median. Per row: a hole takes the min r1 / max r1c of the nonzero pixels
++    within +-ceil(1.5 / cos(lat)) longitude pixels (the 1-ring's angular width at the equator); cs, r2c unchanged."""
++    import torch, torch.nn.functional as Fn
++    r1 = M["r1"].view(-1, MH, MW); r1c = M["r1c"].view(-1, MH, MW); o1, oc = r1.clone(), r1c.clone()
++    lat = [LAT_LO + (i + 0.5) * MRES for i in range(MH)]; K = [int(math.ceil(1.5 / max(0.02, math.cos(x * D2R)))) for x in lat]
++    for k in sorted(set(K)):
++        rows = [i for i in range(MH) if K[i] == k and lat[i] >= lat_min]
++        if k <= 1 or not rows: continue
++        ri = torch.tensor(rows, device=r1.device); a = r1[:, ri].float(); c = r1c[:, ri].float(); hole = a <= 0; F_, R_, W_ = a.shape
++        wrap = lambda x: torch.cat([x[..., -k:], x, x[..., :k]], -1).reshape(F_ * R_, 1, W_ + 2 * k)
++        amin = -Fn.max_pool1d(wrap(-torch.where(hole, torch.full_like(a, float("inf")), a)), 2 * k + 1, stride=1).reshape(F_, R_, W_)
++        cmax = Fn.max_pool1d(wrap(torch.where(hole, torch.full_like(c, -float("inf")), c)), 2 * k + 1, stride=1).reshape(F_, R_, W_)
++        ok = hole & torch.isfinite(amin)
++        o1[:, ri] = torch.where(ok, amin, a).to(o1.dtype); oc[:, ri] = torch.where(ok, cmax, c).to(oc.dtype)
++    return dict(M, r1=o1.reshape(M["r1"].shape), r1c=oc.reshape(M["r1c"].shape))
++
++
+ def load_poses(b64, dev):
+     import torch
+     Z = np.load(io.BytesIO(gzip.decompress(base64.b64decode(b64))), allow_pickle=False)
+@@ -241,7 +263,7 @@
+     def __init__(self, job, dev):
+         import torch
+         self.t = torch; self.dev = dev; self.f32 = torch.float32
+-        key = hashlib.md5(job["poses"].encode()).hexdigest() + str(job.get("spacing", 0.8))
++        key = hashlib.md5(job["poses"].encode()).hexdigest() + str(job.get("spacing", 0.8)) + ("f" if job.get("fill_holes") else "")
+         if key not in _CACHE:
+             t0 = time.time(); P = load_poses(job["poses"], dev)
+             if job.get("stride"):
+@@ -253,6 +275,7 @@
+             else:
+                 M = build_frame_maps(P["POSE"], dev, spacing=float(job.get("spacing", 0.8)))
+                 if mc: import torch as _t; _t.save({k: v.cpu() for k, v in M.items()}, mc)
++            if job.get("fill_holes"): M = fill_pole_holes(M)                    # job key fill_holes: a MEASUREMENT change (report separately)
+             _CACHE.clear(); _CACHE[key] = (M, P); print(f"frame maps built in {time.time() - t0:.0f}s", flush=True)
+         self.M, self.P = _CACHE[key]; self.S = MH * MW; self.stride = int(job.get("stride") or 1)
+         cid, fi = self.P["CID"].cpu().numpy(), self.P["FI"].cpu().numpy()

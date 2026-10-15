@@ -51,44 +51,30 @@ const controls = new OrbitControls(camera, renderer.domElement); controls.enable
 function resize() { renderer.setSize(innerWidth, innerHeight); camera.aspect = innerWidth / innerHeight; camera.updateProjectionMatrix(); }
 addEventListener('resize', resize); resize();
 
-// ---- mannequin: the rig's skin in matte black, the head pulled onto a smooth egg (no face)
+// ---- mannequin: the film's own mesh (mannequin.py -> mannequin_head.json, exactly what film_frames.py sends to
+// Blender): the rig's skin below the lower neck + a smooth featureless display head and neck, matte black
 const ANA = await loadBody(THREE, 'body_mesh.json'); scene.add(ANA.group); const L = ANA.landmarks;
-const black = new THREE.MeshPhysicalMaterial({ color: 0x040405, roughness: 0.78, metalness: 0, specularIntensity: 0.55, envMapIntensity: 0.3, sheen: 0.18, sheenRoughness: 0.7, sheenColor: new THREE.Color(0.30, 0.32, 0.36), side: THREE.DoubleSide });
-ANA.group.traverse(o => { if (o.isMesh && o.material !== ANA.materials.eye) o.material = black; });
-const skin = ANA._dbg.dynamic.find(d => d.cls === 'skin').mesh;
-const HD = ANA._dbg.J.head; const s = ANA.scale; let cap = null;
-// headless torso form: the head's triangles are dropped above the narrowest neck section and the neck is closed by a
-// smooth dome with a short skirt (tracks the neck ring every frame). Eyes (separate meshes) hidden.
-ANA.group.traverse(o => { if (o.isMesh && ANA.materials && o.material === ANA.materials.eye) o.visible = false; });
-function capPrep() {
-  const g = skin.geometry, P = g.attributes.position.array, n = P.length / 3, c = HD.mid, near = [];
-  for (let i = 0; i < n; i++) { if (Math.hypot(P[3 * i] - c[0], P[3 * i + 2] - c[2]) < 95 * s && P[3 * i + 1] > c[1] - 230 * s) near.push(i); }
-  let best = null;
-  for (let y = c[1] - 200 * s; y < c[1] - 40 * s; y += 3 * s) {
-    let mnx = 1e9, mxx = -1e9, mnz = 1e9, mxz = -1e9, k = 0;
-    for (const i of near) { if (Math.abs(P[3 * i + 1] - y) > 1.6 * s) continue; k++;
-      mnx = Math.min(mnx, P[3 * i]); mxx = Math.max(mxx, P[3 * i]); mnz = Math.min(mnz, P[3 * i + 2]); mxz = Math.max(mxz, P[3 * i + 2]); }
-    if (k < 12) continue; const w = (mxx - mnx) + (mxz - mnz);
-    if (!best || w < best.w) best = { w, y, cx: 0.5 * (mnx + mxx), cz: 0.5 * (mnz + mxz), rx: 0.5 * (mxx - mnx), rz: 0.5 * (mxz - mnz) };
-  }
-  const yc = best.y + 8 * s, head = new Uint8Array(n);
-  for (let i = 0; i < n; i++) if (P[3 * i + 1] > yc && Math.hypot(P[3 * i] - best.cx, P[3 * i + 2] - best.cz) < 140 * s) head[i] = 1;
-  const I = g.index.array, keep = [];
-  for (let f = 0; f < I.length; f += 3) if (!(head[I[f]] || head[I[f + 1]] || head[I[f + 2]])) keep.push(I[f], I[f + 1], I[f + 2]);
-  g.setIndex(new THREE.BufferAttribute(Uint32Array.from(keep), 1));
-  const ring = near.filter(i => Math.abs(P[3 * i + 1] - (yc - 6 * s)) < 2.5 * s);
-  const rc = ring.reduce((m, i) => [m[0] + P[3 * i], m[1] + P[3 * i + 1], m[2] + P[3 * i + 2]], [0, 0, 0]).map(v => v / ring.length);
-  const rx = best.rx * 1.035, rz = best.rz * 1.035, h = 0.38 * Math.min(rx, rz);
-  const dome = new THREE.SphereGeometry(1, 64, 20, 0, Math.PI * 2, 0, Math.PI / 2); dome.scale(rx, h, rz); dome.translate(0, 4 * s, 0);
-  const skirt = new THREE.CylinderGeometry(1, 1, 1, 64, 1, true); skirt.scale(rx, 16 * s, rz); skirt.translate(0, 4 * s - 8 * s, 0);
-  const mesh = new THREE.Group(); [dome, skirt].forEach(gg => { const m = new THREE.Mesh(gg, black); m.frustumCulled = false; mesh.add(m); });
-  ANA.group.add(mesh); cap = { mesh, ring: Uint32Array.from(ring), off: [best.cx - rc[0], yc - rc[1], best.cz - rc[2]] };
-}
-function capApply() {
-  if (!cap) capPrep(); const P = skin.geometry.attributes.position.array; let x = 0, y = 0, z = 0;
-  for (const i of cap.ring) { x += P[3 * i]; y += P[3 * i + 1]; z += P[3 * i + 2]; } const k = cap.ring.length;
-  cap.mesh.position.set(x / k + cap.off[0], y / k + cap.off[1], z / k + cap.off[2]); cap.mesh.updateMatrix();
-}
+const black = new THREE.MeshPhysicalMaterial({ color: 0x050506, roughness: 0.9, metalness: 0, specularIntensity: 0.45, envMapIntensity: 0.35 });
+ANA.group.traverse(o => { if (o.isMesh) o.visible = false; });                  // rig meshes hidden (eyes too); the mannequin below
+const skin = ANA._dbg.dynamic.find(d => d.cls === 'skin').mesh; skin.material = new THREE.MeshBasicMaterial({ visible: false });
+const MQ = await (await fetch('mannequin_head.json' + bust)).json();
+const dec = (str, T) => { const b = atob(str), u = new Uint8Array(b.length); for (let i = 0; i < b.length; i++) u[i] = b.charCodeAt(i); return new T(u.buffer); };
+const mq = (() => {
+  const nb = MQ.nb, np_ = MQ.npv, keep = dec(MQ.keep, Uint8Array), pv = dec(MQ.pv, Float32Array), wi = dec(MQ.wi, Uint32Array), ww = dec(MQ.ww, Float32Array);
+  const I0 = skin.geometry.index.array, idx = [];
+  if (I0.length !== 3 * MQ.nf) throw new Error('mannequin_head.json does not match body_mesh.json (rebuild: python3 mannequin.py)');
+  for (let f = 0; f < MQ.nf; f++) if ((keep[f >> 3] >> (7 - (f & 7))) & 1) idx.push(I0[3 * f], I0[3 * f + 1], I0[3 * f + 2]);
+  for (const k of dec(MQ.pf, Uint32Array)) idx.push(k);
+  const pos = new Float32Array(3 * (nb + np_)), g = new THREE.BufferGeometry();
+  g.setAttribute('position', new THREE.BufferAttribute(pos, 3)); g.setIndex(new THREE.BufferAttribute(Uint32Array.from(idx), 1));
+  const mesh = new THREE.Mesh(g, black); mesh.frustumCulled = false; mesh.matrixAutoUpdate = false; ANA.group.add(mesh);
+  return { apply() {                                                             // new vertex = rest + blend of its rig vertices' displacement
+    const P = skin.geometry.attributes.position.array, R0 = skin.geometry.attributes.restPos.array; pos.set(P, 0);
+    for (let i = 0; i < np_; i++) { let x = pv[3 * i], y = pv[3 * i + 1], z = pv[3 * i + 2];
+      for (let k = 0; k < 4; k++) { const j = 3 * wi[4 * i + k], w = ww[4 * i + k]; if (!w) continue; x += w * (P[j] - R0[j]); y += w * (P[j + 1] - R0[j + 1]); z += w * (P[j + 2] - R0[j + 2]); }
+      pos[3 * (nb + i)] = x; pos[3 * (nb + i) + 1] = y; pos[3 * (nb + i) + 2] = z; }
+    g.attributes.position.needsUpdate = true; g.computeVertexNormals(); } };
+})();
 
 // ---- designs
 const alu = new THREE.MeshPhysicalMaterial({ color: 0xa4a7ac, metalness: 1.0, roughness: 0.36 });
@@ -126,7 +112,7 @@ function show() {
   const fr = dz.data.clips[sh.clip].frames[Math.min(sh.f0 + i, dz.data.clips[sh.clip].frames.length - 1)];
   const [plane, elev, axial, flex, pron] = fr.p, pose = { plane, elev, axial, flex, pron };
   const { segs, lift } = segmentTransforms(L, pose, { girdle: true, scale: ANA.scale }); const M = frameM(lift);
-  ANA.update(pose, 0, { girdle: true }); capApply(); ANA.setFrame(M);
+  ANA.update(pose, 0, { girdle: true }); mq.apply(); ANA.setFrame(M);
   // swap: the outgoing design shrinks into the shoulder over the last XF frames, the next grows out of it
   let sc = 1; if (i < XF && k > 0 && SH[k - 1].design !== sh.design) sc = ease(i / XF); if (i >= sh.n - XF && k < SH.length - 1 && SH[k + 1].design !== sh.design) sc = ease((sh.n - 1 - i) / XF);
   for (const [j, dd] of D.entries()) {
@@ -144,6 +130,7 @@ $('play').onclick = () => { playing = !playing; $('play').textContent = playing 
 $('scrub').oninput = e => { playing = false; $('play').textContent = 'Play'; f = +e.target.value; show(); };
 $('cam').onclick = e => { filmCam = !filmCam; e.target.setAttribute('aria-pressed', filmCam); e.target.textContent = filmCam ? 'Film camera' : 'Free camera'; };
 window.__film = { go: fr => { f = fr; playing = false; show(); }, NF, camera, controls,
+  view: (pos, target, fov) => { filmCam = false; camera.position.set(...pos); controls.target.set(...target); if (fov) camera.fov = fov; camera.updateProjectionMatrix(); },   // free close-up camera (world m)
   stop: () => renderer.setAnimationLoop(null), draw: () => { controls.update(); renderer.render(scene, camera); } };   // headless capture (tools/preview_film.mjs): render on demand
 show();
 renderer.setAnimationLoop(() => {

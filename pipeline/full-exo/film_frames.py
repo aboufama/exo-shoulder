@@ -2,7 +2,7 @@
 
 Writes film_render/: designs.glb (every design's exo parts, nodes "D<k>|<group>|<part>|i", group-local mm) and one
 motion file per chunk (frames a..b): camera, which design shows and its swap scale, each group's world transform
-(viewer metres), the mannequin's posed vertices (int16, 0.05 mm) and the body faces. Egg head as in film.html.
+(viewer metres), the mannequin's posed vertices (int16, 0.05 mm) and its faces (mannequin.py: rig skin + display head).
 
     python3 film_frames.py [chunk=12]
 env FILM=<plan json> (default designs/film.json), FILM_RENDER=<out dir> (default film_render/)
@@ -25,25 +25,11 @@ for k, d in enumerate(FILM["designs"]):
         m = trimesh.Trimesh(vv.astype(np.float32), fa, process=False)
         sc.add_geometry(m, node_name=f"D{k}|{node}", geom_name=f"D{k}|{node}")                              # no normals: Blender smooths
 sc.export(os.path.join(OUT, "designs.glb"))
-# ---- faceless mannequin head: the head keeps its proportions, its surface is Laplacian-smoothed (no nose, eyes, lips),
-#      blended to the untouched neck; the same rule as film.html
-F = BP.F; V0 = BP.posed(dict(plane=0, elev=0, axial=0, flex=0, pron=0)); c = np.array(HD["mid"]) * 1.0
-r_ax = np.hypot(V0[:, 0] - c[0], V0[:, 2] - c[2]); yrel = V0[:, 1] - c[1]
-w_head = np.clip((yrel + 95 * S) / (35 * S), 0, 1) * (r_ax < 210 * S)                    # 0 at the neck, 1 from the jaw up (210: the face front is 158-176 mm off the head axis)
-w_head = w_head * w_head * (3 - 2 * w_head); hidx = np.nonzero(w_head > 0)[0]
-from scipy.spatial import cKDTree
-from scipy.sparse import csr_matrix
-H = V0[hidx]; tree = cKDTree(H); pairs = tree.query_pairs(24 * S, output_type="ndarray")
-ii = np.r_[pairs[:, 0], pairs[:, 1], np.arange(len(H))]; jj = np.r_[pairs[:, 1], pairs[:, 0], np.arange(len(H))]
-d2 = np.sum((H[ii] - H[jj]) ** 2, 1); Wk = csr_matrix((np.exp(-d2 / (2 * (10 * S) ** 2)), (ii, jj)), shape=(len(H), len(H)))
-Wk = csr_matrix(Wk.multiply(1.0 / np.asarray(Wk.sum(1)).ravel()[:, None]))
-hc = H.mean(0) + np.array([-10 * S, 10 * S, 0])                                         # head centre (for the size restore)
-Hf = H[w_head[hidx] > 0.99]; E_c = 0.5 * (Hf.min(0) + Hf.max(0)); E_ax = 0.5 * (Hf.max(0) - Hf.min(0)) * 0.94   # the head's box -> ellipsoid
-def egg(V):                                                                                  # faceless head for one frame: a smooth egg
-    X = V.copy(); Hh = X[hidx]; ce = E_c + (Hh.mean(0) - H.mean(0))                         # (the radius-restored smoothing kept the skull's lumps)
-    d = Hh - ce; d /= np.linalg.norm(d, axis=1, keepdims=True) + 1e-12; t = 1.0 / np.sqrt(((d / E_ax) ** 2).sum(1))
-    X[hidx] = Hh + w_head[hidx][:, None] * (ce + d * t[:, None] - Hh); return X
-CV = np.zeros((0, 3))
+# ---- mannequin: the rig's skin below the lower neck + the smooth featureless display head and neck of mannequin.py
+#      (mannequin_head.json, built once; the same mesh film.html shows). Compact vertex numbering.
+import mannequin as MQ
+if not os.path.exists(MQ.OUT): json.dump(MQ.build(), open(MQ.OUT, "w"), separators=(",", ":"))
+MQM = MQ.Mannequin(); F = MQM.F; V0 = MQM.verts(BP.V0.astype(float))
 # ---- timeline
 shots, T = [], 0
 for s in FILM["shots"]:
@@ -67,7 +53,7 @@ for f in range(NF):
     X = {g: (np.array(G).reshape(3, 3), np.zeros(3)) for g, G in fr["G"].items()}; X["H"] = (np.array(sg[2][0]), np.array(sg[2][1])); X["F"] = (np.array(sg[3][0]), np.array(sg[3][1]))
     Xw = {g: np.c_[R * 1e-3 * scl, (t * scl + lift) * 1e-3].round(7).ravel().tolist() for g, (R, t) in X.items()}     # world (m) = 1e-3 (scl (R x + t) + lift)
     frames.append(dict(cam=cam_at(f), design=s["design"], scale=scl, X=Xw, label=FILM["designs"][s["design"]]["label"]))
-    verts.append(np.round((egg(BP.posed(pose)) + lift) * 20).astype(np.int16))
+    verts.append(np.round((MQM.verts(BP.posed(pose)) + lift) * 20).astype(np.int16))
     if f % 100 == 0: print("frame", f, "/", NF, flush=True)
 faces = base64.b64encode(gzip.compress(F.astype(np.int32).tobytes())).decode()
 for a in range(0, NF, CH):

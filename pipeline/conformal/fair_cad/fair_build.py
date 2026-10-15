@@ -37,14 +37,14 @@ def make_members():
     mem = {}
     lv1 = joint_lv(1)
     bt = math.radians(float(os.environ.get("TAB_BETA", 0.0))); sd = math.cos(bt) * np.array([0, -1.0, 0]) + math.sin(bt) * np.cross([1.0, 0, 0], [0, -1.0, 0])
-    mem["base"] = MB.Member("D4-01 scapula base", "base", [dict(axis=hub_axis(0, 1), role=role(0, 1), lv=lv1, joint=1)],
+    mem["base"] = MB.make_member("D4-01 scapula base", "base", [dict(axis=hub_axis(0, 1), role=role(0, 1), lv=lv1, joint=1)],
                             strip_dir=sd, strip_len=MOUNT_LEN, R0=lv1["S"], flat=True)
     if BASE_TOP_MOUNT:                                                                  # 4c: base is the outer member at J1 -> anchored from above
         mem["base"] = MB.Member("D4-01 scapula base", "base", [dict(axis=hub_axis(0, 1), role=role(0, 1), lv=lv1, joint=1)],
                                 strip_dir=sd, strip_len=0.0, R0=lv1["S"], flat=True); mem["base"].disc_r = 14.0   # O28: the 3 M2 back-plate holes need a wall outside the O22 cap
     for mi in range(1, N):
         hubs = [dict(axis=hub_axis(mi, 0), role=role(mi, mi), lv=joint_lv(mi), joint=mi), dict(axis=hub_axis(mi, 1), role=role(mi, mi + 1), lv=joint_lv(mi + 1), joint=mi + 1)]
-        mem[f"l{mi}"] = MB.Member(f"D4-{mi + 1:02d} link {mi}", f"l{mi}", hubs, theta=A[mi - 1])
+        mem[f"l{mi}"] = MB.make_member(f"D4-{mi + 1:02d} link {mi}", f"l{mi}", hubs, theta=A[mi - 1])
     if BASE_TOP_MOUNT:                                                                  # link 1 stays flat under the base disc's overhang
         for h in mem["l1"].hubs:
             if h["joint"] == 1: h["flat_r"] = mem["base"].disc_r + 1.0
@@ -173,7 +173,7 @@ if __name__ == "__main__" and STAGE == "members":
         hard |= v
     np.save(os.path.join(OUT, "hard_frames.npy"), np.array([p for (p, _), h_ in zip(E.frames, hard) if h_], int))
     for n in names:
-        m = mem[n]; log(f"{n}: hubs {[(j, r, round(g, 2)) for j, r, g in m.hub_report]} (hub plane - need)  min gap {m.gap_min:.2f}  t {m.t_min:.2f}  Lt {[round(x['Lt'], 1) for x in m.hubs]}")
+        m = mem[n]; log(f"{n}: hubs {[(j, r, round(g, 2)) for j, r, g in m.hub_report]} (hub plane - need)  min gap {m.gap_min:.2f}  t {m.t_min:.2f}  Lt {[round(x.get('Lt', 0.0), 1) for x in m.hubs]}" + (f"  strap spine: {m.fit_info}  arm gap over need med {m.fair_report['gap_med']:.2f} min {m.fair_report['gap_min']:.2f}" if hasattr(m, 'fit_info') else ''))
         for j, r, g in m.hub_report:                                                 # r18 s1394 #1: J3 168 mm over its need, l2 twisted (0.52 cm3)
             if g > STANDOFF_MM: log(f"WARNING stand-off: {n} hub {j} ({r}) rides {g:.0f} mm above its need (> {STANDOFF_MM:.0f}): not a close-fitting design, the ribbon may twist")
     sol = {}
@@ -183,14 +183,14 @@ if __name__ == "__main__" and STAGE == "members":
         if s.Volume() <= 0: log(f"WARNING inside-out: {n} has volume {s.Volume() / 1000:.2f} cm3 (reversed or self-intersecting shell: contact judges would miss penetrations)")
     from OCP.BRepTools import BRepTools
     for n, s in sol.items(): BRepTools.Write_s(s.wrapped, os.path.join(OUT, f"{n}.brep"))
-    pickle.dump(dict(FACES=FACES, mem={n: dict(bot=m.bot, top=m.top, top_hw=m.top_hw, xs=m.xs, ys=m.ys, c0=m.chart.c0, e1=m.chart.e1, R0=m.chart.R0, hubs=m.hubs) for n, m in mem.items()}), open(os.path.join(OUT, "fields.pkl"), "wb"))
+    pickle.dump(dict(FACES=FACES, mem={n: dict(bot=m.bot, top=m.top, top_hw=m.top_hw, xs=m.xs, ys=m.ys, c0=m.chart.c0, e1=m.chart.e1, R0=m.chart.R0, hubs=m.hubs, strap=getattr(m, "sp", None)) for n, m in mem.items()}), open(os.path.join(OUT, "fields.pkl"), "wb"))
     log("members done")
 
 # ================================================================ stage "assemble": features, hardware, arm end, export
-MAT = {"Ti": ("Ti-6Al-4V", 4.43), "igus": ("iglidur G", 1.46), "A2": ("A2 stainless", 7.9), "174": ("17-4PH H900", 7.8), "PEEK": ("PEEK", 1.32), "brg": ("52100 bearing steel", 7.8), "Al": ("7075-T6", 2.81), "AlSi": ("AlSi10Mg (SLM)", 2.67)}
+MAT = {"NdFeB": ("NdFeB N52", 7.5), "FR4": ("FR-4", 1.85), "Ti": ("Ti-6Al-4V", 4.43), "igus": ("iglidur G", 1.46), "A2": ("A2 stainless", 7.9), "174": ("17-4PH H900", 7.8), "PEEK": ("PEEK", 1.32), "brg": ("52100 bearing steel", 7.8), "Al": ("7075-T6", 2.81), "AlSi": ("AlSi10Mg (SLM)", 2.67)}
 def mat_of(name):
     n = name.lower()
-    for k, key in (("alsi10mg", "AlSi"), ("iso 10642", "A2"), ("igus", "igus"), ("din 7984", "A2"), ("dowel", "A2"), ("17-4", "174"), ("peek", "PEEK"), ("bearing", "brg"), ("7075", "Al"), ("ti-6al-4v", "Ti")):
+    for k, key in (("(ndfeb)", "NdFeB"), ("(fr-4", "FR4"), ("alsi10mg", "AlSi"), ("iso 10642", "A2"), ("igus", "igus"), ("din 7984", "A2"), ("dowel", "A2"), ("17-4", "174"), ("peek", "PEEK"), ("bearing", "brg"), ("7075", "Al"), ("ti-6al-4v", "Ti")):
         if k in n: return key
     return "Ti"
 
@@ -246,7 +246,7 @@ def assemble():
         user = g in ("H", "F") and not (nm.startswith(("BOTTOM +", "J", "UPPER ARM CUFF (conformal", "M4x6 ISO 10642")))
         vs_, tr_ = s.tessellate(0.02, 0.1); vol = abs(trimesh.Trimesh(np.array([[q.x, q.y, q.z] for q in vs_]), tr_, process=True).volume) / 1000.0; mk = mat_of(nm)
         rows.append(dict(k=k_, group=g, name=nm, vol_cm3=round(vol, 3), material="user part" if user else MAT[mk][0], mass_g=None if user else round(vol * MAT[mk][1], 2), valid=bool(s.isValid()), faces=len(s.Faces())))
-        if nm.startswith(("D4-", "BOTTOM +", "UPPER ARM CUFF")): cq.exporters.export(cq.Workplane().add(s), os.path.join(OUT, "step", nm.split(" ")[0].replace("/", "_") + ".step"))
+        if nm.startswith(("D4-", "BOTTOM +", "UPPER ARM CUFF")) or (HWR.JOINT == "v5" and nm.split(" ")[0][:1] == "J" and "-" in nm.split(" ")[0]): cq.exporters.export(cq.Workplane().add(s), os.path.join(OUT, "step", nm.split(" ")[0].replace("/", "_") + ".step"))
     json.dump(dict(key=KEY, n=N, FACES=FACES, parts=rows), open(os.path.join(OUT, "parts.json"), "w"), indent=1)
     tot = sum(r["mass_g"] for r in rows if r["mass_g"]); log(f"assembled {len(parts)} parts; custom mass {tot:.0f} g")
 

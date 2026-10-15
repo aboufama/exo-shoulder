@@ -1,5 +1,13 @@
 [
  {
+  "id": "cad_r18_n3_s1392_1_v5",
+  "label": "3R r18 s1392 #1, v5 joint + strap links"
+ },
+ {
+  "id": "cad_r18_n3_s1392_1_c1",
+  "label": "r18 s1392 #1, fair links, J3 hardware on its axis + level neck root (agent C)"
+ },
+ {
   "id": "cad_r18_n3_s1392_1_f300",
   "label": "FINAL 2026-10-15: 3R range first, fair links (r18 s1392 #1)"
  },

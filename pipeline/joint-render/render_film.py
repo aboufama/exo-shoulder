@@ -1,6 +1,6 @@
 """Blender Cycles: the mannequin film (film_frames.py chunk -> PNG frames).
 
-Matte-black mannequin (smooth egg head, muscle relief from the rig), every design's exo parts parented to one empty per
+Matte-black mannequin (film_frames.py / mannequin.py: smooth featureless display head, muscle relief from the rig), every design's exo parts parented to one empty per
 (design, group) whose world matrix comes from the chunk file each frame; the showing design swaps with a shrink/grow
 about the shoulder. Dark studio: charcoal gradient seen by the camera, cool rim softboxes that draw the black body's
 outline, a warm key for the metal. Exo look = the user's: bead-blasted metal with grain, polished screws, iglidur orange.
@@ -45,9 +45,11 @@ def principled(name, color, metal, rough, bump=None, coat=0.0, sheen=0.0):
     return m
 alu = principled("blasted", (0.60, 0.615, 0.635), 1.0, 0.36, bump=(9.0, 0.18)); stainless = principled("stainless", (0.80, 0.80, 0.81), 1.0, 0.09)
 iglide = principled("iglide", (0.80, 0.42, 0.03), 0.0, 0.42); steel = principled("steel", (0.82, 0.83, 0.85), 1.0, 0.13)
-black = principled("mannequin", (0.008, 0.008, 0.009), 0.0, 0.72, coat=0.04, sheen=0.05)     # matte black (user look); sheen 0.35 read as grey
-for nd in black.node_tree.nodes:                                                                  # default specular (0.5) under the softboxes read as mid-grey
-    if nd.type == "BSDF_PRINCIPLED" and "Specular IOR Level" in nd.inputs: nd.inputs["Specular IOR Level"].default_value = 0.15
+# matte black display mannequin (user look): no coat, no sheen, very rough, low specular - face-on it stays black, the
+# softbox rims draw its outline at grazing angles (Fresnel). Coat 0.04 + sheen 0.05 + roughness 0.72 read charcoal and glossy.
+black = principled("mannequin", (0.014, 0.014, 0.015), 0.0, 0.9)
+for nd in black.node_tree.nodes:
+    if nd.type == "BSDF_PRINCIPLED" and "Specular IOR Level" in nd.inputs: nd.inputs["Specular IOR Level"].default_value = 0.12
 def mat_for(n):
     l = n.lower()
     if any(k in l for k in ("din 7984", "iso 10642", "dowel", "screw")): return stainless           # every screw polished (user look)

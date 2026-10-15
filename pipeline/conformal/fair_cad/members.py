@@ -64,8 +64,14 @@ def fair_field(target, lb, clamp, inside, lam, a0=0.02, h=GRID, iters=12, ub=Non
         act |= viol; acu |= vio2
     return u.reshape(nx, ny)
 
+JOINT = __import__("os").environ.get("JOINT", "v4")                                    # "v5": O20 hub, 2x MR117-2RS (joint_v5.py)
+if JOINT == "v5": HUB_R = 10.0                                                          # the v5 boss / cap / pad radius (user: "We can go to 20mm hubs")
+CAP_RK = HUB_R + 0.0 if JOINT == "v5" else 11.3                                          # cap dome keep-out radius (v4: O22 cap + 0.3)
 def stack_levels(F, t_lo=T_LO):
-    """v4 encoder stack (joint_v4.py) along the joint axis from the lower member's skin-side face F"""
+    """joint stack along the joint axis from the lower member's skin-side face F: v4 (joint_v4.py) or v5 (joint_v5.py)"""
+    if JOINT == "v5":
+        import joint_v5 as J5
+        return J5.levels(F, t_lo)
     import joint_v4 as J4
     lv = J4.levels(F)
     if t_lo != J4.T_LO:                                                                  # arm-end lower member (thicker plate)
@@ -179,7 +185,7 @@ class Member:
             if h["role"] != "upper": continue
             c = np.clip(D @ h["axis"], 1e-3, 1); lv = h["lv"]; r_in = lv["U1"] * np.sqrt(1 - c * c) / c
             crown = (lv["top"] + 0.3) / c; rim = lv["U1"] / c
-            cap = np.maximum(cap, np.where(r_in <= 11.3, rim + (crown - rim) * np.sqrt(np.clip(1 - (r_in / 11.3) ** 2, 0, 1)) - top, 0.0))
+            cap = np.maximum(cap, np.where(r_in <= CAP_RK, rim + (crown - rim) * np.sqrt(np.clip(1 - (r_in / CAP_RK) ** 2, 0, 1)) - top, 0.0))
         self.top_hw = top + np.maximum(cap, 0.0)
         self.fh = RectBivariateSpline(self.xs, self.ys, self.top_hw, kx=1, ky=1, s=0)
         self.fb = RectBivariateSpline(self.xs, self.ys, bot, kx=3, ky=3, s=0); self.ft = RectBivariateSpline(self.xs, self.ys, top, kx=3, ky=3, s=0)
@@ -397,3 +403,296 @@ def location_constraint(A, B, frames, core=None, clear=CLEAR_MM, sub=2):
     from scipy.ndimage import maximum_filter
     full = maximum_filter(full, size=sub + 1)
     return np.where(np.isfinite(full), full, np.nan)
+
+
+# ================================================================ STRAP links (LINK_STYLE=strap): the user's CAD standard
+# Each link is ONE constant section (2 HW x T_LINK, edges rounded STRAP_E) on ONE planar fair spine, leaving each hub
+# through an exact flat circular pad. Why it cannot twist: both hub axes pass through GH, so the plane spanned by them
+# contains both axes; the spine lies in that plane and the strap is the spine extruded across it (along the plane's normal
+# ez) - a bent flat bar. Every hub pad plane contains ez too, so the pads are the straight ends of the same planar curve
+# and the whole skin side (pads + strap) is one extruded G2 curve: straight on each pad, a clamped cubic B-spline with
+# few control points between (its first / last three control points on the pad lines: tangent AND zero curvature at the
+# joins -> G2 by construction). The spine is fitted to the floor the band evaluator's fitted shape gives (its ribbon
+# underside + the dense skin envelope + stacking floors, members' need) - as low as the floor allows, fair (bending
+# energy), bend radius >= STRAP_RMIN, ramp <= RAMP_TOP. Walls are designed (sheet.sheet_solid_v2): true cylinders about
+# each hub axis around the pads, the strap's own normal along it (rectangular section). Upper hubs: a boss (U0..H1)
+# whose top blends G2 into the strap top over GUSSET mm; lower hubs: a turned skin side (centre flat + cone, smooth
+# corners) fitted under the pad where the skin allows, never above the face F.
+import os as _os
+LINK_STYLE = _os.environ.get("LINK_STYLE", "sheet")
+STRAP_E = float(_os.environ.get("STRAP_E", 1.2))                                         # strap edge rounds (user: 1-1.5)
+PAD_E = {"upper": (0.4, 0.1), "lower": (0.8, 0.4)}                                       # (skin-side, outer) rounds at a pad: boss top 0.1 sits under the cap skirt
+GUSSET = float(_os.environ.get("GUSSET_MM", 7.0)); STRAP_RMIN = float(_os.environ.get("STRAP_RMIN", 8.0))
+FILLET_K = 4.0; STRAP_FAIR = float(_os.environ.get("STRAP_FAIR", 30.0)); DIMPLE_MAX = float(_os.environ.get("DIMPLE_MAX", 8.0)); DIMPLE_BW = 1.5
+L_FLAT_UP = float(_os.environ.get("L_FLAT_UP", 2.0))                                     # an upper link runs flat this far past its pad (clear of the cap skirt)
+
+def _ss(x): return smootherstep((np.asarray(x, float) + 1.0) / 2.0)                    # 0 at x <= -1, 1 at x >= 1, C2
+def _sstep_int(x):
+    """integral of _ss from -inf to x (C3): 0 for x <= -1, x for x >= 1"""
+    x = np.asarray(x, float); t = np.clip((x + 1.0) / 2.0, 0.0, 1.0)
+    return np.where(x >= 1.0, x, 2.0 * (t ** 6 - 3.0 * t ** 5 + 2.5 * t ** 4))       # 2 * int_0^t (6s^5 - 15s^4 + 10s^3) ds
+def _smax(a, b, k): return -_smin(-a, -b, k)
+
+def dimple_profile(r, zb, zc, r1, al, bw=DIMPLE_BW):
+    """turned skin side of a lower pad: flat at zc out to r1, cone at al back up to the face zb, smooth (C3) corners of
+    half-width bw: z(r) = zc + tan(al) * (I((r - r1)/bw) - I((r - r2)/bw)) * bw, r2 = r1 + (zb - zc)/tan(al)"""
+    if zc >= zb - 1e-9 or al <= 0: return np.full_like(np.asarray(r, float), zb)
+    r2 = r1 + (zb - zc) / math.tan(al)
+    return zc + math.tan(al) * bw * (_sstep_int((np.asarray(r, float) - r1) / bw) - _sstep_int((np.asarray(r, float) - r2) / bw))
+
+def fit_dimple(rr, zneed, zb, r_max, depth_max=DIMPLE_MAX, bw=DIMPLE_BW):
+    """lowest-stand-off profile of the family above zneed(rr) (axial heights per ring), inside r_max, <= depth_max under zb"""
+    zn = np.where(np.isfinite(zneed), np.minimum(zneed, zb), -np.inf); floor = zb - depth_max; nf = np.maximum(zn, floor); w = np.maximum(rr, 0.1)
+    best = (float(np.sum((zb - nf) * w)), zb, 0.0, 0.0)                                  # no dimple
+    if np.all(zn >= zb - 0.05): return dict(zc=zb, r1=0.0, al=0.0, J=best[0])
+    for al in np.radians(np.arange(5.0, 45.01, 2.5)):
+        for r1 in np.arange(bw, r_max, 0.25):
+            lo, hi = floor, zb - 0.05
+            ok = lambda zc: (r1 + (zb - zc) / math.tan(al) + bw <= r_max) and bool(np.all(dimple_profile(rr, zb, zc, r1, al, bw) >= zn - 1e-6))
+            if not ok(hi): continue
+            if ok(lo): zc = lo
+            else:
+                for _ in range(30):
+                    mid = 0.5 * (lo + hi); lo, hi = (lo, mid) if ok(mid) else (mid, hi)
+                zc = hi
+            J = float(np.sum((dimple_profile(rr, zb, zc, r1, al, bw) - nf) * w))
+            if J < best[0] - 1e-9: best = (J, zc, r1, al)
+    return dict(J=best[0], zc=best[1], r1=best[2], al=best[3])
+
+class Strap(Member):
+    """a link (2 hubs) or the base (1 hub + flat mount tab) as a strap; same API as Member for the pipeline"""
+    def __init__(self, name, group, hubs, theta=None, strip_dir=None, strip_len=None, R0=None, flat=False):
+        super().__init__(name, group, hubs, theta, strip_dir, strip_len, R0, flat)
+        a0 = np.asarray(hubs[0]["axis"], float)
+        if len(hubs) == 2:
+            a1 = np.asarray(hubs[1]["axis"], float); ez = unit(np.cross(a0, a1)); self.th = math.acos(float(np.clip(a0 @ a1, -1, 1)))
+        else:
+            s = unit(np.asarray(strip_dir, float) - (np.asarray(strip_dir, float) @ a0) * a0); ez = unit(np.cross(a0, s))
+            self.th = math.atan((max(strip_len, 0.0) + HUB_R) / self._zb(hubs[0]))       # tab end (polar angle)
+        self.ex, self.ez = a0, ez; self.ey = np.cross(ez, a0); self.sp = None
+        self.phik = [0.0] + ([self.th] if len(hubs) == 2 else [])
+    # ---- levels of a hub pad: skin side (zb) and top (zt: lower seat S, upper boss top H1 under the cap skirt)
+    @staticmethod
+    def _zb(h): return h["lv"]["F"] if h["role"] == "lower" else h["lv"]["U0"]
+    @staticmethod
+    def _zt(h): return h["lv"]["S"] if h["role"] == "lower" else h["lv"].get("H1", h["lv"]["U1"])
+    def _polar(self, D):
+        px, py, pz = D @ self.ex, D @ self.ey, D @ self.ez; cps = np.maximum(np.hypot(px, py), 1e-6)
+        return np.arctan2(py, px), cps, pz / cps
+    def _r_at(self, D, k, z):
+        c = np.clip(D @ self.hubs[k]["axis"], 1e-3, 1); return z * np.sqrt(1 - c * c) / c, c
+    # ---- the skin-side spine in polar form Q(phi) (radius from GH in the strap plane) and its outer offset
+    def _line(self, k, phi, z):
+        return z / np.maximum(np.cos(np.asarray(phi, float) - self.phik[k]), 1e-3)
+    def Qb(self, phi):
+        phi = np.asarray(phi, float); h = self.hubs; zA = self._zb(h[0])
+        if len(h) == 1: return self._line(0, phi, zA)
+        zB = self._zb(h[1])
+        if self.sp is None:                                                              # before the fit: blend of the two pad lines
+            s = smootherstep(phi / self.th); return (1 - s) * self._line(0, phi, zA) + s * self._line(1, phi, zB)
+        sp = self.sp; out = np.interp(phi, sp["phi_b"], sp["Q_b"])
+        out = np.where(phi <= sp["phi_b"][0], self._line(0, phi, zA), out); return np.where(phi >= sp["phi_b"][-1], self._line(1, phi, zB), out)
+    def Qt(self, phi):
+        phi = np.asarray(phi, float); h = self.hubs; zA = self._zb(h[0]) + T_LINK
+        if len(h) == 1 or self.sp is None: return self.Qb(phi) + T_LINK if len(h) == 2 else self._line(0, phi, zA)
+        sp = self.sp; zB = self._zb(h[1]) + T_LINK; out = np.interp(phi, sp["phi_t"], sp["Q_t"])
+        out = np.where(phi <= sp["phi_t"][0], self._line(0, phi, zA), out); return np.where(phi >= sp["phi_t"][-1], self._line(1, phi, zB), out)
+    def nang(self, phi):
+        """angle (in the strap plane, from ex) of the spine's outward normal at polar angle phi: the hub axis on a pad"""
+        phi = np.asarray(phi, float)
+        if len(self.hubs) == 1: return np.zeros_like(phi)
+        if self.sp is None: return np.clip(phi, 0.0, self.th)
+        sp = self.sp; out = np.interp(phi, sp["phi_b"], sp["nu"])
+        return np.where(phi <= sp["phi_b"][0], 0.0, np.where(phi >= sp["phi_b"][-1], self.th, out))
+    # ---- planform (true mm on the skin side): hub discs + the strap / tab capsule, G2 blends
+    def sdf2(self, x, y):
+        x = np.asarray(x, float); y = np.asarray(y, float); D = self.chart.dirs(x, y); phi, cps, tps = self._polar(D)
+        ds = [self._r_at(D, k, self._zb(h))[0] - HUB_R for k, h in enumerate(self.hubs)]
+        Q = self.Qb(phi); z = Q * tps; along = Q * np.maximum(np.maximum(-phi, phi - self.th), 0.0)
+        strap = np.hypot(along, z) - HW; out = _smin(ds[0], strap, FILLET_K)
+        if len(ds) == 2: out = _smin(out, ds[1], FILLET_K)
+        return out
+    def _pad_w(self, D):
+        """blend weight of each hub pad (1 on the pad, 0 on the strap 6 mm past its rim)"""
+        return [1.0 - smootherstep((self._r_at(D, k, self._zb(h))[0] - HUB_R - 0.5) / 6.0) for k, h in enumerate(self.hubs)]
+    def e_bot(self, x, y):
+        D = self.chart.dirs(np.asarray(x, float), np.asarray(y, float)); e = np.full(D.shape[:-1], STRAP_E)
+        for w, h in zip(self._pad_w(D), self.hubs): e = e + w * (PAD_E[h["role"]][0] - STRAP_E)
+        return e
+    def e_top(self, x, y):
+        D = self.chart.dirs(np.asarray(x, float), np.asarray(y, float)); e = np.full(D.shape[:-1], STRAP_E)
+        for w, h in zip(self._pad_w(D), self.hubs): e = e + w * (PAD_E[h["role"]][1] - STRAP_E)
+        return e
+    def wall_dir(self, P):
+        P = np.asarray(P, float); phi = np.arctan2(P @ self.ey, P @ self.ex); nu = self.nang(phi)
+        return np.cos(nu)[:, None] * self.ex[None] + np.sin(nu)[:, None] * self.ey[None]
+    # ---- analytic fields (chart mm -> radius from GH along the chart direction)
+    def field_bot(self, x, y):
+        D = self.chart.dirs(np.asarray(x, float), np.asarray(y, float)); phi, cps, _ = self._polar(D); b = self.Qb(phi) / cps
+        for k, h in enumerate(self.hubs):
+            dm = h.get("_dimple")
+            if h["role"] == "lower" and dm is not None and dm["zc"] < self._zb(h) - 1e-6:
+                r, c = self._r_at(D, k, self._zb(h)); b = np.minimum(b, dimple_profile(r, self._zb(h), dm["zc"], dm["r1"], dm["al"]) / c)
+        return b
+    def field_top(self, x, y):
+        D = self.chart.dirs(np.asarray(x, float), np.asarray(y, float)); phi, cps, _ = self._polar(D); t = self.Qt(phi) / cps
+        for k, h in enumerate(self.hubs):
+            if h["role"] != "upper": continue
+            zt = self._zt(h); r, c = self._r_at(D, k, zt); w = 1.0 - smootherstep((r - (HUB_R - PAD_E["upper"][1])) / GUSSET)
+            boss = (t - 2.5) + w * (zt / c - (t - 2.5))                                    # the boss top plane, easing to 2.5 under the strap top
+            t = _smax(t, boss, 1.5)                                                       # (exactly the plane on the pad, exactly the strap past the gusset)
+        return t
+    def rho_bot(self, X, Y): return self.field_bot(X, Y)
+    def rho_top(self, X, Y): return self.field_top(X, Y)
+    def max_bot_at(self, dirs):
+        out = np.full(dirs.shape[:-1], np.inf)
+        for k, h in enumerate(self.hubs):
+            r, c = self._r_at(dirs, k, self._zb(h)); out = np.where(r <= HUB_R + 0.5, np.minimum(out, self._zb(h) / c), out)
+        return out
+
+    # ---- the spine fit
+    def _floor(self, need, valid):
+        """per polar angle: the lowest skin-side spine radius Q(phi) that keeps the extruded strap on or above need across
+        its width (max over the band of need * cos(psi)); the pad discs are left to the joint raise logic"""
+        D = self.D; phi, cps, tps = self._polar(D); z = self.Qb(phi) * tps
+        outside = np.ones(phi.shape, bool)
+        for k, h in enumerate(self.hubs): outside &= self._r_at(D, k, self._zb(h))[0] > HUB_R - 0.5
+        band = (np.abs(z) <= HW) & valid & outside & (phi > -0.02) & (phi < self.th + 0.02)
+        dphi = 0.3 / max(self.R0, 1.0); bins = np.arange(-0.03, self.th + 0.03 + dphi, dphi); fl = np.full(len(bins), -np.inf)
+        ib = np.clip(np.round((phi[band] - bins[0]) / dphi).astype(int), 0, len(bins) - 1); np.maximum.at(fl, ib, (need * cps)[band])
+        from scipy.ndimage import maximum_filter1d
+        fl = maximum_filter1d(np.where(np.isfinite(fl), fl, -1e9), 3); fl[fl < -1e8] = -np.inf
+        return bins, fl
+    def ramp_report(self, bins, fl):
+        """per hub: how far the floor rises above what a ramp of RAMP_TOP out of the pad allows (> 0: raise the joint)"""
+        k_ = math.tan(RAMP_TOP * D2R); out = {}
+        for k, h in enumerate(self.hubs):
+            dph = np.abs(bins - self.phik[k]); m = np.isfinite(fl) & (dph < math.pi / 2)
+            rho = fl * np.sin(dph); zax = fl * np.cos(dph); d = rho - HUB_R; sel = m & (d > -0.5) & (d <= 12.0)
+            out[h["joint"]] = float(np.max(zax[sel] - (self._zb(h) + k_ * np.maximum(d[sel], 0.0)))) if sel.any() else -1.0
+        return out
+    def fit_spine(self, bins, fl, ks=(2, 3, 4, 5)):
+        from scipy.interpolate import BSpline
+        from scipy.optimize import minimize
+        h = self.hubs; zA, zB = self._zb(h[0]), self._zb(h[1]); th = self.th
+        a1 = np.array([math.cos(th), math.sin(th)]); tA = np.array([0.0, 1.0]); tB = np.array([math.sin(th), -math.cos(th)])
+        LA = lambda w: np.array([zA, 0.0]) + np.multiply.outer(w, tA); LB = lambda w: zB * a1 + np.multiply.outer(w, tB)
+        ok_f = np.isfinite(fl); flv = np.where(ok_f, fl, -1e9)
+        def floor_at(ph): return np.interp(ph, bins, flv)
+        sR, kR = math.sin(RAMP_TOP * D2R), math.tan(RAMP_TOP * D2R); u = np.linspace(0, 1, 260)
+        w0A = HUB_R + (L_FLAT_UP if h[0]["role"] == "upper" else 0.3); w0B = HUB_R + (L_FLAT_UP if h[1]["role"] == "upper" else 0.3)
+        lowers = [(k, hh) for k, hh in enumerate(h) if hh["role"] == "lower"]
+        def ctrl(p, k):
+            I = p[6:].reshape(k, 2)
+            return np.vstack([LA(p[0]), LA(p[0] + p[1]), LA(p[0] + p[1] + p[2]), I, LB(p[3] + p[4] + p[5]), LB(p[3] + p[4]), LB(p[3])])
+        def curve(p, k):
+            C = ctrl(p, k); n = len(C); t = np.r_[[0.0] * 4, np.linspace(0, 1, n - 2)[1:-1], [1.0] * 4]
+            b = BSpline(t, C, 3); P = b(u); d1 = b.derivative(1)(u); d2 = b.derivative(2)(u); sp = np.linalg.norm(d1, axis=1)
+            kap = (d1[:, 0] * d2[:, 1] - d1[:, 1] * d2[:, 0]) / sp ** 3; return P, d1 / sp[:, None], kap, sp
+        def parts(p, k):
+            P, T, kap, sp = curve(p, k); ph = np.arctan2(P[:, 1], P[:, 0]); Q = np.hypot(P[:, 0], P[:, 1])
+            wl = np.r_[np.linspace(HUB_R - 0.5, p[0], 10)]; PA = LA(wl); wl2 = np.linspace(HUB_R - 0.5, p[3], 10); PB = LB(wl2)
+            Ps = np.vstack([P, PA, PB]); phs = np.arctan2(Ps[:, 1], Ps[:, 0]); Qs = np.hypot(Ps[:, 0], Ps[:, 1]); fs = floor_at(phs)
+            g_floor = np.where(fs > -1e8, Qs - fs, 10.0)
+            g_kap = 1.0 / STRAP_RMIN - np.abs(kap)
+            er = np.c_[np.cos(ph), np.sin(ph)]; g_ramp = sR - np.abs((T * er).sum(1))
+            g_mono = np.diff(ph) * 1e3
+            g_ceil = []
+            for k_, hh in lowers:                                                         # the lower link leaves under its seat + ramp
+                dph = np.abs(ph - self.phik[k_]); rho = (Q + T_LINK) * np.sin(dph); m = rho < HUB_R + 25.0
+                g_ceil.append(np.where(m, hh["lv"]["S"] + kR * np.maximum(rho - HUB_R, 0.0) - (Q + T_LINK) * np.cos(dph), 5.0))
+            g = np.concatenate([g_floor, g_kap, g_ramp, g_mono] + g_ceil)
+            ds = sp / (len(u) - 1); f_ = floor_at(ph); gap = np.where(f_ > -1e8, Q - f_, 0.0)
+            J = float(np.sum(gap * ds) + STRAP_FAIR * np.sum(kap ** 2 * ds))
+            return J, g, dict(P=P, T=T, kap=kap, ph=ph, Q=Q, gap=gap, ds=ds)
+        best = None
+        for k in ks:
+            pA, pB = w0A + 2.0, w0B + 2.0
+            phA = math.atan2(pA + 8.0, zA); phB = th - math.atan2(pB + 8.0, zB)
+            I = []
+            for j in range(k):
+                ph = phA + (phB - phA) * (j + 1) / (k + 1); m = np.abs(bins - ph) < 0.06
+                fq = fl[m & ok_f].max() if (m & ok_f).any() else (1 - (j + 1) / (k + 1)) * zA / math.cos(ph) + (j + 1) / (k + 1) * zB / math.cos(th - ph)
+                q = max(fq + 1.0, 0.0); I.append([q * math.cos(ph), q * math.sin(ph)])
+            p0 = np.r_[pA, 4.0, 4.0, pB, 4.0, 4.0, np.ravel(I)]
+            bnds = [(w0A, w0A + 30.0), (0.5, 30.0), (0.5, 30.0), (w0B, w0B + 30.0), (0.5, 30.0), (0.5, 30.0)] + [(-300.0, 300.0)] * (2 * k)
+            try:
+                res = minimize(lambda p: parts(p, k)[0], p0, method="SLSQP", bounds=bnds, constraints=[dict(type="ineq", fun=lambda p: parts(p, k)[1])],
+                               options=dict(maxiter=400, ftol=1e-7))
+                p = res.x
+            except Exception as ex_:
+                print(f"  strap fit k={k}: {ex_}", flush=True); continue
+            J, g, info = parts(p, k); viol = float(max(0.0, -g.min()))
+            key = (viol > 0.05, J if viol <= 0.05 else viol)
+            print(f"  {self.group} spine k={k}: J {J:.1f}  viol {viol:.3f}  gap med {np.median(info['gap'][info['gap'] != 0]) if (info['gap'] != 0).any() else 0:.2f}  "
+                  f"min R {1 / max(np.abs(info['kap']).max(), 1e-6):.1f} mm  ({res.nit} it, {res.message})", flush=True)
+            if best is None or key < best[0] or (not key[0] and not best[0][0] and J < best[0][1] * 0.97): best = (key, k, p, info)
+        key, k, p, info = best
+        return k, p, ctrl(p, k), info, key[0]
+    def build_spine(self, k, p, C):
+        """dense polar samples of the B-spline part of the skin-side spine and its outer offset (T_LINK along the normal)"""
+        from scipy.interpolate import BSpline
+        n = len(C); t = np.r_[[0.0] * 4, np.linspace(0, 1, n - 2)[1:-1], [1.0] * 4]; b = BSpline(t, C, 3); u = np.linspace(0, 1, 3000)
+        P = b(u); d1 = b.derivative(1)(u); T = d1 / np.linalg.norm(d1, axis=1)[:, None]; N = np.c_[T[:, 1], -T[:, 0]]
+        Pt = P + T_LINK * N; nu = np.unwrap(np.arctan2(N[:, 1], N[:, 0]))
+        sp = dict(phi_b=np.arctan2(P[:, 1], P[:, 0]), Q_b=np.hypot(P[:, 0], P[:, 1]), phi_t=np.arctan2(Pt[:, 1], Pt[:, 0]), Q_t=np.hypot(Pt[:, 0], Pt[:, 1]), nu=nu, C=C, k=k, p=p)
+        for a, b_ in (("phi_b", "Q_b"), ("phi_t", "Q_t")):
+            if np.any(np.diff(sp[a]) <= 0): raise ValueError(f"{self.name}: spine not monotone in polar angle ({a})")
+        return sp
+
+    def fields(self, env, sigma_mm=4.0, baseline=None):
+        D = self.D; ok = np.isfinite(env) & (env > 20)
+        need = np.where(ok, env + MARGIN, -np.inf)
+        if baseline is not None:
+            bl = np.where(np.isfinite(baseline), baseline, -np.inf); need = np.maximum(need, np.minimum(bl, self.ramp_cap()))
+        for c in self.extra: need = np.maximum(need, np.where(np.isfinite(c), c, -np.inf))
+        valid = np.isfinite(need); self.need = need
+        # hub reports + lower-pad turned skin sides
+        self.hub_report = []
+        for k, h in enumerate(self.hubs):
+            zb = self._zb(h); r, c = self._r_at(D, k, zb); core = (r <= HUB_R) & valid
+            if core.any(): self.hub_report.append((h["joint"], h["role"], float((zb / c - need)[core].min())))
+            h["_dimple"] = None
+            if h["role"] == "lower":
+                rmax = HUB_R - PAD_E["lower"][0] - 0.5; ring = np.clip(np.round(r / 0.25).astype(int), 0, 400); m = valid & (r <= rmax + 0.5)
+                prof = np.full(401, -np.inf); np.maximum.at(prof, ring[m], (need * c)[m]); rr = np.arange(401) * 0.25; sel = rr <= rmax
+                h["_dimple"] = fit_dimple(rr[sel], prof[sel], zb, rmax)
+        # the spine
+        self.ramp_excess = {}
+        if len(self.hubs) == 2:
+            self.sp = None; bins, fl = self._floor(need, valid)
+            for _ in range(2):                                                               # 2nd pass: band width from the fitted spine
+                self.ramp_excess = self.ramp_report(bins, fl)
+                k, p, C, info, bad = self.fit_spine(bins, fl); self.sp = self.build_spine(k, p, C); self.sp["floor"] = (bins, fl); bins, fl = self._floor(need, valid)
+            self.fit_info = dict(k=k, infeasible=bad, gap_med=float(np.median(info["gap"][info["gap"] != 0])) if (info["gap"] != 0).any() else 0.0,
+                                 rmin=float(1 / max(np.abs(info["kap"]).max(), 1e-6)))
+        else:
+            self.ramp_excess = {}; self.fit_info = dict(k=0)
+        bot = self.field_bot(self.X, self.Y); top = self.field_top(self.X, self.Y)
+        self.bot, self.top = bot, top
+        cap = np.zeros_like(top)
+        for h in self.hubs:
+            if h["role"] != "upper": continue
+            c = np.clip(D @ h["axis"], 1e-3, 1); lv = h["lv"]; r_in = lv["U1"] * np.sqrt(1 - c * c) / c
+            crown = (lv["top"] + 0.3) / c; rim = lv["U1"] / c
+            cap = np.maximum(cap, np.where(r_in <= CAP_RK, rim + (crown - rim) * np.sqrt(np.clip(1 - (r_in / CAP_RK) ** 2, 0, 1)) - top, 0.0))
+        self.top_hw = top + np.maximum(cap, 0.0)
+        self.fh = RectBivariateSpline(self.xs, self.ys, self.top_hw, kx=1, ky=1, s=0)
+        self.fb = RectBivariateSpline(self.xs, self.ys, bot, kx=3, ky=3, s=0); self.ft = RectBivariateSpline(self.xs, self.ys, top, kx=3, ky=3, s=0)
+        ins = self.sdf2(self.X, self.Y) <= 0
+        self.gap_min = float(np.nanmin(np.where(valid & ins, bot - need, np.nan))) if (valid & ins).any() else float("nan")
+        self.t_min = float((top - bot)[ins].min())
+        cores = np.zeros(ins.shape, bool)
+        for k, h in enumerate(self.hubs): cores |= self._r_at(D, k, self._zb(h))[0] <= HUB_R
+        arm = ins & valid & ~cores
+        self.fair_report = dict(gap_med=float(np.nanmedian(np.where(arm, bot - need, np.nan))) if arm.any() else 0.0,
+                                gap_min=float(np.nanmin(np.where(arm, bot - need, np.nan))) if arm.any() else 0.0)
+        return self
+
+    def solid(self, e=None):
+        s, info = SH.sheet_solid_v2(self.chart, self.field_bot, self.field_top, self.sdf2, self.extent(), self.e_bot, self.e_top, self.wall_dir)
+        self.info = info; return s
+
+def make_member(*a, **k):
+    """Member (default sheet links) or Strap (LINK_STYLE=strap)"""
+    return (Strap if LINK_STYLE == "strap" else Member)(*a, **k)

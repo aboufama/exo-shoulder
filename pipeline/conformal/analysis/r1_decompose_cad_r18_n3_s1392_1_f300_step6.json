@@ -1,0 +1,506 @@
+{
+ "design": "cad_r18_n3_s1392_1_f300",
+ "band": [
+  2.0,
+  14.0
+ ],
+ "step": 6,
+ "R1": 0.4101,
+ "lowered_R1": 0.5619,
+ "all": {
+  "area": 1.0,
+  "in_band": 0.4101,
+  "too_close": 0.0,
+  "too_far": 0.5899,
+  "lowered_in_band": 0.5619,
+  "gap_median": 16.39,
+  "too_far_excess_median": 11.09,
+  "slack_median": 4.32,
+  "too_far_mm_from_slack": 5.57,
+  "too_far_mm_from_motion": 7.73,
+  "lost_share": 0.5899
+ },
+ "by_part": {
+  "H|BOTTOM + neck + JN hub (one 5-axis part, 7075-T6 bead blasted)": {
+   "area": 0.3417,
+   "in_band": 0.4986,
+   "too_close": 0.0,
+   "too_far": 0.5014,
+   "lowered_in_band": 0.7174,
+   "gap_median": 14.27,
+   "too_far_excess_median": 4.93,
+   "slack_median": 4.21,
+   "too_far_mm_from_slack": 3.6,
+   "too_far_mm_from_motion": 6.53,
+   "lost_share": 0.1713
+  },
+  "l1|D4-02 link 1 (Ti-6Al-4V)": {
+   "area": 0.282,
+   "in_band": 0.2418,
+   "too_close": 0.0,
+   "too_far": 0.7582,
+   "lowered_in_band": 0.3189,
+   "gap_median": 30.93,
+   "too_far_excess_median": 19.49,
+   "slack_median": 8.66,
+   "too_far_mm_from_slack": 8.62,
+   "too_far_mm_from_motion": 10.86,
+   "lost_share": 0.2138
+  },
+  "l2|D4-03 link 2 (Ti-6Al-4V)": {
+   "area": 0.1866,
+   "in_band": 0.1367,
+   "too_close": 0.0,
+   "too_far": 0.8633,
+   "lowered_in_band": 0.344,
+   "gap_median": 20.21,
+   "too_far_excess_median": 7.26,
+   "slack_median": 3.76,
+   "too_far_mm_from_slack": 3.32,
+   "too_far_mm_from_motion": 4.58,
+   "lost_share": 0.1611
+  },
+  "base|D4-01 scapula base (Ti-6Al-4V)": {
+   "area": 0.1768,
+   "in_band": 0.8249,
+   "too_close": 0.0,
+   "too_far": 0.1751,
+   "lowered_in_band": 0.8684,
+   "gap_median": 9.76,
+   "too_far_excess_median": 17.53,
+   "slack_median": 5.41,
+   "too_far_mm_from_slack": 6.34,
+   "too_far_mm_from_motion": 10.23,
+   "lost_share": 0.031
+  },
+  "H|J3 washer A (igus GTM-1018-005, recessed)": {
+   "area": 0.013,
+   "in_band": 0.0214,
+   "too_close": 0.0,
+   "too_far": 0.9786,
+   "lowered_in_band": 0.7087,
+   "gap_median": 20.97,
+   "too_far_excess_median": 7.15,
+   "slack_median": 11.25,
+   "too_far_mm_from_slack": 7.58,
+   "too_far_mm_from_motion": 5.0,
+   "lost_share": 0.0127
+  }
+ },
+ "by_region": {
+  "H|BOTTOM + neck + JN hub (one 5-axis part, 7075-T6 bead blasted) / neck / bar": {
+   "area": 0.1947,
+   "in_band": 0.6078,
+   "too_close": 0.0,
+   "too_far": 0.3922,
+   "lowered_in_band": 0.8483,
+   "gap_median": 13.01,
+   "too_far_excess_median": 5.03,
+   "slack_median": 5.56,
+   "too_far_mm_from_slack": 4.76,
+   "too_far_mm_from_motion": 10.37,
+   "lost_share": 0.0764
+  },
+  "l2|D4-03 link 2 (Ti-6Al-4V) / ribbon": {
+   "area": 0.1865,
+   "in_band": 0.1368,
+   "too_close": 0.0,
+   "too_far": 0.8632,
+   "lowered_in_band": 0.3437,
+   "gap_median": 20.22,
+   "too_far_excess_median": 7.27,
+   "slack_median": 3.76,
+   "too_far_mm_from_slack": 3.32,
+   "too_far_mm_from_motion": 4.58,
+   "lost_share": 0.161
+  },
+  "l1|D4-02 link 1 (Ti-6Al-4V) / hub J2": {
+   "area": 0.1854,
+   "in_band": 0.0073,
+   "too_close": 0.0,
+   "too_far": 0.9927,
+   "lowered_in_band": 0.0532,
+   "gap_median": 34.49,
+   "too_far_excess_median": 20.55,
+   "slack_median": 9.18,
+   "too_far_mm_from_slack": 9.56,
+   "too_far_mm_from_motion": 12.17,
+   "lost_share": 0.184
+  },
+  "H|BOTTOM + neck + JN hub (one 5-axis part, 7075-T6 bead blasted) / hub J3": {
+   "area": 0.147,
+   "in_band": 0.3539,
+   "too_close": 0.0,
+   "too_far": 0.6461,
+   "lowered_in_band": 0.544,
+   "gap_median": 16.33,
+   "too_far_excess_median": 4.89,
+   "slack_median": 2.23,
+   "too_far_mm_from_slack": 2.66,
+   "too_far_mm_from_motion": 3.44,
+   "lost_share": 0.095
+  },
+  "base|D4-01 scapula base (Ti-6Al-4V) / hub J1": {
+   "area": 0.1214,
+   "in_band": 0.8166,
+   "too_close": 0.0,
+   "too_far": 0.1834,
+   "lowered_in_band": 0.8235,
+   "gap_median": 7.84,
+   "too_far_excess_median": 18.33,
+   "slack_median": 4.14,
+   "too_far_mm_from_slack": 7.8,
+   "too_far_mm_from_motion": 11.99,
+   "lost_share": 0.0223
+  },
+  "l1|D4-02 link 1 (Ti-6Al-4V) / ribbon": {
+   "area": 0.0917,
+   "in_band": 0.7289,
+   "too_close": 0.0,
+   "too_far": 0.2711,
+   "lowered_in_band": 0.873,
+   "gap_median": 11.61,
+   "too_far_excess_median": 2.14,
+   "slack_median": 2.06,
+   "too_far_mm_from_slack": 1.88,
+   "too_far_mm_from_motion": 0.84,
+   "lost_share": 0.0249
+  },
+  "base|D4-01 scapula base (Ti-6Al-4V) / ribbon": {
+   "area": 0.0554,
+   "in_band": 0.8429,
+   "too_close": 0.0,
+   "too_far": 0.1571,
+   "lowered_in_band": 0.9668,
+   "gap_median": 11.07,
+   "too_far_excess_median": 1.29,
+   "slack_median": 6.37,
+   "too_far_mm_from_slack": 2.6,
+   "too_far_mm_from_motion": 5.75,
+   "lost_share": 0.0087
+  },
+  "H|J3 washer A (igus GTM-1018-005, recessed) / neck / bar": {
+   "area": 0.013,
+   "in_band": 0.0214,
+   "too_close": 0.0,
+   "too_far": 0.9786,
+   "lowered_in_band": 0.7087,
+   "gap_median": 20.97,
+   "too_far_excess_median": 7.15,
+   "slack_median": 11.25,
+   "too_far_mm_from_slack": 7.58,
+   "too_far_mm_from_motion": 5.0,
+   "lost_share": 0.0127
+  },
+  "l1|D4-02 link 1 (Ti-6Al-4V) / hub J1": {
+   "area": 0.0049,
+   "in_band": 0.0,
+   "too_close": 0.0,
+   "too_far": 1.0,
+   "lowered_in_band": 0.0,
+   "gap_median": 33.2,
+   "too_far_excess_median": 19.2,
+   "slack_median": 7.34,
+   "too_far_mm_from_slack": 7.23,
+   "too_far_mm_from_motion": 12.69,
+   "lost_share": 0.0049
+  },
+  "l2|D4-03 link 2 (Ti-6Al-4V) / hub J2": {
+   "area": 0.0001,
+   "in_band": 0.0,
+   "too_close": 0.0,
+   "too_far": 1.0,
+   "lowered_in_band": 1.0,
+   "gap_median": 18.09,
+   "too_far_excess_median": 4.09,
+   "slack_median": 12.53,
+   "too_far_mm_from_slack": 4.92,
+   "too_far_mm_from_motion": 0.0,
+   "lost_share": 0.0001
+  }
+ },
+ "by_clip": {
+  "Raise overhead": {
+   "area": 0.1197,
+   "in_band": 0.4133,
+   "too_close": 0.0,
+   "too_far": 0.5867,
+   "lowered_in_band": 0.5934,
+   "gap_median": 16.01,
+   "too_far_excess_median": 7.35,
+   "slack_median": 4.07,
+   "too_far_mm_from_slack": 5.22,
+   "too_far_mm_from_motion": 3.39,
+   "lost_share": 0.0702
+  },
+  "Drink from a cup": {
+   "area": 0.1658,
+   "in_band": 0.3432,
+   "too_close": 0.0,
+   "too_far": 0.6568,
+   "lowered_in_band": 0.5045,
+   "gap_median": 17.4,
+   "too_far_excess_median": 6.94,
+   "slack_median": 4.04,
+   "too_far_mm_from_slack": 4.59,
+   "too_far_mm_from_motion": 6.42,
+   "lost_share": 0.1089
+  },
+  "Comb hair": {
+   "area": 0.1882,
+   "in_band": 0.4489,
+   "too_close": 0.0,
+   "too_far": 0.5511,
+   "lowered_in_band": 0.5712,
+   "gap_median": 15.48,
+   "too_far_excess_median": 16.42,
+   "slack_median": 5.17,
+   "too_far_mm_from_slack": 6.48,
+   "too_far_mm_from_motion": 7.78,
+   "lost_share": 0.1037
+  },
+  "Reach a high shelf": {
+   "area": 0.1463,
+   "in_band": 0.4925,
+   "too_close": 0.0,
+   "too_far": 0.5075,
+   "lowered_in_band": 0.6063,
+   "gap_median": 14.18,
+   "too_far_excess_median": 18.61,
+   "slack_median": 5.41,
+   "too_far_mm_from_slack": 6.49,
+   "too_far_mm_from_motion": 10.9,
+   "lost_share": 0.0742
+  },
+  "Wash opposite shoulder": {
+   "area": 0.1798,
+   "in_band": 0.2628,
+   "too_close": 0.0,
+   "too_far": 0.7372,
+   "lowered_in_band": 0.408,
+   "gap_median": 21.93,
+   "too_far_excess_median": 14.35,
+   "slack_median": 4.29,
+   "too_far_mm_from_slack": 5.3,
+   "too_far_mm_from_motion": 11.83,
+   "lost_share": 0.1326
+  },
+  "Reach back pocket": {
+   "area": 0.0324,
+   "in_band": 0.5631,
+   "too_close": 0.0,
+   "too_far": 0.4369,
+   "lowered_in_band": 0.7738,
+   "gap_median": 13.05,
+   "too_far_excess_median": 5.98,
+   "slack_median": 4.08,
+   "too_far_mm_from_slack": 5.79,
+   "too_far_mm_from_motion": 2.36,
+   "lost_share": 0.0142
+  },
+  "Wave": {
+   "area": 0.0663,
+   "in_band": 0.4437,
+   "too_close": 0.0,
+   "too_far": 0.5563,
+   "lowered_in_band": 0.6663,
+   "gap_median": 15.1,
+   "too_far_excess_median": 6.37,
+   "slack_median": 4.1,
+   "too_far_mm_from_slack": 5.11,
+   "too_far_mm_from_motion": 2.6,
+   "lost_share": 0.0369
+  },
+  "Walking arm swing": {
+   "area": 0.1015,
+   "in_band": 0.5154,
+   "too_close": 0.0,
+   "too_far": 0.4846,
+   "lowered_in_band": 0.6743,
+   "gap_median": 13.74,
+   "too_far_excess_median": 9.81,
+   "slack_median": 4.18,
+   "too_far_mm_from_slack": 5.93,
+   "too_far_mm_from_motion": 6.28,
+   "lost_share": 0.0492
+  }
+ },
+ "by_elevation": {
+  "0-30": {
+   "area": 0.4134,
+   "in_band": 0.4893,
+   "too_close": 0.0,
+   "too_far": 0.5107,
+   "lowered_in_band": 0.6648,
+   "gap_median": 14.18,
+   "too_far_excess_median": 7.66,
+   "slack_median": 4.12,
+   "too_far_mm_from_slack": 5.78,
+   "too_far_mm_from_motion": 4.74,
+   "lost_share": 0.2112
+  },
+  "30-60": {
+   "area": 0.2409,
+   "in_band": 0.2614,
+   "too_close": 0.0,
+   "too_far": 0.7386,
+   "lowered_in_band": 0.4266,
+   "gap_median": 20.43,
+   "too_far_excess_median": 10.64,
+   "slack_median": 4.25,
+   "too_far_mm_from_slack": 5.02,
+   "too_far_mm_from_motion": 10.28,
+   "lost_share": 0.178
+  },
+  "60-90": {
+   "area": 0.11,
+   "in_band": 0.3309,
+   "too_close": 0.0,
+   "too_far": 0.6691,
+   "lowered_in_band": 0.4873,
+   "gap_median": 17.8,
+   "too_far_excess_median": 7.56,
+   "slack_median": 4.07,
+   "too_far_mm_from_slack": 4.68,
+   "too_far_mm_from_motion": 6.09,
+   "lost_share": 0.0736
+  },
+  "90-120": {
+   "area": 0.0766,
+   "in_band": 0.4678,
+   "too_close": 0.0,
+   "too_far": 0.5322,
+   "lowered_in_band": 0.5981,
+   "gap_median": 15.0,
+   "too_far_excess_median": 14.8,
+   "slack_median": 4.81,
+   "too_far_mm_from_slack": 6.15,
+   "too_far_mm_from_motion": 9.99,
+   "lost_share": 0.0408
+  },
+  "120-200": {
+   "area": 0.1591,
+   "in_band": 0.4569,
+   "too_close": 0.0,
+   "too_far": 0.5431,
+   "lowered_in_band": 0.5337,
+   "gap_median": 16.1,
+   "too_far_excess_median": 17.58,
+   "slack_median": 6.05,
+   "too_far_mm_from_slack": 6.67,
+   "too_far_mm_from_motion": 10.12,
+   "lost_share": 0.0864
+  }
+ },
+ "by_skin": {
+  "arm": {
+   "area": 0.2309,
+   "in_band": 0.6082,
+   "too_close": 0.0,
+   "too_far": 0.3918,
+   "lowered_in_band": 0.8487,
+   "gap_median": 12.76,
+   "too_far_excess_median": 4.06,
+   "slack_median": 4.52,
+   "too_far_mm_from_slack": 3.51,
+   "too_far_mm_from_motion": 3.45,
+   "lost_share": 0.0904
+  },
+  "trunk_scapula": {
+   "area": 0.7691,
+   "in_band": 0.3507,
+   "too_close": 0.0,
+   "too_far": 0.6493,
+   "lowered_in_band": 0.4759,
+   "gap_median": 18.65,
+   "too_far_excess_median": 13.55,
+   "slack_median": 4.27,
+   "too_far_mm_from_slack": 5.94,
+   "too_far_mm_from_motion": 8.51,
+   "lost_share": 0.4994
+  }
+ },
+ "too_far_binding_clip": {
+  "Raise overhead": 0.22,
+  "Drink from a cup": 0.0,
+  "Comb hair": 0.0493,
+  "Reach a high shelf": 0.2023,
+  "Wash opposite shoulder": 0.0083,
+  "Reach back pocket": 0.3579,
+  "Wave": 0.1577,
+  "Walking arm swing": 0.0045
+ },
+ "gap_hist": {
+  "0-2": 0.0,
+  "2-4": 0.0114,
+  "4-6": 0.0341,
+  "6-8": 0.0628,
+  "8-10": 0.0834,
+  "10-12": 0.1171,
+  "12-14": 0.1013,
+  "14-18": 0.1527,
+  "18-22": 0.1017,
+  "22-26": 0.0589,
+  "26-30": 0.0595,
+  "30-40": 0.1366,
+  "40-60": 0.0805
+ },
+ "axes": {
+  "base": [
+   [
+    "J1",
+    [
+     -1.0,
+     0.0,
+     0.0
+    ]
+   ]
+  ],
+  "l1": [
+   [
+    "J1",
+    [
+     -1.0,
+     -0.0,
+     0.0
+    ]
+   ],
+   [
+    "J2",
+    [
+     -0.218,
+     -0.9759,
+     -0.0
+    ]
+   ]
+  ],
+  "l2": [
+   [
+    "J2",
+    [
+     -1.0,
+     -0.0,
+     0.0
+    ]
+   ],
+   [
+    "J3",
+    [
+     0.1487,
+     0.9889,
+     -0.0
+    ]
+   ]
+  ],
+  "H": [
+   [
+    "J3",
+    [
+     -0.0519,
+     -0.1582,
+     0.986
+    ]
+   ]
+  ]
+ }
+}
