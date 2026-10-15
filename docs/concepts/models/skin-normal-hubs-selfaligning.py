@@ -98,6 +98,7 @@ class Design(S.Design):
         self.branch = float(np.sign(d2 @ np.cross(d1, d3)) or 1.0)
         u2 = S.circ_int(u1, A[0], u3, A[1], self.branch)
         self.u = [unit(u1), unit(u2), unit(u3)]; self.A = A; self.h0 = np.array([0.0, -1.0, 0.0])
+        self.sn = self.u[2]; self.sa = unit(self.h0 - (self.h0 @ self.sn) * self.sn); self.st = np.cross(self.sn, self.sa)
         if not P.get("slides", 1):                                  # spherical reference: concurrent lines
             self.c = [np.zeros(3)] * 3
         else:
@@ -108,7 +109,6 @@ class Design(S.Design):
             _, _, _, X2, _, _ = self.ik(Q0[None]); R12, tt2 = X2[0][0], X2[1][0]
             self.c[2] = foot(R12.T @ (P3 - tt2), self.u[2])
         self.ea = self.ec = None
-        self.sn = self.u[2]; self.sa = unit(self.h0 - (self.h0 @ self.sn) * self.sn); self.st = np.cross(self.sn, self.sa)
 
 
 class Model(S.Model):

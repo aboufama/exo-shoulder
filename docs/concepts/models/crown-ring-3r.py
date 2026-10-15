@@ -15,11 +15,12 @@ Parts at real size (honesty rule 1):
     (stator 0..4.5, rotor housing 4.5..9). The outer and bore walls stand on the land's rim samples; the K3 march
     already requires dist >= 0 on the 15 mm of the axis-parallel line above every land sample (the march window), so
     a wall can never be inside the skin in a fitted pose. p1 = 0 makes J1 an O20 hub (the in-model control).
-  * link 1: 14 x 3 Ti strap (spec: MVP1 loads ~1 N.m) on the great circle from the ROOT direction to J2. The root is a
-    lug LUG mm outside the ring's outer land edge at the rotor-housing level, i.e. at the 3-D point
-    (h1 + RING_UP) a1 + (p1 + 8 + LUG) e: its direction is atan2(p1 + 8 + LUG, h1 + RING_UP) off a1 and its radius
-    sqrt(...) is enforced on the first 12 mm of the strap by a ramp (dz above the ring's fitted level). h1 is the ring
-    level F; bench_eval runs two passes (h1 from the first pass's fitted F) so the root is where the rotor really is.
+  * link 1: 14 x 3 Ti strap (spec: MVP1 loads ~1 N.m) on the great circle from the ROOT direction to J2. The root is
+    bolted on TOP of the rotor housing: the strap starts over the pitch circle (direction atan2(p1, h1 + 9) off a1)
+    and passes over the outer half of the land with `over=[("ring1", 0.6)]` (underside >= ring top + 0.6 mm wherever
+    it is above the ring, so K6 sees the attachment as clear; the real bolted joint has 0 gap: conservative by 0.6).
+    (A lug outside the land edge collided with the land in every pose - K6 exempts partners only within 12 mm of the
+    axis, made for O20 hubs.) h1 is the ring level F; bench_eval runs two passes (h1 = the first pass's fitted F).
   * J2, J3: O20 hubs (K4, 12.25 stack) - annular-ring-3r measured donut / ring bores at J2 and J3 lose to O20 at every
     bore (J2 105 vs 112-118 mm, J3 66 vs 68 mm), so they are not re-swept here.
   * links 12/14 x 3, K5 60 deg climb; neck = K7 (14 x 6).
@@ -72,9 +73,10 @@ def build(B, F, p):
     W, T = p["width"], p["t_link"]
     hub2, hub3 = K.hub_member("hub2", a2, "J2"), K.hub_member("hub3", a3, "J3")
     if p["p1"] > 0:                                          # the crown ring and its lug root
-        j1 = ring_member("ring1", a1, "J1", p["p1"]); L = p["p1"] + RING_HW + LUG; hr = p["h1"] + RING_UP
-        root = toward(a1, a2, math.atan2(L, hr)); dz = math.hypot(L, hr) - p["h1"]
-        link1 = K.strap_member("link1", root, a2, ("J1", "J2"), width=W, t=T, ramp_to=(("ring1", dz), ("hub2", 0.0)))
+        j1 = ring_member("ring1", a1, "J1", p["p1"])
+        root = toward(a1, a2, math.atan2(p["p1"], p["h1"] + RING_H))      # bolted on the rotor top, from the pitch circle out
+        link1 = K.strap_member("link1", root, a2, ("J1", "J2"), width=W, t=T, ramp_to=((None, 0), ("hub2", 0.0)),
+                               over=[("ring1", 0.6)])
         hubless = ("J1",)
     else:                                                    # in-model control: J1 an O20 hub (template)
         j1 = K.hub_member("hub1", a1, "J1")

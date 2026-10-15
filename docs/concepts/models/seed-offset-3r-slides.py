@@ -67,7 +67,9 @@ PARAMS = dict(o1a=0.0, o1c=0.0, o2a=0.0, o2c=0.0, o3a=0.0, o3c=0.0,   # axis off
               jam_contact=0,                                          # 1: skin-dropped poses stay contact even if parts jam there
               remote=0, neck=15.0, ramp=0,                            # 1: slide stage down the arm, `neck` mm past hub 3's rim;
                                                                       # ramp 1: hub 3 at its own height, neck ramps up onto the stage
-              slides=1)                                               # 0: spherical reference (offsets ignored, arm-fixed hub 3)
+              slides=1,                                               # 0: spherical reference (offsets ignored, arm-fixed hub 3)
+              vfix=0,                                                 # 1: bench_eval uses VModel (the verifier's checks + the riser)
+              branch=0)                                               # 0: the seed's J2 branch (-1); +1 / -1 forces a branch
 SWEEP = dict(o1a=[-20, -10, 0, 10, 20], o1c=[-20, -10, 0, 10, 20], o2a=[-20, -10, 0, 10, 20], o2c=[-20, -10, 0, 10, 20],
              o3a=[-20, -10, 0, 10, 20], o3c=[-20, -10, 0, 10, 20], S_a=[10, 15, 25], S_t=[10, 15, 25], R_r=[0.5, 2, 5, 10])
 
@@ -118,7 +120,7 @@ def pose_rots(POSE):
 class Design:
     def __init__(self, params=None):
         P = dict(PARAMS); P.update(params or {}); self.p = P
-        s = SEED; self.branch = s["branch"]                       # axis directions: the seed + sweepable deltas (deg)
+        s = SEED; self.branch = int(P.get("branch") or s["branch"])   # axis directions: the seed + sweepable deltas (deg)
         u1 = bvec(s["az"] + P.get("d_az", 0.0), s["el"] + P.get("d_el", 0.0))
         u3 = w_dir(s["w"][0] + P.get("d_wd", 0.0), s["w"][1] + P.get("d_wa", 0.0))
         A = [(s["a"][0] + P.get("d_a1", 0.0)) * D2R, (s["a"][1] + P.get("d_a2", 0.0)) * D2R]
@@ -622,6 +624,112 @@ def metal(pose, frames, params, B=None, i=None):
     if i is None:
         i = next(j for j, p in enumerate(M.B.poses) if p == pose)
     return None if M.B.res[i] is None else M.metal_points(i)
+
+
+# ---- the verifier's corrected checks (adversarial verification 2026-10-15) + the red team's riser -------------------
+class VModel(Model):
+    """Model + every check the verifier added (doc, section Verification), so sweeps optimise the honest number:
+    closure residual (R1 R2 R3 vs the arm < 0.5 deg), hub 3 / bridge vs rail and carriage A, carriage B vs rail, the
+    missing member-3 BRIDGE strap (neck end -> carriage B's near edge, underside at carriage B's underside), a dropped
+    pose that also jams is never taken; and (red team, 2026-10-15) the member-3 RISER: with the ramped neck, member 3
+    (hub 3's LOWER plate, face f3) must climb from the plate at the hub rim to the neck's start height - a 3 mm wall
+    x 8 mm wide box on member 3 just outside hub 3's rim, checked against the rail (non-adjacent, 1 mm), hubs 1-2 and
+    link 1 (1 mm), link 2 and carriage A (adjacent, 0.15 mm), and for skin contact."""
+    fix = dict(closure=True, hub3rail=True, bridge=True, jam=True, riser=True)
+    ADJ = 0.15
+
+    def __init__(self, B, params=None, fix=None):
+        if fix is not None: self.fix = dict(fix)
+        elif params is not None and not params.get("riser", 1): self.fix = dict(self.fix, riser=False)
+        super().__init__(B, params)
+        R123 = self.X[3][0]; c = (np.einsum("nij,nij->n", R123, self.Q) - 1) / 2
+        self.res_deg = np.degrees(np.arccos(np.clip(c, -1, 1)))
+        if self.fix["closure"]:
+            bad = self.kin_ok & (self.res_deg >= 0.5); self.why[bad] = "closure"; self.kin_ok &= ~bad
+
+    def finalize(self):
+        super().finalize()
+        D = self.D; P = D.p; self.riser = None
+        if P.get("remote") and P.get("slides", 1):
+            if self.fix["bridge"]:
+                L = P["S_a"]; r = rect(L, W_LINK); r[:, 0] += HUB_R + P["neck"] + L / 2
+                Bb = D.c[2][None] + r[:, :1] * D.sa + r[:, 1:] * D.st
+                self.rigid["bridge"] = (3, Bb + self.zb * D.sn[None])
+            if self.fix["riser"] and P.get("ramp"):
+                f3 = self.f[2]; ztop = self.zb + CAR_H
+                h_rim = max(f3, ztop - math.tan(RAMP * D2R) * P["neck"])        # neck underside where it leaves hub 3's rim
+                top = h_rim + T_LINK
+                if h_rim > f3 + 1e-6:
+                    cen = D.c[2] + (HUB_R + 1.5) * D.sa + 0.5 * (f3 + top) * D.sn
+                    self.riser = (3, cen, np.array([1.5, W_LINK / 2, 0.5 * (top - f3)]))
+                    g = np.stack(np.meshgrid(np.linspace(-1.5, 1.5, 3), np.linspace(-W_LINK / 2, W_LINK / 2, 5),
+                                             np.linspace(-0.5 * (top - f3), 0.5 * (top - f3), max(3, int((top - f3) / 2) + 1)),
+                                             indexing="ij"), -1).reshape(-1, 3)
+                    self.riser_pts = cen[None] + g @ np.stack([D.sa, D.st, D.sn], 1).T
+                    self.contact.append((3, self.riser_pts))                 # its outer wall / bottom edge vs the skin
+                self.riser_h = round(float(h_rim - f3), 1)
+
+    def collide(self, i):
+        m = super().collide(i)
+        if not self.box: return m
+        D = self.D; Rst = np.stack([D.sa, D.st, D.sn], 1)
+        def tf(mm, P): R, t = self.T(mm, i); return P @ R.T + t
+        def boxw(bn): mb, cen, half = self.box[bn]; R, t = self.T(mb, i); return R @ cen + t, R @ Rst, half
+        extra, adj = {}, {}
+        if self.fix["hub3rail"]:
+            mem3 = self.cyl_surf["hub3"]
+            for bn in ("rail", "carA"):
+                cw, Rw, half = boxw(bn)
+                extra[f"hub3-{bn}"] = float(self.sd_box(tf(mem3[0], mem3[1]), cw, Rw, half).min())
+                if "bridge" in self.rigid:
+                    b = self.rigid["bridge"]; extra[f"bridge-{bn}"] = float(self.sd_box(tf(b[0], b[1] + 1.5 * D.sn), cw, Rw, half).min()) - 1.5
+            cw, Rw, half = boxw("rail"); _, cB, hB = self.box["carB"]; R3, t3 = self.T(3, i)
+            g = np.stack(np.meshgrid(*[np.linspace(-h, h, 7) for h in hB], indexing="ij"), -1).reshape(-1, 3)
+            extra["carB-rail"] = float(self.sd_box((R3 @ (cB[:, None] + Rst @ g.T)).T + t3, cw, Rw, half).min())
+        if self.riser is not None:
+            Pr = tf(3, self.riser_pts); h = T_LINK / 2
+            cw, Rw, half = boxw("rail"); extra["riser-rail"] = float(self.sd_box(Pr, cw, Rw, half).min())
+            for nm in ("hub1", "hub2"):
+                mc, cen, ax = self.cyl[nm]; R, t = self.T(mc, i); extra[f"riser-{nm}"] = float(self.sd_cyl(Pr, R @ cen + t, R @ ax).min())
+            S1 = tf(self.strap["L1"][0], self.strap["L1"][1])
+            if len(S1): extra["riser-L1"] = float(self.sd_box(S1, *_box_of(self, i, Rst)).min()) - h
+            S2 = tf(self.strap["L2"][0], self.strap["L2"][1])          # adjacent at hub 3: running clearance only
+            if len(S2): adj["riser-L2"] = float(self.sd_box(S2, *_box_of(self, i, Rst)).min()) - h
+            cw, Rw, half = boxw("carA"); adj["riser-carA"] = float(self.sd_box(Pr, cw, Rw, half).min())
+        self.last_clear.update({k: round(v, 1) for k, v in extra.items()})
+        self.last_clear.update({k: round(v, 1) for k, v in adj.items()})
+        out = min([m] + list(extra.values()))
+        if adj and min(adj.values()) < self.ADJ: out = min(out, -1.0)   # an adjacent pair interpenetrates: the pose jams
+        return out
+
+    def run(self, B=None):
+        r = super().run()
+        if self.fix["jam"] and self.p.get("jam_contact"):
+            dropped = set(self.poses_fit[self.drop].tolist()); n = 0
+            for i in dropped:
+                if self.clear[i] < PART_CLEAR and self.B.res[i] is not None and float(np.min(self.B.res[i])) >= 0:
+                    self.B.res[i] = None; self.why[i] = "parts"; n += 1
+            r2 = self.B.report(); r.update({k: r2[k] for k in ("reach", "follow", "inband14", "inband10", "contact", "gap")}); r["jam_fixed"] = n
+        r["why"] = {k: int((self.why == k).sum()) for k in ("fold", "slide", "flip", "closure", "skin", "parts", "contact")}
+        r["parts_ib14"] = self.part_inband()
+        pc = [self.last_pair.get(i) for i in range(len(self.B.idx)) if self.why[i] == "parts"]
+        r["parts_pairs"] = {str(k): pc.count(k) for k in set(pc)}
+        r["res_max"] = round(float(self.res_deg[self.kin_ok].max()), 4) if self.kin_ok.any() else None
+        tk = [self.clear[i] for i in range(len(self.B.idx)) if self.B.res[i] is not None and float(np.min(self.B.res[i])) >= 0]
+        r["min_clear_taken"] = round(float(np.nanmin(tk)), 2) if tk else None
+        r["riser_h"] = getattr(self, "riser_h", None)
+        return r
+
+
+def _box_of(M, i, Rst):
+    mc, cen, half = M.riser; R, t = M.T(mc, i); return R @ cen + t, R @ Rst, half
+
+
+def bench_eval(B, params):
+    """tools/concept_sweep.py hook: vfix=1 -> VModel (verifier checks + riser), else the screening Model"""
+    P = dict(params); M = (VModel if P.get("vfix") else Model)(B, P); r = M.run()
+    r.pop("params", None); r["S"] = [M.p["S_a"], M.p["S_t"], M.p["R_r"]]
+    return r
 
 
 # ---- sweep driver -------------------------------------------------------------------------------------------------
