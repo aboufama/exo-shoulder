@@ -442,3 +442,14 @@ directions; metal that rotates by the region's own fraction of the arm's swing (
 -> 0.70). The fractions are bimodal: ~0-0.2 over the top, ~0.7-0.9 over the deltoid. Design rule: pieces over the cap
 must turn by graded fractions of the swing (pauldron lames, spherical lazy tongs, rolling / CV couplings), and the
 humeral twist belongs below the cap.
+
+## The baseline bar is soft: the same 3R scores 65.05 with honest flat hubs (2026-10-15, kit verification)
+
+The shared modelling kit (tools/concept_kit.py, docs/concepts/KIT.md, verified: 22 tests, K1 closure on 120k cases)
+reproduces the baseline row exactly (gap 68.93). Built on the kit's own conventions - flat O20 hubs fitted by a
+true-offset march, 12 x 3 mm straps with the 60 deg climb limit, the K7 neck, every part clear in every pose (q 1.0),
+dense branch continuity, part-part collisions - the SAME champion kinematics score **gap 65.05**
+(docs/concepts/models/_template.py). With the kit's stricter K3 radius but the baseline's cap hubs it scores 70.27
+(a measurement change). So a morphology must beat **~65**, not 68.93, before it beats the 3R family; screened rows
+below 68.93 are compared against both numbers. Models built on kit flat hubs before the K4 fix (commit 03bb5bf)
+must be re-measured.
