@@ -5,7 +5,7 @@
  "family": "offset axes",
  "active_dof": 3,
  "passive_dof": 3,
- "status": "screened",
+ "status": "verified",
  "t_ideated": null,
  "t_screened": "2026-10-15T18:15:34Z",
  "reach": 0.7688,
@@ -14,11 +14,11 @@
  "inband10": 0.3496,
  "contact": 0.11,
  "gap": 57.95,
- "v_reach": null,
- "v_follow": null,
- "v_inband14": null,
- "v_inband10": null,
- "v_gap": null,
+ "v_reach": 0.7611,
+ "v_follow": 0.9182,
+ "v_inband14": 0.5024,
+ "v_inband10": 0.259,
+ "v_gap": 66.47,
  "n_configs": 360,
  "verdict": "not worth its own GPU sweep: net -0.84 gap vs the in-model spherical control with the same directions (57.95 vs 58.79, inside greedy-drop noise) - the slides cost 6.4, R1/R2 offsets buy back 7.3; the gain over the 68.93 baseline is the model's free-underside fit (62.58 at the champion directions) and a direction re-tune that belongs to the spherical family (hand d_el -6.4, d_wd +4.1, d_wa +3.6 to its GPU sweep)",
  "limiter": "hub 2 (J2 hub): 2 % of its samples in band, median 28 mm off the skin in all 360 configs - its face is set by abduction/flexion 90-150 deg poses at small axial rotation (plane -15..30) where the elevated arm occupies its place (22 skin poses); the J2 fold costs 19 poses (Raise overhead elev 124-150 plane 30 axial -55..-60; behind-back plane -60..-90); the slide stage's along-carriage is 23 % in band (median 18 mm) and the stage costs +6.4 gap at fixed directions",
@@ -72,5 +72,7 @@
    "k": 320,
    "gap": 49.15
   }
- }
+ },
+ "t_verified": "2026-10-15T20:32:53Z",
+ "v_note": "verifier: Bench(110,360) exact path, model re-fitted there with corrected checks (closure residual <= 0.015 deg, + hub3/bridge vs rail/carriage-A and carriage-B vs rail clearances, + the missing member-3 bridge neck->carriage B (8 x 13 mm, 24 samples, 0 % in band, +1.7 gap), dropped-and-jammed poses never taken); Bench(60,160): fast 59.63, exact 58.38; why not taken {'fold': 51, 'slide': 0, 'flip': 0, 'closure': 0, 'skin': 40, 'parts': 4, 'contact': 0}; radial-slide guide hardware still unmodelled (not skin-facing)"
 }

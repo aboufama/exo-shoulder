@@ -118,3 +118,41 @@ the spherical GPU sweep; a morphology that wins must move or remove hub 2 over t
 * sweep log: docs/concepts/sweeps/seed-offset-3r-slides.json (in order; `asked` = the parameters as given, `params`
   = with the resolved slide ranges; entries before k 324 without `jam_contact` use the old jam rule)
 * sketch: docs/concepts/img/seed-offset-3r-slides.png (lowest-elevation and highest pose taken, best configuration)
+
+## Verification (adversarial verifier, 2026-10-15)
+
+Verdict: **verified** - the corrected gap on Bench(110, 360), exact path, is **66.47** (baseline 68.93). The
+morphology stays ahead of the baseline, but by 2.5, not 11. The verifier's checks are a subclass of the model
+(VModel: closure, extra clearance pairs, missing part, jam rule), run on the best configuration (k 324, `asked`
+parameters, refitted on each bench by the model's own procedure).
+
+| check | result |
+|---|---|
+| 3 ACTIVE DOF, no undetermined passive coordinate | holds: R1-R3 set the orientation, and the 3 slides are solved by closure (s = Q^T t3); loop mobility 3 |
+| closure residual (R1 R2 R3 vs the arm, < 0.5 deg; position closes through the slides) | max 0.015 deg over the poses taken: no pose lost |
+| joint / slide ranges, 10 fps branch continuity | enforced in the model (fold 10 deg, S_auto ranges, 25 deg step); no flips |
+| part-part pairs the model skipped: hub 3 vs rail and carriage A, carriage B vs rail, bridge vs rail and carriage A | added: min 2.0 / 18.0 / 7.9 / 7.9 / 3.8 mm over the poses taken (rail runs under hub 3's rim with 2 mm to spare): no pose lost |
+| adjacent pairs checked anyway (exempt by the rule): link 2 vs the member-3 neck, carriage B, bridge | min 10.6 / 11.8 / 15.3 mm |
+| **missing part**: member 3 had no link between the neck end (hub 3 rim + neck) and carriage B's near edge (+ S_a); with `stage_c` placing carriage B S_a further, a 13 x 8 mm gap was left | added a bridge strap with its underside at carriage B's underside (the most favourable height): 24 samples, 0 % in band (median 27 mm), **+1.68 gap** (57.95 -> 59.63 on the fast grid) |
+| jam rule: a skin-dropped pose with a part-part jam but no metal inside counted as taken | fixed (such a pose is not taken); 0 poses affected for this configuration |
+| grid-cache artefact (CB_EXACT=1, Bench(60,160), all fixes) | exact 58.38 vs fast 59.63: no artefact in the model's favour (the exact path is 1.25 better) |
+| **re-measure on Bench(110, 360), exact path, all fixes** | **gap 66.47**: reach 0.761, follow 0.918, in-band 14 0.502, in-band 10 0.259, contact 0.096 |
+
+The larger bench costs +6.8 gap in all. On the larger bench, hub 2 must rise to f2 98 mm (90 before); it is then
+0 % in band, median 37 mm. Link 2 drops to 40 % in band (median 17.5 mm). The along-slide needs 15.2 mm of travel
+(13 before). 51 poses are lost to the J2 fold and 40 to the skin. In-band 14 falls from 0.595 to 0.502. The screened
+57.95 came from fitting the free undersides on the 220 poses the bench also scores. With more poses, the envelope
+includes more of the high-skin overhead poses. Hub 2 and link 2 absorb most of that.
+
+Holes that remain, not quantified:
+* The radial slide (+-6.7 mm, normal to the carriage) has no guide hardware in the model. Carriage B floats on a gap
+  of R_r. Pins or a bushing need about 2 R_r of stroke plus their engagement length. Pins fixed in carriage A and
+  poking up through carriage B do not touch the skin, and their envelope clears link 2 by 9.6 mm. They do add height
+  and mass.
+* The member-3 neck breaks the model's own 60 deg ramp rule. It rises from hub 3's plate (64 mm) to 80 mm at the
+  hub rim, a vertical riser. The riser has to clear the rail, which slides under it. It is not skin-facing.
+* The baseline's 68.93 is on Bench(60,160), fast grid. Nobody has re-run the baseline on Bench(110,360). If the
+  larger bench costs the spherical chain the same ~7 points, the margin over it is larger than 2.5.
+* The author's verdict stands, with a smaller margin: the in-model spherical control at the same directions
+  (58.79 fast) is within noise of this morphology, so the gain comes from the fitting and the direction re-tune,
+  not from the offsets and slides. This verification did not re-run that control on the large bench.
