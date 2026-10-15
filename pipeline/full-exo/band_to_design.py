@@ -29,8 +29,9 @@ if __name__ == "__main__":                                                      
     if _probs:                                                                      # a scoring proxy is fine; CAD is refused downstream
         print("\n" + "!" * 110 + f"\nWARNING band_to_design ({SRC} #{IDX} -> {NAME}): a link without a real arm\n  " + "\n  ".join(_probs)
               + "\n  usable as a scoring proxy only: make_cad_design.py refuses it (override: --allow-short-link / ALLOW_SHORT_LINK=1)\n" + "!" * 110 + "\n", file=sys.stderr, flush=True)
-Z = np.load(io.BytesIO(gzip.decompress(base64.b64decode(open(os.path.join(EXO, "conformal", "band_poses.b64")).read()))))
+Z = np.load(io.BytesIO(gzip.decompress(base64.b64decode(open(os.path.join(EXO, "conformal", os.environ.get("POSES_FILE", "band_poses.b64"))).read()))))   # the payload the eval used
 POSE, CID, FI, NAMES, FPS = Z["POSE"], Z["CID"], Z["FI"], [str(x) for x in Z["NAMES"]], float(Z["FPS"])
+ENVELOPE = set(str(x) for x in Z["ENVELOPE"]) if "ENVELOPE" in Z.files else set()                        # workspace poses: shaped, never clips
 ST = int(R.get("stride", 1)); POSE, CID, FI = POSE[::ST], CID[::ST], FI[::ST]; FPS = FPS / ST          # frames the evaluator saw
 P_, C_ = R["PC"]; FEAS = np.unpackbits(np.frombuffer(base64.b64decode(R["feas_all"]), np.uint8))[:P_ * C_].reshape(P_, C_).astype(bool)
 SHARE = np.frombuffer(base64.b64decode(R["share_all"]), np.uint8).reshape(P_, C_) / 255.0
@@ -140,6 +141,7 @@ def path_of(ix):
     return out
 clips = []; nfol = 0; ntot = 0
 for ci, name in enumerate(NAMES):
+    if name in ENVELOPE: continue
     ix = np.nonzero(CID == ci)[0]; ix = ix[np.argsort(FI[ix])]; path = path_of(ix) if os.environ.get("OWN_DP") != "1" else dp(ix)
     frames = []
     if not path:                                                                         # never followed: hold the clip's first pose at a closing config
