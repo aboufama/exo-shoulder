@@ -1,0 +1,98 @@
+{
+ "id": "twin-rail-one-hub",
+ "name": "Twin rails, one hub: virtual J1 on a crown rail, virtual J3 on an arm rail",
+ "lens": "biomimetic-girdle|hardware-unlocks",
+ "family": "spherical 3R (virtual J1 / J3 on arc rails)",
+ "active_dof": 3,
+ "passive_dof": 0,
+ "status": "screened",
+ "t_ideated": null,
+ "t_screened": "2026-10-15T23:28:22Z",
+ "reach": 0.5625,
+ "follow": 0.85,
+ "inband14": 0.1413,
+ "inband10": 0.0815,
+ "contact": 0.0,
+ "gap": 119.62,
+ "v_reach": null,
+ "v_follow": null,
+ "v_inband14": null,
+ "v_inband10": null,
+ "v_gap": null,
+ "n_configs": 170,
+ "verdict": "screened (provisional, CMA-ES on the farm queued): far behind the spherical family - best honest 119.62 (score 56.5) vs the champion 68.93; the rails replace the pole hubs, which were never the limiter, and add their own: a constant-section rail must clear the highest skin anywhere on its 120-190 deg arc in any pose (crown rail 0 % in band), and the arm rail cannot cover the humeral rotation range (cov 1.0 needs 420 deg)",
+ "note": "Bench(60,160), fast grid, K3 march, K2 dense, K6 (same-body pairs exempt), audit clean, rails laid out at their fitted radius (fix point). 169 configs (166 coarse on the farm + 3 local) + 1 variant-b bound. Gate (score points, variant a): gain over 2nd half 0.92, last third 0.92, top-5 spread 4.91 - NOT converged (CMA-ES streams A-D queued). Kinematics: 95 %-central carriage travels sum >= ~300 deg over 1640 valid axis sets (spec hoped +-35). Raw maps: 8 % of axis sets have a crown rail clear of the body; best constant-section crown rail 0.49 in band. Variant b (crown rail shaped per station, float not charged): gap 97.64 at the leader's axes.",
+ "doc": "docs/concepts/twin-rail-one-hub.md",
+ "limiter": "crown rail constant section (rows 94-111 mm vs median skin requirement 52 mm along its 186 deg arc; set by plane 45 / elev 165 / axial -90 where the elevated arm passes under the S-fixed arc): 0 % in band; arm rail span (humeral rotation range + shoe: 297 deg at cov 0.9, 420 deg at cov 1.0) caps reach at ~0.56; overhead 2/17 taken (7 beyond the rails, 5 collisions); hub 2 0.09 and link 2 0.001 in band (the spherical family's J2 limiter is untouched)",
+ "best_k": 166,
+ "best_params": {
+  "az1": 98.93,
+  "el1": 69.48,
+  "a12": 55.78,
+  "d1": -22.0,
+  "wd": 49.1,
+  "wa": -25.93,
+  "a23": 79.46,
+  "ar3": 10.0,
+  "sigma": -1,
+  "margin": 10.0,
+  "W1": 20.0,
+  "W3": 20.0,
+  "Lc": 30.0,
+  "cov": 0.9,
+  "R1": 94.0,
+  "R3": 108.0,
+  "q": 1.0,
+  "revolve": 1,
+  "l2over": 1,
+  "ref1": 0.0,
+  "ref3": 0.0
+ },
+ "hub2": [
+  73.0,
+  17.9
+ ],
+ "park_ok": true,
+ "rails": {
+  "rail1_deg": 188.5,
+  "rail1_mm": 171.9,
+  "rail3_deg": 302.8,
+  "rail3_mm": 99.1
+ },
+ "inband_member": {
+  "rail1": 0.0,
+  "car1": 0.9969,
+  "bridge1": 0.0604,
+  "hub2": 0.0871,
+  "link2": 0.0007,
+  "car3": 0.1906,
+  "rail3": 0.2583,
+  "neck": 0.9865
+ },
+ "layout_iter": [
+  [
+   94.0,
+   94.0,
+   108.0,
+   107.0
+  ]
+ ],
+ "mode": "fast",
+ "bench": "Bench(60,160)",
+ "mass_g": 261.0,
+ "honest": true,
+ "checks": {
+  "mode": "march",
+  "cont": true,
+  "collide": true,
+  "q": 1.0
+ },
+ "audit": [],
+ "hubless": [
+  "J1",
+  "J3",
+  "C1",
+  "C3",
+  "N3"
+ ]
+}
