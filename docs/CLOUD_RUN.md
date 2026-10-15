@@ -31,13 +31,22 @@ python3 tools/concept_sweep.py docs/concepts/models/<id>.py --configs configs.js
 - The model contract (`tools/concept_sweep.py`, first hook found): a concept_kit model's `build(B, F, params)` (scored
   with `K.evaluate`), else `bench_eval(B, params) -> report`, else the bench's `metal(pose, frames, params)`.
   `tools/concept_baseline_sweep.py` is the adapter for the champion 3R (`tools/concept_baseline.py`).
-- **Slots today: 4 jobs x 8 processes = 32 configs at once.** The running bundle takes ONE job per worker (measured
-  19:01 UTC: 16 sleep-20 jobs ran strictly in sequence on each worker; the 4-jobs-per-worker handler is in the
-  undeployed 3.12 build), so `sweep` makes chunks of `max(ceil(n / 4), min(n, 8))` configs (fill one worker's 8
+- **Slots today: 4 jobs x 8 processes = 32 configs at once** (4 workers x 8 vCPU; one job per worker). Root cause, measured
+  2026-10-15 21:43-21:50 UTC: the 3.12 build (farm-2, `max_concurrency=4`) IS live, but the Flash CPU image boots its own
+  `/app/handler.py`, which imports the generated `handler_exo-cpu1.py` as a module and calls
+  `runpod.serverless.start({"handler": handler})` without the generated `concurrency_modifier`, and runpod 1.10.1 has no
+  env var for it - so every worker takes ONE job (12 sleep-20 jobs: 3 per worker, strictly sequential, wall 121 s). A plain
+  redeploy cannot fix it. The fix (farm-3, "Redeploy in place" below) is built. A canary passed: the module is imported,
+  then `start()` is called the way the image calls it, then `JobScaler.set_scale()` gives concurrency 4. It ran locally on
+  runpod 1.12.0 (the image has 1.10.1 and the same JobScaler path, source read on a worker). It waits for the user's go:
+  deploying to the shared endpoint was refused by this session's permission policy. After it lands: 4 workers x 4 jobs =
+  **16 job slots**, still 32 vCPU in all (2 per job). Sweeps then make chunks of `max(ceil(n / 16), min(n, 2))` configs and
+  run 2 processes each (set `CLOUD_JOBS_PER_WORKER=4`, the default once farm-3 is verified). Until then `sweep` makes
+  chunks of `max(ceil(n / 4), min(n, 8))` configs (fill one worker's 8
   processes before taking another worker: a job bills the whole worker) and runs each with up to 8 processes
   (`--jobs-per-chunk`, `--chunk` override) and `IGL_NUM_THREADS=1`. Verified 19:33 UTC, 8 champion configs: 1 chunk x 8
   processes = wall 44 s, 42 worker-s ($0.0034), 1 slot; the old `ceil(n/4)` split (4 chunks x 2) = wall 30 s, 92 worker-s
-  ($0.0074), all 4 shared slots. Pass `--chunk 2` when latency matters more than cost and the queue is empty. After a redeploy set `CLOUD_JOBS_PER_WORKER=4`. The 4 workers are
+  ($0.0074), all 4 shared slots. Pass `--chunk 2` when latency matters more than cost and the queue is empty. The 4 workers are
   shared by every agent: a sweep queues behind other agents' batches (seen 19:00-19:15: 31 map jobs + a sweep, queue 15). Each job ships only what a bench sweep reads (the model, tools/, judge/, pipeline/avg/, the pose
   files, split.json, docs/concepts/models/: 29 MB, uploaded once ever); `--full-base` ships the whole repo. The configs
   travel inside the command (no upload round trip). The bench grid cache `.cache/concept_bench` (562 MB, key
@@ -96,13 +105,11 @@ Every job prints: return code, run seconds, CPU, the $ it cost, the last log lin
   cp311 extension modules (numpy then says "you should not try to import numpy from its source directory"). The later
   3.12 redeploy never landed (the NetworkVolume undeploy error). A local `flash build --python-version 3.12` is correct
   (cp312 wheels, 108 MB), so a redeploy fixes the bundle.
-- **Redeploy blocked**: without the old `.flash/` state, `flash deploy` provisions a NEW endpoint, and the account's
-  worker quota (10 = exo-cpu1 4 + exo-blender-cycles 4 + exo-band23 2) refuses it ("lower the max worker count for this
-  endpoint to at most 0"). Parking the old endpoint at workersMax 0 first was refused by this session's permission
-  policy (modifying shared RunPod resources) - it needs the user's go. Steps when allowed: set exo-cpu1 (n1f5v21dfrco3b)
-  workersMax 0 -> `cd pipeline/cloud && RUNPOD_API_KEY="$(cat ~/.runpod_key)" flash deploy --python-version 3.12` (reuses
-  volume exo-farm-cas u9gf22x1a2 by name + datacenter) -> check `ping` on the new endpoint -> delete the old one (the
-  client picks the first endpoint named exo-cpu1) -> PATCH executionTimeoutMs 3600000 on the new one.
+- **Redeploy status (corrected 21:50 UTC)**: the 18:05 `flash deploy` DID land the code: it made the 3.12 build
+  (cmv9uml2f) the active build of the Flash env `cloud/production` before its endpoint reconcile failed (it tried to
+  provision a NEW endpoint, refused by the account worker quota of 10), and workers unpack the env's active build when they
+  boot. `ping` 21:41: handler python 3.12.14, numpy 2.0.2 importable, `farm-2`. The pinned tar below stays in use
+  (same versions; harmless).
 - **Fix in use (no endpoint change)**: the pinned packages for CPython 3.12 were pip-installed by a farm job into the
   volume and packed as one tar, `/runpod-volume/exo-farm/py312/v1.tar` (425 MB; rebuild: `cloud_run.py pyenv`). Every job
   extracts it once per worker to `/tmp/farm-py312-v1` (2.2 s, flock-guarded) and puts it first on `PYTHONPATH`
@@ -114,14 +121,34 @@ Every job prints: return code, run seconds, CPU, the $ it cost, the last log lin
   one process per vCPU) unless the job sets it. Measured on the same
   20-config chunk: 692 s -> 89 s, identical reports.
 
+## Redeploy in place (no new endpoint, same queue)
+
+`tools/farm_redeploy.py` does what `flash deploy` does minus the endpoint reconcile: uploads `.flash/artifact.tar.gz` as a
+new build of app `cloud`, makes it the active build of env `production`, stores the manifest with the existing endpoint
+id, and writes the new source fingerprint into the endpoint template's env (the env var flash itself uses), so RunPod
+replaces the workers as they finish their jobs. The queue belongs to the endpoint, so queued jobs are kept. It also sets
+executionTimeoutMs 3600000. `status` shows the active build, `rollback <build id>` restores one (farm-2 = cmv9uml2f).
+
+```bash
+cd pipeline/cloud && RUNPOD_API_KEY="$(cat ~/.runpod_key)" flash build --python-version 3.12      # farm-3 is built (21:52 UTC)
+cd ../.. && RUNPOD_API_KEY="$(cat ~/.runpod_key)" ~/.local/share/uv/tools/runpod-flash/bin/python tools/farm_redeploy.py deploy
+# verify: 12-16 sleep-20 jobs show 4 at once per worker and ping says farm-3; then CLOUD_JOBS_PER_WORKER default -> 4 in tools/cloud_run.py
+```
+
+farm-3 = farm-2 + `pipeline/cloud/farm_worker.py` wrapping `runpod.serverless.start` at import (worker only, guarded by
+try/except: any failure leaves the stock 1-job behaviour) to add `concurrency_modifier: 4`. The generated handler module
+is imported before `/app/handler.py` calls `start()`. **Needs the user's go**: the in-place deploy and the fallback quota
+rebalance (exo-band23 workersMax 0, exo-cpu1 6: +50 % workers) were both refused by this session's permission policy
+("Production Deploy" / "Modify Shared Resources").
+
 ## Endpoint, cost, hygiene
 
 | item | value |
 |---|---|
-| endpoint | `exo-cpu1` n1f5v21dfrco3b (Flash, `pipeline/cloud/farm_worker.py`; redeploy steps in "Worker python") |
+| endpoint | `exo-cpu1` n1f5v21dfrco3b (Flash app `cloud`, env `production`, `pipeline/cloud/farm_worker.py`; redeploy: "Redeploy in place") |
 | instance | cpu3c-8-16 (8 vCPU, 16 GB), fallback cpu5c-8-16 |
 | rate | $0.288/h per worker = $0.036 per vCPU-h (the lowest RunPod serverless CPU rate; cpu5c $0.336/h) |
-| scaling | workersMin 0, workersMax 4 (account quota 10 across all endpoints), idle 10 s, 1 job per worker today (4 after a redeploy), executionTimeoutMs 0 (1 h asked, needs the redeploy / a PATCH) |
+| scaling | workersMin 0, workersMax 4 (account quota 10 across all endpoints), idle 10 s, 1 job per worker today (the image ignores max_concurrency; 4 after the farm-3 redeploy), executionTimeoutMs 0 (`farm_redeploy.py deploy` sets 3600000) |
 | storage | network volume `exo-farm-cas` 20 GB, EU-RO-1: $1.40/month |
 
 `python3 tools/runpod_guard.py audit | enforce` covers it (workersMin 0, idle <= 10 s, workersMax <= 10, volume listed).
@@ -163,3 +190,8 @@ See the "CPU farm" section of `docs/RUNPOD_COSTS.md` for the measured run: R2 bo
 - `judge` works: `cloud_run.py judge cad_r13_n4_s1343_1 fast` -> rc 0 in 1226 s on one worker ($0.10), full scorecard;
   R1-R8 values equal the tree's scorecard (14 h old); R10 / R11 now measured because the judges gained them since then
   (a measurement change, not a design change); R9 not run (SKIP_FEA on the farm).
+- Concurrency and queue (2026-10-15 21:43-22:00 UTC): 12 `sleep 20` jobs on the 4 workers ran 3 per worker strictly in
+  sequence (max 1 concurrent per worker, wall 121 s; 4 jobs per worker would take ~25 s). At 21:50-22:00 the farm held
+  4 long jobs in progress with 12-15 queued: a 0-s diagnostic job waited 102 s and the farm-3 canary (a 2-s job) waited
+  > 10 min. Every agent's sweep, upload (`have` / `put`) and ping shares these 4 slots. That is the case for the
+  16-slot fix.

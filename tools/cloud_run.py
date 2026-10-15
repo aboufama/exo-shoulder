@@ -33,10 +33,12 @@ REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 GQL = "https://api.runpod.io/graphql"; RUN = "https://api.runpod.ai/v2"
 EP_NAME = os.environ.get("CLOUD_EP_NAME", "exo-cpu1")
 RATE = {"cpu3c-8-16": 0.288 / 3600, "cpu5c-8-16": 0.336 / 3600}      # $/s per worker, serverless (GraphQL slsPrice, EU-RO-1, 2026-10-15)
-# jobs a worker runs at once. The decorator asks for 4 (max_concurrency), but the bundle exo-cpu1 runs today (the 15:13
-# UTC build) takes ONE job at a time per worker (measured 2026-10-15 19:01: 16 sleep-20 jobs ran strictly one after the
-# other on each worker). So a job gets the whole worker (8 vCPU): sweeps run 8 processes per job. Set
-# CLOUD_JOBS_PER_WORKER=4 after a redeploy that restores the concurrent handler.
+# jobs a worker runs at once. The decorator asks for 4 (max_concurrency), but the Flash CPU image boots its own
+# /app/handler.py, which calls runpod.serverless.start() WITHOUT the generated concurrency_modifier: every worker takes ONE
+# job (measured 2026-10-15 19:01 and 21:43 UTC on the live 3.12 build farm-2). So a job gets the whole worker (8 vCPU)
+# and sweeps run 8 processes per job. farm-3 (pipeline/cloud/farm_worker.py wraps start(); tools/farm_redeploy.py deploys it
+# in place, docs/CLOUD_RUN.md "Redeploy in place") restores 4 per worker: once ping says farm-3 and a sleep test shows 4 at
+# once, make 4 the default here.
 SLOTS = int(os.environ.get("CLOUD_JOBS_PER_WORKER", 1))
 WORKERS_MAX = 4
 VCPU = 8

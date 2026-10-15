@@ -10,14 +10,16 @@ Modes (job dict -> result dict):
   ping                                  -> python / cpu / volume facts
   have  {shas}                          -> {missing}
   put   {blobs: [{sha, i, n, data}]}    -> {stored, pending, bad}   data = base64 of chunk i of n of gzip(file)
-  run   {files, cmd, out, env, timeout} -> {rc, log, secs, files: {rel: {sha, size, data | in_cas}}} | {missing}
+  run   {files, cmd, out, env, timeout, link} -> {rc, log, secs, files: {rel: {sha, size, data | in_cas}}} | {missing}
+        link: path prefixes (e.g. ".cache/concept_bench/") whose files are READ-ONLY inputs: symlinked to a per-worker local
+        copy of the blob (copied from the CAS once per worker, then shared by every job on it) instead of copied per job
   get   {sha, i, chunk}                 -> {i, n, data}             chunk i of gzip(blob) (outputs too big to inline)
 Never handles keys: the job env is whatever the client sends (the client refuses key-like names), and the RunPod
 environment's own secrets are stripped from the command's environment.
 """
 import base64, glob, gzip, hashlib, os, shutil, subprocess, sys, tempfile, time, uuid
 
-VERSION = "farm-1 2026-10-15"
+VERSION = "farm-3 2026-10-15"
 ROOT = "/runpod-volume/exo-farm" if os.path.isdir("/runpod-volume") else os.path.join(tempfile.gettempdir(), "exo-farm")
 CAS = os.path.join(ROOT, "cas"); PARTS = os.path.join(ROOT, "parts"); SHARED = os.path.join(ROOT, "shared")
 INLINE_MAX = 6 * 1024 * 1024          # bytes of gzip returned inline per job; bigger outputs stay in the CAS for "get"
@@ -26,6 +28,18 @@ CHUNK = 6 * 1024 * 1024
 
 def _blob(sha):
     return os.path.join(CAS, sha[:2], sha)
+
+
+LOCAL = "/tmp/farm-blobs"                                      # worker-local disk: read-only blobs used by `link` files
+
+
+def _local_blob(sha):
+    """path of a worker-local copy of blob sha (copied from the network volume once, atomic)"""
+    p = os.path.join(LOCAL, sha)
+    if not os.path.exists(p):
+        os.makedirs(LOCAL, exist_ok=True); tmp = p + "." + uuid.uuid4().hex[:8]
+        shutil.copyfile(_blob(sha), tmp); os.chmod(tmp, 0o444); os.replace(tmp, p)
+    return p
 
 
 def _sha(path):
@@ -134,10 +148,13 @@ def run(job):
     base = "/tmp/farm" if os.path.isdir("/tmp") else tempfile.gettempdir()
     wd = os.path.join(base, job.get("tag", "job") + "-" + uuid.uuid4().hex[:8]); os.makedirs(wd)
     try:
+        link = tuple(job.get("link", []))
         for rel, (sha, mode) in files.items():
             if rel.startswith("/") or ".." in rel.split("/"):
                 continue
             p = os.path.join(wd, rel); os.makedirs(os.path.dirname(p), exist_ok=True)
+            if link and rel.startswith(link):
+                os.symlink(_local_blob(sha), p); continue
             shutil.copyfile(_blob(sha), p); os.chmod(p, int(mode))
         for rel in job.get("shared", []):                      # persistent writable dirs on the volume (e.g. .cache/concept_bench)
             if rel.startswith("/") or ".." in rel.split("/"):
@@ -171,7 +188,7 @@ def run(job):
                 if not os.path.isfile(p):
                     continue
                 rel = os.path.relpath(p, wd)
-                if rel in out or rel.startswith(".farm_bin"):
+                if rel in out or rel.startswith(".farm_bin") or os.path.islink(p):
                     continue
                 sha = _sha(p)
                 if before.get(rel) == sha:

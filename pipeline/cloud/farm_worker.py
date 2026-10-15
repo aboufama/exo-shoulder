@@ -10,8 +10,35 @@ no stock. 4 jobs per worker (max_concurrency 4) because the account's worker quo
 the user's render endpoint held 6 + 4 of it on 2026-10-15): 4 workers give 16 job slots (a job alone gets all 8 vCPU).
 CPU serverless exists only in EU-RO-1, so the CAS network volume lives there too.
 Scale to zero (workersMin 0), idle 10 s, workersMax 4, 1 h server-side runaway limit.
+Redeploy without a new endpoint (the account worker quota refuses one): tools/farm_redeploy.py.
 """
+import os
+
 from runpod_flash import CpuInstanceType, DataCenter, Endpoint, NetworkVolume
+
+JOBS_PER_WORKER = 4                                            # keep equal to max_concurrency below (a literal: flash reads it statically)
+# The Flash CPU image boots /app/handler.py, which imports the generated handler_exo-cpu1.py as a module and then calls
+# runpod.serverless.start({"handler": handler}) WITHOUT the generated concurrency_modifier: max_concurrency=4 was never
+# applied and every worker took ONE job at a time (measured 2026-10-15 21:45 UTC on the farm-2 build: 12 sleep-20 jobs,
+# max 1 concurrent per worker; runpod 1.10.1 has no env var for it). This module is imported while that handler loads,
+# before start() runs, so wrap start() to add the modifier. Worker only (RUNPOD_ENDPOINT_ID), never at build time; any
+# failure leaves the stock 1-job behaviour.
+if os.environ.get("RUNPOD_ENDPOINT_ID"):
+    try:
+        import runpod.serverless as _rs
+
+        if not getattr(_rs.start, "_farm_concurrency", False):
+            _start0 = _rs.start
+
+            def _start(config, *a, **k):
+                if isinstance(config, dict):
+                    config.setdefault("concurrency_modifier", lambda current: JOBS_PER_WORKER)
+                return _start0(config, *a, **k)
+
+            _start._farm_concurrency = True
+            _rs.start = _start
+    except Exception:                                           # noqa: BLE001
+        pass
 
 VOL = NetworkVolume(name="exo-farm-cas", size=20, datacenter=DataCenter.EU_RO_1)        # 20 GB = $1.40/month
 
