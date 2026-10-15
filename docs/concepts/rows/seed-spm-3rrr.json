@@ -14,11 +14,11 @@
  "inband10": 0.2514,
  "contact": 0.0208,
  "gap": 193.44,
- "v_reach": null,
- "v_follow": null,
- "v_inband14": null,
- "v_inband10": null,
- "v_gap": null,
+ "v_reach": 0.1812,
+ "v_follow": 0.3,
+ "v_inband14": 0.3552,
+ "v_inband10": 0.2514,
+ "v_gap": 193.44,
  "n_configs": 51,
  "verdict": "dead: gap 193.44 vs 68.93 for the 3R on the same bench; not worth a GPU sweep - the limiter is structural (leg closure / leg-leg collisions over the shoulder workspace, and nine rigid parts each clearing the highest skin they sweep)",
  "limiter": "kinematic workspace vs collisions: with every hub axis on reachable skin, the best closes 0.92 of poses but then loses 116-190/220 to leg-leg and leg-platform collisions; local short legs (entry 46) lose 97/220 to leg closure (leg 1: 56). Proximity: middle hubs 62-201 mm and links up to 204 mm from GH over skin 45-70 mm away (inband14 0.355)",
@@ -52,5 +52,6 @@
   "clear": 2.760769024829036,
   "q": 0.95,
   "acc": 1
- }
+ },
+ "audit": "audit 2026-10-15: death stands. Entry 46 re-measured on Bench(60,160) fast: identical (193.44). Upper bound with every adjacent-member collision waived: entry 46 187.80, entry 49 166.49 (reach 0.41, follow 0.75, inband14 0.049) - still ~100 above the 3R. Limiter: the 3 middle hubs sweep the shoulder and are fitted 150-400 mm from GH, so inband14 stays <= 0.36 whatever the collision rules."
 }

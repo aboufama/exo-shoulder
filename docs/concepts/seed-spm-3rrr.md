@@ -101,3 +101,20 @@ sweeps; the in-band ceiling falls with that area, and parallel legs multiply it.
 Sketch: docs/concepts/img/seed-spm-3rrr.png (rest and overhead, skin radius from GH, parts by group).
 Reproduce: `python3 docs/concepts/models/seed-spm-3rrr.py redteam` (best of the sweep), `... sweep3 <budget s>`,
 `... sweep2 <nA> <budget s>`, `... sketch`.
+
+## Audit (2026-10-15, independent verifier)
+
+Verdict: **the death stands.** I looked for a modelling bug, a convention that differs from `tools/concept_baseline.py`, a parameter range that missed the obvious region, and an over-strict check.
+
+- **Re-measure.** Entry 46 on Bench(60,160) fast gives exactly the reported numbers: gap 193.44, reach 0.181, follow 0.30, inband14 0.355, inband10 0.251, contact 0.021. Losses: 107 kinematic (104 leg closure / singular, 3 path), 20 collisions.
+- **Kinematics.** The two-cone leg IK, the Gosselin Jacobian, the frame chain (V = S Q V_loc = H V_loc) and the slerp continuity check are correct.
+- **Over-strict check? Tested.** In entry 46, 14 of the 20 collisions are between adjacent members of one joint (D0-PF at HV0, P1-BF at HB1). A real designer would stack the upper member over the lower one there. To bound that, I waived every adjacent-member collision, which is generous because it allows interpenetration:
+  - entry 46 goes from 193.44 to **187.80**;
+  - entry 49 (17 kinematic fails only) goes from 205.01 to **166.49** (reach 0.41, follow 0.75, inband14 0.049);
+  - entry 18 goes to 238.93, still mostly non-adjacent leg-leg crossings (D0-D2, P0-P1).
+
+  None of these comes within 10 of 68.93.
+- **A flaw, but not the limiter.** A ray that does not exit the skin within 270 mm (into the trunk) is fitted at a fallback of 400 mm. The accessibility rule checks only the axis, not a hub's rim rays. So hubs can still sit at 402 mm (entry 49: HW0, HW1, HV1). Fixing it, by dropping those poses or by using the baseline's outermost crossing, cannot recover proximity. Even in the cleanest design (entry 46) the middle hubs honestly sit 62-201 mm from GH and the platform hubs 104-152 mm, so inband14 stays at or below 0.36. Inband alone then costs more than 54 gap points, before any lost reach or follow.
+- **Conventions vs the baseline.** This model is stricter than the 3R reference in two ways: it checks collisions and clip continuity, and both are required by the honesty rules. It is more lenient in one: it fits to the first exit rather than the outermost crossing. None of these flips the verdict.
+
+Measured reason in one line: the three middle hubs sweep the whole shoulder sphere, so any rigid fit puts them 150-400 mm from GH (inband14 at most 0.36). The kinematically rich designs then lose most poses to leg crossings, and still score 166 or more even with all adjacent-member collisions waived.
