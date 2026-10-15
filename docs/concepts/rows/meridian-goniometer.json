@@ -25,9 +25,20 @@
  "note": "Bench(60,160) fast grid, K3 march, K2 dense, K6 (+ by-construction bearing pairs), audit clean (honest); best k 0 of 195; GATE NOT passed (2nd-half gain 0.0, last-third gain 0.0, top-5 spread 5.81 score points). Sweep: 1 local + 194 farm Sobol (128 hub-J3 3R, 64 spec C-slide, 2 seeds); 110 entries flagged honest:false after the run (rail parked at the 400 mm fallback; numbers unchanged); CMA-ES from k0 running on the farm (python3 docs/concepts/models/meridian-goniometer.py farmcma '{}' 6 24 0.2 hub), appends to the sweep. Red team (k0): overhead flexion (90,165,-90) hub3 -2.8 / neck -3.7 mm (contact); root 1.7 mm at (0,60,-60); behind-back (-75,30,165) and abduction-ER (-15,75,90) singular (closure margin 8.3 / 1.3 deg); rail nearest skin 8.4 mm at abd 90 / extension, median > 31 mm (beyond the grid) in every pose. Mass 318 g Ti.",
  "doc": "docs/concepts/meridian-goniometer.md",
  "model_file": "docs/concepts/models/meridian-goniometer.py",
- "best_params": {},
+ "best_params": {
+  "j3": "hub",
+  "note": "PARAMS defaults of the model file (champion axes, rail alpha 45 side +1, qcov 0.95, q 0.95)"
+ },
  "best_k": 0,
- "inband_member": null,
+ "inband_member": {
+  "hub1": 1.0,
+  "root": 0.3067,
+  "rail": 0.0,
+  "carriage": 0.0,
+  "bridge": 0.0,
+  "hub3": 0.6287,
+  "neck": 0.758
+ },
  "rail_r": 152.9,
  "mass_g": null,
  "honest": true,

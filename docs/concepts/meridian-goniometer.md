@@ -64,3 +64,62 @@ The median requirement of the same samples is 52-79 mm (hub) / 59-119 mm (spec):
 WORST pose's height over its WHOLE arc, so it rides 30-80 mm over the skin in the median pose. This is the proximity
 atlas rule (a rigid part must clear the highest skin it ever passes over) at its most extreme: the rail is the
 longest rigid arc of any J2 (125-150 deg of arc + the carriage) and it is swept by q1 around the whole shoulder.
+
+## Sweep (Bench(60, 160), fast grid, honest kit checks)
+
+195 configurations: 1 local check + 194 on the cloud CPU farm (Sobol: 128 rail-on-3R with an arm hub J3 over az, el,
+A1, A2, wd, wa, sigma, side, alpha 8-85, dphi +-60, Lc 25-50, qcov 0.4-1.0, q 0.85-1.0; 64 spec pointer + C-slide over
+az, el, side, alpha, dphi, Lc, qcov, q, s, phi_s, cov; 2 seeds). 119 park the rail at the fallback radius (flagged
+dishonest, see above).
+
+| | gap | score | reach | follow | in-band 14 | in-band 10 | contact | rail radius | rail / carriage in band |
+|---|---|---|---|---|---|---|---|---|---|
+| best honest (k0: champion axes, rail alpha 45, side +1) | **102.5** | 62.7 | 0.775 | 0.917 | 0.115 | 0.077 | 0.082 | 153 mm | 0.00 / 0.00 |
+| 2nd (k18: alpha 51, sigma +1) | 103.23 | 62.5 | 0.688 | 0.833 | 0.209 | | 0.012 | 139 mm | 0.0002 / 0.00 |
+| ring-like rail (k5: alpha 12, the rail ~ a big hub about a2) | 125.08 | | 0.525 | 0.717 | 0.399 | | 0.142 | 89 mm | 0.015 / 0.00 |
+| spec (k1: pointer p*, C-slide, alpha 40) | 112.24 | 59.2 | 0.463 | 0.833 | 0.385 | 0.317 | 0.053 | 131 mm | 0.0002 / 0.00 |
+
+Reference: champion spherical 3R 68.93 (same bench), pointer-cslide (the spec's J2 as a hub) 69.84.
+
+**Convergence gate: NOT passed** (2nd-half gain 0.0, last-third gain 0.0, top-5 spread 5.81 score points > 3). CMA-ES
+from k0 is running on the farm and appends to the sweep (the loop to continue:
+`RUNPOD_API_KEY="$(cat ~/.runpod_key)" python3 docs/concepts/models/meridian-goniometer.py farmcma '{}' 6 24 0.2 hub`;
+`... farmcma '{}' 6 24 0.2 cslide` for the spec). The farm queue was 13+ minutes per batch during this screen (uploads
+of 600 MB by concurrent agents), so the gate could not be run to the end inside the time box.
+
+## Red team (k0)
+
+| pose | result |
+|---|---|
+| rest (0, 4, 0) | taken; hub1 3.1 mm, hub3 8.9, neck 5.2; rail / carriage / bridge > 31 mm (beyond the grid) |
+| overhead abduction (0, 150, 0) | taken; rail 20.3 mm at its nearest, carriage 15.7, bridge 18.7 - none in band |
+| overhead flexion (90, 165, -90) | **contact**: hub3 -2.8 mm, neck -3.7 mm |
+| across-body (135, 90, -45) | taken; rail / carriage > 31 mm |
+| behind-the-back (-75, 30, 165) | **singular** (closure margin 8.3 deg < 10) |
+| abduction 75 ER 90 (-15, 75, 90) | **singular** (margin 1.3 deg) |
+| abduction 60 IR 60 (0, 60, -60) | taken; **root 1.7 mm** from the skin (pinch under the 2 mm rule) |
+| abduction 90 / extension 45 | the rail comes down to 8.4 mm of the skin at one point, its median stays > 31 mm |
+
+The optimistic number: none found in the rail (it is pessimistic by construction: one radius); the bench counts the
+carriage at its real height over the rail (rail + 6.15), not at the rail's skin face.
+
+## Verdict and what it teaches
+
+Screened, not converged, but the limiter is structural and measured: **a virtual-axis arc rail is the worst place
+for J2's metal, not the best.** A rail is one circle about a2 (the rigid carriage forbids any other shape), it spans
+the whole elevation travel (q2 window 100-115 deg for 90-95 % of the closing poses, + the carriage + stops = 125-150
+deg of arc), and it is swept by q1 around the shoulder; so it must clear the highest skin under ANY of its points in
+ANY pose. Measured: q95 requirement 57 mm at the overhead end vs 137 mm at the rest end; the fitted rail rides
+116-173 mm from GH, 0-6 % of its samples in band in every honest configuration, and in 61 % of the coarse configs
+some rail sample has no clearance at all (its rest end passes through the arm or torso at mid elevation). Shrinking
+the arc (alpha -> 10 deg, the rail becomes a large ring bearing about a2) brings it to 89 mm but costs reach (0.53) -
+that is a hub, i.e. the champion's floating hub 2 again. On the spec's pointer the C-slide's twist window still caps
+reach at 0.46 (pointer-cslide's measured limiter).
+
+**New knowledge (predicts beyond this morphology):** a rigid curved guide for a revolute joint costs the joint's full
+travel + its shoe in arc length at one radius; under the proximity rule its height is the max of the skin's
+requirement over that whole arc and every pose, so a guide can only beat a hub when the joint's travel is short
+(< ~40 deg of arc) or when the guide rides in a frame in which the skin under it barely moves (scapula-fixed near the
+J1 pole, or arm-fixed along the humerus). J2 (elevation, 100+ deg) is the worst candidate for a rail; humeral twist
+(arm-fixed band) and a short scapula-side arc are the only places rails have scored (rail-elbow's stages are also
+0 % in band at 109/111 mm for the same reason).
