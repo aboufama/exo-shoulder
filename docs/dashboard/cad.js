@@ -56,17 +56,17 @@
       let dom;
       if (unit === 'pct') dom = [0, 1];
       else { const hi = Math.max(thr !== null ? thr * (dir === 'lo' ? 4 : 1.4) : 1, d3.quantile(vals.slice().sort(d3.ascending), 0.75) * 1.15); dom = [0, hi]; }
-      let run = null; const steps = [];
-      r3.forEach((c) => { if (run === null || (dir === 'hi' ? c.value > run : c.value < run)) { run = c.value; steps.push({ t: X.date(c.time), v: c.value }); } });
+      const run = {}, steps = { current: [], older: [] };
+      r3.forEach((c) => { const k = c.rules === 'current' ? 'current' : 'older'; if (run[k] === undefined || (dir === 'hi' ? c.value > run[k] : c.value < run[k])) { run[k] = c.value; steps[k].push({ t: X.date(c.time), v: c.value }); } });
       const dots = rows.map((c) => ({ t: X.date(c.time), v: c.value, r: 3.5, shape: c.level === 'Full CAD' ? 'circle' : 'square',
         fill: c.level === 'Full CAD' ? (c.dof === 3 ? 'var(--color-fg)' : 'var(--cds-chart-muted)') : 'none', stroke: c.dof === 3 ? 'var(--color-fg)' : 'var(--cds-chart-muted)',
         opacity: c.rules === 'older' ? 0.35 : 1, head: X.tUTC(X.date(c.time)),
         tip: [c.design, [rid, fmtV(c.value, unit)], ['pass', c.ok ? 'yes' : 'no'], ['level', c.level + ', ' + c.dof + ' DOF'], ['judging rules', c.rules], ['source', c.src]] }));
       X.timeChart(ch, { H: 170, x: xd, y: { domain: dom, fmt: unit === 'pct' ? d3.format('.0%') : d3.format('~g') },
         refs: thr !== null && thr >= dom[0] && thr <= dom[1] ? [{ v: thr, label: 'pass', cls: 'sw-tgt' }] : [],
-        lines: [{ pts: steps, color: X.acc(), width: 2, extend: true }], dots });
+        lines: [{ pts: steps.older, color: 'var(--cds-chart-muted)', width: 1.5, dash: '5 4', extend: steps.current.length ? steps.current[0].t : true }, { pts: steps.current, color: X.acc(), width: 2, extend: true }], dots });
     });
-    X.key(document.getElementById('cad-key'), [['line', X.acc(), 'best 3-DOF so far'], ['dot', 'var(--color-fg)', 'full CAD'], ['square', 'var(--color-fg)', 'keep-out CAD'],
+    X.key(document.getElementById('cad-key'), [['line', X.acc(), 'best 3-DOF so far, current rules'], ['dash', 'var(--cds-chart-muted)', 'best under older rules'], ['dot', 'var(--color-fg)', 'full CAD'], ['square', 'var(--color-fg)', 'keep-out CAD'],
       show4 ? ['dot', 'var(--cds-chart-muted)', '4 DOF (never joined to the 3-DOF line)'] : null, ['dash', 'var(--color-ok)', 'pass threshold'], ['tri', 'var(--color-fg)', 'off the scale (hover for the value)']]);
   }
 

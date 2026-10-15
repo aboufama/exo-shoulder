@@ -27,7 +27,7 @@
     <article class="sw-card" id="record-card">
       <div class="sw-card-head">
         <div class="sw-h2row"><h2 id="record">Concept bench record over time</h2><span class="sw-dir">&#8595; lower is better</span></div>
-        <p class="sw-note">The step line is the best gap any morphology has reached so far on the concept bench (every configuration every agent evaluated, unverified until the verifier re-measures it). It turns to the accent colour once it is below the 3R baseline; each new record is a dot on the line and the current one is named. Faint dots are single configurations; a filled diamond is a verifier's re-measured gap.</p>
+        <p class="sw-note">The step line is the best gap any morphology has reached so far on the concept bench (every configuration every agent evaluated, unverified until the verifier re-measures it). It turns to the accent colour once it is below the 3R baseline; each new record is a dot on the line and the current one is named. Faint dots are single configurations; a hollow ring is one its agent passed over (measured before the agent's claimed row and better than it: the agent found it wrong, so it sets no record); a filled diamond is a verifier's re-measured gap.</p>
       </div>
       <div class="sw-key" id="record-key"></div>
       <div class="sw-chart" id="record-chart" data-source="sweeps morphs"></div>
@@ -35,7 +35,7 @@
     <article class="sw-card" id="cadrec-card">
       <div class="sw-card-head">
         <div class="sw-h2row"><h2 id="cadrec">Built CAD record: R1 over time</h2><span class="sw-dir">&#8593; higher is better</span></div>
-        <p class="sw-note">R1 is the share of the covered skin 2-14 mm from the metal while the exo follows the arm, judged on the built CAD with the exact posed skin (pass at 90%). The step line is the best 3-DOF design so far; each dot is one judged design (filled: full CAD, hollow: keep-out CAD). Values judged before a judging-rule change are faded.</p>
+        <p class="sw-note">R1 is the share of the covered skin 2-14 mm from the metal while the exo follows the arm, judged on the built CAD with the exact posed skin (pass at 90%). The step line is the best 3-DOF design so far under the current judging rules; each dot is one judged design (filled: full CAD, hollow: keep-out CAD). Values judged before a judging-rule change are faded and keep their own dashed record line: they are not compared with current ones.</p>
       </div>
       <div class="sw-key" id="cadrec-key"></div>
       <div class="sw-chart" id="cadrec-chart" data-source="cad cad_record"></div>
@@ -84,7 +84,7 @@
     <article class="sw-card" id="cadtime-card">
       <div class="sw-card-head">
         <div class="sw-h2row"><h2 id="cadtime">Each judged requirement over time</h2><span class="sw-dir">one chart per requirement · same time axis</span></div>
-        <p class="sw-note">Every built design the outside judges scored, at the time it was judged. The dashed line is the pass threshold, the step line the best 3-DOF value so far. Filled: full CAD; hollow: keep-out CAD; faded: judged before that requirement's judging rule changed. Percent charts share one 0-100% scale.</p>
+        <p class="sw-note">Every built design the outside judges scored, at the time it was judged. The dotted line is the pass threshold, the step line the best 3-DOF value so far under the current judging rules (dashed grey: the best under older rules). Filled: full CAD; hollow: keep-out CAD; faded: judged before that requirement's judging rule changed. Percent charts share one 0-100% scale.</p>
       </div>
       <div class="sw-controls"><button type="button" class="sw-toggle" id="cad-show4" aria-pressed="false">Show 4-DOF designs</button></div>
       <div class="sw-key" id="cad-key"></div>

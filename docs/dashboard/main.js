@@ -23,8 +23,13 @@
     const T = (t) => document.createTextNode(t);
     if (s.ver_id) {
       const win = s.base_gap !== null && s.ver_gap < s.base_gap;
+      if (win) take.append(el('span', 'sw-take-win', 'Winner'));
       take.append(T('Concept-bench leader: '), b(s.ver_name, 'ver_name', 'sw-acc'), T(', verified gap '), b(X.gapf(s.ver_gap), 'ver_gap'),
         T(win ? ', ' : ' ('), b(X.gapf(Math.abs(s.ver_delta)), 'ver_delta'), T(win ? ' below the 3R baseline. ' : ' above the 3R baseline). '));
+    } else if (s.claim_id && (s.sweep_gap === null || s.claim_gap <= s.sweep_gap)) {
+      const below = s.claim_delta < 0;
+      take.append(T('No verified concept-bench leader yet. Best evidence: '), b(s.claim_name, 'claim_name'), T('’s claimed row, gap '), b(X.gapf(s.claim_gap), 'claim_gap'),
+        T(', '), b(X.gapf(Math.abs(s.claim_delta)), 'claim_delta'), T(below ? ' below the 3R baseline (waiting for the verifier). ' : ' above the 3R baseline. '));
     } else if (s.sweep_id) {
       const below = s.sweep_delta < 0;
       take.append(T('No verified concept-bench leader yet. Best evidence: '), b(s.sweep_name, 'sweep_name'), T('’s best sweep configuration, gap '), b(X.gapf(s.sweep_gap), 'sweep_gap'),

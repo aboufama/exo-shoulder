@@ -51,12 +51,12 @@ dash.calc('funnel', {
 dash.calc('cad_record', {
   inputs: ['cad'],
   title: 'Built CAD R1 record',
-  description: 'Each time a judged 3-DOF design set a new best R1 (share of skin 2-14 mm from the metal), in judge-time order.',
+  description: 'Each time a judged 3-DOF design set a new best R1 (share of skin 2-14 mm from the metal), in judge-time order; values judged under older rules keep their own record, never compared with current ones.',
   fn: (cad) => {
     cad = cad.filter((r) => r.empty !== true);
-    let best = null; const out = [];
+    const best = {}; const out = [];
     cad.filter((c) => c.req === 'R1' && c.dof === 3).sort((a, b) => (a.time < b.time ? -1 : a.time > b.time ? 1 : 0)).forEach((c) => {
-      if (best === null || c.value > best) { best = c.value; out.push({ time: c.time, design: c.design, level: c.level, value: c.value, rules: c.rules }); }
+      if (best[c.rules] === undefined || c.value > best[c.rules]) { best[c.rules] = c.value; out.push({ time: c.time, design: c.design, level: c.level, value: c.value, rules: c.rules }); }
     });
     return out;
   }

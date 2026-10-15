@@ -127,13 +127,13 @@ Each dataset is an attached JSON file (an array of row objects). Time-series row
 | id | Title | Sources | `tools/dash_build.py` |
 |---|---|---|---|
 | morphs | Concept bench morphologies | docs/concepts/catalogue.json < families.json < rows/*.json, + best sweep config per id from sweeps/*.json | `morphs()` |
-| sweeps | Concept bench sweeps | docs/concepts/sweeps/*.json (each configuration's `t`), with per-morphology `best_gap`, overall `record_gap` and `is_record` | `sweeps()` |
+| sweeps | Concept bench sweeps | docs/concepts/sweeps/*.json (each configuration's `t`), with per-morphology `best_gap`, overall `record_gap`, `is_record` and `passed_over` (see Times and rules); a file gap >= 999 is the agent's failed-configuration marker (no gap) | `sweeps()` |
 | cad | Built CAD judge results | tools/judged_history.py (score.json, score_14mm.json, judge/workspace.json, part_contact.json, dynamics.json) + judge/scorecard.json; thresholds judge/requirements.json | `cad()` |
 | gpu_evals | GPU evaluator detail runs | pipeline/conformal/gpu_client/band_eval_*.json via `judged_history.py --evals` | `gpu_evals()` |
 | gpu_searches | GPU band searches | pipeline/conformal/gpu_client/band_search_*.json | `gpu_searches()` |
 | reqs | Requirement board | judge/scorecard.json files (3-DOF), judge/requirements.json, `cad` | `reqs()` |
 | events | Event log | docs/concepts/events.jsonl + judged designs (first judge time) + built-CAD R1 records | `events()` |
-| spend | GPU spend log | docs/RUNPOD_COSTS.md audit rows | `spend()` |
+| spend | GPU spend log | docs/RUNPOD_COSTS.md audit rows (the 'balance before -> after' column; a single balance is an audit with no spend) | `spend()` |
 | cov3d | Arm reach in 3-D | tools/coverage3d.py (judge/workspace.json), newest 8 designs | `cov3d()` |
 | meta | Data build info | the build itself (built_at, commit, warnings) | `main()` |
 
@@ -141,13 +141,20 @@ Calculations the page defines (`dash.calc`; their formulas are visible in the da
 
 - `summary`: the headline numbers.
 - `funnel`: the stage counts.
-- `cad_record`: the steps of the built-CAD R1 record.
+- `cad_record`: the steps of the built-CAD R1 record, one record per judging-rule epoch (`rules` older / current): values judged before a rule change are never compared with current ones, so the Leader chart draws the older record dashed grey and the current one in the accent colour; the CAD tab's small multiples do the same.
 - `cov3d_share`: the share of poses reached per design.
 
 Times:
 
 - Sweep configurations and events carry the time their agent wrote.
-- A judged design's time is the earlier of the commit that added its score.json and the file's mtime.
+- A judged design's time is the earliest of: the commit that added its score.json, the file's mtime, and the first
+  commit whose docs (docs/*.md, README.md) name the design id. Score files are often committed hours later in a
+  batch (7c94de2 at 13:33 carried builds reported in the docs from 05:52 on); the docs mention bounds the judge time.
+- Passed-over configurations: a sweep configuration measured before its morphology's claimed row (rows/<id>.json,
+  `t_screened`) and better than the claim was seen and rejected by its agent. It stays in `sweeps` with
+  `passed_over: true`, drawn as a hollow ring, and counts for no best and no record. Two real cases: the 80
+  seed-offset-3r-slides configurations scored under a jam-contact metric hole (best 49.15 vs the claimed 57.95), and
+  the seed-arc-rails rev-1 entries whose links were not joined to the rails (46.67, "which was wrong").
 - A value found only in a scorecard takes the scorecard's last commit, or its mtime while uncommitted.
 - GPU files take the commit that added them: a batch committed together shares one time. Each dataset's description
   says so.
@@ -188,10 +195,13 @@ and cannot load offline, so the harness renders the serif in a fallback face.
 ## Known limits
 
 - Times on GPU files are commit times, not run times.
-- A built design judged before its commit shows its commit time unless its file mtime is earlier. A fresh clone resets
-  mtimes, so seven designs committed together at 13:33 UTC on Oct 15 share that time, and a design judged under older
-  rules but committed later can look "current" (example: cad_r16_n3_s1373_1_fair R1 70.6 %, scored before the 11:55
-  held-out-leak fix according to the round-1 review).
+- A built design judged before its commit and never named in the docs shows its commit time (or an earlier mtime).
+  Of the seven designs committed together at 13:33 UTC on Oct 15, six are dated by their first docs mention;
+  cad_r16_n3_s1373_1_fair300 (built in the same pre-11:55 fair-field series) is not named in any doc and still counts
+  as 'current rules' (it is the R1-aim 'best, current rules' value, 34.5 %). A judge-time field in the score files
+  would end this.
+- A configuration an agent rejects while still sweeping (before it files its claimed row) counts until the claim
+  arrives; `rev` fields in sweep files are not read (their values are not uniform).
 - The best-sweep-configuration evidence is the agent's own measurement on the fast (grid) bench. Only `v_*` values
   are verified.
 - docs/FINDINGS.md tables are not parsed: they are prose tables without a stable schema. Their GPU numbers reach the

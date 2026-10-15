@@ -44,6 +44,7 @@ NUMS = ("reach", "follow", "inband14", "inband10", "contact")
 STATUSES = ("ideated", "modelling", "screened", "verified", "refuted", "dead", "duplicate", "gpu", "cad")
 KINDS = ("leader", "milestone", "measurement", "infra", "method", "judged")
 BASE_ID = "baseline-3r"
+FAILED_GAP = 999.0          # a sweep file's gap at or above this is the agent's marker for a failed configuration
 
 
 def warn(msg):
@@ -157,16 +158,32 @@ def sweep_file_rows(mid, items, src):
         r = dict(id=mid, t=t, k=to_int(x.get("k"), i), stage=str(x.get("stage") or x.get("mode") or ""))
         for f in NUMS: r[f] = share(x.get(f))
         r["gap"] = gap(r["inband14"], r["follow"], r["reach"], r["contact"])
-        if r["gap"] is None:
-            g = num(x.get("gap"))
-            r["gap"] = round(g, 2) if g is not None else None
+        raw = num(x.get("gap"))
+        if raw is not None and raw >= FAILED_GAP: r["gap"] = None          # the agent's own 'failed' sentinel (999)
+        elif r["gap"] is None: r["gap"] = round(raw, 2) if raw is not None else None
+        elif raw is not None and abs(raw - r["gap"]) > 0.02: warn(f"{src} k={r['k']}: file gap {raw} != recomputed {r['gap']}; recomputed kept")
         rows.append(r)
     if not rows and items: warn(f"{src}: no configuration has a time, skipped")
     return rows
 
 
+def claims():
+    """the agents' claimed rows: id -> (gap, claim time); see passed_over in sweeps()"""
+    out = {}
+    for p in glob.glob(os.path.join(CONCEPTS, "rows", "*.json")):
+        r = load(p)
+        if not isinstance(r, dict): continue
+        g = gap(*(share(r.get(k)) for k in ("inband14", "follow", "reach")), share(r.get("contact")))
+        t = norm_time(r.get("t_screened")) or (file_time(p) if g is not None else None)
+        if g is not None and t: out[slug(r.get("id") or os.path.splitext(os.path.basename(p))[0])] = (g, t)
+    return out
+
+
 def sweeps():
-    rows = []
+    """passed_over: a configuration measured before its morphology's claimed row and better than the claim. The agent saw
+    it and claimed something worse, i.e. rejected it (seed-offset-3r-slides: 80 configurations scored under a metric hole
+    it then closed, best 49.15 vs the claimed 57.95). It stays in the data but counts for no best and no record."""
+    rows, C = [], claims()
     for p in sorted(glob.glob(os.path.join(CONCEPTS, "sweeps", "*.json"))):
         try:
             D = load(p)
@@ -175,9 +192,14 @@ def sweeps():
         except Exception as e:
             warn(f"{os.path.relpath(p, REPO)}: skipped ({e})")
     rows.sort(key=lambda r: (r["t"], r["id"], r["k"]))
+    for r in rows:
+        c = C.get(r["id"])
+        r["passed_over"] = bool(c and r["gap"] is not None and r["t"] <= c[1] and r["gap"] < c[0] - 0.005)
+    n = sum(r["passed_over"] for r in rows)
+    if n: print(f"{n} sweep configuration(s) passed over by their agent's claim (no best, no record)", file=sys.stderr)
     best, rec = {}, None
     for r in rows:                                   # running bests in time order
-        g = r["gap"]
+        g = None if r["passed_over"] else r["gap"]
         if g is not None and (r["id"] not in best or g < best[r["id"]]): best[r["id"]] = g
         r["best_gap"] = best.get(r["id"])
         r["is_record"] = g is not None and (rec is None or g < rec)
@@ -254,7 +276,7 @@ def morphs(S):
                 m["v_gap"] = gap(pick("inband14"), pick("follow"), pick("reach"), pick("contact"))
             else: m["v_gap"] = None
             m["n_configs"] = len(sw) or to_int(m.get("n_configs"), 0) or 0
-            scored = [s for s in sw if s["gap"] is not None]
+            scored = [s for s in sw if s["gap"] is not None and not s["passed_over"]]
             if scored:
                 b = min(scored, key=lambda s: (s["gap"], s["t"]))
                 m.update(sweep_gap=b["gap"], sweep_t=b["t"], sweep_reach=b["reach"], sweep_follow=b["follow"],
@@ -329,6 +351,20 @@ def rules_since(ev):
     return out
 
 
+def first_mention(design):
+    """the first commit whose docs (docs/*.md, README.md) mention the design id: a judged build is reported as soon as it
+    is judged, while its score files may be committed hours later in a batch (7c94de2 at 13:33 carried builds judged
+    from 05:52 on); taking the earlier time keeps a pre-fix result from counting as 'current rules'"""
+    if not design or design == "None": return None
+    key = ("mention", design)
+    if key not in _GIT:
+        args = ["git", "-C", REPO, "log", "--format=%cI", "-G", re.escape(design) + r"([^_a-z0-9]|$)", "--", "docs/*.md", "README.md"]
+        try: out = subprocess.run(args, capture_output=True, text=True, timeout=60).stdout.split()
+        except Exception: out = []
+        _GIT[key] = norm_time(out[-1]) if out else None
+    return _GIT[key]
+
+
 def judged_history():
     try:
         out = subprocess.run([sys.executable, os.path.join(REPO, "tools", "judged_history.py")], cwd=REPO, capture_output=True, text=True, timeout=300)
@@ -338,7 +374,7 @@ def judged_history():
         warn(f"judged_history.py failed: {e}"); return []
     for r in rows:      # a build judged hours before its commit keeps the judge time in the files' mtime: take the earlier
         dd = os.path.join(DESIGNS, str(r.get("design")))
-        ts = [when(r.get("time"))] + [when(mtime(f)) for f in (f"{dd}/score.json", f"{dd}/score_14mm.json") if os.path.exists(f) and not dirty(os.path.relpath(f, REPO))]
+        ts = [when(r.get("time")), when(first_mention(str(r.get("design"))))] + [when(mtime(f)) for f in (f"{dd}/score.json", f"{dd}/score_14mm.json") if os.path.exists(f) and not dirty(os.path.relpath(f, REPO))]
         ts = [t for t in ts if t]
         r["time"] = iso(min(ts)) if ts else None
     return [r for r in rows if r.get("time")]
@@ -476,17 +512,19 @@ def events(C):
             row = dict(time=t, kind=k if k in KINDS else "milestone", event=e, source="swarm")
             if isinstance(r.get("affects"), list) and r["affects"]: row["affects"] = ",".join(map(str, r["affects"]))
             rows.append(row)
-    first, rec = {}, None
+    first = {}
     for c in C:
         first.setdefault(c["design"], c)
     for d, c in first.items():
         vals = {x["req"]: x for x in C if x["design"] == d and x["time"] == c["time"]}
         bits = [f"{rid} {'%.1f %%' % (100 * vals[rid]['value']) if vals[rid]['unit'] == '%' else vals[rid]['value']}" for rid in ("R1", "R3", "R16") if rid in vals]
         rows.append(dict(time=c["time"], kind="judged", event=f"Judged {d} ({c['level']}, {c['dof']} DOF)" + (": " + ", ".join(bits) if bits else ""), source="judges"))
+    rec = {}                                         # one record per judging-rule epoch: older values are not compared
     for c in [x for x in C if x["req"] == "R1" and x["dof"] == 3]:
-        if rec is None or c["value"] > rec:
-            rec = c["value"]
-            rows.append(dict(time=c["time"], kind="leader", event=f"Built-CAD R1 record: {100 * rec:.1f} % ({c['design']}, {c['level']})", source="judges"))
+        if c["rules"] not in rec or c["value"] > rec[c["rules"]]:
+            rec[c["rules"]] = c["value"]
+            tail = "" if c["rules"] == "current" else "; judged before a later judging-rule change"
+            rows.append(dict(time=c["time"], kind="leader", event=f"Built-CAD R1 record: {100 * c['value']:.1f} % ({c['design']}, {c['level']}{tail})", source="judges"))
     out, seen = [], set()
     for r in rows:
         key = (r["time"], r["event"])
@@ -502,9 +540,11 @@ def spend():
     rows, start = [], None
     for line in txt.splitlines():
         m = re.match(r"\| (\d\d)-(\d\d) (\d\d:\d\d)(?:-(\d\d:\d\d))? \| ([^|]*)\|", line)
-        b = re.search(r"(\d+\.\d\d) -> (\d+\.\d\d)", line)
+        cells = line.split("|")
+        bal = cells[6].strip() if len(cells) > 6 else ""          # the 'balance before -> after' column
+        b = re.match(r"(\d+\.\d\d)(?: -> (\d+\.\d\d))?", bal)
         if not (m and b): continue
-        before, after = float(b.group(1)), float(b.group(2))
+        before = float(b.group(1)); after = float(b.group(2)) if b.group(2) else before     # an audit row: one balance
         if start is None: start = before
         rows.append(dict(time=f"2026-{m.group(1)}-{m.group(2)}T{m.group(4) or m.group(3)}:00Z", endpoint=m.group(5).strip()[:60],
                          balance=after, spent=round(start - after, 2)))
@@ -530,8 +570,8 @@ def cov3d(keep=8):
 # ---------------------------------------------------------------- main
 DESC = {
     "morphs": ("Concept bench morphologies", "One row per morphology in the swarm's catalogue: status, the agent's claimed bench numbers, the verifier's re-measured numbers (v_), its best sweep configuration so far, and the 3R baseline once (is_baseline). Built from docs/concepts/catalogue.json, families.json, rows/*.json and sweeps/*.json."),
-    "sweeps": ("Concept bench sweeps", "Every configuration a morphology agent evaluated on the concept bench, with its time, gap, its morphology's best gap so far (best_gap) and the record over all morphologies so far (record_gap). Built from docs/concepts/sweeps/*.json."),
-    "cad": ("Built CAD judge results", "One row per judged design and requirement: value, threshold and pass from the outside judges, timed by the judge output (score files: the earlier of commit and file time; scorecard-only values: the scorecard's commit). Built from tools/judged_history.py, judge/scorecard.json files and judge/requirements.json."),
+    "sweeps": ("Concept bench sweeps", "Every configuration a morphology agent evaluated on the concept bench, with its time, gap, its morphology's best gap so far (best_gap) and the record over all morphologies so far (record_gap); passed_over marks a configuration its agent measured before its claimed row and rejected (better than the claim), which counts for no best. Built from docs/concepts/sweeps/*.json."),
+    "cad": ("Built CAD judge results", "One row per judged design and requirement: value, threshold and pass from the outside judges, timed by the judge output (score files: the earliest of their commit, their file time and the first commit whose docs report the design; scorecard-only values: the scorecard's commit). Built from tools/judged_history.py, judge/scorecard.json files and judge/requirements.json."),
     "gpu_evals": ("GPU evaluator detail runs", "Every GPU band-evaluator detail evaluation of a search candidate (in-band 14 mm, follow, workspace share, overhead follow). Time is the git commit that added the result file, not the run itself. Built from pipeline/conformal/gpu_client/band_eval_*.json via tools/judged_history.py --evals."),
     "gpu_searches": ("GPU band searches", "One row per GPU search job: its final best fitness, follow, generations, evaluations and seconds. Time is the git commit that added the result file. Built from pipeline/conformal/gpu_client/band_search_*.json."),
     "reqs": ("Requirement board", "Latest status of R1-R17 (with R1-aim and R5-aim) for the best judged 3-DOF design (most passes on its scorecard, then R1), with the best value any 3-DOF design reached under the current judging rules. Built from judge/scorecard.json files and judge/requirements.json."),

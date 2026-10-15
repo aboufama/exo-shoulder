@@ -73,7 +73,11 @@ dash.calc('cov3d_share', {
     ['parts', 'body', 'chain'].forEach((k) => fill('reach3d-' + k, k, pct));
     const share = document.getElementById('reach3d-share'); share.style.color = cs && num(cs.share) >= 0.9 ? 'var(--color-ok)' : 'var(--color-fg)';
     const rd = rowsAll.find((r) => r.design === design);
-    ['level', 'id'].forEach((f) => { const e = document.getElementById('reach3d-' + f); e.setAttribute('data-where', 'design=' + encodeURIComponent(design || '')); e.textContent = rd ? (f === 'id' ? rd.design : rd.level) : ''; });
+    ['level', 'id'].forEach((f) => {
+      const e = document.getElementById('reach3d-' + f);
+      if (rd) { e.setAttribute('data-field', f === 'id' ? 'design' : 'level'); e.setAttribute('data-where', 'design=' + encodeURIComponent(design)); } else { e.removeAttribute('data-field'); e.removeAttribute('data-where'); }
+      e.textContent = rd ? (f === 'id' ? rd.design : rd.level) : '';
+    });
     card.querySelectorAll('.c3-reason').forEach((b) => b.setAttribute('aria-pressed', String(only === b.dataset.r)));
     view.querySelectorAll('.sw-msg').forEach((e) => e.remove());
     if (D.status !== 'ok' || !rowsAll.length) {
