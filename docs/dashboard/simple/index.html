@@ -36,6 +36,10 @@
 .sx .chip.pass { border-color: var(--color-ok); color: var(--color-ok); }
 .sx .chip.fail { border-color: var(--color-bad); color: var(--color-bad); }
 .sx .chip.none { color: var(--color-fg-muted); border-style: dashed; }
+.sx .detail-head { border-top: 1px solid var(--color-border-line); padding-top: 20px; }
+.sx .grid3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr)); gap: var(--cds-gap-md, 12px); }
+.sx .legend { display: flex; flex-wrap: wrap; gap: 6px 14px; margin: 8px 0 0; font-size: 12px; color: var(--color-fg-muted); }
+.sx .legend i { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 5px; vertical-align: -1px; }
 @media (max-width: 640px) { .sx .hide-sm { display: none; } .sx .kpi .big { font-size: 32px; } }
 </style>
 
@@ -44,11 +48,11 @@
     <h1>Shoulder exo: who is winning</h1>
     <p class="lede" id="lede" data-source="leader">—</p>
     <div class="kpis">
-      <div class="kpi lead" id="kpi-best"><span class="lab">Best design so far</span><span class="big" data-source="leader" data-field="gap">—</span><span id="kpi-best-name" class="muted" data-source="leader" data-field="short">—</span></div>
-      <div class="kpi"><span class="lab">Bar to beat: today's 3-joint chain</span><span class="big" data-source="morphs" data-field="gap" data-where="id=baseline-3r">—</span><span class="muted">the design you have seen rendered</span></div>
-      <div class="kpi"><span class="lab">Goal</span><span class="big">0</span><span class="muted">every bench target met</span></div>
+      <div class="kpi lead" id="kpi-best"><span class="lab">Best design so far</span><span class="big" data-source="leader" data-field="score">—</span><span id="kpi-best-name" class="muted" data-source="leader" data-field="short">—</span></div>
+      <div class="kpi"><span class="lab">Bar to beat: today's 3-joint chain</span><span class="big" id="kpi-base" data-source="leader" data-field="base_score">—</span><span class="muted">the design you have seen rendered</span></div>
+      <div class="kpi"><span class="lab">Goal</span><span class="big">100</span><span class="muted">every target met</span></div>
     </div>
-    <p class="muted" style="margin-top:12px">Gap = how far a design is from the targets, lower is better. It adds up the shortfalls in staying 2-14 mm from the skin (target 90 % of the metal), following the arm (95 % of motion frames) and reaching everyday poses (90 %), plus any pose where metal would touch the skin.</p>
+    <p class="muted" style="margin-top:12px">Score: higher is better, 100 = every target met, 0 = nothing works. It is the share of three targets a design meets - metal 2-14 mm from the skin (target 90 % of the metal), following the arm (95 % of motion frames), reaching everyday poses (90 %) - minus a penalty for any pose where metal would touch the skin.</p>
   </header>
 
   <section class="card" id="camps">
@@ -61,14 +65,14 @@
     <h2>Leaderboard</h2>
     <p class="muted">Every design that has a measured number, best first. "Checking" means an independent agent is re-measuring it. Names: R = a hinge (revolute joint), P = a slider; "3R" = three hinges in a row (3 degrees of freedom); "spherical" = all hinge axes meet at the centre of the shoulder joint; "offset" = they do not; "3-RRR" = three hinged legs side by side.</p>
     <div class="scroll"><table id="board" data-source="board" data-row-key="id">
-      <thead><tr><th data-field="short">Design</th><th class="num" data-field="gap">Gap</th><th data-field="close">Close to skin</th><th data-field="follows" class="hide-sm">Follows arm</th><th data-field="reaches" class="hide-sm">Reaches</th><th data-field="state">Status</th></tr></thead>
+      <thead><tr><th data-field="short">Design</th><th class="num" data-field="score">Score</th><th data-field="close">Close to skin</th><th data-field="follows" class="hide-sm">Follows arm</th><th data-field="reaches" class="hide-sm">Reaches</th><th data-field="state">Status</th></tr></thead>
       <tbody></tbody>
     </table></div>
   </section>
 
   <section class="card" id="progress">
-    <h2>Best gap over time</h2>
-    <p class="muted">The best number any design has reached, as the agents sweep. The dashed line is the bar to beat.</p>
+    <h2>Best score over time</h2>
+    <p class="muted">The best score any design has reached as the agents sweep (higher is better). The dashed line is today's 3-hinge chain.</p>
     <div class="chart" id="record" data-source="sweeps morphs" style="min-height:260px"></div>
   </section>
 
@@ -82,29 +86,62 @@
     <p class="muted" id="reqline" data-source="reqsum">—</p>
     <div class="chips" id="chips" data-source="reqs"></div>
   </section>
+  <section class="detail-head" id="details">
+    <h2>Details: every data point</h2>
+    <p class="muted">Everything the agents have measured, over time. Hover any dot for what it is.</p>
+  </section>
+
+  <section class="card" id="all-configs">
+    <h2>Every configuration tried</h2>
+    <p class="muted">Each dot is one parameter setting of one design, scored when it finished (higher is better). Colours are the leading designs; grey dots are the rest; the line is the best so far.</p>
+    <div class="legend" id="cfg-legend" data-source="sweeps"></div>
+    <div class="chart" id="cfg-chart" data-source="sweeps" style="min-height:340px"></div>
+  </section>
+
+  <section class="card" id="targets">
+    <h2>Each target over time</h2>
+    <p class="muted">The three things the score is made of. Faint dots: every configuration; line: the best any configuration has reached so far; dashed: the target. A design must hit all three at once to win.</p>
+    <div class="grid3">
+      <div><h3 class="muted">Metal 2-14 mm from the skin (target 90 %)</h3><div class="chart" id="t-close" data-source="sweeps" style="min-height:220px"></div></div>
+      <div><h3 class="muted">Follows the arm (target 95 %)</h3><div class="chart" id="t-follow" data-source="sweeps" style="min-height:220px"></div></div>
+      <div><h3 class="muted">Reaches everyday poses (target 90 %)</h3><div class="chart" id="t-reach" data-source="sweeps" style="min-height:220px"></div></div>
+    </div>
+  </section>
+
+  <section class="card" id="built-time">
+    <h2>Built prototype designs over time</h2>
+    <p class="muted">Full CAD designs scored by the outside judges, by the time they were judged. Dots: 3-joint designs (filled) and 4-joint designs (hollow); grey: judged under older rules; dashed: the requirement.</p>
+    <div class="grid3">
+      <div><h3 class="muted">R1: skin 2-14 mm from the metal (pass 90 %)</h3><div class="chart" id="c-R1" data-source="cad" style="min-height:220px"></div></div>
+      <div><h3 class="muted">R3: follows the arm (pass 95 %)</h3><div class="chart" id="c-R3" data-source="cad" style="min-height:220px"></div></div>
+      <div><h3 class="muted">R16: everyday workspace reached (pass 90 %)</h3><div class="chart" id="c-R16" data-source="cad" style="min-height:220px"></div></div>
+    </div>
+  </section>
 </div>
 
 <script>
 const live = (m) => !m.is_baseline && !['dead', 'refuted', 'duplicate'].includes(m.status);
 dash.calc('board', {
   inputs: ['morphs'], title: 'Designs with a number',
-  description: 'Every morphology with a measured bench number: the verified number if one exists, else the agent\'s claim, else its best sweep so far; best (lowest gap) first.',
+  description: 'Every morphology with a measured bench number: the verified number if one exists, else the agent\'s claim, else its best sweep so far; score = 100 x (1 - gap / 275) floored at 0, best first.',
   fn: (morphs) => morphs.filter((m) => m.empty !== true && m.status !== 'duplicate').map((m) => {
     const v = m.v_gap !== null && m.v_gap !== undefined, c = m.gap !== null && m.gap !== undefined, s = m.sweep_gap !== null && m.sweep_gap !== undefined;
     if (!v && !c && !s) return null;
     const p = v ? 'v_' : c ? '' : 'sweep_';
     const state = m.is_baseline ? 'Bar to beat' : m.status === 'verified' ? 'Verified' : m.status === 'refuted' ? 'Refuted' : m.status === 'dead' ? 'Dead end' : c ? 'Checking' : 'Sweeping';
     const short = m.is_baseline ? "Today's 3-hinge chain" : String(m.name || m.id).split(/[:(;]| with | - /)[0].trim().slice(0, 44);
-    return { id: m.id, short, gap: m[p + 'gap'], close: m[p + 'inband14'], follows: m[p + 'follow'], reaches: m[p + 'reach'], contact: m[p + 'contact'], state, is_baseline: !!m.is_baseline };
+    const g = m[p + 'gap'];
+    return { id: m.id, short, score: Math.max(0, Math.round((1 - g / 275) * 1000) / 10), gap: g, close: m[p + 'inband14'], follows: m[p + 'follow'], reaches: m[p + 'reach'], contact: m[p + 'contact'], state, is_baseline: !!m.is_baseline };
   }).filter(Boolean).sort((a, b) => a.gap - b.gap)
 });
 dash.calc('leader', {
   inputs: ['board', 'morphs'], title: 'Best design so far',
-  description: 'The lowest-gap design that is not the baseline and not a dead end, with the baseline gap for comparison.',
+  description: 'The highest-scoring design that is not the baseline and not a dead end, with the baseline score for comparison. Score = 100 x (1 - gap / 275), floored at 0.',
   fn: (board, morphs) => {
     const b = board.find((r) => !r.is_baseline && !['Dead end', 'Refuted'].includes(r.state)) || {};
     const base = morphs.find((m) => m.is_baseline) || {};
-    return [{ id: b.id ?? null, short: b.short ?? null, gap: b.gap ?? null, state: b.state ?? null, base_gap: base.gap ?? null, delta: b.gap != null && base.gap != null ? Math.round((base.gap - b.gap) * 100) / 100 : null }];
+    const sc = (g) => (g == null ? null : Math.max(0, Math.round((1 - g / 275) * 1000) / 10));
+    return [{ id: b.id ?? null, short: b.short ?? null, score: sc(b.gap), state: b.state ?? null, base_score: sc(base.gap), delta: b.gap != null && base.gap != null ? Math.round((sc(b.gap) - sc(base.gap)) * 10) / 10 : null }];
   }
 });
 dash.calc('reqsum', {
@@ -134,7 +171,7 @@ function drawScatter(rows) {
   const best = rows.filter((r) => !r.is_baseline && !['Dead end', 'Refuted'].includes(r.state))[0];
   svg.append('g').selectAll('circle').data(rows).join('circle').attr('cx', (r) => x(mv(r))).attr('cy', (r) => y(r.close)).attr('r', (r) => (r === best || r.is_baseline ? 8 : 6))
     .attr('fill', col).attr('fill-opacity', (r) => (r.state === 'Dead end' ? 0.45 : 0.9)).attr('stroke', 'var(--color-panel)').attr('stroke-width', 1.5)
-    .on('mousemove', (ev, r) => { tip.hidden = false; tip.textContent = `${r.short} - gap ${g1(r.gap)} (${r.state}). Close to skin ${pct(r.close)}, follows ${pct(r.follows)}, reaches ${pct(r.reaches)}.`; const b = box.getBoundingClientRect(); tip.style.left = Math.min(ev.clientX - b.left + 12, b.width - 270) + 'px'; tip.style.top = (ev.clientY - b.top + 12) + 'px'; })
+    .on('mousemove', (ev, r) => { tip.hidden = false; tip.textContent = `${r.short} - score ${g1(r.score)} of 100 (${r.state}). Close to skin ${pct(r.close)}, follows ${pct(r.follows)}, reaches ${pct(r.reaches)}.`; const b = box.getBoundingClientRect(); tip.style.left = Math.min(ev.clientX - b.left + 12, b.width - 270) + 'px'; tip.style.top = (ev.clientY - b.top + 12) + 'px'; })
     .on('mouseleave', () => { tip.hidden = true; });
   const lab = rows.filter((r) => r.is_baseline || r === best || r.close >= 0.7 || mv(r) >= 0.85).slice(0, 7);
   const used = [];
@@ -152,27 +189,29 @@ function drawBoard(rows) {
   rows.forEach((r) => {
     const tr = document.createElement('tr'); tr.dataset.key = r.id;
     const td = (c, cls) => { const e = document.createElement('td'); if (cls) e.className = cls; if (c instanceof Node) e.appendChild(c); else e.textContent = c; tr.appendChild(e); return e; };
-    td(r.short); td(g1(r.gap), 'num'); td(meter(r.close, 0.9)); td(meter(r.follows, 0.95), 'hide-sm'); td(meter(r.reaches, 0.9), 'hide-sm');
+    td(r.short); td(g1(r.score), 'num'); td(meter(r.close, 0.9)); td(meter(r.follows, 0.95), 'hide-sm'); td(meter(r.reaches, 0.9), 'hide-sm');
     const p = document.createElement('span'); p.className = 'pill ' + (r.state === 'Verified' ? 'ver' : r.state === 'Dead end' || r.state === 'Refuted' ? 'dead' : r.state === 'Bar to beat' ? '' : 'run'); p.textContent = r.state; td(p);
     tb.appendChild(tr);
   });
 }
 
-function drawRecord(sweeps, base) {
+function drawRecord(sweeps, baseGap) {
   const box = document.getElementById('record'); box.querySelectorAll('svg').forEach((n) => n.remove());
-  const rec = sweeps.filter((s) => s.is_record && !s.passed_over && s.record_gap != null).map((s) => ({ t: new Date(s.t), g: s.record_gap })).sort((a, b) => a.t - b.t);
-  const on = rec.findIndex((p) => p.g <= 150); if (on < 0) return; rec.splice(0, on);
-  const now = new Date(Math.max(rec[rec.length - 1].t, ...sweeps.map((s) => +new Date(s.t))));
-  const W = Math.max(320, box.clientWidth), H = 260, m = { l: 44, r: 16, t: 12, b: 28 }, top = 150;
-  const x = d3.scaleUtc([rec[0].t, now], [m.l, W - m.r]), y = d3.scaleLinear([0, top], [H - m.b, m.t]);
+  const sc = (g) => Math.max(0, (1 - g / 275) * 100);
+  const rec = sweeps.filter((s) => s.is_record && !s.passed_over && s.record_gap != null).map((s) => ({ t: new Date(s.t), v: sc(s.record_gap) })).sort((a, b) => a.t - b.t);
+  if (!rec.length) return;
+  const now = new Date(Math.max(+rec[rec.length - 1].t, ...sweeps.map((s) => +new Date(s.t))));
+  const W = Math.max(320, box.clientWidth), H = 260, m = { l: 44, r: 16, t: 12, b: 28 };
+  const x = d3.scaleUtc([rec[0].t, now], [m.l, W - m.r]), y = d3.scaleLinear([0, 100], [H - m.b, m.t]);
   const svg = d3.select(box).append('svg').attr('width', '100%').attr('viewBox', `0 0 ${W} ${H}`);
-  svg.append('g').attr('transform', `translate(0,${H - m.b})`).call(d3.axisBottom(x).ticks(Math.max(2, Math.floor(W / 120)))).attr('font-size', null).attr('font-family', null);
-  svg.append('g').attr('transform', `translate(${m.l},0)`).call(d3.axisLeft(y).ticks(4)).attr('font-size', null).attr('font-family', null);
-  if (base != null) { svg.append('line').attr('x1', m.l).attr('x2', W - m.r).attr('y1', y(base)).attr('y2', y(base)).attr('stroke', 'var(--cds-chart-reference, var(--color-fg-muted))').attr('stroke-dasharray', '4 4'); svg.append('text').attr('x', W - m.r).attr('y', y(base) - 6).attr('text-anchor', 'end').text("today's 3-hinge chain"); }
-  const pts = [...rec, { t: now, g: rec[rec.length - 1].g }].map((p) => ({ t: p.t, g: Math.min(p.g, top) }));
-  svg.append('path').attr('d', d3.line().curve(d3.curveStepAfter).x((p) => x(p.t)).y((p) => y(p.g))(pts)).attr('fill', 'none').attr('stroke', dash.colors[0]).attr('stroke-width', 2).attr('stroke-linejoin', 'round');
-  const last = rec[rec.length - 1]; svg.append('circle').attr('cx', x(last.t)).attr('cy', y(Math.min(last.g, top))).attr('r', 4).attr('fill', dash.colors[0]);
-  svg.append('text').attr('class', 'lbl').attr('x', Math.min(x(last.t) + 8, W - 60)).attr('y', y(Math.min(last.g, top)) + 16).text(g1(last.g));
+  svg.append('g').attr('transform', `translate(0,${H - m.b})`).call(d3.axisBottom(x).ticks(Math.max(2, Math.floor(W / 120))).tickFormat(d3.utcFormat('%H:%M'))).attr('font-size', null).attr('font-family', null);
+  svg.append('g').attr('transform', `translate(${m.l},0)`).call(d3.axisLeft(y).ticks(5)).attr('font-size', null).attr('font-family', null);
+  svg.append('text').attr('x', W - m.r).attr('y', y(100) + 12).attr('text-anchor', 'end').text('goal 100');
+  if (baseGap != null) { const b = sc(baseGap); svg.append('line').attr('x1', m.l).attr('x2', W - m.r).attr('y1', y(b)).attr('y2', y(b)).attr('stroke', 'var(--cds-chart-reference, var(--color-fg-muted))').attr('stroke-dasharray', '4 4'); svg.append('text').attr('x', W - m.r).attr('y', y(b) + 16).attr('text-anchor', 'end').text("today's 3-hinge chain"); }
+  const pts = [...rec, { t: now, v: rec[rec.length - 1].v }];
+  svg.append('path').attr('d', d3.line().curve(d3.curveStepAfter).x((p) => x(p.t)).y((p) => y(p.v))(pts)).attr('fill', 'none').attr('stroke', dash.colors[0]).attr('stroke-width', 2).attr('stroke-linejoin', 'round');
+  const last = rec[rec.length - 1]; svg.append('circle').attr('cx', x(last.t)).attr('cy', y(last.v)).attr('r', 4).attr('fill', dash.colors[0]);
+  svg.append('text').attr('class', 'lbl').attr('x', Math.min(x(last.t) + 8, W - 60)).attr('y', y(last.v) - 8).text(g1(last.v));
 }
 
 function drawEvents(ev) {
@@ -189,21 +228,95 @@ function drawReqs(reqs) {
   reqs.filter((r) => r.req).forEach((r) => { const c = document.createElement('span'); c.className = 'chip ' + (r.state === 'pass' ? 'pass' : r.state === 'fail' ? 'fail' : 'none'); c.textContent = `${r.req} ${r.name}`.slice(0, 48); box.appendChild(c); });
 }
 
+
+const scoreOf = (g) => Math.max(0, (1 - g / 275) * 100);
+function liveStart(ds) {                       // skip a sparse early stretch (< 5 % of the points before a > 30 min pause)
+  const t = ds.map((d) => +d).sort((a, b) => a - b); let cut = t[0], best = 0;
+  for (let i = 1; i < t.length; i++) if (t[i] - t[i - 1] > best) { best = t[i] - t[i - 1]; if (best > 1.8e6 && i < 0.05 * t.length) cut = t[i]; }
+  return new Date(cut);
+}
+const hm = (span) => (span < 864e5 ? d3.utcFormat('%H:%M') : d3.utcFormat('%b %-d %H:%M'));
+function timeAxes(svg, x, y, W, H, m, yfmt) {
+  const dm = x.domain(); svg.append('g').attr('transform', `translate(0,${H - m.b})`).call(d3.axisBottom(x).ticks(Math.max(2, Math.floor(W / 110))).tickFormat(hm(dm[1] - dm[0]))).attr('font-size', null).attr('font-family', null);
+  svg.append('g').attr('transform', `translate(${m.l},0)`).call(d3.axisLeft(y).ticks(4).tickFormat(yfmt)).attr('font-size', null).attr('font-family', null);
+}
+function hover(box, sel, text) {
+  const tip = tipper(box);
+  sel.on('mousemove', (ev, d) => { tip.hidden = false; tip.textContent = text(d); const b = box.getBoundingClientRect(); tip.style.left = Math.min(ev.clientX - b.left + 12, b.width - 270) + 'px'; tip.style.top = (ev.clientY - b.top + 12) + 'px'; })
+     .on('mouseleave', () => { tip.hidden = true; });
+}
+function drawConfigs(sw, names, leaders) {
+  const box = document.getElementById('cfg-chart'); box.querySelectorAll('svg').forEach((n) => n.remove());
+  const leg = document.getElementById('cfg-legend'); leg.replaceChildren();
+  const pts = sw.filter((r) => r.gap != null && r.t).map((r) => ({ ...r, d: new Date(r.t), s: scoreOf(r.gap) })).sort((a, b) => a.d - b.d);
+  if (!pts.length) return;
+  { const t0 = liveStart(pts.map((p) => p.d)); pts.splice(0, pts.findIndex((p) => p.d >= t0)); }
+  const col = new Map(leaders.slice(0, 8).map((id, i) => [id, dash.colors[i % dash.colors.length]]));
+  leaders.slice(0, 8).forEach((id) => { const e = document.createElement('span'); const i = document.createElement('i'); i.style.background = col.get(id); e.append(i, names.get(id) || id); leg.appendChild(e); });
+  const W = Math.max(320, box.clientWidth), H = 340, m = { l: 40, r: 12, t: 10, b: 26 };
+  const x = d3.scaleUtc(d3.extent(pts, (p) => p.d), [m.l, W - m.r]), y = d3.scaleLinear([0, 100], [H - m.b, m.t]);
+  const svg = d3.select(box).append('svg').attr('width', '100%').attr('viewBox', `0 0 ${W} ${H}`);
+  timeAxes(svg, x, y, W, H, m, (v) => v);
+  const c = svg.append('g').selectAll('circle').data(pts).join('circle').attr('cx', (p) => x(p.d)).attr('cy', (p) => y(p.s)).attr('r', 2.6)
+    .attr('fill', (p) => (p.passed_over ? 'none' : col.get(p.id) || 'var(--cds-chart-muted, var(--color-fg-muted))'))
+    .attr('stroke', (p) => (p.passed_over ? 'var(--color-fg-muted)' : 'none')).attr('fill-opacity', (p) => (col.has(p.id) ? 0.75 : 0.35));
+  hover(box, c, (p) => `${names.get(p.id) || p.id}: score ${g1(p.s)} - close to skin ${pct(p.inband14)}, follows ${pct(p.follow)}, reaches ${pct(p.reach)}${p.passed_over ? ' (superseded by its agent)' : ''}`);
+  const rec = pts.filter((p) => p.is_record && !p.passed_over && p.record_gap != null).map((p) => ({ d: p.d, s: scoreOf(p.record_gap) }));
+  if (rec.length) { rec.push({ d: pts[pts.length - 1].d, s: rec[rec.length - 1].s }); svg.append('path').attr('d', d3.line().curve(d3.curveStepAfter).x((p) => x(p.d)).y((p) => y(p.s))(rec)).attr('fill', 'none').attr('stroke', 'var(--color-fg)').attr('stroke-width', 1.5); }
+}
+function drawTarget(id, sw, field, target) {
+  const box = document.getElementById(id); box.querySelectorAll('svg').forEach((n) => n.remove());
+  const pts = sw.filter((r) => r[field] != null && r.t && !r.passed_over).map((r) => ({ d: new Date(r.t), v: r[field], id: r.id })).sort((a, b) => a.d - b.d);
+  if (!pts.length) return;
+  { const t0 = liveStart(pts.map((p) => p.d)); pts.splice(0, pts.findIndex((p) => p.d >= t0)); }
+  const W = Math.max(260, box.clientWidth), H = 220, m = { l: 40, r: 10, t: 8, b: 24 };
+  const x = d3.scaleUtc(d3.extent(pts, (p) => p.d), [m.l, W - m.r]), y = d3.scaleLinear([0, 1], [H - m.b, m.t]);
+  const svg = d3.select(box).append('svg').attr('width', '100%').attr('viewBox', `0 0 ${W} ${H}`);
+  timeAxes(svg, x, y, W, H, m, pct);
+  svg.append('line').attr('x1', m.l).attr('x2', W - m.r).attr('y1', y(target)).attr('y2', y(target)).attr('stroke', 'var(--color-ok)').attr('stroke-dasharray', '4 4');
+  svg.append('g').selectAll('circle').data(pts).join('circle').attr('cx', (p) => x(p.d)).attr('cy', (p) => y(p.v)).attr('r', 1.8).attr('fill', dash.colors[0]).attr('fill-opacity', 0.18);
+  let best = -1; const line = pts.map((p) => ({ d: p.d, v: (best = Math.max(best, p.v)) }));
+  svg.append('path').attr('d', d3.line().curve(d3.curveStepAfter).x((p) => x(p.d)).y((p) => y(p.v))(line)).attr('fill', 'none').attr('stroke', dash.colors[0]).attr('stroke-width', 2);
+}
+function drawCad(id, cad, req) {
+  const box = document.getElementById(id); box.querySelectorAll('svg').forEach((n) => n.remove());
+  const pts = cad.filter((r) => r.req === req && r.value != null && r.time).map((r) => ({ ...r, d: new Date(r.time) })).sort((a, b) => a.d - b.d);
+  if (!pts.length) return;
+  const W = Math.max(260, box.clientWidth), H = 220, m = { l: 40, r: 10, t: 8, b: 24 };
+  const x = d3.scaleUtc(d3.extent(pts, (p) => p.d), [m.l, W - m.r]).nice(), y = d3.scaleLinear([0, 1], [H - m.b, m.t]);
+  const svg = d3.select(box).append('svg').attr('width', '100%').attr('viewBox', `0 0 ${W} ${H}`);
+  timeAxes(svg, x, y, W, H, m, pct);
+  const thr = pts.find((p) => p.threshold != null); if (thr) svg.append('line').attr('x1', m.l).attr('x2', W - m.r).attr('y1', y(thr.threshold)).attr('y2', y(thr.threshold)).attr('stroke', 'var(--color-ok)').attr('stroke-dasharray', '4 4');
+  const cur = (p) => p.rules === 'current';
+  const c = svg.append('g').selectAll('circle').data(pts).join('circle').attr('cx', (p) => x(p.d)).attr('cy', (p) => y(Math.min(1, p.value))).attr('r', 4)
+    .attr('fill', (p) => (p.dof === 4 ? 'none' : cur(p) ? dash.colors[1] : 'var(--cds-chart-muted, var(--color-fg-muted))'))
+    .attr('stroke', (p) => (cur(p) ? dash.colors[1] : 'var(--cds-chart-muted, var(--color-fg-muted))')).attr('stroke-width', 1.5);
+  hover(box, c, (p) => `${p.design} (${p.dof}-joint${cur(p) ? '' : ', older rules'}): ${req} ${pct(p.value)}`);
+}
+
 dash.onData(() => {
   const B = dash.data('board'), L = dash.data('leader'), S = dash.data('sweeps'), E = dash.data('events'), R = dash.data('reqs'), RS = dash.data('reqsum'), M = dash.data('morphs');
   const okd = (d) => d && d.status === 'ok';
-  if (okd(L) && L.data[0] && L.data[0].gap != null) {
+  if (okd(L) && L.data[0] && L.data[0].score != null) {
     const l = L.data[0];
     document.getElementById('lede').textContent = l.delta > 0
-      ? `${l.short} leads at gap ${g1(l.gap)}, ${g1(l.delta)} better than today's 3-hinge chain (${g1(l.base_gap)}). Status: ${l.state.toLowerCase()}. Nothing is near the goal of 0 yet.`
-      : `No design beats today's 3-hinge chain (gap ${g1(l.base_gap)}) yet; the closest is ${l.short} at ${g1(l.gap)}.`;
+      ? `${l.short} leads with a score of ${g1(l.score)} out of 100, ${g1(l.delta)} points above today's 3-hinge chain (${g1(l.base_score)}). Status: ${l.state.toLowerCase()}. No design meets every target yet.`
+      : `No design beats today's 3-hinge chain (score ${g1(l.base_score)} of 100) yet; the closest is ${l.short} at ${g1(l.score)}.`;
   }
-  if (okd(L) && L.data[0]) { const l = L.data[0]; document.querySelector('#kpi-best .big').textContent = l.gap == null ? '—' : g1(l.gap); document.getElementById('kpi-best-name').textContent = l.short ? `${l.short} (${String(l.state).toLowerCase()})` : '—'; }
-  if (okd(M)) { const b = M.data.find((m) => m.is_baseline); document.querySelector('[data-where="id=baseline-3r"]').textContent = b && b.gap != null ? g1(b.gap) : '—'; }
+  if (okd(L) && L.data[0]) { const l = L.data[0]; document.querySelector('#kpi-best .big').textContent = l.score == null ? '—' : g1(l.score); document.getElementById('kpi-base').textContent = l.base_score == null ? '—' : g1(l.base_score); document.getElementById('kpi-best-name').textContent = l.short ? `${l.short} (${String(l.state).toLowerCase()})` : '—'; }
   if (okd(B)) { const rows = B.data.filter((r) => r.empty !== true); drawScatter(rows); drawBoard(rows); }
   if (okd(S) && okd(M)) drawRecord(S.data.filter((r) => r.empty !== true), (M.data.find((m) => m.is_baseline) || {}).gap);
   if (okd(E)) drawEvents(E.data.filter((r) => r.empty !== true));
   if (okd(R)) drawReqs(R.data.filter((r) => r.empty !== true));
   if (okd(RS) && RS.data[0]) { const q = RS.data[0]; document.getElementById('reqline').textContent = `${q.pass} of ${q.total} pass on the best judged design (${q.design}). Green = pass, red = fail, dashed = not measured yet.`; }
+  if (okd(S) && okd(B)) {
+    const sw = S.data.filter((r) => r.empty !== true), rows = B.data.filter((r) => r.empty !== true);
+    const names = new Map(rows.map((r) => [r.id, r.short]));
+    const leaders = rows.filter((r) => !r.is_baseline).map((r) => r.id);
+    drawConfigs(sw, names, leaders);
+    drawTarget('t-close', sw, 'inband14', 0.9); drawTarget('t-follow', sw, 'follow', 0.95); drawTarget('t-reach', sw, 'reach', 0.9);
+  }
+  const C = dash.data('cad');
+  if (okd(C)) { const cad = C.data.filter((r) => r.empty !== true); drawCad('c-R1', cad, 'R1'); drawCad('c-R3', cad, 'R3'); drawCad('c-R16', cad, 'R16'); }
 });
 </script>
