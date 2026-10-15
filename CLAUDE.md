@@ -34,6 +34,8 @@ docs/EVOLUTION.md (and its snapshot to pipeline/evolution/) as part of the judge
 4. **Range: do the work of other fields, never role-play them**, and always include a red team looking for the pose
    that jams, the point that pinches, the number that is optimistic.
 5. **Produce new knowledge** and write it down (docs/FINDINGS.md, docs/concepts/): what you measured, what failed, why.
+6. **Chat with the user: big updates only** (user 2026-10-15): a new leader, a requirement newly passing, a blocker that
+   needs them. Everything else goes to the dashboard and the repo.
 
 ## Working method (docs/METHOD.md - start every session with its checklist)
 
@@ -62,7 +64,8 @@ docs/EVOLUTION.md (and its snapshot to pipeline/evolution/) as part of the judge
   also has a `personal-shoulder-diagnosis` folder - never read it into this repo or commit it.
 - **Paid compute**: before any RunPod job or deploy, state the GPU type and estimated cost and wait for a yes.
   (User 2026-10-15 ~12:45 UTC: "you can spend more, i permit everything" - spend approved without a fixed cap for
-  this push; still state GPU type + cost per batch and keep the endpoint hygiene below.) The key
+  this push; still state GPU type + cost per batch and keep the endpoint hygiene below. User 2026-10-15 ~15:00: RunPod may offload
+  work "only as cheap as possible if it provides a big speed up": cheapest worker type that works, scale to 0, keep small jobs local.) The key
   comes from the `RUNPOD_API_KEY` environment variable (or `~/.runpod_key` locally) - never print it, never commit it.
   After a search, set the endpoint's `workersMin` back to 0. Never touch the user's other pods (names starting `crl-`).
 - **Downloads and licences**: installs approved by the user 2026-10-15 ("install whatever you want": CalculiX, gmsh,
