@@ -4,20 +4,20 @@
   "title": "Concept bench morphologies",
   "description": "One row per morphology in the swarm's catalogue: status, the agent's claimed bench numbers, the verifier's re-measured numbers (v_), its best sweep configuration so far, and the 3R baseline once (is_baseline). Built from docs/concepts/catalogue.json, families.json, rows/*.json and sweeps/*.json.",
   "file": "data/morphs.json",
-  "sha256": "42cf4d9d2f30ab02a10c1651db353b810e4c1600f92d86dcccb9b9fbaea9f8a9",
+  "sha256": "740755d36098e161e600ce84e4de76e2e1be1abe6dcd3431e48c11a84396c0cf",
   "rows": 81,
-  "bytes": 79635,
-  "updated": "2026-10-15T21:32:54Z"
+  "bytes": 80485,
+  "updated": "2026-10-15T22:01:47Z"
  },
  {
   "id": "sweeps",
   "title": "Concept bench sweeps",
   "description": "Every configuration a morphology agent evaluated on the concept bench, with its time, gap, its morphology's best gap so far (best_gap) and the record over all morphologies so far (record_gap); passed_over marks a configuration its agent measured before its claimed row and rejected (better than the claim), which counts for no best. Built from docs/concepts/sweeps/*.json.",
   "file": "data/sweeps.json",
-  "sha256": "bd1eba647614632d06711404e6b5f496f4f778ed89e47d78a881fa5f70e7a15d",
-  "rows": 2735,
-  "bytes": 662992,
-  "updated": "2026-10-15T21:32:54Z"
+  "sha256": "0bf009657c28dad6f286c9125618fe05b855a7ed70a73c5021fab32ef781dc9e",
+  "rows": 3462,
+  "bytes": 845932,
+  "updated": "2026-10-15T22:01:47Z"
  },
  {
   "id": "cad",
@@ -64,10 +64,10 @@
   "title": "Event log",
   "description": "What happened and when: the swarm's own log (docs/concepts/events.jsonl), one milestone per judged design and every new built-CAD R1 record (from the judge outputs).",
   "file": "data/events.json",
-  "sha256": "157054a80e5a4cadf84aae753cfe9e73f2634759d283721c23ea6738967f43c1",
-  "rows": 218,
-  "bytes": 65779,
-  "updated": "2026-10-15T21:41:50Z"
+  "sha256": "54469e0cfc259c220fe326f1821eb97436778c53719167f1b5a2623c6b71338c",
+  "rows": 224,
+  "bytes": 67580,
+  "updated": "2026-10-15T22:01:47Z"
  },
  {
   "id": "spend",
@@ -94,9 +94,9 @@
   "title": "Data build info",
   "description": "When tools/dash_build.py last gathered the data, the repo commit, and any warnings it printed.",
   "file": "data/meta.json",
-  "sha256": "c105b6e3197ac84ad708385039cddc4eaa9bcb428e4cdeb4476ce6c6285223f9",
+  "sha256": "8331f3f1ad6046140845849c2b58a0f33c73da4f4d6010c3b28cdb1f0b35804a",
   "rows": 1,
   "bytes": 85,
-  "updated": "2026-10-15T21:41:50Z"
+  "updated": "2026-10-15T22:01:47Z"
  }
 ]
