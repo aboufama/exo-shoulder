@@ -75,8 +75,11 @@ docs/EVOLUTION.md (and its snapshot to pipeline/evolution/) as part of the judge
 - **Manufacturable joints only** (user, 2026-10-15: "I do not think I am able to make a 3 dof translating passive device
   ... two is probably the most I can make ... Make sure that all designs are thought of with manufacturability in mind, is
   there actually a component that can be designed which serves these degrees of freedom for the size they are
-  presented at?"): at most **2 passive translations** anywhere in a design (unless a buildable 3rd is shown and the user
-  agrees); every joint, active or passive, maps to a real component - a catalogue part number (bearing, miniature guide,
+  presented at?" and, clarifying: "its not that there are two max, its more subtle than that, although two would be a
+  good max, its just hard to actually make a 2 dof passive translation component fit in such a small space, so max 2, 1
+  is better"): every passive translation is a COST paid in space - prefer **0, then 1; 2 is the hard maximum** (never 3),
+  and a 2-axis passive translation stage must be shown to fit at its real size where the design puts it. Rank designs
+  that tie on the bench by fewer passive translations; every joint, active or passive, maps to a real component - a catalogue part number (bearing, miniature guide,
   bushing) or a simple machinable design - and the model carries that component's REAL envelope (assembly height,
   footprint, rail length = travel + block length, mass) as sampled metal. A radial (skin-normal) slide counts as
   standing up by its travel + block length. A few mm of radial play may go to the cuff liner's compliance, stated as

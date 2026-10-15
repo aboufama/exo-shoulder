@@ -1,0 +1,54 @@
+{
+ "id": "l1_3r-k2221",
+ "source": "params {\"az\": 28.6645, \"el\": 80.9335, \"a1\": 82.4951, \"a2\": 65.4259, \"wd\": 94.1803, \"wa\": -0.9902, \"sigma\": -1, \"margin\": 10.0, \"width\": 12.0, \"t_link\": 3.0, \"q\": 1.0}, refitted on Bench(60,160) fast",
+ "n_joints": 3,
+ "sliding_cuff": false,
+ "dof": 3,
+ "kinematics": {
+  "az": 28.6645,
+  "el": 80.9335,
+  "a": [
+   82.4951,
+   65.4259
+  ],
+  "w": [
+   94.1803,
+   -0.9902
+  ],
+  "branch": -1,
+  "order": [
+   0,
+   1,
+   1
+  ]
+ },
+ "base": {
+  "mount": "girdle",
+  "chain": "spherical",
+  "note": "base rides the scapula on the user's scapula handler"
+ },
+ "built_with": "pipeline/concept_l1/build_kit_l1.py (L1 keep-out meshes from the kit model's fitted samples: O20 hub keep-outs, fitted straps, rail stages and an L-section carriage revolved about J2)",
+ "label": "plain spherical 3R at rail-elbow k2221's axes (control), L1 keep-out",
+ "model": "docs/concepts/models/_template.py",
+ "params": {
+  "az": 28.6645,
+  "el": 80.9335,
+  "a1": 82.4951,
+  "a2": 65.4259,
+  "wd": 94.1803,
+  "wa": -0.9902,
+  "sigma": -1,
+  "margin": 10.0,
+  "width": 12.0,
+  "t_link": 3.0,
+  "q": 1.0
+ },
+ "bench": {
+  "gap": 51.33,
+  "reach": 0.8938,
+  "follow": 1.0,
+  "inband14": 0.3929,
+  "inband10": 0.2396,
+  "contact": 0.0
+ }
+}

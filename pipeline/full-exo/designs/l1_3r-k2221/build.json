@@ -1,0 +1,154 @@
+{
+ "fit": {
+  "model": "_template",
+  "k": null,
+  "bench": "60,160",
+  "mode": "fast",
+  "report": {
+   "gap": 51.33,
+   "reach": 0.8938,
+   "follow": 1.0,
+   "inband14": 0.3929,
+   "inband10": 0.2396,
+   "contact": 0.0,
+   "closure": 0.9318,
+   "collide": 0.0098,
+   "flips": 0,
+   "honest": true,
+   "audit": [],
+   "inband_member": {
+    "hub1": 1.0,
+    "hub2": 0.0,
+    "hub3": 0.6759,
+    "link1": 0.3673,
+    "link2": 0.0488,
+    "neck": 0.656
+   },
+   "mass_g": 162.9
+  }
+ },
+ "frames_err": {
+  "RHG_vs_bodypose_H": 5.875668152022229e-08,
+  "RS_vs_bodypose_S": 2.8769468141121024e-08
+ },
+ "pose_path_err_mm": 1.56503574793021e-05,
+ "rigidity_mm": {
+  "link1": 0.0,
+  "link2": 0.0,
+  "neck": 0.0,
+  "hub1 axis in base": 0.0,
+  "hub1 axis in l1": 0.0,
+  "hub2 axis in l1": 0.0,
+  "hub2 axis in l2": 0.0,
+  "hub3 axis in H": 0.0,
+  "hub3 axis in l2": 0.0
+ },
+ "rails": {},
+ "check": [
+  {
+   "bench_pose": 0,
+   "pose": [
+    30.0,
+    3.0,
+    -30.0
+   ],
+   "max_mm": 0.012,
+   "per_member": {
+    "hub1": [
+     0.011,
+     0.008
+    ],
+    "hub2": [
+     0.012,
+     0.011
+    ],
+    "hub3": [
+     0.012,
+     0.012
+    ],
+    "link1": [
+     0.0,
+     0.0
+    ],
+    "link2": [
+     0.0,
+     0.0
+    ],
+    "neck": [
+     0.0,
+     0.0
+    ]
+   }
+  },
+  {
+   "bench_pose": 105,
+   "pose": [
+    15.0,
+    0.0,
+    -75.0
+   ],
+   "max_mm": 0.012,
+   "per_member": {
+    "hub1": [
+     0.011,
+     0.008
+    ],
+    "hub2": [
+     0.011,
+     0.009
+    ],
+    "hub3": [
+     0.012,
+     0.011
+    ],
+    "link1": [
+     0.0,
+     0.0
+    ],
+    "link2": [
+     0.0,
+     0.0
+    ],
+    "neck": [
+     0.0,
+     0.0
+    ]
+   }
+  },
+  {
+   "bench_pose": 140,
+   "pose": [
+    45.0,
+    165.0,
+    -90.0
+   ],
+   "max_mm": 0.012,
+   "per_member": {
+    "hub1": [
+     0.012,
+     0.012
+    ],
+    "hub2": [
+     0.01,
+     0.009
+    ],
+    "hub3": [
+     0.012,
+     0.011
+    ],
+    "link1": [
+     0.0,
+     0.0
+    ],
+    "link2": [
+     0.0,
+     0.0
+    ],
+    "neck": [
+     0.0,
+     0.0
+    ]
+   }
+  }
+ ]
+}
