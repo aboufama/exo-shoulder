@@ -137,7 +137,8 @@ def morphs(sweep_counts):
         fam, var = str(r.get("family") or ""), str(r.get("variant") or "")
         mid = slug(r.get("id") or (fam + "-" + var if var else fam))
         m = merge(by.get(mid) or blank(mid), {k: v for k, v in r.items() if k not in ("variant", "id")})
-        m["name"] = r.get("name") or var or fam
+        nm = fam if not var else var if fam.lower() in var.lower() else f"{fam} ({var})" if fam else var
+        m["name"] = r.get("name") or (nm[:1].upper() + nm[1:])
         base = r.get("is_baseline")
         m["is_baseline"] = bool(base) if base is not None else ("baseline" in (fam + " " + var).lower())
         if "status" not in r:
@@ -192,8 +193,19 @@ def judged():
         rows = json.loads(out.stdout) if out.returncode == 0 else []
     except Exception as e:
         print("judged: judged_history.py failed:", e, file=sys.stderr); rows = []
-    for r in rows: r["time"] = norm_time(r.get("time"))
-    return [r for r in rows if r.get("time")]
+    D = os.path.join(REPO, "pipeline", "full-exo", "designs")
+    for r in rows:
+        # judged_history dates a design by the commit that added its score.json; a build judged hours before it was
+        # committed keeps its judge time in the file's mtime (git checkouts only make mtimes later), so take the earlier
+        t, dd = when(r.get("time")), os.path.join(D, str(r.get("design")))
+        fs = [f for f in (f"{dd}/score.json", f"{dd}/score_14mm.json", f"{dd}/judge/workspace.json", f"{dd}/judge/part_contact.json", f"{dd}/judge/dynamics.json") if os.path.exists(f)]
+        if fs:
+            m = when(mtime(fs[0]))
+            if m and (t is None or m < t): t = m
+        r["time"] = iso(t)
+    rows = [r for r in rows if r.get("time")]
+    rows.sort(key=lambda r: r["time"])
+    return rows
 
 
 def events(old_path):
@@ -417,7 +429,7 @@ def main():
     base = next((m for m in M if m["is_baseline"]), None)
     scr = [m for m in M if not m["is_baseline"] and m["gap"] is not None]
     best = min(scr, key=lambda m: m["v_gap"] if m["v_gap"] is not None else m["gap"], default=None)
-    write(out, "morphs", M, f"{len(scr)} screened, baseline gap {base['gap'] if base else '-'}, best {best['name'] + ' ' + str(best['gap']) if best else '-'}" + (" (SAMPLE)" if a.sample else ""))
+    write(out, "morphs", M, f"{len(scr)} screened, baseline gap {base['gap'] if base else '-'}, best {best['name'] + ' ' + str(best['v_gap'] if best['v_gap'] is not None else best['gap']) if best else '-'}" + (" (SAMPLE)" if a.sample else ""))
     write(out, "sweeps", S, f"{len({r['id'] for r in S})} morphologies")
     write(out, "judged", J, f"{sum(1 for r in J if r.get('dof') == 3)} with 3 DOF, newest {J[-1]['design'] if J else '-'}")
     write(out, "events", E, f"newest {E[-1]['time'] if E else '-'}")
