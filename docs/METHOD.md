@@ -132,7 +132,7 @@ A morphology's sweep samples its parameter space: a cap of good settings above a
 best point is reported. The user asked how we know a low number is not just an unlucky sample. Measured on the swarm's
 own sweeps: five of the morphologies declared dead were still climbing when stopped (best found on the last try, or
 +6.5 to +27 score points in the second half). So a design may be called dead only when its sweep passes the
-**convergence gate**: < 1 score point gained over the second half of the tries, the best not found in the last third,
+**convergence gate**: < 1 score point gained over the second half of the tries, < 0.5 point gained over the last third,
 and the top-5 configurations within 3 points (score = 100 x (1 - gap / 275), higher is better). Otherwise it gets a
 local optimiser (CMA-ES) from its top configurations first. Cheap next check, not yet run: a budget-matched comparison
 (the 3-hinge chain's best-of-N on the same bench at the same N as the design's sweep).

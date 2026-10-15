@@ -63,7 +63,7 @@
 
   <section class="card" id="board-sec">
     <h2>Leaderboard</h2>
-    <p class="muted">Every design that has a measured number, best first. "Checking" means an independent agent is re-measuring it. Names: R = a hinge (revolute joint), P = a slider; "3R" = three hinges in a row (3 degrees of freedom); "spherical" = all hinge axes meet at the centre of the shoulder joint; "offset" = they do not; "3-RRR" = three hinged legs side by side.</p>
+    <p class="muted">Every design that has a measured number, best first. "Checking" means an independent agent is re-measuring it. "Stopped early" means it was called dead while its search was still improving, so it is being re-opened. Names: R = a hinge (revolute joint), P = a slider; "3R" = three hinges in a row (3 degrees of freedom); "spherical" = all hinge axes meet at the centre of the shoulder joint; "offset" = they do not; "3-RRR" = three hinged legs side by side.</p>
     <div class="scroll"><table id="board" data-source="board" data-row-key="id">
       <thead><tr><th data-field="short">Design</th><th class="num" data-field="score">Score</th><th data-field="close">Close to skin</th><th data-field="follows" class="hide-sm">Follows arm</th><th data-field="reaches" class="hide-sm">Reaches</th><th data-field="state">Status</th></tr></thead>
       <tbody></tbody>
@@ -122,17 +122,28 @@
 <script>
 const live = (m) => !m.is_baseline && !['dead', 'refuted', 'duplicate'].includes(m.status);
 dash.calc('board', {
-  inputs: ['morphs'], title: 'Designs with a number',
-  description: 'Every morphology with a measured bench number: the verified number if one exists, else the agent\'s claim, else its best sweep so far; score = 100 x (1 - gap / 275) floored at 0, best first.',
-  fn: (morphs) => morphs.filter((m) => m.empty !== true && m.status !== 'duplicate').map((m) => {
+  inputs: ['morphs', 'sweeps'], title: 'Designs with a number',
+  description: 'Every morphology with a measured bench number: the verified number if one exists, else the agent\'s claim, else its best sweep so far; score = 100 x (1 - gap / 275) floored at 0, best first. A dead design whose sweep had not converged (still improving when stopped) is marked Stopped early.',
+  fn: (morphs, sweeps) => {
+    const sc = (g) => Math.max(0, (1 - g / 275) * 100), by = {};
+    sweeps.forEach((x) => { if (x.empty !== true && !x.passed_over && x.gap != null && x.gap < 999) (by[x.id] = by[x.id] || []).push(x); });
+    const conv = {};
+    Object.entries(by).forEach(([id, s]) => {
+      s.sort((a, b) => (a.t < b.t ? -1 : a.t > b.t ? 1 : (a.k || 0) - (b.k || 0))); const v = s.map((x) => sc(x.gap)), N = v.length; if (N < 3) return;
+      let b = -1; const run = v.map((x) => (b = Math.max(b, x)));
+      const gain = run[N - 1] - run[Math.floor(N / 2) - 1], best = run[N - 1], since = N - 1 - v.lastIndexOf(best), top = [...v].sort((p, q) => q - p);
+      const late = run[N - 1] - run[Math.max(0, N - 1 - Math.floor(N / 3))]; conv[id] = gain < 1 && late < 0.5 && top[0] - top[Math.min(4, N - 1)] < 3;
+    });
+    return morphs.filter((m) => m.empty !== true && m.status !== 'duplicate').map((m) => {
     const v = m.v_gap !== null && m.v_gap !== undefined, c = m.gap !== null && m.gap !== undefined, s = m.sweep_gap !== null && m.sweep_gap !== undefined;
     if (!v && !c && !s) return null;
     const p = v ? 'v_' : c ? '' : 'sweep_';
-    const state = m.is_baseline ? 'Bar to beat' : m.status === 'verified' ? 'Verified' : m.status === 'refuted' ? 'Refuted' : m.status === 'dead' ? 'Dead end' : c ? 'Checking' : 'Sweeping';
+    const state = m.is_baseline ? 'Bar to beat' : m.status === 'verified' ? 'Verified' : m.status === 'refuted' ? 'Refuted' : m.status === 'dead' ? (conv[m.id] === false ? 'Stopped early' : 'Dead end') : c ? 'Checking' : 'Sweeping';
     const short = m.is_baseline ? "Today's 3-hinge chain" : String(m.name || m.id).split(/[:(;]| with | - /)[0].trim().slice(0, 44);
     const g = m[p + 'gap'];
     return { id: m.id, short, score: Math.max(0, Math.round((1 - g / 275) * 1000) / 10), gap: g, close: m[p + 'inband14'], follows: m[p + 'follow'], reaches: m[p + 'reach'], contact: m[p + 'contact'], state, is_baseline: !!m.is_baseline };
-  }).filter(Boolean).sort((a, b) => a.gap - b.gap)
+  }).filter(Boolean).sort((a, b) => a.gap - b.gap);
+  }
 });
 dash.calc('leader', {
   inputs: ['board', 'morphs'], title: 'Best design so far',
