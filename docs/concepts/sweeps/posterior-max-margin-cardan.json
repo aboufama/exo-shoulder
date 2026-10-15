@@ -1,0 +1,140 @@
+[
+ {
+  "k": 0,
+  "t": "2026-10-15T18:30:56Z",
+  "params": {
+   "b_az": -28.0,
+   "b_el": -19.0,
+   "w_d": 42.0,
+   "w_a": -64.0,
+   "a1": 90.0,
+   "a2": 90.0,
+   "sigma": 1,
+   "margin": 5.0,
+   "seat": "wedge",
+   "stack": "A",
+   "q": 1.0,
+   "width": 12.0,
+   "t_link": 3.0
+  },
+  "inband14": 0.0104,
+  "inband10": 0.0024,
+  "reach": 0.9688,
+  "follow": 1.0,
+  "contact": 0.0227,
+  "gap": 91.23,
+  "closure": 1.0,
+  "mass_g": 653.8,
+  "flips": 0,
+  "collide": 0.0,
+  "min_margin": 27.71,
+  "inband_member": {
+   "hub1": 0.4895,
+   "hub2": 0.0,
+   "hub3": 0.0,
+   "link1": 0.0,
+   "link2": 0.0,
+   "neck": 0.0
+  },
+  "levels": {
+   "h_hub1": 153.0,
+   "h_hub2": 250.0,
+   "h_hub3": 250.0,
+   "wh_hub1": 17.0,
+   "wh_hub2": 0.0,
+   "wh_hub3": 0.0
+  }
+ },
+ {
+  "k": 1,
+  "t": "2026-10-15T18:32:32Z",
+  "params": {
+   "b_az": -28.0,
+   "b_el": -19.0,
+   "w_d": 42.0,
+   "w_a": -64.0,
+   "a1": 90.0,
+   "a2": 90.0,
+   "sigma": 1,
+   "margin": 5.0,
+   "seat": "wedge",
+   "stack": "A",
+   "q": 0.97,
+   "width": 12.0,
+   "t_link": 3.0
+  },
+  "inband14": 0.0952,
+  "inband10": 0.0602,
+  "reach": 0.8688,
+  "follow": 1.0,
+  "contact": 0.0913,
+  "gap": 92.73,
+  "closure": 1.0,
+  "mass_g": 345.6,
+  "flips": 0,
+  "collide": 0.0045,
+  "min_margin": 27.71,
+  "inband_member": {
+   "hub1": 0.9907,
+   "hub2": 0.287,
+   "hub3": 0.0,
+   "link1": 0.0156,
+   "link2": 0.0152,
+   "neck": 0.1499
+  },
+  "levels": {
+   "h_hub1": 146.43,
+   "h_hub2": 104.16,
+   "h_hub3": 250.0,
+   "wh_hub1": 22.43,
+   "wh_hub2": 39.16,
+   "wh_hub3": 59.09
+  }
+ },
+ {
+  "k": 2,
+  "t": "2026-10-15T18:32:47Z",
+  "params": {
+   "b_az": -28.0,
+   "b_el": -19.0,
+   "w_d": 42.0,
+   "w_a": -64.0,
+   "a1": 90.0,
+   "a2": 90.0,
+   "sigma": 1,
+   "margin": 5.0,
+   "seat": "wedge",
+   "stack": "A",
+   "q": 0.93,
+   "width": 12.0,
+   "t_link": 3.0
+  },
+  "inband14": 0.398,
+  "inband10": 0.2805,
+  "reach": 0.7375,
+  "follow": 1.0,
+  "contact": 0.1909,
+  "gap": 85.54,
+  "closure": 1.0,
+  "mass_g": 198.0,
+  "flips": 0,
+  "collide": 0.0,
+  "min_margin": 27.71,
+  "inband_member": {
+   "hub1": 0.9891,
+   "hub2": 0.7228,
+   "hub3": 0.6539,
+   "link1": 0.1729,
+   "link2": 0.1572,
+   "neck": 0.8254
+  },
+  "levels": {
+   "h_hub1": 144.0,
+   "h_hub2": 66.0,
+   "h_hub3": 143.35,
+   "wh_hub1": 23.0,
+   "wh_hub2": 3.33,
+   "wh_hub3": 19.35
+  }
+ }
+]
