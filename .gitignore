@@ -42,3 +42,8 @@ pipeline/full-exo/designs/cad_r17_n3_s1381_0/
 pipeline/full-exo/designs/*/preview/
 pipeline/full-exo/designs/*/preview_test/
 pipeline/full-exo/designs/*/film_test.json
+# builds in progress by the parallel agents (2026-10-15 day): committed with `git add -f` once judged
+pipeline/conformal/fair_cad/out_joint_v5/
+pipeline/conformal/fair_cad/out_r18_n3_s1392_1_*/
+pipeline/full-exo/designs/band_r18_n3_s1392_1_*/
+pipeline/full-exo/designs/cad_r18_n3_s1392_1_*/
