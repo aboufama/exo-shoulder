@@ -32,7 +32,7 @@ except ImportError:
     np = None
 
 _CACHE = {}
-CODE_VERSION = "band-2026-10-15z (job key hw: link half-width; range first: score x min(1, workspace share / target)^w; why poses are lost; fit_clips; guards; pure 3R chain)"
+CODE_VERSION = "band-2026-10-15m (fill_holes: skin-map pole holes filled; jn_low: link N-1 under the arm hub at JN; job key hw; range first; why poses are lost; fit_clips; guards; pure 3R chain)"
 RESD = 0.25; NWD, NHD = 1440, 720; LAT_LO, LAT_HI = -75.0, 90.0; CLEAR = 3.0
 ROW0, ROW1 = int((LAT_LO + 90) / RESD), int((LAT_HI + 90) / RESD)
 HUB_R, HW, T_LINK, STACK, T_W, T_BOT = 17.0, 7.0, 5.5, 6.0, 1.0, 6.5
@@ -227,6 +227,28 @@ def build_frame_maps(POSE, dev, c=CLEAR, spacing=0.8, log=print):
     return dict(r1=R1, r1c=R1C, r2c=R2C, cs=CS)
 
 
+def fill_pole_holes(M, lat_min=30.0):
+    """the maps' sampling holes near the pole (straight up from GH, the top of the shoulder): a 0.5 deg pixel spans
+    0.5 cos(lat) deg of longitude, so above lat ~65 most pixels get no skin sample and the 1-ring cannot fill them
+    (r1 = 0: no clearance constraint there, never in band). Measured on maps_s1 (analysis/map_holes.py): 37 / 58 / 87 %
+    of the pixels at lat 70 / 80 / 88 had no skin; every one checked by an exact ray cast hits skin 40-70 mm out, and
+    the fill below agrees with it to 0.2 mm median. Per row: a hole takes the min r1 / max r1c of the nonzero pixels
+    within +-ceil(1.5 / cos(lat)) longitude pixels (the 1-ring's angular width at the equator); cs, r2c unchanged."""
+    import torch, torch.nn.functional as Fn
+    r1 = M["r1"].view(-1, MH, MW); r1c = M["r1c"].view(-1, MH, MW); o1, oc = r1.clone(), r1c.clone()
+    lat = [LAT_LO + (i + 0.5) * MRES for i in range(MH)]; K = [int(math.ceil(1.5 / max(0.02, math.cos(x * D2R)))) for x in lat]
+    for k in sorted(set(K)):
+        rows = [i for i in range(MH) if K[i] == k and lat[i] >= lat_min]
+        if k <= 1 or not rows: continue
+        ri = torch.tensor(rows, device=r1.device); a = r1[:, ri].float(); c = r1c[:, ri].float(); hole = a <= 0; F_, R_, W_ = a.shape
+        wrap = lambda x: torch.cat([x[..., -k:], x, x[..., :k]], -1).reshape(F_ * R_, 1, W_ + 2 * k)
+        amin = -Fn.max_pool1d(wrap(-torch.where(hole, torch.full_like(a, float("inf")), a)), 2 * k + 1, stride=1).reshape(F_, R_, W_)
+        cmax = Fn.max_pool1d(wrap(torch.where(hole, torch.full_like(c, -float("inf")), c)), 2 * k + 1, stride=1).reshape(F_, R_, W_)
+        ok = hole & torch.isfinite(amin)
+        o1[:, ri] = torch.where(ok, amin, a).to(o1.dtype); oc[:, ri] = torch.where(ok, cmax, c).to(oc.dtype)
+    return dict(M, r1=o1.reshape(M["r1"].shape), r1c=oc.reshape(M["r1c"].shape))
+
+
 def load_poses(b64, dev):
     import torch
     Z = np.load(io.BytesIO(gzip.decompress(base64.b64decode(b64))), allow_pickle=False)
@@ -241,7 +263,7 @@ class Band:
     def __init__(self, job, dev):
         import torch
         self.t = torch; self.dev = dev; self.f32 = torch.float32
-        key = hashlib.md5(job["poses"].encode()).hexdigest() + str(job.get("spacing", 0.8))
+        key = hashlib.md5(job["poses"].encode()).hexdigest() + str(job.get("spacing", 0.8)) + ("f" if job.get("fill_holes") else "")
         if key not in _CACHE:
             t0 = time.time(); P = load_poses(job["poses"], dev)
             if job.get("stride"):
@@ -253,6 +275,7 @@ class Band:
             else:
                 M = build_frame_maps(P["POSE"], dev, spacing=float(job.get("spacing", 0.8)))
                 if mc: import torch as _t; _t.save({k: v.cpu() for k, v in M.items()}, mc)
+            if job.get("fill_holes"): M = fill_pole_holes(M)                    # job key fill_holes: a MEASUREMENT change (report separately)
             _CACHE.clear(); _CACHE[key] = (M, P); print(f"frame maps built in {time.time() - t0:.0f}s", flush=True)
         self.M, self.P = _CACHE[key]; self.S = MH * MW; self.stride = int(job.get("stride") or 1)
         cid, fi = self.P["CID"].cpu().numpy(), self.P["FI"].cpu().numpy()
@@ -281,6 +304,7 @@ class Band:
         self.WT = self.P["WT"]
         self.b_ant_max = float(job.get("b_ant_max", 0.15)); self.neck_cfg = job.get("neck"); self.mount_dir = job.get("mount_dir", [0.0, 0.6, -0.8])
         self.min_arc = float(job.get("min_arc", MIN_ARC)); self.min_arm = float(job.get("min_arm_mm", MIN_ARM_MM))   # every link has a real arm
+        self.jn_low0 = str(job.get("jn_low", "arm")); self.jn_link = False      # "link": link N-1 under the arm hub at JN (analysis/jn_flip_patch.py)
 
     # -- helpers
     def _unit(self, x): return x / (self.t.linalg.norm(x, dim=-1, keepdim=True) + 1e-12)
@@ -385,6 +409,7 @@ class Band:
 
     def evaluate(self, d, detail=False):
         self.hub_margin = float(d.get("hm", self.hub_margin0))                # per-design contour margin (searched)
+        self.jn_link = str(d.get("jn_low", self.jn_low0)) == "link"
         ok_, err_ = link_arcs_ok(d, self.min_arc, self.R_REF, HUB_R)          # every link a real arm (FINDINGS "Short link")
         if not ok_: return self._reject(err_)
         if bvec(d["az"], d["el"])[0] > self.b_ant_max:                       # J1 on the front of the shoulder: no back anchor
@@ -474,7 +499,7 @@ class Band:
         # BOTTOM hub face: clear of the arm skin under the disc at every bin (arm-fixed)  -> link N-1 face on top
         self._zj4_fixed = d.get("zj4_fixed")                                                       # None: fitted with the shape
         zj4 = self._zj4_fixed if self._zj4_fixed is not None else self.bottom_face(d)
-        F_top_bottom = zj4 + T_BOT + T_W
+        F_top_bottom = zj4 + (0.0 if self.jn_link else T_BOT + T_W)
         self._bot_gap = (zj4 - F_top_bottom)                                   # scored height offset of the JN samples (BOTTOM's disc under link N-1)
         # ---- collisions need heights: computed inside the loop
         rng_iters = int(d.get("iters", 4)); WT = self.WT; BIG = 1e4; ar = t.arange(NP, device=self.dev)
@@ -679,12 +704,13 @@ class Band:
             rail_under = None
             if NR:                                                                              # carriage rides 0.5 mm over the rail's turned top
                 rail_under = Lm[rail_m] + self.hub_margin; zb = t.maximum(zb, rail_under.max() + RAIL_D + 0.5)
-            Fb = zb + T_BOT + T_W
+            Fb = zb + (0.0 if self.jn_link else T_BOT + T_W)
             Fj = {}
             for J in range(1, N):
                 m_lo = is_low & (JA == J); m_up = (kindA > 0) & (JA == J) & ~is_low
                 Fj[J] = t.maximum((Lm[m_lo] * cosA[m_lo]).max(), (Lm[m_up] * cosA[m_up]).max() - STACK)
             for _pass in range(3):
+                Fb = zb + (0.0 if self.jn_link else T_BOT + T_W)
                 h = Lm.clone(); faces = {}
                 for J in range(1, N):
                     m_lo = is_low & (JA == J); m_up = (kindA > 0) & (JA == J) & ~is_low; F = Fj[J]; faces[J] = F
@@ -709,6 +735,11 @@ class Band:
                     if not bool(near.any()): continue
                     req = h[near].max() + T_LO - STACK + 0.1                                      # rim of the lower plate under the upper hub
                     if float(req) > float(Fj[J]) + 1e-3: Fj[J] = req; moved = True
+                if self.jn_link:
+                    near = rib & (memA == N - 1) & (dBA < HUB_R + 2.5)
+                    if bool(near.any()):
+                        req = h[near].max() + T_LO - STACK + 0.1
+                        if float(req) > float(zb) + 1e-3: zb = req if hasattr(req, 'shape') else t.tensor(req); moved = True
                 if not moved: break
             if self.hub_relief > 0 and self._rail is None:                                     # BOTTOM / cuff hub: arm-side part, link N-1 turns on it ->
                 bu = zb / cosA                                                                  # its contour is axisymmetric (one height per ring, turned)
@@ -723,7 +754,7 @@ class Band:
             aux_u = []
             for ax_ in self._aux:                                                                 # neck / tab: hug the kept frames, ramp out of their start
                 La = t.where(S[:, None], ax_["LO"], t.full_like(ax_["LO"], -1e4)).max(0).values + self.hub_margin
-                hs0 = zb if ax_["start"] == "hub" else ((rail_under.max() + 4.0 - 4.0) if (ax_["start"] == "rail" and rail_under is not None) else (Fj[1] if 1 in Fj else zb))
+                hs0 = (zb + (STACK if self.jn_link else 0.0)) if ax_["start"] == "hub" else ((rail_under.max() + 4.0 - 4.0) if (ax_["start"] == "rail" and rail_under is not None) else (Fj[1] if 1 in Fj else zb))
                 u_ = t.maximum(La, hs0 - self.RAMP * t.clamp(ax_["dA"] - 6.0, min=0))
                 if ax_["h_end"] is not None: u_ = t.maximum(u_, t.tensor(ax_["h_end"], device=self.dev) - self.RAMP * t.clamp(ax_["dB"] - 6.0, min=0))
                 aux_u.append(u_)
@@ -789,7 +820,7 @@ class Band:
                 if int(kd[k_]) == 0: continue
                 J = (mi if int(kd[k_]) == 1 else mi + 1) if mi > 0 else 1
                 if J == N:                                                                       # link N-1 on BOTTOM's hub / the carriage
-                    bot[k_] = F["zj4"]; top[k_] = F[N] + HUB_UP + CAP_UP
+                    bot[k_] = F["zj4"]; top[k_] = (F["zj4"] + T_LO) if self.jn_link else (F[N] + HUB_UP + CAP_UP)
                 elif lower.get(J) == mi: top[k_] = F[J] + T_LO
                 else: bot[k_] = F[J] + STACK; top[k_] = F[J] + STACK + HUB_UP + CAP_UP
             ivs.append((bot, top, kd, dA, dB))
