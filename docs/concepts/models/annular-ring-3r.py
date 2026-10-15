@@ -47,7 +47,7 @@ KAA = [12.7, 19.05, 25.4, 31.75]                             # Reali-Slim KAA10/
 CHAMP = dict(az=2.4305071427308924, el=80.67633718429899, a1=76.90180446920043, a2=66.74921235407174,
              wd=86.32769021001913, wa=21.829657347343378)
 PARAMS = dict(CHAMP, sigma=-1, margin=10.0, width=12.0, t_link=3.0, q=0.95, r1=19.05, r2=19.05, r3=19.05, sec=4.76,
-              lug=2.0, h1=100.0, h2=115.0, h3=68.0, walls="contact")
+              lug=2.0, h1=100.0, h2=115.0, h3=68.0, walls="contact", skirt=0)
 
 
 def toward(u, v, ang_deg):
@@ -73,6 +73,18 @@ def ring_member(name, axis, joint, ri, sec, h0=70.0):
     area = math.pi * (ro ** 2 - ri ** 2)
     m = K.Member(name, D, kind="flat", t=h, width=2 * ro, joints=(joint,), K=k, A=a, Bv=b, xy=xy, cell=area / len(xy))
     m.ring = (ri, ro, h, split); return m
+
+
+def skirt_member(name, k, a_ref, joint, ri, sec, h0):
+    """the ring's LOWER race housing extended down to the skin as a contoured skirt (a 2 mm shell): fixed in the
+    PROXIMAL member (a_ref: a direction fixed in it), so each sample is one material point; K3 per-sample underside
+    along its ray from GH (laid out at the ring's level h0, so it tapers slightly toward GH), never above the ring"""
+    w, h, split = SEC[float(sec)]; ro = ri + w; k = K.unit(k)
+    A = K.unit(a_ref - (a_ref * k).sum(-1, keepdims=True) * k); Bv = np.cross(k, A); xy = ring_xy(ri, ro)
+    D = K.unit(h0 * k[:, None] + xy[None, :, :1] * A[:, None] + xy[None, :, 1:] * Bv[:, None])
+    m = K.Member(name, D, kind="free", t=2.0, width=2 * ro, joints=(joint,), cell=math.pi * (ro ** 2 - ri ** 2) / len(xy),
+                 r_ref=float(math.hypot(h0, ri + w / 2)))
+    m.skirt = (ri, ro, k); return m
 
 
 def joint_geo(p, j):
@@ -101,6 +113,10 @@ def build(B, F, p):
         if p[f"r{j}"] > 0: members.append(ring_member(f"ring{j}", axes[j], f"J{j}", p[f"r{j}"], p["sec"])); hubless.append(f"J{j}")
         else: members.append(K.hub_member(f"hub{j}", axes[j], f"J{j}"))
     nm = {j: members[j - 1].name for j in (1, 2, 3)}
+    if p.get("skirt", 0):                                     # proximal-member frames: base = S, link 1, arm = HG
+        ref = {1: F.S([1.0, 0, 0]), 2: p1, 3: F.HG([0.0, -1, 0])}
+        for j in (1, 2, 3):
+            if p[f"r{j}"] > 0: members.append(skirt_member(f"skirt{j}", axes[j], ref[j], f"J{j}", p[f"r{j}"], p["sec"], p[f"h{j}"]))
     w, t = p["width"], p["t_link"]
 
     def ramps_for(m, ends):
@@ -166,6 +182,15 @@ def walls(B, p, rep):
             X = (lvl + zs)[None, :, None, None] * m.K[Pi][:, None, None, :] + r * (np.cos(a)[None, None, :, None] * m.A[Pi][:, None, None, :]
                                                                             + np.sin(a)[None, None, :, None] * m.Bv[Pi][:, None, None, :])
             W.append(X.reshape(len(Pi), -1, 3))
+    for m in ch.members:                                      # skirt walls: from each edge sample up to the ring plane
+        if not hasattr(m, "skirt"): continue
+        ri, ro, k = m.skirt; ring = next(x for x in ch.members if hasattr(x, "ring") and x.joints == m.joints)
+        lvl = float(L["prof"][ring.name][0]); X0 = L["pts"][m.name][Pi]; lat = np.linalg.norm(X0 - (X0 * ring.K[Pi][:, None]).sum(-1, keepdims=True) * ring.K[Pi][:, None], axis=-1)
+        edge = (np.abs(lat - ri) < 1.5) | (np.abs(lat - ro) < 1.5); X0 = X0[:, edge[0]] if edge.ndim == 2 else X0
+        z0 = (X0 * ring.K[Pi][:, None]).sum(-1); st = np.arange(2.0, 41.0, 2.0)
+        X = X0[:, :, None, :] + st[None, None, :, None] * ring.K[Pi][:, None, None, :]
+        X = np.where(((z0[:, :, None] + st[None, None, :]) < lvl)[..., None], X, X0[:, :, None, :])   # beyond the plane: repeat the edge point
+        W.append(X.reshape(len(Pi), -1, 3))
     if not W: return rep
     W = np.concatenate(W, 1); d = K.dist_many(B, np.repeat(Pi, W.shape[1]), W.reshape(-1, 3)).reshape(len(Pi), -1)
     nwc = 0
@@ -221,6 +246,28 @@ if __name__ == "__main__":
         stageA = [dict(PARAMS, **H)] + [dict(PARAMS, **dict(H, **{f"r{j}": r})) for j in (1, 2, 3) for r in KAA] + \
                  [dict(PARAMS, r1=r, r2=r, r3=r) for r in KAA]
         best, rows = run_configs(B, stageA if "A" in a else [], tag="A bore per joint")
+        bases = [dict(H, r3=12.7), dict(H, r2=12.7), dict(H, r1=12.7), dict(r1=12.7, r2=12.7, r3=12.7), dict(H, r2=19.05)]
+        stageB = [dict(PARAMS, **b, q=q) for b in bases for q in (0.85, 0.9, 1.0)] + \
+                 [dict(PARAMS, **dict(H, r3=25.4), sec=6.35), dict(PARAMS, **dict(H, r2=25.4), sec=6.35),
+                  dict(PARAMS, **dict(H, r3=12.7), width=10.0), dict(PARAMS, **dict(H, r3=12.7), width=14.0)]
+        if "B" in a: best, rows = run_configs(B, stageB, tag="B q / section / width")
+        stageC = [dict(PARAMS, **dict(b, **{x: CHAMP[x] + s})) for b in (dict(H, r3=12.7), dict(r1=19.05, r2=19.05, r3=19.05))
+                  for x in ("az", "el", "a1", "a2", "wd", "wa") for s in (-10.0, 10.0)]
+        if "C" in a: best, rows = run_configs(B, stageC, tag="C axes +-10")
+    if "D" in a:                                              # the skirt variant on the best ring layouts
+        H = dict(r1=0, r2=0, r3=0); lay = [dict(H, r3=12.7), dict(H, r1=12.7), dict(H, r3=19.05), dict(H, r3=25.4),
+                                           dict(H, r1=12.7, r3=12.7), dict(r1=12.7, r2=12.7, r3=12.7), dict(r1=19.05, r2=19.05, r3=19.05)]
+        best, rows = run_configs(B, [dict(PARAMS, **l, skirt=1, h1=58.0, h3=68.0, h2=111.8) for l in lay], tag="D skirt")
+    if "C2" in a:                                             # reduced axes stage (time box): ring 3 seat and J1 elevation
+        H = dict(r1=0, r2=0, r3=0)
+        best, rows = run_configs(B, [dict(PARAMS, **dict(H, r3=12.7, **{x: CHAMP[x] + s})) for x in ("wd", "wa", "el") for s in (-10.0, 10.0)],
+                                 tag="C axes +-10 (ring 3)")
+    if "E" in a:                                              # refine the best (ring 1 r 12.7 + skirt): q
+        H = dict(r1=0, r2=0, r3=0)
+        best, rows = run_configs(B, [dict(PARAMS, **dict(H, r1=12.7), skirt=1, h1=58.0, q=q) for q in (0.93, 0.97, 1.0)] +
+                                 [dict(PARAMS, **dict(H, r1=12.7), skirt=1, h1=58.0, width=10.0)], tag="E refine q / width")
+    if "T" in a:                                              # twin control at the best's q
+        best, rows = run_configs(B, [dict(PARAMS, r1=0, r2=0, r3=0, q=1.0)], tag="twin q 1.0")
     if "bores" in a:
         for r in [0, 12.7, 19.05, 25.4, 31.75]:
             evaluate(B, dict(PARAMS, r1=r, r2=r, r3=r), verbose=True)
