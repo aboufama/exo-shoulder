@@ -1,9 +1,8 @@
 {
- "step": 2,
+ "step": 6,
  "tol_mm": 0.5,
- "frames_checked": 671,
- "seconds": 3262,
- "jobs": 4,
+ "frames_checked": 228,
+ "seconds": 1065,
  "parts": {
   "H|M4x6 ISO 10642 countersunk (upper cuff)": {
    "max_depth": 0.0,
@@ -52,15 +51,15 @@
   },
   "H|Revolve1[3]": {
    "max_depth": 0.61,
-   "frames": 132,
+   "frames": 46,
    "worst": [
-    "Comb hair",
-    172,
+    "Reach a high shelf",
+    72,
     [
-     63,
-     100,
-     -56,
-     86,
+     82,
+     132,
+     -82,
+     6,
      0
     ]
    ]
@@ -126,16 +125,16 @@
    "worst": null
   },
   "H|Revolve1[1]": {
-   "max_depth": 1.09,
-   "frames": 487,
+   "max_depth": 0.93,
+   "frames": 167,
    "worst": [
     "Comb hair",
-    170,
+    168,
     [
-     66,
-     109,
-     -58,
-     93,
+     69,
+     118,
+     -60,
+     100,
      0
     ]
    ]
@@ -176,23 +175,23 @@
    "worst": null
   },
   "F|Hex socket head countersunk screw grade C M4x0.7 x 8": {
-   "max_depth": 8.37,
-   "frames": 671,
+   "max_depth": 8.3,
+   "frames": 228,
    "worst": [
     "Comb hair",
-    172,
+    168,
     [
-     63,
+     69,
+     118,
+     -60,
      100,
-     -56,
-     86,
      0
     ]
    ]
   },
   "H|IGUS THRUST WASHER, 30mm ID, 39mm OD, 1.5mm T, IGLIDE J": {
    "max_depth": 2.82,
-   "frames": 671,
+   "frames": 228,
    "worst": [
     "Comb hair",
     162,
@@ -206,38 +205,38 @@
    ]
   },
   "F|MIDDLE": {
-   "max_depth": 5.79,
-   "frames": 671,
+   "max_depth": 5.78,
+   "frames": 228,
    "worst": [
     "Comb hair",
-    68,
+    102,
     [
-     60,
-     121,
-     -59,
-     119,
+     78,
+     143,
+     -67,
+     118,
      0
     ]
    ]
   },
   "H|TOP": {
-   "max_depth": 2.34,
-   "frames": 14,
+   "max_depth": 2.28,
+   "frames": 5,
    "worst": [
     "Drink from a cup",
-    128,
+    126,
     [
      91,
-     47,
-     -58,
-     123,
+     50,
+     -57,
+     124,
      0
     ]
    ]
   },
   "F|FOREARM CUFF": {
    "max_depth": 24.15,
-   "frames": 671,
+   "frames": 228,
    "worst": [
     "Wash opposite shoulder",
     42,
@@ -267,7 +266,7 @@
   },
   "H|J4 washer A (igus GTM-1018-005, recessed)": {
    "max_depth": 24.43,
-   "frames": 21,
+   "frames": 7,
    "worst": [
     "Drink from a cup",
     108,
@@ -281,16 +280,16 @@
    ]
   },
   "H|BOTTOM + neck + JN hub (one 5-axis part, 7075-T6 bead blasted)": {
-   "max_depth": 13.57,
-   "frames": 671,
+   "max_depth": 13.11,
+   "frames": 228,
    "worst": [
-    "Wash opposite shoulder",
-    40,
+    "Drink from a cup",
+    36,
     [
-     112,
-     28,
-     -74,
-     110,
+     85,
+     40,
+     -58,
+     111,
      0
     ]
    ]

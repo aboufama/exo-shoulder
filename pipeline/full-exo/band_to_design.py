@@ -235,7 +235,8 @@ for mi in range(N):
 
 # ---------------------------------------------------------------- write the design dir
 DD = os.path.join(HERE, "designs", NAME); os.makedirs(DD, exist_ok=True)
-sc = trimesh.Scene(); src = trimesh.load(os.environ.get("ARM_SRC", os.path.join(HERE, "designs", "final", "exo.glb")))   # ARM_SRC: another design's arm parts
+sc = trimesh.Scene(); _fin = os.environ.get("ARM_SRC", os.path.join(HERE, "designs", "final", "exo.glb"))   # the user's arm parts (ARM_SRC: another design's)
+src = trimesh.load(_fin) if os.path.exists(_fin) else trimesh.Scene()
 ARM_SKIP = [x for x in os.environ.get("ARM_SKIP", "").split(",") if x]                  # e.g. that design's own custom arm-end parts
 for g, mesh in meshes.items(): sc.add_geometry(mesh, node_name=f"{g}|D4 member {g} (proxy)|0", geom_name=f"{g}|proxy")
 moved_w = abs(R["w"][0] - 85.9) > 0.5 or abs(R["w"][1]) > 0.5

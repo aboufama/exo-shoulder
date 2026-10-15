@@ -101,7 +101,7 @@ def v4_upper_features(body, axis, lv, yref=None):
     import joint_v4 as J4, cad_helpers as CH
     a = np.asarray(axis, float); body = body.cut(CH.bore_tool(a, lv["U0"], lv["U1"], 6.0))
     n_, x_, y_ = _frame(a, yref)
-    for s_ in (1, -1): body = body.cut(cq.Solid.makeCylinder(0.625, 2.7, cq.Vector(*(y_ * s_ * 10.15 + a * (lv["U1"] - 2.7))), cq.Vector(*a)))   # 2.7 deep: the M1.6x3 goes in 2.54, clear of the lower edge round
+    for s_ in (1, -1): body = body.cut(cq.Solid.makeCylinder(0.625, 3.7, cq.Vector(*(y_ * s_ * 10.15 + a * (lv["U1"] - 2.7))), cq.Vector(*a)))   # 2.7 deep: the M1.6x3 goes in 2.54, clear of the lower edge round; the drill runs 1 mm out of the seat face (a tool ending ON the face broke the solid)
     return body
 def v4_joint_parts(axis, lv, J, yref=None):
     """lower-member group: washers, magnet, ring nut; upper-member group: sleeve, PCB + IC, cap, 2 cap screws"""

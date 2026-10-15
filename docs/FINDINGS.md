@@ -11,7 +11,9 @@ github.com/aboufama/exo-arm (archive, private).
 | band designs, simplified geometry (`designs/band_4c_best`) | 80.5 % | **5 DOF** (4R + cuff), 4.0 mm links, no real stacks / neck / rail - not buildable as modelled |
 | GPU search on real geometry, r13 (`gpu_client/band_search_r13.json`) | 37-45 % search, 35-37 % local detail | 5.5 mm links (FEA), v4 joint stack, hugging neck, back/top base |
 | r13 4R built as fair CAD, first build | 38.0 % | follows 64.5 %, in-band 58.9 %, zero collisions |
-| same, after the quality pass (swept-band links, turned JN hub, conformal saddle cuff) | 29-33 % | the turned JN hub lost its contoured skin side (re-add it: -4 pts); see scorecard for the current number |
+| same, after the quality pass (swept-band links, turned JN hub, conformal saddle cuff) | 29.6 % | follows 64.5 %, in-band 45.9 %; the turned JN hub had lost its contoured skin side |
+| same, turned skin side restored (dimple) + neck fixes (2026-10-15) | 32.0 % | follows 64.5 %, in-band 49.6 %, overhead 20.7 %. Same rebuild with the old flat hub: 30.2 % -> the skin side is worth +1.8 pts, the neck changes +0.6 |
+| r13 3R + sliding cuff (`cad_r13_n3_s1331_0`), first build with every part valid | 21.2 % | follows 61.0 %, in-band 34.8 %, overhead 20.5 %, 436 g (R8 fail: Ti rail + keel); see "Arm end" |
 
 **Measurement changes are not design regressions.** Stricter skin, natural motions and the in-band metric each moved
 numbers on 2026-10-13. Always report a score change with its cause.
@@ -105,12 +107,45 @@ rig's girdle law (GH lift 0.2 mm/deg above 30 deg, scapula rotating about GH), a
 ## Arm end (BOTTOM + neck + J4 hub, one 7075 part)
 
 - **Turned hub + swept neck** (`armend_fair.build_hub_neck_v2`): revolve with exact seat; neck = constant 14 x 6.5
-  section along the skin-hugging path, starting 6 mm inside the hub, tapering into BOTTOM's outline at the cut.
-- Booleans: the neck end coincides with BOTTOM's cut face -> plain fuse loses volume; **OCC glue fuse**
-  (`cad_helpers.glue_fuse`) merges it exactly. The washer-recess tool must cross the seat face transversally (a tool
-  tangent to the face along a circle breaks the solid). Never let fused faces coincide otherwise.
-- 3R + sliding cuff (r13 n3, 36.8 % detail): members clean, but its arm end is broken (link 2 builds with zero volume,
-  the dovetail track is invalid) - unfinished.
+  section along the skin-hugging path, starting 6 mm inside the hub.
+- **Turned skin side** (`hub_need` / `fit_underside`): per ring radius the axial height the dense envelope allows (max
+  over the ring and all followed frames, skin + 2 mm + 0.5), then the closest sketch above it - centre flat + cone
+  (+ the old face F as an outer annulus = "dimple"), short G2 corner blends, revolved. r13 n4: centre 3.1 mm under F to
+  r 2.5, 25 deg cone back to F by r ~10. Radial skin gap under the hub: min 3.15 -> 2.71 mm, worst-frame median 7.14 ->
+  4.78, all-frames median 13.33 -> 11.46; exact body clearance of the hub region (451 frames) 2.68 -> 2.60 mm.
+- **Neck end**: morphing the 14 mm neck into BOTTOM's 30 mm bar section over the last few mm folded the loft (the
+  lateral face self-intersects; OCC `isValid` still says True, every later boolean silently fails). Now the neck keeps
+  14 x 5.5 and runs 6 mm into BOTTOM past the cut -> plain transversal fuse (`NECK_END=bar` = old). Inside the hub it
+  starts 5.9 thick (0.3 inside both hub faces) so nothing is coincident or tangent; a flat face 0-0.4 mm under F is
+  snapped to F (a neck underside grazing the rim blend broke the recess cut). Check lofts with
+  `armend_fair.self_x` (BOPAlgo_ArgumentAnalyzer), not `isValid`.
+- **3R + sliding cuff** (`cad_r13_n3_s1331_0`): every part one valid solid now (R7). What was broken:
+  (1) `sheet.sheet_solid` sewed the 5 faces at 5 um and took the FIRST shell: on steep members the edge rounds drift
+  from the exact trimmed outline, sewing leaves several shells -> an open 3-4 face "solid" with a meaningless volume
+  (reproduced on the official maps: link 1, 4 faces, invalid). Now: retry 0.02-0.1 mm, keep the one closed shell.
+  (2) the evaluator's ribbon floor for link 2 started 29 mm above J2's plane at J2's rim (JN plane 119 mm vs J2 61 mm
+  from GH, ramp-limited from JN only) -> an 85 deg wall, J2 raised 12 mm by the ramp loop, link 2's skin side 8 mm inside
+  the envelope. Now the floor is capped at RAMP_DEG out of every hub plane (`Member.ramp_cap`): J2 raise 2.6 mm, link 2
+  -1.4 mm, link 1's J2 hub 0.8 mm over its need (was 9.2). (3) rail + neck were ONE loft whose dovetail-with-keel
+  sections morphed into the neck: self-intersecting -> the BOTTOM merge returned 0 cm3 and assemble crashed. Now
+  (`build_dovetail_rail_neck`): exact revolve head, straight-quad keel loft to the skin envelope, separate neck (smoothing
+  spline path, approach run down the bar's axis). (4) saddle: channel tool had a sign error (a 13 mm rectangular slot,
+  no dovetail) and the 18 mm plate was narrower than the v4 washer recess (r 9.15-9.3) -> recess broke out of its
+  sides; now the dovetail + liner offset, plate 2 x 12.3. (5) the top-mounted base: cap-screw drills ended exactly on the
+  seat face (invalid solid) and the 3 M2 back-plate holes sat 0.075 mm from a cap-screw hole / 0.55 mm from the disc
+  edge; now drills cross the face, M2 at r 12 between the cap screws on a O28 disc.
+- Still wrong on the 3R build: the neck runs back beside the rail toward the bar and grazes the saddle's lip in the
+  last ~2.5 deg of travel (0.44 mm at the clips' max 45.0 deg, 0.55 at the 45.6 deg limit; true ray-parity check); the
+  rail part enters the body by 1.0 mm (ray-parity verified, 'Wave' 60); the JN plate sits ~35 mm above the skin
+  (zj4 112) so the skin-following keel is 4.5-40 mm deep and the rail part is 63 cm3 of Ti (R8 436 g).
+- **Travel of an arc slide / open ring** (for a 2R + humeral-rotation ring): an ARM-fixed ring at this rail's height (64 mm
+  down the humerus) is body-free (> 2 mm, all 451 clip frames, exact distance) only over 130 deg at r 92 mm about the
+  humerus axis and 124 deg at r 80; at r 70 (about skin + 1 cm) it hits the body even at its centre. Travel + the
+  saddle's length (+-8 deg) + the neck must fit inside that window, so 120-160 deg of travel cannot be an arm-fixed rail
+  here; the long arc has to ride on the shoulder side (it then does not turn with the humerus) with a short arm-fixed
+  cuff, and its constant radius stands off a non-round arm (36-70 mm skin radius). Other limits seen in this build:
+  one-end neck = a long cantilever arc; the 26 mm saddle and the stop slot set the end stops; the neck must leave
+  beyond the saddle's reach (here the body window ends 0.3 deg past the saddle's travel).
 
 ## Structure (in-house FEA, `pipeline/conformal/thin_study/REPORT.md`)
 
@@ -123,3 +158,9 @@ rig's girdle law (GH lift 0.2 mm/deg above 30 deg, scapula rotating about GH), a
   (dj3qfmtwrwy2pr). Warm workers serve old code after a deploy -> new endpoint name per code change, check
   CODE_VERSION. Queued jobs may need `workersMin` PATCHed > 0 to start; reset to 0 after. Account quota 10 workers.
 - The dense per-frame skin maps (`.cache/maps_s1.pt`, 857 MB) are not in git: `tools/build_maps.py`.
+- **The contact judges over-report.** `judge/sdist.py` takes the inside/outside sign from ONE nearest triangle's face
+  normal; near edges/vertices that sign is often wrong. Ray-parity re-test of the worst frame of every top entry:
+  r13 n4 R6 (15.48 mm before, 37.64 after this change) and r13 n3 R6 (90.07): 0 truly-inside vertices in all top
+  7-14 pairs. R2 on the n3 rail part: judge 15.39 mm, truly 1.03 mm. The 13.11 mm R2 entry of the n4 BOTTOM part comes
+  from the user's bar region (s < 265; not re-tested), not the neck/hub (>= 2.45 mm from the body in every frame). Fix the judge (winding number or ray parity) before trusting
+  R2/R6 numbers.

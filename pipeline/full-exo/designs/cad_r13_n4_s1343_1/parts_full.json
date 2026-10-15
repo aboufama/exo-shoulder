@@ -52,7 +52,7 @@
    "k": 4,
    "group": "base",
    "name": "D4-01 scapula base (Ti-6Al-4V)",
-   "vol_cm3": 3.81,
+   "vol_cm3": 3.811,
    "material": "Ti-6Al-4V",
    "mass_g": 16.88,
    "valid": true,
@@ -272,7 +272,7 @@
    "k": 26,
    "group": "l2",
    "name": "D4-03 link 2 (Ti-6Al-4V)",
-   "vol_cm3": 6.321,
+   "vol_cm3": 6.32,
    "material": "Ti-6Al-4V",
    "mass_g": 28.0,
    "valid": true,
@@ -406,17 +406,17 @@
    "material": "Ti-6Al-4V",
    "mass_g": 17.89,
    "valid": true,
-   "faces": 24
+   "faces": 19
   },
   {
    "k": 40,
    "group": "H",
    "name": "BOTTOM + neck + JN hub (one 5-axis part, 7075-T6 bead blasted)",
-   "vol_cm3": 33.053,
+   "vol_cm3": 33.345,
    "material": "7075-T6",
-   "mass_g": 92.88,
+   "mass_g": 93.7,
    "valid": true,
-   "faces": 142
+   "faces": 128
   },
   {
    "k": 41,
@@ -472,7 +472,7 @@
    "k": 46,
    "group": "F",
    "name": "FOREARM CUFF",
-   "vol_cm3": 131.273,
+   "vol_cm3": 131.298,
    "material": "user part",
    "mass_g": null,
    "valid": true,
@@ -832,9 +832,9 @@
    "k": 82,
    "group": "H",
    "name": "UPPER ARM CUFF (conformal G2 shell, AlSi10Mg bead blasted)",
-   "vol_cm3": 15.176,
+   "vol_cm3": 15.173,
    "material": "AlSi10Mg (SLM)",
-   "mass_g": 40.52,
+   "mass_g": 40.51,
    "valid": true,
    "faces": 17
   },

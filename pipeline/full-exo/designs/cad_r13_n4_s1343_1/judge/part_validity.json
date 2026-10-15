@@ -4,14 +4,14 @@
    "file": "BOTTOM.step",
    "valid": true,
    "solids": 1,
-   "faces": 142,
+   "faces": 128,
    "bad_faces": 0,
    "watertight": false,
-   "volume_cm3": 33.058,
+   "volume_cm3": 33.345,
    "bbox_mm": [
-    44.7,
-    355.0,
-    48.9
+    42.7,
+    352.9,
+    46.8
    ]
   },
   {
@@ -60,12 +60,12 @@
    "file": "D4-04.step",
    "valid": true,
    "solids": 1,
-   "faces": 24,
+   "faces": 19,
    "bad_faces": 0,
-   "watertight": false,
+   "watertight": true,
    "volume_cm3": 4.038,
    "bbox_mm": [
-    18.4,
+    18.3,
     64.8,
     24.6
    ]

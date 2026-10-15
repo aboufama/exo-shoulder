@@ -33,7 +33,7 @@ def make_members():
                             strip_dir=sd, strip_len=MOUNT_LEN, R0=lv1["S"], flat=True)
     if BASE_TOP_MOUNT:                                                                  # 4c: base is the outer member at J1 -> anchored from above
         mem["base"] = MB.Member("D4-01 scapula base", "base", [dict(axis=hub_axis(0, 1), role=role(0, 1), lv=lv1, joint=1)],
-                                strip_dir=sd, strip_len=0.0, R0=lv1["S"], flat=True); mem["base"].disc_r = 13.0
+                                strip_dir=sd, strip_len=0.0, R0=lv1["S"], flat=True); mem["base"].disc_r = 14.0   # O28: the 3 M2 back-plate holes need a wall outside the O22 cap
     for mi in range(1, N):
         hubs = [dict(axis=hub_axis(mi, 0), role=role(mi, mi), lv=joint_lv(mi), joint=mi), dict(axis=hub_axis(mi, 1), role=role(mi, mi + 1), lv=joint_lv(mi + 1), joint=mi + 1)]
         mem[f"l{mi}"] = MB.Member(f"D4-{mi + 1:02d} link {mi}", f"l{mi}", hubs, theta=A[mi - 1])
@@ -205,9 +205,9 @@ def assemble():
             else:
                 s = HWR.v4_upper_features(s, a, lv, yref=yref); parts += [(n, nm, hs) for nm, hs in up_parts]          # cap + sensor ride the upper member
         if n == "base" and BASE_TOP_MOUNT:                                                   # back-plate interface on top: 3x M2 blind, around the cap
-            a = m.hubs[0]["axis"]; lv = m.hubs[0]["lv"]; n_ = a / np.linalg.norm(a); x_ = np.cross(n_, [0, 0, 1.0]); x_ /= np.linalg.norm(x_); y_ = np.cross(n_, x_)
+            a = m.hubs[0]["axis"]; lv = m.hubs[0]["lv"]; n_, x_, y_ = HWR._frame(a, yref)                # the cap screws sit at +-y_ (90 / 270 deg)
             for k in range(3):
-                ang = 2 * math.pi * k / 3 + math.pi / 6; p = n_ * lv["U1"] + 11.65 * (math.cos(ang) * x_ + math.sin(ang) * y_)
+                ang = 2 * math.pi * k / 3; p = n_ * lv["U1"] + 12.0 * (math.cos(ang) * x_ + math.sin(ang) * y_)   # 0 / 120 / 240 deg: >= 30 deg from the cap screws, wall to the O28 disc
                 s = s.cut(cq.Solid.makeCylinder(0.8, 3.2, cq.Vector(*(p - 3.0 * n_)), cq.Vector(*n_)))
         s = solid_fix(s); log(f"{n}: featured valid {s.isValid()} vol {s.Volume() / 1000:.2f} cm3")
         parts.append((n, f"{m.name} (Ti-6Al-4V)", s))
@@ -217,7 +217,7 @@ def assemble():
         track, info = AF.build_track_neck(E); carr, hw = AF.build_carriage(info); bm = AF.bottom_merged(track)
         parts += [("H", "BOTTOM + neck + V-track (one 5-axis part; V flanks hard-anodised / nitrided)", bm), ("cuff", "D4-C cuff carriage (Ti-6Al-4V)", carr)] + hw
     elif R.get("cuff"):
-        track, info = AF.build_dovetail_track_neck(E); sad, hw = AF.build_saddle(info); bm = AF.bottom_merged(track)
+        track, info = (AF.build_dovetail_track_neck if os.environ.get("RAIL_V1") == "1" else AF.build_dovetail_rail_neck)(E); sad, hw = AF.build_saddle(info); bm = AF.bottom_merged(track)
         parts += [("H", "BOTTOM + neck + curved dovetail rail (one 5-axis part, Ti-6Al-4V)", bm), ("cuff", "D4-S cuff saddle (Ti-6Al-4V)", sad)] + hw
     else:
         blk, hw = (AF.build_hub_neck_v2 if os.environ.get('HUB_V1') is None else AF.build_hub_neck)(E); bm = AF.bottom_merged(blk)

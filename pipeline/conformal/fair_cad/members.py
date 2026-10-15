@@ -138,7 +138,9 @@ class Member:
         baseline: the band design's fitted ribbon underside (grid), kept as a floor"""
         D = self.D; ok = np.isfinite(env) & (env > 20)
         need = np.where(ok, env + MARGIN, -np.inf)
-        if baseline is not None: need = np.maximum(need, np.where(np.isfinite(baseline), baseline, -np.inf))
+        if baseline is not None:                                                            # BASE_CAP=0: the old uncapped floor (reproduction)
+            bl = np.where(np.isfinite(baseline), baseline, -np.inf)
+            need = np.maximum(need, bl if __import__("os").environ.get("BASE_CAP", "1") == "0" else np.minimum(bl, self.ramp_cap()))
         for c in self.extra: need = np.maximum(need, np.where(np.isfinite(c), c, -np.inf))
         valid = np.isfinite(need); self.need = need
         rib = smooth_upper(np.where(valid, need, 0.0), valid, sigma_mm / GRID)
@@ -185,6 +187,18 @@ class Member:
         self.gap_min = float(np.nanmin(np.where(valid & ins, bot - need, np.nan))) if (valid & ins).any() else float("nan")
         self.t_min = float((top - bot)[ins].min())
         return self
+
+    def ramp_cap(self):
+        """highest the band design's fitted ribbon may hold the skin side: out of every hub's skin-side plane at most
+        RAMP_DEG (the steepest lift the sheet can take). The evaluator ramp-limits a ribbon only from one hub; where the
+        two hubs of a link sit at very different heights (r13 n3 link 2: J2 plane 61 mm, JN plane 119 mm from GH) its
+        ribbon started 29 mm above J2's plane at J2's rim -> an 85 deg wall the sheet could not be built on"""
+        cap = np.full(self.D.shape[:-1], np.inf); k = math.tan(RAMP_DEG * D2R)
+        for h in self.hubs:
+            c = np.clip(self.D @ h["axis"], 1e-3, 1); lv = h["lv"]; r_in = lv["S"] * np.sqrt(1 - c * c) / c
+            plane = (lv["U0"] if h["role"] == "upper" else lv["S"] - 2.85) / c
+            cap = np.minimum(cap, plane + k * np.maximum(r_in - h.get("flat_r", HUB_R + 0.5), 0.0))
+        return cap
 
     def _fair(self, bot, top, need, valid):
         """replace ribbon + transitions + lifts by fair fields: the skin side is the stiffest smooth surface that stays on
