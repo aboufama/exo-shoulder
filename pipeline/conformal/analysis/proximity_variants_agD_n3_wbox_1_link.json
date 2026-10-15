@@ -1,0 +1,1001 @@
+{
+ "design": {
+  "n": 3,
+  "az": 61.11396484246086,
+  "el": 84.79012323988644,
+  "a": [
+   72.89803435585966,
+   60.006082882592224
+  ],
+  "w": [
+   100.0,
+   -7.084132311065103
+  ],
+  "branch": -1,
+  "order": [
+   1,
+   1,
+   0
+  ],
+  "hm": 1.3510164347072071
+ },
+ "geo": {
+  "q_step": 12,
+  "hub_r": 11.5,
+  "hub_relief": 11.5,
+  "hub_margin": 2.0,
+  "stack": 3.15,
+  "t_w": 0.15,
+  "t_link": 3.0,
+  "neck": {
+   "p_bar": [
+    -0.06,
+    -64.677,
+    74.895
+   ],
+   "r_under": 96.38
+  },
+  "b_ant_max": 0.15,
+  "mount_dir": [
+   0.0,
+   0.6,
+   -0.8
+  ],
+  "t_lo": 3.0,
+  "hub_up": 4.05,
+  "cap_up": 3.3,
+  "rail_d": 10.0,
+  "min_arc": 60.0,
+  "min_arm_mm": 10.0,
+  "G": 14.0,
+  "env_target": 0.9,
+  "env_weight": 4.0,
+  "ramp_deg": 60.0,
+  "hw": 5.0,
+  "fit_clips": [
+   "Raise overhead",
+   "Drink from a cup",
+   "Comb hair",
+   "Reach a high shelf",
+   "Wash opposite shoulder",
+   "Reach back pocket"
+  ]
+ },
+ "rows": [
+  {
+   "variant": "baseline",
+   "geo": {},
+   "design": {},
+   "G14": {
+    "score": 0.5848906636238098,
+    "follow": 0.8043668270111084,
+    "in_band": 0.7137857675552368,
+    "zj4": 65.79750061035156,
+    "arm_mm": [
+     57.64,
+     54.42
+    ],
+    "achieved": 0.6981704831123352,
+    "ceiling": 0.8806326985359192,
+    "classes": {
+     "ribbon link 1": {
+      "area": 0.268,
+      "achieved": 0.756,
+      "ceiling": 0.94,
+      "lift_mm": 0.0,
+      "skin_motion_mm": 10.94
+     },
+     "ribbon link 2": {
+      "area": 0.208,
+      "achieved": 0.464,
+      "ceiling": 0.947,
+      "lift_mm": 9.71,
+      "skin_motion_mm": 10.41
+     },
+     "lower hub J1": {
+      "area": 0.175,
+      "achieved": 0.949,
+      "ceiling": 0.949,
+      "lift_mm": 1.35,
+      "skin_motion_mm": 3.97
+     },
+     "lower hub J2": {
+      "area": 0.175,
+      "achieved": 0.504,
+      "ceiling": 0.627,
+      "lift_mm": 1.35,
+      "skin_motion_mm": 19.19
+     },
+     "BOTTOM hub J3": {
+      "area": 0.175,
+      "achieved": 0.83,
+      "ceiling": 0.896,
+      "lift_mm": 2.38,
+      "skin_motion_mm": 14.25
+     },
+     "neck": {
+      "area_vs_scored": 0.29,
+      "achieved": 0.782,
+      "ceiling": 0.882,
+      "lift_mm": 1.35,
+      "skin_motion_mm": 21.84
+     },
+     "tab": {
+      "area_vs_scored": 0.071,
+      "achieved": 0.911,
+      "ceiling": 0.911,
+      "lift_mm": 1.35,
+      "skin_motion_mm": 0.91
+     }
+    },
+    "clips": {
+     "Raise overhead": 0.329,
+     "Drink from a cup": 0.632,
+     "Comb hair": 0.825,
+     "Reach a high shelf": 0.745,
+     "Wash opposite shoulder": 0.497,
+     "Reach back pocket": 0.817,
+     "Wave": 0.22,
+     "Walking arm swing": 0.762
+    },
+    "follow_clips": {
+     "Raise overhead": 0.426,
+     "Drink from a cup": 1.0,
+     "Comb hair": 1.0,
+     "Reach a high shelf": 1.0,
+     "Wash opposite shoulder": 1.0,
+     "Reach back pocket": 1.0,
+     "Wave": 0.276,
+     "Walking arm swing": 1.0
+    },
+    "faces": {
+     "1": 49.66,
+     "2": 78.43,
+     "3": 72.45,
+     "zj4": 65.8
+    },
+    "secs": 1.4
+   },
+   "G10": {
+    "score": 0.4181421399116516,
+    "follow": 0.8043668270111084,
+    "in_band": 0.5015074610710144,
+    "zj4": 65.79750061035156,
+    "arm_mm": [
+     57.64,
+     54.42
+    ],
+    "achieved": 0.5255424976348877,
+    "ceiling": 0.7207097411155701,
+    "classes": {
+     "ribbon link 1": {
+      "area": 0.268,
+      "achieved": 0.624,
+      "ceiling": 0.748,
+      "lift_mm": 0.0,
+      "skin_motion_mm": 10.94
+     },
+     "ribbon link 2": {
+      "area": 0.208,
+      "achieved": 0.404,
+      "ceiling": 0.87,
+      "lift_mm": 9.71,
+      "skin_motion_mm": 10.41
+     },
+     "lower hub J1": {
+      "area": 0.175,
+      "achieved": 0.949,
+      "ceiling": 0.949,
+      "lift_mm": 1.35,
+      "skin_motion_mm": 3.97
+     },
+     "lower hub J2": {
+      "area": 0.175,
+      "achieved": 0.209,
+      "ceiling": 0.344,
+      "lift_mm": 1.35,
+      "skin_motion_mm": 19.19
+     },
+     "BOTTOM hub J3": {
+      "area": 0.175,
+      "achieved": 0.413,
+      "ceiling": 0.65,
+      "lift_mm": 2.38,
+      "skin_motion_mm": 14.25
+     },
+     "neck": {
+      "area_vs_scored": 0.29,
+      "achieved": 0.405,
+      "ceiling": 0.649,
+      "lift_mm": 1.35,
+      "skin_motion_mm": 21.84
+     },
+     "tab": {
+      "area_vs_scored": 0.071,
+      "achieved": 0.911,
+      "ceiling": 0.911,
+      "lift_mm": 1.35,
+      "skin_motion_mm": 0.91
+     }
+    },
+    "clips": {
+     "Raise overhead": 0.212,
+     "Drink from a cup": 0.38,
+     "Comb hair": 0.662,
+     "Reach a high shelf": 0.619,
+     "Wash opposite shoulder": 0.299,
+     "Reach back pocket": 0.556,
+     "Wave": 0.141,
+     "Walking arm swing": 0.519
+    },
+    "follow_clips": {
+     "Raise overhead": 0.426,
+     "Drink from a cup": 1.0,
+     "Comb hair": 1.0,
+     "Reach a high shelf": 1.0,
+     "Wash opposite shoulder": 1.0,
+     "Reach back pocket": 1.0,
+     "Wave": 0.276,
+     "Walking arm swing": 1.0
+    },
+    "faces": {
+     "1": 49.66,
+     "2": 78.43,
+     "3": 72.45,
+     "zj4": 65.8
+    },
+    "secs": 0.9
+   }
+  },
+  {
+   "variant": "hw 4",
+   "geo": {
+    "hw": 4.0
+   },
+   "design": {},
+   "G14": {
+    "score": 0.5906310677528381,
+    "follow": 0.8043668270111084,
+    "in_band": 0.7206155061721802,
+    "zj4": 65.79750061035156,
+    "arm_mm": [
+     57.64,
+     54.42
+    ],
+    "achieved": 0.7051075100898743,
+    "ceiling": 0.8769319653511047,
+    "classes": {
+     "ribbon link 1": {
+      "area": 0.237,
+      "achieved": 0.76,
+      "ceiling": 0.948,
+      "lift_mm": 0.0,
+      "skin_motion_mm": 11.03
+     },
+     "ribbon link 2": {
+      "area": 0.183,
+      "achieved": 0.458,
+      "ceiling": 0.951,
+      "lift_mm": 9.71,
+      "skin_motion_mm": 10.22
+     },
+     "lower hub J1": {
+      "area": 0.193,
+      "achieved": 0.949,
+      "ceiling": 0.949,
+      "lift_mm": 1.35,
+      "skin_motion_mm": 3.97
+     },
+     "lower hub J2": {
+      "area": 0.193,
+      "achieved": 0.504,
+      "ceiling": 0.627,
+      "lift_mm": 1.35,
+      "skin_motion_mm": 19.19
+     },
+     "BOTTOM hub J3": {
+      "area": 0.193,
+      "achieved": 0.83,
+      "ceiling": 0.896,
+      "lift_mm": 2.38,
+      "skin_motion_mm": 14.25
+     },
+     "neck": {
+      "area_vs_scored": 0.321,
+      "achieved": 0.782,
+      "ceiling": 0.882,
+      "lift_mm": 1.35,
+      "skin_motion_mm": 21.84
+     },
+     "tab": {
+      "area_vs_scored": 0.078,
+      "achieved": 0.911,
+      "ceiling": 0.911,
+      "lift_mm": 1.35,
+      "skin_motion_mm": 0.91
+     }
+    },
+    "clips": {
+     "Raise overhead": 0.334,
+     "Drink from a cup": 0.639,
+     "Comb hair": 0.836,
+     "Reach a high shelf": 0.749,
+     "Wash opposite shoulder": 0.495,
+     "Reach back pocket": 0.826,
+     "Wave": 0.223,
+     "Walking arm swing": 0.776
+    },
+    "follow_clips": {
+     "Raise overhead": 0.426,
+     "Drink from a cup": 1.0,
+     "Comb hair": 1.0,
+     "Reach a high shelf": 1.0,
+     "Wash opposite shoulder": 1.0,
+     "Reach back pocket": 1.0,
+     "Wave": 0.276,
+     "Walking arm swing": 1.0
+    },
+    "faces": {
+     "1": 49.66,
+     "2": 78.43,
+     "3": 72.45,
+     "zj4": 65.8
+    },
+    "secs": 1.0
+   },
+   "G10": {
+    "score": 0.41811060905456543,
+    "follow": 0.8043668270111084,
+    "in_band": 0.5013203620910645,
+    "zj4": 65.79750061035156,
+    "arm_mm": [
+     57.64,
+     54.42
+    ],
+    "achieved": 0.5260872840881348,
+    "ceiling": 0.7136211395263672,
+    "classes": {
+     "ribbon link 1": {
+      "area": 0.237,
+      "achieved": 0.629,
+      "ceiling": 0.753,
+      "lift_mm": 0.0,
+      "skin_motion_mm": 11.03
+     },
+     "ribbon link 2": {
+      "area": 0.183,
+      "achieved": 0.402,
+      "ceiling": 0.871,
+      "lift_mm": 9.71,
+      "skin_motion_mm": 10.22
+     },
+     "lower hub J1": {
+      "area": 0.193,
+      "achieved": 0.949,
+      "ceiling": 0.949,
+      "lift_mm": 1.35,
+      "skin_motion_mm": 3.97
+     },
+     "lower hub J2": {
+      "area": 0.193,
+      "achieved": 0.209,
+      "ceiling": 0.344,
+      "lift_mm": 1.35,
+      "skin_motion_mm": 19.19
+     },
+     "BOTTOM hub J3": {
+      "area": 0.193,
+      "achieved": 0.413,
+      "ceiling": 0.65,
+      "lift_mm": 2.38,
+      "skin_motion_mm": 14.25
+     },
+     "neck": {
+      "area_vs_scored": 0.321,
+      "achieved": 0.405,
+      "ceiling": 0.649,
+      "lift_mm": 1.35,
+      "skin_motion_mm": 21.84
+     },
+     "tab": {
+      "area_vs_scored": 0.078,
+      "achieved": 0.911,
+      "ceiling": 0.911,
+      "lift_mm": 1.35,
+      "skin_motion_mm": 0.91
+     }
+    },
+    "clips": {
+     "Raise overhead": 0.209,
+     "Drink from a cup": 0.371,
+     "Comb hair": 0.667,
+     "Reach a high shelf": 0.621,
+     "Wash opposite shoulder": 0.301,
+     "Reach back pocket": 0.561,
+     "Wave": 0.138,
+     "Walking arm swing": 0.518
+    },
+    "follow_clips": {
+     "Raise overhead": 0.426,
+     "Drink from a cup": 1.0,
+     "Comb hair": 1.0,
+     "Reach a high shelf": 1.0,
+     "Wash opposite shoulder": 1.0,
+     "Reach back pocket": 1.0,
+     "Wave": 0.276,
+     "Walking arm swing": 1.0
+    },
+    "faces": {
+     "1": 49.66,
+     "2": 78.43,
+     "3": 72.45,
+     "zj4": 65.8
+    },
+    "secs": 1.2
+   }
+  },
+  {
+   "variant": "hw 3",
+   "geo": {
+    "hw": 3.0
+   },
+   "design": {},
+   "G14": {
+    "score": 0.5974425673484802,
+    "follow": 0.8043668270111084,
+    "in_band": 0.7281082272529602,
+    "zj4": 65.79750061035156,
+    "arm_mm": [
+     57.64,
+     54.42
+    ],
+    "achieved": 0.7139233946800232,
+    "ceiling": 0.8712059855461121,
+    "classes": {
+     "ribbon link 1": {
+      "area": 0.199,
+      "achieved": 0.761,
+      "ceiling": 0.957,
+      "lift_mm": 0.0,
+      "skin_motion_mm": 11.5
+     },
+     "ribbon link 2": {
+      "area": 0.154,
+      "achieved": 0.455,
+      "ceiling": 0.959,
+      "lift_mm": 9.71,
+      "skin_motion_mm": 9.94
+     },
+     "lower hub J1": {
+      "area": 0.216,
+      "achieved": 0.949,
+      "ceiling": 0.949,
+      "lift_mm": 1.35,
+      "skin_motion_mm": 3.97
+     },
+     "lower hub J2": {
+      "area": 0.216,
+      "achieved": 0.504,
+      "ceiling": 0.627,
+      "lift_mm": 1.35,
+      "skin_motion_mm": 19.19
+     },
+     "BOTTOM hub J3": {
+      "area": 0.216,
+      "achieved": 0.83,
+      "ceiling": 0.896,
+      "lift_mm": 2.38,
+      "skin_motion_mm": 14.25
+     },
+     "neck": {
+      "area_vs_scored": 0.359,
+      "achieved": 0.782,
+      "ceiling": 0.882,
+      "lift_mm": 1.35,
+      "skin_motion_mm": 21.84
+     },
+     "tab": {
+      "area_vs_scored": 0.087,
+      "achieved": 0.911,
+      "ceiling": 0.911,
+      "lift_mm": 1.35,
+      "skin_motion_mm": 0.91
+     }
+    },
+    "clips": {
+     "Raise overhead": 0.338,
+     "Drink from a cup": 0.64,
+     "Comb hair": 0.849,
+     "Reach a high shelf": 0.762,
+     "Wash opposite shoulder": 0.491,
+     "Reach back pocket": 0.838,
+     "Wave": 0.226,
+     "Walking arm swing": 0.785
+    },
+    "follow_clips": {
+     "Raise overhead": 0.426,
+     "Drink from a cup": 1.0,
+     "Comb hair": 1.0,
+     "Reach a high shelf": 1.0,
+     "Wash opposite shoulder": 1.0,
+     "Reach back pocket": 1.0,
+     "Wave": 0.276,
+     "Walking arm swing": 1.0
+    },
+    "faces": {
+     "1": 49.66,
+     "2": 78.43,
+     "3": 72.45,
+     "zj4": 65.8
+    },
+    "secs": 0.8
+   },
+   "G10": {
+    "score": 0.4171692728996277,
+    "follow": 0.8043668270111084,
+    "in_band": 0.4994662404060364,
+    "zj4": 65.79750061035156,
+    "arm_mm": [
+     57.64,
+     54.42
+    ],
+    "achieved": 0.5251339673995972,
+    "ceiling": 0.7033917307853699,
+    "classes": {
+     "ribbon link 1": {
+      "area": 0.199,
+      "achieved": 0.627,
+      "ceiling": 0.751,
+      "lift_mm": 0.0,
+      "skin_motion_mm": 11.5
+     },
+     "ribbon link 2": {
+      "area": 0.154,
+      "achieved": 0.401,
+      "ceiling": 0.877,
+      "lift_mm": 9.71,
+      "skin_motion_mm": 9.94
+     },
+     "lower hub J1": {
+      "area": 0.216,
+      "achieved": 0.949,
+      "ceiling": 0.949,
+      "lift_mm": 1.35,
+      "skin_motion_mm": 3.97
+     },
+     "lower hub J2": {
+      "area": 0.216,
+      "achieved": 0.209,
+      "ceiling": 0.344,
+      "lift_mm": 1.35,
+      "skin_motion_mm": 19.19
+     },
+     "BOTTOM hub J3": {
+      "area": 0.216,
+      "achieved": 0.413,
+      "ceiling": 0.65,
+      "lift_mm": 2.38,
+      "skin_motion_mm": 14.25
+     },
+     "neck": {
+      "area_vs_scored": 0.359,
+      "achieved": 0.405,
+      "ceiling": 0.649,
+      "lift_mm": 1.35,
+      "skin_motion_mm": 21.84
+     },
+     "tab": {
+      "area_vs_scored": 0.087,
+      "achieved": 0.911,
+      "ceiling": 0.911,
+      "lift_mm": 1.35,
+      "skin_motion_mm": 0.91
+     }
+    },
+    "clips": {
+     "Raise overhead": 0.206,
+     "Drink from a cup": 0.358,
+     "Comb hair": 0.67,
+     "Reach a high shelf": 0.63,
+     "Wash opposite shoulder": 0.299,
+     "Reach back pocket": 0.559,
+     "Wave": 0.137,
+     "Walking arm swing": 0.514
+    },
+    "follow_clips": {
+     "Raise overhead": 0.426,
+     "Drink from a cup": 1.0,
+     "Comb hair": 1.0,
+     "Reach a high shelf": 1.0,
+     "Wash opposite shoulder": 1.0,
+     "Reach back pocket": 1.0,
+     "Wave": 0.276,
+     "Walking arm swing": 1.0
+    },
+    "faces": {
+     "1": 49.66,
+     "2": 78.43,
+     "3": 72.45,
+     "zj4": 65.8
+    },
+    "secs": 0.9
+   }
+  },
+  {
+   "variant": "ramp 70",
+   "geo": {
+    "ramp_deg": 70.0
+   },
+   "design": {},
+   "G14": {
+    "score": 0.605884850025177,
+    "follow": 0.8043668270111084,
+    "in_band": 0.7395182847976685,
+    "zj4": 65.79750061035156,
+    "arm_mm": [
+     57.64,
+     54.42
+    ],
+    "achieved": 0.7296074628829956,
+    "ceiling": 0.8806326985359192,
+    "classes": {
+     "ribbon link 1": {
+      "area": 0.268,
+      "achieved": 0.809,
+      "ceiling": 0.94,
+      "lift_mm": 0.0,
+      "skin_motion_mm": 10.94
+     },
+     "ribbon link 2": {
+      "area": 0.208,
+      "achieved": 0.548,
+      "ceiling": 0.947,
+      "lift_mm": 4.05,
+      "skin_motion_mm": 10.41
+     },
+     "lower hub J1": {
+      "area": 0.175,
+      "achieved": 0.949,
+      "ceiling": 0.949,
+      "lift_mm": 1.35,
+      "skin_motion_mm": 3.97
+     },
+     "lower hub J2": {
+      "area": 0.175,
+      "achieved": 0.504,
+      "ceiling": 0.627,
+      "lift_mm": 1.35,
+      "skin_motion_mm": 19.19
+     },
+     "BOTTOM hub J3": {
+      "area": 0.175,
+      "achieved": 0.83,
+      "ceiling": 0.896,
+      "lift_mm": 2.38,
+      "skin_motion_mm": 14.25
+     },
+     "neck": {
+      "area_vs_scored": 0.29,
+      "achieved": 0.796,
+      "ceiling": 0.882,
+      "lift_mm": 1.35,
+      "skin_motion_mm": 21.84
+     },
+     "tab": {
+      "area_vs_scored": 0.071,
+      "achieved": 0.911,
+      "ceiling": 0.911,
+      "lift_mm": 1.35,
+      "skin_motion_mm": 0.91
+     }
+    },
+    "clips": {
+     "Raise overhead": 0.341,
+     "Drink from a cup": 0.664,
+     "Comb hair": 0.849,
+     "Reach a high shelf": 0.778,
+     "Wash opposite shoulder": 0.515,
+     "Reach back pocket": 0.838,
+     "Wave": 0.226,
+     "Walking arm swing": 0.791
+    },
+    "follow_clips": {
+     "Raise overhead": 0.426,
+     "Drink from a cup": 1.0,
+     "Comb hair": 1.0,
+     "Reach a high shelf": 1.0,
+     "Wash opposite shoulder": 1.0,
+     "Reach back pocket": 1.0,
+     "Wave": 0.276,
+     "Walking arm swing": 1.0
+    },
+    "faces": {
+     "1": 49.66,
+     "2": 78.43,
+     "3": 72.45,
+     "zj4": 65.8
+    },
+    "secs": 1.1
+   },
+   "G10": {
+    "score": 0.43022605776786804,
+    "follow": 0.8043668270111084,
+    "in_band": 0.5162343382835388,
+    "zj4": 65.79750061035156,
+    "arm_mm": [
+     57.64,
+     54.42
+    ],
+    "achieved": 0.5380946397781372,
+    "ceiling": 0.7207097411155701,
+    "classes": {
+     "ribbon link 1": {
+      "area": 0.268,
+      "achieved": 0.64,
+      "ceiling": 0.748,
+      "lift_mm": 0.0,
+      "skin_motion_mm": 10.94
+     },
+     "ribbon link 2": {
+      "area": 0.208,
+      "achieved": 0.444,
+      "ceiling": 0.87,
+      "lift_mm": 4.05,
+      "skin_motion_mm": 10.41
+     },
+     "lower hub J1": {
+      "area": 0.175,
+      "achieved": 0.949,
+      "ceiling": 0.949,
+      "lift_mm": 1.35,
+      "skin_motion_mm": 3.97
+     },
+     "lower hub J2": {
+      "area": 0.175,
+      "achieved": 0.209,
+      "ceiling": 0.344,
+      "lift_mm": 1.35,
+      "skin_motion_mm": 19.19
+     },
+     "BOTTOM hub J3": {
+      "area": 0.175,
+      "achieved": 0.413,
+      "ceiling": 0.65,
+      "lift_mm": 2.38,
+      "skin_motion_mm": 14.25
+     },
+     "neck": {
+      "area_vs_scored": 0.29,
+      "achieved": 0.432,
+      "ceiling": 0.649,
+      "lift_mm": 1.35,
+      "skin_motion_mm": 21.84
+     },
+     "tab": {
+      "area_vs_scored": 0.071,
+      "achieved": 0.911,
+      "ceiling": 0.911,
+      "lift_mm": 1.35,
+      "skin_motion_mm": 0.91
+     }
+    },
+    "clips": {
+     "Raise overhead": 0.222,
+     "Drink from a cup": 0.387,
+     "Comb hair": 0.678,
+     "Reach a high shelf": 0.628,
+     "Wash opposite shoulder": 0.311,
+     "Reach back pocket": 0.575,
+     "Wave": 0.149,
+     "Walking arm swing": 0.539
+    },
+    "follow_clips": {
+     "Raise overhead": 0.426,
+     "Drink from a cup": 1.0,
+     "Comb hair": 1.0,
+     "Reach a high shelf": 1.0,
+     "Wash opposite shoulder": 1.0,
+     "Reach back pocket": 1.0,
+     "Wave": 0.276,
+     "Walking arm swing": 1.0
+    },
+    "faces": {
+     "1": 49.66,
+     "2": 78.43,
+     "3": 72.45,
+     "zj4": 65.8
+    },
+    "secs": 1.2
+   }
+  },
+  {
+   "variant": "ramp 80",
+   "geo": {
+    "ramp_deg": 80.0
+   },
+   "design": {},
+   "G14": {
+    "score": 0.6071090698242188,
+    "follow": 0.8043668270111084,
+    "in_band": 0.7412865161895752,
+    "zj4": 65.79750061035156,
+    "arm_mm": [
+     57.64,
+     54.42
+    ],
+    "achieved": 0.7316789627075195,
+    "ceiling": 0.8806326985359192,
+    "classes": {
+     "ribbon link 1": {
+      "area": 0.268,
+      "achieved": 0.811,
+      "ceiling": 0.94,
+      "lift_mm": 0.0,
+      "skin_motion_mm": 10.94
+     },
+     "ribbon link 2": {
+      "area": 0.208,
+      "achieved": 0.555,
+      "ceiling": 0.947,
+      "lift_mm": 0.0,
+      "skin_motion_mm": 10.41
+     },
+     "lower hub J1": {
+      "area": 0.175,
+      "achieved": 0.949,
+      "ceiling": 0.949,
+      "lift_mm": 1.35,
+      "skin_motion_mm": 3.97
+     },
+     "lower hub J2": {
+      "area": 0.175,
+      "achieved": 0.504,
+      "ceiling": 0.627,
+      "lift_mm": 1.35,
+      "skin_motion_mm": 19.19
+     },
+     "BOTTOM hub J3": {
+      "area": 0.175,
+      "achieved": 0.83,
+      "ceiling": 0.896,
+      "lift_mm": 2.38,
+      "skin_motion_mm": 14.25
+     },
+     "neck": {
+      "area_vs_scored": 0.29,
+      "achieved": 0.796,
+      "ceiling": 0.882,
+      "lift_mm": 1.35,
+      "skin_motion_mm": 21.84
+     },
+     "tab": {
+      "area_vs_scored": 0.071,
+      "achieved": 0.911,
+      "ceiling": 0.911,
+      "lift_mm": 1.35,
+      "skin_motion_mm": 0.91
+     }
+    },
+    "clips": {
+     "Raise overhead": 0.341,
+     "Drink from a cup": 0.664,
+     "Comb hair": 0.85,
+     "Reach a high shelf": 0.779,
+     "Wash opposite shoulder": 0.524,
+     "Reach back pocket": 0.838,
+     "Wave": 0.226,
+     "Walking arm swing": 0.792
+    },
+    "follow_clips": {
+     "Raise overhead": 0.426,
+     "Drink from a cup": 1.0,
+     "Comb hair": 1.0,
+     "Reach a high shelf": 1.0,
+     "Wash opposite shoulder": 1.0,
+     "Reach back pocket": 1.0,
+     "Wave": 0.276,
+     "Walking arm swing": 1.0
+    },
+    "faces": {
+     "1": 49.66,
+     "2": 78.43,
+     "3": 72.45,
+     "zj4": 65.8
+    },
+    "secs": 1.0
+   },
+   "G10": {
+    "score": 0.4401874542236328,
+    "follow": 0.8043668270111084,
+    "in_band": 0.5285089015960693,
+    "zj4": 65.79750061035156,
+    "arm_mm": [
+     57.64,
+     54.42
+    ],
+    "achieved": 0.5549505949020386,
+    "ceiling": 0.7207097411155701,
+    "classes": {
+     "ribbon link 1": {
+      "area": 0.268,
+      "achieved": 0.659,
+      "ceiling": 0.748,
+      "lift_mm": 0.0,
+      "skin_motion_mm": 10.94
+     },
+     "ribbon link 2": {
+      "area": 0.208,
+      "achieved": 0.5,
+      "ceiling": 0.87,
+      "lift_mm": 0.0,
+      "skin_motion_mm": 10.41
+     },
+     "lower hub J1": {
+      "area": 0.175,
+      "achieved": 0.949,
+      "ceiling": 0.949,
+      "lift_mm": 1.35,
+      "skin_motion_mm": 3.97
+     },
+     "lower hub J2": {
+      "area": 0.175,
+      "achieved": 0.209,
+      "ceiling": 0.344,
+      "lift_mm": 1.35,
+      "skin_motion_mm": 19.19
+     },
+     "BOTTOM hub J3": {
+      "area": 0.175,
+      "achieved": 0.413,
+      "ceiling": 0.65,
+      "lift_mm": 2.38,
+      "skin_motion_mm": 14.25
+     },
+     "neck": {
+      "area_vs_scored": 0.29,
+      "achieved": 0.432,
+      "ceiling": 0.649,
+      "lift_mm": 1.35,
+      "skin_motion_mm": 21.84
+     },
+     "tab": {
+      "area_vs_scored": 0.071,
+      "achieved": 0.911,
+      "ceiling": 0.911,
+      "lift_mm": 1.35,
+      "skin_motion_mm": 0.91
+     }
+    },
+    "clips": {
+     "Raise overhead": 0.225,
+     "Drink from a cup": 0.402,
+     "Comb hair": 0.692,
+     "Reach a high shelf": 0.644,
+     "Wash opposite shoulder": 0.32,
+     "Reach back pocket": 0.582,
+     "Wave": 0.152,
+     "Walking arm swing": 0.554
+    },
+    "follow_clips": {
+     "Raise overhead": 0.426,
+     "Drink from a cup": 1.0,
+     "Comb hair": 1.0,
+     "Reach a high shelf": 1.0,
+     "Wash opposite shoulder": 1.0,
+     "Reach back pocket": 1.0,
+     "Wave": 0.276,
+     "Walking arm swing": 1.0
+    },
+    "faces": {
+     "1": 49.66,
+     "2": 78.43,
+     "3": 72.45,
+     "zj4": 65.8
+    },
+    "secs": 0.9
+   }
+  }
+ ],
+ "poses": "band_poses.b64",
+ "filled_maps": true
+}

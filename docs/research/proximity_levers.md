@@ -37,6 +37,13 @@ covered skin: 2-14 mm 41 %, 14-22 mm 25 %, 22-30 mm 12 %, 30-60 mm 22 %.
   worst-frame 2 mm, same followed frames). The other 44 points are *motion*: rigid metal over skin whose distance from
   it changes by more than the 12 mm the band allows (14 - 2). The J2 zone cannot be fixed by shape at all (5 % even
   lowered): J2 sweeps over skin whose radius from the GH centre runs 58-93 mm across the clips it follows.
+- **How much of that headroom the range (R16) protects** (same judge, frame step 12, plus the 88 functional-workspace
+  poses of `workspace.json` (every 12th) the evaluator followed, `WS_STEP=12`): R1 41.3 %; every metal point at its
+  worst-frame 2 mm over the clips 62.7 %; the same but also clear of the skin in those workspace poses **50.2 %**. Per
+  part (clips-only -> keeping the workspace): link 2 68.7 -> 26.4 %, BOTTOM + neck + JN hub 72.1 -> 60.8 %, link 1
+  32.0 -> 30.4 %, base 87.0 -> 87.0 %. So with its range kept, reshaping this design's parts is worth at most ~9 points
+  of R1; link 2's slack exists only because the clips do not use the workspace poses that hold it up.
+  (Finer frame sampling lowers the bound: 56.2 % at step 6 vs 62.7 % at step 12, clips only.)
 - By skin: 77 % of the covered skin is trunk / scapula skin (35 % in band), 23 % arm skin (61 %). By elevation the
   worst band is 30-60 deg (26 % in band), not overhead (46 % at 120+ deg).
 - Which frames hold the metal up (the frame setting each too-far point's clearance): Reach back pocket 36 %, Raise
@@ -103,8 +110,21 @@ All shape / hardware levers together are worth about +6-10 points in the evaluat
   90 % point ceiling (median motion 30 mm): the arm is mostly bad ground for a rigid hub.
 - J2 rides on link 1 (moves against both the scapula and the arm): its path, not a frame, decides its motion (here
   20 mm, ceiling 71 %). A search term for it: the evaluator's per-sample skin motion (`proximity_variants.py`).
-- CPU local search, W boxed at (100-120, -30-0) vs free (`local_w_search.py`, clips-only fit, filled maps; range not
-  judged on CPU): see the results table in 7.
+- CPU local search, W boxed at (100-120, -30..0) vs free (`local_w_search.py`, 240 evals, clips-only fit, filled maps;
+  range not judged on CPU). Same conditions for all three rows:
+
+  | design (CPU, clips-only fit, filled maps, G 14) | follow | in band | ceiling | BOTTOM hub J3 in band / ceiling / skin motion | neck | ribbon link 2 | lower hub J2 |
+  |---|---|---|---|---|---|---|---|
+  | final kinematics r18 s1392 #1, W (71.4, 4.8) | 74.1 % | 67.5 % | 86.6 % | 41.8 / 70.5 % / 21.8 mm | 63.6 % | 58.2 % | 59.7 % |
+  | W free (stopped at 36 evals), W (75.4, 16.1) | 81.5 % | 68.3 % | - | - | - | - | - |
+  | **W boxed, best `agD_n3_wbox_1`**: az 61.1, el 84.8, a (72.9, 60.0), W (100.0, -7.1), hm 1.35 | **80.4 %** | **71.4 %** | 88.1 % | **83.0 / 89.6 % / 14.2 mm** | 78.2 % (area x3.6) | 46.4 % (lift 9.7 mm) | 50.4 % |
+
+  The relocated JN does what the map predicted for its own hub (41.8 -> 83.0 % in band) and the longer neck rides
+  closer too (63.6 -> 78.2 %), but link 2 got short (60 deg, the min_arc floor) and ramp-limited between hub planes 6 mm
+  apart: its ribbon sits 9.7 mm over its lowest legal underside. Net +3.9 points in band and +6.3 follow. The search
+  ends on the box edge (delta 100): the chain closure pulls W toward the deltoid. On this design: ramp 80 deg +2.7,
+  O20 +2.2, O17 +4.1 (in band 75.5 %, ceiling 90.8 % - the first ceiling above 90 %), hw 3 +1.4, relief 3.65 (the CAD's
+  contour) -3.5.
 
 ## 6. Other findings
 
