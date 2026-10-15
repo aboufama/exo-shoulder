@@ -1,4 +1,7 @@
-"""JUDGE R10: the base bolts to a thorax back plate. How far is the arm's GH centre from where the chain carries it, and
+"""JUDGE R10. Girdle mount (design.json base.mount = "girdle": the base rides the scapula on the user's scapula handler,
+the decided architecture): the GH-centre misalignment from the handler slipping over the bone, from the literature
+skin-slip model in judge/base_slip.py (docs/research/base_slip_model.md) - the central law's worst frame is R10's
+number, low / high laws bracket it. Thorax mount (below): the base bolts to a thorax back plate. How far is the arm's GH centre from where the chain carries it, and
 does the base part stay out of the body, when the base is THORAX-fixed (whatever frame the design pipeline assumed)?
 
 Girdle motion: the WORST over three laws (girdle.lift_laws): the body rig's (avg/body_pose.py segs()), the published
@@ -22,10 +25,31 @@ ap = argparse.ArgumentParser(); ap.add_argument("design"); ap.add_argument("--st
 a = ap.parse_args(); dd = design_dir(a.design)
 D = json.load(open(os.path.join(dd, "design.json"))); base = D.get("base", {"mount": "thorax", "chain": "spherical", "centre_mm": [0, 0, 0]})
 FR = list(frames(dd, a.step)); W = np.array([fr["want"] for _, _, fr in FR], float); M = GD.Motion(W)
-if base.get("mount") == "girdle":                                           # option A: the base rides the girdle - its error (acromion skin slip) is not modelled yet
-    out = dict(base=base, max_mm=None, note="girdle-riding base: R10 as written (thorax plate) does not apply; skin-slip error not modelled (literature: 5-7 deg below 100-120 deg elevation, up to 25 deg above)")
-    os.makedirs(os.path.join(dd, "judge"), exist_ok=True); json.dump(out, open(os.path.join(dd, "judge", "base_mount.json"), "w"), indent=1)
-    print("base mount: girdle-riding base -> R10 NOT RUN (skin-slip model missing)"); sys.exit(0)
+if base.get("mount") == "girdle":                                           # the base rides the scapula on the user's handler: skin slip over the bone
+    import base_slip as BS                                                   # literature model (docs/research/base_slip_model.md)
+    names = [f[0] for f in FR]
+    if base.get("chain", "spherical") != "spherical" or base.get("slider"):
+        out = dict(base=base, max_mm=None, note="girdle mount: the skin-slip model (judge/base_slip.py) handles a spherical chain centred on the GH centre without a slider; this design needs the lever / slider mapping first")
+        print("base mount: girdle mount with an offset chain or a slider -> R10 NOT RUN (base_slip.py handles a spherical chain only)")
+    else:
+        r, sc = BS.lever(); c0 = np.asarray(base.get("centre_mm", [0, 0, 0]), float)
+        if np.linalg.norm(c0) > 1e-6: print(f"  note: chain centre {c0} mm from GH at rest; the slip model uses the lever to GH (the centre offset is a fixed error R1 already sees)")
+        mis = BS.misalignment(W[:, :2], r); law = "central"; m = mis[law]
+        alt = {an: float(BS.misalignment(W[:, :2], BS.lever(an)[0], laws=(law,))[law].max()) for an in ("aa", "ac")}
+        ev = W[:, 1]
+        out = dict(base=base, model="base_slip.py: handler = acromion marker cluster analogue; per-axis ISB scapula error angles vs humeral elevation/plane from Karduna 2001, "
+                   "van Andel 2009, Lempereur 2014 + 4.2 mm translation slip (McQuade & Smidt 1998); lever GH - flat of the acromion from the OpenSim Seth 2016 scapula, scaled to the rig",
+                   law=law, frames_checked=len(FR), step=a.step, lever_mm=[round(float(x), 1) for x in r], lever_scale=round(float(sc), 3),
+                   max_mm=round(float(m.max()), 2), p95_mm=round(float(np.percentile(m, 95)), 2), share_over_4mm=round(float((m > 4).mean()), 3),
+                   per_law_max_mm={l: round(float(v.max()), 2) for l, v in mis.items()}, per_law_share_over_4mm={l: round(float((v > 4).mean()), 3) for l, v in mis.items()},
+                   central_max_by_elevation_mm={f"<= {hi}": (round(float(m[ev <= hi].max()), 2) if (ev <= hi).any() else None) for hi in (60, 90, 100, 120, 150, 180)},
+                   central_max_anchor_sensitivity_mm=dict(mid=round(float(m.max()), 2), aa=round(alt["aa"], 2), ac=round(alt["ac"], 2)),
+                   worst=[names[int(np.argmax(m))], FR[int(np.argmax(m))][1], [round(v) for v in W[int(np.argmax(m))][:3]]],
+                   per_clip={n: round(float(m[[k for k, q in enumerate(names) if q == n]].max()), 2) for n in dict.fromkeys(names)},
+                   note="design-independent for a spherical chain on a girdle mount: only the handler (grip, footprint), the motions and a passive slider can change it")
+        print(f"base mount (girdle, skin slip over the scapula, central law): GH misalignment max {out['max_mm']} mm (low {out['per_law_max_mm']['low']}, high {out['per_law_max_mm']['high']}), "
+              f"p95 {out['p95_mm']} mm, {100 * out['share_over_4mm']:.0f}% of frames > 4 mm; by elevation {out['central_max_by_elevation_mm']}")
+    os.makedirs(os.path.join(dd, "judge"), exist_ok=True); json.dump(out, open(os.path.join(dd, "judge", "base_mount.json"), "w"), indent=1); sys.exit(0)
 LAWS = GD.lift_laws(W, M); Pe = np.eye(3)
 if base.get("slider"): e = np.asarray(base["slider"], float); e /= np.linalg.norm(e); Pe = np.eye(3) - np.outer(e, e)
 if base.get("chain") == "offset3":
