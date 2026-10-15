@@ -385,11 +385,34 @@ if __name__ == "__main__":
                 cfgs.append(dict(PARAMS, o=o, a1_az=A1_DIRS[a1][0], a1_el=A1_DIRS[a1][1], dpsi=dpsi, q=q))
         else:                                              # refine around the best: bar azimuth, cuff station / azimuth, cap end, O direction
             b = dict(best[1]); cfgs = []
-            for k_, vals in dict(dpsi=[-60, -30, 30, 60], s=[160, 180, 220, 240], caz=[-40, -20, 20, 40], th_k=[25, 45, 55],
-                                 o_dir=list(O_DIRS), branch=[1], sing=[8, 16], hC=[b["hC"] - 2, b["hC"] + 2]).items():
+            for k_, vals in dict(q=[0.98, 1.0], dpsi=[b["dpsi"] - 20, b["dpsi"] + 20], s=[130, 160, 180, 230], caz=[-40, -20, 20, 40], th_k=[25, 45, 55],
+                                 o_dir=list(O_DIRS), branch=[1], sing=[8, 16], hC=[b["hC"] - 2, b["hC"] + 3], o=[5.0, 10.0]).items():
                 for v in vals:
                     c = dict(b)
                     if k_ == "o_dir": c["o_az"], c["o_el"] = O_DIRS[v]
                     else: c[k_] = v
                     if c != b: cfgs.append(c)
+        if "--q1" in a:                                    # second refine at q = 1 (no pose sacrificed): J1 axis, bar routing, station
+            b = dict(min(rows, key=lambda e: e["gap"])["params"]); cfgs = []
+            for k_, vals in dict(a1_az=[85, 115], a1_el=[50, 70], dpsi=[30, 60], th_k=[55, 65], s=[190, 210], hC=[14], width=[10], q=[0.995]).items():
+                for v in vals: c = dict(b); c[k_] = v; cfgs.append(c)
         best = run_sweep(B, cfgs, rows, best); print("BEST", best[0], json.dumps(best[1]))
+    elif mode == "red":                                    # red team the best configuration: jams, pinches, the poses it loses
+        rows = json.load(open(SWEEP_JSON)); b = min(rows, key=lambda e: e["gap"]); r, L = evaluate(B, b["params"])
+        print("BEST k", b["k"], json.dumps({x: r[x] for x in ("gap", "reach", "follow", "inband14", "inband10", "contact", "per", "contact_by", "why", "F1", "F2", "lam")}))
+        kk = L["kn"].k; d, Ti = L["d"], L["Ti"]; names = L["names"]; sizes = [L["pts"][n].shape[1] for n in names]; cut = np.cumsum([0] + sizes)
+        lost = [i for i in range(len(B.idx)) if not (B.res[i] is not None and B.res[i].min() >= 0)]
+        why = lambda i: ("sing" if not kk["sing_ok"][i] else "U/slide" if not L["kn"].ok[i] else "flip" if not L["ok"][i] else
+                         "parts " + "-".join(L["why"].get(i, ("?",))) if L["hit"][i] else "contact " + ",".join(n for j, n in enumerate(names) if (B.res[i][cut[j]:cut[j + 1]].min() < 0)) or "walls")
+        from collections import Counter
+        print("lost poses by reason:", Counter(why(i).split(" ")[0] for i in lost))
+        print("contact by part:", Counter(p_ for i in lost for p_ in (why(i).split(" ")[1].split(",") if why(i).startswith("contact") else [])))
+        tests = dict(rest=dict(plane=0, elev=0), overhead=dict(elev=150), across=dict(plane=110), behind=dict(axial=-80))
+        for nm, cond in tests.items():
+            sel = [i for i, p_ in enumerate(B.poses) if all((p_[k_] >= v) if v > 0 else (p_[k_] <= v) if v < 0 else abs(p_[k_]) < 10 for k_, v in cond.items())]
+            tk = [i for i in sel if B.res[i] is not None and B.res[i].min() >= 0]
+            print(f"{nm}: {len(tk)}/{len(sel)} taken; lost:", Counter(why(i) for i in sel if i not in tk).most_common(4))
+        j, m = np.unravel_index(np.argmin(np.where(d.min(1, keepdims=True) >= 0, d, 99)), d.shape); part = names[np.searchsorted(cut, m, side="right") - 1]
+        print("pinch (closest metal in a taken pose):", round(float(d[j, m]), 2), "mm", part, B.poses[Ti[j]])
+        J = np.stack([kk["J1"], kk["J2"], kk["J3"], kk["alpha"], kk["beta"]], 1)[L["take"]]
+        print("ranges deg J1 J2 J3 alpha beta:", [[round(float(np.min(c)), 1), round(float(np.max(c)), 1)] for c in J.T])

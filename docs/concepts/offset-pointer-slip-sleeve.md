@@ -21,3 +21,86 @@
    the 68.93 champion), the adversarial verifier re-running the best config on the exact path, and a red-team pose
    list (rest, overhead 150-170 deg, across-the-body, behind-the-back, extreme axial rotation) with the worst pinch
    point and the pose that jams.
+
+## The morphology
+
+Scapula -> **J1** (O20 hub, axis a1 through a centre O fixed in the scapula, |o| mm from GH) -> **link 1** (12 x 3 strap,
+90 deg great-circle arc about O from a1 to j2) -> **J2** (O20 hub, axis j2 = branch * unit(a1 x dh) through O) -> **bar**
+(12 x 3 strap: a cap arc about O from j2 down to th_k from the rod line, then a run along the rod line at azimuth
+psi_b, fitted from the line outward) -> **boss** (rod clamp O12 x 10) -> **O6 rod** on the line O -> C -> **sleeve**
+(O12 x 25 linear-rotary bushing centred at the cuff point C: **J3** spin, ACTIVE; slide lam = |C - O|, PASSIVE) ->
+**Hooke U** (ring around the sleeve on the inner axis u1, outer pins u2 on two 3 x 10 cheeks on the cuff; 2 PASSIVE)
+-> the user's upper-arm cuff. 3 ACTIVE + 3 PASSIVE; closed-form IK (residual 0), every passive coordinate set by
+closure (the cuff's 6 DOF = 6 chain coordinates).
+
+Model: `docs/concepts/models/offset-pointer-slip-sleeve.py`, rebuilt on the shared kit (K2 dense continuity on joint
+values AND joint axes, K3 march, quantile underside, kit sampling). The interrupted session's per-pose model was
+replaced. Every part at real size: flat O20 hub discs with the 12.25 mm crown (walls checked for contact), link 1 and
+the bar at 12 x 3 with the 60 deg climb limit and the hub stack (link 1 upper at J1, lower at J2; the bar over the J2
+hub and **over link 1 by construction** (+1 mm clearance + 1 mm sampling slack) wherever link 1 passes under it in any
+taken pose - without it link 1 and the bar collide in 52 % of the closing poses), the rod, boss, sleeve and U ring
+sampled on the half facing the arm and contact-checked on the whole circumference, cheeks with skin-fitted feet.
+
+### Spec corrections (measured)
+
+- C0: the catalogue took the bind pose (BP.V0). Here C0 sits hC mm over the q90 (over the bench poses) of the arm's
+  own outer skin, marched OUT from the band humerus axis (a march inward stops on the trunk in the poses where the arm
+  presses on it: 83-106 mm instead of 49 mm).
+- The U is a ring + two cheeks at real size (the spec's O16 disc cannot carry a 2-axis gimbal); ring radius from the
+  measured U tilt (5-6 deg at the best configurations, so the 9 mm minimum governs).
+- Rod line: the spec's straight O -> C rod is the measured limiter of the offset (below). A tilted / offset prismatic
+  axis is the fix in principle; it was bounded, not built (see "What limits it").
+
+## Results (Bench(60,160), fast grid cache, K3 march, K2 dense, K6 on)
+
+114 configurations in `docs/concepts/sweeps/offset-pointer-slip-sleeve.json` (coarse 72: |o| 0/10/20 x four J1 axes x bar
+azimuth x quantile; refine 26 around the best; q = 1 refine 13; third stage 3, stopped when each configuration took
+~110 s on the loaded machine). Baseline 68.93.
+
+| config | gap | reach | follow | in-band 14 | in-band 10 | contact | note |
+|---|---|---|---|---|---|---|---|
+| k 113: o 0, a1 bvec(85, 78), dpsi 45, q 1.0 | **71.15** | 0.950 | 0.950 | 0.239 | 0.170 | 0.050 | bench best - DEGENERATE: hub 2 327 mm, link 1 199 mm, bar cap 274 mm off the skin (no clearance in some pose -> fitted at the 400 mm cap); only the cuff end is in band |
+| k 109: o 0, a1 bvec(100, 60), width 10, q 1.0 | 74.57 | 0.950 | 0.950 | 0.204 | 0.135 | 0.050 | shoulder side >= 32 mm off the skin (grid clamp) |
+| k 86: o 0, a1 bvec(100, 60), dpsi 45, th_k 55, q 0.95 | 88.62 | 0.763 | 0.883 | 0.423 | 0.243 | 0.205 | best that keeps hub 1 (93 %) and link 1 (67 %) in band |
+| k 96: same, o 5 | 152.45 | 0.500 | 0.733 | 0.429 | 0.261 | 0.436 | the offset, the morphology's point, costs +64 |
+| k 97: same, o 10 | 224.15 | 0.256 | 0.500 | 0.430 | 0.299 | 0.677 | boss in contact in 139 / 220 poses |
+
+Per part at k 86 (in-band 14, median mm, samples): hub 1 0.93 / 10.7; link 1 0.67 / 11.0; **hub 2 0.02 / >= 32**;
+**bar cap 0.16 / 24**; **bar arm run 0.04 / >= 32 (525 samples, a quarter of all metal)**; boss 0.90 / 4.6; sleeve
+0.84 / 10.5; rod 0.68 / 12.2; U ring 0.90 / 8.3; cheeks 0.86 / 2.5.
+
+## What limits it (measured)
+
+1. **The offset itself.** With O off GH the slide works (lam 207-219 mm at o 10), but the rod lies on the line O -> C,
+   which converges on O at ~15 deg to the arm surface: the rod clamp sits (range + 25) mm proximal of the sleeve and
+   sinks ~0.27 mm per mm into the deltoid. Contact by the boss: 11 poses at o 0, 139 at o 10; gap 88.6 -> 152 (o 5)
+   -> 224 (o 10) -> 250 (o 20). Bound for the fix (a tilted / offset prismatic axis): removing every boss-only contact
+   at o 10 leaves link 1 / bar / hub 2 contacts in ~40 poses and in-band 0.43, i.e. ~85-90 - no better than o 0,
+   because the bar, rotating about O while the arm rotates about GH, drops from 4 % to 0.2 % in band (it slides
+   against the skin by |o| x angle, the spec's own risk). So the tilt was bounded, not built.
+2. **The pointer's bar does not follow axial rotation.** Its roll is set by a1 x dh, the arm's by the arm: the rigid
+   run down the lateral arm must clear the arm at every axial angle and floats >= 32 mm (0-4 % in band) in every
+   configuration. This is the 3R family's proximity limit moved from link 2 to the bar.
+3. **J2 hub**: 0-4 % in band at every J1 axis (it sweeps over the posterior-lateral cap that the elevated arm fills).
+4. q trades contact for in-band; at q = 1 the shoulder side floats (best numbers above are degenerate).
+
+## Red team (best bench config, k 113)
+
+- Rest 3/3, overhead (elev >= 150) 13/13, behind-the-back (axial <= -80) 44/45, across-the-body (plane >= 110)
+  27/38 taken. The 11 lost poses are all across-the-body: the cuff end (boss, sleeve, rod, U ring, cheeks) is inside
+  the body - the arm pressed on the chest.
+- Pinch: the rod clamp (boss) 0.25 mm off the skin at plane 122, elev 31, axial -80, flex 122.
+- No jam: closed-form chain, 0 flips along the clips (K2 dense on values and axes), no part collision (bar over
+  link 1 by construction). J1 spans -115..101 deg, J2 -163..-59, J3 a full turn (a sleeve can spin), U angles 0 at
+  o = 0 (the slide and U are idle: the cuff-sleeve-3r limit, as the spec said).
+
+## Verdict
+
+**Dead as an offset-pointer morphology.** The offset (its reason to exist) is monotonically harmful; at o = 0 it is
+the cuff-sleeve-3r limit, whose best non-degenerate number (88.6) is worse than the champion 3R (68.93) because the
+bar cannot follow the arm's axial rotation. Not worth a GPU sweep. What it teaches beyond this morphology: (a) any
+prismatic element on a line through a centre near GH is buried by its own travel (depth ~ sin(angle to the arm
+surface) x travel; ~0.27 mm/mm at a 200 mm cuff); (b) a long rigid run down the upper arm whose roll is not slaved to the humerus cannot be in band (it must clear
+every axial rotation): put the twist joint high, so the part that runs along the arm is humerus-fixed, rather than
+at the cuff; (c) a q = 1 fit can "win" the gap by floating whole subassemblies - the bench should cap or penalise parts more than
+~30 mm off the skin (a verifier check).
