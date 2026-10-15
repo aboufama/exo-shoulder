@@ -244,7 +244,8 @@ def bench_eval(B, params):
     p = dict(PARAMS, **params)
     if getattr(B, "_kitF", None) is None: B._kitF = K.frames(B)
     rep = K.evaluate(B, build_chain, p)
-    return outer_contact(B, p, rep)
+    rep = outer_contact(B, p, rep)
+    return json.loads(json.dumps(rep, default=lambda o: o.item() if hasattr(o, "item") else str(o)))
 
 
 def metal(pose, frames, params):

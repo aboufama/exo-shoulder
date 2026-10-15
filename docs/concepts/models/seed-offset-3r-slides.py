@@ -961,6 +961,59 @@ def reeval(B, top=24):
     return log
 
 
+def redteam2(P, nc, nw, frozen=False):
+    """red team of one configuration under VModel on Bench(nc, nw) (CB_EXACT=1 for the exact path): the poses that jam
+    (by reason, with labels), the points that pinch (lowest metal per part over the poses taken), named pose groups,
+    hub-2 face setters, the slide travel and part clearances; frozen: fit the shape on Bench(60,160) and wear THAT
+    shape on Bench(nc, nw) without refitting (is the fit-on-the-scored-poses number optimistic?)"""
+    t0 = time.time(); B = CB.Bench(n_clip=nc, n_ws=nw)
+    if frozen:
+        B1 = CB.Bench(n_clip=60, n_ws=160); M1 = VModel(B1, dict(P)); r1 = M1.run(); P2 = dict(M1.p); P2["S_auto"] = 0
+        class Frozen(VModel):
+            def fit(self):
+                for a in ("geo", "rigid", "link_pts", "f", "tr", "zb", "_tr_fit", "contact", "cyl", "box", "strap", "cyl_surf", "riser", "riser_h", "Hneed", "Lneed"):
+                    if hasattr(M1, a): setattr(self, a, getattr(M1, a))
+                if getattr(M1, "riser", None) is not None: self.riser_pts = M1.riser_pts
+                self.poses_fit = np.nonzero(self.kin_ok)[0]; self.drop = np.zeros(len(self.poses_fit), bool)
+        M = Frozen(B, P2)
+    else:
+        M = VModel(B, dict(P))
+    r = M.run()
+    def lab(i):
+        p = B.poses[i]; return dict(i=int(i), kind=B.kind[i], clip=B.clip[i], plane=round(p["plane"], 1), elev=round(p["elev"], 1), axial=round(p["axial"], 1))
+    jams = [dict(lab(i), why=M.why[i], clear=None if np.isnan(M.clear[i]) else round(float(M.clear[i]), 2), pair=M.last_pair.get(i)) for i in range(len(B.idx)) if M.why[i]]
+    names = list(M.rigid) + list(M.link_pts); sizes = [len(X) for _, X in M.rigid.values()] + [len(X) for _, X in M.link_pts.values()]
+    cut = np.cumsum([0] + sizes); low = {}
+    for i in range(len(B.idx)):
+        d = B.res[i]
+        if d is None or float(np.min(d)) < 0: continue
+        for k, n in enumerate(names):
+            j = float(np.min(d[cut[k]:cut[k + 1]])) if sizes[k] else 1e9
+            if n not in low or j < low[n][0]: low[n] = (j, i)
+    pinch = sorted([dict(part=n, mm=round(v[0], 2), **lab(v[1])) for n, v in low.items()], key=lambda e: e["mm"])
+    taken = lambda i: B.res[i] is not None and float(np.min(B.res[i])) >= 0
+    el = np.array([p["elev"] for p in B.poses]); pl = np.array([p["plane"] for p in B.poses])
+    groups = dict(rest=np.argsort(el)[:5], overhead=np.nonzero(el >= 120)[0], across=np.nonzero((pl >= 100) & (el >= 40))[0],
+                  behind=np.array([i for i in range(len(B.idx)) if "back" in B.clip[i].lower() or (pl[i] < -30 and el[i] > 20)], int))
+    G = {}
+    for g, ii in groups.items():
+        ii = list(ii); tk = [i for i in ii if taken(i)]
+        G[g] = dict(taken=len(tk), total=len(ii), median_mm=round(float(np.median(np.concatenate([B.res[i] for i in tk]))), 1) if tk else None,
+                    not_taken={k: sum(1 for i in ii if not taken(i) and M.why[i] == k) for k in ("fold", "skin", "parts", "contact", "slide", "flip", "closure")})
+    out = dict(bench=f"Bench({nc},{nw}) {B.mode}" + (" frozen-shape(60,160)" if frozen else ""), params={k: v for k, v in M.p.items()},
+               **{k: r[k] for k in ("gap", "reach", "follow", "inband14", "inband10", "contact", "why", "parts_pairs", "parts_ib14", "f", "s_abs_max", "res_max", "min_clear_taken", "riser_h")},
+               S=[M.p["S_a"], M.p["S_t"], M.p["R_r"]], jams=jams, pinch=pinch, groups=G, secs=round(time.time() - t0, 1))
+    if not frozen and "hub2" in M.Hneed:
+        H2 = M.Hneed["hub2"]; top = np.argsort(-H2.max(1))[:8]
+        out["hub2_setters"] = [dict(need=round(float(H2[a].max()), 1), dropped=bool(M.drop[a]), **lab(int(M.poses_fit[a]))) for a in top]
+        out["hub2_median_need"] = round(float(np.median(H2[~M.drop].max(1))), 1)
+    tk = [i for i in range(len(B.idx)) if taken(i)]
+    if tk:
+        sv = np.abs(M.s[tk]); out["slide_travel_p50_p95_max"] = [np.round(np.percentile(sv, q, axis=0), 1).tolist() for q in (50, 95, 100)]
+        cl = np.array([M.clear[i] for i in tk]); out["clear_taken_p5_min"] = [round(float(np.nanpercentile(cl, 5)), 2), round(float(np.nanmin(cl)), 2)]
+    return out
+
+
 def sketch(M, path):
     """matplotlib sketch: skin near the shoulder (grey) and the metal by part, at rest and at the highest pose taken"""
     import matplotlib; matplotlib.use("Agg"); import matplotlib.pyplot as plt
@@ -988,6 +1041,10 @@ if __name__ == "__main__":
         for par in (dict(slides=0), dict(), dict(o3a=5), dict(o1a=5), dict(o1a=5, R_r=5.0), dict(o2c=5), dict(o2c=5, R_r=5.0)):
             print(par, kin_scan(B, par))
         sys.exit()
+    if mode == "redteam2":                                        # VModel red team: redteam2 <params.json> <n_clip> <n_ws> <out.json> [frozen]
+        P = dict(PARAMS); P.update(json.load(open(sys.argv[2]))); nc, nw = int(sys.argv[3]), int(sys.argv[4])
+        out = redteam2(P, nc, nw, frozen="frozen" in sys.argv[6:]); json.dump(out, open(sys.argv[5], "w"), indent=1)
+        print(json.dumps({k: out[k] for k in ("bench", "gap", "reach", "follow", "inband14", "inband10", "contact", "why")})); sys.exit()
     if mode == "redteam":                                         # the best slide config of the sweep log (or slides=0 with 'ref')
         B = CB.Bench(n_clip=60, n_ws=160); log = json.load(open(SWEEP_FILE))
         cand = [e for e in log if e["params"].get("slides", 1) and e["asked"].get("jam_contact")] if "ref" not in sys.argv else [e for e in log if not e["params"].get("slides", 1)]
