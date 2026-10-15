@@ -1,0 +1,111 @@
+{
+ "parts": [
+  {
+   "file": "l2|link2 strap keep-out (12 x 3 mm Ti at r_ref 70, fitted underside)",
+   "valid": true,
+   "solids": 1,
+   "faces": 1116,
+   "bad_faces": 0,
+   "watertight": true,
+   "volume_cm3": 7.737,
+   "bbox_mm": [
+    121.7,
+    67.4,
+    26.0
+   ],
+   "level": "L1 mesh"
+  },
+  {
+   "file": "l1|link1 strap keep-out (12 x 3 mm Ti at r_ref 70, fitted underside)",
+   "valid": true,
+   "solids": 1,
+   "faces": 1424,
+   "bad_faces": 0,
+   "watertight": true,
+   "volume_cm3": 7.148,
+   "bbox_mm": [
+    52.1,
+    148.2,
+    25.5
+   ],
+   "level": "L1 mesh"
+  },
+  {
+   "file": "l2|J3 upper boss + cap keep-out (O20, F+3.15..F+12.25)",
+   "valid": true,
+   "solids": 1,
+   "faces": 256,
+   "bad_faces": 0,
+   "watertight": true,
+   "volume_cm3": 2.854,
+   "bbox_mm": [
+    22.0,
+    16.6,
+    20.0
+   ],
+   "level": "L1 mesh"
+  },
+  {
+   "file": "l2|J2 upper boss + cap keep-out (O20, F+3.15..F+12.25)",
+   "valid": true,
+   "solids": 1,
+   "faces": 256,
+   "bad_faces": 0,
+   "watertight": true,
+   "volume_cm3": 2.854,
+   "bbox_mm": [
+    9.1,
+    20.0,
+    20.0
+   ],
+   "level": "L1 mesh"
+  },
+  {
+   "file": "l1|J2 lower plate keep-out (O20 x 3, F 145.0 mm)",
+   "valid": true,
+   "solids": 1,
+   "faces": 256,
+   "bad_faces": 0,
+   "watertight": true,
+   "volume_cm3": 0.941,
+   "bbox_mm": [
+    20.2,
+    5.6,
+    20.0
+   ],
+   "level": "L1 mesh"
+  },
+  {
+   "file": "l1|J1 upper boss + cap keep-out (O20, F+3.15..F+12.25)",
+   "valid": true,
+   "solids": 1,
+   "faces": 256,
+   "bad_faces": 0,
+   "watertight": true,
+   "volume_cm3": 2.854,
+   "bbox_mm": [
+    9.1,
+    20.0,
+    20.0
+   ],
+   "level": "L1 mesh"
+  },
+  {
+   "file": "base|J1 lower plate keep-out (O20 x 3, F 52.0 mm)",
+   "valid": true,
+   "solids": 1,
+   "faces": 256,
+   "bad_faces": 0,
+   "watertight": true,
+   "volume_cm3": 0.941,
+   "bbox_mm": [
+    20.2,
+    6.1,
+    20.2
+   ],
+   "level": "L1 mesh"
+  }
+ ],
+ "level": "L1",
+ "all_ok": true
+}

@@ -77,9 +77,15 @@ docs/EVOLUTION.md (and its snapshot to pipeline/evolution/) as part of the judge
   there actually a component that can be designed which serves these degrees of freedom for the size they are
   presented at?" and, clarifying: "its not that there are two max, its more subtle than that, although two would be a
   good max, its just hard to actually make a 2 dof passive translation component fit in such a small space, so max 2, 1
-  is better"): every passive translation is a COST paid in space - prefer **0, then 1; 2 is the hard maximum** (never 3),
-  and a 2-axis passive translation stage must be shown to fit at its real size where the design puts it. Rank designs
-  that tie on the bench by fewer passive translations; every joint, active or passive, maps to a real component - a catalogue part number (bearing, miniature guide,
+  is better", and "like a linear rail, or some sort of passive joint that actually exists (the real component must exist
+  or be plausible) for it to be there, for example a ball and socket is fine because its a 3 dof passive joint but a 3dof
+  translation passive is not, its way more subtle!"): the test is PER JOINT - does a real component exist that gives
+  exactly that freedom at that size? Rotations are cheap: pin / bearing pair (1 rot), miniature U-joint (2 rot), ball and
+  socket / rod end / ball stud / spherical plain bearing (3 rot), rod in a linear-rotary bushing (1 rot + 1 trans).
+  Translations are expensive: a linear rail / miniature guide (1 trans) is fine at its real length; two crossed rails
+  (2 trans) are bulky and must be shown to fit; a 3-translation passive joint does not exist as a compact part - never.
+  Prefer 0 passive translations, then 1; 2 is the hard maximum. Rank designs that tie on the bench by fewer passive
+  translations. Every joint, active or passive, maps to a real component - a catalogue part number (bearing, miniature guide,
   bushing) or a simple machinable design - and the model carries that component's REAL envelope (assembly height,
   footprint, rail length = travel + block length, mass) as sampled metal. A radial (skin-normal) slide counts as
   standing up by its travel + block length. A few mm of radial play may go to the cuff liner's compliance, stated as
