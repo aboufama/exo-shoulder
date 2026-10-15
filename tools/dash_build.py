@@ -586,14 +586,14 @@ def motion(out_dir):
         t_out = os.path.getmtime(out)
         stale = any(os.path.getmtime(f) > t_out for f in srcs if os.path.exists(f))
         if not stale:
-            rows = load(out, []) or []
-            stale = any(isinstance(r, dict) and r.get("kind") == "mechanism" and r.get("id") not in have for r in rows)
+            mech = [r for r in (load(out, []) or []) if isinstance(r, dict) and r.get("kind") == "mechanism"]
+            stale = not mech or any(r.get("id") not in have for r in mech)
     if stale and os.path.exists(thumbs):
         try:
             r = subprocess.run(["nice", "-n", "10", "node", thumbs, "--out", out], capture_output=True, text=True, timeout=600)
             if r.returncode != 0: warn(f"motion: thumbs.mjs exited {r.returncode}: {(r.stderr or r.stdout).strip()[-300:]}")
-            for line in r.stdout.splitlines():
-                if line.startswith("skipped"): warn("motion: " + line.strip())
+            skipped = [line.strip() for line in r.stdout.splitlines() if line.startswith("  ")]
+            if skipped: warn("motion: thumbs.mjs skipped " + "; ".join(skipped))
         except Exception as e:
             warn(f"motion: thumbs.mjs did not run ({e}); kept the previous file")
     if not os.path.exists(out): return None

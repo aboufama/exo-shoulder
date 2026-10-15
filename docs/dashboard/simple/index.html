@@ -46,9 +46,17 @@
 .sx td.mo svg { display: block; width: 56px; height: 56px; overflow: hidden; }
 .sx td.mo path { fill: none; vector-effect: non-scaling-stroke; stroke-linecap: round; stroke-linejoin: round; }
 .sx td.mo .mo-b { stroke: var(--color-fg-muted); stroke-opacity: .5; stroke-width: 1; }
-.sx td.mo .mo-m { stroke: var(--color-fg); stroke-width: 1.3; }
-.sx td.mo .mo-j { stroke: var(--color-fg); stroke-width: 3.2; }
-@media (max-width: 520px) { .sx th.mo, .sx td.mo { width: 44px; padding-right: 6px; } .sx td.mo svg { width: 44px; height: 44px; } .sx td.mo .mo-j { stroke-width: 2.6; } }
+.sx td.mo .mo-m { stroke: var(--color-fg); stroke-width: 1.2; }
+.sx td.mo .mo-j { stroke: var(--color-fg); stroke-width: 3; }
+@media (max-width: 520px) {
+  .sx #board th, .sx #board td { padding-left: 4px; padding-right: 4px; }
+  .sx #board .meter { width: 30px; margin-right: 4px; }
+  .sx #board .pill { padding: 1px 6px; font-size: 11px; }
+  .sx #board th.mo, .sx #board td.mo { width: 44px; padding: 3px 6px 3px 0; }
+  .sx td.mo svg { width: 44px; height: 44px; }
+  .sx td.mo .mo-m { stroke-width: 1.1; }
+  .sx td.mo .mo-j { stroke-width: 2.6; }
+}
 </style>
 
 <div class="sx">
@@ -213,7 +221,7 @@ function drawScatter(rows) {
 // Motion previews: one shared timer (8 frames a second: the 40-frame loop takes 5 s) animates every thumbnail on
 // screen; it stops while none is visible or the tab is hidden. Reduced motion shows the overhead frame, still.
 const MO = { data: null, prep: null, frame: 0, timer: 0, seen: new Set(), io: null, rm: window.matchMedia ? window.matchMedia('(prefers-reduced-motion: reduce)') : null };
-const moStill = () => !!(MO.rm && MO.rm.matches);
+const moStill = () => !!(MO.rm && MO.rm.matches), moAt = () => (MO.prep && moStill() ? MO.prep.still : MO.frame);
 function motionPrep(rows) {
   if (MO.data === rows) return MO.prep;
   const sh = rows.find((r) => r.kind === 'shoulder') || {}, byId = new Map();
@@ -242,7 +250,7 @@ function moWatch(svgs) {
   if (!('IntersectionObserver' in window)) { svgs.forEach((svg) => MO.seen.add(svg)); moSync(); return; }
   MO.io = MO.io || new IntersectionObserver((entries) => {
     entries.forEach((e) => {
-      if (e.isIntersecting) { MO.seen.add(e.target); moPaint(e.target, moStill() ? MO.prep.still : MO.frame); } else MO.seen.delete(e.target);
+      if (e.isIntersecting) { MO.seen.add(e.target); moPaint(e.target, moAt()); } else MO.seen.delete(e.target);
     });
     moSync();
   });
@@ -250,7 +258,7 @@ function moWatch(svgs) {
 }
 document.addEventListener('visibilitychange', moSync);
 if (MO.rm) {
-  const onRm = () => { document.querySelectorAll('#board td.mo svg').forEach((svg) => moPaint(svg, moStill() ? MO.prep.still : MO.frame)); moSync(); };
+  const onRm = () => { document.querySelectorAll('#board td.mo svg').forEach((svg) => moPaint(svg, moAt())); moSync(); };
   if (MO.rm.addEventListener) MO.rm.addEventListener('change', onRm); else if (MO.rm.addListener) MO.rm.addListener(onRm);
 }
 function moThumb(id, name) {
@@ -258,7 +266,7 @@ function moThumb(id, name) {
   svg.setAttribute('viewBox', MO.prep.view); svg.setAttribute('role', 'img'); svg.setAttribute('aria-label', `Motion preview: ${name}`);
   svg.dataset.id = id;
   ['mo-b', 'mo-m', 'mo-j'].forEach((c) => { const p = document.createElementNS(NS, 'path'); p.setAttribute('class', c); svg.appendChild(p); });
-  moPaint(svg, moStill() ? MO.prep.still : MO.frame);
+  moPaint(svg, moAt());
   return svg;
 }
 

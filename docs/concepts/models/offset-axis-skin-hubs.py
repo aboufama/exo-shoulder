@@ -153,6 +153,22 @@ def from_sn(snp):
     return {k: (round(v, 4) if isinstance(v, float) else v) for k, v in out.items()}, D
 
 
+def from_seed(sp):
+    """seed-offset-3r-slides params (home-frame lines) -> this model's rest-frame direction + offset"""
+    D = S.Design(sp); Q0 = SN.rest()["Q0"]; _, _, X1, X2, _, _ = D.ik(Q0[None])
+    R1, t1 = X1[0][0], X1[1][0]; R12, t2 = X2[0][0], X2[1][0]
+    dd = [D.u[0], R1 @ D.u[1], R12 @ D.u[2]]; cc = [D.c[0], R1 @ D.c[1] + t1, R12 @ D.c[2] + t2]
+    out = {}; out["az1"], out["el1"] = b_inv(dd[0]); out["az2"], out["el2"] = b_inv(dd[1]); out["wd"], out["wa"] = w_inv(Q0.T @ dd[2])
+    for k in range(3):
+        d = unit(dd[k]); o = foot(np.asarray(cc[k], float), d); e, f = S.frame_of(d)
+        out[f"o{k + 1}x"], out[f"o{k + 1}y"] = float(o @ e), float(o @ f)
+    out["neck"] = sp.get("neck", 5.0)
+    return {k: (round(v, 4) if isinstance(v, float) else v) for k, v in out.items()}, D
+
+
+K403 = {"o1a": 1.9, "o1c": -5.8, "o2a": 3.7, "o2c": -4.0, "o3a": 0.6, "o3c": 4.8, "d_az": -2.3, "d_el": -8.1, "d_a1": 3.3, "d_a2": -2.7,
+        "d_wd": 3.7, "d_wa": 1.8, "neck": 17.6, "remote": 1, "ramp": 1, "slides": 1, "S_auto": 1, "drop": 1, "jam_contact": 1, "vfix": 1}
+
 K722 = {"az1": 94.61, "el1": 60.68, "b1": 0.34, "az2": 24.06, "el2": 48.54, "b2": 0.42, "wd": 75.16, "wa": -13.04, "b3": 0.21,
         "S_max": 21.22, "centre": 1}
 
@@ -164,6 +180,40 @@ if __name__ == "__main__":
         print(json.dumps(mine))
         print("max |u - u_sn|", max(float(np.abs(a - b).max()) for a, b in zip(Dm.u, Dsn.u)),
               "max |c - c_sn|", max(float(np.abs(a - b).max()) for a, b in zip(Dm.c, Dsn.c)))
+        sys.exit()
+    if mode == "k403":                                                  # conversion check: same lines as seed-offset k 403
+        mine, Ds = from_seed(K403); Dm = Design(dict(mine, centre=0, S_max=60.0))
+        print(json.dumps(mine)); print("max |u - u_seed|", max(float(np.abs(a - b).max()) for a, b in zip(Dm.u, Ds.u)),
+                                       "max |c - c_seed|", max(float(np.abs(a - b).max()) for a, b in zip(Dm.c, Ds.c)), "branch", Dm.branch, Ds.branch)
+        B = CB.Bench(n_clip=60, n_ws=160); r = bench_eval(B, dict(mine, centre=0, S_max=60.0)); r0 = S.bench_eval(B, K403)
+        print("mine", {k: r[k] for k in ("gap", "reach", "inband14", "contact")}, r["S"], "seed VModel", {k: r0[k] for k in ("gap", "reach", "inband14", "contact")}, r0["S"])
+        sys.exit()
+    if mode == "redteam":                                               # the pose that jams, the point that pinches, named groups
+        B = CB.Bench(n_clip=60, n_ws=160); r, M = evaluate(B, par)
+        print({k: r[k] for k in ("gap", "reach", "follow", "inband14", "inband10", "contact")}, "S", [M.p["S_a"], M.p["S_t"], M.p["R_r"]], "f", r.get("f"), r["lines"], "riser_h", r.get("riser_h"))
+        print("parts in band 2-14 [share, median mm, samples]:", r["parts_ib14"]); print("why not taken:", r["why"], r["parts_pairs"], "res_max", r.get("res_max"), "min_clear_taken", r.get("min_clear_taken"))
+        print("slide travel max |s - mid| (along, across, radial):", np.round(np.abs(M.s[M.kin_ok] - M.D.m).max(0), 1).tolist(), "mid", np.round(M.D.m, 1).tolist())
+        lab = lambda i: f"#{i} {B.kind[i]} {B.clip[i][:22]:22s} plane {B.poses[i]['plane']:6.1f} elev {B.poses[i]['elev']:6.1f} axial {B.poses[i]['axial']:6.1f}"
+        print("-- poses not taken (non-fold first, then fold) --")
+        nt = [i for i in range(len(B.idx)) if M.why[i]]; nt.sort(key=lambda i: M.why[i] == "fold")
+        for i in nt[:20]: print(f"  {M.why[i]:7s} {lab(i)}" + (f" clear {M.clear[i]:.1f} ({M.last_pair.get(i)})" if M.why[i] == "parts" else ""))
+        names = list(M.rigid) + list(M.link_pts); sizes = [len(X) for _, X in M.rigid.values()] + [len(X) for _, X in M.link_pts.values()]
+        cut = np.cumsum([0] + sizes); low = []
+        for i in range(len(B.idx)):
+            d = B.res[i]
+            if d is None or float(np.min(d)) < 0: continue
+            j = int(np.argmin(d[:cut[-1]])); low.append((float(d[j]), i, names[int(np.searchsorted(cut, j, side="right") - 1)]))
+        low.sort(); print("-- closest metal over taken poses (the point that pinches) --")
+        for dd, i, part in low[:6]: print(f"  {dd:5.2f} mm  {part:6s} {lab(i)}")
+        taken = lambda i: B.res[i] is not None and float(np.min(B.res[i])) >= 0
+        el = np.array([p["elev"] for p in B.poses]); pl = np.array([p["plane"] for p in B.poses])
+        groups = dict(rest=np.argsort(el)[:5], overhead=np.nonzero(el >= 120)[0], across=np.nonzero((pl >= 100) & (el >= 40))[0],
+                      behind=np.array([i for i in range(len(B.idx)) if "back" in B.clip[i].lower() or (pl[i] < -30 and el[i] > 20)], int))
+        print("-- named pose groups: taken / total, median metal-skin mm, in band 2-14 --")
+        for g, ii in groups.items():
+            ii = list(ii); tk = [i for i in ii if taken(i)]; dd = np.concatenate([B.res[i] for i in tk]) if tk else np.array([np.nan])
+            print(f"  {g:9s} {len(tk)}/{len(ii)}  median {float(np.median(dd)):.1f} mm  ib14 {float(((dd >= 2) & (dd <= 14)).mean()):.3f}  not taken: {[(int(i), M.why[i]) for i in ii if not taken(i)][:8]}")
+        if "--png" in sys.argv: S.ID = ID; S.sketch(M, os.path.join(REPO, "docs", "concepts", "img", ID + ".png")); print("sketch written")
         sys.exit()
     B = CB.Bench(n_clip=60, n_ws=160); t = time.time()
     r, M = evaluate(B, par)

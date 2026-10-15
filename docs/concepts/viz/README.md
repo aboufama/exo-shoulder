@@ -8,6 +8,9 @@ active and passive DOF, which axes pass through GH, what is fixed to the scapula
     python3 docs/concepts/viz/build.py [--only a,b]      # meta.js + index.html script block + dist/index.html (the Artifact)
     PW_MODULE=<scratch>/node_modules/playwright-core node docs/concepts/viz/shots.mjs --out <dir> [id ...]
                                                           # stage shots at 2 poses per concept + contact sheet + console errors
+    node docs/concepts/viz/thumbs.mjs [--stats] [--sheet f.svg] [--out f.json] [id ...]
+                                                          # tiny monochrome motion previews -> docs/dashboard/data/motion.json
+                                                          # (the dashboard leaderboard; tools/dash_build.py re-runs it when stale)
     open docs/concepts/viz/index.html via any static server (dev page, loads the files one by one)
 
 Files: `kin.js` (maths, motion loop, IK, registry), `concepts/<id>.js` (one per morphology, file name = id),

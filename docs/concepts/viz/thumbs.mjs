@@ -2,6 +2,7 @@
 // (docs/DASHBOARD.md, "Motion previews"). Node only, no browser.
 //
 //   node docs/concepts/viz/thumbs.mjs [--out docs/dashboard/data/motion.json] [--n 40] [--sheet file.svg] [--stats] [id ...]
+//   (tools/dash_build.py runs it when kin.js, this file or a concepts/*.js is newer than motion.json)
 //
 // Each concept runs exactly as the gallery runs it (viewer.js: KIN.run over KIN.motion(240), so the numeric IK keeps
 // its continuity from frame to frame); --n evenly spaced frames of that loop (rest -> forward raise -> overhead ->
@@ -31,7 +32,7 @@ const V = KIN.V;
 const args = process.argv.slice(2);
 const opt = (k, d) => { const i = args.indexOf(k); if (i < 0) return d; const v = args[i + 1]; args.splice(i, 2); return v; };
 const flag = (k) => { const i = args.indexOf(k); if (i < 0) return false; args.splice(i, 1); return true; };
-const OUT = opt('--out', path.join(REPO, 'docs', 'dashboard', 'data', 'motion.json'));
+const OUT_ARG = opt('--out', null), OUT = OUT_ARG || path.join(REPO, 'docs', 'dashboard', 'data', 'motion.json');
 const N = Number(opt('--n', 40));
 const SHEET = opt('--sheet', null);
 const STATS = flag('--stats');
@@ -171,7 +172,7 @@ const notes = [];
 const t0 = Date.now();
 for (const id of [...KIN.order].sort()) {
   if (ONLY.length && !ONLY.includes(id)) continue;
-  const c = KIN.concepts[id], t1 = Date.now();
+  const c = KIN.concepts[id], t1 = Date.now(); dropped = 0;
   try {
     const sol = KIN.run(c, frames).frames, mech = [], joint = [], closes = [];
     for (const i of pick) {
@@ -186,12 +187,11 @@ for (const id of [...KIN.order].sort()) {
 }
 rows.sort((a, b) => (a.id < b.id ? -1 : a.id > b.id ? 1 : 0));
 const raw = JSON.stringify(rows);
-if (rows.length > 1) {
-  fs.mkdirSync(path.dirname(OUT), { recursive: true });
-  const old = fs.existsSync(OUT) ? fs.readFileSync(OUT, 'utf8') : null;
-  if (old !== raw) fs.writeFileSync(OUT, raw);
-}
-console.log(`motion previews: ${rows.length - 1} concept(s), ${N} frames each, still = frame ${still}, ${raw.length} bytes -> ${path.relative(process.cwd(), OUT)} (${((Date.now() - t0) / 1000).toFixed(1)} s)`);
+// always (re)written, so its mtime says when it was last built (tools/dash_build.py re-runs this when a source is newer);
+// a run on chosen ids (--only style args) never overwrites the dashboard's file unless --out names one
+const write = rows.length > 1 && (!ONLY.length || OUT_ARG);
+if (write) { fs.mkdirSync(path.dirname(OUT), { recursive: true }); fs.writeFileSync(OUT, raw); }
+console.log(`motion previews: ${rows.length - 1} concept(s), ${N} frames each, still = frame ${still}, ${raw.length} bytes${write ? ' -> ' + path.relative(process.cwd(), OUT) : ' (not written: ids given without --out)'} (${((Date.now() - t0) / 1000).toFixed(1)} s)`);
 if (skipped.length) console.log(`skipped ${skipped.length}:\n  ` + skipped.join('\n  '));
 
 if (notes.length) console.log(notes.join('\n'));
@@ -221,8 +221,8 @@ if (SHEET) {
     s += `<text x="4" y="${y + cell / 2}">${r.id.slice(0, 22)}</text>`;
     idxs.forEach((k, i) => {
       s += `<svg x="${lab + i * (cell + pad)}" y="${y}" width="${cell}" height="${cell}" viewBox="${r.view}"><rect width="100" height="100" fill="none" stroke="#ddd"/>`
-        + `<path d="${sh[k]}" fill="none" stroke="#777" stroke-opacity=".5" stroke-width="1.6"/><path d="${m[k]}" fill="none" stroke="#111" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/>`
-        + `<path d="${jt[k]}" fill="none" stroke="#111" stroke-width="5" stroke-linecap="round"/></svg>`;
+        + `<g fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="${sh[k]}" stroke="#777" stroke-opacity=".5" stroke-width="1" vector-effect="non-scaling-stroke"/>`
+        + `<path d="${m[k]}" stroke="#111" stroke-width="1.2" vector-effect="non-scaling-stroke"/><path d="${jt[k]}" stroke="#111" stroke-width="3" vector-effect="non-scaling-stroke"/></g></svg>`;
     });
   });
   fs.writeFileSync(SHEET, s + '</svg>');
