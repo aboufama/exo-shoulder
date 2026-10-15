@@ -1,79 +1,79 @@
 {
- "overall": 0.2959524892584464,
+ "overall": 0.32021665297021157,
  "follow": 0.6451268240693522,
- "in_band": 0.4587508660570453,
+ "in_band": 0.4963623291159069,
  "clips": [
   {
    "name": "Raise overhead",
    "frames": 181,
-   "score": 0.1884853574195436,
+   "score": 0.20731810958020397,
    "follow": 0.4098360655737705,
-   "in_band_when_following": 0.45990427210368623,
-   "median_gap": 11.71451747441085,
-   "min_gap": 2.883217781691665
+   "in_band_when_following": 0.5058561873756977,
+   "median_gap": 11.32090257941709,
+   "min_gap": 2.9353683390368897
   },
   {
    "name": "Drink from a cup",
    "frames": 178,
-   "score": 0.3501046447685765,
+   "score": 0.3758050615044135,
    "follow": 1.0,
-   "in_band_when_following": 0.3501046447685765,
-   "median_gap": 12.592751381278257,
-   "min_gap": 2.7056153682551365
+   "in_band_when_following": 0.3758050615044135,
+   "median_gap": 11.972166891713275,
+   "min_gap": 2.7832918113551455
   },
   {
    "name": "Comb hair",
    "frames": 202,
-   "score": 0.48305095563639566,
+   "score": 0.5113721613229868,
    "follow": 1.0,
-   "in_band_when_following": 0.48305095563639566,
-   "median_gap": 10.109685983597108,
-   "min_gap": 2.3232375167774606
+   "in_band_when_following": 0.5113721613229868,
+   "median_gap": 9.78985662336088,
+   "min_gap": 2.3984768058233104
   },
   {
    "name": "Reach a high shelf",
    "frames": 157,
-   "score": 0.54544462113108,
+   "score": 0.5801412016367746,
    "follow": 1.0,
-   "in_band_when_following": 0.54544462113108,
-   "median_gap": 9.315435329423316,
-   "min_gap": 2.7095535454405177
+   "in_band_when_following": 0.5801412016367746,
+   "median_gap": 8.880067903522193,
+   "min_gap": 2.9212828579136882
   },
   {
    "name": "Wash opposite shoulder",
    "frames": 193,
-   "score": 0.09906158441120969,
+   "score": 0.10670928872882139,
    "follow": 0.35384615384615387,
-   "in_band_when_following": 0.2799566515968969,
-   "median_gap": 18.428550914880745,
-   "min_gap": 2.7922994273189916
+   "in_band_when_following": 0.30156972901623436,
+   "median_gap": 17.93117955987981,
+   "min_gap": 2.789603771617102
   },
   {
    "name": "Reach back pocket",
    "frames": 145,
-   "score": 0.11894789561780918,
+   "score": 0.13319903537717773,
    "follow": 0.24489795918367346,
-   "in_band_when_following": 0.4857039071060542,
-   "median_gap": 10.587380678926905,
-   "min_gap": 3.3178986826809256
+   "in_band_when_following": 0.5438960611234757,
+   "median_gap": 10.04789261932147,
+   "min_gap": 3.3427505423654433
   },
   {
    "name": "Wave",
    "frames": 172,
-   "score": 0.1065915055273378,
+   "score": 0.11910044243271799,
    "follow": 0.22413793103448276,
-   "in_band_when_following": 0.47556210158350704,
-   "median_gap": 10.894426266941178,
-   "min_gap": 3.8329588822792546
+   "in_band_when_following": 0.5313712046998188,
+   "median_gap": 10.401662464728572,
+   "min_gap": 3.8660918423201576
   },
   {
    "name": "Walking arm swing",
    "frames": 109,
-   "score": 0.5627782891194443,
+   "score": 0.6324624958015829,
    "follow": 1.0,
-   "in_band_when_following": 0.5627782891194443,
-   "median_gap": 9.368616468726353,
-   "min_gap": 3.897025750524044
+   "in_band_when_following": 0.6324624958015829,
+   "median_gap": 8.946387656979331,
+   "min_gap": 3.990044527064542
   }
  ],
  "band": [

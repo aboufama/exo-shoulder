@@ -2,7 +2,7 @@
  {
   "id": "R1",
   "name": "Proximity: covered skin 2-10 mm from the metal while following",
-  "value": 0.4587508660570453,
+  "value": 0.4963623291159069,
   "target": ">= 0.9",
   "status": "FAIL",
   "judge": "full-exo/score_design.py (exact posed skin, 30 fps clips)"
@@ -10,9 +10,9 @@
  {
   "id": "R2",
   "name": "No part enters the body, any frame of any clip",
-  "value": null,
+  "value": 24.43,
   "target": "<= 0.5 mm",
-  "status": "NOT RUN",
+  "status": "FAIL",
   "judge": "judge/body_contact.py (exact signed distance)"
  },
  {
@@ -26,7 +26,7 @@
  {
   "id": "R4",
   "name": "Overhead works (Raise overhead clip score)",
-  "value": 0.1884853574195436,
+  "value": 0.20731810958020397,
   "target": ">= 0.8",
   "status": "FAIL",
   "judge": "full-exo/score_design.py"
@@ -42,9 +42,9 @@
  {
   "id": "R6",
   "name": "No interference between parts that move relative to each other",
-  "value": null,
+  "value": 37.64,
   "target": "<= 0.15 mm",
-  "status": "NOT RUN",
+  "status": "FAIL",
   "judge": "judge/part_contact.py (geometry only)"
  },
  {
@@ -58,7 +58,7 @@
  {
   "id": "R8",
   "name": "Custom-part mass budget (proposed)",
-  "value": 244.6,
+  "value": 245.4,
   "target": "<= 300 g",
   "status": "PASS",
   "judge": "parts_full.json (mesh volume x density)"

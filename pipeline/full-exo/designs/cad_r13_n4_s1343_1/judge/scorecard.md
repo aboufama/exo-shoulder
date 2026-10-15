@@ -2,14 +2,14 @@
 
 | | requirement | value | target | status | judge |
 |---|---|---|---|---|---|
-| R1 | Proximity: covered skin 2-10 mm from the metal while following | 45.9% | >= 0.9 | **FAIL** | full-exo/score_design.py (exact posed skin, 30 fps clips) |
-| R2 | No part enters the body, any frame of any clip | - | <= 0.5 mm | **NOT RUN** | judge/body_contact.py (exact signed distance) |
+| R1 | Proximity: covered skin 2-10 mm from the metal while following | 49.6% | >= 0.9 | **FAIL** | full-exo/score_design.py (exact posed skin, 30 fps clips) |
+| R2 | No part enters the body, any frame of any clip | 24.43 | <= 0.5 mm | **FAIL** | judge/body_contact.py (exact signed distance) |
 | R3 | Follows the arm (frames tracked, not held at a limit) | 64.5% | >= 0.95 | **FAIL** | full-exo/score_design.py |
-| R4 | Overhead works (Raise overhead clip score) | 18.8% | >= 0.8 | **FAIL** | full-exo/score_design.py |
+| R4 | Overhead works (Raise overhead clip score) | 20.7% | >= 0.8 | **FAIL** | full-exo/score_design.py |
 | R5 | At most 4 DOF (3R + sliding cuff, or 4R) | 4 | <= 4 | **PASS** | design.json |
-| R6 | No interference between parts that move relative to each other | - | <= 0.15 mm | **NOT RUN** | judge/part_contact.py (geometry only) |
+| R6 | No interference between parts that move relative to each other | 37.64 | <= 0.15 mm | **FAIL** | judge/part_contact.py (geometry only) |
 | R7 | Every custom part is one valid closed solid | True | == True | **PASS** | judge/part_validity.py (OCC BRepCheck on the exported STEP) |
-| R8 | Custom-part mass budget (proposed) | 244.6 | <= 300 g | **PASS** | parts_full.json (mesh volume x density) |
+| R8 | Custom-part mass budget (proposed) | 245.4 | <= 300 g | **PASS** | parts_full.json (mesh volume x density) |
 | R9 | Strength: SF >= 1.5 at 25 N.m worst direction; deflection and fatigue bounded | - |  | **UNVERIFIED** | independent FEA (CalculiX) - only the in-house hex8 study exists (pipeline/conformal/thin_study) |
 | R10 | Base mounts to a thorax-fixed back plate; shoulder-centre misalignment bounded | - |  | **OPEN** | OpenSim (Seth 2016 thoracoscapular model): today the base is modelled scapula-fixed |
 | R11 | Interface pressure under ISO/TS 15066 body-region limits | - |  | **NOT MEASURED** | coupled human-exo contact sim (MuJoCo/Drake) then pressure film / FSRs on a prototype |

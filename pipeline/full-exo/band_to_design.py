@@ -225,7 +225,8 @@ for mi in range(N):
 
 # ---------------------------------------------------------------- write the design dir
 DD = os.path.join(HERE, "designs", NAME); os.makedirs(DD, exist_ok=True)
-sc = trimesh.Scene(); src = trimesh.load(os.path.join(HERE, "designs", "final", "exo.glb"))
+sc = trimesh.Scene(); _fin = os.path.join(HERE, "designs", "final", "exo.glb")              # the user's arm parts (viewer only; not committed)
+src = trimesh.load(_fin) if os.path.exists(_fin) else trimesh.Scene()
 for g, mesh in meshes.items(): sc.add_geometry(mesh, node_name=f"{g}|D4 member {g} (proxy)|0", geom_name=f"{g}|proxy")
 moved_w = abs(R["w"][0] - 85.9) > 0.5 or abs(R["w"][1]) > 0.5
 for node in src.graph.nodes_geometry:                                                  # the user's arm parts ride on
