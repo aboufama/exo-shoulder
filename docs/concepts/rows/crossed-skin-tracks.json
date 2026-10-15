@@ -14,11 +14,11 @@
  "inband10": 0.4066,
  "contact": 0.0172,
  "gap": 94.55,
- "v_reach": 0.4562,
- "v_follow": 0.4667,
- "v_inband14": 0.7585,
- "v_inband10": 0.3907,
- "v_gap": 108.8,
+ "v_reach": 0.4625,
+ "v_follow": 0.65,
+ "v_inband14": 0.703,
+ "v_inband10": 0.4052,
+ "v_gap": 96.04,
  "n_configs": 387,
  "verdict": "dead after polish: gap 94.55 (score 65.6) vs bar 68.93 (74.9); sweep NOT converged by the gate but the kinematic ceiling of the polished best (reach_kin 0.65, follow_kin 0.72) leaves little room; overhead still not taken (crossing exists, off the 93 deg arm track)",
  "limiter": "kinematic coverage: 98/220 poses have no crossing; each track must stay in its frame's safe zone (humerus: one lateral deltoid patch d 60-135, a -45..30, so the arm track is <= ~95 deg) and two such 1-D tracks cross for too few relative rotations; nothing is taken above 90 deg elevation (overhead and across-body: no crossing). Secondary: outer track and carriage B ride on the 11 mm swivel stack (in band 0.38 / 0.04)",
@@ -52,5 +52,8 @@
   "fitfix": 1
  },
  "best_k": 338,
- "model_file": "docs/concepts/models/crossed-skin-tracks.py"
+ "model_file": "docs/concepts/models/crossed-skin-tracks.py",
+ "v_contact": 0.0259,
+ "v_score": 65.08,
+ "v_note": "Checker 2026-10-15: k338 re-measured with CB_EXACT=1 on Bench(60,160) (CPU farm, 1761 s; the model's K3 maps take ~35 min per map on the loaded 4-core box), model file unchanged since 6a1a503 (no diff over the polish, nothing uncommitted): gap 96.04 (score 65.08) vs grid 94.55 (65.62), -0.54 pt; model's own checks on; refusals as claimed except contact 3 (grid 2); closure 0.708; per part exact in band 2-14: T_S 0.93, car_A 0.98, neck 0.64, T_H 0.24, car_B 0.05. Kinematic screen reach_kin 0.65, follow_kin 0.717 (gap_kin 48.3). Grid path reproduces 94.55 exactly (locally). Convergence numbers reproduced from the sweep file (2nd-half gain +2.96, best at polish try 160/208 in the last third, top-5 within 2.03 points): NOT converged, as claimed. Stays dead (65.1 < 74.9)."
 }
