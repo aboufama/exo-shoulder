@@ -54,7 +54,7 @@ addEventListener('resize', resize); resize();
 // ---- mannequin: the film's own mesh (mannequin.py -> mannequin_head.json, exactly what film_frames.py sends to
 // Blender): the rig's skin below the lower neck + a smooth featureless display head and neck, matte black
 const ANA = await loadBody(THREE, 'body_mesh.json'); scene.add(ANA.group); const L = ANA.landmarks;
-const black = new THREE.MeshPhysicalMaterial({ color: 0x050506, roughness: 0.9, metalness: 0, specularIntensity: 0.45, envMapIntensity: 0.35 });
+const black = new THREE.MeshPhysicalMaterial({ color: 0x0a0a0b, roughness: 0.78, metalness: 0, specularIntensity: 0.7, envMapIntensity: 0.6 });   // ~ the film's matte black (render_film.py)
 ANA.group.traverse(o => { if (o.isMesh) o.visible = false; });                  // rig meshes hidden (eyes too); the mannequin below
 const skin = ANA._dbg.dynamic.find(d => d.cls === 'skin').mesh; skin.material = new THREE.MeshBasicMaterial({ visible: false });
 const MQ = await (await fetch('mannequin_head.json' + bust)).json();

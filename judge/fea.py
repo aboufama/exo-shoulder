@@ -144,17 +144,29 @@ def mesh_step(step, h, out_msh=None, local=None):
             gmsh.option.setNumber("Mesh.MeshSizeMax", h); gmsh.option.setNumber("Mesh.MeshSizeMin", 0.15 * h)
             gmsh.option.setNumber("Mesh.MeshSizeFromCurvature", 12)
         else:
+            # background size field: a coarse linear tet mesh carries the size (wall at the nearest surface samples / k)
             from scipy.spatial import cKDTree
-            C, t, k, hmin, hmax = local; tree = cKDTree(C); sz = np.clip(t / k, hmin, hmax)
-            # a point's size: the smallest of its 8 nearest samples (both walls of a thin section are near it)
-            def cb(dim, tag, x, y, z, lc):
-                _, i = tree.query((x, y, z), k=8); return float(min(lc, sz[i].min()))
-            gmsh.model.mesh.setSizeCallback(cb)
+            C, t, k, hmin, hmax = local; sz = np.clip(t / k, hmin, hmax)
+            for hb_ in (2.0, 1.2, 0.8, 0.5):                                                    # thin twisted straps: a coarse PLC can self-intersect
+                try:
+                    gmsh.model.mesh.clear(); gmsh.option.setNumber("Mesh.MeshSizeMax", hb_); gmsh.option.setNumber("Mesh.MeshSizeMin", 0.25 * hb_); gmsh.model.mesh.generate(3); break
+                except Exception:
+                    if hb_ == 0.5: raise
+            _, Xb, _ = gmsh.model.mesh.getNodes(); Xb = Xb.reshape(-1, 3); tg, _, _ = gmsh.model.mesh.getNodes()
+            et, _, en = gmsh.model.mesh.getElements(3); ib = np.full(int(tg.max()) + 1, -1); ib[tg] = np.arange(len(tg)); Tb = ib[np.asarray(en[list(et).index(4)]).reshape(-1, 4)]
+            _, i8 = cKDTree(C).query(Xb, k=8); hb = sz[i8].min(1)                       # both walls of a thin section are among the 8 nearest
+            data = np.c_[Xb[Tb][:, :, 0], Xb[Tb][:, :, 1], Xb[Tb][:, :, 2], hb[Tb]].ravel()
+            v = gmsh.view.add("size"); gmsh.view.addListData(v, "SS", len(Tb), data.tolist())
+            gmsh.model.mesh.clear()
+            f = gmsh.model.mesh.field.add("PostView"); gmsh.model.mesh.field.setNumber(f, "ViewTag", v); gmsh.model.mesh.field.setAsBackgroundMesh(f)
             gmsh.option.setNumber("Mesh.MeshSizeMax", hmax); gmsh.option.setNumber("Mesh.MeshSizeMin", hmin)
-            gmsh.option.setNumber("Mesh.MeshSizeExtendFromBoundary", 0); gmsh.option.setNumber("Mesh.MeshSizeFromPoints", 0)
-        gmsh.option.setNumber("Mesh.ElementOrder", 2); gmsh.option.setNumber("Mesh.HighOrderOptimize", 1)
+            gmsh.option.setNumber("Mesh.MeshSizeExtendFromBoundary", 0); gmsh.option.setNumber("Mesh.MeshSizeFromPoints", 0); gmsh.option.setNumber("Mesh.MeshSizeFromCurvature", 0)
+        gmsh.option.setNumber("Mesh.ElementOrder", 2); gmsh.option.setNumber("Mesh.SecondOrderLinear", 1)   # straight-edged tet10: projecting
+        gmsh.option.setNumber("Mesh.HighOrderOptimize", 0)                                       # mid-nodes onto BSpline faces takes minutes
         gmsh.option.setNumber("Mesh.Optimize", 1); gmsh.option.setNumber("Mesh.Algorithm3D", 1)
-        gmsh.model.mesh.generate(3)
+        try: gmsh.model.mesh.generate(3)
+        except Exception:
+            gmsh.model.mesh.clear(); gmsh.option.setNumber("Mesh.Algorithm", 1); gmsh.model.mesh.generate(3)   # MeshAdapt surfaces
         tags, X, _ = gmsh.model.mesh.getNodes(); X = X.reshape(-1, 3)
         et, _, en = gmsh.model.mesh.getElements(3)
         k_ = list(et).index(11)                                                          # 11 = 10-node tetrahedron
@@ -337,12 +349,18 @@ def solve(P, mat, steps, work, threads=2):
     """steps: list of (moment N.mm (3), force N (3)) at the load hub's reference point -> U (k,n,3), S (k,n,6), seconds"""
     os.makedirs(work, exist_ok=True); X = P["X"]; rid = len(X) + 1
     loads = [[(rid, 4 + j, m[j]) for j in range(3) if abs(m[j]) > 0] + [(rid, 1 + j, f[j]) for j in range(3) if abs(f[j]) > 0] for m, f in steps]
-    write_inp(os.path.join(work, "part.inp"), X, P["T"], mat, {"LD": (rid, P["ld_ref"], P["ef"])}, loads, np.nonzero(P["fx_sel"])[0])
+    inp = os.path.join(work, "part.inp"); write_inp(inp, X, P["T"], mat, {"LD": (rid, P["ld_ref"], P["ef"])}, loads, np.nonzero(P["fx_sel"])[0])
+    import hashlib
+    hsh = hashlib.sha1(open(inp, "rb").read()).hexdigest(); cache = os.path.join(work, "result.npz")
+    if os.path.exists(cache):                                                            # same deck solved before: reuse
+        z = np.load(cache)
+        if str(z["hash"]) == hsh: return z["U"], z["S"], float(z["sec"])
     sec = run_ccx(work, "part", threads); R = read_frd(os.path.join(work, "part.frd"), len(X))
     if len(R) != len(steps): raise RuntimeError(f"{len(R)} result steps for {len(steps)} load cases")
     for f in os.listdir(work):                                                           # keep the deck + log, drop the bulk
         if f.endswith((".frd", ".12d", ".cvg", ".sta", ".out")): os.remove(os.path.join(work, f))
-    return np.stack([r[0] for r in R]), np.stack([r[1] for r in R]), sec
+    U, S = np.stack([r[0] for r in R]), np.stack([r[1] for r in R]); np.savez(cache, U=U, S=S, sec=sec, hash=hsh)
+    return U, S, sec
 
 def unit_data(P, mat, work, threads=2):
     """the six unit cases (moments, then forces, along the load hub's axis and two perpendiculars)"""
@@ -382,7 +400,7 @@ def worst_pair(A, Bm, nf=240, nphi=24):
 
 def post_part(name, mat, res, D):
     SM, SF, dM, dF, rM = wrench_maps(D)
-    LM = np.einsum("ij,ncj->nic", _L, SM); LF = np.einsum("ij,ncj->nic", _L, SF)            # VM-metric maps (n,6,3)
+    LM = np.einsum("ic,ncj->nij", _L, SM); LF = np.einsum("ic,ncj->nij", _L, SF)            # VM-metric maps (n,6,3)
     sM = np.linalg.svd(LM, compute_uv=False)[:, 0]; d1 = M_DESIGN * sM                     # D1: worst direction, exact
     a = D["B"][0]; P = np.stack([D["B"][1], D["B"][2]], 1)
     d1_perp = M_DESIGN * np.linalg.svd(LM @ P, compute_uv=False)[:, 0]; d1_ax = M_DESIGN * np.linalg.norm(LM @ a, axis=1)
@@ -484,6 +502,7 @@ def part_fea(step, pre, kind, mat, work0, fast=False, centres=None, threads=2):
         if ratio > 1.0:                                                                   # never let the coarse mesh flatter the part
             for nm in ("D1", "D1_perp", "D1_axial", "D2_force_50N", "D1F"):
                 c_ = p["cases"][nm]; c_["vm_coarse_MPa"] = c_["vm_MPa"]; c_["vm_MPa"] = round(c_["vm_MPa"] * ratio, 1); c_["SF"] = round(mat["Sy"] / c_["vm_MPa"], 2)
+                for z_ in ("load_hub_zone_vm_MPa", "support_zone_vm_MPa", "raw_vm_MPa"): c_[z_] = round(c_[z_] * ratio, 1)
             p["cases"]["MVP1"]["vm_MPa"] = round(p["cases"]["MVP1"]["vm_MPa"] * ratio, 2); p["cases"]["MVP1"]["SF"] = round(mat["Sy"] / p["cases"]["MVP1"]["vm_MPa"], 1)
             s_ = p["cases"]["D1F"]["vm_MPa"]; p["fatigue"].update(sigma_a_MPa=s_, SF_fully_reversed=round(mat["Se"] / s_, 2), SF_R0_goodman=round(1.0 / ((s_ / 2) / mat["Se"] + (s_ / 2) / mat["Su"]), 2))
         if dgh_f > dgh_c: p["deflection"]["d_GH_mm"] = round(p["deflection"]["d_GH_mm"] * dgh_f / dgh_c, 3)

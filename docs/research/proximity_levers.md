@@ -81,9 +81,10 @@ fill agrees with the exact distance to 0.14-1.14 mm median (p95 0.4-2.4 mm). Eff
 the top of the shoulder (LO = -1: metal may sit inside the skin there) and never in band there (CAP = G / cs). On this
 design the J1 hub reads 61.6 % in band (raw) vs 98.4 % (filled); the whole design 58.6 -> 67.5 %. The search has been
 steered away from the top of the shoulder for in-band and left unguarded there for clearance.
-Patch for the lead: `pipeline/conformal/analysis/band_impl_fill_holes.patch` (`fill_pole_holes`, job key
-`fill_holes`, part of the map-cache key; tested bit-identical to map_holes.fill on 40 frames). Deploy as a new
-endpoint, re-evaluate the final as a measurement change before comparing designs.
+Patch: `pipeline/conformal/analysis/band_impl_fill_holes.patch` (`fill_pole_holes`, job key `fill_holes`, part of
+the map-cache key; tested bit-identical to map_holes.fill on 40 frames). The lead deployed it on exo-band20
+(band-2026-10-15m) and re-measured the final on the wsf payload (`gpu_client/band_eval_det20base.json`): in band
+28.6 -> **38.2 %**, follow 83.2 % unchanged, same faces; base member 97.4 % in band. **[measurement]**
 
 ## 4. Levers, one at a time (evaluator, CPU, clips-only fit; in-band at G 14 / G 10 vs baseline 67.5 / 51.7 filled)
 

@@ -86,7 +86,10 @@ def geometry_of(R, POSE):
 
 def main():
     key = sys.argv[1]; outp = sys.argv[2] if len(sys.argv) > 2 else os.path.join(HERE, f"why_held_{key}.json")
-    INP = json.load(open(os.path.join(CONF, "band_cad", "inputs", f"{key}.json"))); R = INP["results"][0]
+    if key.endswith(".json"):                                                          # any band_eval DETAIL json: <file>.json[:index]
+        INP = json.load(open(key)); R = INP["results"][int(os.environ.get("IDX", 0))]; key = os.path.basename(key)[:-5] + f"_{os.environ.get('IDX', 0)}"
+        outp = sys.argv[2] if len(sys.argv) > 2 else os.path.join(HERE, f"why_held_{key}.json")
+    else: INP = json.load(open(os.path.join(CONF, "band_cad", "inputs", f"{key}.json"))); R = INP["results"][0]
     pf = R.get("poses_file", "band_poses_wsf.b64")
     Z = np.load(io.BytesIO(gzip.decompress(base64.b64decode(open(os.path.join(CONF, pf)).read()))))
     NAMES = [str(x) for x in Z["NAMES"]]; ENV = set(str(x) for x in Z["ENVELOPE"]) if "ENVELOPE" in Z.files else set()
@@ -105,6 +108,9 @@ def main():
     geo_job = {k: cfg[k] for k in ("hub_r", "hub_relief", "hub_margin", "stack", "t_w", "t_link", "neck", "b_ant_max", "mount_dir", "t_lo", "hub_up", "cap_up", "rail_d", "min_arc", "min_arm_mm", "G", "ramp_deg", "hw") if k in cfg}
     for k in ("hub_r", "stack", "t_link", "ramp_deg", "hw"):
         if k in R and R[k] is not None: geo_job[k] = R[k]
+    for k in ("hub_relief", "hub_up", "cap_up"):                                       # job keys the DETAIL eval ran with (env overrides)
+        if os.environ.get(k.upper()): geo_job[k] = float(os.environ[k.upper()])
+    if os.environ.get("FILL_HOLES") == "1": geo_job["fill_holes"] = True               # band-2026-10-15m measurement (skin-map pole holes)
     job = dict(geo_job, mode="band_eval", poses=poses_cpu, maps_cache=os.path.join(REPO, ".cache", "maps_s1.pt"), q_step=R.get("q_step", 12),
                fit_clips=R.get("fit_clips"), env_target=0.9, env_weight=4.0, jn_low=os.environ.get("JN_LOW", "arm"))
     for g in ("HUB_R", "HW", "T_LINK", "STACK", "T_W", "T_BOT", "T_LO", "HUB_UP", "CAP_UP", "RAIL_D"):

@@ -1,11 +1,11 @@
 [
  {
-  "id": "cad_r18_n3_s1392_1_v5f",
-  "label": "3R r18 s1392 #1: v5 joint + strap links (fair spine)"
+  "id": "cad_r18_n3_s1392_1_v5",
+  "label": "3R r18 s1392 #1: v5 joint (O20, 2x MR117 preloaded) + strap links"
  },
  {
-  "id": "cad_r18_n3_s1392_1_v5",
-  "label": "3R r18 s1392 #1: v5 joint (O20, 2x MR117) + strap links"
+  "id": "cad_r18_n3_s1392_1_v5f",
+  "label": "3R r18 s1392 #1: v5 joint + strap links (fair spine)"
  },
  {
   "id": "cad_r18_n3_s1392_1_c1",

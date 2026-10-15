@@ -84,8 +84,10 @@ NODE_PATH=$(npm root -g) node tools/preview_film.mjs designs/cad_<key>/film_prev
 NODE_PATH=$(npm root -g) node tools/preview_film.mjs designs/cad_<key>/film_preview.json pipeline/full-exo/designs/cad_<key>/preview --frames none --every 2 --w 960 --h 540   # MP4, 4.3 min
 ```
 
-`film.html` plays the same plan with the film's camera, a matte-black headless mannequin and the part materials
-(the Blender film has a smooth faceless head instead). Chromium uses software WebGL (SwiftShader, ~2 cores). The
+`film.html` plays the same plan with the film's camera, the part materials and the film's own mannequin mesh
+(`mannequin.py` -> `mannequin_head.json`: the rig's skin below the neck root + a smooth featureless display head, the
+same vertices `film_frames.py` sends to Blender), matte black. Rebuild the JSON (`python3 mannequin.py`, ~10 min) only
+if `body_mesh.json` changes; both scripts refuse a mismatch. Chromium uses software WebGL (SwiftShader, ~2 cores). The
 viewer is also live at `http://localhost:4199/index.html?d=cad_<key>` and `film.html?film=designs/cad_<key>/film_preview.json`.
 
 ## 4. Paid render on `exo-blender-cycles` (only after the yes)
