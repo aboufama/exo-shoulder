@@ -217,3 +217,4 @@
 {"time": "2026-10-15T22:12:24Z", "kind": "milestone", "event": "pointer-cslide new best gap 160.51 (score 41.63; reach 0.4, follow 0.7167, in-band14 0.2472, contact 0.219) at config 219 (skin-fitted band saddle, local CMA); baseline 68.93"}
 {"time": "2026-10-15T22:12:26Z", "kind": "milestone", "event": "pointer-cslide new best gap 128.78 (score 53.17; reach 0.2812, follow 0.7167, in-band14 0.6341, contact 0.1698) at config 220 (skin-fitted band saddle, local CMA); baseline 68.93"}
 {"time": "2026-10-15T22:12:45Z", "kind": "milestone", "event": "pointer-cslide new best gap 115.84 (score 57.88; reach 0.2938, follow 0.6333, in-band14 0.7602, contact 0.0957) at config 226 (skin-fitted band saddle, local CMA); baseline 68.93"}
+{"time": "2026-10-15T22:13:07Z", "kind": "milestone", "event": "pointer-cslide new best gap 106.8 (score 61.16; reach 0.3937, follow 0.7667, in-band14 0.6354, contact 0.1138) at config 238 (skin-fitted band saddle, local CMA); baseline 68.93"}
