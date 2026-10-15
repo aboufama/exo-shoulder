@@ -120,8 +120,44 @@ BAR0 = C_HG_H @ BAR0_H                     # bar start in the HG frame (mm from 
 _MAP = json.load(open(os.path.join(REPO, "pipeline", "conformal", "analysis", "skin_motion_map_14.json")))["scapula"]["grid"]
 
 
+_IB = {}                                   # bench in-band map (set by Ctx): az, el grid and share of poses in band
+
+
+def ib_map(B, RS):
+    """the rawest guide for a scapula-fixed part: per scapula-frame direction (az step 6, el step 3), the K3 requirement
+    in every bench pose; a part fixed at the worst-pose requirement is in band (2-14 mm) in pose i when
+    max - req_i <= 12. Returns the share of poses in band per direction (and the max requirement)."""
+    if "share" in _IB: return _IB
+    AZ = np.arange(-180, 180, 6.0); EL = np.arange(-10, 89, 3.0)
+    A, E = np.meshgrid(AZ, EL, indexing="ij"); U = bvec(A.ravel(), E.ravel())
+    RQ = np.stack([requirement(B, i, U @ RS[i].T) for i in range(len(B.poses))])
+    RQ = np.where(np.isfinite(RQ), RQ, 400.0).reshape(len(RQ), len(AZ), len(EL)); top = RQ.max(0)
+    _IB.update(AZ=AZ, EL=EL, share=((top[None] - RQ) <= 12).mean(0), top=top)
+    return _IB
+
+
 def contour(thr):
-    """el*(az) (deg) on the map's az grid: lowest el above which every cell has 0 <= motion <= thr; 9-tap circular mean"""
+    """el*(az) (deg): thr a number -> the skin-motion map's contour (lowest el above which every cell has
+    0 <= motion <= thr); thr "ibNN" -> the bench in-band contour (lowest el above which every direction is in band in
+    >= NN % of the bench poses, ib_map). 9-tap circular mean."""
+    if isinstance(thr, str):
+        S = _IB["share"] >= int(thr[2:]) / 100.0; EL = _IB["EL"]; el = np.empty(len(_IB["AZ"]))
+        # erode the zone by one cell in el and two in az (the track is 8 mm wide and the carriage 16 mm; the raised arm's
+        # edge crosses the map between grid points - measured: 165 mm requirement at az -79 el 71 in elev 165, map cell 56)
+        S0 = S.copy()
+        for da in (-2, -1, 1, 2): S &= np.roll(S0, da, 0)
+        S[:, 1:] &= S0[:, :-1]; S[:, :-1] &= S0[:, 1:]
+        for i in range(len(el)):
+            k = len(EL) - 1
+            if not S[i, k]: el[i] = EL[-1]; continue
+            while k > 0 and S[i, k - 1]: k -= 1
+            el[i] = EL[k]
+        # conservative smoothing (into the zone): max over +-24 deg of az, then a 5-tap mean - a plain mean across the
+        # zone's steep posteromedial edge (el -2 at az -24 vs 62 at az -36) drags the loop onto skin the raised arm
+        # covers overhead (measured: requirement > 100 mm at az -74..-30 in elev 150-165)
+        mx = np.array([np.max(np.take(el, range(i - 4, i + 5), mode="wrap")) for i in range(len(el))])
+        sm = np.array([np.mean(np.take(mx, range(i - 2, i + 3), mode="wrap")) for i in range(len(el))])
+        return _IB["AZ"], sm
     a = np.array(_MAP["a"], float); b = np.array(_MAP["b"], float); M = np.array(_MAP["motion"], float)
     el = np.empty(len(a))
     for i in range(len(a)):
@@ -346,6 +382,7 @@ class Ctx:
     def __init__(self, B):
         self.B = B; self.HG = _Z["HG"][B.idx].astype(float); self.RS = _Z["RS"][B.idx].astype(float)
         self.tracks = {}; self.treq = {}; self.wreq = {}; self.clipst = {}
+        ib_map(B, self.RS)
 
     def track(self, p):
         k = (p["thr"], round(p["shrink"], 3), tuple(round(v, 3) for v in p["fh"]))
@@ -453,33 +490,50 @@ class Design:
         # ---- link 2: samples in its own frame (theta along p2 -> w, c across)
         a2 = p["a2"] * D2R; ns = max(3, int(a2 * R_REF / SP) + 1); th = np.linspace(0, a2, ns)
         cc = np.linspace(-L2_W / 2, L2_W / 2, int(round(L2_W / SP)) + 1); self.l2 = (th, cc)
-        L2req = []; on = self.on
-        Td = unit(tr.D[on].reshape(-1, 3)); Ttop = np.repeat(self.Rt[on], len(tr.cc)) + TR_T; tree = cKDTree(Td)
-        for i in F:
-            r = self.cand[i][0]; D = self.l2dirs(i, r); Dd = D.reshape(-1, 3)
-            rq = requirement(B, i, Dd @ RS[i].T)
-            # link 2 must clear the track (top + GAP) and the carriage (top + GAP) wherever it passes over them
-            far = np.arccos(np.clip(Dd @ r["u"], -1, 1)) * 60.0 > EXEMPT
-            M_ = tree.sparse_distance_matrix(cKDTree(Dd), (2.0 + GAP) / 35.0, output_type="ndarray")
-            if len(M_):
-                lat = 2 * np.arcsin(np.clip(M_["v"] / 2, 0, 1)) * Ttop[M_["i"]]
-                k = (lat < 2.0 + GAP) & far[M_["j"]]
-                np.maximum.at(rq, M_["j"][k], Ttop[M_["i"][k]] + GAP)
-            Rc = float(np.interp(r["s"] % tr.L, np.r_[tr.sa, tr.L], np.r_[self.Rt, self.Rt[0]]))
-            loc = np.c_[Dd @ r["t"], Dd @ r["n"]] * Rc
-            ov = far & (np.abs(loc[:, 0]) < CAR_L / 2 + 2 + GAP) & (np.abs(loc[:, 1]) < CAR_W / 2 + 2 + GAP)
-            rq[ov] = np.maximum(rq[ov], Rc + CAR_T + GAP)
-            L2req.append(rq.reshape(D.shape[:2]))
-        lreq = qtl(np.stack(L2req), q)
-        xl = th * 65.0; xn = NG["th"] * 65.0
-        up = STACK                                                             # upper member underside above F
-        for _ in range(3):
-            l3 = F3d + (up if p["order"] == "A" else 0.0); n3 = F3d + (0.0 if p["order"] == "A" else up)
-            Lp, (h2, h3) = lip(lreq, xl, [(0.0, self.H2), (xl[-1], l3)])
-            Np, (hn,) = lip(nreq, xn, [(0.0, n3)])
-            F3 = max(F3d, h3 - (l3 - F3d), hn - (n3 - F3d))
-            if F3 <= F3d + 1e-6: break
-            F3d = F3
+        F3n = F3d; F3_0 = F3d
+        for _pass in range(3):                                                 # neck level <-> link 2 clearance
+            F3d = F3_0
+            L2req = []; on = self.on
+            Np0, _ = lip(nreq, NG["th"] * 65.0, [(0.0, F3n)])                     # neck underside at the last pass's J3 level
+            nkeep = NG["th"] * 65.0 > HUB_R; ntop = Np0.max(1) + NK_T; nbot = Np0.min(1)   # per neck station
+            Td = unit(tr.D[on].reshape(-1, 3)); Ttop = np.repeat(self.Rt[on], len(tr.cc)) + TR_T; tree = cKDTree(Td)
+            for i in F:
+                r = self.cand[i][0]; D = self.l2dirs(i, r); Dd = D.reshape(-1, 3)
+                rq = requirement(B, i, Dd @ RS[i].T)
+                # link 2 must clear the track (top + GAP) and the carriage (top + GAP) wherever it passes over them
+                far = np.arccos(np.clip(Dd @ r["u"], -1, 1)) * self.H2 > EXEMPT      # (was * 60 mm: link 2 runs at H2,
+                # so samples 10-12 mm from J2 escaped this raise but not the K6 check -> carriage/link2 interference)
+                M_ = tree.sparse_distance_matrix(cKDTree(Dd), (2.0 + GAP) / 35.0, output_type="ndarray")
+                if len(M_):
+                    lat = 2 * np.arcsin(np.clip(M_["v"] / 2, 0, 1)) * Ttop[M_["i"]]
+                    k = (lat < 2.0 + GAP) & far[M_["j"]]
+                    np.maximum.at(rq, M_["j"][k], Ttop[M_["i"][k]] + GAP)
+                Rc = float(np.interp(r["s"] % tr.L, np.r_[tr.sa, tr.L], np.r_[self.Rt, self.Rt[0]]))
+                loc = np.c_[Dd @ r["t"], Dd @ r["n"]] * Rc
+                ov = far & (np.abs(loc[:, 0]) < CAR_L / 2 + 2 + GAP) & (np.abs(loc[:, 1]) < CAR_W / 2 + 2 + GAP)
+                rq[ov] = np.maximum(rq[ov], Rc + CAR_T + GAP)
+                # link 2 must clear the neck (top + GAP) wherever it passes over it away from J3 (measured: link2/armend
+                # interference in 19 % of poses when the neck and link 2 leave J3 on close azimuths)
+                w3 = HG[i] @ self.W0; NDi = (NG["ND"] @ HG[i].T)[nkeep].reshape(-1, 3); Ntop = np.repeat(ntop[nkeep], NDi.shape[0] // max(nkeep.sum(), 1)); Nbot = np.repeat(nbot[nkeep], NDi.shape[0] // max(nkeep.sum(), 1))
+                far3 = np.arccos(np.clip(Dd @ w3, -1, 1)) * F3d > EXEMPT
+                M_ = cKDTree(NDi).sparse_distance_matrix(cKDTree(Dd), (2.0 + GAP) / 35.0, output_type="ndarray")
+                if len(M_):
+                    lat = 2 * np.arcsin(np.clip(M_["v"] / 2, 0, 1)) * Nbot[M_["i"]]
+                    k = (lat < 2.0 + GAP) & far3[M_["j"]]
+                    np.maximum.at(rq, M_["j"][k], Ntop[M_["i"][k]] + GAP)
+                L2req.append(rq.reshape(D.shape[:2]))
+            lreq = qtl(np.stack(L2req), q)
+            xl = th * 65.0; xn = NG["th"] * 65.0
+            up = STACK                                                             # upper member underside above F
+            for _ in range(3):
+                l3 = F3d + (up if p["order"] == "A" else 0.0); n3 = F3d + (0.0 if p["order"] == "A" else up)
+                Lp, (h2, h3) = lip(lreq, xl, [(0.0, self.H2), (xl[-1], l3)])
+                Np, (hn,) = lip(nreq, xn, [(0.0, n3)])
+                F3 = max(F3d, h3 - (l3 - F3d), hn - (n3 - F3d))
+                if F3 <= F3d + 1e-6: break
+                F3d = F3
+            if F3d <= F3n + 0.25: break
+            F3n = F3d
         self.H2 = max(self.H2, h2); self.F3 = F3d; self.Lp = Lp; self.Np = Np; self.xl, self.xn = xl, xn
         self.l3, self.n3 = l3, n3
 
