@@ -179,5 +179,71 @@
     ]
    }
   }
- ]
+ ],
+ "clips": {
+  "Raise overhead": {
+   "frames": 181,
+   "held": 0,
+   "follow": 1.0,
+   "reasons": {},
+   "min_skin_mm": 2.12
+  },
+  "Drink from a cup": {
+   "frames": 178,
+   "held": 0,
+   "follow": 1.0,
+   "reasons": {},
+   "min_skin_mm": 2.85
+  },
+  "Comb hair": {
+   "frames": 202,
+   "held": 0,
+   "follow": 1.0,
+   "reasons": {},
+   "min_skin_mm": 1.86
+  },
+  "Reach a high shelf": {
+   "frames": 157,
+   "held": 0,
+   "follow": 1.0,
+   "reasons": {},
+   "min_skin_mm": 2.16
+  },
+  "Wash opposite shoulder": {
+   "frames": 193,
+   "held": 0,
+   "follow": 1.0,
+   "reasons": {},
+   "min_skin_mm": 2.89
+  },
+  "Reach back pocket": {
+   "frames": 145,
+   "held": 0,
+   "follow": 1.0,
+   "reasons": {},
+   "min_skin_mm": 2.96
+  },
+  "Wave": {
+   "frames": 172,
+   "held": 32,
+   "follow": 0.814,
+   "reasons": {
+    "skin": 26,
+    "fold": 6
+   },
+   "min_skin_mm": -6.35
+  },
+  "Walking arm swing": {
+   "frames": 109,
+   "held": 0,
+   "follow": 1.0,
+   "reasons": {},
+   "min_skin_mm": 2.98
+  }
+ },
+ "workspace": {
+  "poses": 1432,
+  "closes": 0.852,
+  "feasible_kin_parts": 0.8471
+ }
 }

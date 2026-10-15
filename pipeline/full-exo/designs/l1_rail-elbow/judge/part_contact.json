@@ -1,0 +1,69 @@
+{
+ "step": 12,
+ "tol_mm": 0.15,
+ "frames_checked": 117,
+ "pairs": 774,
+ "seconds": 5,
+ "jobs": 4,
+ "violations": {
+  "H|neck neck to BOTTOM's bar keep-out (14 x 6 mm Ti at r_ref 70, fitted underside)  IN  l2|J3 upper boss + cap keep-out (O20, F+3.15..F+12.25)": {
+   "max_depth": 2.84,
+   "frames": 117,
+   "worst": [
+    "Walking arm swing",
+    108
+   ]
+  },
+  "l2|bridge strap keep-out (12 x 3 mm Ti at r_ref 70, fitted underside)  IN  H|neck neck to BOTTOM's bar keep-out (14 x 6 mm Ti at r_ref 70, fitted underside)": {
+   "max_depth": 2.85,
+   "frames": 110,
+   "worst": [
+    "Drink from a cup",
+    24
+   ]
+  },
+  "l2|bridge strap keep-out (12 x 3 mm Ti at r_ref 70, fitted underside)  IN  H|J3 lower plate keep-out (O20 x 3, F 68.0 mm)": {
+   "max_depth": 0.46,
+   "frames": 117,
+   "worst": [
+    "Raise overhead",
+    0
+   ]
+  },
+  "l1|strap1 strap keep-out (12 x 3 mm Ti at r_ref 70, fitted underside)  IN  base|J1 lower plate keep-out (O20 x 3, F 52.0 mm)": {
+   "max_depth": 0.5,
+   "frames": 117,
+   "worst": [
+    "Walking arm swing",
+    108
+   ]
+  },
+  "l2|J3 upper boss + cap keep-out (O20, F+3.15..F+12.25)  IN  H|neck neck to BOTTOM's bar keep-out (14 x 6 mm Ti at r_ref 70, fitted underside)": {
+   "max_depth": 2.72,
+   "frames": 117,
+   "worst": [
+    "Walking arm swing",
+    108
+   ]
+  },
+  "base|J1 lower plate keep-out (O20 x 3, F 52.0 mm)  IN  l1|strap1 strap keep-out (12 x 3 mm Ti at r_ref 70, fitted underside)": {
+   "max_depth": 0.82,
+   "frames": 8,
+   "worst": [
+    "Wash opposite shoulder",
+    132
+   ]
+  },
+  "H|neck neck to BOTTOM's bar keep-out (14 x 6 mm Ti at r_ref 70, fitted underside)  IN  l2|bridge strap keep-out (12 x 3 mm Ti at r_ref 70, fitted underside)": {
+   "max_depth": 0.8,
+   "frames": 9,
+   "worst": [
+    "Reach back pocket",
+    96
+   ]
+  }
+ },
+ "open_parts_not_tested_as_container": [],
+ "inside": "integer winding number on welded tessellations (grid + segment crossings), depth = exact distance (judge/sdist.py)",
+ "max_depth": 2.85
+}
