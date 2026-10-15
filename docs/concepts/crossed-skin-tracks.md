@@ -42,3 +42,107 @@ takes up the radius difference of the two tracks at the crossing; the closure se
    - A red-team pose list: rest, overhead (elev 160), across the body, behind the back, plus the measured worst
      poses of the best config (the crossing that goes tangent, the frame where the slide runs out, and the pinch
      point with the smallest metal-to-skin distance).
+
+## Result (Bench(60,160), fast grid cache, 179 configurations)
+
+| | gap | reach | follow | in-band 2-14 | in-band 2-10 | contact |
+|---|---|---|---|---|---|---|
+| **best (k 138)** | **108.8** | 0.456 | 0.467 | **0.759** | 0.391 | 0.019 |
+| baseline spherical 3R | 68.93 | 0.775 | 1.000 | 0.438 | 0.279 | 0.102 |
+
+**Best configuration.**
+- The halo is the scapula-frame parallel at el 35 deg, trimmed to the scapula-safe zone (a 195 deg arc).
+- The arm track is a thin loop along the deltoid meridian (a -10, d 60-140; oval(100, -10, 40, 4)), trimmed to a
+  95 deg arc. It is held by a 14 x 6 neck to BOTTOM's bar.
+- Branch sigma -1, radial stack 11 mm, quantile 0.9 for both tracks, rmax 90 mm. Ti mass is about 86 g.
+- The slide uses 0-11 mm. Track radii from GH: halo 56-72 mm, arm track 74-90 mm.
+- `python3 docs/concepts/models/crossed-skin-tracks.py check` reproduces it.
+
+**In band per part** (2-14 mm, clip frames taken):
+
+| Part | In band | Mean distance |
+|---|---|---|
+| Halo T_S | 0.94 | 10.0 mm |
+| Carriage A | 0.99 | — |
+| Neck | 0.78 | — |
+| Arm track T_H | 0.38 | 17.1 mm |
+| Carriage B | 0.04 | 20.8 mm |
+
+The in-band-first claim of the spec holds: 0.76 against the baseline's 0.44. A scapula-fixed track on the
+acromion cap stays in band almost everywhere. Only the outer track and carriage B, which ride on the swivel stack,
+leave the band.
+
+## Measured limiter: kinematic coverage, and nothing taken overhead
+
+- **No elevation above 90 deg is ever taken.** Taken share by elevation band:
+
+  | Elevation | Taken |
+  |---|---|
+  | 0-30 deg | 0.93 |
+  | 30-60 deg | 0.57 |
+  | 60-90 deg | 0.37 |
+  | 90-120 deg | 0.04 |
+  | 120-180 deg | 0.00 |
+
+  Overhead and across-the-body probes have no crossing at all. "No crossing" is 98 of the 220 bench poses.
+- **Why the coverage is capped.** Every rigid member fixed to one body frame must stay inside that frame's safe zone,
+  where the fitted K3 requirement is at most about 90 mm.
+  - The humerus-safe zone, measured on the posed skin with q95 over 220 poses, is one patch over the lateral deltoid:
+    d 60-135, a -45..+30. Anterior directions hit the chest in across-body poses, posterior directions hit the back
+    in behind-back poses, and the top of the head of the humerus hits the acromion and neck overhead.
+  - The spec's seed arm circle needs 200-290 deg of J3-like travel. Fitted rigidly, it sits 180-240 mm from GH
+    (sweep k 0-5).
+  - Two 1-D tracks of lengths L_S and L_H cross for only a limited set of relative rotations, roughly in
+    proportion to L_S x L_H. The humerus patch caps L_H at about 1.6 rad.
+- **The safe zones themselves are not the problem.** A per-pose check
+  (`python3 docs/concepts/models/crossed-skin-tracks.py overlap`) shows that the humerus-safe patch maps into the scapula-safe zone in
+  77-100 % of poses in every elevation band, overhead included: 83 % of poses at elevation 120 deg or more have at
+  least 5 % overlap. The overlap region moves (scapula frame az 40-175, el 17-72), and one fixed 1-D halo crossed by
+  one 1-D arm track cannot follow it.
+
+## What was tried (the variant that removes each limiter)
+
+| Stage | k | Change | Best gap |
+|---|---|---|---|
+| coarse | 0-5 | Spec as written: iso-motion halo + arm circle, untrimmed | 209.9 (arm track at 184-224 mm) |
+| coarse-rmax | 6-21 | Both tracks trimmed to their safe zones | 224 (arm arc 25-60 deg, almost all poses off track) |
+| oval-safe, halo-lowered | 22-56 | Arm track = deltoid oval or thin meridian loop inside the patch; halo lowered | (fit bug, see note) |
+| halo-lowered-fitfix | 57-94 | Fit poses limited to on-track crossings | 175.1 |
+| refine 1-3 | 95-134 | Quantile, rmax, halo offset, oval centre and size, stack 13 | 149.5 |
+| halo-parallel | 135-152 | **Halo drawn from the measured zone overlap** (scapula parallel at el 35-50) | **108.8** |
+| parallel-refine | 153-166 | halo el 25/30, oval centre / size / width, q, f1 tilt, stack 13 | 108.8 (stack 13: 108.82, contact 0) |
+| overhead-arm | 167-178 | Full loops and a ring around the arm, aimed at overhead | 177-275 (worse: the loops leave the band and still miss overhead) |
+
+Note: k 6-56 fitted the tracks over every kinematically closing pose, including crossings off the trimmed tracks.
+That lifted the outer track to 180-230 mm, so those numbers are pessimistic. The fix applies from k 57.
+
+## Red team of the best configuration
+
+- **Jam.** The lowest transmission angle among taken poses is 21.4 deg, at ws pose 77 (plane -45, elev 60, axial 45).
+  Below 20 deg the pose is refused as a near-tangent crossing.
+- **Pinch.**
+  - The halo T_S comes to 0.13 mm from the skin at ws pose 136 (plane 45, elev 75, axial 45).
+  - Carriage A comes to 0.5 mm at ws pose 101 (plane 0, elev 90).
+  - These are below the grid cache's 0.5-1.5 mm p99 error, so the verifier should re-check them exactly.
+- **Jams and refusals.**
+  - abd90: neck/swivel interference. The swivel runs into the neck root at the end of the arm track.
+  - behind-the-back: off track, the crossing leaves the 95 deg arm arc.
+  - across-body and overhead: no crossing.
+  - flex90: taken by the kinematics, but its exact-distance probe dips 5.2 mm into the skin, so it would be refused as
+    contact.
+- **Slide.** 0-11 mm over taken poses. Closure-set, it never sags.
+
+## Verdict
+
+**Dead as a primary morphology. Not worth a GPU sweep.**
+- Gap 108.8 is 40 points behind the 3R baseline.
+- No overhead pose is taken (0 of 41 at elevation 120 deg or more), and the user's goal puts overhead first.
+- The measured cap is structural: the arm-fixed track must stay in a single lateral-deltoid patch, and two 1-D tracks
+  fixed to two frames cross for too few relative rotations.
+
+**What survives.**
+- A scapula-fixed track on the acromion cap at el about 35 deg is in band 0.94, with mean distance 10 mm.
+- A carriage riding on it is in band 0.99.
+- A design that needs a scapula-side guide (for example a 3R whose J1 is a track) should copy this halo.
+
+Image: `docs/concepts/img/crossed-skin-tracks.png` (rest and overhead, skin in grey).

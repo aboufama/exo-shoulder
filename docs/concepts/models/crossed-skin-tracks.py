@@ -18,13 +18,22 @@ The slide value L = rho_H(t) - rho_S(s) - stack is fixed by the tracks' radii at
 line through GH changes no orientation) -> passive, closure-set, cannot sag.
 
 Spec corrections (docs/concepts/crossed-skin-tracks.md):
-  * the swivel axis is the radial line through the crossing, which also passes through the OUTER rail: carriage B must
-    hang below T_H (bottom plate under the rail) and the slide guide must sit beside the rail (a prismatic joint has a
-    direction, not a line). Radial stack at L = 0: A over its rail 4 + bearing hb + B plate 4 + outer rail 5
-    = 13 + hb = `stack` (spec: 9-13 + 5 margin; here 15-19).
-  * the slide rods stick out above B, so nothing can hold T_H along its travel: T_H is an OPEN arc held at one end
-    by the neck (a closed T_H is impossible); T_S may be closed (web-supported from the handler) or trimmed.
-  * rails and carriages follow the track radius (bogies); each rail radius is slope-limited (<= 0.5 mm/mm).
+  * the swivel axis is the radial line through the crossing, which also passes through the OUTER track: carriage B hangs
+    under it and the slide guide sits beside it. Tracks are Ti strips 10 x 3 that ARE the guides (iglidur C-sliders,
+    2 mm walls, 1.5 mm lips), the swivel a 6700 bearing (4 mm). Radial stack from the inner strip's top to the outer
+    strip's underside at L = 0: A plate 2 + bearing 4 + B plate 2 + strip 3 = 11 (`stack`; the spec's 9-13 + 5 and the
+    earlier 8 x 5 rails gave 17). The inner strip sits 1.5 mm above its requirement for the lips.
+  * the outer track is held at its ends only (the slide rods stick out above carriage B): T_H is an OPEN arc held at
+    one end by the neck; both tracks are trimmed to the arcs actually visited.
+  * a rigid track fixed to a body frame must stay in that frame's SAFE ZONE (fitted requirement <= rmax = 90 mm): an
+    arm circle over 200-290 deg of travel (the spec's seed) points into the trunk / chest / back in >= 5 % of poses
+    and fits at 180-240 mm. Measured humerus-safe patch: d 60-135, a -45..+30 (lateral deltoid); scapula-safe: the
+    acromion cap, el >= 30-45.
+  * the halo is not the iso-motion contour but a scapula-frame parallel (el 35) through the band where the
+    humerus-safe patch meets the scapula-safe zone (overlap centroids at el 30-55, az 40-175).
+  * fit poses (K3 quantile, crossing constraints) = poses whose crossing is ON both trimmed tracks (k >= 57 in the
+    sweep; k 6-56 used every kinematically closing pose, which lifted the outer track to 180-230 mm).
+  * rails and carriages follow the track radius (bogies); each track radius is slope-limited (<= 0.5 mm/mm).
 Geometry (idealised, every part at its real size; skin-facing faces sampled on a 2 mm grid = 1 point / 4 mm2 at the
 part's real radius, like tools/concept_baseline.py): K3 requirement = the first radius on a ray from GH with skin
 distance >= 2 mm and no skin over the next 15 mm; a rigid member's radius per sample = quantile q of that over the
@@ -34,8 +43,9 @@ track arcs, slide 0..Lmax, no interference between non-adjacent parts (>= 1 mm r
 half-widths + 1 mm), fit-clip frames followed on EVERY 10 fps frame (no jump > 25 deg in s, t (arc deg) or q2 since
 the last followed frame), and no metal inside the body (B.dist; skin-facing samples + the worst top/side sample).
 
-    python3 docs/concepts/models/crossed-skin-tracks.py check     # rest / overhead / across / behind on Bench(20, 40)
-    python3 docs/concepts/models/crossed-skin-tracks.py sweep     # coarse -> refine sweep on Bench(60, 160)
+    python3 docs/concepts/models/crossed-skin-tracks.py check     # best config (PARAMS) on Bench(60, 160) + rest / overhead / across / behind probes
+    python3 docs/concepts/models/crossed-skin-tracks.py sweep     # the staged sweep (stage_configs), appended to docs/concepts/sweeps/<id>.json
+    python3 docs/concepts/models/crossed-skin-tracks.py overlap   # humerus-safe vs scapula-safe zone overlap per elevation band
 """
 import json, math, os, sys, time
 import numpy as np
@@ -68,9 +78,11 @@ RHO_TI = 4.43e-3               # g/mm3
 BAR_WB = np.array([0.0, -0.0713, 0.9975]); BAR_DB = np.array([0.0, -0.9975, -0.0713])   # BOTTOM's bar (humerus frame)
 BAR_P = 40.0 * BAR_DB + 67.5 * BAR_WB
 
-PARAMS = dict(thr=13, el_off=0.0, f1c=0.0, f1s=0.0, f2c=0.0, f2s=0.0, trim_S=1,
-              th="circle", W_d=115.0, W_a=-18.0, a2=55.0, o_d=95.0, o_a=-10.0, o_A=30.0, o_B=60.0,
-              sigma=1, stack=11.0, Lmax=25.0, q=0.95, qH=0.95, slope=SLOPE, order="S_in", rmax=90.0)
+# defaults = the best configuration of the sweep (k 138, gap 108.8 on Bench(60, 160)): halo = the scapula-frame parallel
+# el 35 deg (trimmed to the scapula-safe zone), arm track = a thin loop along the deltoid meridian a -10, d 60-140
+PARAMS = dict(thr=13, el_off=0.0, f1c=0.0, f1s=0.0, f2c=0.0, f2s=0.0, trim_S=1, halo_el=35.0,
+              th="oval", W_d=115.0, W_a=-18.0, a2=55.0, o_d=100.0, o_a=-10.0, o_A=40.0, o_B=4.0,
+              sigma=-1, stack=11.0, Lmax=25.0, q=0.9, qH=0.9, slope=SLOPE, order="S_in", rmax=90.0)
 SWEEP = dict(thr=(13, 20), el_off=(-6, 8), W_d=(0, 150), W_a=(-40, 55), a2=(55, 130), sigma=(-1, 1), stack=(11, 13),
              q=(0.93, 1.0), qH=(0.93, 1.0), trim_S=(0, 1), th=("circle", "oval"))
 
@@ -133,6 +145,8 @@ def halo_curve(p):
         while j >= 0 and ok[j]: j -= 1
         el[k] = b[min(j + 1, len(b) - 1)]
     el = np.convolve(np.r_[el[-4:], el, el[:4]], np.ones(9) / 9, mode="valid")          # 9-tap circular mean
+    if p.get("halo_el") is not None:     # data-drawn variant: a parallel through the band where the humerus-safe patch meets
+        el = np.full(len(a), float(p["halo_el"]) - 4.0)                                   # the scapula-safe zone (el 30-55)
     A = a * D2R
     el = el + 4.0 + p["el_off"] + p["f1c"] * np.cos(A) + p["f1s"] * np.sin(A) + p["f2c"] * np.cos(2 * A) + p["f2s"] * np.sin(2 * A)
     el = np.clip(el, -60, 88)
@@ -305,7 +319,7 @@ class Model:
         D["inS"], D["inH"] = inS, inH
         vi = np.nonzero(valid)[0]
         T = dict(S=dict(C=CS, frame="S", R=self.RSb, key="s", tan="tS", m=inS(CS.s), arc=D["arcS"], q=p["q"],
-                        ck=("S", p["thr"], p["el_off"], p["f1c"], p["f1s"], p["f2c"], p["f2s"])),
+                        ck=("S", p["thr"], p["el_off"], p["f1c"], p["f1s"], p["f2c"], p["f2s"], p.get("halo_el"))),
                  H=dict(C=CH, frame="H", R=self.RHb, key="t", tan="tH", m=inH(CH.s), arc=D["arcH"], q=p["qH"],
                         ck=("H", p["th"], p["W_d"], p["W_a"], p["a2"], p["o_d"], p["o_a"], p["o_A"], p["o_B"])))
         D["T"] = T
@@ -316,6 +330,8 @@ class Model:
                 a_ = longest_run((rq <= p["rmax"]) & Tk["m"], C)
                 if a_ is None: D["fail"] = f"T_{nm} has no safe arc"; return D
                 D["arc" + nm] = a_; Tk["arc"] = a_; Tk["m"] = (inS if nm == "S" else inH)(C.s)
+        vi = np.array([i for i in vi if self.on_track(D, kin[i])], int)    # fit poses = poses whose crossing is on both tracks
+        if len(vi) < 5: D["fail"] = "on-track crossings in < 5 poses"; return D
         I, O = T[inn], T[out_]
         # inner radius: K3 over the carriage width (16), quantile over the closing poses, + rail height, slope-limited
         Rq = self.req_strip(I["ck"] + (CAR_W,), I["C"], CAR_W, I["frame"])
@@ -373,6 +389,14 @@ class Model:
             D["neck"] = dict(C=Cn, nrm=nrm, ang=ang, r=rN, th=th, un=un, e2=e2, local=(Dl * rN[:, None, None]).reshape(-1, 3))
         D["ok"] = True; D["secs_fit"] = round(time.time() - t0, 1)
         return D
+
+    def on_track(self, D, c):
+        """both carriages (half length CAR_L / 2) inside their track arcs"""
+        for Tk, rf in ((D["T"][D["inner"]], R_FOOT_I), (D["T"][D["outer"]], R_FOOT_O)):
+            if Tk["arc"] is None: continue
+            u = np.mod(c[Tk["key"]] - Tk["arc"][0], Tk["C"].per); e = (CAR_L / 2) / rf
+            if u < e or u > Tk["arc"][1] - e: return False
+        return True
 
     # carriage A (inner track) frame at the crossing: (p2, inner tangent, across)
     def a_frame(self, D, c):
@@ -603,7 +627,7 @@ def bench_for(fast_only=False):
     return B
 
 
-def check(nc=20, nw=40):
+def check(nc=60, nw=160):
     B = CB.Bench(nc, nw); print("bench", B.mode, len(B.poses)); M = Model(B)
     p = dict(PARAMS); r, D = run(M, p, verbose=True); print(json.dumps({k: v for k, v in r.items()}, default=str))
     probes = dict(rest=dict(plane=0, elev=5, axial=0, flex=12, pron=0), overhead=dict(plane=60, elev=160, axial=0, flex=12, pron=0),
@@ -633,72 +657,95 @@ def kin_screen(M, p):
     return dict(reach_kin=round(rk, 4), follow_kin=round(fk, 4), gap_kin=round(100 * (max(0, .95 - fk) + max(0, .90 - rk)), 2), why=why)
 
 
-def sweep(stages=("kin", "coarse", "refine")):
+def stage_configs(stage):
+    """the sweep as it was run (docs/concepts/sweeps/crossed-skin-tracks.json, in order): coarse (kinematically best
+    arm circles, untrimmed, S_in / H_in) -> coarse-rmax (tracks trimmed to their frame's safe zone) -> oval-safe (arm
+    track = a deltoid oval / thin meridian loop inside the humerus safe patch) -> halo-lowered(-fitfix) (halo moved
+    down toward the deltoid) -> refine / refine2 (quantile, rmax, halo offset, oval centre / size, stack)"""
+    ov = lambda d, a, A, Bq: dict(th="oval", o_d=float(d), o_a=float(a), o_A=float(A), o_B=float(Bq))
+    if stage == "coarse":
+        return [dict(W_d=float(d), W_a=float(a), a2=float(a2), sigma=-1, order=o, rmax=None)
+                for d, a, a2 in ((75, 20, 95), (75, -10, 95), (95, -10, 75)) for o in ("S_in", "H_in")]
+    if stage == "oval-safe":
+        return [dict(ov(d, a, A, Bq), sigma=sg, order="S_in", rmax=90.0, fitfix=1) for d, a in ((95, -10), (100, -15))
+                for A, Bq in ((40, 4), (40, 35), (25, 40), (4, 40), (30, 25)) for sg in (1, -1)]
+    if stage == "halo-lowered":
+        arms = (ov(95, -10, 40, 4), ov(95, -10, 40, 35), dict(th="circle", W_d=75.0, W_a=20.0, a2=95.0), dict(th="circle", W_d=95.0, W_a=20.0, a2=75.0))
+        return [dict(thr=t, el_off=e, sigma=sg, order="S_in", rmax=90.0, fitfix=1, **a) for t in (13, 20) for e in (-15.0, -30.0) for a in arms for sg in (1, -1)]
+    if stage == "halo-parallel":
+        arms = (ov(95, -10, 40, 4), ov(100, -10, 40, 4), ov(95, -10, 40, 35))
+        return [dict(thr=13, halo_el=float(he), sigma=sg, order="S_in", rmax=90.0, q=0.9, qH=0.9, fitfix=1, **a) for he in (35, 42, 50) for a in arms for sg in (1, -1)]
+    if stage == "parallel-refine":
+        b = dict(thr=13, halo_el=35.0, sigma=-1, order="S_in", rmax=90.0, q=0.9, qH=0.9, fitfix=1, **ov(100, -10, 40, 4))
+        return [dict(b, **ch) for ch in (dict(halo_el=25.0), dict(halo_el=30.0), dict(halo_el=30.0, o_d=105.0), dict(o_d=105.0), dict(o_d=110.0),
+                                         dict(q=0.85, qH=0.85), dict(q=0.95, qH=0.95), dict(o_A=45.0), dict(o_a=-20.0), dict(o_a=0.0), dict(o_B=10.0),
+                                         dict(f1c=6.0), dict(f1c=-6.0), dict(stack=13.0))]
+    if stage == "overhead-arm":            # arm-track loops that could still meet the halo overhead (red team: 0/41 taken at elev >= 120)
+        return [dict(thr=13, halo_el=float(he), sigma=sg, order="S_in", rmax=90.0, q=0.9, qH=0.9, fitfix=1, **a)
+                for he in (30, 35) for a in (ov(100, -10, 25, 20), ov(100, -10, 30, 28), ov(100, -10, 4, 35)) for sg in (1, -1)]
+    if stage == "refine":
+        b1 = dict(thr=13, el_off=-30.0, sigma=1, order="S_in", rmax=90.0, fitfix=1, **ov(95, -10, 40, 4))
+        b2 = dict(thr=20, el_off=-15.0, sigma=-1, order="S_in", rmax=90.0, fitfix=1, **ov(95, -10, 40, 4))
+        out = []
+        for b in (b1, b2):
+            for ch in (dict(rmax=105.0), dict(rmax=120.0), dict(q=0.9, qH=0.9), dict(q=0.98, qH=0.98), dict(el_off=b["el_off"] - 8), dict(el_off=b["el_off"] + 8),
+                       dict(o_A=50.0), dict(o_a=-25.0), dict(o_a=5.0), dict(o_d=105.0), dict(o_B=12.0), dict(stack=13.0)):
+                out.append(dict(b, **ch))
+        b3 = dict(thr=13, el_off=0.0, sigma=-1, order="S_in", rmax=90.0, fitfix=1, **ov(100, -15, 40, 4))
+        out += [dict(b1, q=0.9, qH=0.9, o_B=12.0), dict(b1, q=0.85, qH=0.85), dict(b1, q=0.9, qH=0.95), dict(b1, q=0.95, qH=0.9)]
+        out += [dict(b3, **ch) for ch in (dict(q=0.9, qH=0.9), dict(q=0.85, qH=0.85), dict(o_B=12.0), dict(el_off=-8.0), dict(o_d=105.0, o_a=-20.0),
+                                          dict(o_A=45.0), dict(sigma=1, q=0.9, qH=0.9))]
+        out += [dict(b2, q=0.9, qH=0.9, o_d=105.0), dict(b2, q=0.85, qH=0.85), dict(b2, q=0.9, qH=0.9, o_d=105.0, o_B=12.0),
+                dict(b2, q=0.9, qH=0.9, o_d=100.0), dict(b2, q=0.9, qH=0.9, o_d=110.0)]
+        return out
+    return []
+
+
+def sweep(stages=("coarse", "oval-safe", "halo-lowered", "refine", "halo-parallel", "parallel-refine", "overhead-arm")):
+    """re-run the staged sweep on Bench(60, 160), appending to the sweep JSON (configs already in it are skipped)"""
     B = CB.Bench(60, 160); print("bench", B.mode, len(B.poses), flush=True); M = Model(B)
     rows = json.load(open(SWEEP_JSON)) if os.path.exists(SWEEP_JSON) else []
-    done = {json.dumps(r["params"], sort_keys=True): r for r in rows}
+    done = {json.dumps(r["params"], sort_keys=True) for r in rows}
+    for st in stages:
+        for g in stage_configs(st):
+            p = dict(PARAMS, **g); key = json.dumps(p, sort_keys=True)
+            if key in done: continue
+            r, D = run(M, p)
+            e = dict(k=len(rows), t=now(), params=p, inband14=r["inband14"], inband10=r["inband10"], reach=r["reach"], follow=r["follow"],
+                     contact=r["contact"], gap=r["gap"], stage=st, why=r.get("why"), mode=B.mode)
+            rows.append(e); done.add(key)
+            json.dump(rows, open(SWEEP_JSON + ".tmp", "w"), indent=0); os.replace(SWEEP_JSON + ".tmp", SWEEP_JSON)
+            print(f"[{e['k']}] {st} gap {e['gap']} reach {e['reach']} follow {e['follow']} ib14 {e['inband14']} | {short(p)}", flush=True)
+    best = min(rows, key=lambda e: e["gap"]); print("BEST", json.dumps(best)); return best, rows
 
-    def ev(p, stage):
-        p = dict(PARAMS, **p); key = json.dumps(p, sort_keys=True)
-        if key in done: return done[key]
-        r, D = run(M, p)
-        e = dict(k=len(rows), t=now(), params=p, inband14=r["inband14"], inband10=r["inband10"], reach=r["reach"], follow=r["follow"],
-                 contact=r["contact"], gap=r["gap"], stage=stage, why=r.get("why"), arcS_deg=r.get("arcS_deg"), arcH_deg=r.get("arcH_deg"),
-                 rhoS=r.get("rhoS"), rhoH=r.get("rhoH"), mass_g=r.get("mass_g"), secs=r.get("secs"), mode=B.mode)
-        rows.append(e); done[key] = e
-        os.makedirs(os.path.dirname(SWEEP_JSON), exist_ok=True)
-        json.dump(rows, open(SWEEP_JSON + ".tmp", "w"), indent=0); os.replace(SWEEP_JSON + ".tmp", SWEEP_JSON)
-        print(f"[{e['k']}] {stage} gap {e['gap']:.1f} reach {e['reach']:.3f} follow {e['follow']:.3f} ib14 {e['inband14']:.3f} "
-              f"ib10 {e['inband10']:.3f} contact {e['contact']:.3f} | {short(p)} | {e['why']} {e['secs']} s", flush=True)
-        return e
 
-    kin = json.load(open(KIN_JSON)) if os.path.exists(KIN_JSON) else []
-    if "kin" in stages:                                         # stage 0: kinematic screen of the arm track and halo
-        seen = {json.dumps(k["params"], sort_keys=True) for k in kin}
-        grid = []
-        for thr in (13, 20):
-            for Wd in (75, 90, 105, 120):
-                for Wa in (-40, -10, 20, 55):
-                    for a2 in (50, 70, 90, 115):
-                        for sg in (1, -1):
-                            grid.append(dict(PARAMS, thr=thr, W_d=float(Wd), W_a=float(Wa), a2=float(a2), sigma=sg))
-        for thr in (13, 20):                                    # the deltoid-oval variant
-            for (od, oa, oA, oB) in ((95, -10, 30, 60), (95, -10, 40, 80), (105, 0, 30, 60), (85, -20, 25, 70), (100, 10, 35, 90)):
-                for sg in (1, -1):
-                    grid.append(dict(PARAMS, thr=thr, th="oval", o_d=float(od), o_a=float(oa), o_A=float(oA), o_B=float(oB), sigma=sg))
-        for p in grid:
-            if json.dumps(p, sort_keys=True) in seen: continue
-            k = kin_screen(M, p); k["params"] = p; kin.append(k)
-            print("kin", short(p), k["reach_kin"], k["follow_kin"], k["gap_kin"], flush=True)
-            os.makedirs(os.path.dirname(KIN_JSON), exist_ok=True); json.dump(kin, open(KIN_JSON, "w"), indent=0)
-    if "coarse" in stages:                                      # stage 1: full bench on the kinematically best shapes
-        kin.sort(key=lambda k: k["gap_kin"])
-        picked = []
-        for k in kin:
-            sh = (k["params"]["th"], k["params"]["W_d"], k["params"]["W_a"], k["params"]["a2"], k["params"]["o_d"], k["params"]["o_B"], k["params"]["sigma"])
-            if sh in [x[0] for x in picked]: continue
-            picked.append((sh, k["params"]))
-            if len(picked) >= 12: break
-        for sh, p in picked:
-            ev(dict(p), "coarse")
-    if "refine" in stages:                                      # stage 2: around the best: radial stack, quantiles, halo trim / offset
-        for _ in range(3):
-            best = sorted(rows, key=lambda e: e["gap"])[:3]
-            for e in best:
-                p0 = e["params"]
-                for ch in (dict(q=0.97), dict(q=0.93), dict(qH=0.97), dict(qH=0.93), dict(stack=15.0), dict(trim_S=1 - p0["trim_S"]),
-                           dict(el_off=p0["el_off"] + 4), dict(el_off=p0["el_off"] - 4), dict(thr=33 - p0["thr"]) if p0["thr"] in (13, 20) else {},
-                           dict(a2=p0["a2"] + 8), dict(a2=p0["a2"] - 8), dict(W_d=p0["W_d"] + 8), dict(W_d=p0["W_d"] - 8),
-                           dict(W_a=p0["W_a"] + 12), dict(W_a=p0["W_a"] - 12)):
-                    if not ch: continue
-                    if p0["th"] == "oval" and any(k in ch for k in ("a2", "W_d", "W_a")): continue
-                    ev(dict(p0, **ch), "refine")
-    best = sorted(rows, key=lambda e: e["gap"])[0]
-    print("BEST", json.dumps(best)); return best, rows
+def zone_overlap(R=90.0):
+    """the measurement behind the verdict: per bench pose, the share of the humerus-safe patch (humerus-frame
+    directions whose q95 K3 requirement <= R) whose scapula-frame image lands in the scapula-safe zone (same rule);
+    a crossing between a scapula-fixed and a humerus-fixed member can only be in band inside this overlap"""
+    sys.path.insert(0, os.path.join(REPO, "tools")); import concept_kit as K
+    B = K.bench(60, 160); F = K.frames(B); P = len(B.poses)
+    d, a = np.meshgrid(np.arange(30, 171, 5.0), np.arange(-180, 180, 5.0), indexing="ij"); U = K.wdir(d.ravel(), a.ravel())
+    req = K.requirement(B, np.repeat(np.arange(P), len(U)), np.einsum("pij,nj->pni", F.RH, U).reshape(-1, 3)).reshape(P, len(U))
+    safeH = np.quantile(np.where(np.isfinite(req), req, 400), 0.95, axis=0) <= R
+    img = np.einsum("pji,pjk,nk->pni", F.RS, F.RH, U[safeH])
+    el = np.degrees(np.arcsin(np.clip(img[..., 1], -1, 1))); az = np.degrees(np.arctan2(img[..., 2], -img[..., 0]))
+    ga, ge = np.arange(-180, 180, 6.0), np.arange(-90, 91, 6.0); A_, E_ = np.meshgrid(ga, ge, indexing="ij"); Us = K.bvec(A_.ravel(), E_.ravel())
+    rs = K.requirement(B, np.repeat(np.arange(P), len(Us)), np.einsum("pij,nj->pni", F.RS, Us).reshape(-1, 3)).reshape(P, len(Us))
+    safeS = (np.quantile(np.where(np.isfinite(rs), rs, 400), 0.95, axis=0) <= R).reshape(A_.shape)
+    ov = safeS[np.clip(np.round((az + 180) / 6).astype(int), 0, len(ga) - 1), np.clip(np.round((el + 90) / 6).astype(int), 0, len(ge) - 1)]
+    share = ov.mean(1); elev = np.array([q["elev"] for q in B.poses])
+    print(f"humerus-safe directions: {safeH.sum()} of {len(U)}")
+    for lo, hi in ((0, 30), (30, 60), (60, 90), (90, 120), (120, 180)):
+        m = (elev >= lo) & (elev < hi)
+        cz = [K.unit(img[i][ov[i]].mean(0)) for i in np.nonzero(m)[0] if ov[i].any()]
+        cz = np.array(cz); cel = np.degrees(np.arcsin(cz[:, 1])); caz = np.degrees(np.arctan2(cz[:, 2], -cz[:, 0]))
+        print(f"elev {lo}-{hi}: {m.sum()} poses, overlap share median {np.median(share[m]):.2f}, poses with >= 5 % overlap "
+              f"{np.mean(share[m] >= 0.05):.2f}, overlap centroid az {np.percentile(caz, [10, 50, 90]).round(0)} el {np.percentile(cel, [10, 50, 90]).round(0)}")
 
 
 def short(p):
-    s = f"thr{p['thr']} el{p['el_off']:+.0f} " + (f"W({p['W_d']:.0f},{p['W_a']:.0f}) a2 {p['a2']:.0f}" if p["th"] == "circle" else
+    s = (f"par{p['halo_el']:.0f} " if p.get("halo_el") is not None else f"thr{p['thr']} el{p['el_off']:+.0f} ") + (f"W({p['W_d']:.0f},{p['W_a']:.0f}) a2 {p['a2']:.0f}" if p["th"] == "circle" else
                                                   f"oval({p['o_d']:.0f},{p['o_a']:.0f},{p['o_A']:.0f},{p['o_B']:.0f})")
     return s + f" sg{p['sigma']:+d} st{p['stack']:.0f} q{p['q']} qH{p['qH']} trim{p['trim_S']} rmax{p.get('rmax')} {p.get('order')}"
 
@@ -706,4 +753,5 @@ def short(p):
 if __name__ == "__main__":
     a = sys.argv[1:]
     if not a or a[0] == "check": check()
-    elif a[0] == "sweep": sweep(tuple(a[1:]) if len(a) > 1 else ("kin", "coarse", "refine"))
+    elif a[0] == "sweep": sweep(tuple(a[1:])) if len(a) > 1 else sweep()
+    elif a[0] == "overlap": zone_overlap()
