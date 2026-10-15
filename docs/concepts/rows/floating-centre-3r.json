@@ -5,7 +5,7 @@
  "family": "spherical 3R + passive base float",
  "active_dof": 3,
  "passive_dof": 3,
- "status": "screened",
+ "status": "refuted",
  "t_ideated": null,
  "t_screened": "2026-10-15T19:37:06Z",
  "reach": 0.9062,
@@ -14,11 +14,11 @@
  "inband10": 0.2269,
  "contact": 0.0,
  "gap": 58.17,
- "v_reach": null,
- "v_follow": null,
- "v_inband14": null,
- "v_inband10": null,
- "v_gap": null,
+ "v_reach": 0.5,
+ "v_follow": 0.7182,
+ "v_inband14": 0.1725,
+ "v_inband10": 0.1292,
+ "v_gap": 136.31,
  "n_configs": 41,
  "verdict": "Not worth a GPU sweep as a morphology. Plain bench: gap 58.17 vs its own parent's 65.05 on the same code, but the gain is the skin-contoured float plate's samples (0.83 in band); the chain itself gets worse (chain-only in-band 14 0.250 -> 0.161, plate-excluded gap 73.95). Slip bench (the float's real claim): direction right (in-band 0.35-0.41 vs cuff-slide parent 0.19-0.20) but the travel the slip law needs (+-20 tangent, 6-9 mm normal) makes the plate too big: best 73.46 (central) / 136.74 (high) vs the cuff-slide parent's 71.03 / 70.42.",
  "limiter": "A flat slide face must clear the skin under its whole footprint: around J1 the skin ridge is tilted 17-42 deg to it, so under J1 hub 1 rises +13 mm at +-4 mm travel and +58 mm at +-12 (link 1 0 % in band); beside J1 (stage at az 0 / el 35 on the scapula) link 1 must pass over the stage + normal travel (link 1 0.25 -> 0.0 in band). Under slip, +-15..20 mm travel puts the plate's displaced slab under link 1 / the bracket: reach 0.39-0.81, follow 0.52-0.83 (central and high laws).",
@@ -48,5 +48,29 @@
    "parent_cuff_slides": 70.42,
    "float_best": 136.74
   }
+ },
+ "verification": {
+  "bench": "Bench(110,360) exact (CB_EXACT=1)",
+  "fixes": [
+   "bracket stage end raised onto the stage + normal travel + 1 mm",
+   "K6 re-run at 1 mm radial clearance"
+  ],
+  "v_contact": 0.0038,
+  "v_inband14_chain": 0.0599,
+  "v_gap_chain_only": 147.57,
+  "inband_member": {
+   "plate": 0.7691,
+   "bracket": 0.0282,
+   "hub1": 1.0,
+   "hub2": 0.0,
+   "hub3": 0.0,
+   "link1": 0.0604,
+   "link2": 0.0,
+   "neck": 0.0
+  },
+  "layout_r": [
+   120.0,
+   200.0
+  ]
  }
 }

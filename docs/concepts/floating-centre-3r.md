@@ -91,3 +91,40 @@ SMALL float (+-4..8 mm) beside J1 removes the low-elevation part of R10 at almos
 chain-only 0.16) but needs the cuff slides anyway overhead, so it does not simplify the cuff.
 
 ![sketch](img/floating-centre-3r.png)
+
+## Verification (adversarial verifier, 2026-10-15)
+
+Verdict: **refuted**. The corrected gap on Bench(110, 360), exact path, is **136.31** (baseline 68.93; claimed 58.17).
+The best configuration (sweep k 28: parent r20 s1414 #4, q 1.0, stage beside J1 at az 0 / el 35, +-8 / 4 mm) was
+refitted on each bench by the model's own `evaluate` (plate constants, re-layout loop, kit K3 march, K2 dense, K6).
+
+| check | result |
+|---|---|
+| 3 ACTIVE DOF, no undetermined passive coordinate | holds: the arm member is rigid on the cuff, so the chain centre is a fixed point of the humerus frame and the float's 3 translations are set by c = GH (3P + 3R = 6 against the cuff's 6). On the plain bench the float is at 0. |
+| closure residual | 0.0 deg (closed form); J2 fold margin >= 10.1 deg |
+| branch continuity (K2 dense) | 0 flips on both benches |
+| part-part clearance | K6 re-run with 1 mm RADIAL clearance (the kit enforces 0.5): no extra pose lost at 0.99 mm. At exactly 1.00 mm, 83 poses fail on float round-off, because `over` builds exactly 1 mm. |
+| **missing part height: the bracket's stage end** | The bracket (J1's lower member) leaves the XY stage at JF. JF is hubless, and `over` exempts the shared-joint zone, so the bracket's first ~12 mm sat at skin level, inside the plate's 24 mm slab. Fix: that end ramps to the plate + slab + normal travel + 1 mm. Gap 58.17 -> **58.62** (Bench(60,160), fast); bracket in band 0.090 -> 0.045. |
+| plate in-band artefact | Confirmed as the author reported. The chain-only gap (plate samples excluded, same poses) is 74.54 on Bench(60,160), against 58.62 with the plate. |
+| grid-cache artefact (CB_EXACT=1 on Bench(60,160)) | **not completed**: the exact path took > 10 min per configuration at load ~12, and the run was stopped by its time limit. The large-bench run below is on the exact path anyway. |
+| **re-measure, Bench(110, 360), exact, with the fixes** | **gap 136.31**: reach 0.500, follow 0.718, in-band 14 0.1725, in-band 10 0.1292, contact 0.0038; chain-only gap 147.57 |
+
+On the larger bench the chain falls apart in the parent's own weak member, not in the float. Hub 2 and link 2 go out
+of band: the re-layout loop moves link 1 to 120 mm and link 2 to the 200 mm cap. K6 then loses 39 % of the closing
+poses to collisions (collide 0.387), the neck re-lays at 10.8 mm spacing, and the audit flags it (`honest` false).
+Per-member in-band 14: plate 0.77, hub 1 1.00, link 1 0.06, bracket 0.03, and 0 for hub 2, hub 3, link 2 and the neck.
+This is the "infinite K4 fit for hub 2 at q 1.0" the author found on four other parents. With 470 poses, it now hits
+r20 s1414 #4 too: some new pose puts J2's axis through the body. The plate is the only member that stays in band.
+
+Holes that remain:
+* The parent alone (float = 0) was not re-run on Bench(110, 360). That run costs ~80 min on the exact path. It most
+  likely collapses the same way, since the failure is in hub 2 / link 2, so the large-bench number condemns the q 1.0
+  spherical chain as much as the float. The baseline's 68.93 is itself a Bench(60, 160) number.
+* The normal slide (+-4 mm along the slide-face normal) has no guide hardware in the model. Only its travel is
+  reserved, as the 5 mm gap under the bracket.
+* The kit's `over` builds exactly 1 mm. A K6 at a literal ">= 1 mm" fails on round-off: use 0.99 or build 1.05.
+* Speed: the exact path's 24-pose skin cache thrashes when the K3 march sweeps all poses. Keeping every posed skin cut
+  this run from > 30 min stalled to 81 min, so a 470-pose fast cache is what large-bench verification needs.
+
+Scripts: the verifier's scratchpad `vfc/verify.py` (monkey-patches only the verifier's copy of the model: the bracket
+ramp, the skin cache).
