@@ -71,7 +71,7 @@ seed-offset-3r-slides k 403 lines to 4e-5 mm and its VModel number exactly (54.9
 | same directions, offsets x1.5 / x2 / x3 / x4 | 58.92 / 94.40 / 141.97 / 123.02 | | 0.54-0.46 | | 0.72-0.38 | | |
 | best of 240-config DOE (free lines up to 30 mm, J1 pinned or not, neck 10-35, travel cap 8-40) | 49.12 | 82.14 | 0.663 | | 0.749 | | 0.036 |
 | best of 96-config reach-side DOE (seed-offset directions, free lines) | 54.96 (= k 403) | | | | | | |
-| best of CMA-ES (local, 48 tries from k 1, sigma 2 deg / 3 mm) | 39.89 | 85.49 | 0.650 | | 0.769 | | |
+| best of CMA-ES from k 1 (local 48 tries sigma 1.2 deg / 1.8 mm; farm 64 tries sigma 1.6 deg / 2.4 mm) | 39.89 / 40.58 | 85.49 | 0.650 | | 0.769 | | |
 | fold-frontier seed a1 60 deg (fold only 9 poses), both J2 branches, zero offsets | 119.16 / 148.39 | | 0.650 / 0.588 | | 0.326 / 0.411 | | 0.20 / 0.37 |
 
 Best configuration (k 1): J1 line bvec(108.72, 62.15) offset (-4.55, -2.32) mm; J2 rest line bvec(32.35, 53.72) offset
@@ -98,8 +98,8 @@ Over all tries in order (DOE 240 + reach-side DOE 103 + CMA): best gained **0.0*
 (limit 1), **0.0** over the last third (limit 0.5), top-5 spread **1.54** (limit 3) -> **converged** by the rule. Honest
 reading: the best is the seed (k 1), a CMA optimum of the relative's search re-measured under the verifier checks; my
 search (DOE + 48 local CMA tries + the fold-seed CMA below) never improved on it, so the morphology is screened at the
-relative's number, not above it. A farm CMA (16 x 16, sigma 2-3 mm) was queued at 23:11 UTC and had not returned a
-generation by 23:45 (farm queue): its tries append to the sweep log when they land.
+relative's number, not above it. The farm CMA (16 per generation, sigma 1.6 deg / 2.4 mm, 4 generations, queued 23:11,
+landed 23:37-23:43 behind the shared queue) reached 40.58; the local CMA (12 per generation, 4 generations) 39.89.
 
 ## Red team (best k 1)
 
