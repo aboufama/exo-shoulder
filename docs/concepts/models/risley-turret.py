@@ -13,11 +13,13 @@ DOF: a spherical 3R with a short first link: b fixed in S, W fixed in H, p2 by t
 Parts, every one at real size (2 mm sample grid = 1 pt / 4 mm2 on every skin-facing face):
   ring1  flat annulus about b, radii r_in..r_out, axial section ring_h (8 mm: lower race on S, upper race on L1);
          lower face fitted by the K4 march of every annulus sample along b (kind 'flat');
-  ring2  same about p2. Its level h2 = max(K4 skin fit, stack): every ring-2 lower-face point over ring 1's footprint
+  ring2  same about p2 (j2hub=1: an O20 v5 hub instead - the variant that removes the ring-2 limiter, best config). Its level h2 = max(K4 skin fit, stack): every ring-2 lower-face point over ring 1's footprint
          (lateral r_in - 1 .. r_out + 1 from b) sits >= j2_gap above ring 1's top (h1 + ring_h). Solved exactly in the
          ring pair's own frame (constant: both rings are bodies of revolution, the angle b-p2 is A1), two-pass: pass 1
          fits h1 and h2's skin level, pass 2 rebuilds with h2 (a ramp on ring1's level). The overlap lens (area of
          ring 2's lower face over ring 1's upper race) is reported; < lens_min mm2 -> no L1 joint -> config invalid.
+  bridge (L1) 14 x 3 strap between lugs on J1's upper race and J2's lower race when the races share no >= lens_min
+         bolting lens (always, measured); fake joints L1a / L1b for K6.
   link2  strap width x t (14 x 3 Ti) on the great circle from the ring-2 rim point toward W (a lug on the outer wall of
          J2's upper race: underside at axial h2 + ring_h/2) to the J3 hub (upper member, F3 + 3.15); K3 underside,
          60 deg climb, passes over ring 1 and the neck (>= 1 mm, `over`). The rigid lug join ring2/link2 is the fake
@@ -27,7 +29,7 @@ Taken: K1 closure with margin, dense K2 continuity (every joint axis), K6 collis
 
     OMP_NUM_THREADS=1 nice -n 10 python3 docs/concepts/models/risley-turret.py check [key=value ...]
     ... sweep coarse|refine|red   (appends to docs/concepts/sweeps/risley-turret.json)
-    ... write                     (row from the best sweep entry, re-evaluated)
+    ... red | sketch              (red team / matplotlib sketch of the best sweep entry)
 """
 import itertools, json, math, os, sys
 import numpy as np
