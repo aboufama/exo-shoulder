@@ -36,7 +36,13 @@ carriage inside its rail; fit-clip frames followed on EVERY 10 fps frame of the 
 the last followed frame, as seed-2r-cring); no interference between parts without a sliding interface (volume samples
 >= 1 mm apart). Contact: any skin-facing sample < 0 mm, plus top / edge samples (one appended when inside).
 
-    python3 docs/concepts/models/seed-arc-rails.py check     # default design on Bench(20, 40)
+Revisions (each sweep entry carries `rev`): rev 1 fitted the link straps to the skin only (links did not reach a rail
+pushed far out - optimistic, superseded); rev 2a joined them at the rail level (they cut through the rail their
+carriage rides on - every pose interfered); rev 3 (current): each link leaves its carriage over the rail (underside >=
+rail top + 1 mm) and runs at least on the straight ramp to the radius of the part at its other end, lifted wherever the
+skin needs more. Known approximation: a strap's along / across sampling uses the mean radius of its two ends.
+
+    python3 docs/concepts/models/seed-arc-rails.py check     # best design (PARAMS) on Bench(60, 160)
     python3 docs/concepts/models/seed-arc-rails.py sweep     # coarse -> refine sweep on Bench(60, 160)
 """
 import itertools, json, math, os, sys, time
@@ -61,9 +67,12 @@ GAP_PART = 1.0                                  # mm: clearance between parts wi
 Y_ARM = np.array([0.0, -1.0, 0.0])              # humerus long axis in the HG frame (concept_baseline convention)
 Z_ARM = np.array([0.0, 0.0, 1.0])               # azimuth reference on the C-ring (HG frame)
 
-# spec layout: great-circle rail 1, meridian rail 2 through carriage 1 (a12 = 90, phi1 = 90, rho2 = 90)
-PARAMS = dict(u_az=123.0, u_el=44.4, a12=90.0, a23=90.0, branch=1, rho1=90.0, phi1=90.0, rho2=90.0, phi2=75.0, rho3=50.0,
-              ring_c=None, ring_on="cuff", cuff_az=90.0, cov=0.95, p=100.0, br_up=1, R_est=60.0, w_delta=0.0, w_az=0.0)
+# best measured (rev 3, sweep k369, Bench(60, 160)): crowns about the champion 3R axes with the base axis turned to az -30.
+# The catalogue spec layout is SPEC (great-circle rails + C-ring on the humerus long axis; measured: no finite radius).
+PARAMS = dict(u_az=-30.0, u_el=80.68, a12=76.9, a23=66.75, branch=-1, rho1=12.0, phi1=0.0, rho2=20.0, phi2=0.0, rho3=12.0,
+              ring_c=0.0, ring_on="cuff", cuff_az=90.0, cov=1.0, p=98.0, br_up=0, R_est=60.0, w_delta=86.33, w_az=21.83)
+SPEC = dict(PARAMS, u_az=123.0, u_el=44.4, a12=90.0, a23=90.0, branch=1, rho1=90.0, phi1=90.0, rho2=90.0, phi2=75.0, rho3=50.0,
+            ring_c=None, cov=0.95, p=100.0, br_up=1, w_delta=0.0, w_az=0.0)
 SWEEP = dict(u_az=(0, 360), u_el=(-90, 90), a12=(60, 100), a23=(60, 100), branch=(-1, 1), rho1=(15, 90), phi1=(-90, 90),
              rho2=(15, 90), phi2=(-180, 180), rho3=(25, 65), ring_c=(-90, 90), ring_on=("cuff", "body2"), cuff_az=(-180, 180),
              cov=(0.8, 1.0), p=(50, 100), br_up=(0, 1))
@@ -125,9 +134,10 @@ def arc_dirs(a, b, rho, t0, t1, r, width, step=SP):
     return unit(D[:, None, :] + c[None, :, None] * E[:, None, :])
 
 
-def gc_dirs(x0, x1, s0_mm, s1_mm, r, width=LK_W, step=SP):
-    """strap on the great circle x0 -> x1, from s0_mm past x0 to s1_mm short of x1 (sphere radius r): (n, nc, 3) or None"""
-    ang = math.acos(float(np.clip(x0 @ x1, -1, 1))); a0 = s0_mm / r; a1 = ang - s1_mm / r
+def gc_dirs(x0, x1, s0_mm, s1_mm, r, width=LK_W, step=SP, r0=None, r1=None):
+    """strap on the great circle x0 -> x1, from s0_mm past x0 (at radius r0) to s1_mm short of x1 (at radius r1); r = mean
+    radius for the along / across sampling: (n, nc, 3) or None"""
+    ang = math.acos(float(np.clip(x0 @ x1, -1, 1))); a0 = s0_mm / (r0 or r); a1 = ang - s1_mm / (r1 or r)
     if a1 - a0 < step / r: return None
     t = unit(x1 - (x1 @ x0) * x0); nrm = unit(np.cross(x0, t))
     s = np.linspace(a0, a1, max(2, int(math.ceil((a1 - a0) * r / step)) + 1))
@@ -258,11 +268,11 @@ class Design:
         a0, a1_ = self.att + self.rail2[0], self.att + self.rail2[1]
         S["rail2"] = arc_dirs(self.u2, self.e2, p["rho2"] * D2R, a0 * D2R, a1_ * D2R, R2, RAIL_W)
         att = math.cos(p["rho2"] * D2R) * self.u2 + math.sin(p["rho2"] * D2R) * perp(self.c1, self.u2)
-        S["link1"] = gc_dirs(self.c1, att, CAR_W / 2 + 0.5, RAIL_W / 2 + 0.5, (R1 + R2) / 2) if self.link1_len() > CAR_W / 2 + RAIL_W / 2 + 2 else None
+        S["link1"] = gc_dirs(self.c1, att, CAR_W / 2 + 0.5, RAIL_W / 2 + 0.5, (R1 + R2) / 2, r0=R1, r1=R2) if self.link1_len() > CAR_W / 2 + RAIL_W / 2 + 2 else None
         S["car2"] = block_dirs(self.d2, unit(np.cross(self.u2, self.d2)), perp(self.u2, self.d2), R2)
         tdir = perp(self.p3, self.d2); t2 = unit(np.cross(self.u2, self.d2)); n2 = perp(self.u2, self.d2)
         foot = min(CAR_L / 2 / max(abs(tdir @ t2), 1e-6), CAR_W / 2 / max(abs(tdir @ n2), 1e-6))
-        S["link2"] = gc_dirs(self.d2, self.g0, foot + 0.5, CAR_W / 2 + 0.5, (R2 + R3) / 2)
+        S["link2"] = gc_dirs(self.d2, self.g0, foot + 0.5, CAR_W / 2 + 0.5, (R2 + R3) / 2, r0=R2, r1=R3)
         rt = unit(np.cross(self.p3, self.g0))
         if p["ring_on"] == "body2":                                              # ring on body 2, carriage on the cuff (arm frame)
             S["ring"] = arc_dirs(self.p3, perp(self.g0, self.p3), p["rho3"] * D2R, self.ring[0] * D2R, self.ring[1] * D2R, R3, RAIL_W)
@@ -306,6 +316,15 @@ class Design:
         pc = lambda x: np.nan_to_num(np.minimum(np.percentile(np.minimum(x, 999.0), q, axis=0) + CLEAR, 999.0), nan=999.0)
         self.R = {g: float(pc(need[g][valid])) if valid.any() else 999.0 for g in self.GROUPS}
         self.RL = {k: (pc(np.array(v)) if v else None) for k, v in self.lk.items()}
+        # rev 2: a link must JOIN the parts it connects. Its underside runs at least on the straight ramp (along the
+        # strap) from the radius of the part at one end to the part at the other (flush with their undersides; over
+        # carriage 2's top when br_up), lifted wherever the skin needs more. Rev 1 fitted the strap to the skin only,
+        # so a rail pushed far out (R2 ~170 mm) hung in the air with its links still on the skin.
+        # a link leaves its carriage from the top, over the rail the carriage rides on (underside >= rail top + 1 mm)
+        ends = dict(link1=(self.R["R1"] + RAIL_T + GAP_PART, self.R["R2"]),
+                    link2=(self.R["R2"] + (CAR_T if self.p["br_up"] else RAIL_T + GAP_PART), self.R["R3"] + RAIL_T + GAP_PART))
+        for k, (ra, rb) in ends.items():
+            if self.RL[k] is not None: self.RL[k] = np.maximum(self.RL[k], np.linspace(ra, rb, len(self.RL[k])))
         if self.p["br_up"] and self.RL["link2"] is not None: self.RL["link2"] = np.maximum(self.RL["link2"], self.R["R2"] + CAR_T)
 
     def _need(self, i, groups, RSi, lo=20.0, hi=250.0, it=60):
@@ -434,6 +453,7 @@ def metal(pose, frames, params, _cache={}):
     return _cache[key].metal(i)[0]
 
 
+REV = 3                                         # model revision written into each sweep entry (rev 1: links not joined to the rails' radii)
 SWEEP_OUT = os.path.join(REPO, "docs", "concepts", "sweeps", ID + ".json")
 KEYS = ('u_az', 'u_el', 'a12', 'a23', 'w_delta', 'w_az', 'branch', 'rho1', 'phi1', 'rho2', 'phi2', 'rho3', 'ring_c', 'ring_on', 'cuff_az', 'cov', 'p', 'br_up')
 
@@ -447,7 +467,7 @@ def sweep(configs, B, out=SWEEP_OUT, tag="", passes=2, ps=None):
         except Exception as e:
             import traceback; traceback.print_exc(); print("ERR", p, e, flush=True); continue
         for r, pq in res:
-            row = dict(k=len(rows), t=time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()), params=pq, inband14=r["inband14"], inband10=r["inband10"],
+            row = dict(k=len(rows), t=time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()), rev=REV, params=pq, inband14=r["inband14"], inband10=r["inband10"],
                        reach=r["reach"], follow=r["follow"], contact=r["contact"], gap=r["gap"], why=r["why"], shape=r["shape"], mode=r["mode"], stage=tag)
             rows.append(row); json.dump(rows, open(out + ".tmp", "w"), indent=0); os.replace(out + ".tmp", out)
             print(f"[{row['k']}] gap {r['gap']:.1f} reach {r['reach']:.3f} follow {r['follow']:.3f} ib14 {r['inband14']:.3f} ib10 {r['inband10']:.3f} "
@@ -476,8 +496,8 @@ def stage_configs(stage, rows=None):
 if __name__ == "__main__":
     a = sys.argv[1:]
     if not a or a[0] == "check":
-        B = CB.Bench(n_clip=20, n_ws=40)
-        sweep([dict(PARAMS)], B, out=os.path.join(os.environ.get("ARC_TMP", "/tmp"), "arc_check.json"), tag="check", ps=[90, 100])
+        B = CB.Bench(n_clip=60, n_ws=160)                                  # fast when the grid cache exists
+        sweep([dict(PARAMS)], B, out=os.path.join(os.environ.get("ARC_TMP", "/tmp"), "arc_check.json"), tag="check", ps=[PARAMS["p"]])
     elif a[0] == "sweep":
         B = CB.Bench(n_clip=60, n_ws=160); print("bench mode", B.mode, flush=True)
         for st in (a[1:] or ["A", "B", "C"]):

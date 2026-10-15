@@ -22,8 +22,8 @@
 4. **What, other than me, shows the number is right.** tools/concept_bench.py (same metrics and poses as every other
    concept), the swarm's adversarial verifier, and a red-team pose list (rest, 170 deg overhead flexion/abduction,
    across-the-body adduction, hand behind the back) written below with the reason each fails or passes. The hub-like
-   limit (rho ~ 12 deg) was run first as a calibration against the baseline (68.9): it lands at 80.7 at p100, the
-   same family, which shows the model is not flattering itself.
+   limit (rho ~ 12 deg) on the champion's own axes was run as a calibration against the baseline (68.9): it lands at
+   72.7-81 (rev 3), the same family, which shows the model is not flattering itself.
 
 ## Morphology and model
 
@@ -46,4 +46,59 @@ Spec changes, each measured (docs/concepts/sweeps/seed-arc-rails.json, stage tag
 Model file: docs/concepts/models/seed-arc-rails.py (`check`, `sweep`; task API `metal(pose, frames, params)`).
 Radii are refitted twice so carriage and strap footprints are at their real size at the fitted radius.
 
-RESULTS_PLACEHOLDER
+## Results (Bench(60, 160), fast grid; baseline spherical 3R = 68.93)
+
+Best, CONVERGED (sweep k438 / k441, stage F, radius fit iterated 3-4 passes to a fixed point): **gap 73.0** -
+reach 0.894, follow 1.000, inband14 0.186, inband10 0.097, contact 0.010, at p98. Worse than the baseline (68.93).
+Geometry (PARAMS in the model): rails as small crowns (rho1 12, rho2 20, rho3 12 deg) about the champion's axes with the
+base axis turned to az -30 (u_el 80.68, a12 76.9, a23 66.75, rail-3 axis 86.33 deg from the humerus long axis, az
+21.83, branch -1); radii R1 61.6, R2 170.9, R3 74.7 mm; spans rail 1 360 deg (a full ring), rail 2 154, rail 3 ~300.
+449 sweep entries (A spec, B crowns, C refine, D axes, E re-measure, F/G converged checks). Corrections, in order,
+all found by red-teaming my own best: rev 1 left the links on the skin while their rail hung 17 cm out (reported 46.7 -
+wrong); rev 2a joined links at rail level (they cut their own rail - every pose interfered); rev 3 with the default 2
+radius passes reported 57.3 for this geometry (k369) but the radius fit was not converged (pass 2 sized the parts at
+the p100 radii); iterated to a fixed point the same geometry scores 73.0, and the next three rev-3 geometries 78.9-89
+(stage G; some diverge, R1 running to 130-160 mm). Only the converged numbers are claimed.
+
+The converged best is worse than the baseline on inband (0.19 vs 0.44) and better on reach / contact (0.89 / 0.010 vs
+0.775 / 0.10): the J2 rail and its carriage sit 17 cm from GH, more than 3 cm off the skin everywhere (rail 2,
+carriage 2, link 1, link 2 = 57 % of the metal, ~0 % in band) - against the user's 1 cm rule in spirit as well.
+
+### Measured limiter
+* **The spec as written has no finite radius** (stage A, 30 entries): great-circle rails need 177-275 deg of arc about
+  GH and run through the trunk, neck or arm at every radius up to 250 mm; the C-ring about the humerus long axis needs
+  200-315 deg (the carriage's azimuth around the arm couples swing and twist) and its medial part enters the trunk.
+* **Bigger rho is always worse** (stage B): rho1 12 -> 30 -> 50 pushes R1 from 59 to 88 to 117 mm (the crown runs over
+  the trapezius / neck); rho3 12 -> 30 pushes R3 from 73 to 86. The best rail is the smallest crown, i.e. the hub limit:
+  "arc rails" degenerate to the spherical 3R with ring bearings.
+* **The J2 rail lands on the elevated arm.** Per-pose radius need of rail 2: median 62 mm, p90 89, p95 121, max 183.
+  The large needs are all at 90-150 deg of abduction / scaption (plane 0-30), where the J2 axis points within ~26 deg
+  of the humerus (u2 ~ (-0.16, 0.64, 0.75) in the thorax frame): the rail sits on the arm and must clear it radially.
+  Lower percentiles bring R2 to 105-125 mm but put 5-13 % of the poses in contact. Turning the base axis to az -30
+  helps (stage D) but does not remove it; a23 56 / 78, a12 68 / 86, W at 72 / 100 deg, W az 0 / 45 are all worse.
+* Rail 1 is the one good rail: per-pose need spread 54.7-58.2 mm (3.5 mm over every valid pose), 69 % in band.
+
+### Red team (best config, 2-pass radii = the k369 sizing; the converged radii differ by < 3.5 mm on rails 1 / 3)
+* Rest, reach-back-pocket (plane down to -80, axial +101), across the body (plane 120-140, elev 59-75): taken.
+* Jams: the fold singularity (10 deg margin) at across-the-body with deep internal rotation (plane 120, elev 90-105,
+  axial -120 / -135) and at overhead (4 of 13 poses at elev >= 150). Elevation 0-30: 58/58 taken.
+* Pinch: overhead (Raise overhead, elev 149-150): carriage 1 2.2 mm and rail 1 2.8 mm from the skin - the
+  acromion / upper trapezius rises under the scapula rail when the arm is up; one workspace pose at elev >= 150 is in
+  contact.
+* Per part over taken clip frames (share 2-14 mm): rail 1 0.69, carriage 1 0.59, rail 3 0.13, carriage 3 0.24,
+  rail 2 / carriage 2 / link 1 / link 2 0.00-0.01.
+
+### Verdict
+DEAD as a morphology - not worth a GPU sweep: the rail idea itself (rho > 12 deg) measured worse at every step, the
+converged best (73.0) does not beat the hub baseline it degenerates to, and it only gets there by parking J2 far off
+the body. What predicts beyond it: (1) a circle about an axis
+through GH is at one distance from GH, so a rail can hug only skin that is itself near-spherical about GH and static in
+the rail's body - the scapula rail over the acromion is (3.5 mm spread), the moving middle rail is not; (2) any
+spherical chain whose middle axis comes within ~25 deg of the humerus at 90-150 deg abduction puts its J2 on the arm;
+(3) the base-axis azimuth (-30 vs +2.4) mattered more than any rail parameter - worth a look in the hub family too.
+
+Lesson for every model in the swarm: a percentile-fitted radius that sets its own parts' angular size must be iterated
+to a fixed point before the number is quoted (here 2 passes flattered the gap by 16 points).
+
+Files: docs/concepts/models/seed-arc-rails.py, docs/concepts/sweeps/seed-arc-rails.json,
+docs/concepts/rows/seed-arc-rails.json, docs/concepts/img/seed-arc-rails.png (rest and highest taken pose, skin grey).
