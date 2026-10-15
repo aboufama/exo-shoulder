@@ -32,7 +32,7 @@ except ImportError:
     np = None
 
 _CACHE = {}
-CODE_VERSION = "band-2026-10-15w (workspace envelope, poses given up at a price: score x workspace share; fit_clips; min link arc 35 deg + min arm 10 mm; pure 3R chain)"
+CODE_VERSION = "band-2026-10-15x (workspace envelope + why poses are lost; poses given up at a price; fit_clips; min link arc 35 deg + min arm 10 mm; pure 3R chain)"
 RESD = 0.25; NWD, NHD = 1440, 720; LAT_LO, LAT_HI = -75.0, 90.0; CLEAR = 3.0
 ROW0, ROW1 = int((LAT_LO + 90) / RESD), int((LAT_HI + 90) / RESD)
 HUB_R, HW, T_LINK, STACK, T_W, T_BOT = 17.0, 7.0, 5.5, 6.0, 1.0, 6.5
@@ -497,7 +497,10 @@ class Band:
             if __import__('os').environ.get('BAND_DEBUG'):
                 f_lo = VALID & (LO <= hl[None, None] + 1e-3).all(-1); f_hi = VALID & (h[None, None] <= HI + 1e-3).all(-1); col = self.collisions(COLD, FP, h, offs, N, lower, Qgrid, d)
                 print(f"    lo-ok {float(f_lo.any(1).float().mean()):.2f} hi-ok {float(f_hi.any(1).float().mean()):.2f} nocol {float((VALID & ~col).any(1).float().mean()):.2f}", flush=True)
-            feas &= ~self.collisions(COLD, FP, h, offs, N, lower, Qgrid, d)
+            colm = self.collisions(COLD, FP, h, offs, N, lower, Qgrid, d)
+            if bool(self.env_mask.any()):                                                          # why workspace poses are lost (per constraint)
+                f_lo_ = (LO <= hl[None, None] + 1e-3).all(-1); f_hi_ = (h[None, None] <= HI + 1e-3).all(-1)
+            feas &= ~colm
             share = ((hl[None, None] <= CAP + 1e-3).float() * wS).sum(-1); den = wS.sum()
             if self._rail is not None:
                 ru = self._faces_full["rail_under"]; rw = self._rail["w"]
@@ -512,6 +515,11 @@ class Band:
             val = t.where(feas, 1.0 + share, t.where(VALID, -0.05 * viol, t.full_like(share, -BIG)))
             path = self.dp_path(val, NBR)
             fe = feas[ar, path]; frame = t.where(fe, share[ar, path], t.zeros_like(share[:, 0]))
+            env_why = None
+            if bool(self.env_mask.any()):
+                em = self.env_mask; pv = path[em]; ae = ar[em]
+                env_why = dict(kinematics=float((~VALID[ae, pv]).float().mean()), skin_above_shape=float((VALID[ae, pv] & ~f_lo_[ae, pv]).float().mean()),
+                               squeezed_top=float((VALID[ae, pv] & ~f_hi_[ae, pv]).float().mean()), part_collision=float((VALID[ae, pv] & colm[ae, pv]).float().mean()))
             score = float((frame * WT).sum() / WT.sum()); follow = float((fe.float() * WT).sum() / WT.sum())
             env_follow = float(fe[self.env_mask].float().mean()) if bool(self.env_mask.any()) else None
             if self.balance > 0:                                                                       # favour designs good in every clip
@@ -521,7 +529,7 @@ class Band:
             if __import__('os').environ.get('BAND_DEBUG'): print(f'  iter {it_}: fit {sc:.3f} -> path score {score:.3f} follow {follow:.3f} valid-any {float(VALID.any(1).float().mean()):.2f} feas-any {float(feas.any(1).float().mean()):.2f} zj4 {zj4:.1f}', flush=True)
             fm = self.fit_mask; sel = float((frame * WT)[fm].sum() / WT[fm].sum()) if self.fit_clips else score
             if best is None or sel > best["sel"]:
-                best = dict(sel=sel, score=score, follow=follow, env_follow=env_follow, h=h.clone(), zj4=zj4, bot_under=self._bot_under.clone(), faces=dict(self._faces),
+                best = dict(sel=sel, score=score, follow=follow, env_follow=env_follow, env_why=env_why, h=h.clone(), zj4=zj4, bot_under=self._bot_under.clone(), faces=dict(self._faces),
                             rail_under=(self._faces_full["rail_under"].clone() if self._rail is not None else None), frame=frame.clone(), cfg=path.clone(), feas=fe.clone(),
                             feas_all=feas.clone() if detail else None, share_all=share.clone() if detail else None)
         if __import__('os').environ.get('BAND_STASH'):                                             # analysis hook (pipeline/conformal/inband_ceiling.py)
@@ -539,7 +547,7 @@ class Band:
             out["follow_fit"] = float((best["feas"].float() * WT)[fm].sum() / WT[fm].sum())
         names = self.P["NAMES"]; cid = self.P["CID"]
         out["clips"] = {names[k]: dict(score=float(best["frame"][cid == k].mean()), follow=float(best["feas"][cid == k].float().mean())) for k in range(len(names)) if k not in self.env_ids}
-        if self.env_ids: out["envelope"] = dict(poses=int(self.env_mask.sum()), follow=best["env_follow"], weight=self.env_weight)
+        if self.env_ids: out["envelope"] = dict(poses=int(self.env_mask.sum()), follow=best["env_follow"], weight=self.env_weight, lost_because=best["env_why"])
         if detail or d.get("diag"):
             # where the in-band share is lost: per sample class, over the followed frames of the best path
             hb = best["h"]; cfgb = best["cfg"]; fe = best["feas"]

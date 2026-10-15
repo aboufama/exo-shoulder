@@ -18,7 +18,7 @@ import argparse, json, os, sys, time, urllib.error, urllib.request
 REST = "https://rest.runpod.io/v1"
 GQL = "https://api.runpod.io/graphql"
 RUN = "https://api.runpod.ai/v2"
-OLD = {"exo-band8", "exo-band9", "exo-band10", "exo-band11", "exo-band12", "exo-band13", "exo-band14"}   # superseded search endpoints: keep at workersMax 0
+OLD = {"exo-band8", "exo-band9", "exo-band10", "exo-band11", "exo-band12", "exo-band13", "exo-band14", "exo-band15"}   # superseded search endpoints: keep at workersMax 0
 USER_EP = {"exo-blender-cycles"}                        # the user's render endpoint: only workersMin -> 0
 IDLE_MAX = 60                                           # s; above this is flagged
 IDLE_SET = 30                                           # s; enforce lowers idleTimeout to at most this
