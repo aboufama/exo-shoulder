@@ -108,3 +108,41 @@ Best ring, k175 (KAA10 ring at the best control axes, q 0.985):
 O20-hub control, k163 (the best number of this sweep): rest 52/52 taken; overhead 7/17 (6 closure, 2 K6, 1 link-1
 contact at plane 30 / elev 150, 1 neck contact at plane 75 / elev 165); behind the back 17/19; across 28/30. Pinch:
 link 1 -1.0 mm at plane -15 / elev 105 / axial 45 (a contact pose, q 0.985). Hub 2 113 mm (2.7 % in band), link 2 4 %.
+
+## CMA-ES and the convergence gate (236 configurations: 144 coarse on the farm, 3 CMA generations of 28 on the farm, 8 local checks)
+
+Two CMA-ES instances per farm batch: the ring (az1, el1, a12, a23, wd, wa, p1 12-42, q) and the O20-hub control
+(same without p1); fitness = gap + 15 for a parking failure + 25 for a dishonest audit. The farm queue was 19 jobs
+deep (4 slots shared by the swarm), so a generation took 5-15 min; one generation was lost to the client's 30-min
+background limit. Gate (score points; "park" = every joint part <= 140 mm and 25 mm free above):
+
+| family | n | best | gain over 2nd half | over last third | top-5 spread | gate |
+|---|---|---|---|---|---|---|
+| ring, park rule on | 163 | 82.37 (k154, score 70.05) | 70.05 (every coarse ring has hub 2 at 161 mm: no valid config in the first half) | 70.05 | 1.16 | NOT converged |
+| ring, park rule off | 163 | 78.34 (k218, score 71.51) | 1.84 | 1.84 | 1.47 | NOT converged |
+| O20-hub control, park on | 73 | **56.04 (k235, score 79.62)** | 79.62 | 0.72 | 0.83 | NOT converged |
+
+## Verdict
+
+**Screened, not dead (the gate is not met), and not worth a GPU sweep as a ring.** Measured on the posed skin: a flat
+annulus normal to a GH ray fits the crown only out to ~20-25 mm radius; the spec's KA020-KA030 rings (outer land
+36.6-49.3 mm) sit 74-133 mm from GH, 20-80 mm above an O20 hub on the same axis, and the medial land runs onto the
+trapezius (or, tilted laterally, onto the clavicle / anterior deltoid). The ring is then the largest metal area in the
+chain at 1-12 % in band, and the best ring loses to its own O20 twin by 20-26 gap points on the same axes. The crown
+ring does not remove the 3R limiter either: J2 still travels the 60-90 deg circle off J1 (hub 2 at 113-140 mm, ~3 % in
+band), which the spec's main risk predicted.
+
+**What the sweep found instead (the in-model control):** the spherical 3R with an O20 J1 almost straight up the
+scapula frame (bvec(29.9, 89.0); CMA presses on the el 89 bound), a12 82.6, a23 66.8, J3 wdir(92.2, 6.8), q 0.998:
+gap **56.04** (score 79.62; reach 0.90, follow 1.00, in-band 14 0.345, in-band 10 0.203, contact 0.005; hub 2 at
+139.5 mm, parking rule passed; Bench(60,160) fast, march, K2 dense, K6, audit clean). Its CMA is not converged
+either (best moved 3.0 points over the second half). This belongs to the spherical family: hand k235 (and k231 57.11,
+k163 58.03) to the verifier for Bench(110,360) exact and to the family's farm CMA (open el1 past 89 by
+re-parametrising J1 around the vertical).
+
+## Next (the loop)
+
+1. Verifier: re-measure k235 / k231 / k163 on Bench(110,360) exact; if they hold, they lead the 3R family.
+2. Farm CMA of the O20 control from k235 with J1 parametrised around the vertical (no el bound), until the gate passes.
+3. The ring: only a small ring (outer land <= 22 mm, a KAA10-class 25 mm bore) seats on the crown, and it is still
+   12 mm higher than an O20 hub and contacts across the body (plane 135-150, elev 105-135); no further ring sweep.

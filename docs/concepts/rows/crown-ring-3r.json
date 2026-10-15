@@ -7,57 +7,56 @@
  "passive_dof": 0,
  "status": "screened",
  "t_ideated": null,
- "t_screened": "2026-10-15T22:24:53Z",
- "reach": 0.8187,
- "follow": 1.0,
- "inband14": 0.1927,
- "inband10": 0.0713,
- "contact": 0.0305,
- "gap": 81.91,
+ "t_screened": "2026-10-15T22:45:53Z",
+ "reach": 0.9,
+ "follow": 0.9167,
+ "inband14": 0.1146,
+ "inband10": 0.0457,
+ "contact": 0.005,
+ "gap": 82.37,
  "v_reach": null,
  "v_follow": null,
  "v_inband14": null,
  "v_inband10": null,
  "v_gap": null,
- "n_configs": 180,
- "verdict": "in progress: ring J1 loses to an O20 hub on the same axes by 20-24 gap at every size and seat (best ring 81.91 vs O20 control 58.03); CMA still running",
- "note": "Bench(60,160) fast grid, march, K2 dense, K6, audit clean. Intermediate row.",
+ "n_configs": 236,
+ "verdict": "screened, not worth a GPU sweep as a ring: the open ring at J1 loses to an O20 hub on the same axes by 20-26 gap at every size and seat (best ring passing the parking rule 82.37 vs its O20 control 56.04, k235); convergence gate NOT met (ring g2 70.05 / g3 70.05 / top-5 1.16 with the parking rule, 1.84 / 1.84 / 1.47 without)",
+ "note": "Bench(60,160) fast grid, K3 march, K2 dense, K6, audit clean; 236 configs (144 coarse + 3 CMA gens of 28 on the farm + 8 local). Gate (score points) ring with parking rule: gain 2nd half 70.05, last third 70.05, top-5 1.16 (no coarse ring passes parking: hub 2 at 161); without: 1.84 / 1.84 / 1.47 - NOT converged. Spec fixes: link-1 lug root collides with the land in every pose (K6 partner zone is 12 mm), so link 1 rides on the rotor top (over ring1 0.6 mm) or a 7 mm lug; two-pass ring level. In-model O20-hub control k235 = 56.04 (score 79.62; J1 bvec(29.9, 89.0), a12 82.6, a23 66.8, J3 wdir(92.2, 6.8), q 0.998; reach 0.90 follow 1.00 ib14 0.345 ib10 0.203 contact 0.005; hub 2 139.5 mm, parking ok): hand to the verifier / spherical-family CMA.",
  "doc": "docs/concepts/crown-ring-3r.md",
- "limiter": "ring land level: a flat annulus normal to a GH ray fits the crown only out to ~20-25 mm radius; beyond it the trapezius (medial) or clavicle/anterior deltoid (lateral tilt) sets F 20-70 mm higher; ring 0.8-12 % in band; across-body contact of the ring at plane 135-150 elev 105-135",
- "best_k": 175,
+ "limiter": "ring land level (posed skin, 220 bench poses): a flat annulus normal to a GH ray fits the crown only to ~20-25 mm radius; KA020-KA030 (outer 36.6-49.3 mm) sit 74-133 mm from GH vs 52-58 for an O20 hub, set by the trapezius (medial, az -70..-88) or the clavicle/anterior deltoid (lateral tilt); ring 1-12 % in band; hub 2 113-140 mm (~3 % in band); smallest ring contacts the skin across the body (plane 135-150, elev 105-135, -6.7 mm)",
+ "best_k": 154,
  "best_params": {
-  "az1": 19.5333,
-  "el1": 88.3426,
-  "p1": 15.1,
-  "a12": 79.9991,
-  "a23": 60.5802,
-  "wd": 94.5093,
-  "wa": 12.6915,
+  "az1": 11.3025,
+  "el1": 74.313,
+  "p1": 37.5102,
+  "a12": 84.1189,
+  "a23": 67.8288,
+  "wd": 95.4289,
+  "wa": 8.7573,
   "sigma": -1,
   "margin": 10.0,
   "width": 14.0,
   "t_link": 3.0,
   "w2": 12.0,
-  "q": 0.9849,
-  "h1": 60.0,
-  "lug": 7.0
+  "q": 0.9969,
+  "h1": 60.0
  },
  "park": {
   "ring1": [
-   64.6,
-   -3.1
+   113.0,
+   6.34
   ],
   "hub2": [
-   112.9,
-   7.3
+   134.7,
+   8.76
   ],
   "hub3": [
    67.0,
-   4.36
+   4.24
   ]
  },
- "park_ok": false,
- "ring1_F": 64.6,
+ "park_ok": true,
+ "ring1_F": 113.0,
  "mode": "fast",
  "bench": "Bench(60,160)",
  "honest": true,
@@ -65,7 +64,7 @@
   "mode": "march",
   "cont": true,
   "collide": true,
-  "q": 0.9849
+  "q": 0.9969
  },
  "audit": [],
  "hubless": [
