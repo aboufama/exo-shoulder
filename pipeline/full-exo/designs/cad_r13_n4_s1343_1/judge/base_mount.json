@@ -1,42 +1,9 @@
 {
- "girdle_law": "worst of rig / literature / OpenSim Seth (girdle.lift_laws) - not yet the user's OpenCap",
  "base": {
-  "mount": "thorax",
+  "mount": "girdle",
   "chain": "spherical",
-  "centre_mm": [
-   0,
-   0,
-   0
-  ]
+  "note": "base rides the scapula on the user's scapula handler (user decision 2026-10-15); the design was always built in the scapula frame"
  },
- "frames_checked": 451,
- "step": 3,
- "per_law_max_mm": {
-  "rig": 25.34,
-  "literature": 64.89,
-  "seth": 62.86
- },
- "max_mm": 64.89,
- "p95_mm": 56.95,
- "share_over_4mm": 0.825,
- "per_clip": {
-  "Raise overhead": 64.89,
-  "Drink from a cup": 18.79,
-  "Comb hair": 56.36,
-  "Reach a high shelf": 49.54,
-  "Wash opposite shoulder": 15.25,
-  "Reach back pocket": 25.88,
-  "Wave": 46.92,
-  "Walking arm swing": 5.19
- },
- "base_part_enters_body_mm": 43.91,
- "base_part_worst": [
-  "Raise overhead",
-  78,
-  [
-   30,
-   150,
-   -60
-  ]
- ]
+ "max_mm": null,
+ "note": "girdle-riding base: R10 as written (thorax plate) does not apply; skin-slip error not modelled (literature: 5-7 deg below 100-120 deg elevation, up to 25 deg above)"
 }

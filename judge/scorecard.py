@@ -21,11 +21,11 @@ for rid, r in REQ.items():
     if rid.startswith("_"): continue
     if "metric" in r:
         v = metric(r["metric"]); st = "NOT RUN" if v is None else ("PASS" if OPS[r["op"]](v, r["value"]) else "FAIL")
-        rows.append(dict(id=rid, name=r["name"], value=v, target=f"{r['op']} {r['value']}{(' ' + r['unit']) if 'unit' in r else ''}", status=st, judge=r["judge"]))
+        rows.append(dict(id=rid, name=r["name"], value=v, unit=r.get("unit"), target=f"{r['op']} {r['value']}{(' ' + r['unit']) if 'unit' in r else ''}", status=st, judge=r["judge"]))
     else: rows.append(dict(id=rid, name=r["name"], value=None, target="", status=r["status"], judge=r["judge"]))
-fmt = lambda v: "-" if v is None else (f"{100 * v:.1f}%" if isinstance(v, float) and v <= 1.0 and v >= 0 and not isinstance(v, bool) else str(v))
+fmt = lambda v, u=None: "-" if v is None else (f"{v} {u}" if u else (f"{100 * v:.1f}%" if isinstance(v, float) and 0 <= v <= 1.0 and not isinstance(v, bool) else str(v)))
 md = [f"# Scorecard: {os.path.basename(os.path.normpath(dd))}", "", "| | requirement | value | target | status | judge |", "|---|---|---|---|---|---|"]
-md += [f"| {r['id']} | {r['name']} | {fmt(r['value'])} | {r['target']} | **{r['status']}** | {r['judge']} |" for r in rows]
+md += [f"| {r['id']} | {r['name']} | {fmt(r['value'], r.get('unit'))} | {r['target']} | **{r['status']}** | {r['judge']} |" for r in rows]
 n_pass = sum(r["status"] == "PASS" for r in rows); md += ["", f"{n_pass} of {len(rows)} requirements pass."]
 open(os.path.join(J if os.path.isdir(J) else dd, "scorecard.md"), "w").write("\n".join(md) + "\n"); json.dump(rows, open(os.path.join(J if os.path.isdir(J) else dd, "scorecard.json"), "w"), indent=1)
 print("\n".join(md))

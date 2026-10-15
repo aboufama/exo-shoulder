@@ -13,7 +13,8 @@ def fmt(r):
     if r is None: return "-"
     v = r.get("value")
     if v is None: return r["status"]
-    s = f"{100 * v:.1f}%" if isinstance(v, float) and 0 <= v <= 1 and not isinstance(v, bool) else str(v)
+    u = r.get("unit") or ({"R2": "mm", "R6": "mm", "R10": "mm", "R8": "g"}.get(r["id"]) if "unit" not in r else None)   # old scorecards carry no unit
+    s = f"{v} {u}" if u else (f"{100 * v:.1f}%" if isinstance(v, float) and 0 <= v <= 1 and not isinstance(v, bool) else str(v))
     return f"{s} ({r['status']})"
 print(f"| | requirement | before ({rev}) | after | |\n|---|---|---|---|---|")
 for k, r in now.items():

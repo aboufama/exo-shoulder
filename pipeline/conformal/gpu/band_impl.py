@@ -32,7 +32,7 @@ except ImportError:
     np = None
 
 _CACHE = {}
-CODE_VERSION = "band-2026-10-15v (workspace envelope: links clear the skin over the plausible ROM; fit_clips; min link arc 35 deg + min arm 10 mm; pure 3R chain)"
+CODE_VERSION = "band-2026-10-15w (workspace envelope, poses given up at a price: score x workspace share; fit_clips; min link arc 35 deg + min arm 10 mm; pure 3R chain)"
 RESD = 0.25; NWD, NHD = 1440, 720; LAT_LO, LAT_HI = -75.0, 90.0; CLEAR = 3.0
 ROW0, ROW1 = int((LAT_LO + 90) / RESD), int((LAT_HI + 90) / RESD)
 HUB_R, HW, T_LINK, STACK, T_W, T_BOT = 17.0, 7.0, 5.5, 6.0, 1.0, 6.5
@@ -645,7 +645,7 @@ class Band:
         HG, RS = self.P["HG"], self.P["RS"]; NP = HG.shape[0]
         wt = t.einsum("pij,pjk,mk->pmi", RS, HG, dirs)                                            # thorax = RS HG w
         flat = self.pix(wt); fx = t.arange(NP, device=self.dev)[:, None].expand_as(flat)
-        return float((self.look("r1c", fx, flat) * cosa[None])[self.fit_mask].max()) + 0.5
+        return float((self.look("r1c", fx, flat) * cosa[None])[self.fit_mask & ~self.env_mask].max()) + 0.5
 
     def fit_shape(self, Lsel, Csel, keep, wS, kindA, cosA, dAA, dBA, JA, memA, is_low, is_bot, F_bot, N, lower):
         """shape h (I,) from the chosen configs' lower bounds: envelope over the frames kept, greedily dropping the
@@ -729,12 +729,14 @@ class Band:
             for ax_, u_ in zip(self._aux, faces["aux_under"]):
                 inb = inb + ((u_[None] <= ax_["CAP"] + 1e-3).float() * ax_["w"]).sum(-1); ok = ok & (ax_["LO"] <= u_[None] + 1e-3).all(-1); den = den + ax_["w"].sum()
             inb = inb / den
-            return float((t.where(ok, inb, t.zeros_like(inb)) * WT).sum() / WT.sum())
+            sc_ = float((t.where(ok, inb, t.zeros_like(inb)) * WT).sum() / WT.sum())
+            if bool(envm.any()): sc_ *= (float((ok & envm).sum()) / float(envm.sum())) ** self.env_weight     # share of the workspace it can move through
+            return sc_
         # coherent drops first: frames ranked by how far they push the envelope above the typical frame
         med = t.where(keep[:, None], Lsel, t.full_like(Lsel, float("nan"))).nanmedian(0).values
         diff = ((Lsel - med[None]).clamp(min=0) * wS).sum(1); diff = t.where(keep, diff, t.full_like(diff, float("inf")))
-        envm = self.env_mask & keep; diff = t.where(envm, t.full_like(diff, -float("inf")), diff)    # the envelope is never dropped
-        dk = keep & ~envm
+        envm = self.env_mask & keep; dk = keep                                # envelope poses may be given up, at a price (score_of)
+        WTd = t.where(envm, WT[~self.env_mask].mean() if bool((~self.env_mask).any()) else t.ones_like(WT), WT) if bool(envm.any()) else WT
         best = None
         for tau in (1.0, 0.97, 0.94, 0.9, 0.85, 0.8, 0.75, 0.7, 0.65, 0.6, 0.5, 0.4, 0.3):
             thr = t.quantile(diff[dk], tau) if int(dk.sum()) > 1 else diff.max()
@@ -748,9 +750,8 @@ class Band:
             Lm = t.where(S[:, None], Lsel, t.full_like(Lsel, -1e4))
             top2 = Lm.topk(2, dim=0); excess = (top2.values[0] - top2.values[1]) * wS             # how far each arg-max frame pushes
             push = t.zeros(NP, device=self.dev).index_add_(0, top2.indices[0], excess)
-            pr = t.where(envm, t.full_like(push, -float("inf")), push / t.clamp(WT, min=1e-6))
-            p_drop = int(pr.argmax())
-            if envm[p_drop] or not S[p_drop]: break
+            p_drop = int((push / t.clamp(WTd, min=1e-6)).argmax())
+            if not S[p_drop]: break
             S[p_drop] = False
             h, faces = shape_of(S); s = score_of(h, S, faces)
             if s > best[0] + 1e-5: best = (s, h, S.clone(), faces); stall = 0

@@ -1,8 +1,10 @@
 {
- "step": 6,
+ "step": 2,
  "tol_mm": 0.5,
- "frames_checked": 228,
- "seconds": 1065,
+ "frames_checked": 671,
+ "seconds": 567,
+ "jobs": 4,
+ "inside": "integer winding number (grid + segment crossings), depth = exact distance to the nearest surface (judge/sdist.py)",
  "parts": {
   "H|M4x6 ISO 10642 countersunk (upper cuff)": {
    "max_depth": 0.0,
@@ -10,19 +12,9 @@
    "worst": null
   },
   "H|UPPER ARM CUFF (conformal G2 shell, AlSi10Mg bead blasted)": {
-   "max_depth": 0.07,
+   "max_depth": 0.0,
    "frames": 0,
-   "worst": [
-    "Wash opposite shoulder",
-    66,
-    [
-     131,
-     37,
-     -76,
-     121,
-     0
-    ]
-   ]
+   "worst": null
   },
   "H|CirPattern1[13]": {
    "max_depth": 0.0,
@@ -50,16 +42,16 @@
    "worst": null
   },
   "H|Revolve1[3]": {
-   "max_depth": 0.61,
-   "frames": 46,
+   "max_depth": 0.6,
+   "frames": 2,
    "worst": [
-    "Reach a high shelf",
-    72,
+    "Comb hair",
+    172,
     [
-     82,
-     132,
-     -82,
-     6,
+     63,
+     100,
+     -56,
+     86,
      0
     ]
    ]
@@ -75,19 +67,9 @@
    "worst": null
   },
   "H|Revolve3": {
-   "max_depth": 0.43,
+   "max_depth": 0.0,
    "frames": 0,
-   "worst": [
-    "Raise overhead",
-    0,
-    [
-     30,
-     3,
-     -30,
-     12,
-     0
-    ]
-   ]
+   "worst": null
   },
   "H|CirPattern1[4]": {
    "max_depth": 0.0,
@@ -125,16 +107,16 @@
    "worst": null
   },
   "H|Revolve1[1]": {
-   "max_depth": 0.93,
-   "frames": 167,
+   "max_depth": 1.03,
+   "frames": 352,
    "worst": [
     "Comb hair",
-    168,
+    172,
     [
-     69,
-     118,
-     -60,
+     63,
      100,
+     -56,
+     86,
      0
     ]
    ]
@@ -175,23 +157,23 @@
    "worst": null
   },
   "F|Hex socket head countersunk screw grade C M4x0.7 x 8": {
-   "max_depth": 8.3,
-   "frames": 228,
+   "max_depth": 8.37,
+   "frames": 671,
    "worst": [
     "Comb hair",
-    168,
+    172,
     [
-     69,
-     118,
-     -60,
+     63,
      100,
+     -56,
+     86,
      0
     ]
    ]
   },
   "H|IGUS THRUST WASHER, 30mm ID, 39mm OD, 1.5mm T, IGLIDE J": {
    "max_depth": 2.82,
-   "frames": 228,
+   "frames": 671,
    "worst": [
     "Comb hair",
     162,
@@ -205,46 +187,36 @@
    ]
   },
   "F|MIDDLE": {
-   "max_depth": 5.78,
-   "frames": 228,
+   "max_depth": 5.79,
+   "frames": 671,
    "worst": [
     "Comb hair",
-    102,
+    68,
     [
-     78,
-     143,
-     -67,
-     118,
+     60,
+     121,
+     -59,
+     119,
      0
     ]
    ]
   },
   "H|TOP": {
-   "max_depth": 2.28,
-   "frames": 5,
-   "worst": [
-    "Drink from a cup",
-    126,
-    [
-     91,
-     50,
-     -57,
-     124,
-     0
-    ]
-   ]
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null
   },
   "F|FOREARM CUFF": {
-   "max_depth": 24.15,
-   "frames": 228,
+   "max_depth": 24.62,
+   "frames": 671,
    "worst": [
     "Wash opposite shoulder",
-    42,
+    44,
     [
-     115,
+     118,
      29,
-     -76,
-     114,
+     -77,
+     117,
      0
     ]
    ]
@@ -265,31 +237,21 @@
    "worst": null
   },
   "H|J4 washer A (igus GTM-1018-005, recessed)": {
-   "max_depth": 24.43,
-   "frames": 7,
-   "worst": [
-    "Drink from a cup",
-    108,
-    [
-     95,
-     69,
-     -48,
-     132,
-     0
-    ]
-   ]
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null
   },
   "H|BOTTOM + neck + JN hub (one 5-axis part, 7075-T6 bead blasted)": {
-   "max_depth": 13.11,
-   "frames": 228,
+   "max_depth": 4.96,
+   "frames": 671,
    "worst": [
-    "Drink from a cup",
-    36,
+    "Comb hair",
+    164,
     [
-     85,
-     40,
-     -58,
-     111,
+     74,
+     131,
+     -64,
+     109,
      0
     ]
    ]
@@ -475,6 +437,6 @@
    "worst": null
   }
  },
- "worst_part": "H|J4 washer A (igus GTM-1018-005, recessed)",
- "max_depth": 24.43
+ "worst_part": "F|FOREARM CUFF",
+ "max_depth": 24.62
 }

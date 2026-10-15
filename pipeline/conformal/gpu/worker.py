@@ -9,7 +9,7 @@ height z_j4 come with the job ("W", "z_j4"); G = rest-pose skin gap cap (mm).
 from runpod_flash import Endpoint, GpuGroup
 
 
-@Endpoint(name="exo-band14", gpu=[GpuGroup.AMPERE_24], workers=(0, 4),            # A5000 / 3090: cheapest 24 GB tier, scale to zero
+@Endpoint(name="exo-band15", gpu=[GpuGroup.AMPERE_24], workers=(0, 4),            # A5000 / 3090: cheapest 24 GB tier, scale to zero
           idle_timeout=30, execution_timeout_ms=5400000, dependencies=["numpy", "scipy"])
 async def conformal_job(job: dict):
     import base64, gzip, io, math, time, random, hashlib

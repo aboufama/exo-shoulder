@@ -158,9 +158,12 @@ rig's girdle law (GH lift 0.2 mm/deg above 30 deg, scapula rotating about GH), a
   (dj3qfmtwrwy2pr). Warm workers serve old code after a deploy -> new endpoint name per code change, check
   CODE_VERSION. Queued jobs may need `workersMin` PATCHed > 0 to start; reset to 0 after. Account quota 10 workers.
 - The dense per-frame skin maps (`.cache/maps_s1.pt`, 857 MB) are not in git: `tools/build_maps.py`.
-- **The contact judges over-report.** `judge/sdist.py` takes the inside/outside sign from ONE nearest triangle's face
-  normal; near edges/vertices that sign is often wrong. Ray-parity re-test of the worst frame of every top entry:
-  r13 n4 R6 (15.48 mm before, 37.64 after this change) and r13 n3 R6 (90.07): 0 truly-inside vertices in all top
-  7-14 pairs. R2 on the n3 rail part: judge 15.39 mm, truly 1.03 mm. The 13.11 mm R2 entry of the n4 BOTTOM part comes
-  from the user's bar region (s < 265; not re-tested), not the neck/hub (>= 2.45 mm from the body in every frame). Fix the judge (winding number or ray parity) before trusting
-  R2/R6 numbers.
+- **The contact judges over-reported - fixed 2026-10-15 (judge/sdist.py, judge/test_sdist.py).** The old sign came from
+  the face normal of the nearest of 10 triangle centroids; on long glb facets and the coarse body mesh (median edge
+  8 mm, max 87 mm) the true closest triangle was often not among them (e.g. "link 2 IN J2 cap" 4.78 mm where ray parity
+  in 3 directions and the winding number find 0 points inside), and the posed body self-intersects (winding up to 3)
+  where no normal-based sign exists. Now: exact closest point (covering samples + one ball query) and the integer
+  winding number (scanline grid + segment crossings). Test vs brute force: wrong inside 0 % on cube, sphere, a real
+  part and the posed body (old: 0 / 0 / 2.6 / 2.8 %), |d| error 0. **Measurement change** on the reference
+  (cad_r13_n4_s1343_1): R6 37.64 -> 0.80 mm (15 pairs > 0.15 mm), R2 24.43 -> 24.62 mm (the user's forearm cuff vs the
+  rig's forearm: a size mismatch, not exo metal).
