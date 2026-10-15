@@ -14,6 +14,10 @@ rest, i.e. every axis through the GH centre):
     {"mount": "thorax", "chain": "spherical", "centre_mm": [x, y, z]}
     {"mount": "thorax", "chain": "offset3", "prm": {b, a1, a2, branch, w}, "axis_points_mm": [o1, o2, o3]}  (girdle.Chain3)
     + optional "slider": [ex, ey, ez]: one torque-free passive slider (the user's exception): misalignment along it is free
+    {"mount": "girdle", "chain": "spherical", "stage": {"kind": "follower", "gh_minus_p_mm": [x, y, z], "f_ang": 1, "f_slip": 1}}
+      a 3-axis torque-free stage between the handler and J1 set by a bony follower at P (ISB scapula frame, GH - P;
+      lateral acromion right above GH: [0, -32, 0]); f_ang / f_slip < 1 only with the user's measured calibrated law
+      (judge/base_stage.py, docs/FINDINGS.md "R10 on the scapula handler")
     python3 judge/base_mount.py <design dir|id> [--step 3]  -> <design>/judge/base_mount.json"""
 import argparse, json, os, sys
 import numpy as np
@@ -28,6 +32,19 @@ FR = list(frames(dd, a.step)); W = np.array([fr["want"] for _, _, fr in FR], flo
 if base.get("mount") == "girdle":                                           # the base rides the scapula on the user's handler: skin slip over the bone
     import base_slip as BS                                                   # literature model (docs/research/base_slip_model.md)
     names = [f[0] for f in FR]
+    st = base.get("stage")
+    if st and st.get("kind") == "follower" and base.get("chain", "spherical") == "spherical":
+        import base_stage as BST
+        P = BS.lever()[0] - np.asarray(st["gh_minus_p_mm"], float); fa, fs = float(st.get("f_ang", 1.0)), float(st.get("f_slip", 1.0))
+        mis = {law: BST.follower(W, P, law, fa, fs) for law in ("central", "low")}; m = mis["central"]; ev = W[:, 1]
+        out = dict(base=base, model="base_stage.py follower: seen = (R_err - I)(GH - P) + d_f, handler angles and slip from base_slip.py (central law unchanged), x f_ang / f_slip",
+                   law="central", frames_checked=len(FR), step=a.step, max_mm=round(float(m.max()), 2), p95_mm=round(float(np.percentile(m, 95)), 2), share_over_4mm=round(float((m > 4).mean()), 3),
+                   per_law_max_mm={l: round(float(v.max()), 2) for l, v in mis.items()} | {"high": None}, central_max_by_elevation_mm={f"<= {hi}": (round(float(m[ev <= hi].max()), 2) if (ev <= hi).any() else None) for hi in (60, 90, 100, 120, 150, 180)},
+                   worst=[names[int(np.argmax(m))], FR[int(np.argmax(m))][1], [round(v) for v in W[int(np.argmax(m))][:3]]],
+                   per_clip={n: round(float(m[[k for k, q in enumerate(names) if q == n]].max()), 2) for n in dict.fromkeys(names)},
+                   note="girdle mount + follower stage (no active DOF): the handler's IR/ER swing no longer moves the centre; f < 1 claims a per-user calibrated law")
+        print(f"base mount (girdle + follower stage, f_ang {fa}, f_slip {fs}): GH misalignment max {out['max_mm']} mm (low {out['per_law_max_mm']['low']}), p95 {out['p95_mm']} mm, {100 * out['share_over_4mm']:.0f}% of frames > 4 mm")
+        os.makedirs(os.path.join(dd, "judge"), exist_ok=True); json.dump(out, open(os.path.join(dd, "judge", "base_mount.json"), "w"), indent=1); sys.exit(0)
     if base.get("chain", "spherical") != "spherical" or base.get("slider"):
         out = dict(base=base, max_mm=None, note="girdle mount: the skin-slip model (judge/base_slip.py) handles a spherical chain centred on the GH centre without a slider; this design needs the lever / slider mapping first")
         print("base mount: girdle mount with an offset chain or a slider -> R10 NOT RUN (base_slip.py handles a spherical chain only)")

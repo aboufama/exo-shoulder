@@ -82,9 +82,11 @@ What this shows (new knowledge, with the reason):
 - **The path to <= 4 mm:** follower stage + the user's systematic slip removed by a calibrated motion law
   (double / multiple calibration of an acromion cluster cut max errors 44.8 -> 14.2 deg in cadavers, f ~ 0.32;
   Brochard 2011 matched palpation on 5 of 6 axes): **2.3 mm (1.8 held out)**, or 4.6 mm if the slip itself is not
-  repeatable. The law costs no part: it is carried by offset (non-concurrent) axes, as P0 did for the thorax base
-  (`girdle.fit_minimax`), fitted to the user's measured c(pose). It needs the user's own data first (handler + bony
+  repeatable. The law need not cost a part: offset (non-concurrent) axes can carry it, as P0's exact minimax LP did for
+  the thorax base (`girdle.fit_minimax`; not yet fitted here: it needs the signed, measured c(pose)). It needs the user's own data first (handler + bony
   landmarks at 3-4 elevations, base_slip_model.md section 6.1).
+- **Judge:** `judge/base_mount.py` now scores a girdle design with `base.stage = {kind: follower, gh_minus_p_mm,
+  f_ang, f_slip}` (7.28 / 2.33 mm reproduced on a copy of cad_r18_n3_s1392_1_f300); f < 1 only with measured data.
 - **It helps R1 as much:** R1 is judged with the chain centred on GH; on the body the links are offset by the misalignment
   across the arm - 11.8 mm today (the whole 10 mm band), 5.9 with the follower, 1.9 with follower + calibration.
 - **Red team / costs:** a pad on a bony prominence worn for hours (keep it torque-free and gravity-balanced so it
