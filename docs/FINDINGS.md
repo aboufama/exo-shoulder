@@ -169,6 +169,21 @@ rig's girdle law (GH lift 0.2 mm/deg above 30 deg, scapula rotating about GH), a
   (worn sleeve carrying the tilt) -> 2-4 clips lock and stay locked. Cuff twist (0.03 N.m/deg torsion) is the weak
   point under friction. Cuff pressure is far below the all-day budget (worst 1.8 kPa vs 7.5 kPa for the exo).
 
+## Range first: the search finds stand-off designs (r17 / r18, 2026-10-15)
+
+- Scoring range first (score x min(1, workspace share / 0.9)^4, functional workspace) trades closeness for range:
+  the detail evals (15 deg functional grid, 1432 poses) run from 74 % of the workspace at 18 % in band (14 mm) to 45 %
+  of the workspace at 62 % in band. No design reaches the 90 % range target.
+- The two widest-range designs (r18 s1394 #1, s1392 #0: 73-74 % of the workspace, Raise overhead followed 100 %)
+  get there by holding the last joint in the air: J3 at 248 / 275 mm from GH with its hub plane 169 mm above its
+  skin need. The fair CAD builder then twists link 2 (a valid but self-intersecting shell, 0.52 cm3, -1.64 cm3 after
+  features; reported as 1118 g). These are not close-fitting designs; `fair_build.py` now flags a hub > 25 mm over
+  its need (STANDOFF_MM) and a non-positive solid volume. A compact design (J3 within ~100 mm of GH) costs about 2-3
+  points of workspace (r18 s1394 #0: 72 %, 29 % in band).
+- The workspace losses of the compact designs are mostly skin (the shape under the links sits above the skin in
+  12-31 % of poses) and squeeze (9-19 %), not kinematics (5-15 %): range has to come from the shape and the link
+  routing, not from more joints.
+
 ## Infrastructure
 
 - RunPod Flash endpoints: band evaluator `exo-band10` (5ogdx1ex9wyh02), Blender Cycles render `exo-blender-cycles`

@@ -23,6 +23,7 @@ FACES = {int(k): v for k, v in R["faces"].items() if k.isdigit()}; LOWER = {int(
 if os.environ.get("SWAP_J1") == "1" and LOWER[1] != 0:                              # base under link 1 at J1 (skin side), same stack height
     LOWER[1] = 0; R["lower"]["1"] = 0
 BASE_TOP_MOUNT = (LOWER[1] != 0)                                              # base outer at J1
+STANDOFF_MM = float(os.environ.get("STANDOFF_MM", 25.0))                              # hub plane this far over its skin need: flagged (a stand-off design)
 MOUNT_LEN = 6.0                                                                     # base arm beyond the hub, toward the back plate
 def log(*a): print(f"[{time.strftime('%H:%M:%S')}]", *a, flush=True)
 
@@ -173,10 +174,13 @@ if __name__ == "__main__" and STAGE == "members":
     np.save(os.path.join(OUT, "hard_frames.npy"), np.array([p for (p, _), h_ in zip(E.frames, hard) if h_], int))
     for n in names:
         m = mem[n]; log(f"{n}: hubs {[(j, r, round(g, 2)) for j, r, g in m.hub_report]} (hub plane - need)  min gap {m.gap_min:.2f}  t {m.t_min:.2f}  Lt {[round(x['Lt'], 1) for x in m.hubs]}")
+        for j, r, g in m.hub_report:                                                 # r18 s1394 #1: J3 168 mm over its need, l2 twisted (0.52 cm3)
+            if g > STANDOFF_MM: log(f"WARNING stand-off: {n} hub {j} ({r}) rides {g:.0f} mm above its need (> {STANDOFF_MM:.0f}): not a close-fitting design, the ribbon may twist")
     sol = {}
     for n in names:
         t0 = time.time(); s = mem[n].solid(); sol[n] = s
         log(f"{n}: solid valid {s.isValid()} faces {len(s.Faces())} vol {s.Volume() / 1000:.2f} cm3 thickness {np.round(mem[n].info['thickness'], 2)} ({time.time() - t0:.1f}s)")
+        if s.Volume() <= 0: log(f"WARNING inside-out: {n} has volume {s.Volume() / 1000:.2f} cm3 (reversed or self-intersecting shell: contact judges would miss penetrations)")
     from OCP.BRepTools import BRepTools
     for n, s in sol.items(): BRepTools.Write_s(s.wrapped, os.path.join(OUT, f"{n}.brep"))
     pickle.dump(dict(FACES=FACES, mem={n: dict(bot=m.bot, top=m.top, top_hw=m.top_hw, xs=m.xs, ys=m.ys, c0=m.chart.c0, e1=m.chart.e1, R0=m.chart.R0, hubs=m.hubs) for n, m in mem.items()}), open(os.path.join(OUT, "fields.pkl"), "wb"))
