@@ -34,7 +34,11 @@ cuff slides): chain samples over arm skin +delta; mode 'float': plate 0, chain s
 shifted), so the undersides are fitted to the skin they really meet; K6 uses the chain-frame points (+delta on the
 plate in float mode: the plate moves under the chain).
 
-    OMP_NUM_THREADS=1 nice -n 10 python3 docs/concepts/models/floating-centre-3r.py [check|sweep|slip|redteam|sketch]
+  VARIANT stage="beside" (the one that removes the measured limiter of the float under J1): the plate centred at
+  (az_s, el_s) on flatter scapula skin, a 12 x 3 bracket (the top carriage arm, J1 lower member) from it to hub 1
+  at the parent level, link 1 over the bracket and the stage; the stage axis JF is declared hubless (slides).
+
+    OMP_NUM_THREADS=1 nice -n 10 python3 docs/concepts/models/floating-centre-3r.py [check|sweep|beside|slip|bs|redteam|sketch]
 """
 import itertools, json, math, os, sys
 import numpy as np
@@ -106,7 +110,7 @@ def build(B, F, p):
             # runs from the stage over its top (+ normal travel + 1) down to hub 1 at the parent's level
             joints["JF"] = pc; hubless = ("JF",)
             mem.append(strap("bracket", pc, p1, ("JF", "J1"), 12.0, 3.0, ((None, 0), ("hub1", 0.0)), [("plate", p["n_down"] + 1.0)], r_lay=h0))
-        l1_over = [("plate", p["n_down"] + 1.0)]
+        l1_over = [("plate", p["n_down"] + 1.0)] + ([("bracket", 1.0)] if p["stage"] != "under" else [])
         l2_over = l2_over + [("plate", p["n_down"] + 1.0)]
     links = [strap("link1", p1, p2, ("J1", "J2"), w, t, (("hub1", K.STACK), ("hub2", 0.0)), l1_over, r_lay=p["_rl1"]),
              strap("link2", p2, p3, ("J2", "J3"), w, t, (("hub2", K.STACK), ("hub3", K.STACK)), l2_over, r_lay=p["_rl2"]),
@@ -169,7 +173,9 @@ def evaluate(B, p, verbose=False):
     for _ in range(2):                                        # links pushed out (audit: > 4 mm spacing): re-lay at the true radius
         if not any("sparse" in a for a in r["audit"]): break
         L = B._kit_last; i0 = int(np.nonzero(L["take"] if L["take"].any() else L["ok"])[0][0])
-        rl = {k: max(70.0, float(np.median(np.linalg.norm(L["pts"][k][i0], axis=-1)))) for k in ("link1", "link2")}
+        rl = {k: min(200.0, max(70.0, float(np.median(np.linalg.norm(L["pts"][k][i0], axis=-1))))) for k in ("link1", "link2")}
+        # (capped at 200 mm: a link that far out is > 100 mm off the skin, never in band; the K6 arrays of a denser
+        # layout exhaust memory - the audit still flags it, so such a configuration is reported as not honest)
         p["_rl1"], p["_rl2"] = round(rl["link1"], 0), round(rl["link2"], 0)
         if p["float"]:
             c = plate_consts(B, F, p, kin_ok(B, F, p)[0]); p["_dz"] = c["dz"]; p["_tplate"] = c["t_slab"]
@@ -320,13 +326,11 @@ def beside(B):
     """the variant that removes the measured limiter (J1 raised over a flat slide face on the sloped skin under it):
     the stage moves off J1 onto flatter scapula skin, a bracket carries J1 at the parent's level"""
     R = Runner(B); base = with_parent(PARAMS, "r20_s1414_4")
-    for q in (1.0, 0.95):
-        for (az_s, el_s) in ((0.0, 45.0), (-45.0, 50.0), (45.0, 45.0), (0.0, 30.0)):
-            R.run(dict(base, q=q, stage="beside", az_s=az_s, el_s=el_s, trav_t=12.0, n_down=4.0), "D beside")
+    for (az_s, el_s) in ((0.0, 35.0), (-45.0, 40.0), (45.0, 35.0)):
+        R.run(dict(base, q=1.0, stage="beside", az_s=az_s, el_s=el_s, trav_t=8.0, n_down=4.0), "D beside")
     pb = min((e for e in R.rows if e["params"].get("stage") == "beside"), key=lambda e: e["gap"])["params"]
-    for trav, nd in ((8.0, 4.0), (20.0, 8.0)):
-        R.run(dict(PARAMS, **dict(pb, trav_t=trav, n_down=nd)), "D beside travel")
-    R.run(dict(PARAMS, **dict(pb, plane="b")), "D beside plane")
+    R.run(dict(PARAMS, **dict(pb, trav_t=4.0)), "D beside travel")
+    R.run(dict(PARAMS, **dict(pb, q=0.95)), "D beside q")
     return R
 
 
@@ -410,6 +414,7 @@ if __name__ == "__main__":
     elif mode == "sweep": sweep(B)
     elif mode == "slip": slip_runs(B)
     elif mode == "beside": beside(B)
+    elif mode == "bs": beside(B); slip_runs(B)
     elif mode == "redteam":
         p = dict(PARAMS, **(json.loads(a[1]) if len(a) > 1 else Runner(B).best["params"]))
         print(json.dumps(redteam(B, p), indent=1, default=str))

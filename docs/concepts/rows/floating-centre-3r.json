@@ -1,0 +1,52 @@
+{
+ "id": "floating-centre-3r",
+ "name": "Floating-centre 3R: the spherical chain on a closure-set 3-axis float (stage beside J1), rigid cuff",
+ "lens": "literature",
+ "family": "spherical 3R + passive base float",
+ "active_dof": 3,
+ "passive_dof": 3,
+ "status": "screened",
+ "t_ideated": null,
+ "t_screened": "2026-10-15T19:37:06Z",
+ "reach": 0.9062,
+ "follow": 1.0,
+ "inband14": 0.3183,
+ "inband10": 0.2269,
+ "contact": 0.0,
+ "gap": 58.17,
+ "v_reach": null,
+ "v_follow": null,
+ "v_inband14": null,
+ "v_inband10": null,
+ "v_gap": null,
+ "n_configs": 41,
+ "verdict": "Not worth a GPU sweep as a morphology. Plain bench: gap 58.17 vs its own parent's 65.05 on the same code, but the gain is the skin-contoured float plate's samples (0.83 in band); the chain itself gets worse (chain-only in-band 14 0.250 -> 0.161, plate-excluded gap 73.95). Slip bench (the float's real claim): direction right (in-band 0.35-0.41 vs cuff-slide parent 0.19-0.20) but the travel the slip law needs (+-20 tangent, 6-9 mm normal) makes the plate too big: best 73.46 (central) / 136.74 (high) vs the cuff-slide parent's 71.03 / 70.42.",
+ "limiter": "A flat slide face must clear the skin under its whole footprint: around J1 the skin ridge is tilted 17-42 deg to it, so under J1 hub 1 rises +13 mm at +-4 mm travel and +58 mm at +-12 (link 1 0 % in band); beside J1 (stage at az 0 / el 35 on the scapula) link 1 must pass over the stage + normal travel (link 1 0.25 -> 0.0 in band). Under slip, +-15..20 mm travel puts the plate's displaced slab under link 1 / the bracket: reach 0.39-0.81, follow 0.52-0.83 (central and high laws).",
+ "note": "Bench(60,160) fast cache, kit checks (march, K2 dense, K6, audit clean). Best: parent r20 s1414 #4, q 1.0, stage beside J1 at az 0 / el 35, +-8 mm XY, 4 mm normal, 5.5 mm XY stage, slide face = least-squares plane of the plate underside (28.6 deg from the stage axis), plate slab 24.3 mm, hub 1 at the parent's 54 mm. Slip extension per spec (judge/base_slip.py, samples classed by the skin they ride, offsets applied before the K3 fit). Spec corrections: the 5 mm J1 raise is wrong (flat face on a sloped ridge), the slip law needs +-20 / 6-9 mm travel not +-12 / 4.",
+ "doc": "docs/concepts/floating-centre-3r.md",
+ "model_file": "docs/concepts/models/floating-centre-3r.py",
+ "honest": true,
+ "checks": {
+  "mode": "march",
+  "cont": true,
+  "collide": true,
+  "q": 1.0
+ },
+ "audit": [],
+ "hubless": [
+  "JF"
+ ],
+ "inband14_chain": 0.1605,
+ "inband10_chain": 0.0973,
+ "best_k": 28,
+ "slip": {
+  "central": {
+   "parent_cuff_slides": 71.03,
+   "float_best": 73.46
+  },
+  "high": {
+   "parent_cuff_slides": 70.42,
+   "float_best": 136.74
+  }
+ }
+}

@@ -23,3 +23,71 @@
    the parent reproduced on the same code (template numbers 69.29 at q 0.95), the adversarial verifier, and a
    red-team pose list (rest, highest overhead, most across-body, mid behind-back, and the pose of largest slip)
    with per-member minimum gaps.
+
+## What was built (docs/concepts/models/floating-centre-3r.py, on tools/concept_kit.py)
+
+The champion chain (r20 s1414 #4: J1 az 2.4 / el 80.7, a = 76.9 / 66.7, W 86.3 / 21.8, branch -1) with kit parts at
+real size (flat O20 hubs with the 12.25 stack, 12 x 3 straps with the 60 deg climb, the 14 x 6 K7 neck, link 2 over
+link 1 and the neck) plus the float: a skin-contoured PLATE (disc of lateral radius 14 + travel, 2 mm grid in true
+mm), a flat slide face (least-squares plane of the underside, or normal to J1's axis) at its top + 1.5, a 5.5 mm XY
+stage and n_down of normal travel; the plate's K6 slab is the whole stack above its lowest point (conservative). The
+float's 3 slides are the closure's c = GH (no free coordinate); on the plain bench (GH fixed in the scapula frame) they
+sit at 0. Links that the float pushes out are re-laid at their true radius (otherwise the kit's 70 mm layout thins to
+5-10 mm spacing and the audit fails). All numbers: Bench(60, 160), fast grid cache, K3 march, K2 dense, K6 on,
+audit clean (`honest`), unless stated.
+
+**Spec corrections (measured).** (1) The spec's "J1 raised by about 5 mm" is wrong: a flat slide face under J1 must
+clear the skin under its whole footprint, and the skin around J1 (acromion -> trapezius ridge) is tilted 17-42 deg to
+the plane normal to J1's axis (least-squares plane of the plate underside, measured per configuration); with +-12 mm travel the plate top sits at 66 mm along its normal and hub 1's skin face at 112 mm
+(parent: 54 mm). (2) The travel the slip law needs is +-20 mm tangent and 6-9 mm normal (central and high laws, every
+parent), not +-12 / 4: +-12 leaves 19 % of the bench poses outside the travel. (3) The spec's "the cuff becomes
+simple" holds, but the cuff slides of the parent are not modelled in (a), so (a) is slightly flattered.
+
+## Results (41 configurations, docs/concepts/sweeps/floating-centre-3r.json)
+
+| configuration | gap | reach | follow | in-band 14 | in-band 10 | contact | chain-only in-band 14 |
+|---|---|---|---|---|---|---|---|
+| parent alone, q 1.0 (= _template) | 65.05 | 0.906 | 1.000 | 0.250 | 0.158 | 0 | 0.250 |
+| parent alone, q 0.95 | 69.29 | 0.763 | 1.000 | 0.457 | 0.298 | 0.112 | 0.457 |
+| float UNDER J1, +-4 mm, fitted face (20.6 deg tilt), q 1.0 | 63.12 | 0.906 | 1.000 | 0.269 | 0.224 | 0 | 0.095 (hub 1 at 67.2 mm, +13) |
+| float under J1, +-8 / +-12 mm | 168-235 | 0.17-0.41 | 0.03-0.45 | | | | hub 1 at 112 mm (+-12, q 0.95) |
+| float under J1, +-20 / 8 mm | 89.6 * | 0.825 | 0.917 | 0.158 | 0.140 | 0.046 | 0.048; plate top 354 mm (a footprint ray never clears) |
+| **float BESIDE J1 (stage at az 0 / el 35 on the scapula, bracket to J1), +-8 / 4 mm, q 1.0** | **58.17** | 0.906 | 1.000 | 0.318 | 0.227 | 0 | **0.161** |
+| same, +-4 mm | 59.73 | 0.875 | 1.000 | 0.328 | 0.229 | 0 | |
+| same, q 0.95 | 62.93 | 0.806 | 1.000 | 0.438 | 0.338 | 0.074 | |
+| stage at az -45 / el 40 or az 45 / el 35 | 180.7-275 | | | | | | collides with hub 1 / bracket |
+| SLIP central: parent + cuff slides (a) | 71.03 | 0.906 | 1.000 | 0.190 | 0.134 | 0 | |
+| SLIP central: float beside +-8 / 4 (b) | 102.38 | 0.656 | 0.717 | 0.353 | 0.247 | 0 | travel-limited |
+| SLIP central: float beside +-15 / 6 (b) | 73.46 | 0.813 | 0.833 | 0.370 | 0.272 | 0 | |
+| SLIP central: float beside +-20 / 8 (b) | 136.53 | 0.406 | 0.567 | 0.412 | 0.298 | 0 | plate under link 1 |
+| SLIP high: parent + cuff slides (a) | 70.42 | 0.906 | 1.000 | 0.196 | 0.136 | 0 | |
+| SLIP high: float beside (b), best | 136.74 | 0.388 | 0.633 | 0.362 | 0.280 | 0 | |
+
+\* entries k 8-9 were written before the 200 mm cap on the link re-layout; re-run with the current code k 8 reads 77.31 and is NOT honest (links > 200 mm, sparse) - dead either way.
+
+Parents other than r20 s1414 #4 / #0 at q 1.0: hub 2's K4 fit is infinite (J2's axis passes through the body in some
+pose, 36 rays never clear in 220 mm), with or without the float; the float runs on them take nothing (gap 275).
+
+**The measured limiter.** On the plain bench the float only adds metal. Its best bench gap (58.17, below the parent's
+65.05) is an artefact of the share metric: the skin-contoured plate (0.83 in band, ~380 samples at +-8 mm) lifts the in-band
+share while the chain itself moves away - link 1 has to pass over the stage (+ normal travel + 1 mm) and drops from
+0.25 to 0.0 in band; chain-only in-band 14 falls from 0.250 to 0.161 (plate-excluded gap 73.95). Under J1 the float
+cannot work at all with real travel (flat face on a 17-42 deg skin ridge -> hub 1 +13 mm at +-4, +58 mm at +-12; chain-only in-band 0.095 at +-4). Under the slip law the
+float's thesis holds in direction (chain samples over scapula skin get -delta, the arm-end metal stays aligned: in-band
+0.35-0.41 vs the cuff-slide parent's 0.19-0.20) but every travel that covers the law (+-15..20 mm) needs a 58-68 mm
+plate whose displaced slab runs under link 1 and the bracket: reach falls to 0.39-0.81 and follow to 0.52-0.83.
+
+**Red team (best, k 28).** Rest (plane -90, elev 0): plate 2.1 / 7.8 mm (min / median), hub 1 3.1 / 7.1, bracket
+8.3 / 28.7, link 1 17.1 / >31.8, hub 3 12.4 / 14.8, neck 5.9 / 11.5. Overhead (plane 45, elev 165, the highest taken):
+plate 2.4, hub 1 2.8, neck 2.7 min; link 1 12.1 / >31.8, hub 2 >31.7. Across (plane 150): hub 3 16.1 / 17.5, neck
+12.4 / 18.3. Jams: the 15 poses lost are the parent's own closure folds (plane -90..-60 at elev 30-60 behind the back,
+and elev 135 at plane 0-15); no collision and no flip left. Pinch: the plate at 2.0 mm (plane -63, elev 36, axial 75).
+The rest pose and the most-behind pose coincide on this bench (plane -90, elev 0).
+
+**Verdict.** Not worth a GPU sweep as a morphology: on the plain bench it is the parent plus a skin-hugging plate (the
+gap gain is the plate's samples, the chain is worse), and on the slip bench the travel that the slip law needs makes
+the float plate too big for the space under link 1. As a topology modifier the idea that survives is narrower: a
+SMALL float (+-4..8 mm) beside J1 removes the low-elevation part of R10 at almost no cost (58-60 on the plain bench,
+chain-only 0.16) but needs the cuff slides anyway overhead, so it does not simplify the cuff.
+
+![sketch](img/floating-centre-3r.png)
