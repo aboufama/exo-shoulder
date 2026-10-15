@@ -53,3 +53,4 @@ pipeline/full-exo/designs/band_r20_*/
 pipeline/full-exo/designs/cad_r20_*/
 pipeline/full-exo/designs/band_r21_*/
 pipeline/full-exo/designs/cad_r21_*/
+*.json.lock
