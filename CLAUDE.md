@@ -19,6 +19,15 @@ docs/EVOLUTION.md (and its snapshot to pipeline/evolution/) as part of the judge
 
 ## Working method (docs/METHOD.md - start every session with its checklist)
 
+- **Never idle (user, 2026-10-15: "the goal of this project is to iterate as quick as possible ... don't let this
+  happen again").** Never hold work behind infrastructure that can be built in parallel: start agents on the current
+  tools and let them switch when the faster one lands. Before launching a workflow, count its concurrency (at most
+  min(16, CPUs - 2) agents run at once per workflow: 2 on a 4-core box) and split the work over several workflows so
+  everything runs at once. Keep a watchdog (a session cron every ~15 min) that checks every slot - workflows, agents,
+  GPU endpoints (`tools/runpod_guard.py audit`: a stuck queue or unhealthy workers -> retire the endpoint and move the
+  jobs at once), local CPU - and starts the next work when anything is idle. An interrupt can stop background agents:
+  after one, check what is still running and report what stopped.
+
 - **Outside judges, never self-assessment.** After every design change run `tools/judge_all.sh <design id>` (or
   `... fast` while iterating) and report the scorecard before/after. If a number moved because the measurement changed
   (skin model, motions, metric), say so separately from design changes.
