@@ -45,7 +45,9 @@ def principled(name, color, metal, rough, bump=None, coat=0.0, sheen=0.0):
     return m
 alu = principled("blasted", (0.60, 0.615, 0.635), 1.0, 0.36, bump=(9.0, 0.18)); stainless = principled("stainless", (0.80, 0.80, 0.81), 1.0, 0.09)
 iglide = principled("iglide", (0.80, 0.42, 0.03), 0.0, 0.42); steel = principled("steel", (0.82, 0.83, 0.85), 1.0, 0.13)
-black = principled("mannequin", (0.012, 0.012, 0.013), 0.0, 0.62, coat=0.12, sheen=0.35)
+black = principled("mannequin", (0.008, 0.008, 0.009), 0.0, 0.72, coat=0.04, sheen=0.05)     # matte black (user look); sheen 0.35 read as grey
+for nd in black.node_tree.nodes:                                                                  # default specular (0.5) under the softboxes read as mid-grey
+    if nd.type == "BSDF_PRINCIPLED" and "Specular IOR Level" in nd.inputs: nd.inputs["Specular IOR Level"].default_value = 0.15
 def mat_for(n):
     l = n.lower()
     if any(k in l for k in ("din 7984", "iso 10642", "dowel", "screw")): return stainless           # every screw polished (user look)
