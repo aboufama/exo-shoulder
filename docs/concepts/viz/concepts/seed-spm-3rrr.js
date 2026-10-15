@@ -4,14 +4,15 @@
  * fixed in the humerus (a cone p_cone about the arm axis: the platform IS the arm side of the cuff, no extra ring).
  * All 9 axes through GH; spherical Gruebler 3(8-1-9)+9 = 3. Elbow = two-cone closure (angle a1 from the base axis,
  * a2 from the platform axis) on a fixed branch per leg. Best honest sweep entry (k46, gap 193.44, hub-axis
- * accessibility enforced). Out of range: a leg cannot close, or cond(J) > 50 (Gosselin J = B^-1 A). Hub radii are
- * schematic (base 56, elbow 70, platform 62 mm): the bench fit put HW0 / HW1 at 201 / 157 mm, which is the concept's
- * red-team result, not a plausible part. Closed form; residual = each leg's distal-arc error. 3 ACTIVE + 6 PASSIVE. */
+ * accessibility enforced). Out of range: a leg cannot close, or cond(J) > 50 (Gosselin J = B^-1 A). Hub radii = the
+ * entry's fitted hub levels (skin under each axis + clearance), capped at the 140 mm accessibility limit: elbows 1-2
+ * and platform hub 2 point down the arm or into the trunk, so they float 120-140 mm out (fit: 201 / 157 / 152 mm) -
+ * the measured reason the concept is dead. Closed form; residual = each leg's distal-arc error. 3 ACTIVE + 6 PASSIVE. */
 (function () {
   const K = (typeof window !== 'undefined' ? window : globalThis).KIN, V = K.V, M = K.M, D = K.D2R;
   const P = { b_th: 33.713, b_ph: 26.438, b_rho: 30.684, b_psi0: 360.0, b_psis: 121.565, p_cone: 48.536, p_az: -47.436,
               p_spread: 51.204, a1: 85.836, a2: 50.662, br: [1, -1, 1], perm: [1, 0, 2], cond_max: 50,
-              rB: 56, rW: 70, rV: 62, hub_r: 10, stack: 12.25, cuff_at: 165 };
+              rB: [122.3, 55.3, 83.9], rW: [140, 140, 61.8], rV: [119.8, 140, 103.7], hub_r: 10, stack: 12.25, cuff_at: 165 };
   // base axes (scapula frame): 3 spots b_rho around c = sph(b_th, b_ph) (th from lateral, ph 0 = up, 90 = back)
   const sph = (th, ph) => [-Math.sin(th * D) * Math.sin(ph * D), Math.sin(th * D) * Math.cos(ph * D), Math.cos(th * D)];
   const c = sph(P.b_th, P.b_ph), e1 = V.unit(V.sub(sph(P.b_th + 1e-3, P.b_ph), c)), e2 = V.cross(c, e1);
@@ -64,17 +65,18 @@
       out.push({ kind: 'arc', role: 'fixed-scapula', name: 'base frame 1-2', u: Uw[0], v: Uw[1], r0: P.rB - 2, r1: P.rB - 2, r: 3 },
         { kind: 'arc', role: 'fixed-scapula', name: 'base frame 2-3', u: Uw[1], v: Uw[2], r0: P.rB - 2, r1: P.rB - 2, r: 3 });
       for (let i = 0; i < 3; i++) {
-        out.push({ kind: 'hub', role: 'active', name: `base hub ${i + 1} (leg ${i + 1})`, c: V.scale(Uw[i], P.rB), axis: Uw[i], r: P.hub_r, h },
-          { kind: 'arc', role: 'link', name: `proximal arc ${i + 1}`, u: Uw[i], v: Ww[i], r0: P.rB + 6, r1: P.rW + 3, r: 2.5 },
-          { kind: 'hub', role: 'passive', name: `elbow hub ${i + 1}`, c: V.scale(Ww[i], P.rW), axis: Ww[i], r: P.hub_r, h },
-          { kind: 'arc', role: 'link', name: `distal arc ${i + 1}`, u: Ww[i], v: Vw[i], r0: P.rW + 9, r1: P.rV + 6, r: 2.5 },
-          { kind: 'hub', role: 'passive', name: `platform hub ${i + 1}`, c: V.scale(Vw[i], P.rV), axis: Vw[i], r: P.hub_r, h });
+        const rb = P.rB[i], rw = P.rW[i], rv = P.rV[i];
+        out.push({ kind: 'hub', role: 'active', name: `base hub ${i + 1} (leg ${i + 1})`, c: V.scale(Uw[i], rb), axis: Uw[i], r: P.hub_r, h },
+          { kind: 'arc', role: 'link', name: `proximal arc ${i + 1}`, u: Uw[i], v: Ww[i], r0: rb + 6, r1: rw + 3, r: 2.5 },
+          { kind: 'hub', role: 'passive', name: `elbow hub ${i + 1}`, c: V.scale(Ww[i], rw), axis: Ww[i], r: P.hub_r, h },
+          { kind: 'arc', role: 'link', name: `distal arc ${i + 1}`, u: Ww[i], v: Vw[i], r0: rw + 9, r1: rv + 6, r: 2.5 },
+          { kind: 'hub', role: 'passive', name: `platform hub ${i + 1}`, c: V.scale(Vw[i], rv), axis: Vw[i], r: P.hub_r, h });
       }
-      const harm = ctx.armAxis, mid = Vw[P.perm.indexOf(1)], cuffC = V.scale(harm, P.cuff_at);
-      const drop = V.scale(V.unit(V.add(V.scale(mid, 0.6), V.scale(harm, 0.4))), P.rV + 1);
-      out.push({ kind: 'arc', role: 'fixed-arm', name: 'platform strap a', u: Vw[0], v: Vw[1], r0: P.rV - 2, r1: P.rV - 2, r: 3 },
-        { kind: 'arc', role: 'fixed-arm', name: 'platform strap b', u: Vw[1], v: Vw[2], r0: P.rV - 2, r1: P.rV - 2, r: 3 },
-        { kind: 'arc', role: 'fixed-arm', name: 'arm-end drop strap', u: mid, v: drop, r0: P.rV - 2, r1: P.rV + 1, r: 3 },
+      const harm = ctx.armAxis, j = P.perm.indexOf(1), mid = Vw[j], rm = P.rV[j], cuffC = V.scale(harm, P.cuff_at);
+      const drop = V.scale(V.unit(V.add(V.scale(mid, 0.6), V.scale(harm, 0.4))), rm + 1);
+      out.push({ kind: 'arc', role: 'fixed-arm', name: 'platform strap a', u: Vw[0], v: Vw[1], r0: P.rV[0] - 2, r1: P.rV[1] - 2, r: 3 },
+        { kind: 'arc', role: 'fixed-arm', name: 'platform strap b', u: Vw[1], v: Vw[2], r0: P.rV[1] - 2, r1: P.rV[2] - 2, r: 3 },
+        { kind: 'arc', role: 'fixed-arm', name: 'arm-end drop strap', u: mid, v: drop, r0: rm - 2, r1: rm + 1, r: 3 },
         { kind: 'link', role: 'fixed-arm', name: 'drop strap to cuff', a: drop, b: V.madd(cuffC, V.unit(V.reject(drop, harm)), 47), r: 3 },
         { kind: 'strap', role: 'fixed-arm', name: 'arm cuff', c: cuffC, axis: harm, r: 47, w: 26 },
         { kind: 'point', role: 'link', name: 'GH centre', p: [0, 0, 0], r: 4 });
