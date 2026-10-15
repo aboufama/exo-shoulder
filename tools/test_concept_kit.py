@@ -173,12 +173,58 @@ def test_over_clears_by_construction():
     assert not K.collisions(ch, pts, ch.ok).any() and K.collisions(ch, {"A": D * 70.0, "B": D * 71.0}, ch.ok).all()
 
 
+def assert_over_fixed_point(ch, prof, fit):
+    """every `over` member's final profile is a fixed point of `_over` (nothing left to raise) and K6 finds no hit
+    between it and the members it passes over"""
+    for m in ch.members:
+        if not m.over: continue
+        r = prof[m.name]; assert np.max(K._over(ch, m, r.copy(), prof, fit) - r) <= 1e-6, m.name
+        for name, _ in m.over:
+            sub = K.Chain(members=[o for o in ch.members if o.name in (m.name, name)], ok=fit, joints=ch.joints)
+            assert not K.collisions(sub, {o.name: K.member_points(o, prof[o.name]) for o in sub.members}, fit).any(), (m.name, name)
+
+
+def test_over_and_climb_reach_a_fixed_point(monkeypatch):
+    """`_near` decides the shared-joint exemption at the CURRENT radius: a sample exempt at its raw 50 mm (13 deg from
+    the joint: 13.3 deg x 50 mm < 12 mm) that the climb lifts to 76.5 mm is outside the zone there (scaled to 70 mm:
+    16 mm) and inside the lower member's radial band [76, 79] -> K6 hit. fit_profiles iterates `over` and the climb."""
+    P = 2; k = np.tile([0.0, 1, 0], (P, 1)); t = math.radians(40.0); v = np.tile([math.sin(t), math.cos(t), 0], (P, 1))
+    A = K.strap_member("A", k, v, ("J",)); Bm = K.strap_member("B", k, v, ("J",), over=[("A", 1.0)])   # same arc off J
+    ns, nc = Bm.grid; s = np.repeat(np.arange(ns), nc)
+    raw = {"A": np.full(ns * nc, 76.0), "B": np.where(s <= 8, 50.0, 70.0)}       # B low by the joint, high beyond
+    ch = K.Chain(members=[A, Bm], ok=np.ones(P, bool), joints=dict(J=k))
+    monkeypatch.setattr(K, "_levels", lambda B, chain, fit, q, mode: {n: r.copy() for n, r in raw.items()})
+    one = K._climb(Bm, K._over(ch, Bm, raw["B"].copy(), {"A": raw["A"]}, ch.ok))    # the old single pass
+    assert K.collisions(ch, {"A": K.member_points(A, raw["A"]), "B": K.member_points(Bm, one)}, ch.ok).all()
+    prof = K.fit_profiles(None, ch, ch.ok)
+    assert_over_fixed_point(ch, prof, ch.ok)
+    assert np.all(prof["B"] >= one) and np.allclose(prof["B"].reshape(ns, nc)[6:, nc // 2], 80.0)   # A's top + 1 from 10 deg out
+
+
+def test_over_tests_the_pair_in_the_collisions_order(monkeypatch):
+    """`_near` is not symmetric (arc at the first member's radius, the second's largest sample extent): B over A, 2.6 deg
+    to the side, B at 88 mm (A 85 + 3 thick: 0.0 mm radial gap) with a 140 mm end. collisions() tests (A, B) when A is
+    listed first: near (4.2 mm / 85 mm > 2.6 deg); (B, A) is not (3.5 mm / 88 mm). `over` must use the same order."""
+    P = 2; t = np.radians(np.linspace(-20, 20, 21)); side = math.tan(0.045)
+    DA = np.tile(np.stack([np.sin(t), 0 * t, np.cos(t)], -1)[None], (P, 1, 1))
+    DB = K.unit(np.tile(np.stack([np.sin(t), side + 0 * t, np.cos(t)], -1)[None], (P, 1, 1)))
+    raw = {"A": np.full(21, 85.0), "B": np.where(np.arange(21) >= 18, 140.0, 88.0)}
+    monkeypatch.setattr(K, "_levels", lambda B, chain, fit, q, mode: {n: r.copy() for n, r in raw.items()})
+    for first in (True, False):
+        A = K.Member("A", DA, joints=("J1",)); Bm = K.Member("B", DB, joints=("J2",), over=[("A", 1.0)])
+        ch = K.Chain(members=[A, Bm] if first else [Bm, A], ok=np.ones(P, bool), joints={})
+        if first: assert K.collisions(ch, {"A": DA * 85.0, "B": DB * raw["B"][None, :, None]}, ch.ok).all()
+        prof = K.fit_profiles(None, ch, ch.ok); assert_over_fixed_point(ch, prof, ch.ok)
+        assert np.allclose(prof["B"][:18], 89.0 if first else 88.0)    # raised only where K6 would look
+
+
 def test_template_runs_on_kit_conventions(B):
     import importlib.util
     p = os.path.join(K.REPO, "docs", "concepts", "models", "_template.py")
     spec = importlib.util.spec_from_file_location("tp", p); M = importlib.util.module_from_spec(spec); spec.loader.exec_module(M)
     r = K.evaluate(B, M.build, M.PARAMS)
     assert r["collide"] == 0.0 and r["residual_deg"] < 0.5 and 0 < r["gap"] < 275 and r["mass_g"] > 50
+    L = B._kit_last; assert_over_fixed_point(L["chain"], L["prof"], L["ok"])   # link 2 over link 1 and the neck
 
 
 # ---- verification (adversarial verifier, docs/concepts/KIT.md "Verification") ----------------------------------------

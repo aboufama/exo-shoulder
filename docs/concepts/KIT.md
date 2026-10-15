@@ -89,7 +89,9 @@ K.log_event(f"screened <name>: gap {rep['gap']} (baseline 68.93)")
   part-part clearance, `over` builds 1 mm) -> the pose is not taken; joint partners exempt within HUB_R + 2 mm
   of the shared joint. To avoid collisions by construction, give the upper part `over=[(name, 1.0)]`: its underside is
   raised to the other's top + 1 mm wherever they meet in any fit pose (the template's link 2 over link 1 and the neck:
-  without it 34 % of the template's closing poses collide; link 2 then pays for it: 5 % in band).
+  without it 34 % of the template's closing poses collide; link 2 then pays for it: 5 % in band). `over` tests each
+  pair in the order K6 does (`Chain.members` order) and is iterated with the K5 climb to a fixed point, so K6 never
+  flags an `over` pair (Verification, bugs 4-5).
 - **K7.** `neck_member(F, p_from)`: 14 x 6 strap from the arm-end plate (direction p_from) to the start of BOTTOM's bar
   (RH @ (67.5 Wb + 40 Db)), K3 underside, K5 climb.
 
@@ -131,11 +133,12 @@ covers 56 % of an O20 disc, reaches 7.5 mm: the audit flags it); no continuity o
 
 ## Tests
 
-`OMP_NUM_THREADS=1 python3 -m pytest -q tools/test_concept_kit.py` (22 tests, ~35-45 s): directions vs band_impl, frames
+`OMP_NUM_THREADS=1 python3 -m pytest -q tools/test_concept_kit.py` (24 tests, ~20-45 s): directions vs band_impl, frames
 vs Bench, closure vs a brute-force circle scan on random vectors (both branches) and near-degenerate cases (b ~ w,
 tangent circles), K3 march vs a brute 1 mm march on real poses, `outer` vs concept_baseline, `dist_many` vs
-`B.dist` (incl. points outside the grid box), collisions on constructed hit / miss / exempt cases, `over`, K2 on a
-constructed flip (frames rule and dense rule), and the baseline row reproduction.
+`B.dist` (incl. points outside the grid box), collisions on constructed hit / miss / exempt cases, `over` (incl. a
+fixed point of `_over` with no K6 hit, on constructed cases and on the template), K2 on a constructed flip (frames rule
+and dense rule), and the baseline row reproduction.
 
 ## Verification (adversarial verifier, 2026-10-15)
 
@@ -182,3 +185,56 @@ Holes that remain (the verifier must look): a member that samples only part of i
 (the kit cannot know the true outline), understated thickness `t`, a sweep re-run with `resume=False` that drops
 earlier configurations, `n_configs` written by hand, a model that reads poses outside `B` (only held-out clips in
 B are caught), monkey-patching the kit.
+
+### `over` against its own judge K6 (2026-10-15, second pass)
+
+Reported from `clavicular-front-route` at the front-top seat `{j1lat 65, j1lon -120, a12 75, a23 70, s3 35, th3 -20,
+sigma -1, margin 8, q 0.98}`: link 1 (`over` bridge_b, both on J1) collided with bridge_b in 180 of 211 poses, and
+`_over` run again on the final profile still raised link 1. Two causes, both fixed, each with a test:
+
+4. **`over` ran once, before the climb (numbers changed).** `_near` decides the shared-joint exemption at the
+   member's CURRENT radius (angle x radius, scaled to r_ref above 70 mm): at the raw ~50 mm a sample 12 deg from J1
+   is exempt (10.5 mm < HUB_R + 2), the K5 climb then lifts it to ~78 mm where it is not (14.7 mm), and K6 flags the
+   pair. The final profile was not a fixed point of its own `over` (link 1: 12 samples still to raise, by up to
+   6.9 mm). `fit_profiles` now repeats `_over` + climb until nothing changes (both only raise; 2-3 passes measured, a
+   RuntimeError after 20). Test `test_over_and_climb_reach_a_fixed_point` (constructed, no bench).
+5. **`over` tested the pair in the other order (numbers changed).** `_near(A, B)` is not symmetric: the arc is taken
+   at A's radius and the threshold uses B's LARGEST sample extent. `collisions` tests each pair in `Chain.members`
+   order (usually the lower member first); `_over` tested (upper, lower). With fix 4 alone the clavicular seat kept 1
+   colliding pose: link 2 0.15 mm above link 1's top, 2.5 deg to the side, near for K6 (278 near sample pairs) but
+   not for `over` (207). `_over` now uses K6's order, so it raises exactly where K6 looks - also LOWER than before
+   where the old order was the stricter one (template link 2: Ti mass 125.1 -> 124.9 g at q 0.95, 176.7 -> 175.4 g at
+   q 1.0). Test `test_over_tests_the_pair_in_the_collisions_order` (constructed, both member orders). The template
+   test now also asserts the fixed point and no K6 hit on any `over` pair.
+
+Measured on Bench(60, 160), fast grid cache, `march`, K2 dense, K6 on (before = commit 727156a; gap / poses K6 rejects):
+
+| model, params | before | fix 4 | fix 4 + 5 |
+|---|---|---|---|
+| baseline-3r-kit, both conventions | 68.93 / 70.27, 0 | same | same (profiles identical) |
+| _template q 0.95 / q 1.0 | 69.29 / 65.05, 0 | same | same; Ti mass -0.2 / -1.3 g (fix 5) |
+| clavicular front-top, bare link 1 (ramp hub1 + STACK, default end) | 225.82, 180 | 78.64, 1 | 78.98, 0 |
+| clavicular front-top, model as committed (link 1 ramp STACK + 1 over 20 mm) | 79.02, 1 | 79.02, 1 | 79.45, 0 |
+| clavicular sweep best (k303) | 67.19, collide 0.0195 | - | 66.10, 0 |
+| seed-2r-cring PARAMS (= its row) | 129.98, 4 (link 1 x link 2, an `over` pair) | same | 126.23, 0 |
+| crown-ring-3r PARAMS | 88.03, 5 (ring 1 x link 2) | same | 86.76, 1 (raising link 2 over link 1 clears ring 1 too) |
+| crown-ring-3r sweep best (k163) | 58.03 | - | 58.03 |
+| annular-ring-3r, back-anchored-ring-3r, fivebar-roll, floating-centre-3r, posterior-max-margin-cardan, risley-turret, seed-pauldron-shells, trombone-arc (PARAMS) | | | no number moved |
+
+Not run (same error with both kits, not kit-standard): fourbar-virtual-joint, pointer-cslide, rolling-fin-j2 (no
+module-level `build`), rail-elbow (its PARAMS lack `psi_c`).
+
+**Which way the numbers move.** The template's numbers (table "Measured" above) did not move: gap, reach, follow,
+in-band 14 / 10 and contact are identical at q 0.95 and q 1.0; only its Ti mass dropped (fix 5). The number of poses
+K6 rejects went down or stayed the same in every model measured, and no `over` pair is flagged any more - but that
+is measured, not guaranteed (a raised member can meet a third member it has no `over` for). The GAP does not only get
+better: a pose K6 rejected was simply not taken, and once K6 accepts it, it is scored - if a member touches the skin
+there (q < 1 fits let the worst poses touch), it also counts as contact (100 x its share). The clavicular seat goes
+UP 0.34-0.43 for exactly that reason: in the committed model its last rejected pose (128, a workspace pose) has a
+member 20.9 mm inside the skin, so contact goes 21/210 -> 22/211. The moved numbers are more correct, not necessarily lower; fewer false collisions,
+not a better score, is what this fix buys.
+
+Rows and sweeps screened before this fix are stale where a model has `over` pairs: seed-2r-cring's row (129.98 ->
+126.23 at its own params) and clavicular-front-route (sweep best 67.19 -> 66.10; its row, 68.26, not re-run). They
+were left as written (their tracks own them). The clavicular model's link 1 workaround (ramp STACK + 1 over 20 mm)
+is no longer needed: at the front-top seat the bare link reads 78.98 against 79.45 with it.

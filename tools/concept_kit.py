@@ -256,7 +256,8 @@ class Member:
     off: level added to the fitted underside (hub stack); grid (ns, nc) + climb_deg: strap climb limit along axis 0
     (step_mm apart); ramps: [(mask (m,), other member name, dz)]: final underside >= the other's level + dz there;
     over: [(other member name, gap)]: wherever it passes over that member (in any fit pose), underside >= the
-    other's top + gap (the K6 clearance by construction; the other must not itself have `over`).
+    other's top + gap (the K6 clearance by construction; the other must not itself have `over`); iterated with the
+    climb limit to a fixed point (fit_profiles), so the final profile satisfies it.
     joints: names of the joints it carries (K6 partners are exempt within HUB_R + 2 mm of a shared joint)."""
     name: str
     D: np.ndarray
@@ -313,8 +314,19 @@ def _levels(B, chain, fit, q, mode):
     return out
 
 
-def fit_profiles(B, chain, fit, q=1.0, mode="march"):
-    """underside radius per sample (final, with offsets, flat levels, climb limit and ramps) -> {name: rho (m,)}"""
+def _climb(m, r):
+    """K5: |d underside / d s| <= tan(climb) along the strap (raises only; idempotent)"""
+    if not (m.climb_deg and m.grid): return r
+    ns, nc = m.grid; R2 = r.reshape(ns, nc); x = np.arange(ns) * m.step_mm; sl = math.tan(m.climb_deg * D2R)
+    return (R2[None, :, :] - sl * np.abs(x[:, None, None] - x[None, :, None])).max(1).ravel()
+
+
+def fit_profiles(B, chain, fit, q=1.0, mode="march", max_pass=20):
+    """underside radius per sample (final, with offsets, flat levels, climb limit and ramps) -> {name: rho (m,)}.
+    `over` and the K5 climb are iterated to a fixed point: `_near` decides the shared-joint exemption at the member's
+    CURRENT radius, so a sample exempt at its raw level (~50 mm, 12 deg from the joint) and then lifted by the climb
+    (~78 mm) is no longer exempt there, and K6 would flag the pair. Both only raise, over a finite set of levels, so
+    the loop ends (2-3 passes measured); the result is a fixed point of `_over` and of the climb."""
     raw = _levels(B, chain, fit, q, mode); prof = {}; level = {}
     order = sorted(chain.members, key=lambda m: (len(m.over) > 0, len(m.ramps) > 0))
     for m in order:
@@ -322,10 +334,13 @@ def fit_profiles(B, chain, fit, q=1.0, mode="march"):
         if m.kind in ("cap", "flat"): r[:] = r.max()
         r = r + m.off
         for mask, other, dz in m.ramps: r[mask] = np.maximum(r[mask], level[other] + dz)
-        if m.over: r = _over(chain, m, r, prof, fit)
-        if m.climb_deg and m.grid:                            # K5: |d underside / d s| <= tan(climb) (raises only)
-            ns, nc = m.grid; R2 = r.reshape(ns, nc); x = np.arange(ns) * m.step_mm; sl = math.tan(m.climb_deg * D2R)
-            R2 = (R2[None, :, :] - sl * np.abs(x[:, None, None] - x[None, :, None])).max(1); r = R2.ravel()
+        for _ in range(max_pass if m.over else 1):
+            r0 = r
+            if m.over: r = _over(chain, m, r, prof, fit)
+            r = _climb(m, r)
+            if np.max(r - r0, initial=0.0) <= 1e-6: break     # (float round-off of the climb's cone sums: ~1e-14 mm)
+        else:
+            if m.over: raise RuntimeError(f"{m.name}: over + climb did not reach a fixed point in {max_pass} passes")
         prof[m.name] = r; level[m.name] = float(r.max())
     return prof
 
@@ -412,16 +427,21 @@ def collisions(chain, pts, ok, clear=1.0, overlap=0.5, chunk=24):
 def _over(chain, m, r, prof, fit, clear=1.0, chunk=24):
     """K6 by construction: raise member m's underside r (m,) to >= other top + gap wherever it passes over the members
     listed in m.over [(name, gap)] (max over the fit poses: one violated sample would reject the pose; the shared-joint
-    zone is left to the hub stack)"""
+    zone is left to the hub stack). `_near` is not symmetric (arc at the first member's radius, the second's largest
+    sample extent), so the pair is tested in the order `collisions` tests it: the order of chain.members"""
     Pi = np.nonzero(fit)[0]; O = {o.name: o for o in chain.members}; need = np.full((len(Pi), len(r)), -np.inf)
     if not len(Pi): return r
-    xa_all = np.broadcast_to(r, (len(m.D), len(r)))
+    xa_all = np.broadcast_to(r, (len(m.D), len(r))); pos = {o.name: j for j, o in enumerate(chain.members)}
     for name, gap in m.over:
         o = O[name]; po = member_points(o, prof[name]); xo = np.linalg.norm(po, axis=-1); do = po / xo[..., None]
         shared = set(m.joints) & set(o.joints)
         for c0 in range(0, len(Pi), chunk):
             P = Pi[c0:c0 + chunk]
-            res = _near(m, o, m.D[P], do[P], xa_all[P], xo[P], chain.joints, shared, P, clear)
+            if pos[name] < pos[m.name]:                       # collisions() sees (o, m)
+                res = _near(o, m, do[P], m.D[P], xo[P], xa_all[P], chain.joints, shared, P, clear)
+                if res is not None: res = (res[0], res[1].transpose(0, 2, 1))
+            else:
+                res = _near(m, o, m.D[P], do[P], xa_all[P], xo[P], chain.joints, shared, P, clear)
             if res is None: continue
             k, nm = res
             top = np.where(nm, (xo[P][k] + o.t + gap)[:, None, :], -np.inf).max(2)
