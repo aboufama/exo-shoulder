@@ -60,3 +60,28 @@ Spec changes (each stated):
   the pre-climb radius) left L2 0.15 mm over the rail just outside the J2 zone in 85 % of poses (found and fixed here);
   link 2 is listed first among the members so K6 measures its pairs at its own radius, as `over` builds them.
 
+## The ceiling, from the raw skin (why the race cannot reach gap 0)
+
+**A race carrying a GH-concentric hub must be a surface of revolution about a1.** A rigid carriage that turns about a1
+sweeps surfaces of revolution; on a rail whose radius changes along its length (a "cam" rail) the carriage pitches by
+atan(r' / (r sin gamma)) and tilts the J2 axis off GH, so the three axes no longer meet and L2 binds. So the rail is
+one circle at one distance R, and every station of it is metal in every pose: R must clear the highest skin under ANY
+station of the used arc in ANY taken pose.
+
+`python3 docs/concepts/models/scapular-race-j2-carriage.py bound 24000` (K3 march along every scapula-fixed direction on
+a 3 deg grid in all 220 bench poses, quantile 0.95; 24 000 random designs over a1, gamma 15-85, alpha23 40-120, the J3
+axis, the branch and the rail radius budget `rmax`; the J2 axis must land on the best contiguous run of rail stations
+whose need is <= rmax, +- half a carriage + end stop). Hubs, L2, K2 and K6 are ignored, so these are UPPER bounds:
+
+| rail radius budget rmax (mm) | 65 | 70 | 75 | 80 | 90 | 100 | 115 | 130 |
+|---|---|---|---|---|---|---|---|---|
+| reach upper bound | 0.556 | 0.613 | 0.625 | 0.713 | 0.787 | 0.856 | **0.925** | 0.956 |
+| best follow bound | 0.933 | 0.917 | 0.950 | 0.950 | 0.983 | 1.000 | 1.000 | 1.000 |
+| rail in band at one R (the reach-best design) | 0.630 | 0.223 | 0.330 | 0.118 | 0.045 | 0.037 | **0.010** | 0.020 |
+| rail underside in band if it could follow each station (ceiling) | 0.892 | 0.818 | 0.860 | 0.599 | 0.657 | 0.154 | 0.534 | 0.315 |
+
+Reach >= 0.90 needs the rail at >= ~115 mm from GH; there the one-radius rail is 1 % in band (its stations need 46 to
+115 mm: median ~68). Below 80 mm the rail can be in band but the J2 axis then cannot follow the arm: reach <= 0.71.
+The deltoid, armpit and pectoral stations are the ones the arm enters (the spec's own 13-pose precheck found the same:
+~45-50 % of the workspace).
+
