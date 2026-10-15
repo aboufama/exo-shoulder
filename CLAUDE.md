@@ -17,6 +17,24 @@ self-aligning slides at the cuff (outside the count). Right shoulder; fit the us
 The user wants the design's evolution recorded for a final time-lapse visual: add every judged design to
 docs/EVOLUTION.md (and its snapshot to pipeline/evolution/) as part of the judge loop.
 
+## Ambition rules - every agent and subagent, every task (Felix Rieseberg's essay, docs/METHOD.md; user 2026-10-15:
+"make sure any findings from it are hard engrained in everything you and all subagents do")
+
+1. **Speed is assumed.** Never wait on something that can run in parallel; start now on the tools that exist and switch
+   when better ones land; keep every slot busy (agents, GPU, CPU); time-box your task tightly and report early when a
+   direction is dead (with the measured reason).
+2. **Altitude: the outcome, not the task.** The outcome is all 19 requirements passing on a mechanism the wearer does not
+   feel. Before you finish, say what happens next and leave a loop running instead of a one-off result (idea -> bench ->
+   verifier -> GPU sweep -> L1 CAD -> judges -> dashboard, unattended).
+3. **Depth: a specific, hard goal stated as reasonable.** Bench: gap 0 (in-band 2-14 mm >= 90 %, follow >= 95 %, reach
+   >= 90 %, zero contact); built CAD: R1-aim (2-10 mm) >= 90 %. Not "do your best". When it looks impossible, change the
+   morphology and prove the impossibility from data. Use the field's instruments (libigl, CalculiX, MuJoCo, OpenSim, ...),
+   start from the rawest data, and let an outside judge decide - never grade your own work (a verifier re-measures
+   every claim).
+4. **Range: do the work of other fields, never role-play them**, and always include a red team looking for the pose
+   that jams, the point that pinches, the number that is optimistic.
+5. **Produce new knowledge** and write it down (docs/FINDINGS.md, docs/concepts/): what you measured, what failed, why.
+
 ## Working method (docs/METHOD.md - start every session with its checklist)
 
 - **Never idle (user, 2026-10-15: "the goal of this project is to iterate as quick as possible ... don't let this

@@ -77,3 +77,25 @@ the model, produce the pressure map, write the quote request), never writing a c
 2. Depth: which professional instrument does the work, which raw data does it start from, which judge decides?
 3. Range: which other field's method applies here, and who is the red team?
 4. Close with the scorecard (`tools/judge_all.sh`), before vs after, and what was learned in docs/FINDINGS.md.
+
+## Running agents (the essay applied to orchestration - hard rules for the lead and every subagent)
+
+Learned the hard way on 2026-10-15: screening agents sat unlaunched while the lead waited for a faster bench, a
+workflow ran 2 agents at a time without anyone counting, a GPU endpoint sat stuck for 26 minutes, and stopped agents
+went unnoticed. The user: "the goal of this project is to iterate as quick as possible ... don't ever waste time like
+this again". So:
+
+- **Speed is assumed** (the essay takes it as given): every slot busy - agents, GPU, CPU. Never hold work behind
+  infrastructure that can be built in parallel; agents start on the current tools and switch when the better one lands.
+  Count a workflow's concurrency before launching it (min(16, CPUs - 2) per workflow) and split the work so everything
+  runs at once. A 15-minute watchdog checks every workflow, agent, endpoint and core and launches the next work.
+- **Altitude in every prompt**: the prompt names the outcome (all 19 requirements, a wearer who does not feel it), the
+  loop the agent's result feeds (bench -> verifier -> GPU -> L1 CAD -> judges -> dashboard) and what happens next.
+- **Depth in every prompt**: a specific hard numeric target stated as reasonable (gap 0; R1-aim >= 90 %), a tight
+  time box (the "Fast" list: audacious goals, short deadlines), the instrument of the field to use, the rawest data to
+  start from, and the outside judge that decides. No agent grades itself: every result that matters passes an
+  adversarial verifier before it is reported as a win.
+- **Range in the crew**: agents do the work of distinct fields (kinematician, orthotist, machinist, biomechanist,
+  inventor) plus a red team; they produce artefacts (a model, a measurement, a quote request), not characters.
+- **Honest reporting**: measured numbers before/after, measurement changes separate from design changes, failures said
+  plainly, and every result logged on the dashboard as it lands.
