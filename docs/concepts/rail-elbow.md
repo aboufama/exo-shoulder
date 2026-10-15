@@ -199,3 +199,121 @@ rail stage is one radius about p2 (now ~100-105 mm, lower than k64's 116-125 bec
 lower skin), still 0 % in band; the score rose through hub 3 (0.15 -> 0.36), strap 1 (0.31 -> 0.41) and the neck
 (0.42 -> 0.51). Status moves from dead to **screened** (clears 74.9 and, narrowly, 76.3); the structural argument above
 still caps it (rail stages ~40 % of the samples at ~0 % in band).
+
+## Convergence and red team (2026-10-15, leader stage 1)
+
+**Gate on the polish, recomputed from the sweep file: not converged.** Over the 123 polish tries, the best-so-far
+gained 0.69 pt over the second half (< 1: pass), **0.60 pt over the last third (>= 0.5: fail)**, and the top 5 are
+within 0.60 pt (pass).
+
+**Method.** CMA-ES on the farm, one job per stream (`tools/concept_cma.py`: 8 processes on one 8-vCPU worker, a whole
+generation per round, no per-generation round trip). Same 7 parameters and scales as the polish (az 8, el 4, a1 4,
+a2 4, wd 6, wa 6, d_off 5 deg), popsize 8, telescopic rail, sigma -1, margin 10, q 1. Model file unchanged.
+Two rules are now automatic instead of hand-run:
+* `r_lay` = the fitted stage radius (min of the two stages' levels), as a fix point with at most 2 re-runs;
+* a dishonest report (kit audit) costs +100 in the objective, and so does a layout radius above the fitted one.
+
+Both streams started from k172: A at sigma 0.3 (seed 11, 141 generations, 1129 tries, 698 s) and B at sigma 0.6
+(seed 12, 35 generations, 281 tries, 882 s). Farm cost $0.13. 1410 tries were appended to the sweep, stage `cma2-A` /
+`cma2-B`, k191-k1600.
+
+| stream | best | score | where | gate on the stream |
+|---|---|---|---|---|
+| A (sigma 0.3 -> 0.02, collapsed) | **57.19** (k1530) | **79.20** | az 0.65, el 76.82, a1 80.71, a2 62.93, W (93.82, -4.20), d_off -33.24, r_lay 109 | 2nd half +0.14, last third +0.06, top 5 within 0.01: **converged** |
+| B (sigma 0.6 -> 0.32, budget hit) | 58.23 | 78.83 | az 27.0, el 84.4, a1 84.4, a2 66.9, W (93.6, 1.1), d_off -57.4, r_lay 131 | 2nd half +0.66, last third +0.27: a second basin, still descending when it stopped |
+
+**Gate on the whole CMA history (polish + cma2, 1533 tries in order): converged.** The best gained 0.38 pt over the
+second half and 0.08 pt over the last third, and the top 5 are within 0.01 pt (57.19-57.22, all in A's basin).
+B's basin (58.23, sigma still 0.32) is being continued from its best (stream C, sigma 0.2). If it goes below 57.19,
+the gate has to be re-run.
+
+**New best k1530** (Bench(60,160), fast grid, kit checks; re-run locally: same 57.19, honest, audit clean):
+* reach 0.894, follow 1.000, in-band 14 0.334, in-band 10 0.193, contact 0, closure 0.923, 0 flips, K6 0;
+* closure residual 0.0 deg, min fold margin 10.4 deg, Ti 161 g;
+* rail at polar 29.7 deg about p2, centreline radius 54 mm, span 176 deg including the stops and the tab.
+
+Per member in band: hub 1 1.00, **hub 3 0.75** (k172: 0.36), strap 1 0.43, **neck 0.68** (0.51), bridge 0.13 (0.04),
+rail **0.00**, stage 2 **0.00**. The whole gain over k172 (63.72 -> 57.19) comes from the arm-end parts. The
+morphology's own part, the rail, still contributes nothing in band.
+
+### The measured limiter (k1530; k172 the same)
+
+The two rail stages are 40 % of the metal samples (rail 0.20, stage 2 0.20), and 0.0 % of them are in band. The
+per-sample skin need under them (the K3 march over the 203 taken poses) has a median of 58-59 mm. A rigid stage has to
+take the maximum over its stations and over every pose, though:
+
+| stage | need p50 | p75 | p90 | p95 | max = level | poses that set it |
+|---|---|---|---|---|---|---|
+| rail | 64 | 70 | 82 | 87 | 109 | pose 89 (plane -15, elev 60, axial -15), pose 180 (plane 105, elev 45, axial -165), 105, 123, 130 (internal rotation 75-105) |
+| stage 2 | 72 | 81 | 90 | 95 | 111 | pose 89, pose 126 (plane 30, elev 105), 180, 88, 76 |
+
+(The need columns are per-pose maxima over the stage's stations.)
+
+* Even a stage refitted in every pose would sit at 64-72 mm, while the median sample needs 58: the spread along one
+  stage, within a single pose, already pushes most of it past the 12 mm band.
+* The 5 % worst poses add 20-40 mm on top of that.
+* No per-member quantile can bring the stages into band. At q 0.75 they would still be at 70-81 mm, about 12-23 mm
+  over the median skin, and they would lose 25 % of the poses.
+
+### The variant that attacks it, and why
+
+The red team found the telescope illegal for MVP1 (below), so the variant has to be the MVP1-legal rail: the **rigid
+single rail (`tele=0`) with the CMA free to move the rail toward the J2 pole**. A small polar angle gives a short,
+local arc whose far stations stay over the skin near p2, and that is the only way a one-piece rail can avoid the
+beyond-carriage stations that killed it at d_off -25.
+
+Measured at k172's axes before the search (local, Bench(60,160) fast): the rigid rail needs **209 mm** (gap 72.99,
+dishonest: strap 1 and the bridge ramp up to it, sampled at 4.8-4.9 mm).
+* Its per-pose need: p50 70, p90 103, p95 121, max 209 mm.
+* Laid out at 70 mm, some stations find no clearance at all (400).
+
+The CMA of the rigid variant (stream R, sigma 0.6, seed 21, d_off scale 8) is queued on the farm; its result goes
+below.
+
+### Red team
+
+1. **The telescope's 2:1 drive is not allowed in MVP1.** Stage 2 has to run at half the carriage speed; the model
+   names a cable loop for this, which needs pulleys. REQUIREMENTS.md, scope 2026-10-15: MVP1 has "no actuators,
+   pulleys or gearing". The legal alternatives either cost or are not modelled:
+   * a rack and pinion is gearing;
+   * a floating stage 2 is an undriven coordinate (R17), and its worst-case envelope is the rigid rail's;
+   * a crossed-roller cage (rolling elements only) makes the moving stage a part of link 2 that runs behind the
+     carriage and past the anchor, across strap 1's path (not modelled);
+   * the rigid rail at the same axes needs 209 mm (above).
+
+   Until a legal 2:1 drive is modelled, **every telescopic number here (63.72, 57.19) is an MVP2 number, not an MVP1
+   one.**
+2. **The pose that jams.** Every pose lost at k1530 is a fold of the 3R (fold margin 2.1 to -28.8 deg), none to the
+   rail travel or to K6:
+   * rest 57/57;
+   * overhead (elevation >= 140) 11/17: 6 folds, at elev 150 in plane 30 with axial 0, and in planes 90-120 with axial
+     -90 to -135 (k172: 4 folds + 2 K6);
+   * across the body (plane >= 90, elevation >= 45) 37/48, 11 folds;
+   * behind the back (plane <= -30 or axial >= 60, elevation < 50) 29/29.
+
+   The fold sits in the overhead / across-the-body corner with the arm internally rotated; on this bench that is the
+   gap's remaining reach term.
+3. **The point that pinches** (closest metal over the taken poses at k1530):
+   * strap 1 at 2.01 mm (pose 123), neck 2.00 (pose 148), hub 3 2.25, rail 2.31, hub 1 2.45, stage 2 2.60; no contact.
+   * Part-part gaps between parts that move relative to each other:
+     * bridge over the neck (the J3 scissor) 2.2 mm at pose 102 (plane 0, elev 105), 29-31 mm over the skin. A finger
+       pinch, not a skin one.
+     * stage 2 over the neck 10.0 mm at pose 76 (plane -45, elev 45, axial 30), 9-16 mm over the skin. This is the one
+       moving gap near the skin, and it is wider than the 8 mm a skin fold needs to be caught.
+     * strap 1 vs stage 2 4.9 mm, 30 mm or more over the skin.
+4. **The numbers that are optimistic.**
+   * (a) Grid vs exact: the verifier measured k172 at 64.70 exact vs 63.72 on the grid (+0.98). k1530's exact number is
+     in the queued large-bench job.
+   * (b) The brief says rail-elbow "beats the champion on the same large bench" at v_gap 64.70. That 64.70 is
+     **Bench(60,160)** exact, not Bench(110,360). The large-bench re-measure (k172 and k1530, exact, 1 mm radial part
+     clearance, refit and frozen; `tools/concept_bigbench.py`) is queued on the farm.
+   * (c) The rail hardware:
+     * The centreline radius is 54 mm at k1530 (40 mm at k172). docs/research/ring_and_shell_hardware.md finds no
+       catalogue curved guide at 45-65 mm: THK HCR needs R >= 100, and the Hepco R12-93 is rated 1.25 N.m against the
+       25 N.m needed.
+     * The custom options there stack about 10 mm (wire race) to 10.4 mm (V-wheel), against the model's 9 mm
+       carriage, and two of them side by side are needed for the telescope.
+     * 176 deg of open arc is a curved cantilever on link 1 (twist not modelled).
+   * (d) Not modelled, all of which would make it worse: the 2:1 drive and its parts, the roller housings, the stage-2
+     end stops' strikers, and the 1 mm radial part clearance. The last costs nothing at k172 on Bench(60,160): K6 is
+     1.96 % at both 0.5 and 1 mm.
