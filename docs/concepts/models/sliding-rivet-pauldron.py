@@ -371,13 +371,21 @@ class Design:
 
     def _check_slots(self, sl, R):
         for s in sl:
-            if s["hi"] - s["lo"] >= 330: return f"slot {s['hi'] - s['lo']:.0f} deg >= 330 (plate cut in two)"
+            if s["hi"] - s["lo"] >= 330:                                       # full ring track: the island inside it is dropped
+                if len(sl) > 1: return f"slot {s['hi'] - s['lo']:.0f} deg >= 330 with two slots (plate cut in two)"
+                s["lo"], s["hi"], s["ring"] = 0.0, 360.0, True
             if R * math.sin(s["pol"]) - self.p["slot_w"] / 2 < 2.0: return "slot crosses the joint axis"
         if len(sl) == 2:
             a, b = sl
             if abs(a["pol"] - b["pol"]) * R < self.p["slot_w"] + WEB and arcs_overlap((a["lo"], a["hi"]), (b["lo"], b["hi"])):
                 return "the two slots cross"
         return ""
+
+    def _island(self, pol, slots, R):
+        h = np.zeros(len(pol), bool)
+        for s in slots:
+            if s.get("ring"): h |= pol < s["pol"] - self.p["slot_w"] / 2 / R
+        return h
 
     @staticmethod
     def _in_slots(pol, az, slots, R, sw):
@@ -393,7 +401,7 @@ class Design:
         G = {}
         # S cap (S frame, about b)
         bS = basis(self.b); D = cap_grid(*bS, self.rhoS, R_TOP); pol, az, _ = sph(D, *bS)
-        G["scap"] = ("S", D, ~self._in_slots(pol, az, self.slots1, R_TOP, sw), bS, self.rhoS)
+        G["scap"] = ("S", D, ~self._in_slots(pol, az, self.slots1, R_TOP, sw) & ~self._island(pol, self.slots1, R_TOP), bS, self.rhoS)
         # L1 (L1-local: x = b, y = toward p2)
         D = cap_grid(ex, ey, ez, self.rho1, R_TOP)
         self.j1_dirs = [from_sph(np.array([pl]), np.array([az]), ex, ey, ez)[0] for pl, az in self.j1]
@@ -411,7 +419,7 @@ class Design:
         Wl = np.array([math.cos(A2), math.sin(A2), 0.0]); self.Wl = Wl
         uW = unit(ex - math.cos(A2) * Wl); vW = np.cross(Wl, uW); self.bW = (Wl, uW, vW)
         D = cap_grid(Wl, uW, vW, self.rho3, R_ARM); pol, az, _ = sph(D, Wl, uW, vW)
-        G["armend"] = ("L2", D, ~self._in_slots(pol, az, self.slots3, R_ARM, sw), self.bW, self.rho3)
+        G["armend"] = ("L2", D, ~self._in_slots(pol, az, self.slots3, R_ARM, sw) & ~self._island(pol, self.slots3, R_ARM), self.bW, self.rho3)
         # strap: from the arm-end disc edge to the band's near (lo) end, on the great circle W -> c(lo)
         cend = from_sph(np.array([A1]), np.array([lo + 0.0]), ex, ey, ez)[0]
         dWe = math.acos(np.clip(Wl @ cend, -1, 1)); self.strap_len = dWe - self.rho3
