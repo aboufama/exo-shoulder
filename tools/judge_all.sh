@@ -6,4 +6,5 @@ $PY -W ignore judge/part_validity.py $ID | tail -8
 $PY -W ignore judge/body_contact.py $ID --step $S | head -6
 $PY -W ignore judge/part_contact.py $ID --step $P | head -8
 $PY -W ignore judge/base_mount.py $ID --step $((S + 1)) | tail -1
+[ -f pipeline/full-exo/designs/$ID/workspace.json ] && $PY -W ignore judge/workspace.py $ID --step $((S * 2)) | tail -1
 $PY judge/scorecard.py $ID

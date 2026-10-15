@@ -278,6 +278,17 @@ else:
     sc.add_geometry(blk, node_name="H|BOTTOM JN hub block (proxy)|0", geom_name="H|hubblock")
 sc.export(os.path.join(DD, "exo.glb"))
 axes = [["base", [1.0, 0, 0]]] + [[f"l{k}", [1.0, 0, 0]] for k in range(1, N)] + [[f"l{N - 1}", [math.cos(A[N - 2]), math.sin(A[N - 2]), 0.0]]]
+if ENVELOPE:                                                                         # R16: every workspace pose, independently (judge/workspace.py)
+    wsp = []
+    for ci, name in enumerate(NAMES):
+        if name not in ENVELOPE: continue
+        for f in np.nonzero(CID == ci)[0]:
+            pose = POSE[f]; HG, Rs = pose_mats(*pose[:3]); pins = chain(HG, qrad(int(CFG[f])))
+            rec = dict(p=[round(float(x), 2) for x in pose], want=[round(float(x), 2) for x in pose], held=False, eval_feasible=bool(FEA[f]), closes=pins is not None)
+            if pins is not None: rec["G"] = {g: (Rs @ F_).round(6).ravel().tolist() for g, F_ in zip(GRP, frames_of_members(pins))}
+            wsp.append(rec)
+    os.makedirs(DD, exist_ok=True); json.dump(dict(envelope=sorted(ENVELOPE), poses=wsp), open(os.path.join(DD, "workspace.json"), "w"), separators=(",", ":"))
+    print(f"workspace.json: {len(wsp)} poses, chain closes in {100 * np.mean([w['closes'] for w in wsp]):.1f} %, evaluator-feasible {100 * np.mean([w['eval_feasible'] for w in wsp]):.1f} %")
 json.dump(dict(subtitle=SUB, clips=clips, axes=axes, design=dict({k: R[k] for k in ("n", "az", "el", "a", "w", "branch", "order", "zj4", "score", "follow", "in_band")},
                                                                   hub_r=float(R.get("hub_r", HUB_R)), arm_mm=ARM_MM)),
           open(os.path.join(DD, "clips.json"), "w"), separators=(",", ":"))
