@@ -32,7 +32,7 @@ except ImportError:
     np = None
 
 _CACHE = {}
-CODE_VERSION = "band-2026-10-15t (min link arc 35 deg + min arm 10 mm between hub seats; pure 3R chain)"
+CODE_VERSION = "band-2026-10-15u (fit_clips: held-out frames never shape the design; min link arc 35 deg + min arm 10 mm; pure 3R chain)"
 RESD = 0.25; NWD, NHD = 1440, 720; LAT_LO, LAT_HI = -75.0, 90.0; CLEAR = 3.0
 ROW0, ROW1 = int((LAT_LO + 90) / RESD), int((LAT_HI + 90) / RESD)
 HUB_R, HW, T_LINK, STACK, T_W, T_BOT = 17.0, 7.0, 5.5, 6.0, 1.0, 6.5
@@ -260,6 +260,9 @@ class Band:
         self.G = float(job.get("G", 10.0)); self.R_REF = float(job.get("r_ref", 65.0)); self.RAMP = math.tan(math.radians(float(job.get("ramp_deg", 35.0))))
         self.SING = float(job.get("sing_deg", 10.0)) * D2R; self.q_step = float(job.get("q_step", 10.0))
         self.chunk = int(job.get("chunk", 48)); self.drop_rounds = int(job.get("drop_rounds", 80))
+        fc = job.get("fit_clips")                                          # held-out split: shape, BOTTOM face and the kept
+        nm = list(self.P["NAMES"]); self.fit_clips = [n for n in nm if n in fc] if fc else None     # iteration see these clips only
+        self.fit_mask = (sum((self.P["CID"] == k) for k, n in enumerate(nm) if n in fc) > 0) if fc else self.t.ones(len(self.P["CID"]), dtype=self.t.bool, device=dev)
         self.hub_relief = float(job.get("hub_relief", 0.0))                # mm the contoured hub underside may drop below the flat face
         self.balance = float(job.get("balance", 0.0))                      # blend in the mean of the 3 worst clips
         self.hub_margin0 = float(job.get("hub_margin", 2.0))               # contoured undersides keep this much spare clearance
@@ -476,7 +479,7 @@ class Band:
         if init_mode == "hug": val0 = t.where(VALID, -(LO * wn).sum(-1), t.full((NP, C), -BIG, device=self.dev))          # hug: lowest skin
         else:                                                                                       # 'band': most samples with a non-empty band
             val0 = t.where(VALID, ((CAP - LO).clamp(min=0, max=8.0) * wn).sum(-1), t.full((NP, C), -BIG, device=self.dev))
-        path = self.dp_path(val0, NBR); keep = t.ones(NP, dtype=t.bool, device=self.dev)
+        path = self.dp_path(val0, NBR); keep = self.fit_mask.clone()          # fit_clips: held-out frames never shape the design
         best = None
         for it_ in range(rng_iters):
             h, S, sc, zj4 = self.fit_shape(LO[ar, path], CAP[ar, path], keep, wS, kindA, cosA, dAA, dBA, JA, memA, is_low, is_bot, F_top_bottom, N, lower)
@@ -509,10 +512,13 @@ class Band:
                 cs_ = sorted(float(frame[t.tensor(fr_, device=self.dev)].mean()) for fr_ in self.clip_frames)
                 score = (1 - self.balance) * score + self.balance * sum(cs_[:3]) / 3
             if __import__('os').environ.get('BAND_DEBUG'): print(f'  iter {it_}: fit {sc:.3f} -> path score {score:.3f} follow {follow:.3f} valid-any {float(VALID.any(1).float().mean()):.2f} feas-any {float(feas.any(1).float().mean()):.2f} zj4 {zj4:.1f}', flush=True)
-            if best is None or score > best["score"]:
-                best = dict(score=score, follow=follow, h=h.clone(), zj4=zj4, bot_under=self._bot_under.clone(), faces=dict(self._faces),
+            fm = self.fit_mask; sel = float((frame * WT)[fm].sum() / WT[fm].sum()) if self.fit_clips else score
+            if best is None or sel > best["sel"]:
+                best = dict(sel=sel, score=score, follow=follow, h=h.clone(), zj4=zj4, bot_under=self._bot_under.clone(), faces=dict(self._faces),
                             rail_under=(self._faces_full["rail_under"].clone() if self._rail is not None else None), frame=frame.clone(), cfg=path.clone(), feas=fe.clone(),
                             feas_all=feas.clone() if detail else None, share_all=share.clone() if detail else None)
+        if __import__('os').environ.get('BAND_STASH'):                                             # analysis hook (pipeline/conformal/inband_ceiling.py)
+            self._stash = dict(LO=LO, CAP=CAP, cfg=best["cfg"], feas=best["feas"], h=best["h"], bot_under=best["bot_under"], wS=wS, memA=memA, kindA=kindA, is_bot=is_bot, is_low=is_low, scored=scored)
         # the physical arm rule at the fitted hub heights: the deg rule alone lets hubs near GH (or big hubs) touch
         arm_ok_, arm_err, arm_mm = arms_ok(d["a"], hub_heights(N, best["faces"], lower, STACK), self.min_arm, HUB_R)
         arm_mm = [round(c, 2) for c in arm_mm]
@@ -521,6 +527,9 @@ class Band:
                    score_unweighted=float(best["frame"].mean()), follow_unweighted=float(best["feas"].float().mean()),
                    in_band=float(best["frame"][best["feas"]].mean()) if bool(best["feas"].any()) else 0.0, zj4=float(best["zj4"]), C=C, arm_mm=arm_mm,
                    min_arc=self.min_arc, min_arm_mm=self.min_arm)
+        if self.fit_clips:
+            fm = self.fit_mask; out["fit_clips"] = self.fit_clips; out["score_fit"] = best["sel"]
+            out["follow_fit"] = float((best["feas"].float() * WT)[fm].sum() / WT[fm].sum())
         names = self.P["NAMES"]; cid = self.P["CID"]
         out["clips"] = {names[k]: dict(score=float(best["frame"][cid == k].mean()), follow=float(best["feas"][cid == k].float().mean())) for k in range(len(names))}
         if detail or d.get("diag"):
@@ -627,7 +636,7 @@ class Band:
         HG, RS = self.P["HG"], self.P["RS"]; NP = HG.shape[0]
         wt = t.einsum("pij,pjk,mk->pmi", RS, HG, dirs)                                            # thorax = RS HG w
         flat = self.pix(wt); fx = t.arange(NP, device=self.dev)[:, None].expand_as(flat)
-        return float((self.look("r1c", fx, flat) * cosa[None]).max()) + 0.5
+        return float((self.look("r1c", fx, flat) * cosa[None])[self.fit_mask].max()) + 0.5
 
     def fit_shape(self, Lsel, Csel, keep, wS, kindA, cosA, dAA, dBA, JA, memA, is_low, is_bot, F_bot, N, lower):
         """shape h (I,) from the chosen configs' lower bounds: envelope over the frames kept, greedily dropping the

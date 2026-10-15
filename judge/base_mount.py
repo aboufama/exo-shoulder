@@ -14,9 +14,8 @@ rest, i.e. every axis through the GH centre):
     python3 judge/base_mount.py <design dir|id> [--step 3]  -> <design>/judge/base_mount.json"""
 import argparse, json, os, sys
 import numpy as np
-from scipy.spatial import cKDTree
 from common import design_dir, load_parts, frames, PIPE
-from sdist import signed_distance
+from sdist import max_depth
 sys.path.insert(0, os.path.join(PIPE, "girdle")); import girdle as GD
 from girdle import BP
 ap = argparse.ArgumentParser(); ap.add_argument("design"); ap.add_argument("--step", type=int, default=3)
@@ -44,8 +43,8 @@ if parts:
     G0 = BP.scap(C0["p"][1]).T @ np.array(C0["G"]["base"]).reshape(3, 3)          # base group frame -> rest (thorax) frame
     B = np.concatenate([P[:: max(1, len(P) // 3000)] for _, P in parts]) @ G0.T
     for (clip, fi, fr), lf in zip(FR[::2], M.lift[::2]):
-        V = BP.posed(dict(zip(["plane", "elev", "axial", "flex", "pron"], fr["want"]))); sd = signed_distance(B - lf, V, BP.F, tree=cKDTree(V[BP.F].mean(1)))
-        if -sd.min() > depth: depth = float(-sd.min()); worst = [clip, fi, [round(v) for v in fr["want"][:3]]]
+        V = BP.posed(dict(zip(["plane", "elev", "axial", "flex", "pron"], fr["want"]))); dep = max_depth(B - lf, V, BP.F, h=2.0, g=1.0)[0]
+        if dep > depth: depth = dep; worst = [clip, fi, [round(v) for v in fr["want"][:3]]]
 names = [f[0] for f in FR]
 out = dict(girdle_law="worst of rig / literature / OpenSim Seth (girdle.lift_laws) - not yet the user's OpenCap", base=base, frames_checked=len(FR), step=a.step,
            per_law_max_mm={l: round(float(v.max()), 2) for l, v in per_law.items()},
