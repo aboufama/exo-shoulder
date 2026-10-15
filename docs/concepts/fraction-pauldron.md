@@ -211,3 +211,79 @@ Not worth a GPU sweep.
   ~0). Every telescope must store >= 136-177 deg of outer-angle stroke. A pauldron that genuinely tracks the fraction
   field needs a holonomic 2-DOF partial-CV coupling, which none of the borrowed fields (armour, tongs, rolling spines,
   CV shafts) provides beyond t = 1/2 at <= ~45 deg.
+
+## Verification (adversarial verifier, 2026-10-15)
+
+**Result: the "dead" verdict holds.** Corrected gap is **104.42** on the exact path of the same bench, and 98.92 on
+the larger exact bench. Both are worse than the 3R baseline's 68.93, so the row is marked `refuted`: it does not beat
+the baseline. One honesty hole was found and fixed (the neck root, below). With that fix, the designer's numbers
+reproduce.
+
+Scripts and results are in `.cache/fraction-pauldron_verify/` (git-ignored): `verify_fp.py` holds the extra checks,
+`fixed.py` the corrected design, and `verify_fp_*.json` the outputs.
+
+| run | gap | reach | follow | in-band 2-14 | 2-10 | contact |
+|---|---|---|---|---|---|---|
+| designer's claim, Bench(60,160) fast | 101.68 | 0.256 | 0.95 | 0.566 | 0.345 | 0.039 |
+| reproduced as committed, fast | 101.68 | 0.256 | 0.95 | 0.566 | 0.345 | 0.039 |
+| as committed, strict part-part check (1 below), fast | **133.99** | 0.169 | 0.717 | 0.566 | 0.343 | 0.041 |
+| corrected (strap A over the neck root, real O20 crown), fast | 102.87 | 0.256 | 0.95 | 0.554 | 0.334 | 0.039 |
+| corrected, `CB_EXACT=1`, Bench(60,160) | **104.42** | 0.256 | 0.95 | 0.539 | 0.316 | 0.039 |
+| corrected, `CB_EXACT=1`, Bench(110,360), design constants frozen from (60,160) | 98.92 | 0.322 | 0.936 | 0.533 | 0.325 | 0.031 |
+
+The larger bench draws a different workspace sample, and reach rises to 0.32 on it. That is a change in the
+measurement, not in the design. In-band is unchanged (0.53-0.54).
+
+What was checked:
+
+1. **Part-part clearance: one hole, fixed.**
+   - The model's K6 exempts every pair of members that share "J3" within 12 mm of the carriage axis. Strap A, the
+     carriage, the rail and the neck all share J3.
+   - J3 is not a hub, though. It is a carriage on a rail, and the neck leaves that rail at its midpoint. The
+     exemption therefore hid strap A cutting through the neck root, 4.1 mm deep, whenever the carriage passes the
+     middle of the rail. That happens in 29 taken poses (23 at the fit level).
+   - The re-run keeps the exemption only for the real J2 hub stack and for rail/carriage. It asks >= 1 mm between
+     non-adjacent parts (0.5 mm between neighbouring lames, which is the running gap), and drops those 29 poses:
+     gap 133.99.
+   - Minimum fix: strap A stays at carriage level over its last 14 mm (7 rows, not 3). The strict check is then
+     clean, at a cost of 0.012 in-band (gap 102.87).
+   - Hub A's crown was also raised to the real O20 height, F + 12.25 (it had been modelled at F + 6.15). This
+     changed nothing.
+   - No other pair collides in any taken pose, lames included.
+2. **Closure and ranges.**
+   - Max closure residual over the taken poses: 0.023 deg for the arm direction rebuilt from (alpha, beta), and
+     3e-6 deg for the carriage on the rail cone. Both are under 0.5 deg.
+   - Alpha stays in [-56, 43] deg, more than 120 deg from the +-180 wrap, so there are no wrapped strokes.
+   - Stroke 100.4 deg and rail 73 deg are enforced in `build`. Each lame's race length equals its relative stroke
+     (g_k - g_k-1) x stroke.
+3. **Continuity.** Dense K2 (2-degree slerp steps, joint values and the J2/J3 axes): 0 flips. The lames follow
+   g_k x alpha, so they are continuous wherever alpha is.
+4. **Sampling and hubs.**
+   - The kit's `audit` with J3 declared hubless (a rail carriage) is clean: pose-local, and the J2 caps cover the
+     O20 disc.
+   - Median sample spacing is 1.6-3.4 mm at real radius, against a limit of 4.
+   - Lames are 8 x 2 Ti with 0.6 mm running gaps, stacked whole-length (plate 56 mm, tip 73 mm from GH). Strap A is
+     8 x 3, the carriage 16 x 10 x 3, the rail 8 x 3 and the neck 14 x 6.
+5. **DOF (R5, R17).**
+   - 3 active DOF (alpha, beta, psi): the arm's three rotations, and closure fixes each of them.
+   - The 4 lame positions are passive, and kinematically determined by the cages. The fractions 0.09 / 0.25 / 0.46
+     / 0.72 need inner-race weights of 0.646 / 0.564 / 0.542 / 0.531, i.e. stepped rollers whose two radii sum to
+     the 3.2 mm race gap. For lame 1 that is r 1.13 + 2.07 mm, on a pin of about 1 mm.
+   - The constraint is holonomic only while the rollers do not slip, and a friction cage has no positive drive. With
+     no radial preload, nothing holds the inner lames against their own weight. With preload, Ti-on-Ti rolling
+     galls, and a friction cage creeps. Teeth would make it a gear, which MVP1 forbids.
+   - So this is not a hard-rule break, but it is the weakest point of R17: "nothing sags" holds only with a
+     preloaded, hard-faced (e.g. steel-insert) race.
+   - Gimbal lock at a 12 deg margin means alpha turns up to ~5x faster than the arm near x.
+6. **Buildability, unpowered MVP1.** There are no gears, pulleys or cables: rolling cages, curved sliding lames
+   and a ring-guide carriage. Still not modelled:
+   - the lames' radial and lateral retention (lips or sliding rivets in slots). An 8 mm bare strip on a curved
+     track has nothing holding it on, and retention adds width and stack height. It can only lower in-band.
+   - the ~Ø2-4 mm rollers in windows of a 2 mm lame, which is at the edge of buildable.
+   Neither can rescue reach, which is set by the stroke, the 73 deg twist arc and gimbal lock (closure 0.46-0.48 of
+   all poses before skin contact).
+7. **Held-out clips.** Not used: `Bench` excludes them, and the bench pose set is unchanged.
+
+**Verdict of verification: refuted** (corrected gap 104.42 exact, 98.92 on the larger bench, against 68.93). The
+designer's limiter analysis is confirmed: reach 0.26-0.32 is structural, and in-band 0.53-0.55 is real but not
+enough.
