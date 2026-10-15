@@ -14,11 +14,11 @@
  "inband10": 0.102,
  "contact": 0.0872,
  "gap": 88.29,
- "v_reach": null,
- "v_follow": null,
- "v_inband14": null,
- "v_inband10": null,
- "v_gap": null,
+ "v_reach": 0.775,
+ "v_follow": 0.9,
+ "v_inband14": 0.2793,
+ "v_inband10": 0.102,
+ "v_gap": 88.29,
  "n_configs": 144,
  "verdict": "Dead, not worth a GPU sweep: honest best gap 88.29 vs the champion's 68.93 after 144 configurations. The single-stage arc never fits: its tail runs into the neck and head, so the band floats at 400 mm. The 2-stage telescoping variant (the measured fix for the tail) closes and follows, but it still carries a constant-radius sleeve/band 40-60 mm off the skin (0 % in band).",
  "note": "Kit conventions (K3 march, K2 dense, K6 collisions, O20 hubs, K7 neck), Bench(60,160) fast cache, q 0.95. Best = k 143: 2-stage telescoping arc (2:1 cable sleeve). J1 = O20 hub on b = bvec(45,30), guide offset 22 deg across the band on an L1 strap. A1 = A2 = 90 deg, W = champion wdir(86.33,21.83), arc from the p5-p95 guide azimuths. Band laid out at its fitted radius (Rn 106). Rows laid out at Rn 56 while the band fitted at 97-131 mm are sampled 2-4x too sparsely and read up to 7 points too good (k 130: 91.57 -> 97.47 re-laid). Rows with the band at 400 mm (single stage, gap 91.33) are degenerate.",
@@ -32,10 +32,11 @@
   "collide": true,
   "q": 0.95
  },
- "audit": [],
+ "audit": "Audit 2026-10-15T19:46:15Z: death stands. Best config k143 reproduced exactly on Bench(60,160) (gap 88.29, honest, audit clean). Kit conventions = baseline (KIT.md parity; kit-honest baseline 70.27). Sleeve+band are 898 of 1684 samples (53 %) and 0 % in band at 110.6 mm; every other member is 60 % in band. Narrower arc ranges (p10-90 .. p25-75) cost reach faster than they lower the band (best 98.96).",
  "hubless": [
   "J2",
   "Jc",
   "Ja"
- ]
+ ],
+ "v_contact": 0.0872
 }

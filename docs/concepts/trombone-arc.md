@@ -97,3 +97,35 @@ Spec corrections (measured):
   the trunk (champion b). A lateral-posterior b (bvec(90,40)) extends this to ~+50-70 deg (p80).
 - A1 = A2 = 90 deg minimises the J2 stroke (equal to the separation range). The champion's 77/67 deg costs 120 deg
   of stroke on the clips instead of 77-96 deg.
+
+## Audit (2026-10-15T19:46:15Z, independent re-measurement)
+
+Verdict: **the death stands**. The measured reason is that the telescoping sleeve and band are 53 % of the metal samples
+(898 of 1684), and both are 0 % in band, because they must sit at R_a 110.6 mm to clear the highest trunk skin they sweep over.
+
+- **Reproduction.** k 143 re-run on Bench(60,160) (fast cache, K3 march, K2 dense, K6, audit clean) gives gap 88.29,
+  reach 0.775, follow 0.900, in-band 14 0.2793, in-band 10 0.102 and contact 0.0872. Every value is identical to the row.
+- **Conventions.** The model is built on tools/concept_kit.py, which reproduces the baseline row exactly (KIT.md). The
+  kit's honest checks score the champion at 70.27 rather than 68.93. That is a 1.3 point stricter reference, and it
+  cannot explain an 18 point deficit. I found no modelling bug in axes/closure, the guide-on-band range test, the
+  sleeve/band ramps or the arc range.
+- **What a fix could buy.** If the sleeve and band were removed from the count, the remaining members are 60 % in band,
+  which would give gap of about 56. So the whole verdict rests on the band radius. The tail map in this file (skin
+  climbs from 50 mm to 90-400 mm within +30-50 deg past the guide) explains that radius. Raising the band quantile or
+  the layout radius does not change it.
+- **Missed-region probe** (src = arc-end percentiles, Rn = layout radius; the 80 mm rows are sampled sparsely and so read too well):
+
+| src | Rn | gap | reach | follow | in-band 14 | contact | R_a |
+|---|---|---|---|---|---|---|---|
+| p5-95 | 106 | 88.29 | 0.775 | 0.90 | 0.279 | 0.087 | 110.6 |
+| p10-90 | 106 | 101.61 | 0.681 | 0.85 | 0.288 | 0.086 | 105.6 |
+| p10-95 | 106 | 94.49 | 0.750 | 0.85 | 0.286 | 0.081 | 110.6 |
+| p25-75 | 106 | 147.37 | 0.419 | 0.55 | 0.390 | 0.083 | 79.6 |
+| p5-95 | 80 (sparse) | 84.9 | 0.775 | 0.90 | 0.313 | 0.087 | 112.6 |
+
+  A shorter arc lowers the band only to about 80 mm, still about 25 mm over the skin, and it loses reach and follow
+  faster than it gains in-band share.
+- **Minor issues found** (none would revive the design). (1) src p15-85 and p5-80 return gap 275 with reach = follow = 0.
+  That looks like a degenerate fit when the arc misses the clip guide range; it should be reported as "no taken
+  frames", not scored. (2) The guide's ~50 mm pedestal under the sleeve is not modelled as metal and its mass is not
+  counted. This flatters the design. (3) Rows k < 133 laid out at Rn 56 are sampled sparsely (already noted above).
