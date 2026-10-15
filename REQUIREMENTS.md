@@ -35,6 +35,14 @@ degrees of freedom found in the shoulder, the minimum possible solution is 3 dof
 it". Joint count: "I would REALLY like 3 joints, but just push for as low a joint count as possible, this is a huge
 reward". Proximity: pass at 14 mm, aim for 10 mm (both reported).
 
+**User decisions, 2026-10-15 (after the sim-to-real register, docs/research/sim_to_real_gaps.md).** Actuation:
+remote motors with cables to the joints. Assist: "Don't worry about this at all since they're offset but it would be
+very subtle just a bit more than gravity" -> design load = gravity support of the arm plus a margin (~10 N.m peak at
+90 deg elevation for an average arm; R9's 25 N.m is retired as the design case). GH-centre error: torque-free passive
+self-aligning slides at the cuff, outside the 3-DOF count. Bearings: "use actual tiny needle bearings if possible try
+to optimize assuming very high quality bearings" -> rolling (needle / thin-section) bearings at every joint; the
+plain-bearing self-locking risk (G6) is designed out, the joint keep-out becomes bearing + cable pulley.
+
 | ID | Requirement | Threshold | Judge | Why this threshold |
 |---|---|---|---|---|
 | R1 | Proximity: share of the covered skin that is 2-14 mm from the metal, while following | >= 90 % (aim: the same at 2-10 mm, reported as R1-aim) | `pipeline/full-exo/score_design.py` with BAND_HI=14 (exact posed skin, 30 fps) | the 1 cm rule with the user's allowance: pass at 14 mm, aim for 10 (2026-10-15); 2 mm keeps the liner/clearance |
@@ -45,7 +53,7 @@ reward". Proximity: pass at 14 mm, aim for 10 mm (both reported).
 | R6 | No interference between parts that move relative to each other | <= 0.15 mm | `judge/part_contact.py` (geometry only) | designed coaxial fits (pin in sleeve, washer on seat) sit inside 0.15 mm |
 | R7 | Every custom part is one valid, closed solid | all | `judge/part_validity.py` (OCC BRepCheck on the exported STEP) | a supplier must be able to read and machine it |
 | R8 | Custom-part mass | <= 300 g (proposed) | `parts_full.json` (mesh volume x density) | placeholder budget, **confirm with the user** |
-| R9 | Strength SF >= 1.5 at 25 N.m worst direction; deflection and fatigue bounded | - | **independent FEA (CalculiX)** - today only the in-house hex8 study (`pipeline/conformal/thin_study/REPORT.md`) | 25 N.m = assist torque design load |
+| R9 | Strength SF >= 1.5 at the design load (arm gravity support + margin, ~10 N.m; was 25 N.m), worst direction; deflection keeps the 2 mm floor; fatigue bounded | - | **independent FEA (CalculiX)** - today only the in-house hex8 study (`pipeline/conformal/thin_study/REPORT.md`) | 25 N.m = assist torque design load |
 | R10 | The base rides the scapula on the user's scapula handler: worst-frame GH-centre misalignment from the base slipping over the bone | <= 4 mm (proposed) | `judge/base_mount.py` (girdle mount: skin-slip model still to build -> NOT RUN; designs with a thorax base keep the three-girdle-law check: rig, published bone-pin chain, **OpenSim Seth 2016**) | 4 mm = half the 2-10 mm band: a misalignment shifts the metal against the skin by up to that much (docs/P0_BASE_MOUNT.md) |
 | R11 | Interface pressure under the ISO/TS 15066 body-region limits | - | coupled human-exo contact simulation, then pressure film / FSRs on a prototype | comfort and safety at the cuffs |
 | R12 | CAD standard: G2 surfaces, flat seats under every seat, no visible screws or seams | - | zebra / curvature check (`pipeline/full-exo/parts.html`) + user review | the user's own parts set the bar (docs/CAD_STANDARD.md) |
