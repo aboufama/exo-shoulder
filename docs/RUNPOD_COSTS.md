@@ -109,3 +109,28 @@ no reason to move to the 16 GB pool or to pay for a 4090 unless a later result s
 6. After each batch run `python3 tools/runpod_guard.py enforce && python3 tools/runpod_guard.py audit`; for unattended runs
    `python3 tools/runpod_guard.py watch --ep <endpoint> --max-secs <max_secs> --log <file>` exits 2 on idle billing, a stuck queue or a
    job that outlives max_secs + 10 min, and runs `enforce` itself when the queue is empty for 3 polls.
+
+## CPU farm (exo-cpu1, Flash serverless CPU, EU-RO-1) - session 2026-10-15 17:45-19:15 UTC
+
+Rate: cpu3c-8-16 $0.288/h per worker = **$0.036 per vCPU-hour** (cpu5c-8-16 fallback $0.336/h = $0.042). The running
+bundle takes one job per worker (measured 19:01), so a job-hour costs the whole worker, $0.288. Network volume exo-farm-cas 20 GB:
+$1.40/month (holds the CAS, 562 MB bench grids + the 425 MB py312 package tar + 1.6 GB unpacked copy).
+
+| time (UTC) | what | worker-s billed | $ (cpu3c) | result |
+|---|---|---|---|---|
+| 17:50 | diagnostic job (sys.path, numpy import, /app manifest) | ~10 | 0.001 | bundle = 3.11 build on the 3.12 image (cp311 .so) |
+| 17:55 | `flash deploy --python-version 3.12` | 0 | 0 | refused by the account worker quota (new endpoint); parking the old one needs the user's go |
+| 18:00 | pyenv: pip install of the pinned packages into the volume | ~463 | 0.037 | numpy 2.0.2 / scipy 1.13.1 / trimesh 4.12.2 / libigl 2.6.3 / mujoco 3.16.0 import on 3.12 |
+| 18:10 | import timing x2 (volume 11.8 s vs local tar 0.6 s) + tar build | ~240 | 0.019 | tar on the volume, extracted once per worker |
+| 18:12 | val5: 5 configs, champion 3R (upload of 121 files / 139 MB gzip incl. the bench grids) | ~269 + puts | 0.022 | identical to local |
+| 18:20 | libigl thread test | ~43 | 0.003 | 192-thread pool on 8 vCPU found |
+| 18:24 | c20: 20-config chunk before the thread fix | ~710 | 0.057 | 692 s, identical to local |
+| 18:37 | c20igl: same chunk, IGL_NUM_THREADS=2 | ~109 | 0.009 | 89 s (7.8x faster), identical |
+| 18:40 | kit20: 20 configs of baseline-3r-kit | ~40 | 0.003 | 17.5 s, identical |
+| 18:41-19:00 | kit5: 5 configs of baseline-3r-kit (queued 17 min behind another agent's 31-job batch) | ~39 | 0.003 | identical |
+| 19:01 | slot test: 16 x sleep 20 | ~330 | 0.026 | 1 job per worker at a time (not 4) |
+| 19:05-19:20 | c20 chunk with 8 processes + judge_all fast on cad_r13_n4_s1343_1 | queued behind other agents | <= 0.05 | see the session report |
+
+Session total for this track: ~$0.21 of worker time + cold starts (balance 37.21 at 17:49 -> 36.24 at 19:14, the rest
+of that drop is other agents' map batches on the same endpoint). Hygiene at 19:14: workersMin 0 on every endpoint,
+exo-cpu1 idle 10 s; executionTimeoutMs still 0 (the PATCH / redeploy needs the user's go, docs/CLOUD_RUN.md).

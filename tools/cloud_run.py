@@ -6,16 +6,24 @@
     python3 tools/cloud_run.py batch jobs.json [opts]             N jobs at once: [{"cmd", "tag"?, "design"?: [ids], "include"?: [paths],
                                                                   "out"?: [globs], "env"?: {}, "shared"?: [dirs]}, ...]
     python3 tools/cloud_run.py ping                               worker facts (python, packages, CPU, volume)
+    python3 tools/cloud_run.py sweep <model.py> --configs C.json --out R.json [--chunk N] [--jobs-per-chunk J]
+                                  [--n-clip 60 --n-ws 160]      concept-bench sweep (tools/concept_sweep.py) in parallel
+                                                                  chunks over the farm's slots; per-config reports in R.json
 opts: --design ID (ship pipeline/full-exo/designs/ID, git-ignored parts/ included)   --include PATH (file or dir, repeatable)
       --out GLOB (files to bring back, relative to the repo; only created/changed ones come back)   --env K=V
       --outdir DIR (write returned files under DIR instead of the tree)   --timeout S (default 3000)   --bench-cache
-      (ship .cache/concept_bench, the concept bench's signed-distance grids)   --no-base (ship only --include/--design files)
+      (link .cache/concept_bench, the bench's signed-distance grids: uploaded once to the CAS, copied once per worker to its
+      local disk and symlinked read-only into each job)   --no-base (ship only --include/--design files)
+Python on the worker: the endpoint image is CPython 3.12; the job's python gets the packages pinned to the local versions
+from /runpod-volume/exo-farm/py312/v1.tar (numpy 2.0.2, scipy 1.13.1, trimesh 4.12.2, libigl 2.6.3, networkx 3.6.1,
+rtree 1.4.1, mujoco 3.16.0, pillow 12.3.0; built on the farm by `pyenv`, extracted once per worker to /tmp, put first
+on PYTHONPATH by every job - docs/CLOUD_RUN.md "Worker python").
 What is shipped (content-addressed, each file uploaded once ever, docs/CLOUD_RUN.md): git-tracked + untracked-not-ignored
 files, minus renders/, media, other designs, .claude/; plus what --design/--include name. NEVER shipped (hard deny, also
 for --include): data/raw/private/, anything named like a key (.runpod_key, *.key, .env, *.pem, id_*), the user's
 personal-shoulder-diagnosis folder, symlinks leaving the repo. The API key (RUNPOD_API_KEY or ~/.runpod_key) is never printed.
-Cost: every job prints its seconds and $ (cpu3c-8-16 serverless $0.288/h per worker = $0.036/vCPU-h, up to 4 jobs per
-worker; cpu5c-8-16 fallback $0.336/h); the batch line bills each worker for the span of its jobs + the 10 s idle timeout.
+Cost: every job prints its seconds and $ (cpu3c-8-16 serverless $0.288/h per worker = $0.036/vCPU-h, 1 job per worker today,
+4 after a redeploy; cpu5c-8-16 fallback $0.336/h); the batch line bills each worker for the span of its jobs + the 10 s idle timeout.
 Rule (user 2026-10-15, cheap-if-big-speed-up): send a job here only when the batch saves >= 3x wall-clock over this box.
 """
 import argparse, base64, concurrent.futures as cf, fnmatch, gzip, hashlib, json, os, subprocess, sys, threading, time
@@ -25,14 +33,30 @@ REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 GQL = "https://api.runpod.io/graphql"; RUN = "https://api.runpod.ai/v2"
 EP_NAME = os.environ.get("CLOUD_EP_NAME", "exo-cpu1")
 RATE = {"cpu3c-8-16": 0.288 / 3600, "cpu5c-8-16": 0.336 / 3600}      # $/s per worker, serverless (GraphQL slsPrice, EU-RO-1, 2026-10-15)
-SLOTS = 4                                                               # jobs per worker (max_concurrency): a job pays 1/4 of a busy worker
+# jobs a worker runs at once. The decorator asks for 4 (max_concurrency), but the bundle exo-cpu1 runs today (the 15:13
+# UTC build) takes ONE job at a time per worker (measured 2026-10-15 19:01: 16 sleep-20 jobs ran strictly one after the
+# other on each worker). So a job gets the whole worker (8 vCPU): sweeps run 8 processes per job. Set
+# CLOUD_JOBS_PER_WORKER=4 after a redeploy that restores the concurrent handler.
+SLOTS = int(os.environ.get("CLOUD_JOBS_PER_WORKER", 1))
+WORKERS_MAX = 4
+VCPU = 8
 IDLE_S = 10                                                             # endpoint idle timeout: billed once per worker per batch
 CHUNK = 6 * 1024 * 1024                                                 # gzip bytes per put job (base64 ~8 MB < the 10 MB /run limit)
-MAX_INFLIGHT = int(os.environ.get("CLOUD_MAX_INFLIGHT", 16))           # = workersMax 4 x 4 slots
+MAX_INFLIGHT = int(os.environ.get("CLOUD_MAX_INFLIGHT", 16))           # requests in flight (queued ones wait server-side)
 CACHE = os.path.expanduser("~/.cache/cloud_run"); os.makedirs(CACHE, exist_ok=True)
 DENY_DIRS = ("data/raw/private/", ".git/", ".claude/", "renders/")
 DENY_NAMES = (".runpod_key", ".env", "id_rsa", "id_ed25519", ".netrc", "credentials", ".pypirc")
 DENY_EXT = (".key", ".pem", ".p12", ".mp4", ".mov", ".webm", ".blend", ".png", ".jpg", ".jpeg", ".gif", ".pdf", ".pyc")
+PYENV_TAR = "/runpod-volume/exo-farm/py312/v1.tar"                     # pinned packages for the image's CPython 3.12 (cmd `pyenv`)
+PYENV_PINS = "numpy==2.0.2 scipy==1.13.1 trimesh==4.12.2 libigl==2.6.3 networkx==3.6.1 rtree==1.4.1 mujoco==3.16.0 pillow==12.3.0"
+PYENV = (f'_P={PYENV_TAR}; _L=/tmp/farm-py312-v1; if [ -f "$_P" ]; then if [ ! -f "$_L/.ok" ]; then '
+         '( flock 9; [ -f "$_L/.ok" ] || { rm -rf "$_L"; mkdir -p "$_L" && tar xf "$_P" -C "$_L" && touch "$_L/.ok"; } ) 9>/tmp/farm-py312-v1.lock; fi; '
+         'export PYTHONPATH="$_L${PYTHONPATH:+:$PYTHONPATH}"; else echo "[farm] WARNING: $_P missing (run: cloud_run.py pyenv)"; fi; '
+         # libigl sizes its thread pool from hardware_concurrency = the HOST's 192 cores, not the job's 8-vCPU quota: a bench
+         # config ran 55 s instead of 8 s. Pin it to the job's share of the worker (4 jobs per 8-vCPU worker -> 2).
+         '_n=${FARM_VCPUS%%.*}; export IGL_NUM_THREADS=${IGL_NUM_THREADS:-$(( ${_n:-8} / ' + str(SLOTS) + ' > 0 ? ${_n:-8} / ' + str(SLOTS) + ' : 1 ))}; ')
+LINK_FN = ('_lk(){ _b=/runpod-volume/exo-farm/cas/${1:0:2}/$1; _l=/tmp/farm-blobs/$1; if [ ! -f "$_l" ]; then mkdir -p /tmp/farm-blobs; '
+           '( flock 8; [ -f "$_l" ] || { cp "$_b" "$_l.tmp" && mv "$_l.tmp" "$_l"; } ) 8>"$_l.lock"; fi; mkdir -p "$(dirname "$2")"; ln -sfn "$_l" "$2"; }; ')
 _lock = threading.Lock()
 REMAP = {}                                                              # manifest sha -> sha actually uploaded (file changed meanwhile)
 
@@ -256,9 +280,17 @@ def run_batch(jobs, outdir=None, timeout=3000):
     with cf.ThreadPoolExecutor(8) as hp:
         mans = list(hp.map(lambda j: manifest(j, base), jobs))
     save_hash_cache()
+    links = []                                                          # per job: [(sha, rel)] of read-only linked files
+    for j in jobs:
+        lk = sorted(set(r for p in j.get("link", []) for r in walk(p)))
+        links.append([(file_sha(r), r) for r in lk])
+    save_hash_cache()
     by_sha = {}
     for m in mans:
         for r, (s, _) in m.items():
+            by_sha.setdefault(s, r)
+    for lk in links:
+        for s, r in lk:
             by_sha.setdefault(s, r)
     load = os.getloadavg()[0]; ncpu = os.cpu_count() or 1
     print(f"farm {EP_NAME} ({eid}): {len(jobs)} job(s), {len(by_sha)} distinct files "
@@ -270,8 +302,11 @@ def run_batch(jobs, outdir=None, timeout=3000):
 
         def one(k):
             j, m = jobs[k], mans[k]; tag = j.get("tag") or f"job{k}"
-            m = {r: [REMAP.get(sv, sv), md] for r, (sv, md) in m.items()}
-            body = dict(mode="run", tag=tag, cmd=j["cmd"], files=m, out=j.get("out", []), env=j.get("env", {}),
+            m = {r: [REMAP.get(sv, sv), md] for r, (sv, md) in m.items() if not any(sv == ls for ls, _ in links[k])}
+            pre = "" if os.environ.get("CLOUD_NO_PYENV") == "1" else PYENV
+            if links[k]:
+                pre += LINK_FN + " ".join(f"_lk {REMAP.get(ls, ls)} '{lr}';" for ls, lr in links[k]) + " "
+            body = dict(mode="run", tag=tag, cmd=pre + j["cmd"], files=m, out=j.get("out", []), env=j.get("env", {}),
                         shared=j.get("shared", []), timeout=j.get("timeout", timeout))
             for attempt in range(2):
                 out, st = submit(eid, body, timeout=float(body["timeout"]) + 900)
@@ -311,9 +346,64 @@ def run_batch(jobs, outdir=None, timeout=3000):
     return res
 
 
+SWEEP_BASE = ["tools", "judge", "pipeline/avg", "pipeline/conformal/analysis", "data/raw/split.json", "docs/concepts/models"]
+
+
+def sweep(a, env):
+    """concept-bench sweep on the farm: chunks of configs -> tools/concept_sweep.py per chunk -> merged per-config reports"""
+    model = os.path.relpath(os.path.abspath(a.args[0]), REPO)
+    if model.startswith(".."):
+        sys.exit("the model must be inside the repo")
+    cfgs = json.load(open(a.configs)); n = len(cfgs)
+    if not isinstance(cfgs, list) or not n:
+        sys.exit("--configs must be a non-empty JSON list of dicts")
+    slots = WORKERS_MAX * SLOTS                                         # jobs running at once (4 today)
+    procs = a.jobs_per_chunk or max(1, VCPU // SLOTS)                   # processes per job = its vCPU share (8 today)
+    chunk = a.chunk or max(1, -(-n // slots))
+    env = dict({"IGL_NUM_THREADS": "1"}, **env)                         # 1 libigl thread per bench process
+    tag = a.tag or "sweep-" + os.path.splitext(os.path.basename(model))[0] + "-" + time.strftime("%H%M%S")
+    d = os.path.join(".cache", "cloud_sweeps", tag); os.makedirs(os.path.join(REPO, d), exist_ok=True)
+    # what a bench sweep reads (measured with an audit hook on open(): concept_sweep + concept_bench + concept_kit +
+    # body_pose + the pose file + split.json); --full-base ships the whole repo instead (142 MB, ~11 s copy per job)
+    inc = [model] + ([] if a.full_base else [r for r in SWEEP_BASE if os.path.exists(os.path.join(REPO, r))]
+                     + [os.path.join("pipeline", "conformal", f) for f in os.listdir(os.path.join(REPO, "pipeline", "conformal")) if f.endswith(".b64")])
+    jobs = []
+    for k, s0 in enumerate(range(0, n, chunk)):
+        cf_ = os.path.join(d, f"cfg_{k:03d}.json"); raw = json.dumps(cfgs[s0:s0 + chunk]); open(os.path.join(REPO, cf_), "w").write(raw)
+        b64 = base64.b64encode(gzip.compress(raw.encode())).decode()          # configs travel inside the command: no upload round trip
+        out = os.path.join(d, f"out_{k:03d}.json")
+        cmd = (f"mkdir -p '{d}' && echo '{b64}' | base64 -d | gunzip > '{cf_}' && "
+               f"python3 tools/concept_sweep.py '{model}' --configs '{cf_}' --out '{out}' --n-clip {a.n_clip} --n-ws {a.n_ws}"
+               + f" --jobs {procs}")
+        jobs.append(dict(cmd=cmd, tag=f"{tag}-{k:03d}", include=inc + a.include, link=[".cache/concept_bench"],
+                         out=[out], env=env, base=a.full_base, design=a.design, _s0=s0))
+    print(f"sweep {model}: {n} configs in {len(jobs)} chunk(s) of <= {chunk}, {procs} processes each; {min(len(jobs), slots)} jobs x {procs} "
+          f"= {min(len(jobs), slots) * procs} configs evaluated in parallel", flush=True)
+    res = run_batch(jobs, None, a.timeout)
+    merged, missing = [], []
+    for (tag_k, j, out, st) in res:
+        p = os.path.join(REPO, j["out"][0])
+        if isinstance(out, dict) and out.get("rc") == 0 and os.path.exists(p):
+            for r in json.load(open(p)):
+                r["i"] += j["_s0"]; merged.append(r)
+        else:
+            missing.append(tag_k)
+    merged.sort(key=lambda r: r["i"])
+    json.dump(merged, open(a.out[0] if a.out else os.path.join(REPO, d, "results.json"), "w"), indent=1)
+    secs = [r["secs"] for r in merged]
+    print(f"sweep: {len(merged)}/{n} configs back ({sum(r.get('error') is not None for r in merged)} with errors), "
+          f"config time mean {sum(secs) / max(1, len(secs)):.1f}s -> {a.out[0] if a.out else os.path.join(d, 'results.json')}"
+          + (f"; FAILED chunks: {missing}" if missing else ""))
+    if missing:
+        sys.exit(1)
+
+
 def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.add_argument("what", choices=["judge", "run", "batch", "ping"]); ap.add_argument("args", nargs="*")
+    ap.add_argument("what", choices=["judge", "run", "batch", "ping", "sweep", "pyenv"]); ap.add_argument("args", nargs="*")
+    ap.add_argument("--configs"); ap.add_argument("--chunk", type=int, default=0); ap.add_argument("--jobs-per-chunk", type=int, default=0)
+    ap.add_argument("--n-clip", type=int, default=60); ap.add_argument("--n-ws", type=int, default=160)
+    ap.add_argument("--full-base", action="store_true")
     ap.add_argument("--design", action="append", default=[]); ap.add_argument("--include", action="append", default=[])
     ap.add_argument("--out", action="append", default=[]); ap.add_argument("--env", action="append", default=[])
     ap.add_argument("--shared", action="append", default=[]); ap.add_argument("--outdir"); ap.add_argument("--tag")
@@ -328,9 +418,23 @@ def main():
         sys.exit("refusing to send secret-like env vars to the farm")
     if a.what == "ping":
         out, st = submit(endpoint_id(), dict(mode="ping"))
-        print(json.dumps(out, indent=1)); ex, lo, hi = cost(st, None); print(f"billed ~{ex:.1f}s = ${lo:.5f} (<= ${hi:.5f})"); return
-    extra = dict(design=a.design, include=a.include + ([".cache/concept_bench"] if a.bench_cache else []),
+        print(json.dumps(out, indent=1)); ex, lo, hi = cost(st, None); print(f"billed ~{ex:.1f}s = ${lo:.5f} (<= ${hi:.5f})")
+        print("(packages above = the handler's own bundle; what JOBS import comes from the pinned py312 tar:)")
+        os.environ.setdefault("CLOUD_TAIL", "3")
+        run_batch([dict(cmd="python3 -c \"import sys, numpy, scipy, trimesh, igl, mujoco, networkx, rtree, PIL; print(sys.version.split()[0], "
+                            "'numpy', numpy.__version__, 'scipy', scipy.__version__, 'trimesh', trimesh.__version__, 'mujoco', mujoco.__version__, "
+                            "'networkx', networkx.__version__, 'rtree', rtree.__version__, 'PIL', PIL.__version__, numpy.__file__)\"",
+                        tag="ping-pyenv", base=False)], None, 600); return
+    extra = dict(design=a.design, include=a.include, link=[".cache/concept_bench"] if a.bench_cache else [],
                  out=a.out, env=env, shared=a.shared, base=not a.no_base)
+    if a.what == "pyenv":                                               # (re)build the pinned package tar on the volume
+        cmd = (f'set -e; T={PYENV_TAR}; D=${{T%.tar}}; [ -f "$T" ] && {{ echo "exists: $T"; exit 0; }}; rm -rf "$D.tmp"; '
+               f'python3 -m pip install -q --no-cache-dir --target "$D.tmp" {PYENV_PINS}; (cd "$D.tmp" && tar cf "$T.tmp" .); '
+               f'mv "$T.tmp" "$T"; rm -rf "$D.tmp"; ls -la "$T"')
+        os.environ["CLOUD_NO_PYENV"] = "1"
+        run_batch([dict(cmd=cmd, tag="pyenv", base=False)], None, 1800); return
+    if a.what == "sweep":
+        sweep(a, env); return
     if a.what == "judge":
         d = a.args[0]; fast = "fast" if "fast" in a.args[1:] else ""; dd = f"pipeline/full-exo/designs/{d}"
         job = dict(extra, cmd=f"tools/judge_all.sh {d} {fast}", tag=a.tag or f"judge_{d}", design=[d] + a.design,

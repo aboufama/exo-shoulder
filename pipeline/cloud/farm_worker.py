@@ -1,6 +1,6 @@
 """RunPod Flash CPU farm endpoint (exo-cpu1): runs named commands of this repo on serverless CPU workers.
 Logic in farm_impl.py; client tools/cloud_run.py; how-to docs/CLOUD_RUN.md; costs docs/RUNPOD_COSTS.md.
-Deploy (from this directory): flash deploy --python-version 3.12   (the Flash CPU image has only CPython 3.12; the
+Deploy (from this directory): RUNPOD_API_KEY="$(cat ~/.runpod_key)" flash deploy --python-version 3.12   (the Flash CPU image is CPython 3.12;
 packages are pinned to the local versions, so the judges give the same numbers as on CPython 3.11 locally - validated)
 
 Instance: cpu3c-8-16 (3rd-gen compute-optimised, 8 vCPU, 16 GB) = the lowest serverless $/vCPU-h RunPod lists

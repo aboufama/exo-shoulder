@@ -9,9 +9,44 @@ serverless CPU endpoint on RunPod (`exo-cpu1`, code in `pipeline/cloud/`), drive
 python3 tools/cloud_run.py judge cad_r18_n3_s1392_1_f300 fast          # tools/judge_all.sh <id> fast on the farm
 python3 tools/cloud_run.py run --include docs/concepts/models --out 'docs/concepts/sweeps/*.json' -- \
         "python3 docs/concepts/models/seed-2r-cring.py check"             # any bash command, files back into the tree
-python3 tools/cloud_run.py batch jobs.json                              # N jobs at once (16 slots: 4 workers x 4 jobs)
+python3 tools/cloud_run.py batch jobs.json                              # N jobs at once (4 slots today: 1 job per worker, 8 vCPU each)
 python3 tools/cloud_run.py ping                                         # worker facts: python, packages, CPU, volume
+python3 tools/cloud_run.py sweep docs/concepts/models/<id>.py --configs configs.json --out results.json   # bench sweep
 ```
+
+## For screening agents (concept-bench sweeps on the farm)
+
+Copy-paste (the key is read from the file, never typed or echoed; the RUNPOD_API_KEY env var in some containers is a
+stale placeholder, so always pass it like this):
+
+```bash
+RUNPOD_API_KEY="$(cat ~/.runpod_key)" python3 tools/cloud_run.py sweep docs/concepts/models/<id>.py \
+    --configs /path/configs.json --out /path/results.json [--chunk N] [--jobs-per-chunk J] [--n-clip 60 --n-ws 160]
+python3 tools/concept_sweep.py docs/concepts/models/<id>.py --configs configs.json --out results.json --jobs 2   # same, locally
+```
+
+- `configs.json` = a JSON list of partial parameter dicts (merged over the model's `PARAMS`). `results.json` = one entry
+  per config in input order: `{i, config, report, secs}` (+ `error`, `trace` when that config raised). `report` is the
+  bench report (reach, follow, inband14, inband10, contact, gap, poses, mode; kit models add closure, mass_g, flips...).
+- The model contract (`tools/concept_sweep.py`, first hook found): a concept_kit model's `build(B, F, params)` (scored
+  with `K.evaluate`), else `bench_eval(B, params) -> report`, else the bench's `metal(pose, frames, params)`.
+  `tools/concept_baseline_sweep.py` is the adapter for the champion 3R (`tools/concept_baseline.py`).
+- **Slots today: 4 jobs x 8 processes = 32 configs at once.** The running bundle takes ONE job per worker (measured
+  19:01 UTC: 16 sleep-20 jobs ran strictly in sequence on each worker; the 4-jobs-per-worker handler is in the
+  undeployed 3.12 build), so `sweep` makes `ceil(n / 4)` chunks and runs each with 8 processes (`--jobs-per-chunk`,
+  `--chunk` override) and `IGL_NUM_THREADS=1`. After a redeploy set `CLOUD_JOBS_PER_WORKER=4`. The 4 workers are
+  shared by every agent: a sweep queues behind other agents' batches (seen 19:00-19:15: 31 map jobs + a sweep, queue 15). Each job ships only what a bench sweep reads (the model, tools/, judge/, pipeline/avg/, the pose
+  files, split.json, docs/concepts/models/: 29 MB, uploaded once ever); `--full-base` ships the whole repo. The configs
+  travel inside the command (no upload round trip). The bench grid cache `.cache/concept_bench` (562 MB, key
+  0089c747c10f) is in the farm's CAS since 18:10 UTC; each worker copies it once to local disk and every job symlinks
+  it read-only. If the local cache is rebuilt, its new blobs upload once (~140 MB gzip, ~40 s).
+- **When to use the farm**: only when it saves >= 3x wall-clock. Fixed cost per sweep: ~10-30 s (job setup, worker
+  cold start, queue behind other agents' jobs - the farm is shared, 4 jobs at once in all). Rule of thumb from the measurements
+  below (champion 3R via concept_baseline_sweep, ~25 s per config here; kit models ~1-5 s): a sweep whose local time is > ~2 min (e.g. >= 50 kit configs, or >= 10 configs of a 10-s model) goes to the
+  farm; a handful of 1-3 s configs stays local. Never more than one sweep per agent at a time (the 4 workers are shared).
+- **Same numbers**: 45 configurations compared local vs farm (5 + 20 of the champion 3R via concept_baseline_sweep, 20
+  of docs/concepts/models/baseline-3r-kit.py): max abs difference 0 on every metric (reach, follow, inband14, inband10,
+  contact, gap, pct, mass_g, closure, flips, collide, residual_deg) - the reports are byte-identical.
 
 `jobs.json` is a list of `{"cmd": ..., "tag": ..., "design": [ids], "include": [paths], "out": [globs], "env": {...}}`.
 Options for `run`/`batch`/`judge`: `--design ID` (ships `pipeline/full-exo/designs/ID`, git-ignored files included, the
@@ -45,17 +80,44 @@ Every job prints: return code, run seconds, CPU, the $ it cost, the last log lin
   like a key (`.runpod_key`, `*.key`, `.env`, `*.pem`, `id_*`), the user's `personal-shoulder-diagnosis` folder, symlinks
   leaving the repo. Secret-like `--env` names are refused; the worker strips KEY/SECRET/TOKEN variables from the
   command's environment. The API key comes from `RUNPOD_API_KEY` or `~/.runpod_key` and is never printed.
-- **Same numbers as local**: the worker runs CPython 3.11 with the local versions pinned (numpy 2.0.2, scipy 1.13.1,
-  trimesh 4.12.2, libigl 2.6.3, networkx 3.6.1, rtree 1.4.1, mujoco 3.16.0). Validation below.
+- **Same numbers as local**: the job's python is the image's CPython 3.12 with the local versions pinned (numpy 2.0.2,
+  scipy 1.13.1, trimesh 4.12.2, libigl 2.6.3, networkx 3.6.1, rtree 1.4.1, mujoco 3.16.0, pillow 12.3.0; locally CPython
+  3.11 with the same versions). Validation below and in "For screening agents".
+
+## Worker python (diagnosis 2026-10-15 18:00 UTC, and the fix in use)
+
+- **Symptom**: `ping` reported python 3.12.14 but `numpy: missing ImportError`, scipy / trimesh / igl / mujoco missing.
+- **Cause (measured with a diagnostic job)**: the bundle the endpoint runs is the 15:13 UTC build made with
+  `--python-version 3.11` (`/app/flash_manifest.json`: `"python_version": "3.11"`, `/app/numpy/_core/
+  _multiarray_umath.cpython-311-x86_64-linux-gnu.so`) on the `runpod/flash-cpu:py3.12` image - CPython 3.12 cannot load
+  cp311 extension modules (numpy then says "you should not try to import numpy from its source directory"). The later
+  3.12 redeploy never landed (the NetworkVolume undeploy error). A local `flash build --python-version 3.12` is correct
+  (cp312 wheels, 108 MB), so a redeploy fixes the bundle.
+- **Redeploy blocked**: without the old `.flash/` state, `flash deploy` provisions a NEW endpoint, and the account's
+  worker quota (10 = exo-cpu1 4 + exo-blender-cycles 4 + exo-band23 2) refuses it ("lower the max worker count for this
+  endpoint to at most 0"). Parking the old endpoint at workersMax 0 first was refused by this session's permission
+  policy (modifying shared RunPod resources) - it needs the user's go. Steps when allowed: set exo-cpu1 (n1f5v21dfrco3b)
+  workersMax 0 -> `cd pipeline/cloud && RUNPOD_API_KEY="$(cat ~/.runpod_key)" flash deploy --python-version 3.12` (reuses
+  volume exo-farm-cas u9gf22x1a2 by name + datacenter) -> check `ping` on the new endpoint -> delete the old one (the
+  client picks the first endpoint named exo-cpu1) -> PATCH executionTimeoutMs 3600000 on the new one.
+- **Fix in use (no endpoint change)**: the pinned packages for CPython 3.12 were pip-installed by a farm job into the
+  volume and packed as one tar, `/runpod-volume/exo-farm/py312/v1.tar` (425 MB; rebuild: `cloud_run.py pyenv`). Every job
+  extracts it once per worker to `/tmp/farm-py312-v1` (2.2 s, flock-guarded) and puts it first on `PYTHONPATH`
+  (importing straight from the network volume costs 11.8 s per process; from local disk 0.6 s). The broken `/app`
+  packages stay on the path behind it and are never reached.
+- **libigl threads**: libigl sizes its pool from `hardware_concurrency()` = the host's 192 cores, not the job's 8-vCPU
+  quota; a bench configuration took 55 s instead of 8 s. Every job now exports `IGL_NUM_THREADS` = vCPUs / 4 (= 2, the
+  job's share of a worker; 1 in sweeps, which run one process per vCPU) unless the job sets it. Measured on the same
+  20-config chunk: 692 s -> 89 s, identical reports.
 
 ## Endpoint, cost, hygiene
 
 | item | value |
 |---|---|
-| endpoint | `exo-cpu1` (Flash, `pipeline/cloud/farm_worker.py`, deploy: `cd pipeline/cloud && flash deploy --python-version 3.11`) |
+| endpoint | `exo-cpu1` n1f5v21dfrco3b (Flash, `pipeline/cloud/farm_worker.py`; redeploy steps in "Worker python") |
 | instance | cpu3c-8-16 (8 vCPU, 16 GB), fallback cpu5c-8-16 |
 | rate | $0.288/h per worker = $0.036 per vCPU-h (the lowest RunPod serverless CPU rate; cpu5c $0.336/h) |
-| scaling | workersMin 0, workersMax 4 (account quota 10 across all endpoints), idle 10 s, 4 jobs per worker, 1 h runaway limit |
+| scaling | workersMin 0, workersMax 4 (account quota 10 across all endpoints), idle 10 s, 1 job per worker today (4 after a redeploy), executionTimeoutMs 0 (1 h asked, needs the redeploy / a PATCH) |
 | storage | network volume `exo-farm-cas` 20 GB, EU-RO-1: $1.40/month |
 
 `python3 tools/runpod_guard.py audit | enforce` covers it (workersMin 0, idle <= 10 s, workersMax <= 10, volume listed).
@@ -65,3 +127,17 @@ Per-run costs are logged in `docs/RUNPOD_COSTS.md`.
 
 See the "CPU farm" section of `docs/RUNPOD_COSTS.md` for the measured run: R2 body contact (`judge/body_contact.py
 --step 6`) and `score_design.py` (10 mm and 14 mm bands) on `cad_r18_n3_s1392_1_f300`, run locally and on the farm.
+
+## Measured (2026-10-15 18:10-19:15 UTC; local box: 4 cores, load 12-28 from the other agents)
+
+| workload | local (`concept_sweep --jobs 2`, nice 10) | farm job (compute / wall incl. setup, queue-free) | speed-up | $ per chunk (cpu3c, whole worker) |
+|---|---|---|---|---|
+| 20 configs, champion 3R (concept_baseline_sweep, pcts 90/95/100) | 515 s | 89 s / 109 s (2 processes, before the 1-job-per-worker finding) | 4.7x | $0.0087 |
+| same, before the libigl thread fix | - | 692 s / 705 s | 0.7x | $0.057 |
+| 20 configs, docs/concepts/models/baseline-3r-kit.py | 100 s | 17.5 s / 31 s on the worker (2 processes) | 3.2x on the worker | $0.0032 |
+
+- Per CPU-hour: $0.036 per vCPU-h (cpu3c-8-16, $0.288 per worker-hour); a farm job holds a whole worker today.
+- Overheads that decide whether the farm pays: job setup 2 s (sweep file set, 29 MB) or 11-13 s (whole repo); first job
+  on a worker +2.2 s (package tar) + ~3 s (bench grids copy); cold start of a worker 5-40 s; uploads of new files go
+  through `have`/`put` jobs that wait in the same queue as everybody's compute (kit5: 17 min behind a 31-job batch).
+- Same numbers: 50 configurations local vs farm, every metric identical (max abs difference 0).
