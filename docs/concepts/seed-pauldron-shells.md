@@ -135,3 +135,28 @@ so spreading J2 over a ring makes its one radius clear the worst of a 250 deg ar
 colatitude 12-16 deg round u1, 7 mm stack, 334-356 deg arc) sits at one radius of 58-59 mm in every pose and is
 65-94 % in band. It is a low-profile replacement for the champion's hub 1 at 12.25 mm. The spec's C-ring round the
 humerus axis is impossible on this body (see spec correction 3).
+
+## Audit (verifier, 2026-10-15)
+
+**Verdict: the death stands.** Measured reason: the J2 ring bearing (track 2) must be one surface of revolution about u2. It spans about 250 deg of azimuth over the bulging deltoid and acromion, so it sits about 120 mm out and is 0.00 % in band in every variant.
+
+- **Re-measured:** I re-ran the best configuration (k=88) on Bench(60,160) with the honest kit checks: march requirement, dense K2, K6 collisions and the kit audit (clean). It reproduces exactly: gap 79.46, reach 0.75, follow 1.00, in-band 14 0.2718, in-band 10 0.1513, contact 0.016.
+- **Checked against the baseline's conventions:**
+  - Sampling, hubs and the quantile all come from the kit, which reproduces the baseline row exactly.
+  - Held-out clips are guarded in `evaluate`.
+  - Arcs are measured over every pose that closes. This is conservative but correct, because a track must cover every pose it is used in.
+  - The C-gap neck check and the web lift over the channels (7 mm stack + 1 mm) are both physical.
+  - I found no bug.
+- **Comparability note:** the baseline's 68.93 uses the `outer` requirement with no K2 or K6. The champion under the same honest kit checks scores 70.27 (KIT.md). So like-for-like, this morphology is 9.2 points behind, not 10.5. It is still behind, and still above the refutation line of 78.93 against 68.93. The `outer` mode can't be used on this model: its straps and bands become sparse and the gap reads 275, so that number is not meaningful.
+- **Probes at k=88:**
+
+  | Variant | Gap | Note |
+  |---|---|---|
+  | q 0.95 | 89.73 | reach 0.68, contact 0.077 |
+  | O20 hub at J2 | 102.85 | hub2 0.2 % in band, collisions 15 %, follow 0.78 |
+  | same, track 1 proximal | 106.14 | |
+  | cov3 0.8 | 93.06 | |
+  | cov2 0.95 | 84.85 | |
+
+  None of them moves the limiter.
+- **What survives:** the scapula-fixed J1 ring is about 65 % in band in every variant. It is a graft candidate for the champion's hub 1. That would be a different row.

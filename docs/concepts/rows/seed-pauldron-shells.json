@@ -14,11 +14,11 @@
  "inband10": 0.1513,
  "contact": 0.0164,
  "gap": 79.46,
- "v_reach": null,
- "v_follow": null,
- "v_inband14": null,
- "v_inband10": null,
- "v_gap": null,
+ "v_reach": 0.75,
+ "v_follow": 1.0,
+ "v_inband14": 0.2718,
+ "v_inband10": 0.1513,
+ "v_gap": 79.46,
  "n_configs": 107,
  "verdict": "dead: best honest gap 79.46 (reach 0.75, follow 1.00, in-band 14 0.27, contact 0.016) vs the 3R champion 68.93; not worth a GPU sweep. The ring-bearing joints do not remove the 3R family's middle-axis limiter (J2): a revolute concentric with GH must be a surface of revolution, so spreading J2 over a 250 deg ring makes its one radius clear the worst of the arc (about 120 mm vs 61-86 mm along u2). Transferable: a scapula-fixed J1 ring bearing (7 mm stack) sits at one radius of 58 mm, 65-94 % in band - graft it on the champion.",
  "limiter": "J2 (middle axis) track: in-band 0.00; its one radius about 120 mm (per-sample q95 64-107, per-pose max to 132 mm at elevation 165 / axial -90 and elevation 60-90 reaches; the ring passes over the bulging deltoid/acromion), and web 2 rides lifted over it (0.00 in band). Second: J3 C-gap loses 22 workspace poses, all at elevation 60-180 (overhead 11 of 13 lost); closing the gap (neck from the ring centre, reach 0.86) sends track 2 to 204 mm, which fails the audit.",
@@ -33,5 +33,6 @@
   "web1": 0.0947,
   "neck": 0.4331,
   "web2": 0.0
- }
+ },
+ "audit": "2026-10-15 audit: death stands. Best config re-measured honest (march, dense K2, K6, kit audit clean) = 79.46 exactly. No modelling bug or convention error found. The like-for-like reference is the champion under the same kit checks, 70.27 (it is 68.93 only under the baseline's looser conventions), so this morphology is 9.2 behind, not 10.5. Probes: q 0.95 89.73; O20 hub at J2 102.85 (hub2 0.2 % in band, 15 % collisions); cov3 0.8 93.06; cov2 0.95 84.85. Limiter confirmed: track 2 is 0.00 in band in every variant."
 }
