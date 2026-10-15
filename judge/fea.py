@@ -216,7 +216,7 @@ def boundary_faces(T):
     return el, fc
 
 # ================================================================ CalculiX deck, run, results
-def write_inp(path, X, T, mat, couplings, steps, fixed_nodes=None, extra=""):
+def write_inp(path, X, T, mat, couplings, steps, fixed_nodes=None, extra="", solver=None):
     """couplings: {name: (ref id (1-based), ref xyz, [(elem, face)])} - distributing (load) couplings; fixed_nodes: 0-based
     node ids held in u1-u3 (the support; ccx 2.21 does not let a fixed DISTRIBUTING reference node restrain the part);
     steps: [list of (node, dof, value)] or a raw load block per step"""
@@ -234,7 +234,7 @@ def write_inp(path, X, T, mat, couplings, steps, fixed_nodes=None, extra=""):
         if fixed_nodes is not None and len(fixed_nodes): f.write("*BOUNDARY\n" + "".join(f"{i + 1},1,3\n" for i in fixed_nodes))
         f.write(extra)
         for loads in steps:
-            f.write("*STEP\n*STATIC\n")
+            f.write("*STEP\n*STATIC" + (f", SOLVER={solver}" if solver else "") + "\n")
             if loads and isinstance(loads, str): f.write(loads)
             elif loads: f.write("*CLOAD, OP=NEW\n" + "".join(f"{nd},{dof},{v:.6e}\n" for nd, dof, v in loads))
             f.write("*NODE FILE\nU\n*EL FILE\nS\n*END STEP\n")
@@ -339,8 +339,9 @@ def part_setup(step, name, kind, hub_idx=None, cuff_centres=None):
     for h in hubs: h["zc"] = 0.5 * (h["z"][0] + h["z"][1])
     return dict(hubs=hubs, cyls=cy, vol_mm3=vol, com=com)
 
-H_RANGE = {2: (0.4, 3.0), 3: (0.3, 2.0), 2.5: (0.35, 2.5)}                          # size clamp per k (mm)
+H_RANGE = {2: (0.4, 3.0), 3: (0.3, 2.0), 2.5: (0.4, 3.0), 1.5: (0.6, 4.0)}                          # size clamp per k (mm)
 FOCUS_ABOVE, FOCUS_R = 60000, 30.0                                                     # parts with more coarse nodes: t/3 only near the peak
+K0_BIG = {"bottom": float(os.environ.get("FEA_K0_BOTTOM", 2.5))}                                                               # BOTTOM: t/2.5 for the six unit cases (t/2 = ~140k nodes, SPOOLES > 1.6 GB: OOM-killed on the shared machine 2026-10-15); t/3 refinement at the peak kept
 def prepare_part(step, name, kind, k, wall, cuff_centres=None, focus=None):
     """mesh (size = local wall / k; with focus = (point, R): k only within R of the point, k = 2 elsewhere), the load
     hub's joint surfaces and the support nodes"""
@@ -349,7 +350,8 @@ def prepare_part(step, name, kind, k, wall, cuff_centres=None, focus=None):
     load = hubs[1] if kind == "link" else hubs[0]
     if kind == "link" and len(hubs) != 2: raise RuntimeError(f"{name}: {len(hubs)} hubs found (2 expected)")
     hmin, hmax = H_RANGE[k]; C, tw = wall[2], wall[3]
-    X, T, on_curve = mesh_step(step, None, local=(C, tw, k, hmin, hmax) + (((np.asarray(focus[0], float), focus[1], 2, *H_RANGE[2]),) if focus is not None else ()), return_curves=True)
+    fk = (focus[2] if len(focus) > 2 else 2) if focus is not None else None               # outside the focus ball: the coarse mesh's k
+    X, T, on_curve = mesh_step(step, None, local=(C, tw, k, hmin, hmax) + (((np.asarray(focus[0], float), focus[1], fk, *H_RANGE[fk]),) if focus is not None else ()), return_curves=True)
     vol = tet_volumes(X, T)
     if (vol <= 0).any(): raise RuntimeError(f"{name}: {int((vol <= 0).sum())} inverted tets")
     el, fc = boundary_faces(T); bn = np.zeros(len(X), bool); bn[np.unique(T[el][np.arange(len(el))[:, None], np.c_[FACES, FACE_MID][fc]])] = True
@@ -384,15 +386,16 @@ def solve(P, mat, steps, work, threads=2):
     loads = [[(rid, 4 + j, m[j]) for j in range(3) if abs(m[j]) > 0] + [(rid, 1 + j, f[j]) for j in range(3) if abs(f[j]) > 0] for m, f in steps]
     inp = os.path.join(work, "part.inp"); write_inp(inp, X, P["T"], mat, {"LD": (rid, P["ld_ref"], P["ef"])}, loads, np.nonzero(P["fx_sel"])[0])
     import hashlib
-    hsh = hashlib.sha1(open(inp, "rb").read()).hexdigest(); cache = os.path.join(work, "result.npz")
+    hsh = hashlib.sha1(open(inp, "rb").read()).hexdigest(); cache = os.path.join(work, "result.npz")   # hash of the direct-solver deck (the solver choice does not change the answer)
     if os.path.exists(cache):                                                            # same deck solved before: reuse
         z = np.load(cache)
-        if str(z["hash"]) == hsh: return z["U"], z["S"], float(z["sec"])
-    sec = run_ccx(work, "part", threads); R = read_frd(os.path.join(work, "part.frd"), len(X))
+        if str(z["hash"]) == hsh: P["solver"] = str(z["solver"]) if "solver" in z else "SPOOLES"; return z["U"], z["S"], float(z["sec"])
+    solver = "SPOOLES"; sec = run_ccx(work, "part", threads)                               # (ccx's ITERATIVE CHOLESKY was tried 2026-10-15: no convergence in 870 iterations on the validation beam)
+    P["solver"] = solver; R = read_frd(os.path.join(work, "part.frd"), len(X))
     if len(R) != len(steps): raise RuntimeError(f"{len(R)} result steps for {len(steps)} load cases")
     for f in os.listdir(work):                                                           # keep the deck + log, drop the bulk
         if f.endswith((".frd", ".12d", ".cvg", ".sta", ".out")): os.remove(os.path.join(work, f))
-    U, S = np.stack([r[0] for r in R]), np.stack([r[1] for r in R]); np.savez(cache, U=U, S=S, sec=sec, hash=hsh)
+    U, S = np.stack([r[0] for r in R]), np.stack([r[1] for r in R]); np.savez(cache, U=U, S=S, sec=sec, hash=hsh, solver=solver)
     return U, S, sec
 
 def unit_data(P, mat, work, threads=2):
@@ -440,7 +443,10 @@ def post_part(name, mat, res, D):
     d2 = F_CUFF * np.linalg.svd(LF, compute_uv=False)[:, 0]
     bound = d1 + d2; judged = ~D["bcz"]
     cand = np.argsort(-np.where(judged, bound, 0))[:600]; cand_bc = np.argsort(-np.where(D["ldz"], bound, 0))[:200]; cand_s = np.argsort(-np.where(D["supz"] | D["sgz"], bound, 0))[:200]
-    idx = np.unique(np.r_[cand, cand_bc, cand_s]); d1f = np.zeros(len(bound)); d1f[idx] = worst_pair(LM[idx], LF[idx])[0]
+    cand_t = np.nonzero(D["thin"] & judged)[0] if "thin" in D else np.zeros(0, int)            # the smallest section (red team)
+    cand_t = cand_t[np.argsort(-bound[cand_t])][:300]
+    idx = np.unique(np.r_[cand, cand_bc, cand_s, cand_t]); d1f = np.zeros(len(bound)); d1f[idx] = worst_pair(LM[idx], LF[idx])[0]
+    D["_d1"], D["_bound"], D["_d1f"] = d1, bound, d1f
     w = np.where(judged)[0]
     kj = w[np.argmax(d1f[w])]; _, argw = worst_pair(LM[[kj]], LF[[kj]]); f_star, m_star = argw[0]
     m1 = np.linalg.svd(LM[kj])[2][0] * M_DESIGN                                              # D1's worst moment at that node
@@ -514,10 +520,17 @@ def judged_peak(S, mask):
 def part_fea(step, pre, kind, mat, work0, fast=False, centres=None, threads=2):
     t0 = time.time(); wall = wall_thickness(step)
     log(f"{pre}: {mat_name_of(mat)}, wall thickness p10 {wall[0]:.2f} mm, median {wall[1]:.2f}")
-    k0 = 2.5 if fast else 2
+    k0 = 2.5 if fast else K0_BIG.get(kind, 2)
     P = prepare_part(step, pre, kind, k0, wall, centres)
     D, sec = unit_data(P, mat, os.path.join(work0, f"{pre}_k{k0}"), threads)
-    p = post_part(pre, mat, P["info"], D); p["mesh"] = dict(P["info"], ccx_s=round(sec, 1)); p["wall_mm"] = dict(p10=round(wall[0], 2), median=round(wall[1], 2))
+    from scipy.spatial import cKDTree
+    _, i8 = cKDTree(wall[2]).query(P["X"], k=8); t_node = wall[3][i8].min(1)                   # local wall at every node (both faces among the 8 nearest)
+    t_thin = float(np.percentile(t_node[~P["bcz"]], 5)); D["thin"] = t_node <= t_thin            # red team: the smallest section = the thinnest 5 % of the judged nodes
+    p = post_part(pre, mat, P["info"], D); p["mesh"] = dict(P["info"], ccx_s=round(sec, 1), solver=P.get("solver")); p["wall_mm"] = dict(p10=round(wall[0], 2), median=round(wall[1], 2))
+    th = np.nonzero(D["thin"] & ~P["bcz"])[0]; kt = th[np.argmax(D["_d1f"][th])]
+    p["smallest_section"] = dict(wall_mm=round(float(t_node[kt]), 2), wall_p5_judged_mm=round(t_thin, 2), at_mm=np.round(P["X"][kt], 1).tolist(),
+                                 D1_vm_MPa=round(float(D["_d1"][kt]), 1), D1F_vm_MPa=round(float(D["_d1f"][kt]), 1), SF_D1F=round(mat["Sy"] / max(float(D["_d1f"][kt]), 1e-9), 2),
+                                 rule="the thinnest 5 % of the judged nodes (local wall = min ray thickness of the 8 nearest surface samples); D1F = the worst 10 N.m + 50 N wrench at each, its peak reported (coarse mesh)")
     log(f"  k {k0}: {P['info']['n_nodes']} nodes, ccx {sec:.0f} s; D1 {p['cases']['D1']['vm_MPa']} MPa, D1F {p['cases']['D1F']['vm_MPa']} MPa (SF {p['cases']['D1F']['SF']}) at {p['cases']['D1F']['at_mm']}; d_GH {p['deflection']['d_GH_mm']} mm")
     p["convergence"] = None
     if not fast:
@@ -525,7 +538,7 @@ def part_fea(step, pre, kind, mat, work0, fast=False, centres=None, threads=2):
         gw = p["governing_wrench"]; m_s, f_s = wrench_at_hub(gw["m_about_GH_Nmm"], gw["f_through_GH_N"], P["ld_ref"])
         S_c = np.einsum("k,knc->nc", np.r_[m_s @ D["B"].T / UNIT_M, f_s @ D["B"].T / UNIT_F], D["S"])   # the same wrench on the coarse mesh
         vc, kc = judged_peak(S_c, ~D["bcz"])
-        focus = None if P["info"]["n_nodes"] < FOCUS_ABOVE else (D["X"][gw["node"]], FOCUS_R)    # big parts: t/3 around the governing peak only
+        focus = None if (P["info"]["n_nodes"] < FOCUS_ABOVE and kind != "bottom") else (D["X"][gw["node"]], FOCUS_R, k0)    # big parts: t/3 around the governing peak only
         P3 = prepare_part(step, pre, kind, 3, wall, centres, focus)
         U3, S3, sec3 = solve(P3, mat, [(m_s, f_s)], os.path.join(work0, f"{pre}_k3"), threads)
         vf, kf = judged_peak(S3[0], ~P3["bcz"]); ratio = vf / vc
@@ -553,8 +566,74 @@ def part_fea(step, pre, kind, mat, work0, fast=False, centres=None, threads=2):
                        rule="linear: allowable moment = 10 N.m x SF / 1.5; t_peak = 30th percentile of the ray thickness within 3 mm of the peak; t_req = t_peak x (1.5 / SF)^(1/1.9) (thin_study exponent), width-only = x 1.5 / SF")
     p["seconds"] = round(time.time() - t0, 1); return p
 
+# ================================================================ red team: the joint hardware and the abnormal cases (hand calcs on the FE wrench)
+HW_V5 = dict(bearing="2x MR117-2RS (7 x 11 x 3) back-to-back, preloaded", C_N=700.0, C0_N=280.0, s_eff_mm=6.0, s_centres_mm=3.6, pin_d_mm=7.0, pin_lever_mm=3.95,
+             nut=dict(thread="M7x0.5", d3_mm=6.39, Le_mm=0.9), cap=dict(thread="M18x0.5", d3_mm=17.39, Le_mm=1.5), alpha0_deg=15.0,
+             src="docs/HARDWARE.md v5 (catalogue C ~0.7 kN, C0 ~0.28 kN: to confirm with the supplier); pressure centres ~6 mm apart (3.6 centre spacing + contact angle); pin root at S, pair centre at (L1 + U1) / 2")
+HW_V4 = dict(washer="igus GTM-1018-005 (O10 x O18 x 0.5, iglidur G)", sleeve="igus GSM-1012-04", p_allow_MPa=80.0, Do=18.0, Di=10.0, pin_d_mm=10.0, pin_lever_mm=3.0,
+             nut=dict(thread="M8x0.5", d3_mm=7.39, Le_mm=1.0), sleeve_d=10.0, sleeve_L=4.0, src="iglidur G max static surface pressure 80 MPa (igus); docs/HARDWARE.md v4")
+S0_MIN = 1.0                 # ISO 76 static safety factor of a rolling bearing, normal duty (1.5-2 with shock)
+ARM_GRAVITY_NM = 13.8        # this user's full arm gravity moment at 90 deg (de Leva 1996 mass fractions, 85 kg, 185 cm): the 10 N.m design load is ~70 % support
+def joint_hardware(P):
+    """per joint (the load hub of each part; the last link and BOTTOM share J_N): the worst tilt moment about the bearing
+    pair under the D1F wrench (10 N.m about GH perpendicular to a 50 N force through GH: tilt = |M_perp - z a x F|,
+    worst = 10 N.m + 50 N x z, z = hub reference along the axis from GH), and what it does to the bearings, pin and threads"""
+    out = {}; links = [k for k, _ in PARTS if k in P and k != "BOTTOM"]                     # parts sit in their own member frames: joints by chain order
+    for nm, p in P.items():
+        lh = p["mesh"]["load_hub"]; z = float(np.linalg.norm(lh["ref"]))
+        jn = f"J{links.index(nm) + 1}" if nm in links else f"J{len(links)}"                  # BOTTOM's load hub = the last link's distal joint
+        if nm == "BOTTOM" and jn in out:
+            if z <= out[jn]["z_mm"]: continue                                                # keep the larger lever of the two members' references
+        M = M_DESIGN + F_CUFF * z; Fr = F_CUFF; Fa = F_CUFF
+        mat = MAT["Ti-6Al-4V"]; tau_allow = 0.577 * mat["Sy"]
+        j = dict(load_hub_of=nm, ver=lh["ver"], z_mm=round(z, 1), tilt_Nm=round(M / 1e3, 2), radial_N=Fr, axial_N=Fa)
+        if lh["ver"] == "v5":
+            H = HW_V5; Fb = M / H["s_eff_mm"] + Fr / 2; P0 = max(Fb, 0.6 * Fb + 0.5 * Fa); Fb_c = M / H["s_centres_mm"] + Fr / 2
+            Mp = M + Fr * H["pin_lever_mm"]; s_pin = 32 * Mp / (math.pi * H["pin_d_mm"] ** 3)
+            Fn = Fa + Fb * math.tan(math.radians(H["alpha0_deg"]))
+            tn = Fn / (0.5 * math.pi * H["nut"]["d3_mm"] * H["nut"]["Le_mm"]); tc = Fn / (0.5 * math.pi * H["cap"]["d3_mm"] * H["cap"]["Le_mm"])
+            Mallow_b = (H["C0_N"] / S0_MIN - Fr / 2) * H["s_eff_mm"]
+            j.update(bearing=H["bearing"], bearing_load_N=round(Fb, 0), bearing_load_centres_N=round(Fb_c, 0), C0_N=H["C0_N"], s0=round(H["C0_N"] / P0, 3),
+                     tilt_allow_at_s0_1_Nm=round(Mallow_b / 1e3, 2), pin_root_vm_MPa=round(s_pin, 1), pin_SF=round(mat["Sy"] / s_pin, 2),
+                     nut_axial_N=round(Fn, 0), nut_thread_shear_MPa=round(tn, 1), nut_SF=round(tau_allow / tn, 2), cap_thread_shear_MPa=round(tc, 1), cap_SF=round(tau_allow / tc, 2),
+                     need_C0xs_Nm=round(S0_MIN * M / 1e3, 2), have_C0xs_Nm=round(H["C0_N"] * H["s_eff_mm"] / 1e3, 2))
+            j["min_SF"] = min(j["s0"] / S0_MIN * SF_MIN, j["pin_SF"], j["nut_SF"], j["cap_SF"])          # s0 normalised so that 1.5 = the bearing at S0_MIN
+            j["ok"] = bool(j["s0"] >= S0_MIN and min(j["pin_SF"], j["nut_SF"], j["cap_SF"]) >= SF_MIN)
+        else:
+            H = HW_V4; W = math.pi * (H["Do"] ** 4 - H["Di"] ** 4) / (32 * H["Do"]); A = math.pi / 4 * (H["Do"] ** 2 - H["Di"] ** 2)
+            pw = M / W + Fa / A; ps = Fr / (H["sleeve_d"] * H["sleeve_L"]); Mp = M + Fr * H["pin_lever_mm"]; s_pin = 32 * Mp / (math.pi * H["pin_d_mm"] ** 3)
+            Fn = Fa + M / (H["Do"] + H["Di"]) * 2 * 0.5; tn = Fn / (0.5 * math.pi * H["nut"]["d3_mm"] * H["nut"]["Le_mm"])
+            j.update(bearing=f"{H['washer']} pair + {H['sleeve']}", washer_edge_pressure_MPa=round(pw, 1), washer_SF=round(H["p_allow_MPa"] / pw, 2), sleeve_pressure_MPa=round(ps, 2),
+                     pin_root_vm_MPa=round(s_pin, 1), pin_SF=round(mat["Sy"] / s_pin, 2), nut_axial_N=round(Fn, 0), nut_thread_shear_MPa=round(tn, 1), nut_SF=round(tau_allow / tn, 2))
+            j["min_SF"] = min(j["washer_SF"], j["pin_SF"], j["nut_SF"]); j["ok"] = bool(j["min_SF"] >= SF_MIN)
+        out[jn] = j
+    return out
+
+def red_team(out):
+    P = out["parts"]; rt = {}
+    rt["worst_direction"] = dict(min_SF_D1=min(p["cases"]["D1"]["SF"] for p in P.values()), min_SF_D1F=min(p["cases"]["D1F"]["SF"] for p in P.values()),
+                                 note="D1 = 10 N.m in the exact worst direction (SVD of each node's stress map); D1F = that moment with the 50 N cuff force behind it (worst pair)")
+    rt["arm_overhead"] = dict(covered_by="D1F", min_SF=rt["worst_direction"]["min_SF_D1F"], mvp1_own_weight_min_SF=min(p["cases"]["MVP1"]["SF"] for p in P.values()),
+                              note="in a serial spherical chain every member carries the same end wrench about GH; a pose (overhead included) only turns it in the part frame, so the worst-direction envelope bounds every pose. "
+                                   f"The arm's gravity moment overhead is below its 90 deg value (this user's full arm: ~{ARM_GRAVITY_NM} N.m, de Leva 1996; the 10 N.m design load is ~{100 * M_DESIGN / 1e3 / ARM_GRAVITY_NM:.0f} % support: full support would scale every stress by {ARM_GRAVITY_NM / (M_DESIGN / 1e3):.2f})")
+    rt["fall_on_elbow_2x"] = dict(load="2 x D1F (20 N.m + 100 N, worst direction): accident case, judged against fracture (Su), not yield",
+                                  parts={k: dict(SF_ult=round(MAT[p["material"]]["Su"] / (2 * p["cases"]["D1F"]["vm_MPa"]), 2), SF_yield=round(p["cases"]["D1F"]["SF"] / 2, 2)) for k, p in P.items()})
+    rt["fall_on_elbow_2x"]["min_SF_ult"] = min(v["SF_ult"] for v in rt["fall_on_elbow_2x"]["parts"].values())
+    ss = {k: p["smallest_section"] for k, p in P.items() if "smallest_section" in p}
+    if ss: rt["smallest_section"] = dict(parts=ss, worst=min(ss, key=lambda k: ss[k]["SF_D1F"]), min_SF=min(v["SF_D1F"] for v in ss.values()))
+    hw = joint_hardware(P); rt["joint_hardware"] = hw
+    rt["hardware_min_SF"] = round(min(j["min_SF"] for j in hw.values()), 3); rt["hardware_ok"] = bool(all(j["ok"] for j in hw.values()))
+    v5 = [j for j in hw.values() if j["ver"] == "v5"]
+    if v5: rt["bearing_s0_min"] = min(j["s0"] for j in v5)
+    # MVP1 (unpowered PoC): the hardware at the R17 envelope (D1F / 10)
+    rt["mvp1_hardware"] = {k: (dict(bearing_load_N=round(j["bearing_load_N"] * MVP1_SCALE, 0), s0=round(j["s0"] / MVP1_SCALE, 2)) if j["ver"] == "v5" else dict(min_SF=round(j["min_SF"] / MVP1_SCALE, 1))) for k, j in hw.items()}
+    rt["base_interface"] = {k: dict(moment_at_tab_Nm=round((M_DESIGN + F_CUFF * float(np.linalg.norm(p["mesh"]["support_ref"]))) / 1e3, 2), force_N=F_CUFF, tab_ref_mm=p["mesh"]["support_ref"],
+                                    note="what the user's scapula handler (and its bolts) must carry at the tab under D1F; the handler is the user's part (not judged here)") for k, p in P.items() if k == "D4-01"}
+    return rt
+
 def summarise(out, dd):
     gap, gsrc = min_skin_gap(dd); P = out["parts"]
+    out["red_team"] = red_team(out)
     mvp1 = None                                                                          # the measured MVP1 loads (judge/dynamics.py nominal case)
     try:
         dy = json.load(open(os.path.join(dd, "judge", "dynamics.json"))); c = dy["cases"][dy["nominal"]]
@@ -573,7 +652,11 @@ def summarise(out, dd):
                           M_allow_at_SF_1_5_Nm=round(min(p["sizing"]["M_allow_at_SF_1_5_Nm"] for p in P.values() if "sizing" in p), 2) if all("sizing" in p for p in P.values()) else None,
                           thickness_scale_for_floor=round(max(1.0, dsum / FLOOR_MM) ** (1 / 2.7), 2), mvp1_measured=mvp1,
                           sizing_note="M_allow: the design moment the weakest part carries at SF 1.5 (linear); thickness_scale_for_floor: uniform wall scale that brings the chain d_GH to 2 mm (stiffness ~ t^2.7, thin_study)",
-                          passes=bool(sf >= SF_MIN and fsf >= FATIGUE_MIN and defl_ok and all(k in P for k in chain)))
+                          hardware_min_SF=out["red_team"]["hardware_min_SF"], hardware_ok=out["red_team"]["hardware_ok"], bearing_s0_min=out["red_team"].get("bearing_s0_min"),
+                          fall_2x_min_SF_ult=out["red_team"]["fall_on_elbow_2x"]["min_SF_ult"],
+                          smallest_section_min_SF=out["red_team"].get("smallest_section", {}).get("min_SF"),
+                          mvp1_passes=bool(min(p["cases"]["MVP1"]["SF"] for p in P.values()) >= SF_MIN and all(v.get("s0", 99) >= S0_MIN and v.get("min_SF", 99) >= SF_MIN for v in out["red_team"]["mvp1_hardware"].values())),
+                          passes=bool(sf >= SF_MIN and fsf >= FATIGUE_MIN and defl_ok and all(k in P for k in chain) and out["red_team"]["hardware_ok"] and out["red_team"]["fall_on_elbow_2x"]["min_SF_ult"] >= 1.0))
     return out
 
 def cut_beyond_support(step, centres, out, margin=12.0):
@@ -601,7 +684,9 @@ def judge_design(dd, only=None, fast=False, threads=2):
         note = None
         if kind == "bottom" and centres:
             step, note = cut_beyond_support(step, centres, os.path.join(work0, "BOTTOM_cut.step"))
-        out["parts"][pre] = part_fea(step, pre, kind, material_for(pf, pre), work0, fast, centres, threads)
+        try: out["parts"][pre] = part_fea(step, pre, kind, material_for(pf, pre), work0, fast, centres, threads)
+        except Exception as e:                                                            # one part failing never loses the others (summary: complete = False)
+            log(f"{pre}: FAILED {e!r}"[:300]); out.setdefault("parts_failed", {})[pre] = repr(e)[:300]; continue
         if note: out["parts"][pre]["geometry_note"] = note
     if not out["parts"]: raise RuntimeError("no parts analysed")
     out["seconds"] = round(time.time() - t_all, 1)
@@ -677,14 +762,22 @@ def validate(threads=2):
 if __name__ == "__main__":
     ap = argparse.ArgumentParser(); ap.add_argument("design", nargs="?"); ap.add_argument("--parts", default=""); ap.add_argument("--fast", action="store_true")
     ap.add_argument("--validate", action="store_true"); ap.add_argument("--threads", type=int, default=int(os.environ.get("OMP_NUM_THREADS", 2)))
+    ap.add_argument("--post", action="store_true", help="re-run only the summary and the red team on an existing fea.json (no meshing, no solve)")
     A = ap.parse_args()
     if A.validate: validate(A.threads); sys.exit(0)
-    dd = design_dir(A.design); out = judge_design(dd, [p for p in A.parts.split(",") if p] or None, A.fast, A.threads)
-    os.makedirs(os.path.join(dd, "judge"), exist_ok=True); fn = os.path.join(dd, "judge", "fea.json")
-    if A.parts and os.path.exists(fn):                                                     # partial re-run: merge into the existing result
-        old = json.load(open(fn)); old["parts"].update(out["parts"]); out["parts"] = old["parts"]
+    dd = design_dir(A.design); fn = os.path.join(dd, "judge", "fea.json")
+    if A.post: out = json.load(open(fn))
+    else:
+        out = judge_design(dd, [p for p in A.parts.split(",") if p] or None, A.fast, A.threads)
+        os.makedirs(os.path.join(dd, "judge"), exist_ok=True)
+        if A.parts and os.path.exists(fn):                                                 # partial re-run: merge into the existing result
+            old = json.load(open(fn)); old["parts"].update(out["parts"]); out["parts"] = old["parts"]
     summarise(out, dd); json.dump(out, open(fn, "w"), indent=1)
-    S_ = out["summary"]
+    S_ = out["summary"]; rt = out["red_team"]
+    for k, j in rt["joint_hardware"].items():
+        print(f"{k:16s} {j['ver']} z {j['z_mm']:5.1f} mm tilt {j['tilt_Nm']:5.2f} N.m: " + (f"bearing {j['bearing_load_N']:.0f} N vs C0 {j['C0_N']:.0f} (s0 {j['s0']}), pin SF {j['pin_SF']}, nut SF {j['nut_SF']}, cap SF {j['cap_SF']}" if j["ver"] == "v5"
+              else f"washer {j['washer_edge_pressure_MPa']} MPa (SF {j['washer_SF']}), pin SF {j['pin_SF']}, nut SF {j['nut_SF']}"))
+    print(f"red team: fall 2x min SF_ult {rt['fall_on_elbow_2x']['min_SF_ult']}, smallest section SF {rt.get('smallest_section', {}).get('min_SF')}, hardware min SF {rt['hardware_min_SF']} ({'ok' if rt['hardware_ok'] else 'FAIL'}); MVP1 passes: {S_['mvp1_passes']}")
     for k, p in out["parts"].items():
         c = p["cases"]; print(f"{k:7s} {p['material']:10s} D1 {c['D1']['vm_MPa']:7.1f} MPa  D1F {c['D1F']['vm_MPa']:7.1f} MPa SF {c['D1F']['SF']:5.2f}  fatigue SF {p['fatigue']['SF_fully_reversed']:5.2f}  d_GH {p['deflection']['d_GH_mm']:.3f} mm")
     print(f"R9: min SF {S_['min_SF']} ({S_['worst_part']}), fatigue {S_['fatigue_min_SF']}, chain d_GH {S_['chain_d_GH_mm']} mm vs gap {S_['min_skin_gap_mm']} -> {'PASS' if S_['passes'] else 'FAIL'}")

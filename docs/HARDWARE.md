@@ -46,7 +46,7 @@ O20 hub (HUB_R 10), **12.25 mm** from the lower member's skin face F to the cap 
 | B1 | 6.65 | bearing 1 (MR117-2RS, 7 x 11 x 3) top |
 | B2 | 7.25 | 0.6 outer spacer (O11 x O9.8, 17-4PH) / inner spacer (O8.2 x O7, 0.6 - preload offset, ground) |
 | H1 | 8.75 | boss top proper; the cap skirt seats over it (0.05 float) |
-| U1 | 10.25 | bearing 2 top = top of the O18 threaded spigot (M18x0.5) = cap flange (clamps the upper outer ring) |
+| U1 | 10.25 | bearing 2 top = cap flange face (clamps the upper outer ring); the O18 threaded spigot (M18x0.5) tops out 0.03 under it (`CLAMP_GAP`, from `cad_r20_n3_s1414_4_s10` on) |
 | N1 | 11.15 | Ti ring nut M7x0.5, O8.6 x 0.9 (on the inner ring only; 2 pin-spanner holes, Loctite 222) = pin top |
 | M0..M1 | 8.30..10.30 | O4 x 2 N52 diametric magnet in the pin top (placeholder) |
 | IC0..P0 | 10.60..11.35 | sensor IC QFN 3x3x0.75 in a O4.6 pocket of the pin stub, 0.3 air gap (placeholder) |
@@ -54,9 +54,10 @@ O20 hub (HUB_R 10), **12.25 mm** from the lower member's skin face F to the cap 
 | top | 12.25 | O20 G2 dome crown (0.5 Ti over the PCB; >= 0.38 over the pocket rim) |
 
 - **No play, no loose bearing:** two stacks are clamped. Outer: hub lip -> outer ring 1 -> outer spacer -> outer ring 2
-  -> cap flange (the cap threads onto the spigot and bottoms on U1). Inner: pin collar -> inner ring 1 -> inner spacer
-  -> inner ring 2 -> ring nut. The inner spacer is ground shorter than the outer one by the preload offset (~5 um,
-  not modelled) -> a back-to-back preloaded pair that carries radial, axial and tilt loads.
+  -> cap flange (the cap threads onto the spigot; its flange bears on outer ring 2 only, 0.03 clear of the spigot top).
+  Inner: pin collar -> inner ring 1 -> inner spacer -> inner ring 2 -> ring nut. The inner spacer is ground shorter than
+  the outer one by the preload offset (~5 um, not modelled) -> a back-to-back preloaded pair that carries radial, axial
+  and tilt loads. See "Preload by construction" below for the parts that set it.
 - **No visible screws:** the cap is one turned Ti part (O20 skirt continuing the boss wall, one hairline seam, G2 dome
   from the wall to the crown, zero curvature at both ends); it threads onto the spigot (M18x0.5, Loctite 222) and is
   tightened with a soft-jaw cup. No drive features, no holes.
@@ -74,6 +75,36 @@ O20 hub (HUB_R 10), **12.25 mm** from the lower member's skin face F to the cap 
   it as tilt, would be ~1.7 kN per bearing, 6x over C0: MVP2 needs this pair re-sized (or the moment kept about the
   joint axes); MVP1 does not. Not an FEA; R9 still needs CalculiX.
 - Custom parts exported as STEP (R7): `J<n>-cap`, `J<n>-nut`, `J<n>-spacerO`, `J<n>-spacerI`.
+
+### Preload by construction (checked 2026-10-15, track linkage-final-standard)
+
+The user's complaint about the v4 build: "loose bearings". Check of the v5 stack as modelled in `joint_v5.py`:
+
+- **Found (builds up to `cad_r20_n3_s1414_4_f300`): the outer stack was not clamped by construction.** The cap's flange
+  face at U1 spanned r 4.6-8.8 and sat on BOTH the upper outer ring (face r 4.85-5.35) and the spigot top (r 5.7-8.8),
+  coplanar at U1. A 7 x 11 x 3 bearing's ring width tolerance is 0/-120 um (P0 / ABEC-1) or 0/-40 um (P5): with a short
+  ring stack the cap bottoms on the spigot first and both outer rings float - up to 0.24 mm axial play at P0, i.e. the
+  same loose bearing again, hidden under a tight-looking cap.
+- **Fixed (`joint_v5.CLAMP_GAP = 0.03`, every JOINT=v5 build from `cad_r20_n3_s1414_4_s10` on):** the spigot top sits
+  0.03 under U1, so the cap flange can bear only on outer ring 2 and the thread load always goes through the outer
+  stack (spindle practice: the clamping cover bears on the ring with a small measured gap to the housing face). The cap
+  skirt keeps its 0.05 float over the boss shoulder H1, so the skirt never takes the load either. The inner stack was
+  already right: the ring nut's face (r 3.25-4.1) bears on inner ring 2 only and the M7 thread runs on below it.
+
+**The parts that set the preload and the zero play** (per joint J<n>):
+
+| part | sets | how it is made / assembled |
+|---|---|---|
+| `J<n>-spacerO` outer spacer O11 x O9.8 x 0.6 (17-4PH) | the outer stack height: boss lip (L1) -> outer ring 1 -> spacer -> outer ring 2, standing 0.02-0.04 proud of the spigot top | select-ground at assembly to the measured lip-to-spigot depth and the two rings' measured widths |
+| `J<n>-spacerI` inner spacer O8.2 x O7 x (0.6 - delta) (17-4PH) | the preload: delta (~5 um light preload for a 7 x 11 x 3 pair; take delta from the supplier's preload table) | ground in the same setup as spacerO (matched pair), then lapped delta shorter |
+| `J<n>-cap` (M18x0.5 onto the spigot, Loctite 222) | clamps the outer stack (flange on outer ring 2 only) | soft-jaw cup to torque |
+| `J<n>-nut` ring nut M7x0.5 (Ti, Loctite 222) | clamps the inner stack and closes delta: the inner rings are pulled delta closer than the outer rings -> back-to-back (DB) pair, pressure centres ~6 mm apart | pin spanner to torque, lower member held |
+| pin collar (lower member, L1) and boss lip (upper member, L1) | the two datum faces both stacks start from; they also set the 0.15 running gap S..U0 | turned in the member's hub setup |
+| MR117-2RS bearings | ring widths enter the spacerO grind | P5 (ABEC-5) recommended (0/-40 um widths keep the grind window small); a factory DB-matched pair is the alternative to ground spacers |
+
+Not modelled: delta itself (5 um), thread flanks (threads at their major / minor diameters). Judges: R6
+(`judge/part_contact.py`) checks the lower vs upper groups of every joint; it does not check a stack's clamping, which
+is why this section exists.
 
 ### History: the v5 concept before it was built
 

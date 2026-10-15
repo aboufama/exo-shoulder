@@ -10,7 +10,8 @@
                                         is done (queue empty + no workers for 3 polls -> runs enforce), 3 at the time limit
 
 Key: RUNPOD_API_KEY, else ~/.runpod_key. Never touches pods (crl-* are the user's) and never deletes anything.
-enforce rules: any exo-* endpoint: workersMin -> 0, idleTimeout -> min(current, 30); superseded exo-band8/9/10/11:
+enforce rules: any exo-* endpoint: workersMin -> 0, idleTimeout -> min(current, 30) (CPU farm exo-cpu1: 10, workersMax <= 10);
+superseded exo-band8/9/10/11:
 workersMax -> 0; exo-blender-cycles (the user's render endpoint): ONLY workersMin -> 0. Everything else is left alone.
 """
 import argparse, json, os, sys, time, urllib.error, urllib.request
@@ -20,6 +21,9 @@ GQL = "https://api.runpod.io/graphql"
 RUN = "https://api.runpod.ai/v2"
 OLD = {"exo-band8", "exo-band9", "exo-band10", "exo-band11", "exo-band12", "exo-band13", "exo-band14", "exo-band15", "exo-band16", "exo-band17", "exo-band18", "exo-band20", "exo-band21", "exo-band22"}   # superseded search endpoints: keep at workersMax 0
 USER_EP = {"exo-blender-cycles"}                        # the user's render endpoint: only workersMin -> 0
+CPU_EP = {"exo-cpu1"}                                   # the CPU farm (pipeline/cloud, tools/cloud_run.py): idle <= 10 s, workersMax <= 10
+CPU_IDLE, CPU_MAX = 10, 10
+VOL_RATE = 0.07                                         # $/GB-month, network volume (the farm's CAS: exo-farm-cas, EU-RO-1)
 IDLE_MAX = 60                                           # s; above this is flagged
 IDLE_SET = 30                                           # s; enforce lowers idleTimeout to at most this
 STATE = os.path.expanduser("~/.cache/runpod_guard.json")  # only timestamps/counters, no secrets
@@ -64,7 +68,7 @@ def gql(q):
 def account():
     """One GraphQL call: balance, spend/hr, limit and all endpoints (min/max/idle/exec timeout/gpu groups)."""
     return gql("query { myself { clientBalance currentSpendPerHr spendLimit endpoints { id name workersMin workersMax "
-               "idleTimeout executionTimeoutMs scalerType scalerValue gpuIds } } }")["myself"]
+               "idleTimeout executionTimeoutMs scalerType scalerValue gpuIds instanceIds } networkVolumes { id name size dataCenterId } } }")["myself"]
 
 
 def health(eid):
@@ -116,6 +120,8 @@ def audit(quiet=False):
             flags.append(f"{n}: superseded endpoint has workersMax={e['workersMax']} -> 0")
         if e["idleTimeout"] > IDLE_MAX and e["workersMax"] > 0:
             flags.append(f"{n}: idleTimeout={e['idleTimeout']}s > {IDLE_MAX}s -> {IDLE_SET}")
+        if n in CPU_EP and (e["idleTimeout"] > CPU_IDLE or e["workersMax"] > CPU_MAX):
+            flags.append(f"{n}: CPU farm idleTimeout={e['idleTimeout']}s workersMax={e['workersMax']} -> <= {CPU_IDLE}s, <= {CPU_MAX}")
         if live:
             busy = h["q"] + h["prog"]
             if h["ok"] and busy == 0 and (h["idle"] + h["run"] + h["init"]) > 0:
@@ -148,7 +154,9 @@ def audit(quiet=False):
     print(f"{'endpoint':19s} {'min':>3s} {'max':>3s} {'idle':>4s} {'exec':>5s} {'queue':>5s} {'prog':>4s} {'run':>3s} {'idl':>3s} gpu groups")
     for n, e, h, live in rows:
         q = f"{h['q']:5d} {h['prog']:4d} {h['run']:3d} {h['idle']:3d}" if live and h["ok"] else f"{'-':>5s} {'-':>4s} {'-':>3s} {'-':>3s}"
-        print(f"{n:19s} {e['workersMin']:3d} {e['workersMax']:3d} {e['idleTimeout']:3d}s {e.get('executionTimeoutMs') or 0:5d} {q} {e['gpuIds']}")
+        print(f"{n:19s} {e['workersMin']:3d} {e['workersMax']:3d} {e['idleTimeout']:3d}s {e.get('executionTimeoutMs') or 0:5d} {q} {e['gpuIds'] or e.get('instanceIds')}")
+    for v in me.get("networkVolumes") or []:
+        print(f"network volume {v['name']} {v['size']} GB {v['dataCenterId']}: ${v['size'] * VOL_RATE:.2f}/month")
     print("FLAGS:" if flags else "no inefficiencies flagged")
     for f in flags:
         print("  - " + f)
@@ -173,8 +181,10 @@ def enforce(dry=False):
         if n in USER_EP:
             pass                                       # the user's render endpoint: workersMin only
         else:
-            if e["idleTimeout"] > IDLE_SET:
-                body["idleTimeout"] = min(e["idleTimeout"], IDLE_SET)
+            if e["idleTimeout"] > (CPU_IDLE if n in CPU_EP else IDLE_SET):
+                body["idleTimeout"] = min(e["idleTimeout"], CPU_IDLE if n in CPU_EP else IDLE_SET)
+            if n in CPU_EP and e["workersMax"] > CPU_MAX:
+                body["workersMax"] = CPU_MAX
             if n in OLD and e["workersMax"] > 0:
                 body["workersMax"] = 0
         if body:

@@ -87,6 +87,13 @@ if fe and fe.get("summary"):
     notes.append(f"- R9 (CalculiX FEA, 10 N.m + 50 N cuff wrench): min SF {sm['min_SF']} on {sm['worst_part']} ({c['vm_MPa']} MPa at {c['at_mm']}, {wp['material']}); "
                  f"pure 10 N.m worst direction SF {sm['min_SF_D1']}; MVP1 (R17 envelope) SF {sm['min_SF_MVP1']}; fatigue SF {sm['fatigue_min_SF']}; "
                  f"chain GH-point deflection {sm['chain_d_GH_mm']} mm vs 2 mm floor / {sm['min_skin_gap_mm']} mm min skin gap; parts " + ", ".join(f"{k} SF {v['cases']['D1F']['SF']}" for k, v in fe["parts"].items()))
+    rt = fe.get("red_team")
+    if rt:
+        hw = rt["joint_hardware"]
+        notes.append(f"- R9 red team: fall on the elbow (2x) SF vs fracture {rt['fall_on_elbow_2x']['min_SF_ult']}; smallest section SF {rt.get('smallest_section', {}).get('min_SF', '-')}; "
+                     f"overhead covered by the worst-direction envelope; joint hardware min SF {rt['hardware_min_SF']} ({'ok' if rt['hardware_ok'] else 'FAIL'}: "
+                     + ", ".join(f"{k} {j['tilt_Nm']} N.m tilt" + (f" -> {j['bearing_load_N']:.0f} N per bearing vs C0 {j['C0_N']:.0f} N" if j['ver'] == 'v5' else f" -> washer {j['washer_edge_pressure_MPa']} MPa") for k, j in hw.items())
+                     + f"); MVP1 (unpowered, R17 envelope) {'passes' if sm.get('mvp1_passes') else 'fails'}")
 if notes: md += ["", "Notes:", ""] + notes
 open(os.path.join(J if os.path.isdir(J) else dd, "scorecard.md"), "w").write("\n".join(md) + "\n"); json.dump(rows, open(os.path.join(J if os.path.isdir(J) else dd, "scorecard.json"), "w"), indent=1)
 print("\n".join(md))

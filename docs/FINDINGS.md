@@ -53,7 +53,7 @@ is set by closure (the arm or a bone contact), the user's handler is untouched, 
 
 | mechanism between handler and J1 | worst frame (mm) | across the humerus (R1-relevant) |
 |---|---|---|
-| rigid on the handler (today, R10's number) | **15.2** (7.5) | 11.8 |
+| rigid on the handler (today, R10's number); passive cuff slides alone change nothing here - they remove the force, not the offset | **15.2** (7.5) | 11.8 |
 | 3-axis stage set by the arm brace (elbow-referenced; Hamming 2012 cuff errors 0-4 deg x 325 mm) | 23.6 (16.2) | - |
 | 1 slider set by the brace along the humerus, cuff slides across it | 10.0 (6.2) | - |
 | 1 torque-free slider, set perfectly (earlier P0 idealisation) | 7.0 (5.4) | 6.4 |
@@ -104,6 +104,39 @@ What this shows (new knowledge, with the reason):
   (23 mm under the high law) adds height under J1 (R1 near the base); the stage passes every moment, so MVP2's assist
   still lands on the handler (Stienen 2009). Model limits: brace errors are Hamming's averages, elbow slip 3 mm assumed,
   the follower's slip = the handler's slip law, the calibration factor is a cadaver ratio.
+
+## R2 on the user's own body (`BODY_FIT=user`, 2026-10-15)
+
+Measurement unchanged (`judge/body_contact.py`); only the body option: the rig bounded by the user's own arm parts
+(`pipeline/avg/user_fit.py`). Coverage is partial: the box ran at load 40-70 on 4 cores and the CPU farm (exo-cpu1)
+was not deployed, so instead of the full step-6 sweep (228 frames, ~4 h at the CPU share available here):
+(a) every part (80 / 62) at the 9 frames where any part of either design was deepest on the rig (each part's rig-worst
+and attributable-worst frame: `<design>/judge/body_contact_user_worst9.json`); (b) every step-6 frame of Comb hair
+(31 more) for the only three parts of ours that enter the rig by > 0.5 mm at all (upper-arm cuff, its M4 screws,
+BOTTOM + neck + JN hub). The user fit only pulls skin inward, so a part outside the rig stays outside the fitted body
+(except in the rig's arm-in-chest overlap, where (a) found nothing new).
+
+| design | ours, attributable (limit 0.5 mm) | where | on the rig (step 6) |
+|---|---|---|---|
+| cad_r20_n3_s1414_4 | **0.93 mm** (17 of 31 Comb hair frames; 0.65 at the 9 rig-worst frames) | BOTTOM + neck + JN hub, Comb hair f174 [60, 90, -53, 79] | 4.71 mm (same part, Comb hair f162) |
+| cad_r18_n3_s1392_1_f300 | **0.93 mm** (same frames; 0.72 at the 9 rig-worst frames, Wave f126 held out) | same part, same frame | not reported (old judge format) |
+
+- **R2 on the user's body: 0.93 mm vs 0.5 mm, one part, both designs (the arm end is the same).** The user fit takes
+  r20's 4.71 mm to 0.93: most of the rig's R2 was the rig's oversize elbow.
+- **The 0.93 mm is most likely the fit, not the design (red team on our own measurement).** The deepest points
+  (8 vertices, 0.33-0.93 mm, "region edge (plain depth)") sit at the lateral elbow, 57 mm from the elbow centre and
+  level with it - BOTTOM's distal end under the user's elbow stack, 300 mm from the neck we added. `user_fit.py` leaves
+  BOTTOM out of the skin bound because this project modifies it, but its elbow end is the user's own geometry, worn on
+  the user's arm, so the real skin clears it. Next (a measurement change, to be reported as such): bound the skin by
+  BOTTOM's unmodified elbow end too, then re-run; if 0.93 survives, lift BOTTOM's skin face there by 0.5 mm.
+- Our upper-arm cuff (19.9 mm) and its M4 screws (17.6 mm) lie in the rig's arm-in-chest overlap (Wash opposite
+  shoulder): attributable 0 on both bodies.
+- **Measurement caveat found:** the user's forearm cuff scores 24.1 mm attributable ("other region, own skin visible",
+  Wash opposite shoulder f42) - the user fit pulls the forearm skin inside the cuff, so in the rig's forearm-through-
+  chest overlap the cuff is no longer hidden by its own skin. Same 24.1 mm on the rig; an artefact of the missing
+  soft-tissue contact, on the user's part, not a design finding.
+- Next: the full sweep (all parts, step 6 and the judge default step 2) on the farm once exo-cpu1 is up:
+  `BODY_FIT=user python3 judge/body_contact.py <id> --step 6 --out <design>/judge/body_contact_user.json`.
 
 ## Published girdle motion and the red team (2026-10-14)
 
@@ -227,7 +260,71 @@ What this shows (new knowledge, with the reason):
 ## Structure (in-house FEA, `pipeline/conformal/thin_study/REPORT.md`)
 
 25 N.m worst direction: link bodies need ~5.5 mm (SF 1.5); seat zones carry 0.3-0.6x body stress; a cuff rail needs
->= 10 mm in Ti; the 7075 neck at 14 x 6.5 has SF ~2. **Not independently verified (R9).**
+>= 10 mm in Ti; the 7075 neck at 14 x 6.5 has SF ~2. Superseded for 10 N.m by the CalculiX section below.
+
+## R9 strength, measured with CalculiX (`judge/fea.py`, 2026-10-15 afternoon)
+
+Loads: D1 = 10 N.m about GH in the exact worst direction. D1F = the same moment plus the 50 N cuff force that produces
+it at 200 mm, worst pair. MVP1 = R17's envelope (D1F / 10) plus 3 g of the part's own weight. Solver: C3D10, t/2 mesh,
+then a t/3 check under the governing wrench (validated on a cantilever and a thick ring within 2 %). Every design now
+gets R9 from `tools/judge_all.sh`. Red-team cases: the overhead pose, a fall on the elbow at 2x D1F (judged against
+fracture), the smallest section, and the joint bearings, pin and threads (hand calcs on the FE wrench). Results are in
+`<design>/judge/fea.json`.
+
+| design | part (mass) | SF D1 | SF D1F | t/2 -> t/3 | d_GH at D1F |
+|---|---|---|---|---|---|
+| r20 s1414 #4 strap (v5) | base 19.4 g | 6.07 | **4.71** | -11 % | 0.18 mm |
+| | link 1 22.4 g (3.0 x 14 strap) | 0.72 | **0.50** | -17 % | 56.7 mm |
+| | link 2 22.0 g | 0.73 | **0.50** | -13 % | 58.2 mm |
+| | BOTTOM (7075) | not measured: OOM-killed at t/2 and t/2.5 on the shared machine (run at t/1.5 open) | | | |
+| r20 #4 f300 (fair links, same BOTTOM) | base 163 g | 5.91 | 4.56 | -18 % | 0.18 mm |
+| | link 1 29.4 g | 0.40 | **0.28** | -3 % | 32.3 mm |
+| | link 2 49.1 g | 2.09 | 1.47 | -0.3 % | 3.9 mm |
+| r18 s1392 f300 (v4, rendered) | base / link 1 / link 2 / BOTTOM | 0.29 / 0.60 / 0.36 / 0.83 | 0.23 / 0.42 / 0.25 / 0.56 | -3 to +5 % | 158.6 mm chain |
+
+- **R9 fails on every champion, by ~3x on the links.** It passes for MVP1: SF 4.7 at the R17 envelope, and 30.9 at the
+  measured MVP1 peak (0.162 N.m, 0.24 N). The links are the problem; the r20 base passes at SF 4.7. The r18 base
+  fails at SF 0.23 on a 0.82 mm sliver (its smallest section).
+- **The failure point is the strap-to-J2-hub junction, not the 3 mm arm.** Both r20 links peak 16-20 mm off the J2 axis
+  and 92 mm out along it. That is where the strap climbs ~35 mm, from J1's level (r ~ 62) up to J2's raised plate
+  (r 97-104). `judge/fea_sizing.py` scales the real tet10 mesh and solves it again (link 1,
+  `cad_r20_n3_s1414_4/judge/fea_sizing_D4-02.json`):
+  - Thickening the arm to 1.5x and 1.8x (hub pads unchanged) moves the peak only as t^-0.26 (SF 0.58), but halves
+    d_GH (t^-1.5).
+  - Widening the whole part, hubs included, scales the peak as w^-1.05: SF 1.06 at 2x and 1.58 at 3x.
+  - **So SF 1.5 needs the J2 junction ~2.8x stronger.** Measured upper bound: 2.84x width, 63.5 g per link instead of
+    22.4 g, so +41 g per link and +82 g for both. The lightest real fix is local, at the J2 ramp: a gusset plus a
+    fillet (L2 CAD), or a lower J2 so the ramp is smaller. It is not yet measured. Keeping the links at 3 mm is
+    possible, but only if the junction changes.
+  - A radial thickness map is wrong on such ramps: it lengthens them instead of thickening them. The tool now offsets
+    along the thickness from the skin side.
+- **The joint bearings fail MVP2 by ~9x.** The D1F tilt at a joint is 10 N.m + 50 N x z = 13.1 / 15.0 / 14.1 N.m at
+  J1 / J2 / J3 (z = 61 / 101 / 82 mm). On the MR117-2RS pair (pressure centres ~6 mm apart) that is 2.2-2.5 kN per
+  bearing against C0 0.28 kN: s0 = 0.11. Needed: C0 x s_eff >= 15 N.m per joint; the pair has 1.7. Under the MVP1
+  envelope s0 = 1.11-1.27, which passes, just. The O7 Ti pin root (SF 1.95-2.24), the M7x0.5 ring nut (6.3-7.2) and
+  the M18x0.5 cap (> 28) all pass. The r18 v4 joints pass at SF 2.66, because the iglidur thrust washers carry the
+  tilt as an O18 annulus (25-30 MPa against 80). MVP2 therefore needs a moment-capable joint: thrust washers or needle
+  thrust bearings either side of the boss, as in v4, or a larger-diameter pair.
+- **Stiffness binds harder than strength.** At D1F the r20 strap chain's d_GH is 115 mm (base plus two links) against
+  the 2 mm floor. Even at the measured MVP1 peak it is 1.87 mm, against the 2.66 mm minimum skin gap. Thickening the
+  arm 1.8x gives 23.6 mm per link. No skin-hugging section reaches 2 mm at 10 N.m: a 20 x 8 x 1.2 closed box is ~15x
+  stiffer than the 14 x 3 strap (analytic), and ~50x is needed. Either the MVP2 deflection rule is judged at the MVP1
+  loads (user decision), or MVP2 needs a different load path.
+- Red team, other cases:
+  - **Overhead**: covered by the worst-direction envelope. In a serial spherical chain every member carries the same
+    end wrench about GH; a pose only turns it in the part frame.
+  - **The 10 N.m load is ~70 % of this user's full arm gravity** (13.8 N.m, de Leva 1996, 85 kg). Full support would
+    scale every stress by 1.38.
+  - **Fall on the elbow (2x D1F)**: SF 0.27 against fracture on the r20 links, 2.5 on the base.
+  - **Smallest section**: the 0.5-1.5 mm walls (edge features) are at SF >= 3.5, so they do not govern.
+  - **Scapula handler interface**: it must carry 13.3 N.m + 50 N at the base tab.
+- Mesh convergence: from t/2 to t/3 the judged peaks fall by 0.3-18 %. The judged value keeps the coarse (higher)
+  number, so the reported SFs are conservative by up to 18 %.
+- Infrastructure:
+  - BOTTOM (~140k nodes at t/2) is OOM-killed while a dozen agents share 16 GB. It is now meshed coarser
+    (`FEA_K0_BOTTOM`, default t/2.5), with t/3 only within 30 mm of the peak.
+  - ccx's ITERATIVE CHOLESKY was tried and did not converge (870 iterations on the validation beam).
+  - One failing part no longer loses the others (`parts_failed`, `complete = False`).
 
 ## Unpowered tracking (MVP1) needs exactly 3 DOF (judge/dynamics.py, MuJoCo, 2026-10-15)
 

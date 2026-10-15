@@ -85,6 +85,10 @@ docs/EVOLUTION.md (and its snapshot to pipeline/evolution/) as part of the judge
 
 ## Where things stand
 
+**Start with docs/HANDOFF.md** (2026-10-15 ~16:00 UTC: the full state of the morphology swarm, the interrupted tracks,
+the RunPod/cloud-farm state and the next steps; the previous session stopped at the user's weekly limit).
+
+
 See README "Status" and `pipeline/full-exo/designs/cad_r18_n3_s1392_1_f300/judge/scorecard.md` (the 3R final rendered
 2026-10-15; renders/2026-10-15_final_3R). Next levers, in order: a smaller joint stack (O17 hub: ~20 points of
 workspace, docs/FINDINGS.md), the arm-end neck clear of link 2 over the whole workspace (R16 part interference), links

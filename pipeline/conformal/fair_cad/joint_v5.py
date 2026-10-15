@@ -42,6 +42,9 @@ POCKET_R, CAP_T = 4.6, 0.5                                                  # ca
 PCB_T, PCB_R, IC_T, IC_A, AIR = 0.4, 4.5, 0.75, 3.0, 0.3
 MAG_R, MAG_H = 2.0, 2.0
 FLOAT = 0.05                                                                # cap skirt over the boss shoulder (the flange clamps at U1)
+CLAMP_GAP = 0.03                                                            # spigot top this far under U1: the cap flange bears on the upper outer ring ONLY
+                                                                            # (never bottoms on the spigot), so the thread load clamps the outer stack; the outer spacer
+                                                                            # is select-ground so the ring stack stands 0.02-0.04 proud of the spigot (docs/HARDWARE.md)
 
 def levels(F=0.0, t_lo=T_LO):
     S = F + t_lo; U0 = S + GAP; L1 = U0 + LIP_T; B1 = L1 + BRG["B"]; B2 = B1 + SPC_T; U1 = B2 + BRG["B"]
@@ -63,9 +66,9 @@ def pin_cuts(axis, lv):
 
 # ---------------------------------------------------------------- upper member: boss bore + spigot
 def spigot(axis, lv):
-    """threaded spigot (M18x0.5, modelled at its major diameter), 0.5 embedded in the boss below H1"""
+    """threaded spigot (M18x0.5, modelled at its major diameter), 0.5 embedded in the boss below H1, top CLAMP_GAP under U1"""
     H1, U1 = lv["H1"], lv["U1"]
-    return rev([(5.0, H1 - 0.5), (SPIG_R, H1 - 0.5), (SPIG_R, U1 - 0.2), (SPIG_R - 0.2, U1), (5.0, U1)], axis)
+    return rev([(5.0, H1 - 0.5), (SPIG_R, H1 - 0.5), (SPIG_R, U1 - 0.2), (SPIG_R - 0.2 + CLAMP_GAP, U1 - CLAMP_GAP), (5.0, U1 - CLAMP_GAP)], axis)
 def bore_tool(axis, lv):
     """lip O9.8 (entry chamfer from the skin side), bearing bore O11 with a relief at the lip corner, entry chamfer on top"""
     U0, L1, U1 = lv["U0"], lv["L1"], lv["U1"]; R = BRG["D"] / 2
@@ -106,7 +109,8 @@ def dome_profile(lv):
     return [P0, P0 + 0.5 * DOME_A0 * T0, P0 + DOME_A0 * T0, P1 - DOME_A1 * T1, P1 - 0.5 * DOME_A1 * T1, P1], zw
 def cap(axis, lv):
     """one turned Ti part: skirt over the spigot (internal M18x0.5 at its major diameter), flange on the upper outer ring
-    and the spigot top at U1, pocket for nut + PCB, G2 dome. No screws, no drive features."""
+    only (CLAMP_GAP clear of the spigot top: the thread load goes through the outer stack), pocket for nut + PCB, G2 dome.
+    No screws, no drive features."""
     U1, H1, P1, top = lv["U1"], lv["H1"], lv["P1"], lv["top"]; cp, zw = dome_profile(lv); zs = H1 + FLOAT
     segs = [("line", (0.0, P1), (POCKET_R - 0.2, P1)), ("line", (POCKET_R - 0.2, P1), (POCKET_R, P1 - 0.2)), ("line", (POCKET_R, P1 - 0.2), (POCKET_R, U1)),
             ("line", (POCKET_R, U1), (SPIG_R - 0.2, U1)), ("line", (SPIG_R - 0.2, U1), (SPIG_R, U1 - 0.2)), ("line", (SPIG_R, U1 - 0.2), (SPIG_R, zs + 0.15)),

@@ -422,8 +422,15 @@ import os as _os
 LINK_STYLE = _os.environ.get("LINK_STYLE", "sheet")
 STRAP_E = float(_os.environ.get("STRAP_E", 1.2))                                         # strap edge rounds (user: 1-1.5)
 PAD_E = {"upper": (0.4, 0.3), "lower": (0.8, 0.4)}                                       # (skin-side, outer) rounds at a pad: the boss-top round sits under the cap skirt
-GUSSET = float(_os.environ.get("GUSSET_MM", 7.0)); STRAP_RMIN = float(_os.environ.get("STRAP_RMIN", 25.0))
-FILLET_K = 4.0; STRAP_FAIR = float(_os.environ.get("STRAP_FAIR", 1500.0)); DIMPLE_MAX = float(_os.environ.get("DIMPLE_MAX", 8.0)); DIMPLE_BW = 1.5
+# Bend radius / fairness / control points (2026-10-15, measured on r20 s1414 #4): at R 25 mm, fairness 1500 and <= 5
+# control points the spine could not get down from hubs that sit 11-21 mm over the skin need (l2: both hubs upper,
+# 21.3 / 11.5 mm up; an S-bend at R 25 + 60 deg ramp needs ~45 mm to drop 21 mm) -> l2 rode 9.6 mm (median) over the
+# evaluator's fitted ribbon, the fair link 0.1 mm; l1 3.6 vs 1.3 (R1 2-14: strap 35.0 %, fair 46.2 %). The fair link bends
+# at ~5 mm (smootherstep over Lt 8-25 mm). R 10 = 3.3 t for the 3.0 Ti strap (hot-formed / 5-axis machined), fairness
+# 150, 3-6 control points: spine gap over its floor l1 1.28 -> 0.36, l2 8.41 -> 0.49 mm (median, offline refit).
+GUSSET = float(_os.environ.get("GUSSET_MM", 7.0)); STRAP_RMIN = float(_os.environ.get("STRAP_RMIN", 10.0))
+FILLET_K = 4.0; STRAP_FAIR = float(_os.environ.get("STRAP_FAIR", 150.0)); DIMPLE_MAX = float(_os.environ.get("DIMPLE_MAX", 8.0)); DIMPLE_BW = 1.5
+STRAP_KS = tuple(int(k) for k in _os.environ.get("STRAP_KS", "3,4,5,6").split(","))    # interior control-point counts tried by the spine fit
 TAB_RMIN = 8.0                                                                           # the base's short mount tab may bend tighter than a link
 FLOOR_TOL = 0.12                                                                         # a spine may dip this far into the need's 0.5 mm margin (joint raises start at 0.1)
 REACH_K = 1.6                                                                            # the reach cap's bend radius / STRAP_RMIN (room for the G2 lead-in)
@@ -595,7 +602,8 @@ class Strap(Member):
             rho = fl * np.sin(dph); zax = fl * np.cos(dph); d = rho - HUB_R; sel = m & (d > -0.5) & (d <= 12.0)
             out[h["joint"]] = float(np.max(zax[sel] - (self._zb(h) + self._reach(rho[sel] - self._w0(h))))) if sel.any() else -1.0
         return out
-    def fit_spine(self, bins, fl, ks=(2, 3, 4, 5)):
+    def fit_spine(self, bins, fl, ks=None):
+        ks = STRAP_KS if ks is None else ks
         from scipy.interpolate import BSpline
         from scipy.optimize import minimize
         h = self.hubs; zA = self._zb(h[0]); th = self.th; free = len(h) == 1; zB = zA if free else self._zb(h[1])
@@ -629,45 +637,53 @@ class Strap(Member):
                 g_ceil.append(np.where(m, hh["lv"]["S"] + self._reach(rho - self._w0(hh)) - (Q + T_LINK) * np.cos(dph), 5.0))
             g_end = [np.array([ph[-1] - (th + (HW + 1.0) / zA)]) * 100.0] if free else []     # the spine reaches past the tab's round end
             blocks = [("floor", g_floor), ("bend", g_kap), ("ramp", g_ramp), ("mono", g_mono)] + [(f"ceil{i}", c_) for i, c_ in enumerate(g_ceil)] + [("end", e_) for e_ in g_end]
-            g = np.concatenate([b_ for _, b_ in blocks]); self._gblocks = [(nm_, float(b_.min())) for nm_, b_ in blocks]
+            soft = getattr(self, "_soft_floor", False)                                    # soft floor: bend / ramp / mono / ceil stay hard, the floor goes to the objective
+            g = np.concatenate([b_ for n_, b_ in blocks if not (soft and n_ == "floor")]); self._gblocks = [(nm_, float(b_.min())) for nm_, b_ in blocks]
             ds = sp / (len(u) - 1); f_ = floor_at(ph); gap = np.where(f_ > -1e8, Q - f_, 0.0)
-            J = float(np.sum(gap * ds) + STRAP_FAIR * np.sum(kap ** 2 * ds))
+            J = float(np.sum(gap * ds) + STRAP_FAIR * np.sum(kap ** 2 * ds)) + (1e3 * float(np.sum(np.minimum(g_floor, 0.0) ** 2)) if soft else 0.0)
             return J, g, dict(P=P, T=T, kap=kap, ph=ph, Q=Q, gap=gap, ds=ds)
         best = None
-        for k in ((1, 2) if free else ks):
-            pA, pB = w0A + 2.0, w0B + 2.0
-            phA = math.atan2(pA + 8.0, zA); phB = (th + 0.05) if free else th - math.atan2(pB + 8.0, zB)
-            I = []
-            for j in range(k):
-                ph = phA + (phB - phA) * ((j + 1) / k if free else (j + 1) / (k + 1)); m = np.abs(bins - ph) < 0.06
-                if free: ph = phA + (th + (HW + 1.5) / zA - phA) * (j + 1) / k; m = np.abs(bins - ph) < 0.06; fq = max(fl[m & ok_f].max() if (m & ok_f).any() else -1e9, zA / math.cos(ph))
-                else: fq = fl[m & ok_f].max() if (m & ok_f).any() else (1 - (j + 1) / (k + 1)) * zA / math.cos(ph) + (j + 1) / (k + 1) * zB / math.cos(th - ph)
-                q = max(fq + 1.0, 0.0); I.append([q * math.cos(ph), q * math.sin(ph)])
-            p0 = np.r_[pA, 4.0, 4.0, pB, 4.0, 4.0, np.ravel(I)]
-            bnds = [(w0A, w0A + 30.0), (0.5, 30.0), (0.5, 30.0), (w0B, w0B + 30.0), (0.5, 30.0), (0.5, 30.0)] + [(-300.0, 300.0)] * (2 * k)
-            if free: bnds = bnds[:3] + [(w0A, w0A + 1.0), (0.5, 1.0), (0.5, 1.0)] + bnds[6:]          # unused B-end parameters
-            def pen(p):                                                                   # stage 1: penalty (always converges to something)
-                J, g, _ = parts(p, k); return J + 1e4 * float(np.sum(np.minimum(g, 0.0) ** 2))
-            try:
-                p1 = minimize(pen, p0, method="L-BFGS-B", bounds=bnds, options=dict(maxiter=300)).x
-            except Exception as ex_:
-                p1 = p0
-            try:
-                res = minimize(lambda p: parts(p, k)[0], p1, method="SLSQP", bounds=bnds, constraints=[dict(type="ineq", fun=lambda p: parts(p, k)[1])],
-                               options=dict(maxiter=400, ftol=1e-7))
-                p = res.x if max(0.0, -parts(res.x, k)[1].min()) <= max(0.05, max(0.0, -parts(p1, k)[1].min())) else p1
-            except Exception as ex_:
-                print(f"  strap fit k={k}: {ex_}", flush=True); p = p1; res = type("r", (), dict(nit=0, message=str(ex_)))
-            J, g, info = parts(p, k); viol = float(max(0.0, -g.min())); worst = min(self._gblocks, key=lambda t: t[1])
-            hard = max(0.0, -min(v_ for n_, v_ in self._gblocks if n_ in ("bend", "mono")) * (STRAP_RMIN if True else 1.0))
-            key = (hard > 0.02, viol > 0.05, J if viol <= 0.05 else viol)
-            print(f"  {self.group} spine k={k}: J {J:.1f}  viol {viol:.3f}  gap med {np.median(info['gap'][info['gap'] != 0]) if (info['gap'] != 0).any() else 0:.2f}  "
-                  f"min R {1 / max(np.abs(info['kap']).max(), 1e-6):.1f} mm  ({res.nit} it, {res.message})" + (f"  worst: {worst[0]} {worst[1]:.2f}" if viol > 0.05 else ""), flush=True)
-            if viol > 0.05 and worst[0] == "floor":
-                t_ = self._gfloor_at; i_ = int(np.argmin(np.where(t_[2] > -1e8, t_[1] - t_[2], 1e9)))
-                print(f"    floor worst at {t_[0][i_]:.1f} deg (sample {i_}: spine 0..{t_[3] - 1}, line A ..{t_[3] + t_[4] - 1}, line B after), Q {t_[1][i_]:.2f} floor {t_[2][i_]:.2f}", flush=True)
-            if best is None or key < best[0] or (not key[0] and not key[1] and not best[0][0] and not best[0][1] and J < best[0][2] * 0.97): best = (key, k, p, info)
-        key, k, p, info = best
+        # pass 1: floor hard. If no k then meets the bend radius (the floor needs a joint raise first: provisional fields in
+        # replan / before fair_build's ramp raises), pass 2 keeps the bend hard and the floor soft -> a bend-true spine
+        # whose floor shortfall is reported (bad = True; ramp_report drives the joint raise), instead of an exception
+        for soft_ in (False, True):
+          if soft_ and best is not None and not best[0][0]: break
+          self._soft_floor = soft_
+          if soft_: print(f"  {self.group} spine: no k meets R {STRAP_RMIN} with the floor hard -> soft floor", flush=True); best = None
+          for k in ((1, 2) if free else ks):
+              pA, pB = w0A + 2.0, w0B + 2.0
+              phA = math.atan2(pA + 8.0, zA); phB = (th + 0.05) if free else th - math.atan2(pB + 8.0, zB)
+              I = []
+              for j in range(k):
+                  ph = phA + (phB - phA) * ((j + 1) / k if free else (j + 1) / (k + 1)); m = np.abs(bins - ph) < 0.06
+                  if free: ph = phA + (th + (HW + 1.5) / zA - phA) * (j + 1) / k; m = np.abs(bins - ph) < 0.06; fq = max(fl[m & ok_f].max() if (m & ok_f).any() else -1e9, zA / math.cos(ph))
+                  else: fq = fl[m & ok_f].max() if (m & ok_f).any() else (1 - (j + 1) / (k + 1)) * zA / math.cos(ph) + (j + 1) / (k + 1) * zB / math.cos(th - ph)
+                  q = max(fq + 1.0, 0.0); I.append([q * math.cos(ph), q * math.sin(ph)])
+              p0 = np.r_[pA, 4.0, 4.0, pB, 4.0, 4.0, np.ravel(I)]
+              bnds = [(w0A, w0A + 30.0), (0.5, 30.0), (0.5, 30.0), (w0B, w0B + 30.0), (0.5, 30.0), (0.5, 30.0)] + [(-300.0, 300.0)] * (2 * k)
+              if free: bnds = bnds[:3] + [(w0A, w0A + 1.0), (0.5, 1.0), (0.5, 1.0)] + bnds[6:]          # unused B-end parameters
+              def pen(p):                                                                   # stage 1: penalty (always converges to something)
+                  J, g, _ = parts(p, k); return J + 1e4 * float(np.sum(np.minimum(g, 0.0) ** 2))
+              try:
+                  p1 = minimize(pen, p0, method="L-BFGS-B", bounds=bnds, options=dict(maxiter=300)).x
+              except Exception as ex_:
+                  p1 = p0
+              try:
+                  res = minimize(lambda p: parts(p, k)[0], p1, method="SLSQP", bounds=bnds, constraints=[dict(type="ineq", fun=lambda p: parts(p, k)[1])],
+                                 options=dict(maxiter=400, ftol=1e-7))
+                  p = res.x if max(0.0, -parts(res.x, k)[1].min()) <= max(0.05, max(0.0, -parts(p1, k)[1].min())) else p1
+              except Exception as ex_:
+                  print(f"  strap fit k={k}: {ex_}", flush=True); p = p1; res = type("r", (), dict(nit=0, message=str(ex_)))
+              J, g, info = parts(p, k); viol = float(max(0.0, -g.min(), -min(v_ for _, v_ in self._gblocks))); worst = min(self._gblocks, key=lambda t: t[1])
+              hard = max(0.0, -min(v_ for n_, v_ in self._gblocks if n_ in ("bend", "mono")) * (STRAP_RMIN if True else 1.0))
+              key = (hard > 0.02, viol > 0.05, J if viol <= 0.05 else viol)
+              print(f"  {self.group} spine k={k}: J {J:.1f}  viol {viol:.3f}  gap med {np.median(info['gap'][info['gap'] != 0]) if (info['gap'] != 0).any() else 0:.2f}  "
+                    f"min R {1 / max(np.abs(info['kap']).max(), 1e-6):.1f} mm  ({res.nit} it, {res.message})" + (f"  worst: {worst[0]} {worst[1]:.2f}" if viol > 0.05 else ""), flush=True)
+              if viol > 0.05 and worst[0] == "floor":
+                  t_ = self._gfloor_at; i_ = int(np.argmin(np.where(t_[2] > -1e8, t_[1] - t_[2], 1e9)))
+                  print(f"    floor worst at {t_[0][i_]:.1f} deg (sample {i_}: spine 0..{t_[3] - 1}, line A ..{t_[3] + t_[4] - 1}, line B after), Q {t_[1][i_]:.2f} floor {t_[2][i_]:.2f}", flush=True)
+              if best is None or key < best[0] or (not key[0] and not key[1] and not best[0][0] and not best[0][1] and J < best[0][2] * 0.97): best = (key, k, p, info)
+        self._soft_floor = False; key, k, p, info = best
         if key[0]: raise ValueError(f"{self.name}: no spine meets the bend radius {STRAP_RMIN} mm (STRAP_RMIN / ramp / floor incompatible)")
         return k, p, ctrl(p, k), info, key[1]
     def fit_tab(self, bins, fl, Lb=6.0):

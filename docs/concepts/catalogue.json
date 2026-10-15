@@ -17,7 +17,9 @@
   ],
   "t_ideated": "2026-10-15T14:54:13Z",
   "source": "lead seed",
-  "screening": "S1-S3"
+  "screening": "S1-S3",
+  "status": "modelling-interrupted",
+  "model_file": "docs/concepts/models/seed-2r-cring.py"
  },
  {
   "id": "seed-arc-rails",
@@ -37,7 +39,9 @@
   ],
   "t_ideated": "2026-10-15T14:54:13Z",
   "source": "lead seed",
-  "screening": "S1-S3"
+  "screening": "S1-S3",
+  "status": "modelling-interrupted",
+  "model_file": "docs/concepts/models/seed-arc-rails.py"
  },
  {
   "id": "seed-spm-3rrr",
@@ -57,7 +61,9 @@
   ],
   "t_ideated": "2026-10-15T14:54:13Z",
   "source": "lead seed",
-  "screening": "S1-S3"
+  "screening": "S1-S3",
+  "status": "modelling-interrupted",
+  "model_file": "docs/concepts/models/seed-spm-3rrr.py"
  },
  {
   "id": "seed-rcm-parallelogram",
@@ -77,7 +83,9 @@
   ],
   "t_ideated": "2026-10-15T14:54:13Z",
   "source": "lead seed",
-  "screening": "S1-S3"
+  "screening": "S1-S3",
+  "status": "modelling-interrupted",
+  "model_file": "docs/concepts/models/seed-rcm-parallelogram.py"
  },
  {
   "id": "seed-offset-3r-slides",
@@ -97,7 +105,9 @@
   ],
   "t_ideated": "2026-10-15T14:54:13Z",
   "source": "lead seed",
-  "screening": "S1-S3"
+  "screening": "S1-S3",
+  "status": "modelling-interrupted",
+  "model_file": "docs/concepts/models/seed-offset-3r-slides.py"
  },
  {
   "id": "seed-pauldron-shells",
@@ -117,7 +127,9 @@
   ],
   "t_ideated": "2026-10-15T14:54:13Z",
   "source": "lead seed",
-  "screening": "S1-S3"
+  "screening": "S1-S3",
+  "status": "modelling-interrupted",
+  "model_file": "docs/concepts/models/seed-pauldron-shells.py"
  },
  {
   "id": "trombone-arc",
@@ -138,7 +150,9 @@
    ""
   ],
   "t_ideated": "2026-10-15T14:54:13Z",
-  "source": "ideation A"
+  "source": "ideation A",
+  "status": "modelling-interrupted",
+  "model_file": "docs/concepts/models/trombone-arc.py"
  },
  {
   "id": "annular-ring-3r",
@@ -159,7 +173,9 @@
    ""
   ],
   "t_ideated": "2026-10-15T14:54:13Z",
-  "source": "ideation A"
+  "source": "ideation A",
+  "status": "modelling-interrupted",
+  "model_file": "docs/concepts/models/annular-ring-3r.py"
  },
  {
   "id": "risley-turret",
@@ -180,7 +196,9 @@
    ""
   ],
   "t_ideated": "2026-10-15T14:54:13Z",
-  "source": "ideation A"
+  "source": "ideation A",
+  "status": "modelling-interrupted",
+  "model_file": "docs/concepts/models/risley-turret.py"
  },
  {
   "id": "skin-stretch-scissor",
@@ -201,7 +219,9 @@
    ""
   ],
   "t_ideated": "2026-10-15T14:54:13Z",
-  "source": "ideation A"
+  "source": "ideation A",
+  "status": "modelling-interrupted",
+  "model_file": "docs/concepts/models/skin-stretch-scissor.py"
  },
  {
   "id": "sliding-rivet-pauldron",
@@ -222,7 +242,9 @@
    ""
   ],
   "t_ideated": "2026-10-15T14:54:13Z",
-  "source": "ideation A"
+  "source": "ideation A",
+  "status": "modelling-interrupted",
+  "model_file": "docs/concepts/models/sliding-rivet-pauldron.py"
  },
  {
   "id": "deltoid-strut-tripod",
@@ -243,7 +265,9 @@
    ""
   ],
   "t_ideated": "2026-10-15T14:54:13Z",
-  "source": "ideation A"
+  "source": "ideation A",
+  "status": "modelling-interrupted",
+  "model_file": "docs/concepts/models/deltoid-strut-tripod.py"
  },
  {
   "id": "offset-arc-selfalign",
@@ -264,7 +288,9 @@
    ""
   ],
   "t_ideated": "2026-10-15T14:54:13Z",
-  "source": "ideation A"
+  "source": "ideation A",
+  "status": "modelling-interrupted",
+  "model_file": "docs/concepts/models/offset-arc-selfalign.py"
  },
  {
   "id": "rolling-fin-j2",
@@ -285,7 +311,9 @@
    ""
   ],
   "t_ideated": "2026-10-15T14:54:13Z",
-  "source": "ideation A"
+  "source": "ideation A",
+  "status": "modelling-interrupted",
+  "model_file": "docs/concepts/models/rolling-fin-j2.py"
  },
  {
   "id": "scapula-halo-track",
@@ -306,7 +334,9 @@
    ""
   ],
   "t_ideated": "2026-10-15T14:54:13Z",
-  "source": "ideation A"
+  "source": "ideation A",
+  "status": "modelling-interrupted",
+  "model_file": "docs/concepts/models/scapula-halo-track.py"
  },
  {
   "id": "deltoid-oval-track",
@@ -327,7 +357,9 @@
    ""
   ],
   "t_ideated": "2026-10-15T14:54:13Z",
-  "source": "ideation A"
+  "source": "ideation A",
+  "status": "modelling-interrupted",
+  "model_file": "docs/concepts/models/deltoid-oval-track.py"
  },
  {
   "id": "crossed-skin-tracks",
@@ -348,7 +380,9 @@
    ""
   ],
   "t_ideated": "2026-10-15T14:54:13Z",
-  "source": "ideation A"
+  "source": "ideation A",
+  "status": "modelling-interrupted",
+  "model_file": "docs/concepts/models/crossed-skin-tracks.py"
  },
  {
   "id": "rail-elbow",
@@ -369,7 +403,9 @@
    ""
   ],
   "t_ideated": "2026-10-15T14:54:13Z",
-  "source": "ideation A"
+  "source": "ideation A",
+  "status": "modelling-interrupted",
+  "model_file": "docs/concepts/models/rail-elbow.py"
  },
  {
   "id": "rolling-cone-elbow",
@@ -390,7 +426,9 @@
    ""
   ],
   "t_ideated": "2026-10-15T14:54:13Z",
-  "source": "ideation A"
+  "source": "ideation A",
+  "status": "modelling-interrupted",
+  "model_file": "docs/concepts/models/rolling-cone-elbow.py"
  },
  {
   "id": "pointing-gimbal-humeral-crail",
@@ -412,7 +450,8 @@
   ],
   "t_ideated": "2026-10-15T14:54:13Z",
   "source": "ideation A",
-  "duplicate_of": "seed-2r-cring"
+  "duplicate_of": "seed-2r-cring",
+  "status": "duplicate"
  },
  {
   "id": "open-ring-joints",
@@ -434,7 +473,8 @@
   ],
   "t_ideated": "2026-10-15T14:54:13Z",
   "source": "ideation A",
-  "duplicate_of": "annular-ring-3r"
+  "duplicate_of": "annular-ring-3r",
+  "status": "duplicate"
  },
  {
   "id": "posterior-max-margin-cardan",
@@ -455,7 +495,9 @@
    ""
   ],
   "t_ideated": "2026-10-15T14:54:13Z",
-  "source": "ideation A"
+  "source": "ideation A",
+  "status": "modelling-interrupted",
+  "model_file": "docs/concepts/models/posterior-max-margin-cardan.py"
  },
  {
   "id": "spm-coaxial-turret",
@@ -476,7 +518,9 @@
    "closed-loop"
   ],
   "t_ideated": "2026-10-15T15:12:21Z",
-  "source": "ideation C"
+  "source": "ideation C",
+  "status": "modelling-interrupted",
+  "model_file": "docs/concepts/models/spm-coaxial-turret.py"
  },
  {
   "id": "fivebar-roll",
@@ -497,7 +541,9 @@
    "closed-loop"
   ],
   "t_ideated": "2026-10-15T15:12:21Z",
-  "source": "ideation C"
+  "source": "ideation C",
+  "status": "modelling-interrupted",
+  "model_file": "docs/concepts/models/fivebar-roll.py"
  },
  {
   "id": "convergent-spm-twistleg",
@@ -518,7 +564,9 @@
    "closed-loop"
   ],
   "t_ideated": "2026-10-15T15:12:21Z",
-  "source": "ideation C"
+  "source": "ideation C",
+  "status": "modelling-interrupted",
+  "model_file": "docs/concepts/models/convergent-spm-twistleg.py"
  },
  {
   "id": "fourbar-virtual-joint",
@@ -539,7 +587,9 @@
    "closed-loop"
   ],
   "t_ideated": "2026-10-15T15:12:21Z",
-  "source": "ideation C"
+  "source": "ideation C",
+  "status": "modelling-interrupted",
+  "model_file": "docs/concepts/models/fourbar-virtual-joint.py"
  },
  {
   "id": "human-closed-crank-rods",
@@ -560,7 +610,9 @@
    "closed-loop"
   ],
   "t_ideated": "2026-10-15T15:12:21Z",
-  "source": "ideation C"
+  "source": "ideation C",
+  "status": "modelling-interrupted",
+  "model_file": "docs/concepts/models/human-closed-crank-rods.py"
  },
  {
   "id": "human-closed-telescopes",
@@ -581,7 +633,9 @@
    "closed-loop"
   ],
   "t_ideated": "2026-10-15T15:12:21Z",
-  "source": "ideation C"
+  "source": "ideation C",
+  "status": "modelling-interrupted",
+  "model_file": "docs/concepts/models/human-closed-telescopes.py"
  },
  {
   "id": "tongs-tripod",
@@ -602,7 +656,9 @@
    "closed-loop"
   ],
   "t_ideated": "2026-10-15T15:12:21Z",
-  "source": "ideation C"
+  "source": "ideation C",
+  "status": "modelling-interrupted",
+  "model_file": "docs/concepts/models/tongs-tripod.py"
  },
  {
   "id": "rolling-elbow-fivebar",
@@ -623,7 +679,9 @@
    "closed-loop"
   ],
   "t_ideated": "2026-10-15T15:12:21Z",
-  "source": "ideation C"
+  "source": "ideation C",
+  "status": "modelling-interrupted",
+  "model_file": "docs/concepts/models/rolling-elbow-fivebar.py"
  },
  {
   "id": "lazy-tongs-polar",
@@ -644,7 +702,9 @@
    "literature"
   ],
   "t_ideated": "2026-10-15T15:12:21Z",
-  "source": "ideation C"
+  "source": "ideation C",
+  "status": "modelling-interrupted",
+  "model_file": "docs/concepts/models/lazy-tongs-polar.py"
  },
  {
   "id": "dome-telescope-tripod",
@@ -665,7 +725,8 @@
    "literature"
   ],
   "t_ideated": "2026-10-15T15:12:21Z",
-  "source": "ideation C"
+  "source": "ideation C",
+  "status": "ideated"
  },
  {
   "id": "base-rail-tripod",
@@ -686,7 +747,8 @@
    "literature"
   ],
   "t_ideated": "2026-10-15T15:12:21Z",
-  "source": "ideation C"
+  "source": "ideation C",
+  "status": "ideated"
  },
  {
   "id": "coaxial-spm-scapula",
@@ -708,7 +770,8 @@
   ],
   "t_ideated": "2026-10-15T15:12:21Z",
   "source": "ideation C",
-  "duplicate_of": "spm-coaxial-turret"
+  "duplicate_of": "spm-coaxial-turret",
+  "status": "duplicate"
  },
  {
   "id": "offset-pointer-slip-sleeve",
@@ -729,7 +792,9 @@
    "literature"
   ],
   "t_ideated": "2026-10-15T15:12:21Z",
-  "source": "ideation C"
+  "source": "ideation C",
+  "status": "modelling-interrupted",
+  "model_file": "docs/concepts/models/offset-pointer-slip-sleeve.py"
  },
  {
   "id": "cuff-sleeve-3r",
@@ -750,7 +815,8 @@
    "literature"
   ],
   "t_ideated": "2026-10-15T15:12:21Z",
-  "source": "ideation C"
+  "source": "ideation C",
+  "status": "ideated"
  },
  {
   "id": "cam-coupled-4r",
@@ -771,7 +837,9 @@
    "literature"
   ],
   "t_ideated": "2026-10-15T15:12:21Z",
-  "source": "ideation C"
+  "source": "ideation C",
+  "status": "modelling-interrupted",
+  "model_file": "docs/concepts/models/cam-coupled-4r.py"
  },
  {
   "id": "floating-centre-3r",
@@ -792,7 +860,9 @@
    "literature"
   ],
   "t_ideated": "2026-10-15T15:12:21Z",
-  "source": "ideation C"
+  "source": "ideation C",
+  "status": "modelling-interrupted",
+  "model_file": "docs/concepts/models/floating-centre-3r.py"
  },
  {
   "id": "back-anchored-ring-3r",
@@ -813,7 +883,9 @@
    "weird-compliant"
   ],
   "t_ideated": "2026-10-15T15:15:45Z",
-  "source": "ideation E"
+  "source": "ideation E",
+  "status": "modelling-interrupted",
+  "model_file": "docs/concepts/models/back-anchored-ring-3r.py"
  },
  {
   "id": "lazy-tongs-j2",
@@ -834,7 +906,8 @@
    "weird-compliant"
   ],
   "t_ideated": "2026-10-15T15:15:45Z",
-  "source": "ideation E"
+  "source": "ideation E",
+  "status": "ideated"
  },
  {
   "id": "rolling-cone-knee-3r",
@@ -856,7 +929,8 @@
   ],
   "t_ideated": "2026-10-15T15:15:45Z",
   "source": "ideation E",
-  "duplicate_of": "rolling-cone-elbow"
+  "duplicate_of": "rolling-cone-elbow",
+  "status": "duplicate"
  },
  {
   "id": "lamellae-pauldron",
@@ -877,7 +951,8 @@
    "weird-compliant"
   ],
   "t_ideated": "2026-10-15T15:15:45Z",
-  "source": "ideation E"
+  "source": "ideation E",
+  "status": "ideated"
  },
  {
   "id": "rus-tripod-gh-centre",
@@ -898,7 +973,9 @@
    "weird-compliant"
   ],
   "t_ideated": "2026-10-15T15:15:45Z",
-  "source": "ideation E"
+  "source": "ideation E",
+  "status": "modelling-interrupted",
+  "model_file": "docs/concepts/models/rus-tripod-gh-centre.py"
  },
  {
   "id": "pointer-boom-twist",
@@ -920,7 +997,8 @@
   ],
   "t_ideated": "2026-10-15T15:15:45Z",
   "source": "ideation E",
-  "duplicate_of": "seed-2r-cring"
+  "duplicate_of": "seed-2r-cring",
+  "status": "duplicate"
  },
  {
   "id": "offset-skin-normal-3r",
@@ -941,7 +1019,8 @@
    "weird-compliant"
   ],
   "t_ideated": "2026-10-15T15:15:45Z",
-  "source": "ideation E"
+  "source": "ideation E",
+  "status": "ideated"
  },
  {
   "id": "five-bar-pointer-turret",
@@ -963,7 +1042,8 @@
   ],
   "t_ideated": "2026-10-15T15:15:45Z",
   "source": "ideation E",
-  "duplicate_of": "fivebar-roll"
+  "duplicate_of": "fivebar-roll",
+  "status": "duplicate"
  },
  {
   "id": "coaxial-crown-spm",
@@ -985,7 +1065,8 @@
   ],
   "t_ideated": "2026-10-15T15:15:45Z",
   "source": "ideation E",
-  "duplicate_of": "spm-coaxial-turret"
+  "duplicate_of": "spm-coaxial-turret",
+  "status": "duplicate"
  },
  {
   "id": "breathing-hubs",
@@ -1006,7 +1087,9 @@
    "overhead-first"
   ],
   "t_ideated": "2026-10-15T15:15:45Z",
-  "source": "ideation E"
+  "source": "ideation E",
+  "status": "modelling-interrupted",
+  "model_file": "docs/concepts/models/breathing-hubs.py"
  },
  {
   "id": "core-cone-chain",
@@ -1027,7 +1110,9 @@
    "overhead-first"
   ],
   "t_ideated": "2026-10-15T15:15:45Z",
-  "source": "ideation E"
+  "source": "ideation E",
+  "status": "modelling-interrupted",
+  "model_file": "docs/concepts/models/core-cone-chain.py"
  },
  {
   "id": "tape-spool-humeral",
@@ -1048,7 +1133,8 @@
    "overhead-first"
   ],
   "t_ideated": "2026-10-15T15:15:45Z",
-  "source": "ideation E"
+  "source": "ideation E",
+  "status": "ideated"
  },
  {
   "id": "geodesic-strap-gimbal",
@@ -1069,7 +1155,8 @@
    "overhead-first"
   ],
   "t_ideated": "2026-10-15T15:15:45Z",
-  "source": "ideation E"
+  "source": "ideation E",
+  "status": "ideated"
  },
  {
   "id": "magrace-arc-chain",
@@ -1090,7 +1177,9 @@
    "overhead-first"
   ],
   "t_ideated": "2026-10-15T15:15:45Z",
-  "source": "ideation E"
+  "source": "ideation E",
+  "status": "modelling-interrupted",
+  "model_file": "docs/concepts/models/magrace-arc-chain.py"
  },
  {
   "id": "cam-unfold-4th",
@@ -1111,7 +1200,9 @@
    "overhead-first"
   ],
   "t_ideated": "2026-10-15T15:15:45Z",
-  "source": "ideation E"
+  "source": "ideation E",
+  "status": "modelling-interrupted",
+  "model_file": "docs/concepts/models/cam-unfold-4th.py"
  },
  {
   "id": "offset-flex-aligner",
@@ -1132,7 +1223,8 @@
    "overhead-first"
   ],
   "t_ideated": "2026-10-15T15:15:45Z",
-  "source": "ideation E"
+  "source": "ideation E",
+  "status": "ideated"
  },
  {
   "id": "coupler-path-j1",
@@ -1153,6 +1245,536 @@
    "overhead-first"
   ],
   "t_ideated": "2026-10-15T15:15:45Z",
-  "source": "ideation E"
+  "source": "ideation E",
+  "status": "ideated"
+ },
+ {
+  "id": "crossed-muscle-rails",
+  "name": "Crossed muscle-line rails (scapula-fixed acromial arch crossed by an arm-fixed humeral-head collar)",
+  "topology": "Spherical 3R with no strap links. Scapula base -> R1 = carriage 1 on a scapula-fixed circular arc rail (rail 1, the 'acromial arch': a small circle of half-angle a12 about axis a1 through GH, lying over the acromion / supraspinatus / spine) [ACTIVE] -> R2 = bearing between carriage 1 and carriage 2 on the radial axis a2 through the rails' crossing point (v5 O20 hub or a thin-section ring) [ACTIVE] -> R3 = carriage 2 on an arm-fixed circular arc rail (rail 2, the 'collar': a small circle of half-angle a23 about an arm-fixed axis a3, around the top of the humeral head just under the acromion edge; part of the arm piece that runs on to BOTTOM) [ACTIVE] -> arm. All three axes through GH. Passive in the chain: none (the user's torque-free cuff slides stay outside the count).",
+  "active_dof": 3,
+  "passive_dof": 0,
+  "dof_reasoning": "Exactly the three revolutes of a spherical 3R: J1 = carriage-1 position on rail 1 (rotation about a1), J2 = hub angle between the two carriages (about a2), J3 = carriage-2 position on rail 2 (rotation about a3). For a given arm orientation a2 is the intersection of two cones (a12 from a1 in the scapula frame, a23 from a3 in the arm frame) on a fixed branch, so all three coordinates are functions of the arm pose: the crossing point is unique, both carriages are captive on their rails, nothing can sag. All three must be sensed (MVP2 powered); none is spare. The only degeneracy is the 3R singularity, which here is visible as the two rails becoming tangent (crossing angle -> 0); the model keeps it >= 25 deg.",
+  "description": "Two curved rails and one small double carriage, no links. Rail 1 (~10 x 5 mm Ti with a rolling-element track) is part of the exo-scapula: an arch over the top of the shoulder along the acromion / scapular spine, ~52-60 mm from the GH centre. That skin is the most stable of the shoulder in the scapula frame: 37-58 mm from GH both at rest and at 150 deg elevation (my lookup on the rig). Rail 2 is part of the arm piece: a collar arc around the top of the humeral head, ~20 deg above the arm's equator. This is the arm's low-motion band (delta 100-125; the proximity agent's best arm-fixed spot w(112,-15): point ceiling 99 %, disc ceiling 94 %). The collar carries on as the neck to BOTTOM. The rails cross at one point, where the double carriage holds the J2 bearing. Rest: the arch sits on the acromion, the collar's lateral arc lies under its lateral end over the deltoid cap, and they cross near the acromion's lateral edge. Overhead: the arm turns the collar up under the arch and the crossing slides along both rails. The arch stays clear because the scapula's upward rotation keeps the arm axis below the scapula's horizon: <= +5 deg in all 110 bench clip frames, and arch directions bvec(0..45, 60) stay >= 59 deg from the arm axis over the whole bench workspace (my check). Across-body: the crossing runs to the anterior end of the arch and the collar's posterior arc rises over the back of the head. Behind-back: the crossing runs to the posterior end (over the spine). The only metal that moves against both bodies is the ~30 mm double carriage. The upper rail sits one carriage stack (~12-16 mm) above the lower one.",
+  "why_better": "It attacks the two largest R1 losses of the baseline (docs/research/proximity_levers.md), both of which are metal moving against both the scapula and the arm. (1) The J2 hub zone: 18.5 % of the covered skin at 0.7 % in band, and shape cannot fix it because J2 sweeps skin 58-93 mm from GH. (2) Link 2's ribbon: 16 points. Here each rail is fixed to the body whose skin it rides: the arch to the scapula (top / posterosuperior skin, 1.8-3.5 mm radial motion, ceiling 100 %) and the collar to the arm's best band. J2's swept path becomes body-fixed metal on stable skin instead of a hub flying over moving skin. No part has to clear the whole workspace against both bodies: the arch only has to clear the arm, and the collar only the trunk. Kinematics-only screen (my quick random search over the bench's 470 poses, no skin): some spherical 3R parameter sets keep J2 above 35 deg elevation in the scapula frame in 66-92 % of clip frames AND inside the arm cap band (delta 75-130) in 84-100 % of them. They close in 97-100 % of clip frames and 83-99 % of workspace poses at a crossing angle >= 25 deg (seeds in model_spec).",
+  "main_risk": "(1) Stack at the crossing: the upper rail's skin face sits Delta ~12-16 mm above the lower one's (rail 5 + carriage plate 3 + bearing 5-7 + plate 1). The crossing visits the whole travel of both rails, so the upper rail is ~15-20 mm off the skin wherever it crosses: probably outside 10 mm, marginal at 14 mm. (2) Rail length: the same screen needs rail-1 travel of ~120-200 deg (115-160 mm) and rail-2 travel of ~65-150 deg (80-180 mm) on the fit clips, and more for the workspace. That costs mass and stiffness: open curved cantilevers twist ~2-5 deg per 75 mm under 25 N.m (docs/research/ring_and_shell_hardware.md). The rail ends become joint limits that cap reach. (3) A constant-radius rail over skin whose radius varies 37-58 mm along the arch loses band where the spread exceeds 12 mm (skin-cam-rails fixes this). (4) Short carriages can jam or bind under tilt (drawer effect) and near small crossing angles (R17 friction).",
+  "unpowered_and_mvp2": "Unpowered: both carriages are captive on their rails and J2 is a plain rolling bearing, so the arm drives all three coordinates. Nothing sags because no coordinate is free. Rolling carriages (V-wheels or a caged-ball wire-race, ~10 mm stack per the hardware note) keep friction well under 1 N.m except near rail tangency, which is excluded. MVP2: J1 and J3 are circular rails about axes through GH, so a cable laid in a groove along each rail acts as a drum of radius rho*sin(a) ~50-65 mm (~150-200 N of cable tension for 10 N.m), pulling the carriage from both ends. J2 is a v5 hub with its own drum. Sensing: a magnetic arc scale along each rail read by its carriage (AS5311-type), and the v5 magnet / IC on J2.",
+  "model_spec": "Conventions (band_impl / bench): bvec(az, el) is a scapula-frame direction (az 0 posterior, 90 lateral, 180 anterior, -90 medial; el up). w_dir(delta, az) is a canonical-humerus direction (delta from the distal humerus axis, az 0 lateral, +90 anterior). For pose i: scapula dir d -> S_R(i) @ d, with S_R = B.frames(i)['S'][0]. Arm dir d -> H_R(i) @ RH @ d, with H_R = B.frames(i)['H'][0] and RH = np.array(BP._rig().L['rest_humerus']) (H_R @ RH = rot(plane) rot(elev) rot(axial)). GH is the origin; a point = radius * unit direction. circ_int = a numpy port of band_impl.circ_int. PARAMS: a1 = bvec(az1, el1), a12, a3 = w_dir(d3, az3), a23, sigma (+-1), order ('arch_low' | 'collar_low'), Delta = 14 mm (upper skin face minus lower skin face), rail width 10 / thickness 5, carriage arc radius 13 mm, gamma_min 25 deg, Lmax 200 deg, rho_max 75 mm. SEEDS (az1, el1, a12, d3, az3, a23, sigma) from my kinematics-only screen: (64.9, 56.1, 57.4, 147.1, -119.0, 87.9, -1); (96.3, 31.3, 80.3, 148.0, -108.2, 87.9, -1); (119.5, 20.3, 86.6, 149.7, -45.0, 86.5, -1); (52.2, 37.4, 75.8, 62.6, 32.4, 70.3, +1). PASS 1 (all poses, no skin): A1 = S_R a1; A3 = H_R RH a3; (a2, ok) = circ_int(A1, a12, A3, a23, sigma). Crossing angle gamma = acos|t1.t3|, with t1 = unit(A1 x a2) and t3 = unit(A3 x a2). phi = angle of S_R^T a2 about a1 in a fixed basis (e1 = unit(a1 x h), e2 = a1 x e1, h = z unless |a1.z| > 0.9, then x). psi = the same for (H_R RH)^T a2 about a3. Centre each angle on its circular mean over the closing fit-clip frames and wrap to (-180, 180]. Extents: [min, max] over fit-clip frames with ok and gamma >= gamma_min, widened by the carriage half-length (13 / (rho sin a), rad -> deg) + 2 deg, then grown toward the workspace angles while length <= Lmax. HEIGHTS: rho_low = smallest radius (0.5 mm steps from 40) at which every skin-face sample of the lower rail is >= 2 mm from the skin (B.dist) in every fit-clip frame. rho_up = max(rho_low + Delta, the same rule applied to the upper rail). If part of a rail needs more than rho_max, trim its extent to the contiguous part under rho_max that contains the median angle. PASS 2 (per pose, then B.record): return None if not ok, gamma < gamma_min, phi or psi outside its extent shrunk by the carriage half-length, or any contact-only point has B.dist < 0. Skin-face samples on a 2 mm grid: rail 1 = scapula-frame dirs unit(cos(a12+b) a1 + sin(a12+b)(cos p e1 + sin p e2)) for p over its extent and b in +-5/rho, at its radius, mapped by S_R. Rail 2 = the same about a3 in the arm frame, mapped by H_R RH. Carriage = dirs within 13 mm of a2, at rho_low. Arm end = a 14 mm strip from the rail-2 end nearest BOTTOM, along the great circle to BOTTOM's cut end, radius ramped linearly from rho_2 to 96. BOTTOM's cut end is at canonical ~(0, -70, 67.5): band_impl's bar plane z0 67.5 along W (0, -0.071, 0.998), ~96 mm from GH; use the evaluator's neck p_bar if known. Contact-only points: rail tops (+5) and the J2 cap (dirs within 10 mm of a2, at rho_up + 6). VARIANT 'arch-and-strap': replace rail 2 with a 14 mm strap from the carriage (at rho_low + 3.15) to a v5 J3 hub at the arm spot w_dir(112, -15), whose lower member is an arm pad at its lowest legal radius. This variant has no crossing stack. REPORT: rail lengths (mm), gamma percentiles, and the share of poses lost to each test.",
+  "sweep_params": "a1 (az 30-130, el 15-70); a12 (50-90); a3 in two families: collar (delta 130-155, az -130..-30) or lateral (delta 55-75, az 0-60); a23 (60-90); sigma; order (arch_low / collar_low); Delta (11-16 mm); Lmax (150-220 deg); gamma_min (20-30); the variant arch-and-strap on/off.",
+  "modelling_cost": "low",
+  "prior_art": "Circular-arc remote-centre guides (surgical RCM arcs); semicircular humeral-rotation bearings in ARMin-type exos; MEDARM's curved girdle track; intersecting-circle (armillary) gimbals. I know of no exo that realises a spherical 3R as a scapula-fixed arch crossed by an arm-fixed collar with a double carriage at the crossing.",
+  "lenses": [
+   "biomimetic-girdle|hardware-unlocks"
+  ],
+  "t_ideated": "2026-10-15T17:21:09Z",
+  "source": "ideation B",
+  "status": "ideated"
+ },
+ {
+  "id": "skin-cam-rails",
+  "name": "Skin-following cam rails with a telescoping crossing (profiled-radius version of the crossed rails)",
+  "topology": "Same chain as crossed-muscle-rails, but the rails are not spheres. Scapula base -> R1 = carriage 1 on a scapula-fixed rail whose directions lie on the cone (a1, a12) and whose radius r1(phi) follows the scapula skin [ACTIVE] -> C2 = cylindrical joint on the radial axis a2 at the crossing: rotation [ACTIVE] + radial slide along a2 [PASSIVE, set by the two rail profiles] (rolling ball spline / linear ball bushing) -> R3 = carriage 2 on an arm-fixed rail on the cone (a3, a23) whose radius r2(psi) follows the arm skin; the rail continues down the lateral arm as the neck to BOTTOM [ACTIVE] -> arm.",
+  "active_dof": 3,
+  "passive_dof": 1,
+  "dof_reasoning": "A translation along an axis that passes through the GH centre does not change the orientation a spherical chain transmits. So each carriage may move radially as it travels without changing the 3R kinematics. Carriage 1 sits at r1(phi), set by rail 1's profile at its position; carriage 2 sits at r2(psi). Both phi and psi are functions of the arm pose (the 3R's two-cone closure), so the J2 slide length r2(psi) - r1(phi) is set by closure. That makes it a passive element driven by the chain, outside the active count (user rule 2026-10-15). It cannot sag because both carriages are captive on rails whose profiles fix it. Active: J1 (rail-1 position), J2 rotation, J3 (rail-2 position), which are the 3R's three coordinates.",
+  "description": "The same picture as the crossed rails, but each rail is a 3-D curve that hugs its own skin. The exo-acromial arch dips to 2-4 mm over the acromion, where the skin is low (37-45 mm from GH), and rises over the supraspinatus / spine (55-60 mm). The arm collar follows the deltoid cap (45-64 mm across poses in the arm frame), then carries on down the lateral arm as the neck to BOTTOM, following the arm skin. At the crossing, a short ball-spline post on the J2 axis lets the two carriages sit at different heights: one carriage stack plus 0-15 mm of slide. Rest, overhead, across-body and behind-back: as in the crossed rails (the crossing travels along both rails). The difference is that the rails keep a constant clearance from their own skin instead of a constant radius, and the slide post grows where the arm rail's skin is higher than the arch's.",
+  "why_better": "It removes the crossed rails' first weakness: a constant-radius rail over skin whose radius varies (37-58 mm along an arch over the top; 45-64 mm around the cap) loses band wherever the spread exceeds the 12 mm window. Here each rail's in-band ceiling is set only by the skin motion in its own frame (scapula top 1.8-3.5 mm; arm cap band ~12 mm), not by its shape. The proximity analysis classed 44 of the baseline's lost points as 'motion' that no reshaping on its path can recover. Profiled body-fixed rails turn most of that into slack that the profile can remove. The arm rail also doubles as the neck: the baseline's arm end + neck cover 34 % of the covered skin at 61 / 35 % in band, and here one part replaces three.",
+  "main_risk": "(1) The slide post: where r2 - r1 at the crossing exceeds the carriage stack by more than 15-20 mm, J2 becomes a tall post. The upper rail's profile must then be raised to keep the slide short, which costs band. (2) The ball spline carries the J2 tilt moment (10 N.m in MVP2), which drives its section size and friction. (3) Non-circular rails need custom carriages that follow a varying radius and curvature (4 wheels on a 3-D curve). They are harder to make and to keep free of play, and need 5-axis machining. (4) All of the crossed rails' other risks remain (rail length, stack, tangency).",
+  "unpowered_and_mvp2": "Unpowered: both carriages are captive and the slide is set by the profiles, so there is no free coordinate. Friction comes from two rail carriages and one ball spline (rolling, mu ~0.005). The slide's axial load is the radial component of the cuff force, which is small in MVP1 (< 5 N). MVP2: J1 and J3 are driven by cables. The cable cannot sit in a plain groove on a 3-D profiled rail, so use a closed channel, or a constant-radius drum sector fixed beside the rail, about the rail's own axis. J2 is driven by a v5 hub drum on the spline's outer sleeve. Sensing: arc scales on both rails and a magnet / IC on J2; the slide needs no sensing.",
+  "model_spec": "Conventions as in crossed-muscle-rails: scapula dir -> S_R(i) d; arm dir (canonical, w_dir) -> H_R(i) @ RH @ d, with RH = BP._rig().L['rest_humerus']; GH origin; numpy band_impl.circ_int. KINEMATICS, extents, branch and None rules: exactly as crossed-muscle-rails pass 1 / pass 2 (same params a1, a12, a3, a23, sigma, gamma_min, Lmax and the same seeds). PROFILES: sample each rail every 2 deg along its extent x 3 across (b = 0, +-5 mm), giving body-frame directions d_k. Shaping poses = the bench's fit-clip poses + workspace poses (held-out clips are never in it). For each pose i, take the points r * R_i d_k for r = 30, 32, ..., 150 (R_i = S_R for rail 1, H_R RH for rail 2) and make one batched B.dist call per pose. r_exit(i, k) = the largest r with dist < 0 (0 if none). r_need(k) = max_i r_exit + 2.5. Rail directions with r_need > 85 are unusable: trim the extent to avoid them, and return None for poses that need them. r_low(s) = moving max of r_need over +-6 mm along the rail, then a smoothing spline with curvature radius >= 15 mm, + 0.5. Upper rail: r_up(psi) = max(its own smoothed r_need, max over closing poses with psi_i = psi of r_low(phi_i) + Delta_min), with Delta_min = 12, smoothed the same way. Slide stroke s_i = r_up(psi_i) - r_low(phi_i) - Delta_min; return None if s_i > stroke_max (15 mm). METAL per pose (skin faces, 2 mm grid): rail 1 at its profile along its directions, mapped by S_R; rail 2 at its profile, mapped by H_R RH; carriage = a disc of 13 mm arc radius around a2 at the lower rail's profile radius. Arm-rail neck: continue rail 2 beyond its travel end nearest BOTTOM, along the great circle, to BOTTOM's cut end (canonical ~(0, -70, 67.5)), profiled by the same r_need rule in the arm frame. Contact-only points: rail tops (+5), and the slide post as a 12 mm-radius cylinder along a2 from r_low to r_up + 6. Record the skin faces with B.record. REPORT: profile ranges, slide strokes, rail lengths.",
+  "sweep_params": "The same kinematic params as crossed-muscle-rails; Delta_min (10-14 mm); stroke_max (10-25 mm); clearance (2-4 mm); profile smoothing radius (10-25 mm); arm rail as neck on/off; which rail is lower.",
+  "modelling_cost": "medium",
+  "prior_art": "Self-aligning exos with passive prismatic joints set by closure (Schiele & van der Helm 2006, kinematic compatibility; Stienen et al. 2009, Dampace); cam-follower guides; ball-spline cylindrical joints. I have not seen body-profiled crossing rails.",
+  "unused": null,
+  "lenses": [
+   "biomimetic-girdle|hardware-unlocks"
+  ],
+  "t_ideated": "2026-10-15T17:21:09Z",
+  "source": "ideation B",
+  "status": "ideated"
+ },
+ {
+  "id": "pauldron-lame-telescope",
+  "name": "Pauldron: lobster-tail lames as a remote-centre J2 that shares the elevation like the skin (scapulohumeral rhythm inside the mechanism)",
+  "topology": "Serial spherical 3R with a12 = a23 = 90 deg and no J2 hub. Scapula base -> J1 = v5 O20 hub on the exo-scapula top (axis a1 through GH) [ACTIVE] -> lame 0 -> N-2 intermediate lames [PASSIVE: each held at a fixed share k/(N-1) of the J2 extension by an equal-share coupling, either pin-in-slot or a small lazy-tongs strip along the lame centreline] -> lame N-1. J2 = the stack's total extension, a remote-centre rotation about a2 (the normal of the great circle through J1 and J3) [ACTIVE] -> J3 = v5 O20 hub at the arm's low-motion spot (axis a3) [ACTIVE] -> arm piece -> BOTTOM.",
+  "active_dof": 3,
+  "passive_dof": 2,
+  "dof_reasoning": "J1, J2 and J3 are the three revolutes of a spherical 3R with 90/90 arcs. a2 = unit(A1 x A3), and the J2 coordinate is the arc angle theta13 = angle(A1, A3), so all three are functions of the arm pose. The intermediate lames (N-2; 2 at N = 4) are extra bodies whose angles are fixed fractions of theta13 through the coupling, a linkage with no gears or cables. So they are set by closure, cannot sag and need no sensing: passive elements outside the active count. Active: the J1 hub, the J2 stack extension and the J3 hub.",
+  "description": "A row of 3-5 overlapping curved Ti lames, like a plate-armour pauldron or a lobster tail. It runs from a hub on top of the shoulder (exo-acromion) down over the deltoid cap to a hub on the arm just under the acromion edge. Each lame is a spherical band 24-40 mm wide and ~3 mm thick that slides on the one below along circular tracks about a2, with rolling elements at the band edges. The coupling keeps the gaps equal, so each lame turns a fixed share of the elevation: lame k moves like the skin k/(N-1) of the way from the acromion to the arm. The lame radii rise by one lame thickness toward the arm, matching the skin, which rises from the acromion (41-50 mm) to the cap (55-60 mm). Rest: the stack is extended down over the lateral cap. Overhead: the arm hub rises toward the top hub and the lames telescope together under the acromion. Across-body: the stack swings forward about J1 and extends over the front of the cap. Behind-back: it swings back over the posterior cap and extends.",
+  "why_better": "It deletes the J2 hub, the baseline's worst zone (18.5 % of the covered skin at 0.7 % in band), together with link 2's ribbon. The J2 rotation happens in nested circular tracks about the GH centre instead of in a hub standing on moving skin. J1 and J3 sit on the two best-ground spots measured: the scapula top (1.8-3.5 mm skin motion, ceiling 100 %) and the arm spot w(112,-15) (disc ceiling 94 %; the baseline's JN hub rides at 39.5 %). The lames interpolate the skin motion between the scapula and arm frames, instead of one rigid link riding in one frame over skin that moves with the other.",
+  "main_risk": "Span ratio: J1-J3 spans 46-128 deg on the bench fit clips (2.8x) and 27-150 deg over the workspace for top / tubercle placements (my check). That needs N >= 4 lames with ~30 % overlap (max/min = 1 + (N-1)(1 - overlap) = 3.1 at N = 4), so the workspace extremes stay out of reach. The stack thickness (N x ~3 mm + rolling elements) lifts the outer lames. There are many track surfaces (friction, and pinch points between lames, which are the cover's job), and the coupling is fiddly. Thin lames must carry MVP2's 10 N.m through ~25 mm-wide bands. The chain is singular when theta13 -> 0 or 180 deg (kept within 25-155).",
+  "unpowered_and_mvp2": "Unpowered: the hubs and the stack are driven by the arm, and the intermediate lames are held by the coupling, so there is no free coordinate. Friction comes from two hubs plus (N-1) lame tracks on caged balls or needle rollers, and the coupling's tiny pivots. MVP2: J1 and J3 use cable drums on their v5 hubs. J2 uses a cable pulling the last lame along the stack's circular track about a2; the track is a circle about GH, so it acts as a natural drum of radius ~55 mm. Sensing: v5 magnet / IC on J1 and J3; J2 by an arc scale on the last lame's track (or the coupling's first pivot angle).",
+  "model_spec": "Conventions: scapula dir -> S_R(i) d; arm dir (canonical, w_dir) -> H_R(i) @ RH @ d, with RH = BP._rig().L['rest_humerus']; GH origin. PARAMS: a1 = bvec(az1, el1) (seed (15, 80)); a3 = w_dir(d3, az3) (seed (112, -15)); N (4); lame span Lam (45 deg); overlap ov (0.3); half-width hw (14 mm); lame thickness tl (3 mm); lame order 'rising' (lame k skin face = rhoL + k*tl) or 'falling'. HEIGHTS: rho0 (J1 base pad face) = lowest legal radius of the pad over the fit-clip frames (smallest radius, 0.5 mm steps, with every sample >= 2 mm from the skin by B.dist). rhoL = max(rho0 + 3.15, the lowest legal radius of lame 0). Raise all lames together if any lame violates its own lowest legal radius. VALIDITY: [th_min, th_max] = the fit-clip range of theta13 +-3 deg. The design is valid iff th_max <= Lam*(1 + (N-1)(1 - ov)) and th_min >= Lam + 2*asin(12/rho) in deg. PER POSE: A1 = S_R a1; A3 = H_R RH a3; theta = angle(A1, A3). Return None if theta is outside [th_min, th_max] or [25, 155]. a2 = unit(A1 x A3); e = unit(a2 x A1), so that A3 = cos(theta) A1 + sin(theta) e. Lame k starts at lam_k = k (theta - Lam)/(N-1) and covers lam in [lam_k, lam_k + Lam]. Its directions are cos(mu)(cos(lam) A1 + sin(lam) e) + sin(mu) a2 for mu in +-hw/rho_k. METAL (skin faces, 2 mm grid): the J1 base pad (disc of 13 mm arc radius at A1, rho0) plus a scapula-fixed tab toward the handler (14 mm wide, 25 mm long, toward bvec(-20, 45), at rho0); the lames at rho_k; the J3 arm pad (disc r 13 at A3, face rho_{N-1} - 3.15); the arm piece (a 14 mm strip from A3 along the great circle to BOTTOM's cut end, canonical ~(0, -70, 67.5), radius ramped to 96). COLLISIONS: the J1 hub cap (rho0 .. rho0 + 12.25, r 10) vs lame k >= 1 when lam_k*rho_k < 12 mm, i.e. lame k has slid over the J1 hub -> None. The same at J3 for lames k <= N-2. Contact-only points: lame tops (+tl) and the hub caps. Record the skin faces. REPORT: theta percentiles, and the lame overlap at the extremes.",
+  "sweep_params": "a1 (az -20..60, el 60-90); a3 (delta 100-120, az -40..0); N (3-5); Lam (35-60 deg); overlap (0.2-0.4); hw (10-20 mm); tl (2-3.5 mm); rising vs falling lame order.",
+  "modelling_cost": "low",
+  "prior_art": "Plate-armour pauldrons and lobster-tail lames on sliding rivets; pangolin / armadillo-scale wearable armour concepts; remote-centre circular guides. I know of none used as the J2 of a 3R shoulder exo with an equal-share coupling.",
+  "lenses": [
+   "biomimetic-girdle|hardware-unlocks"
+  ],
+  "t_ideated": "2026-10-15T17:21:09Z",
+  "source": "ideation B",
+  "status": "ideated"
+ },
+ {
+  "id": "rotator-cuff-pair",
+  "name": "Rotator-cuff pair: supraspinatus and infraspinatus arcs converging on an exo-tubercle hub",
+  "topology": "Parallel: two legs plus one hub. Leg 1 (supraspinatus line): radial pivot on a scapula pad A1 over the supraspinous fossa / top [PASSIVE] -> telescoping great-circle arc, length theta1 [ACTIVE] -> radial v5 hub at the 'exo-greater-tubercle' B1, the arm's low-motion spot [ACTIVE: the twist angle between leg 1's arc and the arm pad]. Leg 2 (infraspinatus line): radial pivot on a pad A2 over the infraspinous fossa / spine [PASSIVE] -> telescoping arc, length theta2 [ACTIVE] -> radial pivot on a second arm pad B2 on the posterior cap, or coaxial on B1 [PASSIVE] -> arm piece -> BOTTOM.",
+  "active_dof": 3,
+  "passive_dof": 3,
+  "dof_reasoning": "Leg 1 alone is a spherical 3R with 90/90 arcs (pivot A1, telescope, hub B1); leg 2 is an R-P-R leg. Mobility = 6 + 3 (human GH) - 2 loops x 3 = 3. Active: theta1 and theta2 (the two arc lengths) and the hub angle at B1 (leg 1's arc direction relative to the arm pad). Passive: the A1, A2 and B2 pivots, each set by its leg's endpoints (closure). There is no free coordinate unless a leg reaches 0 / 180 deg (rejected) or the three active coordinates stop determining the pose, i.e. the sensing Jacobian is singular (reported).",
+  "description": "Two curved struts laid out like the supraspinatus and the infraspinatus. One runs from the top of the scapula forward-laterally over the acromion edge. The other runs from the back of the scapula around the posterior cap. Both converge on the arm just under the acromion edge, where the real cuff inserts on the greater tubercle. That is the arm's lowest-motion spot, w(112,-15), 60 mm from GH, with a 94 % disc ceiling. A v5 hub there carries leg 1; the arm piece holds the hub and runs to BOTTOM. Rest: both struts hug the top and back of the cap. Overhead: the tubercle rises under the acromion, leg 1 shortens, and leg 2 wraps further around the back. Across-body: leg 2 lengthens over the back. Behind-back: leg 2 shortens and leg 1 swings back. No metal sits over the front of the shoulder.",
+  "why_better": "Same skin logic as the trilateration (below) with less metal. The two struts lie over the posterosuperior cap, the scapula's best ground, and the one hub sits on the arm's best spot. There is no metal over the anterior shoulder, the scapula frame's worst ground (az 150-180, ceiling 9-27 %), and no third strut to cross. The arm hub sits exactly where the proximity analysis found the only arm-fixed spot a flat O20/O23 disc can ride (94 % disc ceiling; the baseline's JN hub rides at 39.5 %). Each strut lies on the cap's geodesic between its origin and insertion, the line a wrapping cuff muscle takes, over skin that is round (the deltoid cap's radius spreads only 4.7 mm over 120 deg).",
+  "main_risk": "Span ratio: ~2.6x on the clips and ~5x over the workspace for these point pairs (my check: 46-128 / 27-150 deg). That forces lazy-tongs or 3-stage telescopes. The B1 hub cap (12.25 mm) must never be crossed by leg 2. The sensing Jacobian of (theta1, theta2, twist) can degenerate where the two legs become coplanar (e.g. arm at the side with the insertion between the two origins). The two legs and the single hub carry all of MVP2's torque.",
+  "unpowered_and_mvp2": "Unpowered: everything is closure-set, the telescopes and pivots roll, and poses with theta near 0 / 180 are rejected, so nothing sags. MVP2: two tendon-like cables on the struts (pull to shorten; an internal push-pull band or a second cable to lengthen) and one hub drum at B1, with its cable routed along leg 1 or as a Bowden sheath ending on the arm piece. Sensing: a linear scale in each telescope and the B1 hub's magnet / IC. Forward kinematics by Newton from the last pose.",
+  "model_spec": "Conventions: scapula dir -> S_R(i) d; arm dir (canonical, w_dir) -> H_R(i) @ RH @ d, with RH = BP._rig().L['rest_humerus']; GH origin. PARAMS: A1 = bvec (seed (20, 75)); A2 = bvec (seed (-10, 25)); B1 = w_dir (seed (112, -15)); B2 = w_dir (seed (95, -55)) or 'coaxial' (B2 = B1, leg 2 one layer up, +6 mm). Realisation: 'telescope3' (width 12, allowed theta_max/theta_min <= 2.6) or 'lazytongs' (n units of bar length Lb; band half-width w(theta) = 0.5*Lb*sqrt(1 - (theta*rho/(n*Lb))^2) + 3; requires 0.35*n*Lb <= theta*rho <= 0.92*n*Lb). HEIGHTS: pads at their lowest legal radius over the fit-clip frames (smallest radius, 0.5 mm steps, with all samples >= 2 mm from the skin by B.dist); rho0 = the max of the pad radii; legs at rho0 + 3.15, or the leg's own lowest legal radius if that is higher. PER POSE: P1 = S_R A1; P2 = S_R A2; Q1 = H_R RH B1; Q2 = H_R RH B2; theta_k = acos(P_k . Q_k). Return None if theta_k is outside its leg's fit-clip range +-3 deg, or outside [20, 160]. Twist tau = signed angle at Q1 between leg 1's tangent toward P1 (unit(P1 - (P1.Q1) Q1)) and an arm-fixed tangent at Q1 (H_R RH t0, where t0 = the canonical distal axis (0,-1,0) projected perpendicular to B1 and normalised). SENSING JACOBIAN: rotate the arm by +-0.3 deg about thorax x, y and z (apply the rotation to Q1, Q2 and the t0 image) and finite-difference (theta1, theta2, tau) to get a 3x3 J. Report |det| with the rows normalised; flag |det| < 0.1 as 'unsensable' (counted as taken, reported separately). COLLISIONS (None): leg 2's centreline within 19 mm of Q1 while its layer overlaps the hub span (rho0 .. rho0 + 12.25); legs crossing on the same layer (minimum distance between centrelines < (w1 + w2)/2 + 1). METAL (skin faces, 2 mm grid): pads as discs of r 12 at P1, P2 and Q2; the hub's arm pad at Q1; legs as great-circle bands P_k -> Q_k at their radius and width; the arm bridge Q1-Q2 at the pad radius; plus a 14 mm strip from Q1 to BOTTOM's cut end (canonical ~(0, -70, 67.5), radius ramped to 96). Contact-only points: the hub cap (disc r 10 at rho0 + 12.25) and the leg tops. Record the skin faces.",
+  "sweep_params": "A1 (az -10..60, el 55-85); A2 (az -40..30, el 10-45); B1 (delta 100-120, az -40..0); B2 (delta 80-110, az -80..-30) or coaxial; realisation (telescope3 / lazytongs with n 4-8 and Lb 20-35 mm).",
+  "modelling_cost": "low",
+  "prior_art": "BONES (Klein et al. 2008, UC Irvine), a shoulder orthosis whose parallel mechanism is driven by linear (pneumatic) actuators; rotator-cuff-inspired cable routing in soft shoulder exosuits; the 2R 'pointing + twist' split studied earlier in this repo. I have not seen two geodesic struts converging on a tubercle hub.",
+  "lenses": [
+   "biomimetic-girdle|hardware-unlocks"
+  ],
+  "t_ideated": "2026-10-15T17:21:09Z",
+  "source": "ideation B",
+  "status": "ideated"
+ },
+ {
+  "id": "deltoid-trilateration",
+  "name": "Muscle-arc trilateration: three telescoping 'deltoid' arcs whose lengths are the active joints",
+  "topology": "Parallel. Three legs, each R-P-R along a great circle about GH, from a scapula-fixed pad A_k (origin: anterior, middle and posterior heads) to an arm-fixed pad B_k (insertion on the cap band): radial pivot at A_k [PASSIVE] -> curved telescoping arc whose angular length theta_k = angle(A_k, B_k) is the 'muscle length' [ACTIVE] -> radial pivot at B_k [PASSIVE] -> arm (pads tied by an arm bridge to BOTTOM). Realised as a lazy-tongs scissor or a 3-stage curved telescope.",
+  "active_dof": 3,
+  "passive_dof": 6,
+  "dof_reasoning": "Each R-P-R arc leg is a spherical 3R with 90/90 arcs whose middle joint is realised as the telescope (its axis is the normal of the great circle through A_k and B_k). Mobility = 9 + 3 (human GH) - 3 loops x 3 = 3. The three arc lengths theta_k = acos(A_k . B_k) are the active coordinates: like muscle lengths, three distances on a sphere fix an orientation locally. Each leg's plane and its two end pivots are set by its endpoints, so the 6 pivots are closure-set and cannot sag unless a leg reaches theta = 0 or 180 deg (plane undefined), which the model rejects.",
+  "description": "Three curved struts lie along the geodesics of the shoulder cap, like the anterior, middle and posterior deltoid wrapping the humeral head. Their origins are pads with radial pivots on the exo-scapula's top / posterior ground. Their insertions are three pads on the arm's cap band, tied by an arm-fixed bridge to BOTTOM. Each strut is a band 10-16 mm wide at a constant radius just over the cap (skin face ~3 mm above the pads). Rest: the struts run down from the acromion region over the front, side and back of the cap. Overhead: the middle strut shortens as the insertion rises under the acromion, and the posterior one lengthens. Across-body: the posterior strut is long and the anterior short. Behind-back: the reverse. Axial twist shows up as a difference between the three lengths.",
+  "why_better": "The only moving metal is the struts, and they lie exactly on the shortest surface path between an origin and an insertion: the line a wrapping muscle takes over the cap, where the skin is round (deltoid cap: 4.7 mm radius spread over 120 deg). No hub ever travels over moving skin; the six pivots sit on fixed pads on the best scapula and arm ground. The MVP2 drive is biomimetic and simple: a cable shortens or lengthens each strut, like a tendon. All three actuated coordinates are at the struts, so no motor cable has to reach a joint riding on a moving link the way the baseline's J2 and J3 do.",
+  "main_risk": "Span ratio: for every scapula / arm point pair, the arc angle varies by at least 2.1x (best pairs: 75-165 deg). For good-ground pairs it varies 2.6x on the fit clips and 5.4x over the workspace (top / tubercle: 46-128 deg on the clips, 27-150 deg in the workspace; my check). A 2-stage telescope (< 1.8x) cannot do this. A lazy-tongs leg can (3-5x), but brings 15-25 small pivots, varying width and backlash; a 3-stage telescope is thick. Long struts at 150-170 deg approach the undefined-plane singularity. The struts cross each other under twist (stacking). Sensing singularity: when the three leg normals become coplanar, the lengths stop determining the pose.",
+  "unpowered_and_mvp2": "Unpowered: the arm drives the pads, and the struts extend and retract freely (rolling telescopes or ball-bearing scissor pivots). The pivots are closure-set, so nothing sags except at theta -> 0 / 180, which is rejected. MVP2: each strut is driven like a muscle by a Bowden cable pair (pull to shorten; a second cable or an internal push-pull band to lengthen) from a remote motor. Sensing: a magnetic linear scale along the inner stage, or the angle of the first scissor pivot (length = n*Lb*cos(beta)). Forward kinematics from three lengths by Newton from the last pose.",
+  "model_spec": "Conventions: scapula dir -> S_R(i) d; arm dir (canonical, w_dir) -> H_R(i) @ RH @ d, with RH = BP._rig().L['rest_humerus']; GH origin. PARAMS: A_k = bvec(az, el) for k = ant / mid / post (seeds (120, 60), (60, 70), (0, 50)); B_k = w_dir(delta, az) (seeds (95, 15), (112, -15), (100, -55)); realisation 'telescope3' (width 12, ratio <= 2.6) or 'lazytongs' (n, Lb; half-width w(theta) = 0.5*Lb*sqrt(1 - (theta*rho/(n*Lb))^2) + 3, two layers 2.5 mm apart; requires 0.35*n*Lb <= theta*rho <= 0.92*n*Lb). Per-leg range [th_min_k, th_max_k] = the fit-clip range +-3 deg; the design is invalid if the realisation cannot cover that ratio. HEIGHTS: each pad at its lowest legal radius over the fit-clip frames (0.5 mm steps, all samples >= 2 mm from the skin by B.dist); rho0 = the max pad radius; legs at rho0 + 3.15, or at their own lowest legal radius if higher; a leg flagged 'upper' gets +6. PER POSE: theta_k = acos(clip(S_R A_k . H_R RH B_k)). Return None if any theta_k is outside its range or outside [20, 160]. Leg geometry: unit vectors along the great circle from A_k to B_k (slerp), with a band of +-w/2 across at the leg's radius. Crossing test: if two legs on the same layer have centrelines closer than (w1 + w2)/2 + 1 mm -> None. SENSING index: rows n_k = unit(A_k x B_k) in the thorax frame; report |det| percentiles; poses with |det| < 0.1 count as taken but are reported as 'unsensable'. METAL (skin faces, 2 mm grid): base pads (discs r 12 at A_k), arm pads (discs r 12 at B_k), the legs, a base bridge (strips joining the A_k), and an arm bridge (strips joining the B_k, plus a 14 mm strip from the mid pad to BOTTOM's cut end, canonical ~(0, -70, 67.5), radius ramped to 96). Contact-only points: pivot caps (face + 10) and leg tops. Record the skin faces. REPORT: per-leg theta ranges, crossings, and sensing-index percentiles.",
+  "sweep_params": "A_k on the scapula's top / posterior ground (el 30-80, az -30..130); B_k on the cap band (delta 85-125, az -70..+20, spread 60-90 deg); realisation (telescope3 / lazytongs with n 4-8 and Lb 20-35 mm); which leg is upper.",
+  "modelling_cost": "medium",
+  "prior_art": "BONES (Klein et al. 2008): a parallel shoulder orthosis with muscle-like linear actuators; Stewart-Gough / 3-UPS-S spherical parallel mechanisms; spherical scissor (lazy-tongs) linkages (Hoberman; You & Chen); soft shoulder exosuits with cable 'tendons'. I have not seen curved telescoping struts on the cap's geodesics as the active coordinates.",
+  "lenses": [
+   "biomimetic-girdle|hardware-unlocks"
+  ],
+  "t_ideated": "2026-10-15T17:21:09Z",
+  "source": "ideation B",
+  "status": "ideated"
+ },
+ {
+  "id": "three-head-deltoid-spm",
+  "name": "Three-headed exo-deltoid: a 3-RRR spherical parallel mechanism with every actuator on the scapula",
+  "topology": "Spherical parallel mechanism, all 9 axes through GH. Three legs run from the exo-scapula to an arm platform made of three small pads on the cap band; each leg follows one head of the deltoid. Base R: a radial hub on the scapula (anterior head over the anterior acromion, middle head on the acromion top, posterior head on the scapular spine) [ACTIVE] -> proximal arc link -> elbow R [PASSIVE] -> distal arc link -> platform R: a radial hub on an arm pad [PASSIVE] -> arm. 3 active (base hubs), 6 passive (elbows + platform joints).",
+  "active_dof": 3,
+  "passive_dof": 6,
+  "dof_reasoning": "Mobility = 9 revolute freedoms + the human GH's 3 - 3 independent spherical loops x 3 = 3: the arm's own three rotations. For a given arm orientation, each leg's elbow axis is the intersection of the cone a_prox around its base axis and the cone a_dist around its platform axis, on a fixed working mode. So every passive joint is set by closure and cannot sag, as long as no leg reaches its stretched / folded configuration (where its elbow could flip), which the model rejects. The 3 base hubs are the active joints, sensed and MVP2-powered. The passive joints need no sensing, because the arm pose follows from the 3 base angles (forward kinematics on the chosen assembly mode).",
+  "description": "Three thin arc 'heads' fan over the shoulder cap like the deltoid. Their base hubs sit on the exo-scapula, on ground the scapulohumeral rhythm protects: anterior-superior over the front of the acromion, middle on the acromion top, posterior on the spine. Each head is two 12 mm Ti arcs, proximal (base face + 3.15) and distal (+ 6.3), meeting at an elbow hub. The distal arcs end on three small arm pads on the cap band just below the acromion edge (posterolateral to lateral, delta ~95-115: the arm's low-motion band). The pads are tied by an arm-fixed bridge that continues to BOTTOM. Rest: the three elbows sit over the anterior, lateral and posterior deltoid. Overhead: the pads rise under the acromion and the heads fold, with the elbows moving up and out over the top and back; the posterior head stretches. Across-body: the posterior head stretches toward the front and the anterior head folds. Behind-back: the reverse. Axial twist is carried as a difference between the three heads.",
+  "why_better": "In every serial chain, MVP2's hardest problem is driving J2 and J3, which ride on moving links. Here all three motor cables end on scapula-fixed hubs, like the deltoid's origins, and the moving legs carry no actuator. Each leg is short and stays over its own region (anterior / lateral / posterior), so no single link has to sweep the whole cap the way the baseline's link 1 and link 2 do. The arm attachment is three small pads on the arm's best band, instead of one large hub on the deltoid belly (the baseline's JN hub: 39.5 % disc ceiling, vs ~94 % near w(112,-15)). Sharing the load across three legs allows arcs thinner than 5.5 mm. With 90/90 arcs a leg is singular only at base-to-pad separations of 0 / 180 deg, and top / tubercle spans are 46-128 deg on the fit clips (my check), well inside.",
+  "main_risk": "More metal over the cap (6 arcs, 9 hubs, 3 layers), all of which must stay in band. Legs collide under axial rotation, because the heads cross each other. The reachable set is the intersection of the three legs' sets, each limited by its own collisions. For MVP2 control there are 8 assembly modes and type-II (platform) singularities. The 9 bearings add friction (R17), though each is lightly loaded. Heavier than a serial 3R.",
+  "unpowered_and_mvp2": "Unpowered: the arm moves the platform and every leg is closure-set. The only failure mode is a leg passing its stretched / folded configuration, where the elbow is undetermined and could flip; the model rejects poses within 12 deg of it. MVP2: a cable drum on each base hub. These are scapula-fixed, so the cable routes are the shortest and fixed of any concept. Sensing on the three base hubs (v5 magnet / IC), optionally plus one elbow encoder to pick the assembly mode. The MVP2 risk is control near type-II singularities (the platform loses stiffness with the actuators locked); the model reports its index.",
+  "model_spec": "Conventions: scapula dir -> S_R(i) d; arm dir (canonical, w_dir) -> H_R(i) @ RH @ d, with RH = BP._rig().L['rest_humerus']; GH origin; numpy band_impl.circ_int. PARAMS: base axes u_k = bvec(az, el) for k = A / M / P (seeds (120, 60), (70, 70), (10, 50)); platform axes v_k = w_dir(delta, az) (seeds (95, 15), (112, -15), (100, -55)); arcs a_prox = a_dist = 90 (or per leg); working modes s_k = +-1 (per leg, pick the one whose elbow is farther from the other legs at the bench's first pose); link width 12, thickness 5.5; hub radius 10, cap 12.25 above the lower member's face; margin m = 12 deg. HEIGHTS: rho0 = the max over the base pads of their lowest legal radius over the fit-clip frames (0.5 mm steps, all samples >= 2 mm by B.dist). Layers (skin faces): base pads + base bridge at rho0; proximal arcs + arm pads + arm bridge at rho0 + 3.15; distal arcs at rho0 + 6.3. Raise all layers together if the arm pads violate their own lowest legal radius. IK PER POSE: U_k = S_R u_k; V_k = H_R RH v_k; theta_k = angle(U_k, V_k). Return None if theta_k < |a_prox - a_dist| + m or > a_prox + a_dist - m. Elbow W_k = circ_int(U_k, a_prox, V_k, a_dist, s_k). METAL (2 mm grid): base pads = discs r 12 at U_k; base bridge = great-circle strips U_A-U_M-U_P, 12 wide; proximal = great-circle band U_k -> W_k; elbow discs at W_k; distal = band W_k -> V_k; arm pads = discs r 12 at V_k; arm bridge = strips V_A-V_M-V_P plus a 14 mm strip from V_M to BOTTOM's cut end (canonical ~(0, -70, 67.5), radius ramped to 96). SELF-COLLISION (None): same-layer elements of different legs whose centrelines come within 13 mm (arc length at their radius); or any arc passing within 17 mm of another leg's hub whose radial span [face, face + 12.25] overlaps the arc's [face, face + 5.5]. Contact-only points: tops (+5.5) and caps. Record the skin faces. REPORT: the type-II index min |det[unit(W_k x V_k)]| over the taken poses, and the share of poses lost to each test.",
+  "sweep_params": "Base axes (az, el) for the three heads within the scapula's top / posterior ground (el 30-80, az -30..130); platform axes on the cap band (delta 85-125, az -70..+20, spread 60-90 deg); a_prox, a_dist (60-100, shared or per leg); working modes; link width (8-14 mm).",
+  "modelling_cost": "medium",
+  "prior_art": "Gosselin & Angeles' Agile Eye (3-RRR SPM); SPM-based shoulder exoskeleton work by Niyetkaliyev and Shintemirov (Nazarbayev University). I have not seen legs routed along the deltoid heads with the platform on the cap band.",
+  "lenses": [
+   "biomimetic-girdle|hardware-unlocks"
+  ],
+  "t_ideated": "2026-10-15T17:21:09Z",
+  "source": "ideation B",
+  "status": "ideated"
+ },
+ {
+  "id": "lone-helix-humeral",
+  "name": "Lines-of-non-extension helix: 2R pointing over the top + a helical, skin-profiled humeral-rotation rail",
+  "topology": "Scapula base -> J1 = hub (axis a1 at the 2R singularity home) [ACTIVE] -> link 1 -> J2 = hub (axis a2, at a12 from a1 and perpendicular to the humerus axis) [ACTIVE] -> link 2 (the pointing link: it holds the humerus axis direction and runs down the lateral arm) -> carriage stage on link 2: an axial slide along the humerus axis [PASSIVE] + a radial slide [PASSIVE] -> J3 = carriage on an arm-fixed HELICAL rail around the upper arm, whose station and radius change with its angle (humeral rotation) [ACTIVE] -> arm.",
+  "active_dof": 3,
+  "passive_dof": 2,
+  "dof_reasoning": "The 2R pointing chain sets the humerus direction (2 DOF, both hubs active). J3 is the arm's rotation about its own axis relative to link 2, i.e. the carriage's angle on the helix (active). Because the rail is a helix with a radius profile, the rail point under the carriage moves along the humerus axis (by the pitch) and radially as the arm rotates; the carriage's two passive slides on link 2 follow it. Their positions are set by the helix profile at the current J3 angle (closure), so they cannot sag and need no sensing. A translation along, or radial to, the humerus axis does not change the rotation the joint transmits about that axis.",
+  "description": "Over the shoulder: a compact 2R pointing chain, with J1 at the anterior-superior acromion / clavicle-tip region (the singularity home) and J2 on the cap's equator. Down the arm: link 2 lies along the lateral arm. At its end, a small two-slide carriage rides an arm-fixed helical rail, a 10 mm band that winds ~120-180 deg around the upper arm. The helix follows a line of non-extension of the skin (as in the MIT BioSuit), and its radius follows the non-round arm. Rest: the helix runs from the posterolateral arm high up to the anterolateral arm lower down (or the reverse). Overhead, across-body and behind-back: link 2 points with the arm. Internal / external rotation runs the carriage along the helix, moving it up or down the arm by the pitch, so that at each station it stays in that station's body-free window.",
+  "why_better": "It implements the user's own suggestion ('put upper arm rotation in its own DOF farther down ... and just have to handle 2 at the shoulder'). It addresses the two measured failures of an arm-fixed ring (FINDINGS). (1) The arm is not round (13.5-25 mm skin-radius spread over 120 deg at every station 80-280 mm down), so the cam profile follows the skin. (2) The body-free window at a fixed station is only 124-130 deg, so the helix spreads the travel over several stations, each using its own window. The 2R pointing chain's singularity has a home: J1's axis can sit where the arm axis never comes within 41 deg (bench fit clips) / 31 deg (workspace) (my check: bvec(125, 45)).",
+  "main_risk": "Link 2 still rides over arm skin that rotates under it (a pointing-only link over the arm's non-round section), so its band may be poor. The body-free windows at successive stations may not chain into a helix, because the trunk sits medial at every station. The two-slide carriage stage is bulky (~25 x 20 x 9 mm). The J1 home (anterior-superior, scapula ceiling ~30 %) is not on good ground, and J2 is still a moving hub over the cap equator.",
+  "unpowered_and_mvp2": "Unpowered: the hubs and the helix carriage are driven by the arm, and the passive slides are set by the profile; V-wheel carriage on a 3-D curve. MVP2: hub drums on J1 and J2. J3 is driven by a cable laid along the helical rail's groove from a Bowden stop on link 2; a helix is a constant-lead path, so the cable wraps it like a screw thread. Sensing: magnet / IC on the hubs; J3 by a magnetic scale along the helix read by the carriage.",
+  "model_spec": "Conventions: scapula dir -> S_R(i) d; arm dir (canonical, w_dir; the distal axis is (0,-1,0)) -> H_R(i) @ RH @ d, with RH = BP._rig().L['rest_humerus']; GH origin; numpy band_impl.circ_int. PARAMS: a1 = bvec (seed (125, 45)); a12 (90); sigma; chi = the carriage azimuth in link 2's frame, measured from a2 about u, set at the bench's first pose so that the carriage sits at canonical az = psi_c. Helix: s0 = station at its centre (90 mm down the axis); pitch p (0.3 mm/deg); span Psi (150 deg); centre azimuth psi_c (0 = lateral, + anterior); clearance 2.5. KINEMATICS PER POSE: u = H_R RH (0,-1,0); A1 = S_R a1; a2 = circ_int(A1, a12, u, 90 deg, sigma). Return None within 10 deg of cone tangency (angle(A1, u) outside [|90 - a12| + 10, 90 + a12 - 10]). Link-2 frame: e1 = a2, e2 = u x a2, e3 = u. Humeral rotation gamma = atan2(ref . e2, ref . e1), with ref = H_R RH (0,0,1) (canonical lateral). Carriage arm-frame azimuth psi = wrap(chi - gamma + gamma_0), where gamma_0 makes psi = psi_c at the first pose. Return None if psi is outside [psi_c - Psi/2 + c, psi_c + Psi/2 - c] (c = carriage half-length in deg). HELIX (arm frame): station s(psi) = s0 + p (psi - psi_c). Radius r(psi) = r_need + clearance, where r_need = max over the shaping poses (fit clips + workspace) of the outermost inside radius along the canonical ray from (0, -s, 0) in direction (sin psi, 0, cos psi), sampled r = 20..90 in steps of 1.5 with one batched B.dist call per pose. METAL (skin faces, 2 mm grid): the J1 pad disc at its lowest legal radius rho0; link 1 = great-circle band A1 -> a2 at rho0 + 3.15, width 12; the J2 disc at a2; link 2 = a 14 mm strip at azimuth chi in link 2's frame, i.e. points s*u + R2(s)(cos chi e1 + sin chi e2) for s from 0 to s(psi). R2(s) = 2 + the max over poses of the arm skin radius at station s and that link-2 azimuth (computed in a first pass in link 2's frame), but never below rho0 + 6.3 near s = 0. Carriage box face 24 x 20 mm at r(psi) + 5; helix rail = a 10 mm band along (s(psi'), r(psi')) for psi' over the span, mapped by H_R RH. Contact-only points: tops. Record the skin faces. REPORT: link 2's in-band separately (the expected weak part).",
+  "sweep_params": "a1 (around bvec(125, 45) +-20 deg); a12 (70-90); s0 (70-130 mm); pitch p (0-0.6 mm/deg, either sign); Psi (100-200 deg); psi_c (-60..60); chi.",
+  "modelling_cost": "medium",
+  "prior_art": "Lines of non-extension (Iberall 1964; Newman's MIT BioSuit; Bethke 2005 mapping); semicircular humeral-rotation bearings (ARMin II/III, ABLE); the 2R pointing + ring studied in this repo (FINDINGS: ring body-free windows). I have not seen a helical, skin-profiled humeral-rotation rail.",
+  "lenses": [
+   "biomimetic-girdle|hardware-unlocks"
+  ],
+  "t_ideated": "2026-10-15T17:21:09Z",
+  "source": "ideation B",
+  "status": "ideated"
+ },
+ {
+  "id": "cruciate-knuckle-3r",
+  "name": "Cruciate-ligament knuckles: a spherical 3R whose joints are rolling crossed four-bars instead of stacked hubs",
+  "topology": "A spherical serial chain where each revolute is replaced by a spherical crossed four-bar 'knuckle': two crossing ligament bars between the ends of adjacent members, like the knee's cruciate ligaments. Scapula base -> knuckle 1 [1 ACTIVE input + 3 PASSIVE pivots] -> link 1 -> knuckle 2 [1 ACTIVE + 3 PASSIVE] -> link 2 -> knuckle 3 [1 ACTIVE + 3 PASSIVE] -> arm piece -> BOTTOM. All pivot axes pass through GH. Each knuckle's relative motion is a rolling of two pitch cones about a moving instantaneous axis.",
+  "active_dof": 3,
+  "passive_dof": 9,
+  "dof_reasoning": "Each crossed four-bar is one closed loop with mobility 1: its other 3 pivots are set by closure from the input pivot. So each knuckle is one joint coordinate (one active pivot, sensed / driven), and three knuckles give three active DOF. The 9 passive pivots are inside the loops and cannot sag while the loops stay away from toggle (ligaments collinear), which the model rejects. The chain is still spherical (all axes through GH), and its three inputs are set by the arm orientation (numerical IK, unique on a branch near the previous pose).",
+  "description": "It looks like the baseline's straps, but the members butt end to end at small knuckles instead of overlapping at O20 hubs. Each knuckle is two short Ti ligament bars (~20 mm) crossing in an X between the rounded ends of the two members, on 4 tiny bearings (O6-8). All members ride on ONE layer: no 3.15 mm step per joint and no 12.25 mm cap. The ligaments sit 3-6 mm above. The joint 'rolls' like the knee, or like the humeral head on the glenoid: its instantaneous axis travels along the member ends by half the rotation, spreading each joint's footprint. Rest, overhead, across-body and behind-back: the chain follows the path of the 3R it replaces (seeded from the baseline and from the crossed-rails seeds), with every member at the height it needs.",
+  "why_better": "Joint size is a measured lever: O17 vs O23 hubs is worth ~20 points of workspace (FINDINGS). The hub zones (J2's lower plate, BOTTOM's JN hub) carry most of the baseline's R1 loss, and each joint also steps the next member 3.15 mm up. A knuckle has no disc that must stand on the skin and no overlap between members, so the chain can sit one layer lower everywhere and its joint zones are as thin as the members. The model builds the same seed with v5 hubs in the same script, so the knuckle's effect is measured on its own.",
+  "main_risk": "Range: a crossed four-bar has ~150-170 deg of total travel before toggle, but well-conditioned travel is ~+-70 deg, and some 3R joints need more (J1 / J3 rotations can exceed 150 deg), so some poses become unreachable. Ligament strength and buckling under MVP2's 10 N.m (~1 kN at a 10 mm lever). 12 small bearings. Numerical IK. An unusual CAD.",
+  "unpowered_and_mvp2": "Unpowered: the loops are closure-set, and the 12 small rolling bearings each carry a low load. The moving instantaneous axis adds no free coordinate. Near toggle a knuckle loses stiffness, so those poses are rejected. MVP2: a cable drum on the input pivot of each knuckle, or on a member-fixed sector about the knuckle's mean axis. Sensing at the same pivot (small magnet / IC); the knuckle's forward kinematics maps it to the member angle.",
+  "model_spec": "Conventions: scapula dir -> S_R(i) d; arm dir (canonical, w_dir) -> H_R(i) @ RH @ d, with RH = BP._rig().L['rest_humerus']; GH origin. TARGET per pose: T_i = S_R(i)^T H_R(i) RH, the arm orientation in the scapula frame. SEED 3R in product-of-exponentials form: T(q) = Rot(j1, q1) Rot(j2, q2) Rot(j3, q3) T_0. Take the joint axes j1, j2, j3 (scapula frame) and T_0 from a seed spherical 3R evaluated at the bench's first pose: the baseline r18 s1392 #1 (J1 axis bvec(32.6, 80.6), arcs (77.4, 81.4) deg, JN axis w_dir(71.4, 4.8), branch -1: j1 = a1, j2 = a2 at that pose, j3 = HG a3 at that pose), or a crossed-muscle-rails seed. KNUCKLE (idealised rolling equal pitch cones, which a symmetric crossed four-bar approximates): replace Rot(j_k, q_k) by Rot(c_k, q_k/2) Rot(c'_k, q_k/2), with c_k = Rot(n_k, -beta_k) j_k, c'_k = Rot(n_k, +beta_k) j_k and n_k = unit(j_k x j_(k+1)) (for k = 3 use j2). With beta -> 0 this is the seed 3R exactly. IK: solve q (3 values) to minimise |log(T(q)^T T_i)| by Levenberg-Marquardt, warm-started from the previous pose along each clip sequence and, for workspace poses, from the nearest solved pose in pose space. Return None if the residual > 0.5 deg, any |q_k - median_k| > q_max (70 deg; median over the fit clips), or cond(J) > 50. GEOMETRY: member k's frame P_k(q) = the product of the first k knuckle factors. Knuckle k's contact direction in the scapula frame = P_(k-1)(q) Rot(c_k, q_k/2) j_k. Members are great-circle bands, 14 mm wide, between consecutive contact directions (base pad -> contact 1 -> contact 2 -> contact 3 -> arm piece), ALL at one skin face rho = the max over the members of their lowest legal radius over the fit-clip frames (0.5 mm steps, all samples >= 2 mm by B.dist). Knuckles: two ligament bars (6 mm wide, length 2*rho*sin(beta) + 6) crossing over the contact at rho + 6 and rho + 9, plus pivot discs r 4 (contact-only). Arm piece: from contact 3 to BOTTOM's cut end (canonical ~(0, -70, 67.5), radius ramped to 96). Map everything to the thorax frame by S_R(i). CONTROL: in the same script, build the same seed with v5 hubs (discs r 10 at each j_k direction, members stepping +3.15 per joint, caps contact-only) and report both. REPORT: per-knuckle q range and the residuals.",
+  "sweep_params": "beta per knuckle (6-15 deg); q_max (55-80 deg); seed 3R (baseline r18 / crossed-rails seeds / free 3R parameters); member width (10-16 mm).",
+  "modelling_cost": "high",
+  "prior_art": "Crossed four-bar knee models (O'Connor, Zavatsky) and polycentric prosthetic knees; rolling-contact joints (Jacob's ladder; CORE by Halverson and Howell). I know of no spherical crossed-four-bar knuckles in a shoulder exo.",
+  "lenses": [
+   "biomimetic-girdle|hardware-unlocks"
+  ],
+  "t_ideated": "2026-10-15T17:21:09Z",
+  "source": "ideation B",
+  "status": "ideated"
+ },
+ {
+  "id": "crown-ring-3r",
+  "name": "Crown ring 3R: J1 is an open thin-section ring on the crown the arm never approaches; donut J2/J3",
+  "topology": "S (handler) -> J1 R active: 4-point-contact thin-section ring (RBC/Kaydon Reali-Slim KA025XP0 63.5x76.2x6.35 or KA030XP0 76.2x88.9x6.35, ~60-70 g). It lies flat on the shoulder crown (top-back of the acromion and supraspinatus), axis a1 through GH near c* = [-0.38, 0.91, 0.16] (S-local; S-local = thorax at rest because scap(0) = I). Stator on the handler, rotor = link 1 -> link 1 = rotor flange + 14 mm Ti strap from the ring rim to J2 at alpha12 = 58-80 deg from a1 -> J2 R active: donut hub (RBC KAA15XL0 38.1x47.6x4.76, 18 g, ~40 N.m static moment; or IKO CRBT305A 30x41x5), axis a2 through GH -> link 2 strap over the deltoid -> J3 R active: KAA15XL0 donut on the lateral upper arm, axis a3 humerus-fixed through GH (NOT the humerus axis). Its outer race sits in the arm-side saddle under BOTTOM. All axes meet at GH. Passive (outside the count): the cuff's self-aligning slides, zero travel in the bench.",
+  "active_dof": 3,
+  "passive_dof": 0,
+  "dof_reasoning": "A spherical 3R: the humerus orientation relative to the scapula fixes the 3 joint angles (closed-form IK, 2 branches, branch fixed per design). There is no redundant joint and nothing that can sag. Each joint is one rolling bearing with an open bore for an encoder and an OD for an MVP2 cable drum. A feasibility constraint, measured today on the bench frames (470 poses): every humerus-fixed direction swings over at least ~95 deg of polar angle about c*. The 3R band [|a12-a23|, a12+a23] must contain that range plus a margin, so alpha12 >= spread/2 + 10 ~ 58 deg, with alpha23 at the band centre.",
+  "description": "At rest the ring frames the acromion and supraspinatus. That skin moves with the base: measured today, the skin along S-fixed superior stays at 47.7-48.6 mm and along superior-posterior-lateral at 49.6-54.8 mm, from rest to 150 deg elevation. The ring sits like an eyelet with the bony crown inside its bore, 2-9 mm above the skin around it. Link 1 leaves the rotor and runs down the front or back of the crown to J2, 58-80 deg from the crown pole (top of the anterior or posterior deltoid). Link 2 runs to J3 on the lateral upper arm, 100-160 mm from GH, inside the -20..+62 deg arm sector. Overhead: the humerus never comes within 82 deg of c* (one-sided, all bench poses; 58 deg for plain superior), so J1 and the ring never meet the deltoid; J2 swings to the back or front of the crown. Across-body and behind-back: J1 turns, J2 travels around its circle, and link 2 is the only metal over the moving deltoid.",
+  "why_better": "All S-fixed metal and J1 sit on the only skin that moves with the base, at the one pole the arm never approaches. The open bore takes the 12.25 mm O20 dome off the highest bony point: the ring is a 6.35 mm section with ~9 mm of housing stack. KAA15 / CRBT donuts at J2 and J3 (~9 mm, open bore) take ~3 mm off each O20 stack and let the deltoid bulge rise into the bore. FINDINGS puts joint size at ~20 points of workspace. The strap from J1 to J2 starts at the ring rim, so link 1 cannot become the short-link failure (two hubs side by side).",
+  "main_risk": "alpha12 >= ~58 deg means J2 still travels a circle 58-80 deg off the crown. That is the same circle on which the baseline's J2 hub lands on the back over the medial scapula overhead, so this concept may only move J1's share of the problem. A flat ring on a dome tilts against the skin across its land: on a 55 mm-radius dome, a 76 mm ring's skin side drops ~6-7 mm across its section. The ring needs a stiff round housing (1.5 mm Ti both sides), so J1 alone weighs 60-90 g.",
+  "unpowered_and_mvp2": "MVP1: rolling everywhere (mu ~0.004) and no spare joint, so nothing sags or locks. Use shielded rings, not 2RS seals, to keep drag on the large ring under ~0.05 N.m. MVP2: the J1 drum is a groove on the rotor OD (r 38-44 mm), which roughly halves the cable tension of an O20 drum; J1 sensing is a magnetic ring on the rotor with a Hall sensor on the stator. J2 and J3 have drums on the donut OD (r ~24 mm) and encoders in the open bore.",
+  "model_spec": "COMMON: fr = B.frames(i); RS, RH = fr['S'][0], fr['H'][0]; GH = origin, so Q = RS.T@RH is the humerus rotation in S-local. Humerus axis in H-local: u = normalize(BP._rig().L['elbow']). Arm direction t = Q@u. Arm-fixed vectors: v_H = RH0.T@v_rest (RH0 = RH at the all-zero pose). Map S-local points by RS@p and H-local points by RH@p. ENV(member, rays): for each member-local ray d and each fit-clip pose taken, the skin radius is the first r >= 30 mm along M(i)@d with B.dist >= 0 (2 mm march, then 0.5 mm bisection); the envelope is the max over poses, and the underside = envelope + 2. Sample skin-facing faces on a 2 mm grid; hubs and rings = underside annulus + outer rim. Self-collision: if point sets of members that move relative to each other come closer than 1 mm (ignoring points within one hub radius + 3 mm of their shared joint), return None. IK3R: G = Q@Q0.T (Q0 = Q at the reference pose). Solve R(a1,q1) R(a2,q2) a3 = G@a3 with Paden-Kahan subproblem 2 (no solution -> None; along a clip take the branch nearest the previous frame, on workspace poses the design's branch). Get q3 from subproblem 1. Singular if |a1 . (a2c x a3c)| < 0.17 (current axes) -> None. Apply joint travel limits. THIS CONCEPT: members base (RS), L1 = RS@R(a1,q1), L2 = RS@R(a1,q1)@R(a2_0,q2), arm (RH). Ring: pitch radius 34.9 (KA025) or 41.3 (KA030), land from pitch-8 to pitch+8 (bearing plus 1.5 mm Ti housings). Its plane is perpendicular to a1 at the smallest height h such that every land point p = h a1 + r e(phi) satisfies |p| >= ENV_S(dir p) + 2, with ENV_S over all clip poses (the base is S-fixed). Metal: the underside annulus + the outer cylinder, 9 mm tall. a2_0 = a1 rotated by alpha12 toward a chosen azimuth. J2 donut: annulus r 19-26 perpendicular to a2 at max(ENV over L1 and L2 under the annulus) + 2, stack 9 (upper member from +3). J3: same donut on a3 with ENV over the arm. Link 1: great-circle strap from the ring rim (at a2's azimuth) to J2, 14 wide, 3 thick (MVP1 loads ~1 N.m; 5.5 for MVP2), underside ENV_L1 + 2. Link 2: J2 -> J3 the same way in L2. Seed: the baseline axes in pipeline/full-exo/designs/cad_r18_n3_s1392_1_f300/design.json (convention in pipeline/conformal/gpu/band_impl.py) with J1 moved to c*; or choose a3 (H-local) to minimise its polar range about c* over the clip and workspace poses and centre the band on that range.",
+  "sweep_params": "a1 within 20 deg of c*; ring size (KA020/025/030); alpha12 55-80 deg; alpha23 60-100 deg; a3 direction (2 params, H-local); branch; J2/J3 donut type (KAA15 vs CRBT305A); R2, R3 hub distance from GH 55-95 mm.",
+  "modelling_cost": "low",
+  "prior_art": "Spherical 3R shoulder exos (Harmony, Kim & Deshpande 2017; the repo baseline). Ring bearings in exos: ARMin III. No device known with J1 as an open thin-section ring around the acromion.",
+  "lenses": [
+   "biomimetic-girdle|hardware-unlocks"
+  ],
+  "t_ideated": "2026-10-15T17:21:09Z",
+  "source": "ideation B",
+  "status": "ideated"
+ },
+ {
+  "id": "twin-rail-one-hub",
+  "name": "Twin rails, one hub: virtual J1 on an S-fixed crown rail, virtual J3 on an arm-fixed rail",
+  "topology": "S -> J1 R active with a VIRTUAL axis a1 through GH. An S-fixed open arc rail carries it: either a custom caged-ball wire-race C-slide (docs/research/ring_and_shell_hardware.md option A: 26 mm-wide hollow Ti band, 6 mm radial, 2 hardened race wires per edge, 3 mm balls) or a plain iglidur J band slide (8.5 mm stack). The rail lies on a circle about a1 at cone alpha12, over the crown -> carriage 1 (40-60 mm shoe) = J2's lower member -> J2 R active: the ONLY hub (KAA15XL0 donut, ~9 mm), axis a2 = the carriage's ray through GH, mounted BESIDE the rail at the same level (side outrigger, not stacked on it) -> link 2 = short strap -> carriage 3 -> J3 R active with a VIRTUAL axis a3 (humerus-fixed, through GH): an ARM-fixed arc rail on a circle about a3 at cone alpha32, on the lateral upper arm inside the -20..+62 deg sector, fixed to the cuff saddle under BOTTOM.",
+  "active_dof": 3,
+  "passive_dof": 0,
+  "dof_reasoning": "Kinematically a spherical 3R: the two carriage positions are q1 and q3 and the hub angle is q2, all fixed by the humerus orientation (closed-form IK). No spare coordinate. The caged-ball cages move at half the carriage speed but carry no load-free freedom: their position is set by the carriages, an anti-creep rack keeps them centred, and they are not a DOF. Each coordinate can be sensed (magnetic strip along each band, hall on the carriage; magnet + hall in the donut bore) and, in MVP2, driven (cable laid in a groove along the band to the carriage; drum on the donut).",
+  "description": "Neither the J1 pole nor the J3 pole has a hub, so those poles may point into the body. The crown rail is a 26 mm band laid like a headband over the acromion and supraspinatus. This base metal is shaped exactly to skin that moves with S (measured today: 47.7-55 mm from GH, rest to 150 deg), so it never moves against that skin. The arm rail runs along the lateral arm 100-200 mm from GH, shaped to the arm skin. Only J2 and the short link 2 between the carriages move over the deforming deltoid. Overhead: carriage 1 sits at the front or back end of the crown rail and J2 at the crown edge. Across-body and behind-back: the carriages move to opposite ends of their rails.",
+  "why_better": "Metal fixed to S or to the humerus can be shaped exactly to the skin it rides on, because nothing moves between them. Only one hub and one short link cross the deltoid, where the skin bulges and moves with the pose. The rails replace both pole hubs, link 1, and the arm-end neck: today the 'link 2 - neck' collision is all of R16's part interference (FINDINGS). Axis directions that hub chains could never build become available, because the poles no longer need room for a hub.",
+  "main_risk": "The J1 travel used must fit on the crown patch (roughly +-35 deg around c*), and J3 travel plus the carriage arc must fit in the 82 deg arm sector. Both cap the joint ranges, and the alpha >= ~58 deg constraint from the crown-ring concept still applies, so it is not certain a 3R exists whose q1 and q3 both fit. A long open rail is a curved cantilever (a 26x6 hollow band twists ~2 deg at 25 N.m). Rail plus carriage is ~10 mm, which leaves no margin to 14 mm where the deltoid bulges under the arm rail in flexion.",
+  "unpowered_and_mvp2": "MVP1: caged-ball rolling, or iglidur with friction ~(4/pi) mu M under tilt (~0.06 N.m at MVP1's ~0.5 N.m tilt), so no locking; anti-creep rack on each cage; no spare joint. MVP2: a Bowden cable runs in a groove along each band to its carriage, with sheath stops at the band ends; the J2 drum is on the donut OD; encoders are magnetic strips under the carriages plus the J2 bore encoder.",
+  "model_spec": "COMMON: fr = B.frames(i); RS, RH = fr['S'][0], fr['H'][0]; GH = origin, so Q = RS.T@RH (S-local = thorax at rest). Humerus axis in H-local: u = normalize(BP._rig().L['elbow']); arm direction t = Q@u. Arm-fixed vectors: v_H = RH0.T@v_rest. Map S-local points by RS@p and H-local points by RH@p. ENV(member, rays): for each member-local ray d and each fit-clip pose taken, the skin radius is the first r >= 30 mm along M(i)@d with B.dist >= 0 (2 mm march, then 0.5 mm bisection); the envelope is the max over poses, and the underside = envelope + 2. Sample skin-facing faces on a 2 mm grid. Self-collision under 1 mm between relatively moving members -> None. IK3R: G = Q@Q0.T; solve R(a1,q1) R(a2,q2) a3 = G@a3 with Paden-Kahan subproblem 2 (branch continuity along clips), q3 from subproblem 1; singular if |a1 . (a2c x a3c)| < 0.17 -> None. THIS CONCEPT: members base S (crown rail), L1 = carriage 1 + J2 lower (RS@R(a1,q1)), L2 = J2 upper + link 2 + carriage 3 (RS@R(a1,q1)@R(a2_0,q2)), arm RH (arm rail + saddle). First pass: run IK on all poses to get the q1 and q3 ranges, then fix the rail lengths at the chosen percentile (rail arc = range + carriage arc Lc) and reject poses outside. Crown rail points: R(a1,phi) applied to r(phi) * (cos alpha12 a1 + sin alpha12 e0), offset w in [-13, 13] mm along the circle's binormal, phi over [q1min - Lc/2, q1max + Lc/2]. Two variants: (a) circular rail, r = max over phi of (ENV_S along that ray + 2) - the real C-slide; (b) shaped rail, r(phi) = ENV_S + 2, which needs a passive radial float in the carriage (report both). The arm rail is built the same way in H about a3 at cone alpha32, with ENV over the arm. Carriages: a 40-60 mm shoe sampled +6..+9 mm above the band; only the overhanging underside counts. J2 donut beside carriage 1: centre on a2 at R2 = ENV + 2, annulus r 19-26, stack 9. Link 2: great-circle strap from J2 to carriage 3 at ENV_L2 + 2.",
+  "sweep_params": "a1 and alpha12 (crown-rail circle); a3 (H-local) and alpha32 (arm-rail circle); branch; rail-length percentile cut 90-100 % of the IK range; carriage arc 30-60 deg; J2 radius from GH; circular vs shaped rail.",
+  "modelling_cost": "medium",
+  "prior_art": "CADEN-7 (Perry, Rosen & Burns 2007: humeral rail of 3x60 deg THK HCR segments); MEDARM curved track; circular-guided RCM (Yip et al. 2014); goniometer cradles. None known with rails on both base skin and arm skin.",
+  "lenses": [
+   "biomimetic-girdle|hardware-unlocks"
+  ],
+  "t_ideated": "2026-10-15T17:21:09Z",
+  "source": "ideation B",
+  "status": "ideated"
+ },
+ {
+  "id": "crown-cospm",
+  "name": "Coaxial spherical parallel manipulator driven from a nested ring stack on the crown (bold)",
+  "topology": "S -> three ACTIVE R joints, all coaxial with a0 (S-local, near c* = [-0.38, 0.91, 0.16]): three concentric thin-section rings nested in one ~7 mm layer on the crown (RBC KA020XP0 50.8x63.5x6.35, KA025XP0 63.5x76.2, KA030XP0 76.2x88.9), or two nested and one stacked. Each rotor carries a proximal arc link (arc ap) -> passive R micro-hub (2x MR85-2RS 5x8x2.5, or 683ZZ 3x7x3, in an O12 boss, ~7 mm stack) -> distal arc link (arc ad) -> passive R micro-hub on the arm platform, axes v_i humerus-fixed through GH (platform = a C-saddle on the lateral upper arm under BOTTOM). Three RRR legs, every axis through GH.",
+  "active_dof": 3,
+  "passive_dof": 6,
+  "dof_reasoning": "A spherical parallel mechanism: 3 legs x 3 R = 9 joints, mobility 3. The 3 coaxial input angles fix the platform orientation (coaxial-SPM forward/inverse kinematics, Tursynbek et al. 2019). Conversely the humerus orientation fixes every input angle and all 6 passive joints: each leg's middle-joint axis is the intersection of two cones. The passives are set by closure, so there is no spare coordinate and nothing can sag. Near-singular frames are rejected, because there the passives would be force-amplifying, not sagging.",
+  "description": "At rest a flat ring stack sits on the crown, on skin that moves with S (48-55 mm from GH). Three thin curved legs fan out over the front, top-lateral and back of the deltoid to the arm saddle. Because the inputs are coaxial, rotation about a0 is unlimited, so the arm can sweep any azimuth around the crown pole. Overhead the legs fold toward the crown; across-body the front leg flattens over the anterior deltoid; behind-back the rear leg crosses the posterior deltoid.",
+  "why_better": "All three actuated joints, and later every MVP2 drum and encoder, sit on the base, on the only skin that moves with S. The moving legs carry only O12 micro-hubs (~7 mm) instead of 12.25 mm O20 hubs, which attacks the hub-stack difficulty directly. Each leg carries about a third of the moment, so the legs can be thinner than a serial strap. Closed loops are stiff for MVP2.",
+  "main_risk": "Orientation workspace. Each leg needs v_i to stay within [|ap-ad| + m, ap + ad - m] of a0, while any humerus-fixed direction swings at least ~95 deg about the crown. That forces ap ~ ad ~ 80-90 deg: long legs over the deltoid. Parallel singularities inside the range are likely. Legs may collide with each other and with the arm across-body. Nine joints of metal over the shoulder.",
+  "unpowered_and_mvp2": "MVP1: thin-section rings and micro ball bearings, all rolling. The passives are set by closure; near-singular configurations are rejected, not passed through. MVP2: drums on the three ring rotors (r 30-42 mm) with cables to remote motors; encoders are magnetic rings on the stator. No actuator or sensor on the moving legs.",
+  "model_spec": "COMMON: fr = B.frames(i); RS, RH = fr['S'][0], fr['H'][0]; GH = origin, so Q = RS.T@RH (S-local = thorax at rest). Humerus axis in H-local: u = normalize(BP._rig().L['elbow']). Arm-fixed vectors: v_H = RH0.T@v_rest. ENV(member, rays): for each member-local ray d and each fit-clip pose taken, the skin radius is the first r >= 30 mm along M(i)@d with B.dist >= 0 (2 mm march, then 0.5 mm bisection); the envelope is the max over poses, and the underside = envelope + 2. 2 mm sampling grid. Self-collision under 1 mm -> None. THIS CONCEPT: params a0 (S-local); ap, ad; platform axes v_i (H-local), three unit vectors 120 deg apart on a cone of half-angle gamma about v0; branch sign s_i per leg; platform hub radius Rp (70-110 mm from GH). Per pose: v_i' = Q@v_i. Leg i: w_i = the intersection of the circle {angle(a0, w) = ap} with the circle {angle(w, v_i') = ad}, branch s_i (analytic two-small-circle intersection, or F.circ_int as used in pipeline/arm-rom/family_V.py). No intersection -> None. Input angle theta_i = azimuth of w_i about a0 (report it; ring rotors turn by it). Singularities: leg serial if |a0 . (w_i x v_i')| < 0.15; parallel if |det[(w_i x v_i') for i = 1..3]| < 0.05 -> None. Metal: ring lands on S (annuli at pitch radii 28.6 / 34.9 / 41.3, ~7 mm wide, at max(ENV_S under all lands) + 2, height 7); proximal link i = 12 mm strap along the great circle from its root on ring i (root at the ring pitch point at w_i's azimuth) to w_i, at ENV + 2 in a frame rotating with theta_i about a0; distal link i = strap from w_i to v_i' * Rp at ENV + 2; micro-hubs = discs r 6, stack 7, at w_i and at the platform; platform saddle in H. Check leg-leg and leg-arm clearance.",
+  "sweep_params": "a0 (within 25 deg of c*); ap 60-100 deg; ad 60-100 deg; platform cone gamma 30-70 deg and its axis v0 (H-local); leg phase offsets; branch signs; platform radius Rp.",
+  "modelling_cost": "medium",
+  "prior_art": "Agile Eye (Gosselin 1994); coaxial SPM (Tursynbek, Niyetkaliyev & Shintemirov 2019, also used to model the shoulder); SPM shoulder exo patent US 10,800,031; repo five-bar family E in pipeline/arm-rom (35-39 %).",
+  "lenses": [
+   "biomimetic-girdle|hardware-unlocks"
+  ],
+  "t_ideated": "2026-10-15T17:21:09Z",
+  "source": "ideation B",
+  "status": "ideated"
+ },
+ {
+  "id": "rolling-cone-3r",
+  "name": "Hubless spherical rolling-contact joints: conical Rolamite / CORE pairs with apex at GH (bold, weird)",
+  "topology": "S -> J1 active: a conical rolling-contact pair. Two Ti cone-sector rims (apex at GH, half-angles ga and gb, 2.5 mm wall, radial extent from skin+2 to skin+10 mm) roll on each other along a radial contact line, held by 2-3 crossed flexure straps (0.1 mm spring steel or Ti foil, wound in opposite senses: the Jacob's-ladder / Rolamite principle) -> link 1 -> J2 active: second cone pair -> link 2 -> J3 active: third cone pair on the arm saddle. Every contact line is a ray from GH, so each pair is a 1-DOF spherical motion with a rolling instantaneous axis. No pins, no hubs.",
+  "active_dof": 3,
+  "passive_dof": 0,
+  "dof_reasoning": "Each strap-held rolling pair is exactly 1 DOF (rolling without slip). With equal cones the relative rotation is T(phi) = R(c, phi) R(m0, phi), where c is the fixed-cone axis and m0 the moving-cone axis at phi = 0, 2g apart; that is the spherical analogue of equal rolling circles. Three such joints in series give a generic 3-DOF spherical map, so the humerus orientation fixes phi1-phi3: a 3x3 nonlinear solve, no redundancy, nothing that sags. Each phi is sensable (magnet on one cone, hall on the other) and, in MVP2, drivable (cable wrapped on the cone rim, the rim acting as its own drum).",
+  "description": "There are no hubs and no pins. Each joint is two thin bevel-wheel-like rims standing on edge, ~8 mm tall, rolling on each other like toothless bevel gears, with the straps wrapped around them. At rest J1's pair stands on the crown, J2's over the deltoid top and J3's on the lateral arm. As the arm moves the rims roll, so each joint's contact point walks along its rims: the joint itself travels over the skin by up to (rim radius x phi), which a hub cannot do.",
+  "why_better": "It removes the joint stack entirely. A rolling pair is two 2.5 mm walls and 0.1 mm straps, ~8-10 mm tall in total, with no dome, cap, pin or bearing seat. There is no friction torque under tilt (rolling; the straps carry the tension). The wandering contact point gives each joint a cam-like freedom to put its metal where the skin is, beyond the fixed-axis-point limit of every hub chain.",
+  "main_risk": "Off-plane loads: strap-held rolling joints resist only in their rolling plane, so the cones need side flanges or guides (extra width). Each joint's range is limited by its rim arc (+-90-120 deg needs long rims). The rims stand radially, edge-on to the skin, so their footprint is narrow but the links must sit on top. A precise conical rolling surface on Ti is unusual to make (DFM), and strap fatigue over all-day wear is unproven. Modelling is nonlinear: no closed-form IK.",
+  "unpowered_and_mvp2": "MVP1: rolling with no stiction or self-locking; preloaded straps give zero backlash; no spare joint. MVP2: the cable wraps the cone rim (drum radius = rim radius ~50-60 mm, low tension); sensor = magnet and hall across the contact, or a hall track on the rim.",
+  "model_spec": "COMMON: fr = B.frames(i); RS, RH = fr['S'][0], fr['H'][0]; GH = origin, so Q = RS.T@RH (S-local = thorax at rest). Humerus axis in H-local: u = normalize(BP._rig().L['elbow']). Arm-fixed vectors: v_H = RH0.T@v_rest. ENV(member, rays): for each member-local ray d and each fit-clip pose taken, the skin radius is the first r >= 30 mm along M(i)@d with B.dist >= 0 (2 mm march, then 0.5 mm bisection); the envelope is the max over poses, and the underside = envelope + 2. 2 mm sampling grid. Self-collision under 1 mm -> None. THIS CONCEPT: joint k has a fixed-cone axis c_k in its lower member frame and a moving-cone axis m_k0 at angle 2g_k from c_k (equal cones; unequal cones: T_k = R(c_k, phi) R(m_k0, phi sin ga / sin gb)). Relative rotation T_k(phi_k) = R(c_k, phi_k) R(m_k0, phi_k). FK: M1 = T_1(phi1), M2 = M1 T_2(phi2), M3 = M2 T_3(phi3), with c_2, m_20 expressed in link 1's frame (so they move with M1) and c_3, m_30 in link 2's frame; Q_pred = M3 @ Q0. IK: Levenberg-Marquardt on phi (3 unknowns), minimising ||log(Q_pred^T Q)||. Warm-start from the previous frame along a clip; use 8 seeds on workspace poses. Fail if the residual > 0.5 deg or any |phi_k| > rim range. Metal per joint: two cone walls, each a strip on the cone surface about its axis spanning the rim arc actually used (+-range) and radially from ENV + 2 to ENV + 10 along each generator, sampled every 2 mm (both rims, in their members' frames). The current contact ray = the fixed cone's generator rotated by phi about c_k. Straps ignored (sub-mm). Links: great-circle straps between consecutive rims, 14 wide, 3 thick, at ENV + 2.",
+  "sweep_params": "Joint axes (equivalent to the axis set of a 3R: seed with the baseline or crown-ring-3r axes, then split each axis into c_k / m_k0 symmetric about it); cone half-angles g_k 10-40 deg; rim arc ranges; link widths.",
+  "modelling_cost": "medium",
+  "prior_art": "Rolamite (Wilkes 1967); Jacob's-ladder / XR joints; CORE compliant rolling-contact elements (Cannon & Howell 2005); rolling-contact knee orthoses. No conical (spherical) rolling exo joint known.",
+  "lenses": [
+   "biomimetic-girdle|hardware-unlocks"
+  ],
+  "t_ideated": "2026-10-15T17:21:09Z",
+  "source": "ideation B",
+  "status": "ideated"
+ },
+ {
+  "id": "offset-axis-skin-hubs",
+  "name": "Off-sphere skin hubs + passive cuff stage: axis directions spherical, axis positions free",
+  "topology": "S -> J1 R active: O20 v5 hub or KAA15XL0 donut lying flat ON the crown skin, axis direction a1, but its axis line does not pass through GH -> link 1 -> J2 R active: hub on skin, offset axis line -> link 2 -> J3 R active: hub on the arm, offset line -> passive self-aligning cuff stage under the saddle (passive, outside the count): one along-arm miniature linear guide (THK RSR5 / RSR7: 5 / 7 mm rail, block height 6 / 8 mm, travel +-40 mm) + two short transverse guides (THK RSR3: 3 mm rail, 4 mm tall, +-8 mm), or a 2-axis flexure parallelogram (+-5 mm) -> user's cuff.",
+  "active_dof": 3,
+  "passive_dof": 3,
+  "dof_reasoning": "The axis directions are those of a spherical 3R, so the joint angles are fixed by orientation alone (same IK as a spherical 3R) and the chain matches the arm's rotation exactly. The axis offsets only create a translation mismatch at the cuff, which the 3 passive slides take up. Chain 3R + 3P = 6 coordinates; closure with the rigid cuff = 6 equations; so each slide position is a unique function of the pose, set by closure and driven by the arm. That is the user's passive self-aligning cuff slide (2026-10-15 rule: not counted). No spare coordinate, nothing that can sag. In the real body the same slides also absorb GH translation (R10).",
+  "description": "Hubs are no longer forced onto rays through GH at fixed radii. J1 lies flat on the crown, J2 on the top of the posterior or anterior deltoid wherever the skin is, J3 on the lateral arm; each hub's lower plate rests on its own skin patch at +2 mm. The end of link 2 rides a short rail along the lateral arm under BOTTOM: overhead it slides toward the shoulder, across-body away from it, and the transverse guides shift a few mm.",
+  "why_better": "Spherical chains pay for 'every axis through GH' by holding hubs at a constant radius over a shoulder that is not a sphere (38-98 mm skin radius about GH; 47-98 mm measured along S-fixed directions today). Freeing axis positions lets each hub sit at skin + 2 at its own centre, which attacks the stand-off that limits in-band to 41-58 % in the built CAD. The minimax LP in pipeline/girdle/girdle.py (for fixed axis directions, the carried GH point is linear in the axis points) gives exact offsets that keep slide travel inside the guides.",
+  "main_risk": "Travel. An offset e turned by q moves the cuff end ~2e sin(q/2), so with q up to ~150 deg the transverse offsets must stay under ~4-5 mm (+-8 mm guides), or the motion must be steered along the arm; the hubs gain far less freedom than hoped. The passive stage adds ~6-8 mm of stack under the saddle, plus friction and compliance at the cuff (R17 limits: 5 N and 5 deg at the cuff). A slide that moves the chain end against the arm skin is the R10 problem in reverse.",
+  "unpowered_and_mvp2": "MVP1: the slides run on miniature ball guides (mu ~0.003-0.005) and are driven by the arm through the closure; unique closure, so no sag; hubs are rolling. MVP2: the 3 hubs carry drums and encoders as today; the slides stay passive and unsensed (their position is not needed to know the arm pose).",
+  "model_spec": "COMMON: fr = B.frames(i); RS, RH = fr['S'][0], fr['H'][0]; GH = origin, so Q = RS.T@RH (S-local = thorax at rest). Humerus axis in H-local: u = normalize(BP._rig().L['elbow']). Arm-fixed vectors: v_H = RH0.T@v_rest. ENV(member, rays): for each member-local ray d and each fit-clip pose taken, the skin radius is the first r >= 30 mm along M(i)@d with B.dist >= 0 (2 mm march, then 0.5 mm bisection); the envelope is the max over poses, and the underside = envelope + 2. 2 mm sampling grid. Self-collision under 1 mm -> None. IK3R on directions: G = Q@Q0.T; Paden-Kahan subproblem 2 for q1, q2, subproblem 1 for q3; singular if |a1 . (a2c x a3c)| < 0.17 -> None. THIS CONCEPT: params axis directions (a1, a2_0, a3_0); axis points c_k = GH + offset perpendicular to a_k (2 params each); cuff attach point Pc (H-local, lateral arm, s 150-200); slide frame (along u, plus two transverse). FK with axis lines: rotating about the line (a, c) maps p -> R(a, q)(p - c) + c, composed through the chain in S-local, then RS applied. Per pose: q from the orientation IK; chain-end point E (fixed on link 3 at the cuff interface) from FK; mismatch delta = RH^T (E - RH@Pc) in the slide frame. Take the pose if |delta_along| <= 40 and |delta_x|, |delta_y| <= 8, else None. Metal: hubs at their placed centres (underside at ENV in their member frame + 2, stack 12.25 for O20 or 9 for a donut); straps between hubs at ENV + 2; slide stack at the cuff (saddle-fixed rail 4-6 mm + block 4 mm, in H at Pc); link 3's end at Pc + delta. Optional first step: girdle.fit_minimax over the clip poses to minimise max |delta_transverse| subject to hubs at ENV + 2 (an LP for fixed directions).",
+  "sweep_params": "Axis directions (seed: baseline or crown-ring-3r); offsets c_k up to 30 mm; transverse / along travel budgets (5-10 / 25-50 mm); cuff attach station; hub type (O20 v5 vs KAA15 donut); whether the J1 axis line is pinned through GH (offsets only at J2/J3).",
+  "modelling_cost": "medium",
+  "prior_art": "Self-aligning exoskeleton axes with passive translations (Stienen et al. 2009; Schiele & van der Helm 2006); repo P0 offset-axis minimax LP (pipeline/girdle/girdle.py, p0_results.json).",
+  "lenses": [
+   "biomimetic-girdle|hardware-unlocks"
+  ],
+  "t_ideated": "2026-10-15T17:21:09Z",
+  "source": "ideation B",
+  "status": "ideated"
+ },
+ {
+  "id": "pointer-cslide",
+  "name": "The user's split: 2R donut pointer + shoulder-side wire-race C-slide for humeral twist",
+  "topology": "S -> J1 R active: KAA10XL0 or KAA15XL0 donut (25.4x34.9x4.76 / 38.1x47.6x4.76) on an S-fixed bracket over the anterior acromion, axis a1 = p* ~ [0.36, 0.72, 0.60] (S-local; the best two-sided pointer pole over the 470 bench poses) -> link 1 (~90 deg arc) -> J2 R active: donut, a2 = +-normalize(a1 x t), i.e. 90 deg from both a1 and the arm -> link 2 = pointing link (follows the arm direction, not its twist), carrying an open C-rail (custom caged-ball wire-race band 26x6 mm; 2 + 6 + 2 = 10 mm stack) on a circle about the humerus axis at station s, radius rho -> J3 R active: arm-fixed 50-60 deg shoe on the rail (humeral axial rotation; 67-87 deg of travel per pipeline/girdle/ring_travel.json) -> shoe neck along the arm -> user's cuff / BOTTOM.",
+  "active_dof": 3,
+  "passive_dof": 0,
+  "dof_reasoning": "A spherical 3R with a3 = the humerus axis: q1 and q2 point the arm, q3 is its twist about its own axis, all fixed by the humerus orientation in closed form. Singular when t is parallel to +-a1; such frames are rejected. No spare joint. Each joint is a rolling element with its own sensor (bore encoders on the donuts, magnetic strip on the rail band) and an MVP2 drive (drums on the donuts, a cable along the rail band).",
+  "description": "J1 sits on the anterior acromion / lateral clavicle edge. J2 always rides beside the arm, 90 deg off its axis: anterolateral at rest, on the shoulder top overhead. The C-rail wraps the lateral half of the arm root, with the shoe on the arm's lateral side. Overhead the arm comes within 32 deg of J1 (its closest approach), so the deltoid passes right under J1. Across-body, the rail's open side faces the chest. Behind-back, J1 turns ~180 deg and J2 moves posterior.",
+  "why_better": "This is the user's own suggestion (REQUIREMENTS 2026-10-14: 'put upper arm rotation in its own DOF farther down ... just handle 2 at the shoulder'). Humeral twist no longer swings the hub chain around the shoulder (the sweep principle, pipeline/arm-rom/RESEARCH_NOTES.md section 2): link 2's envelope is only the annulus around the arm root, and only two hubs ride over the shoulder. RESEARCH_NOTES reports family V (two pivots + ideal axial joint) at 67-77 % of a workspace before hardware.",
+  "main_risk": "Measured today on the bench frames: the best two-sided pointer pole has only 32 deg of margin (p*). ring_travel's clip-optimal pole n = [-0.525, -0.253, 0.812] drops to 14.6 deg on the workspace poses, against 45-55 deg on the clips. p* lies where the overhead arm comes, so J1-deltoid contact overhead is likely. A rail at the deltoid cap needs r >= 82-91 mm to be body-free (pipeline/girdle/ring_roundness.json) against ~55-60 mm of skin: 20+ mm of stand-off unless it moves to s 120-160 (17-21 mm skin spread). The rail is a cantilever (~2 deg twist for a hollow 26x6 band at 25 N.m).",
+  "unpowered_and_mvp2": "MVP1: rolling (thin sections, caged balls), no spare joint. Cage creep is handled by an anti-creep rack or end-stop re-centring. MVP2: J1/J2 drums cut into the donut ODs (r ~17-24 mm); for J3 a cable runs along the band and wraps the shoe (radius rho); encoders in the donut bores and a magnetic strip on the band.",
+  "model_spec": "COMMON: fr = B.frames(i); RS, RH = fr['S'][0], fr['H'][0]; GH = origin, so Q = RS.T@RH (S-local = thorax at rest). Humerus axis in H-local: u = normalize(BP._rig().L['elbow']); arm direction t = Q@u. Arm-fixed vectors: v_H = RH0.T@v_rest. ENV(member, rays): for each member-local ray d and each fit-clip pose taken, the skin radius is the first r >= 30 mm along M(i)@d with B.dist >= 0 (2 mm march, then 0.5 mm bisection); the envelope is the max over poses, and the underside = envelope + 2. 2 mm sampling grid. Self-collision under 1 mm -> None. POINTER IK: if angle(t, +-a1) < 15 deg -> None. a2 = s * normalize(a1 x t), with s the branch. Pointing frame P = columns [a2 x t, a2, t] (S-local). q1 = azimuth of a2 about a1 (reference e1 perpendicular to a1); q2 = angle(a1, t). Twist: l_H = RH0.T@[0, 0, 1], made perpendicular to u; v = P.T @ Q @ l_H; q3 = atan2(v_y, v_x). Reject if |wrap(q3 - c)| > T/2. Members: L1 = rotation about a1 by q1, P, arm. Metal: J1 donut on a1 at R1 = ENV_S(a1) + 2 (annulus r 13-17.5 for KAA10 or 19-24 for KAA15, stack 9); J2 donut on a2 at R2 = ENV_L1 + 2; link 1 = great-circle strap a1 -> a2 (14 wide, 3 thick) in L1; link 2 = strap in P from a2 to the rail's mid angle. Rail in P: points s_r t + rho (cos th x_P + sin th y_P) + w t, for w in [-13, 13] and th in [c - T/2 - Ls/2, c + T/2 + Ls/2]. rho = 2 + the max skin radius about the humerus axis over the rail arc and the clip poses at stations s +- 13. Shoe in the arm frame: th = q3 +- Ls/2 at rho + 6..+8. Neck: strap from the shoe's distal edge along the arm, at ENV_arm + 2, to s = 180.",
+  "sweep_params": "a1 within 15 deg of p*; branch s; J1/J2 radii R1, R2; station s 40-160 mm; rho; window centre c; travel T 60-90 deg; shoe arc Ls 40-60 deg.",
+  "modelling_cost": "low",
+  "prior_art": "CADEN-7 humeral C-rail (THK HCR, 3x60 deg); Harmony and MGA (3R humeral rotation); repo P0 '2R shoulder + humeral-rotation ring' (kinematic only); pipeline/arm-rom families V/G (virtual axial joint); docs/research/ring_and_shell_hardware.md.",
+  "lenses": [
+   "biomimetic-girdle|hardware-unlocks"
+  ],
+  "t_ideated": "2026-10-15T17:21:09Z",
+  "source": "ideation B",
+  "status": "ideated"
+ },
+ {
+  "id": "meridian-goniometer",
+  "name": "Goniometer pointer: J2 is an arc rail running beside the arm's elevation path, no J2 hub",
+  "topology": "S -> J1 R active: donut at p* (as in pointer-cslide) -> link 1 = arc rail (wire-race or crossed-roller curved slide, 6 mm band), lying on a small circle about a2 at cone alpha_r = 35-55 deg on one side of the plane through a1 and the arm, fixed to the J1 rotor by a short root -> J2 R active with a VIRTUAL axis a2 = normalize(a1 x t): carriage (40-50 mm shoe) on the rail -> link 2 = carriage + short bridge to the arm root -> J3 R active: humeral C-slide as in pointer-cslide -> cuff.",
+  "active_dof": 3,
+  "passive_dof": 0,
+  "dof_reasoning": "Same 3-DOF spherical kinematics as pointer-cslide: q1 = J1 azimuth, q2 = carriage position along the rail (rotation about the virtual axis a2), q3 = humeral twist, all fixed in closed form by the humerus orientation. No spare coordinate. The rail cage is not a DOF (half speed, anti-creep rack). Each coordinate is sensable and drivable: donut drum + encoder; cable in a band groove + magnetic strip for the carriage and the C-slide.",
+  "description": "There is no J2 hub. The rail runs alongside the arm's elevation path, 35-55 deg to the front or back of the plane holding the arm and the J1 pole, like a goniometer cradle; the carriage stays level with the arm root and moves with it. At rest the rail runs from the front of the shoulder down beside the arm root. Overhead the carriage sits at the rail's upper end near the crown edge. Across-body and behind-back, J1 turns the whole rail about p*.",
+  "why_better": "J2's metal moves from a hub held 90 deg off the arm, which always sits on the moving deltoid, to a thin band beside the arm path at whatever cone the skin allows. Link 2 shrinks to a carriage plus a bridge. The rail can go on the side of the arm where the body leaves room (in front for most ADL), and a 6 mm band is lower than any hub.",
+  "main_risk": "The same 32 deg pole problem as pointer-cslide. A long rail (the q2 range, ~90 deg, plus the shoe) fixed to J1's rotor sweeps around p* with q1 (~190 deg) and must clear the body over that whole sweep. Rail plus carriage stack is ~10-12 mm. The rail is a curved cantilever.",
+  "unpowered_and_mvp2": "MVP1: rolling, anti-creep cage, no spare joint. MVP2: a cable along the rail band to the carriage (Bowden stop at the root); J1 drum on the donut; J3 as in pointer-cslide; magnetic-strip encoders.",
+  "model_spec": "COMMON: fr = B.frames(i); RS, RH = fr['S'][0], fr['H'][0]; GH = origin, so Q = RS.T@RH (S-local = thorax at rest). Humerus axis in H-local: u = normalize(BP._rig().L['elbow']); arm direction t = Q@u. Arm-fixed vectors: v_H = RH0.T@v_rest. ENV(member, rays): for each member-local ray d and each fit-clip pose taken, the skin radius is the first r >= 30 mm along M(i)@d with B.dist >= 0 (2 mm march, then 0.5 mm bisection); the envelope is the max over poses, and the underside = envelope + 2. 2 mm sampling grid. Self-collision under 1 mm -> None. POINTER IK as in pointer-cslide (t, a2 = s * normalize(a1 x t), P = [a2 x t, a2, t], q1, q2 = angle(a1, t), q3 from the arm-fixed lateral; reject within 15 deg of +-a1 or outside the twist window). L1 = rotation about a1 by q1, in which a2 is fixed: a2_L1. Rail in L1: points R(a2_L1, phi) applied to Rr(phi) * (cos alpha_r * (side * a2_L1) + sin alpha_r * e_t0), where e_t0 = the arm direction at q2 = 0 in the meridian plane, for phi in [q2min - Lc/2, q2max + Lc/2], plus a band of +-13 mm along the circle's binormal. Rr(phi) = ENV_L1 along that ray + 2 (circular variant: the max over phi). Carriage: phi = q2 +- Lc/2 at +6..+9 mm. Bridge in P: strap from the carriage to the C-rail at the arm root (C-rail, shoe and neck as in pointer-cslide). First pass: the q2 range over all poses; then cut the rail to the chosen percentile and reject poses beyond it.",
+  "sweep_params": "a1 within 15 deg of p*; branch; rail side (+-a2); alpha_r 30-60 deg; Rr; q2 range cut (percentile); carriage arc Lc 30-50 deg; C-slide station, rho, window c, travel T.",
+  "modelling_cost": "medium",
+  "prior_art": "Goniometer cradle stages (curved crossed-roller guides); circular-guided RCM mechanisms (Yip et al. 2014); MEDARM curved track; CADEN-7 arcs.",
+  "lenses": [
+   "biomimetic-girdle|hardware-unlocks"
+  ],
+  "t_ideated": "2026-10-15T17:21:09Z",
+  "source": "ideation B",
+  "status": "ideated"
+ },
+ {
+  "id": "armband-pointer",
+  "name": "Closed thin-section armband at the user's cuff + 2R donut pointer with a lateral spar",
+  "topology": "S -> J1 R active: donut at p* ~ [0.36, 0.72, 0.60] -> link 1 -> J2 R active: donut, a2 = +-normalize(a1 x t) -> link 2 = a long lateral spar from J2 down the outside of the arm (pointing frame: no twist) -> J3 R active: a CLOSED 4-point thin-section ring coaxial with the humerus axis around the distal upper arm, s = 190-240 mm from GH (RBC/Kaydon KA045XP0 114.3x127x6.35 or KA050XP0 127x139.7x6.35; a KA040XP0 is ~86 g with ~310 N.m static moment). Stator on the spar; rotor bolted into the user's upper-arm cuff / BOTTOM.",
+  "active_dof": 3,
+  "passive_dof": 0,
+  "dof_reasoning": "Spherical 3R with a3 = the humerus axis: two pointing angles and the arm twist, all fixed in closed form by the humerus orientation; singular only for t parallel to +-a1 (rejected). No spare joint. The ring is a single closed rolling bearing: a magnetic-ring encoder and an MVP2 cable drum on its rotor OD.",
+  "description": "The shoulder carries only two donuts and the strap between them. The spar runs down the lateral arm 8-15 mm off the deltoid to a ring around the arm just above the user's cuff, where the arm is slimmer: 40-50 mm skin radius, so 7-17 mm of gap inside a 57 mm bore radius. Overhead the spar lies along the arm's lateral side. Across-body the ring's medial arc meets the chest. Behind-back it sits between the arm and the trunk.",
+  "why_better": "A closed ring is a full bearing: no open-rail cantilever, no twist and no cage creep, which are the recurring failures of open humeral rings in exos (research note section 3). Its 6.35 mm section is thinner than any C-slide (~10 mm). The twist joint moves to where the arm is a plain cylinder and where the user's own cuff already sits, and the spar does not twist with the arm.",
+  "main_risk": "The ring's medial arc between arm and trunk: in the rig the arm touches or enters the torso in walking and wash-opposite-shoulder poses, so adducted poses will count as contact (follow and reach losses). The arm must be threaded through the ring (donning). The spar's gap changes with axial twist over a non-round arm (13.5-25 mm skin-radius spread 80-280 mm down the arm, FINDINGS), so the spar is often over 14 mm. The p* pole limit (32 deg) is the same as in pointer-cslide.",
+  "unpowered_and_mvp2": "MVP1: rolling throughout (4-point thin section, donuts), no spare joint. Use shielded, not sealed, rings to keep drag under ~0.05 N.m. MVP2: J3 drum = a groove on the rotor OD (r ~64-70 mm, low tension), with the cable led along the spar; J1/J2 as in pointer-cslide.",
+  "model_spec": "COMMON: fr = B.frames(i); RS, RH = fr['S'][0], fr['H'][0]; GH = origin, so Q = RS.T@RH (S-local = thorax at rest). Humerus axis in H-local: u = normalize(BP._rig().L['elbow']); arm direction t = Q@u. Arm-fixed vectors: v_H = RH0.T@v_rest. ENV(member, rays): for each member-local ray d and each fit-clip pose taken, the skin radius is the first r >= 30 mm along M(i)@d with B.dist >= 0 (2 mm march, then 0.5 mm bisection); the envelope is the max over poses, and the underside = envelope + 2. 2 mm sampling grid. Self-collision under 1 mm -> None. POINTER IK as in pointer-cslide (t; a2 = s * normalize(a1 x t); P = [a2 x t, a2, t]; q1, q2; q3 = twist of the arm-fixed lateral in P, no travel limit for a closed ring). Metal: J1 and J2 donuts and link 1 as in pointer-cslide. Ring in P, centred at s_r * t: inner cylinder at r_in = bore/2 (57.15 for KA045), axial width 10 mm (s_r +- 5); both side annuli from r_in to r_in + 10 (bearing + housings); the rotor housing in the arm frame (same place). Spar in P: strap 16 wide x 4 thick from J2 to the ring stator at angle c (lateral), underside = 2 + the max skin radius about the humerus axis at that angle over the clip poses (ENV in P). Ring points inside the body are the adduction failure mode: let the bench count them, and also report the share of poses lost to the ring alone.",
+  "sweep_params": "a1 within 15 deg of p*; branch; ring station s_r 170-250 mm; ring size (KA040 / 045 / 050); spar angle c and its height; J1 / J2 radii.",
+  "modelling_cost": "low",
+  "prior_art": "ARMin III / ArmeoPower (serially mounted ring bearing for humeral rotation); NESM-gamma (ring gears around the arm); the user's 2026-10-14 suggestion in REQUIREMENTS.md.",
+  "lenses": [
+   "biomimetic-girdle|hardware-unlocks"
+  ],
+  "t_ideated": "2026-10-15T17:21:09Z",
+  "source": "ideation B",
+  "status": "ideated"
+ },
+ {
+  "id": "acromion-pointer-arm-ctrack",
+  "name": "Acromion gimbal + arm-fixed skin-shaped C-track (2 DOF at the shoulder, axial rotation lower on the arm)",
+  "topology": "Scapula base -> J1: O20 hub, active R. Its axis a1 is fixed to the scapula and passes through GH; the hub sits on the lateral acromion top (default a1 = sdir(40,0)) -> L1 strap -> J2: O20 hub, active R. Its axis u2 passes through GH; this is an orthogonal gimbal by default (alpha12 = alpha23 = 90) -> L2: a short pointing yoke. Its frame follows the arm direction but not its axial rotation -> carriage, with a passive radial slide and a passive swivel about an axis parallel to the humeral axis -> rides an ARM-FIXED C-track at station s_t ~100 mm (deltoid insertion). The track is shaped to the arm's own skin at +4 mm and spans ~190 deg (anteromedial -> lateral -> posterolateral), open medially -> a track bracket merged into a shortened BOTTOM. Active joints: J1, J2, and the carriage's arc position on the track (the humeral rotation about the GH-elbow line). Passive: the radial slide and the swivel.",
+  "active_dof": 3,
+  "passive_dof": 2,
+  "dof_reasoning": "J1 and J2 point the humeral axis (2 DOF). The third active coordinate is where the carriage sits along the track, which equals the arm's rotation about its own GH-elbow axis relative to L2. It can be driven by a cable loop laid in the track groove and sensed by a magnetic strip. The track is non-circular because it follows the arm's skin, so the carriage needs a radial slide and a swivel. Both are fixed by the track geometry at every carriage position: they are set by closure, carry no load along their free direction, and cannot sag. Chain + arm therefore has exactly the arm's 3 DOF. Optional extra: let the carriage float +-8 mm along the arm (passive) so the arm end absorbs 2 of the 3 components of the real GH/handler translation.",
+  "description": "This is the user's own decomposition: two hubs form a clean gimbal at the shoulder, and humeral rotation gets its own joint lower on the arm. That joint is not a circular ring (a ring stands off a non-round arm: skin radius 38-73 mm around the humeral axis at s 90-120). It is an arm-fixed track that follows the arm's skin, so the long arc of the axial joint is arm-fixed metal over arm skin.\n- Rest: J1 sits on the bony lateral acromion top (2-5 mm skin spread in the scapula frame). J2 is behind the humeral head at GH level (posterior branch). The short yoke runs down the posterolateral deltoid to the carriage on the lateral arm ~100 mm below GH. The track wraps from the biceps edge over the anterolateral strip (2-4 mm spread) and the posterolateral strip (0.7-1.6 mm) to the triceps edge.\n- Overhead: the scapula-relative elevation peaks at ~128 deg, so the arm stays 10-25 deg (by a1 choice) from the gimbal poles. J2 swings to the posterior-superior side; track and yoke move with the arm. The J1 hub sits next to the deltoid where it bunches under the acromion.\n- Across the body: J2 moves over the top and back, and the carriage runs to one end of the track. The anterior track end is closest to the chest.\n- Behind the back: J2 moves front-lateral, and the carriage runs to the other end. The posterior track end faces the back.",
+  "why_better": "Skin-frame metal: scapula-fixed metal sits on the acromion, and arm-fixed metal (track, bracket, BOTTOM) sits over the arm's quiet lateral strips. Only L1, J2 and a short yoke move in a non-skin frame. The baseline has two 77-81 deg straps plus a floating hub.\nAxial range: the axial DOF no longer has to be built from three oblique hubs, so the shoulder pair can be a clean gimbal with its singular poles parked outside the scapula-relative workspace. Kinematic precheck over the 1432 functional poses: a1 = sdir(30,-10) keeps every pose >= 25 deg from both poles (fit clips 29 deg). sdir(40,0) keeps 14 deg (clips 17), sdir(50,10) keeps 10 deg (clips 12).\nThis tests the user's '2 at the shoulder + rotation farther down' idea head-on.",
+  "main_risk": "1. Axial travel. Kinematic precheck (orthogonal gimbal, carriage angle about the humeral axis): the 6 fit clips need only 93/116/138 deg of track for a1 = (30,-10)/(40,0)/(50,10). The functional workspace needs 311/335/353 deg, because its 90-165 deg of axial width at each direction adds to the gimbal's twist across directions. A medially open track cannot exceed ~200 deg, so expect high follow but reach capped around 50-65 %.\n2. The singularity-free pole sdir(30,-10) has no hub site: its +pole is inside the abducted arm and its -pole inside the trunk. J1 must therefore tilt to the acromion, trading margin.\n3. The yoke rides in the pointing frame over the deltoid while the arm rotates under it.\n4. BOTTOM occupies the lateral line (theta ~0, r 56-75 mm) from s ~52 down. A track at s 100 needs BOTTOM cut shorter (top at s ~115) and merged into the track bracket; otherwise the track must sit above BOTTOM's top (s 40-50, deltoid cap, 8-22 mm skin spread).\n5. Putting the track 'farther down' (s > 130) turns the yoke into a pointing-frame rib along the arm that must clear BOTTOM's swept tube: out of band.",
+  "unpowered_and_mvp2": "MVP1: J1 and J2 are O20 hubs on preloaded MR117 pairs. The carriage runs on 4 miniature V-rollers (MR63) on the track's bevelled edges, with a PTFE/needle radial slide and a pin swivel. The arm drives everything through the track; all passive coordinates are geometric, so nothing sags. Use a long carriage so it cannot cock under cuff shear. MVP2: J1 and J2 get cable drums in the hubs (remote motors, Bowden). The axial DOF gets a closed cable loop in the track groove clamped to the carriage (a curved linear drive). Sensing: magnetic encoders in J1/J2, and a magnetic strip along the track read by a Hall sensor on the carriage.",
+  "model_spec": "COMMON (bench frame): GH = origin. f = B.frames(i): Rs = f['S'][0] (scapula), Rh = f['H'][0]. A rest-mesh arm point p maps to Rh@p; a scapula-fixed point q maps to Rs@q; M = Rs.T@Rh maps arm vectors into the scapula frame.\nArm axes: e = unit(L['elbow']) = (-0.023,-0.986,0.164) (GH->elbow, 325 mm), l = (0.004,0.164,0.986) lateral, b = (-1,0.023,0) posterior. armpt(s,th,r) = s*e + r*(cos th*l + sin th*b), with th 0 lateral, +90 posterior, -90 anterior.\nScapula directions: sdir(lat,lon) = (-cos lat*sin lon, sin lat, cos lat*cos lon), with lon 0 lateral, +90 posterior, -90 anterior, 180 medial.\ncirc_int and tri_ok: numpy copies of pipeline/conformal/gpu/band_impl.py.\nR_env(s,th): max over all poses of the arm-skin radius about e within (s+-5, th+-3); use the ARMV vertices of B.skin(i) mapped by Rh.T.\nRAY FIT (sample with direction u in its member frame): per pose, scan rho downward from 260 mm in 4 mm steps (one B.dist call for all samples) to the first rho with dist < 2 mm, then refine with 3 bisections -> rho_need. Member height = max of rho_need over taken poses, after trimming the 10 % of poses that need the most lift (trimmed poses count as not taken).\nStraps: 14 mm wide, skin face sampled every 2 mm. O20 hub: disc r 10; the lower member's skin face sits at the fitted radius, the upper member's underside 3.15 mm higher.\nRun two passes: fit, then record. Report inband per group (scapula-fixed / moving / arm-fixed) so quiet-zone ballast cannot inflate the metal-centric score.\n\nGEOMETRY:\n- a1 = sdir(40,0). J1 hub on a1 at the fitted radius (~48-55). Its lower member is a 3 mm base plate running posteriorly toward the handler.\n- Per pose: d = M@e. Not taken if min(angle(d,a1), angle(d,-a1)) < 10 deg.\n- u2 = circ_int(a1, 90deg, d, 90deg, branch=-1) (posterior at rest). J2 = O20 hub on u2 (radius by RAY FIT). L1 = strap along the great circle a1->u2.\n- Pointing frame: r_ref = unit(u2-(u2.d)d), t_ref = d x r_ref. Axial angle: lm = M@l, q3 = atan2(lm.t_ref, lm.r_ref).\n- The carriage is fixed in the pointing frame at angle th_c0 about d. Its arm-frame angle is th_arm = wrap(th_c0 - q3). Choose th_c0 so the median th_arm over the clip frames equals the track centre (-15 deg).\n\nTRACK (arm-fixed, fitted once):\n- Centreline T(th) = s_t*e + (R_env(s_t,th)+4+1.5)*(cos th*l + sin th*b), for th in [-110,80], s_t = 100.\n- Section: 8 mm along the arm x 3 mm; sample 3 rows on the skin face at R_env+4.\n- Not taken if th_arm is outside [-103,73].\n- Carriage: block 24 (along the track) x 16 x 7 mm sitting on T(th_arm).\n- Yoke end: fixed in the pointing frame at station s_t, angle th_c0, radius r_y = max over the span of (R_env+4+3) + 7. Sample the radial-slide column (10x10 mm) between the carriage and the yoke end.\n- L2 yoke: strap from the J2 hub to the yoke end. Its samples are fixed in [r_ref, t_ref, d]; heights by RAY FIT.\n- Bracket: arm-fixed strap from T(0) down the lateral strip, replacing BOTTOM above s 115 (report part interference with the remaining BOTTOM: a 30x6.5 bar from arm_fit.json C_b along u_b).\n\nNOT TAKEN: singular, carriage off the span, contact (bench).\nGH translation is not in the bench (GH is fixed in the scapula frame). The radial slide and the optional along-arm float absorb it in reality.",
+  "sweep_params": "a1 lat 30-55, lon -15..+20 (singular margin vs a housable hub site); alpha12 70-110 and alpha23 70-100 (move J2 off the humeral 'equator'); branch +-1; track station s_t 45-130, plus one point at 250 for the user's 'farther down' extreme; track span centre -40..+20 and width 160-240 deg; th_c0; track gap 3-6 mm.",
+  "modelling_cost": "medium",
+  "prior_art": "ARMin III: 2-axis shoulder plus a semicircular guide for humeral rotation (Nef, Guidali, Riener 2009). MGA and CADEN-7 use open-ring humeral-rotation bearings. All of these rings are circular and ride in the pointing frame. I know of no arm-fixed, skin-shaped track with a radial+swivel carriage.",
+  "lenses": [
+   "distributed-dof"
+  ],
+  "t_ideated": "2026-10-15T17:21:09Z",
+  "source": "ideation D",
+  "status": "ideated"
+ },
+ {
+  "id": "scapular-race-j2-carriage",
+  "name": "Scapular race: J1 is a rail on the bony rim and J2 rides its carriage (the only way two GH-concurrent joints can overlap)",
+  "topology": "Scapula base carrying a fixed arc RAIL. J1 is an active R about a1 through GH; the rail is a circle of angular radius gamma around a1, laid on intrusion-free acromion / scapular-spine / clavicle-rim skin -> rolling carriage. The carriage is L1: there is no link -> J2: O20 hub mounted on the carriage, active R. Its axis is the carriage's own direction from GH, so alpha12 = gamma -> L2 strap, the only moving-frame link -> J3, active R. Default J3: the posterolateral septum barrel on its own arm cuff (see septum-barrel-arm-link). Option: a lateral O20 hub at s 5-30 plus a neck to BOTTOM.",
+  "active_dof": 3,
+  "passive_dof": 0,
+  "dof_reasoning": "Three revolutes with axes concurrent at GH. The rail is a revolute whose bearing is spread along a circle instead of sitting on its own axis, so it counts as one active joint (cable-drivable along the rail, sensable with a magnetic strip). The rollers only realise J1, so there is no passive coordinate and nothing can sag. For real GH/handler translation, add the user-approved passive slides at J3's cuff, outside the count.",
+  "description": "Two revolutes with axes through GH can never share a location: their hubs sit on their own axes, and two lines through GH meet only at GH. The rail breaks this, because a revolute's bearing can lie anywhere on a circle around its axis. So J1 becomes a 10 mm wide, 4 mm tall rail fixed to the base, lying ~4 mm over bony, intrusion-free rim. J2 sits on the rail carriage and always rides that quiet rim. The single crossing strap L2 runs from the carriage over the deltoid to J3.\n- Rest (precheck geometry): carriage on the posterior/top part of the rim, L2 down the posterior deltoid to the septum barrel.\n- Overhead and across the body: the carriage slides along the rim; the rail never moves.\n- Behind the back: the carriage goes to the anterior end.\n- Poses that would need J2 off the rail are not reachable.\nKinematic hint (also useful for the hub-only GPU family): in the scapula frame, the direction lat 30-40, lon -10..0 is the centre of the arm's workspace. Every arm-fixed hub stays 18-111 deg from it, so a 3R about it needs only 55-60 deg links (total ~115 deg vs the baseline's 77+81). Its pole lies inside the abducted arm, though, so only a race can use it without losing the max-abduction poses. (band_impl allows it: sdir(40,0) has no anterior component.)",
+  "why_better": "It deletes L1 entirely: the baseline's first 77-deg strap and its floating J2 stack are both gone, leaving one strap as the only moving metal. Intermediate frames have no quiet skin at all. I checked the half-angle frame slerp(S,H,0.5) over the shoulder cap: median skin spread 43 mm, vs 26 in the scapula frame and 30 in the arm frame. Deleting a moving link is therefore the most direct lever on in-band. The rail sits at constant radius over bone, so it is in band by construction.",
+  "main_risk": "Reach. Kinematic precheck: I required the used part of the rail to lie on trunk skin that the arm never enters (13-pose probe) with <= 20 mm skin-radius variation. That leaves at best ~45-50 % of the functional workspace. Two best configurations:\n- a1 = sdir(0,20), gamma 50, alpha23 80, branch +1, J3 septum barrel: J2 phi -104..+64, skin R 45-61 mm.\n- a1 = sdir(40,-100), gamma 70, alpha23 70, branch -1: phi 20..116.\nWithout the skin constraint the chain closes in 92-99 % of poses (a1 = sdir(40,0), gamma = alpha23 = 60), but J2 must circle ~280 deg, through the arm.\nSo this is probably a high-band, low-reach clip/overhead specialist. A constant-radius rail over 44-62 mm skin also varies its gap by up to 18 mm. (My intrusion filter is conservative: one probe pose was enough to veto a bin.)",
+  "unpowered_and_mvp2": "MVP1: carriage on 4-6 preloaded V-rollers (MR63/MR74) on a Ti rail with ground 90-deg edges; J2 and J3 are O20 hubs. No spare, nothing sags, rolling friction only. MVP2: J1 is driven by a cable loop in the rail groove clamped to the carriage (remote motor); J2 and J3 by hub drums. Sensing: magnetic strip + Hall on the carriage for J1, magnetic encoders for J2/J3.",
+  "model_spec": "COMMON (bench frame): GH = origin. f = B.frames(i): Rs = f['S'][0], Rh = f['H'][0]. A rest-mesh arm point p maps to Rh@p; a scapula-fixed point q maps to Rs@q; M = Rs.T@Rh.\nArm axes: e = unit(L['elbow']) = (-0.023,-0.986,0.164), l = (0.004,0.164,0.986), b = (-1,0.023,0). armpt(s,th,r) = s*e + r*(cos th*l + sin th*b) (th 0 lateral, +90 posterior).\nScapula directions: sdir(lat,lon) = (-cos lat*sin lon, sin lat, cos lat*cos lon) (lon 0 lateral, +90 posterior, -90 anterior).\ncirc_int and tri_ok: numpy copies of band_impl.py.\nR_env(s,th): max over poses of the arm-skin radius about e (ARMV vertices of B.skin(i) mapped by Rh.T).\nRAY FIT: per pose, scan rho downward from 260 mm in 4 mm steps to the first rho with B.dist < 2 mm, then 3 bisections -> rho_need. Height = max over taken poses after trimming the worst 10 % of poses (those count as not taken).\nStraps: 14 mm wide, skin face sampled every 2 mm. O20 hub: disc r 10; upper member +3.15 mm. Two passes. Report inband per group.\n\nGEOMETRY:\n- a1 = sdir(0,20). m = unit(y - (y.a1)a1) (phi = 0 up), n = a1 x m (phi = +90 posterior).\n- Rail = {cos g*a1 + sin g*(cos phi*m + sin phi*n)}, g = 50 deg, phi in [phi_lo,phi_hi] = [-115,75] (trim to the used phi range after pass 1).\n- J3 axis: w = unit(armpt(150,35,R_env(150,35)+9)) (septum barrel; the precheck used th = 20, 35 clears BOTTOM). Option: w = unit(armpt(30,0,80)) with an O20 hub plus a neck strap down the lateral strip to armpt(65,0,R_env+4). alpha23 = 80.\n- Per pose: u3 = M@w. Require tri_ok(a1,u3,g,a23,8deg). u2 = circ_int(a1,g,u3,a23,+1). phi = atan2(u2.n, u2.m). Not taken if phi is outside [phi_lo+8, phi_hi-8] (carriage +-8 deg).\n\nMETAL:\n- Rail: scapula-fixed band 10 mm wide along the arc, sampled every 3 deg x 3 rows. Skin face at rho_r - 4, where rho_r = 6 + RAY FIT max over taken poses of the arc samples.\n- Carriage: 26 x 22 x 8 mm centred at u2*rho_r, sharing the rail's skin face.\n- J2: O20 hub on the carriage; L2's underside near J2 at rho_r+4.15.\n- L2: strap along the great circle u2->u3, sampled in L2's frame [u2, unit(u3-(u3.u2)u2), cross], heights by RAY FIT.\n- J3: barrel as in septum-barrel-arm-link (cylinder r 7, length 24 along w, proximal end 2 mm over the skin) or the O20 hub + neck.\n\nNOT TAKEN: tri_ok/closure fail, phi off the rail, contact.",
+  "sweep_params": "Race axis a1: lat -10..50, lon -110..+40. gamma 40-80. alpha23 50-100. Rail arc limits phi_lo/phi_hi. Branch. J3 choice (septum barrel s 120-200 / th 25-40, or lateral hub s 5-30 + neck). Trim fraction 0-20 %.",
+  "modelling_cost": "low",
+  "prior_art": "Same curved-guide principle as ARMin III's humeral-rotation guide (Nef et al. 2009), and as telescope alt-az races and turntable bearings. I know of no shoulder exo that puts the first joint on a scapula-fixed race carrying the second hub.",
+  "lenses": [
+   "distributed-dof"
+  ],
+  "t_ideated": "2026-10-15T17:21:09Z",
+  "source": "ideation D",
+  "status": "ideated"
+ },
+ {
+  "id": "septum-barrel-arm-link",
+  "name": "Septum barrel: near-axial J3 lying along the quietest arm strip on its own cuff (the humerus is the link to BOTTOM)",
+  "topology": "Scapula base -> J1: O20 hub, active R, a1 = sdir(55,15) on the acromion top -> L1 strap -> J2: O20 hub, active R, floating -> L2 strap -> J3: BARREL hinge, active R. Its axis passes through GH and is aimed down the posterolateral septum strip, 17-24 deg off the humeral axis, so the barrel lies ALONG the arm with its axis nearly tangent to the skin -> a separate proximal arm cuff (saddle) at s 120-180, th 30-40, beside BOTTOM. No neck: the humerus itself is the rigid link between this cuff and the user's cuff/BOTTOM.",
+  "active_dof": 3,
+  "passive_dof": 0,
+  "dof_reasoning": "Spherical 3R with all axes through GH: exactly 3 active revolutes and no passive coordinate. The proximal cuff is a second skin attachment, not a joint. For real GH/handler translation, the user-approved passive slides (along-arm + tangential) go between the barrel cuff and the arm, outside the count.",
+  "description": "Joints sit where the rig's skin moves least.\n- J1 sits on the bony acromion top (2-5 mm skin spread in the scapula frame).\n- J3 sits on the posterolateral intermuscular-septum strip. In the arm frame, th 0..45 deg and s 120-240 mm from GH, the material-point radial spread over 13 poses is only 0.7-1.6 mm, the quietest skin on the body model (the anterolateral strip, -45..0, is 2-4 mm).\n- An axis through GH can only be tangent to skin along the arm, so J3 there is a barrel: two MR117 back-to-back, OD 14, 24 mm long, lying along the arm, rather than a hub standing 12.25 mm off it.\nMetal by pose:\n- Rest: barrel on the posterolateral arm ~150 mm below GH beside BOTTOM; L2 climbs the posterior deltoid to J2 behind the shoulder; L1 crosses to the acromion.\n- Overhead: the barrel faces back/up with the raised arm; J2 sits over the posterior-superior scapula; L1 short over the top.\n- Across the body: the barrel faces back/out; L2 wraps over the posterior deltoid.\n- Behind the back: the barrel faces out/up; J2 sits lateral of the acromion.",
+  "why_better": "1. The arm-end neck disappears. On the r20 picks, every evaluator part collision was 'link 2 - neck', and the hub-arm-end neck caused most of R16's part interference.\n2. Arm-fixed metal sits only on the quietest strip.\n3. The barrel's skin face is 2-12 mm along its length, instead of a 12.25 mm hub stack plus a neck.\nIt is a direct test of whether J3 belongs in the quiet strip. Today the GPU picks put it high on the deltoid at 69-71 deg off the arm axis, where arm-frame skin spread is 8-22 mm.",
+  "main_risk": "1. J3 is now nearly the humeral axis, so q3 carries most of the axial rotation (+-75 deg at a given direction). L2 and J2 swing around the deltoid cap relative to the arm skin, and the cap is 50-82 mm from the humeral axis depending on azimuth.\n2. L1 gets long. Kinematic band from the acromion to the septum point (s150, th 20) is 55-150 deg (p5-p95), so alpha12 ~100 and alpha23 ~50. With the central axis sdir(35,-5) the band is 29-128 deg (-> 75/55).\n3. A GH-aimed line converges on the humeral axis proximally, so the barrel must be short: its underside rises ~10 mm over 24 mm.\n4. A second cuff adds skin pressure (R11), and the barrel cuff must clear BOTTOM (30 mm wide at th ~0, r 56-75 mm).",
+  "unpowered_and_mvp2": "MVP1: J1 and J2 are O20 hubs. J3 is two MR117 in the barrel sleeve on an integral Ti pin of the cuff. No spare joint, rolling friction. MVP2: J3 gets a cable drum turned on the barrel sleeve, with the Bowden running down the arm next to BOTTOM (easy routing). J1 and J2 get hub drums. Magnetic encoder at the barrel's distal end.",
+  "model_spec": "COMMON (bench frame): GH = origin. f = B.frames(i): Rs = f['S'][0], Rh = f['H'][0]. Arm point p maps to Rh@p; scapula point q maps to Rs@q; M = Rs.T@Rh.\nArm axes: e = unit(L['elbow']) = (-0.023,-0.986,0.164), l = (0.004,0.164,0.986), b = (-1,0.023,0). armpt(s,th,r) = s*e + r*(cos th*l + sin th*b).\nScapula directions: sdir(lat,lon) = (-cos lat*sin lon, sin lat, cos lat*cos lon).\ncirc_int and tri_ok from band_impl.py.\nR_env(s,th): max over poses of the arm-skin radius about e (ARMV vertices of B.skin(i) mapped by Rh.T).\nRAY FIT: per pose, scan rho downward from 260 mm in 4 mm steps to the first rho with B.dist < 2, refine -> rho_need. Height = max over taken poses after a 10 % trim. Straps 14 mm wide, sampled every 2 mm; O20 hub = disc r 10, upper member +3.15. Two passes. Report inband per group.\n\nJ3 / BARREL:\n- Station s_b = 150, th_b = 35. Barrel centre c = armpt(s_b, th_b, R_env(s_b,th_b)+9+k). Raise k until the proximal end (c - 12*w) clears the skin by 2 mm.\n- w = unit(c) is J3's arm-fixed axis.\n- Barrel: cylinder r 7, length 24 along w; sample its skin-facing half-surface as 3 lines.\n- Cuff saddle: arm-fixed, 40 (around) x 50 (along) x 3 mm under the barrel at R_env+2 (liner). Report it as group 'cuff'.\n- Check the barrel/cuff against BOTTOM: a 30 x 6.5 bar from pipeline/full-exo/arm_fit.json C_b along u_b, 265 mm. Require > 2 mm clearance.\n\nCHAIN:\n- a1 = sdir(55,15), alpha12 = 100, alpha23 = 50 (alternative: a1 = sdir(35,-5) with 75/55).\n- Per pose: u3 = M@w. Not taken unless tri_ok(a1,u3,a12,a23,8deg). u2 = circ_int(a1,a12,u3,a23,branch).\n- O20 hubs at a1 and u2 (RAY FIT radius).\n- L1: strap a1->u2.\n- L2: strap from u2 to the barrel's proximal end, attached to the sleeve. Its samples are fixed in L2's frame [u3, unit(u2-(u2.u3)u3), cross], which rotates with J2 and J3.\n- RAY FIT for L1, L2 and the J2 hub.\n\nNOT TAKEN: closure/tri_ok fail, contact, barrel vs BOTTOM.",
+  "sweep_params": "Barrel station s_b 110-210. th_b 25-45 (beside BOTTOM) or -40..-20 (anterolateral strip). Barrel length 18-30. J1 site: acromion sdir(55,15), central sdir(35,-5) or posterior-superior sdir(40,95). alpha12 60-110, alpha23 40-70. Branch.",
+  "modelling_cost": "low",
+  "prior_art": "Exos usually do humeral rotation with a ring or arc around the upper arm (ARMin III, CADEN-7, MGA). I know of no design that uses a GH-aimed barrel lying along the arm as the last joint of a spherical chain, nor one that removes the arm-end neck by treating the humerus as the link between two cuffs.",
+  "lenses": [
+   "distributed-dof"
+  ],
+  "t_ideated": "2026-10-15T17:21:09Z",
+  "source": "ideation D",
+  "status": "ideated"
+ },
+ {
+  "id": "scapular-skate-remote-j1",
+  "name": "Scapular skate: J1 is a puck gliding on a flat plate on the back of the shoulder (remote-centre rotation, passive in-plane slip)",
+  "topology": "Scapula base = a flat Ti plate (3 mm, ~110 x 90 mm), parallel to the posterior scapular skin plane (fitted normal ~sdir(27,75), ~59 mm behind GH) -> SKATE: a puck on a ball cage under a retaining lip. It has 3 planar coordinates: the in-plane rotation is the active J1 (about the plate normal through GH, a remote axis with no hub), and the 2 in-plane translations are passive -> J2: O20 hub on the puck, active R. Its axis runs from GH through the puck point and is tilted ~55 deg to the plate -> L2 strap -> J3: active R, either an O20 hub at armpt(30,40,~80) plus a neck to BOTTOM, or the septum barrel.",
+  "active_dof": 3,
+  "passive_dof": 2,
+  "dof_reasoning": "The puck has 3 planar DOF on the plate. J2's axis must pass through GH, because L2, J3 and the arm are all concurrent at GH. That imposes 2 conditions on the puck, so its two translations are set by closure and only the in-plane rotation remains: J1 = rotation about the plate normal through GH, active (driven and sensed). The passive slides have no free direction once the chain closes, so nothing sags. In the real world they move only with the handler slip / GH translation in the scapular plane, which they absorb. A concurrent chain cannot do that: R10 is design-independent for spherical chains, and is 15 mm today vs 4 allowed.",
+  "description": "A rotation about the normal of a flat region maps that plane onto itself. So everything J1 carries on the plate (puck, J2's base) stays at constant height over the flat back of the shoulder, whatever q1 is. There is no L1 swinging through the air and no J1 hub on the shoulder top.\n- Rest: the puck sits on the infraspinatus ~84 mm from the foot of GH on the plate, J2 tilted on it, L2 down the posterior deltoid to J3 on the posterolateral upper arm.\n- Overhead: the puck rotates along its arc toward the spine/upper plate; L2 shortens over the top-back.\n- Across the body: the puck moves toward the medial/upper part of the plate.\n- Behind the back: the puck swings toward the lateral/lower edge; this is where it may leave the flat region.\nThe plate is base metal over the scapula's quiet skin (0.2-2.4 mm Lagrangian spread at lat 30-60, lon 60-120).",
+  "why_better": "1. The links are flat by geometry: the J1 'link' cannot leave the skin plane.\n2. The 12.25 mm J1 stack disappears.\n3. A built-in R10 absorber: none of the concurrent chains can fix the 15 mm handler-slip misalignment without a passive element, and here the passive element is the joint itself.\n4. Total moving metal is one strap (L2) plus the J2 hub.",
+  "main_risk": "1. The posterior skin is less flat and less scapula-fixed than hoped. A plane fit over 219 x 165 mm has 9.6 mm rms (31 mm max), and those trunk points drift 12 mm (median; 29 mm p90) from the plane across the 13 probe poses. So keep the plate to ~110 x 90 mm near lat 0-45, lon 60-120.\n2. The kinematic band from the plate normal to the s30 posterolateral hub is 35-145 deg, so alpha12 ~55 (J2 84 mm from the foot point) and alpha23 ~90. The puck sweeps an 84 mm-radius arc and leaves the plate for large q1.\n3. J2's hub stands 55 deg tilted on the puck, so one rim is ~8 mm higher.\n4. MVP2 has to drive a remote-centre rotation by cable, which is awkward.",
+  "unpowered_and_mvp2": "MVP1: puck on a ball cage (or PTFE pads) captured under the plate lip, with low friction. The arm drives the puck through L2 and closure fixes its path. Gravity on the puck's slip is carried by the closure; check friction in the slip direction under cuff load (R17). MVP2: two antagonistic Bowden cables pull the puck along its arc (anchored at the plate edges, acting through a pulley-free cable saddle on the puck). Puck pose (x, y, theta) is sensed by two planar optical/magnetic sensors, with theta as the joint value. The slip stays passive and unpowered.",
+  "model_spec": "COMMON (bench frame): GH = origin. f = B.frames(i): Rs = f['S'][0], Rh = f['H'][0]. Arm point p maps to Rh@p; scapula point q maps to Rs@q; M = Rs.T@Rh.\nArm axes: e = unit(L['elbow']) = (-0.023,-0.986,0.164), l = (0.004,0.164,0.986), b = (-1,0.023,0). armpt(s,th,r) = s*e + r*(cos th*l + sin th*b).\nScapula directions: sdir(lat,lon) = (-cos lat*sin lon, sin lat, cos lat*cos lon).\ncirc_int and tri_ok from band_impl.py. R_env(s,th) from the ARMV skin in the arm frame.\nRAY FIT: scan rho downward from 260 mm in 4 mm steps to the first rho with B.dist < 2, refine -> rho_need. Height = max over taken poses after a 10 % trim. Straps 14 mm wide, sampled every 2 mm; O20 hub = disc r 10, +3.15. Two passes. Report inband per group.\n\nPLATE:\n- Map the non-ARMV skin vertices of a rest-pose B.skin(i) into the scapula frame with Rs.T. Keep lat 0-45, lon 60-120. Fit a plane by SVD: normal n_p (posterior), offset h (expect ~59 mm), foot point F = h*n_p.\n- a1 = n_p.\n- Plate: 110 x 90 mm outline centred on the fitted patch, 3 mm thick, parallel to the plane at offset h_p = 2 + max over all poses of (the skin's height above the plane within the outline). Sample its skin face (scapula-fixed).\n\nCHAIN:\n- alpha12 = 55, alpha23 = 90, w = unit(armpt(30,40,80)).\n- Per pose: u3 = M@w. Not taken unless tri_ok(a1,u3,55,90,8deg).\n- u2 = circ_int(a1,55deg,u3,90deg,branch). Puck point P = (h_p+3)/(u2.n_p)*u2 (where J2's axis pierces the puck top). Not taken if P is closer than 25 mm to the plate outline.\n\nMETAL:\n- Puck: disc r 25, 6 mm tall; underside = plate top + 0.5.\n- J2: O20 hub with axis u2 on the puck. Sample its disc underside, which is tilted.\n- L2: strap from the J2 hub to J3, in L2's frame, RAY FIT.\n- J3: O20 hub on u3 (RAY FIT) + neck: arm-fixed strap down the posterolateral/lateral strip to armpt(65,0,R_env+4) (BOTTOM's top).\n\nNOT TAKEN: closure, puck off the plate, contact.\nThe bench has no GH translation; to show the slip benefit, separately perturb GH by 10-15 mm in-plane and confirm the puck stays on the plate.",
+  "sweep_params": "Plate patch centre (lat 0-40, lon 60-120) and size (80-130 mm). alpha12 40-60 (puck arc radius h*tan(alpha12)). alpha23 70-110. J3 site (s 5-40, th 0-45) or septum barrel. Branch. Plate offset margin.",
+  "modelling_cost": "medium",
+  "prior_art": "Passive scapular translation stages in shoulder exos are used to follow the girdle (e.g. Harmony's shoulder girdle mechanism; self-aligning designs after Schiele & van der Helm 2006, Stienen et al. 2009 Dampace). Using a planar skate as a remote-centre first joint, with its slip as the closure, is not known to me.",
+  "lenses": [
+   "distributed-dof"
+  ],
+  "t_ideated": "2026-10-15T17:21:09Z",
+  "source": "ideation D",
+  "status": "ideated"
+ },
+ {
+  "id": "skin-normal-hubs-selfaligning",
+  "name": "Skin-normal hubs + passive cuff translation stage (non-concurrent 3R placed on the flattest quiet seats)",
+  "topology": "Scapula base -> J1: O20 hub, active R. Its axis is the skin NORMAL at the acromion seat, not through GH; the line passes ~5-20 mm from GH -> L1 -> J2: O20 hub, active R. Its axis is the skin normal at its home seat on the posterior-superior zone -> L2 -> J3: active R, either a septum barrel or a lateral hub with axis through GH -> passive XYZ translation stage (along the arm on a short rail merged into BOTTOM's top, tangential, radial; +-25 mm) -> arm cuff/BOTTOM.",
+  "active_dof": 3,
+  "passive_dof": 3,
+  "dof_reasoning": "Orientation is carried by the three active revolutes; only their directions matter for orientation. Their lines do not meet at GH, so the chain end is displaced from the arm attachment by a pose-dependent translation, and the 3 passive slides take exactly that displacement. Chain + stage has 6 DOF for the arm's 6 equations (3 rotations about the human GH plus its translation): determinate, no spare, closed through the arm's own joint. The same stage absorbs the handler slip and GH translation (R10).",
+  "description": "Each hub stands square on its seat: the 12.25 mm stack is normal to the skin. Seats are chosen purely by quietness and flatness: J1 on the bony acromion, J2's home on the posterior-superior zone (0.2-2.4 mm spread). A GH-radial hub on sloping skin sits tilted, and an O20 rim then rises 10*sin(tilt), i.e. 5-8 mm on the 20-30 deg slopes of the posterior shoulder; the stack being normal removes that.\n- Rest: J1 flat on the acromion, J2 flat on the supraspinous area, L2 down the posterior deltoid to J3, stage at BOTTOM's top.\n- Overhead / across the body / behind the back: as for a 3R with these axis directions, plus the stage sliding by the offset-induced error (expected 10-60 mm).",
+  "why_better": "1. A small direct in-band gain from flat hub seats.\n2. The structural point: it is the one concurrent-axis escape that keeps 3 active joints and gets R10 (handler slip, 15 mm today, independent of design for any GH-concurrent chain) under control by design, with the user-approved passive cuff slides as part of the kinematics rather than an afterthought.\n3. Seat choice is freed from the GH-radial constraint.",
+  "main_risk": "1. Stage travel and metal: the stage moves ~sum of 2*d_k*sin(q_k/2). Axis offsets of 10-20 mm over 100-150 deg swings give 30-60 mm, and a 3-axis stage on the arm is heavy and tall.\n2. The radial slide changes the arm-end height.\n3. The bench has GH fixed to the scapula, so it shows only the cost, not the R10 benefit.\n4. The skin normals over the shoulder cap pass near GH anyway, so the in-band gain may be small.\nHonest expectation: a modest bench score, valuable mainly for R10.",
+  "unpowered_and_mvp2": "MVP1: O20 hubs. Stage = three crossed miniature ball slides (7 mm rails) or the user's passive cuff slides. Free, and positioned by the arm through closure; check that gravity on the stage's vertical axis does not load the arm (R17: <= 5 N at the cuff). MVP2: the three hubs get cable drums; the stage is never powered or sensed.",
+  "model_spec": "COMMON (bench frame): GH = origin. f = B.frames(i): Rs = f['S'][0], Rh = f['H'][0]. Arm point p maps to Rh@p; scapula point q maps to Rs@q; M = Rs.T@Rh.\nArm axes: e = unit(L['elbow']) = (-0.023,-0.986,0.164), l = (0.004,0.164,0.986), b = (-1,0.023,0). armpt(s,th,r) = s*e + r*(cos th*l + sin th*b).\nScapula directions: sdir(lat,lon) = (-cos lat*sin lon, sin lat, cos lat*cos lon).\nR_env from the ARMV skin. RAY FIT: scan rho downward from 260 mm in 4 mm steps to the first rho with B.dist < 2 -> rho_need; 10 % trim. O20 hub = disc r 10, +3.15. Straps 14 mm wide, sampled every 2 mm. Two passes. Report inband per group.\n\nSEATS (rest pose, scapula frame):\n- J1: P1 = skin point along sdir(55,15) + 2 mm; n1 = mean outward face normal within 10 mm of it.\n- J2 home: P2 = skin along sdir(40,95) + 2; n2 likewise.\n- J3: axis line through GH with direction w = unit(armpt(30,40,80)) (hub at its RAY FIT radius), or the septum barrel.\n\nORIENTATION IK:\n- Directions (n1, n2, w) with q = 0 at the rest pose.\n- Solve R(n1,q1) R(R(n1,q1)n2... i.e. the standard product R(n1,q1)*R(n2,q2)*R(w,q3) = M*M0^-1 (M0 = the rest pose's M) with Paden-Kahan subproblems 2 then 1, or scipy least_squares warm-started from the previous pose. Keep the branch continuous from home.\n- Not taken if the Jacobian condition is > 50 (singular).\n\nPOSITION FK:\n- J2 line = rotate (P2, n2) about line (P1, n1) by q1.\n- J3 attachment point A_chain = the member point rotated about the J2 line by q2, and so on.\n- Arm attachment A_arm = M@armpt(65,0,R_env+4).\n- Delta = A_chain - A_arm in the arm frame [e, tangential, radial]. Not taken if any |component| > 25 mm (stage travel).\n\nMETAL: hubs as O20 discs on their lines at their seats (moving with their members); straps between hub centres (RAY FIT in member frames); stage block 30 x 30 x 10 mm (arm-fixed) at A_arm. Also report the stage displacement distribution.",
+  "sweep_params": "Seat locations for J1 (acromion top, lateral acromion) and J2 (posterior-superior lat 30-55, lon 70-120). Blend between skin normal and GH-radial direction (0..1; 0 = the spherical chain). Stage travel limit 15-35 mm. J3 choice.",
+  "modelling_cost": "medium",
+  "prior_art": "Self-aligning exoskeleton axes through decoupling of rotations and translations: Dampace (Stienen et al. 2009); kinematic compatibility (Schiele & van der Helm 2006); kinetostatic self-alignment (Cempini et al. 2013); ABLE and Harmony shoulder girdle mechanisms. None placed the hubs by skin flatness/quietness.",
+  "lenses": [
+   "distributed-dof"
+  ],
+  "t_ideated": "2026-10-15T17:21:09Z",
+  "source": "ideation D",
+  "status": "ideated"
+ },
+ {
+  "id": "clavicular-front-route",
+  "name": "Front route: J1 on the bony acromio-clavicular front, crossing the anterior shoulder to the anterolateral strip (short links; the GPU never looked here)",
+  "topology": "Scapula base + a scapula-fixed bridge strap from the handler over the acromion top to the front seat -> J1: O20 hub, active R, a1 = sdir(40,-100) over the AC joint / lateral clavicle -> L1 (alpha12 ~60) -> J2: O20 hub, active R, floating in front of / over the top of the shoulder -> L2 (alpha23 ~60) -> J3: active R, an O20 hub on the anterolateral upper arm at armpt(30,-40,~76) plus a neck down the anterolateral strip (th -45..0) to BOTTOM's top. Option: an anterolateral septum barrel at s 150, th -30.",
+  "active_dof": 3,
+  "passive_dof": 0,
+  "dof_reasoning": "A spherical 3R: three active revolutes, all through GH, no passive coordinate. The bridge is part of the scapula-fixed base. Handle GH/handler translation with the usual passive cuff slides, outside the count.",
+  "description": "Most of the functional workspace is forward (planes 30-150). This route puts the scapula anchor near the centre of that forward motion, on bone (acromion front / clavicle), and lands J3 on the anterolateral arm strip (2-4 mm spread).\n- Rest: J1 in front of the acromion, J2 over the anterolateral deltoid, J3 high on the anterolateral arm, neck down the strip, bridge over the acromion.\n- Overhead (scaption/flexion): the chain folds over the front-top of the shoulder with the two links overlapping. It folds rather than stretches, with an 8 deg fold margin.\n- Across the body: J1 is closest to the arm/hand.\n- Behind the back: the chain stretches over the front-lateral shoulder.",
+  "why_better": "Kinematic band from AC-front sdir(40,-100) to the s30 anterolateral point is 21-115 deg over the workspace (21-110 on the clips). So alpha12 = alpha23 = 60 covers ~95 % of poses at 8 deg singular margins, with total link arc 120 deg vs the baseline's 158 (~25 % less moving metal). The clavicle-lateral seat sdir(30,-80) gives 17-102 (-> 55/55). This region is unexplored: band_impl rejects any J1 with an anterior component > 0.15 (b_ant_max) because there was no back anchor, and the scapula-fixed bridge over the acromion provides one.",
+  "main_risk": "1. The front seat is not as quiet as the back: scapula-frame skin at lat 30-45, lon -90..-120 has 8-11 mm spread, and the arm/hand reaches it in 8-38 % of the probe poses (across the body, comb hair). Across-body reach may collapse.\n2. J2 floats over the anterior deltoid / biceps root (arm-frame spread 10-15 mm).\n3. The bridge adds ~80-100 mm of base strap (in band, but mass).\n4. The front of the shoulder is where the shoulder-pad cover and clothing straps go.",
+  "unpowered_and_mvp2": "MVP1: three O20 hubs, rolling, no spare. MVP2: hub drums, with Bowdens routed from the back over the bridge.",
+  "model_spec": "COMMON (bench frame): GH = origin. f = B.frames(i): Rs = f['S'][0], Rh = f['H'][0]. Arm point p maps to Rh@p; scapula point q maps to Rs@q; M = Rs.T@Rh.\nArm axes: e = unit(L['elbow']) = (-0.023,-0.986,0.164), l = (0.004,0.164,0.986), b = (-1,0.023,0). armpt(s,th,r) = s*e + r*(cos th*l + sin th*b).\nScapula directions: sdir(lat,lon) = (-cos lat*sin lon, sin lat, cos lat*cos lon).\ncirc_int and tri_ok from band_impl.py. R_env from the ARMV skin.\nRAY FIT: scan rho downward from 260 mm in 4 mm steps to the first rho with B.dist < 2 -> rho_need; 10 % trim. Straps 14 mm wide, sampled every 2 mm; O20 hub = disc r 10, +3.15. Two passes. Report inband per group.\n\nCHAIN:\n- a1 = sdir(40,-100), w = unit(armpt(30,-40,76)), alpha12 = alpha23 = 60.\n- Per pose: u3 = M@w. Not taken unless tri_ok(a1,u3,60deg,60deg,8deg).\n- u2 = circ_int(a1,60deg,u3,60deg,branch); pick the branch that puts J2 outside the arm at rest.\n\nMETAL:\n- O20 hubs on a1, u2, u3, each at its RAY FIT radius.\n- L1 and L2: straps on the great circles a1->u2 and u2->u3, sampled in their link frames, RAY FIT.\n- Base bridge (scapula-fixed): strap 14 x 3 from sdir(45,90) (handler side) via sdir(65,20) to the J1 seat; heights = RAY FIT max over poses.\n- Neck (arm-fixed): strap from the J3 hub down armpt(s,-30,R_env+4) to s = 65, then laterally to armpt(65,0,R_env+4) (BOTTOM's top).\n\nNOT TAKEN: closure/tri_ok fail, contact.",
+  "sweep_params": "J1 seat: AC-front sdir(35-45,-90..-110), clavicle-lateral sdir(25-35,-70..-90), supraclavicular sdir(45-55,-130..-150) (needs alpha ~95/55). alpha12/alpha23 50-100. J3: s 5-40, th -60..-10, or an anterolateral barrel. Branch.",
+  "modelling_cost": "low",
+  "prior_art": "Shoulder exos with the first actuator in front of or above the shoulder (e.g. ARMin's front-mounted axes on a fixed frame; the Harmony shoulder). On a scapula-riding base with a back anchor, this route was excluded from our own search by b_ant_max = 0.15.",
+  "lenses": [
+   "distributed-dof"
+  ],
+  "t_ideated": "2026-10-15T17:21:09Z",
+  "source": "ideation D",
+  "status": "ideated"
+ },
+ {
+  "id": "scapular-five-bar-twist",
+  "name": "Scapular five-bar + twist: both pointing joints are scapula-fixed hubs on the two quietest seats (bold)",
+  "topology": "Scapula base with TWO fixed active hubs: A on the acromion top, sdir(55,15); B on the posterior-superior zone, sdir(40,100) -> proximal straps L_A (alpha_A) and L_B (alpha_B) -> passive elbow hubs E_A and E_B -> distal straps D_A (beta_A) and D_B (beta_B) -> these meet at C, an arm-fixed site at armpt(30,0,~80) with a stacked double O20 hub. At C, the D_A-D_B joint is passive and the D_B-arm joint is the active twist about GH-C. All axes pass through GH: a spherical 2-DOF five-bar plus a coaxial twist, ending in a neck to BOTTOM.",
+  "active_dof": 3,
+  "passive_dof": 3,
+  "dof_reasoning": "A spherical five-bar (5 links, 5 revolutes) has mobility 2. With both base joints active, it fixes the direction of GH-C on the arm, and the coaxial twist adds the rotation about GH-C: 3 active in total. The two elbows and the coupler pivot are fixed by the five-bar closure for given A and B (each leg's branch is chosen once), so there is no undriven coordinate and nothing sags. Joint count is 6, more than the user would like.",
+  "description": "Both pointing actuators and their hubs are scapula-fixed on the quietest seats (acromion top 2-5 mm, posterior-superior 0.2-2.4 mm). The four straps converge on C on the upper lateral arm.\n- Rest: leg A runs down the lateral shoulder, leg B over the posterior deltoid, C on the lateral deltoid with the neck to BOTTOM.\n- Overhead: both legs fold over the top-back as C rises.\n- Across the body: leg B stretches; leg A folds over the top.\n- Behind the back: leg A stretches forward-lateral; leg B folds.",
+  "why_better": "1. MVP2 routing is simplest of all concepts: the two pointing motors' cables end on the base, and no cable crosses a moving joint except the twist.\n2. Two load paths: lower tilt moments per bearing (relevant for MVP2's ~10 N.m, which already exceeds a single MR117 pair's C0 if carried as tilt).\n3. Singularities move: a five-bar fails at leg fold/stretch or when the distal arms align at C, not when three serial axes become coplanar. This may free regions of the workspace the serial 3R loses.",
+  "main_risk": "1. Twice the moving metal. Kinematic bands: acromion -> C is 25-138 deg (-> alpha_A = beta_A = 72); posterior -> C is 57-162 deg (-> alpha_B ~110, beta_B ~55). That is ~310 deg of straps crossing the shoulder vs 158 in the baseline, so in-band will probably drop.\n2. Reach is the intersection of both legs' reach.\n3. Four straps converge on the deltoid at C, where the bulge is.\n4. Six joints vs the user's wish for 3.",
+  "unpowered_and_mvp2": "MVP1: six bearing sets (C stacked: two MR117 pairs), rolling. Closure holds all the passive joints; leg weight is shared. MVP2: A and B get hub drums with base-fixed Bowden stops; the twist at C gets a drum on the arm. Magnetic encoders at A, B and C.",
+  "model_spec": "COMMON (bench frame): GH = origin. f = B.frames(i): Rs = f['S'][0], Rh = f['H'][0]. Arm point p maps to Rh@p; scapula point q maps to Rs@q; M = Rs.T@Rh.\nArm axes: e = unit(L['elbow']) = (-0.023,-0.986,0.164), l = (0.004,0.164,0.986), b = (-1,0.023,0). armpt(s,th,r) = s*e + r*(cos th*l + sin th*b).\nScapula directions: sdir(lat,lon) = (-cos lat*sin lon, sin lat, cos lat*cos lon).\ncirc_int and tri_ok from band_impl.py. R_env from the ARMV skin.\nRAY FIT: scan rho downward from 260 mm in 4 mm steps to the first rho with B.dist < 2 -> rho_need; 10 % trim. Straps 14 mm wide, sampled every 2 mm; O20 hub = disc r 10, +3.15. Two passes. Report inband per group.\n\nCHAIN:\n- uA = sdir(55,15), uB = sdir(40,100), w = unit(armpt(30,0,80)).\n- alpha_A = beta_A = 72, alpha_B = 110, beta_B = 55.\n- Per pose: uC = M@w.\n- E_A = circ_int(uA,alpha_A,uC,beta_A,sA), E_B = circ_int(uB,alpha_B,uC,beta_B,sB). Fix sA and sB at the rest pose so both elbows are outside the arm's path.\n- Valid only if both legs pass tri_ok (8 deg), and the transmission angle at C is within [20,160] deg (angle between the tangents at C of the arcs C->E_A and C->E_B; outside it is a five-bar singularity). Otherwise not taken.\n- Twist angle (for the report): rotation of M@l about uC relative to D_B's frame.\n\nMETAL:\n- Base hubs at uA and uB (scapula-fixed), elbow hubs at E_A and E_B, and the C hub stacked twice (2 x 3.15 mm).\n- Four straps along their great circles, each sampled in its own link frame: L_A in [uA,E_A], D_A in [E_A,uC], L_B in [uB,E_B], D_B in [E_B,uC]. RAY FIT for each.\n- Neck: from C down the lateral strip to armpt(65,0,R_env+4).\n\nNOT TAKEN: leg closure, transmission angle, contact.",
+  "sweep_params": "Base seats A (acromion / lateral acromion) and B (posterior-superior lat 25-55, lon 70-130). alpha_A, beta_A, alpha_B, beta_B 40-120. Leg branches. C site (s 5-40, th -20..40). Transmission-angle limit.",
+  "modelling_cost": "medium",
+  "prior_art": "Spherical parallel manipulators: Gosselin's spherical five-bar and the Agile Eye (Gosselin & Hamel 1994). Spherical-parallel shoulder exoskeleton prototypes exist in the rehabilitation literature, typically with ground-mounted bases, not a scapula-riding one.",
+  "lenses": [
+   "distributed-dof"
+  ],
+  "t_ideated": "2026-10-15T17:21:09Z",
+  "source": "ideation D",
+  "status": "ideated"
+ },
+ {
+  "id": "gh-tripod-telescoping-struts",
+  "name": "GH tripod: three telescoping struts from quiet scapular seats to quiet arm strips, with the human shoulder as the spherical joint (bold / weird)",
+  "topology": "Three legs, each U - P - U:\n- U: passive cardan on a scapula-fixed seat.\n- P: active telescoping strut, Ti tube in tube, OD 8.\n- U: passive cardan on an arm-fixed seat (a small proximal cuff, or BOTTOM's outer face).\nThe exo has no rotation centre; the human GH is the only spherical constraint (a 3-UPU parallel mechanism about the human joint).",
+  "active_dof": 3,
+  "passive_dof": 12,
+  "dof_reasoning": "The arm has 3 rotational DOF about its own GH. Each strut length is one scalar function of arm orientation, so the 3 lengths determine it wherever the three strut moment vectors about GH are independent. U-P-U legs have no free spin about their own axis (an S joint would add an undriven, floppy spin). All 12 universal-joint angles are set by the leg geometry, so nothing sags. Active = the 3 measured lengths; in MVP2 a Bowden pulling a slider is the most natural cable actuator there is.",
+  "description": "Scapula seats sit on the quietest base skin: B1 acromion top, B2 posterior-superior, B3 posterior scapula at GH level. Arm seats sit on the quiet strips: C1 anterolateral at s 110, C2 posterolateral at s 150, C3 on BOTTOM's outer face at s ~220.\n- Rest: three struts fan down from the top/back of the shoulder to the lateral arm.\n- Overhead: the arm seats rise above the shoulder, and the struts shorten and bunch over the top.\n- Across the body: the posterior struts stretch over the back of the arm.\n- Behind the back: the anterior strut stretches over the front.\nThere are no hubs anywhere on the shoulder cap.",
+  "why_better": "1. It is the only concept whose kinematics do not depend on matching the GH centre, so handler slip and GH translation (R10: 15 mm today, design-independent for every concurrent chain) vanish by construction.\n2. No 12 mm hub stacks over the shoulder, only small cardans on quiet seats.\n3. It maps 1:1 onto MVP2 Bowden actuation.\n4. It is cheap to model. Even if it fails the 1 cm rule, it bounds how much proximity a non-rotary topology loses.",
+  "main_risk": "1. Straight members over a convex, bulging shoulder: a chord between a scapular seat and an arm seat passes through the deltoid unless it stands off. Expect most strut length out of band and many poses with a strut inside the deltoid.\n2. Extension ratio: an arm seat moves ~200 mm between rest and overhead, so telescopes need ~2:1.\n3. Singular poses where the three moment vectors become coplanar (to be measured).\n4. It relies on the arm's own GH: soft-tissue compliance at the cuffs becomes tracking error, and the assist load in MVP2 passes through the human joint.\nI expect this to score poorly on in-band. Its value is as a bound and as an R10-free reference.",
+  "unpowered_and_mvp2": "MVP1: Ti tube-in-tube struts on linear ball bushings or PTFE, light (gravity torque about GH counts against R17); miniature cardans with MR52 bearings. No spare. MVP2: each inner tube pulled by a push-pull Bowden or an antagonistic pair; length sensed by a magnetic linear encoder inside the tube.",
+  "model_spec": "COMMON (bench frame): GH = origin. f = B.frames(i): Rs = f['S'][0], Rh = f['H'][0]. Arm point p maps to Rh@p; scapula point q maps to Rs@q.\nArm axes: e = unit(L['elbow']) = (-0.023,-0.986,0.164), l = (0.004,0.164,0.986), b = (-1,0.023,0). armpt(s,th,r) = s*e + r*(cos th*l + sin th*b).\nScapula directions: sdir(lat,lon) = (-cos lat*sin lon, sin lat, cos lat*cos lon).\nR_env(s,th): max over poses of the arm-skin radius about e (ARMV vertices mapped by Rh.T). Report inband per group.\n\nSEATS:\n- Scapula-fixed: b1 = r1*sdir(55,15), b2 = r2*sdir(40,95), b3 = r3*sdir(0,95). Each rk = 6 + max over poses of the skin radius along that direction (ray scan with B.dist; expect ~48/62/88 mm).\n- Arm-fixed: c1 = armpt(110,-30,R_env+6), c2 = armpt(150,35,R_env+6), c3 = armpt(220,8,R_env+12) (on BOTTOM).\n\nPER POSE:\n- Bk = Rs@bk, Ck = Rh@ck, Lk = |Ck-Bk|.\n- Moment vectors mk = Ck x (Ck-Bk)/Lk.\n- Not taken if |det[m1 m2 m3]| / (|m1||m2||m3|) < 0.15 (near-singular).\n- Not taken if any Lk is outside [Lmin_k, 1.9*Lmin_k], where Lmin_k = min over the clip frames - 5 mm (telescope ratio).\n\nMETAL:\n- Each strut: segment Bk->Ck sampled every 2 mm along the tube; for each sample, offset 4 mm (tube radius) toward the nearest skin point to get the skin-facing surface.\n- U-joint blocks: 12 mm cubes at both ends (8 corner/face samples each).\n- Report the length-range table.\nContact from the bench.",
+  "sweep_params": "Scapular seats (acromion lateral/medial, posterior-superior lat 25-55, posterior lat -15..15, lon 80-130). Arm seats (s 90-240, th -45..45; BOTTOM-mounted or cuff-mounted). Strut stand-off 4-10 mm. Singular threshold. Telescope ratio 1.6-2.2.",
+  "modelling_cost": "low",
+  "prior_art": "CAREX, a cable-driven arm exoskeleton relying on the human joints (Mao & Agrawal 2012); 3-UPS/3-UPU rehabilitation shoulder mechanisms about a passive spherical joint; self-aligning designs that let the human joint define the centre (Schiele & van der Helm 2006).",
+  "lenses": [
+   "distributed-dof"
+  ],
+  "t_ideated": "2026-10-15T17:21:09Z",
+  "source": "ideation D",
+  "status": "ideated"
  }
 ]
