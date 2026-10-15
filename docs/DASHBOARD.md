@@ -238,7 +238,7 @@ each cell cites that design's row; a design with no concept module gets an empty
   overhead -> abduction -> across the body -> hand behind the back -> rest) are projected by ONE orthographic camera for
   every design: from the front, right and above (direction (0.42, 0.5, 0.76) in the rig frame), the frame 350 mm wide
   around a point 5 mm right / 10 mm below GH on screen, so designs compare at one scale. The fixed camera keeps every
-  concept's overhead frames inside the frame (72 of 73 on 2026-10-15) and ~99 % of all drawn points; concepts with
+  concept's overhead frames inside the frame (73 of 74 on 2026-10-15) and ~99 % of all drawn points; concepts with
   parts far down the arm (armband-pointer, cuff-sleeve-3r, ...) are clipped at the arm end in some poses
   (`node docs/concepts/viz/thumbs.mjs --stats --out <scratch file>` prints the counts).
 - Layers, monochrome: the shoulder (faint, `--color-fg-muted` at 50 % opacity, 1 px): deltoid circle, the upper arm
