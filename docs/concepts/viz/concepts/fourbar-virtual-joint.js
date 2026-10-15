@@ -1,16 +1,19 @@
 /* fourbar-virtual-joint - polycentric 3R: the champion's J2 hub replaced by a spherical four-bar 'virtual joint'
- * (catalogue fourbar-virtual-joint, models/fourbar-virtual-joint.py; modelling interrupted, no sweep yet: the model's
- * defaults). L1 (a V of straps from J1) carries pins p1 (ACTIVE: rocker-1 angle phi = the virtual J2 coordinate) and
+ * (catalogue fourbar-virtual-joint, models/fourbar-virtual-joint.py; modelling interrupted, no sweep yet; see the
+ * pin layout below). L1 (a V of straps from J1) carries pins p1 (ACTIVE: rocker-1 angle phi = the virtual J2 coordinate) and
  * p2; two crossed two-force rockers reach pins q1, q2 on L2 (the coupler), which carries J3 (ACTIVE, arm-fixed W).
  * Spherical Gruebler: 6 bodies, 6 revolutes, M = 3: J1, p1, J3 ACTIVE; p2, q1, q2 PASSIVE (set by the loop). Every
- * axis through GH. Pins sit d 20 deg up / down from the old J2 spot, spread +-12 deg, rockers crossed. Kinematics =
+ * axis through GH. The model's default pins (d 20 / 20, spread +-12, crossed) toggle at the rest pose (q2 transmission
+ * 17 deg < 25: its own design() also rejects them - and its sigma test uses a 1e-6 rad arccos tolerance that misses
+ * the true branch); this preview uses d_up 20 / d_dn 28, spread +-8, crossed, the best of a 162-layout scan of the
+ * spec ranges on the loop (closure + transmission only, no skin). Kinematics =
  * the model's exact IK: with L1 at rest the coupler's pose is a function of phi alone, closure <=> b . W_L(phi) = b . y
  * (a 1-D root on the design piece: monotone, both transmission angles in [25, 155], pins >= 15 deg apart), then J1 =
  * the azimuth of W_L(phi) to y about b and J3 = the arm's twist. Reference = the rest pose. Faces are schematic. */
 (function () {
   const K = (typeof window !== 'undefined' ? window : globalThis).KIN, V = K.V, M = K.M, D = K.D2R;
   const P = { az: 2.4305071427308924, el: 80.67633718429899, a0: 76.90180446920043, a1: 66.74921235407174,
-              wd: 86.32769021001913, wa: 21.829657347343378, branch: -1, d_up: 20, d_dn: 20, s_up: 12, s_dn: 12, crossed: 1,
+              wd: 86.32769021001913, wa: 21.829657347343378, branch: -1, d_up: 20, d_dn: 28, s_up: 8, s_dn: 8, crossed: 1,
               skew: 0, sing: 10, tmin: 25, pin_sep: 15, faces: [52.8, 74, 80, 71.85], hub_r: 10, pin_r: 7, stack: 12.25,
               neck_deg: 25, cuff_at: 165 };
   const mv = (p, t, a) => V.unit(V.add(V.scale(p, Math.cos(a * D)), V.scale(t, Math.sin(a * D))));
