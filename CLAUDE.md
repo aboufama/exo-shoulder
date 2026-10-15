@@ -11,8 +11,9 @@ Never relax the 1 cm rule or the DOF cap to buy range without asking.
 User decisions 2026-10-15 (REQUIREMENTS.md): pass at 14 mm, aim for 10; the base rides the scapula on the user's own
 scapula handler (a separate part, outside the DOF count); the shoulder chain should have exactly 3 DOF - "the minimum
 possible solution is 3 dof" - so push for 3 before settling for 4.
-Hardware decisions 2026-10-15: remote motors with cables to the joints, subtle assist (about arm gravity), passive
-self-aligning slides at the cuff (outside the count), high-quality rolling bearings at every joint.
+Scope 2026-10-15: MVP1 is an UNPOWERED kinematic proof of concept that tracks the arm (basic rolling bearings, the
+user adds rotation sensing); no gears, pulleys or cables (MVP2 powers it, remote motors on cables). Passive
+self-aligning slides at the cuff (outside the count). Right shoulder; fit the user: 6'1" (185 cm), 6'4" wingspan.
 The user wants the design's evolution recorded for a final time-lapse visual: add every judged design to
 docs/EVOLUTION.md (and its snapshot to pipeline/evolution/) as part of the judge loop.
 

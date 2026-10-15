@@ -27,7 +27,10 @@ O23 hub (HUB_R 11.5), **10.47 mm** above the lower member's skin face F. Axial l
 - Sizing (in-house FEA, `pipeline/conformal/thin_study/REPORT.md`): 25 N.m worst direction -> 5.5 mm link bodies
   (SF 1.5), the ring nut carries the 2.2 kN cap-screw pull of the earlier stack. R9 asks for an independent check.
 
-## v5 joint concept (user decisions 2026-10-15: rolling bearings, remote motors with cables)
+## v5 joint concept (user decisions 2026-10-15: rolling bearings; cables are MVP2)
+
+MVP1 (user: "a kinematic proof of concept, with some basic bearings") uses the bearing part only; the cable groove
+below is an MVP2 note - not designed now ("You should not design the gear ratios, or any of the pulley system").
 
 Not yet built as CAD; the search parameters follow it. Per joint, at L1 keep-out level:
 - **Bearings:** 2x 6700-2RS (10 x 15 x 4 mm deep-groove, pair spaced ~1 mm) inside the upper hub on the O10 Ti pin of
