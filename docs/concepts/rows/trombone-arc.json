@@ -1,0 +1,41 @@
+{
+ "id": "trombone-arc",
+ "name": "Trombone arc: one curved slide through a swivel guide on top of the scapula",
+ "lens": "",
+ "family": "spherical 3R realised as a sliding arc (circular-guided RCM)",
+ "active_dof": 3,
+ "passive_dof": 0,
+ "status": "dead",
+ "t_ideated": null,
+ "t_screened": "2026-10-15T19:40:33Z",
+ "reach": 0.7438,
+ "follow": 0.9167,
+ "inband14": 0.286,
+ "inband10": 0.1081,
+ "contact": 0.1122,
+ "gap": 91.57,
+ "v_reach": null,
+ "v_follow": null,
+ "v_inband14": null,
+ "v_inband10": null,
+ "v_gap": null,
+ "n_configs": 133,
+ "verdict": "Dead, not worth a GPU sweep: honest best gap 91.57 vs the champion's 68.93 after 133 configurations (37 honest and non-degenerate). The single-stage arc never fits: its tail runs into the neck and head, so the band floats at 400 mm. The 2-stage telescoping variant (the measured fix for the tail) closes and follows, but it still puts a constant-radius band 25-30 mm off the skin.",
+ "note": "Kit conventions (K3 march, K2 dense, K6 collisions, O20 hubs, K7 neck), Bench(60,160) fast cache. Best = 2-stage telescoping arc (2:1 cable sleeve), J1 = O20 hub on b = bvec(45,25), guide offset 15 deg across the band, A1 = A2 = 90 deg, W = champion wdir(86.33,21.83), arc from the p5-p95 guide azimuths, q 0.95. The single-stage configurations that score 91.33 have the band at 400 mm (mass 1.7 kg, sparse-sampling audit): degenerate, rejected.",
+ "doc": "docs/concepts/trombone-arc.md",
+ "limiter": "The sleeve/band radius (one radius from GH over a 140-200 mm arc) must clear the highest skin the band ever passes over. In the L1 frame the band sweeps +-(J2 range) about the guide, and the requirement past the guide rises from 50 to 90-400 mm within 30-50 deg on the tail side (trapezius, neck, head). In the best configuration the sleeve sits at 97 mm and the band at 100 mm (tail past the guide up to 109 mm), 2.4 % / 0.1 % in band. The hubs and neck stay at 47-73 % in band.",
+ "model_file": "docs/concepts/models/trombone-arc.py",
+ "honest": true,
+ "checks": {
+  "mode": "march",
+  "cont": true,
+  "collide": true,
+  "q": 0.95
+ },
+ "audit": [],
+ "hubless": [
+  "J2",
+  "Jc",
+  "Ja"
+ ]
+}

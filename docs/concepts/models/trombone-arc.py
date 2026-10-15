@@ -13,6 +13,9 @@ Topology (scapula handler -> user's upper-arm cuff), every axis through GH (a sp
       p2 wherever it passes the guide; member 'band', kind 'cap') + a connector strap from the band's arm-side end to
       J3 (member 'conn', skin-fitted, the upper member of J3, passes over the neck)
   J3  O20 v5 hub about W (humerus-fixed), member 'hub3'; lower member = the K7 neck to BOTTOM's bar ('neck').
+VARIANTS (measured, docs/concepts/trombone-arc.md): j1='hub' replaces the ring by an O20 hub on b with the guide offset
+goff deg across the band (the ring's 52 mm footprint sits at 67-72 mm and forces the band 15 mm over it); tele=1 is the
+spec's 2-stage telescoping arc (sleeve A through the guide, band B in A, A turns half of J2: 2:1 cable, no extra DOF).
 Arc ends: the band spans [phi_lo, phi_hi] (azimuth about p2 in the L2 frame e2 = toward W, e3 = p2 x e2) - CONSTANT
 params (it is one rigid part), set by arc_range() from the guide azimuths the poses need; a pose is taken only if the
 whole guide (+- its half length) stays on the band.
@@ -32,10 +35,14 @@ NAME = "Trombone arc: one curved slide through a swivel guide on top of the scap
 D2R = math.pi / 180
 SWEEP_OUT = os.path.join(REPO, "docs", "concepts", "sweeps", f"{ID}.json")
 # baseline champion axes (tools/concept_baseline.py = the bench's 68.93)
-PARAMS = dict(az=2.43, el=80.68, A1=76.9, A2=66.75, wd=86.33, wa=21.83, sigma=-1, margin=5.0,
-              phi_lo=20.0, phi_hi=140.0, src="clip", Rn=56.0, width=10.0, band_t=4.0, qb=1.0, dR=0.0,
+# best honest configuration of the sweep (k 130, gap 91.57): 2-stage telescoping arc, O20 hub at J1, guide offset 15 deg.
+# The champion axes (az 2.43, el 80.68, A1 76.9, A2 66.75) with a single-stage band: the tail runs into the neck/head.
+PARAMS = dict(az=45.0, el=25.0, A1=90.0, A2=90.0, wd=86.33, wa=21.83, sigma=-1, margin=5.0,
+              phi_lo=20.0, phi_hi=140.0, src="p5-95", Rn=56.0, width=10.0, band_t=4.0, qb=0.95, dR=0.0,
               guide_L=30.0, guide_W=22.0, ring_ri=19.0, ring_ro=26.0, ring_t=6.0, dz_ring=15.0,
-              conn_w=12.0, conn_t=3.0, q=1.0, j1="ring", goff=0.0)
+              conn_w=12.0, conn_t=3.0, q=0.95, j1="hub", goff=15.0, tele=1)
+# variants: j1 'ring' (KAA15XL0 ring about b, guide in its bore, goff 0) or 'hub' (O20 hub on b, guide offset goff deg
+# across the band on an L1 strap 'arm1'); tele 0 = single-stage band, 1 = 2-stage telescoping arc (sleeve + band)
 
 
 def axes(F, p):
@@ -78,6 +85,14 @@ def band_dirs(p2, e2, e3, p):
     return D.reshape(len(p2), -1, 3), (n, len(de))
 
 
+def arc_dirs(p2, e2, e3, Ab, ph, width, Rn):
+    """band directions on the circle about p2 at polar angle Ab (rad), azimuths ph (P, n) deg, width mm at Rn"""
+    ph = np.asarray(ph) * D2R; de = np.arange(-width / 2, width / 2 + 1e-6, 2.0) / Rn; pol = Ab + de
+    rad = np.cos(ph)[..., None, None] * e2[:, None, None, :] + np.sin(ph)[..., None, None] * e3[:, None, None, :]
+    D = np.cos(pol)[None, None, :, None] * p2[:, None, None, :] + np.sin(pol)[None, None, :, None] * rad
+    return D.reshape(len(p2), -1, 3)
+
+
 def build(B, F, p):
     b, W, p2, e2, e3, phi_g, ok, margin = axes(F, p)
     hl = half_len(p)
@@ -106,17 +121,39 @@ def build(B, F, p):
                             cell=4.0, ramps=gram))
     if p["j1"] != "ring":
         members.append(K.strap_member("arm1", b, g, ("J1", "Ja"), width=12.0, t=3.0, ramp_to=(("hub1", K.STACK), ("guide", 0.0))))
-    # band L2: one radius (cap), fitted, raised over the guide (lower rollers) and the ring
-    pb = dict(p, A1=math.degrees(Ab))
-    Db, grid = band_dirs(p2, e2, e3, pb); nb = Db.shape[1]; allb = np.ones(nb, bool)
-    members.append(K.Member("band", Db, kind="cap", t=p["band_t"], width=p["width"], joints=("J2", "Jc"), r_ref=p["Rn"],
-                            cell=4.0, q=p["qb"], off=p["dR"],
-                            ramps=[(allb, "guide", 3.5)] + [(allb, o, dz) for o, dz in ramps_band]))
+    Rs = p["Rn"] * math.sin(Ab)
+    if not p.get("tele"):
+        # band L2: one radius (cap), fitted, raised over the guide (lower rollers) and the ring
+        pb = dict(p, A1=math.degrees(Ab))
+        Db, grid = band_dirs(p2, e2, e3, pb); nb = Db.shape[1]; allb = np.ones(nb, bool)
+        members.append(K.Member("band", Db, kind="cap", t=p["band_t"], width=p["width"], joints=("J2", "Jc"), r_ref=p["Rn"],
+                                cell=4.0, q=p["qb"], off=p["dR"],
+                                ramps=[(allb, "guide", 3.6)] + [(allb, o, dz) for o, dz in ramps_band]))
+        phM = phi_g
+    else:
+        # 2-stage telescoping arc: sleeve A (middle body, C-channel, 2 mm walls + 0.5 gaps around B, width + 5) slides
+        # through the guide; band B (L2) slides in A. A turns half of J2 about p2 (2:1 cable over pulleys at A's ends,
+        # inside A's section), so its tail past the guide is half the single-stage one. Lower wall of A = member
+        # 'sleeve' [R_A, R_A + 2]; B at exactly R_A + 2.5 (off -1000 + ramp); A >= guide + 3.5.
+        g0, g1 = p["phi_lo"] + hl + 1.0, p["phi_hi"] - hl - 1.0
+        ok = ok & (phi_g >= g0) & (phi_g <= g1)
+        phM = (phi_g + g1) / 2
+        nA = max(3, int(round(((g1 - g0) / 2 + 2 * hl + 2) * D2R * Rs / 2.0)) + 1)
+        sA = np.linspace(-(g1 - g0) / 2 - hl - 1, hl + 1, nA)
+        DA = arc_dirs(p2, e2, e3, Ab, phM[:, None] + sA[None, :], p["width"] + 5.0, p["Rn"]); nA_ = DA.shape[1]
+        members.append(K.Member("sleeve", DA, kind="cap", t=2.0, width=p["width"] + 5, joints=("J2",), r_ref=p["Rn"],
+                                cell=4.0, q=p["qb"], off=p["dR"],
+                                ramps=[(np.ones(nA_, bool), "guide", 3.6)] + [(np.ones(nA_, bool), o, dz) for o, dz in ramps_band]))
+        hiB = (g0 + g1) / 2 + hl - 1.0
+        nB = max(3, int(round((hiB - p["phi_lo"]) * D2R * Rs / 2.0)) + 1)
+        DB_ = arc_dirs(p2, e2, e3, Ab, np.broadcast_to(np.linspace(p["phi_lo"], hiB, nB), (len(p2), nB)), p["width"], p["Rn"])
+        members.append(K.Member("band", DB_, kind="cap", t=p["band_t"], width=p["width"], joints=("J2", "Jc"), r_ref=p["Rn"],
+                                cell=4.0, off=-1000.0, ramps=[(np.ones(DB_.shape[1], bool), "sleeve", 2.6)]))
     members.append(K.hub_member("hub3", W, "J3"))
     members.append(K.neck_member(F, W, joints=("J3",), ramps=(("hub3", 0.0), (None, 0))))
     members.append(K.strap_member("conn", c_lo, W, ("J3", "Jc"), width=p["conn_w"], t=p["conn_t"],
                                   ramp_to=(("band", 0.0), ("hub3", K.STACK)), over=[("neck", 1.0)]))
-    q = np.stack([K.axis_angle(b, F.S([1.0, 0, 0]), p2), phi_g, K.axis_angle(W, F.HG([0.0, -1, 0]), p2)], -1)
+    q = np.stack([K.axis_angle(b, F.S([1.0, 0, 0]), p2), phi_g, K.axis_angle(W, F.HG([0.0, -1, 0]), p2), phM], -1)
     res = K.closure_residual(b, W, p2, p["A1"], p["A2"])
     return K.Chain(members=members, ok=ok, q=q, joints=joints, hubless=tuple(hubless),
                    info=dict(residual_deg=round(float(res[ok].max()), 6) if ok.any() else None,
@@ -136,6 +173,7 @@ def details(B, p, rep=None):
     Ra = float(prof["band"][0]); A1 = p["A1"] * D2R
     A1 = (p["A1"] + p.get("goff", 0.0)) * D2R
     tail = (p["phi_hi"] - phi_g) * D2R * Ra * math.sin(A1) - p["guide_L"] / 2
+    if p.get("tele"): tail = ((p["phi_hi"] - half_len(p) - 1 - phi_g) / 2 + half_len(p) + 1) * D2R * Ra * math.sin(A1) - p["guide_L"] / 2
     j1 = "ring" if "ring" in prof else "hub1"
     return dict(R_a=round(Ra, 2), j1=round(float(prof[j1][0]), 2), guide=round(float(prof["guide"][0]), 2),
                 hub3=round(float(prof["hub3"][0]), 2), arc_deg=round(p["phi_hi"] - p["phi_lo"], 1),
