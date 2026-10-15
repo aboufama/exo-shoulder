@@ -359,7 +359,9 @@ def sweep(a, env):
         sys.exit("--configs must be a non-empty JSON list of dicts")
     slots = WORKERS_MAX * SLOTS                                         # jobs running at once (4 today)
     procs = a.jobs_per_chunk or max(1, VCPU // SLOTS)                   # processes per job = its vCPU share (8 today)
-    chunk = a.chunk or max(1, -(-n // slots))
+    # fill a worker's processes before spreading over more workers: a job holds (and bills) a whole worker, so 8 configs
+    # in 4 chunks of 2 left 6 of 8 vCPUs idle on each of 4 workers (4x the worker-seconds, 3 shared slots taken for nothing)
+    chunk = a.chunk or max(1, -(-n // slots), min(n, procs))
     env = dict({"IGL_NUM_THREADS": "1"}, **env)                         # 1 libigl thread per bench process
     tag = a.tag or "sweep-" + os.path.splitext(os.path.basename(model))[0] + "-" + time.strftime("%H%M%S")
     d = os.path.join(".cache", "cloud_sweeps", tag); os.makedirs(os.path.join(REPO, d), exist_ok=True)
@@ -377,8 +379,9 @@ def sweep(a, env):
                + f" --jobs {procs}")
         jobs.append(dict(cmd=cmd, tag=f"{tag}-{k:03d}", include=inc + a.include, link=[".cache/concept_bench"],
                          out=[out], env=env, base=a.full_base, design=a.design, _s0=s0))
-    print(f"sweep {model}: {n} configs in {len(jobs)} chunk(s) of <= {chunk}, {procs} processes each; {min(len(jobs), slots)} jobs x {procs} "
-          f"= {min(len(jobs), slots) * procs} configs evaluated in parallel", flush=True)
+    pp = min(procs, chunk)                                              # concept_sweep runs min(--jobs, configs) processes
+    print(f"sweep {model}: {n} configs in {len(jobs)} chunk(s) of <= {chunk}, {pp} processes each; {min(len(jobs), slots)} jobs x {pp} "
+          f"= {min(len(jobs), slots) * pp} configs evaluated in parallel", flush=True)
     res = run_batch(jobs, None, a.timeout)
     merged, missing = [], []
     for (tag_k, j, out, st) in res:

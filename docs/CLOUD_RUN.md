@@ -33,8 +33,11 @@ python3 tools/concept_sweep.py docs/concepts/models/<id>.py --configs configs.js
   `tools/concept_baseline_sweep.py` is the adapter for the champion 3R (`tools/concept_baseline.py`).
 - **Slots today: 4 jobs x 8 processes = 32 configs at once.** The running bundle takes ONE job per worker (measured
   19:01 UTC: 16 sleep-20 jobs ran strictly in sequence on each worker; the 4-jobs-per-worker handler is in the
-  undeployed 3.12 build), so `sweep` makes `ceil(n / 4)` chunks and runs each with 8 processes (`--jobs-per-chunk`,
-  `--chunk` override) and `IGL_NUM_THREADS=1`. After a redeploy set `CLOUD_JOBS_PER_WORKER=4`. The 4 workers are
+  undeployed 3.12 build), so `sweep` makes chunks of `max(ceil(n / 4), min(n, 8))` configs (fill one worker's 8
+  processes before taking another worker: a job bills the whole worker) and runs each with up to 8 processes
+  (`--jobs-per-chunk`, `--chunk` override) and `IGL_NUM_THREADS=1`. Verified 19:33 UTC, 8 champion configs: 1 chunk x 8
+  processes = wall 44 s, 42 worker-s ($0.0034), 1 slot; the old `ceil(n/4)` split (4 chunks x 2) = wall 30 s, 92 worker-s
+  ($0.0074), all 4 shared slots. Pass `--chunk 2` when latency matters more than cost and the queue is empty. After a redeploy set `CLOUD_JOBS_PER_WORKER=4`. The 4 workers are
   shared by every agent: a sweep queues behind other agents' batches (seen 19:00-19:15: 31 map jobs + a sweep, queue 15). Each job ships only what a bench sweep reads (the model, tools/, judge/, pipeline/avg/, the pose
   files, split.json, docs/concepts/models/: 29 MB, uploaded once ever); `--full-base` ships the whole repo. The configs
   travel inside the command (no upload round trip). The bench grid cache `.cache/concept_bench` (562 MB, key
@@ -106,8 +109,9 @@ Every job prints: return code, run seconds, CPU, the $ it cost, the last log lin
   (importing straight from the network volume costs 11.8 s per process; from local disk 0.6 s). The broken `/app`
   packages stay on the path behind it and are never reached.
 - **libigl threads**: libigl sizes its pool from `hardware_concurrency()` = the host's 192 cores, not the job's 8-vCPU
-  quota; a bench configuration took 55 s instead of 8 s. Every job now exports `IGL_NUM_THREADS` = vCPUs / 4 (= 2, the
-  job's share of a worker; 1 in sweeps, which run one process per vCPU) unless the job sets it. Measured on the same
+  quota; a bench configuration took 55 s instead of 8 s. Every job now exports `IGL_NUM_THREADS` = vCPUs /
+  `CLOUD_JOBS_PER_WORKER` (= 8 today, 1 job per worker; 2 after a redeploy with 4 jobs per worker; 1 in sweeps, which run
+  one process per vCPU) unless the job sets it. Measured on the same
   20-config chunk: 692 s -> 89 s, identical reports.
 
 ## Endpoint, cost, hygiene
@@ -147,6 +151,15 @@ See the "CPU farm" section of `docs/RUNPOD_COSTS.md` for the measured run: R2 bo
   because its `have` / `put` upload jobs waited 17 min behind another agent's 31-job batch on the same 4 workers. Keep
   the shipped files unchanged between sweeps (uploads are then skipped) and do not start a sweep while a big batch runs
   (`RUNPOD_API_KEY="$(cat ~/.runpod_key)" python3 tools/runpod_guard.py audit` shows the exo-cpu1 queue).
+- Independent verification (19:24-19:52 UTC, a second agent, own configs): champion 3R via concept_baseline_sweep, 8 new
+  configs (hub_r, width, clear, stack/t_link, branch, neck_deg, az/el, pcts 90/95/100; gaps 67.95-183.05): 80 values,
+  0 differences local vs farm, twice (4 x 2 and 1 x 8 chunks). Local `--jobs 2` at load 26-31: 276 s; farm 30 s wall
+  ($0.0074) or 44 s wall ($0.0034, 1 worker). deltoid-oval-track (metal() hook), 8 configs: identical (a dead concept,
+  every config reach 0 / gap 275, the same as the model's own run()); local 67 s, farm 17 s ($0.0031). `judge
+  cad_r18_n3_s1392_1_f300 fast`: rc 0, 1504 s wall, 1497 worker-s ($0.12); 148 of 151 scorecard fields equal the tree's;
+  R1 differs in the 17th digit (0.4085815614067577 vs ...767), R9 NOT RUN (no FEA on the farm). Rates re-read from
+  GraphQL `cpuFlavors.specifics.slsPrice` (EU-RO-1): cpu3c-8-16 $0.288/h, cpu5c-8-16 $0.336/h, cpu3c-2-4 $0.072/h (cpu3c
+  is $0.036 per vCPU-h at every size).
 - `judge` works: `cloud_run.py judge cad_r13_n4_s1343_1 fast` -> rc 0 in 1226 s on one worker ($0.10), full scorecard;
   R1-R8 values equal the tree's scorecard (14 h old); R10 / R11 now measured because the judges gained them since then
   (a measurement change, not a design change); R9 not run (SKIP_FEA on the farm).
