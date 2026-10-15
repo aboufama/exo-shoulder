@@ -141,7 +141,10 @@ def mass_props(parts):
         m = trimesh.Trimesh(V / 1000.0, F, process=False); m.merge_vertices(digits_vertex=7); m.update_faces(m.nondegenerate_faces()); m.remove_unreferenced_vertices()
         rho = density(g, nm) * 1000.0
         for c in m.split(only_watertight=False):
-            if not c.is_watertight: c = c.convex_hull                        # never happens on today's L1 meshes (checked)
+            if c.area < 1e-6 or len(c.faces) < 4: continue                    # zero-area slivers of a merged B-rep tessellation (fair CAD BOTTOM): no mass, and qhull fails on them
+            if not c.is_watertight:
+                try: c = c.convex_hull                                        # open shell: its hull (never happens on L1 meshes)
+                except Exception: continue
             trimesh.repair.fix_normals(c); c.density = rho; mpp = c.mass_properties
             mi, ci, Ii = float(mpp["mass"]), np.asarray(mpp["center_mass"]), np.asarray(mpp["inertia"])
             M += mi; S += mi * ci; vol += float(mpp["volume"]) * 1e6

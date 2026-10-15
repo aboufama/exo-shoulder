@@ -2,7 +2,7 @@
 
 For the user's request of 2026-10-15 ("create a design from the best configuration (or a select few) and render them in
 blender, should be done by 8:30am" = **12:30 UTC**). Dry run on `cad_r16_n3_s1373_1` (r16 seed 1373 rank 1, pure 3R,
-no sliding cuff), 05:19-06:xx UTC; every timing below was measured in that run on this 4-core machine with the lead's
+no sliding cuff), 05:19-07:30 UTC; every timing below was measured in that run on this 4-core machine with the lead's
 judges and the r17 search client running beside it (OMP_NUM_THREADS=2). Rules that apply (CLAUDE.md): cost + GPU type
 stated and a yes before any paid job; a cheap motion preview approved before any paid render; workersMin back to 0
 after; never print the key; never touch `crl-*` pods.
@@ -12,16 +12,22 @@ after; never print the key; never touch `crl-*` pods.
 - A **DETAIL** band_eval result (`band_eval` job with `detail: 1`) **on a payload whose first 451 poses are
   `band_poses.b64`'s 8 clips**: `band_poses_ws.b64` (what r16diag used) or `band_poses_wsf.b64`. The r17 search runs
   on `band_poses_fit_wsf20.b64` (6 fit clips, no Wave / Walking, indices shifted): its results cannot go into the CAD
-  pipeline directly - re-evaluate the picks with DETAIL on `band_poses_ws.b64` (one GPU job; the r16diag job with 4
+  pipeline directly - re-evaluate the picks with DETAIL on `band_poses_ws.b64` / `band_poses_wsf.b64` (the lead's
+  r17/r18 detail evals used wsf; one GPU job - the r16diag job with 4
   designs took 612 s on a 24 GB MIG slice = ~$0.12). `make_input.py` below refuses a wrong payload.
 - The job's `ramp_deg` (r17: 60) and `hw` if the job set one (r17 did not). `t_link` / `hub_r` / `stack` are in the result.
+- **`hub_r` is not honoured by the CAD**: `fair_build.py` takes t_link / hw / ramp_deg from the input, but the hubs stay
+  O23 (members.HUB_R 11.5) because the v4 joint hardware is O23 (O22 cap, O18 washers and ring nut). r18 was evaluated
+  with hub_r 8.5 (O17): its CAD has bigger hubs than its score assumed, and the v4 stack does not fit an O17 hub (nor
+  would v5's O15 bearings leave more than a 1 mm wall). A smaller joint model is a CAD-stage task; tonight prefer picks
+  evaluated at hub_r 11.5, or read r18 CAD scores as O23-hub results.
 - `.cache/maps_s1.pt` (present; `tools/build_maps.py` otherwise).
 
 ## 1. Build the CAD (per design, ~3 min; two designs in parallel at most)
 
 ```bash
 cd /home/user/exo-shoulder/pipeline/conformal/band_cad
-python3 make_input.py ../gpu_client/<detail eval>.json <index> <key> --ramp-deg 60 --poses band_poses_ws.b64   # 1 s
+python3 make_input.py ../gpu_client/<detail eval>.json <index> <key> --ramp-deg 60 --poses <band_poses_wsf.b64 | band_poses_ws.b64>   # 1 s
 cd /home/user/exo-shoulder
 export OMP_NUM_THREADS=2 MKL_NUM_THREADS=2 OPENBLAS_NUM_THREADS=2 SKIP_SCORE=1
 export ARM_SRC=$PWD/pipeline/full-exo/designs/cad_r13_n4_s1343_1/exo.glb ARM_SKIP="BOTTOM + neck,UPPER ARM CUFF,(upper cuff)"   # band_<key> proxy only
@@ -29,17 +35,21 @@ bash pipeline/conformal/fair_cad/fair_pipeline.sh <key> "<label>"        # write
 bash tools/publish_design.sh <key>                                        # step/, parts_full.json, parts/ (76 s)
 ```
 
-Key naming: `r17_n3_s<seed>_<rank>` (the lead's band designs are `band_r16_3r_...`; the CAD gets `cad_<key>`).
+Key naming: `r1x_n3_s<seed>_<rank>` (e.g. `r18_n3_s1394_0`; the CAD gets `cad_<key>`, the proxy `band_<key>`).
 What to check in the output (dry-run values in brackets):
 
 | stage | time | look for |
 |---|---|---|
 | band_to_design + make_cad_design | 3 s | no `WARNING band_to_design` / `REFUSED` (short link guard) |
 | replan + members + verify (loop) | 52 s | `hard collisions in 0 of ...`, `valid members: 3`, `members clean after round 1` |
-| `out_<key>/members_1.log` | - | `raised joint faces` of a few mm at most (a three-digit raise = bad skin map, see 5) |
+| `out_<key>/members_1.log` | - | `raised joint faces` of a few mm at most (a three-digit raise = bad skin map, see 5); no `WARNING stand-off` (a hub riding > 25 mm over its need: not a close-fitting design) or `WARNING inside-out` |
 | assemble | 77 s | `out_<key>/assemble.log`: every `featured valid True`, `BOTTOM merged valid True` with one solid |
 | verify_armend | 5 s | `frames with any link/arm-end collision: 0` |
 | publish_design.sh | 76 s | `parts.html ready` |
+
+Links: keep the default swept bands for the renders (lead: G2, no lumps). `FIELD_MODE=fair` (FAIR_LAM 300) before
+`fair_pipeline.sh` gives 2-D fair-field links, +7 points R1-aim on r16 (stride 6) and smooth at preview scale; FAIR_LAM=30 is
+closer still but lumpy (table in 5; members ~2 min slower).
 
 `fair_pipeline.sh` also writes `design.json` (R5 / R10 / R17 read it) and a `workspace.json` with the CAD's fixed base
 frame (R16), both via `make_cad_design.py`. Without `SKIP_SCORE=1` it ends with an 8-min `score_design` run that
@@ -54,6 +64,13 @@ OMP_NUM_THREADS=2 bash tools/judge_all.sh cad_<key> fast    # scorecard -> desig
 Dry run (load 5-8 on 4 cores): 43 min - R1 at 10 + 14 mm (stride 3) 19 min, R7 18 s, R2 5.5 min, R6 3.5 min, R16 7 min,
 R17 8 min. `part_contact.py`, `workspace.py` and `dynamics.py` start 4 processes each (`--jobs` default), not 2.
 Two designs judged in parallel will take ~1 h; judge the first pick while the second builds.
+
+Dry-run scorecard, `cad_r16_n3_s1373_1` (final build, lead's 06:48 R16 judge): R1 56.8 %, R1-aim 27.2 %, R2 24.87 mm
+(the user's forearm cuff vs the rig, as on every design), R3 80.9 %, R4 45.6 %, R5 3 PASS, R6 0.63 mm (only the static
+v4 J3 stack fits), R7 PASS, R8 233 g PASS, R10 not run, R16 37.4 % (proxy 46.0 %), R17 PASS **but stale**: on the final
+build `judge/dynamics.py` crashed in `mass_props` (two zero-area sliver components in the merged BOTTOM tessellation ->
+`convex_hull` of degenerate triangles; on the fair variant the same parts raise a QhullError and R17 is NOT RUN), so the scorecard kept the 06:27 result of the same links with the old neck
+(0.45 N.m peak, 2.0 N, 4.4 deg twist). Fix in the judge: skip components with area ~0 before the convex-hull fallback.
 
 ## 3. Free motion preview (show it, get the go-ahead for the paid render)
 
@@ -126,7 +143,8 @@ judges -> preview (~3 min) -> yes -> calibration chunk -> film + stills (~30 min
 1. **J1 raised by 204 mm** (`fair_cad/envelope.py`). The dense skin maps put a skin sample into the first sheet's
    clearance band whenever its pixel has no detected re-entry, and posed-mesh sampling holes near the acromion leave
    3-7 pixel patches where only the raised arm's far side (r1 ~ 230 mm) was sampled inside a ring of shoulder skin at
-   43 mm. The CAD's dense hub grid hit those pixels in 9 overhead frames (the evaluator's 21 hub samples did not).
+   43 mm. The CAD's dense hub grid hit those pixels in 9 followed frames of Comb hair, Reach a high shelf and Wave (the
+   evaluator's 21 hub samples did not).
    Fix: `Envelope.first_sheet_r1c` - the first sheet is the nearest skin in a 9 x 9 pixel window, an r1c more than 25 mm
    beyond it takes the window's largest first-sheet value; it never raises a need (over a random sphere x all followed
    frames: 1.43 % of lookups lowered, median 24 mm, 0.68 % by > 25 mm; 0.32 % of those whose raw r1c is < 130 mm).
@@ -160,19 +178,29 @@ judges -> preview (~3 min) -> yes -> calibration chunk -> film + stills (~30 min
    (2x 6700-2RS, 8.5 mm tall) changes every upper hub and cap height the search assumed and needs new
    `joint_v4.py` / `hardware.py` parts + boolean re-validation - not a small change. R17 already models rolling bearings
    (mu 0.005) independent of the CAD hardware.
+9. **R16 = 0 % on the first CAD judge run was a measurement artefact** (the L1 proxy scored 46 %): `judge/workspace.py`
+   judged the whole merged BOTTOM part, i.e. the user's own bar, which sits inside the rig's arm in every pose (114 of
+   174 poses), and the v4 J3 stack's ring nut sits 0.62 mm inside the J3 cap in every pose (89 poses; cad_r13_n4_s1343_1
+   has the same pair at 0.80 mm). **Lead's fix (06:48, commit 2f93db0, a measurement change):** arm-group parts count
+   only within 110 mm of the GH centre (as R1's ARM_NEAR) and a pair interfering in >= 95 % of poses is a static fit
+   left to R6. The J3 stack fit itself (ring nut / washer B vs cap, 0.2-0.6 mm in every frame) is a hardware-model fix
+   still to do (`joint_v4.py` levels at the arm end).
 
-9. **R16 = 0 % on the CAD is mostly a measurement artefact** (the L1 proxy scored 46 %): `judge/workspace.py` judges
-   every part named BOTTOM / neck / JN hub against the body, and the merged part carries the user's own BOTTOM bar,
-   which sits inside the rig's arm in every pose (the size mismatch R2 reports for the user's cuffs: 17.6 mm) - 114 of
-   174 poses fail on it; and the v4 J3 stack's ring nut sits 0.62 mm inside the J3 cap in every pose (89 poses; the
-   reference cad_r13_n4_s1343_1 has the same pair at 0.80 mm). Judging only the custom part of BOTTOM (e.g. within
-   110 mm of the GH centre, as `score_design.py` does) and fixing the JN stack levels are judge / hardware changes for
-   the lead; not done here.
+**Proximity gap (measured, cause known; closing it is a CAD-stage task, not tonight).** The swept-band links sit higher
+than the evaluator's fitted shape: link 2 ribbon median +7.5 mm (p90 +14), link 1 +3.4 mm (p90 +7.4), hubs +0..1.5 mm.
+Cause: `members.Member._swept` builds each arm as one constant section with straight generators across its 14 mm
+width and ONE stiff height profile along it (1-D shrink-wrap, FAIR_LAM 300), clamped in value and slope to both hub
+planes - it cannot follow the skin across the band or between the hubs, so the band's worst point sets its height.
+Shoulder members alone (no arm parts, stride 6): swept CAD 14.0 % in band vs proxy 39.8 % - the loss is in the links.
+r16 s1373, same kinematics (follows 80.9 % of frames in every build). Scorecard R1 / R1-aim = in-band share of the
+covered skin while following; "overall" = score_design's OVERALL (held frames count 0):
 
-Known residuals: the fair CAD's link ribbons sit higher than the evaluator's fitted shape (l2 ribbon median +7.5 mm,
-p90 +14 mm; l1 +3.4 mm) - the swept-band profile is a stiff beam clamped flat at both hub planes. `FAIR_LAM=30` (less
-stiff) gives R1-aim 23.6 % vs 19.8 % (+3.8 points, stride 6). **`FIELD_MODE=fair FAIR_LAM=30`** (2-D fair fields
-instead of swept bands, `cad_r16_n3_s1373_1_fair`) gives **R1-aim 36.8 %** (stride 6; the L1 proxy: 42.6 %), all parts
-valid, 251 g - but the links come out lumpy (visibly "fitted", against CAD_STANDARD's "constrained, not weirdly meshed");
-shoulder members alone (no arm parts, stride 6): swept CAD 14.0 % vs proxy 39.8 %, so the loss is in the links, not
-the neck. `designs/cad_<key>/exo.glb` is 22 MB and not git-ignored.
+| build | R1-aim (2-10 mm) | R1 (2-14 mm) | overall 10 / 14 mm | look |
+|---|---|---|---|---|
+| L1 proxy `band_r16_3r_s1373_1` (the evaluator's fitted shape) | 52.7 % | 68.4 % | 42.6 / 55.3 % | slabs |
+| swept bands (default), final `cad_r16_n3_s1373_1` | 27.2 % | 56.8 % | 22.0 / 46.0 % | clean constant section - **use for the renders** (lead, 07:00) |
+| `FIELD_MODE=fair` (2-D bi-Laplacian field), FAIR_LAM 300 | 34.5 % (stride 6) | - | 28.0 / - % | smooth at preview scale; check zebra in parts.html |
+| `FIELD_MODE=fair FAIR_LAM=30`, `cad_r16_n3_s1373_1_fair` | 48.9 % | 70.6 % | 39.5 / 57.2 % | visibly lumpy link 2 - not for renders (R4 52.4 %, R16 36.8 %, R7 PASS, 250 g) |
+
+A CAD design dir is ~120 MB with step/ and parts/ (exo.glb 22 MB): the lead git-ignored the dry-run dirs
+(`*_r16_n3_*`); decide the same for the final picks.

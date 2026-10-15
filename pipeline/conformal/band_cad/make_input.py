@@ -30,5 +30,8 @@ R.update(ramp_deg=a.ramp_deg, poses_file=a.poses, _eval_src=f"{os.path.relpath(a
 if a.hw is not None: R["hw"] = a.hw
 out = os.path.join(HERE, "inputs", f"{a.key}.json")
 json.dump(dict(results=[R], secs=D.get("secs"), device=D.get("device"), version=D.get("version")), open(out, "w"))
+if abs(float(R.get("hub_r", 11.5)) - 11.5) > 0.01:                                      # fair_cad builds O23 hubs (members.HUB_R, v4 joint)
+    print(f"WARNING make_input: the eval used hub_r {R['hub_r']} but the fair CAD builds O23 hubs (members.HUB_R 11.5, v4 joint "
+          f"hardware O18-O22): the CAD's hubs are bigger than the evaluator scored", file=sys.stderr)
 print(f"wrote {out}: n {R['n']}, t_link {R.get('t_link')}, hub_r {R.get('hub_r')}, stack {R.get('stack')}, ramp {a.ramp_deg}, poses {a.poses}, "
       f"cuff {R.get('cuff')}, eval score {R.get('score', 0):.3f} follow {R.get('follow', 0):.3f}")
