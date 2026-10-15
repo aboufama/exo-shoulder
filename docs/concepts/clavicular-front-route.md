@@ -54,3 +54,15 @@ across-the-body workspace poses (plane 120-150, elevation 120-150) the forearm l
 220 mm clears it ("unclearable": the hub would sit inside the arm). The spec's "8-11 mm spread" was a first-sheet,
 fit-clip-only number; the arm passing over is what kills the seat. Only the front-TOP edge (lat ~65) is quiet in the
 clips.
+
+## Two model bugs found and fixed on the way (v1 -> v2)
+
+1. **Bridge self-collision.** The bridge was two straps meeting at the waypoint with no shared joint, so K6 flagged
+   their common end in every pose whenever both sat at one level (collide 1.0, gap 275). Fix: a lap joint, bridge_a
+   passes over bridge_b (`over`, >= 1 mm).
+2. **`over` near a shared joint is decided at the pre-raise radius (kit subtlety, affects any model).** `_over`
+   evaluates the shared-joint exemption (HUB_R + 2 mm of arc) at the upper member's raw skin radius; at ~50 mm a link-1
+   sample 12 deg from J1 is exempt, the K5 climb limit then lifts it to ~78 mm where it is not, and K6 rejects the pose
+   (link 1 vs bridge in 85 % of poses at the front-top seat, measured with a pair-by-pair K6 split). Workaround in the
+   model: link 1's J1 end ramps to the bridge top + 1 mm (STACK + 1) over 20 mm. Both bugs only removed poses (v1
+   numbers are pessimistic, never optimistic); the v1 sweep entries stay in the sweep file tagged `model: v1`.
