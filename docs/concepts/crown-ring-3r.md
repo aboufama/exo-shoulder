@@ -68,3 +68,43 @@ trapezius / neck rise (azimuth -70..-88) and F jumps by 30-70 mm. Tilting the ax
 anterior-lateral side (clavicle / anterior deltoid, azimuth 106-162): 74-84 mm for KA025. The spec's premise ("the
 skin along superior stays at 47.7-48.6 mm") holds on the one ray, but a 76-89 mm OD ring is not a ray: its land
 reaches skin 30-45 deg off the axis.
+
+## Results (Bench(60,160), fast grid, K3 march, K2 dense, K6, audit; sweep file docs/concepts/sweeps/crown-ring-3r.json)
+
+| what | k | gap | score | reach | follow | in-band 14 | in-band 10 | contact | ring / hub-1 in band | J1 level | hub 2 level |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| spec seed: KA025 at c*, champion closure | (local) | 88.17 | 67.9 | 0.8875 | 0.9167 | 0.064 | 0.026 | 0 | 0.009 | 91 | 160 |
+| same axes, O20 hub at J1 (control) | (local) | 67.62 | 75.4 | 0.90 | 0.9167 | 0.257 | 0.179 | 0 | 1.00 | 54 | 160 |
+| best ring, coarse grid (KA020, a1 (10, 75)) | 28 | 83.40 | 69.7 | 0.9125 | 0.95 | 0.066 | 0.027 | 0 | 0.008 | 107 | 161 |
+| best ring with every hub <= 140 mm (CMA, p1 37.5) | 154 | 82.37 | 70.0 | 0.90 | 0.9167 | 0.115 | 0.046 | 0.005 | 0.009 | 113 | 135 |
+| smallest real ring (KAA10, pitch 15.1, lug root) at the best control axes | 175 | 81.91 | 70.2 | 0.8187 | 1.0 | 0.193 | 0.071 | 0.031 | 0.110 | 64.6 | 113 |
+| **O20-hub control, CMA (J1 bvec(19.5, 88.3), a12 80.0, a23 60.6, J3 wdir(94.5, 12.7), q 0.985)** | 163 | **58.03** | **78.9** | 0.8438 | 0.9833 | 0.391 | 0.226 | 0.015 | 1.00 | 52 | 113 |
+
+The ring loses to an O20 hub on the same axes by 20-24 gap points at every size and every seat tried: its land is a
+large flat area (877 samples for KA025 against ~80 for a hub) that sits 25-32 mm off the domed crown, so it drags
+in-band 14 down to 0.06-0.19 on its own. Even the smallest real ring (KAA10, 25.4 mm bore, outer land 23 mm) sits at
+64.6 mm vs 52 mm for the hub on the same axis and is 11 % in band; link 1 then starts 12 mm higher too (5 % in band vs
+41 % from the hub).
+
+## Red team (scratch redteam.py: every bench pose classified, the reason it is lost, the pinch, per-member distances)
+
+Best ring, k175 (KAA10 ring at the best control axes, q 0.985):
+- **The point that pinches: the ring itself, across the body.** At plane 135-150, elev 105-135, axial -45..-60 the
+  ring's land is 0.2-6.7 mm INSIDE the skin (4 workspace poses; worst -6.67 mm at plane 150 / elev 120 / axial -60).
+  The S-fixed ring is not on S-fixed skin there: the trapezius / clavicular skin moves relative to the scapula frame
+  when the scapula protracts, and q 0.985 hands those poses to contact. The same rise into the J1 bore was measured by
+  annular-ring-3r (wall -0.4 mm at plane 150 / elev 120 / axial -60): two independent models, the same pose.
+- **The pose that jams: J2's closure fold.** Raise overhead (plane 0..30, elev 135, axial -45) and behind the back
+  (plane -60..-90, elev 60, axial 120-135): 6 overhead + 2 behind-back + 2 across poses lost to the closure margin; 2
+  overhead lost to K6 (link 2 on link 1 / neck at elev >= 150).
+- **The member that floats:** hub 2 at 113 mm (median skin distance >= 31.8 mm, 2.7 % in band) and link 2 (4 %), as in
+  every spherical 3R; the ring is 12 % in band, link 1 from the ring 5.5 % (41 % when it leaves an O20 hub).
+- **The optimistic numbers, said plainly:** the bench distance saturates at ~31.8 mm (medians at that value mean
+  "farther"); the ring's K6 attachment is modelled on top of the rotor with a 0.6 mm gap or on a 7 mm lug with no
+  lug samples (the lug is ~7 x 14 mm of unsampled metal at the rotor level); the land is the spec's +-8 mm for every
+  ring size (a KAA10's real land is ~+-6.5: slightly pessimistic for the smallest ring); the ring walls are covered
+  for contact only through the K3 march window (dist >= 0), not sampled for in-band.
+
+O20-hub control, k163 (the best number of this sweep): rest 52/52 taken; overhead 7/17 (6 closure, 2 K6, 1 link-1
+contact at plane 30 / elev 150, 1 neck contact at plane 75 / elev 165); behind the back 17/19; across 28/30. Pinch:
+link 1 -1.0 mm at plane -15 / elev 105 / axial 45 (a contact pose, q 0.985). Hub 2 113 mm (2.7 % in band), link 2 4 %.

@@ -42,7 +42,7 @@ RING_HW, RING_H, RING_UP, LUG = 8.0, 9.0, 4.5, 4.5         # land half width, st
 
 # seed: J1 at c* (spec), the template's closure angles / J3 (the champion's), KA025 ring, q 1.0 (never touches)
 PARAMS = dict(az1=22.8, el1=65.6, p1=34.9, a12=76.9, a23=66.75, wd=86.33, wa=21.83, sigma=-1, margin=10.0,
-              width=14.0, t_link=3.0, w2=12.0, q=1.0, h1=60.0)
+              width=14.0, t_link=3.0, w2=12.0, q=1.0, h1=60.0, lug=0.0)
 
 
 def toward(u, v, phi):
@@ -74,9 +74,14 @@ def build(B, F, p):
     hub2, hub3 = K.hub_member("hub2", a2, "J2"), K.hub_member("hub3", a3, "J3")
     if p["p1"] > 0:                                          # the crown ring and its lug root
         j1 = ring_member("ring1", a1, "J1", p["p1"])
-        root = toward(a1, a2, math.atan2(p["p1"], p["h1"] + RING_H))      # bolted on the rotor top, from the pitch circle out
-        link1 = K.strap_member("link1", root, a2, ("J1", "J2"), width=W, t=T, ramp_to=((None, 0), ("hub2", 0.0)),
-                               over=[("ring1", 0.6)])
+        if p.get("lug", 0) > 0:                                  # variant: root on a lug p['lug'] mm outside the land, rotor level
+            L = p["p1"] + RING_HW + p["lug"]; hr = p["h1"] + RING_UP
+            root = toward(a1, a2, math.atan2(L, hr)); dz = math.hypot(L, hr) - p["h1"]
+            link1 = K.strap_member("link1", root, a2, ("J1", "J2"), width=W, t=T, ramp_to=(("ring1", dz), ("hub2", 0.0)))
+        else:
+            root = toward(a1, a2, math.atan2(p["p1"], p["h1"] + RING_H))      # bolted on the rotor top, from the pitch circle out
+            link1 = K.strap_member("link1", root, a2, ("J1", "J2"), width=W, t=T, ramp_to=((None, 0), ("hub2", 0.0)),
+                                   over=[("ring1", 0.6)])
         hubless = ("J1",)
     else:                                                    # in-model control: J1 an O20 hub (template)
         j1 = K.hub_member("hub1", a1, "J1")

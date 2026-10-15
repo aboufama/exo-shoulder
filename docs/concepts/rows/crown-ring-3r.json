@@ -7,56 +7,57 @@
  "passive_dof": 0,
  "status": "screened",
  "t_ideated": null,
- "t_screened": "2026-10-15T21:50:14Z",
- "reach": 0.9125,
- "follow": 0.95,
- "inband14": 0.066,
- "inband10": 0.0272,
- "contact": 0.0,
- "gap": 83.4,
+ "t_screened": "2026-10-15T22:24:53Z",
+ "reach": 0.8187,
+ "follow": 1.0,
+ "inband14": 0.1927,
+ "inband10": 0.0713,
+ "contact": 0.0305,
+ "gap": 81.91,
  "v_reach": null,
  "v_follow": null,
  "v_inband14": null,
  "v_inband10": null,
  "v_gap": null,
- "n_configs": 144,
- "verdict": "in progress: coarse grid only (144 configs); CMA-ES running",
- "note": "Bench(60,160) fast grid, march, K2 dense, K6, audit clean. Preliminary row after the coarse grid; O20-hub J1 control at the same axes 64.33 (k26).",
+ "n_configs": 180,
+ "verdict": "in progress: ring J1 loses to an O20 hub on the same axes by 20-24 gap at every size and seat (best ring 81.91 vs O20 control 58.03); CMA still running",
+ "note": "Bench(60,160) fast grid, march, K2 dense, K6, audit clean. Intermediate row.",
  "doc": "docs/concepts/crown-ring-3r.md",
- "limiter": "ring1 land level 74-119 mm from GH at every axis tried (0.8 % in band); hub 2 at 161 mm",
- "best_k": 28,
+ "limiter": "ring land level: a flat annulus normal to a GH ray fits the crown only out to ~20-25 mm radius; beyond it the trapezius (medial) or clavicle/anterior deltoid (lateral tilt) sets F 20-70 mm higher; ring 0.8-12 % in band; across-body contact of the ring at plane 135-150 elev 105-135",
+ "best_k": 175,
  "best_params": {
-  "az1": 10,
-  "el1": 75,
-  "p1": 28.6,
-  "a12": 77,
-  "a23": 66.75,
-  "wd": 86.33,
-  "wa": 21.83,
+  "az1": 19.5333,
+  "el1": 88.3426,
+  "p1": 15.1,
+  "a12": 79.9991,
+  "a23": 60.5802,
+  "wd": 94.5093,
+  "wa": 12.6915,
   "sigma": -1,
   "margin": 10.0,
   "width": 14.0,
   "t_link": 3.0,
   "w2": 12.0,
-  "q": 1.0,
-  "h1": 60.0
+  "q": 0.9849,
+  "h1": 60.0,
+  "lug": 7.0
  },
  "park": {
   "ring1": [
-   107.0,
-   7.08
+   64.6,
+   -3.1
   ],
   "hub2": [
-   161.0,
-   11.15
+   112.9,
+   7.3
   ],
   "hub3": [
-   72.0,
-   5.55
+   67.0,
+   4.36
   ]
  },
  "park_ok": false,
- "ring1_F": 107.0,
+ "ring1_F": 64.6,
  "mode": "fast",
  "bench": "Bench(60,160)",
  "honest": true,
@@ -64,7 +65,7 @@
   "mode": "march",
   "cont": true,
   "collide": true,
-  "q": 1.0
+  "q": 0.9849
  },
  "audit": [],
  "hubless": [
