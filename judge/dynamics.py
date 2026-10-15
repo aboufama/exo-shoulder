@@ -15,25 +15,34 @@ Model (SI units inside MuJoCo; the body rig frame: thorax, x anterior, y up, z r
            (the motion the exo follows, "p", smoothed with PCHIP through the clip's knots). Interaction = the tissue wrench.
            The cuff member is light (20 g, gravity compensated): the user's arm parts are carried by the arm and their
            weight is reported, not added, so every N and N.m below is what the shoulder chain adds.
-  joints   Coulomb friction (frictionloss, exact with the noslip solver - MuJoCo's default soft friction is viscous at low
-           speed, see docs/research/dynamics_judge.md) on every hinge; armature 0 (passive) or a back-driven gearmotor.
+  joints   every hinge passive (MVP1 is unpowered, user 2026-10-15). Friction, exact Coulomb (frictionloss with the
+           noslip solver - MuJoCo's default soft friction is viscous at low speed, see docs/research/dynamics_judge.md):
+           MAIN: rolling bearings, load-dependent, tau_f = tau0 + mu_eff |M_perp| with mu_eff 0.002 / 0.005 and tau0 0.001 N.m
+             (M_perp = the joint's reaction moment perpendicular to its axis about the bearing centre, from cfrc_int each step);
+           COMPARISON: plain bearings, the same law with mu_eff 0.06-0.37, tau0 0.05 N.m (red team G6, pipeline/redteam/
+             rt_wedge.py: wedging), tilt about the bearing centre (hub) and about GH (gh, rt_wedge.py's model);
+           and the brief's constant torques 0.05 / 0.2 / 0.5 N.m per joint.
   contact  stacked links: hub discs as cylinders, ribbons as capsule chains at their real height and thickness (from the
            meshes), mu 0.2; the designed bearing (hub on hub, hub on the other member's hub-side ribbon root at a shared
            joint) is the hinge itself and is not a contact.
-Cases: passive (armature 0), motor (every joint a back-driven gearmotor, armature ARM_MOTOR), and for N >= 4 servo (the
-spare joint J1 position-controlled along the evaluator's planned path by a motor, the others passive). For N >= 4 the
-passive chain's spare DOF is free: it does what friction and gravity make it do, and its drift from the plan is reported.
+For N = 4 the passive chain's spare DOF is free: it does what friction, gravity and inertia make it do, and its drift from
+the evaluator's planned path (which the geometric judges assume) is reported. Motor (back-driven gearmotor armature) and
+servo (spare J1 on the plan) cases remain as --cases options; validate() uses the servo only as a numerical device.
+Outputs per clip: interaction force (N) and moment (N.m) at the cuff and about GH, mean cuff pressure (kPa) on the cuff's
+68 cm2 skin side vs the 14 kPa sustained budget, joint speeds / accelerations, cuff tracking (twist about the humerus,
+swing), stalls, lock frames, link-link contact, the worst frames with their friction amplification and axis condition.
 
-    python3 judge/dynamics.py <design id> [--friction 0.2] [--speed 1.0] [--cases passive,motor,servo] [--jobs 4]
-        -> <design>/judge/dynamics.json  (defaults: friction 0.05,0.2,0.5 N.m x speed 1,2 x every case, + validation
-           and attribution; --friction / --speed / --cases take comma lists; --quick: nominal case only)
+    python3 judge/dynamics.py <design id> [--friction 0.2] [--speed 1.0] [--mu_roll 0.002,0.005] [--mu_eff ...] [--jobs 4]
+        -> <design>/judge/dynamics.json  (defaults: rolling 0.002 / 0.005 x speed 1, 2 (main); plain 0.06-0.37 x tilt
+           hub, gh at speed 1; constant 0.05 / 0.2 / 0.5 x speed 1, 2; attribution runs; both validations.
+           Comma lists; '' switches a sweep off; --quick: the nominal rolling-bearing case only)
 """
 import argparse, contextlib, json, math, multiprocessing as mp, os, sys, time
 import numpy as np
 from common import design_dir, load_parts, PIPE
 
 D2R = math.pi / 180
-VERSION = "dynamics-2026-10-15a"
+VERSION = "dynamics-2026-10-15b (MVP1: unpowered; rolling bearings main, plain bearings comparison)"
 # ---------------------------------------------------------------- assumptions (all stated in docs/research/dynamics_judge.md)
 TISSUE = dict(k_perp=3.5e3, k_ax=2.1e3,                   # N/m across / along the humerus (Schiebl 2025 medians 2.1-4.5 N/mm)
               kr_perp=0.20 / D2R, kr_ax=0.03 / D2R,       # N.m/rad bending / torsion (Schiebl 2025: 0.18-0.22, 0.03 N.m/deg)
@@ -42,9 +51,13 @@ CUFF_MM = 200.0             # cuff centre on the humerus axis, mm from GH (user'
 CUFF_MASS = 0.020           # kg, arm-side member at JN (gravity compensated; numerical only)
 ARM_MOTOR = 0.03            # kg m^2 reflected: ~1.2e-5 kg m^2 rotor (45 mm flat BLDC class) x 50:1 gearhead
 SERVO_WN = 2 * math.pi * 15.0
-FRICTIONS = (0.05, 0.2, 0.5); SPEEDS = (1.0, 2.0); NOMINAL = (0.2, 1.0, "passive")
+FRICTIONS = (0.05, 0.2, 0.5); SPEEDS = (1.0, 2.0)
 DT = 2e-4; REC = 5; SETTLE = 0.5; MU_CONTACT = 0.2; HW = 7.0
-MU_EFFS = (0.06, 0.15, 0.25, 0.37); TAU0 = 0.05      # load-dependent friction sweep (red team G6) and its no-load torque, N.m
+MU_EFFS = (0.06, 0.15, 0.25, 0.37); TAU0 = 0.05      # plain bearings (comparison): load-dependent friction sweep (red team G6), no-load torque N.m
+MU_ROLL = (0.002, 0.005); TAU0_ROLL = 0.001          # rolling bearings (MVP1 main case): mu_eff = mu_SKF d / L for a bearing pair, shielded no-load drag
+CUFF_AREA_CM2 = 68.0        # skin side of the user's upper-arm cuff shell (cad_r13_n4_s1343_1, faces facing the humerus axis)
+STRAP_KPA = 6.5             # strap preload that gives Schiebl's stiffness (65 mbar attachment pressure)
+COMFORT_KPA = 14.0          # sustained (all-day) interface pressure budget at the cuff (lead / user, 2026-10-15)
 THRESH = dict(free_moment_gh_peak_Nm=1.0, free_moment_gh_rms_Nm=0.5, free_force_peak_N=5.0, free_twist_peak_deg=5.0,
               free_spare_drift_deg=5.0, iso_ts_15066_upper_arm_N=150.0, lock_moment_gh_Nm=10.0)
 LAG_DEG = 10.0              # a stall that misses >= this much planned joint travel: the exo is no longer where the geometric judges put it
@@ -262,44 +275,121 @@ def quat(R):
     import mujoco
     q = np.zeros(4); mujoco.mju_mat2Quat(q, np.asarray(R, float).ravel()); return q
 
-def build_xml(des, friction, armature, R0, tissue_scale=1.0, gravity=True, contacts=True, dt=DT, servo=False):
-    """R0: reference rotations at qpos = 0 {'l1'..: link frame in the scapula frame, 'cuff': HG}"""
+MEMBERS = None
+def members(des): return des.groups + ["cuff"]                                  # member index m: base 0, l1..l(N-1), cuff N; joint J(m, m+1) = m + 1
+
+def geom_table(des):
+    """[(name, member index, kind, J, p0 mm, p1 mm, radius mm, near-joint set)] for every contact primitive; near = the
+    ribbon's midpoint within hub_r + half width + 1 mm of one of its member's joint axes (the hub-side ribbon root)"""
+    out = []
+    for mi, g in enumerate(members(des)):
+        hubs = [(JJ, unit(np.asarray(q1, float)), rr) for kd, JJ, q0, q1, rr in des.prims.get(g, []) if kd == "hub"]
+        for i, (kind, J, p0, p1, rad) in enumerate(des.prims.get(g, [])):
+            mid = 0.5 * (np.asarray(p0) + np.asarray(p1))
+            near = {JJ for JJ, u, rr in hubs if np.linalg.norm(mid - (mid @ u) * u) < rr + HW + 1.0} if kind == "rib" else set()
+            out.append((f"{g}_{i}", mi, kind, J, np.asarray(p0, float), np.asarray(p1, float), rad, near))
+    return out
+
+def designed_bearing(a, b):
+    """True for the pairs that are the joint itself at a shared joint J: hub on hub, hub on the other member's hub-side
+    ribbon root (band_impl.collisions' exemptions)"""
+    (_, ma, ka, Ja, *_, na), (_, mb, kb, Jb, *_, nb) = a, b
+    J = max(ma, mb)                                                             # the joint between members m and m+1 is J = m + 1
+    if abs(ma - mb) != 1: return False
+    hub_a = ka == "hub" and Ja == J; hub_b = kb == "hub" and Jb == J
+    return (hub_a and hub_b) or (hub_a and J in nb) or (hub_b and J in na)
+
+def build_xml(des, friction, armature, R0, tissue_scale=1.0, gravity=True, contacts=True, dt=DT, servo=False, pairs=()):
+    """R0: reference rotations at qpos = 0 {'l1'..: link frame in the scapula frame, 'cuff': HG}. Contact: members that
+    are not adjacent collide automatically (member bits); adjacent members only through the explicit `pairs`
+    [(geom name, geom name)] (judge: candidates from a full joint-angle sweep, minus the designed bearing, minus pairs
+    that already interpenetrate on the clip's planned path)."""
     N = des.N; fmt = lambda v: " ".join(f"{x:.9g}" for x in np.ravel(v))
-    ALL = (1 << (2 * N + 2)) - 1
-    def geoms(g):
+    ALL = (1 << (N + 1)) - 1; D = lambda m_: (1 << m_) if 0 <= m_ <= N else 0
+    tab = {}
+    for row in geom_table(des): tab.setdefault(row[1], []).append(row)
+    attrs = f'condim="3" friction="{MU_CONTACT} 0.005 0.0001" margin="0" gap="0.001" solref="0.004 1"'
+    def geoms(mi):
         out = []
-        for kind, J, p0, p1, rad in des.prims.get(g, []):
-            p0, p1 = np.asarray(p0) / 1000, np.asarray(p1) / 1000; rad = rad / 1000
+        for name, _, kind, J, p0, p1, rad, _n in tab.get(mi, []):
+            p0, p1 = p0 / 1000, p1 / 1000; rad = rad / 1000
             if np.linalg.norm(p1 - p0) < 1e-5: p1 = p0 + 1e-5 * unit(p0)
-            if kind == "hub": ct, ca = 1 << (2 * J), ALL & ~((1 << (2 * J)) | (1 << (2 * J + 1)))
-            else:
-                mid = 0.5 * (p0 + p1) * 1000; near = None; best = 1e9
-                for kd, JJ, q0, q1, rr in des.prims.get(g, []):
-                    if kd != "hub": continue
-                    u = unit(np.asarray(q1, float)); d_ = np.linalg.norm(mid - (mid @ u) * u)
-                    if d_ < rr + HW + 1.0 and d_ < best: best, near = d_, JJ
-                ct, ca = ((1 << (2 * near + 1)), ALL & ~(1 << (2 * near))) if near else (1, ALL)
             typ = "cylinder" if kind == "hub" else "capsule"
-            out.append(f'<geom type="{typ}" fromto="{fmt(p0)} {fmt(p1)}" size="{rad:.6g}" contype="{ct}" conaffinity="{ca}" '
-                       f'condim="3" friction="{MU_CONTACT} 0.005 0.0001" margin="0" gap="0.001" solref="0.004 1" group="1"/>')
+            out.append(f'<geom name="{name}" type="{typ}" fromto="{fmt(p0)} {fmt(p1)}" size="{rad:.6g}" contype="{D(mi)}" conaffinity="{ALL & ~D(mi - 1) & ~D(mi + 1)}" {attrs} group="1"/>')
         return "\n".join(out) if contacts else ""
     def inertial(g):
         m, c, I, _ = des.mp[g]; I = 0.5 * (I + I.T)
         return f'<inertial pos="{fmt(c)}" mass="{max(m, 1e-4):.9g}" fullinertia="{I[0,0]:.9g} {I[1,1]:.9g} {I[2,2]:.9g} {I[0,1]:.9g} {I[0,2]:.9g} {I[1,2]:.9g}"/>'
     fl = (f'frictionloss="{friction:.6g}"' if friction > 0 else "")
     def arm_of(J): return armature if (not servo or J == 1) else 0.0
-    body = [f'<body name="base"><joint name="scap" type="ball" armature="1000"/><inertial pos="0 0 0" mass="1" diaginertia="1e-3 1e-3 1e-3"/>{geoms("base")}']
+    body = [f'<body name="base"><joint name="scap" type="ball" armature="1000"/><inertial pos="0 0 0" mass="1" diaginertia="1e-3 1e-3 1e-3"/>{geoms(0)}']
     prev = np.eye(3)
     for k in range(1, N):
         g = f"l{k}"; Rr = prev.T @ R0[g]
-        body.append(f'<body name="{g}" quat="{fmt(quat(Rr))}"><joint name="J{k}" type="hinge" axis="1 0 0" {fl} armature="{arm_of(k):.6g}"/>{inertial(g)}{geoms(g)}')
+        body.append(f'<body name="{g}" quat="{fmt(quat(Rr))}"><joint name="J{k}" type="hinge" axis="1 0 0" {fl} armature="{arm_of(k):.6g}"/>{inertial(g)}{geoms(k)}')
         prev = R0[g]
     Rr = prev.T @ R0["cuff"]; c = np.array([0, -CUFF_MM / 1000, 0])
     body.append(f'<body name="cuff" quat="{fmt(quat(Rr))}" gravcomp="1"><joint name="J{N}" type="hinge" axis="{fmt(des.ch.W)}" {fl} armature="{arm_of(N):.6g}"/>'
-                f'<inertial pos="{fmt(c)}" mass="{CUFF_MASS}" diaginertia="2e-6 2e-6 2e-6"/>{geoms("cuff")}')
+                f'<inertial pos="{fmt(c)}" mass="{CUFF_MASS}" diaginertia="2e-6 2e-6 2e-6"/>{geoms(N)}')
+    pr = "".join(f'<pair geom1="{a}" geom2="{b}" {attrs.replace("condim", "condim")}/>' for a, b in pairs) if contacts else ""
     xml = f"""<mujoco model="{des.id}"><compiler angle="radian" autolimits="true"/>{option_xml(dt, gravity)}
-<worldbody>{''.join(body)}{'</body>' * (N + 1)}</worldbody></mujoco>"""
+<worldbody>{''.join(body)}{'</body>' * (N + 1)}</worldbody>{f'<contact>{pr}</contact>' if pr else ''}</mujoco>"""
     return xml
+
+def adjacent_candidates(des, step_deg=3.0, near_mm=2.0):
+    """geom pairs of adjacent members that come within near_mm at some angle of their shared joint (full-turn sweep;
+    the relative pose of two adjacent members depends on that joint alone), minus the designed bearing pairs"""
+    if getattr(des, "_cand", None) is not None: return des._cand
+    import mujoco
+    tr = des.clip_traj(0); X = tr["f"](np.array([0.0])); Rh = humerus(X[:, :3]); Rs = scap(X[:, 1]); HG = np.transpose(Rs, (0, 2, 1)) @ Rh
+    pins0, _ = des.ch.pins(HG, None if des.N == 3 else np.radians(X[:, 3])); Fm0 = des.ch.frames(pins0)
+    R0 = {f"l{k}": Fm0[k - 1][0] for k in range(1, des.N)}; R0["cuff"] = HG[0]
+    m = mujoco.MjModel.from_xml_string(build_xml(des, 0.0, 0.0, R0)); d = mujoco.MjData(m); d.qpos[0:4] = quat(Rs[0])
+    tab = geom_table(des); gid = {r[0]: mujoco.mj_name2id(m, mujoco.mjtObj.mjOBJ_GEOM, r[0]) for r in tab}
+    by = {}
+    for r in tab: by.setdefault(r[1], []).append(r)
+    cand, ft = [], np.zeros(6)
+    for mi in range(des.N):
+        P = [(a, b) for a in by.get(mi, []) for b in by.get(mi + 1, []) if not designed_bearing(a, b)]
+        if not P: continue
+        qa = m.jnt_qposadr[mujoco.mj_name2id(m, mujoco.mjtObj.mjOBJ_JOINT, f"J{mi + 1}")]; best = np.full(len(P), np.inf)
+        for th in np.radians(np.arange(0, 360, step_deg)):
+            d.qpos[qa] = th; mujoco.mj_kinematics(m, d)
+            for k, (a, b) in enumerate(P):
+                if best[k] > -1: best[k] = min(best[k], mujoco.mj_geomDistance(m, d, gid[a[0]], gid[b[0]], near_mm / 1000, ft))
+        cand += [(a[0], b[0]) for (a, b), x in zip(P, best) if x < near_mm / 1000]
+        d.qpos[qa] = 0.0
+    des._cand = cand; return cand
+
+def planned(des, tr, s, R0):
+    """the evaluator's configuration along path frames s: (joint angles (n, N) relative to the reference R0, closure ok,
+    humerus frames, scapula frames)"""
+    N = des.N; Xr = tr["f"](s); Rh_r = humerus(Xr[:, :3]); Rs_r = scap(Xr[:, 1]); HG_r = np.transpose(Rs_r, (0, 2, 1)) @ Rh_r
+    pins_r, ok_r = des.ch.pins(HG_r, None if N == 3 else np.radians(Xr[:, 3])); Fm_r = des.ch.frames(pins_r)
+    chainR = [np.broadcast_to(np.eye(3), Fm_r[0].shape)] + Fm_r + [HG_r]; refR = [np.eye(3)] + [R0[f"l{k}"] for k in range(1, N)] + [R0["cuff"]]
+    axes_loc = [np.array([1.0, 0, 0])] * (N - 1) + [des.ch.W]; qp = []
+    for k in range(1, N + 1):
+        Roff = refR[k - 1].T @ refR[k]; Rrel = np.transpose(chainR[k - 1], (0, 2, 1)) @ chainR[k]
+        qp.append(np.unwrap(angle_about(Roff.T @ Rrel, axes_loc[k - 1])))
+    return np.stack(qp, 1), ok_r, Rh_r, Rs_r
+
+def planned_overlaps(des, tr, R0, pairs, every=3):
+    """candidate pairs that already interpenetrate on this clip's planned path (sampled every `every` clip frames):
+    {(a, b): deepest mm} - the L1 geometry / primitives overlap by design there (R6's domain)"""
+    import mujoco
+    if not pairs: return {}
+    m = mujoco.MjModel.from_xml_string(build_xml(des, 0.0, 0.0, R0)); d = mujoco.MjData(m); ft = np.zeros(6)
+    sv = np.arange(0, tr["n"], every, dtype=float); qp, ok, _, Rs_r = planned(des, tr, sv, R0)
+    jq = [m.jnt_qposadr[mujoco.mj_name2id(m, mujoco.mjtObj.mjOBJ_JOINT, f"J{k}")] for k in range(1, des.N + 1)]
+    gid = {n: mujoco.mj_name2id(m, mujoco.mjtObj.mjOBJ_GEOM, n) for ab in pairs for n in ab}; out = {}
+    for i in range(len(sv)):
+        d.qpos[0:4] = quat(Rs_r[i])
+        for k, a in enumerate(jq): d.qpos[a] = qp[i, k]
+        mujoco.mj_kinematics(m, d)
+        for a, b in pairs:
+            x = mujoco.mj_geomDistance(m, d, gid[a], gid[b], 0.0, ft)
+            if x < -1e-5: out[(a, b)] = min(out.get((a, b), 0.0), x * 1000)
+    return out
 
 # ---------------------------------------------------------------- one run
 def run(des, ci, friction=0.2, speed=1.0, case="passive", gravity=True, tissue_scale=1.0, contacts=True, dt=DT, traj=None, record=False,
@@ -325,7 +415,9 @@ def run(des, ci, friction=0.2, speed=1.0, case="passive", gravity=True, tissue_s
     R0 = {f"l{k}": Fm0[k - 1][0] for k in range(1, N)}; R0["cuff"] = HG[0]
     servo = case == "servo"; arm = ARM_MOTOR if case in ("motor", "servo") else 0.0
     load = mu_eff is not None; f_xml = tau0 if load else friction
-    m = mujoco.MjModel.from_xml_string(build_xml(des, f_xml, arm, R0, tissue_scale, gravity, contacts, dt, servo)); d = mujoco.MjData(m)
+    cand = adjacent_candidates(des) if contacts else []; pov = planned_overlaps(des, tr, R0, cand) if contacts else {}
+    pairs = [ab for ab in cand if ab not in pov]
+    m = mujoco.MjModel.from_xml_string(build_xml(des, f_xml, arm, R0, tissue_scale, gravity, contacts, dt, servo, pairs)); d = mujoco.MjData(m)
     if load and f_xml <= 0: raise ValueError("load-dependent friction needs tau0 > 0 (frictionloss rows must exist)")
     jid = [mujoco.mj_name2id(m, mujoco.mjtObj.mjOBJ_JOINT, f"J{k}") for k in range(1, N + 1)]
     qa = [m.jnt_qposadr[j] for j in jid]; va = [m.jnt_dofadr[j] for j in jid]; bq, bv = m.jnt_qposadr[0], m.jnt_dofadr[0]
@@ -401,19 +493,16 @@ def run(des, ci, friction=0.2, speed=1.0, case="passive", gravity=True, tissue_s
     R = {k: (np.array(v) if k not in ("con",) else v) for k, v in rec.items()}
     R["fmax"] = np.array([c[0] for c in R["con"]]); R["pair"] = [c[1] for c in R["con"]]
     # planned configuration at the recorded samples
-    sr = R["s"]; Xr = tr["f"](sr); dXr = tr["df"](sr) * speed * fps; Rh_r = humerus(Xr[:, :3]); Rs_r = scap(Xr[:, 1]); HG_r = np.transpose(Rs_r, (0, 2, 1)) @ Rh_r
-    pins_r, ok_r = des.ch.pins(HG_r, None if N == 3 else np.radians(Xr[:, 3])); Fm_r = des.ch.frames(pins_r)
-    chainR = [np.broadcast_to(np.eye(3), Fm_r[0].shape)] + Fm_r + [HG_r]; refR = [np.eye(3)] + [R0[f"l{k}"] for k in range(1, N)] + [R0["cuff"]]
-    axes_loc = [np.array([1.0, 0, 0])] * (N - 1) + [des.ch.W]; qp = []
-    for k in range(1, N + 1):
-        Roff = refR[k - 1].T @ refR[k]; Rrel = np.transpose(chainR[k - 1], (0, 2, 1)) @ chainR[k]
-        qp.append(np.unwrap(angle_about(Roff.T @ Rrel, axes_loc[k - 1])))
-    R["qp"] = np.stack(qp, 1); R["qp"] -= R["qp"][0]; R["ok"] = ok_r
+    sr = R["s"]; qp, ok_r, Rh_r, _ = planned(des, tr, sr, R0); R["qp"] = qp; R["ok"] = ok_r
     R["qdp"] = np.gradient(R["qp"], R["t"], axis=0)
     R["warm"] = R["t"] >= SETTLE; R["h"] = Rh_r @ np.array([0, -1.0, 0]); R["Rh"] = Rh_r
     wr = vee(np.gradient(Rh_r, R["t"], axis=0) @ np.transpose(Rh_r, (0, 2, 1))); R["warm_w"] = np.linalg.norm(wr, axis=1)
     R["frame"] = np.clip(np.round(sr).astype(int), 0, nf - 1); R["held"] = tr["held"][R["frame"]]
     summ = summarise(des, tr, R, friction if not load else tau0, speed, case)
+    po = {}
+    for (ga, gb), x in pov.items():
+        k = f"{ga.rsplit('_', 1)[0]}-{gb.rsplit('_', 1)[0]}"; po[k] = round(min(po.get(k, 0.0), x), 2)
+    summ["contact"]["planned_overlap_mm"] = po; summ["contact"]["adjacent_pairs_checked"] = len(pairs)
     if load: summ["load_friction"] = dict(mu_eff=mu_eff, tau0_Nm=tau0, tilt_ref=tilt, tilt_peak_Nm=[round(float(x), 3) for x in R["tilt"][R["warm"]].max(0)],
                                           friction_peak_Nm=[round(float(x), 3) for x in R["cap"][R["warm"]].max(0)])
     return summ, (R if record else None)
@@ -472,6 +561,8 @@ def summarise(des, tr, R, friction, speed, case):
     lockm = (Mgn > THRESH["lock_moment_gh_Nm"]) | (Fn > THRESH["iso_ts_15066_upper_arm_N"])     # the arm cannot reasonably drive it
     out = dict(duration_s=round(float(t[-1] - t[0]), 2), held_share=round(float(R["held"][w].mean()), 3),
                force_N=dict(peak=round(float(Fn.max()), 2), rms=round(rms(Fn), 2)),
+               cuff_pressure_kPa=dict(peak=round(float(Fn.max()) / CUFF_AREA_CM2 * 10, 3), rms=round(rms(Fn) / CUFF_AREA_CM2 * 10, 3),
+                                      axial_shear_peak=round(float(Mc_ax.max()) / (0.063 * CUFF_AREA_CM2 * 1e-4) / 1000, 3)),
                moment_cuff_Nm=dict(peak=round(float(Mn.max()), 3), rms=round(rms(Mn), 3), axial_peak=round(float(Mc_ax.max()), 3)),
                moment_gh_Nm=dict(peak=round(float(Mgn.max()), 3), rms=round(rms(Mgn), 3), perp_peak=round(float(Mperp.max()), 3), axial_peak=round(float(Max.max()), 3)),
                joint_speed_dps=[round(float(x), 1) for x in np.degrees(np.abs(qd).max(0))], arm_speed_dps=round(float(np.degrees(warm_w.max())), 1),
@@ -535,11 +626,11 @@ def validate(des, clips=None, friction=0.05, speed=0.25, tissue_scale=20.0, dt=1
             rows.append(row)
     if not rows: return dict(ok=None, note="no comparable frames")
     ref = "amp_transmission" if des.N == 3 else "amp_exact_servo"
-    use = [r for r in rows if ref in r and r.get("same_signs", True)]
+    use = [r for r in rows if ref in r and (des.N == 4 or r.get("same_signs", True))]       # N = 4: the exact reference uses the realised signs
     err = np.array([abs(r["amp_dynamics"] / r[ref] - 1) for r in use]) if use else np.array([np.nan])
     out = dict(method=f"speed x{speed}, gravity off, cuff stiffness x{tissue_scale}, friction {friction} N.m on every joint, contacts off, dt {dt}; |M_GH| / friction vs "
                       + ("transmission.py's amplification on its 10 fps frames" if des.N == 3 else "the exact quasi-static moment with J1 servoed (3 passive joints)"),
-               reference=ref, frames_compared=len(use), frames_excluded_sign_mismatch=len([r for r in rows if not r.get("same_signs", True)]),
+               reference=ref, frames_compared=len(use), frames_excluded_sign_mismatch=(len([r for r in rows if not r.get("same_signs", True)]) if des.N == 3 else 0),
                rel_err_median=round(float(np.median(err)), 4), rel_err_p95=round(float(np.percentile(err, 95)), 4), rel_err_max=round(float(np.max(err)), 4),
                ok=bool(np.percentile(err, 95) < 0.03), rows=rows)
     if des.N == 4 and have_tm:
@@ -571,7 +662,7 @@ def qs_load_moment(U, s, mu, tau0):
     M, _, ier, _ = fsolve(f, np.linalg.solve(U, s * tau0), full_output=True)
     return M if ier == 1 and np.abs(f(M)).max() < 1e-7 and (np.sign(U @ M) == s).all() else None
 
-def validate_wedge(des, mus=(0.15, 0.25, 0.37), tau0=TAU0, speed=0.25, tissue_scale=20.0, dt=1e-4, jobs=1, log=print, clips=None):
+def validate_wedge(des, mus=(0.005, 0.15, 0.25, 0.37), tau0=TAU0, speed=0.25, tissue_scale=20.0, dt=1e-4, jobs=1, log=print, clips=None):
     """the load-dependent friction against rt_wedge.py's quasi-static wedge model, on transmission.py's 10 fps frames
     (N = 3 only: rt_wedge's 4R moves all four joints on the evaluator's path, a passive 4R does not). Slow, no gravity,
     stiff cuff, tilt about GH (rt_wedge's model). (a) frames well clear of a lock (tan alpha* >= 1.2 mu, no joint-rate
@@ -636,29 +727,36 @@ def load_key(mu, tau0, s, c, tilt): return f"{c}|mu{mu:g}|t{tau0:g}|s{s:g}|{tilt
 
 def main():
     ap = argparse.ArgumentParser(); ap.add_argument("design")
-    ap.add_argument("--friction", default=",".join(f"{x:g}" for x in FRICTIONS)); ap.add_argument("--speed", default=",".join(f"{x:g}" for x in SPEEDS))
-    ap.add_argument("--cases", default=None); ap.add_argument("--clips", default=None); ap.add_argument("--jobs", type=int, default=min(4, os.cpu_count() or 1))
-    ap.add_argument("--quick", action="store_true", help="nominal case only (friction 0.2, speed 1, passive), no validation")
-    ap.add_argument("--mu_eff", default=",".join(f"{x:g}" for x in MU_EFFS), help="load-dependent friction sweep (red team G6); '' = off")
-    ap.add_argument("--tau0", type=float, default=TAU0); ap.add_argument("--tilt", default="hub,gh", help="tilt couple about the bearing centre (hub) and/or GH (gh, rt_wedge.py)")
+    ap.add_argument("--friction", default=",".join(f"{x:g}" for x in FRICTIONS), help="constant Coulomb torques per joint, N.m ('' = off)")
+    ap.add_argument("--speed", default=",".join(f"{x:g}" for x in SPEEDS))
+    ap.add_argument("--cases", default="passive", help="passive (MVP1: unpowered); motor / servo kept as options")
+    ap.add_argument("--clips", default=None); ap.add_argument("--jobs", type=int, default=min(4, os.cpu_count() or 1))
+    ap.add_argument("--mu_roll", default=",".join(f"{x:g}" for x in MU_ROLL), help="rolling bearings, load-dependent (main case); '' = off")
+    ap.add_argument("--tau0_roll", type=float, default=TAU0_ROLL)
+    ap.add_argument("--mu_eff", default=",".join(f"{x:g}" for x in MU_EFFS), help="plain bearings, load-dependent (comparison, red team G6); '' = off")
+    ap.add_argument("--tau0", type=float, default=TAU0); ap.add_argument("--tilt", default="hub,gh", help="plain-bearing tilt couple about the bearing centre (hub) and/or GH (gh, rt_wedge.py)")
+    ap.add_argument("--quick", action="store_true", help="nominal case only (rolling bearings mu_eff 0.005, speed 1), no validation")
     ap.add_argument("--no-validate", action="store_true"); ap.add_argument("--out", default=None)
     a = ap.parse_args(); global DES
     t0 = time.time(); DES = des = Design(a.design); N = des.N
-    cases = a.cases.split(",") if a.cases else (["passive", "motor"] + (["servo"] if N == 4 else []))
-    fr = [float(x) for x in a.friction.split(",")]; sp = [float(x) for x in a.speed.split(",")]
-    mus = [float(x) for x in a.mu_eff.split(",") if x.strip()]; tilts = [x for x in a.tilt.split(",") if x.strip()]
-    if a.quick: fr, sp, cases, mus = [NOMINAL[0]], [NOMINAL[1]], [NOMINAL[2]], []
+    cases = [c for c in a.cases.split(",") if c]
+    lst = lambda x: [float(v) for v in x.split(",") if v.strip()]
+    fr, sp, mur, mus = lst(a.friction), lst(a.speed), lst(a.mu_roll), lst(a.mu_eff); tilts = [x for x in a.tilt.split(",") if x.strip()]
+    nom_mu = max(mur) if mur else MU_ROLL[-1]
+    if a.quick: fr, sp, mur, mus, cases = [], [1.0], [nom_mu], [], ["passive"]
     cl = [i for i, c in enumerate(des.clips) if a.clips is None or c["name"] in a.clips.split(",") or str(i) in a.clips.split(",")]
     print(f"dynamics {des.id}: N = {N}, link masses " + ", ".join(f"{g} {1000 * des.mp[g][0]:.1f} g" for g in des.groups[1:]) +
           f"; arm parts (H) {1000 * des.H_mass:.0f} g carried by the arm; {sum(len(v) for v in des.prims.values())} contact primitives", flush=True)
     ik = des.ik_check(); print(f"  chain vs the clips' G: max {max(ik.values()):.3f} deg {ik}", flush=True)
-    todo = [(case_key(f, s, c), ci, dict(friction=f, speed=s, case=c)) for c in cases for f in fr for s in sp for ci in cl]
-    lcases = ["passive"] + (["servo"] if N == 4 and "servo" in cases else [])            # load-dependent friction: quasi-static effect, speed 1
-    todo += [(load_key(mu, a.tau0, 1.0, c, tl), ci, dict(speed=1.0, case=c, mu_eff=mu, tau0=a.tau0, tilt=tl)) for c in lcases for tl in tilts for mu in mus for ci in cl]
-    nom = case_key(*NOMINAL)
-    if nom in {k for k, _, _ in todo} and not a.quick:                                # attribution: same run without friction / without gravity
-        todo += [(nom + "|nofric", ci, dict(friction=0.0, speed=1.0, case="passive")) for ci in cl]
-        todo += [(nom + "|nofric|nograv", ci, dict(friction=0.0, speed=1.0, case="passive", gravity=False)) for ci in cl]
+    todo = [(case_key(f, s, c), ci, dict(friction=f, speed=s, case=c)) for c in cases for f in fr for s in sp for ci in cl]                       # constant Coulomb (the brief)
+    todo += [(load_key(mu, a.tau0_roll, s, c, "hub"), ci, dict(speed=s, case=c, mu_eff=mu, tau0=a.tau0_roll, tilt="hub")) for c in cases for mu in mur for s in sp for ci in cl]   # rolling (main)
+    todo += [(load_key(mu, a.tau0, 1.0, c, tl), ci, dict(speed=1.0, case=c, mu_eff=mu, tau0=a.tau0, tilt=tl)) for c in cases for tl in tilts for mu in mus for ci in cl]       # plain (comparison)
+    nom = load_key(nom_mu, a.tau0_roll, 1.0, "passive", "hub")
+    if not a.quick:                                                                    # attribution: the same arm motion without friction / without gravity
+        for s in sp:
+            todo += [(f"passive|nofric|s{s:g}", ci, dict(friction=0.0, speed=s, case="passive")) for ci in cl]
+            todo += [(f"passive|nofric|nograv|s{s:g}", ci, dict(friction=0.0, speed=s, case="passive", gravity=False)) for ci in cl]
+    lcases = cases
     res = {}; errs = []
     with (mp.get_context("fork").Pool(a.jobs) if a.jobs > 1 else contextlib.nullcontext()) as pool:
         it = pool.imap_unordered(_task, todo) if pool else map(_task, todo)
@@ -675,19 +773,24 @@ def main():
                           link_com_mm={g: [round(1000 * x, 1) for x in des.mp[g][1]] for g in des.groups[1:]},
                           link_inertia_about_gh_kgm2={g: round(float(np.trace(des.mp[g][2] + des.mp[g][0] * (np.dot(des.mp[g][1], des.mp[g][1]) * np.eye(3) - np.outer(des.mp[g][1], des.mp[g][1]))) / 2), 7) for g in des.groups[1:]},
                           arm_parts_mass_g=round(1000 * des.H_mass, 1), forearm_parts_mass_g=round(1000 * des.F_mass, 1), densities_g_cm3=G_CM3,
-                          motor_armature_kgm2=ARM_MOTOR, motor_assumption="~1.2e-5 kg m^2 rotor (45 mm flat BLDC class) x 50:1 = 0.03 kg m^2 reflected per joint, back-driven (zero torque command)",
-                          servo="N = 4: J1 (the spare) position-controlled along the evaluator's path, 15 Hz PD + feed-forward, motor armature on J1 only",
+                          cases_run=cases, mvp1="unpowered (user, 2026-10-15): every joint passive, no motor / gear / cable; motor and servo cases exist only as --cases options",
+                          cuff_pressure=dict(area_cm2=CUFF_AREA_CM2, strap_preload_kPa=STRAP_KPA, sustained_budget_kPa=COMFORT_KPA,
+                                             rule="mean pressure = cuff force / skin-side shell area; the budget left for the exo is COMFORT - STRAP (edge peaks ~2x the mean)",
+                                             arm_parts_weight_N=round(9.81 * des.H_mass, 2)),
                           contact=dict(mu=MU_CONTACT, primitives={g: len(v) for g, v in des.prims.items()}, hub_r_mm=des.hub_r, margin_mm=0.0, near_miss_band_mm=2.0,
                                        rule="every member pair incl. adjacent ones; at a shared joint the bearing (hub on hub, hub on the other member's hub-side ribbon root) is the hinge, not a contact")),
                load_friction=dict(model="tau_f,i = tau0 + mu_eff |M_perp,i| each step (red team G6, pipeline/redteam/rt_wedge.py); M_perp from cfrc_int one step behind",
-                                  mu_eff=mus, tau0_Nm=a.tau0, tilt_refs=tilts, cases=lcases, speed=1.0,
+                                  rolling=dict(mu_eff=mur, tau0_Nm=a.tau0_roll, tilt_ref="hub", speeds=sp,
+                                               basis="pair of shielded deep-groove / needle bearings at the hub, bore d ~10 mm, spacing L ~5 mm: the tilt couple is a force couple M/L, "
+                                                     "SKF simplified friction M_f = 0.5 mu P d per bearing (mu 0.0015 deep groove, 0.0025 needle) -> mu_eff = mu d / L = 0.003-0.005; tau0 = grease drag of 2 shielded bearings"),
+                                  plain=dict(mu_eff=mus, tau0_Nm=a.tau0, tilt_refs=tilts, speed=1.0), cases=lcases,
                                   tilt_ref_note="hub: moment about the hub stack's mid-height on the axis (the pin carries the force); gh: about the GH centre, rt_wedge.py's model without R x F",
                                   bearing_r_mm={str(k): round(float(v), 1) for k, v in des.bearing_r.items()}),
                chain_vs_clip_G_max_deg=ik, thresholds=THRESH, nominal=nom, cases={}, errors=errs)
     for key in sorted(res):
         C = res[key]; out["cases"][key] = dict(clips=C, **rollup(C, N))
-    if nom + "|nofric" in res:
-        out["attribution"] = attribution(res, nom)
+    if any(k.startswith("passive|nofric") for k in res):
+        out["attribution"] = {f"s{s:g}": attribution(res, load_key(nom_mu, a.tau0_roll, s, "passive", "hub"), s) for s in sp}
     if nom in res: out["verdict"] = verdict(out, nom)
     path = a.out or os.path.join(des.dd, "judge", "dynamics.json"); os.makedirs(os.path.dirname(path), exist_ok=True)
     out["seconds"] = round(time.time() - t0); json.dump(out, open(path, "w"), indent=1)          # the runs are saved before the validations
@@ -714,6 +817,7 @@ def rollup(C, N):
              worst_missed_deg=max(c["stalls"]["worst_missed_deg"] for c in C.values()),
              lock_clips=[n for n, c in C.items() if not c["drive"]["drives"]], frames_over_lock_max=max(c["drive"]["frames_over_lock"] for c in C.values()),
              frames_over_felt_max=max(c["drive"]["frames_over_felt"] for c in C.values()), contact_touch=any(c["contact"]["touch"] for c in C.values()),
+             cuff_pressure_peak_kPa=max(c["cuff_pressure_kPa"]["peak"] for c in C.values()),
              contact_peak_N=max(c["contact"]["peak_N"] for c in C.values()), amp_qs_max=max(c["amp_qs"]["max"] for c in C.values()))
     if N == 4: r["spare_drift_max_deg"] = max(c.get("spare_drift_deg", 0) for c in C.values())
     if any("servo_peak_Nm" in c for c in C.values()): r["servo_peak_Nm"] = max(c.get("servo_peak_Nm", 0) for c in C.values())
@@ -721,15 +825,15 @@ def rollup(C, N):
         r["friction_peak_Nm"] = max(max(c["load_friction"]["friction_peak_Nm"]) for c in C.values()); r["tilt_peak_Nm"] = max(max(c["load_friction"]["tilt_peak_Nm"]) for c in C.values())
     return r
 
-def attribution(res, nom):
-    """per clip at the nominal case: share of the peak moment about GH from friction (full - no friction), gravity
-    (no friction - no friction & no gravity) and inertia (no friction & no gravity), each at its own peak"""
+def attribution(res, nom, s):
+    """per clip: the peak moment about GH of the nominal (rolling-bearing) run, of the same motion without friction
+    (gravity + inertia) and without friction and gravity (inertia alone), each at its own peak"""
     out = {}
-    for n, c in res[nom].items():
-        a = res.get(nom + "|nofric", {}).get(n); b = res.get(nom + "|nofric|nograv", {}).get(n)
+    for n, c in res.get(nom, {}).items():
+        a = res.get(f"passive|nofric|s{s:g}", {}).get(n); b = res.get(f"passive|nofric|nograv|s{s:g}", {}).get(n)
         if not a or not b: continue
         out[n] = dict(total_peak_Nm=c["moment_gh_Nm"]["peak"], without_friction_peak_Nm=a["moment_gh_Nm"]["peak"], inertia_only_peak_Nm=b["moment_gh_Nm"]["peak"],
-                      friction_qs_at_worst_Nm=c["worst"][0]["friction_qs_Nm"] if c["worst"] else None)
+                      total_force_peak_N=c["force_N"]["peak"], without_friction_force_peak_N=a["force_N"]["peak"], inertia_only_force_peak_N=b["force_N"]["peak"])
     return out
 
 def verdict(out, nom):
@@ -740,15 +844,19 @@ def verdict(out, nom):
     v["rule"] = (f"moves freely: |M_GH| peak <= {T['free_moment_gh_peak_Nm']} N.m and rms <= {T['free_moment_gh_rms_Nm']}, cuff force <= {T['free_force_peak_N']} N, cuff twist <= "
                  f"{T['free_twist_peak_deg']} deg, no stall missing >= {LAG_DEG} deg of planned joint travel, 4R spare drift <= {T['free_spare_drift_deg']} deg; "
                  f"drives: never |M_GH| > {T['lock_moment_gh_Nm']} N.m or cuff force > {T['iso_ts_15066_upper_arm_N']} N (ISO/TS 15066 upper arm)")
+    v["nominal_case"] = nom
+    v["cuff_pressure_nominal_kPa"] = dict(peak=round(c["force_peak_N"] / CUFF_AREA_CM2 * 10, 3), budget_for_exo=COMFORT_KPA - STRAP_KPA,
+                                          with_arm_parts_weight=round((c["force_peak_N"] + 9.81 * DES.H_mass) / CUFF_AREA_CM2 * 10, 3))
     v["per_case"] = {k: dict(moment_gh_peak_Nm=x["moment_gh_peak_Nm"], force_peak_N=x["force_peak_N"], twist_peak_deg=x["twist_peak_deg"], lags_over_10deg=x["lags_over_10deg"],
                              contact=x["contact_touch"], spare_drift_deg=x.get("spare_drift_max_deg"), lock_clips=x["lock_clips"], free=free(x), drives=not x["lock_clips"],
-                             under_iso_15066=bool(x["force_peak_N"] < T["iso_ts_15066_upper_arm_N"])) for k, x in out["cases"].items() if "|nofric" not in k}
+                             cuff_pressure_peak_kPa=x["cuff_pressure_peak_kPa"], within_pressure_budget=bool(x["cuff_pressure_peak_kPa"] <= COMFORT_KPA - STRAP_KPA),
+                             under_iso_15066=bool(x["force_peak_N"] < T["iso_ts_15066_upper_arm_N"])) for k, x in out["cases"].items() if "nofric" not in k}
     return v
 
 def print_report(out):
     print(f"dynamics {out['design']} (N = {out['n_joints']})")
     for k, c in out["cases"].items():
-        if "|nofric" in k: continue
+        if "nofric" in k: continue
         print(f"  {k:30s} worst {c['worst_clip'][:20]:20s} M_GH peak {c['moment_gh_peak_Nm']:6.3f} (rms<= {c['moment_gh_rms_max_Nm']:5.3f}) N.m  F {c['force_peak_N']:6.2f} N  "
               f"twist {c['twist_peak_deg']:6.2f} deg  qdot {c['joint_speed_peak_dps']:6.1f} deg/s ({c['speed_ratio_max']:.2f}x)  lag>10 {c['lags_over_10deg']:2d}  lock {len(c['lock_clips'])} clips  "
               f"contact {c['contact_peak_N']:6.2f} N" + (f"  spare drift {c['spare_drift_max_deg']:6.1f}" if "spare_drift_max_deg" in c else "") + (f"  servo {c['servo_peak_Nm']:.2f} N.m" if "servo_peak_Nm" in c else ""))
