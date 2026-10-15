@@ -1,0 +1,66 @@
+{
+ "parts": [
+  {
+   "file": "l3|D4 member l3 (proxy)",
+   "valid": false,
+   "solids": 3,
+   "faces": 556,
+   "bad_faces": 0,
+   "watertight": true,
+   "volume_cm3": 7.763,
+   "bbox_mm": [
+    34.3,
+    80.8,
+    23.0
+   ],
+   "level": "L1 mesh"
+  },
+  {
+   "file": "l2|D4 member l2 (proxy)",
+   "valid": false,
+   "solids": 51,
+   "faces": 840,
+   "bad_faces": 0,
+   "watertight": false,
+   "volume_cm3": 14.206,
+   "bbox_mm": [
+    57.4,
+    97.4,
+    23.0
+   ],
+   "level": "L1 mesh"
+  },
+  {
+   "file": "l1|D4 member l1 (proxy)",
+   "valid": false,
+   "solids": 51,
+   "faces": 720,
+   "bad_faces": 0,
+   "watertight": false,
+   "volume_cm3": 3.092,
+   "bbox_mm": [
+    22.2,
+    54.3,
+    23.0
+   ],
+   "level": "L1 mesh"
+  },
+  {
+   "file": "base|D4 member base (proxy)",
+   "valid": false,
+   "solids": 49,
+   "faces": 432,
+   "bad_faces": 0,
+   "watertight": false,
+   "volume_cm3": 1.235,
+   "bbox_mm": [
+    6.3,
+    23.0,
+    23.0
+   ],
+   "level": "L1 mesh"
+  }
+ ],
+ "level": "L1",
+ "all_ok": false
+}

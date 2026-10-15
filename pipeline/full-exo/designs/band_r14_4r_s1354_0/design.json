@@ -1,0 +1,38 @@
+{
+ "id": "band_r14_4r_s1354_0",
+ "source": "pipeline/conformal/gpu_client/band_eval_r14_all.json #6 (search n4 seed 1354 rank 0 (fit score 0.477))",
+ "n_joints": 4,
+ "sliding_cuff": false,
+ "dof": 4,
+ "kinematics": {
+  "az": 92.58517980487889,
+  "el": 60.28982130797946,
+  "a": [
+   35,
+   77.16299507141206,
+   41.141877200367645
+  ],
+  "w": [
+   72.39248736277827,
+   -23.52008408691083
+  ],
+  "branch": -1,
+  "order": [
+   1,
+   1,
+   1,
+   1
+  ]
+ },
+ "base": {
+  "mount": "girdle",
+  "chain": "spherical",
+  "note": "option A: the band evaluator's scapula frame = a base riding the shoulder girdle"
+ },
+ "built_with": "pipeline/full-exo/band_to_design.py (L1 proxies from the evaluator's fitted shape; user arm parts from cad_r13_n4_s1343_1 minus its custom arm end)",
+ "evaluator": {
+  "score": 0.4017550845940908,
+  "follow": 1,
+  "in_band": 0.42811042070388794
+ }
+}
