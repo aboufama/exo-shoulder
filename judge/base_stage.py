@@ -25,7 +25,8 @@ Mechanisms (no active DOF anywhere; every passive element is set by closure thro
                centring spring rho = k_spring / k_tissue holds the slider where the closure cannot set it, u.h -> 0):
                g = (u.h) / (rho + (u.h)^2),  seen = (I - g u h^T) e_H + g u h^T e_C
   follower     three-axis stage set by a point follower pressed on a bony spot P of the scapula (e.g. the lateral
-               acromion, right above the GH centre): seen = (R_err - I)(GH - P) + d_f  (d_f = the 4.2 mm slip law)
+               acromion, right above the GH centre): seen = (R_err - I)(GH - P) + d_f  (d_f = the 4.2 mm slip law);
+               or a two-axis stage across n, the handler holding the centre along n (follower(..., normal=n))
   calibrated   any of the above with the handler's error angles (and optionally its slip) scaled by f: the systematic
                part removed by a per-user calibrated passive law (double / multiple calibration of an acromion
                cluster: max errors 44.8 -> 14.2 deg in cadavers, f ~ 0.32 - Cereatti et al., Med Biol Eng Comput;
@@ -110,15 +111,20 @@ def mech(name, H, C, h, u=None, rho=0.05, P=None, r=None, f=None):
 
 
 _FCACHE = {}
-def follower(W, P, law="central", f_ang=1.0, f_slip=1.0):
-    """3-axis stage set by a point follower on the scapula at P (ISB scapula, relative to the acromion-flat anchor A):
-    seen = (R_err - I)(GH - P) + d_f, GH - P = r - P (rotation sources RSS, slip as in base_slip)"""
+def follower(W, P, law="central", f_ang=1.0, f_slip=1.0, normal=None):
+    """stage set by a point follower on the scapula at P (ISB scapula, relative to the acromion-flat anchor A); GH - P = r - P.
+    normal None: 3-axis stage, seen = (R_err - I)(GH - P) + d_f. normal n: 2-axis stage across n - the handler holds the
+    centre along n (where its lever makes it good), the follower sets the two directions across it:
+    seen = n n^T (R_err - I) r + (I - n n^T)(R_err - I)(GH - P) + d (one skin sheet: the same slip for both)"""
     key = (id(W), law, f_ang, f_slip)
     if key not in _FCACHE:
         th, d = BS.angles(np.asarray(W, float)[:, :2], law); th = th * D2R * f_ang
         _FCACHE[key] = (np.stack([np.stack([BS.rot(E3[k], a) - E3 for a in th[:, k]]) for k in range(3)], 1), d * f_slip)   # (T, 3, 3, 3)
-    Rm, d = _FCACHE[key]; lev = BS.lever()[0] - P
-    V = np.einsum("tkij,j->tki", Rm, lev); D = np.repeat(d[:, None], 3, 1)[:, :, None] * E3[None] / math.sqrt(3)
+    Rm, d = _FCACHE[key]; r = BS.lever()[0]; V = np.einsum("tkij,j->tki", Rm, r - P)
+    if normal is not None:
+        n = np.asarray(normal, float); n = n / np.linalg.norm(n); Q = np.outer(n, n)
+        V = np.einsum("ij,tkj->tki", Q, np.einsum("tkij,j->tki", Rm, r)) + np.einsum("ij,tkj->tki", E3 - Q, V)
+    D = np.repeat(d[:, None], 3, 1)[:, :, None] * E3[None] / math.sqrt(3)
     return rss([(E3, np.concatenate([V, D], 1))])
 
 
@@ -171,6 +177,10 @@ if __name__ == "__main__":
                 if best is None or v < best[0]: best = (v, P, m, s * u, Ld)
     row("follower (best point, 25-40 mm from GH)", best[2], dict(GH_minus_P_dir=np.round(best[3], 2).tolist(), dist_mm=best[4]))
     row("follower lateral acromion (32 mm above GH)", follower(W, r - np.array([0, -32.0, 0])))
+    PL = r - np.array([0, -32.0, 0]); bf = search(lambda u: follower(W, PL, normal=u), U, fit)
+    row("follower 2-axis stage (handler holds along n)", bf[2], dict(n=np.round(bf[1], 2).tolist(), deg_from_lever=round(float(np.degrees(np.arccos(abs(bf[1] @ r) / np.linalg.norm(r)))), 1)))
+    for f in (0.32, 0.55): row(f"calibrated f {f} (angles and slip): + follower 2-axis stage", follower(W, PL, f_ang=f, f_slip=f, normal=bf[1]))
+    row("[low law] follower 2-axis stage", follower(W, PL, law="low", normal=bf[1]))
     # per-user calibrated law (systematic part removed): handler angles x f (slip kept / x f)
     for f, fs in ((0.32, 1.0), (0.32, 0.32), (0.5, 1.0)):
         Hc, _, _, _ = sources(W, f_ang=f, f_slip=fs); row(f"calibrated f_ang {f} f_slip {fs}: fixed", mech("fixed", Hc, C, h))

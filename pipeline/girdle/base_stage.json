@@ -182,6 +182,76 @@
     ]
    ]
   },
+  "follower 2-axis stage (handler holds along n)": {
+   "fit_max": 6.55,
+   "held_out_max": 5.05,
+   "all_max": 6.55,
+   "p95": 6.43,
+   "share_over_4": 0.328,
+   "max_elev_le_120": 6.08,
+   "worst": [
+    "Raise overhead",
+    [
+     30,
+     150,
+     -60
+    ]
+   ],
+   "n": [
+    0.68,
+    -0.57,
+    0.46
+   ],
+   "deg_from_lever": 17.1
+  },
+  "calibrated f 0.32 (angles and slip): + follower 2-axis stage": {
+   "fit_max": 2.15,
+   "held_out_max": 1.62,
+   "all_max": 2.15,
+   "p95": 2.1,
+   "share_over_4": 0.0,
+   "max_elev_le_120": 1.96,
+   "worst": [
+    "Raise overhead",
+    [
+     30,
+     150,
+     -60
+    ]
+   ]
+  },
+  "calibrated f 0.55 (angles and slip): + follower 2-axis stage": {
+   "fit_max": 3.65,
+   "held_out_max": 2.78,
+   "all_max": 3.65,
+   "p95": 3.58,
+   "share_over_4": 0.0,
+   "max_elev_le_120": 3.35,
+   "worst": [
+    "Raise overhead",
+    [
+     30,
+     150,
+     -60
+    ]
+   ]
+  },
+  "[low law] follower 2-axis stage": {
+   "fit_max": 3.39,
+   "held_out_max": 3.23,
+   "all_max": 3.39,
+   "p95": 3.39,
+   "share_over_4": 0.0,
+   "max_elev_le_120": 3.39,
+   "worst": [
+    "Raise overhead",
+    [
+     30,
+     101,
+     -50
+    ]
+   ]
+  },
   "calibrated f_ang 0.32 f_slip 1.0: fixed": {
    "fit_max": 6.31,
    "held_out_max": 3.48,

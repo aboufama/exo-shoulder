@@ -58,11 +58,14 @@ is set by closure (the arm or a bone contact), the user's handler is untouched, 
 | 1 slider set by the brace along the humerus, cuff slides across it | 10.0 (6.2) | - |
 | 1 torque-free slider, set perfectly (earlier P0 idealisation) | 7.0 (5.4) | 6.4 |
 | **3-axis stage set by a bony follower on the lateral acromion** (32 mm above GH) | **7.3** (5.7) | 5.9 |
+| **2-axis stage set by the follower, the handler holding the centre along n** (n 17 deg from its lever) | **6.55** (5.05) | - |
 | 2-axis stage across the handler's lever, set perfectly (no such reference exists) | 2.4 (1.6) | 2.3 |
 | per-user calibrated law (f 0.32 on angles and slip), rigid | 4.9 (2.4) | 4.0 |
 | **follower stage + per-user calibrated law (f 0.32 on angles and slip)** | **2.3** (1.8) | 1.9 |
 | follower stage + calibrated angles only (slip not repeatable) | 4.6 (3.1) | 3.8 |
 | follower stage, low law (review best case, no slip) | 3.95 (3.75) | - |
+| **2-axis follower stage + calibrated law (f 0.32 / 0.55)** | **2.15** (1.6) / 3.65 (2.8) | - |
+| 2-axis follower stage, low law | 3.39 (3.23) | - |
 
 What this shows (new knowledge, with the reason):
 - **A skin-held body knows the GH centre along its lever, not across it.** Its error is (rotation error) x (lever) plus
@@ -74,7 +77,9 @@ What this shows (new knowledge, with the reason):
   set by the brace), and the "slider set perfectly" of P0 (7.0 mm) has no physical reference that sets it.
 - **A bony follower moves the lever, not the slip.** A spring-loaded pad on the lateral acromion, directly above GH,
   setting a 3-axis torque-free stage under J1, makes the lever vertical, so the dominant overhead error (handler
-  IR/ER, 25 deg about the superior axis, 12.6 of the 15.2 mm) no longer moves the chain centre: 15.2 -> 7.3 mm.
+  IR/ER, 25 deg about the superior axis, 12.6 of the 15.2 mm) no longer moves the chain centre: 15.2 -> 7.3 mm. Better
+  with one axis fewer: let the handler hold the centre along n = (0.68, -0.57, 0.46) (17 deg from its own lever, where
+  it is good) and the follower set the two directions across it: 6.55 mm, 2.15 calibrated, 3.39 under the low law.
 - **Proof that no uncalibrated skin reference passes R10 under the central law:** every skin contact over the scapula
   slips 4.2 mm at 150 deg (McQuade & Smidt), already > 4 mm with zero lever (averaging several contacts helps only if
   they slip independently; a skin sheet does not). "Impossible" here is conditional on the
@@ -91,7 +96,7 @@ What this shows (new knowledge, with the reason):
   the vertical gives 2.0-3.1 mm calibrated, 6.3-9.7 mm uncalibrated (in the scaled Seth scapula the AC joint is 38 mm
   above and 25 mm medial of GH, so the spot is the acromion lateral of the AC joint).
 - **Judge:** `judge/base_mount.py` now scores a girdle design with `base.stage = {kind: follower, gh_minus_p_mm,
-  f_ang, f_slip}` (7.28 / 2.33 mm reproduced on a copy of cad_r18_n3_s1392_1_f300); f < 1 only with measured data.
+  f_ang, f_slip}` (7.28 / 2.33 mm, and 6.55 with `normal`, reproduced on a copy of cad_r18_n3_s1392_1_f300); f < 1 only with measured data.
 - **It helps R1 as much:** R1 is judged with the chain centred on GH; on the body the links are offset by the misalignment
   across the arm - 11.8 mm today (the whole 10 mm band), 5.9 with the follower, 1.9 with follower + calibration.
 - **Red team / costs:** a pad on a bony prominence worn for hours (keep it torque-free and gravity-balanced so it

@@ -16,7 +16,8 @@ rest, i.e. every axis through the GH centre):
     + optional "slider": [ex, ey, ez]: one torque-free passive slider (the user's exception): misalignment along it is free
     {"mount": "girdle", "chain": "spherical", "stage": {"kind": "follower", "gh_minus_p_mm": [x, y, z], "f_ang": 1, "f_slip": 1}}
       a 3-axis torque-free stage between the handler and J1 set by a bony follower at P (ISB scapula frame, GH - P;
-      lateral acromion right above GH: [0, -32, 0]); f_ang / f_slip < 1 only with the user's measured calibrated law
+      lateral acromion right above GH: [0, -32, 0]; optional "normal": [nx, ny, nz] -> a 2-axis stage across it, the
+      handler holding the centre along it); f_ang / f_slip < 1 only with the user's measured calibrated law
       (judge/base_stage.py, docs/FINDINGS.md "R10 on the scapula handler")
     python3 judge/base_mount.py <design dir|id> [--step 3]  -> <design>/judge/base_mount.json"""
 import argparse, json, os, sys
@@ -36,7 +37,7 @@ if base.get("mount") == "girdle":                                           # th
     if st and st.get("kind") == "follower" and base.get("chain", "spherical") == "spherical":
         import base_stage as BST
         P = BS.lever()[0] - np.asarray(st["gh_minus_p_mm"], float); fa, fs = float(st.get("f_ang", 1.0)), float(st.get("f_slip", 1.0))
-        mis = {law: BST.follower(W, P, law, fa, fs) for law in ("central", "low")}; m = mis["central"]; ev = W[:, 1]
+        mis = {law: BST.follower(W, P, law, fa, fs, normal=st.get("normal")) for law in ("central", "low")}; m = mis["central"]; ev = W[:, 1]
         out = dict(base=base, model="base_stage.py follower: seen = (R_err - I)(GH - P) + d_f, handler angles and slip from base_slip.py (central law unchanged), x f_ang / f_slip",
                    law="central", frames_checked=len(FR), step=a.step, max_mm=round(float(m.max()), 2), p95_mm=round(float(np.percentile(m, 95)), 2), share_over_4mm=round(float((m > 4).mean()), 3),
                    per_law_max_mm={l: round(float(v.max()), 2) for l, v in mis.items()} | {"high": None}, central_max_by_elevation_mm={f"<= {hi}": (round(float(m[ev <= hi].max()), 2) if (ev <= hi).any() else None) for hi in (60, 90, 100, 120, 150, 180)},
