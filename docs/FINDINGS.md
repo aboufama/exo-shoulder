@@ -79,12 +79,17 @@ What this shows (new knowledge, with the reason):
   slips 4.2 mm at 150 deg (McQuade & Smidt), already > 4 mm with zero lever (averaging several contacts helps only if
   they slip independently; a skin sheet does not). "Impossible" here is conditional on the
   literature law; it fails only if the user's skin slips less (measure it) or the slip is repeatable (calibrate it).
-- **The path to <= 4 mm:** follower stage + the user's systematic slip removed by a calibrated motion law
-  (double / multiple calibration of an acromion cluster cut max errors 44.8 -> 14.2 deg in cadavers, f ~ 0.32;
-  Brochard 2011 matched palpation on 5 of 6 axes): **2.3 mm (1.8 held out)**, or 4.6 mm if the slip itself is not
-  repeatable. The law need not cost a part: offset (non-concurrent) axes can carry it, as P0's exact minimax LP did for
-  the thorax base (`girdle.fit_minimax`; not yet fitted here: it needs the signed, measured c(pose)). It needs the user's own data first (handler + bony
-  landmarks at 3-4 elevations, base_slip_model.md section 6.1).
+- **The path to <= 4 mm:** follower stage + the user's systematic slip removed by a calibrated motion law (double /
+  multiple calibration of an acromion cluster cut max errors 44.8 -> 14.2 deg in cadavers, f ~ 0.32 = the share that is
+  not repeatable; Brochard 2011 matched palpation on 5 of 6 axes): **2.3 mm (1.8 held out)**, or 4.6 mm if the slip
+  itself is not repeatable. The law need not cost a part: offset (non-concurrent) axes can carry it, as P0's exact
+  minimax LP did for the thorax base (`girdle.fit_minimax`; not fitted here: it needs the signed, measured c(pose), so
+  the user's own data come first - handler + bony landmarks at 3-4 elevations, base_slip_model.md section 6.1).
+- **Design rule (the number the user's measurement must hit):** the follower path passes R10 when the non-repeatable
+  share f of the user's slip is <= 0.55 (f 0.5 -> 3.6 mm, 0.55 -> 4.0, 0.7 -> 5.1); a rigid base needs f <= ~0.26
+  (0.32 -> 4.9 mm): the follower doubles the tolerable non-repeatability. Placement: 25-40 mm above GH and +-10 mm off
+  the vertical gives 2.0-3.1 mm calibrated, 6.3-9.7 mm uncalibrated (in the scaled Seth scapula the AC joint is 38 mm
+  above and 25 mm medial of GH, so the spot is the acromion lateral of the AC joint).
 - **Judge:** `judge/base_mount.py` now scores a girdle design with `base.stage = {kind: follower, gh_minus_p_mm,
   f_ang, f_slip}` (7.28 / 2.33 mm reproduced on a copy of cad_r18_n3_s1392_1_f300); f < 1 only with measured data.
 - **It helps R1 as much:** R1 is judged with the chain centred on GH; on the body the links are offset by the misalignment
