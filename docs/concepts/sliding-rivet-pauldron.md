@@ -74,3 +74,57 @@ radius set by the highest skin), and the trombone layout's tail is intrinsic: ri
 excess band travel anywhere that is not over the neck (past b) or over the arm (past W). What would beat it is a member
 that is not one-radius over its travel (flexible / telescoping in two stages with their own radii, or a chain whose
 middle axis is not swept over the trapezius).
+
+## Audit (independent verifier, 2026-10-15)
+
+Verdict: **the death stands.** After fixing one modelling artefact, the best gap is 158.3 on Bench(60,160), still far
+from the 68.93 baseline (the bar to refute was 78.9 or lower).
+
+**What was checked**
+- The conventions against `tools/concept_baseline.py`: sampling at 2 mm (about 1 point per 4 mm2), the same bench
+  contact test, the closure / singularity margin and the percentile envelope. Nothing here is stricter in a way that
+  matters.
+- Per-pose max radius: a plate that slides through followers must be a surface of revolution about its joint axis.
+  So a constant band radius set by the per-pose max is intrinsic to the morphology. It is not an over-strict
+  convention.
+
+**Artefact found**
+- In the s1 variant (J2 rollers moved toward W), the band's near end moves past W. The model still routes the W-to-lo-end
+  strap there, so the strap doubles back over the humerus. That causes 107-139 `strap/stub` interferences per run
+  (sweep rows 32-39).
+- With s1 > 0 the band already reaches over the arm-end disc, so I removed that strap (monkeypatch, model file not
+  edited) and used `arm_layer=band_over`.
+
+Corrected runs, 12 in all (2.5-4.4 s each, scratch sweep):
+
+| s1 | cov_ws | gap | reach | follow | inband14 | contact | band radius RB |
+|---|---|---|---|---|---|---|---|
+| 0 (k=35, original best) | 0.95 | 177.0 | 0.469 | 0.583 | 0.337 | 0.409 | 152 |
+| 35 | 0.95 | **158.3** | 0.500 | 0.633 | 0.297 | 0.263 | 152 |
+| 35 | 0.0 | 174.3 | 0.306 | 0.583 | 0.317 | 0.200 | 152 |
+| 50 | 0.95 | 185.9 | 0.350 | 0.517 | 0.305 | 0.281 | 145 |
+| 50 / 65 | 0-0.8 | 197-279 | | | | | 127-152 (L1 arm hits the saddle / arm end) |
+
+**Measured limiter.** This is the local-outer skin radius along the band's centre circle (polar A1 about p2) on the
+k=35 axes, over the 210 valid bench poses:
+
+| Where the band extends | 0 deg | 10 deg | 20 deg | 30 deg | 40 deg | 60 deg |
+|---|---|---|---|---|---|---|
+| Past W, p80 (mm) | 59 | 61 | 65 | 69 | 78 | - |
+| Past b, p80 (mm) | 47 | 51 | 57 | 71 | 111 | 150+ |
+| Past b, p80, poses with phig < 70 (mm) | 48 | 51 | 57 | 122 | 150+ | 150+ |
+
+So the W side does have room: about 40 deg of tail at about 75 mm. Splitting the tail (s1 about 30) would need a band
+radius of about 73 mm at p80 if the band stored only the fit-clip travel (phig 40-120).
+
+But the workspace spans phig 12-158. With cov_ws 0.95 the J2 slot spans 159-165 deg, and the band is 174 deg long. More
+than 40 deg of tail is left past b in the low-phig (overhead) poses, so the band saturates at 127-152 mm. If cov_ws is
+cut to 0, J1 and J3 limits drop reach to 0.31 instead.
+
+The limiter is the same as the author's: a one-radius sliding band has to store the full b-W angle travel, and only
+about 40 deg of it fits past W. It holds after the artefact fix.
+
+**New knowledge**
+- The skin beyond W along the band circle stays low (p80 59-78 mm out to 40 deg). Any sliding-band layout should put
+  its excess on the W side, but it gets only about 40 deg there.
+- Past b, the skin rises steeply (p80 above 110 mm beyond 30-40 deg) in overhead poses.
