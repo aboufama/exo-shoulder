@@ -1,22 +1,24 @@
 /* convergent-spm-twistleg - convergent 2+1 spherical parallel mechanism: a five-bar A-frame whose two couplers meet at
  * ONE double pin on the arm (axis W), plus a light third "twist" leg to a second arm pin (axis v3), all three actives
  * on the scapula dome (catalogue convergent-spm-twistleg; models/convergent-spm-twistleg.py, no sweep yet: its PARAMS).
- * Base hubs u_k = bvec(-75, 40), bvec(-35, 40) (the model's) and bvec(150, 45) (the catalogue's anterior-dome twist
- * hub) (ACTIVE) -> crank (arc a_k = 60 / 60 / 70) -> elbow pin e_k (passive) -> coupler (arc c_k = 120 / 120 / 85) -> arm
- * pin about W (legs 1, 2: coaxial, one double-row hub) or v3 (leg 3: W turned 45 deg toward 225, posterior-distal)
+ * Base hubs u_k = bvec(-75, 40), bvec(-35, 40) (the model's) and bvec(60, 75) (the catalogue's top-dome twist hub)
+ * (ACTIVE) -> crank (arc a_k = 60 / 60 / 50) -> elbow pin e_k (passive) -> coupler (arc c_k = 120 / 120 / 80) -> arm
+ * pin about W (legs 1, 2: coaxial, one double-row hub) or v3 (leg 3: W turned 35 deg toward 225, posterior-distal)
  * (passive). Leg 3 screened kinematically first, as the spec asks: over 3 base hubs x branches x 8 v3 directions x 2
- * arcs, the model's bvec(-45, 65) / v3_dir 45 keeps 70 of the 240 loop frames in range (elbows collide, det flips), this
- * one 227. 3 ACTIVE + 6 PASSIVE (spherical Gruebler: 8 bodies, 9 revolutes, M = 3). Closed form as the model:
+ * arcs, the model's bvec(-45, 65) / v3_dir 45 keeps 70 of the 240 loop frames in range (elbows collide, det flips). The
+ * anterior hub bvec(150, 45) / a3 70 / c3 85 kept 227 in range, but its twist coupler crossed the upper arm (within
+ * 44 mm of the humerus axis beyond 30 mm from GH) on 171 of them. Re-screened with that arm-clearance test (4 hubs x
+ * 8 v3 dirs x 3 offsets x 2 arcs x 2 branches): the catalogue's top hub with a3 50 / c3 80, offset 35, branch -1 keeps
+ * 211 in range, all clear of the arm. 3 ACTIVE + 6 PASSIVE (spherical Gruebler: 8 bodies, 9 revolutes, M = 3). Closed form as the model:
  * e_k = the two-circle closure (cone a_k about u_k) x (cone c_k about the leg's arm axis) on branch s_k = (-1, 1, 1);
  * q_k = the crank angle about u_k from its rest elbow. Working range (the model's): fold / stretch margin >= 8 deg per
  * leg, det[unit(e1 x W), unit(e2 x W), unit(e3 x v3)] keeps its rest sign with |det| >= 0.1, elbows >= 17 deg apart.
  * Radii schematic (base hubs on the dome, elbows on its rim, the arm plate over the deltoid). Seen in this preview:
- * leg 2 passes its fold behind the back (frames out of range, its crank whips ~100 deg there) and the twist coupler's
- * great arc crosses the humerus axis line (~4 mm) during the forward raise: the bench's contact rule has to decide. */
+ * leg 2 passes its fold behind the back (frames out of range, its crank whips ~100 deg there). */
 (function () {
   const K = (typeof window !== 'undefined' ? window : globalThis).KIN, V = K.V, M = K.M;
-  const P = { u: [[-75, 40], [-35, 40], [150, 45]], a: [60, 60, 70], c: [120, 120, 85], W: [71.38, 4.78], v3_off: 45, v3_dir: 225,
-              s: [-1, 1, 1], det_min: 0.1, margin: 8, sep: 17, Fb: [56, 56, 58], Fe: 62, Fa: 68, stack: 12.25, neck_deg: 25, cuff_at: 165 };
+  const P = { u: [[-75, 40], [-35, 40], [60, 75]], a: [60, 60, 50], c: [120, 120, 80], W: [71.38, 4.78], v3_off: 35, v3_dir: 225,
+              s: [-1, 1, -1], det_min: 0.1, margin: 8, sep: 17, Fb: [56, 56, 58], Fe: 62, Fa: 68, stack: 12.25, neck_deg: 25, cuff_at: 165 };
   const U = P.u.map(x => V.unit(K.bvec(x[0], x[1]))), W = V.unit(K.wdir(P.W[0], P.W[1]));
   const v3 = (() => {                                             // models/convergent-spm-twistleg.py v3_of
     const td = V.unit(V.scale(V.reject([0, -1, 0], W), -1)); let ta = V.cross(W, td);
@@ -38,7 +40,7 @@
     dof: { active: 3, passive: 6 },
     params: P,
     q0: ctx => solve(ctx),
-    qNames: ['base 1 (posterior)', 'base 2 (posterior-lateral)', 'base 3 (twist leg, anterior)'], qUnits: ['deg', 'deg', 'deg'], resUnits: ['deg', 'deg', 'deg'],
+    qNames: ['base 1 (posterior)', 'base 2 (posterior-lateral)', 'base 3 (twist leg, top)'], qUnits: ['deg', 'deg', 'deg'], resUnits: ['deg', 'deg', 'deg'],
     solve: ctx => solve(ctx),
     residual: (q, ctx) => targets(ctx).map((t, k) => V.angle(elbowAt(q, k), t) - P.c[k]),
     check: (q, ctx) => {
