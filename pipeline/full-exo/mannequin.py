@@ -71,13 +71,21 @@ def boundary_loops(F):
     return loops
 
 
-def zipper(A, B, PA, PB):
-    """triangle strip between two closed loops running in opposite directions (rig.py zipper)"""
-    B = B[::-1]; PB = PB[::-1]
-    k0 = int(np.argmin(np.linalg.norm(PB - PA[0], axis=1))); B = np.roll(B, -k0); PB = np.roll(PB, -k0, axis=0)
-    def param(P):
-        d = np.r_[0, np.cumsum(np.linalg.norm(np.diff(np.r_[P, P[:1]], axis=0), axis=1))]; return d / d[-1]
-    ua, ub = param(PA), param(PB); i = j = 0; out = []; na, nb = len(A), len(B)
+def zip_loops(A, B, PA, PB):
+    """triangle strip between two closed horizontal loops of one surface, A below (body cut) and B above (new surface),
+    running in opposite directions. B's vertices are matched to A by their nearest point on A's polyline seen from
+    above (rig.py's arc-length matching folded the strip where the coarse body loop and the fine new loop differ)."""
+    def match(B, PB):
+        Q = np.r_[PA, PA[:1]][:, [0, 2]]; seg = np.diff(Q, axis=0); La = np.linalg.norm(seg, axis=1); cum = np.r_[0, np.cumsum(La)]
+        pb = PB[:, [0, 2]]; t = np.clip(((pb[:, None] - Q[None, :-1]) * seg[None]).sum(-1) / np.maximum(La ** 2, 1e-12)[None], 0, 1)
+        d = np.linalg.norm(Q[None, :-1] + t[..., None] * seg[None] - pb[:, None], axis=2); k = d.argmin(1)
+        return (cum[k] + t[np.arange(len(pb)), k] * La[k]) / cum[-1]
+    B = B[::-1]; PB = PB[::-1]; sb = match(B, PB)
+    if (((np.diff(np.r_[sb, sb[:1]]) + 0.5) % 1.0) - 0.5).sum() < 0: B = B[::-1]; PB = PB[::-1]; sb = sb[::-1]   # same direction: undo
+    j0 = int(np.argmin(sb)); B = np.roll(B, -j0); sb = np.roll(sb, -j0)
+    sb = np.maximum.accumulate(np.where(np.diff(np.r_[0.0, sb]) < -0.5, sb + 1, sb))   # monotone (small back-steps flattened)
+    na, nb = len(A), len(B); seg = np.linalg.norm(np.diff(np.r_[PA, PA[:1]], axis=0), axis=1)
+    ua = np.r_[0, np.cumsum(seg)] / seg.sum(); ub = np.r_[sb, 1.0 + sb[0]]; i = j = 0; out = []
     while i < na or j < nb:
         if j >= nb or (i < na and ua[i + 1] <= ub[j + 1]): out.append((A[(i + 1) % na], A[i % na], B[j % nb])); i += 1
         else: out.append((A[i % na], B[j % nb], B[(j + 1) % nb])); j += 1
@@ -108,10 +116,11 @@ def build(verbose=True):
     V0, F0 = BP.V0.astype(float), BP.F.astype(int); nb = len(V0)
     zc = hm[2]
     Y_STITCH = hm[1] - 111 * S                      # 96 mm: lower neck, above the trapezius flare, below the old seam (115)
-    GAP = 4.0 * S                                   # body cut loop -> new surface loop
+    GAP = 5.0 * S                                   # body cut loop -> new surface loop
     C = np.array([hm[0] - 48 * S, hm[1] + 2 * S, zc])   # cranium centre: every head and upper-neck point is seen from it
     def s_band(x, y): return y - (hm[1] - 105 * S + 0.46 * (hm[0] - 16 * S - x))   # height over the jaw-occiput line (front: chin-throat corner, back: occiput)
     B0, B1 = -10 * S, 5 * S                         # neck field below B0, head field above B1
+    L_CRANIUM, L_JAW = float(os.environ.get("MQ_LC", 13)), float(os.environ.get("MQ_LJ", 18))
     # ---- 1. head: radial function about C, first exit along rays cast from inside
     import torch
     torch.set_num_threads(2)
@@ -138,7 +147,7 @@ def build(verbose=True):
     def box(a, a0, a1, e, e0, e1_, soft=6.0):
         sm = lambda x: np.clip(x / soft, 0, 1)
         return sm(a - a0) * sm(a1 - a) * sm(e - e0) * sm(e1_ - e)
-    face = box(azi, -40, 40, ele, -41, 13)                                   # eyes, nose, mouth (keeps forehead, cheeks, chin)
+    face = box(azi, -50, 50, ele, -46, 15)                                   # eyes (to the outer corners), nose, mouth; keeps forehead, chin, jaw
     ears = np.maximum(box(azi, 62, 128, ele, -36, 22), box(azi, -128, -62, ele, -36, 22))
     w = data * (1 - np.maximum(face, ears))
     Rd = np.where(data, R, 0.0)
@@ -153,11 +162,13 @@ def build(verbose=True):
     ct = (1 / (s_c * dA) ** 2)[:, None] * np.ones((1, NTH))
     add(I, up, cn); add(I, dn, cs); add(I, lf, ct); add(I, rt, ct); add(I, I, -(cn + cs + 2 * ct))
     Lap = sparse.csr_matrix((np.concatenate(vals), (np.concatenate(rows), np.concatenate(cols))), shape=(n, n))
-    Ar = np.repeat(s_c * dA * dA, NTH); lc = 13.0; lam = 1.0 / (lc * (lc + 1)) ** 2
-    M = sparse.diags(w * Ar) + lam * (Lap.T @ sparse.diags(Ar) @ Lap)
+    Ar = np.repeat(s_c * dA * dA, NTH); lc = lambda l: 1.0 / (l * (l + 1)) ** 2   # SH degree at half attenuation
+    jaw = np.clip((-25 - ele) / 15, 0, 1) * (s_band(Ph[:, 0], Ph[:, 1]) > B1)    # jaw line and chin: finer (sharper) than the cranium
+    lam = lc(L_CRANIUM) + jaw * (lc(L_JAW) - lc(L_CRANIUM))
+    M = sparse.diags(w * Ar) + Lap.T @ sparse.diags(lam * Ar) @ Lap
     r_s = spsolve(M.tocsc(), w * Ar * Rd).reshape(NPH, NTH)
     if os.environ.get("MQ_DEBUG"): np.savez(os.environ["MQ_DEBUG"], R=R.reshape(NPH, NTH), r_s=r_s, w=w.reshape(NPH, NTH), data=data.reshape(NPH, NTH), C=C)
-    log(f"thin-plate head, l_c {lc}: r {r_s.min():.0f}..{r_s.max():.0f} mm, data residual p95 {np.percentile(np.abs(r_s.ravel() - R)[w > 0.99], 95):.1f} mm")
+    log(f"thin-plate head, l_c {L_CRANIUM}/{L_JAW}: r {r_s.min():.0f}..{r_s.max():.0f} mm, data residual p95 {np.percentile(np.abs(r_s.ravel() - R)[w > 0.99], 95):.1f} mm")
     nod = (~data).reshape(NPH, NTH)                 # rays that leave below the band (down the neck): the head's closure stays inside
     r_s[nod] = np.maximum(r_s[nod], np.minimum(R.reshape(NPH, NTH)[nod], 400.0))
     rpad = np.c_[r_s, r_s[:, :1]]
@@ -217,38 +228,29 @@ def build(verbose=True):
         P[~bnd] += 0.6 * L_[~bnd]; P = project(P, 2)
     P = project(P, 2)
     log(f"relaxed; |f| p99 {np.percentile(np.abs(field(P)), 99):.3f} mm")
-    # ---- 4. cut the new surface at Y_STITCH + GAP, the body at Y_STITCH; zip the two loops
-    keep_h, pc_h, ab_h = cut_below(P * [1, -1, 1], ff, -(Y_STITCH + GAP))        # keep ABOVE: mirror y
+    # ---- 4. cut the body at Y_STITCH (moved by < 2 mm so that no rig vertex lies within reach of the plane: no
+    #         sliver pieces), the new surface GAP above; zip the two loops
+    col = np.hypot(V0[:, 0] - (hm[0] - 40 * S), V0[:, 2] - zc) < 160 * S
+    cand = Y_STITCH + np.linspace(-2, 2, 81) * S
+    yb = cand[np.argmax([np.abs(V0[col, 1] - c).min() for c in cand])]
+    keep_h, pc_h, ab_h = cut_below(P * [1, -1, 1], ff, -(yb + GAP))            # keep ABOVE: mirror y
     Ph_ = np.r_[P, P[ab_h[:, 0].astype(int)] + ab_h[:, 2:3] * (P[ab_h[:, 1].astype(int)] - P[ab_h[:, 0].astype(int)])] if len(ab_h) else P
     Fh_ = np.r_[ff[keep_h], pc_h]
-    used = np.zeros(len(Ph_), bool); used[Fh_.ravel()] = True; remap = -np.ones(len(Ph_), int); remap[used] = np.arange(used.sum())
-    Ph_, Fh_ = Ph_[used], remap[Fh_]
     cc = trimesh.graph.connected_components(trimesh.Trimesh(Ph_, Fh_, process=False).face_adjacency, nodes=np.arange(len(Fh_)))
-    big = np.sort(max(cc, key=len)); Fh_ = Fh_[big]
+    Fh_ = Fh_[np.sort(max(cc, key=len))]
     used = np.zeros(len(Ph_), bool); used[Fh_.ravel()] = True; remap = -np.ones(len(Ph_), int); remap[used] = np.arange(used.sum()); Ph_, Fh_ = Ph_[used], remap[Fh_]
-    keep_b, pc_b, ab_b = cut_below(V0, F0, Y_STITCH)
+    keep_b, pc_b, ab_b = cut_below(V0, F0, yb)
     nab = len(ab_b); Pab = V0[ab_b[:, 0].astype(int)] + ab_b[:, 2:3] * (V0[ab_b[:, 1].astype(int)] - V0[ab_b[:, 0].astype(int)])
-    # body faces above the cut that are not the head/neck would be lost: there must be none
     far = np.hypot(V0[F0[~keep_b]][:, :, 0].mean(1) - (hm[0] - 40 * S), V0[F0[~keep_b]][:, :, 2].mean(1) - zc)
     assert far.max() < 160 * S, f"body faces above the stitch outside the neck column ({far.max():.0f} mm)"
-    # combined index space: [body 0..nb) [cut nb..nb+nab) [new nb+nab..)
-    Fb_pieces = pc_b                                                           # pieces reference body ids and nb+k cut ids
-    lb = [l for l in boundary_loops(np.r_[F0[keep_b], Fb_pieces]) if (l >= nb).all()]
+    # combined index space: [body 0..nb) [cut nb..nb+nab) [new nb+nab..); the cut pieces reference body and cut ids
+    lb = [l for l in boundary_loops(np.r_[F0[keep_b], pc_b]) if (l >= nb).all()]
     assert len(lb) == 1, f"body cut loops: {len(lb)}"; lb = lb[0]
-    lh = boundary_loops(Fh_); lh = max(lh, key=len); off = nb + nab
+    lh = max(boundary_loops(Fh_), key=len); off = nb + nab
     Pall = np.r_[V0, Pab, Ph_]
-    Z = zipper(lb, lh + off, Pall[lb], Pall[lh + off])
-    Fp = np.r_[Fb_pieces, Fh_ + off, Z]
-    log(f"stitch: body loop {len(lb)} verts at y {Y_STITCH:.1f}, new loop {len(lh)} at {Y_STITCH + GAP:.1f}; zipper {len(Z)} faces")
-    # ---- 5. smooth the stitch band (zipper rows + two rows of the new surface): tangential, ends fixed
-    newv = np.arange(off, len(Pall)); Aall = neighbours(np.r_[F0[keep_b], Fp], len(Pall)); dg = np.asarray(Aall.sum(1)).ravel()
-    band = np.zeros(len(Pall), bool); band[lh + off] = True
-    for _ in range(2): band[newv] |= (Aall[newv] @ band.astype(float)) > 0
-    band[:off] = False
-    Fall = np.r_[F0[keep_b], Fp]
-    for _ in range(6):
-        Nn = vnormals(Pall, Fall); L_ = (Aall @ Pall) / np.maximum(dg, 1)[:, None] - Pall; L_ -= (L_ * Nn).sum(1, keepdims=True) * Nn
-        Pall[band] += 0.5 * L_[band]
+    Z = zip_loops(lb, lh + off, Pall[lb], Pall[lh + off])
+    Fp = np.r_[pc_b, Fh_ + off, Z]
+    log(f"stitch: body loop {len(lb)} verts at y {yb:.2f} (min vertex distance {np.abs(V0[col, 1] - yb).min():.2f} mm), new loop {len(lh)} at {yb + GAP:.1f}; zipper {len(Z)} faces")
     # ---- 6. per-vertex displacement weights (rest -> posed): cut vertices exact, new vertices IDW over 4 rig vertices
     Wi = np.zeros((len(Pall) - nb, 4), int); Ww = np.zeros((len(Pall) - nb, 4))
     Wi[:nab, 0] = ab_b[:, 0]; Wi[:nab, 1] = ab_b[:, 1]; Ww[:nab, 0] = 1 - ab_b[:, 2]; Ww[:nab, 1] = ab_b[:, 2]
