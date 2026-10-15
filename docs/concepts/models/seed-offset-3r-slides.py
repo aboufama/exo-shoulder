@@ -69,7 +69,9 @@ PARAMS = dict(o1a=0.0, o1c=0.0, o2a=0.0, o2c=0.0, o3a=0.0, o3c=0.0,   # axis off
                                                                       # ramp 1: hub 3 at its own height, neck ramps up onto the stage
               slides=1,                                               # 0: spherical reference (offsets ignored, arm-fixed hub 3)
               vfix=0,                                                 # 1: bench_eval uses VModel (the verifier's checks + the riser)
-              branch=0)                                               # 0: the seed's J2 branch (-1); +1 / -1 forces a branch
+              branch=0,                                               # 0: the seed's J2 branch (-1); +1 / -1 forces a branch
+              flip3=0)                                                # 1: member 3 is hub 3's UPPER member (boss + cap), link 2 its
+                                                                      # lower plate: the neck leaves the boss wall (F+3.15..F+10.25)
 SWEEP = dict(o1a=[-20, -10, 0, 10, 20], o1c=[-20, -10, 0, 10, 20], o2a=[-20, -10, 0, 10, 20], o2c=[-20, -10, 0, 10, 20],
              o3a=[-20, -10, 0, 10, 20], o3c=[-20, -10, 0, 10, 20], S_a=[10, 15, 25], S_t=[10, 15, 25], R_r=[0.5, 2, 5, 10])
 
@@ -450,7 +452,7 @@ class Model:
         self.f = [f1, f2, f3]; self.tr = tr; self.zb = tr + RAIL_H + RUN + CAR_H + RUN + D.p["R_r"]   # carriage B underside
         # link shapes: lower bound from the envelope, raised to meet the hub levels with <= RAMP slopes
         u, c = D.u, D.c; k = math.tan(RAMP * D2R)
-        lvl = {("L1", 0): 0.0, ("L1", 1): 0.0, ("L2", 1): UP, ("L2", 2): UP}    # link 1 lower at J1, J2; link 2 upper at J2, J3
+        lvl = {("L1", 0): 0.0, ("L1", 1): 0.0, ("L2", 1): UP, ("L2", 2): 0.0 if D.p.get("flip3") else UP}  # link 1 lower at J1, J2; link 2 upper at J2 (and J3 unless flip3)
         F = [f1, f2, f3]; self.link_pts = {}
         for lk in geo.links:
             pts_all = []
@@ -474,6 +476,7 @@ class Model:
             h = {"hub1": f1, "hub2": f2, "hub3": f3, "neck": f3}.get(g["name"], tr)            # rail / carriage A / reference hub 3: the stack height
             hh = np.full(len(g["B"]), h) + g["off"]
             if g["name"] == "neck" and g["mem"] == 3 and D.p.get("ramp"):      # <= 60 deg ramp from hub 3's level to carriage B's top
+                if D.p.get("flip3"): hh = hh + UP                                # flip3: the neck leaves the boss wall, not the plate
                 x = (g["B"] - D.c[2]) @ D.sa; ztop = tr + RAIL_H + RUN + CAR_H + RUN + D.p["R_r"] + CAR_H
                 hh = np.maximum(hh, ztop - math.tan(RAMP * D2R) * (HUB_R + D.p["neck"] - x))
             self.rigid[g["name"]] = (g["mem"], g["B"] + hh[:, None] * g["N"])
@@ -657,8 +660,10 @@ class VModel(Model):
                 self.rigid["bridge"] = (3, Bb + self.zb * D.sn[None])
             if self.fix["riser"] and P.get("ramp"):
                 f3 = self.f[2]; ztop = self.zb + CAR_H
-                h_rim = max(f3, ztop - math.tan(RAMP * D2R) * P["neck"])        # neck underside where it leaves hub 3's rim
+                fl = P.get("flip3"); base = f3 + (UP if fl else 0.0)            # member 3's lowest level at the rim
+                h_rim = max(base, ztop - math.tan(RAMP * D2R) * P["neck"])      # neck underside where it leaves hub 3's rim
                 top = h_rim + T_LINK
+                if fl: f3 = f3 + 7.25                                         # flip3: the boss wall carries the neck up to F+7.25 (+3 strap = cap flange)
                 if h_rim > f3 + 1e-6:
                     cen = D.c[2] + (HUB_R + 1.5) * D.sa + 0.5 * (f3 + top) * D.sn
                     self.riser = (3, cen, np.array([1.5, W_LINK / 2, 0.5 * (top - f3)]))

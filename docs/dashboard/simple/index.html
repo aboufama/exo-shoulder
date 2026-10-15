@@ -46,6 +46,7 @@
 <div class="sx">
   <header id="top">
     <h1>Shoulder exo: who is winning</h1>
+    <p class="muted" id="tz-note">All times are US Eastern.</p>
     <p class="lede" id="lede" data-source="leader">—</p>
     <div class="kpis">
       <div class="kpi lead" id="kpi-best"><span class="lab">Best design so far</span><span class="big" data-source="leader" data-field="score">—</span><span id="kpi-best-name" class="muted" data-source="leader" data-field="short">—</span></div>
@@ -119,6 +120,13 @@
   </section>
 </div>
 
+<script>
+// US Eastern wall-clock time (EST/EDT, daylight saving handled): dates are shifted to New York local time, then drawn
+// with d3's UTC scales and formats, so every axis, tick and event time on the page reads in Eastern time.
+const ET_FMT = new Intl.DateTimeFormat('en-US', { timeZone: 'America/New_York', hourCycle: 'h23', year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit' });
+window.et = (v) => { const d = v instanceof Date ? v : new Date(v); if (isNaN(+d)) return d; const p = Object.fromEntries(ET_FMT.formatToParts(d).map((x) => [x.type, x.value])); return new Date(Date.UTC(+p.year, +p.month - 1, +p.day, +p.hour % 24, +p.minute, +p.second)); };
+window.etZone = () => (new Intl.DateTimeFormat('en-US', { timeZone: 'America/New_York', timeZoneName: 'short' }).formatToParts(new Date()).find((x) => x.type === 'timeZoneName') || {}).value || 'ET';
+</script>
 <script>
 const live = (m) => !m.is_baseline && !['dead', 'refuted', 'duplicate'].includes(m.status);
 dash.calc('board', {
@@ -209,9 +217,9 @@ function drawBoard(rows) {
 function drawRecord(sweeps, baseGap) {
   const box = document.getElementById('record'); box.querySelectorAll('svg').forEach((n) => n.remove());
   const sc = (g) => Math.max(0, (1 - g / 275) * 100);
-  const rec = sweeps.filter((s) => s.is_record && !s.passed_over && s.record_gap != null).map((s) => ({ t: new Date(s.t), v: sc(s.record_gap) })).sort((a, b) => a.t - b.t);
+  const rec = sweeps.filter((s) => s.is_record && !s.passed_over && s.record_gap != null).map((s) => ({ t: et(s.t), v: sc(s.record_gap) })).sort((a, b) => a.t - b.t);
   if (!rec.length) return;
-  const now = new Date(Math.max(+rec[rec.length - 1].t, ...sweeps.map((s) => +new Date(s.t))));
+  const now = new Date(Math.max(+rec[rec.length - 1].t, ...sweeps.map((s) => +et(s.t))));
   const W = Math.max(320, box.clientWidth), H = 260, m = { l: 44, r: 16, t: 12, b: 28 };
   const x = d3.scaleUtc([rec[0].t, now], [m.l, W - m.r]), y = d3.scaleLinear([0, 100], [H - m.b, m.t]);
   const svg = d3.select(box).append('svg').attr('width', '100%').attr('viewBox', `0 0 ${W} ${H}`);
@@ -228,7 +236,7 @@ function drawRecord(sweeps, baseGap) {
 function drawEvents(ev) {
   const ul = document.getElementById('events'); ul.replaceChildren();
   ev.filter((e) => e.event).sort((a, b) => (a.time < b.time ? 1 : -1)).slice(0, 7).forEach((e) => {
-    const li = document.createElement('li'); const t = document.createElement('time'); t.textContent = d3.utcFormat('%H:%M')(new Date(e.time));
+    const li = document.createElement('li'); const t = document.createElement('time'); t.textContent = d3.utcFormat('%H:%M')(et(e.time));
     const s = document.createElement('span'); const txt = String(e.event).replace(/\{[^}]*\}/g, '').replace(/\([^)]*\)/g, '').replace(/\s+/g, ' ').replace(/ at( config \S+)?$/, '').trim(); s.textContent = txt.length > 170 ? txt.slice(0, 167) + '...' : txt;
     li.append(t, s); ul.appendChild(li);
   });
@@ -259,7 +267,7 @@ function hover(box, sel, text) {
 function drawConfigs(sw, names, leaders) {
   const box = document.getElementById('cfg-chart'); box.querySelectorAll('svg').forEach((n) => n.remove());
   const leg = document.getElementById('cfg-legend'); leg.replaceChildren();
-  const pts = sw.filter((r) => r.gap != null && r.t).map((r) => ({ ...r, d: new Date(r.t), s: scoreOf(r.gap) })).sort((a, b) => a.d - b.d);
+  const pts = sw.filter((r) => r.gap != null && r.t).map((r) => ({ ...r, d: et(r.t), s: scoreOf(r.gap) })).sort((a, b) => a.d - b.d);
   if (!pts.length) return;
   { const t0 = liveStart(pts.map((p) => p.d)); pts.splice(0, pts.findIndex((p) => p.d >= t0)); }
   const col = new Map(leaders.slice(0, 8).map((id, i) => [id, dash.colors[i % dash.colors.length]]));
@@ -277,7 +285,7 @@ function drawConfigs(sw, names, leaders) {
 }
 function drawTarget(id, sw, field, target) {
   const box = document.getElementById(id); box.querySelectorAll('svg').forEach((n) => n.remove());
-  const pts = sw.filter((r) => r[field] != null && r.t && !r.passed_over).map((r) => ({ d: new Date(r.t), v: r[field], id: r.id })).sort((a, b) => a.d - b.d);
+  const pts = sw.filter((r) => r[field] != null && r.t && !r.passed_over).map((r) => ({ d: et(r.t), v: r[field], id: r.id })).sort((a, b) => a.d - b.d);
   if (!pts.length) return;
   { const t0 = liveStart(pts.map((p) => p.d)); pts.splice(0, pts.findIndex((p) => p.d >= t0)); }
   const W = Math.max(260, box.clientWidth), H = 220, m = { l: 40, r: 10, t: 8, b: 24 };
@@ -291,7 +299,7 @@ function drawTarget(id, sw, field, target) {
 }
 function drawCad(id, cad, req) {
   const box = document.getElementById(id); box.querySelectorAll('svg').forEach((n) => n.remove());
-  const pts = cad.filter((r) => r.req === req && r.value != null && r.time).map((r) => ({ ...r, d: new Date(r.time) })).sort((a, b) => a.d - b.d);
+  const pts = cad.filter((r) => r.req === req && r.value != null && r.time).map((r) => ({ ...r, d: et(r.time) })).sort((a, b) => a.d - b.d);
   if (!pts.length) return;
   const W = Math.max(260, box.clientWidth), H = 220, m = { l: 40, r: 10, t: 8, b: 24 };
   const x = d3.scaleUtc(d3.extent(pts, (p) => p.d), [m.l, W - m.r]).nice(), y = d3.scaleLinear([0, 1], [H - m.b, m.t]);
@@ -306,6 +314,7 @@ function drawCad(id, cad, req) {
 }
 
 dash.onData(() => {
+  { const z = document.getElementById('tz-note'); if (z) z.textContent = `All times are US Eastern (${etZone()}).`; }
   const B = dash.data('board'), L = dash.data('leader'), S = dash.data('sweeps'), E = dash.data('events'), R = dash.data('reqs'), RS = dash.data('reqsum'), M = dash.data('morphs');
   const okd = (d) => d && d.status === 'ok';
   if (okd(L) && L.data[0] && L.data[0].score != null) {

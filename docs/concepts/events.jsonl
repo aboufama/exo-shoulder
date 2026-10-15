@@ -195,3 +195,4 @@
 {"time": "2026-10-15T21:38:50Z", "kind": "milestone", "event": "modelling clavicular-front-route (Front route: J1 on the bony acromio-clavicular front, spherical 3R + scapula bridge)"}
 {"time": "2026-10-15T21:40:34Z", "kind": "milestone", "event": "modelling Crown ring 3R (crown-ring-3r): J1 open thin-section ring on the crown, O20 J2/J3, kit model"}
 {"time": "2026-10-15T21:41:30Z", "kind": "milestone", "event": "skin-normal-hubs-selfaligning: modelling Skin-normal hubs + passive cuff translation stage (non-concurrent 3R) on the verified seed-offset-3r-slides closure"}
+{"time": "2026-10-15T21:45:28Z", "kind": "milestone", "event": "seed-offset-3r-slides CMA (main, VModel checks, Bench(60,160) fast, farm): new best gap 58.15 at gen 1"}
