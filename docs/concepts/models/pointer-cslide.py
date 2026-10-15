@@ -42,7 +42,7 @@ ID = "pointer-cslide"
 NAME = "The user's split: 2R donut pointer + shoulder-side wire-race C-slide for humeral twist"
 BAND_W, BAND_T, LIP, CAP = 26.0, 6.0, 2.0, 2.0               # band 26 x 6; shoe lip under it 2, cap over it 2 (2+6+2)
 PARAMS = dict(az=120.0, el=46.0, sigma=1, A1=90.0, A2=90.0, sing=15.0, tilt=0.0, tilt_a=0.0,
-              s=120.0, phi_s=0.0, Ls=50.0, cov=0.9, c_off=0.0, q_ring=1.0, hub="o20", width=12.0, t_link=3.0, q=0.95)
+              s=120.0, phi_s=0.0, Ls=50.0, cov=0.9, c_off=0.0, q_ring=0.95, r_block=100.0, hub="o20", width=12.0, t_link=3.0, q=0.95)
 
 # ---- fixed-geometry members (band, shoe: circles about d3, not GH-ray fitted) --------------------------------------
 _orig_levels = K._levels
@@ -107,7 +107,7 @@ def kin(F, p):
 _CACHE = {}
 
 
-def _key(p): return tuple(p[k] for k in ("az", "el", "sigma", "A1", "A2", "sing", "tilt", "tilt_a", "s", "phi_s", "Ls", "cov", "c_off", "q_ring"))
+def _key(p): return tuple(p[k] for k in ("az", "el", "sigma", "A1", "A2", "sing", "tilt", "tilt_a", "s", "phi_s", "Ls", "cov", "c_off", "q_ring", "r_block"))
 
 
 def window(th, ok, cov):
@@ -119,7 +119,7 @@ def window(th, ok, cov):
     return float(wrap(s2[i] + w[i] / 2)), float(w[i])
 
 
-def radial_req(B, I, Z, U, clr=2.0, r0=12.0, r_block=120.0):
+def radial_req(B, I, Z, U, clr=2.0, r0=12.0, r_block=100.0):
     """per point: the first radius r >= r0 out from the axis point Z along the radial unit U (thorax, per pose I)
     where the skin distance is >= clr (Lipschitz march, 0.25 mm min step). Still blocked at r_block (torso pressed on
     the arm) -> 0: such a pose does not push the band out (it becomes a contact pose for the bench)"""
@@ -156,11 +156,10 @@ def design(B, p):
         U = ring_pts(None, xP[Pi], yP[Pi], d3[Pi], [0.0], band_ang, 1.0)                 # unit radials (band, P frame)
         Zb = np.repeat(rowsB, U.shape[1])[None, :, None] * d3[Pi][:, None]
         Ub = np.tile(U, (1, len(rowsB), 1))
-        sa = th[Pi][:, None] + shoe_ang[None, :] - th[Pi][:, None]                       # shoe columns in its own (arm) frame
-        Us = ring_pts(None, E1[Pi], E2[Pi], d3[Pi], [0.0], p["phi_s"] + shoe_ang - 0.0, 1.0)
+        Us = ring_pts(None, E1[Pi], E2[Pi], d3[Pi], [0.0], p["phi_s"] + shoe_ang, 1.0)
         Zs = np.repeat(rowsS, Us.shape[1])[None, :, None] * d3[Pi][:, None]; Us = np.tile(Us, (1, len(rowsS), 1))
-        I = np.repeat(Pi, Ub.shape[1]); rb = radial_req(B, I, Zb.reshape(-1, 3), Ub.reshape(-1, 3)).reshape(len(Pi), -1).max(1)
-        I = np.repeat(Pi, Us.shape[1]); rs = radial_req(B, I, Zs.reshape(-1, 3), Us.reshape(-1, 3)).reshape(len(Pi), -1).max(1)
+        I = np.repeat(Pi, Ub.shape[1]); rb = radial_req(B, I, Zb.reshape(-1, 3), Ub.reshape(-1, 3), r_block=p["r_block"]).reshape(len(Pi), -1).max(1)
+        I = np.repeat(Pi, Us.shape[1]); rs = radial_req(B, I, Zs.reshape(-1, 3), Us.reshape(-1, 3), r_block=p["r_block"]).reshape(len(Pi), -1).max(1)
         qq = p["q_ring"]; f = (lambda x: np.quantile(x, qq)) if qq < 1 else np.max
         rho = float(max(f(rb) - LIP, f(rs), 20.0))
     _CACHE[key] = dict(c=c, T=T, rho=rho)
@@ -260,6 +259,10 @@ if __name__ == "__main__":
     p = dict(PARAMS, **(json.loads(a[1]) if len(a) > 1 else {}))
     if a[0] == "check":
         import time; t0 = time.time(); r = bench_eval(B, p); print(round(time.time() - t0, 1), "s"); print(r)
+        L = B._kit_last; tk = L["take"]
+        for m in L["chain"].members:
+            X = np.linalg.norm(L["pts"][m.name], axis=-1); d = K.dist_many(B, np.repeat(np.nonzero(tk)[0], X.shape[1]), L["pts"][m.name][tk].reshape(-1, 3)) if tk.any() else np.zeros(1)
+            print(m.name, "radius", round(float(X.min()), 1), round(float(X.max()), 1), "skin dist med/p10/p90", np.percentile(d, [50, 10, 90]).round(1) if d.size else None)
     elif a[0] == "twist":                     # the shoe-angle distribution: what travel T a share of poses needs
         F = B._kitF; a1, p2, d3, xP, yP, E1, E2, th, ok, margin = kin(F, p)
         for cov in (0.5, 0.7, 0.8, 0.9, 0.95, 1.0):

@@ -365,7 +365,9 @@ def main():
     # the skin lets it sit lowest, outside link 1's sweep about J1 (computed over the followed frames)
     k1 = unit(J1w); d0 = R["S"] @ unit(np.array([0.0, 0.6, -0.8])); d0 = unit(d0 - (d0 @ k1) * k1); d1 = np.cross(k1, d0)
     th = math.radians(32); best = None
-    for al in np.arange(-130.0, 75.0, 10.0):
+    tkey = f"tab|{np.round(k1, 5).tolist()}|{F['J1']:.3f}"; tc = json.load(open(FIT_CACHE)) if os.path.exists(FIT_CACHE) else {}
+    scan = [tc[tkey]] if tkey in tc else np.arange(-130.0, 75.0, 10.0)
+    for al in scan:
         td = math.cos(math.radians(al)) * d0 + math.sin(math.radians(al)) * d1
         fld = PolarField(E, "S", R["S"], k1, td, -5.0, 45.0, 16.0)
         for h in np.arange(F["J1"] + up_mid, F["J1"] + 60, 0.5):
@@ -375,6 +377,7 @@ def main():
                 if best is None or h < best[0]: best = (h, al, td, fld)
                 break
     ht, al, ey_, fld = best; ex_ = k1
+    tc = json.load(open(FIT_CACHE)) if os.path.exists(FIT_CACHE) else {}; tc[tkey] = float(al); json.dump(tc, open(FIT_CACHE, "w"), indent=0)
     print(f"base tab: heading {al:.0f} deg from medial-up about J1 (link 1 sweeps 97..207), terminal height {ht:.1f} mm")
     start = (F["J1"] + up_mid, L_SEAT, math.pi / 2); end = (*(ht * np.array([math.cos(th), math.sin(th)])), th + math.pi / 2)
     fit = SK.fit_chain(start, end, fld, T, n_arcs=3, climb_max=CLIMB)
@@ -382,7 +385,7 @@ def main():
     body = glue(plate_r(J1w, F["J1"] + LV["U0"], ey_, 16.0, upper=True), bar_swept(ex_, ey_, start, fit["segs"], w=16.0))
     o_mid = ht * (math.cos(th) * ex_ + math.sin(th) * ey_); sd = -math.sin(th) * ex_ + math.cos(th) * ey_; nrm = unit(o_mid)
     body = glue(body, terminal_r(o_mid, nrm, sd, 16.0, 14.0))
-    body = ring_root_fillet(glue(body, upper_ring_r(J1w, F["J1"])), J1w, F["J1"])
+    body = glue(body, upper_ring_r(J1w, F["J1"]))                                        # (a concave root round here segfaults OCC's filleter)
     body = body.cut(bore_cutter(J1w, F["J1"]))
     for x_ in (9.0, 17.0):                                                                 # 2x M4: O4.3 through, O7.3 x 1.2 counterbore (outer face)
         c = o_mid + x_ * sd
