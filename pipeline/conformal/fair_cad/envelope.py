@@ -24,7 +24,9 @@ class Envelope:
         Z = np.load(io.BytesIO(gzip.decompress(base64.b64decode(open(os.path.join(CONF, "band_poses.b64")).read()))))
         self.HG, self.RS, P = Z["HG"], Z["RS"], Z["POSE"]
         C = json.load(open(os.path.join(design_dir, "clips.json"))); self.frames = []
-        for cl in C["clips"]:
+        held = set() if os.environ.get("ENV_ALL_CLIPS") == "1" else set(json.load(open(os.path.join(CONF, "..", "..", "data", "raw", "split.json")))["motions"]["held_out"])
+        for cl in C["clips"]:                                          # held-out motions (data/raw/split.json) never shape the CAD (as the
+            if cl["name"] in held: continue                            # evaluator's fit_clips); ENV_ALL_CLIPS=1 restores the old envelope
             for k, f in enumerate(cl["frames"]):
                 if k % 3 or f["held"]: continue
                 p = int(np.argmin(np.abs(P - np.array(f["p"])).sum(1)))
