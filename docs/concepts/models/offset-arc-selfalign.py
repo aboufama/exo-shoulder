@@ -68,7 +68,7 @@ PARAMS = dict(az=32.55, el=80.56, wd=71.38, wa=4.78, A1=77.41, A2=81.45, branch=
               S_a=20.0, S_t=15.0, R_r=4.0,   # slide half-ranges (spec 15-25 / 10-20 / 3-5)
               frame="arm",               # stage plane: 'arm' (tangent to the arm, wedge under the hub) or 'hub' (perp. to W)
               arc_ws=0.0,                # arc also covers this central share of the workspace guide azimuths (0 = fit clips)
-              pct=100.0,                 # percentile of the per-pose needs for rigid heights
+              pct=95.0,                  # percentile of the per-pose needs for rigid heights
               comp=0,                    # 1: J1 / J3 offsets chosen by the minimax LP (radial slide half-range), see Model.compensate
               stage=1)                   # 0: no stage (spherical trombone reference: hub lower plate fixed to the arm)
 SWEEP = dict(o2w=[-15, -10, -5, 0, 5, 10, 15], o2n=[-15, -10, -5, 0, 5, 10, 15], o1m=[-10, -5, 0, 5, 10], o1t=[-10, -5, 0, 5, 10],
@@ -298,51 +298,105 @@ class Model:
     def to_T(self, m, i, X):
         return self.to_S(m, i, X) @ self.RS[i].T
 
-    # ---- sphere tracing: per-pose heights along fixed directions -----------------------------------------------------
-    def trace(self, items, poses, iters=24, h0=None):
+    # ---- batched (all poses at once) transforms and distances ---------------------------------------------------------
+    def Tv(self, m, poses):
+        """member transforms for a batch of bench poses: R (n,3,3), t (n,3) in the scapula frame"""
+        k = self.k; n = len(poses); I = np.broadcast_to(np.eye(3), (n, 3, 3)); z = np.zeros((n, 3))
+        if m == "S": return I, z
+        if m == "L1": return k["RL1"][poses], k["t1"][poses]
+        if m == "L2": return k["RL2"][poses], k["t2"][poses]
+        if m == "E": return k["RH"][poses], k["tE"][poses]
+        RH = k["RH"][poses]
+        if not self.p["stage"] or m == "H": return RH, z
+        s = k["s_raw"][poses] - self.c; K = self.K
+        if m == "A": return RH, mv(RH, s[:, :1] * K.sa)
+        if m == "C": return RH, mv(RH, s[:, :1] * K.sa + s[:, 1:2] * K.st)
+        raise ValueError(m)
+
+    def to_Sb(self, m, poses, X):
+        """X (m,3) or (n,m,3) member reference coordinates -> (n,m,3) scapula frame"""
+        R, t = self.Tv(m, poses); X = np.broadcast_to(X, (len(poses),) + X.shape[-2:])
+        return np.einsum("pij,pmj->pmi", R, X) + t[:, None]
+
+    def S2T(self, poses, PS):
+        return np.einsum("pij,pmj->pmi", self.RS[poses], PS)
+
+    def dist_b(self, poses, PT, exact_out=False):
+        """signed skin distance of PT (n,m,3) thorax points, row a at bench pose poses[a] -> (n,m); one gather on the
+        bench's fast grid (the bench's own trilinear rule), exact fallback per pose outside the grid box"""
+        B = self.B; poses = np.asarray(poses); n, m = PT.shape[:2]
+        if B.grid is None:
+            return np.stack([B.dist(int(i), PT[a]) for a, i in enumerate(poses)])
+        P = PT.reshape(-1, 3); pi = np.repeat(poses, m)
+        g = (P + CB.HALF) / CB.H_GRID; N = B.grid.shape[1]
+        inside = np.all((g >= 0) & (g <= N - 1 - 1e-9), axis=1); out = np.empty(len(P))
+        if inside.any():
+            gi = g[inside]; i0 = np.floor(gi).astype(np.int64); f = gi - i0; G = B.grid; q = pi[inside]
+            x0, y0, z0 = i0.T; x1, y1, z1 = x0 + 1, y0 + 1, z0 + 1; fx, fy, fz = f.T
+            c = lambda a, b, cc: G[q, a, b, cc].astype(np.float32)
+            v = (c(x0, y0, z0) * (1 - fx) * (1 - fy) * (1 - fz) + c(x1, y0, z0) * fx * (1 - fy) * (1 - fz) + c(x0, y1, z0) * (1 - fx) * fy * (1 - fz)
+                 + c(x0, y0, z1) * (1 - fx) * (1 - fy) * fz + c(x1, y1, z0) * fx * fy * (1 - fz) + c(x1, y0, z1) * fx * (1 - fy) * fz
+                 + c(x0, y1, z1) * (1 - fx) * fy * fz + c(x1, y1, z1) * fx * fy * fz)
+            out[inside] = v * CB.Q
+        if (~inside).any():
+            if exact_out:
+                for i in np.unique(pi[~inside]):
+                    sel = (~inside) & (pi == i); out[sel] = B._exact(int(i), P[sel])
+            else: out[~inside] = 31.75                           # fitting only: far outside the 260 mm box = far field
+        return out.reshape(n, m)
+
+    # ---- sphere tracing: per-pose heights along fixed directions (all poses at once) ----------------------------------
+    def trace(self, items, poses, iters=28, h0=None):
         """items: list of (member, base X (m,3), dir N (m,3), start h (m,), avoid-fn or None). Returns per item an array
         (len(poses), m): the height h along N (from X) at which X + h N sits CLEAR mm off the skin (and PART_CLEAR off
-        whatever the avoid-fn measures, an SDF of S-frame points) in that pose."""
+        whatever the avoid-fn measures, an SDF of S-frame points (n,m,3) -> (n,m)) in that pose."""
+        poses = np.asarray(poses); n = len(poses)
         sizes = [len(it[1]) for it in items]; cut = np.cumsum([0] + sizes)
-        out = np.zeros((len(poses), cut[-1]))
-        for a, i in enumerate(poses):
-            H = np.concatenate([np.asarray(it[3], float) * np.ones(len(it[1])) for it in items])
-            Hp = dp = None
-            for _ in range(iters):
-                PS = [self.to_S(m, i, X + H[cut[k]:cut[k + 1], None] * N) for k, (m, X, N, *_r) in enumerate(items)]
-                d = self.B.dist(i, np.concatenate(PS) @ self.RS[i].T) - CLEAR
-                for k, it in enumerate(items):
-                    if len(it) > 4 and it[4] is not None:
-                        d[cut[k]:cut[k + 1]] = np.minimum(d[cut[k]:cut[k + 1]], it[4](i, PS[k]) - PART_CLEAR)
-                if np.abs(d).max() < 0.05: break
-                # sphere-tracing step (1-Lipschitz distance) accelerated by a clamped secant slope
-                g = np.ones_like(d) if Hp is None else np.clip((dp - d) / np.where(np.abs(Hp - H) > 1e-6, Hp - H, 1e-6), 0.3, 1.0)
-                if Hp is not None: g = np.where((np.abs(d) > 25) | (np.abs(dp) > 25), 1.0, g)     # clamped far field: plain step
-                Hp, dp = H.copy(), d
-                H = H - d / g
-            out[a] = H
-        return [out[:, cut[k]:cut[k + 1]] for k in range(len(items))]
+        H = np.tile(np.concatenate([np.asarray(it[3], float) * np.ones(len(it[1])) for it in items]), (n, 1))
+        Hp = dp = None
+        for _ in range(iters):
+            PS = [self.to_Sb(m, poses, X[None] + H[:, cut[k]:cut[k + 1], None] * N[None]) for k, (m, X, N, *_r) in enumerate(items)]
+            d = self.dist_b(poses, self.S2T(poses, np.concatenate(PS, 1))) - CLEAR
+            for k, it in enumerate(items):
+                if len(it) > 4 and it[4] is not None:
+                    d[:, cut[k]:cut[k + 1]] = np.minimum(d[:, cut[k]:cut[k + 1]], it[4](poses, PS[k]) - PART_CLEAR)
+            if np.abs(d).max() < 0.05: break
+            # sphere-tracing step (1-Lipschitz distance) accelerated by a clamped secant slope
+            g = np.ones_like(d) if Hp is None else np.clip((dp - d) / np.where(np.abs(Hp - H) > 1e-6, Hp - H, 1e-6), 0.3, 1.0)
+            if Hp is not None: g = np.where((np.abs(d) > 25) | (np.abs(dp) > 25), 1.0, g)     # clamped far field: plain step
+            Hp, dp = H.copy(), d
+            H = np.clip(H - d / g, -60.0, 160.0)                  # a sample whose ray never meets the skin stops at the clamp
+        return [H[:, cut[k]:cut[k + 1]] for k in range(len(items))]
 
-    def rigid(self, items, poses, h0, iters=16):
+    def rigid(self, items, poses, h0, iters=28):
         """one shared height for a rigid group: items = list of (member, base X (m,3), dir N (m,3)); per pose the lowest
         h at which every X + h N sits >= CLEAR off the skin (scalar sphere tracing: all samples move by |dh| along unit
-        directions, so stepping by the smallest clearance never crosses a level; clamped secant acceleration)"""
-        out = np.zeros(len(poses)); h_start = h0
-        for a, i in enumerate(poses):
-            h = h_start; hp = mp = None
-            for _ in range(iters):
-                PS = np.concatenate([self.to_S(m, i, X + h * N) for m, X, N in items])
-                m_ = float((self.B.dist(i, PS @ self.RS[i].T) - CLEAR).min())
-                if abs(m_) < 0.05: break
-                g = 1.0
-                if hp is not None and abs(hp - h) > 1e-6 and abs(m_) < 25 and abs(mp) < 25: g = min(1.0, max(0.3, (mp - m_) / (hp - h)))
-                hp, mp = h, m_; h = h - m_ / g
-            out[a] = h; h_start = h + 4.0
-        return out
+        directions, so stepping by the smallest clearance never crosses a level; clamped secant acceleration).
+        All poses advance together (one batched distance call per iteration)."""
+        poses = np.asarray(poses); n = len(poses); h = np.full(n, float(h0)); hp = mp = None
+        for _ in range(iters):
+            PS = np.concatenate([self.to_Sb(m, poses, X[None] + h[:, None, None] * N[None]) for m, X, N in items], 1)
+            m_ = (self.dist_b(poses, self.S2T(poses, PS)) - CLEAR).min(1)
+            if np.abs(m_).max() < 0.05: break
+            g = np.ones(n)
+            if hp is not None:
+                ok = (np.abs(hp - h) > 1e-6) & (np.abs(m_) < 25) & (np.abs(mp) < 25)
+                g = np.where(ok, np.clip((mp - m_) / np.where(ok, hp - h, 1.0), 0.3, 1.0), 1.0)
+            hp, mp = h.copy(), m_; h = np.clip(np.where(np.abs(m_) < 0.05, h, h - m_ / g), -60.0, 200.0)
+        return h
 
     def red(self, A, axis=0):
-        """rigid height from per-pose needs: the pct-th percentile over poses"""
-        return np.percentile(A, self.p["pct"], axis=axis) if self.p["pct"] < 100 else A.max(axis)
+        """rigid height from per-pose needs: the pct-th percentile over the poses where the part CAN clear the skin at
+        some height (a need at the trace clamp means no height clears it - e.g. the trombone tail inside the neck: that
+        pose is lost whatever the height, so it must not set the height; it is scored as contact)"""
+        A = np.asarray(A, float); sat = A >= 159.0
+        if axis == 0 and A.ndim == 1:
+            a = A[~sat] if (~sat).any() else A
+            return np.percentile(a, self.p["pct"]) if self.p["pct"] < 100 else a.max()
+        Am = np.where(sat, np.nan, A)
+        allsat = np.all(sat, axis=axis)
+        r = np.nanpercentile(Am, self.p["pct"], axis=axis) if self.p["pct"] < 100 else np.nanmax(Am, axis=axis)
+        return np.where(allsat, A.max(axis), r)
 
     # ---- fit -----------------------------------------------------------------------------------------------------------
     def fit(self):
@@ -446,13 +500,16 @@ class Model:
         self.lam = f3
 
     def box_sdf_fn(self, names):
+        """batched: (poses (n,), PS (n,m,3) scapula frame) -> (n,m) signed distance to the named stage boxes"""
         K = self.K
-        def fn(i, PS):
-            d = np.full(len(PS), 1e9)
+        def fn(poses, PS):
+            d = np.full(PS.shape[:2], 1e9)
             for nm in names:
                 if nm not in self.boxes: continue
-                cen, half = self.boxes[nm]; R, t = self.T(nm, i)
-                d = np.minimum(d, sd_box(PS, R @ cen + t, R @ K.Qs, half))
+                cen, half = self.boxes[nm]; R, t = self.Tv(nm, poses)
+                C = np.einsum("pij,j->pi", R, cen) + t; M = R @ K.Qs
+                q = np.abs(np.einsum("pmi,pij->pmj", PS - C[:, None], M)) - half
+                d = np.minimum(d, np.linalg.norm(np.maximum(q, 0), axis=2) + np.minimum(q.max(2), 0))
             return d
         return fn
 
@@ -488,11 +545,11 @@ class Model:
         for z in (self.z1 + 0.5, self.z1 + RING_H):                 # ring outer wall
             out.append(("S", K.o1 + z * b + RING_RO * (np.cos(ang)[:, None] * e + np.sin(ang)[:, None] * f)))
         g = grid2(GUIDE_L, GUIDE_W, 4.0)                             # guide top + side walls
-        top = self.guide_c + g[:, :1] * K.tG + g[:, 1:] * K.p2_r + GUIDE_UP * K.uG; out.append(("L1", top))
+        top = self.guide_c + g[:, :1] * self.tG + g[:, 1:] * K.p2_r + GUIDE_UP * self.uG; out.append(("L1", top))
         for s in (-1, 1):
             for z in np.linspace(-GUIDE_DN, GUIDE_UP, 4):
-                out.append(("L1", self.guide_c + s * GUIDE_L / 2 * K.tG + np.linspace(-GUIDE_W / 2, GUIDE_W / 2, 6)[:, None] * K.p2_r + z * K.uG))
-                out.append(("L1", self.guide_c + s * GUIDE_W / 2 * K.p2_r + np.linspace(-GUIDE_L / 2, GUIDE_L / 2, 8)[:, None] * K.tG + z * K.uG))
+                out.append(("L1", self.guide_c + s * GUIDE_L / 2 * self.tG + np.linspace(-GUIDE_W / 2, GUIDE_W / 2, 6)[:, None] * K.p2_r + z * self.uG))
+                out.append(("L1", self.guide_c + s * GUIDE_W / 2 * K.p2_r + np.linspace(-GUIDE_L / 2, GUIDE_L / 2, 8)[:, None] * self.tG + z * self.uG))
         Ub = self.band_U[::2]; Xb = self.band[::2]                   # band top and edges
         out.append(("L2", Xb + BAND_T * Ub))
         W = K.W_r; e3, f3_ = perp(W)                                 # hub barrel + crown (L2), lower plate (E)
@@ -540,7 +597,7 @@ class Model:
         self.hub_surf_E = np.concatenate([self.P3 + z * W + HUB_R * (np.cos(ang)[:, None] * e3 + np.sin(ang)[:, None] * f3_) for z in (0.0, LOWER_T)]
                                          + [self.P3 + dd[:, :1] * e3 + dd[:, 1:] * f3_])
         g = grid2(GUIDE_L, GUIDE_W, 4.0); gs = []
-        for z in (-GUIDE_DN, GUIDE_UP): gs.append(self.guide_c + g[:, :1] * K.tG + g[:, 1:] * K.p2_r + z * K.uG)
+        for z in (-GUIDE_DN, GUIDE_UP): gs.append(self.guide_c + g[:, :1] * self.tG + g[:, 1:] * K.p2_r + z * self.uG)
         self.guide_surf = np.concatenate(gs)
         b = K.b; e, f = perp(b); ang2 = np.linspace(0, 2 * np.pi, 40, endpoint=False)
         self.ring_surf = np.concatenate([K.o1 + z * b + r * (np.cos(ang2)[:, None] * e + np.sin(ang2)[:, None] * f)
@@ -642,33 +699,34 @@ def sweep(B, budget=150, stages=None):
         return log[-1]
     def best(filt=lambda e: True):
         c = [e for e in log if filt(e)]; return min(c, key=lambda e: e["gap"]) if c else None
-    # stage 0: references (spherical trombone without / with the idle stage)
-    run(dict(stage=0)); run(dict()); run(dict(frame="hub"))
+    # stage 0: rigid-height percentile (baseline convention: poses above it count as contact) x arc coverage
+    for pc in (85.0, 92.0, 96.0, 99.0):
+        for aw in (0.0, 0.8):
+            run(dict(pct=pc, arc_ws=aw))
+    b0 = best(lambda e: e["req"].get("stage", 1) == 1)["req"]
+    run(dict(b0, stage=0))                                       # spherical trombone reference (no stage)
     # stage 1: the skin-shaped arc - J2 line offset (o2w toward W's azimuth, o2n normal), J1 / J3 offsets by the LP
     for o2w in (-12, -6, 6, 12):
         for o2n in (-10, 0, 10):
-            run(dict(o2w=o2w, o2n=o2n, comp=1))
-    b1 = best(lambda e: e["req"].get("stage", 1) == 1)["req"]
-    # stage 2: arc coverage of the workspace, frame, slide ranges, arc axial shift
-    for k, vals in (("arc_ws", (0.5, 0.8, 0.9)), ("frame", ("hub",)), ("dza", (-6, -3, 3, 6)), ("R_r", (3.0, 5.0)),
-                    ("S_a", (15.0, 25.0)), ("S_t", (10.0, 20.0))):
+            run(dict(b0, o2w=o2w, o2n=o2n, comp=1))
+    # stage 2: arc coverage of the workspace, frame, slide ranges, arc axial shift, percentile
+    for k, vals in (("dza", (-6, -3, 3, 6)), ("arc_ws", (0.5, 0.9, 0.95)), ("frame", ("hub",)), ("R_r", (3.0, 5.0)),
+                    ("S_a", (15.0, 25.0)), ("S_t", (10.0, 20.0)), ("comp", (0, 1)), ("pct", (80.0, 90.0, 94.0, 98.0))):
         cur = best(lambda e: e["req"].get("stage", 1) == 1)["req"]
         for v in vals:
             q = dict(cur); q[k] = v; run(q)
-    # stage 3: coordinate refinement around the best (J2 offset by 3 mm, LP compensation on/off, percentile)
-    for rnd in range(3):
+    # stage 3: coordinate refinement around the best
+    for rnd in range(4):
         cur = best(lambda e: e["req"].get("stage", 1) == 1); improved = False
-        for k, st in (("o2w", 3.0), ("o2n", 3.0), ("dza", 2.0)):
+        for k, st in (("o2w", 3.0), ("o2n", 3.0), ("dza", 2.0), ("pct", 2.0)):
             for sg in (-1, 1):
-                q = dict(cur["req"]); q[k] = q.get(k, 0.0) + sg * st
-                if abs(q[k]) > 15: continue
+                q = dict(cur["req"]); q[k] = q.get(k, PARAMS[k]) + sg * st
+                if k != "pct" and abs(q[k]) > 15: continue
+                if k == "pct" and not (50 <= q[k] <= 100): continue
                 e = run(q)
                 if e is None: return log
                 if e["gap"] < cur["gap"] - 1e-9: improved = True
         if not improved: break
-    cur = best(lambda e: e["req"].get("stage", 1) == 1)["req"]
-    for pc in (99.0, 98.0):
-        q = dict(cur); q["pct"] = pc; run(q)
     return log
 
 
@@ -680,7 +738,7 @@ if __name__ == "__main__":
                     dict(o3a=10), dict(o3t=10), dict(frame="hub", o2w=10), dict(frame="hub", o2n=10), dict(arc_ws=0.9)):
             print(par, kin_scan(B, par), flush=True)
         sys.exit()
-    nc, nw = (20, 40) if mode == "check" else (60, 160)
+    nc, nw = (20, 40) if (mode == "check" and not os.path.exists(os.path.join(CB.CACHE, "0089c747c10f", "meta.json"))) else (60, 160)
     B = CB.Bench(n_clip=nc, n_ws=nw); print("bench", B.mode, len(B.idx), flush=True)
     if mode == "sweep":
         sweep(B, budget=int(sys.argv[2]) if len(sys.argv) > 2 else 150)
