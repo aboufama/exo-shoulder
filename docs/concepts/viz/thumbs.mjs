@@ -14,7 +14,8 @@
 // distance the upper arm (its end 200 mm down and four points around it) moves; a frame that falls between two loop
 // frames is solved there, warm-started from the loop frame before it. ONE fixed orthographic camera, shared by every
 // concept (same direction, centre and scale, so designs compare), projects into a 0..100 viewBox, quantised to
-// integers and written as compact SVG path strings, one per frame, frames separated by '|':
+// integers and written as compact SVG path strings, one per frame, frames separated by '|' ('=' stands for a frame
+// identical to the one before it: the key-pose holds cost nothing):
 //   mech   links, arcs, rails, straps / rings (the cuff), plate and carriage outlines: single strokes. Construction
 //          geometry (a part named "construction line", "not metal" or "trace", or a link / arc / rail thinner than
 //          1.5 mm) is not metal and is not drawn.
@@ -40,11 +41,12 @@ export const KIN = require(path.join(HERE, 'kin.js'));
 const V = KIN.V;
 
 // ---------------------------------------------------------------- the one camera (orthographic)
-// From the front, right and a little above: x anterior, y up, z lateral (right shoulder). Low enough that the
-// overhead arm points up the thumbnail (not at the viewer), turned enough to the front that abduction is not seen
-// end-on. `pan` moves the frame (mm on the screen: right, down) off GH, `half` is its half-width in mm: fitted so every
-// leaderboard design's drawing stays inside the frame in every sampled pose (thumbs.mjs --stats prints what falls out).
-export const CAM = { dir: [0.62, 0.27, 0.74], pan: [8, 22], half: 180, view: 100 };
+// From the front-right (45 deg between anterior x and lateral z) and 12 deg above (y up): the overhead arm points up
+// the thumbnail (77 % of its length on screen; the earlier 30 deg-high camera showed 48 %: overhead read as a ring over
+// a circle), and forward raise and abduction show 72 % each. `pan` moves the frame (mm on the screen: right, down) off
+// GH, `half` is its half-width in mm: fitted on 2026-10-15 so every leaderboard design's drawing stays inside the frame
+// in every sampled pose (thumbs.mjs --stats prints what falls out; designs with a cuff stage far down the arm set it).
+export const CAM = { dir: [1, 0.3, 1], pan: [25, 12], half: 215, view: 100 };
 export function camera(spec = CAM) {
   const Zc = V.unit(spec.dir), Xc = V.unit(V.cross([0, 1, 0], Zc)), Yc = V.cross(Zc, Xc), S = spec.view / (2 * spec.half);
   const proj = (p) => [spec.view / 2 + (V.dot(p, Xc) - spec.pan[0]) * S, spec.view / 2 + (-V.dot(p, Yc) - spec.pan[1]) * S];
@@ -137,6 +139,9 @@ export function partLines(parts) {
   return { mech, joint };
 }
 const linesPath = (lines, cam) => lines.map((l) => poly(l.pts.map(cam.proj), l.closed)).join('');
+/** frames -> one string: '|' between frames, '=' for a frame identical to the one before (unpack reverses it) */
+export const pack = (frames) => frames.map((d, k) => (k > 0 && d === frames[k - 1] ? '=' : d)).join('|');
+export const unpack = (s) => { const o = []; String(s).split('|').forEach((d, k) => o.push(d === '=' && k > 0 ? o[k - 1] : d)); return o; };
 
 // ---------------------------------------------------------------- the shoulder (shared by every concept)
 export const ARM = { s0: 8, s1: 200, r0: 41, r1: 34, delt: 45 };
@@ -237,7 +242,7 @@ function main() {
   const t0 = Date.now(), { files, bad } = loadConcepts(ONLY), mtime = srcMtime(files);   // mtime read BEFORE the run
   const plan = samplePlan(N), still = plan.still;
   const base = { n: N, still, view: `0 0 ${cam.view} ${cam.view}` }, blank = { closes: '', body: '', mech: '', joint: '', note: '' };
-  const rows = [{ id: '_shoulder', kind: 'shoulder', ...base, ...blank, body: plan.samples.map((s) => bodyPath(KIN.makeCtx(s.pose, s.t), cam)).join('|') }];
+  const rows = [{ id: '_shoulder', kind: 'shoulder', ...base, ...blank, body: pack(plan.samples.map((s) => bodyPath(KIN.makeCtx(s.pose, s.t), cam))) }];
   const skipped = bad.map((b) => ({ id: b.id, kind: 'skipped', ...base, ...blank, note: b.reason }));
   const notes = [];
   for (const id of [...KIN.order].sort()) {
@@ -250,7 +255,7 @@ function main() {
         if (/NaN|Infinity/.test(m + j)) throw new Error('NaN in the drawing');
         mech.push(m); joint.push(j); closes.push(s.closes ? '1' : '0');
       }
-      rows.push({ id, kind: 'mechanism', ...base, ...blank, closes: closes.join(''), mech: mech.join('|'), joint: joint.join('|') });
+      rows.push({ id, kind: 'mechanism', ...base, ...blank, closes: closes.join(''), mech: pack(mech), joint: pack(joint) });
       if (dropped) { notes.push(`${id}: ${dropped} part drawing(s) with non-finite points left out`); dropped = 0; }
       if (STATS) process.stderr.write(`${id} ${Date.now() - t1} ms\n`);
     } catch (e) { skipped.push({ id, kind: 'skipped', ...base, ...blank, note: `run threw: ${String(e.message || e).split('\n')[0]}` }); }
@@ -281,7 +286,7 @@ function stats(rows, cam, still) {
   let nc = 0, ff = 0, nf = 0, pin = 0, np = 0, okStill = 0; const out = {}, big = [];
   for (const r of rows) {
     if (r.kind !== 'mechanism') continue;
-    nc++; const m = r.mech.split('|'), j = r.joint.split('|'), F = m.map((d, k) => pathPts(d).concat(pathPts(j[k])));
+    nc++; const m = unpack(r.mech), j = unpack(r.joint), F = m.map((d, k) => pathPts(d).concat(pathPts(j[k])));
     if (F[still].every(inside)) okStill++;
     F.forEach((P) => { nf++; if (P.every(inside)) ff++; else out[r.id] = (out[r.id] || 0) + 1; P.forEach((p) => { np++; if (inside(p)) pin++; }); });
     // the largest frame-to-frame move of the drawing (mean point shift, same point count only) and the wrap
@@ -298,10 +303,10 @@ function stats(rows, cam, still) {
 // contact sheet (SVG) for a look without a browser: one row per concept, `cols` frames across
 function sheet(rows, file) {
   const sh = rows.find((r) => r.id === '_shoulder'), N = sh.n, cols = 8, cell = 56, pad = 8, lab = 150, idxs = Array.from({ length: cols }, (_, k) => Math.round(k * N / cols));
-  const body = sh.body.split('|'), mechs = rows.filter((r) => r.kind === 'mechanism');
+  const body = unpack(sh.body), mechs = rows.filter((r) => r.kind === 'mechanism');
   let s = `<svg xmlns="http://www.w3.org/2000/svg" width="${lab + cols * (cell + pad)}" height="${mechs.length * (cell + pad) + pad}" font-family="monospace" font-size="9"><rect width="100%" height="100%" fill="#fff"/>`;
   mechs.forEach((r, j) => {
-    const m = r.mech.split('|'), jt = r.joint.split('|'), y = pad + j * (cell + pad);
+    const m = unpack(r.mech), jt = unpack(r.joint), y = pad + j * (cell + pad);
     s += `<text x="4" y="${y + cell / 2}">${r.id.slice(0, 22)}</text>`;
     idxs.forEach((k, i) => {
       s += `<svg x="${lab + i * (cell + pad)}" y="${y}" width="${cell}" height="${cell}" viewBox="${r.view}"><rect width="100" height="100" fill="none" stroke="#ddd"/>`

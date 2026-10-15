@@ -1,4 +1,22 @@
-"""Concept model: NON-SPHERICAL OFFSET 3R + PASSIVE SELF-ALIGNING CUFF SLIDES (id seed-offset-3r-slides).
+"""Concept model: seed-offset-3r-slides, 2-TRANSLATION VERSION (id seed-offset-3r-slides__2slide), user rule 2026-10-15.
+
+The user (mechanical designer, builds MVP1): at most 2 passive translations, every joint a real component at its real
+envelope. This copy of docs/concepts/models/seed-offset-3r-slides.py (left untouched) keeps the model's own finding:
+with the axis offsets on R3 ONLY (o1 = o2 = 0, forced here) the drift is t3 = R12 (I - R3) c3 and on the arm
+s = Q^T t3 = (R3^T - I) c3, which is perpendicular to u3 = the slide-plane normal - so two in-plane slides close the loop
+EXACTLY (radial travel 0, checked <= 0.05 mm per pose) and the arm's orientation is R1 R2 R3 of the spherical IK (the
+three hub encoders read it; the slides need no sensing).
+
+The cuff stage is two real ball guides stacked crosswise (THK RSR3M, catalogue values read from
+tools/hardware_catalogue.json: H 4.0, block 8 x 12, rail 3 x 2.6), sampled as metal at their real envelope (`stack()`):
+arm-fixed base plate 1.5 mm + rail 1 (along the humerus; length = blocks + 2 S_a + 2), carriage A = block(s) 1 +
+1.0 mm adapter + rail 2 (across; length = block 2 + 2 S_t + 2), carriage B = block 2 + member 3's 3 mm plate on top:
+member-3 plate underside 10.5 mm, top 13.5 mm above the base plate's underside. Along guide = a DOUBLE block (two
+RSR3M, 25 mm: MA 2.11 N.m vs 0.29 for one - docs/research/manufacturability_audit.md), across guide = one block
+(`nblk_a`, `nblk_t`). Every number reported by this file is VModel (the verifier's checks + the member-3 riser).
+
+--- the parent model's docstring follows (its 3-slide text describes the parent, not this copy) ---
+Concept model: NON-SPHERICAL OFFSET 3R + PASSIVE SELF-ALIGNING CUFF SLIDES (id seed-offset-3r-slides).
 
 Chain: scapula base -> R1 -> link 1 -> R2 -> link 2 -> R3 -> carriage stack -> passive slides -> arm-fixed cuff rail.
 The three revolute axes keep the champion's directions (the r20 s1414 #4 spherical 3R) but each axis line is moved
@@ -45,30 +63,56 @@ HERE = os.path.dirname(os.path.abspath(__file__)); REPO = os.path.abspath(os.pat
 sys.path.insert(0, os.path.join(REPO, "tools"))
 import concept_bench as CB                                   # noqa: E402
 BP = CB.BP
-ID = "seed-offset-3r-slides"
+ID = "seed-offset-3r-slides__2slide"
 D2R = math.pi / 180
 
 # ---- hardware (docs/HARDWARE.md v5 joint; catalogue spec) -----------------------------------------------------------
 HUB_R, CROWN, UP = 10.0, 12.25, 3.15        # hub radius, F -> crown, F -> upper member underside
 T_LINK, W_LINK, RAMP = 3.0, 8.0, 60.0       # strap thickness / width, ramp limit (deg)
-RAIL_W, RAIL_H, CAR_L, CAR_W, CAR_H, RUN = 8.0, 4.0, 20.0, 20.0, 4.0, 0.5
+# (the parent model's RAIL_W, RAIL_H, CAR_L, CAR_W, CAR_H, RUN are replaced by stack(): real RSR3M envelopes)
 CLEAR, PART_CLEAR, SPACING = 2.0, 1.0, 2.0  # skin clearance target, part-part clearance, sample grid (1 pt / 4 mm2)
 BIG = 999.0
+
+# ---- the real cuff stage (tools/hardware_catalogue.json; CLAUDE.md 'Manufacturable joints only') ----------------------
+def _guide(gid, fallback):
+    try:
+        for g in json.load(open(os.path.join(REPO, "tools", "hardware_catalogue.json")))["linear_guides"]:
+            if g.get("id") == gid: return {k: g[k] for k in fallback}
+    except Exception:                                                          # noqa: BLE001
+        pass
+    return dict(fallback)
+GUIDE = _guide("THK-RSR3M", dict(H=4.0, W=8.0, L=12.0, rail_W=3.0, rail_H=2.6))       # catalogue (THK RSR PDF)
+G_H, G_W, G_L, G_RW, G_RH = (float(GUIDE[k]) for k in ("H", "W", "L", "rail_W", "rail_H"))
+PLATE, ADAPT, T3 = 1.5, 1.0, 3.0   # arm-fixed base plate under rail 1; adapter plate on block(s) 1 under rail 2; member-3 plate on block 2
+BLK_GAP, END, H1 = 1.0, 2.0, 1.0   # gap between the blocks of a double block; rail = blocks + 2 travel + END; block underside above its rail's mounting face [est.]
+RTOL = 0.05                        # radial travel allowed (numerical): two slides close exactly with R3-only offsets
+
+
+def stack(P):
+    """real envelopes of the crossed-guide stage, levels in mm above the base plate's underside (tr)"""
+    nA = int(P.get("nblk_a", 2)); nT = int(P.get("nblk_t", 1))
+    La = nA * G_L + (nA - 1) * BLK_GAP; Lt = nT * G_L + (nT - 1) * BLK_GAP
+    return dict(La=La, Lt=Lt, Lr=La + 2 * P["S_a"] + END, Wr=G_W + 2.0, Wa=Lt + 2 * P["S_t"] + END, Lb=G_W + 2.0,
+                rail0=0.0, rail1=PLATE + G_RH,                          # base plate + rail 1 (arm-fixed)
+                a0=PLATE + G_H, a1=PLATE + G_H + ADAPT + G_RH,          # adapter underside .. rail 2 top (carriage A)
+                b0=PLATE + G_H + ADAPT + H1,                            # block 2 underside (carriage B = member 3)
+                zb=PLATE + 2 * G_H + ADAPT, top=PLATE + 2 * G_H + ADAPT + T3)   # member-3 plate underside / top
 SING, JUMP = 10.0, 25.0                     # deg: J2 fold margin, largest joint step between 10 fps frames
 
 # the seed: the current champion's axis directions (r20 s1414 #4, pipeline/conformal/band_cad/inputs/r20_n3_s1414_4_f300.json)
 SEED = dict(az=2.4305071427308924, el=80.67633718429899, a=[76.90180446920043, 66.74921235407174],
             w=[86.32769021001913, 21.829657347343378], branch=-1)
 
-PARAMS = dict(o1a=0.0, o1c=0.0, o2a=0.0, o2c=0.0, o3a=0.0, o3c=0.0,   # axis offsets (mm): along / across the link
-              S_a=15.0, S_t=15.0, R_r=0.5,                            # slide half-ranges (mm); R_r 0.5 = the spec's 2 slides
+PARAMS = dict(o1a=0.0, o1c=0.0, o2a=0.0, o2c=0.0, o3a=0.0, o3c=0.0,   # axis offsets (mm); o1*, o2* forced to 0 (2 slides)
+              S_a=15.0, S_t=15.0, R_r=0.0,                            # slide half-ranges (mm); no radial slide
+              nblk_a=2, nblk_t=1,                                     # RSR3M blocks on the along / across guide
               drop=1,                                                 # greedy pose dropping on the skin envelope (0/1)
-              S_auto=0,                                               # 1: slide ranges = needed travel + 0.5 mm
-              jam_contact=0,                                          # 1: skin-dropped poses stay contact even if parts jam there
-              remote=0, neck=15.0, ramp=0,                            # 1: slide stage down the arm, `neck` mm past hub 3's rim;
+              S_auto=1,                                               # 1: slide ranges = needed travel + 0.5 mm
+              jam_contact=1,                                          # 1: skin-dropped poses stay contact even if parts jam there
+              remote=1, neck=13.0, ramp=1,                            # 1: slide stage down the arm, `neck` mm past hub 3's rim;
                                                                       # ramp 1: hub 3 at its own height, neck ramps up onto the stage
               slides=1,                                               # 0: spherical reference (offsets ignored, arm-fixed hub 3)
-              vfix=0,                                                 # 1: bench_eval uses VModel (the verifier's checks + the riser)
+              vfix=1,                                                 # 1: bench_eval uses VModel (the verifier's checks + the riser)
               branch=0,                                               # 0: the seed's J2 branch (-1); +1 / -1 forces a branch
               flip3=0)                                                # 1: member 3 is hub 3's UPPER member (boss + cap), link 2 its
                                                                       # lower plate: the neck leaves the boss wall (F+3.15..F+10.25)
@@ -122,6 +166,8 @@ def pose_rots(POSE):
 class Design:
     def __init__(self, params=None):
         P = dict(PARAMS); P.update(params or {}); self.p = P
+        for k in ("o1a", "o1c", "o2a", "o2c"): P[k] = 0.0             # 2 slides: offsets on R3 only (radial drift = 0 exactly)
+        P["R_r"] = 0.0; P["neck"] = max(3.0, float(P["neck"]))
         s = SEED; self.branch = int(P.get("branch") or s["branch"])   # axis directions: the seed + sweepable deltas (deg)
         u1 = bvec(s["az"] + P.get("d_az", 0.0), s["el"] + P.get("d_el", 0.0))
         u3 = w_dir(s["w"][0] + P.get("d_wd", 0.0), s["w"][1] + P.get("d_wa", 0.0))
@@ -177,12 +223,12 @@ class Design:
         """slide-stage centre (rest frame): under hub 3, or (remote) down the arm past a `neck` strap from hub 3's rim"""
         P = self.p
         if not P.get("remote"): return self.c[2]
-        return self.c[2] + (HUB_R + P["neck"] + CAR_L / 2 + P["S_a"]) * self.sa
+        return self.c[2] + (HUB_R + P["neck"] + stack(P)["Lr"] / 2) * self.sa       # rail 1's near end at the neck's end
 
     def slides_ok(self, s):
         P = self.p
         if not P.get("slides", 1): return np.ones(len(s), bool)
-        return (np.abs(s[:, 0]) <= P["S_a"]) & (np.abs(s[:, 1]) <= P["S_t"]) & (np.abs(s[:, 2]) <= P["R_r"])
+        return (np.abs(s[:, 0]) <= P["S_a"]) & (np.abs(s[:, 1]) <= P["S_t"]) & (np.abs(s[:, 2]) <= max(P["R_r"], RTOL))
 
 
 # ---- parts (member-local rest coordinates) ---------------------------------------------------------------------------
@@ -198,6 +244,15 @@ def rect(L, W, sp=SPACING):
 
 def frame_of(n):
     e = unit(np.cross(n, [0.0, 0.0, 1.0]) if abs(n[2]) < 0.9 else np.cross(n, [1.0, 0.0, 0.0])); return e, np.cross(n, e)
+
+
+def stage_boxes(D, tr):
+    """the crossed-guide stage as boxes (member, centre, half sizes in the (sa, st, sn) frame), rest member frames"""
+    S = stack(D.p); cs = D.stage_c(); sn = D.sn
+    def bx(z0, z1, L, W): return cs + (tr + 0.5 * (z0 + z1)) * sn, np.array([L / 2, W / 2, 0.5 * (z1 - z0)])
+    return {"rail": (5, *bx(S["rail0"], S["rail1"], S["Lr"], S["Wr"])),       # base plate + rail 1 (rail top 4.1)
+            "carA": (4, *bx(S["a0"], S["a1"], S["La"], S["Wa"])),             # adapter + rail 2 (conservative: full width to rail 2's top)
+            "carB": (3, *bx(S["b0"], S["top"], S["Lb"], S["Lt"]))}            # block 2 + member-3 plate
 
 
 class Geometry:
@@ -228,12 +283,13 @@ class Geometry:
             nk = rect(P["neck"], W_LINK); nk[:, 0] += HUB_R + P["neck"] / 2
             Bn = c[2][None] + nk[:, :1] * sa + nk[:, 1:] * st
             self.groups.append(dict(name="neck", mem=3, B=Bn, N=np.broadcast_to(u[2], Bn.shape).copy(), shared="h3", off=np.zeros(len(Bn))))
-        r = rect(CAR_L + 2 * Sa, RAIL_W); Br = cs[None] + r[:, :1] * sa + r[:, 1:] * st
-        ca = rect(CAR_L, CAR_W + 2 * St); ca = ca[np.abs(ca[:, 1]) > RAIL_W / 2]
+        S = stack(P)                                                # base plate underside; adapter underside where it overhangs it
+        r = rect(S["Lr"], S["Wr"]); Br = cs[None] + r[:, :1] * sa + r[:, 1:] * st
+        ca = rect(S["La"], S["Wa"]); ca = ca[np.abs(ca[:, 1]) > S["Wr"] / 2]
         Bc = cs[None] + ca[:, :1] * sa + ca[:, 1:] * st
         self.groups.append(dict(name="rail", mem=5, B=Br, N=np.broadcast_to(sn, Br.shape).copy(), shared="stack", off=np.zeros(len(Br))))
         self.groups.append(dict(name="carA", mem=4, B=Bc, N=np.broadcast_to(sn, Bc.shape).copy(), shared="stack",
-                                off=np.full(len(Bc), RAIL_H + RUN)))
+                                off=np.full(len(Bc), S["a0"])))
         self.links = []
 
     def add_links(self, f1, f2, f3):
@@ -271,7 +327,7 @@ class Model:
             _, okc, _, _, _, sc = self.D.ik(Z["HG"][ii].astype(float))
             sa = np.abs(np.r_[s[ok], sc[okc]]); m = sa.max(0) if len(sa) else np.zeros(3)
             self.p["S_a"] = round(max(2.0, float(m[0]) + 0.5), 1); self.p["S_t"] = round(max(2.0, float(m[1]) + 0.5), 1)
-            self.p["R_r"] = round(max(0.5, float(m[2]) + 0.5), 1)
+            self.p["R_r"] = 0.0; self.s_radial_max = round(float(m[2]), 4)
         self.q, self.X = q, {1: X1, 2: X2, 3: X3}; self.s = s
         self.why = np.array([""] * len(B.idx), dtype=object)
         okf = ok.copy(); self.why[~ok] = "fold"
@@ -352,11 +408,8 @@ class Model:
 
     def _boxes_at(self, i):
         """slide-stack boxes (centre, rotation, half sizes) in the scapula frame at pose i, from the current rail height"""
-        D = self.D; P = D.p; tr = self._tr_fit; cs = D.stage_c(); sa, st, sn = D.sa, D.st, D.sn; Rst = np.stack([sa, st, sn], 1)
-        f3 = tr + RAIL_H + RUN + CAR_H + RUN + P["R_r"]
-        spec = {"rail": (5, cs + (tr + RAIL_H / 2) * sn, np.array([(CAR_L + 2 * P["S_a"]) / 2, RAIL_W / 2, RAIL_H / 2])),
-                "carA": (4, cs + (tr + RAIL_H + RUN + CAR_H / 2) * sn, np.array([CAR_L / 2, (CAR_W + 2 * P["S_t"]) / 2, CAR_H / 2])),
-                "carB": (3, cs + (f3 + CAR_H / 2) * sn, np.array([CAR_L / 2, CAR_W / 2, CAR_H / 2]))}
+        D = self.D; P = D.p; tr = self._tr_fit; sa, st, sn = D.sa, D.st, D.sn; Rst = np.stack([sa, st, sn], 1)
+        spec = stage_boxes(D, tr)
         out = {}
         for nm, (m, cen, half) in spec.items():
             R, t = self.T(m, i); out[nm] = (R @ cen + t, R @ Rst, half)
@@ -395,8 +448,8 @@ class Model:
         if "h3" in self.Hneed and self.D.p.get("ramp"):             # hub 3 at its own height; the neck ramps up to carriage B
             return float(self.Hneed["h3"][keep].max())
         if "h3" in self.Hneed:                                       # the neck runs on, over the stage, onto carriage B's top
-            return max(float(self.Hneed["h3"][keep].max()), tr + RAIL_H + RUN + CAR_H + RUN + self.D.p["R_r"] + CAR_H)
-        return tr + RAIL_H + RUN + CAR_H + RUN + self.D.p["R_r"] if self.D.p.get("slides", 1) else tr
+            return max(float(self.Hneed["h3"][keep].max()), tr + stack(self.D.p)["top"])
+        return tr + stack(self.D.p)["zb"] if self.D.p.get("slides", 1) else tr
 
     def _heights(self, keep):
         H, L = self.Hneed, self.Lneed
@@ -449,7 +502,7 @@ class Model:
         f1, f2, tr, rL = self._heights(keep)
         D = self.D; geo = self.geo
         f3 = self.f3_of(tr, keep)                                    # (the link paths keep the first pass's hub centres)
-        self.f = [f1, f2, f3]; self.tr = tr; self.zb = tr + RAIL_H + RUN + CAR_H + RUN + D.p["R_r"]   # carriage B underside
+        self.f = [f1, f2, f3]; self.tr = tr; self.zb = tr + stack(D.p)["zb"]   # member-3 plate underside on block 2
         # link shapes: lower bound from the envelope, raised to meet the hub levels with <= RAMP slopes
         u, c = D.u, D.c; k = math.tan(RAMP * D2R)
         lvl = {("L1", 0): 0.0, ("L1", 1): 0.0, ("L2", 1): UP, ("L2", 2): 0.0 if D.p.get("flip3") else UP}  # link 1 lower at J1, J2; link 2 upper at J2 (and J3 unless flip3)
@@ -477,7 +530,7 @@ class Model:
             hh = np.full(len(g["B"]), h) + g["off"]
             if g["name"] == "neck" and g["mem"] == 3 and D.p.get("ramp"):      # <= 60 deg ramp from hub 3's level to carriage B's top
                 if D.p.get("flip3"): hh = hh + UP                                # flip3: the neck leaves the boss wall, not the plate
-                x = (g["B"] - D.c[2]) @ D.sa; ztop = tr + RAIL_H + RUN + CAR_H + RUN + D.p["R_r"] + CAR_H
+                x = (g["B"] - D.c[2]) @ D.sa; ztop = tr + stack(D.p)["top"]
                 hh = np.maximum(hh, ztop - math.tan(RAMP * D2R) * (HUB_R + D.p["neck"] - x))
             self.rigid[g["name"]] = (g["mem"], g["B"] + hh[:, None] * g["N"])
         self._contact_only(); self._solids()
@@ -489,7 +542,7 @@ class Model:
         sl = D.p.get("slides", 1)
         for k, mem in ((0, 0), (1, 1), (2, 3 if sl else 5)):
             e, f = frame_of(u[k]); ring = HUB_R * (np.cos(ang)[:, None] * e + np.sin(ang)[:, None] * f)
-            z0 = F[k] + (CAR_H if k == 2 and sl and not D.p.get("remote") else 0.0)
+            z0 = F[k] + (T3 if k == 2 and sl and not D.p.get("remote") else 0.0)
             for z in np.linspace(z0, F[k] + CROWN, 4):
                 out.append((mem, c[k] + z * u[k] + ring))
         sa, st, sn = D.sa, D.st, D.sn; P = D.p; tr = self.tr
@@ -500,10 +553,10 @@ class Model:
                 for y in np.arange(-W / 2, W / 2 + 1e-6, SPACING): pts += [(-L / 2, y, z), (L / 2, y, z)]
             a = np.array(pts); return (mem, D.stage_c() + a[:, :1] * sa + a[:, 1:2] * st + a[:, 2:] * sn)
         if not sl: self.contact = out; return
-        out.append(box_edges(5, CAR_L + 2 * P["S_a"], RAIL_W, tr, tr + RAIL_H))
-        out.append(box_edges(4, CAR_L, CAR_W + 2 * P["S_t"], tr + RAIL_H + RUN, tr + RAIL_H + RUN + CAR_H))
-        zb = self.zb                                                # across carriage (= hub 3 lower plate unless remote)
-        out.append(box_edges(3, CAR_L, CAR_W, zb, zb + CAR_H))
+        S = stack(P)
+        out.append(box_edges(5, S["Lr"], S["Wr"], tr + S["rail0"], tr + S["rail1"]))
+        out.append(box_edges(4, S["La"], S["Wa"], tr + S["a0"], tr + S["a1"]))
+        out.append(box_edges(3, S["Lb"], S["Lt"], tr + S["b0"], tr + S["top"]))     # block 2 + member-3 plate
         self.contact = out
 
     def _solids(self):
@@ -511,10 +564,7 @@ class Model:
         D = self.D; u, c = D.u, D.c; F = self.f; P = D.p; tr = self.tr; sa, st, sn = D.sa, D.st, D.sn
         sl = P.get("slides", 1)
         self.cyl = {"hub1": (0, c[0] + F[0] * u[0], u[0]), "hub2": (1, c[1] + F[1] * u[1], u[1]), "hub3": (3 if sl else 5, c[2] + F[2] * u[2], u[2])}
-        cs = D.stage_c()
-        self.box = {} if not sl else {"rail": (5, cs + (tr + RAIL_H / 2) * sn, np.array([(CAR_L + 2 * P["S_a"]) / 2, RAIL_W / 2, RAIL_H / 2])),
-                    "carA": (4, cs + (tr + RAIL_H + RUN + CAR_H / 2) * sn, np.array([CAR_L / 2, (CAR_W + 2 * P["S_t"]) / 2, CAR_H / 2])),
-                    "carB": (3, cs + (self.zb + CAR_H / 2) * sn, np.array([CAR_L / 2, CAR_W / 2, CAR_H / 2]))}
+        self.box = {} if not sl else {k: (m, cen, half) for k, (m, cen, half) in stage_boxes(D, tr).items()}
         self.strap = {}
         for nm, (mem, pts) in self.link_pts.items():
             dv = unit(pts); self.strap[nm] = (mem, pts + (T_LINK / 2) * dv)
@@ -655,11 +705,11 @@ class VModel(Model):
         D = self.D; P = D.p; self.riser = None
         if P.get("remote") and P.get("slides", 1):
             if self.fix["bridge"]:
-                L = P["S_a"]; r = rect(L, W_LINK); r[:, 0] += HUB_R + P["neck"] + L / 2
+                S = stack(P); L = S["Lr"] / 2 - S["Lb"] / 2; r = rect(L, W_LINK); r[:, 0] += HUB_R + P["neck"] + L / 2   # neck end -> carriage B
                 Bb = D.c[2][None] + r[:, :1] * D.sa + r[:, 1:] * D.st
                 self.rigid["bridge"] = (3, Bb + self.zb * D.sn[None])
             if self.fix["riser"] and P.get("ramp"):
-                f3 = self.f[2]; ztop = self.zb + CAR_H
+                f3 = self.f[2]; ztop = self.zb + T3
                 fl = P.get("flip3"); base = f3 + (UP if fl else 0.0)            # member 3's lowest level at the rim
                 h_rim = max(base, ztop - math.tan(RAMP * D2R) * P["neck"])      # neck underside where it leaves hub 3's rim
                 top = h_rim + T_LINK
@@ -742,223 +792,20 @@ def now(): return datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%
 
 
 def evaluate(B, params, log=None):
-    M = Model(B, params); r = M.run(); r["params"] = dict(M.p)
+    """tools/concept_cma.py / tools/concept_bigbench.py contract: (resolved params, report). Always VModel."""
+    P = dict(PARAMS); P.update(params); P["vfix"] = 1
+    M = VModel(B, P); r = M.run()
+    S = stack(M.p); r.pop("params", None)
+    r.update(honest=True, passive_translations=2, S=[M.p["S_a"], M.p["S_t"], 0.0],
+             s_radial_max=getattr(M, "s_radial_max", None),
+             stage=dict(guide="THK RSR3M x %d along + x %d across" % (M.p["nblk_a"], M.p["nblk_t"]),
+                        rail1_mm=round(S["Lr"], 1), rail2_mm=round(S["Wa"], 1), height_mm=S["top"], member3_plate_underside_mm=S["zb"]))
     if log is not None:
-        log.append(dict(k=len(log), t=now(), params=dict(M.p), inband14=r["inband14"], inband10=r["inband10"], reach=r["reach"],
-                        follow=r["follow"], contact=r["contact"], gap=r["gap"], why=r["why"], s_abs_max=r["s_abs_max"]))
-    return r, M
-
-
-def kin_scan(B, params):
-    """kinematics only (no skin): share of clip / workspace poses the chain closes on within the slide ranges"""
-    kind = np.array(B.kind); HG = CB._poses_all()["HG"][B.idx].astype(float)
-    D = Design(params); q, ok, X1, X2, X3, s = D.ik(HG); sok = D.slides_ok(s)
-    return dict(clip=round(float((ok & sok)[kind == "clip"].mean()), 3), ws=round(float((ok & sok)[kind == "ws"].mean()), 3),
-                s_max=np.round(np.abs(s[ok]).max(0), 1).tolist(), s_p95=np.round(np.percentile(np.abs(s[ok]), 95, axis=0), 1).tolist())
+        log.append(dict(k=len(log), t=now(), params=dict(M.p), **{k: r[k] for k in ("inband14", "inband10", "reach", "follow", "contact", "gap", "why", "s_abs_max")}))
+    return dict(M.p), r
 
 
 SWEEP_FILE = os.path.join(REPO, "docs", "concepts", "sweeps", ID + ".json")
-
-
-def sweep(B, budget=110, seed=7):
-    """coarse (references, one offset at a time, random combinations) then coordinate refinement around the best.
-    Slide ranges are sized automatically (S_auto: the travel the fit set needs + 0.5 mm), so the sweep is over the six
-    axis offsets; the log records the resolved ranges."""
-    os.makedirs(os.path.dirname(SWEEP_FILE), exist_ok=True)
-    log = json.load(open(SWEEP_FILE)) if os.path.exists(SWEEP_FILE) else []
-    done = {json.dumps(e.get("asked", e["params"]), sort_keys=True): e for e in log}
-    best_gap = [min([e["gap"] for e in log], default=1e9)]
-    def run(par):
-        P = dict(PARAMS); P.update(par); key = json.dumps(P, sort_keys=True)
-        if key in done: return done[key]
-        if len(log) >= budget: return None
-        t = time.time(); r, M = evaluate(B, dict(P), log); log[-1]["asked"] = json.loads(key); done[key] = log[-1]
-        json.dump(log, open(SWEEP_FILE + ".tmp", "w"), indent=1); os.replace(SWEEP_FILE + ".tmp", SWEEP_FILE)
-        print(f"[{len(log):3d}] gap {r['gap']:6.2f} reach {r['reach']:.3f} follow {r['follow']:.3f} ib14 {r['inband14']:.3f} "
-              f"ib10 {r['inband10']:.3f} contact {r['contact']:.3f} why {r['why']} S {[M.p['S_a'], M.p['S_t'], M.p['R_r']]} "
-              f"f {r['f']} ib/part {r['parts_ib14']} {par} ({time.time() - t:.0f} s)", flush=True)
-        if r["gap"] < best_gap[0] - 1e-9:
-            best_gap[0] = r["gap"]
-            with open(os.path.join(REPO, "docs", "concepts", "events.jsonl"), "a") as fh:
-                fh.write(json.dumps(dict(time=now(), kind="milestone", event=f"{ID}: new best gap {r['gap']} (reach {r['reach']}, follow {r['follow']}, "
-                                         f"inband14 {r['inband14']}, contact {r['contact']}) at {par}")) + "\n")
-        return log[-1]
-    OFF = ("o1a", "o1c", "o2a", "o2c", "o3a", "o3c")
-    run(dict(slides=0)); run(dict(S_auto=1))
-    for k in OFF:
-        for v in (-10, -5, 5, 10): run({k: v, "S_auto": 1})
-    rng = np.random.default_rng(seed)
-    for _ in range(26):
-        par = {k: round(float(rng.uniform(-10, 10)), 1) for k in OFF}; par["S_auto"] = 1
-        run(par)
-    steps = {k: 2.5 for k in OFF}
-    for rnd in range(4):
-        cand = [e for e in log if e["params"].get("slides", 1)]
-        best = min(cand, key=lambda e: e["gap"]); improved = False
-        for k, st in steps.items():
-            for sg in (-1, 1):
-                par = {kk: best["asked"][kk] for kk in OFF}; par[k] = par[k] + sg * st; par["S_auto"] = 1
-                e = run(par)
-                if e is None: return log
-                if e["gap"] < best["gap"] - 1e-9: improved = True
-        if not improved: break
-    return log
-
-
-DIRS = ("d_az", "d_el", "d_a1", "d_a2", "d_wd", "d_wa")
-
-
-def sweep2(B, budget=200, seed=11):
-    """stage 2: axis DIRECTIONS (spec: 'axis offsets and directions') around the seed, with and without offsets, then
-    coordinate refinement of directions + offsets around the best slide design"""
-    log = json.load(open(SWEEP_FILE)); done = {json.dumps(e.get("asked", e["params"]), sort_keys=True): e for e in log}
-    best_gap = [min([e["gap"] for e in log if e["params"].get("slides", 1)], default=1e9)]
-    OFF = ("o1a", "o1c", "o2a", "o2c", "o3a", "o3c")
-    def run(par):
-        P = dict(PARAMS); P.update(par); key = json.dumps(P, sort_keys=True)
-        if key in done: return done[key]
-        if len(log) >= budget: return None
-        t = time.time(); r, M = evaluate(B, dict(P), log); log[-1]["asked"] = json.loads(key); done[key] = log[-1]
-        json.dump(log, open(SWEEP_FILE + ".tmp", "w"), indent=1); os.replace(SWEEP_FILE + ".tmp", SWEEP_FILE)
-        print(f"[{len(log):3d}] gap {r['gap']:6.2f} reach {r['reach']:.3f} follow {r['follow']:.3f} ib14 {r['inband14']:.3f} "
-              f"ib10 {r['inband10']:.3f} contact {r['contact']:.3f} why {r['why']} S {[M.p['S_a'], M.p['S_t'], M.p['R_r']]} "
-              f"f {r['f']} ib/part {r['parts_ib14']} {par} ({time.time() - t:.0f} s)", flush=True)
-        if par.get("slides", 1) and r["gap"] < best_gap[0] - 1e-9:
-            best_gap[0] = r["gap"]
-            with open(os.path.join(REPO, "docs", "concepts", "events.jsonl"), "a") as fh:
-                fh.write(json.dumps(dict(time=now(), kind="milestone", event=f"{ID}: new best gap {r['gap']} (reach {r['reach']}, follow {r['follow']}, "
-                                         f"inband14 {r['inband14']}, contact {r['contact']}) at {par}")) + "\n")
-        return log[-1]
-    for k in DIRS:
-        for v in (-10, -5, 5, 10): run({k: v, "S_auto": 1})
-    rng = np.random.default_rng(seed)
-    for _ in range(30):
-        par = {k: round(float(rng.uniform(-10, 10)), 1) for k in DIRS}
-        par.update({k: round(float(rng.uniform(-6, 6)), 1) for k in OFF}); par["S_auto"] = 1
-        run(par)
-    for rnd in range(4):
-        cand = [e for e in log if e["params"].get("slides", 1)]
-        best = min(cand, key=lambda e: e["gap"]); improved = False
-        for k in DIRS + OFF:
-            for sg in (-1, 1):
-                par = {kk: best["asked"].get(kk, 0.0) for kk in DIRS + OFF}; par[k] = par[k] + sg * (4.0 if k in DIRS else 2.5); par["S_auto"] = 1
-                e = run(par)
-                if e is None: return log
-                if e["gap"] < best["gap"] - 1e-9: improved = True
-        if not improved: break
-    return log
-
-
-def sweep3(B, budget=300, seed=23):
-    """stage 3 - the variant that removes the measured limiter of stages 1-2 (the slide stack under hub 3 lifts hub 3 and
-    the distal link by RAIL_H + CAR_H + 2 RUN + R_r): the stage moves down the arm on a member-3 neck, hub 3 sits at its
-    own fitted height. Neck length x offsets x directions, then coordinate refinement."""
-    log = json.load(open(SWEEP_FILE)); done = {json.dumps(e.get("asked", e["params"]), sort_keys=True): e for e in log}
-    best_gap = [min([e["gap"] for e in log if e["params"].get("slides", 1)], default=1e9)]
-    OFF = ("o1a", "o1c", "o2a", "o2c", "o3a", "o3c")
-    def run(par):
-        P = dict(PARAMS); P.update(par); key = json.dumps(P, sort_keys=True)
-        if key in done: return done[key]
-        if len(log) >= budget: return None
-        t = time.time(); r, M = evaluate(B, dict(P), log); log[-1]["asked"] = json.loads(key); done[key] = log[-1]
-        json.dump(log, open(SWEEP_FILE + ".tmp", "w"), indent=1); os.replace(SWEEP_FILE + ".tmp", SWEEP_FILE)
-        print(f"[{len(log):3d}] gap {r['gap']:6.2f} reach {r['reach']:.3f} follow {r['follow']:.3f} ib14 {r['inband14']:.3f} "
-              f"ib10 {r['inband10']:.3f} contact {r['contact']:.3f} why {r['why']} S {[M.p['S_a'], M.p['S_t'], M.p['R_r']]} "
-              f"f {r['f']} ib/part {r['parts_ib14']} pairs {r['parts_pairs']} {par} ({time.time() - t:.0f} s)", flush=True)
-        if r["gap"] < best_gap[0] - 1e-9:
-            best_gap[0] = r["gap"]
-            with open(os.path.join(REPO, "docs", "concepts", "events.jsonl"), "a") as fh:
-                fh.write(json.dumps(dict(time=now(), kind="milestone", event=f"{ID}: new best gap {r['gap']} (reach {r['reach']}, follow {r['follow']}, "
-                                         f"inband14 {r['inband14']}, contact {r['contact']}) at {par}")) + "\n")
-        return log[-1]
-    bd = min([e for e in log if e["params"].get("slides", 1) and not e["asked"].get("remote")], key=lambda e: e["gap"])["asked"]
-    bdir = {k: bd.get(k, 0.0) for k in DIRS}                    # the best directions of stage 2 (all its winners have zero offsets)
-    run(dict(slides=0, **bdir))                                  # control: the spherical reference with those directions
-    base = dict(remote=1, S_auto=1, **bdir)
-    for nk in (5.0, 15.0, 30.0, 45.0): run(dict(base, neck=nk))
-    best_nk = min([e for e in log if e["asked"].get("remote")], key=lambda e: e["gap"])["asked"]["neck"]
-    for k in OFF:
-        for v in (-8, -4, 4, 8): run(dict(base, neck=best_nk, **{k: v}))
-    for k in DIRS:
-        for v in (-6, 6): run(dict(base, neck=best_nk, **{k: bdir[k] + v}))
-    for k in ("o1a", "o1c", "o2a", "o2c"):                        # large offsets: can an offset axis LIFT hub 2 where the skin is high?
-        for v in (-25, -18, 18, 25): run(dict(base, neck=best_nk, **{k: v}))
-    rng = np.random.default_rng(seed)
-    for _ in range(24):
-        par = dict(base, neck=float(rng.choice([best_nk, 15.0, 30.0])))
-        par.update({k: round(float(rng.uniform(-8, 8)), 1) for k in OFF}); par.update({k: round(bdir[k] + float(rng.uniform(-6, 6)), 1) for k in DIRS})
-        run(par)
-    for rnd in range(4):
-        cand = [e for e in log if e["asked"].get("remote")]
-        best = min(cand, key=lambda e: e["gap"]); improved = False
-        for k in DIRS + OFF + ("neck",):
-            for sg in (-1, 1):
-                par = {kk: best["asked"].get(kk, 0.0) for kk in DIRS + OFF + ("neck",)}; par.update(base)
-                par[k] = max(3.0, par[k] + sg * 5.0) if k == "neck" else par[k] + sg * (3.0 if k in DIRS else 2.0)
-                e = run(par)
-                if e is None: return log
-                if e["gap"] < best["gap"] - 1e-9: improved = True
-        if not improved: break
-    return log
-
-
-def sweep4(B, budget=400, seed=31):
-    """stage 4 - remote stage with the ramped neck (hub 3 back at its own fitted height): neck length, then offsets
-    one at a time and random, then refinement - does any offset beat zero offsets once the slides cost least?"""
-    log = json.load(open(SWEEP_FILE)); done = {json.dumps(e.get("asked", e["params"]), sort_keys=True): e for e in log}
-    best_gap = [min([e["gap"] for e in log if e["params"].get("slides", 1)], default=1e9)]
-    OFF = ("o1a", "o1c", "o2a", "o2c", "o3a", "o3c")
-    def run(par):
-        P = dict(PARAMS); P.update(par); key = json.dumps(P, sort_keys=True)
-        if key in done: return done[key]
-        if len(log) >= budget: return None
-        t = time.time(); r, M = evaluate(B, dict(P), log); log[-1]["asked"] = json.loads(key); done[key] = log[-1]
-        json.dump(log, open(SWEEP_FILE + ".tmp", "w"), indent=1); os.replace(SWEEP_FILE + ".tmp", SWEEP_FILE)
-        print(f"[{len(log):3d}] gap {r['gap']:6.2f} reach {r['reach']:.3f} follow {r['follow']:.3f} ib14 {r['inband14']:.3f} "
-              f"ib10 {r['inband10']:.3f} contact {r['contact']:.3f} why {r['why']} S {[M.p['S_a'], M.p['S_t'], M.p['R_r']]} "
-              f"f {r['f']} ib/part {r['parts_ib14']} pairs {r['parts_pairs']} {par} ({time.time() - t:.0f} s)", flush=True)
-        if r["gap"] < best_gap[0] - 1e-9:
-            best_gap[0] = r["gap"]
-            with open(os.path.join(REPO, "docs", "concepts", "events.jsonl"), "a") as fh:
-                fh.write(json.dumps(dict(time=now(), kind="milestone", event=f"{ID}: new best gap {r['gap']} (reach {r['reach']}, follow {r['follow']}, "
-                                         f"inband14 {r['inband14']}, contact {r['contact']}) at {par}")) + "\n")
-        return log[-1]
-    bd = min([e for e in log if e["params"].get("slides", 1) and not e["asked"].get("remote")], key=lambda e: e["gap"])["asked"]
-    bdir = {k: bd.get(k, 0.0) for k in DIRS}
-    base = dict(remote=1, ramp=1, S_auto=1, **bdir)
-    for nk in (5.0, 10.0, 20.0, 35.0): run(dict(base, neck=nk))
-    best_nk = min([e for e in log if e["asked"].get("ramp")], key=lambda e: e["gap"])["asked"]["neck"]
-    for k in OFF:
-        for v in (-8, -4, 4, 8): run(dict(base, neck=best_nk, **{k: v}))
-    rng = np.random.default_rng(seed)
-    for _ in range(20):
-        par = dict(base, neck=best_nk); par.update({k: round(float(rng.uniform(-8, 8)), 1) for k in OFF})
-        par.update({k: round(bdir[k] + float(rng.uniform(-5, 5)), 1) for k in DIRS}); run(par)
-    for rnd in range(3):
-        best = min([e for e in log if e["asked"].get("ramp")], key=lambda e: e["gap"]); improved = False
-        for k in DIRS + OFF + ("neck",):
-            for sg in (-1, 1):
-                par = {kk: best["asked"].get(kk, 0.0) for kk in DIRS + OFF + ("neck",)}; par.update(remote=1, ramp=1, S_auto=1)
-                par[k] = max(3.0, par[k] + sg * 5.0) if k == "neck" else par[k] + sg * (3.0 if k in DIRS else 2.0)
-                e = run(par)
-                if e is None: return log
-                if e["gap"] < best["gap"] - 1e-9: improved = True
-        if not improved: break
-    return log
-
-
-def reeval(B, top=24):
-    """re-evaluate the best configurations (and the two spherical controls) under jam_contact=1, appended in order"""
-    log = json.load(open(SWEEP_FILE)); done = {json.dumps(e.get("asked", e["params"]), sort_keys=True) for e in log}
-    cand = sorted([e for e in log if e["params"].get("slides", 1) and not e["asked"].get("jam_contact")], key=lambda e: e["gap"])[:top]
-    cand += [e for e in log if not e["params"].get("slides", 1)]
-    for e in cand:
-        P = dict(e["asked"]); P["jam_contact"] = 1; key = json.dumps(P, sort_keys=True)
-        if key in done: continue
-        r, M = evaluate(B, dict(P), log); log[-1]["asked"] = json.loads(key); done.add(key)
-        json.dump(log, open(SWEEP_FILE + ".tmp", "w"), indent=1); os.replace(SWEEP_FILE + ".tmp", SWEEP_FILE)
-        print(f"[{len(log):3d}] from k {e['k']} gap {e['gap']} -> {r['gap']} reach {r['reach']} follow {r['follow']} ib14 {r['inband14']} contact {r['contact']} why {r['why']}", flush=True)
-    return log
 
 
 def redteam2(P, nc, nw, frozen=False):
@@ -1038,64 +885,18 @@ if __name__ == "__main__":
     mode = sys.argv[1] if len(sys.argv) > 1 else "check"
     if mode == "kin":
         B = CB.Bench(n_clip=60, n_ws=160)
-        for par in (dict(slides=0), dict(), dict(o3a=5), dict(o1a=5), dict(o1a=5, R_r=5.0), dict(o2c=5), dict(o2c=5, R_r=5.0)):
+        for par in (dict(slides=0), dict(), dict(o3c=5), dict(o3a=5, o3c=5), dict(o1a=5)):
             print(par, kin_scan(B, par))
         sys.exit()
-    if mode == "redteam2":                                        # VModel red team: redteam2 <params.json> <n_clip> <n_ws> <out.json> [frozen]
+    if mode == "redteam2":                                        # redteam2 <params.json> <n_clip> <n_ws> <out.json> [frozen]
         P = dict(PARAMS); P.update(json.load(open(sys.argv[2]))); nc, nw = int(sys.argv[3]), int(sys.argv[4])
-        out = redteam2(P, nc, nw, frozen="frozen" in sys.argv[6:]); json.dump(out, open(sys.argv[5], "w"), indent=1)
+        out = redteam2(P, nc, nw, frozen="frozen" in sys.argv[6:]); json.dump(out, open(sys.argv[5], "w"), indent=1, default=float)
         print(json.dumps({k: out[k] for k in ("bench", "gap", "reach", "follow", "inband14", "inband10", "contact", "why")})); sys.exit()
-    if mode == "redteam":                                         # the best slide config of the sweep log (or slides=0 with 'ref')
-        B = CB.Bench(n_clip=60, n_ws=160); log = json.load(open(SWEEP_FILE))
-        cand = [e for e in log if e["params"].get("slides", 1) and e["asked"].get("jam_contact")] if "ref" not in sys.argv else [e for e in log if not e["params"].get("slides", 1)]
-        e = min(cand, key=lambda e: e["gap"]); P = dict(e["asked"]); M = Model(B, P); r = M.run()
-        print("config", e["k"], {k: v for k, v in M.p.items() if v}, {k: r[k] for k in ("gap", "reach", "follow", "inband14", "inband10", "contact")})
-        print("parts in band 2-14 [share, median mm, samples]:", r["parts_ib14"]); print("reasons not taken:", r["why"], r["parts_pairs"])
-        print("slide travel max |s| (along, across, radial):", r["s_abs_max"], "ranges", [M.p["S_a"], M.p["S_t"], M.p["R_r"]], "faces f1 f2 f3", r["f"])
-        def lab(i):
-            p = B.poses[i]; return f"#{i} {B.kind[i]} {B.clip[i][:22]:22s} plane {p['plane']:6.1f} elev {p['elev']:6.1f} axial {p['axial']:6.1f}"
-        print("\n-- poses that JAM (not taken) --")
-        for i in range(len(B.idx)):
-            if M.why[i]: print(f"  {M.why[i]:7s} {lab(i)}" + (f" clear {M.clear[i]:.1f} ({M.last_pair.get(i)})" if M.why[i] == 'parts' else ""))
-        # the point that pinches: lowest metal sample over taken poses, by part
-        names = list(M.rigid) + list(M.link_pts); sizes = [len(X) for _, X in M.rigid.values()] + [len(X) for _, X in M.link_pts.values()]
-        cut = np.cumsum([0] + sizes); low = []
-        for i in range(len(B.idx)):
-            d = B.res[i]
-            if d is None or float(np.min(d)) < 0: continue
-            j = int(np.argmin(d[:cut[-1]])); part = names[int(np.searchsorted(cut, j, side="right") - 1)]; low.append((float(d[j]), i, part))
-        low.sort(); print("\n-- closest metal over taken poses (the point that pinches) --")
-        for dd, i, part in low[:8]: print(f"  {dd:5.2f} mm  {part:5s} {lab(i)}")
-        # named checks: rest, overhead, across the body, behind the back
-        taken = lambda i: B.res[i] is not None and float(np.min(B.res[i])) >= 0
-        el = np.array([p["elev"] for p in B.poses]); pl = np.array([p["plane"] for p in B.poses])
-        groups = dict(rest=np.argsort(el)[:5], overhead=np.nonzero(el >= 120)[0], across=np.nonzero((pl >= 100) & (el >= 40))[0],
-                      behind=np.array([i for i in range(len(B.idx)) if "back" in B.clip[i].lower() or (pl[i] < -30 and el[i] > 20)], int))
-        print("\n-- named pose groups: taken / total, median metal-skin mm --")
-        for g, ii in groups.items():
-            ii = list(ii); tk = [i for i in ii if taken(i)]
-            med = float(np.median(np.concatenate([B.res[i] for i in tk]))) if tk else float("nan")
-            print(f"  {g:9s} {len(tk)}/{len(ii)}  median {med:.1f} mm  not taken: {[(int(i), M.why[i]) for i in ii if not taken(i)][:10]}")
-        # hub 2: which poses set its face height
-        H2 = M.Hneed["hub2"]; top = np.argsort(-H2.max(1))[:6]
-        print("\n-- hub 2 face: poses that set it (needed face height mm) --")
-        for a in top: print(f"  {H2[a].max():6.1f}  {lab(int(M.poses_fit[a]))}  dropped {bool(M.drop[a])}")
-        print("  median need over taken poses", round(float(np.median(H2[~M.drop].max(1))), 1), "fitted", round(M.f[1], 1))
-        os.makedirs(os.path.join(REPO, "docs", "concepts", "img"), exist_ok=True)
-        if "ref" not in sys.argv: sketch(M, os.path.join(REPO, "docs", "concepts", "img", ID + ".png")); print("sketch written")
-        sys.exit()
+    if mode == "eval":                                            # eval '<params json>' [n_clip n_ws]
+        nc, nw = (int(sys.argv[3]), int(sys.argv[4])) if len(sys.argv) > 4 else (60, 160)
+        B = CB.Bench(n_clip=nc, n_ws=nw); p, r = evaluate(B, json.loads(sys.argv[2]))
+        print(json.dumps(dict(params=p, report=r), default=float)); sys.exit()
     nc, nw = (20, 40) if mode == "check" else (60, 160)
     B = CB.Bench(n_clip=nc, n_ws=nw); print("bench", B.mode, len(B.idx), flush=True)
-    if mode == "sweep":
-        sweep(B, budget=int(sys.argv[2]) if len(sys.argv) > 2 else 110)
-    elif mode == "sweep2":
-        sweep2(B, budget=int(sys.argv[2]) if len(sys.argv) > 2 else 200)
-    elif mode == "reeval":
-        reeval(B)
-    elif mode == "sweep4":
-        sweep4(B, budget=int(sys.argv[2]) if len(sys.argv) > 2 else 400)
-    elif mode == "sweep3":
-        sweep3(B, budget=int(sys.argv[2]) if len(sys.argv) > 2 else 300)
-    else:
-        r, M = evaluate(B, dict(PARAMS))
-        print(json.dumps({k: v for k, v in r.items()}, default=str))
+    p, r = evaluate(B, {})
+    print(json.dumps(r, default=float))

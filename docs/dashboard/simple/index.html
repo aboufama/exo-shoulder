@@ -42,17 +42,20 @@
 .sx .legend i { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 5px; vertical-align: -1px; }
 @media (max-width: 640px) { .sx .hide-sm { display: none; } .sx .kpi .big { font-size: 32px; } }
 /* motion previews (leaderboard, first column): monochrome, theme tokens only; the shoulder faint, the mechanism in the text colour */
-.sx th.mo, .sx td.mo { width: 56px; padding: 3px 8px 3px 0; }
+.sx th.mo, .sx td.mo { width: 56px; padding: 2px 8px 2px 0; }
 .sx td.mo svg { display: block; width: 56px; height: 56px; overflow: hidden; }
 .sx td.mo path { fill: none; vector-effect: non-scaling-stroke; stroke-linecap: round; stroke-linejoin: round; }
-.sx td.mo .mo-b { stroke: var(--color-fg-muted); stroke-opacity: .5; stroke-width: 1; }
+.sx td.mo .mo-b { stroke: var(--color-fg-muted); stroke-opacity: .55; stroke-width: 1; }
+/* on the dark card a faint muted line disappears: the shoulder gets more opacity there (still lighter than the mechanism) */
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .sx td.mo .mo-b { stroke-opacity: .85; } }
+:root[data-theme="dark"] .sx td.mo .mo-b { stroke-opacity: .85; }
 .sx td.mo .mo-m { stroke: var(--color-fg); stroke-width: 1.2; }
 .sx td.mo .mo-j { stroke: var(--color-fg); stroke-width: 3; }
 @media (max-width: 520px) {
   .sx #board th, .sx #board td { padding-left: 4px; padding-right: 4px; }
   .sx #board .meter { width: 30px; margin-right: 4px; }
   .sx #board .pill { padding: 1px 6px; font-size: 11px; }
-  .sx #board th.mo, .sx #board td.mo { width: 44px; padding: 3px 6px 3px 0; }
+  .sx #board th.mo, .sx #board td.mo { width: 44px; padding: 2px 6px 2px 0; }
   .sx td.mo svg { width: 44px; height: 44px; }
   .sx td.mo .mo-m { stroke-width: 1.1; }
   .sx td.mo .mo-j { stroke-width: 2.6; }
@@ -80,7 +83,7 @@
 
   <section class="card" id="board-sec">
     <h2>Leaderboard</h2>
-    <p class="muted">Every design that has a measured number, best first. Motion: each design's mechanism (bold lines, joints as dots) on a faint outline of the shoulder, through the same arm loop - rest, forward raise, overhead, abduction, across the body, hand behind the back - seen from the front, right and above, all at one scale. "Checking" means an independent agent is re-measuring it. "Stopped early" means it was called dead while its search was still improving, so it is being re-opened. Names: R = a hinge (revolute joint), P = a slider; "3R" = three hinges in a row (3 degrees of freedom); "spherical" = all hinge axes meet at the centre of the shoulder joint; "offset" = they do not; "3-RRR" = three hinged legs side by side.</p>
+    <p class="muted">Every design that has a measured number, best first. Motion: each design through the same arm loop, at one scale. "Checking" means an independent agent is re-measuring it. "Stopped early" means it was called dead while its search was still improving, so it is being re-opened. Names: R = a hinge (revolute joint), P = a slider; "3R" = three hinges in a row (3 degrees of freedom); "spherical" = all hinge axes meet at the centre of the shoulder joint; "offset" = they do not; "3-RRR" = three hinged legs side by side.</p>
     <div class="scroll"><table id="board" data-source="board" data-row-key="id">
       <thead><tr><th class="mo" data-source="motion" data-field="mech">Motion</th><th data-field="short">Design</th><th class="num" data-field="score">Score</th><th data-field="close">Close to skin</th><th data-field="follows" class="hide-sm">Follows arm</th><th data-field="reaches" class="hide-sm">Reaches</th><th data-field="state">Status</th></tr></thead>
       <tbody></tbody>
@@ -218,18 +221,21 @@ function drawScatter(rows) {
   });
 }
 
-// Motion previews: one shared timer (8 frames a second: the 40-frame loop takes 5 s) animates every thumbnail on
-// screen; it stops while none is visible or the tab is hidden. Reduced motion shows the overhead frame, still.
-const MO = { data: null, prep: null, frame: 0, timer: 0, seen: new Set(), io: null, rm: window.matchMedia ? window.matchMedia('(prefers-reduced-motion: reduce)') : null };
+// Motion previews: one shared timer (~10 frames a second: the 56-frame loop takes ~5.6 s) animates every thumbnail on
+// screen; it stops while none is visible or the tab is hidden. Reduced motion shows one still frame (arm on its way
+// overhead). Frames are '|'-separated paths; '=' repeats the frame before (the key-pose holds).
+const MO = { src: null, prep: null, frame: 0, timer: 0, seen: new Set(), io: null, rm: window.matchMedia ? window.matchMedia('(prefers-reduced-motion: reduce)') : null };
 const moStill = () => !!(MO.rm && MO.rm.matches), moAt = () => (MO.prep && moStill() ? MO.prep.still : MO.frame);
-function motionPrep(rows) {
-  if (MO.data === rows) return MO.prep;
-  const sh = rows.find((r) => r.kind === 'shoulder') || {}, byId = new Map();
-  rows.forEach((r) => { if (r.kind === 'mechanism' && r.mech) byId.set(r.id, { m: String(r.mech).split('|'), j: String(r.joint || '').split('|') }); });
-  const body = sh.body ? String(sh.body).split('|') : [];
+const moFrames = (s) => { const o = []; String(s || '').split('|').forEach((d, k) => o.push(d === '=' && k > 0 ? o[k - 1] : d)); return o; };
+function motionPrep(src) {                      // memoised on the runtime's own array (one parse per dataset load)
+  if (MO.src === src) return MO.prep;
+  const rows = src.filter((r) => r.empty !== true), sh = rows.find((r) => r.kind === 'shoulder') || {}, byId = new Map();
+  rows.forEach((r) => { if (r.kind === 'mechanism' && r.mech) byId.set(r.id, { m: moFrames(r.mech), j: moFrames(r.joint) }); });
+  const body = sh.body ? moFrames(sh.body) : [];
   const n = Math.max(1, Number(sh.n) || body.length || 1), still = Math.min(n - 1, Math.max(0, Number(sh.still) || 0));
-  MO.data = rows; MO.prep = { byId, body, n, still, view: sh.view || '0 0 100 100' };
+  MO.src = src; MO.prep = { byId, body, n, still, view: sh.view || '0 0 100 100', ms: Math.round(Math.min(125, Math.max(80, 5600 / n))) };
   MO.frame %= n;
+  if (MO.timer) { clearInterval(MO.timer); MO.timer = 0; }
   return MO.prep;
 }
 function moPaint(svg, k) {
@@ -240,7 +246,7 @@ function moPaint(svg, k) {
 function moTick() { if (!MO.prep) return; MO.frame = (MO.frame + 1) % MO.prep.n; MO.seen.forEach((svg) => moPaint(svg, MO.frame)); }
 function moSync() {
   const run = !!MO.prep && !moStill() && !document.hidden && MO.seen.size > 0;
-  if (run && !MO.timer) MO.timer = setInterval(moTick, 125);
+  if (run && !MO.timer) MO.timer = setInterval(moTick, MO.prep.ms);
   if (!run && MO.timer) { clearInterval(MO.timer); MO.timer = 0; }
 }
 function moWatch(svgs) {
@@ -396,7 +402,7 @@ dash.onData(() => {
       : `No design beats today's 3-hinge chain (score ${g1(l.base_score)} of 100) yet; the closest is ${l.short} at ${g1(l.score)}.`;
   }
   if (okd(L) && L.data[0]) { const l = L.data[0]; document.querySelector('#kpi-best .big').textContent = l.score == null ? '—' : g1(l.score); document.getElementById('kpi-base').textContent = l.base_score == null ? '—' : g1(l.base_score); document.getElementById('kpi-best-name').textContent = l.short ? `${l.short} (${String(l.state).toLowerCase()})` : '—'; }
-  const MOT = dash.data('motion'), mo = okd(MOT) ? motionPrep(MOT.data.filter((r) => r.empty !== true)) : null;
+  const MOT = dash.data('motion'), mo = okd(MOT) && Array.isArray(MOT.data) ? motionPrep(MOT.data) : null;
   if (okd(B)) { const rows = B.data.filter((r) => r.empty !== true); drawScatter(rows); drawBoard(rows, mo); }
   if (okd(S) && okd(M)) drawRecord(S.data.filter((r) => r.empty !== true), (M.data.find((m) => m.is_baseline) || {}).gap);
   if (okd(E)) drawEvents(E.data.filter((r) => r.empty !== true));
