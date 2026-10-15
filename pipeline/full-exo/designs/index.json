@@ -1,5 +1,13 @@
 [
  {
+  "id": "param_r20_n3_s1414_4",
+  "label": "3R champion r20 s1414 #4, parametric B-rep CAD (v5 joints, 8x3 straps)"
+ },
+ {
+  "id": "cad_r20_n3_s1414_4",
+  "label": "3R champion r20 s1414 #4"
+ },
+ {
   "id": "cad_r20_n3_s1414_4_s10",
   "label": "CAD r20 s1414 #4 strap R10"
  },
@@ -10,10 +18,6 @@
  {
   "id": "cad_r20_n3_s1411_2",
   "label": "3R r20 s1411 #2: v5 joint + strap links"
- },
- {
-  "id": "cad_r20_n3_s1414_4",
-  "label": "3R r20 s1414 #4 (O20 v5, strap)"
  },
  {
   "id": "cad_r18_n3_s1392_1_v5",
