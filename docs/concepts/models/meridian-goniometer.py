@@ -164,6 +164,9 @@ def bench_eval(B, params):
     rep = K.evaluate(B, build_chain, p)
     if p["j3"] == "cslide": rep = PC.outer_contact(B, p, rep)
     L = B._kit_last; rep["rail_r"] = round(float(L["prof"]["rail"].max()), 1); rep["r_lay"] = round(design(B, p)["rl"], 1)
+    if rep["rail_r"] >= 220.0:   # the K3 march found no clearance within 220 mm for a rail sample in a fit pose (inf -> 400):
+        rep["honest"] = False     # the rail passes through the body there; parking it at the fallback radius is not a design
+        rep["audit"] = list(rep.get("audit") or []) + [f"rail parked at the fallback radius ({rep['rail_r']} mm): a rail sample has no skin clearance within 220 mm"]
     return json.loads(json.dumps(rep, default=lambda o: o.item() if hasattr(o, "item") else str(o)))
 
 
