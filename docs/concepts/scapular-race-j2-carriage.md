@@ -28,4 +28,35 @@
 
 ## Morphology and model
 
-(results below are filled in as the sweep runs)
+Topology (scapula handler -> user's cuff), every joint axis through the GH centre: base + **rail** (scapula-fixed arc,
+10 wide x 4, at polar angle gamma about the race axis a1, at ONE distance R from GH) -- **J1** = the carriage rolling on
+the rail (V-rollers on both rail edges; its azimuth phi about a1 is the joint value; no hub and no metal at a1's pole)
+-- **J2** = O20 hub whose lower plate IS the carriage plate (axis u2 = the carriage's own direction from GH, so
+alpha12 = gamma) -> **L2** (12 x 3 strap, skin-fitted underside) -- **J3** O20 hub, axis wdir(wd, wa) fixed in the
+humerus -> arm-end plate + neck (14 x 6) to BOTTOM's bar. phi, q2, q3 follow from the two-circle closure of a1 and p3
+(arcs gamma, alpha23, branch sigma): **3 active DOF, 0 passive**, nothing undetermined.
+
+Model: `docs/concepts/models/scapular-race-j2-carriage.py` on the shared kit (K3 march, flat O20 hubs with the
+12.25 mm stack, K5 strap, K7 neck, dense K2 along the slerped motion, K6 collisions; audit clean, `honest` true).
+`python3 ... check [k=v ...]` evaluates one configuration, `python3 ... bound [n]` reproduces the ceiling below.
+
+Spec changes (each stated):
+* **the rail extent is chosen from the skin, not from a phi window** (design step `travel()`, outside `build` so
+  `build` stays pose-local): rail stations every 2 deg, the K3 march along each station's centre ray in every closing
+  bench pose, quantile q; stations with need <= `rmax` are quiet; the rail is laid on the contiguous quiet run that
+  holds the most closing-pose carriage azimuths, trimmed to the travel actually used (+ `tmarg` 3 deg) + half a
+  carriage (13 mm) + a 3 mm end stop at each end. The J1 range is that travel; poses outside it are not taken.
+* **carriage = rollers + the J2 lower plate.** The spec's 26 x 22 x 8 block sharing the rail's skin face cannot be
+  separated from the rail in the kit's K6 (they would always "collide"), and it is not what rolls: the V-rollers hang
+  beside the rail head down to R (strips 5..9 mm either side of the rail centre, +-8 mm along, in the race member at R),
+  the carriage plate = the J2 O20 lower plate rides 0.5 mm over the rail top (F = R + 4.5), L2 at F + 3.15.
+* **J3 = an O20 hub + K7 neck** (the spec's option), not the septum barrel: the barrel (r 7) is smaller than O20 and
+  the audit flags it; the barrel's J3 position (wd ~22, wa ~-35) was tried as a seed and closes in 3-11 % of poses.
+* humerus axes in the band frame (`F.HG`) as the kit and the champion; scapula axes `bvec(az1, el1)`
+  (the spec's sdir(lat, lon) = bvec(90 - lon, lat)).
+* `r_lay` (the layout radius of the rail and roller samples) is a fix point at the fitted R (|R - r_lay| <= 1.5 mm, at
+  most 2 re-runs); a layout above the fitted R would draw a rail narrower than 10 mm and is flagged dishonest.
+* link 2's hub ramps run over its first / last 16 mm (kit default 12): with 12 mm the kit's `over` (which measures at
+  the pre-climb radius) left L2 0.15 mm over the rail just outside the J2 zone in 85 % of poses (found and fixed here);
+  link 2 is listed first among the members so K6 measures its pairs at its own radius, as `over` builds them.
+

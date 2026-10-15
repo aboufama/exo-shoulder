@@ -42,7 +42,7 @@ const ONLY = args.filter((a) => !a.startsWith('--'));
 // From front-right-above: x anterior, y up, z lateral (right shoulder). `pan` moves the frame (mm on the screen: right,
 // down) off GH, `half` is its half-width in mm: tuned on every concept's drawn points so the overhead arm, the cuff in
 // every pose and the scapular bases stay inside the frame (thumbs.mjs --stats prints what still falls outside).
-const CAM = { dir: V.unit([0.42, 0.5, 0.76]), pan: [0, 0], half: 185, view: 100 };
+const CAM = { dir: V.unit([0.42, 0.5, 0.76]), pan: [5, 10], half: 175, view: 100 };
 if (CAM_ARG) { const v = CAM_ARG.split(',').map(Number); CAM.dir = V.unit(v.slice(0, 3)); CAM.pan = v.slice(3, 5); CAM.half = v[5]; }
 const Zc = CAM.dir, Xc = V.unit(V.cross([0, 1, 0], Zc)), Yc = V.cross(Zc, Xc);
 const S = CAM.view / (2 * CAM.half);
@@ -69,7 +69,9 @@ function rdp(pts, eps) {
   return rdp(pts.slice(0, k + 1), eps).slice(0, -1).concat(rdp(pts.slice(k), eps));
 }
 /** polyline (screen pts) -> "M x y l dx dy ..." on the integer grid; closed adds z */
+let dropped = 0;                          // parts whose points are not finite (a concept's own NaN: the gallery hides them too)
 function poly(pts, closed) {
+  if (pts.some((p) => !Number.isFinite(p[0]) || !Number.isFinite(p[1]))) { dropped++; return ''; }
   let P = rdp(pts, 0.45).map(([x, y]) => [q(x), q(y)]);
   P = P.filter((p, i) => i === 0 || p[0] !== P[i - 1][0] || p[1] !== P[i - 1][1]);
   if (closed && P.length > 1 && P[0][0] === P[P.length - 1][0] && P[0][1] === P[P.length - 1][1]) P.pop();
@@ -165,7 +167,7 @@ const base = { n: N, still, view: `0 0 ${CAM.view} ${CAM.view}` };
 
 const rows = [];
 rows.push({ id: '_shoulder', kind: 'shoulder', ...base, closes: '', body: pick.map((i) => drawBody(KIN.makeCtx(frames[i].pose, frames[i].t))).join('|'), mech: '', joint: '' });
-const ext = [];
+const notes = [];
 const t0 = Date.now();
 for (const id of [...KIN.order].sort()) {
   if (ONLY.length && !ONLY.includes(id)) continue;
@@ -176,9 +178,9 @@ for (const id of [...KIN.order].sort()) {
       const s = sol[i], parts = c.parts(s.q, s.ctx), d = drawParts(parts);
       if (/NaN|Infinity/.test(d.mech + d.joint)) throw new Error(`frame ${i}: NaN in the drawing`);
       mech.push(d.mech); joint.push(d.joint); closes.push(s.closes ? '1' : '0');
-      if (STATS) for (const p of parts) if (p.kind !== 'point') for (const k of ['a', 'b', 'c', 'at']) if (Array.isArray(p[k])) ext.push([id, i, ...proj(p[k])]);
     }
     rows.push({ id, kind: 'mechanism', ...base, closes: closes.join(''), body: '', mech: mech.join('|'), joint: joint.join('|') });
+    if (dropped) { notes.push(`${id}: ${dropped} part drawing(s) with non-finite points left out`); dropped = 0; }
     if (STATS) process.stderr.write(`${id} ${Date.now() - t1} ms\n`);
   } catch (e) { skipped.push(`${id}: ${String(e.message || e).split('\n')[0]}`); }
 }
@@ -192,13 +194,21 @@ if (rows.length > 1) {
 console.log(`motion previews: ${rows.length - 1} concept(s), ${N} frames each, still = frame ${still}, ${raw.length} bytes -> ${path.relative(process.cwd(), OUT)} (${((Date.now() - t0) / 1000).toFixed(1)} s)`);
 if (skipped.length) console.log(`skipped ${skipped.length}:\n  ` + skipped.join('\n  '));
 
-if (STATS && ext.length) {
-  const xs = ext.map((e) => e[2]).sort((a, b) => a - b), ys = ext.map((e) => e[3]).sort((a, b) => a - b), pc = (a, p) => a[Math.floor(p * (a.length - 1))];
-  console.log(`screen x: min ${xs[0].toFixed(0)} p1 ${pc(xs, 0.01).toFixed(0)} p99 ${pc(xs, 0.99).toFixed(0)} max ${xs[xs.length - 1].toFixed(0)}`);
-  console.log(`screen y: min ${ys[0].toFixed(0)} p1 ${pc(ys, 0.01).toFixed(0)} p99 ${pc(ys, 0.99).toFixed(0)} max ${ys[ys.length - 1].toFixed(0)}`);
-  const out = ext.filter((e) => e[2] < -2 || e[2] > CAM.view + 2 || e[3] < -2 || e[3] > CAM.view + 2);
-  const by = {}; out.forEach((e) => { by[e[0]] = (by[e[0]] || 0) + 1; });
-  console.log('points outside the frame by concept:', JSON.stringify(by));
+if (notes.length) console.log(notes.join('\n'));
+// --stats: how much of the drawing the fixed camera keeps (overhead frames of every concept, whole frames, points)
+if (STATS) {
+  const pts = (d) => { const o = []; let x = 0, y = 0; for (const m of d.matchAll(/([Ml])([^Mlaz]*)/g)) { const n = (m[2].match(/-?\d+/g) || []).map(Number);
+    if (m[1] === 'M') { x = n[0]; y = n[1]; o.push([x, y]); } else for (let i = 0; i + 1 < n.length; i += 2) { x += n[i]; y += n[i + 1]; o.push([x, y]); } } return o; };
+  const inside = ([x, y]) => x >= 0 && x <= CAM.view && y >= 0 && y <= CAM.view;
+  let oh = 0, nc = 0, ff = 0, nf = 0, pin = 0, np = 0; const out = {};
+  for (const r of rows) {
+    if (r.kind !== 'mechanism') continue;
+    nc++; const m = r.mech.split('|'), j = r.joint.split('|'), F = m.map((d, k) => pts(d).concat(pts(j[k])));
+    if ([still - 1, still, still + 1].every((k) => F[(k + N) % N].every(inside))) oh++;
+    F.forEach((P) => { nf++; if (P.every(inside)) ff++; else out[r.id] = (out[r.id] || 0) + 1; P.forEach((p) => { np++; if (inside(p)) pin++; }); });
+  }
+  console.log(`inside the frame: overhead (3 frames) of ${oh}/${nc} concepts, ${(100 * ff / nf).toFixed(1)} % of frames whole, ${(100 * pin / np).toFixed(1)} % of points`);
+  console.log('frames with something outside, by concept:', JSON.stringify(out));
 }
 
 // contact sheet (SVG) for a look without a browser: one row per concept, `cols` frames across

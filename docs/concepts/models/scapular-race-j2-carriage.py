@@ -191,6 +191,52 @@ def levels(B):
     return out
 
 
+def reach_bound(B, n=24000, seed=2, q=0.95, rmaxs=(65.0, 70.0, 75.0, 80.0, 90.0, 100.0, 115.0, 130.0)):
+    """the morphology's ceiling from the raw skin, no part but the rail modelled: K3 march along every scapula-fixed
+    direction (3 deg grid) in every bench pose -> per-direction q-quantile requirement. For n random designs (a1, gamma,
+    alpha23, J3 axis, branch, rmax) the J2 axis must land on the best contiguous run of rail stations whose requirement
+    is <= rmax (+- half a carriage + end stop): an UPPER bound on reach / follow (hubs, L2, K2, K6 ignored), and the
+    rail's in-band ceiling at one radius R = max need over the run vs. at a per-station radius (a cam / skin-milled web)."""
+    F = K.frames(B); P = len(F.RS)
+    AZ, EL = np.meshgrid(np.arange(0, 360, 3.0), np.arange(-42, 90.1, 3.0), indexing="ij"); U = K.bvec(AZ.ravel(), EL.ravel())
+    R = K.requirement(B, np.repeat(np.arange(P), len(U)), F.S(U).reshape(-1, 3)).reshape(P, len(U)); R[~np.isfinite(R)] = 400.0
+    NEED = np.quantile(R, q, axis=0); ci = np.nonzero(F.clip)[0]
+
+    def cell(u):
+        el = np.degrees(np.arcsin(np.clip(u[..., 1], -1, 1))); az = np.degrees(np.arctan2(u[..., 2], -u[..., 0])) % 360
+        return (np.round(az / 3).astype(int) % 120) * 45 + np.clip(np.round((el + 42) / 3).astype(int), 0, 44)
+    rng = np.random.default_rng(seed); st = np.arange(-180, 180, 2.0) * D2R; out = []
+    for _ in range(n):
+        az1, el1, g, a23 = rng.uniform(0, 360), rng.uniform(-20, 90), rng.uniform(15, 85), rng.uniform(40, 120)
+        wd, wa, sg, rmax = rng.uniform(10, 120), rng.uniform(-180, 180), int(rng.choice([-1, 1])), float(rng.choice(rmaxs))
+        a1, m, nn = race_frame(dict(az1=az1, el1=el1)); gr = g * D2R
+        Ds = math.cos(gr) * a1 + math.sin(gr) * (np.cos(st)[:, None] * m + np.sin(st)[:, None] * nn); cs = cell(Ds)
+        quiet = NEED[cs] <= rmax; best = (0.0, 0.0, 0.0, 0.0, 0.0)
+        if quiet.any():
+            u2, ok, _ = K.closure(F.S(a1), F.HG(K.wdir(wd, wa)), g, a23, sg, margin_deg=8.0)
+            u2s = np.einsum("pji,pj->pi", F.RS, u2); phi = np.degrees(np.arctan2(u2s @ nn, u2s @ m))
+            e = (CAR_L / 2 + END_STOP) / (60 * math.sin(gr)) / D2R
+            k0 = int(np.argmin(quiet)) if not quiet.all() else 0; qq = np.roll(quiet, -k0); runs = []; i = 0
+            while i < 180:
+                if qq[i]:
+                    j = i
+                    while j < 180 and qq[j]: j += 1
+                    runs.append(((i + k0) % 180, j - i)); i = j
+                else: i += 1
+            for s0, L in runs:
+                lo = -180 + 2 * s0 - 1 + e; span = 2 * L - 2 * e
+                if span <= 0: continue
+                inside = ok.copy() if L == 180 else ok & (((phi - lo) % 360) <= span)
+                rw, rc = float(inside[F.ws].mean()), float(inside[F.clip].mean())
+                if rw + rc > best[0] + best[1]:
+                    idx = cs[[(s0 + k) % 180 for k in range(L)]]; nd = NEED[idx]; Rc = R[np.ix_(ci, idx)]
+                    best = (rw, rc, float(((Rc >= nd.max() - 12) & (Rc <= nd.max())).mean()), float(((Rc >= nd - 12) & (Rc <= nd)).mean()), float(nd.max()))
+        out.append(dict(reach=round(best[0], 4), follow=round(best[1], 4), band_const=round(best[2], 3), band_cam=round(best[3], 3),
+                        R=round(best[4], 1), az1=round(az1, 2), el1=round(el1, 2), gamma=round(g, 2), a23=round(a23, 2), wd=round(wd, 2),
+                        wa=round(wa, 2), sigma=sg, rmax=rmax))
+    return out
+
+
 if __name__ == "__main__":
     a = sys.argv[1:] or ["check"]
     B = K.bench(60, 160)
@@ -200,3 +246,9 @@ if __name__ == "__main__":
         print(json.dumps({k: r.get(k) for k in ("gap", "reach", "follow", "inband14", "inband10", "contact", "closure", "flips", "collide",
                                                 "inband_member", "mass_g", "honest", "audit", "rail_span_deg", "race_R", "r_lay",
                                                 "phi_lo", "phi_hi", "rail_req", "residual_deg", "levels")}))
+    elif a[0] == "bound":            # the ceiling from the raw skin (docs/concepts/scapular-race-j2-carriage.md)
+        out = reach_bound(B, n=int(a[1]) if len(a) > 1 else 24000)
+        for rm in sorted({o["rmax"] for o in out}):
+            s = [o for o in out if o["rmax"] == rm]; b = max(s, key=lambda o: o["reach"])
+            print(f"rmax {rm:5.0f}: n {len(s)}  reach bound {b['reach']:.3f} (follow {b['follow']:.3f}, rail R {b['R']}, rail in band at one R "
+                  f"{b['band_const']:.3f}, per-station {b['band_cam']:.3f})  best follow {max(o['follow'] for o in s):.3f}")
