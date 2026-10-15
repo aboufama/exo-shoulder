@@ -66,3 +66,41 @@ clips.
    (link 1 vs bridge in 85 % of poses at the front-top seat, measured with a pair-by-pair K6 split). Workaround in the
    model: link 1's J1 end ramps to the bridge top + 1 mm (STACK + 1) over 20 mm. Both bugs only removed poses (v1
    numbers are pessimistic, never optimistic); the v1 sweep entries stay in the sweep file tagged `model: v1`.
+
+## Sweep (Bench(60,160), fast grid, every check on; farm)
+
+- v1 (with the two bugs): 240 random configurations over the spec's ranges (+ 24 CMA tries): best 81.07, never
+  honest (links at 150-400 mm, sparse).
+- v2: 128 random configurations, half at the front-top seat (lat 55-75), half at the spec's seats (lat 30-55):
+  **best honest gap 68.26 (score 75.18)**, k368: J1 sdir(66.3, -105.5), a12 83.4, a23 73.8, J3 armpt(10.2, -34.1, 76),
+  sigma -1, margin 7.3, q 0.98: reach 0.875, follow 0.95, in-band 14 0.309, in-band 10 0.241, contact 0.066, Ti 201 g.
+  Reproduced locally to the digit. A non-honest 67.19 (k303, links sparse at 100+ mm) is not counted.
+- Where the optimum went: every top-5 config sits on the FRONT-TOP edge (lat 55-74) or needs long arcs (a12 83-94);
+  the spec's AC-front seat (lat ~40) is >= 9 gap points worse at its best. The front route converges toward the
+  champion's top seat - the front itself buys nothing.
+- Convergence gate (v2 tries in order): gain over the 2nd half 0.00, over the last third 0.00, top-5 spread 3.81
+  score points (all configs; honest-only top-5: 75.18 / 71.78 / 71.63 / 71.56 / 71.38, spread 3.80): NOT converged (spread > 3). Status screened, not dead.
+
+## Red team of the best honest config (k368)
+
+| pose class | poses | close | taken | what is lost |
+|---|---|---|---|---|
+| rest (elev < 25) | 58 | 58 | 58 | - |
+| overhead (elev >= 140) | 17 | 17 | 6 | the fold drives link 1 into the head/neck: -21 mm in raise-overhead (plane 30 elev 150); 3 K6 collisions at plane 0-45 elev 135-150 |
+| across the body (plane >= 110, elev >= 60) | 18 | 17 | 14 | the forearm lies over the J1 seat: hub 1 -5.2 mm (plane 135 elev 120), bridge -6.5 mm (plane 135 elev 135) |
+| behind the back (plane <= -20) | 30 | 30 | 30 | - |
+
+- The optimistic number: in-band 14 = 0.31 is the base and the neck, not the mechanism. Per member: bridge 100 / 52 %,
+  neck 59 %, hub 3 20 %, hub 1 7 %, **hub 2 0 % (151 mm), link 1 1.7 %, link 2 0.7 %** (links 113-155 mm over the
+  skin). The 3R proper floats exactly like the champion's (atlas: link 2 crosses skin that moves ~40 mm under it).
+- q 0.98 buys the result with 6.6 % contact poses (counted as not taken).
+- Other branch (sigma +1) at the front-top seat: J2 folds into the chest, hub 2 / links unclearable (400 mm), gap 240.
+
+## Verdict
+
+Screened, gap 68.26 honest (score 75.18) on Bench(60,160): level with the champion baseline (68.93) and the kit
+template at q 0.95 (69.29), behind the verified leaders (rail-elbow, seed-offset-3r-slides). The front route as
+specified (J1 on the AC front) is measured worse than the top seat: the scapula-frame skin under it rises 34 mm in the
+fit clips and the forearm covers it across the body. Next lever, if anyone continues: a CMA polish from k368 to pass
+the gate - but the members that matter (hub 2, links) are at 0-2 % in band in every config, so the ceiling of this
+family is the 3R proximity limit, not a parameter.
