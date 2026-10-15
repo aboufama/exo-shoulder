@@ -35,12 +35,13 @@ NAME = "Trombone arc: one curved slide through a swivel guide on top of the scap
 D2R = math.pi / 180
 SWEEP_OUT = os.path.join(REPO, "docs", "concepts", "sweeps", f"{ID}.json")
 # baseline champion axes (tools/concept_baseline.py = the bench's 68.93)
-# best honest configuration of the sweep (k 130, gap 91.57): 2-stage telescoping arc, O20 hub at J1, guide offset 15 deg.
+# best honest configuration of the sweep (k 143, gap 88.29): 2-stage telescoping arc, O20 hub at J1, guide offset 22 deg,
+# band laid out at its fitted radius (Rn 106; it fits at 110.6).
 # The champion axes (az 2.43, el 80.68, A1 76.9, A2 66.75) with a single-stage band: the tail runs into the neck/head.
-PARAMS = dict(az=45.0, el=25.0, A1=90.0, A2=90.0, wd=86.33, wa=21.83, sigma=-1, margin=5.0,
-              phi_lo=20.0, phi_hi=140.0, src="p5-95", Rn=56.0, width=10.0, band_t=4.0, qb=0.95, dR=0.0,
+PARAMS = dict(az=45.0, el=30.0, A1=90.0, A2=90.0, wd=86.33, wa=21.83, sigma=-1, margin=5.0,
+              phi_lo=20.0, phi_hi=140.0, src="p5-95", Rn=106.0, width=10.0, band_t=4.0, qb=1.0, dR=0.0,
               guide_L=30.0, guide_W=22.0, ring_ri=19.0, ring_ro=26.0, ring_t=6.0, dz_ring=15.0,
-              conn_w=12.0, conn_t=3.0, q=0.95, j1="hub", goff=15.0, tele=1)
+              conn_w=12.0, conn_t=3.0, q=0.95, j1="hub", goff=22.0, tele=1)
 # variants: j1 'ring' (KAA15XL0 ring about b, guide in its bore, goff 0) or 'hub' (O20 hub on b, guide offset goff deg
 # across the band on an L1 strap 'arm1'); tele 0 = single-stage band, 1 = 2-stage telescoping arc (sleeve + band)
 

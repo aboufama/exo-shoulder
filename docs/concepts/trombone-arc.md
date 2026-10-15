@@ -18,11 +18,13 @@
    adversarial verifier, and a red-team pose list (overhead, across-body, behind-back, the pose of the longest tail,
    the pose of closest band-to-skin and closest band-to-arm) reported below.
 
-## Verdict: dead (honest best gap 91.57 against the champion's 68.93; not worth a GPU sweep)
+## Verdict: dead (honest best gap 88.29 against the champion's 68.93; not worth a GPU sweep)
 
 All numbers below use Bench(60,160) on the fast grid cache with the kit's honest checks: K3 march, K2 dense
-continuity, K6 collisions, a clean audit, and q 0.95 like the baseline. The sweep covered 133 configurations
-(`docs/concepts/sweeps/trombone-arc.json`, in order). 37 of them are honest and non-degenerate. Model:
+continuity, K6 collisions, a clean audit, and q 0.95 like the baseline. The sweep covered 144 configurations
+(`docs/concepts/sweeps/trombone-arc.json`, in order). Only k >= 133 lay the band out at its fitted radius; the others
+lay it out at Rn 56. For a band fitted at 97-131 mm, that samples it 2-4x too sparsely, and those rows read up to
+7 points too good (k 130: 91.57, re-laid at its true radius: 97.47). The row quotes only true-radius configurations. Model:
 `docs/concepts/models/trombone-arc.py`, rebuilt on `tools/concept_kit.py`. The partial model from the interrupted
 session was replaced, because it used its own fit and checks.
 
@@ -31,12 +33,14 @@ session was replaced, because it used its own fit and checks.
 | spec as written: champion axes, KAA15XL0 ring, single-stage band | 192-275 | 0.03-0.30 | 0.03-0.45 | 0.17-0.21 | | | band at 400 mm (tail inside neck/head), ring at 68-103 mm |
 | single stage, O20 hub J1, b lateral-posterior | 91.33 | 0.78 | 0.90 | 0.23 | | 0.077 | **degenerate**: band at 400 mm, 1.7 kg, sparse-sampling audit. Rejected |
 | 2-stage telescoping, b bvec(60,30) | 106.29 | 0.76 | 0.82 | 0.20 | 0.09 | 0.095 | first honest one |
-| **2-stage telescoping, b bvec(45,25), goff 15, A1=A2=90** | **91.57** | 0.744 | 0.917 | 0.286 | 0.108 | 0.112 | best (k 130) |
+| 2-stage telescoping, b bvec(45,25), goff 15, A1=A2=90, laid out at Rn 56 | 91.57 | 0.744 | 0.917 | 0.286 | 0.108 | 0.112 | k 130: band sampled too sparsely. Re-laid at Rn 97: 97.47 |
+| **2-stage telescoping, b bvec(45,30), goff 22, A1=A2=90, band quantile 1.0, Rn 106 (true radius)** | **88.29** | 0.775 | 0.900 | 0.279 | 0.102 | 0.087 | **best (k 143)** |
 
-In-band 14 per member in the best configuration: guide 0.76, neck 0.70, hub3 0.65, hub1 0.17, arm1 0.14, sleeve
-0.024, band 0.001, connector 0.0. The sleeve's skin face sits at 97 mm and the band at 100 mm. The arc spans
-147 deg (248 mm at that radius), and the tail past the guide runs 12-109 mm. Ti mass is 179 g. The closure residual
-is 0 and the minimum closure margin 26 deg. K2 found 2 flips.
+In-band 14 per member in the best configuration (k 143): guide 0.84, hub1 0.81, neck 0.68, hub3 0.62, arm1 0.52,
+connector 0.009, sleeve 0.001, band 0.0. The band sits at 110.6 mm. The arc spans 130 deg (233 mm at that radius),
+and the tail past the guide runs 1-101 mm. The guide's skin face is at 60 mm, so the guide is a ~50 mm pedestal under
+the sleeve. That is real metal; its mass is not counted. Ti mass is 138 g. The closure residual is 0 and the minimum
+closure margin 28 deg. K2 found 2 flips, and K6 removes 0.5 % of the poses.
 
 ## The measured limiter (rawest material: the posed skin along the band's own path)
 
@@ -57,7 +61,7 @@ The J2 range is at least the range of the b-W separation: 77 deg on the clips an
 +30-50 deg on the skin under it climbs from ~50 mm to the trapezius, neck and head (400 = no exit within 220 mm).
 A single-stage band therefore has to float above the head, or every pose touches.
 The 2-stage telescoping arc (the spec's variant) halves the tail. It is the first realisation that fits at all,
-but its sleeve still has to clear the highest trunk skin it sweeps over (97 mm), against skin at 45-60 mm.
+but its sleeve still has to clear the highest trunk skin it sweeps over (106-110 mm), against skin at 45-60 mm.
 That is the same limit as the 3R links ("a rigid part clears the highest skin it ever passes over"), made worse,
 because a sliding arc passes over MORE skin than a link: its own length plus its stroke.
 
@@ -70,13 +74,15 @@ Spec corrections (measured):
 - A band quantile below 1 per sample does not trade a few poses: each tail sample is inside the body in different
   poses, so nearly every pose becomes a contact pose (qb 0.8 gives gap 275).
 
-## Red team (best configuration)
+## Red team (best configuration, k 143)
 
-- Pinch / contact: ws plane -15 elev 75 axial -45 (the sleeve 19.7 mm inside the body); ws plane 30 elev 150 axial 0 (the band 16.3 mm
-  inside); ws plane -15 elev 75 axial 90 (the sleeve 13 mm inside); ws plane 0 elev 150 axial 0 (the guide 10.8 mm inside).
-- Jam / branch: clip plane 77-78, elev 141-143, axial -67 (overhead with strong internal rotation) is dropped by dense
-  K2: a joint axis jumps more than 25 deg per 2 deg step near the closure's edge.
-- Overhead (elev >= 140): 13 of 17 taken. Lost: the 2 clip frames above, plus ws plane 45-60 elev 165 axial -90.
+- Pinch / contact: ws plane 15 and 30, elev 150, axial 0: the connector is 26 / 22 mm inside the body (overhead, where
+  the band's arm-side end meets the hub). ws plane 0 elev 150 axial 0: the band is 16.8 mm inside. ws plane -15 elev 105
+  axial 45: hub1 is 5.5 mm inside. ws plane 75 elev 165 axial -90: hub3 is 3.9 mm inside.
+- Jam (part-part collision, K6): ws plane -15 elev 75 axial -45.
+- Branch / continuity: clip plane 77-78, elev 141-143, axial -67 (overhead with strong internal rotation) is dropped by
+  dense K2.
+- Overhead (elev >= 140): 14 of 17 taken. Lost: the 2 clip frames above and ws plane 45 elev 165 axial -90.
 - Not modelled, and conservative to leave out: the sleeve's upper wall and the guide's upper roller cap (not
   skin-facing, above the band), the 2:1 cable pulleys (inside the sleeve section), and the guide arms' 4 mm bridge to
   the ring (ring variant only).
