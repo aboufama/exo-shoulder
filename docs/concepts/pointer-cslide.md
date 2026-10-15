@@ -106,8 +106,69 @@ sits 92 mm inside the body in abduction 90 (local red-team run).
 | coarse Sobol, spec cylinder band, K7 neck | 212 (k 0-211) | farm | 173.65 (honest best 177.73) | band floats 30 mm, rho 80-103 |
 | local CMA, saddle band, neck down the arm | 30 (k 212-241) | local, 1 process (farm queue 12-19 jobs) | 115.84 | |
 | local CMA restart from best, 13 dims | 112 (k 242-353) | local | **73.48** (k 341) | still improving |
-| local CMA restart, step 0.07 | see sweep | local | see row | |
+| local CMA restart, step 0.07 | 125 (k 354-478) | local | **69.84** (k 375) | score 74.60 |
 | focused farm batch (64, spec cylinder, K7 neck, v1 model) | queued 20+ min | farm | - | not recorded: superseded model version |
 
 The farm queue held 12-19 jobs from other agents for the whole time box (a 212-config batch took 858 s wall for
 265 s of compute), so the CMA ran locally as one niced process (~2-7 s per configuration).
+
+## Result (best k 375, Bench(60, 160) fast grid, honest: march + K2 dense + K6 + clean audit)
+
+| gap | score | reach | follow | in-band 14 | in-band 10 | contact | mass (Ti) |
+|---|---|---|---|---|---|---|---|
+| **69.84** | **74.60** | 0.500 | 0.933 | 0.674 | 0.521 | 0.056 | 741 g |
+| spherical 3R champion, same bench | 74.93 | 0.775 | 1.000 | 0.438 | 0.279 | 0.102 | 125 g |
+
+Per member in band: band 0.85, neck 0.99, link 2 0.67, link 1 0.19, hub 2 0.18, hub 1 0.02, shoe 0.00. Window
+T = 98 deg centred at 27 deg in P, track radius 81.8 mm about the axis (tilted 11.9 deg toward tilt_a -90), station
+s = 111 mm, pole bvec(120.4, 35.4), cones 89.6 / 87.4 deg, branch -1, shoe arc 39 deg at arm angle -18 deg.
+Params: `docs/concepts/rows/pointer-cslide.json` best_params.
+
+**Convergence gate: NOT passed** - score gain over the second half of the 479 tries 13.44 (needs < 1), over the last
+third 5.68 (needs < 0.5), top-5 within 1.06 (ok). The design is not called dead. Next: `RUNPOD_API_KEY="$(cat
+~/.runpod_key)" python3 docs/concepts/models/pointer-cslide.py farmcma '{}' 8 32` (CMA on the farm from the best saddle
+config, appends to the sweep) until the gate passes; then the verifier on Bench(110, 360) exact.
+
+## Red team (the best config, named poses; local run)
+
+| pose | taken? | the worst metal |
+|---|---|---|
+| rest (clip) | yes | band 3.0 mm min / 6.1 median; shoe 26.7 mm (floats); hub 1 >= 31.7 |
+| rest + internal rotation 75 | **no: twist 112 deg outside the 98 deg window** | |
+| abduction 90 | yes | link 1 15-29 mm, shoe 29 mm |
+| abduction 150 (overhead) | **contact: hub 1 -15.7 mm, link 1 -14.7 mm inside the deltoid** | the pole margin is 20.5 deg here |
+| flexion 165 + IR 90 | **no: window (104 deg)** | |
+| across-body 135 / 90 | yes | band 6.2 mm min; hub 2 21 mm |
+| across-body low 120 / 45 | yes | band 3.6 mm |
+| behind the back (-75 / 30, axial 165) | **no: window (-69 deg)** | |
+| abduction 60 + IR 60 | **no: window (92 deg)** | |
+| abduction 75 + ER 90 | **no: window (-55 deg)** | |
+
+The optimistic numbers: in-band 14 0.67 is carried by the saddle band (0.85) and the neck (0.99) - the two parts that
+are skin-fitted per sample; the parts with one level (hubs, shoe, track) are 0.00-0.18. The saddle's body is solid
+from the skin to the track (741 g Ti); a printed body would change the mass, not the bench number. The band's
+underside is fitted at q_ring 0.99 of its own requirement; the 4 poses whose torso reaches the band's outer face are
+counted as contact (outer-face check), the 4 others are skin contacts.
+
+## Verdict and what it teaches
+
+The user's split works far better than the spec drawing of it suggests - **if the band is skin-fitted** (saddle):
+gap 69.84 vs 173.65 for the spec's cylinder, level with the 3R champion on this bench, with the best in-band 14 of any
+3R-family design screened so far on Bench(60, 160) (0.67 vs 0.44). It cannot reach the workspace: **reach 0.50 is set by
+the twist window**, and the window is set by the torso: a C-band fixed in the pointing frame (the swing frame, no
+twist) has a torso-free sector of only ~150-180 deg at s 110-160, so the band (window + shoe arc + stops) fits ~98 deg
+of travel, while the workspace needs ~150-180 (intrinsic: arm directions within 15 deg differ by a median 135 deg of
+twist). The 2R pointer half shows the pole problem the spec predicted: the J1 hub sits where the overhead arm comes
+within 20-39 deg, so it is either inside the deltoid overhead or > 30 mm off the skin elsewhere.
+
+New knowledge (predicts beyond this morphology):
+1. Any C-slide / ring that carries humeral twist in a frame that does not twist (a swing or pointing frame) is limited
+   by the torso-free sector of that frame (~150-180 deg at mid-arm), not by the ring's own travel: workspace reach
+   above ~0.6 needs either a twist share on another joint (the 3R's way) or a ring that opens toward the torso in
+   every pose (no fixed sector does).
+2. A rotary track only has to be circular where the bearing runs: the body under it can be skin-fitted per sample
+   (here +0.85 band in-band, gap 174 -> 70). The same trick applies to any arc rail or ring bearing in the catalogue.
+3. A strap that runs ALONG the arm cannot be fitted on GH rays (the ray runs inside the arm and parks it at 400 mm):
+   fit it radially from the arm axis.
+4. The kit's K7 neck to BOTTOM's bar start (lateral arm root) crosses any part that sits on the upper arm below
+   s ~ 60 mm; models with arm-mounted parts need the neck to run down the arm (BOTTOM cut there).

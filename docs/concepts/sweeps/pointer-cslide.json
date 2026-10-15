@@ -21,7 +21,9 @@
    "hub": "o20",
    "width": 12.0,
    "t_link": 3.0,
-   "q": 0.95
+   "q": 0.95,
+   "saddle": 0,
+   "neck": "bar"
   },
   "inband14": 0.0203,
   "inband10": 0.0168,
@@ -51,7 +53,8 @@
    "link2: sparse sampling (9.76 mm median spacing > 4 mm)"
   ],
   "flips": 0,
-  "collide": 0.0101
+  "collide": 0.0101,
+  "model_version": "v1 (cylinder band, K7 neck to BOTTOM's bar)"
  },
  {
   "k": 1,
@@ -75,7 +78,9 @@
    "hub": "o20",
    "width": 12.0,
    "t_link": 3.0,
-   "q": 0.95
+   "q": 0.95,
+   "saddle": 0,
+   "neck": "bar"
   },
   "inband14": 0.117,
   "inband10": 0.0805,
@@ -102,7 +107,8 @@
   },
   "audit": [],
   "flips": 0,
-  "collide": 0.4343
+  "collide": 0.4343,
+  "model_version": "v1 (cylinder band, K7 neck to BOTTOM's bar)"
  },
  {
   "k": 2,
@@ -126,7 +132,9 @@
    "hub": "o20",
    "width": 12.0,
    "t_link": 3.0,
-   "q": 0.95
+   "q": 0.95,
+   "saddle": 0,
+   "neck": "bar"
   },
   "inband14": 0.1296,
   "inband10": 0.0763,
@@ -153,7 +161,8 @@
   },
   "audit": [],
   "flips": 0,
-  "collide": 0.2879
+  "collide": 0.2879,
+  "model_version": "v1 (cylinder band, K7 neck to BOTTOM's bar)"
  },
  {
   "k": 3,
@@ -177,7 +186,9 @@
    "hub": "o20",
    "width": 12.0,
    "t_link": 3.0,
-   "q": 0.95
+   "q": 0.95,
+   "saddle": 0,
+   "neck": "bar"
   },
   "inband14": 0.1734,
   "inband10": 0.1184,
@@ -204,7 +215,8 @@
   },
   "audit": [],
   "flips": 0,
-  "collide": 0.5974
+  "collide": 0.5974,
+  "model_version": "v1 (cylinder band, K7 neck to BOTTOM's bar)"
  },
  {
   "k": 4,
@@ -228,7 +240,9 @@
    "hub": "o20",
    "width": 12.0,
    "t_link": 3.0,
-   "q": 0.92
+   "q": 0.92,
+   "saddle": 0,
+   "neck": "bar"
   },
   "inband14": 0.0772,
   "inband10": 0.0579,
@@ -258,7 +272,8 @@
    "neck: sparse sampling (10.93 mm median spacing > 4 mm)"
   ],
   "flips": 2,
-  "collide": 0.44
+  "collide": 0.44,
+  "model_version": "v1 (cylinder band, K7 neck to BOTTOM's bar)"
  },
  {
   "k": 5,
@@ -282,7 +297,9 @@
    "hub": "kaa10",
    "width": 12.0,
    "t_link": 3.0,
-   "q": 0.99
+   "q": 0.99,
+   "saddle": 0,
+   "neck": "bar"
   },
   "inband14": 0.0637,
   "inband10": 0.0337,
@@ -312,7 +329,8 @@
    "link2: sparse sampling (9.46 mm median spacing > 4 mm)"
   ],
   "flips": 0,
-  "collide": 0.2482
+  "collide": 0.2482,
+  "model_version": "v1 (cylinder band, K7 neck to BOTTOM's bar)"
  },
  {
   "k": 6,
@@ -336,7 +354,9 @@
    "hub": "o20",
    "width": 12.0,
    "t_link": 3.0,
-   "q": 0.96
+   "q": 0.96,
+   "saddle": 0,
+   "neck": "bar"
   },
   "inband14": 0.0,
   "inband10": 0.0,
@@ -366,7 +386,8 @@
    "neck: sparse sampling (11.23 mm median spacing > 4 mm)"
   ],
   "flips": 4,
-  "collide": 0.2455
+  "collide": 0.2455,
+  "model_version": "v1 (cylinder band, K7 neck to BOTTOM's bar)"
  },
  {
   "k": 7,
@@ -390,7 +411,9 @@
    "hub": "o20",
    "width": 12.0,
    "t_link": 3.0,
-   "q": 0.88
+   "q": 0.88,
+   "saddle": 0,
+   "neck": "bar"
   },
   "inband14": 0.0,
   "inband10": 0.0,
@@ -417,7 +440,8 @@
   },
   "audit": [],
   "flips": 1,
-  "collide": 0.9434
+  "collide": 0.9434,
+  "model_version": "v1 (cylinder band, K7 neck to BOTTOM's bar)"
  },
  {
   "k": 8,
@@ -441,7 +465,9 @@
    "hub": "o20",
    "width": 12.0,
    "t_link": 3.0,
-   "q": 0.86
+   "q": 0.86,
+   "saddle": 0,
+   "neck": "bar"
   },
   "inband14": 0.0,
   "inband10": 0.0,
@@ -470,7 +496,8 @@
    "neck: sparse sampling (10.19 mm median spacing > 4 mm)"
   ],
   "flips": 0,
-  "collide": 1.0
+  "collide": 1.0,
+  "model_version": "v1 (cylinder band, K7 neck to BOTTOM's bar)"
  },
  {
   "k": 9,
@@ -494,7 +521,9 @@
    "hub": "kaa10",
    "width": 12.0,
    "t_link": 3.0,
-   "q": 0.93
+   "q": 0.93,
+   "saddle": 0,
+   "neck": "bar"
   },
   "inband14": 0.0166,
   "inband10": 0.0133,
@@ -524,7 +553,8 @@
    "link2: sparse sampling (10.65 mm median spacing > 4 mm)"
   ],
   "flips": 0,
-  "collide": 0.0061
+  "collide": 0.0061,
+  "model_version": "v1 (cylinder band, K7 neck to BOTTOM's bar)"
  },
  {
   "k": 10,
@@ -548,7 +578,9 @@
    "hub": "o20",
    "width": 12.0,
    "t_link": 3.0,
-   "q": 0.97
+   "q": 0.97,
+   "saddle": 0,
+   "neck": "bar"
   },
   "inband14": 0.0,
   "inband10": 0.0,
@@ -579,7 +611,8 @@
    "neck: sparse sampling (11.13 mm median spacing > 4 mm)"
   ],
   "flips": 0,
-  "collide": 0.1037
+  "collide": 0.1037,
+  "model_version": "v1 (cylinder band, K7 neck to BOTTOM's bar)"
  },
  {
   "k": 11,
@@ -603,7 +636,9 @@
    "hub": "o20",
    "width": 12.0,
    "t_link": 3.0,
-   "q": 0.89
+   "q": 0.89,
+   "saddle": 0,
+   "neck": "bar"
   },
   "inband14": 0.0,
   "inband10": 0.0,
@@ -633,7 +668,8 @@
    "link2: sparse sampling (11.43 mm median spacing > 4 mm)"
   ],
   "flips": 0,
-  "collide": 0.0
+  "collide": 0.0,
+  "model_version": "v1 (cylinder band, K7 neck to BOTTOM's bar)"
  },
  {
   "k": 12,
@@ -657,7 +693,9 @@
    "hub": "o20",
    "width": 12.0,
    "t_link": 3.0,
-   "q": 0.91
+   "q": 0.91,
+   "saddle": 0,
+   "neck": "bar"
   },
   "inband14": 0.0947,
   "inband10": 0.0744,
@@ -688,7 +726,8 @@
    "neck: sparse sampling (4.1 mm median spacing > 4 mm)"
   ],
   "flips": 2,
-  "collide": 0.0
+  "collide": 0.0,
+  "model_version": "v1 (cylinder band, K7 neck to BOTTOM's bar)"
  },
  {
   "k": 13,
@@ -712,7 +751,9 @@
    "hub": "kaa10",
    "width": 12.0,
    "t_link": 3.0,
-   "q": 0.99
+   "q": 0.99,
+   "saddle": 0,
+   "neck": "bar"
   },
   "inband14": 0.0268,
   "inband10": 0.0152,
@@ -742,7 +783,8 @@
    "link2: sparse sampling (10.06 mm median spacing > 4 mm)"
   ],
   "flips": 0,
-  "collide": 0.125
+  "collide": 0.125,
+  "model_version": "v1 (cylinder band, K7 neck to BOTTOM's bar)"
  },
  {
   "k": 14,
@@ -766,7 +808,9 @@
    "hub": "o20",
    "width": 12.0,
    "t_link": 3.0,
-   "q": 0.95
+   "q": 0.95,
+   "saddle": 0,
+   "neck": "bar"
   },
   "inband14": 0.1867,
   "inband10": 0.138,
@@ -796,7 +840,8 @@
    "neck: sparse sampling (11.43 mm median spacing > 4 mm)"
   ],
   "flips": 3,
-  "collide": 0.2074
+  "collide": 0.2074,
+  "model_version": "v1 (cylinder band, K7 neck to BOTTOM's bar)"
  },
  {
   "k": 15,
@@ -820,7 +865,9 @@
    "hub": "o20",
    "width": 12.0,
    "t_link": 3.0,
-   "q": 0.88
+   "q": 0.88,
+   "saddle": 0,
+   "neck": "bar"
   },
   "inband14": 0.0,
   "inband10": 0.0,
@@ -847,7 +894,8 @@
   },
   "audit": [],
   "flips": 0,
-  "collide": 1.0
+  "collide": 1.0,
+  "model_version": "v1 (cylinder band, K7 neck to BOTTOM's bar)"
  },
  {
   "k": 16,
@@ -871,7 +919,9 @@
    "hub": "o20",
    "width": 12.0,
    "t_link": 3.0,
-   "q": 0.86
+   "q": 0.86,
+   "saddle": 0,
+   "neck": "bar"
   },
   "inband14": 0.0,
   "inband10": 0.0,
@@ -898,7 +948,8 @@
   },
   "audit": [],
   "flips": 1,
-  "collide": 0.7257
+  "collide": 0.7257,
+  "model_version": "v1 (cylinder band, K7 neck to BOTTOM's bar)"
  },
  {
   "k": 17,
@@ -922,7 +973,9 @@
    "hub": "o20",
    "width": 12.0,
    "t_link": 3.0,
-   "q": 0.94
+   "q": 0.94,
+   "saddle": 0,
+   "neck": "bar"
   },
   "inband14": 0.3048,
   "inband10": 0.2022,
@@ -949,7 +1002,8 @@
   },
   "audit": [],
   "flips": 2,
-  "collide": 0.1818
+  "collide": 0.1818,
+  "model_version": "v1 (cylinder band, K7 neck to BOTTOM's bar)"
  },
  {
   "k": 18,
@@ -973,7 +1027,9 @@
    "hub": "o20",
    "width": 12.0,
    "t_link": 3.0,
-   "q": 0.97
+   "q": 0.97,
+   "saddle": 0,
+   "neck": "bar"
   },
   "inband14": 0.022,
   "inband10": 0.0185,
@@ -1004,7 +1060,8 @@
    "neck: sparse sampling (11.38 mm median spacing > 4 mm)"
   ],
   "flips": 0,
-  "collide": 0.1977
+  "collide": 0.1977,
+  "model_version": "v1 (cylinder band, K7 neck to BOTTOM's bar)"
  },
  {
   "k": 19,
@@ -1028,7 +1085,9 @@
    "hub": "o20",
    "width": 12.0,
    "t_link": 3.0,
-   "q": 0.9
+   "q": 0.9,
+   "saddle": 0,
+   "neck": "bar"
   },
   "inband14": 0.0,
   "inband10": 0.0,
@@ -1055,7 +1114,8 @@
   },
   "audit": [],
   "flips": 0,
-  "collide": 0.9301
+  "collide": 0.9301,
+  "model_version": "v1 (cylinder band, K7 neck to BOTTOM's bar)"
  },
  {
   "k": 20,
@@ -1079,7 +1139,9 @@
    "hub": "o20",
    "width": 12.0,
    "t_link": 3.0,
-   "q": 0.87
+   "q": 0.87,
+   "saddle": 0,
+   "neck": "bar"
   },
   "inband14": 0.0,
   "inband10": 0.0,
@@ -1110,7 +1172,8 @@
    "neck: sparse sampling (11.43 mm median spacing > 4 mm)"
   ],
   "flips": 0,
-  "collide": 0.0
+  "collide": 0.0,
+  "model_version": "v1 (cylinder band, K7 neck to BOTTOM's bar)"
  },
  {
   "k": 21,
@@ -1134,7 +1197,9 @@
    "hub": "o20",
    "width": 12.0,
    "t_link": 3.0,
-   "q": 0.93
+   "q": 0.93,
+   "saddle": 0,
+   "neck": "bar"
   },
   "inband14": 0.0,
   "inband10": 0.0,
@@ -1161,7 +1226,8 @@
   },
   "audit": [],
   "flips": 0,
-  "collide": 0.9118
+  "collide": 0.9118,
+  "model_version": "v1 (cylinder band, K7 neck to BOTTOM's bar)"
  },
  {
   "k": 22,
@@ -1185,7 +1251,9 @@
    "hub": "o20",
    "width": 12.0,
    "t_link": 3.0,
-   "q": 0.98
+   "q": 0.98,
+   "saddle": 0,
+   "neck": "bar"
   },
   "inband14": 0.0337,
   "inband10": 0.0158,
@@ -1216,7 +1284,8 @@
    "neck: sparse sampling (10.79 mm median spacing > 4 mm)"
   ],
   "flips": 1,
-  "collide": 0.0
+  "collide": 0.0,
+  "model_version": "v1 (cylinder band, K7 neck to BOTTOM's bar)"
  },
  {
   "k": 23,
@@ -1240,7 +1309,9 @@
    "hub": "kaa10",
    "width": 12.0,
    "t_link": 3.0,
-   "q": 0.89
+   "q": 0.89,
+   "saddle": 0,
+   "neck": "bar"
   },
   "inband14": 0.0,
   "inband10": 0.0,
@@ -1269,7 +1340,8 @@
    "neck: sparse sampling (4.04 mm median spacing > 4 mm)"
   ],
   "flips": 0,
-  "collide": 1.0
+  "collide": 1.0,
+  "model_version": "v1 (cylinder band, K7 neck to BOTTOM's bar)"
  },
  {
   "k": 24,
@@ -1293,7 +1365,9 @@
    "hub": "o20",
    "width": 12.0,
    "t_link": 3.0,
-   "q": 0.92
+   "q": 0.92,
+   "saddle": 0,
+   "neck": "bar"
   },
   "inband14": 0.1384,
   "inband10": 0.1216,
@@ -1323,7 +1397,8 @@
    "neck: sparse sampling (11.43 mm median spacing > 4 mm)"
   ],
   "flips": 0,
-  "collide": 0.4141
+  "collide": 0.4141,
+  "model_version": "v1 (cylinder band, K7 neck to BOTTOM's bar)"
  },
  {
   "k": 25,
@@ -1347,7 +1422,9 @@
    "hub": "o20",
    "width": 12.0,
    "t_link": 3.0,
-   "q": 0.98
+   "q": 0.98,
+   "saddle": 0,
+   "neck": "bar"
   },
   "inband14": 0.0482,
   "inband10": 0.0302,
@@ -1377,7 +1454,8 @@
    "link2: sparse sampling (11.03 mm median spacing > 4 mm)"
   ],
   "flips": 0,
-  "collide": 0.0
+  "collide": 0.0,
+  "model_version": "v1 (cylinder band, K7 neck to BOTTOM's bar)"
  },
  {
   "k": 26,
@@ -1401,7 +1479,9 @@
    "hub": "o20",
    "width": 12.0,
    "t_link": 3.0,
-   "q": 0.95
+   "q": 0.95,
+   "saddle": 0,
+   "neck": "bar"
   },
   "inband14": 0.1119,
   "inband10": 0.1058,
@@ -1430,7 +1510,8 @@
    "link2: sparse sampling (5.56 mm median spacing > 4 mm)"
   ],
   "flips": 1,
-  "collide": 0.019
+  "collide": 0.019,
+  "model_version": "v1 (cylinder band, K7 neck to BOTTOM's bar)"
  },
  {
   "k": 27,
@@ -1454,7 +1535,9 @@
    "hub": "o20",
    "width": 12.0,
    "t_link": 3.0,
-   "q": 0.87
+   "q": 0.87,
+   "saddle": 0,
+   "neck": "bar"
   },
   "inband14": 0.0,
   "inband10": 0.0,
@@ -1481,7 +1564,8 @@
   },
   "audit": [],
   "flips": 0,
-  "collide": 0.9224
+  "collide": 0.9224,
+  "model_version": "v1 (cylinder band, K7 neck to BOTTOM's bar)"
  },
  {
   "k": 28,
@@ -1505,7 +1589,9 @@
    "hub": "kaa10",
    "width": 12.0,
    "t_link": 3.0,
-   "q": 0.85
+   "q": 0.85,
+   "saddle": 0,
+   "neck": "bar"
   },
   "inband14": 0.067,
   "inband10": 0.0304,
@@ -1536,7 +1622,8 @@
    "neck: sparse sampling (11.08 mm median spacing > 4 mm)"
   ],
   "flips": 0,
-  "collide": 0.0
+  "collide": 0.0,
+  "model_version": "v1 (cylinder band, K7 neck to BOTTOM's bar)"
  },
  {
   "k": 29,
@@ -1560,7 +1647,9 @@
    "hub": "kaa10",
    "width": 12.0,
    "t_link": 3.0,
-   "q": 0.94
+   "q": 0.94,
+   "saddle": 0,
+   "neck": "bar"
   },
   "inband14": 0.0682,
   "inband10": 0.0617,
@@ -1590,7 +1679,8 @@
    "link2: sparse sampling (11.43 mm median spacing > 4 mm)"
   ],
   "flips": 0,
-  "collide": 0.0
+  "collide": 0.0,
+  "model_version": "v1 (cylinder band, K7 neck to BOTTOM's bar)"
  },
  {
   "k": 30,
@@ -1614,7 +1704,9 @@
    "hub": "kaa10",
    "width": 12.0,
    "t_link": 3.0,
-   "q": 0.97
+   "q": 0.97,
+   "saddle": 0,
+   "neck": "bar"
   },
   "inband14": 0.0,
   "inband10": 0.0,
@@ -1644,7 +1736,8 @@
    "neck: sparse sampling (11.43 mm median spacing > 4 mm)"
   ],
   "flips": 0,
-  "collide": 1.0
+  "collide": 1.0,
+  "model_version": "v1 (cylinder band, K7 neck to BOTTOM's bar)"
  },
  {
   "k": 31,
@@ -1668,7 +1761,9 @@
    "hub": "o20",
    "width": 12.0,
    "t_link": 3.0,
-   "q": 0.9
+   "q": 0.9,
+   "saddle": 0,
+   "neck": "bar"
   },
   "inband14": 0.0327,
   "inband10": 0.0201,
@@ -1698,7 +1793,8 @@
    "link2: sparse sampling (11.43 mm median spacing > 4 mm)"
   ],
   "flips": 0,
-  "collide": 0.0214
+  "collide": 0.0214,
+  "model_version": "v1 (cylinder band, K7 neck to BOTTOM's bar)"
  },
  {
   "k": 32,
@@ -1722,7 +1818,9 @@
    "hub": "kaa10",
    "width": 12.0,
    "t_link": 3.0,
-   "q": 0.91
+   "q": 0.91,
+   "saddle": 0,
+   "neck": "bar"
   },
   "inband14": 0.0,
   "inband10": 0.0,
@@ -1753,7 +1851,8 @@
    "neck: sparse sampling (11.43 mm median spacing > 4 mm)"
   ],
   "flips": 0,
-  "collide": 0.0
+  "collide": 0.0,
+  "model_version": "v1 (cylinder band, K7 neck to BOTTOM's bar)"
  },
  {
   "k": 33,
@@ -1777,7 +1876,9 @@
    "hub": "o20",
    "width": 12.0,
    "t_link": 3.0,
-   "q": 1.0
+   "q": 1.0,
+   "saddle": 0,
+   "neck": "bar"
   },
   "inband14": 0.0,
   "inband10": 0.0,
@@ -1807,7 +1908,8 @@
    "neck: sparse sampling (10.74 mm median spacing > 4 mm)"
   ],
   "flips": 0,
-  "collide": 0.2745
+  "collide": 0.2745,
+  "model_version": "v1 (cylinder band, K7 neck to BOTTOM's bar)"
  },
  {
   "k": 34,
@@ -1831,7 +1933,9 @@
    "hub": "kaa10",
    "width": 12.0,
    "t_link": 3.0,
-   "q": 0.95
+   "q": 0.95,
+   "saddle": 0,
+   "neck": "bar"
   },
   "inband14": 0.0,
   "inband10": 0.0,
@@ -1861,7 +1965,8 @@
    "neck: sparse sampling (11.18 mm median spacing > 4 mm)"
   ],
   "flips": 1,
-  "collide": 1.0
+  "collide": 1.0,
+  "model_version": "v1 (cylinder band, K7 neck to BOTTOM's bar)"
  },
  {
   "k": 35,
@@ -1885,7 +1990,9 @@
    "hub": "o20",
    "width": 12.0,
    "t_link": 3.0,
-   "q": 0.88
+   "q": 0.88,
+   "saddle": 0,
+   "neck": "bar"
   },
   "inband14": 0.2473,
   "inband10": 0.1785,
@@ -1912,7 +2019,8 @@
   },
   "audit": [],
   "flips": 0,
-  "collide": 0.3066
+  "collide": 0.3066,
+  "model_version": "v1 (cylinder band, K7 neck to BOTTOM's bar)"
  },
  {
   "k": 36,
@@ -1936,7 +2044,9 @@
    "hub": "o20",
    "width": 12.0,
    "t_link": 3.0,
-   "q": 0.94
+   "q": 0.94,
+   "saddle": 0,
+   "neck": "bar"
   },
   "inband14": 0.0,
   "inband10": 0.0,
@@ -1963,7 +2073,8 @@
   },
   "audit": [],
   "flips": 1,
-  "collide": 1.0
+  "collide": 1.0,
+  "model_version": "v1 (cylinder band, K7 neck to BOTTOM's bar)"
  },
  {
   "k": 37,
@@ -1987,7 +2098,9 @@
    "hub": "o20",
    "width": 12.0,
    "t_link": 3.0,
-   "q": 0.86
+   "q": 0.86,
+   "saddle": 0,
+   "neck": "bar"
   },
   "inband14": 0.1251,
   "inband10": 0.0768,
@@ -2017,7 +2130,8 @@
    "neck: sparse sampling (10.86 mm median spacing > 4 mm)"
   ],
   "flips": 0,
-  "collide": 0.6618
+  "collide": 0.6618,
+  "model_version": "v1 (cylinder band, K7 neck to BOTTOM's bar)"
  },
  {
   "k": 38,
@@ -2041,7 +2155,9 @@
    "hub": "o20",
    "width": 12.0,
    "t_link": 3.0,
-   "q": 0.91
+   "q": 0.91,
+   "saddle": 0,
+   "neck": "bar"
   },
   "inband14": 0.2914,
   "inband10": 0.2167,
@@ -2068,7 +2184,8 @@
   },
   "audit": [],
   "flips": 2,
-  "collide": 0.0348
+  "collide": 0.0348,
+  "model_version": "v1 (cylinder band, K7 neck to BOTTOM's bar)"
  },
  {
   "k": 39,
@@ -2092,7 +2209,9 @@
    "hub": "o20",
    "width": 12.0,
    "t_link": 3.0,
-   "q": 0.97
+   "q": 0.97,
+   "saddle": 0,
+   "neck": "bar"
   },
   "inband14": 0.0415,
   "inband10": 0.0075,
@@ -2123,7 +2242,8 @@
    "neck: sparse sampling (11.43 mm median spacing > 4 mm)"
   ],
   "flips": 0,
-  "collide": 0.1447
+  "collide": 0.1447,
+  "model_version": "v1 (cylinder band, K7 neck to BOTTOM's bar)"
  },
  {
   "k": 40,
@@ -2147,7 +2267,9 @@
    "hub": "o20",
    "width": 12.0,
    "t_link": 3.0,
-   "q": 0.99
+   "q": 0.99,
+   "saddle": 0,
+   "neck": "bar"
   },
   "inband14": 0.0105,
   "inband10": 0.0,
@@ -2176,7 +2298,8 @@
    "neck: sparse sampling (10.64 mm median spacing > 4 mm)"
   ],
   "flips": 0,
-  "collide": 0.1557
+  "collide": 0.1557,
+  "model_version": "v1 (cylinder band, K7 neck to BOTTOM's bar)"
  },
  {
   "k": 41,
@@ -2200,7 +2323,9 @@
    "hub": "o20",
    "width": 12.0,
    "t_link": 3.0,
-   "q": 0.91
+   "q": 0.91,
+   "saddle": 0,
+   "neck": "bar"
   },
   "inband14": 0.0991,
   "inband10": 0.079,
@@ -2230,7 +2355,8 @@
    "neck: sparse sampling (8.03 mm median spacing > 4 mm)"
   ],
   "flips": 0,
-  "collide": 0.0
+  "collide": 0.0,
+  "model_version": "v1 (cylinder band, K7 neck to BOTTOM's bar)"
  },
  {
   "k": 42,
@@ -2254,7 +2380,9 @@
    "hub": "o20",
    "width": 12.0,
    "t_link": 3.0,
-   "q": 0.88
+   "q": 0.88,
+   "saddle": 0,
+   "neck": "bar"
   },
   "inband14": 0.056,
   "inband10": 0.0523,
@@ -2284,7 +2412,8 @@
    "link2: sparse sampling (10.9 mm median spacing > 4 mm)"
   ],
   "flips": 7,
-  "collide": 0.0
+  "collide": 0.0,
+  "model_version": "v1 (cylinder band, K7 neck to BOTTOM's bar)"
  },
  {
   "k": 43,
@@ -2308,7 +2437,9 @@
    "hub": "o20",
    "width": 12.0,
    "t_link": 3.0,
-   "q": 0.95
+   "q": 0.95,
+   "saddle": 0,
+   "neck": "bar"
   },
   "inband14": 0.0,
   "inband10": 0.0,
@@ -2339,7 +2470,8 @@
    "neck: sparse sampling (11.23 mm median spacing > 4 mm)"
   ],
   "flips": 0,
-  "collide": 0.2455
+  "collide": 0.2455,
+  "model_version": "v1 (cylinder band, K7 neck to BOTTOM's bar)"
  },
  {
   "k": 44,
@@ -2363,7 +2495,9 @@
    "hub": "kaa10",
    "width": 12.0,
    "t_link": 3.0,
-   "q": 0.93
+   "q": 0.93,
+   "saddle": 0,
+   "neck": "bar"
   },
   "inband14": 0.0,
   "inband10": 0.0,
@@ -2390,7 +2524,8 @@
   },
   "audit": [],
   "flips": 0,
-  "collide": 1.0
+  "collide": 1.0,
+  "model_version": "v1 (cylinder band, K7 neck to BOTTOM's bar)"
  },
  {
   "k": 45,
@@ -2414,7 +2549,9 @@
    "hub": "kaa10",
    "width": 12.0,
    "t_link": 3.0,
-   "q": 0.86
+   "q": 0.86,
+   "saddle": 0,
+   "neck": "bar"
   },
   "inband14": 0.0817,
   "inband10": 0.0412,
@@ -2445,7 +2582,8 @@
    "neck: sparse sampling (11.43 mm median spacing > 4 mm)"
   ],
   "flips": 0,
-  "collide": 0.0
+  "collide": 0.0,
+  "model_version": "v1 (cylinder band, K7 neck to BOTTOM's bar)"
  },
  {
   "k": 46,
@@ -2469,7 +2607,9 @@
    "hub": "kaa10",
    "width": 12.0,
    "t_link": 3.0,
-   "q": 0.89
+   "q": 0.89,
+   "saddle": 0,
+   "neck": "bar"
   },
   "inband14": 0.0984,
   "inband10": 0.0906,
@@ -2499,7 +2639,8 @@
    "link2: sparse sampling (11.23 mm median spacing > 4 mm)"
   ],
   "flips": 5,
-  "collide": 0.0
+  "collide": 0.0,
+  "model_version": "v1 (cylinder band, K7 neck to BOTTOM's bar)"
  },
  {
   "k": 47,
@@ -2523,7 +2664,9 @@
    "hub": "o20",
    "width": 12.0,
    "t_link": 3.0,
-   "q": 0.98
+   "q": 0.98,
+   "saddle": 0,
+   "neck": "bar"
   },
   "inband14": 0.0,
   "inband10": 0.0,
@@ -2552,7 +2695,8 @@
    "neck: sparse sampling (11.43 mm median spacing > 4 mm)"
   ],
   "flips": 2,
-  "collide": 0.5202
+  "collide": 0.5202,
+  "model_version": "v1 (cylinder band, K7 neck to BOTTOM's bar)"
  },
  {
   "k": 48,
@@ -2576,7 +2720,9 @@
    "hub": "o20",
    "width": 12.0,
    "t_link": 3.0,
-   "q": 0.99
+   "q": 0.99,
+   "saddle": 0,
+   "neck": "bar"
   },
   "inband14": 0.1872,
   "inband10": 0.1454,
@@ -2606,7 +2752,8 @@
    "link2: sparse sampling (11.43 mm median spacing > 4 mm)"
   ],
   "flips": 0,
-  "collide": 0.0
+  "collide": 0.0,
+  "model_version": "v1 (cylinder band, K7 neck to BOTTOM's bar)"
  },
  {
   "k": 49,
@@ -2630,7 +2777,9 @@
    "hub": "kaa10",
    "width": 12.0,
    "t_link": 3.0,
-   "q": 0.92
+   "q": 0.92,
+   "saddle": 0,
+   "neck": "bar"
   },
   "inband14": 0.0,
   "inband10": 0.0,
@@ -2660,7 +2809,8 @@
    "neck: sparse sampling (11.43 mm median spacing > 4 mm)"
   ],
   "flips": 2,
-  "collide": 1.0
+  "collide": 1.0,
+  "model_version": "v1 (cylinder band, K7 neck to BOTTOM's bar)"
  },
  {
   "k": 50,
@@ -2684,7 +2834,9 @@
    "hub": "o20",
    "width": 12.0,
    "t_link": 3.0,
-   "q": 0.88
+   "q": 0.88,
+   "saddle": 0,
+   "neck": "bar"
   },
   "inband14": 0.0,
   "inband10": 0.0,
@@ -2711,7 +2863,8 @@
   },
   "audit": [],
   "flips": 0,
-  "collide": 0.5183
+  "collide": 0.5183,
+  "model_version": "v1 (cylinder band, K7 neck to BOTTOM's bar)"
  },
  {
   "k": 51,
@@ -2735,7 +2888,9 @@
    "hub": "kaa10",
    "width": 12.0,
    "t_link": 3.0,
-   "q": 0.96
+   "q": 0.96,
+   "saddle": 0,
+   "neck": "bar"
   },
   "inband14": 0.0,
   "inband10": 0.0,
@@ -2765,7 +2920,8 @@
    "neck: sparse sampling (10.2 mm median spacing > 4 mm)"
   ],
   "flips": 0,
-  "collide": 1.0
+  "collide": 1.0,
+  "model_version": "v1 (cylinder band, K7 neck to BOTTOM's bar)"
  },
  {
   "k": 52,
@@ -2789,7 +2945,9 @@
    "hub": "kaa10",
    "width": 12.0,
    "t_link": 3.0,
-   "q": 1.0
+   "q": 1.0,
+   "saddle": 0,
+   "neck": "bar"
   },
   "inband14": 0.0,
   "inband10": 0.0,
@@ -2816,7 +2974,8 @@
   },
   "audit": [],
   "flips": 0,
-  "collide": 1.0
+  "collide": 1.0,
+  "model_version": "v1 (cylinder band, K7 neck to BOTTOM's bar)"
  },
  {
   "k": 53,
@@ -2840,7 +2999,9 @@
    "hub": "o20",
    "width": 12.0,
    "t_link": 3.0,
-   "q": 0.91
+   "q": 0.91,
+   "saddle": 0,
+   "neck": "bar"
   },
   "inband14": 0.0,
   "inband10": 0.0,
@@ -2869,7 +3030,8 @@
    "neck: sparse sampling (4.84 mm median spacing > 4 mm)"
   ],
   "flips": 2,
-  "collide": 0.0067
+  "collide": 0.0067,
+  "model_version": "v1 (cylinder band, K7 neck to BOTTOM's bar)"
  },
  {
   "k": 54,
@@ -2893,7 +3055,9 @@
    "hub": "o20",
    "width": 12.0,
    "t_link": 3.0,
-   "q": 0.89
+   "q": 0.89,
+   "saddle": 0,
+   "neck": "bar"
   },
   "inband14": 0.2635,
   "inband10": 0.1906,
@@ -2920,7 +3084,8 @@
   },
   "audit": [],
   "flips": 1,
-  "collide": 0.0
+  "collide": 0.0,
+  "model_version": "v1 (cylinder band, K7 neck to BOTTOM's bar)"
  },
  {
   "k": 55,
@@ -2944,7 +3109,9 @@
    "hub": "o20",
    "width": 12.0,
    "t_link": 3.0,
-   "q": 0.95
+   "q": 0.95,
+   "saddle": 0,
+   "neck": "bar"
   },
   "inband14": 0.0,
   "inband10": 0.0,
@@ -2975,7 +3142,8 @@
    "neck: sparse sampling (11.43 mm median spacing > 4 mm)"
   ],
   "flips": 0,
-  "collide": 0.0
+  "collide": 0.0,
+  "model_version": "v1 (cylinder band, K7 neck to BOTTOM's bar)"
  },
  {
   "k": 56,
@@ -2999,7 +3167,9 @@
    "hub": "kaa10",
    "width": 12.0,
    "t_link": 3.0,
-   "q": 0.94
+   "q": 0.94,
+   "saddle": 0,
+   "neck": "bar"
   },
   "inband14": 0.0,
   "inband10": 0.0,
@@ -3026,7 +3196,8 @@
   },
   "audit": [],
   "flips": 1,
-  "collide": 1.0
+  "collide": 1.0,
+  "model_version": "v1 (cylinder band, K7 neck to BOTTOM's bar)"
  },
  {
   "k": 57,
@@ -3050,7 +3221,9 @@
    "hub": "o20",
    "width": 12.0,
    "t_link": 3.0,
-   "q": 0.85
+   "q": 0.85,
+   "saddle": 0,
+   "neck": "bar"
   },
   "inband14": 0.0,
   "inband10": 0.0,
@@ -3079,7 +3252,8 @@
    "neck: sparse sampling (10.02 mm median spacing > 4 mm)"
   ],
   "flips": 0,
-  "collide": 0.0
+  "collide": 0.0,
+  "model_version": "v1 (cylinder band, K7 neck to BOTTOM's bar)"
  },
  {
   "k": 58,
@@ -3103,7 +3277,9 @@
    "hub": "o20",
    "width": 12.0,
    "t_link": 3.0,
-   "q": 0.9
+   "q": 0.9,
+   "saddle": 0,
+   "neck": "bar"
   },
   "inband14": 0.0676,
   "inband10": 0.0519,
@@ -3133,7 +3309,8 @@
    "link2: sparse sampling (11.43 mm median spacing > 4 mm)"
   ],
   "flips": 0,
-  "collide": 0.0
+  "collide": 0.0,
+  "model_version": "v1 (cylinder band, K7 neck to BOTTOM's bar)"
  },
  {
   "k": 59,
@@ -3157,7 +3334,9 @@
    "hub": "kaa10",
    "width": 12.0,
    "t_link": 3.0,
-   "q": 0.96
+   "q": 0.96,
+   "saddle": 0,
+   "neck": "bar"
   },
   "inband14": 0.1624,
   "inband10": 0.1036,
@@ -3188,7 +3367,8 @@
    "neck: sparse sampling (11.42 mm median spacing > 4 mm)"
   ],
   "flips": 0,
-  "collide": 0.0
+  "collide": 0.0,
+  "model_version": "v1 (cylinder band, K7 neck to BOTTOM's bar)"
  },
  {
   "k": 60,
@@ -3212,7 +3392,9 @@
    "hub": "kaa10",
    "width": 12.0,
    "t_link": 3.0,
-   "q": 0.98
+   "q": 0.98,
+   "saddle": 0,
+   "neck": "bar"
   },
   "inband14": 0.0,
   "inband10": 0.0,
@@ -3242,7 +3424,8 @@
    "link2: sparse sampling (4.13 mm median spacing > 4 mm)"
   ],
   "flips": 0,
-  "collide": 1.0
+  "collide": 1.0,
+  "model_version": "v1 (cylinder band, K7 neck to BOTTOM's bar)"
  },
  {
   "k": 61,
@@ -3266,7 +3449,9 @@
    "hub": "o20",
    "width": 12.0,
    "t_link": 3.0,
-   "q": 0.92
+   "q": 0.92,
+   "saddle": 0,
+   "neck": "bar"
   },
   "inband14": 0.0,
   "inband10": 0.0,
@@ -3296,7 +3481,8 @@
    "neck: sparse sampling (10.51 mm median spacing > 4 mm)"
   ],
   "flips": 2,
-  "collide": 0.3694
+  "collide": 0.3694,
+  "model_version": "v1 (cylinder band, K7 neck to BOTTOM's bar)"
  },
  {
   "k": 62,
@@ -3320,7 +3506,9 @@
    "hub": "kaa10",
    "width": 12.0,
    "t_link": 3.0,
-   "q": 0.87
+   "q": 0.87,
+   "saddle": 0,
+   "neck": "bar"
   },
   "inband14": 0.0,
   "inband10": 0.0,
@@ -3349,7 +3537,8 @@
    "link2: sparse sampling (11.05 mm median spacing > 4 mm)"
   ],
   "flips": 6,
-  "collide": 1.0
+  "collide": 1.0,
+  "model_version": "v1 (cylinder band, K7 neck to BOTTOM's bar)"
  },
  {
   "k": 63,
@@ -3373,7 +3562,9 @@
    "hub": "o20",
    "width": 12.0,
    "t_link": 3.0,
-   "q": 0.96
+   "q": 0.96,
+   "saddle": 0,
+   "neck": "bar"
   },
   "inband14": 0.0,
   "inband10": 0.0,
@@ -3403,7 +3594,8 @@
    "neck: sparse sampling (11.39 mm median spacing > 4 mm)"
   ],
   "flips": 0,
-  "collide": 1.0
+  "collide": 1.0,
+  "model_version": "v1 (cylinder band, K7 neck to BOTTOM's bar)"
  },
  {
   "k": 64,
@@ -3427,7 +3619,9 @@
    "hub": "o20",
    "width": 12.0,
    "t_link": 3.0,
-   "q": 0.93
+   "q": 0.93,
+   "saddle": 0,
+   "neck": "bar"
   },
   "inband14": 0.0441,
   "inband10": 0.0323,
@@ -3457,7 +3651,8 @@
    "link2: sparse sampling (11.42 mm median spacing > 4 mm)"
   ],
   "flips": 0,
-  "collide": 0.0
+  "collide": 0.0,
+  "model_version": "v1 (cylinder band, K7 neck to BOTTOM's bar)"
  },
  {
   "k": 65,
@@ -3481,7 +3676,9 @@
    "hub": "o20",
    "width": 12.0,
    "t_link": 3.0,
-   "q": 0.86
+   "q": 0.86,
+   "saddle": 0,
+   "neck": "bar"
   },
   "inband14": 0.1334,
   "inband10": 0.1195,
@@ -3511,7 +3708,8 @@
    "neck: sparse sampling (6.06 mm median spacing > 4 mm)"
   ],
   "flips": 0,
-  "collide": 0.0
+  "collide": 0.0,
+  "model_version": "v1 (cylinder band, K7 neck to BOTTOM's bar)"
  },
  {
   "k": 66,
@@ -3535,7 +3733,9 @@
    "hub": "o20",
    "width": 12.0,
    "t_link": 3.0,
-   "q": 0.89
+   "q": 0.89,
+   "saddle": 0,
+   "neck": "bar"
   },
   "inband14": 0.0,
   "inband10": 0.0,
@@ -3566,7 +3766,8 @@
    "neck: sparse sampling (5.36 mm median spacing > 4 mm)"
   ],
   "flips": 0,
-  "collide": 1.0
+  "collide": 1.0,
+  "model_version": "v1 (cylinder band, K7 neck to BOTTOM's bar)"
  },
  {
   "k": 67,
@@ -3590,7 +3791,9 @@
    "hub": "o20",
    "width": 12.0,
    "t_link": 3.0,
-   "q": 0.98
+   "q": 0.98,
+   "saddle": 0,
+   "neck": "bar"
   },
   "inband14": 0.0816,
   "inband10": 0.0635,
@@ -3620,7 +3823,8 @@
    "neck: sparse sampling (11.4 mm median spacing > 4 mm)"
   ],
   "flips": 0,
-  "collide": 0.4101
+  "collide": 0.4101,
+  "model_version": "v1 (cylinder band, K7 neck to BOTTOM's bar)"
  },
  {
   "k": 68,
@@ -3644,7 +3848,9 @@
    "hub": "o20",
    "width": 12.0,
    "t_link": 3.0,
-   "q": 0.9
+   "q": 0.9,
+   "saddle": 0,
+   "neck": "bar"
   },
   "inband14": 0.0406,
   "inband10": 0.0187,
@@ -3675,7 +3881,8 @@
    "neck: sparse sampling (11.43 mm median spacing > 4 mm)"
   ],
   "flips": 0,
-  "collide": 0.0
+  "collide": 0.0,
+  "model_version": "v1 (cylinder band, K7 neck to BOTTOM's bar)"
  },
  {
   "k": 69,
@@ -3699,7 +3906,9 @@
    "hub": "o20",
    "width": 12.0,
    "t_link": 3.0,
-   "q": 0.97
+   "q": 0.97,
+   "saddle": 0,
+   "neck": "bar"
   },
   "inband14": 0.066,
   "inband10": 0.0553,
@@ -3726,7 +3935,8 @@
   },
   "audit": [],
   "flips": 0,
-  "collide": 0.4521
+  "collide": 0.4521,
+  "model_version": "v1 (cylinder band, K7 neck to BOTTOM's bar)"
  },
  {
   "k": 70,
@@ -3750,7 +3960,9 @@
    "hub": "o20",
    "width": 12.0,
    "t_link": 3.0,
-   "q": 0.94
+   "q": 0.94,
+   "saddle": 0,
+   "neck": "bar"
   },
   "inband14": 0.0,
   "inband10": 0.0,
@@ -3779,7 +3991,8 @@
    "neck: sparse sampling (5.15 mm median spacing > 4 mm)"
   ],
   "flips": 3,
-  "collide": 1.0
+  "collide": 1.0,
+  "model_version": "v1 (cylinder band, K7 neck to BOTTOM's bar)"
  },
  {
   "k": 71,
@@ -3803,7 +4016,9 @@
    "hub": "o20",
    "width": 12.0,
    "t_link": 3.0,
-   "q": 0.85
+   "q": 0.85,
+   "saddle": 0,
+   "neck": "bar"
   },
   "inband14": 0.1629,
   "inband10": 0.1361,
@@ -3833,7 +4048,8 @@
    "link2: sparse sampling (11.43 mm median spacing > 4 mm)"
   ],
   "flips": 0,
-  "collide": 0.0
+  "collide": 0.0,
+  "model_version": "v1 (cylinder band, K7 neck to BOTTOM's bar)"
  },
  {
   "k": 72,
@@ -3857,7 +4073,9 @@
    "hub": "o20",
    "width": 12.0,
    "t_link": 3.0,
-   "q": 0.88
+   "q": 0.88,
+   "saddle": 0,
+   "neck": "bar"
   },
   "inband14": 0.1647,
   "inband10": 0.1387,
@@ -3887,7 +4105,8 @@
    "neck: sparse sampling (11.43 mm median spacing > 4 mm)"
   ],
   "flips": 0,
-  "collide": 0.3043
+  "collide": 0.3043,
+  "model_version": "v1 (cylinder band, K7 neck to BOTTOM's bar)"
  },
  {
   "k": 73,
@@ -3911,7 +4130,9 @@
    "hub": "o20",
    "width": 12.0,
    "t_link": 3.0,
-   "q": 0.95
+   "q": 0.95,
+   "saddle": 0,
+   "neck": "bar"
   },
   "inband14": 0.0577,
   "inband10": 0.0155,
@@ -3941,7 +4162,8 @@
    "neck: sparse sampling (10.46 mm median spacing > 4 mm)"
   ],
   "flips": 0,
-  "collide": 0.2152
+  "collide": 0.2152,
+  "model_version": "v1 (cylinder band, K7 neck to BOTTOM's bar)"
  },
  {
   "k": 74,
@@ -3965,7 +4187,9 @@
    "hub": "o20",
    "width": 12.0,
    "t_link": 3.0,
-   "q": 1.0
+   "q": 1.0,
+   "saddle": 0,
+   "neck": "bar"
   },
   "inband14": 0.0563,
   "inband10": 0.0321,
@@ -3996,7 +4220,8 @@
    "neck: sparse sampling (11.23 mm median spacing > 4 mm)"
   ],
   "flips": 0,
-  "collide": 0.4797
+  "collide": 0.4797,
+  "model_version": "v1 (cylinder band, K7 neck to BOTTOM's bar)"
  },
  {
   "k": 75,
@@ -4020,7 +4245,9 @@
    "hub": "kaa10",
    "width": 12.0,
    "t_link": 3.0,
-   "q": 0.91
+   "q": 0.91,
+   "saddle": 0,
+   "neck": "bar"
   },
   "inband14": 0.0,
   "inband10": 0.0,
@@ -4047,7 +4274,8 @@
   },
   "audit": [],
   "flips": 0,
-  "collide": 1.0
+  "collide": 1.0,
+  "model_version": "v1 (cylinder band, K7 neck to BOTTOM's bar)"
  },
  {
   "k": 76,
@@ -4071,7 +4299,9 @@
    "hub": "o20",
    "width": 12.0,
    "t_link": 3.0,
-   "q": 0.9
+   "q": 0.9,
+   "saddle": 0,
+   "neck": "bar"
   },
   "inband14": 0.1108,
   "inband10": 0.0762,
@@ -4101,7 +4331,8 @@
    "neck: sparse sampling (11.43 mm median spacing > 4 mm)"
   ],
   "flips": 0,
-  "collide": 0.0
+  "collide": 0.0,
+  "model_version": "v1 (cylinder band, K7 neck to BOTTOM's bar)"
  },
  {
   "k": 77,
@@ -4125,7 +4356,9 @@
    "hub": "kaa10",
    "width": 12.0,
    "t_link": 3.0,
-   "q": 0.98
+   "q": 0.98,
+   "saddle": 0,
+   "neck": "bar"
   },
   "inband14": 0.0004,
   "inband10": 0.0,
@@ -4156,7 +4389,8 @@
    "neck: sparse sampling (10.95 mm median spacing > 4 mm)"
   ],
   "flips": 0,
-  "collide": 0.7121
+  "collide": 0.7121,
+  "model_version": "v1 (cylinder band, K7 neck to BOTTOM's bar)"
  },
  {
   "k": 78,
@@ -4180,7 +4414,9 @@
    "hub": "o20",
    "width": 12.0,
    "t_link": 3.0,
-   "q": 0.93
+   "q": 0.93,
+   "saddle": 0,
+   "neck": "bar"
   },
   "inband14": 0.0291,
   "inband10": 0.0265,
@@ -4211,7 +4447,8 @@
    "neck: sparse sampling (10.65 mm median spacing > 4 mm)"
   ],
   "flips": 1,
-  "collide": 0.0078
+  "collide": 0.0078,
+  "model_version": "v1 (cylinder band, K7 neck to BOTTOM's bar)"
  },
  {
   "k": 79,
@@ -4235,7 +4472,9 @@
    "hub": "o20",
    "width": 12.0,
    "t_link": 3.0,
-   "q": 0.87
+   "q": 0.87,
+   "saddle": 0,
+   "neck": "bar"
   },
   "inband14": 0.0663,
   "inband10": 0.0397,
@@ -4265,7 +4504,8 @@
    "link2: sparse sampling (11.43 mm median spacing > 4 mm)"
   ],
   "flips": 0,
-  "collide": 0.0
+  "collide": 0.0,
+  "model_version": "v1 (cylinder band, K7 neck to BOTTOM's bar)"
  },
  {
   "k": 80,
@@ -4289,7 +4529,9 @@
    "hub": "o20",
    "width": 12.0,
    "t_link": 3.0,
-   "q": 0.87
+   "q": 0.87,
+   "saddle": 0,
+   "neck": "bar"
   },
   "inband14": 0.0,
   "inband10": 0.0,
@@ -4320,7 +4562,8 @@
    "neck: sparse sampling (11.42 mm median spacing > 4 mm)"
   ],
   "flips": 0,
-  "collide": 0.0
+  "collide": 0.0,
+  "model_version": "v1 (cylinder band, K7 neck to BOTTOM's bar)"
  },
  {
   "k": 81,
@@ -4344,7 +4587,9 @@
    "hub": "o20",
    "width": 12.0,
    "t_link": 3.0,
-   "q": 0.95
+   "q": 0.95,
+   "saddle": 0,
+   "neck": "bar"
   },
   "inband14": 0.0,
   "inband10": 0.0,
@@ -4375,7 +4620,8 @@
    "neck: sparse sampling (5.04 mm median spacing > 4 mm)"
   ],
   "flips": 0,
-  "collide": 1.0
+  "collide": 1.0,
+  "model_version": "v1 (cylinder band, K7 neck to BOTTOM's bar)"
  },
  {
   "k": 82,
@@ -4399,7 +4645,9 @@
    "hub": "o20",
    "width": 12.0,
    "t_link": 3.0,
-   "q": 0.98
+   "q": 0.98,
+   "saddle": 0,
+   "neck": "bar"
   },
   "inband14": 0.0,
   "inband10": 0.0,
@@ -4430,7 +4678,8 @@
    "neck: sparse sampling (11.43 mm median spacing > 4 mm)"
   ],
   "flips": 0,
-  "collide": 0.5579
+  "collide": 0.5579,
+  "model_version": "v1 (cylinder band, K7 neck to BOTTOM's bar)"
  },
  {
   "k": 83,
@@ -4454,7 +4703,9 @@
    "hub": "kaa10",
    "width": 12.0,
    "t_link": 3.0,
-   "q": 0.92
+   "q": 0.92,
+   "saddle": 0,
+   "neck": "bar"
   },
   "inband14": 0.0,
   "inband10": 0.0,
@@ -4481,7 +4732,8 @@
   },
   "audit": [],
   "flips": 0,
-  "collide": 1.0
+  "collide": 1.0,
+  "model_version": "v1 (cylinder band, K7 neck to BOTTOM's bar)"
  },
  {
   "k": 84,
@@ -4505,7 +4757,9 @@
    "hub": "kaa10",
    "width": 12.0,
    "t_link": 3.0,
-   "q": 0.88
+   "q": 0.88,
+   "saddle": 0,
+   "neck": "bar"
   },
   "inband14": 0.0,
   "inband10": 0.0,
@@ -4536,7 +4790,8 @@
    "neck: sparse sampling (11.27 mm median spacing > 4 mm)"
   ],
   "flips": 0,
-  "collide": 0.2332
+  "collide": 0.2332,
+  "model_version": "v1 (cylinder band, K7 neck to BOTTOM's bar)"
  },
  {
   "k": 85,
@@ -4560,7 +4815,9 @@
    "hub": "kaa10",
    "width": 12.0,
    "t_link": 3.0,
-   "q": 0.95
+   "q": 0.95,
+   "saddle": 0,
+   "neck": "bar"
   },
   "inband14": 0.0,
   "inband10": 0.0,
@@ -4587,7 +4844,8 @@
   },
   "audit": [],
   "flips": 0,
-  "collide": 1.0
+  "collide": 1.0,
+  "model_version": "v1 (cylinder band, K7 neck to BOTTOM's bar)"
  },
  {
   "k": 86,
@@ -4611,7 +4869,9 @@
    "hub": "kaa10",
    "width": 12.0,
    "t_link": 3.0,
-   "q": 0.99
+   "q": 0.99,
+   "saddle": 0,
+   "neck": "bar"
   },
   "inband14": 0.0699,
   "inband10": 0.0442,
@@ -4642,7 +4902,8 @@
    "neck: sparse sampling (11.23 mm median spacing > 4 mm)"
   ],
   "flips": 0,
-  "collide": 0.4369
+  "collide": 0.4369,
+  "model_version": "v1 (cylinder band, K7 neck to BOTTOM's bar)"
  },
  {
   "k": 87,
@@ -4666,7 +4927,9 @@
    "hub": "o20",
    "width": 12.0,
    "t_link": 3.0,
-   "q": 0.91
+   "q": 0.91,
+   "saddle": 0,
+   "neck": "bar"
   },
   "inband14": 0.0,
   "inband10": 0.0,
@@ -4693,7 +4956,8 @@
   },
   "audit": [],
   "flips": 0,
-  "collide": 0.012
+  "collide": 0.012,
+  "model_version": "v1 (cylinder band, K7 neck to BOTTOM's bar)"
  },
  {
   "k": 88,
@@ -4717,7 +4981,9 @@
    "hub": "o20",
    "width": 12.0,
    "t_link": 3.0,
-   "q": 0.9
+   "q": 0.9,
+   "saddle": 0,
+   "neck": "bar"
   },
   "inband14": 0.0,
   "inband10": 0.0,
@@ -4747,7 +5013,8 @@
    "neck: sparse sampling (11.33 mm median spacing > 4 mm)"
   ],
   "flips": 0,
-  "collide": 1.0
+  "collide": 1.0,
+  "model_version": "v1 (cylinder band, K7 neck to BOTTOM's bar)"
  },
  {
   "k": 89,
@@ -4771,7 +5038,9 @@
    "hub": "o20",
    "width": 12.0,
    "t_link": 3.0,
-   "q": 0.97
+   "q": 0.97,
+   "saddle": 0,
+   "neck": "bar"
   },
   "inband14": 0.176,
   "inband10": 0.0975,
@@ -4798,7 +5067,8 @@
   },
   "audit": [],
   "flips": 0,
-  "collide": 0.1275
+  "collide": 0.1275,
+  "model_version": "v1 (cylinder band, K7 neck to BOTTOM's bar)"
  },
  {
   "k": 90,
@@ -4822,7 +5092,9 @@
    "hub": "o20",
    "width": 12.0,
    "t_link": 3.0,
-   "q": 0.94
+   "q": 0.94,
+   "saddle": 0,
+   "neck": "bar"
   },
   "inband14": 0.0,
   "inband10": 0.0,
@@ -4853,7 +5125,8 @@
    "neck: sparse sampling (11.43 mm median spacing > 4 mm)"
   ],
   "flips": 0,
-  "collide": 0.6625
+  "collide": 0.6625,
+  "model_version": "v1 (cylinder band, K7 neck to BOTTOM's bar)"
  },
  {
   "k": 91,
@@ -4877,7 +5150,9 @@
    "hub": "o20",
    "width": 12.0,
    "t_link": 3.0,
-   "q": 0.86
+   "q": 0.86,
+   "saddle": 0,
+   "neck": "bar"
   },
   "inband14": 0.0,
   "inband10": 0.0,
@@ -4904,7 +5179,8 @@
   },
   "audit": [],
   "flips": 2,
-  "collide": 0.5259
+  "collide": 0.5259,
+  "model_version": "v1 (cylinder band, K7 neck to BOTTOM's bar)"
  },
  {
   "k": 92,
@@ -4928,7 +5204,9 @@
    "hub": "o20",
    "width": 12.0,
    "t_link": 3.0,
-   "q": 0.88
+   "q": 0.88,
+   "saddle": 0,
+   "neck": "bar"
   },
   "inband14": 0.026,
   "inband10": 0.0239,
@@ -4959,7 +5237,8 @@
    "neck: sparse sampling (10.56 mm median spacing > 4 mm)"
   ],
   "flips": 0,
-  "collide": 0.1589
+  "collide": 0.1589,
+  "model_version": "v1 (cylinder band, K7 neck to BOTTOM's bar)"
  },
  {
   "k": 93,
@@ -4983,7 +5262,9 @@
    "hub": "o20",
    "width": 12.0,
    "t_link": 3.0,
-   "q": 0.96
+   "q": 0.96,
+   "saddle": 0,
+   "neck": "bar"
   },
   "inband14": 0.132,
   "inband10": 0.085,
@@ -5010,7 +5291,8 @@
   },
   "audit": [],
   "flips": 3,
-  "collide": 0.0893
+  "collide": 0.0893,
+  "model_version": "v1 (cylinder band, K7 neck to BOTTOM's bar)"
  },
  {
   "k": 94,
@@ -5034,7 +5316,9 @@
    "hub": "kaa10",
    "width": 12.0,
    "t_link": 3.0,
-   "q": 0.99
+   "q": 0.99,
+   "saddle": 0,
+   "neck": "bar"
   },
   "inband14": 0.0669,
   "inband10": 0.0537,
@@ -5065,7 +5349,8 @@
    "neck: sparse sampling (11.4 mm median spacing > 4 mm)"
   ],
   "flips": 0,
-  "collide": 0.0235
+  "collide": 0.0235,
+  "model_version": "v1 (cylinder band, K7 neck to BOTTOM's bar)"
  },
  {
   "k": 95,
@@ -5089,7 +5374,9 @@
    "hub": "o20",
    "width": 12.0,
    "t_link": 3.0,
-   "q": 0.92
+   "q": 0.92,
+   "saddle": 0,
+   "neck": "bar"
   },
   "inband14": 0.0288,
   "inband10": 0.0052,
@@ -5119,7 +5406,8 @@
    "link2: sparse sampling (11.43 mm median spacing > 4 mm)"
   ],
   "flips": 0,
-  "collide": 0.0462
+  "collide": 0.0462,
+  "model_version": "v1 (cylinder band, K7 neck to BOTTOM's bar)"
  },
  {
   "k": 96,
@@ -5143,7 +5431,9 @@
    "hub": "o20",
    "width": 12.0,
    "t_link": 3.0,
-   "q": 0.89
+   "q": 0.89,
+   "saddle": 0,
+   "neck": "bar"
   },
   "inband14": 0.0,
   "inband10": 0.0,
@@ -5174,7 +5464,8 @@
    "neck: sparse sampling (5.38 mm median spacing > 4 mm)"
   ],
   "flips": 0,
-  "collide": 1.0
+  "collide": 1.0,
+  "model_version": "v1 (cylinder band, K7 neck to BOTTOM's bar)"
  },
  {
   "k": 97,
@@ -5198,7 +5489,9 @@
    "hub": "o20",
    "width": 12.0,
    "t_link": 3.0,
-   "q": 0.97
+   "q": 0.97,
+   "saddle": 0,
+   "neck": "bar"
   },
   "inband14": 0.0,
   "inband10": 0.0,
@@ -5228,7 +5521,8 @@
    "link2: sparse sampling (11.52 mm median spacing > 4 mm)"
   ],
   "flips": 0,
-  "collide": 0.2484
+  "collide": 0.2484,
+  "model_version": "v1 (cylinder band, K7 neck to BOTTOM's bar)"
  },
  {
   "k": 98,
@@ -5252,7 +5546,9 @@
    "hub": "o20",
    "width": 12.0,
    "t_link": 3.0,
-   "q": 0.93
+   "q": 0.93,
+   "saddle": 0,
+   "neck": "bar"
   },
   "inband14": 0.155,
   "inband10": 0.1139,
@@ -5282,7 +5578,8 @@
    "neck: sparse sampling (11.43 mm median spacing > 4 mm)"
   ],
   "flips": 1,
-  "collide": 0.6275
+  "collide": 0.6275,
+  "model_version": "v1 (cylinder band, K7 neck to BOTTOM's bar)"
  },
  {
   "k": 99,
@@ -5306,7 +5603,9 @@
    "hub": "o20",
    "width": 12.0,
    "t_link": 3.0,
-   "q": 0.86
+   "q": 0.86,
+   "saddle": 0,
+   "neck": "bar"
   },
   "inband14": 0.2329,
   "inband10": 0.1057,
@@ -5333,7 +5632,8 @@
   },
   "audit": [],
   "flips": 0,
-  "collide": 0.3417
+  "collide": 0.3417,
+  "model_version": "v1 (cylinder band, K7 neck to BOTTOM's bar)"
  },
  {
   "k": 100,
@@ -5357,7 +5657,9 @@
    "hub": "o20",
    "width": 12.0,
    "t_link": 3.0,
-   "q": 0.96
+   "q": 0.96,
+   "saddle": 0,
+   "neck": "bar"
   },
   "inband14": 0.0,
   "inband10": 0.0,
@@ -5386,7 +5688,8 @@
    "link2: sparse sampling (4.51 mm median spacing > 4 mm)"
   ],
   "flips": 0,
-  "collide": 0.1907
+  "collide": 0.1907,
+  "model_version": "v1 (cylinder band, K7 neck to BOTTOM's bar)"
  },
  {
   "k": 101,
@@ -5410,7 +5713,9 @@
    "hub": "o20",
    "width": 12.0,
    "t_link": 3.0,
-   "q": 0.87
+   "q": 0.87,
+   "saddle": 0,
+   "neck": "bar"
   },
   "inband14": 0.1284,
   "inband10": 0.113,
@@ -5440,7 +5745,8 @@
    "neck: sparse sampling (10.2 mm median spacing > 4 mm)"
   ],
   "flips": 0,
-  "collide": 0.6667
+  "collide": 0.6667,
+  "model_version": "v1 (cylinder band, K7 neck to BOTTOM's bar)"
  },
  {
   "k": 102,
@@ -5464,7 +5770,9 @@
    "hub": "o20",
    "width": 12.0,
    "t_link": 3.0,
-   "q": 0.92
+   "q": 0.92,
+   "saddle": 0,
+   "neck": "bar"
   },
   "inband14": 0.0695,
   "inband10": 0.0679,
@@ -5494,7 +5802,8 @@
    "link2: sparse sampling (11.42 mm median spacing > 4 mm)"
   ],
   "flips": 0,
-  "collide": 0.0
+  "collide": 0.0,
+  "model_version": "v1 (cylinder band, K7 neck to BOTTOM's bar)"
  },
  {
   "k": 103,
@@ -5518,7 +5827,9 @@
    "hub": "o20",
    "width": 12.0,
    "t_link": 3.0,
-   "q": 0.99
+   "q": 0.99,
+   "saddle": 0,
+   "neck": "bar"
   },
   "inband14": 0.0,
   "inband10": 0.0,
@@ -5549,7 +5860,8 @@
    "neck: sparse sampling (11.43 mm median spacing > 4 mm)"
   ],
   "flips": 0,
-  "collide": 0.0132
+  "collide": 0.0132,
+  "model_version": "v1 (cylinder band, K7 neck to BOTTOM's bar)"
  },
  {
   "k": 104,
@@ -5573,7 +5885,9 @@
    "hub": "kaa10",
    "width": 12.0,
    "t_link": 3.0,
-   "q": 0.98
+   "q": 0.98,
+   "saddle": 0,
+   "neck": "bar"
   },
   "inband14": 0.0,
   "inband10": 0.0,
@@ -5600,7 +5914,8 @@
   },
   "audit": [],
   "flips": 0,
-  "collide": 1.0
+  "collide": 1.0,
+  "model_version": "v1 (cylinder band, K7 neck to BOTTOM's bar)"
  },
  {
   "k": 105,
@@ -5624,7 +5939,9 @@
    "hub": "o20",
    "width": 12.0,
    "t_link": 3.0,
-   "q": 0.89
+   "q": 0.89,
+   "saddle": 0,
+   "neck": "bar"
   },
   "inband14": 0.1358,
   "inband10": 0.106,
@@ -5654,7 +5971,8 @@
    "neck: sparse sampling (4.27 mm median spacing > 4 mm)"
   ],
   "flips": 0,
-  "collide": 0.0105
+  "collide": 0.0105,
+  "model_version": "v1 (cylinder band, K7 neck to BOTTOM's bar)"
  },
  {
   "k": 106,
@@ -5678,7 +5996,9 @@
    "hub": "o20",
    "width": 12.0,
    "t_link": 3.0,
-   "q": 0.87
+   "q": 0.87,
+   "saddle": 0,
+   "neck": "bar"
   },
   "inband14": 0.263,
   "inband10": 0.2117,
@@ -5705,7 +6025,8 @@
   },
   "audit": [],
   "flips": 0,
-  "collide": 0.186
+  "collide": 0.186,
+  "model_version": "v1 (cylinder band, K7 neck to BOTTOM's bar)"
  },
  {
   "k": 107,
@@ -5729,7 +6050,9 @@
    "hub": "kaa10",
    "width": 12.0,
    "t_link": 3.0,
-   "q": 0.93
+   "q": 0.93,
+   "saddle": 0,
+   "neck": "bar"
   },
   "inband14": 0.0,
   "inband10": 0.0,
@@ -5760,7 +6083,8 @@
    "neck: sparse sampling (11.43 mm median spacing > 4 mm)"
   ],
   "flips": 0,
-  "collide": 0.0
+  "collide": 0.0,
+  "model_version": "v1 (cylinder band, K7 neck to BOTTOM's bar)"
  },
  {
   "k": 108,
@@ -5784,7 +6108,9 @@
    "hub": "o20",
    "width": 12.0,
    "t_link": 3.0,
-   "q": 0.95
+   "q": 0.95,
+   "saddle": 0,
+   "neck": "bar"
   },
   "inband14": 0.1638,
   "inband10": 0.1396,
@@ -5811,7 +6137,8 @@
   },
   "audit": [],
   "flips": 0,
-  "collide": 0.3846
+  "collide": 0.3846,
+  "model_version": "v1 (cylinder band, K7 neck to BOTTOM's bar)"
  },
  {
   "k": 109,
@@ -5835,7 +6162,9 @@
    "hub": "o20",
    "width": 12.0,
    "t_link": 3.0,
-   "q": 0.89
+   "q": 0.89,
+   "saddle": 0,
+   "neck": "bar"
   },
   "inband14": 0.2121,
   "inband10": 0.1675,
@@ -5865,7 +6194,8 @@
    "neck: sparse sampling (9.23 mm median spacing > 4 mm)"
   ],
   "flips": 1,
-  "collide": 0.0
+  "collide": 0.0,
+  "model_version": "v1 (cylinder band, K7 neck to BOTTOM's bar)"
  },
  {
   "k": 110,
@@ -5889,7 +6219,9 @@
    "hub": "o20",
    "width": 12.0,
    "t_link": 3.0,
-   "q": 0.92
+   "q": 0.92,
+   "saddle": 0,
+   "neck": "bar"
   },
   "inband14": 0.0,
   "inband10": 0.0,
@@ -5916,7 +6248,8 @@
   },
   "audit": [],
   "flips": 0,
-  "collide": 0.8881
+  "collide": 0.8881,
+  "model_version": "v1 (cylinder band, K7 neck to BOTTOM's bar)"
  },
  {
   "k": 111,
@@ -5940,7 +6273,9 @@
    "hub": "o20",
    "width": 12.0,
    "t_link": 3.0,
-   "q": 1.0
+   "q": 1.0,
+   "saddle": 0,
+   "neck": "bar"
   },
   "inband14": 0.0,
   "inband10": 0.0,
@@ -5970,7 +6305,8 @@
    "neck: sparse sampling (11.43 mm median spacing > 4 mm)"
   ],
   "flips": 0,
-  "collide": 0.746
+  "collide": 0.746,
+  "model_version": "v1 (cylinder band, K7 neck to BOTTOM's bar)"
  },
  {
   "k": 112,
@@ -5994,7 +6330,9 @@
    "hub": "kaa10",
    "width": 12.0,
    "t_link": 3.0,
-   "q": 0.96
+   "q": 0.96,
+   "saddle": 0,
+   "neck": "bar"
   },
   "inband14": 0.0706,
   "inband10": 0.0392,
@@ -6024,7 +6362,8 @@
    "link2: sparse sampling (11.43 mm median spacing > 4 mm)"
   ],
   "flips": 0,
-  "collide": 0.0
+  "collide": 0.0,
+  "model_version": "v1 (cylinder band, K7 neck to BOTTOM's bar)"
  },
  {
   "k": 113,
@@ -6048,7 +6387,9 @@
    "hub": "kaa10",
    "width": 12.0,
    "t_link": 3.0,
-   "q": 0.9
+   "q": 0.9,
+   "saddle": 0,
+   "neck": "bar"
   },
   "inband14": 0.2209,
   "inband10": 0.0987,
@@ -6079,7 +6420,8 @@
    "neck: sparse sampling (10.9 mm median spacing > 4 mm)"
   ],
   "flips": 0,
-  "collide": 0.0391
+  "collide": 0.0391,
+  "model_version": "v1 (cylinder band, K7 neck to BOTTOM's bar)"
  },
  {
   "k": 114,
@@ -6103,7 +6445,9 @@
    "hub": "o20",
    "width": 12.0,
    "t_link": 3.0,
-   "q": 0.85
+   "q": 0.85,
+   "saddle": 0,
+   "neck": "bar"
   },
   "inband14": 0.0748,
   "inband10": 0.0663,
@@ -6132,7 +6476,8 @@
    "link2: sparse sampling (5.7 mm median spacing > 4 mm)"
   ],
   "flips": 2,
-  "collide": 0.0164
+  "collide": 0.0164,
+  "model_version": "v1 (cylinder band, K7 neck to BOTTOM's bar)"
  },
  {
   "k": 115,
@@ -6156,7 +6501,9 @@
    "hub": "o20",
    "width": 12.0,
    "t_link": 3.0,
-   "q": 0.94
+   "q": 0.94,
+   "saddle": 0,
+   "neck": "bar"
   },
   "inband14": 0.0,
   "inband10": 0.0,
@@ -6186,7 +6533,8 @@
    "neck: sparse sampling (11.43 mm median spacing > 4 mm)"
   ],
   "flips": 0,
-  "collide": 0.0
+  "collide": 0.0,
+  "model_version": "v1 (cylinder band, K7 neck to BOTTOM's bar)"
  },
  {
   "k": 116,
@@ -6210,7 +6558,9 @@
    "hub": "kaa10",
    "width": 12.0,
    "t_link": 3.0,
-   "q": 0.97
+   "q": 0.97,
+   "saddle": 0,
+   "neck": "bar"
   },
   "inband14": 0.058,
   "inband10": 0.0126,
@@ -6241,7 +6591,8 @@
    "neck: sparse sampling (10.14 mm median spacing > 4 mm)"
   ],
   "flips": 1,
-  "collide": 0.0053
+  "collide": 0.0053,
+  "model_version": "v1 (cylinder band, K7 neck to BOTTOM's bar)"
  },
  {
   "k": 117,
@@ -6265,7 +6616,9 @@
    "hub": "o20",
    "width": 12.0,
    "t_link": 3.0,
-   "q": 0.89
+   "q": 0.89,
+   "saddle": 0,
+   "neck": "bar"
   },
   "inband14": 0.0,
   "inband10": 0.0,
@@ -6295,7 +6648,8 @@
    "neck: sparse sampling (11.43 mm median spacing > 4 mm)"
   ],
   "flips": 0,
-  "collide": 0.8054
+  "collide": 0.8054,
+  "model_version": "v1 (cylinder band, K7 neck to BOTTOM's bar)"
  },
  {
   "k": 118,
@@ -6319,7 +6673,9 @@
    "hub": "o20",
    "width": 12.0,
    "t_link": 3.0,
-   "q": 0.86
+   "q": 0.86,
+   "saddle": 0,
+   "neck": "bar"
   },
   "inband14": 0.1055,
   "inband10": 0.0596,
@@ -6349,7 +6705,8 @@
    "link2: sparse sampling (8.97 mm median spacing > 4 mm)"
   ],
   "flips": 0,
-  "collide": 0.0
+  "collide": 0.0,
+  "model_version": "v1 (cylinder band, K7 neck to BOTTOM's bar)"
  },
  {
   "k": 119,
@@ -6373,7 +6730,9 @@
    "hub": "o20",
    "width": 12.0,
    "t_link": 3.0,
-   "q": 0.93
+   "q": 0.93,
+   "saddle": 0,
+   "neck": "bar"
   },
   "inband14": 0.0,
   "inband10": 0.0,
@@ -6403,7 +6762,8 @@
    "neck: sparse sampling (11.14 mm median spacing > 4 mm)"
   ],
   "flips": 0,
-  "collide": 0.8983
+  "collide": 0.8983,
+  "model_version": "v1 (cylinder band, K7 neck to BOTTOM's bar)"
  },
  {
   "k": 120,
@@ -6427,7 +6787,9 @@
    "hub": "o20",
    "width": 12.0,
    "t_link": 3.0,
-   "q": 0.96
+   "q": 0.96,
+   "saddle": 0,
+   "neck": "bar"
   },
   "inband14": 0.2643,
   "inband10": 0.1792,
@@ -6454,7 +6816,8 @@
   },
   "audit": [],
   "flips": 0,
-  "collide": 0.0
+  "collide": 0.0,
+  "model_version": "v1 (cylinder band, K7 neck to BOTTOM's bar)"
  },
  {
   "k": 121,
@@ -6478,7 +6841,9 @@
    "hub": "o20",
    "width": 12.0,
    "t_link": 3.0,
-   "q": 0.87
+   "q": 0.87,
+   "saddle": 0,
+   "neck": "bar"
   },
   "inband14": 0.1441,
   "inband10": 0.0923,
@@ -6508,7 +6873,8 @@
    "neck: sparse sampling (11.23 mm median spacing > 4 mm)"
   ],
   "flips": 2,
-  "collide": 0.4227
+  "collide": 0.4227,
+  "model_version": "v1 (cylinder band, K7 neck to BOTTOM's bar)"
  },
  {
   "k": 122,
@@ -6532,7 +6898,9 @@
    "hub": "o20",
    "width": 12.0,
    "t_link": 3.0,
-   "q": 0.92
+   "q": 0.92,
+   "saddle": 0,
+   "neck": "bar"
   },
   "inband14": 0.0664,
   "inband10": 0.0417,
@@ -6562,7 +6930,8 @@
    "link2: sparse sampling (11.33 mm median spacing > 4 mm)"
   ],
   "flips": 0,
-  "collide": 0.0
+  "collide": 0.0,
+  "model_version": "v1 (cylinder band, K7 neck to BOTTOM's bar)"
  },
  {
   "k": 123,
@@ -6586,7 +6955,9 @@
    "hub": "kaa10",
    "width": 12.0,
    "t_link": 3.0,
-   "q": 0.99
+   "q": 0.99,
+   "saddle": 0,
+   "neck": "bar"
   },
   "inband14": 0.0,
   "inband10": 0.0,
@@ -6616,7 +6987,8 @@
    "neck: sparse sampling (10.76 mm median spacing > 4 mm)"
   ],
   "flips": 2,
-  "collide": 1.0
+  "collide": 1.0,
+  "model_version": "v1 (cylinder band, K7 neck to BOTTOM's bar)"
  },
  {
   "k": 124,
@@ -6640,7 +7012,9 @@
    "hub": "o20",
    "width": 12.0,
    "t_link": 3.0,
-   "q": 0.97
+   "q": 0.97,
+   "saddle": 0,
+   "neck": "bar"
   },
   "inband14": 0.0,
   "inband10": 0.0,
@@ -6670,7 +7044,8 @@
    "link2: sparse sampling (11.41 mm median spacing > 4 mm)"
   ],
   "flips": 0,
-  "collide": 0.0
+  "collide": 0.0,
+  "model_version": "v1 (cylinder band, K7 neck to BOTTOM's bar)"
  },
  {
   "k": 125,
@@ -6694,7 +7069,9 @@
    "hub": "o20",
    "width": 12.0,
    "t_link": 3.0,
-   "q": 0.9
+   "q": 0.9,
+   "saddle": 0,
+   "neck": "bar"
   },
   "inband14": 0.0,
   "inband10": 0.0,
@@ -6724,7 +7101,8 @@
    "neck: sparse sampling (11.13 mm median spacing > 4 mm)"
   ],
   "flips": 0,
-  "collide": 0.6261
+  "collide": 0.6261,
+  "model_version": "v1 (cylinder band, K7 neck to BOTTOM's bar)"
  },
  {
   "k": 126,
@@ -6748,7 +7126,9 @@
    "hub": "o20",
    "width": 12.0,
    "t_link": 3.0,
-   "q": 0.86
+   "q": 0.86,
+   "saddle": 0,
+   "neck": "bar"
   },
   "inband14": 0.0525,
   "inband10": 0.0518,
@@ -6778,7 +7158,8 @@
    "link2: sparse sampling (10.42 mm median spacing > 4 mm)"
   ],
   "flips": 6,
-  "collide": 0.0
+  "collide": 0.0,
+  "model_version": "v1 (cylinder band, K7 neck to BOTTOM's bar)"
  },
  {
   "k": 127,
@@ -6802,7 +7183,9 @@
    "hub": "kaa10",
    "width": 12.0,
    "t_link": 3.0,
-   "q": 0.94
+   "q": 0.94,
+   "saddle": 0,
+   "neck": "bar"
   },
   "inband14": 0.0,
   "inband10": 0.0,
@@ -6832,7 +7215,8 @@
    "neck: sparse sampling (10.08 mm median spacing > 4 mm)"
   ],
   "flips": 1,
-  "collide": 1.0
+  "collide": 1.0,
+  "model_version": "v1 (cylinder band, K7 neck to BOTTOM's bar)"
  },
  {
   "k": 128,
@@ -6856,7 +7240,9 @@
    "hub": "o20",
    "width": 12.0,
    "t_link": 3.0,
-   "q": 0.94
+   "q": 0.94,
+   "saddle": 0,
+   "neck": "bar"
   },
   "inband14": 0.0,
   "inband10": 0.0,
@@ -6886,7 +7272,8 @@
    "link2: sparse sampling (11.43 mm median spacing > 4 mm)"
   ],
   "flips": 0,
-  "collide": 1.0
+  "collide": 1.0,
+  "model_version": "v1 (cylinder band, K7 neck to BOTTOM's bar)"
  },
  {
   "k": 129,
@@ -6910,7 +7297,9 @@
    "hub": "kaa10",
    "width": 12.0,
    "t_link": 3.0,
-   "q": 0.88
+   "q": 0.88,
+   "saddle": 0,
+   "neck": "bar"
   },
   "inband14": 0.0,
   "inband10": 0.0,
@@ -6940,7 +7329,8 @@
    "neck: sparse sampling (11.43 mm median spacing > 4 mm)"
   ],
   "flips": 0,
-  "collide": 1.0
+  "collide": 1.0,
+  "model_version": "v1 (cylinder band, K7 neck to BOTTOM's bar)"
  },
  {
   "k": 130,
@@ -6964,7 +7354,9 @@
    "hub": "o20",
    "width": 12.0,
    "t_link": 3.0,
-   "q": 0.91
+   "q": 0.91,
+   "saddle": 0,
+   "neck": "bar"
   },
   "inband14": 0.2422,
   "inband10": 0.18,
@@ -6991,7 +7383,8 @@
   },
   "audit": [],
   "flips": 0,
-  "collide": 0.0049
+  "collide": 0.0049,
+  "model_version": "v1 (cylinder band, K7 neck to BOTTOM's bar)"
  },
  {
   "k": 131,
@@ -7015,7 +7408,9 @@
    "hub": "o20",
    "width": 12.0,
    "t_link": 3.0,
-   "q": 0.99
+   "q": 0.99,
+   "saddle": 0,
+   "neck": "bar"
   },
   "inband14": 0.0984,
   "inband10": 0.0594,
@@ -7045,7 +7440,8 @@
    "neck: sparse sampling (11.43 mm median spacing > 4 mm)"
   ],
   "flips": 0,
-  "collide": 0.9037
+  "collide": 0.9037,
+  "model_version": "v1 (cylinder band, K7 neck to BOTTOM's bar)"
  },
  {
   "k": 132,
@@ -7069,7 +7465,9 @@
    "hub": "o20",
    "width": 12.0,
    "t_link": 3.0,
-   "q": 0.96
+   "q": 0.96,
+   "saddle": 0,
+   "neck": "bar"
   },
   "inband14": 0.1572,
   "inband10": 0.1268,
@@ -7099,7 +7497,8 @@
    "neck: sparse sampling (11.43 mm median spacing > 4 mm)"
   ],
   "flips": 0,
-  "collide": 0.746
+  "collide": 0.746,
+  "model_version": "v1 (cylinder band, K7 neck to BOTTOM's bar)"
  },
  {
   "k": 133,
@@ -7123,7 +7522,9 @@
    "hub": "o20",
    "width": 12.0,
    "t_link": 3.0,
-   "q": 0.9
+   "q": 0.9,
+   "saddle": 0,
+   "neck": "bar"
   },
   "inband14": 0.0522,
   "inband10": 0.0419,
@@ -7150,7 +7551,8 @@
   },
   "audit": [],
   "flips": 0,
-  "collide": 0.7055
+  "collide": 0.7055,
+  "model_version": "v1 (cylinder band, K7 neck to BOTTOM's bar)"
  },
  {
   "k": 134,
@@ -7174,7 +7576,9 @@
    "hub": "o20",
    "width": 12.0,
    "t_link": 3.0,
-   "q": 0.85
+   "q": 0.85,
+   "saddle": 0,
+   "neck": "bar"
   },
   "inband14": 0.0,
   "inband10": 0.0,
@@ -7204,7 +7608,8 @@
    "link2: sparse sampling (11.43 mm median spacing > 4 mm)"
   ],
   "flips": 0,
-  "collide": 1.0
+  "collide": 1.0,
+  "model_version": "v1 (cylinder band, K7 neck to BOTTOM's bar)"
  },
  {
   "k": 135,
@@ -7228,7 +7633,9 @@
    "hub": "o20",
    "width": 12.0,
    "t_link": 3.0,
-   "q": 0.93
+   "q": 0.93,
+   "saddle": 0,
+   "neck": "bar"
   },
   "inband14": 0.2638,
   "inband10": 0.1477,
@@ -7255,7 +7662,8 @@
   },
   "audit": [],
   "flips": 0,
-  "collide": 0.5775
+  "collide": 0.5775,
+  "model_version": "v1 (cylinder band, K7 neck to BOTTOM's bar)"
  },
  {
   "k": 136,
@@ -7279,7 +7687,9 @@
    "hub": "o20",
    "width": 12.0,
    "t_link": 3.0,
-   "q": 0.95
+   "q": 0.95,
+   "saddle": 0,
+   "neck": "bar"
   },
   "inband14": 0.0,
   "inband10": 0.0,
@@ -7309,7 +7719,8 @@
    "neck: sparse sampling (11.43 mm median spacing > 4 mm)"
   ],
   "flips": 0,
-  "collide": 1.0
+  "collide": 1.0,
+  "model_version": "v1 (cylinder band, K7 neck to BOTTOM's bar)"
  },
  {
   "k": 137,
@@ -7333,7 +7744,9 @@
    "hub": "kaa10",
    "width": 12.0,
    "t_link": 3.0,
-   "q": 0.89
+   "q": 0.89,
+   "saddle": 0,
+   "neck": "bar"
   },
   "inband14": 0.1558,
   "inband10": 0.0907,
@@ -7363,7 +7776,8 @@
    "link2: sparse sampling (11.43 mm median spacing > 4 mm)"
   ],
   "flips": 0,
-  "collide": 0.0
+  "collide": 0.0,
+  "model_version": "v1 (cylinder band, K7 neck to BOTTOM's bar)"
  },
  {
   "k": 138,
@@ -7387,7 +7801,9 @@
    "hub": "o20",
    "width": 12.0,
    "t_link": 3.0,
-   "q": 0.91
+   "q": 0.91,
+   "saddle": 0,
+   "neck": "bar"
   },
   "inband14": 0.0,
   "inband10": 0.0,
@@ -7417,7 +7833,8 @@
    "neck: sparse sampling (10.44 mm median spacing > 4 mm)"
   ],
   "flips": 0,
-  "collide": 0.7981
+  "collide": 0.7981,
+  "model_version": "v1 (cylinder band, K7 neck to BOTTOM's bar)"
  },
  {
   "k": 139,
@@ -7441,7 +7858,9 @@
    "hub": "o20",
    "width": 12.0,
    "t_link": 3.0,
-   "q": 1.0
+   "q": 1.0,
+   "saddle": 0,
+   "neck": "bar"
   },
   "inband14": 0.0114,
   "inband10": 0.0065,
@@ -7472,7 +7891,8 @@
    "neck: sparse sampling (10.93 mm median spacing > 4 mm)"
   ],
   "flips": 0,
-  "collide": 0.3492
+  "collide": 0.3492,
+  "model_version": "v1 (cylinder band, K7 neck to BOTTOM's bar)"
  },
  {
   "k": 140,
@@ -7496,7 +7916,9 @@
    "hub": "o20",
    "width": 12.0,
    "t_link": 3.0,
-   "q": 0.98
+   "q": 0.98,
+   "saddle": 0,
+   "neck": "bar"
   },
   "inband14": 0.0,
   "inband10": 0.0,
@@ -7527,7 +7949,8 @@
    "neck: sparse sampling (11.43 mm median spacing > 4 mm)"
   ],
   "flips": 0,
-  "collide": 0.0
+  "collide": 0.0,
+  "model_version": "v1 (cylinder band, K7 neck to BOTTOM's bar)"
  },
  {
   "k": 141,
@@ -7551,7 +7974,9 @@
    "hub": "o20",
    "width": 12.0,
    "t_link": 3.0,
-   "q": 0.89
+   "q": 0.89,
+   "saddle": 0,
+   "neck": "bar"
   },
   "inband14": 0.1611,
   "inband10": 0.1002,
@@ -7580,7 +8005,8 @@
    "link2: sparse sampling (10.58 mm median spacing > 4 mm)"
   ],
   "flips": 0,
-  "collide": 0.0
+  "collide": 0.0,
+  "model_version": "v1 (cylinder band, K7 neck to BOTTOM's bar)"
  },
  {
   "k": 142,
@@ -7604,7 +8030,9 @@
    "hub": "o20",
    "width": 12.0,
    "t_link": 3.0,
-   "q": 0.86
+   "q": 0.86,
+   "saddle": 0,
+   "neck": "bar"
   },
   "inband14": 0.0399,
   "inband10": 0.0333,
@@ -7634,7 +8062,8 @@
    "neck: sparse sampling (11.03 mm median spacing > 4 mm)"
   ],
   "flips": 5,
-  "collide": 0.0464
+  "collide": 0.0464,
+  "model_version": "v1 (cylinder band, K7 neck to BOTTOM's bar)"
  },
  {
   "k": 143,
@@ -7658,7 +8087,9 @@
    "hub": "kaa10",
    "width": 12.0,
    "t_link": 3.0,
-   "q": 0.93
+   "q": 0.93,
+   "saddle": 0,
+   "neck": "bar"
   },
   "inband14": 0.0,
   "inband10": 0.0,
@@ -7688,7 +8119,8 @@
    "link2: sparse sampling (11.43 mm median spacing > 4 mm)"
   ],
   "flips": 0,
-  "collide": 0.0
+  "collide": 0.0,
+  "model_version": "v1 (cylinder band, K7 neck to BOTTOM's bar)"
  },
  {
   "k": 144,
@@ -7712,7 +8144,9 @@
    "hub": "kaa10",
    "width": 12.0,
    "t_link": 3.0,
-   "q": 0.96
+   "q": 0.96,
+   "saddle": 0,
+   "neck": "bar"
   },
   "inband14": 0.0,
   "inband10": 0.0,
@@ -7742,7 +8176,8 @@
    "neck: sparse sampling (11.43 mm median spacing > 4 mm)"
   ],
   "flips": 0,
-  "collide": 1.0
+  "collide": 1.0,
+  "model_version": "v1 (cylinder band, K7 neck to BOTTOM's bar)"
  },
  {
   "k": 145,
@@ -7766,7 +8201,9 @@
    "hub": "kaa10",
    "width": 12.0,
    "t_link": 3.0,
-   "q": 0.87
+   "q": 0.87,
+   "saddle": 0,
+   "neck": "bar"
   },
   "inband14": 0.0,
   "inband10": 0.0,
@@ -7793,7 +8230,8 @@
   },
   "audit": [],
   "flips": 0,
-  "collide": 1.0
+  "collide": 1.0,
+  "model_version": "v1 (cylinder band, K7 neck to BOTTOM's bar)"
  },
  {
   "k": 146,
@@ -7817,7 +8255,9 @@
    "hub": "o20",
    "width": 12.0,
    "t_link": 3.0,
-   "q": 0.92
+   "q": 0.92,
+   "saddle": 0,
+   "neck": "bar"
   },
   "inband14": 0.1416,
   "inband10": 0.0661,
@@ -7848,7 +8288,8 @@
    "neck: sparse sampling (9.4 mm median spacing > 4 mm)"
   ],
   "flips": 0,
-  "collide": 0.0252
+  "collide": 0.0252,
+  "model_version": "v1 (cylinder band, K7 neck to BOTTOM's bar)"
  },
  {
   "k": 147,
@@ -7872,7 +8313,9 @@
    "hub": "o20",
    "width": 12.0,
    "t_link": 3.0,
-   "q": 0.98
+   "q": 0.98,
+   "saddle": 0,
+   "neck": "bar"
   },
   "inband14": 0.1571,
   "inband10": 0.0721,
@@ -7899,7 +8342,8 @@
   },
   "audit": [],
   "flips": 0,
-  "collide": 0.191
+  "collide": 0.191,
+  "model_version": "v1 (cylinder band, K7 neck to BOTTOM's bar)"
  },
  {
   "k": 148,
@@ -7923,7 +8367,9 @@
    "hub": "o20",
    "width": 12.0,
    "t_link": 3.0,
-   "q": 0.95
+   "q": 0.95,
+   "saddle": 0,
+   "neck": "bar"
   },
   "inband14": 0.0,
   "inband10": 0.0,
@@ -7954,7 +8400,8 @@
    "neck: sparse sampling (10.85 mm median spacing > 4 mm)"
   ],
   "flips": 0,
-  "collide": 0.5268
+  "collide": 0.5268,
+  "model_version": "v1 (cylinder band, K7 neck to BOTTOM's bar)"
  },
  {
   "k": 149,
@@ -7978,7 +8425,9 @@
    "hub": "o20",
    "width": 12.0,
    "t_link": 3.0,
-   "q": 0.88
+   "q": 0.88,
+   "saddle": 0,
+   "neck": "bar"
   },
   "inband14": 0.1922,
   "inband10": 0.1125,
@@ -8005,7 +8454,8 @@
   },
   "audit": [],
   "flips": 0,
-  "collide": 0.1508
+  "collide": 0.1508,
+  "model_version": "v1 (cylinder band, K7 neck to BOTTOM's bar)"
  },
  {
   "k": 150,
@@ -8029,7 +8479,9 @@
    "hub": "o20",
    "width": 12.0,
    "t_link": 3.0,
-   "q": 0.91
+   "q": 0.91,
+   "saddle": 0,
+   "neck": "bar"
   },
   "inband14": 0.1182,
   "inband10": 0.0943,
@@ -8060,7 +8512,8 @@
    "neck: sparse sampling (11.23 mm median spacing > 4 mm)"
   ],
   "flips": 0,
-  "collide": 0.0798
+  "collide": 0.0798,
+  "model_version": "v1 (cylinder band, K7 neck to BOTTOM's bar)"
  },
  {
   "k": 151,
@@ -8084,7 +8537,9 @@
    "hub": "o20",
    "width": 12.0,
    "t_link": 3.0,
-   "q": 0.99
+   "q": 0.99,
+   "saddle": 0,
+   "neck": "bar"
   },
   "inband14": 0.0,
   "inband10": 0.0,
@@ -8115,7 +8570,8 @@
    "neck: sparse sampling (10.64 mm median spacing > 4 mm)"
   ],
   "flips": 0,
-  "collide": 0.5214
+  "collide": 0.5214,
+  "model_version": "v1 (cylinder band, K7 neck to BOTTOM's bar)"
  },
  {
   "k": 152,
@@ -8139,7 +8595,9 @@
    "hub": "o20",
    "width": 12.0,
    "t_link": 3.0,
-   "q": 0.97
+   "q": 0.97,
+   "saddle": 0,
+   "neck": "bar"
   },
   "inband14": 0.0,
   "inband10": 0.0,
@@ -8170,7 +8628,8 @@
    "neck: sparse sampling (11.43 mm median spacing > 4 mm)"
   ],
   "flips": 0,
-  "collide": 0.0129
+  "collide": 0.0129,
+  "model_version": "v1 (cylinder band, K7 neck to BOTTOM's bar)"
  },
  {
   "k": 153,
@@ -8194,7 +8653,9 @@
    "hub": "kaa10",
    "width": 12.0,
    "t_link": 3.0,
-   "q": 0.91
+   "q": 0.91,
+   "saddle": 0,
+   "neck": "bar"
   },
   "inband14": 0.0,
   "inband10": 0.0,
@@ -8221,7 +8682,8 @@
   },
   "audit": [],
   "flips": 0,
-  "collide": 1.0
+  "collide": 1.0,
+  "model_version": "v1 (cylinder band, K7 neck to BOTTOM's bar)"
  },
  {
   "k": 154,
@@ -8245,7 +8707,9 @@
    "hub": "kaa10",
    "width": 12.0,
    "t_link": 3.0,
-   "q": 0.86
+   "q": 0.86,
+   "saddle": 0,
+   "neck": "bar"
   },
   "inband14": 0.0,
   "inband10": 0.0,
@@ -8275,7 +8739,8 @@
    "neck: sparse sampling (11.43 mm median spacing > 4 mm)"
   ],
   "flips": 0,
-  "collide": 1.0
+  "collide": 1.0,
+  "model_version": "v1 (cylinder band, K7 neck to BOTTOM's bar)"
  },
  {
   "k": 155,
@@ -8299,7 +8764,9 @@
    "hub": "o20",
    "width": 12.0,
    "t_link": 3.0,
-   "q": 0.94
+   "q": 0.94,
+   "saddle": 0,
+   "neck": "bar"
   },
   "inband14": 0.0093,
   "inband10": 0.0,
@@ -8330,7 +8797,8 @@
    "neck: sparse sampling (10.95 mm median spacing > 4 mm)"
   ],
   "flips": 0,
-  "collide": 0.0
+  "collide": 0.0,
+  "model_version": "v1 (cylinder band, K7 neck to BOTTOM's bar)"
  },
  {
   "k": 156,
@@ -8354,7 +8822,9 @@
    "hub": "o20",
    "width": 12.0,
    "t_link": 3.0,
-   "q": 0.96
+   "q": 0.96,
+   "saddle": 0,
+   "neck": "bar"
   },
   "inband14": 0.1092,
   "inband10": 0.0965,
@@ -8384,7 +8854,8 @@
    "neck: sparse sampling (11.05 mm median spacing > 4 mm)"
   ],
   "flips": 0,
-  "collide": 0.7706
+  "collide": 0.7706,
+  "model_version": "v1 (cylinder band, K7 neck to BOTTOM's bar)"
  },
  {
   "k": 157,
@@ -8408,7 +8879,9 @@
    "hub": "o20",
    "width": 12.0,
    "t_link": 3.0,
-   "q": 0.88
+   "q": 0.88,
+   "saddle": 0,
+   "neck": "bar"
   },
   "inband14": 0.0,
   "inband10": 0.0,
@@ -8435,7 +8908,8 @@
   },
   "audit": [],
   "flips": 0,
-  "collide": 0.8925
+  "collide": 0.8925,
+  "model_version": "v1 (cylinder band, K7 neck to BOTTOM's bar)"
  },
  {
   "k": 158,
@@ -8459,7 +8933,9 @@
    "hub": "o20",
    "width": 12.0,
    "t_link": 3.0,
-   "q": 0.92
+   "q": 0.92,
+   "saddle": 0,
+   "neck": "bar"
   },
   "inband14": 0.0,
   "inband10": 0.0,
@@ -8489,7 +8965,8 @@
    "neck: sparse sampling (11.03 mm median spacing > 4 mm)"
   ],
   "flips": 2,
-  "collide": 0.4512
+  "collide": 0.4512,
+  "model_version": "v1 (cylinder band, K7 neck to BOTTOM's bar)"
  },
  {
   "k": 159,
@@ -8513,7 +8990,9 @@
    "hub": "o20",
    "width": 12.0,
    "t_link": 3.0,
-   "q": 0.99
+   "q": 0.99,
+   "saddle": 0,
+   "neck": "bar"
   },
   "inband14": 0.0,
   "inband10": 0.0,
@@ -8542,7 +9021,8 @@
    "neck: sparse sampling (10.52 mm median spacing > 4 mm)"
   ],
   "flips": 0,
-  "collide": 0.972
+  "collide": 0.972,
+  "model_version": "v1 (cylinder band, K7 neck to BOTTOM's bar)"
  },
  {
   "k": 160,
@@ -8566,7 +9046,9 @@
    "hub": "o20",
    "width": 12.0,
    "t_link": 3.0,
-   "q": 0.98
+   "q": 0.98,
+   "saddle": 0,
+   "neck": "bar"
   },
   "inband14": 0.0,
   "inband10": 0.0,
@@ -8597,7 +9079,8 @@
    "neck: sparse sampling (10.8 mm median spacing > 4 mm)"
   ],
   "flips": 0,
-  "collide": 0.4451
+  "collide": 0.4451,
+  "model_version": "v1 (cylinder band, K7 neck to BOTTOM's bar)"
  },
  {
   "k": 161,
@@ -8621,7 +9104,9 @@
    "hub": "kaa10",
    "width": 12.0,
    "t_link": 3.0,
-   "q": 0.89
+   "q": 0.89,
+   "saddle": 0,
+   "neck": "bar"
   },
   "inband14": 0.0,
   "inband10": 0.0,
@@ -8648,7 +9133,8 @@
   },
   "audit": [],
   "flips": 0,
-  "collide": 1.0
+  "collide": 1.0,
+  "model_version": "v1 (cylinder band, K7 neck to BOTTOM's bar)"
  },
  {
   "k": 162,
@@ -8672,7 +9158,9 @@
    "hub": "o20",
    "width": 12.0,
    "t_link": 3.0,
-   "q": 0.86
+   "q": 0.86,
+   "saddle": 0,
+   "neck": "bar"
   },
   "inband14": 0.2239,
   "inband10": 0.171,
@@ -8702,7 +9190,8 @@
    "neck: sparse sampling (11.43 mm median spacing > 4 mm)"
   ],
   "flips": 1,
-  "collide": 0.2843
+  "collide": 0.2843,
+  "model_version": "v1 (cylinder band, K7 neck to BOTTOM's bar)"
  },
  {
   "k": 163,
@@ -8726,7 +9215,9 @@
    "hub": "o20",
    "width": 12.0,
    "t_link": 3.0,
-   "q": 0.93
+   "q": 0.93,
+   "saddle": 0,
+   "neck": "bar"
   },
   "inband14": 0.0,
   "inband10": 0.0,
@@ -8753,7 +9244,8 @@
   },
   "audit": [],
   "flips": 0,
-  "collide": 1.0
+  "collide": 1.0,
+  "model_version": "v1 (cylinder band, K7 neck to BOTTOM's bar)"
  },
  {
   "k": 164,
@@ -8777,7 +9269,9 @@
    "hub": "o20",
    "width": 12.0,
    "t_link": 3.0,
-   "q": 0.87
+   "q": 0.87,
+   "saddle": 0,
+   "neck": "bar"
   },
   "inband14": 0.0,
   "inband10": 0.0,
@@ -8806,7 +9300,8 @@
    "link1: sparse sampling (4.15 mm median spacing > 4 mm)"
   ],
   "flips": 0,
-  "collide": 1.0
+  "collide": 1.0,
+  "model_version": "v1 (cylinder band, K7 neck to BOTTOM's bar)"
  },
  {
   "k": 165,
@@ -8830,7 +9325,9 @@
    "hub": "o20",
    "width": 12.0,
    "t_link": 3.0,
-   "q": 0.95
+   "q": 0.95,
+   "saddle": 0,
+   "neck": "bar"
   },
   "inband14": 0.1039,
   "inband10": 0.0578,
@@ -8860,7 +9357,8 @@
    "neck: sparse sampling (10.68 mm median spacing > 4 mm)"
   ],
   "flips": 0,
-  "collide": 0.5515
+  "collide": 0.5515,
+  "model_version": "v1 (cylinder band, K7 neck to BOTTOM's bar)"
  },
  {
   "k": 166,
@@ -8884,7 +9382,9 @@
    "hub": "kaa10",
    "width": 12.0,
    "t_link": 3.0,
-   "q": 0.98
+   "q": 0.98,
+   "saddle": 0,
+   "neck": "bar"
   },
   "inband14": 0.1036,
   "inband10": 0.0695,
@@ -8914,7 +9414,8 @@
    "link2: sparse sampling (9.84 mm median spacing > 4 mm)"
   ],
   "flips": 0,
-  "collide": 0.0
+  "collide": 0.0,
+  "model_version": "v1 (cylinder band, K7 neck to BOTTOM's bar)"
  },
  {
   "k": 167,
@@ -8938,7 +9439,9 @@
    "hub": "o20",
    "width": 12.0,
    "t_link": 3.0,
-   "q": 0.92
+   "q": 0.92,
+   "saddle": 0,
+   "neck": "bar"
   },
   "inband14": 0.136,
   "inband10": 0.0937,
@@ -8968,7 +9471,8 @@
    "neck: sparse sampling (11.42 mm median spacing > 4 mm)"
   ],
   "flips": 0,
-  "collide": 0.5956
+  "collide": 0.5956,
+  "model_version": "v1 (cylinder band, K7 neck to BOTTOM's bar)"
  },
  {
   "k": 168,
@@ -8992,7 +9496,9 @@
    "hub": "o20",
    "width": 12.0,
    "t_link": 3.0,
-   "q": 0.9
+   "q": 0.9,
+   "saddle": 0,
+   "neck": "bar"
   },
   "inband14": 0.0314,
   "inband10": 0.0278,
@@ -9022,7 +9528,8 @@
    "link2: sparse sampling (11.43 mm median spacing > 4 mm)"
   ],
   "flips": 0,
-  "collide": 0.0076
+  "collide": 0.0076,
+  "model_version": "v1 (cylinder band, K7 neck to BOTTOM's bar)"
  },
  {
   "k": 169,
@@ -9046,7 +9553,9 @@
    "hub": "o20",
    "width": 12.0,
    "t_link": 3.0,
-   "q": 0.98
+   "q": 0.98,
+   "saddle": 0,
+   "neck": "bar"
   },
   "inband14": 0.0,
   "inband10": 0.0,
@@ -9073,7 +9582,8 @@
   },
   "audit": [],
   "flips": 0,
-  "collide": 1.0
+  "collide": 1.0,
+  "model_version": "v1 (cylinder band, K7 neck to BOTTOM's bar)"
  },
  {
   "k": 170,
@@ -9097,7 +9607,9 @@
    "hub": "o20",
    "width": 12.0,
    "t_link": 3.0,
-   "q": 0.93
+   "q": 0.93,
+   "saddle": 0,
+   "neck": "bar"
   },
   "inband14": 0.1766,
   "inband10": 0.1238,
@@ -9124,7 +9636,8 @@
   },
   "audit": [],
   "flips": 0,
-  "collide": 0.2431
+  "collide": 0.2431,
+  "model_version": "v1 (cylinder band, K7 neck to BOTTOM's bar)"
  },
  {
   "k": 171,
@@ -9148,7 +9661,9 @@
    "hub": "o20",
    "width": 12.0,
    "t_link": 3.0,
-   "q": 0.87
+   "q": 0.87,
+   "saddle": 0,
+   "neck": "bar"
   },
   "inband14": 0.0,
   "inband10": 0.0,
@@ -9178,7 +9693,8 @@
    "neck: sparse sampling (11.43 mm median spacing > 4 mm)"
   ],
   "flips": 0,
-  "collide": 0.5189
+  "collide": 0.5189,
+  "model_version": "v1 (cylinder band, K7 neck to BOTTOM's bar)"
  },
  {
   "k": 172,
@@ -9202,7 +9718,9 @@
    "hub": "o20",
    "width": 12.0,
    "t_link": 3.0,
-   "q": 0.88
+   "q": 0.88,
+   "saddle": 0,
+   "neck": "bar"
   },
   "inband14": 0.0,
   "inband10": 0.0,
@@ -9232,7 +9750,8 @@
    "link2: sparse sampling (11.43 mm median spacing > 4 mm)"
   ],
   "flips": 0,
-  "collide": 0.0
+  "collide": 0.0,
+  "model_version": "v1 (cylinder band, K7 neck to BOTTOM's bar)"
  },
  {
   "k": 173,
@@ -9256,7 +9775,9 @@
    "hub": "o20",
    "width": 12.0,
    "t_link": 3.0,
-   "q": 0.95
+   "q": 0.95,
+   "saddle": 0,
+   "neck": "bar"
   },
   "inband14": 0.0,
   "inband10": 0.0,
@@ -9286,7 +9807,8 @@
    "neck: sparse sampling (11.23 mm median spacing > 4 mm)"
   ],
   "flips": 0,
-  "collide": 0.0205
+  "collide": 0.0205,
+  "model_version": "v1 (cylinder band, K7 neck to BOTTOM's bar)"
  },
  {
   "k": 174,
@@ -9310,7 +9832,9 @@
    "hub": "o20",
    "width": 12.0,
    "t_link": 3.0,
-   "q": 1.0
+   "q": 1.0,
+   "saddle": 0,
+   "neck": "bar"
   },
   "inband14": 0.0,
   "inband10": 0.0,
@@ -9341,7 +9865,8 @@
    "neck: sparse sampling (10.74 mm median spacing > 4 mm)"
   ],
   "flips": 5,
-  "collide": 0.4452
+  "collide": 0.4452,
+  "model_version": "v1 (cylinder band, K7 neck to BOTTOM's bar)"
  },
  {
   "k": 175,
@@ -9365,7 +9890,9 @@
    "hub": "o20",
    "width": 12.0,
    "t_link": 3.0,
-   "q": 0.91
+   "q": 0.91,
+   "saddle": 0,
+   "neck": "bar"
   },
   "inband14": 0.0,
   "inband10": 0.0,
@@ -9395,7 +9922,8 @@
    "neck: sparse sampling (11.43 mm median spacing > 4 mm)"
   ],
   "flips": 1,
-  "collide": 0.4797
+  "collide": 0.4797,
+  "model_version": "v1 (cylinder band, K7 neck to BOTTOM's bar)"
  },
  {
   "k": 176,
@@ -9419,7 +9947,9 @@
    "hub": "kaa10",
    "width": 12.0,
    "t_link": 3.0,
-   "q": 0.9
+   "q": 0.9,
+   "saddle": 0,
+   "neck": "bar"
   },
   "inband14": 0.0383,
   "inband10": 0.0244,
@@ -9449,7 +9979,8 @@
    "link2: sparse sampling (11.41 mm median spacing > 4 mm)"
   ],
   "flips": 0,
-  "collide": 0.0
+  "collide": 0.0,
+  "model_version": "v1 (cylinder band, K7 neck to BOTTOM's bar)"
  },
  {
   "k": 177,
@@ -9473,7 +10004,9 @@
    "hub": "kaa10",
    "width": 12.0,
    "t_link": 3.0,
-   "q": 0.97
+   "q": 0.97,
+   "saddle": 0,
+   "neck": "bar"
   },
   "inband14": 0.0554,
   "inband10": 0.0234,
@@ -9504,7 +10037,8 @@
    "neck: sparse sampling (10.61 mm median spacing > 4 mm)"
   ],
   "flips": 1,
-  "collide": 0.0
+  "collide": 0.0,
+  "model_version": "v1 (cylinder band, K7 neck to BOTTOM's bar)"
  },
  {
   "k": 178,
@@ -9528,7 +10062,9 @@
    "hub": "o20",
    "width": 12.0,
    "t_link": 3.0,
-   "q": 0.94
+   "q": 0.94,
+   "saddle": 0,
+   "neck": "bar"
   },
   "inband14": 0.0,
   "inband10": 0.0,
@@ -9557,7 +10093,8 @@
    "neck: sparse sampling (4.52 mm median spacing > 4 mm)"
   ],
   "flips": 0,
-  "collide": 1.0
+  "collide": 1.0,
+  "model_version": "v1 (cylinder band, K7 neck to BOTTOM's bar)"
  },
  {
   "k": 179,
@@ -9581,7 +10118,9 @@
    "hub": "o20",
    "width": 12.0,
    "t_link": 3.0,
-   "q": 0.85
+   "q": 0.85,
+   "saddle": 0,
+   "neck": "bar"
   },
   "inband14": 0.0,
   "inband10": 0.0,
@@ -9611,7 +10150,8 @@
    "neck: sparse sampling (11.43 mm median spacing > 4 mm)"
   ],
   "flips": 2,
-  "collide": 0.1576
+  "collide": 0.1576,
+  "model_version": "v1 (cylinder band, K7 neck to BOTTOM's bar)"
  },
  {
   "k": 180,
@@ -9635,7 +10175,9 @@
    "hub": "o20",
    "width": 12.0,
    "t_link": 3.0,
-   "q": 0.89
+   "q": 0.89,
+   "saddle": 0,
+   "neck": "bar"
   },
   "inband14": 0.4113,
   "inband10": 0.3643,
@@ -9662,7 +10204,8 @@
   },
   "audit": [],
   "flips": 0,
-  "collide": 0.5327
+  "collide": 0.5327,
+  "model_version": "v1 (cylinder band, K7 neck to BOTTOM's bar)"
  },
  {
   "k": 181,
@@ -9686,7 +10229,9 @@
    "hub": "kaa10",
    "width": 12.0,
    "t_link": 3.0,
-   "q": 0.97
+   "q": 0.97,
+   "saddle": 0,
+   "neck": "bar"
   },
   "inband14": 0.0,
   "inband10": 0.0,
@@ -9716,7 +10261,8 @@
    "neck: sparse sampling (11.43 mm median spacing > 4 mm)"
   ],
   "flips": 0,
-  "collide": 1.0
+  "collide": 1.0,
+  "model_version": "v1 (cylinder band, K7 neck to BOTTOM's bar)"
  },
  {
   "k": 182,
@@ -9740,7 +10286,9 @@
    "hub": "kaa10",
    "width": 12.0,
    "t_link": 3.0,
-   "q": 0.93
+   "q": 0.93,
+   "saddle": 0,
+   "neck": "bar"
   },
   "inband14": 0.0,
   "inband10": 0.0,
@@ -9767,7 +10315,8 @@
   },
   "audit": [],
   "flips": 1,
-  "collide": 1.0
+  "collide": 1.0,
+  "model_version": "v1 (cylinder band, K7 neck to BOTTOM's bar)"
  },
  {
   "k": 183,
@@ -9791,7 +10340,9 @@
    "hub": "o20",
    "width": 12.0,
    "t_link": 3.0,
-   "q": 0.86
+   "q": 0.86,
+   "saddle": 0,
+   "neck": "bar"
   },
   "inband14": 0.0492,
   "inband10": 0.0201,
@@ -9822,7 +10373,8 @@
    "neck: sparse sampling (10.44 mm median spacing > 4 mm)"
   ],
   "flips": 0,
-  "collide": 0.0903
+  "collide": 0.0903,
+  "model_version": "v1 (cylinder band, K7 neck to BOTTOM's bar)"
  },
  {
   "k": 184,
@@ -9846,7 +10398,9 @@
    "hub": "kaa10",
    "width": 12.0,
    "t_link": 3.0,
-   "q": 0.88
+   "q": 0.88,
+   "saddle": 0,
+   "neck": "bar"
   },
   "inband14": 0.0,
   "inband10": 0.0,
@@ -9875,7 +10429,8 @@
    "neck: sparse sampling (4.34 mm median spacing > 4 mm)"
   ],
   "flips": 0,
-  "collide": 1.0
+  "collide": 1.0,
+  "model_version": "v1 (cylinder band, K7 neck to BOTTOM's bar)"
  },
  {
   "k": 185,
@@ -9899,7 +10454,9 @@
    "hub": "kaa10",
    "width": 12.0,
    "t_link": 3.0,
-   "q": 0.96
+   "q": 0.96,
+   "saddle": 0,
+   "neck": "bar"
   },
   "inband14": 0.0,
   "inband10": 0.0,
@@ -9929,7 +10486,8 @@
    "neck: sparse sampling (11.23 mm median spacing > 4 mm)"
   ],
   "flips": 1,
-  "collide": 1.0
+  "collide": 1.0,
+  "model_version": "v1 (cylinder band, K7 neck to BOTTOM's bar)"
  },
  {
   "k": 186,
@@ -9953,7 +10511,9 @@
    "hub": "o20",
    "width": 12.0,
    "t_link": 3.0,
-   "q": 0.99
+   "q": 0.99,
+   "saddle": 0,
+   "neck": "bar"
   },
   "inband14": 0.1093,
   "inband10": 0.0507,
@@ -9983,7 +10543,8 @@
    "link2: sparse sampling (11.43 mm median spacing > 4 mm)"
   ],
   "flips": 0,
-  "collide": 0.0
+  "collide": 0.0,
+  "model_version": "v1 (cylinder band, K7 neck to BOTTOM's bar)"
  },
  {
   "k": 187,
@@ -10007,7 +10568,9 @@
    "hub": "o20",
    "width": 12.0,
    "t_link": 3.0,
-   "q": 0.92
+   "q": 0.92,
+   "saddle": 0,
+   "neck": "bar"
   },
   "inband14": 0.0,
   "inband10": 0.0,
@@ -10037,7 +10600,8 @@
    "neck: sparse sampling (11.24 mm median spacing > 4 mm)"
   ],
   "flips": 0,
-  "collide": 0.3462
+  "collide": 0.3462,
+  "model_version": "v1 (cylinder band, K7 neck to BOTTOM's bar)"
  },
  {
   "k": 188,
@@ -10061,7 +10625,9 @@
    "hub": "o20",
    "width": 12.0,
    "t_link": 3.0,
-   "q": 0.9
+   "q": 0.9,
+   "saddle": 0,
+   "neck": "bar"
   },
   "inband14": 0.1011,
   "inband10": 0.0481,
@@ -10091,7 +10657,8 @@
    "link2: sparse sampling (11.41 mm median spacing > 4 mm)"
   ],
   "flips": 1,
-  "collide": 0.0
+  "collide": 0.0,
+  "model_version": "v1 (cylinder band, K7 neck to BOTTOM's bar)"
  },
  {
   "k": 189,
@@ -10115,7 +10682,9 @@
    "hub": "kaa10",
    "width": 12.0,
    "t_link": 3.0,
-   "q": 0.97
+   "q": 0.97,
+   "saddle": 0,
+   "neck": "bar"
   },
   "inband14": 0.0714,
   "inband10": 0.0454,
@@ -10146,7 +10715,8 @@
    "neck: sparse sampling (11.43 mm median spacing > 4 mm)"
   ],
   "flips": 2,
-  "collide": 0.5739
+  "collide": 0.5739,
+  "model_version": "v1 (cylinder band, K7 neck to BOTTOM's bar)"
  },
  {
   "k": 190,
@@ -10170,7 +10740,9 @@
    "hub": "o20",
    "width": 12.0,
    "t_link": 3.0,
-   "q": 0.94
+   "q": 0.94,
+   "saddle": 0,
+   "neck": "bar"
   },
   "inband14": 0.0453,
   "inband10": 0.0381,
@@ -10200,7 +10772,8 @@
    "link2: sparse sampling (11.54 mm median spacing > 4 mm)"
   ],
   "flips": 14,
-  "collide": 0.0
+  "collide": 0.0,
+  "model_version": "v1 (cylinder band, K7 neck to BOTTOM's bar)"
  },
  {
   "k": 191,
@@ -10224,7 +10797,9 @@
    "hub": "o20",
    "width": 12.0,
    "t_link": 3.0,
-   "q": 0.86
+   "q": 0.86,
+   "saddle": 0,
+   "neck": "bar"
   },
   "inband14": 0.0,
   "inband10": 0.0,
@@ -10253,7 +10828,8 @@
    "neck: sparse sampling (6.21 mm median spacing > 4 mm)"
   ],
   "flips": 1,
-  "collide": 1.0
+  "collide": 1.0,
+  "model_version": "v1 (cylinder band, K7 neck to BOTTOM's bar)"
  },
  {
   "k": 192,
@@ -10277,7 +10853,9 @@
    "hub": "o20",
    "width": 12.0,
    "t_link": 3.0,
-   "q": 0.88
+   "q": 0.88,
+   "saddle": 0,
+   "neck": "bar"
   },
   "inband14": 0.0,
   "inband10": 0.0,
@@ -10307,7 +10885,8 @@
    "link2: sparse sampling (11.44 mm median spacing > 4 mm)"
   ],
   "flips": 0,
-  "collide": 0.0
+  "collide": 0.0,
+  "model_version": "v1 (cylinder band, K7 neck to BOTTOM's bar)"
  },
  {
   "k": 193,
@@ -10331,7 +10910,9 @@
    "hub": "o20",
    "width": 12.0,
    "t_link": 3.0,
-   "q": 0.95
+   "q": 0.95,
+   "saddle": 0,
+   "neck": "bar"
   },
   "inband14": 0.0,
   "inband10": 0.0,
@@ -10361,7 +10942,8 @@
    "neck: sparse sampling (11.43 mm median spacing > 4 mm)"
   ],
   "flips": 1,
-  "collide": 0.7299
+  "collide": 0.7299,
+  "model_version": "v1 (cylinder band, K7 neck to BOTTOM's bar)"
  },
  {
   "k": 194,
@@ -10385,7 +10967,9 @@
    "hub": "kaa10",
    "width": 12.0,
    "t_link": 3.0,
-   "q": 0.99
+   "q": 0.99,
+   "saddle": 0,
+   "neck": "bar"
   },
   "inband14": 0.053,
   "inband10": 0.0306,
@@ -10415,7 +10999,8 @@
    "link2: sparse sampling (10.54 mm median spacing > 4 mm)"
   ],
   "flips": 0,
-  "collide": 0.0
+  "collide": 0.0,
+  "model_version": "v1 (cylinder band, K7 neck to BOTTOM's bar)"
  },
  {
   "k": 195,
@@ -10439,7 +11024,9 @@
    "hub": "o20",
    "width": 12.0,
    "t_link": 3.0,
-   "q": 0.91
+   "q": 0.91,
+   "saddle": 0,
+   "neck": "bar"
   },
   "inband14": 0.1133,
   "inband10": 0.0759,
@@ -10469,7 +11056,8 @@
    "neck: sparse sampling (10.44 mm median spacing > 4 mm)"
   ],
   "flips": 0,
-  "collide": 0.5
+  "collide": 0.5,
+  "model_version": "v1 (cylinder band, K7 neck to BOTTOM's bar)"
  },
  {
   "k": 196,
@@ -10493,7 +11081,9 @@
    "hub": "o20",
    "width": 12.0,
    "t_link": 3.0,
-   "q": 0.99
+   "q": 0.99,
+   "saddle": 0,
+   "neck": "bar"
   },
   "inband14": 0.0638,
   "inband10": 0.0392,
@@ -10523,7 +11113,8 @@
    "neck: sparse sampling (11.42 mm median spacing > 4 mm)"
   ],
   "flips": 0,
-  "collide": 0.6061
+  "collide": 0.6061,
+  "model_version": "v1 (cylinder band, K7 neck to BOTTOM's bar)"
  },
  {
   "k": 197,
@@ -10547,7 +11138,9 @@
    "hub": "kaa10",
    "width": 12.0,
    "t_link": 3.0,
-   "q": 0.92
+   "q": 0.92,
+   "saddle": 0,
+   "neck": "bar"
   },
   "inband14": 0.0495,
   "inband10": 0.0353,
@@ -10577,7 +11170,8 @@
    "link2: sparse sampling (9.46 mm median spacing > 4 mm)"
   ],
   "flips": 0,
-  "collide": 0.0
+  "collide": 0.0,
+  "model_version": "v1 (cylinder band, K7 neck to BOTTOM's bar)"
  },
  {
   "k": 198,
@@ -10601,7 +11195,9 @@
    "hub": "o20",
    "width": 12.0,
    "t_link": 3.0,
-   "q": 0.87
+   "q": 0.87,
+   "saddle": 0,
+   "neck": "bar"
   },
   "inband14": 0.0645,
   "inband10": 0.0586,
@@ -10631,7 +11227,8 @@
    "neck: sparse sampling (10.54 mm median spacing > 4 mm)"
   ],
   "flips": 0,
-  "collide": 0.0827
+  "collide": 0.0827,
+  "model_version": "v1 (cylinder band, K7 neck to BOTTOM's bar)"
  },
  {
   "k": 199,
@@ -10655,7 +11252,9 @@
    "hub": "o20",
    "width": 12.0,
    "t_link": 3.0,
-   "q": 0.96
+   "q": 0.96,
+   "saddle": 0,
+   "neck": "bar"
   },
   "inband14": 0.0,
   "inband10": 0.0,
@@ -10684,7 +11283,8 @@
    "neck: sparse sampling (7.16 mm median spacing > 4 mm)"
   ],
   "flips": 2,
-  "collide": 0.7023
+  "collide": 0.7023,
+  "model_version": "v1 (cylinder band, K7 neck to BOTTOM's bar)"
  },
  {
   "k": 200,
@@ -10708,7 +11308,9 @@
    "hub": "o20",
    "width": 12.0,
    "t_link": 3.0,
-   "q": 0.93
+   "q": 0.93,
+   "saddle": 0,
+   "neck": "bar"
   },
   "inband14": 0.0,
   "inband10": 0.0,
@@ -10739,7 +11341,8 @@
    "neck: sparse sampling (11.33 mm median spacing > 4 mm)"
   ],
   "flips": 0,
-  "collide": 0.1926
+  "collide": 0.1926,
+  "model_version": "v1 (cylinder band, K7 neck to BOTTOM's bar)"
  },
  {
   "k": 201,
@@ -10763,7 +11366,9 @@
    "hub": "o20",
    "width": 12.0,
    "t_link": 3.0,
-   "q": 0.86
+   "q": 0.86,
+   "saddle": 0,
+   "neck": "bar"
   },
   "inband14": 0.1134,
   "inband10": 0.0777,
@@ -10792,7 +11397,8 @@
    "link2: sparse sampling (8.91 mm median spacing > 4 mm)"
   ],
   "flips": 2,
-  "collide": 0.4537
+  "collide": 0.4537,
+  "model_version": "v1 (cylinder band, K7 neck to BOTTOM's bar)"
  },
  {
   "k": 202,
@@ -10816,7 +11422,9 @@
    "hub": "o20",
    "width": 12.0,
    "t_link": 3.0,
-   "q": 0.89
+   "q": 0.89,
+   "saddle": 0,
+   "neck": "bar"
   },
   "inband14": 0.0687,
   "inband10": 0.0582,
@@ -10846,7 +11454,8 @@
    "neck: sparse sampling (11.28 mm median spacing > 4 mm)"
   ],
   "flips": 0,
-  "collide": 0.6061
+  "collide": 0.6061,
+  "model_version": "v1 (cylinder band, K7 neck to BOTTOM's bar)"
  },
  {
   "k": 203,
@@ -10870,7 +11479,9 @@
    "hub": "kaa10",
    "width": 12.0,
    "t_link": 3.0,
-   "q": 0.98
+   "q": 0.98,
+   "saddle": 0,
+   "neck": "bar"
   },
   "inband14": 0.0,
   "inband10": 0.0,
@@ -10899,7 +11510,8 @@
    "neck: sparse sampling (8.42 mm median spacing > 4 mm)"
   ],
   "flips": 0,
-  "collide": 1.0
+  "collide": 1.0,
+  "model_version": "v1 (cylinder band, K7 neck to BOTTOM's bar)"
  },
  {
   "k": 204,
@@ -10923,7 +11535,9 @@
    "hub": "o20",
    "width": 12.0,
    "t_link": 3.0,
-   "q": 0.99
+   "q": 0.99,
+   "saddle": 0,
+   "neck": "bar"
   },
   "inband14": 0.0,
   "inband10": 0.0,
@@ -10954,7 +11568,8 @@
    "neck: sparse sampling (11.43 mm median spacing > 4 mm)"
   ],
   "flips": 0,
-  "collide": 0.5669
+  "collide": 0.5669,
+  "model_version": "v1 (cylinder band, K7 neck to BOTTOM's bar)"
  },
  {
   "k": 205,
@@ -10978,7 +11593,9 @@
    "hub": "o20",
    "width": 12.0,
    "t_link": 3.0,
-   "q": 0.91
+   "q": 0.91,
+   "saddle": 0,
+   "neck": "bar"
   },
   "inband14": 0.0,
   "inband10": 0.0,
@@ -11005,7 +11622,8 @@
   },
   "audit": [],
   "flips": 0,
-  "collide": 0.5202
+  "collide": 0.5202,
+  "model_version": "v1 (cylinder band, K7 neck to BOTTOM's bar)"
  },
  {
   "k": 206,
@@ -11029,7 +11647,9 @@
    "hub": "o20",
    "width": 12.0,
    "t_link": 3.0,
-   "q": 0.88
+   "q": 0.88,
+   "saddle": 0,
+   "neck": "bar"
   },
   "inband14": 0.0986,
   "inband10": 0.0748,
@@ -11059,7 +11679,8 @@
    "neck: sparse sampling (11.33 mm median spacing > 4 mm)"
   ],
   "flips": 3,
-  "collide": 0.4487
+  "collide": 0.4487,
+  "model_version": "v1 (cylinder band, K7 neck to BOTTOM's bar)"
  },
  {
   "k": 207,
@@ -11083,7 +11704,9 @@
    "hub": "o20",
    "width": 12.0,
    "t_link": 3.0,
-   "q": 0.94
+   "q": 0.94,
+   "saddle": 0,
+   "neck": "bar"
   },
   "inband14": 0.2631,
   "inband10": 0.1594,
@@ -11110,7 +11733,8 @@
   },
   "audit": [],
   "flips": 2,
-  "collide": 0.0175
+  "collide": 0.0175,
+  "model_version": "v1 (cylinder band, K7 neck to BOTTOM's bar)"
  },
  {
   "k": 208,
@@ -11134,7 +11758,9 @@
    "hub": "o20",
    "width": 12.0,
    "t_link": 3.0,
-   "q": 0.94
+   "q": 0.94,
+   "saddle": 0,
+   "neck": "bar"
   },
   "inband14": 0.0321,
   "inband10": 0.0196,
@@ -11165,7 +11791,8 @@
    "neck: sparse sampling (11.23 mm median spacing > 4 mm)"
   ],
   "flips": 0,
-  "collide": 0.3404
+  "collide": 0.3404,
+  "model_version": "v1 (cylinder band, K7 neck to BOTTOM's bar)"
  },
  {
   "k": 209,
@@ -11189,7 +11816,9 @@
    "hub": "o20",
    "width": 12.0,
    "t_link": 3.0,
-   "q": 0.86
+   "q": 0.86,
+   "saddle": 0,
+   "neck": "bar"
   },
   "inband14": 0.2043,
   "inband10": 0.1422,
@@ -11216,7 +11845,8 @@
   },
   "audit": [],
   "flips": 0,
-  "collide": 0.3228
+  "collide": 0.3228,
+  "model_version": "v1 (cylinder band, K7 neck to BOTTOM's bar)"
  },
  {
   "k": 210,
@@ -11240,7 +11870,9 @@
    "hub": "o20",
    "width": 12.0,
    "t_link": 3.0,
-   "q": 0.9
+   "q": 0.9,
+   "saddle": 0,
+   "neck": "bar"
   },
   "inband14": 0.2741,
   "inband10": 0.2296,
@@ -11270,7 +11902,8 @@
    "neck: sparse sampling (11.43 mm median spacing > 4 mm)"
   ],
   "flips": 0,
-  "collide": 0.802
+  "collide": 0.802,
+  "model_version": "v1 (cylinder band, K7 neck to BOTTOM's bar)"
  },
  {
   "k": 211,
@@ -11294,7 +11927,9 @@
    "hub": "o20",
    "width": 12.0,
    "t_link": 3.0,
-   "q": 0.97
+   "q": 0.97,
+   "saddle": 0,
+   "neck": "bar"
   },
   "inband14": 0.0,
   "inband10": 0.0,
@@ -11324,7 +11959,8 @@
    "link2: sparse sampling (10.65 mm median spacing > 4 mm)"
   ],
   "flips": 0,
-  "collide": 0.1149
+  "collide": 0.1149,
+  "model_version": "v1 (cylinder band, K7 neck to BOTTOM's bar)"
  },
  {
   "k": 212,
@@ -11378,7 +12014,8 @@
   "audit": [],
   "flips": 1,
   "collide": 0.1678,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 213,
@@ -11432,7 +12069,8 @@
   "audit": [],
   "flips": 0,
   "collide": 0.1611,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 214,
@@ -11486,7 +12124,8 @@
   "audit": [],
   "flips": 0,
   "collide": 0.2,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 215,
@@ -11540,7 +12179,8 @@
   "audit": [],
   "flips": 0,
   "collide": 0.1463,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 216,
@@ -11594,7 +12234,8 @@
   "audit": [],
   "flips": 0,
   "collide": 0.1769,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 217,
@@ -11648,7 +12289,8 @@
   "audit": [],
   "flips": 0,
   "collide": 0.2286,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 218,
@@ -11702,7 +12344,8 @@
   "audit": [],
   "flips": 0,
   "collide": 0.189,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 219,
@@ -11756,7 +12399,8 @@
   "audit": [],
   "flips": 0,
   "collide": 0.0214,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 220,
@@ -11810,7 +12454,8 @@
   "audit": [],
   "flips": 0,
   "collide": 0.0619,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 221,
@@ -11864,7 +12509,8 @@
   "audit": [],
   "flips": 0,
   "collide": 0.053,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 222,
@@ -11918,7 +12564,8 @@
   "audit": [],
   "flips": 0,
   "collide": 0.1773,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 223,
@@ -11972,7 +12619,8 @@
   "audit": [],
   "flips": 0,
   "collide": 0.1087,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 224,
@@ -12026,7 +12674,8 @@
   "audit": [],
   "flips": 0,
   "collide": 0.0538,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 225,
@@ -12080,7 +12729,8 @@
   "audit": [],
   "flips": 0,
   "collide": 0.1429,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 226,
@@ -12134,7 +12784,8 @@
   "audit": [],
   "flips": 1,
   "collide": 0.1681,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 227,
@@ -12188,7 +12839,8 @@
   "audit": [],
   "flips": 0,
   "collide": 0.1462,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 228,
@@ -12242,7 +12894,8 @@
   "audit": [],
   "flips": 0,
   "collide": 0.2162,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 229,
@@ -12296,7 +12949,8 @@
   "audit": [],
   "flips": 0,
   "collide": 0.1301,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 230,
@@ -12350,7 +13004,8 @@
   "audit": [],
   "flips": 0,
   "collide": 0.0066,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 231,
@@ -12404,7 +13059,8 @@
   "audit": [],
   "flips": 0,
   "collide": 0.0909,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 232,
@@ -12458,7 +13114,8 @@
   "audit": [],
   "flips": 1,
   "collide": 0.1081,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 233,
@@ -12512,7 +13169,8 @@
   "audit": [],
   "flips": 2,
   "collide": 0.0164,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 234,
@@ -12566,7 +13224,8 @@
   "audit": [],
   "flips": 1,
   "collide": 0.1652,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 235,
@@ -12620,7 +13279,8 @@
   "audit": [],
   "flips": 0,
   "collide": 0.0976,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 236,
@@ -12674,7 +13334,8 @@
   "audit": [],
   "flips": 0,
   "collide": 0.1081,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 237,
@@ -12728,7 +13389,8 @@
   "audit": [],
   "flips": 0,
   "collide": 0.1639,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 238,
@@ -12782,7 +13444,8 @@
   "audit": [],
   "flips": 0,
   "collide": 0.0538,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 239,
@@ -12836,7 +13499,8 @@
   "audit": [],
   "flips": 2,
   "collide": 0.2,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 240,
@@ -12890,7 +13554,8 @@
   "audit": [],
   "flips": 1,
   "collide": 0.1091,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 241,
@@ -12944,7 +13609,8 @@
   "audit": [],
   "flips": 2,
   "collide": 0.1707,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 242,
@@ -12998,7 +13664,8 @@
   "audit": [],
   "flips": 0,
   "collide": 0.053,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 243,
@@ -13052,7 +13719,8 @@
   "audit": [],
   "flips": 0,
   "collide": 0.0273,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 244,
@@ -13106,7 +13774,8 @@
   "audit": [],
   "flips": 1,
   "collide": 0.0333,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 245,
@@ -13160,7 +13829,8 @@
   "audit": [],
   "flips": 0,
   "collide": 0.7444,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 246,
@@ -13214,7 +13884,8 @@
   "audit": [],
   "flips": 0,
   "collide": 0.3625,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 247,
@@ -13268,7 +13939,8 @@
   "audit": [],
   "flips": 4,
   "collide": 0.9307,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 248,
@@ -13322,7 +13994,8 @@
   "audit": [],
   "flips": 0,
   "collide": 1.0,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 249,
@@ -13376,7 +14049,8 @@
   "audit": [],
   "flips": 0,
   "collide": 0.4355,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 250,
@@ -13430,7 +14104,8 @@
   "audit": [],
   "flips": 0,
   "collide": 0.009,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 251,
@@ -13484,7 +14159,8 @@
   "audit": [],
   "flips": 0,
   "collide": 0.8699,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 252,
@@ -13538,7 +14214,8 @@
   "audit": [],
   "flips": 1,
   "collide": 0.1308,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 253,
@@ -13592,7 +14269,8 @@
   "audit": [],
   "flips": 0,
   "collide": 0.6228,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 254,
@@ -13646,7 +14324,8 @@
   "audit": [],
   "flips": 2,
   "collide": 1.0,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 255,
@@ -13700,7 +14379,8 @@
   "audit": [],
   "flips": 1,
   "collide": 0.2062,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 256,
@@ -13754,7 +14434,8 @@
   "audit": [],
   "flips": 0,
   "collide": 0.3592,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 257,
@@ -13808,7 +14489,8 @@
   "audit": [],
   "flips": 0,
   "collide": 0.4386,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 258,
@@ -13862,7 +14544,8 @@
   "audit": [],
   "flips": 2,
   "collide": 0.1735,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 259,
@@ -13916,7 +14599,8 @@
   "audit": [],
   "flips": 1,
   "collide": 0.0094,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 260,
@@ -13970,7 +14654,8 @@
   "audit": [],
   "flips": 2,
   "collide": 0.1134,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 261,
@@ -14024,7 +14709,8 @@
   "audit": [],
   "flips": 2,
   "collide": 0.7107,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 262,
@@ -14078,7 +14764,8 @@
   "audit": [],
   "flips": 1,
   "collide": 0.1368,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 263,
@@ -14132,7 +14819,8 @@
   "audit": [],
   "flips": 0,
   "collide": 0.086,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 264,
@@ -14186,7 +14874,8 @@
   "audit": [],
   "flips": 0,
   "collide": 0.3871,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 265,
@@ -14240,7 +14929,8 @@
   "audit": [],
   "flips": 1,
   "collide": 0.9478,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 266,
@@ -14294,7 +14984,8 @@
   "audit": [],
   "flips": 1,
   "collide": 0.3295,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 267,
@@ -14348,7 +15039,8 @@
   "audit": [],
   "flips": 0,
   "collide": 0.4444,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 268,
@@ -14402,7 +15094,8 @@
   "audit": [],
   "flips": 0,
   "collide": 1.0,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 269,
@@ -14456,7 +15149,8 @@
   "audit": [],
   "flips": 0,
   "collide": 0.0316,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 270,
@@ -14510,7 +15204,8 @@
   "audit": [],
   "flips": 1,
   "collide": 0.4639,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 271,
@@ -14564,7 +15259,8 @@
   "audit": [],
   "flips": 1,
   "collide": 0.0106,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 272,
@@ -14618,7 +15314,8 @@
   "audit": [],
   "flips": 1,
   "collide": 0.1593,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 273,
@@ -14672,7 +15369,8 @@
   "audit": [],
   "flips": 0,
   "collide": 0.0086,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 274,
@@ -14726,7 +15424,8 @@
   "audit": [],
   "flips": 0,
   "collide": 0.1028,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 275,
@@ -14780,7 +15479,8 @@
   "audit": [],
   "flips": 0,
   "collide": 0.031,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 276,
@@ -14834,7 +15534,8 @@
   "audit": [],
   "flips": 0,
   "collide": 0.2273,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 277,
@@ -14888,7 +15589,8 @@
   "audit": [],
   "flips": 2,
   "collide": 0.0561,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 278,
@@ -14942,7 +15644,8 @@
   "audit": [],
   "flips": 1,
   "collide": 0.0667,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 279,
@@ -14996,7 +15699,8 @@
   "audit": [],
   "flips": 0,
   "collide": 0.0092,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 280,
@@ -15050,7 +15754,8 @@
   "audit": [],
   "flips": 0,
   "collide": 0.055,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 281,
@@ -15104,7 +15809,8 @@
   "audit": [],
   "flips": 4,
   "collide": 0.9074,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 282,
@@ -15158,7 +15864,8 @@
   "audit": [],
   "flips": 0,
   "collide": 0.0625,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 283,
@@ -15212,7 +15919,8 @@
   "audit": [],
   "flips": 2,
   "collide": 0.0088,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 284,
@@ -15266,7 +15974,8 @@
   "audit": [],
   "flips": 2,
   "collide": 0.0265,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 285,
@@ -15320,7 +16029,8 @@
   "audit": [],
   "flips": 0,
   "collide": 0.0,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 286,
@@ -15374,7 +16084,8 @@
   "audit": [],
   "flips": 0,
   "collide": 0.0,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 287,
@@ -15428,7 +16139,8 @@
   "audit": [],
   "flips": 1,
   "collide": 0.1709,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 288,
@@ -15482,7 +16194,8 @@
   "audit": [],
   "flips": 0,
   "collide": 0.1239,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 289,
@@ -15536,7 +16249,8 @@
   "audit": [],
   "flips": 1,
   "collide": 0.1017,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 290,
@@ -15590,7 +16304,8 @@
   "audit": [],
   "flips": 0,
   "collide": 0.1901,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 291,
@@ -15644,7 +16359,8 @@
   "audit": [],
   "flips": 0,
   "collide": 0.0089,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 292,
@@ -15698,7 +16414,8 @@
   "audit": [],
   "flips": 1,
   "collide": 0.0083,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 293,
@@ -15752,7 +16469,8 @@
   "audit": [],
   "flips": 0,
   "collide": 0.0168,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 294,
@@ -15806,7 +16524,8 @@
   "audit": [],
   "flips": 0,
   "collide": 0.8729,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 295,
@@ -15860,7 +16579,8 @@
   "audit": [],
   "flips": 1,
   "collide": 0.0598,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 296,
@@ -15914,7 +16634,8 @@
   "audit": [],
   "flips": 2,
   "collide": 0.0783,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 297,
@@ -15968,7 +16689,8 @@
   "audit": [],
   "flips": 0,
   "collide": 0.018,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 298,
@@ -16022,7 +16744,8 @@
   "audit": [],
   "flips": 0,
   "collide": 0.0168,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 299,
@@ -16076,7 +16799,8 @@
   "audit": [],
   "flips": 0,
   "collide": 0.0455,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 300,
@@ -16130,7 +16854,8 @@
   "audit": [],
   "flips": 0,
   "collide": 0.0488,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 301,
@@ -16184,7 +16909,8 @@
   "audit": [],
   "flips": 2,
   "collide": 0.009,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 302,
@@ -16238,7 +16964,8 @@
   "audit": [],
   "flips": 1,
   "collide": 0.064,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 303,
@@ -16292,7 +17019,8 @@
   "audit": [],
   "flips": 0,
   "collide": 0.1217,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 304,
@@ -16346,7 +17074,8 @@
   "audit": [],
   "flips": 1,
   "collide": 0.0556,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 305,
@@ -16400,7 +17129,8 @@
   "audit": [],
   "flips": 3,
   "collide": 1.0,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 306,
@@ -16454,7 +17184,8 @@
   "audit": [],
   "flips": 0,
   "collide": 0.0,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 307,
@@ -16508,7 +17239,8 @@
   "audit": [],
   "flips": 0,
   "collide": 0.0,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 308,
@@ -16562,7 +17294,8 @@
   "audit": [],
   "flips": 0,
   "collide": 0.0673,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 309,
@@ -16616,7 +17349,8 @@
   "audit": [],
   "flips": 1,
   "collide": 0.0435,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 310,
@@ -16670,7 +17404,8 @@
   "audit": [],
   "flips": 0,
   "collide": 0.029,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 311,
@@ -16724,7 +17459,8 @@
   "audit": [],
   "flips": 0,
   "collide": 0.0565,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 312,
@@ -16778,7 +17514,8 @@
   "audit": [],
   "flips": 0,
   "collide": 0.0517,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 313,
@@ -16832,7 +17569,8 @@
   "audit": [],
   "flips": 1,
   "collide": 0.0088,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 314,
@@ -16886,7 +17624,8 @@
   "audit": [],
   "flips": 0,
   "collide": 0.015,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 315,
@@ -16940,7 +17679,8 @@
   "audit": [],
   "flips": 0,
   "collide": 0.0177,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 316,
@@ -16994,7 +17734,8 @@
   "audit": [],
   "flips": 0,
   "collide": 0.0493,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 317,
@@ -17048,7 +17789,8 @@
   "audit": [],
   "flips": 0,
   "collide": 0.0513,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 318,
@@ -17102,7 +17844,8 @@
   "audit": [],
   "flips": 0,
   "collide": 0.0079,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 319,
@@ -17156,7 +17899,8 @@
   "audit": [],
   "flips": 2,
   "collide": 0.2273,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 320,
@@ -17210,7 +17954,8 @@
   "audit": [],
   "flips": 0,
   "collide": 0.3091,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 321,
@@ -17264,7 +18009,8 @@
   "audit": [],
   "flips": 2,
   "collide": 0.0,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 322,
@@ -17318,7 +18064,8 @@
   "audit": [],
   "flips": 0,
   "collide": 0.0,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 323,
@@ -17372,7 +18119,8 @@
   "audit": [],
   "flips": 1,
   "collide": 0.0,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 324,
@@ -17426,7 +18174,8 @@
   "audit": [],
   "flips": 0,
   "collide": 0.0,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 325,
@@ -17480,7 +18229,8 @@
   "audit": [],
   "flips": 0,
   "collide": 0.007,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 326,
@@ -17534,7 +18284,8 @@
   "audit": [],
   "flips": 2,
   "collide": 0.0088,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 327,
@@ -17588,7 +18339,8 @@
   "audit": [],
   "flips": 0,
   "collide": 0.0315,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 328,
@@ -17642,7 +18394,8 @@
   "audit": [],
   "flips": 1,
   "collide": 0.0084,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 329,
@@ -17696,7 +18449,8 @@
   "audit": [],
   "flips": 0,
   "collide": 0.0476,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 330,
@@ -17750,7 +18504,8 @@
   "audit": [],
   "flips": 0,
   "collide": 0.0077,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 331,
@@ -17804,7 +18559,8 @@
   "audit": [],
   "flips": 0,
   "collide": 0.0,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 332,
@@ -17858,7 +18614,8 @@
   "audit": [],
   "flips": 0,
   "collide": 0.3869,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 333,
@@ -17912,7 +18669,8 @@
   "audit": [],
   "flips": 0,
   "collide": 0.0588,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 334,
@@ -17966,7 +18724,8 @@
   "audit": [],
   "flips": 0,
   "collide": 0.0559,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 335,
@@ -18020,7 +18779,8 @@
   "audit": [],
   "flips": 0,
   "collide": 0.0078,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 336,
@@ -18074,7 +18834,8 @@
   "audit": [],
   "flips": 0,
   "collide": 0.1293,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 337,
@@ -18128,7 +18889,8 @@
   "audit": [],
   "flips": 0,
   "collide": 0.0625,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 338,
@@ -18182,7 +18944,8 @@
   "audit": [],
   "flips": 0,
   "collide": 0.0388,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 339,
@@ -18236,7 +18999,8 @@
   "audit": [],
   "flips": 0,
   "collide": 0.0076,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 340,
@@ -18290,7 +19054,8 @@
   "audit": [],
   "flips": 0,
   "collide": 0.0,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 341,
@@ -18344,7 +19109,8 @@
   "audit": [],
   "flips": 0,
   "collide": 0.0357,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 342,
@@ -18398,7 +19164,8 @@
   "audit": [],
   "flips": 0,
   "collide": 0.0,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 343,
@@ -18452,7 +19219,8 @@
   "audit": [],
   "flips": 0,
   "collide": 0.0078,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 344,
@@ -18506,7 +19274,8 @@
   "audit": [],
   "flips": 0,
   "collide": 0.0154,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 345,
@@ -18560,7 +19329,8 @@
   "audit": [],
   "flips": 0,
   "collide": 0.0909,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 346,
@@ -18614,7 +19384,8 @@
   "audit": [],
   "flips": 0,
   "collide": 0.0197,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 347,
@@ -18668,7 +19439,8 @@
   "audit": [],
   "flips": 0,
   "collide": 0.025,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 348,
@@ -18722,7 +19494,8 @@
   "audit": [],
   "flips": 0,
   "collide": 0.048,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 349,
@@ -18776,7 +19549,8 @@
   "audit": [],
   "flips": 0,
   "collide": 0.0465,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 350,
@@ -18830,7 +19604,8 @@
   "audit": [],
   "flips": 0,
   "collide": 0.0076,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 351,
@@ -18884,7 +19659,8 @@
   "audit": [],
   "flips": 0,
   "collide": 0.0077,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 352,
@@ -18938,7 +19714,8 @@
   "audit": [],
   "flips": 2,
   "collide": 0.3089,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 353,
@@ -18992,7 +19769,8 @@
   "audit": [],
   "flips": 0,
   "collide": 0.0338,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 354,
@@ -19046,7 +19824,8 @@
   "audit": [],
   "flips": 0,
   "collide": 0.0515,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 355,
@@ -19100,7 +19879,8 @@
   "audit": [],
   "flips": 0,
   "collide": 0.7391,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 356,
@@ -19154,7 +19934,8 @@
   "audit": [],
   "flips": 0,
   "collide": 0.2327,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 357,
@@ -19208,7 +19989,8 @@
   "audit": [],
   "flips": 0,
   "collide": 0.0876,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 358,
@@ -19262,7 +20044,8 @@
   "audit": [],
   "flips": 0,
   "collide": 0.5522,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 359,
@@ -19316,7 +20099,8 @@
   "audit": [],
   "flips": 0,
   "collide": 0.0556,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 360,
@@ -19370,7 +20154,8 @@
   "audit": [],
   "flips": 0,
   "collide": 0.0479,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 361,
@@ -19424,7 +20209,8 @@
   "audit": [],
   "flips": 0,
   "collide": 0.02,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 362,
@@ -19478,7 +20264,8 @@
   "audit": [],
   "flips": 1,
   "collide": 0.1163,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 363,
@@ -19532,7 +20319,8 @@
   "audit": [],
   "flips": 0,
   "collide": 0.1679,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 364,
@@ -19586,7 +20374,8 @@
   "audit": [],
   "flips": 0,
   "collide": 0.0229,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 365,
@@ -19640,7 +20429,8 @@
   "audit": [],
   "flips": 0,
   "collide": 0.0388,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 366,
@@ -19694,7 +20484,8 @@
   "audit": [],
   "flips": 0,
   "collide": 0.0211,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 367,
@@ -19748,7 +20539,8 @@
   "audit": [],
   "flips": 0,
   "collide": 0.0563,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 368,
@@ -19802,7 +20594,8 @@
   "audit": [],
   "flips": 0,
   "collide": 0.1752,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 369,
@@ -19856,7 +20649,8 @@
   "audit": [],
   "flips": 0,
   "collide": 0.0074,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 370,
@@ -19910,7 +20704,8 @@
   "audit": [],
   "flips": 0,
   "collide": 0.8523,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 371,
@@ -19964,7 +20759,8 @@
   "audit": [],
   "flips": 0,
   "collide": 0.1765,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 372,
@@ -20018,7 +20814,8 @@
   "audit": [],
   "flips": 0,
   "collide": 0.1549,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 373,
@@ -20072,7 +20869,8 @@
   "audit": [],
   "flips": 1,
   "collide": 0.0,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 374,
@@ -20126,7 +20924,8 @@
   "audit": [],
   "flips": 0,
   "collide": 0.0,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 375,
@@ -20180,7 +20979,8 @@
   "audit": [],
   "flips": 0,
   "collide": 0.0137,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 376,
@@ -20234,7 +21034,8 @@
   "audit": [],
   "flips": 0,
   "collide": 0.0438,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 377,
@@ -20288,7 +21089,8 @@
   "audit": [],
   "flips": 0,
   "collide": 0.4198,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 378,
@@ -20342,7 +21144,8 @@
   "audit": [],
   "flips": 0,
   "collide": 0.0616,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 379,
@@ -20396,7 +21199,8 @@
   "audit": [],
   "flips": 0,
   "collide": 0.0153,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 380,
@@ -20450,7 +21254,8 @@
   "audit": [],
   "flips": 0,
   "collide": 0.0211,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 381,
@@ -20504,7 +21309,8 @@
   "audit": [],
   "flips": 0,
   "collide": 0.0472,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 382,
@@ -20558,7 +21364,8 @@
   "audit": [],
   "flips": 0,
   "collide": 0.0071,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 383,
@@ -20612,7 +21419,8 @@
   "audit": [],
   "flips": 0,
   "collide": 0.058,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 384,
@@ -20666,7 +21474,8 @@
   "audit": [],
   "flips": 0,
   "collide": 0.0522,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 385,
@@ -20720,7 +21529,8 @@
   "audit": [],
   "flips": 0,
   "collide": 0.0284,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 386,
@@ -20774,7 +21584,8 @@
   "audit": [],
   "flips": 0,
   "collide": 0.008,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 387,
@@ -20828,7 +21639,8 @@
   "audit": [],
   "flips": 0,
   "collide": 0.0593,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 388,
@@ -20882,7 +21694,8 @@
   "audit": [],
   "flips": 0,
   "collide": 0.0144,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 389,
@@ -20936,7 +21749,8 @@
   "audit": [],
   "flips": 0,
   "collide": 0.0308,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 390,
@@ -20990,7 +21804,8 @@
   "audit": [],
   "flips": 0,
   "collide": 0.4135,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 391,
@@ -21044,7 +21859,8 @@
   "audit": [],
   "flips": 0,
   "collide": 0.0507,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 392,
@@ -21098,7 +21914,8 @@
   "audit": [],
   "flips": 0,
   "collide": 0.6985,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 393,
@@ -21152,7 +21969,8 @@
   "audit": [],
   "flips": 0,
   "collide": 0.0,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 394,
@@ -21206,7 +22024,8 @@
   "audit": [],
   "flips": 0,
   "collide": 0.0159,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 395,
@@ -21260,7 +22079,8 @@
   "audit": [],
   "flips": 0,
   "collide": 0.0,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 396,
@@ -21314,7 +22134,8 @@
   "audit": [],
   "flips": 0,
   "collide": 0.0534,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 397,
@@ -21368,7 +22189,8 @@
   "audit": [],
   "flips": 0,
   "collide": 0.0077,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 398,
@@ -21422,7 +22244,8 @@
   "audit": [],
   "flips": 0,
   "collide": 0.0211,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 399,
@@ -21476,7 +22299,8 @@
   "audit": [],
   "flips": 0,
   "collide": 0.1206,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 400,
@@ -21530,7 +22354,8 @@
   "audit": [],
   "flips": 0,
   "collide": 0.3504,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 401,
@@ -21584,7 +22409,8 @@
   "audit": [],
   "flips": 0,
   "collide": 0.0074,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 402,
@@ -21638,7 +22464,8 @@
   "audit": [],
   "flips": 0,
   "collide": 0.0,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 403,
@@ -21692,7 +22519,8 @@
   "audit": [],
   "flips": 0,
   "collide": 0.0072,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 404,
@@ -21746,7 +22574,8 @@
   "audit": [],
   "flips": 0,
   "collide": 0.0284,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 405,
@@ -21800,7 +22629,8 @@
   "audit": [],
   "flips": 0,
   "collide": 0.041,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 406,
@@ -21854,7 +22684,8 @@
   "audit": [],
   "flips": 0,
   "collide": 0.016,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 407,
@@ -21908,7 +22739,8 @@
   "audit": [],
   "flips": 2,
   "collide": 0.0325,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 408,
@@ -21962,7 +22794,8 @@
   "audit": [],
   "flips": 0,
   "collide": 0.0153,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 409,
@@ -22016,7 +22849,8 @@
   "audit": [],
   "flips": 0,
   "collide": 0.0,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 410,
@@ -22070,7 +22904,8 @@
   "audit": [],
   "flips": 0,
   "collide": 0.0219,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 411,
@@ -22124,7 +22959,8 @@
   "audit": [],
   "flips": 0,
   "collide": 0.0,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 412,
@@ -22178,7 +23014,8 @@
   "audit": [],
   "flips": 0,
   "collide": 0.0077,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 413,
@@ -22232,7 +23069,8 @@
   "audit": [],
   "flips": 0,
   "collide": 0.0074,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 414,
@@ -22286,7 +23124,8 @@
   "audit": [],
   "flips": 0,
   "collide": 0.0146,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 415,
@@ -22340,7 +23179,8 @@
   "audit": [],
   "flips": 0,
   "collide": 0.0221,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 416,
@@ -22394,7 +23234,8 @@
   "audit": [],
   "flips": 0,
   "collide": 0.0222,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 417,
@@ -22448,7 +23289,8 @@
   "audit": [],
   "flips": 0,
   "collide": 0.0134,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 418,
@@ -22502,7 +23344,8 @@
   "audit": [],
   "flips": 0,
   "collide": 0.0071,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 419,
@@ -22556,7 +23399,8 @@
   "audit": [],
   "flips": 0,
   "collide": 0.035,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 420,
@@ -22610,7 +23454,8 @@
   "audit": [],
   "flips": 0,
   "collide": 0.209,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 421,
@@ -22664,7 +23509,8 @@
   "audit": [],
   "flips": 0,
   "collide": 0.0071,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 422,
@@ -22718,7 +23564,8 @@
   "audit": [],
   "flips": 0,
   "collide": 0.0222,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 423,
@@ -22772,7 +23619,8 @@
   "audit": [],
   "flips": 0,
   "collide": 0.0149,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 424,
@@ -22826,7 +23674,8 @@
   "audit": [],
   "flips": 0,
   "collide": 0.0833,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 425,
@@ -22880,7 +23729,8 @@
   "audit": [],
   "flips": 0,
   "collide": 0.0511,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 426,
@@ -22934,7 +23784,8 @@
   "audit": [],
   "flips": 0,
   "collide": 0.0078,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 427,
@@ -22988,7 +23839,8 @@
   "audit": [],
   "flips": 0,
   "collide": 0.0217,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 428,
@@ -23042,7 +23894,8 @@
   "audit": [],
   "flips": 0,
   "collide": 0.0076,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 429,
@@ -23096,7 +23949,8 @@
   "audit": [],
   "flips": 0,
   "collide": 0.0138,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 430,
@@ -23150,7 +24004,8 @@
   "audit": [],
   "flips": 0,
   "collide": 0.0,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 431,
@@ -23204,7 +24059,8 @@
   "audit": [],
   "flips": 0,
   "collide": 0.0075,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 432,
@@ -23258,7 +24114,8 @@
   "audit": [],
   "flips": 0,
   "collide": 0.0078,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 433,
@@ -23312,7 +24169,8 @@
   "audit": [],
   "flips": 1,
   "collide": 0.0221,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 434,
@@ -23366,7 +24224,8 @@
   "audit": [],
   "flips": 0,
   "collide": 0.0077,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 435,
@@ -23420,7 +24279,8 @@
   "audit": [],
   "flips": 0,
   "collide": 0.0147,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 436,
@@ -23474,7 +24334,8 @@
   "audit": [],
   "flips": 0,
   "collide": 0.0075,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 437,
@@ -23528,7 +24389,8 @@
   "audit": [],
   "flips": 0,
   "collide": 0.0074,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 438,
@@ -23582,7 +24444,8 @@
   "audit": [],
   "flips": 0,
   "collide": 0.0074,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 439,
@@ -23636,7 +24499,8 @@
   "audit": [],
   "flips": 0,
   "collide": 0.0,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 440,
@@ -23690,7 +24554,8 @@
   "audit": [],
   "flips": 1,
   "collide": 0.0083,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 441,
@@ -23744,7 +24609,8 @@
   "audit": [],
   "flips": 0,
   "collide": 0.0315,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 442,
@@ -23798,7 +24664,8 @@
   "audit": [],
   "flips": 0,
   "collide": 0.0073,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 443,
@@ -23852,7 +24719,8 @@
   "audit": [],
   "flips": 0,
   "collide": 0.0,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 444,
@@ -23906,7 +24774,8 @@
   "audit": [],
   "flips": 0,
   "collide": 0.0,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 445,
@@ -23960,7 +24829,8 @@
   "audit": [],
   "flips": 0,
   "collide": 0.0,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 446,
@@ -24014,7 +24884,8 @@
   "audit": [],
   "flips": 0,
   "collide": 0.0067,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 447,
@@ -24068,7 +24939,8 @@
   "audit": [],
   "flips": 0,
   "collide": 0.0,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 448,
@@ -24122,7 +24994,8 @@
   "audit": [],
   "flips": 0,
   "collide": 0.0076,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 449,
@@ -24176,7 +25049,8 @@
   "audit": [],
   "flips": 0,
   "collide": 0.0145,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 450,
@@ -24230,7 +25104,8 @@
   "audit": [],
   "flips": 0,
   "collide": 0.0,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 451,
@@ -24284,7 +25159,8 @@
   "audit": [],
   "flips": 0,
   "collide": 0.0134,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 452,
@@ -24338,7 +25214,8 @@
   "audit": [],
   "flips": 0,
   "collide": 0.0,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 453,
@@ -24392,7 +25269,8 @@
   "audit": [],
   "flips": 0,
   "collide": 0.0067,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 454,
@@ -24446,7 +25324,8 @@
   "audit": [],
   "flips": 0,
   "collide": 0.0068,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 455,
@@ -24500,7 +25379,8 @@
   "audit": [],
   "flips": 0,
   "collide": 0.0129,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 456,
@@ -24554,7 +25434,8 @@
   "audit": [],
   "flips": 0,
   "collide": 0.014,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 457,
@@ -24608,7 +25489,8 @@
   "audit": [],
   "flips": 0,
   "collide": 0.0214,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 458,
@@ -24662,7 +25544,8 @@
   "audit": [],
   "flips": 0,
   "collide": 0.0,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 459,
@@ -24716,7 +25599,8 @@
   "audit": [],
   "flips": 0,
   "collide": 0.014,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 460,
@@ -24770,7 +25654,8 @@
   "audit": [],
   "flips": 0,
   "collide": 0.0,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 461,
@@ -24824,7 +25709,8 @@
   "audit": [],
   "flips": 0,
   "collide": 0.0134,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 462,
@@ -24878,7 +25764,8 @@
   "audit": [],
   "flips": 0,
   "collide": 0.0137,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 463,
@@ -24932,7 +25819,8 @@
   "audit": [],
   "flips": 0,
   "collide": 0.0069,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 464,
@@ -24986,7 +25874,8 @@
   "audit": [],
   "flips": 0,
   "collide": 0.0132,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 465,
@@ -25040,7 +25929,8 @@
   "audit": [],
   "flips": 0,
   "collide": 0.0204,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 466,
@@ -25094,7 +25984,8 @@
   "audit": [],
   "flips": 0,
   "collide": 0.0138,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 467,
@@ -25148,7 +26039,8 @@
   "audit": [],
   "flips": 0,
   "collide": 0.0065,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 468,
@@ -25202,7 +26094,8 @@
   "audit": [],
   "flips": 1,
   "collide": 0.0069,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  },
  {
   "k": 469,
@@ -25256,6 +26149,502 @@
   "audit": [],
   "flips": 1,
   "collide": 0.0131,
-  "where": "local-cma"
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
+ },
+ {
+  "k": 470,
+  "t": "2026-10-15T22:34:49Z",
+  "params": {
+   "az": 123.082,
+   "el": 43.218,
+   "sigma": -1,
+   "A1": 88.762,
+   "A2": 84.953,
+   "sing": 15.0,
+   "tilt": 13.912,
+   "tilt_a": -75.483,
+   "s": 110.295,
+   "phi_s": -10.375,
+   "Ls": 41.602,
+   "cov": 0.667,
+   "c_off": 0.0,
+   "q_ring": 0.999,
+   "r_block": 89.012,
+   "saddle": 1,
+   "neck": "down",
+   "hub": "o20",
+   "width": 12.0,
+   "t_link": 3.0,
+   "q": 0.97
+  },
+  "inband14": 0.6137,
+  "inband10": 0.409,
+  "reach": 0.4875,
+  "follow": 0.8833,
+  "contact": 0.0966,
+  "gap": 86.21,
+  "closure": 0.6682,
+  "mass_g": 1035.1,
+  "honest": true,
+  "kmode": "march",
+  "rho": 88.14,
+  "T": 103.0,
+  "c": 42.5,
+  "outer_contact_poses": 1,
+  "inband_member": {
+   "hub1": 0.0294,
+   "hub2": 0.3976,
+   "link1": 0.2946,
+   "link2": 0.7585,
+   "band": 0.681,
+   "shoe": 0.0,
+   "neck": 1.0
+  },
+  "audit": [],
+  "flips": 0,
+  "collide": 0.0136,
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
+ },
+ {
+  "k": 471,
+  "t": "2026-10-15T22:34:56Z",
+  "params": {
+   "az": 118.042,
+   "el": 37.134,
+   "sigma": -1,
+   "A1": 89.581,
+   "A2": 84.978,
+   "sing": 15.0,
+   "tilt": 13.011,
+   "tilt_a": -88.748,
+   "s": 117.171,
+   "phi_s": -18.183,
+   "Ls": 42.862,
+   "cov": 0.642,
+   "c_off": 0.0,
+   "q_ring": 0.996,
+   "r_block": 86.752,
+   "saddle": 1,
+   "neck": "down",
+   "hub": "o20",
+   "width": 12.0,
+   "t_link": 3.0,
+   "q": 0.984
+  },
+  "inband14": 0.5945,
+  "inband10": 0.4318,
+  "reach": 0.45,
+  "follow": 0.8167,
+  "contact": 0.0692,
+  "gap": 95.8,
+  "closure": 0.6455,
+  "mass_g": 887.9,
+  "honest": true,
+  "kmode": "march",
+  "rho": 85.72,
+  "T": 94.7,
+  "c": 43.0,
+  "outer_contact_poses": 0,
+  "inband_member": {
+   "hub1": 0.0,
+   "hub2": 0.0159,
+   "link1": 0.1004,
+   "link2": 0.597,
+   "band": 0.764,
+   "shoe": 0.0,
+   "neck": 0.959
+  },
+  "audit": [],
+  "flips": 0,
+  "collide": 0.0845,
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
+ },
+ {
+  "k": 472,
+  "t": "2026-10-15T22:35:00Z",
+  "params": {
+   "az": 123.95,
+   "el": 36.873,
+   "sigma": -1,
+   "A1": 91.0,
+   "A2": 83.901,
+   "sing": 15.0,
+   "tilt": 12.966,
+   "tilt_a": -70.155,
+   "s": 110.789,
+   "phi_s": -20.486,
+   "Ls": 41.563,
+   "cov": 0.63,
+   "c_off": 0.0,
+   "q_ring": 1.0,
+   "r_block": 87.959,
+   "saddle": 1,
+   "neck": "down",
+   "hub": "o20",
+   "width": 12.0,
+   "t_link": 3.0,
+   "q": 0.976
+  },
+  "inband14": 0.6676,
+  "inband10": 0.498,
+  "reach": 0.4813,
+  "follow": 0.8667,
+  "contact": 0.0584,
+  "gap": 79.28,
+  "closure": 0.6273,
+  "mass_g": 991.2,
+  "honest": true,
+  "kmode": "march",
+  "rho": 87.77,
+  "T": 92.1,
+  "c": 23.2,
+  "outer_contact_poses": 2,
+  "inband_member": {
+   "hub1": 0.0463,
+   "hub2": 0.1868,
+   "link1": 0.1878,
+   "link2": 0.5775,
+   "band": 0.8523,
+   "shoe": 0.0,
+   "neck": 0.9877
+  },
+  "audit": [],
+  "flips": 0,
+  "collide": 0.0072,
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
+ },
+ {
+  "k": 473,
+  "t": "2026-10-15T22:35:06Z",
+  "params": {
+   "az": 121.494,
+   "el": 42.415,
+   "sigma": -1,
+   "A1": 89.645,
+   "A2": 84.767,
+   "sing": 15.0,
+   "tilt": 14.827,
+   "tilt_a": -71.768,
+   "s": 116.259,
+   "phi_s": -15.279,
+   "Ls": 41.73,
+   "cov": 0.67,
+   "c_off": 0.0,
+   "q_ring": 0.998,
+   "r_block": 87.912,
+   "saddle": 1,
+   "neck": "down",
+   "hub": "o20",
+   "width": 12.0,
+   "t_link": 3.0,
+   "q": 0.968
+  },
+  "inband14": 0.5526,
+  "inband10": 0.3499,
+  "reach": 0.4813,
+  "follow": 0.8833,
+  "contact": 0.1156,
+  "gap": 94.84,
+  "closure": 0.6727,
+  "mass_g": 1118.4,
+  "honest": true,
+  "kmode": "march",
+  "rho": 87.82,
+  "T": 104.2,
+  "c": 45.3,
+  "outer_contact_poses": 0,
+  "inband_member": {
+   "hub1": 0.0403,
+   "hub2": 0.1302,
+   "link1": 0.2708,
+   "link2": 0.7134,
+   "band": 0.6113,
+   "shoe": 0.0,
+   "neck": 1.0
+  },
+  "audit": [],
+  "flips": 0,
+  "collide": 0.0068,
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
+ },
+ {
+  "k": 474,
+  "t": "2026-10-15T22:35:11Z",
+  "params": {
+   "az": 120.075,
+   "el": 37.314,
+   "sigma": -1,
+   "A1": 91.0,
+   "A2": 86.633,
+   "sing": 15.0,
+   "tilt": 11.53,
+   "tilt_a": -84.73,
+   "s": 110.47,
+   "phi_s": -12.576,
+   "Ls": 42.915,
+   "cov": 0.674,
+   "c_off": 0.0,
+   "q_ring": 0.998,
+   "r_block": 87.531,
+   "saddle": 1,
+   "neck": "down",
+   "hub": "o20",
+   "width": 12.0,
+   "t_link": 3.0,
+   "q": 0.981
+  },
+  "inband14": 0.6017,
+  "inband10": 0.4069,
+  "reach": 0.5125,
+  "follow": 0.9,
+  "contact": 0.0621,
+  "gap": 79.79,
+  "closure": 0.6773,
+  "mass_g": 906.6,
+  "honest": true,
+  "kmode": "march",
+  "rho": 87.08,
+  "T": 101.1,
+  "c": 40.8,
+  "outer_contact_poses": 0,
+  "inband_member": {
+   "hub1": 0.0165,
+   "hub2": 0.1285,
+   "link1": 0.1455,
+   "link2": 0.5443,
+   "band": 0.7531,
+   "shoe": 0.0,
+   "neck": 0.9616
+  },
+  "audit": [],
+  "flips": 0,
+  "collide": 0.0268,
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
+ },
+ {
+  "k": 475,
+  "t": "2026-10-15T22:35:16Z",
+  "params": {
+   "az": 126.792,
+   "el": 37.066,
+   "sigma": -1,
+   "A1": 89.705,
+   "A2": 84.174,
+   "sing": 15.0,
+   "tilt": 12.187,
+   "tilt_a": -79.049,
+   "s": 111.289,
+   "phi_s": -23.224,
+   "Ls": 42.506,
+   "cov": 0.696,
+   "c_off": 0.0,
+   "q_ring": 1.0,
+   "r_block": 85.769,
+   "saddle": 1,
+   "neck": "down",
+   "hub": "o20",
+   "width": 12.0,
+   "t_link": 3.0,
+   "q": 0.963
+  },
+  "inband14": 0.6807,
+  "inband10": 0.4538,
+  "reach": 0.5312,
+  "follow": 0.8833,
+  "contact": 0.1039,
+  "gap": 75.87,
+  "closure": 0.7,
+  "mass_g": 945.7,
+  "honest": true,
+  "kmode": "march",
+  "rho": 85.77,
+  "T": 106.5,
+  "c": 48.1,
+  "outer_contact_poses": 0,
+  "inband_member": {
+   "hub1": 0.0461,
+   "hub2": 0.8309,
+   "link1": 0.3105,
+   "link2": 0.8841,
+   "band": 0.7494,
+   "shoe": 0.0,
+   "neck": 0.9997
+  },
+  "audit": [],
+  "flips": 0,
+  "collide": 0.0,
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
+ },
+ {
+  "k": 476,
+  "t": "2026-10-15T22:35:22Z",
+  "params": {
+   "az": 123.592,
+   "el": 37.41,
+   "sigma": -1,
+   "A1": 91.423,
+   "A2": 83.826,
+   "sing": 15.0,
+   "tilt": 12.718,
+   "tilt_a": -74.388,
+   "s": 110.321,
+   "phi_s": -19.475,
+   "Ls": 40.943,
+   "cov": 0.688,
+   "c_off": 0.0,
+   "q_ring": 1.0,
+   "r_block": 87.062,
+   "saddle": 1,
+   "neck": "down",
+   "hub": "o20",
+   "width": 12.0,
+   "t_link": 3.0,
+   "q": 0.971
+  },
+  "inband14": 0.6125,
+  "inband10": 0.3966,
+  "reach": 0.525,
+  "follow": 0.9,
+  "contact": 0.0861,
+  "gap": 79.86,
+  "closure": 0.6864,
+  "mass_g": 983.2,
+  "honest": true,
+  "kmode": "march",
+  "rho": 86.91,
+  "T": 104.7,
+  "c": 47.7,
+  "outer_contact_poses": 0,
+  "inband_member": {
+   "hub1": 0.0391,
+   "hub2": 0.6303,
+   "link1": 0.2442,
+   "link2": 0.7481,
+   "band": 0.6838,
+   "shoe": 0.0,
+   "neck": 1.0
+  },
+  "audit": [],
+  "flips": 0,
+  "collide": 0.0,
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
+ },
+ {
+  "k": 477,
+  "t": "2026-10-15T22:35:28Z",
+  "params": {
+   "az": 123.259,
+   "el": 37.611,
+   "sigma": -1,
+   "A1": 91.567,
+   "A2": 86.768,
+   "sing": 15.0,
+   "tilt": 11.935,
+   "tilt_a": -76.832,
+   "s": 110.182,
+   "phi_s": -15.651,
+   "Ls": 41.136,
+   "cov": 0.699,
+   "c_off": 0.0,
+   "q_ring": 0.998,
+   "r_block": 88.834,
+   "saddle": 1,
+   "neck": "down",
+   "hub": "o20",
+   "width": 12.0,
+   "t_link": 3.0,
+   "q": 0.981
+  },
+  "inband14": 0.5738,
+  "inband10": 0.389,
+  "reach": 0.5437,
+  "follow": 0.8833,
+  "contact": 0.0541,
+  "gap": 80.33,
+  "closure": 0.7,
+  "mass_g": 994.4,
+  "honest": true,
+  "kmode": "march",
+  "rho": 87.57,
+  "T": 106.0,
+  "c": 41.7,
+  "outer_contact_poses": 0,
+  "inband_member": {
+   "hub1": 0.0,
+   "hub2": 0.0447,
+   "link1": 0.1353,
+   "link2": 0.5389,
+   "band": 0.7067,
+   "shoe": 0.0,
+   "neck": 0.983
+  },
+  "audit": [],
+  "flips": 0,
+  "collide": 0.039,
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
+ },
+ {
+  "k": 478,
+  "t": "2026-10-15T22:35:35Z",
+  "params": {
+   "az": 121.547,
+   "el": 34.731,
+   "sigma": -1,
+   "A1": 90.06,
+   "A2": 85.894,
+   "sing": 15.0,
+   "tilt": 12.654,
+   "tilt_a": -88.104,
+   "s": 110.392,
+   "phi_s": -20.148,
+   "Ls": 41.958,
+   "cov": 0.688,
+   "c_off": 0.0,
+   "q_ring": 0.997,
+   "r_block": 86.138,
+   "saddle": 1,
+   "neck": "down",
+   "hub": "o20",
+   "width": 12.0,
+   "t_link": 3.0,
+   "q": 0.984
+  },
+  "inband14": 0.6273,
+  "inband10": 0.4475,
+  "reach": 0.5188,
+  "follow": 0.9167,
+  "contact": 0.0483,
+  "gap": 73.55,
+  "closure": 0.6909,
+  "mass_g": 870.1,
+  "honest": true,
+  "kmode": "march",
+  "rho": 85.16,
+  "T": 103.5,
+  "c": 39.1,
+  "outer_contact_poses": 1,
+  "inband_member": {
+   "hub1": 0.0,
+   "hub2": 0.2485,
+   "link1": 0.1556,
+   "link2": 0.5908,
+   "band": 0.7801,
+   "shoe": 0.0,
+   "neck": 0.9704
+  },
+  "audit": [],
+  "flips": 0,
+  "collide": 0.0461,
+  "where": "local-cma",
+  "model_version": "v2 (saddle option, neck down the arm)"
  }
 ]
