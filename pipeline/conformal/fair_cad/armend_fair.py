@@ -422,6 +422,25 @@ def hub_gap_report(E, dh, lat, zb_of_r, r0, tag, nth=72):
     print(f"  {tag}: skin gap min {np.nanmin(gap):.2f} mm, median (worst frame) {np.nanmedian(worst):.2f} mm, median (all frames) {np.nanmedian(gap):.2f} mm", flush=True)
     return dict(min=float(np.nanmin(gap)), median_worst=float(np.nanmedian(worst)), median_all=float(np.nanmedian(gap)))
 
+NECK_GAP = float(os.environ.get("NECK_GAP_DEG", 80.0))
+def neck_exit(E, dh):
+    """direction (in JN's plane) in which the neck leaves the hub: toward the bar (dh) unless link N-1 sweeps within
+    NECK_GAP deg of it about JN in a followed frame (r16 3R: link 2 came within 46 deg; its 14 mm arm and the 14 mm neck
+    overlapped 14-22 mm from the axis, 1.8 mm deep, in 32 % of the frames) - then the smallest turn away from the sweep
+    that clears it. r16: 65 deg (exit +19) left 0.65 mm in 19 % of the frames next to the hub rim; 80 deg (exit +34):
+    0 of 451 frames, and the neck loft no longer folds. NECK_GAP_DEG=0: always toward the bar (old)"""
+    lat = unit(np.cross(W0, dh)); g = f"l{BB.N - 1}"; az = []
+    for p, G in E.frames:
+        v = (E.RS[p] @ E.HG[p]).T @ (G[g] @ np.array([1.0, 0, 0])); v = v - (v @ W0) * W0
+        az.append(math.degrees(math.atan2(v @ lat, v @ dh)))
+    az = np.array(az); dist = lambda c: float(np.min(np.abs((c - az + 180) % 360 - 180))) if len(az) else 180.0
+    cands = sorted(range(-90, 91), key=abs); ok = [c for c in cands if dist(c) >= NECK_GAP]; c = ok[0] if ok else max(cands, key=dist)
+    print(f"  link {BB.N - 1} sweeps {az.min():.0f}..{az.max():.0f} deg about JN (0 = toward the bar): neck exit at {c:+d} deg, "
+          f"{dist(c):.0f} deg from the link's axis (need {NECK_GAP:.0f})", flush=True)
+    ca, sa = math.cos(math.radians(c)), math.sin(math.radians(c))
+    rot = lambda v: ca * (v - (v @ W0) * W0) + sa * np.cross(W0, v) + (v @ W0) * W0             # rotation about W0 by c
+    return unit(ca * dh + sa * lat), rot
+
 def build_hub_neck_v2(E):
     """non-cuff arm end, built like a machined part: the JN hub is one turned revolve (exact seat plane on top, R0.8 round
     into the wall; its skin side a turned sketch - centre flat + cone + G2 blends - fitted over the dense skin envelope,
@@ -448,7 +467,8 @@ def build_hub_neck_v2(E):
         zb_ = fit["zb"]; hub_gap_report(E, dh, lat, lambda r: np.interp(r, rr, zb_), r0, "turned skin side (new hub)")
     hub = BB.G.revolve_profile(prof, W0, ref=dh); print("  JN hub (turned): valid", hub.isValid(), round(hub.Volume() / 1000, 2), "cm3", flush=True)
     al = math.atan((MB.HUB_R + 3.0) / 65.0); tw = unit(unit(P_bar) - (unit(P_bar) @ W0) * W0)
-    P0 = W0 * (ZJ4 + T_BOT / 2) + (MB.HUB_R - 4.0) * dh; prof0 = BB.rr_prof(2 * BB.HW, T_BOT - 0.6); acr0 = unit(np.cross(W0, dh))
+    dn, rot = neck_exit(E, dh); tw = rot(tw)                                                # the neck leaves clear of link N-1's sweep
+    P0 = W0 * (ZJ4 + T_BOT / 2) + (MB.HUB_R - 4.0) * dn; prof0 = BB.rr_prof(2 * BB.HW, T_BOT - 0.6); acr0 = unit(np.cross(W0, dn)); dh = dn
     sd = math.cos(al) * W0 + math.sin(al) * tw
     for appr in (0.0, 12.0, 16.0, 20.0):
         # 0: great circle + Bezier ends (r13 n4). A short neck (r16 3R: JN hub beside BOTTOM's cut, 44 mm chord, 55 deg

@@ -1,7 +1,7 @@
 [
  {
-  "id": "cad_r16_n3_s1373_1_lam30",
-  "label": "CAD r16 3R s1373 #1, FAIR_LAM 30 (proximity test)"
+  "id": "cad_r16_n3_s1373_1_fair",
+  "label": "CAD r16 3R s1373 #1, 2-D fair fields, FAIR_LAM 30 (proximity test)"
  },
  {
   "id": "cad_r16_n3_s1374_0",

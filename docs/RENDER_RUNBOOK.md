@@ -48,8 +48,12 @@ frame (R16), both via `make_cad_design.py`. Without `SKIP_SCORE=1` it ends with 
 ## 2. Judge (per design)
 
 ```bash
-OMP_NUM_THREADS=2 bash tools/judge_all.sh cad_<key> fast    # JUDGE_TIME; scorecard -> designs/cad_<key>/judge/scorecard.md
+OMP_NUM_THREADS=2 bash tools/judge_all.sh cad_<key> fast    # scorecard -> designs/cad_<key>/judge/scorecard.md
 ```
+
+Dry run (load 5-8 on 4 cores): 43 min - R1 at 10 + 14 mm (stride 3) 19 min, R7 18 s, R2 5.5 min, R6 3.5 min, R16 7 min,
+R17 8 min. `part_contact.py`, `workspace.py` and `dynamics.py` start 4 processes each (`--jobs` default), not 2.
+Two designs judged in parallel will take ~1 h; judge the first pick while the second builds.
 
 ## 3. Free motion preview (show it, get the go-ahead for the paid render)
 
@@ -60,7 +64,7 @@ CLIPS="Raise overhead,Reach back pocket" FILM_OUT=designs/cad_<key>/film_preview
   python3 film_plan.py "cad_<key>:<label>:<subtitle>" [ "cad_<key2>:...:..." ]      # 1 s; several designs swap mid-clip
 cd /home/user/exo-shoulder
 NODE_PATH=$(npm root -g) node tools/preview_film.mjs designs/cad_<key>/film_preview.json pipeline/full-exo/designs/cad_<key>/preview --every 0      # 12 stills, 30 s
-NODE_PATH=$(npm root -g) node tools/preview_film.mjs designs/cad_<key>/film_preview.json pipeline/full-exo/designs/cad_<key>/preview --frames none --every 2 --w 960 --h 540   # MP4, MP4_TIME
+NODE_PATH=$(npm root -g) node tools/preview_film.mjs designs/cad_<key>/film_preview.json pipeline/full-exo/designs/cad_<key>/preview --frames none --every 2 --w 960 --h 540   # MP4, 4.3 min
 ```
 
 `film.html` plays the same plan with the film's camera, a matte-black headless mannequin and the part materials
@@ -123,12 +127,16 @@ judges -> preview (~3 min) -> yes -> calibration chunk -> film + stills (~30 min
    `FIRST_GAP=0` restores the raw maps. After the fix J1 rises 0.72 mm. This changes the CAD builder's
    envelope, not a judge: R2 (exact signed distance to the posed body) stays the check. The same artefact may cost the
    evaluator workspace poses ("skin_above_shape") - not checked.
-2. **Neck fold** (`armend_fair.build_hub_neck_v2`). On a 3R chain whose JN hub sits beside BOTTOM's cut (r16 s1373:
-   44 mm chord, 55 deg turn, hugging floor up to 9 mm over the chord) the great-circle + Bezier neck folds. Now the
-   rail neck's smoothing-spline paths are tried (approach 12/16/20 mm) and the first unfolded loft wins. s1374 (the
-   robustness build): approach 12 is clean. s1373: every candidate is flagged self-intersecting by OCC's analyser;
-   the 20 mm one (widest bend, 11.8 mm) is kept - the BOTTOM merge gives one valid solid (35.4 cm3) and R7 passes, but
-   look at the neck in `parts.html` before showing it (residual for L2).
+2. **Neck fold and link 2 hitting the neck** (`armend_fair.build_hub_neck_v2`). On r16 s1373 the JN hub sits beside
+   BOTTOM's cut (44 mm chord, 55 deg turn, hugging floor up to 9 mm over the chord): the great-circle + Bezier neck
+   folds (OCC self-intersection). Fallback: the rail neck's smoothing-spline paths (approach 12/16/20 mm), first
+   unfolded loft wins. The first full judge run then found R6 = 1.77 mm: **link 2's arm swept over the neck's start**
+   (14-22 mm from the J3 axis, at the hub's seat level) in 143 of 451 frames (Raise overhead, Comb hair, Reach back
+   pocket, Wave) - `verify_armend.py` misses it because it excludes 26.5 mm round JN. Fix: `neck_exit()` measures link
+   N-1's azimuth sweep about JN over the followed frames (r16: -138..-46 deg, 0 = toward the bar) and turns the neck's
+   exit away from it until it is `NECK_GAP_DEG` (80) clear: exit +34 deg -> link 2 vs arm end 0 of 451 frames (65 deg
+   left 0.65 mm in 87), and the neck loft no longer folds. The robustness build (s1374, ramp 35, base under link 1 at
+   J1) built clean with the spline fallback.
 3. **CAD built thicker / flatter than the eval scored**: `members.T_LINK` was 5.5 and the ramps 35/55 deg; the r16/r17
    jobs use t_link 4.0 and ramp_deg 60. `fair_build.py` now takes t_link / hw / ramp_deg from the input
    (`RAMP_DEG`, `RAMP_TOP` env still override); r13 inputs carry 5.5 and no ramp, so their builds do not change.
@@ -147,6 +155,18 @@ judges -> preview (~3 min) -> yes -> calibration chunk -> film + stills (~30 min
    `joint_v4.py` / `hardware.py` parts + boolean re-validation - not a small change. R17 already models rolling bearings
    (mu 0.005) independent of the CAD hardware.
 
+9. **R16 = 0 % on the CAD is mostly a measurement artefact** (the L1 proxy scored 46 %): `judge/workspace.py` judges
+   every part named BOTTOM / neck / JN hub against the body, and the merged part carries the user's own BOTTOM bar,
+   which sits inside the rig's arm in every pose (the size mismatch R2 reports for the user's cuffs: 17.6 mm) - 114 of
+   174 poses fail on it; and the v4 J3 stack's ring nut sits 0.62 mm inside the J3 cap in every pose (89 poses; the
+   reference cad_r13_n4_s1343_1 has the same pair at 0.80 mm). Judging only the custom part of BOTTOM (e.g. within
+   110 mm of the GH centre, as `score_design.py` does) and fixing the JN stack levels are judge / hardware changes for
+   the lead; not done here.
+
 Known residuals: the fair CAD's link ribbons sit higher than the evaluator's fitted shape (l2 ribbon median +7.5 mm,
 p90 +14 mm; l1 +3.4 mm) - the swept-band profile is a stiff beam clamped flat at both hub planes. `FAIR_LAM=30` (less
-stiff) gives R1-aim 23.6 % vs 19.8 % (+3.8 points). `designs/cad_<key>/exo.glb` is 22 MB and not git-ignored.
+stiff) gives R1-aim 23.6 % vs 19.8 % (+3.8 points, stride 6). **`FIELD_MODE=fair FAIR_LAM=30`** (2-D fair fields
+instead of swept bands, `cad_r16_n3_s1373_1_fair`) gives **R1-aim 36.8 %** (stride 6; the L1 proxy: 42.6 %), all parts
+valid, 251 g - but the links come out lumpy (visibly "fitted", against CAD_STANDARD's "constrained, not weirdly meshed");
+shoulder members alone (no arm parts, stride 6): swept CAD 14.0 % vs proxy 39.8 %, so the loss is in the links, not
+the neck. `designs/cad_<key>/exo.glb` is 22 MB and not git-ignored.
