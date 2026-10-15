@@ -60,6 +60,13 @@ possible (R1 on the clips). New requirement R16 below. Overnight GPU cap raised 
 allowed ("Yes, as a comparison"); scaling the rig to the user is low priority ("any design can be scaled by a few
 percent").
 
+**DOF counting, user 2026-10-15 (~14:00 UTC):** "families should be categorized on degrees of active freedom (a passive
+cuff which slides with 3 rotational joints is 3dof if the sliding doesn't need to be powered or position measured for
+all function to happen)". So R5 / R5-aim count ACTIVE DOF: joints that must be powered (MVP2) or position-measured for
+the device to work. A passive element the arm drives (e.g. a cuff slide whose position is set by the chain's closure)
+is outside the count. Concept families are grouped by active DOF; GPU sweeps are short, per subtype within a family
+(docs/concepts/).
+
 | ID | Requirement | Threshold | Judge | Why this threshold |
 |---|---|---|---|---|
 | R1 | Proximity: share of the covered skin that is 2-14 mm from the metal, while following | >= 90 % (aim: the same at 2-10 mm, reported as R1-aim) | `pipeline/full-exo/score_design.py` with BAND_HI=14 (exact posed skin, 30 fps) | the 1 cm rule with the user's allowance: pass at 14 mm, aim for 10 (2026-10-15); 2 mm keeps the liner/clearance |
