@@ -44,7 +44,8 @@ PARAMS.update(remote=1, ramp=1, neck=5.0, S_auto=1, jam_contact=1, drop=1, slide
               az1=75.0, el1=55.0, b1=1.0,        # J1 seat: spec sdir(55, 15) = bvec(75, 55), skin normal
               az2=-5.0, el2=40.0, b2=1.0,        # J2 home seat: spec sdir(40, 95) = bvec(-5, 40), skin normal
               wd=86.33, wa=21.83, b3=0.0,        # J3: GH-radial hub on the arm (spec), b3 1 = skin normal on the deltoid
-              S_max=25.0, bridge=1)             # stage travel cap (mm, each slide); member-3 bridge strap (verifier fix)
+              S_max=25.0, bridge=1,             # stage travel cap (mm, each slide); member-3 bridge strap (verifier fix)
+              centre=0)                         # 1: each slide range centred on its mid travel (rail / carriages shifted)
 SEAT_KEYS = ("az1", "el1", "b1", "az2", "el2", "b2", "wd", "wa", "b3")
 
 
@@ -108,7 +109,12 @@ class Design(S.Design):
             self.c[1] = foot(R1.T @ (P2 - tt1), self.u[1])
             _, _, _, X2, _, _ = self.ik(Q0[None]); R12, tt2 = X2[0][0], X2[1][0]
             self.c[2] = foot(R12.T @ (P3 - tt2), self.u[2])
-        self.ea = self.ec = None
+        self.ea = self.ec = None; self.m = np.zeros(3)
+
+    def slides_ok(self, s):
+        P = self.p; d = s - self.m
+        if not P.get("slides", 1): return np.ones(len(s), bool)
+        return (np.abs(d[:, 0]) <= P["S_a"]) & (np.abs(d[:, 1]) <= P["S_t"]) & (np.abs(d[:, 2]) <= P["R_r"])
 
 
 class Model(S.Model):
@@ -120,7 +126,9 @@ class Model(S.Model):
         if self.p.get("S_auto") and self.p.get("slides", 1):
             names = list(Z["NAMES"]); ii = np.nonzero(np.isin(Z["CID"], [names.index(n) for n in CB.FIT]))[0]
             _, okc, _, _, _, sc = self.D.ik(Z["HG"][ii].astype(float))
-            sa = np.abs(np.r_[s[ok], sc[okc]]); m = sa.max(0) if len(sa) else np.zeros(3); cap = float(self.p.get("S_max", 25.0))
+            sv = np.r_[s[ok], sc[okc]]; cap = float(self.p.get("S_max", 25.0))
+            if self.p.get("centre") and len(sv): self.D.m = 0.5 * (sv.max(0) + sv.min(0))   # centred ranges (mid travel)
+            sa = np.abs(sv - self.D.m); m = sa.max(0) if len(sa) else np.zeros(3)
             self.p["S_a"] = round(min(cap, max(2.0, float(m[0]) + 0.5)), 1); self.p["S_t"] = round(min(cap, max(2.0, float(m[1]) + 0.5)), 1)
             self.p["R_r"] = round(min(cap, max(0.5, float(m[2]) + 0.5)), 1)
         self.q, self.X = q, {1: X1, 2: X2, 3: X3}; self.s = s
@@ -130,6 +138,14 @@ class Model(S.Model):
         cont = self.continuity()
         bad_c = okf & ~cont; self.why[bad_c] = "flip"; okf &= cont
         self.kin_ok = okf
+
+    def T(self, m, i):
+        """member transforms; centred stage: the arm-fixed rail (5) and the along-carriage (4) sit at the mid travel D.m"""
+        if m in (4, 5) and self.D.m.any():
+            Q = self.Q[i]; D = self.D; mm = D.m
+            loc = (mm[0] if m == 5 else self.s[i, 0]) * D.sa + mm[1] * D.st + mm[2] * D.sn
+            return Q, Q @ loc
+        return super().T(m, i)
 
     def finalize(self):
         super().finalize()
@@ -171,6 +187,37 @@ if __name__ == "__main__":
     if mode == "seats":
         D = Design(par); print("tilt (deg between seat ray and skin normal)", D.seats["tilt_deg"], "a", [round(math.degrees(a), 1) for a in D.A],
                               "offsets", [round(float(np.linalg.norm(c)), 1) for c in D.c], "rest err", getattr(D, "rest_err", None))
+        sys.exit()
+    if mode == "redteam":                                         # the pose that jams, the point that pinches, named groups
+        B = CB.Bench(n_clip=60, n_ws=160); r, M = evaluate(B, par)
+        print({k: r[k] for k in ("gap", "reach", "follow", "inband14", "inband10", "contact")}, "S", [M.p["S_a"], M.p["S_t"], M.p["R_r"]], "f", r["f"], r["seats"])
+        print("parts in band 2-14 [share, median mm, samples]:", r["parts_ib14"]); print("reasons not taken:", r["why"], r["parts_pairs"])
+        print("slide travel max |s| over the poses kept (along, across, radial):", r["s_abs_max"])
+        lab = lambda i: f"#{i} {B.kind[i]} {B.clip[i][:22]:22s} plane {B.poses[i]['plane']:6.1f} elev {B.poses[i]['elev']:6.1f} axial {B.poses[i]['axial']:6.1f}"
+        print("-- poses not taken (first 25) --")
+        for i in [i for i in range(len(B.idx)) if M.why[i]][:25]:
+            print(f"  {M.why[i]:7s} {lab(i)}" + (f" clear {M.clear[i]:.1f} ({M.last_pair.get(i)})" if M.why[i] == "parts" else ""))
+        names = list(M.rigid) + list(M.link_pts); sizes = [len(X) for _, X in M.rigid.values()] + [len(X) for _, X in M.link_pts.values()]
+        cut = np.cumsum([0] + sizes); low = []
+        for i in range(len(B.idx)):
+            d = B.res[i]
+            if d is None or float(np.min(d)) < 0: continue
+            j = int(np.argmin(d[:cut[-1]])); low.append((float(d[j]), i, names[int(np.searchsorted(cut, j, side="right") - 1)]))
+        low.sort(); print("-- closest metal over taken poses (the point that pinches) --")
+        for dd, i, part in low[:6]: print(f"  {dd:5.2f} mm  {part:6s} {lab(i)}")
+        taken = lambda i: B.res[i] is not None and float(np.min(B.res[i])) >= 0
+        el = np.array([p["elev"] for p in B.poses]); pl = np.array([p["plane"] for p in B.poses])
+        groups = dict(rest=np.argsort(el)[:5], overhead=np.nonzero(el >= 120)[0], across=np.nonzero((pl >= 100) & (el >= 40))[0],
+                      behind=np.array([i for i in range(len(B.idx)) if "back" in B.clip[i].lower() or (pl[i] < -30 and el[i] > 20)], int))
+        print("-- named pose groups: taken / total, median metal-skin mm, in band 2-14 --")
+        for g, ii in groups.items():
+            ii = list(ii); tk = [i for i in ii if taken(i)]; dd = np.concatenate([B.res[i] for i in tk]) if tk else np.array([np.nan])
+            print(f"  {g:9s} {len(tk)}/{len(ii)}  median {float(np.median(dd)):.1f} mm  ib14 {float(((dd >= 2) & (dd <= 14)).mean()):.3f}  not taken: {[(int(i), M.why[i]) for i in ii if not taken(i)][:8]}")
+        H2 = M.Hneed["hub2"]; top = np.argsort(-H2.max(1))[:5]
+        print("-- hub 2 face: poses that set it (needed face height mm) --")
+        for a in top: print(f"  {H2[a].max():6.1f}  {lab(int(M.poses_fit[a]))}  dropped {bool(M.drop[a])}")
+        print("  median need over kept poses", round(float(np.median(H2[~M.drop].max(1))), 1), "fitted", round(M.f[1], 1))
+        if "--png" in sys.argv: S.ID = ID; S.sketch(M, os.path.join(REPO, "docs", "concepts", "img", ID + ".png")); print("sketch written")
         sys.exit()
     nc, nw = (20, 40) if mode == "quick" else (60, 160)
     B = CB.Bench(n_clip=nc, n_ws=nw); t = time.time()

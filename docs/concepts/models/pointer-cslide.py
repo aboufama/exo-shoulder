@@ -264,6 +264,29 @@ if __name__ == "__main__":
         for m in L["chain"].members:
             X = np.linalg.norm(L["pts"][m.name], axis=-1); d = K.dist_many(B, np.repeat(np.nonzero(tk)[0], X.shape[1]), L["pts"][m.name][tk].reshape(-1, 3)) if tk.any() else np.zeros(1)
             print(m.name, "radius", round(float(X.min()), 1), round(float(X.max()), 1), "skin dist med/p10/p90", np.percentile(d, [50, 10, 90]).round(1) if d.size else None)
+    elif a[0] == "redteam":                   # the red-team pose list: why each pose is (not) taken, the nearest metal
+        r = bench_eval(B, p); print({k: r[k] for k in ("gap", "reach", "follow", "inband14", "inband10", "contact")}, r["inband_member"])
+        L = B._kit_last; ch = L["chain"]; F = B._kitF; a1, p2, d3, xP, yP, E1, E2, th, ok0, margin = kin(F, p)
+        Dd = design(B, p); win = np.abs(wrap(th - Dd["c"])) <= Dd["T"] / 2 + 1e-9
+        pz = np.array([(q["plane"], q["elev"], q["axial"]) for q in B.poses])
+        tg = dict(rest=(0, 0, 0), rest_ir=(0, 0, -80), rest_er=(0, 0, 60), abd90=(0, 90, 0), overhead_abd=(0, 160, 0),
+                  overhead_flex=(90, 160, 0), across_body=(130, 90, 0), across_low=(120, 45, -40), behind_back=(-90, 40, -90),
+                  ext=(-60, 50, 0), abd90_ir=(0, 90, -80), abd90_er=(0, 90, 90))
+        for nm, t3 in tg.items():
+            dd = np.abs(pz - np.array(t3)); dd[:, 2] = np.minimum(dd[:, 2], 360 - dd[:, 2]); i = int(np.argmin(dd @ [1, 1, 0.5]))
+            why = "TAKEN" if L["take"][i] else ("singular" if not (margin[i] >= p["sing"]) else "window" if not win[i] else "K2" if not L["ok"][i] else "collide" if L["hit"][i] else "?")
+            line = f"{nm:13s} pose {i:3d} {B.kind[i]:4s} {tuple(round(float(x)) for x in pz[i])} q3 {th[i]:7.1f} margin {margin[i]:5.1f} {why}"
+            if L["take"][i]:
+                for m in ch.members:
+                    dm = K.dist_many(B, np.full(L["pts"][m.name].shape[1], i), L["pts"][m.name][i]); line += f" | {m.name} {dm.min():.1f}/{np.median(dm):.1f}"
+            if why == "collide":
+                pr = []
+                for x, y in itertools.combinations(ch.members, 2):
+                    sub = K.Chain(members=[x, y], ok=ch.ok, joints=ch.joints); msk = np.zeros(len(L["ok"]), bool); msk[i] = True
+                    if _collisions(sub, {x.name: L["pts"][x.name], y.name: L["pts"][y.name]}, msk)[i]: pr.append(f"{x.name}-{y.name}")
+                line += " " + ",".join(pr)
+            print(line)
+        print("contact poses:", int(sum(1 for i in range(len(B.res)) if B.res[i] is not None and np.min(B.res[i]) < 0)), "outer", r.get("outer_contact_poses"))
     elif a[0] == "twist":                     # the shoe-angle distribution: what travel T a share of poses needs
         F = B._kitF; a1, p2, d3, xP, yP, E1, E2, th, ok, margin = kin(F, p)
         for cov in (0.5, 0.7, 0.8, 0.9, 0.95, 1.0):

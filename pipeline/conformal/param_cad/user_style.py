@@ -405,64 +405,137 @@ def main():
     for g, n, s in parts:
         Rg, tg = X0[g]; out.append((g, n, xform(s, Rg.T, -Rg.T @ tg)))
     AE.S_CUT = S_CUT2; AE.LAP_HOLES = holes
+    cuff_parts, rep["upper cuff"] = upper_cuff(E)
+    ia = [k for k, (g, n, _) in enumerate(out) if n.startswith("D6-04")][0]
     for g, n, s in AE.user_parts():
-        if n.startswith("BOTTOM"): n = f"BOTTOM (user's bar, cut at s {S_CUT2:g}, 2x M3 countersunk for the arm-end tongue)"
+        if n.startswith(("UPPER ARM CUFF", "M4x6 ISO 10642 countersunk (upper cuff)")): continue    # replaced by upper_cuff()
+        if n.startswith("BOTTOM"):                                                        # user 2026-10-15: BOTTOM and the J3 member
+            m = s.fuse(out[ia][2])                                                        # are ONE 5-axis part, not bolted
+            m = m.clean() if m.clean().isValid() else m
+            print(f"  BOTTOM + arm end fused: valid {m.isValid()}, solids {len(m.Solids())}, faces {len(m.Faces())}")
+            out[ia] = ("H", f"D6-04 BOTTOM + arm end, one 5-axis part (user's bar cut at s {S_CUT2:g}, strap fused into its channel; 7075-T6)", m)
+            continue
         out.append((g, n, s))
+    out += cuff_parts
     print(f"{len(out)} parts built in {time.time() - t0:.0f} s")
     return out, rep, C
 
 
-S_CUT2, NECK_W, NECK_BETA, NECK_R, NECK_L3 = 255.0, 10.0, 40.0, 20.0, 3.0
+S_CUT2, NECK_W, NECK_XC, NECK_RT, NECK_RB, NECK_RHO, NECK_LIFT = 255.0, 8.0, 55.0, 12.0, 7.5, 4.5, 1.0
 
 
 def arm_end(E, F, J3w, X0):
-    """J3 lower member on the arm. The J3 pad plane and BOTTOM's channel plane meet along a line d running down the arm:
-    the pad's strap S-turns in the pad plane (line, R20 arc, line) onto that line, twists about it by the planes' angle
-    (smoothstep law along a straight run, so it leaves both flats tangentially), and continues flat as a tongue in the
-    channel, held by 2x M3 countersunk screws through BOTTOM's web. Returns ([(group, name, solid)], report, LAP_HOLES)."""
+    """J3 lower member on the arm, from lines, tangent arcs and one bend only (no loft, no twist). The J3 pad plane
+    (normal = the J3 axis) and BOTTOM's channel plane (normal = the bar's up) are 22 deg apart about a line d running down
+    the arm. So: a flat strap in the pad plane leaves J3 straight down the arm (clear of link 2's sweep), turns 90 deg
+    (R12, planform) to run posterior and crosses that common line square; one bend about it (R4.5 centreline, the
+    planes' 22 deg) puts it in the channel plane; there it turns down the arm again (R7.5, planform) into a tongue in
+    BOTTOM's channel, held by 2x M3 countersunk screws through BOTTOM's web. Returns ([(group, name, solid)], report,
+    LAP_HOLES)."""
     RH, tH = X0["H"]; k3 = unit(J3w); F3 = F["J3"]
-    up, ub, vb = RH @ AE.axB, RH @ AE.uB, RH @ AE.vB
+    up, ub = RH @ AE.axB, RH @ AE.uB
     cbar = lambda s_: RH @ (AE.CB + s_ * AE.uB) + tH                                       # bar axis point (centre plane) at station s
     d = unit(np.cross(k3, up)); d = -d if d @ ub > 0 else d                                # common line of the two planes, down the arm
     yA, yB = np.cross(k3, d), np.cross(up, d)
-    OA = F3 * k3
-    M = np.array([[1.0, k3 @ up], [k3 @ up, 1.0]]); a_, b_ = np.linalg.solve(M, [F3 + T / 2, cbar(S_CUT2) @ up]); p0 = a_ * k3 + b_ * up
-    xo = lambda p: float(d @ (p - OA))
-    pf = lambda x: p0 + (x - xo(p0)) * d                                                   # point of the common line at height x below the hub
-    yf = float(yA @ (p0 - OA)); fold = math.degrees(math.acos(np.clip(k3 @ up, -1, 1)))
-    b = math.radians(NECK_BETA); L = L_SEAT
-    L1 = (-yf - NECK_R * (1 - math.cos(b))) / math.sin(b) - L
-    assert L1 > 2, f"neck: no room for the S-turn (L1 {L1:.1f})"
-    start = (L * math.cos(b), -L * math.sin(b), -b); segs = [(0.0, L1), (1.0 / NECK_R, NECK_R * b), (0.0, NECK_L3)]
-    pe, he = chain_end(start, segs); xa = float(pe[0]); assert abs(pe[1] - yf) < 1e-6 and abs(he) < 1e-9
-    xcut = xo(cbar(S_CUT2)); xb = xcut - 1.0
-    print(f"arm end: planes {fold:.1f} deg apart, common line {abs(yf):.1f} mm behind J3 in the pad plane; S-strap down to {xa:.1f}, "
-          f"twist {xa:.1f}..{xb:.1f} ({xb - xa:.1f} mm), tongue into the channel from {xcut:.1f}")
-    assert xb - xa > 15, "neck: twist run too short"
-    body = glue(plate_r(k3, F3, math.cos(b) * d - math.sin(b) * yA, NECK_W),
-                bar_swept(d, yA, start, segs, t=T, w=NECK_W, origin=OA + T / 2 * k3, flat=True))
-    Phi = math.atan2(np.cross(k3, up) @ d, k3 @ up)
-    def rot(v, a): return v * math.cos(a) + np.cross(d, v) * math.sin(a) + d * (d @ v) * (1 - math.cos(a))
-    wires = []
-    for u in np.linspace(0, 1, 13):
-        s_ = (1 - math.cos(math.pi * u)) / 2; ph = Phi * (3 * s_ ** 2 - 2 * s_ ** 3)
-        c = pf(xa + s_ * (xb - xa)); n = rot(k3, ph); wd = np.cross(n, d)
-        wires.append(rrect(c, wd, n, NECK_W / 2, T / 2))
-    assert np.abs(rot(k3, Phi) - up).max() < 1e-6
-    twist = cq.Solid.makeLoft(wires, ruled=False)
-    body = glue(body, twist)
-    s_end = S_CUT2 - 19.0; Lt = xo(cbar(s_end)) - xb
-    body = glue(body, terminal_r(pf(xb), up, d, NECK_W, Lt)); nr, nf = -1, -1
+    OAm = F3 * k3 + T / 2 * k3                                                             # pad mid-plane at the J3 axis
+    M = np.array([[1.0, k3 @ up], [k3 @ up, 1.0]]); a_, b_ = np.linalg.solve(M, [F3 + T / 2, cbar(S_CUT2) @ up + NECK_LIFT]); p0 = a_ * k3 + b_ * up
+    xA = lambda p: float(d @ (p - OAm)); yf = float(yA @ (p0 - OAm))
+    th = math.acos(np.clip(yA @ yB, -1, 1)); dl = NECK_RHO * math.tan(th / 2)              # bend angle, tangent length
+    xc, w = NECK_XC, NECK_W
+    pc = p0 + (xc - xA(p0)) * d                                                            # where the strap crosses the common line
+    h1, h2 = -yA, -yB; T1 = pc - dl * h1; T2 = pc + dl * h2
+    n1 = unit(h2 - (h2 @ h1) * h1)
+    xcut = xA(cbar(S_CUT2))
+    assert xc + NECK_RB + 2 < xcut, "neck: the channel-plane turn must sit above BOTTOM's cut end"
+    # 1) pad stub (planform pad, down the arm) + strap in the pad plane: line down, R12 turn, line posterior to T1
+    yT1 = float(yA @ (T1 - OAm)); L1 = (xc - NECK_RT) - L_SEAT; L3 = -NECK_RT - yT1
+    assert L1 > 1 and L3 > 1, (L1, L3)
+    segA = [(0.0, L1), (-1.0 / NECK_RT, NECK_RT * math.pi / 2), (0.0, L3)]
+    body = glue(plate_r(k3, F3, d, w), bar_swept(d, yA, (L_SEAT, 0.0, 0.0), segA, t=T, w=w, origin=OAm, flat=True))
+    pe, he = chain_end((L_SEAT, 0.0, 0.0), segA); assert abs(pe[0] - xc) < 1e-6 and abs(pe[1] - yT1) < 1e-6
+    # 2) the bend about the common line: an arc in the cross-section plane, width along d
+    body = glue(body, bar_swept(h1, n1, (0.0, 0.0, 0.0), [(1.0 / NECK_RHO, NECK_RHO * th)], t=T, w=w, origin=T1))
+    # 3) channel plane: R7.5 turn down the arm, then the tongue with a full round end
+    s_end = S_CUT2 - 19.0; xe = float(d @ (cbar(s_end) - T2))
+    segB = [(1.0 / NECK_RB, NECK_RB * math.pi / 2), (0.0, xe - NECK_RB)]
+    body = glue(body, bar_swept(d, yB, (0.0, 0.0, -math.pi / 2), segB, t=T, w=w, origin=T2, flat=True))
+    pB, _ = chain_end((0.0, 0.0, -math.pi / 2), segB); tip = T2 + pB[0] * d + pB[1] * yB
+    body = glue(body, terminal_r(tip, up, d, w, 0.001))
     body = body.fuse(lower_pin(k3, F3))
-    holes = []
-    for s_ in (S_CUT2 - 6.0, S_CUT2 - 16.0):
-        c = pf(xo(cbar(s_))); body = body.cut(cq.Solid.makeCylinder(1.25, 10.0, V(c - 5 * up), V(up)))   # M3 tap drill
-        q = RH.T @ (c - tH); holes.append((s_, float((q - AE.CB) @ AE.vB)))
+    holes = []; tline = T2 - NECK_RB * yB                                                  # the tongue's centre line
+    off = float(yB @ (tline - cbar(S_CUT2)))
+    assert abs(off) + w / 2 <= 11.5, f"tongue {off:+.1f} mm off the channel centre: it would cut BOTTOM's flanges"
     body = body.clean() if body.clean().isValid() else body
-    rep = dict(planes_deg=fold, common_line_behind_J3_mm=abs(yf), s_strap=dict(beta_deg=NECK_BETA, R=NECK_R, L1=L1), twist_mm=xb - xa,
-               twist_deg=math.degrees(Phi), tongue_mm=Lt + NECK_W / 2, bottom_cut_s=S_CUT2, holes=holes, rounded_edges=nr, unrounded=nf)
-    print(f"  arm end valid {body.isValid()}, rounds {nr} (+{nf} refused); BOTTOM holes (s, lateral) {[(round(a, 1), round(c, 2)) for a, c in holes]}")
-    return [("H", "D6-04 arm end: J3 pad + pin + S-strap, twist, tongue in BOTTOM's channel (Ti-6Al-4V)", body)], rep, holes
+    rep = dict(planes_deg=math.degrees(th), common_line_behind_J3_mm=abs(yf), embedded_in_web_mm=NECK_LIFT + T / 2 - 1.5, crossing_mm_below_J3=xc, turn_pad_plane_R=NECK_RT,
+               bend_R=NECK_RHO, turn_channel_plane_R=NECK_RB, tongue_offset_from_channel_centre_mm=off, bottom_cut_s=S_CUT2, holes=holes)
+    print(f"arm end: planes {math.degrees(th):.1f} deg apart about a line {abs(yf):.1f} mm behind J3; strap down {xc:.0f} mm, R{NECK_RT:g} turn, "
+          f"R{NECK_RHO:g} bend, R{NECK_RB:g} turn, tongue {off:+.1f} mm off the channel centre; valid {body.isValid()}")
+    return [("H", "D6-04 arm end: J3 pad + pin, strap with one bend into BOTTOM's channel", body)], rep, holes
+
+
+CUFF = dict(t_land=2.8, t_shell=2.0, land_hw=15.6, wrap_deg=110.0, s0=83.85, s1=164.65, round=0.8)
+
+
+def upper_cuff(E):
+    """Upper-arm cuff from one sketch of lines and arcs, extruded straight along BOTTOM (no loft, no fitted shell): a flat
+    land under the bar (BOTTOM's skin-side plane, 2.8 mm), an inner arc about the arm (radius and centre chosen as the
+    tightest circle that keeps the skin envelope + 2 mm clear over every followed frame of the fit clips) wrapping
+    +-110 deg, and an outer arc through the land's ends that thins to 2 mm at the wrap ends; 6x M4 countersunk from
+    inside into BOTTOM's tapped holes. Built in the arm's rest frame (group H). Returns ([(group, name, solid)], report)."""
+    from scipy.optimize import brentq, fsolve
+    CB, uB, vB, axB = AE.CB, AE.uB, AE.vB, AE.axB; HR = AE.HR; c = CUFF
+    zt = AE.Z_SKIN_BAR                                                                      # the bar's skin-side plane (-2.8)
+    ss = np.linspace(c["s0"], c["s1"], 28); W_ = math.radians(c["wrap_deg"])
+    def clear(Rin, vc, n_phi=61):
+        zc = zt - c["t_land"] - Rin; ph = np.linspace(-W_, W_, n_phi)
+        P = np.array([CB + s_ * uB + (vc + Rin * math.sin(p_)) * vB + (zc + Rin * math.cos(p_)) * axB for s_ in ss for p_ in ph])
+        Pc = P @ HR; nr = np.linalg.norm(Pc, axis=1)                                       # rest -> canonical (rows: HR.T @ p)
+        return float((nr - E.min_radius("can", Pc / nr[:, None])).min())
+    best = None
+    for vc in np.arange(-12.0, 12.1, 3.0):
+        lo, hi = 25.0, 120.0
+        if clear(hi, vc) < 0: continue
+        Rin = brentq(lambda r: clear(r, vc), lo, hi, xtol=0.25) if clear(lo, vc) < 0 else lo
+        Rin = math.ceil(Rin + 0.25)                                                          # a round radius, clear by construction
+        if best is None or Rin < best[0]: best = (Rin, vc)
+    assert best, "cuff: no circle clears the arm"
+    Rin, vc = best; zc = zt - c["t_land"] - Rin
+    print(f"cuff: inner arc R{Rin:g} centred {vc:+.0f} mm across the bar, clearance {clear(Rin, vc, 121):.2f} mm over the envelope (2 mm in it)")
+    # outer arc: through the land ends, 2 mm from the inner arc at the wrap ends
+    wl = c["land_hw"]; ue = np.array([math.sin(W_), math.cos(W_)]); Pi = np.array([vc, zc]) + Rin * ue
+    def eqs(x):
+        zc2, Ro = x
+        return [math.hypot(wl - vc, zt - zc2) - Ro, Ro - np.linalg.norm(Pi - np.array([vc, zc2])) - c["t_shell"]]
+    zc2, Ro = fsolve(eqs, [zc - 1.0, Rin + c["t_land"] + 1.0])
+    C1, C2 = np.array([vc, zc]), np.array([vc, zc2])
+    pt = lambda C, R, a: C + R * np.array([math.sin(a), math.cos(a)])
+    ao_l = math.atan2(wl - vc, zt - zc2); Po = C2 + Ro * (Pi - C2) / np.linalg.norm(Pi - C2); ao_e = math.atan2(*(Po - C2))
+    pl = cq.Plane(origin=tuple(map(float, CB + c["s0"] * uB)), xDir=tuple(map(float, vB)), normal=tuple(map(float, uB)))
+    q = lambda xy: (float(xy[0]), float(xy[1]))
+    wp = (cq.Workplane(pl).moveTo(-wl + 2 * vc - vc, zt).lineTo(wl, zt) if False else cq.Workplane(pl).moveTo(vc - (wl - vc), zt))
+    # outline: land (line) -> outer arc right -> end cap -> inner arc over the top -> end cap -> outer arc left -> close
+    L = np.array([2 * vc - wl, zt]); Rr = np.array([wl, zt])
+    wp = (cq.Workplane(pl).moveTo(*q(L)).lineTo(*q(Rr))
+          .threePointArc(q(pt(C2, Ro, (ao_l + ao_e) / 2)), q(pt(C2, Ro, ao_e)))
+          .lineTo(*q(pt(C1, Rin, W_)))
+          .threePointArc(q(pt(C1, Rin, 0.0)), q(pt(C1, Rin, -W_)))
+          .lineTo(*q(pt(C2, Ro, -ao_e)))
+          .threePointArc(q(pt(C2, Ro, -(ao_l + ao_e) / 2)), q(L)).close())
+    cuff = wp.extrude(c["s1"] - c["s0"]).val()
+    cuff = rounded(cuff, r=c["round"])
+    scr = []
+    for s_ in (94.25, 124.25, 154.25):
+        for y_ in (-8.75, 8.75):
+            p = CB + s_ * uB + y_ * vB + zt * axB; zi = zc + math.sqrt(Rin ** 2 - (y_ - vc) ** 2)   # inner face under the screw
+            cuff = cuff.cut(cq.Solid.makeCylinder(2.25, 12.0, V(p - 10 * axB), V(axB)))
+            hd = (zt - zi)                                                                      # head sits flush with the inner face
+            cuff = cuff.cut(cq.Solid.makeCone(4.2, 0.0, 4.2, V(p - hd * axB), V(axB)))
+            head = PB.revolved([(0, 0), (3.95, 0), (2.0, 1.95), (2.0, 6.0), (0, 6.0)], np.array([0, 0, 1.0]), 0.0)
+            Rz = PB.axis_frame(axB); scr.append(("H", "M4x6 ISO 10642 countersunk (upper cuff), polished", xform(head, Rz, p - hd * axB)))
+    cuff = cuff.clean() if cuff.clean().isValid() else cuff
+    rep = dict(inner_R=Rin, centre_across_bar=vc, outer_R=float(Ro), wrap_deg=c["wrap_deg"], length=c["s1"] - c["s0"], valid=cuff.isValid())
+    print(f"  cuff valid {cuff.isValid()}, faces {len(cuff.Faces())}, outer arc R{Ro:.1f}")
+    return [("H", "UPPER ARM CUFF (lines and arcs: flat land + inner R arc + outer arc, extruded; AlSi10Mg bead blasted)", cuff)] + scr, rep
 
 
 def export(parts, rep, C):
@@ -497,6 +570,7 @@ def export(parts, rep, C):
         mm = m.copy(); mm.merge_vertices(); vol = abs(mm.volume) if mm.is_watertight else s.Volume()
         if user: mat, rho = "user part", None
         elif "bearing" in n or "17-4PH" in n: mat, rho = ("bearing steel" if "bearing" in n else "17-4PH"), 7.8
+        elif "7075-T6" in n: mat, rho = "7075-T6 (BOTTOM merged with the arm end)", 2.81
         else: mat, rho = "Ti-6Al-4V", 4.43
         pf.append(dict(k=i, group=g, name=n, vol_cm3=round(vol / 1000, 3), material=mat, mass_g=None if rho is None else round(vol / 1000 * rho, 2),
                        valid=bool(s.isValid()), faces=len(s.Faces()), solids=len(s.Solids())))

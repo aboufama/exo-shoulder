@@ -24,3 +24,33 @@
 ## Model
 
 `docs/concepts/models/clavicular-front-route.py` (kit, all honesty checks on).
+
+Spherical 3R: J1 (O20 hub) scapula-fixed at sdir(j1lat, j1lon), J3 (O20 hub) humerus-fixed at armpt(s3, th3, 76)
+(body_pose frame), J2 by the two-circle closure (arcs a12, a23, branch sigma, fold margin), 12 x 3 links, a
+scapula-fixed 14 x 3 bridge from the handler side sdir(45, 90) via sdir(65, 20) to the J1 seat (two straps lapped
+at the waypoint), the K7 14 x 6 neck to BOTTOM. Every honesty check on (K3 march, K2 dense continuity on every
+joint axis, K6 collisions, audit clean, closure residual 0).
+
+Departures from the spec, and why: kit flat O20 hubs instead of ray-fit caps; the K7 straight neck instead of the
+dog-leg down the strip; the bridge counted as metal (it sits between the handler and the cuff); the J1 seat range
+extended to the front-top (lat 55-75) once the raw skin showed the spec's seat is not quiet (below).
+
+## Measured on the raw skin: the spec's front seat is not quiet
+
+The K3 skin requirement of an O20 disc fixed in the scapula frame, all 220 bench poses
+(scratch `seat_req.py`; same march as the bench):
+
+| J1 seat | fit clips p10 / p50 / p90 / max (mm) | workspace p50 / p90 / max | atlas S ceiling | atlas skin motion |
+|---|---|---|---|---|
+| spec AC-front sdir(40,-100) | 44 / 49 / 78 / 79 | 48 / 77 / unclearable | 0.00 | 95 mm |
+| clavicle-lateral sdir(30,-80) | 44 / 51 / 84 / 87 | 51 / 79 / unclearable | 0.00 | 111 mm |
+| supraclavicular sdir(50,-140) | 59 / 62 / 71 / unclearable | 61 / 87 / unclearable | 0.10-0.23 | 36-47 mm |
+| **front-top sdir(65,-120)** | **49 / 49 / 51 / 52** | 49 / 51 / 87 | 0.02-0.08 | 32-43 mm |
+| champion top bvec(2.4, 80.7) | 53 / 53 / 54 / 54 | 53 / 54 / 54 | 1.00 | 1.7 mm |
+
+The bony AC front is quiet only in the rig's bones: in the scapula frame the skin over it rises 34 mm in the fit
+clips alone (anterior deltoid / pectoral bulge and the humeral head moving forward under arm flexion), and in
+across-the-body workspace poses (plane 120-150, elevation 120-150) the forearm lies over the seat, so no radius up to
+220 mm clears it ("unclearable": the hub would sit inside the arm). The spec's "8-11 mm spread" was a first-sheet,
+fit-clip-only number; the arm passing over is what kills the seat. Only the front-TOP edge (lat ~65) is quiet in the
+clips.

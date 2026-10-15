@@ -55,8 +55,11 @@ def build(B, F, p):
               K.strap_member("bridge_a", b0, bw, (), width=p["br_w"], t=3.0, over=[("bridge_b", 1.0)])]
     w, t = p["width"], p["t_link"]
     o1 = [("bridge_b", 1.0)] if p.get("link1_over_bridge", 1) else []   # link 1 sweeps about J1: over the bridge's J1 end
-    links = [K.strap_member("link1", p1, p2, ("J1", "J2"), width=w, t=t, ramp_to=(("hub1", K.STACK), ("hub2", 0.0)),
-                            **({"over": o1} if o1 else {})),
+    # link 1's J1 end: ramp to the bridge's top + 1 mm (STACK + 1) over 20 mm. The kit's `over` decides the shared-joint
+    # exemption at the PRE-raise radius (at ~50 mm a sample 12 deg from J1 is exempt), then the K5 climb lifts it to
+    # ~78 mm where it is not: K6 then flagged link 1 against the bridge in 85 % of poses (measured, front-top seat).
+    links = [K.strap_member("link1", p1, p2, ("J1", "J2"), width=w, t=t, ramp_to=(("hub1", K.STACK + 1.0), ("hub2", 0.0)),
+                            end_mm=20.0, **({"over": o1} if o1 else {})),
              K.strap_member("link2", p2, p3, ("J2", "J3"), width=w, t=t, ramp_to=(("hub2", K.STACK), ("hub3", K.STACK)),
                             over=[("link1", 1.0), ("neck", 1.0)]),
              K.neck_member(F, p3, joints=("J3",), ramps=(("hub3", 0.0), (None, 0)))]
