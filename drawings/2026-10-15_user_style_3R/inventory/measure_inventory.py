@@ -607,25 +607,68 @@ def arm_end_inventory():
         if t == "torus": return abs(a["major_radius"] - b["major_radius"]) < 1e-3 and abs(a["minor_radius"] - b["minor_radius"]) < 1e-3 and np.linalg.norm(a["centre"] - b["centre"]) < 1e-3
         if t == "sphere": return abs(a["radius"] - b["radius"]) < 1e-3 and np.linalg.norm(a["centre"] - b["centre"]) < 1e-3
         return np.allclose(a["bbox"], b["bbox"], atol=1e-2) or np.linalg.norm(a["centroid"] - b["centroid"]) < 1e-2
+    from OCP.BRepExtrema import BRepExtrema_DistShapeShape
+    from OCP.BRepBuilderAPI import BRepBuilderAPI_MakeVertex
+    from OCP.BRepAlgoAPI import BRepAlgoAPI_Common
+    ofaces = ob.Faces()
+    def on_face(face_pts, face_shape, tol=2e-3):
+        for p in face_pts:
+            v = BRepBuilderAPI_MakeVertex(gp_Pnt(*map(float, p))).Vertex(); dd = BRepExtrema_DistShapeShape(v, face_shape.wrapped)
+            if not dd.IsDone() or dd.Value() > tol: return False
+        return True
+    def face_samples(face, n=3):
+        ad = BRepAdaptor_Surface(face.wrapped); u0, u1, v0, v1 = ad.FirstUParameter(), ad.LastUParameter(), ad.FirstVParameter(), ad.LastVParameter()
+        P = []
+        for a in np.linspace(0.2, 0.8, n):
+            for b_ in np.linspace(0.2, 0.8, n):
+                p = P3(ad.Value(u0 + a * (u1 - u0), v0 + b_ * (v1 - v0)))
+                if classify_face(face, p): P.append(p)
+        return P or [P3(ad.Value((u0 + u1) / 2, (v0 + v1) / 2))]
+    def classify_face(face, p):
+        from OCP.BRepClass import BRepClass_FaceClassifier
+        ad = BRepAdaptor_Surface(face.wrapped)
+        from OCP.GeomAPI import GeomAPI_ProjectPointOnSurf
+        from OCP.BRep import BRep_Tool
+        pr = GeomAPI_ProjectPointOnSurf(gp_Pnt(*map(float, p)), BRep_Tool.Surface_s(face.wrapped))
+        if pr.NbPoints() == 0: return False
+        u, v = pr.LowerDistanceParameters()
+        from OCP.gp import gp_Pnt2d
+        c = BRepClass_FaceClassifier(face.wrapped, gp_Pnt2d(u, v), 1e-6); return c.State() == TopAbs_IN
+    half = cq.Workplane(cq.Plane(origin=tuple(map(float, CB + (cut_s or 255.0) * uB)), xDir=tuple(map(float, vB)), normal=tuple(map(float, -uB)))).rect(2000, 2000).extrude(2000).val()
+    def area_below_cut(face):
+        try:
+            c = BRepAlgoAPI_Common(face.wrapped, half.wrapped); c.Build(); return cq.Shape.cast(c.Shape()).Area()
+        except Exception: return None
     cmp = []; used = set()
     for a in Fo:
         ms = [b for b in F if sig_match(a, b)]
-        smin, smax = sv(a["bbox"][:3]), sv(a["bbox"][3:])
-        if not ms: st = "removed (beyond the cut)" if sv(a["centroid"]) > (cut_s or 255) - 1e-3 else "removed / replaced (merged with the strap)"
+        if not ms and a["type"] == "B-spline":                                       # a trimmed B-spline: same surface, other bounds
+            for b in F:
+                if b["type"] == "B-spline" and b["id"] not in used and on_face(face_samples(faces[b["id"]]), ofaces[a["id"]]): ms.append(b)
+        s_lo, s_hi = sv(a["bbox"][:3]), sv(a["bbox"][3:])
+        vo_, _ = ofaces[a["id"]].tessellate(0.1, 0.3); So_ = (np.array([[q.x, q.y, q.z] for q in vo_]) - CB) @ uB
+        crosses = So_.max() > (cut_s or 255.0) + 1e-3; below = So_.max() <= (cut_s or 255.0) + 1e-3
+        ar = sum(b["area_mm2"] for b in ms); tol_a = (5e-3 if a["type"] == "B-spline" else 1e-4) * max(1.0, a["area_mm2"])
+        if not ms:
+            st = "removed (beyond the cut)" if So_.min() >= (cut_s or 255.0) - 1e-3 else "removed (covered by the fused strap/tongue or re-made)"
         else:
-            same = [b for b in ms if abs(b["area_mm2"] - a["area_mm2"]) < 1e-3 * max(1, a["area_mm2"]) and np.linalg.norm(b["centroid"] - a["centroid"]) < 1e-3]
-            ar = sum(b["area_mm2"] for b in ms)
-            st = "unchanged" if same else ("trimmed by the cut" if ar < a["area_mm2"] - 1e-3 and max(sv(b["bbox"][3:]) for b in ms) >= (cut_s or 255) - 0.5 else
-                                            ("trimmed / merged with the strap" if ar < a["area_mm2"] - 1e-3 else "kept surface, re-split (area within part)"))
             used |= {b["id"] for b in ms}
-        rec = dict(orig_face=a["id"], type=a["type"], area_orig=a["area_mm2"], s_centroid=sv(a["centroid"]), status=st, d6_04_faces=[b["id"] for b in ms])
+            if abs(ar - a["area_mm2"]) < tol_a and below: st = "unchanged" if len(ms) == 1 else "unchanged surface, split into %d faces" % len(ms)
+            elif crosses:
+                ab = area_below_cut(ofaces[a["id"]])
+                st = "trimmed by the cut" if ab is not None and abs(ar - ab) < max(tol_a, 1e-3 * ab) else "trimmed by the cut and partly covered by the fused tongue/strap"
+                if ab is not None: a["area_below_cut"] = ab
+            else: st = "partly covered by the fused tongue/strap" if ar < a["area_mm2"] else "changed (area grew)"
+        rec = dict(orig_face=a["id"], type=a["type"], area_orig=a["area_mm2"], area_in_D6_04=ar, area_orig_below_cut=a.get("area_below_cut"), s_range_orig=[float(So_.min()), float(So_.max())],
+                   status=st, d6_04_faces=[b["id"] for b in ms])
         for kk in ("radius", "minor_radius", "major_radius", "semi_angle_deg"):
             if kk in a: rec[kk] = a[kk]
-        if a["type"] in ("cylinder", "cone"): rec["axis_dir"] = a["axis_dir"]
-        if a["type"] == "plane": rec["normal"] = a["normal"]
+        if a["type"] in ("cylinder", "cone"): rec["axis_dir"] = a["axis_dir"]; rec["axis_s_v"] = [sv(a.get("axis_point", a.get("apex"))), float((np.asarray(a.get("axis_point", a.get("apex"))) - CB) @ vB)]
+        if a["type"] == "plane": rec["normal"] = a["normal"]; rec["offset_along_axB_from_CB"] = float((a["point"] - CB) @ axB) if abs(abs(a["normal"] @ axB) - 1) < 1e-3 else None
         cmp.append(rec)
     new = [f["id"] for f in F if f["id"] not in used]
     Go = coaxial_groups(Fo); Ho = holes_of(ob, Fo, ob.Faces(), Go)
+    for h in Ho: h["s_v_of_axis_at_entry"] = {k: [sv(v), float((np.asarray(v) - CB) @ vB), float((np.asarray(v) - CB) @ axB)] for k, v in h["entry_points"].items()}
     bott["original_bottom"] = dict(volume_mm3=ob.Volume(), faces=len(Fo), face_types=dict(collections.Counter(f["type"] for f in Fo)), holes=Ho)
     bott["face_comparison_with_original"] = cmp
     bott["face_status_counts"] = dict(collections.Counter(c["status"] for c in cmp))
@@ -633,6 +676,7 @@ def arm_end_inventory():
     # holes of D6-04 tagged by whether the original BOTTOM had them
     for h in inv["holes"]:
         h["s_from_elbow_hinge_of_entries"] = {k: sv(v) for k, v in h["entry_points"].items()}
+        h["s_v_of_axis_at_entry"] = {k: [sv(v), float((np.asarray(v) - CB) @ vB), float((np.asarray(v) - CB) @ axB)] for k, v in h["entry_points"].items()}
         h["from_original_bottom"] = any(np.linalg.norm(np.cross(h["axis_point_nearest_GH"] - ho["axis_point_nearest_GH"], ho["axis_dir"])) < 1e-3 and abs(abs(ho["axis_dir"] @ h["axis_dir"]) - 1) < 1e-6
                                         and abs(ho["min_diameter"] - h["min_diameter"]) < 1e-3 for ho in Ho)
     inv["bottom"] = bott
@@ -685,11 +729,26 @@ def arm_end_inventory():
         strap["common_line_note"] = "the planes' common line is where the strap's pad mid-plane and channel mid-plane meet; the bend R is tangent to both, so the line lies Rb / cos(th/2) from the bend axis, on the bisector"
         bis = unit(-n1 * 0 + 0 * up)
     # tongue: where the strap leaves the channel-plane turn and runs down the arm; offset of its centre line from the channel centre (vB = 0)
-    tong = []
-    for f in F:
-        if f["type"] == "plane" and abs(f["normal"] @ vB) > 1 - 1e-6 and abs(f["normal"] @ d) < 1e-3:
-            pass
-    strap["tongue_note"] = "tongue = the 8 mm strap in the channel plane after the R7.5 turn, running down the arm to a full-round end; it is fused into BOTTOM's web (embedded 1 mm) so its faces inside the channel are merged; see channel-plane turn centre and bar sections s225..s254"
+    # tongue: the strap's side planes square to yB (one free inner side; the outer side is fused into BOTTOM's flange)
+    tside = [dict(face=f["id"], v_offset_along_yB_from_CB=float((f["point"] - CB) @ yB), s_range=[sv(f["bbox"][:3]), sv(f["bbox"][3:])], area=f["area_mm2"])
+             for f in F if f["type"] == "plane" and abs(abs(f["normal"] @ yB) - 1) < 1e-4 and f["id"] in new]
+    tend = [dict(face=f["id"], radius=f["radius"], span_deg=f["u_span_deg"], s_of_axis=sv(f["axis_point"]), yB_of_axis=float((f["axis_point"] - CB) @ yB))
+            for f in F if f["type"] == "cylinder" and abs(abs(f["axis_dir"] @ up) - 1) < 1e-4 and abs(f["radius"] - 4.0) < 1e-3 and f["id"] in new]
+    strap["tongue"] = dict(note="the 8 mm strap in the channel plane after the R7.5 turn, down the arm to a full-round end (R4); its outer side and top are fused into BOTTOM's flange and web",
+                           free_side_planes=tside, round_end=tend,
+                           strap_faces_normal_axB_offsets_from_CB=sorted({round(float((f["point"] - CB) @ up), 4) for f in F if f["type"] == "plane" and abs(abs(f["normal"] @ up) - 1) < 1e-6 and f["id"] in new}))
+    if strap["turn_in_channel_plane"]:
+        tc = strap["turn_in_channel_plane"][0]; Ct = [x for x in tB if x["face"] == tc["faces"][0]][0]["axis_point"]
+        tl = np.asarray(Ct) - tc["centre_line_radius"] * (yB if ((np.asarray(Ct) - CB) @ yB) > ((CB + 255 * uB - CB) @ yB) else -yB)
+        strap["tongue"]["centre_line_offset_from_channel_centre_along_yB"] = float(yB @ (tl - (CB + (cut_s or 255.0) * uB)))
+        strap["tongue"]["centre_line_offset_note"] = "turn centre minus R7.5 along yB, measured from the bar centre line at the cut station (build.json tongue_offset_from_channel_centre_mm uses the same definition)"
+    web = sorted({round(float((f["point"] - CB) @ up), 4) for f in F if f["type"] == "plane" and abs(f["normal"] @ up + 1) < 0.01 and f["id"] not in new and 1.0 < (f["point"] - CB) @ up < 2.5})
+    strap["web_underside_offsets_axB_from_CB"] = web
+    if strap["bend_about_common_line"]:
+        b = strap["bend_about_common_line"][0]; yb_ = b["centre"][0]; dl = b["centre_line_radius"] * math.tan(math.radians(th_pl) / 2)
+        strap["common_line_behind_J3_measured_mm"] = abs(yb_) + dl
+        strap["bend_tangent_point_T1_behind_J3_mm"] = abs(yb_)
+        strap["bend_tangent_length_mm"] = dl
     # J3 pad + pin
     lv = F3
     strap["J3_pad"] = dict(planes_square_to_axis_within_pad=[p for p in J[0]["planes_square_to_axis"] if lv - 0.01 <= p["z"] <= lv + T_BAR + 0.01],

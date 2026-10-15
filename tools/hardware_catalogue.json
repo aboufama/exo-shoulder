@@ -1,0 +1,90 @@
+{
+  "_doc": "Real components for passive DOF at exo scale. Companion to docs/research/passive_dof_hardware.md (read it for the reasoning). Units mm, N, N.m, g. 'conf' = where each number comes from: 'catalogue' = read from the manufacturer's PDF table listed in 'src' (fetched 2026-10-15); 'distributor' = a reseller / trade page (confirm); 'memory' = from memory, NOT checked - confirm before CAD; 'est' = my calculation (shown in the doc). Model envelope rule (CLAUDE.md 'Manufacturable joints only'): a guide occupies height H above its mounting face, footprint W x (L_block + travel) for the rail, plus a mounting plate (>= 1.0-1.5 mm); a radial (skin-normal) guide stands up by L_block + travel.",
+  "version": "2026-10-15",
+  "sources": {
+    "THK_RSX": "https://tech.thk.com/en/products/pdfs/en_a01_264.pdf (THK general catalogue A1, models RSX-SM/M/NM dimension + load table)",
+    "THK_RSR": "https://tech.thk.com/en/products/pdfs/en_a01_268.pdf (THK A1, models RSR2N/3M/3N/3WM/3WN/14WVM; RSR5M-15M are no longer in these pages - RSX is THK's current 5-15 mm stainless miniature)",
+    "HIWIN_MG": "https://damencnc.com/userdata/file/3455-3_HIWIN_MGN_and_MGW_Product_Catalog_2023.pdf (HIWIN GW-11-5-EN-2207, tables 3.76 loads, 3.79 block dims, 3.81 rail dims)",
+    "IGUS_DRYLIN_N": "https://www.igus.com/contentData/Product_Files/Download/pdf/6-4%20DryLin%20N%202016%20Section.pdf (drylin N system table + NS-01-17 / NW-02-17 tables)",
+    "IKO_LWLF2": "https://www.automate.org/products/iko-international-inc/iko-lwlf2-miniature-linear-guides (IKO product announcement)",
+    "IKO_LWL2": "https://www.astbearings.com/catalog/miniature_linear_way_series/LWL2 (distributor table)",
+    "IKO_LWL3": "https://kr.rs-online.com/web/p/linear-guides/9175945 (RS listing LWL3C1R150T0H)",
+    "IKO_CRWM1": "https://qualitybearingsonline.ca/crwm1-30 (retailer listing)",
+    "THK_LT": "https://tech.thk.com/en/products/pdfs/en_a03_082.pdf (ball spline LT, nut dims)",
+    "THK_LTX": "https://tech.thk.com/en/products/pdfs/en_a03_086.pdf (miniature ball spline LT-X)",
+    "IGUS_RJUM": "https://uk.rs-online.com/web/p/linear-bearings/6174602 (RJUM-01-08 listing)",
+    "REPO_HW": "docs/HARDWARE.md, docs/research/ring_and_shell_hardware.md (MR117 / KAA15XL0 / CRBT305A already researched)"
+  },
+  "linear_guides": [
+    {"id": "IKO-LWL1", "mfr": "IKO", "pn": "LWL1 (C1R..)", "dof": "P", "H": 2.5, "rail_W": 1.0, "conf": "distributor", "src": "IKO_LWLF2", "friction": "rolling (ball)", "make_buy": "buy", "notes": "smallest made; loads tens of N; same 2.5 H as LWLF2 (Design World / IKO). Block L and loads: memory only, confirm."},
+    {"id": "IKO-LWLF2", "mfr": "IKO", "pn": "LWLF2", "dof": "P", "H": 2.5, "W": 5.0, "rail_W": 2.0, "block_g": 0.21, "rail_g_per_100": 2.0, "conf": "distributor", "src": "IKO_LWLF2", "friction": "rolling (ball)", "make_buy": "buy", "notes": "lowest section height on the market (IKO claim). Block length not in the source (memory ~ 7-9 mm, confirm). Loads ~100 N class (memory)."},
+    {"id": "IKO-LWL2", "mfr": "IKO", "pn": "LWL2", "dof": "P", "H": 3.2, "H1_clear": 0.7, "W": 6.0, "rail_W": 2.0, "rail_H": 2.0, "C_N": 211, "conf": "distributor", "src": "IKO_LWL2", "friction": "rolling (ball)", "make_buy": "buy"},
+    {"id": "IKO-LWL3", "mfr": "IKO", "pn": "LWL3", "dof": "P", "rail_W": 3.0, "C_N": 353, "C0_N": 587, "H": 4.0, "W": 8.0, "conf": "distributor (C, C0, rail W); memory (H 4, W 8: confirm)", "src": "IKO_LWL3", "friction": "rolling (ball)", "make_buy": "buy"},
+    {"id": "IKO-LWL5", "mfr": "IKO", "pn": "LWL5", "dof": "P", "H": 6.0, "W": 12.0, "rail_W": 5.0, "conf": "memory", "friction": "rolling (ball)", "make_buy": "buy", "notes": "same class as MGN5C / RSX5M"},
+    {"id": "THK-RSR2N", "mfr": "THK", "pn": "RSR2N", "dof": "P", "H": 3.2, "W": 6.0, "L": 12.4, "rail_W": 2.0, "rail_H": 2.0, "rail_pitch": 8, "C_N": 214, "C0_N": 384, "MA1_Nm": 0.564, "MA2_Nm": 2.994, "MC_Nm": 0.442, "block_g": 0.8, "rail_g_per_100": 2.9, "conf": "catalogue", "src": "THK_RSR", "friction": "rolling (ball), no seal", "make_buy": "buy"},
+    {"id": "THK-RSR3M", "mfr": "THK", "pn": "RSR3M", "dof": "P", "H": 4.0, "W": 8.0, "L": 12.0, "rail_W": 3.0, "rail_H": 2.6, "rail_pitch": 10, "rail_max": 220, "C_N": 180, "C0_N": 270, "MA1_Nm": 0.293, "MA2_Nm": 2.11, "MB1_Nm": 0.293, "MC_Nm": 0.45, "block_g": 1.1, "rail_g_per_100": 5.5, "conf": "catalogue", "src": "THK_RSR", "friction": "rolling (ball), no seal", "make_buy": "buy", "notes": "MA2 = two blocks in contact"},
+    {"id": "THK-RSR3N", "mfr": "THK", "pn": "RSR3N", "dof": "P", "H": 4.0, "W": 8.0, "L": 16.0, "rail_W": 3.0, "rail_H": 2.6, "C_N": 300, "C0_N": 440, "MA1_Nm": 0.726, "MA2_Nm": 4.33, "MC_Nm": 0.73, "block_g": 1.6, "rail_g_per_100": 5.5, "conf": "catalogue", "src": "THK_RSR", "friction": "rolling (ball)", "make_buy": "buy"},
+    {"id": "THK-RSX5M", "mfr": "THK", "pn": "RSX5M", "dof": "P", "H": 6.0, "W": 12.0, "L": 16.9, "rail_W": 5.0, "rail_H": 3.5, "rail_pitch": 15, "rail_max": 220, "C_N": 370, "C0_N": 530, "MA1_Nm": 0.789, "MA2_Nm": 5.79, "MB1_Nm": 0.923, "MC_Nm": 1.38, "block_g": 2, "rail_g_per_100": 13.6, "conf": "catalogue", "src": "THK_RSX", "friction": "rolling (ball)", "make_buy": "buy"},
+    {"id": "THK-RSX7M", "mfr": "THK", "pn": "RSX7M", "dof": "P", "H": 8.0, "W": 17.0, "L": 23.4, "rail_W": 7.0, "rail_H": 5.0, "rail_pitch": 15, "C_N": 1160, "C0_N": 1540, "MA1_Nm": 3.27, "MA2_Nm": 23.1, "MB1_Nm": 3.77, "MC_Nm": 5.96, "block_g": 8, "rail_g_per_100": 22.7, "conf": "catalogue", "src": "THK_RSX", "friction": "rolling (ball)", "make_buy": "buy"},
+    {"id": "HIWIN-MGN02C", "mfr": "HIWIN", "pn": "MGN02C", "dof": "P", "H": 3.2, "W": 6.0, "L": 12.5, "rail_W": 2.0, "rail_H": 2.0, "C_N": 220, "C0_N": 400, "M0X_Nm": 0.4, "M0Y_Nm": 0.6, "block_g": 1, "rail_g_per_100": 3, "conf": "catalogue", "src": "HIWIN_MG", "friction": "rolling (ball)", "make_buy": "buy", "notes": "sold only mounted on its rail"},
+    {"id": "HIWIN-MGN03C", "mfr": "HIWIN", "pn": "MGN03C", "dof": "P", "H": 4.0, "W": 8.0, "L": 11.3, "rail_W": 3.0, "rail_H": 2.6, "rail_pitch": 10, "C_N": 290, "C0_N": 440, "M0X_Nm": 0.7, "M0Y_Nm": 0.5, "block_g": 1, "rail_g_per_100": 5, "conf": "catalogue", "src": "HIWIN_MG", "friction": "rolling (ball)", "make_buy": "buy"},
+    {"id": "HIWIN-MGN05C", "mfr": "HIWIN", "pn": "MGN05C", "dof": "P", "H": 6.0, "W": 12.0, "L": 16.0, "rail_W": 5.0, "rail_H": 3.6, "rail_pitch": 15, "rail_max": 250, "C_N": 540, "C0_N": 840, "M0X_Nm": 2.0, "M0Y_Nm": 1.3, "block_g": 8, "rail_g_per_100": 15, "conf": "catalogue", "src": "HIWIN_MG", "friction": "rolling (ball)", "make_buy": "buy"},
+    {"id": "HIWIN-MGN05H", "mfr": "HIWIN", "pn": "MGN05H", "dof": "P", "H": 6.0, "W": 12.0, "L": 19.0, "rail_W": 5.0, "rail_H": 3.6, "C_N": 670, "C0_N": 1080, "M0X_Nm": 2.6, "M0Y_Nm": 2.3, "block_g": 10, "rail_g_per_100": 15, "conf": "catalogue", "src": "HIWIN_MG", "friction": "rolling (ball)", "make_buy": "buy"},
+    {"id": "HIWIN-MGN07C", "mfr": "HIWIN", "pn": "MGN07C", "dof": "P", "H": 8.0, "W": 17.0, "L": 22.5, "rail_W": 7.0, "rail_H": 4.8, "rail_pitch": 15, "rail_max": 600, "C_N": 980, "C0_N": 1245, "M0X_Nm": 4.7, "M0Y_Nm": 2.8, "block_g": 10, "rail_g_per_100": 22, "conf": "catalogue", "src": "HIWIN_MG", "friction": "rolling (ball)", "make_buy": "buy"},
+    {"id": "HIWIN-MGN07H", "mfr": "HIWIN", "pn": "MGN07H", "dof": "P", "H": 8.0, "W": 17.0, "L": 30.8, "rail_W": 7.0, "rail_H": 4.8, "C_N": 1372, "C0_N": 1960, "M0X_Nm": 7.6, "M0Y_Nm": 4.8, "block_g": 20, "rail_g_per_100": 22, "conf": "catalogue", "src": "HIWIN_MG", "friction": "rolling (ball)", "make_buy": "buy"},
+    {"id": "HIWIN-MGN12H", "mfr": "HIWIN", "pn": "MGN12H", "dof": "P", "H": 13.0, "W": 27.0, "L": 45.4, "rail_W": 12.0, "rail_H": 8.0, "C_N": 3720, "C0_N": 5880, "M0X_Nm": 38.2, "M0Y_Nm": 36.3, "block_g": 50, "rail_g_per_100": 65, "conf": "catalogue", "src": "HIWIN_MG", "friction": "rolling (ball)", "make_buy": "buy", "notes": "smallest single block that carries the 25 N.m MVP2 moment; 13 mm tall alone"},
+    {"id": "IGUS-NW-02-17", "mfr": "igus", "pn": "drylin N NW-02-17 on NS-01-17", "dof": "P", "H": 6.0, "W": 9.6, "L": 20.0, "rail_W": 17.0, "rail_H": 5.5, "rail_max": 2000, "Fz_static_N": 50, "Mx_Nm": 0.31, "My_Nm": 0.18, "block_g": 1.7, "rail_g_per_100": 15, "conf": "catalogue", "src": "IGUS_DRYLIN_N", "friction": "plain (iglidur on hard-anodised Al, mu ~0.1-0.25 - memory)", "make_buy": "buy (cheap, cut to length)", "notes": "17 mm wide flat rail; low loads; lengths NW-22-17-30/40 for more moment"},
+    {"id": "IKO-CRWM1", "mfr": "IKO", "pn": "CRWM1-30 (anti-creep crossed-roller way, rail pair)", "dof": "P", "H": 4.5, "W": 17.0, "rail_len": 30, "C_N": 125, "C0_N": 120, "conf": "distributor (memory: rail 8.5 wide each, 1.5 mm rollers)", "src": "IKO_CRWM1", "friction": "rolling (crossed roller)", "make_buy": "buy rails + make table/base", "notes": "stroke ~ half the rail length minus cage; you make both carriers; no recirculation -> travel limited, no better than a miniature ball guide in height"}
+  ],
+  "slide_and_spin": [
+    {"id": "IGLIDUR-SLEEVE-6", "mfr": "igus", "pn": "iglidur J sleeve, e.g. JSM-0608-10 (6 x 8 x 10) - memory, confirm", "dof": "PR (slide + spin)", "d": 6, "D": 8, "L": 10, "conf": "memory", "friction": "plain (mu 0.06-0.2 on hard shaft)", "make_buy": "buy sleeve, make Ti/steel rod (hard anodised / TiN / 1.4034)", "notes": "most compact slide+spin; keep L/d >= 1.5 to avoid drawer jamming"},
+    {"id": "IGUS-RJUM-01-08", "mfr": "igus", "pn": "drylin R RJUM-01-08", "dof": "PR", "d": 8, "D": 16, "L": 25, "C_N": 960, "C0_N": 6720, "conf": "distributor", "src": "IGUS_RJUM", "friction": "plain", "make_buy": "buy", "notes": "smallest RJUM in stock listings is 8 mm; plain iglidur sleeves go smaller"},
+    {"id": "THK-ST6", "mfr": "THK", "pn": "ST6 stroke bush (ball cage, linear + rotary, finite stroke)", "dof": "PR", "d": 6, "D": 12, "L": 19, "conf": "memory", "friction": "rolling", "make_buy": "buy; shaft must be hardened (>= HRC 58): no Ti rod"},
+    {"id": "THK-LM4", "mfr": "THK", "pn": "LM4 linear ball bushing", "dof": "P (rotation possible but not rated)", "d": 4, "D": 8, "L": 12, "conf": "memory", "friction": "rolling", "make_buy": "buy; hardened shaft"},
+    {"id": "THK-LT4", "mfr": "THK", "pn": "LT4 ball spline", "dof": "P only (carries torque about the axis)", "d": 4, "D": 10, "L": 16, "conf": "catalogue", "src": "THK_LT", "friction": "rolling", "make_buy": "buy", "notes": "use when the translation must transmit torque about its own axis (e.g. along-arm slide carrying humeral rotation)"},
+    {"id": "THK-LT4X", "mfr": "THK", "pn": "LT4X miniature ball spline", "dof": "P only", "d": 4, "D": 8, "L": 12, "L_with_seal": 14.4, "conf": "catalogue", "src": "THK_LTX", "friction": "rolling", "make_buy": "buy"}
+  ],
+  "rotary_bearings": [
+    {"id": "MR117-2RS", "pn": "MR117-2RS (7 x 11 x 3)", "dof": "R", "d": 7, "D": 11, "B": 3, "conf": "catalogue (repo docs/HARDWARE.md)", "friction": "rolling", "make_buy": "buy", "notes": "O20 v5 hub pair, 12.25 mm stack incl. encoder + cap"},
+    {"id": "MR63ZZ", "pn": "MR63ZZ (3 x 6 x 2.5)", "dof": "R", "d": 3, "D": 6, "B": 2.5, "conf": "memory", "friction": "rolling", "make_buy": "buy", "notes": "passive pin joint (no encoder): two 2.5-3 mm plates -> ~6 mm stack"},
+    {"id": "MR85ZZ", "pn": "MR85ZZ (5 x 8 x 2.5)", "dof": "R", "d": 5, "D": 8, "B": 2.5, "conf": "memory", "friction": "rolling", "make_buy": "buy"},
+    {"id": "6700ZZ", "pn": "6700ZZ (10 x 15 x 4)", "dof": "R", "d": 10, "D": 15, "B": 4, "conf": "memory", "friction": "rolling", "make_buy": "buy", "notes": "thin-section deep-groove; open bore 10"},
+    {"id": "KAA10XL0", "pn": "Kaydon KAA10XL0 (1.000 x 1.375 x 0.1875 in = 25.4 x 34.9 x 4.76)", "dof": "R", "d": 25.4, "D": 34.9, "B": 4.76, "conf": "memory", "friction": "rolling (4-point contact)", "make_buy": "buy"},
+    {"id": "KAA15XL0", "pn": "Kaydon/RBC KAA15XL0 (38.1 x 47.6 x 4.76)", "dof": "R", "d": 38.1, "D": 47.6, "B": 4.76, "mass_g": 18, "M_Nm": 40, "conf": "repo (ring_and_shell_hardware.md, sourced)", "friction": "rolling (4-point contact)", "make_buy": "buy"},
+    {"id": "IKO-CRBT305A", "pn": "IKO CRBT305A crossed-roller ring (30 x 41 x 5)", "dof": "R", "d": 30, "D": 41, "B": 5, "mass_g": 20.7, "conf": "repo (ring_and_shell_hardware.md, sourced)", "friction": "rolling", "make_buy": "buy"},
+    {"id": "IGLIDUR-PIN", "pn": "iglidur GSM sleeve + GTM thrust washers on an integral Ti pin (v4 joint)", "dof": "R", "conf": "repo (docs/HARDWARE.md)", "friction": "plain", "make_buy": "make pin + buy liners", "notes": "a passive pin without encoder/cap: two 2 mm plates + 0.15 washer ~ 4.5-5 mm"}
+  ],
+  "flexures_est": {
+    "_formula": "fixed-guided leaf: sigma = 3 E t d / L^2  ->  L = sqrt(3 E t d / sigma_allow); stiffness per leaf k = 12 E I / L^3, I = b t^3 / 12; parasitic shortening ~ 0.6 d^2 / L. sigma_allow = fatigue design stress (est, not a datasheet value).",
+    "materials": {"Ti-6Al-4V": {"E": 114000, "sigma_allow": 350}, "beta Ti-15-3": {"E": 95000, "sigma_allow": 500}, "spring steel 1.4310": {"E": 190000, "sigma_allow": 450}, "POM": {"E": 2800, "sigma_allow": 25}},
+    "leaf_length_mm_for_travel": {
+      "Ti-6Al-4V t0.2": {"pm3": 24.2, "pm6": 34.2, "pm12": 48.4},
+      "Ti-6Al-4V t0.3": {"pm3": 29.7, "pm6": 41.9, "pm12": 59.3},
+      "beta-Ti t0.2": {"pm3": 18.5, "pm6": 26.2, "pm12": 37.0},
+      "spring steel t0.1": {"pm3": 19.5, "pm6": 27.6, "pm12": 39.0},
+      "spring steel t0.2": {"pm3": 27.6, "pm6": 39.0, "pm12": 55.1},
+      "POM t1.0": {"pm3": 31.7, "pm6": 44.9, "pm12": 63.5}
+    },
+    "centring_force_2_leaves_b6_at_6mm_N": {"Ti t0.2": 1.6, "Ti t0.3": 3.0, "spring steel t0.1": 0.7, "POM t1.0": 2.2},
+    "conf": "est",
+    "make_buy": "make: wire EDM from Ti / spring-steel plate (job shop), or laser-cut shim + clamp blocks; POM machined"
+  },
+  "revolute_only_translations_est": {
+    "parallelogram_4bar": {"_formula": "swing theta = asin(d / l), parasitic = l (1 - cos theta) = ~ d^2 / (2 l)", "table": [
+      {"l": 20, "d": 3, "swing_deg": 8.6, "parasitic": 0.23}, {"l": 20, "d": 6, "swing_deg": 17.5, "parasitic": 0.92},
+      {"l": 30, "d": 9, "swing_deg": 17.5, "parasitic": 1.38}, {"l": 30, "d": 13, "swing_deg": 25.7, "parasitic": 2.96},
+      {"l": 40, "d": 13, "swing_deg": 19.0, "parasitic": 2.17}],
+      "envelope": "in the skin plane (pins skin-normal): height = one passive pin stack ~5-6.5 mm, footprint l + 2 boss radii x (2 links + spacing). Skin-normal travel (pins parallel to skin, links near-flat): height = 2 d + pin boss (~4-5) -> +-3: ~10 mm, +-6: ~16-17 mm",
+      "pins": 4, "conf": "est"},
+    "planar_RR_parallel_to_J3": {"note": "two extra pins parallel to J3 = planar RRR with J3: gives the same 2 in-plane translations as 2 slides in J3's plane. l1 = l2 = 20 covers +-13 x +-9.2 with the elbow kept 48-134 deg (>= 46 deg from fold/stretch); l 15: 76-152 deg (28 deg margin). Arm twist = q3 + qa + qb (sense the passive pins or accept). Height ~ one passive pin stack 5-6.5 mm; footprint ~ 2 l + bosses (~48 x 20 mm swept).", "conf": "est"},
+    "sarrus": {"note": "+-3 mm with 8 mm links: 8.5 mm (collapsed, phi 20 deg) to 14.5 mm (extended) incl. 2 x 1.5 plates; knees stick out ~7.5 mm each side. 6 pins. Not better than a near-flat parallelogram.", "conf": "est"},
+    "scissor_lift": {"note": "collapses to ~6-7 mm but needs a sliding foot (a prismatic joint anyway) and is singular near flat (foot force = F / tan phi): jam-prone when the arm pushes from the collapsed end.", "conf": "est"}
+  },
+  "answers_mm": {
+    "a_one_translation_along_arm": {"best": "THK RSR3M or HIWIN MGN03C (ball), H 4.0 on a 1.5 plate = 5.5 mm, rail 3 x 2.6, block 8 x 12; rail length = 12 + 2 x travel + 2 (+-13 -> 40 mm); ~3.5 g. MVP1 only (pitch moment 0.29 N.m one block, 2.1 N.m two blocks). Lower: IKO LWLF2/LWL1 H 2.5 (fragile). Plain: igus drylin N17 H 6, 17 wide.", "MVP2_25Nm": "two parallel MGN05C rails 30 mm apart (C0 840 N x 0.03 m = 25 N.m) at H 6, or one MGN12H (H 13)"},
+    "b_two_in_plane_at_cuff": {"best": "two RSR3M / MGN03C stacked crosswise: 4 + 1 (adapter) + 4 + 1.5 base = 10.5 mm; footprint ~40 x 33 mm for +-13 x +-9.2; ~10 g. Revolute alternative: planar RR (l 20) on passive pins, 5-6.5 mm tall, ~48 x 20 mm swept, carries MVP2 tilting moments better.", "too_tall": "MGN05C x 2 = 13-14.5 mm (uses the whole 14 mm pass band)"},
+    "c_radial_pm3": {"best": "no guide: cuff liner compliance (6-8 mm foam / TPU lattice, est.) or a near-flat parallelogram / Ti leaf pad ~9-10 mm tall, ~30 mm long. A miniature guide standing up is 12 + 6 = 18 mm (RSR3M) - not buildable in the band."},
+    "c_radial_pm6": {"best": "nothing real fits the 14 mm band: guide 24 mm (RSR3M), near-flat parallelogram ~16-17 mm, Ti leaf ~15 mm with 34-42 mm leaves. Verdict: not buildable at the size modelled."},
+    "d_slide_plus_spin": {"best": "iglidur J plain sleeve on a 6 mm hard-coated rod: sleeve O8 x 10-12 in an O11-12 boss (memory part no. JSM-0608-10, confirm); rolling option THK ST stroke bush O12 x 19 on a hardened rod (memory). Ball spline is slide-only (blocks spin)."}
+  }
+}
