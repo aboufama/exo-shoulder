@@ -7,9 +7,9 @@
  * carriages are captive and nothing sags (catalogue entry; not modelled yet). Seed 1 of the spec's kinematic screen
  * (az1 64.9, el1 56.1, a12 57.4, d3 147.1, az3 -119, a23 87.9, sigma -1); arch low at 56 mm, collar one carriage
  * stack (14 mm) above. Rail extents = the crossing's travel over this loop + half a carriage + 2 deg, capped at
- * Lmax 200 deg; out of range when a carriage leaves its rail or the rails cross at < 25 deg. On this loop the arch
- * crossing needs > 200 deg (49 / 240 frames past its ends) and overhead the 200 deg arch passes 19 mm from the
- * humerus axis (inside the deltoid): the red-team pose for this seed. Closed form (KIN.sph3r), 3 active, 0 passive. */
+ * Lmax 200 deg; out of range when a carriage leaves its rail or the rails cross at < 25 deg (the rails go tangent
+ * across the body and behind the back, ~16 % of the loop). Red team: the arch needs ~198 deg of travel, and overhead
+ * that long arch passes 19 mm from the humerus axis (inside the deltoid). Closed form (KIN.sph3r), 3 active, 0 passive. */
 (function () {
   const K = (typeof window !== 'undefined' ? window : globalThis).KIN, V = K.V, M = K.M, R2D = K.R2D, D2R = K.D2R;
   const P = { az1: 64.9, el1: 56.1, a12: 57.4, d3: 147.1, az3: -119.0, a23: 87.9, sigma: -1, rho1: 56, delta: 14,
