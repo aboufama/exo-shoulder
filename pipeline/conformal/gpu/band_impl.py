@@ -32,7 +32,7 @@ except ImportError:
     np = None
 
 _CACHE = {}
-CODE_VERSION = "band-2026-10-15y (range first: score x min(1, workspace share / target)^w; why poses are lost; fit_clips; min link arc + min arm guards; pure 3R chain)"
+CODE_VERSION = "band-2026-10-15z (job key hw: link half-width; range first: score x min(1, workspace share / target)^w; why poses are lost; fit_clips; guards; pure 3R chain)"
 RESD = 0.25; NWD, NHD = 1440, 720; LAT_LO, LAT_HI = -75.0, 90.0; CLEAR = 3.0
 ROW0, ROW1 = int((LAT_LO + 90) / RESD), int((LAT_HI + 90) / RESD)
 HUB_R, HW, T_LINK, STACK, T_W, T_BOT = 17.0, 7.0, 5.5, 6.0, 1.0, 6.5
@@ -873,7 +873,7 @@ def tri_ok(t, x, y, a, b, sing):
 def run(job):
     import torch
     g = globals()                                                     # per-job geometry overrides (sensitivity studies)
-    for k in ("HUB_R", "T_LINK", "STACK", "T_W", "T_BOT", "T_LO", "HUB_UP", "CAP_UP", "RAIL_D"):
+    for k in ("HUB_R", "HW", "T_LINK", "STACK", "T_W", "T_BOT", "T_LO", "HUB_UP", "CAP_UP", "RAIL_D"):     # HW: link half-width (MVP1: tiny loads -> narrow links)
         if k.lower() in job: g[k] = float(job[k.lower()])
     dev = torch.device("cuda" if torch.cuda.is_available() else ("mps" if job.get("mps") and torch.backends.mps.is_available() else "cpu"))
     t0 = time.time(); B = Band(job, dev)
