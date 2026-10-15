@@ -5,7 +5,7 @@
  "family": "spherical 3R",
  "active_dof": 3,
  "passive_dof": 0,
- "status": "screened",
+ "status": "refuted",
  "t_ideated": null,
  "t_screened": "2026-10-15T19:48:25Z",
  "reach": 0.8875,
@@ -14,11 +14,11 @@
  "inband10": 0.2933,
  "contact": 0.0051,
  "gap": 57.81,
- "v_reach": null,
- "v_follow": null,
- "v_inband14": null,
- "v_inband10": null,
- "v_gap": null,
+ "v_reach": 0.8361,
+ "v_follow": 0.9273,
+ "v_inband14": 0.2116,
+ "v_inband10": 0.1113,
+ "v_gap": 77.99,
  "n_configs": 55,
  "verdict": "screened: best honest gap 57.81 (k52, Bench(60,160) fast cache, K3 march, K2 dense, K6, audit clean) vs 68.93 baseline and 65.05 for its own O20 twin at q 1.0. But the open bore loses to the O20 hub at every joint and every bore (rings at all three: 91.6-112.0 vs 69.29); the gain is the skin-contoured skirt under the J1 ring (98.5 % in band), which the champion can take too. Not worth a GPU sweep of ring sizes; worth one short sweep of the champion with a J1 skirt.",
  "limiter": "J2 and the links, measured: hub 2 sits at 161 mm from GH (0 % in band), link 1 / link 2 0.2 / 1 % in band at q 1.0 - the 3R proximity limit, which rings do not touch. Ring levels (mm along the axis): J1 hub 54 vs ring 58/100/109/117 for bore 12.7/19.05/25.4/31.75 (trapezius/neck rises medially); J2 105 vs 112-118 (the axis wanders over scapula and trunk); J3 66 vs 68 (a real dome, but the flat rim floats: in-band 0.19-0.37 vs 0.60). Red team k52: across the body (plane 150, elev 120, axial -60) the trapezius rises into the J1 bore (wall -0.4 mm); overhead 6/17 lost (3 closure, 3 part-part); behind the back 5/20 lost to closure margin.",
@@ -48,5 +48,7 @@
   "skirt": 1
  },
  "honest": true,
- "model_file": "docs/concepts/models/annular-ring-3r.py"
+ "model_file": "docs/concepts/models/annular-ring-3r.py",
+ "v_note": "Verifier: refuted. The 57.81 is the J1 skirt diluting the sample-share in-band (a non-functional skin-contoured shell, 323 of 1548 samples, 98.5 % in band); widening the same skirt by 10 mm alone gives 53.85, so the gain is a metric artefact. Functional metal only (skirt excluded from in-band, poses unchanged): 73.95 on Bench(60,160) fast, 73.92 exact, 77.99 on Bench(110,360) exact with the geometry frozen from Bench(60,160). As measured with the skirt: 57.78 exact, 61.85 on the big bench. DOF, sampling, closure, continuity and the grid cache all hold.",
+ "v_gap_with_skirt": 61.85
 }

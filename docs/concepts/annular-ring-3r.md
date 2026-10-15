@@ -92,3 +92,32 @@ bore loses to the O20 hub at every joint and every bore size (stage A); the gain
 skirt under the J1 ring, which any design can put under its base-side joint. Not worth a GPU sweep of ring sizes;
 worth transplanting the skirt (a skin-hugging lower housing on the proximal member of J1) to the champion and
 sweeping the champion's axes with it.
+
+## Verification (adversarial verifier, 2026-10-15)
+
+Verdict: **refuted.** The corrected gap is **77.99** (Bench(110, 360), exact path, geometry fitted on Bench(60, 160) and
+then frozen), worse than the 68.93 baseline. No hard rule is broken. The screened win comes from a bench artefact: the
+J1 skirt adds skin-hugging metal that does no mechanical work, and in-band is a share of samples. The verifier's
+script is in its scratchpad (`ver_ar/v.py`). It imports the model and leaves the model file unchanged.
+
+| check | what I did | result |
+|---|---|---|
+| (1) DOF | read `build` | 3 active ring angles, J2 from the K1 closure on one branch, 0 passive coordinates. Nothing sags. Holds. |
+| (2) real size, sampling | per-member sample counts, kit audit | ring 1: 323 samples (KAA 9 x 8 housing, 2 mm grid). O20 hubs 2/3: 81 each. Straps 12 x 3, neck 14 x 6. Audit clean. Only the 2 mm strap lugs are unsampled. Holds. |
+| (3) pose-taking | reproduced k52 and broke down the lost poses | closure residual 0. 0 flips (dense K2). On Bench(60,160): 15 poses with no closure, 7 part-part collisions, 1 contact (J1 bore wall, -0.38 mm fast / -0.77 mm exact). Holds as reported. |
+| (4) grid artefact | the same geometry with exact libigl distance (CB_EXACT path) on the same 220 poses | 57.78 exact vs 57.81 fast. No grid artefact. |
+| **(4) metric artefact: the skirt** | counted the skirt's share of the metal and **widened the same skirt with nothing else changed** | skirt 1 is 323 of 1548 samples (21 %) and 98.5 % in band. It is a 2 mm shell, fixed in the scapula frame, with no load path or bearing function. Widening it 10 mm outward (765 samples) gives **53.85**: more passive skin-hugging area lowers the gap with no change to any functional part. hub 2 stays at 161 mm (0 % in band) and the links stay at 0.2 / 1 %. The gain is dilution, not proximity. |
+| corrected measure | in-band over the functional metal only: the skirt is excluded from the share; poses, contact and walls are unchanged | Bench(60,160): **73.95** fast / 73.92 exact (= k25, the ring without a skirt, as expected). That is worse than the baseline (68.93) and than its own O20 twin (65.05). |
+| **re-measure on Bench(110, 360), exact, frozen geometry** | 470 poses, about 250 of them never seen by the fit | **gap 77.99** with the skirt excluded: reach 0.836, follow 0.927, in-band 14 0.212, in-band 10 0.111, contact 0.005. Counting the skirt: 61.85. 46 poses with no closure, 19 collisions, 2 contact poses, 0 flips. |
+
+What this means:
+* The author's own finding stands and is the useful knowledge here: the open bore loses to the O20 hub at every joint
+  (rings 73.95-112 vs twin 65.05). The ring morphology does not beat the baseline.
+* The skirt is not a property of rings. It is a way to raise in-band by adding area. Any design can lower its gap
+  this way, and the score has no lower bound short of contact: a skirt 25 mm wider starts to lose reach to contact
+  (68.38). The bench should weight in-band per member, or exclude metal with no structural function, before skirts are
+  compared across designs. Until then, a "skin-contoured J1 housing" sweep on the champion would measure the same
+  artefact. A real reason for that housing (load spreading onto the scapula, a seat for the user's scapula handler)
+  has to be argued separately, and the housing has to be checked against the handler, which is not modelled.
+* Holes that remain: Bench(110,360) was not refit (the exact K3 march takes about 1-2 CPU hours at the current load).
+  The frozen-geometry penalty on the large bench is +4.0 with the skirt (57.81 -> 61.85).
