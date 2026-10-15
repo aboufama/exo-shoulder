@@ -1,0 +1,417 @@
+{
+ "step": 6,
+ "tol_mm": 0.5,
+ "frames_checked": 228,
+ "seconds": 253,
+ "jobs": 4,
+ "inside": "integer winding number (grid + segment crossings), depth = exact distance to the nearest surface (judge/sdist.py)",
+ "parts": {
+  "H|M4x6 ISO 10642 countersunk (upper cuff)": {
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null
+  },
+  "H|UPPER ARM CUFF (conformal G2 shell, AlSi10Mg bead blasted)": {
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null
+  },
+  "H|CirPattern1[13]": {
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null
+  },
+  "H|CirPattern1[17]": {
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null
+  },
+  "H|CirPattern1[3]": {
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null
+  },
+  "H|CirPattern1[6]": {
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null
+  },
+  "H|CirPattern1[1]": {
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null
+  },
+  "H|Revolve1[3]": {
+   "max_depth": 0.51,
+   "frames": 10,
+   "worst": [
+    "Wave",
+    42,
+    [
+     15,
+     91,
+     -59,
+     94,
+     0
+    ]
+   ]
+  },
+  "H|CirPattern1[9]": {
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null
+  },
+  "H|CirPattern1[2]": {
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null
+  },
+  "H|Revolve3": {
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null
+  },
+  "H|CirPattern1[4]": {
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null
+  },
+  "H|CirPattern1[10]": {
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null
+  },
+  "H|CirPattern1[8]": {
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null
+  },
+  "H|CirPattern1[14]": {
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null
+  },
+  "H|CirPattern1[12]": {
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null
+  },
+  "H|CirPattern1[16]": {
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null
+  },
+  "H|CirPattern1[7]": {
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null
+  },
+  "H|Revolve1[1]": {
+   "max_depth": 0.98,
+   "frames": 140,
+   "worst": [
+    "Wave",
+    126,
+    [
+     15,
+     92,
+     -60,
+     95,
+     0
+    ]
+   ]
+  },
+  "H|CirPattern1[5]": {
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null
+  },
+  "H|Revolve4": {
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null
+  },
+  "H|CirPattern1[11]": {
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null
+  },
+  "H|Revolve1[2]": {
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null
+  },
+  "H|CirPattern1[15]": {
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null
+  },
+  "H|M4 ULTRA LOW PROFILE SOCKET HEAD SCREW, 6mm L, HS STEEL": {
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null
+  },
+  "H|5mm D, 2.5mm H, N42 MAGNET": {
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null
+  },
+  "F|Hex socket head countersunk screw grade C M4x0.7 x 8": {
+   "max_depth": 8.35,
+   "frames": 228,
+   "worst": [
+    "Wave",
+    42,
+    [
+     15,
+     91,
+     -59,
+     94,
+     0
+    ]
+   ]
+  },
+  "H|IGUS THRUST WASHER, 30mm ID, 39mm OD, 1.5mm T, IGLIDE J": {
+   "max_depth": 2.77,
+   "frames": 228,
+   "worst": [
+    "Comb hair",
+    42,
+    [
+     56,
+     101,
+     -57,
+     116,
+     0
+    ]
+   ]
+  },
+  "F|MIDDLE": {
+   "max_depth": 5.77,
+   "frames": 228,
+   "worst": [
+    "Comb hair",
+    66,
+    [
+     60,
+     118,
+     -59,
+     120,
+     0
+    ]
+   ]
+  },
+  "H|TOP": {
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null
+  },
+  "F|FOREARM CUFF": {
+   "max_depth": 21.94,
+   "frames": 228,
+   "worst": [
+    "Drink from a cup",
+    72,
+    [
+     95,
+     69,
+     -48,
+     132,
+     0
+    ]
+   ]
+  },
+  "cuff|J3 ring nut M8x0.5 18x1 (Ti-6Al-4V)": {
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null
+  },
+  "cuff|J3 magnet \u00d84x2 N52 diametric": {
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null
+  },
+  "cuff|J3 washer B (igus GTM-1018-005)": {
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null
+  },
+  "cuff|J3 washer A (igus GTM-1018-005, recessed)": {
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null
+  },
+  "cuff|tapered gib (iglidur J, 0.5 -> 0.8): preload by 2 flush M2 set screws in the lip": {
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null
+  },
+  "cuff|flank liner (iglidur J 0.5)": {
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null
+  },
+  "cuff|top liner (iglidur J 0.5)": {
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null
+  },
+  "cuff|stop pin \u00d82 x 5 dowel (A2): rides in the rail slot = travel stops": {
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null
+  },
+  "cuff|D4-S cuff saddle (Ti-6Al-4V)": {
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null
+  },
+  "H|BOTTOM + neck + curved dovetail rail (one 5-axis part, Ti-6Al-4V)": {
+   "max_depth": 5.89,
+   "frames": 228,
+   "worst": [
+    "Wave",
+    60,
+    [
+     15,
+     95,
+     -79,
+     95,
+     0
+    ]
+   ]
+  },
+  "l2|D4-03 link 2 (Ti-6Al-4V)": {
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null
+  },
+  "l2|J3 M1.6x3 ISO 10642 Ti (cap)": {
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null
+  },
+  "l2|J3 cap \u00d822 G2 dome (Ti-6Al-4V)": {
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null
+  },
+  "l2|J3 angle sensor IC (placeholder)": {
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null
+  },
+  "l2|J3 position PCB \u00d816 (placeholder)": {
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null
+  },
+  "l2|J3 sleeve (igus GSM-1012-04)": {
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null
+  },
+  "l2|J2 M1.6x3 ISO 10642 Ti (cap)": {
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null
+  },
+  "l2|J2 cap \u00d822 G2 dome (Ti-6Al-4V)": {
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null
+  },
+  "l2|J2 angle sensor IC (placeholder)": {
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null
+  },
+  "l2|J2 position PCB \u00d816 (placeholder)": {
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null
+  },
+  "l2|J2 sleeve (igus GSM-1012-04)": {
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null
+  },
+  "l1|D4-02 link 1 (Ti-6Al-4V)": {
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null
+  },
+  "l1|J2 ring nut M8x0.5 18x1 (Ti-6Al-4V)": {
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null
+  },
+  "l1|J2 magnet \u00d84x2 N52 diametric": {
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null
+  },
+  "l1|J2 washer B (igus GTM-1018-005)": {
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null
+  },
+  "l1|J2 washer A (igus GTM-1018-005, recessed)": {
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null
+  },
+  "l1|J1 ring nut M8x0.5 18x1 (Ti-6Al-4V)": {
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null
+  },
+  "l1|J1 magnet \u00d84x2 N52 diametric": {
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null
+  },
+  "l1|J1 washer B (igus GTM-1018-005)": {
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null
+  },
+  "l1|J1 washer A (igus GTM-1018-005, recessed)": {
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null
+  },
+  "base|D4-01 scapula base (Ti-6Al-4V)": {
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null
+  },
+  "base|J1 M1.6x3 ISO 10642 Ti (cap)": {
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null
+  },
+  "base|J1 cap \u00d822 G2 dome (Ti-6Al-4V)": {
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null
+  },
+  "base|J1 angle sensor IC (placeholder)": {
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null
+  },
+  "base|J1 position PCB \u00d816 (placeholder)": {
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null
+  },
+  "base|J1 sleeve (igus GSM-1012-04)": {
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null
+  }
+ },
+ "worst_part": "F|FOREARM CUFF",
+ "max_depth": 21.94
+}

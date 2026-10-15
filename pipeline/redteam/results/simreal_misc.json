@@ -1,0 +1,106 @@
+{
+ "design": "l1_r14_3r_s1351_1",
+ "clips": {
+  "Raise overhead": {
+   "seconds": 6.0,
+   "humerus_speed_max_deg_s": 107.8,
+   "p95": 107.7,
+   "median_moving": 66.9
+  },
+  "Drink from a cup": {
+   "seconds": 5.9,
+   "humerus_speed_max_deg_s": 69.8,
+   "p95": 64.4,
+   "median_moving": 41.8
+  },
+  "Comb hair": {
+   "seconds": 6.7,
+   "humerus_speed_max_deg_s": 175.4,
+   "p95": 156.6,
+   "median_moving": 50.8
+  },
+  "Reach a high shelf": {
+   "seconds": 5.2,
+   "humerus_speed_max_deg_s": 135.2,
+   "p95": 129.2,
+   "median_moving": 67.6
+  },
+  "Wash opposite shoulder": {
+   "seconds": 6.4,
+   "humerus_speed_max_deg_s": 127.6,
+   "p95": 116.6,
+   "median_moving": 46.7
+  },
+  "Reach back pocket": {
+   "seconds": 4.8,
+   "humerus_speed_max_deg_s": 70.8,
+   "p95": 64.6,
+   "median_moving": 31.0
+  },
+  "Wave": {
+   "seconds": 5.7,
+   "humerus_speed_max_deg_s": 139.4,
+   "p95": 139.4,
+   "median_moving": 73.7
+  },
+  "Walking arm swing": {
+   "seconds": 3.6,
+   "humerus_speed_max_deg_s": 58.2,
+   "p95": 58.2,
+   "median_moving": 34.8
+  }
+ },
+ "bulge": [
+  {
+   "pose": {
+    "plane": 30,
+    "elev": 10,
+    "axial": -30,
+    "flex": 15,
+    "pron": 0
+   },
+   "within_120mm": {
+    "max_disp": 0.71,
+    "max_rise_from_GH": 0.45
+   },
+   "within_200mm": {
+    "max_disp": 1.57,
+    "max_rise_from_GH": 0.46
+   }
+  },
+  {
+   "pose": {
+    "plane": 30,
+    "elev": 90,
+    "axial": -45,
+    "flex": 15,
+    "pron": 0
+   },
+   "within_120mm": {
+    "max_disp": 0.87,
+    "max_rise_from_GH": 0.35
+   },
+   "within_200mm": {
+    "max_disp": 1.56,
+    "max_rise_from_GH": 0.41
+   }
+  },
+  {
+   "pose": {
+    "plane": 60,
+    "elev": 140,
+    "axial": -60,
+    "flex": 90,
+    "pron": 0
+   },
+   "within_120mm": {
+    "max_disp": 1.37,
+    "max_rise_from_GH": 0.54
+   },
+   "within_200mm": {
+    "max_disp": 2.17,
+    "max_rise_from_GH": 0.64
+   }
+  }
+ ]
+}

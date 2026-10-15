@@ -4,6 +4,10 @@
   "label": "4 joints (r13), fair CAD - current reference"
  },
  {
+  "id": "cad_r13_n3_s1331_0",
+  "label": "3R + sliding cuff (r13 n3), iteration CAD - every part valid"
+ },
+ {
   "id": "band_4c_best",
   "label": "4 joints + sliding cuff \u2014 80.5% (best, 84% at 11 mm)"
  },

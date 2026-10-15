@@ -1,0 +1,47 @@
+{
+ "step": 12,
+ "tol_mm": 0.15,
+ "frames_checked": 117,
+ "pairs": 3320,
+ "seconds": 233,
+ "jobs": 4,
+ "violations": {
+  "l2|J3 M1.6x3 ISO 10642 Ti (cap)  IN  cuff|J3 washer B (igus GTM-1018-005)": {
+   "max_depth": 0.17,
+   "frames": 117,
+   "worst": [
+    "Walking arm swing",
+    108
+   ]
+  },
+  "l2|J2 M1.6x3 ISO 10642 Ti (cap)  IN  l1|J2 washer B (igus GTM-1018-005)": {
+   "max_depth": 0.17,
+   "frames": 117,
+   "worst": [
+    "Walking arm swing",
+    108
+   ]
+  },
+  "base|J1 M1.6x3 ISO 10642 Ti (cap)  IN  l1|J1 washer B (igus GTM-1018-005)": {
+   "max_depth": 0.17,
+   "frames": 117,
+   "worst": [
+    "Walking arm swing",
+    108
+   ]
+  },
+  "cuff|flank liner (iglidur J 0.5)  IN  H|BOTTOM + neck + curved dovetail rail (one 5-axis part, Ti-6Al-4V)": {
+   "max_depth": 0.55,
+   "frames": 32,
+   "worst": [
+    "Wash opposite shoulder",
+    192
+   ]
+  }
+ },
+ "open_parts": [
+  "H|BOTTOM + neck + curved dovetail rail (one 5-axis part, Ti-6Al-4V)"
+ ],
+ "inside": "integer winding number on welded tessellations (grid + segment crossings; open parts: x/y/z ray majority + generalized winding number where they disagree), depth = exact distance (judge/sdist.py)",
+ "max_depth": 0.55
+}

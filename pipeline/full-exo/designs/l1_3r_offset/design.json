@@ -1,0 +1,57 @@
+{
+ "id": "l1_3r_offset",
+ "source": "pipeline/girdle/hug.py (L1 keep-out)",
+ "n_joints": 3,
+ "sliding_cuff": false,
+ "dof": 3,
+ "kinematics": {
+  "arch": "3 DOF: 3R, offset axes",
+  "b": [
+   163.5,
+   61.0
+  ],
+  "a1": 106.9,
+  "a2": 107.1,
+  "branch": 1.0,
+  "w": [
+   121.5,
+   93.4
+  ]
+ },
+ "base": {
+  "mount": "thorax",
+  "chain": "offset3",
+  "prm": {
+   "b": [
+    163.5,
+    61.0
+   ],
+   "a1": 106.9,
+   "a2": 107.1,
+   "branch": 1.0,
+   "w": [
+    121.5,
+    93.4
+   ]
+  },
+  "axis_points_mm": [
+   [
+    25.981252422507737,
+    60.0,
+    8.704171731997375
+   ],
+   [
+    34.47462379309541,
+    2.1618480894462255,
+    60.0
+   ],
+   [
+    60.0,
+    43.217772926070815,
+    -3.68871337425845
+   ]
+  ]
+ },
+ "built_with": "L1 keep-out: cylinders + slabs, no fairing",
+ "note": "COUNTER-EXAMPLE, not a design: P0's rig-optimal 3R (kinematics only) built as L1 keep-out CAD. Its J1 axis points where the arm goes overhead, so the thorax-fixed J1 hub sits far out and the links cross; judged R1 0.1 %, R2 25 mm, R6 51 mm, R10 5.8 mm. Kept to show why hub sites and skin hug must be in the search loop (docs/P3_SEARCH_PLAN.md)."
+}

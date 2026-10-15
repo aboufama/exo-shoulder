@@ -44,7 +44,8 @@ def skin(P):
 def frame_metrics(fr):
     X = BP.posed(dict(zip(["plane", "elev", "axial", "flex", "pron"], fr["p"]))); sp, ns = skin(X)
     pose = dict(zip(["plane", "elev", "axial", "flex", "pron"], fr["p"]))
-    parts = [MET[g] @ np.array(fr["G"][g]).reshape(3, 3).T for g in MET if g != "H" and g in fr["G"]]
+    T = fr.get("T", {})                                                                       # optional per-group translation (offset-axis chains)
+    parts = [MET[g] @ np.array(fr["G"][g]).reshape(3, 3).T + np.array(T.get(g, (0.0, 0.0, 0.0)), float) for g in MET if g != "H" and g in fr["G"]]
     if "H" in MET:
         sg, _ = BP.segs(L_, S_, pose); parts.append(MET["H"] @ sg[2][0].T + sg[2][1])                 # rides on the humerus
     E = np.concatenate(parts)

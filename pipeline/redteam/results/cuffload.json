@@ -1,0 +1,38 @@
+{
+ "part": "UPPER ARM CUFF (conformal G2 shell, AlSi10Mg bead blasted)",
+ "skin_facing_area_cm2": 67.8,
+ "lever_mm": 203.4,
+ "theta_span_deg": [
+  -21,
+  62
+ ],
+ "s_span_mm": [
+  165,
+  246
+ ],
+ "T25Nm": {
+  "force_N": 123,
+  "mean_pressure_kPa": 18.1,
+  "mean_pressure_mmHg": 136
+ },
+ "T10Nm": {
+  "force_N": 49,
+  "mean_pressure_kPa": 7.3,
+  "mean_pressure_mmHg": 54
+ },
+ "T5Nm": {
+  "force_N": 25,
+  "mean_pressure_kPa": 3.6,
+  "mean_pressure_mmHg": 27
+ },
+ "assist_underside": {
+  "frames_elev_ge_45": 681,
+  "share_on_rigid_saddle": 0.0,
+  "underside_theta_p5_p50_p95": [
+   98.0,
+   120.0,
+   135.0
+  ],
+  "note": "theta 0 = lateral, +90 = posterior, 180 = medial; the elevation-assist load lands where the arm faces down"
+ }
+}

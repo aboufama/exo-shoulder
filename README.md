@@ -16,17 +16,25 @@ scripts that happened to get written:
 | What has been learned so far? | [`docs/FINDINGS.md`](docs/FINDINGS.md) |
 | How do I run it? | [`docs/PIPELINE.md`](docs/PIPELINE.md), [`CLAUDE.md`](CLAUDE.md) for agents |
 
-## Status (2026-10-14)
+## Status (2026-10-14, evening)
 
-Reference design: **`cad_r13_n4_s1343_1`**, 4 revolute joints, base on top/back of the shoulder, v4 encoder joints,
-swept-band Ti links, BOTTOM + neck + J4 hub as one 7075 part, conformal AlSi10Mg saddle cuff on the upper arm.
-Scorecard: [`pipeline/full-exo/designs/cad_r13_n4_s1343_1/judge/scorecard.md`](pipeline/full-exo/designs/cad_r13_n4_s1343_1/judge/scorecard.md).
+Reference design: **`cad_r13_n4_s1343_1`** (4R, all axes through the GH centre). Full scorecard, first complete judge
+run (R2, R6, R10 measured for the first time): 3 of 15 pass - R1 45.9 %, R2 24.4 mm, R3 64.5 %, R4 18.8 %, R6 18.5 mm,
+**R10 25.3 mm** ([scorecard](pipeline/full-exo/designs/cad_r13_n4_s1343_1/judge/scorecard.md)). 2026-10-15, contact
+judges fixed (a measurement change, docs/FINDINGS.md "Infrastructure"): the old R2 / R6 numbers carried false
+penetrations (R6 was sign errors); re-judged: R2 24.6 mm (the user's forearm cuff in the rig's forearm), R6 0.80 mm.
 
-What it means in one paragraph: the CAD is collision-free and buildable-looking, but the design only covers about a
-third of the goal (honest score ~30 %, overhead far from usable), and three things outrank more polishing - the base is
-modelled as riding the scapula although it bolts to a thorax back plate (R10, the likely reason overhead is so hard),
-the human model has measurable artifacts (R14 / P2), and nothing has been checked by an independent solver, a supplier
-or a real body yet (R9, R13, R15). **Next: phase P0** in docs/PLAN.md.
+**P0 answered the base question ([docs/P0_BASE_MOUNT.md](docs/P0_BASE_MOUNT.md)):** the base bolts to a thorax plate
+but every design assumed it rides the scapula. On a thorax plate the reference base enters the body by 44 mm, and no
+chain whose axes meet at one thorax-fixed point can hold the 2-10 mm band (>= 12.7 mm on the rig law). Offset axes help
+on the rig law (3-DOF: 5.8 / 6.8 mm), but published girdle motion is 2-3x the rig's and 3-D
+([docs/research/gh_translation_literature.md](docs/research/gh_translation_literature.md)): any rigid thorax-plate chain
+within the cap misaligns >= 11-26 mm, plus +-7-12 mm that no arm-angle function follows; the red team
+([pipeline/redteam/REPORT.md](pipeline/redteam/REPORT.md)) finds the same over the whole workspace and for a shrug.
+**Waiting on the user:** base option A (3 DOF on a girdle-riding base) / B (thorax plate + passive girdle, 5 DOF) /
+C (thorax plate + 3 rigid DOF, only if the user's girdle moves like the rig - the 1-minute ruler test in
+[data/raw/README.md](data/raw/README.md) decides). Then P3 ([docs/P3_SEARCH_PLAN.md](docs/P3_SEARCH_PLAN.md)) with
+L1 keep-out CAD (CAD_STANDARD.md scope) and the held-out split in `data/raw/split.json`.
 
 ## Quickstart
 

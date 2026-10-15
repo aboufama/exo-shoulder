@@ -22,3 +22,7 @@ pipeline/joint-render/out*/
 data/raw/private/
 .env
 *.key
+# agent worktrees (parallel subagents)
+.claude/worktrees/
+pipeline/redteam/results/jam_ws.npz
+pipeline/redteam/results/pressure_base_frames.json

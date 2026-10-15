@@ -1,0 +1,87 @@
+{
+ "key": "l1_r14_3r_s1351_1",
+ "n": 3,
+ "level": "L1 keep-out",
+ "parts": [
+  {
+   "k": 0,
+   "group": "base",
+   "name": "J1 lower plate keep-out (O23 x 3.0)",
+   "vol_cm3": 1.243,
+   "material": "Ti-6Al-4V",
+   "mass_g": 5.51,
+   "valid": true,
+   "faces": 192
+  },
+  {
+   "k": 1,
+   "group": "l1",
+   "name": "J1 upper hub + cap keep-out (O23 x 7.32)",
+   "vol_cm3": 3.033,
+   "material": "Ti-6Al-4V",
+   "mass_g": 13.43,
+   "valid": true,
+   "faces": 192
+  },
+  {
+   "k": 2,
+   "group": "l1",
+   "name": "J2 lower plate keep-out (O23 x 3.0)",
+   "vol_cm3": 1.243,
+   "material": "Ti-6Al-4V",
+   "mass_g": 5.51,
+   "valid": true,
+   "faces": 192
+  },
+  {
+   "k": 3,
+   "group": "l2",
+   "name": "J2 upper hub + cap keep-out (O23 x 7.32)",
+   "vol_cm3": 3.033,
+   "material": "Ti-6Al-4V",
+   "mass_g": 13.43,
+   "valid": true,
+   "faces": 192
+  },
+  {
+   "k": 4,
+   "group": "cuff",
+   "name": "J3 lower plate keep-out (O23 x 3.0)",
+   "vol_cm3": 1.243,
+   "material": "Ti-6Al-4V",
+   "mass_g": 5.51,
+   "valid": true,
+   "faces": 192
+  },
+  {
+   "k": 5,
+   "group": "l2",
+   "name": "J3 upper hub + cap keep-out (O23 x 7.32)",
+   "vol_cm3": 3.033,
+   "material": "Ti-6Al-4V",
+   "mass_g": 13.43,
+   "valid": true,
+   "faces": 192
+  },
+  {
+   "k": 6,
+   "group": "l1",
+   "name": "link 1 slab keep-out (5.5 mm Ti, 14 wide)",
+   "vol_cm3": 5.559,
+   "material": "Ti-6Al-4V",
+   "mass_g": 24.63,
+   "valid": true,
+   "faces": 836
+  },
+  {
+   "k": 7,
+   "group": "l2",
+   "name": "link 2 slab keep-out (5.5 mm Ti, 14 wide)",
+   "vol_cm3": 6.642,
+   "material": "Ti-6Al-4V",
+   "mass_g": 29.42,
+   "valid": true,
+   "faces": 856
+  }
+ ]
+}

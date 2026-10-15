@@ -1,0 +1,190 @@
+{
+ "method": "Outside check of the contact judges (R2 judge/body_contact.py, R6 judge/part_contact.py): re-measures the top entries\nof a design's judge output at their worst frame with nothing from judge/sdist.py. Inside = winding number by signed ray\ncrossings (sum of sign(n . d) over the hits t > 0) along 3 random directions on the RAW glb tessellation (unwelded),\nmajority vote; ray parity is reported alongside (it differs where the posed body overlaps itself). Depth = exact closest\npoint by brute force over all triangles (inside points only, deepest first, pruned by the distance to the nearest vertex,\nan upper bound). R2 entries of the merged BOTTOM are split into the user's bar (s < 265 along the bar, arm_fit.json) and\nthe new neck / arm end.",
+ "r2": [
+  {
+   "entry": "F|FOREARM CUFF",
+   "frame": [
+    "Wash opposite shoulder",
+    44
+   ],
+   "judge": 24.62,
+   "depth": 24.62,
+   "inside": 20328,
+   "inside_parity": 17138,
+   "rays_agree_pct": 100.0
+  },
+  {
+   "entry": "F|Hex socket head countersunk screw grade C M4x0.7 x 8",
+   "frame": [
+    "Comb hair",
+    172
+   ],
+   "judge": 8.37,
+   "depth": 8.37,
+   "inside": 11632,
+   "inside_parity": 11632,
+   "rays_agree_pct": 100.0
+  },
+  {
+   "entry": "F|MIDDLE",
+   "frame": [
+    "Comb hair",
+    68
+   ],
+   "judge": 5.79,
+   "depth": 5.79,
+   "inside": 2618,
+   "inside_parity": 2618,
+   "rays_agree_pct": 100.0
+  },
+  {
+   "entry": "H|BOTTOM + neck + JN hub (one 5-axis part, 7075-T6 bead blasted)",
+   "frame": [
+    "Comb hair",
+    164
+   ],
+   "judge": 4.96,
+   "depth": 4.96,
+   "inside": 264,
+   "inside_parity": 264,
+   "rays_agree_pct": 100.0,
+   "bar_s_lt_265": 4.96,
+   "neck_arm_end": 0.0
+  },
+  {
+   "entry": "H|IGUS THRUST WASHER, 30mm ID, 39mm OD, 1.5mm T, IGLIDE J",
+   "frame": [
+    "Comb hair",
+    162
+   ],
+   "judge": 2.82,
+   "depth": 2.82,
+   "inside": 92,
+   "inside_parity": 92,
+   "rays_agree_pct": 100.0
+  },
+  {
+   "entry": "H|Revolve1[1]",
+   "frame": [
+    "Comb hair",
+    172
+   ],
+   "judge": 1.03,
+   "depth": 1.03,
+   "inside": 96,
+   "inside_parity": 96,
+   "rays_agree_pct": 100.0
+  },
+  {
+   "entry": "H|Revolve1[3]",
+   "frame": [
+    "Comb hair",
+    172
+   ],
+   "judge": 0.6,
+   "depth": 0.6,
+   "inside": 39,
+   "inside_parity": 39,
+   "rays_agree_pct": 100.0
+  }
+ ],
+ "r6": [
+  {
+   "entry": "H|J4 ring nut M8x0.5 18x1 (Ti-6Al-4V)  IN  l3|J4 cap \u00d822 G2 dome (Ti-6Al-4V)",
+   "frame": [
+    "Reach back pocket",
+    12
+   ],
+   "judge": 0.8,
+   "depth": 0.8,
+   "inside": 47,
+   "inside_parity": 47,
+   "rays_agree_pct": 100.0
+  },
+  {
+   "entry": "l1|D4-02 link 1 (Ti-6Al-4V)  IN  base|D4-01 scapula base (Ti-6Al-4V)",
+   "frame": [
+    "Raise overhead",
+    24
+   ],
+   "judge": 0.62,
+   "depth": 0.62,
+   "inside": 2625,
+   "inside_parity": 2625,
+   "rays_agree_pct": 100.0
+  },
+  {
+   "entry": "l3|J4 M1.6x3 ISO 10642 Ti (cap)  IN  H|J4 ring nut M8x0.5 18x1 (Ti-6Al-4V)",
+   "frame": [
+    "Reach a high shelf",
+    72
+   ],
+   "judge": 0.5,
+   "depth": 0.5,
+   "inside": 105,
+   "inside_parity": 105,
+   "rays_agree_pct": 100.0
+  },
+  {
+   "entry": "H|J4 washer B (igus GTM-1018-005)  IN  l3|J4 cap \u00d822 G2 dome (Ti-6Al-4V)",
+   "frame": [
+    "Raise overhead",
+    0
+   ],
+   "judge": 0.42,
+   "depth": 0.42,
+   "inside": 26,
+   "inside_parity": 26,
+   "rays_agree_pct": 100.0
+  },
+  {
+   "entry": "l3|J4 cap \u00d822 G2 dome (Ti-6Al-4V)  IN  H|J4 ring nut M8x0.5 18x1 (Ti-6Al-4V)",
+   "frame": [
+    "Reach a high shelf",
+    68
+   ],
+   "judge": 0.37,
+   "depth": 0.37,
+   "inside": 68,
+   "inside_parity": 68,
+   "rays_agree_pct": 100.0
+  },
+  {
+   "entry": "H|J4 washer B (igus GTM-1018-005)  IN  l3|D4-04 link 3 (Ti-6Al-4V)",
+   "frame": [
+    "Walking arm swing",
+    108
+   ],
+   "judge": 0.32,
+   "depth": 0.32,
+   "inside": 26,
+   "inside_parity": 26,
+   "rays_agree_pct": 100.0
+  },
+  {
+   "entry": "H|J4 washer B (igus GTM-1018-005)  IN  l3|J4 M1.6x3 ISO 10642 Ti (cap)",
+   "frame": [
+    "Reach a high shelf",
+    48
+   ],
+   "judge": 0.26,
+   "depth": 0.26,
+   "inside": 13,
+   "inside_parity": 13,
+   "rays_agree_pct": 100.0
+  },
+  {
+   "entry": "l3|D4-04 link 3 (Ti-6Al-4V)  IN  H|J4 washer B (igus GTM-1018-005)",
+   "frame": [
+    "Wave",
+    8
+   ],
+   "judge": 0.25,
+   "depth": 0.25,
+   "inside": 575,
+   "inside_parity": 575,
+   "rays_agree_pct": 100.0
+  }
+ ],
+ "max_abs_diff_mm": 0.0
+}

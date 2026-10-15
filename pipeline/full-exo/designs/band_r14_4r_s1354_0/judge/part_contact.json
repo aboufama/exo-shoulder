@@ -1,0 +1,99 @@
+{
+ "step": 12,
+ "tol_mm": 0.15,
+ "frames_checked": 117,
+ "pairs": 414,
+ "seconds": 19,
+ "jobs": 4,
+ "violations": {
+  "H|BOTTOM JN hub block (proxy)  IN  l3|D4 member l3 (proxy)": {
+   "max_depth": 6.05,
+   "frames": 77,
+   "worst": [
+    "Wash opposite shoulder",
+    48
+   ]
+  },
+  "H|TOP  IN  F|MIDDLE": {
+   "max_depth": 1.45,
+   "frames": 117,
+   "worst": [
+    "Reach a high shelf",
+    60
+   ]
+  },
+  "H|IGUS THRUST WASHER, 30mm ID, 39mm OD, 1.5mm T, IGLIDE J  IN  F|MIDDLE": {
+   "max_depth": 3.01,
+   "frames": 117,
+   "worst": [
+    "Wave",
+    132
+   ]
+  },
+  "F|MIDDLE  IN  H|TOP": {
+   "max_depth": 2.76,
+   "frames": 116,
+   "worst": [
+    "Wash opposite shoulder",
+    120
+   ]
+  },
+  "l3|D4 member l3 (proxy)  IN  H|BOTTOM JN hub block (proxy)": {
+   "max_depth": 7.39,
+   "frames": 117,
+   "worst": [
+    "Reach back pocket",
+    24
+   ]
+  },
+  "l3|D4 member l3 (proxy)  IN  l2|D4 member l2 (proxy)": {
+   "max_depth": 2.31,
+   "frames": 117,
+   "worst": [
+    "Raise overhead",
+    36
+   ]
+  },
+  "l2|D4 member l2 (proxy)  IN  l3|D4 member l3 (proxy)": {
+   "max_depth": 14.8,
+   "frames": 117,
+   "worst": [
+    "Drink from a cup",
+    120
+   ]
+  },
+  "l2|D4 member l2 (proxy)  IN  l1|D4 member l1 (proxy)": {
+   "max_depth": 5.94,
+   "frames": 117,
+   "worst": [
+    "Reach back pocket",
+    108
+   ]
+  },
+  "l1|D4 member l1 (proxy)  IN  l2|D4 member l2 (proxy)": {
+   "max_depth": 5.2,
+   "frames": 117,
+   "worst": [
+    "Reach back pocket",
+    36
+   ]
+  },
+  "base|D4 member base (proxy)  IN  l1|D4 member l1 (proxy)": {
+   "max_depth": 5.46,
+   "frames": 117,
+   "worst": [
+    "Raise overhead",
+    0
+   ]
+  },
+  "l1|D4 member l1 (proxy)  IN  base|D4 member base (proxy)": {
+   "max_depth": 1.0,
+   "frames": 79,
+   "worst": [
+    "Walking arm swing",
+    96
+   ]
+  }
+ },
+ "max_depth": 14.8
+}

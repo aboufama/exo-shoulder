@@ -1,0 +1,2753 @@
+{
+ "candidates": {
+  "ring": {
+   "params": {
+    "b": [
+     38.6,
+     -4.6
+    ],
+    "a1": 88.7,
+    "a2": 99.8,
+    "branch": 1.0,
+    "w": null
+   },
+   "x_source": "published _x",
+   "key": "3 DOF: 2R shoulder (offset axes) + humeral-rotation ring"
+  },
+  "3R": {
+   "params": {
+    "b": [
+     163.5,
+     61.0
+    ],
+    "a1": 106.9,
+    "a2": 107.1,
+    "branch": 1.0,
+    "w": [
+     121.5,
+     93.4
+    ]
+   },
+   "x_source": "published _x",
+   "key": "3 DOF: 3R, offset axes"
+  },
+  "ring_mt": {
+   "params": {
+    "b": [
+     79.0,
+     -0.5
+    ],
+    "a1": 110.0,
+    "a2": 89.1,
+    "branch": 1,
+    "w": null
+   },
+   "x_source": "refit (minimax LP, fit clips)",
+   "key": "ring_travel.json best (least ring travel)"
+  }
+ },
+ "clip_summary": {
+  "ring": {
+   "margin_fit_min": 28.2,
+   "margin_heldout_min": 55.4,
+   "sigma_fit_min": 0.429,
+   "sigma_heldout_min": 0.747
+  },
+  "3R": {
+   "margin_fit_min": 19.9,
+   "margin_heldout_min": 12.4,
+   "sigma_fit_min": 0.247,
+   "sigma_heldout_min": 0.155
+  },
+  "ring_mt": {
+   "margin_fit_min": 20.1,
+   "margin_heldout_min": 5.2,
+   "sigma_fit_min": 0.407,
+   "sigma_heldout_min": 0.184
+  },
+  "ref4R": {
+   "sing_margin_used_by_clip_generator_deg": 10.0,
+   "sigma_min_actual_followed": 0.314,
+   "sigma_J1locked_min_followed": 0.258,
+   "inner_margin_min_followed": 10.0,
+   "want_frames_without_valid_closure_scapula_base": 54,
+   "want_frames_without_valid_closure_thorax_base": 0,
+   "want_frames_without_any_closure_thorax_base": 0,
+   "frames": 1337
+  }
+ },
+ "clips": {
+  "Raise overhead": {
+   "ref4R_actual_q": {
+    "sigma_min": 0.419,
+    "sigma_J1locked_min": 0.283,
+    "inner_margin_min_deg": 12.4,
+    "at": [
+     33,
+     [
+      30,
+      56,
+      -41
+     ]
+    ]
+   },
+   "ref4R_best_q_want": {
+    "sigma_min": 0.382,
+    "no_valid_closure_frames": 0,
+    "at": [
+     48,
+     [
+      30,
+      107,
+      -51
+     ]
+    ]
+   },
+   "ref4R_thorax_best_q_want": {
+    "sigma_min": 0.395,
+    "no_valid_closure_frames": 0,
+    "no_closure_frames": 0
+   },
+   "ring": {
+    "margin_min_deg": 69.2,
+    "sigma_min": 0.865,
+    "closes": 1.0,
+    "at": [
+     35,
+     [
+      30,
+      62,
+      -42
+     ]
+    ]
+   },
+   "3R": {
+    "margin_min_deg": 27.8,
+    "sigma_min": 0.342,
+    "closes": 1.0,
+    "at": [
+     22,
+     [
+      30,
+      24,
+      -34
+     ]
+    ]
+   },
+   "ring_mt": {
+    "margin_min_deg": 20.1,
+    "sigma_min": 0.407,
+    "closes": 1.0,
+    "at": [
+     43,
+     [
+      30,
+      90,
+      -48
+     ]
+    ]
+   }
+  },
+  "Drink from a cup": {
+   "ref4R_actual_q": {
+    "sigma_min": 0.435,
+    "sigma_J1locked_min": 0.285,
+    "inner_margin_min_deg": 10.0,
+    "at": [
+     9,
+     [
+      42,
+      6,
+      -41
+     ]
+    ]
+   },
+   "ref4R_best_q_want": {
+    "sigma_min": 0.447,
+    "no_valid_closure_frames": 0,
+    "at": [
+     56,
+     [
+      91,
+      50,
+      -57
+     ]
+    ]
+   },
+   "ref4R_thorax_best_q_want": {
+    "sigma_min": 0.46,
+    "no_valid_closure_frames": 0,
+    "no_closure_frames": 0
+   },
+   "ring": {
+    "margin_min_deg": 33.4,
+    "sigma_min": 0.491,
+    "closes": 1.0,
+    "at": [
+     72,
+     [
+      95,
+      69,
+      -48
+     ]
+    ]
+   },
+   "3R": {
+    "margin_min_deg": 29.8,
+    "sigma_min": 0.366,
+    "closes": 1.0,
+    "at": [
+     164,
+     [
+      49,
+      11,
+      -44
+     ]
+    ]
+   },
+   "ring_mt": {
+    "margin_min_deg": 56.2,
+    "sigma_min": 0.763,
+    "closes": 1.0,
+    "at": [
+     72,
+     [
+      95,
+      69,
+      -48
+     ]
+    ]
+   }
+  },
+  "Comb hair": {
+   "ref4R_actual_q": {
+    "sigma_min": 0.396,
+    "sigma_J1locked_min": 0.261,
+    "inner_margin_min_deg": 10.2,
+    "at": [
+     36,
+     [
+      52,
+      87,
+      -53
+     ]
+    ]
+   },
+   "ref4R_best_q_want": {
+    "sigma_min": 0.433,
+    "no_valid_closure_frames": 0,
+    "at": [
+     105,
+     [
+      78,
+      143,
+      -67
+     ]
+    ]
+   },
+   "ref4R_thorax_best_q_want": {
+    "sigma_min": 0.409,
+    "no_valid_closure_frames": 0,
+    "no_closure_frames": 0
+   },
+   "ring": {
+    "margin_min_deg": 51.9,
+    "sigma_min": 0.696,
+    "closes": 1.0,
+    "at": [
+     166,
+     [
+      72,
+      125,
+      -62
+     ]
+    ]
+   },
+   "3R": {
+    "margin_min_deg": 29.0,
+    "sigma_min": 0.356,
+    "closes": 1.0,
+    "at": [
+     16,
+     [
+      34,
+      21,
+      -35
+     ]
+    ]
+   },
+   "ring_mt": {
+    "margin_min_deg": 39.4,
+    "sigma_min": 0.625,
+    "closes": 1.0,
+    "at": [
+     30,
+     [
+      47,
+      67,
+      -47
+     ]
+    ]
+   }
+  },
+  "Reach a high shelf": {
+   "ref4R_actual_q": {
+    "sigma_min": 0.323,
+    "sigma_J1locked_min": 0.262,
+    "inner_margin_min_deg": 10.2,
+    "at": [
+     75,
+     [
+      82,
+      132,
+      -82
+     ]
+    ]
+   },
+   "ref4R_best_q_want": {
+    "sigma_min": 0.346,
+    "no_valid_closure_frames": 0,
+    "at": [
+     75,
+     [
+      82,
+      132,
+      -82
+     ]
+    ]
+   },
+   "ref4R_thorax_best_q_want": {
+    "sigma_min": 0.459,
+    "no_valid_closure_frames": 0,
+    "no_closure_frames": 0
+   },
+   "ring": {
+    "margin_min_deg": 42.0,
+    "sigma_min": 0.589,
+    "closes": 1.0,
+    "at": [
+     44,
+     [
+      79,
+      110,
+      -79
+     ]
+    ]
+   },
+   "3R": {
+    "margin_min_deg": 19.9,
+    "sigma_min": 0.247,
+    "closes": 1.0,
+    "at": [
+     18,
+     [
+      64,
+      27,
+      -64
+     ]
+    ]
+   },
+   "ring_mt": {
+    "margin_min_deg": 60.3,
+    "sigma_min": 0.787,
+    "closes": 1.0,
+    "at": [
+     134,
+     [
+      67,
+      46,
+      -67
+     ]
+    ]
+   }
+  },
+  "Wash opposite shoulder": {
+   "ref4R_actual_q": {
+    "sigma_min": 0.314,
+    "sigma_J1locked_min": 0.265,
+    "inner_margin_min_deg": 10.2,
+    "at": [
+     66,
+     [
+      131,
+      37,
+      -76
+     ]
+    ]
+   },
+   "ref4R_best_q_want": {
+    "sigma_min": 0.243,
+    "no_valid_closure_frames": 54,
+    "at": [
+     81,
+     [
+      145,
+      46,
+      -69
+     ]
+    ]
+   },
+   "ref4R_thorax_best_q_want": {
+    "sigma_min": 0.353,
+    "no_valid_closure_frames": 0,
+    "no_closure_frames": 0
+   },
+   "ring": {
+    "margin_min_deg": 28.2,
+    "sigma_min": 0.429,
+    "closes": 1.0,
+    "at": [
+     102,
+     [
+      140,
+      60,
+      -50
+     ]
+    ]
+   },
+   "3R": {
+    "margin_min_deg": 31.1,
+    "sigma_min": 0.381,
+    "closes": 1.0,
+    "at": [
+     0,
+     [
+      30,
+      4,
+      -30
+     ]
+    ]
+   },
+   "ring_mt": {
+    "margin_min_deg": 22.3,
+    "sigma_min": 0.426,
+    "closes": 1.0,
+    "at": [
+     102,
+     [
+      140,
+      60,
+      -50
+     ]
+    ]
+   }
+  },
+  "Reach back pocket": {
+   "ref4R_actual_q": {
+    "sigma_min": 0.442,
+    "sigma_J1locked_min": 0.296,
+    "inner_margin_min_deg": 13.9,
+    "at": [
+     0,
+     [
+      0,
+      4,
+      0
+     ]
+    ]
+   },
+   "ref4R_best_q_want": {
+    "sigma_min": 0.434,
+    "no_valid_closure_frames": 0,
+    "at": [
+     72,
+     [
+      -80,
+      39,
+      101
+     ]
+    ]
+   },
+   "ref4R_thorax_best_q_want": {
+    "sigma_min": 0.451,
+    "no_valid_closure_frames": 0,
+    "no_closure_frames": 0
+   },
+   "ring": {
+    "margin_min_deg": 36.8,
+    "sigma_min": 0.55,
+    "closes": 1.0,
+    "at": [
+     48,
+     [
+      -70,
+      40,
+      83
+     ]
+    ]
+   },
+   "3R": {
+    "margin_min_deg": 33.0,
+    "sigma_min": 0.404,
+    "closes": 1.0,
+    "at": [
+     0,
+     [
+      0,
+      4,
+      0
+     ]
+    ]
+   },
+   "ring_mt": {
+    "margin_min_deg": 45.9,
+    "sigma_min": 0.686,
+    "closes": 1.0,
+    "at": [
+     30,
+     [
+      -51,
+      30,
+      60
+     ]
+    ]
+   }
+  },
+  "Wave": {
+   "ref4R_actual_q": {
+    "sigma_min": 0.44,
+    "sigma_J1locked_min": 0.292,
+    "inner_margin_min_deg": 13.4,
+    "at": [
+     0,
+     [
+      20,
+      4,
+      -20
+     ]
+    ]
+   },
+   "ref4R_best_q_want": {
+    "sigma_min": 0.323,
+    "no_valid_closure_frames": 0,
+    "at": [
+     75,
+     [
+      15,
+      92,
+      -45
+     ]
+    ]
+   },
+   "ref4R_thorax_best_q_want": {
+    "sigma_min": 0.425,
+    "no_valid_closure_frames": 0,
+    "no_closure_frames": 0
+   },
+   "ring": {
+    "margin_min_deg": 55.4,
+    "sigma_min": 0.747,
+    "closes": 1.0,
+    "at": [
+     38,
+     [
+      15,
+      86,
+      -57
+     ]
+    ]
+   },
+   "3R": {
+    "margin_min_deg": 25.4,
+    "sigma_min": 0.313,
+    "closes": 1.0,
+    "at": [
+     22,
+     [
+      18,
+      41,
+      -37
+     ]
+    ]
+   },
+   "ring_mt": {
+    "margin_min_deg": 5.2,
+    "sigma_min": 0.184,
+    "closes": 1.0,
+    "at": [
+     44,
+     [
+      15,
+      91,
+      -60
+     ]
+    ]
+   }
+  },
+  "Walking arm swing": {
+   "ref4R_actual_q": {
+    "sigma_min": 0.428,
+    "sigma_J1locked_min": 0.258,
+    "inner_margin_min_deg": 10.0,
+    "at": [
+     15,
+     [
+      90,
+      23,
+      -90
+     ]
+    ]
+   },
+   "ref4R_best_q_want": {
+    "sigma_min": 0.447,
+    "no_valid_closure_frames": 0,
+    "at": [
+     18,
+     [
+      90,
+      24,
+      -90
+     ]
+    ]
+   },
+   "ref4R_thorax_best_q_want": {
+    "sigma_min": 0.448,
+    "no_valid_closure_frames": 0,
+    "no_closure_frames": 0
+   },
+   "ring": {
+    "margin_min_deg": 67.4,
+    "sigma_min": 0.845,
+    "closes": 1.0,
+    "at": [
+     18,
+     [
+      90,
+      24,
+      -90
+     ]
+    ]
+   },
+   "3R": {
+    "margin_min_deg": 12.4,
+    "sigma_min": 0.155,
+    "closes": 1.0,
+    "at": [
+     18,
+     [
+      90,
+      24,
+      -90
+     ]
+    ]
+   },
+   "ring_mt": {
+    "margin_min_deg": 66.9,
+    "sigma_min": 0.809,
+    "closes": 1.0,
+    "at": [
+     18,
+     [
+      90,
+      24,
+      -90
+     ]
+    ]
+   }
+  }
+ },
+ "workspace": {
+  "ring": {
+   "plausible": {
+    "share_no_closure": 0.0067,
+    "share_sigma_below_0p1": 0.0134,
+    "share_sigma_below_0p2": 0.0306,
+    "sigma_min": 0.0,
+    "share_margin_below_5deg": 0.0172,
+    "share_margin_below_10deg": 0.0314
+   },
+   "full_box": {
+    "share_no_closure": 0.0146,
+    "share_sigma_below_0p1": 0.0245,
+    "share_sigma_below_0p2": 0.0525,
+    "sigma_min": 0.0,
+    "share_margin_below_5deg": 0.0327,
+    "share_margin_below_10deg": 0.0577
+   },
+   "worst_plausible_by_sigma": [
+    {
+     "plane": 125.0,
+     "elev": 100.0,
+     "axial": -215.0,
+     "r_rel": -90.0,
+     "score": 0.0,
+     "hand_mm": [
+      424,
+      -134,
+      33
+     ],
+     "task": "reach across the body (wash opposite shoulder/armpit, seat belt, opposite pocket) (external rot)"
+    },
+    {
+     "plane": 130.0,
+     "elev": 100.0,
+     "axial": -180.0,
+     "r_rel": -50.0,
+     "score": 0.0,
+     "hand_mm": [
+      438,
+      52,
+      63
+     ],
+     "task": "reach across the body (wash opposite shoulder/armpit, seat belt, opposite pocket) (external rot)"
+    },
+    {
+     "plane": 130.0,
+     "elev": 100.0,
+     "axial": -125.0,
+     "r_rel": 5.0,
+     "score": 0.0,
+     "hand_mm": [
+      312,
+      318,
+      -15
+     ],
+     "task": "reach across the body (wash opposite shoulder/armpit, seat belt, opposite pocket) (neutral rot)"
+    },
+    {
+     "plane": 130.0,
+     "elev": 100.0,
+     "axial": -150.0,
+     "r_rel": -20.0,
+     "score": 0.0,
+     "hand_mm": [
+      388,
+      215,
+      47
+     ],
+     "task": "reach across the body (wash opposite shoulder/armpit, seat belt, opposite pocket) (neutral rot)"
+    },
+    {
+     "plane": 130.0,
+     "elev": 95.0,
+     "axial": -75.0,
+     "r_rel": 55.0,
+     "score": 0.0,
+     "hand_mm": [
+      153,
+      344,
+      -240
+     ],
+     "task": "reach across the body (wash opposite shoulder/armpit, seat belt, opposite pocket) (internal rot)"
+    },
+    {
+     "plane": 125.0,
+     "elev": 90.0,
+     "axial": -35.0,
+     "r_rel": 90.0,
+     "score": 0.0,
+     "hand_mm": [
+      91,
+      189,
+      -394
+     ],
+     "task": "reach across the body (wash opposite shoulder/armpit, seat belt, opposite pocket) (internal rot)"
+    }
+   ],
+   "worst_plausible_by_margin": [
+    {
+     "plane": 130.0,
+     "elev": 95.0,
+     "axial": -60.0,
+     "r_rel": 70.0,
+     "score": -7.049,
+     "hand_mm": [
+      104,
+      311,
+      -302
+     ],
+     "task": "reach across the body (wash opposite shoulder/armpit, seat belt, opposite pocket) (internal rot)"
+    },
+    {
+     "plane": 130.0,
+     "elev": 95.0,
+     "axial": -160.0,
+     "r_rel": -30.0,
+     "score": -7.049,
+     "hand_mm": [
+      421,
+      139,
+      52
+     ],
+     "task": "reach across the body (wash opposite shoulder/armpit, seat belt, opposite pocket) (external rot)"
+    },
+    {
+     "plane": 130.0,
+     "elev": 95.0,
+     "axial": -130.0,
+     "r_rel": 0.0,
+     "score": -7.049,
+     "hand_mm": [
+      348,
+      278,
+      -15
+     ],
+     "task": "reach across the body (wash opposite shoulder/armpit, seat belt, opposite pocket) (neutral rot)"
+    },
+    {
+     "plane": 130.0,
+     "elev": 95.0,
+     "axial": -195.0,
+     "r_rel": -65.0,
+     "score": -7.049,
+     "hand_mm": [
+      440,
+      -59,
+      47
+     ],
+     "task": "reach across the body (wash opposite shoulder/armpit, seat belt, opposite pocket) (external rot)"
+    },
+    {
+     "plane": 130.0,
+     "elev": 95.0,
+     "axial": -85.0,
+     "r_rel": 45.0,
+     "score": -7.049,
+     "hand_mm": [
+      189,
+      354,
+      -196
+     ],
+     "task": "reach across the body (wash opposite shoulder/armpit, seat belt, opposite pocket) (internal rot)"
+    },
+    {
+     "plane": 130.0,
+     "elev": 95.0,
+     "axial": -220.0,
+     "r_rel": -90.0,
+     "score": -7.049,
+     "hand_mm": [
+      406,
+      -185,
+      -10
+     ],
+     "task": "reach across the body (wash opposite shoulder/armpit, seat belt, opposite pocket) (external rot)"
+    }
+   ],
+   "by_elevation": {
+    "0-30": {
+     "no_closure": 0.0,
+     "sigma_lt_0p1": 0.0
+    },
+    "30-60": {
+     "no_closure": 0.0,
+     "sigma_lt_0p1": 0.0
+    },
+    "60-90": {
+     "no_closure": 0.0,
+     "sigma_lt_0p1": 0.013
+    },
+    "90-120": {
+     "no_closure": 0.044,
+     "sigma_lt_0p1": 0.073
+    },
+    "120-150": {
+     "no_closure": 0.0,
+     "sigma_lt_0p1": 0.0
+    },
+    "150-171": {
+     "no_closure": 0.0,
+     "sigma_lt_0p1": 0.0
+    }
+   },
+   "bad_regions": [
+    {
+     "share_of_plausible": 0.0209,
+     "no_closure_share": 0.321,
+     "plane": [
+      115.0,
+      140.0
+     ],
+     "elev": [
+      80.0,
+      105.0
+     ],
+     "r_rel": [
+      -90.0,
+      90.0
+     ],
+     "deepest": {
+      "plane": 125.0,
+      "elev": 90.0,
+      "axial": -215.0,
+      "r_rel": -90.0,
+      "sigma": 0.0
+     },
+     "task": "reach across the body (wash opposite shoulder/armpit, seat belt, opposite pocket) (external rot)"
+    }
+   ],
+   "clip_to_nearest_singular_deg": {
+    "Raise overhead": {
+     "deg": 88.0,
+     "clip_frame": 53,
+     "clip_pose": [
+      30,
+      122,
+      -54
+     ],
+     "singular_pose": [
+      120.0,
+      95.0,
+      -30.0
+     ],
+     "singular_task": "reach across the body (wash opposite shoulder/armpit, seat belt, opposite pocket) (internal rot)"
+    },
+    "Drink from a cup": {
+     "deg": 36.0,
+     "clip_frame": 72,
+     "clip_pose": [
+      95,
+      69,
+      -48
+     ],
+     "singular_pose": [
+      120.0,
+      95.0,
+      -50.0
+     ],
+     "singular_task": "reach across the body (wash opposite shoulder/armpit, seat belt, opposite pocket) (internal rot)"
+    },
+    "Comb hair": {
+     "deg": 53.2,
+     "clip_frame": 168,
+     "clip_pose": [
+      69,
+      118,
+      -60
+     ],
+     "singular_pose": [
+      120.0,
+      95.0,
+      -45.0
+     ],
+     "singular_task": "reach across the body (wash opposite shoulder/armpit, seat belt, opposite pocket) (internal rot)"
+    },
+    "Reach a high shelf": {
+     "deg": 42.3,
+     "clip_frame": 42,
+     "clip_pose": [
+      78,
+      107,
+      -78
+     ],
+     "singular_pose": [
+      120.0,
+      95.0,
+      -70.0
+     ],
+     "singular_task": "reach across the body (wash opposite shoulder/armpit, seat belt, opposite pocket) (internal rot)"
+    },
+    "Wash opposite shoulder": {
+     "deg": 30.8,
+     "clip_frame": 102,
+     "clip_pose": [
+      140,
+      60,
+      -50
+     ],
+     "singular_pose": [
+      135.0,
+      90.0,
+      -50.0
+     ],
+     "singular_task": "reach across the body (wash opposite shoulder/armpit, seat belt, opposite pocket) (internal rot)"
+    },
+    "Reach back pocket": {
+     "deg": 92.3,
+     "clip_frame": 0,
+     "clip_pose": [
+      0,
+      4,
+      0
+     ],
+     "singular_pose": [
+      125.0,
+      90.0,
+      -120.0
+     ],
+     "singular_task": "reach across the body (wash opposite shoulder/armpit, seat belt, opposite pocket) (neutral rot)"
+    },
+    "Wave": {
+     "deg": 91.0,
+     "clip_frame": 0,
+     "clip_pose": [
+      20,
+      4,
+      -20
+     ],
+     "singular_pose": [
+      125.0,
+      90.0,
+      -120.0
+     ],
+     "singular_task": "reach across the body (wash opposite shoulder/armpit, seat belt, opposite pocket) (neutral rot)"
+    },
+    "Walking arm swing": {
+     "deg": 70.6,
+     "clip_frame": 18,
+     "clip_pose": [
+      90,
+      24,
+      -90
+     ],
+     "singular_pose": [
+      125.0,
+      90.0,
+      -115.0
+     ],
+     "singular_task": "reach across the body (wash opposite shoulder/armpit, seat belt, opposite pocket) (neutral rot)"
+    }
+   }
+  },
+  "3R": {
+   "plausible": {
+    "share_no_closure": 0.0025,
+    "share_sigma_below_0p1": 0.0107,
+    "share_sigma_below_0p2": 0.0377,
+    "sigma_min": 0.0,
+    "share_margin_below_5deg": 0.0092,
+    "share_margin_below_10deg": 0.0271
+   },
+   "full_box": {
+    "share_no_closure": 0.0357,
+    "share_sigma_below_0p1": 0.0442,
+    "share_sigma_below_0p2": 0.071,
+    "sigma_min": 0.0,
+    "share_margin_below_5deg": 0.0492,
+    "share_margin_below_10deg": 0.0721
+   },
+   "worst_plausible_by_sigma": [
+    {
+     "plane": 5.0,
+     "elev": 95.0,
+     "axial": 85.0,
+     "r_rel": 90.0,
+     "score": 0.0,
+     "hand_mm": [
+      57,
+      -301,
+      324
+     ],
+     "task": "arm out to the side, in/behind the frontal plane (reach sideways, T-pose, arm into a jacket sleeve, hand on a door frame) (internal rot)"
+    },
+    {
+     "plane": -20.0,
+     "elev": 90.0,
+     "axial": 110.0,
+     "r_rel": 90.0,
+     "score": 0.0,
+     "hand_mm": [
+      -209,
+      -310,
+      243
+     ],
+     "task": "arm out to the side, in/behind the frontal plane (reach sideways, T-pose, arm into a jacket sleeve, hand on a door frame) (internal rot)"
+    },
+    {
+     "plane": -5.0,
+     "elev": 130.0,
+     "axial": 90.0,
+     "r_rel": 85.0,
+     "score": 0.0,
+     "hand_mm": [
+      -39,
+      -60,
+      440
+     ],
+     "task": "hand behind the head (comb/wash back of hair, scratch back) (internal rot)"
+    },
+    {
+     "plane": 85.0,
+     "elev": 30.0,
+     "axial": -100.0,
+     "r_rel": -15.0,
+     "score": 0.0,
+     "hand_mm": [
+      425,
+      -97,
+      95
+     ],
+     "task": "mid reach (eat/drink, table reach) (neutral rot)"
+    },
+    {
+     "plane": 0.0,
+     "elev": 45.0,
+     "axial": -60.0,
+     "r_rel": -60.0,
+     "score": 0.004,
+     "hand_mm": [
+      165,
+      -10,
+      414
+     ],
+     "task": "mid reach (eat/drink, table reach) (external rot)"
+    },
+    {
+     "plane": 60.0,
+     "elev": 30.0,
+     "axial": -85.0,
+     "r_rel": -25.0,
+     "score": 0.008,
+     "hand_mm": [
+      391,
+      -95,
+      192
+     ],
+     "task": "mid reach (eat/drink, table reach) (external rot)"
+    }
+   ],
+   "worst_plausible_by_margin": [
+    {
+     "plane": -15.0,
+     "elev": 115.0,
+     "axial": 105.0,
+     "r_rel": 90.0,
+     "score": -19.139,
+     "hand_mm": [
+      -188,
+      -162,
+      371
+     ],
+     "task": "arm out to the side, in/behind the frontal plane (reach sideways, T-pose, arm into a jacket sleeve, hand on a door frame) (internal rot)"
+    },
+    {
+     "plane": -5.0,
+     "elev": 140.0,
+     "axial": 95.0,
+     "r_rel": 90.0,
+     "score": -2.59,
+     "hand_mm": [
+      -67,
+      19,
+      440
+     ],
+     "task": "hand behind the head (comb/wash back of hair, scratch back) (internal rot)"
+    },
+    {
+     "plane": 10.0,
+     "elev": 110.0,
+     "axial": 80.0,
+     "r_rel": 90.0,
+     "score": -2.588,
+     "hand_mm": [
+      125,
+      -203,
+      377
+     ],
+     "task": "arm out to the side, in/behind the frontal plane (reach sideways, T-pose, arm into a jacket sleeve, hand on a door frame) (internal rot)"
+    },
+    {
+     "plane": -15.0,
+     "elev": 90.0,
+     "axial": 105.0,
+     "r_rel": 90.0,
+     "score": -1.637,
+     "hand_mm": [
+      -160,
+      -319,
+      268
+     ],
+     "task": "arm out to the side, in/behind the frontal plane (reach sideways, T-pose, arm into a jacket sleeve, hand on a door frame) (internal rot)"
+    },
+    {
+     "plane": 85.0,
+     "elev": 30.0,
+     "axial": -100.0,
+     "r_rel": -15.0,
+     "score": -0.005,
+     "hand_mm": [
+      425,
+      -97,
+      95
+     ],
+     "task": "mid reach (eat/drink, table reach) (neutral rot)"
+    },
+    {
+     "plane": 0.0,
+     "elev": 45.0,
+     "axial": -60.0,
+     "r_rel": -60.0,
+     "score": 0.155,
+     "hand_mm": [
+      165,
+      -10,
+      414
+     ],
+     "task": "mid reach (eat/drink, table reach) (external rot)"
+    }
+   ],
+   "by_elevation": {
+    "0-30": {
+     "no_closure": 0.0,
+     "sigma_lt_0p1": 0.004
+    },
+    "30-60": {
+     "no_closure": 0.0,
+     "sigma_lt_0p1": 0.03
+    },
+    "60-90": {
+     "no_closure": 0.0,
+     "sigma_lt_0p1": 0.002
+    },
+    "90-120": {
+     "no_closure": 0.012,
+     "sigma_lt_0p1": 0.014
+    },
+    "120-150": {
+     "no_closure": 0.005,
+     "sigma_lt_0p1": 0.006
+    },
+    "150-171": {
+     "no_closure": 0.0,
+     "sigma_lt_0p1": 0.0
+    }
+   },
+   "bad_regions": [
+    {
+     "share_of_plausible": 0.018,
+     "no_closure_share": 0.001,
+     "plane": [
+      -40.0,
+      150.0
+     ],
+     "elev": [
+      20.0,
+      70.0
+     ],
+     "r_rel": [
+      -90.0,
+      35.0
+     ],
+     "deepest": {
+      "plane": 85.0,
+      "elev": 30.0,
+      "axial": -100.0,
+      "r_rel": -15.0,
+      "sigma": 0.0
+     },
+     "task": "mid reach (eat/drink, table reach) (neutral rot)"
+    },
+    {
+     "share_of_plausible": 0.0035,
+     "no_closure_share": 0.709,
+     "plane": [
+      -20.0,
+      15.0
+     ],
+     "elev": [
+      85.0,
+      145.0
+     ],
+     "r_rel": [
+      65.0,
+      90.0
+     ],
+     "deepest": {
+      "plane": -20.0,
+      "elev": 90.0,
+      "axial": 110.0,
+      "r_rel": 90.0,
+      "sigma": 0.0
+     },
+     "task": "arm out to the side, in/behind the frontal plane (reach sideways, T-pose, arm into a jacket sleeve, hand on a door frame) (internal rot)"
+    }
+   ],
+   "clip_to_nearest_singular_deg": {
+    "Raise overhead": {
+     "deg": 25.4,
+     "clip_frame": 23,
+     "clip_pose": [
+      30,
+      26,
+      -35
+     ],
+     "singular_pose": [
+      65.0,
+      30.0,
+      -85.0
+     ],
+     "singular_task": "mid reach (eat/drink, table reach) (neutral rot)"
+    },
+    "Drink from a cup": {
+     "deg": 27.3,
+     "clip_frame": 162,
+     "clip_pose": [
+      52,
+      14,
+      -45
+     ],
+     "singular_pose": [
+      100.0,
+      30.0,
+      -105.0
+     ],
+     "singular_task": "mid reach (eat/drink, table reach) (neutral rot)"
+    },
+    "Comb hair": {
+     "deg": 26.4,
+     "clip_frame": 17,
+     "clip_pose": [
+      35,
+      23,
+      -35
+     ],
+     "singular_pose": [
+      75.0,
+      30.0,
+      -90.0
+     ],
+     "singular_task": "mid reach (eat/drink, table reach) (neutral rot)"
+    },
+    "Reach a high shelf": {
+     "deg": 17.2,
+     "clip_frame": 19,
+     "clip_pose": [
+      65,
+      31,
+      -65
+     ],
+     "singular_pose": [
+      75.0,
+      30.0,
+      -90.0
+     ],
+     "singular_task": "mid reach (eat/drink, table reach) (neutral rot)"
+    },
+    "Wash opposite shoulder": {
+     "deg": 29.3,
+     "clip_frame": 13,
+     "clip_pose": [
+      39,
+      7,
+      -35
+     ],
+     "singular_pose": [
+      100.0,
+      30.0,
+      -105.0
+     ],
+     "singular_task": "mid reach (eat/drink, table reach) (neutral rot)"
+    },
+    "Reach back pocket": {
+     "deg": 31.5,
+     "clip_frame": 0,
+     "clip_pose": [
+      0,
+      4,
+      0
+     ],
+     "singular_pose": [
+      100.0,
+      30.0,
+      -105.0
+     ],
+     "singular_task": "mid reach (eat/drink, table reach) (neutral rot)"
+    },
+    "Wave": {
+     "deg": 23.0,
+     "clip_frame": 22,
+     "clip_pose": [
+      18,
+      41,
+      -37
+     ],
+     "singular_pose": [
+      35.0,
+      35.0,
+      -70.0
+     ],
+     "singular_task": "mid reach (eat/drink, table reach) (external rot)"
+    },
+    "Walking arm swing": {
+     "deg": 9.7,
+     "clip_frame": 18,
+     "clip_pose": [
+      90,
+      24,
+      -90
+     ],
+     "singular_pose": [
+      100.0,
+      30.0,
+      -105.0
+     ],
+     "singular_task": "mid reach (eat/drink, table reach) (neutral rot)"
+    }
+   }
+  },
+  "ring_mt": {
+   "plausible": {
+    "share_no_closure": 0.0336,
+    "share_sigma_below_0p1": 0.0411,
+    "share_sigma_below_0p2": 0.0605,
+    "sigma_min": 0.0,
+    "share_margin_below_5deg": 0.053,
+    "share_margin_below_10deg": 0.0769
+   },
+   "full_box": {
+    "share_no_closure": 0.0327,
+    "share_sigma_below_0p1": 0.0402,
+    "share_sigma_below_0p2": 0.0612,
+    "sigma_min": 0.0,
+    "share_margin_below_5deg": 0.0536,
+    "share_margin_below_10deg": 0.081
+   },
+   "worst_plausible_by_sigma": [
+    {
+     "plane": -15.0,
+     "elev": 105.0,
+     "axial": 5.0,
+     "r_rel": -10.0,
+     "score": 0.0,
+     "hand_mm": [
+      241,
+      50,
+      372
+     ],
+     "task": "arm out to the side, in/behind the frontal plane (reach sideways, T-pose, arm into a jacket sleeve, hand on a door frame) (neutral rot)"
+    },
+    {
+     "plane": -15.0,
+     "elev": 105.0,
+     "axial": -20.0,
+     "r_rel": -35.0,
+     "score": 0.0,
+     "hand_mm": [
+      232,
+      187,
+      332
+     ],
+     "task": "arm out to the side, in/behind the frontal plane (reach sideways, T-pose, arm into a jacket sleeve, hand on a door frame) (external rot)"
+    },
+    {
+     "plane": -15.0,
+     "elev": 105.0,
+     "axial": -45.0,
+     "r_rel": -60.0,
+     "score": 0.0,
+     "hand_mm": [
+      166,
+      303,
+      282
+     ],
+     "task": "arm out to the side, in/behind the frontal plane (reach sideways, T-pose, arm into a jacket sleeve, hand on a door frame) (external rot)"
+    },
+    {
+     "plane": -15.0,
+     "elev": 95.0,
+     "axial": 80.0,
+     "r_rel": 65.0,
+     "score": 0.0,
+     "hand_mm": [
+      -29,
+      -298,
+      331
+     ],
+     "task": "arm out to the side, in/behind the frontal plane (reach sideways, T-pose, arm into a jacket sleeve, hand on a door frame) (internal rot)"
+    },
+    {
+     "plane": -15.0,
+     "elev": 100.0,
+     "axial": -70.0,
+     "r_rel": -85.0,
+     "score": 0.0,
+     "hand_mm": [
+      46,
+      357,
+      263
+     ],
+     "task": "arm out to the side, in/behind the frontal plane (reach sideways, T-pose, arm into a jacket sleeve, hand on a door frame) (external rot)"
+    },
+    {
+     "plane": -15.0,
+     "elev": 95.0,
+     "axial": 105.0,
+     "r_rel": 90.0,
+     "score": 0.0,
+     "hand_mm": [
+      -167,
+      -291,
+      293
+     ],
+     "task": "arm out to the side, in/behind the frontal plane (reach sideways, T-pose, arm into a jacket sleeve, hand on a door frame) (internal rot)"
+    }
+   ],
+   "worst_plausible_by_margin": [
+    {
+     "plane": -10.0,
+     "elev": 90.0,
+     "axial": 55.0,
+     "r_rel": 45.0,
+     "score": -19.782,
+     "hand_mm": [
+      134,
+      -270,
+      328
+     ],
+     "task": "arm out to the side, in/behind the frontal plane (reach sideways, T-pose, arm into a jacket sleeve, hand on a door frame) (internal rot)"
+    },
+    {
+     "plane": -10.0,
+     "elev": 90.0,
+     "axial": -20.0,
+     "r_rel": -30.0,
+     "score": -19.782,
+     "hand_mm": [
+      253,
+      113,
+      349
+     ],
+     "task": "arm out to the side, in/behind the frontal plane (reach sideways, T-pose, arm into a jacket sleeve, hand on a door frame) (external rot)"
+    },
+    {
+     "plane": -10.0,
+     "elev": 90.0,
+     "axial": 5.0,
+     "r_rel": -5.0,
+     "score": -19.782,
+     "hand_mm": [
+      272,
+      -29,
+      353
+     ],
+     "task": "arm out to the side, in/behind the frontal plane (reach sideways, T-pose, arm into a jacket sleeve, hand on a door frame) (neutral rot)"
+    },
+    {
+     "plane": -10.0,
+     "elev": 90.0,
+     "axial": -45.0,
+     "r_rel": -55.0,
+     "score": -19.782,
+     "hand_mm": [
+      178,
+      233,
+      336
+     ],
+     "task": "arm out to the side, in/behind the frontal plane (reach sideways, T-pose, arm into a jacket sleeve, hand on a door frame) (external rot)"
+    },
+    {
+     "plane": -10.0,
+     "elev": 90.0,
+     "axial": -80.0,
+     "r_rel": -90.0,
+     "score": -19.782,
+     "hand_mm": [
+      4,
+      325,
+      305
+     ],
+     "task": "arm out to the side, in/behind the frontal plane (reach sideways, T-pose, arm into a jacket sleeve, hand on a door frame) (external rot)"
+    },
+    {
+     "plane": -10.0,
+     "elev": 90.0,
+     "axial": 100.0,
+     "r_rel": 90.0,
+     "score": -19.782,
+     "hand_mm": [
+      -109,
+      -325,
+      285
+     ],
+     "task": "arm out to the side, in/behind the frontal plane (reach sideways, T-pose, arm into a jacket sleeve, hand on a door frame) (internal rot)"
+    }
+   ],
+   "by_elevation": {
+    "0-30": {
+     "no_closure": 0.0,
+     "sigma_lt_0p1": 0.0
+    },
+    "30-60": {
+     "no_closure": 0.0,
+     "sigma_lt_0p1": 0.0
+    },
+    "60-90": {
+     "no_closure": 0.093,
+     "sigma_lt_0p1": 0.115
+    },
+    "90-120": {
+     "no_closure": 0.117,
+     "sigma_lt_0p1": 0.141
+    },
+    "120-150": {
+     "no_closure": 0.0,
+     "sigma_lt_0p1": 0.0
+    },
+    "150-171": {
+     "no_closure": 0.0,
+     "sigma_lt_0p1": 0.0
+    }
+   },
+   "bad_regions": [
+    {
+     "share_of_plausible": 0.0418,
+     "no_closure_share": 0.786,
+     "plane": [
+      -25.0,
+      10.0
+     ],
+     "elev": [
+      70.0,
+      110.0
+     ],
+     "r_rel": [
+      -90.0,
+      90.0
+     ],
+     "deepest": {
+      "plane": -25.0,
+      "elev": 75.0,
+      "axial": -65.0,
+      "r_rel": -90.0,
+      "sigma": 0.0
+     },
+     "task": "arm out to the side, in/behind the frontal plane (reach sideways, T-pose, arm into a jacket sleeve, hand on a door frame) (external rot)"
+    },
+    {
+     "share_of_plausible": 0.0037,
+     "no_closure_share": 0.2,
+     "plane": [
+      150.0,
+      150.0
+     ],
+     "elev": [
+      80.0,
+      100.0
+     ],
+     "r_rel": [
+      -90.0,
+      90.0
+     ],
+     "deepest": {
+      "plane": 150.0,
+      "elev": 90.0,
+      "axial": -240.0,
+      "r_rel": -90.0,
+      "sigma": 0.0
+     },
+     "task": "reach across the body (wash opposite shoulder/armpit, seat belt, opposite pocket) (external rot)"
+    }
+   ],
+   "clip_to_nearest_singular_deg": {
+    "Raise overhead": {
+     "deg": 20.1,
+     "clip_frame": 43,
+     "clip_pose": [
+      30,
+      90,
+      -48
+     ],
+     "singular_pose": [
+      10.0,
+      90.0,
+      -50.0
+     ],
+     "singular_task": "arm out to the side, in/behind the frontal plane (reach sideways, T-pose, arm into a jacket sleeve, hand on a door frame) (external rot)"
+    },
+    "Drink from a cup": {
+     "deg": 57.7,
+     "clip_frame": 72,
+     "clip_pose": [
+      95,
+      69,
+      -48
+     ],
+     "singular_pose": [
+      150.0,
+      90.0,
+      -60.0
+     ],
+     "singular_task": "reach across the body (wash opposite shoulder/armpit, seat belt, opposite pocket) (internal rot)"
+    },
+    "Comb hair": {
+     "deg": 41.1,
+     "clip_frame": 33,
+     "clip_pose": [
+      49,
+      77,
+      -50
+     ],
+     "singular_pose": [
+      10.0,
+      90.0,
+      -45.0
+     ],
+     "singular_task": "arm out to the side, in/behind the frontal plane (reach sideways, T-pose, arm into a jacket sleeve, hand on a door frame) (external rot)"
+    },
+    "Reach a high shelf": {
+     "deg": 62.5,
+     "clip_frame": 137,
+     "clip_pose": [
+      65,
+      35,
+      -65
+     ],
+     "singular_pose": [
+      -5.0,
+      70.0,
+      -15.0
+     ],
+     "singular_task": "arm out to the side, in/behind the frontal plane (reach sideways, T-pose, arm into a jacket sleeve, hand on a door frame) (neutral rot)"
+    },
+    "Wash opposite shoulder": {
+     "deg": 32.6,
+     "clip_frame": 102,
+     "clip_pose": [
+      140,
+      60,
+      -50
+     ],
+     "singular_pose": [
+      150.0,
+      90.0,
+      -60.0
+     ],
+     "singular_task": "reach across the body (wash opposite shoulder/armpit, seat belt, opposite pocket) (internal rot)"
+    },
+    "Reach back pocket": {
+     "deg": 47.2,
+     "clip_frame": 30,
+     "clip_pose": [
+      -51,
+      30,
+      60
+     ],
+     "singular_pose": [
+      -15.0,
+      70.0,
+      35.0
+     ],
+     "singular_task": "arm out to the side, in/behind the frontal plane (reach sideways, T-pose, arm into a jacket sleeve, hand on a door frame) (neutral rot)"
+    },
+    "Wave": {
+     "deg": 5.2,
+     "clip_frame": 42,
+     "clip_pose": [
+      15,
+      91,
+      -59
+     ],
+     "singular_pose": [
+      10.0,
+      90.0,
+      -60.0
+     ],
+     "singular_task": "arm out to the side, in/behind the frontal plane (reach sideways, T-pose, arm into a jacket sleeve, hand on a door frame) (external rot)"
+    },
+    "Walking arm swing": {
+     "deg": 70.4,
+     "clip_frame": 0,
+     "clip_pose": [
+      90,
+      4,
+      -90
+     ],
+     "singular_pose": [
+      -5.0,
+      70.0,
+      0.0
+     ],
+     "singular_task": "arm out to the side, in/behind the frontal plane (reach sideways, T-pose, arm into a jacket sleeve, hand on a door frame) (neutral rot)"
+    }
+   }
+  },
+  "ref4R_scapula": {
+   "plausible": {
+    "share_no_closure": 0.1915,
+    "share_sigma_below_0p1": 0.2003,
+    "share_sigma_below_0p2": 0.233,
+    "sigma_min": 0.0,
+    "share_no_valid_closure_at_clip_margin": 0.3233
+   },
+   "full_box": {
+    "share_no_closure": 0.2161,
+    "share_sigma_below_0p1": 0.2265,
+    "share_sigma_below_0p2": 0.2626,
+    "sigma_min": 0.0,
+    "share_no_valid_closure_at_clip_margin": 0.3566
+   },
+   "worst_plausible_by_sigma": [
+    {
+     "plane": 125.0,
+     "elev": 145.0,
+     "axial": -80.0,
+     "r_rel": 45.0,
+     "score": 0.0,
+     "hand_mm": [
+      -110,
+      432,
+      7
+     ],
+     "task": "hand behind the head (comb/wash back of hair, scratch back) (internal rot)"
+    },
+    {
+     "plane": 125.0,
+     "elev": 150.0,
+     "axial": -165.0,
+     "r_rel": -40.0,
+     "score": 0.0,
+     "hand_mm": [
+      245,
+      303,
+      217
+     ],
+     "task": "reach overhead (high shelf, light bulb) (external rot)"
+    },
+    {
+     "plane": 95.0,
+     "elev": 70.0,
+     "axial": -180.0,
+     "r_rel": -85.0,
+     "score": 0.0,
+     "hand_mm": [
+      310,
+      -103,
+      304
+     ],
+     "task": "arm raised, forearm up: wave / throw / hands-up (external rot)"
+    },
+    {
+     "plane": 15.0,
+     "elev": 160.0,
+     "axial": 70.0,
+     "r_rel": 85.0,
+     "score": 0.0,
+     "hand_mm": [
+      211,
+      176,
+      351
+     ],
+     "task": "reach overhead (high shelf, light bulb) (internal rot)"
+    },
+    {
+     "plane": 95.0,
+     "elev": 65.0,
+     "axial": -135.0,
+     "r_rel": -40.0,
+     "score": 0.0,
+     "hand_mm": [
+      389,
+      85,
+      200
+     ],
+     "task": "mid reach (eat/drink, table reach) (external rot)"
+    },
+    {
+     "plane": 125.0,
+     "elev": 145.0,
+     "axial": -120.0,
+     "r_rel": 5.0,
+     "score": 0.0,
+     "hand_mm": [
+      44,
+      410,
+      171
+     ],
+     "task": "reach overhead (high shelf, light bulb) (neutral rot)"
+    }
+   ],
+   "worst_plausible_by_margin": [
+    {
+     "plane": 125.0,
+     "elev": 55.0,
+     "axial": -155.0,
+     "r_rel": -30.0,
+     "score": -90.0,
+     "hand_mm": [
+      438,
+      -58,
+      58
+     ],
+     "task": "reach across the body (wash opposite shoulder/armpit, seat belt, opposite pocket) (external rot)"
+    },
+    {
+     "plane": 125.0,
+     "elev": 55.0,
+     "axial": -205.0,
+     "r_rel": -80.0,
+     "score": -90.0,
+     "hand_mm": [
+      307,
+      -286,
+      150
+     ],
+     "task": "reach across the body (wash opposite shoulder/armpit, seat belt, opposite pocket) (external rot)"
+    },
+    {
+     "plane": 125.0,
+     "elev": 55.0,
+     "axial": -180.0,
+     "r_rel": -55.0,
+     "score": -90.0,
+     "hand_mm": [
+      391,
+      -172,
+      129
+     ],
+     "task": "reach across the body (wash opposite shoulder/armpit, seat belt, opposite pocket) (external rot)"
+    },
+    {
+     "plane": 125.0,
+     "elev": 55.0,
+     "axial": -130.0,
+     "r_rel": -5.0,
+     "score": -90.0,
+     "hand_mm": [
+      442,
+      35,
+      -50
+     ],
+     "task": "reach across the body (wash opposite shoulder/armpit, seat belt, opposite pocket) (neutral rot)"
+    },
+    {
+     "plane": 15.0,
+     "elev": 130.0,
+     "axial": 75.0,
+     "r_rel": 90.0,
+     "score": -90.0,
+     "hand_mm": [
+      195,
+      -51,
+      398
+     ],
+     "task": "reach overhead (high shelf, light bulb) (internal rot)"
+    },
+    {
+     "plane": 95.0,
+     "elev": 55.0,
+     "axial": -145.0,
+     "r_rel": -50.0,
+     "score": -90.0,
+     "hand_mm": [
+      377,
+      -17,
+      238
+     ],
+     "task": "mid reach (eat/drink, table reach) (external rot)"
+    }
+   ],
+   "no_closure_region": {
+    "elev_range": [
+     10.0,
+     170.0
+    ],
+    "plane_range": [
+     -90.0,
+     150.0
+    ],
+    "share_of_plausible_with_elev_ge_120": 0.325,
+    "examples": [
+     {
+      "plane": 150.0,
+      "elev": 125.0,
+      "axial": -180.0,
+      "r_rel": -30.0,
+      "score": -1.0,
+      "hand_mm": [
+       409,
+       172,
+       -48
+      ],
+      "task": "reach across the body (wash opposite shoulder/armpit, seat belt, opposite pocket) (external rot)"
+     },
+     {
+      "plane": 150.0,
+      "elev": 125.0,
+      "axial": -150.0,
+      "r_rel": 0.0,
+      "score": -1.0,
+      "hand_mm": [
+       323,
+       307,
+       12
+      ],
+      "task": "reach across the body (wash opposite shoulder/armpit, seat belt, opposite pocket) (neutral rot)"
+     },
+     {
+      "plane": 150.0,
+      "elev": 120.0,
+      "axial": -80.0,
+      "r_rel": 70.0,
+      "score": -1.0,
+      "hand_mm": [
+       -1,
+       431,
+       -113
+      ],
+      "task": "reach across the body (wash opposite shoulder/armpit, seat belt, opposite pocket) (internal rot)"
+     },
+     {
+      "plane": 150.0,
+      "elev": 120.0,
+      "axial": -120.0,
+      "r_rel": 30.0,
+      "score": -1.0,
+      "hand_mm": [
+       201,
+       398,
+       -19
+      ],
+      "task": "reach across the body (wash opposite shoulder/armpit, seat belt, opposite pocket) (internal rot)"
+     },
+     {
+      "plane": -90.0,
+      "elev": 35.0,
+      "axial": 170.0,
+      "r_rel": 80.0,
+      "score": -1.0,
+      "hand_mm": [
+       -125,
+       -279,
+       -325
+      ],
+      "task": "reach behind the body (2nd sleeve of a jacket, back pocket, seat-belt behind) (internal rot)"
+     },
+     {
+      "plane": -85.0,
+      "elev": 60.0,
+      "axial": 135.0,
+      "r_rel": 50.0,
+      "score": -1.0,
+      "hand_mm": [
+       -163,
+       -352,
+       -220
+      ],
+      "task": "reach behind the body (2nd sleeve of a jacket, back pocket, seat-belt behind) (internal rot)"
+     }
+    ]
+   },
+   "by_elevation": {
+    "0-30": {
+     "no_closure": 0.01,
+     "sigma_lt_0p1": 0.013
+    },
+    "30-60": {
+     "no_closure": 0.09,
+     "sigma_lt_0p1": 0.103
+    },
+    "60-90": {
+     "no_closure": 0.253,
+     "sigma_lt_0p1": 0.264
+    },
+    "90-120": {
+     "no_closure": 0.319,
+     "sigma_lt_0p1": 0.329
+    },
+    "120-150": {
+     "no_closure": 0.34,
+     "sigma_lt_0p1": 0.349
+    },
+    "150-171": {
+     "no_closure": 0.305,
+     "sigma_lt_0p1": 0.316
+    }
+   },
+   "bad_regions": [
+    {
+     "share_of_plausible": 0.1832,
+     "no_closure_share": 0.927,
+     "plane": [
+      40.0,
+      150.0
+     ],
+     "elev": [
+      30.0,
+      170.0
+     ],
+     "r_rel": [
+      -90.0,
+      90.0
+     ],
+     "deepest": {
+      "plane": 45.0,
+      "elev": 75.0,
+      "axial": -135.0,
+      "r_rel": -90.0,
+      "sigma": 0.0
+     },
+     "task": "arm raised, forearm up: wave / throw / hands-up (external rot)"
+    },
+    {
+     "share_of_plausible": 0.0256,
+     "no_closure_share": 0.818,
+     "plane": [
+      -90.0,
+      20.0
+     ],
+     "elev": [
+      5.0,
+      170.0
+     ],
+     "r_rel": [
+      45.0,
+      90.0
+     ],
+     "deepest": {
+      "plane": -90.0,
+      "elev": 10.0,
+      "axial": 175.0,
+      "r_rel": 85.0,
+      "sigma": 0.0
+     },
+     "task": "arm by the side, behind: hand to back pocket / tuck shirt (internal rot)"
+    },
+    {
+     "share_of_plausible": 0.0022,
+     "no_closure_share": 0.229,
+     "plane": [
+      -25.0,
+      35.0
+     ],
+     "elev": [
+      65.0,
+      150.0
+     ],
+     "r_rel": [
+      -40.0,
+      10.0
+     ],
+     "deepest": {
+      "plane": -25.0,
+      "elev": 70.0,
+      "axial": -10.0,
+      "r_rel": -35.0,
+      "sigma": 0.0
+     },
+     "task": "arm out to the side, in/behind the frontal plane (reach sideways, T-pose, arm into a jacket sleeve, hand on a door frame) (external rot)"
+    }
+   ],
+   "clip_to_nearest_singular_deg": {
+    "Raise overhead": {
+     "deg": 24.6,
+     "clip_frame": 50,
+     "clip_pose": [
+      30,
+      113,
+      -52
+     ],
+     "singular_pose": [
+      20.0,
+      120.0,
+      -35.0
+     ],
+     "singular_task": "reach overhead (high shelf, light bulb) (neutral rot)"
+    },
+    "Drink from a cup": {
+     "deg": 37.7,
+     "clip_frame": 48,
+     "clip_pose": [
+      90,
+      44,
+      -60
+     ],
+     "singular_pose": [
+      130.0,
+      60.0,
+      -100.0
+     ],
+     "singular_task": "reach across the body (wash opposite shoulder/armpit, seat belt, opposite pocket) (internal rot)"
+    },
+    "Comb hair": {
+     "deg": 34.5,
+     "clip_frame": 105,
+     "clip_pose": [
+      78,
+      143,
+      -67
+     ],
+     "singular_pose": [
+      80.0,
+      145.0,
+      -100.0
+     ],
+     "singular_task": "hand behind the head (comb/wash back of hair, scratch back) (neutral rot)"
+    },
+    "Reach a high shelf": {
+     "deg": 19.3,
+     "clip_frame": 75,
+     "clip_pose": [
+      82,
+      132,
+      -82
+     ],
+     "singular_pose": [
+      90.0,
+      130.0,
+      -95.0
+     ],
+     "singular_task": "reach overhead (high shelf, light bulb) (neutral rot)"
+    },
+    "Wash opposite shoulder": {
+     "deg": 12.0,
+     "clip_frame": 73,
+     "clip_pose": [
+      141,
+      44,
+      -71
+     ],
+     "singular_pose": [
+      150.0,
+      50.0,
+      -85.0
+     ],
+     "singular_task": "reach across the body (wash opposite shoulder/armpit, seat belt, opposite pocket) (internal rot)"
+    },
+    "Reach back pocket": {
+     "deg": 34.2,
+     "clip_frame": 72,
+     "clip_pose": [
+      -80,
+      39,
+      101
+     ],
+     "singular_pose": [
+      -90.0,
+      50.0,
+      140.0
+     ],
+     "singular_task": "reach behind the body (2nd sleeve of a jacket, back pocket, seat-belt behind) (internal rot)"
+    },
+    "Wave": {
+     "deg": 16.4,
+     "clip_frame": 75,
+     "clip_pose": [
+      15,
+      92,
+      -45
+     ],
+     "singular_pose": [
+      10.0,
+      95.0,
+      -30.0
+     ],
+     "singular_task": "arm out to the side, in/behind the frontal plane (reach sideways, T-pose, arm into a jacket sleeve, hand on a door frame) (neutral rot)"
+    },
+    "Walking arm swing": {
+     "deg": 33.9,
+     "clip_frame": 18,
+     "clip_pose": [
+      90,
+      24,
+      -90
+     ],
+     "singular_pose": [
+      140.0,
+      45.0,
+      -135.0
+     ],
+     "singular_task": "reach across the body (wash opposite shoulder/armpit, seat belt, opposite pocket) (neutral rot)"
+    }
+   }
+  },
+  "ref4R_thorax": {
+   "plausible": {
+    "share_no_closure": 0.1309,
+    "share_sigma_below_0p1": 0.1377,
+    "share_sigma_below_0p2": 0.1632,
+    "sigma_min": 0.0,
+    "share_no_valid_closure_at_clip_margin": 0.2391
+   },
+   "full_box": {
+    "share_no_closure": 0.1189,
+    "share_sigma_below_0p1": 0.1252,
+    "share_sigma_below_0p2": 0.1511,
+    "sigma_min": 0.0,
+    "share_no_valid_closure_at_clip_margin": 0.2292
+   },
+   "worst_plausible_by_sigma": [
+    {
+     "plane": 115.0,
+     "elev": 140.0,
+     "axial": -125.0,
+     "r_rel": -10.0,
+     "score": 0.0,
+     "hand_mm": [
+      67,
+      404,
+      178
+     ],
+     "task": "reach overhead (high shelf, light bulb) (neutral rot)"
+    },
+    {
+     "plane": 115.0,
+     "elev": 130.0,
+     "axial": -155.0,
+     "r_rel": -40.0,
+     "score": 0.0,
+     "hand_mm": [
+      253,
+      300,
+      212
+     ],
+     "task": "reach overhead (high shelf, light bulb) (external rot)"
+    },
+    {
+     "plane": 115.0,
+     "elev": 135.0,
+     "axial": -180.0,
+     "r_rel": -65.0,
+     "score": 0.0,
+     "hand_mm": [
+      332,
+      212,
+      209
+     ],
+     "task": "reach overhead (high shelf, light bulb) (external rot)"
+    },
+    {
+     "plane": 115.0,
+     "elev": 125.0,
+     "axial": -205.0,
+     "r_rel": -90.0,
+     "score": 0.0,
+     "hand_mm": [
+      422,
+      58,
+      133
+     ],
+     "task": "reach across the body (wash opposite shoulder/armpit, seat belt, opposite pocket) (external rot)"
+    },
+    {
+     "plane": -40.0,
+     "elev": 20.0,
+     "axial": 130.0,
+     "r_rel": 90.0,
+     "score": 0.0,
+     "hand_mm": [
+      -76,
+      -368,
+      -240
+     ],
+     "task": "arm by the side, behind: hand to back pocket / tuck shirt (internal rot)"
+    },
+    {
+     "plane": 115.0,
+     "elev": 150.0,
+     "axial": -205.0,
+     "r_rel": -90.0,
+     "score": 0.0,
+     "hand_mm": [
+      372,
+      190,
+      157
+     ],
+     "task": "reach overhead (high shelf, light bulb) (external rot)"
+    }
+   ],
+   "worst_plausible_by_margin": [
+    {
+     "plane": 110.0,
+     "elev": 170.0,
+     "axial": -175.0,
+     "r_rel": -65.0,
+     "score": -90.0,
+     "hand_mm": [
+      135,
+      300,
+      301
+     ],
+     "task": "reach overhead (high shelf, light bulb) (external rot)"
+    },
+    {
+     "plane": 110.0,
+     "elev": 160.0,
+     "axial": -150.0,
+     "r_rel": -40.0,
+     "score": -90.0,
+     "hand_mm": [
+      48,
+      338,
+      286
+     ],
+     "task": "reach overhead (high shelf, light bulb) (external rot)"
+    },
+    {
+     "plane": 110.0,
+     "elev": 155.0,
+     "axial": -200.0,
+     "r_rel": -90.0,
+     "score": -90.0,
+     "hand_mm": [
+      321,
+      224,
+      213
+     ],
+     "task": "reach overhead (high shelf, light bulb) (external rot)"
+    },
+    {
+     "plane": -35.0,
+     "elev": 35.0,
+     "axial": 125.0,
+     "r_rel": 90.0,
+     "score": -90.0,
+     "hand_mm": [
+      -127,
+      -401,
+      -149
+     ],
+     "task": "mid reach (eat/drink, table reach) (internal rot)"
+    },
+    {
+     "plane": 115.0,
+     "elev": 65.0,
+     "axial": -170.0,
+     "r_rel": -55.0,
+     "score": -90.0,
+     "hand_mm": [
+      406,
+      -75,
+      169
+     ],
+     "task": "reach across the body (wash opposite shoulder/armpit, seat belt, opposite pocket) (external rot)"
+    },
+    {
+     "plane": 115.0,
+     "elev": 50.0,
+     "axial": -195.0,
+     "r_rel": -80.0,
+     "score": -90.0,
+     "hand_mm": [
+      293,
+      -258,
+      215
+     ],
+     "task": "reach across the body (wash opposite shoulder/armpit, seat belt, opposite pocket) (external rot)"
+    }
+   ],
+   "no_closure_region": {
+    "elev_range": [
+     10.0,
+     170.0
+    ],
+    "plane_range": [
+     -90.0,
+     150.0
+    ],
+    "share_of_plausible_with_elev_ge_120": 0.164,
+    "examples": [
+     {
+      "plane": 150.0,
+      "elev": 120.0,
+      "axial": -105.0,
+      "r_rel": 45.0,
+      "score": -1.0,
+      "hand_mm": [
+       124,
+       426,
+       -44
+      ],
+      "task": "reach across the body (wash opposite shoulder/armpit, seat belt, opposite pocket) (internal rot)"
+     },
+     {
+      "plane": 150.0,
+      "elev": 125.0,
+      "axial": -235.0,
+      "r_rel": -85.0,
+      "score": -1.0,
+      "hand_mm": [
+       364,
+       -49,
+       -252
+      ],
+      "task": "reach across the body (wash opposite shoulder/armpit, seat belt, opposite pocket) (external rot)"
+     },
+     {
+      "plane": 150.0,
+      "elev": 120.0,
+      "axial": -145.0,
+      "r_rel": 5.0,
+      "score": -1.0,
+      "hand_mm": [
+       317,
+       314,
+       -8
+      ],
+      "task": "reach across the body (wash opposite shoulder/armpit, seat belt, opposite pocket) (neutral rot)"
+     },
+     {
+      "plane": 150.0,
+      "elev": 120.0,
+      "axial": -185.0,
+      "r_rel": -35.0,
+      "score": -1.0,
+      "hand_mm": [
+       422,
+       125,
+       -73
+      ],
+      "task": "reach across the body (wash opposite shoulder/armpit, seat belt, opposite pocket) (external rot)"
+     },
+     {
+      "plane": -90.0,
+      "elev": 40.0,
+      "axial": 155.0,
+      "r_rel": 65.0,
+      "score": -1.0,
+      "hand_mm": [
+       -86,
+       -319,
+       -299
+      ],
+      "task": "reach behind the body (2nd sleeve of a jacket, back pocket, seat-belt behind) (internal rot)"
+     },
+     {
+      "plane": -90.0,
+      "elev": 10.0,
+      "axial": 180.0,
+      "r_rel": 90.0,
+      "score": -1.0,
+      "hand_mm": [
+       -52,
+       -295,
+       -330
+      ],
+      "task": "arm by the side, behind: hand to back pocket / tuck shirt (internal rot)"
+     }
+    ]
+   },
+   "by_elevation": {
+    "0-30": {
+     "no_closure": 0.008,
+     "sigma_lt_0p1": 0.01
+    },
+    "30-60": {
+     "no_closure": 0.084,
+     "sigma_lt_0p1": 0.095
+    },
+    "60-90": {
+     "no_closure": 0.207,
+     "sigma_lt_0p1": 0.217
+    },
+    "90-120": {
+     "no_closure": 0.239,
+     "sigma_lt_0p1": 0.245
+    },
+    "120-150": {
+     "no_closure": 0.206,
+     "sigma_lt_0p1": 0.21
+    },
+    "150-171": {
+     "no_closure": 0.104,
+     "sigma_lt_0p1": 0.112
+    }
+   },
+   "bad_regions": [
+    {
+     "share_of_plausible": 0.1333,
+     "no_closure_share": 0.92,
+     "plane": [
+      35.0,
+      150.0
+     ],
+     "elev": [
+      25.0,
+      170.0
+     ],
+     "r_rel": [
+      -90.0,
+      50.0
+     ],
+     "deepest": {
+      "plane": 40.0,
+      "elev": 55.0,
+      "axial": -130.0,
+      "r_rel": -90.0,
+      "sigma": 0.0
+     },
+     "task": "mid reach (eat/drink, table reach) (external rot)"
+    },
+    {
+     "share_of_plausible": 0.0099,
+     "no_closure_share": 0.756,
+     "plane": [
+      -90.0,
+      -25.0
+     ],
+     "elev": [
+      5.0,
+      60.0
+     ],
+     "r_rel": [
+      60.0,
+      90.0
+     ],
+     "deepest": {
+      "plane": -90.0,
+      "elev": 10.0,
+      "axial": 175.0,
+      "r_rel": 85.0,
+      "sigma": 0.0
+     },
+     "task": "arm by the side, behind: hand to back pocket / tuck shirt (internal rot)"
+    },
+    {
+     "share_of_plausible": 0.0026,
+     "no_closure_share": 0.22,
+     "plane": [
+      -45.0,
+      105.0
+     ],
+     "elev": [
+      60.0,
+      125.0
+     ],
+     "r_rel": [
+      -25.0,
+      90.0
+     ],
+     "deepest": {
+      "plane": -25.0,
+      "elev": 65.0,
+      "axial": 10.0,
+      "r_rel": -15.0,
+      "sigma": 0.0
+     },
+     "task": "arm out to the side, in/behind the frontal plane (reach sideways, T-pose, arm into a jacket sleeve, hand on a door frame) (neutral rot)"
+    }
+   ],
+   "clip_to_nearest_singular_deg": {
+    "Raise overhead": {
+     "deg": 26.7,
+     "clip_frame": 39,
+     "clip_pose": [
+      30,
+      76,
+      -45
+     ],
+     "singular_pose": [
+      35.0,
+      80.0,
+      -20.0
+     ],
+     "singular_task": "reach forward-side at shoulder height (door, shelf) (neutral rot)"
+    },
+    "Drink from a cup": {
+     "deg": 47.0,
+     "clip_frame": 72,
+     "clip_pose": [
+      95,
+      69,
+      -48
+     ],
+     "singular_pose": [
+      70.0,
+      100.0,
+      -20.0
+     ],
+     "singular_task": "hand to head (hat, hair, glasses) (internal rot)"
+    },
+    "Comb hair": {
+     "deg": 29.4,
+     "clip_frame": 31,
+     "clip_pose": [
+      48,
+      71,
+      -48
+     ],
+     "singular_pose": [
+      35.0,
+      80.0,
+      -20.0
+     ],
+     "singular_task": "reach forward-side at shoulder height (door, shelf) (neutral rot)"
+    },
+    "Reach a high shelf": {
+     "deg": 49.7,
+     "clip_frame": 10,
+     "clip_pose": [
+      61,
+      9,
+      -61
+     ],
+     "singular_pose": [
+      140.0,
+      50.0,
+      -145.0
+     ],
+     "singular_task": "reach across the body (wash opposite shoulder/armpit, seat belt, opposite pocket) (neutral rot)"
+    },
+    "Wash opposite shoulder": {
+     "deg": 35.9,
+     "clip_frame": 54,
+     "clip_pose": [
+      122,
+      31,
+      -80
+     ],
+     "singular_pose": [
+      150.0,
+      55.0,
+      -120.0
+     ],
+     "singular_task": "reach across the body (wash opposite shoulder/armpit, seat belt, opposite pocket) (internal rot)"
+    },
+    "Reach back pocket": {
+     "deg": 43.6,
+     "clip_frame": 72,
+     "clip_pose": [
+      -80,
+      39,
+      101
+     ],
+     "singular_pose": [
+      -90.0,
+      50.0,
+      150.0
+     ],
+     "singular_task": "reach behind the body (2nd sleeve of a jacket, back pocket, seat-belt behind) (internal rot)"
+    },
+    "Wave": {
+     "deg": 33.5,
+     "clip_frame": 24,
+     "clip_pose": [
+      18,
+      48,
+      -40
+     ],
+     "singular_pose": [
+      0.0,
+      65.0,
+      -5.0
+     ],
+     "singular_task": "arm out to the side, in/behind the frontal plane (reach sideways, T-pose, arm into a jacket sleeve, hand on a door frame) (neutral rot)"
+    },
+    "Walking arm swing": {
+     "deg": 40.2,
+     "clip_frame": 18,
+     "clip_pose": [
+      90,
+      24,
+      -90
+     ],
+     "singular_pose": [
+      140.0,
+      50.0,
+      -145.0
+     ],
+     "singular_task": "reach across the body (wash opposite shoulder/armpit, seat belt, opposite pocket) (neutral rot)"
+    }
+   }
+  }
+ },
+ "grid": {
+  "plane": [
+   -90,
+   150,
+   5
+  ],
+  "elev": [
+   0,
+   170,
+   5
+  ],
+  "r_rel": [
+   -90,
+   90,
+   5
+  ],
+  "poses": 63455,
+  "plausible": 49543
+ },
+ "joint_rate_note": "worst-direction joint rate = arm angular speed / sigma: at 100 deg/s, sigma 0.1 -> 1000 deg/s, 0.05 -> 2000 deg/s"
+}

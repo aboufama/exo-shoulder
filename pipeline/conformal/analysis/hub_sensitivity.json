@@ -1,0 +1,232 @@
+{
+ "design": {
+  "n": 3,
+  "az": 98.92799273521032,
+  "el": 69.44529513118657,
+  "a": [
+   72.23934699347542,
+   54.714630488635116
+  ],
+  "w": [
+   55.87416113637332,
+   -13.955840613299602
+  ],
+  "branch": -1,
+  "order": [
+   0,
+   1,
+   0
+  ],
+  "hm": 0.8928519809429056,
+  "_src": "search n3 seed 1351 rank 1 (fit score 0.414)"
+ },
+ "rows": [
+  {
+   "variant": "baseline",
+   "G10": {
+    "score": 0.357,
+    "follow": 0.935,
+    "in_band": 0.449,
+    "ceiling": 0.74,
+    "member_in_band": {
+     "member 1": 0.633,
+     "member 2": 0.14
+    }
+   },
+   "G14": {
+    "score": 0.465,
+    "follow": 0.935,
+    "in_band": 0.569,
+    "ceiling": 0.825,
+    "member_in_band": {
+     "member 1": 0.777,
+     "member 2": 0.222
+    }
+   }
+  },
+  {
+   "variant": "ramp 50 deg",
+   "G10": {
+    "score": 0.392,
+    "follow": 0.935,
+    "in_band": 0.488,
+    "ceiling": 0.74,
+    "member_in_band": {
+     "member 1": 0.663,
+     "member 2": 0.194
+    }
+   },
+   "G14": {
+    "score": 0.519,
+    "follow": 0.935,
+    "in_band": 0.636,
+    "ceiling": 0.825,
+    "member_in_band": {
+     "member 1": 0.778,
+     "member 2": 0.398
+    }
+   }
+  },
+  {
+   "variant": "ramp 65 deg",
+   "G10": {
+    "score": 0.43,
+    "follow": 0.937,
+    "in_band": 0.535,
+    "ceiling": 0.739,
+    "member_in_band": {
+     "member 1": 0.662,
+     "member 2": 0.32
+    }
+   },
+   "G14": {
+    "score": 0.562,
+    "follow": 0.941,
+    "in_band": 0.682,
+    "ceiling": 0.825,
+    "member_in_band": {
+     "member 1": 0.772,
+     "member 2": 0.532
+    }
+   }
+  },
+  {
+   "variant": "hub radius 9 mm",
+   "G10": {
+    "score": 0.364,
+    "follow": 0.904,
+    "in_band": 0.464,
+    "ceiling": 0.772,
+    "member_in_band": {
+     "member 1": 0.687,
+     "member 2": 0.113
+    }
+   },
+   "G14": {
+    "score": 0.477,
+    "follow": 0.906,
+    "in_band": 0.591,
+    "ceiling": 0.847,
+    "member_in_band": {
+     "member 1": 0.808,
+     "member 2": 0.25
+    }
+   }
+  },
+  {
+   "variant": "BOTTOM hub 4.5 mm thick",
+   "G10": {
+    "score": 0.357,
+    "follow": 0.935,
+    "in_band": 0.449,
+    "ceiling": 0.74,
+    "member_in_band": {
+     "member 1": 0.633,
+     "member 2": 0.14
+    }
+   },
+   "G14": {
+    "score": 0.468,
+    "follow": 0.935,
+    "in_band": 0.573,
+    "ceiling": 0.825,
+    "member_in_band": {
+     "member 1": 0.777,
+     "member 2": 0.231
+    }
+   }
+  },
+  {
+   "variant": "stack 2.5 mm",
+   "G10": {
+    "score": 0.303,
+    "follow": 0.861,
+    "in_band": 0.424,
+    "ceiling": 0.728,
+    "member_in_band": {
+     "member 1": 0.597,
+     "member 2": 0.136
+    }
+   },
+   "G14": {
+    "score": 0.449,
+    "follow": 0.937,
+    "in_band": 0.55,
+    "ceiling": 0.825,
+    "member_in_band": {
+     "member 1": 0.746,
+     "member 2": 0.221
+    }
+   }
+  },
+  {
+   "variant": "hub relief 20 mm",
+   "G10": {
+    "score": 0.357,
+    "follow": 0.935,
+    "in_band": 0.449,
+    "ceiling": 0.74,
+    "member_in_band": {
+     "member 1": 0.633,
+     "member 2": 0.14
+    }
+   },
+   "G14": {
+    "score": 0.465,
+    "follow": 0.935,
+    "in_band": 0.569,
+    "ceiling": 0.825,
+    "member_in_band": {
+     "member 1": 0.777,
+     "member 2": 0.222
+    }
+   }
+  },
+  {
+   "variant": "hub margin 0.8 mm",
+   "G10": {
+    "score": 0.358,
+    "follow": 0.935,
+    "in_band": 0.45,
+    "ceiling": 0.74,
+    "member_in_band": {
+     "member 1": 0.635,
+     "member 2": 0.14
+    }
+   },
+   "G14": {
+    "score": 0.466,
+    "follow": 0.935,
+    "in_band": 0.57,
+    "ceiling": 0.825,
+    "member_in_band": {
+     "member 1": 0.777,
+     "member 2": 0.222
+    }
+   }
+  },
+  {
+   "variant": "all of the above",
+   "G10": {
+    "score": 0.268,
+    "follow": 0.563,
+    "in_band": 0.561,
+    "ceiling": 0.775,
+    "member_in_band": {
+     "member 1": 0.643,
+     "member 2": 0.431
+    }
+   },
+   "G14": {
+    "score": 0.34,
+    "follow": 0.567,
+    "in_band": 0.702,
+    "ceiling": 0.826,
+    "member_in_band": {
+     "member 1": 0.748,
+     "member 2": 0.629
+    }
+   }
+  }
+ ]
+}

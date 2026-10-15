@@ -8,6 +8,13 @@ before touching any part, `docs/PIPELINE.md` before running anything.
 Shoulder exo, at most 4 DOF (3 joints + sliding cuff, or 4 joints), whose whole mechanism rides within ~1 cm of the
 skin over the full range of motion - overhead most of all - without ever touching the skin, at the user's CAD standard.
 Never relax the 1 cm rule or the DOF cap to buy range without asking.
+User decisions 2026-10-15 (REQUIREMENTS.md): pass at 14 mm, aim for 10; the base rides the scapula on the user's own
+scapula handler (a separate part, outside the DOF count); the shoulder chain should have exactly 3 DOF - "the minimum
+possible solution is 3 dof" - so push for 3 before settling for 4.
+Hardware decisions 2026-10-15: remote motors with cables to the joints, subtle assist (about arm gravity), passive
+self-aligning slides at the cuff (outside the count), high-quality rolling bearings at every joint.
+The user wants the design's evolution recorded for a final time-lapse visual: add every judged design to
+docs/EVOLUTION.md (and its snapshot to pipeline/evolution/) as part of the judge loop.
 
 ## Working method (docs/METHOD.md - start every session with its checklist)
 
@@ -31,14 +38,19 @@ Never relax the 1 cm rule or the DOF cap to buy range without asking.
 - **Downloads and licences**: ask first; licences (AMASS, SMPL-X) are accepted by the user, not the agent.
 - **Renders/films**: show a cheap motion preview and get approval before any paid render. Mannequin: matte black,
   faceless (not uncanny), muscles OK. Parts: bead blasted metal, polished screws, iglidur orange; no black parts.
-- **CAD**: follow docs/CAD_STANDARD.md; every part passes `judge/part_validity.py` and the zebra check in
-  `pipeline/full-exo/parts.html` before it is shown.
+- **CAD has two levels** (user, 2026-10-14: "you dont need to make high quality CAD with smoothing for each iteration
+  and testing ... Just a basic CAD that has the expected keep outs of the joint, expected link height"). **L1 keep-out
+  CAD** for every iteration and test: joint keep-outs (hub diameter x the real stack height), links as constant-thickness
+  slabs at their real height over the skin, rail/carriage envelopes; one valid solid per part (`judge/part_validity.py`)
+  and the motion judges (R1-R6, R10) - no fillets, no G2, no zebra. **L2 user-standard CAD** (docs/CAD_STANDARD.md,
+  zebra check in `pipeline/full-exo/parts.html`) only for a design that passed the L1 judges on held-out data and that
+  the user chose (phase P4).
 - **Git**: commit and push after each meaningful, judged step; never commit caches, keys or personal data. Use the
   commit attribution your environment specifies.
 - Compute: use the machine's own CPUs (check `nproc`, parallelise searches across cores); GPU on RunPod only for final Blender renders, after cost approval. Keep local CPU jobs to <= 4 workers on the user's laptop (it overheats); no limit in the cloud.
 
 ## Where things stand
 
-See README "Status" and `pipeline/full-exo/designs/cad_r13_n4_s1343_1/judge/scorecard.md`. Next step: phase P0 in
-docs/PLAN.md (base-mount physics, R10) - it needs nothing from the user except permission to download OpenSim's
-shoulder model; the rig in `pipeline/avg/body_pose.py` already gives a first number.
+See README "Status" and `pipeline/full-exo/designs/cad_r13_n4_s1343_1/judge/scorecard.md`. P0 is decided (base on the
+scapula, docs/P0_BASE_MOUNT.md). Next: a 3-DOF shoulder chain that follows every clip (the GPU 3R designs fail
+"Reach back pocket"), judged at 14 mm with 10 mm reported; then the base skin-slip judge (R10).

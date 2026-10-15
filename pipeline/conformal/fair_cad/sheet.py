@@ -123,10 +123,25 @@ def sheet_solid(chart, rho_bot, rho_top, sdf2, extent, e=1.2, n=360, h=0.6, wall
         c2 = pcurve(Q); ed = BRepBuilderAPI_MakeEdge(c2, S).Edge(); BRepLib.BuildCurves3d_s(ed, 1e-6, GeomAbs_C2, 9, 2 * len(Q))
         w = BRepBuilderAPI_MakeWire(ed).Wire(); f = BRepBuilderAPI_MakeFace(S, w, True).Face()
         sf = ShapeFix_Face(f); sf.Perform(); return sf.Face()
-    sew = BRepBuilderAPI_Sewing(5e-3)
-    for f in faces + [trimmed(SB), trimmed(ST)]: sew.Add(f)
-    sew.Perform(); sh = sew.SewedShape(); exs = TopExp_Explorer(sh, TopAbs_SHELL)
-    so = BRepBuilderAPI_MakeSolid(TopoDS.Shell_s(exs.Current())).Solid(); fx = ShapeFix_Solid(so); fx.Perform(); so = fx.Solid()
+    tb_, tt_ = trimmed(SB), trimmed(ST)
+    # sew the five faces into ONE closed shell. The edge rounds are interpolated through the outline stations while the
+    # trimmed skin/outer faces carry the exact outline curve: on steep or strongly curved members the two drift apart by
+    # more than 5 um between stations, the sewing then leaves free edges and several shells, and taking the first shell
+    # gave an open "solid" with 3-4 faces and a meaningless (near zero) volume. Retry with a wider tolerance, then check.
+    for tol in ((5e-3,) if os.environ.get("SEW_V1") == "1" else (5e-3, 2e-2, 5e-2, 0.1)):         # SEW_V1=1: the old single try (reproduction)
+        sew = BRepBuilderAPI_Sewing(tol)
+        for f in faces + [tb_, tt_]: sew.Add(f)
+        sew.Perform(); sh = sew.SewedShape(); shells = []; exs = TopExp_Explorer(sh, TopAbs_SHELL)
+        while exs.More(): shells.append(TopoDS.Shell_s(exs.Current())); exs.Next()
+        if len(shells) == 1 and sew.NbFreeEdges() == 0: break
+    sew_info = dict(tol=tol, shells=len(shells), free_edges=int(sew.NbFreeEdges()))
+    shell = shells[0] if os.environ.get("SEW_V1") == "1" else max(shells, key=lambda s_: sum(1 for _ in _faces_of(s_)))
+    so = BRepBuilderAPI_MakeSolid(shell).Solid(); fx = ShapeFix_Solid(so); fx.Perform(); so = fx.Solid()
     s = cq.Solid(so)
     if s.Volume() < 0: s = cq.Solid(so.Reversed())
-    return s, dict(Q=Q, SB=SB, ST=ST, thickness=(float(np.linalg.norm(Tp - Bp, axis=1).min()), float(np.linalg.norm(Tp - Bp, axis=1).max())))
+    return s, dict(Q=Q, SB=SB, ST=ST, sew=sew_info, thickness=(float(np.linalg.norm(Tp - Bp, axis=1).min()), float(np.linalg.norm(Tp - Bp, axis=1).max())))
+
+def _faces_of(shape):
+    from OCP.TopAbs import TopAbs_FACE
+    ex = TopExp_Explorer(shape, TopAbs_FACE)
+    while ex.More(): yield ex.Current(); ex.Next()

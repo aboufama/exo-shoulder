@@ -1,0 +1,21 @@
+{
+ "step": 4,
+ "tol_mm": 0.15,
+ "frames_checked": 339,
+ "pairs": 348,
+ "seconds": 78,
+ "jobs": 4,
+ "violations": {
+  "l1|D4 member l1 (proxy)  IN  base|D4 member base (proxy)": {
+   "max_depth": 1.09,
+   "frames": 339,
+   "worst": [
+    "Walking arm swing",
+    108
+   ]
+  }
+ },
+ "open_parts_not_tested_as_container": [],
+ "inside": "integer winding number on welded tessellations (grid + segment crossings), depth = exact distance (judge/sdist.py)",
+ "max_depth": 1.09
+}

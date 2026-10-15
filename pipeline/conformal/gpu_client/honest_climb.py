@@ -4,7 +4,7 @@ sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), ".."
 import torch; torch.set_num_threads(4); import band_impl as BI
 E = os.path.abspath(os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..")); S = os.path.dirname(os.path.abspath(__file__)); FX = f"{E}/full-exo"; GC = f"{E}/conformal/gpu_client"
 budget = float(sys.argv[1]) if len(sys.argv) > 1 else 6000; STEP = sys.argv[2] if len(sys.argv) > 2 else "6"
-keys = ("n", "az", "el", "a", "w", "branch", "order", "cuff", "hm"); GEO = ("hub_r", "hub_relief", "hub_margin", "stack", "t_link", "G")
+keys = ("n", "az", "el", "a", "w", "branch", "order", "cuff", "hm"); GEO = ("hub_r", "hub_relief", "hub_margin", "stack", "t_link", "G", "min_arc", "min_arm_mm")
 job = json.load(open(f"{GC}/band_search_r10a.json"))[0]; cfg = job["cfg"]; geo = {k: cfg[k] for k in GEO if k in cfg}
 poses = open(f"{E}/conformal/band_poses.b64").read()
 def honest(d, tag):
@@ -21,7 +21,7 @@ while time.time() - t0 < budget:
     k += 1; d = copy.deepcopy(best[1]); m = rng.random()
     if m < 0.35: d["cuff"]["range"] = min(45, max(10, d["cuff"]["range"] + rng.gauss(0, 1.5)))
     elif m < 0.55: d["hm"] = min(4, max(0.8, d.get("hm", 2.0) + rng.gauss(0, 0.25)))
-    elif m < 0.8: i = rng.randrange(3); d["a"][i] = max(6, d["a"][i] + rng.gauss(0, 0.8))
+    elif m < 0.8: i = rng.randrange(3); d["a"][i] = max(float(cfg.get("min_arc", BI.MIN_ARC)), d["a"][i] + rng.gauss(0, 0.8))
     else: d["w"][0] += rng.gauss(0, 1.0); d["w"][1] += rng.gauss(0, 1.5); d["az"] = (d["az"] + rng.gauss(0, 1.0)) % 360; d["el"] += rng.gauss(0, 0.7)
     try: s, name = honest(d, f"{k}")
     except Exception as e: print(k, "failed", str(e)[:120], flush=True); continue

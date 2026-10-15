@@ -1,0 +1,841 @@
+{
+ "key": "r13_n3_s1331_0",
+ "n": 3,
+ "FACES": {
+  "1": 71.99578857421875,
+  "2": 60.83663894063053,
+  "3": 118.94029235839844
+ },
+ "parts": [
+  {
+   "k": 0,
+   "group": "base",
+   "name": "J1 sleeve (igus GSM-1012-04)",
+   "vol_cm3": 0.135,
+   "material": "iglidur G",
+   "mass_g": 0.2,
+   "valid": true,
+   "faces": 6
+  },
+  {
+   "k": 1,
+   "group": "base",
+   "name": "J1 position PCB \u00d816 (placeholder)",
+   "vol_cm3": 0.121,
+   "material": "Ti-6Al-4V",
+   "mass_g": 0.53,
+   "valid": true,
+   "faces": 3
+  },
+  {
+   "k": 2,
+   "group": "base",
+   "name": "J1 angle sensor IC (placeholder)",
+   "vol_cm3": 0.007,
+   "material": "Ti-6Al-4V",
+   "mass_g": 0.03,
+   "valid": true,
+   "faces": 6
+  },
+  {
+   "k": 3,
+   "group": "base",
+   "name": "J1 cap \u00d822 G2 dome (Ti-6Al-4V)",
+   "vol_cm3": 1.041,
+   "material": "Ti-6Al-4V",
+   "mass_g": 4.61,
+   "valid": true,
+   "faces": 28
+  },
+  {
+   "k": 4,
+   "group": "base",
+   "name": "J1 M1.6x3 ISO 10642 Ti (cap)",
+   "vol_cm3": 0.007,
+   "material": "A2 stainless",
+   "mass_g": 0.06,
+   "valid": true,
+   "faces": 12
+  },
+  {
+   "k": 5,
+   "group": "base",
+   "name": "J1 M1.6x3 ISO 10642 Ti (cap)",
+   "vol_cm3": 0.007,
+   "material": "A2 stainless",
+   "mass_g": 0.06,
+   "valid": true,
+   "faces": 12
+  },
+  {
+   "k": 6,
+   "group": "base",
+   "name": "D4-01 scapula base (Ti-6Al-4V)",
+   "vol_cm3": 2.2,
+   "material": "Ti-6Al-4V",
+   "mass_g": 9.75,
+   "valid": true,
+   "faces": 18
+  },
+  {
+   "k": 7,
+   "group": "l1",
+   "name": "J1 washer A (igus GTM-1018-005, recessed)",
+   "vol_cm3": 0.087,
+   "material": "iglidur G",
+   "mass_g": 0.13,
+   "valid": true,
+   "faces": 6
+  },
+  {
+   "k": 8,
+   "group": "l1",
+   "name": "J1 washer B (igus GTM-1018-005)",
+   "vol_cm3": 0.087,
+   "material": "iglidur G",
+   "mass_g": 0.13,
+   "valid": true,
+   "faces": 6
+  },
+  {
+   "k": 9,
+   "group": "l1",
+   "name": "J1 magnet \u00d84x2 N52 diametric",
+   "vol_cm3": 0.025,
+   "material": "Ti-6Al-4V",
+   "mass_g": 0.11,
+   "valid": true,
+   "faces": 3
+  },
+  {
+   "k": 10,
+   "group": "l1",
+   "name": "J1 ring nut M8x0.5 18x1 (Ti-6Al-4V)",
+   "vol_cm3": 0.203,
+   "material": "Ti-6Al-4V",
+   "mass_g": 0.9,
+   "valid": true,
+   "faces": 11
+  },
+  {
+   "k": 11,
+   "group": "l1",
+   "name": "J2 washer A (igus GTM-1018-005, recessed)",
+   "vol_cm3": 0.087,
+   "material": "iglidur G",
+   "mass_g": 0.13,
+   "valid": true,
+   "faces": 6
+  },
+  {
+   "k": 12,
+   "group": "l1",
+   "name": "J2 washer B (igus GTM-1018-005)",
+   "vol_cm3": 0.087,
+   "material": "iglidur G",
+   "mass_g": 0.13,
+   "valid": true,
+   "faces": 6
+  },
+  {
+   "k": 13,
+   "group": "l1",
+   "name": "J2 magnet \u00d84x2 N52 diametric",
+   "vol_cm3": 0.025,
+   "material": "Ti-6Al-4V",
+   "mass_g": 0.11,
+   "valid": true,
+   "faces": 3
+  },
+  {
+   "k": 14,
+   "group": "l1",
+   "name": "J2 ring nut M8x0.5 18x1 (Ti-6Al-4V)",
+   "vol_cm3": 0.203,
+   "material": "Ti-6Al-4V",
+   "mass_g": 0.9,
+   "valid": true,
+   "faces": 11
+  },
+  {
+   "k": 15,
+   "group": "l1",
+   "name": "D4-02 link 1 (Ti-6Al-4V)",
+   "vol_cm3": 7.838,
+   "material": "Ti-6Al-4V",
+   "mass_g": 34.72,
+   "valid": true,
+   "faces": 39
+  },
+  {
+   "k": 16,
+   "group": "l2",
+   "name": "J2 sleeve (igus GSM-1012-04)",
+   "vol_cm3": 0.135,
+   "material": "iglidur G",
+   "mass_g": 0.2,
+   "valid": true,
+   "faces": 6
+  },
+  {
+   "k": 17,
+   "group": "l2",
+   "name": "J2 position PCB \u00d816 (placeholder)",
+   "vol_cm3": 0.121,
+   "material": "Ti-6Al-4V",
+   "mass_g": 0.53,
+   "valid": true,
+   "faces": 3
+  },
+  {
+   "k": 18,
+   "group": "l2",
+   "name": "J2 angle sensor IC (placeholder)",
+   "vol_cm3": 0.007,
+   "material": "Ti-6Al-4V",
+   "mass_g": 0.03,
+   "valid": true,
+   "faces": 6
+  },
+  {
+   "k": 19,
+   "group": "l2",
+   "name": "J2 cap \u00d822 G2 dome (Ti-6Al-4V)",
+   "vol_cm3": 1.041,
+   "material": "Ti-6Al-4V",
+   "mass_g": 4.61,
+   "valid": true,
+   "faces": 28
+  },
+  {
+   "k": 20,
+   "group": "l2",
+   "name": "J2 M1.6x3 ISO 10642 Ti (cap)",
+   "vol_cm3": 0.007,
+   "material": "A2 stainless",
+   "mass_g": 0.06,
+   "valid": true,
+   "faces": 12
+  },
+  {
+   "k": 21,
+   "group": "l2",
+   "name": "J2 M1.6x3 ISO 10642 Ti (cap)",
+   "vol_cm3": 0.007,
+   "material": "A2 stainless",
+   "mass_g": 0.06,
+   "valid": true,
+   "faces": 12
+  },
+  {
+   "k": 22,
+   "group": "l2",
+   "name": "J3 sleeve (igus GSM-1012-04)",
+   "vol_cm3": 0.135,
+   "material": "iglidur G",
+   "mass_g": 0.2,
+   "valid": true,
+   "faces": 6
+  },
+  {
+   "k": 23,
+   "group": "l2",
+   "name": "J3 position PCB \u00d816 (placeholder)",
+   "vol_cm3": 0.121,
+   "material": "Ti-6Al-4V",
+   "mass_g": 0.53,
+   "valid": true,
+   "faces": 3
+  },
+  {
+   "k": 24,
+   "group": "l2",
+   "name": "J3 angle sensor IC (placeholder)",
+   "vol_cm3": 0.007,
+   "material": "Ti-6Al-4V",
+   "mass_g": 0.03,
+   "valid": true,
+   "faces": 6
+  },
+  {
+   "k": 25,
+   "group": "l2",
+   "name": "J3 cap \u00d822 G2 dome (Ti-6Al-4V)",
+   "vol_cm3": 1.04,
+   "material": "Ti-6Al-4V",
+   "mass_g": 4.61,
+   "valid": true,
+   "faces": 28
+  },
+  {
+   "k": 26,
+   "group": "l2",
+   "name": "J3 M1.6x3 ISO 10642 Ti (cap)",
+   "vol_cm3": 0.007,
+   "material": "A2 stainless",
+   "mass_g": 0.06,
+   "valid": true,
+   "faces": 12
+  },
+  {
+   "k": 27,
+   "group": "l2",
+   "name": "J3 M1.6x3 ISO 10642 Ti (cap)",
+   "vol_cm3": 0.007,
+   "material": "A2 stainless",
+   "mass_g": 0.06,
+   "valid": true,
+   "faces": 12
+  },
+  {
+   "k": 28,
+   "group": "l2",
+   "name": "D4-03 link 2 (Ti-6Al-4V)",
+   "vol_cm3": 10.193,
+   "material": "Ti-6Al-4V",
+   "mass_g": 45.15,
+   "valid": true,
+   "faces": 19
+  },
+  {
+   "k": 29,
+   "group": "H",
+   "name": "BOTTOM + neck + curved dovetail rail (one 5-axis part, Ti-6Al-4V)",
+   "vol_cm3": 57.747,
+   "material": "Ti-6Al-4V",
+   "mass_g": 255.82,
+   "valid": true,
+   "faces": 127
+  },
+  {
+   "k": 30,
+   "group": "cuff",
+   "name": "D4-S cuff saddle (Ti-6Al-4V)",
+   "vol_cm3": 5.125,
+   "material": "Ti-6Al-4V",
+   "mass_g": 22.7,
+   "valid": true,
+   "faces": 29
+  },
+  {
+   "k": 31,
+   "group": "cuff",
+   "name": "stop pin \u00d82 x 5 dowel (A2): rides in the rail slot = travel stops",
+   "vol_cm3": 0.016,
+   "material": "A2 stainless",
+   "mass_g": 0.12,
+   "valid": true,
+   "faces": 3
+  },
+  {
+   "k": 32,
+   "group": "cuff",
+   "name": "top liner (iglidur J 0.5)",
+   "vol_cm3": 0.134,
+   "material": "Ti-6Al-4V",
+   "mass_g": 0.6,
+   "valid": true,
+   "faces": 7
+  },
+  {
+   "k": 33,
+   "group": "cuff",
+   "name": "flank liner (iglidur J 0.5)",
+   "vol_cm3": 0.032,
+   "material": "Ti-6Al-4V",
+   "mass_g": 0.14,
+   "valid": true,
+   "faces": 6
+  },
+  {
+   "k": 34,
+   "group": "cuff",
+   "name": "tapered gib (iglidur J, 0.5 -> 0.8): preload by 2 flush M2 set screws in the lip",
+   "vol_cm3": 0.034,
+   "material": "Ti-6Al-4V",
+   "mass_g": 0.15,
+   "valid": true,
+   "faces": 6
+  },
+  {
+   "k": 35,
+   "group": "cuff",
+   "name": "J3 washer A (igus GTM-1018-005, recessed)",
+   "vol_cm3": 0.087,
+   "material": "iglidur G",
+   "mass_g": 0.13,
+   "valid": true,
+   "faces": 6
+  },
+  {
+   "k": 36,
+   "group": "cuff",
+   "name": "J3 washer B (igus GTM-1018-005)",
+   "vol_cm3": 0.087,
+   "material": "iglidur G",
+   "mass_g": 0.13,
+   "valid": true,
+   "faces": 6
+  },
+  {
+   "k": 37,
+   "group": "cuff",
+   "name": "J3 magnet \u00d84x2 N52 diametric",
+   "vol_cm3": 0.025,
+   "material": "Ti-6Al-4V",
+   "mass_g": 0.11,
+   "valid": true,
+   "faces": 3
+  },
+  {
+   "k": 38,
+   "group": "cuff",
+   "name": "J3 ring nut M8x0.5 18x1 (Ti-6Al-4V)",
+   "vol_cm3": 0.203,
+   "material": "Ti-6Al-4V",
+   "mass_g": 0.9,
+   "valid": true,
+   "faces": 11
+  },
+  {
+   "k": 39,
+   "group": "H",
+   "name": "M4 ULTRA LOW PROFILE SOCKET HEAD SCREW, 6mm L, HS STEEL",
+   "vol_cm3": 0.106,
+   "material": "user part",
+   "mass_g": null,
+   "valid": true,
+   "faces": 32
+  },
+  {
+   "k": 40,
+   "group": "F",
+   "name": "FOREARM CUFF",
+   "vol_cm3": 131.298,
+   "material": "user part",
+   "mass_g": null,
+   "valid": true,
+   "faces": 52
+  },
+  {
+   "k": 41,
+   "group": "F",
+   "name": "Hex socket head countersunk screw grade C M4x0.7 x 8",
+   "vol_cm3": 0.139,
+   "material": "user part",
+   "mass_g": null,
+   "valid": true,
+   "faces": 20
+  },
+  {
+   "k": 42,
+   "group": "H",
+   "name": "TOP",
+   "vol_cm3": 2.177,
+   "material": "user part",
+   "mass_g": null,
+   "valid": true,
+   "faces": 17
+  },
+  {
+   "k": 43,
+   "group": "F",
+   "name": "Hex socket head countersunk screw grade C M4x0.7 x 8",
+   "vol_cm3": 0.139,
+   "material": "user part",
+   "mass_g": null,
+   "valid": true,
+   "faces": 20
+  },
+  {
+   "k": 44,
+   "group": "F",
+   "name": "Hex socket head countersunk screw grade C M4x0.7 x 8",
+   "vol_cm3": 0.139,
+   "material": "user part",
+   "mass_g": null,
+   "valid": true,
+   "faces": 20
+  },
+  {
+   "k": 45,
+   "group": "H",
+   "name": "M4 ULTRA LOW PROFILE SOCKET HEAD SCREW, 6mm L, HS STEEL",
+   "vol_cm3": 0.106,
+   "material": "user part",
+   "mass_g": null,
+   "valid": true,
+   "faces": 32
+  },
+  {
+   "k": 46,
+   "group": "H",
+   "name": "IGUS THRUST WASHER, 30mm ID, 39mm OD, 1.5mm T, IGLIDE J",
+   "vol_cm3": 0.731,
+   "material": "user part",
+   "mass_g": null,
+   "valid": true,
+   "faces": 4
+  },
+  {
+   "k": 47,
+   "group": "F",
+   "name": "MIDDLE",
+   "vol_cm3": 12.22,
+   "material": "user part",
+   "mass_g": null,
+   "valid": true,
+   "faces": 105
+  },
+  {
+   "k": 48,
+   "group": "H",
+   "name": "IGUS THRUST WASHER, 30mm ID, 39mm OD, 1.5mm T, IGLIDE J",
+   "vol_cm3": 0.731,
+   "material": "user part",
+   "mass_g": null,
+   "valid": true,
+   "faces": 4
+  },
+  {
+   "k": 49,
+   "group": "F",
+   "name": "Hex socket head countersunk screw grade C M4x0.7 x 8",
+   "vol_cm3": 0.139,
+   "material": "user part",
+   "mass_g": null,
+   "valid": true,
+   "faces": 20
+  },
+  {
+   "k": 50,
+   "group": "F",
+   "name": "Hex socket head countersunk screw grade C M4x0.7 x 8",
+   "vol_cm3": 0.139,
+   "material": "user part",
+   "mass_g": null,
+   "valid": true,
+   "faces": 20
+  },
+  {
+   "k": 51,
+   "group": "F",
+   "name": "Hex socket head countersunk screw grade C M4x0.7 x 8",
+   "vol_cm3": 0.139,
+   "material": "user part",
+   "mass_g": null,
+   "valid": true,
+   "faces": 20
+  },
+  {
+   "k": 52,
+   "group": "H",
+   "name": "5mm D, 2.5mm H, N42 MAGNET",
+   "vol_cm3": 0.049,
+   "material": "user part",
+   "mass_g": null,
+   "valid": true,
+   "faces": 5
+  },
+  {
+   "k": 53,
+   "group": "H",
+   "name": "M4 ULTRA LOW PROFILE SOCKET HEAD SCREW, 6mm L, HS STEEL",
+   "vol_cm3": 0.106,
+   "material": "user part",
+   "mass_g": null,
+   "valid": true,
+   "faces": 32
+  },
+  {
+   "k": 54,
+   "group": "H",
+   "name": "CirPattern1[15]",
+   "vol_cm3": 0.007,
+   "material": "user part",
+   "mass_g": null,
+   "valid": true,
+   "faces": 1
+  },
+  {
+   "k": 55,
+   "group": "H",
+   "name": "Revolve1[2]",
+   "vol_cm3": 0.042,
+   "material": "user part",
+   "mass_g": null,
+   "valid": true,
+   "faces": 4
+  },
+  {
+   "k": 56,
+   "group": "H",
+   "name": "CirPattern1[11]",
+   "vol_cm3": 0.007,
+   "material": "user part",
+   "mass_g": null,
+   "valid": true,
+   "faces": 1
+  },
+  {
+   "k": 57,
+   "group": "H",
+   "name": "Revolve4",
+   "vol_cm3": 0.007,
+   "material": "user part",
+   "mass_g": null,
+   "valid": true,
+   "faces": 1
+  },
+  {
+   "k": 58,
+   "group": "H",
+   "name": "CirPattern1[5]",
+   "vol_cm3": 0.007,
+   "material": "user part",
+   "mass_g": null,
+   "valid": true,
+   "faces": 1
+  },
+  {
+   "k": 59,
+   "group": "H",
+   "name": "Revolve1[1]",
+   "vol_cm3": 0.275,
+   "material": "user part",
+   "mass_g": null,
+   "valid": true,
+   "faces": 8
+  },
+  {
+   "k": 60,
+   "group": "H",
+   "name": "CirPattern1[7]",
+   "vol_cm3": 0.007,
+   "material": "user part",
+   "mass_g": null,
+   "valid": true,
+   "faces": 1
+  },
+  {
+   "k": 61,
+   "group": "H",
+   "name": "CirPattern1[16]",
+   "vol_cm3": 0.007,
+   "material": "user part",
+   "mass_g": null,
+   "valid": true,
+   "faces": 1
+  },
+  {
+   "k": 62,
+   "group": "H",
+   "name": "CirPattern1[12]",
+   "vol_cm3": 0.007,
+   "material": "user part",
+   "mass_g": null,
+   "valid": true,
+   "faces": 1
+  },
+  {
+   "k": 63,
+   "group": "H",
+   "name": "CirPattern1[14]",
+   "vol_cm3": 0.007,
+   "material": "user part",
+   "mass_g": null,
+   "valid": true,
+   "faces": 1
+  },
+  {
+   "k": 64,
+   "group": "H",
+   "name": "CirPattern1[8]",
+   "vol_cm3": 0.007,
+   "material": "user part",
+   "mass_g": null,
+   "valid": true,
+   "faces": 1
+  },
+  {
+   "k": 65,
+   "group": "H",
+   "name": "CirPattern1[10]",
+   "vol_cm3": 0.007,
+   "material": "user part",
+   "mass_g": null,
+   "valid": true,
+   "faces": 1
+  },
+  {
+   "k": 66,
+   "group": "H",
+   "name": "CirPattern1[4]",
+   "vol_cm3": 0.007,
+   "material": "user part",
+   "mass_g": null,
+   "valid": true,
+   "faces": 1
+  },
+  {
+   "k": 67,
+   "group": "H",
+   "name": "Revolve3",
+   "vol_cm3": 0.22,
+   "material": "user part",
+   "mass_g": null,
+   "valid": true,
+   "faces": 8
+  },
+  {
+   "k": 68,
+   "group": "H",
+   "name": "CirPattern1[2]",
+   "vol_cm3": 0.007,
+   "material": "user part",
+   "mass_g": null,
+   "valid": true,
+   "faces": 1
+  },
+  {
+   "k": 69,
+   "group": "H",
+   "name": "CirPattern1[9]",
+   "vol_cm3": 0.007,
+   "material": "user part",
+   "mass_g": null,
+   "valid": true,
+   "faces": 1
+  },
+  {
+   "k": 70,
+   "group": "H",
+   "name": "Revolve1[3]",
+   "vol_cm3": 0.042,
+   "material": "user part",
+   "mass_g": null,
+   "valid": true,
+   "faces": 4
+  },
+  {
+   "k": 71,
+   "group": "H",
+   "name": "CirPattern1[1]",
+   "vol_cm3": 0.007,
+   "material": "user part",
+   "mass_g": null,
+   "valid": true,
+   "faces": 1
+  },
+  {
+   "k": 72,
+   "group": "H",
+   "name": "CirPattern1[6]",
+   "vol_cm3": 0.007,
+   "material": "user part",
+   "mass_g": null,
+   "valid": true,
+   "faces": 1
+  },
+  {
+   "k": 73,
+   "group": "H",
+   "name": "CirPattern1[3]",
+   "vol_cm3": 0.007,
+   "material": "user part",
+   "mass_g": null,
+   "valid": true,
+   "faces": 1
+  },
+  {
+   "k": 74,
+   "group": "H",
+   "name": "CirPattern1[17]",
+   "vol_cm3": 0.007,
+   "material": "user part",
+   "mass_g": null,
+   "valid": true,
+   "faces": 1
+  },
+  {
+   "k": 75,
+   "group": "H",
+   "name": "CirPattern1[13]",
+   "vol_cm3": 0.007,
+   "material": "user part",
+   "mass_g": null,
+   "valid": true,
+   "faces": 1
+  },
+  {
+   "k": 76,
+   "group": "H",
+   "name": "UPPER ARM CUFF (conformal G2 shell, AlSi10Mg bead blasted)",
+   "vol_cm3": 15.173,
+   "material": "AlSi10Mg (SLM)",
+   "mass_g": 40.51,
+   "valid": true,
+   "faces": 17
+  },
+  {
+   "k": 77,
+   "group": "H",
+   "name": "M4x6 ISO 10642 countersunk (upper cuff)",
+   "vol_cm3": 0.13,
+   "material": "A2 stainless",
+   "mass_g": 1.03,
+   "valid": true,
+   "faces": 4
+  },
+  {
+   "k": 78,
+   "group": "H",
+   "name": "M4x6 ISO 10642 countersunk (upper cuff)",
+   "vol_cm3": 0.13,
+   "material": "A2 stainless",
+   "mass_g": 1.03,
+   "valid": true,
+   "faces": 4
+  },
+  {
+   "k": 79,
+   "group": "H",
+   "name": "M4x6 ISO 10642 countersunk (upper cuff)",
+   "vol_cm3": 0.13,
+   "material": "A2 stainless",
+   "mass_g": 1.03,
+   "valid": true,
+   "faces": 4
+  },
+  {
+   "k": 80,
+   "group": "H",
+   "name": "M4x6 ISO 10642 countersunk (upper cuff)",
+   "vol_cm3": 0.13,
+   "material": "A2 stainless",
+   "mass_g": 1.03,
+   "valid": true,
+   "faces": 4
+  },
+  {
+   "k": 81,
+   "group": "H",
+   "name": "M4x6 ISO 10642 countersunk (upper cuff)",
+   "vol_cm3": 0.13,
+   "material": "A2 stainless",
+   "mass_g": 1.03,
+   "valid": true,
+   "faces": 4
+  },
+  {
+   "k": 82,
+   "group": "H",
+   "name": "M4x6 ISO 10642 countersunk (upper cuff)",
+   "vol_cm3": 0.13,
+   "material": "A2 stainless",
+   "mass_g": 1.03,
+   "valid": true,
+   "faces": 4
+  }
+ ]
+}
