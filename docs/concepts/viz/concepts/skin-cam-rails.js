@@ -10,8 +10,10 @@
  * crossing: 3 ACTIVE + 1 PASSIVE. Skin proxy (no fit yet): scapula frame 40 mm at the acromion rising to 58 / 68 mm
  * medially (catalogue: arch 37-45 over the acromion, 55-60 over the spine); arm frame 46 mm over the cap, 43 / sin
  * (angle from the arm axis) down the arm, + up to 6 mm medially. Rail extents = the crossing's travel over this loop
- * (as crossed-muscle-rails). Out of range: no crossing, rails crossing at < 25 deg, a carriage past its rail end, the
- * slide past its 15 mm stroke, a rail direction whose skin needs > 85 mm. Closed form (KIN.sph3r) + the profile slide. */
+ * (as crossed-muscle-rails). Result on this loop: rail 1 at 61-64 mm (seed 1's arch runs medial of the acromion, 44 deg
+ * from it at its closest, so it never dips), rail 2 at 49-76 mm, slide 0.5-3.5 mm. Out of range: no crossing, rails
+ * crossing at < 25 deg, a carriage past its rail end, the slide past its 15 mm stroke, a rail direction whose skin needs
+ * > 85 mm, the arch inside the raised arm (< 38 mm from its axis). Closed form (KIN.sph3r) + the profile slide. */
 (function () {
   const K = (typeof window !== 'undefined' ? window : globalThis).KIN, V = K.V, M = K.M, R2D = K.R2D, D2R = K.D2R;
   const P = { az1: 64.9, el1: 56.1, a12: 57.4, d3: 147.1, az3: -119.0, a23: 87.9, sigma: -1, clear: 2.5, delta: 12,
@@ -80,6 +82,8 @@
       if (need1[idx(c.phi)] > P.r_max || need2[idx(c.psi)] > P.r_max) return 'crossing over skin deeper than 85 mm (rail unusable there)';
       if (q[3] > P.stroke) return `slide post ${q[3].toFixed(0)} mm (stroke 15)`;
       if (q[3] < -0.5) return 'carriages collide (negative slide)';
+      const pts1 = railPts(ext.phi[0], ext.phi[1], dir1, r1, ctx.S);
+      if (pts1.some(x => { const sa = V.dot(x, ctx.armAxis); return sa > 20 && sa < 300 && V.norm(V.reject(x, ctx.armAxis)) < 38; })) return 'the arch runs into the raised arm';
       return null;
     },
     parts: (q, ctx) => {
