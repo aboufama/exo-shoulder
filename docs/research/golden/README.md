@@ -27,3 +27,37 @@ products in float32, as the kit); continuity slerps come from scipy tables (the 
 (48-72 per call, grouped by stack order); strap sample counts vary per config and are padded with duplicates of the
 last sample (zero weight in the in-band share). Protocols: same-bench (the golden search: fit = wear = Bench(110,360))
 and frozen (fit Bench(60,160) -> wear Bench(110,360), the verifier's protocol).
+
+### Parity (the gate): GPU port vs the CPU kit model (zc-frontier-3r evaluate, tools/concept_bench.py fast path)
+
+Same configs, same bench, CPU reference = the kit model itself run on the pod's CPUs (`python3 tools/gpu_bench.py parity
+--n 50 --sane --leaders ...`). Configs: 50 random configs inside the rulings (J1 seat region, the zc-frontier BOUNDS, both
+branches, all four stack orders, q 0.85-1, end_extra 0-6) whose metal stays inside the +-260 mm grid box (a GPU
+pre-pass picks them from 500 draws: the rest have a member at the 400 mm "no clearance" sentinel, are dishonest
+(+100) and cost the CPU minutes on libigl's exact path) + the 4 verified / screened leaders' configs (spine-parked
+k7008 axes at O20 / margin 5, the spine-parked polish, fold-sph3r and raglan-routed bests - one of them does put
+1.57 M points outside the box: the port hands those to the kit's own exact function, `GB_EXACT_OUTSIDE=1`, and matches).
+
+| protocol | configs | max abs diff: gap | reach | follow | in-band 14 | in-band 10 | contact | configs > 1 gap point | GPU s | CPU s (procs) |
+|---|---|---|---|---|---|---|---|---|---|---|
+| same-bench Bench(110,360) (the golden search objective) | 54 | **0.0** | 0.0 | 0.0 | 0.0 | 0.0 | 0.0 | **0** | 251.9 (one leader's 1.57 M outside-box points on libigl) | 249.4 (15) |
+
+Also measured: Bench(60,160) component parity on the CPU torch path (closure masks, dense K2 masks and every member's
+fitted underside identical to the kit, 3 configs incl. inv2 = inv3 = 1) and end-to-end on 2 configs with ~0.5 M
+outside-box points each (every metric identical). Parity is exact, not approximate: the port replays the kit's
+arithmetic step for step (float64, the kit's integer march, numpy's quantile rule, float32 K6 dots), so the gap of
+every config on the list is the same number to the last digit. Gap values of the 54: 46.8 ... 250.3 (median 171).
+
+The first frozen-protocol run (fit 60/160 -> wear 110/360) disagreed on 6 of 20 configs: a bug in the parity script's
+CPU side (it re-fitted on the wear bench whenever the FIT-bench gap was >= 200), fixed and re-run below.
+
+### Speed (Bench(110,360) same-bench, RTX PRO 4000 Blackwell, `speed --n 576`, metal outside the box on the grid only)
+
+| | evals/s | s per config | notes |
+|---|---|---|---|
+| GPU pod, chunk 96 | **8.46** | 0.118 | per 96 configs: K2 0.39 s, K3 march + profiles 7.1 s, K6 + skin / crown / top distances 3.6 s - the GPU is saturated (chunk 192 scales linearly) |
+| CPU kit, one process (pod EPYC core) | 0.27 | 3.75 median, 6.8 p90 | the parity set (sane configs); the 400 mm-sentinel configs take 1-4 min each on libigl |
+| CPU farm worker (8 vCPU, 4 jobs) | ~1.1 | | 4 processes |
+
+Per dollar: the pod ($0.57/h) gives ~53 k evals/$; a farm worker ($0.288/h) ~13 k evals/$ -> ~4x per dollar, ~8x per
+worker slot, and outside the serverless worker quota (the farm's 9 workers would give ~10 evals/s in total).

@@ -611,9 +611,9 @@ def cpu_eval(args):
     M = globals()["zcm"]; BB = globals()["_benches"]
     get = lambda nb: BB.setdefault(nb, M.K.bench(*nb))
     t = time.time(); prof = None
-    if fit and tuple(fit) != tuple(wear):
-        Bf = get(tuple(fit)); _, rf = M.evaluate(Bf, dict(p))
-        prof = {k: np.array(v) for k, v in Bf._kit_last["prof"].items()} if "chain" in getattr(Bf, "_kit_last", {}) and rf.get("gap", 0) < 200 else None
+    if fit and tuple(fit) != tuple(wear):                                     # = tools/zc_frontier.py cmd_frozen
+        Bf = get(tuple(fit)); Bf._kit_last = None; _, rf = M.evaluate(Bf, dict(p))
+        prof = {k: np.array(v) for k, v in Bf._kit_last["prof"].items()} if Bf._kit_last else None   # None: seat refused
     Bw = get(tuple(wear))
     try:
         _, r = M.evaluate(Bw, dict(p), fixed_prof=prof)
