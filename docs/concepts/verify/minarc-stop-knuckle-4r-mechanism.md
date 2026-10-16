@@ -9,7 +9,7 @@ round-3 protocol.
 - Harness: `docs/concepts/verify/minarc-stop-knuckle-4r-mechanism.py`. It imports the model unchanged and swaps only the
   part under test.
 - Raw outputs: `.cache/minarc_verify_mech/*.json` (git-ignored).
-- Runs: local (at most 2 processes) and the exo-cpu1 farm (7 jobs, about $0.15).
+- Runs: local (at most 2 processes) and the exo-cpu1 farm (7 jobs, about $0.09 billed).
 
 ## Reproduction
 
