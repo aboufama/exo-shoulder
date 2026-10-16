@@ -929,6 +929,6 @@ stack order (`docs/concepts/zc-frontier-3r.md`, `tools/zc_frontier.py`, data `do
   found nothing 0.05 better. The fold takes 121 of 136 lost workspace poses (44 folded, 77 stretched; across the body
   19 / 68, overhead 6 / 28).
 * **What follows.** At complexity 0 the measured ceiling is ~31 exact: 13.75 needs reach +0.13 at the same in-band,
-  i.e. a second fold window or a hub 2 that can change level - relay, 4th joint, or a passive give along the J2 axis
-  (1 passive translation). That is the near-zero track's input; judge each lever by where hub 2 parks in the poses
-  it rescues.
+  i.e. a second fold window (relay, 4th joint) whose hub 2 stays in band in the poses it rescues. A radial slide at
+  hub 2 would have to absorb 26-47 mm of level spread and stands up by its travel (CLAUDE.md): ruled out. That is
+  the near-zero track's input.

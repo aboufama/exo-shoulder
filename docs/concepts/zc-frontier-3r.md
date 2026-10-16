@@ -135,9 +135,10 @@ touches (2 top-face poses on hubs 1 / 2, one hub crown) sits at 0.09 mm.
 * **So the zero-complexity class tops out at gap 28.85 fast / 31.04 frozen exact (score 88.7) on the verification
   bench**, ~6.6 points behind the complexity-19.5 pin knee's polished 24.48 (verified, margin 5). What 13.75 needs is reach
   +0.13 at the same in-band, i.e. a second fold window or a hub 2 that can change level: a two-state arc relay
-  (kinematic 0.93-0.95), a fourth joint, or a passive radial give at hub 2 (a slide along the J2 axis lets hub 2 ride
-  the skin while the window is wide - 1 passive translation, complexity +3). Those are the near-zero track's levers,
-  each judged by where hub 2 parks in the poses it rescues.
+  (kinematic 0.93-0.95) or a fourth joint, each judged by where hub 2 parks in the poses it rescues. A radial give at
+  hub 2 (a slide along the J2 axis so the hub rides the skin) is NOT a way out: the level spread it would absorb is
+  26-47 mm (F 60 -> 86 -> 107 mm), and a skin-normal slide stands up by its travel + block length (CLAUDE.md), which
+  breaks the 1 cm envelope by itself.
 
 ## Deeper version (answered before modelling)
 
@@ -153,6 +154,14 @@ touches (2 top-face poses on hubs 1 / 2, one hub crown) sits at 0.09 mm.
    independent verifier re-run of the claim (requested, not done by this track).
 
 ## Red team
+
+* **Far-end hubs at the optimum (`docs/concepts/zc/far_ends.json`, Bench(60,160) fast):** the same axis lines with the
+  hub on the other end of the J2 line, the J3 line or both close exactly the same poses (fold-law reach 0.681 in all
+  four) but the far-end hub has no skin within reach along its axis (F 400 mm sentinel: it would float on the chest /
+  axilla side): 343.7 / 400.4 / 461.9 vs 30.04. The near ends are the only buildable ones here.
+* **Link routing was not a continuous freedom here** (straps on great circles, underside fitted to the skin); the
+  raglan measurement on the knee chain (docs/FINDINGS.md "Raglan routing") put routing at +0.4 real. Routing cannot
+  move hub 2, which is the cap.
 
 * The search bench and the claim bench are the same 470 poses (the shape is fitted on the fast grid, worn on the exact
   mesh): in sample. The round-3 protocol number (fit on Bench(60,160)) is reported beside it.
