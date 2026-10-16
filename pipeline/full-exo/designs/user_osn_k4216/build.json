@@ -15,34 +15,36 @@
    "segs": [
     [
      -0.16666666666666666,
-     2.8755056811475663
+     2.8251837746864537
     ],
     [
-     0.012903225806451613,
-     10.016686135853774
+     0.011111111111111112,
+     10.027421309487929
     ],
     [
      0.25,
-     4.21653013986974
+     4.2543092850913755
     ]
    ],
-   "objective": 17.421143951469453,
-   "end_err": 5.222489107836736e-13,
+   "objective": 4.991712451898652,
+   "end_err": 2.0605739337042905e-13,
    "min_clear": 1.432901093598126,
-   "mean_clear": 3.6181038697736794,
-   "max_clear": 5.887096936552318,
-   "max_climb": 44.862203887790585,
+   "mean_clear": 3.6092740093349738,
+   "max_clear": 5.8651650088483365,
+   "max_climb": 44.833065108519044,
    "radii": [
     -6.0,
-    77.5,
+    90.0,
     4.0
    ],
    "climb_limit": 45.0,
    "r_min": 4.0,
+   "l_min": 2.0,
    "snap_scale": 1.0,
+   "bend": 4.0,
    "over_L1_min": 1.432901093598126,
-   "over_L1_mean": 3.6231747170093795,
-   "over_L1_max": 5.9074863145151255,
+   "over_L1_mean": 3.6143809100849142,
+   "over_L1_max": 5.897515467835397,
    "pocket": 0,
    "valid": true,
    "solids": 1
@@ -51,39 +53,46 @@
    "segs": [
     [
      0.030303030303030304,
-     21.389029402942633
+     27.563868518386943
     ],
     [
-     -0.01904761904761905,
-     8.988201563689682
+     -0.07692307692307693,
+     3.5779919722405524
     ],
     [
-     -0.012903225806451613,
-     16.878505749376853
+     -0.041666666666666664,
+     1.6096975290469755
     ],
     [
-     0.04,
-     25.823600771168778
+     -0.002,
+     28.266246983411744
+    ],
+    [
+     0.07692307692307693,
+     11.123710438260966
     ]
    ],
-   "objective": 7.836126842266818,
-   "end_err": 9.484553333122457e-07,
-   "min_clear": 1.5037668265293576,
-   "mean_clear": 5.154929810519389,
-   "max_clear": 12.64166057816658,
-   "max_climb": 35.01199931345598,
+   "objective": 3.8433861847439736,
+   "end_err": 9.468018902225595e-08,
+   "min_clear": 0.0013474245606630575,
+   "mean_clear": 3.3825414857879315,
+   "max_clear": 11.11372618529198,
+   "max_climb": 34.99346619589482,
    "radii": [
     33.0,
-    -52.49999999999999,
-    -77.5,
-    25.0
+    -13.0,
+    -24.0,
+    -500.0,
+    13.0
    ],
    "climb_limit": 35.0,
    "r_min": 12.0,
+   "l_min": 2.0,
    "snap_scale": 1.0,
-   "over_L1_min": 1.5091465329931566,
-   "over_L1_mean": 5.159703422118185,
-   "over_L1_max": 12.559865464319458,
+   "bend": 4.0,
+   "over_L1_min": 0.0013510336634539044,
+   "over_L1_mean": 3.3838788953213395,
+   "over_L1_max": 11.081662796615419,
    "pocket": 1,
    "u3_lean_out_of_plane_deg": 3.850358770887794,
    "j3_seat_offset_mm": 0.3122515394558834,
@@ -98,8 +107,8 @@
     75.68382855549056
    ],
    [
-    25.102749192431123,
-    88.34102029799959
+    24.525398923241497,
+    87.34102029799959
    ]
   ],
   "bridge": [
@@ -107,6 +116,11 @@
    47.134799999913376,
    88.34102029799959,
    94.34102029799959
+  ],
+  "bridge_underside_beside_block": [
+   24.525398923241497,
+   39.134799999913376,
+   87.34102029799959
   ],
   "valid": true,
   "solids": 1
@@ -149,13 +163,13 @@
    174.62868079223682
   ],
   "radii": [
-   -11.0,
-   -215.0,
-   8.0
+   -7.0,
+   125.0,
+   6.0
   ],
-  "min_clear": 1.0870912099988022,
-  "mean_clear": 10.89230268672874,
-  "terminal_height": 76.96631200682287,
+  "min_clear": 3.5990422381794085,
+  "mean_clear": 15.71438968135055,
+  "terminal_height": 75.46631200682287,
   "valid": true
  },
  "arm side": {
@@ -172,13 +186,14 @@
    "centre_across_bar": 4.0,
    "shell": 2.0,
    "wrap_deg": 110.0,
+   "wrap_neg_deg": 12.0,
    "length": 80.80000000000001,
    "valid": true
   }
  },
  "mass_g": {
-  "custom": 203.4,
-  "bottom_plus_base": 75.1
+  "custom": 165.2,
+  "bottom_plus_base": 75.0
  },
  "parts": [
   {
@@ -394,31 +409,31 @@
    "k": 19,
    "group": "l2",
    "name": "D7-03 link 2: bent bar 8x3 + J2/J3 hubs (Ti-6Al-4V)",
-   "vol_cm3": 4.535,
+   "vol_cm3": 4.514,
    "material": "Ti-6Al-4V",
-   "mass_g": 20.09,
+   "mass_g": 20.0,
    "valid": true,
-   "faces": 117,
+   "faces": 118,
    "solids": 1
   },
   {
    "k": 20,
    "group": "l3",
    "name": "D7-04 member 3: J3 pad + integral O7 pin + ramped neck (60 deg, the model's) + bridge, one sketch (Ti-6Al-4V)",
-   "vol_cm3": 2.524,
+   "vol_cm3": 2.639,
    "material": "Ti-6Al-4V",
-   "mass_g": 11.18,
+   "mass_g": 11.69,
    "valid": true,
-   "faces": 44,
+   "faces": 48,
    "solids": 1
   },
   {
    "k": 21,
    "group": "l3",
-   "name": "M1.6x4 ISO 10642 countersunk, across block to member 3 (polished)",
+   "name": "M1.6x4 ISO 10642 countersunk screw, across block to member 3 (polished stainless)",
    "vol_cm3": 0.01,
-   "material": "Ti-6Al-4V",
-   "mass_g": 0.05,
+   "material": "stainless (polished)",
+   "mass_g": 0.08,
    "valid": true,
    "faces": 4,
    "solids": 1
@@ -426,10 +441,10 @@
   {
    "k": 22,
    "group": "l3",
-   "name": "M1.6x4 ISO 10642 countersunk, across block to member 3 (polished)",
+   "name": "M1.6x4 ISO 10642 countersunk screw, across block to member 3 (polished stainless)",
    "vol_cm3": 0.01,
-   "material": "Ti-6Al-4V",
-   "mass_g": 0.05,
+   "material": "stainless (polished)",
+   "mass_g": 0.08,
    "valid": true,
    "faces": 4,
    "solids": 1
@@ -438,11 +453,11 @@
    "k": 23,
    "group": "H",
    "name": "along guide block THK RSR3M (= HIWIN MGN03C class), INVERTED on the cuff base: W 8.0 x L 12.0 x H 4.0 (catalogue)",
-   "vol_cm3": 0.21,
+   "vol_cm3": 0.211,
    "material": "steel (catalogue guide)",
-   "mass_g": 1.65,
+   "mass_g": 1.66,
    "valid": true,
-   "faces": 16,
+   "faces": 18,
    "solids": 1
   },
   {
@@ -482,20 +497,20 @@
    "k": 27,
    "group": "l3",
    "name": "carriage B = across guide block THK RSR3M (= HIWIN MGN03C class): W 8.0 x L 12.0 x H 4.0 (catalogue)",
-   "vol_cm3": 0.214,
+   "vol_cm3": 0.211,
    "material": "steel (catalogue guide)",
-   "mass_g": 1.68,
+   "mass_g": 1.66,
    "valid": true,
-   "faces": 14,
+   "faces": 18,
    "solids": 1
   },
   {
    "k": 28,
    "group": "base",
    "name": "D7-01 scapula base: J1 hub + tab, 2x M4 counterbored to the scapula handler (Ti-6Al-4V)",
-   "vol_cm3": 3.945,
+   "vol_cm3": 3.731,
    "material": "Ti-6Al-4V",
-   "mass_g": 17.48,
+   "mass_g": 16.53,
    "valid": true,
    "faces": 60,
    "solids": 1
@@ -504,9 +519,9 @@
    "k": 29,
    "group": "H",
    "name": "D7-05 BOTTOM + stage base, one 5-axis part (user's bar cut at s 255; base plate 1.5 under the along block + arm + tongue fused into its channel web; 7075-T6)",
-   "vol_cm3": 26.727,
+   "vol_cm3": 26.687,
    "material": "7075-T6 (BOTTOM merged with the stage base)",
-   "mass_g": 75.1,
+   "mass_g": 74.99,
    "valid": true,
    "faces": 125,
    "solids": 1
@@ -514,10 +529,10 @@
   {
    "k": 30,
    "group": "H",
-   "name": "M1.6x4 ISO 10642 countersunk, along block to the base (polished)",
-   "vol_cm3": 0.01,
-   "material": "Ti-6Al-4V",
-   "mass_g": 0.05,
+   "name": "M1.6x2.5 ISO 10642 countersunk screw, along block to the base (polished stainless)",
+   "vol_cm3": 0.007,
+   "material": "stainless (polished)",
+   "mass_g": 0.06,
    "valid": true,
    "faces": 4,
    "solids": 1
@@ -525,10 +540,10 @@
   {
    "k": 31,
    "group": "H",
-   "name": "M1.6x4 ISO 10642 countersunk, along block to the base (polished)",
-   "vol_cm3": 0.01,
-   "material": "Ti-6Al-4V",
-   "mass_g": 0.05,
+   "name": "M1.6x2.5 ISO 10642 countersunk screw, along block to the base (polished stainless)",
+   "vol_cm3": 0.007,
+   "material": "stainless (polished)",
+   "mass_g": 0.06,
    "valid": true,
    "faces": 4,
    "solids": 1
@@ -944,9 +959,9 @@
    "k": 69,
    "group": "H",
    "name": "UPPER ARM CUFF (lines and arcs: flat land + inner R arc + outer arc, extruded; AlSi10Mg bead blasted)",
-   "vol_cm3": 42.368,
+   "vol_cm3": 28.305,
    "material": "AlSi10Mg",
-   "mass_g": 113.55,
+   "mass_g": 75.86,
    "valid": true,
    "faces": 50,
    "solids": 1
@@ -1048,22 +1063,22 @@
     },
     "neck": {
      "outside_max": 0.1702,
-     "abs_max": 0.1702
+     "abs_max": 0.8221
     },
     "bridge": {
-     "outside_max": 1.0,
-     "abs_max": 1.0
+     "outside_max": -0.0001,
+     "abs_max": 0.0001
     },
     "L1": {
-     "outside_max": 4.0203,
-     "abs_max": 4.0203
+     "outside_max": 3.9998,
+     "abs_max": 3.9998
     },
     "L2": {
-     "outside_max": 13.6682,
-     "abs_max": 13.6682
+     "outside_max": 10.2395,
+     "abs_max": 10.2395
     }
    },
-   "within_0p5": false
+   "within_0p5": true
   },
   {
    "pose_name": "forward reach",
@@ -1094,22 +1109,22 @@
     },
     "neck": {
      "outside_max": 0.1703,
-     "abs_max": 0.1703
+     "abs_max": 0.822
     },
     "bridge": {
-     "outside_max": 1.0,
-     "abs_max": 1.0
+     "outside_max": 0.0,
+     "abs_max": 0.0
     },
     "L1": {
-     "outside_max": 4.0203,
-     "abs_max": 4.0203
+     "outside_max": 3.9998,
+     "abs_max": 3.9998
     },
     "L2": {
-     "outside_max": 13.6683,
-     "abs_max": 13.6683
+     "outside_max": 10.2395,
+     "abs_max": 10.2395
     }
    },
-   "within_0p5": false
+   "within_0p5": true
   },
   {
    "pose_name": "abduction 90",
@@ -1140,22 +1155,22 @@
     },
     "neck": {
      "outside_max": 0.1702,
-     "abs_max": 0.1702
+     "abs_max": 0.822
     },
     "bridge": {
-     "outside_max": 1.0,
-     "abs_max": 1.0
+     "outside_max": -0.0,
+     "abs_max": 0.0
     },
     "L1": {
-     "outside_max": 4.0203,
-     "abs_max": 4.0203
+     "outside_max": 3.9997,
+     "abs_max": 3.9997
     },
     "L2": {
-     "outside_max": 13.6683,
-     "abs_max": 13.6683
+     "outside_max": 10.2395,
+     "abs_max": 10.2395
     }
    },
-   "within_0p5": false
+   "within_0p5": true
   },
   {
    "pose_name": "overhead (bench highest)",
@@ -1186,22 +1201,22 @@
     },
     "neck": {
      "outside_max": 0.1703,
-     "abs_max": 0.1703
+     "abs_max": 0.822
     },
     "bridge": {
-     "outside_max": 1.0,
-     "abs_max": 1.0
+     "outside_max": 0.0,
+     "abs_max": 0.0
     },
     "L1": {
-     "outside_max": 4.0203,
-     "abs_max": 4.0203
+     "outside_max": 3.9998,
+     "abs_max": 3.9998
     },
     "L2": {
-     "outside_max": 13.6682,
-     "abs_max": 13.6682
+     "outside_max": 10.2395,
+     "abs_max": 10.2395
     }
    },
-   "within_0p5": false
+   "within_0p5": true
   },
   {
    "pose_name": "overhead raise elev 150",
@@ -1232,22 +1247,22 @@
     },
     "neck": {
      "outside_max": 0.1702,
-     "abs_max": 0.1702
+     "abs_max": 0.8221
     },
     "bridge": {
-     "outside_max": 1.0,
-     "abs_max": 1.0
+     "outside_max": -0.0,
+     "abs_max": 0.0
     },
     "L1": {
-     "outside_max": 4.0203,
-     "abs_max": 4.0203
+     "outside_max": 3.9998,
+     "abs_max": 3.9998
     },
     "L2": {
-     "outside_max": 13.6683,
-     "abs_max": 13.6683
+     "outside_max": 10.2396,
+     "abs_max": 10.2396
     }
    },
-   "within_0p5": false
+   "within_0p5": true
   },
   {
    "pose_name": "behind the back (pocket)",
@@ -1278,22 +1293,22 @@
     },
     "neck": {
      "outside_max": 0.1702,
-     "abs_max": 0.1702
+     "abs_max": 0.8221
     },
     "bridge": {
-     "outside_max": 0.9999,
-     "abs_max": 0.9999
+     "outside_max": -0.0001,
+     "abs_max": 0.0001
     },
     "L1": {
-     "outside_max": 4.0203,
-     "abs_max": 4.0203
+     "outside_max": 3.9997,
+     "abs_max": 3.9997
     },
     "L2": {
-     "outside_max": 13.6683,
-     "abs_max": 13.6683
+     "outside_max": 10.2395,
+     "abs_max": 10.2395
     }
    },
-   "within_0p5": false
+   "within_0p5": true
   },
   {
    "pose_name": "behind the back (red-team pinch)",
@@ -1324,22 +1339,22 @@
     },
     "neck": {
      "outside_max": 0.1703,
-     "abs_max": 0.1703
+     "abs_max": 0.822
     },
     "bridge": {
-     "outside_max": 1.0,
-     "abs_max": 1.0
+     "outside_max": -0.0,
+     "abs_max": 0.0
     },
     "L1": {
-     "outside_max": 4.0203,
-     "abs_max": 4.0203
+     "outside_max": 3.9998,
+     "abs_max": 3.9998
     },
     "L2": {
-     "outside_max": 13.6683,
-     "abs_max": 13.6683
+     "outside_max": 10.2396,
+     "abs_max": 10.2396
     }
    },
-   "within_0p5": false
+   "within_0p5": true
   }
  ],
  "check_clips": [
@@ -1383,19 +1398,19 @@
      "n": 32
     },
     "bridge": {
-     "outside_max": 1.0,
+     "outside_max": -0.0001,
      "n": 12
     },
     "L1": {
-     "outside_max": 4.0203,
+     "outside_max": 3.9998,
      "n": 36
     },
     "L2": {
-     "outside_max": 13.6682,
+     "outside_max": 10.2395,
      "n": 145
     }
    },
-   "within_0p5": false
+   "within_0p5": true
   },
   {
    "label": "Raise overhead peak",
@@ -1437,19 +1452,19 @@
      "n": 32
     },
     "bridge": {
-     "outside_max": 1.0,
+     "outside_max": -0.0,
      "n": 12
     },
     "L1": {
-     "outside_max": 4.0203,
+     "outside_max": 3.9997,
      "n": 36
     },
     "L2": {
-     "outside_max": 13.6683,
+     "outside_max": 10.2395,
      "n": 145
     }
    },
-   "within_0p5": false
+   "within_0p5": true
   },
   {
    "label": "Raise overhead middle",
@@ -1491,19 +1506,19 @@
      "n": 32
     },
     "bridge": {
-     "outside_max": 1.0,
+     "outside_max": -0.0,
      "n": 12
     },
     "L1": {
-     "outside_max": 4.0203,
+     "outside_max": 3.9997,
      "n": 36
     },
     "L2": {
-     "outside_max": 13.6683,
+     "outside_max": 10.2395,
      "n": 145
     }
    },
-   "within_0p5": false
+   "within_0p5": true
   },
   {
    "label": "Drink from a cup peak",
@@ -1545,19 +1560,19 @@
      "n": 32
     },
     "bridge": {
-     "outside_max": 1.0001,
+     "outside_max": 0.0001,
      "n": 12
     },
     "L1": {
-     "outside_max": 4.0203,
+     "outside_max": 3.9998,
      "n": 36
     },
     "L2": {
-     "outside_max": 13.6683,
+     "outside_max": 10.2396,
      "n": 145
     }
    },
-   "within_0p5": false
+   "within_0p5": true
   },
   {
    "label": "Comb hair peak",
@@ -1599,19 +1614,19 @@
      "n": 32
     },
     "bridge": {
-     "outside_max": 0.9999,
+     "outside_max": -0.0001,
      "n": 12
     },
     "L1": {
-     "outside_max": 4.0203,
+     "outside_max": 3.9997,
      "n": 36
     },
     "L2": {
-     "outside_max": 13.6683,
+     "outside_max": 10.2395,
      "n": 145
     }
    },
-   "within_0p5": false
+   "within_0p5": true
   },
   {
    "label": "Reach a high shelf peak",
@@ -1653,19 +1668,19 @@
      "n": 32
     },
     "bridge": {
-     "outside_max": 1.0,
+     "outside_max": 0.0,
      "n": 12
     },
     "L1": {
-     "outside_max": 4.0203,
+     "outside_max": 3.9998,
      "n": 36
     },
     "L2": {
-     "outside_max": 13.6682,
+     "outside_max": 10.2395,
      "n": 145
     }
    },
-   "within_0p5": false
+   "within_0p5": true
   },
   {
    "label": "Wash opposite shoulder peak",
@@ -1707,19 +1722,19 @@
      "n": 32
     },
     "bridge": {
-     "outside_max": 1.0001,
+     "outside_max": 0.0,
      "n": 12
     },
     "L1": {
-     "outside_max": 4.0203,
+     "outside_max": 3.9997,
      "n": 36
     },
     "L2": {
-     "outside_max": 13.6683,
+     "outside_max": 10.2395,
      "n": 145
     }
    },
-   "within_0p5": false
+   "within_0p5": true
   },
   {
    "label": "Reach back pocket peak",
@@ -1761,19 +1776,19 @@
      "n": 32
     },
     "bridge": {
-     "outside_max": 1.0,
+     "outside_max": 0.0,
      "n": 12
     },
     "L1": {
-     "outside_max": 4.0203,
+     "outside_max": 3.9998,
      "n": 36
     },
     "L2": {
-     "outside_max": 13.6682,
+     "outside_max": 10.2395,
      "n": 145
     }
    },
-   "within_0p5": false
+   "within_0p5": true
   },
   {
    "label": "Wave peak",
@@ -1815,19 +1830,19 @@
      "n": 32
     },
     "bridge": {
-     "outside_max": 1.0,
+     "outside_max": -0.0,
      "n": 12
     },
     "L1": {
-     "outside_max": 4.0203,
+     "outside_max": 3.9997,
      "n": 36
     },
     "L2": {
-     "outside_max": 13.6683,
+     "outside_max": 10.2395,
      "n": 145
     }
    },
-   "within_0p5": false
+   "within_0p5": true
   },
   {
    "label": "Walking arm swing peak",
@@ -1869,25 +1884,25 @@
      "n": 32
     },
     "bridge": {
-     "outside_max": 1.0,
+     "outside_max": 0.0,
      "n": 12
     },
     "L1": {
-     "outside_max": 4.0203,
+     "outside_max": 3.9998,
      "n": 36
     },
     "L2": {
-     "outside_max": 13.6683,
+     "outside_max": 10.2395,
      "n": 145
     }
    },
-   "within_0p5": false
+   "within_0p5": true
   }
  ],
  "kinematics_exact": {
   "clip_frames": 10,
-  "all_within_0p5": false,
+  "all_within_0p5": true,
   "max_frame_dev_mm": 0.0001,
-  "max_model_sample_outside_mm": 1.0001
+  "max_model_sample_outside_mm": 0.1703
  }
 }
