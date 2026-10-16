@@ -1318,5 +1318,822 @@
    "solids": 1,
    "watertight_judge_units": true
   }
- ]
+ ],
+ "check": [
+  {
+   "label": "arm at side",
+   "bench_pose": 60,
+   "clip_frame": false,
+   "pose": [
+    -90.0,
+    0.0,
+    75.0
+   ],
+   "joint_features_max_mm": 0.1443,
+   "rigid_incl_knee_link_max_mm": 1.2487,
+   "closure_parts_model_outside_built_max_mm": 1.2487,
+   "within_0p5": false,
+   "per_part": {
+    "hub1": {
+     "max": 0.1418,
+     "p95": 0.0071,
+     "outside_max": 0.1418,
+     "n": 80
+    },
+    "hub2": {
+     "max": 0.1443,
+     "p95": 0.0072,
+     "outside_max": 0.1443,
+     "n": 80
+    },
+    "hub3": {
+     "max": 0.0,
+     "p95": 0.0,
+     "outside_max": 0.0,
+     "n": 80
+    },
+    "E": {
+     "max": 0.1239,
+     "p95": 0.1129,
+     "outside_max": 0.1239,
+     "n": 88
+    },
+    "boss": {
+     "max": 0.0,
+     "p95": 0.0,
+     "outside_max": 0.0,
+     "n": 32
+    },
+    "pad": {
+     "max": 0.0,
+     "p95": 0.0,
+     "outside_max": 0.0,
+     "n": 32
+    },
+    "knee": {
+     "max": 1.2487,
+     "p95": 0.0,
+     "outside_max": 1.2487,
+     "n": 100
+    },
+    "L1": {
+     "max": 2.5751,
+     "p95": 2.1554,
+     "outside_max": 2.5751,
+     "n": 40
+    },
+    "L2": {
+     "max": 5.5609,
+     "p95": 4.3372,
+     "outside_max": 5.5609,
+     "n": 139
+    }
+   },
+   "frame_dev_mm": 5.8e-05,
+   "res_deg": 0.0001,
+   "knee_angle": 101.2
+  },
+  {
+   "label": "first",
+   "bench_pose": 0,
+   "clip_frame": false,
+   "pose": [
+    30.0,
+    3.0,
+    -30.0
+   ],
+   "joint_features_max_mm": 0.1442,
+   "rigid_incl_knee_link_max_mm": 1.2487,
+   "closure_parts_model_outside_built_max_mm": 1.2487,
+   "within_0p5": false,
+   "per_part": {
+    "hub1": {
+     "max": 0.1408,
+     "p95": 0.007,
+     "outside_max": 0.1408,
+     "n": 80
+    },
+    "hub2": {
+     "max": 0.1442,
+     "p95": 0.0072,
+     "outside_max": 0.1442,
+     "n": 80
+    },
+    "hub3": {
+     "max": 0.0,
+     "p95": 0.0,
+     "outside_max": 0.0,
+     "n": 80
+    },
+    "E": {
+     "max": 0.1239,
+     "p95": 0.1129,
+     "outside_max": 0.1239,
+     "n": 88
+    },
+    "boss": {
+     "max": 0.0,
+     "p95": 0.0,
+     "outside_max": 0.0,
+     "n": 32
+    },
+    "pad": {
+     "max": 0.0,
+     "p95": 0.0,
+     "outside_max": 0.0,
+     "n": 32
+    },
+    "knee": {
+     "max": 1.2487,
+     "p95": 0.0,
+     "outside_max": 1.2487,
+     "n": 100
+    },
+    "L1": {
+     "max": 2.5751,
+     "p95": 2.1554,
+     "outside_max": 2.5751,
+     "n": 40
+    },
+    "L2": {
+     "max": 5.561,
+     "p95": 4.3372,
+     "outside_max": 5.561,
+     "n": 139
+    }
+   },
+   "frame_dev_mm": 4.5e-05,
+   "res_deg": 0.0,
+   "knee_angle": 101.6
+  },
+  {
+   "label": "middle",
+   "bench_pose": 91,
+   "clip_frame": false,
+   "pose": [
+    -15.0,
+    75.0,
+    90.0
+   ],
+   "joint_features_max_mm": 0.1443,
+   "rigid_incl_knee_link_max_mm": 1.2488,
+   "closure_parts_model_outside_built_max_mm": 1.2488,
+   "within_0p5": false,
+   "per_part": {
+    "hub1": {
+     "max": 0.1415,
+     "p95": 0.0071,
+     "outside_max": 0.1415,
+     "n": 80
+    },
+    "hub2": {
+     "max": 0.1443,
+     "p95": 0.0072,
+     "outside_max": 0.1443,
+     "n": 80
+    },
+    "hub3": {
+     "max": 0.0,
+     "p95": 0.0,
+     "outside_max": -0.0,
+     "n": 80
+    },
+    "E": {
+     "max": 0.1238,
+     "p95": 0.1128,
+     "outside_max": 0.1238,
+     "n": 88
+    },
+    "boss": {
+     "max": 0.0,
+     "p95": 0.0,
+     "outside_max": -0.0,
+     "n": 32
+    },
+    "pad": {
+     "max": 0.0,
+     "p95": 0.0,
+     "outside_max": -0.0,
+     "n": 32
+    },
+    "knee": {
+     "max": 1.2488,
+     "p95": 0.0,
+     "outside_max": 1.2488,
+     "n": 100
+    },
+    "L1": {
+     "max": 2.5751,
+     "p95": 2.1554,
+     "outside_max": 2.5751,
+     "n": 40
+    },
+    "L2": {
+     "max": 5.561,
+     "p95": 4.3372,
+     "outside_max": 5.561,
+     "n": 139
+    }
+   },
+   "frame_dev_mm": 9.4e-05,
+   "res_deg": 0.0002,
+   "knee_angle": 138.6
+  },
+  {
+   "label": "highest",
+   "bench_pose": 140,
+   "clip_frame": false,
+   "pose": [
+    45.0,
+    165.0,
+    -90.0
+   ],
+   "joint_features_max_mm": 0.1444,
+   "rigid_incl_knee_link_max_mm": 1.2487,
+   "closure_parts_model_outside_built_max_mm": 1.2487,
+   "within_0p5": false,
+   "per_part": {
+    "hub1": {
+     "max": 0.1444,
+     "p95": 0.0072,
+     "outside_max": 0.1444,
+     "n": 80
+    },
+    "hub2": {
+     "max": 0.1442,
+     "p95": 0.0072,
+     "outside_max": 0.1442,
+     "n": 80
+    },
+    "hub3": {
+     "max": 0.0,
+     "p95": 0.0,
+     "outside_max": 0.0,
+     "n": 80
+    },
+    "E": {
+     "max": 0.1239,
+     "p95": 0.1129,
+     "outside_max": 0.1239,
+     "n": 88
+    },
+    "boss": {
+     "max": 0.0,
+     "p95": 0.0,
+     "outside_max": 0.0,
+     "n": 32
+    },
+    "pad": {
+     "max": 0.0,
+     "p95": 0.0,
+     "outside_max": -0.0,
+     "n": 32
+    },
+    "knee": {
+     "max": 1.2487,
+     "p95": 0.0,
+     "outside_max": 1.2487,
+     "n": 100
+    },
+    "L1": {
+     "max": 2.5751,
+     "p95": 2.1554,
+     "outside_max": 2.5751,
+     "n": 40
+    },
+    "L2": {
+     "max": 5.561,
+     "p95": 4.3372,
+     "outside_max": 5.561,
+     "n": 139
+    }
+   },
+   "frame_dev_mm": 8.3e-05,
+   "res_deg": 0.0002,
+   "knee_angle": 144.6
+  },
+  {
+   "label": "2nd highest",
+   "bench_pose": 5,
+   "clip_frame": false,
+   "pose": [
+    30.0,
+    150.0,
+    -60.0
+   ],
+   "joint_features_max_mm": 0.1444,
+   "rigid_incl_knee_link_max_mm": 1.2487,
+   "closure_parts_model_outside_built_max_mm": 1.2487,
+   "within_0p5": false,
+   "per_part": {
+    "hub1": {
+     "max": 0.1444,
+     "p95": 0.0072,
+     "outside_max": 0.1444,
+     "n": 80
+    },
+    "hub2": {
+     "max": 0.1443,
+     "p95": 0.0072,
+     "outside_max": 0.1443,
+     "n": 80
+    },
+    "hub3": {
+     "max": 0.0,
+     "p95": 0.0,
+     "outside_max": 0.0,
+     "n": 80
+    },
+    "E": {
+     "max": 0.1238,
+     "p95": 0.1129,
+     "outside_max": 0.1238,
+     "n": 88
+    },
+    "boss": {
+     "max": 0.0,
+     "p95": 0.0,
+     "outside_max": -0.0,
+     "n": 32
+    },
+    "pad": {
+     "max": 0.0,
+     "p95": 0.0,
+     "outside_max": 0.0,
+     "n": 32
+    },
+    "knee": {
+     "max": 1.2487,
+     "p95": 0.0001,
+     "outside_max": 1.2487,
+     "n": 100
+    },
+    "L1": {
+     "max": 2.575,
+     "p95": 2.1554,
+     "outside_max": 2.575,
+     "n": 40
+    },
+    "L2": {
+     "max": 5.5609,
+     "p95": 4.3372,
+     "outside_max": 5.5609,
+     "n": 139
+    }
+   },
+   "frame_dev_mm": 8.8e-05,
+   "res_deg": 0.0002,
+   "knee_angle": 144.1
+  },
+  {
+   "label": "behind the back",
+   "bench_pose": 62,
+   "clip_frame": false,
+   "pose": [
+    -90.0,
+    30.0,
+    105.0
+   ],
+   "joint_features_max_mm": 0.1443,
+   "rigid_incl_knee_link_max_mm": 1.2487,
+   "closure_parts_model_outside_built_max_mm": 1.2487,
+   "within_0p5": false,
+   "per_part": {
+    "hub1": {
+     "max": 0.1423,
+     "p95": 0.0,
+     "outside_max": 0.1423,
+     "n": 80
+    },
+    "hub2": {
+     "max": 0.1443,
+     "p95": 0.0072,
+     "outside_max": 0.1443,
+     "n": 80
+    },
+    "hub3": {
+     "max": 0.0,
+     "p95": 0.0,
+     "outside_max": 0.0,
+     "n": 80
+    },
+    "E": {
+     "max": 0.1239,
+     "p95": 0.1129,
+     "outside_max": 0.1239,
+     "n": 88
+    },
+    "boss": {
+     "max": 0.0,
+     "p95": 0.0,
+     "outside_max": 0.0,
+     "n": 32
+    },
+    "pad": {
+     "max": 0.0,
+     "p95": 0.0,
+     "outside_max": 0.0,
+     "n": 32
+    },
+    "knee": {
+     "max": 1.2487,
+     "p95": 0.0,
+     "outside_max": 1.2487,
+     "n": 100
+    },
+    "L1": {
+     "max": 2.575,
+     "p95": 2.1554,
+     "outside_max": 2.575,
+     "n": 40
+    },
+    "L2": {
+     "max": 5.561,
+     "p95": 4.3373,
+     "outside_max": 5.561,
+     "n": 139
+    }
+   },
+   "frame_dev_mm": 8.5e-05,
+   "res_deg": 0.0001,
+   "knee_angle": 111.0
+  },
+  {
+   "label": "across the body",
+   "bench_pose": 214,
+   "clip_frame": false,
+   "pose": [
+    150.0,
+    45.0,
+    -60.0
+   ],
+   "joint_features_max_mm": 0.1443,
+   "rigid_incl_knee_link_max_mm": 1.2487,
+   "closure_parts_model_outside_built_max_mm": 1.2487,
+   "within_0p5": false,
+   "per_part": {
+    "hub1": {
+     "max": 0.1443,
+     "p95": 0.0,
+     "outside_max": 0.1443,
+     "n": 80
+    },
+    "hub2": {
+     "max": 0.1443,
+     "p95": 0.0072,
+     "outside_max": 0.1443,
+     "n": 80
+    },
+    "hub3": {
+     "max": 0.0,
+     "p95": 0.0,
+     "outside_max": 0.0,
+     "n": 80
+    },
+    "E": {
+     "max": 0.1238,
+     "p95": 0.1129,
+     "outside_max": 0.1238,
+     "n": 88
+    },
+    "boss": {
+     "max": 0.0,
+     "p95": 0.0,
+     "outside_max": 0.0,
+     "n": 32
+    },
+    "pad": {
+     "max": 0.0,
+     "p95": 0.0,
+     "outside_max": 0.0,
+     "n": 32
+    },
+    "knee": {
+     "max": 1.2487,
+     "p95": 0.0,
+     "outside_max": 1.2487,
+     "n": 100
+    },
+    "L1": {
+     "max": 2.5751,
+     "p95": 2.1554,
+     "outside_max": 2.5751,
+     "n": 40
+    },
+    "L2": {
+     "max": 5.5609,
+     "p95": 4.3372,
+     "outside_max": 5.5609,
+     "n": 139
+    }
+   },
+   "frame_dev_mm": 6.4e-05,
+   "res_deg": 0.0002,
+   "knee_angle": 101.4
+  },
+  {
+   "label": "clip: Raise overhead top (frame 78)",
+   "bench_pose": null,
+   "clip_frame": true,
+   "pose": [
+    30.0,
+    150.0,
+    -60.0
+   ],
+   "joint_features_max_mm": 0.1444,
+   "rigid_incl_knee_link_max_mm": 1.2487,
+   "closure_parts_model_outside_built_max_mm": 1.2487,
+   "within_0p5": false,
+   "per_part": {
+    "hub1": {
+     "max": 0.1444,
+     "p95": 0.0072,
+     "outside_max": 0.1444,
+     "n": 80
+    },
+    "hub2": {
+     "max": 0.1443,
+     "p95": 0.0072,
+     "outside_max": 0.1443,
+     "n": 80
+    },
+    "hub3": {
+     "max": 0.0,
+     "p95": 0.0,
+     "outside_max": 0.0,
+     "n": 80
+    },
+    "E": {
+     "max": 0.1238,
+     "p95": 0.1129,
+     "outside_max": 0.1238,
+     "n": 88
+    },
+    "boss": {
+     "max": 0.0,
+     "p95": 0.0,
+     "outside_max": -0.0,
+     "n": 32
+    },
+    "pad": {
+     "max": 0.0,
+     "p95": 0.0,
+     "outside_max": 0.0,
+     "n": 32
+    },
+    "knee": {
+     "max": 1.2487,
+     "p95": 0.0001,
+     "outside_max": 1.2487,
+     "n": 100
+    },
+    "L1": {
+     "max": 2.575,
+     "p95": 2.1554,
+     "outside_max": 2.575,
+     "n": 40
+    },
+    "L2": {
+     "max": 5.5609,
+     "p95": 4.3372,
+     "outside_max": 5.5609,
+     "n": 139
+    }
+   },
+   "frame_dev_mm": 8.6e-05,
+   "res_deg": 0.0002,
+   "knee_angle": 144.1
+  },
+  {
+   "label": "clip: Walking arm at side (frame 0)",
+   "bench_pose": null,
+   "clip_frame": true,
+   "pose": [
+    90.0,
+    4.0,
+    -90.0
+   ],
+   "joint_features_max_mm": 0.1443,
+   "rigid_incl_knee_link_max_mm": 1.2487,
+   "closure_parts_model_outside_built_max_mm": 1.2487,
+   "within_0p5": false,
+   "per_part": {
+    "hub1": {
+     "max": 0.1422,
+     "p95": 0.0071,
+     "outside_max": 0.1422,
+     "n": 80
+    },
+    "hub2": {
+     "max": 0.1443,
+     "p95": 0.0072,
+     "outside_max": 0.1443,
+     "n": 80
+    },
+    "hub3": {
+     "max": 0.0,
+     "p95": 0.0,
+     "outside_max": 0.0,
+     "n": 80
+    },
+    "E": {
+     "max": 0.1239,
+     "p95": 0.1129,
+     "outside_max": 0.1239,
+     "n": 88
+    },
+    "boss": {
+     "max": 0.0,
+     "p95": 0.0,
+     "outside_max": 0.0,
+     "n": 32
+    },
+    "pad": {
+     "max": 0.0,
+     "p95": 0.0,
+     "outside_max": 0.0,
+     "n": 32
+    },
+    "knee": {
+     "max": 1.2487,
+     "p95": 0.0,
+     "outside_max": 1.2487,
+     "n": 100
+    },
+    "L1": {
+     "max": 2.575,
+     "p95": 2.1554,
+     "outside_max": 2.575,
+     "n": 40
+    },
+    "L2": {
+     "max": 5.5609,
+     "p95": 4.3372,
+     "outside_max": 5.5609,
+     "n": 139
+    }
+   },
+   "frame_dev_mm": 8.2e-05,
+   "res_deg": 0.0001,
+   "knee_angle": 101.3
+  },
+  {
+   "label": "clip: Comb hair top (frame 105)",
+   "bench_pose": null,
+   "clip_frame": true,
+   "pose": [
+    78.1,
+    143.1,
+    -67.1
+   ],
+   "joint_features_max_mm": 0.1443,
+   "rigid_incl_knee_link_max_mm": 1.2487,
+   "closure_parts_model_outside_built_max_mm": 1.2487,
+   "within_0p5": false,
+   "per_part": {
+    "hub1": {
+     "max": 0.1442,
+     "p95": 0.0072,
+     "outside_max": 0.1442,
+     "n": 80
+    },
+    "hub2": {
+     "max": 0.1443,
+     "p95": 0.0072,
+     "outside_max": 0.1443,
+     "n": 80
+    },
+    "hub3": {
+     "max": 0.0001,
+     "p95": 0.0001,
+     "outside_max": 0.0001,
+     "n": 80
+    },
+    "E": {
+     "max": 0.1239,
+     "p95": 0.1129,
+     "outside_max": 0.1239,
+     "n": 88
+    },
+    "boss": {
+     "max": 0.0001,
+     "p95": 0.0001,
+     "outside_max": 0.0001,
+     "n": 32
+    },
+    "pad": {
+     "max": 0.0,
+     "p95": 0.0,
+     "outside_max": 0.0,
+     "n": 32
+    },
+    "knee": {
+     "max": 1.2487,
+     "p95": 0.0,
+     "outside_max": 1.2487,
+     "n": 100
+    },
+    "L1": {
+     "max": 2.5751,
+     "p95": 2.1554,
+     "outside_max": 2.5751,
+     "n": 40
+    },
+    "L2": {
+     "max": 5.5609,
+     "p95": 4.3372,
+     "outside_max": 5.5609,
+     "n": 139
+    }
+   },
+   "frame_dev_mm": 7.3e-05,
+   "res_deg": 0.0002,
+   "knee_angle": 133.2
+  },
+  {
+   "label": "clip: Reach back pocket (frame 72)",
+   "bench_pose": null,
+   "clip_frame": true,
+   "pose": [
+    -80.0,
+    39.0,
+    101.1
+   ],
+   "joint_features_max_mm": 0.1443,
+   "rigid_incl_knee_link_max_mm": 1.2488,
+   "closure_parts_model_outside_built_max_mm": 1.2488,
+   "within_0p5": false,
+   "per_part": {
+    "hub1": {
+     "max": 0.1412,
+     "p95": 0.0,
+     "outside_max": 0.1412,
+     "n": 80
+    },
+    "hub2": {
+     "max": 0.1443,
+     "p95": 0.0072,
+     "outside_max": 0.1443,
+     "n": 80
+    },
+    "hub3": {
+     "max": 0.0,
+     "p95": 0.0,
+     "outside_max": 0.0,
+     "n": 80
+    },
+    "E": {
+     "max": 0.1239,
+     "p95": 0.1129,
+     "outside_max": 0.1239,
+     "n": 88
+    },
+    "boss": {
+     "max": 0.0,
+     "p95": 0.0,
+     "outside_max": 0.0,
+     "n": 32
+    },
+    "pad": {
+     "max": 0.0,
+     "p95": 0.0,
+     "outside_max": 0.0,
+     "n": 32
+    },
+    "knee": {
+     "max": 1.2488,
+     "p95": 0.0,
+     "outside_max": 1.2488,
+     "n": 100
+    },
+    "L1": {
+     "max": 2.5751,
+     "p95": 2.1554,
+     "outside_max": 2.5751,
+     "n": 40
+    },
+    "L2": {
+     "max": 5.5609,
+     "p95": 4.3372,
+     "outside_max": 5.5609,
+     "n": 139
+    }
+   },
+   "frame_dev_mm": 6.5e-05,
+   "res_deg": 0.0001,
+   "knee_angle": 116.8
+  }
+ ],
+ "ring_root_fillet_skipped": [
+  {
+   "F": 61.31,
+   "child_status": 11
+  }
+ ],
+ "kinematics_exact": {
+  "poses": 11,
+  "all_within_0p5": false,
+  "max_frame_dev_mm": 9.4e-05,
+  "max_joint_feature_mm": 0.1444
+ }
 }
