@@ -388,8 +388,32 @@ def frozen(P, nc=110, nw=360):
     return out
 
 
+def viz_export(par):
+    """geometry of the fitted design (Bench(60,160)) for docs/concepts/viz/concepts/cam-unfold-4th.js"""
+    B = CB.Bench(n_clip=60, n_ws=160); r, M = _report(B, par); D = M.D; P = D.p
+    R = lambda v, n=5: [round(float(x), n) for x in v]
+    def centre(name):
+        lk = [l for l in M.geo.links if l["name"] == name][0]; keep = ~M.drop
+        rows = [rr[keep].max(0) for rr in M.Lneed[name]]
+        pts = []
+        for ri in (1, 2):
+            dv, ks, _ = lk["rows"][ri]; pts.append(dv * rows[ri][:, None])
+        c = 0.5 * (pts[0] + pts[1]); return [R(x, 2) for x in c[::2]]
+    sub = slice(None, None, max(1, len(D.tx) // 160))
+    G = dict(u=[R(x) for x in D.u], uK=R(D.uK), c=[R(x) for x in D.c], sa=R(D.sa), st=R(D.st), sn=R(D.sn), A=[round(D.a1, 3), round(D.a2, 3)],
+             branch=float(D.branch), m=R(D.m), f=[round(float(x), 2) for x in M.f], fK=round(float(M.fK), 2), tr=round(float(M.tr), 2),
+             tp=round(float(P["tp"]), 3), RUN=S.RUN, SING=KIT.FOLD_MARGIN, camR=M.cam_r, A0=R(M.fr["A0"]), A0m=R(M.fr["A0m"]), Bm=R(M.fr["Bm"]),
+             eE=R(M.fr["eE"]), eK=R(M.fr["eK"]), psiA=round(math.degrees(D.psiA), 4), q2f=D.q2f, d=D.d, xs=round(D.xs, 3), xf=round(D.xf, 3),
+             cam=dict(cs=P["cs"], ws=P["ws"], cf=P["cf"], wf=P["wf"]), tx=R(D.tx[sub], 2), tth=R(D.tth[sub], 3), th_win=R(D.th_win, 2),
+             L1=centre("L1"), L2a=centre("L2a"), L2b=centre("L2b"))
+    keys = ("az1", "el1", "az2", "el2", "wd", "wa", "b3", "lE", "lc", "phiE", "phib", "stk", "ang_min", "bk1", "bk2", "sK", "mons", "ws", "cs", "monf", "wf", "cf")
+    return dict(P={k: P[k] for k in keys}, G=G, report={k: r[k] for k in ("gap", "reach", "follow", "inband14", "contact")})
+
+
 if __name__ == "__main__":
     mode = sys.argv[1] if len(sys.argv) > 1 else "check"
+    if mode == "viz":
+        print(json.dumps(viz_export(json.loads(sys.argv[2]) if len(sys.argv) > 2 else {}), default=float)); sys.exit()
     par = json.loads(sys.argv[2]) if len(sys.argv) > 2 else {}
     if mode == "table":
         D = CDesign(dict(PARAMS, **par)); tf = D.tab_full
