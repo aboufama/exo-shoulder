@@ -97,3 +97,12 @@ worth +28 (beta 20) to +43 (beta 40) fold-free poses; the realisable one with re
   axis measures th directly), or drive the rocker from link 2 / J2 (q2 is a monotone function of th: a two-pin
   coupler J2 -> rocker would schedule exactly the polar term). Both keep rotations only. The second is a planar
   four-bar on the chain itself, no arm stud, and is the variant that removes the measured limiter.
+
+**Polar-schedule bound (measured 03:08, scratch proxy, leader seats, Bench(60,160) ws poses).** If the rocker angle is
+a smooth function of the POLAR angle of J3 from the pivot axis only (q0 = g(angle(c, d3)), |dg| <= 2.5 deg per deg,
+|q0| <= 75, best g by dynamic programming over 2-deg polar bins), the fold-free workspace is **141 of 160** poses at
+beta 30 (139-141 for beta 25-30 over several pivot azimuths) vs the plain leader's 114 and the per-pose free bound of
+148-152: a polar schedule captures ~75 % of the ideal gain (kinematic reach ceiling ~0.88). The S-U rod's schedule is
+azimuth-dominated and captures none of it once real parts are added. So the lever is right and the transmission is
+wrong: the follow-up morphology is a rocker driven by a quantity that measures the J1-J3 angle - q2 itself (a two-pin
+coupler from link 1 / J2 to the rocker, rotations only) - not by an arm-fixed stud.
