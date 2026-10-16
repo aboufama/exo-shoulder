@@ -21,6 +21,7 @@ Conditioning, from (a1, a2, th) alone (a spherical 3R's orientation Jacobian is 
         leader: pin-knee | raglan | knuckle | spine
         --margin M: the fold margin on the worn bench (deg, default 10 = the bench rule; 7 / 5 = sensitivity, report only)
         --refit:    fit the shape at margin M too (default: the shape stays the margin-10 fit, only the window widens)
+        --set k=v:  override one verified parameter (repeatable; a lever probe, e.g. --set lc=30 for a longer knee link)
 """
 import functools, importlib.util, json, math, os, sys, time
 import numpy as np
@@ -142,7 +143,9 @@ def main():
     a = sys.argv[1:]; leader, outp = a[0], a[1]
     margin = float(a[a.index("--margin") + 1]) if "--margin" in a else 10.0; refit = "--refit" in a
     nc = int(a[a.index("--nc") + 1]) if "--nc" in a else 110; nw = int(a[a.index("--nw") + 1]) if "--nw" in a else 360
-    P = verified_params(leader); t0 = time.time()
+    P = dict(verified_params(leader)); t0 = time.time()
+    for kv in [a[j + 1] for j in range(len(a) - 1) if a[j] == "--set"]:      # lever probes: --set lc=30 (report only)
+        k, v = kv.split("="); P[k] = float(v)
     R = run_spine(P, margin, refit, nc, nw) if leader == "spine" else run_osn(leader, P, margin, refit, nc, nw)
     B, why, th, a1, a2 = R["B"], R["why"], R["th"], R["a1"], R["a2"]
     lo = abs(a1 - a2) + margin; hi = min(a1 + a2, 360 - a1 - a2) - margin
