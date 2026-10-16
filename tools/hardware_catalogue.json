@@ -499,6 +499,26 @@
    "notes": "O20 v5 hub pair, 12.25 mm stack incl. encoder + cap"
   },
   {
+   "id": "MR117-pair-O15-slim",
+   "pn": "slim joint hub: 2 x MR117-2RS (7 x 11 x 3) in a 2.0 mm Ti-6Al-4V wall (bore 11 H7, OD 15), internal DIN 472 retaining ring",
+   "dof": "R",
+   "d": 7,
+   "D": 11,
+   "B": 3,
+   "n_bearings": 2,
+   "wall": 2.0,
+   "OD": 15.0,
+   "stack": 12.25,
+   "retention": "lower outer ring on a bore shoulder of the lower member; upper outer ring held by an internal DIN 472 ring in a ~O11.6 groove (1.7 mm wall left at the groove); cap = press-fit O15 disc with the O6 x 2.5 magnet; no external thread (an M14x0.5 cap thread would leave 1.19 mm under the root and grow the crown past O15)",
+   "sensor": "AS5600 SOIC-8 (4.9 x 6.0) on a 1.6 mm O13 PCB",
+   "strength_est": "tube at the groove (OD 15, ID 11.6): Z = 210 mm3; 10 N m -> 48 MPa vs Ti-6Al-4V yield ~830 MPa (SF ~17); MVP1 unpowered loads < 0.5 N m (SF > 300)",
+   "conf": "est (hand calc: docs/concepts/spine-parked-j2-3r.md 'Slim hub, hand calc'); bearing = catalogue (repo docs/HARDWARE.md)",
+   "src": "REPO_HW",
+   "friction": "rolling",
+   "make_buy": "buy 2 x MR117-2RS + DIN 472 ring; make the Ti housing",
+   "notes": "same bearing pair, spacing and 12.25 mm F-to-crown stack as the v5 O20 hub, 2.5 mm less radius. Kit: hub_member(rad=7.5) declared in Chain.info['hub_rad'] passes the audit against this O15 disc (concept_kit.catalogue_hubs); K6 then exempts the joint's partners only within 9.5 mm."
+  },
+  {
    "id": "MR63ZZ",
    "pn": "MR63ZZ (3 x 6 x 2.5)",
    "dof": "R",

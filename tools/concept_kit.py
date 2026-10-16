@@ -11,7 +11,7 @@ Conventions are those of tools/concept_baseline.py (the champion 3R), so a kit m
 identically: strap samples every 2 mm along / across at r_ref = 70 mm, cap hubs every 2.5 mm, profile = quantile q over
 the fit poses of the per-sample skin requirement (+ 2 mm clearance), contact decided by B.dist on every metal sample.
 """
-import datetime, json, math, os, sys
+import datetime, functools, json, math, os, sys, warnings
 from dataclasses import dataclass, field
 import numpy as np
 
@@ -256,8 +256,10 @@ class Member:
     off: level added to the fitted underside (hub stack); grid (ns, nc) + climb_deg: strap climb limit along axis 0
     (step_mm apart); ramps: [(mask (m,), other member name, dz)]: final underside >= the other's level + dz there;
     over: [(other member name, gap)]: wherever it passes over that member (in any fit pose), underside >= the
-    other's top + gap (the K6 clearance by construction; the other must not itself have `over`).
-    joints: names of the joints it carries (K6 partners are exempt within HUB_R + 2 mm of a shared joint)."""
+    other's top + gap (the K6 clearance by construction; the other must not itself have `over`); iterated with the
+    climb limit to a fixed point (fit_profiles), so it holds on the final underside K6 sees.
+    joints: names of the joints it carries (K6 partners are exempt within `hub_zones` of a shared joint: the joint's
+    hub radius + 2 mm). hub: this member is the joint hub of its joint (hub_member sets it; radius = width / 2)."""
     name: str
     D: np.ndarray
     kind: str = "free"
@@ -279,6 +281,7 @@ class Member:
     r_ref: float = 70.0
     hw: float = 1.0           # half extent of one sample (K6)
     strap: bool = False       # report mass at 5.5 mm too (K5)
+    hub: bool = False         # the joint hub of joints[0] (hub_member): K6 zone of that joint = min(width / 2, HUB_R) + 2
 
 
 @dataclass
@@ -313,8 +316,21 @@ def _levels(B, chain, fit, q, mode):
     return out
 
 
-def fit_profiles(B, chain, fit, q=1.0, mode="march"):
-    """underside radius per sample (final, with offsets, flat levels, climb limit and ramps) -> {name: rho (m,)}"""
+def _climb(m, r):
+    """K5: |d underside / d s| <= tan(climb_deg) along a strap's axis 0 (raises only; idempotent)"""
+    if not (m.climb_deg and m.grid): return r
+    ns, nc = m.grid; R2 = r.reshape(ns, nc); x = np.arange(ns) * m.step_mm; sl = math.tan(m.climb_deg * D2R)
+    return (R2[None, :, :] - sl * np.abs(x[:, None, None] - x[None, :, None])).max(1).ravel()
+
+
+def fit_profiles(B, chain, fit, q=1.0, mode="march", max_pass=20):
+    """underside radius per sample (final, with offsets, flat levels, climb limit and ramps) -> {name: rho (m,)}.
+    `over` and the K5 climb are iterated to a fixed point. `_near` decides the shared-joint exemption at the radius it
+    is given, and K6 judges the FINAL radius: one `over` pass on the pre-climb underside left a sample that is exempt
+    there (10 mm of arc from J2 at ~50 mm) but not where the climb lifts it (12.8 mm at 63.2 mm) in contact with the
+    member below (KIT.md Verification, bug 4). Both steps only raise, over finitely many levels, so the loop ends
+    (2-4 passes measured); at the fixed point `_over` has tested every sample at its final radius, in K6's pair order,
+    so no `over` pair is left for K6 to flag."""
     raw = _levels(B, chain, fit, q, mode); prof = {}; level = {}
     order = sorted(chain.members, key=lambda m: (len(m.over) > 0, len(m.ramps) > 0))
     for m in order:
@@ -322,10 +338,13 @@ def fit_profiles(B, chain, fit, q=1.0, mode="march"):
         if m.kind in ("cap", "flat"): r[:] = r.max()
         r = r + m.off
         for mask, other, dz in m.ramps: r[mask] = np.maximum(r[mask], level[other] + dz)
-        if m.over: r = _over(chain, m, r, prof, fit)
-        if m.climb_deg and m.grid:                            # K5: |d underside / d s| <= tan(climb) (raises only)
-            ns, nc = m.grid; R2 = r.reshape(ns, nc); x = np.arange(ns) * m.step_mm; sl = math.tan(m.climb_deg * D2R)
-            R2 = (R2[None, :, :] - sl * np.abs(x[:, None, None] - x[None, :, None])).max(1); r = R2.ravel()
+        for _ in range(max_pass if m.over else 1):
+            r0 = r
+            if m.over: r = _over(chain, m, r, prof, fit)
+            r = _climb(m, r)
+            if not m.over or np.max(r - r0, initial=0.0) <= 1e-9: break
+        else:
+            warnings.warn(f"{m.name}: `over` + climb not at a fixed point after {max_pass} passes (K6 still judges it)")
         prof[m.name] = r; level[m.name] = float(r.max())
     return prof
 
@@ -340,16 +359,20 @@ def member_points(m, rho):
 def hub_member(name, axis, joint, t=CROWN, rad=HUB_R, step=2.0, h0=70.0, ref=None):
     """K4: the O20 hub of joint `joint` as a flat disc (radius 10, 2 mm grid) normal to axis (P, 3); its level h_F (the
     lower member's skin face F) is fitted by the K3 march of every disc sample along the axis from its true in-plane
-    offset (h0 only lays out the nominal directions D); t = 12.25 (F to the crown)"""
+    offset (h0 only lays out the nominal directions D); t = 12.25 (F to the crown). rad < 10: a slim hub - K6 exempts
+    the joint's partners only within rad + 2 mm (`hub_zones`), and the audit accepts it only as a catalogue component
+    declared in Chain.info['hub_rad'] (e.g. 7.5 = MR117-pair-O15-slim, tools/hardware_catalogue.json)"""
     k = unit(axis); a, b = plane_frame(k, ref); xy = disc_xy(rad, step)
     D = unit(h0 * k[:, None] + xy[None, :, :1] * a[:, None] + xy[None, :, 1:] * b[:, None])
-    return Member(name, D, kind="flat", t=t, width=2 * rad, joints=(joint,), K=k, A=a, Bv=b, xy=xy, cell=step * step)
+    return Member(name, D, kind="flat", t=t, width=2 * rad, joints=(joint,), K=k, A=a, Bv=b, xy=xy, cell=step * step, hub=True)
 
 
 def strap_member(name, u, v, joints, ang=None, width=12.0, t=3.0, ramp_to=(), climb_deg=60.0, end_mm=HUB_R + 2.0, **kw):
     """K5: a strap on the great circle u -> v (P, 3) (12 x 3 mm, 2 mm samples), K3 underside, climb <= 60 deg.
     ramp_to: ((hub member name or None, dz), (hub name or None, dz)) for its start / end: the first / last end_mm (at
-    r_ref) sit >= that hub's F + dz (dz = STACK when this strap is the upper member of that joint, 0 when the lower)"""
+    r_ref) sit >= that hub's F + dz (dz = STACK when this strap is the upper member of that joint, 0 when the lower).
+    end_mm = HUB_R + 2 matches the K6 zone of an O20 hub; at a slim hub (rad < 10) K6 checks the partners from rad + 2
+    on, so end_mm = rad + 2 is honest, and a longer ramp is checked (and lifted by `over`) beyond rad + 2"""
     D = strap_dirs(u, v, ang, width=width); ns, nc = D.shape[1:3]
     n_end = int(math.ceil(end_mm / 2.0)) + 1; s = np.repeat(np.arange(ns), nc); ramps = []
     for (h, dz), m in zip(ramp_to, (s < n_end, s >= ns - n_end)):
@@ -364,15 +387,30 @@ def _scale(m, x):
     return np.ones_like(x) if m.kind == "flat" else np.maximum(1.0, x / m.r_ref)
 
 
-def _near(A, Bm, da, db, xa, xb, joints, shared, P, clear):
+def hub_zones(chain):
+    """{joint: K6 exempt radius (mm of arc from the axis)} = the joint's hub radius + 2: width / 2 of the hub member
+    on it (hub_member), capped at the O20 HUB_R; HUB_R + 2 when the joint has no hub member (hubless joints, rings,
+    hand-built cap hubs). A slim hub shrinks the zone, so its partners are checked from rad + 2 mm on (an O20 zone
+    around a slim hub left them unchecked between rad + 2 and 12 mm: KIT.md Verification, bug 5); a larger hub keeps
+    the O20 zone, because the kit's strap ramps (end_mm = HUB_R + 2) hold the partners at their stack levels only that
+    far (a zone grown with the hub would open the same unchecked band the other way round)."""
+    z = {}
+    for m in chain.members:
+        if m.hub and m.joints:
+            j = m.joints[0]; z[j] = max(z.get(j, 0.0), min(m.width / 2, HUB_R) + 2.0)
+    return {j: z.get(j, HUB_R + 2.0) for j in chain.joints}
+
+
+def _near(A, Bm, da, db, xa, xb, joints, shared, P, clear, zone=None):
     """near mask of two members' samples on poses P: arc distance (angle * A's radius) < hw_a + hw_b + clear, the
-    samples within HUB_R + 2 mm of a shared joint axis exempt. Returns (k, near (len(k), m, n)) for the poses k of P
-    whose two sample cones can touch at all, or None. Squared chords instead of arccos (error < 0.05 % below 0.1 rad)."""
+    samples within zone[j] mm (`hub_zones`, default HUB_R + 2) of a shared joint axis j exempt, each at its own radius.
+    Returns (k, near (len(k), m, n)) for the poses k of P whose two sample cones can touch at all, or None. Squared
+    chords instead of arccos (error < 0.05 % below 0.1 rad)."""
     ma = np.ones(xa.shape, bool); mb = np.ones(xb.shape, bool); sa, sb = _scale(A, xa), _scale(Bm, xb)   # layouts made at r_ref grow with radius
     for j in shared:
-        k = unit(joints[j][P])
-        ma &= np.arccos(np.clip(np.einsum("pmd,pd->pm", da, k), -1, 1)) * xa / sa > HUB_R + 2
-        mb &= np.arccos(np.clip(np.einsum("pmd,pd->pm", db, k), -1, 1)) * xb / sb > HUB_R + 2
+        k = unit(joints[j][P]); zj = (zone or {}).get(j, HUB_R + 2.0)
+        ma &= np.arccos(np.clip(np.einsum("pmd,pd->pm", da, k), -1, 1)) * xa / sa > zj
+        mb &= np.arccos(np.clip(np.einsum("pmd,pd->pm", db, k), -1, 1)) * xb / sb > zj
     ha, hb = A.hw * sa, Bm.hw * sb
     ca, cb = unit(da.mean(1)), unit(db.mean(1))                # cone prefilter per pose
     ra = np.arccos(np.clip(np.einsum("pmd,pd->pm", da, ca).min(1), -1, 1)); rb = np.arccos(np.clip(np.einsum("pmd,pd->pm", db, cb).min(1), -1, 1))
@@ -388,12 +426,15 @@ def _near(A, Bm, da, db, xa, xb, joints, shared, P, clear):
     return k, near
 
 
-def collisions(chain, pts, ok, clear=1.0, overlap=0.5, chunk=24):
+def collisions(chain, pts, ok, clear=1.0, overlap=0.5, chunk=24, zone=None):
     """(P,) bool: any two members collide (arc distance < hw1 + hw2 + clear, and radial intervals [r, r + t] closer
     than `overlap` = 0.5 mm: the spec's K6, so the radial part-part clearance it enforces is 0.5 mm, the lateral 1 mm;
-    `over` builds 1 mm); joint partners are exempt within HUB_R + 2 mm of a shared joint axis"""
+    `over` builds 1 mm); joint partners are exempt within `hub_zones` (hub radius + 2 mm) of a shared joint axis.
+    zone: {joint: mm} override - a model that calls this on a sub-chain without the hub member (e.g. pair by pair)
+    passes hub_zones(full chain), else that joint falls back to HUB_R + 2"""
     hit = np.zeros(len(ok), bool); M = chain.members; Pi = np.nonzero(ok)[0]
     if not len(Pi): return hit
+    zone = hub_zones(chain) if zone is None else zone
     nr = {m.name: np.linalg.norm(pts[m.name], axis=-1) for m in M}; dr = {m.name: pts[m.name] / nr[m.name][..., None] for m in M}
     for a in range(len(M)):
         for b in range(a + 1, len(M)):
@@ -401,7 +442,7 @@ def collisions(chain, pts, ok, clear=1.0, overlap=0.5, chunk=24):
             if ra[Pi].min() > rb[Pi].max() + Bm.t + overlap or rb[Pi].min() > ra[Pi].max() + A.t + overlap: continue
             for c0 in range(0, len(Pi), chunk):
                 P = Pi[c0:c0 + chunk]; xa, xb = ra[P], rb[P]
-                res = _near(A, Bm, dr[A.name][P], dr[Bm.name][P], xa, xb, chain.joints, shared, P, clear)
+                res = _near(A, Bm, dr[A.name][P], dr[Bm.name][P], xa, xb, chain.joints, shared, P, clear, zone)
                 if res is None: continue
                 k, nm = res; xa, xb = xa[k], xb[k]
                 ov = (xa[:, :, None] < xb[:, None, :] + Bm.t + overlap) & (xb[:, None, :] < xa[:, :, None] + A.t + overlap)
@@ -412,16 +453,23 @@ def collisions(chain, pts, ok, clear=1.0, overlap=0.5, chunk=24):
 def _over(chain, m, r, prof, fit, clear=1.0, chunk=24):
     """K6 by construction: raise member m's underside r (m,) to >= other top + gap wherever it passes over the members
     listed in m.over [(name, gap)] (max over the fit poses: one violated sample would reject the pose; the shared-joint
-    zone is left to the hub stack)"""
+    zone, `hub_zones`, is left to the hub stack). It asks K6's own question: `_near` on the points at r, the pair in
+    Chain.members order (`_near` is not symmetric: arc at the first member's radius, the second's largest sample
+    extent), the same zones; fit_profiles repeats it with the climb until neither raises, so r is the radius K6 sees."""
     Pi = np.nonzero(fit)[0]; O = {o.name: o for o in chain.members}; need = np.full((len(Pi), len(r)), -np.inf)
     if not len(Pi): return r
-    xa_all = np.broadcast_to(r, (len(m.D), len(r)))
+    zone = hub_zones(chain); pos = {o.name: i for i, o in enumerate(chain.members)}
+    if m.kind == "flat": dm, xm = m.D, np.broadcast_to(r, (len(m.D), len(r)))
+    else: pm = member_points(m, r); xm = np.linalg.norm(pm, axis=-1); dm = pm / xm[..., None]   # as collisions() sees it
     for name, gap in m.over:
         o = O[name]; po = member_points(o, prof[name]); xo = np.linalg.norm(po, axis=-1); do = po / xo[..., None]
-        shared = set(m.joints) & set(o.joints)
+        shared = set(m.joints) & set(o.joints); first = pos[m.name] < pos[name]
         for c0 in range(0, len(Pi), chunk):
             P = Pi[c0:c0 + chunk]
-            res = _near(m, o, m.D[P], do[P], xa_all[P], xo[P], chain.joints, shared, P, clear)
+            if first: res = _near(m, o, dm[P], do[P], xm[P], xo[P], chain.joints, shared, P, clear, zone)
+            else:
+                res = _near(o, m, do[P], dm[P], xo[P], xm[P], chain.joints, shared, P, clear, zone)
+                if res is not None: res = (res[0], res[1].transpose(0, 2, 1))
             if res is None: continue
             k, nm = res
             top = np.where(nm, (xo[P][k] + o.t + gap)[:, None, :], -np.inf).max(2)
@@ -475,25 +523,39 @@ def evaluate(B, model, params, q=None, mode="march", cont=True, collide=True, ju
         rho = np.linalg.norm(pts[m.name][Pi[:1]], axis=-1)[0] if len(Pi) else prof[m.name]
         area = float(m.cell * (((rho / m.r_ref) ** 2).sum() if m.kind != "flat" else rho.size))
         mass += area * m.t * TI; mass55 += area * (5.5 if m.strap else m.t) * TI
-    problems, density = audit(B, F, build, params, ch, pts, take if take.any() else ok)
+    declared = {}; problems, density = audit(B, F, build, params, ch, pts, take if take.any() else ok, declared)
     checks = dict(mode=mode, cont=cont, collide=bool(collide), q=q)
     honest = mode == "march" and cont in (True, "frames") and bool(collide) and not problems
     r.update(inband_member=per, mass_g=round(mass, 1), mass_g_strap55=round(mass55, 1), closure=round(float(np.mean(ch.ok)), 4),
              flips=int(flips), collide=round(float(np.mean(hit[ok])) if ok.any() else 0.0, 4), q=q, kmode=mode, **ch.info)
-    r.update(checks=checks, honest=honest, audit=problems, sample_mm=density, hubless=list(ch.hubless))
+    r.update(checks=checks, honest=honest, audit=problems, sample_mm=density, hubless=list(ch.hubless), declared_hubs=declared)
     if verbose: print(r)
     B._kit_last = dict(chain=ch, prof=prof, pts=pts, take=take, ok=ok, hit=hit)
     return r
 
 
-def audit(B, F, build, params, ch, pts, sel):
+@functools.lru_cache(maxsize=1)
+def catalogue_hubs():
+    """{radius mm: entry} of the joint-hub components in tools/hardware_catalogue.json (rotary_bearings entries with an
+    outer diameter `OD` and a `stack`): the hubs smaller than O20 a model may declare in Chain.info['hub_rad']"""
+    cat = json.load(open(os.path.join(REPO, "tools", "hardware_catalogue.json")))
+    return {round(e["OD"] / 2, 3): e for e in cat.get("rotary_bearings", []) if e.get("OD") and e.get("stack")}
+
+
+def audit(B, F, build, params, ch, pts, sel, declared=None):
     """honesty audit of a built chain (docs/concepts/KIT.md 'Verification'). Returns (problems [str], sample spacing
     {member: median nearest-neighbour mm}). Raises when a joint has no member centred on it at all (a skipped hub)
     unless it is declared in Chain.hubless. Problems (the report's `honest` turns False): a hub smaller than the O20
     disc (< 75 % of its 314 mm2 covered within 10.5 mm of the axis, or reaching < 9.5 mm), a member sampled sparser
     than 1 pt / 16 mm2 (median spacing > 4 mm at its real radius), a build that is not pose-local (its output on a
-    subset of poses differs from the full build: it uses B or all poses, so dense K2 sees different geometry)."""
+    subset of poses differs from the full build: it uses B or all poses, so dense K2 sees different geometry).
+    Declared slim hubs: a joint whose radius in Chain.info['hub_rad'] ({joint: mm}, < HUB_R) is a catalogue hub
+    (`catalogue_hubs`, e.g. 7.5 = MR117-pair-O15-slim) is checked against THAT disc instead (>= 75 % of it covered
+    within rad + 0.5, reaching >= rad - 0.5, thickness >= the component's stack); it is listed in `declared` ({joint:
+    {rad, component, cover, reach}}, the report's `declared_hubs`). A radius with no catalogue component gets the O20
+    check."""
     problems = []; idx = np.nonzero(sel)[0]; i0 = int(idx[0]) if len(idx) else 0; density = {}
+    decl = dict((ch.info or {}).get("hub_rad") or {}); cat = catalogue_hubs()
     for m in ch.members:
         X = np.asarray(pts[m.name][i0], float)
         if len(X) > 1:
@@ -503,17 +565,26 @@ def audit(B, F, build, params, ch, pts, sel):
     for j, axis in ch.joints.items():
         if j in ch.hubless: continue
         k = unit(np.asarray(axis, float)[i0]); best = None
+        rd = float(decl[j]) if decl.get(j) is not None else None
+        comp = cat.get(round(rd, 3)) if rd is not None and rd < HUB_R else None; rh = rd if comp else HUB_R
         for m in ch.members:
             if j not in m.joints: continue
             X = np.asarray(pts[m.name][i0], float); L = X - (X @ k)[:, None] * k; lat = np.linalg.norm(L, axis=1)
             u = unit(X); Lu = u - (u @ k)[:, None] * k                                      # centred: sample directions around k
             if np.linalg.norm(Lu.mean(0)) > 0.25 * np.linalg.norm(Lu, axis=1).max() + 1e-9: continue   # (a link is not)
             cell = np.full(len(X), m.cell, float) if m.kind == "flat" else m.cell * (np.linalg.norm(X, axis=1) / m.r_ref) ** 2
-            cov = float(cell[lat <= HUB_R + 0.5].sum() / (math.pi * HUB_R ** 2)); reach = float(lat.max())
-            if best is None or cov > best[0]: best = (cov, reach, m.name)
+            cov = float(cell[lat <= rh + 0.5].sum() / (math.pi * rh ** 2)); reach = float(lat.max())
+            if best is None or cov > best[0]: best = (cov, reach, m.name, m.t)
         if best is None:
             raise ValueError(f"joint {j}: no member centred on its axis (an O20 hub, honesty rule 1); declare it in Chain.hubless if it has none")
-        if best[0] < 0.75 or best[1] < HUB_R - 0.5:
+        if comp:                                                                            # a declared catalogue slim hub
+            if best[0] >= 0.75 and best[1] >= rd - 0.5 and best[3] >= comp["stack"] - 1e-6:
+                if declared is not None:
+                    declared[j] = dict(rad=rd, component=comp["id"], cover=round(best[0], 3), reach=round(best[1], 1))
+            else:
+                problems.append(f"{best[2]}: hub of {j} smaller than its declared {comp['id']} (covers {best[0]:.2f} of the "
+                                f"O{2 * rd:g} disc, reaches {best[1]:.1f} mm, thickness {best[3]:g} of the {comp['stack']:g} mm stack)")
+        elif best[0] < 0.75 or best[1] < HUB_R - 0.5:
             problems.append(f"{best[2]}: hub of {j} smaller than O20 (covers {best[0]:.2f} of the disc, reaches {best[1]:.1f} mm)")
     S = idx[np.linspace(0, len(idx) - 1, min(8, len(idx))).round().astype(int)] if len(idx) else idx
     if len(S):                                                                              # pose locality

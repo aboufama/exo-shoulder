@@ -42,7 +42,8 @@ K.log_event(f"screened <name>: gap {rep['gap']} (baseline 68.93)")
 | `strap_dirs`, `cap_dirs`, `disc_xy`, `rect_xy`, `plane_frame` | sampling |
 | `Member`, `Chain` | the data model (docstrings); kinds `free` (skin-fitted underside per sample), `cap` (one radius), `flat` (K4 plate at h_F) |
 | `hub_member`, `strap_member`, `neck_member` | K4 / K5 / K7 members |
-| `fit_profiles`, `member_points`, `collisions` | K3 fit with quantile q over the fit poses, K6 |
+| `fit_profiles`, `member_points`, `collisions` | K3 fit with quantile q over the fit poses (`over` + climb to a fixed point), K6 |
+| `hub_zones(chain)`, `catalogue_hubs()` | K6 exempt radius per joint (hub radius + 2, capped at 12 mm); the catalogue hubs a slim hub may be declared as (`Chain.info['hub_rad']`) |
 | `evaluate(B, build, params, q=None, mode='march', cont=True, collide=True)` | report: `reach follow inband14 inband10 contact gap`, `inband_member`, `mass_g` (Ti 4.43 g/cm3), `mass_g_strap55` (straps at 5.5 mm), `closure` (share of poses the chain closes in), `flips`, `collide`, + `Chain.info`; `B._kit_last` keeps chain, profiles and points for plots |
 | `sweep(B, build, configs, out_json)` | writes the sweep file after EVERY configuration: list of `{k, t, params, inband14, inband10, reach, follow, contact, gap, closure, mass_g}` |
 | `write_row(id, name, rep, ...)` | `docs/concepts/rows/<id>.json` with the screen2.js fields (v_* null until verified); refuses a report that is not `honest` unless `force=True` (the row then carries `honest: false`, `checks`, `audit`) |
@@ -74,6 +75,11 @@ K.log_event(f"screened <name>: gap {rep['gap']} (baseline 68.93)")
   member thickness 12.25 (F to crown) for collisions and mass. Lower member skin face at F,
   upper member underside at F + 3.15 (`K.STACK`): say which with `ramp_to=((hub, dz), (hub, dz))`. The nominal
   directions `D` (laid out at `h0` = 70 mm) are no longer used for the fit (see Verification, bug 1).
+  A hub smaller than O20 (`hub_member(rad=7.5)`) is honest only as a DECLARED catalogue component: put its radius in
+  `Chain.info['hub_rad']` (`{joint: mm}`); when `tools/hardware_catalogue.json` holds a hub of that OD
+  (`K.catalogue_hubs()`: today `MR117-pair-O15-slim`, O15, 12.25 mm stack) the audit checks the sampled disc against
+  that disc (>= 75 % covered, reaching >= rad - 0.5, thickness >= the stack) and lists it in the report's
+  `declared_hubs`; any other radius gets the O20 check. A slim hub also shrinks the K6 zone of its joint (below).
 - **K5 straps.** 12 x 3 mm default, climb limit 60 deg applied AFTER the hub ramps (raises only), mass also reported at
   5.5 mm.
 - **K2 continuity.** The spec rule (25 deg between consecutive bench frames, `cont='frames'`) is wrong on this bench:
@@ -86,10 +92,16 @@ K.log_event(f"screened <name>: gap {rep['gap']} (baseline 68.93)")
   (champion: max 3.1 deg joint value and 2.5 deg axis motion per step along all 6 clips).
 - **K6 collisions.** Every member pair: samples nearer than hw_a + hw_b + 1 mm (arc at radius) with radial intervals
   [r, r + t] closer than 0.5 mm (the spec's "+0.5 mm"; so K6 itself enforces 1 mm lateral but only 0.5 mm radial
-  part-part clearance, `over` builds 1 mm) -> the pose is not taken; joint partners exempt within HUB_R + 2 mm
-  of the shared joint. To avoid collisions by construction, give the upper part `over=[(name, 1.0)]`: its underside is
-  raised to the other's top + 1 mm wherever they meet in any fit pose (the template's link 2 over link 1 and the neck:
-  without it 34 % of the template's closing poses collide; link 2 then pays for it: 5 % in band).
+  part-part clearance, `over` builds 1 mm) -> the pose is not taken; joint partners exempt within `hub_zones(chain)`
+  of the shared joint = its hub radius + 2 mm (width / 2 of the joint's `hub_member`, capped at HUB_R: 12 mm at an
+  O20 hub, 9.5 mm at an O15 one, 12 mm at a joint without a hub member). A model that runs `collisions` on sub-chains
+  without the hub member (pair by pair) passes `zone=K.hub_zones(full chain)`. To avoid collisions by construction,
+  give the upper part `over=[(name, 1.0)]`: its underside is raised to the other's top + 1 mm wherever K6 would see
+  them meet in any fit pose - the same `_near` test, zones and pair order as `collisions`, at the final radius (`over`
+  and the K5 climb are iterated to a fixed point) - (the template's link 2 over link 1 and the neck: without it 34 % of
+  the template's closing poses collide; link 2 then pays for it: 5 % in band). With an O20 hub, `strap_member`'s
+  default `end_mm = HUB_R + 2` holds a strap end at its hub level over exactly the K6 zone; at a slim hub
+  `end_mm = rad + 2` is equally honest (a longer ramp is checked, and lifted by `over`, beyond rad + 2).
 - **K7.** `neck_member(F, p_from)`: 14 x 6 strap from the arm-end plate (direction p_from) to the start of BOTTOM's bar
   (RH @ (67.5 Wb + 40 Db)), K3 underside, K5 climb.
 
@@ -131,11 +143,13 @@ covers 56 % of an O20 disc, reaches 7.5 mm: the audit flags it); no continuity o
 
 ## Tests
 
-`OMP_NUM_THREADS=1 python3 -m pytest -q tools/test_concept_kit.py` (22 tests, ~35-45 s): directions vs band_impl, frames
-vs Bench, closure vs a brute-force circle scan on random vectors (both branches) and near-degenerate cases (b ~ w,
-tangent circles), K3 march vs a brute 1 mm march on real poses, `outer` vs concept_baseline, `dist_many` vs
-`B.dist` (incl. points outside the grid box), collisions on constructed hit / miss / exempt cases, `over`, K2 on a
-constructed flip (frames rule and dense rule), and the baseline row reproduction.
+`OMP_NUM_THREADS=1 python3 -m pytest -q tools/test_concept_kit.py` (26 tests, ~20 s on 4 idle cores; ~35-45 s
+loaded): directions vs band_impl, frames vs Bench, closure vs a brute-force circle scan on random vectors (both
+branches) and near-degenerate cases (b ~ w, tangent circles), K3 march vs a brute 1 mm march on real poses, `outer` vs
+concept_baseline, `dist_many` vs `B.dist` (incl. points outside the grid box), collisions on constructed hit / miss /
+exempt cases, `over`, K2 on a constructed flip (frames rule and dense rule), the baseline row reproduction, and the
+constructed cases of Verification 2: `over` at the final radius (bug 4), the K6 zone per hub radius (bug 5, incl. the
+`zone=` override for sub-chains), `over` in K6's pair order (bug 6), the declared slim hub audit.
 
 ## Verification (adversarial verifier, 2026-10-15)
 
@@ -170,7 +184,8 @@ Bugs found and fixed (each with a test):
 
 Honesty holes closed (`audit`, run by every `evaluate`; `honest` = march + K2 + K6 + clean audit):
 skipped hub -> ValueError unless the joint is declared in `Chain.hubless` (listed in the report); hub smaller than O20
-(< 75 % of the disc within 10.5 mm or reaching < 9.5 mm) -> flagged (it flags the baseline's own hub 1, a quirk);
+(< 75 % of the disc within 10.5 mm or reaching < 9.5 mm) -> flagged (it flags the baseline's own hub 1, a quirk),
+unless it is a declared catalogue slim hub that covers its own disc (Verification 2);
 sparse sampling (median spacing > 4 mm at real radius) -> flagged, spacing reported per member; build not pose-local
 (uses B or all-pose statistics, so dense K2 and the fit see different geometry) -> flagged; held-out clips in the bench
 -> ValueError; checks off (`outer`, `cont=False`, `collide=False`) -> `honest` false; `write_row` refuses a non-honest
@@ -182,3 +197,100 @@ Holes that remain (the verifier must look): a member that samples only part of i
 (the kit cannot know the true outline), understated thickness `t`, a sweep re-run with `resume=False` that drops
 earlier configurations, `n_configs` written by hand, a model that reads poses outside `B` (only held-out clips in
 B are caught), monkey-patching the kit.
+
+## Verification 2: `over` vs K6 near a shared joint, slim hubs (2026-10-16)
+
+Found on `docs/concepts/models/spine-parked-j2-3r.py` (spherical 3R at the k4216 seats: az 95.8565, el 65.2093,
+a1 40.3436, a2 74.0692, wd 84.7998, wa -11.3702, sigma -1, q 0.98), Bench(60, 160), fast grid cache, march, dense K2,
+K6. Three bugs made `over` (K6 clearance by construction) and `collisions` (K6) disagree, so a member built to pass
+over another was still rejected, and the O20 exemption around a slim hub hid an unchecked band. Each has a constructed
+test; each test fails when its own fix is reverted and passes otherwise (mutation check).
+
+4. **`over` judged the shared-joint exemption at the pre-raise radius.** `_near` exempts samples within the zone (mm
+   of arc = angle x radius) of a shared joint axis. `_over` called it with the underside BEFORE the K5 climb
+   (`xa_all = broadcast(r)`), `collisions` with the final one. A link-2 sample 12.8 mm from J2 at its final 63.2 mm is
+   ~10 mm from J2 at its pre-raise ~50 mm: `_over` skipped it as exempt, the climb lifted it partly, K6 found link 1 /
+   link 2 overlapping (20 of 170 closing poses). Now `fit_profiles` iterates `_over` and the climb to a fixed point
+   (both only raise; 2-4 passes; a warning after 20), so `_over` last tested every sample at its final radius.
+   `test_over_decides_the_k6_zone_at_the_final_radius` (that 12.8 / 10.1 mm sample, constructed).
+5. **The K6 zone ignored the hub's size.** `_near` exempted HUB_R + 2 = 12 mm at every joint and `strap_member`'s
+   `end_mm` defaults to the same. A model with a slim hub (`hub_member(rad=7.5)`) and ramps shortened to rad + 2 left
+   link 1 / link 2 unchecked between 9.5 and 12 mm from the joint: optimistic. Now `hub_zones(chain)` gives each joint
+   min(hub radius, HUB_R) + 2, the hub radius being width / 2 of the joint's `hub_member` (`Member.hub`); a joint
+   without one (hubless, rings, hand-built cap hubs) keeps 12 mm. A hub larger than O20 keeps 12 mm too: a zone grown
+   with the hub would open the same unchecked band the other way round, since the ramps hold the partners at their
+   stack levels only 12 mm by default. `collisions(..., zone=)` serves models that test sub-chains without the hub
+   member. `test_k6_zone_follows_the_hub_radius`.
+6. **`over` asked in the other pair order.** `_near` is not symmetric (arc at the first member's radius, the second
+   member's LARGEST sample half extent). `collisions` tests pairs in `Chain.members` order, `_over` tested (upper,
+   lower). With O15 hubs, 5 poses stayed rejected after fixes 4 and 5: link 1 (listed first, 55.6 mm) and link 2
+   (59.0 mm; its far end at 84 mm makes its largest half extent 1.2 mm) are 3.1 mm apart at link 1's radius (near:
+   < 3.2) but 3.3 mm at link 2's (not near: > 3.0), 0.4 mm radial gap. `_over` now runs `_near` on the points K6 sees
+   (`member_points`) in K6's order. `test_over_tests_the_pair_in_the_k6_order`.
+
+Each fix on and off (gap, K6-rejected poses of 170 closing; spine-parked at the seats above):
+
+| case | old kit | 5 only | 4 only | 4 + 6 | 4 + 5 + 6 (now) |
+|---|---|---|---|---|---|
+| O20 hubs, 12 mm ramps | 54.35 (20) | 54.35 (20) | 37.53 (0) | 37.53 (0) | **37.53** (0) |
+| O20 hubs, 14 mm ramps (`end_extra 2`) | 38.73 (0) | 38.73 (0) | 38.73 (0) | 38.73 (0) | **38.73** (0) |
+| O15 hubs at J2 / J3, 12 mm ramps | 44.49 (15) | 38.25 (5) | 36.95 (5) | 32.01 (0) | **33.38** (0) |
+| O15 hubs, ramps rad + 2 (link 1 12 mm, link 2 9.5 mm) | 35.11 (7) | 38.18 (5) | 36.35 (5) | 31.40 (0) | **33.31** (0) |
+
+The O20 zone around an O15 hub was worth ~2 points of optimism (31.40 vs 33.31); with all three fixes the ramp length
+no longer matters (33.38 vs 33.31). Independent check: a float64 brute-force K6 (own loops, exact arccos, own reading
+of the zones) agrees with the kit pose for pose on these four cases, the sweep's best entry and the template at q 0.95 /
+1.0 (0 hits each), and on virtual-pole-4bar-j2 k472 / -j1 k700 (41 / 22 hits).
+
+**Declared slim hubs.** `tools/hardware_catalogue.json` rotary_bearings `MR117-pair-O15-slim`: 2 x MR117-2RS in a
+2.0 mm Ti wall, OD 15, 12.25 mm stack, internal DIN 472 retention (hand calc: docs/concepts/spine-parked-j2-3r.md).
+`audit` reads `Chain.info['hub_rad']`. A declared radius < 10 with a catalogue hub of that OD (`catalogue_hubs()`) is
+checked against that disc (>= 75 % covered within rad + 0.5, reaching >= rad - 0.5, thickness >= its stack) and listed
+in the report's `declared_hubs`. An undeclared slim hub, or a radius with no catalogue entry (O17), still gets "smaller
+than O20"; a declared O15 built smaller gets "smaller than its declared MR117-pair-O15-slim". `test_audit_declared_slim_hub`.
+
+**Committed sweep numbers that move (a measurement change, not a design change).** Every kit model with a sweep file:
+its best 3 entries by gap and its first entry (spine-parked-j2-3r: all 245), re-evaluated through
+`tools/concept_sweep.py`'s hooks on Bench(60, 160) fast, kit before (85c53e7) and after, ONE FRESH PROCESS PER MODEL
+(several models monkeypatch the kit at import - `K.collisions`, `K.fit_profiles`, `K._levels`, `K.HUB_R` - so a shared
+process leaks the patches into the next model).
+
+| model | entry k | committed | before (HEAD) | after |
+|---|---|---|---|---|
+| spine-parked-j2-3r | 32 (best) / 196 / 110 / 0 | 31.90 / 33.86 / 32.53 / 54.35 | same | 32.35 / 32.88 / 32.98 / 37.53 |
+| floating-centre-3r | 28 / 31 / 32 | 58.17 / 59.73 / 62.93 | 61.76 / 87.27 / 58.48 (stale) | 51.69 / 51.98 / 58.04 |
+| seed-2r-cring | 8 (best) / 19 / 23 | 129.98 / 134.81 / 139.60 | same | 126.23 / 138.58 / 127.59 |
+| fivebar-roll | 13 (best) / 6 / 7 / 0 | 89.13 / 90.30 / 94.80 / 95.89 | same | 88.46 / 89.61 / 94.41 / 95.86 |
+| back-anchored-ring-3r | 12 (best) / 14 / 13 | 82.26 / 83.80 / 85.78 | same | 82.72 / 84.26 / 86.22 |
+| clavicular-front-route | 414 (best) / 303 / 0 | 65.53 / 67.19 / 218.34 | 65.53 / 67.19 / 230.75 | 65.52 / 66.10 / 226.10 |
+| j2-arc-sector-3r | 1 / 0 (best 78.47 unchanged) | 82.81 / 93.88 | same | 81.79 / 92.96 |
+| pointer-cslide | 375 (best) / 469 / 366 | 69.84 / 70.23 / 71.48 | same | 69.78 / 70.22 / 71.47 |
+| virtual-pole-4bar-j2 | 472 (best 104.57 unchanged) | 122.09 | same | 124.16 |
+| virtual-pole-4bar-j1 | 700 (best 152.69 unchanged) | 182.68 | same | 178.48 |
+| meridian-goniometer | 63 (best 86.81 unchanged) | 89.79 | same | 89.64 |
+| seed-pauldron-shells | 0 (best 70.26 unchanged) | 90.07 | same | 88.37 |
+| scapular-race-j2-carriage | 0 (best unchanged) | 158.84 | 155.40 (stale) | 159.69 |
+| risley-turret | 42 | 63.17 | 68.17 (stale) | 67.98 |
+| rail-elbow | 0 (best 56.25 unchanged) | 100.46 | 101.32 (stale) | 98.25 |
+
+spine-parked-j2-3r, all 245 entries (all reproduce at HEAD): 238 move (180 down, 58 up, median -0.36, -26.85 to
++1.25); entries with K6 rejections 122 -> 5 (the 5 left are hub 1 / neck and link 1 / neck, pairs no `over` covers);
+best still k32, 31.90 -> 32.35; best O20 entry k227 37.37 unchanged; the 12 mm-ramp O15 entries (k2, k5) 44.49 ->
+33.38. fivebar-roll k13 also turns honest (its coupler 2 spacing 4.03 mm -> under the 4 mm audit limit).
+Gap unchanged, only the Ti mass moves (-0.1 to -3 %): annular-ring-3r, crown-ring-3r, fold-sph3r, twin-rail-one-hub,
+the best entries of j2-arc-sector-3r and meridian-goniometer, `_template` (69.29 / 65.05; Ti 125.1 -> 124.9 g,
+176.7 -> 175.4 g). Unchanged: baseline-3r-kit (68.93 / 70.27),
+raglan-routed-3r, trombone-arc, posterior-max-margin-cardan (its own over + climb loop), fraction-pauldron (its own
+profiles; its committed 92.32 reads 189.73 at HEAD before and after). "Stale" = the committed number did not reproduce
+at HEAD on the unchanged kit either (model or kit changed after the sweep: also annular-ring-3r k51 / k52,
+posterior-max-margin-cardan, the k0 rows of trombone-arc, seed-2r-cring, pointer-cslide); re-sweep those separately.
+
+Gap is not monotone in this fix: a pose K6 no longer rejects is taken, and costs 100 x contact if metal is in the skin
+there (seed-2r-cring k19, back-anchored-ring-3r, scapular race k0); `over` now raises only where K6 looks, so some
+members sit lower (mass down) and nearer the skin; a member raised to clear its `over` targets can meet a member not in
+its list (virtual-pole-4bar-j2 k472: link 1 / coupler 36 -> 39 poses).
+
+Holes that remain: a hub larger than O20 keeps the 12 mm zone (pessimistic: its partners are checked over the outer
+part of its disc); a `flat` member with `over` (a plate's per-sample raise is not represented: `member_points` uses one
+level); a model that calls `collisions` on sub-chains without the hub member must pass `zone=` (no committed model has
+a slim hub on that path today).

@@ -173,6 +173,87 @@ def test_over_clears_by_construction():
     assert not K.collisions(ch, pts, ch.ok).any() and K.collisions(ch, {"A": D * 70.0, "B": D * 71.0}, ch.ok).all()
 
 
+def _fixed_levels(monkeypatch, raw):
+    """fit_profiles on given raw undersides (no bench): K._levels returns copies of raw {member name: rho (m,)}"""
+    monkeypatch.setattr(K, "_levels", lambda B, chain, fit, q, mode: {n: np.array(r, float) for n, r in raw.items()})
+
+
+def _k6(ch, prof):
+    return K.collisions(ch, {m.name: K.member_points(m, prof[m.name]) for m in ch.members}, ch.ok)
+
+
+def test_over_decides_the_k6_zone_at_the_final_radius(monkeypatch):
+    """KIT.md Verification bug 4 (measured on spine-parked-j2-3r: 20 of 170 closing poses). link 2 passes over link 1;
+    both leave J2 along the same arc (O20 zone: 12 mm). link 2 sits at 50 mm up to row 7 (0.202 rad from J2) and at
+    66.67 mm beyond. Row 7 is 10.1 mm of arc from J2 at its pre-raise 50 mm (exempt), so one `over` pass skips it; the
+    K5 climb then lifts it to 63.2 mm, where it is 12.8 mm from J2 (not exempt) and inside link 1's [60.5, 63.5] + 0.5:
+    K6 rejects every pose. Now `over` + climb run to a fixed point and K6 finds nothing."""
+    P = 2; c, s = math.cos(0.5), math.sin(0.5); Rx = np.array([[1, 0, 0], [0, c, -s], [0, s, c]])   # pose 1: all rotated
+    k = np.stack([[0, 1.0, 0], Rx @ [0, 1.0, 0]]); e = np.stack([[0, 0, 1.0], Rx @ [0, 0, 1.0]]); a = 48.5 / 70
+    v = math.cos(a) * k + math.sin(a) * e
+    l1 = K.strap_member("link1", k, v, ("J1", "J2")); l2 = K.strap_member("link2", k, v, ("J2", "J3"), over=[("link1", 1.0)])
+    ns, nc = l2.grid; row = np.repeat(np.arange(ns), nc); ch = K.Chain(members=[l1, l2], ok=np.ones(P, bool), joints=dict(J2=k))
+    raw = {"link1": np.full(ns * nc, 60.5), "link2": np.where(row <= 7, 50.0, 66.67)}
+    old = K._climb(l2, K._over(ch, l2, raw["link2"], {"link1": raw["link1"]}, ch.ok))      # one pass, then the climb
+    ang = np.arccos(np.clip(np.einsum("pmd,pd->pm", l2.D, k), -1, 1))[0]
+    r7 = (row == 7) & (np.arange(ns * nc) % nc == nc // 2)                                  # row 7, centre column
+    assert np.isclose(old[r7][0], 63.2, atol=0.01) and abs(ang[r7][0] * 50 - 10.1) < 0.05 and abs(ang[r7][0] * 63.2 - 12.8) < 0.05
+    assert _k6(ch, {"link1": raw["link1"], "link2": old}).all()                             # the old construction: K6 hit
+    _fixed_levels(monkeypatch, raw)
+    prof = K.fit_profiles(None, ch, ch.ok)
+    assert not _k6(ch, prof).any()
+    assert np.allclose(K._over(ch, l2, prof["link2"], prof, ch.ok), prof["link2"])         # a fixed point of `over`
+    assert np.allclose(K._climb(l2, prof["link2"]), prof["link2"]) and np.isclose(prof["link2"][r7][0], 64.5)   # link 1 top + 1
+
+
+def test_k6_zone_follows_the_hub_radius(monkeypatch):
+    """KIT.md Verification bug 5: the K6 exemption was HUB_R + 2 = 12 mm at every joint, so around a slim O15 hub
+    (hub_member(rad=7.5)) link 1 / link 2 went unchecked between 9.5 and 12 mm (with end_mm = rad + 2 an optimistic
+    hole: 35.11 vs 44.49 measured). Partners stacked 0.15 mm apart (the hub stack spacing) 10-11.5 mm from J2: exempt
+    at an O20 hub, hubless or a larger hub (the zone is capped at 12), a K6 hit at the O15 hub, and `over` (which uses
+    the same zones) lifts the upper one there."""
+    P = 2; k = np.tile([0.0, 1, 0], (P, 1)); a_, b_ = K.plane_frame(k)
+    d = np.array([10.0, 10.5, 11.0, 11.5]); y = np.array([-2.0, 0.0, 2.0])
+    th, cs = (d[:, None] / 60.0 + 0 * y).ravel(), (y[None, :] / 60.0 + 0 * d[:, None]).ravel()   # mm of arc at r 60
+    D = K.unit(np.cos(th)[None, :, None] * k[:, None] + np.sin(th)[None, :, None] * a_[:, None] + cs[None, :, None] * b_[:, None])
+
+    def chain(rad, over=()):
+        lo = K.Member("link1", D, joints=("J1", "J2")); up = K.Member("link2", D.copy(), joints=("J2", "J3"), over=list(over))
+        hubs = [K.hub_member("hub2", k, "J2", rad=rad)] if rad else []
+        return K.Chain(members=hubs + [lo, up], ok=np.ones(P, bool), joints=dict(J2=k))
+    n = len(th); raw = {"hub2": np.full(1, 40.0), "link1": np.full(n, 60.0), "link2": np.full(n, 63.15)}
+    for rad, zone, hit in ((10.0, 12.0, False), (None, 12.0, False), (19.5, 12.0, False), (7.5, 9.5, True)):
+        ch = chain(rad); assert K.hub_zones(ch) == {"J2": zone}
+        prof = {"link1": raw["link1"], "link2": raw["link2"]}
+        if rad: prof["hub2"] = np.full(len(ch.members[0].xy), 40.0)
+        assert _k6(ch, prof).all() == hit and _k6(ch, prof).any() == hit, rad
+        pair = K.Chain(members=ch.members[-2:], ok=ch.ok, joints=ch.joints)                # a pair without the hub:
+        pp = {m.name: K.member_points(m, prof[m.name]) for m in pair.members}               # O20 zone unless told
+        assert not K.collisions(pair, pp, ch.ok).any() and K.collisions(pair, pp, ch.ok, zone=K.hub_zones(ch)).all() == hit
+        ch = chain(rad, over=[("link1", 1.0)])
+        _fixed_levels(monkeypatch, dict(raw, hub2=np.full(len(ch.members[0].xy) if rad else 1, 40.0)))
+        pf = K.fit_profiles(None, ch, ch.ok); assert not _k6(ch, pf).any()
+        assert np.allclose(pf["link2"], 64.0 if hit else 63.15), rad                        # 60 + 3 + 1 only at O15
+
+
+def test_over_tests_the_pair_in_the_k6_order(monkeypatch):
+    """KIT.md Verification bug 6: `_near` is not symmetric (arc at the first member's radius, the second's largest
+    sample extent) and collisions() tests a pair in Chain.members order. Measured on spine-parked-j2-3r with O15 hubs: 5 poses where link 1 (listed
+    first, 55.6 mm) and link 2 (59.0 mm, its far end at 84 mm) are 3.1 mm apart at link 1's radius (near: < 1 + 1.2 + 1)
+    but 3.3 mm at link 2's (not near: > 1 + 1 + 1), 0.4 mm radial gap. `over` now asks in K6's order."""
+    P = 2; t = np.radians(np.linspace(-20, 20, 21)); side = 3.1 / 55.6
+    DA = np.tile(np.stack([np.sin(t), 0 * t, np.cos(t)], -1)[None], (P, 1, 1))
+    DB = K.unit(np.tile(np.stack([np.sin(t), math.tan(side) + 0 * t, np.cos(t)], -1)[None], (P, 1, 1)))
+    raw = {"link1": np.full(21, 55.6), "link2": np.where(np.arange(21) >= 18, 84.0, 59.0)}
+    _fixed_levels(monkeypatch, raw)
+    for first in (True, False):
+        lo = K.Member("link1", DA, joints=("J1",)); up = K.Member("link2", DB, joints=("J2",), over=[("link1", 1.0)])
+        ch = K.Chain(members=[lo, up] if first else [up, lo], ok=np.ones(P, bool), joints={})
+        h = _k6(ch, raw); assert h.all() if first else not h.any()          # listed first, link 1 makes the pair near
+        prof = K.fit_profiles(None, ch, ch.ok); assert not _k6(ch, prof).any()
+        assert np.allclose(prof["link2"][:18], 59.6 if first else 59.0)      # raised only where K6 looks
+
+
 def test_template_runs_on_kit_conventions(B):
     import importlib.util
     p = os.path.join(K.REPO, "docs", "concepts", "models", "_template.py")
@@ -210,7 +291,7 @@ def test_dense_continuity_axis_check_ignores_fake_q(B):
     assert f1 > 0 and ok1.sum() < ok.sum()
 
 
-def _tiny_chain_model(hub_rad=K.HUB_R, nonlocal_=False, hubless=()):
+def _tiny_chain_model(hub_rad=K.HUB_R, nonlocal_=False, hubless=(), info=None):
     def build(B, F, p):
         p1 = F.S(K.bvec(2.4, 80.7)); p3 = F.HG(K.wdir(86.3, 21.8)); p2, ok, _ = K.closure(p1, p3, 76.9, 66.7, -1, 10)
         if nonlocal_: ok = ok & (np.arange(len(p1)) % 2 == 0)                       # depends on the pose index, not on F
@@ -218,7 +299,7 @@ def _tiny_chain_model(hub_rad=K.HUB_R, nonlocal_=False, hubless=()):
         mem = [K.hub_member("hub1", p1, "J1", rad=hub_rad), K.hub_member("hub3", p3, "J3"),
                K.strap_member("link1", p1, p2, ("J1", "J2"), ramp_to=(("hub1", K.STACK), (None, 0)))]
         if "J2" not in hubless: mem.append(K.hub_member("hub2", p2, "J2"))
-        return K.Chain(members=mem, ok=ok, q=q, joints=dict(J1=p1, J2=p2, J3=p3), hubless=hubless)
+        return K.Chain(members=mem, ok=ok, q=q, joints=dict(J1=p1, J2=p2, J3=p3), hubless=hubless, info=dict(info or {}))
     return build
 
 
@@ -238,6 +319,20 @@ def test_audit_closes_honesty_holes(B, tmp_path):
     import json; saved = json.load(open(out))
     assert len(saved) == 2 and all(e["gap"] == K.CB.gap_of(e["inband14"], e["follow"], e["reach"], e["contact"]) for e in saved)
     assert all(e["honest"] for e in saved)
+
+
+def test_audit_declared_slim_hub(B):
+    """a hub smaller than O20 is honest only as a DECLARED catalogue component: Chain.info['hub_rad'] names its radius,
+    tools/hardware_catalogue.json holds it (7.5 = MR117-pair-O15-slim) and the sampled disc covers that disc"""
+    assert K.catalogue_hubs()[7.5]["id"] == "MR117-pair-O15-slim" and K.catalogue_hubs()[7.5]["stack"] == K.CROWN
+    r = K.evaluate(B, _tiny_chain_model(hub_rad=7.5, info=dict(hub_rad=dict(J1=7.5))), {})
+    assert r["honest"] and not r["audit"] and r["declared_hubs"]["J1"]["component"] == "MR117-pair-O15-slim"
+    r = K.evaluate(B, _tiny_chain_model(hub_rad=7.5), {})                                    # not declared
+    assert not r["honest"] and any("hub1: hub of J1 smaller than O20" in x for x in r["audit"]) and not r["declared_hubs"]
+    r = K.evaluate(B, _tiny_chain_model(hub_rad=5.0, info=dict(hub_rad=dict(J1=7.5))), {})   # declared O15, built O10
+    assert not r["honest"] and any("smaller than its declared MR117-pair-O15-slim" in x for x in r["audit"])
+    r = K.evaluate(B, _tiny_chain_model(hub_rad=8.5, info=dict(hub_rad=dict(J1=8.5))), {})   # O17: no catalogue entry
+    assert not r["honest"] and any("smaller than O20" in x for x in r["audit"])
 
 
 def test_strap_layout_pose_local():

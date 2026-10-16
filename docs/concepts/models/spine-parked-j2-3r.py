@@ -11,7 +11,8 @@ this bench and is judged separately (catalogue: cuff liner, one RSR3M along the 
 Kinematics and members = docs/concepts/models/_template.py build() (= fold-sph3r's), with three changes:
   * per-hub radius: rad1 / rad2 / rad3 (mm). 10 = the O20 v5 hub. 7.5 = the slim O15 hub: the SAME MR117-2RS pair
     (7 x 11 x 3) in a 2.0 mm Ti wall (bore 11 H7 + 2 x 2), same 12.25 mm stack. The kit's audit asks for O20 discs;
-    a slim hub is accepted here only as a DECLARED component (SLIM below, hand calc in docs/concepts/spine-parked-j2-3r.md):
+    a slim hub is accepted here only as a DECLARED component (SLIM below, hand calc in docs/concepts/spine-parked-j2-3r.md;
+    O15 is also the catalogue hub MR117-pair-O15-slim, which the kit audit now accepts itself via Chain.info['hub_rad']):
     its sampled disc must cover >= 75 % of ITS declared disc and reach >= rad - 0.5 - otherwise the problem stands
     and the report is not honest. Crowns, walls and K6 use the declared radius.
   * the crown / wall skin check, near-touch and overhead split of fold-sph3r (lessons d, e): every hub is a solid
@@ -53,9 +54,10 @@ def build(B, F, p):
     r1, r2, r3 = float(p["rad1"]), float(p["rad2"]), float(p["rad3"])
     hubs = [K.hub_member("hub1", p1, "J1", rad=r1), K.hub_member("hub2", p2, "J2", rad=r2), K.hub_member("hub3", p3, "J3", rad=r3)]
     w = 8.0 if p.get("vm") else p["width"]; t = p["t_link"]
-    # strap end zone held at its hub's level: HUB_R + 2 = 12 mm for EVERY hub (also the slim ones): K6 exempts joint
-    # partners within HUB_R + 2 of the shared joint whatever the hub size, so a shorter ramp would leave link 1 / link 2
-    # unchecked against each other between rad + 2 and 12 mm (an optimistic hole, measured: see the doc)
+    # strap end zone held at its hub's level: HUB_R + 2 = 12 mm for EVERY hub (also the slim ones). Since the kit fix of
+    # 2026-10-16 (KIT.md Verification, bugs 4-6) K6 exempts the partners of a slim hub only within rad + 2 mm, so the
+    # part of a 12 mm ramp beyond rad + 2 is checked (and link 2 lifted by `over`); a rad + 2 ramp is equally honest now
+    # (it was an unchecked band between rad + 2 and 12 mm before the fix: see the doc)
     end = lambda r: K.HUB_R + 2.0 + float(p.get("end_extra", 0.0))
     links = [K.strap_member("link1", p1, p2, ("J1", "J2"), width=w, t=t, ramp_to=(("hub1", K.STACK), ("hub2", 0.0)), end_mm=end(max(r1, r2))),
              K.strap_member("link2", p2, p3, ("J2", "J3"), width=w, t=t, ramp_to=(("hub2", K.STACK), ("hub3", K.STACK)),
@@ -91,7 +93,7 @@ def declared_audit(r, p):
             if rad in SLIM and cov >= 0.75 and reach >= rad - 0.5:
                 decl[m.group(2)] = dict(rad=rad, component=SLIM[rad], cover=round(cov, 3), reach=reach); continue
         keep.append(msg)
-    r["audit"] = keep; r["declared_hubs"] = decl
+    r["audit"] = keep; r["declared_hubs"] = dict(r.get("declared_hubs") or {}, **decl)   # + the kit's catalogue hubs (O15)
     c = r.get("checks") or {}
     r["honest"] = c.get("mode") == "march" and c.get("cont") in (True, "frames") and bool(c.get("collide")) and not keep
     return r

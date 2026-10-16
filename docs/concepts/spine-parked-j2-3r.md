@@ -76,8 +76,10 @@ Sweep log: `docs/concepts/sweeps/spine-parked-j2-3r.json`. Row: `docs/concepts/r
   housing is a simple machined part.
   - The model accepts a slim hub only as a DECLARED component (`SLIM` in the model). Its sampled disc must cover
     >= 75 % of its own disc and reach >= rad - 0.5. Crowns, walls and K6 use the declared radius.
-  - To do (shared files, not edited by this track): add a `MR117-pair-O15-slim` entry to
-    tools/hardware_catalogue.json and a declared-radius path to the kit audit.
+  - Done 2026-10-16: `MR117-pair-O15-slim` is in tools/hardware_catalogue.json (rotary_bearings), and the kit audit
+    checks a radius declared in `Chain.info['hub_rad']` against it (`K.catalogue_hubs`), so the O15 hub no longer
+    needs the model's own `declared_audit` (O17 still does: it has no catalogue entry). K6 now exempts a slim hub's
+    partners only within rad + 2 = 9.5 mm (docs/concepts/KIT.md, Verification 2).
 
 ## The split: kit vs VModel at the same axes, settled
 
@@ -108,6 +110,11 @@ What differs, and which side is right:
    - The physical fix is real and cheap: hold each strap end at its hub's stack level for 14 mm instead of 12
      (`end_extra`). The upper link then stays on the hub's upper plate until it has cleared the lower link.
    - The kit bug is reported as a separate task, with a test to add.
+   - **Fixed in the kit 2026-10-16** (docs/concepts/KIT.md, Verification 2, bugs 4-6: `over` iterated with the climb
+     to a fixed point, asked in K6's pair order, K6 zone per hub radius). Same axes, Bench(60,160) fast, O20 hubs:
+     12 mm ramps 54.35 -> **37.53** (0 K6 rejections, was 20), `end_extra 2` 38.73 unchanged. With the O15 hubs:
+     12 mm ramps 44.49 -> 33.38, rad + 2 ramps 35.11 -> 33.31 (the slim-hub zone closed a ~2-point optimistic hole,
+     the other two fixes removed the remaining K6 rejections). The table above is the pre-fix measurement.
 2. **The fold margin along the motion (worth 3.4 points; the kit is right).**
    - Raw 10 fps Raise-overhead clip at k4216: the chain closes in every frame, minimum margin 7.9 deg, 12 frames inside
      the 10 deg jam margin.
