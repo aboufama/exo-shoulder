@@ -20,8 +20,8 @@
  "v_inband10": null,
  "v_gap": null,
  "n_configs": 5912,
- "verdict": "in progress: best 29.38 on Bench(60,160) fast (score 89.3), CMA gate passed on stream 3; frozen exact Bench(110,360) wear running",
- "note": "in progress",
+ "verdict": "screened: 29.38 on Bench(60,160) fast (score 89.3), FROZEN exact Bench(110,360) 41.19 (score 85.0, self-measured, not verified): below the leaders (pin knee 29.54 verified at margin 5). The relay is real (+17-20 points over a plain 3R / the slide locked at the same seats on the fast bench) but the slot under hub 3 costs hub 3's band; the judge's 20-23 kinematic estimate did not survive the kit (S1 seed 69.23 in the kit).",
+ "note": "margin 5 (user ruling), O20 x3, 0 passive translations, 1 passive rotation (GH-concentric slot, sensed, CF-spring returned), complexity 14.75. 5912 configs: coarse 220 (spec layout) + 200 (side 1: slot at the root of a long link 2) + CMA 4 streams (5492); a side-2 coarse (hub beside the rail, 150), 3 side-1 CMA, a polish and a near-touch CMA were queued on the farm at the time-box end (.cache/a2s/). GATE (stream 3, the best): +0.44 score over the 2nd half, +0.44 over the last third, top-5 spread 0.00 -> converged; other streams 37.75-41.96 (other basins). Controls (fast): plain 3R same seats 46.24, slide locked 48.93. Margin 10: coarse leader 49.91 -> 71.49. Flood fill on the raw 1432-pose grid: 119 relay edges, 0 relay jams, 0 islands. R17 statics: gravity self-motion force <= 0.016 N m/rad vs 1.5 N CF spring at the slot radius 0.099 N m (+0.004 friction): holds. Kit finding: `over` measures the joint-exempt zone at the pre-climb radius, K6 at the final one (17 % of S1 poses jammed until link 1 got a spacer).",
  "doc": "docs/concepts/short-a2-arc-slide-3r.md",
  "honest": true,
  "checks": {
@@ -86,7 +86,7 @@
   "near": 0
  },
  "best_k": 4179,
- "limiter": "hub 3 sits on the slot (F3 = rail 66 + 3.15: hub 3 in band 0.31 vs 0.87 for the plain 3R at the same seats); overhead ws 0/12 (hub 3 buried at elev 150: requirement 125-400 mm); near-touch: gap 53.76 if metal < 1 mm counts as contact",
+ "limiter": "hub 3 rides the slot: F3 = slot radius + 3.15 (hub 3 0.31-0.33 in band vs 0.87 for the plain 3R at the same seats) and the neck becomes J3's upper member (0.64 vs 0.83); the slot zone must be ONE radius over the whole travel, so CMA shrank the travel to 5.6 deg (slide opens on 13/220 poses) which caps the relay; fast -> frozen reach 0.744 -> 0.661 (seats tuned to the 160-pose sample); overhead workspace 7/28 frozen (hub 3's lateral-deltoid seat is buried at elev 150); near-touch: gap 61.62 frozen if metal < 1 mm counts as contact",
  "complexity": 14.75,
  "overhead": {
   "n_ws": 12,
@@ -159,5 +159,82 @@
   "same_seats_plain_3r": 46.24,
   "slide_locked_same_model": 48.93,
   "note": "Bench(60,160) fast; plain 3R = spine-parked-j2-3r.py at a1 42.143, a2 45.5057, same u1/u3, q 0.96, O20"
+ },
+ "frozen": {
+  "gap": 41.19,
+  "reach": 0.6611,
+  "follow": 1.0,
+  "inband14": 0.7813,
+  "inband10": 0.3977,
+  "contact": 0.0543,
+  "gap_near1": 61.62,
+  "min_metal_skin": 0.02,
+  "overhead": {
+   "n_ws": 28,
+   "reach": 0.25,
+   "n_clip": 10,
+   "follow": 1.0,
+   "n_taken": 17,
+   "inband14": 0.7812,
+   "inband10": 0.5143
+  },
+  "inband_member": {
+   "hub1": 0.9883,
+   "hub2": 0.9878,
+   "rail_t": 0.8152,
+   "rail_r": 0.7911,
+   "link1": 0.9885,
+   "hub3": 0.3348,
+   "neck": 0.6393
+  },
+  "taken_slide": {
+   "home": 336,
+   "open": 12,
+   "ws_open": 7,
+   "clip_open": 5,
+   "slide_p95": 5.45
+  },
+  "modes": {
+   "A": 377,
+   "B": 13,
+   "C": 0,
+   "none": 80
+  },
+  "flood": {
+   "grid": 1432,
+   "static": 0.7709,
+   "connected": 0.7709,
+   "home": 0.7409,
+   "relay_edges": 119,
+   "relay_jams": 0,
+   "jams": 3,
+   "overhead_static": 0.5833,
+   "overhead_connected": 0.5833,
+   "islands": 0
+  },
+  "honest": true,
+  "mode": "exact",
+  "bench": [
+   110,
+   360
+  ],
+  "islands_dropped": 0,
+  "crown_contact_poses": 11,
+  "protocol": "fit on Bench(60,160) fast (K6 1 mm), shape frozen, worn on Bench(110,360) exact, margin 5",
+  "self_measured": true,
+  "near1": {
+   "reach": 0.6194,
+   "follow": 0.8727,
+   "inband14": 0.7749,
+   "contact": 0.1332
+  }
+ },
+ "gate": {
+  "stream": "cma3",
+  "gain_second_half": 0.44,
+  "gain_last_third": 0.44,
+  "top5_spread": 0.0,
+  "converged": true,
+  "n_stream": 1601
  }
 }

@@ -2,13 +2,13 @@
 
 Round 5 pick (lens round5:reseat-for-union). Model: `docs/concepts/models/short-a2-arc-slide-3r.py`.
 
-## Status (2026-10-16 ~08:05 UTC)
+## Status (2026-10-16 08:20 UTC): screened - 29.38 fast, 41.19 frozen exact (self-measured)
 
 | | gap | score | reach | follow | in-band 14 | in-band 10 | contact | note |
 |---|---|---|---|---|---|---|---|---|
 | **best, Bench(60,160) fast** (CMA stream 3, sweep k4179) | **29.38** | **89.3** | 0.744 | 1.000 | 0.779 | 0.392 | 0.017 | honest (march, K2 dense, K6, clean audit) |
 | same, metal < 1 mm counted as contact (lesson d) | 53.76 | 80.5 | 0.675 | 0.883 | 0.770 | | 0.115 | the near-touch number: optimistic by ~24 |
-| FROZEN exact Bench(110,360) (fit shape frozen, K6 1 mm) | FROZEN_GAP | | | | | | | FROZEN_NOTE |
+| FROZEN exact Bench(110,360) (fit shape frozen, K6 1 mm; self-measured, NOT verified) | **41.19** | 85.02 | 0.6611 | 1.0 | 0.7813 | 0.3977 | 0.0543 | near-touch gap 61.62, min metal-skin 0.02 mm, overhead ws reach 0.25 (28 poses), in band 0.7812 |
 | plain 3R at the same seats (spine-parked-j2-3r.py, a2 = a2h) | 46.24 | 83.2 | 0.631 | 0.933 | 0.742 | | 0.019 | control |
 | this model, slide locked (a2max = a2h) | 48.93 | 82.2 | 0.631 | 0.867 | 0.807 | | 0.044 | control: the relay is worth ~17-20 points here |
 | the spec's seed S1 in the kit (O20, margin 5) | 69.23 | 74.8 | 0.713 | 0.950 | 0.424 | 0.167 | 0.028 | proxy estimate was 14.13 |
@@ -51,11 +51,24 @@ m_stop 10) the coarse leader drops 49.91 -> 71.49 (reach 0.73 -> 0.59).
 - **Two variants built to remove the measured limiter** (`side`): side 1 puts the slot at the ROOT of a long link 2
   (carriage carries link 2b to hub 3 at its own level; bilateral travel): coarse best 45.30 (plain 3R at the same seats
   52.93), only 3 poses open the slide; side 2 puts hub 3 BESIDE the rail (carriage bridge to hub 3's upper flange, neck
-  back to J3's lower member): hub 3 in band 0.86 but the rail beside it climbs to 95 mm (in band 0) - SIDE2_NOTE
+  back to J3's lower member): hub 3 in band 0.86 but the rail beside it climbs to 95 mm (in band 0) - its coarse sweep (150 configs) was queued on the farm at the time-box end.
 
 ## Search (all Bench(60,160) fast, farm; docs/concepts/sweeps/short-a2-arc-slide-3r.json, in order)
 
-SEARCH_TABLE
+| stage | configs | best gap | reach / follow / in-band 14 | note |
+|---|---|---|---|---|
+| coarse, spec layout (slot under hub 3), seeds S1 / S2 +- the spec's ranges | 220 | 49.91 | 0.731 / 1.0 / 0.597 | hub 3 0.08 in band on the 2-mm carriage (+5.15) |
+| coarse, side 1 (slot at the root of a long link 2, bilateral) around the zc-frontier / spine-parked seats | 200 | 45.30 | 0.713 / 1.0 / 0.673 | 67 of 200 infeasible (rail tail under hub 3); slide opens on 3 poses |
+| CMA tip 1 (layout 1, 2-mm carriage) | 1089 | 39.00 | 0.725 / 1.0 / 0.713 | gate +0.42 / +0.19 / 0.02 |
+| CMA tip 2 (layout 0, integrated sole) | 1201 | 37.75 | 0.725 / 1.0 / 0.714 | gate +0.78 / +0.20 / 0.03 |
+| **CMA tip 3 (layout 1, integrated sole)** | 1601 | **29.38** | 0.744 / 1.0 / 0.779 | **gate +0.44 / +0.44 / 0.00: converged** |
+| CMA tip 4 (layout 1, integrated sole, long travel) | 1601 | 41.96 | 0.788 / 1.0 / 0.614 | gate +1.25 / +0.94 / 0.02 (not converged; the long-travel basin trades in-band for reach) |
+| coarse, side 2 (hub 3 beside the rail) | 150 | (queued) | | queued on the farm at the time-box end |
+| CMA side 1 x3, polish x1, near-touch objective x1 | | | | queued on the farm at the time-box end (results land in .cache/a2s/) |
+
+The gate (binding): stream 3 gained 0.44 score points over its second half and 0.44 over its last third, top-5 within
+0.00 points - converged. Across streams the basins differ (37.75-41.96 vs 29.38), so 29.38 is the best basin found,
+not a proof that no better basin exists.
 
 ## Red team (best config, Bench(60,160) fast; frozen numbers above)
 
@@ -66,7 +79,7 @@ SEARCH_TABLE
 - **Across the body**: 23/36 (13 lost to the fold: th past th_top 87.8). **Behind the back** 14/19. Rest 5/5.
 - **Near-touch**: min metal-skin 0.0 mm (pose ws plane 75 elev 30 axial -135); counting metal < 1 mm as contact the gap
   is 53.76 (contact 0.115, follow 0.883) - the q 0.96 underside leaves ~10 % of poses within 1 mm. The polish stream with
-  the near-touch objective (near 1) is the answer to that number: NEAR_NOTE
+  the near-touch objective (near 1) is the answer to that number: queued on the farm at the time-box end (stream cmaN1, `near 1`).
 - **Per part in band**: hub 1 0.99, hub 2 0.99, link 1 0.99, slot zone 0.82, rail root 0.79, neck 0.64, **hub 3 0.31**
   (F3 = 69.15 on the slot at 66: the sole stack), so hub 3 + the neck (J3's upper member) carry the in-band loss.
 - **The slide**: opens on 13 of 220 poses (10 ws, 3 clip; p95 5.45 deg, max 5.45 = full travel). CMA shrank the travel
@@ -82,7 +95,18 @@ radius over its whole travel. The CMA answered by shortening the travel to 5.6 d
 
 ## What next
 
-VERDICT_NEXT
+- **Verdict: screened, not a 90-crosser in this form.** 29.38 fast (score 89.3) wears 41.19 frozen exact on
+  Bench(110,360) (score 85.0, self-measured): reach 0.661, follow 1.0, in-band 0.781, contact 0.054, overhead
+  workspace 7/28, near-touch gap 61.62. The verified leaders sit at 27.2-29.5 (margin 5). An independent verifier
+  should re-run `frozen` (the farm jobs `.cache/a2s/jobs_fzU.json`, m 5 and m 10, were queued at the time-box end).
+- **The relay is worth its place** at a fixed seat (+17-20 fast points over the same-seat plain 3R, reach +0.11,
+  follow +0.07): a one-sided a2 relay on J2 stops is a sound, buildable fold lever (0 jams on the raw grid, holds
+  statically with a 1.5 N spring). What kills it here is WHERE the slot sits: under hub 3.
+- **Next lever (measured, not yet converged)**: keep hub 3 off the slot. Side 1 (slot at the root of a long link 2,
+  hub 3 at its own level) already gives 45.30 coarse at the leaders' seats vs 52.93 plain 3R; its CMA (3 streams) and
+  side 2 (hub beside the rail) were queued. Give a relay to the pin knee instead of a plain 3R: the pin knee closes the
+  cuff with hub 3 in band and loses 76 stretched poses - an a2 relay at its J2 (slot at the root, side 1 geometry) is the
+  direct transplant. Kit: fix `over` to measure the exempt zone after the climb.
 
 ## Deeper-version prompt (answered before modelling)
 
