@@ -409,6 +409,17 @@ dash.onData(() => {
   { const z = document.getElementById('tz-note'); if (z) z.textContent = `All times are US Eastern (${etZone()}).`; }
   const B = dash.data('board'), L = dash.data('leader'), S = dash.data('sweeps'), E = dash.data('events'), R = dash.data('reqs'), RS = dash.data('reqsum'), M = dash.data('morphs');
   const okd = (d) => d && d.status === 'ok';
+  { // data freshness: the newest sweep / event time in the datasets (the page itself is republished rarely; its data every ~15 min)
+    let last = 0;
+    if (okd(S)) for (const r of S.data) { const t = Date.parse(r.t); if (t > last) last = t; }
+    if (okd(E)) for (const r of E.data) { const t = Date.parse(r.time || r.t); if (t > last) last = t; }
+    const z = document.getElementById('tz-note');
+    if (z && last) {
+      const ago = Math.max(0, Math.round((Date.now() - last) / 60000));
+      const when = new Intl.DateTimeFormat('en-US', { timeZone: 'America/New_York', month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' }).format(new Date(last));
+      z.textContent = `All times are US Eastern (${etZone()}). Newest result in the data: ${when} (${ago < 60 ? ago + ' min' : Math.round(ago / 60) + ' h'} ago); the data refreshes about every 15 minutes.`;
+    }
+  }
   if (okd(L) && L.data[0] && L.data[0].score != null) {
     const l = L.data[0];
     document.getElementById('lede').textContent = l.delta > 0

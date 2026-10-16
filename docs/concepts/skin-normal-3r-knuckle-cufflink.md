@@ -77,3 +77,54 @@ of the 6 joint values continuous at 10 fps on the fit clips (step <= 25 deg). Pa
 adjacent (crank / crank strap vs link 1 at J2, link 2b vs crank strap at the knuckle, link 2b vs E arm at J3). Pins:
 IGLIDUR-PIN (O4 Ti pin, GSM sleeve, 2 GTM washers), modelled as 3 mm plates + 0.15 + 1 mm head (7.15 mm stack, more
 than the catalogue's 4.5-5). 3 active, 3 passive rotations, 0 passive translations.
+
+## Sweep (Bench(60,160) fast, every configuration in docs/concepts/sweeps/skin-normal-3r-knuckle-cufflink.json)
+
+| stage | configs | best gap | notes |
+|---|---|---|---|
+| local-check (first model) | 3 | 93.62 | snh seats, flat crank aimed along the line-foot difference |
+| coarse-farm (first model) | 288 | 36.33 | b1 = b2 = 0.2, crank strap lk 20; random configs never in the top 14 |
+| local-search (corrected model) | 81 | **28.64** (k 351) | from the knuckle-idle control 30.57; b1 0.007, b2 0.015, qk swing 3 deg |
+| local-search, b1 fixed 0.3 | 36 | 45.10 (k 403) | seats, cuff, crank free around a working knuckle (qk -8..+32 deg): the search buys in-band back by re-tuning the seats until the fold is back at 47 |
+| coarse-v2-farm (corrected model) | 224 | 27.60 (k 437) | J1 knuckle, b1 = b2 = 0: the knuckle IDLE (qk 0); J2 idle control 30.57; no random config in the top 12 |
+| CMA B0-B3 (farm) | queued | - | farm queue 57 deep at 02:39 UTC; filled below if back inside the time box |
+
+The b1 lever, measured with every part (leader seats, b2 0, J2 knuckle, crank strap lk 20, coarse v2):
+
+| b1 | gap | reach | in-band14 | fold | skin | parts | cuff |
+|---|---|---|---|---|---|---|---|
+| 0.0 | 30.57 | 0.669 | 0.872 | 47 | 8 | 0 | 0 |
+| 0.2 | 45.76 | 0.631 | 0.787 | 42 | 13 | 1 | 1 |
+| 0.4 | 87.47 | 0.613 | 0.606 | 36 | 21 | 14 | 4 |
+| 0.6 | 115.13 | 0.619 | 0.416 | 30 | 16 | 20 | 13 |
+| 0.8 | 114.32 | 0.575 | 0.404 | 28 | 16 | 15 | 19 |
+
+The fold falls 47 -> 28 as predicted, but reach does NOT rise: the poses the fold gives back are lost to skin contact,
+part clashes and the cuff dyad's range, because once line 1 misses GH the knuckle swings (qk spans 30-50 deg), link
+2b and the crank boss sweep the deltoid, and the cuff's in-plane drift grows past what a 30 / 25 dyad spans. In-band
+collapses with them (0.87 -> 0.40).
+
+Best configuration k 351: leader seats with J2 nudged (az2 12.43, wd 80.91), b1 0.007, b2 0.0145, b3 0.228, crank strap
+lk 20 along link 2, E arm 31.7 at phE 2.8, cuff link 25 at dB -86.2. reach 0.675, follow 1.000, in-band14 0.879,
+in-band10 0.463, contact 0.040 -> gap 28.64 (score 89.59). Parts in band (share, median mm): hubs 1.00 / 0.98 / 0.85,
+crank boss 0.98 (10.4), crank strap 0.70, link 1 0.91, link 2b 0.81, E arm 0.86, cuff link 0.73, pad 0.90. Knuckle
+qk 17.8..21.1 deg (idle), authority p1 6.5 mm/rad; cuff drift 23 x 23 mm, elbow 63-128 deg, rotor turn psi +-22 deg.
+
+Convergence gate (local-search stream, 81 tries): gain over the 2nd half 0.70 score points (< 1: pass), over the last
+third 0.69 (> 0.5: NOT passed), top-5 spread 0.25 (< 3: pass). The b1 = 0.3 stream (stopped at 36 tries, 45.10): 1.79 / 1.79 / 4.88 - not converged, 16 points behind.
+
+## Red team (own best, k 351)
+
+* **The optimistic number.** 28.64 is a design whose knuckle does not move (qk swing 3 deg): it is the pin-knee leader
+  (2 pins, 26.34 fast / 33.84 exact) plus a third pin and a crank strap, i.e. a slightly worse copy of an existing row.
+  Every configuration where the knuckle does real work (b1 >= 0.3) is >= 20 gap points worse (49.98 best at b1 0.3 after
+  the seats and cuff were re-tuned around it; 52-105 at the leader seats).
+* **The point that pinches.** Lowest metal over taken poses (walls, crowns, pin heads included): 0.08 mm at #179
+  (across the body, plane 105, elevation 30, axial -135), 0.26 mm at #100, 0.40 mm at #79, 0.68 mm at #112: 4 poses
+  under 1 mm -> gap 33.43 if near-touch counts as contact.
+* **The pose that jams / the overhead.** Elevation >= 140: 7 of 17 taken (reach 0.17, in-band14 0.94 where taken); the
+  J2 fold takes 5 of the 10 misses. Across the body: reach 0.58, in-band14 0.48 (median 14.6 mm - the across-body
+  poses lift the cuff side). Behind the back: reach 0.40.
+* **The floppy pin.** The knuckle is set only by the cuff's radial constraint. At authority 6.5 mm/rad (p1) a 3 mm
+  cuff-liner give lets the knuckle and link 2b swing 0.46 rad (26 deg) unpowered; at the idle optimum the knuckle is
+  a pure liability (lock it = the pin knee).

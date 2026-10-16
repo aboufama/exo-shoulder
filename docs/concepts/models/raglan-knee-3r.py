@@ -94,12 +94,19 @@ def routed_add_links(self, f1, f2, f3):
         else:
             dirs, sarc, nrm, info = _path(da, db, R, t_w, d_w, float(P.get("rc", 10.0)))
             info["W"] = [round(float(x), 4) for x in info["W"]]
-        rows = []
-        for v in (-3.0, -1.0, 1.0, 3.0):
-            dv = unit(dirs + (v / R) * nrm); pts = R * dv
-            def off_axis(k): w = pts - c[k]; return np.linalg.norm(w - (w @ u[k])[:, None] * u[k], axis=1)
-            keep = (off_axis(ka) > S.HUB_R) & (off_axis(kb) > S.HUB_R)
-            rows.append((dv, keep, sarc))
+        def rows_of(dirs, sarc, nrm):
+            rows = []
+            for v in (-3.0, -1.0, 1.0, 3.0):
+                dv = unit(dirs + (v / R) * nrm); pts = R * dv
+                def off_axis(k): w = pts - c[k]; return np.linalg.norm(w - (w @ u[k])[:, None] * u[k], axis=1)
+                keep = (off_axis(ka) > S.HUB_R) & (off_axis(kb) > S.HUB_R)
+                rows.append((dv, keep, sarc))
+            return rows
+        rows = rows_of(dirs, sarc, nrm)
+        ang0 = math.acos(float(np.clip(da @ db, -1, 1))); bn0 = unit(np.cross(da, db)); n0 = max(4, int(R * ang0 / S.SPACING))
+        ts0 = (np.arange(n0) + 0.5) / n0; dirs0 = np.array([unit(math.sin((1 - t) * ang0) * da + math.sin(t * ang0) * db) for t in ts0])
+        info["n_samples"] = int(sum(int(r[1].sum()) for r in rows))
+        info["n_great_circle"] = int(sum(int(r[1].sum()) for r in rows_of(dirs0, ts0 * R * ang0, np.repeat(bn0[None], n0, 0))))
         out.append(dict(name=f"L{li + 1}", mem=mem, ka=ka, kb=kb, rows=rows)); self.route_info[f"L{li + 1}"] = info
     self.links = out
     return out
@@ -127,6 +134,17 @@ def _report(B, params):
     if geo is not None and not hasattr(geo, "route_info"): r["route"] = "great circle"
     try: r["parts_ib14"] = M.part_inband()
     except Exception: pass
+    # red team (dilution): in-band 14 is a SHARE of metal samples, so a longer link that sits in band lowers the gap by
+    # diluting the out-of-band parts. Recompute it with each routed link weighted at its great-circle sample count.
+    ri = r.get("route") if isinstance(r.get("route"), dict) else None; pib = r.get("parts_ib14") or {}
+    if pib:
+        w = {k: v[2] for k, v in pib.items()}
+        if ri:
+            for k, inf in ri.items():
+                if k in w and inf.get("n_great_circle"): w[k] = inf["n_great_circle"]
+        ib = sum(w[k] * pib[k][0] for k in w) / max(1, sum(w.values()))
+        r["inband14_fixed_n"] = round(float(ib), 4)
+        r["gap_fixed_n"] = CB.gap_of(ib, r["follow"], r["reach"], r["contact"])
     return r, M
 
 
@@ -199,5 +217,5 @@ if __name__ == "__main__":
             print("   best d per t:", [(round(M["T"][a], 2), M["D"][int(np.argmax(top[a]))], round(float(top[a].max()), 2)) for a in range(len(M["T"]))])
         print(f"{time.time() - t0:.0f}s"); sys.exit()
     r, M = _report(B, par)
-    print({k: r.get(k) for k in ("gap", "reach", "follow", "inband14", "inband10", "contact", "why", "route")}, f"{time.time() - t0:.0f}s", B.mode)
+    print({k: r.get(k) for k in ("gap", "gap_fixed_n", "inband14_fixed_n", "reach", "follow", "inband14", "inband10", "contact", "why", "route")}, f"{time.time() - t0:.0f}s", B.mode)
     print("parts", r.get("parts_ib14"))

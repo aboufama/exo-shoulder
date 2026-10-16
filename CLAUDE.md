@@ -109,6 +109,10 @@ docs/EVOLUTION.md (and its snapshot to pipeline/evolution/) as part of the judge
   claim) on the farm - this bench runs on CPU (libigl / the signed-distance cache), so the farm is the instrument; a GPU
   port is worth building only if it measurably beats the farm per dollar. A polished config replaces the CAD's config
   only after an independent verifier confirms a gain >= 1 gap point.
+  (User 2026-10-16 ~03:00: no film for now - "you dont need to do the film ... focus everything on solution hunting";
+  the generation-winner CAD + stills still run: "generation winner cad should still run". Quota while no film renders:
+  exo-blender-cycles workersMax 1 (stills), exo-cpu1 workersMax 9 - give the render endpoint its 4 back when a film or a
+  big render batch is approved.)
 - **No lofts, ever** (user, 2026-10-15: "for all the design you do, lofts look horrible and introduce geometric problems, you
   can combine arcs, but no lofts!"): every surface comes from sketches of lines and tangent arcs - extrudes, revolves,
   sweeps of ONE constant section along a line/arc path, fillets. No lofts, no surfaces fitted or shrink-wrapped to skin

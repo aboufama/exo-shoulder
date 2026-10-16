@@ -40,7 +40,7 @@ RATE = {"cpu3c-8-16": 0.288 / 3600, "cpu5c-8-16": 0.336 / 3600}      # $/s per w
 # in place, docs/CLOUD_RUN.md "Redeploy in place") restores 4 per worker. Verified 2026-10-15 23:54 UTC after the in-place
 # deploy + a worker recycle: ping says farm-3, and 8 sleep-20 jobs ran 4 at once on one worker and 3 at once on another.
 SLOTS = int(os.environ.get("CLOUD_JOBS_PER_WORKER", 4))
-WORKERS_MAX = 6
+WORKERS_MAX = 9
 VCPU = 8
 IDLE_S = 10                                                             # endpoint idle timeout: billed once per worker per batch
 CHUNK = 6 * 1024 * 1024                                                 # gzip bytes per put job (base64 ~8 MB < the 10 MB /run limit)
