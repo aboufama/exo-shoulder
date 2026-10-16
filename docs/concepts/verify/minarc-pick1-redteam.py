@@ -98,7 +98,7 @@ def mode_attr(fit, which, outp):
     W = R.PV.held_bench(); assert len(W.idx) == 1154
     M, fitr, M1, keys = R.freeze(FIT, W, Pp, R.KR.KModel); M.run(); ex, bad, rows = R.checks_B(M, W)
     Z = CB._poses_all(); names = list(Z["NAMES"]); cid = Z["CID"]; HGall = Z["HG"].astype(float)
-    clipsel = cid != names.index("Workspace (envelope)"); HGc = HGall[clipsel]
+    clipsel = np.array([not (str(names[c]).startswith("Workspace") or str(names[c]).startswith("Envelope")) for c in cid]); HGc = HGall[clipsel]
     capmin = {i: r["cap_skin"] for i, r in rows.items()}
     D = M.D; HGw = HGall[np.asarray(W.idx)]; q, okk, X1, X2, X3, s = D.ik(HGw); st = np.asarray(D._state).copy(); dK = np.degrees(np.asarray(D._dK)).copy()
     th = np.degrees(np.arccos(np.clip((HGw @ D.u[2]) @ D.u[0], -1, 1)))
@@ -161,7 +161,7 @@ def mech_one(R, MECH, which):
     st = np.asarray(D._state).copy(); dK0 = np.asarray(D._dK).copy()
     u1, u2, u3 = D.u; uK = D.uK; sp = float(np.sign(D.psiA))
     out = dict(config=which, price=pinfo, q2_stops=[round(x, 3) for x in D.q2_stops], th_hi=round(D.th_hi, 2))
-    ws = cid == names.index("Workspace (envelope)")
+    ws = cid == names.index("Workspace (envelope)"); fresh = np.array([str(names[c]).startswith("Envelope") for c in cid])
     out["dK_max_all_ok"] = round(float(np.degrees(np.abs(dK0[ok])).max()), 2); out["dK_max_ws_ok"] = round(float(np.degrees(np.abs(dK0[ok & ws])).max()), 2)
     # --- masses + spring demand along K's self-motion (buildability lens's method: MECH.kin at dK0 and dK0 + opening eps)
     mass = MECH.member_mass_model(M1); mass[7] = (mass[7][0] + 4.0, mass[7][1])
@@ -177,7 +177,7 @@ def mech_one(R, MECH, which):
     dq = np.degrees(np.abs(R.PK.wrap(kp["q"] - k0["q"]))) / math.degrees(eps)
     okm = ok & (kp["g2"] > 0) & (k0["g2"] > 0) & (q2err < 0.5)
     dem = 2 * tau_any + 2e-3 * (1 + dq.sum(1))                  # 2 g any direction + 2 mN.m per sealed pair along the self-motion
-    clip = ~ws
+    clip = ~ws & ~fresh
     out["masses_g"] = {str(m): round(g, 1) for m, (g, _) in mass.items()}
     out["demand"] = {nm: dict(n=int(sel.sum()), any_dir_2g_Nm=round(float(2 * tau_any[sel].max()), 4), demand_2g_fric2_Nm=round(float(dem[sel].max()), 4),
                               self_motion_ratio_max={j: round(float(dq[sel, k].max()), 2) for k, j in enumerate(("J1", "J2", "J3"))},
@@ -186,7 +186,7 @@ def mech_one(R, MECH, which):
     # --- clips at 10 fps: K + joint rates, arm speed
     clips = {}; armmax = 0.0
     for c, nm in enumerate(names):
-        if nm.startswith("Workspace"): continue
+        if nm.startswith("Workspace") or nm.startswith("Envelope"): continue
         ii = np.nonzero(cid == c)[0]; ii = ii[np.argsort(Z["FI"][ii], kind="stable")]
         qq_, okc, *_r = D.ik(Q[ii]); sc = _r[-1]; Kc = D.knee(sc); okc = okc & Kc["ok"]; dKc = np.degrees(np.asarray(D._dK)); stc = np.asarray(D._state)
         qq = np.c_[np.degrees(qq_[:, :3]), dKc, np.degrees(Kc["qa"]), np.degrees(Kc["qb"])]

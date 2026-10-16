@@ -111,3 +111,58 @@ crest seed B (az 95.37, el 62.54, a1 44.53, a2 50.26, wd 108.87, wa -3.53, inv3 
    - Tail and roller sit 0-24 % in band in every configuration measured.
    - At the best configuration the tail metal (tail + roller + lug) costs **9.3 gap points**: 39.36 with it against
      30.02 with the law alone at the same parameters.
+
+## The search (farm), and the convergence gate
+
+| stage | configs | best near-touch gap (fast, Bench(60,160)) | note |
+|---|---|---|---|
+| LA1 control (the proposer's seats, d 7, onset 6.1) | 3 | 67.45 (law only, no tail: 51.03; sensed stop law: 30.03) | the law covers th 109 -> 117 only |
+| LHS-1 on the farm (tail metal; crown d 4-13) | 300 | 54.97 (no drive) / 57.88 (drive ok) | drive valid in 83 of 300 |
+| gate LHS-2, law only (no tail: an upper bound on reach) | 300 | - | hubs >= 0.8 with a drive: 8 configs, max reach 0.66; reach >= 0.72: max min-hub 0.765 |
+| CMA, 6 streams x 16 on the farm (tail metal, near-touch) | 11270 | **39.39** (stream s4) | gate passed (below) |
+| gate CMA, 4 streams (max plain reach s.t. hub 2 / K / hub 3 >= 0.8, law only) | 6676 | reach 0.825 at hub 3 0.802 | the literal kill gate is passed, law only |
+
+The convergence gate, all six streams merged in generation order:
+- the best gained 0.23 score points over the second half (< 1);
+- it gained 0.20 points over the last third (< 0.5);
+- the top 5 lie within 0.01 points (< 3).
+
+It is converged.
+
+**Best configuration (s4), re-measured on the final model:**
+- Parameters: az 92.11, el 63.02, wd 36.33, wa -4.76, a1 40.83, a2 74.39, b1 33.44, b2 55.70, a1max 71.62, smhi 13.26,
+  smlo 7.19, d 19.49 mm (beside), psi_c 11.53, q 0.965, inv3 0, end_extra 0, sigma -1, sK -1.
+- **Gap 39.36 near-touch = plain** (score 85.7). Reach 0.825, follow 0.95, in-band14 0.673, in-band10 0.392, contact
+  0.091. Minimum metal 1.13 mm. Overhead ws reach 4 of 12.
+- Drive: tail tip 39.7 deg from u2. K opens up to 49.6 deg over 23.6 deg of q2. Th runs 101.95 -> 136.61 and ends on the
+  m3e margin. Peak pressure angle 41 deg; contact radius up to 21.7 mm on the lug.
+- In band per part:
+  - hub 1 1.00, hub K 0.99, hub 2 0.92, link 1a 0.93, link 1b 0.99, lug 0.98;
+  - **hub 3 0.75, link 2 0.33, neck 0.23, tail 0.15, roller 0.03**.
+
+Two measurements at the same parameters:
+- Law only, without the tail metal: 30.02 (reach 0.85, in-band 0.72). The tail metal costs 9.3 points.
+- The sensed stop law in place of the Geneva law: 53.5.
+
+The kill-gate configurations (hub 3 >= 0.8 at reach 0.825, law only) score **75.19** near-touch (52.7 plain) once the
+tail is built: contact 0.24, link 2 0.37, neck 0.21.
+
+## Red team (own best)
+
+- **The pose that jams.** The folded side has no tooth: J2 sits on its dowel. On the fast bench, 3 of the 17 overhead
+  poses (th ~36) and the across-body poses past the law end (th 147-159, m3e) do not close. Of the 17 overhead poses,
+  6 are taken and 8 close but touch the skin.
+- **The point that pinches.** On the fast bench, metal comes within 1.13 mm at ws (plane -75, elev 15, axial 150), a
+  behind-the-back reach. On the big bench frozen, the minimum is **0.31 mm** (static).
+- **Optimistic numbers, stated.**
+  - The roller-lug K6 exemption within 12 mm of the roller axis also covers state-A passes behind the lug.
+  - The crown embodiment's tooth blade is not modelled as metal.
+  - Lift-off uses the pinknee model's self-motion slope test.
+  - The fast fit (39.36) loses about 14 points when worn frozen (next section).
+- **Feel at rest.** 56 of the 57 rest poses are DRIVEN: K is held open by the roller against the clock spring. The
+  wearer's resting arm carries the spring torque through the chain. This is small (0.3 x 5 mm strip), but it is
+  unlike every other knuckle design, which rests on stop A.
+- **Continuity rule.** The strict flood fill seeds at elevation 0 with K on stop A. There is NO such pose here (every
+  elevation-0 pose is driven), so the strict rule gives reach 0 by construction. K is a function of q2 everywhere (the
+  law is continuous at the onset, with no branch). The seed-any flood fill is the meaningful reading, and both are
+  reported.
