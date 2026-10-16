@@ -2,6 +2,7 @@
  "fit": "fit60",
  "config": "pick1",
  "lift": {},
+ "wear": "held",
  "price": {
   "th_cut": 118.9,
   "dK_cut": 56.652,
@@ -18118,5 +18119,5 @@
    ]
   }
  ],
- "secs": 730.6
+ "secs": 356.8
 }

@@ -77,6 +77,11 @@ def cap_v5(k, F):
     """the v5 threaded O20 cap (skirt over the boss from H1 + 0.05, flange face at U1 on the upper bearing's outer ring) with a
     torispherical dome of tangent arcs to the crown at F + 12.25"""
     z0, z1, zt = LV["H1"] + 0.05 + F, LV["U1"] + F, LV["top"] + F; R = US.HUB_R
+    if CAP_STYLE == "flat":                                                                # the O20 x 12.25 envelope the model / L1 carry: wall to the
+        r = 0.5; q = 1 - math.sqrt(0.5)                                                    # crown, R0.5 crown corner, flat crown
+        wp = (cq.Workplane("XZ").moveTo(9.0, z0).lineTo(R, z0).lineTo(R, zt - r).threePointArc((R - r * q, zt - r * q), (R - r, zt)).lineTo(0.0, zt)
+              .lineTo(0.0, zt - 0.5).lineTo(4.5, zt - 0.5).lineTo(4.5, z1).lineTo(9.0, z1).close())
+        return xform(wp.revolve(360, (0, 0, 0), (0, 1, 0)).val(), PB.axis_frame(k)), None
     km, tp, cm, Rc = _ts_dome(R, z1 + 0.35, zt)
     wp = (cq.Workplane("XZ").moveTo(9.0, z0).lineTo(R, z0).lineTo(R, z1 + 0.35).threePointArc(km, tp).threePointArc(cm, (0.0, zt))
           .lineTo(0.0, zt - 0.5).lineTo(4.5, zt - 0.5).lineTo(4.5, z1).lineTo(9.0, z1).close())
@@ -194,7 +199,7 @@ LINK_MODE = os.environ.get("MINARC_LINK_MODE", "profile")                       
 R_CONVEX, R_REFLEX, MARGIN, CLIMB_MAX = 2.0, 0.5, 0.1, 59.5
 
 
-def profile_link(label, ex, ey, start, end, Dq, Rq, axes, hr2, t=T, w=W):
+def profile_link(label, ex, ey, start, end, Dq, Rq, axes, hr2, t=T, w=W, side=0):
     """the link as ONE side-view sketch in the bar plane (lines + tangent arcs), extruded w across it: a 2.5-D part (3+2-axis
     machined / wire-EDM from a Ti-6Al-4V plate) whose underside runs THROUGH the verified model's strap stations (the L1 strap
     underside, max over the strap's columns, in the bar plane: polar angle / radius), MARGIN mm above them outside the hub
@@ -257,10 +262,11 @@ def profile_link(label, ex, ey, start, end, Dq, Rq, axes, hr2, t=T, w=W):
         want.append(R_CONVEX if (convex or i >= n) else R_REFLEX)
     rad = USP.safe_radii(pts, want)
     for i in (0, n - 1, n, len(pts) - 1): rad[i] = 0.0                                     # the four end-face corners stay sharp
-    sol = USP.prism(np.zeros(3), ex, ey, pts, rad, w, both=True)
     nP = unit(np.cross(ex, ey))
+    sol = USP.prism(np.zeros(3), ex, ey, pts, rad, w, both=True) if not side else USP.prism((-w if side < 0 else 0.0) * nP, ex, ey, pts, rad, w)
     def in_end(e_):
         q = np.array(e_.positionAt(0.5).toTuple()); x, y = q @ ex, q @ ey
+        if side and abs(q @ nP) < 1e-3: return True                                        # the centre plane (the other half is glued there)
         for (Pu, ax_) in ((S_u, a_ax), (E_u, b_ax)):
             sd = np.array([ax_[1], -ax_[0]])                                               # along the pad (perpendicular to the axis in the plane)
             if abs((np.array([x, y]) - Pu) @ sd) < 1e-3: return True
@@ -287,6 +293,30 @@ def profile_link(label, ex, ey, start, end, Dq, Rq, axes, hr2, t=T, w=W):
     return sol, rep
 
 
+SPLIT = os.environ.get("MINARC_SPLIT", "1") == "1"
+CAP_STYLE = os.environ.get("MINARC_CAP", "dome")                                        # dome (torispherical) | flat (the O20 x 12.25 envelope)
+
+
+def profile_link_split(label, ex, ey, start, end, Dq, Rq, axes, hr2, t=T, w=W):
+    """the strap is tilted across its width (one edge of a flat bar 1.7-1.9 mm above it on links 1b / 2): the bar as TWO
+    half-width (4 mm) side-view profiles, each through the strap stations of ITS half (max over that half's rows), extruded
+    from the bar plane to either side and glued on it - a bar whose underside steps once along its centre line (two
+    extrudes; 3-axis machinable). Falls back to the one-profile bar if the halves do not glue into one valid solid."""
+    nP = unit(np.cross(ex, ey)); off = np.einsum("qjk,k->qj", Dq, nP).mean(1)
+    lo, hi = off <= 1e-6, off >= -1e-6
+    if lo.sum() < 2 or hi.sum() < 2: return profile_link(label, ex, ey, start, end, Dq, Rq, axes, hr2, t, w)
+    a, ra = profile_link(label + " (half -)", ex, ey, start, end, Dq[lo], Rq[lo], axes, hr2, t, w / 2, side=-1)
+    b, rb = profile_link(label + " (half +)", ex, ey, start, end, Dq[hi], Rq[hi], axes, hr2, t, w / 2, side=+1)
+    try: sol = US.glue(a, b)
+    except Exception as e_: sol = None; print(f"  {label}: halves do not glue ({e_}) - one profile", flush=True)
+    if sol is None or not sol.isValid() or len(sol.Solids()) != 1: return profile_link(label, ex, ey, start, end, Dq, Rq, axes, hr2, t, w)
+    rep = dict(split="two half-width profiles glued on the bar plane", half_minus=ra, half_plus=rb,
+               over_L1_max_outside_footprints=max(ra["over_L1_max_outside_footprints"] or 0, rb["over_L1_max_outside_footprints"] or 0),
+               max_climb=max(ra["max_climb"], rb["max_climb"]), process=ra["process"].replace("ONE side-view sketch", "TWO half-width side-view sketches"))
+    print(f"{label}: split bar glued, valid {sol.isValid()}, solids {len(sol.Solids())}", flush=True)
+    return sol, rep
+
+
 def link_gh(M, prof, nm, label, ka, kb, up_a, up_b):
     """a hugging machined bar between two joints whose axes pass through GH (links 1a, 1b): plane span(U_a, U_b); seats at the
     member level (lower pad 0 / upper pad U0) of each joint; returns (body, ex, ey, start, fit, report, Ls, rf, he)"""
@@ -299,7 +329,7 @@ def link_gh(M, prof, nm, label, ka, kb, up_a, up_b):
     Dq, Rq = link_cols(M, *prof[nm]); axes = [((0.0, 0.0), (1.0, 0.0)), ((0.0, 0.0), (math.cos(phi), math.sin(phi)))]
     sd_b = -(math.cos(math.pi / 2 + phi) * ex + math.sin(math.pi / 2 + phi) * ey)
     if LINK_MODE == "profile":
-        body, rep = profile_link(label, ex, ey, start, end, Dq, Rq, axes, [hr[ka], hr[kb]]); fit = dict(segs=None)
+        body, rep = (profile_link_split if SPLIT else profile_link)(label, ex, ey, start, end, Dq, Rq, axes, [hr[ka], hr[kb]]); fit = dict(segs=None)
         rep.update(arc_deg=round(math.degrees(phi), 2), seat_mm=Ls, pad_round_mm=rf)
         return body, ex, ey, start, fit, rep, Ls, rf, sd_b
     fit, rep = USP.hug_fit(label, ex, ey, start, end, Dq, Rq, axes, [hr[ka], hr[kb]])
@@ -357,7 +387,7 @@ def build_links(M, stops):
     Ls, rf = USP.HUG_SEAT, USP.HUG_RF; start = (ha, Ls, math.pi / 2); end = (*(B + Ls * back), math.pi / 2 + phi)
     Dq, Rq = link_cols(M, *prof["L2"])
     axes = [((0.0, 0.0), (1.0, 0.0)), (tuple(B), (math.cos(phi), math.sin(phi)))]
-    if LINK_MODE == "profile": body, r = profile_link("link 2", ex, ey, start, end, Dq, Rq, axes, [hr[2], hr[3]]); fit = dict(segs=None)
+    if LINK_MODE == "profile": body, r = (profile_link_split if SPLIT else profile_link)("link 2", ex, ey, start, end, Dq, Rq, axes, [hr[2], hr[3]]); fit = dict(segs=None)
     else: fit, r = USP.hug_fit("link 2", ex, ey, start, end, Dq, Rq, axes, [hr[2], hr[3]]); body = US.bar_swept(ex, ey, start, fit["segs"])
     back_w = math.sin(phi) * ex - math.cos(phi) * ey
     body = US.glue(USP.plate_R(u[1], F[1] + LV["U0"], ey, W, hr[2], L=Ls, upper=True, rf=rf), body)
@@ -389,8 +419,9 @@ def hubs(M):
             if " cap " in n: continue
             out.append((g, n, at(s, C[j])))
         if J != "K":
-            cap, Rc = cap_v5(Uu[j], F4[j]); rep["dome_crown_R"] = round(Rc, 2)
-            out.append((hi, f"{J} cap O20, torispherical dome R{Rc:.1f} / R1 (tangent arcs), threaded M18x0.5 (Ti-6Al-4V)", at(cap, C[j])))
+            cap, Rc = cap_v5(Uu[j], F4[j]); rep["cap_style"] = CAP_STYLE; rep["dome_crown_R"] = None if Rc is None else round(Rc, 2)
+            out.append((hi, (f"{J} cap O20, torispherical dome R{Rc:.1f} / R1 (tangent arcs)" if Rc else f"{J} cap O20 x crown F+12.25, flat crown, R0.5 corner")
+                        + ", threaded M18x0.5 (Ti-6Al-4V)", at(cap, C[j])))
         else:
             cap = cap_k(Uu[j], F4[j], crown); sp, Lsp = clock_spring(Uu[j], F4[j])
             out.append((hi, f"K clock-spring cap O20 x crown F+{crown:.2f} ({capK:g} mm taller): spring chamber O16 x {CAPK['ch_z1'] - CAPK['ch_z0']:.1f}, "

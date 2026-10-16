@@ -1,0 +1,98 @@
+[
+ {
+  "tag": "p1rt-env-held-sB40",
+  "cmd": "eval \"$(python3 tools/env_bench.py use env)\" && python3 docs/concepts/verify/minarc-pick1-redteam.py attr env pick1 docs/research/minarc_pick1_redteam/attr_pick1_env_held_stopB40.json > docs/research/minarc_pick1_redteam/attr_pick1_env_held_stopB40.log 2>&1; tail -1 docs/research/minarc_pick1_redteam/attr_pick1_env_held_stopB40.log",
+  "out": [
+   "docs/research/minarc_pick1_redteam/attr_pick1_env_held_stopB40*"
+  ],
+  "env": {
+   "OMP_NUM_THREADS": "1",
+   "IGL_NUM_THREADS": "2",
+   "CB_EXACT": "1",
+   "CB_FOLD_MARGIN": "5.5",
+   "STOPB_DK": "40",
+   "WEAR": "held"
+  },
+  "timeout": 3000
+ },
+ {
+  "tag": "p1rt-fit60-bench-sB40",
+  "cmd": "python3 docs/concepts/verify/minarc-pick1-redteam.py attr fit60 pick1 docs/research/minarc_pick1_redteam/attr_pick1_fit60_bench_stopB40.json > docs/research/minarc_pick1_redteam/attr_pick1_fit60_bench_stopB40.log 2>&1; tail -1 docs/research/minarc_pick1_redteam/attr_pick1_fit60_bench_stopB40.log",
+  "out": [
+   "docs/research/minarc_pick1_redteam/attr_pick1_fit60_bench_stopB40*"
+  ],
+  "env": {
+   "OMP_NUM_THREADS": "1",
+   "IGL_NUM_THREADS": "2",
+   "CB_EXACT": "1",
+   "CB_FOLD_MARGIN": "5.5",
+   "STOPB_DK": "40",
+   "WEAR": "bench"
+  },
+  "timeout": 3000
+ },
+ {
+  "tag": "p1rt-env-held-sB45",
+  "cmd": "eval \"$(python3 tools/env_bench.py use env)\" && python3 docs/concepts/verify/minarc-pick1-redteam.py attr env pick1 docs/research/minarc_pick1_redteam/attr_pick1_env_held_stopB45.json > docs/research/minarc_pick1_redteam/attr_pick1_env_held_stopB45.log 2>&1; tail -1 docs/research/minarc_pick1_redteam/attr_pick1_env_held_stopB45.log",
+  "out": [
+   "docs/research/minarc_pick1_redteam/attr_pick1_env_held_stopB45*"
+  ],
+  "env": {
+   "OMP_NUM_THREADS": "1",
+   "IGL_NUM_THREADS": "2",
+   "CB_EXACT": "1",
+   "CB_FOLD_MARGIN": "5.5",
+   "STOPB_DK": "45",
+   "WEAR": "held"
+  },
+  "timeout": 3000
+ },
+ {
+  "tag": "p1rt-fit60-bench-sB45",
+  "cmd": "python3 docs/concepts/verify/minarc-pick1-redteam.py attr fit60 pick1 docs/research/minarc_pick1_redteam/attr_pick1_fit60_bench_stopB45.json > docs/research/minarc_pick1_redteam/attr_pick1_fit60_bench_stopB45.log 2>&1; tail -1 docs/research/minarc_pick1_redteam/attr_pick1_fit60_bench_stopB45.log",
+  "out": [
+   "docs/research/minarc_pick1_redteam/attr_pick1_fit60_bench_stopB45*"
+  ],
+  "env": {
+   "OMP_NUM_THREADS": "1",
+   "IGL_NUM_THREADS": "2",
+   "CB_EXACT": "1",
+   "CB_FOLD_MARGIN": "5.5",
+   "STOPB_DK": "45",
+   "WEAR": "bench"
+  },
+  "timeout": 3000
+ },
+ {
+  "tag": "p1rt-env-held-sB50",
+  "cmd": "eval \"$(python3 tools/env_bench.py use env)\" && python3 docs/concepts/verify/minarc-pick1-redteam.py attr env pick1 docs/research/minarc_pick1_redteam/attr_pick1_env_held_stopB50.json > docs/research/minarc_pick1_redteam/attr_pick1_env_held_stopB50.log 2>&1; tail -1 docs/research/minarc_pick1_redteam/attr_pick1_env_held_stopB50.log",
+  "out": [
+   "docs/research/minarc_pick1_redteam/attr_pick1_env_held_stopB50*"
+  ],
+  "env": {
+   "OMP_NUM_THREADS": "1",
+   "IGL_NUM_THREADS": "2",
+   "CB_EXACT": "1",
+   "CB_FOLD_MARGIN": "5.5",
+   "STOPB_DK": "50",
+   "WEAR": "held"
+  },
+  "timeout": 3000
+ },
+ {
+  "tag": "p1rt-fit60-bench-sB50",
+  "cmd": "python3 docs/concepts/verify/minarc-pick1-redteam.py attr fit60 pick1 docs/research/minarc_pick1_redteam/attr_pick1_fit60_bench_stopB50.json > docs/research/minarc_pick1_redteam/attr_pick1_fit60_bench_stopB50.log 2>&1; tail -1 docs/research/minarc_pick1_redteam/attr_pick1_fit60_bench_stopB50.log",
+  "out": [
+   "docs/research/minarc_pick1_redteam/attr_pick1_fit60_bench_stopB50*"
+  ],
+  "env": {
+   "OMP_NUM_THREADS": "1",
+   "IGL_NUM_THREADS": "2",
+   "CB_EXACT": "1",
+   "CB_FOLD_MARGIN": "5.5",
+   "STOPB_DK": "50",
+   "WEAR": "bench"
+  },
+  "timeout": 3000
+ }
+]
