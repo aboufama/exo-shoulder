@@ -13,13 +13,24 @@ plates whose edges cross put no vertex inside each other; judge/test_part_contac
   - every face, refined by longest-edge bisection until no edge is longer than h (default 1.0 mm): the midpoints are the
     samples, so every point of every face lies within h / sqrt(3) of a sample and the count is ~ area / h^2 (area
     weighted, deterministic, no n^2 blow-up on long thin facets).
-Speed: per frame each part's box is posed (8 corners) and only pairs whose world boxes overlap are tested; A's samples
-are then culled to B's own box before the winding number. B's grids are built only for parts that are ever B in such a
-pair.
+Speed (the measurement is unchanged by any of it - judge/test_part_contact.py checks the fast path point by point against
+sdist's Mesh.max_depth):
+  - per frame each part's box is posed (8 corners) and only ordered pairs whose world boxes overlap are tested;
+  - A's samples are culled in A's own frame (kd-tree ball around B's box), then to B's box shrunk by tol;
+  - an exact reject mask on B's winding grid drops samples well clear of B and outside it (build_B);
+  - depth = libigl's AABB closest point (exact); inside = sdist's integer winding number (grid node, plus the segment
+    crossings only where the surface is nearer than the node); samples within tol of B's surface are skipped first, so a
+    coaxial fit (a whole face seated on B) costs one distance query per sample;
+  - a pair seen before in the same relative pose (held frames, a joint that does not move) reuses its answer;
+  - samples are cached on disk per part content (.cache/part_contact, git-ignored): the user's parts repeat across designs.
+B's grids are built only for parts that are ever B in an overlapping pair.
     python3 judge/part_contact.py <design dir|id> [--step 3] [--tol 0.15] [--h 1.0] [--jobs N]  -> <design>/judge/part_contact.json
 --jobs splits the frames over N processes (same measurement, merged in frame order; default min(4, cores)).
-Default step 3 (10 frames per second of the 30 fps clips): a crossing that lasts 3 frames (0.1 s) is always sampled; the
-06b5a59 crossing of l1_offset-skin-normal-3r lasts 11 frames above 1 mm (test_part_contact.py)."""
+Step: default 3 (10 frames per second of the 30 fps clips: a crossing that lasts >= 3 frames, 0.1 s, is always sampled);
+tools/judge_all.sh runs every frame (step 1) and step 3 when fast. Measured on the 06b5a59 build of
+l1_offset-skin-normal-3r at step 1: link 2 sits 1.07 mm inside the J3 plate at EVERY frame (a fixed overlap at the
+joint); link 1 / link 2 cross by up to 0.66 mm for 9 frames (Wave 71-79 and 95-103) and 0.59 mm over Raise overhead 35-145.
+"""
 import argparse, contextlib, json, multiprocessing as mp, os, sys, time
 import numpy as np
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
@@ -186,8 +197,7 @@ def max_depth(B, P, tol):
     return (float(dk[j]), int(keep[j])) if dk[j] > tol else (0.0, None)
 
 
-_MEMO = {}
-def frame_depths(info, ok, W, tol, memo=_MEMO):
+def frame_depths(info, ok, W, tol, memo=None):
     """{"A  IN  B": (depth, kind)} for one frame (W = {group: (R, t)}). A pair whose relative pose (B's frame seen from A's,
     to 1e-5) was already measured reuses that answer - the same two rigid shapes in the same relative pose: held frames,
     and parts whose relative joint does not move over a stretch of a clip (the elbow between the cuffs)"""
@@ -195,10 +205,12 @@ def frame_depths(info, ok, W, tol, memo=_MEMO):
     for i, j in candidates(info, W, ok, tol):
         A, B = info[i], info[j]; (Ra, ta), (Rb, tb) = W[A["g"]], W[B["g"]]
         key = (int(i), int(j), np.round(np.r_[(Ra.T @ Rb).ravel(), (tb - ta) @ Ra], 5).tobytes())
-        if key not in memo:
-            if len(memo) > 200000: memo.clear()
-            memo[key] = depth_in(A, B, W[A["g"]], W[B["g"]], tol)
-        dep, kind = memo[key]
+        if memo is None: dep, kind = depth_in(A, B, W[A["g"]], W[B["g"]], tol)
+        else:
+            if key not in memo:
+                if len(memo) > 200000: memo.clear()
+                memo[key] = depth_in(A, B, W[A["g"]], W[B["g"]], tol)
+            dep, kind = memo[key]
         if dep > tol: out[f"{A['g']}|{A['n']}  IN  {B['g']}|{B['n']}"] = (dep, kind)
     return out
 
@@ -210,23 +222,24 @@ def xforms(fr):
 
 _G = {}
 def _work(item):
-    clip, fi, W = item; return clip, fi, frame_depths(_G["info"], _G["ok"], W, _G["tol"])
+    clip, fi, W = item; c0 = time.process_time(); out = frame_depths(_G["info"], _G["ok"], W, _G["tol"], _G["memo"])
+    return clip, fi, out, time.process_time() - c0
 
 
 def run(dd, step=3, tol=0.15, h=1.0, jobs=1, select=None, log=print):
     """the judge on a design dir: returns the part_contact.json dict (select(clip, fi) -> bool limits the frames)"""
-    t0 = time.time(); parts = load_parts(dd)
+    t0 = time.time(); c0 = time.process_time(); parts = load_parts(dd)
     todo = [(c, fi, xforms(fr)) for c, fi, fr in frames(dd, step) if select is None or select(c, fi)]
     probe = prepare(parts, h, build=set())                                          # samples + boxes, no grids yet
     ok = pair_ok(probe); need = set()
     for _, _, W in todo: need |= {int(j) for _, j in candidates(probe, W, ok, tol)}
     for j in need: build_B(probe[j])                                                  # grids only where a part is ever B
-    info = probe; t1 = time.time(); res = {}; nf = 0
-    _G.update(info=info, ok=ok, tol=tol)
+    info = probe; t1 = time.time(); cpu = cs = time.process_time() - c0; res = {}; nf = 0
+    _G.update(info=info, ok=ok, tol=tol, memo={})                                    # the memo is per run (keys are part indices)
     with (mp.get_context("fork").Pool(jobs) if jobs > 1 else contextlib.nullcontext()) as pool:
         it = pool.imap(_work, todo, chunksize=2) if pool else map(_work, todo)
-        for clip, fi, out in it:                                                     # frame order: same tie-breaking as one process
-            nf += 1
+        for clip, fi, out, c in it:                                                  # frame order: same tie-breaking as one process
+            nf += 1; cpu += c
             for k, (dep, kind) in out.items():
                 r = res.setdefault(k, dict(max_depth=0.0, frames=0, worst=None, worst_point=None, per_frame={}))
                 r["frames"] += 1; r["per_frame"][f"{clip}|{fi}"] = round(dep, 2)
@@ -236,10 +249,11 @@ def run(dd, step=3, tol=0.15, h=1.0, jobs=1, select=None, log=print):
     OPEN = [f"{x['g']}|{x['n']}" for x in info if not x["closed"]]
     ns = {f"{x['g']}|{x['n']}": int(len(x["S"])) for x in info}
     return dict(step=step, tol_mm=tol, frames_checked=nf, pairs=int(ok.sum()), seconds=round(time.time() - t0), setup_seconds=round(t1 - t0), jobs=jobs,
+                cpu_seconds=round(cpu), cpu_s_per_frame=round((cpu - cs) / max(nf, 1), 3),
                 violations=res, open_parts_not_tested_as_container=OPEN,
                 samples=dict(h_mm=h, sharp_deg=SHARP_DEG, total=int(sum(ns.values())), per_part=ns,
                              rule="every vertex + sharp/boundary edges at <= h/2 + longest-edge bisection of every face to edges <= h (midpoints)"),
-                inside="dense surface samples of A (vertices, sharp edges, faces), both ways; integer winding number on welded tessellations (grid + segment crossings), depth = exact distance (judge/sdist.py)",
+                inside="dense surface samples of A (vertices, sharp edges, faces), both ways; integer winding number on welded tessellations (judge/sdist.py grid + segment crossings), depth = exact distance to B's closest point (libigl AABB)",
                 max_depth=max([r["max_depth"] for r in res.values()], default=0.0))
 
 
