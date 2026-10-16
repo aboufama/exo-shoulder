@@ -124,7 +124,7 @@ text(vb, (-29 * SC2, TOP * SC2), "BAR TOP = DATUM B ", ha="right", va="center", 
 leader(vb, (120, BOT), (120 * SC2 - 6, BOT * SC2 - 10), f"bar {TOP - BOT:.1f} thick (30 wide)", ha="right", sc=SC2)
 cline(vb, (J3F[0] * SC2, (J3F[2] - 8) * SC2), (J3T[0] * SC2, (J3T[2] + 6) * SC2))
 dim(vb, (J3F[0] + 20, TOP), (J3F[0] + 20, J3F[2]), 6, f"{TOP - J3F[2]:.1f}", sc=SC2)
-text(vb, ((J3F[0] + 20) * SC2 + 15, (TOP + J3F[2]) / 2 * SC2), "J3 pad face\nbelow datum B", ha="left", va="center", fs=6.5)
+text(vb, ((J3F[0] + 20) * SC2 + 1, (J3F[2] - 3) * SC2), "15.9 = bar top to the CENTRE of the J3 pad's O20 bottom face\n(skin side; the J3 axis pierces it there), square to datum B", ha="right", va="top", fs=6.5, bbox=dict(fc="white", ec="none", pad=0.2))
 title(20, 196, "VIEW B  -  SIDE VIEW (across the bar; up = away from the arm)   1:2")
 # ---- DETAIL C: the arm end, top view at 1:1 (s 228 .. 352)
 xc, yc = (212.0, 352.0), (-60.0, 28.0)
@@ -162,7 +162,8 @@ notes = [("CUT YOUR BOTTOM BAR", True),
          ("", False),
          ("ARM END (fused into the bar's channel, one part)", True),
          (f"J3 axis passes through GH; pad face {F3:.2f} mm from GH; at s {J3F[0]:.1f}, {abs(J3F[1]):.1f} off the bar centre,", False),
-         (f"pad face {TOP - J3F[2]:.1f} below the bar top (datum B); pad plane tilted {abs(a_pad - 180):.1f}° to the bar top (VIEW D).", False),
+         (f"On the J3 axis, square to the bar top (datum B): centre of the pad's bottom face {TOP - J3F[2]:.1f}, mid-plane {TOP - J3F[2] - 1.5 * k3l[2]:.1f},", False),
+         (f"pad top {TOP - J3F[2] - 3.0 * k3l[2]:.1f} below it (pad 3.0 thick). J3 axis tilted {math.degrees(math.acos(k3l[2])):.1f}° from the bar normal toward -v (VIEW D).", False),
          (f"Strap 8 x 3; pad plane vs channel plane {ang:.1f}° about a line {AEB['common_line_behind_J3_mm']:.1f} mm behind J3;", False),
          (f"crossing {AEB['crossing_mm_below_J3']:.0f} mm below J3; turns R{AEB['turn_pad_plane_R']:g} (pad plane), R{AEB['turn_channel_plane_R']:g} (channel); bend R{AEB['bend_R']:g}.", False),
          (f"Tongue {abs(off):.2f} mm off the channel centre, embedded {AEB['embedded_in_web_mm']:g} mm in the web.", False),
