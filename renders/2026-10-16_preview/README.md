@@ -55,7 +55,7 @@ asked for) keeps it low even at a full change of layout: v3's cuts scored 0.006-
 raise the planned cuts found at 0.1 from 2 of 22 (v3) to 5 of 19, and the match cuts (montage cards on one framing, the
 pinned 95 line) are low by design. The cut list is exact by construction (the renderer draws from it).
 
-Phone scale: each shot was checked at 390 x 219 (a 16:9 frame on a 390-pt-wide phone in portrait): the heroes (~30 pt), the tags and the
+Phone scale: each shot was checked at 390 x 219 (a 16:9 frame on a 390-pt-wide phone in portrait): the heroes (~35 pt), the tags and the
 labels read; the meter targets (40 px, ~8 pt) and the snapshot line (36 px) are context.
 
 ## Cut list (hard cuts on a 120 BPM grid: every shot a multiple of 0.5 s; 15 frames = one beat)
