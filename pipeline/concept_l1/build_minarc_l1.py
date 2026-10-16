@@ -147,31 +147,33 @@ def extrude2d(V2, F2, cen, e, f, ax, z0, z1):
     return m
 
 
-def slotted_plate(cen, ax, z0, z1, R, rs, w, a_lo, a_hi, n_ang=240):
+def slotted_plate(cen, ax, z0, z1, R, rs, w, a_lo, a_hi, n_ang=240, extra=()):
     """O(2R) x (z1 - z0) plate about ax at cen with an arc slot: radii rs - w .. rs + w, angles a_lo .. a_hi (rad, frame_of(ax),
     a_hi - a_lo < 2 pi), radial ends; one watertight genus-1 solid (polar grid, extruded)"""
     e, f = S.frame_of(ax); f = np.cross(ax, e)
     tw = 2 * np.pi
-    ang = np.unique(np.round(np.r_[np.linspace(0, tw, n_ang, endpoint=False), a_lo % tw, a_hi % tw], 9))
+    spans = [(a_lo, a_hi)] + list(extra)                                         # extra: more slots (a_lo, a_hi) at the same radius
+    ang = np.unique(np.round(np.r_[np.linspace(0, tw, n_ang, endpoint=False), [x % tw for sp in spans for x in sp]], 9))
     radii = np.unique(np.r_[np.linspace(R / 6, rs - w, 4), rs - 0.5 * w, rs, rs + 0.5 * w, rs + w, np.linspace(rs + w, R, 3)])
     na, nr = len(ang), len(radii)
     V2 = [np.zeros(2)] + [np.array([r * math.cos(t), r * math.sin(t)]) for r in radii for t in ang]
     vid = lambda i, j: 1 + i * na + (j % na)
     F2 = [[0, vid(0, j), vid(0, j + 1)] for j in range(na)]
-    span = (a_hi - a_lo) % tw
     for i in range(nr - 1):
         rm = 0.5 * (radii[i] + radii[i + 1]); in_band = (rm > rs - w - 1e-9) and (rm < rs + w + 1e-9)
         for j in range(na):
             t0, t1 = ang[j], ang[(j + 1) % na] + (tw if j == na - 1 else 0.0); tm = 0.5 * (t0 + t1)
-            if in_band and ((tm - a_lo) % tw) < span: continue                  # the slot
+            if in_band and any(((tm - lo_) % tw) < ((hi_ - lo_) % tw) for lo_, hi_ in spans): continue   # a slot
             F2 += [[vid(i, j), vid(i + 1, j), vid(i + 1, j + 1)], [vid(i, j), vid(i + 1, j + 1), vid(i, j + 1)]]
     return extrude2d(np.array(V2), np.array(F2), cen, e, f, ax, z0, z1)
 
 
-def slot_place(strap_pts, cen, ax, q_lo, q_hi, rs, w, r_d):
+def slot_place(strap_pts, cen, ax, q_lo, q_hi, rs, w, r_d, pair=False):
     """the dowel's home angle th (rad, frame_of(ax) in the UPPER member) so that the slot (dowel centre th + q, q in
     [q_lo, q_hi] rad, plus the dowel's angular half-width) keeps the most angle from the lower member's strap points in the
-    slot's radial / height band. (th, a_lo, a_hi, clearance deg)"""
+    slot's radial / height band. pair: an OPPOSED second slot at th + pi (a dowel couple) must clear the strap too - the
+    min clearance of both slots is maximised (gen-4 build finding: the BDp CAD's second K slot ran through link 1a's root).
+    (th, a_lo, a_hi, clearance deg)"""
     e, f = S.frame_of(ax); f = np.cross(ax, e)
     w3 = strap_pts - cen; z = w3 @ ax; pl = w3 - np.outer(z, ax); r = np.linalg.norm(pl, axis=1)
     band = (z > -0.5) & (z < PLATE + 0.5) & (r > rs - w - 1.0) & (r < rs + w + 1.0)
@@ -180,6 +182,7 @@ def slot_place(strap_pts, cen, ax, q_lo, q_hi, rs, w, r_d):
     for th in np.radians(np.arange(0.0, 360.0, 1.0)):
         a_lo, a_hi = th + q_lo - d, th + q_hi + d; mid, half = 0.5 * (a_lo + a_hi), 0.5 * (a_hi - a_lo)
         gap = np.abs((phi - mid + np.pi) % (2 * np.pi) - np.pi) - half
+        if pair: gap = np.r_[gap, np.abs((phi - mid) % (2 * np.pi) - np.pi) - half]
         c = float(gap.min()) if len(gap) else np.pi
         if best is None or c > best[3]: best = (th, a_lo, a_hi, c)
     th, a_lo, a_hi, c = best

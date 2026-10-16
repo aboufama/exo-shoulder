@@ -97,7 +97,17 @@
    "contact": 4
   },
   "control_winner_same_rule": 23.47,
-  "control_linear_law": 22.73
+  "control_linear_law": 22.73,
+  "connected": {
+   "full": 22.72,
+   "knn": 25.53,
+   "bench_grid": 46.09,
+   "winner_same_rule": {
+    "full": 23.47,
+    "knn": 26.0,
+    "bench_grid": 46.55
+   }
+  }
  },
  "held_out": {
   "gap": 26.65,

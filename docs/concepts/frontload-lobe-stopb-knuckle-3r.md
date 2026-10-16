@@ -61,9 +61,11 @@ All on the farm, Bench(60,160) fast, objective = the near-touch gap. The CMA sta
 | **CMA B** | **seg law, i_rock = 1 (the 1:1 post), seats** | 1921 | **15.57** | 0.06 / 0.04 / 0.01 |
 | CMA C | track law, i_rock free, seats | 945 | 17.23 (i_rock 1.85) | 0.13 / 0.01 / 0.03 |
 | CMA D | the winner's linear law, i_rock free, a1max to 64 | 977 | 16.77 (i_rock 1.51) | 0.09 / 0.04 / 0.01 |
-| CMA E | control: linear law, i_rock 1, re-fit from B's seats | see the row | - | - |
+| CMA E (control) | the winner's own LINEAR law, i_rock 1, re-fit from B's seats | 2609 | **15.54** (kK 2.27, smhi 18.5) | 0.04 / 0.01 / 0.00 |
 
-Every run passes the convergence gate. Combined over 6292 CMA tries: 0.10 / 0.01 / 0.01.
+Every run passes the convergence gate. Combined over 8901 CMA tries: 0.10 / 0.01 / 0.01. The control E settles on the winner's
+own linear law, re-fitted. It matches the front-loaded best fast (15.54 against 15.57), at reach 0.7875 and in-band
+0.862.
 
 Best (CMA B):
 - Law and drive: law seg, kA 2.900, t1 6.94, kB 2.756, i_rock 1 (the follower post), r_horn 2.471, r_lobe 7.350 (crest
@@ -94,6 +96,13 @@ Held out (every fit-clip frame and workspace pose in neither bench, exact; the v
 - best: 26.65 (near-touch 29.29), reach 0.6922, in-band 0.8539, contact 0.0126, overhead 19/71, min metal 0.14 mm.
 - winner + rule: 28.02 (near-touch 30.21), reach 0.6912, in-band 0.8435, contact 0.0149, overhead 19/71, min metal 0.21 mm. The verifier measured the claim at 28.12.
 - Held-out gain: 1.37 gap points. Lost poses held out: best {'fold': 251, 'slide': 25, 'flip': 0, 'closure': 0, 'skin': 0, 'parts': 6, 'contact': 11}; winner {'fold': 252, 'slide': 29, 'flip': 0, 'closure': 0, 'skin': 0, 'parts': 0, 'contact': 13}.
+
+Continuity flood fill on the frozen Bench(110,360) wear. This is the round-6 verifier's connected_report: 2-deg slerp edges, passive
+jumps of at most 10 deg, seeds in state A.
+- full grid: best 22.72 (0 dropped), winner + rule 23.47 (0 dropped).
+- knn grid: best 25.53 (10 dropped), winner 26.0 (9 dropped).
+- sparse bench grid: best 46.09, winner 46.55.
+The order is the same on every grid.
 
 Lost poses, frozen:
 - best: fold 86, slide 7, parts 1, contact 4. Overhead: fold 15, slide 3, contact 2.
