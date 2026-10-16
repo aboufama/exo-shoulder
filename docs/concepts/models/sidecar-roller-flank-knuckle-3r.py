@@ -45,6 +45,11 @@ unit = S.unit; D2R = math.pi / 180
 ID = "sidecar-roller-flank-knuckle-3r"
 PA_MAX, ROLL_R, ROLL_W, RHO_MIN, R_CMIN, LUG_BACK, RUNG = 45.0, 3.0, 2.5, 3.5, 13.0, 6.0, SC.RUNG
 DK_IDLE = 30.0
+K_DES = math.radians(50.0)                                   # the K stroke the progressive law's lobe gate is sized for
+
+
+def phi_of(k, g, c): return (np.asarray(k, float) / g) * (1.0 + c * np.asarray(k, float))      # crank angle (rad) per |dK| (rad)
+def dphi_of(k, g, c): return (1.0 + 2.0 * c * np.asarray(k, float)) / g
 LEAD_DYAD = {"bk1": 30.05, "bk2": 37.57, "a1max": 61.72}
 SEED = dict(SC.LEAD, **LEAD_DYAD, law_mode="lin", kK=2.0, g=1.8, r_c=15.5, beta=-85.0, hl=3.15, zr=1.5, s_arm=5.0, r_lobe=7.5,
             chain="lead")
@@ -58,7 +63,10 @@ def _clamp(p):
     p["g"] = min(max(float(p["g"]), 1.0), 3.0); p["r_c"] = min(max(float(p["r_c"]), 14.0), 22.0)
     p["s_arm"] = min(max(float(p["s_arm"]), 4.0), 6.0); p["r_lobe"] = min(max(float(p["r_lobe"]), 7.0), 8.5)
     p["hl"] = min(max(float(p["hl"]), 0.0), 3.15); p["zr"] = max(float(p["zr"]), 0.0)
-    p["i_rock"] = p["g"]; p["r_horn"] = p["s_arm"]; p["r_h"] = p["r_c"]; p["La"] = 0.0
+    p["cprog"] = min(max(float(p.get("cprog", 0.0)), -0.4), 2.0)                # phi' > 0 over K <= 1.25 rad
+    # progressive law phi = (|dK| / g)(1 + cprog |dK|): the lobe gate (lift, pressure, crest) is evaluated at the STEEPEST gain
+    # (1 + 2 cprog K_DES) / g everywhere - conservative: the real lift and lift rate are lower below K_DES
+    p["i_rock"] = p["g"] / max(1.0, 1.0 + 2.0 * p["cprog"] * K_DES); p["r_horn"] = p["s_arm"]; p["r_h"] = p["r_c"]; p["La"] = 0.0
     if p.get("law_mode", "lin") == "lin":
         p["kK"] = max(float(p["kK"]), 0.0); p["kA"] = p["kB"] = p["kK"]; p["t1"] = 6.0; p["law_mode_in"] = "lin"; p["law_mode"] = "seg"
     for k in ("kA", "kB"): p[k] = max(float(p[k]), 0.0)
@@ -77,7 +85,7 @@ def _ang(a, b):
 class RFModel(SC.SCModel):
     def _sc_pose(self):
         g = self._scg; dKp = np.abs(np.asarray(self.dK, float)); n = len(dKp)
-        php = g["sig"] * dKp / g["g"]
+        php = g["sig"] * phi_of(dKp, g["g"], g.get("c", 0.0))
         Rc = S.rotm(g["dR"], php); tc = g["PV"][None] - np.einsum("nij,j->ni", Rc, g["PV"])
         self._sc = dict(n=n, X={9: (Rc, tc), 8: (Rc, tc)})
 
@@ -87,7 +95,7 @@ class RFModel(SC.SCModel):
         g0 = (S.HUB_R + 5.0 + 1.0) / max(f2, 30.0); ax = unit(np.cross(u2, uK)); dR = unit(S.rotm(ax, g0)[0] @ u2)
         near = L1b[np.argsort(np.linalg.norm(unit(L1b) - dR, axis=1))[:6]]; lev = float(np.linalg.norm(near, axis=1).max())
         tK0 = unit(dR - (dR @ uK) * uK); bK0 = unit(np.cross(uK, tK0))
-        beta = float(P["beta"]) * D2R; rc = float(P["r_c"]); gg = float(P["g"])
+        beta = float(P["beta"]) * D2R; rc = float(P["r_c"]); gg = float(P["g"]); cc = float(P.get("cprog", 0.0))
         sK = math.cos(beta) * tK0 + math.sin(beta) * bK0
         lvK = fK + float(P["hl"]); lift = min(max(float(P.get("lift", 0.0)), 0.0), 8.0)   # lug / roller layer lifted off hub K's member level
         h_tip = lvK + lift + S.T_LINK + RUNG                                # arm underside over the lug layer (+ running gap)
@@ -113,7 +121,7 @@ class RFModel(SC.SCModel):
         rad0 = np.array([float(np.linalg.norm(P0 + s * ch)) for s in ss_])
         # phi range of the arm swing (for the stacking rule): the law's K range / g
         L_ = D.law(); dKmax = math.radians(float(L_.get("dK_max", 0.0)) + 2.0) if L_.get("ok") else 0.2
-        phis = sig * np.linspace(0.0, dKmax / gg, 7)
+        phis = sig * phi_of(np.linspace(0.0, dKmax, 7), gg, cc)
         lvl = np.zeros(ns)
         for j, (d_, s_) in enumerate(zip(dirs, ss_)):
             over = False
@@ -141,12 +149,12 @@ class RFModel(SC.SCModel):
         # ---- spherical cam synthesis on the K grid
         kgrid = np.radians(np.arange(0.0, max(math.degrees(dKmax), 5.0) + 1e-6, 0.25)); nk = len(kgrid)
         Rk = S.rotm(uK, sp * kgrid)                                       # link 1b -> link 1a: X_1a = Rk X_1b
-        Rcg = S.rotm(dR, sig * kgrid / gg)
+        Rcg = S.rotm(dR, sig * phi_of(kgrid, gg, cc))
         Cg = np.einsum("nij,j->ni", Rcg, C0 - PV) + PV
         pac = np.zeros(nk); pah = np.zeros(nk); Qg = np.zeros((nk, 3)); ng = np.zeros((nk, 3)); lift = np.zeros(nk, bool)
         nprev = None
         for j in range(nk):
-            C = Cg[j]; vC = (sig / gg) * np.cross(dR, C); vh = vH(C); vr = vC - vh; rh = unit(C)
+            C = Cg[j]; vC = sig * float(dphi_of(kgrid[j], gg, cc)) * np.cross(dR, C); vh = vH(C); vr = vC - vh; rh = unit(C)
             n = np.cross(rh, vr); nn = float(np.linalg.norm(n))
             n = n / nn if nn > 1e-9 else (nprev if nprev is not None else unit(vh))
             if nprev is None: n = n if float(n @ vh) >= 0 else -n
@@ -213,7 +221,9 @@ class RFModel(SC.SCModel):
             if badL.any():
                 jl2 = max(int(np.argmax(badL)) - 1, 0)
                 if jl2 < jl: jl, lim, why_lim = jl2, float(kgrid[jl2]), "CRK-HORN"
-        self._scg = dict(PV=PV, dR=dR, uK=uK, sp=sp, sig=sig, g=gg, kgrid=kgrid, dK_lim=lim, why_lim=why_lim, lowarm=low, lugM=lugM)
+        self._cam_table = dict(k=np.degrees(kgrid), phi=np.degrees(phi_of(kgrid, gg, cc)), pa_crank=pac, pa_horn=pah, contact_r=rQ, flank_rho=flank_rho,
+                               clear_hubK=cK, clear_roll_hubK=cR, clear_hub2=c2, lift=lift, cusp=flank_bad)
+        self._scg = dict(PV=PV, dR=dR, uK=uK, sp=sp, sig=sig, g=gg, c=cc, kgrid=kgrid, dK_lim=lim, why_lim=why_lim, lowarm=low, lugM=lugM)
         self._sc = None
         # metal: crank (boss underside disc + arm underside), roller underside, horn lug underside
         self.rigid["crank"] = (9, np.concatenate([boss, arm]))
@@ -231,7 +241,7 @@ class RFModel(SC.SCModel):
         armPts = [PV + 1.5 * dR] + [d_ * (lvl[j] + 1.5) for j, d_ in enumerate(dirs)][1:] + [unit(uK * h_tip + rc * (math.cos(a) * tK0 + math.sin(a) * bK0)) * (rA + 1.5) for a in psi[1:]]
         lugPts = [unit(uK * lvK + (S.HUB_R + 0.5) * unit(Q1[0] - (Q1[0] @ uK) * uK)) * (np.linalg.norm(uK * lvK + (S.HUB_R + 0.5) * unit(Q1[0] - (Q1[0] @ uK) * uK)) + 1.5)] + \
                  [unit(Q1[j] + 3.0 * N1[j]) * R0 for j in pick]
-        self._viz_rod = dict(rocker=PV, rockerAx=dR, rodA=C0, rodB=C0, armA=PV, armB=T3, roller=C0, armPts=armPts, lugPts=lugPts, sig=sig, g=gg)
+        self._viz_rod = dict(rocker=PV, rockerAx=dR, rodA=C0, rodB=C0, armA=PV, armB=T3, roller=C0, armPts=armPts, lugPts=lugPts, sig=sig, g=gg, c=cc)
         dKp = np.abs(np.asarray(self.dK, float)); taken = (np.asarray(self.kin_ok, bool)) & (dKp > 1e-9)
         kmax_t = float(dKp[taken].max()) if taken.any() else 0.0; jt = min(int(np.searchsorted(kgrid, min(kmax_t, lim))) + 1, nk)
         self._sc_info = dict(boss_level=round(zboss, 1), lev_L1b=round(lev, 1), arm_tip_level=round(float(np.linalg.norm(T3)), 1), g=round(gg, 3), sig=sig,
@@ -242,8 +252,8 @@ class RFModel(SC.SCModel):
                              flank_rho_min=round(float(np.abs(flank_rho[:jl + 1]).min()), 1), contact_r=[round(float(rQ[0]), 1), round(float(rQ[jl]), 1)],
                              clear_hubK_min=round(float(cK[:jl + 1].min()), 2), clear_roll_hubK_min=round(float(cR[:jl + 1].min()), 2),
                              clear_lowarm_lug_min=round(float(cL[:jl + 1].min()), 2) if len(low) else None, n_lowarm=int(len(low)),
-                             phi_max_taken=round(math.degrees(min(kmax_t, lim) / gg), 1),
-                             crest_exact=round(float(P["r_lobe"]) + float(P["s_arm"]) * min(kmax_t, lim) / gg, 2),
+                             phi_max_taken=round(math.degrees(float(phi_of(min(kmax_t, lim), gg, cc))), 1), cprog=round(cc, 3),
+                             crest_exact=round(float(P["r_lobe"]) + float(P["s_arm"]) * float(phi_of(min(kmax_t, lim), gg, cc)), 2),
                              dK_lim=round(math.degrees(lim), 1), why_lim=why_lim, law_dK_max=round(float(L_.get("dK_max", 0.0)), 1),
                              lug_r_max=round(float(np.linalg.norm(lug - (lug @ uK)[:, None] * uK, axis=1).max()), 1))
         self._rod_info = self._sc_info
@@ -298,7 +308,7 @@ def viz_export(par):
     B = CB.Bench(n_clip=60, n_ws=160); r, M = SC._report(B, par); vr = M._viz_rod
     R = lambda v, n=3: [round(float(x), n) for x in v]
     out["G"].update(armPts=[R(x) for x in vr["armPts"]], lugPts=[R(x) for x in vr["lugPts"]], roller=R(vr["roller"]), rollerAx=R(unit(vr["roller"]), 5),
-                    sig=float(vr["sig"]), g=round(float(vr["g"]), 4), dKlim=round(float(M._sc_info["dK_lim"]), 2))
+                    sig=float(vr["sig"]), g=round(float(vr["g"]), 4), cprog=round(float(vr.get("c", 0.0)), 4), dKlim=round(float(M._sc_info["dK_lim"]), 2))
     out["report"]["near1"] = r.get("gap_near1"); out["sidecar"] = M._sc_info
     return out
 
