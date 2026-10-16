@@ -802,7 +802,7 @@ got a kinematic and an in-band ceiling (`ceilings.py`, `frontier_mine.py`).
   143; knuckle 132 of 138; spine-parked 140 of 146). Everything else is 6-9 poses: the pin knee's knee reach (4, all
   at elevation 165: hub 3 drifts 65.8-70.1 mm against lE + lc - 1 = 66.0; a longer knee measured 0 - lc 31 admits 2
   and both touch the skin), contact 2-5, parts 1-3, no jams.
-* **Across the body is lost on the stretched side only** (47-51 of 68; th up to 153 against window tops of 101-104).
+* **Across the body is lost on the stretched side only** (47-51 of 68; th up to 173-179 against window tops of 101-104).
   **Overhead is lost on both sides** (7-9 folded at th 24-37, 10 stretched at 110-142): the overhead poses alone span
   th 18-146, so no shift of the window rescues them, only a wider one or a second one.
 * **The plain 3R loses half its in-window overhead to the skin** (spine-parked: 5 of 10, link 2's top face among

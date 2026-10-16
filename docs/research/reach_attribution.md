@@ -61,7 +61,7 @@ By region (measured per pose; raglan = today's model):
 | behind the back (plane < -30, elev > 20, or a "back" clip) | 25 | **17** / 1, 5, contact 2 | **16** / 2, 5, contact 2 | **17** / 1, 6, contact 1 | **17** / 2, 5, contact 1 |
 | the rest (none of the three; 6 poses are both overhead and across) | 245 | 174 / 48, 20, parts 2 + contact 1 | | | |
 
-* **Across the body is a pure stretched-side loss** (47-51 of 68, th up to 153 deg against a window top of 101-104):
+* **Across the body is a pure stretched-side loss** (47-51 of 68, th up to 173-179 deg against a window top of 101-104):
   horizontal adduction swings the humerus-fixed J3 away from the scapula-fixed J1 beyond the two arcs' reach. Only a
   longer a1 + a2 (or a second, longer state) rescues it; the margin cannot (it moves the top 3-8 deg).
 * **Overhead fails on both sides** (7-9 folded at th 24-37, 10 stretched at th 110-142) - the overhead poses alone
@@ -225,7 +225,7 @@ Reading the ranking:
 
 * **The plateau is the fold, and the fold is set by the arcs proximity allows.** 94-96 % of every leader's lost
   workspace is the J2 fold; the rest (6-9 poses) is worth 1.7-2.5 points of reach. At the seats where the hubs can sit
-  in band (J1 over the acromion top, arcs ~40 / 73) the fold window is 60 deg wide against a 114-deg (5-95 %)
+  in band (J1 over the acromion top, arcs ~40 / 73) the fold window is 55-60 deg wide against a 114-deg (5-95 %)
   workspace spread of th, so the kinematic ceiling AT THOSE SEATS is 0.61-0.63 - the verified reaches are 0.594-0.617.
   Across the body is lost on the stretched side only; overhead on both sides.
 * **No measured 3-joint configuration beats ~0.70 fast / ~0.61 frozen at in-band >= 0.88**, across 50 k plain-3R,

@@ -272,7 +272,7 @@ def links(M):
     # is 10.9 mm above J1's within 40 deg, the L1 strap needs ~55 deg near J2), 12 / 11 mm pads with R3 planform rounds
     for Ls, rf in ((L_SEAT, US.RF), (12.0, 3.0), (11.0, 2.0)):
         start = (ha, Ls, math.pi / 2); end = (*(B + Ls * back), math.pi / 2 + phi)
-        try: fit, r1 = link_fit(f"link 1 (seat {Ls:g})", ex, ey, start, end, Dq, Rq); break
+        try: fit, r1 = link_fit("link 1" if Ls == L_SEAT else f"link 1 (seat {Ls:g})", ex, ey, start, end, Dq, Rq); break
         except RuntimeError as e_: print(f"  link 1: seat {Ls:g}: {e_}", flush=True)
     if fit is None: raise RuntimeError("link 1: no chain at any seat length")
     body = US.bar_swept(ex, ey, start, fit["segs"])

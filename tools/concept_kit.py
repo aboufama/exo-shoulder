@@ -22,6 +22,12 @@ import concept_bench as CB                                   # noqa: E402
 D2R = math.pi / 180
 TI = 4.43e-3                                                 # g / mm3
 HUB_R, STACK, CROWN = 10.0, 3.15, 12.25                      # O20 hub v5 (docs/HARDWARE.md): lower member [F, F+3], upper at F+3.15, crown F+12.25
+# THE J1-J3 FOLD MARGIN (deg), in ONE place: a 3R (or any J1 -> J2 -> J3 dyad) takes a pose only if th = angle(J1, J3) lies in
+# [|a1 - a2| + m, min(a1 + a2, 360 - a1 - a2) - m]. User ruling 2026-10-16 ~05:50 UTC: 5 deg for the unpowered MVP1 (was
+# 10; CLAUDE.md "The golden solution"). Every model / verifier that keeps J2 short of its fold reads this constant
+# (seed-offset-3r-slides SING -> osn / pin knee / raglan knee / knuckle / arc knee; kit models' PARAMS["margin"]);
+# CB_FOLD_MARGIN=10 re-measures at the old rule for before / after comparisons (docs/FINDINGS.md "Rebase").
+FOLD_MARGIN = float(os.environ.get("CB_FOLD_MARGIN", 5.0))
 
 
 def bench(n_clip=60, n_ws=160): return CB.Bench(n_clip, n_ws)

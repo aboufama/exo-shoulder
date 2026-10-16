@@ -44,6 +44,7 @@ from scipy.spatial import cKDTree
 HERE = os.path.dirname(os.path.abspath(__file__)); REPO = os.path.abspath(os.path.join(HERE, "..", "..", ".."))
 sys.path.insert(0, os.path.join(REPO, "tools"))
 import concept_bench as CB                                   # noqa: E402
+import concept_kit as _KIT                                   # noqa: E402  (FOLD_MARGIN only)
 BP = CB.BP
 ID = "seed-offset-3r-slides"
 D2R = math.pi / 180
@@ -54,7 +55,8 @@ T_LINK, W_LINK, RAMP = 3.0, 8.0, 60.0       # strap thickness / width, ramp limi
 RAIL_W, RAIL_H, CAR_L, CAR_W, CAR_H, RUN = 8.0, 4.0, 20.0, 20.0, 4.0, 0.5
 CLEAR, PART_CLEAR, SPACING = 2.0, 1.0, 2.0  # skin clearance target, part-part clearance, sample grid (1 pt / 4 mm2)
 BIG = 999.0
-SING, JUMP = 10.0, 25.0                     # deg: J2 fold margin, largest joint step between 10 fps frames
+SING, JUMP = _KIT.FOLD_MARGIN, 25.0         # deg: J2 fold margin (tools/concept_kit.py FOLD_MARGIN: 5 since the user's 2026-10-16
+                                            # ruling, was 10; CB_FOLD_MARGIN overrides), largest joint step between 10 fps frames
 
 # the seed: the current champion's axis directions (r20 s1414 #4, pipeline/conformal/band_cad/inputs/r20_n3_s1414_4_f300.json)
 SEED = dict(az=2.4305071427308924, el=80.67633718429899, a=[76.90180446920043, 66.74921235407174],
