@@ -155,9 +155,10 @@ def _w_init(nc, nw, device):
     _W.update(GB=GB, KP=KP, S=KP.verifier().MK.S, B=GB.bench(nc, nw, device))
 
 
-def gpu_slots(ncpu, per_gb=float(os.environ.get("GKS_GB_PER_WORKER", 1.8))):
+def gpu_slots(ncpu, per_gb=max(2.8, float(os.environ.get("GKS_GB_PER_WORKER", 2.8)))):
     """workers the device memory holds: each worker keeps its own int8 grid of the bench (470 poses x 131^3 = 1.06 GB on
-    Bench(110,360)) + a CUDA context + the batch temporaries (~1.8 GB in all); capped by the CPUs"""
+    Bench(110,360)) + a CUDA context + the batch temporaries: measured 2.0-2.6 GB per worker on the RTX PRO 4500 (14
+    workers ran out of its 31.4 GB), so 2.8 GB is budgeted; capped by the CPUs"""
     try:
         mb = float(os.popen("nvidia-smi --query-gpu=memory.total --format=csv,noheader,nounits").read().split()[0])
         return max(1, min(ncpu - 1, int((mb / 1024.0 - 2.0) / per_gb)))
@@ -225,10 +226,11 @@ def cuda_err(r): return bool(r.get("err")) and any(w in r["err"] for w in ("CUDA
 
 
 def dedupe(rows):
-    """one row per tag: a row that closed beats an error row (a restarted pod re-evaluates its CUDA-error rows)"""
+    """one row per (tag, params): a row that closed beats an error row (a restarted pod re-evaluates its CUDA-error rows);
+    the params are part of the key because CMA tags repeat across restarts (basin numbering of the first run)"""
     best = {}
     for r in rows:
-        t = r.get("tag"); o = best.get(t)
+        t = (r.get("tag"), json.dumps(r.get("p"), sort_keys=True)); o = best.get(t)
         if o is None or (o.get("err") is not None and r.get("err") is None): best[t] = r
     return list(best.values())
 
@@ -369,7 +371,12 @@ def run(a):
     retry = [r for r in dedupe(prev) if cuda_err(r) and r["tag"] not in okt]
     if retry: log(f"restart: re-evaluating {len(retry)} rows that failed on a CUDA error (of {len(prev)} rows)")
     for dp in sorted(dead_pods(OUT)):                     # a terminated pod: its CUDA-error rows + the rest of its claimed chunks
-        if dp == me or not claim(os.path.join(OUT, "claims", f"orph_{dp}")): continue
+        op = os.path.join(OUT, "claims", f"orph_{dp}")
+        if dp == me: continue
+        if not claim(op):                                 # a restarted pod takes back the orphans it had claimed
+            try:
+                if open(op).read().split()[0] != me: continue
+            except (OSError, IndexError): continue
         allrows = dedupe(read_jsonl(os.path.join(OUT, "sobol_*.jsonl"))); okt2 = {r["tag"] for r in allrows if r.get("err") is None}
         dr = [r for r in dedupe(read_jsonl(os.path.join(OUT, f"sobol_{dp}.jsonl"))) if cuda_err(r) and r["tag"] not in okt2]
         have = {r["tag"] for r in allrows}; miss = []

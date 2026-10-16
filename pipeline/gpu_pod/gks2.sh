@@ -6,7 +6,7 @@ source /root/xs/pipeline/gpu_pod/gks_env.sh
 K=/workspace/exo-farm/gpuk; RUN=$K/out/$GKS_RUN; L=$RUN/log_${RUNPOD_POD_ID}.txt
 echo "restart $(date -u +%FT%TZ): $(ls -R $RUN/override | tr '\n' ' ')" >> $L
 cp -r $RUN/override/. /root/repo/
-cd /root/repo; export CB_QUIET_EXACT=1 OMP_NUM_THREADS=1 CB_FOLD_MARGIN=5 IGL_NUM_THREADS=1 GKS_GB_PER_WORKER=2.0 PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True
+cd /root/repo; export CB_QUIET_EXACT=1 OMP_NUM_THREADS=1 CB_FOLD_MARGIN=5 IGL_NUM_THREADS=1 GKS_GB_PER_WORKER=2.8 PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True
 nvidia-smi --query-gpu=name,memory.total,memory.used --format=csv >> $L
 LEFT=$(( ${GKS_T_CMA%.*} + 600 - $(date +%s) ))
 timeout $LEFT python3 tools/gpu_knee_search.py run --out $RUN >> $L 2>&1

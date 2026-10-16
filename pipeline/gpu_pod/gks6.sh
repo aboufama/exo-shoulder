@@ -1,6 +1,6 @@
 # gks6 (farm job): wait until the pin-knee search's verification is done (every job in verify_jobs.json has its output,
-# or 11:27 UTC), then digest the run directory on the volume into docs/research/golden/gks1_digest.json (+ _all.npz)
-V=/runpod-volume/exo-farm; R=$V/gpuk/out/gks1; END=$(date -d "11:27" +%s)
+# or 11:36 UTC), then digest the run directory on the volume into docs/research/golden/gks1_digest.json (+ _all.npz)
+V=/runpod-volume/exo-farm; R=$V/gpuk/out/gks1; END=$(date -d "11:36" +%s)
 while [ $(date +%s) -lt $END ]; do
   if [ -f $R/verify_jobs.json ]; then
     n=$(python3 -c "import json,os; j=json.load(open('$R/verify_jobs.json'))['jobs']; print(sum(1 for x in j if not os.path.exists('$R/verify/'+x['id']+'.json')))")
