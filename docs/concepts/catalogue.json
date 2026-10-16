@@ -2289,7 +2289,7 @@
   "name": "Min-arc stop knuckle 4R: a preloaded one-sided knuckle in link 1 with J2 hard stops (plain spherical chain)",
   "family": "redundant 4R, determined spare (Keemink layout)",
   "lens": "round5:keemink-4r-band",
-  "status": "screened",
+  "status": "refuted",
   "t_ideated": "2026-10-16T07:12:09Z",
   "source": "round 5 judge (docs/concepts/round5_ideation.md)",
   "merged_from": [

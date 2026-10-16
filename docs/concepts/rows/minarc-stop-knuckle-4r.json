@@ -7,11 +7,11 @@
  "passive_dof": 3,
  "passive_translations": 0,
  "t_ideated": null,
- "v_reach": null,
- "v_follow": null,
- "v_inband14": null,
- "v_inband10": null,
- "v_gap": null,
+ "v_reach": 0.7472,
+ "v_follow": 1.0,
+ "v_inband14": 0.889,
+ "v_inband10": 0.583,
+ "v_gap": 18.45,
  "doc": "docs/concepts/minarc-stop-knuckle-4r.md",
  "model_file": "docs/concepts/models/minarc-stop-knuckle-4r.py",
  "mechanism": {
@@ -32,7 +32,7 @@
   "source": "docs/concepts/models/minarc-stop-knuckle-4r.py:1-20 (chain, law), build()",
   "confidence": "counted"
  },
- "status": "screened",
+ "status": "refuted",
  "t_screened": "2026-10-16T08:30:00Z",
  "reach": 0.8438,
  "follow": 1.0,
@@ -43,7 +43,7 @@
  "n_configs": 14443,
  "verdict": "screened: variant B frozen exact 15.42 on Bench(110,360) (score 94.4, self-measured; conservative fold-margin reading 21.40, near-touch 21.37 at BA) - best self-measured frozen number so far, 0 passive translations, complexity 33; needs the independent verifier. Variant A (complexity 13.5) 22.17 fast converged.",
  "limiter": "B at BD, big bench: the fold (56 poses: stretched past stop B a1max 66, folded with J1 ~ J3), the knee window (16), contact (9); overhead reach 8/28; hub 3 (0.66) and link 2 (0.78) in band; near-touch 0.05 mm overhead. Red team: the forced sub-chain J1-K-J3 swings J1 20-40 deg/frame before stop B on the gallery loop (sub-chain margin 7.3) - dynamic stiffening risk for MuJoCo",
- "note": "Bench(60,160) fast unless stated. VARIANT B (docs/concepts/models/minarc-stop-knuckle-4r-pinknee.py: the pin-knee VModel + passive spring knuckle K in link 1 + J2 interior-angle stops): CMA (4 streams, 6234 tries) BD 6.19 fast -> FROZEN EXACT Bench(110,360) 15.42 (score 94.4; reach 0.769, follow 1.0, ib14 0.899, contact 0.023; near-touch 22.17, min metal 0.05 mm on the overhead raise clip); BA 7.27 -> 17.98 (near-touch 21.37, min metal 0.76 mm); BB (mstop 1, J2 dyad keeps 5 deg th-margin) 9.43 -> 21.40; at the pin knee's own seats knuckle locked 26.82 vs knuckle 24.00 frozen. Gate (B): 0.23 / 0.23 / 0.03 score pts -> converged. VARIANT A (docs/concepts/models/minarc-stop-knuckle-4r.py, kit, plain spherical chain + K, complexity 13.5): coarse 302 -> 49.10; CMA 6 streams 7886 tries -> 22.17 fast (gate 0.49 / 0.31 / 0.02 converged; 3R control at the same seats 45.91; near-touch 41.79); frozen exact pending (.cache/minarc/frozen_FA.json, FA3R; near-touch CMA AN1/AN2/AG -> .cache/minarc/cma_AN*.json). Judge's prediction 18-24 for the plain chain: refuted on the kit (22.17 fast); the knuckle is worth 23.7 points over its own 3R control only once seats are re-tuned for it. Spring: quasi-static gravity torque <= 0.008 N.m (B) / 0.018 (A) vs 0.08 N.m preload; MuJoCo pending L1 meshes.",
+ "note": "Bench(60,160) fast unless stated. VARIANT B (docs/concepts/models/minarc-stop-knuckle-4r-pinknee.py: the pin-knee VModel + passive spring knuckle K in link 1 + J2 interior-angle stops): CMA (4 streams, 6234 tries) BD 6.19 fast -> FROZEN EXACT Bench(110,360) 15.42 (score 94.4; reach 0.769, follow 1.0, ib14 0.899, contact 0.023; near-touch 22.17, min metal 0.05 mm on the overhead raise clip); BA 7.27 -> 17.98 (near-touch 21.37, min metal 0.76 mm); BB (mstop 1, J2 dyad keeps 5 deg th-margin) 9.43 -> 21.40; at the pin knee's own seats knuckle locked 26.82 vs knuckle 24.00 frozen. Gate (B): 0.23 / 0.23 / 0.03 score pts -> converged. VARIANT A (docs/concepts/models/minarc-stop-knuckle-4r.py, kit, plain spherical chain + K, complexity 13.5): coarse 302 -> 49.10; CMA 6 streams 7886 tries -> 22.17 fast (gate 0.49 / 0.31 / 0.02 converged; 3R control at the same seats 45.91; near-touch 41.79); frozen exact pending (.cache/minarc/frozen_FA.json, FA3R; near-touch CMA AN1/AN2/AG -> .cache/minarc/cma_AN*.json). Judge's prediction 18-24 for the plain chain: refuted on the kit (22.17 fast); the knuckle is worth 23.7 points over its own 3R control only once seats are re-tuned for it. Spring: quasi-static gravity torque <= 0.008 N.m (B) / 0.018 (A) vs 0.08 N.m preload; MuJoCo pending L1 meshes. | VERIFIED-REFUTED 2026-10-16 (skeptic lens; also docs/concepts/verify/minarc-stop-knuckle-4r-remeasure.md and -mechanism.md): (1) the claimed 15.42 reproduces to the digit but its J2 interior-angle stops (12.28 / 162.70) leave the J1-J3 dyad 1.97 deg from its fold on taken poses (25 state-A poses under the user's 5-deg margin, 3 of them clip frames) - shrinking the singularity margin without the user's say; (2) K is NOT a passive coordinate under the user's DOF rule: in the forced states J2 sits on its stop, so q1/q2/q3 do not determine the arm and K must be position-measured -> 4 ACTIVE DOF (R5 cap 4 met, R5-aim and the 3-active brief failed; same ruling as short-a2-arc-slide-3r). Honest figure (J2 stops at the 5-deg J1-J3 margin, phi 20.79 / 146.61, BD seats, fit Bench(60,160) fast, worn frozen on Bench(110,360) exact): v_gap 18.45 (score 93.3; reach 0.747, follow 1.0, ib14 0.889, ib10 0.583, contact 0.021; near-touch 24.26, min metal 0.05 mm; overhead ws 8/28) vs CHAMPION 64.93 on the same bench and checks (fold margin 5; 66.97 at margin 10). As a 4-active-DOF design it beats the champion and every verified 3-active leader; the mechanism verifier's buildable variant (physical q2 stop + 6 mm spring cap) measured 17.32.",
  "best_k": "variant B, CMA stream BD best (6.19 on Bench(60,160) fast, VModel rules)",
  "best_params": {
   "az1": 95.4669,
@@ -359,5 +359,43 @@
   "phi_hi": 158.8831,
   "mstop": 0,
   "variant": "B"
+ },
+ "v_contact": 0.0207,
+ "verification": {
+  "t": "2026-10-16T09:50:00Z",
+  "lens": "skeptic (DOF count, fold-margin metric, champion same bench)",
+  "harness": "docs/concepts/verify/minarc-stop-knuckle-4r-skeptic.py",
+  "outputs": "docs/concepts/verify/minarc-skeptic/",
+  "claim_reproduced": {
+   "gap": 15.42,
+   "min_J1J3_margin_stateA_deg": 1.971,
+   "stateA_taken_under_5deg": 25,
+   "of_which_clip_frames": 3
+  },
+  "corrected_stops5": {
+   "gap": 18.45,
+   "reach": 0.7472,
+   "follow": 1.0,
+   "inband14": 0.889,
+   "inband10": 0.583,
+   "contact": 0.0207,
+   "gap_near1": 24.26,
+   "min_metal_mm": 0.05,
+   "overhead_ws_reach": "8/28",
+   "min_J1J3_margin_stateA_deg": 5.124,
+   "min_subchain_margin_forced_deg": 16.9,
+   "forced_taken": 67,
+   "forced_clip_frames": 3,
+   "max_closure_deg": 0.015
+  },
+  "champion_same_bench": {
+   "gap": 64.93,
+   "reach": 0.7278,
+   "follow": 0.9182,
+   "inband14": 0.565,
+   "contact": 0.1103,
+   "note": "seed VModel slides=0, frozen exact Bench(110,360), fold margin 5 (66.97 at margin 10)"
+  },
+  "active_dof_honest": 4
  }
 }

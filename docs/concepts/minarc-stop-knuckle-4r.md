@@ -266,3 +266,66 @@ passive rotations, complexity 33.
 
 **Next:** an independent verifier on BD and BA (docs/concepts/models/minarc-stop-knuckle-4r-pinknee.py frozen), then a
 near-touch polish (objective gap_near1, sub-chain margin >= 10). After that, the L1 CAD and the MuJoCo spring check.
+
+## Verification
+
+Independent skeptic verifier, 2026-10-16. This lens covers the DOF count, the fold-margin metric and the champion on
+the same bench. Two other verifiers also checked this claim: `verify/minarc-stop-knuckle-4r-remeasure.md` and
+`verify/minarc-stop-knuckle-4r-mechanism.md`. Harness: `verify/minarc-stop-knuckle-4r-skeptic.py`, which imports the
+model unchanged. Raw outputs: `verify/minarc-skeptic/`. All runs are local, one process each, and use the frozen
+protocol: fit on Bench(60,160) fast, then wear on Bench(110,360) EXACT. O20 hubs, fold margin 5.
+
+**Independent audit.** For every taken pose the harness recomputes the following from the bench's arm rotation Q
+alone, not from the model's law:
+- th = angle(J1, Q u3);
+- the J1-J3 dyad margin;
+- the rotation of member 3 from (q1, dK, q2, q3), checked against Q;
+- that K stays one-sided;
+- the margin of the forced J1-K-J3 sub-chain.
+
+| reading (BD seats) | gap | score | reach | follow | ib14 | ib10 | contact | near-touch gap | min J1-J3 margin, K on stop A | state-A poses < 5 deg |
+|---|---|---|---|---|---|---|---|---|---|---|
+| claim: J2 stops phi 12.28 / 162.70 | 15.42 | 94.4 | 0.769 | 1.0 | 0.899 | 0.581 | 0.023 | 22.17 | **1.97 deg** | **25 (3 clip frames)** |
+| **corrected: J2 stops at the 5-deg J1-J3 margin (phi 20.79 / 146.61)** | **18.45** | **93.3** | 0.747 | 1.0 | 0.889 | 0.583 | 0.021 | 24.26 | 5.12 deg | 0 |
+| champion (seed VModel, slides 0), same bench and checks | 64.93 | 76.4 | 0.728 | 0.918 | 0.565 | 0.350 | 0.110 | - | - | - |
+
+What holds in both readings:
+- Closure is within 0.015 deg on every taken pose.
+- dK is one-sided (0 to -58.7 deg) and stays inside stop B.
+- The forced sub-chain keeps at least 7.4 deg of margin in the claim and 16.9 deg in the corrected reading.
+- Overhead workspace reach is 8 of 28 poses.
+- Minimum metal is 0.05 mm, on the overhead raise clip at plane 30 / elevation 150.
+- In the corrected reading, 67 taken poses are forced, and 3 of them are clip frames.
+- The champion scored 66.97 at margin 10 (`.cache/osn_verify/L_champbig_frozen.json`). At margin 5 it scores 64.93.
+
+**Refuted as claimed, on two counts.**
+1. **The fold margin.** The claimed 15.42 puts the J2 hard stops on the interior angle phi, 5 deg inside [0, 180].
+   In the J1-J3 metric, which the kit's rule and every verified row use, those stops sit 1.37 / 1.88 deg from the
+   fold. On the worn bench, 25 taken poses with K on stop A run inside the user's 5-deg margin; 3 of them are clip
+   frames. That buys reach by shrinking the singularity margin, which needs the user's say. Moving the stops to the
+   5-deg margin costs 3.03 points: **18.45**. This reproduces the mechanism verifier's `stops5` run to the digit.
+2. **The active-DOF count.** The row records 3 active DOF with K as a "sensed passive". The user's counting rule
+   (REQUIREMENTS.md, 2026-10-15) makes a joint ACTIVE when it must be position-measured for the device to work.
+   - In every forced state J2 rests on its stop, so q2 is constant and q1 / q3 alone cannot give the arm's three
+     rotations. K's angle has to be read.
+   - In the corrected reading this also happens on 3 clip frames, not only on static workspace poses.
+   - The MVP2 J2 motor cannot drive these states either: it would push against a stop while K is unpowered.
+   - So this is a **4-active-DOF** chain. It meets the R5 cap of 4 but fails R5-aim and the brief's "exactly 3 ACTIVE
+     DOF". This is the same ruling as for `short-a2-arc-slide-3r`'s sensed slide.
+
+**What stands.** As a 4-active-DOF design with 0 passive translations, the honest figure is **v_gap 18.45** (score 93.3)
+on Bench(110,360) exact, against the champion's 64.93 under the same bench and checks. It beats every verified 3-active
+leader: H1 scores 24.48 at margin 5 (polish protocol) and 27.20 on this protocol.
+- Continuity on the full envelope grid holds for this configuration: 64 of 64 forced poses are connected (mechanism
+  verifier).
+- The buildable form scores 17.32. It adds a physical q2 stop dowel and a 0.3 x 5 mm clock spring in a 6 mm taller K
+  cap (mechanism verifier).
+
+**Comparisons and next steps.**
+- Compare this design with the four-dof lens (park4 at 22.36, self-measured), not with the 3R family.
+- Open items:
+  - a CMA run that holds the stops at the 5-deg margin, optimised on the near-touch gap;
+  - the 0.05 mm overhead pinch;
+  - in-band10 0.58 against the R1-aim of 0.90;
+  - overhead reach of 8 of 28;
+  - asking the user whether a sensed 4th joint is acceptable for the golden target.
