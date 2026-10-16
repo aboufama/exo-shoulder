@@ -148,7 +148,10 @@ marches leave the grid box and fall back to libigl's exact path.
 |---|---|---|---|---|---|---|---|
 | informed-1 | (-24,4)/(10,105)/65/+1, (-42,20)/(10,150)/65/+1, (-10,40)/(0,150)/70/+1 | 100 | 0.58 | 0.675 | 0 | 275.0 | cranks fitted at the 220 mm march ceiling (r_T 230 on all three legs), F 74-148; 125 collisions (bracket / hub vs crank 2, ball / ball) |
 | informed-2 | (-24,4)/(10,90)/65/-1, (-36,16)/(10,120)/65/-1, (-24,78)/(0,120)/80/-1 | 100 | 0.705 | 0.80 | 0 | 275.0 | r_T 230 on all three legs again, rods 212-294 mm; 154 collisions (ball 1 / ball 2: the studs sat 10 mm apart, crank 0 / crank 1) |
-| informed-3 | (-24,4)/(10,90)/65/-1, (-36,16)/(10,120)/65/-1, (-24,78)/(0,150)/85/-1 | 90 | see the row | | | | the 90th-percentile fit (5-10 % of poses given up as contact) |
+| informed-3 | (-24,4)/(10,90)/65/-1, (-36,16)/(10,120)/65/-1, (-24,78)/(0,150)/85/-1 | 90 | 0.686 | 0.76 | 0 | 275.0 | the 90th-percentile fit lowers r_T to 112-153 (off the ceiling) and every leg is valid on 0.98, but all 151 kin-valid poses collide: the base brackets sit in the cranks' sweep (br/crank 136) |
+| informed-4 | same + `crank_over` (each crank one strap layer over the brackets) | 90 | 0.659 | 0.725 | 0 | 275.0 | 145 collisions: the brackets climb to the 131 mm hub face of the (-36,16) seat and still cross the cranks; crank 0 / rod 0 in 32 poses (the rod folds back over its own crank) |
+| informed-5 | same, p 95 | 95 | 0.682 | 0.756 | 0 | 275.0 | 150 collisions (bracket / crank) |
+| red-team ceiling | informed-4 with every part-part collision switched OFF | 90 | 0.659 | 0.725 | reach 0.34 | 253.41 | the optimistic bound if every bracket, crank and rod could be routed around the others at no cost: follow 0.23, in-band 14 0.18, contact 0.53 |
 
 Each leg's own validity in the model (closure + 15 deg transmission) is 0.93-0.96 of the workspace, so the fold
 lever works per leg. The truss as a whole is limited by three things:
@@ -158,3 +161,64 @@ lever works per leg. The truss as a whole is limited by three things:
   crank's middle runs under the raised or extended arm (crank_park: mid-span need p50 65, p90 105-130 mm, against
   55-74 mm at the tip and 93-114 mm at the hub seat);
 - part collisions between three legs that share the posterior shoulder.
+
+## Verdict: killed after the coarse screen
+
+Six full-model evaluations were run: five honest, one red-team ceiling with collisions off. None takes a single pose,
+and the optimistic ceiling is gap 253.41 (score 7.9). The leader is skin-normal-3r-pin-knee: 26.34 fast, 33.84 frozen
+exact.
+
+**The idea is right per leg.** Each RUS leg closed by the user's GH has its own fold band, and fold-free legs
+exist: 188 of the 280 seat-stud pairs, with legs valid on 0.93-0.98 in the model.
+
+**It dies as a truss, for three measured reasons, each enough on its own:**
+1. **Crank parking.** A fold-free leg needs a 60-85 deg crank. Its circle about a scapula-fixed axis sweeps the
+   region the raised or extended arm occupies (mid-span need p90 105-130 mm), or the trunk on the other branch.
+   This is the 3R's J1-band versus hub-parking trade, met three times instead of once.
+2. **The parallel singularity.** The fold-free studs cluster on the posterior humeral head, so the moment lines are
+   nearly coplanar: det >= 0.10 on only 0.675-0.80 of the workspace. That alone caps reach near 0.7, about 20 gap
+   points.
+3. **Part count.** About 15 rigid parts are each fitted to their own 90-95th-percentile pose set: 3 hubs, 2-3
+   brackets, 3 cranks, 3 U housings, 3 rods, 3 saddles. With collisions off, 53 % of the kinematically valid poses
+   still put some part inside the skin.
+
+**Not done, and why.** The farm coarse sweep (240 random dome / BOTTOM-stud configurations) was queued, then
+cancelled with 7 of 24 chunks running. The shared farm queue stood at 107 jobs with 20 running. The random layouts
+are not fold-free by construction, so they could only score worse than the informed ones, and the informed ones
+already showed the failure is structural. The 4 CMA streams were cancelled before they started. So:
+- the convergence gate is not applicable (killed after the coarse screen);
+- no frozen Bench(110,360) wear (nothing is taken to wear);
+- near-touch and overhead splits are empty.
+
+## Red team (the pose that jams, the point that pinches, the number that is optimistic)
+
+* **Jam pose.** A leg at dead centre (the rod perpendicular to the crank-tip velocity; transmission < 15 deg) locks
+  the arm on that leg's band edge. The model drops those poses. On the posterior legs they sit at the band floor (c-Q angle 4-9 deg over the
+  workspace) and at the ceiling (115-155 deg). Which arm poses these are was not traced in this screen.
+  The parallel singularity (det < 0.10) is a second jam set: 20-32 % of the workspace with clustered studs. There the
+  three rods cannot resist one moment direction, so an MVP2 motor torque is lost.
+* **Pinch point.** Between a rod and its own crank on the -1 branch, which keeps the cranks out of the trunk: the rod
+  folds back over the crank (32-145 poses). Between the crank's mid-span and the posterior deltoid when the arm
+  extends behind the back. And between ball studs 10 mm apart (informed-2: 64 poses).
+* **The optimistic numbers.**
+  - The kinematic leg scans used 10 deg band margins and 98 % coverage. The model's 15 deg transmission gives
+    0.93-0.98: optimistic by 2-7 %.
+  - The bench fixes GH in S. On the user GH translates a few mm. The truss is the one morphology here with no
+    stiffness against GH translation (its 3 extra mobilities are the arm's translations), so the crank angles also
+    read GH translation as rotation: sensing error ~ GH shift / (60-90 mm lever), about 2-3 deg for 3 mm.
+  - For MVP2, the rod forces sum to a net force on the humeral head (Sigma F_k is not 0). A serial 3R reacts that
+    force through its base instead.
+  - The red-team ceiling (collisions off) is the honest upper bound and is still 253.
+
+## What happens next (altitude)
+
+* The fold lever has to come from ONE extra rotation that the arm sets. A parallel truss multiplies the parking
+  problem by three instead of solving it once. So the levers left are a rocker (acromial-rocker-3r), a closure-set
+  arc (closure-set-arc-knee-3r) and a virtual J2 (j2-arc-sector-3r, virtual-pole-4bar-j2). All are under test.
+* Reusable result: docs/research/rus/crank_park.json gives the crank-parking need per station.
+  - Tip p50 55-62 mm for posterior legs, against a hub seat at 93-114 mm: the far end of a posterior-horizontal arm
+    lies on quiet skin; the middle does not.
+  - A 3R J2 hub placed at the tip region of the posterior J1's 65 deg circle would sit at 55-74 mm (p50 / p90).
+  - This is a parking check the posterior fold-free 3R (ends.json) has not had.
+* Reusable tooling: the patch-on-load pattern (foldfree-rus-truss.py `load_base`, coaxial-rus-turret.py `PATCHES`).
+  It lets a morphology variant change a verified model in a few asserted lines instead of a copy.

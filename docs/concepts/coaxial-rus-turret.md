@@ -59,6 +59,7 @@ For bvec(-24..-30, 4..8) they all sit on the posterior humeral head: s 0-20 mm, 
 | informed-1 | (-30,8) / (10,120) (10,150) (20,105) / 70 65 60 / +1 | 100 | 0.38 | 0.50 | 320.51 | 0.006 | 0.57 | the parallel singularity on half the workspace (the studs cluster); every crank at the march ceiling (r_T 230-239); crank 0 / crank 1 collide in 69 poses |
 | informed-2 | (-24,4) / (10,90) (10,150) (0,105) / 70 65 60 / -1 | 100 | 0.64 | 0.79 | 358.13 | 0.019 | 0.85 | cranks at the ceiling again (r_T 230-239); stacked cranks collide (crank 0/1 67, crank 1/2 29) |
 | informed-3 | same, 90th-percentile fit | 90 | 0.68 | 0.81 | 275.0 (0 taken) | 0 | 0 | on the -1 branch each rod folds back over its own crank (crank 0 / rod 0 in 145 poses) |
+| red-team ceiling | informed-3 with every part-part collision switched OFF | 90 | 0.68 | 0.81 | 280.01 | 0.30 | 0.61 | the optimistic bound (free routing): follow 0.18, in-band 14 0.07; crank 1 / 2 still at the 220 mm march ceiling (r_T 230 / 234.5) |
 
 In the model, each leg alone is valid (closure + 15 deg transmission) on 0.93-0.98 of the workspace, so the fold
 lever works per leg. The turret fails on everything else.
@@ -78,3 +79,14 @@ A farm coarse sweep (200 random seat / stud / branch configurations) was queued 
 107 jobs with 20 running, and the informed configurations above had already shown that the failure is structural.
 The CMA streams were cancelled before they started. The convergence gate is not applicable (killed after the coarse
 screen).
+
+## Red team
+
+* **Jam pose.** The parallel singularity (det < 0.10) covers 19-50 % of the workspace. There the three rods cannot
+  resist one moment direction about GH: the unpowered turret is loose in that direction and MVP2 loses torque in it.
+  Leg dead centres (transmission < 15 deg) sit at each leg's band floor and ceiling.
+* **Pinch point.** On the trunk-free branch each rod passes back over its own crank (145 poses), and the stacked
+  cranks shear past each other at 4.5 mm layer spacing (crank 0/1 collisions in 67-69 poses at p 100). Both would be
+  finger traps on a real build.
+* **The optimistic numbers.** The collision-off ceiling (280.01) is the most favourable reading, and the honest gap
+  is worse. The 4.5 mm layer is a minimum: thin-section bearings stack 4-5 mm each, so a real stack is taller.

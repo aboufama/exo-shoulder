@@ -2028,5 +2028,69 @@
   "t_ideated": "2026-10-16T02:10:00Z",
   "source": "round 3, tailoring / pattern-making / orthotic fitting lens (second pass)",
   "status": "screened"
+ },
+ {
+  "id": "foldfree-rus-truss",
+  "name": "Fold-free human-closed 3-RUS truss: three scapula crank hubs, O5 rods to arm ball studs, the user's GH closes the loop",
+  "topology": "- Scapula base (S) on the user's scapula handler: three O20 crank hubs on GH rays (ACTIVE revolutes) joined by 12 x 3 base brackets.\n- Each hub carries a crank of arc beta_k (12 x 3 Ti strap); at its tip an O12 U-joint (passive, 2 rot).\n- O5 Ti rod (rigid, its bow fitted) to an O12 rod end on a ball stud (passive, 3 rot) on a 14 x 4 arm saddle at the humeral-head level.\n- No exo joint at GH: the user's glenohumeral joint closes all three loops.",
+  "active_dof": 3,
+  "passive_dof": 15,
+  "dof_reasoning": "Grubler-Kutzbach on the bench (GH fixed in S): 3 legs x (R 1 + U 2 + S 3) + GH 3 = 21 joint freedoms - 3 loops x 6 = 3; the 3 rod spins are killed by the U pitch pins; the 3 crank angles are the only coordinates (closed-form RUS IK, branch fixed per leg); numeric rank check = |det| of the three unit moment lines T_k x Q_k >= 0.10. 0 passive translations; all passive freedoms are rotations of catalogue parts (U-joints, rod ends).",
+  "description": "Leg-fold theorem: each RUS leg closed by GH is a spherical RRR with its OWN fold band angle(c_k, Q_k) in [|beta_k - gamma_k|, beta_k + gamma_k]; the truss gives three independently placed bands instead of the 3R's one, seeded from the fold-free (c, q) pairs of docs/research/fold/ends.json (posterior-horizontal crank axis + posterior humeral-head stud: fold-free at 65 / 65).",
+  "why_better": "A fold lever made only of rotations: the 3R's single J1-J3 band is replaced by three per-leg bands each placed outside the workspace; no J2 hub on a moving GH ray.",
+  "main_risk": "Crank parking (a 60-85 deg crank circle sweeps the arm / trunk), the parallel singularity with clustered studs, and ~15 fitted rigid parts on one shoulder.",
+  "unpowered_and_mvp2": "Unpowered: three O20 bearing hubs with the user's rotation sensing (crank angles map 1:1 to the arm's rotation on a fixed GH; GH translation reads as ~2-3 deg per 3 mm). MVP2: three remote motors on the scapula base; the net rod force Sigma F_k loads the humeral head (a 3R reacts it through its base).",
+  "model_spec": "docs/concepts/models/foldfree-rus-truss.py (patch-on-load of docs/concepts/models/human-closed-crank-rods.py: options studs3, crank_over; bench_eval / evaluate (flat, CMA) / frozen + wear (near-touch, overhead, red team))",
+  "sweep_params": "seats from ends.json fold-free lines and the dome; studs s 0-160 mm, theta -60..150; beta 35-85; branch per leg; p 90-100; crank_over",
+  "modelling_cost": "medium",
+  "prior_art": "Spherical parallel manipulators (3-RRR / 3-RUS, Gosselin's Agile Eye), human-closed parallel exoskeleton concepts that use the anatomical joint as the passive centre.",
+  "lenses": [
+   "deployable structures / overconstrained and spherical linkage kinematics"
+  ],
+  "lens": "deployable structures / overconstrained and spherical linkage kinematics",
+  "family": "human-closed RUS truss (spherical parallel mechanism on the user's GH)",
+  "t_ideated": "2026-10-16T02:16:00Z",
+  "source": "round-3 weird wave (deployable / spherical-linkage lens); revives the interrupted round-1 human-closed-crank-rods model",
+  "model_file": "docs/concepts/models/foldfree-rus-truss.py",
+  "status": "killed",
+  "screening": {
+   "gap": 275.0,
+   "ceiling_collisions_off": 253.41,
+   "frozen_big_gap": null,
+   "n_configs": 5,
+   "row": "docs/concepts/rows/foldfree-rus-truss.json"
+  }
+ },
+ {
+  "id": "coaxial-rus-turret",
+  "name": "Coaxial RUS turret: three stacked crank bearings on one posterior scapula seat, O5 rods to arm studs, the user's GH closes the loop",
+  "topology": "- One O20 hub shaft on the fold-free posterior-horizontal scapula seat carrying three crank layers (each on its own thin-section bearing, 4.5 mm per layer, stack 21.25 mm): the three ACTIVE crank axes coincide.\n- Each crank: arc beta_k, O12 U-joint at the tip, O5 rod to an O12 rod end on a ball stud on the arm saddle.\n- The user's GH closes the loops; no base brackets.",
+  "active_dof": 3,
+  "passive_dof": 15,
+  "dof_reasoning": "As foldfree-rus-truss (Grubler 21 - 18 = 3 on the bench; rod spins killed by the U pitch pins); coaxial cranks keep full rank iff the moment lines T_k x Q_k span 3-space (det >= 0.10 checked per pose). 0 passive translations.",
+  "description": "Coaxial-input spherical parallel mechanism worn on the user (the humerus is the platform, GH its centre), all three legs on the single seat that is fold-free with many studs.",
+  "why_better": "One hub footprint on the quietest scapula skin, no base brackets, MVP2 motors on one axis (one cable bundle), unlimited common rotation.",
+  "main_risk": "Studs that are fold-free for one axis cluster -> parallel singularity; stacked long cranks.",
+  "unpowered_and_mvp2": "Unpowered: one stacked hub with three angle sensors. MVP2: three coaxial remote drives at one place.",
+  "model_spec": "docs/concepts/models/coaxial-rus-turret.py (five asserted source patches over the base model on top of foldfree-rus-truss's: one stacked hub, layered crank profiles, no brackets)",
+  "sweep_params": "seat posterior cluster bvec(-42..-24, 4..20) or top; three studs; betas descending by layer 35-75; branch per leg; p 90-100",
+  "modelling_cost": "medium",
+  "prior_art": "Coaxial spherical parallel manipulators (Agile Wrist family).",
+  "lenses": [
+   "deployable structures / overconstrained and spherical linkage kinematics"
+  ],
+  "lens": "deployable structures / overconstrained and spherical linkage kinematics",
+  "family": "human-closed RUS truss (spherical parallel mechanism on the user's GH)",
+  "t_ideated": "2026-10-16T02:25:00Z",
+  "source": "round-3 weird wave (deployable / spherical-linkage lens)",
+  "model_file": "docs/concepts/models/coaxial-rus-turret.py",
+  "status": "killed",
+  "screening": {
+   "gap": 275.0,
+   "ceiling_collisions_off": 280.01,
+   "frozen_big_gap": null,
+   "n_configs": 3,
+   "row": "docs/concepts/rows/coaxial-rus-turret.json"
+  }
  }
 ]

@@ -1,0 +1,92 @@
+{
+ "id": "foldfree-rus-truss",
+ "name": "Fold-free human-closed 3-RUS truss: three scapula crank hubs, O5 rods to arm ball studs, the user's GH closes the loop",
+ "lens": "deployable structures / overconstrained and spherical linkage kinematics",
+ "family": "human-closed RUS truss (spherical parallel mechanism on the user's GH)",
+ "active_dof": 3,
+ "passive_dof": 15,
+ "status": "killed",
+ "t_ideated": "2026-10-16T02:16:00Z",
+ "t_screened": "2026-10-16T03:17:36Z",
+ "reach": 0.0,
+ "follow": 0.0,
+ "inband14": 0.0,
+ "inband10": 0.0,
+ "contact": 0.0,
+ "gap": 275.0,
+ "v_reach": null,
+ "v_follow": null,
+ "v_inband14": null,
+ "v_inband10": null,
+ "v_gap": null,
+ "n_configs": 5,
+ "verdict": "KILLED after the coarse screen: 5 honest full-model configurations seeded from the fold-free legs take no pose (gap 275.0), the red-team ceiling with every part-part collision OFF is 253.41 (reach 0.34, in-band 0.18, contact 0.53) vs the leader 26.34 fast / 33.84 frozen exact. The fold lever works PER LEG (leg-fold theorem: each RUS leg closed by GH is a spherical RRR with its own band; 188/280 seat-stud pairs fold-free, legs valid 0.93-0.98 in the model) but the truss dies on crank parking, the parallel singularity and part count",
+ "limiter": "(1) crank parking: a fold-free leg needs a 60-85 deg crank whose circle about a scapula-fixed axis sweeps the raised / extended arm (mid-span need p90 105-130 mm vs seat skin 93-102; tip p50 55-62) or the trunk on the other branch (need >= 160 mm) - fitted cranks end at the 220 mm march ceiling (r_T 230) at p 100; (2) parallel singularity: fold-free studs cluster on the posterior humeral head, det >= 0.10 on only 0.675-0.80 of the workspace; (3) ~15 fitted rigid parts: base brackets cross the crank sweep (br/crank 136 of 151 poses), rods fold back over their own cranks on the trunk-free branch (32 poses)",
+ "note": "Bench(60,160) fast grid (exact libigl outside the grid box), the base model's checks (K3 march, 10 fps continuity on every crank / U / ball angle, 1 mm part clearance, contact rule) on every evaluation; 500-1100 s per configuration on the shared box. Kinematic screens (docs/research/rus/): leg_bands.json 280 seat-stud pairs, crank_park.json 24 leg-branches, skew_kin.json 168 skew legs (sibling skin-normal skew-crank RSS truss killed: best leg coverage 0.58 at rho 20 vs 0.975 for a GH-centred beta-50 crank). Farm coarse sweep (240 random configs) cancelled with 7/24 chunks running (shared queue 107 jobs, failure already structural); 4 CMA streams cancelled before start; gate not applicable; no frozen Bench(110,360) wear (nothing taken). Mobility 3 (Grubler on the bench: 21 - 18), 0 passive translations, every joint a catalogue part",
+ "doc": "docs/concepts/foldfree-rus-truss.md",
+ "model_file": "docs/concepts/models/foldfree-rus-truss.py",
+ "best_k": 0,
+ "best_stage": "informed (local, full model)",
+ "best_params": {
+  "hubs": [
+   [
+    -24.0,
+    4.0
+   ],
+   [
+    -42.0,
+    20.0
+   ],
+   [
+    -10.0,
+    40.0
+   ]
+  ],
+  "beta": [
+   65.0,
+   65.0,
+   70.0
+  ],
+  "sigma": [
+   1,
+   1,
+   1
+  ],
+  "studs3": true,
+  "studs": [
+   [
+    10.0,
+    105.0
+   ],
+   [
+    10.0,
+    150.0
+   ],
+   [
+    0.0,
+    150.0
+   ]
+  ]
+ },
+ "bench": "Bench(60,160) fast grid",
+ "frozen_big": null,
+ "passive_translations": 0,
+ "cuff_slides": 0,
+ "liner_compliance_mm": 0,
+ "honest": true,
+ "gate": "not applicable: killed after the coarse screen",
+ "redteam_ceiling_collisions_off": {
+  "reach": 0.3375,
+  "follow": 0.2333,
+  "inband14": 0.1761,
+  "inband10": 0.0766,
+  "contact": 0.531,
+  "gap": 253.41
+ },
+ "kinematic_screens": {
+  "leg_bands": "docs/research/rus/leg_bands.json",
+  "crank_park": "docs/research/rus/crank_park.json",
+  "crank_park_tip": "docs/research/rus/crank_park_tip.json",
+  "skew_kin": "docs/research/rus/skew_kin.json"
+ }
+}

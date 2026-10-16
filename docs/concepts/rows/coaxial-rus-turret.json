@@ -1,0 +1,93 @@
+{
+ "id": "coaxial-rus-turret",
+ "name": "Coaxial RUS turret: three stacked crank bearings on one posterior scapula seat, O5 rods to arm studs, the user's GH closes the loop",
+ "lens": "deployable structures / overconstrained and spherical linkage kinematics",
+ "family": "human-closed RUS truss (spherical parallel mechanism on the user's GH)",
+ "active_dof": 3,
+ "passive_dof": 15,
+ "status": "killed",
+ "t_ideated": "2026-10-16T02:25:00Z",
+ "t_screened": "2026-10-16T03:17:36Z",
+ "reach": 0.0,
+ "follow": 0.0,
+ "inband14": 0.0,
+ "inband10": 0.0,
+ "contact": 0.0,
+ "gap": 275.0,
+ "v_reach": null,
+ "v_follow": null,
+ "v_inband14": null,
+ "v_inband10": null,
+ "v_gap": null,
+ "n_configs": 3,
+ "verdict": "KILLED after the coarse screen: 3 honest full-model configurations on the fold-free posterior seat: gap 320.51 / 358.13 / 275.0 (0 taken); red-team ceiling with collisions OFF 280.01 (reach 0.30, in-band 0.07). One fold-free seat forces the three studs onto one patch of the posterior humeral head, so the coaxial-input SPM is parallel-singular on 19-50 % of the workspace; the stacked 60-70 deg cranks still sweep under the arm (march ceiling); on the trunk-free branch each rod folds back over its own crank",
+ "limiter": "parallel singularity (det >= 0.10 on 0.50-0.81 of the workspace: fold-free studs for one axis cluster); crank parking (r_T at the 220 mm ceiling for 2-3 of 3 cranks at p 100 and for 2 of 3 at p 90); crank 0 / rod 0 collisions in 145 of 150 kin-valid poses on the -1 branch; stacked crank shear (crank 0/1 67-69 poses at p 100)",
+ "note": "Bench(60,160) fast grid, base model checks on; coaxial stack modelled honestly (one O20 hub shaft, three 4.5 mm layers, stack 21.25 mm, every crank profile layered >= 4.5 mm over the crank below); farm coarse sweep (200 random configs) cancelled before its jobs started (shared queue 107 jobs); CMA not started; gate not applicable; no frozen wear (nothing taken). Mobility 3, 0 passive translations",
+ "doc": "docs/concepts/coaxial-rus-turret.md",
+ "model_file": "docs/concepts/models/coaxial-rus-turret.py",
+ "best_k": 2,
+ "best_stage": "informed (local, full model)",
+ "best_params": {
+  "hubs": [
+   [
+    -24.0,
+    4.0
+   ],
+   [
+    -24.0,
+    4.0
+   ],
+   [
+    -24.0,
+    4.0
+   ]
+  ],
+  "beta": [
+   70.0,
+   65.0,
+   60.0
+  ],
+  "sigma": [
+   -1,
+   -1,
+   -1
+  ],
+  "studs3": true,
+  "studs": [
+   [
+    10.0,
+    90.0
+   ],
+   [
+    10.0,
+    150.0
+   ],
+   [
+    0.0,
+    105.0
+   ]
+  ],
+  "p": 90.0
+ },
+ "bench": "Bench(60,160) fast grid",
+ "frozen_big": null,
+ "passive_translations": 0,
+ "cuff_slides": 0,
+ "liner_compliance_mm": 0,
+ "honest": true,
+ "gate": "not applicable: killed after the coarse screen",
+ "redteam_ceiling_collisions_off": {
+  "reach": 0.3,
+  "follow": 0.1833,
+  "inband14": 0.0733,
+  "inband10": 0.0254,
+  "contact": 0.6067,
+  "gap": 280.01
+ },
+ "kinematic_screens": {
+  "leg_bands": "docs/research/rus/leg_bands.json",
+  "crank_park": "docs/research/rus/crank_park.json",
+  "crank_park_tip": "docs/research/rus/crank_park_tip.json",
+  "skew_kin": "docs/research/rus/skew_kin.json"
+ }
+}
