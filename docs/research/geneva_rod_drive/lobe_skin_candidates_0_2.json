@@ -1,0 +1,223 @@
+{
+ "as built (exo.glb)": {
+  "min_sd_mm": -0.258,
+  "where": [
+   "Raise overhead 78",
+   7.44,
+   12.86,
+   60.7
+  ],
+  "frames_under_2mm": 71,
+  "frames": 375,
+  "raise_overhead_flank_min_mm": 0.225,
+  "raise_overhead_dwell_min_mm": 2.176,
+  "lobe": {
+   "profile_r": null,
+   "profile_az": null,
+   "past_skirt": null,
+   "flank_to_roller_at_stopB": null,
+   "band": null
+  },
+  "drive": {}
+ },
+ "(ii) band up 0.5": {
+  "min_sd_mm": -0.257,
+  "where": [
+   "Raise overhead 78",
+   7.02,
+   12.86,
+   60.8
+  ],
+  "frames_under_2mm": 71,
+  "frames": 375,
+  "raise_overhead_flank_min_mm": 0.237,
+  "raise_overhead_dwell_min_mm": 2.175,
+  "lobe": {
+   "profile_r": [
+    10.738,
+    12.869
+   ],
+   "profile_az": [
+    48.28,
+    60.73
+   ],
+   "past_skirt": 2.869,
+   "flank_to_roller_at_stopB": 0.08,
+   "band": [
+    6.65,
+    9.25
+   ]
+  },
+  "drive": {
+   "lobe_r_onset": 10.74,
+   "lobe_r_end": 12.87,
+   "pa_deg": [
+    11.5,
+    34.3
+   ],
+   "lift_mm": 2.416,
+   "rocker_turn_deg": 15.53,
+   "rod_cap_clear_min": 1.1
+  }
+ },
+ "(ii) band up 1.5": {
+  "min_sd_mm": -0.257,
+  "where": [
+   "Raise overhead 78",
+   7.65,
+   12.87,
+   60.7
+  ],
+  "frames_under_2mm": 69,
+  "frames": 375,
+  "raise_overhead_flank_min_mm": 0.261,
+  "raise_overhead_dwell_min_mm": 2.125,
+  "lobe": {
+   "profile_r": [
+    10.738,
+    12.869
+   ],
+   "profile_az": [
+    48.28,
+    60.73
+   ],
+   "past_skirt": 2.869,
+   "flank_to_roller_at_stopB": 0.08,
+   "band": [
+    7.65,
+    10.25
+   ]
+  },
+  "drive": {
+   "lobe_r_onset": 10.74,
+   "lobe_r_end": 12.87,
+   "pa_deg": [
+    11.5,
+    34.3
+   ],
+   "lift_mm": 2.416,
+   "rocker_turn_deg": 15.53,
+   "rod_cap_clear_min": 1.1
+  }
+ },
+ "(iii) follower arm 8.0": {
+  "min_sd_mm": -0.143,
+  "where": [
+   "Raise overhead 78",
+   8.58,
+   12.54,
+   56.6
+  ],
+  "frames_under_2mm": 69,
+  "frames": 375,
+  "raise_overhead_flank_min_mm": 0.317,
+  "raise_overhead_dwell_min_mm": 2.178,
+  "lobe": {
+   "profile_r": [
+    10.592,
+    12.545
+   ],
+   "profile_az": [
+    42.97,
+    56.69
+   ],
+   "past_skirt": 2.545,
+   "flank_to_roller_at_stopB": 0.073,
+   "band": [
+    6.15,
+    8.75
+   ]
+  },
+  "drive": {
+   "lobe_r_onset": 10.59,
+   "lobe_r_end": 12.55,
+   "pa_deg": [
+    12.7,
+    34.7
+   ],
+   "lift_mm": 2.16,
+   "rocker_turn_deg": 15.53,
+   "rod_cap_clear_min": 1.1
+  }
+ },
+ "(iii) follower arm 7.0": {
+  "min_sd_mm": 0.147,
+  "where": [
+   "Raise overhead 78",
+   8.75,
+   12.21,
+   52.5
+  ],
+  "frames_under_2mm": 67,
+  "frames": 375,
+  "raise_overhead_flank_min_mm": 0.532,
+  "raise_overhead_dwell_min_mm": 2.2,
+  "lobe": {
+   "profile_r": [
+    10.462,
+    12.212
+   ],
+   "profile_az": [
+    37.53,
+    52.51
+   ],
+   "past_skirt": 2.212,
+   "flank_to_roller_at_stopB": 0.065,
+   "band": [
+    6.15,
+    8.75
+   ]
+  },
+  "drive": {
+   "lobe_r_onset": 10.46,
+   "lobe_r_end": 12.21,
+   "pa_deg": [
+    14.7,
+    35.8
+   ],
+   "lift_mm": 1.889,
+   "rocker_turn_deg": 15.53,
+   "rod_cap_clear_min": 1.1
+  }
+ },
+ "(iii) follower 7.0 + crank 10": {
+  "min_sd_mm": 0.391,
+  "where": [
+   "Raise overhead 78",
+   8.75,
+   11.97,
+   52.2
+  ],
+  "frames_under_2mm": 65,
+  "frames": 375,
+  "raise_overhead_flank_min_mm": 0.771,
+  "raise_overhead_dwell_min_mm": 2.165,
+  "lobe": {
+   "profile_r": [
+    10.409,
+    11.969
+   ],
+   "profile_az": [
+    37.05,
+    52.15
+   ],
+   "past_skirt": 1.969,
+   "flank_to_roller_at_stopB": 0.059,
+   "band": [
+    6.15,
+    8.75
+   ]
+  },
+  "drive": {
+   "lobe_r_onset": 10.41,
+   "lobe_r_end": 11.97,
+   "pa_deg": [
+    14.1,
+    33.9
+   ],
+   "lift_mm": 1.691,
+   "rocker_turn_deg": 13.9,
+   "rod_cap_clear_min": 1.19
+  }
+ }
+}

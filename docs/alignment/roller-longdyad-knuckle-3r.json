@@ -6,11 +6,8 @@
  "verdict": "watch",
  "reasons": [
   "held_out: no verified bench gap on the row",
-  "near_touch: no near-touch measurement on file (rule since 2026-10-16: claims report plain and near-touch)",
-  "dominance: cannot compare with sidecar-longdyad-knuckle-3r at 2 mm",
   "continuity: passive / sprung / sensed coordinates but no continuity flood on file (rule 2026-10-16)",
-  "fold_margin: no min-th margin over taken poses on file (rule: each claim reports it)",
-  "idle: a drive is declared but no range of it over the taken poses is on file"
+  "fold_margin: no min-th margin over taken poses on file (rule: each claim reports it)"
  ],
  "checks": [
   {
@@ -25,13 +22,34 @@
   },
   {
    "check": "near_touch",
-   "level": "watch",
-   "reason": "no near-touch measurement on file (rule since 2026-10-16: claims report plain and near-touch)"
+   "level": "ok",
+   "reason": "plain 18.67, <1 mm 20.3, <2 mm 33.1, <3 mm 107.65, band read 3-14 mm 18.84, 14.43 points live in the 1-2 mm shell (re-measured (this audit))",
+   "shell2": 14.43,
+   "plain": 18.67,
+   "n1": 20.3,
+   "n2": 33.1,
+   "n3": 107.65,
+   "band3": 18.84,
+   "hist": {
+    "0-1": 0.0,
+    "1-2": 0.0001,
+    "2-3": 0.0018,
+    "3-4": 0.0108,
+    "4-6": 0.0912,
+    "6-10": 0.4095,
+    "10-14": 0.3805,
+    ">14": 0.1062
+   },
+   "minmm": 0.072,
+   "source": "re-measured (this audit)"
   },
   {
    "check": "dominance",
-   "level": "watch",
-   "reason": "cannot compare with sidecar-longdyad-knuckle-3r at 2 mm"
+   "level": "ok",
+   "reason": "vs sidecar-longdyad-knuckle-3r: plain +0.24, 2 mm +0.93",
+   "ref": "sidecar-longdyad-knuckle-3r",
+   "gain_plain": 0.24,
+   "gain_2mm": 0.93
   },
   {
    "check": "continuity",
@@ -45,29 +63,94 @@
   },
   {
    "check": "idle",
-   "level": "watch",
-   "reason": "a drive is declared but no range of it over the taken poses is on file",
-   "spans": []
+   "level": "ok",
+   "reason": "declared drive moves: smallest recorded span 45.61 (re-measured dK span)",
+   "spans": [
+    [
+     "re-measured dK span",
+     45.61
+    ],
+    [
+     "re-measured K.ang span",
+     65.71
+    ]
+   ]
   },
   {
    "check": "sampling",
    "level": "ok",
-   "reason": "per-part sample counts not on file (fractions only) (row frozen)",
+   "reason": "sample-weighted in-band 0.894 vs part-weighted 0.923 (-2.87 points); thinly sampled parts: L1a 8 (re-measured)",
    "parts": {
-    "hub1": 0.999,
-    "hubK": 0.992,
-    "hub2": 0.953,
-    "hub3": 0.739,
-    "E": 0.966,
-    "boss": 0.988,
-    "pad": 1.0,
-    "knee": 0.941,
-    "crank": 0.797,
-    "roller": 0.935,
-    "horn": 0.957,
-    "L1a": 0.981,
-    "L1b": 0.931,
-    "L2": 0.736
+    "hub1": [
+     0.999,
+     8.6,
+     80
+    ],
+    "hubK": [
+     0.992,
+     7.9,
+     80
+    ],
+    "hub2": [
+     0.953,
+     11.1,
+     80
+    ],
+    "hub3": [
+     0.739,
+     11.5,
+     80
+    ],
+    "E": [
+     0.966,
+     6.5,
+     104
+    ],
+    "boss": [
+     0.988,
+     8.5,
+     32
+    ],
+    "pad": [
+     1.0,
+     8.1,
+     32
+    ],
+    "knee": [
+     0.941,
+     10.7,
+     85
+    ],
+    "crank": [
+     0.797,
+     11.6,
+     129
+    ],
+    "roller": [
+     0.935,
+     9.9,
+     37
+    ],
+    "horn": [
+     0.957,
+     6.8,
+     31
+    ],
+    "L1a": [
+     0.981,
+     10.1,
+     8
+    ],
+    "L1b": [
+     0.931,
+     8.2,
+     36
+    ],
+    "L2": [
+     0.736,
+     12.0,
+     124
+    ]
    }
   },
   {
@@ -94,10 +177,10 @@
   }
  ],
  "remeasured": {
-  "bench": false,
-  "held": false
+  "bench": true,
+  "held": true
  },
  "verifier_files": [],
- "git": "c6c6947",
- "t": "2026-10-16T22:44:03Z"
+ "git": "67e8480",
+ "t": "2026-10-16T22:53:06Z"
 }

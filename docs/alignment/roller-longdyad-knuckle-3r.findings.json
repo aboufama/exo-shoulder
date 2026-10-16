@@ -1,0 +1,44 @@
+[
+ {
+  "key": "P1",
+  "level": "watch",
+  "reason": "The A1 dominance pass is a sub-pose margin that reverses held out. Frozen exact Bench(110,360), re-worn by this audit: plain 18.67 vs the lead's 18.91 (+0.24, i.e. 0.86 of one workspace pose at 0.278 points per pose); 2 mm 33.10 vs 34.03 (+0.93); 1 mm 20.30 vs 20.00 (-0.30). The whole plain gain is contact-pose count: 2 contact poses against 4 (contact 0.0054 vs 0.0107 = +0.53), offset by in-band14 0.8937 vs 0.8966 (-0.29). Reach is identical (261 of 360, overhead 8 of 28). Held out, with both designs re-worn through the same harness (alignment_audit remeasure): 23.73 vs 22.67 (-1.06; 851 vs 859 taken poses of 1154); 1 mm 26.83 vs 25.75 (-1.08); 2 mm 37.02 vs 37.24 (+0.22). Not gamed: at 3 mm this design is far ahead (107.65 vs 155.98 on the bench, 101.03 vs 163.09 held out; 133 vs 178 and 274 vs 427 poses under 3 mm). So the lead is not shown to be better for the wearer. But the gate's 'beats the lead' reading is noise, not a better exo, and it fails the 1-point rule.",
+  "evidence": "docs/alignment/remeasure/roller-longdyad-knuckle-3r_bench.json, docs/alignment/remeasure/roller-longdyad-knuckle-3r_held.json, docs/alignment/remeasure/sidecar-longdyad-knuckle-3r_bench.json, docs/alignment/live_audit_2026-10-16/ref_sidecar-longdyad-knuckle-3r_held_same_harness.json, docs/concepts/verify/sidecar-longdyad-knuckle-3r_v_held_frozen.json (22.67 / 25.75 / 37.24, reproduced to the digit)"
+ },
+ {
+  "key": "R1",
+  "level": "watch",
+  "reason": "The dashboard shows only the fast best-of-7236 number for this row: gap 13.19, score 95.20, which is above the golden 95 line. The design's own self-measured frozen exact claim is 18.67 (score 93.21). The row stores that claim under the key 'frozen', but tools/dash_build.py line 409 reads only 'frozen_exact' / 'frozen_exact_gap'. So docs/dashboard/data/morphs.json has frozen_gap null, and the public and simple boards fall back to basis 'fast'. The row is sorted below the verified rows and labelled 'fast', so it does not outrank them. Still, the only number displayed is 5.48 points better than the design's own frozen exact claim. The row name also still advertises the lever ('a re-cut flank to lift the lead's drive-stroke wall'). The row's verdict calls that lever dead, and the claimed config's taken th max is 106.3 against the lead's 109.22 (probe_th): the wall was not lifted.",
+  "evidence": "docs/dashboard/data/morphs.json (roller-longdyad-knuckle-3r: gap 13.19, frozen_gap null, sweep_gap 15.09); tools/dash_build.py:409; docs/dashboard/public/index.html:270-276; docs/concepts/rows/roller-longdyad-knuckle-3r.json (frozen.gap 18.67); docs/alignment/live_audit_2026-10-16/probe_roller-longdyad-knuckle-3r_th.json (th_max_taken 106.3) vs probe_sidecar-longdyad-knuckle-3r_th.json (109.22)"
+ },
+ {
+  "key": "NEW-contact-depth",
+  "level": "watch",
+  "reason": "Contact is counted per pose and is blind to depth (live audit L6). The plain gain over the lead is exactly 2 fewer contact poses, but the 2 that remain are much deeper. On the bench: -10.55 mm at (plane 15, elev 165, axial -60) and -5.91 mm at (30, 165, -60), sum 16.46 mm. The lead has 4 contact poses at -4.61 / -0.77 / -0.74 / -0.11 mm, sum 6.23 mm. Held out: 10 contact poses, deepest -9.54 mm at (30, 165, -45), sum 49.88 mm (the lead's held-out depths are not measured). The part that presses is not measured: the probe has no per-part split for the claimed config. Every deep contact is overhead (elev 150-165), the region the user ranks first.",
+  "evidence": "docs/alignment/live_audit_2026-10-16/probe_roller-longdyad-knuckle-3r.json and _held.json contact_poses; docs/alignment/live_audit_2026-10-16/probe_sidecar-longdyad-knuckle-3r.json contact_poses"
+ },
+ {
+  "key": "NEW-ws-inband",
+  "level": "watch",
+  "reason": "The design is worse on the workspace in-band, which the score does not see (live audit L2). On the claim bench (frozen exact Bench(110,360)), metal on taken workspace poses is 0.854 in band against the lead's 0.874. At elevation 90-140 (the raised arm) it is 0.798 against 0.841, 4.3 points worse. The design doc reports only the fit-bench reading: 0.825 / 0.757 vs 0.837 / 0.762, 'slightly below the lead ... no hidden gain'. That under-states the raised-arm deficit on the claim bench by about 3.8 points. The scored clip in-band is also slightly lower (0.8937 vs 0.8966).",
+  "evidence": "docs/alignment/live_audit_2026-10-16/probe_roller-longdyad-knuckle-3r.json (ws_unscored, ws_elev90_140) vs probe_sidecar-longdyad-knuckle-3r.json; docs/concepts/rows/roller-longdyad-knuckle-3r.json fast.ws_inband"
+ },
+ {
+  "key": "G4",
+  "level": "watch",
+  "reason": "The drive sits at its transmission cap. The K stroke limit is set by the horn pressure angle (why_lim 'pressure_horn', dK_lim 46.2 deg). The taken dK reaches 45.62 deg, where the pressure angle reaches 43.0, exactly PA_MAX. That is the 2-degree cushion under the 45 gate, kept for the ~0.6 deg K slop and the flank tolerance. The tightest clearances are bent arm to hub K 1.14 mm and roller to hub K 2.02 mm. No force or dynamics check (R17) exists for this drive at that step, so the feel of a 43-degree roller-flank contact under K slop is unmeasured.",
+  "evidence": "docs/alignment/live_audit_2026-10-16/probe_roller-longdyad-knuckle-3r_th.json extras.sc_info (pa_horn_max_taken 43.0, dK_lim 46.2, why_lim pressure_horn, clear_hubK_min 1.14, clear_roll_hubK_min 2.02, dK_taken_max_deg 45.62); docs/concepts/models/roller-longdyad-knuckle-3r.py:45 (PA_MAX 43)"
+ },
+ {
+  "key": "T4",
+  "level": "watch",
+  "reason": "The knee window walked toward the straight-knee singularity, but the score does not depend on it. ang_min has no bound anywhere in the model's _clamp chain, and the search moved it from the seed's 26.88 (the lead's verified value) to 25.22 (H1: 30.46). The taken knee angle runs to 151.92 deg on the bench and 153.16 held out, against the lead's 146.14 / 150.86: 5.8 deg closer to straight on the bench. Re-worn at the lead's ang_min 26.88, the result is identical (18.67 / 20.30 / 33.10), so the walk buys nothing against the lead. Re-worn at H1's 30.46: plain 18.71, 1 mm 20.36, 2 mm 36.76, reach 0.7167 (3 fewer poses), overhead 7 of 28. At that window it falls behind the lead at 2 mm.",
+  "evidence": "docs/alignment/remeasure/roller-longdyad-knuckle-3r_angmin26.8823.json, docs/alignment/remeasure/roller-longdyad-knuckle-3r_angmin30.46.json, docs/alignment/live_audit_2026-10-16/probe_roller-longdyad-knuckle-3r_th.json (knee_ang_taken 86.21-151.92, window 25.22-154.78), remeasure _held.json coord_spans K.ang 86.21-153.16; docs/concepts/models/roller-longdyad-knuckle-3r.py:61-70"
+ },
+ {
+  "key": "M5",
+  "level": "watch",
+  "reason": "K is scored at its planned (slaved) value, but it is held there by a single clock-spring cap that force-closes two rolling pairs: the lobe follower on hub 2's cap, and the MR63ZZ roller on the conjugate flank. The cam synthesis checks lift-off, cusp and pressure angles kinematically. No dynamics judge (R17) has run on this design, so nothing shows that the spring holds K on the law under arm load or gravity across the thorax. The new slaved-coordinate coupling in judge/dynamics.py (commits 5d6b819, 9f28755) is the instrument. This is required before any CAD, not before a screen.",
+  "evidence": "docs/concepts/rows/roller-longdyad-knuckle-3r.json mechanism.notes ('K slaved (clock-spring cap), never read'; springs_or_flexures 1; rolling_pairs 2); no R17 / dynamics output for this id under docs/concepts/verify or pipeline/"
+ }
+]

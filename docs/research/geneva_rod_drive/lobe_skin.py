@@ -53,7 +53,10 @@ def lobe_variant(dv, rr=3.0, dz=0.0):
 CANDS = [("as built (exo.glb)", None), ("rebuilt baseline V0", dict()),
          ("(ii) band up 0.5", dict(dz=0.5)), ("(ii) band up 1.0", dict(dz=1.0)), ("(ii) band up 1.5", dict(dz=1.5)), ("(ii) band up 2.0", dict(dz=2.0)),
          ("(iii) follower arm 8.0", dict(a_f=8.0)), ("(iii) follower arm 7.5", dict(a_f=7.5)), ("(iii) follower arm 7.0", dict(a_f=7.0)),
-         ("(iii) crank arm 10", dict(a_c=10.0)), ("(iii) follower 7.0 + crank 10", dict(a_f=7.0, a_c=10.0)), ("(iii) roller O5 (MR52ZZ 2x5x2.5)", dict(rr=2.5))]
+         ("(iii) crank arm 10", dict(a_c=10.0)), ("(iii) follower 7.0 + crank 10", dict(a_f=7.0, a_c=10.0)), ("(iii) roller O5 (MR52ZZ 2x5x2.5)", dict(rr=2.5)),
+         # round 2 (the follower arm stays 9.0: a shorter one puts the O6 roller into the O10 bell-crank tube, a_f >= 5 + 3 + 0.3)
+         ("(iii) crank 12, horn r 2.0", dict(a_c=12.0, r_h=2.0)), ("(iii) crank 13, horn r 2.0", dict(a_c=13.0, r_h=2.0)),
+         ("(iii) crank 14, horn r 1.8", dict(a_c=14.0, r_h=1.8)), ("(iii) crank 14, horn r 2.493", dict(a_c=14.0))]
 
 if __name__ == "__main__":
     src = trimesh.load(os.path.join(DD, "exo.glb")); built = {}
@@ -77,7 +80,7 @@ if __name__ == "__main__":
 
     if MODE.startswith("candidates"):
         part = int(sys.argv_part) if hasattr(sys, "argv_part") else None
-        out = {}; todo = CANDS if ":" not in MODE else [c for i, c in enumerate(CANDS) if i % int(MODE.split(":")[2]) == int(MODE.split(":")[1])]
+        out = {}; todo = CANDS if ":" not in MODE else [c for i, c in enumerate(CANDS) if i % int(MODE.split(":")[2]) == int(MODE.split(":")[1]) and (len(MODE.split(":")) < 4 or i >= int(MODE.split(":")[3]))]
         fl = list(frames(1, ["Raise overhead"])) + list(frames(4, ["Reach a high shelf", "Comb hair"])) + list(frames(8, ["Drink from a cup", "Wash opposite shoulder", "Reach back pocket", "Wave", "Walking arm swing"]))
         for label, kw in todo:
             if kw is None: P = built["l2"][::3]; info = {}; dvv = dv0; rep = {}
