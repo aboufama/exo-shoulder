@@ -13,3 +13,17 @@ acromion top only.
   are cheaper per hour only for the 4080 SUPER class and cannot see the volume). No public port: the pod runs job
   scripts that farm jobs drop on the private network volume and writes results back there. Stopped / terminated the
   moment the search ends (idle self-stop after 30 min as a safety net).
+- How work reaches the pod: `python3 tools/gpu_pod.py submit <job.sh> <name> --include tools/gpu_bench.py` (one farm
+  job drops the script + files on the volume; the pod's spool runs it), `python3 tools/gpu_pod.py fetch <name>
+  --outdir DIR` (one farm job brings exo-farm/gpu/out/<name>/ back). Jobs: pipeline/gpu_pod/*.sh.
+
+### The port (tools/gpu_bench.py)
+
+Family = docs/concepts/models/zc-frontier-3r.py exactly (three active pins through GH, O20 hubs, 12 x 3 straps with the
+kit's skin-fitted K3 undersides + ramps + `over` + 60 deg climb, the K7 14 x 6 neck, stack orders inv2 / inv3, fold
+margin 5, 1 mm radial K6, hub crowns / walls, every member's top face, the audit's sampling and pose-locality rules,
+hub_F <= 140, the J1 seat region). Every step is the kit's own arithmetic in float64 on the device (the K6 dot
+products in float32, as the kit); continuity slerps come from scipy tables (the kit's Slerp). Configs are batched
+(48-72 per call, grouped by stack order); strap sample counts vary per config and are padded with duplicates of the
+last sample (zero weight in the in-band share). Protocols: same-bench (the golden search: fit = wear = Bench(110,360))
+and frozen (fit Bench(60,160) -> wear Bench(110,360), the verifier's protocol).

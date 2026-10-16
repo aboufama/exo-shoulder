@@ -235,7 +235,7 @@ def strap(u, v, width):
     Dd = torch.cos(th)[..., None] * u[:, :, None] + torch.sin(th)[..., None] * e2[:, :, None]
     cs = torch.as_tensor(np.arange(-width / 2, width / 2 + 1e-6, 2.0) / 70.0, device=u.device)
     D = unit(Dd[:, :, :, None, :] * torch.cos(cs)[None, None, None, :, None] + nrm[:, :, None, None, :] * torch.sin(cs)[None, None, None, :, None])
-    return D, ns
+    return D, ns, ang
 
 
 def disc_xy(rad=HUB_R, step=2.0):
@@ -270,8 +270,8 @@ class Chain:
                 ("link1", p1, p2, 12.0, 3.0, ("J1", "J2"), (("hub1", STACK), ("hub2", l1_at2)), over1, nend),
                 ("link2", p2, p3, 12.0, 3.0, ("J2", "J3"), (("hub2", l2_at2), ("hub3", l2_at3)), over2, nend),
                 ("neck", p3, bar.expand_as(p3), 14.0, 6.0, ("J3",), (("hub3", nk_at3), (None, 0)), overn, torch.full_like(nend, 7))):
-            D, ns = strap(u, v, w)
-            self.straps[name] = dict(D=D, ns=ns, nc=D.shape[3], NS=D.shape[2], t=t, joints=joints, ramps=ramps, over=over, nend=ne)
+            D, ns, ang = strap(u, v, w)
+            self.straps[name] = dict(D=D, ns=ns, ang=ang, nc=D.shape[3], NS=D.shape[2], t=t, joints=joints, ramps=ramps, over=over, nend=ne)
         deps = {"link1": over1, "link2": over2, "neck": overn}; order, left = [], ["link1", "neck", "link2"]
         while left:
             for n in left:
@@ -362,6 +362,11 @@ def exempt(dirs, x, s, axes):
     return keep
 
 
+def budget(dev):
+    """elements per chunk of the pairwise / per-point work (GB_ELEM overrides)"""
+    return int(os.environ.get("GB_ELEM", 0)) or (250_000_000 if str(dev).startswith("cuda") else 20_000_000)
+
+
 def items_chunks(ci, pi, size):
     for o in range(0, len(ci), size): yield ci[o:o + size], pi[o:o + size]
 
@@ -372,15 +377,16 @@ RAYS = int(os.environ.get("GB_RAYS", 0)) or None        # rays per march call (d
 def fit_profiles(Bn, ch, okf, pr):
     """concept_kit.fit_profiles for the batch: {member: rho (C, m)}"""
     C = ch.C; ci, pi = torch.nonzero(okf, as_tuple=True); raw = {}
-    for name in ch.order:
-        O, D = ch.rays(name, ci[:1], pi[:1]); m = D.shape[1]
-        R = torch.full((C, Bn.P, m), float("inf"), dtype=torch.float64, device=okf.device)
-        rays = RAYS or (4_000_000 if okf.is_cuda else 262_144)
-        for c0, p0 in items_chunks(ci, pi, max(1, rays // m)):
-            O, D = ch.rays(name, c0, p0); n = len(c0)
-            r = requirement(Bn, p0[:, None].expand(-1, m).reshape(-1), O.reshape(-1, 3), D.reshape(-1, 3)).reshape(n, m)
-            R[c0, p0] = r
-        raw[name] = lerp_quantile(R, okf, pr["q"])
+    ms = [ch.weight(n).shape[1] for n in ch.order]; Mt = sum(ms); cut = np.r_[0, np.cumsum(ms)]
+    R = torch.full((C, Bn.P, Mt), float("inf"), dtype=torch.float64, device=okf.device)
+    rays = RAYS or (6_000_000 if okf.is_cuda else 262_144)
+    for c0, p0 in items_chunks(ci, pi, max(1, rays // Mt)):
+        OD = [ch.rays(n, c0, p0) for n in ch.order]; O = torch.cat([x[0] for x in OD], 1); D = torch.cat([x[1] for x in OD], 1)
+        r = requirement(Bn, p0[:, None].expand(-1, Mt).reshape(-1), O.reshape(-1, 3), D.reshape(-1, 3)).reshape(len(c0), Mt)
+        R[c0, p0] = r
+    for k, name in enumerate(ch.order):
+        raw[name] = lerp_quantile(R[:, :, cut[k]:cut[k + 1]], okf, pr["q"])
+    del R
     prof, level = {}, {}
     sl = math.tan(60 * D2R)
     order = sorted(ch.order, key=lambda n: (n in ch.straps and len(ch.straps[n]["over"]) > 0, n in ch.straps))
@@ -406,11 +412,11 @@ def _pad_last(R2, ns):
     return torch.gather(R2, 1, idx[:, :, None].expand(-1, -1, R2.shape[2]))
 
 
-def _over(Bn, ch, name, r, prof, okf, ci, pi, clear=1.0, item_chunk=1024):
+def _over(Bn, ch, name, r, prof, okf, ci, pi, clear=1.0):
     s = ch.straps[name]; need = torch.full_like(r, -float("inf"))
     for oname, gap in s["over"]:
         shared = set(s["joints"]) & set(ch.mj[oname])
-        for c0, p0 in items_chunks(ci, pi, item_chunk):
+        for c0, p0 in items_chunks(ci, pi, max(1, budget(r.device) // (r.shape[1] * ch.weight(oname).shape[1]))):
             da = s["D"][c0, p0].reshape(len(c0), -1, 3); xa = r[c0]; sa = torch.clamp(xa / 70.0, min=1.0)
             po = ch.points(oname, prof[oname], c0, p0); xo = torch.linalg.norm(po, dim=-1); do = po / xo[..., None]
             sb = torch.clamp(xo / 70.0, min=1.0) if not oname.startswith("hub") else torch.ones_like(xo)
@@ -423,14 +429,14 @@ def _over(Bn, ch, name, r, prof, okf, ci, pi, clear=1.0, item_chunk=1024):
 
 
 # ---- K6 + scoring --------------------------------------------------------------------------------------------------
-def collisions(ch, pts, ok, overlap, clear=1.0, item_chunk=512):
+def collisions(ch, pts, ok, overlap, clear=1.0):
     """concept_kit.collisions for the batch: pts {member: (C, P, m, 3)} -> hit (C, P)"""
     hit = torch.zeros_like(ok); ci, pi = torch.nonzero(ok, as_tuple=True); M = ch.order
     if not len(ci): return hit
     for ia in range(len(M)):
         for ib in range(ia + 1, len(M)):
             A, Bm = M[ia], M[ib]; shared = set(ch.mj[A]) & set(ch.mj[Bm]); tA, tB = ch.tk[A], ch.tk[Bm]
-            for c0, p0 in items_chunks(ci, pi, item_chunk):
+            for c0, p0 in items_chunks(ci, pi, max(1, budget(ok.device) // (pts[A].shape[2] * pts[Bm].shape[2]))):
                 XA, XB = pts[A][c0, p0], pts[Bm][c0, p0]; xa, xb = torch.linalg.norm(XA, dim=-1), torch.linalg.norm(XB, dim=-1)
                 da, db = XA / xa[..., None], XB / xb[..., None]
                 sa = torch.ones_like(xa) if A.startswith("hub") else torch.clamp(xa / 70.0, min=1.0)
@@ -452,7 +458,7 @@ def crown_pts(ch, name, F0, ci, pi):
     return torch.cat([crown] + wall, 1)
 
 
-def score(Bw, ch, prof, okw, overlap, item_chunk=1024):
+def score(Bw, ch, prof, okw, overlap):
     """wear: collisions, skin faces / crowns / tops, metrics -> dict of (C,) tensors"""
     C, P = okw.shape; dev = okw.device
     ci, pi = torch.nonzero(okw, as_tuple=True)
@@ -467,7 +473,7 @@ def score(Bw, ch, prof, okw, overlap, item_chunk=1024):
     fmin = torch.full((C, P), float("inf"), dtype=torch.float64, device=dev); cmin = fmin.clone(); tmin = fmin.clone()
     in14 = torch.zeros((C, P), dtype=torch.float64, device=dev); in10 = in14.clone()
     ci, pi = torch.nonzero(take, as_tuple=True)
-    for c0, p0 in items_chunks(ci, pi, item_chunk):
+    for c0, p0 in items_chunks(ci, pi, max(1, budget(dev) // 40 // W.shape[1])):
         X = torch.cat([pts[n][c0, p0] for n in ch.order], 1); n_, m_ = X.shape[:2]
         d = Bw.dist(p0[:, None].expand(-1, m_).reshape(-1), X.reshape(-1, 3)).reshape(n_, m_)
         fmin[c0, p0] = d.amin(1); w = W[c0]
@@ -500,6 +506,20 @@ def score(Bw, ch, prof, okw, overlap, item_chunk=1024):
         nn = torch.sqrt(D2.amin(2)); nn = torch.where(w, nn, torch.full_like(nn, float("nan")))
         med = torch.nanquantile(nn, 0.5, dim=1)
         sparse |= torch.round(med * 100) / 100 > 4.0
+    # audit: pose locality - the kit rebuilds the chain on 8 poses of `sel` spread evenly; a strap whose sample count
+    # (median arc over the bench poses) differs on that subset makes the build "not pose-local" (not honest)
+    nsel = sel.sum(1); cs = torch.cumsum(sel.to(torch.int64), 1)
+    for a in range(C):
+        L = int(nsel[a])
+        if not L: continue
+        m = min(8, L); kk = torch.arange(m, dtype=torch.float64, device=dev)
+        pos = (kk * ((L - 1) / (m - 1)) if m > 1 else kk).clone()
+        if m > 1: pos[-1] = L - 1
+        rank = torch.round(pos).long()                                          # numpy round: half to even
+        idx = torch.nonzero(sel[a])[:, 0][rank]
+        for n, st in ch.straps.items():
+            med = torch.quantile(st["ang"][a, idx], 0.5)
+            if max(3, int(math.floor(float(med) * 70.0 / 2.0)) + 1) != int(st["ns"][a]): sparse[a] = True
     hubF = torch.stack([prof[h][:, 0] for h in ("hub1", "hub2", "hub3")], 1)
     return dict(reach=reach, follow=follow, inband14=ib14, inband10=ib10, contact=contact, sparse=sparse, hubF=hubF,
                 ok=okw.to(torch.float64).mean(1), collide=torch.where(okw.any(1), (hit & okw).sum(1) / okw.sum(1).clamp(min=1), torch.zeros_like(reach)))
@@ -510,6 +530,16 @@ def gap_of(ib14, follow, reach, contact):
 
 
 # ---- driver --------------------------------------------------------------------------------------------------------
+class _Timer:
+    """GB_PROF=1: per-stage seconds (synchronised)"""
+    def __init__(self, dev):
+        self.on = os.environ.get("GB_PROF") == "1"; self.dev = dev; self.t = time.time(); self.s = {}
+    def __call__(self, k):
+        if not self.on: return
+        if str(self.dev).startswith("cuda"): torch.cuda.synchronize()
+        t = time.time(); self.s[k] = round(t - self.t, 2); self.t = t
+
+
 def evaluate(configs, Bw, Bf=None, chunk=48, overlap=1.0 - 1e-4, log=None):
     """configs: list of param dicts (zc-frontier-3r's). Bw = wear bench, Bf = fit bench (None = same bench). -> rows"""
     Bf = Bf or Bw; dev = Bw.RS.device; out = [None] * len(configs); ps = [snap(c) for c in configs]
@@ -525,24 +555,29 @@ def evaluate(configs, Bw, Bf=None, chunk=48, overlap=1.0 - 1e-4, log=None):
             pr = {k: torch.tensor([float(ps[i][k]) for i in ii], dtype=torch.float64, device=dev)
                   for k in ("az", "el", "a1", "a2", "wd", "wa", "sigma", "q", "end_extra")}
             Bw.outside = Bf.outside = 0
-            chf = Chain(Bf, pr, inv2, inv3); okf = continuity(Bf, pr, chf.ok)
-            prof = fit_profiles(Bf, chf, okf, pr)
+            tm = _Timer(dev)
+            chf = Chain(Bf, pr, inv2, inv3); tm("chain"); okf = continuity(Bf, pr, chf.ok); tm("K2"); mism = torch.zeros(len(ii), dtype=torch.bool, device=dev)
+            prof = fit_profiles(Bf, chf, okf, pr); tm("fit")
             if Bf is Bw: chw, okw = chf, okf
             else:
                 chw = Chain(Bw, pr, inv2, inv3); okw = continuity(Bw, pr, chw.ok)
-                for n in chw.straps:
-                    if chw.straps[n]["NS"] != chf.straps[n]["NS"] or not torch.equal(chw.straps[n]["ns"], chf.straps[n]["ns"]):
-                        raise ValueError(f"{n}: strap sample count differs between the fit and the wear bench")
-            S = score(Bw, chw, prof, okw, overlap)
+                for n in chw.straps:                    # the CPU kit cannot wear a frozen strap whose sample count changed
+                    sw, sf = chw.straps[n], chf.straps[n]; mism |= sw["ns"] != sf["ns"]
+                    if sw["NS"] != sf["NS"]:
+                        k = torch.arange(sw["NS"], device=dev); idx = torch.minimum(k, torch.tensor(sf["NS"] - 1, device=dev))
+                        prof[n] = prof[n].reshape(len(ii), sf["NS"], sf["nc"])[:, idx].reshape(len(ii), -1)
+            tm("wear-K2"); S = score(Bw, chw, prof, okw, overlap); tm("score")
             S = {k: v.cpu().numpy() for k, v in S.items()}
             for a, i in enumerate(ii):
                 r = {k: round(float(S[k][a]), 4) for k in ("reach", "follow", "inband14", "inband10", "contact")}
                 v = gap_of(r["inband14"], r["follow"], r["reach"], r["contact"])
                 hubF = [round(float(x), 2) for x in S["hubF"][a]]; hub_ok = all(x <= 140.0 for x in hubF); honest = not bool(S["sparse"][a])
+                if bool(mism[a]):
+                    out[i] = dict(params=ps[i], gap=999.0, error="strap sample count differs between the fit and the wear bench"); continue
                 out[i] = dict(params=ps[i], gap=round(v + (0.0 if (honest and hub_ok) else 100.0), 2), v_gap=v, honest=honest and hub_ok,
                               sparse=bool(S["sparse"][a]), hub_F=hubF, hub_F_ok=hub_ok, closure_k2=round(float(S["ok"][a]), 4),
                               collide=round(float(S["collide"][a]), 4), outside=int(Bw.outside + Bf.outside), **r)
-            if log: log(f"  group inv2={inv2} inv3={inv3}: {len(ii)} configs in {time.time() - t0:.1f} s")
+            if log: log(f"  group inv2={inv2} inv3={inv3}: {len(ii)} configs in {time.time() - t0:.1f} s" + (f" {tm.s}" if tm.on else ""))
     return out
 
 
@@ -562,7 +597,11 @@ def cpu_eval(args):
     if fit and tuple(fit) != tuple(wear):
         Bf = get(tuple(fit)); _, rf = M.evaluate(Bf, dict(p))
         prof = {k: np.array(v) for k, v in Bf._kit_last["prof"].items()} if "chain" in getattr(Bf, "_kit_last", {}) and rf.get("gap", 0) < 200 else None
-    Bw = get(tuple(wear)); _, r = M.evaluate(Bw, dict(p), fixed_prof=prof)
+    Bw = get(tuple(wear))
+    try:
+        _, r = M.evaluate(Bw, dict(p), fixed_prof=prof)
+    except Exception as e:                                                    # noqa: BLE001
+        return dict(error=f"{type(e).__name__}: {e}"[:200], gap=None)
     keep = ("gap", "reach", "follow", "inband14", "inband10", "contact", "honest", "hub_F")
     return {k: r.get(k) for k in keep} | dict(v_gap=(r.get("v") or {}).get("gap"), secs=round(time.time() - t, 2), mode=Bw.mode)
 
@@ -655,6 +694,13 @@ def main():
     ap.add_argument("--elites", type=int, default=16); ap.add_argument("--lam", type=int, default=24)
     a = ap.parse_args()
     wear = tuple(int(x) for x in a.bench.split(",")); fit = tuple(int(x) for x in a.fit.split(",")) if a.fit else None
+    if a.cmd == "table":                                              # markdown parity table from parity JSONs
+        for f in a.args:
+            d = json.load(open(f)); S = d["summary"]; md = S["max_abs_diff"]
+            print(f"| {'fit ' + str(tuple(S['fit'])) + ' -> ' if S.get('fit') else 'same '}{tuple(S['bench'])} | {S['n']} | "
+                  + " | ".join(str(md.get(k)) for k in ("gap", "reach", "follow", "inband14", "inband10", "contact"))
+                  + f" | {S['n_gap_diff_gt_1']} | {S['gpu_secs']} | {S['cpu_secs']} ({S['cpu_procs']} proc) |")
+        return
     if a.cmd == "pack":
         print(make_pack(int(a.args[0]), int(a.args[1]))); return
     log = lambda s: print(s, flush=True)
@@ -689,7 +735,8 @@ def main():
             c = pool.map(cpu_eval, [(p, wear, fit) for p in cf], chunksize=1)
         tc = time.time() - t; log(f"CPU {len(cf)} configs in {tc:.1f} s on {a.procs} processes")
         keys = ("gap", "reach", "follow", "inband14", "inband10", "contact")
-        diff = {k: [abs(float(x[k]) - float(y[k])) for x, y in zip(g, c) if x.get(k) is not None and y.get(k) is not None] for k in keys}
+        both = [(x, y) for x, y in zip(g, c) if not x.get("error") and not y.get("error")]
+        diff = {k: [abs(float(x[k]) - float(y[k])) for x, y in both if x.get(k) is not None and y.get(k) is not None] for k in keys}
         rows = [dict(params=x["params"], gpu={k: x.get(k) for k in keys + ("honest", "hub_F", "outside")}, cpu=y) for x, y in zip(g, c)]
         summ = dict(n=len(cf), bench=list(wear), fit=list(fit) if fit else None, max_abs_diff={k: round(max(v), 4) if v else None for k, v in diff.items()},
                     n_gap_diff_gt_1=sum(1 for v in diff["gap"] if v > 1.0), gpu_secs=round(tg, 2), cpu_secs=round(tc, 2), cpu_procs=a.procs,
