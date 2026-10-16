@@ -537,3 +537,51 @@ metal, overhead weighted) or a cap on tr, not near-touch alone (polish 2, task 2
   the trunk (3 poses: not taken - skin - as on the bench); of the skin-clear ones one is < 1 mm (link 2 0.37 mm at
   -15 / 10 / -60), the rest >= 2.35 mm (E strap). The verifier's 0.02 mm point does not reproduce on H1.
 * *The optimistic number:* the bench's 26.45 / 24.48 is a gap, not R1; built, H1's coverage is 1 point below k4598's.
+
+## Verification (rebase to margin 5 / O20) (independent verifier, 2026-10-16 ~08:10 UTC)
+
+Claim checked: the rebase track's "H1 (H-g107-1, O20 x3) 28.21 (margin 10) -> 27.20 (margin 5)" on the round-3 protocol
+(fit Bench(60,160) FAST at the same margin, shape frozen, worn on Bench(110,360) EXACT), complexity 19.5, 0 passive
+translations. Harness: `docs/research/rebase/verify_rebase_pinknee.py` (runs `docs/concepts/verify/skin-normal-3r-pin-knee.py`
+unchanged and adds the checks below), plus `docs/concepts/verify/skin-normal-3r-pin-knee-continuity.py` (kin + taken).
+Run on this box (nice, one process at a time), CB_EXACT=1, CB_FOLD_MARGIN=5, O20 only (the model refuses slim hubs).
+
+**Verdict: CONFIRMED (not refuted).** The gap reproduces exactly, no rule is broken, and the complexity is not understated.
+
+| | claim | re-measured |
+|---|---|---|
+| gap (Bench(110,360) exact, frozen) | 27.20 | **27.20** (fit 23.64 fast), score 90.11 |
+| reach / follow / in-band14 / in-band10 / contact | 0.6583 / 0.9636 / 0.8953 / 0.5539 / 0.0256 | identical |
+| near-touch gap (metal < 1 mm = contact) | 31.75 | 31.75 (8 poses < 1 mm, min metal 0.09 mm, clip frame 30 / 148 / -60) |
+| overhead (elev >= 140) | - | ws reach 0.179 (5 / 28), clip follow 0.60, in-band14 0.916; not taken: fold 15, knee window 7, contact 5 |
+| raglan-knee-3r (own verifier, `big`, margin 5) | 27.82 | **27.82** (dilution-corrected 28.56, near-touch 32.34) |
+
+Checks the round-3 harness does not make:
+1. **DOF / determinacy (screw rank, all 343 taken poses).** Loop scapula-J1-J2-J3-pin a-knee-pin b-arm-GH(3R): mobility
+   3 and chain rank 5 at every pose (smallest chain singular value 0.064 of the largest, p5 0.081), 6th singular value of
+   all 8 screws <= 1.6e-9: one redundant constraint (J1, J2 through GH - c1 = c2 = 0 - and pins parallel to J3). No
+   undetermined passive coordinate.
+2. **Sensing claim (null-space Jacobian).** The 3 hub rates fix the loop motion at every taken pose (sigma_min of the hub
+   rows of the orthonormal null space >= 0.39, condition <= 2.3): with GH known the knee pins need no encoder. The record
+   keeps 2 sensed pins because SIMPLICITY.md requires sensing to hold when GH translates (R10); the pins carry that in-plane
+   drift. So 19.5 is the rule's count, not an understatement (9.5 if the user accepts hub-only sensing / a cuff IMU).
+3. **Components at their envelope.** Hubs O20 (r 10) x 12.25 (F -> crown, upper member at F + 3.15) at J1-J3; knee pins:
+   stack 5.68 = 2 x 2.59 mm Ti plates + 0.5 washer on an O4 integral pin in O12 bosses, knee bar (lc + 12) x 10. Caveat
+   (found by the L1 CAD build, confirmed here from the model): the model's stack leaves out the top thrust washer +
+   e-clip (+1.4 mm, outward of the knee bar) - no skin number moves; part-part over it is the built CAD's R16 job.
+   J1 seat u1 = (ant 0.085, up 0.898, lat 0.432): acromion top, ruling 4 holds (anterior <= 0.20).
+4. **Honest pose-taking.** 470 poses = 343 taken + 127 with a reason (fold 97, knee window 14, parts 7, contact 9); 0
+   silent drops; the verifier's extra checks remove 0. Fold margin used >= 5.49 deg (0 poses under 5, 5 between 5 and
+   10 - the newly admitted ones); knee angle >= 2.24 deg inside [30.46, 149.54]; radial drift 0.0 mm (R_tol 0.5);
+   closure residual <= 0.015 deg; independent 3D closure <= 0.022 deg / 0.000 mm; J3 travel 181.5 deg (MR117 pair, full
+   rotation), pin a 44.3, pin b 40.6 deg.
+5. **Continuity (CLAUDE.md "reach must be reachable by moving").** Full 1432-pose workspace grid, 2-deg slerp edges, no
+   joint jump > 10 deg, one knee branch sign: kinematic nodes 971 / 971 connected, taken nodes 913 / 913 connected (742
+   edges, 0 refused), 0 islands; on the Bench(110,360) workspace 237 / 237 taken poses connected: connected reach =
+   static reach = 0.6583. Out of sample (all 1432 grid poses) the taken reach is 0.638, 0.02 below the bench's.
+6. **Complexity** (`tools/simplicity.py`, record checked against the model's members 1, 2, 3, 6, 5 and joints J1-J3,
+   pin a, pin b): 2 passive rotations 2 + 2 sensed pins 10 + 2 bodies 2 + 2 joints 2 + 4 made parts 2 + 6 bought 1.5 =
+   **19.5**. The iglidur pins are revolutes, not sliding pairs (SIMPLICITY.md); nothing is undercounted.
+
+What it means: under the user's rulings the pin knee stays the verified leader at 27.20 (score 90.1), 13.45 points
+short of 95 at complexity 19.5. Reach (0.658, overhead 0.18) is still the whole deficit, as the rebase track says.
