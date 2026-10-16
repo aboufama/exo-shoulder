@@ -16,26 +16,32 @@ scripts that happened to get written:
 | What has been learned so far? | [`docs/FINDINGS.md`](docs/FINDINGS.md) |
 | How do I run it? | [`docs/PIPELINE.md`](docs/PIPELINE.md), [`CLAUDE.md`](CLAUDE.md) for agents |
 
-## Status (2026-10-15, morning)
+## Status (2026-10-16 ~20:15 UTC)
 
-**Final design of the night, built and rendered: `cad_r18_n3_s1392_1_f300`** - a 3-joint chain (the user's 3-DOF
-minimum) from the range-first GPU search r18, full fair CAD with smooth fair-field links (FAIR_LAM 300), the scapula
-base on the user's handler, unpowered (MVP1, rolling bearings). Scorecard:
-[pipeline/full-exo/designs/cad_r18_n3_s1392_1_f300/judge/scorecard.md](pipeline/full-exo/designs/cad_r18_n3_s1392_1_f300/judge/scorecard.md);
-film and stills: [renders/2026-10-15_final_3R/](renders/2026-10-15_final_3R/).
+**New here, with no context? Read [`docs/HANDOFF.md`](docs/HANDOFF.md) first.** It holds the full state, the open
+questions and the next steps. [`docs/OPERATIONS.md`](docs/OPERATIONS.md) says how to run everything. The working method
+comes from Felix Rieseberg's essay
+[How to be more ambitious: A tutorial for humans with models](https://felixrieseberg.com/how-to-be-more-ambitious-a-tutorial-for-humans-with-models/)
+([`docs/METHOD.md`](docs/METHOD.md)).
 
-- Moves freely unpowered (R17), 3 DOF (R5), every part one valid solid (R7), 234 g of custom parts (R8).
-- Follows 80 % of motion frames (R3); Raise overhead to 138 deg of elevation (scapular plane), then holds; Comb hair,
-  Drink, Reach a high shelf, Wash opposite shoulder and Walking 100 %; Reach back pocket 22 %, Wave 40 %.
-- Proximity is the big gap: 41 % of the covered skin within 14 mm (R1, target 90 %), 19 % within 10 mm.
-- No design reaches the 90 % range target: the best compact designs cover 65-75 % of the functional workspace in the
-  evaluator, the built CAD 47 % (R16; link 2 meets the arm-end neck in half the poses outside the clips).
-
-What the night established (docs/FINDINGS.md): range first makes the search hold joints off the skin (stand-off
-designs, now flagged by the builder); joint size is worth ~20 points of workspace (O17 vs the O23 the CAD builds);
-the fair CAD's links ride 3-7 mm above the fitted shape (fair-field links recover part of it). Next levers: a smaller
-joint stack (needle bearings, O17 hub), the neck clearance over the whole workspace, links that follow the fitted
-shape.
+- **Scoring.** Score = 100 (1 - gap / 275) on the verification bench: Bench(110,360) exact, frozen shape, fold margin 5,
+  O20 hubs. A number counts only after an independent verifier re-measures it. The golden target is score >= 95 at
+  complexity ~0, and nothing has reached it yet.
+- **Best verified overall:** minarc-stop-knuckle-4r pick1, **18.40 (score 93.31)**, held out 21.31. It has 4 revolutes,
+  and the knuckle K is spring-held and sensed.
+- **Best verified with 3 active joints:** frontload-lobe-stopb-knuckle-3r, **22.82 (91.70)**, held out 26.75. Its K is
+  slaved to J2 by a rod drive. The simplest class, a plain 3R at complexity 0, tops out at 31-34.
+- **Round 8 (self-measured, under verification).** The "sidecar" drive at strap level reaches 18.91-19.13 frozen
+  (score ~93.1) with 3 active joints.
+- **What limits every leader: reach.** The J2 fold costs ~86 of 360 workspace poses and 20 of 28 overhead poses.
+  In-band (~0.89) and follow (~1.0) are close to target.
+- **Built CAD.** The best builds pass 7-8 of the 19 requirements:
+  - user_pinknee_h1b passes 8 (3 DOF);
+  - user_minarc_pick1 and l1_geneva-rod pass 7 each;
+  - proximity R1 tops out at 81 % against 90, overhead R4 at ~73 % against 80, and workspace R16 at 74 % against 90.
+  - The gen-5 full CAD (user_geneva_rod) is in progress.
+- **Design history:** [`docs/EVOLUTION.md`](docs/EVOLUTION.md) has every judged design, and
+  [`docs/concepts/ROUNDS.md`](docs/concepts/ROUNDS.md) has every discovery round.
 
 ## Quickstart
 

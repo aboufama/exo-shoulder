@@ -2,6 +2,7 @@
 
 Read first, in order: `docs/METHOD.md` (how we work: altitude, depth, range - from Felix Rieseberg's essay), `README.md`, `REQUIREMENTS.md`, `docs/PLAN.md`, `docs/FINDINGS.md`. Then `docs/CAD_STANDARD.md`
 before touching any part, `docs/PIPELINE.md` before running anything.
+The method's source: Felix Rieseberg, *How to be more ambitious: A tutorial for humans with models* - https://felixrieseberg.com/how-to-be-more-ambitious-a-tutorial-for-humans-with-models/ (docs/METHOD.md applies it).
 
 ## The goal (the user's words outrank everything)
 
@@ -196,12 +197,6 @@ docs/EVOLUTION.md (and its snapshot to pipeline/evolution/) as part of the judge
 
 ## Where things stand
 
-**Start with docs/HANDOFF.md** (2026-10-15 ~16:00 UTC: the full state of the morphology swarm, the interrupted tracks,
-the RunPod/cloud-farm state and the next steps; the previous session stopped at the user's weekly limit).
-
-
-See README "Status" and `pipeline/full-exo/designs/cad_r18_n3_s1392_1_f300/judge/scorecard.md` (the 3R final rendered
-2026-10-15; renders/2026-10-15_final_3R). Next levers, in order: a smaller joint stack (O17 hub: ~20 points of
-workspace, docs/FINDINGS.md), the arm-end neck clear of link 2 over the whole workspace (R16 part interference), links
-that follow the evaluator's fitted shape (R1), then the base skin-slip judge (R10). Evaluate picks at hub_r 11.5 until
-the CAD builds a smaller joint.
+**Start with docs/HANDOFF.md** (written for a reader with no context: what the project is, the score, the verified
+leaderboard, the built CADs, what is dead, the open questions for the user, what was running and how to relaunch it,
+the next steps), then **docs/OPERATIONS.md** (how to run the machinery: workflows, farm, watchdog, dashboards, git).
