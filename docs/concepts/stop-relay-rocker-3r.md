@@ -223,6 +223,10 @@ $0.17-0.20 for CMA A-D. The later batches (CMA E-K, frozen runs) were queued beh
 | CMA D (anterior pivot, phi ~185) | 1697 | 39.73 | | m_hi 8: not compliant; pivot hub in band only 0.26 |
 | **C best, continuity enforced** (connect = 1) | 1 | **31.92** | **88.39** | all 7 relay poses are islands; relay taken 0 |
 | C best shape, relay off | 1 | 32.63 | | the relay's usable worth: 0.71 points |
+| CMA E (connect = 1, both relay sides, from B) | 1273 | 31.58 | 88.52 | continuity in the objective |
+| **CMA F** (connect = 1, overhead relay only, from C) | 2401 | **29.82** | **89.16** | **honest best**: relay taken 0 (6 islands dropped), so the rocker is inert |
+| CMA G (connect = 1, relay_hi 0, from B) | 2401 | 31.52 | 88.54 | |
+| F best shape, relay off | 1 | 30.85 | | the 1.03 difference is the fit set (static islands change which poses q drops), not relay poses |
 
 The C best (static, the configuration the gate refers to) is:
 
@@ -272,8 +276,37 @@ streams interleaved by generation):
 - top-5 spread: 0.01;
 - -> converged.
 
-The continuity objective (CMA H-K, connect = 1, pivot directions 230-360 deg) was queued on the farm at write time.
-Its outputs land in .cache/srr/cma_[E-K].json.
+**Convergence gate, continuity objective** (CMA E-G + the post checks, 6080 tries in time order):
+- gain over the 2nd half: 0.51;
+- gain over the last third: 0.45;
+- top-5 spread: 0.00;
+- -> converged. CMA E-G ran with connect = 1: the model shipped after the filter landed.
+
+The honest best F (k12072) is:
+
+| parameter | value |
+|---|---|
+| J1 (az, el) | 97.32, 64.55 |
+| arcs a1, a2 | 41.72, 72.10 |
+| J3 wdir (wd, wa) | 82.86, -15.23 |
+| q | 0.959 |
+| rocker beta, phi | 27.90, 327.97 |
+| stop margins m_lo, m_hi | 11.02, 10.0 |
+| qmax | 70.4 |
+| relay | lo side only |
+| spacer lift1 | 0.41 |
+
+| metric | value |
+|---|---|
+| reach / follow | 0.656 / 1.0 |
+| in-band 14 / 10 | 0.897 / 0.560 |
+| contact | 0.052 |
+| near-touch gap | 50.29 |
+| min metal-skin | 0.02 mm |
+| overhead workspace reach | 0 / 12 |
+
+More pivot-direction streams (CMA H-K, connect = 1, phi 230-360) were still queued at write time. Their outputs land
+in .cache/srr/cma_[H-K].json.
 
 **Frozen Bench(110,360) exact** of the seed-spacer shape and of the B / C bests was queued at write time:
 .cache/srr/frozen_{k6,B,C}.json. These are static-relay numbers from the model as shipped before the continuity filter.
@@ -287,6 +320,8 @@ The stop-relay rocker's gains are static closure islands.
 - With the requirement that the arm can MOVE into a pose (flood fill from the mode-A region, 2-deg frames, no rocker
   snap), every relay pose of that shape is unreachable. The number falls to 31.92, 0.71 points better than the same
   shape with the rocker locked (32.63).
+- A CMA with continuity in its objective converges to **29.82** (score 89.16) with 0 relay poses taken: an inert rocker
+  on a spine-parked chain. Locked, the same shape scores 30.85.
 - Across 72 pivot directions, the kinematic ceiling with continuity is +0.023 big-bench reach and +0 overhead.
 
 The leader it is built on (spine-parked-j2-3r, 0 passive joints, complexity 0) is 28.49 fast / 34.29 verified. This
