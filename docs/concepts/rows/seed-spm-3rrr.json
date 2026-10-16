@@ -53,5 +53,23 @@
   "q": 0.95,
   "acc": 1
  },
- "audit": "audit 2026-10-15: death stands. Entry 46 re-measured on Bench(60,160) fast: identical (193.44). Upper bound with every adjacent-member collision waived: entry 46 187.80, entry 49 166.49 (reach 0.41, follow 0.75, inband14 0.049) - still ~100 above the 3R. Limiter: the 3 middle hubs sweep the shoulder and are fitted 150-400 mm from GH, so inband14 stays <= 0.36 whatever the collision rules."
+ "audit": "audit 2026-10-15: death stands. Entry 46 re-measured on Bench(60,160) fast: identical (193.44). Upper bound with every adjacent-member collision waived: entry 46 187.80, entry 49 166.49 (reach 0.41, follow 0.75, inband14 0.049) - still ~100 above the 3R. Limiter: the 3 middle hubs sweep the shoulder and are fitted 150-400 mm from GH, so inband14 stays <= 0.36 whatever the collision rules.",
+ "mechanism": {
+  "active_dof": 3,
+  "passive_trans": 0,
+  "crossed_rails": false,
+  "passive_rot": 6,
+  "moving_bodies": 7,
+  "joints": 9,
+  "closed_loops": 2,
+  "sliding_pairs": 0,
+  "rolling_pairs": 9,
+  "sensed_passive": 0,
+  "springs_or_flexures": 0,
+  "custom_parts": 17,
+  "catalogue_parts": 18,
+  "notes": "Agile-Eye-type spherical 3-RRR. bodies: 3 proximal arc links, 3 distal arc links, platform ring + arm end (fixed to the arm). joints: 3 ACTIVE base hubs + 3 x 2 PASSIVE hubs (HW_i, HV_i), 9 O20 hubs; 2 loops (three legs). Passives set by the closures (spherical Grubler 3 (8 - 1 - 9) + 9 = 3): not sensed (the 3 base angles fix the platform). custom: base frame (3 hub seats + 2 straps), 6 links, platform (2 straps + arm end), 9 hub shafts (est.); catalogue: 9 x MR117 pair (est.).",
+  "source": "docs/concepts/models/seed-spm-3rrr.py:1-37 (topology, legs, parts)",
+  "confidence": "counted"
+ }
 }

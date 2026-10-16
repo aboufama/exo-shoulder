@@ -100,5 +100,23 @@
    "inband14": 0.923,
    "inband10": 0.6335
   }
+ },
+ "mechanism": {
+  "active_dof": 3,
+  "passive_trans": 0,
+  "crossed_rails": false,
+  "passive_rot": 2,
+  "moving_bodies": 5,
+  "joints": 5,
+  "closed_loops": 0,
+  "sliding_pairs": 0,
+  "rolling_pairs": 5,
+  "sensed_passive": 2,
+  "springs_or_flexures": 0,
+  "custom_parts": 10,
+  "catalogue_parts": 12,
+  "notes": "the leader 3R (osn) closed by a flat two-pin knee instead of the crossed cuff slides. bodies: link 1, link 2, member 3 (hub-3 lower plate + E strap), knee link, arm pad (arm-end, on the cuff / BOTTOM). joints: J1-J3 O20 hubs, knee pins a, b parallel to J3 (iglidur pin: GSM sleeve + 2 GTM washers on an integral Ti pin, stk 5; counted as bearing-supported revolutes). Open chain, GH closes it (loop mobility 3, nothing sags). sensed: both knee pins - parallel to J3, they add to the arm's twist (q3' = q3 + phi), so tracking the arm needs them read (or the closure solved with GH known). custom: base, 2 links, member 3, knee link, arm pad, 3 hub shafts, 2 Ti pins (est.); catalogue: 3 x MR117 pair + 2 x (GSM sleeve + 2 GTM washers) (est.).",
+  "source": "docs/concepts/models/skin-normal-3r-pin-knee.py:1-25 (chain, kinematics, parts)",
+  "confidence": "counted"
  }
 }

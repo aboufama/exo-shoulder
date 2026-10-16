@@ -23,5 +23,23 @@
  "verdict": "dead: best gap 177.0 vs the 3R baseline 68.93; the sliding band's tail (constant radius, ~80 deg of excess travel stored past b) runs into the neck / arm in 20-40 % of poses; trimming the J2 range, moving the J2 rollers onto an L1 arm toward W, post-mounted band and ring tracks did not remove it - not worth a GPU sweep",
  "limiter": "the L2 band's tail: a band that slides through followers at b keeps one radius about GH and stores the ~80 deg change of the b-W angle (phig 40-120 deg over the fit clips) past b, over the trapezius into the neck (and into the arm in elevated poses): per-pose band requirement p50 99 mm, p80 >= 150 mm (local-outer skin radius) vs 43-60 mm skin under its b-W part; worst poses = elevation 120-135 deg (phig 61-69), band azimuth >= 96 deg inside the body to 150 mm; contact 0.41 of taken poses at best",
  "note": "bench fast Bench(60,160); best params k=35: {\"b_az\": 2.4305, \"b_el\": 80.6763, \"w_d\": 86.3277, \"w_az\": 21.8297, \"A1\": 76.9018, \"A2\": 66.7492, \"pct\": 80.0, \"cov_ws\": 0.95, \"top\": \"post\", \"n1\": 1, \"n3\": 1, \"g3a\": 8.0, \"s1\": 0.0, \"trim2\": 0.0} | audit: strap artefact for s1>0 removed, s1=35 band_over cov_ws .95 -> v_gap 158.3 (contact .263); death stands (band tail past b saturates RB 127-152 mm over the 160 deg workspace J2 travel)",
- "doc": "docs/concepts/sliding-rivet-pauldron.md"
+ "doc": "docs/concepts/sliding-rivet-pauldron.md",
+ "mechanism": {
+  "active_dof": 3,
+  "passive_trans": 0,
+  "crossed_rails": false,
+  "passive_rot": 0,
+  "moving_bodies": 3,
+  "joints": 3,
+  "closed_loops": 0,
+  "sliding_pairs": 3,
+  "rolling_pairs": 0,
+  "sensed_passive": 0,
+  "springs_or_flexures": 0,
+  "custom_parts": 12,
+  "catalogue_parts": 6,
+  "notes": "counted at the best config (k35, top = 'post'). hubless spherical 3R: every joint is two needle cam followers in arc slots (follower-in-slot: a track pair). bodies: L1 (guide disc + 2 O6 posts), L2 (band + ramped strap + arm-end disc), H saddle (arm-end, + BOTTOM stub). joints: J1, J2, J3 (2 rollers each, 90 deg apart). custom: S cap, L1 disc, 2 posts, L2, H saddle, 6 flanged roller studs (est.); catalogue: 6 MR84-class rollers (est.).",
+  "source": "docs/concepts/models/sliding-rivet-pauldron.py:1-49 (topology, SPEC CORRECTIONS 1-4)",
+  "confidence": "counted"
+ }
 }

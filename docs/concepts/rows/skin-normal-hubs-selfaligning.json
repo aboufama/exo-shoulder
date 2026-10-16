@@ -32,5 +32,23 @@
   "buildable_variant": "offset-skin-normal-3r (2 slides in hub 3's plane, 2 x RSR3M / MGN03C ~10.5-11.5 mm): 32.61 Bench(60,160) fast, unverified",
   "t": "2026-10-16",
   "source": "docs/research/manufacturability_summary.md; docs/research/passive_dof_hardware.md; docs/research/manufacturability_audit.md"
+ },
+ "mechanism": {
+  "active_dof": 3,
+  "passive_trans": 3,
+  "crossed_rails": true,
+  "passive_rot": 0,
+  "moving_bodies": 6,
+  "joints": 6,
+  "closed_loops": 0,
+  "sliding_pairs": 3,
+  "rolling_pairs": 3,
+  "sensed_passive": 0,
+  "springs_or_flexures": 0,
+  "custom_parts": 11,
+  "catalogue_parts": 12,
+  "notes": "the seed-offset-3r-slides chain with skin-normal hub tilts (beta) + the bridge strap; NOT BUILDABLE (3 passive translations; radial slide has no compact part, audit). bodies: link 1, link 2, member 3 (hub 3 + neck + bridge + across carriage), 2 stage carriages, arm-end (arm-fixed cuff rail on BOTTOM's top). joints: J1-J3 O20 hubs, along / across (crossed) / radial slides. Translations change no orientation: not sensed. custom: base, 2 links, member 3, bridge, 2 carriage adapters, arm rail mount, 3 hub shafts (est.); catalogue: 3 x MR117 pair, 2 rails + 2 blocks, radial guide as 1 rail + 1 block (est.).",
+  "source": "docs/concepts/models/skin-normal-hubs-selfaligning.py:1-27 (chain, XYZ stage); docs/research/manufacturability_audit.md:94",
+  "confidence": "counted"
  }
 }

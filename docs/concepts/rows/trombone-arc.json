@@ -46,5 +46,23 @@
   "buildable_variant": "none (dead on the bench)",
   "t": "2026-10-16",
   "source": "docs/research/manufacturability_summary.md; docs/research/passive_dof_hardware.md; docs/research/manufacturability_audit.md"
+ },
+ "mechanism": {
+  "active_dof": 3,
+  "passive_trans": 0,
+  "crossed_rails": false,
+  "passive_rot": 0,
+  "moving_bodies": 4,
+  "joints": 5,
+  "closed_loops": 1,
+  "sliding_pairs": 2,
+  "rolling_pairs": 2,
+  "sensed_passive": 0,
+  "springs_or_flexures": 0,
+  "custom_parts": 11,
+  "catalogue_parts": 13,
+  "notes": "counted at the best config (k143: j1 = 'hub', tele = 1, the 2-stage telescoping arc with a 2:1 cable sleeve - NOT BUILDABLE in MVP1, audit). bodies: L1 (strap + needle cam-follower guide), sleeve A (turns half of J2), band B + connector (link 2), arm-end (hub-3 lower member + K7 neck). joints: J1 O20 hub, sleeve A through the guide, band B in sleeve A (track pairs), J3 O20 hub, the 2:1 cable coupling (a constraint pair: 1 loop, no free coordinate). The spec form (ring J1, one band): bodies 3, joints 3, sliding 1, rolling 2 (KAA15XL0 + hub). custom: base, L1 strap, guide box, sleeve A, band B, connector, neck, 2 hub shafts, 2 cable pulleys (est.); catalogue: 2 x MR117 pair, 8 needle cam followers, 1 cable (est.).",
+  "source": "docs/concepts/models/trombone-arc.py:1-26 (topology, variants), 38-44 (best k143 PARAMS)",
+  "confidence": "counted"
  }
 }

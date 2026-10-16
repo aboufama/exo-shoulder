@@ -34,5 +34,23 @@
   "neck": 0.4331,
   "web2": 0.0
  },
- "audit": "2026-10-15 audit: death stands. Best config re-measured honest (march, dense K2, K6, kit audit clean) = 79.46 exactly. No modelling bug or convention error found. The like-for-like reference is the champion under the same kit checks, 70.27 (it is 68.93 only under the baseline's looser conventions), so this morphology is 9.2 behind, not 10.5. Probes: q 0.95 89.73; O20 hub at J2 102.85 (hub2 0.2 % in band, 15 % collisions); cov3 0.8 93.06; cov2 0.95 84.85. Limiter confirmed: track 2 is 0.00 in band in every variant."
+ "audit": "2026-10-15 audit: death stands. Best config re-measured honest (march, dense K2, K6, kit audit clean) = 79.46 exactly. No modelling bug or convention error found. The like-for-like reference is the champion under the same kit checks, 70.27 (it is 68.93 only under the baseline's looser conventions), so this morphology is 9.2 behind, not 10.5. Probes: q 0.95 89.73; O20 hub at J2 102.85 (hub2 0.2 % in band, 15 % collisions); cov3 0.8 93.06; cov2 0.95 84.85. Limiter confirmed: track 2 is 0.00 in band in every variant.",
+ "mechanism": {
+  "active_dof": 3,
+  "passive_trans": 1,
+  "crossed_rails": false,
+  "passive_rot": 0,
+  "moving_bodies": 4,
+  "joints": 4,
+  "closed_loops": 0,
+  "sliding_pairs": 4,
+  "rolling_pairs": 0,
+  "sensed_passive": 0,
+  "springs_or_flexures": 0,
+  "custom_parts": 9,
+  "catalogue_parts": 5,
+  "notes": "every revolute a large sliding pair concentric with GH (T-slot channel + iglidur liner slider). bodies: shell 1 (slider 1 + web 1 + track 2), shell 2 (slider 2 + web 2 + carriage), C-ring + neck, arm-end (slide block on BOTTOM). joints: J1, J2 shell sliders in channels, J3 carriage on the C-ring, PASSIVE slide along the humerus (30 x 10 x 5): 4 sliding pairs, no bearing. Slide changes no orientation: not sensed. custom: base shell + track 1, shell 1, web 2, carriage, C-ring, neck, slide mount, 2 channel caps (est.); catalogue: 3 iglidur liner sliders, slide rail + block (est.).",
+  "source": "docs/concepts/models/seed-pauldron-shells.py:1-38 (topology, parts)",
+  "confidence": "counted"
+ }
 }

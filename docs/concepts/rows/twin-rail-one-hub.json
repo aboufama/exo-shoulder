@@ -94,5 +94,23 @@
   "C1",
   "C3",
   "N3"
- ]
+ ],
+ "mechanism": {
+  "active_dof": 3,
+  "passive_trans": 0,
+  "crossed_rails": false,
+  "passive_rot": 0,
+  "moving_bodies": 3,
+  "joints": 3,
+  "closed_loops": 0,
+  "sliding_pairs": 2,
+  "rolling_pairs": 1,
+  "sensed_passive": 0,
+  "springs_or_flexures": 0,
+  "custom_parts": 10,
+  "catalogue_parts": 12,
+  "notes": "spherical 3R whose two pole joints are arc rails (virtual axes), J2 the only hub. bodies: link 1 (carriage 1 + bridge), link 2 (strap + carriage 3), arm-end (arm rail + K7 neck). joints: J1 carriage 1 on the crown rail, J3 carriage 3 on the arm rail (caged-ball wire-race C-slides; the cages run at half speed, set by the carriages, not counted as bodies), J2 O20 hub. custom: crown rail (base), carriage 1, bridge, link 2, carriage 3, arm rail, neck, 2 ball cages, J2 shaft (est.); catalogue: MR117 pair, 8 race wires, 2 ball sets (est.).",
+  "source": "docs/concepts/models/twin-rail-one-hub.py:1-37 (topology, DOF)",
+  "confidence": "counted"
+ }
 }
