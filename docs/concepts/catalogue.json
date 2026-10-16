@@ -2449,7 +2449,7 @@
   "name": "Front-loaded stretched lobe + stop B at the K dyad's 5-deg margin (winner re-cut; K opens before J2 stretches)",
   "family": "redundant 4R with a determined spare (cam-slaved knuckle)",
   "lens": "round7:two-rise-lobe -> stretched-side follow-up from the Step-1 split (stop-B half merged from long-a2-bilobe-knuckle-3r)",
-  "status": "ideated",
+  "status": "screened",
   "t_ideated": "2026-10-16T15:33:10Z",
   "source": "round 7 judge (docs/concepts/round7_ideation.md)",
   "merged_from": [
