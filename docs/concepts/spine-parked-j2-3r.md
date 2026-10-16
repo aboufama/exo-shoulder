@@ -178,6 +178,8 @@ fix costs nothing measurable.
 
 ## The fold: what it costs, and that it is a seat problem, not a law of the spherical 3R
 
+![J1-J3 angle demand vs the closure window](img/spine-parked-j2-3r.png)
+
 At the CMA-B seats, the 49 workspace poses lost split as follows (redteam, Bench(60,160)):
 * 45 poses are fold / K2: the J1-J3 angle leaves the closure window [|a1 - a2| + 10, a1 + a2 - 10] = [43.1, 104.4];
 * 6 poses are contact;
