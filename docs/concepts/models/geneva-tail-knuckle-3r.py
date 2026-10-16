@@ -146,8 +146,11 @@ def geneva(p):
                    "m3e" if m3e[j] < m else "msub" if msub[j] < m else "sign")
     # the tail tip in link 2's frame: coefficients on (u2, u3, n23) at the onset
     n23 = K.unit(np.cross(u2, u3)); Mb = np.stack([u2, u3, n23], 1); coef = np.linalg.solve(Mb, K.unit(p0))
+    # the flank direction at stop A in link 1a's frame: coefficients on (uK, u1, n_K1) (the beside embodiment's lug)
+    azc0 = float(az[0] + s_m * math.asin(min(1.0, rho_n / rp[0]))); fl = math.cos(azc0) * eK + math.sin(azc0) * fK
+    nK1 = K.unit(np.cross(uK, u1)); coefL = np.linalg.solve(np.stack([uK, u1, nK1], 1), fl)
     out = dict(ok=nval > 1, side=side, Lt=Lt, emb=emb, th=th[:nval], a1e=a1e[:nval], ts=ts[:nval], kap=kap[:nval], pa=pa[:nval],
-               r_c=r_c[:nval], rate=rate[:nval], th_hi=th_hi, th_max=float(th[nval - 1]), why_end=why_end, coef=coef,
+               r_c=r_c[:nval], rate=rate[:nval], th_hi=th_hi, th_max=float(th[nval - 1]), why_end=why_end, coef=coef, coefL=coefL,
                dK_max=float(np.degrees(kabs[:nval].max())), t_max=float(np.degrees(ts[nval - 1])),
                tip_from_u2=float(_ang(u2, p0)))
     _LAW_CACHE[key] = out
@@ -220,6 +223,11 @@ def build(B, F, p):
         tail = K.strap_member("tail", p2, tipA, ("J2",), width=tw, t=t, ramp_to=(("hub2", K.STACK), ("roller", ROLLER_H)),
                               over=[("link1a", 1.0), ("link1b", 1.0), ("hubK", 1.0)], end_mm=end)
         mem = mem + [roller, tail]
+        if L["emb"] == "beside":                              # the tooth lug on link 1a: K's rim -> lug_max along the flank, 6 mm wide
+            fl = K.unit(L["coefL"][0] * K.unit(pK) + L["coefL"][1] * K.unit(p1) + L["coefL"][2] * K.unit(np.cross(pK, p1)))
+            gl = float(p["lug_max"]) / 70.0; lugE = K.unit(math.cos(gl) * K.unit(pK) + math.sin(gl) * fl)
+            mem.append(K.strap_member("lug", pK, lugE, ("K",), width=6.0, t=t, ramp_to=(("hubK", K.STACK + KA.KX), ("hubK", K.STACK + KA.KX)),
+                                      end_mm=float(p["lug_max"]) + 2.0))
         info.update(tail_deg=round(float(_ang(p2, tip).mean()), 1), emb=L["emb"])
     o = ok
     info.update(residual_deg=round(float(k["res"][o].max()), 5) if o.any() else None,
@@ -240,6 +248,9 @@ def evaluate(B, params):
                       dK_max=round(L.get("dK_max", 0.0), 1), t_max=round(L.get("t_max", 0.0), 1), why_end=L.get("why_end"),
                       pa_max_used=round(float(L["pa"].max()), 1) if L.get("ok") else None, rc_max=round(float(L["r_c"].max()), 1) if L.get("ok") else None,
                       rate_max_used=round(float(L["rate"].max()), 2) if L.get("ok") else None)
+    if p.get("cam") and not L.get("ok"):                     # no working drive = not this design (a plain 3R with a stuck K, no tail)
+        r["gap_nodrive"] = r["gap"]; r["gap"] = float(r["gap"]) + 100.0; r["honest"] = False
+        r.setdefault("audit", []).append("drive: the one-tooth law has no valid prefix (no tail built)")
     kin = B._kit_last.get("kin")
     if kin is not None:
         ok = kin["ok"]; st = kin["state"]; ws = np.array([k_ == "ws" for k_ in B.kind])

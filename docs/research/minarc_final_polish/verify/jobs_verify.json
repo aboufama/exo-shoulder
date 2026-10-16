@@ -1,0 +1,86 @@
+[
+ {
+  "tag": "fpv-BDp-env-held",
+  "cmd": "eval \"$(python3 tools/env_bench.py use env)\" && python3 docs/concepts/verify/minarc-final-polish-verify.py env held BDp docs/research/minarc_final_polish/verify/v_BDp_env_held.json > docs/research/minarc_final_polish/verify/v_BDp_env_held.log 2>&1; tail -1 docs/research/minarc_final_polish/verify/v_BDp_env_held.log",
+  "out": [
+   "docs/research/minarc_final_polish/verify/v_BDp_env_held*"
+  ],
+  "env": {
+   "OMP_NUM_THREADS": "1",
+   "IGL_NUM_THREADS": "2",
+   "CB_EXACT": "1",
+   "CB_FOLD_MARGIN": "5.5"
+  },
+  "timeout": 3000
+ },
+ {
+  "tag": "fpv-BDp-fit60-bench",
+  "cmd": "eval \"$(python3 tools/env_bench.py use env)\" && python3 docs/concepts/verify/minarc-final-polish-verify.py fit60 bench BDp docs/research/minarc_final_polish/verify/v_BDp_fit60_bench.json > docs/research/minarc_final_polish/verify/v_BDp_fit60_bench.log 2>&1; tail -1 docs/research/minarc_final_polish/verify/v_BDp_fit60_bench.log",
+  "out": [
+   "docs/research/minarc_final_polish/verify/v_BDp_fit60_bench*"
+  ],
+  "env": {
+   "OMP_NUM_THREADS": "1",
+   "IGL_NUM_THREADS": "2",
+   "CB_EXACT": "1",
+   "CB_FOLD_MARGIN": "5.5"
+  },
+  "timeout": 3000
+ },
+ {
+  "tag": "fpv-BDp-fit60-held",
+  "cmd": "eval \"$(python3 tools/env_bench.py use env)\" && python3 docs/concepts/verify/minarc-final-polish-verify.py fit60 held BDp docs/research/minarc_final_polish/verify/v_BDp_fit60_held.json > docs/research/minarc_final_polish/verify/v_BDp_fit60_held.log 2>&1; tail -1 docs/research/minarc_final_polish/verify/v_BDp_fit60_held.log",
+  "out": [
+   "docs/research/minarc_final_polish/verify/v_BDp_fit60_held*"
+  ],
+  "env": {
+   "OMP_NUM_THREADS": "1",
+   "IGL_NUM_THREADS": "2",
+   "CB_EXACT": "1",
+   "CB_FOLD_MARGIN": "5.5"
+  },
+  "timeout": 3000
+ },
+ {
+  "tag": "fpv-pick1-env-held",
+  "cmd": "eval \"$(python3 tools/env_bench.py use env)\" && python3 docs/concepts/verify/minarc-final-polish-verify.py env held docs/research/minarc_final_polish/picks/pick1.json docs/research/minarc_final_polish/verify/v_pick1_env_held.json > docs/research/minarc_final_polish/verify/v_pick1_env_held.log 2>&1; tail -1 docs/research/minarc_final_polish/verify/v_pick1_env_held.log",
+  "out": [
+   "docs/research/minarc_final_polish/verify/v_pick1_env_held*"
+  ],
+  "env": {
+   "OMP_NUM_THREADS": "1",
+   "IGL_NUM_THREADS": "2",
+   "CB_EXACT": "1",
+   "CB_FOLD_MARGIN": "5.5"
+  },
+  "timeout": 3000
+ },
+ {
+  "tag": "fpv-pick1-fit60-bench",
+  "cmd": "eval \"$(python3 tools/env_bench.py use env)\" && python3 docs/concepts/verify/minarc-final-polish-verify.py fit60 bench docs/research/minarc_final_polish/picks/pick1.json docs/research/minarc_final_polish/verify/v_pick1_fit60_bench.json > docs/research/minarc_final_polish/verify/v_pick1_fit60_bench.log 2>&1; tail -1 docs/research/minarc_final_polish/verify/v_pick1_fit60_bench.log",
+  "out": [
+   "docs/research/minarc_final_polish/verify/v_pick1_fit60_bench*"
+  ],
+  "env": {
+   "OMP_NUM_THREADS": "1",
+   "IGL_NUM_THREADS": "2",
+   "CB_EXACT": "1",
+   "CB_FOLD_MARGIN": "5.5"
+  },
+  "timeout": 3000
+ },
+ {
+  "tag": "fpv-pick1-fit60-held",
+  "cmd": "eval \"$(python3 tools/env_bench.py use env)\" && python3 docs/concepts/verify/minarc-final-polish-verify.py fit60 held docs/research/minarc_final_polish/picks/pick1.json docs/research/minarc_final_polish/verify/v_pick1_fit60_held.json > docs/research/minarc_final_polish/verify/v_pick1_fit60_held.log 2>&1; tail -1 docs/research/minarc_final_polish/verify/v_pick1_fit60_held.log",
+  "out": [
+   "docs/research/minarc_final_polish/verify/v_pick1_fit60_held*"
+  ],
+  "env": {
+   "OMP_NUM_THREADS": "1",
+   "IGL_NUM_THREADS": "2",
+   "CB_EXACT": "1",
+   "CB_FOLD_MARGIN": "5.5"
+  },
+  "timeout": 3000
+ }
+]

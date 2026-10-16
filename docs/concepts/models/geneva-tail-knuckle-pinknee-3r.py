@@ -66,7 +66,8 @@ LB1 = {"o1a": 0.0, "o1c": 0.0, "o2a": 0.0, "o2c": 0.0, "o3a": 0.0, "o3c": 0.0, "
        "rad3": 10.0, "bk1": 28.3208, "bk2": 46.7062, "sK": -1, "a1max": 67.5814, "mstop": 0, "kitrule": 1, "smhi": 8.0, "smlo": 5.0, "near": 1,
        "phys": 1, "capK": 6.0, "m3e": 1}
 PARAMS = dict(KR.PARAMS, **LB1)
-PARAMS.update(cam=1, d_mm=7.0, psi_c=0.0, side=0, rho=3.0, r_law=70.0, pa_max=45.0, lug_max=22.0, tail=1, flipK=1)
+PARAMS.update(cam=1, d_mm=7.0, psi_c=0.0, side=0, rho=3.0, r_law=70.0, pa_max=45.0, lug_max=22.0, tail=1, flipK=1,
+              emb_mode="tail", kK=3.0, r_lobe=9.0, r_horn=2.6)
 
 
 class GDesign(KR.KRDesign):
@@ -81,7 +82,11 @@ class GDesign(KR.KRDesign):
         r_law = float(P["r_law"]); rho_n = float(P["rho"]) / r_law; d_deg = math.degrees(float(P["d_mm"]) / r_law)
         bk2 = float(P["bk2"]); e, f = S.frame_of(uK)
         best = None
-        for side in ((-1.0, 1.0) if not P.get("side") else (float(np.sign(P["side"])),)):
+        ROD = P.get("emb_mode") == "rod"
+        if ROD:                                                    # fallback: hub-2 rim lobe -> rocker -> pushrod -> horn on K's cap
+            ts = np.radians(np.arange(0.0, 60.01, 0.1)); q2t = q2hi + s_q * ts; kK = float(P["kK"])
+            best = (0.0, 0.0, u2.copy(), ts, q2t, np.tile(u2, (len(ts), 1)), sp * kK * ts, np.ones(len(ts)), 1.0, q2hi, s_q)
+        for side in (() if ROD else (-1.0, 1.0) if not P.get("side") else (float(np.sign(P["side"])),)):
             Lt = bk2 + side * d_deg
             if not (5.0 < Lt < 175.0): continue
             # closest-approach point: Lt from u2 toward uK on the great circle u2 -> uK
@@ -112,6 +117,8 @@ class GDesign(KR.KRDesign):
         nvec = -np.sin(apl)[:, None] * e + np.cos(apl)[:, None] * f
         pa = np.degrees(np.arccos(np.clip(np.abs(np.einsum("ij,ij->i", nvec, v)) / np.maximum(np.linalg.norm(v, axis=1), 1e-12), 0, 1)))
         r_c = np.sqrt(np.maximum(rp ** 2 - rho_n ** 2, 0)) * float(P["r_law"])     # contact radius on the flank (mm)
+        if ROD:                                                    # constant-pressure spiral lobe: tan(pa) = kK r_horn / r_lobe
+            pa = np.full(len(ts), math.degrees(math.atan(float(P["kK"]) * float(P["r_horn"]) / float(P["r_lobe"])))); r_c = np.zeros(len(ts))
         kabs = np.abs(dK); dth = np.gradient(th, ts); dk = np.gradient(kabs, ts)
         # lift-off: self-motion slope at fixed th: d|dK|/dt|_C = -(dth/dt|_dK) / (dth/d|dK| |_t)
         h = 1e-4
@@ -122,7 +129,8 @@ class GDesign(KR.KRDesign):
         sC = -a_t / np.where(np.abs(b_k) < 1e-12, 1e-12, b_k)
         lift = (sC > 1e-9) & (sC < dk - 1e-9)
         rate = 1.0 / np.maximum(np.radians(dth) * 1.0, 1e-12)     # dq2/dth (both rad)
-        if float(P["d_mm"]) < S.HUB_R + float(P["rho"]) + 1.0: emb, rmax = "crown", S.HUB_R
+        if ROD: emb, rmax = "rod", 1e9
+        elif float(P["d_mm"]) < S.HUB_R + float(P["rho"]) + 1.0: emb, rmax = "crown", S.HUB_R
         else: emb, rmax = "beside", float(P["lug_max"])
         cpsiB = (math.cos(float(P["a1max"]) * D2R) - math.cos(float(P["bk1"]) * D2R) * math.cos(float(P["bk2"]) * D2R)) / (math.sin(float(P["bk1"]) * D2R) * math.sin(float(P["bk2"]) * D2R))
         dKB = abs(math.acos(max(-1, min(1, cpsiB))) - abs(self.psiA))
@@ -138,6 +146,7 @@ class GDesign(KR.KRDesign):
                          rate=rate[:nval], emb=emb, q2hi=q2hi, s_q=s_q, why_end=why_end, s_m=s_m,
                          dK_max=float(np.degrees(kabs[:nval].max())) if nval else 0.0, t_max=float(np.degrees(ts[nval - 1])) if nval else 0.0,
                          th_max=float(th[nval - 1]) if nval else None, phi_t=None)
+        if ROD: return self._law
         # planform bend of the tail at hub 2 (deg about u2 from link 2's own backward extension)
         ext = unit(S.rotm(unit(np.cross(u3, u2)), Lt * D2R)[0] @ u2)
         a_ = unit(ext - (ext @ u2) * u2); b_ = unit(p0 - (p0 @ u2) * u2)
@@ -204,7 +213,7 @@ class GModel(KR.KModel):
 
     def fit(self):
         D = self.D; P = D.p
-        if not (P.get("cam") and P.get("tail", 1)): return super().fit()
+        if not (P.get("cam") and P.get("tail", 1)) or P.get("emb_mode") == "rod": return super().fit()
         poses = np.nonzero(self.kin_ok)[0]; self.poses_fit = poses
         g = self._geo(); self.g = g; off_k = P["tp"] + S.RUN
         order = ["hub1", "hubK", "hub2", "hub3", "boss", "pad", "knee", "E"]
@@ -253,6 +262,7 @@ class GModel(KR.KModel):
     def finalize(self):
         super().finalize()
         D = self.D; P = D.p
+        if P.get("cam") and P.get("emb_mode") == "rod": return self._rod_metal() if P.get("tail", 1) else None
         if not (P.get("cam") and P.get("tail", 1)) or not getattr(self, "_tail_rows", None): return
         keep = ~self.drop; L_ = D.law(); k = math.tan(S.RAMP * D2R)
         self._LT_need = self.Lneed.get("LT", []); self._TIP_need = self.Lneed.get("TIP", [None])[0]
@@ -301,6 +311,32 @@ class GModel(KR.KModel):
         self.contact.append((2, np.concatenate([self._tip_dir * z + ring for z in (rtip, rtip + ROLLER_H)])))
         self.strap["ROL"] = (2, np.concatenate([self._tip_dir * z + ring for z in np.linspace(rtip, rtip + ROLLER_H, 3)]))
 
+    def _rod_metal(self):
+        """the fallback drive's metal, all on member 7 (link 1b; the rod's own few-mm slide is ignored): a rocker O10 x 9
+        on link 1b beside hub 2 (its base disc on link 1b's level, sampled + in band), an O3 pushrod from the rocker's top
+        to a horn on K's cap (radius r_horn, at K's cap mid-height), M3 rod-end heads O10 x 5 at both ends"""
+        D = self.D; P = D.p; u2, uK = D.u[1], D.uK; fK, f2 = self.fK, self.f[1]; capK = float(P.get("capK", 0) or 0)
+        L1b = self.link_pts["L1b"][1]
+        g0 = (S.HUB_R + 5.0 + 1.0) / max(f2, 30.0)                 # rocker centre: rim of hub 2 + its radius + 1 mm, toward K
+        ax = unit(np.cross(u2, uK)); dR = unit(S.rotm(ax, g0)[0] @ u2)
+        near = L1b[np.argsort(np.linalg.norm(unit(L1b) - dR, axis=1))[:6]]; lev = float(np.linalg.norm(near, axis=1).max()) + S.T_LINK
+        e, f = S.frame_of(dR); dd = S.disc(5.0, 2.0)
+        self.rigid["rocker"] = (7, dR * lev + dd[:, :1] * e + dd[:, 1:] * f)
+        top = dR * (lev + 9.0)                                      # rod end on the rocker's top
+        eK, fK_ = S.frame_of(uK); hornP = uK * (fK + S.CROWN + capK * 0.5) + float(P["r_horn"]) * eK
+        n = max(3, int(np.linalg.norm(hornP - top) / S.SPACING)); sg = np.linspace(0, 1, n)[:, None]
+        rod = top[None] * (1 - sg) + hornP[None] * sg
+        self.rigid["rod"] = (7, rod - 1.5 * unit(rod))               # rod underside (O3)
+        ang = np.linspace(0, 2 * np.pi, 16, endpoint=False)
+        def ring(c, r, axv): a, b = S.frame_of(axv); return c + r * (np.cos(ang)[:, None] * a + np.sin(ang)[:, None] * b)
+        ends = np.concatenate([ring(top, 5.0, dR), ring(hornP, 5.0, uK), ring(top + 5.0 * dR, 5.0, dR), ring(hornP + 5.0 * uK, 5.0, uK)])
+        cyl = np.concatenate([ring(dR * z, 5.0, dR) for z in np.linspace(lev, lev + 9.0, 4)])
+        self.rigid["rodends"] = (7, np.concatenate([ring(top, 5.0, dR), ring(hornP, 5.0, uK)]))
+        self._contact_only(); self._solids()
+        self.contact.append((7, np.concatenate([ends, cyl, rod + 1.5 * unit(rod)])))
+        self.strap["ROD"] = (7, np.concatenate([ends, cyl, rod]))
+        self._rod_info = dict(rocker_level=round(lev, 1), horn_level=round(float(fK + S.CROWN + capK * 0.5), 1), rod_len=round(float(np.linalg.norm(hornP - top)), 1))
+
     def _contact_only(self):
         super()._contact_only()
         if "lug" in getattr(self, "rigid", {}):
@@ -308,6 +344,20 @@ class GModel(KR.KModel):
 
     def collide(self, i):
         out = super().collide(i)
+        if "ROD" in self.strap:
+            h = S.T_LINK / 2
+            def tf(m, X): R, t = self.T(m, i); return X @ R.T + t
+            cyl = {}
+            for k_, (m, cen, ax) in self.cyl.items(): R, t = self.T(m, i); cyl[k_] = (R @ cen + t, R @ ax)
+            RD = tf(*self.strap["ROD"]); c = {}
+            for hb in ("hub1", "hub3"): c[f"ROD-{hb}"] = float(self.sd_cyl(RD, *cyl[hb], r=self.cyl_r[hb]).min())
+            for nm in ("L1a", "L2"):
+                Xs = tf(*self.strap[nm]); c[f"ROD-{nm}"] = float(cKDTree(Xs).query(RD)[0].min()) - h
+            bx = self._boxes_at_final(i)
+            for nm in ("knee", "pad"): cen, R, half = bx[nm]; c[f"{nm}-ROD"] = float(self.sd_box(RD, cen, R, half).min())
+            Em = tf(*self.Emid); c["E-ROD"] = float(cKDTree(Em).query(RD)[0].min()) - h
+            self.last_clear.update({k_: round(v, 1) for k_, v in c.items()})
+            return min(out, min(c.values()))
         if "LT" not in self.strap: return out
         h = S.T_LINK / 2
         def tf(m, X): R, t = self.T(m, i); return X @ R.T + t
@@ -352,7 +402,7 @@ def _report(B, params):
                           stretched_kin=int((ko & (st == 1)).sum()), folded_kin=int((ko & (st == -1)).sum()),
                           dK_taken_max=round(float(np.degrees(np.abs(M.dK[ko & (st == 1)])).max()), 1) if (ko & (st == 1)).any() else 0.0,
                           floor_tip=round(getattr(M, "_floor_tip", 0.0), 1), roller_bottom=round(getattr(M, "_roller_bottom", 0.0), 1),
-                          LT_len_mm=round(getattr(M, "_LT_len", 0.0), 1), fK=round(float(getattr(M, "fK", 0)), 1))
+                          LT_len_mm=round(getattr(M, "_LT_len", 0.0), 1), fK=round(float(getattr(M, "fK", 0)), 1), rod=getattr(M, "_rod_info", None))
         if hasattr(M, "link_pts") and "LT" in getattr(M, "link_pts", {}):
             # in-band share of the tail alone over the taken clip frames
             tk = [i for i in range(len(B.idx)) if B.kind[i] == "clip" and B.res[i] is not None and float(np.min(B.res[i])) >= 0]

@@ -9,7 +9,8 @@ scratchpad vfy_pkb/: dev.py, climb.py, pins.py, groove2.py; not in the repo). Th
 `--outdir` (scratch) and R7 locally on copies, so no judge file in the tree was overwritten. I changed nothing in the
 design.
 
-**Verdict: NOT REFUTED.** FARM_VERDICT_LINE
+**Verdict: NOT REFUTED.** Every re-run judge reproduces the claimed scorecard exactly (R1 76.72 %, R1-aim 35.79 %, R4
+71.23 %, R6 0.0 mm, R16 61.67 %, R7 PASS, 8 of 19), and the claimed bar-over-model residual is what I measure.
 
 What holds:
 - The bar-over-model numbers reproduce to 0.01 mm (link 1 4.13 -> 2.58 mm, link 2 10.90 -> 5.56 mm), and the kinematics
@@ -63,7 +64,36 @@ radial ray meets the sloped bar obliquely; the mean agrees (2.33 vs 2.22).
 
 ## 2. The judges, re-run
 
-FARM_SECTION
+Farm: `python3 tools/cloud_run.py judge user_pinknee_h1b fast --outdir <scratch>` (SKIP_FEA, as the claim): job 1255 s on
+1 worker, ~$0.10-0.12 (log in the session's cloud_run logs, tag vfy_pinknee_h1b). R7 does not run on the farm (no
+cadquery there: `ModuleNotFoundError`), so the farm scorecard takes R7 from the tree; I ran R7 locally with OCC on a copy
+(section 3).
+
+What came back:
+- score.json, score_14mm.json, scorecard.json / .md and two more judge files came back **byte-identical** to the
+  committed ones (cloud_run: "6 rewritten byte-identical to the tree").
+- workspace.json and body_contact.json: identical apart from timing fields; part_contact.json: identical apart from
+  setup / CPU seconds; dynamics.json: identical values, only the order of the `lock_clips` lists differs.
+
+| req | claim (h1b) | my re-run | h1 (its VERIFY.md re-run) |
+|---|---|---|---|
+| R1 (2-14 mm) | 76.72 % | **76.72 %** (in-band 0.7672, overall 75.7 %) | 71.40 % |
+| R1-aim (2-10 mm) | 35.79 % | **35.79 %** (overall 35.3 %) | 32.85 % |
+| R3 follow | 98.7 % | **98.67 %** | 98.67 % |
+| R4 overhead (Raise overhead, 14 mm band) | 71.23 %, min gap 1.79 mm | **71.23 %**, median gap 12.50, min gap **1.79 mm** | 68.67 %, min 1.78 |
+| R6 | 0.0 mm, 451 x 2586 | **0.0 mm**, 451 frames x 2586 ordered pairs, 1.39 M samples | 0.0 |
+| R16 | 61.67 % | **61.67 %** (closure 34.2 %, body 4.2 %, parts 0.8 %) | 61.67 % |
+| R2 | 24.87 mm (user's forearm cuff); ours 17.67, attributable 4.71 | **24.87**; ours 17.67, attributable 4.71 (D8-06) | same |
+| R7 | PASS 29 / 29 | **PASS**, 29 / 29 (local OCC, identical rows) | PASS |
+| R8 / R11 / R17 | 178.0 g / 0.213 kPa / PASS | **178.0 g / 0.213 kPa / PASS** | 178.9 / 0.303 |
+
+Per clip (14 mm band) the re-run equals the claimed clip scores (byte-identical score_14mm.json): Raise overhead 71.2,
+Drink 76.2, Comb hair 83.3, Reach a high shelf 85.4, Wash opposite shoulder 54.2, Reach back pocket 91.5, Wave 62.8,
+Walking 91.7 %.
+
+**Check 2 holds: every re-run value equals the claim; 8 of 19 pass.** The before / after attribution is right: the
+judges, step, clips, frozen shape and L1 frames are the same for h1 and h1b, so R1 +5.3, R1-aim +2.9, R4 +2.6 are the
+design change.
 
 ## 3. The R7 change (judge/part_validity.py)
 
