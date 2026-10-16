@@ -996,3 +996,58 @@ Measured / derived (Bench(110,360) frames, margin 5, H1 seats; `docs/research/fo
   down to el 28 (outside the acromion-top seat region), and rho moves 6.5 deg per mm of real GH translation at R 12
   (sensed: complexity 19.5 -> 29.0); a larger R moves the chain centre 11-21 mm and lifts hubs 1 / 2 out of band.
   Not catalogued. Next: a joint search with the hub-2 gate and J1 el >= 50 in the objective (seats free).
+
+## The zero-complexity class, searched near-exhaustively on GPUs: one narrow-window basin, ceiling 31.04 exact frozen; the reach / in-band frontier is 2x short of 95 (2026-10-16, tools/gpu_bench.py screen / cma / polish / pareto)
+
+The whole complexity-0 class under the 05:50 UTC rulings (three active O20 pins through GH, margin 5, J1 on the back /
+acromion top only, J3 anywhere on the arm sphere, both ends of every axis line, branch, all four J2 / J3 stack orders,
+underside quantile, strap end hold) on the verification pose set Bench(110,360), with the exact-parity GPU port of
+zc-frontier-3r (incl. the verifier's near-touch metric: the pods' CPU-kit checks max |GPU - CPU| 0.0 on gap, 0.01 on
+near-touch), on three RunPod pods (2x RTX 5090, 1x RTX PRO 4000; data, method and per-config numbers in
+docs/research/golden/README.md and docs/research/golden/gpu_frontier.json).
+
+* **Sobol, 560,478 configs (two independent scrambled sequences), with exact lower bounds.** Stage A (closure + dense
+  K2, i.e. the fold law and the jam check alone): 78,724 (14 %) could still score 95 (bound <= 13.75). Stage B (the
+  three hubs alone: their K3 levels and their skin contact): only 6,528 of those keep all three hubs on the body (F <=
+  140 mm; hub 3 floats in 64 %, hub 2 in 64 %, hub 1 in 33 %: median F 99 / 213 / 400 mm), and 470 still have bound <=
+  13.75. Every Sobol config with bound < 45 (first sequence) / < 35 (second) ran on the full bench at both J3 stack
+  orders (7,644 evaluations): **the best Sobol point is 63.63**. The 470 that fold and hubs would allow at 95 reach
+  0.75-0.83 but sit at in-band 0.21-0.41: hub 2 in band 0.0-0.09 (F 87-131 mm), link 2 0.0-0.3, link 1 0.1-0.5.
+* **The good region is a needle for sampling and a wide basin for local search.** 130 CMA-ES runs (108,768 evaluations) started from the best
+  distinct points of both sequences (plus the 4 earlier leaders and 2 seeds) land in two families only: the **narrow-window spine-parked family** (J1
+  bvec(81-111, 62-68) = acromion top / back of the shoulder, a1 34-41, a2 64-81, J3 wdir(64-90, -10..-22), branch -1,
+  mostly inv3 = 1) at 28.85-38 fast, reached from starts as poor as 83-86; and a **wide-window medial acromion-top
+  family** (J1 az 23-125 / el 64-81, a1 70-85, a2 50-60, J3 wd 93-97) at reach 0.78-0.87 but in-band 0.39-0.56, 50-58.
+  No third basin. The deep polish (every branch x stack order at each basin's best, then IPOP-style CMA, lambda 24 / 48,
+  on the near-touch AND the plain gap) leaves the plain-gap optimum at 28.85 (three restarts, no gain: a strict local optimum) and brings the other basins to 29.12-29.26 plain or 33.48 near-touch.
+* **The class's reach / in-band frontier** (CMA on the best in-band at reach >= R, Bench(110,360) fast, 56 runs):
+  R 0.63 -> in-band 0.89 (the 28.85 optimum), 0.66 -> 0.83, 0.69 -> 0.83 (contact 0.05), 0.70 -> 0.76, 0.73 -> 0.69,
+  0.75 -> 0.64, 0.80 -> 0.52, 0.85 -> 0.42. A 95 needs (0.90 - in-band) + (0.90 - reach) <= 0.1375 - contact at follow
+  >= 0.95; the frontier's smallest sum is 0.28 (at reach 0.63), so **the class cannot score better than ~28 fast on this
+  bench** - the 28.85 found by the CPU CMA earlier is the class optimum, and no GPU run found a lower plain gap.
+* **Verified (outside judge = the CPU kit, `tools/zc_frontier.py frozen`, the zc model's checks + the spine-parked
+  verifier's top_check at O20 / margin 5, run on the pods' CPUs; 10 best distinct configs by GPU gap).** The CPU fast
+  numbers equal the GPU's on all 10 (gap identical, near-touch +-0.01). Exact frozen wear on Bench(110,360): best
+  **31.04** (the 28.85 config; near-touch 38.03; verifier protocol fit 60/160 -> 33.51), then **32.08** for the
+  plain-gap polish 29.12 (best on the verifier protocol: **32.95**), **32.37** for the near-touch optimum (CMA basin
+  23: GPU 32.44 / near 33.60 -> exact 32.37 / near 34.69, fit-60 33.70 / 36.60 - the near-touch search loses nothing to
+  the exact path, the plain-gap optimum loses 2.2), then 34.52, 34.84, 35.98, 36.36, 37.73, 38.07, 38.61, 38.69 (11
+  verified). **Nothing reaches 13.75; the measured ceiling of the class is 31.04 exact frozen (score 88.7) on the
+  fit-110 protocol and 32.95 (score 88.0) on the verifier's fit-60 protocol.**
+* **What caps it, by pose and member (the 31.04 config, exact):** 136 of the 360 workspace poses are lost, 121 to the
+  fold (44 folded, 77 stretched: 49 of the 68 across-body poses, 18 of the 28 overhead ones), 7 to parts, 8 to contact
+  (link 2 3, hub 3 2, hub 2 2, neck 1); in band: hub 3 0.82, neck 0.81, link 2 0.88 (hub 1 0.98, hub 2 1.00, link 1
+  0.95). Opening the window to take the stretched across-body poses (a2 up, J3 toward the arm's inside) drops link 2
+  (0.88 -> 0.72 -> 0.52 -> 0.36 at reach 0.63 / 0.66 / 0.70 / 0.75), hub 3 (0.82 -> 0.70) and the neck (-> 0.33 at 0.75);
+  the wide-window family takes the poses but floats hub 2 (in band 0.0, F 102-113 mm) and link 2 (0.05-0.08).
+  At complexity 0 a hub is one disc at one level on an axis the closure moves: the fold window that 95 needs puts the
+  J2 neighbourhood (hub 2 + link 2) or the J3 side (hub 3 + link 2 + neck) over skin that spans more than the 12 mm band.
+* **Method lessons.** (1) A 10^5-10^6 Sobol map of an 8-D needle basin finds nothing (best 63.6 vs 28.85): sampling
+  maps the bounds, local search finds the basins - start CMA from many distinct points, not from the best samples only.
+  (2) Exact lower bounds without straps prune 99 % of a Sobol map in seconds (57 k configs: stage A + B in 61 s on a
+  5090), which makes the full bench affordable on what is left. (3) RTX 5090 ~40 evaluations/s on CMA batches vs RTX PRO
+  4000 Blackwell ~12.6: 3.2x the speed at 2.1x the price - the 5090 is the better buy per dollar too. (4) The near-touch
+  objective holds up under the exact path (32.44 fast -> 32.37 exact), the plain one does not (28.85 -> 31.04).
+* **What follows.** The golden 13.75 is out of reach at complexity 0 under the rulings (measured, not argued): the
+  frontier must move by ~2x, which needs a member that follows the skin where the window opens (hub 2 / link 2 or the J3
+  side) - i.e. the near-zero track (one sensed passive or a 4th joint), not more search of this class.

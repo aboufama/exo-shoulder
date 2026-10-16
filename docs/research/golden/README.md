@@ -240,3 +240,56 @@ the round-3 protocol, the disjoint held-out bench and the continuity flood fill 
 skin-normal-3r-pin-knee-polish.py + -continuity.py). Next: a held-out-aware objective on the GPU (fit on Bench(110,360),
 score on a second disjoint fast bench - the port takes any Bench with a grid) so the polish stops paying for in-sample
 gains.
+
+### Exhaustive zero-complexity search: results (2026-10-16, 08:18-09:35 UTC; Bench(110,360), O20, margin 5, J1 back + acromion top)
+
+| step | where | configs / evaluations | best (plain gap, Bench(110,360) fast) | note |
+|---|---|---|---|---|
+| Sobol seed 11 (2 halves), bounds A + B | 5090 + PRO 4000 | 112,100 bounded (61 s / 184 s) | - | 1,124 with bound < 45 |
+| full bench of every config with bound < 45 (inv3 0 / 1) | same | 2,252 evals | **66.38** (Sobol points); seeds 28.85 / 36.66 | certificate cut 45 |
+| Sobol seed 12 (2 halves), bounds A + B | 5090 | 448,378 bounded (199 s / 207 s) | - | 2,698 with bound < 35 |
+| full bench of every config with bound < 35 (inv3 0 / 1) | 5090 | 5,396 evals | **63.63** | certificate cut 35 |
+| CMA-ES from the 45 + 45 best distinct (seed 11) and 40 (seed 12) points, near-touch objective | all three | 108,768 evals, 130 runs | 28.85 (unchanged), near-touch **33.60** (plain 32.44) | two families only (spine-parked narrow window; medial acromion-top wide window) |
+| deep polish: 8 branch x stack variants per basin + IPOP CMA (lambda 24 / 48) on near-touch and plain gap | 5090 + PRO 4000 | 27,016 evals | 28.85 unchanged (3 restarts, lambda 24 / 48: a strict local optimum); from the other basins plain 29.12 / 29.24, near-touch 33.48 (plain 32.90) | |
+| reach / in-band frontier: CMA on best in-band at reach >= R (R 0.62-0.85) | 5090 | 42,816 evals, 81 runs | - | see the frontier table |
+
+Reach / in-band frontier of the class (best in-band14 found at reach >= R; fast, same bench):
+
+| reach >= | 0.62 | 0.65 | 0.68 | 0.70 | 0.72 | 0.75 | 0.80 | 0.85 |
+|---|---|---|---|---|---|---|---|---|
+| in-band14 | 0.890 | 0.828 | 0.833 (contact 0.054) | 0.761 | 0.694 | 0.645 | 0.520 | 0.420 |
+| plain gap there | 28.85 | 34.40 | 33.46 | 40.75 | 48.24 | 50.27 | 49.00 | 57.98 |
+| member that leaves the band | - | link 2 0.72, hub 3 0.70 | link 2 0.72, hub 3 0.69 | link 2 0.52 | link 2 0.49, neck 0.61 | link 2 0.36, neck 0.33 | hub 2 0.00, link 2 0.08 | hub 2 0.00, link 2 0.05 |
+
+**Verification (the outside judge: the CPU kit, `tools/zc_frontier.py frozen` = the zc model's checks + the
+spine-parked verifier's top_check at O20 / margin 5, run on the pods' CPUs; the 10 best distinct configs by GPU gap):**
+
+| config (src) | GPU fast gap / near | CPU fast (fit 110/360) gap / near | **exact frozen wear 110/360** gap / near | verifier protocol fit 60/160 -> exact 110/360 |
+|---|---|---|---|---|
+| CPU CMA optimum, seed (J1 bvec(109.4, 65.9), a1 36.7 / a2 69.1, J3 wdir(85.7, -16.2), inv3 1) | 28.85 / 38.13 | 28.85 / 38.14 | **31.04** / 38.03 | 33.51 / 40.57 |
+| deep polish, plain gap, cmag_p1/basin5 (J1 bvec(106.4, 66.7), a1 35.6 / a2 71.2, J3 wdir(90.2, -14.6), inv3 1) | 29.12 / 39.05 | 29.12 / 39.04 | **32.08** / 39.62 | 32.95 / 41.18 |
+| cma_p1/basin23 (J1 bvec(104.3, 66.8), a1 35.4 / a2 70.7, J3 wdir(90.3, -12.9), inv3 1) | 32.44 / 33.6 | 32.44 / 33.6 | **32.37** / 34.69 | 33.7 / 36.6 |
+| cma_p1/basin0 (J1 bvec(98.5, 64.5), a1 36.2 / a2 68.7, J3 wdir(88.1, -13.5), inv3 1) | 34.62 / 37.51 | 34.62 / 37.51 | **34.52** / 40.31 | 39.8 / 44.19 |
+| cma_p1/basin31 (J1 bvec(101.3, 64.0), a1 40.2 / a2 68.3, J3 wdir(70.5, -15.9), inv3 1) | 34.4 / 36.07 | 34.4 / 36.07 | **34.84** / 37.63 | 39.63 / 42.97 |
+| cma_p1/basin16 (J1 bvec(93.1, 64.4), a1 37.1 / a2 70.8, J3 wdir(68.1, -18.0), inv3 0) | 35.52 / 38.36 | 35.52 / 38.37 | **35.98** / 38.83 | 53.2 / 55.53 |
+| cma_p0/basin17 (J1 bvec(94.4, 62.7), a1 38.2 / a2 69.8, J3 wdir(68.0, -19.5), inv3 1) | 36.49 / 38.77 | 36.49 / 38.77 | **36.36** / 38.64 | 42.92 / 45.77 |
+| 20-min GPU climb best, seed (J1 bvec(92.7, 61.6), a1 40.4 / a2 64.7, J3 wdir(89.1, -22.7), inv3 1) | 36.66 / 48.25 | 36.66 / 48.26 | **37.73** / 48.73 | 43.92 / 53.5 |
+| cma_p1/basin44 (J1 bvec(89.4, 62.9), a1 38.6 / a2 71.7, J3 wdir(63.8, -19.6), inv3 0) | 38.13 / 39.85 | 38.13 / 39.85 | **38.07** / 39.79 | 43.45 / 44.6 |
+| cma_p1/basin32 (J1 bvec(81.6, 61.7), a1 36.6 / a2 43.4, J3 wdir(108.4, -7.9), inv3 1) | 38.01 / 42.22 | 38.01 / 42.21 | **38.61** / 43.41 | 39.2 / 43.41 |
+| cma_p0/basin1 (J1 bvec(103.1, 68.1), a1 34.1 / a2 72.6, J3 wdir(84.4, -14.4), inv3 0) | 38.83 / 39.42 | 38.83 / 39.42 | **38.69** / 41.62 | 36.07 / 40.17 |
+
+The CPU fast numbers equal the GPU's on every config (gap identical, near-touch within 0.01). **Nothing reaches the
+golden 13.75: the class's measured ceiling is 31.04 exact frozen (score 88.7)**, the near-touch optimum holds best
+under the exact path (32.44 fast -> 32.37 exact). Pods: exo-gpu-bench (RTX PRO 4000, $0.57/h) 08:18-09:35,
+exo-gpu-bench2 (RTX 5090, $1.19/h) 08:18-09:19, exo-gpu-bench3 (RTX 5090, $1.19/h) 08:30-09:14, plus the first
+spool-only pair 08:09-08:18 and a 2-min RTX PRO 4500; total 3.36 pod-hours, **~$3.10**. All terminated.
+
+Files: docs/research/golden/gpu_frontier.json (every screen's summary + certificate + best rows, all 154 CMA / polish /
+frontier basins with start, best (near-touch or plain objective) and best plain gap seen, the 11 verified configs with
+their CPU fast, exact frozen and fit-60 numbers and the pose attribution), docs/research/golden/xs_ceiling.json (the
+stage A / B counts behind the ceiling: which hub floats where the fold would allow 95). Raw outputs (Sobol bounds of all
+560,478 configs as .npz, every full-bench row, CMA logs, the CPU-kit verify JSONs): farm volume exo-farm-cas,
+exo-farm/gpu/out/xs, xs2, xs3, xs4, xs5 (`python3 tools/gpu_pod.py fetch xs --outdir DIR`).
+Reproduce: `python3 tools/gpu_pod.py create --gpu "NVIDIA GeForce RTX 5090" --name exo-gpu-bench --spool gpux0 --payload
+<the files in pipeline/gpu_pod/xs.sh's header> --jobs pipeline/gpu_pod/boot.sh,pipeline/gpu_pod/xs_p0.sh` (jobs
+pipeline/gpu_pod/xs*.sh; merge with pipeline/gpu_pod/xs_merge.py, ceiling with pipeline/gpu_pod/xs_ceiling.py).
