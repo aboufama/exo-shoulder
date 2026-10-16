@@ -163,7 +163,9 @@ def build(B, F, p):
                         width=wl(p["rail_w"]), t=p["rail_th"], climb_deg=None)
     rt.kind = "cap"; rt.joints = ("S", "Sc", "Rj")              # Rj: the root / slot junction of the ONE rail plate
     lay = 1 if side == 1 else int(p.get("layout", 0)); w, t = p["width"], p["t_link"]; end = K.HUB_R + 2.0
-    rr = K.strap_member("rail_r", p2, p3, ("J2", "S", "Rj"), ang=math.radians(s0), width=wl(p["rail_w"]), t=p["rail_th"],
+    # the root's end is the same plate as the slot zone (ramped to its level): hub 3's sole / the carriage slides over
+    # it at the 0.15 running gap, so rail_r is a partner of the slide (Sc) as well (K6 at 1 mm would flag that gap)
+    rr = K.strap_member("rail_r", p2, p3, ("J2", "S", "Rj", "Sc"), ang=math.radians(s0), width=wl(p["rail_w"]), t=p["rail_th"],
                         ramp_to=(("hub2", K.STACK if lay else 0.0), ("rail_t", 0.0)), end_mm=end)
     # link 1's J2 end zone is lift1 mm above hub 2's upper flange (a spacer: only raises metal) and l1_end mm long, so
     # the upper member clears the rail root by >= 1 mm just past K6's 12-mm exempt zone (the kit's `over` measures that
