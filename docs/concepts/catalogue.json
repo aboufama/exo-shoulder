@@ -2169,7 +2169,7 @@
   "name": "Arm-parked knee 4R: spherical 4R whose spare is held by a torsion spring on the arm-end joint J4 (parks the knee hub J3 on arm skin) and by fold-margin stops on J2",
   "family": "spherical 4R, spare set by a spring and stops (all axes through GH)",
   "lens": "round4:honest 4-DOF comparison - what a 4th joint buys at the best seats, and what it costs in complexity",
-  "status": "ideated",
+  "status": "screened",
   "t_ideated": "2026-10-16T05:47:46Z",
   "source": "round 4 judge (docs/concepts/round4_ideation.md)",
   "merged_from": [

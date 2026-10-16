@@ -170,3 +170,63 @@ spring, q 0.98, end_extra 1.28, all O20 hubs (hub 4 + spring coil r 12). Fitted 
   hubs at J2-J4 the user ruled out). Price: complexity 32.25 (4 active) or 13.25 (J4 a sprung, sensed passive pin) vs
   19.5, and a spring the wearer feels on 26-38 % of poses. (The pin knee's 26.45 / 24.48 are on the polish protocol -
   fit on Bench(110,360) fast - not comparable to the numbers here.)
+
+### 5. Overhead-weighted search (the user's priority)
+
+Four more CMA streams with objective = gap + w * 100 * max(0, 0.9 - overhead reach) (w 0.3 / 0.6, plain, near-touch and
+`l3low` starts; 4196 tries): three found no configuration that takes a single overhead workspace pose of Bench(60,160)
+(stayed at their starts, overhead reach 0/12); the near-touch stream O2n took 2 of 12 at 23.90 near / 20.49 plain fast
+(vs W3n 21.60 / 19.32). The overhead loss is structural for this morphology (red team below), not a search artefact.
+
+## Red team (my own best, W3n)
+
+- **The pose that jams.** Overhead across the body (plane 90-120, elev 150-165, axial -90 / -135): the J1-J4 angle
+  leaves what the knee cone (a3 25.5) plus the J2 window can meet - fold (26 of the 31 lost poses on Bench(60,160) are
+  fold/K2; across 26/36 taken, behind the back 14/19, rest 5/5, overhead 5/17). The spare widens the J1-J3 window but
+  the knee cone is small; a longer link 3 (a3 up) moves link 3 and hub 4 off the deltoid (they are already the
+  worst-banded parts).
+- **The point that pinches.** Abduction overhead (plane 0, elev 150, axial 0): hub 2 is 6.3 mm and link 2 4.9 mm
+  inside the skin bulge over the acromion / trapezius (hub 3 4.3 mm) - one rigid level per hub over all poses cannot
+  clear it (proximity atlas: a rigid part must clear the highest skin it ever passes over). Taken poses: min metal-skin
+  0.03 mm fast (#210, plane 135, elev 135, axial -45: across overhead) and 0.40 mm frozen; 7 crown/wall-contact poses on
+  the big bench.
+- **The number that is optimistic.** (a) Fast 19.32 -> frozen 25.05 (+5.7: the fold tuned to the sample; the plain-gap
+  optima lose 8-27 points); (b) plain vs near-touch: +4.2 frozen; (c) the centred spring has TWO feasible arcs for the
+  knee (|d| in [dlo, dhi] on either side): the model takes the low-energy arc pose by pose, but the J2 stops trap the
+  physical knee on its arc - the preview loop shows 2 snaps (across -> rest at plane 56 / elev 39: J3 jumps 163 deg;
+  behind -> rest at elev 16: 90 deg). On the bench's clips the dense K2 continuity check sees no flip (flips 0), but a
+  workspace pose reached from the other side could find the knee on the other arc, spring wound past its rating. A
+  third stop that confines the knee to one arc is the fix to try (it costs the poses that need the other arc).
+  (d) The spring coil annulus (r 10-12) is skin-checked but not K6-checked against links 1 / 2.
+- **The feel.** The spare sits on a J2 stop on 26-38 % of poses (overhead, across): the wearer then feels the spring,
+  40 N.mm preload + 19 N.mm/rad x up to 130 deg = up to 83 N.mm about J4, comparable to the whole chain's measured drag
+  (0.05-0.10 N.m). In park poses the 40 N.mm preload holds the spare against at most 18 N.mm (rolling bearings,
+  nominal) / 29 N.mm (pessimistic friction) - the spare does not break away.
+
+## Verdict
+
+**Screened, converged, not the golden solution.** At O20 everywhere the arm-parked knee 4R scores 19.32 fast and
+**25.05 frozen on Bench(110,360) exact (score 90.9; near-touch 29.29 = 89.3)** with 0 passive translations - it does
+cross 90 frozen on the plain gap, and it beats the pin-knee 3R on the same protocol by ~3 plain / ~4.5 near-touch
+points. But the spare's price is high for what it buys: complexity 32.25 (or 13.25 as a sprung sensed J4) against the
+golden target's ~0, a felt spring on a third of the poses, a two-arc hysteresis, and the overhead still lost (0.29
+frozen). The 4th joint does NOT open the overhead: what kills overhead is skin proximity at J2 (abduction) and the knee
+window across the body, neither of which the spare removes.
+
+## New knowledge (predicts beyond this morphology)
+
+1. **The ideation's 4R advantage was mostly hub size.** At the same seats O15 -> O20 costs 11.65 fast points (19.19 ->
+   30.84); after re-optimisation at O20 the 4R leads the 3R pin knee by ~3 frozen points, not ~12. Any slim-hub claim
+   from before the 05:50 ruling should be expected to lose ~10 points at O20.
+2. **With a spare, the J2 stop position is a design variable whose optimum is ~10-12 deg from the fold, not the
+   5 deg minimum.** Every free-margin stream moved it to 9-12 deg; the same shapes at 5 deg are 26-37 frozen points
+   worse (more near-fold configurations with link clashes and higher-riding hubs). The 5-deg ruling is a bound, not a
+   target, whenever something else (a spring, a knee, a pin) takes over the poses beyond the stop.
+3. **Near-touch must be in the objective, not only in the report.** Plain-gap CMA optima here put metal within 1 mm of
+   skin on 15-20 % of poses (fast near-touch 39-57 vs plain 16-17) and lose 8-27 points frozen; the near-touch
+   objective costs ~2 fast points and holds up frozen (25.05 plain / 29.29 near vs 24.47 / 38.02).
+4. **A sprung spare needs ~40 N.mm preload, not 10 and not 100.** The self-motion collects friction through
+   sum |dq_i/dd| = 1.8-3.2 (J1-J3), so the hold is 3-4x one joint's friction plus 3-7 N.mm of gravity. A preloaded
+   return-to-centre torsion spring (wire 0.95, D 22, 6 coils) fits round an O20 housing at OD ~23 (r 12 keep-out).
+5. **A centred spring under two stops is bistable by topology**: the feasible knee azimuths form two disjoint arcs;
+   any pose-by-pose energy-minimum policy is path-blind and must be checked on continuous motion (preview loop: 2 snaps).
