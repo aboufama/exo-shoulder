@@ -267,3 +267,69 @@ Reading the ranking:
   Bench(60,160) fast (frozen loses 0.06-0.09 of reach, section 2); the 4-DOF lens numbers are self-measured; the
   per-pose-free rocker assumes the best travel direction in every pose, which a real stop relay chooses only at the
   stops; the margin runs keep the margin-10 shape (frozen) or refit it on 160 poses only.
+
+## 6. Red team (independent, 2026-10-16 ~06:25 UTC)
+
+Instruments (share no code with sections 1-5): `redteam_recount.py` (own grid IK on the bench's own 110 + 360 frames:
+J2 sampled on its circle about J1 in 7200 steps, closure-with-margin = the circle comes within a2 - m and a2 + m of the
+posed J3; axes from the pin-knee model's own Design and, for spine-parked, from an own bvec / wdir checked equal to the
+kit's), `redteam_ceilings.py` (own random + local seat search, two seat regions, 160-vs-360 selection test),
+`redteam_seat_local.json` (inline local re-tune). Data: `redteam_recount.json`, `redteam_ceilings[_strict].json`.
+
+**Attribution: confirmed, pose by pose.** The fold sets of all four leaders equal the CSVs exactly (folded / stretched
+per pose): pin knee 57 / 76, spine-parked 59 / 81, raglan 60 / 76, knuckle 55 / 77; clip folds 0 / 5 / 3 / 4; overhead
+in-window 11 / 10 / 9 / 9. Lost poses INSIDE the window are 9 / 6 / 7 / 6 = exactly the attribution's non-fold counts
+(pin knee 4 knee + 2 parts + 3 contact; spine 1 + 5), and no taken pose sits outside the window. The in-window shares
+at m 10 / 7 / 5 / 2 / 0 reproduce section 3's kinematic column to the pose (pin knee 0.631 / 0.664 / 0.681 / 0.722 /
+0.731). Not re-measured independently: which non-fold cause each of those 6-9 poses has (needs the skin model); their
+counts equal the verifier's own `why` (pin knee: fold 133, slide 4, parts 2, contact 3).
+
+**Ceilings re-checked:**
+* Plain 3R, free seats: 0.928 / 0.972 / 0.992 at 40/40, 45/45, 50/50 (claim 0.928 / 0.969 / 0.989): confirmed.
+* Two-state relay union (a1' 77 / 80 / 84, fixed seats): pin knee 0.931 / 0.939 / 0.947 (overhead 0.93 / 1.0 / 1.0),
+  spine 0.922-0.944, raglan 0.933-0.942, knuckle 0.928-0.933 (overhead 0.89-0.93): confirmed (kinematic only).
+* Leaders' arcs 40/73 with free seats: 0.794 (claim 0.74-0.78, slightly low). **The seat quoted for it (J1 bvec(-114, 16))
+  is anteromedial - over the clavicle, excluded by the user's J1 ruling.** Inside the ruling (J1 back of the shoulder
+  az -90..90 or acromion top az 90..135 / el >= 50; J3 on the arm, d 45-110, |a| <= 100): 0.758 at 40/73, 0.836 at
+  45/70, 0.942 at 50/50, 0.964 at 55/57 - the balanced-arc optimum is J1 at the back of the shoulder at GH height
+  (az -5..3, el 0) with J3 on the back of the upper arm (d 110, a -96..-100). The kinematic headroom survives the ruling;
+  hub 2 in band is still the open cost.
+* The fast-to-frozen loss is SELECTION, as claimed: random seats in the region see no 160-vs-360 bias (mean -0.005 /
+  -0.008; seats with share >= 0.5: -0.016 / -0.018, p10-p90 -0.075..+0.056), while the 100 seats with the best 160-pose
+  share lose +0.076 / +0.080 on the 360 - the leaders' 0.71 -> 0.63 (pin knee: 0.7125 on 160, 0.631 on 360, 0.634 on the
+  whole envelope) is that winner's curse.
+* Seat re-tune on the 360 poses (arcs fixed, kinematic): pin knee +0.033 / +0.044 / +0.061 within 5 / 10 / 15 deg,
+  knuckle +0.028 / +0.044 / +0.056, raglan +0.025 / +0.039 / +0.056; at margin 5 +0.033-0.039 within 5 deg. Section 2's
+  +0.014-0.025 within 5 deg is UNDERSTATED (in-band cost still unmeasured - "small" is an assertion).
+
+**Lever ranking: refuted - the order changes.**
+1. **Rank 1 is refuted by its own verifier** (`docs/concepts/verify/stop-relay-rocker-3r.results.json`, 06:01-06:22 UTC):
+   frozen exact reach 0.578 / gap 38.10 with its O15 hubs at m 10, rocker LOCKED 0.575 / 38.21 - the rocker is worth
+   +0.003 and takes 0 relay poses (inert); at the user's O20 + margin 5: gap 50.36, reach 0.575, in-band 0.837. Even
+   its fast 0.700 came at contact 0.055 (gap 27.4 vs the pin knee's 21.97 at the same reach and in-band): the ranking
+   key "reach at in-band >= 0.88" ignored contact, which costs 100 gap points per unit. Its "+0.056 over its base"
+   compared two slim-hub sets (rocker O15; spine-parked history rad2 8.5 / rad3 7.5) that do not stand under O20-only.
+   The per-pose-free rocker ceiling (0.84-0.88 at 30 deg) assumes a coordinate chosen per pose - undetermined under the
+   MVP1 rule; the real stop relay realised none of it.
+2. **The ranking key is not the objective.** gap_of weights in-band and reach equally (100 x each shortfall + 100 x
+   contact). By measured gap the 4-DOF lens's spring-centred 4R is the ONLY lever worth more than ~2 points (fast best
+   19.18 vs the pin knee's 20.63; frozen exact 22.36 vs 30.35, self-measured), yet it ranks 9th because its in-band
+   is 0.864 < 0.88. Caveats that keep it "verify first", not "build": unverified, its margin is not stated in the
+   source, contact 0.037-0.038 (~4 gap points), link 3 only 0.51 in band; and its 4th angle must be the spring's
+   STATIC equilibrium (spring vs chain weight vs cuff friction), not a per-pose kinematic optimum, or the number is
+   optimistic and the coordinate undetermined under MVP1.
+3. **Margin 10 -> 5 is no longer a lever**: since ~05:50 it is the rule, i.e. the REFERENCE (pin knee 29.26 frozen at
+   m 5). Ranked as #2 it double-counts; every other lever must be measured against the m 5 reference. At that reference
+   the dwell four-bar's verified O20 / m 5 number (37.66: reach 0.644, in-band 0.788, 06:21 UTC) is +0.019 of reach but
+   8.4 gap points worse - another "reach-only" lever that loses on the objective.
+4. **Relay (#8): determinacy and optimism.** A detented two-state link has a history-dependent state (which detent):
+   MVP1 needs it sensed (complexity up), and while it switches the chain is a redundant 4R with an undetermined
+   coordinate; the trigger is unsolved. The +0.09-0.14 parking bound is before links, hub 1, contact and parts.
+
+**Re-ranked by measured / bounded gap under the current rules (O20, m 5, J1 back + acromion):** (1) verify the
+spring-centred 4R with a static-equilibrium 4th angle (the only candidate > 2 points; ~-8 self-measured); (2) seats
+re-tuned on the 360 poses (+0.025-0.039 kinematic within 5 deg, the polish in flight measures the in-band cost); (3)
+non-fold fixes (<= 0.008 each); (4) a relay model only past the parking gate AND with a sensed state; balanced arcs
+50/50 at back-of-shoulder seats (0.94 kinematic) need the same hub-2 parking gate. Stop-relay rocker: drop (verified
+inert). Dwell four-bar: drop at the bar (verified 37.66). Longer knee: 0 (unchallenged). The bottom line of sections
+1-5 (the plateau is the fold; 3-joint classes cap at ~0.61-0.64 frozen at the hub levels proximity allows) stands.
