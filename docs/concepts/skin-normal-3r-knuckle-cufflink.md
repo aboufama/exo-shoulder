@@ -140,7 +140,12 @@ third 0.69 (> 0.5: NOT passed), top-5 spread 0.25 (< 3: pass). The b1 = 0.3 stre
 
 ## Frozen wear on Bench(110,360) exact (lesson c)
 
-FROZEN_PLACEHOLDER
+NOT BACK inside the time box (03:40 UTC). Running: the farm job kc-frozen-C (B1, B2, B0 bests; the farm queue held
+its upload 5 + 5 min) and a local single-process run of B1 (`CB_EXACT=1 python3
+docs/concepts/models/skin-normal-3r-knuckle-cufflink.py frozen '<B1 params>' <out.json>`, 20+ min under a load of
+7-44 on 4 cores). Its fit step reproduced 24.47 exactly. Until a frozen exact number exists the 24.47 is a FAST-bench
+number only: for scale, the pin knee went 26.34 fast -> 33.84 exact frozen and the 2-slide leader 32.61 -> 42.59; the
+J2-fold boundary is tuned to the 160 workspace poses in every one of these CMA runs (lesson c), so expect +7..+10.
 
 ## Verdict (03:25 UTC, after the CMA)
 
