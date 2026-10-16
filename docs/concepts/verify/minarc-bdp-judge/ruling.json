@@ -1,11 +1,18 @@
 {
  "confirmed": true,
- "v_gap": 19.06,
- "v_score": 93.07,
- "held_out_gap": 23.24,
+ "v_gap": 19.29,
+ "v_score": 92.99,
+ "held_out_gap": 23.36,
+ "rule_reading": {
+  "gap": 19.06,
+  "score": 93.07,
+  "held_out_gap": 23.24,
+  "note": "both J2 stops at exactly the 5.00-deg rule (both lenses, to the digit)"
+ },
  "priced_mechanism_issues": {
   "K stop B moved to dK 34.5 deg (buildability lens)": 0.0,
-  "clock-spring rate <= 0.015 N.m/rad, +C1900 (buildability lens)": 0.0
+  "clock-spring rate <= 0.015 N.m/rad, +C1900 (buildability lens)": 0.0,
+  "J2 stop slot drawn 5.0 +0.5 / -0 deg of J1-J3 margin (judge; worst built case = stops at 5.5)": 0.23
  },
  "stop_tolerance": {
   "bench_m5p5": 19.29,
@@ -23,7 +30,9 @@
   "margin_ge_5_held": true,
   "continuity_0_dropped": true,
   "beats_h1_bench": true,
-  "beats_h1_held": true
+  "beats_h1_held": true,
+  "tolerance_margin_ge_5": true,
+  "tolerance_continuity_0_dropped": true
  },
  "lenses_refuted": {
   "remeasure": false,

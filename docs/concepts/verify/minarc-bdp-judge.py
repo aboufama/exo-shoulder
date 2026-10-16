@@ -65,6 +65,9 @@ def main():
     R["bench_m5p5"] = summary(load(os.path.join(J, "wear_bench_m5p5.json")), "judge, bench, stops at 5.5 (tolerance)")
     R["held_m5p5"] = summary(load(os.path.join(J, "wear_held_m5p5.json")), "judge, held out, stops at 5.5 (tolerance)")
     R["bench_m6"] = summary(load(os.path.join(J, "wear_bench_m6.json")), "judge, bench, stops at 6")
+    R["bench_m5_B34"] = summary(load(os.path.join(J, "wear_bench_m5_B34.json")), "judge, bench, J2 stops 5.0, K stop B dK 34.47")
+    R["bench_m5p5_B34"] = summary(load(os.path.join(J, "wear_bench_m5p5_B34.json")), "judge, bench, J2 stops 5.5, K stop B dK 34.47")
+    R["held_m5p5_B34"] = summary(load(os.path.join(J, "wear_held_m5p5_B34.json")), "judge, held out, J2 stops 5.5, K stop B dK 34.47")
     ct = load(os.path.join(V, "minarc-bdp", "conn_taken_m5.json"))
     if ct: R["conn_taken_m5"] = dict(nodes=ct["grid"]["nodes"], connected=ct["grid"]["connected"], islands=ct["grid"]["islands"],
                                      edges=f'{ct["edges"]["passed"]}/{ct["edges"]["tested"]}')
@@ -96,12 +99,25 @@ def main():
     if R["held_m5p5"]:
         tol["held_m5p5"] = R["held_m5p5"]["gap"]; tol["held_cost"] = round(R["held_m5p5"]["gap"] - h["gap"], 2)
     if R["bench_m6"]: tol["bench_m6"] = R["bench_m6"]["gap"]
-    worst_bench = max([b["gap"]] + ([R["lens2_bench"]["gap"]] if "lens2_bench" in R else []))
-    worst_held = max([h["gap"]] + ([R["lens2_held"]["gap"]] if "lens2_held" in R else []))
+    rule_bench = max([b["gap"]] + ([R["lens2_bench"]["gap"]] if "lens2_bench" in R else []))
+    rule_held = max([h["gap"]] + ([R["lens2_held"]["gap"]] if "lens2_held" in R else []))
+    # priced: a stop that must engage at >= 5 deg is drawn 5.0 +0.5 / -0; its worst built case is the 5.5 reading
+    # and K's stop B drawn at the 5.0-deg cut (dK 34.47) - the worst built pairing is J2 at 5.5 with stop B at 34.47
+    worst_bench = max([rule_bench] + [R[k]["gap"] for k in ("bench_m5p5", "bench_m5_B34", "bench_m5p5_B34") if R.get(k)])
+    worst_held = max([rule_held] + [R[k]["gap"] for k in ("held_m5p5", "held_m5p5_B34") if R.get(k)])
+    for k in ("bench_m5_B34", "bench_m5p5_B34", "held_m5p5_B34"):
+        if R.get(k): checks[k + "_margin_ge_5"] = R[k]["min_th"] >= 5.0 and R[k]["lt5"] == 0 and R[k]["dropped_unconnected"] == 0
+    if R["bench_m5p5"]:
+        checks["tolerance_margin_ge_5"] = R["bench_m5p5"]["min_th"] >= 5.0 and R["bench_m5p5"]["lt5"] == 0
+        checks["tolerance_continuity_0_dropped"] = R["bench_m5p5"]["dropped_unconnected"] == 0 and R["held_m5p5"]["dropped_unconnected"] == 0
     confirmed = not any(lenses_refuted.values()) and all(checks.values())
     ruling = dict(confirmed=confirmed, v_gap=worst_bench, v_score=score(worst_bench), held_out_gap=worst_held,
+                  rule_reading=dict(gap=rule_bench, score=score(rule_bench), held_out_gap=rule_held,
+                                    note="both J2 stops at exactly the 5.00-deg rule (both lenses, to the digit)"),
                   priced_mechanism_issues={"K stop B moved to dK 34.5 deg (buildability lens)": 0.0,
-                                           "clock-spring rate <= 0.015 N.m/rad, +C1900 (buildability lens)": 0.0},
+                                           "clock-spring rate <= 0.015 N.m/rad, +C1900 (buildability lens)": 0.0,
+                                           "J2 stop slot drawn 5.0 +0.5 / -0 deg of J1-J3 margin with K stop B at dK 34.47 "
+                                           "(judge; worst built pairing = J2 stops at 5.5, stop B at 34.47)": round(worst_bench - rule_bench, 2)},
                   stop_tolerance=tol, checks=checks, lenses_refuted=lenses_refuted, runs=R)
     os.makedirs(J, exist_ok=True)
     json.dump(ruling, open(os.path.join(J, "ruling.json"), "w"), indent=1, default=float)
@@ -110,5 +126,28 @@ def main():
         if R.get(k): print(k, {x: R[k].get(x) for x in ("gap", "regap", "reach", "inband14", "contact", "gap_near1", "min_th", "lt10", "q2_slot")})
 
 
+def wear_stopb(wb, dKB, outp):
+    """the re-measure lens' wear(), unchanged, with K's stop B moved to dK = dKB (a1max from K's dyad: cos a1max =
+    cos bk1 cos bk2 + sin bk1 sin bk2 cos(|psiA| + dKB), psiA from K's closed dyad a1). CB_FOLD_MARGIN sets the J2 stops."""
+    import importlib.util, math
+    spec = importlib.util.spec_from_file_location("bdp_remeasure", os.path.join(V, "minarc-bdp-remeasure.py"))
+    mod = importlib.util.module_from_spec(spec); spec.loader.exec_module(mod)
+    P = json.load(open(mod.PFILE)); d = math.pi / 180
+    b1, b2, a1max0 = P["bk1"] * d, P["bk2"] * d, P["a1max"] * d
+    cb, sb = math.cos(b1) * math.cos(b2), math.sin(b1) * math.sin(b2)
+    psiB0 = math.acos((math.cos(a1max0) - cb) / sb)
+    eq = load(os.path.join(B2, "equil.json"))
+    psiA = abs(eq["psiA_deg"]) * d if eq else psiB0 - 62.827 * d          # lens 2: psiA -57.465, dK at stop B 62.827
+    a1max = math.acos(cb + sb * math.cos(psiA + dKB * d)) / d
+    P["a1max"] = round(a1max, 4)
+    pf = os.path.join(J, f"params_BDp_stopB{dKB:g}.json"); os.makedirs(J, exist_ok=True)
+    json.dump(P, open(pf, "w"), indent=1)
+    print(json.dumps(dict(dKB=dKB, a1max=P["a1max"], a1max_was=round(a1max0 / d, 4), psiA_deg=round(psiA / d, 3),
+                          dK_stopB_check=round((psiB0 - psiA) / d, 3))), flush=True)
+    mod.PFILE = pf
+    mod.wear(wb, "BDp", outp)
+
+
 if __name__ == "__main__":
-    main()
+    if len(sys.argv) > 1 and sys.argv[1] == "wear": wear_stopb(sys.argv[2], float(sys.argv[3]), sys.argv[4])
+    else: main()

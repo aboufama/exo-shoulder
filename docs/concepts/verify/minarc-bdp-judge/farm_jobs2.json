@@ -1,0 +1,5 @@
+[
+ {"cmd": "mkdir -p docs/concepts/verify/minarc-bdp-judge && OMP_NUM_THREADS=1 CB_EXACT=1 CB_FOLD_MARGIN=5 python3 docs/concepts/verify/minarc-bdp-judge.py wear bench 34.47 docs/concepts/verify/minarc-bdp-judge/wear_bench_m5_B34.json", "tag": "bdpj_bench_m5_B34", "out": ["docs/concepts/verify/minarc-bdp-judge/wear_bench_m5_B34*.json", "docs/concepts/verify/minarc-bdp-judge/params_BDp_stopB*.json"]},
+ {"cmd": "mkdir -p docs/concepts/verify/minarc-bdp-judge && OMP_NUM_THREADS=1 CB_EXACT=1 CB_FOLD_MARGIN=5.5 python3 docs/concepts/verify/minarc-bdp-judge.py wear bench 34.47 docs/concepts/verify/minarc-bdp-judge/wear_bench_m5p5_B34.json", "tag": "bdpj_bench_m5p5_B34", "out": ["docs/concepts/verify/minarc-bdp-judge/wear_bench_m5p5_B34*.json"]},
+ {"cmd": "mkdir -p docs/concepts/verify/minarc-bdp-judge && OMP_NUM_THREADS=1 CB_EXACT=1 CB_FOLD_MARGIN=5.5 python3 docs/concepts/verify/minarc-bdp-judge.py wear held 34.47 docs/concepts/verify/minarc-bdp-judge/wear_held_m5p5_B34.json", "tag": "bdpj_held_m5p5_B34", "out": ["docs/concepts/verify/minarc-bdp-judge/wear_held_m5p5_B34*.json"]}
+]
