@@ -196,7 +196,13 @@ def sweep_file_rows(mid, items, src):
         raw = num(x.get("gap"))
         if raw is not None and raw >= FAILED_GAP: r["gap"] = None          # the agent's own 'failed' sentinel (999)
         elif r["gap"] is None: r["gap"] = round(raw, 2) if raw is not None else None
-        elif raw is not None and abs(raw - r["gap"]) > 0.02: warn(f"{src} k={r['k']}: file gap {raw} != recomputed {r['gap']}; recomputed kept")
+        elif raw is not None and abs(raw - r["gap"]) > 0.02:
+            # never show a better number than the agent logged: a file gap above the plain formula carries a penalty the
+            # metrics do not (continuity / near-touch / objective terms, 2026-10-16: arm-parked-knee-4r logged 43.57 with
+            # a plain 16.57), so the larger of the two is kept; a file gap below the formula is the agent's error
+            keep = max(raw, r["gap"])
+            warn(f"{src} k={r['k']}: file gap {raw} != recomputed {r['gap']}; {'file' if keep == raw else 'recomputed'} kept (the larger)")
+            r["gap"] = round(keep, 2)
         rows.append(r)
     if not rows and items: warn(f"{src}: no configuration has a time, skipped")
     return rows
