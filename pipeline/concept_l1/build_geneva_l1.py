@@ -141,11 +141,12 @@ def drive_parts(M, dg, lg):
     L_rod = float(np.linalg.norm(dg["b"] - dg["a"]))
     out.append(("l1b", 7, f"drive pushrod keep-out (O{2 * ROD_R:.0f} x {L_rod:.1f} mm steel rod, head mid to head mid)",
                 REF.cyl(dg["a"], unit(dg["b"] - dg["a"]), 0.0, L_rod, r=ROD_R), "steel"))
-    out.append(("l1a", 1, f"drive horn plate keep-out (O{2 * S.HUB_R:.0f} x {HORN_PLATE:g} mm on hub K's cap top, F+{CROWN + dg['capK']:.2f}.."
+    r_hp = float(D.p["r_horn"]) + 4.0                                         # the verifier's O8 pad about the horn pin, made concentric (K-invariant)
+    out.append(("l1a", 1, f"drive horn plate keep-out (O{2 * r_hp:.1f} x {HORN_PLATE:g} mm on hub K's cap top, F+{CROWN + dg['capK']:.2f}.."
                 f"F+{CROWN + dg['capK'] + HORN_PLATE:.2f}; clamped on link 1a's K axle through the bearing bore and the spring arbor; carries the horn pin)",
-                REF.cyl(HK, D.uK, CROWN + dg["capK"], CROWN + dg["capK"] + HORN_PLATE, r=S.HUB_R), "ti"))
+                REF.cyl(HK, D.uK, CROWN + dg["capK"], CROWN + dg["capK"] + HORN_PLATE, r=r_hp), "ti"))
     return out, dict(lobe=linfo, rod_len_mm=round(L_rod, 2), rocker_post_mm=dg["hrk"], rocker_base_mm=round(dg["lev"], 2),
-                     horn=dict(r_horn=float(D.p["r_horn"]), plate_mm=HORN_PLATE, head_bottom_mm=round(CROWN + dg["capK"] + HORN_PLATE, 3),
+                     horn=dict(r_horn=float(D.p["r_horn"]), plate_mm=HORN_PLATE, plate_r_mm=round(r_hp, 3), head_bottom_mm=round(CROWN + dg["capK"] + HORN_PLATE, 3),
                                arc_at_stopB_mm=round(float(D.p["r_horn"]) * math.radians(lg["law"]["dK_end_deg"]), 2),
                                arc_at_taken_max_mm=round(float(D.p["r_horn"]) * taken_t * lg["law"]["kK"], 2)),
                      model_rod_info=getattr(M, "_rod_info", None))
@@ -243,6 +244,32 @@ def set_adjacent(parts):
         BASE.ADJ_PAIRS.append((A[2][:24], A[1], XA, Bp[2][:24], Bp[1], np.ascontiguousarray(Bp[3].vertices, float), np.ascontiguousarray(Bp[3].faces, np.int64)))
 
 
+def drive_sweep(parts, U2, UK, q2w, kw, dq=1.0, nk=55):
+    """red team of the drive's relative motions, pose-independent: link 2's parts (lobe, strap, J2 upper boss, J2 dowel) vs
+    link 1b's over the whole q2 window (rotation about u2 through GH: the model's member frames have no translation), and
+    link 1a's (horn plate, strap, plates) vs link 1b's over K's window. Pairs with a drive part only. Signed distance of A's
+    surface samples to B's mesh (negative = inside), worst over the window: {pair: (mm, angle)}"""
+    import igl
+    def rot(u, a):
+        u = unit(u); Kx = np.array([[0, -u[2], u[1]], [u[2], 0, -u[0]], [-u[1], u[0], 0]]); return np.eye(3) + math.sin(a) * Kx + (1 - math.cos(a)) * Kx @ Kx
+    smp = lambda m: np.r_[np.asarray(m.vertices), trimesh.sample.sample_surface_even(m, 3000, seed=4)[0]]
+    sd = lambda X, m: float(igl.signed_distance(np.ascontiguousarray(X), np.ascontiguousarray(m.vertices, float), np.ascontiguousarray(m.faces, np.int64))[0].min())
+    by = lambda mem: [(n, m) for g, mm, n, m, mat in parts if mm == mem]
+    out = {}
+    for memA, axis, angs in ((2, U2, np.arange(q2w[0], q2w[1] + 1e-6, dq)), (1, UK, -np.linspace(min(0.0, kw), max(0.0, kw), nk))):
+        for na, ma in by(memA):
+            if memA == 2 and not any(s_ in na for s_ in ("drive", "link 2 strap", "J2 upper boss", "J2 stop dowel")): continue
+            XA = smp(ma)
+            for nb, mb in by(7):
+                if not ("drive" in na or "drive" in nb): continue
+                best = (1e9, None)
+                for q in angs:
+                    v = sd(XA @ rot(axis, math.radians(q)).T, mb)
+                    if v < best[0]: best = (v, float(q))
+                out[f"{na[:40]} | {nb[:40]}"] = (round(best[0], 3), round(best[1] if memA == 2 else -best[1], 1))
+    return dict(sorted(out.items(), key=lambda kv: kv[1][0]))
+
+
 def law_check(M, K, idx):
     """per pose: the slaved K vs the lobe law, from the member frames (K's angle and q2 read off R1^T R1b and R1b^T R2)"""
     from scipy.spatial.transform import Rotation as Rot
@@ -317,6 +344,10 @@ def main():
     bad = [p['name'] for p in ours if not p['valid'] or p['pieces'] != 1]
     print(f"exo.glb: {len(parts)} keep-out parts ({sum(p['mass_g'] or 0 for p in ours):.1f} g) + {len(up)} user parts; invalid: {bad or 'none'}; mount {mrep}; "
           f"stops {json.dumps(stack['stops'])}", flush=True)
+    dsw = drive_sweep(parts, D.u[1], D.uK, stack["stops"]["J2"]["window_deg"], stack["stops"]["K"]["stop_B_deg"])
+    stack["drive"]["sweep_check"] = dict(rule="signed distance (mm, negative = inside), worst over the joint window; angle = q2 (link 2 pairs) or dK (link 1a pairs)",
+                                         pairs=dsw, worst=next(iter(dsw.items())) if dsw else None)
+    print(f"drive sweep (worst 6): {list(dsw.items())[:6]}", flush=True)
     u1, u2, u3 = D.u; w_d = math.degrees(math.acos(float(np.clip(-u3[1], -1, 1)))); w_a = math.degrees(math.atan2(u3[0], u3[2]))
     az = math.degrees(math.atan2(u1[2], -u1[0])); elv = math.degrees(math.asin(float(np.clip(u1[1], -1, 1))))
     chk = S.circ_int(S.bvec(az, elv), D.A[0], S.w_dir(w_d, w_a), D.A[1], D.branch)
@@ -352,7 +383,7 @@ def main():
                           dict(joint="J3", part="O20 x 12.25 v5 hub, MR117-2RS pair, encoder", axis_offset_mm=kin["axis_line_offsets_mm"][2])],
                   drive=dict(kind="constant-pressure spiral lobe (hub 2 rotor) -> rocker on link 1b -> O3 pushrod, M3 rod ends O10 -> horn on hub K's cap top",
                              components=["MR63ZZ-class follower or a polished pad on the rocker (L2)", "M3 rod-end x 2 (e.g. DIN ISO 12240-4 E-series, O10 head)",
-                                         "O3 x %.1f mm steel pushrod, M3 threaded ends" % stack["drive"]["rod_len_mm"], "O20 x 1.5 Ti horn plate on the K axle"],
+                                         "O3 x %.1f mm steel pushrod, M3 threaded ends" % stack["drive"]["rod_len_mm"], "O%.1f x 1.5 Ti horn plate on the K axle" % (2 * (float(P["r_horn"]) + 4.0))],
                              **stack["drive"]),
                   kinematics=kin, base=dict(mount="girdle", chain="geneva_rod_knuckle", note="base rides the scapula on the user's scapula handler, carried directly at the J1 hub ring (no tab)"),
                   built_with="pipeline/concept_l1/build_geneva_l1.py (L1 keep-out meshes: O20 hub keep-outs incl. hub K's 6 mm taller cap + horn plate, fitted 8 x 3 straps "
