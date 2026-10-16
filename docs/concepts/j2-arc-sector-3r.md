@@ -246,3 +246,23 @@ spec axes: rail 84.81 (beta 40, chi 60) vs hub 73.57.
   the frame's window. Pair it with a joint layout whose J2 travel is <= ~60 deg, or split the travel over two bodies
   (variant 1 above, if a gear-free half-speed coupling at this size exists). Otherwise keep the hub at J2 and work on
   link 2 (fold-sph3r, skin-normal-3r-pin-knee).
+
+## Audit (2026-10-16 ~03:40 UTC, independent auditor)
+
+- **Gate:** the 288-config history passes the gate's numbers only because the best was found early by the random
+  coarse sweep and the rest were probes and re-runs; no CMA stream ever returned (the farm jobs were lost at the
+  container restart, logs end at "upload done"). Worse, the best per cone half-angle band is monotone: beta 12-20:
+  71.12, 20-30: 74.38, 30-45: 78.99, 45-76: 82.16, so the optimum sat at the `beta >= 12` clamp. That is not a real
+  convergence.
+- **Re-measured at the clamp** (Bench(60,160) fast, the model's own `evaluate`, all checks on; entries `audit-local` in
+  the sweep): k114 axes, beta 13 -> 69.00; beta 12 -> 68.50; beta 12, cov 0.99 -> **66.30** (honest). chi 0 / 90 / 180 /
+  -90 -> 75.6 / 74.6 / 84.5 / 79.4; s1 -1 -> 70.5; cov 0.93 -> 72.2; over_hub1 -> 68.5.
+- **So the absolute number beats the 68.93 champion, but the rail adds nothing:** in each of these configurations the
+  rail sits at 147-152 mm from GH, in band 0.0 (rail) and 0.0 (carriage) - a hoop parked about 9 cm off the skin. The
+  gain is the re-tuned axes; the hub version at identical axes scores 57.75. The sweep walks toward beta -> 0, i.e.
+  toward the hub, which is the rail's own limit with a smaller footprint.
+- **Verdict: death upheld, on dominance, not on the absolute number.** Measured reason: an arc rail about the virtual
+  J2 axis must stand at one level over a ~150 deg sector. Every configuration found so far either leaves the band
+  (0 % in band at 147-152 mm) or trades the reach away. The best rail (66.30) still loses 8.6 gap points to the plain
+  O20 hub at the same axes (57.75).
+- Tooling note confirmed: the CMA farm jobs need `mkdir -p` for their `--out` directory.
