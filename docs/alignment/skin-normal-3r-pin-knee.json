@@ -6,11 +6,10 @@
  "verdict": "watch",
  "reasons": [
   "held_out: no held-out measurement on file: the claim has never been worn off its own bench",
-  "near_touch: no near-touch measurement on file (rule since 2026-10-16: claims report plain and near-touch)",
+  "near_touch: plain 27.2, <1 mm 31.75, <2 mm 46.85, 19.65 points live in the 1-2 mm shell (row v_polish_protocols.H1_fit60_m5.gap_near1)",
   "continuity: continuity record without the connected numbers (row v_connected_reach)",
   "fold_margin: no min-th margin over taken poses on file (rule: each claim reports it)",
   "sampling: no per-part in-band record: unsampled bodies cannot be ruled out",
-  "complexity: recomputed 19.5 vs row None; 3 active + 2 sensed passive coordinates = 5 read coordinates (the DOF count shows 3)",
   "reporting: verdict text still reads as a self-measured screen; dashboard sweep best 19.72 (score 92.83) sits 7.48 below the verified number"
  ],
  "checks": [
@@ -31,7 +30,16 @@
   {
    "check": "near_touch",
    "level": "watch",
-   "reason": "no near-touch measurement on file (rule since 2026-10-16: claims report plain and near-touch)"
+   "reason": "plain 27.2, <1 mm 31.75, <2 mm 46.85, 19.65 points live in the 1-2 mm shell (row v_polish_protocols.H1_fit60_m5.gap_near1)",
+   "shell2": 19.65,
+   "plain": 27.2,
+   "n1": 31.75,
+   "n2": 46.85,
+   "n3": null,
+   "band3": null,
+   "hist": null,
+   "minmm": null,
+   "source": "row v_polish_protocols.H1_fit60_m5.gap_near1"
   },
   {
    "check": "dominance",
@@ -62,8 +70,8 @@
   },
   {
    "check": "complexity",
-   "level": "watch",
-   "reason": "recomputed 19.5 vs row None; 3 active + 2 sensed passive coordinates = 5 read coordinates (the DOF count shows 3)",
+   "level": "ok",
+   "reason": "recomputed 19.5 vs row None; info: 3 active + 2 sensed passive coordinates = 5 read coordinates (cuff-side passives are outside the count by the user's ruling)",
    "recomputed": 19.5,
    "row": null
   },
@@ -91,6 +99,6 @@
   "docs/concepts/verify/skin-normal-3r-pin-knee-polish.results.json",
   "docs/concepts/verify/skin-normal-3r-pin-knee_big_frozen.json"
  ],
- "git": "1165c80",
- "t": "2026-10-16T20:23:40Z"
+ "git": "c932f10",
+ "t": "2026-10-16T20:26:30Z"
 }

@@ -5,9 +5,8 @@
  "complexity": 49.0,
  "verdict": "gamed",
  "reasons": [
-  "near_touch: plain 19.13, <1 mm 20.77, <2 mm 50.41, 31.28 points live in the 1-2 mm shell (docs/concepts/verify/sidecar-parallelogram-knuckle-3r_v_bench_zb45.json)",
-  "dominance: beats frontload-lobe-stopb-knuckle-3r by 3.59 plain but loses by 6.43 at 2 mm: the gain is metal moved into the 1-2 mm shell",
-  "reporting: verdict text still reads as a self-measured screen; dashboard v_gap 18.06 vs verifier 19.13 (-1.07; the dashboard flatters the design); dashboard sweep best 10.63 (score 96.13) sits 8.50 below the verified number"
+  "near_touch: plain 19.13, <1 mm 20.22, <2 mm 50.14, <3 mm 150.75, band read 3-14 mm 19.13, 31.01 points live in the 1-2 mm shell (re-measured (this audit))",
+  "dominance: beats frontload-lobe-stopb-knuckle-3r by 3.59 plain but loses by 6.16 at 2 mm: the gain is metal moved into the 1-2 mm shell"
  ],
  "checks": [
   {
@@ -30,24 +29,33 @@
   {
    "check": "near_touch",
    "level": "gamed",
-   "reason": "plain 19.13, <1 mm 20.77, <2 mm 50.41, 31.28 points live in the 1-2 mm shell (docs/concepts/verify/sidecar-parallelogram-knuckle-3r_v_bench_zb45.json)",
-   "shell2": 31.28,
+   "reason": "plain 19.13, <1 mm 20.22, <2 mm 50.14, <3 mm 150.75, band read 3-14 mm 19.13, 31.01 points live in the 1-2 mm shell (re-measured (this audit))",
+   "shell2": 31.01,
    "plain": 19.13,
-   "n1": 20.77,
-   "n2": 50.41,
-   "n3": null,
-   "band3": null,
-   "hist": null,
-   "minmm": 0.65,
-   "source": "docs/concepts/verify/sidecar-parallelogram-knuckle-3r_v_bench_zb45.json"
+   "n1": 20.22,
+   "n2": 50.14,
+   "n3": 150.75,
+   "band3": 19.13,
+   "hist": {
+    "0-1": 0.0,
+    "1-2": 0.0006,
+    "2-3": 0.0022,
+    "3-4": 0.0109,
+    "4-6": 0.081,
+    "6-10": 0.4292,
+    "10-14": 0.3815,
+    ">14": 0.0944
+   },
+   "minmm": 0.651,
+   "source": "re-measured (this audit)"
   },
   {
    "check": "dominance",
    "level": "gamed",
-   "reason": "beats frontload-lobe-stopb-knuckle-3r by 3.59 plain but loses by 6.43 at 2 mm: the gain is metal moved into the 1-2 mm shell",
+   "reason": "beats frontload-lobe-stopb-knuckle-3r by 3.59 plain but loses by 6.16 at 2 mm: the gain is metal moved into the 1-2 mm shell",
    "ref": "frontload-lobe-stopb-knuckle-3r",
    "gain_plain": 3.59,
-   "gain_2mm": -6.43
+   "gain_2mm": -6.16
   },
   {
    "check": "continuity",
@@ -105,7 +113,7 @@
   {
    "check": "sampling",
    "level": "ok",
-   "reason": "sample-weighted in-band 0.900 vs part-weighted 0.898 (+0.23 points); thinly sampled parts: rod 12 (docs/concepts/verify/sidecar-parallelogram-knuckle-3r_v_bench_zb45.json)",
+   "reason": "sample-weighted in-band 0.905 vs part-weighted 0.921 (-1.65 points); thinly sampled parts: rod 12 (re-measured)",
    "parts": {
     "hub1": [
      0.995,
@@ -158,8 +166,8 @@
      20
     ],
     "rod": [
-     0.529,
-     13.8,
+     0.883,
+     12.3,
      12
     ],
     "rodends": [
@@ -186,14 +194,14 @@
   },
   {
    "check": "complexity",
-   "level": "watch",
-   "reason": "recomputed 49.0 vs row 49.0; hand count (not derived from the model); 3 active + 2 sensed passive coordinates = 5 read coordinates (the DOF count shows 3)",
+   "level": "ok",
+   "reason": "recomputed 49.0 vs row 49.0; hand count (not derived from the model); info: 3 active + 2 sensed passive coordinates = 5 read coordinates (cuff-side passives are outside the count by the user's ruling)",
    "recomputed": 49.0,
    "row": 49.0
   },
   {
    "check": "reporting",
-   "level": "gamed",
+   "level": "watch",
    "reason": "verdict text still reads as a self-measured screen; dashboard v_gap 18.06 vs verifier 19.13 (-1.07; the dashboard flatters the design); dashboard sweep best 10.63 (score 96.13) sits 8.50 below the verified number"
   },
   {
@@ -208,7 +216,7 @@
   }
  ],
  "remeasured": {
-  "bench": false,
+  "bench": true,
   "held": false
  },
  "verifier_files": [
@@ -217,6 +225,6 @@
   "docs/concepts/verify/sidecar-parallelogram-knuckle-3r_v_held_frozen.json",
   "docs/concepts/verify/sidecar-parallelogram-knuckle-3r_v_bench_frozen.json"
  ],
- "git": "1165c80",
- "t": "2026-10-16T20:23:39Z"
+ "git": "c932f10",
+ "t": "2026-10-16T20:26:29Z"
 }

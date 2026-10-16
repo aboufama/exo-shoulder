@@ -89,8 +89,8 @@
   },
   {
    "check": "complexity",
-   "level": "watch",
-   "reason": "recomputed 45.25 vs row 45.25; 3 active + 2 sensed passive coordinates = 5 read coordinates (the DOF count shows 3)",
+   "level": "ok",
+   "reason": "recomputed 45.25 vs row 45.25; info: 3 active + 2 sensed passive coordinates = 5 read coordinates (cuff-side passives are outside the count by the user's ruling)",
    "recomputed": 45.25,
    "row": 45.25
   },
@@ -115,6 +115,6 @@
   "held": false
  },
  "verifier_files": [],
- "git": "1165c80",
- "t": "2026-10-16T20:23:41Z"
+ "git": "c932f10",
+ "t": "2026-10-16T20:26:31Z"
 }

@@ -6,7 +6,7 @@
  "verdict": "watch",
  "reasons": [
   "held_out: no held-out measurement on file: the claim has never been worn off its own bench",
-  "near_touch: no near-touch measurement on file (rule since 2026-10-16: claims report plain and near-touch)",
+  "near_touch: plain 28.46, <1 mm 35.44, 2 mm near-touch not measured (row exact_frozen.best_C6.gap_near1)",
   "continuity: continuity record without the connected numbers (docs/concepts/verify/j3-neck-over-3r_claim_big_frozen.json)",
   "fold_margin: no min-th margin over taken poses on file (rule: each claim reports it)",
   "sampling: no per-part in-band record: unsampled bodies cannot be ruled out",
@@ -30,7 +30,16 @@
   {
    "check": "near_touch",
    "level": "watch",
-   "reason": "no near-touch measurement on file (rule since 2026-10-16: claims report plain and near-touch)"
+   "reason": "plain 28.46, <1 mm 35.44, 2 mm near-touch not measured (row exact_frozen.best_C6.gap_near1)",
+   "shell2": null,
+   "plain": 28.46,
+   "n1": 35.44,
+   "n2": null,
+   "n3": null,
+   "band3": null,
+   "hist": null,
+   "minmm": null,
+   "source": "row exact_frozen.best_C6.gap_near1"
   },
   {
    "check": "dominance",
@@ -90,6 +99,6 @@
   "docs/concepts/verify/j3-neck-over-3r_claim_big_frozen.json",
   "docs/concepts/verify/j3-neck-over-3r_nw14_big_frozen.json"
  ],
- "git": "1165c80",
- "t": "2026-10-16T20:23:37Z"
+ "git": "c932f10",
+ "t": "2026-10-16T20:26:27Z"
 }

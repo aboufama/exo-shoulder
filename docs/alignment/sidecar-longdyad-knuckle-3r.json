@@ -3,8 +3,10 @@
  "status": "verified",
  "v_gap": 18.91,
  "complexity": 49.0,
- "verdict": "gamed",
+ "verdict": "watch",
  "reasons": [
+  "near_touch: plain 18.91, <1 mm 20.0, <2 mm 34.03, <3 mm 155.98, band read 3-14 mm 19.22, 15.12 points live in the 1-2 mm shell (re-measured (this audit))",
+  "fold_margin: no min-th margin over taken poses on file (rule: each claim reports it)",
   "reporting: verdict text still reads as a self-measured screen; dashboard v_gap 17.84 vs verifier 18.91 (-1.07; the dashboard flatters the design); dashboard sweep best 10.3 (score 96.25) sits 8.61 below the verified number"
  ],
  "checks": [
@@ -28,16 +30,25 @@
   {
    "check": "near_touch",
    "level": "watch",
-   "reason": "plain 18.91, <1 mm 20.0, <2 mm 34.03, 15.12 points live in the 1-2 mm shell (docs/concepts/verify/sidecar-longdyad-knuckle-3r_v_bench_frozen.json)",
+   "reason": "plain 18.91, <1 mm 20.0, <2 mm 34.03, <3 mm 155.98, band read 3-14 mm 19.22, 15.12 points live in the 1-2 mm shell (re-measured (this audit))",
    "shell2": 15.12,
    "plain": 18.91,
    "n1": 20.0,
    "n2": 34.03,
-   "n3": null,
-   "band3": null,
-   "hist": null,
-   "minmm": 0.28,
-   "source": "docs/concepts/verify/sidecar-longdyad-knuckle-3r_v_bench_frozen.json"
+   "n3": 155.98,
+   "band3": 19.22,
+   "hist": {
+    "0-1": 0.0,
+    "1-2": 0.0007,
+    "2-3": 0.0031,
+    "3-4": 0.0117,
+    "4-6": 0.0777,
+    "6-10": 0.4411,
+    "10-14": 0.363,
+    ">14": 0.1027
+   },
+   "minmm": 0.278,
+   "source": "re-measured (this audit)"
   },
   {
    "check": "dominance",
@@ -89,13 +100,21 @@
     [
      "docs/concepts/verify/sidecar-longdyad-knuckle-3r_v_bench_frozen.json:sidecar.phi_max_taken",
      31.6
+    ],
+    [
+     "re-measured dK span",
+     37.8
+    ],
+    [
+     "re-measured K.ang span",
+     57.44
     ]
    ]
   },
   {
    "check": "sampling",
    "level": "ok",
-   "reason": "sample-weighted in-band 0.897 vs part-weighted 0.923 (-2.63 points); thinly sampled parts: rod 13, L1a 12 (docs/concepts/verify/sidecar-longdyad-knuckle-3r_v_bench_frozen.json)",
+   "reason": "sample-weighted in-band 0.897 vs part-weighted 0.923 (-2.63 points); thinly sampled parts: rod 13, L1a 12 (re-measured)",
    "parts": {
     "hub1": [
      0.994,
@@ -176,14 +195,14 @@
   },
   {
    "check": "complexity",
-   "level": "watch",
-   "reason": "recomputed 49.0 vs row 49.0; hand count (not derived from the model); 3 active + 2 sensed passive coordinates = 5 read coordinates (the DOF count shows 3)",
+   "level": "ok",
+   "reason": "recomputed 49.0 vs row 49.0; hand count (not derived from the model); info: 3 active + 2 sensed passive coordinates = 5 read coordinates (cuff-side passives are outside the count by the user's ruling)",
    "recomputed": 49.0,
    "row": 49.0
   },
   {
    "check": "reporting",
-   "level": "gamed",
+   "level": "watch",
    "reason": "verdict text still reads as a self-measured screen; dashboard v_gap 17.84 vs verifier 18.91 (-1.07; the dashboard flatters the design); dashboard sweep best 10.3 (score 96.25) sits 8.61 below the verified number"
   },
   {
@@ -198,13 +217,13 @@
   }
  ],
  "remeasured": {
-  "bench": false,
+  "bench": true,
   "held": false
  },
  "verifier_files": [
   "docs/concepts/verify/sidecar-longdyad-knuckle-3r_v_held_frozen.json",
   "docs/concepts/verify/sidecar-longdyad-knuckle-3r_v_bench_frozen.json"
  ],
- "git": "1165c80",
- "t": "2026-10-16T20:23:39Z"
+ "git": "c932f10",
+ "t": "2026-10-16T20:26:29Z"
 }

@@ -233,10 +233,23 @@ def _near_numbers(row, V, rem_b):
         if a and "held" not in os.path.basename(f) and _num(a.get("gap_near1")) is not None and isinstance(d.get("frozen"), dict):
             return dict(plain=_num(d["frozen"].get("gap")), n1=_num(a.get("gap_near1")), n2=_num(a.get("gap_near2")), n3=None, band3=None, hist=None,
                         minmm=_num(a.get("near_touch_min_mm")), src=f)
-    n1 = [(p, _num(v)) for p, v in _find_keys(row, r"gap_near1$") if "held" not in p and _num(v) is not None]
-    if n1 and _num(row.get("v_gap")) is not None:
-        p, v = n1[0]; n2 = [(q, _num(w)) for q, w in _find_keys(row, r"gap_near2$") if "held" not in q and _num(w) is not None]
-        return dict(plain=_num(row.get("v_gap")), n1=v, n2=n2[0][1] if n2 else None, n3=None, band3=None, hist=None, minmm=None, src="row " + p + " (bench reading next to v_gap)")
+    def _at(path):
+        d = row
+        for k in path.split("."): d = d.get(k) if isinstance(d, dict) else None
+        return d
+    cands = []
+    for p, v in _find_keys(row, r"gap_near1$"):
+        if "held" in p or _num(v) is None: continue
+        parts = p.split(".")
+        for j in range(len(parts) - 1, -1, -1):              # the plain gap of the SAME record (walk up to a dict with 'gap')
+            par = _at(".".join(parts[:j])) if j else row
+            if isinstance(par, dict) and _num(par.get("gap")) is not None and (j or p == "gap_near1"):
+                n2p = [w for q, w in _find_keys(par, r"gap_near2$") if _num(w) is not None]
+                cands.append((abs(_num(par["gap"]) - (_num(row.get("v_gap")) or 0)), p, _num(par["gap"]), _num(v), _num(n2p[0]) if n2p else None)); break
+    if cands:
+        cands.sort(key=lambda t: t[0]); e, p, g, v, v2 = cands[0]
+        if e <= 0.5:
+            return dict(plain=g, n1=v, n2=v2, n3=None, band3=None, hist=None, minmm=None, src="row " + p)
     fz = row.get("frozen") if isinstance(row.get("frozen"), dict) else {}
     if _num(fz.get("near_touch_gap")) is not None:
         return dict(plain=_num(fz.get("gap")), n1=_num(fz.get("near_touch_gap")), n2=_num(fz.get("near_touch_2mm")), n3=None, band3=None, hist=None,

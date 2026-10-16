@@ -3,8 +3,12 @@
  "status": "verified",
  "v_gap": 33.51,
  "complexity": null,
- "verdict": "gamed",
+ "verdict": "watch",
  "reasons": [
+  "held_out: no held-out measurement on file: the claim has never been worn off its own bench",
+  "near_touch: no near-touch measurement on file (rule since 2026-10-16: claims report plain and near-touch)",
+  "fold_margin: no min-th margin over taken poses on file (rule: each claim reports it)",
+  "sampling: no per-part in-band record: unsampled bodies cannot be ruled out",
   "reporting: dashboard v_gap 31.7 vs verifier 33.51 (-1.81; the dashboard flatters the design)"
  ],
  "checks": [
@@ -62,7 +66,7 @@
   },
   {
    "check": "reporting",
-   "level": "gamed",
+   "level": "watch",
    "reason": "dashboard v_gap 31.7 vs verifier 33.51 (-1.81; the dashboard flatters the design)"
   },
   {
@@ -81,6 +85,6 @@
   "held": false
  },
  "verifier_files": [],
- "git": "1165c80",
- "t": "2026-10-16T20:23:41Z"
+ "git": "c932f10",
+ "t": "2026-10-16T20:26:31Z"
 }

@@ -8,8 +8,7 @@
   "held_out: no held-out measurement on file: the claim has never been worn off its own bench",
   "near_touch: no near-touch measurement on file (rule since 2026-10-16: claims report plain and near-touch)",
   "continuity: passive / sprung / sensed coordinates but no continuity flood on file (rule 2026-10-16)",
-  "fold_margin: no min-th margin over taken poses on file (rule: each claim reports it)",
-  "complexity: recomputed 19.5 vs row None; 3 active + 2 sensed passive coordinates = 5 read coordinates (the DOF count shows 3)"
+  "fold_margin: no min-th margin over taken poses on file (rule: each claim reports it)"
  ],
  "checks": [
   {
@@ -106,8 +105,8 @@
   },
   {
    "check": "complexity",
-   "level": "watch",
-   "reason": "recomputed 19.5 vs row None; 3 active + 2 sensed passive coordinates = 5 read coordinates (the DOF count shows 3)",
+   "level": "ok",
+   "reason": "recomputed 19.5 vs row None; info: 3 active + 2 sensed passive coordinates = 5 read coordinates (cuff-side passives are outside the count by the user's ruling)",
    "recomputed": 19.5,
    "row": null
   },
@@ -135,6 +134,6 @@
   "docs/concepts/verify/raglan-knee-3r.results.json",
   "docs/concepts/verify/raglan-knee-3r_big_frozen.json"
  ],
- "git": "1165c80",
- "t": "2026-10-16T20:23:38Z"
+ "git": "c932f10",
+ "t": "2026-10-16T20:26:29Z"
 }

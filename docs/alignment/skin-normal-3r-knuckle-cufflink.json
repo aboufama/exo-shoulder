@@ -10,8 +10,7 @@
   "continuity: passive / sprung / sensed coordinates but no continuity flood on file (rule 2026-10-16)",
   "fold_margin: no min-th margin over taken poses on file (rule: each claim reports it)",
   "idle: a drive is declared but no range of it over the taken poses is on file",
-  "sampling: no per-part in-band record: unsampled bodies cannot be ruled out",
-  "complexity: recomputed 29.25 vs row None; 3 active + 3 sensed passive coordinates = 6 read coordinates (the DOF count shows 3)"
+  "sampling: no per-part in-band record: unsampled bodies cannot be ruled out"
  ],
  "checks": [
   {
@@ -61,8 +60,8 @@
   },
   {
    "check": "complexity",
-   "level": "watch",
-   "reason": "recomputed 29.25 vs row None; 3 active + 3 sensed passive coordinates = 6 read coordinates (the DOF count shows 3)",
+   "level": "ok",
+   "reason": "recomputed 29.25 vs row None; info: 3 active + 3 sensed passive coordinates = 6 read coordinates (cuff-side passives are outside the count by the user's ruling)",
    "recomputed": 29.25,
    "row": null
   },
@@ -89,6 +88,6 @@
  "verifier_files": [
   "docs/concepts/verify/skin-normal-3r-knuckle-cufflink.results.json"
  ],
- "git": "1165c80",
- "t": "2026-10-16T20:23:40Z"
+ "git": "c932f10",
+ "t": "2026-10-16T20:26:30Z"
 }

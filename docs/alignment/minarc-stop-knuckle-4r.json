@@ -5,10 +5,9 @@
  "complexity": 33.0,
  "verdict": "watch",
  "reasons": [
-  "near_touch: no near-touch measurement on file (rule since 2026-10-16: claims report plain and near-touch)",
+  "near_touch: plain 19.54, <1 mm 26.44, 2 mm near-touch not measured (row polished_bench.BDp_same_harness.gap_near1)",
   "continuity: continuity record without the connected numbers (row kitrule_continuity)",
   "sampling: no per-part in-band record: unsampled bodies cannot be ruled out",
-  "complexity: recomputed 33.0 vs row 33.0; 3 active + 3 sensed passive coordinates = 6 read coordinates (the DOF count shows 3)",
   "reporting: dashboard sweep best 6.19 (score 97.75) sits 13.35 below the verified number"
  ],
  "checks": [
@@ -32,7 +31,16 @@
   {
    "check": "near_touch",
    "level": "watch",
-   "reason": "no near-touch measurement on file (rule since 2026-10-16: claims report plain and near-touch)"
+   "reason": "plain 19.54, <1 mm 26.44, 2 mm near-touch not measured (row polished_bench.BDp_same_harness.gap_near1)",
+   "shell2": null,
+   "plain": 19.54,
+   "n1": 26.44,
+   "n2": null,
+   "n3": null,
+   "band3": null,
+   "hist": null,
+   "minmm": null,
+   "source": "row polished_bench.BDp_same_harness.gap_near1"
   },
   {
    "check": "dominance",
@@ -65,8 +73,8 @@
   },
   {
    "check": "complexity",
-   "level": "watch",
-   "reason": "recomputed 33.0 vs row 33.0; 3 active + 3 sensed passive coordinates = 6 read coordinates (the DOF count shows 3)",
+   "level": "ok",
+   "reason": "recomputed 33.0 vs row 33.0; info: 3 active + 3 sensed passive coordinates = 6 read coordinates (cuff-side passives are outside the count by the user's ruling)",
    "recomputed": 33.0,
    "row": 33.0
   },
@@ -91,6 +99,6 @@
   "held": false
  },
  "verifier_files": [],
- "git": "1165c80",
- "t": "2026-10-16T20:23:37Z"
+ "git": "c932f10",
+ "t": "2026-10-16T20:26:28Z"
 }

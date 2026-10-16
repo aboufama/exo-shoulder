@@ -8,7 +8,6 @@
   "near_touch: plain 22.72, <1 mm 24.36, <2 mm 43.98, 21.26 points live in the 1-2 mm shell (docs/concepts/verify/frontload-lobe-stopb-knuckle-3r_claim_bench_frozen.json)",
   "fold_margin: no min-th margin over taken poses on file (rule: each claim reports it)",
   "sampling: sample-weighted in-band 0.856 vs part-weighted 0.798 (+5.73 points); thinly sampled parts: rod 14; mostly out-of-band parts: rod (0.00 in band, median 22.2 mm, 1.7 % of samples); rodends (0.00 in band, median 22.5 mm, 3.8 % of samples) (docs/concepts/verify/frontload-lobe-stopb-knuckle-3r_claim_bench_frozen.json)",
-  "complexity: recomputed 49.0 vs row 49.0; hand count (not derived from the model); 3 active + 2 sensed passive coordinates = 5 read coordinates (the DOF count shows 3)",
   "reporting: verdict text still reads as a self-measured screen; dashboard sweep best 15.57 (score 94.34) sits 7.25 below the verified number"
  ],
  "checks": [
@@ -160,8 +159,8 @@
   },
   {
    "check": "complexity",
-   "level": "watch",
-   "reason": "recomputed 49.0 vs row 49.0; hand count (not derived from the model); 3 active + 2 sensed passive coordinates = 5 read coordinates (the DOF count shows 3)",
+   "level": "ok",
+   "reason": "recomputed 49.0 vs row 49.0; hand count (not derived from the model); info: 3 active + 2 sensed passive coordinates = 5 read coordinates (cuff-side passives are outside the count by the user's ruling)",
    "recomputed": 49.0,
    "row": 49.0
   },
@@ -190,6 +189,6 @@
   "docs/concepts/verify/frontload-lobe-stopb-knuckle-3r_claim_bench_frozen.json",
   "docs/concepts/verify/frontload-lobe-stopb-knuckle-3r_corr_bench_frozen.json"
  ],
- "git": "1165c80",
- "t": "2026-10-16T20:23:36Z"
+ "git": "c932f10",
+ "t": "2026-10-16T20:26:27Z"
 }

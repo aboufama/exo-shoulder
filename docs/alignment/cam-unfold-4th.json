@@ -6,12 +6,11 @@
  "verdict": "watch",
  "reasons": [
   "held_out: no held-out measurement on file: the claim has never been worn off its own bench",
-  "near_touch: no near-touch measurement on file (rule since 2026-10-16: claims report plain and near-touch)",
+  "near_touch: plain 26.7, <1 mm 28.4, 2 mm near-touch not measured (row frozen_exact.gap_near1)",
   "continuity: passive / sprung / sensed coordinates but no continuity flood on file (rule 2026-10-16)",
   "fold_margin: no min-th margin over taken poses on file (rule: each claim reports it)",
   "idle: a drive is declared but no range of it over the taken poses is on file",
   "sampling: sample-weighted in-band 0.889 vs part-weighted 0.840 (+4.86 points); thinly sampled parts: L2a 4; mostly out-of-band parts: L2a (0.17 in band, median 15.2 mm, 0.6 % of samples) (docs/concepts/verify/cam-unfold-4th/local_claim.json)",
-  "complexity: recomputed 33.75 vs row 33.75; 3 active + 2 sensed passive coordinates = 5 read coordinates (the DOF count shows 3)",
   "reporting: verdict text still reads as a self-measured screen"
  ],
  "checks": [
@@ -32,7 +31,16 @@
   {
    "check": "near_touch",
    "level": "watch",
-   "reason": "no near-touch measurement on file (rule since 2026-10-16: claims report plain and near-touch)"
+   "reason": "plain 26.7, <1 mm 28.4, 2 mm near-touch not measured (row frozen_exact.gap_near1)",
+   "shell2": null,
+   "plain": 26.7,
+   "n1": 28.4,
+   "n2": null,
+   "n3": null,
+   "band3": null,
+   "hist": null,
+   "minmm": null,
+   "source": "row frozen_exact.gap_near1"
   },
   {
    "check": "dominance",
@@ -119,8 +127,8 @@
   },
   {
    "check": "complexity",
-   "level": "watch",
-   "reason": "recomputed 33.75 vs row 33.75; 3 active + 2 sensed passive coordinates = 5 read coordinates (the DOF count shows 3)",
+   "level": "ok",
+   "reason": "recomputed 33.75 vs row 33.75; info: 3 active + 2 sensed passive coordinates = 5 read coordinates (cuff-side passives are outside the count by the user's ruling)",
    "recomputed": 33.75,
    "row": 33.75
   },
@@ -149,6 +157,6 @@
   "docs/concepts/verify/cam-unfold-4th/farm_hw.json",
   "docs/concepts/verify/cam-unfold-4th/farm_claim.json"
  ],
- "git": "1165c80",
- "t": "2026-10-16T20:23:36Z"
+ "git": "c932f10",
+ "t": "2026-10-16T20:26:27Z"
 }
