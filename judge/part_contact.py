@@ -10,9 +10,11 @@ its open link 1, judge/VERIFY_part_contact.md). close_open() makes their oriente
   - otherwise the boundary of the chain (every directed edge without its reverse: the crack's two lips, T-junctions) is
     split into loops and each loop is capped by ear clipping on the shortest diagonal (the cap zips the crack shut along
     its lips); the cap's own edges cancel the boundary, so the integer winding number of judge/sdist.py applies unchanged,
-    and the depth is the exact distance to the capped tessellation. part_contact.json lists every open part, the cap
-    (triangles, area) and its deviation from the original surface (cap_max_dev_mm: every cap sample's distance to the open
-    tessellation), so a cap that is not a crack is visible;
+    and the depth is the exact distance to the capped tessellation. part_contact.json lists every open part and its cap
+    (triangles, area, cap_max_dev_mm = the farthest cap point from the open tessellation: ~0 for a crack or T-junction,
+    about half the width of a real hole), so a cap that is more than a crack is visible. Measured 2026-10-16: on D5-02,
+    D6-03 and D7-03 the capped integer winding number agrees with libigl's generalized winding number of the open
+    tessellation on every one of ~35000 random points deeper than 0.15 mm (box + near-surface);
   - a part whose chain still does not close (a non-orientable tessellation) falls back to libigl's exact generalized
     winding number |w| > 0.5 on the open tessellation (igl.winding_number, no grid, no reject mask) - listed as such.
 judge/test_part_contact.py: a pin fully embedded in a cracked slab must be caught (exact depth) both ways.
