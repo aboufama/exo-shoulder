@@ -1,12 +1,13 @@
 # Independent verification: user_osn_k4216 (generation-2 winner, full CAD in the user's style + stills)
 
-Verifier, 2026-10-16 05:23-06:10 UTC. The claim under test: the builder's report (commits c9b8f01, e1a3c87) and the
+Verifier, 2026-10-16 05:23-06:15 UTC. The claim under test: the builder's report (commits c9b8f01, e1a3c87) and the
 stills in renders/2026-10-16_userstyle_osn_k4216. Everything below was re-measured from the files in this directory
 with my own scripts (kept in the session scratchpad, not in the repo). Nothing in the design was changed.
 
-**Verdict: NOT REFUTED.** All five checks hold on the points that matter. The kinematics are the verified model's to the
-digit, the guides and hub stacks are real catalogue parts at their real size, the builder has no loft or fitted surface,
-part validity reproduces exactly, and the re-run judges match the scorecard. The stills show this CAD on a matte,
+**Verdict: NOT REFUTED.** Checks 1, 2, 3 and 5 hold on the points that matter. The kinematics are the verified
+model's to the digit, the guides and hub stacks are real catalogue parts at their real size, and the builder has no
+loft or fitted surface. Check 4 is only partly verified: part validity and R3 reproduce exactly, but R1, R2, R4 and R6
+did not finish on the overloaded box. The stills show this CAD on a matte,
 faceless mannequin. The claim also understates or leaves out some things; they are listed under "Corrections" below.
 None of them changes a requirement's status.
 
@@ -93,21 +94,28 @@ searched for loft, makeLoft, ThruSections, interpPlate, MakeFilling, PointsToBSp
 
 ## 4. Part validity and the cheapest judges, re-run
 
-I re-ran these locally (niced, on a copy at designs/vfy_user_osn_k4216 that is excluded from git):
+I re-ran these locally, niced, on a scratch copy of this directory that has since been deleted. The box was at load
+31-39 on 4 cores from other agents the whole time, so only the cheap rows finished inside the time box:
 
 | row | scorecard | re-run | within 2 points |
 |---|---|---|---|
-| R7 part_validity | all_ok True, 29 parts | **all_ok True, 29 parts, identical json** | yes |
-| R1 (2-14 mm) | 49.0 % | RERUN_R1 | RERUN_R1_OK |
-| R1-aim (2-10 mm) | 22.3 % | RERUN_R1A | RERUN_R1A_OK |
-| R3 follow | 90.9 % | RERUN_R3 | RERUN_R3_OK |
-| R4 overhead | 24.6 % | RERUN_R4 | RERUN_R4_OK |
-| R6 | 0.85 mm (base tab IN link 1, Wave 71+) | RERUN_R6 | RERUN_R6_OK |
-| R2 (ours, attributable) | 7.55 mm | RERUN_R2 | RERUN_R2_OK |
+| R7 part_validity | all_ok True, 29 parts | **all_ok True, 29 parts; the part_validity.json is identical** | yes |
+| R3 follow | 90.9 % | **90.9 %** (410 of 451 frames at step 3, from clips.json) | yes |
+| R4 overhead | 24.6 % | follow factor **0.4262** reproduced; in-band part not re-run | partly |
+| R1 / R1-aim / R4 in-band | 49.0 / 22.3 % | **not finished** (score_design stopped after 29 min at ~27 % of one core) | - |
+| R6 | 0.85 mm | **not finished** (part_contact --step 3 stopped after 24 min at ~7 % CPU per worker; a targeted base-tab vs link-1 winding-number re-measure did not finish either) | - |
+| R2 (ours, attributable) | 7.55 mm | **not re-run** (queued behind R1) | - |
 
-R6_NOTE
+I also checked that the judges' own output files in judge/ and score*.json agree with the scorecard. This is
+consistency, not a re-measurement:
+- score_14mm.json: in_band 0.4903, so R1 = 49.0.
+- score.json: 0.2234, so R1-aim = 22.3.
+- Raise overhead clip score: 0.2457, so R4 = 24.6.
+- part_contact.json: 0.85 mm, base tab in link 1, step 1, 1337 frames.
+- body_contact.json: attributable ours 7.55 mm (upper cuff), user's 24.0 mm (FOREARM CUFF).
 
-**Check 4: CHECK4_VERDICT.**
+**Check 4 is only partly verified.** R7 and R3 are reproduced exactly. R1, R2, R4 and R6 still need an independent
+re-run on the farm: `tools/cloud_run.py judge user_osn_k4216 fast`. Nothing I measured contradicts them.
 
 ## 5. The stills (all 12 looked at)
 
