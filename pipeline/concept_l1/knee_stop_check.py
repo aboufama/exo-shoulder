@@ -7,7 +7,10 @@ negative = overlap) of every pair. Knee angle = the model's (pin a -> J3 vs pin 
 knee about pin a is the rotation the builder uses (build_minarc_l1.knee_stop_geom), checked there against the model's own
 member transforms to 0.0 deg.
 
-    CB_FOLD_MARGIN=5.5 python3 pipeline/concept_l1/knee_stop_check.py <l1 design id> --params-file F --a1max A
+    CB_FOLD_MARGIN=5.5 python3 pipeline/concept_l1/knee_stop_check.py <design id> --params-file F --a1max A
+(an L1: its keep-out parts by name; a full CAD (user_style_minarc): D8-05 knee link incl. its tooth vs D8-04 member 3 - there
+the closest pair far from the stop is the knee link over the E boss / strap top, the 0.5 mm thrust-washer gap, so the stop
+shows as the clearance falling below 0.5 near the stop, to 0 at it and negative past it)
 """
 import argparse, json, math, os, sys
 import numpy as np, trimesh
@@ -30,9 +33,11 @@ def main():
         g, n = node.split("|")[:2]
         if g not in ("l3", "l4"): continue
         T_, gn = src.graph[node]; m = src.geometry[gn].copy(); m.apply_transform(T_)
-        for key in ("knee link", "knee stop tooth", "knee stop web", "E strap", "E boss"):
-            if n.startswith(key): parts[key] = m
+        for key, alias in (("knee link", "knee link"), ("knee stop tooth", "knee stop tooth"), ("knee stop web", "knee stop web"), ("E strap", "E strap"),
+                           ("E boss", "E boss"), ("D8-05", "knee link (D8-05, incl. the stop tooth)"), ("D8-04", "E member 3 (D8-04: E strap + E boss + pins)")):
+            if n.startswith(key): parts[alias] = m                              # L1 keep-outs, or the full CAD's machined parts
     knee = {k: v for k, v in parts.items() if k.startswith("knee")}; m3 = {k: v for k, v in parts.items() if k.startswith("E ")}
+    full = any("D8-05" in k for k in knee)
     dense = lambda m: np.r_[np.asarray(m.vertices), trimesh.sample.sample_surface_even(m, 6000, seed=4)[0]]
     angs = sorted(set([95.0, 110.0, 125.0, 135.0, 140.0, 143.6, 145.0, 147.0, 148.5, 149.0, 149.4, ks, 149.6, 150.0, 151.0, 153.0]))
     rows = []
@@ -46,10 +51,12 @@ def main():
         rows.append(out)
         print(json.dumps(out), flush=True)
     below = [r for r in rows if r["knee_angle"] < ks - 1e-6]
-    res = dict(design=a.design, knee_stop_deg=ks, rows=rows,
+    kk = next(iter(r_ for r_ in rows[0] if r_ != "knee_angle"))
+    pair_t = kk if full else "knee stop tooth vs E strap"; pair_k = kk if full else "knee link vs E strap"
+    res = dict(design=a.design, knee_stop_deg=ks, rows=rows, pair=pair_t,
                min_clear_below_stop=min(min(v for k, v in r.items() if k != "knee_angle") for r in below),
-               tooth_vs_strap_at_stop=next(r["knee stop tooth vs E strap"] for r in rows if abs(r["knee_angle"] - ks) < 1e-6),
-               knee_link_vs_E_strap_min_over_range=min(r["knee link vs E strap"] for r in below),
+               tooth_vs_strap_at_stop=next(r[pair_t] for r in rows if abs(r["knee_angle"] - ks) < 1e-6),
+               knee_link_vs_E_strap_min_over_range=min(r[pair_k] for r in below),
                note="signed clearance (mm, negative = overlap) of the built knee-side parts vs the built member-3 parts, the knee turned about pin a")
     json.dump(res, open(os.path.join(dd, "knee_stop_check.json"), "w"), indent=1)
     print({k: v for k, v in res.items() if k != "rows"})
