@@ -43,5 +43,51 @@
   "source": "docs/concepts/models/spine-parked-j2-3r.py:1-25 (chain, slim hubs, 0 passive)",
   "confidence": "counted"
  },
- "v_contact": 0.0154
+ "v_contact": 0.0154,
+ "t_polished": "2026-10-16T05:50:57Z",
+ "polish_status": "final polish on Bench(110,360) done (fast-grid CMA search, exact claim); gate passed; plain gain does NOT hold out of sample; awaiting independent verification",
+ "polish_params": {
+  "az": 105.4303,
+  "el": 66.9934,
+  "a1": 38.2422,
+  "a2": 73.7679,
+  "wd": 88.0898,
+  "wa": -13.2634,
+  "q": 0.9838,
+  "end_extra": 0.2905,
+  "rad1": 10.0,
+  "rad2": 7.5,
+  "rad3": 7.5,
+  "sigma": -1
+ },
+ "polish_big_exact": 32.79,
+ "polish_big_fast": 32.28,
+ "polish_near_exact": 36.85,
+ "polish_min_metal_mm": 0.12,
+ "polish_small_fast": 30.71,
+ "polish_baseline_big_exact": 34.29,
+ "polish_baseline_near_exact": 40.15,
+ "polish_oos_1432_exact": {
+  "k7008": 36.59,
+  "pB97": 36.82,
+  "r5_111": 37.16
+ },
+ "polish_oos_1432_near": {
+  "k7008": 44.24,
+  "pB97": 42.6,
+  "r5_111": 41.02
+ },
+ "polish_buildable_alt": {
+  "label": "r5_111",
+  "big_exact": 34.09,
+  "near_exact": 36.42,
+  "min_metal_mm": 0.52,
+  "rad": [
+   8.5,
+   7.5,
+   7.5
+  ]
+ },
+ "polish_n_configs": 43450,
+ "polish_note": "FINAL POLISH (docs/concepts/spine-parked-j2-3r.md 'Final polish'): 24 + 10 CMA-ES streams on Bench(110,360) (fast grid cache built on the farm, tools/bench_cache_farm.py; objective = verifier near-touch gap), 43450 configs, gate passed (0.044 / 0.044 score points, top-5 within 0.29). Exact (verifier frozen): pB97 32.79 (score 88.08) vs k7008 34.29; near-touch 36.85 vs 40.15. Out of sample on all 1432 workspace poses (exact): pB97 36.82 vs k7008 36.59 - the reach gain is the fold boundary tuned to the 360 sampled poses, so keep k7008's seats for the score; r5_111 (O17 J1) is the skin-safest (min metal 0.52 mm, near-touch -3.2 out of sample). Weird starts (hub at the other end of its axis, sigma +1, J1 el 30) dead."
 }

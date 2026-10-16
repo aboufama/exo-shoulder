@@ -434,3 +434,166 @@ What was checked:
    refuted**.
    - Against the board: 8.3 better than the 2-slide leader's verified 42.59 (VModel harness), and 0.45 ahead of the
      pin knee's 33.84 exact. Both are within the cross-harness noise, so the result is level with the pin knee.
+
+## Final polish (Bench(110,360)) - 2026-10-16 04:00-05:45 UTC
+
+**Measured: polished pB97 = 32.79 on Bench(110,360) EXACT** (score 88.08), against k7008's 34.29 on the same bench and
+checks (score 87.53). That is a gain of 1.50 gap points. The near-touch gap goes from 40.15 to 36.85 and the top-face
+contacts from 2 to 0. **But on the full workspace envelope the plain gain is gone.** Out of sample (all 1432 workspace
+poses, 1072 of them never seen by the search, exact) pB97 scores 36.82 against k7008's 36.59. Only the near-touch gain
+partly survives (44.24 -> 42.60). It does not cross 27.5. The polish is converged.
+
+Polish objective: `docs/concepts/verify/spine-parked-j2-3r-polish.py` (the verifier's `frozen` task, run on the fast grid).
+Exact re-measures: `docs/concepts/verify/spine-parked-j2-3r-polish.results.json`. Every configuration is logged in the
+sweep log, stages `polish-big-wave1` / `polish-big-wave2`. The polisher measured these numbers itself, so the
+independent verifier still has to confirm them.
+
+### The instrument: a fast grid cache for Bench(110,360), built on the farm
+
+* `tools/bench_cache_farm.py` makes the same grids as `concept_bench.py --build` (same `_grid_pose`, same key
+  14f156cb6fc8). It splits the 470 poses into 10 farm jobs of 2 processes each (3 min wall, about $0.05), assembles them
+  on the volume (`/runpod-volume/exo-farm/shared/bench/14f156cb6fc8`, 1.06 GB), and each worker copies the cache once
+  to its local disk (`bench_cache_farm.py use 110 360`).
+* **Point validation** (`concept_bench.py --validate 110 360`, 28136 points within 20 mm of the skin): mean error
+  0.10 mm, p99 1.08 mm, max 2.2 mm; the sign agrees on 0.99996 of the points beyond 1 mm.
+* **Configuration validation** (5 shapes with known exact numbers):
+
+| shape | plain gap: fast / exact | near-touch gap: fast / exact |
+|---|---|---|
+| k7008 | 34.28 / 34.29 | 38.97 / 40.15 |
+| CMA-B | 34.79 / 34.79 | 37.64 / 37.64 |
+| k2445 | 35.88 / 35.86 | 38.74 / 39.29 |
+| k7008 with an O17 J2 hub | 35.20 / 35.18 | 39.89 / 40.46 |
+| D | 34.88 / 34.83 | 37.23 / 36.59 |
+
+  - The plain gap agrees to 0.05. The near-touch gap agrees only to +-1.2, because it is a 1-mm threshold and the grid
+    error at p99 is 1.08 mm.
+* **Cost per evaluation: about 1 s** on one farm vCPU (a fit on Bench(60,160) plus a wear on 470 poses). The exact path
+  takes 185-560 s.
+
+### Parameters freed (bounds = hard rules and real parts; no check loosened)
+
+| parameter | what it is | range searched |
+|---|---|---|
+| az, el | J1 axis in the scapula frame | unbounded (CMA); starts down to el 30 and at the antipode |
+| wd, wa | J3 axis in the band humerus frame | unbounded (CMA); a start at the antipode |
+| a1, a2 | link arcs | free; starts at 180 - a (the other hub end) |
+| sigma | closure branch | +-1, one per stream |
+| q | the underside quantile | 0.80-1.00 (the model's clamp) |
+| rad1, rad2, rad3 | hub size, snapped to real parts | {7.5 O15, 8.5 O17, 10 O20}: the same MR117-2RS pair and 12.25 mm stack. rad1 is newly freed (the J1 hub may be slim too) |
+| end_extra | strap end held at hub level beyond the K6 exempt zone | 0-8 mm (never shorter) |
+
+**Fixed, because they are rules:**
+* the fold (jam) margin, 10 deg;
+* the 12 x 3 Ti link section;
+* the K7 14 x 6 neck to BOTTOM's bar (the user's part: the model exposes no neck or arm-end offset);
+* the 1 mm radial K6 clearance;
+* the crown, wall and top-face checks.
+
+**Objective:** the verifier's near-touch gap (metal on any face within 1 mm of the skin counts as contact) on
+Bench(110,360) fast, worn frozen from the Bench(60,160) fast fit. The plain gap is logged beside it. A dishonest report
+or a hub axis with F > 140 mm scores +100.
+
+### Search
+
+* **Wave 1** (45 min): 24 CMA-ES streams, popsize 16, 2 streams per farm job, 12 jobs. 33384 configurations.
+  - **10 polish starts** (sigma 0.3): k7008, CMA-B, D, k2445, and the top distinct sweep-log configurations k6364,
+    k1155, k6972, k2321, k32 and k245.
+  - **6 random restarts** (sigma 0.8) over az 85-120, el 55-75, a1 33-48, a2 65-85, wd 72-92, wa -25..-2, random hubs.
+  - **8 deliberately weird starts** (sigma 0.6), in the table below.
+* **Wave 2** (25 min): 10 streams from the top 8 distinct configurations of wave 1. Eight ran at sigma 0.15. Two ran
+  broad (sigma 0.5, popsize 24). 10066 configurations.
+* **Total: 43450 configurations on the verification bench, about $1.4 of farm time.**
+
+**Weird starts: all dead, with the measured reason** (best of each stream, plain big-bench gap):
+
+| start | best | why |
+|---|---|---|
+| J1 at the other end of its axis (az -75.6, el -67, a1 = 180 - a1), sigma -1 / +1 | 309 / 322, dishonest | the axis leaves through the axilla and chest: hub 1 has no accessible skin (F at the 400 mm search cap), links at 100+ mm |
+| J2 at the other end of its axis (a1, a2 -> 180 - a), sigma -1 / +1 | 142 / 210, dishonest | hub 2 at F 400 (anterior-inferior: the axis runs into the trunk), link 1 / link 2 never in band |
+| J3 at the other end of its axis (medial arm) | 276, dishonest | hub 3 against the chest wall, F 400 |
+| sigma +1 at the k7008 seats | 74.89 | hub 2 rises to F 140 (in-band 0.04) |
+| J1 nearer horizontal, el 30 | 69.46 | reach 0.85 but hub 1 F 126 and hub 2 F 118: in-band 0.26 (the fold-law trade again) |
+| J1 el 45 | 34.52 | the CMA walked back to el 66 (the main basin) |
+
+Each far-end evaluation took about 130 s (the levels march to the cap), so those streams ran 1 generation each. All 17
+of their configurations score > 140.
+
+### The convergence gate (Bench(110,360) fast, the whole history in wall order)
+
+| | best | gain over the 2nd half | gain over the last third | top-5 distinct spread |
+|---|---|---|---|---|
+| near-touch objective (43406 configurations scoring < 400) | 34.49 | 0.044 score points | 0.044 | 0.29 score points |
+| plain gap | 31.74 | 0.011 | 0.0 | - |
+
+* **The gate passes:** under 1 point over the second half, under 0.5 over the last third, top 5 within 3. It already
+  passed after wave 1 (0.105 / 0.0 / 0.24).
+* Every polish stream ended within 0.4 score points of its own best over its second half.
+
+### Exact re-measures (verifier harness `frozen`: fit Bench(60,160) fast, wear Bench(110,360) EXACT, 1 mm radial K6, crowns, top faces)
+
+| shape | fit Bench(60,160) fast | **plain gap** | reach | follow | in-band 14 | in-band 10 | contact | **near-touch** | min metal mm | overhead ws reached |
+|---|---|---|---|---|---|---|---|---|---|---|
+| k7008 (baseline, re-run: identical to the verification) | 28.49 | 34.29 | 0.594 | 0.955 | 0.878 | 0.524 | 0.015 | 40.15 | 0.01 | 5/28 |
+| **pB97** (best objective, wave 1) | 30.71 | **32.79** | 0.611 | 0.955 | 0.873 | 0.466 | 0.012 | **36.85** | 0.12 | 4/28 |
+| pB100 (best plain fast) | 32.01 | 32.83 | 0.611 | 0.955 | 0.873 | 0.467 | 0.012 | 36.89 | 0.11 | 4/28 |
+| r3_154 (random restart, O17 J1) | 35.56 | 33.13 | 0.622 | 0.955 | 0.876 | 0.472 | 0.030 | 37.71 | 0.01 | 6/28 |
+| pS_92 (O17 J1 + O17 J3) | 33.08 | 34.04 | 0.594 | 0.955 | 0.884 | 0.505 | 0.019 | 38.41 | 0.12 | 5/28 |
+| r5_111 (random restart, O17 J1) | 33.20 | 34.09 | 0.603 | 0.955 | 0.869 | 0.458 | 0.012 | **36.42** | **0.52** | 5/28 |
+| r6_135 (O15 at all three joints) | 33.45 | 34.48 | 0.592 | 0.955 | 0.885 | 0.510 | 0.022 | 38.27 | 0.24 | 5/28 |
+| q2_55 (best objective, wave 2) | Q2FIT | Q2PLAIN | | | | | | Q2NEAR | Q2MIN | |
+
+* **pB97** (O20 J1, O15 J2, O15 J3, sigma -1):
+  `{"az": 105.4303, "el": 66.9934, "a1": 38.2422, "a2": 73.7679, "wd": 88.0898, "wa": -13.2634, "q": 0.9838,
+  "end_extra": 0.2905, "rad1": 10, "rad2": 7.5, "rad3": 7.5, "sigma": -1}`.
+* Polished on Bench(60,160) fast it scores **30.71** (k7008 28.49), with near-touch 34.42. Optimising on the big bench
+  gives back 2.2 points of the small-bench fit: lesson (c), run backwards.
+* The fast search was optimistic about its own winner: fast near-touch 34.61 became 36.85 exact, and fast plain 32.28
+  became 32.79. CMA picks configurations where the grid error is in their favour. That is why the claim is the exact
+  number and never the fast one.
+
+### What moved, and why
+
+From k7008 to pB97:
+* J3 turned 6 deg further from the down-the-arm axis (wd 82.1 -> 88.1), so it is now almost square to the humerus.
+* a1 grew 0.6 deg (37.6 -> 38.2), so the closure window [|a1 - a2| + 10, a1 + a2 - 10] widens from [46.0, 101.2] to
+  [45.5, 102.0].
+* q rose 0.972 -> 0.984, so fewer fit poses are given up as contact.
+* end_extra fell 1.02 -> 0.29. J1 moved 1 deg in azimuth. The hubs stayed O20 / O15 / O15.
+
+Effect on the 360-pose bench:
+* 6 more workspace poses close (reach 0.594 -> 0.611).
+* Contact falls 0.015 -> 0.012, and the two link-2 top-face penetrations are gone.
+* In-band 10 falls 0.524 -> 0.466, because hub 3 sits 3 mm lower (F 69) but link 2 sits higher where it passes the
+  neck.
+
+### Red team: the number that is optimistic - the polish fits the verification bench (out-of-sample check)
+
+Optimising ON Bench(110,360) makes those 360 workspace poses in-sample. They are a 1-in-4 sample of a 1432-pose grid
+(plane x elevation x axial rotation in 15-deg steps). So the frozen shapes were also worn on **all 1432 workspace
+poses** (+ the same 110 clip frames, exact, `SPM_BIG=110,1432`):
+
+| shape | Bench(110,360) exact (in-sample for the polish) | **Bench(110,1432) exact (1072 poses unseen)** | reach | near-touch | min metal | overhead ws reached |
+|---|---|---|---|---|---|---|
+| k7008 | 34.29 | **36.59** | 0.581 | 44.24 | 0.01 | 19/108 |
+| pB97 | 32.79 | **36.82** | 0.578 | 42.60 | 0.12 | 16/108 |
+| r5_111 | 34.09 | 37.16 | 0.575 | **41.02** | 0.20 | 21/108 |
+
+* **The plain-gap gain does not generalise.** pB97 is 0.23 worse than k7008 over the whole envelope. The 6 extra
+  closing poses were the CMA placing the fold boundary between the sampled poses, which is lesson (c) again, one level
+  up. The fold is the limiter at every pose sample, and no seat in this basin moves it by more than noise.
+* **The buildability gain partly survives.** Out of sample the near-touch gap improves 1.6 (pB97) and 3.2 (r5_111)
+  over k7008, against 3.3 / 3.7 in sample. r5_111 is the most skin-safe shape on the board for this design: min metal
+  0.52 mm on the 360 poses and 0.20 mm over all 1432. Its cost is 0.57 plain points out of sample.
+* **For the CAD:** the rule asks for a verified gain >= 1 gap point. pB97 shows 1.50 on the verification bench and
+  -0.23 over the full envelope, so it is not a real gain in reach. Keep k7008's seats for the score. If the CAD should
+  favour skin clearance, r5_111 is the candidate: O17 J1, near-touch -3.2 out of sample, min metal >= 0.5 mm on the
+  verification bench. That is the verifier's call.
+
+### Next
+
+* **The polish has converged.** The fold is the limiter, and seat tuning within the basin is worth < 1 point on the
+  full envelope. Score 90 (27.5) needs the J2 fold lever: round 4.
+* **Search on the full envelope.** Future polishes should search on Bench(110,1432) or rotate pose samples between
+  generations, and claim on a held-back sample. `bench_cache_farm.py jobs 110 1432` builds that cache: 1542 poses,
+  about 3.5 GB, ~8 min on 12 jobs.
