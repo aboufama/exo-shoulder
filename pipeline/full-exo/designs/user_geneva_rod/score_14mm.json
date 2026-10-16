@@ -1,15 +1,15 @@
 {
- "overall": 0.8029960206223343,
+ "overall": 0.8029496296273458,
  "follow": 1.0,
- "in_band": 0.8029960206223343,
+ "in_band": 0.8029496296273458,
  "clips": [
   {
    "name": "Raise overhead",
    "frames": 181,
-   "score": 0.7383647413311465,
+   "score": 0.7383385138478272,
    "follow": 1.0,
-   "in_band_when_following": 0.7383647413311465,
-   "median_gap": 11.591984092671488,
+   "in_band_when_following": 0.7383385138478272,
+   "median_gap": 11.59665914591353,
    "min_gap": 0.24211155447610272
   },
   {
@@ -24,9 +24,9 @@
   {
    "name": "Comb hair",
    "frames": 202,
-   "score": 0.8713069298510158,
+   "score": 0.8711052031810108,
    "follow": 1.0,
-   "in_band_when_following": 0.8713069298510158,
+   "in_band_when_following": 0.8711052031810108,
    "median_gap": 9.814821961531386,
    "min_gap": 2.6469508940262787
   },
@@ -60,10 +60,10 @@
   {
    "name": "Wave",
    "frames": 172,
-   "score": 0.6362367954773259,
+   "score": 0.6361406978117568,
    "follow": 1.0,
-   "in_band_when_following": 0.6362367954773259,
-   "median_gap": 13.194325454224513,
+   "in_band_when_following": 0.6361406978117568,
+   "median_gap": 13.194541024053613,
    "min_gap": 2.4689159666012297
   },
   {

@@ -3,59 +3,12 @@
  "tol_mm": 0.15,
  "frames_checked": 1337,
  "pairs": 7138,
- "seconds": 272,
- "setup_seconds": 17,
+ "seconds": 359,
+ "setup_seconds": 31,
  "jobs": 4,
- "cpu_seconds": 1042,
- "cpu_s_per_frame": 0.767,
- "violations": {
-  "dk|D9-02 drive bell crank (Ti-6Al-4V): tube O10 on the post, follower arm 9.00 mm, crank arm 9.00 mm + crank-pin boss tilted 29.0 deg (square to the rod)  IN  l1b|drive rocker post: O5 x 15.8 17-4PH H900, pressed 3.7 mm through link 1b's J2 pad + boss, axis ": {
-   "max_depth": 2.5,
-   "frames": 1337,
-   "worst": [
-    "Raise overhead",
-    0
-   ],
-   "worst_point": "face",
-   "per_frame": {
-    "Raise overhead|0": 2.5,
-    "Raise overhead|1": 2.5,
-    "Raise overhead|2": 2.5,
-    "Raise overhead|3": 2.5,
-    "Raise overhead|4": 2.5,
-    "Raise overhead|5": 2.5,
-    "Raise overhead|6": 2.5,
-    "Raise overhead|7": 2.5,
-    "Raise overhead|8": 2.5,
-    "Raise overhead|9": 2.5,
-    "Raise overhead|10": 2.5,
-    "Raise overhead|11": 2.5
-   }
-  },
-  "l1b|drive rocker post: O5 x 15.8 17-4PH H900, pressed 3.7 mm through link 1b's J2 pad + boss, axis   IN  dk|D9-02 drive bell crank (Ti-6Al-4V): tube O10 on the post, follower arm 9.00 mm, crank arm 9.00 mm + crank-pin boss tilted 29.0 deg (square to the rod)": {
-   "max_depth": 0.99,
-   "frames": 1337,
-   "worst": [
-    "Raise overhead",
-    0
-   ],
-   "worst_point": "face",
-   "per_frame": {
-    "Raise overhead|0": 0.99,
-    "Raise overhead|1": 0.99,
-    "Raise overhead|2": 0.99,
-    "Raise overhead|3": 0.99,
-    "Raise overhead|4": 0.99,
-    "Raise overhead|5": 0.99,
-    "Raise overhead|6": 0.99,
-    "Raise overhead|7": 0.99,
-    "Raise overhead|8": 0.99,
-    "Raise overhead|9": 0.99,
-    "Raise overhead|10": 0.99,
-    "Raise overhead|11": 0.99
-   }
-  }
- },
+ "cpu_seconds": 1343,
+ "cpu_s_per_frame": 0.981,
+ "violations": {},
  "open_parts_not_tested_as_container": [],
  "open_parts": {
   "l1b|D8-02b link 1b: 8x3 bar on a line/arc chain, K upper pad + O20 ring + M18 spigot + bore (2 dowel holes), J2 pad (carries the rocker post bush) + integral O7 pin with the 115.2-deg q2 stop slot (machined from solid Ti-6Al-4V (2.5-D: 4 side-view sketches side by side of lines + tangent arcs through the model's strap stations, extruded 2 mm; 3+2-axis milling - a wire cannot cut strips of different profiles side by side), rounds R2 / R0.5 in the profile)": {
@@ -75,7 +28,7 @@
  "samples": {
   "h_mm": 1.0,
   "sharp_deg": 30.0,
-  "total": 1638968,
+  "total": 1639752,
   "per_part": {
    "H|M4x6 ISO 10642 hexagon socket countersunk screw (upper cuff -> BOTTOM), polished A2": 17154,
    "H|UPPER ARM CUFF (one sketch: flat land + inner/outer R arcs, both side arcs trimmed clear of the trunk, extruded; AlSi10Mg bead blasted)": 550272,
@@ -135,7 +88,7 @@
    "dk|drive follower roller MR63ZZ 3x6x2.5 (polished)": 2016,
    "dk|drive bell crank bearing 2 MR85ZZ 5x8x2.5 (wave-washer preloaded)": 2016,
    "dk|drive bell crank bearing 1 MR85ZZ 5x8x2.5": 2016,
-   "dk|D9-02 drive bell crank (Ti-6Al-4V): tube O10 on the post, follower arm 9.00 mm, crank arm 9.00 mm + crank-pin boss tilted 29.0 deg (square to the rod)": 17878,
+   "dk|D9-02 drive bell crank (Ti-6Al-4V): tube O10 on the post, follower arm 9.00 mm, crank arm 9.00 mm + crank-pin boss tilted 29.0 deg (square to the rod)": 18662,
    "l1b|drive rocker post: O5 x 15.8 17-4PH H900, pressed 3.7 mm through link 1b's J2 pad + boss, axis ": 7160,
    "l1b|drive rocker post bush: Ti-6Al-4V O9 x 3.5, in link 1b's J2 pad (bonded; the post is pressed through bush and pad)": 1605,
    "l2|D9-01 drive lobe ring: 17-4PH H900, wire-EDM, the exact RSSR profile r 10.74 -> 12.87 mm (8 3-point arcs), R3 concave into the O20.2 dwell, bore O18 on link 2's turned ring, keyed by an O1 dowel at the onset q2 -5.011 deg, F+6.15..F+8.75": 2850,
@@ -174,5 +127,5 @@
   "rule": "every vertex + sharp/boundary edges at <= h/2 + longest-edge bisection of every face to edges <= h (midpoints)"
  },
  "inside": "dense surface samples of A (vertices, sharp edges, faces), both ways; integer winding number on welded tessellations (judge/sdist.py grid + segment crossings), depth = exact distance to B's closest point (libigl AABB)",
- "max_depth": 2.5
+ "max_depth": 0.0
 }
