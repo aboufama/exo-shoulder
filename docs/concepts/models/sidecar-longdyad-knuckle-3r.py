@@ -80,6 +80,19 @@ class SCModel(FL.FLModel):
             return R7 @ Rb[i], R7 @ tb[i] + t7
         return super().T(m, i)
 
+    def fit(self):
+        super().fit(); self._truncate()
+
+    def _truncate(self):
+        """poses whose K opening is past the drive's own range (dK_lim) are not reachable: J2's stop B dowel sits there"""
+        g = getattr(self, "_scg", None)
+        if g is None or "dK_lim" not in g or not len(self.poses_fit): return
+        dk = np.abs(np.asarray(self.dK, float))[self.poses_fit]; bad = dk > g["dK_lim"] + 1e-9
+        self._n_trunc = int(bad.sum())
+        if not bad.any(): return
+        for i in self.poses_fit[bad]: self.why[i] = "fold"
+        keep = ~bad; self.poses_fit = self.poses_fit[keep]; self.drop = self.drop[keep]
+
     def _sc_pose(self):
         """per-pose transforms (link 1b frame) of the crank (9) and the rod (8) from the RSSR table phi(|dK|)"""
         g = self._scg; PV, dR, tip0, H0, uK, sp = g["PV"], g["dR"], g["tip0"], g["H0"], g["uK"], g["sp"]
@@ -162,7 +175,7 @@ class SCModel(FL.FLModel):
             trans[j] = 90.0 - max(math.degrees(math.acos(min(1, abs(float(rod @ vt))))), math.degrees(math.acos(min(1, abs(float(rod @ vh))))))
         ratio = np.gradient(phig, kgrid) if len(kgrid) > 2 else np.ones(len(kgrid))
         self._scg = dict(PV=PV, dR=dR, tip0=tip0, H0=H0, uK=uK, sp=sp, kgrid=kgrid, phig=phig); self._sc = None
-        dKp = np.abs(np.asarray(self.dK, float))
+        dKp = np.abs(np.asarray(self.dK, float)); dKsave = self.dK
         # metal: crank (boss underside disc + arm underside + the tip's socket ring), rod (underside), ball-link sockets
         self.rigid["crank"] = (9, np.concatenate([boss, arm]))
         self.rigid["horn"] = (1, horn)
@@ -184,6 +197,27 @@ class SCModel(FL.FLModel):
         self.strap["CRK"] = (9, np.concatenate([cyl, arm + 1.5 * dR]))
         self.strap["HORN"] = (1, horn + 1.5 * uK)
         self._crown_ok = True
+        # THE DRIVE'S OWN RANGE (red team 18:45: a crank phase that buys transmission swings the rod into hub 2 at dK > 42,
+        # which the fit bench never reached - 8 frozen / 24 held-out poses lost as ROD-hub2): on the RSSR table, the first
+        # |dK| where the transmission < TRANS_MIN or the rod comes < 1 mm to hub 2's housing / link 1b, or the crank's
+        # long arm < 1 mm to hub 2, ends the usable range; stop B (the q2 dowel) sits there, so every pose past it is lost
+        # on EVERY bench (self._truncate after each fit)
+        mem2, cen2, ax2 = self.cyl["hub2"]; r2 = self.cyl_r["hub2"]; L1bS = self.strap["L1b"][1]
+        def farX(X, pad): w = X - cen2; return X[np.linalg.norm(w - (w @ ax2)[:, None] * ax2, axis=1) > r2 + pad]
+        L1b_far = farX(L1bS, 4.0); treeL1b = cKDTree(L1b_far) if len(L1b_far) else None
+        lim, why_lim = float(kgrid[-1]), "law"
+        for j, kk in enumerate(kgrid):
+            self.dK = np.array([sp * kk]); self._sc = None; self._sc_pose()
+            Rr, trr = self._sc["X"][8]; Rc, tcc = self._sc["X"][9]
+            XR = self.strap["ROD"][1] @ Rr[0].T + trr[0]; XC = self.strap["CRK"][1] @ Rc[0].T + tcc[0]
+            dh2 = float(self.sd_cyl(XR, cen2, ax2, r=r2).min())
+            dl1b = float(treeL1b.query(farX(XR, 4.0))[0].min()) - S.T_LINK / 2 if treeL1b is not None and len(farX(XR, 4.0)) else 99.0
+            XCf = farX(XC, 6.5); dc2 = float(self.sd_cyl(XCf, cen2, ax2, r=r2).min()) - S.T_LINK / 2 if len(XCf) else 99.0
+            bad = {"transmission": trans[j] < TRANS_MIN, "ROD-hub2": dh2 < 1.0, "ROD-L1b": dl1b < 1.0, "CRK-hub2": dc2 < 1.0}
+            if any(bad.values()):
+                lim = float(kgrid[max(j - 1, 0)]); why_lim = [k_ for k_, v in bad.items() if v][0]; break
+        self.dK = dKsave; self._sc = None
+        self._scg.update(dK_lim=lim, why_lim=why_lim)
         self._viz_rod = dict(rocker=PV, rockerAx=dR, rodA=tip0, rodB=H0, armA=PV, armB=tip0 - (S.T_LINK + ZB) * dR)
         taken = (np.asarray(self.kin_ok, bool)) & (dKp > 1e-9)
         kmax_t = float(dKp[taken].max()) if taken.any() else 0.0
@@ -192,7 +226,8 @@ class SCModel(FL.FLModel):
                              La=round(La, 1), r_h=round(RH, 1), i_rock=round(float(P["i_rock"]), 2), rssr_closed=bool(okc),
                              trans_min_taken=round(float(trans[:jt].min()), 1), ratio_range=[round(float(ratio[:jt].min()), 3), round(float(ratio[:jt].max()), 3)],
                              ratio_small_angle=round(RH / La, 3), phi_max_taken=round(math.degrees(float(np.interp(kmax_t, kgrid, phig))), 1),
-                             crest_exact=round(float(P["r_lobe"]) + float(P["s_arm"]) * abs(float(np.interp(kmax_t, kgrid, phig))), 2))
+                             crest_exact=round(float(P["r_lobe"]) + float(P["s_arm"]) * abs(float(np.interp(kmax_t, kgrid, phig))), 2),
+                             dK_lim=round(math.degrees(lim), 1), why_lim=why_lim)
         self._rod_info = self._sc_info
 
     def collide(self, i):
@@ -230,14 +265,14 @@ def _report(B, params):
     a1lim = float(p["bk1"]) + float(p["bk2"]) - 5.0
     r, M = G._report(B, p)
     L_ = M.D.law(); info = getattr(M, "_sc_info", None) or {}
-    if info and (not info.get("rssr_closed", True) or info.get("trans_min_taken", 90) < TRANS_MIN or info.get("crest_exact", 0) > S.HUB_R + 1.5 + 0.25):
+    if info and (not info.get("rssr_closed", True) or info.get("crest_exact", 0) > S.HUB_R + 1.5 + 0.25):
         r["honest"] = False; r["sidecar_fail"] = True               # the RSSR does not close / toggles / the real crest leaves the skirt
     if "drive" in r:
         r["drive"].update(law_mode=p.get("law_mode_in", p.get("law_mode")), i_rock=round(float(p["i_rock"]), 3), r_h=p["r_h"],
                           lobe_r_max=round(L_.get("lobe_r_max", 0.0), 2) if L_.get("lobe_r_max") else None,
                           m3e_law_min=round(L_["m3e_min"], 2) if L_.get("m3e_min") is not None else None,
                           dKB=round(L_.get("dKB", 0.0), 1) if L_.get("dKB") else None, a1max=round(p["a1max"], 2), a1max_lim=round(a1lim, 2),
-                          sidecar=info)
+                          sidecar=info, truncated=getattr(M, "_n_trunc", 0))
     return r, M
 
 
@@ -270,6 +305,7 @@ def frozen(P, nc=110, nw=360):
                 if hasattr(M1, a): setattr(self, a, getattr(M1, a))
             self._sc = None
             self.contact = list(M1.contact); self.poses_fit = np.nonzero(self.kin_ok)[0]; self.drop = np.zeros(len(self.poses_fit), bool)
+            self._truncate()
     if nc == -1:
         sp_ = importlib.util.spec_from_file_location("pk_polish_v_sidecar", os.path.join(REPO, "docs", "concepts", "verify", "skin-normal-3r-pin-knee-polish.py"))
         PVm = importlib.util.module_from_spec(sp_); sp_.loader.exec_module(PVm); B = PVm.held_bench()
@@ -303,6 +339,7 @@ def frozen_flood(P, nc=110, nw=360):
                 if hasattr(M1, a): setattr(self, a, getattr(M1, a))
             self._sc = None
             self.contact = list(M1.contact); self.poses_fit = np.nonzero(self.kin_ok)[0]; self.drop = np.zeros(len(self.poses_fit), bool)
+            self._truncate()
     os.environ["CB_EXACT"] = "1"
     B = CB.Bench(n_clip=nc, n_ws=nw); M = Frozen(B, P2); r = M.run()
     out["frozen"] = {k: r[k] for k in ("gap", "reach", "follow", "inband14", "inband10", "contact")}
