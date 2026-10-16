@@ -1,0 +1,349 @@
+{
+ "fit": {
+  "k": 4216,
+  "bench": "60,160",
+  "mode": "fast",
+  "report": {
+   "gap": 32.61,
+   "reach": 0.7063,
+   "follow": 0.9667,
+   "inband14": 0.7792,
+   "inband10": 0.3892,
+   "contact": 0.0116,
+   "why": {
+    "fold": 47,
+    "slide": 0,
+    "flip": 0,
+    "closure": 0,
+    "skin": 2,
+    "parts": 0,
+    "contact": 0
+   },
+   "f": [
+    51.3,
+    61.2,
+    75.7
+   ],
+   "min_clear_taken": 1.18,
+   "parts_ib14": {
+    "hub1": [
+     1.0,
+     9.5,
+     80
+    ],
+    "hub2": [
+     0.996,
+     10.5,
+     80
+    ],
+    "hub3": [
+     0.495,
+     14.0,
+     80
+    ],
+    "neck": [
+     0.615,
+     12.4,
+     32
+    ],
+    "rail": [
+     0.892,
+     7.9,
+     100
+    ],
+    "carA": [
+     0.672,
+     12.3,
+     170
+    ],
+    "strip": [
+     0.698,
+     12.0,
+     24
+    ],
+    "bridge": [
+     0.0,
+     17.7,
+     12
+    ],
+    "L1": [
+     0.925,
+     7.3,
+     36
+    ],
+    "L2": [
+     0.822,
+     10.6,
+     145
+    ]
+   }
+  },
+  "S": [
+   6.3,
+   7.5,
+   0.5
+  ],
+  "m": [
+   -5.642,
+   1.575,
+   0.0
+  ]
+ },
+ "stack": {
+  "base": [
+   0,
+   1.5
+  ],
+  "along_block": [
+   1.5,
+   4.5
+  ],
+  "along_rail": [
+   2.9,
+   5.5
+  ],
+  "adapter": [
+   5.5,
+   6.5
+  ],
+  "across_rail": [
+   6.5,
+   9.1
+  ],
+  "across_block": [
+   7.5,
+   10.5
+  ],
+  "total": 10.5,
+  "model_total": 13.5,
+  "rails_mm": {
+   "along": 26.6,
+   "across": 29.0
+  },
+  "bridge": [
+   10.5,
+   16.5
+  ]
+ },
+ "mount": {
+  "side": "distal",
+  "along": [
+   6.0,
+   37.0
+  ],
+  "across": [
+   -5.0,
+   19.6
+  ],
+  "height": [
+   77.8,
+   79.3
+  ],
+  "bottom_verts_near": 512
+ },
+ "kin_u2_check_deg": 0.0001,
+ "check": [
+  {
+   "bench_pose": 0,
+   "pose": [
+    30.0,
+    3.0,
+    -30.0
+   ],
+   "model_samples_max_mm": 0.0001,
+   "per_part": {
+    "hub1": [
+     0.0,
+     0.0
+    ],
+    "hub2": [
+     0.0,
+     0.0
+    ],
+    "hub3": [
+     0.0,
+     0.0
+    ],
+    "neck": [
+     0.0001,
+     0.0001
+    ],
+    "L1": [
+     0.0,
+     0.0
+    ],
+    "L2": [
+     0.0,
+     0.0
+    ]
+   },
+   "frame_dev_mm": 0.000102,
+   "res_deg": 0.0,
+   "slides": [
+    -0.05,
+    -0.19,
+    0.0
+   ]
+  },
+  {
+   "bench_pose": 97,
+   "pose": [
+    0.0,
+    45.0,
+    -30.0
+   ],
+   "model_samples_max_mm": 0.0,
+   "per_part": {
+    "hub1": [
+     0.0,
+     0.0
+    ],
+    "hub2": [
+     0.0,
+     0.0
+    ],
+    "hub3": [
+     0.0,
+     0.0
+    ],
+    "neck": [
+     0.0,
+     0.0
+    ],
+    "L1": [
+     0.0,
+     0.0
+    ],
+    "L2": [
+     0.0,
+     0.0
+    ]
+   },
+   "frame_dev_mm": 5.2e-05,
+   "res_deg": 0.0001,
+   "slides": [
+    -2.9,
+    -4.23,
+    0.0
+   ]
+  },
+  {
+   "bench_pose": 140,
+   "pose": [
+    45.0,
+    165.0,
+    -90.0
+   ],
+   "model_samples_max_mm": 0.0,
+   "per_part": {
+    "hub1": [
+     0.0,
+     0.0
+    ],
+    "hub2": [
+     0.0,
+     0.0
+    ],
+    "hub3": [
+     0.0,
+     0.0
+    ],
+    "neck": [
+     0.0,
+     0.0
+    ],
+    "L1": [
+     0.0,
+     0.0
+    ],
+    "L2": [
+     0.0,
+     0.0
+    ]
+   },
+   "frame_dev_mm": 6e-05,
+   "res_deg": 0.0002,
+   "slides": [
+    -10.92,
+    -4.12,
+    0.0
+   ]
+  }
+ ],
+ "clips": {
+  "Raise overhead": {
+   "frames": 181,
+   "held": 107,
+   "follow": 0.409,
+   "reasons": {
+    "fold": 36,
+    "flip": 71
+   },
+   "min_skin_mm": 1.42,
+   "min_adj_mm": 9.54
+  },
+  "Drink from a cup": {
+   "frames": 178,
+   "held": 0,
+   "follow": 1.0,
+   "reasons": {},
+   "min_skin_mm": 4.18,
+   "min_adj_mm": 18.38
+  },
+  "Comb hair": {
+   "frames": 202,
+   "held": 0,
+   "follow": 1.0,
+   "reasons": {},
+   "min_skin_mm": 1.76,
+   "min_adj_mm": 12.02
+  },
+  "Reach a high shelf": {
+   "frames": 157,
+   "held": 0,
+   "follow": 1.0,
+   "reasons": {},
+   "min_skin_mm": 3.05,
+   "min_adj_mm": 11.76
+  },
+  "Wash opposite shoulder": {
+   "frames": 193,
+   "held": 0,
+   "follow": 1.0,
+   "reasons": {},
+   "min_skin_mm": 4.4,
+   "min_adj_mm": 18.29
+  },
+  "Reach back pocket": {
+   "frames": 145,
+   "held": 0,
+   "follow": 1.0,
+   "reasons": {},
+   "min_skin_mm": 1.75,
+   "min_adj_mm": 9.97
+  },
+  "Wave": {
+   "frames": 172,
+   "held": 14,
+   "follow": 0.919,
+   "reasons": {
+    "fold": 14
+   },
+   "min_skin_mm": 1.48,
+   "min_adj_mm": 13.75
+  },
+  "Walking arm swing": {
+   "frames": 109,
+   "held": 0,
+   "follow": 1.0,
+   "reasons": {},
+   "min_skin_mm": 4.09,
+   "min_adj_mm": 18.46
+  }
+ },
+ "workspace": {
+  "poses": 1432,
+  "closes": 0.6376,
+  "feasible_kin_parts": 0.6306
+ }
+}

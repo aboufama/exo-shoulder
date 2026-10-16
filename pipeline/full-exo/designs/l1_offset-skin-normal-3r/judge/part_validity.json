@@ -1,0 +1,216 @@
+{
+ "parts": [
+  {
+   "file": "l3|member-3 bridge keep-out (8 wide, stepped: neck end at the neck top, over carriage B at the model's carriage-B top)",
+   "valid": true,
+   "solids": 1,
+   "faces": 20,
+   "bad_faces": 0,
+   "watertight": true,
+   "volume_cm3": 0.686,
+   "bbox_mm": [
+    9.4,
+    21.5,
+    9.3
+   ],
+   "level": "L1 mesh"
+  },
+  {
+   "file": "l3|carriage B = across guide block (THK RSR3M / HIWIN MGN03C: W 8.0 x L 12.0, body 3.0 mm)",
+   "valid": true,
+   "solids": 1,
+   "faces": 28,
+   "bad_faces": 0,
+   "watertight": true,
+   "volume_cm3": 0.215,
+   "bbox_mm": [
+    12.5,
+    8.2,
+    6.0
+   ],
+   "level": "L1 mesh"
+  },
+  {
+   "file": "l4|across guide rail (RSR3M rail 3.0 x 2.6 x 29.0 mm, crosswise on carriage A)",
+   "valid": true,
+   "solids": 1,
+   "faces": 12,
+   "bad_faces": 0,
+   "watertight": true,
+   "volume_cm3": 0.226,
+   "bbox_mm": [
+    29.0,
+    3.2,
+    8.5
+   ],
+   "level": "L1 mesh"
+  },
+  {
+   "file": "l4|carriage A adapter keep-out (plus plate 1.0 mm, arms 5.0 wide, under both rails)",
+   "valid": true,
+   "solids": 1,
+   "faces": 44,
+   "bad_faces": 0,
+   "watertight": true,
+   "volume_cm3": 0.253,
+   "bbox_mm": [
+    28.7,
+    26.6,
+    7.1
+   ],
+   "level": "L1 mesh"
+  },
+  {
+   "file": "l4|along guide rail (RSR3M rail 3.0 x 2.6 x 26.6 mm, rides with carriage A)",
+   "valid": true,
+   "solids": 1,
+   "faces": 12,
+   "bad_faces": 0,
+   "watertight": true,
+   "volume_cm3": 0.207,
+   "bbox_mm": [
+    3.9,
+    26.7,
+    5.5
+   ],
+   "level": "L1 mesh"
+  },
+  {
+   "file": "l3|member-3 neck keep-out (8 x 3 mm, ramp <= 60 deg from the J3 plate to the bridge)",
+   "valid": true,
+   "solids": 1,
+   "faces": 488,
+   "bad_faces": 0,
+   "watertight": true,
+   "volume_cm3": 0.452,
+   "bbox_mm": [
+    11.3,
+    20.4,
+    19.0
+   ],
+   "level": "L1 mesh"
+  },
+  {
+   "file": "l2|link 2 strap keep-out (8 x 3 mm Ti, fitted underside)",
+   "valid": true,
+   "solids": 1,
+   "faces": 932,
+   "bad_faces": 0,
+   "watertight": true,
+   "volume_cm3": 1.759,
+   "bbox_mm": [
+    27.0,
+    60.7,
+    57.9
+   ],
+   "level": "L1 mesh"
+  },
+  {
+   "file": "l1|link 1 strap keep-out (8 x 3 mm Ti, fitted underside)",
+   "valid": true,
+   "solids": 1,
+   "faces": 260,
+   "bad_faces": 0,
+   "watertight": true,
+   "volume_cm3": 0.499,
+   "bbox_mm": [
+    25.5,
+    13.6,
+    11.0
+   ],
+   "level": "L1 mesh"
+  },
+  {
+   "file": "l3|J3 lower plate keep-out (O20 x 3, member 3)",
+   "valid": true,
+   "solids": 1,
+   "faces": 256,
+   "bad_faces": 0,
+   "watertight": true,
+   "volume_cm3": 0.941,
+   "bbox_mm": [
+    20.2,
+    20.2,
+    7.2
+   ],
+   "level": "L1 mesh"
+  },
+  {
+   "file": "l2|J3 upper boss + cap keep-out (O20, F+3.15..F+12.25, link 2)",
+   "valid": true,
+   "solids": 1,
+   "faces": 256,
+   "bad_faces": 0,
+   "watertight": true,
+   "volume_cm3": 2.854,
+   "bbox_mm": [
+    21.4,
+    20.7,
+    13.2
+   ],
+   "level": "L1 mesh"
+  },
+  {
+   "file": "l2|J2 upper boss + cap keep-out (O20, F+3.15..F+12.25, link 2)",
+   "valid": true,
+   "solids": 1,
+   "faces": 256,
+   "bad_faces": 0,
+   "watertight": true,
+   "volume_cm3": 2.854,
+   "bbox_mm": [
+    21.4,
+    19.9,
+    21.6
+   ],
+   "level": "L1 mesh"
+  },
+  {
+   "file": "l1|J2 lower plate keep-out (O20 x 3, link 1)",
+   "valid": true,
+   "solids": 1,
+   "faces": 256,
+   "bad_faces": 0,
+   "watertight": true,
+   "volume_cm3": 0.941,
+   "bbox_mm": [
+    17.7,
+    15.2,
+    20.2
+   ],
+   "level": "L1 mesh"
+  },
+  {
+   "file": "l1|J1 lower plate keep-out (O20 x 3, link 1)",
+   "valid": true,
+   "solids": 1,
+   "faces": 256,
+   "bad_faces": 0,
+   "watertight": true,
+   "volume_cm3": 0.941,
+   "bbox_mm": [
+    20.1,
+    11.1,
+    19.4
+   ],
+   "level": "L1 mesh"
+  },
+  {
+   "file": "base|J1 upper boss + cap keep-out (O20, F+3.15..F+12.25; base = J1's upper member)",
+   "valid": true,
+   "solids": 1,
+   "faces": 256,
+   "bad_faces": 0,
+   "watertight": true,
+   "volume_cm3": 2.854,
+   "bbox_mm": [
+    20.4,
+    16.6,
+    22.0
+   ],
+   "level": "L1 mesh"
+  }
+ ],
+ "level": "L1",
+ "all_ok": true
+}
