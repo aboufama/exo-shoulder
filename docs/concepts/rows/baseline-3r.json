@@ -23,5 +23,23 @@
  "n_configs": 6,
  "verdict": "the bar to beat",
  "note": "profile percentile p95; bench fast, {'clip': 60, 'ws': 160}; real judged CAD of this design: R1 35.0 % (strap links), R3 98.2 %",
- "doc": "tools/concept_baseline.py"
+ "doc": "tools/concept_baseline.py",
+ "mechanism": {
+  "active_dof": 3,
+  "passive_trans": 0,
+  "crossed_rails": false,
+  "passive_rot": 0,
+  "moving_bodies": 3,
+  "joints": 3,
+  "closed_loops": 0,
+  "sliding_pairs": 0,
+  "rolling_pairs": 3,
+  "sensed_passive": 0,
+  "springs_or_flexures": 0,
+  "custom_parts": 7,
+  "catalogue_parts": 6,
+  "notes": "the zero point: plain spherical 3R. bodies: link 1, link 2, arm-end (member 3: hub-3 plate + K7 neck rigid on BOTTOM); joints: J1, J2, J3 O20 hubs (MR117-2RS pair each). Bench has no GH translation: no cuff slide modelled; on a body the user's cuff slides under BOTTOM (outside the DOF count) or the liner take GH slip - if counted, +2 passive_trans, crossed. custom: base adapter, 2 straps, neck, 3 hub shafts (est.); catalogue: 3 x MR117 pair (est., fasteners excluded).",
+  "source": "tools/concept_baseline.py:1-20 (docstring), 101-124 (parts link1/link2/neck, hub1-3)",
+  "confidence": "counted"
+ }
 }

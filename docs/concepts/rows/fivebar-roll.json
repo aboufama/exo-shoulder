@@ -38,5 +38,23 @@
   "B1",
   "B2"
  ],
- "audit_verdict": "death stands (auditor reproduced gap 89.13 on Bench(60,160), march, K2 dense, K6): even with the part-part stacking (over) and K6 both switched off - physically impossible - the best config only reaches 66.64; the honest stacking of 4 rigid arcs + 2 elbow pins over the cap (pins 99/129 mm, couplers 0 % in band) is the limiter, not a bug"
+ "audit_verdict": "death stands (auditor reproduced gap 89.13 on Bench(60,160), march, K2 dense, K6): even with the part-part stacking (over) and K6 both switched off - physically impossible - the best config only reaches 66.64; the honest stacking of 4 rigid arcs + 2 elbow pins over the cap (pins 99/129 mm, couplers 0 % in band) is the limiter, not a bug",
+ "mechanism": {
+  "active_dof": 3,
+  "passive_trans": 0,
+  "crossed_rails": false,
+  "passive_rot": 3,
+  "moving_bodies": 5,
+  "joints": 6,
+  "closed_loops": 1,
+  "sliding_pairs": 0,
+  "rolling_pairs": 6,
+  "sensed_passive": 0,
+  "springs_or_flexures": 0,
+  "custom_parts": 10,
+  "catalogue_parts": 10,
+  "notes": "spherical five-bar + active roll, best config coaxial (one double-row base hub). bodies: crank 1, crank 2, coupler 1, coupler 2, arm-end plate + neck. joints: A1, A2 (active, base), B1, B2 elbow pins (passive, MR126), C couplers at W (passive), D roll at W (active). 1 loop (the 5R). Passives B1, B2, C set by closure; A1, A2, D read the arm (two-cone FK), so none is sensed. custom: base hub housing, 2 cranks, 2 couplers, arm plate + neck, 4 shafts (est.); catalogue: 4 + 4 bearings in the two double-row hubs, 2 MR126 (est.).",
+  "source": "docs/concepts/models/fivebar-roll.py:1-20 (topology, Gruebler 6 bodies / 6 revolutes, hardware); rows/fivebar-roll.json note (k13 coax)",
+  "confidence": "counted"
+ }
 }

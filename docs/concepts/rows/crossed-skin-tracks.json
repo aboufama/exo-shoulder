@@ -63,5 +63,23 @@
   "buildable_variant": "none (dead on the bench)",
   "t": "2026-10-16",
   "source": "docs/research/manufacturability_summary.md; docs/research/passive_dof_hardware.md; docs/research/manufacturability_audit.md"
+ },
+ "mechanism": {
+  "active_dof": 3,
+  "passive_trans": 1,
+  "crossed_rails": false,
+  "passive_rot": 0,
+  "moving_bodies": 4,
+  "joints": 4,
+  "closed_loops": 0,
+  "sliding_pairs": 3,
+  "rolling_pairs": 1,
+  "sensed_passive": 0,
+  "springs_or_flexures": 0,
+  "custom_parts": 6,
+  "catalogue_parts": 7,
+  "notes": "no links: two skin-shaped tracks crossing at a swivel. bodies: carriage A, swivel rotor carrying the 2 slide rods, carriage B, arm track T_H + neck (arm-end). joints: J1 carriage A on the scapula halo strip (sliding, iglidur C-slider), J2 swivel (6700 bearing), passive radial slide (2 rods in bushings in carriage B, along a GH ray: changes no orientation, not sensed), J3 carriage B on T_H (sliding). Radial slide stands 10 + L mm (audit: not buildable at the modelled height). custom: T_S strip, carriage A, swivel housing, carriage B, T_H, neck (est.); catalogue: 6700, 2 iglidur liners, 2 rods, 2 bushings (est.).",
+  "source": "docs/concepts/models/crossed-skin-tracks.py:1-26, 61-67 (topology, hardware constants)",
+  "confidence": "counted"
  }
 }

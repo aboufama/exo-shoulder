@@ -69,5 +69,23 @@
  "audit": [],
  "hubless": [
   "J1"
- ]
+ ],
+ "mechanism": {
+  "active_dof": 3,
+  "passive_trans": 0,
+  "crossed_rails": false,
+  "passive_rot": 0,
+  "moving_bodies": 3,
+  "joints": 3,
+  "closed_loops": 0,
+  "sliding_pairs": 0,
+  "rolling_pairs": 3,
+  "sensed_passive": 0,
+  "springs_or_flexures": 0,
+  "custom_parts": 7,
+  "catalogue_parts": 5,
+  "notes": "counted at the best config (p1 37.5: open thin-section ring at J1 on the shoulder crown, O20 hubs at J2, J3). bodies: link 1 (rotor housing + bolted 14 x 3 strap), link 2, neck (arm-end). custom: stator housing, rotor housing, link-1 strap, link 2, neck, 2 hub shafts (est.); catalogue: 1 KA025/030XP0 + 2 x MR117 pair (est.).",
+  "source": "docs/concepts/models/crown-ring-3r.py:1-28 (chain, parts); rows/crown-ring-3r.json best_params",
+  "confidence": "counted"
+ }
 }

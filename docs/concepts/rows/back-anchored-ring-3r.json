@@ -63,5 +63,23 @@
  },
  "audit": [],
  "hubless": [],
- "audit_note": "Audit 2026-10-15T20:36:47Z: death stands. k18 reproduced exactly on Bench(60,160) (gap 116.31, honest). Conventions: the kit reproduces the baseline row exactly (KIT.md). 14 random configurations over a wider box (lat1 -25..50, lon1 -170..-55, a12/a23 60-110, d3 35-92, th3 -40..100, q .90-.97, margin 5/10): best 113.69 (not audit-honest), best honest 128.15. Control with the baseline's 8x3 straps instead of 14x5.5: honest 89.02 (q .92), 78.02 only with parts at the 400 mm cap (q .97) - still > 78.93. Reason: a back-anchored J1 forces link 1 over the whole posterior shoulder and into the body overhead; not a bug, convention or missed range."
+ "audit_note": "Audit 2026-10-15T20:36:47Z: death stands. k18 reproduced exactly on Bench(60,160) (gap 116.31, honest). Conventions: the kit reproduces the baseline row exactly (KIT.md). 14 random configurations over a wider box (lat1 -25..50, lon1 -170..-55, a12/a23 60-110, d3 35-92, th3 -40..100, q .90-.97, margin 5/10): best 113.69 (not audit-honest), best honest 128.15. Control with the baseline's 8x3 straps instead of 14x5.5: honest 89.02 (q .92), 78.02 only with parts at the 400 mm cap (q .97) - still > 78.93. Reason: a back-anchored J1 forces link 1 over the whole posterior shoulder and into the body overhead; not a bug, convention or missed range.",
+ "mechanism": {
+  "active_dof": 3,
+  "passive_trans": 0,
+  "crossed_rails": false,
+  "passive_rot": 0,
+  "moving_bodies": 3,
+  "joints": 3,
+  "closed_loops": 0,
+  "sliding_pairs": 0,
+  "rolling_pairs": 3,
+  "sensed_passive": 0,
+  "springs_or_flexures": 0,
+  "custom_parts": 8,
+  "catalogue_parts": 6,
+  "notes": "counted at the best config (k18: p1 = p3 = 0, i.e. O20 hubs at all three joints - a plain spherical 3R). bodies: link 1, link 2, J3 bracket to BOTTOM's bar (arm-end). The ring intent (KAA rings at J1, J3 + O20 at J2) has the same counts, catalogue 2 rings + 2 MR117. custom: base, 2 straps (14 x 5.5), J3 bracket, 3 hub shafts, 1 lug (est.); catalogue 3 x MR117 pair (est.).",
+  "source": "docs/concepts/models/back-anchored-ring-3r.py:1-25 (chain, parts), 54 (BEST p1 = p3 = 0)",
+  "confidence": "counted"
+ }
 }

@@ -211,5 +211,23 @@
  "frozen_pending": {
   "F": ".cache/fsph3r/big_cmaF.json (farm)",
   "G": ".cache/fsph3r/big_cmaG.json (farm)"
+ },
+ "mechanism": {
+  "active_dof": 3,
+  "passive_trans": 0,
+  "crossed_rails": false,
+  "passive_rot": 0,
+  "moving_bodies": 3,
+  "joints": 3,
+  "closed_loops": 0,
+  "sliding_pairs": 0,
+  "rolling_pairs": 3,
+  "sensed_passive": 0,
+  "springs_or_flexures": 0,
+  "custom_parts": 7,
+  "catalogue_parts": 6,
+  "notes": "plain spherical 3R on fold-frontier axes (template build). bodies: link 1, link 2, arm-end (member 3: hub-3 plate + K7 neck rigid on BOTTOM); joints: J1, J2, J3 O20 hubs (MR117-2RS pair each). Bench has no GH translation: no cuff slide modelled; on a body the user's cuff slides under BOTTOM (outside the DOF count) or the liner take GH slip - if counted, +2 passive_trans, crossed. The model claims 0 mm liner compliance. custom: base, 2 straps, arm-end plate + neck, 3 hub shafts (est.); catalogue 3 x MR117 pair.",
+  "source": "docs/concepts/models/fold-sph3r.py:1-12 (three pins, no passive translation, no cuff slide)",
+  "confidence": "counted"
  }
 }

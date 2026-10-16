@@ -50,5 +50,23 @@
  "honest": true,
  "model_file": "docs/concepts/models/annular-ring-3r.py",
  "v_note": "Verifier: refuted. The 57.81 is the J1 skirt diluting the sample-share in-band (a non-functional skin-contoured shell, 323 of 1548 samples, 98.5 % in band); widening the same skirt by 10 mm alone gives 53.85, so the gain is a metric artefact. Functional metal only (skirt excluded from in-band, poses unchanged): 73.95 on Bench(60,160) fast, 73.92 exact, 77.99 on Bench(110,360) exact with the geometry frozen from Bench(60,160). As measured with the skirt: 57.78 exact, 61.85 on the big bench. DOF, sampling, closure, continuity and the grid cache all hold.",
- "v_gap_with_skirt": 61.85
+ "v_gap_with_skirt": 61.85,
+ "mechanism": {
+  "active_dof": 3,
+  "passive_trans": 0,
+  "crossed_rails": false,
+  "passive_rot": 0,
+  "moving_bodies": 3,
+  "joints": 3,
+  "closed_loops": 0,
+  "sliding_pairs": 0,
+  "rolling_pairs": 3,
+  "sensed_passive": 0,
+  "springs_or_flexures": 0,
+  "custom_parts": 8,
+  "catalogue_parts": 5,
+  "notes": "counted at the best config (k52: r1 12.7 = KAA10XL0 open ring at J1 with the skin skirt, r2 = r3 = 0 = O20 hubs at J2, J3). bodies: link 1 (rotor housing + strap), link 2, neck (arm-end). The all-ring intent (3 x KAA) has the same counts, catalogue 3. custom: stator housing + skirt, race clamp, 2 straps, neck, 2 hub shafts, 1 rotor housing (est.); catalogue: 1 KAA10XL0 + 2 x MR117 pair (est.).",
+  "source": "docs/concepts/models/annular-ring-3r.py:1-33 (chain, parts); rows/annular-ring-3r.json best_params",
+  "confidence": "counted"
+ }
 }

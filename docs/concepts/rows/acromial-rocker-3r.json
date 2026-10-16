@@ -56,5 +56,23 @@
   "contact": 0.0116,
   "note": "plain pin-knee leader k10 in the same file"
  },
- "audit": "AUDIT 2026-10-16: death NOT refuted. k22 reproduced exactly (125.84) on Bench(60,160) fast. No modelling bug or convention error found (control rocker=0 = 26.34). 16 local perturbations of k22: best 122.28 (reach 0.19, follow 0.60); rod limits take 133-210 of 220 poses in every one. Upper bound: k22 with every rod limit removed (cap 180, transmission 5, ball 90, U 180) AND the rod-vs-U-base check dropped still scores 108.37 (reach 0.46, overhead reach 0.00), 82 gap behind the control in the same file. Gate over 64 rocker configs: gain 2nd half 1.29, last third 1.29, top-5 spread 3.22 -> formally not converged, so status stays screened, but the limit-free bound shows no tuning can reach the control. Measured reason: an arm-fixed rod stud circles the pivot axis, so q0 is azimuth-driven and the rod's dead point / cap / U bend kill 60-95 % of poses."
+ "audit": "AUDIT 2026-10-16: death NOT refuted. k22 reproduced exactly (125.84) on Bench(60,160) fast. No modelling bug or convention error found (control rocker=0 = 26.34). 16 local perturbations of k22: best 122.28 (reach 0.19, follow 0.60); rod limits take 133-210 of 220 poses in every one. Upper bound: k22 with every rod limit removed (cap 180, transmission 5, ball 90, U 180) AND the rod-vs-U-base check dropped still scores 108.37 (reach 0.46, overhead reach 0.00), 82 gap behind the control in the same file. Gate over 64 rocker configs: gain 2nd half 1.29, last third 1.29, top-5 spread 3.22 -> formally not converged, so status stays screened, but the limit-free bound shows no tuning can reach the control. Measured reason: an arm-fixed rod stud circles the pivot axis, so q0 is azimuth-driven and the rod's dead point / cap / U bend kill 60-95 % of poses.",
+ "mechanism": {
+  "active_dof": 3,
+  "passive_trans": 0,
+  "crossed_rails": false,
+  "passive_rot": 8,
+  "moving_bodies": 8,
+  "joints": 9,
+  "closed_loops": 1,
+  "sliding_pairs": 1,
+  "rolling_pairs": 8,
+  "sensed_passive": 3,
+  "springs_or_flexures": 0,
+  "custom_parts": 17,
+  "catalogue_parts": 16,
+  "notes": "pin-knee leader + passive rocker under J1 tied to the arm by an S-U rod. bodies: rocker, link 1, link 2, member 3 (hub-3 plate + E strap), knee link, tie rod, U cross, arm pad + bracket (arm-end). joints: J0 rocker pivot (MR63ZZ pair), J1-J3 O20 hubs, knee pins a, b (iglidur pin, stk 5), ball link (3 rot), U (2 pairs). passive_rot = rocker 1 + knee pins 2 + ball 3 + U 2 = 8 (the row's passive_dof 6 leaves out the knee's 2 pins). 1 loop = the tie rod. sensed: rocker angle q0 (J1 rides on it) + both knee pins (they add to the twist), unless the loop's forward kinematics is solved. custom / catalogue estimated (catalogue: 6 MR117, 2 MR63ZZ, 2 iglidur sleeves + 4 washers, ball link, miniature U-joint).",
+  "source": "docs/concepts/models/acromial-rocker-3r.py:1-24 (chain, tie, parts); docs/concepts/models/skin-normal-3r-pin-knee.py:4-7, 18-21 (knee pins)",
+  "confidence": "counted"
+ }
 }
