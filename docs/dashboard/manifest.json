@@ -4,10 +4,10 @@
   "title": "Concept bench morphologies",
   "description": "One row per morphology in the swarm's catalogue: status, the agent's claimed bench numbers, the verifier's re-measured numbers (v_), its best sweep configuration so far, and the 3R baseline once (is_baseline), and the complexity count (the simplicity number, never part of the gap or score): complexity = points, lower = simpler, 0 = three pins on bearing pairs and three links; complexity_items = where the points come from; passive_trans = passive translations (more than 2 = not buildable); mechanism_confidence = counted or estimated. Built from docs/concepts/catalogue.json, families.json, rows/*.json (complexity: tools/simplicity.py on each row's mechanism record, docs/SIMPLICITY.md) and sweeps/*.json.",
   "file": "data/morphs.json",
-  "sha256": "539c5c5f85991e3969f304eda3509fae95cbbd09befb9a24c7063cb83b64ef7a",
+  "sha256": "2e45bf9de4518f01168920bf8f7aafbb152c8d49e247c757b7db6ca5c95b7230",
   "rows": 116,
-  "bytes": 219515,
-  "updated": "2026-10-16T20:32:10Z"
+  "bytes": 223231,
+  "updated": "2026-10-16T20:41:40Z"
  },
  {
   "id": "sweeps",
@@ -24,10 +24,10 @@
   "title": "Built CAD judge results",
   "description": "One row per judged design and requirement: value, threshold and pass from the outside judges, timed by the judge output (score files: the earliest of their commit, their file time and the first commit whose docs report the design; scorecard-only values: the scorecard's commit). Built from tools/judged_history.py, judge/scorecard.json files and judge/requirements.json.",
   "file": "data/cad.json",
-  "sha256": "cccf5497fa929d70dd413eb7c72836a966dd6f169d10b7de7f1985052ec8de86",
-  "rows": 351,
-  "bytes": 110190,
-  "updated": "2026-10-16T19:08:28Z"
+  "sha256": "d7467a1914fae65f79d28ed3af4d87f9de00dbdce7b0c7a5e5b28a9ccecdd861",
+  "rows": 361,
+  "bytes": 113207,
+  "updated": "2026-10-16T20:41:40Z"
  },
  {
   "id": "gpu_evals",
@@ -54,20 +54,20 @@
   "title": "Requirement board",
   "description": "Latest status of R1-R17 (with R1-aim and R5-aim) for the best judged 3-DOF design (most passes on its scorecard, then R1), with the best value any 3-DOF design reached under the current judging rules. Built from judge/scorecard.json files and judge/requirements.json.",
   "file": "data/reqs.json",
-  "sha256": "7d30722ce3cebf48cf31415c903aac402f195f37076e9ad084f16c237c94a589",
+  "sha256": "0b8918df6c1a522387b93a5b0015df68d8b1a642ed7f808c8f80344adb6d81d1",
   "rows": 19,
-  "bytes": 8012,
-  "updated": "2026-10-16T18:03:05Z"
+  "bytes": 8020,
+  "updated": "2026-10-16T20:41:40Z"
  },
  {
   "id": "events",
   "title": "Event log",
   "description": "What happened and when: the swarm's own log (docs/concepts/events.jsonl), one milestone per judged design and every new built-CAD R1 record (from the judge outputs).",
   "file": "data/events.json",
-  "sha256": "91d029f836dac1a8cd436f2a125769e39bcf6c78fb5ccf6f90df715b5558dc70",
-  "rows": 550,
-  "bytes": 199951,
-  "updated": "2026-10-16T20:32:10Z"
+  "sha256": "baee9fe31549c248b0d6883d1b646483af0b289e2f8ca15832b191b59fae285e",
+  "rows": 552,
+  "bytes": 201601,
+  "updated": "2026-10-16T20:41:40Z"
  },
  {
   "id": "spend",
@@ -84,10 +84,10 @@
   "title": "Arm reach in 3-D",
   "description": "One row per built design and everyday arm pose of the R16 workspace judge: where the upper arm points and whether the built design reaches it, with the reason if not. Built by tools/coverage3d.py from judge/workspace.json files (newest 8 designs).",
   "file": "data/cov3d.json",
-  "sha256": "a8c11cc571e69502969ea0b845bb2ea4ce70a7a6691865a4b7269b90e9625365",
+  "sha256": "99b5713db39a636f4c4ce37d7f4965caa178d8600a7896df1f747b1e18a02e6f",
   "rows": 2388,
-  "bytes": 729243,
-  "updated": "2026-10-16T18:23:24Z"
+  "bytes": 714409,
+  "updated": "2026-10-16T20:41:40Z"
  },
  {
   "id": "motion",
@@ -104,9 +104,9 @@
   "title": "Data build info",
   "description": "When tools/dash_build.py last gathered the data, the repo commit, and any warnings it printed.",
   "file": "data/meta.json",
-  "sha256": "477e99c69cd9ab411734f7f4a25a1ce66cfd2cf3d5eb7809a7b404a66f59fbb2",
+  "sha256": "866ab0543c0ae35c3738b3d05a7c647361d7299cb7534c604c438ae73d07b140",
   "rows": 1,
   "bytes": 2089,
-  "updated": "2026-10-16T20:32:10Z"
+  "updated": "2026-10-16T20:41:40Z"
  }
 ]

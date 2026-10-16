@@ -294,7 +294,8 @@ def blank(mid):
                 v_reach=None, v_follow=None, v_inband14=None, v_inband10=None, v_contact=None, v_gap=None,
                 n_configs=0, sweep_gap=None, sweep_t=None, sweep_reach=None, sweep_follow=None, sweep_inband14=None,
                 sweep_contact=None, t_last=None, verdict="", note="", duplicate_of="", doc="", source="",
-                complexity=None, complexity_items="", passive_trans=None, mechanism_confidence="")
+                complexity=None, complexity_items="", passive_trans=None, mechanism_confidence="",
+                frozen_gap=None, v_config="")
 
 
 def merge(m, src):
@@ -315,7 +316,7 @@ COMPLEXITY = ("complexity", "complexity_items", "passive_trans", "mechanism_conf
 
 
 def morphs(S):
-    by, mech = {}, {}
+    by, mech, raw = {}, {}, {}                                         # raw: each row file as written (fields merge() drops)
     for e in as_list(load(os.path.join(CONCEPTS, "catalogue.json")), "morphologies", "items"):
         if isinstance(e, dict) and e.get("id"):
             mid = slug(e["id"]); by[mid] = merge(by.get(mid) or blank(mid), dict(e, id=mid))
@@ -332,6 +333,7 @@ def morphs(S):
         if not isinstance(r, dict): warn(f"{os.path.relpath(p, REPO)}: not a JSON object, skipped"); continue
         mid = slug(r.get("id") or os.path.splitext(os.path.basename(p))[0])
         if isinstance(r.get("mechanism"), dict): mech[mid] = r["mechanism"]
+        raw[mid] = r
         by[mid] = merge(by.get(mid) or blank(mid), {k: v for k, v in dict(r, id=mid).items() if k not in COMPLEXITY})
         if not norm_time(by[mid].get("t_screened")) and r.get("inband14") is not None: by[mid]["t_screened"] = file_time(p)
     per = {}
@@ -356,10 +358,28 @@ def morphs(S):
             m["status"] = st
             m["gap"] = gap(m["inband14"], m["follow"], m["reach"], m["contact"])
             if m["gap"] is None and num(m.get("gap")) is not None: m["gap"] = round(num(m["gap"]), 2)
+            # the VERIFIER'S number is the authority (alignment audit 2026-10-16, L1/R4): never recompute a verified gap from
+            # partial v_* fields - a missing v_contact used to fall back to the FAST bench's contact (0.0) and turned
+            # sidecar-longdyad's verified 18.91 into 17.84, ranking it above the true leader
+            row_v = num(m.get("v_gap"))
             if any(m["v_" + k] is not None for k in ("inband14", "follow", "reach")):
                 pick = lambda k: m["v_" + k] if m["v_" + k] is not None else m[k]
-                m["v_gap"] = gap(pick("inband14"), pick("follow"), pick("reach"), pick("contact"))
-            else: m["v_gap"] = None
+                rec = gap(pick("inband14"), pick("follow"), pick("reach"), pick("contact"))
+                if row_v is not None and rec is not None and abs(rec - row_v) > 0.05:
+                    warn(f"{mid}: v_gap {row_v} kept; recomputed from v_* fields {rec} (missing v_ fields fall back to fast numbers)")
+                m["v_gap"] = round(row_v, 2) if row_v is not None else rec
+            else: m["v_gap"] = round(row_v, 2) if row_v is not None else None
+            # a polished configuration CONFIRMED by an independent verifier replaces the row's verified number (final-polish rule)
+            rw = raw.get(mid, {})
+            if str(rw.get("polished_status") or "").upper().startswith("CONFIRMED") and num(rw.get("polished_gap")) is not None:
+                pb = ((rw.get("polished_bench") or {}).get("pick1") or {}) if isinstance(rw.get("polished_bench"), dict) else {}
+                m["v_gap"] = round(num(rw["polished_gap"]), 2)
+                for k in ("reach", "follow", "inband14", "inband10", "contact"):
+                    if pb.get(k) is not None: m["v_" + k] = share(pb[k])
+                m["v_config"] = str(rw.get("polished_id") or "polished").split(" ")[0]
+            # a self-measured FROZEN EXACT claim (not verified) - shown as such, never as a fast number
+            fz = rw.get("frozen_exact")
+            m["frozen_gap"] = num(rw.get("frozen_exact_gap")) if num(rw.get("frozen_exact_gap")) is not None else (num(fz.get("gap")) if isinstance(fz, dict) else None)
             m["n_configs"] = len(sw) or to_int(m.get("n_configs"), 0) or 0
             scored = [s for s in sw if s["gap"] is not None and not s["passed_over"]]
             if scored:

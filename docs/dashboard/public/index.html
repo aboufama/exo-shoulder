@@ -72,6 +72,7 @@ window.dash = (() => {
 .sx th { text-align: left; font-weight: var(--cds-font-weight-medium, 500); color: var(--color-fg-muted); font-size: 12px; padding: 6px 8px; border-bottom: 1px solid var(--color-border-line); }
 .sx td { padding: 8px; border-bottom: 1px solid var(--color-border-line); vertical-align: middle; }
 .sx td.num, .sx th.num { text-align: right; }
+.sx td.unv { color: var(--color-fg-muted); font-size: 12px; }
 .sx .meter { display: inline-block; width: 60px; height: 6px; border-radius: 3px; background: var(--color-border-line); vertical-align: middle; margin-right: 6px; overflow: hidden; }
 .sx .meter > i { display: block; height: 100%; background: var(--color-fg-muted); }
 .sx .meter > i.ok { background: var(--color-ok); }
@@ -182,7 +183,7 @@ window.dash = (() => {
 
   <section class="card" id="board-sec">
     <h2>Leaderboard</h2>
-    <p class="muted">Every design that has a measured number, best first. Motion: each design through the same arm loop, at one scale. "Checking" means an independent agent is re-measuring it. "Stopped early" means it was called dead while its search was still improving, so it is being re-opened. Names: R = a hinge (revolute joint), P = a slider; "3R" = three hinges in a row (3 degrees of freedom); "spherical" = all hinge axes meet at the centre of the shoulder joint; "offset" = they do not; "3-RRR" = three hinged legs side by side. Simplicity: points for every freedom, slider, sensor, loop and part beyond the simplest buildable chain (three hinges, three links = 0), lower = simpler; hover a number for where its points come from. It is not part of the score.</p>
+    <p class="muted">Every design that has a measured number. Ranked by the independently verified number (frozen shape, exact bench); a score marked "self-measured" is the design's own frozen claim, and one marked "fast search" is an unverified quick-bench number that typically drops 5-14 points when verified - those rank below every verified design. Motion: each design through the same arm loop, at one scale. "Checking" means an independent agent is re-measuring it. "Stopped early" means it was called dead while its search was still improving, so it is being re-opened. Names: R = a hinge (revolute joint), P = a slider; "3R" = three hinges in a row (3 degrees of freedom); "spherical" = all hinge axes meet at the centre of the shoulder joint; "offset" = they do not; "3-RRR" = three hinged legs side by side. Simplicity: points for every freedom, slider, sensor, loop and part beyond the simplest buildable chain (three hinges, three links = 0), lower = simpler; hover a number for where its points come from. It is not part of the score.</p>
     <div class="scroll"><table id="board" data-source="board" data-row-key="id">
       <thead><tr><th class="mo" data-source="motion" data-field="mech">Motion</th><th data-field="short">Design</th><th class="num" data-field="score">Score</th><th class="num cx" data-field="complexity">Simplicity<span class="cap">lower = simpler</span></th><th data-field="close" class="cl">Close to skin</th><th data-field="follows" class="hide-sm">Follows arm</th><th data-field="reaches" class="hide-sm">Reaches</th><th data-field="state">Status</th></tr></thead>
       <tbody></tbody>
@@ -190,8 +191,8 @@ window.dash = (() => {
   </section>
 
   <section class="card" id="progress">
-    <h2>Best score over time</h2>
-    <p class="muted">The best score any design has reached as the agents sweep (higher is better).</p>
+    <h2>Best quick-search score over time</h2>
+    <p class="muted">The best score any configuration reached in the agents' fast searches (higher is better). These are unverified: the frozen, independently checked number is typically 5-14 points lower, so this line is not the leaderboard.</p>
     <div class="chart" id="record" data-source="sweeps morphs" style="min-height:260px"></div>
   </section>
 
@@ -264,19 +265,22 @@ dash.calc('board', {
     const v = m.v_gap !== null && m.v_gap !== undefined, c = m.gap !== null && m.gap !== undefined, s = m.sweep_gap !== null && m.sweep_gap !== undefined;
     if (!v && !c && !s) return null;
     const p = v ? 'v_' : c ? '' : 'sweep_';
+    // score basis (alignment audit 2026-10-16): only a verifier's frozen exact number ranks as a result; a self-measured frozen
+    // claim is labelled; a fast search number is never shown as a score that competes with verified ones
+    const fz = !v && m.frozen_gap !== null && m.frozen_gap !== undefined, basis = v ? 'verified' : fz ? 'self' : 'fast';
     const state = m.is_baseline ? 'Baseline' : m.status === 'verified' ? 'Verified' : m.status === 'refuted' ? 'Refuted' : m.status === 'dead' ? (conv[m.id] === false ? 'Stopped early' : 'Dead end') : c ? 'Checking' : 'Sweeping';
     const short = m.is_baseline ? "Today's 3-hinge chain" : String(m.name || m.id).split(/[:(;]| with | - /)[0].trim().slice(0, 44);
-    const g = m[p + 'gap'];
-    return { id: m.id, short, score: Math.max(0, Math.round((1 - g / 275) * 1000) / 10), gap: g, close: m[p + 'inband14'], follows: m[p + 'follow'], reaches: m[p + 'reach'], contact: m[p + 'contact'], state, is_baseline: !!m.is_baseline,
+    const g = fz ? m.frozen_gap : m[p + 'gap'];
+    return { id: m.id, short: m.v_config ? `${short} (${m.v_config})` : short, basis, score: Math.max(0, Math.round((1 - g / 275) * 1000) / 10), gap: g, close: m[p + 'inband14'], follows: m[p + 'follow'], reaches: m[p + 'reach'], contact: m[p + 'contact'], state, is_baseline: !!m.is_baseline,
       complexity: m.complexity ?? null, complexity_items: m.complexity_items || '', passive_trans: m.passive_trans ?? null };
-  }).filter(Boolean).sort((a, b) => a.gap - b.gap);
+  }).filter(Boolean).sort((a, b) => (a.basis === 'fast') - (b.basis === 'fast') || a.gap - b.gap);
   }
 });
 dash.calc('leader', {
   inputs: ['board'], title: 'Best design so far',
-  description: 'The highest-scoring design that is not the baseline and not a dead end. Score = 100 x (1 - gap / 275), floored at 0. complexity = its simplicity number (lower = simpler; not part of the score).',
+  description: 'The highest-scoring design whose number an independent verifier confirmed (frozen exact bench). Score = 100 x (1 - gap / 275), floored at 0. complexity = its simplicity number (lower = simpler; not part of the score).',
   fn: (board) => {
-    const b = board.find((r) => !r.is_baseline && !['Dead end', 'Refuted'].includes(r.state)) || {};
+    const b = board.find((r) => !r.is_baseline && r.state === 'Verified' && r.basis === 'verified') || {};
     const sc = (g) => (g == null ? null : Math.max(0, Math.round((1 - g / 275) * 1000) / 10));
     return [{ id: b.id ?? null, short: b.short ?? null, score: sc(b.gap), state: b.state ?? null, complexity: b.complexity ?? null }];
   }
@@ -334,7 +338,7 @@ function drawScatter(all) {
 // corner (score 95+, fewest points). Scores under X0 sit on the left edge; 3 passive translations (not buildable) = x.
 function drawSimple(rows) {
   const box = document.getElementById('simp'); box.querySelectorAll('svg').forEach((n) => n.remove());
-  const pts = rows.filter((r) => !r.is_baseline && r.complexity != null && r.score != null), X0 = 50;
+  const pts = rows.filter((r) => !r.is_baseline && r.basis !== 'fast' && r.complexity != null && r.score != null), X0 = 50;
   const under = pts.filter((r) => r.score < X0).length, nb = pts.filter((r) => r.passive_trans > 2).length;
   document.getElementById('simp-note').textContent = [`${pts.length} of ${rows.length} designs counted so far.`,
     under ? `${under} scoring under ${X0} sit on the left edge.` : '', nb ? 'x = three passive translations: not buildable.' : ''].filter(Boolean).join(' ');
@@ -480,7 +484,7 @@ function drawBoard(rows, mo) {
     const td = (c, cls) => { const e = document.createElement('td'); if (cls) e.className = cls; if (c instanceof Node) e.appendChild(c); else e.textContent = c; tr.appendChild(e); return e; };
     const has = mo && mo.byId.has(r.id), cell = td('', 'mo');
     if (has) { const svg = moThumb(r.id, r.short, r); cell.appendChild(svg); thumbs.push(svg); }
-    td(r.short); td(g1(r.score), 'num');
+    td(r.short); td(r.basis === 'verified' || r.is_baseline ? g1(r.score) : `${g1(r.score)} ${r.basis === 'self' ? 'self-measured' : 'fast search'}`, 'num' + (r.basis === 'verified' ? '' : ' unv'));
     const cx = td('', 'num cx');
     if (r.complexity != null) {
       const bar = document.createElement('span'), i = document.createElement('i'); bar.className = 'cxbar'; i.style.width = Math.min(1, r.complexity / cxMax) * 100 + '%'; bar.appendChild(i);
