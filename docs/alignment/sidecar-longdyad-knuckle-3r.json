@@ -6,18 +6,17 @@
  "verdict": "watch",
  "reasons": [
   "near_touch: plain 18.91, <1 mm 20.0, <2 mm 34.03, <3 mm 155.98, band read 3-14 mm 19.22, 15.12 points live in the 1-2 mm shell (re-measured (this audit))",
-  "fold_margin: no min-th margin over taken poses on file (rule: each claim reports it)",
-  "reporting: verdict text still reads as a self-measured screen; dashboard v_gap 17.84 vs verifier 18.91 (-1.07; the dashboard flatters the design); dashboard sweep best 10.3 (score 96.25) sits 8.61 below the verified number"
+  "reporting: verdict text still reads as a self-measured screen; dashboard sweep best 10.3 (score 96.25) sits 8.61 below the verified number"
  ],
  "checks": [
   {
    "check": "held_out",
    "level": "ok",
-   "reason": "held out 22.67 vs bench 18.91 (+3.76; row held_out)",
+   "reason": "held out 22.67 vs bench 18.91 (+3.76; re-measured (this audit))",
    "held_gap": 22.67,
    "v_gap": 18.91,
    "drop": 3.76,
-   "source": "row held_out"
+   "source": "re-measured (this audit)"
   },
   {
    "check": "fast_frozen",
@@ -69,8 +68,10 @@
   },
   {
    "check": "fold_margin",
-   "level": "watch",
-   "reason": "no min-th margin over taken poses on file (rule: each claim reports it)"
+   "level": "ok",
+   "reason": "min fold margin on file 5.232 deg (final_polish.min_th_margin; 2 readings)",
+   "min_margin": 5.232,
+   "where": "final_polish.min_th_margin"
   },
   {
    "check": "idle",
@@ -203,12 +204,12 @@
   {
    "check": "reporting",
    "level": "watch",
-   "reason": "verdict text still reads as a self-measured screen; dashboard v_gap 17.84 vs verifier 18.91 (-1.07; the dashboard flatters the design); dashboard sweep best 10.3 (score 96.25) sits 8.61 below the verified number"
+   "reason": "verdict text still reads as a self-measured screen; dashboard sweep best 10.3 (score 96.25) sits 8.61 below the verified number"
   },
   {
    "check": "judge_change",
    "level": "ok",
-   "reason": "no bench / judge / metric file changed in the 3 commits that touched the row"
+   "reason": "no bench / judge / metric file changed in the 4 commits that touched the row"
   },
   {
    "check": "rules",
@@ -218,12 +219,12 @@
  ],
  "remeasured": {
   "bench": true,
-  "held": false
+  "held": true
  },
  "verifier_files": [
   "docs/concepts/verify/sidecar-longdyad-knuckle-3r_v_held_frozen.json",
   "docs/concepts/verify/sidecar-longdyad-knuckle-3r_v_bench_frozen.json"
  ],
- "git": "c932f10",
- "t": "2026-10-16T20:26:29Z"
+ "git": "5bc1adf",
+ "t": "2026-10-16T22:51:30Z"
 }

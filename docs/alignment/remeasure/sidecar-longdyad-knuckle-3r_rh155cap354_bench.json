@@ -1,0 +1,238 @@
+{
+ "id": "sidecar-longdyad-knuckle-3r",
+ "wear": "bench",
+ "tag": "rh155cap354",
+ "cap_deg": 35.4,
+ "params": {
+  "bk1": 28.9414,
+  "bk2": 39.236,
+  "a1max": 63.177400000000006,
+  "kK": 1.6232,
+  "r_h": 15.5,
+  "beta": -86.447,
+  "La": 16.5467,
+  "s_arm": 4.3872,
+  "hl": 3.15,
+  "zr": 0.0,
+  "r_lobe": 7.7447,
+  "smhi": 16.5464,
+  "smlo": 5.0,
+  "az1": 96.6954,
+  "el1": 67.5865,
+  "az2": 42.2031,
+  "el2": 44.4209,
+  "wd": 67.5003,
+  "wa": -7.3175,
+  "b3": 0.345,
+  "ang_min": 26.8823,
+  "lc": 25.6915,
+  "phib": -60.7036,
+  "gam": 0.0,
+  "law_mode": "lin"
+ },
+ "cap": {
+  "dK_lim_model_deg": 40.5,
+  "n_trunc_last": 3
+ },
+ "frozen": {
+  "gap": 19.76,
+  "reach": 0.7167,
+  "follow": 1.0,
+  "inband14": 0.8965,
+  "inband10": 0.5337,
+  "contact": 0.0108
+ },
+ "fit_fast": {
+  "gap": 11.56,
+  "reach": 0.7875,
+  "follow": 1.0,
+  "inband14": 0.8969,
+  "inband10": 0.5292,
+  "contact": 0.0
+ },
+ "why": {
+  "fold": 89,
+  "slide": 7,
+  "flip": 0,
+  "closure": 0,
+  "skin": 0,
+  "parts": 2,
+  "contact": 4
+ },
+ "audit": {
+  "near_touch_min_mm": 0.28,
+  "near_touch_low": [
+   {
+    "mm": 0.28,
+    "i": 290,
+    "kind": "ws",
+    "plane": 45.0,
+    "elev": 150.0,
+    "axial": -45.0
+   },
+   {
+    "mm": 0.38,
+    "i": 230,
+    "kind": "ws",
+    "plane": 15.0,
+    "elev": 90.0,
+    "axial": 30.0
+   },
+   {
+    "mm": 1.02,
+    "i": 8,
+    "kind": "clip",
+    "plane": 30.0,
+    "elev": 150.0,
+    "axial": -60.0
+   },
+   {
+    "mm": 1.02,
+    "i": 9,
+    "kind": "clip",
+    "plane": 30.0,
+    "elev": 150.0,
+    "axial": -60.0
+   },
+   {
+    "mm": 1.02,
+    "i": 10,
+    "kind": "clip",
+    "plane": 30.0,
+    "elev": 150.0,
+    "axial": -60.0
+   }
+  ],
+  "gap_near1": 20.85,
+  "near1_poses": 2,
+  "gap_near2": 34.39,
+  "near2_poses": 25,
+  "overhead140": {
+   "ws": 28,
+   "reach": 0.2857,
+   "clip": 10,
+   "follow": 1.0,
+   "inband14": 0.8661,
+   "inband10": 0.5662,
+   "why_not": {
+    "fold": 14,
+    "slide": 4,
+    "flip": 0,
+    "closure": 0,
+    "skin": 0,
+    "parts": 0,
+    "contact": 2
+   }
+  }
+ },
+ "sidecar": {
+  "boss_level": 61.1,
+  "lev_L1b": 57.9,
+  "arm_tip_level": 57.9,
+  "rod_len": 26.8,
+  "La": 16.5,
+  "r_h": 15.5,
+  "i_rock": 3.77,
+  "rssr_closed": true,
+  "trans_min_taken": 40.2,
+  "ratio_range": [
+   0.792,
+   0.922
+  ],
+  "ratio_small_angle": 0.937,
+  "phi_max_taken": 33.2,
+  "crest_exact": 10.29,
+  "dK_lim": 40.5,
+  "why_lim": "ROD-hub2"
+ },
+ "deep": {
+  "plain": 19.76,
+  "reach": 0.7167,
+  "follow": 1.0,
+  "inband14": 0.8965,
+  "contact": 0.0108,
+  "n_poses": 470,
+  "n_taken": 368,
+  "min_metal_mm": 0.278,
+  "gap_near1": 20.85,
+  "near1_poses": 2,
+  "gap_near2": 34.39,
+  "near2_poses": 25,
+  "gap_near3": 156.16,
+  "near3_poses": 176,
+  "clip_metal_hist": {
+   "0-1": 0.0,
+   "1-2": 0.0007,
+   "2-3": 0.0031,
+   "3-4": 0.0118,
+   "4-6": 0.0779,
+   "6-10": 0.441,
+   "10-14": 0.3627,
+   ">14": 0.1028
+  },
+  "gap_band3_14": 20.07,
+  "inband3_14": 0.8934,
+  "overhead_min_metal_p10": 1.02,
+  "coord_spans": {
+   "dK": [
+    -0.6094,
+    0.0
+   ],
+   "kstate": [
+    0.0,
+    1.0
+   ],
+   "a1e": [
+    36.3687,
+    51.4647
+   ],
+   "msub": [
+    10.7896,
+    99.0
+   ],
+   "kin_ok": [
+    1.0,
+    1.0
+   ],
+   "res_deg": [
+    0.0,
+    0.0151
+   ],
+   "clear": [
+    1.8192,
+    2.0524
+   ],
+   "K.phi": [
+    -0.2193,
+    0.2117
+   ],
+   "K.th": [
+    -0.2679,
+    0.1631
+   ],
+   "K.psi": [
+    -1.5623,
+    -0.5835
+   ],
+   "K.ang": [
+    88.6911,
+    146.1357
+   ],
+   "K.ok": [
+    1.0,
+    1.0
+   ],
+   "K.qa": [
+    -1.5936,
+    -0.591
+   ],
+   "K.qb": [
+    -0.5028,
+    0.476
+   ]
+  }
+ },
+ "mode": "exact",
+ "secs": 178.4,
+ "exact": true
+}
