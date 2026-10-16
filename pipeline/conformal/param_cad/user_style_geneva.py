@@ -412,17 +412,15 @@ def main():
         if n.startswith("D8-03"):
             s2 = s.cut(ring_cut); s2 = s2.clean() if s2.clean().isValid() else s2
             lk[i] = (g, n.replace("flies over", "upper ring turned to O18 over F+6.15..8.95 for the lobe ring, flies over"), s2)
-        if n.startswith("D8-02b"):
-            v0 = s.Volume(); s2 = US.glue(s, bc["boss"]).cut(disc(dv["axis"], dv["u2"], POST_R - 0.01, dv["f2"] + 0.2, dv["f2"] + 4.1))
-            s2 = s2.clean() if s2.clean().isValid() else s2
-            assert s2.Volume() > v0 and len(s2.Solids()) == 1, f"link 1b + rocker boss: volume {v0:.1f} -> {s2.Volume():.1f} mm3 (the boss does not seat in the bar)"
-            lk[i] = (g, n.replace("J2 pad", "the rocker post boss (O9, press hole O5), J2 pad"), s2)
+        if n.startswith("D8-02b"):                                                          # the rocker boss stays a separate bush (a glued boss hung OCC's
+            lk[i] = (g, n.replace("J2 pad", "J2 pad (carries the rocker post bush)"), s)        # tessellation of link 1b for 20+ min): same member, no boolean
     parts += lk
     lobe, rep["lobe"] = lobe_ring(dv)
     rp, rep["rod"] = rod_parts(dv); hp, rep["horn"] = horn_parts(dv, M); rep["bell crank"] = bc_info
     parts += [("l2", f"D9-01 drive lobe ring: 17-4PH H900, wire-EDM, the exact RSSR profile r {rep['lobe']['profile_r'][0]:.2f} -> {rep['lobe']['profile_r'][1]:.2f} mm "
                      f"({rep['lobe']['arcs']} 3-point arcs), R3 concave into the O20.2 dwell, bore O18 on link 2's turned ring, keyed by an O1 dowel at the onset q2 "
                      f"{lg['law']['q2hi_deg']:.3f} deg, F+{LOBE_Z[0]}..F+{LOBE_Z[1]}", lobe),
+              ("l1b", f"drive rocker post bush: Ti-6Al-4V O9 x {bc_info['boss'][1] - bc_info['boss'][0]:.1f}, in link 1b's J2 pad (bonded; the post is pressed through bush and pad)", bc["boss"]),
               ("l1b", f"drive rocker post: O5 x {bc_info['post'][1] - bc_info['post'][0]:.1f} 17-4PH H900, pressed 3.7 mm through link 1b's J2 pad + boss, axis || J2 "
                       f"({bc_info['rocker_axis_to_u2_mm']:.2f} mm off it)", bc["post"]),
               ("dk", f"D9-02 drive bell crank (Ti-6Al-4V): tube O10 on the post, follower arm {bc_info['follower_arm_mm']:.2f} mm, crank arm {bc_info['crank_arm_mm']:.2f} mm "
