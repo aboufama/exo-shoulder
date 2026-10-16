@@ -1,0 +1,37 @@
+{
+ "id": "k-rim-lobe-stub-knuckle-3r",
+ "by": "skeptic review 2026-10-16",
+ "review": "docs/alignment/review_2026-10-16.md",
+ "rulings": [
+  {
+   "key": "near_touch",
+   "refuted": true,
+   "evidence": "2 mm shell 26.89 as 'gamed': the 1-2 mm shell is a proposed tightening, not a rule (user ruling + CLAUDE.md: near-touch = metal < 1 mm; REQUIREMENTS R1: 2-14 mm is a share >= 90 %); a tightening is a proposal for the lead / user with its measured effect, so the reading stands as 'watch' evidence, not a gamed verdict (docs/alignment/review_2026-10-16.md). At 3 mm every design scores 150-165, so the 2 mm line sits on a cliff where one clip pose = 1.18 points. Note the ADOPTED 1 mm rule already costs it 8.72 points (44.79 -> 53.51), which the remaining reasons and the row's own near-touch report carry; the row is far from the lead (44.79)."
+  },
+  {
+   "key": "held_out",
+   "refuted": false,
+   "evidence": ""
+  },
+  {
+   "key": "fold_margin",
+   "refuted": false,
+   "evidence": ""
+  },
+  {
+   "key": "sampling",
+   "refuted": false,
+   "evidence": ""
+  },
+  {
+   "key": "complexity",
+   "refuted": false,
+   "evidence": ""
+  },
+  {
+   "key": "reporting",
+   "refuted": false,
+   "evidence": ""
+  }
+ ]
+}

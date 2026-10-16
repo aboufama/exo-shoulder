@@ -1,0 +1,32 @@
+{
+ "id": "sidecar-roller-flank-knuckle-3r",
+ "by": "skeptic review 2026-10-16",
+ "review": "docs/alignment/review_2026-10-16.md",
+ "rulings": [
+  {
+   "key": "near_touch",
+   "refuted": true,
+   "evidence": "near-touch 1 mm 21.17 vs plain 20.08 (1.09 points, the adopted rule); 2 mm 46.82 as 'gamed': the 1-2 mm shell is a proposed tightening, not a rule (user ruling + CLAUDE.md: near-touch = metal < 1 mm; REQUIREMENTS R1: 2-14 mm is a share >= 90 %); a tightening is a proposal for the lead / user with its measured effect, so the reading stands as 'watch' evidence, not a gamed verdict (docs/alignment/review_2026-10-16.md). At 3 mm every design scores 150-165, so the 2 mm line sits on a cliff where one clip pose = 1.18 points."
+  },
+  {
+   "key": "dominance",
+   "refuted": true,
+   "evidence": "vs frontload: plain +2.64, 1 mm +3.19, 2 mm -2.84 (about 2-3 poses on the cliff); the reason text 'the gain is metal moved into the 1-2 mm shell' is contradicted by the auditor's own probe (docs/alignment/live_audit_2026-10-16/probe_*.json): the sidecar gain over frontload is the rod drive's far metal (samples > 20 mm 8.3 % -> 2.8 %, workspace in-band 0.827 -> 0.870/0.874, frontload rod 0 % in band at a median 22 mm). More grazing poses comes with a real gain: a trade-off for the wearer ('watch'), not a fake improvement ('gamed'). The 2 mm comparison itself rests on the unadopted 2 mm threshold."
+  },
+  {
+   "key": "held_out",
+   "refuted": false,
+   "evidence": ""
+  },
+  {
+   "key": "continuity",
+   "refuted": false,
+   "evidence": ""
+  },
+  {
+   "key": "fold_margin",
+   "refuted": false,
+   "evidence": ""
+  }
+ ]
+}
