@@ -176,3 +176,84 @@ against the pin knee's 33.84 exact; then the adversarial verifier (docs/concepts
 pattern), a CMA polish of B0 (not converged) and a wider J1-site CMA (the converged B1 basin was reached from the idle
 seed only - seed it from B0 / B2 seats too). The red-team pose #63 (behind the back, 0.04 mm) is the first fix.
 
+
+## Verification (adversarial verifier, 2026-10-16 04:10 UTC)
+
+Harness: `docs/concepts/verify/skin-normal-3r-knuckle-cufflink.py`. Results:
+`docs/concepts/verify/skin-normal-3r-knuckle-cufflink.results.json`. Protocol: the k1187 shape is fit on Bench(60,160)
+fast and reproduces 24.47. It is then worn frozen (no refit, the design-step values c0, knuckle branch and cuff mid
+kept) on Bench(110,360), exact path (CB_EXACT=1), on the farm (1188 s, about $0.10).
+
+| | gap | score | reach | follow | ib14 | ib10 | contact |
+|---|---|---|---|---|---|---|---|
+| claim, Bench(60,160) fast | 24.47 | 91.10 | 0.694 | 0.967 | 0.868 | 0.510 | 0.006 |
+| model's checks, frozen Bench(110,360) exact | 31.89 | 88.40 | 0.617 | 0.964 | 0.871 | 0.517 | 0.006 |
+| **verifier's corrected checks, same run** | **31.89** | **88.40** | 0.617 | 0.964 | 0.871 | 0.517 | 0.006 |
+| metal < 1 mm counted as contact | 33.05 | 87.98 | | | | | |
+| champion 3R, same bench (kit checks + 1 mm radial, risley-turret verifier) | 75.94 | 72.39 | | | | | |
+| champion 3R through the OSN VModel code | 66.97 | 75.65 | | | | | |
+
+The verifier's checks, all re-measured:
+1. **DOF.** Grubler M = 6(7 - 1 - 7) + 6 + 3 = 3. There are 3 active O20 hubs, 3 passive pins (the knuckle parallel
+   to J1, and pins a and b parallel to J3) and 0 passive translations. Every passive coordinate is set by the rigid
+   closure (one assembly mode per closure). No gears, pulleys or cables.
+2. **Independent 3D closure.** Each pose taken is checked from the member transforms, not from the closed form the
+   model solves with. The checks are: the knuckle pin as carried by the crank vs by link 1, J2's line, J3's line,
+   pin a as carried by the rotor vs by the cuff link (the along-axis offset stays constant), pin b, and the rotor axis
+   vs the arm axis. Worst case: 0.000 mm and 0.016 deg, so 0 poses fail.
+3. **Parts the model only skin-checked.** The knuckle post, the pin a post, the pin b post (pad up to the cuff link
+   plus the head) and the E-arm riser are now solids in the part-part check. Each is checked against every
+   non-adjacent part at >= 1 mm (hubs as exact cylinders, plates and straps with their half thickness, the other
+   posts), and the pin a post against link 2 at 0.15 mm. Minimum: 6.46 mm (the pin a post vs the pad, overhead), so
+   0 poses fail.
+4. **Adjacent pairs the model never checked.** E arm vs cuff link (away from pin a) and cuff link vs arm pad (away from
+   pin b), each at >= 0.15 mm. Minimum: 0.18 mm (cuff link vs pad, which sit exactly one running gap apart), so
+   0 poses fail.
+5. **Spans over the poses taken.** Knuckle -5.6..+3.4 deg, rotor turn psi -10.7..+11.1 deg, cuff elbow
+   100.4..138.4 deg (more than 25 deg from straight and from folded).
+6. **Arm pad.** The pad sits 59 mm from GH in the cuff plane, at 79 mm along J3's axis. That puts it on the lateral
+   upper arm about 60 mm below GH, i.e. on the deltoid, not mid-humerus. This is stated, not scored.
+7. **Bench artefact.** None was found. The exact path agrees with the model's own frozen exact run (31.89, the
+   agent's local run, identical to the digit).
+
+Result: the corrected checks remove no pose, so the claim's FROZEN number stands. The FAST number does not: frozen
+exact gives 31.89 (score 88.40, up 7.4 from the fast number), which is below the score-90 target (gap <= 27.5). It is
+behind the pin knee's verified 30.35, and level with raglan-knee-3r's unverified frozen 31.52. It is far ahead of the
+champion (75.94 / 66.97). NOT REFUTED; status verified.
+
+Where the points go on the big bench (measured):
+- The J2 fold takes 136 of 470 poses.
+- Overhead (elevation >= 140): reach 0.25, in-band14 0.91 where taken.
+- Across the body: reach 0.29, in-band14 0.57.
+- Behind the back: reach 0.68.
+- Parts that drop out of band: hub 3 (0.74), link 1 (0.63), cuff link (0.81).
+- Near-touch: 0.19 mm at #317 (plane 60, elevation 150), 2 poses under 1 mm.
+
+### Red team: what the frozen number does not show
+
+- **Liner swing (R17).** The knuckle is set only through the cuff liner. Its authority is as low as 6.8 mm/rad over
+  the big bench (p1 8.0). The test swings the knuckle by +-g / authority per pose (the liner giving g mm radially),
+  moves link 1, hubs 2-3, the rotor and the crank, and leaves the arm side in place (Bench(60,160) fast, base 24.47):
+
+  | liner give | knuckle swing | chain shift | gap (+ / -) | contact poses |
+  |---|---|---|---|---|
+  | 1 mm | 8 deg | 3.0 mm | 23.66 / 27.25 | 1 / 1 |
+  | 2 mm | 16 deg | 6.0 mm | 27.28 / 34.00 | 5 / 3 |
+  | 3 mm | 24 deg | 8.9 mm | 47.83 / 37.46 | 19 / 3 |
+
+  The knuckle amplifies the liner's give about 3x at the chain. The "<= 3 mm radial to the liner" allowance therefore
+  costs 13-23 gap points here, where a design with no closure-set rotation pays none. Fix: an authority floor of at
+  least 15 mm/rad (a longer crank, or the J2 site), a preload spring on the knuckle, or a cuff zone with < 1 mm give.
+- **Readout (R5 active-DOF rule).** The knuckle is parallel to J1, and the cuff pins turn the rotor about J3, so the
+  arm's angles are hub reading + passive angle. From the 3 hub encoders alone (rigid closure), 1 mm of cuff
+  disturbance (liner give, or GH translation against the scapula) moves the implied J1 angle by 2.9 deg median and
+  8.0 deg max, and the implied arm twist by 1.4 deg. A spherical 3R with cuff SLIDES has none of this, because its
+  orientation readout does not depend on the slides. So in practice the 3 pins need encoders to track the arm. The
+  model already lists them as sensed_passive 3. Under the user's counting rule (REQUIREMENTS.md: joints that must be
+  powered or position-measured for the device to work count as active), that is an exposure to 6 active DOF. The
+  user should rule on it. It is not scored here, and the same question applies to the pin knee's 2 cuff pins.
+- **MVP2 torque path.** J1's torque reaches link 1 through a free knuckle, so it is reacted by a radial (skin-normal)
+  force at the cuff. That means lost motion equal to the liner swing above.
+
+Next: wear the B2 (J2-site) and B0 shapes frozen (the farm job kc-frozen-C). Search with an authority floor of 15 mm/rad
+and liner-swing robustness inside the objective (score the worst of the +-2 mm swings). Fix #317.

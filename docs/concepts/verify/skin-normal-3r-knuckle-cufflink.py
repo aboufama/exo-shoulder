@@ -136,8 +136,7 @@ def extra_checks(M, B):
     if len(ok):
         out["spans_deg"] = dict(knuckle=[round(float(np.degrees(K["qk"][ok]).min()), 1), round(float(np.degrees(K["qk"][ok]).max()), 1)],
                                 psi=[round(float(np.degrees(K["psi"][ok]).min()), 1), round(float(np.degrees(K["psi"][ok]).max()), 1)],
-                                elbow=[round(float(K["gam"][ok].min()), 1), round(float(K["gam"][ok].max()), 1)],
-                                J3_actuator=round(math.degrees(float(np.ptp(np.unwrap(M.q[ok, 2])))), 1))
+                                elbow=[round(float(K["gam"][ok].min()), 1), round(float(K["gam"][ok].max()), 1)])
         out["knuckle_auth_mm_per_rad"] = dict(p1=round(float(np.percentile(K["auth"][ok], 1)), 2), min=round(float(K["auth"][ok].min()), 2))
         out["liner_3mm_swing_deg_at_min_auth"] = round(math.degrees(3.0 / max(float(K["auth"][ok].min()), 1e-6)), 1)
     # arm pad on the arm: the humerus axis in the arm frame = the rest arm's GH -> elbow direction; pad centre position
