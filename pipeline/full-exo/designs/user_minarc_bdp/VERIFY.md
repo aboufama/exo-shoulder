@@ -142,9 +142,23 @@ to the committed file.
 `Envelope`. `param_build`'s loft (`strap_solid`, `main`'s neck) and its spline (`cap_shape`) are never called.
 `build_full_exo.py` (ThruSections) is not imported.
 
-**Dynamically.** I rebuilt with `cq.Workplane.loft / spline / splineApprox / interpPlate / parametricCurve /
-parametricSurface`, `cq.Solid.makeLoft`, `cq.Edge.makeSpline*` and `BRepOffsetAPI_ThruSections` trapped:
-TRAP_RESULT.
+**Dynamically.** I rebuilt to scratch (1417 s) with these entry points trapped: `cq.Workplane.loft / spline /
+splineApprox / interpPlate / parametricCurve / parametricSurface`, `cq.Solid.makeLoft`, `cq.Edge.makeSpline*` and
+`BRepOffsetAPI_ThruSections`.
+- **No loft call.** There are 0 calls to `loft`, `makeLoft` or `ThruSections`.
+- **One spline call path, 4 calls, none exported.** `user_style.hardware` goes through `param_build.joint_parts` to
+  `param_build.cap_shape`, whose G2 dome is a `.spline`, once per hub. `user_style_minarc.hubs` drops that cap (`if " cap
+  " in n: continue`) and builds the torispherical line / arc cap instead. No exported part carries it: no part is named
+  "G2 dome".
+- **The waste is harmless, but build.json's "no splines" is not literally true** of the build run. Building the PB cap
+  only when it is wanted would make it so.
+- **The rebuild reproduces the claim's own check:** 9 poses, frames 1.2e-4 mm, joint features 0.144 mm, dowels inside
+  their slots.
+
+**The B-spline faces in the STEP files are blends, not fitted surfaces.** The STEP files of links 1b and 2 and of
+D8-06 contain `B_SPLINE_SURFACE` entities (48 / 216 / 34). They come from OCC's rounds: the ring-root fillets on links
+1b and 2, which the user's rules allow ("fillets"), and the user's own BOTTOM in D8-06. I did not attribute them face by
+face.
 
 **Sweeps.** The spring and the gen-3 E strap / cuff are single constant-section sweeps on line / arc paths. The caps
 are revolved line / tangent-arc profiles. The links are extruded line / arc side profiles.
@@ -236,7 +250,9 @@ stills confirm it: the knee link is grey and the bars are blasted. Rename those 
 4. **"or wire EDM" is not possible for these bars.** Four side profiles that differ across the width cannot be cut by
    one wire pass. Say 3+2-axis milling.
 
-5. **Catalogue names.** ISO 8734 does not list a 3 x 5.65 dowel: take 3 x 6 and deepen the press hole 0.35 mm, or
+5. **"No splines" is not literally true of the build run.** The builder still calls `param_build.cap_shape`'s spline
+   4 times through `user_style.hardware`, then discards the result. No exported part has a spline (section 3).
+6. **Catalogue names.** ISO 8734 does not list a 3 x 5.65 dowel: take 3 x 6 and deepen the press hole 0.35 mm, or
    grind it. The magnet "O3 x 1.4" is not a stock size; use 3 x 1.5 diametric, which the 1.6 mm pocket takes.
 
 ## Red team: open items for the L2 drawings (not judged; flagged)
