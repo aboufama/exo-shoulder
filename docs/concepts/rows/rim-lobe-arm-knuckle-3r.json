@@ -15,11 +15,11 @@
  "inband10": 0.6038,
  "contact": 0.0,
  "gap": 20.57,
- "v_reach": null,
- "v_follow": null,
- "v_inband14": null,
- "v_inband10": null,
- "v_gap": null,
+ "v_reach": 0.7312,
+ "v_follow": 1.0,
+ "v_inband14": 0.8631,
+ "v_inband10": 0.6038,
+ "v_gap": 20.57,
  "n_configs": 1591,
  "best_params": {
   "emb": "roller",
@@ -82,5 +82,7 @@
   "top5_spread": 0.02,
   "units": "score points",
   "run": "CMA b (665 evals)"
- }
+ },
+ "v_contact": 0.0,
+ "audit": "2026-10-16 audit: death STANDS. Gate re-run per source: CMA run b best 20.57, gain 0.11 (2nd half) / 0.09 (last third), top-5 spread 0.02 score pts - converged. Best config re-measured locally on Bench(60,160) fast: 20.57 exactly (reach 0.7312, ib14 0.8631, contact 0). Plate-in-band ceiling: counting the plate's 44 samples all in band gives ib14 0.910 -> gap 16.88 at reach 0.731, still above the rod winner (16.53) and the kill gate (15.5). Probe of rho_max at the best config: 24 -> 60.0 (reach 0.45), 27 -> 34.4 (reach 0.61, ib 0.90), 36 -> 118.5, 45 -> 40.2 (reach 0.731, ib 0.79, contact 0.056); plate_cap 6 changes nothing. No modelling bug, convention error or over-strict check found; reach (K travel) and plate height are coupled through the follower radius. Note: the template refutation test (within 10 of the champion 68.93) is met trivially - every round-7 design beats it - and is not the grounds of this death."
 }

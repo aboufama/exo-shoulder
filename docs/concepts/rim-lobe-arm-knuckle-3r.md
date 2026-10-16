@@ -111,3 +111,29 @@ drive it replaces (16.53), although it is simpler (35.25 vs 46.75): the pair mus
   collides; a slaved-K follower must leave hub K at >= ~25 deg from link 1b.
 - **The low-gain law needs dK >= ~30 deg to beat the rod**: at dK 25.9 (rho_max-capped) reach is 0.731, at 36 (law-only,
   no metal) 0.756.
+
+## Audit (2026-10-16, independent)
+
+Verdict: **the death stands.** The measured reason: the drive's K travel (and so reach) and the plate's height over the skin are both set by the follower radius. Even if the plate were fully in band, this design would score gap 16.88 at reach 0.731. That is worse than the rod winner (16.53) and the kill gate (15.5).
+
+- **Convergence gate, per sweep source.**
+  - Local: 44 configs, best 23.26.
+  - Farm LHS: 224 configs, best 26.84.
+  - CMA run a: 657 configs, best 24.94. Gains 0.00 / 0.00, top-5 spread 0.04.
+  - CMA run b: 665 configs, best 20.57. Gains 0.11 / 0.09, top-5 spread 0.02.
+  - Run b passes the gate. Over the whole 1591-entry file the gain over the last third reads 0.85, but only because the sources are concatenated.
+- **Reproduction.** The best configuration, re-run locally on Bench(60,160) fast, gives exactly 20.57: reach 0.7312, follow 1.0, ib14 0.8631, ib10 0.6038, contact 0. The frozen exact Bench(110,360) json (26.21) is consistent with it: the plate is at 0.075 in band, 18.2 mm over the skin.
+- **Upper bound.** Counting the plate's 44 samples (out of 855) as all in band gives ib14 0.910, which caps at 0.90. The gap is then 100 x (0.90 - 0.731) = 16.88, so the lost reach alone sinks it.
+- **rho_max probe** at the best configuration (plate size cap; plate_cap 6 changed nothing at any value):
+
+  | rho_max | gap | reach | ib14 | contact |
+  |---|---|---|---|---|
+  | 24 | 60.0 | 0.45 | 0.916 | 0 |
+  | 27 | 34.4 | 0.606 | 0.900 | 0 |
+  | 31 (best) | 20.57 | 0.731 | 0.863 | 0 |
+  | 36 | 118.5 | 0.39 | 0.79 | 0.033 |
+  | 45 | 40.2 | 0.731 | 0.79 | 0.056 |
+
+  Shrinking the plate kills reach; growing it lifts the plate off the skin and makes contact.
+- **Checks.** No modelling bug, convention mismatch, missed parameter region or over-strict check was found. The seed's 135.63 is a real idle drive (pressure angle 90 deg), and the search left that region.
+- The template test "within 10 of the champion 68.93" is trivially met, but it is not what killed this design. The kill gate is.
