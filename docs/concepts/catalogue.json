@@ -1801,5 +1801,36 @@
   "screening": "S1-S3",
   "status": "dead",
   "model_file": "docs/concepts/models/fraction-pauldron.py"
+ },
+ {
+  "id": "fold-sph3r",
+  "name": "Spherical 3R on fold-frontier axes",
+  "topology": "- Scapula base (S) on the user's scapula handler.\n- J1 ACTIVE: O20 hub (preloaded MR117-2RS pair, 12.25 mm stack), axis b = bvec(az, el) through GH.\n- Link 1: 12 x 3 mm strap on the great circle J1 -> J2 (arc a1).\n- J2 ACTIVE: O20 hub, axis through GH (two-circle closure, branch sigma).\n- Link 2: 12 x 3 mm strap J2 -> J3 (arc a2), passing over link 1 and the neck.\n- J3 ACTIVE: O20 hub, axis W = wdir(wd, wa) fixed in the humerus.\n- Arm-end plate + 14 x 6 neck rigid to BOTTOM's bar (member 3). No cuff slide.",
+  "active_dof": 3,
+  "passive_dof": 0,
+  "dof_reasoning": "Three revolute pins whose axes meet at GH: a spherical chain whose end orientation is the arm's, solved by the two-circle closure (no spare coordinate). The bench's arm rotates about a fixed GH in the scapula frame, so no translation has to be absorbed: 0 passive translations, no cuff slide, 0 mm liner compliance claimed.",
+  "description": "The plain spherical 3R with its axes re-seeded from the fold frontier (tools/fold_frontier.py, docs/research/fold/frontier.json): the (J1, J3, a1, a2) layouts that keep the J1-J3 axis angle inside the closure band for 85-97 % of the bench workspace at orientation level. Rest / overhead / across: as any spherical 3R; the frontier layouts put J1 anterolateral and nearly horizontal (front of the acromion) and J3 roughly radial on the lateral arm.",
+  "why_better": "The most buildable chain there is: three pins on bearing pairs, no rail, no slide, no carriage. If the fold frontier's reach (0.94-0.97 at orientation level) survived the skin, it would remove the leaders' main limiter (J2 fold: osn reach 0.706, champion 0.775).",
+  "main_risk": "Proximity: a scapula-fixed hub on a near-horizontal anterolateral ray sits over the anterior deltoid / humeral head, which moves under it; short arcs make the links sweep over the neck and chest.",
+  "unpowered_and_mvp2": "Unpowered: three O20 bearing hubs (MR117-2RS pairs) with the user's rotation sensing. MVP2: a drum on each hub, remote motors on cables.",
+  "model_spec": "docs/concepts/models/fold-sph3r.py (= docs/concepts/models/_template.py build() + crown/wall skin check, near-touch and overhead reports)",
+  "sweep_params": "- frontier.json layouts a1 + a2 85-140 (396) x sigma +-1.\n- q 0.95 / 0.97, strap width 10 on the top 20.\n- CMA-ES: az, el, a1, a2, wd, wa (+ q in one stream), margin 10, width 12.",
+  "modelling_cost": "low",
+  "prior_art": "The spherical 3R shoulder exoskeleton (e.g. the concurrent-axis shoulder chains of MGA, ARMin, the project's own champion); new here: the axis layout taken from the measured fold frontier.",
+  "lenses": [
+   "fold-frontier"
+  ],
+  "lens": "fold-frontier",
+  "family": "spherical 3R",
+  "t_ideated": "2026-10-16T00:04:00Z",
+  "source": "fold frontier (tools/fold_frontier.py)",
+  "model_file": "docs/concepts/models/fold-sph3r.py",
+  "status": "screened",
+  "screening": {
+   "gap": 44.72,
+   "frozen_big_gap": null,
+   "n_configs": 5636,
+   "row": "docs/concepts/rows/fold-sph3r.json"
+  }
  }
 ]

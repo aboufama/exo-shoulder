@@ -1,0 +1,215 @@
+{
+ "id": "fold-sph3r",
+ "name": "Spherical 3R on fold-frontier axes",
+ "lens": "fold-frontier",
+ "family": "spherical 3R",
+ "active_dof": 3,
+ "passive_dof": 0,
+ "status": "screened",
+ "t_ideated": "2026-10-16T00:04:00Z",
+ "t_screened": "2026-10-16T01:33:17Z",
+ "reach": 0.9,
+ "follow": 0.9667,
+ "inband14": 0.4577,
+ "inband10": 0.3184,
+ "contact": 0.0049,
+ "gap": 44.72,
+ "v_reach": null,
+ "v_follow": null,
+ "v_inband14": null,
+ "v_inband10": null,
+ "v_gap": null,
+ "n_configs": 5636,
+ "verdict": "screened, the best plain spherical 3R so far (0 passive translations, 0 cuff slides): 44.72 at q 0.98 (score 83.7; near-touch gap 53.66, metal 0.00 mm in 8 poses) and 49.03 at q 1.0 (score 82.2, near-touch clean), vs 51.33 at rail-elbow k2221's axes and 65.05 / 68.93 at the champion's; not 90+. The fold frontier does not transfer to a concurrent chain: the 792 frontier seeds score 74.4-170 (median 118) because the fold-free J1 / J2 rays run inside the arm / trunk (hub parking, tools/fold_parking.py), and CMA walks every frontier start back to J1 over the acromion; gate converged over 4790 CMA tries (0.60 / 0.29 / 0.01 score pts). Frozen Bench(110,360) exact: 57.99 at k2221's axes (51.33 fast), 60.03 at k1530's; CMA bests pending on the farm",
+ "limiter": "hub 2 0 % in band at every axis set (F 145-154 mm, posterolateral horizontal: its GH ray has no level near the skin in every pose) and link 2 5-10 % (median 116 mm, lifted by plane 0 elev 60 axial -60 on a posterior-medial ray); overhead (elev >= 140) reach 0.42-0.50 (J2 fold); with zero slides every axis must pass through GH, so the morphology has no freedom left",
+ "note": "Bench(60,160) fast grid, kit checks (march, dense K2, K6, audit) + hub crown / wall skin check, near-touch and overhead reports (model file); 5636 configs: 792 frontier seeds (frontier.json a1+a2 85-140 x sigma +-1, farm), 54 q / width variants + controls (template reproduced: 65.05 / 69.29 / 51.97 / 51.33), 6 farm CMA streams (A, B, D from the frontier, E, G from k1530 / k2221, F with q free; 4790 tries); crown check: 47 % of frontier configs had taken poses with a hub crown or wall inside the skin although every face was clear",
+ "doc": "docs/concepts/fold-sph3r.md",
+ "model_file": "docs/concepts/models/fold-sph3r.py",
+ "best_k": 5170,
+ "best_stage": "cmaF",
+ "best_params": {
+  "az": 28.338,
+  "el": 65.3972,
+  "a1": 83.5065,
+  "a2": 62.9048,
+  "wd": 94.3254,
+  "wa": -9.3721,
+  "sigma": -1,
+  "margin": 10.0,
+  "width": 12.0,
+  "t_link": 3.0,
+  "q": 0.9805
+ },
+ "bench": "Bench(60,160) fast grid, kit checks (march, dense K2, K6) + crown/wall skin check",
+ "frontier_best": {
+  "k": 822,
+  "gap": 70.9,
+  "params": {
+   "az": 114.0,
+   "el": 64.0,
+   "a1": 75.0,
+   "a2": 60.0,
+   "wd": 90.0,
+   "wa": 12.0,
+   "sigma": -1,
+   "q": 0.95
+  },
+  "stage": "s2-q-variants"
+ },
+ "gate": {
+  "n": 4790,
+  "order": "by generation (the 6 streams ran in parallel)",
+  "best": 44.72,
+  "gain_half": 0.6,
+  "gain_third": 0.29,
+  "top5_spread": 0.01,
+  "passed": true,
+  "streams": {
+   "A": {
+    "n": 185,
+    "best": 170.35,
+    "gain_half": 0.41,
+    "gain_third": 0.2,
+    "top5_spread": 0.28,
+    "passed": true
+   },
+   "B": {
+    "n": 913,
+    "best": 59.33,
+    "gain_half": 0.48,
+    "gain_third": 0.17,
+    "top5_spread": 0.01,
+    "passed": true
+   },
+   "D": {
+    "n": 945,
+    "best": 59.64,
+    "gain_half": 2.16,
+    "gain_third": 0.39,
+    "top5_spread": 0.08,
+    "passed": false
+   },
+   "E": {
+    "n": 1097,
+    "best": 50.3,
+    "gain_half": 0.12,
+    "gain_third": 0.0,
+    "top5_spread": 0.0,
+    "passed": true
+   },
+   "F": {
+    "n": 1193,
+    "best": 44.72,
+    "gain_half": 0.38,
+    "gain_third": 0.15,
+    "top5_spread": 0.01,
+    "passed": true
+   },
+   "G": {
+    "n": 457,
+    "best": 49.03,
+    "gain_half": 0.0,
+    "gain_third": 0.0,
+    "top5_spread": 0.13,
+    "passed": true
+   }
+  }
+ },
+ "frozen_big": null,
+ "passive_translations": 0,
+ "cuff_slides": 0,
+ "liner_compliance_mm": 0,
+ "honest": true,
+ "best_near_touch_clean": {
+  "k": 5244,
+  "stage": "cmaG",
+  "gap": 49.03,
+  "gap_near1": 49.03,
+  "min_metal_skin": 1.37,
+  "params": {
+   "az": 29.1048,
+   "el": 79.4024,
+   "a1": 82.6297,
+   "a2": 65.3472,
+   "wd": 95.5323,
+   "wa": -3.285,
+   "sigma": -1,
+   "margin": 10.0,
+   "width": 12.0,
+   "t_link": 3.0,
+   "q": 1.0
+  },
+  "reach": 0.9,
+  "follow": 1.0,
+  "inband14": 0.4097,
+  "inband10": 0.2529,
+  "contact": 0.0
+ },
+ "gap_near1": 53.66,
+ "min_metal_skin": 0.0,
+ "overhead": {
+  "reach": 0.5,
+  "inband14": 0.4282,
+  "n_ws": 12
+ },
+ "frozen_controls": {
+  "k2221": {
+   "gap": 57.99,
+   "reach": 0.8389,
+   "follow": 1.0,
+   "inband14": 0.3932,
+   "inband10": 0.2409,
+   "contact": 0.012,
+   "gap_near1": 57.99,
+   "min_metal_skin": 1.69,
+   "crown_contact_poses": 2,
+   "overhead": {
+    "n_ws": 28,
+    "reach": 0.3929,
+    "n_taken": 21,
+    "inband14": 0.4764,
+    "inband10": 0.3946
+   }
+  },
+  "k1530": {
+   "gap": 60.03,
+   "reach": 0.8167,
+   "follow": 1.0,
+   "inband14": 0.3928,
+   "inband10": 0.2257,
+   "contact": 0.0098,
+   "gap_near1": 61.08,
+   "min_metal_skin": 0.91,
+   "crown_contact_poses": 2,
+   "overhead": {
+    "n_ws": 28,
+    "reach": 0.4643,
+    "n_taken": 23,
+    "inband14": 0.4704,
+    "inband10": 0.3736
+   }
+  },
+  "seedA": {
+   "gap": 78.11,
+   "reach": 0.8694,
+   "follow": 1.0,
+   "inband14": 0.1703,
+   "inband10": 0.0733,
+   "contact": 0.0208,
+   "gap_near1": 78.61,
+   "min_metal_skin": 0.89,
+   "crown_contact_poses": 3,
+   "overhead": {
+    "n_ws": 28,
+    "reach": 0.5,
+    "n_taken": 24,
+    "inband14": 0.2269,
+    "inband10": 0.1736
+   }
+  }
+ },
+ "frozen_pending": {
+  "F": ".cache/fsph3r/big_cmaF.json (farm)",
+  "G": ".cache/fsph3r/big_cmaG.json (farm)"
+ }
+}

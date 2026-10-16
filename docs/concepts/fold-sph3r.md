@@ -144,10 +144,108 @@ overhead checks. Wall time 21 min on 2 vCPU.
 
 | | fast Bench(60,160) | exact fit Bench(60,160) | **frozen Bench(110,360) exact** | reach | in-band 14 / 10 | contact | min metal-skin | crown-contact poses | overhead (elev >= 140) reach / in-band 14 |
 |---|---|---|---|---|---|---|---|---|---|
-| plain 3R at k2221's axes (best of this search so far) | 51.33 | 51.36 | **57.99** | 0.839 | 0.393 / 0.241 | 0.012 | 1.69 mm | 2 (crown min -27 mm) | 0.39 (11 / 28) / 0.48 |
+| plain 3R at k2221's axes (the 51.33 control) | 51.33 | 51.36 | **57.99** | 0.839 | 0.393 / 0.241 | 0.012 | 1.69 mm | 2 (crown min -27 mm) | 0.39 (11 / 28) / 0.48 |
+| plain 3R at k1530's axes | 51.97 | 51.99 | **60.03** (= the earlier verifier's 60.03, concept_bigbench) | 0.817 | 0.393 / 0.226 | 0.010 | 0.91 mm (near-touch gap 61.08) | 2 (crown min -60 mm) | 0.46 / 0.47 |
+| frontier seed A (75 / 65, bvec(114, 64), wdir(90, 0)) | 74.40 | 74.47 | **78.11** | 0.869 | 0.170 / 0.073 | 0.021 | 0.89 mm (78.61) | 3 | 0.50 / 0.23 |
+| CMA G (q 1.0) | 49.03 | | pending (farm, `.cache/fsph3r/big_cmaG.json`) | | | | | | |
+| CMA F (q 0.9805) | 44.72 | | pending (farm, `.cache/fsph3r/big_cmaF.json`) | | | | | | |
 
-Per part on the big bench: hub 1 100 % in band (F 52 mm, over the acromion), hub 2 0 % (F 145 mm, posterolateral,
+Big-bench crown checks found crown-contact poses at every axis set (2-3 poses, up to 60 mm deep). Those are unseen
+poses where a frozen hub's crown runs into the arm. The poses become contact poses, so the gap above already counts
+them.
+
+Per part on the big bench (k2221): hub 1 100 % in band (F 52 mm, over the acromion), hub 2 0 % (F 145 mm, posterolateral,
 median 73 mm off the skin), hub 3 69 %, link 1 37 %, link 2 5 %, neck 65 %. Poses not taken: 58 of 470 (fold / K2 50,
 K6 3, contact 5). The closest metal is a face at 1.69 mm at plane 15, elev 135, axial -60. That pose is unseen by the
 fit, so the frozen underside is 0.3 mm short of the 2 mm rule there. The < 1 mm near-touch rule changes nothing
 (gap_near1 57.99).
+
+## CMA-ES on the farm (tools/concept_cma.py; 6 streams, 4790 tries)
+
+Setup:
+- Popsize 8, 4 processes per job, budget 1500 s.
+- Coordinates and scales: az 8, el 6, a1 5, a2 5, wd 6, wa 8 deg; stream F also q, scale 0.03 (clipped to <= 1).
+- Fixed: fold margin 10, 12 x 3 straps, branch per stream.
+- A dishonest report costs +100.
+- Farm cost of the batch: $0.46.
+
+| stream | start | sigma | tries | best gap | where it went | gate (score pts: 2nd half / last third / top 5) |
+|---|---|---|---|---|---|---|
+| A | frontier best 74.4 (75 / 65, bvec(114, 64), wdir(90, 0), -1) | 0.4 | 185 | 170.35 (= 70.35 + 100: links beyond 4 mm sampling) | stayed on the frontier; 60 s per try (links outside the grid box) | 0.41 / 0.20 / 0.28 |
+| B | J1 near horizontal (60 / 50, bvec(114, 16), wdir(65, -12), +1) | 0.4 | 913 | 59.33 | J1 climbed el 16 -> 37, a1 / a2 55 / 54, wdir(93, -19); hub 1 still 0 % in band, hub 2 21 %, hub 3 86 % | 0.48 / 0.17 / 0.01 |
+| D | hub 1 in band (45 / 95, bvec(114, 76), wdir(50, 12), -1) | 0.4 | 945 | 59.64 | bvec(88, 61), 57 / 87, wdir(57, -15); hub 1 98 % in band, link 2 1 % | 2.16 / 0.39 / 0.08 (not converged alone) |
+| E | k1530's axes (51.97) | 0.5 | 1097 | 50.30 | bvec(12, 77), 81 / 64, wdir(94, -6): stayed at the known 3R basin | 0.12 / 0.00 / 0.00 |
+| **F** | k1530's axes, **q free** | 0.4 | 1193 | **44.72** | bvec(28.3, 65.4), 83.5 / 62.9, wdir(94.3, -9.4), q 0.9805 | 0.38 / 0.15 / 0.01 |
+| G | k2221's axes (51.33) | 0.3 | 457 | **49.03** (q 1.0) | bvec(29.1, 79.4), 82.6 / 65.3, wdir(95.5, -3.3) | 0.00 / 0.00 / 0.13 |
+
+**Gate on the whole CMA history** (4790 tries ordered by generation): best gained 0.60 score points over the second
+half and 0.29 over the last third; the top 5 are within 0.01. **Converged.** Every stream converged alone except D,
+which is still 15 points behind.
+
+* The streams seeded on the frontier (A, B, D) all walked away from it and stopped at 59-70.
+* Both bridge streams from the known 3R axes (E, G) stayed in the known basin, J1 over the acromion (el 65-80).
+
+### The two bests (Bench(60,160), fast grid, kit checks, crown check)
+
+| | gap | score | reach | follow | in-band 14 / 10 | contact | gap with < 1 mm = contact | min metal-skin | overhead reach / in-band 14 | hub1 / hub2 / hub3 / link1 / link2 / neck in band | Ti mass |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| F k5170 (q 0.9805) | **44.72** | 83.7 | 0.900 | 0.967 | 0.458 / 0.318 | 0.005 | **53.66** | **0.00 mm** | 0.50 / 0.43 | 1.0 / 0 / 0.87 / 0.39 / 0.10 / 0.78 | 172 g |
+| G (q 1.0) | 49.03 | 82.2 | 0.900 | 1.000 | 0.410 / 0.253 | 0 | 49.03 | 1.37 mm (crown / wall; faces >= 2.00) | 0.42 / 0.46 | 1.0 / 0 / 0.80 / 0.36 / 0.06 / 0.69 | 173 g |
+
+F's gain over G comes from q < 1. The undersides are fitted to the 98th percentile of the poses, so in 8 workspace
+poses metal sits 0.00-0.9 mm from the skin (elevation 165, plane 45-75; plane 0, elevation 60). With the near-touch
+rule (lesson d) F scores 53.66, worse than G. **G is the best shape that survives lesson (d).**
+
+## Red team (F and G, Bench(60,160); `fold-sph3r.py redteam`)
+
+* **Jam / fold.** 15-17 of 220 poses are lost to the J2 fold (margin 10 deg) or K2, the same poses at all three axis
+  sets. Overhead (elevation >= 140) reach is 0.42-0.50: 5-7 of the 12 workspace poses up there fold. Overhead is
+  this morphology's weak point. The frontier layouts that would keep those poses push hub 1 and hub 2 into the arm and
+  trunk (above).
+* **Pinch point.**
+  - F: a skin face at 0.00 mm (plane 60, elev 165, axial -90); 0.28 mm at plane 0, elev 60, axial -60.
+  - G: faces never below 2.00 mm. The closest metal is a hub crown or wall at 1.37 mm.
+  - G frozen on the big bench: see below.
+* **What lifts the links.** In G, link 1 and link 2 are lifted to 149-156 mm in one pose (plane 0, elev 60, axial
+  -60). There they lie on a ray at thorax az -131, el -11 to -14 (posterior-medial, slightly down) over the back. In
+  13-14 % of poses some strap sample needs > 100 mm.
+  - Link 2 is 6 % in band, at a median 116 mm.
+  - Hub 2 is 0 % in band at F 154 mm (posterolateral, horizontal). Its centre ray has no position near the skin that
+    holds in every pose.
+  - Hub 2 and link 2 are the limiter, as in the champion.
+* **Near-touch gap:** G 49.03 (unchanged), F 53.66.
+
+## Comparison (same benches)
+
+| design | passive translations | Bench(60,160) fast | Bench(110,360) exact, frozen |
+|---|---|---|---|
+| champion 3R (baseline conventions, rows/baseline-3r.json) | 0 | 68.93 | 75.94 |
+| plain 3R at the champion's axes, kit checks (this model, control) | 0 | 65.05 | |
+| plain 3R at rail-elbow k2221's axes (the 51.33) | 0 | 51.33 | 57.99 |
+| frontier-seeded best, before CMA (q 0.95 / q 1.0) | 0 | 70.90 / 74.40 | 78.11 (q 1.0) |
+| **fold-sph3r CMA G (q 1.0, near-touch clean)** | 0 | **49.03** | pending |
+| fold-sph3r CMA F (q 0.98) | 0 | 44.72 (near-touch 53.66) | pending |
+| leader offset-skin-normal-3r k4216 (2 cuff slides) | 2 | 32.61 | 42.59 (its verifier) |
+
+## Verdict
+
+* **Screened.** This is the best plain spherical 3R measured so far: 49.03 at q 1.0 (score 82.2) and 44.72 at q 0.98
+  (score 83.7, near-touch 53.66).
+  - It beats the champion and the 51.33 control.
+  - It has no passive translation.
+  - It does not reach 90+ (gap <= 27.5). It stays 12-16 points behind the 2-slide osn leader on the screening bench.
+* **The fold frontier does not transfer to a concurrent chain.**
+  - The frontier's own layouts score 70-170.
+  - CMA walks every frontier start back toward J1 over the acromion (el 37-79).
+  - The best result came from the known basin, not from the frontier.
+  - Reason: the rays that keep the J1-J3 angle in band are the rays the arm and the trunk occupy. The fold frontier
+    must be intersected with hub parking (tools/fold_parking.py) before it seeds any concurrent morphology.
+* **Limiter (measured):** hub 2 and link 2.
+  - Hub 2 is 0 % in band at every axis set: F 145-154 mm, posterolateral, horizontal.
+  - Link 2 is 5-10 % in band, at a median 116 mm, lifted by the posterior-medial pose (plane 0, elev 60, axial -60).
+  - Overhead reach is 0.42-0.50: the fold.
+  - A concurrent J2 cannot follow the skin.
+  - With no slide, every axis must pass through GH (the osn closure theorem with zero slides), so this morphology has
+    no further freedom. The cheapest way out is the osn one: J3 offset and tilted toward the skin normal, with 2
+    cuff slides in hub 3's plane (14 points there).
+  - The plain spherical 3R tops out near 49 on this bench (score 82): the 6-coordinate CMA converged from 6 starts.

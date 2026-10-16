@@ -554,3 +554,43 @@ What this predicts: a 3R that puts J1 / J2 metal on their own axes (any spherica
 included) cannot use the fold frontier on this body. The lever left is a morphology that rotates about the J2 GH ray
 without metal on it: an arc guide or remote-centre carriage whose track follows the skin on the J2 circle.
 Offsetting J1 / J2 off GH needs a third (radial) slide, which would make 3 passive translations: not allowed.
+
+## The fold frontier does not seed a concurrent 3R: its axes run inside the arm and the trunk (2026-10-16, fold-sph3r)
+
+The plain spherical 3R (three O20 bearing hubs, axes through GH, 0 passive translations, no cuff slide) was re-seeded
+from every frontier.json layout with a1 + a2 85-140 (792 configurations, both branches, farm) and tuned by 6 farm
+CMA-ES streams (4790 tries, gate converged). Bench(60,160), fast grid, kit checks plus a new hub crown / wall check;
+docs/concepts/fold-sph3r.md.
+
+* **The frontier's layouts score 74.4-170 (median 118).** The 3R at known axes scores 51.33.
+  - Reach mostly survives: 0.925 for the best seed against the frontier's 0.95.
+  - Proximity does not: hub 1 and hub 2 are 0 % in band, and 80 % of the configurations put the links beyond 150 mm.
+* **Why (tools/fold_parking.py -> docs/research/fold/hub_parking.json).** To keep the J1-J3 angle in band, J1 must
+  point near the middle of the humerus's workspace cone, which is where the arm passes.
+  - Overhead, the frontier's anterolateral J1 lies within 9-16 deg of the humerus axis, inside the arm.
+  - The J1 ray never clears the skin in some closing pose for 39 % of the layouts with J1 el 16-33.
+  - The J2 ray never clears (it runs into the trunk) in 26-39 % of the layouts at any J1 elevation.
+  - The fold frontier must be intersected with hub parking before it seeds a concurrent morphology.
+* **CMA walks every frontier start back to J1 over the acromion** (el 37-79): 59.3 and 59.6 from the frontier
+  starts. The best results came from the known basin:
+  - **49.03** at q 1.0 (score 82.2, near-touch clean, min metal 1.37 mm);
+  - 44.72 at q 0.98 (score 83.7). That shape puts metal 0.00-0.9 mm from the skin in 8 poses; counting < 1 mm as
+    contact gives 53.66.
+
+  This is the best plain spherical 3R so far. The 2-slide osn leader is 32.61 fast / 42.59 verified.
+* **Limiter of the concurrent 3R (every axis set):**
+  - Hub 2 is 0 % in band (F 145-154 mm, posterolateral horizontal).
+  - Link 2 is 5-10 % in band (median 116 mm).
+  - Overhead reach is 0.42-0.50.
+  - With zero slides every axis must pass through GH (the osn closure theorem with no slide), so nothing is left to
+    tune. The cheapest way out is the osn one: an offset, skin-normal J3 with 2 cuff slides.
+* **Measurement finding.** The kit fits and scores only each hub's skin face. In 47 % of the frontier configurations
+  a hub crown or wall (F .. F + 12.25) was inside the skin in some taken pose, although every face was clear. On the
+  big bench every axis set has 2-3 such poses. Models that use `K.hub_member` should add the crown check
+  (`crown_points` in docs/concepts/models/fold-sph3r.py). At the known 3R axes with q 1.0 it changes nothing on
+  Bench(60,160); the crowns clear by 1.4-3.5 mm.
+* Frozen on Bench(110,360) exact (lesson c), against 51.33 / 51.97 fast:
+  - 3R at k2221's axes: **57.99**;
+  - 3R at k1530's axes: 60.03, which reproduces the earlier verifier's number;
+  - best frontier seed: 78.11;
+  - CMA bests: queued on the farm.
