@@ -97,6 +97,7 @@ class Model(S.VModel):
         _, okc, _, _, _, sc = self.D.ik(Z["HG"][ii].astype(float))
         sv = np.r_[s[ok], sc[okc]]
         if P.get("centre") and len(sv): self.D.m = 0.5 * (sv.max(0) + sv.min(0))   # knee at mid drift = the reference
+        if P.get("m_fix") is not None: self.D.m = np.array(P["m_fix"], float)      # frozen shape (worn on another bench)
         self.D.m[2] = 0.0
         self.radial_span = round(float(np.ptp(sv[:, 2])), 3) if len(sv) else 0.0
         self.drift_span = [round(float(np.ptp(sv[:, k])), 1) for k in range(2)] if len(sv) else [0, 0]
@@ -338,8 +339,80 @@ class Model(S.VModel):
         return self._h12
 
 
+def _run_batched(self, B=None):
+    """S.Model.run with the metal and contact-only samples of a pose in ONE distance call (the exact path rebuilds its
+    trees per call); same numbers as S.Model.run (the leader's verifier harness does the same)"""
+    B = self.B; B.reset(); t0 = time.time()
+    self.fit()
+    valid = set(self.poses_fit.tolist()); dropped = set(self.poses_fit[self.drop].tolist())
+    self.clear = np.full(len(B.idx), np.nan); self.last_pair = {}; self.cmin = {}
+    for i in range(len(B.idx)):
+        if i not in valid: B.record(i, None); continue
+        cl = self.collide(i); self.clear[i] = cl; self.last_pair[i] = min(self.last_clear, key=self.last_clear.get)
+        if cl < S.PART_CLEAR and not (self.p.get("jam_contact") and i in dropped):
+            self.why[i] = "parts"; B.record(i, None); continue
+        mp = self.metal_points(i); cw = [self.world(m, i, Pc) for m, Pc in self.contact]
+        dd = B.dist(i, np.concatenate([mp] + cw)); d = dd[:len(mp)]; B.res[i] = d
+        dc = float(dd[len(mp):].min()) if len(dd) > len(mp) else 1e9; self.cmin[i] = dc
+        if dc < 0: B.res[i] = np.r_[d, dc]
+        if min(dc, float(d.min())) < 0: self.why[i] = "skin" if i in dropped else "contact"
+    r = B.report(); r["f"] = [round(float(x), 1) for x in self.f]; r["t"] = round(time.time() - t0, 1)
+    return r
+
+
+S.Model.run = _run_batched        # this module's private copy of the seed model only
+
+
+def audit(M, B):
+    """near-touch (lowest metal incl. walls / crowns / tops / edges over the poses taken; gap with metal < 1 / 2 mm as
+    contact) and the overhead split (elevation >= 140)"""
+    taken = lambda i: B.res[i] is not None and float(np.min(B.res[i])) >= 0; out = {}
+    mins = sorted((min(float(np.min(B.res[i])), M.cmin.get(i, 1e9)), i) for i in range(len(B.idx)) if taken(i))
+    lab = lambda i: dict(i=int(i), kind=B.kind[i], plane=B.poses[i]["plane"], elev=B.poses[i]["elev"], axial=B.poses[i]["axial"])
+    out["near_touch_min_mm"] = round(mins[0][0], 2) if mins else None; out["near_touch_low"] = [dict(mm=round(d, 2), **lab(i)) for d, i in mins[:5]]
+    res0 = list(B.res)
+    for thr in (1.0, 2.0):
+        for d, i in mins:
+            if d < thr: B.res[i] = np.r_[B.res[i], -1e-3]
+        out[f"gap_near{int(thr)}"] = B.report()["gap"]; out[f"near{int(thr)}_poses"] = int(sum(1 for d, i in mins if d < thr)); B.res = list(res0)
+    el = np.array([p["elev"] for p in B.poses]); kind = np.array(B.kind)
+    ws = np.nonzero((el >= 140) & (kind == "ws"))[0]; cl = np.nonzero((el >= 140) & (kind == "clip"))[0]; allh = np.nonzero(el >= 140)[0]
+    tk = [i for i in allh if taken(i)]; d = np.concatenate([B.res[i] for i in tk]) if tk else np.zeros(0)
+    out["overhead140"] = dict(ws=len(ws), reach=round(float(np.mean([taken(i) for i in ws])), 4) if len(ws) else None, clip=len(cl),
+                              follow=round(float(np.mean([taken(i) for i in cl])), 4) if len(cl) else None,
+                              inband14=round(float(((d >= 2) & (d <= 14)).mean()), 4) if len(d) else None,
+                              inband10=round(float(((d >= 2) & (d <= 10)).mean()), 4) if len(d) else None,
+                              why_not={k: int(sum(1 for i in allh if not taken(i) and M.why[i] == k)) for k in ("fold", "slide", "flip", "closure", "skin", "parts", "contact")})
+    return out
+
+
+def frozen(P, nc=110, nw=360):
+    """lesson (c): fit on Bench(60,160) FAST, wear that exact shape (heights, knee centre m) on Bench(nc,nw) without refit
+    (CB_EXACT=1 in the environment -> exact distances on the big bench)"""
+    old = os.environ.pop("CB_EXACT", None)
+    try: B1 = CB.Bench(n_clip=60, n_ws=160)
+    finally:
+        if old is not None: os.environ["CB_EXACT"] = old
+    M1 = Model(B1, dict(P)); r1 = M1.run(); fit = {k: r1[k] for k in ("gap", "reach", "follow", "inband14", "inband10", "contact")}
+    P2 = dict(M1.p); P2["m_fix"] = [float(x) for x in M1.D.m]
+    class Frozen(Model):
+        def fit(self):
+            for a in ("g", "fr", "geo", "rigid", "link_pts", "f", "tr", "zb", "_tr_fit", "cyl", "box", "strap", "cyl_surf", "Emid",
+                      "Hneed", "Lneed", "hEx", "_Ex", "_h12"):
+                if hasattr(M1, a): setattr(self, a, getattr(M1, a))
+            self.contact = list(M1.contact); self.poses_fit = np.nonzero(self.kin_ok)[0]; self.drop = np.zeros(len(self.poses_fit), bool)
+    B = CB.Bench(n_clip=nc, n_ws=nw); M = Frozen(B, P2); r = M.run(); S.VModel_post(M, r) if hasattr(S, "VModel_post") else None
+    rep = {k: r[k] for k in ("gap", "reach", "follow", "inband14", "inband10", "contact")}
+    return dict(fit_fast=fit, frozen=rep, mode=B.mode, bench=[nc, nw], why=r.get("why"), parts_pairs=r.get("parts_pairs"),
+                parts_ib14=r.get("parts_ib14"), audit=audit(M, B), knee_ang=[round(float(M.K["ang"][M.kin_ok].min()), 1), round(float(M.K["ang"][M.kin_ok].max()), 1)] if M.kin_ok.any() else None)
+
+
 def _report(B, params):
-    M = Model(B, params); r = M.run(); D = M.D
+    M = Model(B, params)
+    if not M.kin_ok.any():                                       # nothing closes: every pose not taken (no shape to fit)
+        B.reset(); r = B.report(); r["why"] = {k: int((M.why == k).sum()) for k in ("fold", "slide", "flip", "closure")}
+        r["knee"] = None; r["honest"] = True; r["params"] = M.p; return r, M
+    r = M.run(); D = M.D
     r["seats"] = dict(tilt_deg=D.seats["tilt_deg"], a_deg=[round(math.degrees(a), 1) for a in D.A],
                       offset_mm=[round(float(np.linalg.norm(c)), 1) for c in D.c], rest_err_deg=round(D.rest_err, 4))
     k = M.K["ang"][M.kin_ok]
@@ -363,6 +436,10 @@ def bench_eval(B, params):
 if __name__ == "__main__":
     mode = sys.argv[1] if len(sys.argv) > 1 else "check"
     par = json.loads(sys.argv[2]) if len(sys.argv) > 2 else {}
+    if mode == "frozen":
+        t = time.time(); out = frozen(par); out["params"] = par; out["secs"] = round(time.time() - t, 1)
+        if len(sys.argv) > 3: json.dump(out, open(sys.argv[3], "w"), indent=1, default=float)
+        print(json.dumps(out, default=float)); sys.exit()
     nc, nw = (110, 360) if "--big" in sys.argv else (60, 160)
     B = CB.Bench(n_clip=nc, n_ws=nw); t = time.time()
     r, M = _report(B, par)

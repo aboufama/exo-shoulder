@@ -20,8 +20,8 @@
  "v_inband14": null,
  "v_inband10": null,
  "v_gap": null,
- "n_configs": 13,
- "verdict": "in progress: first local ladder at the leader's k4216 seats, knee link pointing posterior (phib -90) gap 26.34 on Bench(60,160) fast with the 5 mm pin stack; exact-bench frozen check and farm sweep running",
+ "n_configs": 269,
+ "verdict": "in progress: k10 (leader k4216 seats, knee posterior phib -90, 5 mm pin stack) 26.34 on Bench(60,160) fast; worn FROZEN on Bench(110,360) exact 33.84 (score 87.69) vs the zero-passive spherical 41.73 and the 2-slide leader's verified 42.59 on the same bench; CMA streams A-H on the farm",
  "limiter": "J2 fold (47 of 220 poses, untouched by the knee)",
  "note": "Bench(60,160) fast, seed VModel rules + knee checks; gate not yet evaluated",
  "doc": "docs/concepts/skin-normal-3r-pin-knee.md",
@@ -42,5 +42,24 @@
   "wa": -13.3653,
   "b3": 0.2282,
   "neck": 13.0
+ },
+ "exact_frozen": {
+  "k": 10,
+  "bench": "Bench(110,360) exact, shape frozen from Bench(60,160) fast",
+  "gap": 33.84,
+  "reach": 0.6194,
+  "follow": 0.9636,
+  "inband14": 0.8452,
+  "inband10": 0.4063,
+  "contact": 0.003,
+  "near_touch_min_mm": 0.2,
+  "gap_near1": 35.58,
+  "gap_near2": 57.78,
+  "overhead140": {
+   "reach": 0.2857,
+   "follow": 1.0,
+   "inband14": 0.8966,
+   "inband10": 0.5703
+  }
  }
 }
