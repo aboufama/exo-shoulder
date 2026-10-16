@@ -95,6 +95,14 @@ docs/EVOLUTION.md (and its snapshot to pipeline/evolution/) as part of the judge
   footprint, rail length = travel + block length, mass) as sampled metal. A radial (skin-normal) slide counts as
   standing up by its travel + block length. A few mm of radial play may go to the cuff liner's compliance, stated as
   such. No virtual slides, no zero-height stages; the verifier rejects a design whose joints have no component.
+- **Every generation ends in a full CAD + render of its winner** (user, 2026-10-16: "after every new generation, make the
+  full cad of the winning verified design of that generation, just so it can be displayed in higher quality and I can see
+  with the humanoid with muscles"). A generation = one discovery round (ideate -> screen -> verify). Its winner = the best
+  design whose number an independent verifier confirmed (ties broken by fewer passive translations). Build it at the
+  user's CAD standard in the user's style (pipeline/conformal/param_cad/user_style.py: bent bars from line/arc sketches,
+  real hub stacks and catalogue parts, BOTTOM cut + arm end, no lofts), judge it, render stills on the muscled mannequin
+  (matte black, faceless; parts bead blasted, polished screws, iglidur orange; no black parts) and add it to
+  docs/EVOLUTION.md + the dashboard. This is the user's standing choice for L2 CAD of generation winners.
 - **No lofts, ever** (user, 2026-10-15: "for all the design you do, lofts look horrible and introduce geometric problems, you
   can combine arcs, but no lofts!"): every surface comes from sketches of lines and tangent arcs - extrudes, revolves,
   sweeps of ONE constant section along a line/arc path, fillets. No lofts, no surfaces fitted or shrink-wrapped to skin
