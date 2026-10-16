@@ -1,0 +1,21 @@
+{
+ "id": "offset-axis-skin-hubs",
+ "mechanism": {
+  "active_dof": 3,
+  "passive_trans": 3,
+  "crossed_rails": true,
+  "passive_rot": 0,
+  "moving_bodies": 6,
+  "joints": 6,
+  "closed_loops": 0,
+  "sliding_pairs": 3,
+  "rolling_pairs": 3,
+  "sensed_passive": 0,
+  "springs_or_flexures": 0,
+  "custom_parts": 11,
+  "catalogue_parts": 12,
+  "notes": "census record only (checker 2026-10-16): the design is on the board from its sweeps (5th by score) with no row, so its count was missing. NOT BUILDABLE (3 passive translations: the model's own spec correction - with non-concurrent lines the drift has a radial component, so the stage is along + across + radial; the radial slide has no compact part, manufacturability_summary.md). Same chain and parts as skin-normal-hubs-selfaligning / the verified seed-offset-3r-slides model, only the axis lines are free. bodies: link 1, link 2, member 3 (hub 3 + ramped neck + riser + bridge + across carriage), 2 stage carriages, arm-end (arm-fixed cuff rail on BOTTOM's top). joints: J1-J3 O20 hubs, along / across (crossed) / radial slides. Translations change no orientation: not sensed. custom: base, 2 links, member 3, bridge, 2 carriage adapters, arm rail mount, 3 hub shafts (est.); catalogue: 3 x MR117 pair, 2 rails + 2 blocks, radial guide as 1 rail + 1 block (est.). The agent's own row, when written, must keep this key.",
+  "source": "docs/concepts/models/offset-axis-skin-hubs.py:1-27 (chain, XYZ stage, spec correction: 3 translations); docs/research/manufacturability_summary.md:40",
+  "confidence": "counted"
+ }
+}

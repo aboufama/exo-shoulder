@@ -556,7 +556,12 @@ def write_row(id, name, rep, lens="", family="", active_dof=3, passive_dof=0, st
                t_ideated=None, t_screened=now(), **{x: rep[x] for x in ("reach", "follow", "inband14", "inband10", "contact", "gap")},
                v_reach=None, v_follow=None, v_inband14=None, v_inband10=None, v_gap=None, n_configs=n_configs, verdict=verdict,
                note=note, doc=doc or f"docs/concepts/models/{id}.py", **extra)
-    p = os.path.join(REPO, "docs", "concepts", "rows", f"{id}.json"); json.dump(row, open(p, "w"), indent=1); return p
+    p = os.path.join(REPO, "docs", "concepts", "rows", f"{id}.json")
+    if "mechanism" not in row and os.path.exists(p):     # keep the census record (tools/simplicity.py, docs/SIMPLICITY.md)
+        try: old = json.load(open(p))
+        except Exception: old = None
+        if isinstance(old, dict) and isinstance(old.get("mechanism"), dict): row["mechanism"] = old["mechanism"]
+    json.dump(row, open(p, "w"), indent=1); return p
 
 
 def log_event(text, kind="milestone"):

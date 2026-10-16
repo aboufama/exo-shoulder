@@ -36,7 +36,7 @@ Each item adds its points once per count. The total is the sum.
 
 | item | points | why this weight |
 |---|---|---|
-| active DOF beyond 3 | **25** each | MVP2 adds a motor, a cable run and an encoder. MVP1 adds a spare freedom that falls under its own weight (R17). The user: "the minimum possible solution is 3 dof", push for 3 before settling for 4. Set so that any 4-active-DOF chain (4R: 28.5) scores above the heaviest legal 3-DOF design, offset-skin-normal-3r with 2 crossed rails (25.75). |
+| active DOF beyond 3 | **25** each | MVP2 adds a motor, a cable run and an encoder. MVP1 adds a spare freedom that falls under its own weight (R17). The user: "the minimum possible solution is 3 dof", push for 3 before settling for 4. Set so that a plain 4R (28.5) scores above every 3R closed by legal passive slides (offset-skin-normal-3r, 2 crossed rails: 25.75; offset-pointer-slip-sleeve: 27.75). It does not outscore every 3R: a closure through three sensed pins (knuckle cufflink 32.25, closure-set knee 33) or internal loops (3-RRR 38) counts more than a plain 4R. |
 | passive translation | **5** each | A guide is a rail, a block and end stops. It stands H + plate tall (5.5 mm for an RSR3M), its rail is longer than its stroke (12 + 2 x travel + 2 mm), and it is moment-limited (0.29 N·m for one block). The user ranks 0, then 1, then 2. |
 | crossed rails (2 translations stacked) | **+5** | An adapter plus a second guide riding on the first: a 10.5-11.5 mm stack, a squareness tolerance, and the tilting moment carried through two blocks in series. The user: "bulky, must be shown to fit". |
 | passive translation beyond 2 | **+20** each, and flagged **NOT BUILDABLE** | No compact component exists. A radial guide stands 25 mm tall (`docs/research/manufacturability_audit.md`). CLAUDE.md: never. |
@@ -108,6 +108,8 @@ rolling_pairs, sensed_passive, springs_or_flexures, custom_parts, catalogue_part
 
 - `source` names the file and lines the count came from.
 - `confidence` is "counted" (from the model) or "estimated" (from the doc).
+- Rows are shared: a writer loads the row, sets its own keys and keeps `"mechanism"`. `tools/concept_kit.write_row`
+  keeps an existing record. A row rewritten from scratch loses it: raglan-knee-3r lost it twice on 2026-10-16.
 - The tool flags these inconsistencies:
   - loops != joints - bodies;
   - Kutzbach M > 3 with no spring (a spare freedom, R17);
