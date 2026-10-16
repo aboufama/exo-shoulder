@@ -7,32 +7,32 @@
  "passive_dof": 3,
  "passive_translations": 0,
  "t_ideated": null,
- "v_reach": 0.7472,
+ "v_reach": 0.7222,
  "v_follow": 1.0,
- "v_inband14": 0.889,
- "v_inband10": 0.583,
- "v_gap": 18.45,
+ "v_inband14": 0.8931,
+ "v_inband10": 0.594,
+ "v_gap": 19.54,
  "doc": "docs/concepts/minarc-stop-knuckle-4r.md",
  "model_file": "docs/concepts/models/minarc-stop-knuckle-4r.py",
  "mechanism": {
   "active_dof": 3,
   "passive_trans": 0,
   "crossed_rails": false,
-  "passive_rot": 1,
-  "moving_bodies": 4,
-  "joints": 4,
+  "passive_rot": 3,
+  "moving_bodies": 6,
+  "joints": 6,
   "closed_loops": 0,
   "sliding_pairs": 0,
-  "rolling_pairs": 4,
-  "sensed_passive": 1,
+  "rolling_pairs": 6,
+  "sensed_passive": 3,
   "springs_or_flexures": 1,
-  "custom_parts": 10,
-  "catalogue_parts": 10,
-  "notes": "spherical 3R with link 1 split by a passive knuckle K. bodies: link 1a, link 1b, link 2, member 3 (hub-3 arm-end plate + K7 neck). joints: J1, K, J2, J3 O20 hubs on MR117-2RS pairs (revolutes). Open chain, GH closes it: loop mobility 4 vs the arm's 3 - the spare is set by the clock spring in K's cap (preload onto stop A) and the J2 interior-angle hard stops (min-arc law), so nothing sags (R17). sensed: K (encoder, the 4th coordinate is not a function of J1-J3 readings alone). custom: base, 3 links, member 3, 4 hub shafts, the clock spring strip (0.2 x 3 mm stainless, ~4 turns); catalogue: 4 x MR117-2RS pair + 2 O2 ISO 8734 stop dowels (K stop arc slot, J2 stop arc slot).",
-  "source": "docs/concepts/models/minarc-stop-knuckle-4r.py:1-20 (chain, law), build()",
+  "custom_parts": 14,
+  "catalogue_parts": 16,
+  "notes": "the pin knee (mechanism of rows/skin-normal-3r-pin-knee.json) + K: link 1 split into 1a / 1b by an O20 passive sensed hub with a clock spring and stop dowels; complexity 33.0 (tools/simplicity.py)",
+  "source": "docs/concepts/models/minarc-stop-knuckle-4r-pinknee.py",
   "confidence": "counted"
  },
- "status": "screened",
+ "status": "verified",
  "t_screened": "2026-10-16T08:30:00Z",
  "reach": 0.8438,
  "follow": 1.0,
@@ -41,7 +41,7 @@
  "contact": 0.0051,
  "gap": 6.19,
  "n_configs": 14443,
- "verdict": "REFUTED by the verifiers (2026-10-16T09:49Z): the claimed 15.42 holds only with J2 stops 1.4-1.9 deg from the J1-J3 fold (kept stops under the 5-deg rule: 35.56 connected). Priced with the stops at the 5-deg margin: 18.45 frozen exact connected (three harnesses), held out 22.27 vs H1 31.39; 17.32 with a physical q2 stop + real spring (one lens) - a re-claim, not yet a verified leader. | screened: variant B frozen exact 15.42 on Bench(110,360) (score 94.4, self-measured; conservative fold-margin reading 21.40, near-touch 21.37 at BA) - best self-measured frozen number so far, 0 passive translations, complexity 33; needs the independent verifier. Variant A (complexity 13.5) 22.17 fast converged.",
+ "verdict": "VERIFIED LEADER (judge 2026-10-16T11:57:11Z, two lenses not refuted + judge cross-check): BDp 19.54 frozen exact Bench(110,360) (score 92.89), margin 5, continuity applied (0 dropped) = the lenses' 19.06 (both, to the digit) + 0.48 priced for buildable stops (J2 slot 5.0 +0.5 / -0 deg of J1-J3 margin, K stop B at dK 34.47; worst built pairing measured on the farm); reach 0.7222, follow 1.0, in-band14 0.8931, contact 0.0107; near-touch 26.44 (hub 2 wall 0.05 mm at the overhead raise peak, disclosed). Held out 24.18 (near-touch 28.86) vs H1 31.39 same harness; bench vs H1 27.2 same protocol. Min own-state J1-J3 margin 5.007 (stops at 5.0) .. 5.553 (5.5); continuity 1041/1041, 0 islands. Cost: 4 revolutes, K spring-held and SENSED (4 active DOF), complexity 33 vs H1 19.5; 5.79 gap points short of the golden 13.75.",
  "limiter": "B at BD, big bench: the fold (56 poses: stretched past stop B a1max 66, folded with J1 ~ J3), the knee window (16), contact (9); overhead reach 8/28; hub 3 (0.66) and link 2 (0.78) in band; near-touch 0.05 mm overhead. Red team: the forced sub-chain J1-K-J3 swings J1 20-40 deg/frame before stop B on the gallery loop (sub-chain margin 7.3) - dynamic stiffening risk for MuJoCo",
  "note": "Bench(60,160) fast unless stated. VARIANT B (docs/concepts/models/minarc-stop-knuckle-4r-pinknee.py: the pin-knee VModel + passive spring knuckle K in link 1 + J2 interior-angle stops): CMA (4 streams, 6234 tries) BD 6.19 fast -> FROZEN EXACT Bench(110,360) 15.42 (score 94.4; reach 0.769, follow 1.0, ib14 0.899, contact 0.023; near-touch 22.17, min metal 0.05 mm on the overhead raise clip); BA 7.27 -> 17.98 (near-touch 21.37, min metal 0.76 mm); BB (mstop 1, J2 dyad keeps 5 deg th-margin) 9.43 -> 21.40; at the pin knee's own seats knuckle locked 26.82 vs knuckle 24.00 frozen. Gate (B): 0.23 / 0.23 / 0.03 score pts -> converged. VARIANT A (docs/concepts/models/minarc-stop-knuckle-4r.py, kit, plain spherical chain + K, complexity 13.5): coarse 302 -> 49.10; CMA 6 streams 7886 tries -> 22.17 fast (gate 0.49 / 0.31 / 0.02 converged; 3R control at the same seats 45.91; near-touch 41.79); frozen exact pending (.cache/minarc/frozen_FA.json, FA3R; near-touch CMA AN1/AN2/AG -> .cache/minarc/cma_AN*.json). Judge's prediction 18-24 for the plain chain: refuted on the kit (22.17 fast); the knuckle is worth 23.7 points over its own 3R control only once seats are re-tuned for it. Spring: quasi-static gravity torque <= 0.008 N.m (B) / 0.018 (A) vs 0.08 N.m preload; MuJoCo pending L1 meshes. | VERIFIED-REFUTED 2026-10-16 (skeptic lens; also docs/concepts/verify/minarc-stop-knuckle-4r-remeasure.md and -mechanism.md): (1) the claimed 15.42 reproduces to the digit but its J2 interior-angle stops (12.28 / 162.70) leave the J1-J3 dyad 1.97 deg from its fold on taken poses (25 state-A poses under the user's 5-deg margin, 3 of them clip frames) - shrinking the singularity margin without the user's say; (2) K is NOT a passive coordinate under the user's DOF rule: in the forced states J2 sits on its stop, so q1/q2/q3 do not determine the arm and K must be position-measured -> 4 ACTIVE DOF (R5 cap 4 met, R5-aim and the 3-active brief failed; same ruling as short-a2-arc-slide-3r). Honest figure (J2 stops at the 5-deg J1-J3 margin, phi 20.79 / 146.61, BD seats, fit Bench(60,160) fast, worn frozen on Bench(110,360) exact): v_gap 18.45 (score 93.3; reach 0.747, follow 1.0, ib14 0.889, ib10 0.583, contact 0.021; near-touch 24.26, min metal 0.05 mm; overhead ws 8/28) vs CHAMPION 64.93 on the same bench and checks (fold margin 5; 66.97 at margin 10). As a 4-active-DOF design it beats the champion and every verified 3-active leader; the mechanism verifier's buildable variant (physical q2 stop + 6 mm spring cap) measured 17.32.",
  "best_k": "variant B, CMA stream BD best (6.19 on Bench(60,160) fast, VModel rules)",
@@ -123,7 +123,7 @@
   "source": "docs/concepts/models/minarc-stop-knuckle-4r-pinknee.py",
   "confidence": "counted"
  },
- "complexity": 13.5,
+ "complexity": 33.0,
  "complexity_B": 33.0,
  "best_params_B_margin_reading": {
   "az1": 97.7672,
@@ -360,7 +360,7 @@
   "mstop": 0,
   "variant": "B"
  },
- "v_contact": 0.0207,
+ "v_contact": 0.0107,
  "verification": {
   "t": "2026-10-16T09:49:14Z",
   "judge": "two assigned lenses (remeasure, mechanism) combined; CONFIRMED only if neither refutes -> REFUTED. v_* = the worst credible re-measure at margin 5 with the continuity rule and the mechanism prices: the claim priced by moving its J2 stops to the 5-deg J1-J3 margin (18.45, three harnesses); the physical-stop gain (17.32) is single-lens and not credited",
@@ -535,19 +535,14 @@
    "raw": "docs/concepts/verify/minarc-judge/"
   }
  },
- "refuted_by": [
-  "docs/concepts/verify/minarc-stop-knuckle-4r-remeasure.md",
-  "docs/concepts/verify/minarc-stop-knuckle-4r-mechanism.md",
-  "docs/concepts/verify/minarc-stop-knuckle-4r-skeptic.py (skeptic lens, docs/concepts/minarc-stop-knuckle-4r.md)"
- ],
- "v_score": 93.29,
- "v_gap_near1": 24.26,
+ "v_score": 92.89,
+ "v_gap_near1": 26.44,
  "v_min_metal_mm": 0.05,
- "held_out_gap": 22.27,
- "held_out_gap_near1": 26.71,
+ "held_out_gap": 24.18,
+ "held_out_gap_near1": 28.86,
  "held_out_h1_same_harness": 31.39,
- "v_t": "2026-10-16T09:49:14Z",
- "v_protocol": "PRICED design, not the claim as made: variant B best_params (CMA stream BD) with the J2 stops moved to the user's 5-deg bound in THE J1-J3 fold-margin metric of tools/concept_kit.py (phi_lo 20.793, phi_hi 146.614 instead of 12.28 / 162.70; the model's own interior-angle stop law), shape refit on Bench(60,160) fast (10.83), frozen, worn on Bench(110,360) EXACT, O20 x4, fold margin 5, verifier checks (0 poses removed), continuity flood fill on the full 1432-pose grid (2-deg slerp; no q1 / q2 / q3' / pin a / pin b / dK step > 10 deg; knee branch fixed; seeds elevation 0 with K on stop A): 0 of 269 taken workspace poses dropped. Same number in three harnesses (mechanism lens, skeptic lens, the judge's run of the re-measure lens' harness). Mechanism prices: physical q2 stop -1.13 and a real 0.3 x 5 mm spring in a 6 mm taller K cap 0.00 (mechanism lens: 17.32) - not credited (single lens); worst credible = 18.45. Held out: the pin knee's 1154 disjoint poses, same frozen shape and checks, continuity 0 of 682 dropped.",
+ "v_t": "2026-10-16T11:57:11Z",
+ "v_protocol": "BDp = variant B (pin knee + spring knuckle K in link 1), CMA stream BD seats, both J2 stops at the 5-deg J1-J3 kit margin, physical q2 dowel stop (slot -24.98 .. 100.84 deg; K opens to the smallest rotation that closes the chain), hub K cap +6 mm; params docs/concepts/verify/minarc-kitrule/params_floorBD5_phys_cap6.json; model docs/concepts/models/minarc-stop-knuckle-4r-kitrule.py (kitrule 1, phys 1, capK 6, m3e 1). Fit Bench(60,160) fast (12.25), frozen, worn Bench(110,360) EXACT, O20 x 4, fold margin 5 in every state (min own-state th 5.015), continuity flood fill on the full 1432-pose grid (2-deg slerp, no q1 / q2 / q3' / pin / dK step > 10 deg, knee branch fixed, seeds elevation 0 with K on stop A): 0 taken poses dropped. Same number in two independent harnesses (remeasure lens: its own harness; buildability lens: the claim's run() path). Held out: the pin knee's 1154 disjoint poses, same frozen shape and checks.",
  "v_gap_claim_reading": 15.42,
  "v_held_out_claim_reading": 18.22,
  "v_gap_claim_stops_kit_rule": {
@@ -558,7 +553,7 @@
   "held_out_connected": 38.2,
   "note": "the claimed stops (phi 12.28 / 162.70) kept, poses inside the 5-deg J1-J3 band refused: the knuckle-open states are reached from rest only through the band"
  },
- "v_verdict": "REFUTED (both lenses; a third, skeptic lens agrees). The claimed 15.42 reproduces to the digit, but only in the model's J2 interior-angle fold reading: its J2 stops (phi 12.28 / 162.70) let the J1-J3 dyad come within 1.88 / 1.37 deg of its fold (kit metric, the one H1 and every verified row use; 5 deg = phi 20.8 / 146.6), below the user's 5-deg lower bound, with J2 hitting the stretched stop at a rate ratio of 6.35 (H1's worst 3.15). Kept stops under the kit rule: 21.33 static, 35.56 connected. Priced (stops moved to the 5-deg margin): 18.45 frozen exact, connected, near-touch 24.26 (score 93.29), held out 22.27 vs H1 31.39 under the same harness - better than the verified H1 (27.20 same protocol, 24.48 polish) by 6-9 points, but it is a different configuration than the one claimed and is not confirmed here. Mechanism (lens 2): the J2 'hard stop' acts on a virtual angle no dowel at J2 can stop (physical q2 stop law: no cost, gains 1.13), and the specified 0.2 x 3 mm clock spring cannot carry 0.08-0.113 N.m (a 0.3 x 5 mm strip in a 6 mm taller cap: no cost). Next: re-claim with the q2-stop model fix and a near-touch CMA holding the stops >= 5 deg from the J1-J3 fold, then a fresh two-lens verification.",
+ "v_verdict": "VERIFIED LEADER (judge 2026-10-16T11:57:11Z, two lenses not refuted + judge cross-check): BDp 19.54 frozen exact Bench(110,360) (score 92.89), margin 5, continuity applied (0 dropped) = the lenses' 19.06 (both, to the digit) + 0.48 priced for buildable stops (J2 slot 5.0 +0.5 / -0 deg of J1-J3 margin, K stop B at dK 34.47; worst built pairing measured on the farm); reach 0.7222, follow 1.0, in-band14 0.8931, contact 0.0107; near-touch 26.44 (hub 2 wall 0.05 mm at the overhead raise peak, disclosed). Held out 24.18 (near-touch 28.86) vs H1 31.39 same harness; bench vs H1 27.2 same protocol. Min own-state J1-J3 margin 5.007 (stops at 5.0) .. 5.553 (5.5); continuity 1041/1041, 0 islands. Cost: 4 revolutes, K spring-held and SENSED (4 active DOF), complexity 33 vs H1 19.5; 5.79 gap points short of the golden 13.75.",
  "v_issues": [
   "FOLD MARGIN (both lenses + skeptic): J2 stops at phi 12.28 / 162.70 put the J1-J3 dyad 1.88 / 1.37 deg from its fold (tools/concept_kit.py metric; a1 38.07, a2 58.75 with K on stop A). Taken state-A poses down to 1.97 deg (25 under 5) on Bench(110,360) and 1.51 deg (44 under 5) held out; 8 clip frames (wash opposite shoulder) down to 4.02 deg. CLAUDE.md: 5 deg is the lower bound; never shrink the singularity margin to buy reach without the user's say.",
   "Claimed stops kept, kit rule: 21.33 static / 35.56 connected on Bench(110,360) (50 workspace poses islanded; 822 of 1070 grid nodes reachable), held out 21.67 static / 38.2 connected.",
@@ -748,5 +743,215 @@
   "continuity": "rest (elevation 0) is always stretched (K open): strict seeds = 0; seeded at any elevation-0 pose 1263 / 1263 nodes connect -> connected = static",
   "held_out_static": 45.72,
   "held_out_static_near1": 48.55
- }
+ },
+ "v_prior_bd_virtual_stop_refuted": {
+  "v_reach": 0.7472,
+  "v_follow": 1.0,
+  "v_inband14": 0.889,
+  "v_inband10": 0.583,
+  "v_gap": 18.45,
+  "v_contact": 0.0207,
+  "v_score": 93.29,
+  "v_gap_near1": 24.26,
+  "v_min_metal_mm": 0.05,
+  "held_out_gap": 22.27,
+  "held_out_gap_near1": 26.71,
+  "v_t": "2026-10-16T09:49:14Z",
+  "v_protocol": "PRICED design, not the claim as made: variant B best_params (CMA stream BD) with the J2 stops moved to the user's 5-deg bound in THE J1-J3 fold-margin metric of tools/concept_kit.py (phi_lo 20.793, phi_hi 146.614 instead of 12.28 / 162.70; the model's own interior-angle stop law), shape refit on Bench(60,160) fast (10.83), frozen, worn on Bench(110,360) EXACT, O20 x4, fold margin 5, verifier checks (0 poses removed), continuity flood fill on the full 1432-pose grid (2-deg slerp; no q1 / q2 / q3' / pin a / pin b / dK step > 10 deg; knee branch fixed; seeds elevation 0 with K on stop A): 0 of 269 taken workspace poses dropped. Same number in three harnesses (mechanism lens, skeptic lens, the judge's run of the re-measure lens' harness). Mechanism prices: physical q2 stop -1.13 and a real 0.3 x 5 mm spring in a 6 mm taller K cap 0.00 (mechanism lens: 17.32) - not credited (single lens); worst credible = 18.45. Held out: the pin knee's 1154 disjoint poses, same frozen shape and checks, continuity 0 of 682 dropped.",
+  "v_verdict": "REFUTED (both lenses; a third, skeptic lens agrees). The claimed 15.42 reproduces to the digit, but only in the model's J2 interior-angle fold reading: its J2 stops (phi 12.28 / 162.70) let the J1-J3 dyad come within 1.88 / 1.37 deg of its fold (kit metric, the one H1 and every verified row use; 5 deg = phi 20.8 / 146.6), below the user's 5-deg lower bound, with J2 hitting the stretched stop at a rate ratio of 6.35 (H1's worst 3.15). Kept stops under the kit rule: 21.33 static, 35.56 connected. Priced (stops moved to the 5-deg margin): 18.45 frozen exact, connected, near-touch 24.26 (score 93.29), held out 22.27 vs H1 31.39 under the same harness - better than the verified H1 (27.20 same protocol, 24.48 polish) by 6-9 points, but it is a different configuration than the one claimed and is not confirmed here. Mechanism (lens 2): the J2 'hard stop' acts on a virtual angle no dowel at J2 can stop (physical q2 stop law: no cost, gains 1.13), and the specified 0.2 x 3 mm clock spring cannot carry 0.08-0.113 N.m (a 0.3 x 5 mm strip in a 6 mm taller cap: no cost). Next: re-claim with the q2-stop model fix and a near-touch CMA holding the stops >= 5 deg from the J1-J3 fold, then a fresh two-lens verification."
+ },
+ "v_kitrule_gap": 19.54,
+ "v_kitrule_score": 92.89,
+ "v_kitrule_gap_near1": 26.44,
+ "v_kitrule_near1_poses": 15,
+ "v_kitrule_min_metal_mm": 0.05,
+ "v_kitrule_reach": 0.7222,
+ "v_kitrule_follow": 1.0,
+ "v_kitrule_inband14": 0.8931,
+ "v_kitrule_inband10": 0.594,
+ "v_kitrule_contact": 0.0107,
+ "v_kitrule_held_out": {
+  "gap": 24.18,
+  "score": 91.21,
+  "gap_near1": 28.86,
+  "near1_poses": 27,
+  "min_mm": 0.05,
+  "reach": 0.6828,
+  "follow": 1.0,
+  "inband14": 0.8904,
+  "inband10": 0.5928,
+  "contact": 0.015,
+  "dropped_unconnected": 0,
+  "h1_same_harness": {
+   "gap": 31.39,
+   "gap_near1": 34.66
+  },
+  "gain_vs_h1": 7.21
+ },
+ "v_kitrule_min_th": {
+  "min": 5.007,
+  "stops_at_5_0": {
+   "bench": 5.015,
+   "held_out": 5.007,
+   "grid_taken": 5.007
+  },
+  "stops_at_5_5": {
+   "bench": 5.553,
+   "held_out": 5.525
+  },
+  "under_5": 0,
+  "under_10_bench": 99,
+  "under_10_held": 247,
+  "folded_taken": 0,
+  "metric": "kit J1-J3 th, each taken pose in its own state; as built the stop engages at 5.0-5.5"
+ },
+ "v_kitrule_continuity": {
+  "kinematic": "1041/1041 grid nodes, 0 islands, 915/915 edges (remeasure lens)",
+  "contact_aware": "1014/1014 taken grid nodes, 0 islands, 888/888 edges (remeasure lens)",
+  "bench_dropped": 0,
+  "held_dropped": 0
+ },
+ "v_kitrule_margin10": {
+  "gap": 22.4,
+  "gap_near1": 26.21,
+  "min_th": 10.017,
+  "h1_margin10": 28.21
+ },
+ "v_kitrule_stop_tolerance": {
+  "note": "judge's farm runs of the remeasure harness with both J2 stops and the all-state rule moved out by a machining tolerance (shape refit at that margin): the build spec for a stop that must engage at >= 5 deg is a unilateral slot tolerance 5.0 +0.5 / -0 deg",
+  "bench_m5p5": 19.29,
+  "held_m5p5": 23.36,
+  "bench_m6": 19.53,
+  "bench_m5p5_near1": 26.15,
+  "held_m5p5_near1": 28.2,
+  "bench_m5p5_min_th": 5.553,
+  "held_m5p5_min_th": 5.517,
+  "stopB_34_47": {
+   "bench_m5_B34": 19.06,
+   "bench_m5p5_B34": 19.54,
+   "held_m5p5_B34": 24.18
+  },
+  "stopB_note": "K stop B drawn at dK 34.47 (the effective-dyad 5.0 cut with J2 on its 5.0 stop; a1max 54.748 instead of 66.159): bench_m5_B34 = nominal J2 stops, *_m5p5_B34 = the worst built pairing (J2 stops at 5.5, stop B at 34.47)",
+  "priced": 0.48,
+  "raw": "docs/concepts/verify/minarc-bdp-judge/"
+ },
+ "v_kitrule_rule_reading": {
+  "gap": 19.06,
+  "score": 93.07,
+  "reach": 0.725,
+  "follow": 1.0,
+  "inband14": 0.8951,
+  "contact": 0.0107,
+  "gap_near1": 26.15,
+  "held_out": 23.24,
+  "held_out_near1": 28.31,
+  "note": "both J2 stops at exactly 5.00 deg, K stop B as modelled - the two lenses, to the digit"
+ },
+ "v_kitrule_h1_same_harness": {
+  "bench": 27.2,
+  "bench_near1": 31.75,
+  "held_out": 31.39,
+  "held_out_near1": 34.66
+ },
+ "v_kitrule_complexity": {
+  "BDp": 33.0,
+  "H1": 19.5,
+  "tool": "tools/simplicity.py v1 (mechanism_B; H1 rows/skin-normal-3r-pin-knee.json)",
+  "note": "4 revolutes (J1, K, J2, J3) + the 2-pin knee; K passive, spring-held, SENSED (4 active DOF in the user's count - the round-5 skeptic's ruling stands); the J2 dowel adds at most 0.25 when counted"
+ },
+ "v_kitrule_build_conditions": [
+  "K stop B at dK 34.47 deg (a1max 54.748; a 35-deg K slot), not 62.83: as modelled it engages at an effective-dyad margin of 2.74 deg (th 122.2) (buildability lens); drawn with a unilateral -0.5 / +0 tolerance; priced by the judge together with the J2 slot tolerance (v_kitrule_stop_tolerance)",
+  "clock spring 0.3 x 5 mm 1.4310 +C1900, rate <= 0.015 N.m/rad (strip >= 145 mm), preload 0.08 N.m; at 0.03 N.m/rad it reaches 1505 MPa at stop B -> 0 bench cost (buildability lens); steel cover (0.7 mm left in the 6 mm cap)",
+  "q2 dowel slot drawn so J2's stop engages at 5.0 +0.5 / -0 deg of the J1-J3 margin (about 1.5 deg of q2, 0.2 mm at the dowel's r 7.75 mm), never below 5 (judge; priced in v_kitrule_stop_tolerance)",
+  "O2 stop dowels: L1 CAD strength check (about 770 N at 6 N.m about GH; 820 MPa shear at 20 N.m)"
+ ],
+ "v_kitrule_issues": [
+  "Hub 2's wall comes within 0.05 mm of the skin at the overhead raise peak (plane 30, elevation 150, axial -60), state A (K closed) - the same part and value as the refuted BD; the held-out set repeats the same pose (not an independent test); hub 1 0.08-0.20 mm at elevation 165 held out. Disclosed in near-touch 26.15 (held 28.31); still better than H1's 31.75 (34.66).",
+  "The stops sit exactly at the 5-deg rule (min own-state margin 5.015 bench / 5.007 held): see the stop tolerance.",
+  "99 of 371 taken bench poses (247 held out) sit under 10 deg of margin - the near-edge feel (docs/research/fold-stop-feel.md).",
+  "The folded stop never engages (0 folded poses anywhere): its side of the slot and K is untested by the bench.",
+  "On forced poses the plain dyad is 11.4-11.6 deg past its own fold; the 5-deg margin holds only because K opens. A sticky K would drive J2 into its stop near-singular: spring preload 0.08 N.m vs a re-measured demand of at most 0.044 N.m (2 g + 2 mN.m seals per pair), 1.6-1.8x.",
+  "Hard wall where J2 is on its stop and K at stop B (th 122.2 as modelled): 184 of 1432 envelope poses beyond it, 0 clip frames; unique equilibrium, no trap.",
+  "Contact-aware continuity checks nodes only; the 2-deg slerp steps between them are checked kinematically.",
+  "Fit-to-wear loss 6.8 points (fast fit 12.25 -> frozen exact 19.06).",
+  "Hub K's 18.25 mm crown (6 mm prouder than the other hubs) is never scored by in-band (same convention for every design); it is >= 4.08 mm from the skin on every taken overhead pose and never decides a pose.",
+  "4 revolutes with a sensed K: at the DOF cap of 4, not the preferred 3; complexity 33 vs H1 19.5, far from the golden complexity ~0; 5.31 gap points short of 13.75.",
+  "K adds nothing overhead: every taken pose at elevation >= 140 is in state A."
+ ],
+ "v_kitrule_verdict": "VERIFIED LEADER (judge 2026-10-16T11:57:11Z, two lenses not refuted + judge cross-check): BDp 19.54 frozen exact Bench(110,360) (score 92.89), margin 5, continuity applied (0 dropped) = the lenses' 19.06 (both, to the digit) + 0.48 priced for buildable stops (J2 slot 5.0 +0.5 / -0 deg of J1-J3 margin, K stop B at dK 34.47; worst built pairing measured on the farm); reach 0.7222, follow 1.0, in-band14 0.8931, contact 0.0107; near-touch 26.44 (hub 2 wall 0.05 mm at the overhead raise peak, disclosed). Held out 24.18 (near-touch 28.86) vs H1 31.39 same harness; bench vs H1 27.2 same protocol. Min own-state J1-J3 margin 5.007 (stops at 5.0) .. 5.553 (5.5); continuity 1041/1041, 0 islands. Cost: 4 revolutes, K spring-held and SENSED (4 active DOF), complexity 33 vs H1 19.5; 5.79 gap points short of the golden 13.75.",
+ "v_kitrule_t": "2026-10-16T11:57:11Z",
+ "v_kitrule_judge": "docs/concepts/verify/minarc-bdp-judge.md (harness minarc-bdp-judge.py, raw minarc-bdp-judge/)",
+ "v_kitrule_lenses": {
+  "remeasure": {
+   "refuted": false,
+   "doc": "docs/concepts/verify/minarc-bdp-remeasure.md",
+   "harness": "docs/concepts/verify/minarc-bdp-remeasure.py",
+   "raw": "docs/concepts/verify/minarc-bdp/",
+   "gap": 19.06,
+   "held_out": 23.24,
+   "margin10": 22.4,
+   "min_th": 5.007
+  },
+  "buildability": {
+   "refuted": false,
+   "doc": "docs/concepts/verify/minarc-bdp-buildability.md",
+   "harness": "docs/concepts/verify/minarc-bdp-buildability.py",
+   "raw": ".cache/minarc_bdp_build/ (git-ignored)",
+   "gap": 19.06,
+   "held_out": 23.24,
+   "min_th": 5.01
+  }
+ },
+ "t_verified": "2026-10-16T11:57:11Z",
+ "mechanism_A": {
+  "active_dof": 3,
+  "passive_trans": 0,
+  "crossed_rails": false,
+  "passive_rot": 1,
+  "moving_bodies": 4,
+  "joints": 4,
+  "closed_loops": 0,
+  "sliding_pairs": 0,
+  "rolling_pairs": 4,
+  "sensed_passive": 1,
+  "springs_or_flexures": 1,
+  "custom_parts": 10,
+  "catalogue_parts": 10,
+  "notes": "spherical 3R with link 1 split by a passive knuckle K. bodies: link 1a, link 1b, link 2, member 3 (hub-3 arm-end plate + K7 neck). joints: J1, K, J2, J3 O20 hubs on MR117-2RS pairs (revolutes). Open chain, GH closes it: loop mobility 4 vs the arm's 3 - the spare is set by the clock spring in K's cap (preload onto stop A) and the J2 interior-angle hard stops (min-arc law), so nothing sags (R17). sensed: K (encoder, the 4th coordinate is not a function of J1-J3 readings alone). custom: base, 3 links, member 3, 4 hub shafts, the clock spring strip (0.2 x 3 mm stainless, ~4 turns); catalogue: 4 x MR117-2RS pair + 2 O2 ISO 8734 stop dowels (K stop arc slot, J2 stop arc slot).",
+  "source": "docs/concepts/models/minarc-stop-knuckle-4r.py:1-20 (chain, law), build()",
+  "confidence": "counted"
+ },
+ "complexity_A": 13.5,
+ "verification_kitrule": {
+  "t": "2026-10-16T11:57:11Z",
+  "judge": "two assigned lenses (remeasure, buildability) combined; CONFIRMED only if neither refutes -> CONFIRMED. v_* = the worst credible re-measure at margin 5 with continuity, plus the priced stop tolerance (judge's farm runs of the remeasure harness)",
+  "lenses": {
+   "remeasure": {
+    "refuted": false,
+    "doc": "docs/concepts/verify/minarc-bdp-remeasure.md",
+    "harness": "docs/concepts/verify/minarc-bdp-remeasure.py",
+    "raw": "docs/concepts/verify/minarc-bdp/",
+    "gap": 19.06,
+    "held_out": 23.24,
+    "margin10": 22.4,
+    "min_th": 5.007
+   },
+   "buildability": {
+    "refuted": false,
+    "doc": "docs/concepts/verify/minarc-bdp-buildability.md",
+    "harness": "docs/concepts/verify/minarc-bdp-buildability.py",
+    "raw": ".cache/minarc_bdp_build/ (git-ignored)",
+    "gap": 19.06,
+    "held_out": 23.24,
+    "min_th": 5.01
+   }
+  },
+  "ruling": "docs/concepts/verify/minarc-bdp-judge/ruling.json",
+  "doc": "docs/concepts/verify/minarc-bdp-judge.md"
+ },
+ "refuted_by_prior_claim_bd": [
+  "docs/concepts/verify/minarc-stop-knuckle-4r-remeasure.md",
+  "docs/concepts/verify/minarc-stop-knuckle-4r-mechanism.md",
+  "docs/concepts/verify/minarc-stop-knuckle-4r-skeptic.py (skeptic lens, docs/concepts/minarc-stop-knuckle-4r.md)"
+ ]
 }

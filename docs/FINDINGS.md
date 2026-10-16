@@ -1276,3 +1276,66 @@ kinematics match the model within 1e-4 mm.
   posture must be fixed in the objective, or the search spends it to buy reach (CLAUDE.md: the user must have their say
   first). The next polish (cross-fit) should hold ang_min >= 30 unless the user rules otherwise.
 * Raw data: `docs/research/verify_gpuknee/`. The row fields are `v_gpuknee_*`.
+
+## The knuckle BDp is verified, the new leader: 19.54 with buildable stops (19.06 at the rule), held out 24.18 vs H1 31.39 (2026-10-16, minarc-stop-knuckle-4r BDp, judge)
+
+**Claim.** Config BDp:
+- variant B: the pin knee plus a spring knuckle K in link 1;
+- both J2 stops at the 5-deg J1-J3 kit margin, as a physical dowel in a q2 slot;
+- hub K's cap 6 mm taller for a 0.3 x 5 mm clock strip.
+
+Claimed 19.06 frozen exact on Bench(110,360). Two independent lenses checked it, and the judge combined them.
+**Verdict: CONFIRMED, the new VERIFIED LEADER.**
+
+Raw data:
+* the lenses: `docs/concepts/verify/minarc-bdp-{remeasure,buildability}.md`;
+* the judge: `docs/concepts/verify/minarc-bdp-judge.{py,md}`, with its farm runs in `minarc-bdp-judge/`;
+* the merged ruling: `rows/minarc-stop-knuckle-4r.json` `v_kitrule_*`, status verified.
+
+What was measured:
+* **The claim reproduces to the digit in two harnesses.**
+  * The re-measure lens used its own harness (frozen hand-over by `__dict__` diff, frame-based checks, its own flood
+    fills).
+  * The buildability lens used the claim's `run()` path plus an independent K / q2 closure.
+  * Both get 19.06 (score 93.07) and held out 23.24, against H1's 31.39 in the same harness. H1 is 27.20 on the bench.
+  * The judge recomputed every gap from its components with the bench's `gap_of`.
+* **Every rule holds.**
+  * The minimum own-state J1-J3 margin is 5.007, with 0 poses under 5.
+  * Continuity: 1041 of 1041 grid nodes connect kinematically and 1014 of 1014 contact-aware, with 0 islands and 0 taken
+    poses dropped.
+  * The forced state is the spring's unique minimum-energy equilibrium. Lens 2 scanned th 0-180 and found 0 multiple
+    equilibria and 0 mismatches.
+  * The margin-10 reading is 22.40, against H1's 28.21.
+* **The stops as built cost +0.48.** This is measured by the judge: six farm jobs of the re-measure harness, about
+  $0.10.
+  * As modelled, K's stop B (dK 62.83) engages at an effective-dyad margin of 2.74 deg, below the rule. Moving it to
+    dK 34.47 (a1max 54.748) is free: the run gives 19.06, identical.
+  * The J2 stops sit exactly at 5.00, so a slot cut long breaks the rule. A buildable slot is drawn 5.0 +0.5 / -0 deg of
+    margin, which is about 1.5 deg of q2, or 0.2 mm at the dowel.
+  * The worst built pairing is J2 at 5.5 with stop B at 34.47. It measures **19.54 (score 92.89)**: reach 0.7222, follow
+    1.0, in-band14 0.8931, contact 0.0107, near-touch 26.44. **Held out it is 24.18** (near-touch 28.86).
+  * The J2 stops alone at 5.5 give 19.29 (held out 23.36); at 6.0, 19.53. The cost is in-band, about 0.47 points per
+    degree; reach does not move.
+  * A tighter band (0.05 mm at the dowel) would recover most of the +0.48. That is a CAD and compliance choice.
+* **The spring is buildable** at a rate of 0.015 N.m/rad or less, in +C1900 temper. The demand is at most 0.044 N.m
+  against the 0.08 N.m preload.
+* **What stands, disclosed.**
+  * Hub 2's wall is 0.05 mm from the skin at the overhead raise peak. This is the same as BD, and the held-out set
+    repeats the pose.
+  * 99 of 371 taken bench poses sit under 10 deg of margin.
+  * The folded stop never engages.
+  * K is sensed, so the chain is 4 active DOF, at the cap. Complexity is 33 against H1's 19.5.
+  * K adds no overhead reach: every taken pose at elevation 140 or more has K closed.
+
+What it means:
+* The knuckle beats the pin knee by 7.7 points on the bench and 7.2 held out, with buildable stops and 0 passive
+  translations. It is the first design verified above score 92.5.
+* It is 5.8 points short of the golden 13.75, at a complexity far from 0.
+* **Protocol lesson: a stop placed exactly at a rule is not a buildable stop.** From now on every claim prices its stops
+  at the rule plus a unilateral tolerance, together with every other stop the tolerance moves (here K's stop B).
+
+Next:
+1. The 2-fold cross-fit near-touch polish of BDp, with the stops as design variables. It must clear the hub-2 pinch.
+2. The gen-4 L1 CAD and stills.
+3. The user's ruling on the sensed 4th joint.
+4. The cam-stop-knuckle lens: K driven from q2, 3 active DOF.

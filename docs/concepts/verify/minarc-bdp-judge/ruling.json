@@ -1,8 +1,8 @@
 {
  "confirmed": true,
- "v_gap": 19.29,
- "v_score": 92.99,
- "held_out_gap": 23.36,
+ "v_gap": 19.54,
+ "v_score": 92.89,
+ "held_out_gap": 24.18,
  "rule_reading": {
   "gap": 19.06,
   "score": 93.07,
@@ -12,7 +12,7 @@
  "priced_mechanism_issues": {
   "K stop B moved to dK 34.5 deg (buildability lens)": 0.0,
   "clock-spring rate <= 0.015 N.m/rad, +C1900 (buildability lens)": 0.0,
-  "J2 stop slot drawn 5.0 +0.5 / -0 deg of J1-J3 margin (judge; worst built case = stops at 5.5)": 0.23
+  "J2 stop slot drawn 5.0 +0.5 / -0 deg of J1-J3 margin with K stop B at dK 34.47 (judge; worst built pairing = J2 stops at 5.5, stop B at 34.47)": 0.48
  },
  "stop_tolerance": {
   "bench_m5p5": 19.29,
@@ -31,6 +31,9 @@
   "continuity_0_dropped": true,
   "beats_h1_bench": true,
   "beats_h1_held": true,
+  "bench_m5_B34_margin_ge_5": true,
+  "bench_m5p5_B34_margin_ge_5": true,
+  "held_m5p5_B34_margin_ge_5": true,
   "tolerance_margin_ge_5": true,
   "tolerance_continuity_0_dropped": true
  },
@@ -240,6 +243,90 @@
    ],
    "dK_range": [
     -36.329,
+    0.0
+   ]
+  },
+  "bench_m5_B34": {
+   "tag": "judge, bench, J2 stops 5.0, K stop B dK 34.47",
+   "margin": 5.0,
+   "fit_fast": 12.25,
+   "gap": 19.06,
+   "regap": 19.06,
+   "score": 93.07,
+   "reach": 0.725,
+   "follow": 1.0,
+   "inband14": 0.8951,
+   "inband10": 0.5969,
+   "contact": 0.0107,
+   "gap_near1": 26.15,
+   "near1_poses": 15,
+   "min_mm": 0.05,
+   "dropped_unconnected": 0,
+   "min_th": 5.015,
+   "lt5": 0,
+   "lt10": 99,
+   "q2_slot": [
+    -24.979,
+    100.843
+   ],
+   "dK_range": [
+    -33.947,
+    0.0
+   ]
+  },
+  "bench_m5p5_B34": {
+   "tag": "judge, bench, J2 stops 5.5, K stop B dK 34.47",
+   "margin": 5.5,
+   "fit_fast": 14.32,
+   "gap": 19.54,
+   "regap": 19.54,
+   "score": 92.89,
+   "reach": 0.7222,
+   "follow": 1.0,
+   "inband14": 0.8931,
+   "inband10": 0.594,
+   "contact": 0.0107,
+   "gap_near1": 26.44,
+   "near1_poses": 15,
+   "min_mm": 0.05,
+   "dropped_unconnected": 0,
+   "min_th": 5.553,
+   "lt5": 0,
+   "lt10": 98,
+   "q2_slot": [
+    -23.293,
+    99.704
+   ],
+   "dK_range": [
+    -34.041,
+    0.0
+   ]
+  },
+  "held_m5p5_B34": {
+   "tag": "judge, held out, J2 stops 5.5, K stop B dK 34.47",
+   "margin": 5.5,
+   "fit_fast": 14.32,
+   "gap": 24.18,
+   "regap": 24.18,
+   "score": 91.21,
+   "reach": 0.6828,
+   "follow": 1.0,
+   "inband14": 0.8904,
+   "inband10": 0.5928,
+   "contact": 0.015,
+   "gap_near1": 28.86,
+   "near1_poses": 27,
+   "min_mm": 0.05,
+   "dropped_unconnected": 0,
+   "min_th": 5.525,
+   "lt5": 0,
+   "lt10": 241,
+   "q2_slot": [
+    -23.293,
+    99.704
+   ],
+   "dK_range": [
+    -34.136,
     0.0
    ]
   },
