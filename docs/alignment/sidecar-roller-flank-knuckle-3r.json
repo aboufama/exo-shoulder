@@ -1,0 +1,120 @@
+{
+ "id": "sidecar-roller-flank-knuckle-3r",
+ "status": "screened",
+ "v_gap": null,
+ "complexity": 45.25,
+ "verdict": "gamed",
+ "reasons": [
+  "near_touch: plain 20.08, <1 mm 21.17, <2 mm 46.82, 26.74 points live in the 1-2 mm shell (row frozen)",
+  "dominance: beats frontload-lobe-stopb-knuckle-3r by 2.64 plain but loses by 2.84 at 2 mm: the gain is metal moved into the 1-2 mm shell"
+ ],
+ "checks": [
+  {
+   "check": "held_out",
+   "level": "watch",
+   "reason": "no verified bench gap on the row"
+  },
+  {
+   "check": "fast_frozen",
+   "level": "ok",
+   "reason": "no pair"
+  },
+  {
+   "check": "near_touch",
+   "level": "gamed",
+   "reason": "plain 20.08, <1 mm 21.17, <2 mm 46.82, 26.74 points live in the 1-2 mm shell (row frozen)",
+   "shell2": 26.74,
+   "plain": 20.08,
+   "n1": 21.17,
+   "n2": 46.82,
+   "n3": null,
+   "band3": null,
+   "hist": null,
+   "minmm": 0.32,
+   "source": "row frozen"
+  },
+  {
+   "check": "dominance",
+   "level": "gamed",
+   "reason": "beats frontload-lobe-stopb-knuckle-3r by 2.64 plain but loses by 2.84 at 2 mm: the gain is metal moved into the 1-2 mm shell",
+   "ref": "frontload-lobe-stopb-knuckle-3r",
+   "gain_plain": 2.64,
+   "gain_2mm": -2.84
+  },
+  {
+   "check": "continuity",
+   "level": "watch",
+   "reason": "passive / sprung / sensed coordinates but no continuity flood on file (rule 2026-10-16)"
+  },
+  {
+   "check": "fold_margin",
+   "level": "watch",
+   "reason": "no min-th margin over taken poses on file (rule: each claim reports it)"
+  },
+  {
+   "check": "idle",
+   "level": "ok",
+   "reason": "declared drive moves: smallest recorded span 23.6 (row:frozen.cam.phi_max_taken)",
+   "spans": [
+    [
+     "row:frozen.cam.phi_max_taken",
+     23.6
+    ],
+    [
+     "row:frozen.cam.law_dK_max",
+     54.3
+    ]
+   ]
+  },
+  {
+   "check": "sampling",
+   "level": "ok",
+   "reason": "per-part sample counts not on file (fractions only) (row frozen)",
+   "parts": {
+    "hub1": 0.993,
+    "hubK": 0.989,
+    "hub2": 0.985,
+    "hub3": 0.604,
+    "E": 0.952,
+    "boss": 0.992,
+    "pad": 1.0,
+    "knee": 0.935,
+    "crank": 0.856,
+    "roller": 0.932,
+    "horn": 0.953,
+    "L1a": 0.956,
+    "L1b": 0.958,
+    "L2": 0.74
+   }
+  },
+  {
+   "check": "complexity",
+   "level": "watch",
+   "reason": "recomputed 45.25 vs row 45.25; 3 active + 2 sensed passive coordinates = 5 read coordinates (the DOF count shows 3)",
+   "recomputed": 45.25,
+   "row": 45.25
+  },
+  {
+   "check": "reporting",
+   "level": "ok",
+   "reason": "row, verifier files and dashboard agree"
+  },
+  {
+   "check": "judge_change",
+   "level": "ok",
+   "reason": "no bench / judge / metric file changed in the 2 commits that touched the row"
+  },
+  {
+   "check": "rules",
+   "level": "ok",
+   "reason": "O20, margin >= 5, translations <= 2 as recorded"
+  }
+ ],
+ "remeasured": {
+  "bench": false,
+  "held": false
+ },
+ "verifier_files": [],
+ "git": "1165c80",
+ "t": "2026-10-16T20:23:41Z"
+}

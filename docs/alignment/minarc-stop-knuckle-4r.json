@@ -1,0 +1,96 @@
+{
+ "id": "minarc-stop-knuckle-4r",
+ "status": "verified",
+ "v_gap": 19.54,
+ "complexity": 33.0,
+ "verdict": "watch",
+ "reasons": [
+  "near_touch: no near-touch measurement on file (rule since 2026-10-16: claims report plain and near-touch)",
+  "continuity: continuity record without the connected numbers (row kitrule_continuity)",
+  "sampling: no per-part in-band record: unsampled bodies cannot be ruled out",
+  "complexity: recomputed 33.0 vs row 33.0; 3 active + 3 sensed passive coordinates = 6 read coordinates (the DOF count shows 3)",
+  "reporting: dashboard sweep best 6.19 (score 97.75) sits 13.35 below the verified number"
+ ],
+ "checks": [
+  {
+   "check": "held_out",
+   "level": "ok",
+   "reason": "held out 24.18 vs bench 19.54 (+4.64; row held_out_gap)",
+   "held_gap": 24.18,
+   "v_gap": 19.54,
+   "drop": 4.64,
+   "source": "row held_out_gap"
+  },
+  {
+   "check": "fast_frozen",
+   "level": "ok",
+   "reason": "self/fast 6.19 -> verified 19.54 (+13.35)",
+   "fast": 6.19,
+   "verified": 19.54,
+   "drop": 13.35
+  },
+  {
+   "check": "near_touch",
+   "level": "watch",
+   "reason": "no near-touch measurement on file (rule since 2026-10-16: claims report plain and near-touch)"
+  },
+  {
+   "check": "dominance",
+   "level": "ok",
+   "reason": "no reference"
+  },
+  {
+   "check": "continuity",
+   "level": "watch",
+   "reason": "continuity record without the connected numbers (row kitrule_continuity)",
+   "record": "{'grid_nodes': 1041, 'connected': 1041, 'islands': 0, 'edges_passed': '1785 / 1785', 'bench_dropped': 0, 'held_dropped': 0}"
+  },
+  {
+   "check": "fold_margin",
+   "level": "ok",
+   "reason": "min fold margin on file 5.007 deg (v_kitrule_lenses.remeasure.min_th; 8 readings)",
+   "min_margin": 5.007,
+   "where": "v_kitrule_lenses.remeasure.min_th"
+  },
+  {
+   "check": "idle",
+   "level": "ok",
+   "reason": "no slaved drive declared",
+   "spans": []
+  },
+  {
+   "check": "sampling",
+   "level": "watch",
+   "reason": "no per-part in-band record: unsampled bodies cannot be ruled out"
+  },
+  {
+   "check": "complexity",
+   "level": "watch",
+   "reason": "recomputed 33.0 vs row 33.0; 3 active + 3 sensed passive coordinates = 6 read coordinates (the DOF count shows 3)",
+   "recomputed": 33.0,
+   "row": 33.0
+  },
+  {
+   "check": "reporting",
+   "level": "watch",
+   "reason": "dashboard sweep best 6.19 (score 97.75) sits 13.35 below the verified number"
+  },
+  {
+   "check": "judge_change",
+   "level": "ok",
+   "reason": "no bench / judge / metric file changed in the 11 commits that touched the row"
+  },
+  {
+   "check": "rules",
+   "level": "ok",
+   "reason": "O20, margin >= 5, translations <= 2 as recorded"
+  }
+ ],
+ "remeasured": {
+  "bench": false,
+  "held": false
+ },
+ "verifier_files": [],
+ "git": "1165c80",
+ "t": "2026-10-16T20:23:37Z"
+}

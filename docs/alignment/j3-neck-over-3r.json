@@ -1,0 +1,95 @@
+{
+ "id": "j3-neck-over-3r",
+ "status": "verified",
+ "v_gap": 28.46,
+ "complexity": 13.5,
+ "verdict": "watch",
+ "reasons": [
+  "held_out: no held-out measurement on file: the claim has never been worn off its own bench",
+  "near_touch: no near-touch measurement on file (rule since 2026-10-16: claims report plain and near-touch)",
+  "continuity: continuity record without the connected numbers (docs/concepts/verify/j3-neck-over-3r_claim_big_frozen.json)",
+  "fold_margin: no min-th margin over taken poses on file (rule: each claim reports it)",
+  "sampling: no per-part in-band record: unsampled bodies cannot be ruled out",
+  "reporting: verdict text still reads as a self-measured screen; dashboard v_gap 29.21 vs verifier 28.46 (+0.75); dashboard sweep best 22.87 (score 91.68) sits 5.59 below the verified number"
+ ],
+ "checks": [
+  {
+   "check": "held_out",
+   "level": "watch",
+   "reason": "no held-out measurement on file: the claim has never been worn off its own bench",
+   "v_gap": 28.46
+  },
+  {
+   "check": "fast_frozen",
+   "level": "ok",
+   "reason": "self/fast 22.87 -> verified 28.46 (+5.59)",
+   "fast": 22.87,
+   "verified": 28.46,
+   "drop": 5.59
+  },
+  {
+   "check": "near_touch",
+   "level": "watch",
+   "reason": "no near-touch measurement on file (rule since 2026-10-16: claims report plain and near-touch)"
+  },
+  {
+   "check": "dominance",
+   "level": "ok",
+   "reason": "no reference"
+  },
+  {
+   "check": "continuity",
+   "level": "watch",
+   "reason": "continuity record without the connected numbers (docs/concepts/verify/j3-neck-over-3r_claim_big_frozen.json)",
+   "record": "{'gap': 28.46, 'reach': 0.7389, 'follow': 0.9636, 'inband14': 0.8347, 'inband10': 0.4716, 'contact': 0.0582, 'gap_near1': 35.44, 'min_metal_skin': 0.0, 'overhead': {'n_ws': 28, 'reach': 0.1786, 'n_clip': 10, 'follow': 0.6, 'n_taken': 11, 'inband14': 0.8958, 'inband10': 0.6453}, 'forced': {'ws_stretc"
+  },
+  {
+   "check": "fold_margin",
+   "level": "watch",
+   "reason": "no min-th margin over taken poses on file (rule: each claim reports it)"
+  },
+  {
+   "check": "idle",
+   "level": "ok",
+   "reason": "no slaved drive declared",
+   "spans": []
+  },
+  {
+   "check": "sampling",
+   "level": "watch",
+   "reason": "no per-part in-band record: unsampled bodies cannot be ruled out"
+  },
+  {
+   "check": "complexity",
+   "level": "ok",
+   "reason": "recomputed 13.5 vs row 13.5",
+   "recomputed": 13.5,
+   "row": 13.5
+  },
+  {
+   "check": "reporting",
+   "level": "watch",
+   "reason": "verdict text still reads as a self-measured screen; dashboard v_gap 29.21 vs verifier 28.46 (+0.75); dashboard sweep best 22.87 (score 91.68) sits 5.59 below the verified number"
+  },
+  {
+   "check": "judge_change",
+   "level": "ok",
+   "reason": "no bench / judge / metric file changed in the 2 commits that touched the row"
+  },
+  {
+   "check": "rules",
+   "level": "ok",
+   "reason": "O20, margin >= 5, translations <= 2 as recorded"
+  }
+ ],
+ "remeasured": {
+  "bench": false,
+  "held": false
+ },
+ "verifier_files": [
+  "docs/concepts/verify/j3-neck-over-3r_claim_big_frozen.json",
+  "docs/concepts/verify/j3-neck-over-3r_nw14_big_frozen.json"
+ ],
+ "git": "1165c80",
+ "t": "2026-10-16T20:23:37Z"
+}

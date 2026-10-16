@@ -1,0 +1,178 @@
+{
+ "id": "k-rim-lobe-stub-knuckle-3r",
+ "status": "verified",
+ "v_gap": 44.79,
+ "complexity": 34.0,
+ "verdict": "gamed",
+ "reasons": [
+  "near_touch: plain 44.79, <1 mm 53.51, <2 mm 71.68, 26.89 points live in the 1-2 mm shell (docs/concepts/verify/k-rim-lobe-stub-knuckle-3r_corr_bench_frozen.json)"
+ ],
+ "checks": [
+  {
+   "check": "held_out",
+   "level": "watch",
+   "reason": "no held-out measurement on file: the claim has never been worn off its own bench",
+   "v_gap": 44.79
+  },
+  {
+   "check": "fast_frozen",
+   "level": "ok",
+   "reason": "self/fast 36.82 -> verified 44.79 (+7.97)",
+   "fast": 36.82,
+   "verified": 44.79,
+   "drop": 7.97
+  },
+  {
+   "check": "near_touch",
+   "level": "gamed",
+   "reason": "plain 44.79, <1 mm 53.51, <2 mm 71.68, 26.89 points live in the 1-2 mm shell (docs/concepts/verify/k-rim-lobe-stub-knuckle-3r_corr_bench_frozen.json)",
+   "shell2": 26.89,
+   "plain": 44.79,
+   "n1": 53.51,
+   "n2": 71.68,
+   "n3": null,
+   "band3": null,
+   "hist": null,
+   "minmm": 0.45,
+   "source": "docs/concepts/verify/k-rim-lobe-stub-knuckle-3r_corr_bench_frozen.json"
+  },
+  {
+   "check": "dominance",
+   "level": "ok",
+   "reason": "no reference"
+  },
+  {
+   "check": "continuity",
+   "level": "ok",
+   "reason": "static 44.79, connected full 44.79, knn 46.48, bench 81.25 (docs/concepts/verify/k-rim-lobe-stub-knuckle-3r_corr_bench_frozen.json)",
+   "static": 44.79,
+   "connected_full": 44.79,
+   "connected_knn": 46.48,
+   "connected_bench": 81.25
+  },
+  {
+   "check": "fold_margin",
+   "level": "watch",
+   "reason": "no min-th margin over taken poses on file (rule: each claim reports it)"
+  },
+  {
+   "check": "idle",
+   "level": "ok",
+   "reason": "declared drive moves: smallest recorded span 24.5 (docs/concepts/verify/k-rim-lobe-stub-knuckle-3r_corr_bench_frozen.json:drive.dK_taken_max)",
+   "spans": [
+    [
+     "docs/concepts/verify/k-rim-lobe-stub-knuckle-3r_corr_bench_frozen.json:drive.dK_taken_max",
+     24.5
+    ]
+   ]
+  },
+  {
+   "check": "sampling",
+   "level": "watch",
+   "reason": "sample-weighted in-band 0.826 vs part-weighted 0.753 (+7.25 points); thinly sampled parts: roller 9; mostly out-of-band parts: roller (0.18 in band, median 19.7 mm, 1.0 % of samples); lobe (0.00 in band, median 19.6 mm, 5.2 % of samples); LT (0.12 in band, median 21.4 mm, 3.7 % of samples) (docs/concepts/verify/k-rim-lobe-stub-knuckle-3r_corr_bench_frozen.json)",
+   "parts": {
+    "hub1": [
+     0.986,
+     7.3,
+     80
+    ],
+    "hubK": [
+     0.945,
+     8.8,
+     80
+    ],
+    "hub2": [
+     0.993,
+     9.8,
+     80
+    ],
+    "hub3": [
+     0.675,
+     12.0,
+     80
+    ],
+    "E": [
+     0.97,
+     6.7,
+     104
+    ],
+    "boss": [
+     1.0,
+     7.1,
+     32
+    ],
+    "pad": [
+     1.0,
+     7.5,
+     32
+    ],
+    "knee": [
+     0.982,
+     9.6,
+     95
+    ],
+    "roller": [
+     0.184,
+     19.7,
+     9
+    ],
+    "lobe": [
+     0.0,
+     19.6,
+     45
+    ],
+    "L1a": [
+     0.964,
+     7.5,
+     20
+    ],
+    "L1b": [
+     0.953,
+     8.2,
+     40
+    ],
+    "L2": [
+     0.776,
+     11.0,
+     140
+    ],
+    "LT": [
+     0.116,
+     21.4,
+     32
+    ]
+   }
+  },
+  {
+   "check": "complexity",
+   "level": "watch",
+   "reason": "recomputed 4.0 vs row 34.0; MISMATCH",
+   "recomputed": 4.0,
+   "row": 34.0
+  },
+  {
+   "check": "reporting",
+   "level": "watch",
+   "reason": "verdict text still reads as a self-measured screen; dashboard sweep best 36.82 (score 86.61) sits 7.97 below the verified number"
+  },
+  {
+   "check": "judge_change",
+   "level": "ok",
+   "reason": "no bench / judge / metric file changed in the 2 commits that touched the row"
+  },
+  {
+   "check": "rules",
+   "level": "ok",
+   "reason": "O20, margin >= 5, translations <= 2 as recorded"
+  }
+ ],
+ "remeasured": {
+  "bench": false,
+  "held": false
+ },
+ "verifier_files": [
+  "docs/concepts/verify/k-rim-lobe-stub-knuckle-3r_corr_bench_frozen.json"
+ ],
+ "git": "1165c80",
+ "t": "2026-10-16T20:23:37Z"
+}

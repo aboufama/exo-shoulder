@@ -1,0 +1,86 @@
+{
+ "id": "seed-offset-3r-slides",
+ "status": "verified",
+ "v_gap": 66.47,
+ "complexity": null,
+ "verdict": "gamed",
+ "reasons": [
+  "complexity: recomputed 43.5 vs row None; 3 passive translations > 2"
+ ],
+ "checks": [
+  {
+   "check": "held_out",
+   "level": "watch",
+   "reason": "no held-out measurement on file: the claim has never been worn off its own bench",
+   "v_gap": 66.47
+  },
+  {
+   "check": "fast_frozen",
+   "level": "ok",
+   "reason": "self/fast 57.95 -> verified 66.47 (+8.52)",
+   "fast": 57.95,
+   "verified": 66.47,
+   "drop": 8.52
+  },
+  {
+   "check": "near_touch",
+   "level": "watch",
+   "reason": "no near-touch measurement on file (rule since 2026-10-16: claims report plain and near-touch)"
+  },
+  {
+   "check": "dominance",
+   "level": "ok",
+   "reason": "no reference"
+  },
+  {
+   "check": "continuity",
+   "level": "watch",
+   "reason": "passive / sprung / sensed coordinates but no continuity flood on file (rule 2026-10-16)"
+  },
+  {
+   "check": "fold_margin",
+   "level": "watch",
+   "reason": "no min-th margin over taken poses on file (rule: each claim reports it)"
+  },
+  {
+   "check": "idle",
+   "level": "ok",
+   "reason": "no slaved drive declared",
+   "spans": []
+  },
+  {
+   "check": "sampling",
+   "level": "watch",
+   "reason": "no per-part in-band record: unsampled bodies cannot be ruled out"
+  },
+  {
+   "check": "complexity",
+   "level": "gamed",
+   "reason": "recomputed 43.5 vs row None; 3 passive translations > 2",
+   "recomputed": 43.5,
+   "row": null
+  },
+  {
+   "check": "reporting",
+   "level": "watch",
+   "reason": "status verified but no verifier file under docs/concepts/verify/; dashboard v_gap 67.83 vs verifier 66.47 (+1.36); dashboard sweep best 54.35 (score 80.24) sits 12.12 below the verified number"
+  },
+  {
+   "check": "judge_change",
+   "level": "ok",
+   "reason": "no bench / judge / metric file changed in the 6 commits that touched the row"
+  },
+  {
+   "check": "rules",
+   "level": "ok",
+   "reason": "O20, margin >= 5, translations <= 2 as recorded"
+  }
+ ],
+ "remeasured": {
+  "bench": false,
+  "held": false
+ },
+ "verifier_files": [],
+ "git": "1165c80",
+ "t": "2026-10-16T20:23:39Z"
+}

@@ -1,0 +1,100 @@
+{
+ "id": "twist-long-a2-knuckle-3r",
+ "status": "dead",
+ "v_gap": 24.46,
+ "complexity": 49.0,
+ "verdict": "watch",
+ "reasons": [
+  "held_out: no held-out measurement on file: the claim has never been worn off its own bench",
+  "near_touch: plain 24.46, <1 mm 27.7, 2 mm near-touch not measured (row frozen)",
+  "continuity: passive / sprung / sensed coordinates but no continuity flood on file (rule 2026-10-16)",
+  "fold_margin: no min-th margin over taken poses on file (rule: each claim reports it)",
+  "idle: a drive is declared but no range of it over the taken poses is on file",
+  "sampling: no per-part in-band record: unsampled bodies cannot be ruled out",
+  "complexity: no mechanism record: complexity unaudited",
+  "reporting: dashboard sweep best 16.74 (score 93.91) sits 7.72 below the verified number"
+ ],
+ "checks": [
+  {
+   "check": "held_out",
+   "level": "watch",
+   "reason": "no held-out measurement on file: the claim has never been worn off its own bench",
+   "v_gap": 24.46
+  },
+  {
+   "check": "fast_frozen",
+   "level": "ok",
+   "reason": "self/fast 16.74 -> verified 24.46 (+7.72)",
+   "fast": 16.74,
+   "verified": 24.46,
+   "drop": 7.72
+  },
+  {
+   "check": "near_touch",
+   "level": "watch",
+   "reason": "plain 24.46, <1 mm 27.7, 2 mm near-touch not measured (row frozen)",
+   "shell2": null,
+   "plain": 24.46,
+   "n1": 27.7,
+   "n2": null,
+   "n3": null,
+   "band3": null,
+   "hist": null,
+   "minmm": 0.03,
+   "source": "row frozen"
+  },
+  {
+   "check": "dominance",
+   "level": "ok",
+   "reason": "no reference"
+  },
+  {
+   "check": "continuity",
+   "level": "watch",
+   "reason": "passive / sprung / sensed coordinates but no continuity flood on file (rule 2026-10-16)"
+  },
+  {
+   "check": "fold_margin",
+   "level": "watch",
+   "reason": "no min-th margin over taken poses on file (rule: each claim reports it)"
+  },
+  {
+   "check": "idle",
+   "level": "watch",
+   "reason": "a drive is declared but no range of it over the taken poses is on file",
+   "spans": []
+  },
+  {
+   "check": "sampling",
+   "level": "watch",
+   "reason": "no per-part in-band record: unsampled bodies cannot be ruled out"
+  },
+  {
+   "check": "complexity",
+   "level": "watch",
+   "reason": "no mechanism record: complexity unaudited"
+  },
+  {
+   "check": "reporting",
+   "level": "watch",
+   "reason": "dashboard sweep best 16.74 (score 93.91) sits 7.72 below the verified number"
+  },
+  {
+   "check": "judge_change",
+   "level": "ok",
+   "reason": "no bench / judge / metric file changed in the 3 commits that touched the row"
+  },
+  {
+   "check": "rules",
+   "level": "ok",
+   "reason": "O20, margin >= 5, translations <= 2 as recorded"
+  }
+ ],
+ "remeasured": {
+  "bench": false,
+  "held": false
+ },
+ "verifier_files": [],
+ "git": "1165c80",
+ "t": "2026-10-16T20:23:41Z"
+}

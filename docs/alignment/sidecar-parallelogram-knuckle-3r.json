@@ -1,0 +1,222 @@
+{
+ "id": "sidecar-parallelogram-knuckle-3r",
+ "status": "verified",
+ "v_gap": 19.13,
+ "complexity": 49.0,
+ "verdict": "gamed",
+ "reasons": [
+  "near_touch: plain 19.13, <1 mm 20.77, <2 mm 50.41, 31.28 points live in the 1-2 mm shell (docs/concepts/verify/sidecar-parallelogram-knuckle-3r_v_bench_zb45.json)",
+  "dominance: beats frontload-lobe-stopb-knuckle-3r by 3.59 plain but loses by 6.43 at 2 mm: the gain is metal moved into the 1-2 mm shell",
+  "reporting: verdict text still reads as a self-measured screen; dashboard v_gap 18.06 vs verifier 19.13 (-1.07; the dashboard flatters the design); dashboard sweep best 10.63 (score 96.13) sits 8.50 below the verified number"
+ ],
+ "checks": [
+  {
+   "check": "held_out",
+   "level": "ok",
+   "reason": "held out 22.03 vs bench 19.13 (+2.90; row held_out)",
+   "held_gap": 22.03,
+   "v_gap": 19.13,
+   "drop": 2.9,
+   "source": "row held_out"
+  },
+  {
+   "check": "fast_frozen",
+   "level": "ok",
+   "reason": "self/fast 10.63 -> verified 19.13 (+8.50)",
+   "fast": 10.63,
+   "verified": 19.13,
+   "drop": 8.5
+  },
+  {
+   "check": "near_touch",
+   "level": "gamed",
+   "reason": "plain 19.13, <1 mm 20.77, <2 mm 50.41, 31.28 points live in the 1-2 mm shell (docs/concepts/verify/sidecar-parallelogram-knuckle-3r_v_bench_zb45.json)",
+   "shell2": 31.28,
+   "plain": 19.13,
+   "n1": 20.77,
+   "n2": 50.41,
+   "n3": null,
+   "band3": null,
+   "hist": null,
+   "minmm": 0.65,
+   "source": "docs/concepts/verify/sidecar-parallelogram-knuckle-3r_v_bench_zb45.json"
+  },
+  {
+   "check": "dominance",
+   "level": "gamed",
+   "reason": "beats frontload-lobe-stopb-knuckle-3r by 3.59 plain but loses by 6.43 at 2 mm: the gain is metal moved into the 1-2 mm shell",
+   "ref": "frontload-lobe-stopb-knuckle-3r",
+   "gain_plain": 3.59,
+   "gain_2mm": -6.43
+  },
+  {
+   "check": "continuity",
+   "level": "watch",
+   "reason": "static 19.13, connected full 19.13, knn 22.21, bench 45.03 (row continuity); the knn flood (no envelope stepping stones) loses 3.08",
+   "static": 19.13,
+   "connected_full": 19.13,
+   "connected_knn": 22.21,
+   "connected_bench": 45.03
+  },
+  {
+   "check": "fold_margin",
+   "level": "watch",
+   "reason": "no min-th margin over taken poses on file (rule: each claim reports it)"
+  },
+  {
+   "check": "idle",
+   "level": "ok",
+   "reason": "declared drive moves: smallest recorded span 35.87 (docs/concepts/verify/sidecar-parallelogram-knuckle-3r_v_bench_zb45.json:fit_fast.extra.dK_taken_max_deg)",
+   "spans": [
+    [
+     "row:frozen.drive.phi_max_taken",
+     36.3
+    ],
+    [
+     "row:verification.added_checks.dK_taken_max_deg",
+     37.31
+    ],
+    [
+     "docs/concepts/verify/sidecar-parallelogram-knuckle-3r_v_bench_zb45.json:fit_fast.extra.dK_taken_max_deg",
+     35.87
+    ],
+    [
+     "docs/concepts/verify/sidecar-parallelogram-knuckle-3r_v_bench_zb45.json:extra.dK_taken_max_deg",
+     37.31
+    ],
+    [
+     "docs/concepts/verify/sidecar-parallelogram-knuckle-3r_v_bench_zb45.json:sidecar.phi_max_taken",
+     36.3
+    ],
+    [
+     "docs/concepts/verify/sidecar-parallelogram-knuckle-3r_v_bench_zb4.json:fit_fast.extra.dK_taken_max_deg",
+     35.87
+    ],
+    [
+     "docs/concepts/verify/sidecar-parallelogram-knuckle-3r_v_bench_zb4.json:extra.dK_taken_max_deg",
+     37.31
+    ],
+    [
+     "docs/concepts/verify/sidecar-parallelogram-knuckle-3r_v_bench_zb4.json:sidecar.phi_max_taken",
+     36.3
+    ]
+   ]
+  },
+  {
+   "check": "sampling",
+   "level": "ok",
+   "reason": "sample-weighted in-band 0.900 vs part-weighted 0.898 (+0.23 points); thinly sampled parts: rod 12 (docs/concepts/verify/sidecar-parallelogram-knuckle-3r_v_bench_zb45.json)",
+   "parts": {
+    "hub1": [
+     0.995,
+     8.4,
+     80
+    ],
+    "hubK": [
+     0.977,
+     8.0,
+     80
+    ],
+    "hub2": [
+     0.992,
+     10.4,
+     80
+    ],
+    "hub3": [
+     0.64,
+     12.7,
+     80
+    ],
+    "E": [
+     0.935,
+     7.5,
+     104
+    ],
+    "boss": [
+     0.982,
+     7.9,
+     32
+    ],
+    "pad": [
+     0.996,
+     9.0,
+     32
+    ],
+    "knee": [
+     0.93,
+     10.5,
+     100
+    ],
+    "crank": [
+     0.892,
+     12.6,
+     53
+    ],
+    "horn": [
+     0.917,
+     7.1,
+     20
+    ],
+    "rod": [
+     0.529,
+     13.8,
+     12
+    ],
+    "rodends": [
+     0.938,
+     11.4,
+     32
+    ],
+    "L1a": [
+     0.976,
+     8.1,
+     16
+    ],
+    "L1b": [
+     0.973,
+     8.8,
+     36
+    ],
+    "L2": [
+     0.794,
+     11.2,
+     124
+    ]
+   }
+  },
+  {
+   "check": "complexity",
+   "level": "watch",
+   "reason": "recomputed 49.0 vs row 49.0; hand count (not derived from the model); 3 active + 2 sensed passive coordinates = 5 read coordinates (the DOF count shows 3)",
+   "recomputed": 49.0,
+   "row": 49.0
+  },
+  {
+   "check": "reporting",
+   "level": "gamed",
+   "reason": "verdict text still reads as a self-measured screen; dashboard v_gap 18.06 vs verifier 19.13 (-1.07; the dashboard flatters the design); dashboard sweep best 10.63 (score 96.13) sits 8.50 below the verified number"
+  },
+  {
+   "check": "judge_change",
+   "level": "ok",
+   "reason": "no bench / judge / metric file changed in the 2 commits that touched the row"
+  },
+  {
+   "check": "rules",
+   "level": "ok",
+   "reason": "O20, margin >= 5, translations <= 2 as recorded"
+  }
+ ],
+ "remeasured": {
+  "bench": false,
+  "held": false
+ },
+ "verifier_files": [
+  "docs/concepts/verify/sidecar-parallelogram-knuckle-3r_v_bench_zb45.json",
+  "docs/concepts/verify/sidecar-parallelogram-knuckle-3r_v_bench_zb4.json",
+  "docs/concepts/verify/sidecar-parallelogram-knuckle-3r_v_held_frozen.json",
+  "docs/concepts/verify/sidecar-parallelogram-knuckle-3r_v_bench_frozen.json"
+ ],
+ "git": "1165c80",
+ "t": "2026-10-16T20:23:39Z"
+}
