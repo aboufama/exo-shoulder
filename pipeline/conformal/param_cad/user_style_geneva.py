@@ -371,6 +371,25 @@ def posed_drive_check(dd, dv, n=40):
     return res
 
 
+def tess_safe(s, fine=True, report=None):
+    """USP.tess without its 0.01 / 0.015 mm retries: OCC's mesher hangs (> 20 min) at 0.01 on this design's link 1b; an open
+    tessellation is capped by the judges (judge/part_contact.py close_open), R7 judges the STEP"""
+    vs, fs = s.tessellate(0.02 if fine else 0.08, 0.15 if fine else 0.4)
+    m = trimesh.Trimesh(np.array([[v.x, v.y, v.z] for v in vs]), np.array(fs), process=False)
+    if not fine: return m
+    m, wt = USP.judge_close(USP.weld_open(m))
+    if not wt:
+        for tl, ta in ((0.03, 0.2), (0.05, 0.25)):
+            vs, fs = s.tessellate(tl, ta)
+            m2, wt2 = USP.judge_close(USP.weld_open(trimesh.Trimesh(np.array([[v.x, v.y, v.z] for v in vs]), np.array(fs), process=False)))
+            if wt2:
+                m, wt = m2, wt2
+                if report is not None: report["tessellation"] = [tl, ta]
+                break
+    if report is not None: report["watertight_judge_units"] = wt
+    return m
+
+
 # ---------------------------------------------------------------------------------------------------- main
 def main():
     ap = argparse.ArgumentParser(); ap.add_argument("--out", default="user_geneva_rod"); ap.add_argument("--l1", default="l1_geneva-rod")
@@ -469,7 +488,7 @@ def main():
         user = n.startswith(USER); hwr = not n.startswith(("D8-", "D9-")) and any(k in n.lower() for k in ("screw", "m4x6", "clip"))
         if not user and not hwr:
             cq.exporters.export(cq.Workplane().add(s), os.path.join(dd, "step", f"{i:02d}_{n.split(':')[0].replace('/', '_').replace(' ', '_')[:40]}.step"))
-        trep = {}; m = USP.tess(s, fine=not user, report=trep)
+        trep = {}; m = tess_safe(s, fine=not user, report=trep)
         sc.add_geometry(m, node_name=f"{g}|{n}|{i}", geom_name=f"{g}|{n}|{i}")
         mm = m.copy(); mm.merge_vertices(); vol = abs(mm.volume) if mm.is_watertight else s.Volume()
         nl = n.lower()
