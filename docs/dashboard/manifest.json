@@ -4,30 +4,30 @@
   "title": "Concept bench morphologies",
   "description": "One row per morphology in the swarm's catalogue: status, the agent's claimed bench numbers, the verifier's re-measured numbers (v_), its best sweep configuration so far, and the 3R baseline once (is_baseline), and the complexity count (the simplicity number, never part of the gap or score): complexity = points, lower = simpler, 0 = three pins on bearing pairs and three links; complexity_items = where the points come from; passive_trans = passive translations (more than 2 = not buildable); mechanism_confidence = counted or estimated. Built from docs/concepts/catalogue.json, families.json, rows/*.json (complexity: tools/simplicity.py on each row's mechanism record, docs/SIMPLICITY.md) and sweeps/*.json.",
   "file": "data/morphs.json",
-  "sha256": "30eb717d4911aff23517d333700b1c4e61b8b306ba37491cada21ce532283fb6",
+  "sha256": "ce19f59f22dd84fa335b3bea65f301c959fcfc8a30404b091d2672fad9023cf4",
   "rows": 95,
-  "bytes": 134478,
-  "updated": "2026-10-16T03:38:12Z"
+  "bytes": 136825,
+  "updated": "2026-10-16T03:52:45Z"
  },
  {
   "id": "sweeps",
   "title": "Concept bench sweeps",
   "description": "Every configuration a morphology agent evaluated on the concept bench, with its time, gap, its morphology's best gap so far (best_gap) and the record over all morphologies so far (record_gap); passed_over marks a configuration its agent measured before its claimed row and rejected (better than the claim), which counts for no best. Built from docs/concepts/sweeps/*.json; a morphology with more than 1500 configurations is thinned for the page (every running-best and record row, its 300 best gaps and an even sample of the rest), while best_gap, record_gap and n_configs come from the full set.",
   "file": "data/sweeps.json",
-  "sha256": "1ee9f521e87e534bdffad4a2cc8d9c5810f23901c0b970f1f5f2ec846b2193b6",
-  "rows": 21766,
-  "bytes": 5507615,
-  "updated": "2026-10-16T03:38:12Z"
+  "sha256": "3777cb80e991809ac1b143fd2012cf249064ff60fcaee11bd0b065c8f75b8c86",
+  "rows": 23056,
+  "bytes": 5817758,
+  "updated": "2026-10-16T03:45:54Z"
  },
  {
   "id": "cad",
   "title": "Built CAD judge results",
   "description": "One row per judged design and requirement: value, threshold and pass from the outside judges, timed by the judge output (score files: the earliest of their commit, their file time and the first commit whose docs report the design; scorecard-only values: the scorecard's commit). Built from tools/judged_history.py, judge/scorecard.json files and judge/requirements.json.",
   "file": "data/cad.json",
-  "sha256": "0cb4f3ee4e22ca35c98ba61107873582f432b3c0950cff223194daf41f63c277",
-  "rows": 211,
-  "bytes": 65688,
-  "updated": "2026-10-16T01:41:52Z"
+  "sha256": "599133b159297f50b5ef4be37fe6f2dd94ea12a30daf6f352619d99fd20a048b",
+  "rows": 235,
+  "bytes": 73267,
+  "updated": "2026-10-16T03:43:50Z"
  },
  {
   "id": "gpu_evals",
@@ -54,20 +54,20 @@
   "title": "Requirement board",
   "description": "Latest status of R1-R17 (with R1-aim and R5-aim) for the best judged 3-DOF design (most passes on its scorecard, then R1), with the best value any 3-DOF design reached under the current judging rules. Built from judge/scorecard.json files and judge/requirements.json.",
   "file": "data/reqs.json",
-  "sha256": "19164a91ce99222c811f5a35ea8fa6a49cc3beb3e571f2910e15512fb80f2c66",
+  "sha256": "5582c5b8176ce482c0ef48538917ec459e2d68eb7dc76faa35dccd221a51c796",
   "rows": 19,
-  "bytes": 8050,
-  "updated": "2026-10-16T01:41:52Z"
+  "bytes": 8019,
+  "updated": "2026-10-16T03:43:50Z"
  },
  {
   "id": "events",
   "title": "Event log",
   "description": "What happened and when: the swarm's own log (docs/concepts/events.jsonl), one milestone per judged design and every new built-CAD R1 record (from the judge outputs).",
   "file": "data/events.json",
-  "sha256": "5c7d4064375f572d41887eacaaeb2c2f82788f95928c889200f19d1b09ba689e",
-  "rows": 375,
-  "bytes": 119443,
-  "updated": "2026-10-16T03:38:12Z"
+  "sha256": "527c35f01b54df3c1cc6db5a3bcfafc647a7cea9644b5fd74f15f919862d7ca5",
+  "rows": 380,
+  "bytes": 121428,
+  "updated": "2026-10-16T03:55:42Z"
  },
  {
   "id": "spend",
@@ -84,10 +84,10 @@
   "title": "Arm reach in 3-D",
   "description": "One row per built design and everyday arm pose of the R16 workspace judge: where the upper arm points and whether the built design reaches it, with the reason if not. Built by tools/coverage3d.py from judge/workspace.json files (newest 8 designs).",
   "file": "data/cov3d.json",
-  "sha256": "55104b7cdbd7de6fb3b087c1dd49e9033c86b1eaf9945fd8b3663a0ee47a1978",
+  "sha256": "904a02cb2a816013199d37bc95498b02246865d4995bf79c8f98854a66ae333d",
   "rows": 1198,
-  "bytes": 412990,
-  "updated": "2026-10-16T01:41:52Z"
+  "bytes": 410964,
+  "updated": "2026-10-16T03:43:50Z"
  },
  {
   "id": "motion",
@@ -104,9 +104,9 @@
   "title": "Data build info",
   "description": "When tools/dash_build.py last gathered the data, the repo commit, and any warnings it printed.",
   "file": "data/meta.json",
-  "sha256": "0619652f3af651673d576376f177fc7418054bb46bb94c097d665d9951b0a79c",
+  "sha256": "ae26b27eb6d27bdf9be80a78a2d24be9841e0a43ea69c04a8cff80caff5c6b89",
   "rows": 1,
   "bytes": 2086,
-  "updated": "2026-10-16T03:38:12Z"
+  "updated": "2026-10-16T03:55:42Z"
  }
 ]

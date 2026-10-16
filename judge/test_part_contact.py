@@ -57,6 +57,13 @@ def synthetic():
             check(abs(ab[0] - 1.0) < 0.05 and abs(ba[0] - 1.0) < 0.05, f"{name}: the dense judge finds the exact 1.0 mm both ways")
         else:
             check(ab[0] > 0.9 and ba[0] > 0.9, f"{name}: the dense judge finds > 0.9 mm both ways")
+    # the same plus sign with B's tessellation turned inside out (inverted normals) and a second, inward copy of A's box
+    # as a separate body of A: re-oriented in weld(), the answers must not move
+    info = PC.prepare([("a", "slab A", np.r_[Va, Va + [0, 0, -10]], np.r_[Fa, Fa[:, ::-1] + len(Va)]), ("b", "slab B inverted", Vb, Fb[:, ::-1])], 1.0)
+    out = PC.frame_depths(info, PC.pair_ok(info), {"a": I, "b": I}, 0.15, memo={})
+    ab = out.get("a|slab A  IN  b|slab B inverted", (0.0, None))[0]; ba = out.get("b|slab B inverted  IN  a|slab A", (0.0, None))[0]
+    print(f"     inverted B, A with an inward body: A in B {ab:.3f} mm, B in A {ba:.3f} mm (re-oriented: {[x['n'] for x in info if x['reoriented']]})")
+    check(abs(ab - 1.0) < 0.05 and abs(ba - 1.0) < 0.05 and all(x["reoriented"] for x in info), "inverted / inconsistently wound tessellations are re-oriented: same 1.0 mm both ways")
     # a coaxial fit within tol must stay silent: B resting on A's top face, 0.1 mm into it
     Vc, Fc = box((-5, -1.5, 1.9), (5, 1.5, 4))
     info = PC.prepare([("a", "slab A", Va, Fa), ("c", "pad on A (0.1 mm in)", Vc, Fc)], 1.0)

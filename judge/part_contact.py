@@ -43,9 +43,21 @@ KINDS = ("vertex", "sharp edge", "face")
 
 
 def weld(V, F):
-    """welded tessellation (glb faces are split at B-rep seams): (V, F, watertight, trimesh)"""
+    """welded tessellation (glb faces are split at B-rep seams): (V, F, watertight, trimesh). A closed tessellation whose
+    winding is inconsistent or whose bodies face inward (the band_* D4 member proxies: 3 bodies, all negative volume) is
+    re-oriented body by body - outward, consistent - since the grid winding number takes its sign from the face normals
+    (2026-10-16: an inverted l1 proxy scored a vertex 3.44 mm 'inside' where the generalized winding number is 0.07).
+    The geometry is unchanged; m.metadata["reoriented"] says it happened."""
     import trimesh
     m = trimesh.Trimesh(V, F, process=False); m.merge_vertices(digits_vertex=4); m.update_faces(m.nondegenerate_faces())
+    if m.is_watertight and (not m.is_winding_consistent or m.volume < 0 or
+                            any(b.volume < 0 for b in m.split(only_watertight=False)) if len(m.faces) else False):
+        bodies = []
+        for b in m.split(only_watertight=False):
+            trimesh.repair.fix_winding(b)
+            if b.volume < 0: b.invert()
+            bodies.append(b)
+        m = trimesh.util.concatenate(bodies); m.metadata["reoriented"] = True
     return np.asarray(m.vertices, float), np.asarray(m.faces), bool(m.is_watertight), m
 
 
@@ -86,7 +98,7 @@ def cached_samples(V, F, h, sharp_deg, m):
     """surface_samples, cached on disk by the part's content (the user's parts and the hubs repeat across designs)"""
     import hashlib
     key = hashlib.sha1(np.ascontiguousarray(V, np.float64).tobytes() + np.ascontiguousarray(F, np.int64).tobytes()
-                       + np.array([h, sharp_deg, 2.0]).tobytes()).hexdigest()
+                       + np.array([h, sharp_deg, 3.0]).tobytes()).hexdigest()
     f = os.path.join(CACHE, key + ".npz")
     try:
         z = np.load(f); return z["S"], z["kind"]
@@ -105,7 +117,7 @@ def prepare(parts, h=1.0, sharp_deg=SHARP_DEG, build=None):
     for g, n, V, F in parts:
         Vw, Fw, closed, m = weld(V, F); S, kind = cached_samples(V, F, h, sharp_deg, m)
         lo, hi = S.min(0), S.max(0)
-        info.append(dict(g=g, n=n, S=S, kind=kind, closed=closed, M=Mesh(Vw, Fw) if closed else None, lo=lo, hi=hi,
+        info.append(dict(g=g, n=n, S=S, kind=kind, closed=closed, reoriented=bool(m.metadata.get("reoriented")), M=Mesh(Vw, Fw) if closed else None, lo=lo, hi=hi,
                          C=np.array([[x, y, z] for x in (lo[0], hi[0]) for y in (lo[1], hi[1]) for z in (lo[2], hi[2])])))
     for i, x in enumerate(info):
         if x["closed"] and (build is None or i in build): build_B(x)
@@ -251,6 +263,7 @@ def run(dd, step=3, tol=0.15, h=1.0, jobs=1, select=None, log=print):
     return dict(step=step, tol_mm=tol, frames_checked=nf, pairs=int(ok.sum()), seconds=round(time.time() - t0), setup_seconds=round(t1 - t0), jobs=jobs,
                 cpu_seconds=round(cpu), cpu_s_per_frame=round((cpu - cs) / max(nf, 1), 3),
                 violations=res, open_parts_not_tested_as_container=OPEN,
+                reoriented_parts=[f"{x['g']}|{x['n']}" for x in info if x.get("reoriented")],
                 samples=dict(h_mm=h, sharp_deg=SHARP_DEG, total=int(sum(ns.values())), per_part=ns,
                              rule="every vertex + sharp/boundary edges at <= h/2 + longest-edge bisection of every face to edges <= h (midpoints)"),
                 inside="dense surface samples of A (vertices, sharp edges, faces), both ways; integer winding number on welded tessellations (judge/sdist.py grid + segment crossings), depth = exact distance to B's closest point (libigl AABB)",
