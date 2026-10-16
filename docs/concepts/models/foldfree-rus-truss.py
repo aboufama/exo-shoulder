@@ -23,13 +23,37 @@ per-leg fold diagnostics, the bench_eval hook for tools/cloud_run.py sweep, and 
 
     OMP_NUM_THREADS=1 nice -n 10 python3 docs/concepts/models/foldfree-rus-truss.py check '<params json>' [--big] [--exact]
 """
-import importlib.util, json, math, os, sys, time
+import importlib.util, json, math, os, sys, time, types
 import numpy as np
 
 HERE = os.path.dirname(os.path.abspath(__file__)); REPO = os.path.abspath(os.path.join(HERE, "..", "..", ".."))
 sys.path.insert(0, os.path.join(REPO, "tools"))
-_spec = importlib.util.spec_from_file_location("hccr", os.path.join(HERE, "human-closed-crank-rods.py"))
-H = importlib.util.module_from_spec(_spec); _spec.loader.exec_module(H)
+
+# Explicit source patches to the base model (each must match exactly once; asserted on load). Option `studs3`: all
+# three legs get their own saddle stud on the arm (the base ties leg 0's stud to the user's BOTTOM bar, whose
+# location is fixed 60-120 mm down the lateral arm; the fold-free legs want studs at the humeral-head level,
+# posterior-medial: leg_bands in docs/concepts/foldfree-rus-truss.md). Ball k is the joint partner of saddle k.
+PATCHES = [
+    ('    D["q"] = q; D["sad"] = sad\n',
+     '    if P.get("studs3"): q = q[1:]\n    D["q"] = q; D["sad"] = sad\n'),
+    ('        if x.startswith("ball") and (H_body(y)) and (x == "ball0" and y == "bar" or x != "ball0" and y == f"sad{int(x[4:]) - 1}"): return True\n',
+     '        if x.startswith("ball") and (H_body(y)) and ((y == "sad" + x[4:]) if D["P"].get("studs3") else (x == "ball0" and y == "bar" or x != "ball0" and y == f"sad{int(x[4:]) - 1}")): return True\n'),
+]
+
+
+def load_base(extra=(), name="hccr_patched", glb=None):
+    src = open(os.path.join(HERE, "human-closed-crank-rods.py")).read()
+    for old, new in list(PATCHES) + list(extra):
+        n = src.count(old)
+        assert n == 1, f"patch target found {n} times: {old[:80]!r}"
+        src = src.replace(old, new)
+    m = types.ModuleType(name); m.__file__ = os.path.join(HERE, "human-closed-crank-rods.py")
+    m.__dict__.update(glb or {})
+    exec(compile(src, m.__file__, "exec"), m.__dict__)
+    return m
+
+
+H = load_base()
 CB = H.CB
 
 ID = "foldfree-rus-truss"
@@ -70,6 +94,39 @@ def bench_eval(B, params):
     except Exception as e: r["fold"] = repr(e)
     r["passive_translations"] = 0
     return r
+
+
+FLAT = ("az0", "el0", "az1", "el1", "az2", "el2", "b0", "b1", "b2", "s1", "t1", "s2", "t2", "s3", "t3", "h_stud")
+
+
+def nest(p):
+    """flat CMA parameters (FLAT, + sg0..sg2 branch signs) -> the model's nested PARAMS"""
+    q = {k: v for k, v in p.items() if k not in FLAT and not k.startswith("sg")}
+    if "az0" in p: q["hubs"] = [[float(p[f"az{k}"]), float(p[f"el{k}"])] for k in range(3)]
+    if "b0" in p: q["beta"] = [float(p[f"b{k}"]) for k in range(3)]
+    if "sg0" in p: q["sigma"] = [int(round(p[f"sg{k}"])) for k in range(3)]
+    if "t1" in p:
+        q["studs3"] = True; q["studs"] = [[float(p[f"s{k}"]), float(p[f"t{k}"])] for k in (1, 2, 3)]
+    elif "s2" in p: q["studs"] = [[float(p["s2"]), float(p["t2"])], [float(p["s3"]), float(p["t3"])]]
+    for k in ("h_stud",):
+        if k in p: q[k] = float(p[k])
+    return q
+
+
+def flat(P):
+    out = {}
+    for k in range(3):
+        out[f"az{k}"], out[f"el{k}"] = P["hubs"][k]; out[f"b{k}"] = P["beta"][k]; out[f"sg{k}"] = P["sigma"][k]
+    out["s2"], out["t2"] = P["studs"][0]; out["s3"], out["t3"] = P["studs"][1]; out["s1"] = P["s1"]; out["h_stud"] = P["h_stud"]
+    return out
+
+
+def evaluate(B, p):
+    """tools/concept_cma.py hook: flat params -> (params, report). honest = the model's own checks (K3 march, 10 fps
+    branch continuity on every crank / U / ball angle, 1 mm part clearance, contact rule) all on, which they always are."""
+    q = nest(p); r = bench_eval(B, q); r["honest"] = True
+    for k in ("rT", "L", "F"): r.pop(k, None)
+    return dict(p), r
 
 
 def wear(D, X, near=1.0):

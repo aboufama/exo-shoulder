@@ -89,9 +89,11 @@ class Design(OSN.Design):
         _, _, _, X2, _, _ = S.Design.ik(self, Q0[None]); R12, tt2 = X2[0][0], X2[1][0]
         P3h = R12.T @ (self.seats["P"][2] - tt2); self.h_seat = float(P3h @ u3)
         self.hK = self.h_seat + P["dh"]; self.cK = self.c[2] + self.hK * u3
-        self._knee = True; self.c0 = 0.0
+        self._knee = True; self.c0 = 0.0; self.flank = 0.0
         rad0 = self.rad_at(Q0[None], np.array([P["psi_rest"] * D2R]))
         self.c0 = float(rad0[0])
+        rr = self.rad_at(np.repeat(Q0[None], 2, 0), np.array([P["psi_rest"] - 0.5, P["psi_rest"] + 0.5]) * D2R)
+        self.flank = float(np.sign(rr[1] - rr[0])) if np.all(np.isfinite(rr)) else 0.0
         # dyad rest layout in the (sa, st) plane of the virtual frame
         e = lambda a: np.array([math.cos(a * D2R), math.sin(a * D2R)])
         self.a0 = P["lE"] * e(P["phiE"]); self.gam0 = P["phiE"] + 180.0 - P["beta0"]
@@ -143,8 +145,10 @@ class Design(OSN.Design):
         f0, f1 = r[:-1], r[1:]; cr = np.isfinite(f0) & np.isfinite(f1) & (f0 * f1 <= 0) & (f0 != f1)
         dps = ps[1] - ps[0]
         with np.errstate(invalid="ignore", divide="ignore"):
-            pr = ps[:-1, None] + f0 / (f0 - f1) * dps; au = np.abs(f1 - f0) / dps
-        return np.where(cr, pr, np.nan), np.where(cr, au, np.nan)
+            pr = ps[:-1, None] + f0 / (f0 - f1) * dps; au = (f1 - f0) / dps        # SIGNED slope d rad / d psi (mm/rad)
+        cr &= np.sign(au) == self.flank                              # FLANK RULE: only roots on the rest root's flank of the closure
+        return np.where(cr, pr, np.nan), np.where(cr, np.abs(au), np.nan)   # curve; the other flank is reached only through the
+                                                                     # closure fold (auth 0, no root nearby) = a branch the knee cannot take
 
     def dyad(self, s):
         """in-plane dyad: s (n,3) drift (arm-home) -> phi (E arm, deg), gam (cuff link, deg), elbow beta (deg), ok"""

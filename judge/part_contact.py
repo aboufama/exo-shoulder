@@ -68,18 +68,57 @@ def surface_samples(V, F, h=1.0, sharp_deg=SHARP_DEG, m=None):
     return P, kind
 
 
+CACHE = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), ".cache", "part_contact")   # git-ignored
+
+
+def cached_samples(V, F, h, sharp_deg, m):
+    """surface_samples, cached on disk by the part's content (the user's parts and the hubs repeat across designs)"""
+    import hashlib
+    key = hashlib.sha1(np.ascontiguousarray(V, np.float64).tobytes() + np.ascontiguousarray(F, np.int64).tobytes()
+                       + np.array([h, sharp_deg, 2.0]).tobytes()).hexdigest()
+    f = os.path.join(CACHE, key + ".npz")
+    try:
+        z = np.load(f); return z["S"], z["kind"]
+    except Exception: pass
+    S, kind = surface_samples(V, F, h, sharp_deg, m)
+    try:
+        os.makedirs(CACHE, exist_ok=True); tmp = f"{f}.{os.getpid()}.npz"; np.savez(tmp, S=S, kind=kind); os.replace(tmp, f)
+    except Exception: pass
+    return S, kind
+
+
 def prepare(parts, h=1.0, sharp_deg=SHARP_DEG, build=None):
     """per part: group, name, samples (local frame) + kind, local box, closed?, Mesh of the welded tessellation (B side;
     grids built for the indices in build, or for every closed part when build is None)"""
     info = []
     for g, n, V, F in parts:
-        Vw, Fw, closed, m = weld(V, F); S, kind = surface_samples(V, F, h, sharp_deg, m)
+        Vw, Fw, closed, m = weld(V, F); S, kind = cached_samples(V, F, h, sharp_deg, m)
         lo, hi = S.min(0), S.max(0)
         info.append(dict(g=g, n=n, S=S, kind=kind, closed=closed, M=Mesh(Vw, Fw) if closed else None, lo=lo, hi=hi,
                          C=np.array([[x, y, z] for x in (lo[0], hi[0]) for y in (lo[1], hi[1]) for z in (lo[2], hi[2])])))
     for i, x in enumerate(info):
-        if x["closed"] and (build is None or i in build): x["M"].build_grid()
+        if x["closed"] and (build is None or i in build): build_B(x)
     return info
+
+
+def build_B(x):
+    """B side of a part: the winding-number grid (judge/sdist.py) plus a reject mask on its nodes, OUT = winding 0 and no
+    surface within the segment to any point that rounds to the node. Bound: a node with no Mesh sample marked within k
+    nodes (chessboard) is farther than k g - g sqrt(3)/2 - M.h from the surface (each sample lies within g sqrt(3)/2 of
+    its node; Mesh.S covers the surface within M.h); with k g > M.h + g sqrt(3) that exceeds |P - node| <= g sqrt(3)/2,
+    so the segment node -> P crosses nothing and P is outside like the node. Exact, never a guess: it only spares the
+    kd-tree and the segment crossings for A's samples well clear of B."""
+    from scipy.ndimage import maximum_filter
+    M = x["M"]
+    if not hasattr(M, "W"): M.build_grid()
+    n = np.asarray(M.W.shape); idx = np.clip(np.rint((M.S - M.glo) / M.g).astype(int), 0, n - 1)
+    mark = np.zeros(M.W.shape, np.uint8); mark[idx[:, 0], idx[:, 1], idx[:, 2]] = 1
+    k = int(np.floor((M.h + M.g * np.sqrt(3)) / M.g)) + 1
+    x["OUT"] = (maximum_filter(mark, size=2 * k + 1, mode="constant") == 0) & (M.W == 0)
+    import igl
+    x["F64"] = np.ascontiguousarray(M.F, np.int64); M.V = np.ascontiguousarray(M.V, float)
+    x["AABB"] = igl.AABB(); x["AABB"].init(M.V, x["F64"])
+    return x
 
 
 def pair_ok(info):
@@ -121,15 +160,45 @@ def depth_in(A, B, Wa, Wb, tol):
     P = A["S"][m] @ (Ra.T @ Rb) + (ta - tb) @ Rb                                     # those samples in B's frame
     k = np.all((P > lo) & (P < hi), axis=1); m, P = m[k], P[k]                       # deeper than tol: inside the box by tol
     if not len(m): return 0.0, None
-    dep, k = B["M"].max_depth(P, tol)
+    M = B["M"]; i = np.clip(np.rint((P - M.glo) / M.g).astype(int), 0, np.asarray(M.W.shape) - 1)
+    k = ~B["OUT"][i[:, 0], i[:, 1], i[:, 2]]; m, P = m[k], P[k]                       # exact reject: well clear of B, outside
+    if not len(m): return 0.0, None
+    dep, k = max_depth(B, P, tol)
     return (dep, KINDS[A["kind"][m[k]]]) if k is not None and dep > tol else (0.0, None)
 
 
-def frame_depths(info, ok, W, tol):
-    """{"A  IN  B": (depth, kind)} for one frame (W = {group: (R, t)})"""
+def max_depth(B, P, tol):
+    """deepest point of P (B's frame) inside B: (depth mm, index) or (0.0, None). Distance = the exact closest point on
+    B's welded tessellation (libigl AABB tree, built once per part); inside = the integer winding number of
+    judge/sdist.py: the grid node's own value wherever the surface is farther from P than the node is (then the segment
+    node -> P crosses nothing), the exact segment crossings (Mesh.winding_at) only for the few points nearer the surface
+    than their node. Points within tol of the surface are skipped first (they cannot be deeper than tol): a coaxial fit at
+    a joint puts a whole face on B's surface and costs one distance query per sample, nothing more."""
+    M = B["M"]; d = np.sqrt(B["AABB"].squared_distance(M.V, B["F64"], P)[0]); keep = np.where(d > tol)[0]
+    if not len(keep): return 0.0, None
+    Pk, dk = P[keep], d[keep]; i = np.clip(np.rint((Pk - M.glo) / M.g).astype(int), 0, np.asarray(M.W.shape) - 1)
+    W = M.W[i[:, 0], i[:, 1], i[:, 2]].astype(int); dn = np.linalg.norm(Pk - (M.glo + M.g * i), axis=1)
+    amb = np.where(dk <= dn + 1e-9)[0]
+    if len(amb): W[amb] = M.winding_at(Pk[amb], dk[amb])
+    ins = np.where(W >= 1)[0]
+    if not len(ins): return 0.0, None
+    j = ins[np.argmax(dk[ins])]
+    return (float(dk[j]), int(keep[j])) if dk[j] > tol else (0.0, None)
+
+
+_MEMO = {}
+def frame_depths(info, ok, W, tol, memo=_MEMO):
+    """{"A  IN  B": (depth, kind)} for one frame (W = {group: (R, t)}). A pair whose relative pose (B's frame seen from A's,
+    to 1e-5) was already measured reuses that answer - the same two rigid shapes in the same relative pose: held frames,
+    and parts whose relative joint does not move over a stretch of a clip (the elbow between the cuffs)"""
     out = {}
     for i, j in candidates(info, W, ok, tol):
-        A, B = info[i], info[j]; dep, kind = depth_in(A, B, W[A["g"]], W[B["g"]], tol)
+        A, B = info[i], info[j]; (Ra, ta), (Rb, tb) = W[A["g"]], W[B["g"]]
+        key = (int(i), int(j), np.round(np.r_[(Ra.T @ Rb).ravel(), (tb - ta) @ Ra], 5).tobytes())
+        if key not in memo:
+            if len(memo) > 200000: memo.clear()
+            memo[key] = depth_in(A, B, W[A["g"]], W[B["g"]], tol)
+        dep, kind = memo[key]
         if dep > tol: out[f"{A['g']}|{A['n']}  IN  {B['g']}|{B['n']}"] = (dep, kind)
     return out
 
@@ -151,7 +220,7 @@ def run(dd, step=3, tol=0.15, h=1.0, jobs=1, select=None, log=print):
     probe = prepare(parts, h, build=set())                                          # samples + boxes, no grids yet
     ok = pair_ok(probe); need = set()
     for _, _, W in todo: need |= {int(j) for _, j in candidates(probe, W, ok, tol)}
-    for j in need: probe[j]["M"].build_grid()                                         # grids only where a part is ever B
+    for j in need: build_B(probe[j])                                                  # grids only where a part is ever B
     info = probe; t1 = time.time(); res = {}; nf = 0
     _G.update(info=info, ok=ok, tol=tol)
     with (mp.get_context("fork").Pool(jobs) if jobs > 1 else contextlib.nullcontext()) as pool:

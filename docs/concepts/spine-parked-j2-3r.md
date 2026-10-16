@@ -129,3 +129,78 @@ What differs, and which side is right:
 **Settled**: at the same axes and the same honest rules, the zero-passive chain scores 38.73 fast (kit, 12 mm straps,
 O20). It would score 33.4-35.4 with the VModel's lax margin rule and 8 mm straps. The judge's 41.73 exact (VModel)
 should be read as ~3-5 points optimistic on follow, and the kit numbers here are the honest ones.
+
+**Addendum (2026-10-16 02:10, after the container restart).** `end_extra 0.24` removes all 16 link 1 / link 2 K6
+rejections exactly as `end_extra 2` does (CMA-B seats, O15 / O15: 37.99 at 0, 30.24 at 0.24 and at 2, 30.70 at 4).
+The artifact is a boundary coincidence: the flat strap end stops at exactly HUB_R + 2, the edge of K6's shared-joint
+exemption. Any real flat end a fraction of a mm longer clears it, so the sweep keeps `end_extra` free in [0, 8] and the
+fix costs nothing measurable.
+
+## What the slim hubs buy (measured, Bench(60,160) fast, CMA-B seats, every other parameter fixed)
+
+| J2 hub | J3 hub | gap | in-band 14 | hub 2 level F | hub 2 / link 1 in band |
+|---|---|---|---|---|---|
+| O15 (rad 7.5) | O15 | **30.24** | 0.851 | 60 | 1.00 / 0.99 |
+| O15 | O17 | 30.33 | 0.850 | 60 | 1.00 / 0.99 |
+| O15 | O20 | 31.84 | 0.835 | 60 | 1.00 / 0.99 |
+| O17 (rad 8.5) | O15 | 30.63 | 0.847 | 60 | 1.00 / 0.99 |
+| O20 (rad 10) | O15 | 47.41 | 0.696 | 65 | 0.41 / 0.69 |
+| O20 | O20 | 48.37 | 0.686 | 65 | 0.41 / 0.69 |
+
+* A slim J2 hub is worth **17 gap points** at these seats. The O20 disc catches the skin bump of pose #112
+  (plane 15, elevation 75, axial 45) and lifts hub 2 from F 60 to F 65, which takes hub 2 and link 1 out of the band.
+* O17 already gets almost all of it (30.63 vs 30.24). The O17 hub (2.75 mm wall) is the conservative pick: it keeps
+  an M14x0.5-free retention with 2.4 mm of wall at the circlip groove.
+* A slim J3 hub is worth 1.6 points (hub 3 in band 0.85 vs 0.74).
+* It is a knife edge: hub 2's level is set by one or two poses within 1 mm. The frozen big bench below tests whether
+  360 poses find a higher bump.
+
+## The fold: what it costs, and that it is a seat problem, not a law of the spherical 3R
+
+At the CMA-B seats, the 49 workspace poses lost split as follows (redteam, Bench(60,160)):
+* 45 poses are fold / K2: the J1-J3 angle leaves the closure window [|a1 - a2| + 10, a1 + a2 - 10] = [43.1, 104.4];
+* 6 poses are contact;
+* 0 poses are K6.
+
+Overhead is where it hurts: **0 of the 12 workspace poses at elevation >= 140** are reached. The 5 overhead clip frames
+are all followed, with in-band 0.87 (the Raise-overhead clip stays inside the window). Over the workspace the J1-J3
+angle spans 6.6-160.7 deg (p5 23, p95 131). Overhead alone spans 21-148, because the overhead poses come in every
+axial rotation.
+
+* The 61-deg window is already placed optimally: it holds 71.9 %, the best any 61-deg window can do at these seats.
+* At these seats, 90 % reach needs a 104.8-deg window, i.e. a shorter arc of at least 62 deg.
+* Longer arcs at these seats, measured (O15 / O15, q 0.98):
+
+| a1 | a2 | sigma | gap | reach | in-band 14 | overhead reach | hub 2 level F |
+|---|---|---|---|---|---|---|---|
+| 40.7 | 73.8 | -1 | 30.24 | 0.681 | 0.851 | 0.00 | 60 |
+| 55 | 80 | -1 | 76.63 | 0.769 | 0.318 | 0.17 | 186 |
+| 62 | 75 | -1 | 68.68 | 0.844 | 0.294 | 0.42 | 355 |
+| 62 | 90 | -1 | 70.43 | 0.831 | 0.275 | 0.50 | 400 (no skin under it) |
+| 70 | 90 | -1 | 71.71 | 0.856 | 0.266 | 0.58 | 400 |
+| 62 | 90 | +1 | 130.39 | 0.550 | 0.290 | 0.17 | 385 |
+| 80 | 100 | +1 | 158.57 | 0.531 | 0.258 | 0.33 | 400 |
+
+  Every longer arc sends hub 2 off the skin: up past the neck, or out of the 400-mm search.
+
+**The fold law over all seats (new).** For every pair of seats, J1 on a 1200-point sphere in the scapula frame and J3
+on the same sphere in the humerus band frame, the narrowest J1-J3 window that holds the Bench(60,160) workspace is
+(`scratchpad foldlaw.py`):
+
+| share of the workspace | narrowest window over all seats | shorter arc needed (10-deg jam margin) |
+|---|---|---|
+| 80 % | 44.9 deg | 32.5 deg |
+| 90 % | 54.9 deg | 37.4 deg |
+| 95 % | 62.2 deg | 41.1 deg |
+
+* So a spherical 3R with ~40-deg arcs can be fold-free for 90 % of the workspace. The fold is a property of the leader's
+  seats (J1 on the acromion top, J3 on the lateral deltoid), not of the topology.
+* At 90 % reach, only 0.05 % of seat pairs fit a 2 x 40 - 20 = 60-deg window, and 11 % fit an 80-deg window.
+* Restricted to seats whose axis leaves the rest skin within 140 mm of GH (1077 J1 and 1131 J3 directions), 68751 pairs
+  have a 90 % window <= 75 deg. The narrowest pairs are 56.5-58 deg.
+* There are two families of them:
+  1. **J1 horizontal and anterolateral**, bvec(120-156, -24..+6). Its axis leaves the skin 50-59 mm from GH over the
+     anterior deltoid / coracoid region. J3 on the lateral arm at wdir(45-63, 6-36), and both arcs short (38-48 deg).
+  2. **J1 posterior-medial** over the scapular body, bvec(-42..-24, 6-24), with the axis leaving the skin 86-131 mm
+     from GH. Here the second arc must be ~135-140 deg.
+* Family 1 is the "weird" lead this track tested on the bench (next section).
