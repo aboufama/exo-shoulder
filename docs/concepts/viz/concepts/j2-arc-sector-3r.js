@@ -36,6 +36,9 @@
     params: P,
     q0: ctx => C.solve(ctx),
     qNames: ['J1', 'J2 (carriage on the arc rail)', 'J3'], qUnits: ['deg', 'deg', 'deg'], resUnits: ['deg', 'deg', 'deg'],
+    // closed form; overhead -> abduction the arm leaves the chain's reach (stretched J2 fold, the arm axis near the
+    // antipode of p1): J1 / J3 whip ~70 deg per frame there - the nearest configuration by least squares whips the same
+    // way, so it is the chain's own singularity, drawn red, not an IK branch flip (thumbs --stats: no flips)
     solve: ctx => C.solve(ctx),
     residual: (q, ctx) => C.residual(q, ctx),
     check: (q, ctx) => {
@@ -62,7 +65,7 @@
         { kind: 'rail', role: 'link', name: 'J2 arc-rail sector (rigid with link 1, revolved about p2)', c: V.scale(f.p2, RL * Math.cos(P.beta * D2R)),
           axis: f.p2, ref: f.e1, rho: rc, a0: lo, a1: hi, r: 3 },
         { kind: 'carriage', role: 'active', name: 'J2 roller carriage (4 V-rollers, link 2 bolted on)', c: carC, x: tang, z: uCar, size: [P.car[0], P.car[1], carT] },
-        { kind: 'link', role: 'link', name: 'J2 virtual axis (construction line)', a: [0, 0, 0], b: V.scale(f.p2, RL), r: 0.5 },
+        { kind: 'link', role: 'link', name: 'J2 virtual axis (construction line)', a: V.scale(f.p2, 30), b: V.scale(f.p2, RL), r: 0.5 },
         { kind: 'arc', role: 'link', name: 'link 2 (carriage to J3)', u: uCar, v: f.p3, r0: RL + carT + 0.6, r1: F[1] + h + 1, r: 2.5 },
         { kind: 'hub', role: 'active', name: 'J3 (O20 hub)', c: V.scale(f.p3, F[1]), axis: f.p3, r: P.hub_r, h },
         { kind: 'arc', role: 'fixed-arm', name: 'neck', u: f.p3, v: nk, r0: F[1] + 1, r1: F[1] + 1, r: 3 },
