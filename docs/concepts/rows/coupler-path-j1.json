@@ -15,11 +15,11 @@
  "inband10": 0.4539,
  "contact": 0.006,
  "gap": 30.52,
- "v_reach": null,
- "v_follow": null,
- "v_inband14": null,
- "v_inband10": null,
- "v_gap": null,
+ "v_reach": 0.6778,
+ "v_follow": 0.9909,
+ "v_inband14": 0.8408,
+ "v_inband10": 0.4493,
+ "v_gap": 28.98,
  "n_configs": 8937,
  "verdict": "dead (converged): honest priced optimum 30.52 on Bench(60,160) fast (score 88.9) vs the pin-knee leader 20.63 through the same code; every CMA stream (6, gates passed) collapses the rocker pivot B0 onto the crank pivot A0 (0.9-4 mm apart, hubs need 17) = the leader's plain J1; best bound 20.58 ties the leader; four-bar metal costs 14-36 points",
  "limiter": "not the J2 path: by IK a coupler covers 0.967 of the 360 big-bench poses but a plain circle with wider arcs covers 0.978; on the bench a wider J2 path lifts hub 2 from 61 to 80-95 mm, runs the knee out of range and puts links over the raised deltoid/trapezius; the four-bar's own metal (rocker over the moving shoulder edge, link 1 a pin stack higher) costs 14-36 points",
@@ -85,5 +85,16 @@
   "notes": "bodies: crank, rocker, coupler = link 1, link 2, member 3 (hub 3 + E strap), knee link, arm pad (on the cuff). joints: A0 (O20, ACTIVE crank), B0, A1, B1 (MR63ZZ / iglidur pins, passive), J2, J3 (O20, ACTIVE), knee pins a, b (passive). loops: the spherical four-bar + the pin knee. No passive coordinate undetermined.",
   "source": "docs/concepts/models/coupler-path-j1.py (CPDesign, price4bar)",
   "confidence": "counted"
+ },
+ "audit": {
+  "t": "2026-10-16T10:20:00Z",
+  "refuted": false,
+  "gate": "all 6 full-bench CMA streams re-checked from the sweep: circB 0.44/0.23/0.00, cplC 0.41/0.18/0.05, cplE 0.68/0.12/0.00, cplD 0.00/0.00/0.01, prcF 0.35/0.35/0.24, prcG 0.25/0.12/0.03 -> converged",
+  "v_note": "v_* = the bound optimum's plain pin-knee equivalent (the four-bar collapses into a rigid crank), worn frozen through the pin-knee model directly (not the coupler code), Bench(110,360) exact: fast 24.09 / frozen 28.98 vs the claimed 21.22 / 25.87; the leader k4598 through the same current code: fast 22.88 / frozen 29.54 (verified 30.35 earlier: code/measurement drift of 0.81). Re-seat gain over the leader in the same code: 0.56 gap points - below the 1-point bar; the by-product claim does NOT reproduce.",
+  "issues": [
+   "price4bar has no A0-B0 hub-overlap constraint: the priced optimum prcG (30.52) has B0 ~3 mm from A0 (two O20 hubs need ~17 mm); the honest priced figure is worse, not better",
+   "no constrained (A0-B0 >= 19.5 deg) priced stream was run: 189 incidental buildable samples, best priced 45.73, bound 28.42 - buildable class not gate-converged, but every free stream moves B0 onto A0, so the gradient points away from buildable",
+   "by-product pin-knee re-seat does not reproduce through the pin-knee model: frozen 28.98 (claimed 25.87), only 0.56 better than the leader in the same code"
+  ]
  }
 }

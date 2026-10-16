@@ -200,3 +200,31 @@ link 1 one pin stack higher).
    - i.e. the next lever is in the radial direction (or a2), not in the path's shape.
 4. **A four-bar base on this chain costs 14-36 points of in-band** for its own metal, so any closed-loop J1 (rocker,
    relay, coupler) has to pay that back in reach before it pays at all.
+
+## Audit (2026-10-16, independent auditor)
+
+Verdict: **the death stands** (refuted = false). The four-bar adds nothing over a plain crank; every number it reaches is the
+pin-knee chain it carries.
+
+- **Convergence gate**, recomputed from docs/concepts/sweeps/coupler-path-j1.json per stream (score points: gain over the
+  2nd half / last third / top-5 spread): circB 0.44/0.23/0.00, cplC 0.41/0.18/0.05, cplE 0.68/0.12/0.00,
+  cplD 0.00/0.00/0.01, prcF 0.35/0.35/0.24, prcG 0.25/0.12/0.03. All converged.
+- **Model bug, lenient side:** `price4bar` has no A0-B0 hub-overlap check, so the priced optimum (prcG 30.52 fast) sits with B0
+  ~3 mm from A0, where two O20 hubs need ~17 mm. The honest priced number is worse than 30.52. No constrained
+  (A0-B0 >= 19.5 deg) priced stream was run. The 189 buildable samples score at best 28.42 bound and 45.73 priced. Every free
+  stream drives B0 onto A0, so a constrained stream would sit against the constraint, and its result would be no better
+  than 28.42 + the metal price.
+- **The by-product does not reproduce.** The bound optimum's plain pin-knee re-seat (params in the row) was worn frozen
+  through `skin-normal-3r-pin-knee.py` itself on Bench(110,360) exact. Script: docs/concepts/verify/coupler-path-j1-audit.py.
+  Outputs: `..._reseat_big_frozen.json` and `..._control_big_frozen.json`.
+
+  | config | fast (60,160) | frozen exact (110,360) | reach | in-band14 | follow | contact |
+  |---|---|---|---|---|---|---|
+  | re-seat (claimed 21.22 / 25.87) | 24.09 | **28.98** | 0.678 | 0.841 | 0.991 | 0.008 |
+  | leader k4598, same current code | 22.88 | 29.54 | 0.636 | 0.877 | 1.000 | 0.009 |
+
+  The re-seat gains 0.56 gap points over the leader in the same code, below the 1-point bar. It trades in-band
+  (0.877 -> 0.841) for reach (0.636 -> 0.678). The leader itself drifted from its verified 30.35 to 29.54 in the current
+  code: that is a measurement/code change, not a design change. The polished H1 (round-3 protocol 28.21) stays ahead.
+- **One-line reason:** a closed-loop J1 on the pin-knee chain collapses to a rigid crank under every honest search. Its own
+  metal costs 14-36 gap points of in-band, and the fold window is set by the arcs, not by the J2 path.
