@@ -332,7 +332,9 @@ sigma -1, inv2 0, inv3 1, q 0.978, end_extra 1.784:
 | protocol | gap | near-touch | reach | follow | in-band 14 | in-band 10 | contact | claim | diff |
 |---|---|---|---|---|---|---|---|---|---|
 | verifier protocol: fit Bench(60,160) fast -> frozen -> worn Bench(110,360) EXACT (this box, 892 s) | **33.51** | 40.57 | 0.6167 | 0.9364 | 0.8917 | 0.4302 | 0.0299 | 33.51 / 40.57 | **0.00** |
-FIT110_ROW
+| claim protocol: fit Bench(110,360) fast -> worn Bench(110,360) EXACT | not re-measured in the time box | | | | | | | 31.04 / 38.03 | - |
+
+The fit-110 protocol needs the Bench(110,360) fast grid, which lives only on the farm volume; the farm job (`frozen ... --fits fit110,fit60`) sat in an 11-deep exo-cpu1 queue for the whole time box. Its output will land in docs/research/golden/skeptic/farm_frozen_v00.json. The wear step is the same code path that reproduced 33.51 to the digit, so only the fit bench differs.
 
 Checks on the 33.51 wear (all pass): honest, audit empty; gap re-derived from its components 33.51, near-touch 40.57;
 reach / follow re-counted from the per-pose residuals 0.6167 / 0.9364; hub_F 51.0 / 58.37 / 71.0 mm (<= 140); hub
@@ -352,6 +354,6 @@ model's snap; zero passive joints (complexity 0). No ruling broken.
 the only pods are the user's crl-* (all EXITED since 2026-10-13, not touched). Farm note: exo-cpu1 queue 11 deep at
 10:02 UTC (4 of 9 workers running) and the account **balance is $10.85 at $3.57/h spend** - about 3 h of runway.
 
-Verdict: **not refuted** - the claim reproduces to the digit on the verifier protocol (33.51, score 88.0), parity holds
+Verdict: **not refuted** - the claim reproduces to the digit on the verifier protocol (33.51, score 87.8), parity holds
 (0 of 20 new configs differ by > 1 gap point), no ruling is broken. The zero-complexity class stays ~19 points short of the
 golden 13.75 (score 95).

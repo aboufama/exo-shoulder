@@ -6,7 +6,7 @@
  "active_dof": 3,
  "passive_dof": 0,
  "passive_translations": 0,
- "status": "screened",
+ "status": "verified",
  "t_ideated": null,
  "t_screened": "2026-10-16T07:08:51Z",
  "reach": 0.6333,
@@ -16,11 +16,11 @@
  "contact": 0.0118,
  "gap": 28.85,
  "bench": "Bench(110,360) fast, shape fitted there (verifier top_check, 1 mm radial K6)",
- "v_reach": null,
- "v_follow": null,
- "v_inband14": null,
- "v_inband10": null,
- "v_gap": null,
+ "v_reach": 0.6167,
+ "v_follow": 0.9364,
+ "v_inband14": 0.8917,
+ "v_inband10": 0.4302,
+ "v_gap": 33.51,
  "n_configs": 15394,
  "best_params": {
   "az": 109.3565,
@@ -35,7 +35,7 @@
   "q": 0.978,
   "end_extra": 1.784
  },
- "verdict": "class ceiling measured (converged): 28.85 Bench(110,360) fast / 31.04 frozen exact (score 88.7) at complexity 0 - cannot reach 13.75: over 15394 evaluations no chain with reach >= 0.7625 exceeds in-band 0.592, at in-band >= 0.88 reach <= 0.633; not yet re-measured by an independent verifier",
+ "verdict": "class ceiling measured (converged): 28.85 Bench(110,360) fast / 31.04 frozen exact (score 88.7) at complexity 0 - cannot reach 13.75: over 15394 evaluations no chain with reach >= 0.7625 exceeds in-band 0.592, at in-band >= 0.88 reach <= 0.633; independently re-measured 2026-10-16 10:12 UTC: 33.51 on the verifier protocol reproduces to the digit (skeptic harness, docs/research/golden/README.md Verification)",
  "limiter": "fold: 121 of 136 lost workspace poses (44 folded, 77 stretched; across the body 49/68, overhead 6/28 taken); widening the window needs shorter arc >= ~45 deg, which carries hub 2 over skin spanning more than the 12 mm band (F 60 -> 86 -> 107 mm at a1 38 -> 54 -> 62) or off the body (2367 of 3560 kinematically viable configs)",
  "note": "global Sobol fold-law map 16384 configs + 4268 full evaluations + 22 CMA streams (11126) on Bench(110,360) fast; best J1 bvec(109.36, 65.94), J3 wdir(85.74, -16.19), a1 36.72, a2 69.06, sigma -1, inverted J3 stack (inv3 1), q 0.978, end hold 1.78; docs/concepts/zc-frontier-3r.md",
  "doc": "docs/concepts/zc-frontier-3r.md",
@@ -88,5 +88,84 @@
   "inband14": 0.8911,
   "contact": 0.0372,
   "near_touch_gap": 42.94
+ },
+ "verification": {
+  "t": "2026-10-16T10:11:56Z",
+  "claim": "GPU golden search (tools/gpu_bench.py, docs/research/golden/gpu_frontier.json): zero-complexity class ceiling, best 31.04 exact frozen (fit 110/360) / 33.51 verifier protocol",
+  "harness": "docs/concepts/verify/zc-frontier-3r-gpu-skeptic.py frozen (kit model + spine-parked top_check, own bench construction, CB_EXACT on the wear bench only, gap re-derived with concept_bench.gap_of, per-pose recount)",
+  "bench": "Bench(110,360) exact, shape frozen from Bench(60,160) fast (the verifier protocol)",
+  "v_gap": 33.51,
+  "v_near": 40.57,
+  "v_reach": 0.6167,
+  "v_follow": 0.9364,
+  "v_inband14": 0.8917,
+  "v_inband10": 0.4302,
+  "v_contact": 0.0299,
+  "score": 87.81,
+  "claim_gap": 33.51,
+  "diff": 0.0,
+  "honest": true,
+  "hub_F": {
+   "hub1": 51.0,
+   "hub2": 58.37,
+   "hub3": 71.0
+  },
+  "crown_contact_poses": 0,
+  "top_contact_poses": 1,
+  "min_metal_all_faces_mm": 0.02,
+  "taken_poses_under_1mm": 10,
+  "overhead140": {
+   "n": 28,
+   "taken": 5,
+   "reach": 0.1786,
+   "clip_follow": 0.8,
+   "inband14": 0.9626
+  },
+  "inband_member": {
+   "hub1": 0.9784,
+   "hub2": 1.0,
+   "hub3": 0.8146,
+   "link1": 0.9545,
+   "link2": 0.8821,
+   "neck": 0.8168
+  },
+  "inband14_all_taken_redteam": 0.8532,
+  "rules": {
+   "seat_ok": true,
+   "u1_anterior": 0.1351,
+   "ant_max": 0.2,
+   "hub_radii": [
+    10.0,
+    10.0,
+    10.0
+   ],
+   "kit_HUB_R": 10.0,
+   "kit_STACK": 3.15,
+   "kit_CROWN": 12.25,
+   "margin": 5.0,
+   "width": 12.0,
+   "t_link": 3.0,
+   "clamped_by_snap": {},
+   "o20_only": true,
+   "margin5": true
+  },
+  "parity": {
+   "configs": 20,
+   "max_abs_diff": {
+    "gap": 0.01,
+    "near": 100.01,
+    "reach": 0.0001,
+    "follow": 0.0,
+    "inband14": 0.0,
+    "inband10": 0.0,
+    "contact": 0.0
+   },
+   "n_gap_diff_gt_1": 0,
+   "how": "port math on CPU torch (tools/gpu_bench.py eval --device cpu) vs kit model, Bench(60,160) fast, 20 new configs (10 basin perturbations, 10 uniform); near differs only on dishonest configs (port adds +100 to near too)",
+   "file": "docs/research/golden/skeptic/port_parity_cpu60.json"
+  },
+  "fit110": "not re-measured within the time box: the Bench(110,360) fast grid lives only on the farm volume and the farm queue was 11 deep; queued as docs/research/golden/skeptic/farm_frozen_v00.json",
+  "pods": "no exo-gpu* pod exists at 09:41 UTC (all terminated); crl-* untouched",
+  "verdict": "not refuted: 33.51 reproduces to the digit on the verifier protocol; parity 0/20 configs > 1 gap point; no ruling broken"
  }
 }
