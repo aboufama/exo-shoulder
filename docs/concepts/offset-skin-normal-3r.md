@@ -256,8 +256,8 @@ atlas), and re-run this script on the result (frozen, Bench(110,360) exact).
 ## Fold-frontier seeds (2026-10-16)
 
 **Verdict: the fold frontier does not carry over to this morphology. Best stays k4216 (gap 32.61 fast, 42.59 frozen
-on Bench(110,360) exact). Every seed and every CMA stream from it returns to the k4216 basin. The whole-history gate
-now passes (9869 tries).** The 2-slide closure theorem makes J1 and J2 hubs on GH rays. On the fold-free layouts, one
+on Bench(110,360) exact). Every CMA stream climbs back to the k4216 region (J1 elevation 63-66); the frontier
+starts stop short of it at 37.62 and 42.65. The whole-history gate now passes (9869 tries).** The 2-slide closure theorem makes J1 and J2 hubs on GH rays. On the fold-free layouts, one
 of those two rays runs where the deltoid or arm moves under a scapula- or link-1-fixed hub. The fold losses come back
 as skin losses.
 
