@@ -7,7 +7,15 @@ swaps the fit bench and reads the th margin out of the same worn model). A polis
 after an independent verifier confirms a held-out gain >= 1 gap point AND it beats the verified config on the plain gap
 and at 2 mm (the user's dominance gate, 2026-10-16 ~21:05).
 
-__VERDICT__
+**Verdict: no pick replaces the verified config.** Measured held-out gain over the verified config: +2.32 / +2.39 /
++2.45 plain when the shape is fitted on env, but **-0.31 / -0.71 / -0.55 when the shape is fitted on Bench(60,160)**,
+the verified protocol's fit. The env-fit gain is an artifact of the fit protocol. Fitting the shape on env makes the
+verified config itself 2.59 points worse held out (23.29 -> 25.88, priced), and the picks were tuned to that fit. The
+verified config, fitted as verified, beats every pick held out under either fit (23.29 vs the best pick's 23.43). On
+the verified protocol no pick passes the dominance gate. pick1 is 0.76 better plain but 3.32 worse at 1 mm and 4.60
+worse at 2 mm: its gain is metal moved into the 0-2 mm shell. pick2 and pick3 lose on the plain gap. The robust gain
+(the best pick's worse of the two fits) is **-0.31**. That is below the 1-point rule, so no verifier run is needed and
+the verified config stays the CAD config. Cost: about $0.47 on the farm (budget $2).
 
 ## 1. The search bench: `env`, reused
 
@@ -146,4 +154,115 @@ What moved (nominal; the claim prices them). All small: the polish stays in the 
 Common moves: the horn radius r_h +0.3..1.1 mm (toward the 15.5 mm the verifier's red team asked for at the horn
 socket vs hub K), the arm joggle zr +0.3..0.4 mm, phib +1..4 deg, ang_min +0.3..0.6 (a narrower knee window).
 
-__CLAIM__
+## 5. The claim (step 4)
+
+**Batch 1** (`farm/jobs_claim.json`, 10 jobs): the 3 picks and the verified config, each on two protocols, priced:
+* fit env FAST -> wear the 1154 held-out poses EXACT;
+* fit Bench(60,160) FAST -> wear Bench(110,360) EXACT (the verified protocol).
+The batch also ran the unpriced margin-5 reading of the verified config and pick1 on env -> held.
+
+**Batch 2** (`farm/jobs_claim2.json`, 5 jobs) was needed once batch 1 showed the env fit penalising the verified
+config. It ran all 4 configs fit Bench(60,160) -> held out, priced: the fit protocol of the verified held-out
+22.67. It also ran pick1 unpriced on the same protocol. The picks were fixed before either batch ran.
+
+Each cell gives gap / near-touch 1 mm / near-touch 2 mm. All runs use the verifier's harness with its continuity flood
+fill: 0 taken poses dropped by the full-grid flood in every run, and 0 poses failing its added checks (RSSR closure,
+ball-link tilt <= 30, lobe pressure angle <= 45).
+
+| config | fit env -> held out | fit Bench(60,160) -> Bench(110,360) (verified protocol) | fit Bench(60,160) -> held out |
+|---|---|---|---|
+| verified, priced | 25.88 / 26.54 / 36.04 | **19.36** / 20.45 / 34.63 (score 92.96) | **23.29** / 26.39 / 38.29 |
+| verified, unpriced (margin 5) | 25.14 / 25.80 / 35.25 | 18.91 / 20.00 / 34.03 (= verified, reproduced) | 22.67 / 25.75 / 37.24 (verifier) |
+| pick1 (s2-g13-5), priced | 23.56 / 25.33 / 35.29 | 18.60 / **23.77** / **39.23** | 23.60 / 27.90 / 44.48 |
+| pick1, unpriced (margin 5) | 22.82 / 24.81 / 34.71 | - | 22.67 / 25.98 / 35.04 |
+| pick2 (s3-g12-0), priced | 23.49 / 24.60 / 35.20 | 20.43 / 21.35 / 31.52 | 24.00 / 27.22 / 33.70 |
+| pick3 (s4-g19-4), priced | 23.43 / 24.90 / 33.12 | 21.03 / 23.22 / 41.96 | 23.84 / 27.35 / 43.68 |
+
+Gain over the verified config on the same protocol and pricing (positive = better):
+
+| pick | held out, fit env (plain / 1 mm / 2 mm) | held out, fit Bench(60,160) | verified protocol, Bench(110,360) | dominance gate (plain AND 2 mm, verified protocol) |
+|---|---|---|---|---|
+| pick1 | +2.32 / +1.21 / +0.75 | **-0.31** / -1.51 / -6.19 | +0.76 / -3.32 / -4.60 | fails (2 mm -4.60; 12 poses < 1 mm, min metal 0.07 mm) |
+| pick2 | +2.39 / +1.94 / +0.84 | -0.71 / -0.83 / +4.59 | -1.07 / -0.90 / +3.11 | fails (plain -1.07) |
+| pick3 | +2.45 / +1.64 / +2.92 | -0.55 / -0.96 / -5.39 | -1.67 / -2.77 / -7.33 | fails (plain and 2 mm) |
+
+**Why the env-fit gain is not a design gain.** In the minarc polish the env fit improved BDp's held-out number
+(24.18 -> 23.68). Here it does the opposite. The verified config fitted on env loses in-band held out (0.871 vs
+0.896 fitted on Bench(60,160)), at equal reach (0.680 both, priced). The picks recover the
+in-band under the env fit (0.892) but not under the Bench(60,160) fit (0.888-0.898). Whether a fitted shape travels
+depends on the design, not only on the bench. The CAD builds one shape. Compared at the best fit of each config, the
+verified config (23.29) beats every pick (best 23.43, pick3 on the env fit).
+
+**Components of the decisive comparison** (fit Bench(60,160) -> held out, priced). Each cell gives reach /
+in-band14 / in-band10 / contact / overhead / kNN-connected gap:
+* verified: 0.680 / 0.896 / 0.536 / 0.008 / 17/71 / 30.92;
+* pick1: 0.675 / 0.898 / 0.542 / 0.009 / 14/71 / 31.14;
+* pick2: 0.682 / 0.888 / 0.532 / 0.009 / 18/71 / 30.58;
+* pick3: 0.680 / 0.890 / 0.537 / 0.008 / 17/71 / 31.47.
+
+Reach does not move. The polish found no fold relief, so the fold (266-268 of 952 held-out workspace poses) is still
+the limiter.
+
+**Rules on every claimed run:**
+* **th margin** (own state, from the member frames): the min over taken poses is 5.50-6.09 deg on every priced run,
+  with 0 poses under the 5.5 priced rule. The verified config's min th margin under the verified reading (margin 5,
+  nominal stops) is **5.232** on Bench(110,360), 0 poses under 5. Unpriced env -> held gives 5.021 (verified) and
+  5.087 (pick1).
+* **Continuity:** the full-grid flood fill keeps the static number in every run (0 dropped). The kNN graph gives
+  23.01 (verified), 21.95 / 24.09 / 24.40 (picks) on the verified protocol and 30.58-31.47 held out (verified
+  30.92).
+* **Drive:** taken K opening dK 33.7-37.6 deg, inside each config's drive range (35.8-45.8). The range ends at
+  ROD-hub2 for the verified config, pick2 and pick3, and at the transmission limit for pick1. Transmission >= 38.1
+  deg; ball-link tilt <= 23.8 deg (<= 30); lobe pressure angle <= 41.9 deg (<= 45).
+* **O20** at every hub (the model's hubs, unchanged). The J1 seat moves less than 1.1 deg in azimuth and 0.6 deg in
+  elevation in every pick.
+
+**The pricing as a measurement change** (not a design change): reading the verified config with built stops (smlo
+5.5, margin 5.5, a1max 62.68) costs 0.45 on the verified bench (18.91 -> 19.36, score 93.12 -> 92.96) and 0.62 held
+out (22.67 -> 23.29). The min th margin rises 5.23 -> 5.51.
+
+## 6. What this measured, and what happens next
+
+1. **The verified config stays the CAD config** (gen-6 CAD on `best_params`). Its built-stop reading belongs on the
+   row: 19.36 priced (score 92.96), held out 23.29, min th margin 5.232 unpriced / 5.513 priced.
+2. **A final-polish objective must fit the shape the CAD will build.** The env bench was built to fix the workspace
+   sample, and it does: env predicts held out within 2.1 points vs Bench(110,360)'s 3.8. But scoring the polish
+   in-sample on an env-fitted shape optimises a shape protocol the claim does not use. The next polish objective:
+   fit the shape on the claim's fit bench (Bench(60,160)), wear it FROZEN on env (fast), and select on envsel the same
+   way. That is the claim's own protocol on a representative sample.
+3. **Selection on noise again sets the size of the in-sample gain.** The top 40 rows average 20.53 in-sample against
+   24.32 on envsel, worse than the verified config's 23.64. The envsel filter (1 mm rank, 2 mm guard) did its job:
+   all 3 picks beat the verified config on envsel at both thresholds, and on the env-fit held-out protocol at all
+   three numbers.
+4. **The basin is narrow.** Wide CMA runs (sigma 0.5-0.6) found nothing better than the verified config in 97 tries
+   each. The losses are fold (86-91 of 360 on the bench), and parameter polish does not move reach. The reach lever is
+   the a2 / J3 re-seat named in the row (twist-long-a2 on this drive and dyad), not a polish.
+5. **For the CAD.** Every pick moved the horn radius r_h up (15.2-16.0 vs 14.87). That is toward the >= 15.5 mm the
+   verifier's red team asked for at the M2 socket vs hub K (1.37 mm). A single-parameter check, r_h 15.5 on the
+   verified config through this claim harness, is the cheap next measurement before the CAD fixes the horn.
+
+## Cost
+
+Farm exo-cpu1 (cpu3c $0.288 / worker-h; cpu5c about 15 % more):
+
+| batch | billed | $ (cpu3c / cpu5c) |
+|---|---|---|
+| CMA 8 runs + re-score x2 | 3562 worker-s | 0.285 / 0.332 |
+| claim batch 1 (10 jobs) | 1563 worker-s | 0.125 / 0.146 |
+| claim batch 2 (5 jobs) | 751 worker-s | 0.060 / 0.070 |
+| **total** | | **about $0.47 / $0.55** (+ cold starts; budget $2.00) |
+
+Local: 1 process at a time (smoke test, the reproduction of 18.91).
+
+## Files
+
+* `tools/sidecar_env_polish.py`: the objective, the priced reading, the full-grid flood with fresh-pose edges, the CMA
+  driver (tools/crossfit_polish.py's), picks, gate, re-score and the claim wrapper around the verifier's harness.
+* `docs/research/sidecar_env_polish/env_table.json`: the distribution table.
+* `docs/research/sidecar_env_polish/farm/`: job files, CMA rows (`cma_scp-*.json` + state + log), the re-scores
+  (`rescore_BEST_*`) and the claims (`claim_*`, `claim2_*`).
+* `docs/research/sidecar_env_polish/picks/`: pick1-3, nominal free parameters + the full config (the claim prices
+  them).
+* `docs/research/sidecar_env_polish/local/claim_BEST_nominal_fit60_bench.json`: the wrapper's reproduction of the
+  verified 18.91.
+

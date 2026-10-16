@@ -1,0 +1,399 @@
+{
+ "fit_fast": {
+  "gap": 12.08,
+  "reach": 0.7812,
+  "follow": 1.0,
+  "inband14": 0.898,
+  "inband10": 0.5326,
+  "contact": 0.0,
+  "extra": {
+   "n_taken": 185,
+   "closure_horn_max_mm": 0.0,
+   "closure_tip_max_mm": 0.0,
+   "tilt_crank_max": 10.0,
+   "tilt_horn_max": 21.1,
+   "tilt_crank_p95": 10.0,
+   "tilt_horn_p95": 19.1,
+   "poses_failing": 0,
+   "poses_failing_ids": [],
+   "pa_real_max": 39.11,
+   "ratio_over_small": [
+    0.852,
+    0.984
+   ],
+   "dK_taken_max_deg": 34.14,
+   "dK_lim_deg": 43.0,
+   "why_lim": "ROD-hub2",
+   "corrected": {
+    "gap": 12.08,
+    "reach": 0.7812,
+    "follow": 1.0,
+    "inband14": 0.898,
+    "inband10": 0.5326,
+    "contact": 0.0
+   },
+   "th_margin_own_state": {
+    "min": 6.062,
+    "n": 185,
+    "lt5": 0,
+    "lt5p5": 0,
+    "min_stateA": 6.062,
+    "min_forced": 6.409,
+    "forced": 67,
+    "a_deg": [
+     36.37,
+     61.89
+    ],
+    "lowest": {
+     "own": 6.062,
+     "forced": false,
+     "kind": "ws",
+     "plane": -30.0,
+     "elev": 60.0,
+     "axial": 15.0
+    }
+   }
+  }
+ },
+ "frozen": {
+  "gap": 23.29,
+  "reach": 0.6796,
+  "follow": 1.0,
+  "inband14": 0.8957,
+  "inband10": 0.5358,
+  "contact": 0.0082
+ },
+ "mode": "exact",
+ "n": 1154,
+ "why": {
+  "fold": 266,
+  "slide": 28,
+  "flip": 0,
+  "closure": 0,
+  "skin": 0,
+  "parts": 4,
+  "contact": 7
+ },
+ "parts_pairs": {
+  "E-L2": 4
+ },
+ "parts_ib14": {
+  "hub1": [
+   0.994,
+   8.0,
+   80
+  ],
+  "hubK": [
+   0.973,
+   7.6,
+   80
+  ],
+  "hub2": [
+   0.985,
+   10.2,
+   80
+  ],
+  "hub3": [
+   0.594,
+   13.0,
+   80
+  ],
+  "E": [
+   0.932,
+   7.3,
+   104
+  ],
+  "boss": [
+   0.988,
+   8.0,
+   32
+  ],
+  "pad": [
+   1.0,
+   8.2,
+   32
+  ],
+  "knee": [
+   0.95,
+   10.4,
+   95
+  ],
+  "crank": [
+   0.908,
+   12.5,
+   57
+  ],
+  "horn": [
+   0.957,
+   7.2,
+   20
+  ],
+  "rod": [
+   0.885,
+   12.4,
+   13
+  ],
+  "rodends": [
+   0.959,
+   11.3,
+   32
+  ],
+  "L1a": [
+   0.98,
+   8.9,
+   12
+  ],
+  "L1b": [
+   0.968,
+   8.4,
+   36
+  ],
+  "L2": [
+   0.747,
+   11.6,
+   132
+  ]
+ },
+ "audit": {
+  "near_touch_min_mm": 0.14,
+  "near_touch_low": [
+   {
+    "mm": 0.14,
+    "i": 1099,
+    "kind": "ws",
+    "plane": 135.0,
+    "elev": 135.0,
+    "axial": -60.0
+   },
+   {
+    "mm": 0.14,
+    "i": 820,
+    "kind": "ws",
+    "plane": 75.0,
+    "elev": 150.0,
+    "axial": -90.0
+   },
+   {
+    "mm": 0.33,
+    "i": 609,
+    "kind": "ws",
+    "plane": 30.0,
+    "elev": 165.0,
+    "axial": -75.0
+   },
+   {
+    "mm": 0.39,
+    "i": 754,
+    "kind": "ws",
+    "plane": 60.0,
+    "elev": 165.0,
+    "axial": -45.0
+   },
+   {
+    "mm": 0.46,
+    "i": 681,
+    "kind": "ws",
+    "plane": 45.0,
+    "elev": 165.0,
+    "axial": -60.0
+   }
+  ],
+  "gap_near1": 26.39,
+  "near1_poses": 14,
+  "gap_near2": 38.29,
+  "near2_poses": 64,
+  "overhead140": {
+   "ws": 71,
+   "reach": 0.2394,
+   "clip": 19,
+   "follow": 1.0,
+   "inband14": 0.8719,
+   "inband10": 0.5806,
+   "why_not": {
+    "fold": 37,
+    "slide": 15,
+    "flip": 0,
+    "closure": 0,
+    "skin": 0,
+    "parts": 0,
+    "contact": 2
+   }
+  }
+ },
+ "extra": {
+  "n_taken": 849,
+  "closure_horn_max_mm": 0.0,
+  "closure_tip_max_mm": 0.0,
+  "tilt_crank_max": 10.0,
+  "tilt_horn_max": 21.6,
+  "tilt_crank_p95": 10.0,
+  "tilt_horn_p95": 19.4,
+  "poses_failing": 0,
+  "poses_failing_ids": [],
+  "pa_real_max": 39.11,
+  "ratio_over_small": [
+   0.832,
+   0.984
+  ],
+  "dK_taken_max_deg": 36.95,
+  "dK_lim_deg": 43.0,
+  "why_lim": "ROD-hub2",
+  "corrected": {
+   "gap": 23.29,
+   "reach": 0.6796,
+   "follow": 1.0,
+   "inband14": 0.8957,
+   "inband10": 0.5358,
+   "contact": 0.0082
+  },
+  "th_margin_own_state": {
+   "min": 5.5,
+   "n": 849,
+   "lt5": 0,
+   "lt5p5": 0,
+   "min_stateA": 6.048,
+   "min_forced": 5.5,
+   "forced": 290,
+   "a_deg": [
+    36.37,
+    61.89
+   ],
+   "lowest": {
+    "own": 5.5,
+    "forced": true,
+    "kind": "ws",
+    "plane": 75.0,
+    "elev": 105.0,
+    "axial": -105.0
+   }
+  }
+ },
+ "sidecar": {
+  "boss_level": 61.1,
+  "lev_L1b": 57.9,
+  "arm_tip_level": 57.9,
+  "rod_len": 26.8,
+  "La": 16.5,
+  "r_h": 14.9,
+  "i_rock": 3.77,
+  "rssr_closed": true,
+  "trans_min_taken": 42.9,
+  "ratio_range": [
+   0.766,
+   0.884
+  ],
+  "ratio_small_angle": 0.899,
+  "phi_max_taken": 28.6,
+  "crest_exact": 9.93,
+  "dK_lim": 43.0,
+  "why_lim": "ROD-hub2"
+ },
+ "min_clear_taken": 1.15,
+ "connected": {
+  "static": {
+   "gap": 23.29,
+   "reach": 0.6796,
+   "follow": 1.0,
+   "inband14": 0.8957,
+   "contact": 0.0082
+  },
+  "connected_bench": {
+   "gap": 23.81,
+   "reach": 0.6744,
+   "dropped": 5,
+   "dropped_forced": 5,
+   "forced_taken": 250,
+   "forced_taken_connected": 245,
+   "dropped_with_no_taken_neighbour": 3
+  },
+  "connected_knn": {
+   "gap": 30.92,
+   "reach": 0.604,
+   "dropped": 72,
+   "dropped_forced": 72,
+   "forced_taken": 250,
+   "forced_taken_connected": 178
+  },
+  "connected_full": {
+   "gap": 23.29,
+   "reach": 0.6796,
+   "dropped": 0,
+   "dropped_forced": 0,
+   "forced_taken": 250,
+   "forced_taken_connected": 250,
+   "envelope": {
+    "env_ok": 1018,
+    "env_forced_ok": 401,
+    "env_forced_connected": 401
+   }
+  },
+  "secs": 4.1
+ },
+ "fit_protocol": "fit60",
+ "wear": "held",
+ "which": "BEST",
+ "nominal": {
+  "bk1": 28.9414,
+  "bk2": 39.236,
+  "a1max": 63.1774,
+  "law_mode": "lin",
+  "kK": 1.6232,
+  "r_h": 14.8706,
+  "beta": -86.447,
+  "La": 16.5467,
+  "s_arm": 4.3872,
+  "hl": 3.15,
+  "zr": 0.0,
+  "r_lobe": 7.7447,
+  "gam": 0.0,
+  "smhi": 16.5464,
+  "smlo": 5.0,
+  "az1": 96.6954,
+  "el1": 67.5865,
+  "az2": 42.2031,
+  "el2": 44.4209,
+  "wd": 67.5003,
+  "wa": -7.3175,
+  "b3": 0.345,
+  "ang_min": 26.8823,
+  "lc": 25.6915,
+  "phib": -60.7036
+ },
+ "priced": {
+  "bk1": 28.9414,
+  "bk2": 39.236,
+  "a1max": 62.6774,
+  "law_mode": "lin",
+  "kK": 1.6232,
+  "r_h": 14.8706,
+  "beta": -86.447,
+  "La": 16.5467,
+  "s_arm": 4.3872,
+  "hl": 3.15,
+  "zr": 0.0,
+  "r_lobe": 7.7447,
+  "gam": 0.0,
+  "smhi": 16.5464,
+  "smlo": 5.5,
+  "az1": 96.6954,
+  "el1": 67.5865,
+  "az2": 42.2031,
+  "el2": 44.4209,
+  "wd": 67.5003,
+  "wa": -7.3175,
+  "b3": 0.345,
+  "ang_min": 26.8823,
+  "lc": 25.6915,
+  "phib": -60.7036
+ },
+ "price": {
+  "smlo_nominal": 5.0,
+  "smlo_priced": 5.5,
+  "smhi": 16.5464,
+  "a1max_nominal": 63.1774,
+  "a1max_priced": 62.6774,
+  "margin": 5.5
+ },
+ "margin": 5.5,
+ "secs": 452.0
+}

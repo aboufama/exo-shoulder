@@ -1943,3 +1943,48 @@ were re-measured by an independent verifier (the sidecars a third time by the al
 lobe window as metal, r_h >= 15.5), its verifier, then the generation-winner CAD and stills. Round 9 attacks reach by
 making the measured kinematic headroom parkable: the J1 back seat for the knuckle (kill gate with parking), a lower hub 3
 / L2 under the wide window (hub-3 crest seat, b3 0 with the knee window), and the roller-flank drive on a longer dyad.
+
+## sidecar-longdyad-knuckle-3r final polish: no pick replaces the verified config; on this design the env-fitted shape travels worse (2026-10-16, docs/research/sidecar-longdyad-knuckle-3r_final_polish.md)
+
+Raw data: `docs/research/sidecar_env_polish/` (CMA rows, picks, re-scores, claims; job files), tool
+`tools/sidecar_env_polish.py`. Self-measured; every claimed number comes from the verifier's own harness
+(`docs/concepts/verify/sidecar-longdyad-knuckle-3r.py`, imported unchanged), which reproduces the verified 18.91 / 20.00 /
+34.03 / kNN 21.72 to the digit through the wrapper.
+
+**What was measured**
+
+* **The search:** 8 CMA runs from the verified config on the envelope bench `env`, 1216 configurations. The objective
+  is the near-touch gap in-sample on env, priced, with continuity, plus the claim-fit guard and a 2-mm shell guard.
+  The convergence gate passes on the combined runs: gain 0.07 over the second half, 0.07 over the last third, top 5
+  within 0.39. In-sample best 19.64 vs the verified config's 21.64. Wide runs (sigma 0.5-0.6) never beat the verified
+  config: the basin is narrow.
+* **Selection on noise.** The 40 best rows average 20.53 in-sample but 24.32 on the independent envsel draw, worse than
+  the verified config's 23.64. The picks were ranked on envsel with a 2-mm guard. All 3 beat the verified config on
+  envsel at 1 mm and at 2 mm.
+* **The claim (priced: smlo +0.5, margin 5.5, a1max <= bk1 + bk2 - 5.5).** With the shape fitted on env, the picks
+  gain +2.32 / +2.39 / +2.45 held out. With the shape fitted on Bench(60,160), the verified protocol's fit, every pick
+  LOSES held out: -0.31 / -0.71 / -0.55. The env fit itself costs the verified config 2.59 points held out (23.29 ->
+  25.88), all in-band (0.896 -> 0.871). In the minarc polish the env fit helped (24.18 -> 23.68). Whether a fitted
+  shape travels depends on the design.
+* **The dominance gate fails on the verified protocol.** pick1 gains +0.76 plain on Bench(110,360) but loses 3.32 at
+  1 mm and 4.60 at 2 mm (12 poses under 1 mm, min metal 0.07 mm): the gain is metal moved into the shell. pick2 and
+  pick3 lose plain. Robust held-out gain (the best pick, the worse of the two fits): **-0.31**. Below 1, so no
+  verifier run is needed.
+* **Built-stop pricing of the verified config** (measurement change, no design change): 18.91 -> 19.36 on the bench
+  (score 93.12 -> 92.96) and 22.67 -> 23.29 held out.
+* **Min th margin over the taken poses**, not on file before: 5.232 deg at the verified reading (0 poses under 5) and
+  5.513 priced.
+* **Continuity:** the full-grid flood drops 0 poses in every run. kNN on the verified protocol: verified 23.01 priced,
+  picks 21.95-24.40.
+
+**Lessons**
+
+* A final-polish objective must fit the shape the CAD builds. Next polish objective: fit the shape on the claim's fit
+  bench, wear it FROZEN on env, and select on envsel. That is the claim's own protocol on a representative sample.
+* Parameter polish does not move reach on this design. Fold is 266-268 of 952 held-out workspace poses for every
+  config. The reach lever is the a2 / J3 re-seat (twist-long-a2), not the polish.
+* For the CAD: every pick raised the horn radius r_h (15.2-16.0 vs 14.87), toward the >= 15.5 the red team asked for at
+  the socket vs hub K. A single-parameter r_h 15.5 check through this harness should come before the CAD fixes the
+  horn.
+
+**Next:** the gen-6 CAD proceeds on the verified config (`best_params`). Cost: about $0.47 on the farm.

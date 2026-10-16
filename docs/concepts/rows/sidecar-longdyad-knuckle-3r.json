@@ -284,5 +284,59 @@
    "4.5": 10.84
   },
   "champion_same_bench": 75.94
+ },
+ "final_polish": {
+  "t": "2026-10-16T22:05:00Z",
+  "doc": "docs/research/sidecar-longdyad-knuckle-3r_final_polish.md",
+  "tool": "tools/sidecar_env_polish.py",
+  "verdict": "no replacement: the verified config stays the CAD config (robust held-out gain -0.31 < 1; no pick passes the dominance gate on the verified protocol)",
+  "min_th_margin": 5.232,
+  "min_th_margin_note": "own-state J1-J3 margin over taken poses, verified reading (margin 5, nominal stops), Bench(110,360) exact frozen; 0 poses < 5",
+  "priced": {
+   "reading": "smlo + 0.5, CB_FOLD_MARGIN 5.5, a1max <= bk1 + bk2 - 5.5",
+   "bench_gap": 19.36,
+   "score": 92.96,
+   "near1": 20.45,
+   "near2": 34.63,
+   "held_gap": 23.29,
+   "held_near1": 26.39,
+   "held_near2": 38.29,
+   "min_th_margin": 5.513
+  },
+  "env": {
+   "fit_env_wear_env_exact": {
+    "gap": 20.55,
+    "near1": 22.46,
+    "near2": 30.87
+   },
+   "fit_env_wear_held": {
+    "gap": 25.88,
+    "near1": 26.54,
+    "near2": 36.04
+   }
+  },
+  "cma": {
+   "runs": 8,
+   "configs": 1216,
+   "gate": {
+    "gain_2nd_half": 0.07,
+    "gain_last_third": 0.07,
+    "top5_spread": 0.39,
+    "passes": true
+   }
+  },
+  "picks_held_gain": {
+   "fit_env": {
+    "pick1": 2.32,
+    "pick2": 2.39,
+    "pick3": 2.45
+   },
+   "fit60": {
+    "pick1": -0.31,
+    "pick2": -0.71,
+    "pick3": -0.55
+   }
+  },
+  "cost_usd": 0.47
  }
 }
