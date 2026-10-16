@@ -125,10 +125,11 @@ now reads the preload the design declares in `design.json` `build_fixes.spring.p
 
 | | before (0.08) L1 | after (0.04) L1 | before CAD | after CAD |
 |---|---|---|---|---|
-| R17 | FAIL (drift 9.28) | **PASS** (3.68; twist 1.98; M_GH 0.061 N.m; F 0.30 N; no lag > 10 deg) | FAIL (9.35) | see the CAD scorecard (section 5) |
-| R11 | 0.404 kPa | 0.344 kPa | - | - |
-| R1 / R1-aim / R4 / R16 | 80.8 / 48.7 / 71.8 / 74.0 % | unchanged (same geometry) | 80.5 / 47.2 / 71.0 / 74.0 % | unchanged |
-| pass count | 6 / 19 | **7 / 19** | 6 / 19 | see section 5 |
+| R17 | FAIL (drift 9.28) | **PASS** (3.68; twist 1.98; M_GH 0.061 N.m; F 0.30 N; no lag > 10 deg) | FAIL (9.35) | **PASS** (3.72; twist 2.00; M_GH 0.062 N.m; F 0.31 N) |
+| R11 | 0.404 kPa | 0.344 kPa | 0.281 kPa | 0.222 kPa |
+| R8 | 105.6 g | 105.6 g | 239.8 g (keyword materials) | **203.8 g** (material table, a builder fix, not a design change) |
+| R1 / R1-aim / R4 / R16 | 80.8 / 48.7 / 71.8 / 74.0 % | unchanged (same geometry) | 80.5 / 47.2 / 71.0 / 74.0 % | unchanged (same geometry) |
+| pass count | 6 / 19 | **7 / 19** | 6 / 19 | **7 / 19** |
 
 ## 4. Builder fixes (pipeline/conformal/param_cad/user_style_minarc.py)
 
@@ -137,7 +138,7 @@ now reads the preload the design declares in `design.json` `build_fixes.spring.p
   no row, or more than one, stops the build.
   * Re-billed in place on the built volumes of `user_minarc_pick1/parts_full.json`; the geometry is unchanged.
   * Link 1a: NdFeB 21.30 g -> Ti 12.58 g. Link 1b: steel 26.78 -> Ti 15.11 g. Link 2: steel 36.05 -> Ti 20.34 g.
-  * Custom mass: 178.2 -> 142.1 g, the verifier's number. **R8 is re-judged in section 5.**
+  * Custom mass: 178.2 -> 142.1 g, the verifier's number. R8 is re-judged: 239.8 -> 203.8 g (pass).
 * **Stock sizes.**
   * Dowels are now "ISO 8734 O3 x 6 m6 hardened (stock length), faced to 5.65 mm": a stock part with one facing op, so
     the press depth stays 3 mm and no hole moves.
@@ -157,7 +158,7 @@ now reads the preload the design declares in `design.json` `build_fixes.spring.p
 
 ## 5. Next
 
-1. CAD re-judge of R17 / R8 (scorecard of `user_minarc_pick1`, this commit).
+1. Done: the CAD re-judge of R17 / R8 / R11 (section 3). Both pick1 designs are 7 / 19, as BDp.
 2. The K pair as a non-opposed search in `build_minarc_l1.py` and a rebuild of both designs. That rebuild carries the
    new part names.
 3. A verifier re-measures section 2: the 2 g real-direction sims and `demand_real_g.py`.
