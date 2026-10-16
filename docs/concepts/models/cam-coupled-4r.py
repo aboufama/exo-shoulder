@@ -184,9 +184,15 @@ def build(B, F, p):
              K.strap_member("link2", p2, p3, ("J2", "J3"), ang=p["a2"] * D2R, width=w, t=t, ramp_to=(("hub2", K.STACK), ("hub3", 0.0)),
                             over=[("link1", 1.0), ("neck", 1.0), ("slot", 1.0)], end_mm=end),
              K.strap_member("link3", p3, u4, ("J3", "J4"), ang=p["a3"] * D2R, width=w, t=t, ramp_to=(("hub3", K.STACK), ("hub4", K.STACK)),
-                            over=[("link1", 1.0), ("neck", 1.0), ("slot", 1.0)], end_mm=end),
+                            over=[("link1", 1.0), ("neck", 1.0), ("slot", 1.0), ("link2", 1.0)], end_mm=end),
              K.neck_member(F, u4, joints=("J4",), ramps=(("hub4", 0.0), (None, 0)))]
     tail = links[1]; tail.ramps.append((np.ones(tail.D.shape[1], bool), "link1", t + 1.0))   # the tail rides one full level over link 1
+    # link 1 crosses the S-fixed groove plate at a FIXED distance from J1 (the plate is a band about n, n = J1 tilted by
+    # ecc): lift those samples one level over the plate (pose-independent mask: the angle of each sample from J1)
+    l1 = links[0]; ang1 = np.degrees(np.arccos(np.clip(np.einsum("pmd,pd->pm", l1.D, u1), -1, 1)))
+    tilt = math.degrees(math.acos(np.clip(float(_slot_frame(p)[0] @ K.bvec(p["az"], p["el"])), -1, 1)))
+    half = math.degrees((p["slot_w"] / 2 + 2.0) / 70.0) + tilt
+    l1.ramps.append(((np.abs(np.median(ang1, 0) - p["beta"]) <= half), "slot", p["slot_t"] + 1.0))
     okr = ok
     info = dict(residual_deg=round(float(max(K.closure_residual(p2, u4, p3, p["a2"], p["a3"])[okr].max(),
                                           np.degrees(np.abs((pin * kn.n).sum(-1) - kn.cb))[okr].max())), 6) if okr.any() else None,
