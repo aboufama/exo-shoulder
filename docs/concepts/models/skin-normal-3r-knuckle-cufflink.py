@@ -52,12 +52,13 @@ NAME = "All-skin-normal 3R closed by three pins (J2 knuckle + pinned cuff link)"
 
 PARAMS = dict(OSN.PARAMS)
 PARAMS.update(az1=94.61, el1=60.68, b1=0.34, az2=24.06, el2=48.54, b2=0.42, wd=75.16, wa=-13.04, b3=0.21,  # snh k722 seats
-              lk=30.0, alk=None, alk_off=90.0,   # crank length; direction (deg about J2 from the hub2 -> hub3 direction):
+              lk=30.0, alk=0.0, alk_off=90.0,   # crank length; direction (deg about J2 from the hub2 -> hub3 direction):
                                                  # alk None = circular median of (chi - q2) + alk_off over the fit set
                                                  # (alk_off +-90: the crank square to J3's normal at the median pose, max authority)
               LE=45.0, lc=30.0,           # E arm (J3 line -> pin a), cuff link (pin a -> pin b)
               phE=0.0, dB=90.0,           # E arm direction in hub 3's plane (deg from the along-arm axis), link direction rel. E arm at mid
               gmin=25.0, auth=5.0, kswing=35.0,
+              crank_strap=0,              # 0: flat crank at hub 2's upper level (spec); 1: skin-following strap to a flat boss (collides with L1)
               alk_auto=None, k_c0=None, k_sk=None, k_mid=None, cuff_m=None, cuff_sig=None,     # design-step outputs (auto when None)
               drop=1, jam_contact=1, slides=1, remote=1, ramp=1, vfix=1)
 for k in ("S_a", "S_t", "R_r", "S_max", "centre", "R_tol", "inv", "S_auto", "neck"): PARAMS.pop(k, None)
@@ -75,6 +76,7 @@ class Design(OSN.Design):
         w = self.c[2] - self.c[1]; w = unit(w - (w @ u2) * u2)          # hub 2 -> hub 3 direction in hub 2's plane
         if np.linalg.norm(w) < 0.5: w = e
         self.ke = w; self.kf = np.cross(u2, w)                          # knuckle frame: alk 0 = toward hub 3
+        if P.get("alk") is None or P.get("alk_auto"): P["alk_auto"] = True
         self.set_alk(P["alk"] if P.get("alk") is not None else 0.0)
         pe = P["phE"] * D2R; self.eE = math.cos(pe) * self.sa + math.sin(pe) * self.st
         pb = (P["phE"] + P["dB"]) * D2R; self.eB = math.cos(pb) * self.sa + math.sin(pb) * self.st
@@ -129,8 +131,8 @@ class Design(OSN.Design):
 def design_step(D, Qd):
     """c0, knuckle branch and mid; cuff mid drift and elbow sign - from the fit set (fit clips 10 fps + bench poses)"""
     P = D.p; q, okf, X1, X2, X3, s = D.ik(Qd)
-    if P.get("alk") is None or P.get("alk_auto"):
-        P["alk_auto"] = True; D.set_alk(0.0)
+    if P.get("alk_auto"):
+        D.set_alk(0.0)
         Phi0, _, _ = D.knuckle_raw(Qd[okf], q[okf], (X1[0][okf], X1[1][okf]), s[okf])     # Phi at alk 0 = q2 - chi
         if not len(Phi0): return False
         med = math.degrees(math.atan2(np.median(np.sin(-Phi0)), np.median(np.cos(-Phi0))))
@@ -240,8 +242,11 @@ class Model(S.VModel):
             G.append(dict(name=f"hub{k + 1}", mem=mem, B=B, N=u[k]))
         e3, f3 = frame_of(sn); d = disc(HUB_R)
         G.append(dict(name="hub3", mem=3, B=c[2][None] + d[:, :1] * e3 + d[:, 1:] * f3, N=sn, sh="h3"))
-        G.append(dict(name="Earm", mem=3, B=self.plate(c[2], D.eE, P["LE"], sn, start=HUB_R), N=sn, sh="h3"))
-        G.append(dict(name="crank", mem=4, B=self.plate(c[1], D.ek, P["lk"], u[1], start=HUB_R), N=u[1]))
+        G.append(dict(name="Earm", mem=3, B=self.plate(c[2], D.eE, P["LE"], sn, start=HUB_R), N=sn))
+        e2, f2 = frame_of(u[1]); n_r = int(2 * np.pi * BOSS_R / SP); ang = np.arange(n_r) * 2 * np.pi / n_r
+        dd = np.r_[disc(BOSS_R), (BOSS_R - 0.25) * np.stack([np.cos(ang), np.sin(ang)], 1)]
+        if P.get("crank_strap"): G.append(dict(name="crank", mem=4, B=c[1] + D.e0 + dd[:, :1] * e2 + dd[:, 1:] * f2, N=u[1]))   # the knuckle boss (flat, O12)
+        else: G.append(dict(name="crank", mem=4, B=self.plate(c[1], D.ek, P["lk"], u[1], start=HUB_R), N=u[1]))           # flat crank + boss
         pa0 = self.Pb3 - P["lc"] * D.eB
         G.append(dict(name="clink", mem=6, B=self.plate(self.Pb3, -D.eB, P["lc"], sn, start=-BOSS_R), N=sn))
         r = rect(PAD, PAD); G.append(dict(name="pad", mem=5, B=self.Pb3[None] + r[:, :1] * sa + r[:, 1:] * st, N=sn))
@@ -280,13 +285,16 @@ class Model(S.VModel):
         G = self.groups(); self.G = G
         res = self.needed([(g["mem"], g["B"], g["N"], 140.0) for g in G], poses)
         H = {g["name"]: r for g, r in zip(G, res)}
-        H["h3"] = np.concatenate([H["hub3"], H["Earm"]], 1)
-        self.Hneed = H; self.Lneed = {}; self.gnames = ["hub1", "hub2", "h3", "crank", "clink", "pad"]
+        H["h3"] = H["hub3"]
+        self.Hneed = H; self.Lneed = {}; self.gnames = ["hub1", "hub2", "h3", "Earm", "crank", "clink", "pad"]
         self.greedy_drop(links=False); keep1 = ~self.drop
         hh = self._levels(keep1)
         Kp = c[1] + D.e0 + (hh["crank"] + T_LINK + S.RUN * 0.3) * u[1]
         C1 = c[0] + hh["hub1"] * u[0]; C2 = c[1] + hh["hub2"] * u[1]; C3 = c[2] + hh["h3"] * u[2]
-        self.links = [dict(name="L1", mem=1, rows=self.strap_rows(C1, C2, [(c[0], u[0], HUB_R), (c[1], u[1], HUB_R)]),
+        Ku = c[1] + (hh["hub2"] + UP) * u[1]; Kb = c[1] + D.e0 + hh["crank"] * u[1]
+        self.links = ([dict(name="crankL", mem=4, rows=self.strap_rows(Ku, Kb, [(c[1], u[1], HUB_R), (c[1] + D.e0, u[1], BOSS_R)]),
+                            ends=[(c[1], u[1], UP, "hub2"), (c[1] + D.e0, u[1], 0.0, "crank")])] if self.p.get("crank_strap") else []) + [
+                      dict(name="L1", mem=1, rows=self.strap_rows(C1, C2, [(c[0], u[0], HUB_R), (c[1], u[1], HUB_R)]),
                            ends=[(c[0], u[0], 0.0, "hub1"), (c[1], u[1], 0.0, "hub2")]),
                       dict(name="L2", mem=2, rows=self.strap_rows(Kp, C3, [(c[1] + D.e0, u[1], BOSS_R), (c[2], u[2], HUB_R)]),
                            ends=[(c[1] + D.e0, u[1], T_LINK + 0.15, "crank"), (c[2], u[2], UP, "h3")])]
@@ -303,10 +311,11 @@ class Model(S.VModel):
     def _levels(self, keep):
         H = self.Hneed; m = lambda k: float(H[k][keep].max()) if keep.any() else 0.0
         f1, f2, f3 = m("hub1"), m("hub2"), m("h3")
-        zc = max(f2 + UP, m("crank")); zp = m("pad"); nl = max(m("clink"), zp + UP)
-        fa = f3 + self.p["k_c0"]                               # the rotor plate's level in the ARM frame (member 3 rides c0 along sn)
+        zc = m("crank") if self.p.get("crank_strap") else max(f2 + UP, m("crank")); zp = m("pad"); nl = max(m("clink"), zp + UP)
+        zE = m("Earm")                                         # the E arm: its own flat level, a step (riser) at hub 3's rim
+        fa = zE + self.p["k_c0"]                               # the E arm's level in the ARM frame (member 3 rides c0 along sn)
         zl = nl if nl <= fa - UP else max(nl, fa + UP)         # pin a: the cuff link passes under the E arm or over it
-        return dict(hub1=f1, hub2=f2, h3=f3, crank=zc, pad=zp, clink=zl)
+        return dict(hub1=f1, hub2=f2, h3=f3, Earm=zE, crank=zc, pad=zp, clink=zl)
 
     def greedy_drop(self, keep0=None, links=True):
         """the seed's greedy pose dropping (S.Model.greedy_drop), on this model's flat parts (each its own shared height)"""
@@ -356,7 +365,7 @@ class Model(S.VModel):
                 r = np.max(r[None, :] - kk * np.abs(Sx[:, None] - Sx[None, :]), axis=1)
                 pts_all.append(dv[keep_s] * r[keep_s][:, None])
             self.link_pts[lk["name"]] = (lk["mem"], np.concatenate(pts_all) if pts_all else np.zeros((0, 3)))
-        hmap = dict(hub1=lv["hub1"], hub2=lv["hub2"], hub3=lv["h3"], Earm=lv["h3"], crank=lv["crank"], clink=lv["clink"], pad=lv["pad"])
+        hmap = dict(hub1=lv["hub1"], hub2=lv["hub2"], hub3=lv["h3"], Earm=lv["Earm"], crank=lv["crank"], clink=lv["clink"], pad=lv["pad"])
         self.rigid = {g["name"]: (g["mem"], g["B"] + hmap[g["name"]] * g["N"]) for g in self.G}
         self._contact_only(); self._solids(); self.riser = None; self.riser_h = 0.0
 
@@ -373,7 +382,12 @@ class Model(S.VModel):
         cyl(4, c[1] + D.e0, u[1], BOSS_R, lv["crank"], lv["crank"] + 2 * T_LINK + 0.15 + PIN_HEAD)                   # knuckle pin
         pa = c[2] + self.p["LE"] * D.eE
         zl3 = lv["clink"] - self.p["k_c0"]                                                                            # link level in member 3's frame
-        cyl(3, pa, sn, BOSS_R, min(lv["h3"], zl3), max(lv["h3"], zl3) + T_LINK + PIN_HEAD)                             # pin a
+        cyl(3, pa, sn, BOSS_R, min(lv["Earm"], zl3), max(lv["Earm"], zl3) + T_LINK + PIN_HEAD)                         # pin a
+        lo, hi = min(lv["h3"], lv["Earm"]), max(lv["h3"], lv["Earm"]) + T_LINK                                       # E-arm riser at hub 3's rim
+        if hi - lo > T_LINK + 0.5:
+            ew = np.cross(sn, D.eE); g = np.stack(np.meshgrid(np.linspace(-W_LINK / 2, W_LINK / 2, 5), np.arange(lo, hi + 0.1, 2.0), indexing="ij"), -1).reshape(-1, 2)
+            for x in (HUB_R, HUB_R + T_LINK): out.append((3, c[2] + x * D.eE + g[:, :1] * ew + g[:, 1:] * sn))
+
         cyl(5, self.Pb3, sn, BOSS_R, lv["pad"], lv["clink"] + T_LINK + PIN_HEAD)                                      # pin b (+ standoff)
         for nm in ("crank", "clink", "pad", "Earm"):
             mem, X = self.rigid[nm]; out.append((mem, X + T_LINK * self.G[[g["name"] for g in self.G].index(nm)]["N"]))
@@ -396,17 +410,18 @@ class Model(S.VModel):
             self.cyl_surf[nm] = (mem, np.concatenate(pts))
 
     # pairs: (a, b, required clearance); adjacent members of one joint get the running gap
-    NONADJ = [("L2", "hub1"), ("L2", "hub2"), ("L2", "L1"), ("L2", "clink"), ("L2", "pad"),
+    NONADJ = [("crankL", "hub1"), ("crankL", "hub3"), ("crankL", "Earm"), ("crankL", "clink"), ("crankL", "pad"), ("L2", "hub1"), ("L2", "hub2"), ("L2", "L1"), ("L2", "clink"), ("L2", "pad"),
               ("crank", "hub1"), ("crank", "hub3"), ("crank", "Earm"), ("crank", "clink"), ("crank", "pad"),
               ("hub3", "hub1"), ("hub3", "hub2"), ("Earm", "hub1"), ("Earm", "hub2"), ("Earm", "L1"), ("Earm", "pad"),
               ("clink", "hub1"), ("clink", "hub2"), ("clink", "hub3"), ("clink", "L1"),
               ("pad", "hub1"), ("pad", "hub2"), ("pad", "hub3"), ("pad", "L1"), ("hub3", "L1")]
-    ADJP = [("L2", "Earm"), ("crank", "L1")]
+    ADJP = [("L2", "Earm"), ("crank", "L1"), ("crankL", "L1"), ("L2", "crankL")]
 
     def collide(self, i):
         D = self.D
         def tf(m, P): R, t = self.T(m, i); return P @ R.T + t
         cylw = {k: (tf(m, cen[None])[0], self.T(m, i)[0] @ ax) for k, (m, cen, ax) in self.cyl.items()}
+        cylw["knuckle"] = (tf(4, (D.c[1] + D.e0)[None])[0], self.T(4, i)[0] @ D.u[1])
         surf = {k: tf(m, P) for k, (m, P) in self.cyl_surf.items()}
         sl = {k: tf(m, P) for k, (m, P) in self.strap.items()}
         h = T_LINK / 2
@@ -414,9 +429,11 @@ class Model(S.VModel):
         def away(P, k, r):
             cen, ax = cylw[k]; w = P - cen; return P[np.linalg.norm(w - (w @ ax)[:, None] * ax, axis=1) > r]
         def clr(a, b):
+            if any(x not in sl and x not in self.cyl for x in (a, b)): return 1e9      # part absent in this variant
             A = sl.get(a); Bp = sl.get(b)
             if a == "L2" and b in ("L1",): A = away(A, "hub2", HUB_R + 4); Bp = away(Bp, "hub2", HUB_R + 4)
-            if (a, b) == ("crank", "L1"): A = away(A, "hub2", HUB_R + 2); Bp = away(Bp, "hub2", HUB_R + 2)
+            if (a, b) in (("crank", "L1"), ("crankL", "L1")): A = away(A, "hub2", HUB_R + 2); Bp = away(Bp, "hub2", HUB_R + 2)
+            if (a, b) == ("L2", "crankL"): A = away(A, "knuckle", BOSS_R + 2); Bp = away(Bp, "knuckle", BOSS_R + 2)
             if (a, b) == ("L2", "Earm"): A = away(A, "hub3", HUB_R + 2); Bp = away(Bp, "hub3", HUB_R + 2)
             if a in self.cyl and b not in self.cyl: a, b = b, a; A, Bp = sl.get(a), None
             if a in self.cyl and b in self.cyl:
@@ -483,7 +500,7 @@ def evaluate(B, params):
     """tools/concept_cma.py hook: (params incl. design-step outputs, report)"""
     P = dict(PARAMS); P.update(params)
     for k in ("k_c0", "k_sk", "k_mid", "cuff_m", "cuff_sig"): P[k] = None
-    if P.get("alk_auto") or P.get("alk") is None: P["alk"] = None; P["alk_auto"] = None
+    if P.get("alk_auto"): P["alk"] = None
     P["lk"] = max(float(P["lk"]), HUB_R + BOSS_R + 1.0)          # the knuckle boss clears hub 2's cap
     P["LE"] = max(float(P["LE"]), HUB_R + BOSS_R + 2.0); P["lc"] = max(float(P["lc"]), 2 * BOSS_R + 2.0)
     for k in ("b1", "b2", "b3"): P[k] = min(1.2, max(-0.2, float(P[k])))

@@ -229,3 +229,18 @@ part clearance) and _rt_vp4j2-coarse.json / _rtfast_vp4j2-coarse.json (`docs/con
   coupler at 0.75 mm (plane 90, elev 150). Counting < 1 mm as contact: gap 153.74, 3 poses.
 * **Mobility.** The 3 x 3 matrix of instantaneous axes (J1, four-bar pole, J3) has rank 3 at all 203 taken poses:
   sigma_min / sigma_max >= 0.229, p5 0.288. No undetermined coordinate, no singular pose taken.
+
+Per-hub metal-to-skin distance over the taken poses (coarse best, Bench(60,160) fast; p5 / median / p95, mm):
+
+| hub | level (mm from GH) | p5 | median | p95 |
+|---|---|---|---|---|
+| J1 | 55.0 | 2.7 | 2.9 | 3.0 |
+| A0 (link 1, free half) | 69.0 | 7.4 | 12.8 | 20.2 |
+| A1 (coupler, free half) | 63.6 | 2.8 | 11.9 | 18.6 |
+| B0 (link 1) | 83.1 | 10.6 | **27.9** | 31.5 |
+| B1 (coupler) | 92.1 | 24.9 | **31.7** | 31.7 |
+| J3 | 68.0 | 2.6 | 10.3 | 19.2 |
+
+The B pins sit 28-32 mm off the skin. That is the same ~31.8 mm the osn fold-seed hub 2 reached, and for the same
+reason: the raised, externally rotated arm comes up under the J2 neighbourhood. The four-bar splits hub 2 into an A
+side that fits and a B side that inherits the problem.
