@@ -1071,3 +1071,62 @@ docs/research/golden/README.md and docs/research/golden/gpu_frontier.json).
   0.46 mm), P5 22.08 -> 21.89, raglan's fixed route 36.82 -> 24.18. P5's in-sample gain was refuted on the disjoint
   held-out bench, so these are candidates for the independent verifier (exact wear, fit-60, held-out, continuity),
   not results; the next polish wants a held-out-aware objective (the port takes any Bench with a fast grid).
+
+## The knuckle's 15.42 needs J2 stops inside the fold margin; at the 5-deg margin it is 18.45, held out 22.27 (2026-10-16, minarc-stop-knuckle-4r variant B, judge)
+
+Claim: variant B (pin knee + a spring-held passive knuckle K splitting link 1 + J2 hard stops, CMA stream BD), frozen
+exact Bench(110,360) 15.42 (score 94.4). Two independent verifiers ran. A third, skeptic lens from another workflow
+agrees with them. Verdict: **REFUTED**.
+
+Raw data:
+* the lenses: `docs/concepts/verify/minarc-stop-knuckle-4r-{remeasure,mechanism}.md`;
+* the judge's cross-check: `docs/concepts/verify/minarc-judge/`;
+* the merged ruling: `docs/concepts/rows/minarc-stop-knuckle-4r.json` (`verification`).
+
+What was measured:
+* **The number reproduces to the digit, but only in the model's own fold reading.** Both lenses got 15.42 locally and on
+  the farm. The verifiers' own closure, stop and boss checks remove 0 poses. On the full 1432-pose grid the continuity
+  rule drops nothing (1143 of 1143 nodes; contact-aware 1097 of 1097). In the same reading the held-out bench gives
+  18.22, against H1's 31.39.
+* **What failed: the fold margin.** The model clamps the J2 *interior angle* to [5, 175] and puts its J2 stops at
+  phi 12.28 / 162.70.
+  * With K on stop A the chain is a plain 3R (a1 38.07, a2 58.75). There, those stops sit **1.88 / 1.37 deg** from the
+    J1-J3 fold in the kit's metric (`tools/concept_kit.py`). That metric is the one H1 and every verified row are held to.
+  * Taken poses come down to 1.97 deg on the bench (25 under 5) and 1.51 deg held out (44 under 5). 8 clip frames
+    (wash opposite shoulder) come down to 4.02 deg.
+  * At the stretched stop, J2 turns 6.35 deg per deg of J1-J3 motion; H1's worst is 3.15.
+  * This is the singularity margin being shrunk to buy reach, which the user's 5-deg lower bound forbids.
+* **Priced.** With the J2 stops moved to the 5-deg margin (phi 20.793 / 146.614), same seats, shape refit fast, worn
+  frozen exact, the gap is **18.45** (score 93.3; reach 0.747, follow 1.0, in-band14 0.889, contact 0.021; near-touch
+  24.26).
+  * Three harnesses agree: the mechanism lens, the skeptic lens, and the judge's run of the re-measure lens' strict
+    harness. In that strict run every joint, the actives included, is held to 10 deg per 2-deg step, and 0 of 269
+    taken workspace poses are dropped.
+  * The minimum state-A margin is 5.12 deg and the forced sub-chain margin is at least 16.9 deg.
+  * **Held out: 22.27, against H1's 31.39 under the same harness** (near-touch 26.71; 0 of 682 dropped).
+  * If the claimed stops are kept and the 5-deg band is simply refused, the knuckle-open states become islands
+    (reachable from rest only through the band): 21.33 static, **35.56 connected**; held out 21.67 / 38.20.
+* **What failed in the mechanism** (mechanism lens). Both faults are fixable, and the fixes cost no bench points.
+  * The J2 "hard stop" acts on a *virtual* angle (arc J2->J1 vs J2->J3), which no dowel at J2 can stop. In the claim's
+    forced states J2 sits up to 14.5 deg off its own stop. A real q2 stop gains 1.13 points, giving 17.32 with the
+    repaired stops. This is single-lens, so it is not credited.
+  * The specified 0.2 x 3 mm clock spring carries 0.028-0.040 N.m, but the claim needs 0.08-0.113 N.m (the demand is
+    0.057 N.m at 2 g). A 0.3 x 5 mm 1.4310 strip in a cap 6 mm taller than the O20 stack does the job, at 0.00 cost.
+* **Other measurements.**
+  * K never moves on any clip (0 deg/s): its whole gain is static workspace reach.
+  * The minimum metal is 0.05 mm on the overhead raise. The CMA searched the plain gap, not the near-touch gap.
+  * The chain has 4 revolutes, which is at the user's cap, not the preferred 3. K is sensed. Complexity is 33.
+* **Protocol lesson.** `connected()` run on the 360-pose bench subsample under-connects any design (here 24.79 for the
+  claim and 32.07 for the repair). Use the full-grid flood fill, which both lenses' harnesses implement. A model must
+  state its fold margin in the kit's J1-J3 metric. A stop on any other angle has to be mapped into that metric before
+  a number is claimed.
+
+What it means:
+* The priced knuckle (18.45 in-sample, 22.27 held out) beats the verified H1 (27.20 same protocol, 24.48 polish, 31.39
+  held out under this harness) by 6-9 points with 0 passive translations. It is the strongest lead in the project.
+* It is still a *different configuration* from the one claimed, and is not confirmed. Next:
+  1. a re-claim with the q2-stop model fix;
+  2. a near-touch CMA with the stops held at least 5 deg from the J1-J3 fold, starting from BD at the margin and from
+     the agent's BB stream;
+  3. its own two-lens verification;
+  4. a MuJoCo feel and stop-impact red team at the J2 stops.
