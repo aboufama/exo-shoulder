@@ -24,10 +24,10 @@
   "title": "Built CAD judge results",
   "description": "One row per judged design and requirement: value, threshold and pass from the outside judges, timed by the judge output (score files: the earliest of their commit, their file time and the first commit whose docs report the design; scorecard-only values: the scorecard's commit). Built from tools/judged_history.py, judge/scorecard.json files and judge/requirements.json.",
   "file": "data/cad.json",
-  "sha256": "016790108eb95af378d80c0bcda3865c3a1b7a4a9ca4611738b6da059b9c6894",
+  "sha256": "9626241c2fdcde6ef938168917974fd850ca8cd0caae47142d51b8dba8ef62b1",
   "rows": 307,
-  "bytes": 96067,
-  "updated": "2026-10-16T14:18:19Z"
+  "bytes": 96068,
+  "updated": "2026-10-16T15:23:27Z"
  },
  {
   "id": "gpu_evals",
@@ -64,10 +64,10 @@
   "title": "Event log",
   "description": "What happened and when: the swarm's own log (docs/concepts/events.jsonl), one milestone per judged design and every new built-CAD R1 record (from the judge outputs).",
   "file": "data/events.json",
-  "sha256": "d3fe39f38f90fee5459fde97fdc132dadd6915847c60b8ea1b14a18287494637",
+  "sha256": "d511beb057fabec13bc373ffac4b8334e5a2925b40d6b3dd97f49ba6cd197e95",
   "rows": 492,
   "bytes": 173338,
-  "updated": "2026-10-16T14:38:48Z"
+  "updated": "2026-10-16T15:23:27Z"
  },
  {
   "id": "spend",
@@ -104,9 +104,9 @@
   "title": "Data build info",
   "description": "When tools/dash_build.py last gathered the data, the repo commit, and any warnings it printed.",
   "file": "data/meta.json",
-  "sha256": "86c74d5055b22ae960877b8e1a7a4425b7206f5a1d75bd6131e9bf3a924ccef5",
+  "sha256": "5fe64e1214abcbc233ea2a52dd1ec5e40ac2e90652beb00bfbf91cf39a076953",
   "rows": 1,
   "bytes": 2089,
-  "updated": "2026-10-16T15:08:29Z"
+  "updated": "2026-10-16T15:23:27Z"
  }
 ]
