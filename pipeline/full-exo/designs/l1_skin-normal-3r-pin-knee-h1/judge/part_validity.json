@@ -1,187 +1,7 @@
 {
  "parts": [
   {
-   "file": "H|UPPER ARM CUFF (conformal G2 shell, AlSi10Mg bead blasted)",
-   "valid": true,
-   "solids": 1,
-   "faces": 7954,
-   "bad_faces": 0,
-   "watertight": true,
-   "volume_cm3": 15.223,
-   "bbox_mm": [
-    86.8,
-    81.7,
-    45.0
-   ],
-   "level": "L1 mesh"
-  },
-  {
-   "file": "H|BOTTOM (user's bar, cut at s 255, 2x M3 countersunk for the arm-end tongue) + cut square to the arm 3.7 mm distal of pin b, clear of the knee sweep",
-   "valid": false,
-   "solids": 7,
-   "faces": 4104,
-   "bad_faces": 0,
-   "watertight": false,
-   "volume_cm3": 22.484,
-   "bbox_mm": [
-    42.4,
-    254.4,
-    31.1
-   ],
-   "level": "L1 mesh"
-  },
-  {
-   "file": "H|pad mount to BOTTOM (proxy) (2.59 mm slab at the pad level, arm pad -> the BOTTOM bar, routed clear of the knee sweep)",
-   "valid": true,
-   "solids": 1,
-   "faces": 44,
-   "bad_faces": 0,
-   "watertight": true,
-   "volume_cm3": 0.857,
-   "bbox_mm": [
-    26.2,
-    21.5,
-    10.1
-   ],
-   "level": "L1 mesh"
-  },
-  {
-   "file": "H|pin b retainer keep-out (O8 x 0.9 mm: DIN 6799 RS 3.2 e-clip + pin end, over the 0.5 mm GTM washer on the knee link)",
-   "valid": true,
-   "solids": 1,
-   "faces": 256,
-   "bad_faces": 0,
-   "watertight": true,
-   "volume_cm3": 0.045,
-   "bbox_mm": [
-    8.0,
-    8.0,
-    2.7
-   ],
-   "level": "L1 mesh"
-  },
-  {
-   "file": "l3|pin a retainer keep-out (O8 x 0.9 mm: DIN 6799 RS 3.2 e-clip + pin end, over the 0.5 mm GTM washer on the knee link)",
-   "valid": true,
-   "solids": 1,
-   "faces": 256,
-   "bad_faces": 0,
-   "watertight": true,
-   "volume_cm3": 0.045,
-   "bbox_mm": [
-    8.0,
-    8.0,
-    2.6
-   ],
-   "level": "L1 mesh"
-  },
-  {
-   "file": "H|arm pad = pin b lower plate (O12 x 2.59075 mm, tr..tr+tp, arm-fixed on the cuff)",
-   "valid": true,
-   "solids": 1,
-   "faces": 256,
-   "bad_faces": 0,
-   "watertight": true,
-   "volume_cm3": 0.293,
-   "bbox_mm": [
-    12.3,
-    12.1,
-    5.2
-   ],
-   "level": "L1 mesh"
-  },
-  {
-   "file": "l4|knee link keep-out (flat Ti bar 40.2 x 10 x 2.59075 mm, pins a, b 6 mm from its ends, tr+tp+0.5)",
-   "valid": true,
-   "solids": 1,
-   "faces": 12,
-   "bad_faces": 0,
-   "watertight": true,
-   "volume_cm3": 1.043,
-   "bbox_mm": [
-    38.5,
-    31.2,
-    11.2
-   ],
-   "level": "L1 mesh"
-  },
-  {
-   "file": "l3|E boss = pin a lower plate (O12 x 2.59075 mm, tr..tr+tp, member 3)",
-   "valid": true,
-   "solids": 1,
-   "faces": 256,
-   "bad_faces": 0,
-   "watertight": true,
-   "volume_cm3": 0.293,
-   "bbox_mm": [
-    12.2,
-    12.3,
-    5.1
-   ],
-   "level": "L1 mesh"
-  },
-  {
-   "file": "l3|E strap keep-out (8 x 3 mm Ti, fitted underside, hub 3 plate -> pin a, thins to 2.59075 at the boss)",
-   "valid": true,
-   "solids": 1,
-   "faces": 460,
-   "bad_faces": 0,
-   "watertight": true,
-   "volume_cm3": 1.123,
-   "bbox_mm": [
-    12.8,
-    48.9,
-    5.8
-   ],
-   "level": "L1 mesh"
-  },
-  {
-   "file": "l2|link 2 strap keep-out (8 x 3 mm Ti, fitted underside)",
-   "valid": true,
-   "solids": 1,
-   "faces": 884,
-   "bad_faces": 0,
-   "watertight": true,
-   "volume_cm3": 1.736,
-   "bbox_mm": [
-    32.0,
-    65.8,
-    44.3
-   ],
-   "level": "L1 mesh"
-  },
-  {
-   "file": "l1|link 1 strap keep-out (8 x 3 mm Ti, fitted underside)",
-   "valid": true,
-   "solids": 1,
-   "faces": 284,
-   "bad_faces": 0,
-   "watertight": true,
-   "volume_cm3": 0.539,
-   "bbox_mm": [
-    26.7,
-    9.8,
-    14.5
-   ],
-   "level": "L1 mesh"
-  },
-  {
-   "file": "l3|J3 lower plate keep-out (O20 x 3, member 3)",
-   "valid": true,
-   "solids": 1,
-   "faces": 256,
-   "bad_faces": 0,
-   "watertight": true,
-   "volume_cm3": 0.941,
-   "bbox_mm": [
-    20.2,
-    20.2,
-    7.3
-   ],
-   "level": "L1 mesh"
-  },
-  {
-   "file": "l2|J3 upper boss + cap keep-out (O20, F+3.15..F+12.25, link 2)",
+   "file": "base|J1 upper boss + cap keep-out (O20, F+3.15..F+12.25; base = J1's upper member)",
    "valid": true,
    "solids": 1,
    "faces": 256,
@@ -190,38 +10,8 @@
    "volume_cm3": 2.854,
    "bbox_mm": [
     20.7,
-    21.4,
-    13.2
-   ],
-   "level": "L1 mesh"
-  },
-  {
-   "file": "l2|J2 upper boss + cap keep-out (O20, F+3.15..F+12.25, link 2)",
-   "valid": true,
-   "solids": 1,
-   "faces": 256,
-   "bad_faces": 0,
-   "watertight": true,
-   "volume_cm3": 2.854,
-   "bbox_mm": [
-    21.6,
-    20.9,
-    21.9
-   ],
-   "level": "L1 mesh"
-  },
-  {
-   "file": "l1|J2 lower plate keep-out (O20 x 3, link 1)",
-   "valid": true,
-   "solids": 1,
-   "faces": 256,
-   "bad_faces": 0,
-   "watertight": true,
-   "volume_cm3": 0.941,
-   "bbox_mm": [
-    18.1,
-    16.8,
-    19.1
+    17.0,
+    22.0
    ],
    "level": "L1 mesh"
   },
@@ -241,7 +31,37 @@
    "level": "L1 mesh"
   },
   {
-   "file": "base|J1 upper boss + cap keep-out (O20, F+3.15..F+12.25; base = J1's upper member)",
+   "file": "l1|J2 lower plate keep-out (O20 x 3, link 1)",
+   "valid": true,
+   "solids": 1,
+   "faces": 256,
+   "bad_faces": 0,
+   "watertight": true,
+   "volume_cm3": 0.941,
+   "bbox_mm": [
+    18.1,
+    16.8,
+    19.1
+   ],
+   "level": "L1 mesh"
+  },
+  {
+   "file": "l2|J2 upper boss + cap keep-out (O20, F+3.15..F+12.25, link 2)",
+   "valid": true,
+   "solids": 1,
+   "faces": 256,
+   "bad_faces": 0,
+   "watertight": true,
+   "volume_cm3": 2.854,
+   "bbox_mm": [
+    21.6,
+    20.9,
+    21.9
+   ],
+   "level": "L1 mesh"
+  },
+  {
+   "file": "l2|J3 upper boss + cap keep-out (O20, F+3.15..F+12.25, link 2)",
    "valid": true,
    "solids": 1,
    "faces": 256,
@@ -250,12 +70,192 @@
    "volume_cm3": 2.854,
    "bbox_mm": [
     20.7,
-    17.0,
-    22.0
+    21.4,
+    13.2
+   ],
+   "level": "L1 mesh"
+  },
+  {
+   "file": "l3|J3 lower plate keep-out (O20 x 3, member 3)",
+   "valid": true,
+   "solids": 1,
+   "faces": 256,
+   "bad_faces": 0,
+   "watertight": true,
+   "volume_cm3": 0.941,
+   "bbox_mm": [
+    20.2,
+    20.2,
+    7.3
+   ],
+   "level": "L1 mesh"
+  },
+  {
+   "file": "l1|link 1 strap keep-out (8 x 3 mm Ti, fitted underside)",
+   "valid": true,
+   "solids": 1,
+   "faces": 284,
+   "bad_faces": 0,
+   "watertight": true,
+   "volume_cm3": 0.539,
+   "bbox_mm": [
+    26.7,
+    9.8,
+    14.5
+   ],
+   "level": "L1 mesh"
+  },
+  {
+   "file": "l2|link 2 strap keep-out (8 x 3 mm Ti, fitted underside)",
+   "valid": true,
+   "solids": 1,
+   "faces": 884,
+   "bad_faces": 0,
+   "watertight": true,
+   "volume_cm3": 1.736,
+   "bbox_mm": [
+    32.0,
+    65.8,
+    44.3
+   ],
+   "level": "L1 mesh"
+  },
+  {
+   "file": "l3|E strap keep-out (8 x 3 mm Ti, fitted underside, hub 3 plate -> pin a, thins to 2.59075 at the boss)",
+   "valid": true,
+   "solids": 1,
+   "faces": 460,
+   "bad_faces": 0,
+   "watertight": true,
+   "volume_cm3": 1.123,
+   "bbox_mm": [
+    12.8,
+    48.9,
+    5.8
+   ],
+   "level": "L1 mesh"
+  },
+  {
+   "file": "l3|E boss = pin a lower plate (O12 x 2.59075 mm, tr..tr+tp, member 3)",
+   "valid": true,
+   "solids": 1,
+   "faces": 256,
+   "bad_faces": 0,
+   "watertight": true,
+   "volume_cm3": 0.293,
+   "bbox_mm": [
+    12.2,
+    12.3,
+    5.1
+   ],
+   "level": "L1 mesh"
+  },
+  {
+   "file": "l4|knee link keep-out (flat Ti bar 40.2 x 10 x 2.59075 mm, pins a, b 6 mm from its ends, tr+tp+0.5)",
+   "valid": true,
+   "solids": 1,
+   "faces": 12,
+   "bad_faces": 0,
+   "watertight": true,
+   "volume_cm3": 1.043,
+   "bbox_mm": [
+    38.5,
+    31.2,
+    11.2
+   ],
+   "level": "L1 mesh"
+  },
+  {
+   "file": "H|arm pad = pin b lower plate (O12 x 2.59075 mm, tr..tr+tp, arm-fixed on the cuff)",
+   "valid": true,
+   "solids": 1,
+   "faces": 256,
+   "bad_faces": 0,
+   "watertight": true,
+   "volume_cm3": 0.293,
+   "bbox_mm": [
+    12.3,
+    12.1,
+    5.2
+   ],
+   "level": "L1 mesh"
+  },
+  {
+   "file": "l3|pin a retainer keep-out (O8 x 0.9 mm: DIN 6799 RS 3.2 e-clip + pin end, over the 0.5 mm GTM washer on the knee link)",
+   "valid": true,
+   "solids": 1,
+   "faces": 256,
+   "bad_faces": 0,
+   "watertight": true,
+   "volume_cm3": 0.045,
+   "bbox_mm": [
+    8.0,
+    8.0,
+    2.6
+   ],
+   "level": "L1 mesh"
+  },
+  {
+   "file": "H|pin b retainer keep-out (O8 x 0.9 mm: DIN 6799 RS 3.2 e-clip + pin end, over the 0.5 mm GTM washer on the knee link)",
+   "valid": true,
+   "solids": 1,
+   "faces": 256,
+   "bad_faces": 0,
+   "watertight": true,
+   "volume_cm3": 0.045,
+   "bbox_mm": [
+    8.0,
+    8.0,
+    2.7
+   ],
+   "level": "L1 mesh"
+  },
+  {
+   "file": "H|pad mount to BOTTOM (proxy) (2.59 mm slab at the pad level, arm pad -> the BOTTOM bar, routed clear of the knee sweep)",
+   "valid": true,
+   "solids": 1,
+   "faces": 44,
+   "bad_faces": 0,
+   "watertight": true,
+   "volume_cm3": 0.857,
+   "bbox_mm": [
+    26.2,
+    21.5,
+    10.1
+   ],
+   "level": "L1 mesh"
+  },
+  {
+   "file": "H|BOTTOM (user's bar, cut at s 255, 2x M3 countersunk for the arm-end tongue) + cut square to the arm 3.7 mm distal of pin b, clear of the knee sweep",
+   "valid": true,
+   "solids": 1,
+   "faces": 4096,
+   "bad_faces": 0,
+   "watertight": true,
+   "volume_cm3": 22.505,
+   "bbox_mm": [
+    42.4,
+    254.4,
+    31.1
+   ],
+   "level": "L1 mesh"
+  },
+  {
+   "file": "H|UPPER ARM CUFF (conformal G2 shell, AlSi10Mg bead blasted)",
+   "valid": true,
+   "solids": 1,
+   "faces": 7954,
+   "bad_faces": 0,
+   "watertight": true,
+   "volume_cm3": 15.223,
+   "bbox_mm": [
+    86.8,
+    81.7,
+    45.0
    ],
    "level": "L1 mesh"
   }
  ],
  "level": "L1",
- "all_ok": false
+ "all_ok": true
 }

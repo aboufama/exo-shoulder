@@ -166,7 +166,30 @@
     -18.1,
     256.9
    ],
-   "bottom_watertight_after_cut": false
+   "bottom_watertight_after_cut": true,
+   "recut_2026_10_16": {
+    "tool": "pipeline/concept_l1/repair_cut_bottom.py (slice_capped)",
+    "design": "l1_skin-normal-3r-pin-knee-h1",
+    "plane_fit_points": 111,
+    "plane_flatness_mm": 4e-06,
+    "plane_normal_rest": [
+     0.021774,
+     -0.999321,
+     -0.029734
+    ],
+    "before": {
+     "watertight": false,
+     "pieces": 7,
+     "volume_cm3": 22.484
+    },
+    "after": {
+     "watertight": true,
+     "is_volume": true,
+     "pieces": 1,
+     "volume_cm3": 22.505,
+     "faces": 4096
+    }
+   }
   },
   "sweep": {
    "poses": 2769,

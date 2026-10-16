@@ -110,21 +110,21 @@
  {
   "id": "R11",
   "name": "Interface pressure, simulation part: worst mean cuff pressure the exo adds (incl. the arm parts' weight) over the MVP1 rolling-bearing cases, within the all-day budget and the ISO/TS 15066 upper-arm limits; the prototype pressure-film check remains",
-  "value": 0.213,
+  "value": 0.216,
   "unit": "kPa",
   "target": "<= 7.5 kPa and ISO/TS 15066 (150 N, 190 N/cm2 at 2x edge peak) == True",
   "status": "PASS",
   "judge": "judge/dynamics.py (MuJoCo cuff force) -> judge/scorecard.py interface_pressure(): 7.5 kPa = 14 kPa sustained (Kermavnar; Van Vlerken 15 kPa) - 6.5 kPa strap preload; ISO/TS 15066 Annex A Table A.2; then pressure film / FSRs on a prototype",
   "details": {
-   "exo_kPa_worst": 0.213,
+   "exo_kPa_worst": 0.216,
    "worst_case": "passive|mu0.002|t0.001|s2|hub",
    "per_case_kPa": {
-    "passive|mu0.002|t0.001|s1|hub": 0.19,
-    "passive|mu0.002|t0.001|s2|hub": 0.213,
-    "passive|mu0.005|t0.001|s1|hub": 0.19,
-    "passive|mu0.005|t0.001|s2|hub": 0.212
+    "passive|mu0.002|t0.001|s1|hub": 0.204,
+    "passive|mu0.002|t0.001|s2|hub": 0.216,
+    "passive|mu0.005|t0.001|s1|hub": 0.207,
+    "passive|mu0.005|t0.001|s2|hub": 0.216
    },
-   "total_with_strap_kPa_worst": 6.713,
+   "total_with_strap_kPa_worst": 6.716,
    "budget_exo_kPa": 7.5,
    "sustained_budget_kPa": 14.0,
    "strap_preload_kPa": 6.5,
@@ -132,15 +132,15 @@
    "arm_parts_weight_N": 1.19,
    "iso_ok": true,
    "iso": {
-    "force_N_worst": 1.45,
+    "force_N_worst": 1.47,
     "force_limit_N": 150.0,
-    "local_peak_kPa_est": 0.426,
+    "local_peak_kPa_est": 0.432,
     "pressure_limit_kPa": 1900.0,
     "basis": "ISO/TS 15066:2016 Annex A Table A.2, upper arm and elbow: 150 N; deltoid 190 / humerus 220 N/cm2"
    },
    "aim_capillary_kPa": 4.3,
    "exo_under_capillary": true,
-   "plain_bearing_worst_kPa": 77.99,
+   "plain_bearing_worst_kPa": 54.63,
    "note": "mean pressure on the cuff's skin side (dynamics.py rule); the forearm cuff shares the load (upper-cuff values are upper bounds); base-side (scapula handler) pressure is not simulated; the prototype pressure-film / FSR check remains part of R11"
   }
  },

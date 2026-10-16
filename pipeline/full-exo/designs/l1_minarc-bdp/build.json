@@ -276,7 +276,30 @@
     -24.9,
     248.2
    ],
-   "bottom_watertight_after_cut": false
+   "bottom_watertight_after_cut": true,
+   "recut_2026_10_16": {
+    "tool": "pipeline/concept_l1/repair_cut_bottom.py (slice_capped)",
+    "design": "l1_minarc-bdp",
+    "plane_fit_points": 111,
+    "plane_flatness_mm": 4e-06,
+    "plane_normal_rest": [
+     0.026722,
+     -0.996276,
+     -0.081971
+    ],
+    "before": {
+     "watertight": false,
+     "pieces": 7,
+     "volume_cm3": 20.991
+    },
+    "after": {
+     "watertight": true,
+     "is_volume": true,
+     "pieces": 1,
+     "volume_cm3": 21.017,
+     "faces": 4096
+    }
+   }
   },
   "sweep": {
    "poses": 2769,

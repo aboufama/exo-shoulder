@@ -42,7 +42,7 @@ import numpy as np
 from common import design_dir, load_parts, PIPE
 
 D2R = math.pi / 180
-VERSION = "dynamics-2026-10-15b (MVP1: unpowered; rolling bearings main, plain bearings comparison)"
+VERSION = "dynamics-2026-10-16 (MVP1: unpowered; rolling bearings main, plain bearings comparison; general N-member chain for offset / split / knee designs)"
 # ---------------------------------------------------------------- assumptions (all stated in docs/research/dynamics_judge.md)
 TISSUE = dict(k_perp=3.5e3, k_ax=2.1e3,                   # N/m across / along the humerus (Schiebl 2025 medians 2.1-4.5 N/mm)
               kr_perp=0.20 / D2R, kr_ax=0.03 / D2R,       # N.m/rad bending / torsion (Schiebl 2025: 0.18-0.22, 0.03 N.m/deg)
@@ -65,6 +65,11 @@ G_CM3 = {"ti": 4.43, "iglidur": 1.46, "magnet": 7.5, "pcb": 1.85, "ic": 2.0, "st
 
 def density(group, name):
     n = name.lower()
+    import re
+    if re.match(r"d\d+-\d+", n):                                                    # our numbered machined parts (D8-02a link 1a ...): material by its stated alloy,
+        if "7075" in n: return G_CM3["7075"]                                       # never by feature words ("O3 magnet pocket", "dowel holes", "sleeve bores"; gen-4 verifier)
+        if "alsi10mg" in n: return G_CM3["alsi10mg"]
+        return G_CM3["ti"]
     if "magnet" in n or "n52" in n or "n42" in n: return G_CM3["magnet"]
     if "igus" in n or "iglid" in n or "sleeve" in n or "washer" in n: return G_CM3["iglidur"]
     if "pcb" in n: return G_CM3["pcb"]
@@ -140,12 +145,19 @@ def mass_props(parts):
     for g, nm, V, F in parts:
         m = trimesh.Trimesh(V / 1000.0, F, process=False); m.merge_vertices(digits_vertex=7); m.update_faces(m.nondegenerate_faces()); m.remove_unreferenced_vertices()
         rho = density(g, nm) * 1000.0
-        for c in m.split(only_watertight=False):
+        comps = m.split(only_watertight=False)
+        if not m.is_watertight and len(m.faces):                             # a STEP tessellation with hairline seams (full CAD: link 2 0.87 mm of open edge in all):
+            E = m.edges_sorted; b_ = trimesh.grouping.group_rows(E, require_count=1)   # the closed-surface integrals of the WHOLE part are exact to the seam; split
+            seam_mm = float(np.linalg.norm(m.vertices[E[b_][:, 0]] - m.vertices[E[b_][:, 1]], axis=1).sum()) * 1000   # pieces are open and their hulls inflate it (gen-4 CAD: link 2 121 g vs 21 g)
+            if seam_mm < 5.0 and m.volume > 0: comps = [m]
+        for c in comps:
             if c.area < 1e-6 or len(c.faces) < 4: continue                    # zero-area slivers of a merged B-rep tessellation (fair CAD BOTTOM): no mass, and qhull fails on them
-            if not c.is_watertight:
+            if c is m and not c.is_watertight: pass                           # hairline-seam part: its own (CAD) winding, whole-surface integrals
+            elif not c.is_watertight:
                 try: c = c.convex_hull                                        # open shell: its hull (never happens on L1 meshes)
                 except Exception: continue
-            trimesh.repair.fix_normals(c); c.density = rho; mpp = c.mass_properties
+            if c.is_watertight: trimesh.repair.fix_normals(c)
+            c.density = rho; mpp = c.mass_properties
             mi, ci, Ii = float(mpp["mass"]), np.asarray(mpp["center_mass"]), np.asarray(mpp["inertia"])
             M += mi; S += mi * ci; vol += float(mpp["volume"]) * 1e6
             I_o += Ii + mi * (np.dot(ci, ci) * np.eye(3) - np.outer(ci, ci))  # about the frame origin
@@ -230,7 +242,7 @@ class Design:
         from scipy.interpolate import PchipInterpolator
         c = self.clips[ci]; Fr = c["frames"]; n = len(Fr); P = np.array([f["p"][:3] for f in Fr], float)
         cols = [P]
-        if self.N == 4:
+        if self.N == 4 and self.ch is not None:
             sp = []
             for f in Fr:
                 Rs = scap(f["p"][1], 0); p2 = Rs.T @ np.array(f["G"]["l2"]).reshape(3, 3)[:, 0]; sp.append(self.ch.spare_of(p2))
@@ -254,6 +266,179 @@ class Design:
                 worst[g] = max(worst[g], float(np.degrees(np.linalg.norm(rotvec(E), axis=1)).max()))
         return {g: round(v, 3) for g, v in worst.items()}
 
+# ---------------------------------------------------------------- general N-member chain (offset axes, split members, knee pins, knuckle)
+K_PRELOAD, K_RATES = 0.08, (0.015, 0.010)          # knuckle clock spring: preload at stop A (N.m), rate (N.m/rad): nominal 0.015 (L1 spec <= 0.015), 0.010 also run
+def group_order(gs):
+    """serial order of the posed member groups: base, l1, l1a, l1b, l2, ..., cuff (the arm member follows)"""
+    import re
+    def key(g):
+        if g in ("base", "S"): return (0, 0, "")
+        m = re.fullmatch(r"l(\d+)([a-z]?)", g)
+        if m: return (1, int(m.group(1)), m.group(2))
+        if g == "cuff": return (2, 0, "")
+        raise ValueError(f"dynamics: posed group {g!r} has no place in the serial chain rule (base, l<k>[a-z], cuff)")
+    return sorted(gs, key=key)
+
+def needs_general(dd):
+    """the spherical az/el/a judge cannot represent this design: offset axes (per-group T), split members (l1a / l1b), or
+    more member groups than its N - 1 links (knee link, member 3)"""
+    D = json.load(open(os.path.join(dd, "design.json"))); C = json.load(open(os.path.join(dd, "clips.json")))
+    f0 = C["clips"][0]["frames"][0]; gs = set(f0["G"])
+    if "T" in f0 and any(np.abs(np.asarray(v, float)).max() > 1e-6 for v in f0["T"].values()): return True
+    N = len(D["kinematics"]["a"]) + 1
+    return gs - {"cuff"} != {"base"} | {f"l{k}" for k in range(1, N)}
+
+class GenDesign(Design):
+    """a serial chain of the clips' own posed members (base -> l.. -> arm), every adjacent pair joined by the hinge that
+    reproduces the clips' relative motion (axis and point fitted from all frames, residual reported), the arm member =
+    the humerus (canonical frame, origin GH) joined to the last member and to the bone by the soft-tissue cuff. Masses /
+    inertias per group from the L1 / L2 meshes. A knuckle (design.json kinematics.knuckle) gets its clock spring
+    (K_PRELOAD at stop A, rate K_RATE) and its stops A / B as joint limits; J2's q2 stops (knuckle.q2_stops_deg) are
+    joint limits. Member-member contact is not modelled here (R6 judges interference geometrically)."""
+    general = True
+    def __init__(self, arg, k_rate=K_RATES[0]):
+        self.dd = design_dir(arg); self.id = os.path.basename(os.path.normpath(self.dd))
+        D = json.load(open(os.path.join(self.dd, "design.json"))); self.kin = D["kinematics"]; self.D = D
+        C = json.load(open(os.path.join(self.dd, "clips.json"))); self.clips = C["clips"]; self.hub_r = float(C.get("design", {}).get("hub_r") or 11.5)
+        L = json.load(open(os.path.join(PIPE, "avg", "body_mesh.json"))); RH = np.array(L["landmarks"]["rest_humerus"]); u_, _, vt_ = np.linalg.svd(RH); self.HR = u_ @ vt_
+        self.ch = None; self.k_rate = k_rate
+        posed = sorted({g for c in self.clips for f in c["frames"] for g in f["G"]})
+        self.groups = group_order([g for g in posed if g != "S" or "base" not in posed])
+        if self.groups[0] != "base": raise ValueError("dynamics (general): the chain starts at 'base'")
+        self.members_ = self.groups + ["cuff"]; N = self.N = len(self.members_) - 1          # N hinges: base-m1, ..., m_last-arm
+        parts = load_parts(self.dd); byg = {}
+        for g, nm, V, F in parts: byg.setdefault(g, []).append((g, nm, V, F))
+        # every frame's member poses in the SCAPULA frame (rotation, translation mm); the arm = canonical humerus at GH
+        self.fr = []
+        for ci, c in enumerate(self.clips):
+            for fi, f in enumerate(c["frames"]):
+                Rs = scap(f["p"][1], 0); T = f.get("T", {}); P = {}
+                for g in self.groups:
+                    P[g] = (Rs.T @ np.array(f["G"][g]).reshape(3, 3), Rs.T @ np.asarray(T.get(g, (0.0, 0.0, 0.0)), float))
+                P["cuff"] = (Rs.T @ humerus(np.asarray(f["p"][:3], float)), np.zeros(3)); self.fr.append((ci, fi, P))
+        ref = self.fr[0][2]; self.ref = ref
+        # hinge fit per adjacent pair: child-frame axis u, child-frame point x (on the axis, at the hub stack centre)
+        self.hinge = []; self.fit = {}
+        for k in range(N):
+            gp, gc = self.members_[k], self.members_[k + 1]
+            Rr0 = ref[gp][0].T @ ref[gc][0]; tr0 = ref[gp][0].T @ (ref[gc][1] - ref[gp][1])
+            E, A, b = [], [], []
+            for _, _, P in self.fr:
+                Rr = P[gp][0].T @ P[gc][0]; tr = P[gp][0].T @ (P[gc][1] - P[gp][1])
+                E.append(Rr0.T @ Rr); A.append(Rr - Rr0); b.append(tr0 - tr)
+            E = np.array(E); rv = rotvec(E); w = np.linalg.norm(rv, axis=1)
+            u = np.linalg.eigh((rv.T * w) @ rv / max(w.sum(), 1e-12))[1][:, -1] if w.max() > 1e-6 else np.array([1.0, 0, 0])
+            if (rv @ u).sum() < 0: u = -u
+            th = angle_about(E, u); Rfit = np.array([rot(u, t_) for t_ in th]); rres = float(np.degrees(np.linalg.norm(rotvec(np.transpose(Rfit, (0, 2, 1)) @ E), axis=1)).max())
+            A = np.concatenate(A); b = np.concatenate(b); x = np.linalg.lstsq(A, b, rcond=None)[0]
+            tres = float(np.abs(A @ x - b).max())
+            Vc = np.concatenate([p_[2] for p_ in byg.get(gc, [])]) if gc != "cuff" and byg.get(gc) else np.zeros((0, 3))
+            if gc == "cuff": Vc = np.concatenate([p_[2] @ self.HR for p_ in byg.get("H", [])]) if byg.get("H") else np.zeros((0, 3))
+            if len(Vc):                                                            # slide the point along u to the hub stack's centre
+                dv = Vc - x; dp = np.linalg.norm(dv - (dv @ u)[:, None] * u, axis=1); sel = dp < max(self.hub_r, 6.0) + 0.5
+                if sel.sum() >= 4: x = x + float(np.median(dv[sel] @ u)) * u
+            self.hinge.append(dict(parent=gp, child=gc, u=u, x=x, Rr0=Rr0, tr0=tr0, th_ref=th))
+            self.fit[f"{gp}-{gc}"] = dict(rot_residual_deg=round(rres, 4), point_residual_mm=round(tres, 4), axis_child=np.round(u, 6).tolist(),
+                                          point_child_mm=np.round(x, 3).tolist(), travel_deg=[round(float(np.degrees(th.min())), 2), round(float(np.degrees(th.max())), 2)])
+        bad = {k_: v for k_, v in self.fit.items() if v["rot_residual_deg"] > 0.05 or v["point_residual_mm"] > 0.05}
+        if bad: raise ValueError(f"dynamics (general): adjacent members do not move as hinges: {bad}")
+        self.q_frames = np.array([[h["th_ref"][i] for h in self.hinge] for i in range(len(self.fr))])   # planned angles per frame (rad)
+        self.joint_names = [self.joint_name(k) for k in range(N)]
+        # mass properties in each member's own (group) frame; base in the scapula frame
+        self.mp = {}; self.prims = {g: [] for g in self.members_}
+        for g in self.groups:
+            P = byg.get(g, [])
+            if g == "base": Rb, tb = ref["base"]; P = [(gg, nm, V @ Rb.T + tb, F) for gg, nm, V, F in P]
+            self.mp[g] = mass_props(P) if P else (1e-3, np.zeros(3), 1e-9 * np.eye(3), 0.0)
+        Hp = byg.get("H", []); self.H_mass = sum(mass_props([p_])[0] for p_ in Hp) if Hp else 0.0
+        self.F_mass = sum(mass_props([p_])[0] for p_ in byg.get("F", [])) if byg.get("F") else 0.0
+        self.bearing_r = {k + 1: float(np.linalg.norm(self.anchor_world_ref(k))) for k in range(N)}
+        # springs / limits: knuckle K (clock spring + stops A / B), J2's q2 stops
+        self.spring = {}; self.limits = {}; self.spare = []; kn = self.kin.get("knuckle")
+        if isinstance(kn, str):
+            import ast; kn = ast.literal_eval(kn)
+        if kn:
+            names = self.members_
+            iK = next((k for k in range(N) if names[k].startswith("l1") and names[k + 1].startswith("l1") and names[k] != names[k + 1]), None)
+            if iK is not None:
+                dK = np.array([f.get("knuckle", {}).get("dK", 0.0) for c in self.clips for f in c["frames"]], float)
+                qK = np.degrees(self.q_frames[:, iK]); m_ = np.abs(dK) > 0.2
+                sK = float(np.sign(np.polyfit(dK[m_], qK[m_], 1)[0])) if m_.sum() >= 3 else 1.0
+                offK = float(np.median(qK[~m_])) if (~m_).any() else 0.0                    # stop A in this judge's angle
+                lo, hi = sorted([offK, offK + sK * float(kn["dK_stop_B_deg"])])
+                self.limits[iK] = (lo, hi); self.spare.append(iK)
+                self.spring_def = (iK, math.radians(offK), 1 if offK >= hi - 1e-9 else -1)   # stop A side: the spring is pre-wound past it
+                self.spring = self.springs(self.k_rate)
+                self.knuckle_fit = dict(joint=self.joint_names[iK], sign_vs_dK=sK, stop_A_deg=round(offK, 3), stop_B_deg=round(offK + sK * float(kn["dK_stop_B_deg"]), 3),
+                                        frames_K_open=int(m_.sum()), fit_dK_max_err_deg=round(float(np.abs(qK[m_] - (offK + sK * dK[m_])).max()), 4) if m_.any() else None)
+                st = kn.get("q2_stops_deg")
+                if st:                                                              # J2 = the hinge after K
+                    i2 = iK + 1; q2 = np.array([f["q"][1] for c in self.clips for f in c["frames"]], float); qj = np.degrees(self.q_frames[:, i2])
+                    a_, b_ = np.polyfit(q2, qj, 1); res2 = float(np.abs(qj - (a_ * q2 + b_)).max())
+                    if abs(abs(a_) - 1) < 1e-3 and res2 < 0.05:
+                        self.limits[i2] = tuple(sorted(a_ * np.asarray(st, float) + b_)); self.q2_fit = dict(joint=self.joint_names[i2], slope=round(float(a_), 6), residual_deg=round(res2, 4))
+                    else: self.q2_fit = dict(joint=self.joint_names[i2], slope=round(float(a_), 6), residual_deg=round(res2, 4), note="q2 does not map onto this hinge: stops not applied")
+        self.pin_stop_note = "the knee stop (149.5 deg) is not in the CAD and not modelled; the knee pins are free"
+    def springs(self, rate):
+        """{joint: (stiffness N.m/rad, springref rad)}: K_PRELOAD toward stop A at stop A"""
+        if not getattr(self, "spring_def", None): return {}
+        iK, qA, sg = self.spring_def; return {iK: (rate, qA + sg * K_PRELOAD / rate)}
+    def joint_name(self, k):
+        a, b = self.members_[k], self.members_[k + 1]
+        if a == "l1a" and b == "l1b": return "K"
+        named = [g for g in self.members_ if g.startswith("l1")]
+        J = {"base": "J1"}.get(a)
+        if J: return J
+        if b == "cuff": return "pin b" if a == "l4" else f"J{k + 1}"
+        if a == "l3" and b == "l4": return "pin a"
+        return {"l1": "J2", "l1b": "J2", "l2": "J3"}.get(a, f"J{k + 1}")
+    def anchor_world_ref(self, k):
+        """joint k's hinge point in the scapula frame at the reference (mm)"""
+        h = self.hinge[k]; Rc, tc = self.ref[h["child"]]; return Rc @ h["x"] + tc
+    def planned_q(self, ci, s):
+        """planned joint angles (rad, relative to the reference) at path frames s of clip ci (linear between frames)"""
+        idx = [i for i, (c_, _, _) in enumerate(self.fr) if c_ == ci]; Q = np.unwrap(self.q_frames[idx], axis=0)
+        fi = np.arange(len(idx)); return np.stack([np.interp(s, fi, Q[:, j]) for j in range(self.N)], 1)
+    def ik_check(self):
+        """max deviation of the fitted hinge chain from the clips' member frames (deg, mm), every frame"""
+        wr, wt = {}, {}
+        for i, (_, _, P) in enumerate(self.fr):
+            R, t = P["base"]
+            for k, h in enumerate(self.hinge):
+                Rr = h["Rr0"] @ rot(h["u"], self.q_frames[i, k]); x = h["x"]
+                tr_ = h["tr0"] + h["Rr0"] @ x - Rr @ x                                    # child point x stays put
+                R, t = R @ Rr, R @ tr_ + t; Rc, tc = P[h["child"]]
+                wr[h["child"]] = max(wr.get(h["child"], 0.0), float(np.degrees(np.linalg.norm(rotvec(R.T @ Rc)))))
+                wt[h["child"]] = max(wt.get(h["child"], 0.0), float(np.linalg.norm(t - tc)))
+                R, t = Rc, tc                                                          # no drift accumulation: the next pair from the clip's own frame
+        return {g: round(wr[g], 4) for g in wr} | {g + "_mm": round(wt[g], 4) for g in wt}
+
+def build_xml_general(des, friction, R0=None, gravity=True, dt=DT, k_rate=None):
+    """the general chain's MuJoCo model at the reference configuration (qpos = 0): base (scapula, prescribed ball joint at
+    GH) -> members (hinges at the fitted points / axes, real mass) -> arm member (cuff, 20 g gravity compensated)"""
+    fmt = lambda v: " ".join(f"{x:.9g}" for x in np.ravel(v)); ref = des.ref
+    def inertial(g):
+        m, c, I, _ = des.mp[g]; I = 0.5 * (I + I.T)
+        return f'<inertial pos="{fmt(c)}" mass="{max(m, 1e-4):.9g}" fullinertia="{I[0,0]:.9g} {I[1,1]:.9g} {I[2,2]:.9g} {I[0,1]:.9g} {I[0,2]:.9g} {I[1,2]:.9g}"/>'
+    fl = (f'frictionloss="{friction:.6g}"' if friction > 0 else "")
+    body = ['<body name="base"><joint name="scap" type="ball" armature="1000"/><inertial pos="0 0 0" mass="1" diaginertia="1e-3 1e-3 1e-3"/>']
+    Rp, tp = np.eye(3), np.zeros(3)
+    for k, h in enumerate(des.hinge):
+        g = h["child"]; Rc, tc = ref[g]; Rr = Rp.T @ Rc; pr = Rp.T @ (tc - tp) / 1000
+        lim = des.limits.get(k); spr = (des.springs(k_rate) if k_rate else des.spring).get(k)
+        extra = (f' limited="true" range="{math.radians(lim[0]):.9g} {math.radians(lim[1]):.9g}" solreflimit="0.002 1"' if lim else "") + \
+                (f' stiffness="{spr[0]:.9g}" springref="{spr[1]:.9g}"' if spr else "")
+        jn = f"J{k + 1}"
+        if g == "cuff":
+            c = np.array([0, -CUFF_MM / 1000, 0])
+            body.append(f'<body name="cuff" pos="{fmt(pr)}" quat="{fmt(quat(Rr))}" gravcomp="1"><joint name="{jn}" type="hinge" pos="{fmt(h["x"] / 1000)}" axis="{fmt(h["u"])}" {fl}{extra}/>'
+                        f'<inertial pos="{fmt(c)}" mass="{CUFF_MASS}" diaginertia="2e-6 2e-6 2e-6"/>')
+        else:
+            body.append(f'<body name="{g}" pos="{fmt(pr)}" quat="{fmt(quat(Rr))}"><joint name="{jn}" type="hinge" pos="{fmt(h["x"] / 1000)}" axis="{fmt(h["u"])}" {fl}{extra}/>{inertial(g)}')
+        Rp, tp = Rc, tc
+    return f"""<mujoco model="{des.id}"><compiler angle="radian" autolimits="true"/>{option_xml(dt, gravity)}
+<worldbody>{''.join(body)}{'</body>' * (des.N + 1)}</worldbody></mujoco>"""
+
 # ---------------------------------------------------------------- MuJoCo model
 def option_xml(dt=DT, gravity=True):
     """solver options shared by the judge and its tests: noslip + stiff friction impedance make frictionloss exact
@@ -261,14 +446,16 @@ def option_xml(dt=DT, gravity=True):
     return (f'<option timestep="{dt}" gravity="0 {-9.81 if gravity else 0} 0" integrator="implicitfast" solver="Newton" iterations="60" tolerance="1e-10" '
             f'noslip_iterations="20"><flag filterparent="disable"/></option><default><joint solreffriction="0.0004 1" solimpfriction="0.99 0.999 0.0001"/></default>')
 
-def load_friction_update(m, d, child, jid, dofs, r_brg, root, tau0, mu, tilt_out=None):
+def load_friction_update(m, d, child, jid, dofs, r_brg, root, tau0, mu, tilt_out=None, anchors=False):
     """plain-bearing friction: each hinge's frictionloss = tau0 + mu |M_perp| (the parent-on-child reaction moment about
-    the bearing centre r_brg (m) on the joint axis, perpendicular to the axis); call after mj_step"""
+    the bearing centre r_brg (m) on the joint axis, perpendicular to the axis); call after mj_step. anchors=True (general
+    chain, axes off GH): the bearing centre is the joint's own anchor d.xanchor (placed at the hub stack's centre)"""
     import mujoco
     mujoco.mj_rnePostConstraint(m, d); cc_ = d.subtree_com[root]
     for k in range(len(jid)):
         w_ = d.cfrc_int[child[k]]; u = d.xaxis[jid[k]]; rb = r_brg[k]
-        a0, a1, a2 = cc_[0] - rb * u[0], cc_[1] - rb * u[1], cc_[2] - rb * u[2]
+        if anchors: xa = d.xanchor[jid[k]]; a0, a1, a2 = cc_[0] - xa[0], cc_[1] - xa[1], cc_[2] - xa[2]
+        else: a0, a1, a2 = cc_[0] - rb * u[0], cc_[1] - rb * u[1], cc_[2] - rb * u[2]
         m0 = w_[0] + a1 * w_[5] - a2 * w_[4]; m1 = w_[1] + a2 * w_[3] - a0 * w_[5]; m2 = w_[2] + a0 * w_[4] - a1 * w_[3]
         ma = m0 * u[0] + m1 * u[1] + m2 * u[2]; tp = math.sqrt(max(0.0, m0 * m0 + m1 * m1 + m2 * m2 - ma * ma))
         if tilt_out is not None: tilt_out[k] = tp
@@ -396,7 +583,7 @@ def planned_overlaps(des, tr, R0, pairs, every=3):
 
 # ---------------------------------------------------------------- one run
 def run(des, ci, friction=0.2, speed=1.0, case="passive", gravity=True, tissue_scale=1.0, contacts=True, dt=DT, traj=None, record=False,
-        mu_eff=None, tau0=TAU0, tilt="hub"):
+        mu_eff=None, tau0=TAU0, tilt="hub", k_rate=None):
     """simulate clip ci; returns (summary dict, recorded series dict if record).
     friction: constant Coulomb torque per joint (N.m). mu_eff (not None): load-dependent plain-bearing friction instead
     (red team G6, pipeline/redteam/rt_wedge.py): every step each hinge's frictionloss = tau0 + mu_eff |M_perp|, M_perp =
@@ -404,23 +591,27 @@ def run(des, ci, friction=0.2, speed=1.0, case="passive", gravity=True, tissue_s
     about the bearing centre (tilt="hub": the hub stack's mid-height on the axis, so the pin carries the force) or about
     the GH centre (tilt="gh": rt_wedge.py's model, no R x F term)."""
     import mujoco
-    N = des.N; tr = traj or des.clip_traj(ci); fps = tr["fps"]; nf = tr["n"]
+    N = des.N; tr = traj or des.clip_traj(ci); fps = tr["fps"]; nf = tr["n"]; gen = getattr(des, "general", False)
     T = SETTLE + (nf - 1) / fps / speed; nsteps = int(round(T / dt)) + 1; t = np.arange(nsteps) * dt
     s = np.clip((t - SETTLE) * speed * fps, 0, nf - 1)
     X = tr["f"](s); pose = X[:, :3]; Rh = humerus(pose); Rs = scap(pose[:, 1])
     def omega(R):
         dR = np.gradient(R, dt, axis=0); return vee(dR @ np.transpose(R, (0, 2, 1)))
     wh, ws = omega(Rh), omega(Rs); als = np.gradient(ws, dt, axis=0)
-    sp = np.radians(X[:, 3]) if N == 4 else None
+    sp = np.radians(X[:, 3]) if (N == 4 and not gen) else None
     HG = np.transpose(Rs, (0, 2, 1)) @ Rh
-    # reference (planned) configuration at t = 0
-    pins0, _ = des.ch.pins(HG[:1], None if sp is None else sp[:1]); Fm0 = des.ch.frames(pins0)
-    R0 = {f"l{k}": Fm0[k - 1][0] for k in range(1, N)}; R0["cuff"] = HG[0]
+    if gen:                                                                   # general chain: the model sits at the design's reference, qpos = planned angles
+        if case != "passive": raise ValueError("general chain: passive case only (MVP1)")
+        contacts = False; R0 = None
+    else:                                                                     # reference (planned) configuration at t = 0
+        pins0, _ = des.ch.pins(HG[:1], None if sp is None else sp[:1]); Fm0 = des.ch.frames(pins0)
+        R0 = {f"l{k}": Fm0[k - 1][0] for k in range(1, N)}; R0["cuff"] = HG[0]
     servo = case == "servo"; arm = ARM_MOTOR if case in ("motor", "servo") else 0.0
     load = mu_eff is not None; f_xml = tau0 if load else friction
     cand = adjacent_candidates(des) if contacts else []; pov = planned_overlaps(des, tr, R0, cand) if contacts else {}
     pairs = [ab for ab in cand if ab not in pov]
-    m = mujoco.MjModel.from_xml_string(build_xml(des, f_xml, arm, R0, tissue_scale, gravity, contacts, dt, servo, pairs)); d = mujoco.MjData(m)
+    xml = build_xml_general(des, f_xml, gravity=gravity, dt=dt, k_rate=k_rate) if gen else build_xml(des, f_xml, arm, R0, tissue_scale, gravity, contacts, dt, servo, pairs)
+    m = mujoco.MjModel.from_xml_string(xml); d = mujoco.MjData(m)
     if load and f_xml <= 0: raise ValueError("load-dependent friction needs tau0 > 0 (frictionloss rows must exist)")
     jid = [mujoco.mj_name2id(m, mujoco.mjtObj.mjOBJ_JOINT, f"J{k}") for k in range(1, N + 1)]
     qa = [m.jnt_qposadr[j] for j in jid]; va = [m.jnt_dofadr[j] for j in jid]; bq, bv = m.jnt_qposadr[0], m.jnt_dofadr[0]
@@ -428,7 +619,11 @@ def run(des, ci, friction=0.2, speed=1.0, case="passive", gravity=True, tissue_s
     child = [m.jnt_bodyid[j] for j in jid]; root = int(m.body_rootid[child[0]])
     r_brg = [0.0 if tilt == "gh" else des.bearing_r[k] / 1000 for k in range(1, N + 1)]; tilt_now = [0.0] * N
     body_member = {mujoco.mj_name2id(m, mujoco.mjtObj.mjOBJ_BODY, g): g for g in des.groups + ["cuff"]}
-    d.qpos[bq:bq + 4] = quat(Rs[0]); mujoco.mj_forward(m, d)
+    d.qpos[bq:bq + 4] = quat(Rs[0])
+    if gen:
+        q00 = des.planned_q(ci, np.array([0.0]))[0]
+        for k, a in enumerate(qa): d.qpos[a] = q00[k]
+    mujoco.mj_forward(m, d)
     Ts = TISSUE; ks = tissue_scale
     Kt = ks * np.array([Ts["k_perp"], Ts["k_ax"], Ts["k_perp"]]); Kr = ks * np.array([Ts["kr_perp"], Ts["kr_ax"], Ts["kr_perp"]])
     ct, cr = math.sqrt(ks) * Ts["c_t"], math.sqrt(ks) * np.array([Ts["cr_perp"], Ts["cr_ax"], Ts["cr_perp"]])
@@ -491,12 +686,15 @@ def run(des, ci, friction=0.2, speed=1.0, case="passive", gravity=True, tissue_s
                     if cf[0] > fmax: fmax, pair = cf[0], f"{body_member.get(m.geom_bodyid[cc.geom1])}-{body_member.get(m.geom_bodyid[cc.geom2])}"
             rec["con"].append((fmax, pair)); rec["gap"].append(gmin); rec["tilt"].append(list(tilt_now)); rec["cap"].append([m.dof_frictionloss[a] for a in va])
         mujoco.mj_step(m, d)
-        if load: load_friction_update(m, d, child, jid, va, r_brg, root, tau0, mu_eff, tilt_now)   # plain bearing: friction grows with the tilt couple
+        if load: load_friction_update(m, d, child, jid, va, r_brg, root, tau0, mu_eff, tilt_now, anchors=gen and tilt != "gh")   # plain bearing: friction grows with the tilt couple
         if i % 500 == 0 and not np.isfinite(d.qacc).all(): raise FloatingPointError(f"{des.id} clip {ci}: simulation diverged at t = {d.time:.3f} s")
     R = {k: (np.array(v) if k not in ("con",) else v) for k, v in rec.items()}
     R["fmax"] = np.array([c[0] for c in R["con"]]); R["pair"] = [c[1] for c in R["con"]]
     # planned configuration at the recorded samples
-    sr = R["s"]; qp, ok_r, Rh_r, _ = planned(des, tr, sr, R0); R["qp"] = qp; R["ok"] = ok_r
+    sr = R["s"]
+    if gen: qp = des.planned_q(ci, sr); ok_r = np.ones(len(sr), bool); Rh_r = humerus(tr["f"](sr)[:, :3])
+    else: qp, ok_r, Rh_r, _ = planned(des, tr, sr, R0)
+    R["qp"] = qp; R["ok"] = ok_r
     R["qdp"] = np.gradient(R["qp"], R["t"], axis=0)
     R["warm"] = R["t"] >= SETTLE; R["h"] = Rh_r @ np.array([0, -1.0, 0]); R["Rh"] = Rh_r
     wr = vee(np.gradient(Rh_r, R["t"], axis=0) @ np.transpose(Rh_r, (0, 2, 1))); R["warm_w"] = np.linalg.norm(wr, axis=1)
@@ -537,7 +735,7 @@ def summarise(des, tr, R, friction, speed, case):
                 dur = t[i - 1] - t[j0]
                 if dur >= 0.05:
                     miss = abs(float(np.degrees((qp[i - 1, j] - q[i - 1, j]) - (qp[j0, j] - q[j0, j]))))
-                    stall_ev.append(dict(joint=f"J{j + 1}", frame=int(R["frame"][w][j0]), ms=round(1000 * dur), missed_deg=round(miss, 1),
+                    stall_ev.append(dict(joint=(des.joint_names[j] if getattr(des, "general", False) else f"J{j + 1}"), frame=int(R["frame"][w][j0]), ms=round(1000 * dur), missed_deg=round(miss, 1),
                                          kind=("lag>10" if miss >= LAG_DEG else "lag") + ("-reversal" if rev[j0:i].mean() > 0.5 else "-stuck")))
             i += 1
     fmax = R["fmax"][w]; pair = [p for p, ww in zip(R["pair"], w) if ww]; gap = R["gap"][w]
@@ -580,7 +778,11 @@ def summarise(des, tr, R, friction, speed, case):
                contact=dict(touch=bool(touch.any()), peak_N=round(float(fmax.max()), 3), time_s=round(float(touch.sum() * np.median(np.diff(t))), 3), pairs={k: round(v, 3) for k, v in pairs.items()},
                             min_gap_mm=round(float(gap.min() * 1000), 2) if np.isfinite(gap.min()) else None),
                worst=W)
-    if N == 4: out["spare_drift_deg"] = round(float(np.degrees(np.abs(q[:, 0] - qp[:, 0]).max())), 2)
+    if getattr(des, "general", False):
+        if des.spare: out["spare_drift_deg"] = round(float(max(np.degrees(np.abs(q[:, j] - qp[:, j]).max()) for j in des.spare)), 2)   # spring-held K vs its plan
+        if des.limits: out["on_limit_share"] = {des.joint_names[j]: round(float(((np.degrees(q[:, j]) <= lo + 0.05) | (np.degrees(q[:, j]) >= hi - 0.05)).mean()), 3) for j, (lo, hi) in des.limits.items()}
+        out["joints"] = des.joint_names
+    elif N == 4: out["spare_drift_deg"] = round(float(np.degrees(np.abs(q[:, 0] - qp[:, 0]).max())), 2)
     if case == "servo": out["servo_peak_Nm"] = round(float(np.abs(R["servo"][w]).max()), 3)
     return out
 
@@ -740,8 +942,17 @@ def main():
     ap.add_argument("--tau0", type=float, default=TAU0); ap.add_argument("--tilt", default="hub,gh", help="plain-bearing tilt couple about the bearing centre (hub) and/or GH (gh, rt_wedge.py)")
     ap.add_argument("--quick", action="store_true", help="nominal case only (rolling bearings mu_eff 0.005, speed 1), no validation")
     ap.add_argument("--no-validate", action="store_true"); ap.add_argument("--out", default=None)
+    ap.add_argument("--general", action="store_true", help="force the general N-member chain (used automatically for offset-axis / split-member / knee designs)")
     a = ap.parse_args(); global DES
-    t0 = time.time(); DES = des = Design(a.design); N = des.N
+    t0 = time.time(); gen = a.general or needs_general(design_dir(a.design)); fallback = None
+    if gen:
+        try: des = GenDesign(a.design)
+        except ValueError as e:                                                        # e.g. passive slides (osn, rail): no prismatic joint in the general chain yet
+            if a.general: raise
+            gen = False; fallback = f"general chain refused ({e}); the spherical az/el/a approximation was used, as before 2026-10-16"
+            print("  WARNING", fallback, flush=True); des = Design(a.design)
+    else: des = Design(a.design)
+    DES = des; N = des.N
     cases = [c for c in a.cases.split(",") if c]
     lst = lambda x: [float(v) for v in x.split(",") if v.strip()]
     fr, sp, mur, mus = lst(a.friction), lst(a.speed), lst(a.mu_roll), lst(a.mu_eff); tilts = [x for x in a.tilt.split(",") if x.strip()]
@@ -755,6 +966,8 @@ def main():
     todo += [(load_key(mu, a.tau0_roll, s, c, "hub"), ci, dict(speed=s, case=c, mu_eff=mu, tau0=a.tau0_roll, tilt="hub")) for c in cases for mu in mur for s in sp for ci in cl]   # rolling (main)
     todo += [(load_key(mu, a.tau0, 1.0, c, tl), ci, dict(speed=1.0, case=c, mu_eff=mu, tau0=a.tau0, tilt=tl)) for c in cases for tl in tilts for mu in mus for ci in cl]       # plain (comparison)
     nom = load_key(nom_mu, a.tau0_roll, 1.0, "passive", "hub")
+    if gen and getattr(des, "spring_def", None):                                       # the knuckle spring at the soft end of its rate spec
+        for kr in K_RATES[1:]: todo += [(load_key(nom_mu, a.tau0_roll, 1.0, "passive", "hub") + f"|krate{kr:g}", ci, dict(speed=1.0, case="passive", mu_eff=nom_mu, tau0=a.tau0_roll, tilt="hub", k_rate=kr)) for ci in cl]
     if not a.quick:                                                                    # attribution: the same arm motion without friction / without gravity
         for s in sp:
             todo += [(f"passive|nofric|s{s:g}", ci, dict(friction=0.0, speed=s, case="passive")) for ci in cl]
@@ -790,6 +1003,16 @@ def main():
                                   tilt_ref_note="hub: moment about the hub stack's mid-height on the axis (the pin carries the force); gh: about the GH centre, rt_wedge.py's model without R x F",
                                   bearing_r_mm={str(k): round(float(v), 1) for k, v in des.bearing_r.items()}),
                chain_vs_clip_G_max_deg=ik, thresholds=THRESH, nominal=nom, cases={}, errors=errs)
+    if fallback: out["chain"] = dict(kind="spherical approximation (fallback)", note=fallback)
+    if gen:
+        out["chain"] = dict(kind="general serial chain from the clips' own member frames (dynamics-2026-10-16): " + " -> ".join(des.members_[:-1]) + " -> arm",
+                            joints=des.joint_names, hinge_fit=des.fit, limits_deg={des.joint_names[j]: [round(x, 3) for x in v] for j, v in des.limits.items()},
+                            springs={des.joint_names[j]: dict(rate_Nm_per_rad=v[0], preload_Nm_at_stop_A=K_PRELOAD, rates_run=list(K_RATES)) for j, v in des.spring.items()},
+                            knuckle=getattr(des, "knuckle_fit", None), q2_stops=getattr(des, "q2_fit", None), spare_joints=[des.joint_names[j] for j in des.spare],
+                            arm_member="the humerus (canonical frame at GH), joined to the last member by its hinge and to the bone by the soft-tissue cuff",
+                            contact="member-member contact not modelled in the general chain (R6 judges part interference geometrically: 0.0 mm on these designs); stops are joint limits",
+                            notes=[des.pin_stop_note, "joint friction on every hinge incl. K and the knee pins (rolling-bearing law; iglidur knee pins share it - an optimistic note for the plain-bearing pins, see the plain-bearing comparison cases)",
+                                   "bearing centre for the load-dependent friction = the hinge's anchor at the hub stack centre (not a point on a GH ray)"])
     for key in sorted(res):
         C = res[key]; out["cases"][key] = dict(clips=C, **rollup(C, N))
     if any(k.startswith("passive|nofric") for k in res):
@@ -797,7 +1020,10 @@ def main():
     if nom in res: out["verdict"] = verdict(out, nom)
     path = a.out or os.path.join(des.dd, "judge", "dynamics.json"); os.makedirs(os.path.dirname(path), exist_ok=True)
     out["seconds"] = round(time.time() - t0); json.dump(out, open(path, "w"), indent=1)          # the runs are saved before the validations
-    if not a.no_validate and not a.quick:
+    if gen and not a.quick:
+        out["validation"] = dict(ok=None, note="general chain: transmission.py / rt_wedge.py assume the spherical az/el/a chain; the general construction is cross-checked by "
+                                 "running it on a spherical 3R (python3 judge/test_dynamics.py --general) against the original path")
+    elif not a.no_validate and not a.quick:
         print("  validating against transmission.py (quasi-static) ...", flush=True); out["validation"] = validate(des, jobs=a.jobs)
         v = out["validation"]; print(f"  validation: {v.get('frames_compared')} frames, rel. error median {v.get('rel_err_median')} p95 {v.get('rel_err_p95')} max {v.get('rel_err_max')} -> {'OK' if v.get('ok') else 'NOT OK'}", flush=True)
         if mus:
@@ -822,7 +1048,7 @@ def rollup(C, N):
              frames_over_felt_max=max(c["drive"]["frames_over_felt"] for c in C.values()), contact_touch=any(c["contact"]["touch"] for c in C.values()),
              cuff_pressure_peak_kPa=max(c["cuff_pressure_kPa"]["peak"] for c in C.values()),
              contact_peak_N=max(c["contact"]["peak_N"] for c in C.values()), amp_qs_max=max(c["amp_qs"]["max"] for c in C.values()))
-    if N == 4: r["spare_drift_max_deg"] = max(c.get("spare_drift_deg", 0) for c in C.values())
+    if any("spare_drift_deg" in c for c in C.values()): r["spare_drift_max_deg"] = max(c.get("spare_drift_deg", 0) for c in C.values())
     if any("servo_peak_Nm" in c for c in C.values()): r["servo_peak_Nm"] = max(c.get("servo_peak_Nm", 0) for c in C.values())
     if any("load_friction" in c for c in C.values()):
         r["friction_peak_Nm"] = max(max(c["load_friction"]["friction_peak_Nm"]) for c in C.values()); r["tilt_peak_Nm"] = max(max(c["load_friction"]["tilt_peak_Nm"]) for c in C.values())

@@ -12,7 +12,9 @@
   3. The load-dependent friction vs rt_wedge.py (judge.dynamics.validate_wedge, Wash opposite shoulder, mu_eff 0.25):
      unlocked frames match the exact quasi-static solution, frames rt_wedge.py calls locked need >= 10x the
      constant-friction moment.
-    python3 judge/test_dynamics.py [--fast]   (--fast: 2 clips in part 2; about 1-2 min on 4 cores)"""
+  4. (--general) the general N-member chain judge.dynamics.GenDesign against the spherical path on the same 3R (part4).
+    python3 judge/test_dynamics.py [--fast]   (--fast: 2 clips in part 2; about 1-2 min on 4 cores)
+    python3 judge/test_dynamics.py --general  (part 4 only)"""
 import math, os, sys, time
 import numpy as np
 HERE = os.path.dirname(os.path.abspath(__file__)); sys.path.insert(0, HERE)
@@ -65,8 +67,29 @@ def part1():
     print(f"  (d) load-dependent friction tau0 {tau0} + mu {mu_e} x tilt {mm * 9.81 * dz:.4f} N.m: mean spring torque over a turn {mu:.5f} vs {exp:.5f} {'ok' if g else 'FAIL'}")
     return ok
 
+def part4(clips=("Raise overhead", "Wash opposite shoulder")):
+    """the general N-member chain (GenDesign: hinges fitted to the clips' member frames, used for offset-axis / split-member /
+    knee designs) against the original spherical-chain path on the same 3R design, contacts off in both: (a) constant
+    friction 0.05 N.m (the chain construction alone: within 2 % or the summaries' rounding step), (b) the nominal rolling-bearing law (also differs by
+    the bearing centre: the hinge anchor at the hub stack centre vs a point on the GH ray at the hubs' mid-radius)"""
+    ok = True; dS = DY.Design("band_r14_3r_s1351_1"); dG = DY.GenDesign("band_r14_3r_s1351_1")
+    print(f"  hinge fit residuals {[(k, v['rot_residual_deg'], v['point_residual_mm']) for k, v in dG.fit.items()]}")
+    for lab, kw, tol in (("constant 0.05 N.m", dict(friction=0.05), 0.02), ("rolling mu 0.005", dict(mu_eff=0.005, tau0=0.001, tilt="hub"), 0.05)):
+        for c in clips:
+            ci = [x["name"] for x in dS.clips].index(c)
+            DY.DES = dS; a = DY.run(dS, ci, contacts=False, **kw)[0]; DY.DES = dG; b = DY.run(dG, ci, contacts=False, **kw)[0]
+            pairs = [("M_GH peak", a["moment_gh_Nm"]["peak"], b["moment_gh_Nm"]["peak"], 0.005), ("M_GH rms", a["moment_gh_Nm"]["rms"], b["moment_gh_Nm"]["rms"], 0.005),
+                     ("F peak", a["force_N"]["peak"], b["force_N"]["peak"], 0.0101), ("twist peak", a["tracking_deg"]["twist_peak"], b["tracking_deg"]["twist_peak"], 0.0501)]
+            rel = max(abs(y - x) / max(abs(x), 1e-3) for _, x, y, _ in pairs)                # the summaries are rounded (N to 0.01): small values also pass on the rounding step
+            g = all(abs(y - x) <= max(tol * abs(x), at) for _, x, y, at in pairs); ok &= g
+            print(f"  ({lab}) {c:24s} " + "  ".join(f"{n} {x:.4f}/{y:.4f}" for n, x, y, _ in pairs) + f"  max rel diff {rel:.4f} {'ok' if g else 'FAIL'}")
+    return ok
+
 if __name__ == "__main__":
     fast = "--fast" in sys.argv; t0 = time.time(); ok = True
+    if "--general" in sys.argv:
+        print("4. general N-member chain vs the spherical chain (band_r14_3r_s1351_1)"); ok = part4()
+        print(f"{'PASS' if ok else 'FAIL'} ({time.time() - t0:.0f}s)"); sys.exit(0 if ok else 1)
     print("1. single hinge, analytic"); ok &= part1()
     print("2. chain vs transmission.py (quasi-static, constant friction)")
     des = DY.Design("band_r14_3r_s1351_1")

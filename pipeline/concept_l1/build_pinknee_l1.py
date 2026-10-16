@@ -232,15 +232,84 @@ def cut_bottom(M, bottom_c, sweep):
 
 
 def slice_bottom(mesh_c, M, xc):
-    """keep the part of BOTTOM distal of the plane x_along = xc (pad-relative): triangles clipped exactly at the plane, each
-    boundary loop on the plane capped by a fan from its centroid (no shapely: trimesh's slice_mesh_plane needs it)"""
+    """keep the part of BOTTOM distal of the plane x_along = xc (pad-relative), as ONE closed solid (slice_capped)"""
     D = M.D; n = D.sa; o = M.fr["Bm"] + xc * n
-    V = np.asarray(mesh_c.vertices, float); F = np.asarray(mesh_c.faces); sd = (V - o) @ n
+    return slice_capped(mesh_c, o, n)
+
+
+def _tri_cap(loops2):
+    """triangulate the planar region bounded by loops (lists of (k, x, y)) -> triangles of k's, counter-clockwise.
+    Nesting by point-in-polygon (even depth = outer, odd = hole of its innermost container); each hole is bridged to its
+    outer loop at the shortest segment that crosses no edge; then ear clipping (no shapely / earcut here)."""
+    import numpy as _np
+    P = [_np.array([(x, y) for _, x, y in L], float) for L in loops2]; K = [[k for k, _, _ in L] for L in loops2]
+    area = lambda Q: 0.5 * float(_np.sum(Q[:, 0] * _np.roll(Q[:, 1], -1) - _np.roll(Q[:, 0], -1) * Q[:, 1]))
+    def inside(pt, Q):
+        x, y = pt; c = False; n = len(Q)
+        for i in range(n):
+            x1, y1 = Q[i]; x2, y2 = Q[(i + 1) % n]
+            if (y1 > y) != (y2 > y) and x < x1 + (y - y1) * (x2 - x1) / (y2 - y1): c = not c
+        return c
+    par = []
+    for a in range(len(P)):
+        cont = [b for b in range(len(P)) if b != a and inside(P[a][0], P[b])]
+        par.append((len(cont), min(cont, key=lambda b: abs(area(P[b]))) if cont else None))
+    def seg_x(p1, p2, q1, q2):
+        d = lambda a, b, c: (b[0] - a[0]) * (c[1] - a[1]) - (b[1] - a[1]) * (c[0] - a[0])
+        return (d(p1, p2, q1) * d(p1, p2, q2) < 0) and (d(q1, q2, p1) * d(q1, q2, p2) < 0)
+    tris = []
+    for a in range(len(P)):
+        if par[a][0] % 2: continue
+        poly = list(zip(K[a], map(tuple, P[a])))
+        if area(P[a]) < 0: poly = poly[::-1]                                               # outer CCW
+        holes = [b for b in range(len(P)) if par[b][0] % 2 and par[b][1] == a]
+        for b in sorted(holes, key=lambda b: -P[b][:, 0].max()):
+            hp = list(zip(K[b], map(tuple, P[b])))
+            if area(P[b]) > 0: hp = hp[::-1]                                               # holes CW
+            edges = [(poly[i][1], poly[(i + 1) % len(poly)][1]) for i in range(len(poly))]
+            for c in holes: edges += [(tuple(P[c][i]), tuple(P[c][(i + 1) % len(P[c])])) for i in range(len(P[c]))]
+            best = None
+            for hi, (_, hq) in enumerate(hp):
+                for oi, (_, oq) in enumerate(poly):
+                    dd = (hq[0] - oq[0]) ** 2 + (hq[1] - oq[1]) ** 2
+                    if best is not None and dd >= best[0]: continue
+                    if any(seg_x(hq, oq, e0, e1) for e0, e1 in edges if hq not in (e0, e1) and oq not in (e0, e1)): continue
+                    best = (dd, hi, oi)
+            _, hi, oi = best
+            poly = poly[:oi + 1] + hp[hi:] + hp[:hi + 1] + poly[oi:]
+        V = poly[:]
+        def cross(o_, a_, b_): return (a_[0] - o_[0]) * (b_[1] - o_[1]) - (a_[1] - o_[1]) * (b_[0] - o_[0])
+        def in_tri(p_, a_, b_, c_): return cross(a_, b_, p_) >= -1e-12 and cross(b_, c_, p_) >= -1e-12 and cross(c_, a_, p_) >= -1e-12
+        guard = 0
+        while len(V) > 3 and guard < 100000:
+            guard += 1; n = len(V); cut = False
+            for i in range(n):
+                pa, pb, pc = V[i - 1][1], V[i][1], V[(i + 1) % n][1]
+                if cross(pa, pb, pc) <= 1e-12: continue
+                if any(in_tri(V[j][1], pa, pb, pc) for j in range(n) if j not in (i - 1 if i else n - 1, i, (i + 1) % n) and V[j][1] not in (pa, pb, pc)): continue
+                tris.append((V[i - 1][0], V[i][0], V[(i + 1) % n][0])); V.pop(i); cut = True; break
+            if not cut:                                                                    # degenerate (collinear) leftovers: drop the flattest vertex
+                i = min(range(n), key=lambda i: abs(cross(V[i - 1][1], V[i][1], V[(i + 1) % n][1]))); V.pop(i)
+        if len(V) == 3 and cross(V[0][1], V[1][1], V[2][1]) > 1e-12: tris.append((V[0][0], V[1][0], V[2][0]))
+    return tris
+
+
+def slice_capped(mesh, o, n):
+    """keep the part of a closed mesh on the +n side of the plane through o, as ONE closed solid: the mesh is cleaned first
+    (vertices merged, zero-area slivers dropped - the inherited BOTTOM tessellation carries 6, which made it 7 open pieces),
+    triangles are clipped exactly at the plane with one new vertex per cut edge, and every boundary loop on the plane is
+    capped by a real triangulation of the section (outer loops with their holes, ear clipping; until 2026-10-16 a fan from
+    each loop's centroid, which also overlapped itself on the channel's non-convex section)."""
+    n = np.asarray(n, float) / np.linalg.norm(n); o = np.asarray(o, float)
+    m0 = trimesh.Trimesh(np.asarray(mesh.vertices, float), np.asarray(mesh.faces), process=False); m0.merge_vertices()
+    m0.update_faces(m0.nondegenerate_faces()); m0.remove_unreferenced_vertices()
+    V = np.asarray(m0.vertices, float); F = np.asarray(m0.faces); sd = (V - o) @ n
+    sd = np.where(np.abs(sd) < 1e-7, 1e-7, sd)                                              # nothing exactly on the plane
     nv = list(V); nf = []; cache = {}
     def cut(i, j):
         k = (min(i, j), max(i, j))
         if k not in cache:
-            t = sd[i] / (sd[i] - sd[j]); cache[k] = len(nv); nv.append(V[i] + t * (V[j] - V[i]))
+            t = sd[k[0]] / (sd[k[0]] - sd[k[1]]); cache[k] = len(nv); nv.append(V[k[0]] + t * (V[k[1]] - V[k[0]]))
         return cache[k]
     for f in F:
         keep = sd[f] >= 0
@@ -253,14 +322,25 @@ def slice_bottom(mesh_c, M, xc):
             if (sd[i] >= 0) != (sd[j] >= 0): poly.append(cut(i, j))
         for q in range(1, len(poly) - 1): nf.append([poly[0], poly[q], poly[q + 1]])
     m = trimesh.Trimesh(np.array(nv), np.array(nf), process=False); m.remove_unreferenced_vertices()
-    E = m.edges_sorted; grp = trimesh.grouping.group_rows(E, require_count=1); Eb = m.edges[grp]
-    on = np.abs((m.vertices - o) @ n) < 1e-6; Eb = Eb[on[Eb].all(1)]
-    if len(Eb):
-        Vn = list(m.vertices); Fn = list(m.faces)
-        for comp in trimesh.graph.connected_components(Eb, min_len=3):
-            cs = set(comp.tolist()); Ec = [e for e in Eb if e[0] in cs]; c = len(Vn); Vn.append(np.asarray(m.vertices)[list(cs)].mean(0))
-            Fn += [[e[1], e[0], c] for e in Ec]
-        m = trimesh.Trimesh(np.array(Vn), np.array(Fn), process=False)
+    # directed boundary half-edges (a -> b as wound in their face); the cap runs them backwards
+    he = np.r_[m.faces[:, [0, 1]], m.faces[:, [1, 2]], m.faces[:, [2, 0]]]
+    und = np.sort(he, axis=1); _, inv, cnt = np.unique(und, axis=0, return_inverse=True, return_counts=True)
+    bd = he[cnt[inv.ravel()] == 1]
+    if len(bd):
+        nxt = {int(b): int(a) for a, b in bd}                                             # cap edge b -> a
+        e1 = trimesh.geometry.align_vectors(n, [0, 0, 1.0])[:3, :3]; X2 = (np.asarray(m.vertices) - o) @ e1.T
+        loops, seen = [], set()
+        for st in list(nxt):
+            if st in seen: continue
+            L = [st]; seen.add(st); k = nxt[st]
+            while k != st and k not in seen and k in nxt: L.append(k); seen.add(k); k = nxt[k]
+            if len(L) >= 3: loops.append([(k_, X2[k_, 0], X2[k_, 1]) for k_ in L])
+        tris = _tri_cap(loops); Fc = np.array(tris, int).reshape(-1, 3)
+        if len(Fc):                                                                        # cap faces wound against the boundary (outward = -n)
+            nrm = np.cross(m.vertices[Fc[:, 1]] - m.vertices[Fc[:, 0]], m.vertices[Fc[:, 2]] - m.vertices[Fc[:, 0]]) @ n
+            Fc[nrm > 0] = Fc[nrm > 0][:, ::-1]
+        m = trimesh.Trimesh(np.asarray(m.vertices), np.r_[np.asarray(m.faces), Fc], process=False)
+    m.merge_vertices(); m.update_faces(m.nondegenerate_faces()); m.remove_unreferenced_vertices()
     return m
 
 

@@ -50,6 +50,7 @@ unit = S.unit; D2R = math.pi / 180
 ID = "split-knuckle-twosided-3r"
 RATE_MAX = 3.45
 BOSS_R, PAD_R, KNEE_W = PK.BOSS_R, PK.PAD_R, PK.KNEE_W
+REPORT_KEYS = ("k2", "k2_idle", "why", "parts_ib14", "parts_pairs", "plain", "gap_near1", "min_metal_mm", "overhead140", "drive")
 
 # the verified winner (docs/concepts/rows/geneva-tail-knuckle-pinknee-3r.json best_params), rod embodiment
 WIN = {"emb_mode": "rod", "kK": 3.1796, "r_horn": 2.4932, "r_lobe": 9.0, "bk1": 31.2491, "bk2": 37.9937, "a1max": 58.3565, "smhi": 13.6865,
@@ -429,6 +430,10 @@ def _report(B, params):
                    psi0=round(L.get("psi0", 0.0), 1), folded_lawok=int(k2p.sum()), folded_kin=int((ko & k2p).sum()),
                    folded_ws_taken=int((tk & ws & k2p).sum()), folded_clip=int((k2p & ~ws).sum()),
                    fK2=round(float(getattr(M, "fK2", 0.0)), 1), rod2=getattr(M, "_rod2_info", None))
+    if p.get("k2") and r["k2"]["folded_ws_taken"] == 0:
+        # measured 16:10 (500 farm configs): a K2 that never engages on a taken pose is the winner + dead metal (24.5 at best,
+        # near-straight K2 where a2e cannot fall as fast as th); flagged so tools/concept_cma.py adds 100 and never settles there
+        r["k2_idle"] = True; r["honest"] = False
     return r, M
 
 
