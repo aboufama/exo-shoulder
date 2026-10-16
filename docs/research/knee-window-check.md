@@ -1,4 +1,4 @@
-# Knee-window singularity check: minarc BDp vs the pin knee H1 (2026-10-16 ~12:35 UTC)
+# Knee-window singularity check: minarc BDp vs the pin knee H1 (2026-10-16 ~12:10 UTC)
 
 **Answer: no. BDp's verified lead over H1 does not depend on its narrower knee window.**
 
@@ -139,5 +139,5 @@ Findings:
 
 Files:
 - `docs/research/knee_window_check.py`
-- `docs/research/knee_window/` (`conn_*.json`, `wear_{BDp,BDp30,H1}_{bench,held}.json` + logs, `stats.jsonl`,
+- `docs/research/knee_window/` (`conn_*.json`, `wear_{BDp,BDp30,H1}_{bench,held}.json`, `stats.jsonl`,
   `feel_{BDp,H1}_{bench,held}.json`)

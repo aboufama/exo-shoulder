@@ -3240,4 +3240,4 @@
   "source": "swarm",
   "affects": "minarc-stop-knuckle-4r"
  }
-]
+,{"time":"2026-10-16T12:11:00Z","kind":"verify","event":"Knee-window singularity check of minarc BDp: its lead does NOT depend on the knee window - refitted at H1's ang_min 30.46 (from 24.95) it measures the same 19.06 bench / 23.24 held out (frozen exact, margin 5, continuity; H1 27.20 / 31.39 same harness, lead 8.14 / 8.15); BDp's knee reaches 149.48 deg on the bench (30.5 from straight, inside H1's window; H1 32.7), 154.0 on one held-out pose; clips stay 47 deg off straight; feel: cuff friction <= 0.29 N (knee 0.09 N, edge bound 0.18 N), no jam (needs < 0.9 deg), no branch flip; build condition: a physical knee stop at 149.5 deg (free, removes the toggle path); farm ~$0.03 - docs/research/knee-window-check.md","source":"swarm","affects":"minarc-stop-knuckle-4r"}]
