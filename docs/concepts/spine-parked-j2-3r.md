@@ -362,3 +362,75 @@ Two family-1 seat sets were tested, with arcs from the fold law: (a) J1 bvec(120
   - The fold law's seats are real, but not wearable within the band.
 * **Gate on the whole history** (6915 tries in order): gain 0.3 score points over the second half and
   0.3 over the last third; top 5 within 0.04 (gaps [28.49, 28.51, 28.52, 28.56, 28.6]). **Converged.**
+
+## Verification (adversarial verifier, 2026-10-16 03:50 UTC)
+
+**Verdict: verified, not refuted.** The fast leader k7008 (claimed 28.49) worn frozen on Bench(110,360) exact with the
+verifier's corrected checks scores **v_gap 34.29** (score 87.53). That is far better than the champion's **75.94** on
+the same bench and checks (the risley-turret verifier's kit checks + 1 mm radial clearance). No hard rule is broken. It
+does **not** cross 27.5: the fast-to-frozen loss is +5.8 gap points, almost all of it reach.
+
+Harness: `docs/concepts/verify/spine-parked-j2-3r.py`. Numbers: `docs/concepts/verify/spine-parked-j2-3r.results.json`.
+Everything ran on the farm (6 jobs, about $0.13).
+
+| run (k7008 unless stated) | gap | reach | follow | in-band 14 | in-band 10 | contact | near-touch gap | min metal mm |
+|---|---|---|---|---|---|---|---|---|
+| claim, Bench(60,160) fast | 28.49 | 0.663 | 0.967 | 0.876 | 0.522 | 0.024 | 38.82 | 0.02 |
+| Bench(60,160) **exact**, refit, 1 mm radial K6, top faces | 28.61 | 0.663 | 0.967 | 0.875 | 0.523 | 0.024 | 38.95 | 0.01 |
+| **Bench(110,360) exact, frozen, 1 mm radial, crowns + top faces (v_*)** | **34.29** | 0.594 | 0.955 | 0.878 | 0.524 | 0.015 | 40.15 | 0.01 |
+| same shape, O17 J2 hub | 35.18 | 0.594 | 0.955 | 0.869 | 0.486 | 0.015 | 40.46 | 0.01 |
+| same shape, O17 J2 + O17 J3 | 35.29 | 0.594 | 0.955 | 0.868 | 0.485 | 0.015 | 40.57 | 0.01 |
+| CMA-B shape, frozen exact (claim 34.79, reproduced) | 34.79 | 0.619 | 1.000 | 0.850 | 0.444 | 0.018 | 37.64 | 0.15 |
+| k2445, frozen exact (was pending) | 35.86 | 0.619 | 1.000 | 0.837 | 0.416 | 0.015 | 39.29 | 0.36 |
+| champion 3R, Bench(110,360) exact, kit checks + 1 mm radial (risley-turret verifier) | 75.94 | 0.742 | 0.927 | 0.413 | 0.256 | 0.091 | | |
+
+What was checked:
+
+1. **DOF (R5 / R17): pass.**
+   - Three active pins whose axes meet at GH: J1 fixed in the scapula, J3 fixed in the humerus band frame, J2 set by
+     the K1 closure on a fixed branch.
+   - That is 0 passive translations, 0 passive rotations and no undetermined coordinate.
+   - The maximum closure residual over the taken poses is 4e-10 deg, and the fold margin is >= 10.0 deg.
+   - Dense K2 (2-deg interpolation between bench frames) finds 0 flips.
+2. **Real size and sampling: pass, with soft notes.**
+   - Every member is in the chain: hub 1 (O20), hubs 2 and 3 (O15, 12.25 mm stack), links 1 and 2 (12 x 3), and the
+     K7 14 x 6 neck.
+   - Sampling is the kit's dense sampling with no near-skin filter, and the kit audit is clean.
+   - The declared-slim-hub audit applies the O20 coverage rule scaled to the declared disc. That is fair: the O15
+     disc is fully sampled, and the crowns and walls are checked at the declared radius.
+   - Soft note 1: the O15 housing is a machined part, not a catalogue entry. The hand calc in this doc makes it
+     plausible. The conservative O17 costs +0.9 frozen exact (35.18).
+   - Soft note 2: the base member from hub 1 to the scapula handler is not modelled. The same is true of every kit
+     model and the champion, so the comparison is like for like. But link 1 ramps down to hub 2's foot over the
+     posterior acromion, which is where a base running medially would go. The CAD must route the base under link 1,
+     or anterior to it.
+3. **Honest pose-taking: pass.** Added checks:
+   - **1 mm radial part-part clearance** in K6 on every run, including the Bench(60,160) exact refit. It changed
+     nothing at 60/160. Frozen on 360, 0.3 % of the closing poses collide.
+   - **Top-face skin check on every member** (strap tops, neck top, hub crowns). It finds 2 top-face penetrations
+     (link 2) in the frozen run, but only in poses that were already counted as contact, so the gap does not move.
+   - **Hub-axis accessibility.** Hub levels are F 50 / 58 / 72 mm, all far inside 140 mm, with nothing above the
+     crowns.
+   - Held-out clips are refused by the kit.
+4. **Bench artefacts: none.** The exact Bench(60,160) refit gives 28.61 against 28.49 fast.
+5. **Where the number is optimistic (the red team).**
+   - **Fold boundary tuned to the 160 poses (lesson c).** k7008's tighter arcs (a1 37.6) buy 1.3 fast points over
+     CMA-B, but frozen they lose more reach (0.594 vs 0.619) and 5 clip frames (follow 0.955).
+   - Net frozen: k7008 is 34.29 and B is 34.79, so k7008 is still the best by 0.5. That difference is within the
+     knife edge.
+   - **Overhead.** 5 of 28 workspace poses at elevation >= 140 are reached (B: 7 of 28). The overhead clip frames
+     are all followed.
+   - **Near-touch.** k7008 has a link 2 / neck face at 0.01 mm in ws #180 (plane -15, elevation 75, axial 90), and
+     0.14 mm at #264 (overhead, plane 30, elevation 165) and at #139.
+   - With metal < 1 mm counted as contact, k7008 is 40.15, worse than B (37.64) and k2445 (39.29, min metal 0.36 mm).
+     **The robust pick for CAD is the CMA-B shape** (34.79 / near 37.64), or the D variant from the table above
+     (34.83 / near 36.59, min 0.43 mm). k7008 is the bench's best by 0.5, and it sits on the skin.
+   - **Not on this bench.** GH translation (R10). With zero passive freedoms, all humeral-head translation must go
+     into the cuff liner or the base slip. That is a real risk for a zero-passive chain, and it is the price paid for
+     the ranking win over slide designs.
+6. **Champion comparison.** The champion is 75.94 on Bench(110,360) exact with kit checks + 1 mm radial (refit
+   protocol). These checks are the same kit checks + 1 mm radial, plus the crown and top-face checks, which moved
+   nothing here. The frozen protocol is the stricter one for the challenger. So v_gap 34.29 against 75.94: **not
+   refuted**.
+   - Against the board: 8.3 better than the 2-slide leader's verified 42.59 (VModel harness), and 0.45 ahead of the
+     pin knee's 33.84 exact. Both are within the cross-harness noise, so the result is level with the pin knee.

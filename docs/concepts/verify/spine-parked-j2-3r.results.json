@@ -1,0 +1,1084 @@
+{
+ "B_frozen": {
+  "task": "frozen",
+  "params": {
+   "az": 102.7793,
+   "el": 65.3479,
+   "a1": 40.6794,
+   "a2": 73.7554,
+   "wd": 84.4912,
+   "wa": -12.7631,
+   "sigma": -1,
+   "margin": 10.0,
+   "width": 12.0,
+   "t_link": 3.0,
+   "q": 0.979,
+   "rad1": 10.0,
+   "rad2": 7.5,
+   "rad3": 7.5,
+   "vm": 0,
+   "end_extra": 0.2389,
+   "near": 0
+  },
+  "exact": true,
+  "fit": {
+   "gap": 30.24,
+   "reach": 0.6813,
+   "follow": 1.0,
+   "inband14": 0.8506,
+   "inband10": 0.438,
+   "contact": 0.0343,
+   "honest": true,
+   "audit": [],
+   "mode": "fast"
+  },
+  "secs": 254.0,
+  "run": {
+   "mode": "exact",
+   "gap": 34.79,
+   "reach": 0.6194,
+   "follow": 1.0,
+   "inband14": 0.8504,
+   "inband10": 0.4438,
+   "contact": 0.0177,
+   "honest": true,
+   "audit": [],
+   "declared_hubs": {
+    "J2": {
+     "rad": 7.5,
+     "component": "O15 slim hub: MR117-2RS pair (O11) in a 2.0 mm Ti wall, 12.25 mm stack (hand calc in the doc)",
+     "cover": 0.978,
+     "reach": 7.4
+    },
+    "J3": {
+     "rad": 7.5,
+     "component": "O15 slim hub: MR117-2RS pair (O11) in a 2.0 mm Ti wall, 12.25 mm stack (hand calc in the doc)",
+     "cover": 0.978,
+     "reach": 7.4
+    }
+   },
+   "gap_near1": 37.64,
+   "near1": {
+    "reach": 0.6056,
+    "follow": 1.0,
+    "inband14": 0.8504,
+    "contact": 0.0324
+   },
+   "min_metal_skin": 0.15,
+   "near_low": [
+    {
+     "mm": 0.15,
+     "i": 180,
+     "kind": "ws",
+     "plane": -15.0,
+     "elev": 75.0,
+     "axial": 90.0,
+     "crown": "face"
+    },
+    {
+     "mm": 0.17,
+     "i": 289,
+     "kind": "ws",
+     "plane": 45.0,
+     "elev": 150.0,
+     "axial": -90.0,
+     "crown": "face"
+    },
+    {
+     "mm": 0.29,
+     "i": 279,
+     "kind": "ws",
+     "plane": 45.0,
+     "elev": 75.0,
+     "axial": -105.0,
+     "crown": "face"
+    },
+    {
+     "mm": 0.5,
+     "i": 264,
+     "kind": "ws",
+     "plane": 30.0,
+     "elev": 165.0,
+     "axial": -60.0,
+     "crown": "face"
+    },
+    {
+     "mm": 0.59,
+     "i": 371,
+     "kind": "ws",
+     "plane": 90.0,
+     "elev": 150.0,
+     "axial": -60.0,
+     "crown": "face"
+    }
+   ],
+   "crown_contact_poses": 2,
+   "crown_min": -1.24,
+   "closure": 0.7234,
+   "flips": 0,
+   "collide": 0.0029,
+   "min_margin": 10.64,
+   "residual_deg": 0.0,
+   "overhead": {
+    "n_ws": 28,
+    "reach": 0.25,
+    "n_clip": 10,
+    "follow": 1.0,
+    "n_taken": 17,
+    "inband14": 0.8744,
+    "inband10": 0.6015
+   },
+   "inband_member": {
+    "hub1": 0.9939,
+    "hub2": 1.0,
+    "hub3": 0.8482,
+    "link1": 0.9883,
+    "link2": 0.7376,
+    "neck": 0.8238
+   },
+   "mass_g": 88.2
+  },
+  "verifier": {
+   "v": {
+    "reach": 0.6194,
+    "follow": 1.0,
+    "inband14": 0.8504,
+    "inband10": 0.4438,
+    "contact": 0.0177,
+    "gap": 34.79
+   },
+   "v_near1": {
+    "reach": 0.6056,
+    "follow": 1.0,
+    "inband14": 0.8504,
+    "inband10": 0.4438,
+    "contact": 0.0324,
+    "gap": 37.64
+   },
+   "top_contact_poses": 1,
+   "top_contact_who": [
+    "link2"
+   ],
+   "top_min": -0.57,
+   "min_metal_all_faces": 0.15,
+   "closure_residual_max_deg": 3.7766767491120845e-10,
+   "hub_F": {
+    "hub1": 51.0,
+    "hub2": 60.0,
+    "hub3": 71.0
+   },
+   "strap_levels": {
+    "link1": {
+     "med": 54.1,
+     "max": 60.0
+    },
+    "link2": {
+     "med": 63.3,
+     "max": 84.0
+    },
+    "neck": {
+     "med": 80.0,
+     "max": 100.3
+    }
+   },
+   "hub_F_ok": true,
+   "n_taken": 333,
+   "n": 470
+  }
+ },
+ "G_fit60x": {
+  "task": "fit60",
+  "params": {
+   "az": 104.4108,
+   "el": 67.05,
+   "a1": 37.6069,
+   "a2": 73.6262,
+   "wd": 82.0601,
+   "wa": -14.086,
+   "q": 0.9721,
+   "rad2": 7.5,
+   "rad3": 7.5,
+   "end_extra": 1.0219,
+   "sigma": -1
+  },
+  "exact": true,
+  "fit": null,
+  "secs": 453.2,
+  "run": {
+   "mode": "exact",
+   "gap": 28.61,
+   "reach": 0.6625,
+   "follow": 0.9667,
+   "inband14": 0.8752,
+   "inband10": 0.5227,
+   "contact": 0.0238,
+   "honest": true,
+   "audit": [],
+   "declared_hubs": {
+    "J2": {
+     "rad": 7.5,
+     "component": "O15 slim hub: MR117-2RS pair (O11) in a 2.0 mm Ti wall, 12.25 mm stack (hand calc in the doc)",
+     "cover": 0.978,
+     "reach": 7.4
+    },
+    "J3": {
+     "rad": 7.5,
+     "component": "O15 slim hub: MR117-2RS pair (O11) in a 2.0 mm Ti wall, 12.25 mm stack (hand calc in the doc)",
+     "cover": 0.978,
+     "reach": 7.4
+    }
+   },
+   "gap_near1": 38.95,
+   "near1": {
+    "reach": 0.6125,
+    "follow": 0.95,
+    "inband14": 0.8754,
+    "contact": 0.0774
+   },
+   "min_metal_skin": 0.01,
+   "near_low": [
+    {
+     "mm": 0.01,
+     "i": 91,
+     "kind": "ws",
+     "plane": -15.0,
+     "elev": 75.0,
+     "axial": 90.0,
+     "crown": "face"
+    },
+    {
+     "mm": 0.11,
+     "i": 35,
+     "kind": "clip",
+     "plane": 81.26423645019531,
+     "elev": 125.74600219726562,
+     "axial": -81.26423645019531,
+     "crown": "face"
+    },
+    {
+     "mm": 0.13,
+     "i": 92,
+     "kind": "ws",
+     "plane": -15.0,
+     "elev": 90.0,
+     "axial": 60.0,
+     "crown": "face"
+    },
+    {
+     "mm": 0.28,
+     "i": 150,
+     "kind": "ws",
+     "plane": 60.0,
+     "elev": 120.0,
+     "axial": -90.0,
+     "crown": "face"
+    },
+    {
+     "mm": 0.33,
+     "i": 209,
+     "kind": "ws",
+     "plane": 135.0,
+     "elev": 120.0,
+     "axial": -45.0,
+     "crown": "face"
+    }
+   ],
+   "crown_contact_poses": 2,
+   "crown_min": -4.25,
+   "closure": 0.7636,
+   "flips": 0,
+   "collide": 0.0,
+   "min_margin": 10.05,
+   "residual_deg": 0.0,
+   "overhead": {
+    "n_ws": 12,
+    "reach": 0.0,
+    "n_clip": 5,
+    "follow": 1.0,
+    "n_taken": 5,
+    "inband14": 0.8928,
+    "inband10": 0.6569
+   },
+   "inband_member": {
+    "hub1": 0.997,
+    "hub2": 1.0,
+    "hub3": 0.8448,
+    "link1": 1.0,
+    "link2": 0.7853,
+    "neck": 0.8477
+   },
+   "mass_g": 86.1
+  },
+  "verifier": {
+   "v": {
+    "reach": 0.6625,
+    "follow": 0.9667,
+    "inband14": 0.8752,
+    "inband10": 0.5227,
+    "contact": 0.0238,
+    "gap": 28.61
+   },
+   "v_near1": {
+    "reach": 0.6125,
+    "follow": 0.95,
+    "inband14": 0.8754,
+    "inband10": 0.5173,
+    "contact": 0.0774,
+    "gap": 38.95
+   },
+   "top_contact_poses": 3,
+   "top_contact_who": [
+    "hub1",
+    "hub2",
+    "link2"
+   ],
+   "top_min": -2.31,
+   "min_metal_all_faces": 0.01,
+   "closure_residual_max_deg": 4.0955683289212175e-10,
+   "hub_F": {
+    "hub1": 50.0,
+    "hub2": 58.0,
+    "hub3": 72.0
+   },
+   "strap_levels": {
+    "link1": {
+     "med": 53.1,
+     "max": 58.0
+    },
+    "link2": {
+     "med": 63.0,
+     "max": 84.0
+    },
+    "neck": {
+     "med": 80.3,
+     "max": 100.3
+    }
+   },
+   "hub_F_ok": true,
+   "n_taken": 164,
+   "n": 220
+  }
+ },
+ "G_frozen": {
+  "task": "frozen",
+  "params": {
+   "az": 104.4108,
+   "el": 67.05,
+   "a1": 37.6069,
+   "a2": 73.6262,
+   "wd": 82.0601,
+   "wa": -14.086,
+   "q": 0.9721,
+   "rad2": 7.5,
+   "rad3": 7.5,
+   "end_extra": 1.0219,
+   "sigma": -1
+  },
+  "exact": true,
+  "fit": {
+   "gap": 28.49,
+   "reach": 0.6625,
+   "follow": 0.9667,
+   "inband14": 0.8764,
+   "inband10": 0.5217,
+   "contact": 0.0238,
+   "honest": true,
+   "audit": [],
+   "mode": "fast"
+  },
+  "secs": 247.8,
+  "run": {
+   "mode": "exact",
+   "gap": 34.29,
+   "reach": 0.5944,
+   "follow": 0.9545,
+   "inband14": 0.8781,
+   "inband10": 0.5242,
+   "contact": 0.0154,
+   "honest": true,
+   "audit": [],
+   "declared_hubs": {
+    "J2": {
+     "rad": 7.5,
+     "component": "O15 slim hub: MR117-2RS pair (O11) in a 2.0 mm Ti wall, 12.25 mm stack (hand calc in the doc)",
+     "cover": 0.978,
+     "reach": 7.4
+    },
+    "J3": {
+     "rad": 7.5,
+     "component": "O15 slim hub: MR117-2RS pair (O11) in a 2.0 mm Ti wall, 12.25 mm stack (hand calc in the doc)",
+     "cover": 0.978,
+     "reach": 7.4
+    }
+   },
+   "gap_near1": 40.15,
+   "near1": {
+    "reach": 0.5667,
+    "follow": 0.9545,
+    "inband14": 0.8781,
+    "contact": 0.0463
+   },
+   "min_metal_skin": 0.01,
+   "near_low": [
+    {
+     "mm": 0.01,
+     "i": 180,
+     "kind": "ws",
+     "plane": -15.0,
+     "elev": 75.0,
+     "axial": 90.0,
+     "crown": "face"
+    },
+    {
+     "mm": 0.14,
+     "i": 264,
+     "kind": "ws",
+     "plane": 30.0,
+     "elev": 165.0,
+     "axial": -60.0,
+     "crown": "face"
+    },
+    {
+     "mm": 0.14,
+     "i": 139,
+     "kind": "ws",
+     "plane": -60.0,
+     "elev": 60.0,
+     "axial": 105.0,
+     "crown": "face"
+    },
+    {
+     "mm": 0.49,
+     "i": 286,
+     "kind": "ws",
+     "plane": 45.0,
+     "elev": 120.0,
+     "axial": -90.0,
+     "crown": "face"
+    },
+    {
+     "mm": 0.51,
+     "i": 203,
+     "kind": "ws",
+     "plane": 0.0,
+     "elev": 90.0,
+     "axial": 45.0,
+     "crown": "face"
+    }
+   ],
+   "crown_contact_poses": 0,
+   "crown_min": 1.65,
+   "closure": 0.6915,
+   "flips": 0,
+   "collide": 0.0031,
+   "min_margin": 10.0,
+   "residual_deg": 0.0,
+   "overhead": {
+    "n_ws": 28,
+    "reach": 0.1786,
+    "n_clip": 10,
+    "follow": 1.0,
+    "n_taken": 15,
+    "inband14": 0.8978,
+    "inband10": 0.6623
+   },
+   "inband_member": {
+    "hub1": 0.9971,
+    "hub2": 0.9998,
+    "hub3": 0.8392,
+    "link1": 1.0,
+    "link2": 0.7946,
+    "neck": 0.8469
+   },
+   "mass_g": 86.1
+  },
+  "verifier": {
+   "v": {
+    "reach": 0.5944,
+    "follow": 0.9545,
+    "inband14": 0.8781,
+    "inband10": 0.5242,
+    "contact": 0.0154,
+    "gap": 34.29
+   },
+   "v_near1": {
+    "reach": 0.5667,
+    "follow": 0.9545,
+    "inband14": 0.8781,
+    "inband10": 0.5242,
+    "contact": 0.0463,
+    "gap": 40.15
+   },
+   "top_contact_poses": 2,
+   "top_contact_who": [
+    "link2"
+   ],
+   "top_min": -1.88,
+   "min_metal_all_faces": 0.01,
+   "closure_residual_max_deg": 4.056630587001564e-10,
+   "hub_F": {
+    "hub1": 50.0,
+    "hub2": 58.0,
+    "hub3": 72.0
+   },
+   "strap_levels": {
+    "link1": {
+     "med": 53.1,
+     "max": 58.0
+    },
+    "link2": {
+     "med": 62.3,
+     "max": 83.3
+    },
+    "neck": {
+     "med": 80.3,
+     "max": 100.3
+    }
+   },
+   "hub_F_ok": true,
+   "n_taken": 319,
+   "n": 470
+  }
+ },
+ "G_o17_frozen": {
+  "task": "frozen",
+  "params": {
+   "az": 104.4108,
+   "el": 67.05,
+   "a1": 37.6069,
+   "a2": 73.6262,
+   "wd": 82.0601,
+   "wa": -14.086,
+   "q": 0.9721,
+   "rad2": 8.5,
+   "rad3": 7.5,
+   "end_extra": 1.0219,
+   "sigma": -1
+  },
+  "exact": true,
+  "fit": {
+   "gap": 29.4,
+   "reach": 0.6625,
+   "follow": 0.9667,
+   "inband14": 0.8673,
+   "inband10": 0.4843,
+   "contact": 0.0238,
+   "honest": true,
+   "audit": [],
+   "mode": "fast"
+  },
+  "secs": 213.7,
+  "run": {
+   "mode": "exact",
+   "gap": 35.18,
+   "reach": 0.5944,
+   "follow": 0.9545,
+   "inband14": 0.8692,
+   "inband10": 0.4855,
+   "contact": 0.0154,
+   "honest": true,
+   "audit": [],
+   "declared_hubs": {
+    "J2": {
+     "rad": 8.5,
+     "component": "O17 hub: MR117-2RS pair in a 2.75 mm Ti wall (conservative slim), 12.25 mm stack",
+     "cover": 0.955,
+     "reach": 8.3
+    },
+    "J3": {
+     "rad": 7.5,
+     "component": "O15 slim hub: MR117-2RS pair (O11) in a 2.0 mm Ti wall, 12.25 mm stack (hand calc in the doc)",
+     "cover": 0.978,
+     "reach": 7.4
+    }
+   },
+   "gap_near1": 40.46,
+   "near1": {
+    "reach": 0.5694,
+    "follow": 0.9545,
+    "inband14": 0.8692,
+    "contact": 0.0432
+   },
+   "min_metal_skin": 0.01,
+   "near_low": [
+    {
+     "mm": 0.01,
+     "i": 180,
+     "kind": "ws",
+     "plane": -15.0,
+     "elev": 75.0,
+     "axial": 90.0,
+     "crown": "face"
+    },
+    {
+     "mm": 0.14,
+     "i": 264,
+     "kind": "ws",
+     "plane": 30.0,
+     "elev": 165.0,
+     "axial": -60.0,
+     "crown": "face"
+    },
+    {
+     "mm": 0.14,
+     "i": 139,
+     "kind": "ws",
+     "plane": -60.0,
+     "elev": 60.0,
+     "axial": 105.0,
+     "crown": "face"
+    },
+    {
+     "mm": 0.49,
+     "i": 286,
+     "kind": "ws",
+     "plane": 45.0,
+     "elev": 120.0,
+     "axial": -90.0,
+     "crown": "face"
+    },
+    {
+     "mm": 0.67,
+     "i": 291,
+     "kind": "ws",
+     "plane": 45.0,
+     "elev": 165.0,
+     "axial": -75.0,
+     "crown": "face"
+    }
+   ],
+   "crown_contact_poses": 0,
+   "crown_min": 1.86,
+   "closure": 0.6915,
+   "flips": 0,
+   "collide": 0.0031,
+   "min_margin": 10.0,
+   "residual_deg": 0.0,
+   "overhead": {
+    "n_ws": 28,
+    "reach": 0.1786,
+    "n_clip": 10,
+    "follow": 1.0,
+    "n_taken": 15,
+    "inband14": 0.895,
+    "inband10": 0.625
+   },
+   "inband_member": {
+    "hub1": 0.9971,
+    "hub2": 1.0,
+    "hub3": 0.8392,
+    "link1": 1.0,
+    "link2": 0.766,
+    "neck": 0.8469
+   },
+   "mass_g": 88.6
+  },
+  "verifier": {
+   "v": {
+    "reach": 0.5944,
+    "follow": 0.9545,
+    "inband14": 0.8692,
+    "inband10": 0.4855,
+    "contact": 0.0154,
+    "gap": 35.18
+   },
+   "v_near1": {
+    "reach": 0.5694,
+    "follow": 0.9545,
+    "inband14": 0.8692,
+    "inband10": 0.4855,
+    "contact": 0.0432,
+    "gap": 40.46
+   },
+   "top_contact_poses": 2,
+   "top_contact_who": [
+    "link2"
+   ],
+   "top_min": -1.88,
+   "min_metal_all_faces": 0.01,
+   "closure_residual_max_deg": 4.056630587001564e-10,
+   "hub_F": {
+    "hub1": 50.0,
+    "hub2": 59.0,
+    "hub3": 72.0
+   },
+   "strap_levels": {
+    "link1": {
+     "med": 53.1,
+     "max": 59.0
+    },
+    "link2": {
+     "med": 63.0,
+     "max": 83.3
+    },
+    "neck": {
+     "med": 80.3,
+     "max": 100.3
+    }
+   },
+   "hub_F_ok": true,
+   "n_taken": 319,
+   "n": 470
+  }
+ },
+ "G_o17o17_frozen": {
+  "task": "frozen",
+  "params": {
+   "az": 104.4108,
+   "el": 67.05,
+   "a1": 37.6069,
+   "a2": 73.6262,
+   "wd": 82.0601,
+   "wa": -14.086,
+   "q": 0.9721,
+   "rad2": 8.5,
+   "rad3": 8.5,
+   "end_extra": 1.0219,
+   "sigma": -1
+  },
+  "exact": true,
+  "fit": {
+   "gap": 29.51,
+   "reach": 0.6625,
+   "follow": 0.9667,
+   "inband14": 0.8662,
+   "inband10": 0.4832,
+   "contact": 0.0238,
+   "honest": true,
+   "audit": [],
+   "mode": "fast"
+  },
+  "secs": 283.5,
+  "run": {
+   "mode": "exact",
+   "gap": 35.29,
+   "reach": 0.5944,
+   "follow": 0.9545,
+   "inband14": 0.8681,
+   "inband10": 0.4846,
+   "contact": 0.0154,
+   "honest": true,
+   "audit": [],
+   "declared_hubs": {
+    "J2": {
+     "rad": 8.5,
+     "component": "O17 hub: MR117-2RS pair in a 2.75 mm Ti wall (conservative slim), 12.25 mm stack",
+     "cover": 0.955,
+     "reach": 8.3
+    },
+    "J3": {
+     "rad": 8.5,
+     "component": "O17 hub: MR117-2RS pair in a 2.75 mm Ti wall (conservative slim), 12.25 mm stack",
+     "cover": 0.955,
+     "reach": 8.3
+    }
+   },
+   "gap_near1": 40.57,
+   "near1": {
+    "reach": 0.5694,
+    "follow": 0.9545,
+    "inband14": 0.8681,
+    "contact": 0.0432
+   },
+   "min_metal_skin": 0.01,
+   "near_low": [
+    {
+     "mm": 0.01,
+     "i": 180,
+     "kind": "ws",
+     "plane": -15.0,
+     "elev": 75.0,
+     "axial": 90.0,
+     "crown": "face"
+    },
+    {
+     "mm": 0.14,
+     "i": 264,
+     "kind": "ws",
+     "plane": 30.0,
+     "elev": 165.0,
+     "axial": -60.0,
+     "crown": "face"
+    },
+    {
+     "mm": 0.14,
+     "i": 139,
+     "kind": "ws",
+     "plane": -60.0,
+     "elev": 60.0,
+     "axial": 105.0,
+     "crown": "face"
+    },
+    {
+     "mm": 0.49,
+     "i": 286,
+     "kind": "ws",
+     "plane": 45.0,
+     "elev": 120.0,
+     "axial": -90.0,
+     "crown": "face"
+    },
+    {
+     "mm": 0.67,
+     "i": 291,
+     "kind": "ws",
+     "plane": 45.0,
+     "elev": 165.0,
+     "axial": -75.0,
+     "crown": "face"
+    }
+   ],
+   "crown_contact_poses": 0,
+   "crown_min": 1.86,
+   "closure": 0.6915,
+   "flips": 0,
+   "collide": 0.0031,
+   "min_margin": 10.0,
+   "residual_deg": 0.0,
+   "overhead": {
+    "n_ws": 28,
+    "reach": 0.1786,
+    "n_clip": 10,
+    "follow": 1.0,
+    "n_taken": 15,
+    "inband14": 0.8954,
+    "inband10": 0.6256
+   },
+   "inband_member": {
+    "hub1": 0.9971,
+    "hub2": 1.0,
+    "hub3": 0.8263,
+    "link1": 1.0,
+    "link2": 0.766,
+    "neck": 0.8469
+   },
+   "mass_g": 91.0
+  },
+  "verifier": {
+   "v": {
+    "reach": 0.5944,
+    "follow": 0.9545,
+    "inband14": 0.8681,
+    "inband10": 0.4846,
+    "contact": 0.0154,
+    "gap": 35.29
+   },
+   "v_near1": {
+    "reach": 0.5694,
+    "follow": 0.9545,
+    "inband14": 0.8681,
+    "inband10": 0.4846,
+    "contact": 0.0432,
+    "gap": 40.57
+   },
+   "top_contact_poses": 2,
+   "top_contact_who": [
+    "link2"
+   ],
+   "top_min": -1.88,
+   "min_metal_all_faces": 0.01,
+   "closure_residual_max_deg": 4.056630587001564e-10,
+   "hub_F": {
+    "hub1": 50.0,
+    "hub2": 59.0,
+    "hub3": 72.0
+   },
+   "strap_levels": {
+    "link1": {
+     "med": 53.1,
+     "max": 59.0
+    },
+    "link2": {
+     "med": 63.0,
+     "max": 83.3
+    },
+    "neck": {
+     "med": 80.3,
+     "max": 100.3
+    }
+   },
+   "hub_F_ok": true,
+   "n_taken": 319,
+   "n": 470
+  }
+ },
+ "k2445_frozen": {
+  "task": "frozen",
+  "params": {
+   "az": 104.2349,
+   "el": 66.2139,
+   "a1": 40.5636,
+   "a2": 74.7016,
+   "wd": 84.1994,
+   "wa": -11.1052,
+   "q": 0.983,
+   "rad2": 7.5,
+   "rad3": 7.5,
+   "end_extra": 0.1495,
+   "sigma": -1
+  },
+  "exact": true,
+  "fit": {
+   "gap": 29.31,
+   "reach": 0.6937,
+   "follow": 1.0,
+   "inband14": 0.8361,
+   "inband10": 0.4108,
+   "contact": 0.0229,
+   "honest": true,
+   "audit": [],
+   "mode": "fast"
+  },
+  "secs": 396.7,
+  "run": {
+   "mode": "exact",
+   "gap": 35.86,
+   "reach": 0.6194,
+   "follow": 1.0,
+   "inband14": 0.8368,
+   "inband10": 0.416,
+   "contact": 0.0148,
+   "honest": true,
+   "audit": [],
+   "declared_hubs": {
+    "J2": {
+     "rad": 7.5,
+     "component": "O15 slim hub: MR117-2RS pair (O11) in a 2.0 mm Ti wall, 12.25 mm stack (hand calc in the doc)",
+     "cover": 0.978,
+     "reach": 7.4
+    },
+    "J3": {
+     "rad": 7.5,
+     "component": "O15 slim hub: MR117-2RS pair (O11) in a 2.0 mm Ti wall, 12.25 mm stack (hand calc in the doc)",
+     "cover": 0.978,
+     "reach": 7.4
+    }
+   },
+   "gap_near1": 39.29,
+   "near1": {
+    "reach": 0.6028,
+    "follow": 1.0,
+    "inband14": 0.8368,
+    "contact": 0.0325
+   },
+   "min_metal_skin": 0.36,
+   "near_low": [
+    {
+     "mm": 0.36,
+     "i": 289,
+     "kind": "ws",
+     "plane": 45.0,
+     "elev": 150.0,
+     "axial": -90.0,
+     "crown": "face"
+    },
+    {
+     "mm": 0.37,
+     "i": 279,
+     "kind": "ws",
+     "plane": 45.0,
+     "elev": 75.0,
+     "axial": -105.0,
+     "crown": "face"
+    },
+    {
+     "mm": 0.39,
+     "i": 139,
+     "kind": "ws",
+     "plane": -60.0,
+     "elev": 60.0,
+     "axial": 105.0,
+     "crown": "face"
+    },
+    {
+     "mm": 0.49,
+     "i": 180,
+     "kind": "ws",
+     "plane": -15.0,
+     "elev": 75.0,
+     "axial": 90.0,
+     "crown": "face"
+    },
+    {
+     "mm": 0.82,
+     "i": 264,
+     "kind": "ws",
+     "plane": 30.0,
+     "elev": 165.0,
+     "axial": -60.0,
+     "crown": "face"
+    }
+   ],
+   "crown_contact_poses": 1,
+   "crown_min": -0.15,
+   "closure": 0.7255,
+   "flips": 0,
+   "collide": 0.0088,
+   "min_margin": 10.2,
+   "residual_deg": 0.0,
+   "overhead": {
+    "n_ws": 28,
+    "reach": 0.25,
+    "n_clip": 10,
+    "follow": 1.0,
+    "n_taken": 17,
+    "inband14": 0.8517,
+    "inband10": 0.5739
+   },
+   "inband_member": {
+    "hub1": 0.991,
+    "hub2": 0.9977,
+    "hub3": 0.8283,
+    "link1": 0.9835,
+    "link2": 0.7206,
+    "neck": 0.8018
+   },
+   "mass_g": 87.3
+  },
+  "verifier": {
+   "v": {
+    "reach": 0.6194,
+    "follow": 1.0,
+    "inband14": 0.8368,
+    "inband10": 0.416,
+    "contact": 0.0148,
+    "gap": 35.86
+   },
+   "v_near1": {
+    "reach": 0.6028,
+    "follow": 1.0,
+    "inband14": 0.8368,
+    "inband10": 0.416,
+    "contact": 0.0325,
+    "gap": 39.29
+   },
+   "top_contact_poses": 0,
+   "top_contact_who": [],
+   "top_min": 0.13,
+   "min_metal_all_faces": 0.36,
+   "closure_residual_max_deg": 3.753015676011273e-10,
+   "hub_F": {
+    "hub1": 51.0,
+    "hub2": 60.04,
+    "hub3": 71.04
+   },
+   "strap_levels": {
+    "link1": {
+     "med": 54.1,
+     "max": 60.0
+    },
+    "link2": {
+     "med": 63.2,
+     "max": 85.0
+    },
+    "neck": {
+     "med": 80.0,
+     "max": 101.0
+    }
+   },
+   "hub_F_ok": true,
+   "n_taken": 333,
+   "n": 470
+  }
+ }
+}
