@@ -1259,3 +1259,20 @@ kinematics match the model within 1e-4 mm.
   fast, which made the log show 77 "evals/s". After the cap, a card ran 10 workers and 13-14 evals/s. Sharing one
   device grid per GPU through CUDA IPC (GridDev already takes a shared tensor) is the next speed-up. Pod cost about
   $2.6.
+
+## The pin-knee GPU polish's held-out gain is the knee's singularity margin, not a better shape (2026-10-16, independent verifier)
+
+* **Reproduced to the digit.** The CPU kit on the farm, with unchanged harnesses, gives every number the GPU polish
+  claimed. On the polish protocol F2 is 20.26 / near-touch 20.81 against H1's 24.48 / 25.59. Held out, F2 is 27.65,
+  F7 27.22 and F5 27.51, against H1's 28.55.
+* **Where the gain comes from.** The search lowered the knee window ang_min from 30.5 to 22-23 deg, close to the
+  polish bound of 20. The taken knee then runs to 157 deg, 22.7 deg from the straight singular posture, against H1's
+  31.6 deg.
+* **The test.** Put H1's window (ang_min 30.46) back on F2 and F7:
+  * the polish-protocol gain falls from 3.7-4.2 to 0.57;
+  * the held-out gain falls to -0.08 (F7) and -0.73 (F2).
+* **The fold floor.** At the old 10-deg fold margin, both configs lose to H1 by 1.7-2.5 points.
+* **Lesson.** A bound a search tool sets for itself (ang_min >= 20) is not a ruling. A margin that guards a singular
+  posture must be fixed in the objective, or the search spends it to buy reach (CLAUDE.md: the user must have their say
+  first). The next polish (cross-fit) should hold ang_min >= 30 unless the user rules otherwise.
+* Raw data: `docs/research/verify_gpuknee/`. The row fields are `v_gpuknee_*`.

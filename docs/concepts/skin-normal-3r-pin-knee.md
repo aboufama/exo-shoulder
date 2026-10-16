@@ -1082,3 +1082,70 @@ independent verifier confirms >= 1 gap point):
 
 The next search should score poses the shape was not fitted on: a 2-fold cross-fit objective. The port takes any Bench
 with a fast grid.
+
+## Verification (massive GPU polish) (independent verifier, 2026-10-16 ~11:45 UTC)
+
+**Claim checked:** the massive GPU polish (`gpu_knee_massive`). Its best, **F2** (cma-b16-g78-7, margin 5.0254), was
+self-measured at 20.26 / near-touch 20.81 on the polish protocol against H1's 24.48 / 25.59, and at 27.65 held out. Its
+best held out, **F7** (cma-b0-g77-1, margin 5.0956), was 27.22 / 29.04 against H1's 28.55 / 31.06. F5 was also checked.
+
+**Harness.** No code from the search driver or the GPU port ran.
+* The polish harness `docs/concepts/verify/skin-normal-3r-pin-knee-polish.py` (fitbig / fit60 / held) and the
+  continuity flood fill `skin-normal-3r-pin-knee-continuity.py` (kin / taken), both imported unchanged.
+* Driver `docs/research/verify_gpuknee/run.sh`: the Bench(110,360) fast cache 14f156cb6fc8 is copied from the farm
+  volume to each worker, so the fit is fast as the polish protocol names; CB_EXACT=1 on every wear bench.
+* CB_FOLD_MARGIN = the claimed margin, then 5, then 10 (the old rule, a measurement change). O20 only.
+* Farm exo-cpu1, 38 jobs in 3 batches, about $0.23. F2 fit60 was also re-run on this box: same digits.
+* Raw outputs and the parameter file: `docs/research/verify_gpuknee/`.
+
+**Measured.** Each cell: gap / near-touch gap (metal < 1 mm = contact); gain over H1 plain / near-touch in brackets.
+
+| protocol | H1 (margin 5) | F2 (5.0254) | F7 (5.0956) | F5 (5.3817) |
+|---|---|---|---|---|
+| polish: fit Bench(110,360) fast, worn exact (470) | 24.48 / 25.59 | 20.26 / 20.81 (4.22 / 4.78) | 20.81 / 21.91 (3.67 / 3.68) | 20.35 / 22.00 (4.13 / 3.59) |
+| round-3: fit Bench(60,160) fast, worn exact | 27.20 / 31.75 | 23.34 / 24.46 (3.86 / 7.29) | 25.57 / 30.56 (1.63 / 1.19) | 25.57 / 30.56 (1.63 / 1.19) |
+| **HELD OUT** (1154 poses outside both benches) | 28.55 / 31.06 | 27.65 / 29.25 (**0.90** / 1.81) | 27.22 / 29.04 (1.33 / 2.02) | 27.51 / 29.33 (1.04 / 1.73) |
+| held out at margin exactly 5 | - | same | 27.11 / 28.92 (1.44 / 2.14) | 27.31 / 29.13 (1.24 / 1.93) |
+| polish at margin 10 (old rule) | 26.45 / 26.45 | 28.10 / 28.68 (-1.65 / -2.23) | 28.97 / 29.54 (-2.52 / -3.09) | - |
+| held out at margin 10 (old rule) | 30.73 / 32.61 | 32.58 / 33.99 (-1.85 / -1.38) | 32.43 / 34.76 (-1.70 / -2.15) | - |
+
+Every number the claim gives reproduces to the digit, H1's included (its margin-10 rows reproduce the verified
+26.45 and 30.73). F7 and F5 really do measure the same fit60 numbers (25.57 / 30.56, reach 0.6722): the two runs are
+independent, so this is not a digest copy.
+
+**Rules: none broken, nothing loosened.**
+* The 3D closure, knee-vs-hub-3 and E boss checks removed 0 poses on every run. Closure residual is at most 0.022 deg.
+* O20 x3. Pin stack 5.87 (F2) / 5.57 (F7) mm. J1 seat anterior component 0.0625 (F2) / 0.0809 (F7): the acromion top.
+* Fold margin over the taken poses is >= 5.01 deg. Overhead clip follow is 1.0 on the polish and held-out benches.
+  (The round-3 bench's overhead clip follow is 0.6 for F7, F5 and H1, and 1.0 for F2.)
+* Arm at the side: 0 poses < 1 mm in-sample. F2 has 2 held out (0.02 mm and 0.63 mm), where H1 has 0.
+* Continuity (taken nodes, full 1432-pose grid): F2 949 / 949 and F7 953 / 953 connected, 0 islands, one knee branch.
+  Connected reach on the bench equals static reach (0.7056 / 0.7028). In kin mode F7 has 1 static-only island on the
+  full grid; H1 has 1 too.
+
+**Red team: where the gain comes from.**
+* *The knee window.* The search moved the knee window ang_min from H1's 30.46 to 22.79 (F2) and 21.93 (F7), just
+  above the polish bound of 20. Over the taken poses the knee now runs to 156.7 / 157.3 deg. That is 22.7-23.3 deg
+  from the straight (singular) posture, against H1's 31.6 deg, and 0.5-0.8 deg from the knee's own stop.
+* *Test.* I re-ran F2 and F7 with H1's ang_min (30.46) and everything else as claimed:
+
+  | protocol | F2 at ang_min 30.46 | F7 at ang_min 30.46 |
+  |---|---|---|
+  | polish | 23.91 / 23.91 (gain 0.57) | 23.91 / 24.46 (gain 0.57) |
+  | held out | 29.28 / 31.34 (gain **-0.73**) | 28.63 / 30.47 (gain **-0.08**) |
+
+  So the whole held-out gain is the knee's singularity margin. CLAUDE.md says: never shrink the singularity /
+  transmission margins to buy reach without a red-team and the user's say. This is that red-team.
+* *The fold floor.* At the old 10-deg fold margin, F2 and F7 are 1.65-2.52 points worse than H1 on the polish
+  protocol and 1.70-1.85 worse held out. Their gain lives on the 5-deg floor and the 22-deg knee window together.
+* *Overfit.* The polish bench gives 4.22 for F2, and held out gives 0.90. The same-bench objective overfits again,
+  as it did for polish 1, P5 and C1.
+
+**Verdict: REFUTED as a replacement for H1. The measurement itself is confirmed.**
+* The claimed best, F2, gains 0.90 plain held out, which is under 1.
+* F7 clears 1 on all three margin-5 protocols, plain and near-touch. But all of that gain comes from a 22-deg knee
+  window, against H1's 30.5. Taking it needs the user's ruling on the knee singularity margin.
+* **H1 stays the polished configuration.** best_k is unchanged; these numbers are in the `v_gpuknee_*` fields.
+* Next:
+  * The cross-fit polish (`tools/crossfit_polish.py`) should keep ang_min >= 30 unless the user rules otherwise.
+  * Ask the user whether a ~22-deg knee window is acceptable for the unpowered MVP1: F7 then gains 1.33-1.44 held out.
