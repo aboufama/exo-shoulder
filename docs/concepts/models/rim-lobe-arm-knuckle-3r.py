@@ -69,7 +69,7 @@ WIN = {"bk1": 31.2491, "bk2": 37.9937, "a1max": 58.3565, "smhi": 13.6865, "smlo"
        "phib": -65.6717, "stk": 4.8534, "ang_min": 27.8544, "capK": 6.0}
 PARAMS = dict(G.PARAMS, **WIN)
 PARAMS.update(cam=1, tail=1, emb_mode="pair", emb="roller", lay="low", kK=0.6, smhi=28.0, L_arm=23.5, a0=2.0, rr=2.5,
-              r_law=62.0, pa_max=45.0, t_end=75.0, rho_max=1e9)
+              r_law=62.0, pa_max=45.0, t_end=75.0, rho_max=1e9, plate_cap=1e9)
 
 
 def _rot(ax, a):
@@ -227,6 +227,12 @@ class RLModel(G.GModel):
         res = self.needed(items, poses); Lq = {}
         for (nm, ri), r in zip(idx, res): Lq.setdefault(nm, []).append(r)
         Lq["E"] = [self._HE]
+        cap = float(P.get("plate_cap", 1e9))
+        if self._pair_ok and "PLATE" in Lq and cap < 1e8:
+            # a buildable plate: its plane may rise at most plate_cap above link 2's ring level (f2 + UP); a pose that needs
+            # more cannot shape it - the greedy drops it (recorded as skin / contact), instead of the plate floating off the body
+            u2 = D.u[1]; c2 = L_["plate_dirs"] @ u2; Hn = Lq["PLATE"][0]
+            Lq["PLATE"][0] = np.where(Hn * c2[None, :] > f2 + S.UP + cap, S.BIG, Hn)
         self.Lneed = Lq
         self._greedy(keep0=keep1)
         self.finalize()
@@ -399,7 +405,7 @@ def viz_export(par):
               plate=[R(x, 2) for x in M.rigid["plate"][1][::3]] if "plate" in M.rigid else [],
               L1a=pts("L1a"), L1b=pts("L1b"), L2=pts("L2", 6))
     keys = ("az1", "el1", "az2", "el2", "wd", "wa", "b3", "lE", "lc", "phiE", "phib", "stk", "ang_min", "bk1", "bk2", "sK", "a1max", "smhi", "smlo", "capK",
-            "emb", "lay", "kK", "L_arm", "a0", "rr", "rho_max")
+            "emb", "lay", "kK", "L_arm", "a0", "rr", "rho_max", "plate_cap")
     return dict(P={k: P[k] for k in keys}, G=G_, report={k: r[k] for k in ("gap", "reach", "follow", "inband14", "contact")})
 
 
