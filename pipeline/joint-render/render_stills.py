@@ -66,6 +66,7 @@ def mat_for(n):
     l = n.lower()
     if l.startswith("body"): return skin
     if any(k in l for k in ("din 7984", "iso 10642", "dowel", "screw", "set screw", "din 6799", "e-clip")): return stainless   # every screw / clip polished (user look)
+    if "clock spring:" in l or "magnet" in l: return stainless                    # polished spring steel strip, Ni-plated magnets
     if ("bearing" in l and "igus" not in l) or "rsr3" in l: return steel                               # bearings, ground miniature guides
     if any(k in l for k in ("igus", "iglidur", "liner", "gib", "washer", "sleeve")): return iglide
     return alu
