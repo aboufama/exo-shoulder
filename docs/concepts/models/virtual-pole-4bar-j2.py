@@ -25,7 +25,7 @@ angles of the loop (at A1 and B1, crank vs coupler) within [M4, 180 - M4] = [25,
 excluded; this also keeps theta on one assembly branch - conservative: the coupler could continue past a crank's dead
 point on the other branch), crossing angle between the coupler curve and the target circle >= XMIN deg
 (the 3R's 10 deg fold margin is a 11-34 deg crossing angle at 65 / 65 arcs, so 12 is the same standard), pins of one
-body >= PINSEP deg apart (two O20 bearings side by side). Closure residual reported (< 0.5 deg rule).
+body (and each pin vs the J1 / carried hub of its body) >= PINSEP = 22 deg apart (two O20 bearings side by side). Closure residual reported (< 0.5 deg rule).
 
     OMP_NUM_THREADS=1 nice -n 10 python3 docs/concepts/models/virtual-pole-4bar-j2.py [check|jac] ['<json params>']
 """
@@ -38,7 +38,7 @@ import concept_kit as K                                      # noqa: E402
 ID = "virtual-pole-4bar-j2"
 NAME = "Virtual-pole spherical four-bar as J2 (all-pin 3-DOF chain, no slide)"
 D2R = math.pi / 180
-M4, XMIN, PINSEP = 25.0, 12.0, 20.0              # M4: min transmission angle (deg) at both coupler pins
+M4, XMIN, PINSEP = 25.0, 12.0, 22.0              # M4: min transmission angle (deg) at both coupler pins
 # at=2 seed: the plain-3R axes of rail-elbow k2221 (51.33 as a plain 3R) with a converging four-bar around the home J2
 PARAMS = dict(at=2, az=0.65, el=76.82, a1=80.71, a2=62.93, beta=110.0, wd=93.82, wa=-4.20, zeta=0.0,
               psiA=35.0, dA0=22.0, dA1=44.0, psiB=-35.0, dB0=22.0, dB1=44.0, sigma=0,   # sigma 0 = auto (at=2 only); at=1 needs +-1
@@ -136,7 +136,9 @@ def curve(p):
         while hi < len(th) - 1 and good[hi + 1]: hi += 1
         full = bool(good.all())
     else: full = False
-    sep = min(ang(fb.a0, fb.b0), ang(fb.a1h, fb.b1h), ang(fb.a0, fb.a1h), ang(fb.b0, fb.b1h))
+    sep = min(ang(fb.a0, fb.b0), ang(fb.a1h, fb.b1h), ang(fb.a0, fb.a1h), ang(fb.b0, fb.b1h),   # pins of one body / one crank
+              ang(fb.a1h, carried), ang(fb.b1h, carried),                                     # coupler pins vs the carried hub
+              *((ang(fb.a0, j), ang(fb.b0, j)) if p["at"] == 2 else ()))                     # link-1 pins vs hub J1
     out = dict(th=th[lo:hi + 1], c=c[lo:hi + 1], valid=bool(good[i0]) and sep >= PINSEP, sep=float(sep), j=j, j2h=j2h,
                pole=pole, carried=carried, fb=fb, full=full)
     if len(_CACHE) > 64: _CACHE.clear()
