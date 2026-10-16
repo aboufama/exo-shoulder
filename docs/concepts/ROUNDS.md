@@ -1013,6 +1013,13 @@ Next (round 9; verified best 18.91, score 93.12, so 95 is not reached and score 
   - So the part headroom (hub 3 0.599 of 80 samples at a median 13.0 mm; L2 0.749 of 132 at 11.6) is not a lever on
     its own. It is a budget: a reach lever may spend in-band down to 0.90, and it must buy more poses than it spends.
   - Every other part is >= 0.91 (crank 0.91, rod 0.89).
+  - **The bench's in-band14 is scored on the clips only** (live alignment audit, commit 984b0b3,
+    docs/alignment/live_audit_2026-10-16.md). On the lead's taken workspace poses, unscored, it is 0.874, and 0.841 at
+    elevation 90-140. A won workspace pose therefore adds reach and contact, never in-band. Metal that leaves the band
+    on the poses a lens wins is invisible to the gap: that is gaming pattern L2. Every lens reports the unscored
+    workspace in-band, overall and at elevation 90-140, and may not fall below the lead's 0.874 / 0.841.
+  - The same audit finds 95 reachable without overhead (overhead is 7.8 % of reach), and metal under 2 mm on 13-15 of
+    the 18 taken overhead poses. Overhead stays in each lens's target as the user's own priority, not as a score lever.
 - **Complexity 49, by item** (tools/simplicity.py):
 
   | item | points |
