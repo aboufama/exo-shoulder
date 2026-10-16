@@ -53,7 +53,7 @@ R_NOM = 62.0                    # mm: nominal radius of hub 2 / knee / lever (mm
 PARAMS = dict(az=97.7506, el=65.294, a1=38.0901, wd=90.0506, wa=-9.2038, sigma=-1, margin=5.0, width=12.0, t_link=3.0,
               q=0.97, rad1=10.0, rad2=10.0, rad3=10.0, end_extra=0.0,
               Amin=60.0, Amax=90.0, w=3.0, sl=1.0, b=25.0, c=72.0, sk=1, psi_lo=15.0,
-              dG=None, gG=None, seg_mm=12.0, rpin=5.0, pin_t=6.5, t_lev=2.0, lock_min=50.0, g_min=0.2,
+              dG=None, gG=None, seg_mm=12.0, wL=0.002, emax=40.0, rpin=5.0, pin_t=6.5, t_lev=2.0, lock_min=50.0, g_min=0.2,
               a2=74.2679, lock=0, near=0, ov=1)
 ang, tangent, unit = DW.ang, DW.tangent, K.unit
 
@@ -114,7 +114,7 @@ def _seg_dist(P, A, B):
 
 _CACHE = {}
 GKEYS = ("a1", "sigma", "margin", "Amin", "Amax", "w", "sl", "b", "c", "sk", "psi_lo", "dG", "gG", "rad2", "rpin", "lock",
-         "lock_min", "g_min", "a2", "seg_mm")
+         "lock_min", "g_min", "a2", "seg_mm", "wL", "emax")
 
 
 def _turn(ax, v, deg):
@@ -199,7 +199,7 @@ def slot_design(p):
         al = ang(tangent(KK, P2), tangent(KK, Gw)); al = np.minimum(al, 180 - al)     # G-K-J2 alignment = singular
         good = (lk >= p["lock_min"]) & (cr >= p["g_min"]) & (al >= 10.0) & (e >= e_min)
         sub = _run(good)                                       # the track ends where the lock is lost: a hard stop
-        if sub is None or len(sub) < 20: continue
+        if sub is None or len(sub) < 20 or e[sub].max() > p["emax"]: continue
         stats["lock"] += 1
         cov = float((need[sub]).sum()) / max(1, need.sum())
         e2, et2 = e[sub], np.unwrap(eta[sub] * D2R) / D2R; S = _xy(e2, et2)        # slot centreline (mm, planar about J2)
@@ -210,11 +210,14 @@ def slot_design(p):
         stats["self"] += 1
         nseg = int(min(10, max(2, math.ceil(L[-1] / float(p.get("seg_mm", 12.0))))))
         ext = 2.5 + 1.95
-        Ln = np.linspace(-ext, L[-1] + ext, nseg + 1)
-        ne = np.interp(np.clip(Ln, 0, L[-1]), L, e2); nh = np.interp(np.clip(Ln, 0, L[-1]), L, et2)
+        Ln = np.linspace(-ext, L[-1] + ext, nseg + 1)                     # nodes along the slot, the ends extended
+        ne = np.interp(Ln, L, e2); nh = np.interp(Ln, L, et2)                # along the end tangents (roller + wall)
+        for j, i0, i1 in ((0, 0, 1), (-1, -1, -2)):
+            dl = Ln[j] - L[i0]; sl_ = (L[i1] - L[i0]) or 1e-9
+            ne[j] = e2[i0] + (e2[i1] - e2[i0]) / sl_ * dl; nh[j] = et2[i0] + (et2[i1] - et2[i0]) / sl_ * dl
         XY = _xy(ne, nh); dev = np.min(np.stack([_seg_dist(S, XY[i], XY[i + 1]) for i in range(nseg)], 0), 0).max()
         width = max(6.5, 6.5 + 2 * dev)
-        score = cov - 0.01 * max(0.0, width - 7.5) - 0.0005 * L[-1]
+        score = cov - 0.01 * max(0.0, width - 7.5) - float(p["wL"]) * L[-1] - 0.002 * float(e2.max())
         if best is None or score > best[0]:
             ispoke = int(np.argmin(np.abs(((nh + 180) % 360) - 180)))
             best = (score, dG, gG, dict(nodes_e=ne.tolist(), nodes_eta=nh.tolist(), width=round(width, 2), dev_mm=round(float(dev), 2),
