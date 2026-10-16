@@ -262,6 +262,11 @@ The leaderboard's first column is a 56 px (44 px at <= 520 px width) animated li
 `motion` dataset (its `<th>` is marked `data-source="motion" data-field="mech"`; the table's row key `id` joins it, so
 each cell cites that design's row; a design with no concept module gets an empty, unmarked cell).
 
+Tap / click a preview (or focus it and press Enter) to enlarge it (user, 2026-10-16: "pressing on a preview should
+enlarge it so its easier to see"): a `<dialog>` with the same animation at up to 526 px, the design's name, score, reach,
+follow, close-to-skin, simplicity and status; Esc, the x button or a tap on the backdrop closes it. The shared preview
+timer animates it; a board redraw keeps it animating.
+
 - What is drawn (docs/concepts/viz/thumbs.mjs): each concept runs as the gallery runs it (KIN.run over KIN.motion(240),
   the IK warm-started frame to frame), over two laps so the warm start carries across the loop's wrap (lap 2 is drawn;
   seed-offset-3r-slides drifted onto another IK branch during lap 1 and jumped back at every repeat). The loop (rest ->
