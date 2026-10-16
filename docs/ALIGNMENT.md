@@ -354,8 +354,10 @@ The table, as of 2026-10-16 ~20:40 UTC:
     row). The one P4 instance found was the R17 preload default (section 2, P4). It was a CAD judge, outside the row
     history, and it was stated as a measurement change.
 
-Not yet re-measured here (queued, `docs/alignment/remeasure/`): the held-out wear of longdyad and parallelogram with
-3 mm near-touch, and roller-flank's bench wear. Their verifier numbers are on file and are used above.
+Not re-measured within this task's time box: the held-out wear of longdyad and parallelogram with 3 mm near-touch, and
+roller-flank's bench wear. Their verifier numbers are on file and are used above. Next step, for each one:
+`CB_EXACT=1 nice python3 tools/alignment_audit.py remeasure <id> held|bench`, then `audit-all`. Each takes about
+4 min on a quiet core.
 
 ## 4. Proposals (not applied; each is a measurement or reporting change for the lead / the user to decide)
 
