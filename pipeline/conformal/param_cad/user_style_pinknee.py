@@ -160,6 +160,7 @@ def judge_close(m):
         for tol in (0.05, 0.1, 0.2, 0.3):                                                  # OCC seams on glued bent bars (link 2 needed > 0.05)
             w = weld_open(out, tol=tol)
             if w.is_watertight: out = w; break
+
     chk = trimesh.Trimesh(np.asarray(out.vertices, np.float32).astype(float) / 1000.0, np.asarray(out.faces), process=False)
     chk.merge_vertices(digits_vertex=7); chk.update_faces(chk.nondegenerate_faces())
     return out, bool(chk.is_watertight)
