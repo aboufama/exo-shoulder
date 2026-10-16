@@ -15,7 +15,7 @@ conventions and reproduces `docs/concepts/rows/baseline-3r.json` exactly.
 import concept_kit as K
 def build(B, F, p) -> K.Chain:         # geometry from F ONLY (K2 calls it again on interpolated frames)
     p1 = F.S(K.bvec(az, el)); p3 = F.HG(K.wdir(d, a))                         # K0
-    p2, ok, margin = K.closure(p1, p3, a1, a2, sigma, margin_deg=5)          # K1 (ranges: ok &= ...)
+    p2, ok, margin = K.closure(p1, p3, a1, a2, sigma, margin_deg=K.FOLD_MARGIN)   # K1 (ranges: ok &= ...)
     q = np.stack([K.axis_angle(p1, F.S([1, 0, 0]), p2), ...], -1)            # joint values for K2 (deg)
     members = [K.hub_member("hub1", p1, "J1"), ...,                           # K4
                K.strap_member("link1", p1, p2, ("J1", "J2"), ramp_to=(("hub1", K.STACK), ("hub2", 0.0))),   # K5
@@ -36,6 +36,8 @@ K.log_event(f"screened <name>: gap {rep['gap']} (baseline 68.93)")
 | `bvec(az, el)`, `wdir(d, a)` | K0 directions, identical to band_impl / concept_baseline (tested) |
 | `axis_angle(k, ref, v)` | signed angle about k from ref to v (joint values) |
 | `closure(b, w, a1, a2, sigma, margin_deg)` | K1 -> `p (P,3)`, `ok`, `margin`; `closure_residual(...)` for the honesty check |
+| `FOLD_MARGIN` | the J1-J3 fold margin (deg) of every J2 dyad, in ONE place: 5 since the user's 2026-10-16 ruling (was 10); `CB_FOLD_MARGIN=10` re-measures at the old rule. Models pass it as their `margin` default (never a free search parameter); the seed-offset-3r-slides `SING` (osn, pin knee, raglan knee, knuckle, arc knee) reads it |
+| `hub_rad(x, declared)`, `O20_ONLY` | "Keep O20 only" (user 2026-10-16): every hub radius a search or verifier sets is O20 (rad 10, 12.25 stack); `CB_ALLOW_SLIM=1` re-measures an old slim-hub claim only |
 | `continuity(B, q, ok)` / `continuity_dense(B, F, build, p, ok)` | K2 (see below) |
 | `dist_many(B, I, P)` | signed distance of points each in its own pose, one vectorised gather on the grid cache (= `B.dist`, tested) |
 | `requirement(B, I, D, mode)` | K3 per ray: `'march'` (default) or `'outer'` (the baseline's) |
