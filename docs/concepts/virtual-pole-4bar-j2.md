@@ -121,3 +121,19 @@ What the sweeps taught, in order:
    link-1 pin across the pole region to a coupler pin on the J3 side). Best any 104.57: reach 0.69, follow 0.88. But
    the cranks pass over the pole region, which is the worst skin in every frame (the map above). They park at 400 mm
    (in-band 0.19, not honest).
+
+### The free wedge: where a converging J2 four-bar can put its pins (scratch `wedge.py`)
+
+A crank joins a link-1 pin to a coupler (link-2) pin on ONE ray through the pole, so both pins need a ray that is free
+in link 1 AND in link 2 (at the 3R's median home dihedral beta). For each arc d, the widest run of such rays (band >= 0.7,
+never into the body), and the bearing separation that run allows (two O20 pins need ~22 deg):
+
+| base | d 20 | d 30 | d 40 | d 50 | d 60 |
+|---|---|---|---|---|---|
+| k2221 | 60 deg / 20 | 45 / 22 | 60 / 37 | 30 / 23 | 0 / 0 |
+| jfront | 0 / 0 | 45 / 22 | 45 / 28 | 60 / 45 | 90 / 76 |
+| front132 | 0 / 0 | 0 / 0 | 0 / 0 | 15 / 11 | 0 / 0 |
+
+At a 0.6 band threshold the wedges widen to 75-105 deg. So a converging four-bar FITS geometrically on k2221
+(d 30-50) and jfront (d 40-60), but only with every pin at 0.7-0.8 band, which is no better than the 3R's own hub 2
+(0.61-0.70). On the fold-free front132 layout no free wedge exists.

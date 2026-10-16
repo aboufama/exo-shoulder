@@ -34,7 +34,8 @@ NAME = "Zero-passive spherical 3R at the leader's seats: J2 parked over the post
 # defaults = the leader's k4216 seats as a spherical chain (osn Design at b1 = b2 = 0, b3 0.2282: u1 = bvec(95.86, 65.21),
 # a1 = angle(u1, u2) 40.34, a2 = angle(u2, u3) 74.07, u3 = wdir(84.80, -11.37) in the band humerus frame, branch -1)
 PARAMS = dict(az=95.8565, el=65.2093, a1=40.3436, a2=74.0692, wd=84.7998, wa=-11.3702, sigma=-1, margin=10.0,
-              width=12.0, t_link=3.0, q=0.98, rad1=10.0, rad2=7.5, rad3=7.5, vm=0)
+              width=12.0, t_link=3.0, q=0.98, rad1=10.0, rad2=7.5, rad3=7.5, vm=0, end_extra=0.0,
+              near=0)   # near 1: the report's gap / reach / follow / in-band / contact count metal < 1 mm as contact (lesson d)
 # declared hub components (radius mm -> component); a hub radius not in here must pass the kit's O20 audit as is
 SLIM = {10.0: "v5 O20 hub: MR117-2RS pair, 12.25 mm stack (docs/HARDWARE.md)",
         8.5: "O17 hub: MR117-2RS pair in a 2.75 mm Ti wall (conservative slim), 12.25 mm stack",
@@ -141,6 +142,9 @@ def evaluate(B, params):
     for k in ("rad2", "rad3"):                                  # CMA steps snap to the declared components
         p[k] = min(SLIM, key=lambda x: abs(x - float(p[k])))
     r = K.evaluate(B, build, p); r = declared_audit(r, p); r = extras(B, r, p)
+    if p.get("near"):                                           # lesson (d) as the objective: metal < 1 mm = contact
+        r["gap_plain"] = r["gap"]; r["gap"] = r["gap_near1"]
+        for k in ("reach", "follow", "inband14", "contact"): r[k + "_plain"] = r[k]; r[k] = r["near1"][k]
     return p, r
 
 
