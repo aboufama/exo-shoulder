@@ -296,3 +296,5 @@
 {"time": "2026-10-16T01:45:35Z", "kind": "milestone", "event": "modelling skin-normal-3r-pin-knee (leader 3R closed by a flat two-pin knee, 0 passive translations, honest 5 mm pin stack)"}
 {"time": "2026-10-16T01:45:50Z", "kind": "milestone", "event": "modelling skin-normal-3r-knuckle-cufflink (all-skin-normal 3R closed by a J2 knuckle pin + a pinned cuff link, 0 passive translations)"}
 {"time": "2026-10-16T01:46:16Z", "kind": "milestone", "event": "modelling j2-arc-sector-3r: spherical 3R with J2 as a link-1 arc-rail sector + link-2 V-roller carriage (no J2 hub), kit model + hub control at identical axes"}
+{"time": "2026-10-16T01:48:26Z", "kind": "milestone", "event": "modelling closure-set-arc-knee-3r (closure-set arc knee: hub 3 on a passive trunnion yoke set by the radial closure, pinned cuff dyad, 0 passive translations)"}
+{"time": "2026-10-16T01:49:12Z", "kind": "milestone", "event": "skin-normal-3r-pin-knee: new best gap 26.34 (score 90.42) on Bench(60,160) fast at the leader k4216 seats with the knee link posterior (phib -90), honest 5 mm pin stack, 0 passive translations; exact-bench check next"}
