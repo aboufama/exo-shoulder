@@ -52,7 +52,7 @@ NAME = "Cam-coupled 4R: a roller on link 2's tail in a scapula-fixed slot schedu
 D2R = math.pi / 180
 # seeds: park4's frozen seats (round-4 four-dof lens: az 102.7, el 68.0, a1 37.6, a2 60, a3 22.3, J4 = wdir(81.36, -14.61))
 PARAMS = dict(az=102.74, el=67.99, wd=81.36, wa=-14.61, a1=37.6, a2=60.0, a3=22.31, mode=1, q1_off=0.0,
-              pz4=98.45, s1=-1, fit=1, m3=0.5, ecc=8.0, phi_e=0.0, dn_az=0.0, dn_el=0.0, dbeta=0.0,
+              pz4=98.45, s1=-1, fit=1, m3=0.5, ecc=8.0, phi_e=0.0, tiebreak=0, tail_hw=1.0, dn_az=0.0, dn_el=0.0, dbeta=0.0,
               tr=25.0, tp=180.0, n_az=102.74, n_el=67.99, beta=50.0, s_c=0.0, s_half=180.0, pct_lo=0.0, pct_hi=100.0,
               pa_min=0.25, hold_mm=8.0, sing_deg=K.FOLD_MARGIN, margin=K.FOLD_MARGIN,
               width=12.0, t_link=3.0, q=0.98, slot_w=14.0, slot_t=4.0, pad=6.0, near=0)
@@ -91,7 +91,7 @@ class Kin:
         self.pp2, self.pp3, self.pok = park(F, p, self.u1)      # the dwell (park4) configuration: tie-break reference
         az4 = np.arctan2((self.u4 * self.b).sum(-1), (self.u4 * self.a).sum(-1))
         azp = np.arctan2((self.pp2 * self.b).sum(-1), (self.pp2 * self.a).sum(-1))
-        self.qref = np.where(self.pok, azp, az4)
+        self.qref = np.where(self.pok, azp, az4); self.az4 = az4
 
     def at(self, I, q1, s3):
         """chain at poses I (k,), J1 azimuths q1 (k,) rad and J3-dyad branches s3 (k,) -> p2, p3, pin, ok3, margin"""
@@ -130,8 +130,9 @@ class Kin:
             pi_ = np.concatenate([c[0] for c in cand]); r = np.concatenate([c[1] for c in cand]); sv = np.concatenate([c[2] for c in cand])
             p2, p3, _, _, _ = self.at(pi_, r, sv)
             ang = lambda x, y: np.arccos(np.clip((x * y).sum(-1), -1, 1))
-            d = np.where(self.pok[pi_], ang(p2, self.pp2[pi_]) + ang(p3, self.pp3[pi_]),
-                         np.abs((r - self.qref[pi_] - self.p["q1_off"] * D2R + math.pi) % (2 * math.pi) - math.pi))
+            dq = np.abs((r - self.qref[pi_] - self.p["q1_off"] * D2R + math.pi) % (2 * math.pi) - math.pi)
+            if int(self.p.get("tiebreak", 0)) == 1: dq = np.abs((r - self.az4[pi_] - self.p["q1_off"] * D2R + math.pi) % (2 * math.pi) - math.pi)
+            d = np.where(self.pok[pi_] & (int(self.p.get("tiebreak", 0)) == 0), ang(p2, self.pp2[pi_]) + ang(p3, self.pp3[pi_]), dq)
             order = np.lexsort((d, pi_)); first = np.r_[True, pi_[order][1:] != pi_[order][:-1]]
             sel = order[first]; q1[pi_[sel]] = r[sel]; s3o[pi_[sel]] = sv[sel]
         return q1, s3o
@@ -179,12 +180,13 @@ def build(B, F, p):
     slot = K.Member("slot", F.S(slot_dirs(p)), kind="cap", t=p["slot_t"], width=p["slot_w"], joints=("J1",), cell=4.0)
     links = [K.strap_member("link1", u1, p2, ("J1", "J2"), ang=p["a1"] * D2R, width=w, t=t, ramp_to=(("hub1", K.STACK), ("hub2", 0.0)), over=[("slot", 1.0)], end_mm=end),
              K.strap_member("tail", p2, pin, ("J2",), ang=ext, width=w, t=t, ramp_to=(("hub2", K.STACK), (None, 0)),
-                            over=[("link1", 1.0), ("slot", 1.0)], end_mm=end),
+                            over=[("link1", 1.0), ("slot", 1.0)], end_mm=end, hw=p["tail_hw"]),
              K.strap_member("link2", p2, p3, ("J2", "J3"), ang=p["a2"] * D2R, width=w, t=t, ramp_to=(("hub2", K.STACK), ("hub3", 0.0)),
                             over=[("link1", 1.0), ("neck", 1.0), ("slot", 1.0)], end_mm=end),
              K.strap_member("link3", p3, u4, ("J3", "J4"), ang=p["a3"] * D2R, width=w, t=t, ramp_to=(("hub3", K.STACK), ("hub4", K.STACK)),
                             over=[("link1", 1.0), ("neck", 1.0), ("slot", 1.0)], end_mm=end),
              K.neck_member(F, u4, joints=("J4",), ramps=(("hub4", 0.0), (None, 0)))]
+    tail = links[1]; tail.ramps.append((np.ones(tail.D.shape[1], bool), "link1", t + 1.0))   # the tail rides one full level over link 1
     okr = ok
     info = dict(residual_deg=round(float(max(K.closure_residual(p2, u4, p3, p["a2"], p["a3"])[okr].max(),
                                           np.degrees(np.abs((pin * kn.n).sum(-1) - kn.cb))[okr].max())), 6) if okr.any() else None,

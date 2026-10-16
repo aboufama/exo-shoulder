@@ -715,7 +715,7 @@ def base_part(M, E, l1_body, rel, frames):
             pl = pl.fuse(disc((EAR_L) * hd(a), k1, EAR_W / 2, lev, lev + T)).clean()
             body = pl if body is None else US.glue(body, pl)
         if dz > 0:                                                                          # the upper seat disc under raised ears
-            body = US.glue(body, disc(np.zeros(3), k1, R, F1 + LV["U0"], F1 + LV["U0"] + T))
+            body = body.fuse(disc(np.zeros(3), k1, R, F1 + LV["U0"], F1 + LV["U0"] + T)).clean()
     else:
         body = disc(np.zeros(3), k1, R, F1 + LV["U0"], F1 + LV["U0"] + T)
     body = US.rounded(body, skip=lambda e: e.geomType() == "CIRCLE" and abs(np.array(e.positionAt(0.5).toTuple()) @ k1 - (F1 + LV["U0"] + T)) < 1e-3

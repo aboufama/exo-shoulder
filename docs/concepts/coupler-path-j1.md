@@ -62,3 +62,29 @@ Changes from the spec, measured or reasoned:
 The leader's own circle written as a degenerate four-bar (`{"circle": 1}`: A0 = u1, alpha = a1, kr = 0) through this
 code, Bench(60,160) fast, m = 10: **gap 20.63, reach 0.6937, follow 1.0, in-band 0.9033 / 0.5323, contact 0, fold 46,
 slide 3** - identical on every metric to `skin-normal-3r-pin-knee.py check` with the verified frozen parameters.
+
+## Stage 1 - the lead's question, by IK only (Bench(110,360), 360 workspace poses, m = 10, osculating rule)
+
+Does a coupler curve cover th 26-140 better than the leader's 42-102 circle? `kin` / `kopt` modes; CMA-ES streams on the
+farm (8 per family, 160-200 generations x 14). Zones are the leader's own: folded th < 42.2 (57 poses), window (227),
+stretched th > 102.4 (76).
+
+| curve (J3 seat = the leader's) | ws | overhead | across | behind | leader-folded zone | leader-stretched zone |
+|---|---|---|---|---|---|---|
+| leader circle (a1 40.1, a2 72.3) | 0.631 | 0.393 | 0.294 | 0.76 | 0.00 | 0.00 |
+| best CIRCLE, no skin term (A0 23 deg off u1, a1 75, a2 75.5) | **0.978** | 1.00 | 0.94 | 1.00 | 0.97 | 0.95 |
+| best COUPLER, no skin term (kr 33, a2 79.6) | 0.967 | 1.00 | 0.85 | 1.00 | 0.97 | 0.87 |
+| best circle with the J2-relief proxy (a1 67.7, a2 84) | 0.906 | 1.00 | 0.88 | 1.00 | 0.56 | 0.91 |
+| best coupler with the J2-relief proxy (kr >= 10) | 0.903 | 1.00 | 0.88 | 1.00 | 0.54 | 0.91 |
+
+**Answer: yes, a coupler covers the workspace (0.97 of the 360 poses, overhead 1.00) - and so does a plain circle.**
+Kinematically the window is set by the ARCS (a1 + a2 up to ~150 deg, |a1 - a2| small), not by the curve's shape: the
+best circle (0.978) beats the best coupler (0.967). With the J2 relief proxy (the K3 march along J2's axis in every
+taken Bench(60,160) pose) the coupler and the circle tie to the third decimal (proxy 5.29 both). The coupler's 8 extra
+parameters buy nothing a re-seated, re-arced J1 does not.
+
+Per pose (Bench(60,160), the 46 poses the leader loses to the fold): **44 of 46 (0.957) have SOME J2 axis on the
+circle C(p3, a2) whose ray clears the skin below the leader's hub-2 level (60.9 mm)** (median lowest requirement 53 mm;
+taken poses 42 mm). The stretched ones want that J2 73.5 deg from the leader's J1 seat (median), the folded ones 53.7.
+So the J2 skin is not a per-pose barrier; what stops a J1 mechanism is that one rigid hub level and one 1-D path must
+serve every pose, and the links that reach those J2 positions.
