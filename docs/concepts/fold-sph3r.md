@@ -69,13 +69,15 @@ By J1 elevation (the frontier's anterolateral J1 is el 16-28):
 | 57-90 | 156 | 113.2 | 0.694 (0.794) | 710 g | 0 / 0 / 0.35 / 0 / 0 / 0.60 |
 
 * **Hub 1 (scapula-fixed).** On the frontier's near-horizontal anterolateral ray, hub 1 is never in band.
-  - Seed B: the J1 ray (thorax az 66, el 16) runs along the upper arm when the arm is raised in the scapular plane. In
-    those poses no position within 220 mm clears the skin, so the rigid hub is lifted to 400 mm.
+  - Seed B: with the arm overhead (elevation 150, plane 0-15) the J1 ray lies within 9-16 deg of the humerus long
+    axis, i.e. inside the arm. No position within 220 mm clears the skin, so the rigid hub is lifted to 400 mm. The
+    frontier's 50 / 50 best does the same in 3 poses (elevation 150-165).
   - The cause is geometric. The fold-free J1 points near the middle of the humerus's workspace cone, because that is
     what keeps the J1-J3 angle in band. The middle of that cone is where the arm passes.
   - At J1 el 57-90 (over the acromion), hub 1 parks at 46-52 mm, in band in 100 % of poses, as in the champion.
 * **Hub 2.** At the frontier layouts it floats at 109-400 mm.
-  - Seed A: hub 2 sits on a ray az 155, el 16 (posterolateral, horizontal) that never clears in some pose.
+  - Seed A: in 2 poses (elevation 135, plane 0-15, axial -45) the J2 ray points 124-136 deg away from the humerus
+    axis, into the trunk, and never clears. Hub 2 is lifted to 400 mm.
   - Hub 2 is out of band in every pose of every frontier seed.
   - The same holds at the known 3R axes (hub 2 0 % in band at k2221, F 145 mm). It is the 3R's standing weakness.
 * **Links.** 80 % of the frontier configurations have links fitted beyond 150 mm (Ti mass > 300 g; median 966 g at
