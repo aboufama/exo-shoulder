@@ -227,13 +227,14 @@ class Proxy:
         fb = fourbar(dict(p, u1=self.u1)); a2 = p.get("a2", self.a2)
         R = curve_roots(fb, self.P3, a2, X, p["branch"], m=MARGIN); good = np.zeros(len(self.P3), bool); np.logical_or.at(good, R["j"], R["good"])
         cov = float(good[self.ws].mean()); fol = float(good[self.clip].mean())
-        jc, jd = self.j2cost(fb, a2, X, p["branch"])
+        jc, jd = (0.0, {}) if NOSKIN else self.j2cost(fb, a2, X, p["branch"])
         g = 100 * max(0, .9 - cov) + 100 * max(0, .95 - fol) + jc
         return g, dict(cov=round(cov, 4), ov=round(float(good[self.ov].mean()), 4), acr=round(float(good[self.acr].mean()), 4),
                        follow=round(fol, 4), j2=jd, crank_valid=round(float(fb["valid"].mean()), 3))
 
 
 MARGIN = float(os.environ.get("CB_FOLD_MARGIN", 10.0))       # the proxy's fold margin (the bench's rule: m = 10 here)
+NOSKIN = int(os.environ.get("CP_NOSKIN", 0))                  # 1: the pure kinematic ceiling (no J2 relief term)
 KRMIN = float(os.environ.get("CP_KRMIN", 0.0))              # > 0: a genuine coupler (J2 off the crank)
 CIRCLE = int(os.environ.get("CP_CIRCLE", 0))                 # 1: the control - J2 on a circle about a free A0 (re-seated J1)
 

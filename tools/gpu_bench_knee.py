@@ -40,7 +40,34 @@ def kit(margin=None):
     os.environ.setdefault("CB_QUIET_EXACT", "1")
     import knee_polish as KP
     KP.verifier(); _MOD["KP"] = KP
+    _route(KP)
     return KP
+
+
+def _route(KP):
+    """raglan-knee-3r's routed links (r1t / r1d / r2t / r2d / rc) on the verifier's pin-knee model: the raglan model's own
+    routed_add_links (docs/concepts/models/raglan-knee-3r.py, loaded as a private copy) whenever |r1d| or |r2d| >= 0.25,
+    else the pin knee's own great-circle links bit for bit (the same dispatch the raglan model installs on its copy).
+    Installed in the port AND in the CPU reference, so both evaluate the same kit code."""
+    import importlib.util
+    spec = importlib.util.spec_from_file_location("raglan_for_port", os.path.join(REPO, "docs", "concepts", "models", "raglan-knee-3r.py"))
+    RG = importlib.util.module_from_spec(spec); spec.loader.exec_module(RG); _MOD["RG"] = RG
+    MKm = KP.verifier().MK; base = MKm._Geo.add_links
+    def add_links(self, f1, f2, f3):
+        if all(abs(float(self.D.p.get(k, 0.0) or 0.0)) < 0.25 for k in ("r1d", "r2d")): return base(self, f1, f2, f3)
+        return RG.routed_add_links(self, f1, f2, f3)
+    MKm._Geo.add_links = add_links
+
+
+def prep(p):
+    """raglan route parameters clamped as raglan-knee-3r.clean does (only when present)"""
+    q = dict(p)
+    for k in ("r1t", "r2t"):
+        if k in q: q[k] = min(0.85, max(0.15, float(q[k])))
+    for k in ("r1d", "r2d"):
+        if k in q: q[k] = min(60.0, max(-60.0, float(q[k])))
+    if "rc" in q: q["rc"] = min(40.0, max(6.0, float(q["rc"])))
+    return q
 
 
 # ---- the device grid (concept_bench.Bench.dist) -----------------------------------------------------------------------
@@ -394,9 +421,9 @@ def seat_ok(p):
 
 def evaluate_one(p, Bw, Bf=None):
     """knee_polish.evaluate (same bench) or frozen_on (fit Bf -> wear Bw) + score_model -> report dict"""
-    KP = kit(); t = time.time()
+    KP = kit(); t = time.time(); p0 = p; p = prep(p)
     try:
-        if not seat_ok(dict(KP.base_params(), **p)): return dict(params=p, gap=200.0, gap_near1=200.0, error="J1 seat outside the back / acromion-top region")
+        if not seat_ok(dict(KP.base_params(), **p)): return dict(params=p0, gap=200.0, gap_near1=200.0, error="J1 seat outside the back / acromion-top region")
         if Bf is None:
             rep, M, aud = KP.evaluate(Bw, p)
         else:
@@ -407,7 +434,7 @@ def evaluate_one(p, Bw, Bf=None):
             if not M.kin_ok.any(): return dict(params=p, gap=None, error="nothing closes on the wear bench", secs=round(time.time() - t, 2))
             rep, aud, ex = KP.score_model(M, Bw, r, P)
         out = {k: rep.get(k) for k in KEYS + ("near_min", "near1_poses", "why", "extra_bad", "knee_ang", "tr", "f")}
-        out.update(params=p, secs=round(time.time() - t, 2))
+        out.update(params=p0, secs=round(time.time() - t, 2))
         return out
     except Exception as e:                                                       # noqa: BLE001
         import traceback
@@ -417,7 +444,7 @@ def evaluate_one(p, Bw, Bf=None):
 # ---- the CPU reference (the kit unpatched, in spawned processes) -----------------------------------------------------------
 def cpu_ref(args):
     p, wear, fit, margin = args
-    os.environ["OMP_NUM_THREADS"] = "1"; KP = kit(margin); t = time.time()
+    os.environ["OMP_NUM_THREADS"] = "1"; KP = kit(margin); t = time.time(); p = prep(p)
     import concept_bench as CB
     try:
         if not seat_ok(dict(KP.base_params(), **p)): return dict(gap=200.0, gap_near1=200.0, error="seat")
@@ -445,6 +472,12 @@ def leaders():
     out = [("H1", dict(r["best_params"])), ("k4598", {k: v for k, v in r["best_params_previous"].items() if k != "neck"})]
     p5 = (r.get("rebase_polish_m5") or {}).get("P5", {}).get("params")
     if p5: out.append(("P5", dict(p5)))
+    if os.environ.get("GBK_RAGLAN", "1") == "1":
+        try:
+            rg = json.load(open(os.path.join(REPO, "docs", "concepts", "rows", "raglan-knee-3r.json")))["best_params"]
+            keep = set(KP.FREE) | {"r1t", "r1d", "r2t", "r2d", "rc", "rad1", "rad2", "rad3"}
+            out.append(("raglan", {k: v for k, v in rg.items() if k in keep}))
+        except Exception: pass                                                    # noqa: BLE001
     return out
 
 

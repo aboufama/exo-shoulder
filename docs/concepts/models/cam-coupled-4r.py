@@ -51,7 +51,8 @@ ID = "cam-coupled-4r"
 NAME = "Cam-coupled 4R: a roller on link 2's tail in a scapula-fixed slot schedules the spare (J2)"
 D2R = math.pi / 180
 # seeds: park4's frozen seats (round-4 four-dof lens: az 102.7, el 68.0, a1 37.6, a2 60, a3 22.3, J4 = wdir(81.36, -14.61))
-PARAMS = dict(az=102.74, el=67.99, wd=81.36, wa=-14.61, a1=37.6, a2=60.0, a3=22.31, s3=-1, mode=1, q1_off=0.0,
+PARAMS = dict(az=102.74, el=67.99, wd=81.36, wa=-14.61, a1=37.6, a2=60.0, a3=22.31, mode=1, q1_off=0.0,
+              pz4=98.45, s1=-1, fit=1, m3=0.5, dn_az=0.0, dn_el=0.0, dbeta=0.0,
               tr=25.0, tp=180.0, n_az=102.74, n_el=67.99, beta=50.0, s_c=0.0, s_half=180.0, pct_lo=0.0, pct_hi=100.0,
               pa_min=0.25, hold_mm=8.0, sing_deg=K.FOLD_MARGIN, margin=K.FOLD_MARGIN,
               width=12.0, t_link=3.0, q=0.98, slot_w=14.0, slot_t=4.0, pad=6.0, near=0)
@@ -69,6 +70,16 @@ def _slot_frame(p):
     return n, e1, e2
 
 
+def park(F, p, u1):
+    """park4's dwell configuration: link 3 humerus-fixed at azimuth pz4 about J4 (p3 = park), J2 by the 3R closure
+    (u1, p3; arcs a1, a2; branch s1). -> p2, p3, ok"""
+    u4s = K.wdir(p["wd"], p["wa"]); ref = np.array([0.0, -1.0, 0.0]) if abs(u4s[1]) < 0.9 else np.array([0.0, 0.0, -1.0])
+    e1 = K.unit(np.cross(u4s, ref)); e2 = np.cross(u4s, e1); a3 = p["a3"] * D2R; z = p["pz4"] * D2R
+    p3 = F.HG(math.cos(a3) * u4s + math.sin(a3) * (math.cos(z) * e1 + math.sin(z) * e2))
+    p2, ok, _ = K.closure(u1, p3, p["a1"], p["a2"], p["s1"], margin_deg=p["margin"])
+    return p2, p3, ok
+
+
 class Kin:
     """kinematics of one design on frames F (pose-local)"""
     def __init__(self, F, p):
@@ -77,49 +88,59 @@ class Kin:
         ref = F.S([0.0, 1.0, 0.0]); self.a = K.unit(ref - (ref * self.u1).sum(-1, keepdims=True) * self.u1)  # q1 = 0 direction
         self.b = np.cross(self.u1, self.a); self.cb = math.cos(p["beta"] * D2R)
         self.tr, self.tp = p["tr"] * D2R, p["tp"] * D2R
+        self.pp2, self.pp3, self.pok = park(F, p, self.u1)      # the dwell (park4) configuration: tie-break reference
+        az4 = np.arctan2((self.u4 * self.b).sum(-1), (self.u4 * self.a).sum(-1))
+        azp = np.arctan2((self.pp2 * self.b).sum(-1), (self.pp2 * self.a).sum(-1))
+        self.qref = np.where(self.pok, azp, az4)
 
-    def at(self, I, q1):
-        """chain at poses I (k,) and J1 azimuths q1 (k,) rad -> p2, p3, pin, ok3, margin"""
+    def at(self, I, q1, s3):
+        """chain at poses I (k,), J1 azimuths q1 (k,) rad and J3-dyad branches s3 (k,) -> p2, p3, pin, ok3, margin"""
         u1, u4 = self.u1[I], self.u4[I]; A1 = self.p["a1"] * D2R
         p2 = math.cos(A1) * u1 + math.sin(A1) * (np.cos(q1)[:, None] * self.a[I] + np.sin(q1)[:, None] * self.b[I])
-        p3, ok3, mar = K.closure(p2, u4, self.p["a2"], self.p["a3"], self.p["s3"], margin_deg=self.p["margin"])
-        pin = self.pin(p2, p3)
-        return p2, p3, pin, ok3, mar
+        p3, ok3, mar = K.closure(p2, u4, self.p["a2"], self.p["a3"], np.asarray(s3, float)[:, None], margin_deg=self.p["m3"])
+        return p2, p3, self.pin(p2, p3), ok3, mar
 
     def pin(self, p2, p3):
         u = K.unit(p3 - (p3 * p2).sum(-1, keepdims=True) * p2); v = np.cross(p2, u)
         return math.cos(self.tr) * p2 + math.sin(self.tr) * (math.cos(self.tp) * u + math.sin(self.tp) * v)
 
-    def g(self, I, q1):
-        p2, p3, pin, ok3, _ = self.at(I, q1); return (pin * self.n[I]).sum(-1) - self.cb, ok3
+    def g(self, I, q1, s3):
+        p2, p3, pin, ok3, _ = self.at(I, q1, s3); return (pin * self.n[I]).sum(-1) - self.cb, ok3
 
     def solve(self):
+        """roots of the pin-in-slot closure on BOTH J3-dyad branches (the 4-bar circuit crosses between them at the
+        dyad's dead points, where J1 reverses: no singularity of the actuated map, which `sing` checks). Circuit slope
+        = s3 * dg/dq1 must equal `mode`; the root nearest the dwell (park) configuration is taken."""
         P = len(self.u1); q = np.arange(NQ) * (2 * math.pi / NQ) - math.pi
-        I = np.repeat(np.arange(P), NQ); Q = np.tile(q, P)
-        G, OK = self.g(I, Q); G = G.reshape(P, NQ); OK = OK.reshape(P, NQ)
-        G2 = np.concatenate([G, G[:, :1]], 1); O2 = np.concatenate([OK, OK[:, :1]], 1)
-        br = (np.sign(G2[:, :-1]) != np.sign(G2[:, 1:])) & O2[:, :-1] & O2[:, 1:]
-        sl = np.sign(G2[:, 1:] - G2[:, :-1])
-        pi_, ki = np.nonzero(br & (sl == float(self.p["mode"])))
-        q1 = np.full(P, np.nan)
-        if len(pi_):
-            lo = q[ki].copy(); hi = lo + 2 * math.pi / NQ; glo = G[pi_, ki].copy()
+        I = np.repeat(np.arange(P), NQ); Q = np.tile(q, P); cand = []
+        for s3 in (1.0, -1.0):
+            G, OK = self.g(I, Q, np.full(len(I), s3)); G = G.reshape(P, NQ); OK = OK.reshape(P, NQ)
+            G2 = np.concatenate([G, G[:, :1]], 1); O2 = np.concatenate([OK, OK[:, :1]], 1)
+            br = (np.sign(G2[:, :-1]) != np.sign(G2[:, 1:])) & O2[:, :-1] & O2[:, 1:]
+            sl = np.sign(G2[:, 1:] - G2[:, :-1])
+            pi_, ki = np.nonzero(br & (s3 * sl == float(self.p["mode"])))
+            if not len(pi_): continue
+            lo = q[ki].copy(); hi = lo + 2 * math.pi / NQ; glo = G[pi_, ki].copy(); sv = np.full(len(pi_), s3)
             for _ in range(40):
-                mid = 0.5 * (lo + hi); gm, _ = self.g(pi_, mid); same = np.sign(gm) == np.sign(glo)
+                mid = 0.5 * (lo + hi); gm, _ = self.g(pi_, mid, sv); same = np.sign(gm) == np.sign(glo)
                 lo = np.where(same, mid, lo); glo = np.where(same, gm, glo); hi = np.where(same, hi, mid)
-            r = 0.5 * (lo + hi)
-            # nearest root to the azimuth of u4 about u1 (+ q1_off): pose-local assembly choice
-            u4 = self.u4[pi_]; az4 = np.arctan2((u4 * self.b[pi_]).sum(-1), (u4 * self.a[pi_]).sum(-1)) + self.p["q1_off"] * D2R
-            d = np.abs((r - az4 + math.pi) % (2 * math.pi) - math.pi)
+            cand.append((pi_, 0.5 * (lo + hi), sv))
+        q1 = np.full(P, np.nan); s3o = np.ones(P)
+        if cand:
+            pi_ = np.concatenate([c[0] for c in cand]); r = np.concatenate([c[1] for c in cand]); sv = np.concatenate([c[2] for c in cand])
+            p2, p3, _, _, _ = self.at(pi_, r, sv)
+            ang = lambda x, y: np.arccos(np.clip((x * y).sum(-1), -1, 1))
+            d = np.where(self.pok[pi_], ang(p2, self.pp2[pi_]) + ang(p3, self.pp3[pi_]),
+                         np.abs((r - self.qref[pi_] - self.p["q1_off"] * D2R + math.pi) % (2 * math.pi) - math.pi))
             order = np.lexsort((d, pi_)); first = np.r_[True, pi_[order][1:] != pi_[order][:-1]]
-            sel = order[first]; q1[pi_[sel]] = r[sel]
-        return q1
+            sel = order[first]; q1[pi_[sel]] = r[sel]; s3o[pi_[sel]] = sv[sel]
+        return q1, s3o
 
 
 def kinematics(F, p):
     """-> dict with q1 (P,) rad (nan = no root), p2, p3, pin, ok (P,), slot coord s (deg), pa, hold, sing (deg)"""
-    kn = Kin(F, p); q1 = kn.solve(); P = len(q1); has = np.isfinite(q1); q1z = np.where(has, q1, 0.0); I = np.arange(P)
-    p2, p3, pin, ok3, mar = kn.at(I, q1z)
+    kn = Kin(F, p); q1, s3 = kn.solve(); P = len(q1); has = np.isfinite(q1); q1z = np.where(has, q1, 0.0); I = np.arange(P)
+    p2, p3, pin, ok3, mar = kn.at(I, q1z, s3)
     # cam transmission at fixed J1: pin velocity per unit J2 = p2 x pin
     t2 = np.cross(p2, pin); nt = kn.n - (kn.n * pin).sum(-1, keepdims=True) * pin; ntn = np.linalg.norm(nt, axis=-1) + 1e-12
     t2n = (t2 * nt).sum(-1) / ntn
@@ -132,7 +153,7 @@ def kinematics(F, p):
     ds = (s - p["s_c"] + 180.0) % 360.0 - 180.0
     ok = has & ok3 & (pa >= p["pa_min"]) & (hold >= p["hold_mm"]) & (sing >= p["sing_deg"])
     inslot = np.abs(ds) <= p["s_half"]
-    return dict(kn=kn, q1=q1z, has=has, p2=p2, p3=p3, pin=pin, ok=ok, okk=ok, inslot=inslot, s=s, ds=ds, pa=pa, hold=hold, sing=sing, margin=mar, fp=fp)
+    return dict(kn=kn, q1=q1z, s3=s3, has=has, p2=p2, p3=p3, pin=pin, ok=ok, okk=ok, inslot=inslot, s=s, ds=ds, pa=pa, hold=hold, sing=sing, margin=mar, fp=fp)
 
 
 def slot_dirs(p):
@@ -153,19 +174,20 @@ def build(B, F, p):
                   K.axis_angle(u4, F.HG([0.0, -1, 0]), p3), k["s"]], -1)
     w = p["width"]; t = p["t_link"]; end = K.HUB_R + 2.0
     # tail: J2 -> pin, extended by `pad` mm past the pin (the roller pad)
-    ang = np.arccos(np.clip((p2 * pin).sum(-1), -1, 1)); ext = ang + p["pad"] / 70.0
+    ext = p["tr"] * D2R + p["pad"] / 70.0
     hubs = [K.hub_member("hub1", u1, "J1"), K.hub_member("hub2", p2, "J2"), K.hub_member("hub3", p3, "J3"), K.hub_member("hub4", u4, "J4")]
     slot = K.Member("slot", F.S(slot_dirs(p)), kind="cap", t=p["slot_t"], width=p["slot_w"], joints=("J1",), cell=4.0)
-    links = [K.strap_member("link1", u1, p2, ("J1", "J2"), width=w, t=t, ramp_to=(("hub1", K.STACK), ("hub2", 0.0)), over=[("slot", 1.0)], end_mm=end),
+    links = [K.strap_member("link1", u1, p2, ("J1", "J2"), ang=p["a1"] * D2R, width=w, t=t, ramp_to=(("hub1", K.STACK), ("hub2", 0.0)), over=[("slot", 1.0)], end_mm=end),
              K.strap_member("tail", p2, pin, ("J2",), ang=ext, width=w, t=t, ramp_to=(("hub2", K.STACK), (None, 0)),
                             over=[("link1", 1.0), ("slot", 1.0)], end_mm=end),
-             K.strap_member("link2", p2, p3, ("J2", "J3"), width=w, t=t, ramp_to=(("hub2", K.STACK), ("hub3", 0.0)),
+             K.strap_member("link2", p2, p3, ("J2", "J3"), ang=p["a2"] * D2R, width=w, t=t, ramp_to=(("hub2", K.STACK), ("hub3", 0.0)),
                             over=[("link1", 1.0), ("neck", 1.0), ("slot", 1.0)], end_mm=end),
-             K.strap_member("link3", p3, u4, ("J3", "J4"), width=w, t=t, ramp_to=(("hub3", K.STACK), ("hub4", K.STACK)),
+             K.strap_member("link3", p3, u4, ("J3", "J4"), ang=p["a3"] * D2R, width=w, t=t, ramp_to=(("hub3", K.STACK), ("hub4", K.STACK)),
                             over=[("link1", 1.0), ("neck", 1.0), ("slot", 1.0)], end_mm=end),
              K.neck_member(F, u4, joints=("J4",), ramps=(("hub4", 0.0), (None, 0)))]
     okr = ok
-    info = dict(residual_deg=round(float(K.closure_residual(p2, u4, p3, p["a2"], p["a3"])[okr].max()), 6) if okr.any() else None,
+    info = dict(residual_deg=round(float(max(K.closure_residual(p2, u4, p3, p["a2"], p["a3"])[okr].max(),
+                                          np.degrees(np.abs((pin * kn.n).sum(-1) - kn.cb))[okr].max())), 6) if okr.any() else None,
                 min_margin=round(float(k["margin"][okr].min()), 2) if okr.any() else None,
                 pa_min_taken=round(float(k["pa"][okr].min()), 3) if okr.any() else None,
                 hold_min_taken=round(float(k["hold"][okr].min()), 2) if okr.any() else None,
@@ -173,6 +195,26 @@ def build(B, F, p):
                 cut_noroot=round(float(np.mean(~k["has"])), 4), cut_cam=round(float(np.mean(k["has"] & ~k["ok"])), 4),
                 cut_slot=round(float(np.mean(k["ok"] & ~k["inslot"])), 4))
     return K.Chain(members=hubs + [slot] + links, ok=ok, q=q, joints=dict(J1=u1, J2=p2, J3=p3, J4=u4, JP=pin), info=info, hubless=("JP",))
+
+
+def fit_slot(B, p):
+    """park-fit (the round-4 lead: fit the slot to park4's dwell): the small circle (plane cut of the sphere) nearest, in
+    least squares, to the pin positions of the dwell configuration over the bench poses where it closes (S frame); then
+    the offsets dn_az / dn_el / dbeta; s3 and mode = the majority branch / slope at the dwell configurations"""
+    F = getattr(B, "_kitF", None) or K.frames(B); B._kitF = F
+    q = dict(p, n_az=0.0, n_el=0.0, beta=90.0); kn = Kin(F, q); ok = kn.pok
+    if ok.sum() < 5: return p
+    pin = kn.pin(kn.pp2, kn.pp3); X = np.einsum("pji,pj->pi", F.RS, pin)[ok]          # scapula frame
+    c = X.mean(0); w, V = np.linalg.eigh(np.cov((X - c).T)); n = V[:, 0]; d = float(n @ c)
+    if d < 0: n, d = -n, -d
+    beta = math.degrees(math.acos(min(1.0, d))); rms = float(np.degrees(np.sqrt(np.mean((np.arccos(np.clip(X @ n, -1, 1)) - beta * D2R) ** 2))))
+    el = math.degrees(math.asin(np.clip(n[1], -1, 1))); az = math.degrees(math.atan2(n[2], -n[0]))
+    p = dict(p, n_az=round(az + p["dn_az"], 4), n_el=round(max(-89.0, min(89.0, el + p["dn_el"])), 4), beta=round(beta + p["dbeta"], 4), fit_rms_deg=round(rms, 2))
+    kn = Kin(F, p); p2, p3 = kn.pp2[ok], kn.pp3[ok]; u4 = kn.u4[ok]
+    s3 = np.where((p3 * np.cross(p2, u4)).sum(-1) >= 0, 1.0, -1.0)
+    I = np.nonzero(ok)[0]; q1 = np.arctan2((p2 * kn.b[I]).sum(-1), (p2 * kn.a[I]).sum(-1)); h = 1e-4
+    ga, _ = kn.g(I, q1 + h, s3); gb, _ = kn.g(I, q1 - h, s3)
+    return dict(p, mode=1 if np.mean(s3 * np.sign(ga - gb)) * float(p.get("mode_flip", 1)) >= 0 else -1)
 
 
 def set_slot(B, p):
@@ -195,11 +237,13 @@ assert "K.HUB_R for m in hubs" in _EXTRAS_SRC
 def evaluate(B, params, preset=False):
     """tools/concept_cma.py hook -> (params, report). preset: keep s_c / s_half as given (frozen protocol)"""
     p = dict(PARAMS, **params); p["q"] = min(1.0, max(0.8, float(p["q"])))
-    p["s3"] = 1 if float(p["s3"]) >= 0 else -1; p["mode"] = 1 if float(p["mode"]) >= 0 else -1
+    p["mode"] = 1 if float(p["mode"]) >= 0 else -1
     for a in ("a1", "a2", "a3"): p[a] = min(150.0, max(15.0, float(p[a])))
     p["tr"] = min(80.0, max(8.0, float(p["tr"]))); p["beta"] = min(170.0, max(5.0, float(p["beta"])))
     p["pct_lo"] = min(20.0, max(0.0, float(p["pct_lo"]))); p["pct_hi"] = min(100.0, max(80.0, float(p["pct_hi"])))
-    if not preset: p = set_slot(B, p)
+    if not preset:
+        if p.get("fit"): p = fit_slot(B, p)
+        p = set_slot(B, p)
     r = K.evaluate(B, build, p); r = extras(B, r, p)
     L = B._kit_last; take = L["take"]; prof = L["prof"]
     r["slot_arc_deg"] = round(2 * p["s_half"], 1); r["slot_len_mm"] = round(2 * p["s_half"] * D2R * float(np.median(prof["slot"])) * math.sin(p["beta"] * D2R), 1)
