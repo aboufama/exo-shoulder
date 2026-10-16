@@ -74,6 +74,11 @@
       const hubD = (name, role, ax, m, r) => ({ kind: 'hub', role, name, c: V.scale(ax, lv[m].F), axis: ax, r, h: lv[m].t });
       const h1 = hubD('J1 (axis through GH)', 'active', X.p1, 'hub1', P.rad1);
       const neckEnd = M.mulv(ctx.Hb, BAR0);
+      // BOTTOM's bar (arm-fixed, the user's part) from the neck's end down to the cuff, as spine-parked-j2-3r.js draws it:
+      // member 3 is rigid to it, so without it the arm end of the chain reads as floating
+      const DB = [0, -0.9975, -0.0713], barDn = M.mulv(ctx.Hb, DB), neckPt = V.scale(V.unit(neckEnd), lv.neck.r1 + h);
+      const cuffC = V.scale(ctx.armAxis, 155), cuffTop = V.madd(cuffC, V.unit(V.reject(neckPt, ctx.armAxis)), 47);
+      const barEnd = V.madd(neckPt, barDn, Math.max(20, V.dot(V.sub(cuffTop, neckPt), barDn)));
       return [
         { kind: 'plate', role: 'fixed-scapula', name: 'base on the scapula handler', c: V.madd(h1.c, X.p1, -3), z: X.p1, x: ctx.attach.scapDir([1, 0, 0]), size: [40, 30], t: 3 },
         h1,
@@ -89,7 +94,9 @@
         arc('L2b tail (knee -> Q)', 'link', X.Kw, X.Qw, 'L2bQ'),
         hubD('J3 (O15 slim, through GH)', 'active', X.u3w, 'hub3', P.rad3),
         arc('neck to BOTTOM\'s bar (14 x 6)', 'fixed-arm', X.p3, neckEnd, 'neck', 3),
-        { kind: 'strap', role: 'fixed-arm', name: 'arm cuff', c: V.scale(ctx.armAxis, 155), axis: ctx.armAxis, r: 47, w: 26 },
+        { kind: 'link', role: 'fixed-arm', name: "BOTTOM's bar", a: neckPt, b: barEnd, r: 3 },
+        { kind: 'link', role: 'fixed-arm', name: 'bar to cuff', a: barEnd, b: cuffTop, r: 3 },
+        { kind: 'strap', role: 'fixed-arm', name: 'arm cuff', c: cuffC, axis: ctx.armAxis, r: 47, w: 26 },
         { kind: 'point', role: 'link', name: 'GH centre', p: [0, 0, 0], r: 4 }
       ];
     }
