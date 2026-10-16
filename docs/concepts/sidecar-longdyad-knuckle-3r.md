@@ -145,3 +145,104 @@ Untuned, the strap-level sidecar plus the longer dyad buys the in-band half the 
   fight each other.
 - **The ball links cannot hang under the arm.** Measured: the rod enters the skin on 110 of 160 poses.
 - **Stop B never binds.** See the gate.
+
+## Search (farm, CMA-ES on the near-touch gap, Bench(60,160) fast; 8 runs, 7248 configurations)
+
+| run | seed | best fast (near = plain) | bk1 / bk2 / a1max | reach | in-band14 | gate (gain 2nd half / last third / top-5 spread, score pts) |
+|---|---|---|---|---|---|---|
+| **A1** | bk 30 / 44 / 66, La 20, gam 0 | **10.30** | 28.9 / **39.2** / 63.2 | 0.800 | 0.897 | 0.29 / 0.13 / 0.01 (passes) |
+| A2 | same, other random seed | 11.60 | 29.2 / 45.5 / 61.3 | 0.800 | 0.901 | 0.00 / 0.00 / 0.00 |
+| B | 30 / 47 / 70, La 22, s_arm 4 | 12.05 | 28.9 / 46.6 / 70.5 | 0.800 | 0.896 | 0.49 / 0.49 / 0.05 |
+| C | wide-dyad 35 / 45 / 75 | 13.50 | 28.7 / 44.3 / 67.9 | 0.781 | 0.902 | 0.56 / 0.00 / 0.00 |
+| D (control) | the lead's dyad 30.05 / 37.57 / 61.72 | 10.63 | 28.6 / **34.6** / 58.3 | 0.794 | 0.901 | 0.64 / 0.39 / 0.12 |
+| E | 30 / 44 / 66, gam +15 | 11.07 | 27.4 / 39.3 / 61.8 | 0.794 | 0.896 | 0.65 / 0.51 / 0.08 |
+| F | 30 / 47 / 72, gam +15 | 12.59 | 27.3 / 43.0 / 65.3 | 0.794 | 0.891 | 0.27 / 0.27 / 0.08 |
+| G | 30 / 44 / 69, La 22, r_h 16 | 11.57 | 25.0 / 41.4 / 61.4 | 0.788 | 0.897 | 0.52 / 0.17 / 0.13 |
+
+Every seed at bk2 44-47 walks back. The best basin is bk2 39-41 (A1, E, G), above the lead's 37.6 and the sidecar
+control's 34.6. The convergence gate passes on the best run A1 and on the combined search: < 1 point over the second
+half, < 0.5 over the last third, top 5 within 3. Every best re-evaluates identically on the final model (drive-range
+truncation included; it does not bite at these configurations). The stop B dyad margin is never what ends the law:
+at A1 the law ends at the lobe skirt (th 119.3), and the drive's own range at dK 43.0 (rod vs hub 2) is beyond every
+taken pose (dK 38.1).
+
+Best configuration (A1): bk1 28.94, bk2 39.24, a1max 63.18, kK 1.623 (linear law, per-t gated), r_h 14.87,
+beta -86.4, La 16.55, s_arm 4.39 (i_rock 3.77), hl 3.15 (the horn on link 1a's own layer), zr 0.0 (the arm's free end
+at link 1b's underside level, beside the strap), r_lobe 7.74, gam 0, smhi 16.55, smlo 5.0, az1 96.70, el1 67.59,
+az2 42.20, el2 44.42, wd 67.50, wa -7.32, b3 0.345, ang_min 26.88, lc 25.69, phib -60.70.
+
+At A1 the drive's internals hold:
+- transmission >= 38.8 deg over the taken range;
+- real ratio dphi/ddK 0.74-0.88 against a small-angle 0.90;
+- exact lobe crest 10.16 mm, inside the O20 skirt;
+- rod 26.8 mm;
+- K slop from 0.05 mm of ball-link play: 0.05 / 14.9 rad = 0.19 deg.
+
+## Claim (frozen shape fit on Bench(60,160) fast, worn on Bench(110,360) exact; self-measured, verifier pending)
+
+| design | fast | frozen plain | score | reach | in-band14 | in-band10 | contact | near-touch 1 mm / 2 mm | min metal | overhead | why (fold / slide / parts / contact) |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| **A1 (this row)** | 10.30 | **18.91** | **93.12** | 0.725 | 0.897 | 0.534 | 0.011 | **20.00** / 34.03 | 0.28 mm (2 poses < 1 mm) | 8/28 | 86 / 7 / 2 (E-L2) / 4 |
+| D: the same sidecar on the lead's dyad basin (bk2 34.6) | 10.63 | 19.97 | 92.74 | 0.711 | 0.902 | 0.521 | 0.011 | 21.61 / 35.91 | 0.56 mm | 8/28 | 91 / 9 / 0 / 4 |
+| verified lead frontload-lobe-stopb-knuckle-3r (same protocol) | 15.68 | 22.82 | 91.70 | 0.728 | 0.855 | 0.558 | 0.011 | 24.46 / 44.08 | 0.30 mm | 8/28 | 86 / 7 / 1 / 4 |
+
+Attribution:
+
+- **Drive.** The strap-level sidecar puts the drive metal in band: rod 0.893, rod ends 0.962, crank 0.910, horn
+  0.964, against the lead's rod and rod ends at 0 %. Frozen in-band goes 0.855 -> 0.897, which is the in-band half of
+  the planner's arithmetic (planned 0.905, gap ~18.3).
+- **Longer dyad.** The longdyad lever, measured against its own control D, is worth 1.06 plain / 1.61 near-touch
+  frozen: 5 fold poses (91 -> 86) and reach +0.014. It does not reach the lead's reach: 0.725 vs 0.728, overhead 8/28
+  both.
+- **The reach half of 95 is untouched.** The poses past th ~132 need a1e >= th - a2 + 5 = 76-100 at a2 62. That is
+  pick 3's lever (twist-long-a2), not this one.
+
+## Red team of the best configuration (A1)
+
+- **The point that pinches.**
+  - The horn's ball-link socket sits 1.37 mm off hub K's housing in every pose (ROD-hubK, the tightest part pair),
+    at r_h 14.87. That meets the judge's flagged cup-to-hub-K pinch at 1 mm + 0.37. A catalogued M2 socket larger
+    than O7 would break it, so take r_h >= 15.5 or a smaller socket (the CAD must check).
+  - knee-E 1.37 mm is inherited from the lead.
+- **The metal that grazes the skin.** The near-touch CMA parks parts at the 1 mm rule's edge. On the fit bench:
+  - horn 1.00 mm (4 poses < 2 mm);
+  - crank arm 1.24 mm (2 poses);
+  - hub 1 1.29 mm;
+  - hub K 1.65 mm.
+
+  Frozen, two workspace poses go under 1 mm: 0.28 mm at plane 45 / elev 150 / axial -45, and 0.38 mm at plane 15 /
+  elev 90 / axial 30. At 2 mm the near-touch gap is 34.03, against the lead's 44.08.
+- **The pose that jams.** The drive's own range ends at dK 43.0, where the rod meets hub 2's housing. Taken poses use
+  at most dK 38.1 (fit) and stay inside it frozen. Stop B (the q2 dowel) belongs at that dK, not at the K dyad's
+  a1max 63.2: the dyad margin is never reached.
+- **The optimistic number.**
+  - Fast 10.30 -> frozen 18.91 (8.6 points). That is the same drop as the lead's 15.57 -> 22.72; the fast bench's
+    workspace sample under-samples axial rotation (CLAUDE.md).
+  - The claim is plain 18.91. Near-touch is 20.00.
+  - Held out and flood fill are below.
+- **Lever attribution, not the bench.**
+  - The sidecar drive is pick 1's lever. On its own (D) it gives 19.97 frozen.
+  - This row's own lever, the longer link 1b, adds 1.06 frozen plain. That is just above the 1-point rule and needs
+    the verifier.
+
+## Held out (the frozen shape worn on every fit-clip frame and workspace pose in neither bench)
+
+| design | held-out plain | near-touch 1 mm / 2 mm | reach | in-band14 | contact | overhead |
+|---|---|---|---|---|---|---|
+| **A1** | **22.67** | 25.75 / 37.24 | 0.690 | 0.895 | 0.012 | 18/71 |
+| verified lead (same protocol) | 26.75 | 29.39 / - | 0.692 | 0.854 | 0.013 | - |
+| untuned seed (gam +15, before the drive-range rule) | 24.98 | 31.66 / - | 0.672 | 0.903 | 0.022 | 13/71 |
+
+The gain holds out of sample: +4.08 plain and +3.64 near-touch over the lead. Reach is equal to the lead's again,
+so the whole gain is in-band.
+
+## What happens next
+
+1. **Verify A1.** Wear it through the round's verifier harness with this model file. The verifier should re-check:
+   - the RSSR per-pose placement and the drive-range truncation;
+   - the horn socket vs hub K's housing at the catalogued M2 socket envelope;
+   - pick 1's own claim on the same drive. If pick 1's per-pose model differs, the two must agree on the drive metal.
+2. **Wear pick 3's a2 / J3 re-seat (twist-long-a2) on A1's drive and dyad.** That is the reach half: the poses past th
+   132 are an a2 wall. Gate it law-only first, then CMA on the near-touch gap from A1.
+3. **If the 1-point rule holds against D only marginally (1.06)**, keep A1 as the drive + dyad reference and fold the
+   bk2 lever into pick 1's polish as one more free parameter. It is not a separate morphology.
