@@ -193,3 +193,34 @@ docs/concepts/models/skin-normal-3r-pin-knee.py (model), docs/concepts/sweeps/sk
 configs in order: early local checks, coarse farm sweep 256, CMA round 1 on the exact path (no bench cache on the farm
 jobs: 9 evaluations per stream), wide seat LHS 240, CMA round 2 with the cache 6600), docs/concepts/rows/
 skin-normal-3r-pin-knee.json.
+
+## Verification (independent verifier, 2026-10-16 ~03:58 UTC)
+
+Harness: `docs/concepts/verify/skin-normal-3r-pin-knee.py` (frozen-shape protocol: fit on Bench(60,160) fast, worn on
+Bench(110,360) with CB_EXACT=1, no refit; the model's own checks plus the verifier's). Run locally as one niced process
+(177 s; the farm sweep hook cannot run the frozen protocol or the added checks).
+
+What was attacked and what it found:
+
+| check | result |
+|---|---|
+| ACTIVE DOF / undetermined passives | 3 active (J1-J3), 2 passive pins parallel to J3, 0 translations. With J1/J2 on GH rays the link-2 -> arm motion is a planar rotation about the GH line parallel to d3; the planar RRR (J3, a, b) has 3 planar DOF, so q3, qa, qb are fixed by the closure on a fixed branch (knee angle kept in [30, 150], never singular). Nothing sags (R17). |
+| independent 3D closure (per taken pose, from the member transforms, not the closed form) | hub-3 centre via link 2 vs via member 3 0.000 mm; pin a via member 3 vs via the knee 0.000 mm; pin b via the knee vs via the arm 0.000 mm; link-2 -> member-3 rotation off J3's axis <= 0.016 deg; knee rotations off the pin axes <= 0.022 deg; arm rotation residual <= 0.015 deg. 0 poses fail. |
+| knee link vs hub 3's upper half (rides with link 2, so non-adjacent: 1 mm, the model used 0.15) | min 24.3 mm - no pose lost |
+| E boss (O12 at pin a; the model checks the E strap only) vs hub 1, hub 2, L1 (1 mm) and L2 (0.15, adjacent at J3) | min 24.7 mm (boss-L2) - no pose lost |
+| parts at real size / sampling | O20 x 12.25 hubs with crowns and walls, 8 x 3 straps, E strap + boss, knee link (lc + 12) x 10 x 2.25, pad O12, all undersides on the 2 mm grid; 5 mm pin stack = the catalogue's IGLIDUR-PIN (two ~2 mm plates + washer, 4.5-5 mm) |
+| joint ranges | J3 travel 186.8 deg over the taken poses (O20 hub with an MR117 pair: full rotation, fine for MVP1; MVP2 cable routing must allow it), pin a 54.1 deg, pin b 47.9 deg |
+| arm pad on the arm | pad centre ~50 mm distal of the J3 line foot in hub 3's plane (47.5 along, -17.2 across): on the lateral upper arm, like the champion's neck end and the leader's cuff rail (all arm-frame-fixed in the bench) |
+| bench artefact (fast grid) | the claim is already the exact-path frozen number; reproduced to the digit |
+
+**Verified numbers, Bench(110,360) exact, frozen k4598:** gap **30.35** (score 88.96): reach 0.6056, follow 1.000,
+in-band 2-14 0.9043, in-band 2-10 0.5376, contact 0.0091 (why not taken: fold 133, knee window 4, parts 2, contact 3).
+Near-touch: min metal 0.02 mm (arm at the side, elevation 0); metal < 1 mm as contact -> 38.41 (16 poses), < 2 mm ->
+64.60 (47 poses). Overhead (elevation >= 140): reach 0.25 (fold 17, knee window 4 of 28), follow 1.0, in-band14 0.940.
+
+**Champion on the same bench and checks** (offset-skin-normal-3r verifier, `champbig_frozen`, re-run now): 66.97
+(reach 0.700, follow 0.918, in-band14 0.575, contact 0.113; metal < 1 mm as contact 71.20). The knee beats it by 36.6
+points (32.8 with the 1 mm near-touch rule on both) and beats the verified 2-slide leader (42.59) with 0 passive
+translations. **Verdict: VERIFIED, not refuted.** It does not reach score 90 on the verification bench (needs gap <=
+27.5); the whole remaining gap is reach (the J2 fold, 0.25 overhead), and the near-touch at the arm-at-side poses
+(0.02 mm) is the next red-team point for the L1 CAD: a 1 mm liner rule costs 8 points.

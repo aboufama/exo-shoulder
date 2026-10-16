@@ -1838,7 +1838,7 @@
   "name": "Leader 3R closed by a flat two-pin knee instead of the crossed cuff slides (0 passive translations; merged with skin-normal-3r-pinned-cufflink, whitworth-j3-cuff kept as the 1-slider fallback)",
   "family": "offset 3R, exact 2-slide subfamily, planar revolute closure",
   "lens": "round3:self-alignment / loop closure through cheap rotational passive joints",
-  "status": "screened",
+  "status": "verified",
   "t_ideated": "2026-10-16T01:35:52Z",
   "source": "round 3 judge (merge of 3 candidates)",
   "merged_from": [
