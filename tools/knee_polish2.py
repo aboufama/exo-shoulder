@@ -14,6 +14,13 @@ Drives tools/knee_polish.py UNCHANGED (its verifier-corrected evaluation, its CM
     such losses free in the gap; the constraint keeps them). Logged: gap, near-touch gap, overhead follow / reach, the
     knee's distance to its window edge over the overhead poses taken (the H1 red-team edge).
 
+  * (KP2_VAL=1, polish 2 at 08:30 UTC) a VALIDATION term against the in-sample over-fit the P5 verification measured
+    (P5: -3.11 on the 470 search poses, -0.16 held out): the shape fitted on Bench(110,360) is worn FROZEN on
+    Bench(60,160) (fast cache 0089c747c10f; 164 of its 220 poses are not in Bench(110,360); none is in the verifier's
+    held-out set, which is every pose OUTSIDE both benches - the held-out split stays held out). Objective =
+    0.5 * (near-touch gap on Bench(110,360) + near-touch gap of the frozen shape on Bench(60,160)) + OH_PEN per overhead
+    clip frame lost on Bench(110,360).
+
     python3 tools/knee_polish2.py cma  ... (tools/knee_polish.py cma options; FREE gains m_lo / m_hi)
     python3 tools/knee_polish2.py scan OUT 'LIST' [--jobs 2]
     python3 tools/knee_polish2.py claim PROTO OUT 'PARAMS'   PROTO fitbig | held | fit60: the polish-verifier harness
@@ -90,11 +97,33 @@ def evaluate2(B, p):
     rep.update(oh_follow=oh["follow"], oh_clip=oh["clip"], oh_lost=lost, oh_reach=oh["reach"], oh_inband14=oh["inband14"], oh_knee_edge=edge,
                fold_taken=th_taken, m_lo=float(P.get("m_lo", STOP_FLOOR)), m_hi=float(P.get("m_hi", STOP_FLOOR)),
                obj2=round(float(rep["gap_near1"]) + OH_PEN * lost, 2))
+    BV = KP._W.get("V") if B is KP._W.get("B") else None
+    if BV is not None:                                       # validation: this fitted shape worn frozen on Bench(60,160)
+        Mf = frozen_from(M, BV); rf = Mf.run(); vrep, vaud, _ = KP.score_model(Mf, BV, rf, Mf.p)
+        rep.update(val_gap=vrep["gap"], val_near1=vrep["gap_near1"], val_reach=vrep["reach"], val_follow=vrep["follow"],
+                   val_inband14=vrep["inband14"], val_contact=vrep["contact"], val_near_min=vrep["near_min"], val_mode=BV.mode,
+                   obj2=round(0.5 * (float(rep["gap_near1"]) + float(vrep["gap_near1"])) + OH_PEN * lost, 2))
     return rep
+
+
+def frozen_from(M1, wearB):
+    """the verifier's frozen protocol on an ALREADY fitted model M1: wear its shape (heights, knee reference m) on wearB
+    without refit (same attribute hand-over as docs/concepts/verify/skin-normal-3r-pin-knee-polish.py frozen_on)"""
+    MK = KP.verifier().MK
+    P2 = dict(M1.p); P2["m_fix"] = [float(x) for x in M1.D.m]
+
+    class Frozen(MK.Model):
+        def fit(self):
+            for at in ("g", "fr", "geo", "rigid", "link_pts", "f", "tr", "zb", "_tr_fit", "cyl", "box", "strap", "cyl_surf", "Emid",
+                       "Hneed", "Lneed", "hEx", "_Ex", "_h12"):
+                if hasattr(M1, at): setattr(self, at, getattr(M1, at))
+            self.contact = list(M1.contact); self.poses_fit = np.nonzero(self.kin_ok)[0]; self.drop = np.zeros(len(self.poses_fit), bool)
+    return Frozen(wearB, P2)
 
 
 def _init2(nc, nw):
     os.environ.setdefault("OMP_NUM_THREADS", "1"); _patch(); KP._W["B"] = CB.Bench(nc, nw)
+    if os.environ.get("KP2_VAL") == "1": KP._W["V"] = CB.Bench(60, 160)
 
 
 def _eval2(arg):
@@ -231,7 +260,10 @@ def log_rows(files, write=True):
                          "fold rule 5 + J2 stops m_lo / m_hi (design variables >= 5); O20 x 3",
                    params=p, **{m: rep.get(m) for m in ("inband14", "inband10", "reach", "follow", "contact")},
                    gap=rep.get("gap") if not r.get("error") else None, gap_near1=rep.get("gap_near1"), obj=r["obj"],
-                   obj_def=f"near-touch gap + {OH_PEN} per overhead clip frame (elev >= 140) lost",
+                   obj_def=(f"0.5 * (near-touch gap Bench(110,360) + frozen-shape near-touch gap on Bench(60,160)) + {OH_PEN} per overhead "
+                            f"clip frame (elev >= 140) lost") if rep.get("val_near1") is not None else
+                           f"near-touch gap + {OH_PEN} per overhead clip frame (elev >= 140) lost",
+                   **{m: rep.get(m) for m in ("val_gap", "val_near1", "val_reach", "val_follow", "val_inband14", "val_contact", "val_near_min", "m_lo", "m_hi")},
                    near_min=rep.get("near_min"), model_gap=rep.get("model_gap"), why=rep.get("why"), knee_ang=rep.get("knee_ang"),
                    j3_lever_min=rep.get("j3_lever_min"), hubs=rep.get("hubs"), oh_follow=rep.get("oh_follow"), oh_lost=rep.get("oh_lost"),
                    oh_reach=rep.get("oh_reach"), oh_knee_edge=rep.get("oh_knee_edge"), fold_taken=rep.get("fold_taken"),

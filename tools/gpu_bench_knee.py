@@ -465,6 +465,38 @@ def random_configs(n, seed=0, around=None, scale=1.0):
     return out
 
 
+def mixed_configs(n, seed=0):
+    """parity / speed set: 4/5 near the three leaders (H1, P5, k4598) at 0.5 / 1 / 2 / 3 x the polish's CMA scale, 1/5
+    uniform in the polish bounds - every one inside the rulings (O20, J1 seat region, knee_polish FREE bounds)"""
+    L = [p for _, p in leaders()]; n_uni = max(2, n // 5); out = []
+    for k in range(n - n_uni):
+        out += random_configs(1, seed * 1000 + k, around=dict(kit().base_params(), **L[k % len(L)]), scale=(0.5, 1.0, 2.0, 3.0)[k % 4])
+    return out + random_configs(n_uni, seed * 1000 + 999)
+
+
+_WG = {}
+
+
+def _gpu_init(wear, fit, margin, device):
+    os.environ["OMP_NUM_THREADS"] = "1"; KP = kit(margin); patch(KP)
+    _WG["Bw"] = bench(*wear, device); _WG["Bf"] = bench(*fit, device) if fit and tuple(fit) != tuple(wear) else None
+
+
+def _gpu_eval(a):
+    k, p = a; return k, evaluate_one(p, _WG["Bw"], _WG["Bf"])
+
+
+def gpu_pool(workers, wear, fit, margin, device):
+    import multiprocessing as mp
+    return mp.get_context("spawn").Pool(workers, initializer=_gpu_init, initargs=(wear, fit, margin, device))
+
+
+def _cma_init(nc, nw):
+    """knee_polish's pool initializer with the device grid + the batched loops (fork: the parent never touched CUDA)"""
+    os.environ.setdefault("OMP_NUM_THREADS", "1"); KP = kit(); patch(KP)
+    dev = os.environ.get("GBK_DEVICE", "cuda"); KP._W["B"] = bench(nc, nw, dev)
+
+
 def main():
     import argparse
     ap = argparse.ArgumentParser(); ap.add_argument("cmd"); ap.add_argument("args", nargs="*")
@@ -472,7 +504,18 @@ def main():
     ap.add_argument("--device", default=None); ap.add_argument("--n", type=int, default=50); ap.add_argument("--out")
     ap.add_argument("--procs", type=int, default=4); ap.add_argument("--seed", type=int, default=0); ap.add_argument("--leaders", action="store_true")
     ap.add_argument("--near", type=float, default=0.0, help="random configs within `near` x the CMA scale around H1 (0 = uniform in the bounds)")
-    ap.add_argument("--cpu-from", dest="cpu_from")
+    ap.add_argument("--cpu-from", dest="cpu_from"); ap.add_argument("--mix", action="store_true"); ap.add_argument("--workers", type=int, default=0)
+    if len(sys.argv) > 1 and sys.argv[1] == "cma":                    # knee_polish's CMA (same objective / rows / state) on the device
+        KP = kit(float(os.environ.get("CB_FOLD_MARGIN", 5.0))); KP._init = _cma_init; sys.argv = [sys.argv[0]] + sys.argv[1:]
+        import argparse as _ap
+        c = _ap.ArgumentParser(); c.add_argument("cmd"); c.add_argument("--x0", default="{}"); c.add_argument("--fixed", default="")
+        c.add_argument("--label", required=True); c.add_argument("--out", required=True); c.add_argument("--state", default="")
+        c.add_argument("--state-out", default=""); c.add_argument("--sigma", type=float, default=0.5)
+        c.add_argument("--popsize", type=int, default=16); c.add_argument("--jobs", type=int, default=2)
+        c.add_argument("--budget-s", type=float, default=3000); c.add_argument("--max-gen", type=int, default=400)
+        c.add_argument("--seed", type=int, default=1); c.add_argument("--nc", type=int, default=110); c.add_argument("--nw", type=int, default=360)
+        c.add_argument("--obj", default="near1", choices=("near1", "gap"))
+        x = c.parse_args(sys.argv[1:]); x.state_out = x.state_out or (x.out + ".state.json"); KP.cma(x); return
     a = ap.parse_args()
     KP = kit(a.margin); patch(KP)
     import torch
@@ -486,7 +529,18 @@ def main():
                   + " | ".join(str(md.get(k)) for k in ("gap", "gap_near1", "reach", "follow", "inband14", "inband10", "contact"))
                   + f" | {S_['n_gap_diff_gt_05']} | {S_['gpu_secs']} | {S_['cpu_secs']} ({S_['cpu_procs']}) |")
         return
-    t = time.time(); Bw = bench(*wear, dev); Bf = bench(*fit, dev) if fit and fit != wear else None
+    if a.cmd == "speed":                                              # evals/s of a worker pool on the device (after warm-up)
+        cf = mixed_configs(a.n, a.seed + 7); gp = gpu_pool(a.workers or 1, wear, fit, a.margin, dev)
+        gp.map(_gpu_eval, list(enumerate(cf[:a.workers or 1])), chunksize=1)
+        t = time.time(); R = gp.map(_gpu_eval, list(enumerate(cf)), chunksize=1); dt = time.time() - t; gp.close()
+        secs = [r.get("secs") for _, r in R if r.get("secs")]
+        res = dict(n=len(cf), secs=round(dt, 2), evals_per_s=round(len(cf) / dt, 3), workers=a.workers or 1, device=dev, bench=list(wear),
+                   fit=list(fit) if fit else None, margin=a.margin, s_per_config_median=round(float(np.median(secs)), 2) if secs else None,
+                   errors=sum(1 for _, r in R if r.get("gap") is None), gpu=(torch.cuda.get_device_name(0) if dev == "cuda" else None), nproc=os.cpu_count())
+        log(json.dumps(res))
+        if a.out: json.dump(res, open(a.out, "w"), indent=1)
+        return
+    t = time.time(); Bw = bench(*wear, dev) if not a.workers else None; Bf = bench(*fit, dev) if fit and fit != wear and not a.workers else None
     log(f"benches on {dev} in {time.time() - t:.1f} s; margin {os.environ.get('CB_FOLD_MARGIN')}")
     if a.cmd == "eval":
         cf = json.load(open(a.args[0])); rows = []
@@ -495,7 +549,7 @@ def main():
         json.dump(dict(bench=list(wear), fit=list(fit) if fit else None, device=dev, margin=a.margin, rows=rows), open(a.args[1], "w"), indent=1, default=float)
     elif a.cmd == "parity":
         named = (leaders() if a.leaders else [])
-        rnd = random_configs(a.n, a.seed, around=(KP.base_params() if a.near else None), scale=a.near or 1.0)
+        rnd = mixed_configs(a.n, a.seed) if a.mix else random_configs(a.n, a.seed, around=(KP.base_params() if a.near else None), scale=a.near or 1.0)
         cf = [p for _, p in named] + rnd; tags = [nm for nm, _ in named] + [f"r{k}" for k in range(len(rnd))]
         import multiprocessing as mp
         ctx = mp.get_context("spawn"); pool = ctx.Pool(a.procs)
@@ -504,11 +558,17 @@ def main():
             for r in json.load(open(a.cpu_from))["rows"]: known[json.dumps(r["params"], sort_keys=True)] = r["cpu"]
         todo = [k for k, p in enumerate(cf) if json.dumps(p, sort_keys=True) not in known]
         tc0 = time.time(); fut = pool.imap_unordered(_cpu_idx, [(k, (cf[k], wear, fit, a.margin)) for k in todo], chunksize=1)
-        t = time.time(); g = []
-        for k, p in enumerate(cf):
-            r = evaluate_one(p, Bw, Bf); g.append(r)
-            log(f"  GPU {k + 1}/{len(cf)} {tags[k]}: gap {r.get('gap')} near1 {r.get('gap_near1')} ({r.get('secs')} s) {r.get('error', '')}")
-        tg = time.time() - t; log(f"GPU {len(cf)} configs in {tg:.1f} s")
+        t = time.time(); g = [None] * len(cf)
+        if a.workers:
+            gp = gpu_pool(a.workers, wear, fit, a.margin, dev)
+            for j, (k, r) in enumerate(gp.imap_unordered(_gpu_eval, list(enumerate(cf)), chunksize=1)):
+                g[k] = r; log(f"  GPU {j + 1}/{len(cf)} {tags[k]}: gap {r.get('gap')} near1 {r.get('gap_near1')} ({r.get('secs')} s) {r.get('error', '')}")
+            gp.close()
+        else:
+            for k, p in enumerate(cf):
+                r = evaluate_one(p, Bw, Bf); g[k] = r
+                log(f"  GPU {k + 1}/{len(cf)} {tags[k]}: gap {r.get('gap')} near1 {r.get('gap_near1')} ({r.get('secs')} s) {r.get('error', '')}")
+        tg = time.time() - t; log(f"GPU {len(cf)} configs in {tg:.1f} s ({a.workers or 1} worker(s))")
         c = [known.get(json.dumps(p, sort_keys=True)) for p in cf]
         for j, (k, r) in enumerate(fut):
             c[k] = r; log(f"  CPU {j + 1}/{len(todo)} {tags[k]}: gap cpu {r.get('gap')} gpu {g[k].get('gap')} | near1 cpu {r.get('gap_near1')} gpu {g[k].get('gap_near1')} ({r.get('secs')} s)")

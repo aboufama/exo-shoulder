@@ -1,224 +1,261 @@
-"""Concept model: CAM-SCHEDULED 4R (id cam-coupled-4r), docs/concepts/catalogue.json.
+"""cam-coupled-4r: a spherical 4R whose spare coordinate is SET by a roller pin on link 2's tail running in a
+scapula-fixed spherical slot (catalogue id cam-coupled-4r, family "redundant 4R, determined spare").
 
-A spherical 4R (every axis through the GH centre, O20 hubs) whose spare coordinate is not free: link 2 carries a
-short tail with a roller pin that runs in a circular slot cut in an S-fixed plate on the base, so the slot schedules
-the fold of the chain (J2) from J1 instead of letting it sag.
-  scapula base (S) -> J1 (O20 hub, axis p1 fixed in the scapula) -> link 1 -> J2 (passive, scheduled) -> link 2
-  (+ tail -> roller pin in the base slot) -> J3 -> link 3 -> J4 (O20 hub, axis W fixed in the humerus) -> arm-end neck
-  -> the user's passive cuff slides (outside the count).
+Chain (every joint axis through GH, every hub the v5 O20 stack):
+  scapula handler -> base (+ the S-fixed slot plate) -> J1 (O20, ACTIVE) -> link 1 (12 x 3 Ti, arc a1) -> J2 (O20,
+  PASSIVE, scheduled by the slot) -> link 2 (12 x 3, arc a2; a tail strap from J2 to an MR63 roller pin) -> J3 (O20,
+  ACTIVE) -> link 3 (12 x 3, arc a3) -> J4 (O20, ACTIVE, humerus-fixed axis) -> K7 neck -> BOTTOM -> cuff.
+The pin on link 2 (angle tr from J2's axis, azimuth tp from link 2's direction: 180 = the tail continues link 2 back past
+J2) runs in the small-circle slot {x : x . n = cos beta} of an S-fixed groove plate (n = bvec(n_az, n_el) in the scapula
+frame). DOF: 4 bodies x 3 - 4 x 2 (J1-J4) - 1 (a point held on a curve) = 3 = the arm. ACTIVE J1, J3, J4. PASSIVE J2,
+the pin's slide along the slot and the roller's roll: all set by the closure. The pin's position depends on q1 and q2
+only (it is fixed in link 2), so the slot is a law q2 = f(q1) wherever d(pin . n)/dq2 != 0 (the cam transmits): the
+arm orientation is an exact function of the three active readings (no sensed passive), and nothing sags (R17).
 
-DOF: spherical mobility 3 x 4 bodies (links 1-3 + the arm) - 2 x 4 (J1-J4) - 1 (pin held on a curve) = 3. ACTIVE 3
-(J1, J3, J4 need driving / sensing); PASSIVE 3 (J2, the pin's slide along the slot and the pin's roll: all set by
-the closure). Nothing is an undriven spare: with the arm held, the 4R's self-motion moves the pin across the slot
-(checked per pose: the 'hold' rate below).
+Kinematics per pose (vectorised): scan the J1 azimuth q1 (p2 on the a1 cone about u1) over 360 x 1 deg; p3 = the
+two-circle closure of p2 (arc a2) and u4 (arc a3) on branch s3 (K.closure, fold margin `margin` = K.FOLD_MARGIN);
+g(q1) = pin . n - cos beta; sign changes between valid neighbours are refined by 40 bisections (residual < 1e-9
+rad). Assembly mode = the sign of dg/dq1 (`mode`): a root cannot change it without a cam fold (dg/dq1 = 0), which the
+hold rule rejects; with two roots of the mode, the one nearest the azimuth of u4 about u1 (+ q1_off) is taken (pose-
+local; K2 dense continuity drops any frame where this rule would switch roots along a clip).
+A pose is TAKEN only if (on top of the kit's K2 / K6 / skin rules):
+  * a root exists on the mode, the J3 dyad (p2, p3, u4) keeps the fold margin;
+  * the cam transmits: pa = |t2 . nt| / |t2| >= pa_min (t2 = pin velocity per unit J2 at fixed J1, nt = slot normal
+    on the sphere; pa = cos of the pressure angle) and 70 |t2 . nt| >= hold_mm (mm of cross-slot pin travel per rad of
+    J2: the roller's 0.05 mm play then costs <= 0.05 / hold_mm rad of J2);
+  * the actuated map (J1 with J2 slaved, J3, J4) is not singular: the effective J1 axis w1 = u1 + f'(q1) p2 stays >=
+    sing_deg out of the plane of p3 and u4;
+  * the pin stays inside the cut slot [s_c - s_half, s_c + s_half] (slot coordinate = azimuth of the pin about n).
+Metal: O20 hubs at J1-J4 (flat, K4), straps link 1-3 (K5; link 2 / link 3 over link 1, the neck and the slot plate;
+link 1 over the slot plate), the tail (12 x 3 strap from J2 to the pin + 6 mm pad past it, link 2's body, over link 1
+and the slot plate), the K7 neck, and the slot plate: an S-fixed spherical groove plate (kind 'cap': ONE radius, so the
+roller runs at one radius) 14 mm wide (6.1 slot for the MR63 3 x 6 x 2.5 roller + 2 x 4 mm walls), 4 mm thick, over the
+cut arc + 6 mm at both ends. The roller pin (M3 shoulder screw) reaches from the tail's underside into the groove:
+its length is reported (pin_len_mm). The slot's cut arc is set by a KINEMATIC pre-pass (evaluate()): the pin's slot
+coordinate over the closing poses, trimmed to the [pct_lo, pct_hi] percentiles; frozen thereafter.
 
-Kinematics (the band evaluator's pin representation, pipeline/conformal/gpu/band_impl.py Band.chain, N = 4), in the
-scapula frame: p1 = bvec(az, el); p2(q1) = cos a1 p1 + sin a1 (cos q1 e + sin q1 f) (e = unit(p1 x y), f = p1 x e);
-p4 = HG W(w); p3 = the two-circle closure of p2 (arc a2) and p4 (arc a3) on the design's branch. The pin is fixed in
-link 2: pi = cos(tail_r) p2 + sin(tail_r) (cos(tail_phi) u + sin(tail_phi) v), u = the direction of link 2 at p2
-(towards p3), v = p2 x u (tail_phi 180 = the tail continues link 2 backwards past J2). The slot is the small circle
-{x : x . n_s = cos beta_s} (n_s fixed in the scapula). IK per pose: G(q1) = pi(q1) . n_s - cos beta_s, scanned at
-1 deg, sign changes refined by bisection (residual < 1e-9 rad, i.e. << 0.5 mm / 0.5 deg). A root's assembly mode is
-(branch, sign of dG/dq1); the mode cannot change without passing a fold, which the hold check rejects.
-
-The slot is parameterised by three KEY POSES (rest, overhead, behind the back) and the J1 angle the chain should have
-at each: the pin's three positions there define the small circle (n_s, beta_s) - i.e. the slot interpolates a chosen
-fold at three poses (equivalent to (n_s, beta_s) but searchable).
-
-A pose is TAKEN iff: a root exists on the design's mode; J2 and J3 are >= sing_deg from their fold / stretch
-singularities (tri_ok, as the band evaluator); the cam transmits (|cos| of the angle between the pin's J2 motion and
-the slot normal >= pa_min); the slot holds the 4R's self-motion (cross-slot pin travel per radian of self-motion
->= hold_min); the pin is inside the slot's cut arc; along each fit clip the root is tracked at 10 fps with 3
-substeps (HG slerped) and no joint (q1..q4, slot coordinate) jumps > JUMP deg per substep and the tracked root never
-vanishes (a flip = a frame not followed; tracking re-acquires the nearest root after it); workspace poses are
-reached by continuation along the slerp from the rest pose (2 deg steps); no two non-adjacent parts come within
-1 mm (radial intervals [underside, top] of samples < 1.5 mm apart laterally; adjacent members share a joint and are
-only exempt within hub radius + 2 mm of it, the tail / slot pair only within the pin pad); no metal inside the body.
-
-Metal (tools/concept_baseline.py conventions): 8 mm straps (3 mm thick) on the great circles between consecutive
-axes, sampled every ~2 mm along and across (arc_dirs, r_ref 70 mm); O20 hub discs (disc_dirs, 2.5 mm step) at every
-axis; the arm-end neck (strap of neck_deg from p4 towards the humerus axis); link 2's tail (strap p2 -> pi, same
-section) and a 10 mm pin pad at its end; the slot plate (S-fixed band slot_w = 14 mm wide over the cut arc + the pin
-pad radius at both ends). Each member's radial profile is fixed in the member: the p-th percentile over the
-kinematically valid poses of the outermost skin radius under the sample + 2 mm, + its level x (stack + t_link) =
-6.15 mm (the baseline's stacking rule; 'levels' sets which member is on top at each joint: the tail rides one level
-over the slot plate); link ends sit on their hubs (hub discs flat at their max). Skin radii come from a per-pose
-radial map (0.5 deg nodes, sphere-traced on demand with B.dist, bilinear) - the final metric always uses B.dist on
-the real points.
-
-    OMP_NUM_THREADS=1 nice -n 5 python3 docs/concepts/models/cam-coupled-4r.py [check|sweep|best|plot]
+    OMP_NUM_THREADS=1 nice -n 10 python3 docs/concepts/models/cam-coupled-4r.py [check|redteam] ['<json params>']
+    hooks: evaluate(B, params) -> (params, report) (tools/concept_cma.py), bench_eval (tools/concept_sweep.py)
+    big:   CB_EXACT=1 python3 docs/concepts/models/cam-coupled-4r.py frozen '<json params>' --out R.json [--redteam]
 """
-import json, math, os, sys, time
+import functools, importlib.util, inspect, json, math, os, sys, time
 import numpy as np
-
-HERE = os.path.dirname(os.path.abspath(__file__)); REPO = os.path.abspath(os.path.join(HERE, "..", "..", ".."))
+REPO = os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
 sys.path.insert(0, os.path.join(REPO, "tools"))
-import concept_bench as CB                                   # noqa: E402
+import concept_kit as K                                      # noqa: E402
+
+_sp = importlib.util.spec_from_file_location("spine_parked_ref", os.path.join(os.path.dirname(os.path.abspath(__file__)), "spine-parked-j2-3r.py"))
+SP = importlib.util.module_from_spec(_sp); _sp.loader.exec_module(SP)   # crown / wall check, near-touch, overhead, red team
 
 ID = "cam-coupled-4r"
-NAME = "Cam-scheduled 4R (pin-in-slot coupling of the spare)"
+NAME = "Cam-coupled 4R: a roller on link 2's tail in a scapula-fixed slot schedules the spare (J2)"
 D2R = math.pi / 180
-UP = 3.15 + 3.0                                              # baseline stack + link thickness (one level)
-CROWN = 12.25                                                # O20 hub: lower face to cap crown (docs/HARDWARE.md v5)
-JUMP = 15.0                                                  # max joint change per tracking substep (deg)
-SUB = 3                                                      # tracking substeps between 10 fps frames
-
-# defaults: the r13 4R (cad_r13_n4_s1343_1) with every arc >= 35 deg (short-link rule), slot keys from check()
-PARAMS = dict(az=61.04, el=57.77, a=[35.0, 56.13, 35.0], w=[84.08, -10.84], branch=-1,
-              tail_r=30.0, tail_phi=180.0, keys=[0.0, 60.0, -60.0], sigma=1,
-              levels=[0, 1, 0, 1], pa_min=0.25, hold_min=0.1, sing_deg=10.0, hub_r=10.0, width=8.0, t_link=3.0,
-              clear=2.0, neck_deg=25.0, slot_w=14.0, pin_r=5.0, pct=90)
-SWEEP = dict(geometry="4R axes: az, el, a (each >= 35), w, branch", slot="keys = J1 angle at rest / overhead / behind-back",
-             tail=dict(tail_r=[20, 30, 40], tail_phi=[120, 150, 180, 210, 240]), sigma=[1, -1],
-             levels=[[0, 1, 0, 1], [0, 1, 2, 3]], pa_min=[0.15, 0.25, 0.35], pct=[60, 70, 80, 90, 95, 100])
+# seeds: park4's frozen seats (round-4 four-dof lens: az 102.7, el 68.0, a1 37.6, a2 60, a3 22.3, J4 = wdir(81.36, -14.61))
+PARAMS = dict(az=102.74, el=67.99, wd=81.36, wa=-14.61, a1=37.6, a2=60.0, a3=22.31, s3=-1, mode=1, q1_off=0.0,
+              tr=25.0, tp=180.0, n_az=102.74, n_el=67.99, beta=50.0, s_c=0.0, s_half=180.0, pct_lo=0.0, pct_hi=100.0,
+              pa_min=0.25, hold_mm=8.0, sing_deg=K.FOLD_MARGIN, margin=K.FOLD_MARGIN,
+              width=12.0, t_link=3.0, q=0.98, slot_w=14.0, slot_t=4.0, pad=6.0, near=0)
+NQ = 360
+ELEV_OVER = 140.0
 
 
-# ---- small geometry ----------------------------------------------------------------------------------------------
-def unit(x): x = np.asarray(x, float); return x / (np.linalg.norm(x, axis=-1, keepdims=True) + 1e-12)
-def bvec(az, el): return np.array([-math.cos(el * D2R) * math.cos(az * D2R), math.sin(el * D2R), math.cos(el * D2R) * math.sin(az * D2R)])
-def w_dir(d, a): return np.array([math.sin(d * D2R) * math.sin(a * D2R), -math.cos(d * D2R), math.sin(d * D2R) * math.cos(a * D2R)])
-def dot(a, b): return (a * b).sum(-1)
+def _rot(k, v, ang):
+    c, s = np.cos(ang)[..., None], np.sin(ang)[..., None]
+    return v * c + np.cross(k, v) * s + k * (k * v).sum(-1, keepdims=True) * (1 - c)
 
 
-def circ_int(c1, r1, c2, r2, sign):
-    dd = np.clip(dot(c1, c2), -1, 1); n = unit(np.cross(c1, c2))
-    den = 1 - dd ** 2 + 1e-12; a = (math.cos(r1) - dd * math.cos(r2)) / den; b = (math.cos(r2) - dd * math.cos(r1)) / den
-    p = a[..., None] * c1 + b[..., None] * c2; h2 = 1 - dot(p, p)
-    return p + sign * np.sqrt(np.clip(h2, 0, None))[..., None] * n, h2 > 0
+def _slot_frame(p):
+    n = K.bvec(p["n_az"], p["n_el"]); e1 = K.unit(np.cross(n, [0.0, 1.0, 0.0]) + 1e-9); e2 = np.cross(n, e1)
+    return n, e1, e2
 
 
-def tri_ok(x, y, a, b, sing):
-    th = np.arccos(np.clip(dot(x, y), -1, 1))
-    return (th >= abs(a - b) + sing) & (th <= min(a + b, 2 * math.pi - a - b) - sing)
+class Kin:
+    """kinematics of one design on frames F (pose-local)"""
+    def __init__(self, F, p):
+        self.p = p; self.u1 = F.S(K.bvec(p["az"], p["el"])); self.u4 = F.HG(K.wdir(p["wd"], p["wa"]))
+        n, e1, e2 = _slot_frame(p); self.n = F.S(n); self.e1 = F.S(e1); self.e2 = F.S(e2)
+        ref = F.S([0.0, 1.0, 0.0]); self.a = K.unit(ref - (ref * self.u1).sum(-1, keepdims=True) * self.u1)  # q1 = 0 direction
+        self.b = np.cross(self.u1, self.a); self.cb = math.cos(p["beta"] * D2R)
+        self.tr, self.tp = p["tr"] * D2R, p["tp"] * D2R
+
+    def at(self, I, q1):
+        """chain at poses I (k,) and J1 azimuths q1 (k,) rad -> p2, p3, pin, ok3, margin"""
+        u1, u4 = self.u1[I], self.u4[I]; A1 = self.p["a1"] * D2R
+        p2 = math.cos(A1) * u1 + math.sin(A1) * (np.cos(q1)[:, None] * self.a[I] + np.sin(q1)[:, None] * self.b[I])
+        p3, ok3, mar = K.closure(p2, u4, self.p["a2"], self.p["a3"], self.p["s3"], margin_deg=self.p["margin"])
+        pin = self.pin(p2, p3)
+        return p2, p3, pin, ok3, mar
+
+    def pin(self, p2, p3):
+        u = K.unit(p3 - (p3 * p2).sum(-1, keepdims=True) * p2); v = np.cross(p2, u)
+        return math.cos(self.tr) * p2 + math.sin(self.tr) * (math.cos(self.tp) * u + math.sin(self.tp) * v)
+
+    def g(self, I, q1):
+        p2, p3, pin, ok3, _ = self.at(I, q1); return (pin * self.n[I]).sum(-1) - self.cb, ok3
+
+    def solve(self):
+        P = len(self.u1); q = np.arange(NQ) * (2 * math.pi / NQ) - math.pi
+        I = np.repeat(np.arange(P), NQ); Q = np.tile(q, P)
+        G, OK = self.g(I, Q); G = G.reshape(P, NQ); OK = OK.reshape(P, NQ)
+        G2 = np.concatenate([G, G[:, :1]], 1); O2 = np.concatenate([OK, OK[:, :1]], 1)
+        br = (np.sign(G2[:, :-1]) != np.sign(G2[:, 1:])) & O2[:, :-1] & O2[:, 1:]
+        sl = np.sign(G2[:, 1:] - G2[:, :-1])
+        pi_, ki = np.nonzero(br & (sl == float(self.p["mode"])))
+        q1 = np.full(P, np.nan)
+        if len(pi_):
+            lo = q[ki].copy(); hi = lo + 2 * math.pi / NQ; glo = G[pi_, ki].copy()
+            for _ in range(40):
+                mid = 0.5 * (lo + hi); gm, _ = self.g(pi_, mid); same = np.sign(gm) == np.sign(glo)
+                lo = np.where(same, mid, lo); glo = np.where(same, gm, glo); hi = np.where(same, hi, mid)
+            r = 0.5 * (lo + hi)
+            # nearest root to the azimuth of u4 about u1 (+ q1_off): pose-local assembly choice
+            u4 = self.u4[pi_]; az4 = np.arctan2((u4 * self.b[pi_]).sum(-1), (u4 * self.a[pi_]).sum(-1)) + self.p["q1_off"] * D2R
+            d = np.abs((r - az4 + math.pi) % (2 * math.pi) - math.pi)
+            order = np.lexsort((d, pi_)); first = np.r_[True, pi_[order][1:] != pi_[order][:-1]]
+            sel = order[first]; q1[pi_[sel]] = r[sel]
+        return q1
 
 
-def dihedral(c, a, b):
-    """signed angle at axis c from the great circle c->a to c->b (rad)"""
-    ta = unit(a - dot(a, c)[..., None] * c); tb = unit(b - dot(b, c)[..., None] * c)
-    return np.arctan2(dot(np.cross(ta, tb), c), dot(ta, tb))
+def kinematics(F, p):
+    """-> dict with q1 (P,) rad (nan = no root), p2, p3, pin, ok (P,), slot coord s (deg), pa, hold, sing (deg)"""
+    kn = Kin(F, p); q1 = kn.solve(); P = len(q1); has = np.isfinite(q1); q1z = np.where(has, q1, 0.0); I = np.arange(P)
+    p2, p3, pin, ok3, mar = kn.at(I, q1z)
+    # cam transmission at fixed J1: pin velocity per unit J2 = p2 x pin
+    t2 = np.cross(p2, pin); nt = kn.n - (kn.n * pin).sum(-1, keepdims=True) * pin; ntn = np.linalg.norm(nt, axis=-1) + 1e-12
+    t2n = (t2 * nt).sum(-1) / ntn
+    pa = np.abs(t2n) / (np.linalg.norm(t2, axis=-1) + 1e-12); hold = 70.0 * np.abs(t2n)
+    # slaved law f'(q1) = -(dg/dq1 at fixed q2) / (dg/dq2): pin velocity per unit J1 at fixed J2 = u1 x pin
+    t1n = (np.cross(kn.u1, pin) * nt).sum(-1) / ntn; fp = -t1n / np.where(np.abs(t2n) < 1e-9, 1e-9, t2n)
+    w1 = K.unit(kn.u1 + fp[:, None] * p2); n34 = K.unit(np.cross(p3, kn.u4))
+    sing = np.degrees(np.arcsin(np.clip(np.abs((w1 * n34).sum(-1)), 0, 1)))
+    s = np.degrees(np.arctan2((pin * kn.e2).sum(-1), (pin * kn.e1).sum(-1)))
+    ds = (s - p["s_c"] + 180.0) % 360.0 - 180.0
+    ok = has & ok3 & (pa >= p["pa_min"]) & (hold >= p["hold_mm"]) & (sing >= p["sing_deg"])
+    inslot = np.abs(ds) <= p["s_half"]
+    return dict(kn=kn, q1=q1z, has=has, p2=p2, p3=p3, pin=pin, ok=ok, okk=ok, inslot=inslot, s=s, ds=ds, pa=pa, hold=hold, sing=sing, margin=mar, fp=fp)
 
 
-def slerp_R(R0, R1, n):
-    """n rotations from R0 to R1 (inclusive of R1, exclusive of R0) along the geodesic"""
-    from scipy.spatial.transform import Rotation as Rot
-    rv = Rot.from_matrix(R0.T @ R1).as_rotvec()
-    return [R0 @ Rot.from_rotvec(rv * (k / n)).as_matrix() for k in range(1, n + 1)]
+def slot_dirs(p):
+    """S-frame directions of the slot plate: band of width slot_w (mm at r 70) about the small circle beta, over the
+    cut arc s_c +- s_half + pad (2 mm grid at r_ref 70)"""
+    n, e1, e2 = _slot_frame(p); bt = p["beta"] * D2R; rr = 70.0 * max(math.sin(bt), 0.05)
+    half = min(180.0, p["s_half"] + math.degrees(p["pad"] / rr))
+    ns = max(3, int(2 * half * D2R * rr / 2.0) + 1); S = (p["s_c"] + np.linspace(-half, half, ns)) * D2R
+    cs = np.arange(-p["slot_w"] / 2, p["slot_w"] / 2 + 1e-6, 2.0) / 70.0
+    D = [math.cos(bt + c) * n + math.sin(bt + c) * (math.cos(a) * e1 + math.sin(a) * e2) for c in cs for a in S]
+    return np.array(D)
 
 
-# ---- chain ---------------------------------------------------------------------------------------------------------
-class Chain:
-    """kinematics of one design: q1 grid, pins, pin-in-slot roots"""
-    def __init__(self, d):
-        self.d = d; self.A = [x * D2R for x in d["a"]]
-        self.p1 = bvec(d["az"], d["el"]); self.W0 = w_dir(*d["w"])
-        e = unit(np.cross(self.p1, np.array([0.0, 1.0, 0.0]))); f = np.cross(self.p1, e); self.e, self.f = e, f
-        self.sing = d["sing_deg"] * D2R; self.tr = d["tail_r"] * D2R; self.tp = d["tail_phi"] * D2R
-        self.ns = None; self.cb = None
-
-    def p2(self, q1):
-        q1 = np.asarray(q1, float)[..., None]
-        return math.cos(self.A[0]) * self.p1 + math.sin(self.A[0]) * (np.cos(q1) * self.e + np.sin(q1) * self.f)
-
-    def state(self, q1, p4):
-        """pins and pin position for J1 angles q1 (...,) and arm axes p4 (..., 3) (broadcast)"""
-        p2 = self.p2(q1); p2, p4 = np.broadcast_arrays(p2, p4)
-        p3, ok = circ_int(p2, self.A[1], p4, self.A[2], float(self.d["branch"]))
-        ok = ok & tri_ok(np.broadcast_to(self.p1, p3.shape), p3, self.A[0], self.A[1], self.sing) & tri_ok(p2, p4, self.A[1], self.A[2], self.sing)
-        u = unit(p3 - dot(p3, p2)[..., None] * p2); v = np.cross(p2, u)
-        pi = math.cos(self.tr) * p2 + math.sin(self.tr) * (math.cos(self.tp) * u + math.sin(self.tp) * v)
-        return p2, p3, pi, ok
-
-    def set_slot(self, ns, cb):
-        self.ns = unit(np.asarray(ns, float)); self.cb = float(cb)
-
-    def slot_from_keys(self, HGk, q1k):
-        """small circle through the pin positions of the key poses at the key J1 angles (deg)"""
-        P = []
-        for HG, q in zip(HGk, q1k):
-            _, _, pi, ok = self.state(np.array(q * D2R), HG @ self.W0); P.append(pi)
-        P = np.array(P); n = unit(np.cross(P[1] - P[0], P[2] - P[0])); cb = float(n @ P[0])
-        if cb < 0: n, cb = -n, -cb
-        self.set_slot(n, cb); return P
-
-    def G(self, q1, p4):
-        p2, p3, pi, ok = self.state(q1, p4); return dot(pi, self.ns) - self.cb, ok
-
-    def roots(self, p4, step=1.0):
-        """all roots q1 (rad) of the pin-in-slot closure for one arm axis p4 (3,), with slope sign and validity"""
-        q = np.arange(-180, 180, step) * D2R; g, ok = self.G(q, p4[None])
-        q2 = np.r_[q, q[0] + 2 * math.pi]; g2 = np.r_[g, g[0]]; ok2 = np.r_[ok, ok[0]]
-        s = np.nonzero((np.sign(g2[:-1]) != np.sign(g2[1:])) & ok2[:-1] & ok2[1:])[0]
-        if not len(s): return np.zeros(0), np.zeros(0)
-        lo, hi = q2[s].copy(), q2[s + 1].copy(); glo = g2[s].copy()
-        for _ in range(40):
-            mid = 0.5 * (lo + hi); gm, _ = self.G(mid, p4[None]); same = np.sign(gm) == np.sign(glo)
-            lo = np.where(same, mid, lo); glo = np.where(same, gm, glo); hi = np.where(same, hi, mid)
-        r = 0.5 * (lo + hi); sl = np.sign(g2[s + 1] - g2[s])
-        return (r + math.pi) % (2 * math.pi) - math.pi, sl
-
-    def info(self, q1, p4, HG):
-        """joint angles (deg), slot coordinate, transmission and hold of one configuration"""
-        h = 1e-5
-        p2, p3, pi, ok = self.state(np.array(q1), p4)
-        _, _, pia, _ = self.state(np.array(q1 + h), p4); _, _, pib, _ = self.state(np.array(q1 - h), p4)
-        dpi = (pia - pib) / (2 * h)                                  # pin velocity along the self-motion
-        nt = self.ns - (self.ns @ pi) * pi; nn = np.linalg.norm(nt) + 1e-12
-        t2 = np.cross(p2, pi)                                        # pin velocity per unit J2 at fixed J1
-        pa = abs(t2 @ nt) / (np.linalg.norm(t2) * nn + 1e-12)
-        hold = abs(dpi @ nt) / nn
-        ref = HG @ unit(np.cross(self.W0, np.array([0.0, -1.0, 0.0])))  # humerus-fixed reference for J4
-        q2 = dihedral(p2, self.p1, p3); q3 = dihedral(p3, p2, p4); q4 = dihedral(p4, p3, p4 + ref)
-        sx = unit(np.cross(self.ns, np.array([0.0, 1.0, 0.0]))); sy = np.cross(self.ns, sx)
-        psi = math.atan2(pi @ sy, pi @ sx)
-        return dict(q=np.degrees([q1, q2, q3, q4]), psi=math.degrees(psi), pa=pa, hold=hold, ok=bool(ok),
-                    pins=np.array([self.p1, p2, p3, p4]), pi=pi)
+def build(B, F, p):
+    k = kinematics(F, p); ok = k["ok"] & k["inslot"]
+    kn = k["kn"]; u1, u4, p2, p3, pin = kn.u1, kn.u4, k["p2"], k["p3"], k["pin"]
+    q = np.stack([K.axis_angle(u1, F.S([1.0, 0, 0]), p2), K.axis_angle(p2, u1, p3), K.axis_angle(p3, p2, u4),
+                  K.axis_angle(u4, F.HG([0.0, -1, 0]), p3), k["s"]], -1)
+    w = p["width"]; t = p["t_link"]; end = K.HUB_R + 2.0
+    # tail: J2 -> pin, extended by `pad` mm past the pin (the roller pad)
+    ang = np.arccos(np.clip((p2 * pin).sum(-1), -1, 1)); ext = ang + p["pad"] / 70.0
+    hubs = [K.hub_member("hub1", u1, "J1"), K.hub_member("hub2", p2, "J2"), K.hub_member("hub3", p3, "J3"), K.hub_member("hub4", u4, "J4")]
+    slot = K.Member("slot", F.S(slot_dirs(p)), kind="cap", t=p["slot_t"], width=p["slot_w"], joints=("J1", "JP"), cell=4.0)
+    links = [K.strap_member("link1", u1, p2, ("J1", "J2"), width=w, t=t, ramp_to=(("hub1", K.STACK), ("hub2", 0.0)), over=[("slot", 1.0)], end_mm=end),
+             K.strap_member("tail", p2, pin, ("J2", "JP"), ang=ext, width=w, t=t, ramp_to=(("hub2", K.STACK), (None, 0)),
+                            over=[("link1", 1.0), ("slot", 1.0)], end_mm=end),
+             K.strap_member("link2", p2, p3, ("J2", "J3"), width=w, t=t, ramp_to=(("hub2", K.STACK), ("hub3", 0.0)),
+                            over=[("link1", 1.0), ("neck", 1.0), ("slot", 1.0)], end_mm=end),
+             K.strap_member("link3", p3, u4, ("J3", "J4"), width=w, t=t, ramp_to=(("hub3", K.STACK), ("hub4", K.STACK)),
+                            over=[("link1", 1.0), ("neck", 1.0), ("slot", 1.0)], end_mm=end),
+             K.neck_member(F, u4, joints=("J4",), ramps=(("hub4", 0.0), (None, 0)))]
+    okr = ok
+    info = dict(residual_deg=round(float(K.closure_residual(p2, u4, p3, p["a2"], p["a3"])[okr].max()), 6) if okr.any() else None,
+                min_margin=round(float(k["margin"][okr].min()), 2) if okr.any() else None,
+                pa_min_taken=round(float(k["pa"][okr].min()), 3) if okr.any() else None,
+                hold_min_taken=round(float(k["hold"][okr].min()), 2) if okr.any() else None,
+                sing_min_taken=round(float(k["sing"][okr].min()), 2) if okr.any() else None,
+                cut_noroot=round(float(np.mean(~k["has"])), 4), cut_cam=round(float(np.mean(k["has"] & ~k["ok"])), 4),
+                cut_slot=round(float(np.mean(k["ok"] & ~k["inslot"])), 4))
+    return K.Chain(members=hubs + [slot] + links, ok=ok, q=q, joints=dict(J1=u1, J2=p2, J3=p3, J4=u4, JP=pin), info=info, hubless=("JP",))
 
 
-# ---- skin radius map (outermost skin crossing along each ray from GH, exact ray casting on the posed skin) ----------
-RM_STEP, RM_LAT0, RM_LAT1, RM_RMAX = 0.5, -60.0, 90.0, 260.0      # deg, deg, deg, mm (the baseline's r_max)
-RM_NLON, RM_NLAT = int(360 / RM_STEP), int((RM_LAT1 - RM_LAT0) / RM_STEP) + 1
+def set_slot(B, p):
+    """kinematic pre-pass: cut the slot over the [pct_lo, pct_hi] percentiles of the pin's slot coordinate over the poses
+    that close (circular: centred on the circular mean)"""
+    F = getattr(B, "_kitF", None) or K.frames(B); B._kitF = F
+    k = kinematics(F, dict(p, s_half=180.0)); s = k["s"][k["ok"]]
+    if len(s) < 3: return dict(p, s_c=0.0, s_half=180.0)
+    c = math.degrees(math.atan2(np.sin(np.radians(s)).mean(), np.cos(np.radians(s)).mean()))
+    d = (s - c + 180.0) % 360.0 - 180.0; lo, hi = np.percentile(d, [p["pct_lo"], p["pct_hi"]])
+    return dict(p, s_c=round(c + 0.5 * (lo + hi), 4), s_half=round(0.5 * (hi - lo) + 0.25, 4))
 
 
-def _lonlat(U):
-    return np.degrees(np.arctan2(U[..., 1], U[..., 0])), np.degrees(np.arcsin(np.clip(U[..., 2], -1, 1)))
+_EXTRAS_SRC = inspect.getsource(SP.extras).replace(
+    'rad = {"hub1": p["rad1"], "hub2": p["rad2"], "hub3": p["rad3"]}', 'rad = {m.name: K.HUB_R for m in hubs}')
+_ns = dict(SP.__dict__); exec(_EXTRAS_SRC, _ns); extras = _ns["extras"]
+assert "K.HUB_R for m in hubs" in _EXTRAS_SRC
 
 
-def build_rmap(V, F):
-    """(RM_NLAT, RM_NLON) outermost skin radius (mm, <= RM_RMAX; 0 = no skin) on a lon / lat grid with the pole along
-    +z (lateral). Every grid ray is intersected exactly (Moller-Trumbore) with the skin triangles whose lon / lat box
-    (padded by one node) contains it."""
-    r = np.linalg.norm(V, axis=1); keep = (r < RM_RMAX + 40)[F].any(1); F = F[keep]
-    U = V / r[:, None]; lon, lat = _lonlat(U)
-    Lo = lon[F]; La = lat[F]
-    span = Lo.max(1) - Lo.min(1); wrap = span > 180; Lo = np.where(wrap[:, None] & (Lo < 0), Lo + 360, Lo)
-    lo0, lo1 = Lo.min(1), Lo.max(1); la0, la1 = La.min(1), La.max(1)
-    pole = la1 > 87.0; lo0 = np.where(pole, -180, lo0); lo1 = np.where(pole, 180 - RM_STEP, lo1); la1 = np.where(pole, 90, la1)
-    i0 = np.floor((lo0 + 180) / RM_STEP).astype(int) - 1; i1 = np.ceil((lo1 + 180) / RM_STEP).astype(int) + 1
-    j0 = np.maximum(np.floor((la0 - RM_LAT0) / RM_STEP).astype(int) - 1, 0); j1 = np.minimum(np.ceil((la1 - RM_LAT0) / RM_STEP).astype(int) + 1, RM_NLAT - 1)
-    ok = j1 >= j0; F, i0, i1, j0, j1 = F[ok], i0[ok], i1[ok], j0[ok], j1[ok]
-    ni, nj = i1 - i0 + 1, j1 - j0 + 1; cnt = ni * nj
-    M = np.zeros((RM_NLAT, RM_NLON))
-    CH = 200000; cs = np.cumsum(cnt)
-    starts = np.r_[0, np.searchsorted(cs, np.arange(CH, cs[-1], CH))] if cs[-1] > CH else np.array([0])
-    bounds = list(starts) + [len(F)]
-    for a, b in zip(bounds[:-1], bounds[1:]):
-        if b <= a: continue
-        fi = np.repeat(np.arange(a, b), cnt[a:b]); k = np.arange(len(fi)) - np.repeat(cs[a:b] - cnt[a:b] - (cs[a] - cnt[a]), cnt[a:b])
-        ii = i0[fi] + k % ni[fi]; jj = j0[fi] + k // ni[fi]
-        lonn = (ii * RM_STEP - 180); latn = RM_LAT0 + jj * RM_STEP
-        cl = np.cos(np.radians(latn)); D = np.stack([cl * np.cos(np.radians(lonn)), cl * np.sin(np.radians(lonn)), np.sin(np.radians(latn))], 1)
-        A = V[F[fi, 0]]; E1 = V[F[fi, 1]] - A; E2 = V[F[fi, 2]] - A
-        pv = np.cross(D, E2); det = dot(E1, pv); inv = 1.0 / np.where(np.abs(det) < 1e-12, 1e-12, det)
-        tv = -A; u = dot(tv, pv) * inv; qv = np.cross(tv, E1); v = dot(D, qv) * inv; t = dot(E2, qv) * inv
-        hit = (np.abs(det) > 1e-12) & (u >= -1e-9) & (v >= -1e-9) & (u + v <= 1 + 1e-9) & (t > 0) & (t <= RM_RMAX)
-        np.maximum.at(M, (jj[hit], ii[hit] % RM_NLON), t[hit])
-    return M
+def evaluate(B, params, preset=False):
+    """tools/concept_cma.py hook -> (params, report). preset: keep s_c / s_half as given (frozen protocol)"""
+    p = dict(PARAMS, **params); p["q"] = min(1.0, max(0.8, float(p["q"])))
+    p["s3"] = 1 if float(p["s3"]) >= 0 else -1; p["mode"] = 1 if float(p["mode"]) >= 0 else -1
+    for a in ("a1", "a2", "a3"): p[a] = min(150.0, max(15.0, float(p[a])))
+    p["tr"] = min(80.0, max(8.0, float(p["tr"]))); p["beta"] = min(170.0, max(5.0, float(p["beta"])))
+    p["pct_lo"] = min(20.0, max(0.0, float(p["pct_lo"]))); p["pct_hi"] = min(100.0, max(80.0, float(p["pct_hi"])))
+    if not preset: p = set_slot(B, p)
+    r = K.evaluate(B, build, p); r = extras(B, r, p)
+    L = B._kit_last; take = L["take"]; prof = L["prof"]
+    r["slot_arc_deg"] = round(2 * p["s_half"], 1); r["slot_len_mm"] = round(2 * p["s_half"] * D2R * float(np.median(prof["slot"])) * math.sin(p["beta"] * D2R), 1)
+    # roller pin length: tail underside over the pin minus the slot plate's groove floor (mm), over taken poses
+    r["pin_len_mm"] = round(float(np.median(prof["tail"][-12:]) - float(np.median(prof["slot"]))), 1)
+    if p.get("near"):
+        r["gap_plain"] = r["gap"]; r["gap"] = r["gap_near1"]
+        for kk in ("reach", "follow", "inband14", "contact"): r[kk + "_plain"] = r[kk]; r[kk] = r["near1"][kk]
+    return p, r
 
 
-def rmap_lookup(M, D):
-    """bilinear outermost skin radius along unit directions D (..., 3)"""
-    lon, lat = _lonlat(D)
-    x = (lon + 180) / RM_STEP; y = np.clip((lat - RM_LAT0) / RM_STEP, 0, RM_NLAT - 1.000001)
-    x0 = np.floor(x).astype(int); y0 = np.floor(y).astype(int); fx = x - x0; fy = y - y0
-    x0 %= RM_NLON; x1 = (x0 + 1) % RM_NLON; y1 = y0 + 1
-    return (M[y0, x0] * (1 - fx) * (1 - fy) + M[y0, x1] * fx * (1 - fy) + M[y1, x0] * (1 - fx) * fy + M[y1, x1] * fx * fy)
+def bench_eval(B, params):
+    _, r = evaluate(B, params)
+    return {k: v for k, v in r.items() if SP._jsonable(v)}
+
+
+def frozen(p0, out, overlap=1.0, fit=(60, 160), big=(110, 360)):
+    """fit on Bench(fit) fast (slot cut there too), freeze every underside / hub level / slot arc, wear on Bench(big)"""
+    coll = K.collisions; K.collisions = functools.partial(coll, overlap=overlap - 1e-4)
+    res = dict(model=f"docs/concepts/models/{ID}.py", params=p0, overlap=overlap, exact=os.environ.get("CB_EXACT") == "1", runs={})
+    ex = os.environ.pop("CB_EXACT", None)
+    try:
+        Bf = K.bench(*fit)
+    finally:
+        if ex is not None: os.environ["CB_EXACT"] = ex
+    pf, rf = evaluate(Bf, dict(p0)); prof = {k: np.array(v) for k, v in Bf._kit_last["prof"].items()}
+    keep = lambda r: {k: v for k, v in r.items() if SP._jsonable(v) and k not in ("checks",)}
+    res["params_frozen"] = pf
+    res["runs"]["fit"] = dict(keep(rf), bench=list(fit), mode=Bf.mode); json.dump(res, open(out, "w"), indent=1, default=float)
+    print("fit", Bf.mode, {k: rf[k] for k in ("gap", "reach", "follow", "inband14", "contact", "honest")}, flush=True)
+    Bb = K.bench(*big); fp = K.fit_profiles; t0 = time.time()
+    K.fit_profiles = lambda B, chain, fit, q=1.0, mode="march": {k: v.copy() for k, v in prof.items()}
+    try:
+        _, r = evaluate(Bb, pf, preset=True)
+    finally:
+        K.fit_profiles = fp
+    res["runs"]["frozen"] = dict(keep(r), bench=list(big), mode=Bb.mode, secs=round(time.time() - t0, 1))
+    json.dump(res, open(out, "w"), indent=1, default=float)
+    print("frozen", Bb.mode, {k: r.get(k) for k in ("gap", "reach", "follow", "inband14", "inband10", "contact", "honest", "gap_near1", "min_metal_skin", "overhead", "inband_member")}, flush=True)
+    if "--redteam" in sys.argv: SP.redteam(Bb, pf, r)
+    return res
+
+
+if __name__ == "__main__":
+    mode = sys.argv[1] if len(sys.argv) > 1 else "check"
+    par = json.loads(sys.argv[2]) if len(sys.argv) > 2 and sys.argv[2].startswith("{") else {}
+    if mode == "frozen":
+        o = sys.argv[sys.argv.index("--out") + 1] if "--out" in sys.argv else "frozen.json"
+        frozen(dict(PARAMS, **par), o); sys.exit()
+    B = K.bench(60, 160); t = time.time()
+    p, r = evaluate(B, par)
+    print({k: r[k] for k in ("gap", "reach", "follow", "inband14", "inband10", "contact", "honest", "audit", "closure", "flips", "collide")},
+          f"{time.time() - t:.1f}s")
+    print("per member", r["inband_member"], "mass", r["mass_g"], "res", r.get("residual_deg"), "margin", r.get("min_margin"))
+    print("cam", {k: r.get(k) for k in ("pa_min_taken", "hold_min_taken", "sing_min_taken", "cut_noroot", "cut_cam", "cut_slot", "slot_arc_deg", "slot_len_mm", "pin_len_mm")},
+          "slot", p["s_c"], p["s_half"])
+    print("crowns: contact poses", r["crown_contact_poses"], "min", r["crown_min"], "| min metal-skin", r["min_metal_skin"],
+          "| gap near1", r["gap_near1"], r["near1"], "| overhead", r["overhead"])
+    if mode == "redteam": SP.redteam(B, p, r)

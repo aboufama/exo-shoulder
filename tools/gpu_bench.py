@@ -909,7 +909,8 @@ def cma_multi(Bw, starts, out_json, budget_s=2400.0, lam=12, sigma0=0.6, key="ne
     converged start frees its slot for the next basin in `reserve`. Objective `key` (near-touch gap by the rule)."""
     t0 = time.time(); reserve = list(reserve); runs = []; act = []; allrows = []
     def start(r, i):
-        c = _CMA(r["params"], sigma0, lam, seed + 7919 * i); c.start_row = r; c.idx = i; c.best = (r.get(key, 999), r); runs.append(c); return c
+        c = _CMA(r["params"], r.get("_sigma0", sigma0), int(r.get("_lam", lam)), seed + 7919 * i); c.start_row = r; c.idx = i
+        c.best = (r.get(key, 999), r); c.best_plain = r; runs.append(c); return c
     for i, r in enumerate(starts): act.append(start(r, i))
     nxt = len(starts); g = 0
     def dump(tag):
@@ -917,7 +918,8 @@ def cma_multi(Bw, starts, out_json, budget_s=2400.0, lam=12, sigma0=0.6, key="ne
         for c in runs:
             b = c.best[1]
             bas.append(dict(basin=c.idx, start=c.start_row["params"], start_gap=c.start_row.get("gap"), start_near=c.start_row.get("near"),
-                            gens=c.gen, done=c.done, why=c.why, sigma=round(c.sigma, 4), best=b))
+                            lam=c.lam, sigma0=c.start_row.get("_sigma0", sigma0), gens=c.gen, done=c.done, why=c.why, sigma=round(c.sigma, 4),
+                            best=b, best_plain=c.best_plain))
         json.dump(dict(t=time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()), tag=tag, secs=round(time.time() - t0, 1), key=key, lam=lam,
                        evals=len(allrows), meta=meta or {}, basins=sorted(bas, key=lambda x: x["best"].get(key, 999))), open(out_json + ".tmp", "w"), default=float)
         os.replace(out_json + ".tmp", out_json)
@@ -928,6 +930,8 @@ def cma_multi(Bw, starts, out_json, budget_s=2400.0, lam=12, sigma0=0.6, key="ne
         R = evaluate(cand, Bw, None, chunk); allrows.extend(R)
         for c in act:
             mine = [r for r, o in zip(R, own) if o is c]; c.tell([r.get(key, 999) for r in mine], mine)
+            for r in mine:                                             # the best PLAIN gap seen on the way (reported, not steered)
+                if r.get("gap", 999) < c.best_plain.get("gap", 999): c.best_plain = r
         fin = [c for c in act if c.done]; act = [c for c in act if not c.done]
         for c in fin:
             if reserve: act.append(start(reserve.pop(0), nxt)); nxt += 1
@@ -996,6 +1000,35 @@ def main():
             + str([e.get(a.key) for e in mine[:12]]))
         cma_multi(Bw, mine[:nb], a.out, a.budget, a.lam, a.sigma0, a.key, a.chunk, a.seed, mine[nb:], log,
                   meta=dict(part=part, nparts=nparts, n_rows=len(rows), basins_total=len(E)))
+    elif a.cmd == "polish":                                         # deep polish of the best basins: discrete variants + IPOP-style CMA
+        rows = []
+        for f in a.args:
+            if not os.path.exists(f): continue
+            D = json.load(open(f))
+            for b in D.get("basins", []):
+                rows.append(b["best"]); rows.append(b.get("best_plain") or b["best"])
+            rows.extend(D.get("rows", [])[:300])
+        rows = [r for r in rows if r.get("params") and r.get("honest")]
+        E = distinct(rows, a.basins, a.key); Eg = distinct(rows, a.basins, "gap")
+        for e in Eg:
+            if all(e is not x for x in E) and len(E) < 2 * a.basins: E.append(e)
+        part, nparts = (int(x) for x in a.part.split("/")); mine = [e for i, e in enumerate(E) if i % nparts == part]
+        var = []                                                       # every branch x stack order at each basin's best
+        for e in mine:
+            for sg in (-1, 1):
+                for i2 in (0, 1):
+                    for i3 in (0, 1): var.append(dict(e["params"], sigma=sg, inv2=i2, inv3=i3))
+        V = evaluate(var, Bw, None, a.chunk)
+        log(f"polish: {len(mine)} basins, {len(V)} discrete variants; best variant near {min(r.get('near', 999) for r in V)} gap {min(r.get('gap', 999) for r in V)}")
+        starts = []
+        for e in mine:
+            vb = [r for r in V if r.get("honest")]
+            near_e = [r for r in vb if all(abs(r["params"][k] - e["params"][k]) < 1e-9 for k in ("az", "el", "a1", "a2", "wd", "wa"))]
+            b = min(near_e or [e], key=lambda r: r.get(a.key, 999))
+            for lam_, s0 in ((24, 0.3), (24, 1.2), (48, 0.6)):
+                starts.append(dict(b, _lam=lam_, _sigma0=s0))
+        cma_multi(Bw, starts, a.out, a.budget, a.lam, a.sigma0, a.key, a.chunk, a.seed, [], log,
+                  meta=dict(part=part, nparts=nparts, variants=[dict(params=r["params"], gap=r.get("gap"), near=r.get("near")) for r in V]))
     elif a.cmd == "search":
         seeds = list(LEADERS) + (json.load(open(a.extra)) if a.extra else [])
         search(Bw, Bf, a.out, a.budget, a.n0, a.elites, a.lam, a.seed, a.chunk, seeds, log)

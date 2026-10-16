@@ -4,7 +4,7 @@ merge both pods' CMA basins (and the screens' best rows), take the 10 best DISTI
 (= the CPU fast number) worn on Bench(110,360) EXACT (CB_EXACT=1), plus the verifier protocol (fit Bench(60,160) fast ->
 wear Bench(110,360) exact) - the zc model's checks + docs/concepts/verify/spine-parked-j2-3r.py top_check at O20 / margin 5.
 
-    python3 pipeline/gpu_pod/xs_verify.py OUTDIR PART NPARTS [--top 10] [--procs 5]
+    python3 pipeline/gpu_pod/xs_verify.py OUTDIR PART NPARTS [--top 10] [--procs 5] [--skip OTHER/verify_pick.json]
 """
 import json, os, subprocess, sys, time
 from concurrent.futures import ThreadPoolExecutor
@@ -20,15 +20,20 @@ def main():
     import gpu_bench as GB
     rows = []
     for k in range(nparts):
-        f = os.path.join(out, f"cma_p{k}.json")
-        if os.path.exists(f):
+        import glob
+        for f in sorted(glob.glob(os.path.join(out, f"cma*_p{k}.json"))):          # cma_p<k> (near) and cmag_p<k> (plain gap)
             for b in json.load(open(f))["basins"]:
-                r = dict(b["best"]); r["src"] = f"cma_p{k}/basin{b['basin']}"; rows.append(r)
+                for w in ("best", "best_plain"):
+                    if b.get(w): r = dict(b[w]); r["src"] = f"{os.path.basename(f)}/basin{b['basin']}/{w}"; rows.append(r)
         f = os.path.join(out, f"screen_p{k}.json")
         if os.path.exists(f):
             for r in json.load(open(f))["rows"][:200]:
                 rows.append(dict(r, src=f"screen_p{k}"))
     rows = [r for r in rows if r.get("params") and r.get("honest")]
+    if "--skip" in sys.argv:                                     # configs an earlier round already verified
+        K6 = ("az", "el", "a1", "a2", "wd", "wa", "sigma", "inv2", "inv3")
+        done = [json.dumps([round(float(e["params"][k]), 3) for k in K6]) for e in json.load(open(sys.argv[sys.argv.index("--skip") + 1]))]
+        rows = [r for r in rows if json.dumps([round(float(r["params"][k]), 3) for k in K6]) not in done]
     E = GB.distinct(rows, top, key="gap")
     json.dump(E, open(os.path.join(out, "verify_pick.json"), "w"), indent=1, default=float)
     mine = [(i, e) for i, e in enumerate(E) if i % nparts == part]

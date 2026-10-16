@@ -102,6 +102,10 @@ is the constraint). Time box ~2.3 h, ~$4 at most; both are terminated the moment
 08:18 carrying their code and jobs in the pod definition (`tools/gpu_pod.py create --payload ... --jobs ...`: an env
 var with the tar.gz of the code, unpacked at start, jobs queued in the pod's own spool) - no farm round trip to start.
 
+Third pod: **exo-gpu-bench3 = 1x NVIDIA RTX 5090 (32 GB), $1.19/h** from 08:30 UTC (spool exo-farm/gpux3; a first one on an
+RTX PRO 4500 Blackwell at $0.72/h ran 08:28-08:30 and was terminated to fix its sweep budget), for an independent ~10^6-config Sobol sweep (pipeline/gpu_pod/xs2.sh, scramble seed 12): the
+first halves (57,652 configs each) took ~1 min for the bounds and ~1 min for the full bench of what passed them.
+
 Method (pipeline/gpu_pod/xs.sh, `tools/gpu_bench.py screen` / `cma`, both pods = 2 halves of one Sobol sequence):
 1. **Sobol map of the whole class** (scrambled Sobol, seed 11, 11 dims = tools/zc_frontier.py cmd_sobol's map: J1 seat
    az / el area-uniform over the allowed back + acromion-top region only, J3 direction area-uniform over the arm-frame

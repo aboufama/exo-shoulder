@@ -1,0 +1,7 @@
+{
+ "source": "tools/gpu_bench.py screen + cma (pipeline/gpu_pod/xs.sh) on exo-gpu-bench (RTX PRO 4000) + exo-gpu-bench2 (RTX 5090)",
+ "objective": "search: near-touch gap (metal < 1 mm = contact; CLAUDE.md rule), same-bench Bench(110,360) fast; claim: plain gap, frozen exact",
+ "screens": [],
+ "basins": [],
+ "verify": []
+}
