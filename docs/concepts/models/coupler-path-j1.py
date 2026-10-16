@@ -409,3 +409,26 @@ if __name__ == "__main__":
             fb = fourbar(calib_circle(u1, a1, br))
             for X in (20, 25, 30, 34, 38, 43):
                 c, good, _ = coverage(fb, P3, a2, X, br, ws); print(f"circle branch {br} X={X}: ws {c:.4f} overhead {good[ov].mean():.4f}")
+
+
+def append_sweep(entries, path=os.path.join(REPO, "docs", "concepts", "sweeps", ID + ".json")):
+    """append bench evaluations IN ORDER: {k, t, params, inband14, inband10, reach, follow, contact, gap, ...}"""
+    import datetime
+    old = json.load(open(path)) if os.path.exists(path) else []
+    for e in entries:
+        r = e["report"]
+        old.append(dict(k=len(old), t=e.get("t") or datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
+                        params=e["params"], **{m: r.get(m) for m in ("inband14", "inband10", "reach", "follow", "contact", "gap")},
+                        why=r.get("why"), stage=e.get("stage", ""), honest=r.get("honest"), margin=e.get("margin", 10)))
+    json.dump(old, open(path + ".tmp", "w"), indent=1, default=float); os.replace(path + ".tmp", path)
+    return len(old)
+
+
+if __name__ == "__main__" and len(sys.argv) > 1 and sys.argv[1] == "local":
+    # local <configs.json> <stage>: evaluate each config on Bench(60,160) and append to the sweep file
+    import concept_bench as CB
+    B = CB.Bench(60, 160)
+    for par in json.load(open(sys.argv[2])):
+        B.reset(); r = bench_eval(B, par)
+        n = append_sweep([dict(params=par, report=r, stage=sys.argv[3])])
+        print(n, r.get("gap"), r.get("reach"), r.get("inband14"), r.get("why"), flush=True)
