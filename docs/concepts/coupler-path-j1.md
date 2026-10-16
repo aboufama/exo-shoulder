@@ -25,7 +25,7 @@ relief map. The leader's frozen verified parameters (`docs/concepts/verify/skin-
 
 **(3) Methods and tools.** Closed-form spherical four-bar (two-circle closure for B1, coupler frame at A1).
 Root finding of g(t) = angle(p2(t), p3) - a2 on a 0.5-deg crank grid, then bisection to < 1e-6 deg. Crossing-angle
-conditioning. CMA-ES (cma 4.5) on the farm for the synthesis. The pin-knee VModel (every verifier check) for the bench
+conditioning. CMA-ES on the farm: cma 4.5 for the stage-1 proxy, tools/concept_cma.py for the bench. The pin-knee VModel (every verifier check) for the bench
 number, with the four-bar replacing J1's rotation of link 1.
 
 **(4) What, other than me, shows the number is right.** The bench (tools/concept_bench.py) on Bench(60,160) fast and
@@ -51,7 +51,8 @@ Changes from the spec, measured or reasoned:
   OSCULATING-CIRCLE rule: at the root, the kit's 3R rule th in [|a1 - a2| + m, min(a1 + a2, 360 - a1 - a2) - m] with u1
   replaced by the centre of the coupler curve's osculating circle and a1 by its radius. It is exact for a circle, and
   it is what makes the control below reproduce the leader to the last digit. (A plain crossing-angle threshold
-  calibrated to the same count, X = 40 deg for m = 10 / X = 25 for m = 5, takes a different pose set: 24.58 vs 20.63.)
+  calibrated to the same count - X = 40 deg for m = 10, X = 25 for m = 5 on the 360 poses - takes a different pose set:
+  with it and the coupler as link 1 the control read 24.58, with the osculating rule 21.47, with both fixed 20.63.)
 * **Body that carries J2.** With kr = 0 (J2 on the A1 axis) link 1 is the CRANK (a rotation about A0); with kr > 0 it is
   the coupler, rotation Rc(t) = E(t) E(t_h)^T.
 * **J2's home** is the root of angle(p2(t), u3) = a2c at Q = I (the leader's home convention), so a2c is free.
@@ -138,3 +139,53 @@ march, max over the taken poses), so it adds no contact, only metal out of band.
 ~3 mm apart, where two hubs need >= 17 mm). No configuration with real, separate base hubs comes near the leader: the best
 bound with A0-B0 >= 19.5 deg (hubs that fit) is 28.42 BEFORE its metal is priced (sweep k3257; its transmission angle
 dips to 26.3 deg, 1.3 deg from the toggle limit).
+
+## Frozen shape on the verification bench (lesson c)
+
+The best bound (cplE, B0 0.9 mm from A0, i.e. a rigid crank) fitted on Bench(60,160) fast and worn FROZEN on
+Bench(110,360) EXACT (farm, m = 10): **26.02** (score 90.54; reach 0.650, follow 0.973, in-band 0.899 / 0.538, contact
+0.009; fold 117, slide 7, parts 2, contact 3). Near-touch: min metal 0.09 mm over taken poses; gap 34.77 if metal < 1 mm
+counts as contact, 57.44 if < 2 mm. Overhead (elevation >= 140): reach 6 of 28 (0.214), in-band 0.872. This is NOT a
+four-bar result: with B0 on A0 the loop is rigid, and its plain-3R equivalent (J1 = A0, a1 41.70, a2 73.26, the same
+J3 seat and knee; sweep entry "plain-3R equivalent") scores 21.22 fast against the bound's 20.58. It is a re-seat of the
+pin knee (A0 2.5 deg off the leader's J1, a2 73.3, J3 wd 66.6 / wa -9.5 / b3 0.30, knee lE 50.3 / lc 17.8 / phiE -4.2 /
+phib -66.5) in the territory the pin-knee polish already holds (H1 verified 26.45 at m = 10). It goes to the polish as a
+seed, not to the leaderboard as a coupler. (Frozen exact of the plain-3R equivalent and of the leader control through
+this code were sent to the farm; their results land in `.cache/cp_runs/frozen_plain3r.json` / `frozen_control.json`.)
+
+## Red team (Bench(60,160) fast, m = 10)
+
+* **The pose that jams.** Overhead: the best bound takes 1 of 12 workspace poses at elevation >= 140 (9 fold, 2 knee
+  range), the best buildable four-bar (k3257) 0 of 12. The coupler did not buy the overhead it was meant to buy.
+* **The point that pinches.** Lowest metal 0.25 mm (cplE: plane 120 / elev 30 / axial -135, across the body), 0.21 mm
+  (k3257: the fit clip at elevation 149). Gap with metal < 1 mm as contact: 30.51 (cplE), 32.35 (k3257).
+* **The number that is optimistic.** The bound leaves the crank, rocker and three pins out; pricing them costs 14-36 gap
+  points (table above), and the bound optimum is not buildable (B0 inside A0's hub). The four-bar's toggle: the best
+  buildable layout's transmission angle reaches 26.3 deg (limit 25) inside the taken set.
+* **The proxy was optimistic too.** The J2-relief proxy (centre ray, Bench(60,160)) predicted a hub-2 level of 63 mm
+  at its best re-seated circle; the bench fitted 80.7 mm (disc edges, poses the circle never used, the knee and links).
+
+## Verdict
+
+**Dead (measured, converged).** The coupler-path J1 is a fold lever only on paper: by IK alone a coupler covers 0.967 of
+the 360 big-bench poses (overhead 1.00), but a plain circle with wider arcs covers 0.978 - the window is set by the
+arcs, not by the curve. On the full bench every CMA stream (6 streams, 8 9xx evaluations in all, every gate passed)
+dissolves the four-bar into a rigid crank (B0 onto A0), i.e. the leader's plain J1; the best bound ties the leader
+(20.58 vs 20.63 fast), and the honest priced optimum is 30.52 fast (+10 over the leader) with hubs that overlap.
+The limiter is not the J2 path but everything a wider path drags along: J2's hub level (61 -> 80-95 mm), the knee's
+range, the links over the raised deltoid / trapezius, and the four-bar's own metal (rocker over the moving shoulder edge,
+link 1 one pin stack higher).
+
+## New knowledge (beyond this morphology)
+
+1. **The osculating-circle fold rule** generalises the kit's 3R margin to any J2 path (coupler curve, cam, rocker): the
+   chain is singular exactly where the path is tangent to the circle C(p3, a2); the margin is the 3R rule with u1 ->
+   the osculating centre, a1 -> the osculating radius. It reproduces the 3R exactly (the control).
+2. **The fold window is an arc property, not a path property.** Over 360 big-bench poses: best circle 0.978, best
+   coupler 0.967 (no skin); with a J2-relief term they tie (0.906 / 0.903).
+3. **Per pose, the J2 skin is not the barrier**: 44 of the 46 poses the leader loses to the fold have a J2 axis on
+   C(p3, a2) whose ray clears the skin below the leader's hub-2 level (median 53 mm vs 61). What fails is ONE rigid
+   hub level + ONE path + the links serving every pose. A lever that changes a1 per pose must also keep J2's HEIGHT
+   - i.e. the next lever is in the radial direction (or a2), not in the path's shape.
+4. **A four-bar base on this chain costs 14-36 points of in-band** for its own metal, so any closed-loop J1 (rocker,
+   relay, coupler) has to pay that back in reach before it pays at all.
