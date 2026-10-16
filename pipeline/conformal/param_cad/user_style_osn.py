@@ -218,7 +218,9 @@ def base_part(M, E, l1_dirs):
     ang = np.degrees(np.arctan2(l1_dirs @ d1, l1_dirs @ d0))                              # link 1's heading about J1, every followed frame
     def dist_sector(al): return float(np.min(np.abs((ang - al + 180) % 360 - 180)))
     Rg = np.eye(3); cands = []
-    for thd in (32.0, 45.0):                                                               # the terminal's angle off the J1 axis
+    # the terminal's angle off the J1 axis: 20-28 deg added (measured at heading -50: the lowest terminal clearing the
+    # scapula-frame skin envelope by 0.5 mm sits at 71.5 / 74.5 / 75.5 / 77.0 mm from GH for 20 / 24 / 28 / 32 deg)
+    for thd in (20.0, 24.0, 28.0, 32.0, 45.0):
         th = math.radians(thd)
         for al in np.arange(-180.0, 180.0, 10.0):
             if dist_sector(al) < 30.0: continue
@@ -308,7 +310,7 @@ def member3_and_stage(M):
         return [(-w, y0), (w, y0), (w, y1), (cw, y1), (cw, yc), (-cw, yc), (-cw, y1), (-w, y1)], [0.3, 0.3, 0.3, 0, 0, 0, 0, 0.3]
     pts, rad = u_sec(True)                                                                  # inverted along block: mount face down on the base
     blk = prism(o(z_blk0), st, sn, pts, rad, GL, both=True)
-    for x_ in (-2.5, 2.5): blk = blk.cut(cq.Solid.makeCylinder(0.65, 1.5, V(o(z_blk0) + x_ * sa - 0.1 * sn), V(sn)))   # M1.6 tapped (drill 1.3)
+    for x_ in (-2.5, 2.5): blk = blk.cut(cq.Solid.makeCylinder(0.65, 1.1, V(o(z_blk0) + x_ * sa - 0.1 * sn), V(sn)))   # M1.6 tapped 1.0 (drill 1.3), under the channel floor
     out.append(("H", 5, f"along guide block THK RSR3M (= HIWIN MGN03C class), INVERTED on the cuff base: W {GW} x L {GL} x H {GH_} (catalogue)", blk))
     rail = lambda L_, pitch_dir: None
     def rail_solid(origin, along, up, L_):
@@ -331,9 +333,11 @@ def member3_and_stage(M):
     out.append(("l4", 4, f"carriage A: plus-shaped adapter {ADAPT_T} mm, arms {ARM_W} wide, under both rails (Ti-6Al-4V)", ad))
     xr = rail_solid(o(z_ad1), st, sn, LT)
     out.append(("l4", 4, f"across guide rail THK RSR3R3 3 x 2.6 x {LT:.1f} (catalogue rail, travel +-{St}), on carriage A", xr))
-    pts, rad = u_sec(False)                                                                 # across block: opening down over the rail
-    pts = [(x, -y) for x, y in pts]; pts = pts[::-1]; rad = rad[::-1]
-    xb = prism(o(z_xb1), sa, sn, pts, rad, GL, both=True)
+    # across block: the open-up section drawn from its top face downward (y along -sn), so the channel opens DOWN over the
+    # across rail (v2/v3 flipped the section and put the channel in the top face: the rail sat 0.6 mm in the block body)
+    pts, rad = u_sec(True)
+    xb = prism(o(z_xb1), sa, -sn, pts, rad, GL, both=True)
+    for y_ in (-2.5, 2.5): xb = xb.cut(cq.Solid.makeCylinder(0.65, 1.1, V(o(z_xb1) + y_ * st + 0.1 * sn), V(-sn)))   # M1.6 tapped 1.0 (member 3's screws)
     out.append(("l3", 3, f"carriage B = across guide block THK RSR3M (= HIWIN MGN03C class): W {GW} x L {GL} x H {GH_} (catalogue)", xb))
     stack = dict(base=[0, BASE_T], along_block=[z_blk0, z_blk0 + bd], along_rail=[round(z_rail0, 2), z_rail1], adapter=[z_rail1, z_ad1],
                  across_rail=[z_ad1, round(z_xr1, 2)], across_block=[z_xb0, z_xb1], total=z_xb1, rails_mm=dict(along=round(LA, 1), across=round(LT, 1)))
@@ -364,7 +368,7 @@ def arm_side(M):
     part = bot.fuse(br); part = part.clean() if part.clean().isValid() else part
     out = [("H", "D7-05 BOTTOM + stage base, one 5-axis part (user's bar cut at s 255; base plate 1.5 under the along block + arm + tongue fused into its channel web; 7075-T6)", part)]
     for x_ in (-2.5, 2.5):
-        out.append(("H", f"{SCREW}x4 ISO 10642 countersunk screw, along block to the base (polished stainless)", screw_csk(O + x_ * aH, nH, 1.6, 4.0, "")[2]))
+        out.append(("H", f"{SCREW}x2.5 ISO 10642 countersunk screw, along block to the base (polished stainless)", screw_csk(O + x_ * aH, nH, 1.6, 2.5, "")[2]))
     for g, n, s in up:
         if n.startswith(("BOTTOM", "UPPER ARM CUFF", "M4x6 ISO 10642 countersunk (upper cuff)")): continue
         out.append((g, n, s))
@@ -464,6 +468,28 @@ def check_clips(M, dd, parts_local, mv):
     return out
 
 
+def weld_open(m, tol=0.05):
+    """weld the vertices on open boundary edges within tol (mm): OCC meshes some glued / filleted seams of the bent bars with
+    0.02 mm gaps (link 2: 88 open edges, 3 pieces), and the judges then see an open shell (dynamics.py takes its convex hull:
+    link 2 weighed 158 g instead of 20; part_contact never uses an open part as the container). Moves vertices < tol."""
+    from scipy.spatial import cKDTree
+    from trimesh.grouping import group_rows
+    w = m.copy(); w.merge_vertices(digits_vertex=6); w.update_faces(w.nondegenerate_faces()); w.remove_unreferenced_vertices()
+    e = w.edges_sorted; ob = e[group_rows(e, require_count=1)]
+    if not len(ob): return w
+    bv = np.unique(ob); par = {int(v): int(v) for v in bv}
+    def find(a_):
+        while par[a_] != a_: par[a_] = par[par[a_]]; a_ = par[a_]
+        return a_
+    for i_, j_ in cKDTree(w.vertices[bv]).query_pairs(tol):
+        ra, rb = find(int(bv[i_])), find(int(bv[j_])); par[max(ra, rb)] = min(ra, rb)
+    mp = np.arange(len(w.vertices))
+    for v_ in bv: mp[v_] = find(int(v_))
+    F2 = mp[w.faces]; F2 = F2[(F2[:, 0] != F2[:, 1]) & (F2[:, 1] != F2[:, 2]) & (F2[:, 0] != F2[:, 2])]
+    w2 = trimesh.Trimesh(w.vertices, F2, process=False); w2.remove_unreferenced_vertices()
+    return w2 if w2.is_watertight or not m.is_watertight else m
+
+
 # ---------------------------------------------------------------------------------------------------- main
 def main():
     ap = argparse.ArgumentParser(); ap.add_argument("--out", default="user_osn_k4216"); ap.add_argument("--k", type=int, default=4216)
@@ -506,6 +532,7 @@ def main():
         fine = not user
         vs, fs = s.tessellate(0.02 if fine else 0.08, 0.15 if fine else 0.4)
         m = trimesh.Trimesh(np.array([[v.x, v.y, v.z] for v in vs]), np.array(fs), process=False)
+        if fine: m = weld_open(m)
         sc.add_geometry(m, node_name=f"{g}|{n}|{i}", geom_name=f"{g}|{n}|{i}")
         mm = m.copy(); mm.merge_vertices(); vol = abs(mm.volume) if mm.is_watertight else s.Volume()
         if user: mat, rho = "user part", None
