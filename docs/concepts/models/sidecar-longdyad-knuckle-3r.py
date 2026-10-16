@@ -74,10 +74,27 @@ def _ring(c, r, axv, n=16):
 
 class SCModel(FL.FLModel):
     def T(self, m, i):
-        if m in (8, 9) and getattr(self, "_sc", None) is not None:
+        if m in (8, 9) and getattr(self, "_scg", None) is not None:
+            if getattr(self, "_sc", None) is None or self._sc["n"] != len(self.dK): self._sc_pose()
             R7, t7 = super().T(7, i); Rb, tb = self._sc["X"][m]
             return R7 @ Rb[i], R7 @ tb[i] + t7
         return super().T(m, i)
+
+    def _sc_pose(self):
+        """per-pose transforms (link 1b frame) of the crank (9) and the rod (8) from the RSSR table phi(|dK|)"""
+        g = self._scg; PV, dR, tip0, H0, uK, sp = g["PV"], g["dR"], g["tip0"], g["H0"], g["uK"], g["sp"]
+        dKp = np.abs(np.asarray(self.dK, float)); n = len(dKp)
+        php = np.interp(dKp, g["kgrid"], g["phig"])
+        Rc = S.rotm(dR, php); tc = PV[None] - np.einsum("nij,j->ni", Rc, PV)
+        tipp = np.einsum("nij,j->ni", Rc, tip0 - PV) + PV
+        Hp = np.einsum("nji,j->ni", S.rotm(uK, sp * dKp), H0)    # R^T H0
+        v0 = unit(H0 - tip0); v1 = (Hp - tipp) / np.linalg.norm(Hp - tipp, axis=1)[:, None]
+        axr = np.cross(v0[None], v1); sn_ = np.linalg.norm(axr, axis=1); cs_ = v1 @ v0
+        Rr = np.zeros((n, 3, 3))
+        for j in range(n):
+            Rr[j] = np.eye(3) if sn_[j] < 1e-9 else S.rotm(axr[j] / sn_[j], math.atan2(sn_[j], cs_[j]))[0]
+        tr = tipp - np.einsum("nij,j->ni", Rr, tip0)
+        self._sc = dict(n=n, X={9: (Rc, tc), 8: (Rr, tr)})
 
     def _rod_metal(self):
         D = self.D; P = D.p; u2, uK = D.u[1], D.uK; fK, f2 = self.fK, self.f[1]
@@ -144,20 +161,8 @@ class SCModel(FL.FLModel):
             # transmission angle = 90 - the worse pressure angle (rod force vs the velocity of the crank tip / horn ball)
             trans[j] = 90.0 - max(math.degrees(math.acos(min(1, abs(float(rod @ vt))))), math.degrees(math.acos(min(1, abs(float(rod @ vh))))))
         ratio = np.gradient(phig, kgrid) if len(kgrid) > 2 else np.ones(len(kgrid))
-        # per-pose transforms (frame 7) of the crank (9) and the rod (8)
-        dKp = np.abs(np.asarray(self.dK, float)); n = len(dKp)
-        php = np.interp(dKp, kgrid, phig)
-        Rc = S.rotm(dR, php); tc = PV[None] - np.einsum("nij,j->ni", Rc, PV)
-        tipp = np.einsum("nij,j->ni", Rc, tip0 - PV) + PV
-        Hp = np.einsum("nji,j->ni", S.rotm(uK, sp * dKp), H0)    # R^T H0
-        v0 = unit(H0 - tip0); v1 = (Hp - tipp) / np.linalg.norm(Hp - tipp, axis=1)[:, None]
-        axr = np.cross(v0[None], v1); sn_ = np.linalg.norm(axr, axis=1); cs_ = v1 @ v0
-        Rr = np.zeros((n, 3, 3))
-        for j in range(n):
-            if sn_[j] < 1e-9: Rr[j] = np.eye(3)
-            else: Rr[j] = S.rotm(axr[j] / sn_[j], math.atan2(sn_[j], cs_[j]))[0]
-        tr = tipp - np.einsum("nij,j->ni", Rr, tip0)
-        self._sc = dict(X={9: (Rc, tc), 8: (Rr, tr)})
+        self._scg = dict(PV=PV, dR=dR, tip0=tip0, H0=H0, uK=uK, sp=sp, kgrid=kgrid, phig=phig); self._sc = None
+        dKp = np.abs(np.asarray(self.dK, float))
         # metal: crank (boss underside disc + arm underside + the tip's socket ring), rod (underside), ball-link sockets
         self.rigid["crank"] = (9, np.concatenate([boss, arm]))
         self.rigid["horn"] = (1, horn)
@@ -248,18 +253,36 @@ def bench_eval(B, params):
 
 
 def frozen(P, nc=110, nw=360):
-    return KB.frozen(_clamp(dict(PARAMS, **P)), nc, nw)
+    """= KB.frozen (fit on Bench(60,160) fast, the shape frozen, worn on Bench(nc, nw) exact) + the sidecar's geometry
+    carried over (the per-pose RSSR transforms are rebuilt from the worn bench's own K states)"""
+    P = _clamp(dict(PARAMS, **P))
+    old = os.environ.pop("CB_EXACT", None)
+    try: B1 = CB.Bench(n_clip=60, n_ws=160)
+    finally:
+        if old is not None: os.environ["CB_EXACT"] = old
+    M1 = SCModel(B1, dict(P)); r1 = M1.run(); fit = {k: r1[k] for k in ("gap", "reach", "follow", "inband14", "inband10", "contact")}
+    P2 = dict(M1.p); P2["m_fix"] = [float(x) for x in M1.D.m]
+
+    class Frozen(SCModel):
+        def fit(self):
+            for a in ("g", "fr", "geo", "rigid", "link_pts", "f", "fK", "tr", "zb", "_tr_fit", "cyl", "box", "strap", "cyl_surf", "Emid",
+                      "Hneed", "Lneed", "hEx", "_Ex", "_rod_info", "_viz_rod", "_crown_ok", "_scg", "_sc_info"):
+                if hasattr(M1, a): setattr(self, a, getattr(M1, a))
+            self._sc = None
+            self.contact = list(M1.contact); self.poses_fit = np.nonzero(self.kin_ok)[0]; self.drop = np.zeros(len(self.poses_fit), bool)
+    if nc == -1:
+        sp_ = importlib.util.spec_from_file_location("pk_polish_v_sidecar", os.path.join(REPO, "docs", "concepts", "verify", "skin-normal-3r-pin-knee-polish.py"))
+        PVm = importlib.util.module_from_spec(sp_); sp_.loader.exec_module(PVm); B = PVm.held_bench()
+    else:
+        B = CB.Bench(n_clip=nc, n_ws=nw)
+    M = Frozen(B, P2); r = M.run()
+    rep = {k: r[k] for k in ("gap", "reach", "follow", "inband14", "inband10", "contact")}
+    return dict(fit_fast=fit, frozen=rep, mode=B.mode, bench=[nc, nw], why=r.get("why"), parts_pairs=r.get("parts_pairs"),
+                parts_ib14=r.get("parts_ib14"), audit=PK.audit(M, B), sidecar=getattr(M1, "_sc_info", None))
 
 
 def frozen_held(P):
-    sp_ = importlib.util.spec_from_file_location("pk_polish_v_sidecar", os.path.join(REPO, "docs", "concepts", "verify", "skin-normal-3r-pin-knee-polish.py"))
-    PV = importlib.util.module_from_spec(sp_); sp_.loader.exec_module(PV)
-    orig = CB.Bench
-    def bench(n_clip=60, n_ws=160, *a, **k):
-        return PV.held_bench() if n_clip == -1 else orig(n_clip, n_ws, *a, **k)
-    CB.Bench = bench
-    try: return KB.frozen(_clamp(dict(PARAMS, **P)), -1, -1)
-    finally: CB.Bench = orig
+    return frozen(P, -1, -1)
 
 
 def viz_export(par):
