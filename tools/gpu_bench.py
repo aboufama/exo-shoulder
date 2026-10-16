@@ -114,7 +114,15 @@ class GBench:
         for i in range(0, g.shape[0], step):
             a = torch.from_numpy(np.ascontiguousarray(g[i:i + step]).reshape(-1))
             self.G[i * self.n ** 3:i * self.n ** 3 + a.numel()] = a.to(device)
-        self.outside = 0
+        self.outside = 0; self._cbB = None
+        self.exact_outside = os.environ.get("GB_EXACT_OUTSIDE", "1") == "1"
+
+    def _cb(self):
+        """the CPU bench (lazily) for the kit's exact path (libigl) on points outside the grid box"""
+        if self._cbB is None:
+            sys.path.insert(0, os.path.join(REPO, "tools")); import concept_bench as CB
+            self._cbB = CB.Bench(self.nc, self.nw)
+        return self._cbB
 
     def dist(self, I, X):
         """signed distance (mm) of points X (N, 3) float64, each in pose I (N,): concept_kit.dist_many's trilinear formula"""
@@ -130,7 +138,13 @@ class GBench:
                 for dz in (0, 1):
                     w = (fx if dx else 1 - fx) * (fy if dy else 1 - fy) * (fz if dz else 1 - fz)
                     v = v + self.G[base + (dx * n + dy) * n + dz].to(torch.float64) * w
-        return v * Q
+        v = v * Q
+        if self.exact_outside and not bool(ins.all()):                 # = Bench.dist / dist_many: the exact path there
+            J = torch.nonzero(~ins)[:, 0]; Ic = I[J].cpu().numpy(); Xc = X[J].cpu().numpy(); o = np.empty(len(J))
+            for i in np.unique(Ic):
+                m = Ic == i; o[m] = self._cb()._exact(int(i), Xc[m])
+            v[J] = torch.as_tensor(o, dtype=v.dtype, device=v.device)
+        return v
 
 
 # ---- vector helpers (the kit's, batched) ---------------------------------------------------------------------------
@@ -471,6 +485,8 @@ def score(Bw, ch, prof, okw, overlap):
     take = okw & ~hit
     W = torch.cat([ch.weight(n) for n in ch.order], 1)                       # (C, M)
     fmin = torch.full((C, P), float("inf"), dtype=torch.float64, device=dev); cmin = fmin.clone(); tmin = fmin.clone()
+    nout = torch.zeros(C, dtype=torch.float64, device=dev)            # metal points outside the grid box, per config
+    box = lambda Xp: (((Xp + HALF) / H_GRID < 0) | ((Xp + HALF) / H_GRID > Bw.n - 1 - 1e-9)).any(-1).sum(1).to(torch.float64)
     in14 = torch.zeros((C, P), dtype=torch.float64, device=dev); in10 = in14.clone()
     ci, pi = torch.nonzero(take, as_tuple=True)
     for c0, p0 in items_chunks(ci, pi, max(1, budget(dev) // 40 // W.shape[1])):
@@ -486,6 +502,7 @@ def score(Bw, ch, prof, okw, overlap):
             Xn = pts[n][c0, p0]; nn = torch.linalg.norm(Xn, dim=-1, keepdim=True); tops.append(Xn * (nn + ch.tk[n]) / nn)
         T = torch.cat(tops, 1); dt = Bw.dist(p0[:, None].expand(-1, T.shape[1]).reshape(-1), T.reshape(-1, 3)).reshape(n_, -1)
         tmin[c0, p0] = dt.amin(1)
+        nout.index_add_(0, c0, box(X) + box(CR) + box(T))
     good = take & (fmin >= 0) & (cmin >= 0) & (tmin >= 0)
     clip, ws = Bw.clip[None, :], Bw.ws[None, :]
     reach = (good & ws).sum(1) / ws.sum(); follow = (good & clip).sum(1) / clip.sum()
@@ -521,7 +538,7 @@ def score(Bw, ch, prof, okw, overlap):
             med = torch.quantile(st["ang"][a, idx], 0.5)
             if max(3, int(math.floor(float(med) * 70.0 / 2.0)) + 1) != int(st["ns"][a]): sparse[a] = True
     hubF = torch.stack([prof[h][:, 0] for h in ("hub1", "hub2", "hub3")], 1)
-    return dict(reach=reach, follow=follow, inband14=ib14, inband10=ib10, contact=contact, sparse=sparse, hubF=hubF,
+    return dict(reach=reach, follow=follow, inband14=ib14, inband10=ib10, contact=contact, sparse=sparse, hubF=hubF, nout=nout,
                 ok=okw.to(torch.float64).mean(1), collide=torch.where(okw.any(1), (hit & okw).sum(1) / okw.sum(1).clamp(min=1), torch.zeros_like(reach)))
 
 
@@ -576,7 +593,7 @@ def evaluate(configs, Bw, Bf=None, chunk=48, overlap=1.0 - 1e-4, log=None):
                     out[i] = dict(params=ps[i], gap=999.0, error="strap sample count differs between the fit and the wear bench"); continue
                 out[i] = dict(params=ps[i], gap=round(v + (0.0 if (honest and hub_ok) else 100.0), 2), v_gap=v, honest=honest and hub_ok,
                               sparse=bool(S["sparse"][a]), hub_F=hubF, hub_F_ok=hub_ok, closure_k2=round(float(S["ok"][a]), 4),
-                              collide=round(float(S["collide"][a]), 4), outside=int(Bw.outside + Bf.outside), **r)
+                              collide=round(float(S["collide"][a]), 4), outside=int(S["nout"][a]), **r)
             if log: log(f"  group inv2={inv2} inv3={inv3}: {len(ii)} configs in {time.time() - t0:.1f} s" + (f" {tm.s}" if tm.on else ""))
     return out
 
@@ -604,6 +621,9 @@ def cpu_eval(args):
         return dict(error=f"{type(e).__name__}: {e}"[:200], gap=None)
     keep = ("gap", "reach", "follow", "inband14", "inband10", "contact", "honest", "hub_F")
     return {k: r.get(k) for k in keep} | dict(v_gap=(r.get("v") or {}).get("gap"), secs=round(time.time() - t, 2), mode=Bw.mode)
+
+
+def _cpu_idx(a): return a[0], cpu_eval(a[1])
 
 
 def random_configs(n, seed=0):
@@ -691,7 +711,7 @@ def main():
     ap.add_argument("--out"); ap.add_argument("--procs", type=int, default=4); ap.add_argument("--seed", type=int, default=0)
     ap.add_argument("--leaders", action="store_true"); ap.add_argument("--extra")
     ap.add_argument("--budget", type=float, default=1800.0); ap.add_argument("--n0", type=int, default=4096)
-    ap.add_argument("--elites", type=int, default=16); ap.add_argument("--lam", type=int, default=24)
+    ap.add_argument("--cpu-from", dest="cpu_from"); ap.add_argument("--sane", action="store_true"); ap.add_argument("--elites", type=int, default=16); ap.add_argument("--lam", type=int, default=24)
     a = ap.parse_args()
     wear = tuple(int(x) for x in a.bench.split(",")); fit = tuple(int(x) for x in a.fit.split(",")) if a.fit else None
     if a.cmd == "table":                                              # markdown parity table from parity JSONs
@@ -725,17 +745,36 @@ def main():
         seeds = list(LEADERS) + (json.load(open(a.extra)) if a.extra else [])
         search(Bw, Bf, a.out, a.budget, a.n0, a.elites, a.lam, a.seed, a.chunk, seeds, log)
     elif a.cmd == "parity":
-        cf = random_configs(a.n, a.seed) + (LEADERS if a.leaders else [])
+        if a.sane:
+            # random configs inside the rulings whose metal stays inside the +-260 mm grid box (no member at the 400 mm
+            # "no clearance" sentinel: those are dishonest, +100, and their CPU reference runs minutes on libigl's exact
+            # path; the port hands such points to that same exact function) - picked by a GPU pre-pass, then compared
+            ex = Bw.exact_outside; Bw.exact_outside = False
+            if Bf: Bf.exact_outside = False
+            cand = random_configs(10 * a.n, a.seed); pre = evaluate(cand, Bw, Bf, a.chunk)
+            Bw.exact_outside = ex
+            if Bf: Bf.exact_outside = ex
+            cf = [c for c, r in zip(cand, pre) if r.get("outside", 1) == 0 and r["gap"] < 300][:a.n]
+            log(f"sane pick: {len(cf)} of {len(cand)} random configs (no metal outside the grid box)")
+        else:
+            cf = random_configs(a.n, a.seed)
+        cf += LEADERS if a.leaders else []
         if a.extra: cf += json.load(open(a.extra))
         t = time.time(); g = evaluate(cf, Bw, Bf, a.chunk, log=log); tg = time.time() - t
         log(f"GPU {len(cf)} configs in {tg:.1f} s")
         import multiprocessing as mp
         t = time.time()
-        c = [None] * len(cf)
+        c = [None] * len(cf); known = {}
+        if a.cpu_from and os.path.exists(a.cpu_from):                      # the CPU side does not depend on the port: reuse it
+            for r in json.load(open(a.cpu_from))["rows"]: known[json.dumps(snap(r["params"]), sort_keys=True)] = r["cpu"]
+        todo = [k for k, p in enumerate(cf) if json.dumps(snap(p), sort_keys=True) not in known]
+        for k, p in enumerate(cf):
+            if k not in todo: c[k] = known[json.dumps(snap(p), sort_keys=True)]
+        log(f"CPU reference: {len(cf) - len(todo)} reused from {a.cpu_from}, {len(todo)} to run")
         with mp.get_context("spawn").Pool(a.procs) as pool:          # spawn: never fork a CUDA process
-            for k, r in enumerate(pool.imap(cpu_eval, [(p, wear, fit) for p in cf], chunksize=1)):
+            for j, (k, r) in enumerate(pool.imap_unordered(_cpu_idx, [(k, (cf[k], wear, fit)) for k in todo], chunksize=1)):
                 c[k] = r
-                log(f"  CPU {k + 1}/{len(cf)} ({time.time() - t:.0f} s) gap cpu {r.get('gap')} gpu {g[k].get('gap')} ({r.get('secs')} s)")
+                log(f"  CPU {j + 1}/{len(todo)} ({time.time() - t:.0f} s) gap cpu {r.get('gap')} gpu {g[k].get('gap')} ({r.get('secs')} s; gpu outside-box points {g[k].get('outside')})")
         tc = time.time() - t; log(f"CPU {len(cf)} configs in {tc:.1f} s on {a.procs} processes")
         keys = ("gap", "reach", "follow", "inband14", "inband10", "contact")
         both = [(x, y) for x, y in zip(g, c) if not x.get("error") and not y.get("error")]

@@ -11,11 +11,12 @@
  * the fold (J1-J3 angle outside the closure window) shows red - the class's measured limiter. */
 (function () {
   const K = (typeof window !== 'undefined' ? window : globalThis).KIN, V = K.V, M = K.M;
-  const P = { az: 95.8565, el: 65.2093, a: [37.6, 73.6], w: [84.8, -11.37], branch: -1, inv2: 0, inv3: 1,
-              faces: [51, 60, 71], stack: 12.25, margin_deg: 5, cuff_at: 165,
-              lv1: [54.2, 54.2, 54.2, 54.2, 50.4, 51.2, 52.3, 60.0, 60.0, 60.0, 60.0],
-              lv2: [63.2, 63.2, 60.2, 59.9, 62.6, 64.0, 65.6, 67.6, 71.0, 71.0, 71.0],
-              lvn: [74.2, 74.2, 75.5, 78.0, 79.6, 81.0, 83.2, 86.4, 88.6, 91.3, 94.6] };
+  const P = { az: 109.3565, el: 65.94, a: [36.7226, 69.0575], w: [85.7423, -16.1921], branch: -1, inv2: 0, inv3: 1,
+              faces: [51.0, 58.4, 71.0], stack: 12.25, margin_deg: 5, cuff_at: 165,
+              // fitted underside level (mm from GH) at 11 stations along each strap (model prof, round-1 best, Bench(60,160) fast)
+              lv1: [54.1, 54.1, 54.1, 54.1, 50.1, 51.0, 52.6, 58.4, 58.4, 58.4, 58.4],
+              lv2: [61.5, 61.5, 62.4, 59.6, 61.3, 63.4, 64.1, 66.0, 68.0, 71.0, 71.0],
+              lvn: [74.2, 74.2, 75.0, 76.1, 78.9, 82.2, 85.2, 88.9, 92.3, 96.6, 101.0] };
   const C = K.sph3r(K.bvec(P.az, P.el), K.wdir(P.w[0], P.w[1]), P.a[0], P.a[1], P.branch);
   const lo = Math.abs(P.a[0] - P.a[1]), hi = Math.min(P.a[0] + P.a[1], 360 - P.a[0] - P.a[1]);
   const WB = [0, -0.0713, 0.9975], DB = [0, -0.9975, -0.0713];             // BOTTOM's bar (body_pose humerus frame)

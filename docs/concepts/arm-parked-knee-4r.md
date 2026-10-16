@@ -233,3 +233,47 @@ window across the body, neither of which the spare removes.
    return-to-centre torsion spring (wire 0.95, D 22, 6 coils) fits round an O20 housing at OD ~23 (r 12 keep-out).
 5. **A centred spring under two stops is bistable by topology**: the feasible knee azimuths form two disjoint arcs;
    any pose-by-pose energy-minimum policy is path-blind and must be checked on continuous motion (preview loop: 2 snaps).
+
+## Verification (independent verifier, 2026-10-16)
+
+Harness `docs/concepts/verify/arm-parked-knee-4r.py`, run on the farm (5 jobs, ~$0.13). Bench(110,360) exact, with the
+shape frozen from the Bench(60,160) fast fit and K6 at 1 mm radial. Config W3n with the stops at 11.74 deg. Results are
+in `docs/concepts/verify/arm-parked-knee-4r_*.json`.
+
+| run | gap | score | reach | follow | ib14 | ib10 | contact | near-touch gap |
+|---|---|---|---|---|---|---|---|---|
+| model's own checks (claim reproduced) | 25.05 | 90.89 | 0.7722 | 0.9545 | 0.8101 | 0.3979 | 0.0328 | 29.29 |
+| + top faces of every member | 25.59 | 90.69 | 0.7694 | 0.9545 | 0.8101 | 0.3979 | 0.0354 | 30.36 |
+| **+ the J4 spring coil as hub 4 at r 12 everywhere (v_gap)** | **26.71** | **90.29** | 0.7694 | 0.9545 | 0.7989 | 0.3919 | 0.0354 | 32.53 |
+| same shape, stops at margin 10 (top faces) | 25.47 | 90.74 | 0.7722 | 0.9545 | 0.8059 | 0.3928 | 0.0328 | 30.78 |
+| same shape, stops at margin 5 (top faces) | 62.70 | 77.20 | 0.5694 | 0.9000 | 0.6976 | 0.3251 | 0.0440 | 67.44 |
+| pessimistic two-arc bound (r 12; a ws pose counts only if taken on both knee arcs) | 42.26 | 84.63 | 0.6194 | 0.9545 | 0.7989 | 0.3919 | 0.0409 | |
+| champion 3R, same bench (osn verifier `champbig_frozen`, re-run on the farm) | 64.93 | 76.39 | 0.7278 | 0.9182 | 0.5650 | 0.3504 | 0.1103 | 67.54 |
+
+What was checked:
+
+1. **DOF.** The design has 4 ACTIVE joints. That is inside the user's cap of 4 (R5), but it fails R5-aim and the round's
+   rule of exactly 3 active DOF. J4 cannot be a passive joint that goes uncounted. The centred spring under two stops has
+   two disjoint knee arcs, so J1-J3 do not determine J4, and J4 must be sensed, which makes it active under the
+   REQUIREMENTS definition. The "13.25 complexity sprung passive pin" option therefore still counts 4 active DOF.
+   No passive coordinate is left undetermined: the spring and the stops set the spare.
+2. **Part sizes.** All four hubs are O20 with crown and wall checked. Before this check the model sampled only
+   undersides for the strap and hub tops: 6 taken poses had the tops of hub 2, hub 3 or link 2 inside the skin
+   (+0.54 gap). The spring coil (OD ~23) was a "stated hole" in K6. Modelled as hub 4's disc at r 12 in the fit, the
+   underside and K6 (J4's own members exempt to r 14), it costs +1.12 gap, mostly in-band. Exempting J4's members only to
+   r 12 + 2 = 14 is lenient at J1-J3 too: the kit ties the exemption radius to HUB_R, so this verifier patched it
+   globally for this run.
+3. **Pose-taking.** The independent closure check finds every angle(Ji, Ji+1) within 3e-6 deg of its arc and 0 poses
+   outside the J2 stop window. Dense K2 runs over the clips with the spring policy (follow 0.9545). Hub levels are
+   F 49 / 59 / 66 / 77 mm, all <= 140. Min metal-skin distance is 0.40 mm.
+4. **Knee-arc history (the model's open question).** I simulated the knee from the rest pose along a slerped path to
+   every ws pose, quasi-statically and with no snap between arcs (the knee changes arc only where the two arcs merge).
+   24 of 360 ws poses end on the other arc. 19 of them are untaken either way and 5 stay taken, so the number does not
+   move. The pessimistic bound (any history) is 42.26.
+5. **Bench artefact.** The exact path reproduces the claimed 25.05 to the digit, so nothing depends on the fast grid.
+
+**Verdict: VERIFIED at v_gap 26.71 (score 90.29), not refuted on the number.** It beats the champion on the same bench
+(64.93) by 38 points. Under these checks its lead over the pin-knee 3R (H1 27.20 at margin 5, own verifier) shrinks to
+about 0.5 point, where the screening claimed ~3. A fourth active joint, a felt spring and a two-arc hysteresis buy
+almost nothing over the 3R leader. Overhead reach stays at 0.29. It is not a golden candidate (complexity 32.25, 4
+active DOF).

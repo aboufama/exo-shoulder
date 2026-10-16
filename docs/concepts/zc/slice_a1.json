@@ -1,0 +1,181 @@
+{
+ "bench": "Bench(60,160) fast, shape fitted there; short CMA per fixed a1 (start: loc60 best, J1 acromion top)",
+ "runs": {
+  "slice_a1_46": {
+   "n": 81,
+   "gap": 43.77,
+   "near": 71.63,
+   "reach": 0.6625,
+   "follow": 0.95,
+   "inband14": 0.8091,
+   "contact": 0.1093,
+   "params": {
+    "az": 93.4572,
+    "el": 60.6063,
+    "a1": 46.0,
+    "a2": 75.1177,
+    "wd": 79.1038,
+    "wa": -11.848600000000005,
+    "sigma": -1,
+    "inv2": 0,
+    "inv3": 1,
+    "q": 0.9487,
+    "end_extra": 2.05
+   },
+   "inband_member": {
+    "hub1": 0.9874,
+    "hub2": 0.9025,
+    "hub3": 0.7512,
+    "link1": 0.907,
+    "link2": 0.6795,
+    "neck": 0.7922
+   },
+   "hub_F": {
+    "hub1": 52.0,
+    "hub2": 64.0,
+    "hub3": 73.46
+   },
+   "overhead": {
+    "n_ws": 12,
+    "reach": 0.0,
+    "n_clip": 5,
+    "follow": 0.4,
+    "n_taken": 2,
+    "inband14": 0.9344,
+    "inband10": 0.7406
+   }
+  },
+  "slice_a1_54": {
+   "n": 89,
+   "gap": 55.55,
+   "near": 75.87,
+   "reach": 0.7312,
+   "follow": 1.0,
+   "inband14": 0.6148,
+   "contact": 0.1015,
+   "params": {
+    "az": 90.4578,
+    "el": 61.9577,
+    "a1": 54.0,
+    "a2": 69.4394,
+    "wd": 75.8128,
+    "wa": -22.61779999999999,
+    "sigma": -1,
+    "inv2": 0,
+    "inv3": 1,
+    "q": 0.938,
+    "end_extra": 2.3365
+   },
+   "inband_member": {
+    "hub1": 0.9926,
+    "hub2": 0.0599,
+    "hub3": 0.7757,
+    "link1": 0.556,
+    "link2": 0.5138,
+    "neck": 0.8413
+   },
+   "hub_F": {
+    "hub1": 51.79,
+    "hub2": 85.79,
+    "hub3": 77.0
+   },
+   "overhead": {
+    "n_ws": 12,
+    "reach": 0.0,
+    "n_clip": 5,
+    "follow": 1.0,
+    "n_taken": 5,
+    "inband14": 0.7227,
+    "inband10": 0.5063
+   }
+  },
+  "slice_a1_62": {
+   "n": 97,
+   "gap": 67.36,
+   "near": 86.44,
+   "reach": 0.6937,
+   "follow": 1.0,
+   "inband14": 0.5734,
+   "contact": 0.1407,
+   "params": {
+    "az": 93.2886,
+    "el": 68.7589,
+    "a1": 62.0,
+    "a2": 71.7997,
+    "wd": 80.6272,
+    "wa": -24.041799999999995,
+    "sigma": -1,
+    "inv2": 0,
+    "inv3": 1,
+    "q": 0.9286,
+    "end_extra": 2.7426
+   },
+   "inband_member": {
+    "hub1": 0.9907,
+    "hub2": 0.0562,
+    "hub3": 0.8239,
+    "link1": 0.4425,
+    "link2": 0.4429,
+    "neck": 0.8536
+   },
+   "hub_F": {
+    "hub1": 49.0,
+    "hub2": 106.86,
+    "hub3": 74.0
+   },
+   "overhead": {
+    "n_ws": 12,
+    "reach": 0.0,
+    "n_clip": 5,
+    "follow": 1.0,
+    "n_taken": 5,
+    "inband14": 0.6695,
+    "inband10": 0.503
+   }
+  },
+  "cma_loc60": {
+   "n": 249,
+   "gap": 27.2,
+   "near": 40.57,
+   "reach": 0.6813,
+   "follow": 1.0,
+   "inband14": 0.8754,
+   "contact": 0.0287,
+   "params": {
+    "az": 97.8695,
+    "el": 65.7801,
+    "a1": 38.2279,
+    "a2": 73.4609,
+    "wd": 85.2247,
+    "wa": -13.495000000000005,
+    "sigma": -1,
+    "inv2": 0,
+    "inv3": 1,
+    "q": 0.9689,
+    "end_extra": 0.9685
+   },
+   "inband_member": {
+    "hub1": 0.9914,
+    "hub2": 0.9973,
+    "hub3": 0.8076,
+    "link1": 0.9985,
+    "link2": 0.8241,
+    "neck": 0.7905
+   },
+   "hub_F": {
+    "hub1": 50.0,
+    "hub2": 60.0,
+    "hub3": 71.05
+   },
+   "overhead": {
+    "n_ws": 12,
+    "reach": 0.0,
+    "n_clip": 5,
+    "follow": 1.0,
+    "n_taken": 5,
+    "inband14": 0.913,
+    "inband10": 0.5641
+   }
+  }
+ }
+}

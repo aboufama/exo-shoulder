@@ -1,0 +1,589 @@
+{
+ "task": "frozen_r12_botharc",
+ "params": {
+  "az": 108.0282,
+  "el": 71.0171,
+  "wd": 76.2005,
+  "wa": -7.9064,
+  "a1": 32.8519,
+  "a2": 72.9724,
+  "a3": 25.4941,
+  "pz4": 104.0211,
+  "s1": -1,
+  "side": 0,
+  "lim4": 400.0,
+  "margin": 11.7402,
+  "inner": 0.5,
+  "width": 12.0,
+  "t_link": 3.0,
+  "q": 0.9801,
+  "rad1": 10.0,
+  "rad2": 10.0,
+  "rad3": 10.0,
+  "rad4": 12.0,
+  "end_extra": 1.276,
+  "near": 0,
+  "spring_rad": 12.0
+ },
+ "exact": true,
+ "t0": "2026-10-16T06:59:28Z",
+ "r12": true,
+ "botharc": {
+  "report": {
+   "reach": 0.6194,
+   "follow": 0.9545,
+   "inband14": 0.7989,
+   "inband10": 0.3919,
+   "contact": 0.0409,
+   "gap": 42.26
+  },
+  "ws_model": 277,
+  "ws_alt": 223,
+  "ws_both": 223,
+  "lost": 54,
+  "lost_poses": [
+   {
+    "plane": -75.0,
+    "elev": 60.0,
+    "axial": 120.0
+   },
+   {
+    "plane": -15.0,
+    "elev": 60.0,
+    "axial": -45.0
+   },
+   {
+    "plane": -15.0,
+    "elev": 75.0,
+    "axial": -30.0
+   },
+   {
+    "plane": -15.0,
+    "elev": 75.0,
+    "axial": 30.0
+   },
+   {
+    "plane": -15.0,
+    "elev": 90.0,
+    "axial": 45.0
+   },
+   {
+    "plane": -15.0,
+    "elev": 105.0,
+    "axial": 15.0
+   },
+   {
+    "plane": 0.0,
+    "elev": 60.0,
+    "axial": -45.0
+   },
+   {
+    "plane": 0.0,
+    "elev": 60.0,
+    "axial": 15.0
+   },
+   {
+    "plane": 0.0,
+    "elev": 75.0,
+    "axial": -30.0
+   },
+   {
+    "plane": 0.0,
+    "elev": 75.0,
+    "axial": 30.0
+   },
+   {
+    "plane": 0.0,
+    "elev": 90.0,
+    "axial": 45.0
+   },
+   {
+    "plane": 0.0,
+    "elev": 105.0,
+    "axial": -45.0
+   },
+   {
+    "plane": 0.0,
+    "elev": 105.0,
+    "axial": 15.0
+   },
+   {
+    "plane": 15.0,
+    "elev": 75.0,
+    "axial": -45.0
+   },
+   {
+    "plane": 15.0,
+    "elev": 75.0,
+    "axial": 15.0
+   },
+   {
+    "plane": 15.0,
+    "elev": 90.0,
+    "axial": -30.0
+   },
+   {
+    "plane": 15.0,
+    "elev": 90.0,
+    "axial": 30.0
+   },
+   {
+    "plane": 15.0,
+    "elev": 105.0,
+    "axial": -60.0
+   },
+   {
+    "plane": 15.0,
+    "elev": 135.0,
+    "axial": -60.0
+   },
+   {
+    "plane": 15.0,
+    "elev": 165.0,
+    "axial": -60.0
+   },
+   {
+    "plane": 30.0,
+    "elev": 75.0,
+    "axial": -45.0
+   },
+   {
+    "plane": 30.0,
+    "elev": 75.0,
+    "axial": 15.0
+   },
+   {
+    "plane": 30.0,
+    "elev": 90.0,
+    "axial": -30.0
+   },
+   {
+    "plane": 30.0,
+    "elev": 90.0,
+    "axial": 30.0
+   },
+   {
+    "plane": 30.0,
+    "elev": 105.0,
+    "axial": -60.0
+   },
+   {
+    "plane": 30.0,
+    "elev": 135.0,
+    "axial": -60.0
+   },
+   {
+    "plane": 45.0,
+    "elev": 75.0,
+    "axial": -45.0
+   },
+   {
+    "plane": 45.0,
+    "elev": 75.0,
+    "axial": 15.0
+   },
+   {
+    "plane": 45.0,
+    "elev": 90.0,
+    "axial": -30.0
+   },
+   {
+    "plane": 45.0,
+    "elev": 90.0,
+    "axial": 30.0
+   },
+   {
+    "plane": 45.0,
+    "elev": 105.0,
+    "axial": -60.0
+   },
+   {
+    "plane": 45.0,
+    "elev": 120.0,
+    "axial": -90.0
+   },
+   {
+    "plane": 45.0,
+    "elev": 120.0,
+    "axial": -30.0
+   },
+   {
+    "plane": 45.0,
+    "elev": 135.0,
+    "axial": -60.0
+   },
+   {
+    "plane": 45.0,
+    "elev": 150.0,
+    "axial": -90.0
+   },
+   {
+    "plane": 45.0,
+    "elev": 150.0,
+    "axial": -45.0
+   },
+   {
+    "plane": 45.0,
+    "elev": 165.0,
+    "axial": -75.0
+   },
+   {
+    "plane": 60.0,
+    "elev": 90.0,
+    "axial": -105.0
+   },
+   {
+    "plane": 60.0,
+    "elev": 90.0,
+    "axial": -45.0
+   },
+   {
+    "plane": 60.0,
+    "elev": 90.0,
+    "axial": 15.0
+   }
+  ]
+ },
+ "fit": {
+  "gap": 20.47,
+  "reach": 0.825,
+  "follow": 0.95,
+  "inband14": 0.7961,
+  "inband10": 0.3848,
+  "contact": 0.0258,
+  "honest": true,
+  "audit": [],
+  "gap_near1": 23.88,
+  "mode": "fast"
+ },
+ "alt": {
+  "reach": 0.6194,
+  "follow": 0.6455,
+  "inband14": 0.6752,
+  "inband10": 0.2401,
+  "contact": 0.1009,
+  "poses": {
+   "clip": 110,
+   "ws": 360
+  },
+  "mode": "exact",
+  "gap": 91.08,
+  "inband_member": {
+   "hub1": 1.0,
+   "hub2": 0.9937,
+   "hub3": 0.6689,
+   "hub4": 0.3885,
+   "link1": 0.995,
+   "link2": 0.6533,
+   "link3": 0.124,
+   "neck": 0.6897
+  },
+  "mass_g": 128.4,
+  "mass_g_strap55": 147.1,
+  "closure": 0.8532,
+  "flips": 5,
+  "collide": 0.1742,
+  "q": 0.9801,
+  "kmode": "march",
+  "moved_share": 1.0,
+  "defl_p95": 192.25,
+  "defl_max": 280.48,
+  "min_margin": 12.24,
+  "residual_deg": 0.0,
+  "honest": true,
+  "audit": [],
+  "sample_mm": {
+   "hub1": 2.0,
+   "hub2": 2.0,
+   "hub3": 2.0,
+   "hub4": 2.0,
+   "link1": 1.49,
+   "link2": 1.77,
+   "link3": 2.29,
+   "neck": 2.53
+  },
+  "hubless": [],
+  "declared_hubs": {},
+  "crown_contact_poses": 21,
+  "crown_min": -16.44,
+  "min_metal_skin": 0.36,
+  "near_low": [
+   {
+    "mm": 0.36,
+    "i": 176,
+    "kind": "ws",
+    "plane": -15.0,
+    "elev": 60.0,
+    "axial": 15.0,
+    "crown": "face"
+   },
+   {
+    "mm": 0.43,
+    "i": 366,
+    "kind": "ws",
+    "plane": 90.0,
+    "elev": 105.0,
+    "axial": -90.0,
+    "crown": "face"
+   },
+   {
+    "mm": 0.65,
+    "i": 138,
+    "kind": "ws",
+    "plane": -60.0,
+    "elev": 60.0,
+    "axial": 45.0,
+    "crown": "face"
+   },
+   {
+    "mm": 0.66,
+    "i": 180,
+    "kind": "ws",
+    "plane": -15.0,
+    "elev": 75.0,
+    "axial": 90.0,
+    "crown": "face"
+   },
+   {
+    "mm": 0.8,
+    "i": 279,
+    "kind": "ws",
+    "plane": 45.0,
+    "elev": 75.0,
+    "axial": -105.0,
+    "crown": "face"
+   }
+  ],
+  "gap_near1": 94.58,
+  "near1": {
+   "reach": 0.6028,
+   "follow": 0.6455,
+   "inband14": 0.6752,
+   "contact": 0.1193
+  },
+  "overhead": {
+   "n_ws": 28,
+   "reach": 0.0,
+   "n_clip": 10,
+   "follow": 0.0,
+   "n_taken": 0,
+   "inband14": null,
+   "inband10": null
+  },
+  "over_reach": 0.0,
+  "stop_share": 1.0,
+  "verifier": {
+   "v": {
+    "reach": 0.6194,
+    "follow": 0.6455,
+    "inband14": 0.6752,
+    "inband10": 0.2401,
+    "contact": 0.1009,
+    "gap": 91.08
+   },
+   "v_near1": {
+    "reach": 0.6028,
+    "follow": 0.6455,
+    "inband14": 0.6752,
+    "inband10": 0.2401,
+    "contact": 0.1193,
+    "gap": 94.58
+   },
+   "top_contact_poses": 8,
+   "top_contact_who": [
+    "hub2",
+    "link2"
+   ],
+   "min_metal_all_faces": 0.36,
+   "closure_err_deg": {
+    "a1": 4.2872727590292925e-10,
+    "a2": 7.23332505003782e-11,
+    "a3": 1.47906979108825e-06
+   },
+   "stop_window": [
+    51.860699999999994,
+    94.08409999999999
+   ],
+   "w13_taken": [
+    52.36069756447371,
+    92.94455752619517
+   ],
+   "stop_violations": 0,
+   "hub_F": {
+    "hub1": 49.0,
+    "hub2": 59.0,
+    "hub3": 66.16,
+    "hub4": 77.16
+   },
+   "hub_F_ok": true,
+   "n_taken": 294,
+   "n": 470
+  }
+ },
+ "run": {
+  "reach": 0.7722,
+  "follow": 0.9545,
+  "inband14": 0.7989,
+  "inband10": 0.3919,
+  "contact": 0.0328,
+  "poses": {
+   "clip": 110,
+   "ws": 360
+  },
+  "mode": "exact",
+  "gap": 26.17,
+  "inband_member": {
+   "hub1": 1.0,
+   "hub2": 0.9911,
+   "hub3": 0.8884,
+   "hub4": 0.4984,
+   "link1": 0.9952,
+   "link2": 0.8911,
+   "link3": 0.3219,
+   "neck": 0.7419
+  },
+  "mass_g": 128.4,
+  "mass_g_strap55": 147.1,
+  "closure": 0.8532,
+  "flips": 5,
+  "collide": 0.0,
+  "q": 0.9801,
+  "kmode": "march",
+  "moved_share": 0.3766,
+  "defl_p95": 76.76,
+  "defl_max": 130.15,
+  "min_margin": 12.24,
+  "residual_deg": 0.0,
+  "honest": true,
+  "audit": [],
+  "sample_mm": {
+   "hub1": 2.0,
+   "hub2": 2.0,
+   "hub3": 2.0,
+   "hub4": 2.0,
+   "link1": 1.49,
+   "link2": 1.77,
+   "link3": 2.29,
+   "neck": 2.53
+  },
+  "hubless": [],
+  "declared_hubs": {},
+  "crown_contact_poses": 7,
+  "crown_min": -19.97,
+  "min_metal_skin": 0.4,
+  "near_low": [
+   {
+    "mm": 0.4,
+    "i": 289,
+    "kind": "ws",
+    "plane": 45.0,
+    "elev": 150.0,
+    "axial": -90.0,
+    "crown": "face"
+   },
+   {
+    "mm": 0.48,
+    "i": 237,
+    "kind": "ws",
+    "plane": 15.0,
+    "elev": 165.0,
+    "axial": -60.0,
+    "crown": "face"
+   },
+   {
+    "mm": 0.59,
+    "i": 205,
+    "kind": "ws",
+    "plane": 0.0,
+    "elev": 105.0,
+    "axial": 15.0,
+    "crown": "face"
+   },
+   {
+    "mm": 0.61,
+    "i": 184,
+    "kind": "ws",
+    "plane": -15.0,
+    "elev": 105.0,
+    "axial": 15.0,
+    "crown": "face"
+   },
+   {
+    "mm": 0.66,
+    "i": 180,
+    "kind": "ws",
+    "plane": -15.0,
+    "elev": 75.0,
+    "axial": 90.0,
+    "crown": "face"
+   }
+  ],
+  "gap_near1": 31.48,
+  "near1": {
+   "reach": 0.7444,
+   "follow": 0.9545,
+   "inband14": 0.7989,
+   "contact": 0.0581
+  },
+  "overhead": {
+   "n_ws": 28,
+   "reach": 0.2857,
+   "n_clip": 10,
+   "follow": 1.0,
+   "n_taken": 18,
+   "inband14": 0.8627,
+   "inband10": 0.6099
+  },
+  "over_reach": 0.2857,
+  "stop_share": 0.3766,
+  "verifier": {
+   "v": {
+    "reach": 0.7694,
+    "follow": 0.9545,
+    "inband14": 0.7989,
+    "inband10": 0.3919,
+    "contact": 0.0354,
+    "gap": 26.71
+   },
+   "v_near1": {
+    "reach": 0.7389,
+    "follow": 0.9545,
+    "inband14": 0.7989,
+    "inband10": 0.3919,
+    "contact": 0.0631,
+    "gap": 32.53
+   },
+   "top_contact_poses": 6,
+   "top_contact_who": [
+    "hub2",
+    "hub3",
+    "link2"
+   ],
+   "min_metal_all_faces": 0.4,
+   "closure_err_deg": {
+    "a1": 4.2872727590292925e-10,
+    "a2": 7.365485998889199e-11,
+    "a3": 2.5905707339290984e-06
+   },
+   "stop_window": [
+    51.860699999999994,
+    94.08409999999999
+   ],
+   "w13_taken": [
+    52.36069756447372,
+    93.58410038255285
+   ],
+   "stop_violations": 0,
+   "hub_F": {
+    "hub1": 49.0,
+    "hub2": 59.0,
+    "hub3": 66.16,
+    "hub4": 77.16
+   },
+   "hub_F_ok": true,
+   "n_taken": 382,
+   "n": 470
+  }
+ },
+ "secs": 367.1
+}

@@ -49,6 +49,49 @@ def spare_alt(F, p, u1, u4):
     defl = np.degrees(np.abs(dsel - dp)); return p3a, feas, defl, np.ones_like(feas, bool)
 
 
+def spare_terms(F, p, u1, u4):
+    """dp (spring rest azimuth), dlo, dhi, feas of the model's spare (same formulas as M.spare)"""
+    a1, a2, a3 = p["a1"], p["a2"], p["a3"]; mi = p["margin"] + p["inner"]
+    th = np.degrees(np.arccos(np.clip((u1 * u4).sum(-1), -1, 1)))
+    lo1, hi1 = abs(a1 - a2) + mi, min(a1 + a2, 360 - a1 - a2) - mi
+    u4s = K.wdir(p["wd"], p["wa"]); ref = np.array([0.0, -1.0, 0.0]) if abs(u4s[1]) < 0.9 else np.array([0.0, 0.0, -1.0])
+    e1 = K.unit(np.cross(u4s, ref)); e2 = np.cross(u4s, e1)
+    pp = F.HG(math.cos(a3 * D2R) * u4s + math.sin(a3 * D2R) * (math.cos(p["pz4"] * D2R) * e1 + math.sin(p["pz4"] * D2R) * e2))
+    dp = np.radians(K.axis_angle(u4, u1, pp))
+    sa, ca = math.sin(a3 * D2R), math.cos(a3 * D2R); st, ct = np.sin(th * D2R), np.cos(th * D2R); den = sa * st + 1e-12
+    cmin = (np.cos(hi1 * D2R) - ca * ct) / den; cmax = (np.cos(lo1 * D2R) - ca * ct) / den
+    dlo = np.arccos(np.clip(cmax, -1, 1)); dhi = np.arccos(np.clip(cmin, -1, 1))
+    return dp, dlo, dhi, (cmax >= -1) & (cmin <= 1) & (dlo <= dhi)
+
+
+def history_signs(B, p):
+    """the knee's arc (sign of d) at every pose, reached by the straight (slerped) path from the rest pose (lowest
+    elevation) with the spring + stops quasi-static and NO snap between arcs: the knee changes arc only where the two
+    arcs merge (dlo ~ 0 or dhi ~ pi). Clip poses keep the model's sign (their dense K2 rejects snaps)."""
+    F = K.frames(B); n = len(B.res); j0 = int(np.argmin([q["elev"] for q in B.poses]))
+    u1s = K.bvec(p["az"], p["el"]); u4s = K.wdir(p["wd"], p["wa"]); eps = 1e-3
+    dpa, *_ = spare_terms(F, p, F.S(u1s), F.HG(u4s)); model = np.where(dpa >= 0, 1, -1); out = model.copy(); stuck = 0
+    for j in range(n):
+        if B.kind[j] != "ws": continue
+        Fs = K._slerp_frames(F, j0, j, 2.0); dp, dlo, dhi, fe = spare_terms(Fs, p, Fs.S(u1s), Fs.HG(u4s))
+        sg = 1 if dp[0] >= 0 else -1
+        for i in range(1, len(dp)):
+            if not fe[i]: continue
+            if dlo[i] < eps or dhi[i] > math.pi - eps: sg = 1 if dp[i] >= 0 else -1      # the arcs merge: free choice
+        out[j] = sg; stuck += int(sg != model[j])
+    return out, model, stuck, j0
+
+
+def spare_hist(signs):
+    def f(F, p, u1, u4):
+        p3, feas, defl, stop = SPARE0(F, p, u1, u4)
+        if len(u1) != len(signs): return p3, feas, defl, stop
+        p3a, _, defla, _ = spare_alt(F, p, u1, u4); dp, *_ = spare_terms(F, p, u1, u4)
+        flip = (np.where(dp >= 0, 1, -1) != signs)
+        return np.where(flip[:, None], p3a, p3), feas, np.where(flip, defla, defl), stop | flip
+    return f
+
+
 def ang(a, b): return np.degrees(np.arccos(np.clip((K.unit(a) * K.unit(b)).sum(-1), -1, 1)))
 
 
@@ -116,6 +159,16 @@ def main():
     par = json.loads(sys.argv[3]) if len(sys.argv) > 3 else {}
     r12 = "r12" in task; both = "botharc" in task
     K.collisions = functools.partial(K.collisions, overlap=1.0 - 1e-4)                  # 1 mm radial K6
+    if r12:   # the coil annulus r 10-12 belongs to J4's stack: J4's own members (link 3, neck) are exempt to r 12 + 2
+        _c = K.collisions
+
+        def coll12(*a, **kw):
+            h = K.HUB_R; K.HUB_R = 12.0
+            try:
+                return _c(*a, **kw)
+            finally:
+                K.HUB_R = h
+        K.collisions = coll12
     p0 = snap(dict(M.PARAMS, **par), r12)
     res = dict(task=task, params=p0, exact=os.environ.get("CB_EXACT") == "1", t0=K.now(), r12=r12, botharc=both)
     t = time.time()
@@ -127,7 +180,7 @@ def main():
     rf = ev(Bf, p0); prof = {k: np.array(v) for k, v in Bf._kit_last["prof"].items()}
     res["fit"] = {k: rf.get(k) for k in ("gap", "reach", "follow", "inband14", "inband10", "contact", "honest", "audit", "gap_near1")}
     res["fit"]["mode"] = Bf.mode; json.dump(res, open(out, "w"), indent=1, default=float); print("fit", res["fit"], flush=True)
-    Bb = K.bench(110, 360)
+    Bb = K.bench(*[int(x) for x in os.environ.get("APK_BIG", "110,360").split(",")])
     if both:
         M.spare = spare_alt
         try:
@@ -136,8 +189,25 @@ def main():
             M.spare = SPARE0
         alt_ws = {j for j in range(len(Bb.res)) if Bb.kind[j] == "ws" and SPM._taken(Bb, j)}
         res["alt"] = dict(keep(ra), verifier=va)
+    if "hist" in task:   # the knee's arc from the rest pose along a slerped path (history, no snap between arcs)
+        sg, model, stuck, j0 = history_signs(Bb, p0)
+        res["hist"] = dict(rest_pose=Bb.poses[j0], ws_on_other_arc=int(stuck))
+        oth = [j for j in range(len(sg)) if sg[j] != model[j]]
+        M.spare = spare_hist(sg)
+        try:
+            rh = ev(Bb, p0, prof); vh = top_check(Bb, rh, p0)
+        finally:
+            M.spare = SPARE0
+        res["hist"]["run"] = dict(keep(rh), verifier=vh)
+        hist_taken = {j for j in oth if SPM._taken(Bb, j)}
+        print("hist", res["hist"]["ws_on_other_arc"], {k: rh.get(k) for k in ("gap", "reach", "follow", "inband14", "inband10", "contact", "gap_near1", "over_reach")}, vh["v"], vh["v_near1"], flush=True)
+        json.dump(res, open(out, "w"), indent=1, default=float)
     r = ev(Bb, p0, prof); v = top_check(Bb, r, p0)
     res["run"] = dict(keep(r), verifier=v, mode=Bb.mode)
+    if "hist" in task:
+        res["hist"]["other_arc_poses"] = [dict(i=j, plane=Bb.poses[j]["plane"], elev=Bb.poses[j]["elev"], axial=Bb.poses[j]["axial"],
+                                               taken_model=SPM._taken(Bb, j), taken_hist=j in hist_taken) for j in oth]
+        print("other arc", [(d["plane"], d["elev"], d["axial"], d["taken_model"], d["taken_hist"]) for d in res["hist"]["other_arc_poses"]], flush=True)
     if both:
         ws_model = {j for j in range(len(Bb.res)) if Bb.kind[j] == "ws" and SPM._taken(Bb, j)}
         lost = sorted(ws_model - alt_ws)
