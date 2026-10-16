@@ -1,0 +1,171 @@
+{
+ "model": "docs/concepts/models/minarc-stop-knuckle-4r-a-kitrule.py",
+ "params": {
+  "az": 100.6785,
+  "el": 65.4034,
+  "wd": 46.1583,
+  "wa": -6.1871,
+  "a1": 43.8793,
+  "a2": 71.1868,
+  "b1": 30.6983,
+  "b2": 56.392,
+  "a1max": 70.3202,
+  "phi_lo": 28.923139192872032,
+  "phi_hi": 148.18749104669635,
+  "sigma": -1,
+  "sK": -1,
+  "margin": 5.0,
+  "mstop": 0,
+  "width": 12.0,
+  "t_link": 3.0,
+  "q": 0.9694,
+  "near": 0,
+  "smhi": 6.0944,
+  "smlo": 8.9158,
+  "phys": 1,
+  "capK": 6.0,
+  "stops_ok": 1,
+  "th_lo": 36.22330000000001,
+  "th_hi": 108.9717
+ },
+ "fold_margin": 5.0,
+ "wear": "held",
+ "mode": "exact",
+ "n": 1154,
+ "fit": {
+  "gap": 28.92,
+  "reach": 0.8625,
+  "follow": 1.0,
+  "inband14": 0.7054,
+  "inband10": 0.3689,
+  "contact": 0.0571,
+  "gap_near1": 30.03,
+  "min_metal_skin": 0.9,
+  "overhead": {
+   "n_ws": 12,
+   "reach": 0.3333,
+   "n_clip": 5,
+   "follow": 1.0,
+   "n_taken": 9,
+   "inband14": 0.7533,
+   "inband10": 0.4957
+  },
+  "honest": true
+ },
+ "static": {
+  "gap": 45.72,
+  "reach": 0.75,
+  "follow": 1.0,
+  "inband14": 0.7043,
+  "inband10": 0.3708,
+  "contact": 0.1115,
+  "gap_near1": 48.55,
+  "min_metal_skin": 0.11,
+  "overhead": {
+   "n_ws": 71,
+   "reach": 0.3521,
+   "n_clip": 19,
+   "follow": 1.0,
+   "n_taken": 44,
+   "inband14": 0.7261,
+   "inband10": 0.4631
+  },
+  "honest": true,
+  "forced": {
+   "ws_stretched": {
+    "n": 300,
+    "taken": 253,
+    "contact": 47
+   },
+   "ws_folded": {
+    "n": 3,
+    "taken": 2,
+    "contact": 1
+   },
+   "ws_A": {
+    "n": 526,
+    "taken": 459,
+    "contact": 67
+   },
+   "clip_forced": {
+    "n": 14,
+    "taken": 14,
+    "contact": 0
+   },
+   "clip_A": {
+    "n": 188,
+    "taken": 188,
+    "contact": 0
+   }
+  }
+ },
+ "connected": {
+  "gap": 145.85,
+  "reach": 0.0,
+  "follow": 1.0,
+  "inband14": 0.7043,
+  "inband10": 0.3708,
+  "contact": 0.3628,
+  "gap_near1": 145.85,
+  "min_metal_skin": 1.64,
+  "overhead": {
+   "n_ws": 71,
+   "reach": 0.0,
+   "n_clip": 19,
+   "follow": 1.0,
+   "n_taken": 19,
+   "inband14": 0.6926,
+   "inband10": 0.4277
+  },
+  "forced": {
+   "ws_stretched": {
+    "n": 300,
+    "taken": 0,
+    "contact": 47
+   },
+   "ws_folded": {
+    "n": 3,
+    "taken": 0,
+    "contact": 1
+   },
+   "ws_A": {
+    "n": 526,
+    "taken": 0,
+    "contact": 67
+   },
+   "clip_forced": {
+    "n": 14,
+    "taken": 14,
+    "contact": 0
+   },
+   "clip_A": {
+    "n": 188,
+    "taken": 188,
+    "contact": 0
+   }
+  },
+  "score": 46.96
+ },
+ "dropped_unconnected": 714,
+ "min_margin_taken": 6.14,
+ "conn_stats": {
+  "nodes": 1263,
+  "connected": 0,
+  "edges": 0,
+  "refused": {
+   "fold_or_window": 0,
+   "jump": 0
+  },
+  "nodes_by_state": {
+   "A": 800,
+   "stretched": 459,
+   "folded": 4
+  },
+  "connected_by_state": {
+   "A": 0,
+   "stretched": 0,
+   "folded": 0
+  }
+ },
+ "secs": 897.6
+}

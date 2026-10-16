@@ -745,6 +745,8 @@
   "bench_static_near1": 44.72,
   "complexity": 13.5,
   "min_margin": 6.19,
-  "continuity": "rest (elevation 0) is always stretched (K open): strict seeds = 0; seeded at any elevation-0 pose 1263 / 1263 nodes connect -> connected = static"
+  "continuity": "rest (elevation 0) is always stretched (K open): strict seeds = 0; seeded at any elevation-0 pose 1263 / 1263 nodes connect -> connected = static",
+  "held_out_static": 45.72,
+  "held_out_static_near1": 48.55
  }
 }

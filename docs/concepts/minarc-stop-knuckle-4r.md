@@ -383,7 +383,7 @@ cap +6 mm, continuity on the full 1432-pose grid; raw data `verify/minarc-kitrul
 | same, effective-dyad check off (`m3e` 0; forced poses down to 2.97 deg) | 10.17 | 20.91 | 92.40 | 0.725 | 1.0 | 0.895 | 0.029 | 27.34 | 0.05 | - |
 | BB seats, virtual stops 5 / 5, no cap | 10.08 | 21.16 | 92.31 | 0.753 | 0.936 | 0.904 | 0.051 | 23.82 | 0.09 | - |
 | LB1 best (near-touch CMA from BDp): physical q2 stop, cap 6, stops 5.00 / 7.27 (`params_B_LB1_g45_2.json`) | 11.22 | 19.63 | 92.86 | 0.761 | 0.945 | 0.900 | 0.053 | **22.88** | 0.02 | 24.59 (28.22) |
-| variant A, LA1 best (`params_A_LA1_g40_2.json`, complexity 13.5) | 30.03 near / 28.92 | 41.14 | 85.04 | 0.778 | 1.0 | 0.706 | 0.095 | 44.72 | 0.26 | (running at report time) |
+| variant A, LA1 best (`params_A_LA1_g40_2.json`, complexity 13.5) | 30.03 near / 28.92 | 41.14 | 85.04 | 0.778 | 1.0 | 0.706 | 0.095 | 44.72 | 0.26 | 45.72 (48.55), static = connected from any elevation-0 seed |
 | H1 (verified pin knee), same harness | 27.20 fit60 | 27.20 | 90.11 | | | | | 31.75 | | 31.39 (34.66) |
 
 **The claim: BDp** (variant B, `models/minarc-stop-knuckle-4r-kitrule.py` with `kitrule 1, phys 1, capK 6, m3e 1`, params
