@@ -15,11 +15,11 @@
  "inband10": 0.392,
  "contact": 0.0913,
  "gap": 39.36,
- "v_reach": null,
- "v_follow": null,
- "v_inband14": null,
- "v_inband10": null,
- "v_gap": null,
+ "v_reach": 0.825,
+ "v_follow": 0.95,
+ "v_inband14": 0.6729,
+ "v_inband10": 0.392,
+ "v_gap": 39.34,
  "n_configs": 18549,
  "verdict": "DEAD (converged, measured): best 39.36 fast near-touch = plain (score 85.7; reach 0.825, in-band 0.673, contact 0.091); frozen exact Bench(110,360) 53.32 (score 80.6; reach 0.739, in-band 0.675, contact 0.134, min metal 0.31 mm, overhead 10/28; continuity seed-any drops 0), held out 59.55 (score 78.4). zc-frontier's verified 31.04 at complexity 0 is 22 points better, so the sensor-free knuckle buys nothing here. The lead's literal kill gate is passed law-only (hub 2 0.89 / K 1.00 / hub 3 0.80 at plain reach 0.825), but there link 2 (0.37) and the neck (0.21) leave the band and the honest tail makes it 75.19.",
  "limiter": "(1) the J3-side straps: link 2 0.33 and neck 0.23 in band at every reach >= 0.8 seat (hub 3 0.75); (2) the tail sweep: the tail is rigid with link 2 and turns through the whole state-A q2 window, its tip ~40 deg from u2 sweeps skin that needs 135-152 mm levels (LA1) -> tail 0-24 % in band, roller 0-13 %; the tail + roller + lug metal costs 9.3 points at the best (39.36 vs law-only 30.02); (3) the fold side has no tooth (overhead th ~36 lost).",
@@ -111,5 +111,6 @@
   "tries": 11270,
   "converged": true,
   "kill_gate": "passed law-only by the gate CMA (hub 2 0.89 / K 1.00 / hub 3 0.80 at plain reach 0.825); 75.19 with the tail metal"
- }
+ },
+ "audit": "2026-10-16 auditor: DEATH STANDS. Re-ran the claimed best through the model on Bench(60,160) fast: gap 39.34 (claim 39.36), reach 0.825, in-band 0.673, contact 0.091; neck 0.23 and link 2 0.33 in band, tail 0.15, roller 0.03. Convergence gate on the 9416 honest CMA tries: +0.80 score over the second half, +0.23 over the last third, top 5 within 0.01 points: CONVERGED. Model read: law, tail and lug metal and the +100 no-drive penalty are consistent with the kit; no bug or over-strict check found. inv3=1 (5795 tries) best 41.5 (reach 0.71), so the J3-side option was searched. The sensed law-only reference on the same chain is 30.03 fast, so even with zero tail cost it does not reach the leaders (18.45 frozen)."
 }

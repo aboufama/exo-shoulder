@@ -208,3 +208,23 @@ The best shape was fit on Bench(60,160) fast, its profiles frozen, and worn on t
   - or a crown cam on hub 2 (cam-unfold-4th's C3 measured 22.02 fast with the pin knee).
 - The J3 side needs the pin knee or a different J3 seat family. The plain neck at wd ~36 cannot sit in band under O20.
 - Do not spend more on the crest basin under O20.
+
+## Audit (2026-10-16, adversarial auditor)
+
+Verdict: the death STANDS. The tail sweep costs 9.3 points, and the plain J3 side (neck 0.23, link 2 0.33 in band) keeps in-band at 0.67. Both were measured and reproduced.
+
+- **Reproduced.** The claimed best params through `geneva-tail-knuckle-3r.py check` on Bench(60,160) fast give gap 39.34 (claim 39.36): reach 0.825, follow 0.95, in-band14 0.673, contact 0.091 and minimum metal 1.11 mm. The drive is the beside embodiment; the law runs th 101.96 -> 136.63 and ends on m3e. Overhead: 6 of 17 taken.
+- **Convergence gate.** I ran it on the 9416 honest CMA tries. Excluded: the SENSED reference, the gate-objective search and the +100 penalised entries. Results:
+  - the best gained 0.80 score points over the second half (limit < 1);
+  - it gained 0.23 over the last third (limit < 0.5);
+  - the top 5 lie within 0.01 points.
+  
+  The sweep is CONVERGED. The plain sweep-order reading also includes the LHS and gate entries; that reading gives 0.80 / 0.77, because the streams are interleaved.
+- **Model read.** I checked the contact law (pressure angle, lift-off, rate, m3e / msub), the tail / roller / lug metal and the no-drive penalty against the kit-rule A parent. None of them shows a bug or an over-strict check. The roller-lug contact is exempted from K6 near D, which is optimistic, not strict.
+- **Parameter coverage.** The J3-side options were searched:
+  - inv3 = 1: 5795 tries, best 41.5 (reach 0.71, neck 0.69, link 2 0.78);
+  - inv3 = 0: best 39.39.
+  
+  The crest basin is closed by the O20-only rule.
+- **Upper bound.** With the sensed law and no tail (4 active, reference only), the same chain scores 30.03 fast. That is still behind H1 (24.48 verified) and minarc B (18.45 frozen). Removing every honesty cost would not make this a leader.
+- **Note on the task's stale criterion.** The template's "within 10 of 68.93" bar would be met trivially (39.34 < 68.93). The death is judged against the verified leaders, not the round-1 champion.
