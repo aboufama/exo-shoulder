@@ -858,6 +858,17 @@ def screen(Bw, out_json, n, seed=0, part=0, nparts=1, thr=45.0, budget_s=2400.0,
 
 
 # ---- batched multi-start CMA-ES (one CMA per basin, every basin's population in the same GPU call) ------------------
+def objective(key, r):
+    """search objective of a row: a row field (gap / near), or `pareto:R` = the best in-band at reach >= R (the class's
+    reach / in-band frontier): 100 max(0, .90 - in-band14) + 1000 max(0, R - reach) + 100 max(0, .95 - follow)
+    + 100 contact (+100 when not honest, 200 seat)"""
+    if not key.startswith("pareto:"): return r.get(key, 999)
+    if r.get("reach") is None: return 999.0
+    R = float(key.split(":")[1])
+    v = 100 * max(0.0, .90 - r["inband14"]) + 1000 * max(0.0, R - r["reach"]) + 100 * max(0.0, .95 - r["follow"]) + 100 * r["contact"]
+    return round(v + (0.0 if r.get("honest") else 100.0), 3)
+
+
 class _CMA:
     def __init__(self, x0, sigma0, lam, seed):
         n = len(CONT); self.n = n; self.lam = lam; mu = lam // 2; self.mu = mu
@@ -910,7 +921,7 @@ def cma_multi(Bw, starts, out_json, budget_s=2400.0, lam=12, sigma0=0.6, key="ne
     t0 = time.time(); reserve = list(reserve); runs = []; act = []; allrows = []
     def start(r, i):
         c = _CMA(r["params"], r.get("_sigma0", sigma0), int(r.get("_lam", lam)), seed + 7919 * i); c.start_row = r; c.idx = i
-        c.best = (r.get(key, 999), r); c.best_plain = r; runs.append(c); return c
+        c.key = r.get("_key", key); c.best = (objective(c.key, r), r); c.best_plain = r; runs.append(c); return c
     for i, r in enumerate(starts): act.append(start(r, i))
     nxt = len(starts); g = 0
     def dump(tag):
@@ -918,10 +929,10 @@ def cma_multi(Bw, starts, out_json, budget_s=2400.0, lam=12, sigma0=0.6, key="ne
         for c in runs:
             b = c.best[1]
             bas.append(dict(basin=c.idx, start=c.start_row["params"], start_gap=c.start_row.get("gap"), start_near=c.start_row.get("near"),
-                            lam=c.lam, sigma0=c.start_row.get("_sigma0", sigma0), gens=c.gen, done=c.done, why=c.why, sigma=round(c.sigma, 4),
+                            lam=c.lam, sigma0=c.start_row.get("_sigma0", sigma0), key=c.key, best_obj=c.best[0], gens=c.gen, done=c.done, why=c.why, sigma=round(c.sigma, 4),
                             best=b, best_plain=c.best_plain))
         json.dump(dict(t=time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()), tag=tag, secs=round(time.time() - t0, 1), key=key, lam=lam,
-                       evals=len(allrows), meta=meta or {}, basins=sorted(bas, key=lambda x: x["best"].get(key, 999))), open(out_json + ".tmp", "w"), default=float)
+                       evals=len(allrows), meta=meta or {}, basins=sorted(bas, key=lambda x: (x["key"], x["best_obj"]))), open(out_json + ".tmp", "w"), default=float)
         os.replace(out_json + ".tmp", out_json)
     while act and time.time() - t0 < budget_s:
         g += 1; cand, own = [], []
@@ -929,14 +940,14 @@ def cma_multi(Bw, starts, out_json, budget_s=2400.0, lam=12, sigma0=0.6, key="ne
             for p in c.ask(): cand.append(p); own.append(c)
         R = evaluate(cand, Bw, None, chunk); allrows.extend(R)
         for c in act:
-            mine = [r for r, o in zip(R, own) if o is c]; c.tell([r.get(key, 999) for r in mine], mine)
+            mine = [r for r, o in zip(R, own) if o is c]; c.tell([objective(c.key, r) for r in mine], mine)
             for r in mine:                                             # the best PLAIN gap seen on the way (reported, not steered)
                 if r.get("gap", 999) < c.best_plain.get("gap", 999): c.best_plain = r
         fin = [c for c in act if c.done]; act = [c for c in act if not c.done]
         for c in fin:
             if reserve: act.append(start(reserve.pop(0), nxt)); nxt += 1
         bb = min((c.best for c in runs), key=lambda x: x[0])
-        log(f"cma gen {g}: {len(allrows)} evals, {len(act)} active, {len(runs) - len(act)} done; best {key} {bb[0]} "
+        log(f"cma gen {g}: {len(allrows)} evals, {len(act)} active, {len(runs) - len(act)} done; best {runs[0].key} {bb[0]} "
             f"(gap {bb[1].get('gap')} reach {bb[1].get('reach')} follow {bb[1].get('follow')} ib14 {bb[1].get('inband14')} contact {bb[1].get('contact')}) "
             f"({time.time() - t0:.0f} s)")
         dump(f"gen{g}")
@@ -1029,6 +1040,24 @@ def main():
                 starts.append(dict(b, _lam=lam_, _sigma0=s0))
         cma_multi(Bw, starts, a.out, a.budget, a.lam, a.sigma0, a.key, a.chunk, a.seed, [], log,
                   meta=dict(part=part, nparts=nparts, variants=[dict(params=r["params"], gap=r.get("gap"), near=r.get("near")) for r in V]))
+    elif a.cmd == "pareto":                                         # the class's reach / in-band frontier: CMA per reach target
+        rows = []
+        for f in a.args:
+            if not os.path.exists(f): continue
+            D = json.load(open(f))
+            for b in D.get("basins", []): rows += [b["best"]] + ([b["best_plain"]] if b.get("best_plain") else [])
+            rows.extend(D.get("rows", [])[:400])
+        rows = [r for r in rows if r.get("params") and r.get("reach") is not None]
+        starts = []
+        for R in (0.65, 0.70, 0.75, 0.80, 0.85):
+            k = f"pareto:{R}"; E = []
+            for r in sorted(rows, key=lambda r: objective(k, r)):
+                if len(E) >= a.basins: break
+                p = r["params"]
+                if all(sum(abs(p[x] - e["params"][x]) for x in ("az", "el", "a1", "a2", "wd", "wa")) > 12 for e in E): E.append(r)
+            starts += [dict(e, _key=k) for e in E]
+        log(f"pareto: {len(rows)} rows, {len(starts)} starts")
+        cma_multi(Bw, starts, a.out, a.budget, a.lam, a.sigma0, "pareto:0.65", a.chunk, a.seed, [], log, meta=dict(targets=[0.65, 0.70, 0.75, 0.80, 0.85]))
     elif a.cmd == "search":
         seeds = list(LEADERS) + (json.load(open(a.extra)) if a.extra else [])
         search(Bw, Bf, a.out, a.budget, a.n0, a.elites, a.lam, a.seed, a.chunk, seeds, log)
