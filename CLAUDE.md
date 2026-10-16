@@ -154,6 +154,12 @@ docs/EVOLUTION.md (and its snapshot to pipeline/evolution/) as part of the judge
   and caused the R6 / R16 / skin hits on user_osn_k4216); (2) link climb angle "your choice but be realistic" - chosen:
   ramps up to 60 deg near a hub (was the standard's 35), with tangent bend arcs of inner radius >= 15 mm (5 t) on a 3 mm
   bent Ti-6Al-4V bar; a tighter transition only where the part is 5-axis machined from solid, stated on the part.
+- **Reach must be reachable by moving (continuity rule, 2026-10-16, measured by the stop-relay screen)**: the bench scores
+  every workspace pose on its own, so a design with a passive, sprung, relayed or redundant coordinate (relays, rockers,
+  spring-parked 4th joints, knees that can change branch) can "take" static islands no continuous arm motion reaches.
+  Every such design's claim and its verifier must run the workspace continuity flood fill (2-deg slerp edges from the
+  rest region, no passive / redundant joint jump > 10 deg, no branch change - `connected()` in
+  docs/concepts/models/stop-relay-rocker-3r.py) and score reach on the CONNECTED set only; report static and connected.
 - **No lofts, ever** (user, 2026-10-15: "for all the design you do, lofts look horrible and introduce geometric problems, you
   can combine arcs, but no lofts!"): every surface comes from sketches of lines and tangent arcs - extrudes, revolves,
   sweeps of ONE constant section along a line/arc path, fillets. No lofts, no surfaces fitted or shrink-wrapped to skin
