@@ -22,7 +22,7 @@ configurations against one score; an independent verifier marked most claims dow
 | cuts the detector sees | all planned cuts | `gt(scene,0.3)`: 0 of 22 (0 detections); 0.05: 9 of 22 (30); 0.02: 17 of 22 (60). The instrument does not fit this footage (see below); the cut list is exact by construction | ffmpeg lavfi.scene_score |
 | median shot | <= 1.5 s | 1.0 s | cut list |
 | longest shot | <= 4 s, one climax <= 5 s | 3.0 s; climax 5.0 s | cut list |
-| words on screen | <= 60 words, <= 4 per label | 48 words + numbers and axis ticks (149 tokens in all); longest label 3 words | scene scripts |
+| words on screen | <= 60 words, <= 4 per label | 48 words + numbers and axis ticks (149 tokens in all); longest label 3 words (the snapshot line: 3 words and a date) | scene scripts |
 | type size | heroes >= 140 px, labels >= 48 px, nothing < 36 px | smallest text drawn 36 px (axis ticks, keys, the snapshot line); labels 48-64 px; heroes 140-180 px | the draw calls, every 5th frame |
 | colour | greyscale theme | max channel spread 13 (of 255) over every 10th frame | numpy on the frames |
 | numbers | 0 unsourced; filled = independent only | every number below has its repo path | this README; independent check pending |
@@ -59,7 +59,7 @@ above is the arithmetic behind it (36 px at 1080p is ~7 pt on that phone, 48 px 
 | Z1 | 0:13.5-0:16.0 | 2.5 | The leader's card (filled dot 93.31) pulls back into the wall; dead / refuted / duplicate tiles dim; the 13 verified tiles get a frame | 93.31 13 verified of 108 | morphs.json statuses at `d7f4bd2`: {'screened': 10, 'ideated': 44, 'refuted': 11, 'verified': 13, 'dead': 19, 'duplicate': 7, 'modelling': 4} |
 | Z2 | 0:16.0-0:18.5 | 2.5 | Every timed concept-bench configuration as a density cloud: x = run order, y = score 0-100, dashed 95; counter to 270,718 | 270,718 configurations 25 50 75 95 | `docs/concepts/sweeps/*.json` at `d7f4bd2`: 57 files, 270,737 rows, 270,718 timed ('_' files excluded) |
 | Z3 | 0:18.5-0:20.0 | 1.5 | The cloud shrinks to a block (area ~ 270,718); a GPU block (area ~ 535,134) slides in; the counter continues to 805,852 | 805,852 scored GPU 270,718 535,134 | 270,718 + 247,646 (gpu_searches.json, band evaluator) + 186,248 (docs/research/golden/README.md) + 101,240 (gks1_digest.json n_ok) = 805,852; the 560,478 bounded configurations are not counted |
-| V1 | 0:20.0-0:22.0 | 2.0 | 4x punch-in on the 08:12 batch: the best screen reading 97.75 drawn as hollow numerals, struck through with all 3,374 readings above 95; "refuted" | 97.75 refuted 95 75 80 85 90 100 | sweep minimum gap 6.19 at 2026-10-16T08:12:02Z = 97.75; 3,374 readings >= 95, all minarc-stop-knuckle-4r 08:12:01-02; refuted 09:45 / 09:49 UTC in events.jsonl (needs J2 stops 1.4-2 deg from the fold, under the 5-deg rule) |
+| V1 | 0:20.0-0:22.0 | 2.0 | 4x punch-in on the 08:12 batch: the best screen reading 97.75 drawn as hollow numerals, struck through with all 3,374 readings above 95; "refuted" | 97.75 refuted 95 75 80 85 90 100 | sweep minimum gap 6.19 at 2026-10-16T08:12:02Z = 97.75; 3,374 readings >= 95, all minarc-stop-knuckle-4r 08:12:01-02; the minarc claim built on this search (15.42 frozen exact) was refuted at 09:45 / 09:49 UTC in events.jsonl: it needs J2 stops 1.4-2 deg from the fold, under the 5-deg rule, and measures 18.45 at the true margin |
 | V2 | 0:22.0-0:25.0 | 3.0 | 30 claims as hollow rings (axis 30-100, sorted by claim, no row labels); filled verifier dots slide to the re-measured scores in one 1-s stage: 26 down, 4 up | claimed verified 26 of 30 came in lower 95 40 60 80 100 | rows/*.json `gap` (minarc: v_gap_claim_reading 15.42) vs `v_gap` at `d7f4bd2`; 26 of 30 lower; the 10 rows whose v_gap equals the claim were written in the screener's own commit and are not drawn |
 | V3 | 0:25.0-0:27.0 | 2.0 | The simplest class (three pins on bearing pairs, zero complexity): 154 hollow basin bests; the top one (89.51) drops to its independently re-measured 87.81; a bracket spans the gap to 95 | three plain pins best 87.81 95 70 80 90 100 | `docs/research/golden/gpu_frontier.json` basins[].best (top gap 28.85 = 89.51); skeptic re-measure 33.51 = 87.81 on the leader's protocol (golden/README.md verification table) |
 | C1 | 0:27.0-0:32.0 | 5.0 | The climb: verified leader on a true time axis (15 Oct 20:32 -> 16 Oct 13:58 UTC, 17 hours), six steps landing as a constant-speed playhead passes their times; bracket to the dashed 95; "1.69 to go" | 75.83 84.51 88.96 90.38 92.89 93.31 17 hours 1.69 to go 95 70 80 90 100 | events.jsonl 20:32 (66.47), 00:32 (42.59), 03:58 (30.35), 06:30 (26.45, polish protocol); rows/minarc-stop-knuckle-4r.json v_gap 19.54 (11:57) and polished_gap 18.40 (13:58); 95 - 93.31 = 1.69 |
@@ -89,7 +89,9 @@ class) · 27-32 s the one peak (verified climb against the dashed 95) · 32-35 s
 - **805,852 mixes evaluators.** 270,718 are concept-bench screens (CPU); 535,134 GPU evaluations combine 247,646 of the older band
   evaluator (87 searches, Oct 14-15) with 186,248 full-bench evaluations of the zero-complexity class and 101,240 of the pin-knee polish
   (gks1). The GPU block is drawn apart from the cloud for that reason. The 560,478 configurations that were only bounded are not counted.
-- **97.75 is a screening reading, never a result.** It is drawn hollow and struck; the verified leader is 93.31.
+- **97.75 is a fast-screen reading, never a result.** It is drawn hollow and struck. "refuted" refers to the verifier's verdict on the
+  claim this search produced (09:45 / 09:49 UTC: it holds only with J2 stops 1.4-2 deg from the fold, under the 5-deg rule); the verified
+  leader is 93.31.
 - **26 of 30.** The 30 pairs are the rows whose `v_gap` differs from the claim. The 10 rows whose verifier number equals the claim
   (acromial-rocker-3r, back-anchored-ring-3r, fivebar-roll, offset-arc-selfalign, scapula-halo-track, seed-2r-cring, seed-arc-rails, seed-pauldron-shells, seed-spm-3rrr, trombone-arc) got both fields in the screener's own commit, so they are not independent re-measures and are not drawn.
 - **The simplest class shows 87.81, not 88.71.** v2 labelled 88.71 (gap 31.04) the "verified ceiling"; that is the claimant's own reading on
@@ -113,7 +115,7 @@ the 32.0-s downbeat followed by silence. Loudness: ffmpeg loudnorm (target -16 L
 ## Rebuild
 
 `python3 make3.py` in the producer folder (snap3.py -> render3.py -> audio3.py -> assemble3.py -> gen_readme3.py): snapshot from git, 1050
-frames rendered with cairosvg on 2 niced processes (~5 min on the shared 4-core box), encode, contact sheet, measurements, this README.
+frames rendered with cairosvg on 2 niced processes (~2 min on the shared 4-core box; ~5 min for the whole command), encode, contact sheet, measurements, this README.
 The producer scripts live in the session scratchpad (`tl3/`), as v2's did; the repo keeps the film, this README and the contact sheet.
 
 ## Not done by the maker (next)
