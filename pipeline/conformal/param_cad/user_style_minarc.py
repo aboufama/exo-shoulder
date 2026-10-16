@@ -28,6 +28,10 @@ at the J1 hub ring (no tab). What is new here:
              the crown (+ 1.6 x 0.8 flex groove) for the user's magnetic angle sensor (K is sensed: the 4th encoder). The
              spring: 0.3 x 5 mm 1.4310 +C1900 strip, 145.5 mm (9 tangent half-turns, R2.75 + 0.6 per half-turn), outer hook.
              All profiles lines + tangent arcs (the gen-3 caps' spline dome is replaced by a torispherical R63.6 / R1 dome).
+  links      v2 (default): each link is N_STRIPS (4) side-view profiles of lines + tangent arcs side by side across its 8 mm
+             width, each through the verified model's strap stations of its own 2 mm strip (the strap is tilted across its
+             width: a one-profile bar, v1, sat 1.7-1.9 mm above the strap's low edge and lost the R1 points to its L1),
+             extruded and glued: a 2.5-D machined bar whose underside steps along 3 lines. Ramps <= 60 deg (the ruling).
   stops      dowel-in-arc-slot (the verified claim's buildable stop): ISO 8734 O3 m6 hardened dowels pressed 3 mm into the
              upper boss at r 7.75, running in 3.1 mm arc slots through the lower pad (slot ends = semicircles, the dowel
              touches 0.02 mm past the stop angle). J2: one dowel, q2 -24.98 .. 100.84 deg (drawn at the 5.0-deg J1-J3
@@ -294,7 +298,7 @@ def profile_link(label, ex, ey, start, end, Dq, Rq, axes, hr2, t=T, w=W, side=0)
 
 
 SPLIT = os.environ.get("MINARC_SPLIT", "1") == "1"
-N_STRIPS = int(os.environ.get("MINARC_STRIPS", "2"))
+N_STRIPS = int(os.environ.get("MINARC_STRIPS", "4"))                                     # strips across a bar (v2: 4; 1 = the one-profile bar of v1)
 CAP_STYLE = os.environ.get("MINARC_CAP", "dome")                                        # dome (torispherical) | flat (the O20 x 12.25 envelope)
 
 
