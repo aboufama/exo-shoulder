@@ -569,5 +569,182 @@
   "NEAR-TOUCH: the CMA searched the plain gap (CLAUDE.md asks for the near-touch gap); min metal 0.05 mm on the raise-overhead clip (plane 30, elev 150, axial -60) in every reading; 14 poses < 1 mm on the bench, 27-31 held out (H1 8 / 15).",
   "DOF: 4 revolutes in the shoulder chain (J1, K, J2, J3) - at the user's cap, not the preferred 3; K passive, spring-held, sensed (skeptic lens: 4 sensed coordinates); 0 passive translations; complexity 33. K never moves on any clip (0 deg/s): its whole gain is static workspace reach.",
   "RED TEAM open: stop impact at J2 (rate ratio 6.35 at the claimed stretched stop), O2 stop dowels loaded with the arm's full torque at stop B (strength check in L1 CAD), J1 up to 4.6 deg per deg of K near stop B."
- ]
+ ],
+ "kitrule_t": "2026-10-16T11:04:02Z",
+ "kitrule_claim": "BDp: variant B, BD seats, J2 stops at the 5-deg J1-J3 kit margin, physical q2 (dowel) stop, hub K cap +6 mm (0.3 x 5 mm 1.4310 clock strip), effective-dyad + sub-chain margins >= 5 in every state; self-measured, needs the independent verifier",
+ "kitrule_model": "docs/concepts/models/minarc-stop-knuckle-4r-kitrule.py (kitrule 1, phys 1, capK 6, m3e 1)",
+ "kitrule_harness": "docs/concepts/models/minarc-stop-knuckle-4r-kitrule-wear.py (docs/concepts/verify/minarc-stop-knuckle-4r-remeasure.py imported unchanged, model handle swapped; q2-slot + all-state kit-margin checks added)",
+ "kitrule_params_file": "docs/concepts/verify/minarc-kitrule/params_floorBD5_phys_cap6.json",
+ "kitrule_params": {
+  "az1": 95.4669,
+  "el1": 67.7011,
+  "az2": 47.212,
+  "el2": 39.8943,
+  "wd": 59.8224,
+  "wa": -9.0298,
+  "b3": 0.4579,
+  "lE": 64.6617,
+  "lc": 30.3886,
+  "phiE": -1.5412,
+  "phib": -69.7597,
+  "ang_min": 24.9512,
+  "stk": 5.2691,
+  "bk1": 30.1634,
+  "bk2": 47.0063,
+  "sK": -1,
+  "a1max": 66.1587,
+  "smhi": 5.0,
+  "smlo": 5.0,
+  "kitrule": 1,
+  "phys": 1,
+  "capK": 6.0,
+  "near": 1,
+  "m3e": 1
+ },
+ "kitrule_protocol": "fit Bench(60,160) fast -> wear Bench(110,360) EXACT, CB_FOLD_MARGIN 5, O20 x 4, continuity: full 1432-pose grid flood fill (2-deg slerp, no joint incl. dK > 10 deg per step, knee branch constant, seeds elevation 0 with K on stop A), reach on the connected set",
+ "kitrule_fit_fast": {
+  "gap": 12.25,
+  "reach": 0.7875,
+  "follow": 1.0,
+  "inband14": 0.8953,
+  "inband10": 0.5933,
+  "contact": 0.0053,
+  "mode": "fast"
+ },
+ "kitrule_gap": 19.06,
+ "kitrule_score": 93.07,
+ "kitrule_gap_near1": 26.15,
+ "kitrule_bench": {
+  "gap": 19.06,
+  "score": 93.07,
+  "reach": 0.725,
+  "follow": 1.0,
+  "inband14": 0.8951,
+  "inband10": 0.5969,
+  "contact": 0.0107,
+  "gap_near1": 26.15,
+  "near1_poses": 15,
+  "min_mm": 0.05,
+  "dropped_unconnected": 0,
+  "ws_taken": 261
+ },
+ "kitrule_held_out": {
+  "gap": 23.24,
+  "score": 91.55,
+  "reach": 0.6891,
+  "follow": 1.0,
+  "inband14": 0.8923,
+  "inband10": 0.5958,
+  "contact": 0.0138,
+  "gap_near1": 28.31,
+  "near1_poses": 28,
+  "min_mm": 0.05,
+  "dropped_unconnected": 0,
+  "ws_taken": 656
+ },
+ "kitrule_h1_same_harness": {
+  "bench": 27.2,
+  "bench_near1": 31.75,
+  "held_out": 31.39,
+  "held_out_near1": 34.66
+ },
+ "kitrule_fold_margin": {
+  "min_any_taken_pose": 5.01,
+  "by_state": {
+   "A": 5.12,
+   "stretched": 5.01,
+   "folded": null
+  },
+  "sub_chain_min": 16.91,
+  "held_out_min": 5.01,
+  "stops": {
+   "phi_lo": 20.79,
+   "phi_hi": 146.61,
+   "smlo": 5.0,
+   "smhi": 5.0
+  },
+  "q2_slot_deg": [
+   100.843,
+   -24.979
+  ]
+ },
+ "kitrule_continuity": {
+  "grid_nodes": 1041,
+  "connected": 1041,
+  "islands": 0,
+  "edges_passed": "1785 / 1785",
+  "bench_dropped": 0,
+  "held_dropped": 0
+ },
+ "kitrule_complexity": 33.0,
+ "kitrule_alt_near_touch_best": {
+  "stream": "LB1",
+  "params_file": "docs/concepts/verify/minarc-kitrule/params_B_LB1_g45_2.json",
+  "fast": 11.22,
+  "bench": {
+   "gap": 19.63,
+   "score": 92.86,
+   "reach": 0.7611,
+   "follow": 0.9455,
+   "inband14": 0.8997,
+   "inband10": 0.6366,
+   "contact": 0.0526,
+   "gap_near1": 22.88,
+   "near1_poses": 5,
+   "min_mm": 0.02,
+   "dropped_unconnected": 0,
+   "ws_taken": 274
+  },
+  "held_out": {
+   "gap": 24.59,
+   "score": 91.06,
+   "reach": 0.7269,
+   "follow": 0.9455,
+   "inband14": 0.8973,
+   "inband10": 0.6345,
+   "contact": 0.0656,
+   "gap_near1": 28.22,
+   "near1_poses": 16,
+   "min_mm": 0.02,
+   "dropped_unconnected": 0,
+   "ws_taken": 692
+  },
+  "min_margin": 5.07,
+  "note": "near-touch CMA best: wins near-touch in-sample (22.88 vs 26.15), loses plain (19.63 vs 19.06) and held out (24.59 vs 23.24; near-touch 28.22 vs 28.31) - not the claim"
+ },
+ "kitrule_sensitivity": {
+  "m3e_off_bench": 20.91,
+  "m3e_off_min_margin": 2.97,
+  "virtual_stop_same_seats_judge": 18.45,
+  "virtual_stop_same_seats_held_judge": 22.27,
+  "BB_virtual_stops5_bench": 21.16
+ },
+ "kitrule_gate": {
+  "LB1": {
+   "evals": 417,
+   "gain_half": 0.24,
+   "gain_third": 0.23,
+   "top5_spread": 0.23,
+   "converged": true
+  },
+  "LA1": {
+   "evals": 337,
+   "gain_half": 0.97,
+   "gain_third": 0.4,
+   "top5_spread": 0.66,
+   "converged": true
+  },
+  "note": "single local stream per variant (score points); farm streams PB1-6 / PA1-3 / K* / AK* queued 09:45-10:05 UTC, never started by 11:05 (queue 9 deep on 4 workers)"
+ },
+ "kitrule_variant_A": {
+  "stream": "LA1",
+  "params_file": "docs/concepts/verify/minarc-kitrule/params_A_LA1_g40_2.json",
+  "model": "docs/concepts/models/minarc-stop-knuckle-4r-a-kitrule.py (phys 1, capK 6)",
+  "fast_near1": 30.03,
+  "bench_static": 41.14,
+  "bench_static_near1": 44.72,
+  "complexity": 13.5,
+  "min_margin": 6.19,
+  "continuity": "rest (elevation 0) is always stretched (K open): strict seeds = 0; seeded at any elevation-0 pose 1263 / 1263 nodes connect -> connected = static"
+ }
 }

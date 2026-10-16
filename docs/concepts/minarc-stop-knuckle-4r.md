@@ -329,3 +329,99 @@ leader: H1 scores 24.48 at margin 5 (polish protocol) and 27.20 on this protocol
   - in-band10 0.58 against the R1-aim of 0.90;
   - overhead reach of 8 of 28;
   - asking the user whether a sensed 4th joint is acceptable for the golden target.
+
+## Kit-rule re-optimisation (Track A, 2026-10-16): physical J2 stop, every state >= 5 deg, real spring cap, near-touch search
+
+Why: the claim (15.42) reproduces only in the model's own fold reading; its J2 stops sit 1.37 / 1.88 deg from the J1-J3
+fold (`verify/minarc-stop-knuckle-4r-remeasure.md`), and its J2 "stop" acts on a virtual angle no dowel can stop
+(`verify/minarc-stop-knuckle-4r-mechanism.md`). This section re-optimises the family under the rules as they stand.
+
+**Model** (`models/minarc-stop-knuckle-4r-kitrule.py`, variant B; the claim's model is imported unchanged, every change is
+an opt-in parameter):
+* `kitrule` 1: the J2 stops are placed in the KIT's J1-J3 metric. `smhi` / `smlo` = the J1-J3 fold margin (deg) at which
+  J2 meets its stretched / folded stop with K on stop A; both are design variables >= 5 (the user's ruling) and the
+  search moves them. K therefore opens *before* the dyad can enter the forbidden band: no island can form.
+* `phys` 1: the BUILDABLE stop - a dowel in an arc slot at J2 stops J2's own angle q2 (link 1b vs link 2). The q2 window
+  is the state-A q2 at the two stop margins (closed form, cos th = A + R cos(q2 - q0)). Past it J2 is locked on the stop
+  and K opens to the smallest rotation (spring direction, <= stop B) that closes J1 -> K -> (link 1b + link 2) -> J3:
+  u1 . R(uK, dK) p = cos th with p = R(u2, q2_stop) u3 (Paden-Kahan; no scan, closure residual <= 0.02 deg).
+* Fold margin in every state: state A the dyad (a1, a2); forced states the moving sub-chain J1-K-J3 (b1, arc(K, J3)) AND
+  (`m3e` 1, the conservative reading) the effective dyad (a1e, a2), all >= 5 deg.
+* `capK` 6: hub K's clock-spring cap 6 mm taller than the O20 12.25 stack (the real 0.3 x 5 mm 1.4310 strip): cylinder,
+  crown samples and skin-contact rings run F .. F + 18.25, in the fit and in every worn copy.
+* `near` 1: the CMA objective is the near-touch gap (metal < 1 mm = contact).
+
+Variant A (`models/minarc-stop-knuckle-4r-a-kitrule.py`, the plain spherical chain + K, complexity 13.5): the same rules
+(stops in the kit metric, physical q2 stop solved by a 0.25-deg scan + bisection on a1e, effective dyad and sub-chain
+>= 5, hub K member 18.25 mm tall incl. its crown-skin samples, near-touch objective); its `frozen` mode carries the
+continuity flood fill.
+
+**Claim harness** (`models/minarc-stop-knuckle-4r-kitrule-wear.py`): the independent re-measure verifier
+(`verify/minarc-stop-knuckle-4r-remeasure.py`) imported UNCHANGED with its model handle swapped: the same fit60 frozen
+hand-over, the same extra checks (closure per axis, K one-sided within stop B, boss / knee clearances), the same held-out
+bench (so H1 31.39 is comparable) and the same full-grid continuity flood fill (1432 workspace poses, 2-deg slerp edges,
+no joint incl. dK > 10 deg per step, knee branch constant, seeds at elevation 0 with K on stop A). Under the physical
+stop the verifier's phi check is relaxed to [5, 175] and replaced by J2's own q2 (from the member frames) inside the
+slot; the kit margin of the effective dyad is re-checked on every taken pose (a failing pose is knocked out).
+
+**Search** (Bench(60,160) fast, near-touch objective, popsize 8): local stream LB1 (variant B, from BD's seats with both
+stops at the 5-deg margin = the judge's floor point, sigma 0.3; 417 evaluations, 52 generations) and LA1 (variant A,
+from its screened best with the stops moved into the kit metric; 337 evaluations). Convergence gate (docs/METHOD.md):
+LB1 gains 0.24 score points over the second half and 0.23 over the last third, top-5 spread 0.23 -> passes; LA1 0.97 /
+0.40 / 0.66 -> passes. Both are single streams. Ten farm streams (PB1-6 variant B and PA1-3 variant A under the same
+rules, K* / AK* under the virtual stop in the kit metric) were queued at 09:45-10:05 UTC and had not started by 10:55 (farm
+queue 9 deep on 4 workers); they are not part of this claim.
+
+**Result** (frozen: fit Bench(60,160) fast -> wear Bench(110,360) EXACT, fold margin 5 in every state, O20 x 4 with hub K's
+cap +6 mm, continuity on the full 1432-pose grid; raw data `verify/minarc-kitrule/`):
+
+| configuration (variant B unless stated) | fast fit | gap (connected) | score | reach | follow | in-band14 | contact | near-touch gap | min metal | held out (near-touch) |
+|---|---|---|---|---|---|---|---|---|---|---|
+| claim BD, virtual phi stops 1.37 / 1.88 deg from the fold (refuted) | 6.19 | 15.42 | 94.4 | 0.769 | 1.0 | 0.899 | 0.023 | 22.17 | 0.05 | 18.22 |
+| judge's floor: BD, virtual stops at the 5-deg margin (not buildable) | 10.83 | 18.45 | 93.3 | 0.747 | 1.0 | 0.889 | 0.021 | 24.26 | 0.05 | 22.27 |
+| **BDp = the claim**: BD seats, stops 5 / 5, **physical q2 stop + cap 6** (`params_floorBD5_phys_cap6.json`) | 12.25 | **19.06** | **93.07** | 0.725 | 1.0 | 0.895 | 0.011 | 26.15 | 0.05 | **23.24 (28.31)** |
+| same, effective-dyad check off (`m3e` 0; forced poses down to 2.97 deg) | 10.17 | 20.91 | 92.40 | 0.725 | 1.0 | 0.895 | 0.029 | 27.34 | 0.05 | - |
+| BB seats, virtual stops 5 / 5, no cap | 10.08 | 21.16 | 92.31 | 0.753 | 0.936 | 0.904 | 0.051 | 23.82 | 0.09 | - |
+| LB1 best (near-touch CMA from BDp): physical q2 stop, cap 6, stops 5.00 / 7.27 (`params_B_LB1_g45_2.json`) | 11.22 | 19.63 | 92.86 | 0.761 | 0.945 | 0.900 | 0.053 | **22.88** | 0.02 | 24.59 (28.22) |
+| variant A, LA1 best (`params_A_LA1_g40_2.json`, complexity 13.5) | 30.03 near / 28.92 | 41.14 | 85.04 | 0.778 | 1.0 | 0.706 | 0.095 | 44.72 | 0.26 | (running at report time) |
+| H1 (verified pin knee), same harness | 27.20 fit60 | 27.20 | 90.11 | | | | | 31.75 | | 31.39 (34.66) |
+
+**The claim: BDp** (variant B, `models/minarc-stop-knuckle-4r-kitrule.py` with `kitrule 1, phys 1, capK 6, m3e 1`, params
+`verify/minarc-kitrule/params_floorBD5_phys_cap6.json` = the claim's BD seats with both J2 stops at the 5-deg kit margin).
+It wins the official (plain) gap in-sample AND held out; the near-touch CMA's best (LB1) wins near-touch in-sample only
+and ties it held out (28.22 vs 28.31) - its in-sample gain does not generalise (the polish lesson again).
+* **Frozen exact Bench(110,360), continuity applied: 19.06 (score 93.07)**; reach 0.725, follow 1.0, in-band14 0.895,
+  in-band10 0.597, contact 0.011; near-touch 26.15 (15 poses under 1 mm, min 0.05 mm on the overhead raise clip, as in
+  the claim). Continuity: 1041 of 1041 grid nodes connected from the strict rest region (820 K on stop A, 221
+  stretched), 0 islands, 1785 of 1785 edges pass; 0 of 261 taken bench workspace poses dropped.
+* **Held out (the re-measure harness, 1154 disjoint poses): 23.24 (score 91.55)**, near-touch 28.31, 0 of 656 taken
+  workspace poses unconnected; H1 under the same harness 31.39 (near-touch 34.66).
+* **Fold margin**: every taken pose keeps >= 5.01 deg of J1-J3 margin in its own state (state A 5.12, stretched 5.01;
+  held out 5.01); the moving sub-chain J1-K-J3 >= 16.9 deg (held out 17.0). J2's own slot q2 -24.98 .. 100.84 deg
+  (125.8 deg of arc); K opens up to 33.95 deg of its 62.83 (stop B never reached on the bench). Verifier checks (closure
+  per axis <= 0.022 deg, K one-sided within stop B, q2 inside the slot, boss / knee clearances) remove 0 poses.
+* Arcs a1 38.07 / a2 58.75, knuckle bk1 30.16 / bk2 47.01, a1max 66.16; hubs O20 x 4, hub K 18.25 mm tall; f = 49.4 /
+  62.1 / 81.6 mm, stack 88.3 mm. Lost poses (470): fold 85, knee window 10, contact 4. Overhead >= 140: workspace reach
+  8 / 28, follow 10 / 10.
+* Complexity 33 (`tools/simplicity.py` count of variant B; the dowel and the taller cap add no counted part). 4 revolutes,
+  K sensed: the skeptic lens counts this as 4 ACTIVE DOF (K must be read in the forced states) - that ruling stands.
+
+LB1 (the near-touch CMA best, for the record): 19.63 frozen exact (near-touch 22.88; 5 poses under 1 mm, min 0.02 mm on
+overhead clips, so follow 0.945), held out 24.59; every taken pose >= 5.07 deg (sub-chain >= 5.06); the search moved
+the stretched stop to 7.27 deg and used K's whole range (77.05 of 77.09 deg); 1154 of 1154 nodes connected.
+
+What it means:
+* Under every rule as it stands (5 deg in every state, a stop a dowel can make, a spring that exists, continuity), the
+  knuckle beats H1 by 8.1 points in-sample (19.06 vs 27.20) and 8.2 held out (23.24 vs 31.39); it does not reach 95
+  (13.75): 5.3 points short.
+* Pricing the buildable stop and the spring cap costs 0.6 points over the judge's virtual floor at the same seats
+  (18.45 -> 19.06; held out 22.27 -> 23.24). With the stops placed in the kit metric no forbidden band separates the
+  states, so no island forms (the claim's stops kept under the kit rule gave 35.56 connected).
+* The near-touch search buys 3.3 near-touch points in-sample (26.15 -> 22.88) for 0.6 plain points and none held out
+  (28.31 -> 28.22, plain 23.24 -> 24.59): the Bench(60,160) objective does not see Bench(110,360)'s overhead clip
+  frames, where LB1 moves metal to 0.02 mm. The next search wants a held-out-aware (cross-fit) objective.
+* The effective-dyad check (`m3e`) is not what limits it: switching it off lets forced poses reach 2.97 deg of margin and
+  the frozen gap gets WORSE (20.91), because the refit shape changes.
+* Variant A (complexity 13.5) under the same rules stays at 41.14 frozen exact (in-band 0.71): not a contender at this
+  budget. Its rest pose (elevation 0) is always in the stretched state (K open), so the strict seed rule (rest = K on
+  stop A) seeds nothing; seeded at every elevation-0 pose, 1263 of 1263 nodes connect (static = connected).

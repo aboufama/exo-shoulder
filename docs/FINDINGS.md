@@ -1131,6 +1131,38 @@ What it means:
   3. its own two-lens verification;
   4. a MuJoCo feel and stop-impact red team at the J2 stops.
 
+## The knuckle under every rule as it stands: 19.06 frozen exact, held out 23.24 vs H1 31.39 (2026-10-16, minarc-stop-knuckle-4r kit-rule re-optimisation)
+
+Question: what does the knuckle family score when J2's stop is one a dowel can make, every state keeps the kit's 5-deg
+J1-J3 fold margin, the clock spring is one that carries the load, the search runs on the near-touch gap, and reach is
+scored on the continuously reachable set? Model `docs/concepts/models/minarc-stop-knuckle-4r-kitrule.py` (opt-in
+`kitrule`, `phys`, `capK`, `m3e`; the claim's model unchanged); claim harness `...-kitrule-wear.py` = the independent
+re-measure verifier imported unchanged with its model handle swapped; raw data `docs/concepts/verify/minarc-kitrule/`;
+write-up `docs/concepts/minarc-stop-knuckle-4r.md` "Kit-rule re-optimisation".
+
+What was measured (fit Bench(60,160) fast -> wear Bench(110,360) EXACT, margin 5 in every state, O20 + hub K cap 6 mm,
+full-grid continuity):
+* **The physical stop law works and costs little.** J2's own angle q2 locked on a dowel, K opening to the smallest
+  rotation that closes (closed form): at the claim's seats with both stops at the 5-deg margin (BDp) it measures
+  **19.06 (score 93.07)**, near-touch 26.15, against the judge's virtual-stop 18.45; **held out 23.24** (near-touch 28.31)
+  against the virtual 22.27 and H1's 31.39 under the same harness. Every taken pose keeps >= 5.01 deg in its own state;
+  1041 of 1041 grid nodes connect, 0 islands: with the stops placed in the kit metric no forbidden band separates the
+  states (the claim's stops kept under the kit rule gave 35.56).
+* **The near-touch CMA from there (stream LB1, 417 evals, gate 0.24 / 0.23 / 0.23 passed)** finds 11.22 fast, frozen
+  19.63 with near-touch 22.88 (stretched stop moved to 7.27 deg, K's whole range used) - but held out it is 24.59 /
+  near-touch 28.22: the in-sample gain does not generalise, and it pinches 0.02 mm on overhead clips Bench(60,160) never
+  shows. BDp stays the claim.
+* **The effective-dyad check is not the limiter**: without it forced poses reach 2.97 deg of margin and BDp gets worse
+  (20.91), because the refit shape changes.
+* **Variant A** (the plain chain + K, complexity 13.5) under the same rules (stream LA1, 337 evals, gate passed): 41.14
+  frozen exact, in-band 0.71 - not a contender. Its rest pose sits with K open, which the strict rest-seed rule cannot
+  seed; from any elevation-0 seed all 1263 nodes connect.
+
+What it means: under the rules as they stand the knuckle (complexity 33, 4 revolutes, K sensed = 4 active DOF by the
+skeptic's ruling) is the best measured family - 8.1 points ahead of H1 in-sample, 8.2 held out - and 5.3 points short of
+95. Next: the independent verifier on BDp (LB1 as the near-touch alternative); a cross-fit (held-out-aware) near-touch
+objective; the farm streams PB1-6 / PA1-3 (queued, never started); the user's ruling on the sensed 4th joint.
+
 ## Feel of the near-fold J2 stop, measured (2026-10-16; docs/research/fold-stop-feel.md)
 
 Method: quasi-static Jacobian analysis (`docs/research/fold_stop_feel.py`); T = 3 N.mm per O20 pair and per knee pin;
