@@ -6,11 +6,22 @@ export const meta = {
     { title: 'Verify', detail: 'skeptic re-measures on Bench(110,360) vs the champion 75.94 there, or audits a death' },
   ],
 }
+// WHAT: screen a slice of morphologies (child of discovery-loop.js): model + farm sweep to the convergence gate +
+//   red team + motion preview, then an independent verifier on Bench(110,360) exact frozen (or an auditor of a death).
+// ARGS (passed by the loop): {slice: 'r8-A', items: [{id, name, note}], round, state, lead: <verified lead gap>,
+//        repo, branch, trailer}
+// WHEN: launched by discovery-loop.js; standalone to screen one catalogue entry (items = [that entry]).
+// Session settings (a NEW lead session sets these through the Workflow tool's args; the defaults are the 2026-10-16 session's):
+//   args.repo    - absolute repo path            (default /home/user/exo-shoulder)
+//   args.branch  - the branch every agent pushes  (default claude/trusting-pasteur-6czobp)
+//   args.trailer - the commit attribution lines your environment's system reminder gives (two lines, '\n'-joined)
+const REPO = (args && args.repo) || '/home/user/exo-shoulder'
+const BRANCH = (args && args.branch) || 'claude/trusting-pasteur-6czobp'
+const TRAILER = (args && args.trailer) || 'Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>\nClaude-Session: https://claude.ai/code/session_014NJ3o5nJ9b1u4LXnQRjmMh'
 
-const SCR = '/tmp/claude-0/-home-user-exo-shoulder/029f38fb-570e-5d7a-bebc-fc64e6215529/scratchpad'
 const items = args.items
 const BASE = 68.93, BIG = 75.94, LEAD = (args.lead || 30.35)
-const COMMON = `REPO /home/user/exo-shoulder, branch claude/trusting-pasteur-6czobp. CLAUDE.md applies; its Ambition rules are binding and so is the brief template at the end of docs/METHOD.md (Felix Rieseberg's essay: altitude, the deeper-version prompt, unreasonable goals stated as reasonable, outside judge, range with a red team, speed).
+const COMMON = `REPO ${REPO}, branch ${BRANCH}. CLAUDE.md applies; its Ambition rules are binding and so is the brief template at the end of docs/METHOD.md (Felix Rieseberg's essay: altitude, the deeper-version prompt, unreasonable goals stated as reasonable, outside judge, range with a red team, speed).
 ALTITUDE: you are one of a swarm fanning out DISTINCT shoulder-exo MORPHOLOGIES (round 3, after 2 rounds and ~30 morphologies, docs/concepts/rows/*.json; the user is waiting to see a design cross score 90, i.e. gap <= 27.5 on Bench(60,160) that SURVIVES verification on Bench(110,360) exact; the user also said 'think like an expert, try weird things, weird wins'. Ties on the bench rank by FEWER passive translations: the round-3 judge measured a ZERO-passive spherical 3R at the leader's seats at 41.73 on Bench(110,360) exact, level with the 2-slide leader - so passive translations must now earn their place in measured points). The outcome: a 3-active-DOF mechanism the wearer does not feel - the whole mechanism 2-14 mm from the skin (aim 2-10) while following the arm over the full range, overhead most of all, never touching the skin (REQUIREMENTS.md R1, R3, R5 incl. the ACTIVE-DOF rule, R16, R17). The loop your result feeds: bench -> adversarial verifier -> farm/GPU sweep -> L1 keep-out CAD -> outside judges -> the user's dashboard (it reads your sweeps and rows, so write them incrementally).
 THE BENCH (the outside judge you can run): tools/concept_bench.py (docstring). Metrics: reach, follow, inband14, inband10, contact; GAP = 100*(max(0,.90-inband14) + max(0,.95-follow) + max(0,.90-reach)) + 100*contact; lower is better, 0 = every target met. Score shown to the user = 100*(1-gap/275). References: the champion spherical 3R scores ${BASE} on Bench(60,160) (docs/concepts/rows/baseline-3r.json; tools/concept_baseline.py) and ${BIG} on Bench(110,360) exact with kit checks + 1 mm radial clearance (docs/concepts/risley-turret.md table). STATE OF THE ART (read docs/concepts/<id>.md of each - their limiters and tricks; do not re-invent them, beat them): offset-skin-normal-3r k4216: 32.61 on Bench(60,160) fast, VERIFIED v_gap 42.59 on Bench(110,360) exact frozen (champion 66.97 through the same code and checks; verifier harness docs/concepts/verify/offset-skin-normal-3r.py - use it), converged over 9869 tries, 2 crossed RSR3M cuff guides; its proof: a 2-slide cuff closes EXACTLY iff J1 and J2 lie on GH rays and the slides lie in hub 3's plane - J3's line is free; limiter: the J2 fold, reach 0.71, the J1-J3 axis angle window vs the 13-156 deg the workspace needs, and hub 3 51 % in band); skin-normal-hubs-selfaligning 35.86 claimed, red-teamed to ~45.8 on Bench(110,360) exact and NOT buildable (3 slides); its chain alone (hubs + links + member 3) scores ib14 0.891, i.e. the chain can live in the band - reach and the stage cost the points; seed-offset-3r-slides v 66.47 on Bench(110,360) (radial slide does not exist); rail-elbow REFUTED by its own control (a plain spherical 3R at the axes its CMA found scores 51.33 fast: the gain came from the axes, not the rail - use that as a free lesson: re-tuned axis directions alone are worth ~17 gap points over the champion's).
 ROUND ${args.round || 4} STATE (this round's planner, latest - it overrides everything older in this text): ${args.state || '(none)'}
@@ -28,9 +39,8 @@ FILES (yours only): docs/concepts/models/<id>.py, docs/concepts/sweeps/<id>.json
 MOTION PREVIEW (user rule, binding): also write docs/concepts/viz/concepts/<id>.js for your morphology at its best configuration (docs/concepts/viz/README.md "Concept API"; copy the closest existing concept file - skin-normal-3r-pin-knee.js / spine-parked-j2-3r.js if present, else baseline-3r.js / rail-elbow.js / seed-offset-3r-slides.js), make \`node docs/concepts/viz/test.mjs <id>\` pass, run \`node docs/concepts/viz/thumbs.mjs\` and commit both files with your row - before you report.
 EVENTS: append one JSON line with >> (never rewrite) to docs/concepts/events.jsonl: {"time": "<ISO UTC>", "kind": "milestone", "event": "<text with numbers>"} at start ("modelling <name>"), at each new best gap, and at the end.
 GIT: commit ONLY your files: \`git add <paths> && git commit -m "<msg>" -- <paths>\` (retry if .git/index.lock exists); message ends with the two lines
-Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
-Claude-Session: https://claude.ai/code/session_014NJ3o5nJ9b1u4LXnQRjmMh
-then \`git push -u origin claude/trusting-pasteur-6czobp\` (if rejected: \`git pull --rebase --autostash\`, push again; up to 4 tries). Commit early (after the first measured config) and again at the end. No model names in commits or files.`
+${TRAILER}
+then \`git push -u origin ${BRANCH}\` (if rejected: \`git pull --rebase --autostash\`, push again; up to 4 tries). Commit early (after the first measured config) and again at the end. No model names in commits or files.`
 
 const RESULT = { type: 'object', properties: {
   id: { type: 'string' }, status: { type: 'string', enum: ['screened', 'dead'] },

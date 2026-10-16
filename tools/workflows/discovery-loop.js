@@ -8,16 +8,29 @@ export const meta = {
     { title: 'Close', detail: 'round summary, lessons, next focus' },
   ],
 }
-const SP = '/tmp/claude-0/-home-user-exo-shoulder/029f38fb-570e-5d7a-bebc-fc64e6215529/scratchpad'
-const IDEATE = `${SP}/discovery-ideate.js`, SCREEN = `${SP}/exo-screen.js`
+// WHAT: the self-driving discovery loop (docs/concepts/ROUNDS.md holds every round). Per round: planner -> the
+//   discovery-ideate.js child workflow -> exo-screen.js child workflows (2 designs per slice, in parallel) -> closer.
+//   The closer's next_focus steers the next round.
+// ARGS: {first_round: N, n_rounds: K, track: 'main', focus: '<the last round closer's "next focus" text>',
+//        wf_dir: '<dir holding discovery-ideate.js + exo-screen.js>' (default <repo>/tools/workflows), repo, branch, trailer}
+// WHEN: always running (CLAUDE.md "Discovery never stops at a round"); relaunch from the next round when one ends.
+// Session settings (a NEW lead session sets these through the Workflow tool's args; the defaults are the 2026-10-16 session's):
+//   args.repo    - absolute repo path            (default /home/user/exo-shoulder)
+//   args.branch  - the branch every agent pushes  (default claude/trusting-pasteur-6czobp)
+//   args.trailer - the commit attribution lines your environment's system reminder gives (two lines, '\n'-joined)
+const REPO = (args && args.repo) || '/home/user/exo-shoulder'
+const BRANCH = (args && args.branch) || 'claude/trusting-pasteur-6czobp'
+const TRAILER = (args && args.trailer) || 'Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>\nClaude-Session: https://claude.ai/code/session_014NJ3o5nJ9b1u4LXnQRjmMh'
+const WF_DIR = args.wf_dir || `${REPO}/tools/workflows`
+const IDEATE = `${WF_DIR}/discovery-ideate.js`, SCREEN = `${WF_DIR}/exo-screen.js`
+const SESSION = { repo: REPO, branch: BRANCH, trailer: TRAILER }
 const first = args.first_round || 5, n = args.n_rounds || 4, track = args.track || 'main'
-const BASE = `REPO /home/user/exo-shoulder (branch claude/trusting-pasteur-6czobp). CLAUDE.md is binding - read its goal, the ambition rules, "Manufacturable joints only", "Reach is the priority now", "Complexity is the second objective", "Every tested design gets its motion preview", "Every generation ends in a full CAD + render of its winner".
+const BASE = `REPO ${REPO} (branch ${BRANCH}). CLAUDE.md is binding - read its goal, the ambition rules, "Manufacturable joints only", "Reach is the priority now", "Complexity is the second objective", "Every tested design gets its motion preview", "Every generation ends in a full CAD + render of its winner".
 THE USER (latest first): "dont just stop on round 4 go as far as you can!"; "I'm excited to see what comes out of tonight, I'm hoping for some amazing 95+ scores with low simplicity"; "the reach numbers at 60s just isn't good ... lets try to max these out as much as we can". Score = 100 (1 - gap / 275); 95 = gap 13.75 on Bench(110,360) exact, frozen shape, confirmed by an independent verifier. With follow ~1.0 and in-band ~0.90 already met by the leaders, 95 needs reach >= ~0.77 at in-band >= 0.88 and ~0 contact.
 TRACK: ${track}. ${args.focus || ''}
 GIT: commit only your own files: git add <paths> && git commit -m "<msg>" -- <paths>, message ending with the two lines
-Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
-Claude-Session: https://claude.ai/code/session_014NJ3o5nJ9b1u4LXnQRjmMh
-then git push -u origin claude/trusting-pasteur-6czobp (on rejection: git pull --rebase --autostash, push again, up to 4 tries). No model names in commits or files.`
+${TRAILER}
+then git push -u origin ${BRANCH} (on rejection: git pull --rebase --autostash, push again, up to 4 tries). No model names in commits or files.`
 const PLAN = { type: 'object', properties: {
   lead_gap: { type: 'number', description: 'the best v_gap an independent verifier confirmed so far (Bench(110,360) exact frozen)' },
   state: { type: 'string', description: 'the round state for the ideators and screeners: verified leaders with numbers and complexity, the measured limiters and where poses are lost, what was tried and died (with the reason), the levers that look open - dense, numbers only from the repo' },
@@ -44,7 +57,7 @@ Read the latest measurements (docs/FINDINGS.md newest sections, docs/research/re
   log(`round ${R}: lead ${plan.lead_gap}; lenses ${plan.lenses.map((l) => l.key).join(', ')}; carry ${plan.carry.map((c) => c.id).join(', ') || '-'}`)
 
   phase('Ideate')
-  const idea = await workflow({ scriptPath: IDEATE }, { round: R, state: plan.state, lenses: plan.lenses, top_n: Math.max(2, 4 - Math.min(2, plan.carry.length)), exclude: [...plan.exclude, ...plan.carry.map((c) => c.id)] }).catch((e) => { log(`ideate r${R} failed: ${e}`); return null })
+  const idea = await workflow({ scriptPath: IDEATE }, { ...SESSION, round: R, state: plan.state, lenses: plan.lenses, top_n: Math.max(2, 4 - Math.min(2, plan.carry.length)), exclude: [...plan.exclude, ...plan.carry.map((c) => c.id)] }).catch((e) => { log(`ideate r${R} failed: ${e}`); return null })
   const picks = ((idea && idea.judged && idea.judged.picks) || []).filter((p) => !plan.exclude.includes(p.id))
   const items = [...plan.carry, ...picks].slice(0, 6)
   log(`round ${R}: screening ${items.map((i) => i.id).join(', ')}`)
@@ -52,7 +65,7 @@ Read the latest measurements (docs/FINDINGS.md newest sections, docs/research/re
   phase('Screen')
   const slices = []
   for (let i = 0; i < items.length; i += 2) slices.push(items.slice(i, i + 2))
-  const screened = await parallel(slices.map((sl, j) => () => workflow({ scriptPath: SCREEN }, { slice: `r${R}-${'ABC'[j]}`, items: sl, round: R, state: plan.state, lead: plan.lead_gap }).catch((e) => { log(`screen r${R} slice ${j} failed: ${e}`); return null })))
+  const screened = await parallel(slices.map((sl, j) => () => workflow({ scriptPath: SCREEN }, { ...SESSION, slice: `r${R}-${'ABC'[j]}`, items: sl, round: R, state: plan.state, lead: plan.lead_gap }).catch((e) => { log(`screen r${R} slice ${j} failed: ${e}`); return null })))
   const results = screened.filter(Boolean).flat().filter(Boolean)
 
   phase('Close')
