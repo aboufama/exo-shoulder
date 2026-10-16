@@ -130,3 +130,48 @@ radius over its whole travel. The CMA answered by shortening the travel to 5.6 d
 4. **What other than me shows the number is right.** The bench (the outside judge), the frozen exact Bench(110,360)
    wear, an independent verifier re-running the model with its own checks, and the red-team pose list in this doc
    (rest, overhead, across-body, behind-back, the jam edges of the flood fill, the near-touch poses).
+
+## Verification (2026-10-16, independent verifier): REFUTED as a 3-active-DOF design; corrected v_gap 55.30
+
+Harness `docs/concepts/verify/short-a2-arc-slide-3r.py`. It uses the model's own frozen protocol: fit on Bench(60,160)
+fast, freeze the shape, wear it on Bench(110,360) exact, with K6 at 1 mm, the flood fill on and margin 5. Results are in
+`docs/concepts/verify/short-a2-arc-slide-3r_big_frozen_{checks,stack}.json`.
+
+| run (Bench(110,360) exact, frozen) | gap | score | reach | follow | in-band 14 | in-band 10 | contact | near-touch gap |
+|---|---|---|---|---|---|---|---|---|
+| claim's stack + verifier's kinematic checks (farm) | 41.19 | 85.0 | 0.661 | 1.000 | 0.781 | 0.398 | 0.054 | 61.62 |
+| **real slide stack (verifier)** | **55.30** | **79.9** | 0.608 | 0.873 | 0.776 | 0.413 | 0.060 | 81.17 |
+| champion spherical 3R, same kit checks | 75.94 | 72.4 | | | | | | |
+
+Overhead (elevation >= 140) with the real stack: workspace reach 0.25 (7 of 28), follow 1.0, in-band 0.756.
+
+- **Kinematics hold.** I checked every taken pose from the chain's own axes, not from the model's closed forms:
+  angle(J1, J2) = a1, the slide inside [a2h, a2max], the J2 dihedral inside its physical stops [11.07, 144.92] deg,
+  and the margin >= 5. None of the 368 taken poses failed. The residual is 0.0 deg, the minimum margin is 5.04 deg,
+  and the largest slide step between consecutive clip frames is 4.4 deg. The flood fill finds 0 relay jams and
+  0 islands. The claimed 41.19 reproduces exactly.
+- **Correction 1, the slide stack under hub 3 (+1.6 mm).** The model slides hub 3's titanium sole directly on the
+  titanium rail at a 0.15 mm running gap, and it hides the keeper flush in a 3 mm plate. Neither is buildable:
+  - Ti on Ti galls. The iglidur flanged bushings the model names (GFM-0405, 0.75 mm flange) are the thrust face, so
+    the sole rides flange-high.
+  - The M4 shoulder screws (M3 thread) need a tapped keeper of about 2 mm. A 1 mm keeper does not hold an M3 thread.
+    The screw heads cannot sit on top of the sole either, because the J3 upper member runs 0.15 mm above it. In a
+    1 mm underside groove, the keeper still protrudes 1 mm below the slot zone.
+
+  Effect: hub 3 rises from 69.15 to 70.75 mm, with in-band 0.335 -> 0.245. Part collisions go from 0.056 to 0.141 of
+  poses, and follow drops from 1.0 to 0.873 (14 clip frames lost). Reach drops 0.661 -> 0.608. The re-fitted fast gap
+  is already 43.27, against the claimed 29.38.
+- **Correction 2, the DOF count (hard rule).** The row's own mechanism record says the slide is Hall-sensed because
+  "the slide angle must be read to know the arm pose in modes B/C". That is correct: in mode B, J2 sits on its stop
+  and the slide replaces q2 as the moving coordinate, so q1, q2 and q3 do not determine the arm. Under the user's
+  2026-10-15 counting rule (REQUIREMENTS.md), a joint that must be position-measured is ACTIVE, so this is a
+  **4-active-DOF** chain. It stays within the R5 cap of 4, but it fails R5-aim and the brief's "exactly 3 ACTIVE DOF".
+  It belongs with the four-dof lens (park4: a spring-centred, sensed 4th), not the 3R family. In MVP2 the J2 motor
+  also cannot drive mode B: it pushes on a stop while the slide is unpowered.
+- **Not checked, flagged.** The constant-force spring drum and the J2 stop dowels are not modelled as bodies. The drum
+  is a coil about 12 mm across standing about 6 mm on rail_r, where it could hit the neck or link 1. The real numbers
+  can only get worse from it.
+- **Verdict.** Refuted as claimed (a 3-active-DOF design at 41.19). The honest figure is a 4-active-DOF design at 55.30
+  on Bench(110,360) exact. That is still better than the champion (75.94), but 25 points behind the verified pin knee
+  (30.35), which is 3 active DOF. The relay lesson stands: it is worth +17-20 fast points over the slide locked. Put
+  it where the moving hub keeps its own level (side 1 / side 2), and count the sensed slide as active.

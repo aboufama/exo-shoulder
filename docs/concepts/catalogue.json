@@ -2315,7 +2315,7 @@
   "name": "Short-link-2 3R whose J3 hub rides a spring-returned GH-concentric arc slide in link 2 (one-sided a2 relay, J2 on hard stops)",
   "family": "scheduled 4th coordinate: spherical 3R + passive arc relay on the ARM-side arc a2 (force-closed by J2 stops and one spring)",
   "lens": "round5:reseat-for-union",
-  "status": "screened",
+  "status": "refuted",
   "t_ideated": "2026-10-16T07:12:09Z",
   "source": "round 5 judge (docs/concepts/round5_ideation.md)",
   "description": "J1: O20 hub on the acromion top on the handler. Link 1: 44 deg Ti strap at 47-58 mm. J2: O20 hub at 55-63 mm over the superolateral cap, with two hard-stop pins at the fold margin. Link 2 is SHORT (home a2 40.7 deg) and built as a 3 mm Ti rail plate: its root is bolted under hub 2, and its last ~18 deg is a constant-radius arc slot (62-65 mm) concentric with GH. A two-bushing carriage in the slot carries the J3 O20 hub on the lateral deltoid at GH level (axis lateral, 13 deg above horizontal). At rest and in most clip frames the carriage sits on its home stop: a plain 3R. Overhead / high flexion and some folded poses, J2 hits a stop and the carriage slides out by up to 13.9 deg (p95 ~13 deg): a2 grows, which widens the window at both ends because a2 < a1. The relay sits on the ARM-side arc, so hub 2 stays on the circle of radius a1 about J1 (scapula-quiet skin), which every scapula-side (a1) relay loses. The slide axis n = unit(p2 x p3) is fixed in link 2a and passes through GH: a passive ROTATION built as an arc slot, not a translation.",

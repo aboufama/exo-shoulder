@@ -5,7 +5,7 @@
  "family": "scheduled 4th coordinate: spherical 3R + passive arc relay on the ARM-side arc a2 (force-closed by J2 stops and one spring)",
  "active_dof": 3,
  "passive_dof": 1,
- "status": "screened",
+ "status": "refuted",
  "t_ideated": null,
  "t_screened": "2026-10-16T07:59:13Z",
  "reach": 0.7438,
@@ -14,14 +14,14 @@
  "inband10": 0.3917,
  "contact": 0.0165,
  "gap": 29.38,
- "v_reach": null,
- "v_follow": null,
- "v_inband14": null,
- "v_inband10": null,
- "v_gap": null,
+ "v_reach": 0.6083,
+ "v_follow": 0.8727,
+ "v_inband14": 0.7757,
+ "v_inband10": 0.4132,
+ "v_gap": 55.3,
  "n_configs": 5912,
  "verdict": "screened: 29.38 on Bench(60,160) fast (score 89.3), FROZEN exact Bench(110,360) 41.19 (score 85.0, self-measured, not verified): below the leaders (pin knee 29.54 verified at margin 5). The relay is real (+17-20 points over a plain 3R / the slide locked at the same seats on the fast bench) but the slot under hub 3 costs hub 3's band; the judge's 20-23 kinematic estimate did not survive the kit (S1 seed 69.23 in the kit).",
- "note": "margin 5 (user ruling), O20 x3, 0 passive translations, 1 passive rotation (GH-concentric slot, sensed, CF-spring returned), complexity 14.75. 5912 configs: coarse 220 (spec layout) + 200 (side 1: slot at the root of a long link 2) + CMA 4 streams (5492); a side-2 coarse (hub beside the rail, 150), 3 side-1 CMA, a polish and a near-touch CMA were queued on the farm at the time-box end (.cache/a2s/). GATE (stream 3, the best): +0.44 score over the 2nd half, +0.44 over the last third, top-5 spread 0.00 -> converged; other streams 37.75-41.96 (other basins). Controls (fast): plain 3R same seats 46.24, slide locked 48.93. Margin 10: coarse leader 49.91 -> 71.49. Flood fill on the raw 1432-pose grid: 119 relay edges, 0 relay jams, 0 islands. R17 statics: gravity self-motion force <= 0.016 N m/rad vs 1.5 N CF spring at the slot radius 0.099 N m (+0.004 friction): holds. Kit finding: `over` measures the joint-exempt zone at the pre-climb radius, K6 at the final one (17 % of S1 poses jammed until link 1 got a spacer).",
+ "note": "margin 5 (user ruling), O20 x3, 0 passive translations, 1 passive rotation (GH-concentric slot, sensed, CF-spring returned), complexity 14.75. 5912 configs: coarse 220 (spec layout) + 200 (side 1: slot at the root of a long link 2) + CMA 4 streams (5492); a side-2 coarse (hub beside the rail, 150), 3 side-1 CMA, a polish and a near-touch CMA were queued on the farm at the time-box end (.cache/a2s/). GATE (stream 3, the best): +0.44 score over the 2nd half, +0.44 over the last third, top-5 spread 0.00 -> converged; other streams 37.75-41.96 (other basins). Controls (fast): plain 3R same seats 46.24, slide locked 48.93. Margin 10: coarse leader 49.91 -> 71.49. Flood fill on the raw 1432-pose grid: 119 relay edges, 0 relay jams, 0 islands. R17 statics: gravity self-motion force <= 0.016 N m/rad vs 1.5 N CF spring at the slot radius 0.099 N m (+0.004 friction): holds. Kit finding: `over` measures the joint-exempt zone at the pre-climb radius, K6 at the final one (17 % of S1 poses jammed until link 1 got a spacer). | VERIFIED 2026-10-16T09:33Z: REFUTED as a 3-active-DOF design (the Hall-sensed slide is position-measured -> 4 active DOF by the user's rule). Corrected real slide stack, Bench(110,360) exact frozen: v_gap 55.3 (score 79.89), reach 0.6083, follow 0.8727, in-band14 0.7757, contact 0.0597, near1 81.17; the claim's own stack with the verifier's kinematic checks reproduces 41.19. Champion same bench and checks 75.94.",
  "doc": "docs/concepts/short-a2-arc-slide-3r.md",
  "honest": true,
  "checks": {
@@ -236,5 +236,52 @@
   "top5_spread": 0.0,
   "converged": true,
   "n_stream": 1601
+ },
+ "verification": {
+  "t": "2026-10-16T09:33:38Z",
+  "bench": [
+   110,
+   360
+  ],
+  "mode": "exact",
+  "protocol": "model's frozen protocol (fit Bench(60,160) fast with the corrections, shape frozen, worn on Bench(110,360) exact, K6 1 mm, flood fill on, margin 5)",
+  "harness": "docs/concepts/verify/short-a2-arc-slide-3r.py",
+  "claim_rerun_with_verifier_checks": {
+   "gap": 41.19,
+   "reach": 0.6611,
+   "follow": 1.0,
+   "inband14": 0.7813,
+   "inband10": 0.3977,
+   "contact": 0.0543,
+   "gap_near1": 61.62,
+   "note": "farm, independent per-pose kinematic checks (a1, slide range, J2 dihedral in its stops, margin): 0 of 368 taken poses dropped; reproduces the claim's 41.19 exactly"
+  },
+  "corrected_real_stack": {
+   "gap": 55.3,
+   "reach": 0.6083,
+   "follow": 0.8727,
+   "inband14": 0.7757,
+   "inband10": 0.4132,
+   "contact": 0.0597,
+   "gap_near1": 81.17,
+   "collide": 0.141,
+   "hub3_level": 70.75,
+   "hub3_inband14": 0.2454,
+   "overhead": {
+    "n_ws": 28,
+    "reach": 0.25,
+    "n_clip": 10,
+    "follow": 1.0,
+    "n_taken": 17,
+    "inband14": 0.756,
+    "inband10": 0.4962
+   },
+   "fit_fast_gap": 43.27,
+   "note": "hub 3 sole on the iglidur flange (0.75, not a 0.15 Ti-on-Ti running gap) and a 2 mm tapped keeper in a 1 mm underside groove (+1 mm below the slot zone): hub 3 69.15 -> 70.75 mm; part collisions 0.056 -> 0.141 of poses, follow 1.0 -> 0.873"
+  },
+  "active_dof": 4,
+  "active_dof_reason": "the slide must be position-measured (Hall) for the device to know the arm pose: in mode B J2 sits on its stop and the slide replaces q2 as the moving coordinate, so q1, q2, q3 do not determine the arm. By the user's 2026-10-15 counting rule (REQUIREMENTS.md: a joint that must be powered or position-measured is ACTIVE) this is 4 active DOF, not 3: within the R5 cap (<= 4), fails R5-aim and the brief's 'exactly 3 ACTIVE DOF'; it belongs with the four-dof lens (park4).",
+  "champion_same_bench": 75.94,
+  "champion_note": "kit strict 1 mm checks on Bench(110,360) exact (risley-turret verifier); this verifier adds only slide-specific checks, which do not apply to the champion"
  }
 }
