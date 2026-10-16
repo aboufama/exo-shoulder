@@ -107,6 +107,10 @@ on the bench at el2 45 (a1 52) hub 2 must sit 93 mm from GH (61 at k10) and the 
 its GH ray, the more deltoid it must clear. Same result as the leader's fold-frontier study (offset-skin-normal-3r.md):
 the knee changes the closure, not the GH-ray hub layout, so the fold frontier stays closed.
 
+**Wide seat sweep with the knee (240 LHS configs on the farm, az1 80-118, el1 50-80, az2 -25-30, el2 28-58, wd 68-92,
+wa -22 to -4, b3 0.05-0.6; k10 knee).** Best 36.26 (a1 43.7: fold 38 but 20 poses to skin, contact 0.110); median 76.87.
+Every config that widens a1 past ~44 deg trades fold poses for skin poses (hub 2 / link 2), the same frontier as above.
+
 **What score 90 on the verification bench needs.** gap = 100 (0.90 - reach) + ... <= 27.5 needs reach >= 0.625 with
 in-band 0.90, follow 0.95 and zero contact; at the measured in-band (0.88-0.90) and contact (0.3-1.2 points), reach
 >= ~0.65. The best frozen reach is 0.619. The remaining lever is a fold lever stacked on this closure (acromial-rocker-3r,
