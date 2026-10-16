@@ -37,7 +37,28 @@ Sweep log: `docs/concepts/sweeps/spine-parked-j2-3r.json`. Row: `docs/concepts/r
    - A red-team pose list: rest, overhead >= 140, across the body, behind the back, the q-dropped poses with the arm
      on hub 2, and the closest metal over taken poses.
 
-(Results below.)
+## Result (2026-10-16 03:00 UTC)
+
+**Best: gap 30.24 on Bench(60,160) fast** (score 89.0). Worn **frozen on Bench(110,360) exact: 34.79** (score 87.35;
+reach 0.619, follow 1.000, in-band 14 0.850, in-band 10 0.444, contact 0.018). **0 passive translations, 0 passive
+rotations, 3 active pins.**
+
+| | fast Bench(60,160) | frozen Bench(110,360) exact | near-touch (metal < 1 mm = contact), exact | min metal-skin | overhead >= 140: reach / in-band 14 |
+|---|---|---|---|---|---|
+| CMA-B best (O15 J2, O15 J3) | **30.24** | **34.79** | 37.64 | 0.15 mm | 7/28 / 0.874 |
+| CMA-D best (O15 J2, O17 J3) | 31.11 | 34.83 | **36.59** | 0.43 mm | 6/28 / 0.901 |
+| CMA-A best (O17 J2, O15 J3) | 31.42 | 35.09 | 38.55 | 0.01 mm | 6/28 / 0.858 |
+| k4216 seats, O20 hubs, same kit | 38.73 | 46.92 | 52.20 | 0.06 mm | 5/28 / 0.912 |
+
+* **Seats.** J1 bvec(102.8, 65.3), J3 wdir(84.5, -12.8), a1 40.7, a2 73.8, sigma -1, q 0.979, end_extra 0.24.
+* **Gain over the k4216 chain.** At the same kit and checks the k4216 chain scores 46.92 exact (the judge's VModel
+  read 41.73 with its laxer fold rule and 8 mm straps). Here it is worth **12.1 exact points**, from the slim J2 hub
+  plus re-tuned arcs.
+* **Against the board.** It is 7.8 points better than the 2-slide leader's verified 42.59. It is 0.95 behind the
+  pin-knee 33.84 exact (also 0 passive translations).
+* **It does not cross 27.5.** The fold costs it: 130 of 360 big-bench workspace poses do not close, so reach is 0.62.
+  See "The fold" and the fold law below.
+
 
 ## What it is
 
@@ -247,3 +268,72 @@ Two family-1 seat sets were tested, with arcs from the fold law: (a) J1 bvec(120
   hub levels march far out.
 * **Farm runs.** CMA streams H / I (seat set a, sigma -1 / +1) and J / L (seat set b) run on the farm, with stream G
   (the leader basin re-polished on the plain gap). Results are below.
+
+## Search and convergence gate
+
+* **Coarse farm sweep.** 240 configurations: az 85-115, el 55-75, a1 36-50, a2 68-90, wd 70-95, wa -30..0, q
+  0.96-1.0, rad2 / rad3 in {7.5, 8.5, 10}, end_extra 0-4, sigma -1. Best 31.90 (k32).
+* **CMA-ES on the farm.** Six streams A-F (`tools/concept_cma.py`, popsize 8), 5510 tries in all. Stream A searched on
+  the plain gap. Streams B-F searched on the near-touch gap (metal < 1 mm counted as contact, lesson d).
+* **Per-stream gate** (score points = gap / 2.75):
+
+| stream | tries | best (its objective) | gain over the 2nd half | gain over the last third | plain gap of its best |
+|---|---|---|---|---|---|
+| A (plain) | 689 | 31.42 | 0.12 | 0.02 | 31.42 |
+| B (near) | 849 | 32.64 | 0.36 | 0.10 | **30.24** |
+| C (near) | 1081 | 38.35 | 0.00 | 0.00 | - |
+| D (near) | 1057 | 32.34 | 0.26 | 0.11 | 31.11 |
+| E (near) | 769 | 34.69 | 0.58 | 0.07 | 32.30 |
+| F (near) | 1065 | 38.86 | 0.49 | 0.00 | - |
+
+* **The gate passes.**
+  - Every stream's sigma collapsed.
+  - Over the 2nd half, every stream gained < 1 score point (max 0.58). Over the last third, < 0.5 (max 0.11).
+  - The top 5 distinct plain configurations are B 30.24, D 31.11, A 31.42, k32 31.90 and E 32.30: within 2.06 gap
+    = 0.75 score points.
+  - The whole history (coarse, CMA, local probes) is re-evaluated on the plain gap on the farm and appended to the sweep
+    log as it lands.
+* **Still running on the farm** (results append to the sweep log): stream G, the leader basin re-polished on the plain
+  gap; streams H / I / J / L at the fold-free anterolateral seats.
+
+## Red team (frozen Bench(110,360) exact, CMA-B best)
+
+* **The pose that jams.** 130 of 360 workspace poses fold (the J1-J3 angle leaves [43.1, 104.4]); 1 is K6 and 6 are
+  contact.
+  - Overhead workspace: 7 of 28 reached.
+  - Across the body (plane >= 100, elevation >= 40): 30 of 78.
+  - Behind the back: 33 of 40.
+  - Every overhead clip frame is followed (10 / 10).
+* **The point that pinches.**
+  - Taken poses: the closest metal is 0.15 mm, the link-2 / neck face at plane -15, elevation 75, axial 90 (ws #180).
+    Then 0.17 mm at plane 45, elevation 150, axial -90.
+  - Dropped poses: hub 2's crown is 1.2 mm inside the skin in 2 contact poses. On the fit bench it is 10 mm inside in
+    pose #93: the posterior axillary fold over hub 2 (section above).
+* **The optimistic number.** The fast 30.24 becomes 34.79 frozen exact: reach 0.681 -> 0.619 (the CMA tunes the fold
+  boundary to the 160 workspace poses, lesson c). With metal < 1 mm counted as contact it is 37.64. The D variant
+  (O17 J3) is the robust pick: 34.83 exact, near-touch 36.59, min metal 0.43 mm.
+* **Hub 2's level is a knife edge.** It is set within 1 mm by one pose (#112), and O20 instead of O15 at J2 costs
+  17 points fast. In-band survives the big bench (hub 2 in band 1.00 on 360 poses), but the CAD must hold the O15 / O17
+  crown exactly: no proud screw heads, cap flush.
+* **Not on this bench.**
+  - R10: GH translation. The cuff liner, one RSR3M along the humerus, or the base follower slide; none is credited here.
+  - The base member from the scapula handler to hub 1: hub 1 sits on the acromion top, as in every leader.
+
+## Verdict
+
+**Screened (not dead): 30.24 fast / 34.79 frozen exact, converged, 0 passive translations.**
+
+* It ties the most buildable design on the board, the pin knee (33.84 exact, also 0 passive translations), within one
+  point, and it beats the 2-slide leader's verified 42.59 by 7.8 points with no slides at all.
+* Limiter, measured: the J2 fold. Reach is 0.62 exact, with 130 / 360 workspace poses outside the closure window at the
+  acromion-top / lateral-deltoid seats. Overhead reach is 7 / 28.
+  - **The fold is a seat property, not a law of the spherical 3R.** Seats with a 57-deg window for 90 % of the workspace
+    exist, with ~40-deg arcs: J1 horizontal-anterolateral.
+  - But there both hubs ride the deltoid: the skin under hub 2 moves 52-104 mm from GH.
+  - Longer arcs at the leader's seats send hub 2 off the skin (a1 >= 55 deg: hub 2 level 186-400 mm).
+* **What would cross 27.5.** A J2 that can sit at a 57-deg-window seat without riding the deltoid: a J2 hub on a
+  link-1 path that stays on scapula-side skin while J1 is anterolateral. Alternatively, keep the leader's seats and add
+  ONE passive rotation that moves the fold boundary (the virtual-pole four-bar track measured that a four-bar shifts,
+  but does not widen, the window).
+* **Slim hubs (asked).** The O15 / O17 J2 hub buys 17 fast points at these seats. The O17 (2.75 mm wall) gets 16.6 of
+  them and is the conservative component. A slim J3 buys 1.6.
