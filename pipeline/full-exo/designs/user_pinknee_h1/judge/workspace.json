@@ -1,0 +1,1981 @@
+{
+ "poses": 120,
+ "step": 12,
+ "share_passing": 0.2,
+ "static_fits_left_to_R6": [],
+ "arm_near_mm": 110.0,
+ "fails": {
+  "chain_does_not_close": 0.3417,
+  "body_contact": 0.0417,
+  "part_interference": 0.425
+ },
+ "evaluator_agreement": 0.567,
+ "skip_groups": [
+  "F"
+ ],
+ "tol_body_mm": 0.5,
+ "tol_parts_mm": 0.15,
+ "seconds": 615,
+ "per_pose": [
+  {
+   "k": 0,
+   "p": [
+    -90.0,
+    0.0,
+    75.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 1.29,
+   "parts_pair": "pin a: iglidur G sleeve bearing igus GSM IN D8-06 BOTTOM + arm pad + pad mount, one ",
+   "pairs": {
+    "pin a: iglidur G sleeve bearing igus GSM IN D8-06 BOTTOM + arm pad + pad mount, one ": 1.29,
+    "D8-06 BOTTOM + arm pad + pad mount, one  IN pin a: iglidur G sleeve bearing igus GSM": 0.27
+   },
+   "parts_motion_mm": 1.29
+  },
+  {
+   "k": 1,
+   "p": [
+    -90.0,
+    15.0,
+    135.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 1.27,
+   "parts_pair": "pin a: iglidur G sleeve bearing igus GSM IN D8-06 BOTTOM + arm pad + pad mount, one ",
+   "pairs": {
+    "pin a: iglidur G sleeve bearing igus GSM IN D8-06 BOTTOM + arm pad + pad mount, one ": 1.27,
+    "D8-06 BOTTOM + arm pad + pad mount, one  IN pin a: iglidur G sleeve bearing igus GSM": 0.3
+   },
+   "parts_motion_mm": 1.27
+  },
+  {
+   "k": 2,
+   "p": [
+    -90.0,
+    45.0,
+    75.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 3,
+   "p": [
+    -90.0,
+    60.0,
+    135.0
+   ],
+   "eval_feasible": false,
+   "closes": false,
+   "body_mm": null,
+   "body_part": null,
+   "parts_mm": null,
+   "parts_pair": null
+  },
+  {
+   "k": 4,
+   "p": [
+    -75.0,
+    15.0,
+    60.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 1.42,
+   "parts_pair": "pin a: iglidur G sleeve bearing igus GSM IN D8-06 BOTTOM + arm pad + pad mount, one ",
+   "pairs": {
+    "pin a: iglidur G sleeve bearing igus GSM IN D8-06 BOTTOM + arm pad + pad mount, one ": 1.42
+   },
+   "parts_motion_mm": 1.42
+  },
+  {
+   "k": 5,
+   "p": [
+    -75.0,
+    30.0,
+    120.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.36,
+   "parts_pair": "pin a: iglidur G sleeve bearing igus GSM IN D8-06 BOTTOM + arm pad + pad mount, one ",
+   "pairs": {
+    "pin a: iglidur G sleeve bearing igus GSM IN D8-06 BOTTOM + arm pad + pad mount, one ": 0.36
+   },
+   "parts_motion_mm": 0.36
+  },
+  {
+   "k": 6,
+   "p": [
+    -75.0,
+    60.0,
+    60.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 7,
+   "p": [
+    -60.0,
+    0.0,
+    105.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 1.39,
+   "parts_pair": "pin a: iglidur G sleeve bearing igus GSM IN D8-06 BOTTOM + arm pad + pad mount, one ",
+   "pairs": {
+    "pin a: iglidur G sleeve bearing igus GSM IN D8-06 BOTTOM + arm pad + pad mount, one ": 1.39
+   },
+   "parts_motion_mm": 1.39
+  },
+  {
+   "k": 8,
+   "p": [
+    -60.0,
+    30.0,
+    45.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 1.39,
+   "parts_pair": "pin a: iglidur G sleeve bearing igus GSM IN D8-06 BOTTOM + arm pad + pad mount, one ",
+   "pairs": {
+    "pin a: iglidur G sleeve bearing igus GSM IN D8-06 BOTTOM + arm pad + pad mount, one ": 1.39
+   },
+   "parts_motion_mm": 1.39
+  },
+  {
+   "k": 9,
+   "p": [
+    -60.0,
+    45.0,
+    105.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 10,
+   "p": [
+    -45.0,
+    0.0,
+    30.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 1.29,
+   "parts_pair": "pin a: iglidur G sleeve bearing igus GSM IN D8-06 BOTTOM + arm pad + pad mount, one ",
+   "pairs": {
+    "pin a: iglidur G sleeve bearing igus GSM IN D8-06 BOTTOM + arm pad + pad mount, one ": 1.29,
+    "D8-06 BOTTOM + arm pad + pad mount, one  IN pin a: iglidur G sleeve bearing igus GSM": 0.27
+   },
+   "parts_motion_mm": 1.29
+  },
+  {
+   "k": 11,
+   "p": [
+    -45.0,
+    15.0,
+    90.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.75,
+   "parts_pair": "pin a: iglidur G sleeve bearing igus GSM IN D8-06 BOTTOM + arm pad + pad mount, one ",
+   "pairs": {
+    "pin a: iglidur G sleeve bearing igus GSM IN D8-06 BOTTOM + arm pad + pad mount, one ": 0.75
+   },
+   "parts_motion_mm": 0.75
+  },
+  {
+   "k": 12,
+   "p": [
+    -45.0,
+    45.0,
+    30.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 1.36,
+   "parts_pair": "pin a: iglidur G sleeve bearing igus GSM IN D8-06 BOTTOM + arm pad + pad mount, one ",
+   "pairs": {
+    "pin a: iglidur G sleeve bearing igus GSM IN D8-06 BOTTOM + arm pad + pad mount, one ": 1.36,
+    "D8-06 BOTTOM + arm pad + pad mount, one  IN pin a: iglidur G sleeve bearing igus GSM": 0.16
+   },
+   "parts_motion_mm": 1.36
+  },
+  {
+   "k": 13,
+   "p": [
+    -45.0,
+    60.0,
+    90.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 14,
+   "p": [
+    -30.0,
+    0.0,
+    90.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 1.36,
+   "parts_pair": "pin a: iglidur G sleeve bearing igus GSM IN D8-06 BOTTOM + arm pad + pad mount, one ",
+   "pairs": {
+    "pin a: iglidur G sleeve bearing igus GSM IN D8-06 BOTTOM + arm pad + pad mount, one ": 1.36
+   },
+   "parts_motion_mm": 1.36
+  },
+  {
+   "k": 15,
+   "p": [
+    -30.0,
+    15.0,
+    105.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.49,
+   "parts_pair": "pin a: iglidur G sleeve bearing igus GSM IN D8-06 BOTTOM + arm pad + pad mount, one ",
+   "pairs": {
+    "pin a: iglidur G sleeve bearing igus GSM IN D8-06 BOTTOM + arm pad + pad mount, one ": 0.49
+   },
+   "parts_motion_mm": 0.49
+  },
+  {
+   "k": 16,
+   "p": [
+    -30.0,
+    30.0,
+    120.0
+   ],
+   "eval_feasible": false,
+   "closes": false,
+   "body_mm": null,
+   "body_part": null,
+   "parts_mm": null,
+   "parts_pair": null
+  },
+  {
+   "k": 17,
+   "p": [
+    -30.0,
+    60.0,
+    -30.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 18,
+   "p": [
+    -15.0,
+    0.0,
+    -30.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.39,
+   "parts_pair": "pin a: iglidur G sleeve bearing igus GSM IN D8-06 BOTTOM + arm pad + pad mount, one ",
+   "pairs": {
+    "pin a: iglidur G sleeve bearing igus GSM IN D8-06 BOTTOM + arm pad + pad mount, one ": 0.39
+   },
+   "parts_motion_mm": 0.39
+  },
+  {
+   "k": 19,
+   "p": [
+    -15.0,
+    15.0,
+    -15.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.91,
+   "parts_pair": "pin a: iglidur G sleeve bearing igus GSM IN D8-06 BOTTOM + arm pad + pad mount, one ",
+   "pairs": {
+    "pin a: iglidur G sleeve bearing igus GSM IN D8-06 BOTTOM + arm pad + pad mount, one ": 0.91
+   },
+   "parts_motion_mm": 0.91
+  },
+  {
+   "k": 20,
+   "p": [
+    -15.0,
+    30.0,
+    0.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 1.37,
+   "parts_pair": "pin a: iglidur G sleeve bearing igus GSM IN D8-06 BOTTOM + arm pad + pad mount, one ",
+   "pairs": {
+    "pin a: iglidur G sleeve bearing igus GSM IN D8-06 BOTTOM + arm pad + pad mount, one ": 1.37
+   },
+   "parts_motion_mm": 1.37
+  },
+  {
+   "k": 21,
+   "p": [
+    -15.0,
+    45.0,
+    15.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 1.41,
+   "parts_pair": "pin a: iglidur G sleeve bearing igus GSM IN D8-06 BOTTOM + arm pad + pad mount, one ",
+   "pairs": {
+    "pin a: iglidur G sleeve bearing igus GSM IN D8-06 BOTTOM + arm pad + pad mount, one ": 1.41
+   },
+   "parts_motion_mm": 1.41
+  },
+  {
+   "k": 22,
+   "p": [
+    -15.0,
+    60.0,
+    30.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 23,
+   "p": [
+    -15.0,
+    75.0,
+    45.0
+   ],
+   "eval_feasible": false,
+   "closes": true,
+   "body_mm": 0.83,
+   "body_part": "l1|D8-02 link 1: 8x3 bar on a line/arc chain + J1/J2 pads + integral O7 pins (5-axis machined from solid Ti-6Al-4V (a bend below the 15 mm inner radius rule))",
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 24,
+   "p": [
+    -15.0,
+    90.0,
+    60.0
+   ],
+   "eval_feasible": false,
+   "closes": false,
+   "body_mm": null,
+   "body_part": null,
+   "parts_mm": null,
+   "parts_pair": null
+  },
+  {
+   "k": 25,
+   "p": [
+    0.0,
+    0.0,
+    -30.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.92,
+   "parts_pair": "pin a: iglidur G sleeve bearing igus GSM IN D8-06 BOTTOM + arm pad + pad mount, one ",
+   "pairs": {
+    "pin a: iglidur G sleeve bearing igus GSM IN D8-06 BOTTOM + arm pad + pad mount, one ": 0.92
+   },
+   "parts_motion_mm": 0.92
+  },
+  {
+   "k": 26,
+   "p": [
+    0.0,
+    15.0,
+    -15.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 1.27,
+   "parts_pair": "pin a: iglidur G sleeve bearing igus GSM IN D8-06 BOTTOM + arm pad + pad mount, one ",
+   "pairs": {
+    "pin a: iglidur G sleeve bearing igus GSM IN D8-06 BOTTOM + arm pad + pad mount, one ": 1.27,
+    "D8-06 BOTTOM + arm pad + pad mount, one  IN pin a: iglidur G sleeve bearing igus GSM": 0.32
+   },
+   "parts_motion_mm": 1.27
+  },
+  {
+   "k": 27,
+   "p": [
+    0.0,
+    30.0,
+    0.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 1.41,
+   "parts_pair": "pin a: iglidur G sleeve bearing igus GSM IN D8-06 BOTTOM + arm pad + pad mount, one ",
+   "pairs": {
+    "pin a: iglidur G sleeve bearing igus GSM IN D8-06 BOTTOM + arm pad + pad mount, one ": 1.41
+   },
+   "parts_motion_mm": 1.41
+  },
+  {
+   "k": 28,
+   "p": [
+    0.0,
+    45.0,
+    15.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 1.36,
+   "parts_pair": "pin a: iglidur G sleeve bearing igus GSM IN D8-06 BOTTOM + arm pad + pad mount, one ",
+   "pairs": {
+    "pin a: iglidur G sleeve bearing igus GSM IN D8-06 BOTTOM + arm pad + pad mount, one ": 1.36,
+    "D8-06 BOTTOM + arm pad + pad mount, one  IN pin a: iglidur G sleeve bearing igus GSM": 0.18
+   },
+   "parts_motion_mm": 1.36
+  },
+  {
+   "k": 29,
+   "p": [
+    0.0,
+    60.0,
+    30.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 30,
+   "p": [
+    0.0,
+    75.0,
+    45.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 1.63,
+   "body_part": "l1|D8-02 link 1: 8x3 bar on a line/arc chain + J1/J2 pads + integral O7 pins (5-axis machined from solid Ti-6Al-4V (a bend below the 15 mm inner radius rule))",
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 31,
+   "p": [
+    0.0,
+    90.0,
+    60.0
+   ],
+   "eval_feasible": false,
+   "closes": false,
+   "body_mm": null,
+   "body_part": null,
+   "parts_mm": null,
+   "parts_pair": null
+  },
+  {
+   "k": 32,
+   "p": [
+    0.0,
+    120.0,
+    0.0
+   ],
+   "eval_feasible": false,
+   "closes": false,
+   "body_mm": null,
+   "body_part": null,
+   "parts_mm": null,
+   "parts_pair": null
+  },
+  {
+   "k": 33,
+   "p": [
+    0.0,
+    150.0,
+    0.0
+   ],
+   "eval_feasible": false,
+   "closes": false,
+   "body_mm": null,
+   "body_part": null,
+   "parts_mm": null,
+   "parts_pair": null
+  },
+  {
+   "k": 34,
+   "p": [
+    15.0,
+    0.0,
+    -30.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 1.29,
+   "parts_pair": "pin a: iglidur G sleeve bearing igus GSM IN D8-06 BOTTOM + arm pad + pad mount, one ",
+   "pairs": {
+    "pin a: iglidur G sleeve bearing igus GSM IN D8-06 BOTTOM + arm pad + pad mount, one ": 1.29,
+    "D8-06 BOTTOM + arm pad + pad mount, one  IN pin a: iglidur G sleeve bearing igus GSM": 0.27
+   },
+   "parts_motion_mm": 1.29
+  },
+  {
+   "k": 35,
+   "p": [
+    15.0,
+    15.0,
+    -15.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 1.39,
+   "parts_pair": "pin a: iglidur G sleeve bearing igus GSM IN D8-06 BOTTOM + arm pad + pad mount, one ",
+   "pairs": {
+    "pin a: iglidur G sleeve bearing igus GSM IN D8-06 BOTTOM + arm pad + pad mount, one ": 1.39
+   },
+   "parts_motion_mm": 1.39
+  },
+  {
+   "k": 36,
+   "p": [
+    15.0,
+    30.0,
+    0.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 1.43,
+   "parts_pair": "pin a: iglidur G sleeve bearing igus GSM IN D8-06 BOTTOM + arm pad + pad mount, one ",
+   "pairs": {
+    "pin a: iglidur G sleeve bearing igus GSM IN D8-06 BOTTOM + arm pad + pad mount, one ": 1.43
+   },
+   "parts_motion_mm": 1.43
+  },
+  {
+   "k": 37,
+   "p": [
+    15.0,
+    45.0,
+    15.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 1.02,
+   "parts_pair": "pin a: iglidur G sleeve bearing igus GSM IN D8-06 BOTTOM + arm pad + pad mount, one ",
+   "pairs": {
+    "pin a: iglidur G sleeve bearing igus GSM IN D8-06 BOTTOM + arm pad + pad mount, one ": 1.02,
+    "D8-06 BOTTOM + arm pad + pad mount, one  IN pin a: iglidur G sleeve bearing igus GSM": 0.19
+   },
+   "parts_motion_mm": 1.02
+  },
+  {
+   "k": 38,
+   "p": [
+    15.0,
+    60.0,
+    30.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 39,
+   "p": [
+    15.0,
+    75.0,
+    45.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.7,
+   "body_part": "l1|D8-02 link 1: 8x3 bar on a line/arc chain + J1/J2 pads + integral O7 pins (5-axis machined from solid Ti-6Al-4V (a bend below the 15 mm inner radius rule))",
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 40,
+   "p": [
+    15.0,
+    90.0,
+    60.0
+   ],
+   "eval_feasible": false,
+   "closes": true,
+   "body_mm": 3.27,
+   "body_part": "l1|D8-02 link 1: 8x3 bar on a line/arc chain + J1/J2 pads + integral O7 pins (5-axis machined from solid Ti-6Al-4V (a bend below the 15 mm inner radius rule))",
+   "parts_mm": 0.36,
+   "parts_pair": "D8-03 link 2: 8x3 bar on a line/arc chai IN D8-04 member 3: J3 disc + integral O7 pi",
+   "pairs": {
+    "D8-03 link 2: 8x3 bar on a line/arc chai IN D8-04 member 3: J3 disc + integral O7 pi": 0.36
+   },
+   "parts_motion_mm": 0.36
+  },
+  {
+   "k": 41,
+   "p": [
+    15.0,
+    120.0,
+    0.0
+   ],
+   "eval_feasible": false,
+   "closes": false,
+   "body_mm": null,
+   "body_part": null,
+   "parts_mm": null,
+   "parts_pair": null
+  },
+  {
+   "k": 42,
+   "p": [
+    15.0,
+    150.0,
+    0.0
+   ],
+   "eval_feasible": false,
+   "closes": false,
+   "body_mm": null,
+   "body_part": null,
+   "parts_mm": null,
+   "parts_pair": null
+  },
+  {
+   "k": 43,
+   "p": [
+    30.0,
+    0.0,
+    -30.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 1.39,
+   "parts_pair": "pin a: iglidur G sleeve bearing igus GSM IN D8-06 BOTTOM + arm pad + pad mount, one ",
+   "pairs": {
+    "pin a: iglidur G sleeve bearing igus GSM IN D8-06 BOTTOM + arm pad + pad mount, one ": 1.39
+   },
+   "parts_motion_mm": 1.39
+  },
+  {
+   "k": 44,
+   "p": [
+    30.0,
+    15.0,
+    -15.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 1.42,
+   "parts_pair": "pin a: iglidur G sleeve bearing igus GSM IN D8-06 BOTTOM + arm pad + pad mount, one ",
+   "pairs": {
+    "pin a: iglidur G sleeve bearing igus GSM IN D8-06 BOTTOM + arm pad + pad mount, one ": 1.42
+   },
+   "parts_motion_mm": 1.42
+  },
+  {
+   "k": 45,
+   "p": [
+    30.0,
+    30.0,
+    0.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 1.4,
+   "parts_pair": "pin a: iglidur G sleeve bearing igus GSM IN D8-06 BOTTOM + arm pad + pad mount, one ",
+   "pairs": {
+    "pin a: iglidur G sleeve bearing igus GSM IN D8-06 BOTTOM + arm pad + pad mount, one ": 1.4
+   },
+   "parts_motion_mm": 1.4
+  },
+  {
+   "k": 46,
+   "p": [
+    30.0,
+    45.0,
+    15.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.63,
+   "parts_pair": "pin a: iglidur G sleeve bearing igus GSM IN D8-06 BOTTOM + arm pad + pad mount, one ",
+   "pairs": {
+    "pin a: iglidur G sleeve bearing igus GSM IN D8-06 BOTTOM + arm pad + pad mount, one ": 0.63
+   },
+   "parts_motion_mm": 0.63
+  },
+  {
+   "k": 47,
+   "p": [
+    30.0,
+    60.0,
+    30.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 48,
+   "p": [
+    30.0,
+    75.0,
+    45.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 49,
+   "p": [
+    30.0,
+    90.0,
+    60.0
+   ],
+   "eval_feasible": false,
+   "closes": true,
+   "body_mm": 1.19,
+   "body_part": "l1|D8-02 link 1: 8x3 bar on a line/arc chain + J1/J2 pads + integral O7 pins (5-axis machined from solid Ti-6Al-4V (a bend below the 15 mm inner radius rule))",
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 50,
+   "p": [
+    30.0,
+    120.0,
+    0.0
+   ],
+   "eval_feasible": false,
+   "closes": false,
+   "body_mm": null,
+   "body_part": null,
+   "parts_mm": null,
+   "parts_pair": null
+  },
+  {
+   "k": 51,
+   "p": [
+    30.0,
+    150.0,
+    0.0
+   ],
+   "eval_feasible": false,
+   "closes": false,
+   "body_mm": null,
+   "body_part": null,
+   "parts_mm": null,
+   "parts_pair": null
+  },
+  {
+   "k": 52,
+   "p": [
+    45.0,
+    0.0,
+    -30.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 1.42,
+   "parts_pair": "pin a: iglidur G sleeve bearing igus GSM IN D8-06 BOTTOM + arm pad + pad mount, one ",
+   "pairs": {
+    "pin a: iglidur G sleeve bearing igus GSM IN D8-06 BOTTOM + arm pad + pad mount, one ": 1.42
+   },
+   "parts_motion_mm": 1.42
+  },
+  {
+   "k": 53,
+   "p": [
+    45.0,
+    15.0,
+    -15.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 1.42,
+   "parts_pair": "pin a: iglidur G sleeve bearing igus GSM IN D8-06 BOTTOM + arm pad + pad mount, one ",
+   "pairs": {
+    "pin a: iglidur G sleeve bearing igus GSM IN D8-06 BOTTOM + arm pad + pad mount, one ": 1.42
+   },
+   "parts_motion_mm": 1.42
+  },
+  {
+   "k": 54,
+   "p": [
+    45.0,
+    30.0,
+    0.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 1.35,
+   "parts_pair": "pin a: iglidur G sleeve bearing igus GSM IN D8-06 BOTTOM + arm pad + pad mount, one ",
+   "pairs": {
+    "pin a: iglidur G sleeve bearing igus GSM IN D8-06 BOTTOM + arm pad + pad mount, one ": 1.35,
+    "D8-06 BOTTOM + arm pad + pad mount, one  IN pin a: iglidur G sleeve bearing igus GSM": 0.19
+   },
+   "parts_motion_mm": 1.35
+  },
+  {
+   "k": 55,
+   "p": [
+    45.0,
+    45.0,
+    15.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.39,
+   "parts_pair": "pin a: iglidur G sleeve bearing igus GSM IN D8-06 BOTTOM + arm pad + pad mount, one ",
+   "pairs": {
+    "pin a: iglidur G sleeve bearing igus GSM IN D8-06 BOTTOM + arm pad + pad mount, one ": 0.39
+   },
+   "parts_motion_mm": 0.39
+  },
+  {
+   "k": 56,
+   "p": [
+    45.0,
+    60.0,
+    30.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 57,
+   "p": [
+    45.0,
+    75.0,
+    45.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 58,
+   "p": [
+    45.0,
+    105.0,
+    -90.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 59,
+   "p": [
+    45.0,
+    135.0,
+    -90.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 60,
+   "p": [
+    45.0,
+    165.0,
+    -90.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 61,
+   "p": [
+    60.0,
+    0.0,
+    -30.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 1.42,
+   "parts_pair": "pin a: iglidur G sleeve bearing igus GSM IN D8-06 BOTTOM + arm pad + pad mount, one ",
+   "pairs": {
+    "pin a: iglidur G sleeve bearing igus GSM IN D8-06 BOTTOM + arm pad + pad mount, one ": 1.42
+   },
+   "parts_motion_mm": 1.42
+  },
+  {
+   "k": 62,
+   "p": [
+    60.0,
+    15.0,
+    -15.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 1.39,
+   "parts_pair": "pin a: iglidur G sleeve bearing igus GSM IN D8-06 BOTTOM + arm pad + pad mount, one ",
+   "pairs": {
+    "pin a: iglidur G sleeve bearing igus GSM IN D8-06 BOTTOM + arm pad + pad mount, one ": 1.39
+   },
+   "parts_motion_mm": 1.39
+  },
+  {
+   "k": 63,
+   "p": [
+    60.0,
+    30.0,
+    0.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 1.21,
+   "parts_pair": "pin a: iglidur G sleeve bearing igus GSM IN D8-06 BOTTOM + arm pad + pad mount, one ",
+   "pairs": {
+    "pin a: iglidur G sleeve bearing igus GSM IN D8-06 BOTTOM + arm pad + pad mount, one ": 1.21,
+    "D8-06 BOTTOM + arm pad + pad mount, one  IN pin a: iglidur G sleeve bearing igus GSM": 0.36
+   },
+   "parts_motion_mm": 1.21
+  },
+  {
+   "k": 64,
+   "p": [
+    60.0,
+    45.0,
+    15.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.34,
+   "parts_pair": "pin a: iglidur G sleeve bearing igus GSM IN D8-06 BOTTOM + arm pad + pad mount, one ",
+   "pairs": {
+    "pin a: iglidur G sleeve bearing igus GSM IN D8-06 BOTTOM + arm pad + pad mount, one ": 0.34
+   },
+   "parts_motion_mm": 0.34
+  },
+  {
+   "k": 65,
+   "p": [
+    60.0,
+    60.0,
+    30.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 66,
+   "p": [
+    60.0,
+    90.0,
+    -120.0
+   ],
+   "eval_feasible": false,
+   "closes": false,
+   "body_mm": null,
+   "body_part": null,
+   "parts_mm": null,
+   "parts_pair": null
+  },
+  {
+   "k": 67,
+   "p": [
+    60.0,
+    105.0,
+    -90.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 68,
+   "p": [
+    60.0,
+    135.0,
+    -90.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 69,
+   "p": [
+    60.0,
+    165.0,
+    -90.0
+   ],
+   "eval_feasible": false,
+   "closes": false,
+   "body_mm": null,
+   "body_part": null,
+   "parts_mm": null,
+   "parts_pair": null
+  },
+  {
+   "k": 70,
+   "p": [
+    75.0,
+    0.0,
+    -30.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 1.39,
+   "parts_pair": "pin a: iglidur G sleeve bearing igus GSM IN D8-06 BOTTOM + arm pad + pad mount, one ",
+   "pairs": {
+    "pin a: iglidur G sleeve bearing igus GSM IN D8-06 BOTTOM + arm pad + pad mount, one ": 1.39
+   },
+   "parts_motion_mm": 1.39
+  },
+  {
+   "k": 71,
+   "p": [
+    75.0,
+    15.0,
+    -15.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 1.36,
+   "parts_pair": "pin a: iglidur G sleeve bearing igus GSM IN D8-06 BOTTOM + arm pad + pad mount, one ",
+   "pairs": {
+    "pin a: iglidur G sleeve bearing igus GSM IN D8-06 BOTTOM + arm pad + pad mount, one ": 1.36,
+    "D8-06 BOTTOM + arm pad + pad mount, one  IN pin a: iglidur G sleeve bearing igus GSM": 0.18
+   },
+   "parts_motion_mm": 1.36
+  },
+  {
+   "k": 72,
+   "p": [
+    75.0,
+    30.0,
+    0.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 1.09,
+   "parts_pair": "pin a: iglidur G sleeve bearing igus GSM IN D8-06 BOTTOM + arm pad + pad mount, one ",
+   "pairs": {
+    "pin a: iglidur G sleeve bearing igus GSM IN D8-06 BOTTOM + arm pad + pad mount, one ": 1.09,
+    "D8-06 BOTTOM + arm pad + pad mount, one  IN pin a: iglidur G sleeve bearing igus GSM": 0.26
+   },
+   "parts_motion_mm": 1.09
+  },
+  {
+   "k": 73,
+   "p": [
+    75.0,
+    45.0,
+    15.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.45,
+   "parts_pair": "pin a: iglidur G sleeve bearing igus GSM IN D8-06 BOTTOM + arm pad + pad mount, one ",
+   "pairs": {
+    "pin a: iglidur G sleeve bearing igus GSM IN D8-06 BOTTOM + arm pad + pad mount, one ": 0.45
+   },
+   "parts_motion_mm": 0.45
+  },
+  {
+   "k": 74,
+   "p": [
+    75.0,
+    75.0,
+    -135.0
+   ],
+   "eval_feasible": false,
+   "closes": false,
+   "body_mm": null,
+   "body_part": null,
+   "parts_mm": null,
+   "parts_pair": null
+  },
+  {
+   "k": 75,
+   "p": [
+    75.0,
+    90.0,
+    -120.0
+   ],
+   "eval_feasible": false,
+   "closes": false,
+   "body_mm": null,
+   "body_part": null,
+   "parts_mm": null,
+   "parts_pair": null
+  },
+  {
+   "k": 76,
+   "p": [
+    75.0,
+    105.0,
+    -90.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 77,
+   "p": [
+    75.0,
+    135.0,
+    -90.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 78,
+   "p": [
+    75.0,
+    165.0,
+    -90.0
+   ],
+   "eval_feasible": false,
+   "closes": false,
+   "body_mm": null,
+   "body_part": null,
+   "parts_mm": null,
+   "parts_pair": null
+  },
+  {
+   "k": 79,
+   "p": [
+    90.0,
+    0.0,
+    -30.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 1.36,
+   "parts_pair": "pin a: iglidur G sleeve bearing igus GSM IN D8-06 BOTTOM + arm pad + pad mount, one ",
+   "pairs": {
+    "pin a: iglidur G sleeve bearing igus GSM IN D8-06 BOTTOM + arm pad + pad mount, one ": 1.36
+   },
+   "parts_motion_mm": 1.36
+  },
+  {
+   "k": 80,
+   "p": [
+    90.0,
+    15.0,
+    -15.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 1.29,
+   "parts_pair": "pin a: iglidur G sleeve bearing igus GSM IN D8-06 BOTTOM + arm pad + pad mount, one ",
+   "pairs": {
+    "pin a: iglidur G sleeve bearing igus GSM IN D8-06 BOTTOM + arm pad + pad mount, one ": 1.29,
+    "D8-06 BOTTOM + arm pad + pad mount, one  IN pin a: iglidur G sleeve bearing igus GSM": 0.26
+   },
+   "parts_motion_mm": 1.29
+  },
+  {
+   "k": 81,
+   "p": [
+    90.0,
+    30.0,
+    0.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 1.12,
+   "parts_pair": "pin a: iglidur G sleeve bearing igus GSM IN D8-06 BOTTOM + arm pad + pad mount, one ",
+   "pairs": {
+    "pin a: iglidur G sleeve bearing igus GSM IN D8-06 BOTTOM + arm pad + pad mount, one ": 1.12,
+    "D8-06 BOTTOM + arm pad + pad mount, one  IN pin a: iglidur G sleeve bearing igus GSM": 0.28
+   },
+   "parts_motion_mm": 1.12
+  },
+  {
+   "k": 82,
+   "p": [
+    90.0,
+    60.0,
+    -150.0
+   ],
+   "eval_feasible": false,
+   "closes": false,
+   "body_mm": null,
+   "body_part": null,
+   "parts_mm": null,
+   "parts_pair": null
+  },
+  {
+   "k": 83,
+   "p": [
+    90.0,
+    75.0,
+    -135.0
+   ],
+   "eval_feasible": false,
+   "closes": false,
+   "body_mm": null,
+   "body_part": null,
+   "parts_mm": null,
+   "parts_pair": null
+  },
+  {
+   "k": 84,
+   "p": [
+    90.0,
+    90.0,
+    -120.0
+   ],
+   "eval_feasible": false,
+   "closes": false,
+   "body_mm": null,
+   "body_part": null,
+   "parts_mm": null,
+   "parts_pair": null
+  },
+  {
+   "k": 85,
+   "p": [
+    90.0,
+    105.0,
+    -90.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 86,
+   "p": [
+    90.0,
+    135.0,
+    -90.0
+   ],
+   "eval_feasible": false,
+   "closes": false,
+   "body_mm": null,
+   "body_part": null,
+   "parts_mm": null,
+   "parts_pair": null
+  },
+  {
+   "k": 87,
+   "p": [
+    90.0,
+    165.0,
+    -90.0
+   ],
+   "eval_feasible": false,
+   "closes": false,
+   "body_mm": null,
+   "body_part": null,
+   "parts_mm": null,
+   "parts_pair": null
+  },
+  {
+   "k": 88,
+   "p": [
+    105.0,
+    0.0,
+    -30.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 1.35,
+   "parts_pair": "pin a: iglidur G sleeve bearing igus GSM IN D8-06 BOTTOM + arm pad + pad mount, one ",
+   "pairs": {
+    "pin a: iglidur G sleeve bearing igus GSM IN D8-06 BOTTOM + arm pad + pad mount, one ": 1.35,
+    "D8-06 BOTTOM + arm pad + pad mount, one  IN pin a: iglidur G sleeve bearing igus GSM": 0.21
+   },
+   "parts_motion_mm": 1.35
+  },
+  {
+   "k": 89,
+   "p": [
+    105.0,
+    15.0,
+    -15.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 1.32,
+   "parts_pair": "pin a: iglidur G sleeve bearing igus GSM IN D8-06 BOTTOM + arm pad + pad mount, one ",
+   "pairs": {
+    "pin a: iglidur G sleeve bearing igus GSM IN D8-06 BOTTOM + arm pad + pad mount, one ": 1.32,
+    "D8-06 BOTTOM + arm pad + pad mount, one  IN pin a: iglidur G sleeve bearing igus GSM": 0.24
+   },
+   "parts_motion_mm": 1.32
+  },
+  {
+   "k": 90,
+   "p": [
+    105.0,
+    45.0,
+    -165.0
+   ],
+   "eval_feasible": false,
+   "closes": false,
+   "body_mm": null,
+   "body_part": null,
+   "parts_mm": null,
+   "parts_pair": null
+  },
+  {
+   "k": 91,
+   "p": [
+    105.0,
+    60.0,
+    -150.0
+   ],
+   "eval_feasible": false,
+   "closes": false,
+   "body_mm": null,
+   "body_part": null,
+   "parts_mm": null,
+   "parts_pair": null
+  },
+  {
+   "k": 92,
+   "p": [
+    105.0,
+    75.0,
+    -135.0
+   ],
+   "eval_feasible": false,
+   "closes": false,
+   "body_mm": null,
+   "body_part": null,
+   "parts_mm": null,
+   "parts_pair": null
+  },
+  {
+   "k": 93,
+   "p": [
+    105.0,
+    90.0,
+    -120.0
+   ],
+   "eval_feasible": false,
+   "closes": false,
+   "body_mm": null,
+   "body_part": null,
+   "parts_mm": null,
+   "parts_pair": null
+  },
+  {
+   "k": 94,
+   "p": [
+    105.0,
+    105.0,
+    -90.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 95,
+   "p": [
+    105.0,
+    135.0,
+    -90.0
+   ],
+   "eval_feasible": false,
+   "closes": false,
+   "body_mm": null,
+   "body_part": null,
+   "parts_mm": null,
+   "parts_pair": null
+  },
+  {
+   "k": 96,
+   "p": [
+    105.0,
+    165.0,
+    -90.0
+   ],
+   "eval_feasible": false,
+   "closes": false,
+   "body_mm": null,
+   "body_part": null,
+   "parts_mm": null,
+   "parts_pair": null
+  },
+  {
+   "k": 97,
+   "p": [
+    120.0,
+    0.0,
+    -30.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 1.36,
+   "parts_pair": "pin a: iglidur G sleeve bearing igus GSM IN D8-06 BOTTOM + arm pad + pad mount, one ",
+   "pairs": {
+    "pin a: iglidur G sleeve bearing igus GSM IN D8-06 BOTTOM + arm pad + pad mount, one ": 1.36,
+    "D8-06 BOTTOM + arm pad + pad mount, one  IN pin a: iglidur G sleeve bearing igus GSM": 0.16
+   },
+   "parts_motion_mm": 1.36
+  },
+  {
+   "k": 98,
+   "p": [
+    120.0,
+    30.0,
+    -180.0
+   ],
+   "eval_feasible": false,
+   "closes": false,
+   "body_mm": null,
+   "body_part": null,
+   "parts_mm": null,
+   "parts_pair": null
+  },
+  {
+   "k": 99,
+   "p": [
+    120.0,
+    45.0,
+    -165.0
+   ],
+   "eval_feasible": false,
+   "closes": false,
+   "body_mm": null,
+   "body_part": null,
+   "parts_mm": null,
+   "parts_pair": null
+  },
+  {
+   "k": 100,
+   "p": [
+    120.0,
+    60.0,
+    -150.0
+   ],
+   "eval_feasible": false,
+   "closes": false,
+   "body_mm": null,
+   "body_part": null,
+   "parts_mm": null,
+   "parts_pair": null
+  },
+  {
+   "k": 101,
+   "p": [
+    120.0,
+    75.0,
+    -135.0
+   ],
+   "eval_feasible": false,
+   "closes": false,
+   "body_mm": null,
+   "body_part": null,
+   "parts_mm": null,
+   "parts_pair": null
+  },
+  {
+   "k": 102,
+   "p": [
+    120.0,
+    90.0,
+    -120.0
+   ],
+   "eval_feasible": false,
+   "closes": false,
+   "body_mm": null,
+   "body_part": null,
+   "parts_mm": null,
+   "parts_pair": null
+  },
+  {
+   "k": 103,
+   "p": [
+    120.0,
+    105.0,
+    -90.0
+   ],
+   "eval_feasible": false,
+   "closes": false,
+   "body_mm": null,
+   "body_part": null,
+   "parts_mm": null,
+   "parts_pair": null
+  },
+  {
+   "k": 104,
+   "p": [
+    120.0,
+    135.0,
+    -90.0
+   ],
+   "eval_feasible": false,
+   "closes": false,
+   "body_mm": null,
+   "body_part": null,
+   "parts_mm": null,
+   "parts_pair": null
+  },
+  {
+   "k": 105,
+   "p": [
+    120.0,
+    165.0,
+    -90.0
+   ],
+   "eval_feasible": false,
+   "closes": false,
+   "body_mm": null,
+   "body_part": null,
+   "parts_mm": null,
+   "parts_pair": null
+  },
+  {
+   "k": 106,
+   "p": [
+    135.0,
+    15.0,
+    -135.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 1.05,
+   "parts_pair": "pin a: iglidur G sleeve bearing igus GSM IN D8-06 BOTTOM + arm pad + pad mount, one ",
+   "pairs": {
+    "pin a: iglidur G sleeve bearing igus GSM IN D8-06 BOTTOM + arm pad + pad mount, one ": 1.05,
+    "D8-06 BOTTOM + arm pad + pad mount, one  IN pin a: iglidur G sleeve bearing igus GSM": 0.22
+   },
+   "parts_motion_mm": 1.05
+  },
+  {
+   "k": 107,
+   "p": [
+    135.0,
+    30.0,
+    -90.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 1.07,
+   "parts_pair": "pin a: iglidur G sleeve bearing igus GSM IN D8-06 BOTTOM + arm pad + pad mount, one ",
+   "pairs": {
+    "pin a: iglidur G sleeve bearing igus GSM IN D8-06 BOTTOM + arm pad + pad mount, one ": 1.07,
+    "D8-06 BOTTOM + arm pad + pad mount, one  IN pin a: iglidur G sleeve bearing igus GSM": 0.24
+   },
+   "parts_motion_mm": 1.07
+  },
+  {
+   "k": 108,
+   "p": [
+    135.0,
+    45.0,
+    -45.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 1.27,
+   "parts_pair": "pin a: iglidur G sleeve bearing igus GSM IN D8-06 BOTTOM + arm pad + pad mount, one ",
+   "pairs": {
+    "pin a: iglidur G sleeve bearing igus GSM IN D8-06 BOTTOM + arm pad + pad mount, one ": 1.27,
+    "D8-06 BOTTOM + arm pad + pad mount, one  IN pin a: iglidur G sleeve bearing igus GSM": 0.32
+   },
+   "parts_motion_mm": 1.27
+  },
+  {
+   "k": 109,
+   "p": [
+    135.0,
+    75.0,
+    -135.0
+   ],
+   "eval_feasible": false,
+   "closes": false,
+   "body_mm": null,
+   "body_part": null,
+   "parts_mm": null,
+   "parts_pair": null
+  },
+  {
+   "k": 110,
+   "p": [
+    135.0,
+    90.0,
+    -90.0
+   ],
+   "eval_feasible": false,
+   "closes": false,
+   "body_mm": null,
+   "body_part": null,
+   "parts_mm": null,
+   "parts_pair": null
+  },
+  {
+   "k": 111,
+   "p": [
+    135.0,
+    105.0,
+    -45.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 112,
+   "p": [
+    135.0,
+    135.0,
+    -135.0
+   ],
+   "eval_feasible": false,
+   "closes": false,
+   "body_mm": null,
+   "body_part": null,
+   "parts_mm": null,
+   "parts_pair": null
+  },
+  {
+   "k": 113,
+   "p": [
+    150.0,
+    0.0,
+    -105.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 1.39,
+   "parts_pair": "pin a: iglidur G sleeve bearing igus GSM IN D8-06 BOTTOM + arm pad + pad mount, one ",
+   "pairs": {
+    "pin a: iglidur G sleeve bearing igus GSM IN D8-06 BOTTOM + arm pad + pad mount, one ": 1.39
+   },
+   "parts_motion_mm": 1.39
+  },
+  {
+   "k": 114,
+   "p": [
+    150.0,
+    15.0,
+    -60.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 1.42,
+   "parts_pair": "pin a: iglidur G sleeve bearing igus GSM IN D8-06 BOTTOM + arm pad + pad mount, one ",
+   "pairs": {
+    "pin a: iglidur G sleeve bearing igus GSM IN D8-06 BOTTOM + arm pad + pad mount, one ": 1.42
+   },
+   "parts_motion_mm": 1.42
+  },
+  {
+   "k": 115,
+   "p": [
+    150.0,
+    45.0,
+    -150.0
+   ],
+   "eval_feasible": false,
+   "closes": false,
+   "body_mm": null,
+   "body_part": null,
+   "parts_mm": null,
+   "parts_pair": null
+  },
+  {
+   "k": 116,
+   "p": [
+    150.0,
+    60.0,
+    -105.0
+   ],
+   "eval_feasible": false,
+   "closes": false,
+   "body_mm": null,
+   "body_part": null,
+   "parts_mm": null,
+   "parts_pair": null
+  },
+  {
+   "k": 117,
+   "p": [
+    150.0,
+    75.0,
+    -60.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 118,
+   "p": [
+    150.0,
+    105.0,
+    -150.0
+   ],
+   "eval_feasible": false,
+   "closes": false,
+   "body_mm": null,
+   "body_part": null,
+   "parts_mm": null,
+   "parts_pair": null
+  },
+  {
+   "k": 119,
+   "p": [
+    150.0,
+    120.0,
+    -105.0
+   ],
+   "eval_feasible": false,
+   "closes": false,
+   "body_mm": null,
+   "body_part": null,
+   "parts_mm": null,
+   "parts_pair": null
+  }
+ ]
+}

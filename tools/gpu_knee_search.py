@@ -357,9 +357,27 @@ def run(a):
     for cm in act + done:
         jdump(dict(j=cm.j, tag0=cm.tag0, gen=cm.gen, best=cm.best, stop=cm.stop() or "deadline", sigma=cm.sigma, hist=cm.hist), os.path.join(OUT, f"basin_{cm.j}.json"))
     open(os.path.join(OUT, f"cma_{me}.done"), "w").write(f"{LC.n}"); log(f"cma done: {LC.n} evals")
-    # 4. final: re-evaluate the top 30 distinct exactly (one pod), verification jobs for everyone
+    pool.close(); pool.terminate()
+
+
+def final(a):
+    """4. final (a separate process, so a fix dropped on the volume applies): the top 30 distinct over every row
+    re-evaluated with the port's EXACT outside path by one pod, the top 10 + H1 -> verification jobs for every pod's CPUs"""
+    import multiprocessing as mp
+    OUT = a.out; me = os.environ.get("RUNPOD_POD_ID", "local"); sc, lo, hi = spec(); S = seeds()
+    T_CMA = float(os.environ.get("GKS_T_CMA", time.time())); T_VER = float(os.environ.get("GKS_T_VERIFY", T_CMA + 1800))
+    log = lambda s: print(f"[{time.strftime('%H:%M:%S', time.gmtime())} {me}] {s}", flush=True)
+    nc, nw = (int(x) for x in a.bench.split(","))
+    ncpu = len(os.sched_getaffinity(0))
+    try:
+        q = open("/sys/fs/cgroup/cpu.max").read().split()
+        if q[0] != "max": ncpu = min(ncpu, max(1, int(int(q[0]) / int(q[1]))))
+    except Exception: pass                                                                   # noqa: BLE001
+    W = a.workers or max(2, ncpu - 1)
+    alive = sorted(os.path.basename(f)[6:] for f in glob.glob(os.path.join(OUT, "alive_*")))
     vpath = os.path.join(OUT, "verify_jobs.json")
     if claim(os.path.join(OUT, "claims", "final")):
+        pool = mp.get_context("spawn").Pool(W, initializer=_w_init, initargs=(nc, nw, a.device))
         while time.time() < T_CMA + 240:
             if all(os.path.exists(os.path.join(OUT, f"cma_{x}.done")) for x in alive): break
             time.sleep(10)
@@ -376,7 +394,7 @@ def run(a):
         jobs.sort(key=lambda j: ("held", "fitbig", "fit60", "cont").index(j["proto"]))
         jdump(dict(finalists=[dict(name=f"F{k + 1}", src=r["src"], obj=r["obj"], gap=r.get("gap"), p=r["p"]) for k, r in enumerate(fin)], jobs=jobs), vpath)
         log("finalists: " + ", ".join(f"F{k + 1} {r['src']} near1 {r.get('gap_near1')} gap {r.get('gap')} m {r['p']['margin']}" for k, r in enumerate(fin)))
-    pool.close(); pool.terminate()
+        pool.close(); pool.terminate()
     while not os.path.exists(vpath) and time.time() < T_VER: time.sleep(10)
     if not os.path.exists(vpath): log("no verification jobs: exit"); return
     time.sleep(2); verify(json.load(open(vpath))["jobs"], OUT, ncpu, T_VER, log)
@@ -452,6 +470,7 @@ def main():
         X, R = sobol_points(float(os.environ.get("GKS_SCALE", 1.0))); u, c = np.unique(R, return_counts=True)
         print(len(X), dict(zip(u.tolist(), c.tolist()))); print({k: {kk: round(v, 2) for kk, v in p.items()} for k, p in seeds().items()})
     elif a.cmd == "run": run(a)
+    elif a.cmd == "final": final(a)
     elif a.cmd == "summary": summary(a.args[0], a.args[1])
     else: raise SystemExit(__doc__)
 

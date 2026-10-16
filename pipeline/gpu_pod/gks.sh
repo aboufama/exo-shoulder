@@ -23,7 +23,11 @@ ln -sfn /root/bench/14f156cb6fc8 .cache/concept_bench/14f156cb6fc8; ln -sfn /roo
 nproc; free -g | head -2; cat /sys/fs/cgroup/cpu.max /sys/fs/cgroup/memory.max 2>/dev/null; nvidia-smi --query-gpu=name,memory.total --format=csv
 echo "booted $(date -u +%FT%TZ)" >> $L
 export CB_QUIET_EXACT=1 OMP_NUM_THREADS=1 CB_FOLD_MARGIN=5 IGL_NUM_THREADS=1
-LEFT=$(( ${GKS_T_VERIFY%.*} + 240 - $(date +%s) ))
+LEFT=$(( ${GKS_T_CMA%.*} + 600 - $(date +%s) ))
 timeout $LEFT python3 tools/gpu_knee_search.py run --out $RUN >> $L 2>&1
+# the final stage (re-evaluation + CPU verification) is its own process: a fix dropped in $RUN/override/ applies to it
+[ -d $RUN/override ] && cp -r $RUN/override/. /root/repo/ && echo "override applied: $(ls -R $RUN/override | tr '\n' ' ')" >> $L
+LEFT=$(( ${GKS_T_VERIFY%.*} + 240 - $(date +%s) ))
+timeout $LEFT python3 tools/gpu_knee_search.py final --out $RUN >> $L 2>&1
 echo "search ended $(date -u +%FT%TZ): removing the pod" >> $L
 runpodctl remove pod $RUNPOD_POD_ID || runpodctl stop pod $RUNPOD_POD_ID
