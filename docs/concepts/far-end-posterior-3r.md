@@ -82,6 +82,6 @@ rays, offset skin-normal J3, flat two-pin knee), 64 layouts on the farm (`docs/c
 stage `coarse-posterior-J1`: J1 bvec(-24, 4) / (-18, 20) / (-18, 24) / (-30, 8), J3 wdir(80 / 100, -90), arcs 65 / 65 and
 65 / 75, b3 0 / 0.35, both branches; J2 seat = the closure's home direction, tools/osn_fold_seeds.py `layout_params`).
 Best 122.45 (median 255.8) against 26.34 for the pin knee's own seats: the fold drops to 6-20 poses of 220 (from 47),
-but 46-69 poses go to skin (hub 2 and link 2 over the neck and chest), in-band 14 0.17-0.25, contact 0.23-0.29, and
+but 46-69 poses go to skin (not split per part; in the plain 3R the raglan map puts these link rays over the neck and chest), in-band 14 0.17-0.25, contact 0.23-0.29, and
 23 of 64 layouts close in no pose at all. Same verdict, other code: the fold-free posterior line moves the poses from
 the fold column to the skin column.

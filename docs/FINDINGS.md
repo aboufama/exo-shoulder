@@ -618,7 +618,7 @@ docs/concepts/fold-sph3r.md.
   plain 3R (far-end-posterior-3r, 256 configs).
 * **Posterior J1 line** (bvec(-24, 4), fold-free on 100 % of poses with hub 1 in one band): dead in both families - the
   plain 3R (best honest 118.55) and the pin-knee family (64 layouts, best 122.45: fold 6-20 poses instead of 47, but
-  46-69 skin poses of 220, hub 2 / link 2 over the neck and chest). The fold-free posterior layout moves the poses from
+  46-69 skin poses of 220; which part hits was not split per part here, the plain-3R raglan map puts the link rays over the neck and chest). The fold-free posterior layout moves the poses from
   the fold column to the skin column.
 * **Farm detail that wasted a round**: `tools/cloud_run.py batch` jobs must carry `"link": [".cache/concept_bench"]`
   (`sweep` adds it): without it the bench runs the exact path, a pin-knee CMA generation takes 660-1060 s instead of

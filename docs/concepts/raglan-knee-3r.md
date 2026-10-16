@@ -75,7 +75,7 @@ as the map predicts.
 | both links | 8 | 27.22 | 53.48 | link 2's loss dominates |
 | tangent arc r 20 instead of 10 | 4 | 26.03 | | a gentler corner keeps less of the gain |
 | seat jitter (+-4 deg, b3 +-0.06) + random routes | 64 | 33.84 | 56.19 | no seat near k10 is better with routes: the fold rises 47 -> 53-59 poses |
-| posterior J1 line (far-end scan lead: bvec(-24, 4), (-18, 20 / 24), (-30, 8); J3 wdir(80 / 100, -90); arcs 65 / 65, 65 / 75; b3 0 / 0.35; both branches) | 64 | 122.45 | 255.8 | dead: fold 6-20 poses only, but 46-69 skin poses of 220 (hub 2 / link 2 into the neck and chest), in-band 0.17-0.25, contact 0.23-0.29; 23 of 64 close no pose at all |
+| posterior J1 line (far-end scan lead: bvec(-24, 4), (-18, 20 / 24), (-30, 8); J3 wdir(80 / 100, -90); arcs 65 / 65, 65 / 75; b3 0 / 0.35; both branches) | 64 | 122.45 | 255.8 | dead: fold 6-20 poses only, but 46-69 skin poses of 220 (not split per part), in-band 0.17-0.25, contact 0.23-0.29; 23 of 64 close no pose at all |
 
 Best coarse (k for `r1t 0.7, r1d -20`): gap **25.36** (score 90.78), reach 0.7063, follow 0.9667, in-band 14 0.8517,
 in-band 10 0.40, contact 0.0116 - the same 47 fold + 2 skin poses as k10; the whole gain is in band.
@@ -142,7 +142,7 @@ skin motion; the coarse sweep and the steeper turns confirm it: the real gain is
 0.925 -> 0.99 in band), everything above that is dilution, and every link-2 turn loses. Best: 24.79 fast (score 90.99;
 25.89 at fixed part sizes) and 33.10 frozen big exact (33.67 at fixed sizes) against the pin knee's 26.34 / 34.06 on
 the same code. The 90+ bar on the large bench needs +0.28 reach, i.e. the J2 fold - nothing a link's route can move.
-The posterior-J1 seats that remove the fold put hub 2 and link 2 over the neck and chest (best 122.45).
+The posterior-J1 seats that remove the fold lose 46-69 poses to skin instead (best 122.45).
 
 Gate: the comparable history (coarse 177 + 6 local) passes the formula trivially (it is a grid, not a search). The
 first CMA round (27 tries) ran on the exact path (missing cache link) and is logged as not comparable; the second
