@@ -112,7 +112,20 @@
    "L1a": 0.982,
    "L1b": 0.969,
    "L2": 0.749
-  }
+  },
+  "connected": {
+   "full": 18.91,
+   "knn": 21.72,
+   "bench_grid": 43.4,
+   "full_dropped": 0,
+   "knn_dropped": 10,
+   "lead_same_protocol": {
+    "full": 22.82,
+    "knn": 25.63,
+    "bench_grid": 46.09
+   }
+  },
+  "fold_margin": "kit rule (msub, m3e >= 5 deg of th in every taken state, as the lead; physical q2 dowel stops)"
  },
  "control_lead_dyad": {
   "params": {

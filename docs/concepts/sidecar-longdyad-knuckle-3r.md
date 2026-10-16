@@ -246,3 +246,10 @@ so the whole gain is in-band.
    132 are an a2 wall. Gate it law-only first, then CMA on the near-touch gap from A1.
 3. **If the 1-point rule holds against D only marginally (1.06)**, keep A1 as the drive + dyad reference and fold the
    bk2 lever into pick 1's polish as one more free parameter. It is not a separate morphology.
+
+## Continuity (frozen wear, the round-6 verifier's flood fill)
+
+Full grid: 18.91 with 0 poses dropped; every forced (K-open) pose is connected (99 / 99). Nearest-neighbour graph:
+21.72 (10 dropped). Bench grid: 43.40. The lead on the same protocol scores full 22.82, knn 25.63, bench grid 46.09.
+The fold margin follows the kit rule: msub and m3e stay >= 5 deg of th in every taken state, with physical q2
+dowels, as the lead.
