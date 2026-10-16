@@ -170,6 +170,14 @@ def tess(s, fine=True, report=None):
     m = trimesh.Trimesh(np.array([[v.x, v.y, v.z] for v in vs]), np.array(fs), process=False)
     if not fine: return m
     m, wt = judge_close(weld_open(m))
+    if not wt:                                                                             # a T-junction crack in OCC's tessellation (link 2: 71 open
+        for tl, ta in ((0.01, 0.1), (0.03, 0.2), (0.05, 0.25), (0.015, 0.12)):           # edges in one 8 x 6 mm patch): other tolerances
+            vs, fs = s.tessellate(tl, ta)
+            m2, wt2 = judge_close(weld_open(trimesh.Trimesh(np.array([[v.x, v.y, v.z] for v in vs]), np.array(fs), process=False)))
+            if wt2:
+                m, wt = m2, wt2
+                if report is not None: report["tessellation"] = [tl, ta]
+                break
     if report is not None: report["watertight_judge_units"] = wt
     return m
 
