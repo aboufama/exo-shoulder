@@ -7,7 +7,7 @@ focus, fstop); optional mannequin (matte black, smooth head) when the GLB carrie
 
     blender -b -P render_stills.py -- --glb scene.glb --out frames --w 1920 --h 1080 --spp 256 --frames a-b
 """
-import argparse, json, math, os, sys
+import argparse, json, math, os, re, sys
 import bpy
 from mathutils import Vector
 
@@ -16,6 +16,7 @@ ap.add_argument("--glb"); ap.add_argument("--out", default="frames"); ap.add_arg
 ap.add_argument("--spp", type=int, default=256); ap.add_argument("--frames", default="")
 args = ap.parse_args(sys.argv[sys.argv.index("--") + 1:] if "--" in sys.argv else sys.argv[1:])
 here = os.path.dirname(os.path.abspath(args.glb)); FILM = json.load(open(os.path.join(here, "motion.json")))
+LOOK = int(FILM.get("look", 1))      # 1: the gen-3 / gen-4 stills look (default, unchanged); 2: the 2026-10-16 look audit (see below)
 
 bpy.ops.wm.read_factory_settings(use_empty=True); sc = bpy.context.scene
 bpy.ops.import_scene.gltf(filepath=os.path.abspath(args.glb))
@@ -30,6 +31,12 @@ for o in objs:                                                                  
     # crease (dome cap rim, bores, plate edges) average across it and the faces next to it show radial streaks / wavy
     # highlights (the 2026-10-16 stills). The mannequin stays fully smooth.
     if not o.name.lower().startswith("body") and hasattr(o.data, "set_sharp_from_angle"): o.data.set_sharp_from_angle(angle=math.radians(30))
+    # look 2 (motion.json "look": 2, the 2026-10-16 look audit): face-area weighted normals on the exo parts. A STEP
+    # tessellation puts long thin triangles on flat faces next to small fillets / bores; plain vertex normals average the
+    # fillet into the flat face and the flat face shades as a gradient / tile mosaic. Weighted normals keep flat faces flat
+    # and give the curvature to the small faces (the standard CAD-render fix). Sharp edges (> 30 deg) are kept.
+    if LOOK >= 2 and not o.name.lower().startswith("body"):
+        wn = o.modifiers.new("wnormal", "WEIGHTED_NORMAL"); wn.mode = "FACE_AREA"; wn.weight = 50; wn.keep_sharp = True; wn.thresh = 0.01
 
 def principled(name, color, metal, rough, bump=None, coat=0.0):
     m = bpy.data.materials.new(name); m.use_nodes = True; nt = m.node_tree; b = nt.nodes["Principled BSDF"]
@@ -45,7 +52,7 @@ def principled(name, color, metal, rough, bump=None, coat=0.0):
     return m
 # motion.json "blast_rough" overrides the blasted metal roughness (default 0.38): at 0.38 a dome cap facing the camera mirrors
 # the dark studio world and reads near-black (2026-10-16 pin-knee stills); real bead blast is satin, ~0.5.
-alu = principled("blasted", (0.60, 0.615, 0.635), 1.0, float(FILM.get("blast_rough", 0.38)), bump=(9000, 0.18))
+alu = principled("blasted", (0.60, 0.615, 0.635) if LOOK < 2 else (0.50, 0.51, 0.525), 1.0, float(FILM.get("blast_rough", 0.38)), bump=(9000, 0.18))
 stainless = principled("stainless", (0.80, 0.80, 0.81), 1.0, 0.09)
 steel = principled("bearing_steel", (0.82, 0.83, 0.85), 1.0, 0.13)
 iglide = principled("iglide", (0.80, 0.42, 0.03), 0.0, 0.42)
@@ -65,6 +72,10 @@ set_skin(SKIN)
 def mat_for(n):
     l = n.lower()
     if l.startswith("body"): return skin
+    if LOOK >= 2 and re.match(r"^[^|]*\|d\d+-\d+", l): return alu       # our drawing-numbered parts (D8-05 knee link ... "sleeve bores", D8-02b "dowel holes") are blasted metal, whatever their description names
+    if LOOK >= 2 and any(k in l for k in ("iglidur", "igubal", "igus")): return iglide       # igubal housings / balls before "(polished)"
+    if LOOK >= 2 and any(k in l for k in ("mr63", "mr85", "roller")): return steel                 # miniature ball bearings, cam follower
+    if LOOK >= 2 and "(polished)" in l: return stainless                                            # pins, clips, horn screws named polished
     if any(k in l for k in ("din 7984", "iso 10642", "dowel", "screw", "set screw", "din 6799", "e-clip")): return stainless   # every screw / clip polished (user look)
     if "clock spring:" in l or "magnet" in l: return stainless                    # polished spring steel strip, Ni-plated magnets
     if ("bearing" in l and "igus" not in l) or "rsr3" in l: return steel                               # bearings, ground miniature guides
@@ -85,6 +96,12 @@ ramp.color_ramp.elements[0].color = (*bgc[0], 1); ramp.color_ramp.elements[1].co
 nt.links.new(tcw.outputs["Window"], sep.inputs["Vector"]); nt.links.new(sep.outputs["Y"], ramp.inputs["Fac"]); nt.links.new(ramp.outputs["Color"], cam_bg.inputs["Color"])
 lp = nt.nodes.new("ShaderNodeLightPath"); mix = nt.nodes.new("ShaderNodeMixShader")
 nt.links.new(lp.outputs["Is Camera Ray"], mix.inputs["Fac"]); nt.links.new(light_bg.outputs["Background"], mix.inputs[1]); nt.links.new(cam_bg.outputs["Background"], mix.inputs[2])
+if LOOK >= 2:   # metal mirrors its surroundings: a uniform grey world makes blasted Ti read as grey plastic and flat caps as white
+    tcg = nt.nodes.new("ShaderNodeTexCoord"); sg = nt.nodes.new("ShaderNodeSeparateXYZ"); rg = nt.nodes.new("ShaderNodeValToRGB")
+    nt.links.new(tcg.outputs["Generated"], sg.inputs["Vector"]); nt.links.new(sg.outputs["Z"], rg.inputs["Fac"])
+    el = rg.color_ramp.elements; el[0].position = 0.0; el[0].color = (0.16, 0.16, 0.165, 1); el[1].position = 0.8; el[1].color = (0.75, 0.75, 0.76, 1)
+    e2 = el.new(0.25); e2.color = (0.24, 0.24, 0.245, 1)                                       # floor (no black reflections) -> horizon -> bright ceiling
+    nt.links.new(rg.outputs["Color"], light_bg.inputs["Color"]); light_bg.inputs["Strength"].default_value = 0.55
 nt.links.new(mix.outputs["Shader"], outn.inputs["Surface"])
 
 def area(name, size, energy, dirv, dist, centre, color=(1, 1, 1)):
@@ -102,6 +119,11 @@ key = area("key", (0.8 * s, 0.5 * s), 8.0 * s * s, (-0.4, 0.5, 0.9), 0.85 * s, C
 fill = area("fill", (1.2 * s, 0.7 * s), 2.0 * s * s, (0.9, -0.3, 0.25), 1.0 * s, Cb, (0.96, 0.98, 1.0))
 rim = area("rim", (0.2 * s, 1.0 * s), 7.0 * s * s, (-0.6, -0.8, 0.35), 0.8 * s, Cb, (0.92, 0.96, 1.0))
 under = area("under", (0.9 * s, 0.6 * s), 4.0 * s * s, (0.3, 0.4, -0.85), 0.8 * s, Cb, (1.0, 0.98, 0.95))
+if LOOK >= 2:
+    key.data.size, key.data.size_y, key.data.energy = 1.4 * s, 0.9 * s, 6.5 * s * s
+    fill.data.size, fill.data.size_y, fill.data.energy = 1.6 * s, 1.0 * s, 2.4 * s * s
+    rim.data.energy = 9.0 * s * s; under.data.energy = 2.0 * s * s
+    rim2 = area("rim2", (0.25 * s, 1.0 * s), 6.0 * s * s, (0.7, -0.7, 0.45), 0.8 * s, Cb, (1.0, 0.98, 0.95))
 for i, f in enumerate(FILM["frames"]):
     c = f["cam"]; cam.location = to_bl(c["pos"]); tgt.location = to_bl(c["target"])
     cam_d.angle_y = math.radians(c["fov"]); cam_d.dof.focus_distance = c["focus"] / 1000; cam_d.dof.aperture_fstop = c["fstop"]
@@ -125,7 +147,7 @@ sc.cycles.use_denoising = True; sc.cycles.denoiser = "OPTIX" if prefs.compute_de
 sc.cycles.max_bounces = 8; sc.cycles.glossy_bounces = 6; sc.cycles.caustics_reflective = False; sc.cycles.caustics_refractive = False
 sc.render.resolution_x, sc.render.resolution_y, sc.render.resolution_percentage = args.w, args.h, 100; sc.render.fps = FILM.get("fps", 30)
 sc.view_settings.view_transform = "AgX"; sc.view_settings.exposure = FILM.get("exposure", -0.1)
-for look in ("AgX - Medium High Contrast", "Medium High Contrast"):
+for look in (("AgX - Medium High Contrast", "Medium High Contrast") if LOOK < 2 else ("AgX - Base Contrast", "Base Contrast", "None")):
     try: sc.view_settings.look = look; break
     except TypeError: pass
 sc.render.image_settings.file_format = "PNG"; sc.render.image_settings.color_depth = "8"

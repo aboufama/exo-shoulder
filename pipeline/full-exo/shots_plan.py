@@ -92,7 +92,8 @@ for cs in SPEC["cams"]:
     frames.append(dict(cam=dict(pos=(c + d * dist).tolist(), target=c.tolist(), fov=fov, focus=float(dist), fstop=cs.get("fstop", 8.0))))
 ca, ra = B["all"]
 mo = dict(fps=1, body=bool(SPEC.get("body", True)), frames=frames, lights_centre=ca.tolist(), light_scale=max(0.8, ra / 90.0), exposure=SPEC.get("exposure", -0.1))
-if "skin" in SPEC: mo["skin"] = SPEC["skin"]
+for k in ("skin", "look", "blast_rough", "backdrop"):                                 # optional render-look keys, passed through to render_stills.py
+    if k in SPEC: mo[k] = SPEC[k]
 json.dump(mo, open(os.path.join(OUT, "motion.json"), "w"), indent=1)
 print("wrote", OUT, "pose", np.round(fr["p"], 1).tolist(), "chain c/r", np.round(B["chain"][0], 1).tolist(), round(B["chain"][1], 1),
       "all r", round(ra, 1), f"{os.path.getsize(os.path.join(OUT, 'scene.glb')) / 1e6:.1f} MB", "clearance", json.dumps(clr))
