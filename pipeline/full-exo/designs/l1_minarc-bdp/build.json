@@ -415,7 +415,7 @@
      "angle_deg": 0.0,
      "from_stop_lo_deg": 34.469,
      "to_stop_hi_deg": -0.001,
-     "inside": false
+     "inside": true
     },
     "J2": {
      "angle_deg": -3.602,
@@ -525,7 +525,7 @@
      "angle_deg": 0.0,
      "from_stop_lo_deg": 34.469,
      "to_stop_hi_deg": -0.001,
-     "inside": false
+     "inside": true
     },
     "J2": {
      "angle_deg": 5.429,
@@ -635,7 +635,7 @@
      "angle_deg": 0.0,
      "from_stop_lo_deg": 34.469,
      "to_stop_hi_deg": -0.001,
-     "inside": false
+     "inside": true
     },
     "J2": {
      "angle_deg": 38.058,
@@ -745,7 +745,7 @@
      "angle_deg": 0.0,
      "from_stop_lo_deg": 34.469,
      "to_stop_hi_deg": -0.001,
-     "inside": false
+     "inside": true
     },
     "J2": {
      "angle_deg": 14.236,
@@ -757,9 +757,9 @@
   },
   {
    "label": "2nd highest",
-   "bench_pose": 140,
+   "bench_pose": 152,
    "pose": [
-    45.0,
+    60.0,
     165.0,
     -90.0
    ],
@@ -806,12 +806,12 @@
      0.0
     ],
     "knee": [
-     0.0001,
-     0.0001
+     0.0,
+     0.0
     ],
     "L1a": [
      1.6565,
-     1.4675
+     1.4676
     ],
     "L1a outside hub zones": [
      0.0,
@@ -822,7 +822,7 @@
      12
     ],
     "L1b": [
-     0.0975,
+     0.0976,
      0.0972
     ],
     "L1b outside hub zones": [
@@ -830,7 +830,7 @@
      44
     ],
     "L1b hub zones (lifted)": [
-     0.0975,
+     0.0976,
      12
     ],
     "L2": [
@@ -846,21 +846,21 @@
      18
     ]
    },
-   "frame_dev_mm": 5.1e-05,
+   "frame_dev_mm": 5.8e-05,
    "res_deg": 0.0002,
-   "knee_angle": 131.6,
-   "m3e": 21.34,
+   "knee_angle": 149.5,
+   "m3e": 10.19,
    "stops": {
     "K": {
      "angle_deg": 0.0,
      "from_stop_lo_deg": 34.469,
      "to_stop_hi_deg": -0.001,
-     "inside": false
+     "inside": true
     },
     "J2": {
-     "angle_deg": 14.236,
-     "from_stop_lo_deg": 39.215,
-     "to_stop_hi_deg": 86.604,
+     "angle_deg": -9.913,
+     "from_stop_lo_deg": 15.066,
+     "to_stop_hi_deg": 110.753,
      "inside": true
     }
    }
@@ -965,7 +965,7 @@
      "angle_deg": 0.0,
      "from_stop_lo_deg": 34.469,
      "to_stop_hi_deg": -0.001,
-     "inside": false
+     "inside": true
     },
     "J2": {
      "angle_deg": -16.506,
@@ -1075,7 +1075,7 @@
      "angle_deg": 0.0,
      "from_stop_lo_deg": 34.469,
      "to_stop_hi_deg": -0.001,
-     "inside": false
+     "inside": true
     },
     "J2": {
      "angle_deg": -19.534,
@@ -1185,7 +1185,7 @@
      "angle_deg": 0.0,
      "from_stop_lo_deg": 34.469,
      "to_stop_hi_deg": -0.001,
-     "inside": false
+     "inside": true
     },
     "J2": {
      "angle_deg": 76.954,
@@ -1305,5 +1305,149 @@
     }
    }
   }
- ]
+ ],
+ "clips": {
+  "Raise overhead": {
+   "frames": 181,
+   "held": 0,
+   "follow": 1.0,
+   "reasons": {},
+   "adjacent_pairs": {},
+   "min_skin_mm": 0.05,
+   "min_adj_mm": 0.18,
+   "knee_angle": [
+    68.8,
+    113.3
+   ],
+   "knuckle": {
+    "frames_K_open": 0,
+    "dK_max": 0.0
+   }
+  },
+  "Drink from a cup": {
+   "frames": 178,
+   "held": 0,
+   "follow": 1.0,
+   "reasons": {},
+   "adjacent_pairs": {},
+   "min_skin_mm": 2.24,
+   "min_adj_mm": 0.18,
+   "knee_angle": [
+    68.8,
+    70.5
+   ],
+   "knuckle": {
+    "frames_K_open": 0,
+    "dK_max": 0.0
+   }
+  },
+  "Comb hair": {
+   "frames": 202,
+   "held": 0,
+   "follow": 1.0,
+   "reasons": {},
+   "adjacent_pairs": {},
+   "min_skin_mm": 2.0,
+   "min_adj_mm": 0.18,
+   "knee_angle": [
+    68.8,
+    116.5
+   ],
+   "knuckle": {
+    "frames_K_open": 0,
+    "dK_max": 0.0
+   }
+  },
+  "Reach a high shelf": {
+   "frames": 157,
+   "held": 0,
+   "follow": 1.0,
+   "reasons": {},
+   "adjacent_pairs": {},
+   "min_skin_mm": 2.06,
+   "min_adj_mm": 0.18,
+   "knee_angle": [
+    68.8,
+    132.6
+   ],
+   "knuckle": {
+    "frames_K_open": 0,
+    "dK_max": 0.0
+   }
+  },
+  "Wash opposite shoulder": {
+   "frames": 193,
+   "held": 0,
+   "follow": 1.0,
+   "reasons": {},
+   "adjacent_pairs": {},
+   "min_skin_mm": 2.26,
+   "min_adj_mm": 0.18,
+   "knee_angle": [
+    68.8,
+    74.6
+   ],
+   "knuckle": {
+    "frames_K_open": 25,
+    "dK_max": 2.19
+   }
+  },
+  "Reach back pocket": {
+   "frames": 145,
+   "held": 0,
+   "follow": 1.0,
+   "reasons": {},
+   "adjacent_pairs": {},
+   "min_skin_mm": 1.38,
+   "min_adj_mm": 0.18,
+   "knee_angle": [
+    71.0,
+    101.6
+   ],
+   "knuckle": {
+    "frames_K_open": 0,
+    "dK_max": 0.0
+   }
+  },
+  "Wave": {
+   "frames": 172,
+   "held": 0,
+   "follow": 1.0,
+   "reasons": {},
+   "adjacent_pairs": {},
+   "min_skin_mm": 2.12,
+   "min_adj_mm": 0.18,
+   "knee_angle": [
+    68.8,
+    91.9
+   ],
+   "knuckle": {
+    "frames_K_open": 0,
+    "dK_max": 0.0
+   }
+  },
+  "Walking arm swing": {
+   "frames": 109,
+   "held": 0,
+   "follow": 1.0,
+   "reasons": {},
+   "adjacent_pairs": {},
+   "min_skin_mm": 2.37,
+   "min_adj_mm": 0.18,
+   "knee_angle": [
+    68.8,
+    69.5
+   ],
+   "knuckle": {
+    "frames_K_open": 0,
+    "dK_max": 0.0
+   }
+  }
+ },
+ "workspace": {
+  "poses": 1432,
+  "closes": 0.727,
+  "feasible_kin_parts": 0.7186,
+  "forced_feasible": 219
+ }
 }

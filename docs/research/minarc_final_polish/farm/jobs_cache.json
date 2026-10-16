@@ -1,0 +1,226 @@
+[
+ {
+  "cmd": "python3 tools/env_bench.py part env --j0 0 --j1 67 --procs 2",
+  "tag": "ebf-env-0000",
+  "include": [
+   "tools/concept_bench.py",
+   "tools/env_bench.py",
+   "pipeline/avg",
+   "data/raw/split.json",
+   "pipeline/conformal/band_poses_wsf.b64",
+   "docs/research/minarc_final_polish/env_poses.npz"
+  ],
+  "base": false,
+  "env": {
+   "IGL_NUM_THREADS": "1"
+  }
+ },
+ {
+  "cmd": "python3 tools/env_bench.py part env --j0 67 --j1 134 --procs 2",
+  "tag": "ebf-env-0067",
+  "include": [
+   "tools/concept_bench.py",
+   "tools/env_bench.py",
+   "pipeline/avg",
+   "data/raw/split.json",
+   "pipeline/conformal/band_poses_wsf.b64",
+   "docs/research/minarc_final_polish/env_poses.npz"
+  ],
+  "base": false,
+  "env": {
+   "IGL_NUM_THREADS": "1"
+  }
+ },
+ {
+  "cmd": "python3 tools/env_bench.py part env --j0 134 --j1 201 --procs 2",
+  "tag": "ebf-env-0134",
+  "include": [
+   "tools/concept_bench.py",
+   "tools/env_bench.py",
+   "pipeline/avg",
+   "data/raw/split.json",
+   "pipeline/conformal/band_poses_wsf.b64",
+   "docs/research/minarc_final_polish/env_poses.npz"
+  ],
+  "base": false,
+  "env": {
+   "IGL_NUM_THREADS": "1"
+  }
+ },
+ {
+  "cmd": "python3 tools/env_bench.py part env --j0 201 --j1 268 --procs 2",
+  "tag": "ebf-env-0201",
+  "include": [
+   "tools/concept_bench.py",
+   "tools/env_bench.py",
+   "pipeline/avg",
+   "data/raw/split.json",
+   "pipeline/conformal/band_poses_wsf.b64",
+   "docs/research/minarc_final_polish/env_poses.npz"
+  ],
+  "base": false,
+  "env": {
+   "IGL_NUM_THREADS": "1"
+  }
+ },
+ {
+  "cmd": "python3 tools/env_bench.py part env --j0 268 --j1 335 --procs 2",
+  "tag": "ebf-env-0268",
+  "include": [
+   "tools/concept_bench.py",
+   "tools/env_bench.py",
+   "pipeline/avg",
+   "data/raw/split.json",
+   "pipeline/conformal/band_poses_wsf.b64",
+   "docs/research/minarc_final_polish/env_poses.npz"
+  ],
+  "base": false,
+  "env": {
+   "IGL_NUM_THREADS": "1"
+  }
+ },
+ {
+  "cmd": "python3 tools/env_bench.py part env --j0 335 --j1 402 --procs 2",
+  "tag": "ebf-env-0335",
+  "include": [
+   "tools/concept_bench.py",
+   "tools/env_bench.py",
+   "pipeline/avg",
+   "data/raw/split.json",
+   "pipeline/conformal/band_poses_wsf.b64",
+   "docs/research/minarc_final_polish/env_poses.npz"
+  ],
+  "base": false,
+  "env": {
+   "IGL_NUM_THREADS": "1"
+  }
+ },
+ {
+  "cmd": "python3 tools/env_bench.py part env --j0 402 --j1 469 --procs 2",
+  "tag": "ebf-env-0402",
+  "include": [
+   "tools/concept_bench.py",
+   "tools/env_bench.py",
+   "pipeline/avg",
+   "data/raw/split.json",
+   "pipeline/conformal/band_poses_wsf.b64",
+   "docs/research/minarc_final_polish/env_poses.npz"
+  ],
+  "base": false,
+  "env": {
+   "IGL_NUM_THREADS": "1"
+  }
+ },
+ {
+  "cmd": "python3 tools/env_bench.py part env --j0 469 --j1 530 --procs 2",
+  "tag": "ebf-env-0469",
+  "include": [
+   "tools/concept_bench.py",
+   "tools/env_bench.py",
+   "pipeline/avg",
+   "data/raw/split.json",
+   "pipeline/conformal/band_poses_wsf.b64",
+   "docs/research/minarc_final_polish/env_poses.npz"
+  ],
+  "base": false,
+  "env": {
+   "IGL_NUM_THREADS": "1"
+  }
+ },
+ {
+  "cmd": "python3 tools/env_bench.py part envsel --j0 0 --j1 79 --procs 2",
+  "tag": "ebf-envsel-0000",
+  "include": [
+   "tools/concept_bench.py",
+   "tools/env_bench.py",
+   "pipeline/avg",
+   "data/raw/split.json",
+   "pipeline/conformal/band_poses_wsf.b64",
+   "docs/research/minarc_final_polish/env_poses.npz"
+  ],
+  "base": false,
+  "env": {
+   "IGL_NUM_THREADS": "1"
+  }
+ },
+ {
+  "cmd": "python3 tools/env_bench.py part envsel --j0 79 --j1 158 --procs 2",
+  "tag": "ebf-envsel-0079",
+  "include": [
+   "tools/concept_bench.py",
+   "tools/env_bench.py",
+   "pipeline/avg",
+   "data/raw/split.json",
+   "pipeline/conformal/band_poses_wsf.b64",
+   "docs/research/minarc_final_polish/env_poses.npz"
+  ],
+  "base": false,
+  "env": {
+   "IGL_NUM_THREADS": "1"
+  }
+ },
+ {
+  "cmd": "python3 tools/env_bench.py part envsel --j0 158 --j1 237 --procs 2",
+  "tag": "ebf-envsel-0158",
+  "include": [
+   "tools/concept_bench.py",
+   "tools/env_bench.py",
+   "pipeline/avg",
+   "data/raw/split.json",
+   "pipeline/conformal/band_poses_wsf.b64",
+   "docs/research/minarc_final_polish/env_poses.npz"
+  ],
+  "base": false,
+  "env": {
+   "IGL_NUM_THREADS": "1"
+  }
+ },
+ {
+  "cmd": "python3 tools/env_bench.py part envsel --j0 237 --j1 316 --procs 2",
+  "tag": "ebf-envsel-0237",
+  "include": [
+   "tools/concept_bench.py",
+   "tools/env_bench.py",
+   "pipeline/avg",
+   "data/raw/split.json",
+   "pipeline/conformal/band_poses_wsf.b64",
+   "docs/research/minarc_final_polish/env_poses.npz"
+  ],
+  "base": false,
+  "env": {
+   "IGL_NUM_THREADS": "1"
+  }
+ },
+ {
+  "cmd": "python3 tools/env_bench.py part envsel --j0 316 --j1 395 --procs 2",
+  "tag": "ebf-envsel-0316",
+  "include": [
+   "tools/concept_bench.py",
+   "tools/env_bench.py",
+   "pipeline/avg",
+   "data/raw/split.json",
+   "pipeline/conformal/band_poses_wsf.b64",
+   "docs/research/minarc_final_polish/env_poses.npz"
+  ],
+  "base": false,
+  "env": {
+   "IGL_NUM_THREADS": "1"
+  }
+ },
+ {
+  "cmd": "python3 tools/env_bench.py part envsel --j0 395 --j1 470 --procs 2",
+  "tag": "ebf-envsel-0395",
+  "include": [
+   "tools/concept_bench.py",
+   "tools/env_bench.py",
+   "pipeline/avg",
+   "data/raw/split.json",
+   "pipeline/conformal/band_poses_wsf.b64",
+   "docs/research/minarc_final_polish/env_poses.npz"
+  ],
+  "base": false,
+  "env": {
+   "IGL_NUM_THREADS": "1"
+  }
+ }
+]
