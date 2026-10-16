@@ -198,3 +198,58 @@ data points to is not on link 2: the high side of the window (71 verification po
 LONGER when theta is large, which this dwell cannot give; the round-4 "rocker on J1 driven by the J1-J3 angle" hope is
 the remaining kinematic route, and it must keep hub 2 within the band (the DP of the ideation and limiter 2 here say
 the band, not the kinematics, is the binding constraint).
+
+## Verification (2026-10-16 06:25 UTC, independent verifier)
+
+Harness: `docs/concepts/verify/dwell-fourbar-knee-3r.py` (imports the model; numbers in
+`docs/concepts/verify/dwell-fourbar-knee-3r_big_frozen.json`). Configuration: the CMA D best from the row, under the
+2026-10-16 rulings (O20 J2 / J3, O10 MR63ZZ passive pins, fold margin 5). Protocol: the model's frozen shape - fit on
+Bench(60,160) fast, every underside / post frozen, worn on **Bench(110,360) exact** (CB_EXACT=1) with K6 at 1 mm. Run on
+the farm (3 jobs, 147-223 s each).
+
+What was checked, and what the verifier changed:
+
+1. **Active DOF / R17.** 6 bodies, 6 revolutes on a sphere: M = 3. J1, J2 (the crank) and J3 are active; the knee K and the
+   pins P, Q follow from q2 through the closure (one branch, chosen by `sgn`, with transmission angles >= 33 deg at Q and
+   >= 21 deg at K over the taken poses). No passive coordinate is undetermined; 0 passive translations. Passes.
+2. **Independent closure (added).** Per pose, every rigid body keeps its axis angles from the rest configuration: link 1
+   {J1, J2, P}, L2a {J2, K}, rocker {P, Q}, L2b {K, Q, J3}. Max error over the taken poses: **0.000 deg**, 0 poses
+   dropped. The closed-form residual is 0.020 deg. Passes.
+3. **K6 exemption at the pins (corrected).** The kit exempts samples within HUB_R + 2 = 12 mm of a SHARED joint axis.
+   That is sized for an O20 hub. At the O10 pins it hid 7 mm of strap overlap around P, K and Q (rocker vs L2b's
+   straps, link 1 vs the rocker). The verifier exempts only rpin + 2 = 7 mm at the pins and 12 mm at the hubs, in the
+   fit (`over` lifts) and in the check. Effect: K6-rejected poses 4.8 % -> 7.3 %.
+4. **Real parts and sampling.** O20 x 12.25 hubs with crowns and walls. O10 pin posts raised to the strap ends they carry:
+   pin P 24.5 mm tall, K 19.6 mm, Q 18.3 mm (post_lift 18.1 / 13.1 / 11.8). These are tall standoffs on a 3 mm shaft;
+   they are buildable, but the stiffness of the standoffs has not been checked. The 12 x 3 / 8 x 3 straps are dense on
+   the 2 mm grid, and the audit is clean. Continuity: 0 flips. Held-out clips: none. The J1 seat (az 97.8, el 65.3,
+   anterior component 0.06) obeys ruling 4 (back / acromion top).
+5. **Bench artefact.** The fit-bench number (30.46 fast) reproduces exactly. The exact path is used for the claim.
+
+| reading (Bench(110,360) exact, frozen) | gap | score | reach | follow | in-band 14 | in-band 10 | contact | near-touch gap (< 1 mm = contact) | min metal | overhead >= 140 reach / ib14 |
+|---|---|---|---|---|---|---|---|---|---|---|
+| **CMA D, verifier checks** | **37.66** | 86.3 | 0.644 | 1.000 | 0.788 | 0.380 | 0.009 | 43.33 | 0.09 mm | 0.21 / 0.80 |
+| CMA D, the model's own checks | 36.13 | 86.9 | 0.664 | 1.000 | 0.789 | 0.380 | 0.014 | 41.74 | 0.09 mm | 0.21 / 0.80 |
+| its locked control at the D seats (verifier checks) | 64.49 | 76.5 | 0.511 | 0.782 | 0.838 | 0.453 | 0.025 | 74.89 | 0.12 mm | 0.11 / 0.93 |
+| champion spherical 3R (same protocol family; risley-turret / osn verifiers) | 66.97-75.94 | | | | | | | | | |
+| leader skin-normal-3r-pin-knee k4598 (verified) | 30.35 | 89.0 | 0.606 | 1.000 | 0.904 | 0.538 | 0.009 | 38.41 | | 0.25 / |
+
+**Verdict: VERIFIED at 37.66 (score 86.3), NOT refuted.** It beats the champion on the same bench by 29-38 points, and
+no hard rule is broken under the pin-size reading the verified leader also uses (a passive knee pin is a catalogue
+pin, not an O20 hub). It is not a contender, though:
+
+- **7.3 points behind the leader** (30.35), and above the ~37 dead line the screening agent set for frozen D.
+- **In-band is the limiter, not reach.** In-band is 0.788: rocker 0.28, L2b tail 0.45, L2b strap 0.61, all because the
+  pin posts stand 12-18 mm tall to carry the rocker over hub 2's crown.
+- **Overhead.** Reach at elevation >= 140 is still 0.21: 22 of 28 workspace poses are lost, the same as the plain 3R
+  family. The kinematic reach on Bench(110,360) is 0.728, and the window [30.9, 107.5] does not reach the p95 demand
+  of 142.5 deg.
+- **Near-touch.** Min metal-skin distance is 0.09 mm (#257, plane 30 elev 90). Counting metal < 1 mm as contact gives
+  43.33.
+- **The loop does pay at these seats.** It is 26.8 points better than its own lock (64.49), but those seats were tuned
+  for the loop. The best lock-family number at other seats is 37.11 (c42 seats, old rules), so the loop's net gain
+  over the family is about 0.
+
+Open risk, not counted: if the user's "O20 at every joint" covers passive pins too, this is 275 (the screen measured it).
+The leader's knee pins are in the same position. A spherical four-pin loop is overconstrained in space (Kutzbach
+M = -3): it needs axis concurrency within about 0.2 deg, or a U-S rocker.

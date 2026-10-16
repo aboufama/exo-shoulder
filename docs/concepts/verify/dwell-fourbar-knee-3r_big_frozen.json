@@ -1,0 +1,1431 @@
+{
+ "verifier_checks": {
+  "model": "docs/concepts/models/dwell-fourbar-knee-3r.py",
+  "params": {
+   "az": 97.7506,
+   "el": 65.294,
+   "a1": 38.0901,
+   "a2": 74.2679,
+   "wd": 90.0506,
+   "wa": -9.2038,
+   "margin": 5.0,
+   "width": 12.0,
+   "t_link": 3.0,
+   "q": 0.9629,
+   "rad1": 10.0,
+   "rad2": 10.0,
+   "rad3": 10.0,
+   "end_extra": 0.0,
+   "b": 40.787,
+   "chi": 6.5374,
+   "gP": 22.4391,
+   "phP": 28.4902,
+   "k": 18.7416,
+   "alq": -141.0145,
+   "sref": 196.2443,
+   "rpin": 5.0,
+   "pin_t": 6.5,
+   "w_rock": 8.0,
+   "tq_lo": 30.0,
+   "tk_lo": 20.0,
+   "lock": 0,
+   "near": 0,
+   "ov": 1
+  },
+  "overlap": 1.0,
+  "exact": true,
+  "runs": {
+   "fit": {
+    "reach": 0.6937,
+    "follow": 1.0,
+    "inband14": 0.7866,
+    "inband10": 0.376,
+    "contact": 0.0116,
+    "poses": {
+     "clip": 60,
+     "ws": 160
+    },
+    "mode": "fast",
+    "gap": 33.13,
+    "inband_member": {
+     "hub1": 0.9988,
+     "hub2": 0.9718,
+     "hub3": 0.8144,
+     "pinP": 0.9857,
+     "pinK": 0.934,
+     "pinQ": 0.9724,
+     "link1": 0.9829,
+     "link1p": 0.9673,
+     "neck": 0.8105,
+     "L2a": 0.8646,
+     "rocker": 0.2816,
+     "L2bJ": 0.5992,
+     "L2bQ": 0.4337
+    },
+    "mass_g": 146.7,
+    "mass_g_strap55": 173.7,
+    "closure": 0.8455,
+    "flips": 0,
+    "collide": 0.0699,
+    "q": 0.9629,
+    "kmode": "march",
+    "residual_deg": 0.01894,
+    "window": [
+     30.91,
+     107.53
+    ],
+    "piece": [
+     176.75,
+     329.75
+    ],
+    "rocker_arc": 46.6,
+    "knee_range": [
+     -180.0,
+     179.8
+    ],
+    "a2eff_range": [
+     68.5,
+     74.7
+    ],
+    "tq_min": 33.0,
+    "tk_min": 21.4,
+    "bodies": [
+     [
+      "link1",
+      "link1p"
+     ],
+     [
+      "L2bJ",
+      "L2bQ"
+     ]
+    ],
+    "flat": {
+     "hub1": [
+      10.0,
+      12.25,
+      12.25
+     ],
+     "hub2": [
+      10.0,
+      13.099999999939733,
+      12.25
+     ],
+     "hub3": [
+      10.0,
+      15.25,
+      12.25
+     ],
+     "pinP": [
+      5.0,
+      24.546927328509447,
+      6.5
+     ],
+     "pinK": [
+      5.0,
+      19.546927328433654,
+      6.5
+     ],
+     "pinQ": [
+      5.0,
+      18.273927328433686,
+      6.5
+     ]
+    },
+    "hold_rest": true,
+    "verifier_closure_max_deg": 0.0,
+    "verifier_closure_bad": 0,
+    "post_lift": {
+     "hub2": 0.85,
+     "pinP": 18.05,
+     "hub3": 3.0,
+     "pinK": 13.05,
+     "pinQ": 11.77
+    },
+    "honest": true,
+    "audit": [],
+    "sample_mm": {
+     "hub1": 2.0,
+     "hub2": 2.0,
+     "hub3": 2.0,
+     "pinP": 1.25,
+     "pinK": 1.25,
+     "pinQ": 1.25,
+     "link1": 1.55,
+     "link1p": 1.67,
+     "neck": 2.26,
+     "L2a": 1.8,
+     "rocker": 2.05,
+     "L2bJ": 1.89,
+     "L2bQ": 1.93
+    },
+    "hubless": [],
+    "declared_hubs": {
+     "P": {
+      "member": "pinP",
+      "rad": 5.0,
+      "component": "passive pin: MR63ZZ pair (3 x 6 x 2.5) in an O10 Ti boss, two 3 mm plates, 6.5 mm stack (catalogue: passive pin)",
+      "cover": 0.975,
+      "reach": 5.0
+     },
+     "K": {
+      "member": "pinK",
+      "rad": 5.0,
+      "component": "passive pin: MR63ZZ pair (3 x 6 x 2.5) in an O10 Ti boss, two 3 mm plates, 6.5 mm stack (catalogue: passive pin)",
+      "cover": 0.975,
+      "reach": 5.0
+     },
+     "Q": {
+      "member": "pinQ",
+      "rad": 5.0,
+      "component": "passive pin: MR63ZZ pair (3 x 6 x 2.5) in an O10 Ti boss, two 3 mm plates, 6.5 mm stack (catalogue: passive pin)",
+      "cover": 0.975,
+      "reach": 5.0
+     }
+    },
+    "crown_contact_poses": 0,
+    "crown_min": 1.43,
+    "min_metal_skin": 0.37,
+    "near_low": [
+     {
+      "mm": 0.37,
+      "i": 91,
+      "kind": "ws",
+      "plane": -15.0,
+      "elev": 75.0,
+      "axial": 90.0,
+      "crown": "face"
+     },
+     {
+      "mm": 0.48,
+      "i": 136,
+      "kind": "ws",
+      "plane": 45.0,
+      "elev": 75.0,
+      "axial": 45.0,
+      "crown": "face"
+     },
+     {
+      "mm": 0.66,
+      "i": 98,
+      "kind": "ws",
+      "plane": 0.0,
+      "elev": 60.0,
+      "axial": -60.0,
+      "crown": "face"
+     },
+     {
+      "mm": 0.75,
+      "i": 150,
+      "kind": "ws",
+      "plane": 60.0,
+      "elev": 120.0,
+      "axial": -90.0,
+      "crown": "face"
+     },
+     {
+      "mm": 1.05,
+      "i": 138,
+      "kind": "ws",
+      "plane": 45.0,
+      "elev": 120.0,
+      "axial": -90.0,
+      "crown": "face"
+     }
+    ],
+    "gap_near1": 37.94,
+    "near1": {
+     "reach": 0.6687,
+     "follow": 1.0,
+     "inband14": 0.7866,
+     "contact": 0.0347
+    },
+    "overhead": {
+     "n_ws": 12,
+     "reach": 0.0,
+     "n_clip": 5,
+     "follow": 1.0,
+     "n_taken": 5,
+     "inband14": 0.7919
+    },
+    "stack_mismatch": {
+     "link1@hub1": 0.0,
+     "link1@hub2": 0.0,
+     "link1p@hub2": 0.0,
+     "link1p@pinP": 2.81,
+     "neck@hub3": 3.0,
+     "L2a@hub2": 0.85,
+     "L2a@pinK": 0.0,
+     "rocker@pinP": 18.05,
+     "rocker@pinQ": 4.0,
+     "L2bJ@pinK": 0.0,
+     "L2bJ@hub3": 0.0,
+     "L2bQ@pinK": 13.05,
+     "L2bQ@pinQ": 11.77
+    },
+    "th_need": {
+     "p5": 25.3,
+     "p95": 129.0,
+     "kin_reach": 0.7875
+    },
+    "bench": [
+     60,
+     160
+    ]
+   },
+   "frozen": {
+    "reach": 0.6444,
+    "follow": 1.0,
+    "inband14": 0.7877,
+    "inband10": 0.3801,
+    "contact": 0.0087,
+    "poses": {
+     "clip": 110,
+     "ws": 360
+    },
+    "mode": "exact",
+    "gap": 37.66,
+    "inband_member": {
+     "hub1": 0.9979,
+     "hub2": 0.9709,
+     "hub3": 0.8135,
+     "pinP": 0.98,
+     "pinK": 0.9388,
+     "pinQ": 0.9788,
+     "link1": 0.9832,
+     "link1p": 0.9645,
+     "neck": 0.8083,
+     "L2a": 0.8646,
+     "rocker": 0.2829,
+     "L2bJ": 0.6059,
+     "L2bQ": 0.4474
+    },
+    "mass_g": 146.7,
+    "mass_g_strap55": 173.7,
+    "closure": 0.7915,
+    "flips": 0,
+    "collide": 0.0726,
+    "q": 0.9629,
+    "kmode": "march",
+    "residual_deg": 0.01987,
+    "window": [
+     30.91,
+     107.53
+    ],
+    "piece": [
+     176.75,
+     329.75
+    ],
+    "rocker_arc": 46.6,
+    "knee_range": [
+     -180.0,
+     179.9
+    ],
+    "a2eff_range": [
+     68.5,
+     74.7
+    ],
+    "tq_min": 33.2,
+    "tk_min": 21.4,
+    "bodies": [
+     [
+      "link1",
+      "link1p"
+     ],
+     [
+      "L2bJ",
+      "L2bQ"
+     ]
+    ],
+    "flat": {
+     "hub1": [
+      10.0,
+      12.25,
+      12.25
+     ],
+     "hub2": [
+      10.0,
+      13.099999999939733,
+      12.25
+     ],
+     "hub3": [
+      10.0,
+      15.25,
+      12.25
+     ],
+     "pinP": [
+      5.0,
+      24.546927328509447,
+      6.5
+     ],
+     "pinK": [
+      5.0,
+      19.546927328433654,
+      6.5
+     ],
+     "pinQ": [
+      5.0,
+      18.273927328433686,
+      6.5
+     ]
+    },
+    "hold_rest": true,
+    "verifier_closure_max_deg": 0.0,
+    "verifier_closure_bad": 0,
+    "post_lift": {
+     "hub2": 0.85,
+     "pinP": 18.05,
+     "hub3": 3.0,
+     "pinK": 13.05,
+     "pinQ": 11.77
+    },
+    "honest": true,
+    "audit": [],
+    "sample_mm": {
+     "hub1": 2.0,
+     "hub2": 2.0,
+     "hub3": 2.0,
+     "pinP": 1.25,
+     "pinK": 1.25,
+     "pinQ": 1.25,
+     "link1": 1.55,
+     "link1p": 1.67,
+     "neck": 2.26,
+     "L2a": 1.8,
+     "rocker": 2.05,
+     "L2bJ": 1.89,
+     "L2bQ": 1.93
+    },
+    "hubless": [],
+    "declared_hubs": {
+     "P": {
+      "member": "pinP",
+      "rad": 5.0,
+      "component": "passive pin: MR63ZZ pair (3 x 6 x 2.5) in an O10 Ti boss, two 3 mm plates, 6.5 mm stack (catalogue: passive pin)",
+      "cover": 0.975,
+      "reach": 5.0
+     },
+     "K": {
+      "member": "pinK",
+      "rad": 5.0,
+      "component": "passive pin: MR63ZZ pair (3 x 6 x 2.5) in an O10 Ti boss, two 3 mm plates, 6.5 mm stack (catalogue: passive pin)",
+      "cover": 0.975,
+      "reach": 5.0
+     },
+     "Q": {
+      "member": "pinQ",
+      "rad": 5.0,
+      "component": "passive pin: MR63ZZ pair (3 x 6 x 2.5) in an O10 Ti boss, two 3 mm plates, 6.5 mm stack (catalogue: passive pin)",
+      "cover": 0.975,
+      "reach": 5.0
+     }
+    },
+    "crown_contact_poses": 0,
+    "crown_min": 0.14,
+    "min_metal_skin": 0.09,
+    "near_low": [
+     {
+      "mm": 0.09,
+      "i": 257,
+      "kind": "ws",
+      "plane": 30.0,
+      "elev": 90.0,
+      "axial": 30.0,
+      "crown": "face"
+     },
+     {
+      "mm": 0.14,
+      "i": 234,
+      "kind": "ws",
+      "plane": 15.0,
+      "elev": 135.0,
+      "axial": -60.0,
+      "crown": "pinQ"
+     },
+     {
+      "mm": 0.18,
+      "i": 180,
+      "kind": "ws",
+      "plane": -15.0,
+      "elev": 75.0,
+      "axial": 90.0,
+      "crown": "face"
+     },
+     {
+      "mm": 0.21,
+      "i": 139,
+      "kind": "ws",
+      "plane": -60.0,
+      "elev": 60.0,
+      "axial": 105.0,
+      "crown": "face"
+     },
+     {
+      "mm": 0.37,
+      "i": 279,
+      "kind": "ws",
+      "plane": 45.0,
+      "elev": 75.0,
+      "axial": -105.0,
+      "crown": "face"
+     }
+    ],
+    "gap_near1": 43.33,
+    "near1": {
+     "reach": 0.6167,
+     "follow": 1.0,
+     "inband14": 0.7877,
+     "contact": 0.0377
+    },
+    "overhead": {
+     "n_ws": 28,
+     "reach": 0.2143,
+     "n_clip": 10,
+     "follow": 1.0,
+     "n_taken": 16,
+     "inband14": 0.8009
+    },
+    "stack_mismatch": {
+     "link1@hub1": 0.0,
+     "link1@hub2": 0.0,
+     "link1p@hub2": 0.0,
+     "link1p@pinP": 2.81,
+     "neck@hub3": 3.0,
+     "L2a@hub2": 0.85,
+     "L2a@pinK": 0.0,
+     "rocker@pinP": 18.05,
+     "rocker@pinQ": 4.0,
+     "L2bJ@pinK": 0.0,
+     "L2bJ@hub3": 0.0,
+     "L2bQ@pinK": 13.05,
+     "L2bQ@pinQ": 11.77
+    },
+    "th_need": {
+     "p5": 24.6,
+     "p95": 142.5,
+     "kin_reach": 0.7278
+    },
+    "bench": [
+     110,
+     360
+    ],
+    "secs": 144.8
+   }
+  },
+  "verifier": {
+   "own_checks_only": false,
+   "exempt_pin_mm": 7.0,
+   "exempt_hub_mm": 12.0,
+   "closure_max_deg": 0.0,
+   "closure_bad_last": 0,
+   "fold_margin": 5.0,
+   "o20_only": true
+  }
+ },
+ "model_own_checks": {
+  "model": "docs/concepts/models/dwell-fourbar-knee-3r.py",
+  "params": {
+   "az": 97.7506,
+   "el": 65.294,
+   "a1": 38.0901,
+   "a2": 74.2679,
+   "wd": 90.0506,
+   "wa": -9.2038,
+   "margin": 5.0,
+   "width": 12.0,
+   "t_link": 3.0,
+   "q": 0.9629,
+   "rad1": 10.0,
+   "rad2": 10.0,
+   "rad3": 10.0,
+   "end_extra": 0.0,
+   "b": 40.787,
+   "chi": 6.5374,
+   "gP": 22.4391,
+   "phP": 28.4902,
+   "k": 18.7416,
+   "alq": -141.0145,
+   "sref": 196.2443,
+   "rpin": 5.0,
+   "pin_t": 6.5,
+   "w_rock": 8.0,
+   "tq_lo": 30.0,
+   "tk_lo": 20.0,
+   "lock": 0,
+   "near": 0,
+   "ov": 1
+  },
+  "overlap": 1.0,
+  "exact": true,
+  "runs": {
+   "fit": {
+    "reach": 0.7063,
+    "follow": 1.0,
+    "inband14": 0.7879,
+    "inband10": 0.3763,
+    "contact": 0.0114,
+    "poses": {
+     "clip": 60,
+     "ws": 160
+    },
+    "mode": "fast",
+    "gap": 31.72,
+    "inband_member": {
+     "hub1": 0.9988,
+     "hub2": 0.9718,
+     "hub3": 0.8144,
+     "pinP": 0.9857,
+     "pinK": 0.934,
+     "pinQ": 0.9724,
+     "link1": 0.9829,
+     "link1p": 0.9673,
+     "neck": 0.8105,
+     "L2a": 0.8646,
+     "rocker": 0.2816,
+     "L2bJ": 0.5992,
+     "L2bQ": 0.4554
+    },
+    "mass_g": 146.7,
+    "mass_g_strap55": 173.7,
+    "closure": 0.8455,
+    "flips": 0,
+    "collide": 0.0591,
+    "q": 0.9629,
+    "kmode": "march",
+    "residual_deg": 0.01894,
+    "window": [
+     30.91,
+     107.53
+    ],
+    "piece": [
+     176.75,
+     329.75
+    ],
+    "rocker_arc": 46.6,
+    "knee_range": [
+     -180.0,
+     179.8
+    ],
+    "a2eff_range": [
+     68.5,
+     74.7
+    ],
+    "tq_min": 33.0,
+    "tk_min": 21.4,
+    "bodies": [
+     [
+      "link1",
+      "link1p"
+     ],
+     [
+      "L2bJ",
+      "L2bQ"
+     ]
+    ],
+    "flat": {
+     "hub1": [
+      10.0,
+      12.25,
+      12.25
+     ],
+     "hub2": [
+      10.0,
+      13.099999999939733,
+      12.25
+     ],
+     "hub3": [
+      10.0,
+      15.25,
+      12.25
+     ],
+     "pinP": [
+      5.0,
+      24.546927328509447,
+      6.5
+     ],
+     "pinK": [
+      5.0,
+      19.546927328433654,
+      6.5
+     ],
+     "pinQ": [
+      5.0,
+      18.273927328433686,
+      6.5
+     ]
+    },
+    "hold_rest": true,
+    "post_lift": {
+     "hub2": 0.85,
+     "pinP": 18.05,
+     "hub3": 3.0,
+     "pinK": 13.05,
+     "pinQ": 11.77
+    },
+    "honest": true,
+    "audit": [],
+    "sample_mm": {
+     "hub1": 2.0,
+     "hub2": 2.0,
+     "hub3": 2.0,
+     "pinP": 1.25,
+     "pinK": 1.25,
+     "pinQ": 1.25,
+     "link1": 1.55,
+     "link1p": 1.67,
+     "neck": 2.26,
+     "L2a": 1.8,
+     "rocker": 2.05,
+     "L2bJ": 1.89,
+     "L2bQ": 1.93
+    },
+    "hubless": [],
+    "declared_hubs": {
+     "P": {
+      "member": "pinP",
+      "rad": 5.0,
+      "component": "passive pin: MR63ZZ pair (3 x 6 x 2.5) in an O10 Ti boss, two 3 mm plates, 6.5 mm stack (catalogue: passive pin)",
+      "cover": 0.975,
+      "reach": 5.0
+     },
+     "K": {
+      "member": "pinK",
+      "rad": 5.0,
+      "component": "passive pin: MR63ZZ pair (3 x 6 x 2.5) in an O10 Ti boss, two 3 mm plates, 6.5 mm stack (catalogue: passive pin)",
+      "cover": 0.975,
+      "reach": 5.0
+     },
+     "Q": {
+      "member": "pinQ",
+      "rad": 5.0,
+      "component": "passive pin: MR63ZZ pair (3 x 6 x 2.5) in an O10 Ti boss, two 3 mm plates, 6.5 mm stack (catalogue: passive pin)",
+      "cover": 0.975,
+      "reach": 5.0
+     }
+    },
+    "crown_contact_poses": 0,
+    "crown_min": 1.43,
+    "min_metal_skin": 0.37,
+    "near_low": [
+     {
+      "mm": 0.37,
+      "i": 91,
+      "kind": "ws",
+      "plane": -15.0,
+      "elev": 75.0,
+      "axial": 90.0,
+      "crown": "face"
+     },
+     {
+      "mm": 0.48,
+      "i": 136,
+      "kind": "ws",
+      "plane": 45.0,
+      "elev": 75.0,
+      "axial": 45.0,
+      "crown": "face"
+     },
+     {
+      "mm": 0.63,
+      "i": 155,
+      "kind": "ws",
+      "plane": 75.0,
+      "elev": 30.0,
+      "axial": -135.0,
+      "crown": "face"
+     },
+     {
+      "mm": 0.66,
+      "i": 98,
+      "kind": "ws",
+      "plane": 0.0,
+      "elev": 60.0,
+      "axial": -60.0,
+      "crown": "face"
+     },
+     {
+      "mm": 0.75,
+      "i": 150,
+      "kind": "ws",
+      "plane": 60.0,
+      "elev": 120.0,
+      "axial": -90.0,
+      "crown": "face"
+     }
+    ],
+    "gap_near1": 37.71,
+    "near1": {
+     "reach": 0.675,
+     "follow": 1.0,
+     "inband14": 0.7879,
+     "contact": 0.04
+    },
+    "overhead": {
+     "n_ws": 12,
+     "reach": 0.0,
+     "n_clip": 5,
+     "follow": 1.0,
+     "n_taken": 5,
+     "inband14": 0.7933
+    },
+    "stack_mismatch": {
+     "link1@hub1": 0.0,
+     "link1@hub2": 0.0,
+     "link1p@hub2": 0.0,
+     "link1p@pinP": 2.81,
+     "neck@hub3": 3.0,
+     "L2a@hub2": 0.85,
+     "L2a@pinK": 0.0,
+     "rocker@pinP": 18.05,
+     "rocker@pinQ": 4.0,
+     "L2bJ@pinK": 0.0,
+     "L2bJ@hub3": 0.0,
+     "L2bQ@pinK": 13.05,
+     "L2bQ@pinQ": 11.77
+    },
+    "th_need": {
+     "p5": 25.3,
+     "p95": 129.0,
+     "kin_reach": 0.7875
+    },
+    "bench": [
+     60,
+     160
+    ]
+   },
+   "frozen": {
+    "reach": 0.6639,
+    "follow": 1.0,
+    "inband14": 0.7889,
+    "inband10": 0.3804,
+    "contact": 0.0141,
+    "poses": {
+     "clip": 110,
+     "ws": 360
+    },
+    "mode": "exact",
+    "gap": 36.13,
+    "inband_member": {
+     "hub1": 0.9979,
+     "hub2": 0.9709,
+     "hub3": 0.8135,
+     "pinP": 0.98,
+     "pinK": 0.9388,
+     "pinQ": 0.9788,
+     "link1": 0.9832,
+     "link1p": 0.9645,
+     "neck": 0.8083,
+     "L2a": 0.8646,
+     "rocker": 0.2829,
+     "L2bJ": 0.6059,
+     "L2bQ": 0.4677
+    },
+    "mass_g": 146.7,
+    "mass_g_strap55": 173.7,
+    "closure": 0.7915,
+    "flips": 0,
+    "collide": 0.0484,
+    "q": 0.9629,
+    "kmode": "march",
+    "residual_deg": 0.01987,
+    "window": [
+     30.91,
+     107.53
+    ],
+    "piece": [
+     176.75,
+     329.75
+    ],
+    "rocker_arc": 46.6,
+    "knee_range": [
+     -180.0,
+     179.9
+    ],
+    "a2eff_range": [
+     68.5,
+     74.7
+    ],
+    "tq_min": 33.2,
+    "tk_min": 21.4,
+    "bodies": [
+     [
+      "link1",
+      "link1p"
+     ],
+     [
+      "L2bJ",
+      "L2bQ"
+     ]
+    ],
+    "flat": {
+     "hub1": [
+      10.0,
+      12.25,
+      12.25
+     ],
+     "hub2": [
+      10.0,
+      13.099999999939733,
+      12.25
+     ],
+     "hub3": [
+      10.0,
+      15.25,
+      12.25
+     ],
+     "pinP": [
+      5.0,
+      24.546927328509447,
+      6.5
+     ],
+     "pinK": [
+      5.0,
+      19.546927328433654,
+      6.5
+     ],
+     "pinQ": [
+      5.0,
+      18.273927328433686,
+      6.5
+     ]
+    },
+    "hold_rest": true,
+    "post_lift": {
+     "hub2": 0.85,
+     "pinP": 18.05,
+     "hub3": 3.0,
+     "pinK": 13.05,
+     "pinQ": 11.77
+    },
+    "honest": true,
+    "audit": [],
+    "sample_mm": {
+     "hub1": 2.0,
+     "hub2": 2.0,
+     "hub3": 2.0,
+     "pinP": 1.25,
+     "pinK": 1.25,
+     "pinQ": 1.25,
+     "link1": 1.55,
+     "link1p": 1.67,
+     "neck": 2.26,
+     "L2a": 1.8,
+     "rocker": 2.05,
+     "L2bJ": 1.89,
+     "L2bQ": 1.93
+    },
+    "hubless": [],
+    "declared_hubs": {
+     "P": {
+      "member": "pinP",
+      "rad": 5.0,
+      "component": "passive pin: MR63ZZ pair (3 x 6 x 2.5) in an O10 Ti boss, two 3 mm plates, 6.5 mm stack (catalogue: passive pin)",
+      "cover": 0.975,
+      "reach": 5.0
+     },
+     "K": {
+      "member": "pinK",
+      "rad": 5.0,
+      "component": "passive pin: MR63ZZ pair (3 x 6 x 2.5) in an O10 Ti boss, two 3 mm plates, 6.5 mm stack (catalogue: passive pin)",
+      "cover": 0.975,
+      "reach": 5.0
+     },
+     "Q": {
+      "member": "pinQ",
+      "rad": 5.0,
+      "component": "passive pin: MR63ZZ pair (3 x 6 x 2.5) in an O10 Ti boss, two 3 mm plates, 6.5 mm stack (catalogue: passive pin)",
+      "cover": 0.975,
+      "reach": 5.0
+     }
+    },
+    "crown_contact_poses": 0,
+    "crown_min": 0.14,
+    "min_metal_skin": 0.09,
+    "near_low": [
+     {
+      "mm": 0.09,
+      "i": 257,
+      "kind": "ws",
+      "plane": 30.0,
+      "elev": 90.0,
+      "axial": 30.0,
+      "crown": "face"
+     },
+     {
+      "mm": 0.14,
+      "i": 234,
+      "kind": "ws",
+      "plane": 15.0,
+      "elev": 135.0,
+      "axial": -60.0,
+      "crown": "pinQ"
+     },
+     {
+      "mm": 0.18,
+      "i": 180,
+      "kind": "ws",
+      "plane": -15.0,
+      "elev": 75.0,
+      "axial": 90.0,
+      "crown": "face"
+     },
+     {
+      "mm": 0.21,
+      "i": 139,
+      "kind": "ws",
+      "plane": -60.0,
+      "elev": 60.0,
+      "axial": 105.0,
+      "crown": "face"
+     },
+     {
+      "mm": 0.37,
+      "i": 279,
+      "kind": "ws",
+      "plane": 45.0,
+      "elev": 75.0,
+      "axial": -105.0,
+      "crown": "face"
+     }
+    ],
+    "gap_near1": 41.74,
+    "near1": {
+     "reach": 0.6361,
+     "follow": 1.0,
+     "inband14": 0.7889,
+     "contact": 0.0424
+    },
+    "overhead": {
+     "n_ws": 28,
+     "reach": 0.2143,
+     "n_clip": 10,
+     "follow": 1.0,
+     "n_taken": 16,
+     "inband14": 0.8026
+    },
+    "stack_mismatch": {
+     "link1@hub1": 0.0,
+     "link1@hub2": 0.0,
+     "link1p@hub2": 0.0,
+     "link1p@pinP": 2.81,
+     "neck@hub3": 3.0,
+     "L2a@hub2": 0.85,
+     "L2a@pinK": 0.0,
+     "rocker@pinP": 18.05,
+     "rocker@pinQ": 4.0,
+     "L2bJ@pinK": 0.0,
+     "L2bJ@hub3": 0.0,
+     "L2bQ@pinK": 13.05,
+     "L2bQ@pinQ": 11.77
+    },
+    "th_need": {
+     "p5": 24.6,
+     "p95": 142.5,
+     "kin_reach": 0.7278
+    },
+    "bench": [
+     110,
+     360
+    ],
+    "secs": 220.6
+   }
+  },
+  "verifier": {
+   "own_checks_only": true,
+   "exempt_pin_mm": null,
+   "exempt_hub_mm": 12.0,
+   "closure_max_deg": 0.0,
+   "closure_bad_last": 0,
+   "fold_margin": 5.0,
+   "o20_only": true
+  }
+ },
+ "locked_control_verifier_checks": {
+  "model": "docs/concepts/models/dwell-fourbar-knee-3r.py",
+  "params": {
+   "az": 97.7506,
+   "el": 65.294,
+   "a1": 38.0901,
+   "a2": 74.2679,
+   "wd": 90.0506,
+   "wa": -9.2038,
+   "margin": 5.0,
+   "width": 12.0,
+   "t_link": 3.0,
+   "q": 0.9629,
+   "rad1": 10.0,
+   "rad2": 10.0,
+   "rad3": 10.0,
+   "end_extra": 0.0,
+   "b": 40.787,
+   "chi": 6.5374,
+   "gP": 22.4391,
+   "phP": 28.4902,
+   "k": 18.7416,
+   "alq": -141.0145,
+   "sref": 196.2443,
+   "rpin": 5.0,
+   "pin_t": 6.5,
+   "w_rock": 8.0,
+   "tq_lo": 30.0,
+   "tk_lo": 20.0,
+   "lock": 1,
+   "near": 0,
+   "ov": 1
+  },
+  "overlap": 1.0,
+  "exact": true,
+  "runs": {
+   "fit": {
+    "reach": 0.5687,
+    "follow": 0.7833,
+    "inband14": 0.8367,
+    "inband10": 0.4466,
+    "contact": 0.0483,
+    "poses": {
+     "clip": 60,
+     "ws": 160
+    },
+    "mode": "fast",
+    "gap": 60.96,
+    "inband_member": {
+     "hub1": 1.0,
+     "hub2": 1.0,
+     "hub3": 0.8059,
+     "link1": 0.9972,
+     "neck": 0.7938,
+     "L2a": 0.8993,
+     "L2bJ": 0.4836
+    },
+    "mass_g": 116.3,
+    "mass_g_strap55": 130.8,
+    "closure": 0.7864,
+    "flips": 2,
+    "collide": 0.152,
+    "q": 0.9629,
+    "kmode": "march",
+    "residual_deg": 0.01894,
+    "window": [
+     41.18,
+     107.36
+    ],
+    "piece": [
+     180.0,
+     359.75
+    ],
+    "rocker_arc": 46.6,
+    "knee_range": [
+     168.7,
+     168.7
+    ],
+    "a2eff_range": [
+     74.3,
+     74.3
+    ],
+    "tq_min": 90.0,
+    "tk_min": 90.0,
+    "bodies": [
+     [
+      "L2a",
+      "L2bJ"
+     ]
+    ],
+    "flat": {
+     "hub1": [
+      10.0,
+      12.25,
+      12.25
+     ],
+     "hub2": [
+      10.0,
+      12.25,
+      12.25
+     ],
+     "hub3": [
+      10.0,
+      20.099999999926993,
+      12.25
+     ]
+    },
+    "hold_rest": true,
+    "post_lift": {
+     "hub3": 7.85
+    },
+    "honest": true,
+    "audit": [],
+    "sample_mm": {
+     "hub1": 2.0,
+     "hub2": 2.0,
+     "hub3": 2.0,
+     "link1": 1.55,
+     "neck": 2.27,
+     "L2a": 1.74,
+     "L2bJ": 2.06
+    },
+    "hubless": [],
+    "declared_hubs": {},
+    "crown_contact_poses": 2,
+    "crown_min": -10.97,
+    "min_metal_skin": 0.36,
+    "near_low": [
+     {
+      "mm": 0.36,
+      "i": 174,
+      "kind": "ws",
+      "plane": 90.0,
+      "elev": 120.0,
+      "axial": -90.0,
+      "crown": "face"
+     },
+     {
+      "mm": 0.37,
+      "i": 91,
+      "kind": "ws",
+      "plane": -15.0,
+      "elev": 75.0,
+      "axial": 90.0,
+      "crown": "face"
+     },
+     {
+      "mm": 0.4,
+      "i": 73,
+      "kind": "ws",
+      "plane": -60.0,
+      "elev": 60.0,
+      "axial": 120.0,
+      "crown": "face"
+     },
+     {
+      "mm": 0.55,
+      "i": 124,
+      "kind": "ws",
+      "plane": 30.0,
+      "elev": 75.0,
+      "axial": 45.0,
+      "crown": "face"
+     },
+     {
+      "mm": 0.69,
+      "i": 155,
+      "kind": "ws",
+      "plane": 75.0,
+      "elev": 30.0,
+      "axial": -135.0,
+      "crown": "face"
+     }
+    ],
+    "gap_near1": 73.72,
+    "near1": {
+     "reach": 0.5312,
+     "follow": 0.75,
+     "inband14": 0.835,
+     "contact": 0.1034
+    },
+    "overhead": {
+     "n_ws": 12,
+     "reach": 0.0,
+     "n_clip": 5,
+     "follow": 0.4,
+     "n_taken": 2,
+     "inband14": 0.9472
+    },
+    "stack_mismatch": {
+     "link1@hub1": 0.0,
+     "link1@hub2": 0.0,
+     "neck@hub3": 3.0,
+     "L2a@hub2": 0.0,
+     "L2bJ@hub3": 7.85
+    },
+    "th_need": {
+     "p5": 25.3,
+     "p95": 129.0,
+     "kin_reach": 0.7188
+    },
+    "bench": [
+     60,
+     160
+    ]
+   },
+   "frozen": {
+    "reach": 0.5111,
+    "follow": 0.7818,
+    "inband14": 0.8375,
+    "inband10": 0.4528,
+    "contact": 0.0253,
+    "poses": {
+     "clip": 110,
+     "ws": 360
+    },
+    "mode": "exact",
+    "gap": 64.49,
+    "inband_member": {
+     "hub1": 1.0,
+     "hub2": 1.0,
+     "hub3": 0.8108,
+     "link1": 0.9973,
+     "neck": 0.7942,
+     "L2a": 0.898,
+     "L2bJ": 0.4872
+    },
+    "mass_g": 116.3,
+    "mass_g_strap55": 130.8,
+    "closure": 0.734,
+    "flips": 8,
+    "collide": 0.178,
+    "q": 0.9629,
+    "kmode": "march",
+    "residual_deg": 0.01987,
+    "window": [
+     41.18,
+     107.36
+    ],
+    "piece": [
+     180.0,
+     359.75
+    ],
+    "rocker_arc": 46.6,
+    "knee_range": [
+     168.7,
+     168.7
+    ],
+    "a2eff_range": [
+     74.3,
+     74.3
+    ],
+    "tq_min": 90.0,
+    "tk_min": 90.0,
+    "bodies": [
+     [
+      "L2a",
+      "L2bJ"
+     ]
+    ],
+    "flat": {
+     "hub1": [
+      10.0,
+      12.25,
+      12.25
+     ],
+     "hub2": [
+      10.0,
+      12.25,
+      12.25
+     ],
+     "hub3": [
+      10.0,
+      20.099999999926993,
+      12.25
+     ]
+    },
+    "hold_rest": true,
+    "post_lift": {
+     "hub3": 7.85
+    },
+    "honest": true,
+    "audit": [],
+    "sample_mm": {
+     "hub1": 2.0,
+     "hub2": 2.0,
+     "hub3": 2.0,
+     "link1": 1.55,
+     "neck": 2.27,
+     "L2a": 1.74,
+     "L2bJ": 2.06
+    },
+    "hubless": [],
+    "declared_hubs": {},
+    "crown_contact_poses": 2,
+    "crown_min": -3.78,
+    "min_metal_skin": 0.12,
+    "near_low": [
+     {
+      "mm": 0.12,
+      "i": 371,
+      "kind": "ws",
+      "plane": 90.0,
+      "elev": 150.0,
+      "axial": -60.0,
+      "crown": "face"
+     },
+     {
+      "mm": 0.18,
+      "i": 180,
+      "kind": "ws",
+      "plane": -15.0,
+      "elev": 75.0,
+      "axial": 90.0,
+      "crown": "face"
+     },
+     {
+      "mm": 0.3,
+      "i": 309,
+      "kind": "ws",
+      "plane": 60.0,
+      "elev": 90.0,
+      "axial": -105.0,
+      "crown": "face"
+     },
+     {
+      "mm": 0.57,
+      "i": 279,
+      "kind": "ws",
+      "plane": 45.0,
+      "elev": 75.0,
+      "axial": -105.0,
+      "crown": "face"
+     },
+     {
+      "mm": 0.69,
+      "i": 469,
+      "kind": "ws",
+      "plane": 150.0,
+      "elev": 120.0,
+      "axial": -60.0,
+      "crown": "face"
+     }
+    ],
+    "gap_near1": 74.89,
+    "near1": {
+     "reach": 0.4889,
+     "follow": 0.7455,
+     "inband14": 0.8353,
+     "contact": 0.0686
+    },
+    "overhead": {
+     "n_ws": 28,
+     "reach": 0.1071,
+     "n_clip": 10,
+     "follow": 0.4,
+     "n_taken": 7,
+     "inband14": 0.9346
+    },
+    "stack_mismatch": {
+     "link1@hub1": 0.0,
+     "link1@hub2": 0.0,
+     "neck@hub3": 3.0,
+     "L2a@hub2": 0.0,
+     "L2bJ@hub3": 7.85
+    },
+    "th_need": {
+     "p5": 24.6,
+     "p95": 142.5,
+     "kin_reach": 0.6611
+    },
+    "bench": [
+     110,
+     360
+    ],
+    "secs": 164.9
+   }
+  },
+  "verifier": {
+   "own_checks_only": false,
+   "exempt_pin_mm": 7.0,
+   "exempt_hub_mm": 12.0,
+   "closure_max_deg": 0.0,
+   "closure_bad_last": 0,
+   "fold_margin": 5.0,
+   "o20_only": true
+  }
+ },
+ "note": "Bench(110,360) exact, frozen shape fit on Bench(60,160) fast, K6 at 1 mm radial; farm 2026-10-16 06:16-06:21 UTC; O20 J2/J3, O10 MR63ZZ pins, fold margin 5"
+}
