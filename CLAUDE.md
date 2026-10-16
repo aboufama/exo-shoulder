@@ -166,6 +166,15 @@ docs/EVOLUTION.md (and its snapshot to pipeline/evolution/) as part of the judge
   every search objective is the near-touch gap; claims report plain and near-touch. Where a spring / knee / pin takes the
   poses past a J2 stop, the stop's margin is a design variable (optimum 9-12 deg there); the user's 5 deg is the lower
   bound for the plain fold window, not a target.
+- **The fold margin is read in ONE metric, and stops must be buildable** (measured 2026-10-16 by the minarc-stop-knuckle-4r
+  verification): the 5 deg margin is the J1-J3 angle's distance from the dyad's fold, `th` in tools/concept_kit.py lines
+  25-30, the metric H1 and every verified row use. A model that clamps another angle (e.g. the J2 interior angle) must
+  show its stops engage at >= 5 deg of `th` in every state. minarc's phi stops at 5 deg of interior angle sat 1.4 deg
+  from the fold and scored 15.42; at the true 5 deg they score 18.45. A different reading is the user's call, not the
+  model's. A hard stop acts on a joint's OWN angle (a dowel in an arc slot between the two bodies that joint connects),
+  never on a virtual angle between non-adjacent bodies. Each claim reports the min `th` margin over its taken poses.
+  Final polishes score only poses the shape was not fitted on (2-fold cross-fit). Every in-sample polish so far lost
+  ~5 points held out (polish 2: C1 23.04 in-sample, +0.33 held out).
 - **No lofts, ever** (user, 2026-10-15: "for all the design you do, lofts look horrible and introduce geometric problems, you
   can combine arcs, but no lofts!"): every surface comes from sketches of lines and tangent arcs - extrudes, revolves,
   sweeps of ONE constant section along a line/arc path, fillets. No lofts, no surfaces fitted or shrink-wrapped to skin
