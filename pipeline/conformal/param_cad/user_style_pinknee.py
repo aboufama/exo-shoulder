@@ -426,7 +426,7 @@ def knee_link(M):
 
 
 # ---------------------------------------------------------------------------------------------------- arm side
-def arm_side(M, mount_rep):
+def arm_side(M, mount_rep, clip_poses):
     """arm pad + pad mount (one planform at the pad level, the L1 slab footprint) + a riser inside BOTTOM's footprint, fused
     with BOTTOM (cut at s 255) and pin b's integral pin; built in the canonical arm frame, exported x_H = HR x"""
     D = M.D; P = D.p; tr = M.tr; tp = P["tp"]; sn = D.sn; fr = M.fr; Bm = fr["Bm"]; HR = PK.HR
@@ -469,9 +469,96 @@ def arm_side(M, mount_rep):
     for g, n, s in up:
         if n.startswith(("BOTTOM", "UPPER ARM CUFF", "M4x6 ISO 10642 countersunk (upper cuff)")): continue
         users.append((g, n, s))
-    cuff, crep = US.upper_cuff(None, wrap_neg_deg=CUFF_WRAP_NEG); users += cuff
+    cuff, crep = upper_cuff_trim(clip_poses); users += cuff
     return out, users, dict(mount_length=Lx, slab_in_bottom_mm3=round(ov, 1), riser_mm3=round(vol, 1), fused_valid=part.isValid(),
                             fused_solids=len(part.Solids()), bottom_cut_s=S_CUT, upper_cuff=crep)
+
+
+# ---------------------------------------------------------------------------------------------------- upper-arm cuff
+def upper_cuff_trim(clip_poses, wrap_neg_deg=CUFF_WRAP_NEG, margin=1.0):
+    """user_style.upper_cuff (one U sketch of lines and arcs, extruded along BOTTOM; the same skin fit) with BOTH side
+    arcs' wraps measured: the gen-2 lesson - the +vB arc entered the trunk with the arm at the side (Walking 90). The trunk
+    skin (vertices with < 5 % weight on the arm bones) is posed at every given clip pose and taken into the arm's rest
+    frame; a side arc stops `margin` mm (along the arc) before the first trunk point that comes within `margin` of its
+    metal radially (points inside the inner radius - 1 are the rig's own trunk-in-arm self-intersection, not ours). The
+    -vB arc keeps at most wrap_neg_deg (the forearm cuff folds onto it, user_style_osn)."""
+    import body_pose as BP
+    CB, uB, vB, axB = AE.CB, AE.uB, AE.vB, AE.axB; c = US.CUFF
+    zt = AE.Z_SKIN_BAR; W_ = math.radians(c["wrap_deg"]); T2_ = c["t_shell"]; zi = zt - T2_; liner = 2.0
+    C_, _ = US.FR.load(PB.BAND); L = json.load(open(os.path.join(REPO, "pipeline", "avg", "body_mesh.json"))); pts = []
+    rig = BP._rig(); sk = rig.skin; n = len(sk["wi"])
+    Wb = np.zeros((n, 5)); np.add.at(Wb, (np.repeat(np.arange(n), 4), sk["wi"].ravel()), sk["ww"].ravel())
+    arm = ((sk["wi"] == 2) * sk["ww"]).sum(1) >= 0.6; trunk = Wb[:, 2:].sum(1) < 0.05
+    for _, _, f in US.FR.followed(C_, every=4):
+        pose = dict(zip(["plane", "elev", "axial", "flex", "pron"], f["p"])); Vw = BP.posed(pose)
+        sg, _ = BP.segs(L["landmarks"], L["scale"], pose); Rh, th = np.array(sg[2][0]), np.array(sg[2][1])
+        Q = (Vw[arm] - th) @ Rh - CB; sq = Q @ uB
+        m = (sq > c["s0"] - 5) & (sq < c["s1"] + 5) & (np.abs(Q @ vB) < 90) & (Q @ axB < 0) & (Q @ axB > -130)
+        pts.append(np.stack([Q[m] @ vB, Q[m] @ axB], 1))
+    P2 = np.concatenate(pts)
+    def fits(R, vc, hw):
+        v, z = P2[:, 0] - vc, P2[:, 1]; m = np.full(len(v), 99.0)
+        top = np.abs(v) <= hw; m[top] = (zi - liner) - z[top]
+        for sg in (-1, 1):
+            sd = (sg * v > hw); cx, cz = sg * hw, zi - R; dx, dz = v[sd] - cx, z[sd] - cz
+            ang = np.arctan2(sg * dx, dz); inw = ang <= W_ + math.radians(8)
+            r = np.hypot(dx, dz); mm = np.where(inw, R - liner - r, 99.0); m[sd] = mm
+        return float(m.min())
+    best = None
+    for vc in np.arange(-14.0, 14.1, 2.0):
+        for hw in np.arange(15.0, 36.0, 2.5):
+            if fits(140.0, vc, hw) < 0: continue
+            lo, hi = 10.0, 140.0
+            for _ in range(28):
+                mid = (lo + hi) / 2; lo, hi = (lo, mid) if fits(mid, vc, hw) >= 0 else (mid, hi)
+            R = math.ceil(hi); score = R + 0.5 * hw
+            if best is None or score < best[0]: best = (score, R, vc, hw)
+    assert best, "cuff: no U profile clears the arm"
+    _, Rin, vc, hw = best; Ro = Rin + T2_
+    # ---- the trunk vs both side arcs at every given pose (the judged clips' own poses)
+    wrap = {1: W_, -1: min(W_, math.radians(wrap_neg_deg))}; hits = {1: [], -1: []}; flat_hit = 1e9
+    for pz in clip_poses:
+        pose = dict(zip(["plane", "elev", "axial", "flex", "pron"], pz)); Vw = rig.posed(pose)
+        sg, _ = BP.segs(L["landmarks"], L["scale"], pose); Rh, th = np.array(sg[2][0]), np.array(sg[2][1])
+        Q = (Vw[trunk] - th) @ Rh - CB; sq = Q @ uB
+        Q = Q[(sq > c["s0"] - margin) & (sq < c["s1"] + margin)]
+        if not len(Q): continue
+        v, z = Q @ vB - vc, Q @ axB
+        topm = (np.abs(v) <= hw) & (z > zi - liner) & (z < zt + margin)
+        if topm.any(): flat_hit = min(flat_hit, float(np.min(np.abs(z[topm] - zt))))
+        for sgn in (1, -1):
+            sd = sgn * v > hw; dx, dz = v[sd] - sgn * hw, z[sd] - (zi - Rin); r = np.hypot(dx, dz); ang = np.arctan2(sgn * dx, dz)
+            near = (r >= Rin - 1.0) & (r <= Ro + margin) & (ang >= 0) & (ang <= wrap[sgn] + margin / Ro)
+            if near.any():
+                a_ = float(ang[near].min()) - margin / Ro
+                if a_ < wrap[sgn]: wrap[sgn] = max(a_, math.radians(10.0)); hits[sgn].append([round(float(x), 1) for x in pz[:3]])
+    Wp, Wn = wrap[1], wrap[-1]
+    print(f"cuff: {len(P2)} arm skin samples; U profile: flat {2 * hw:g} mm, side arcs R{Rin:g}, centred {vc:+.0f} mm across the bar, "
+          f"{fits(Rin, vc, hw):.2f} mm beyond skin + 2 mm liner; trunk over {len(clip_poses)} clip poses: +vB arc wrap {math.degrees(Wp):.0f} deg "
+          f"(was {c['wrap_deg']:g}; {len(hits[1])} limiting poses), -vB {math.degrees(Wn):.0f} deg; flat top vs trunk {flat_hit if flat_hit < 1e8 else None}", flush=True)
+    pl = cq.Plane(origin=tuple(map(float, CB + c["s0"] * uB)), xDir=tuple(map(float, vB)), normal=tuple(map(float, uB)))
+    q = lambda xy: (float(xy[0]), float(xy[1]))
+    def arcp(sg, R, a): return np.array([vc + sg * hw + sg * R * math.sin(a), zi - Rin + R * math.cos(a)])
+    wp = (cq.Workplane(pl).moveTo(*q(arcp(-1, Ro, 0.0))).lineTo(*q(arcp(1, Ro, 0.0)))
+          .threePointArc(q(arcp(1, Ro, Wp / 2)), q(arcp(1, Ro, Wp))).lineTo(*q(arcp(1, Rin, Wp)))
+          .threePointArc(q(arcp(1, Rin, Wp / 2)), q(arcp(1, Rin, 0.0))).lineTo(*q(arcp(-1, Rin, 0.0)))
+          .threePointArc(q(arcp(-1, Rin, Wn / 2)), q(arcp(-1, Rin, Wn))).lineTo(*q(arcp(-1, Ro, Wn)))
+          .threePointArc(q(arcp(-1, Ro, Wn / 2)), q(arcp(-1, Ro, 0.0))).close())
+    cuff = US.rounded(wp.extrude(c["s1"] - c["s0"]).val(), r=c["round"]); scr = []
+    for s_ in (94.25, 124.25, 154.25):
+        for y_ in (-8.75, 8.75):
+            p = CB + s_ * uB + y_ * vB + zt * axB
+            cuff = cuff.cut(cq.Solid.makeCylinder(2.25, 12.0, V(p - 10 * axB), V(axB)))
+            hd = T2_; cuff = cuff.cut(cq.Solid.makeCone(4.2, 0.0, 4.2, V(p - hd * axB), V(axB)))
+            head = PB.revolved([(0, 0), (3.95, 0), (2.0, 1.95), (2.0, 6.0), (0, 6.0)], np.array([0, 0, 1.0]), 0.0)
+            scr.append(("H", "M4x6 ISO 10642 hexagon socket countersunk screw (upper cuff -> BOTTOM), polished A2", xform(head, PB.axis_frame(axB), p - hd * axB)))
+    cuff = cuff.clean() if cuff.clean().isValid() else cuff
+    rep = dict(side_arc_R=Rin, flat_width=2 * hw, centre_across_bar=vc, shell=T2_, wrap_pos_deg=round(math.degrees(Wp), 1), wrap_neg_deg=round(math.degrees(Wn), 1),
+               wrap_rule=f"each side arc stops {margin} mm before the first trunk point within {margin} mm of it over {len(clip_poses)} clip poses",
+               limiting_poses_pos=hits[1][:12], limiting_poses_neg=hits[-1][:12], flat_top_vs_trunk_mm=None if flat_hit > 1e8 else flat_hit,
+               length=c["s1"] - c["s0"], valid=cuff.isValid())
+    print(f"  cuff valid {cuff.isValid()}, faces {len(cuff.Faces())}", flush=True)
+    return [("H", "UPPER ARM CUFF (one sketch: flat land + inner/outer R arcs, both side arcs trimmed clear of the trunk, extruded; AlSi10Mg bead blasted)", cuff)] + scr, rep
 
 
 # ---------------------------------------------------------------------------------------------------- scapula base
@@ -653,7 +740,9 @@ def main():
     m3, rep["member 3"] = member3(M); parts += m3
     parts.append(knee_link(M))
     l1b = json.load(open(os.path.join(FULL, "designs", a.l1, "build.json")))
-    arm, users, rep["arm side"] = arm_side(M, l1b["mount"]); parts += arm
+    Cc = json.load(open(os.path.join(FULL, "designs", a.l1, "clips.json")))
+    cposes = [f["p"] for cl in Cc["clips"] for fi, f in enumerate(cl["frames"]) if fi % 3 == 0]
+    arm, users, rep["arm side"] = arm_side(M, l1b["mount"], cposes); parts += arm
     # the base at the J1 ring vs the posed link 1: every clip frame + every eval-feasible workspace pose (the L1's frames =
     # the model's); the built-mesh confirmation on every 3rd clip frame
     C = json.load(open(os.path.join(FULL, "designs", a.l1, "clips.json"))); frames = []; rel = []

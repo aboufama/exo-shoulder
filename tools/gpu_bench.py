@@ -586,6 +586,64 @@ LEADERS = [  # spine-parked k7008's axes at O20 / margin 5 (zc start), the spine
 ]
 
 
+CONT = ("az", "el", "a1", "a2", "wd", "wa", "q", "end_extra")
+SCALE = dict(az=6.0, el=4.0, a1=4.0, a2=4.0, wd=4.0, wa=6.0, q=0.03, end_extra=1.5)
+
+
+def uniform_configs(n, rng):
+    """the whole zero-complexity box (zc-frontier-3r BOUNDS), J1 seat region only"""
+    out = []
+    while len(out) < n:
+        p = {k: float(rng.uniform(*BOUNDS[k])) for k in CONT}
+        p.update(sigma=int(rng.choice([-1, 1])), inv2=int(rng.random() < 0.5), inv3=int(rng.random() < 0.5))
+        if seat_ok(p["az"], p["el"]): out.append(p)
+    return out
+
+
+def search(Bw, Bf, out_json, budget_s=1800.0, n0=4096, elites=16, lam=24, seed=0, chunk=48, seeds=(), log=print):
+    """GPU hill-climb of the zero-complexity family: a uniform map of n0 configs (+ seeds), then (1+lam) evolution
+    around the best `elites` distinct configs (Gaussian steps on SCALE, step x1.25 on success / x0.85 on failure,
+    sigma / inv2 / inv3 flips 5 %), until budget_s. Writes the frontier (best 64 + every new best) incrementally."""
+    rng = np.random.default_rng(seed); t0 = time.time(); seen = []; hist = []
+    def run(cfgs):
+        r = evaluate(cfgs, Bw, Bf, chunk); seen.extend(r); return r
+    def dump(tag):
+        top = sorted([x for x in seen if x.get("gap") is not None], key=lambda x: x["gap"])[:64]
+        json.dump(dict(t=time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()), secs=round(time.time() - t0, 1), evals=len(seen),
+                       bench=[Bw.nc, Bw.nw], fit=[Bf.nc, Bf.nw] if Bf else None, tag=tag, best_history=hist, top=top),
+                  open(out_json + ".tmp", "w"), indent=1, default=float); os.replace(out_json + ".tmp", out_json)
+    R = run(list(seeds) + uniform_configs(n0, rng)); dump("map")
+    best = sorted(R, key=lambda x: x["gap"]); E = []
+    for r in best:                                                      # distinct elites (not within 3 deg of each other)
+        if len(E) >= elites: break
+        if all(sum(abs(r["params"][k] - e["params"][k]) for k in ("az", "el", "a1", "a2", "wd", "wa")) > 12 for e in E): E.append(r)
+    step = [1.0] * len(E); g = 0; hist.append(dict(gen=0, gap=best[0]["gap"], evals=len(seen), secs=round(time.time() - t0, 1)))
+    log(f"map: {len(seen)} evals, best {best[0]['gap']} ({time.time() - t0:.0f} s)")
+    while time.time() - t0 < budget_s:
+        g += 1; cand, owner = [], []
+        for ei, e in enumerate(E):
+            for _ in range(lam):
+                p = dict(e["params"])
+                for k in CONT: p[k] = p[k] + rng.normal() * SCALE[k] * step[ei]
+                for k in ("sigma",):
+                    if rng.random() < 0.05: p[k] = -p[k]
+                for k in ("inv2", "inv3"):
+                    if rng.random() < 0.05: p[k] = 1 - p[k]
+                p = snap(p)
+                if seat_ok(p["az"], p["el"]): cand.append(p); owner.append(ei)
+        R = run(cand)
+        for ei in range(len(E)):
+            mine = [r for r, o in zip(R, owner) if o == ei]
+            b = min(mine, key=lambda x: x["gap"]) if mine else None
+            if b and b["gap"] < E[ei]["gap"]: E[ei] = b; step[ei] = min(3.0, step[ei] * 1.25)
+            else: step[ei] = max(0.05, step[ei] * 0.85)
+        bb = min(E, key=lambda x: x["gap"]); hist.append(dict(gen=g, gap=bb["gap"], evals=len(seen), secs=round(time.time() - t0, 1)))
+        log(f"gen {g}: {len(seen)} evals, best {bb['gap']} (reach {bb['reach']} follow {bb['follow']} ib14 {bb['inband14']} contact {bb['contact']}), "
+            f"elites {sorted(round(e['gap'], 2) for e in E)[:6]} ({time.time() - t0:.0f} s)")
+        dump(f"gen{g}")
+    return min(E, key=lambda x: x["gap"])
+
+
 def main():
     import argparse
     ap = argparse.ArgumentParser(); ap.add_argument("cmd"); ap.add_argument("args", nargs="*")
@@ -593,6 +651,8 @@ def main():
     ap.add_argument("--device", default="cuda" if torch.cuda.is_available() else "cpu"); ap.add_argument("--n", type=int, default=50)
     ap.add_argument("--out"); ap.add_argument("--procs", type=int, default=4); ap.add_argument("--seed", type=int, default=0)
     ap.add_argument("--leaders", action="store_true"); ap.add_argument("--extra")
+    ap.add_argument("--budget", type=float, default=1800.0); ap.add_argument("--n0", type=int, default=4096)
+    ap.add_argument("--elites", type=int, default=16); ap.add_argument("--lam", type=int, default=24)
     a = ap.parse_args()
     wear = tuple(int(x) for x in a.bench.split(",")); fit = tuple(int(x) for x in a.fit.split(",")) if a.fit else None
     if a.cmd == "pack":
@@ -615,6 +675,9 @@ def main():
                                         gpu=torch.cuda.get_device_name(0) if a.device == "cuda" else None, bench=list(wear), fit=list(fit) if fit else None)
         log(json.dumps(res))
         if a.out: json.dump(res, open(a.out, "w"), indent=1)
+    elif a.cmd == "search":
+        seeds = list(LEADERS) + (json.load(open(a.extra)) if a.extra else [])
+        search(Bw, Bf, a.out, a.budget, a.n0, a.elites, a.lam, a.seed, a.chunk, seeds, log)
     elif a.cmd == "parity":
         cf = random_configs(a.n, a.seed) + (LEADERS if a.leaders else [])
         if a.extra: cf += json.load(open(a.extra))
