@@ -103,6 +103,38 @@ Findings:
   - In the stretched states it reaches 0.085 against a spring of 0.094-0.112 (worst margin -0.004 N.m). A
     **0.12 N.m preload** is needed there.
 
+### Variant A CMA-ES (6 streams on the farm, 7886 tries, popsize 8, 12 coordinates)
+
+| stream | start | tries | best gap | reach | follow | in-band 14 | contact |
+|---|---|---|---|---|---|---|---|
+| A | coarse #1 | 1097 | 24.95 | 0.831 | 1.0 | 0.800 | 0.081 |
+| B | coarse #2 | 929 | 26.43 | 0.844 | 1.0 | 0.768 | 0.076 |
+| C | coarse #3 | 1265 | 23.64 | 0.825 | 0.95 | 0.817 | 0.078 |
+| D | coarse #5 | 1505 | 24.76 | 0.844 | 1.0 | 0.789 | 0.080 |
+| **E** | coarse #6 | 1601 | **22.17** | 0.856 | 1.0 | 0.780 | 0.057 |
+| F | coarse #1, sigma 0.5 | 1489 | 22.57 | 0.850 | 0.95 | 0.783 | 0.059 |
+
+- **Convergence gate**, over the whole history in generation order: the best gained 0.49 score points over the second
+  half and 0.31 over the last third, and the top 5 lie within 0.02. **Converged.**
+- **The best (E).**
+  - Configuration: J1 bvec(102.59, 65.67), J3 wdir(48.38, -6.80), a1 42.99, a2 70.31, b1 29.65, b2 49.38,
+    stop B a1max 65.91, phi stops 29.06 / 166.89, q 0.951.
+  - Score: 22.17 (score 91.9).
+  - Per part in band: hub 1 0.99, hub K 1.00, hub 2 0.93 (F 62 mm), link 1a 1.00, link 1b 0.97, link 2 0.43,
+    hub 3 0.70 (F 101 mm), neck 0.68.
+  - Forced poses: 39 (19 %), all stretched. Of the 36 forced workspace poses, 32 are taken and 4 are contact.
+  - The sub-chain fold margin is at least 13.7 deg; psi runs 64-112 deg.
+- **Its 3R control at the same seats and metal** (stop B = a1) scores **45.91** (reach 0.61). At these seats the
+  knuckle is worth **23.7 points**. The CMA left the 3R-viable seats (coarse: knuckle worth 3.9) for seats where the
+  knuckle carries a fifth of the poses.
+- **Near-touch (lesson d).** Lowest metal is 0.07 mm. Counting metal < 1 mm as contact, the gap is 41.79 (15 poses).
+  q 0.95 lets the fitted undersides graze the skin. A near-touch CMA (objective = gap_near1, streams AN1 / AN2) is
+  running.
+- **Overhead (elevation >= 140):** reach 3 of 12, follow 5 of 5, in-band 0.81.
+- **Named poses:** rest 5/5 (in-band 0.78); overhead 8/17; across-body 28/36; behind-back 16/19.
+- **Spring vs gravity** at E: on stop A, at most 0.016 N.m; in the stretched states at most 0.018 N.m against a
+  spring of 0.087-0.105. The 0.08 N.m preload holds with a 0.064 N.m margin.
+
 ## Variant B - the pin knee + the knuckle (`models/minarc-stop-knuckle-4r-pinknee.py`)
 
 The spec ran this variant only if variant A's in-band fell below 0.88; it fell to 0.62.
@@ -119,3 +151,29 @@ The spec ran this variant only if variant A's in-band fell below 0.88; it fell t
   - The spherical 3R (u1, RK u2, RK u3) is then solved in closed form.
   - The pin knee absorbs the drift as before.
   - The residual is 0.016 deg.
+
+### Variant B measured (Bench(60,160) fast, VModel rules, the pin knee's current best seats)
+
+| configuration | gap | reach | follow | in-band 14 | contact | note |
+|---|---|---|---|---|---|---|
+| the pin-knee model itself at these seats (margin 5) | 23.64 | 0.700 | 0.95 | 0.898 | 0.034 | reference |
+| knuckle locked (stop B = a1) | 22.57 | 0.756 | 0.917 | 0.913 | 0.049 | stops [15, 170] as the J2 guard |
+| bk 30/50, phi 15/170, a1max 70 | 19.12 | 0.813 | 0.917 | 0.913 | 0.070 | |
+| bk 30/50, phi 15/170, a1max 75 | 18.46 | 0.819 | 0.917 | 0.912 | 0.070 | near1 24.08, min metal 0.12 mm |
+| bk 30/50, margin-equivalent stops 22/148, a1max 70 | 20.31 | 0.788 | 0.917 | 0.913 | 0.057 | J2 never within 5 deg of its fold |
+| **bk 36/44, stops 22/148, a1max 75** | **17.58** | 0.781 | 0.95 | 0.908 | 0.057 | near1 22.15; sub-chain margin >= 17 deg |
+| bk 25/55, stops 22/148 | 25.43 | | | | | short link 1a |
+| sK +1 | 73.11 | | | | | wrong knuckle branch |
+
+Variant B at 17.58 (bk 36/44, margin-equivalent stops):
+- **Per part in band:** hub 1 1.0, hub K 0.97, hub 2 1.0, hub 3 0.67, E 0.92, knee 0.93, L1a 0.97, L1b 0.97,
+  L2 0.82.
+- **Forced poses:** 13, all stretched. 9 are taken and 4 are skin contact.
+- **Lost poses:**
+  - 20 fold. The folded side has no closing chain with margin: th 16-32, where J1 and J3 nearly align and the J1-K-J3
+    sub-chain folds too. The stretched side needs a1e 76-100 > stop B, at th 132-152.
+  - 7 lost to the knee window.
+  - 11 lost to skin.
+- **Overhead:** reach 2 of 12, follow 2 of 5.
+- **Spring vs gravity:** at most 0.007 N.m (8 mm straps, members 1a / 1b / 2 / 3 weigh 11 / 8 / 7 / 11 g). The
+  0.08 N.m preload holds with a 0.073 margin.

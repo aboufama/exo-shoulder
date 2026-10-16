@@ -91,3 +91,10 @@ Next (the loop): (1) verify the frontier's top configs on the exact path (`pytho
 '<params>' OUT.json` on the farm: fit 110/360 fast -> wear exact, and the verifier protocol 60/160 -> 110/360 exact);
 (2) restart the pod (`tools/gpu_pod.py create`, queue pipeline/gpu_pod/boot.sh then a search job) for longer climbs
 from the inv3 = 1 basin and a 4-DOF / fold-lever family port - reach, not proximity, is what is left to win.
+
+## Exhaustive GPU search of the zero-complexity class (2026-10-16, from 08:10 UTC)
+
+Pods (outside the serverless worker quota, both mounting the farm volume exo-farm-cas, secure cloud EU-RO-1; work
+reaches them through the volume spool as before): **exo-gpu-bench = 1x NVIDIA RTX PRO 4000 Blackwell (24 GB), $0.57/h**
+(spool exo-farm/gpu) and **exo-gpu-bench2 = 1x NVIDIA RTX 5090 (32 GB), $1.19/h** (spool exo-farm/gpu2; only if stock
+allows - wall clock is the constraint). Time box ~2.3 h, ~$4 at most; both are terminated the moment the search ends.

@@ -38,30 +38,31 @@ def pods():
                              "machine { gpuDisplayName } } } }")["myself"]["pods"] if p["name"].startswith("exo-gpu")]
 
 
-def create(gpu):
-    if any(p["name"] == NAME and p["desiredStatus"] == "RUNNING" for p in pods()): print("already running"); return
+def create(gpu, name=NAME, spool="gpu"):
+    """spool = the pod's queue / out folder under exo-farm/ (a 2nd pod gets its own: gpu2, ...; code/ stays in exo-farm/gpu)"""
+    if any(p["name"] == name and p["desiredStatus"] == "RUNNING" for p in pods()): print("already running"); return
     q = ('mutation { podFindAndDeployOnDemand(input: { cloudType: SECURE, gpuCount: 1, gpuTypeId: %s, name: "%s", '
          'imageName: "%s", containerDiskInGb: 30, volumeInGb: 0, networkVolumeId: "%s", dataCenterId: "EU-RO-1", '
          'volumeMountPath: "/workspace", startSsh: false, dockerArgs: %s }) { id desiredStatus costPerHr machine { gpuDisplayName } } }'
-         % (json.dumps(gpu), NAME, IMAGE, VOLUME, json.dumps("bash -c " + json.dumps(SPOOL))))
+         % (json.dumps(gpu), name, IMAGE, VOLUME, json.dumps("bash -c " + json.dumps(SPOOL.replace("exo-farm/gpu;", f"exo-farm/{spool};")))))
     print(json.dumps(G.gql(q)["podFindAndDeployOnDemand"]))
 
 
-def act(what):
+def act(what, name=NAME):
     for p in pods():
-        if p["name"] != NAME: continue
+        if p["name"] != name: continue
         m = "podStop" if what == "stop" else "podTerminate"
         G.gql('mutation { %s(input: {podId: "%s"}) %s }' % (m, p["id"], "{ id desiredStatus }" if m == "podStop" else ""))
         print(what, p["id"])
 
 
-def submit(script, name, include=()):
+def submit(script, name, include=(), spool="gpu"):
     """drop a job script (and files it needs, under exo-farm/gpu/code/) on the volume through one farm job"""
     import subprocess
     inc = sum((["--include", x] for x in [script, *include]), [])
     cmd = ("set -e; V=/runpod-volume/exo-farm/gpu; mkdir -p $V/code $V/queue; "
            + "".join(f"mkdir -p $V/code/$(dirname {x}); cp -r {x} $V/code/{x}; " for x in include)
-           + f"cp {script} $V/queue/{name}.sh.tmp; mv $V/queue/{name}.sh.tmp $V/queue/{name}.sh; ls -la $V/queue $V/out | tail -8; tail -3 $V/pod.log")
+           + f"Q=/runpod-volume/exo-farm/{spool}; mkdir -p $Q/queue; cp {script} $Q/queue/{name}.sh.tmp; mv $Q/queue/{name}.sh.tmp $Q/queue/{name}.sh; ls -la $Q/queue $Q/out | tail -8; tail -3 $Q/pod.log")
     subprocess.run([sys.executable, os.path.join(os.path.dirname(__file__), "cloud_run.py"), "run", "--no-base", "--no-bench-cache",
                     "--timeout", "600", *inc, "--", cmd], check=False)
 
@@ -73,10 +74,10 @@ def cancel():
                     "--timeout", "300", "--", "touch /runpod-volume/exo-farm/gpu/cancel; ls /runpod-volume/exo-farm/gpu/"], check=False)
 
 
-def fetch(name, outdir=None):
-    """print a job's log (and bring exo-farm/gpu/out/<name>/ back under outdir) through one farm job"""
+def fetch(name, outdir=None, spool="gpu"):
+    """print a job's log (and bring exo-farm/<spool>/out/<name>/ back under outdir) through one farm job"""
     import subprocess
-    cmd = (f"V=/runpod-volume/exo-farm/gpu; tail -3 $V/pod.log; ls $V/out | tail -5; echo ---; tail -c 20000 $V/out/{name}.log; "
+    cmd = (f"V=/runpod-volume/exo-farm/{spool}; tail -3 $V/pod.log; ls $V/out | tail -5; echo ---; tail -c 20000 $V/out/{name}.log; "
            f"mkdir -p gpu_out; [ -d $V/out/{name} ] && cp -r $V/out/{name} gpu_out/ || true")
     extra = ["--out", f"gpu_out/{name}/*", "--outdir", outdir] if outdir else []
     subprocess.run([sys.executable, os.path.join(os.path.dirname(__file__), "cloud_run.py"), "run", "--no-base", "--no-bench-cache",
@@ -85,9 +86,11 @@ def fetch(name, outdir=None):
 
 if __name__ == "__main__":
     a = sys.argv[1:] or ["status"]
-    if a[0] == "create": create(a[a.index("--gpu") + 1] if "--gpu" in a else "NVIDIA RTX 2000 Ada Generation")
-    elif a[0] in ("stop", "terminate"): act(a[0])
-    elif a[0] == "submit": submit(a[1], a[2], [x for i, x in enumerate(a) if i > 0 and a[i - 1] == "--include"])
+    nm = a[a.index("--name") + 1] if "--name" in a else NAME          # a 2nd pod: --name exo-gpu-bench2 --spool gpu2
+    sp = a[a.index("--spool") + 1] if "--spool" in a else "gpu"
+    if a[0] == "create": create(a[a.index("--gpu") + 1] if "--gpu" in a else "NVIDIA RTX 2000 Ada Generation", nm, sp)
+    elif a[0] in ("stop", "terminate"): act(a[0], nm)
+    elif a[0] == "submit": submit(a[1], a[2], [x for i, x in enumerate(a) if i > 0 and a[i - 1] == "--include"], sp)
     elif a[0] == "cancel": cancel()
-    elif a[0] == "fetch": fetch(a[1], a[a.index("--outdir") + 1] if "--outdir" in a else None)
+    elif a[0] == "fetch": fetch(a[1], a[a.index("--outdir") + 1] if "--outdir" in a else None, sp)
     else: print(json.dumps(pods(), indent=1))

@@ -4,10 +4,10 @@
   "title": "Concept bench morphologies",
   "description": "One row per morphology in the swarm's catalogue: status, the agent's claimed bench numbers, the verifier's re-measured numbers (v_), its best sweep configuration so far, and the 3R baseline once (is_baseline), and the complexity count (the simplicity number, never part of the gap or score): complexity = points, lower = simpler, 0 = three pins on bearing pairs and three links; complexity_items = where the points come from; passive_trans = passive translations (more than 2 = not buildable); mechanism_confidence = counted or estimated. Built from docs/concepts/catalogue.json, families.json, rows/*.json (complexity: tools/simplicity.py on each row's mechanism record, docs/SIMPLICITY.md) and sweeps/*.json.",
   "file": "data/morphs.json",
-  "sha256": "0edacb91ead0e6827f52a42fc9ac2c3bb08a3736e3bdff40592ca3c100ade78a",
+  "sha256": "031b9e6b86090228858abe1a188bea3c8cd4321f1a5bedd7ce13762561cee44e",
   "rows": 106,
-  "bytes": 167326,
-  "updated": "2026-10-16T07:53:24Z"
+  "bytes": 167392,
+  "updated": "2026-10-16T08:09:05Z"
  },
  {
   "id": "sweeps",
@@ -104,9 +104,9 @@
   "title": "Data build info",
   "description": "When tools/dash_build.py last gathered the data, the repo commit, and any warnings it printed.",
   "file": "data/meta.json",
-  "sha256": "72523cd27b5d4267ef7d7a3e6a015dca3feafc6d91788de0ac07fbdd0691b110",
+  "sha256": "f4b2ec8a6cff6c3c0c1fbf7f31e580f52f7ab87a4c0f248597809d372572b6b2",
   "rows": 1,
   "bytes": 2088,
-  "updated": "2026-10-16T07:55:12Z"
+  "updated": "2026-10-16T08:09:05Z"
  }
 ]
