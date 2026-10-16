@@ -185,3 +185,28 @@ def hug_chain(start, end, clear, t, outside, n=6, climb_max=60.0, r_min=3.0, tar
     return dict(segs=segs, end_err=e, min_clear=float(c.min()), mean_clear=float(c.mean()), max_clear=float(c.max()),
                 max_clear_outside=float(c[o].max()) if o.any() else None, max_climb=float(climb(P, H).max()),
                 radii=[(1 / k if k else None) for k, _ in segs], objective=float(best[0]), snapped=snapped)
+
+
+def hug_chain_pieces(start, end, clear, t, outside, theta_need, need, cuts, n_piece=4, lift=0.2, **kw):
+    """hug_chain on a long bar in pieces: the chain is pinned at intermediate poses ON the target centre line (strap
+    + t/2 + lift, heading = its tangent) at the polar angles `cuts` (deg), each piece fitted by hug_chain with n_piece
+    segments; tangency holds at every cut (shared pose). theta_need / need: the strap (polar angle rad, radius)."""
+    def pose(a):
+        a = math.radians(a); h = 1e-3
+        rc = lambda b: float(np.interp(b, theta_need, need)) + t / 2 + lift
+        p0 = rc(a) * np.array([math.cos(a), math.sin(a)])
+        # tangent of the target curve from a local least-squares line over +-1.5 deg (the strap has station kinks)
+        bs = np.linspace(a - math.radians(1.5), a + math.radians(1.5), 7); Q = np.array([rc(b) * np.array([math.cos(b), math.sin(b)]) for b in bs])
+        d = np.linalg.svd(Q - Q.mean(0))[2][0]; d = d if d @ np.array([-math.sin(a), math.cos(a)]) > 0 else -d
+        return (float(p0[0]), float(p0[1]), math.atan2(d[1], d[0]))
+    poses = [tuple(start)] + [pose(a) for a in cuts] + [tuple(end)]; segs = []; rep = []
+    for i in range(len(poses) - 1):
+        try: f = hug_chain(poses[i], poses[i + 1], clear, t, outside, n=n_piece if not isinstance(n_piece, (list, tuple)) else n_piece[i], **kw)
+        except RuntimeError as e_: raise RuntimeError(f"piece {i} ({poses[i][:2]} -> {poses[i + 1][:2]}): {e_}")
+        segs += f["segs"]; rep.append(f)
+    P, H, _ = sample(start, segs, 24); U = P - 0.5 * t * normals(H); c = clear(U); o = outside(U)
+    climb = np.degrees(np.abs(wrap(H - np.arctan2(P[:, 1], P[:, 0]) - math.pi / 2)))
+    e = end_pose(start, segs) - np.asarray(end, float); e[2] = wrap(e[2])
+    return dict(segs=segs, end_err=float(np.abs(e).max()), min_clear=float(c.min()), mean_clear=float(c.mean()), max_clear=float(c.max()),
+                max_clear_outside=float(c[o].max()) if o.any() else None, max_climb=float(climb.max()), radii=[(1 / k if k else None) for k, _ in segs],
+                objective=float(sum(r["objective"] for r in rep)), snapped=all(r["snapped"] for r in rep), cuts_deg=list(cuts), pieces=len(rep))
