@@ -1378,5 +1378,149 @@
     }
    }
   }
- ]
+ ],
+ "clips": {
+  "Raise overhead": {
+   "frames": 181,
+   "held": 0,
+   "follow": 1.0,
+   "reasons": {},
+   "adjacent_pairs": {},
+   "min_skin_mm": 0.56,
+   "min_adj_mm": 0.32,
+   "knee_angle": [
+    93.5,
+    122.6
+   ],
+   "knuckle": {
+    "frames_K_open": 0,
+    "dK_max": 0.0
+   }
+  },
+  "Drink from a cup": {
+   "frames": 178,
+   "held": 0,
+   "follow": 1.0,
+   "reasons": {},
+   "adjacent_pairs": {},
+   "min_skin_mm": 2.24,
+   "min_adj_mm": 0.32,
+   "knee_angle": [
+    93.5,
+    94.8
+   ],
+   "knuckle": {
+    "frames_K_open": 0,
+    "dK_max": 0.0
+   }
+  },
+  "Comb hair": {
+   "frames": 202,
+   "held": 0,
+   "follow": 1.0,
+   "reasons": {},
+   "adjacent_pairs": {},
+   "min_skin_mm": 1.64,
+   "min_adj_mm": 0.32,
+   "knee_angle": [
+    93.5,
+    130.6
+   ],
+   "knuckle": {
+    "frames_K_open": 0,
+    "dK_max": 0.0
+   }
+  },
+  "Reach a high shelf": {
+   "frames": 157,
+   "held": 0,
+   "follow": 1.0,
+   "reasons": {},
+   "adjacent_pairs": {},
+   "min_skin_mm": 1.56,
+   "min_adj_mm": 0.32,
+   "knee_angle": [
+    93.5,
+    131.6
+   ],
+   "knuckle": {
+    "frames_K_open": 77,
+    "dK_max": 15.82
+   }
+  },
+  "Wash opposite shoulder": {
+   "frames": 193,
+   "held": 0,
+   "follow": 1.0,
+   "reasons": {},
+   "adjacent_pairs": {},
+   "min_skin_mm": 2.26,
+   "min_adj_mm": 0.32,
+   "knee_angle": [
+    93.5,
+    96.5
+   ],
+   "knuckle": {
+    "frames_K_open": 39,
+    "dK_max": 6.19
+   }
+  },
+  "Reach back pocket": {
+   "frames": 145,
+   "held": 0,
+   "follow": 1.0,
+   "reasons": {},
+   "adjacent_pairs": {},
+   "min_skin_mm": 2.13,
+   "min_adj_mm": 0.32,
+   "knee_angle": [
+    94.5,
+    115.6
+   ],
+   "knuckle": {
+    "frames_K_open": 0,
+    "dK_max": 0.0
+   }
+  },
+  "Wave": {
+   "frames": 172,
+   "held": 0,
+   "follow": 1.0,
+   "reasons": {},
+   "adjacent_pairs": {},
+   "min_skin_mm": 1.69,
+   "min_adj_mm": 0.32,
+   "knee_angle": [
+    93.5,
+    110.2
+   ],
+   "knuckle": {
+    "frames_K_open": 0,
+    "dK_max": 0.0
+   }
+  },
+  "Walking arm swing": {
+   "frames": 109,
+   "held": 0,
+   "follow": 1.0,
+   "reasons": {},
+   "adjacent_pairs": {},
+   "min_skin_mm": 2.48,
+   "min_adj_mm": 0.32,
+   "knee_angle": [
+    93.5,
+    94.2
+   ],
+   "knuckle": {
+    "frames_K_open": 0,
+    "dK_max": 0.0
+   }
+  }
+ },
+ "workspace": {
+  "poses": 1432,
+  "closes": 0.764,
+  "feasible_kin_parts": 0.764,
+  "forced_feasible": 322
+ }
 }

@@ -1,0 +1,154 @@
+{
+ "design": "l1_minarc-pick1",
+ "knee_stop_deg": 149.5,
+ "rows": [
+  {
+   "knee_angle": 95.0,
+   "knee stop web vs E boss": 0.502,
+   "knee stop web vs E strap": 1.6205,
+   "knee stop tooth vs E boss": 1.8918,
+   "knee stop tooth vs E strap": 5.4211,
+   "knee link vs E boss": 0.5,
+   "knee link vs E strap": 0.5
+  },
+  {
+   "knee_angle": 110.0,
+   "knee stop web vs E boss": 0.502,
+   "knee stop web vs E strap": 0.5608,
+   "knee stop tooth vs E boss": 1.8926,
+   "knee stop tooth vs E strap": 3.8563,
+   "knee link vs E boss": 0.5,
+   "knee link vs E strap": 0.5
+  },
+  {
+   "knee_angle": 125.0,
+   "knee stop web vs E boss": 0.5023,
+   "knee stop web vs E strap": 0.5,
+   "knee stop tooth vs E boss": 1.8965,
+   "knee stop tooth vs E strap": 2.4598,
+   "knee link vs E boss": 0.5,
+   "knee link vs E strap": 0.5
+  },
+  {
+   "knee_angle": 135.0,
+   "knee stop web vs E boss": 0.5022,
+   "knee stop web vs E strap": 0.5,
+   "knee stop tooth vs E boss": 1.8943,
+   "knee stop tooth vs E strap": 1.5752,
+   "knee link vs E boss": 0.5,
+   "knee link vs E strap": 0.5
+  },
+  {
+   "knee_angle": 140.0,
+   "knee stop web vs E boss": 0.502,
+   "knee stop web vs E strap": 0.5,
+   "knee stop tooth vs E boss": 1.8918,
+   "knee stop tooth vs E strap": 1.0675,
+   "knee link vs E boss": 0.5,
+   "knee link vs E strap": 0.5
+  },
+  {
+   "knee_angle": 143.6,
+   "knee stop web vs E boss": 0.502,
+   "knee stop web vs E strap": 0.5,
+   "knee stop tooth vs E boss": 1.8932,
+   "knee stop tooth vs E strap": 0.6778,
+   "knee link vs E boss": 0.5,
+   "knee link vs E strap": 0.5
+  },
+  {
+   "knee_angle": 145.0,
+   "knee stop web vs E boss": 0.5018,
+   "knee stop web vs E strap": 0.5,
+   "knee stop tooth vs E boss": 1.8894,
+   "knee stop tooth vs E strap": 0.5212,
+   "knee link vs E boss": 0.5,
+   "knee link vs E strap": 0.5
+  },
+  {
+   "knee_angle": 147.0,
+   "knee stop web vs E boss": 0.5023,
+   "knee stop web vs E strap": 0.5,
+   "knee stop tooth vs E boss": 1.896,
+   "knee stop tooth vs E strap": 0.2928,
+   "knee link vs E boss": 0.5,
+   "knee link vs E strap": 0.5
+  },
+  {
+   "knee_angle": 148.5,
+   "knee stop web vs E boss": 0.5022,
+   "knee stop web vs E strap": 0.5,
+   "knee stop tooth vs E boss": 1.8955,
+   "knee stop tooth vs E strap": 0.1181,
+   "knee link vs E boss": 0.5,
+   "knee link vs E strap": 0.5
+  },
+  {
+   "knee_angle": 149.0,
+   "knee stop web vs E boss": 0.5021,
+   "knee stop web vs E strap": 0.5,
+   "knee stop tooth vs E boss": 1.8941,
+   "knee stop tooth vs E strap": 0.0592,
+   "knee link vs E boss": 0.5,
+   "knee link vs E strap": 0.5
+  },
+  {
+   "knee_angle": 149.4,
+   "knee stop web vs E boss": 0.502,
+   "knee stop web vs E strap": 0.5,
+   "knee stop tooth vs E boss": 1.8925,
+   "knee stop tooth vs E strap": 0.0119,
+   "knee link vs E boss": 0.5,
+   "knee link vs E strap": 0.5
+  },
+  {
+   "knee_angle": 149.5,
+   "knee stop web vs E boss": 0.5019,
+   "knee stop web vs E strap": 0.5,
+   "knee stop tooth vs E boss": 1.8921,
+   "knee stop tooth vs E strap": -0.0,
+   "knee link vs E boss": 0.5,
+   "knee link vs E strap": 0.5
+  },
+  {
+   "knee_angle": 149.6,
+   "knee stop web vs E boss": 0.5019,
+   "knee stop web vs E strap": 0.5,
+   "knee stop tooth vs E boss": 1.8916,
+   "knee stop tooth vs E strap": -0.0161,
+   "knee link vs E boss": 0.5,
+   "knee link vs E strap": 0.5
+  },
+  {
+   "knee_angle": 150.0,
+   "knee stop web vs E boss": 0.5018,
+   "knee stop web vs E strap": 0.5,
+   "knee stop tooth vs E boss": 1.8898,
+   "knee stop tooth vs E strap": -0.0804,
+   "knee link vs E boss": 0.5,
+   "knee link vs E strap": 0.5
+  },
+  {
+   "knee_angle": 151.0,
+   "knee stop web vs E boss": 0.5019,
+   "knee stop web vs E strap": 0.5,
+   "knee stop tooth vs E boss": 1.8906,
+   "knee stop tooth vs E strap": -0.2422,
+   "knee link vs E boss": 0.5,
+   "knee link vs E strap": 0.5
+  },
+  {
+   "knee_angle": 153.0,
+   "knee stop web vs E boss": 0.5023,
+   "knee stop web vs E strap": 0.5,
+   "knee stop tooth vs E boss": 1.8964,
+   "knee stop tooth vs E strap": -0.5381,
+   "knee link vs E boss": 0.5,
+   "knee link vs E strap": 0.5
+  }
+ ],
+ "min_clear_below_stop": 0.0119,
+ "tooth_vs_strap_at_stop": -0.0,
+ "knee_link_vs_E_strap_min_over_range": 0.5,
+ "note": "signed clearance (mm, negative = overlap) of the built knee-side parts vs the built member-3 parts, the knee turned about pin a"
+}
