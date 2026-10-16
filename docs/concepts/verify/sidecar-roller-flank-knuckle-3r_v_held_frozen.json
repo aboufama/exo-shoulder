@@ -1,0 +1,269 @@
+{
+ "fit_fast": {
+  "gap": 11.73,
+  "reach": 0.7937,
+  "follow": 1.0,
+  "inband14": 0.889,
+  "inband10": 0.5103,
+  "contact": 0.0,
+  "extra": {
+   "n_taken": 187,
+   "closure_max_mm": 0.0,
+   "roller_lug_min_mm": 4.024,
+   "roller_lug_max_mm": 5.036,
+   "pa_crank_max": 6.4,
+   "pa_horn_max": 41.4,
+   "wrong_sense": 0,
+   "sp": -1.0,
+   "dK_sign_counts": {
+    "pos": 0,
+    "neg": 99,
+    "zero": 88
+   },
+   "poses_failing": 0,
+   "why_failing": {},
+   "poses_failing_ids": [],
+   "pa_lobe_real_max": 31.14,
+   "dK_taken_max_deg": 52.8,
+   "dK_lim_deg": 56.25,
+   "why_lim": "law",
+   "drive_idle": false,
+   "corrected": {
+    "gap": 11.73,
+    "reach": 0.7937,
+    "follow": 1.0,
+    "inband14": 0.889,
+    "inband10": 0.5103,
+    "contact": 0.0
+   }
+  }
+ },
+ "frozen": {
+  "gap": 22.35,
+  "reach": 0.6996,
+  "follow": 1.0,
+  "inband14": 0.8883,
+  "inband10": 0.5114,
+  "contact": 0.0114
+ },
+ "mode": "exact",
+ "n": 1154,
+ "why": {
+  "fold": 250,
+  "slide": 26,
+  "flip": 0,
+  "closure": 0,
+  "skin": 0,
+  "parts": 0,
+  "contact": 10
+ },
+ "parts_pairs": {},
+ "parts_ib14": {
+  "hub1": [
+   0.993,
+   7.8,
+   80
+  ],
+  "hubK": [
+   0.987,
+   8.1,
+   80
+  ],
+  "hub2": [
+   0.984,
+   10.5,
+   80
+  ],
+  "hub3": [
+   0.597,
+   13.1,
+   80
+  ],
+  "E": [
+   0.951,
+   7.4,
+   104
+  ],
+  "boss": [
+   0.993,
+   8.4,
+   32
+  ],
+  "pad": [
+   1.0,
+   8.5,
+   32
+  ],
+  "knee": [
+   0.936,
+   10.8,
+   80
+  ],
+  "crank": [
+   0.852,
+   11.4,
+   125
+  ],
+  "roller": [
+   0.932,
+   10.0,
+   28
+  ],
+  "horn": [
+   0.947,
+   6.1,
+   33
+  ],
+  "L1a": [
+   0.954,
+   11.0,
+   8
+  ],
+  "L1b": [
+   0.956,
+   8.5,
+   32
+  ],
+  "L2": [
+   0.738,
+   12.0,
+   128
+  ]
+ },
+ "audit": {
+  "near_touch_min_mm": 0.17,
+  "near_touch_low": [
+   {
+    "mm": 0.17,
+    "i": 820,
+    "kind": "ws",
+    "plane": 75.0,
+    "elev": 150.0,
+    "axial": -90.0
+   },
+   {
+    "mm": 0.35,
+    "i": 609,
+    "kind": "ws",
+    "plane": 30.0,
+    "elev": 165.0,
+    "axial": -75.0
+   },
+   {
+    "mm": 0.43,
+    "i": 1099,
+    "kind": "ws",
+    "plane": 135.0,
+    "elev": 135.0,
+    "axial": -60.0
+   },
+   {
+    "mm": 0.43,
+    "i": 754,
+    "kind": "ws",
+    "plane": 60.0,
+    "elev": 165.0,
+    "axial": -45.0
+   },
+   {
+    "mm": 0.49,
+    "i": 681,
+    "kind": "ws",
+    "plane": 45.0,
+    "elev": 165.0,
+    "axial": -60.0
+   }
+  ],
+  "gap_near1": 25.41,
+  "near1_poses": 14,
+  "gap_near2": 50.38,
+  "near2_poses": 108,
+  "overhead140": {
+   "ws": 71,
+   "reach": 0.2676,
+   "clip": 19,
+   "follow": 1.0,
+   "inband14": 0.8681,
+   "inband10": 0.544,
+   "why_not": {
+    "fold": 35,
+    "slide": 11,
+    "flip": 0,
+    "closure": 0,
+    "skin": 0,
+    "parts": 0,
+    "contact": 6
+   }
+  }
+ },
+ "extra": {
+  "n_taken": 868,
+  "closure_max_mm": 0.0,
+  "roller_lug_min_mm": 4.024,
+  "roller_lug_max_mm": 5.036,
+  "pa_crank_max": 6.5,
+  "pa_horn_max": 41.7,
+  "wrong_sense": 0,
+  "sp": -1.0,
+  "dK_sign_counts": {
+   "pos": 0,
+   "neg": 443,
+   "zero": 425
+  },
+  "poses_failing": 0,
+  "why_failing": {},
+  "poses_failing_ids": [],
+  "pa_lobe_real_max": 31.14,
+  "dK_taken_max_deg": 53.37,
+  "dK_lim_deg": 56.25,
+  "why_lim": "law",
+  "drive_idle": false,
+  "corrected": {
+   "gap": 22.35,
+   "reach": 0.6996,
+   "follow": 1.0,
+   "inband14": 0.8883,
+   "inband10": 0.5114,
+   "contact": 0.0114
+  }
+ },
+ "sidecar": {
+  "boss_level": 62.2,
+  "lev_L1b": 59.1,
+  "arm_tip_level": 63.7,
+  "g": 2.282,
+  "sig": 1.0,
+  "r_c": 15.67,
+  "beta": -174.72,
+  "arm_len": 51.5,
+  "arc_deg": 129.9,
+  "rssr_closed": true,
+  "pa_crank_rest": 6.3,
+  "pa_horn_rest": 8.0,
+  "vel_angle_rest": 3.2,
+  "pa_crank_max_taken": 6.4,
+  "pa_horn_max_taken": 41.5,
+  "flank_rho_min": 3.7,
+  "contact_r": [
+   15.8,
+   22.2
+  ],
+  "clear_hubK_min": 1.58,
+  "clear_roll_hubK_min": 2.47,
+  "clear_lowarm_lug_min": 14.65,
+  "n_lowarm": 28,
+  "phi_max_taken": 23.6,
+  "cprog": 0.021,
+  "crest_exact": 9.97,
+  "dK_lim": 56.2,
+  "why_lim": "law",
+  "law_dK_max": 54.3,
+  "lug_r_max": 25.6
+ },
+ "min_clear_taken": 1.58,
+ "head": false,
+ "env": null,
+ "wear": "held",
+ "secs": 212.8,
+ "exact": true
+}

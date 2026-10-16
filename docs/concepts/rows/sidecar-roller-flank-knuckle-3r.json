@@ -6,7 +6,7 @@
  "active_dof": 3,
  "passive_dof": 5,
  "passive_translations": 0,
- "status": "screened",
+ "status": "verified",
  "t_ideated": null,
  "t_screened": "2026-10-16T20:05:07Z",
  "reach": 0.7937,
@@ -15,11 +15,11 @@
  "inband10": 0.5103,
  "contact": 0.0,
  "gap": 11.73,
- "v_reach": null,
- "v_follow": null,
- "v_inband14": null,
- "v_inband10": null,
- "v_gap": null,
+ "v_reach": 0.7222,
+ "v_follow": 1.0,
+ "v_inband14": 0.8903,
+ "v_inband10": 0.5128,
+ "v_gap": 20.08,
  "n_configs": 8717,
  "complexity": 45.25,
  "mechanism": {
@@ -206,5 +206,10 @@
  "doc": "docs/concepts/sidecar-roller-flank-knuckle-3r.md",
  "limiter": "The J2 fold, as in the whole knuckle family: 87 of 360 frozen workspace poses lost to fold (lead 86), overhead 8/28. The drive metal is the second cost: crank 0.856 and L2 0.74 / hub 3 0.60 in band. The cam pair itself no longer limits at the winner (dK_lim 56.2, ended by the law), but only because the lug points straight away from hub 2 (beta -175) and the arm wraps 130 deg around hub K (51.5 mm); at the proposer's beta -85 the horn pressure angle ends the flank after 8.2 deg of K.",
  "verdict": "Contender, self-measured: frozen exact Bench(110,360) 20.08 (score 92.70), near-touch 21.17, connected (flood fill) 20.08 full / 22.90 knn, vs the verified lead 22.82 / 25.63 and the rod sidecar 18.91 / 21.72 (self-measured). 3 active, 0 passive translations, complexity 45.25 (lead 49, rod sidecar 49). Needs the adversarial verifier.",
- "note": "Spherical cam pair synthesised per 0.25 deg of K (pressure angles both sides, force closure, cusp, contact on the lug, arm / roller clearances); the lug is built from the synthesised flank (spherical shell, 5-axis). Kill gate passed: flank >= 30 deg of K (only beta -110..-175), fast near-touch 11.73 <= 14. Progressive law (c) tried and rejected by every stream (cusp at the pitch point). 2 mm near-touch is worse than the lead (46.82 vs 44.08): the drive metal sits at 1-2 mm on 45 frozen poses. K slop from MR63 + pin play ~0.09 deg at the flank, ~0.6 deg through the lobe follower and crank pivot. Fast-best P1d (11.25) worn frozen: 20.48 plain / 21.58 near-touch / 39.94 at 2 mm (fold 91 vs 87) - the 0.48 fast gain is fold tuned to the 160-pose sample, so the claim stays on P1 (20.08). Total tries 8717."
+ "note": "Spherical cam pair synthesised per 0.25 deg of K (pressure angles both sides, force closure, cusp, contact on the lug, arm / roller clearances); the lug is built from the synthesised flank (spherical shell, 5-axis). Kill gate passed: flank >= 30 deg of K (only beta -110..-175), fast near-touch 11.73 <= 14. Progressive law (c) tried and rejected by every stream (cusp at the pitch point). 2 mm near-touch is worse than the lead (46.82 vs 44.08): the drive metal sits at 1-2 mm on 45 frozen poses. K slop from MR63 + pin play ~0.09 deg at the flank, ~0.6 deg through the lobe follower and crank pivot. Fast-best P1d (11.25) worn frozen: 20.48 plain / 21.58 near-touch / 39.94 at 2 mm (fold 91 vs 87) - the 0.48 fast gain is fold tuned to the 160-pose sample, so the claim stays on P1 (20.08). Total tries 8717. | VERIFIED (independent skeptic, docs/concepts/verify/sidecar-roller-flank-knuckle-3r.py, farm, Bench(110,360) exact, frozen fit-60 shape, the claim's model loaded unchanged): v_gap 20.08 (score 92.70) = claim reproduced to the digit; reach 0.722, follow 1.0, in-band14 0.890, in-band10 0.513, contact 0.013; near-touch 21.17 at 1 mm / 46.82 at 2 mm, min metal 0.32 mm; overhead 8/28 (fold 14, slide 3, contact 3); lost ws: fold 87, slide 8, contact 5. Added checks on all 370 taken poses, 0 fail: cam closure in the world (roller centre on the flank's path, max err 0.000 mm), roller never inside the lug (min 4.02 mm to sampled lug metal vs roller r 3), K always opened in the drive's push sense (185 neg / 185 zero / 0 wrong), |dK| <= dK_lim (taken max 51.7 vs 56.25), pressure angles at the pose crank 6.3 / horn 41.0 max (<= 45), real lobe pressure angle 31.1, drive carries 51.7 deg of K (not idle). Flood fill: full 20.08 (0 dropped), knn 22.90 (10). Held out (frozen, exact): 22.35 (near-touch 25.41, min metal 0.17), vs rod sidecar 22.67 and lead 26.75. Sampling defect found: the lug's 0.3-mm-behind-flank row is projected onto the shell, its chord to the roller centre shrinks below 3.3 and the whole row is deleted (sampled lug starts 1-2 mm behind the flank); with that strip and the roller pin's O5 x 0.8 retaining head added (real envelope) the number is 19.96 bench / 22.23 held out (in band, so it does not hurt). Champion same bench 75.94 (risley-turret verifier, Bench(110,360) exact, kit checks + 1 mm clearance). Not refuted: a verified 3-active contender behind the rod sidecar (18.91) and the parallelogram sidecar (19.13), ahead of frontload 22.82; best held out of the three sidecars measured so far (22.35 vs 22.67 / 22.03 parallelogram - parallelogram still better), complexity 45.25 vs 49.",
+ "v_contact": 0.0133,
+ "champion_same_bench": 75.94,
+ "t_verified": "2026-10-16T20:28:02Z",
+ "v_held_gap": 22.35,
+ "v_env_gap": 19.96
 }

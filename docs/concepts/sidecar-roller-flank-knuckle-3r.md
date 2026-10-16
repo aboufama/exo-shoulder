@@ -210,3 +210,52 @@ and 39.94 at 2 mm, with fold losses of 91 against P1's 87. Its 0.48 fast gain is
 4. **The rodless swap is worth about the same as the rod.** Frozen 20.08 (roller) vs 18.91 (rod), at the same fold
    losses. The roller version costs 3.75 complexity points less (no rod, no ball links) and is 1.2 gap points worse:
    its metal runs closer at 2 mm, and its arm is longer.
+
+## Verification (independent skeptic, 2026-10-16)
+
+Harness: `docs/concepts/verify/sidecar-roller-flank-knuckle-3r.py` (the claim's model loaded unchanged; frozen fit-60 shape
+worn on Bench(110,360) exact, on the farm). Outputs: `docs/concepts/verify/sidecar-roller-flank-knuckle-3r_v_{bench,held}_frozen{,_env}.json`.
+
+**Verdict: VERIFIED (not refuted). v_gap 20.08 (score 92.70) on Bench(110,360) exact; champion 75.94 on the same bench.**
+
+| | claim | verifier (claim's sampling + added checks) | verifier, real envelope (`--head`) |
+|---|---|---|---|
+| gap (plain) | 20.08 | **20.08** | 19.96 |
+| reach / follow / in-band14 / in-band10 / contact | 0.722 / 1.0 / 0.890 / - / 0.013 | 0.722 / 1.0 / 0.890 / 0.513 / 0.013 | 0.722 / 1.0 / 0.892 / 0.517 / 0.013 |
+| near-touch 1 mm / 2 mm, min metal | 21.17 / 46.82, 0.32 | 21.17 / 46.82, 0.32 | 21.05 / 46.82, 0.32 |
+| overhead (elev >= 140) | 8/28 | 8/28 (fold 14, slide 3, contact 3), in-band 0.868 | 8/28 |
+| flood fill full / knn | 20.08 / 22.90 | 20.08 (0 dropped) / 22.90 (10) | 19.96 / 22.78 |
+| held out (frozen, exact) | not run | **22.35** (near-touch 25.41, min metal 0.17, reach 0.700) | 22.23 |
+
+Checks added on every taken pose (370 bench, 868 held out); **0 poses fail any of them**:
+
+1. Cam closure in the world: the roller centre carried by the crank (T9 C0) sits on the synthesised roller-centre path of
+   link 1a's flank (T1 P1(|dK|)): max error 0.000 mm. The model's per-pose K sense matches the sense the flank was cut for.
+2. K sense: the roller can only push. Taken poses: 185 with K opened in the drive's sense, 185 at K = 0, 0 the other way.
+3. Roller vs lug in the world: the roller centre stays >= 4.02 mm from the sampled lug metal (roller radius 3), and every
+   taken |dK| (max 51.7) is inside the flank's range (dK_lim 56.25, ended by the law).
+4. Pressure angles at each taken pose's K: crank 6.3, horn 41.0 max (held out 6.5 / 41.7), <= 45. The real lobe pressure
+   angle with the exact phi law is 31.1 deg. The drive carries 51.7 deg of K, so it is not idle (>= 30).
+5. DOF: 3 active (J1, J2, J3). K is slaved through lobe -> crank -> roller -> flank, with force closure from K's clock
+   spring. The crank is set by the lobe. The two knee pins close the cuff (sensed, as in the lead). No passive coordinate
+   is left undetermined. 0 passive translations; no gears, pulleys, cables or rods.
+
+Defects found (none changes the verdict):
+
+- **Lug sampling.** The lug row 0.3 mm behind the flank is projected onto the shell. That shrinks its chord to the roller
+  centre below ROLL_R + 0.3, so the removal step deletes the whole row, and the sampled lug starts 1-2 mm behind the real
+  flank. The harness's `--head` mode re-adds that strip, together with the roller pin's retaining head (O5 x 0.8 under
+  the MR63; the claim's lowest metal was the roller's own underside). That metal lies in band, so the number improves a
+  little: 19.96 on the bench, 22.23 held out. The claim's 20.08 stands as the conservative value.
+- **Running gap.** The arm's arc rides 0.15 mm over the lug shell. The two are concentric spheres about GH, so the gap
+  stays constant, and it is accepted as the cam pair's running gap, not as a 1 mm clearance between non-adjacent parts.
+  The CAD has to hold it: a 0.15 mm gap between two 5-axis spherical surfaces.
+- **Held out.** 22.35. The rod sidecar is 22.67 and the lead 26.75 on the same protocol, so the ~2.3 bench-to-held-out
+  drop is in line with the family's.
+- **Grid-dependent continuity.** The bench-grid flood fill (the sparse neighbour graph) drops 118 forced poses (53.48). The
+  full and knn grids drop 0 and 10. The rule's metric is the full grid, which agrees with the claim. The knn number
+  (22.90) is the cautious one.
+
+Rank among the verified 3-active designs on Bench(110,360) exact frozen: the rod sidecar is 18.91, the parallelogram
+sidecar 19.13, **this design 20.08**, frontload 22.82. Its complexity, 45.25, is the lowest of the sidecars. The fold
+(87 workspace poses, 14 of 28 overhead) is still the limiter, the same as in the lead.
