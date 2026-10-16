@@ -231,6 +231,20 @@ def frozen(P, nc=110, nw=360):
     return KB.frozen(_clamp(dict(PARAMS, **P)), nc, nw)
 
 
+def frozen_held(P):
+    """the frozen shape (fit on Bench(60,160) fast) worn on the HELD-OUT poses: every fit-clip frame and workspace pose in
+    neither Bench(110,360) nor Bench(60,160), exact path (the verifier's held_bench, docs/concepts/verify/
+    skin-normal-3r-pin-knee-polish.py)"""
+    sp_ = importlib.util.spec_from_file_location("pk_polish_v_frontload", os.path.join(REPO, "docs", "concepts", "verify", "skin-normal-3r-pin-knee-polish.py"))
+    PV = importlib.util.module_from_spec(sp_); sp_.loader.exec_module(PV)
+    orig = CB.Bench
+    def bench(n_clip=60, n_ws=160, *a, **k):
+        return PV.held_bench() if n_clip == -1 else orig(n_clip, n_ws, *a, **k)
+    CB.Bench = bench
+    try: return KB.frozen(_clamp(dict(PARAMS, **P)), -1, -1)
+    finally: CB.Bench = orig
+
+
 def viz_export(par):
     """geometry of the fitted design (Bench(60,160)) for docs/concepts/viz/concepts/frontload-lobe-stopb-knuckle-3r.js"""
     B = CB.Bench(n_clip=60, n_ws=160); r, M = _report(B, par); D = M.D; P = D.p; L_ = D.law()
@@ -255,8 +269,8 @@ if __name__ == "__main__":
     par = json.loads(sys.argv[2]) if len(sys.argv) > 2 else {}
     if mode == "viz":
         print(json.dumps(viz_export(par), default=float)); sys.exit()
-    if mode == "frozen":
-        t = time.time(); out = frozen(par); out["params"] = par; out["secs"] = round(time.time() - t, 1)
+    if mode in ("frozen", "held"):
+        t = time.time(); out = frozen(par) if mode == "frozen" else frozen_held(par); out["params"] = par; out["secs"] = round(time.time() - t, 1)
         if len(sys.argv) > 3: json.dump(out, open(sys.argv[3], "w"), indent=1, default=float)
         a = out.get("audit", {})
         print(json.dumps(dict(fit=out["fit_fast"], frozen=out["frozen"], why=out["why"], near1=a.get("gap_near1"), minmetal=a.get("near_touch_min_mm"),
