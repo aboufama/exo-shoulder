@@ -1,0 +1,2 @@
+# the ledger is append-only: concurrent agents / sessions each append lines, so a merge keeps both sides
+ledger.jsonl merge=union
