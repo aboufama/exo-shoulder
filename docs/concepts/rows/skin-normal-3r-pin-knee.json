@@ -772,5 +772,181 @@
   },
   "remark": "H1 replaced k4598 at 06:29 UTC (polish verifier); k4598 re-measured too",
   "delta_gap": -1.01
+ },
+ "rebase_polish_m5": {
+  "status": "CANDIDATE - self-measured by the rebase track (round-3 verifier harness + knee_polish measure, farm, exact); needs an independent verifier before it replaces H1 (CLAUDE.md: gain >= 1 gap point confirmed)",
+  "search": "docs/research/rebase/polish_m5/cma_streams.json (4 streams from H1 / HW / R2 at margin 5, 3876 evals; H1's own objective at margin 5: 25.68)",
+  "P5": {
+   "k": "HWm5-g23-5",
+   "params": {
+    "rad1": 10.0,
+    "rad2": 10.0,
+    "rad3": 10.0,
+    "az1": 101.3136,
+    "el1": 63.0475,
+    "az2": 31.6253,
+    "el2": 44.9795,
+    "wd": 67.6795,
+    "wa": -5.4589,
+    "b3": 0.3392,
+    "lE": 59.5912,
+    "lc": 23.7175,
+    "phiE": -7.4584,
+    "phib": -71.5498,
+    "ang_min": 35.9262,
+    "stk": 5.5412
+   },
+   "polish_protocol_exact": {
+    "gap": 21.79,
+    "reach": 0.7139,
+    "follow": 1.0,
+    "inband14": 0.8869,
+    "inband10": 0.5035,
+    "contact": 0.0187,
+    "gap_near1": 22.34,
+    "gap_near2": 33.81,
+    "near1_poses": 1,
+    "near_min": 0.96,
+    "model_gap": 21.79,
+    "why": {
+     "fold": 84,
+     "slide": 11,
+     "flip": 0,
+     "closure": 0,
+     "skin": 0,
+     "parts": 1,
+     "contact": 7
+    },
+    "f": [
+     52.1,
+     62.2,
+     77.1
+    ],
+    "knee_ang": [
+     80.0,
+     140.7
+    ],
+    "j3_lever_min": 37.8,
+    "extra_bad": 0,
+    "closure_bad": 0,
+    "kh3_bad": 0,
+    "boss_bad": 0,
+    "spans": {
+     "q3": 185.7,
+     "pin_a": 60.7,
+     "pin_b": 60.4
+    },
+    "tr": 84.6,
+    "hubs": [
+     10.0,
+     10.0,
+     10.0
+    ],
+    "parts_pairs": {
+     "E-L2": 1
+    },
+    "oh140": {
+     "reach": 0.3214,
+     "inband14": 0.8305
+    },
+    "mode": "exact"
+   },
+   "held_out_exact": {
+    "gap": 24.87,
+    "reach": 0.6944,
+    "follow": 1.0,
+    "inband14": 0.8865,
+    "inband10": 0.501,
+    "contact": 0.0296,
+    "gap_near1": 28.7,
+    "gap_near2": 36.4,
+    "near1_poses": 7,
+    "near_min": 0.0,
+    "model_gap": 24.87,
+    "why": {
+     "fold": 90,
+     "slide": 9,
+     "flip": 0,
+     "closure": 0,
+     "skin": 0,
+     "parts": 0,
+     "contact": 11
+    },
+    "f": [
+     52.1,
+     62.2,
+     77.1
+    ],
+    "knee_ang": [
+     80.0,
+     142.8
+    ],
+    "j3_lever_min": 36.0,
+    "extra_bad": 0,
+    "closure_bad": 0,
+    "kh3_bad": 0,
+    "boss_bad": 0,
+    "spans": {
+     "q3": 192.4,
+     "pin_a": 62.9,
+     "pin_b": 61.9
+    },
+    "tr": 84.6,
+    "hubs": [
+     10.0,
+     10.0,
+     10.0
+    ],
+    "parts_pairs": {},
+    "oh140": {
+     "reach": 0.1923,
+     "inband14": 0.8396
+    },
+    "mode": "exact"
+   },
+   "fit60_verifier": {
+    "gap": 24.88,
+    "reach": 0.6944,
+    "follow": 0.9455,
+    "inband14": 0.8861,
+    "inband10": 0.5257,
+    "contact": 0.0248
+   },
+   "fit60_near1": 31.95
+  },
+  "Q5": {
+   "k": "H1m5-g71-14",
+   "params": {
+    "rad1": 10.0,
+    "rad2": 10.0,
+    "rad3": 10.0,
+    "az1": 102.6764,
+    "el1": 64.1388,
+    "az2": 32.1006,
+    "el2": 47.7998,
+    "wd": 69.084,
+    "wa": -7.9881,
+    "b3": 0.3451,
+    "lE": 62.2587,
+    "lc": 28.6773,
+    "phiE": -5.1572,
+    "phib": -60.2286,
+    "ang_min": 29.5283,
+    "stk": 5.7581
+   },
+   "fit60_verifier": {
+    "gap": 25.24,
+    "reach": 0.6667,
+    "follow": 1.0,
+    "inband14": 0.8894,
+    "inband10": 0.5253,
+    "contact": 0.0085
+   },
+   "fit60_near1": 28.42
+  },
+  "H1_m5": {
+   "polish_protocol_exact": 24.48,
+   "fit60_verifier": 27.2
+  }
  }
 }

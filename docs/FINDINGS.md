@@ -891,6 +891,14 @@ routing changed nothing at 10.
   by this track's farm run of the round-3 verifier (the polish verifier measured 27.20 too; 24.48 with the shape fitted on
   Bench(110,360) itself); raglan-knee-3r 27.82 (89.88) is 0.6 behind and has not been polished; knuckle 29.10, the
   round-3 k4598 29.54. All three knee designs are complexity 19.5-29.25 (two or three sensed passive pins).
+* **The polish optimum moves with the margin: a margin-5 re-polish gains 2-2.7 more (CANDIDATE, not yet independently
+  verified).** 4 CMA streams from H1 / HW / R2 at margin 5 (`tools/knee_polish.py`, O20 fixed, 3876 evals, farm,
+  `docs/research/rebase/polish_m5/cma_streams.json`; H1's own objective at margin 5 is 25.68): best P5 = HWm5-g23-5
+  near-touch 22.08 fast. Exact: **21.79** on the polish protocol (score 92.08; reach 0.714, follow 1.0, in-band14 0.887,
+  contact 0.019, near-touch 22.34; H1 24.48), disjoint held-out 24.87 (near-touch 28.70), round-3 fit-60 verifier 24.88
+  (follow 0.946; H1 27.20). Q5 = H1m5-g71-14: fit-60 25.24 (follow 1.0, contact 0.009). Both clear the >= 1 point bar
+  on every protocol measured; an independent verifier must confirm before either replaces H1 in the CAD
+  (row field `rebase_polish_m5`). Reach 0.69-0.71 is still short of the ~0.77 that 95 needs.
 * **The 4R's margin is a design element, not a rule.** arm-parked-knee-4r's spare is set by J2 stops AT the fold-margin
   line, so margin 5 moves its stops and the spring parks the knee elsewhere: hub 2 in band 0.75 -> 0.58, gap 33.91 ->
   44.24. At O20 it keeps the highest frozen reach of any class (0.744 at margin 10, overhead 10 of 28) but link 3 is
