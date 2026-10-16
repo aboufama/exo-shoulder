@@ -1,11 +1,11 @@
 # Independent check: user_pinknee_h1b (the gen-3 CAD rebuilt so its bars follow the verified model's strap)
 
-Checker (a skeptic), 2026-10-16 12:32-13:15 UTC. What I tested: the builder's claim in commits 0336225 / 9303730 (and
+Checker (a skeptic), 2026-10-16 12:32-13:45 UTC. What I tested: the builder's claim in commits 0336225 / 9303730 (and
 the lead's WIP commits e469b3c, 2bd6201 that carry the builder, sketch2d and judge/part_validity.py): bars machined to
 hug the model strap, DIN 6799 pin land, the R7 judge fix, and the before / after scorecard.
 
 Everything below is re-measured from the files in this directory and user_pinknee_h1/ with my own scripts (session
-scratchpad vfy_pkb/: dev.py, climb.py, pins.py, groove2.py; not in the repo). The judges ran on the farm with
+scratchpad vfy_pkb/: dev.py, climb.py, pins.py, groove2.py, flyfast.py, l1hit.py; not in the repo). The judges ran on the farm with
 `--outdir` (scratch) and R7 locally on copies, so no judge file in the tree was overwritten. I changed nothing in the
 design.
 
@@ -18,7 +18,7 @@ What holds:
 - R7 reproduces row for row (29 / 29); the judge change skips only the user's untouched parts and catalogue screws.
 - No loft is reachable; both bars are a single section swept on a line / arc wire; the tight bends are on parts
   labelled "5-axis machined from solid".
-- The pins have the 1.0 mm land and stand 0.9 mm proud; no knee-side part comes near link 2.
+- The pins have the 1.0 mm land and stand 0.9 mm proud; no knee-side part comes within 36 mm of link 2 (1616 frames).
 
 Corrections and notes (none changes a requirement's status): see "Corrections" at the end.
 
@@ -157,13 +157,28 @@ Read in full (diff a3eb02a..e469b3c) and run on copies.
 - **Fly-over** (pins.py): link 2 (bar alone, and the whole l2 group incl. the J2 / J3 caps) against every knee-side
   part - knee link + both sleeves, both clips + washers, member 3's pin-a boss region (within 8 mm of pin a), D8-06
   BOTTOM + pad + pin b - posed by scene_export.frame_xforms at every 2nd clip frame plus every eval-feasible workspace
-  pose: FLYOVER_RESULT
+  pose: **1616 frames** (671 clip frames + 945 eval-feasible workspace poses;
+  the claim says 1146 for "every 2nd clip frame + every eval-feasible pose" - its count differs from mine, its
+  conclusion does not). Method (flyfast.py): link 2 kept in its own frame (KD-tree on its vertices), every knee-side
+  part's vertices mapped into it per pose, refined to the exact libigl point-to-mesh distance below 5 mm.
+
+  | knee-side part (h1b, longer pins) | closest approach to link 2 (bar and whole l2 group) | where |
+  |---|---|---|
+  | knee link D8-05 | **38.5 mm** | workspace pose 374 |
+  | pin a thrust washer / E-clip / sleeve | **41.0 / 42.3 / 42.4 mm** | same pose |
+  | D8-06 BOTTOM + pad + pin b | **50.2 mm** | same pose |
+  | pin b thrust washer / sleeve / E-clip | **53.2 / 54.5 / 54.7 mm** | same pose |
+  | member 3's pin-a boss region (within 8 mm of pin a) | **36.0 mm** | workspace pose 374 |
+  | member 3 whole (for reference) | 0.15 mm to the bar at J3 (the designed running gap), 0.0 to the l2 group (the J3 bearings seated on member 3's O7 pin, a static fit judged by R6) | |
+
+  The 0.9 mm the pins now stand proud changes nothing here: the nearest knee-side metal (member 3's pin-a boss) is 36 mm from
+  link 2 in every pose. (The claim's "> 4 mm" is right and very conservative.) I did not re-run h1 to completion (the h1 pass was
+  stopped to save time; h1's pins are 0.9 mm shorter, so h1 can only be farther).
 
 **Check 5 holds.**
 
 ## Corrections
 
-FLYOVER_CORR
 1. **R7's measurement change reaches every L1**, not only l1_skin-normal-3r-pin-knee-h1 (section 3). Two committed L1
    scorecards (l1_skin-normal-3r-pin-knee, l1_offset-skin-normal-3r) still show R7 PASS and fail it when re-judged;
    the gen-4 l1_minarc-bdp will fail it on the same inherited BOTTOM mesh. Fix the shared mesh, then re-judge.
@@ -178,11 +193,14 @@ FLYOVER_CORR
 3. The 0.5 mm bar target is not met (disclosed). Measured by me: link 2 is 5.3 mm over at the J3 ramp foot and 3.7 mm
    over just after J2's footprint; link 1 1.5 mm at J1's drop.
 4. The pin land includes the chamfer (section 5).
+5. The fly-over frame count: every 2nd clip frame + every eval-feasible workspace pose is 671 + 945 = 1616 frames here,
+   not 1146; the conclusion (no knee-side part near link 2) holds with a far larger margin than "> 4 mm" (36 mm).
 
 ## What next
 
 - The fix that buys the most: link 2's two ramp feet (5.3 / 3.7 mm) - a 2 mm centre-line bend at each ramp end or
   leaving J2's level earlier (R6 over the J2 sweep), then the cross-width tilt (tilt the bar plane to the strap's mean
-  tilt, or two flat facets; no twisted sweep). That is the remaining ~3.4 R1 points against the L1.
+  tilt, or two flat facets; no twisted sweep). The CAD is still 3.4 R1 points (6.5 R1-aim, 2.9 R4) below its L1; this residual is the
+  measured candidate, to be confirmed by re-judging after the fix.
 - Repair the inherited cut BOTTOM mesh in the L1 path and re-judge every L1's R7 (stale PASS on two scorecards).
-- R16 / R2: the five link-1 body hits at the hub seats in the workspace poses.
+- R16 / R2: the five link-1 body hits at the rim of link 1's O20 J2 ring (Corrections 2).
