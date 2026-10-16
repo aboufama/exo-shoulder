@@ -150,7 +150,7 @@ def redteam(B, p, r):
               + (f"; {where(m, None, int(Pi[0]))}" if m.kind == "flat" else ""))
         for j in worst: print(f"       worst {lab(int(j))}  ib {ib[list(Pi).index(j)]:.2f} median {np.median(d[list(Pi).index(j)]):.1f}")
     print("-- what lifts each strap: the ray / pose with the largest K3 requirement (thorax az 0 ant, 90 lat; el up) --")
-    fitp = np.nonzero(L["ok"])[0]
+    fitp = np.nonzero(L["ok"])[0] if (B.grid is not None or "--straps" in sys.argv) else np.zeros(0, int)   # slow on the exact path
     for m in ch.members:
         if m.kind == "flat" or not len(fitp): continue
         D = m.D[fitp]; n = D.shape[1]
