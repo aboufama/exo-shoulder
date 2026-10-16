@@ -39,14 +39,15 @@ Sweep log: `docs/concepts/sweeps/spine-parked-j2-3r.json`. Row: `docs/concepts/r
 
 ## Result (2026-10-16 03:00 UTC)
 
-**Best fast: gap 29.31 on Bench(60,160)** (score 89.34; k2445, found when the whole search history was re-evaluated on the
-plain gap; frozen exact pending). **Best worn frozen on Bench(110,360) exact: 34.79** (CMA-B best, fast 30.24; score 87.35;
+**Best fast: gap 28.49 on Bench(60,160)** (score 89.64; k7008, CMA stream G, which re-polished the B basin on the plain
+gap; frozen exact pending). **Best worn frozen on Bench(110,360) exact: 34.79** (CMA-B best, fast 30.24; score 87.35;
 reach 0.619, follow 1.000, in-band 14 0.850, in-band 10 0.444, contact 0.018). **0 passive translations, 0 passive
 rotations, 3 active pins.**
 
 | | fast Bench(60,160) | frozen Bench(110,360) exact | near-touch (metal < 1 mm = contact), exact | min metal-skin | overhead >= 140: reach / in-band 14 |
 |---|---|---|---|---|---|
-| k2445 (CMA-B gen 46, plain re-evaluation; O15 / O15) | **29.31** | pending (farm job spm-frozen3-k2445) | fast 34.09 | 0.06 mm | fast 0/12 |
+| k7008 (CMA-G, plain-gap polish of the B basin; O15 / O15; a1 37.6, q 0.972) | **28.49** | pending (farm job spm-frozen3-G) | - | - | fast 0/12 |
+| k2445 (CMA-B gen 46, plain re-evaluation; O15 / O15) | 29.31 | pending (farm job spm-frozen3-k2445) | fast 34.09 | 0.06 mm | fast 0/12 |
 | CMA-B best (O15 J2, O15 J3) | 30.24 | **34.79** | 37.64 | 0.15 mm | 7/28 / 0.874 |
 | CMA-D best (O15 J2, O17 J3) | 31.11 | 34.83 | **36.59** | 0.43 mm | 6/28 / 0.901 |
 | CMA-A best (O17 J2, O15 J3) | 31.42 | 35.09 | 38.55 | 0.01 mm | 6/28 / 0.858 |
@@ -348,3 +349,16 @@ Two family-1 seat sets were tested, with arcs from the fold law: (a) J1 bvec(120
   but does not widen, the window).
 * **Slim hubs (asked).** The O15 / O17 J2 hub buys 17 fast points at these seats. The O17 (2.75 mm wall) gets 16.6 of
   them and is the conservative component. A slim J3 buys 1.6.
+
+
+## Final farm results (03:15 UTC)
+
+* **Stream G (plain-gap polish of the B basin): 28.49 fast** (k7008; reach 0.663, follow 0.967, in-band 14 0.876,
+  in-band 10 0.522, contact 0.024). Arcs a1 37.6 / a2 73.6, q 0.972. Its frozen exact run is queued (spm-frozen3-G).
+* **Fold-free anterolateral seats, streams H / I / J / L (452 tries): dead.**
+  - Reach rises to 0.84-0.89.
+  - But in-band falls to 0.15-0.30: both hubs ride the deltoid. H / I / J never pass the honesty audit.
+  - L drifts back towards the acromion (J1 el 34) and stops at 65.84 (reach 0.84, in-band 0.30).
+  - The fold law's seats are real, but not wearable within the band.
+* **Gate on the whole history** (6915 tries in order): gain 0.3 score points over the second half and
+  0.3 over the last third; top 5 within 0.04 (gaps [28.49, 28.51, 28.52, 28.56, 28.6]). **Converged.**
