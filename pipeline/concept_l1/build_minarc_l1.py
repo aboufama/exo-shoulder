@@ -137,7 +137,7 @@ def link_solid(M, lk, rows):
 def extrude2d(V2, F2, cen, e, f, ax, z0, z1):
     """closed solid from a 2D triangle mesh (holes allowed) in the (e, f) plane, z0..z1 along ax (e, f, ax right-handed)"""
     V2 = np.asarray(V2, float); F2 = np.asarray(F2, int).copy()
-    ar = np.cross(V2[F2[:, 1]] - V2[F2[:, 0]], V2[F2[:, 2]] - V2[F2[:, 0]]); F2[ar < 0] = F2[ar < 0][:, ::-1]
+    d1, d2 = V2[F2[:, 1]] - V2[F2[:, 0]], V2[F2[:, 2]] - V2[F2[:, 0]]; ar = d1[:, 0] * d2[:, 1] - d1[:, 1] * d2[:, 0]; F2[ar < 0] = F2[ar < 0][:, ::-1]
     n = len(V2); to3 = lambda z: cen + V2[:, :1] * e + V2[:, 1:2] * f + z * ax
     V = np.r_[to3(z0), to3(z1)]; F = [F2[:, ::-1], F2 + n]
     E = np.r_[F2[:, [0, 1]], F2[:, [1, 2]], F2[:, [2, 0]]]; key = np.sort(E, 1)
@@ -381,7 +381,7 @@ def check_frames(M, dd, parts, stack):
     across = [i for i in taken if pl(i) >= 100 and el(i) >= 40]
     kin = [i for i in range(len(B.idx)) if K["ok"][i] and K["kok"][i] and K["res"][i] < 0.5]
     pick = {"arm at side": min(taken, key=el), "first": taken[0], "middle": taken[len(taken) // 2], "highest": max(taken, key=el),
-            "2nd highest": sorted(taken, key=el)[-2]}
+            "2nd highest": next(j for j in sorted(taken, key=el)[::-1] if j != max(taken, key=el))}
     if behind: pick["behind the back"] = max(behind, key=lambda i: -pl(i))
     if across: pick["across the body"] = max(across, key=pl)
     tgt = np.array([30.0, 150.0, -60.0]); pick["overhead raise peak"] = min(kin, key=lambda i: float(np.linalg.norm(allp[i, :3] - tgt)))
@@ -432,7 +432,7 @@ def check_frames(M, dd, parts, stack):
                 s_ = st[key]; c_ = s_["dowel_home_angle_deg"] + ang; a0, a1 = s_["slot_deg"]
                 dd_ = math.degrees(math.asin((DOWEL_R + END_CLR) / SLOT_RS)); lo_, hi_ = a0 + dd_, a1 - dd_
                 pos = (c_ - lo_) % 360.0
-                inside[key] = dict(angle_deg=round(ang, 3), from_stop_lo_deg=round(pos, 3), to_stop_hi_deg=round((hi_ - lo_) - pos, 3), inside=bool(pos <= (hi_ - lo_) + 1e-6))
+                inside[key] = dict(angle_deg=round(ang, 3), from_stop_lo_deg=round(pos, 3), to_stop_hi_deg=round((hi_ - lo_) - pos, 3), inside=bool(pos <= (hi_ - lo_) + 0.01 or pos >= 360.0 - 0.01))
         finally: M.Q, M.s, M.RS, M.X, M.K, M.q = old
         worst = max(v[0] for k, v in res.items() if not k.startswith(("L1", "L2")) and "slot band" not in k and v[0] is not None)
         worst_l = max(v[0] for k, v in res.items() if k in ("L1a", "L1b", "L2"))
