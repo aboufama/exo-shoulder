@@ -838,8 +838,10 @@
   ],
   "t_ideated": "2026-10-15T15:12:21Z",
   "source": "ideation C",
-  "status": "modelling-interrupted",
-  "model_file": "docs/concepts/models/cam-coupled-4r.py"
+  "status": "screened",
+  "model_file": "docs/concepts/models/cam-coupled-4r.py",
+  "t_screened": "2026-10-16T09:56:27Z",
+  "verdict": "screened (round 5, stopped by the lead): best honest 50.67 Bench(60,160) fast under the J1-housing rule; 41.66 red-teamed (groove cuts J1 housing, 176.8 with the rule); limiter: hubs 2 / 3 roam (in band 0 / 0.15). Not a contender. rows/cam-coupled-4r.json"
  },
  {
   "id": "floating-centre-3r",

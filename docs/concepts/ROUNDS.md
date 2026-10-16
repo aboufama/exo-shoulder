@@ -142,3 +142,134 @@ docs/concepts/round3_ideation.md. Rounds 5+ are written as they run (scratchpad 
 - stop-relay-rocker-3r and dwell-fourbar-knee-3r (slice r4-A).
 - skin-normal-3r-pin-knee and spine-parked-j2-3r (final polish on Bench(110,360)).
 - The round-4 judge's picks, still landing, including the four-dof park4 4R.
+
+## Round 5 results (2026-10-16 ~07:12-10:55 UTC; cut short by the lead, written by the round-6 planner from the files)
+
+The lead stopped the round at 10:55 UTC: its last modelling agent (cam-coupled-4r) had run 2h20m against a 75-min
+box. Picks: minarc-stop-knuckle-4r (variant B = pin-knee-minarc-knuckle-4r merged) and short-a2-arc-slide-3r (round-5
+judge, docs/concepts/round5_ideation.md); carried: coupler-path-j1, cam-coupled-4r.
+
+| design | best fast Bench(60,160) | frozen exact Bench(110,360) | verifier | complexity | status |
+|---|---|---|---|---|---|
+| minarc-stop-knuckle-4r B (pin knee + spring knuckle K + J2 stops) | 6.19 | claimed 15.42; **18.45 with the stops at the 5-deg margin** (reach 0.747, in-band14 0.889, contact 0.021, near-touch 24.26; held out 22.27 vs H1 31.39) | REFUTED as claimed (stops 1.37 / 1.88 deg from the J1-J3 fold); 18.45 from 3 harnesses, continuity 0 dropped; a q2 stop + 0.3x5 spring 17.32 (1 lens) | 33 | kit-rule claim in flight elsewhere |
+| minarc-stop-knuckle-4r A (plain spherical chain + K) | 22.17 (reach 0.856, in-band 0.78; near-touch 41.79) | - | - | 13.5 | kit-rule CMA in flight elsewhere |
+| short-a2-arc-slide-3r | 29.38 | 41.19 (self) | REFUTED 55.3 (real slide stack: hub 3 +1.6 mm; the sensed slide makes it 4 active) | 14.75 | refuted |
+| coupler-path-j1 | bound 20.58 = the leader's 20.63; honest 30.52 | - | DEAD (8937 configs, 6 gated streams collapse B0 onto A0; audit confirmed) | - | dead |
+| cam-coupled-4r | 41.66 RED-TEAMED (groove cuts J1's O20 housing; 176.8 with the housing rule); **50.67 honest** under the rule (reach 0.90, follow 0.95, in-band14 0.40) | - | - | 11.75 | screened, not a contender (rows/cam-coupled-4r.json) |
+
+Measured beside the round: the zero-complexity class ceiling VERIFIED at 31.04 (fit-110) / 33.51 (verifier fit-60)
+by a GPU near-exhaustive search (560 k Sobol + 130 CMA; frontier in-band 0.89 / 0.76 / 0.64 / 0.52 at reach 0.63 /
+0.70 / 0.75 / 0.80); polish 2: H1 stays (C1 23.04 vs 24.48 in-sample, +0.33 held out); fold-widening 3-passive
+coupled J1 rocker: kinematic reach 0.731 -> 0.842 connected, 0.775 with hub 2 parked in band (gate 0.78), not
+catalogued; fold-stop feel at B's 1.37-deg stop: J2 rate ratio 6.36 (kit rule 3.45, H1 3.15), cuff friction 0.39 N.
+
+Lessons:
+1. **Fold margins are read in the kit's J1-J3 metric, and stops act on a joint's own angle.** Minarc's interior-angle
+   clamp put its stops 1.4-1.9 deg from the fold (15.42 vs 18.45 at the true 5 deg); its "J2 stop" acted on a virtual
+   angle that no dowel can stop (q2 drifts 14.3 deg as K opens).
+2. **A passive coordinate that must be read to know the arm pose is an ACTIVE DOF** (the user's counting rule): the
+   Hall-sensed slide made short-a2 a 4-active design, and the skeptic counts minarc's K (sensed in its forced states)
+   as 4 active. A fold lever that keeps 3 active needs its extra coordinate to be a function of the three readings.
+3. **The knuckle is the only lever that has lifted frozen reach above 0.74 at in-band >= 0.88** (+6-9 points over H1
+   at its seats; held out 22.27 vs 31.39). K never moves on the clips: its gain is static workspace reach. Without the
+   pin knee (variant A) the J3 side loses the band (link 2 0.43, hub 3 0.70, neck 0.68).
+4. **Base-side schedules give the window and float hubs 2 / 3.** A coupler covers 0.967 of the poses by IK vs a plain
+   circle's 0.978 (the window is set by arcs, not path); a slot that fixes the spare un-fixes J3 from the humerus.
+5. **K6 cannot see a groove that shares a body with a hub** (joint partners within 12 mm of J1 are exempt): any slot
+   or cam on a hub's body gets the housing rule before its number is reported.
+6. In-sample polishes lose ~5 points held out: final polishes score held-out poses (2-fold cross-fit).
+7. Time boxes hold: report the measured reason and stop when the red team kills the number.
+
+## Round 6 plan (2026-10-16 ~11:10 UTC, track main, lead verified gap 24.48)
+
+### State
+
+- **Verified leaders** (Bench(110,360) exact, frozen shape, margin 5, O20):
+  - skin-normal-3r-pin-knee H1 (polished): **24.48** (score 91.1) on the polish protocol; 27.20 on the round-3 protocol
+    (fit Bench(60,160)); held out 30.73 (31.39 in the minarc harness). Reach 0.658, in-band14 0.895. Complexity ~21.5,
+    10 of it for the two sensed knee pins. Gen-3 CAD (user_pinknee_h1) not refuted, 8 of 19 judges.
+  - raglan-knee-3r 27.82; skin-normal-3r-knuckle-cufflink 29.10; zero complexity: zc-frontier-3r 31.04 / 33.51 = the
+    class ceiling (verified); arm-parked-knee-4r 26.71 is 4 active (fails R5-aim).
+  - **Best measured, not a verified leader:** minarc B at the 5-deg margin 18.45 (score 93.3), held out 22.27,
+    complexity 33, counted 4 active (K sensed). Its kit-rule claim and verifier run elsewhere.
+- **Measured limiters.**
+  - Every 3-active verified design: the fold, 94-96 % of the lost workspace. Overhead reach is 0.25-0.29; overhead
+    needs th = angle(J1, J3) of 18-146 deg, off both ends of every 3R window.
+  - Zero-complexity frontier: in-band 0.89 / 0.76 / 0.64 / 0.52 at reach 0.63 / 0.70 / 0.75 / 0.80. At complexity 0
+    the window 95 needs puts hub 2 + link 2 or the J3 side over skin spanning more than the 12 mm band.
+  - minarc B at 5 deg loses 56 poses to the fold (stretched past stop B, a1max 66; folded with J1 ~ J3), 16 to the
+    knee window, 9 to contact; overhead 8 of 28; hub 3 0.66 and link 2 0.78 in band; min metal 0.05 mm overhead.
+  - minarc A (13.5): in-band 0.78, all on the J3 side (link 2 0.43, hub 3 0.70 at F 101 mm, neck 0.68; hub 1 / K /
+    hub 2 / link 1 0.93-1.00).
+  - Parking: a second fold state needs hub 2 at median 70-73 mm, p90 153-226 (state A 51-57); 27-35 % of the
+    rescued poses park at 60 mm.
+- **What 95 needs from the best measured design**: 18.45 -> 13.75, i.e. +0.05 reach (0.747 -> ~0.80) at in-band
+  0.889, or overhead 8 -> ~20 of 28, with contact <= 0.01.
+- **Dead, with the reason**: base-side schedules (coupler-path-j1: arcs set the window; cam-coupled-4r: hubs 2 / 3
+  roam, groove on hub 1's crown); slides under a hub (short-a2: hub 3 0.33 in band, sensed = 4 active); slotted
+  eccentric K (115.21: knee / track leave the band); dwell four-bar (37.66: moves only the window's low end); stop
+  relay rocker (static islands); longer knee link (0); 2 cuff slides; closure-set arc knee; acromial rocker (dead
+  point); any 1- or 2-passive closure (re-parametrises the rotation about w, the fold law is unchanged).
+- **Open levers**: a K that the three readings determine (3 active); knuckle seats chosen for the overhead and the
+  J1-J3 alignment set; the J3 side in band without the pin knee; the coupled J1 rocker with the hub-2 gate (0.775,
+  0.005 short of its gate).
+
+### Lenses
+
+1. **cam-stop-knuckle (determination: 3 active, no K sensor, complexity <= 12).** The one-sided relay's (q2, K) set
+   is an L (K on stop A, or J2 on its stop): one scalar. Make it a curve K = max(K_A, c(q2)) that q2's encoder reads:
+   the J2 hard stop becomes a cam lobe on link 2's side of hub 2. Past q2 = s it bears on a follower on link 1b and
+   opens K as q2 keeps turning, with the spring holding K on stop A or on the lobe. Force closure acts near the
+   stretched end only, with no slot over the full travel and no track plate (the parts that sank the slotted
+   eccentric and the dwell four-bar). Other determined laws: a lobe reading q1; an RSSR rod (round-5 rank 3, in-band
+   proxy 0.79); one draw-wire reading across K and J2 (sensing only). Gates before metal:
+   - th(q2) is monotone through the lobe, and the 5-deg margin holds in the J1-J3 metric with stops on q2's own angle;
+   - the pressure angle stays <= 45 deg, and the J2 rate ratio stays near H1's 3.15 (kit rule 3.45);
+   - the lobe + follower fit inside hub 2's O20 envelope (housing rule).
+
+   Then run the kit, the near-touch CMA, frozen exact and the full-grid flood fill.
+2. **overhead-seat-knuckle (reach >= 0.77 at in-band >= 0.88).** Place the whole knuckle chain for the overhead and
+   across-body ends, as a redundant non-orthogonal 4R (Keemink 2018 TNSRE 26(4)) whose singular sets are put outside
+   the workspace by axis placement. The pin-knee seats it inherited were not chosen for that. Levers:
+   - J1 on the back of the shoulder (posteromedial: the kinematically best seats, never tried with a knuckle), so the
+     J1-J3 alignment set leaves the overhead cone;
+   - a1max raised past 66, with the open state's hub-2 / link-1b parking gate measured first;
+   - an arm-side K (link 2 split, a min-arc law on a2) if it parks better;
+   - a two-sided K only if it is determined without a sensor.
+
+   Target: frozen exact reach >= 0.77 and overhead >= 14 of 28, at in-band >= 0.88 and contact <= 0.01.
+3. **j3-side-band (the 4th joint replaces the pin knee).** Variant A's in-band loss is the J3 side alone. Fix it with
+   zero-cost levers searched together with the seats, as a new morphology id (variant A's own CMA runs elsewhere):
+   - the inverted J3 stack (j3-neck-over-3r: +0.023 in-band on the spine-parked 3R);
+   - deltoid-crest J3 seats;
+   - raglan link-2 routing (raglan-knee-3r 27.82);
+   - a short member 3 (crest-knee's 65 mm);
+   - the underside quantile q.
+
+   Target: in-band >= 0.88 at frozen reach >= 0.75, complexity <= 14 (<= 9 with lens 1's sensor-free K).
+
+### Carried over (catalogue, ideated or interrupted, never screened)
+
+- **cam-unfold-4th** (round 1, modelling interrupted; docs/concepts/models/cam-unfold-4th.py exists). Link 2 with a
+  cam-slaved knee K = c(q2) from a cam ring around J2: the closest catalogued sensor-free knuckle. Screen it as lens
+  1's arm-side variant: a pin on a bearing pair instead of the +-18 deg flexure (minarc's K travels ~28 deg), a
+  one-sided lobe near the stretched end, minarc's seats.
+- **j3-neck-over-3r** (round-4 judge pick). Standalone it is a complexity-0 3R inside the verified zc ceiling (the GPU
+  search covered all four stack orders). Screen it only as lens 3's J3 side on a knuckle chain.
+- Not carried: deltoid-crest-j3-3r and crest-knee-3r (their judge red teams measured +0.017 frozen reach, ~1-2
+  points); slotted-eccentric-pin-knee-3r (its plain-3R sibling refuted at 115.21, in-band slack 0.003).
+
+### Elsewhere, not to be duplicated
+
+- minarc-stop-knuckle-4r: kit-rule claims of A and B (models/minarc-stop-knuckle-4r-kitrule*.py,
+  verify/minarc-kitrule/), then a verifier.
+- skin-normal-3r-pin-knee: the GPU massive polish (tools/gpu_knee_search.py) and the gen-3 CAD fix (user_pinknee_h1b).
+
+### Needs the user's say (listed, not screened)
+
+- A fold margin below 5 deg: minarc's 15.42 sits at 1.4 deg.
+- Whether a sensed passive used only for static extremes may count as passive. The rule today counts it active, so
+  minarc B and arm-parked-knee-4r are 4 active and fail R5-aim.
+- J1 seats off the back of the shoulder and the acromion top.
+- A radial slide that lets hub 2 change level with the state. It stands up by its travel plus block, which is against
+  the 1 cm rule.
