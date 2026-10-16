@@ -951,3 +951,134 @@ For the next polish, one change is needed: score only poses the shape was NOT fi
 * Every polished config so far sits ~5 points worse held out than on its search bench: P5, C1 and H1 itself (24.5 vs
   28.6).
 * The 690 poses of polish 2's objective were fitted as hard as the 470 of polish 1.
+
+## Massive GPU polish (gpu-knee, tools/gpu_knee_search.py, 2026-10-16 ~09:50-11:40 UTC)
+
+Run directory `exo-farm/gpuk/out/gks1`. Digest: `docs/research/golden/gks1_digest.json` (+ `_all.npz`, every evaluation).
+Sweep log stages `gpu-knee-*`. Rows file key `gpu_knee_massive`. Pod jobs: `pipeline/gpu_pod/gks.sh` (boot + search),
+`gks2.sh` (restart on an override driver), `gks4.sh` / `gks5.sh` (restarts through the volume), `gks6.sh` (digest).
+
+**What was searched.**
+* Objective: the near-touch gap (metal < 1 mm counts as contact) of the adversarial verifier's corrected set on
+  Bench(110,360), same-bench (shape fitted there, fast grid), plus 100 x the clip frames lost. The penalty keeps every
+  overhead clip frame followed.
+* Evaluator: the GPU port `tools/gpu_bench_knee.py`. It is the CPU kit's own code with the per-pose loops batched on
+  the device; parity with the kit is 0.0 on 54 configs x 2 protocols.
+* Free: the 13 continuous parameters of `tools/knee_polish.py` FREE: the seats (az1 el1 az2 el2 wd wa b3), the knee
+  (lE lc phiE phib), the knee window ang_min and the pin stack stk. Also free: **the fold margin**, >= 5 deg, set per
+  evaluation on the IK's SING. That is the same global the CPU kit reads from CB_FOLD_MARGIN.
+* Fixed by the rulings: O20 hubs; the J1 seat on the back / acromion top (anterior component <= 0.20, rejected before
+  evaluation); b1 = b2 = 0; and the knee branch, a fixed sign with 10 fps continuity of q1, q2, q3', pin a and pin b
+  inside the window [ang_min, 180 - ang_min].
+* Raglan-knee-3r enters through its seats on straight links. The polish verifier has no route, so routed links stay out.
+
+**How it ran.**
+1. Seeds: H1, P5, HW, k4598, raglan's seats, and the in-sample GPU bests G2 and G3.
+2. Sobol: 101,624 scrambled-Sobol points inside the rulings, in boxes around the leaders' basins and wide over the
+   bounds:
+   * G3: +-3 and +-1 x the polish's CMA scale.
+   * H1, P5, k4598 and raglan: +-3.
+   * G2 and HW: +-2.5.
+   * All of these boxes sample margin 5-8.
+   * 24,400 wide points over the bounds, with margin 5-12.
+
+   Pods share the points in chunks of 512 through O_EXCL claim files on the farm volume. A traced sample outside the
+   +-260 mm grid uses the bound d(clamped) - |offset|, which is never optimistic.
+3. CMA: knee_polish's update, lambda 12, run in the best distinct points (> 2.5 CMA-scale units apart), lockstep per
+   pod. Each run stops at convergence (sigma x max axis < 0.02, or no gain > 0.02 in 40 generations) or at the
+   deadline.
+4. Final: the top 30 distinct points are re-evaluated on the port's exact outside path. The top 10 that follow every
+   clip frame, plus H1, go to the CPU kit, unpatched, on the pods' CPUs:
+   `docs/concepts/verify/skin-normal-3r-pin-knee-polish.py` fitbig / fit60 / held (CB_EXACT=1, CB_FOLD_MARGIN = the
+   config's margin), and the continuity flood fill (`skin-normal-3r-pin-knee-continuity.py` kin fitbig).
+
+**What went wrong on the way.** The first launch gave each pod one GPU worker per vCPU, which meant 31 workers on a 32 GB
+RTX PRO 4500. Each worker holds its own 1.06 GB int8 copy of the Bench(110,360) grid plus a CUDA context. Workers past
+about 14 ran out of device memory, and their evaluations failed fast as CUDA errors: the log showed "77 evals/s", mostly
+errors. The fix:
+* the driver caps workers by device memory;
+* a restarted pod re-runs its own CUDA-error rows first;
+* the stages after Sobol use fresh marker names, so no stale state from the out-of-memory run leaks in.
+
+The pods were restarted on the corrected driver at 10:28, 10:31 and 10:42 UTC. The first restart ran 14 workers per RTX
+PRO 4500 and still ran out of memory, so the driver now allows 2.8 GB per worker, which gives 10 workers. The lead then
+put the deadlines on the volume (final: Sobol 10:54, CMA 11:12, verification 11:36 UTC). It stopped the RTX 4090 pod for budget,
+and also the fourth pod. Their CUDA-error rows were queued on a live pod, but not all of them ran before the Sobol
+deadline. Next time, share one device grid per GPU
+through CUDA IPC. GridDev already takes a shared tensor. Then every vCPU can run a worker.
+
+**What it measured (self-measured: the search's own driver ran the CPU kit; not an independent verification).**
+
+*Evaluations.* 221,042 rows were written. 165,927 are distinct evaluations: 101,631 seeds + Sobol and 64,296 CMA.
+101,240 of them closed a report. The rest are mainly the 64,087 CUDA-error rows of the out-of-memory phase:
+* 34,386 Sobol points were never re-run before the Sobol deadline, so 67,214 of the 101,624 Sobol points were scored.
+* 29,701 rows were from the first, broken CMA.
+
+The restarted CMA ran in 30 basins for 80 generations each (12 per generation). It was stopped by the deadline, not by
+convergence: only b18 stopped on its own. Median 0.70 s per evaluation per worker; 13-14 evaluations/s per RTX PRO
+4500 at 10-14 workers.
+
+*Sobol finds nothing new.* No Sobol point beats the in-sample G3 (20.81). The best Sobol point is 23.31, in the +-1 box
+around G3; 22 points of that box are below 25. The +-3 boxes around G3 / G2 / P5 / HW / H1 / k4598 / raglan's seats
+have their best at 26.3-34.7. The 24,400 wide points over the bounds have their best at 59.2.
+
+The basin is narrow. The +-1 x CMA-scale box around G3 holds 810 of its 5,301 scored points below 30. The +-3 box
+holds 4 of 21,404.
+
+*CMA ends in the same corner.* The 30 basin bests lie at 20.81-24.46, and 12 of them are below 22. Those 12 sit at
+lE 65-80, lc 25-42 and ang_min 22-37. All 30 sit at az1 96-107, az2 30-40 and wd 60-69: G3's corner (a long E strap).
+The margin over the 30 runs from 5.0 to 6.35, median 5.15.
+
+The free margin ends at **5.0-5.4 deg** in every top-10 config: the user's floor binds, and a wider margin only costs
+reach.
+
+*Top 10 distinct, exact.* The table below is the CPU kit on the pods: fit Bench(110,360) fast, worn EXACT, at the
+config's own margin. H1 was run in the same batch:
+
+| config | search tag | margin | fitbig gap / near-touch | fit60 gap / near-touch | held gap / near-touch | reach / in-band 14 / contact (fitbig) | overhead >= 140 ws reach / clip follow | min metal mm | connected reach (static), full grid |
+|---|---|---|---|---|---|---|---|---|---|
+| F1 | G3 (in-sample GPU best) | 5.00 | 20.26 / 21.36 | 23.33 / 24.44 | 27.68 / 29.05 | 0.706 / 0.901 / 0.008 | 0.32 / 1.0 | 0.46 | 0.681 (0.682) |
+| **F2** | cma-b16-g78-7 | 5.03 | **20.26 / 20.81** | 23.34 / 24.46 | 27.65 / 29.25 | 0.706 / 0.901 / 0.008 | 0.32 / 1.0 | 0.35 | 0.680 (0.680), 0 islands |
+| F3 | cma-b13-g79-5 | 5.37 | 20.25 / 21.90 | 25.27 / 30.79 | 28.33 / 31.06 | 0.708 / 0.900 / 0.011 | 0.29 / 1.0 | 0.41 | 0.686 (0.687) |
+| F4 | cma-b23-g78-3 | 5.00 | 20.33 / 21.43 | 24.44 / 28.25 | 28.71 / 30.09 | 0.706 / 0.897 / 0.006 | 0.32 / 1.0 | 0.32 | 0.673 (0.673) |
+| F5 | cma-b20-g65-8 | 5.38 | 20.35 / 22.00 | 25.57 / 30.56 | 27.51 / 29.33 | 0.706 / 0.899 / 0.008 | 0.32 / 1.0 | 0.24 | 0.682 (0.682) |
+| F6 | cma-b27-g60-5 | 5.00 | 20.63 / 21.18 | 24.14 / 29.65 | 27.62 / 29.89 | 0.708 / 0.896 / 0.011 | 0.29 / 1.0 | 0.71 | 0.687 (0.688) |
+| **F7** | cma-b0-g77-1 | 5.10 | 20.81 / 21.91 | 25.57 / 30.56 | **27.22 / 29.04** | 0.703 / 0.900 / 0.011 | 0.29 / 1.0 | 0.70 | 0.687 (0.687) |
+| F8 | cma-b24-g72-7 | 5.39 | 21.24 / 21.79 | 24.92 / 30.26 | 28.90 / 31.61 | 0.706 / 0.893 / 0.011 | 0.29 / 1.0 | 0.79 | 0.688 (0.689) |
+| F9 | cma-b5-g78-9 | 5.16 | 20.68 / 21.23 | 24.04 / 29.36 | 28.77 / 30.80 | 0.711 / 0.896 / 0.014 | 0.32 / 1.0 | 0.54 | 0.702 (0.704) |
+| F10 | cma-b4-g72-1 (from H1) | 5.05 | 20.96 / 21.51 | 24.03 / 25.15 | 28.33 / 29.92 | 0.703 / 0.896 / 0.008 | 0.32 / 1.0 | 0.39 | 0.679 (0.679) |
+| H1 | the verified leader | 5.00 | 24.48 / 25.59 | 27.20 / 31.75 | 28.55 / 31.06 | 0.669 / 0.894 / 0.009 | 0.25 / 1.0 | 0.21 | 0.687 (0.688) |
+
+All finalists keep:
+* O20 hubs;
+* the J1 seat with anterior component 0.055-0.097 (back / acromion top);
+* every clip frame followed (follow 1.0, overhead clips too);
+* the fold margin >= 5.0 deg on every taken pose;
+* the knee at 75-157 deg, inside its window, on one branch sign.
+
+The continuity flood fill (full 1432-pose grid, 2-deg slerp edges) leaves 0-3 static-only islands. Connected reach
+equals static reach to within 0.002.
+
+*The lesson.* The search bench gain is real but does not travel. Against H1 in the same batch:
+
+| protocol | F2 gain, plain / near-touch | F1 gain, plain / near-touch | spread over the top 10, plain |
+|---|---|---|---|
+| fitbig (the search bench) | 4.22 / 4.78 | 4.22 / 4.23 | 3.2-4.2 |
+| fit60 | 3.86 / 7.29 | 3.87 / 7.31 | |
+| held-out (disjoint poses) | 0.90 / 1.81 | 0.87 / 2.01 | |
+
+F7 (from the G3 seed's basin) is the best held out: 27.22 / 29.04, a gain of 1.33 / 2.02. F5 gains 1.04 / 1.73.
+
+Searching the same bench again (G3's corner, lE 72-77) costs 7.4 points out of sample (F2 20.26 -> 27.65). H1 loses 4.1.
+This is the polish-2 finding again, now on 10^5 points: a same-bench objective overfits the 470 poses. Only F7 and F5
+clear the 1-point bar held out on the plain gap. On the held-out near-touch gap, F1 / F2 / F5 / F6 / F7 / F10 clear it
+(1.1-2.0); F3 / F4 / F8 / F9 do not (-0.6 to 1.0).
+
+*Candidates for the independent verifier* (CLAUDE.md FINAL POLISH: a polished config replaces the CAD's only after an
+independent verifier confirms >= 1 gap point):
+* F7: held-out 27.22, score 90.10 vs H1 89.62;
+* F2: fitbig 20.26 / 20.81, score 92.63 vs H1 91.10;
+* F5.
+
+The next search should score poses the shape was not fitted on: a 2-fold cross-fit objective. The port takes any Bench
+with a fast grid.

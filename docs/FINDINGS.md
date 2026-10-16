@@ -1223,3 +1223,39 @@ kinematics match the model within 1e-4 mm.
 - **Open link 2 mesh.** OCC leaves a T-junction crack in link 2's tessellation (71 open edges in one 8 x 6 mm patch).
   Neither welding up to 0.3 mm, other tolerances, ShapeFix nor sewing closes it, so R17's mass model uses link 2's convex
   hull (139 g for 19.8 g). R17 still passes. The real fix is to find the offending face pair in the glued bar.
+
+## 10^5 pin-knee configs on GPU pods confirm the in-sample corner; its gain over H1 shrinks from 4.2 to 0.9-1.3 points held out (2026-10-16, tools/gpu_knee_search.py, run gks1)
+
+* **What ran.** 101,240 configurations returned a report. The objective was the near-touch gap on Bench(110,360),
+  same-bench, through the GPU port (parity 0.0 with the CPU kit), with every clip frame kept followed. Free: the 13
+  continuous parameters plus the fold margin (>= 5); fixed: O20, J1 on the back / acromion top. The configs came from
+  three stages:
+  * 67,214 scored Sobol points around the seven leaders' basins and over the whole bounds;
+  * CMA in 30 basins, 80 generations each, stopped by the deadline;
+  * the top 10 distinct plus H1 run by the CPU kit, exact frozen, on the pods' CPUs. This is self-measured.
+* **Sobol finds no better basin.** No Sobol point beats G3, the 20.81 polish best: the best Sobol point is 23.31. The
+  wide points' best is 59.2.
+* **Every CMA basin ends in the same corner.** That corner is a long E strap: lE 65-80, ang_min 22-37, J2 seat az2
+  30-40. 12 of the 30 basins end below 22.
+* **The fold margin goes to the floor.** The free margin ends at 5.0-5.4 deg in every top-10 config: the 5-deg ruling
+  binds, and more margin only costs reach.
+* **Exact frozen numbers, same batch, against H1:**
+
+  | protocol | best | H1 | gain |
+  |---|---|---|---|
+  | fit Bench(110,360) | F2 20.26 / near-touch 20.81 | 24.48 / 25.59 | 4.2 / 4.8 |
+  | fit Bench(60,160) | F2 23.34 / 24.46 | 27.20 / 31.75 | 3.9 / 7.3 |
+  | held-out disjoint poses | F7 27.22 / 29.04 | 28.55 / 31.06 | 1.33 / 2.02 |
+
+  F2's own held-out number is 27.65 / 29.25, a gain of 0.90 / 1.81.
+* **Other checks.** Reach on Bench(110,360) is 0.703-0.711 against H1's 0.669, and overhead workspace reach is 0.29-0.32
+  against 0.25. Every clip frame is followed. The continuity flood fill leaves 0-3 islands.
+* **Lesson: the same-bench objective overfits.** The corner G3 found overfits the 470 search poses: 7.4 points worse
+  held out, where H1 is 4.1 worse. This is the third polish to show it, after P5 and polish 2.
+* **Candidates.** F7 (held-out score 90.10 vs 89.62) and F5 (held-out gain 1.04) are candidates for the independent
+  verifier. The next pin-knee polish must use a held-out-aware (2-fold cross-fit) objective.
+* **Instrument lesson: one grid copy per GPU worker caps the workers.** Each worker held its own 1.06 GB int8 copy of
+  the Bench(110,360) grid, so one worker per vCPU (31 on a 32 GB card) failed on CUDA out-of-memory. The errors were
+  fast, which made the log show 77 "evals/s". After the cap, a card ran 10 workers and 13-14 evals/s. Sharing one
+  device grid per GPU through CUDA IPC (GridDev already takes a shared tensor) is the next speed-up. Pod cost about
+  $2.6.
