@@ -194,10 +194,12 @@ def bell_crank(dv):
     # follower arm: tube -> roller pin (O5 eye), plate ARM_F_Z
     C0 = dv["C0"]; cr = C0 - ax - (C0 @ u2) * u2; Lf = float(np.linalg.norm(cr)); xf = unit(cr); yf = np.cross(u2, xf)
     armf = USP.stadium(pa(f2 + ARM_F_Z[0]), xf, yf, Lf, 2.5, ARM_F_Z[1] - ARM_F_Z[0])
-    armf_hub = disc(ax, u2, TUBE_R, f2 + ARM_F_Z[0], f2 + ARM_F_Z[1])
+    bore = disc(ax, u2, TUBE_BORE, t_bot - 1.0, t_top + 1.0)                                # the post bore (R6: a solid arm hub sat on the post)
+    armf = armf.cut(bore)
+    armf_hub = rev([(TUBE_BORE, 0), (TUBE_R, 0), (TUBE_R, ARM_F_Z[1] - ARM_F_Z[0]), (TUBE_BORE, ARM_F_Z[1] - ARM_F_Z[0])], pa(f2 + ARM_F_Z[0]), u2)
     # crank arm at the tube top -> the crank pin boss (along the tilted pin axis) up to the eye bottom - 0.3
     ca = A0 - ax - (A0 @ u2) * u2; Lc = float(np.linalg.norm(ca)); xc = unit(ca); yc = np.cross(u2, xc)
-    arm_c = USP.stadium(pa(t_top - 2.0), xc, yc, Lc, 3.0, 2.0)
+    arm_c = USP.stadium(pa(t_top - 2.0), xc, yc, Lc, 3.0, 2.0).cut(bore)
     pinb = A0 + 0.0 * eA; s_lo = None
     for s_ in np.linspace(-12, 0, 241):                                                       # where the pin axis meets the crank arm's top plane
         if (pinb + s_ * eA) @ u2 >= t_top: s_lo = s_; break
