@@ -6,7 +6,7 @@
  "active_dof": 3,
  "passive_dof": 3,
  "passive_translations": 0,
- "status": "screened",
+ "status": "verified",
  "t_ideated": null,
  "t_screened": "2026-10-16T16:50:00Z",
  "reach": 0.7937,
@@ -15,15 +15,15 @@
  "inband10": 0.5558,
  "contact": 0.0053,
  "gap": 15.57,
- "v_reach": null,
- "v_follow": null,
- "v_inband14": null,
- "v_inband10": null,
- "v_gap": null,
+ "v_reach": 0.7278,
+ "v_follow": 1.0,
+ "v_inband14": 0.8546,
+ "v_inband10": 0.5583,
+ "v_gap": 22.82,
  "n_configs": 9096,
  "verdict": "SCREENED: passes its kill gate (15.57 fast near-touch < 16.0) but by a RE-FIT of the winner, not by its own levers: controls on the same seats put the front-loaded law at 0.01 frozen (22.73 linear vs 22.72), stop B raised to a1max 61.7 at 0.00 (identical 15.57 at 58.36: taken poses never use K past 44.7 deg), and the 2:1 rocker at about -1.2 fast (its clevis arm must sit 9-12 mm over link 1b so the rod clears hub K's crown). Best = the winner's 1:1 post, near-linear law (kA 2.90 / kB 2.76) and re-fitted seats: frozen exact Bench(110,360) 22.72 (score 91.74; near-touch 24.36, reach 0.728, ib 0.856, overhead 8/28) vs the winner under the same rod rule 23.47; held out 26.65 vs 28.02. Control E (the winner's own linear law re-fitted, same rules) reaches 15.54 fast / 22.92 frozen (near-touch 24.01) / 26.66 held out: the front-loaded lobe and stop B are noise (-0.35 to +0.20). A candidate polish of the winner for the independent verifier (corrected metal: horn plate on the cap top, rod vs hub K).",
  "limiter": "the fold: 86 of 98 frozen losses (overhead 15 of 20). Stretched fit poses past the law's end (th 124-157, beyond the K dyad's straight-line wall a1max + a2 - 5) and 6 at the m3e wall that the law cannot reach because of the lift-off (self-motion) and pressure-angle gates; the folded side has no lobe. In band: hub 3 0.60, L2 0.78, rod and rod ends 0.00 (above hub K's crown by construction).",
- "note": "Model on the verified winner's module (law + rod metal replaced). Searches: farm LHS 192 + control CMA E (linear law, 1:1) 2609 (15.54); farm LHS 192 (best 17.83) + CMA A seg/2:1 2449 (16.82), B seg/1:1 1921 (15.57), C track 945 (17.23), D linear/2:1 977 (16.77); gate on the best run B: gain over 2nd half 0.06, last third 0.04, top-5 spread 0.01 score points (combined CMA 0.10 / 0.01 / 0.01). Red team: the winner's own rod passes 2.6 mm into hub K's crown (rule added: rod centre >= crown top + 2 within HUB_R + 2 of K's axis; costs the winner 0.10 fast, frozen 23.47); min metal frozen 0.30 mm (winner 0.45); pa 44.3 vs 45; lobe crest 10.26 mm; K slop 1.16 deg per 0.05 mm rod-end play at r_horn 2.47. Frozen exact: fit 15.57 -> 22.72 plain / 24.36 near-touch, why {'fold': 86, 'slide': 7, 'flip': 0, 'closure': 0, 'skin': 0, 'parts': 1, 'contact': 4}; held out 26.65 (near 29.29) vs winner+rule 28.02.",
+ "note": "Model on the verified winner's module (law + rod metal replaced). Searches: farm LHS 192 + control CMA E (linear law, 1:1) 2609 (15.54); farm LHS 192 (best 17.83) + CMA A seg/2:1 2449 (16.82), B seg/1:1 1921 (15.57), C track 945 (17.23), D linear/2:1 977 (16.77); gate on the best run B: gain over 2nd half 0.06, last third 0.04, top-5 spread 0.01 score points (combined CMA 0.10 / 0.01 / 0.01). Red team: the winner's own rod passes 2.6 mm into hub K's crown (rule added: rod centre >= crown top + 2 within HUB_R + 2 of K's axis; costs the winner 0.10 fast, frozen 23.47); min metal frozen 0.30 mm (winner 0.45); pa 44.3 vs 45; lobe crest 10.26 mm; K slop 1.16 deg per 0.05 mm rod-end play at r_horn 2.47. Frozen exact: fit 15.57 -> 22.72 plain / 24.36 near-touch, why {'fold': 86, 'slide': 7, 'flip': 0, 'closure': 0, 'skin': 0, 'parts': 1, 'contact': 4}; held out 26.65 (near 29.29) vs winner+rule 28.02. | VERIFIED 2026-10-16 (skeptic, docs/concepts/verify/frontload-lobe-stopb-knuckle-3r.py): claim reproduces to the digit (15.57 fast, 22.72 frozen exact). Hard metal error found and corrected: the claim's crown rule ignores K's 6 mm spring cap, so its rod ran 4.85 mm and its rod-end head 3.0 mm INSIDE the cap, and the horn sat at cap mid-height inside the clock spring. Corrected with the winner's verified metal (horn plate on the cap top, rocker post 17 mm until the rod clears the cap by 1 mm, ROD-hubK checked per pose): v_gap 22.82 frozen exact Bench(110,360) (score 91.70; reach 0.728, follow 1.0, ib14 0.855, ib10 0.558, contact 0.011; near-touch 24.46; min metal 0.30 mm; overhead 8/28) vs CHAMPION 64.93 on the same bench and protocol (75.94 with the risley checks); not refuted. Flood fill full grid 0 dropped -> 22.82; knn 25.63. Held out 26.75 (near-touch 29.39). Against the verified winner through the same corrections (23.57 / held out 28.12): +0.75 frozen (< the 1-point polish rule) and +1.37 held out - a seat re-fit of the same mechanism, not a new morphology; the claim's own levers (front-load, stop B, 2:1) measured as noise. 3 active (K slaved), 0 passive translations.",
  "doc": "docs/concepts/frontload-lobe-stopb-knuckle-3r.md",
  "complexity": 49.0,
  "mechanism": {
@@ -148,5 +148,37 @@
   "gain_last_third": 0.04,
   "top5_spread": 0.01,
   "run": "CMA B"
+ },
+ "v_contact": 0.0106,
+ "t_verified": "2026-10-16T17:25:00Z",
+ "verification": {
+  "harness": "docs/concepts/verify/frontload-lobe-stopb-knuckle-3r.py",
+  "claim_reproduced": {
+   "fast": 15.57,
+   "frozen": 22.72
+  },
+  "corrected": {
+   "fast": 15.68,
+   "frozen": 22.82,
+   "near_touch": 24.46,
+   "min_metal_mm": 0.3,
+   "overhead": "8/28",
+   "held_out": 26.75,
+   "held_near_touch": 29.39,
+   "connected_full": 22.82,
+   "connected_knn": 25.63,
+   "why": {
+    "fold": 86,
+    "slide": 7,
+    "parts": 1,
+    "contact": 4
+   }
+  },
+  "claim_rod_in_cap_mm": {
+   "rod": -4.85,
+   "rodends": -3.0
+  },
+  "champion_same_bench": 64.93,
+  "winner_same_harness": 23.57
  }
 }

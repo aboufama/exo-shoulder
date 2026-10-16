@@ -200,3 +200,46 @@ New knowledge:
    about 16 mm or more for a drive at strap level.
 3. Raising stop B toward the K dyad's straight line buys nothing. The stretched losses are bounded first by m3e plus
    lift-off (6 fit poses), then by the dyad's straight-line wall (13 fit poses at th 124-157). Neither moves with a1max.
+
+## Verification
+
+Independent skeptic, 2026-10-16. Harness: `docs/concepts/verify/frontload-lobe-stopb-knuckle-3r.py`. It loads the claim's model unchanged and applies the winner's verified metal corrections (from `docs/concepts/verify/geneva-tail-knuckle-pinknee-3r.py`). Outputs: `docs/concepts/verify/frontload-lobe-stopb-knuckle-3r_{claim,corr}_bench_frozen.json` and `_corr_held_frozen.json`.
+
+**Reproduction.** The claim reproduces to the digit: 15.57 fast, and 22.72 frozen exact on Bench(110,360) (near-touch 24.36).
+
+**Hard metal error, corrected.** The claim's crown rule measures from the crown top (fK + CROWN) and ignores K's 6 mm spring cap above it. Measured against the cap cylinder (HUB_R, CROWN + capK):
+- the claim's rod runs 4.85 mm inside the cap;
+- its rod-end head sits 3.0 mm inside the cap;
+- its horn sits at the cap's mid-height, inside the clock spring.
+
+The correction is the winner's verified one:
+- a 1.5 mm horn plate on the cap top;
+- the rod meets both rod-end heads at mid-height;
+- the rocker post grows from 9 to 17 mm, until the rod clears the cap by 1 mm;
+- ROD vs hub K is checked on every pose at the 1 mm rule.
+
+**Other checks (pass).**
+- Active DOF: 3 active (J1, J2, J3 encoded). K is slaved by the lobe and never read. 0 passive translations.
+- Closure: residual at most 0.017 deg on taken poses.
+- Fold margin: m3e >= 5 is enforced on every taken pose. The law prefix itself dips to m3e 0.58 at its end, past every taken pose, where it ends on stop B.
+- Drive: pressure angle 44.3 against a 45 limit; K driven to 44.3 deg on taken poses; 130 stretched poses taken, 0 folded. The drive is not idle.
+- Lobe crest: 10.26 mm, 0.26 mm past hub 2's O20 envelope. This is open and not scored, like the winner's 10.9 mm.
+- Sampling: the rod and rod ends are sampled at their real size and counted (0 % in band, 28 mm off the skin).
+
+| | fast Bench(60,160) | frozen exact Bench(110,360) | near-touch | reach | ib14 | ib10 | contact | overhead | held out |
+|---|---|---|---|---|---|---|---|---|---|
+| claim (its metal) | 15.57 | 22.72 | 24.36 | 0.7278 | 0.8556 | 0.5590 | 0.0106 | 8/28 | 26.65 |
+| **corrected** | 15.68 | **22.82 (score 91.70)** | 24.46 | 0.7278 | 0.8546 | 0.5583 | 0.0106 | 8/28 | 26.75 (near-touch 29.39) |
+| verified winner, same corrections | 16.53 | 23.57 | 25.21 | 0.7306 | 0.8443 | 0.5309 | 0.0106 | 8/28 | 28.12 |
+| champion, same bench and protocol | - | 64.93 | - | 0.7278 | 0.565 | 0.350 | 0.110 | - | - |
+
+**Continuity flood fill.**
+- Full grid: 0 dropped, so the connected score is 22.82.
+- Knn grid: 25.63.
+- Bench grid: 46.19, the known subsample artefact; 17 poses there have no taken neighbour.
+
+**Lost poses, frozen:** fold 86, slide 7, parts 1, contact 4.
+
+**Verdict: VERIFIED, not refuted.** v_gap is 22.82 against the champion's 64.93 on the same bench.
+
+The gain over the verified winner (23.57) is 0.75 frozen. That is below the 1-point rule for replacing a configuration. Held out, the gain is 1.37. This is a seat re-fit of the same mechanism, and the claim itself measured the front-load, stop B and 2:1 levers as noise. It belongs in the lead's env-bench polish of the winner, not here as a new morphology.
