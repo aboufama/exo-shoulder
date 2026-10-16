@@ -165,6 +165,8 @@ def evaluate(B, params):
     if p.get("near"):                                           # lesson (d) as the objective: metal < 1 mm = contact
         r["gap_plain"] = r["gap"]; r["gap"] = r["gap_near1"]
         for k in ("reach", "follow", "inband14", "contact"): r[k + "_plain"] = r[k]; r[k] = r["near1"][k]
+    if p.get("ow"):                                             # objective only: overhead (elev >= 140) reach weighted in
+        r.setdefault("gap_plain", r["gap"]); r["gap"] = round(r["gap"] + float(p["ow"]) * 100 * max(0.0, 0.9 - (r.get("over_reach") or 0.0)), 2)
     return p, r
 
 
