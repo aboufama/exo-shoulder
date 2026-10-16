@@ -77,11 +77,15 @@ def layout_params(az1, el1, wd, wa, a1, a2, b3, branch, extra=None):
 def main():
     ap = argparse.ArgumentParser(); ap.add_argument("mode", choices=["frontier", "k4216"]); ap.add_argument("--out", required=True)
     ap.add_argument("--sum-lo", type=int, default=85); ap.add_argument("--sum-hi", type=int, default=130); ap.add_argument("--top", type=int, default=24)
+    ap.add_argument("--rank", choices=["fold", "joint"], default="fold"); ap.add_argument("--b3", default="0,0.35,0.7")
     a = ap.parse_args(); cfgs = []
     if a.mode == "frontier":
         F = json.load(open(os.path.join(REPO, "docs", "research", "fold", "frontier.json")))
         rows = [r for r in F["rows"] if a.sum_lo <= r["a1"] + r["a2"] <= a.sum_hi]
         score = lambda r: min(r["ws_share"] / 0.90, r["clip_share"] / 0.95)
+        if a.rank == "joint":                                             # fold-free share AND hub-1 band share (tools/fold_rayblock.py)
+            band = {(g["az"], g["el"]): g["window12"] for g in json.load(open(os.path.join(REPO, "docs", "research", "fold", "rayblock.json")))["grid"]}
+            score = lambda r: min(r["ws_share"], r["clip_share"], band.get((r["az1"], r["el1"]), 0.0))
         rows.sort(key=lambda r: (-score(r), r["a1"] + r["a2"]))
         picked = []                                                      # distinct layouts (J1 and J3 each >= 10 deg apart, or other arcs)
         for r in rows:
@@ -93,11 +97,11 @@ def main():
             picked.append(r)
             if len(picked) >= a.top: break
         for li, r in enumerate(picked):
-            for b3 in (0.0, 0.35, 0.7):
+            for b3 in [float(x) for x in a.b3.split(",")]:
                 for br in (1.0, -1.0):
                     p, err = layout_params(r["az1"], r["el1"], r["wd"], r["wa"], r["a1"], r["a2"], b3, br)
                     sh = shares(p)
-                    cfgs.append(dict(p, _meta=dict(layout=li, a1=r["a1"], a2=r["a2"], J1=[r["az1"], r["el1"]], J3=[r["wd"], r["wa"]],
+                    cfgs.append(dict(p, _meta=dict(layout=li, score=round(score(r), 4), a1=r["a1"], a2=r["a2"], J1=[r["az1"], r["el1"]], J3=[r["wd"], r["wa"]],
                                                    branch=br, j3_axis_err_deg=round(err, 2), frontier_ws=r["ws_share"],
                                                    frontier_clip=r["clip_share"], fold=sh)))
     else:                                                                 # k4216's seats, only the arcs / J1 moved toward the frontier
