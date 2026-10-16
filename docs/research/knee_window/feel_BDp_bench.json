@@ -1,6 +1,6 @@
 {
  "design": "BDp",
- "wear_json": "docs/concepts/verify/minarc-kitrule/wear_floorBD5_phys_cap6_bench.json",
+ "wear_json": "docs/research/knee_window/wear_BDp_bench.json",
  "T_joint_Nmm": 3.0,
  "T_pin_Nmm": 3.0,
  "r_cuff_mm": 121.6,
