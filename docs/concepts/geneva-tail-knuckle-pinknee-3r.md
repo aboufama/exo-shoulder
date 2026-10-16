@@ -233,3 +233,88 @@ embodiment is not viable.**
   - Lower rod-end heads, for example a horn under the cap's spring at the crown level: the rod-end samples are 0 % in
     band.
   - Hub 3, which is 0.59 in band, as in every pin-knee chain.
+
+## Verification (independent skeptic, 2026-10-16)
+
+The verdict is **VERIFIED, not refuted**. The corrected v_gap is **23.57** on Bench(110,360), exact path, frozen shape
+(score 91.4). The champion measures 64.93 on the same bench and protocol
+(docs/concepts/verify/minarc-skeptic/champbig_frozen_m5.json, the same frozen-wear protocol with the kit checks;
+75.94 under the risley checks).
+
+- **Harness:** docs/concepts/verify/geneva-tail-knuckle-pinknee-3r.py. It loads the claim's model unchanged, as its own
+  module copy.
+- **Outputs:** `docs/concepts/verify/geneva-tail-knuckle-pinknee-3r_{claim,corr}_{bench,held}_frozen.json`. They were
+  run on the farm (4 jobs, about $0.03).
+
+### Reproduction
+
+The rod best reproduces to the digit: 16.53 fast near-touch and 23.37 frozen exact.
+
+### Corrections
+
+**1. The horn was inside the spring cap (hard geometry).**
+
+- The claim put the rod-end head on K's horn at the cap's mid-height, r_horn 2.49 mm off K's axis.
+- That +6 mm cap is the clock spring's housing, so an O10 head there would sit in the spring's coils and arbor.
+- The rod was never checked against hub K. It ran **5.9 mm into the cap**, and the head ran 3 mm into it.
+- Corrected:
+  - The horn moves onto a 1.5 mm plate on the cap top.
+  - The rod meets both rod-end heads at their mid-height.
+  - The rocker post grows from 9 to **19 mm**, the minimum at which the straight rod clears the cap by 1 mm. The cap is a
+    cylinder about uK, so this clearance does not depend on the pose.
+  - ROD vs hub K is now checked at the 1 mm rule.
+- Cost: +0.20 fast (16.73) and +0.20 frozen (23.57). The rod and its heads were already out of band (now 29-30 mm over
+  the skin), so they lose very little.
+
+**2. Continuity flood fill (the CLAUDE.md rule; flood() from minarc-stop-knuckle-4r-mechanism.py, unchanged):**
+
+| grid | poses dropped | gap |
+|---|---|---|
+| full 15-deg envelope grid (1432 poses) | 0 (all 406 forced envelope nodes connect to state A) | 23.57 |
+| knn | 9 | 26.10 |
+| literal bench grid | 82 (16 of them have no taken neighbour in the 360-pose subsample) | 46.65 |
+
+On the full grid, every forced pose connects to state A, so the static number stands. K is a monotone function of q2,
+so it has no branch to jump.
+
+**3. Bench artefacts.** The claim is already on the exact path. The closure residual is <= 0.015 deg on the taken poses.
+The drive engages on 123 stretched poses (K up to 44.0 deg taken; the law runs to 53.4 deg and ends on stop B), so it
+is not an idle-drive row. Overhead reach is 8 of 28, the same as the claim.
+
+### Corrected numbers (frozen exact Bench(110,360))
+
+| | gap | reach | follow | in-band14 | in-band10 | contact | near-touch | min metal | overhead |
+|---|---|---|---|---|---|---|---|---|---|
+| claim as modelled | 23.37 | 0.731 | 1.0 | 0.846 | 0.532 | 0.011 | 25.01 | 0.45 | 8/28 |
+| **corrected** | **23.57** | 0.731 | 1.0 | 0.844 | 0.531 | 0.011 | 25.21 | 0.45 | 8/28 |
+| corrected, held out | 28.12 | 0.691 | 1.0 | 0.843 | 0.529 | 0.015 | 30.31 | 0.21 | 0.27 |
+
+The held-out row uses clips and workspace poses disjoint from both benches.
+
+The lost poses on the bench are fold 84, slide 8, parts 1 and contact 4. **The fold is still the limiter.**
+
+### Against the same protocol
+
+| design | active DOF | frozen | held out |
+|---|---|---|---|
+| this design | 3 | 23.57 | 28.12 |
+| H1 | 3 | 27.20 | 31.39 |
+| minarc pick1 | 4 (K sensed) | 18.40 | 21.31-22.69 |
+| minarc BDp | 4 (K sensed) | 19.54 | 24.18 |
+
+This is the best verified **3-active** number, but it costs complexity 42.5 against H1's 21.5.
+
+### Rules
+
+- 3 active DOF: K is slaved by the lobe and is never read.
+- No passive coordinate is left undetermined: the cam is spring-closed, and the kinematic lift-off gate holds.
+- 0 passive translations.
+- No gears, pulleys or cables: it uses a cam, a rocker and a pushrod.
+
+### Open (not scored)
+
+- Rod-end and lobe play maps to K error of about 1.2 deg per 0.05 mm at r_horn 2.49 mm.
+- At full stroke the lobe reaches about 10.9 mm radius, 0.9 mm past the O20 skirt. This is not modelled.
+- The rod's horn arc (<= 1.9 mm) is not modelled.
+- The rod is sampled as a line (16 points against the ~25 that 1 point per 4 mm2 would give), which is negligible here.
+- Not checked: the spring against the arm's gravity torque, and the reflected J2 torque (3.18 tau_K).
