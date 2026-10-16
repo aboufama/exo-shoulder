@@ -4,10 +4,10 @@
   "title": "Concept bench morphologies",
   "description": "One row per morphology in the swarm's catalogue: status, the agent's claimed bench numbers, the verifier's re-measured numbers (v_), its best sweep configuration so far, and the 3R baseline once (is_baseline), and the complexity count (the simplicity number, never part of the gap or score): complexity = points, lower = simpler, 0 = three pins on bearing pairs and three links; complexity_items = where the points come from; passive_trans = passive translations (more than 2 = not buildable); mechanism_confidence = counted or estimated. Built from docs/concepts/catalogue.json, families.json, rows/*.json (complexity: tools/simplicity.py on each row's mechanism record, docs/SIMPLICITY.md) and sweeps/*.json.",
   "file": "data/morphs.json",
-  "sha256": "83dc4e9ba5efc1010544edb7b612fe4fc1ddcab9f133ce6e508cf6cf121d79b8",
+  "sha256": "539c5c5f85991e3969f304eda3509fae95cbbd09befb9a24c7063cb83b64ef7a",
   "rows": 116,
-  "bytes": 217689,
-  "updated": "2026-10-16T20:23:39Z"
+  "bytes": 219515,
+  "updated": "2026-10-16T20:32:10Z"
  },
  {
   "id": "sweeps",
@@ -64,10 +64,10 @@
   "title": "Event log",
   "description": "What happened and when: the swarm's own log (docs/concepts/events.jsonl), one milestone per judged design and every new built-CAD R1 record (from the judge outputs).",
   "file": "data/events.json",
-  "sha256": "8f248dd65d01da7d386d91d038bb989e7f3c00cbdec45f458339c5aa7d2a3eeb",
-  "rows": 548,
-  "bytes": 198551,
-  "updated": "2026-10-16T20:23:39Z"
+  "sha256": "91d029f836dac1a8cd436f2a125769e39bcf6c78fb5ccf6f90df715b5558dc70",
+  "rows": 550,
+  "bytes": 199951,
+  "updated": "2026-10-16T20:32:10Z"
  },
  {
   "id": "spend",
@@ -104,9 +104,9 @@
   "title": "Data build info",
   "description": "When tools/dash_build.py last gathered the data, the repo commit, and any warnings it printed.",
   "file": "data/meta.json",
-  "sha256": "a56c732f322b40c5aa9dfd6026ce4adfb3f68cd5cd75a1fa95b8750814c410bf",
+  "sha256": "477e99c69cd9ab411734f7f4a25a1ce66cfd2cf3d5eb7809a7b404a66f59fbb2",
   "rows": 1,
   "bytes": 2089,
-  "updated": "2026-10-16T20:23:39Z"
+  "updated": "2026-10-16T20:32:10Z"
  }
 ]

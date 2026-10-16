@@ -53,7 +53,8 @@ def analyse(M, B):
                          d_median=round(float(np.median(d)), 2), d_p95=round(float(np.percentile(d, 95)), 2), d_max=round(float(d.max()), 2),
                          pose_p95_median=round(float(np.median(p95)), 2), pose_p95_max=round(float(p95.max()), 2),
                          poses_floor_lt1=int((lo < 1).sum()), poses_floor_lt2=int((lo < 2).sum()), poses_floor_lt3=int((lo < 3).sum()),
-                         share_floor_lt2=round(float((lo < 2).mean()), 4))
+                         share_floor_lt2=round(float((lo < 2).mean()), 4),
+                         floor_hist_mm={f"{a}-{b}": int(((lo >= a) & (lo < b)).sum()) for a, b in ((0, 1), (1, 2), (2, 3), (3, 4), (4, 6), (6, 10), (10, 99))})
     allj = np.arange(len(B.idx))
     block(allj[kind == "clip"], "clip_scored")
     block(allj[kind == "ws"], "ws_unscored")
@@ -66,6 +67,9 @@ def analyse(M, B):
         s = allj[(kind == "ws") & (el >= lo_) & (el < hi_)]
         if len(s): bands[f"{lo_}-{hi_}"] = [int(sum(ok(j) for j in s)), int(len(s))]
     out["ws_reach_by_elev"] = bands
+    con = [j for j in allj if B.res[j] is not None and float(np.min(B.res[j])) < 0]
+    out["contact_poses"] = sorted([dict(mm=round(float(np.min(B.res[j])), 2), kind=B.kind[j], plane=B.poses[j]["plane"], elev=B.poses[j]["elev"],
+                                        axial=B.poses[j]["axial"]) for j in con], key=lambda r: r["mm"])
     why = getattr(M, "why", None)
     if why is not None:
         ws_oh = allj[(kind == "ws") & (el >= 140)]
