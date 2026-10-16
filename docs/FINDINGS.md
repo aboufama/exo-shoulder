@@ -1375,3 +1375,31 @@ Next:
   grid pose reused) matches the full grid's closure within 0.005 for every config. Use it as the search bench (own fast
   cache); the held-out set stays untouched. The minarc BDp cross-fit recipe is ready
   (`python3 tools/crossfit_polish.py farm minarc ...`) but NOT launched; run it only with the held-out acceptance.
+
+### Cross-fit polish - independent check (2026-10-16, `docs/research/crossfit_polish_check.md`)
+
+* **Not refuted: the conclusion and the held-out numbers.** Re-measured on the farm with the verifier harness
+  unchanged (held, 1154 poses, worn exact; about $0.05). Every number matches to the digit:
+  * H1: 28.55 / near-touch 31.06.
+  * XP1: 29.50 / 32.22. The same at margin 5.0.
+  * XP2: 29.59 / 30.95.
+  * The cross-fit objective re-scores: H1 28.13, XP1 22.895.
+  * Each pick ends WORSE held out than its own start: XP1 by 1.85 against F2 (27.65), XP2 by 2.37 against F7 (27.22).
+    XP2 was found in generation 2, so it is a near-random step chosen on fold noise.
+* **The held-out set stays out.** The picks are the objective's argmins. The folds are deterministic, 317 / 317, and
+  every stratum is within +-1. Two small caveats:
+  * The continuity flood fill sees the held-out workspace poses' KINEMATICS (the rule's own full grid).
+  * The F2 / F7 starts were chosen after their held-out numbers were known.
+* **Correction: in-fold against out-of-fold.** "0.984 / +0.04 over all 587 rows" is in fact the subset of rows with
+  both gaps < 100. Over all 587 rows it is 0.996 / -1.51 (degenerate rows). On the working range (< 40, 554 rows) it is
+  **0.854, mean +0.17 points**. The conclusion stands: shape over-fit is about 0.2 points.
+* **Correction to the diagnosis: the axial skew is only the common part of the held-out drop.** The claim had no
+  control, because every config it measured was polished on the pool. This check adds 16 configs never optimised
+  (random draws around H1) and measures kinematic closure (`docs/research/crossfit_check/closure_control.json`):
+  * The pool-minus-held closure gap is 0.036. Re-weighting the held-out set to the pool's axial mix leaves 0.006, so
+    the skew explains it.
+  * The 7 polished configs have a gap of 0.062. Re-weighting leaves 0.027, which is **selection on the pool's own
+    poses**: any search over a fixed sample earns it, and no split of that sample sees it.
+* **Consequence.** A fresh jittered search bench removes the skew, but if it is searched as a fixed sample it will be
+  over-fit again. **Choose the pick on a second fresh draw the search never scored**, then accept held out. The
+  CLAUDE.md "2-fold cross-fit" line guards a 0.2-point effect; rewording it is a rule change for the user to see.
