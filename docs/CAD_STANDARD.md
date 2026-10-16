@@ -45,3 +45,10 @@ feature CAD, few faces (TOP = 17), planes / cylinders / cones + G2 B-spline blen
 6. **Check before showing**: `judge/part_validity.py` (one valid solid each), then `parts.html` with the zebra mode -
    stripes must run continuously across every blend.
 7. OCC `Volume()` is unreliable on the sewn sheet bodies: use the closed tessellation (mesh volume).
+
+
+## Rulings 2026-10-16 (user)
+
+- Base: the scapula handler carries the base directly at the J1 hub ring - no tab from J1 to a remote terminal.
+- Link ramps: up to 60 deg near a hub (was 35 deg); bent Ti-6Al-4V 3 mm bars keep tangent bend arcs of inner radius
+  >= 15 mm (5 t); tighter transitions only on parts 5-axis machined from solid, marked as such.

@@ -149,6 +149,11 @@ docs/EVOLUTION.md (and its snapshot to pipeline/evolution/) as part of the judge
   have extra rotation degrees is not huge for me" - tools/simplicity.py re-weighted (passive translation 2, sliding pair
   1, passive rotation 1); (4) **J1 seats: back of the shoulder + acromion top only** (the scapula handler's reach; no
   seats over the front / clavicle).
+- **CAD rulings for built designs** (user, 2026-10-16 ~06:20 UTC, on the gen-2 CAD review): (1) "yes" - the scapula
+  handler can carry the base DIRECTLY at the J1 hub ring: no base tab running out from J1 (the tab cost R1 0.68 -> 0.49
+  and caused the R6 / R16 / skin hits on user_osn_k4216); (2) link climb angle "your choice but be realistic" - chosen:
+  ramps up to 60 deg near a hub (was the standard's 35), with tangent bend arcs of inner radius >= 15 mm (5 t) on a 3 mm
+  bent Ti-6Al-4V bar; a tighter transition only where the part is 5-axis machined from solid, stated on the part.
 - **No lofts, ever** (user, 2026-10-15: "for all the design you do, lofts look horrible and introduce geometric problems, you
   can combine arcs, but no lofts!"): every surface comes from sketches of lines and tangent arcs - extrudes, revolves,
   sweeps of ONE constant section along a line/arc path, fillets. No lofts, no surfaces fitted or shrink-wrapped to skin
