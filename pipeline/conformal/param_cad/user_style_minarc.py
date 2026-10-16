@@ -263,10 +263,10 @@ def profile_link(label, ex, ey, start, end, Dq, Rq, axes, hr2, t=T, w=W, side=0)
     rad = USP.safe_radii(pts, want)
     for i in (0, n - 1, n, len(pts) - 1): rad[i] = 0.0                                     # the four end-face corners stay sharp
     nP = unit(np.cross(ex, ey))
-    sol = USP.prism(np.zeros(3), ex, ey, pts, rad, w, both=True) if not side else USP.prism((-w if side < 0 else 0.0) * nP, ex, ey, pts, rad, w)
+    sol = USP.prism(np.zeros(3), ex, ey, pts, rad, w, both=True) if not side else USP.prism(side[0] * nP, ex, ey, pts, rad, side[1] - side[0])
     def in_end(e_):
         q = np.array(e_.positionAt(0.5).toTuple()); x, y = q @ ex, q @ ey
-        if side and abs(q @ nP) < 1e-3: return True                                        # the centre plane (the other half is glued there)
+        if side and any(abs(q @ nP - b_) < 1e-3 and abs(b_) < W / 2 - 1e-3 for b_ in side): return True   # an inner strip edge plane (a neighbour is glued there)
         for (Pu, ax_) in ((S_u, a_ax), (E_u, b_ax)):
             sd = np.array([ax_[1], -ax_[0]])                                               # along the pad (perpendicular to the axis in the plane)
             if abs((np.array([x, y]) - Pu) @ sd) < 1e-3: return True
@@ -294,26 +294,39 @@ def profile_link(label, ex, ey, start, end, Dq, Rq, axes, hr2, t=T, w=W, side=0)
 
 
 SPLIT = os.environ.get("MINARC_SPLIT", "1") == "1"
+N_STRIPS = int(os.environ.get("MINARC_STRIPS", "2"))
 CAP_STYLE = os.environ.get("MINARC_CAP", "dome")                                        # dome (torispherical) | flat (the O20 x 12.25 envelope)
 
 
-def profile_link_split(label, ex, ey, start, end, Dq, Rq, axes, hr2, t=T, w=W):
-    """the strap is tilted across its width (one edge of a flat bar 1.7-1.9 mm above it on links 1b / 2): the bar as TWO
-    half-width (4 mm) side-view profiles, each through the strap stations of ITS half (max over that half's rows), extruded
-    from the bar plane to either side and glued on it - a bar whose underside steps once along its centre line (two
-    extrudes; 3-axis machinable). Falls back to the one-profile bar if the halves do not glue into one valid solid."""
-    nP = unit(np.cross(ex, ey)); off = np.einsum("qjk,k->qj", Dq, nP).mean(1)
-    lo, hi = off <= 1e-6, off >= -1e-6
-    if lo.sum() < 2 or hi.sum() < 2: return profile_link(label, ex, ey, start, end, Dq, Rq, axes, hr2, t, w)
-    a, ra = profile_link(label + " (half -)", ex, ey, start, end, Dq[lo], Rq[lo], axes, hr2, t, w / 2, side=-1)
-    b, rb = profile_link(label + " (half +)", ex, ey, start, end, Dq[hi], Rq[hi], axes, hr2, t, w / 2, side=+1)
-    try: sol = US.glue(a, b)
-    except Exception as e_: sol = None; print(f"  {label}: halves do not glue ({e_}) - one profile", flush=True)
+def profile_link_split(label, ex, ey, start, end, Dq, Rq, axes, hr2, t=T, w=W, n=None):
+    """the strap is tilted across its width (one edge of a flat bar 1.7-1.9 mm above it on links 1b / 2): the bar as N_STRIPS
+    side-view profiles side by side across the width (each w / N wide), each through the strap stations of ITS strip (max over
+    the model rows inside the strip and the strap linearly interpolated at the strip's edges, so no strip dips below the
+    strap), extruded from its edge plane and glued: a bar whose underside steps along N - 1 lines (N extrudes of line/arc
+    sketches; 3-axis machinable). Falls back to the one-profile bar if the strips do not glue into one valid solid."""
+    n = n or N_STRIPS; nP = unit(np.cross(ex, ey))
+    if n <= 1: return profile_link(label, ex, ey, start, end, Dq, Rq, axes, hr2, t, w)
+    off = np.einsum("qjk,k->qj", Dq * Rq[..., None], nP).mean(1); o_ = np.argsort(off); off, Dq, Rq = off[o_], Dq[o_], Rq[o_]
+    edges = np.linspace(-w / 2, w / 2, n + 1)
+    def row_at(b):                                                                         # the strap row interpolated at offset b
+        k = int(np.clip(np.searchsorted(off, b) - 1, 0, len(off) - 2)); a = float(np.clip((b - off[k]) / (off[k + 1] - off[k]), 0, 1))
+        d = (1 - a) * Dq[k] + a * Dq[k + 1]; d /= np.linalg.norm(d, axis=1, keepdims=True); return d, (1 - a) * Rq[k] + a * Rq[k + 1]
+    parts, reps = [], []
+    for i in range(n):
+        lo, hi = edges[i], edges[i + 1]; sel = (off > lo + 1e-6) & (off < hi - 1e-6)
+        D_ = [Dq[sel]] + [row_at(b)[0][None] for b in (lo, hi)]; R_ = [Rq[sel]] + [row_at(b)[1][None] for b in (lo, hi)]
+        D_, R_ = np.concatenate(D_), np.concatenate(R_)
+        sol_i, r_i = profile_link(f"{label} (strip {i + 1}/{n})", ex, ey, start, end, D_, R_, axes, hr2, t, hi - lo, side=(lo, hi))
+        parts.append(sol_i); reps.append(r_i)
+    try:
+        sol = parts[0]
+        for p_ in parts[1:]: sol = US.glue(sol, p_)
+    except Exception as e_: sol = None; print(f"  {label}: strips do not glue ({e_}) - one profile", flush=True)
     if sol is None or not sol.isValid() or len(sol.Solids()) != 1: return profile_link(label, ex, ey, start, end, Dq, Rq, axes, hr2, t, w)
-    rep = dict(split="two half-width profiles glued on the bar plane", half_minus=ra, half_plus=rb,
-               over_L1_max_outside_footprints=max(ra["over_L1_max_outside_footprints"] or 0, rb["over_L1_max_outside_footprints"] or 0),
-               max_climb=max(ra["max_climb"], rb["max_climb"]), process=ra["process"].replace("ONE side-view sketch", "TWO half-width side-view sketches"))
-    print(f"{label}: split bar glued, valid {sol.isValid()}, solids {len(sol.Solids())}", flush=True)
+    rep = dict(split=f"{n} strips of {w / n:.2f} mm glued side by side", strips=reps,
+               over_L1_max_outside_footprints=max((r_["over_L1_max_outside_footprints"] or 0) for r_ in reps),
+               max_climb=max(r_["max_climb"] for r_ in reps), process=reps[0]["process"].replace("ONE side-view sketch", f"{n} side-view sketches side by side"))
+    print(f"{label}: {n}-strip bar glued, valid {sol.isValid()}, solids {len(sol.Solids())}", flush=True)
     return sol, rep
 
 
