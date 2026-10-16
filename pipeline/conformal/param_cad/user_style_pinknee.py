@@ -55,7 +55,8 @@ CACHE = os.path.join(REPO, ".cache", "user_style_pinknee_fits.json")
 CUFF_WRAP_NEG = 12.0                                                                       # deg (user_style_osn: the forearm cuff folds onto the anterior arc)
 S_CUT = 255.0                                                                              # BOTTOM's cut (as the L1's user parts)
 PIN_D, SLEEVE_D, CB_D, CB_H, CLIP_T, GROOVE_D = 4.0, 5.5, 8.0, 0.7, 0.6, 3.2            # pin stack hardware (mm)
-KNEE_R = 5.0                                                                               # knee link end radius (10 wide)
+KNEE_R = 5.0                                                                               # (unused since the R1-corner plate)
+KNEE_CR = 1.0                                                                              # knee link planform corner radius
 TI, STEEL, IGL = 4.43, 7.85, 1.46
 
 
@@ -219,21 +220,33 @@ def l1_rows(M, lk, rows):
     return np.array([cd[J] for cd in cols_d]), np.array([cr[J] for cr in cols_r])
 
 
-def link_fit(label, ex, ey, start, end, Dq, Rq, t=T, climbs=((35.0, 12.0), (45.0, 6.0), (45.0, 4.0), (60.0, 4.0))):
+BEND_R = 16.5                                                                              # centre-line R of a 3 mm bar bent to >= 15 mm inner radius (5 t)
+CLIMBS = ((60.0, BEND_R), (60.0, 4.0))                                                     # user ruling 2026-10-16: ramps <= 60 deg near a hub, bends
+                                                                                           # >= 15 mm inner on bent bars; tighter = 5-axis machined
+
+
+def link_fit(label, ex, ey, start, end, Dq, Rq, t=T, climbs=CLIMBS):
     """bent-bar chain (start -> end poses in the plane (GH, ex, ey)) whose skin side stays >= the L1 strap underside
-    (user_style_osn.link_fit: fairness weight 4, up to 5 arcs; 35 deg ramp first, then the model's steeper ramps)"""
+    (user_style_osn.link_fit: fairness weight 4, up to 5 arcs). The 2026-10-16 CAD ruling: ramps up to 60 deg; a bent
+    3 mm Ti bar first (every bend >= 15 mm inner radius); only if no such chain exists, tighter transitions on a part
+    5-axis machined from solid (fit['machined'] = True, stated on the part)"""
     th_q = np.arctan2(Dq @ ey, Dq @ ex); rho_q = Rq * np.hypot(Dq @ ex, Dq @ ey)
     th = th_q.mean(0); order = np.argsort(th); th = th[order]; need = rho_q.max(0)[order]
     clear = lambda U: np.hypot(U[:, 0], U[:, 1]) - np.interp(np.arctan2(U[:, 1], U[:, 0]), th, need)
-    key = f"{label}|hug4|{np.round(ex, 5).tolist()}|{np.round(ey, 5).tolist()}|{np.round(start, 4).tolist()}|{np.round(end, 4).tolist()}|{np.round(need, 3).tolist()}"
+    geo = f"{np.round(ex, 5).tolist()}|{np.round(ey, 5).tolist()}|{np.round(start, 4).tolist()}|{np.round(end, 4).tolist()}|{np.round(need, 3).tolist()}"
+    key = f"{label}|hug60|" + "|".join(f"{cm:g},{rm:g}" for cm, rm in climbs) + "|" + geo
     cache = json.load(open(CACHE)) if os.path.exists(CACHE) else {}
+    old = f"{label}|hug4|{geo}"                                                            # the previous run's (60, 4) machined fit of link 1
+    if key not in cache and old in cache and cache[old].get("climb_limit") == 60.0 and cache[old].get("r_min") == 4.0 \
+            and any(f"{label}|hug60|bent-fail|{cm:g}" in k_ for k_ in cache for cm, rm in climbs if rm == BEND_R):
+        cache[key] = cache[old]
     if key in cache: fit = cache[key]; fit["segs"] = [tuple(x) for x in fit["segs"]]
     else:
         fits = {}
         for cm, rm in climbs:
             for n_ in (3, 4, 5):
-                for sc_ in (1.0, 0.5):
-                    fk = f"{key}|fail|{cm}|{rm}|{n_}|{sc_}"                                 # negative cache: never repeat a failed fit
+                for sc_ in ((1.0,) if rm == BEND_R else (1.0, 0.5)):
+                    fk = f"{label}|hug60|bent-fail|{cm:g}|{rm:g}|{n_}|{sc_}|{geo}" if rm == BEND_R else f"{key}|fail|{cm}|{rm}|{n_}|{sc_}"
                     cache = json.load(open(CACHE)) if os.path.exists(CACHE) else {}
                     if fk in cache: print(f"  {label}: {n_} arcs, climb {cm}, R >= {rm}, snap x{sc_}: {cache[fk]} (cached)", flush=True); e = cache[fk]
                     else:
@@ -254,10 +267,14 @@ def link_fit(label, ex, ey, start, end, Dq, Rq, t=T, climbs=((35.0, 12.0), (45.0
         cache = json.load(open(CACHE)) if os.path.exists(CACHE) else {}; cache[key] = fit
         os.makedirs(os.path.dirname(CACHE), exist_ok=True); json.dump(cache, open(CACHE, "w"), indent=0)
     P, H, _ = SK.sample(start, fit["segs"], 40); U = P - 0.5 * t * SK.normals(H); cl = clear(U)
+    rr = [abs(r) for r in fit["radii"] if r is not None]; inner = min(rr) - t / 2 if rr else None
+    machined = bool(inner is not None and inner < BEND_R - t / 2 - 1e-6)
     print(f"{label}: radii {[None if r is None else round(r, 1) for r in fit['radii']]}, lengths {[round(l, 1) for _, l in fit['segs']]}, "
           f"over the L1 underside min {cl.min():.2f} mean {cl.mean():.2f} max {cl.max():.2f} mm, max climb {fit['max_climb']:.1f} deg "
-          f"(limit {fit.get('climb_limit', 35)})", flush=True)
-    return fit, dict(over_L1_min=float(cl.min()), over_L1_mean=float(cl.mean()), over_L1_max=float(cl.max()))
+          f"(limit {fit.get('climb_limit', 35)}), min inner bend R {inner} -> {'5-axis machined from solid' if machined else 'bent 3 mm Ti bar'}", flush=True)
+    return fit, dict(over_L1_min=float(cl.min()), over_L1_mean=float(cl.mean()), over_L1_max=float(cl.max()), min_inner_bend_mm=inner,
+                     process="5-axis machined from solid Ti-6Al-4V (a bend below the 15 mm inner radius rule)" if machined
+                     else "bent 3 mm Ti-6Al-4V bar (every bend >= 15 mm inner radius)")
 
 
 def links(M):
@@ -283,7 +300,7 @@ def links(M):
     body, npk = US.with_pocket_r(body, ex, ey, start, fit["segs"])
     for k_ in (0, 1): body = body.fuse(US.lower_pin(u[k_], F[k_]))
     body = body.clean() if body.clean().isValid() else body
-    out.append(("l1", 1, "D8-02 link 1: bent bar 8x3 + J1/J2 pads + integral O7 pins (Ti-6Al-4V)", body))
+    out.append(("l1", 1, f"D8-02 link 1: 8x3 bar on a line/arc chain + J1/J2 pads + integral O7 pins ({r1['process']})", body))
     rep["link 1"] = dict(fit, **r1, pocket=npk, valid=body.isValid(), solids=len(body.Solids()))
     print(f"  link 1: valid {body.isValid()}, solids {len(body.Solids())}, faces {len(body.Faces())}, pocket {npk}", flush=True)
     # ---- link 2: upper at J2 (through GH) and J3 (offset line), plane span(C2, C3) = the model's strap plane
@@ -303,7 +320,7 @@ def links(M):
     body = US.glue(body, at(upper_ring_R(u[2], F[2], hr[2]), c[2]))
     body = body.cut(bore_cutter_R(u[1], F[1], hr[1])).cut(at(bore_cutter_R(u[2], F[2], hr[2]), c[2]))
     body = body.clean() if body.clean().isValid() else body
-    out.append(("l2", 2, "D8-03 link 2: bent bar 8x3 + J2/J3 hubs, flies over the knee and the pad (Ti-6Al-4V)", body))
+    out.append(("l2", 2, f"D8-03 link 2: 8x3 bar on a line/arc chain + J2/J3 hubs, flies over the knee and the pad ({r2['process']})", body))
     gap = float(abs((p3 - (p3 @ ex) * ex - (p3 @ ey) * ey) @ nP))
     rep["link 2"] = dict(fit, **r2, pocket=npk, u3_lean_out_of_plane_deg=lean, j3_seat_offset_mm=gap, valid=body.isValid(), solids=len(body.Solids()))
     print(f"  link 2: valid {body.isValid()}, solids {len(body.Solids())}, faces {len(body.Faces())}, pocket {npk}; u3 leans {lean:.2f} deg out of "
@@ -395,12 +412,16 @@ def knee_link(M):
     D = M.D; P = D.p; tr = M.tr; tp = P["tp"]; sn = D.sn; fr = M.fr; lc = float(P["lc"])
     z0 = tr + tp + PK.RUN; A = fr["A0m"]; Bp = fr["Bm"]; eK, nK = fr["eK"], fr["nK"]
     assert np.linalg.norm(A + lc * eK - Bp) < 1e-6
-    k = stadium(A + z0 * sn, eK, nK, lc, KNEE_R, tp)
+    # planform: the model's knee box (lc + 2 BOSS_R) x KNEE_W, pins BOSS_R from its ends, corners R1 (lines + tangent arcs):
+    # every model sample of the knee link lies within 0.41 mm of it (a stadium with R5 ends left the box corners 2 mm out)
+    e_ = PK.BOSS_R; hw_ = PK.KNEE_W / 2
+    k = prism(A + z0 * sn, eK, nK, [(-e_, -hw_), (lc + e_, -hw_), (lc + e_, hw_), (-e_, hw_)], [KNEE_CR] * 4, tp)
     for cen in (A, Bp):
         k = k.cut(disc(cen, sn, SLEEVE_D / 2, z0 - 1, z0 + tp + 1)).cut(disc(cen, sn, CB_D / 2, z0 + tp - CB_H, z0 + tp + 1))
     k = k.clean() if k.clean().isValid() else k
-    print(f"knee link: stadium {lc + 2 * KNEE_R:.1f} x {2 * KNEE_R:.0f} x {tp}, valid {k.isValid()}, solids {len(k.Solids())}", flush=True)
-    return ("l4", 6, f"D8-05 knee link: flat plate {lc + 2 * KNEE_R:.1f} x {2 * KNEE_R:.0f} x {tp} (lines + R5 arcs), O5.5 sleeve bores, O8 x 0.7 clip "
+    Lk = lc + 2 * PK.BOSS_R
+    print(f"knee link: plate {Lk:.1f} x {PK.KNEE_W:.0f} x {tp} (R{KNEE_CR:g} corners), valid {k.isValid()}, solids {len(k.Solids())}", flush=True)
+    return ("l4", 6, f"D8-05 knee link: flat plate {Lk:.1f} x {PK.KNEE_W:.0f} x {tp} (lines + R{KNEE_CR:g} arcs), O5.5 sleeve bores, O8 x 0.7 clip "
                      "counterbores (Ti-6Al-4V)", k)
 
 
