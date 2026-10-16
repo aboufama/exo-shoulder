@@ -59,3 +59,6 @@ pipeline/full-exo/designs/cad_r21_*/
 /*.npy
 /*.npz
 /osnp/
+
+# python pickles are caches (CLAUDE.md: never commit caches)
+*.pkl
