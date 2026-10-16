@@ -725,4 +725,49 @@ Results at every one of the 11 poses:
   machined link 2 (R >= 4) would hug the strap and is the next lever on R1 if the judges ask for it.
 
 
-SCORE_TABLE
+**Judged** (the fast scorecard, `pipeline/full-exo/designs/user_pinknee_h1/judge/scorecard.md`): **8 of 19 pass**, the
+same count as its L1. Where the numbers come from:
+- **Farm judge** (fast, $0.10): R1, R2, R4, R11 and R17.
+- **This box, after the pin-a sleeve fix:** R6, R7 and R16.
+- **R1 / R4 were measured before the sleeve fix.** That sleeve is a 0.16 g part that moved 10 mm within the knee link's
+  footprint, so I did not re-run them.
+
+The full CAD against its own L1, line by line:
+
+| req | L1 `l1_skin-normal-3r-pin-knee-h1` | full CAD `user_pinknee_h1` | change |
+|---|---|---|---|
+| R1 (2-14 mm) | 80.1 % | **71.6 %** | **-8.5, lost** |
+| R1-aim (2-10 mm) | 42.3 % | **33.1 %** | **-9.2, lost** |
+| R2 | 24.87 mm (user's forearm cuff) | 24.87 mm (user's forearm cuff) | same; see note 1 |
+| R3 | 98.7 % | 98.7 % | same |
+| R4 overhead | 74.2 % | 69.0 % | -5.2 |
+| R5 / R5-aim | 3 / 3 | 3 / 3 | same |
+| R6 | 0.0 mm (full, every frame) | **0.0 mm** (fast, every 3rd frame; 451 frames x 2586 pairs) | kept (was 1.43 before the sleeve fix) |
+| R7 | PASS (the L1 judge skips the H parts) | **PASS**: 28 STEP files, all valid single solids, 0 bad faces, the arm-side part and the knee link included | kept |
+| R8 | 77.2 g | 178.9 g (112.7 custom + 66.2 BOTTOM / mount) | real parts; PASS |
+| R11 | 0.349 kPa | 0.303 kPa | PASS |
+| R16 | 67.9 % (full: step 4, 360 poses) | **61.7 %** (fast: step 12, 120 poses) | **same as the L1 at the same step: 61.7 %**; see note 2 |
+| R17 | PASS | PASS | see note 3 |
+
+Notes:
+1. **R2.** "Ours" now shows 4.71 mm beyond the rig's self-intersection, but that is BOTTOM's own distal bar inside its
+   own limb (Comb hair). The L1 counted the same bar as the user's, at 4.96 mm; fusing BOTTOM with our mount moved it to
+   "ours". Our new parts add 0 mm: the trimmed cuff, the base and the mount are all 0.0 attributable.
+2. **R16.** The L1 re-judged at step 12 on a scratch copy gives 61.7 %. Its part interference is 1.7 % against the CAD's
+   0.8 %, and body contact is 4.2 % for both. The 67.9 % on the L1's card is the full-mode sample, a measurement
+   difference.
+3. **R17.** It passes even with link 2's open mesh, which the judge takes as its convex hull (139 g instead of 19.8 g).
+
+**The full CAD loses R1 and R4 against its L1. These are design changes:**
+- **The bars ride above the evaluator's straps.** Link 1 is on average 3.3 mm and at most 6.2 mm above the L1 strap.
+  Link 2 is on average 2.6 mm and at most 9.4 mm above it, and up to 10.9 mm above the model's strap at J3.
+- **The cuff side arcs are trimmed to 10 deg** clear of the trunk (the L1 carried the user's original cuff). H metal
+  within 110 mm of GH counts in R1.
+
+**Next levers, in order:**
+1. Link 2 machined to hug the strap. The builder switch is ready (`PK_LINK2_MACHINED=1 ... --out user_pinknee_h1_m2`).
+   The ruling allows it when stated on the part.
+2. A cuff-trim rule over the FOLLOWED clip frames only (it now trims on every third clip frame).
+3. Close link 2's tessellation crack: find the face pair in the glued bar.
+
+Stills on the muscled mannequin and the independent verification are the next steps (task #19).

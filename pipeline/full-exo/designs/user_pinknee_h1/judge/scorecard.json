@@ -65,25 +65,25 @@
  {
   "id": "R6",
   "name": "No interference between parts that move relative to each other",
-  "value": 1.43,
+  "value": 0.0,
   "unit": "mm",
   "target": "<= 0.15 mm",
-  "status": "FAIL",
+  "status": "PASS",
   "judge": "judge/part_contact.py (geometry only)"
  },
  {
   "id": "R7",
   "name": "Every custom part is one valid closed solid",
-  "value": null,
+  "value": true,
   "unit": null,
   "target": "== True",
-  "status": "NOT RUN",
+  "status": "PASS",
   "judge": "judge/part_validity.py (OCC BRepCheck on the exported STEP)"
  },
  {
   "id": "R8",
   "name": "Custom-part mass budget (user: 500 g for the shoulder)",
-  "value": 182.2,
+  "value": 178.9,
   "unit": "g",
   "target": "<= 500 g",
   "status": "PASS",
@@ -179,7 +179,7 @@
  {
   "id": "R16",
   "name": "Follows the functional everyday workspace (built design: chain closes, no body contact, no part interference)",
-  "value": 0.2,
+  "value": 0.6167,
   "unit": null,
   "target": ">= 0.9",
   "status": "FAIL",
