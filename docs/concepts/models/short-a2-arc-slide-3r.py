@@ -55,7 +55,7 @@ NAME = ("Short-link-2 3R whose J3 hub rides a spring-returned GH-concentric arc 
 # seed S1 of the round-5 judge (catalogue model_spec): u1 = bvec(107.18, 64.67), u3 = wdir(103.39, -5.90)
 PARAMS = dict(az=107.18, el=64.67, wd=103.39, wa=-5.90, a1=44.138, a2h=40.730, a2max=54.591, sigma=-1,
               m_stop=K.FOLD_MARGIN, q=0.97, width=12.0, t_link=3.0,
-              rail_w=14.0, rail_th=3.0, carr_t=2.0, carr_len=16.0, rail_end=2.0, r_lay=56.0, layout=0,
+              rail_w=14.0, rail_th=3.0, carr_t=2.0, carr_len=16.0, rail_end=2.0, r_lay=56.0, layout=0, lift1=1.0, l1_end=2.0,
               connect=1, near=0)
 ELEV_OVER = SPM.ELEV_OVER
 GAP = 0.15                                                   # running gap carriage / rail
@@ -134,8 +134,12 @@ def build(B, F, p):
     lay = int(p.get("layout", 0)); w, t = p["width"], p["t_link"]; end = K.HUB_R + 2.0
     rr = K.strap_member("rail_r", p2, p3, ("J2", "S", "Rj"), ang=math.radians(s0), width=wl(p["rail_w"]), t=p["rail_th"],
                         ramp_to=(("hub2", K.STACK if lay else 0.0), ("rail_t", 0.0)), end_mm=end)
-    l1 = K.strap_member("link1", p1, p2, ("J1", "J2"), width=w, t=t, ramp_to=(("hub1", K.STACK), ("hub2", 0.0 if lay else K.STACK)),
-                        end_mm=end)
+    # link 1's J2 end zone is lift1 mm above hub 2's upper flange (a spacer: only raises metal) and l1_end mm long, so
+    # the upper member clears the rail root by >= 1 mm just past K6's 12-mm exempt zone (the kit's `over` measures that
+    # zone at the pre-climb radius, K6 at the final one: without this, 17 % of poses jam link 1 on the rail root)
+    l1 = K.strap_member("link1", p1, p2, ("J1", "J2"), width=w, t=t,
+                        ramp_to=(("hub1", K.STACK), ("hub2", (0.0 if lay else K.STACK) + float(p["lift1"]))),
+                        end_mm=end + float(p["l1_end"]))
     if lay: rr.over = [("link1", 1.0)]
     else: l1.over = [("rail_r", 1.0), ("rail_t", 1.0)]
     ct = float(p["carr_t"]); mem = [hub1, hub2, rt, rr, l1]
@@ -262,6 +266,7 @@ def snap(p):
     p["carr_len"] = min(22.0, max(16.0, float(p["carr_len"])))
     p["layout"] = 1 if float(p.get("layout", 0)) >= 0.5 else 0
     p["r_lay"] = min(80.0, max(40.0, float(p["r_lay"])))
+    p["lift1"] = min(4.0, max(0.0, float(p["lift1"]))); p["l1_end"] = min(8.0, max(0.0, float(p["l1_end"])))
     for k in ("width", "t_link", "rail_w", "rail_th", "rail_end"): p[k] = PARAMS[k]   # never thinned by a search
     return p
 
