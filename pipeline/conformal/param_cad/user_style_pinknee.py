@@ -640,14 +640,14 @@ def link1_posed_check(tab_mesh, l1_mesh, frames):
 EAR_L, EAR_W, EAR_RF, M4_TAP = 14.5, 9.0, 3.0, 3.3                                        # ear: hole centre from the J1 axis, width, root fillet, M4 tap drill
 
 
-def ear_margins(M, l1_body, rel):
+def ear_margins(M, l1_body, rel, dz=0.0, l1m=None):
     """link 1's built surface posed into the base frame over every frame (rel = [(R, t)] l1 local -> base local), kept
     near the ear level and outside the hub ring; per heading (1 deg) the min 3D distance to an ear slab (capsule axis ->
     EAR_L, half width EAR_W / 2, levels F1 + U0 .. + T): all points, and without link 1's own J1 pad (its top face is the
     stack's designed 0.15 mm running gap under the base's upper level)"""
-    D = M.D; k1 = unit(D.u[0]); F1 = M.f[0]; R = M.hr[0]; lev = F1 + LV["U0"]
+    D = M.D; k1 = unit(D.u[0]); F1 = M.f[0]; R = M.hr[0]; lev = F1 + LV["U0"] + dz
     d0 = unit(np.array([0.0, 0.6, -0.8])); d0 = unit(d0 - (d0 @ k1) * k1); d1 = np.cross(k1, d0)
-    l1m = tess(l1_body, fine=False); X1 = np.r_[np.asarray(l1m.vertices), trimesh.sample.sample_surface_even(l1m, 8000, seed=4)[0]]
+    l1m = tess(l1_body, fine=False) if l1m is None else l1m; X1 = np.r_[np.asarray(l1m.vertices), trimesh.sample.sample_surface_even(l1m, 8000, seed=4)[0]]
     keep = []
     for Rr, tr_ in rel:
         P = X1 @ Rr.T + tr_; z = P @ k1; rad = np.linalg.norm(P - np.outer(z, k1), axis=1)
@@ -666,59 +666,88 @@ def ear_margins(M, l1_body, rel):
     return dict(d0=d0, d1=d1, m_all=m_all, m_nopad=m_np, n_pts=int(len(P)), l1m=l1m)
 
 
+EAR_DZ = (0.0, 1.3, 2.6)                                                                   # ear levels above the J1 upper seat (2.6 = flush with the ring top H1)
+
+
 def base_part(M, E, l1_body, rel, frames):
     """the scapula base AT THE J1 HUB RING (user ruling 2026-10-16: the scapula handler carries the base directly at the
-    J1 ring, no tab out to a remote terminal): J1 upper ring + bore, the upper seat disc, and two short ears in the J1
-    upper seat plane (planform: the hub circle + a 9 wide bar to 14.5 mm with an R4.5 end and R3 root fillets - lines +
-    tangent arcs, extruded 3 mm), each with one M4 tapped hole (O3.3 tap drill, 3 mm Ti = 0.75 D engagement) for the
-    handler's bracket, which bolts on from above (outer side). Ear headings: link 1 (built, posed over every clip and
-    workspace frame) >= 1 mm from each ear above its own pad (>= 0.15 mm designed running gap at the pad), >= 0.5 mm over
-    the scapula-frame skin envelope (2 mm clearance), the two ears 90-180 deg apart, the largest worst margin"""
-    D = M.D; k1 = unit(D.u[0]); F1 = M.f[0]; R = M.hr[0]; lev = F1 + LV["U0"]
-    em = ear_margins(M, l1_body, rel); d0, d1 = em["d0"], em["d1"]
-    hd = lambda a: math.cos(math.radians(a)) * d0 + math.sin(math.radians(a)) * d1
-    ok_link = [a for a in range(0, 360, 2) if em["m_nopad"][a] >= 1.0 and em["m_all"][a] >= 0.15]
-    skin = {}
-    for a in ok_link[::2] if len(ok_link) > 90 else ok_link:
-        fld = US.PolarField(E, "S", np.eye(3), k1, hd(a), -5.0, 75.0, EAR_W)
-        Uf = np.array([(lev, x_) for x_ in np.linspace(R, EAR_L + EAR_W / 2, 12)]); skin[a] = float(fld(Uf).min())
-    feas = [a for a, v in skin.items() if v >= 0.5]
-    print(f"base at the J1 ring: {em['n_pts']} posed link-1 samples near the ear level; headings clear of link 1 {len(ok_link)}/180, "
-          f"of those clear of the skin envelope {len(feas)}/{len(skin)}", flush=True)
-    score = lambda a: min(em["m_nopad"][a], 3.0) + 0.5 * min(em["m_all"][a], 1.0) + 0.2 * min(skin[a], 3.0)
-    best = None
-    for i, a in enumerate(feas):
-        for b in feas[i + 1:]:
-            sep = abs((b - a + 180) % 360 - 180)
-            if sep < 90: continue
-            sc = (min(score(a), score(b)), sep)
-            if best is None or sc > best[0]: best = (sc, a, b)
-    assert best is not None, f"base: no pair of ear headings 90-180 deg apart clears link 1 and the skin ({feas})"
-    _, a1, a2 = best
+    J1 ring, no tab out to a remote terminal): J1 upper ring + bore, the upper seat disc, and two short ears on the ring
+    (planform: the hub circle + a 9 wide bar to 14.5 mm with an R4.5 end and R3 root fillets - lines + tangent arcs,
+    extruded 3 mm), each with one M4 tapped hole (O3.3 tap drill) for the handler's bracket from above. Ear level: the
+    upper seat plane, else raised up to flush with the ring top (EAR_DZ). Headings: link 1 (built, posed over every clip
+    and workspace frame) >= 1 mm from each ear above its own pad (>= 0.15 at the pad), >= 0.5 mm over the scapula-frame
+    skin envelope (2 mm clearance), the ears 90-180 deg apart, the largest worst margin. If no level has such a pair, a
+    relaxed pass (link 1 >= 0.5 mm, skin envelope >= -1.5 = 0.5 mm from the skin) - stated; if none either, NO ears: the
+    base is the J1 upper member alone and the handler's bracket threads onto the M18 x 0.5 spigot in place of the dome
+    cap (it retains the upper outer ring) - stated, the bracket being the handler's part."""
+    D = M.D; k1 = unit(D.u[0]); F1 = M.f[0]; R = M.hr[0]
+    l1m = tess(l1_body, fine=False); found = None; diag = []
+    for rule, need_link, need_all, need_skin in (("strict", 1.0, 0.15, 0.5), ("relaxed", 0.5, 0.15, -1.5)):
+        for dz in EAR_DZ:
+            lev = F1 + LV["U0"] + dz
+            em = ear_margins(M, l1_body, rel, dz=dz, l1m=l1m); d0, d1 = em["d0"], em["d1"]
+            hd = lambda a, d0=d0, d1=d1: math.cos(math.radians(a)) * d0 + math.sin(math.radians(a)) * d1
+            ok_link = [a for a in range(0, 360, 2) if em["m_nopad"][a] >= need_link and em["m_all"][a] >= need_all]
+            skin = {}
+            for a in ok_link:
+                fld = US.PolarField(E, "S", np.eye(3), k1, hd(a), -5.0, 75.0, EAR_W)
+                Uf = np.array([(lev, x_) for x_ in np.linspace(R, EAR_L + EAR_W / 2, 12)]); skin[a] = float(fld(Uf).min())
+            feas = [a for a, v in skin.items() if v >= need_skin]
+            score = lambda a: min(em["m_nopad"][a], 3.0) + 0.5 * min(em["m_all"][a], 1.0) + 0.2 * min(skin[a], 3.0)
+            best = None
+            for i, a in enumerate(feas):
+                for b_ in feas[i + 1:]:
+                    sep = abs((b_ - a + 180) % 360 - 180)
+                    if sep < 90: continue
+                    sc = (min(score(a), score(b_)), sep)
+                    if best is None or sc > best[0]: best = (sc, a, b_)
+            top = sorted(skin.items(), key=lambda kv: -kv[1])[:4]
+            diag.append(dict(rule=rule, dz=dz, headings_clear_of_link1=len(ok_link), skin_feasible=len(feas), best_skin=[[a, round(v, 2)] for a, v in top]))
+            print(f"base at the J1 ring ({rule}, ears +{dz:g} mm): {em['n_pts']} posed link-1 samples; headings clear of link 1 {len(ok_link)}/180, "
+                  f"of those clear of the skin envelope {len(feas)}; best skin {[(a, round(v, 2)) for a, v in top]}", flush=True)
+            if best is not None: found = (rule, dz, lev, em, hd, skin, best); break
+        if found: break
     body = None
-    for a in (a1, a2):
-        pl = US.plate(k1, lev, hd(a), EAR_W, T, EAR_L, R=R, rf=EAR_RF)
-        pl = pl.fuse(disc((EAR_L) * hd(a), k1, EAR_W / 2, lev, lev + T)).clean()
-        body = pl if body is None else US.glue(body, pl)
-    body = US.rounded(body, skip=lambda e: e.geomType() == "CIRCLE" and abs(np.array(e.positionAt(0.5).toTuple()) @ k1 - (lev + T)) < 1e-3
-                      and abs(np.linalg.norm((lambda p: p - (p @ k1) * k1)(np.array(e.positionAt(0.5).toTuple()))) - R) < 1e-3)
+    if found:
+        rule, dz, lev, em, hd, skin, (_, a1, a2) = found
+        for a in (a1, a2):
+            pl = US.plate(k1, lev, hd(a), EAR_W, T, EAR_L, R=R, rf=EAR_RF)
+            pl = pl.fuse(disc((EAR_L) * hd(a), k1, EAR_W / 2, lev, lev + T)).clean()
+            body = pl if body is None else US.glue(body, pl)
+        if dz > 0:                                                                          # the upper seat disc under raised ears
+            body = US.glue(body, disc(np.zeros(3), k1, R, F1 + LV["U0"], F1 + LV["U0"] + T))
+    else:
+        body = disc(np.zeros(3), k1, R, F1 + LV["U0"], F1 + LV["U0"] + T)
+    body = US.rounded(body, skip=lambda e: e.geomType() == "CIRCLE" and abs(np.array(e.positionAt(0.5).toTuple()) @ k1 - (F1 + LV["U0"] + T)) < 1e-3
+                      and abs(np.linalg.norm((lambda p: p - (p @ k1) * k1)(np.array(e.positionAt(0.5).toTuple()))) - R) < 1e-3) if found else body
     body = US.glue(body, upper_ring_R(k1, F1, R))
     body = ring_root_R(body, k1, F1, R)
     body = body.cut(bore_cutter_R(k1, F1, R))
-    for a in (a1, a2):
-        cc = EAR_L * hd(a)
-        body = body.cut(cq.Solid.makeCylinder(M4_TAP / 2, T + 2.0, V(cc + (lev - 1.0) * k1), V(k1)))
+    if found:
+        for a in (a1, a2):
+            cc = EAR_L * hd(a)
+            body = body.cut(cq.Solid.makeCylinder(M4_TAP / 2, T + 2.0, V(cc + (lev - 1.0) * k1), V(k1)))
     body = body.clean() if body.clean().isValid() else body
-    cl = link1_posed_check(tess(body), em["l1m"], frames)
-    print(f"base: ears at {a1} / {a2} deg (sep {abs((a2 - a1 + 180) % 360 - 180)}), link 1 margins {em['m_nopad'][a1]:.2f} / {em['m_nopad'][a2]:.2f} mm "
-          f"(incl. its pad {em['m_all'][a1]:.2f} / {em['m_all'][a2]:.2f}), skin envelope {skin[a1]:.2f} / {skin[a2]:.2f} mm; built base vs posed link 1 "
-          f"{cl:.2f} mm; valid {body.isValid()}, solids {len(body.Solids())}", flush=True)
-    return ("base", 0, "D8-01 scapula base AT THE J1 RING: J1 O20 ring + seat disc + 2 ears, each 1x M4 tapped (O3.3 tap drill) for the user's "
-                       "scapula handler bracket from above - no tab (Ti-6Al-4V, 5-axis machined)", body), \
-        dict(rule="base at the J1 hub ring, no tab (user 2026-10-16)", ears_deg=[a1, a2], ear=dict(hole_from_axis=EAR_L, width=EAR_W, thread="M4 tapped, 3 mm",
-             tap_drill=M4_TAP), link1_margin_above_pad_mm=[float(em["m_nopad"][a1]), float(em["m_nopad"][a2])],
-             link1_margin_incl_pad_mm=[float(em["m_all"][a1]), float(em["m_all"][a2])], skin_envelope_mm=[skin[a1], skin[a2]],
-             built_vs_posed_link1_mm=cl, headings_clear_of_link1=len(ok_link), headings_feasible=feas, valid=body.isValid(), solids=len(body.Solids()))
+    cl = link1_posed_check(tess(body), l1m, frames)
+    if found:
+        print(f"base ({rule}): ears +{dz:g} mm at {a1} / {a2} deg (sep {abs((a2 - a1 + 180) % 360 - 180)}), link 1 margins {em['m_nopad'][a1]:.2f} / "
+              f"{em['m_nopad'][a2]:.2f} mm (incl. its pad {em['m_all'][a1]:.2f} / {em['m_all'][a2]:.2f}), skin envelope {skin[a1]:.2f} / {skin[a2]:.2f} mm; "
+              f"built base vs posed link 1 {cl:.2f} mm; valid {body.isValid()}, solids {len(body.Solids())}", flush=True)
+        name = (f"D8-01 scapula base AT THE J1 RING: J1 O20 ring + seat disc + 2 ears (+{dz:g} mm), each 1x M4 tapped (O3.3 tap drill) for the user's "
+                "scapula handler bracket from above - no tab (Ti-6Al-4V, 5-axis machined)")
+        rep = dict(rule=f"base at the J1 hub ring, no tab (user 2026-10-16); ear rule {rule}", ears_deg=[a1, a2], ear_level_above_seat_mm=dz,
+                   ear=dict(hole_from_axis=EAR_L, width=EAR_W, thread="M4 tapped, 3 mm", tap_drill=M4_TAP),
+                   link1_margin_above_pad_mm=[float(em["m_nopad"][a1]), float(em["m_nopad"][a2])],
+                   link1_margin_incl_pad_mm=[float(em["m_all"][a1]), float(em["m_all"][a2])], skin_envelope_mm=[skin[a1], skin[a2]])
+    else:
+        print(f"base: NO ear level clears link 1's sweep and the skin - the base is the J1 upper member alone (handler bracket on the M18 x 0.5 "
+              f"spigot in place of the dome cap); built base vs posed link 1 {cl:.2f} mm; valid {body.isValid()}, solids {len(body.Solids())}", flush=True)
+        name = ("D8-01 scapula base AT THE J1 RING: the J1 upper member alone (O20 ring + seat disc + M18 x 0.5 spigot); the user's scapula handler "
+                "bracket threads onto the spigot in place of the dome cap - no ears, no tab (Ti-6Al-4V, 5-axis machined)")
+        rep = dict(rule="base at the J1 hub ring, no tab (user 2026-10-16); NO ears: link 1 sweeps every ear heading (see diag)",
+                   interface="the handler's bracket threads onto the J1 M18 x 0.5 spigot in place of the dome cap (retains the upper outer ring)")
+    rep.update(built_vs_posed_link1_mm=cl, diag=diag, valid=body.isValid(), solids=len(body.Solids()))
+    return ("base", 0, name, body), rep
 
 
 # ---------------------------------------------------------------------------------------------------- kinematic check
