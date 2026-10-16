@@ -1,0 +1,84 @@
+{
+ "overall": 0.38635538291674154,
+ "follow": 1.0,
+ "in_band": 0.38635538291674154,
+ "clips": [
+  {
+   "name": "Raise overhead",
+   "frames": 181,
+   "score": 0.348834455684841,
+   "follow": 1.0,
+   "in_band_when_following": 0.348834455684841,
+   "median_gap": 12.141249301589475,
+   "min_gap": 0.14429092897407264
+  },
+  {
+   "name": "Drink from a cup",
+   "frames": 178,
+   "score": 0.31950972154487706,
+   "follow": 1.0,
+   "in_band_when_following": 0.31950972154487706,
+   "median_gap": 11.434275950902864,
+   "min_gap": 3.6124023477093634
+  },
+  {
+   "name": "Comb hair",
+   "frames": 202,
+   "score": 0.39666425374130876,
+   "follow": 1.0,
+   "in_band_when_following": 0.39666425374130876,
+   "median_gap": 11.327813182525455,
+   "min_gap": 2.51052991618757
+  },
+  {
+   "name": "Reach a high shelf",
+   "frames": 157,
+   "score": 0.4319155111393013,
+   "follow": 1.0,
+   "in_band_when_following": 0.4319155111393013,
+   "median_gap": 10.125048769456379,
+   "min_gap": 2.262968401045399
+  },
+  {
+   "name": "Wash opposite shoulder",
+   "frames": 193,
+   "score": 0.20694288524980117,
+   "follow": 1.0,
+   "in_band_when_following": 0.20694288524980117,
+   "median_gap": 14.582821975582082,
+   "min_gap": 3.6180378028728133
+  },
+  {
+   "name": "Reach back pocket",
+   "frames": 145,
+   "score": 0.6106246518714752,
+   "follow": 1.0,
+   "in_band_when_following": 0.6106246518714752,
+   "median_gap": 7.982010025795551,
+   "min_gap": 1.6160093349573847
+  },
+  {
+   "name": "Wave",
+   "frames": 172,
+   "score": 0.3642057061004268,
+   "follow": 1.0,
+   "in_band_when_following": 0.3642057061004268,
+   "median_gap": 11.825260500742612,
+   "min_gap": 3.4712252806067863
+  },
+  {
+   "name": "Walking arm swing",
+   "frames": 109,
+   "score": 0.527381034103445,
+   "follow": 1.0,
+   "in_band_when_following": 0.527381034103445,
+   "median_gap": 9.75756651032634,
+   "min_gap": 3.505347233364764
+  }
+ ],
+ "band": [
+  2.0,
+  10.0
+ ],
+ "step": 3
+}
