@@ -1575,3 +1575,72 @@ All numbers are frozen exact on Bench(110,360), at the 5-deg margin with O20 hub
   * a crown cam at slope 1.5 runs ~41 deg (23 deg with a 2:1 lever);
   * a one-tooth Geneva entry (psi_c 4-8) reaches dK 56 within 45 deg.
 * **The fast-to-frozen loss persists at 4.7-7 points.** Overhead is 8 of 28 on every round-6 design.
+
+## Judge fixes: split members now count in R1, the dynamics judge runs any hinge chain, the cut BOTTOM is one solid (2026-10-16, MEASUREMENT changes, no design changed)
+
+Found by the gen-4 CAD and its verifier (`pipeline/full-exo/designs/user_minarc_bdp/VERIFY.md`). Every number below moved
+because the MEASUREMENT changed; no part, shape or configuration changed.
+
+**R1 / R1-aim / R4 (`score_design.py`).** The judge kept only groups named `base`, `l<digits>`, `H`, `cuff`, so minarc's
+split members `l1a` / `l1b` (links 1a, 1b, hub K and its 6 mm taller cap, the K and J2 lower plates) never counted. New
+rule (`pipeline/full-exo/metal_groups.py`): every group the chain poses in clips.json is scored, H within 110 mm of GH as
+before, and any other exo.glb group must be listed in `EXCLUDED` with a reason (today only `F`, the forearm parts) or the
+judge stops; a scored group missing from a frame also stops it. `BANDS=10,14` scores both bands in one pass (identical
+numbers, half the time; `tools/judge_all.sh` uses it). Regression: user_pinknee_h1b (no split groups) reproduces
+bit-identically (77.564 % at step 30, old and new code). Re-judged at step 3 on the farm:
+
+| design | R1 (2-14 mm) | R1-aim (2-10 mm) | R4 (Raise overhead, 14 mm) |
+|---|---|---|---|
+| l1_minarc-bdp | 72.4 -> **80.5 %** | 38.6 -> **52.5 %** | 71.4 -> **72.7 %** |
+| user_minarc_bdp | 71.7 -> **80.0 %** | 37.5 -> **51.0 %** | 70.0 -> **72.0 %** |
+
+These reproduce the verifier's own re-measure (80.04 / 50.96 / 71.98 and the L1's 80.51 / 72.74). Still FAIL (90 % / 80 %
+needed). The gen-4 "R1 below gen 3" story was this blind spot: the minarc CAD is 3.3 points above h1b's 76.7 %. Also
+affected when re-judged: `param2_r20_n3_s1414_4` (its base group is named `S`; now counted). `r1_decompose.py` uses the
+same rule and now applies the per-group offsets T.
+
+**R17 / R11 (`judge/dynamics.py`).** The judge modelled only the spherical az/el/a chain (`KeyError 'l1'` on minarc) and
+judged the pin-knee designs as their orientation-equivalent spherical 3R (its own `chain_vs_clip_G` mismatch was 10.7 /
+33.0 deg on h1's links). New general chain (`GenDesign`): the clips' own members in serial order + the arm (canonical
+humerus at GH), every adjacent pair joined by the hinge FITTED to its relative motion over all frames - minarc J1, K, J2,
+J3, pin a, pin b and h1b J1, J2, J3, pin a, pin b all fit as pure hinges to 1e-4 deg / 3e-4 mm; the knuckle K gets its
+clock spring (0.08 N.m preload at stop A; rate 0.015 nominal, 0.010 also run) and stops A / B (0 / 34.47 deg), J2 its q2
+stops (125.8 deg window), as joint limits. Cross-check (`judge/test_dynamics.py --general`): on the spherical 3R
+band_r14_3r_s1351_1 the general chain reproduces the original path (constant friction: M_GH peak 0.207 / 0.207 and
+0.221 / 0.221 N.m, rms within 0.003; rolling: within the summaries' rounding). The 3-joint path is unchanged:
+`test_dynamics.py --fast` PASS (analytic hinge, transmission p95 0.0015, wedge OK). Two more measurement fixes found on
+the way: (1) part masses from a STEP tessellation with hairline seams (link 2: 0.87 mm of open edge) took the convex hull
+of each open piece - link 2 weighed 121 g instead of 21 g; whole-part integrals now (1a 12.7, 1b 23.8 incl. hub K's
+hardware, 2 28.8 g with its hub stacks); (2) numbered machined parts (D8-...) take their stated alloy, never a feature word
+("O3 magnet pocket", "dowel holes", "sleeve bores" made link 1a NdFeB and the knee link iglidur).
+
+| design (nominal: rolling mu 0.005, speed 1) | M_GH peak | cuff force peak | cuff twist peak | K drift vs plan | R17 | R11 (kPa, with arm parts) |
+|---|---|---|---|---|---|---|
+| l1_minarc-bdp | NOT RUN -> 0.152 N.m | 0.69 N | 1.96 deg | 2.13 deg | NOT RUN -> **PASS** | NOT RUN -> 0.399 **PASS** |
+| user_minarc_bdp | NOT RUN -> 0.153 N.m | 0.70 N | 2.00 deg | 2.17 deg | NOT RUN -> **PASS** | NOT RUN -> 0.272 **PASS** |
+| l1_skin-normal-3r-pin-knee-h1 | 0.040 -> 0.049 N.m | 0.11 -> 0.22 N | 0.94 -> 1.50 deg | - | PASS -> PASS | 0.349 -> 0.351 PASS |
+| user_pinknee_h1b | 0.035 -> 0.046 N.m | 0.10 -> 0.22 N | 0.81 -> 1.39 deg | - | PASS -> PASS | 0.213 -> 0.216 PASS |
+
+What the knuckle does: K never leaves stop A in any clip (on its stop 100 % of the time). On the 8 frames of Wash where the
+plan opens K by up to 2.2 deg with J2 on its stop, the 0.08 N.m preload is more than the cuff's soft tissue resists (0.03
+N.m/deg torsion: 2.7 deg of twist), so the cuff twists ~2 deg instead of K opening - inside R17's 5 deg; K's "stalls" are
+these 66 ms lags of <= 1.6 deg (none >= 10 deg). The spring rate (0.010 vs 0.015 N.m/rad) changes nothing on the clips.
+The pin-knee numbers rose (knee link, member 3 and the J3 offset now carry mass and leverage) but stay 20x under the 1 N.m
+bar. Not modelled in the general chain: member-member contact (R6 judges it, 0.0 mm) and the knee stop (149.5 deg, not
+in the CAD either). Designs with passive slides (osn, rail elbow) are refused by the hinge fit and fall back to the
+spherical approximation, labelled in their dynamics.json "chain".
+
+**R7 (cut BOTTOM).** The inherited BOTTOM tessellation (from l1_seed-offset-3r-slides) carries 6 zero-area slivers that
+make 6 non-manifold edges (7 open pieces); the L1 slicer worked on the unmerged mesh and capped each cut loop with a
+centroid fan, which overlaps itself on the channel's non-convex section. `build_pinknee_l1.slice_capped` cleans the mesh,
+clips each triangle at the plane with one vertex per cut edge, and caps every section loop by ear clipping (holes bridged).
+`pipeline/concept_l1/repair_cut_bottom.py` re-cut the two cut L1s in place (same source mesh, same plane recovered from the
+old cut to 4e-6 mm): l1_minarc-bdp and l1_skin-normal-3r-pin-knee-h1 BOTTOM 7 open pieces -> one closed solid (21.02 /
+22.50 cm3), R7 FAIL -> **PASS**; the three uncut L1s carrying the same mesh (l1_skin-normal-3r-pin-knee, its k4598-m5,
+l1_offset-skin-normal-3r) were cleaned (geometry unchanged) and pass R7 under the current rule. R1 is unaffected (no H
+metal within 110 mm of GH on these designs); R2 / R6 / R16 were not re-run: the new cap only removes the old fan's phantom
+faces inside the channel notch.
+
+Scorecards: l1_minarc-bdp 4 -> 7 of 19 (R7, R11, R17), user_minarc_bdp 5 -> 7 (R11, R17), l1 h1 7 -> 8 (R7), h1b 8 -> 8.
+Open: R8 of user_minarc_bdp still reads parts_full.json's keyword-material masses (239.1 g; the verifier's 202.6 g) - the
+builder's material rule needs the same fix as the dynamics judge's.

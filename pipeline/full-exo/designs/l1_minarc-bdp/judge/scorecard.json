@@ -2,7 +2,7 @@
  {
   "id": "R1",
   "name": "Proximity: covered skin 2-14 mm from the metal while following (user 2026-10-15: pass at 14 mm, aim for 10)",
-  "value": 0.7242450257712352,
+  "value": 0.8051156146685647,
   "unit": null,
   "target": ">= 0.9",
   "status": "FAIL",
@@ -11,7 +11,7 @@
  {
   "id": "R1-aim",
   "name": "Aim: the same at 2-10 mm (the 1 cm rule)",
-  "value": 0.38635538291674154,
+  "value": 0.5249479272199539,
   "unit": null,
   "target": ">= 0.9",
   "status": "FAIL",
@@ -38,7 +38,7 @@
  {
   "id": "R4",
   "name": "Overhead works (Raise overhead clip score) (14 mm band)",
-  "value": 0.7135903390214732,
+  "value": 0.7273802692617172,
   "unit": null,
   "target": ">= 0.8",
   "status": "FAIL",
@@ -74,10 +74,10 @@
  {
   "id": "R7",
   "name": "Every custom part is one valid closed solid",
-  "value": false,
+  "value": true,
   "unit": null,
   "target": "== True",
-  "status": "FAIL",
+  "status": "PASS",
   "judge": "judge/part_validity.py (OCC BRepCheck on the exported STEP)"
  },
  {
@@ -110,12 +110,40 @@
  {
   "id": "R11",
   "name": "Interface pressure, simulation part: worst mean cuff pressure the exo adds (incl. the arm parts' weight) over the MVP1 rolling-bearing cases, within the all-day budget and the ISO/TS 15066 upper-arm limits; the prototype pressure-film check remains",
-  "value": null,
+  "value": 0.399,
   "unit": "kPa",
   "target": "<= 7.5 kPa and ISO/TS 15066 (150 N, 190 N/cm2 at 2x edge peak) == True",
-  "status": "NOT RUN",
+  "status": "PASS",
   "judge": "judge/dynamics.py (MuJoCo cuff force) -> judge/scorecard.py interface_pressure(): 7.5 kPa = 14 kPa sustained (Kermavnar; Van Vlerken 15 kPa) - 6.5 kPa strap preload; ISO/TS 15066 Annex A Table A.2; then pressure film / FSRs on a prototype",
-  "details": null
+  "details": {
+   "exo_kPa_worst": 0.399,
+   "worst_case": "passive|mu0.005|t0.001|s2|hub",
+   "per_case_kPa": {
+    "passive|mu0.002|t0.001|s1|hub": 0.394,
+    "passive|mu0.002|t0.001|s2|hub": 0.397,
+    "passive|mu0.005|t0.001|s1|hub": 0.397,
+    "passive|mu0.005|t0.001|s1|hub|krate0.01": 0.397,
+    "passive|mu0.005|t0.001|s2|hub": 0.399
+   },
+   "total_with_strap_kPa_worst": 6.899,
+   "budget_exo_kPa": 7.5,
+   "sustained_budget_kPa": 14.0,
+   "strap_preload_kPa": 6.5,
+   "area_cm2": 68.0,
+   "arm_parts_weight_N": 2.01,
+   "iso_ok": true,
+   "iso": {
+    "force_N_worst": 2.71,
+    "force_limit_N": 150.0,
+    "local_peak_kPa_est": 0.798,
+    "pressure_limit_kPa": 1900.0,
+    "basis": "ISO/TS 15066:2016 Annex A Table A.2, upper arm and elbow: 150 N; deltoid 190 / humerus 220 N/cm2"
+   },
+   "aim_capillary_kPa": 4.3,
+   "exo_under_capillary": true,
+   "plain_bearing_worst_kPa": 67.94,
+   "note": "mean pressure on the cuff's skin side (dynamics.py rule); the forearm cuff shares the load (upper-cuff values are upper bounds); base-side (scapula handler) pressure is not simulated; the prototype pressure-film / FSR check remains part of R11"
+  }
  },
  {
   "id": "R12",
@@ -161,10 +189,10 @@
  {
   "id": "R17",
   "name": "Moves freely unpowered (MVP1): the arm drives the chain through every clip, peak <= 1 N.m about the shoulder, <= 5 N and <= 5 deg at the cuff, no stall, no undriven spare joint",
-  "value": null,
+  "value": true,
   "unit": null,
   "target": "== True",
-  "status": "NOT RUN",
+  "status": "PASS",
   "judge": "judge/dynamics.py (MuJoCo 3.16; rolling bearings mu 0.005; load-dependent friction; validated in judge/test_dynamics.py)"
  }
 ]

@@ -1,84 +1,96 @@
 {
- "overall": 0.7167331127370703,
+ "overall": 0.8003549587513707,
  "follow": 1.0,
- "in_band": 0.7167331127370702,
+ "in_band": 0.8003549587513707,
  "clips": [
   {
    "name": "Raise overhead",
    "frames": 181,
-   "score": 0.7004604383851023,
+   "score": 0.719848295197574,
    "follow": 1.0,
-   "in_band_when_following": 0.7004604383851023,
-   "median_gap": 12.299957072165679,
+   "in_band_when_following": 0.719848295197574,
+   "median_gap": 12.737046923127753,
    "min_gap": 0.17372908282188623
   },
   {
    "name": "Drink from a cup",
    "frames": 178,
-   "score": 0.7637144173967745,
+   "score": 0.8770542831355895,
    "follow": 1.0,
-   "in_band_when_following": 0.7637144173967745,
-   "median_gap": 11.522897915274193,
-   "min_gap": 3.9640697783075445
+   "in_band_when_following": 0.8770542831355895,
+   "median_gap": 10.118751335306914,
+   "min_gap": 2.419615664632958
   },
   {
    "name": "Comb hair",
    "frames": 202,
-   "score": 0.7281088509687289,
+   "score": 0.8437253525683259,
    "follow": 1.0,
-   "in_band_when_following": 0.7281088509687289,
-   "median_gap": 11.405248805965016,
-   "min_gap": 3.0348424353331613
+   "in_band_when_following": 0.8437253525683259,
+   "median_gap": 9.947917909433464,
+   "min_gap": 2.2000816315778673
   },
   {
    "name": "Reach a high shelf",
    "frames": 157,
-   "score": 0.7432748870514173,
+   "score": 0.8604413891799589,
    "follow": 1.0,
-   "in_band_when_following": 0.7432748870514173,
-   "median_gap": 10.24081955431642,
-   "min_gap": 2.7708250519426487
+   "in_band_when_following": 0.8604413891799589,
+   "median_gap": 8.918112557840246,
+   "min_gap": 2.2619267010201454
   },
   {
    "name": "Wash opposite shoulder",
    "frames": 193,
-   "score": 0.4988601948901114,
+   "score": 0.5961685871944549,
    "follow": 1.0,
-   "in_band_when_following": 0.4988601948901114,
-   "median_gap": 14.710216734584005,
-   "min_gap": 3.980588222373305
+   "in_band_when_following": 0.5961685871944549,
+   "median_gap": 12.99207084269199,
+   "min_gap": 2.4364650802247416
   },
   {
    "name": "Reach back pocket",
    "frames": 145,
-   "score": 0.858235330611773,
+   "score": 0.9755642185952187,
    "follow": 1.0,
-   "in_band_when_following": 0.858235330611773,
-   "median_gap": 8.185207799995611,
+   "in_band_when_following": 0.9755642185952187,
+   "median_gap": 7.7920280914399465,
    "min_gap": 1.785731598960547
   },
   {
    "name": "Wave",
    "frames": 172,
-   "score": 0.6885971888865259,
+   "score": 0.675416156218917,
    "follow": 1.0,
-   "in_band_when_following": 0.6885971888865259,
-   "median_gap": 11.956867804077518,
-   "min_gap": 3.554495955066756
+   "in_band_when_following": 0.675416156218917,
+   "median_gap": 13.014965236890564,
+   "min_gap": 2.311707916771202
   },
   {
    "name": "Walking arm swing",
    "frames": 109,
-   "score": 0.8496574668018051,
+   "score": 0.9674828330930388,
    "follow": 1.0,
-   "in_band_when_following": 0.8496574668018051,
-   "median_gap": 9.949103848233538,
-   "min_gap": 3.7939223044491124
+   "in_band_when_following": 0.9674828330930388,
+   "median_gap": 8.618600934148274,
+   "min_gap": 2.571923908457157
   }
  ],
  "band": [
   2.0,
   14.0
  ],
- "step": 3
+ "step": 3,
+ "groups_scored": [
+  "base",
+  "l1a",
+  "l1b",
+  "l2",
+  "l3",
+  "l4"
+ ],
+ "groups_excluded": {
+  "F": "forearm-fixed parts (the user's MIDDLE / FOREARM CUFF and their screws): ride the forearm segment, far outside the shoulder zone (> 110 mm from GH); the shoulder judges do not pose the forearm"
+ },
+ "group_rule": "metal_groups.py: every group posed in clips.json + H within 110 mm of GH; anything else must be excluded with a reason"
 }
