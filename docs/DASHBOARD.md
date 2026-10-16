@@ -174,6 +174,18 @@ Times:
 Cadence: rebuild and upload after every result (a new sweep best, a verifier verdict, a judged design) and at least
 every 15 min while the swarm runs (the lead's watchdog). The header turns amber when the data is over 30 min old.
 
+## Public copy for viewers who are not signed in (2026-10-16)
+
+The production dashboard is an Artifact made from the Dashboard type: its page and data live in the artifact's own
+store, and a viewer who is not signed in to claude.ai may not be able to load it even when it is shared with anyone
+with the link (user report 2026-10-16). The public copy, https://claude.ai/artifact/5dan8agUow4XR81Pr91XhF, is a plain
+page with no store and no capabilities: `tools/dash_public.py` wraps the same page (docs/dashboard/simple/index.html) in
+a small stand-in for the type's `dash` API (data / calc / onData / colors), writes out the type's theme tokens (light
+and dark), loads d3 7.9.0 from cdnjs, and fetches the same dataset files (docs/dashboard/data/<id>.json) published
+beside it as data/<id>.json. The refresh (scratchpad dash_refresh2.sh) prints a PUBLIC line with the files that
+changed; republish docs/dashboard/public/index.html with those files, then mark them published
+(`tools/dash_public.py <state.json> --mark`).
+
 ## Local harness
 
 ```
