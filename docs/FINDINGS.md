@@ -494,3 +494,36 @@ The rail stages stayed 0 % in band through all of it; the whole gain was the arm
   plate). This flaw sets R6 at 2.85 mm and fails about 107 of 120 judged workspace poses on parts (R16 39-46 %).
   The fix goes into tools/concept_kit.py, so it reaches every model.
 * docs/concepts/rail-elbow.md, "Stage 2".
+
+## The J2 fold is not a hard limit: 50 / 50 deg arcs can keep 96 % of the workspace fold-free (2026-10-16, fold frontier)
+
+Every 3R chain that reproduces the arm's rotation folds when the angle between the scapula-fixed J1 axis and the
+humerus-fixed J3 axis leaves the band [|a1 - a2| + 10, min(a1 + a2, 360 - a1 - a2) - 10] deg. Orientation depends on
+the axis directions only, so this bounds reach for every 3R morphology, offset axes and cuff slides included.
+`tools/fold_frontier.py` scans J1 = bvec(az, el) x J3 = wdir(wd, wa) on a 6 / 4 / 5 / 6 deg grid against the 160
+workspace poses and 60 clip frames of Bench(60,160). It writes `docs/research/fold/frontier.json`. Results (best layout per
+a1 + a2, all clip frames in band):
+
+| a1 + a2 | arcs | workspace in band | J1 | J3 |
+|---|---|---|---|---|
+| 75 | 35 / 40 | 0.762 | bvec(120, 16) | wdir(70, -6) |
+| 90 | 45 / 45 | 0.938 | bvec(132, 16) | wdir(70, 24) |
+| 100 | 50 / 50 | 0.963 | bvec(132, 16) | wdir(75, 24) |
+| 110 | 50 / 60 | 0.969 | bvec(120, 28) | wdir(70, 6) |
+| 150 | 65 / 85 | 0.994 | bvec(-48, 20) | wdir(125, 60) |
+| 165 | 80 / 85 | 1.000 | bvec(-180, 16) | wdir(30, -48) |
+
+The measured leaders sit far inside this frontier:
+- offset-skin-normal-3r k4216: band 44-104 deg, reach 0.706.
+- skin-normal-hubs: reach 0.656.
+- The champion: arcs 77 / 67, reach 0.775.
+
+Their fold losses come from the axis layout the proximity terms pulled them to, not from a limit of the 3R. Short arcs
+(45-50 deg) make links short, which suits the band. The fold-free layouts point J1 anterolateral and nearly horizontal
+(bvec az 108-138, el 16-28: the front of the acromion), and J3 roughly radial on the arm (wd 55-85).
+
+Open question, now under test: can hubs on those rays stay within 14 mm?
+- The anterior deltoid moves under a scapula-fixed hub 1.
+- docs/research/proximity_atlas.md says where rigid metal can live.
+
+Seeds for every 3R search come from frontier.json (the template's az / el / a1 / a2 / wd / wa map 1:1).
