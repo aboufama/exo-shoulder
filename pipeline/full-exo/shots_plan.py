@@ -5,7 +5,7 @@ but a clip does not follow), with the body pose (elbow, pronation) overridden: t
 humerus, the arm groups H / F are recomputed from the body pose.
 
     python3 shots_plan.py <design dir> <out dir> '<spec json>'
-spec: {"pose": {"clip": "<name>", "frame": k} | {"workspace": i, "p": [plane, elev, axial, flex, pron]},
+spec: {"pose": {"clip": "<name>", "frame": k[, "p": [...]]} | {"workspace": i, "p": [plane, elev, axial, flex, pron]},
        "cams": [{"dir": [x, y, z] | "auto" (normal of the aimed parts' plane, away from the body; + "bias": [x, y, z])
                  | "axis" (the aimed node's own axis - its least principal direction, e.g. a hub cap's - pointing away from the
                    nearest skin; "flip": true looks from the skin side, for a bodyless underside view),
@@ -28,6 +28,8 @@ ps = SPEC["pose"]
 if "clip" in ps:
     C = json.load(open(os.path.join(DD, "clips.json"))); fr = [c for c in C["clips"] if c["name"] == ps["clip"]][0]["frames"][ps["frame"]]
     assert not fr.get("held"), "held frame: the exo does not follow this clip frame"
+    if "p" in ps:                                                                   # elbow / forearm override (the chain depends on the humerus only)
+        assert np.allclose(ps["p"][:3], fr["p"][:3], atol=0.05), "only the elbow / forearm may be overridden"; fr = dict(fr); fr["p"] = ps["p"]
 else:
     W = json.load(open(os.path.join(DD, "workspace.json"))); fr = dict(W["poses"][ps["workspace"]])
     assert fr["closes"] and fr.get("eval_feasible"), "workspace pose not feasible in the verified model"
