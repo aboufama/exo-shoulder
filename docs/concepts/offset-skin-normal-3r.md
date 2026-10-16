@@ -184,15 +184,18 @@ the champion runs through the same code).
 |---|---|---|---|---|---|---|
 | claim, Bench(60,160), fast grid (reproduced exactly; sweep log k4216 = row = doc) | 32.61 | 0.706 | 0.967 | 0.779 | 0.389 | 0.012 |
 | same + verifier checks (crowns, strap tops, link 2 vs member 3) | 32.61 | 0.706 | 0.967 | 0.779 | 0.389 | 0.012 |
+| Bench(60,160), **exact** path (CB_EXACT=1), refit, verifier checks | 32.71 | 0.706 | 0.967 | 0.778 | 0.398 | 0.012 |
 | **Bench(110,360), exact, FROZEN shape from the 60/160 fast fit, verifier checks (v_*)** | **42.59** | 0.611 | 0.964 | 0.784 | 0.398 | 0.021 |
 | champion (seed VModel, slides 0: r20 s1414 #4 axes, arm-fixed hub-3 block), Bench(60,160) fast, same checks | 63.26 | 0.744 | 0.917 | 0.574 | 0.354 | 0.117 |
+| champion, Bench(60,160), exact, refit, same checks | 63.19 | 0.744 | 0.917 | 0.574 | 0.356 | 0.117 |
 | **champion, Bench(110,360), exact, frozen shape, same checks** | **66.97** | 0.700 | 0.918 | 0.575 | 0.356 | 0.113 |
 
 The champion number is this verifier's own: the same VModel code, part sizes, fitting, pose rules and added checks.
 It is not the risley-turret verifier's 75.94 (kit checks + 1 mm radial). Concept_baseline's own conventions give
-73.80 on the same bench. Either way the margin is 24-33 points. The exact Bench(60,160) refits and the Bench(110,360)
-refits (osn and champion) were submitted to the farm (`.cache/osn_verify/b_*.json`); the 60/160 refits were also
-started locally. On the first try, every exact distance call rebuilt its trees (0.1 s each, ~50 calls per pose), so
+73.80 on the same bench. Either way the margin is 24-33 points. On its own bench the exact path gives 32.71 against the
+fast grid's 32.61 (+0.10): no grid artefact in the claim's favour. The Bench(110,360) refits (osn and champion) were
+still running on the farm at commit time (`.cache/osn_verify/b_*.json`); the frozen number is the binding one (lesson
+c). On the first try, every exact distance call rebuilt its trees (0.1 s each, ~50 calls per pose), so
 the script now batches each pose's samples into one call. The numbers are identical on the fast grid.
 
 What was checked:

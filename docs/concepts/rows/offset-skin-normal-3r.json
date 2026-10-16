@@ -96,8 +96,9 @@
   "big_frozen_exact": 42.59,
   "champion_fast_60_160_same_checks": 63.26,
   "champion_big_frozen_exact_same_checks": 66.97,
-  "exact_60_160_refit": "pending (farm + local, .cache/osn_verify/b_*.json)",
-  "big_refit_exact": "pending (farm)"
+  "exact_60_160_refit": 32.71,
+  "big_refit_exact": "pending (farm)",
+  "champion_exact_60_160_refit_same_checks": 63.19
  },
- "v_note": "Verifier 2026-10-16, config k4216 (cma2-F; sweep log = row = doc params). Reproduced 32.61 exactly on Bench(60,160) fast. v_* = Bench(110,360) exact, shape FROZEN from the 60/160 fast fit (slide ranges +-6.3/+-7.5 and stage centre frozen), model checks + verifier checks (hub crowns, strap/box tops skin-checked: 0 contact, min 1.12 mm hub-2 crown; link 2 vs member 3 neck/bridge/carriage B: min 3.61 mm, 0 jams): gap 42.59 (reach 0.611: 136/470 poses in the J2 fold). Champion (seed VModel slides 0, r20 s1414 #4 axes) through the same code and checks on the same bench, frozen: 66.97 (not the risley verifier's kit 75.94; concept_baseline 73.80). 3 active + 2 passive (2 x RSR3M/MGN03C crossed, real stack 10.5 mm vs 13.5 modelled; rails 26.6/29 mm real), radial span 0.000 mm, closure 0.015 deg. Not refuted; not 90+ (needs ~+0.29 large-bench reach: fold frontier re-seed). Script docs/concepts/verify/offset-skin-normal-3r.py."
+ "v_note": "Verifier 2026-10-16, config k4216 (cma2-F; sweep log = row = doc params). Reproduced 32.61 exactly on Bench(60,160) fast; exact path (CB_EXACT=1) refit 32.71. v_* = Bench(110,360) exact, shape FROZEN from the 60/160 fast fit (slide ranges +-6.3/+-7.5 and stage centre frozen), model checks + verifier checks (hub crowns, strap/box tops skin-checked: 0 contact, min 1.12 mm hub-2 crown; link 2 vs member 3 neck/bridge/carriage B: min 3.61 mm, 0 jams): gap 42.59 (reach 0.611: 136/470 poses in the J2 fold). Champion (seed VModel slides 0, r20 s1414 #4 axes) through the same code and checks on the same bench, frozen: 66.97 (not the risley verifier's kit 75.94; concept_baseline 73.80). 3 active + 2 passive (2 x RSR3M/MGN03C crossed, real stack 10.5 mm vs 13.5 modelled; rails 26.6/29 mm real), radial span 0.000 mm, closure 0.015 deg. Not refuted; not 90+ (needs ~+0.29 large-bench reach: fold frontier re-seed). Script docs/concepts/verify/offset-skin-normal-3r.py."
 }
