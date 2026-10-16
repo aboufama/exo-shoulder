@@ -126,3 +126,48 @@ travel left after E, and the best share of closing poses that travel can serve (
   link 1 / link 2 collisions and contact take their share; R5 asks for 0.90.
 - At beta 40 with a1 60, hub 1 also stands in the roller strips' path: the strips reach 49.5 deg off p2, and hub 1's
   edge is at 48.3 deg. K6 rejects 106 of 123 closing poses unless the rail rides over the hub crown or a1 grows.
+
+## Round-3 screen (2026-10-16 02:05-03:20 UTC, restart after the container restart)
+
+Model fix before the sweep: the rail's layout radius `r_lay` (which sets the angular length of the carriage, the end
+stops and the tab, and the sample spacing) is now a fix point on the rail's fitted level (`r_lay = floor(level)`, up to
+2 re-runs; a config whose r_lay stays above its fitted level is marked not honest). Before the fix every probe laid
+the rail out at 60 mm while it was fitted at 100-140 mm: the stops and the carriage were 2x too short in angle and the
+audit flagged sparse sampling.
+
+### Coarse farm sweep (268 configs, Bench(60,160) fast, 3 axis families x rail / carriage / link-2 waypoint)
+
+- Families: spec axes +-(az 85-110, a1 50-66, a2 70-90, ...), the fold-sph3r leader's axes +-, a wide random set
+  (sigma +-1), and 18 anchors (spec and fold axes x beta 28/40/52 x chi 0/60/90). Half carry a two-segment link 2
+  (waypoint w_psi / w_beta in link 2's frame, planform turn, no loft).
+- **65 % of the configs: the rail never clears the skin** (fitted level 400 = some pose puts the arm through the rail's
+  sector within 220 mm). Of the rest, the rail's level is median 125 mm, minimum 72 mm from GH.
+- Honest configs: 49 / 268 (the rest: sparse sampling, i.e. the rail parked far out).
+- **Best honest: k114, gap 71.53** (score 73.99): reach 0.838, follow 0.883, in-band 14 0.335, contact 0.021; near-1 mm
+  gap 76.13; overhead (elev >= 140): reach 0.33, in-band 0.38. Axes bvec(23.4, 62.0), a1 85.0 / a2 63.0,
+  wdir(98.3, -8.1), beta 19.7, chi 43.3, cov 0.96. Rail level 139 mm, 116 mm of rail.
+- **In band per member over all 49 honest configs (max / p90 / median): rail 0.030 / 0.008 / 0.000, carriage
+  0.002 / 0 / 0, link 1 0.51 / 0.29 / 0.02, link 2 0.26 / 0.11 / 0.04 (with a waypoint: second segment 0.45 / 0.22 /
+  0.09)**, hub 1 1.0, hub 3 0.88 / 0.80 / 0.64, neck 0.93 / 0.85 / 0.77.
+
+### Hub control at identical axes (the rail-elbow lesson)
+
+At k114's axes (local re-run of the rail: 71.12) the hub version scores **57.75** (reach 0.869, in-band 14 0.451,
+contact 0.030; hub 2 0.0, link 1 0.37, link 2 0.08). **The rail loses 13.4 gap points to its own hub control.** At the
+spec axes: rail 84.81 (beta 40, chi 60) vs hub 73.57.
+
+### Why (measured): the J2 rail is a body of revolution, so it lives at ONE level over J2's whole travel
+
+- A carriage rolling about p2 needs running edges that are circles about p2: the rail is a constant section revolved
+  about p2, at one distance from GH along its whole length. Its level is the highest skin it ever passes over in link
+  1's frame, maximised over the whole sector.
+- The sector must span J2's travel (104-108 deg p2-p98 at both axis families) plus the carriage, 2 end stops and the
+  tab (30 mm of arc): about 150 deg at beta 40.
+- The link-1-frame ceiling maps (raw skin, K3 march, q 0.98 over the closing poses): the longest window whose cells
+  are >= 0.9 in band is 108 deg (spec axes, beta 34-40) and ~40 deg (fold axes, beta 64-70, right next to hub 1). A
+  150 deg sector always reaches skin that rises 40-90 mm higher (or passes through the arm: level 400).
+- The carriage and link 2's root inherit the rail's level (plate at rail + 4.6 mm, link 2 climbs down at <= 60 deg),
+  so link 2 cannot use the link-2-frame window either: that map has 70-84 % cells at fold axes (psi -12..+48, beta
+  46-64), but link 2 starts 60-80 mm above them.
+- The hub needs ~23 mm of footprint at the J2 point; the rail needs ~150 deg of arc. A rail cannot beat the hub on
+  in-band, and when its travel is cut to fit the window, reach falls (spec axes: an in-band rail caps reach at ~0.76).

@@ -1948,7 +1948,7 @@
   "name": "Fold-free spherical 3R whose J2 is a link-1 arc-rail sector with a link-2 roller carriage (no J2 hub; virtual J2 axis)",
   "family": "spherical 3R (virtual-axis J2)",
   "lens": "round3:J2 as a short curved rail with a real carriage, on a fold-free axis layout",
-  "status": "ideated",
+  "status": "screened",
   "t_ideated": "2026-10-16T01:35:52Z",
   "source": "round 3 judge",
   "description": "Hub 1 on the acromion top (bvec(96, 65)); fold-free arcs a1 60 / a2 80 (kit: closure 0.90, reach 0.82 in the hub version vs 0.706 for the leader). No metal on the J2 axis point (in band 3 %): J2 is a flat Ti arc rail, pitch radius 30 mm about the J2 axis at ~52 mm along it, a 125 deg sector on link 1's end on the J1 side; a 4-V-roller carriage fixed to link 2 at chi +90 deg rides it (psi -46..+58 deg p2-p98). Link 2 runs from the carriage to the O20 J3 hub on the lateral deltoid, then the K7 neck.",
