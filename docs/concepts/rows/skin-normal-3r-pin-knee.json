@@ -2254,17 +2254,17 @@
  },
  "polish2_m5": {
   "t": "2026-10-16T10:21:53Z",
-  "status": "SELF-MEASURED, not independently verified. No config clears the >= 1 gap point bar out of sample: C1 gains 1.44 on the polish protocol but 0.33 plain held out (1.04 near-touch). H1 stays the polished configuration.",
+  "status": "SELF-MEASURED, not independently verified. No config clears the >= 1 gap point bar out of sample: C1 gains 1.44 on the polish protocol and 2.63 / 6.06 on the round-3 protocol (benches inside its objective) but 0.33 plain held out (1.04 near-touch). H1 stays the polished configuration.",
   "tool": "tools/knee_polish2.py (KP2_VAL=1): near-touch objective on Bench(110,360) fast + frozen-shape near-touch on Bench(60,160) fast (validation term), + 2 per overhead clip frame lost; J2 stops m_lo / m_hi >= 5 free; fold rule 5; O20 x3",
   "stage": "polish2-m5-* (docs/concepts/sweeps/skin-normal-3r-pin-knee.json; r1* = the earlier no-validation attempt)",
-  "n_evals": 16880,
-  "n_evals_validation_objective": 6520,
+  "n_evals": 20532,
+  "n_evals_validation_objective": 10172,
   "gate": {
-   "gain_half": 0.29,
-   "gain_third": 0.29,
-   "top5_spread": 0.11,
+   "gain_half": 0.0,
+   "gain_third": 0.0,
+   "top5_spread": 0.08,
    "ok": true,
-   "history": "validation-objective streams, generation order"
+   "history": "validation-objective streams (wave 1 + 2), generation order"
   },
   "C1": {
    "k": "H1-g69-4",
@@ -2338,6 +2338,24 @@
     "fit_mode": "fast",
     "wear_mode": "exact",
     "n_wear": 1154
+   },
+   "fit60_exact": {
+    "gap": 24.57,
+    "reach": 0.6806,
+    "follow": 0.9727,
+    "inband14": 0.8822,
+    "inband10": 0.5091,
+    "contact": 0.0085,
+    "gap_near1": 25.69,
+    "near1_poses": 2,
+    "min_metal_mm": 0.66,
+    "overhead_follow": 1.0,
+    "overhead_reach": 0.25,
+    "knee_edge_overhead_deg": 3.52,
+    "reach_connected": 0.6806,
+    "static_islands": 0,
+    "fit_mode": "fast",
+    "wear_mode": "exact"
    }
   },
   "H1_same_protocol": {
@@ -2391,13 +2409,34 @@
     "fit_mode": "fast",
     "wear_mode": "exact",
     "n_wear": 1154
+   },
+   "fit60_exact": {
+    "gap": 27.2,
+    "reach": 0.6583,
+    "follow": 0.9636,
+    "inband14": 0.8953,
+    "inband10": 0.5539,
+    "contact": 0.0256,
+    "gap_near1": 31.75,
+    "near1_poses": 8,
+    "min_metal_mm": 0.09,
+    "overhead_follow": 0.6,
+    "overhead_reach": 0.1786,
+    "knee_edge_overhead_deg": 2.24,
+    "reach_connected": 0.6583,
+    "static_islands": 0,
+    "fit_mode": "fast",
+    "wear_mode": "exact"
    }
   },
   "gain": {
    "polish_plain": 1.44,
    "polish_near1": 1.44,
    "held_plain": 0.33,
-   "held_near1": 1.04
+   "held_near1": 1.04,
+   "fit60_plain": 2.63,
+   "fit60_near1": 6.06,
+   "fit60_note": "both benches of the fit-60 protocol are inside C1's objective; only held-out is out of sample"
   },
   "claims": "docs/research/polish2_m5/ (knee_polish2.py claim: the polish verifier harness imported unchanged; CB_EXACT=1 wear, fast fit)",
   "doc": "docs/concepts/skin-normal-3r-pin-knee.md 'Polish 2 (margin 5, near-touch)'"

@@ -789,7 +789,7 @@ obj = 0.5 x (near-touch gap on Bench(110,360) + frozen near-touch gap on Bench(6
 no held-out number entered the search or the choice of the claim (the claim is the best objective, fixed before the
 held-out runs came back).
 
-**Streams (Bench(110,360) fast, popsize 16, farm exo-cpu1, 8 slots, ~$1.4):**
+**Streams (Bench(110,360) fast, popsize 16 unless noted, farm exo-cpu1, <= 8 slots, ~$2.2 in all):**
 
 | stream | start | sigma | evals | x0 obj -> best obj | best: near-touch Bench(110,360) / frozen on Bench(60,160) / stops m_lo, m_hi |
 |---|---|---|---|---|---|
@@ -801,15 +801,21 @@ held-out runs came back).
 | R2 | R2-g130-11 (polish-big basin) | 0.5 | 657 | 24.22 -> 24.20 | 26.08 / 22.32 / 6.52, 5.07 |
 | rnd1 | best of 32 uniform-random configs (scan best 121.2) | 0.8 | 497 | 121.2 -> 34.36 | 37.72 / 31.00 (killed by the endpoint's 1 h limit; rows kept) |
 | rnd2 | best of 16 x (P5 + 2 sigma noise) (scan best 59.3) | 0.7 | 369 | 59.3 -> 27.37 | 28.70 / 26.04 |
-| wave 2 | H1b (IPOP, popsize 32 from C1), HW resumed, G (short-E basin, lE 21), W1 (flipped knee branch), rnd3 (16 x H1 + 2 sigma), rnd4 (32 uniform) | | | queued behind other agents on the shared farm (exo-cpu1 queue 9 at 10:13 UTC); not back when this was written | |
+| H1b (wave 2) | C1, IPOP restart, popsize 32 | 0.4 | 801 | 20.62 -> 20.62 (no gain: C1 stays) | 24.20 / 17.04 / 5.40, 5.12 |
+| HW resumed (wave 2) | HW stream state | - | 1489 in all | -> 20.81 (HW-g91-1) | 24.33 / 17.29 / 6.46, 5.13 |
+| G (wave 2) | G-g133-10 (short-E basin, lE 21) | 0.6 | 849 | 26.80 -> 24.91 | 27.09 / 22.73 / 6.97, 6.21 |
+| W1 (wave 2) | W1-g105-14 (the other knee branch) | 0.6 | 769 | 29.96 -> 26.31 | 28.95 / 23.68 / 6.18, 5.28 |
+| rnd3 (wave 2) | best of 16 x (H1 + 2 sigma noise) (scan best 60.5) | 0.7 | 465 | 60.5 -> 34.67 | 39.59 / 29.75 |
+| rnd4 (wave 2) | best of 32 uniform-random configs | 0.8 | - | killed by the endpoint's 1 h limit (queue + scan + budget); rows not retrieved | |
 
 An earlier attempt of this track (07:30-08:20 UTC, objective near-touch + overhead only, no validation term; 8 streams,
 10 360 evals) is logged too as `polish2-m5-r1*`: best r1P5-g72-6 near-touch 21.93 (r1Q5 22.27, r1R2m5 22.34, r1H1
-25.31, r1W1 26.44, r1k4598 27.75). All 16 880 rows: docs/concepts/sweeps/skin-normal-3r-pin-knee.json, stages
+25.31, r1W1 26.44, r1k4598 27.75). All 20 532 rows: docs/concepts/sweeps/skin-normal-3r-pin-knee.json, stages
 `polish2-m5-<stream>` (with near-touch, plain, validation, overhead follow / knee edge, stops, fold margins taken).
-**Gate (docs/METHOD.md) on the validation-objective history (6520 evals, generation order): gain 0.29 score points
-over the second half, 0.29 over the last third, top-5 within 0.11 - passed.** Random restarts end 6.7-13.7 points
-behind: the H1 / P5 basin is the only one found in 16 880 evals at margin 5.
+**Gate (docs/METHOD.md) on the validation-objective history (10 172 evals, generation order): gain 0.00 score points
+over the second half, 0.00 over the last third, top-5 within 0.08 - passed** (wave 1 alone: 0.29 / 0.29 / 0.11). The
+IPOP restart from C1 (popsize 32, 801 evals) found nothing better; random restarts end 6.7-14 points behind; the G and
+W1 basins stay 4-6 behind: the H1 / P5 / HW basin is the only competitive one in 20 532 evals at margin 5.
 
 **Claim (fold rule 5 + C1's stops, O20; shape fitted on Bench(110,360) FAST, worn EXACT; `knee_polish2.py claim`,
 which runs the polish verifier harness `docs/concepts/verify/skin-normal-3r-pin-knee-polish.py` imported unchanged;
@@ -820,11 +826,15 @@ H1 in the same protocol; gap / near-touch gap (metal < 1 mm = contact) / poses <
 | polish: Bench(110,360), 470 poses (search poses) | 24.48 / 25.59 / 2 / 0.21 mm (score 91.10); reach 0.6694, follow 1.0, ib14 0.8943, contact 0.0085 | **23.04 / 24.15 / 2 / 0.04 mm (score 91.62)**; reach 0.6889, follow 1.0, ib14 0.8972, ib10 0.5591, contact 0.0165 | 1.44 / 1.44 |
 | HELD-OUT: the verifier's set (202 fit-clip frames + 952 workspace poses outside both benches, 1154) | 28.55 / 31.06 / 11 / 0.11 mm; reach 0.6324, contact 0.0111 | 28.22 / 30.02 / 8 / 0.03 mm; reach 0.6460, contact 0.0239 | **0.33** / 1.04 |
 | overhead (elev >= 140): clip follow, ws reach, knee distance to its stop | polish 10/10, 0.25, **1.14 deg**; held 19/19, 0.254, **0.01 deg** | polish 10/10, 0.25, 3.52 deg; held 19/19, 0.211, 3.31 deg | |
-| continuity (1432-pose grid flood fill) | 0 static islands, connected reach = static | 0 static islands, connected reach = static | |
+| round-3 verifier protocol: shape fitted on Bench(60,160) FAST, worn on Bench(110,360) EXACT | 27.20 / 31.75 / 8 / 0.09 mm; follow 0.9636, contact 0.0256, overhead follow 0.6 | 24.57 / 25.69 / 2 / 0.66 mm; reach 0.6806, follow 0.9727, ib14 0.8822, contact 0.0085, overhead follow 1.0 | 2.63 / 6.06 |
+| continuity (1432-pose grid flood fill) | 0 static islands, connected reach = static (all three protocols) | 0 static islands, connected reach = static (all three protocols) | |
 
 The H1 row reproduces the verified margin-5 polish numbers (24.48 / 25.59) to the digit. Held out it reads 28.55 here
 against the P5 verifier's 29.12 - a MEASUREMENT difference (that batch fitted the shape on the exact path, these jobs on
-the fast cache the polish protocol names). The fit-60 protocol (round-3 verifier) for both is queued; not back at write time.
+the fast cache the polish protocol names). H1's round-3 protocol row reproduces its verified 27.20 / 31.75 to the digit.
+Caveat on the round-3 row: both of its benches are inside C1's objective (the validation term IS Bench(60,160)), so its
+2.63 / 6.06 gain is not out of sample for the parameters - P5, searched without that term, lost 0.20 near-touch there;
+only the held-out row is.
 
 **C1 hardware and rules.** az1 96.90, el1 64.72, az2 29.76, el2 45.53, wd 70.12, wa -6.26, b3 0.328, lE 59.79, lc 26.56,
 phiE -5.45, phib -62.78, ang_min 29.63, stk 5.63 (2.56 mm Ti plates on the iglidur pin, between IGLIDUR-PIN 5.0 and the
@@ -847,7 +857,8 @@ Arm at the side: 0 poses < 1 mm (lowest 1.16 mm held out).
   a wider stop costs reach and buys nothing on this design (no spring / relay takes poses past the stop).
 
 **Verdict (self-measured).** No configuration from polish 2 clears the CLAUDE.md bar out of sample: C1 gains 1.44 on
-the search poses but 0.33 plain held out (1.04 near-touch). **H1 stays the polished configuration; the H1 CAD stands.**
+the search poses and 2.63 / 6.06 on the round-3 protocol (whose poses its objective saw), but 0.33 plain held out
+(1.04 near-touch). **H1 stays the polished configuration; the H1 CAD stands.**
 C1 is recorded (row field `polish2_m5`) for an independent verifier only for its near-touch / knee-edge gains. Next, if
 the knee is polished again: an objective in which no scored pose is a pose the shape was fitted on (2-fold cross-fit:
 shape fitted on Bench(60,160) worn on Bench(110,360) + the reverse), a near-2 mm contact margin for unseen poses, or a
