@@ -527,3 +527,30 @@ Open question, now under test: can hubs on those rays stay within 14 mm?
 - docs/research/proximity_atlas.md says where rigid metal can live.
 
 Seeds for every 3R search come from frontier.json (the template's az / el / a1 / a2 / wd / wa map 1:1).
+
+## On a GH-ray-hub 3R, the fold frontier trades fold for skin: J1 cannot be both fold-free and in band (2026-10-16, osn fold seeds)
+
+offset-skin-normal-3r was re-seeded from the fold frontier. Its J1 and J2 are hubs on GH rays (the 2-slide closure
+theorem). Seeds came from `tools/osn_fold_seeds.py`, then six CMA streams ran on the farm; 5346 new tries, all on
+Bench(60,160) fast with every model check on.
+
+* **Seeds lose to skin.** The fold-free layouts cut fold losses from 47 to 5-15 poses. Skin losses rose from 2 to
+  34-73. The best of 144 frontier seeds scored 83.95; the best of 32 joint-frontier seeds 72.82.
+* **CMA returns to k4216.** All six CMA streams went back to the k4216 basin: J1 bvec(95-106, 63-66). The two frontier
+  starts climbed from J1 elevation 32 back to 63-66. The best stays 32.61 (42.59 frozen on Bench(110,360) exact). The
+  whole-history gate passes (9869 tries).
+* **Mechanism: hub-1 band map** (`tools/fold_rayblock.py` -> docs/research/fold/rayblock.json). A 20 mm hub disc on
+  each J1 ray, with the height each of 220 poses needs. On k4216's J1 bvec(96, 64), one hub height keeps 98 % of poses
+  in band (90 % overhead). On the frontier's J1 bvec(132, 16), only 69 % (2 % overhead): the hub must rise p90 44 mm,
+  max 124 mm, because the anterior deltoid and the elevated arm rise under the front of the acromion.
+* **Joint frontier: the problem moves to hub 2.** Fold-free and hub-1 band together peak at J1 bvec(120, 60), arcs
+  60-65: fold-free 0.96, hub-1 band 0.93. Hub 2 rides on link 1 and then swings over the abducted, externally rotated
+  arm (31.8 mm, 2-5 % in band).
+* **The fold limit and the band limit pull J1 in opposite directions.** The band limit puts J1 up over the acromion
+  (el 60-66); the fold frontier wants el 16-36. The bench's own metric prefers 47 fold poses with both hubs in band to
+  8 fold poses with the hubs 25-32 mm up.
+
+What this predicts: a 3R that puts J1 / J2 metal on their own axes (any spherical or GH-ray hub chain, the champion
+included) cannot use the fold frontier on this body. The lever left is a morphology that rotates about the J2 GH ray
+without metal on it: an arc guide or remote-centre carriage whose track follows the skin on the J2 circle.
+Offsetting J1 / J2 off GH needs a third (radial) slide, which would make 3 passive translations: not allowed.

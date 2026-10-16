@@ -253,10 +253,149 @@ Issues (not refuting):
 docs/research/fold/frontier.json (a1 + a2 >= 90, |a1 - a2| small). Check that the hub rays stay in band (proximity
 atlas), and re-run this script on the result (frozen, Bench(110,360) exact).
 
+## Fold-frontier seeds (2026-10-16)
+
+**Verdict: the fold frontier does not carry over to this morphology. Best stays k4216 (gap 32.61 fast, 42.59 frozen
+on Bench(110,360) exact). Every seed and every CMA stream from it returns to the k4216 basin. The whole-history gate
+now passes (9869 tries).** The 2-slide closure theorem makes J1 and J2 hubs on GH rays. On the fold-free layouts, one
+of those two rays runs where the deltoid or arm moves under a scapula- or link-1-fixed hub. The fold losses come back
+as skin losses.
+
+**Mapping** (`tools/osn_fold_seeds.py`).
+* J1 seat ray = the frontier's J1 = bvec(az1, el1); its axis is the ray.
+* J3 axis = the frontier's wdir(wd, wa). For b3 > 0, the seat ray is solved by fixed point so the skin-normal-tilted
+  axis equals that direction. At b3 0.7 it fails for 14 of 48 configs (error > 5 deg): the skin normal is too far.
+* J2 home direction = circle intersection of arc a1 around J1 with arc a2 around the rest-pose J3 axis, both branches;
+  its seat ray is that direction.
+* neck 13 mm (model default).
+* Each config carries its orientation-level fold share, so a loss splits into fold vs geometry.
+
+**Seeds** (Bench(60,160) fast, every model check on; sweep log stages `fold-seed-*`):
+
+| seed set | n | best gap | fold losses | skin losses | what moved |
+|---|---|---|---|---|---|
+| k4216 itself | 1 | 32.61 | 47 | 2 | - |
+| k4216, J1 az / el and arcs moved toward the frontier (J3 kept) | 100 | 32.61 (itself); next 38.51 (az1 110) | 24-55 | 6-30 | el1 55 + arcs 50 / 60: fold 47 -> 24, skin 2 -> 30, contact 0.012 -> 0.153, gap 51.14 |
+| frontier top 24 layouts, a1 + a2 85-130, x 2 branches x b3 0 / 0.35 / 0.7 | 144 | **83.95** | 5-15 (median 8) | 34-73 (median 59) | 42 configs close no pose (38 of them b3 0.7) |
+| joint frontier (fold-free share AND hub-1 band share, `tools/fold_rayblock.py`), top 8 x 2 x b3 0 / 0.35 | 32 | 72.82 | 6-13 | 31-118 | hub 1 in band, hub 2 out |
+
+Best frontier seed: k4674 (layout a 55 / 55, J1 bvec(108, 32), J3 wdir(70, 0), b3 0.35, branch -1). Reach 0.725 with
+only 8 fold poses. But in-band 0.45 and contact 0.186 (39 poses to skin).
+
+In-band 2-14 per part at k4674, then the median over the 102 frontier seeds that close:
+
+| part | k4674 | seed median |
+|---|---|---|
+| hub 1 | 13 % (median 24.9 mm) | 7 % (31.7 mm) |
+| hub 2 | 0 % (31.8 mm) | 1 % (31.8 mm) |
+| link 2 | 10 % | 12 % (23.8 mm) |
+| bridge | 0 % | 0 % |
+| hub 3 | 34 % | 27 % |
+| moving rail strip | 73 % | 45 % |
+
+The stage parts hold; the two GH-ray hubs and link 2 between them do not. Branch +1 (J2 anterior-inferior,
+el2 -10 to -37) is worse: best 126.79. Branch -1 puts J2 posterolateral (el2 26-41).
+
+**Where the hubs lose band** (`Model.Hneed`: the face height each pose needs; BIG = it would need to rise > 35 mm
+above its rest height). Hub 1 and hub 2 rest seats are 45-56 mm from GH.
+
+| layout | hub 1: lift above rest seat, p50 / p90; poses needing > 35 mm | hub 2: same | gap |
+|---|---|---|---|
+| k4216, J1 bvec(96, 65) | 5.6 / 8.0 mm; 0 | 4.7 / 10.0 mm; 4 | 32.61 |
+| FS1 = k4674, J1 bvec(108, 32) | 8.1 / 20.8 mm; 15, all at elevation >= 120 (15 of 39 such poses) | 5.9 / 22.8 mm; 20 (elevation 60-90 with axial +45-75, planes 0-30) | 83.95 |
+| FS2, J1 bvec(126, 32) | 9.0 / 20.2 mm; 25 (25 of 41 overhead poses) | 5.5 / 20.6 mm; 16 | 90.25 |
+| k4216 moved: el1 55, arcs 50 / 60 | 6.7 / 11.7 mm; 1 | 5.5 / 13.9 mm; 11 | 51.14 |
+
+On the body, the fold-free J1 is near-horizontal and anterolateral: the front of the acromion, over the anterior
+deltoid. When the arm rises past 120 deg, the deltoid and the arm itself rise under that hub (*Raise overhead* and
+*Comb hair* frames set it). The fitted hub-1 face ends 29-41 mm above its rest seat. Hub 2 (posterolateral, el2 26-41)
+rides on link 1, and the abducted, externally rotated arm (elevation 60-90, axial 45-75) passes under it.
+
+**Hub-1 band map** (`tools/fold_rayblock.py` -> docs/research/fold/rayblock.json, with the frontier rows joined). A
+20 mm disc on each J1 ray of the frontier grid, need per pose on Bench(60,160): the share of poses ONE hub height
+keeps within a 12 mm window (= in band 2-14 mm):
+
+| J1 | rest need | lift p90 / max | one-height band share | overhead (elevation >= 120) |
+|---|---|---|---|---|
+| k4216 bvec(96, 64) | 46 mm | 4 / 42 mm | **0.982** | 0.902 |
+| frontier best bvec(132, 16) | 52 mm | 44 / 124 mm | 0.691 | 0.024 |
+| bvec(108, 32) | 52 mm | 26 / 112 mm | 0.809 | 0.122 |
+| bvec(126, 52) | 44 mm | 20 / 52 mm | 0.823 | 0.098 |
+| bvec(120, 60) (joint frontier) | | 10 mm | 0.927 | 0.610 |
+
+490 of the 1140 J1 directions keep >= 95 % of poses in one band, but few of them are fold-free. The joint frontier
+(fold-free ws share AND hub-1 band share) peaks at J1 bvec(120, 60) with arcs 60-65 / 60-65: fold-free 0.956-0.969,
+hub-1 band 0.927. Built in osn on branch +1, hub 1 is then in band (100 %, median 8 mm), but hub 2 (on link 1) is out
+(31.8 mm, 2-5 % in band). On branch -1, both hubs are out (hub 1 28 mm, hub 2 21-32 mm). Best joint seed: 72.82
+(k5579, a 50 / 65, J1 bvec(108, 48), J3 wdir(80, 6), b3 0.35, branch -1).
+
+**CMA** (`tools/concept_cma.py` on the farm, 2 processes per job, popsize 8; objective = the honest bench gap, every
+model check on; stages `fold-cma-*`):
+
+| stream | start | sigma | tries | best | where it ended |
+|---|---|---|---|---|---|
+| K | k4216 32.61 | 0.5 | 785 | 32.61 (no gain) | collapsed on k4216 |
+| K2 | k4216 | 1.0 | 921 | 32.61 (no gain) | collapsed on k4216 |
+| FS1 | frontier k4674 83.95 | 0.8 | 1073 | 42.65 (k7533) | J1 bvec(101, 63), J2 bvec(30, 43) |
+| FS2 | frontier 90.25 | 0.8 | 777 | 37.62 (k8337) | J1 bvec(105, 66), J2 bvec(28, 51) |
+| FM1 | k4216 move az1 110 38.51 | 0.5 | 553 | 33.48 (k8860) | J1 bvec(106, 66), J2 bvec(15, 58) |
+| FM2 | k4216 move el1 55, a 50 / 60 51.14 | 0.5 | 961 | 32.94 (k9587) | J1 bvec(96, 65), J2 bvec(12, 54) |
+
+The two frontier starts begin with J1 elevation 32 and climb back to 63-66, out of the fold-free region. The bench's
+own metric prefers 47 fold poses with both hubs in band (98-100 %) to 8 fold poses with the hubs 25-32 mm up. Whole
+history in order (9869 tries): best gained 0.0 score points over the second half and 0.0 over the last third, top 5
+within 0.03: **converged**.
+
+**Frozen, Bench(110,360) exact (lesson c).** The best shape is k4216, so its frozen big-bench number is the
+verifier's, measured with the verifier's script on the same protocol: **v_gap 42.59** (reach 0.611, follow 0.964,
+in-band 0.784, contact 0.021). Red team (section above):
+* The pose that jams: 136 of 470 poses fold; overhead workspace reach 7 / 28.
+* The point that pinches: 0.64 mm, the arm-fixed block at plane -75, elevation 45, axial 120.
+* Near-touch: metal < 1 mm counted as contact gives 43.74.
+* Overhead (elevation >= 140): reach 0.25, in-band 0.86.
+
+The runner-up CMA shapes and the best fold seed were worn frozen on the same bench (`.cache/osn_fold/big_k*.json`):
+Verifier script, task `osnbig_frozen`, on the farm. The shape is fit on Bench(60,160) fast, then frozen; checks
+include crowns and strap tops, link 2 vs member 3, and near-touch.
+
+| config | fast gap | **frozen big gap** | reach | follow | in-band 2-14 | contact | fold / contact poses (of 470) | min metal-skin | gap, metal < 1 mm as contact | overhead >= 140: ws taken, in-band |
+|---|---|---|---|---|---|---|---|---|---|---|
+| k4216 (verifier, above) | 32.61 | **42.59** | 0.611 | 0.964 | 0.784 | 0.021 | 136 / 7 | 0.64 mm | 43.74 | 7 / 28, 0.86 |
+| k9587 (FM2) | 32.94 | 43.01 | 0.611 | 0.964 | 0.780 | 0.021 | 136 / 7 | 0.69 mm | 44.16 | 7 / 28, 0.85 |
+| k8860 (FM1) | 33.48 | **42.39** | 0.611 | 1.000 | 0.783 | 0.018 | 133 / 6 | 0.10 mm (plane -60, elev 60, axial 105) | 49.07 (13 poses) | 7 / 28, 0.87 |
+| k8337 (FS2) | 37.62 | 43.84 | 0.639 | 1.000 | 0.743 | 0.020 | 123 / 7 | 0.11 mm (hub-2 crown 0.84 mm, Raise overhead elev 150) | 49.75 | 7 / 28, 0.78 |
+| k5579 (best joint fold seed) | 72.82 | 83.64 | 0.628 | 0.982 | 0.517 | 0.181 | **62 / 74** | 0.09 mm | 90.13 | **3 / 28 (4 fold, 21 contact)**, 0.43 |
+
+The ranking by the frozen big bench is the same basin within 1.5 gap. k8860 is 0.2 better than k4216 there, but
+13 of its poses come within 1 mm (gap 49.07 counted as contact, against k4216's 43.74). That is within the
+optimism of the fit, so k4216 stays the pick.
+
+The fold-free seed shows the mechanism on the big bench. Its fold losses halve (136 -> 62), but 74 poses go to
+contact. Overhead, 21 of 28 workspace poses are lost to contact instead of 19 to the fold: the poses move from the
+fold column to the skin column.
+
+**New knowledge.**
+1. In the exact 2-slide subfamily, J1 and J2 are hubs on GH rays. Their rays must avoid the moving deltoid and arm:
+   one hub height must keep >= 90 % of poses in band. That pulls J1 up over the acromion (el 60-66), which is the
+   opposite of the fold frontier (el 16-36). The fold limit and the band limit pull the J1 axis in opposite
+   directions, and k4216 sits at the trade-off. Nothing better came from 1706 restarts at k4216 (sigma 0.5-1.0) or
+   3364 from frontier seeds and moved k4216 seats.
+2. A fold-free layout keeps hub 1 in band only at J1 bvec(120, 60) (arcs 60-65). Hub 2, on link 1, then swings over the
+   abducted arm.
+3. A 3R whose J1 / J2 metal sits on their axes cannot use the fold frontier on this body. The 90+ bar needs a
+   morphology where J1 / J2 rotate about GH rays without metal on those rays: an arc guide or remote-centre carriage
+   for J2 (seed-arc-rails, scapular-race-j2-carriage, meridian-goniometer families), whose track can follow the skin
+   anywhere on the J2 circle. Moving J1 / J2 off GH needs the third (radial) slide: 3 passive translations, not
+   allowed.
+
 ## Files
 
 * model: docs/concepts/models/offset-skin-normal-3r.py (`check`, `kin`, `redteam [--png]`; built on
   seed-offset-3r-slides.py's VModel; ~3-8 s per configuration on the fast grid)
 * sweep log: docs/concepts/sweeps/offset-skin-normal-3r.json (in order; `stage` = local-check, coarse-farm, cma-A/B/C,
-  cma-L-local, control-b3-*, cma2-D/E/F, cma2-M-local; configurations where no pose closes are logged as gap 275)
+  cma-L-local, control-b3-*, cma2-D/E/F, cma2-M-local, fold-seed-k4216moves / -frontier / -joint, fold-cma-K / K2 /
+  FS1 / FS2 / FM1 / FM2; configurations where no pose closes are logged as gap 275)
+* fold seeds: tools/osn_fold_seeds.py (frontier layout -> osn seats); hub-1 band map: tools/fold_rayblock.py ->
+  docs/research/fold/rayblock.json (its frontier_rows = frontier.json rows + j1_ray_free (one-height band share) /
+  j1_ray_free_overhead / j1_lift_p90)
 * sketch: docs/concepts/img/offset-skin-normal-3r.png (rest and highest pose taken, k4216)
