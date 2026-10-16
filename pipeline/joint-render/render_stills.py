@@ -43,11 +43,19 @@ alu = principled("blasted", (0.60, 0.615, 0.635), 1.0, 0.38, bump=(9000, 0.18))
 stainless = principled("stainless", (0.80, 0.80, 0.81), 1.0, 0.09)
 steel = principled("bearing_steel", (0.82, 0.83, 0.85), 1.0, 0.13)
 iglide = principled("iglide", (0.80, 0.42, 0.03), 0.0, 0.42)
-# MATTE black display mannequin (user look; the 2026-10-15 stills at 0.018 / rough 0.55 / coat 0.15 came out glossy):
-# the film's material (render_film.py): base 0.004, no coat, no sheen, rough 0.8, half the default specular
+# MATTE black display mannequin (user look). The 2026-10-15 stills (base 0.018 / rough 0.55 / coat 0.15) came out glossy;
+# the film's base 0.004 / rough 0.8 (2026-10-16 first stills) reads as a flat silhouette: no muscles. Default: a matte
+# charcoal-black (no coat, rough 0.9, low specular) dark enough to read black, light enough for the key / rim light to
+# model the muscles. motion.json "skin" (or a frame's "skin") overrides: base, rough, spec, sheen.
+SKIN = dict(base=0.022, rough=0.9, spec=0.2, sheen=0.0); SKIN.update(FILM.get("skin", {}))
 skin = principled("mannequin", (0.004, 0.004, 0.0043), 0.0, 0.8)
-for nd in skin.node_tree.nodes:
-    if nd.type == "BSDF_PRINCIPLED" and "Specular IOR Level" in nd.inputs: nd.inputs["Specular IOR Level"].default_value = 0.25
+def set_skin(sk):
+    for nd in skin.node_tree.nodes:
+        if nd.type != "BSDF_PRINCIPLED": continue
+        b = sk["base"]; nd.inputs["Base Color"].default_value = (b, b, b * 1.06, 1); nd.inputs["Roughness"].default_value = sk["rough"]
+        if "Specular IOR Level" in nd.inputs: nd.inputs["Specular IOR Level"].default_value = sk["spec"]
+        if "Sheen Weight" in nd.inputs: nd.inputs["Sheen Weight"].default_value = sk["sheen"]; nd.inputs["Sheen Roughness"].default_value = 0.5
+set_skin(SKIN)
 def mat_for(n):
     l = n.lower()
     if l.startswith("body"): return skin
@@ -117,4 +125,5 @@ sc.render.image_settings.file_format = "PNG"; sc.render.image_settings.color_dep
 os.makedirs(args.out, exist_ok=True)
 a, b = (map(int, args.frames.split("-")) if args.frames else (0, len(FILM["frames"]) - 1))
 for i in range(a, b + 1):
+    if "skin" in FILM["frames"][i]: set_skin({**SKIN, **FILM["frames"][i]["skin"]})
     sc.frame_set(i); sc.render.filepath = os.path.join(args.out, f"{i:04d}.png"); bpy.ops.render.render(write_still=True)
