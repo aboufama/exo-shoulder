@@ -47,7 +47,7 @@ iglide = principled("iglide", (0.80, 0.42, 0.03), 0.0, 0.42)
 # the film's base 0.004 / rough 0.8 (2026-10-16 first stills) reads as a flat silhouette: no muscles. Default: a matte
 # charcoal-black (no coat, rough 0.9, low specular) dark enough to read black, light enough for the key / rim light to
 # model the muscles. motion.json "skin" (or a frame's "skin") overrides: base, rough, spec, sheen.
-SKIN = dict(base=0.022, rough=0.9, spec=0.2, sheen=0.0); SKIN.update(FILM.get("skin", {}))
+SKIN = dict(base=0.028, rough=0.9, spec=0.2, sheen=0.0); SKIN.update(FILM.get("skin", {}))
 skin = principled("mannequin", (0.004, 0.004, 0.0043), 0.0, 0.8)
 def set_skin(sk):
     for nd in skin.node_tree.nodes:

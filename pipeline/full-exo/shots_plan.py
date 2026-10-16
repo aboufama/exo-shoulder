@@ -6,7 +6,7 @@ humerus, the arm groups H / F are recomputed from the body pose.
 
     python3 shots_plan.py <design dir> <out dir> '<spec json>'
 spec: {"pose": {"clip": "<name>", "frame": k} | {"workspace": i, "p": [plane, elev, axial, flex, pron]},
-       "cams": [{"dir": [x, y, z], "fov": deg, "aim": "chain" | "all", "tight": 1.0, "shift": [dx, dy, dz], "fstop": 8}],
+       "cams": [{"dir": [x, y, z] | "auto" (normal of the aimed parts' plane, away from the body; + "bias": [x, y, z]), "fov": deg, "aim": "chain" | "all" | "l3+l4" (groups), "tight": 1.0, "shift": [dx, dy, dz], "fstop": 8}],
        "skin": {...optional mannequin material override, see render_stills.py}}
 Rig frame: x anterior, y up, z lateral (right), GH at the origin, mm. Chain = the shoulder groups (base, l1..l4).
 Also writes clearance.json: the deepest exo vertex inside the posed mannequin (winding number) per part group.
@@ -61,8 +61,15 @@ def bound(keys):
 B = dict(chain=bound(CHAIN), all=bound([g for g in parts]))
 frames = []
 for cs in SPEC["cams"]:
-    c, r = B[cs.get("aim", "all")]; c = c + np.array(cs.get("shift", (0, 0, 0)), float); fov = cs.get("fov", 30)
-    d = np.array(cs["dir"], float); d /= np.linalg.norm(d); dist = cs.get("tight", 1.0) * r / math.tan(math.radians(fov) / 2) * 1.1
+    a = cs.get("aim", "all"); c, r = B[a] if a in B else bound(a.split("+"))                        # "chain", "all" or groups "l3+l4"
+    c = c + np.array(cs.get("shift", (0, 0, 0)), float); fov = cs.get("fov", 30)
+    if cs["dir"] == "auto":                                                         # along the normal of the aimed parts' best-fit plane,
+        P = np.concatenate([np.concatenate(parts[g]) for g in (CHAIN if a in ("chain", "all") else a.split("+")) if g in parts])
+        P = P[:: max(1, len(P) // 20000)]; nrm = np.linalg.svd(P - P.mean(0), full_matrices=False)[2][2]
+        if nrm @ (P.mean(0) - Vb.mean(0)) < 0: nrm = -nrm                                # on the side away from the body
+        d = nrm + np.array(cs.get("bias", (0, 0, 0)), float)
+    else: d = np.array(cs["dir"], float)
+    d /= np.linalg.norm(d); dist = cs.get("tight", 1.0) * r / math.tan(math.radians(fov) / 2) * 1.1
     frames.append(dict(cam=dict(pos=(c + d * dist).tolist(), target=c.tolist(), fov=fov, focus=float(dist), fstop=cs.get("fstop", 8.0))))
 ca, ra = B["all"]
 mo = dict(fps=1, body=True, frames=frames, lights_centre=ca.tolist(), light_scale=max(0.8, ra / 90.0), exposure=SPEC.get("exposure", -0.1))

@@ -31,7 +31,24 @@
     0.8419,
     0.7063
    ]
-  ]
+  ],
+  "reach_at_ib_follow95": {
+   "0.80": [
+    0.7063,
+    0.8419,
+    0.0116,
+    26.34
+   ],
+   "0.84": [
+    0.7063,
+    0.8419,
+    0.0116,
+    26.34
+   ],
+   "0.86": null,
+   "0.88": null,
+   "0.90": null
+  }
  },
  "annular-ring-3r": {
   "cls": "plain 3R (0 passive)",
@@ -105,7 +122,14 @@
     0.2495,
     0.9062
    ]
-  ]
+  ],
+  "reach_at_ib_follow95": {
+   "0.80": null,
+   "0.84": null,
+   "0.86": null,
+   "0.88": null,
+   "0.90": null
+  }
  },
  "back-anchored-ring-3r": {
   "cls": "other",
@@ -162,7 +186,14 @@
     "q": 0.92
    }
   },
-  "pareto_ib14_reach": []
+  "pareto_ib14_reach": [],
+  "reach_at_ib_follow95": {
+   "0.80": null,
+   "0.84": null,
+   "0.86": null,
+   "0.88": null,
+   "0.90": null
+  }
  },
  "clavicular-front-route": {
   "cls": "plain 3R (0 passive)",
@@ -225,7 +256,14 @@
     "link1_over_bridge": 1
    }
   },
-  "pareto_ib14_reach": []
+  "pareto_ib14_reach": [],
+  "reach_at_ib_follow95": {
+   "0.80": null,
+   "0.84": null,
+   "0.86": null,
+   "0.88": null,
+   "0.90": null
+  }
  },
  "closure-set-arc-knee-3r": {
   "cls": "3R + coupled schedule (arc knee)",
@@ -289,7 +327,14 @@
     0.7921,
     0.7063
    ]
-  ]
+  ],
+  "reach_at_ib_follow95": {
+   "0.80": null,
+   "0.84": null,
+   "0.86": null,
+   "0.88": null,
+   "0.90": null
+  }
  },
  "coaxial-rus-turret": {
   "cls": "turret / SPM",
@@ -395,7 +440,14 @@
     "p": 90.0
    }
   },
-  "pareto_ib14_reach": []
+  "pareto_ib14_reach": [],
+  "reach_at_ib_follow95": {
+   "0.80": null,
+   "0.84": null,
+   "0.86": null,
+   "0.88": null,
+   "0.90": null
+  }
  },
  "crossed-skin-tracks": {
   "cls": "rails",
@@ -472,7 +524,14 @@
     "fitfix": 1
    }
   },
-  "pareto_ib14_reach": []
+  "pareto_ib14_reach": [],
+  "reach_at_ib_follow95": {
+   "0.80": null,
+   "0.84": null,
+   "0.86": null,
+   "0.88": null,
+   "0.90": null
+  }
  },
  "crown-ring-3r": {
   "cls": "plain 3R (0 passive)",
@@ -554,11 +613,18 @@
     0.0682,
     0.9375
    ]
-  ]
+  ],
+  "reach_at_ib_follow95": {
+   "0.80": null,
+   "0.84": null,
+   "0.86": null,
+   "0.88": null,
+   "0.90": null
+  }
  },
  "dwell-fourbar-knee-3r": {
   "cls": "3R + coupled schedule (dwell four-bar)",
-  "n": 4,
+  "n": 154,
   "reach_max_any": {
    "reach": 0.7375,
    "ib14": 0.5144,
@@ -612,7 +678,33 @@
     "lock": 1
    }
   },
-  "pareto_ib14_reach": []
+  "pareto_ib14_reach": [
+   [
+    0.7239,
+    0.6375
+   ],
+   [
+    0.7113,
+    0.65
+   ]
+  ],
+  "reach_at_ib_follow95": {
+   "0.80": [
+    0.6687,
+    0.852,
+    0.0347,
+    31.4
+   ],
+   "0.84": [
+    0.6687,
+    0.852,
+    0.0347,
+    31.4
+   ],
+   "0.86": null,
+   "0.88": null,
+   "0.90": null
+  }
  },
  "far-end-posterior-3r": {
   "cls": "plain 3R (0 passive)",
@@ -669,7 +761,14 @@
     "q": 0.9
    }
   },
-  "pareto_ib14_reach": []
+  "pareto_ib14_reach": [],
+  "reach_at_ib_follow95": {
+   "0.80": null,
+   "0.84": null,
+   "0.86": null,
+   "0.88": null,
+   "0.90": null
+  }
  },
  "fivebar-roll": {
   "cls": "other",
@@ -732,7 +831,14 @@
     "q": 1.0
    }
   },
-  "pareto_ib14_reach": []
+  "pareto_ib14_reach": [],
+  "reach_at_ib_follow95": {
+   "0.80": null,
+   "0.84": null,
+   "0.86": null,
+   "0.88": null,
+   "0.90": null
+  }
  },
  "floating-centre-3r": {
   "cls": "other",
@@ -813,7 +919,14 @@
     0.3183,
     0.9062
    ]
-  ]
+  ],
+  "reach_at_ib_follow95": {
+   "0.80": null,
+   "0.84": null,
+   "0.86": null,
+   "0.88": null,
+   "0.90": null
+  }
  },
  "fold-sph3r": {
   "cls": "plain 3R (0 passive)",
@@ -887,7 +1000,14 @@
     0.3901,
     0.925
    ]
-  ]
+  ],
+  "reach_at_ib_follow95": {
+   "0.80": null,
+   "0.84": null,
+   "0.86": null,
+   "0.88": null,
+   "0.90": null
+  }
  },
  "foldfree-rus-truss": {
   "cls": "turret / SPM",
@@ -992,7 +1112,14 @@
     ]
    }
   },
-  "pareto_ib14_reach": []
+  "pareto_ib14_reach": [],
+  "reach_at_ib_follow95": {
+   "0.80": null,
+   "0.84": null,
+   "0.86": null,
+   "0.88": null,
+   "0.90": null
+  }
  },
  "fraction-pauldron": {
   "cls": "other",
@@ -1053,7 +1180,14 @@
     "q": 0.97
    }
   },
-  "pareto_ib14_reach": []
+  "pareto_ib14_reach": [],
+  "reach_at_ib_follow95": {
+   "0.80": null,
+   "0.84": null,
+   "0.86": null,
+   "0.88": null,
+   "0.90": null
+  }
  },
  "j2-arc-sector-3r": {
   "cls": "3R + J2 arc sector (coupled)",
@@ -1109,7 +1243,14 @@
     0.1579,
     0.7188
    ]
-  ]
+  ],
+  "reach_at_ib_follow95": {
+   "0.80": null,
+   "0.84": null,
+   "0.86": null,
+   "0.88": null,
+   "0.90": null
+  }
  },
  "meridian-goniometer": {
   "cls": "rails",
@@ -1202,7 +1343,14 @@
     "hub": "o20"
    }
   },
-  "pareto_ib14_reach": []
+  "pareto_ib14_reach": [],
+  "reach_at_ib_follow95": {
+   "0.80": null,
+   "0.84": null,
+   "0.86": null,
+   "0.88": null,
+   "0.90": null
+  }
  },
  "offset-arc-selfalign": {
   "cls": "other",
@@ -1273,7 +1421,14 @@
     "stage": 1
    }
   },
-  "pareto_ib14_reach": []
+  "pareto_ib14_reach": [],
+  "reach_at_ib_follow95": {
+   "0.80": null,
+   "0.84": null,
+   "0.86": null,
+   "0.88": null,
+   "0.90": null
+  }
  },
  "offset-axis-skin-hubs": {
   "cls": "3R + 2 cuff slides",
@@ -1355,7 +1510,19 @@
     0.4729,
     0.6625
    ]
-  ]
+  ],
+  "reach_at_ib_follow95": {
+   "0.80": [
+    0.625,
+    0.8019,
+    0.0482,
+    42.13
+   ],
+   "0.84": null,
+   "0.86": null,
+   "0.88": null,
+   "0.90": null
+  }
  },
  "offset-pointer-slip-sleeve": {
   "cls": "other",
@@ -1416,7 +1583,14 @@
     "q": 0.98
    }
   },
-  "pareto_ib14_reach": []
+  "pareto_ib14_reach": [],
+  "reach_at_ib_follow95": {
+   "0.80": null,
+   "0.84": null,
+   "0.86": null,
+   "0.88": null,
+   "0.90": null
+  }
  },
  "offset-skin-normal-3r": {
   "cls": "3R + 2 cuff slides",
@@ -1513,7 +1687,19 @@
     0.7276,
     0.7188
    ]
-  ]
+  ],
+  "reach_at_ib_follow95": {
+   "0.80": [
+    0.675,
+    0.8107,
+    0.0351,
+    34.94
+   ],
+   "0.84": null,
+   "0.86": null,
+   "0.88": null,
+   "0.90": null
+  }
  },
  "pointer-cslide": {
   "cls": "other",
@@ -1582,7 +1768,14 @@
     "q": 0.983
    }
   },
-  "pareto_ib14_reach": []
+  "pareto_ib14_reach": [],
+  "reach_at_ib_follow95": {
+   "0.80": null,
+   "0.84": null,
+   "0.86": null,
+   "0.88": null,
+   "0.90": null
+  }
  },
  "posterior-max-margin-cardan": {
   "cls": "other",
@@ -1641,7 +1834,14 @@
     0.0104,
     0.9688
    ]
-  ]
+  ],
+  "reach_at_ib_follow95": {
+   "0.80": null,
+   "0.84": null,
+   "0.86": null,
+   "0.88": null,
+   "0.90": null
+  }
  },
  "raglan-knee-3r": {
   "cls": "3R + passive planar closure (0 transl.)",
@@ -1879,7 +2079,39 @@
     0.8603,
     0.7063
    ]
-  ]
+  ],
+  "reach_at_ib_follow95": {
+   "0.80": [
+    0.7063,
+    0.8497,
+    0.0116,
+    25.56
+   ],
+   "0.84": [
+    0.7063,
+    0.8497,
+    0.0116,
+    25.56
+   ],
+   "0.86": [
+    0.7063,
+    0.8601,
+    0.0116,
+    24.52
+   ],
+   "0.88": [
+    0.7,
+    0.8919,
+    0.0343,
+    24.24
+   ],
+   "0.90": [
+    0.6875,
+    0.9011,
+    0.0175,
+    23.0
+   ]
+  }
  },
  "raglan-routed-3r": {
   "cls": "plain 3R (0 passive)",
@@ -1995,7 +2227,14 @@
     0.2353,
     0.9313
    ]
-  ]
+  ],
+  "reach_at_ib_follow95": {
+   "0.80": null,
+   "0.84": null,
+   "0.86": null,
+   "0.88": null,
+   "0.90": null
+  }
  },
  "rail-elbow": {
   "cls": "3R with a rail elbow (1 transl.)",
@@ -2109,7 +2348,14 @@
     0.2231,
     0.9375
    ]
-  ]
+  ],
+  "reach_at_ib_follow95": {
+   "0.80": null,
+   "0.84": null,
+   "0.86": null,
+   "0.88": null,
+   "0.90": null
+  }
  },
  "risley-turret": {
   "cls": "turret / SPM",
@@ -2170,7 +2416,14 @@
     "j2hub": 1
    }
   },
-  "pareto_ib14_reach": []
+  "pareto_ib14_reach": [],
+  "reach_at_ib_follow95": {
+   "0.80": null,
+   "0.84": null,
+   "0.86": null,
+   "0.88": null,
+   "0.90": null
+  }
  },
  "scapula-halo-track": {
   "cls": "other",
@@ -2231,7 +2484,14 @@
     "closed": 1
    }
   },
-  "pareto_ib14_reach": []
+  "pareto_ib14_reach": [],
+  "reach_at_ib_follow95": {
+   "0.80": null,
+   "0.84": null,
+   "0.86": null,
+   "0.88": null,
+   "0.90": null
+  }
  },
  "scapular-race-j2-carriage": {
   "cls": "3R with J2 on a race carriage",
@@ -2329,7 +2589,14 @@
     0.0585,
     0.9375
    ]
-  ]
+  ],
+  "reach_at_ib_follow95": {
+   "0.80": null,
+   "0.84": null,
+   "0.86": null,
+   "0.88": null,
+   "0.90": null
+  }
  },
  "seed-2r-cring": {
   "cls": "other",
@@ -2390,7 +2657,14 @@
     "q": 0.95
    }
   },
-  "pareto_ib14_reach": []
+  "pareto_ib14_reach": [],
+  "reach_at_ib_follow95": {
+   "0.80": null,
+   "0.84": null,
+   "0.86": null,
+   "0.88": null,
+   "0.90": null
+  }
  },
  "seed-arc-rails": {
   "cls": "rails",
@@ -2464,7 +2738,14 @@
     0.3322,
     0.9
    ]
-  ]
+  ],
+  "reach_at_ib_follow95": {
+   "0.80": null,
+   "0.84": null,
+   "0.86": null,
+   "0.88": null,
+   "0.90": null
+  }
  },
  "seed-offset-3r-slides": {
   "cls": "3R + 2 cuff slides",
@@ -2524,7 +2805,14 @@
     "d_wa": 3.6
    }
   },
-  "pareto_ib14_reach": []
+  "pareto_ib14_reach": [],
+  "reach_at_ib_follow95": {
+   "0.80": null,
+   "0.84": null,
+   "0.86": null,
+   "0.88": null,
+   "0.90": null
+  }
  },
  "seed-pauldron-shells": {
   "cls": "other",
@@ -2598,7 +2886,14 @@
     0.2718,
     0.75
    ]
-  ]
+  ],
+  "reach_at_ib_follow95": {
+   "0.80": null,
+   "0.84": null,
+   "0.86": null,
+   "0.88": null,
+   "0.90": null
+  }
  },
  "seed-rcm-parallelogram": {
   "cls": "other",
@@ -2659,7 +2954,14 @@
     "rail_arc": 212.0
    }
   },
-  "pareto_ib14_reach": []
+  "pareto_ib14_reach": [],
+  "reach_at_ib_follow95": {
+   "0.80": null,
+   "0.84": null,
+   "0.86": null,
+   "0.88": null,
+   "0.90": null
+  }
  },
  "seed-spm-3rrr": {
   "cls": "turret / SPM",
@@ -2737,7 +3039,14 @@
     "acc": 1
    }
   },
-  "pareto_ib14_reach": []
+  "pareto_ib14_reach": [],
+  "reach_at_ib_follow95": {
+   "0.80": null,
+   "0.84": null,
+   "0.86": null,
+   "0.88": null,
+   "0.90": null
+  }
  },
  "skin-normal-3r-knuckle-cufflink": {
   "cls": "3R + passive planar closure (0 transl.)",
@@ -2992,7 +3301,39 @@
     0.6225,
     0.7438
    ]
-  ]
+  ],
+  "reach_at_ib_follow95": {
+   "0.80": [
+    0.7312,
+    0.8155,
+    0.0223,
+    27.56
+   ],
+   "0.84": [
+    0.7063,
+    0.8432,
+    0.0114,
+    26.19
+   ],
+   "0.86": [
+    0.6937,
+    0.8609,
+    0.0118,
+    25.72
+   ],
+   "0.88": [
+    0.6813,
+    0.8802,
+    0.0174,
+    25.59
+   ],
+   "0.90": [
+    0.65,
+    0.9014,
+    0.0465,
+    29.65
+   ]
+  }
  },
  "skin-normal-3r-pin-knee": {
   "cls": "3R + passive planar closure (0 transl.)",
@@ -3128,7 +3469,39 @@
     0.8121,
     0.7125
    ]
-  ]
+  ],
+  "reach_at_ib_follow95": {
+   "0.80": [
+    0.7188,
+    0.8192,
+    0.0227,
+    28.47
+   ],
+   "0.84": [
+    0.7125,
+    0.8436,
+    0.0229,
+    26.68
+   ],
+   "0.86": [
+    0.7063,
+    0.8616,
+    0.0341,
+    26.62
+   ],
+   "0.88": [
+    0.7,
+    0.8803,
+    0.0,
+    21.97
+   ],
+   "0.90": [
+    0.6937,
+    0.9006,
+    0.04,
+    24.63
+   ]
+  }
  },
  "skin-normal-hubs-selfaligning": {
   "cls": "3R + 2 cuff slides",
@@ -3199,7 +3572,19 @@
     0.74,
     0.7
    ]
-  ]
+  ],
+  "reach_at_ib_follow95": {
+   "0.80": [
+    0.6562,
+    0.8031,
+    0.0179,
+    35.86
+   ],
+   "0.84": null,
+   "0.86": null,
+   "0.88": null,
+   "0.90": null
+  }
  },
  "sliding-rivet-pauldron": {
   "cls": "other",
@@ -3310,7 +3695,14 @@
     "s1": 0.0
    }
   },
-  "pareto_ib14_reach": []
+  "pareto_ib14_reach": [],
+  "reach_at_ib_follow95": {
+   "0.80": null,
+   "0.84": null,
+   "0.86": null,
+   "0.88": null,
+   "0.90": null
+  }
  },
  "spine-parked-j2-3r": {
   "cls": "plain 3R (0 passive)",
@@ -3473,7 +3865,98 @@
     0.2441,
     0.875
    ]
-  ]
+  ],
+  "reach_at_ib_follow95": {
+   "0.80": [
+    0.7,
+    0.8152,
+    0.0171,
+    30.19
+   ],
+   "0.84": [
+    0.6875,
+    0.8418,
+    0.0286,
+    29.93
+   ],
+   "0.86": [
+    0.675,
+    0.8635,
+    0.0289,
+    29.04
+   ],
+   "0.88": [
+    0.6438,
+    0.8801,
+    0.0359,
+    31.2
+   ],
+   "0.90": null
+  }
+ },
+ "stop-relay-rocker-3r": {
+  "cls": "other",
+  "n": 230,
+  "reach_max_any": {
+   "reach": 0.8187,
+   "ib14": 0.3529,
+   "follow": 0.95,
+   "contact": 0.0918,
+   "gap": 72.02,
+   "k": 66,
+   "params": {
+    "az": 102.78,
+    "el": 65.35,
+    "a1": 40.68,
+    "a2": 73.76,
+    "wd": 84.49,
+    "wa": -12.76,
+    "q": 0.962,
+    "beta": 44.73,
+    "phi": 78.5,
+    "m_lo": 13.52,
+    "m_hi": 20.0,
+    "qmax": 77.2,
+    "end_extra": 2.89,
+    "l1_over": 1,
+    "rad0": 7.5
+   }
+  },
+  "reach_at_ib88": null,
+  "reach_at_ib90": null,
+  "best_gap": {
+   "reach": 0.6813,
+   "ib14": 0.8516,
+   "follow": 0.9167,
+   "contact": 0.052,
+   "gap": 35.24,
+   "k": 6,
+   "params": {
+    "end_extra": 1.02,
+    "lift2": 1.0
+   }
+  },
+  "pareto_ib14_reach": [
+   [
+    0.2838,
+    0.675
+   ],
+   [
+    0.2076,
+    0.775
+   ],
+   [
+    0.2044,
+    0.7812
+   ]
+  ],
+  "reach_at_ib_follow95": {
+   "0.80": null,
+   "0.84": null,
+   "0.86": null,
+   "0.88": null,
+   "0.90": null
+  }
  },
  "trombone-arc": {
   "cls": "other",
@@ -3556,7 +4039,14 @@
     "tele": 1
    }
   },
-  "pareto_ib14_reach": []
+  "pareto_ib14_reach": [],
+  "reach_at_ib_follow95": {
+   "0.80": null,
+   "0.84": null,
+   "0.86": null,
+   "0.88": null,
+   "0.90": null
+  }
  },
  "twin-rail-one-hub": {
   "cls": "rails",
@@ -3642,7 +4132,14 @@
     0.1365,
     0.7438
    ]
-  ]
+  ],
+  "reach_at_ib_follow95": {
+   "0.80": null,
+   "0.84": null,
+   "0.86": null,
+   "0.88": null,
+   "0.90": null
+  }
  },
  "virtual-pole-4bar-j1": {
   "cls": "3R with a four-bar virtual pole",
@@ -3703,7 +4200,14 @@
     "tag": "j1-k2221"
    }
   },
-  "pareto_ib14_reach": []
+  "pareto_ib14_reach": [],
+  "reach_at_ib_follow95": {
+   "0.80": null,
+   "0.84": null,
+   "0.86": null,
+   "0.88": null,
+   "0.90": null
+  }
  },
  "virtual-pole-4bar-j2": {
   "cls": "3R with a four-bar virtual pole",
@@ -3764,6 +4268,502 @@
     "q": 0.97
    }
   },
-  "pareto_ib14_reach": []
+  "pareto_ib14_reach": [],
+  "reach_at_ib_follow95": {
+   "0.80": null,
+   "0.84": null,
+   "0.86": null,
+   "0.88": null,
+   "0.90": null
+  }
+ },
+ "4R-lens:es_park4_a": {
+  "cls": "redundant 4R (spring-centred 4th, lens, unverified)",
+  "n": 151,
+  "reach_max_any": {
+   "reach": 0.8125,
+   "ib14": 0.7149,
+   "follow": 1.0,
+   "contact": 0.0404,
+   "gap": 31.3,
+   "k": null,
+   "params": {
+    "az": 104.41,
+    "el": 66.64476913131827,
+    "wd": 78.02563942768079,
+    "wa": -12.15322114406758,
+    "a1": 37.6,
+    "a2": 60,
+    "a3": 25,
+    "policy": "park4",
+    "paz": 20.0,
+    "pz4": 90,
+    "b0": 70.0,
+    "s1": -1,
+    "s3": -1,
+    "margin": 10.0,
+    "width": 12.0,
+    "t_link": 3.0,
+    "q": 0.972,
+    "rad1": 10.0,
+    "rad2": 7.5,
+    "rad3": 7.5,
+    "rad4": 7.5,
+    "end_extra": 1.02,
+    "inner": 0.5
+   }
+  },
+  "reach_at_ib88": null,
+  "reach_at_ib90": null,
+  "best_gap": {
+   "reach": 0.7812,
+   "ib14": 0.8635,
+   "follow": 1.0,
+   "contact": 0.0365,
+   "gap": 19.18,
+   "k": null,
+   "params": {
+    "az": 102.74081245296175,
+    "el": 67.98539401174864,
+    "wd": 81.35659804547886,
+    "wa": -14.610062611056929,
+    "a1": 37.6,
+    "a2": 60,
+    "a3": 22.306966741717947,
+    "policy": "park4",
+    "paz": 20.0,
+    "pz4": 98.44778988106661,
+    "b0": 70.0,
+    "s1": -1,
+    "s3": -1,
+    "margin": 10.0,
+    "width": 12.0,
+    "t_link": 3.0,
+    "q": 0.9680749614615505,
+    "rad1": 10.0,
+    "rad2": 7.5,
+    "rad3": 7.5,
+    "rad4": 7.5,
+    "end_extra": 1.02,
+    "inner": 0.5
+   }
+  },
+  "pareto_ib14_reach": [],
+  "reach_at_ib_follow95": {
+   "0.80": [
+    0.8063,
+    0.814,
+    0.0308,
+    21.05
+   ],
+   "0.84": [
+    0.7875,
+    0.8423,
+    0.0363,
+    20.65
+   ],
+   "0.86": [
+    0.7812,
+    0.8635,
+    0.0365,
+    19.18
+   ],
+   "0.88": null,
+   "0.90": null
+  }
+ },
+ "4R-lens:es_park4_b": {
+  "cls": "redundant 4R (spring-centred 4th, lens, unverified)",
+  "n": 150,
+  "reach_max_any": {
+   "reach": 0.7875,
+   "ib14": 0.77,
+   "follow": 0.95,
+   "contact": 0.0368,
+   "gap": 27.93,
+   "k": null,
+   "params": {
+    "az": 102.56378856963383,
+    "el": 65.88749946022892,
+    "wd": 81.51179765872288,
+    "wa": -1.671808428092703,
+    "a1": 38.887489885599095,
+    "a2": 48.539674320256196,
+    "a3": 26.003004850048555,
+    "policy": "park4",
+    "paz": 20.0,
+    "pz4": 64.872816995389,
+    "b0": 70.0,
+    "s1": -1,
+    "s3": -1,
+    "margin": 10.0,
+    "width": 12.0,
+    "t_link": 3.0,
+    "q": 0.9696726020046923,
+    "rad1": 10.0,
+    "rad2": 7.5,
+    "rad3": 7.5,
+    "rad4": 7.5,
+    "end_extra": 1.645322336440437,
+    "inner": 0.5
+   }
+  },
+  "reach_at_ib88": null,
+  "reach_at_ib90": null,
+  "best_gap": {
+   "reach": 0.7688,
+   "ib14": 0.8402,
+   "follow": 0.9667,
+   "contact": 0.0423,
+   "gap": 23.33,
+   "k": null,
+   "params": {
+    "az": 99.65754423269664,
+    "el": 65.88749946022892,
+    "wd": 81.51179765872288,
+    "wa": -1.44645900299443,
+    "a1": 39.90355474677607,
+    "a2": 46.91323067882048,
+    "a3": 26.003004850048555,
+    "policy": "park4",
+    "paz": 20.0,
+    "pz4": 77.22281968584804,
+    "b0": 70.0,
+    "s1": -1,
+    "s3": -1,
+    "margin": 10.0,
+    "width": 12.0,
+    "t_link": 3.0,
+    "q": 0.9444980160323719,
+    "rad1": 10.0,
+    "rad2": 7.5,
+    "rad3": 7.5,
+    "rad4": 7.5,
+    "end_extra": 1.5747376123277812,
+    "inner": 0.5
+   }
+  },
+  "pareto_ib14_reach": [],
+  "reach_at_ib_follow95": {
+   "0.80": [
+    0.7688,
+    0.8394,
+    0.0423,
+    23.41
+   ],
+   "0.84": [
+    0.7688,
+    0.8402,
+    0.0423,
+    23.33
+   ],
+   "0.86": [
+    0.6813,
+    0.8706,
+    0.0874,
+    33.55
+   ],
+   "0.88": null,
+   "0.90": null
+  }
+ },
+ "4R-lens:es_park4_c": {
+  "cls": "redundant 4R (spring-centred 4th, lens, unverified)",
+  "n": 151,
+  "reach_max_any": {
+   "reach": 0.8375,
+   "ib14": 0.7351,
+   "follow": 0.8833,
+   "contact": 0.0788,
+   "gap": 37.29,
+   "k": null,
+   "params": {
+    "az": 110.57895481236184,
+    "el": 64.42377488387054,
+    "wd": 77.813640258696,
+    "wa": -15.110852507311604,
+    "a1": 40,
+    "a2": 77.52064252802856,
+    "a3": 32,
+    "policy": "park4",
+    "paz": 20.0,
+    "pz4": 78.97224063854573,
+    "b0": 70.0,
+    "s1": -1,
+    "s3": -1,
+    "margin": 10.0,
+    "width": 12.0,
+    "t_link": 3.0,
+    "q": 0.9524686811925916,
+    "rad1": 10.0,
+    "rad2": 7.5,
+    "rad3": 7.5,
+    "rad4": 7.5,
+    "end_extra": 1.02,
+    "inner": 0.5,
+    "ring": 0,
+    "rd": 45.0,
+    "trav": 90.0,
+    "ring_w": 12.0,
+    "ring_t": 8.0
+   }
+  },
+  "reach_at_ib88": null,
+  "reach_at_ib90": null,
+  "best_gap": {
+   "reach": 0.7875,
+   "ib14": 0.8419,
+   "follow": 1.0,
+   "contact": 0.0558,
+   "gap": 22.64,
+   "k": null,
+   "params": {
+    "az": 99.15142575219426,
+    "el": 67.95425116262514,
+    "wd": 79.15165693633341,
+    "wa": -15.90839560910401,
+    "a1": 30.890400788082626,
+    "a2": 77.52064252802856,
+    "a3": 29.434428707424377,
+    "policy": "park4",
+    "paz": 20.0,
+    "pz4": 78.97224063854573,
+    "b0": 70.0,
+    "s1": -1,
+    "s3": -1,
+    "margin": 10.0,
+    "width": 12.0,
+    "t_link": 3.0,
+    "q": 0.9473751471994311,
+    "rad1": 10.0,
+    "rad2": 7.5,
+    "rad3": 7.5,
+    "rad4": 7.5,
+    "end_extra": 1.02,
+    "inner": 0.5,
+    "ring": 0,
+    "rd": 45.0,
+    "trav": 90.0,
+    "ring_w": 12.0,
+    "ring_t": 8.0
+   }
+  },
+  "pareto_ib14_reach": [],
+  "reach_at_ib_follow95": {
+   "0.80": [
+    0.7937,
+    0.8294,
+    0.0603,
+    23.72
+   ],
+   "0.84": [
+    0.7875,
+    0.8401,
+    0.0558,
+    22.82
+   ],
+   "0.86": [
+    0.65,
+    0.8672,
+    0.0889,
+    37.17
+   ],
+   "0.88": [
+    0.6438,
+    0.8869,
+    0.0526,
+    32.19
+   ],
+   "0.90": null
+  }
+ },
+ "4R-lens:es_park1": {
+  "cls": "redundant 4R (spring-centred 4th, lens, unverified)",
+  "n": 121,
+  "reach_max_any": {
+   "reach": 0.7063,
+   "ib14": 0.4702,
+   "follow": 0.8833,
+   "contact": 0.0292,
+   "gap": 71.94,
+   "k": null,
+   "params": {
+    "az": 54.793185195552375,
+    "el": 56.18300413357069,
+    "wd": 82.46932196984827,
+    "wa": -11.682031596785574,
+    "a1": 20.749858034918102,
+    "a2": 36.98511202462875,
+    "a3": 70,
+    "policy": "park",
+    "paz": -98.77542212936616,
+    "pz4": 0.0,
+    "b0": 70.0,
+    "s1": -1,
+    "s3": -1,
+    "margin": 10.0,
+    "width": 12.0,
+    "t_link": 3.0,
+    "q": 0.9783030273189913,
+    "rad1": 10.0,
+    "rad2": 7.5,
+    "rad3": 7.5,
+    "rad4": 7.5,
+    "end_extra": 1.02,
+    "inner": 0.5,
+    "ring": 0,
+    "rd": 45.0,
+    "trav": 90.0,
+    "ring_w": 12.0,
+    "ring_t": 8.0
+   }
+  },
+  "reach_at_ib88": null,
+  "reach_at_ib90": null,
+  "best_gap": {
+   "reach": 0.6937,
+   "ib14": 0.4956,
+   "follow": 0.8833,
+   "contact": 0.018,
+   "gap": 69.54,
+   "k": null,
+   "params": {
+    "az": 54.793185195552375,
+    "el": 55.48139895268401,
+    "wd": 82.46932196984827,
+    "wa": -14.440015572226853,
+    "a1": 20.749858034918102,
+    "a2": 36.98511202462875,
+    "a3": 70,
+    "policy": "park",
+    "paz": -98.77542212936616,
+    "pz4": 0.0,
+    "b0": 70.0,
+    "s1": -1,
+    "s3": -1,
+    "margin": 10.0,
+    "width": 12.0,
+    "t_link": 3.0,
+    "q": 0.972,
+    "rad1": 10.0,
+    "rad2": 7.5,
+    "rad3": 7.5,
+    "rad4": 7.5,
+    "end_extra": 1.02,
+    "inner": 0.5,
+    "ring": 0,
+    "rd": 45.0,
+    "trav": 90.0,
+    "ring_w": 12.0,
+    "ring_t": 8.0
+   }
+  },
+  "pareto_ib14_reach": [],
+  "reach_at_ib_follow95": {
+   "0.80": null,
+   "0.84": null,
+   "0.86": null,
+   "0.88": null,
+   "0.90": null
+  }
+ },
+ "4R-lens:es_ring": {
+  "cls": "redundant 4R (ring 4th, lens, unverified)",
+  "n": 121,
+  "reach_max_any": {
+   "reach": 0.8063,
+   "ib14": 0.6925,
+   "follow": 1.0,
+   "contact": 0.0357,
+   "gap": 33.69,
+   "k": null,
+   "params": {
+    "az": 102.17155069038552,
+    "el": 68.82974581109826,
+    "wd": 0,
+    "wa": 0,
+    "a1": 38.094388569902854,
+    "a2": 62.12830667187055,
+    "a3": 95,
+    "policy": "park4",
+    "paz": 20.0,
+    "pz4": 89.638309177038,
+    "b0": 70.0,
+    "s1": -1,
+    "s3": -1,
+    "margin": 10.0,
+    "width": 12.0,
+    "t_link": 3.0,
+    "q": 0.972,
+    "rad1": 10.0,
+    "rad2": 7.5,
+    "rad3": 7.5,
+    "rad4": 7.5,
+    "end_extra": 1.02,
+    "inner": 0.5,
+    "ring": 1,
+    "rd": 78.3087638089759,
+    "trav": 41.5671304794452,
+    "ring_w": 7.38652667867025,
+    "ring_t": 8.0
+   }
+  },
+  "reach_at_ib88": null,
+  "reach_at_ib90": null,
+  "best_gap": {
+   "reach": 0.7625,
+   "ib14": 0.7839,
+   "follow": 1.0,
+   "contact": 0.037,
+   "gap": 29.06,
+   "k": null,
+   "params": {
+    "az": 101.30917350739935,
+    "el": 68.82974581109826,
+    "wd": 0,
+    "wa": 0,
+    "a1": 35.70589404822893,
+    "a2": 61.66788892357513,
+    "a3": 95,
+    "policy": "park4",
+    "paz": 20.0,
+    "pz4": 95.5065802368565,
+    "b0": 70.0,
+    "s1": -1,
+    "s3": -1,
+    "margin": 10.0,
+    "width": 12.0,
+    "t_link": 3.0,
+    "q": 0.9714855851723646,
+    "rad1": 10.0,
+    "rad2": 7.5,
+    "rad3": 7.5,
+    "rad4": 7.5,
+    "end_extra": 1.02,
+    "inner": 0.5,
+    "ring": 1,
+    "rd": 78.3087638089759,
+    "trav": 41.5671304794452,
+    "ring_w": 7.497900727064848,
+    "ring_t": 8.0
+   }
+  },
+  "pareto_ib14_reach": [
+   [
+    0.5922,
+    0.7125
+   ],
+   [
+    0.3304,
+    0.7562
+   ]
+  ],
+  "reach_at_ib_follow95": {
+   "0.80": null,
+   "0.84": null,
+   "0.86": null,
+   "0.88": null,
+   "0.90": null
+  }
  }
 }
