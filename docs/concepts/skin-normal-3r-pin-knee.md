@@ -863,3 +863,89 @@ C1 is recorded (row field `polish2_m5`) for an independent verifier only for its
 the knee is polished again: an objective in which no scored pose is a pose the shape was fitted on (2-fold cross-fit:
 shape fitted on Bench(60,160) worn on Bench(110,360) + the reverse), a near-2 mm contact margin for unseen poses, or a
 larger fast bench (e.g. Bench(220,720)) - more poses, not more streams; the parameter space itself is converged.
+
+## Verification (polish 2) (independent verifier, 2026-10-16 ~10:50 UTC)
+
+**Claim checked:** polish 2's best, **C1 = H1-g69-4**, at fold margin 5 with its J2 stops m_lo 5.40 / m_hi 5.12 and
+O20 x3. It was self-measured at 23.04 / near-touch 24.15 on the polish protocol against H1's 24.48 / 25.59, and at
+28.22 held out against 28.55. The claim's own conclusion is that C1 does not clear the bar out of sample and H1 stays.
+
+**Harness.** `docs/concepts/verify/skin-normal-3r-pin-knee-polish2-stops.py` is new and was written by the verifier;
+no code from `tools/knee_polish2.py` runs.
+* It applies the J2 hard stops on the harness's own `MK.Design.ik`. The J1-J3 angle is taken from the SOLVED chain
+  (u1 against the J3 axis carried by link 2, R12 u3), not from the arm orientation. The two angles differ by at most
+  0.0000 deg on every closed pose.
+* It then runs the polish harness `docs/concepts/verify/skin-normal-3r-pin-knee-polish.py` and the continuity flood
+  fill `docs/concepts/verify/skin-normal-3r-pin-knee-continuity.py`, both imported unchanged.
+* A smoke test on 3000 poses: this stop code and the claim's wrapper refuse the same 8 poses.
+* Run settings: CB_EXACT=1 on every wear bench, CB_FOLD_MARGIN=5, O20 only.
+* C1 and H1 ran in the same farm batch: exo-cpu1, 13 jobs, about $0.13.
+* The Bench(110,360) fast cache (14f156cb6fc8) was assembled in each job, so the fit is fast, as the polish protocol
+  names. Exact-fit re-runs were added as a robustness check.
+* Raw outputs: `docs/research/polish2_m5/verify/`.
+
+**Measured.** Fold margin 5. Each cell gives gap / near-touch gap (metal < 1 mm counted as contact) / poses < 1 mm /
+min metal.
+
+| protocol | H1 (H-g107-1) | C1 (H1-g69-4) | gain plain / near-touch |
+|---|---|---|---|
+| polish: fit Bench(110,360) fast, worn exact (470 poses, the search's own) | 24.48 / 25.59 / 2 / 0.21 mm (score 91.10) | **23.04 / 24.15 / 2 / 0.04 mm (score 91.62)**; reach 0.6889, follow 1.0, ib14 0.8972, ib10 0.5591, contact 0.0165 | **1.44 / 1.44** |
+| same, shape fitted EXACT (robustness) | 25.03 / 26.14 / 2 / 0.20 mm | 23.39 / 24.50 / 2 / 0.06 mm | 1.64 / 1.64 |
+| same, harness unchanged (no stops: window 5 at both edges) | 24.48 / 25.59 | 22.75 / 23.86 | 1.73 / 1.73 (the stops cost C1 0.29) |
+| HELD-OUT: fit Bench(110,360) fast, worn exact on the 1154 poses outside both benches | 28.55 / 31.06 / 11 / 0.11 mm (score 89.62) | 28.22 / 30.02 / 8 / 0.03 mm (score 89.74); reach 0.646, contact 0.0239 | **0.33** / 1.04 |
+| round-3 protocol: fit Bench(60,160) fast, worn exact | 27.20 / 31.75 / 8 / 0.09 mm | 24.57 / 25.69 / 2 / 0.66 mm | 2.63 / 6.06 (both benches inside C1's objective) |
+| margin 10, polish protocol | 26.45 / 26.45 (verified H1 numbers) | 26.42 / 27.57 / 2 / 0.13 mm; follow 0.9545, overhead clip follow 0.9 (H1 0.6) | 0.03 / **-1.12** |
+
+Every number the claim gives reproduces to the digit:
+* C1 polish 23.04 / 24.15 / 0.04 mm, held out 28.22 / 30.02 / 0.03 mm, round-3 24.57 / 25.69.
+* H1 24.48 / 25.59, 28.55 / 31.06, 27.20 / 31.75.
+
+**Rules: all hold, nothing loosened.**
+* **Verifier checks.** The independent 3D closure, knee-vs-hub-3 upper-half and E boss checks removed 0 poses for C1
+  and H1 on every bench.
+* **J2 stops are respected.** Over the taken poses the fold margin is 6.97 / 5.19 deg on the polish bench and 6.01 /
+  5.15 deg held out (low / high edge), against stops of 5.40 / 5.12.
+* **Part envelopes.** O20 at J1-J3. Pin stack 5.63 mm, the same envelope class as H1's 5.68: Ti plates on the iglidur
+  pin, between IGLIDUR-PIN 5.0 and the MR63ZZ pair 6.0. Knee link lc 26.56 mm (>= two O12 bosses + 2). lE 59.79 mm.
+  Knee window [29.63, 150.37]. b1 = b2 = 0, R_tol 0.5.
+* **J1 seat:** anterior 0.051, up 0.904, lateral 0.424. That is the acromion top, so ruling (4) holds.
+* **Travel:** J3 182-194 deg (MR117 pair), pins 52-57 deg.
+* **Arm at the side** (elevation <= 15): 0 poses < 1 mm on every bench (lowest 1.16 mm held out).
+* **Continuity.** Full 1432-pose grid, shape frozen from Bench(110,360) fast, 2-deg slerp edges from elevation 0, no
+  joint (q1, q2, q3', pin a, pin b) stepping > 10 deg, knee sign constant, stops installed.
+  * Taken nodes (frozen model worn exact on all 1432 poses): 956, all connected, 0 islands. 785 / 785 edges pass and
+    the knee stays on ONE branch (sign +1).
+  * Kinematic nodes: 985 / 985 connected.
+  * On Bench(110,360), connected reach = static reach = 0.6889.
+
+**Red team.**
+* *The gain does not travel.*
+  * C1 beats H1 by >= 1 point only on poses the search saw: the polish bench at 1.44 (1.64 exact-fit), and the round-3
+    benches, which are its validation term.
+  * Held out the plain gain is 0.33. The near-touch gain of 1.04 comes from 8 poses < 1 mm against 11.
+  * Re-measured at margin 10, C1 is level with H1 plain (26.42 against 26.45) and 1.12 worse near-touch.
+  * By the standard H1 itself was accepted on (>= 1 plain AND near-touch on every protocol), C1 fails on two
+    protocols: held-out plain and margin 10.
+* *Where the held-out points go.* C1 takes more poses held out (reach 0.646 against 0.632, 0 part-jam poses against 29)
+  but lands metal on more of them: 20 contact poses against 9, contact 0.0239 against 0.0111, min metal 0.03 mm. The
+  reach is bought with skin contact on poses the shape was never fitted to.
+* *The knee stop.* C1 buys back H1's overhead edge: its knee stays 3.31 deg from its stop on held-out overhead poses,
+  where H1's comes within 0.01 deg.
+  * But over ALL held-out poses C1's knee reaches 148.9 deg against 150.37, a 1.45 deg margin.
+  * Its kinematically closed workspace runs to 150.3 deg: the knee is still against its stop, just not on the overhead
+    frames.
+  * Overhead workspace reach held out drops 0.254 -> 0.211.
+* *The stops are almost free.* The stops cost 0.29 points (22.75 without them, 23.04 with them). The optimum sits at the
+  5-deg floor because nothing on this design takes poses past a stop.
+
+**Verdict: CONFIRMED as claimed (not refuted), and C1 does not replace H1.**
+* The measurement is reproduced exactly and no rule is broken.
+* The >= 1-point gain reproduces on Bench(110,360) exact frozen at margin 5: 1.44 plain and near-touch.
+* The gain is in-sample: held-out plain is 0.33, and at margin 10 the near-touch gain is -1.12.
+* **H1 stays the polished configuration.** best_k H-g107-1 is unchanged, the `v_polish2_*` fields hold these numbers,
+  and the H1 CAD stands.
+
+For the next polish, one change is needed: score only poses the shape was NOT fitted on (a 2-fold cross-fit).
+* Every polished config so far sits ~5 points worse held out than on its search bench: P5, C1 and H1 itself (24.5 vs
+  28.6).
+* The 690 poses of polish 2's objective were fitted as hard as the 470 of polish 1.
