@@ -176,7 +176,10 @@ spring, q 0.98, end_extra 1.28, all O20 hubs (hub 4 + spring coil r 12). Fitted 
 Four more CMA streams with objective = gap + w * 100 * max(0, 0.9 - overhead reach) (w 0.3 / 0.6, plain, near-touch and
 `l3low` starts; 4196 tries): three found no configuration that takes a single overhead workspace pose of Bench(60,160)
 (stayed at their starts, overhead reach 0/12); the near-touch stream O2n took 2 of 12 at 23.90 near / 20.49 plain fast
-(vs W3n 21.60 / 19.32). The overhead loss is structural for this morphology (red team below), not a search artefact.
+(vs W3n 21.60 / 19.32). Frozen on Bench(110,360) exact, O2n is 26.65 plain / 31.99 near-touch with overhead reach
+**0.39** (11 of 28) vs W3n 25.05 / 29.29 / 0.29: ~0.1 of overhead reach costs ~1.6 plain / ~2.7 near-touch points.
+O2n's parameters: rows/arm-parked-knee-4r.json exact_frozen_others.O2n. The overhead loss is structural for this
+morphology (red team below), not a search artefact.
 
 ## Red team (my own best, W3n)
 

@@ -23,7 +23,7 @@
  "n_configs": 17579,
  "verdict": "screened at O20 everywhere (user rule): best W3n 19.32 fast (near-touch 21.60), FROZEN on Bench(110,360) exact 25.05 = score 90.9 (near-touch 29.29 = 89.3; reach 0.772, overhead reach 0.29); stops at 11.7 deg from the J2 fold (the optimum: at 5 deg the same shape is 62.11 frozen). Beats the pin-knee 3R on the same protocol (28.21 / near 33.77) by ~3 / ~4.5 points, not the ideation's ~12 (that came from slim O15 hubs, now ruled out); price: complexity 32.25 (4 active) or 13.25 (J4 a sprung sensed pin) vs 19.5, and a 40-83 N.mm spring torque felt on 26-38 % of poses. Not the golden solution (complexity ~0); converged (gate passed in all 16 CMA streams).",
  "limiter": "(1) overhead: abduction overhead (plane 0-30, elev 150, axial 0) buries hub 2 + links 1/2 5-6 mm under the acromion skin bulge, and the knee window runs out (fold) at plane 90-120, elev 150-165 - overhead reach 0/12 fast, 0.29 frozen; an overhead-weighted CMA (4 streams) found at most 2/12 at +2.3 near points; (2) the 4th hub on the deltoid: hub 4 in band 0.51 (F 77) and link 3 0.32 - the spare's own metal is the worst-banded part; (3) the centred spring's two feasible arcs: the policy takes the low-energy arc, the physical knee stays on its arc (2 snap events in the preview loop, across->rest at elev 39 and behind->rest at elev 16) - workspace poses may be optimistic where history puts the knee on the other arc.",
- "note": "gate (claim stream W3n, near-touch objective): gain 0.87 over the 2nd half, 0.27 over the last third, top-5 spread 0.03 score points -> converged; every one of the 16 streams passes (sigma collapsed). Measured at margin 5 AND 10: W3n m10 24.94 / near 30.25, m5 62.11 / near 66.84 (the stop is a design variable here; 9-12 deg is its optimum, 5 is only the lower bound). O20 rebase of the ideation seats: 30.84 / 38.90 fast (m10 / m5), 33.91 / 44.24 frozen (ideation O15: 19.18 / 22.36). Spring sizing by virtual work through the self-motion Jacobian: hold needed max 18 / 29 N.mm (tau_f 3 / 6 N.mm per joint) -> preload 40 N.mm, 19 N.mm/rad; hub 4 skin-checked at r 12 for the coil. J4 locked: 82.18 fast at W3n (spare worth ~60 fast points at its seats).",
+ "note": "gate (claim stream W3n, near-touch objective): gain 0.87 over the 2nd half, 0.27 over the last third, top-5 spread 0.03 score points -> converged; every one of the 16 streams passes (sigma collapsed). Measured at margin 5 AND 10: W3n m10 24.94 / near 30.25, m5 62.11 / near 66.84 (the stop is a design variable here; 9-12 deg is its optimum, 5 is only the lower bound). O20 rebase of the ideation seats: 30.84 / 38.90 fast (m10 / m5), 33.91 / 44.24 frozen (ideation O15: 19.18 / 22.36). Spring sizing by virtual work through the self-motion Jacobian: hold needed max 18 / 29 N.mm (tau_f 3 / 6 N.mm per joint) -> preload 40 N.mm, 19 N.mm/rad; hub 4 skin-checked at r 12 for the coil. J4 locked: 82.18 fast at W3n (spare worth ~60 fast points at its seats). Overhead-weighted CMA (4 streams, 4196 tries): best O2n frozen 26.65 / near 31.99 with overhead reach 0.39 (W3n 0.29).",
  "doc": "docs/concepts/arm-parked-knee-4r.md",
  "model_file": "docs/concepts/models/arm-parked-knee-4r.py",
  "best_k": "W3n (cma_W3n best)",
@@ -232,6 +232,30 @@
    "contact": 0.043,
    "over_reach": 0.3571,
    "min_metal_skin": 0.09
+  },
+  "O2n": {
+   "margin": 11.0881,
+   "fit_gap": 20.49,
+   "params": {
+    "az": 106.1782,
+    "el": 71.9233,
+    "wd": 76.682,
+    "wa": -3.3315,
+    "a1": 32.1776,
+    "a2": 74.0796,
+    "a3": 24.0671,
+    "pz4": 108.8986,
+    "q": 0.9873,
+    "end_extra": 1.702,
+    "margin": 11.0881
+   },
+   "gap": 26.65,
+   "gap_near1": 31.99,
+   "reach": 0.7667,
+   "inband14": 0.7898,
+   "contact": 0.023,
+   "over_reach": 0.3929,
+   "min_metal_skin": 0.06
   }
  },
  "complexity": 32.25,
