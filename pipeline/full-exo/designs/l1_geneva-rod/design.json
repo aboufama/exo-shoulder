@@ -90,7 +90,7 @@
    "MR63ZZ-class follower or a polished pad on the rocker (L2)",
    "M3 rod-end x 2 (e.g. DIN ISO 12240-4 E-series, O10 head)",
    "O3 x 33.0 mm steel pushrod, M3 threaded ends",
-   "O20 x 1.5 Ti horn plate on the K axle"
+   "O13.0 x 1.5 Ti horn plate on the K axle"
   ],
   "lobe": {
    "r_lobe": 9.0,
@@ -118,6 +118,7 @@
   "horn": {
    "r_horn": 2.4932,
    "plate_mm": 1.5,
+   "plate_r_mm": 6.493,
    "head_bottom_mm": 19.75,
    "arc_at_stopB_mm": 2.32,
    "arc_at_taken_max_mm": 1.85
@@ -128,6 +129,226 @@
    "rod_len": 33.0,
    "rocker_h": 19.0,
    "corrected": true
+  },
+  "sweep_check": {
+   "rule": "signed distance (mm, negative = inside), worst over the joint window; angle = q2 (link 2 pairs) or dK (link 1a pairs)",
+   "pairs": {
+    "drive horn plate keep-out (O13.0 x 1.5 m | K upper boss + clock-spring cap keep-out": [
+     -0.0,
+     -7.9
+    ],
+    "drive horn plate keep-out (O13.0 x 1.5 m | drive rod-end head at the horn (M3 rod e": [
+     -0.0,
+     -16.9
+    ],
+    "J2 upper boss + cap keep-out (O20, F+3.1 | link 1b strap keep-out (8 x 3 mm Ti, fit": [
+     0.037,
+     -14.8
+    ],
+    "drive horn plate keep-out (O13.0 x 1.5 m | drive pushrod keep-out (O3 x 33.0 mm ste": [
+     0.04,
+     -29.8
+    ],
+    "J2 upper boss + cap keep-out (O20, F+3.1 | J2 lower plate keep-out (O20 x 3, link 1": [
+     0.15,
+     60.2
+    ],
+    "K lower plate keep-out (O20 x 3, link 1a | K upper boss + clock-spring cap keep-out": [
+     0.15,
+     -20.9
+    ],
+    "link 1a strap keep-out (8 x 3 mm Ti, fit | K upper boss + clock-spring cap keep-out": [
+     0.837,
+     -42.7
+    ],
+    "drive lobe keep-out (constant-pressure s | drive rocker post keep-out (O10 x 19.0 m": [
+     0.975,
+     -21.8
+    ],
+    "drive lobe keep-out (constant-pressure s | link 1b strap keep-out (8 x 3 mm Ti, fit": [
+     0.987,
+     -13.8
+    ],
+    "drive lobe keep-out (constant-pressure s | J2 lower plate keep-out (O20 x 3, link 1": [
+     1.15,
+     -4.8
+    ],
+    "J2 upper boss + cap keep-out (O20, F+3.1 | drive rocker post keep-out (O10 x 19.0 m": [
+     1.99,
+     13.2
+    ],
+    "J2 upper boss + cap keep-out (O20, F+3.1 | drive rod-end head at the rocker (M3 rod": [
+     8.452,
+     13.2
+    ],
+    "K lower plate keep-out (O20 x 3, link 1a | drive rocker post keep-out (O10 x 19.0 m": [
+     8.925,
+     -2.0
+    ],
+    "link 2 strap keep-out (8 x 3 mm Ti, fitt | drive rocker post keep-out (O10 x 19.0 m": [
+     9.765,
+     93.2
+    ],
+    "drive lobe keep-out (constant-pressure s | drive rod-end head at the rocker (M3 rod": [
+     11.933,
+     -21.8
+    ],
+    "drive horn plate keep-out (O13.0 x 1.5 m | K stop dowel 1 of 2 (ISO 8734 O3 m6 hard": [
+     12.1,
+     -47.7
+    ],
+    "drive horn plate keep-out (O13.0 x 1.5 m | K stop dowel 2 of 2 (ISO 8734 O3 m6 hard": [
+     12.1,
+     -47.7
+    ],
+    "link 1a strap keep-out (8 x 3 mm Ti, fit | drive rocker post keep-out (O10 x 19.0 m": [
+     12.115,
+     0.0
+    ],
+    "J2 upper boss + cap keep-out (O20, F+3.1 | drive pushrod keep-out (O3 x 33.0 mm ste": [
+     12.22,
+     -3.8
+    ],
+    "drive horn plate keep-out (O13.0 x 1.5 m | link 1b strap keep-out (8 x 3 mm Ti, fit": [
+     12.496,
+     -47.7
+    ],
+    "J1 lower plate keep-out (O20 x 3, link 1 | K upper boss + clock-spring cap keep-out": [
+     13.969,
+     -17.9
+    ],
+    "drive lobe keep-out (constant-pressure s | drive pushrod keep-out (O3 x 33.0 mm ste": [
+     14.348,
+     -21.8
+    ],
+    "J2 stop dowel (ISO 8734 O3 m6 hardened,  | drive rocker post keep-out (O10 x 19.0 m": [
+     14.806,
+     -21.8
+    ],
+    "J1 lower plate keep-out (O20 x 3, link 1 | drive rocker post keep-out (O10 x 19.0 m": [
+     15.242,
+     0.0
+    ],
+    "K lower plate keep-out (O20 x 3, link 1a | drive pushrod keep-out (O3 x 33.0 mm ste": [
+     16.151,
+     -7.0
+    ],
+    "K lower plate keep-out (O20 x 3, link 1a | drive rod-end head at the horn (M3 rod e": [
+     16.75,
+     -20.9
+    ],
+    "link 1a strap keep-out (8 x 3 mm Ti, fit | drive rod-end head at the horn (M3 rod e": [
+     16.942,
+     -51.7
+    ],
+    "link 1a strap keep-out (8 x 3 mm Ti, fit | drive pushrod keep-out (O3 x 33.0 mm ste": [
+     17.218,
+     0.0
+    ],
+    "link 2 strap keep-out (8 x 3 mm Ti, fitt | drive rod-end head at the rocker (M3 rod": [
+     17.799,
+     93.2
+    ],
+    "drive horn plate keep-out (O13.0 x 1.5 m | drive rocker post keep-out (O10 x 19.0 m": [
+     18.537,
+     -47.7
+    ],
+    "drive horn plate keep-out (O13.0 x 1.5 m | drive rod-end head at the rocker (M3 rod": [
+     19.801,
+     -47.7
+    ],
+    "drive lobe keep-out (constant-pressure s | K upper boss + clock-spring cap keep-out": [
+     21.008,
+     -21.8
+    ],
+    "drive lobe keep-out (constant-pressure s | K stop dowel 2 of 2 (ISO 8734 O3 m6 hard": [
+     21.477,
+     -21.8
+    ],
+    "link 2 strap keep-out (8 x 3 mm Ti, fitt | drive pushrod keep-out (O3 x 33.0 mm ste": [
+     21.496,
+     93.2
+    ],
+    "J2 upper boss + cap keep-out (O20, F+3.1 | K upper boss + clock-spring cap keep-out": [
+     21.747,
+     2.2
+    ],
+    "K lower plate keep-out (O20 x 3, link 1a | drive rod-end head at the rocker (M3 rod": [
+     21.796,
+     -2.0
+    ],
+    "J2 upper boss + cap keep-out (O20, F+3.1 | K stop dowel 2 of 2 (ISO 8734 O3 m6 hard": [
+     22.023,
+     13.2
+    ],
+    "J2 stop dowel (ISO 8734 O3 m6 hardened,  | drive rod-end head at the rocker (M3 rod": [
+     22.895,
+     -21.8
+    ],
+    "link 1a strap keep-out (8 x 3 mm Ti, fit | drive rod-end head at the rocker (M3 rod": [
+     23.435,
+     0.0
+    ],
+    "J2 stop dowel (ISO 8734 O3 m6 hardened,  | drive pushrod keep-out (O3 x 33.0 mm ste": [
+     26.964,
+     -21.8
+    ],
+    "link 2 strap keep-out (8 x 3 mm Ti, fitt | K upper boss + clock-spring cap keep-out": [
+     27.924,
+     93.2
+    ],
+    "J1 lower plate keep-out (O20 x 3, link 1 | drive rod-end head at the horn (M3 rod e": [
+     29.658,
+     -45.7
+    ],
+    "J1 lower plate keep-out (O20 x 3, link 1 | drive pushrod keep-out (O3 x 33.0 mm ste": [
+     30.401,
+     0.0
+    ],
+    "J1 lower plate keep-out (O20 x 3, link 1 | drive rod-end head at the rocker (M3 rod": [
+     31.0,
+     0.0
+    ],
+    "drive horn plate keep-out (O13.0 x 1.5 m | J2 lower plate keep-out (O20 x 3, link 1": [
+     31.844,
+     -47.7
+    ],
+    "drive lobe keep-out (constant-pressure s | drive rod-end head at the horn (M3 rod e": [
+     33.321,
+     -21.8
+    ],
+    "J2 stop dowel (ISO 8734 O3 m6 hardened,  | K upper boss + clock-spring cap keep-out": [
+     33.482,
+     -21.8
+    ],
+    "J2 upper boss + cap keep-out (O20, F+3.1 | drive rod-end head at the horn (M3 rod e": [
+     34.625,
+     10.2
+    ],
+    "drive lobe keep-out (constant-pressure s | K stop dowel 1 of 2 (ISO 8734 O3 m6 hard": [
+     36.969,
+     -21.8
+    ],
+    "J2 upper boss + cap keep-out (O20, F+3.1 | K stop dowel 1 of 2 (ISO 8734 O3 m6 hard": [
+     37.466,
+     2.2
+    ],
+    "link 2 strap keep-out (8 x 3 mm Ti, fitt | drive rod-end head at the horn (M3 rod e": [
+     40.555,
+     93.2
+    ],
+    "J2 stop dowel (ISO 8734 O3 m6 hardened,  | drive rod-end head at the horn (M3 rod e": [
+     47.442,
+     93.2
+    ]
+   },
+   "worst": [
+    "drive horn plate keep-out (O13.0 x 1.5 m | K upper boss + clock-spring cap keep-out",
+    [
+     -0.0,
+     -7.9
+    ]
+   ]
   }
  },
  "kinematics": {
@@ -410,6 +631,7 @@
    "horn": {
     "r_horn": 2.4932,
     "plate_mm": 1.5,
+    "plate_r_mm": 6.493,
     "head_bottom_mm": 19.75,
     "arc_at_stopB_mm": 2.32,
     "arc_at_taken_max_mm": 1.85
@@ -420,6 +642,226 @@
     "rod_len": 33.0,
     "rocker_h": 19.0,
     "corrected": true
+   },
+   "sweep_check": {
+    "rule": "signed distance (mm, negative = inside), worst over the joint window; angle = q2 (link 2 pairs) or dK (link 1a pairs)",
+    "pairs": {
+     "drive horn plate keep-out (O13.0 x 1.5 m | K upper boss + clock-spring cap keep-out": [
+      -0.0,
+      -7.9
+     ],
+     "drive horn plate keep-out (O13.0 x 1.5 m | drive rod-end head at the horn (M3 rod e": [
+      -0.0,
+      -16.9
+     ],
+     "J2 upper boss + cap keep-out (O20, F+3.1 | link 1b strap keep-out (8 x 3 mm Ti, fit": [
+      0.037,
+      -14.8
+     ],
+     "drive horn plate keep-out (O13.0 x 1.5 m | drive pushrod keep-out (O3 x 33.0 mm ste": [
+      0.04,
+      -29.8
+     ],
+     "J2 upper boss + cap keep-out (O20, F+3.1 | J2 lower plate keep-out (O20 x 3, link 1": [
+      0.15,
+      60.2
+     ],
+     "K lower plate keep-out (O20 x 3, link 1a | K upper boss + clock-spring cap keep-out": [
+      0.15,
+      -20.9
+     ],
+     "link 1a strap keep-out (8 x 3 mm Ti, fit | K upper boss + clock-spring cap keep-out": [
+      0.837,
+      -42.7
+     ],
+     "drive lobe keep-out (constant-pressure s | drive rocker post keep-out (O10 x 19.0 m": [
+      0.975,
+      -21.8
+     ],
+     "drive lobe keep-out (constant-pressure s | link 1b strap keep-out (8 x 3 mm Ti, fit": [
+      0.987,
+      -13.8
+     ],
+     "drive lobe keep-out (constant-pressure s | J2 lower plate keep-out (O20 x 3, link 1": [
+      1.15,
+      -4.8
+     ],
+     "J2 upper boss + cap keep-out (O20, F+3.1 | drive rocker post keep-out (O10 x 19.0 m": [
+      1.99,
+      13.2
+     ],
+     "J2 upper boss + cap keep-out (O20, F+3.1 | drive rod-end head at the rocker (M3 rod": [
+      8.452,
+      13.2
+     ],
+     "K lower plate keep-out (O20 x 3, link 1a | drive rocker post keep-out (O10 x 19.0 m": [
+      8.925,
+      -2.0
+     ],
+     "link 2 strap keep-out (8 x 3 mm Ti, fitt | drive rocker post keep-out (O10 x 19.0 m": [
+      9.765,
+      93.2
+     ],
+     "drive lobe keep-out (constant-pressure s | drive rod-end head at the rocker (M3 rod": [
+      11.933,
+      -21.8
+     ],
+     "drive horn plate keep-out (O13.0 x 1.5 m | K stop dowel 1 of 2 (ISO 8734 O3 m6 hard": [
+      12.1,
+      -47.7
+     ],
+     "drive horn plate keep-out (O13.0 x 1.5 m | K stop dowel 2 of 2 (ISO 8734 O3 m6 hard": [
+      12.1,
+      -47.7
+     ],
+     "link 1a strap keep-out (8 x 3 mm Ti, fit | drive rocker post keep-out (O10 x 19.0 m": [
+      12.115,
+      0.0
+     ],
+     "J2 upper boss + cap keep-out (O20, F+3.1 | drive pushrod keep-out (O3 x 33.0 mm ste": [
+      12.22,
+      -3.8
+     ],
+     "drive horn plate keep-out (O13.0 x 1.5 m | link 1b strap keep-out (8 x 3 mm Ti, fit": [
+      12.496,
+      -47.7
+     ],
+     "J1 lower plate keep-out (O20 x 3, link 1 | K upper boss + clock-spring cap keep-out": [
+      13.969,
+      -17.9
+     ],
+     "drive lobe keep-out (constant-pressure s | drive pushrod keep-out (O3 x 33.0 mm ste": [
+      14.348,
+      -21.8
+     ],
+     "J2 stop dowel (ISO 8734 O3 m6 hardened,  | drive rocker post keep-out (O10 x 19.0 m": [
+      14.806,
+      -21.8
+     ],
+     "J1 lower plate keep-out (O20 x 3, link 1 | drive rocker post keep-out (O10 x 19.0 m": [
+      15.242,
+      0.0
+     ],
+     "K lower plate keep-out (O20 x 3, link 1a | drive pushrod keep-out (O3 x 33.0 mm ste": [
+      16.151,
+      -7.0
+     ],
+     "K lower plate keep-out (O20 x 3, link 1a | drive rod-end head at the horn (M3 rod e": [
+      16.75,
+      -20.9
+     ],
+     "link 1a strap keep-out (8 x 3 mm Ti, fit | drive rod-end head at the horn (M3 rod e": [
+      16.942,
+      -51.7
+     ],
+     "link 1a strap keep-out (8 x 3 mm Ti, fit | drive pushrod keep-out (O3 x 33.0 mm ste": [
+      17.218,
+      0.0
+     ],
+     "link 2 strap keep-out (8 x 3 mm Ti, fitt | drive rod-end head at the rocker (M3 rod": [
+      17.799,
+      93.2
+     ],
+     "drive horn plate keep-out (O13.0 x 1.5 m | drive rocker post keep-out (O10 x 19.0 m": [
+      18.537,
+      -47.7
+     ],
+     "drive horn plate keep-out (O13.0 x 1.5 m | drive rod-end head at the rocker (M3 rod": [
+      19.801,
+      -47.7
+     ],
+     "drive lobe keep-out (constant-pressure s | K upper boss + clock-spring cap keep-out": [
+      21.008,
+      -21.8
+     ],
+     "drive lobe keep-out (constant-pressure s | K stop dowel 2 of 2 (ISO 8734 O3 m6 hard": [
+      21.477,
+      -21.8
+     ],
+     "link 2 strap keep-out (8 x 3 mm Ti, fitt | drive pushrod keep-out (O3 x 33.0 mm ste": [
+      21.496,
+      93.2
+     ],
+     "J2 upper boss + cap keep-out (O20, F+3.1 | K upper boss + clock-spring cap keep-out": [
+      21.747,
+      2.2
+     ],
+     "K lower plate keep-out (O20 x 3, link 1a | drive rod-end head at the rocker (M3 rod": [
+      21.796,
+      -2.0
+     ],
+     "J2 upper boss + cap keep-out (O20, F+3.1 | K stop dowel 2 of 2 (ISO 8734 O3 m6 hard": [
+      22.023,
+      13.2
+     ],
+     "J2 stop dowel (ISO 8734 O3 m6 hardened,  | drive rod-end head at the rocker (M3 rod": [
+      22.895,
+      -21.8
+     ],
+     "link 1a strap keep-out (8 x 3 mm Ti, fit | drive rod-end head at the rocker (M3 rod": [
+      23.435,
+      0.0
+     ],
+     "J2 stop dowel (ISO 8734 O3 m6 hardened,  | drive pushrod keep-out (O3 x 33.0 mm ste": [
+      26.964,
+      -21.8
+     ],
+     "link 2 strap keep-out (8 x 3 mm Ti, fitt | K upper boss + clock-spring cap keep-out": [
+      27.924,
+      93.2
+     ],
+     "J1 lower plate keep-out (O20 x 3, link 1 | drive rod-end head at the horn (M3 rod e": [
+      29.658,
+      -45.7
+     ],
+     "J1 lower plate keep-out (O20 x 3, link 1 | drive pushrod keep-out (O3 x 33.0 mm ste": [
+      30.401,
+      0.0
+     ],
+     "J1 lower plate keep-out (O20 x 3, link 1 | drive rod-end head at the rocker (M3 rod": [
+      31.0,
+      0.0
+     ],
+     "drive horn plate keep-out (O13.0 x 1.5 m | J2 lower plate keep-out (O20 x 3, link 1": [
+      31.844,
+      -47.7
+     ],
+     "drive lobe keep-out (constant-pressure s | drive rod-end head at the horn (M3 rod e": [
+      33.321,
+      -21.8
+     ],
+     "J2 stop dowel (ISO 8734 O3 m6 hardened,  | K upper boss + clock-spring cap keep-out": [
+      33.482,
+      -21.8
+     ],
+     "J2 upper boss + cap keep-out (O20, F+3.1 | drive rod-end head at the horn (M3 rod e": [
+      34.625,
+      10.2
+     ],
+     "drive lobe keep-out (constant-pressure s | K stop dowel 1 of 2 (ISO 8734 O3 m6 hard": [
+      36.969,
+      -21.8
+     ],
+     "J2 upper boss + cap keep-out (O20, F+3.1 | K stop dowel 1 of 2 (ISO 8734 O3 m6 hard": [
+      37.466,
+      2.2
+     ],
+     "link 2 strap keep-out (8 x 3 mm Ti, fitt | drive rod-end head at the horn (M3 rod e": [
+      40.555,
+      93.2
+     ],
+     "J2 stop dowel (ISO 8734 O3 m6 hardened,  | drive rod-end head at the horn (M3 rod e": [
+      47.442,
+      93.2
+     ]
+    },
+    "worst": [
+     "drive horn plate keep-out (O13.0 x 1.5 m | K upper boss + clock-spring cap keep-out",
+     [
+      -0.0,
+      -7.9
+     ]
+    ]
    }
   },
   "knee_stop": {

@@ -221,10 +221,10 @@
   {
    "k": 19,
    "group": "l1a",
-   "name": "drive horn plate keep-out (O20 x 1.5 mm on hub K's cap top, F+18.25..F+19.75; clamped on link 1a's K axle through the bearing bore and the spring arbor; carries the horn pin)",
-   "vol_cm3": 0.47,
+   "name": "drive horn plate keep-out (O13.0 x 1.5 mm on hub K's cap top, F+18.25..F+19.75; clamped on link 1a's K axle through the bearing bore and the spring arbor; carries the horn pin)",
+   "vol_cm3": 0.198,
    "material": "Ti-6Al-4V",
-   "mass_g": 2.08,
+   "mass_g": 0.88,
    "valid": true,
    "pieces": 1,
    "faces": 256
