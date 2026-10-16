@@ -83,6 +83,7 @@ Bench(60,160) fast, wear the shape on Bench(110,360) without refit; CB_EXACT=1 f
 | k10 | leader k4216 seats, knee posterior (phib -90), lE 30 / lc 25, 5 mm pin stack | 26.34 fast | 33.84 (score 87.69) | 0.619 / 0.845 / 0.003 |
 | k264 | coarse-sweep best (az1 108, el1 66.8, az2 19.4, el2 56.1, b3 0.157, lE 35.6, lc 18.6) | 26.47 fast | **31.22 (score 88.65)** | 0.617 / 0.883 / 0.012 |
 | k299 (D1) | CMA stream D (az1 87.1, el1 60.2, az2 14.4, el2 49.5, b3 0.362, lE 32.7, lc 28.0, phib -56) | 26.17 exact path / 25.87 fast | 31.96 (score 88.38) | 0.597 / 0.895 / 0.012 |
+| F1 (freed b3) | CMA stream F (b3 0.536, az1 98.9, el1 66.3, az2 11.1, el2 55.1, lE 30.3, lc 26.0, phib -82) | 28.80 exact path / 28.95 fast | 37.04 (score 86.53) | 0.594 / 0.851 / 0.015 |
 | reference | zero-passive spherical 3R at the leader's seats (round-3 judge) | - | 41.73 | |
 | reference | 2-slide leader osn k4216, verified | 32.61 fast | 42.59 | |
 
@@ -94,7 +95,9 @@ cross score 90 on the verification bench: every config loses 28-30 gap points to
 arc a2, i.e. the fold window: at the k10 seats and knee, b3 0.23 -> 26.34; 0.40 -> 32.37 (fold 47 -> 50, a2 74.1 ->
 71.0); 0.60 -> 136.84 (drift 33 x 37 mm, the knee link sweeps over the E strap: 98 jams); 0.80 -> 161.67. CMA streams
 started at b3 0.45 / 0.5 / 0.65 end at 34.03 / 34.10 / 28.80 (b3 0.536, Bench(60,160) exact path). The free b3 does not
-pay; the CMA's best sits at b3 0.16-0.36.
+pay; the CMA's best sits at b3 0.16-0.36. On the verification bench the freed-b3 best (F1, b3 0.536) wears to 37.04: it beats
+the zero-passive spherical 41.73 but loses 5-6 points to the b3 0.16-0.36 knees (fold 130 vs 121-136, in-band 0.851).
+Farm and local frozen runs of D1 agree to the digit (31.96).
 
 **The limiter, measured (IK only, Bench(110,360), 360 workspace poses).** theta = angle(u1, Q u3), the J1-J3 axis
 angle, must lie in [|a1 - a2| + 10, a1 + a2 - 10]. At k10 (a1 40.3, a2 74.1) the window is [43.7, 104.4] = 60 deg; the
