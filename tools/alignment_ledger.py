@@ -74,8 +74,11 @@ def row(rid):
 
 
 def claim_of(r):
-    """the number the row claims: the verifier's v_gap when there is one, else the agent's gap"""
+    """the number the row claims (the dashboard's reading, tools/dash_build.py): a polish an independent verifier CONFIRMED
+    (polished_status), else the verifier's v_gap, else the agent's gap"""
     claims = {k: num(r.get(k)) for k in ("v_gap", "gap", "polished_gap") if num(r.get(k)) is not None}
+    if str(r.get("polished_status") or "").upper().startswith("CONFIRMED") and claims.get("polished_gap") is not None:
+        return claims["polished_gap"], "polished_gap", claims
     for k in ("v_gap", "gap"):
         if claims.get(k) is not None: return claims[k], k, claims
     return None, None, claims

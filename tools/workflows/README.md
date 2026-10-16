@@ -6,7 +6,8 @@ whole operation is [`docs/OPERATIONS.md`](../../docs/OPERATIONS.md).
 
 | script | what it does | when to launch |
 |---|---|---|
-| `discovery-loop.js` | the self-driving discovery loop: per round a planner (state + 2-3 lenses), `discovery-ideate.js`, `exo-screen.js` slices of 2 designs, a closer that writes `docs/concepts/ROUNDS.md` + FINDINGS and the next round's focus | always running (CLAUDE.md "Discovery never stops at a round") |
+| `discovery-loop.js` | the self-driving discovery loop: per round a planner (state + 2-3 lenses), `discovery-ideate.js`, `exo-screen.js` slices of 2 designs, `alignment-audit.js` on each slice's screened / verified designs (Audit phase), a closer that writes `docs/concepts/ROUNDS.md` + FINDINGS and the next round's focus and may not name a winner the alignment ledger marks gamed | always running (CLAUDE.md "Discovery never stops at a round") |
+| `alignment-audit.js` | the alignment auditor (CLAUDE.md "Alignment auditor", docs/ALIGNMENT.md): per design an auditor (`tools/alignment_audit.py` checks + the 25-pattern judgement pass -> `docs/alignment/<id>.md/.json`), then a skeptic that tries to refute every gamed / watch verdict; `tools/alignment_ledger.py` computes and records each verdict in `docs/alignment/ledger.jsonl` | after every claim, verification, new leader, judge / metric / bench change (`since`), before a CAD / polish swap; hourly with `targets: []` (the ledger's due list); launched by the loop |
 | `discovery-ideate.js` | child: one agent per lens proposes 3 buildable morphologies; a judge red-teams and appends the top picks to `docs/concepts/catalogue.json` | launched by the loop |
 | `exo-screen.js` | child: model + farm sweep to the convergence gate + red team + motion preview, then an independent verifier (or an auditor of a death) | launched by the loop; standalone for one catalogue entry |
 | `templates/verify-claim.js` | two skeptic lenses (re-measure, buildability) + a judge that writes the verified numbers into the row | a claim made outside the loop (re-fit, embodiment change, Track work) |
@@ -24,6 +25,9 @@ Each script starts with a header comment: what it does, its args, when to launch
 Workflow({ scriptPath: "/home/user/exo-shoulder/tools/workflows/discovery-loop.js",
            args: { first_round: 9, n_rounds: 4, track: "main", focus: "<the last closer's next focus, verbatim>",
                    branch: "<your session's branch>", trailer: "<attribution line 1>\n<attribution line 2>" } })
+Workflow({ scriptPath: "/home/user/exo-shoulder/tools/workflows/alignment-audit.js",
+           args: { targets: ["<row id>", ...], context: "<why: new claim / verification / leader / judge change>", ref: "<verified lead id>",
+                   since: "<ISO time, optional>", branch: "<your session's branch>", trailer: "<attribution line 1>\n<attribution line 2>" } })
 Workflow({ scriptPath: "/home/user/exo-shoulder/tools/workflows/templates/verify-claim.js",
            args: { id: "<row id>", claim: "<config, files, claimed numbers>", lead: "<verified leader + held out>",
                    branch: "<your session's branch>", trailer: "<attribution line 1>\n<attribution line 2>" } })
@@ -37,7 +41,7 @@ Workflow({ scriptPath: "/home/user/exo-shoulder/tools/workflows/templates/verify
   interrupted round by hand - verify its screened rows, write its results - then start the loop at the next round;
   never relaunch the loop at the interrupted round, its planner would write a second plan).
 - No Workflow tool in your session: `docs/OPERATIONS.md` section 9 (run the stages as the script lays them out).
-- The loop finds its children through `wf_dir` (default `<repo>/tools/workflows`). A loop runs for hours; if you will
+- The loop finds its children through `wf_dir` (default `<repo>/tools/workflows`; it needs `alignment-audit.js` there too). A loop runs for hours; if you will
   `git pull` or edit these files meanwhile, copy the three scripts to your session scratchpad and pass `wf_dir` = that
   folder, so the running loop never sees a half-edited file.
 - Before launching an edited script: `node tools/workflows/check.mjs --dry <file>`.

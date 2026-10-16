@@ -310,6 +310,19 @@ a round's winner. If they do not, the auditor was cut short: commit its files (`
 `tools/alignment_audit.py`, `tools/alignment_wear_probe.py`, `docs/alignment/`), then launch a workflow that finishes
 the wiring (an audit phase in `discovery-loop.js` so a flagged claim cannot win, a standalone `alignment-audit.js`, the
 CLAUDE.md rule) and a skeptic review of the auditor.
+Wiring DONE (2026-10-16 ~20:50 UTC; CLAUDE.md "Alignment auditor"): every claim, verification, new leader and judge /
+metric change gets an audit (`tools/workflows/alignment-audit.js`: an auditor per design runs `tools/alignment_audit.py`
+plus the docs/ALIGNMENT.md judgement pass, then a skeptic tries to refute every gamed / watch verdict); verdicts live in
+the append-only ledger `docs/alignment/ledger.jsonl` (`python3 tools/alignment_ledger.py latest`; `get <id>` exits 3
+when gamed; `due` lists what needs an audit). A design the ledger marks 'gamed' cannot be called verified, a winner or a
+leader until the finding is resolved; the auditor's own claims get a skeptic. The repo `discovery-loop.js` runs it in an
+Audit phase between Screen and Close, and its closer may not name a gamed winner. The loop copy already running from
+the old session's scratchpad has NO Audit phase: run `alignment-audit.js` on its round's screened / verified designs
+before naming that round's winner, and relaunch later rounds from the repo copy. The ledger was seeded with the tool's
+19 verdicts (stage 'audit', skeptic pending: gamed = sidecar-parallelogram, sidecar-roller-flank, k-rim-lobe-stub,
+seed-offset-3r-slides): run the workflow on the leaders first (minarc, sidecar-longdyad, sidecar-parallelogram).
+The dashboard's morphs dataset carries `alignment` (+ `_stage`, `_reasons`, `_t`, `_claim`, `_stale`) per design; the
+page does not show it yet.
 
 **Watchdog, dashboards, compute.**
 - Watchdog: a session cron every 15 min (prompt in `docs/OPERATIONS.md` section 3), plus the hourly alignment audit.

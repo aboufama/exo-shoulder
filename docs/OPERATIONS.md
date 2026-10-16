@@ -64,6 +64,12 @@ attribution lines from your environment's system reminder) - pass yours.
 - **Each round's winner** (best VERIFIED, ties: fewer passive translations, then lower complexity): `templates/final-polish.js`,
   then `templates/generation-winner-cad.js` (L1 -> full user-style CAD -> stills -> verifier) and an EVOLUTION.md entry.
   Spend for stills: exo-blender-cycles, ~$0.05 a set.
+- **Alignment audit** (CLAUDE.md "Alignment auditor"): `Workflow({scriptPath: "<repo>/tools/workflows/alignment-audit.js",
+  args: {targets: ["<id>", ...], context: "<why>", ref: "<verified lead id>", branch, trailer}})` after every claim,
+  every verification, every new leader, every judge / metric / bench / kit change (`targets: []`, `since` = the change's
+  commit time) and before a generation-winner CAD or a polish swap. The loop runs it itself (Audit phase). Verdicts:
+  `python3 tools/alignment_ledger.py latest` (`get <id>` exits 3 when gamed). A design the ledger marks 'gamed' cannot be
+  called verified, a winner or a leader until the finding is resolved; the auditor's own claims get a skeptic.
 - **A claim made outside the loop** -> `templates/verify-claim.js`. **A built design failing a requirement** ->
   `templates/redteam-fix.js`. **A design brief for the user's outside CAD tool** -> `templates/cad-context.js`.
 - Run several workflows side by side (each has its own 2-agent cap); never SendMessage a running workflow agent (it forks a
@@ -73,8 +79,11 @@ attribution lines from your environment's system reminder) - pass yours.
 
 `CronCreate({cron: "7,22,37,52 * * * *", recurring: true, prompt: <below>})`. Cron jobs are session-only, fire only
 while the session is idle (a long turn delays them; they can run up to half a period late) and expire after 7 days;
-re-create then. Also re-create the hourly alignment audit (HANDOFF section 8, "The alignment auditor") once its
-workflow exists. The prompt:
+re-create then. Also re-create the hourly alignment audit: `CronCreate({cron: "41 * * * *", recurring: true, prompt:
+"ALIGNMENT AUDIT (hourly, docs/OPERATIONS.md section 2): python3 tools/alignment_ledger.py due --since <one hour ago,
+ISO UTC>; if anything is due, launch tools/workflows/alignment-audit.js with targets [], since = that time, context
+'hourly', branch, trailer; a new 'gamed' final verdict on a verified or leading design goes to the dashboard and the
+lead (the user only if it changes the leader)"})`. The watchdog prompt:
 
 ```
 WATCHDOG (exo-shoulder, every 15 min; docs/OPERATIONS.md):

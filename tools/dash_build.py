@@ -9,9 +9,10 @@ the files whose sha256 changed (compare with the manifest of the last upload) an
 
 Datasets (id: sources -> builder):
   morphs        concept bench, one row per morphology: docs/concepts/catalogue.json < families.json < rows/<id>.json,
-                plus each morphology's best sweep configuration (sweeps/<id>.json) and its complexity count (the
+                plus each morphology's best sweep configuration (sweeps/<id>.json), its complexity count (the
                 user's "simplicity number", tools/simplicity.py on the row's "mechanism" record; lower = simpler,
-                shown beside the score, never part of the gap)                                       -> morphs()
+                shown beside the score, never part of the gap) and its alignment verdict (the latest entry for the id
+                in docs/alignment/ledger.jsonl: clean / watch / gamed, tools/alignment_ledger.py)   -> morphs()
   sweeps        concept bench, every configuration a morphology agent evaluated, with its time, its morphology's best
                 gap so far and the overall record so far (all morphologies)                         -> sweeps()
   cad           built-CAD outside judges, long form: one row per (judged design, requirement) with value, threshold and
@@ -295,7 +296,31 @@ def blank(mid):
                 n_configs=0, sweep_gap=None, sweep_t=None, sweep_reach=None, sweep_follow=None, sweep_inband14=None,
                 sweep_contact=None, t_last=None, verdict="", note="", duplicate_of="", doc="", source="",
                 complexity=None, complexity_items="", passive_trans=None, mechanism_confidence="",
-                frozen_gap=None, v_config="")
+                frozen_gap=None, v_config="",
+                alignment="", alignment_stage="", alignment_reasons="", alignment_t=None, alignment_claim=None, alignment_stale=False)
+
+
+ALIGN_LEDGER = os.path.join(REPO, "docs", "alignment", "ledger.jsonl")
+
+
+def alignment_latest():
+    """{id: latest entry} of docs/alignment/ledger.jsonl (append-only; a later line supersedes an earlier one at the same or a
+    later time) - the same reading as tools/alignment_ledger.py latest_by_id"""
+    best = {}
+    if not os.path.exists(ALIGN_LEDGER): return best
+    for i, line in enumerate(open(ALIGN_LEDGER)):
+        try: e = json.loads(line)
+        except Exception: continue
+        if not isinstance(e, dict) or not e.get("id"): continue
+        k = (str(e.get("time") or ""), i); mid = slug(e["id"])
+        if mid not in best or k >= best[mid][0]: best[mid] = (k, e)
+    return {mid: e for mid, (k, e) in best.items()}
+
+
+def claim_of(rw):
+    """the number a row claims, as tools/alignment_ledger.py claim_of reads it: a CONFIRMED polish, else v_gap, else gap"""
+    if str(rw.get("polished_status") or "").upper().startswith("CONFIRMED") and num(rw.get("polished_gap")) is not None: return num(rw["polished_gap"])
+    return num(rw.get("v_gap")) if num(rw.get("v_gap")) is not None else num(rw.get("gap"))
 
 
 def merge(m, src):
@@ -317,6 +342,8 @@ COMPLEXITY = ("complexity", "complexity_items", "passive_trans", "mechanism_conf
 
 def morphs(S):
     by, mech, raw = {}, {}, {}                                         # raw: each row file as written (fields merge() drops)
+    try: AL = alignment_latest()
+    except Exception as e: AL = {}; warn(f"alignment ledger unreadable ({e}); alignment fields left blank")
     for e in as_list(load(os.path.join(CONCEPTS, "catalogue.json")), "morphologies", "items"):
         if isinstance(e, dict) and e.get("id"):
             mid = slug(e["id"]); by[mid] = merge(by.get(mid) or blank(mid), dict(e, id=mid))
@@ -334,7 +361,7 @@ def morphs(S):
         mid = slug(r.get("id") or os.path.splitext(os.path.basename(p))[0])
         if isinstance(r.get("mechanism"), dict): mech[mid] = r["mechanism"]
         raw[mid] = r
-        by[mid] = merge(by.get(mid) or blank(mid), {k: v for k, v in dict(r, id=mid).items() if k not in COMPLEXITY})
+        by[mid] = merge(by.get(mid) or blank(mid), {k: v for k, v in dict(r, id=mid).items() if k not in COMPLEXITY and not k.startswith("alignment")})
         if not norm_time(by[mid].get("t_screened")) and r.get("inband14") is not None: by[mid]["t_screened"] = file_time(p)
     per = {}
     for s in S: per.setdefault(s["id"], []).append(s)
@@ -388,6 +415,12 @@ def morphs(S):
                          sweep_inband14=b["inband14"], sweep_contact=b["contact"])
             m["t_last"] = max([x for x in [m["t_ideated"], m["t_screened"]] + [s["t"] for s in sw] if x] or [None]) if (sw or m["t_screened"] or m["t_ideated"]) else None
             m.update(complexity_of(mid, mech.get(mid)))
+            e = AL.get(mid)                     # the alignment auditor's latest verdict (docs/ALIGNMENT.md); empty = never audited
+            if e:
+                c, rc = num(e.get("claim")), claim_of(rw)
+                m.update(alignment=str(e.get("verdict") or ""), alignment_stage=str(e.get("stage") or ""),
+                         alignment_reasons=" | ".join(str(x) for x in (e.get("reasons") or []))[:600], alignment_t=norm_time(e.get("time")),
+                         alignment_claim=c, alignment_stale=bool(rc is not None and (c is None or abs(rc - c) > 0.005)))
             if not m["lens"]: m["lens"] = str(m.get("source") or "")
             for k in ("name", "family", "lens", "verdict", "note", "duplicate_of", "doc"): m[k] = "" if m[k] is None else str(m[k])
             out.append({k: m[k] for k in blank(mid) if k != "source"})
@@ -715,7 +748,7 @@ def motion(out_dir):
 
 # ---------------------------------------------------------------- main
 DESC = {
-    "morphs": ("Concept bench morphologies", "One row per morphology in the swarm's catalogue: status, the agent's claimed bench numbers, the verifier's re-measured numbers (v_), its best sweep configuration so far, and the 3R baseline once (is_baseline), and the complexity count (the simplicity number, never part of the gap or score): complexity = points, lower = simpler, 0 = three pins on bearing pairs and three links; complexity_items = where the points come from; passive_trans = passive translations (more than 2 = not buildable); mechanism_confidence = counted or estimated. Built from docs/concepts/catalogue.json, families.json, rows/*.json (complexity: tools/simplicity.py on each row's mechanism record, docs/SIMPLICITY.md) and sweeps/*.json."),
+    "morphs": ("Concept bench morphologies", "One row per morphology in the swarm's catalogue: status, the agent's claimed bench numbers, the verifier's re-measured numbers (v_), its best sweep configuration so far, and the 3R baseline once (is_baseline), and the complexity count (the simplicity number, never part of the gap or score): complexity = points, lower = simpler, 0 = three pins on bearing pairs and three links; complexity_items = where the points come from; passive_trans = passive translations (more than 2 = not buildable); mechanism_confidence = counted or estimated. alignment = the alignment auditor's latest verdict (clean / watch / gamed; gamed = the number is not evidence of a better exo, so the design cannot be called verified, a winner or a leader; empty = never audited), alignment_stage = audit (skeptic pending) or skeptic (final), alignment_reasons = the reasons at that level, alignment_t = when, alignment_claim = the number it audited, alignment_stale = the row's claim moved since (a re-audit is due); from docs/alignment/ledger.jsonl (tools/alignment_ledger.py, docs/ALIGNMENT.md). Built from docs/concepts/catalogue.json, families.json, rows/*.json (complexity: tools/simplicity.py on each row's mechanism record, docs/SIMPLICITY.md) and sweeps/*.json."),
     "sweeps": ("Concept bench sweeps", "Every configuration a morphology agent evaluated on the concept bench, with its time, gap, its morphology's best gap so far (best_gap) and the record over all morphologies so far (record_gap); passed_over marks a configuration its agent measured before its claimed row and rejected (better than the claim), which counts for no best. Built from docs/concepts/sweeps/*.json; a morphology with more than 1500 configurations is thinned for the page (every running-best and record row, its 300 best gaps and an even sample of the rest), while best_gap, record_gap and n_configs come from the full set."),
     "cad": ("Built CAD judge results", "One row per judged design and requirement: value, threshold and pass from the outside judges, timed by the judge output (score files: the earliest of their commit, their file time and the first commit whose docs report the design; scorecard-only values: the scorecard's commit). Built from tools/judged_history.py, judge/scorecard.json files and judge/requirements.json."),
     "gpu_evals": ("GPU evaluator detail runs", "Every GPU band-evaluator detail evaluation of a search candidate (in-band 14 mm, follow, workspace share, overhead follow). Time is the git commit that added the result file, not the run itself. Built from pipeline/conformal/gpu_client/band_eval_*.json via tools/judged_history.py --evals."),

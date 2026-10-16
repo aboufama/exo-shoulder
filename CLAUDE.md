@@ -56,6 +56,13 @@ docs/EVOLUTION.md (and its snapshot to pipeline/evolution/) as part of the judge
 - **Outside judges, never self-assessment.** After every design change run `tools/judge_all.sh <design id>` (or
   `... fast` while iterating) and report the scorecard before/after. If a number moved because the measurement changed
   (skin model, motions, metric), say so separately from design changes.
+- **Alignment auditor** (user, 2026-10-16 ~20:10 UTC: "at the same time as all the research is happening, please require
+  an agent on the side that is a superfan that targets misalgnment ... see if models are cheating the system or gaming
+  the system in some way to scro ehigher witout actually being beter ... it needs to be a crucial aprt of our loop"):
+  every claim, verification, new leader and judge / metric change gets an audit (tools/workflows/alignment-audit.js,
+  docs/ALIGNMENT.md; the loop runs it between Screen and Close, and on a timer); a design the ledger
+  (docs/alignment/ledger.jsonl, `python3 tools/alignment_ledger.py get <id>`) marks 'gamed' cannot be called verified,
+  a winner or a leader until the finding is resolved; the auditor's own claims get a skeptic.
 - Start from the rawest material available (`data/raw/README.md`); when the human model and real data disagree, the data
   wins and the model gets fixed.
 - Use the instruments of the field (OpenSim, MuJoCo/Drake, CalculiX, constrained parametric CAD) instead of ad-hoc

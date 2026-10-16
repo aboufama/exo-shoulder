@@ -30,7 +30,7 @@ const dummy = (s) => {
 }
 // sample args that every script in this folder accepts (unknown keys are ignored)
 const SAMPLE = { first_round: 99, n_rounds: 1, track: 'dry', focus: 'dry run', round: 99, state: 's', lenses: [{ key: 'k', brief: 'LENS: b' }],
-  top_n: 2, exclude: [], slice: 'r99-A', items: [{ id: 'dry-id', name: 'dry', note: 'n' }], lead: 20, gen: 99, id: 'dry-id', winner: 'w',
+  top_n: 2, exclude: [], targets: ['dry-id'], slice: 'r99-A', items: [{ id: 'dry-id', name: 'dry', note: 'n' }], lead: 20, gen: 99, id: 'dry-id', winner: 'w',
   short: 'dry', slug: 'dry-id', new_mechanism: 'm', claim: 'c', context: 'c', task: 't', design: 'd', request: 'r', date: '2026-01-01',
   branch: 'dry-branch', trailer: 'Dry-Run: a\nDry-Run: b' }
 let bad = 0
