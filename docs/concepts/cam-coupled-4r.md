@@ -60,6 +60,52 @@ Row: `docs/concepts/rows/cam-coupled-4r.json`.
   - The pin is inside the cut arc.
   - The root nearest the dwell configuration is taken. Dense K2 drops any clip frame where that choice switches roots.
 
-## Results
+## Results (Bench(60,160) fast unless stated)
 
-(filled in below as the sweeps land)
+### 1. Kinematics first: the slot law has no reach problem
+
+All numbers below are local kinematic scans: closure, cam transmission and singularity only, with no metal, skin or
+continuity check.
+
+| slot | root / taken share (ws) | overhead (elev >= 140) | slot arc |
+|---|---|---|---|
+| plane fit to park4's dwell pins, one J3-dyad branch (the spec's IK) | 0.12-0.36 | - | 38-280 deg |
+| same, both branches (the 4-bar circuit) | 0.27-0.72 | - | 120-350 deg |
+| random slots, both branches (731 configurations) | **1.00** | **1.00** | 340 deg |
+| eccentric J1 groove (n = J1 tilted by ecc <= 15 deg, beta 18-27 deg) | 0.99 | 0.92 | 225 deg |
+
+- **Branches.** Fixing the J3-dyad branch (the spec's single-branch IK) loses 60-80 % of the roots. The 4-bar
+  (J1, J2, J3, J4) crosses between the two branches at its dead points, where J1 reverses. The actuated map (J1 with
+  J2 slaved, J3, J4) is not singular there; the model checks that directly.
+- **The plane fit.** The dwell pins of park4 (link 3 humerus-fixed) are a 2-D cloud: plane-fit RMS 1.7-15 deg. One
+  slot cannot reproduce the free 4th. It can only hand each pose ONE configuration on the circuit.
+- **The full-ring slot.** Any slot with a 260-350 deg cut covers almost every pose kinematically, but it is a ring
+  around J1 that runs over the neck and torso. The K3 march finds no skin window there, so the one-radius plate goes
+  to the 400 mm fallback and every part stacked on it follows (first coarse sweep: 320 configurations, best 126.87,
+  every top configuration dishonest).
+- **The eccentric J1 groove.** This version keeps the ring compact: 150-195 mm of groove 14 mm wide around hub 1, an
+  MR63 roller on a tail of link 2 that lies along link 1.
+
+### 2. Metal: where the band is lost (best coarse configuration, gap 93.63, honest)
+
+The red team (`redteam` mode) on this configuration found:
+
+- **Fold / K2.** reach 0.7375 and follow 0.917. Of the 47 poses not taken, 43 are lost to the fold or to K2 (no root
+  of the mode, or the dwell-nearest root switching along a clip) and 4 to part collisions.
+- **In-band 14 is 0.16.** By part: hub 1 0.99, neck 0.76, hub 4 0.56, hub 3 0.17, hub 2 0, slot plate 0, link 1 0,
+  tail 0, link 2 0.04, link 3 0.01.
+- **The groove plate rides the bunched deltoid.** The S-fixed ring around J1 (beta 27.5 deg about an axis 4.3 deg off
+  J1) must clear the highest skin it passes in ANY pose. With the arm overhead, the deltoid bunches against the
+  acromion under it, so the plate's one radius is 97 mm against hub 1's 52 mm. Link 1 (a full level over the plate,
+  103.6), the tail (107.6, over link 1) and hub 2 all stack on top, about 30 mm above the skin in rest poses.
+- **Hubs 2 and 3 roam.** Hub 2 (level 103.6) is set by the elev 165 / axial -90 workspace poses. Hub 3 (115) is set by
+  comb hair and across-body poses. With the slot fixing the spare, J3 is no longer humerus-fixed (as in park4's
+  dwell): it slides around the a3-cone of J4. Its flat hub therefore clears the highest skin of all those places.
+- **Cam health is fine everywhere taken.** Transmission cos >= 0.94, cross-slot travel >= 21 mm/rad of J2, the
+  actuated map >= 11 deg from singular, roller pin 10 mm long.
+
+Kit note (measured): `over` did not keep the tail clear of link 1, or link 1 clear of the groove plate. K6 flagged
+68 % and 30 % of the closing poses. The tail samples 14-15 mm from J2 stayed at 109.5 mm against link 1's 109-112.
+The model now lifts both explicitly with ramps: the tail one full level over link 1, and link 1 one level over the
+plate at the fixed distance band from J1 where it crosses the ring. This is conservative: K6 itself never missed a
+collision.
