@@ -1,0 +1,655 @@
+{
+ "design": "l1_minarc-bdp",
+ "overhead_peak_neighbourhood": {
+  "centre": [
+   30.0,
+   150.0,
+   -60.0,
+   12.0,
+   0.0
+  ],
+  "poses": [
+   {
+    "pose": [
+     15.0,
+     135.0,
+     -90.0
+    ],
+    "closes": true,
+    "state": 0,
+    "lowest_part": "J1 lower plate keep-out (O20 x 3, link 1",
+    "lowest_mm": 1.517,
+    "hub2_mm": {
+     "J2 upper boss + cap keep-out (O20, F+3.15..F+12.25, link 2)": 4.9,
+     "J2 stop dowel (ISO 8734 O3 m6 hardened, r 7.75 mm, F+0.5..F+6.15, pressed in the J2 upper boss)": 6.288,
+     "J2 lower plate keep-out (O20 x 3, link 1b) with the J2 stop slot (r 7.75 mm, 3.1 wide, 125.8 deg of travel + the dowel; its ends = the stops)": 2.383
+    },
+    "under_1mm": []
+   },
+   {
+    "pose": [
+     15.0,
+     135.0,
+     -60.0
+    ],
+    "closes": true,
+    "state": 0,
+    "lowest_part": "K lower plate keep-out (O20 x 3, link 1a",
+    "lowest_mm": 0.405,
+    "hub2_mm": {
+     "J2 upper boss + cap keep-out (O20, F+3.15..F+12.25, link 2)": 3.869,
+     "J2 stop dowel (ISO 8734 O3 m6 hardened, r 7.75 mm, F+0.5..F+6.15, pressed in the J2 upper boss)": 8.36,
+     "J2 lower plate keep-out (O20 x 3, link 1b) with the J2 stop slot (r 7.75 mm, 3.1 wide, 125.8 deg of travel + the dowel; its ends = the stops)": 1.981
+    },
+    "under_1mm": [
+     "K lower plate keep-out (O20 x 3, link 1a"
+    ]
+   },
+   {
+    "pose": [
+     15.0,
+     135.0,
+     -30.0
+    ],
+    "closes": false
+   },
+   {
+    "pose": [
+     15.0,
+     150.0,
+     -90.0
+    ],
+    "closes": true,
+    "state": 0,
+    "lowest_part": "J1 lower plate keep-out (O20 x 3, link 1",
+    "lowest_mm": 0.656,
+    "hub2_mm": {
+     "J2 upper boss + cap keep-out (O20, F+3.15..F+12.25, link 2)": 4.462,
+     "J2 stop dowel (ISO 8734 O3 m6 hardened, r 7.75 mm, F+0.5..F+6.15, pressed in the J2 upper boss)": 6.388,
+     "J2 lower plate keep-out (O20 x 3, link 1b) with the J2 stop slot (r 7.75 mm, 3.1 wide, 125.8 deg of travel + the dowel; its ends = the stops)": 2.007
+    },
+    "under_1mm": [
+     "J1 lower plate keep-out (O20 x 3, link 1"
+    ]
+   },
+   {
+    "pose": [
+     15.0,
+     150.0,
+     -60.0
+    ],
+    "closes": true,
+    "state": 0,
+    "lowest_part": "K upper boss + clock-spring cap keep-out",
+    "lowest_mm": -6.095,
+    "hub2_mm": {
+     "J2 upper boss + cap keep-out (O20, F+3.15..F+12.25, link 2)": 5.126,
+     "J2 stop dowel (ISO 8734 O3 m6 hardened, r 7.75 mm, F+0.5..F+6.15, pressed in the J2 upper boss)": 9.221,
+     "J2 lower plate keep-out (O20 x 3, link 1b) with the J2 stop slot (r 7.75 mm, 3.1 wide, 125.8 deg of travel + the dowel; its ends = the stops)": 3.813
+    },
+    "under_1mm": [
+     "J1 lower plate keep-out (O20 x 3, link 1",
+     "K lower plate keep-out (O20 x 3, link 1a",
+     "K stop dowel (ISO 8734 O3 m6 hardened, r",
+     "K upper boss + clock-spring cap keep-out"
+    ]
+   },
+   {
+    "pose": [
+     15.0,
+     150.0,
+     -30.0
+    ],
+    "closes": false
+   },
+   {
+    "pose": [
+     15.0,
+     165.0,
+     -90.0
+    ],
+    "closes": true,
+    "state": 0,
+    "lowest_part": "J1 lower plate keep-out (O20 x 3, link 1",
+    "lowest_mm": -0.197,
+    "hub2_mm": {
+     "J2 upper boss + cap keep-out (O20, F+3.15..F+12.25, link 2)": 3.921,
+     "J2 stop dowel (ISO 8734 O3 m6 hardened, r 7.75 mm, F+0.5..F+6.15, pressed in the J2 upper boss)": 6.589,
+     "J2 lower plate keep-out (O20 x 3, link 1b) with the J2 stop slot (r 7.75 mm, 3.1 wide, 125.8 deg of travel + the dowel; its ends = the stops)": 1.705
+    },
+    "under_1mm": [
+     "J1 lower plate keep-out (O20 x 3, link 1"
+    ]
+   },
+   {
+    "pose": [
+     15.0,
+     165.0,
+     -60.0
+    ],
+    "closes": false
+   },
+   {
+    "pose": [
+     15.0,
+     165.0,
+     -30.0
+    ],
+    "closes": false
+   },
+   {
+    "pose": [
+     30.0,
+     135.0,
+     -90.0
+    ],
+    "closes": true,
+    "state": 0,
+    "lowest_part": "J1 lower plate keep-out (O20 x 3, link 1",
+    "lowest_mm": 2.367,
+    "hub2_mm": {
+     "J2 upper boss + cap keep-out (O20, F+3.15..F+12.25, link 2)": 10.068,
+     "J2 stop dowel (ISO 8734 O3 m6 hardened, r 7.75 mm, F+0.5..F+6.15, pressed in the J2 upper boss)": 9.587,
+     "J2 lower plate keep-out (O20 x 3, link 1b) with the J2 stop slot (r 7.75 mm, 3.1 wide, 125.8 deg of travel + the dowel; its ends = the stops)": 7.141
+    },
+    "under_1mm": []
+   },
+   {
+    "pose": [
+     30.0,
+     135.0,
+     -60.0
+    ],
+    "closes": true,
+    "state": 0,
+    "lowest_part": "J1 lower plate keep-out (O20 x 3, link 1",
+    "lowest_mm": 1.747,
+    "hub2_mm": {
+     "J2 upper boss + cap keep-out (O20, F+3.15..F+12.25, link 2)": 2.46,
+     "J2 stop dowel (ISO 8734 O3 m6 hardened, r 7.75 mm, F+0.5..F+6.15, pressed in the J2 upper boss)": 6.529,
+     "J2 lower plate keep-out (O20 x 3, link 1b) with the J2 stop slot (r 7.75 mm, 3.1 wide, 125.8 deg of travel + the dowel; its ends = the stops)": 1.811
+    },
+    "under_1mm": []
+   },
+   {
+    "pose": [
+     30.0,
+     135.0,
+     -30.0
+    ],
+    "closes": false
+   },
+   {
+    "pose": [
+     30.0,
+     150.0,
+     -90.0
+    ],
+    "closes": true,
+    "state": 0,
+    "lowest_part": "J1 lower plate keep-out (O20 x 3, link 1",
+    "lowest_mm": 1.523,
+    "hub2_mm": {
+     "J2 upper boss + cap keep-out (O20, F+3.15..F+12.25, link 2)": 9.809,
+     "J2 stop dowel (ISO 8734 O3 m6 hardened, r 7.75 mm, F+0.5..F+6.15, pressed in the J2 upper boss)": 9.595,
+     "J2 lower plate keep-out (O20 x 3, link 1b) with the J2 stop slot (r 7.75 mm, 3.1 wide, 125.8 deg of travel + the dowel; its ends = the stops)": 6.891
+    },
+    "under_1mm": []
+   },
+   {
+    "pose": [
+     30.0,
+     150.0,
+     -60.0
+    ],
+    "closes": true,
+    "state": 0,
+    "lowest_part": "J2 upper boss + cap keep-out (O20, F+3.1",
+    "lowest_mm": 0.016,
+    "hub2_mm": {
+     "J2 upper boss + cap keep-out (O20, F+3.15..F+12.25, link 2)": 0.016,
+     "J2 stop dowel (ISO 8734 O3 m6 hardened, r 7.75 mm, F+0.5..F+6.15, pressed in the J2 upper boss)": 6.48,
+     "J2 lower plate keep-out (O20 x 3, link 1b) with the J2 stop slot (r 7.75 mm, 3.1 wide, 125.8 deg of travel + the dowel; its ends = the stops)": 0.209
+    },
+    "under_1mm": [
+     "J1 lower plate keep-out (O20 x 3, link 1",
+     "J2 lower plate keep-out (O20 x 3, link 1",
+     "J2 upper boss + cap keep-out (O20, F+3.1"
+    ]
+   },
+   {
+    "pose": [
+     30.0,
+     150.0,
+     -30.0
+    ],
+    "closes": false
+   },
+   {
+    "pose": [
+     30.0,
+     165.0,
+     -90.0
+    ],
+    "closes": true,
+    "state": 0,
+    "lowest_part": "J1 lower plate keep-out (O20 x 3, link 1",
+    "lowest_mm": 0.593,
+    "hub2_mm": {
+     "J2 upper boss + cap keep-out (O20, F+3.15..F+12.25, link 2)": 9.598,
+     "J2 stop dowel (ISO 8734 O3 m6 hardened, r 7.75 mm, F+0.5..F+6.15, pressed in the J2 upper boss)": 9.626,
+     "J2 lower plate keep-out (O20 x 3, link 1b) with the J2 stop slot (r 7.75 mm, 3.1 wide, 125.8 deg of travel + the dowel; its ends = the stops)": 6.703
+    },
+    "under_1mm": [
+     "J1 lower plate keep-out (O20 x 3, link 1"
+    ]
+   },
+   {
+    "pose": [
+     30.0,
+     165.0,
+     -60.0
+    ],
+    "closes": true,
+    "state": 0,
+    "lowest_part": "K upper boss + clock-spring cap keep-out",
+    "lowest_mm": -6.477,
+    "hub2_mm": {
+     "J2 upper boss + cap keep-out (O20, F+3.15..F+12.25, link 2)": -3.076,
+     "J2 stop dowel (ISO 8734 O3 m6 hardened, r 7.75 mm, F+0.5..F+6.15, pressed in the J2 upper boss)": 6.396,
+     "J2 lower plate keep-out (O20 x 3, link 1b) with the J2 stop slot (r 7.75 mm, 3.1 wide, 125.8 deg of travel + the dowel; its ends = the stops)": -1.307
+    },
+    "under_1mm": [
+     "J1 lower plate keep-out (O20 x 3, link 1",
+     "J2 lower plate keep-out (O20 x 3, link 1",
+     "J2 upper boss + cap keep-out (O20, F+3.1",
+     "K lower plate keep-out (O20 x 3, link 1a",
+     "K stop dowel (ISO 8734 O3 m6 hardened, r",
+     "K upper boss + clock-spring cap keep-out"
+    ]
+   },
+   {
+    "pose": [
+     30.0,
+     165.0,
+     -30.0
+    ],
+    "closes": false
+   },
+   {
+    "pose": [
+     45.0,
+     135.0,
+     -90.0
+    ],
+    "closes": true,
+    "state": 0,
+    "lowest_part": "link 2 strap keep-out (8 x 3 mm Ti, fitt",
+    "lowest_mm": 3.03,
+    "hub2_mm": {
+     "J2 upper boss + cap keep-out (O20, F+3.15..F+12.25, link 2)": 12.362,
+     "J2 stop dowel (ISO 8734 O3 m6 hardened, r 7.75 mm, F+0.5..F+6.15, pressed in the J2 upper boss)": 9.793,
+     "J2 lower plate keep-out (O20 x 3, link 1b) with the J2 stop slot (r 7.75 mm, 3.1 wide, 125.8 deg of travel + the dowel; its ends = the stops)": 9.214
+    },
+    "under_1mm": []
+   },
+   {
+    "pose": [
+     45.0,
+     135.0,
+     -60.0
+    ],
+    "closes": true,
+    "state": 0,
+    "lowest_part": "J1 lower plate keep-out (O20 x 3, link 1",
+    "lowest_mm": 2.377,
+    "hub2_mm": {
+     "J2 upper boss + cap keep-out (O20, F+3.15..F+12.25, link 2)": 7.273,
+     "J2 stop dowel (ISO 8734 O3 m6 hardened, r 7.75 mm, F+0.5..F+6.15, pressed in the J2 upper boss)": 9.191,
+     "J2 lower plate keep-out (O20 x 3, link 1b) with the J2 stop slot (r 7.75 mm, 3.1 wide, 125.8 deg of travel + the dowel; its ends = the stops)": 4.615
+    },
+    "under_1mm": []
+   },
+   {
+    "pose": [
+     45.0,
+     135.0,
+     -30.0
+    ],
+    "closes": false
+   },
+   {
+    "pose": [
+     45.0,
+     150.0,
+     -90.0
+    ],
+    "closes": true,
+    "state": 0,
+    "lowest_part": "J1 lower plate keep-out (O20 x 3, link 1",
+    "lowest_mm": 2.303,
+    "hub2_mm": {
+     "J2 upper boss + cap keep-out (O20, F+3.15..F+12.25, link 2)": 12.143,
+     "J2 stop dowel (ISO 8734 O3 m6 hardened, r 7.75 mm, F+0.5..F+6.15, pressed in the J2 upper boss)": 9.594,
+     "J2 lower plate keep-out (O20 x 3, link 1b) with the J2 stop slot (r 7.75 mm, 3.1 wide, 125.8 deg of travel + the dowel; its ends = the stops)": 8.996
+    },
+    "under_1mm": []
+   },
+   {
+    "pose": [
+     45.0,
+     150.0,
+     -60.0
+    ],
+    "closes": true,
+    "state": 0,
+    "lowest_part": "J1 lower plate keep-out (O20 x 3, link 1",
+    "lowest_mm": 1.329,
+    "hub2_mm": {
+     "J2 upper boss + cap keep-out (O20, F+3.15..F+12.25, link 2)": 5.484,
+     "J2 stop dowel (ISO 8734 O3 m6 hardened, r 7.75 mm, F+0.5..F+6.15, pressed in the J2 upper boss)": 8.384,
+     "J2 lower plate keep-out (O20 x 3, link 1b) with the J2 stop slot (r 7.75 mm, 3.1 wide, 125.8 deg of travel + the dowel; its ends = the stops)": 3.059
+    },
+    "under_1mm": []
+   },
+   {
+    "pose": [
+     45.0,
+     150.0,
+     -30.0
+    ],
+    "closes": false
+   },
+   {
+    "pose": [
+     45.0,
+     165.0,
+     -90.0
+    ],
+    "closes": true,
+    "state": 0,
+    "lowest_part": "J1 lower plate keep-out (O20 x 3, link 1",
+    "lowest_mm": 1.408,
+    "hub2_mm": {
+     "J2 upper boss + cap keep-out (O20, F+3.15..F+12.25, link 2)": 11.91,
+     "J2 stop dowel (ISO 8734 O3 m6 hardened, r 7.75 mm, F+0.5..F+6.15, pressed in the J2 upper boss)": 9.393,
+     "J2 lower plate keep-out (O20 x 3, link 1b) with the J2 stop slot (r 7.75 mm, 3.1 wide, 125.8 deg of travel + the dowel; its ends = the stops)": 8.768
+    },
+    "under_1mm": []
+   },
+   {
+    "pose": [
+     45.0,
+     165.0,
+     -60.0
+    ],
+    "closes": true,
+    "state": 0,
+    "lowest_part": "J1 lower plate keep-out (O20 x 3, link 1",
+    "lowest_mm": 0.129,
+    "hub2_mm": {
+     "J2 upper boss + cap keep-out (O20, F+3.15..F+12.25, link 2)": 4.323,
+     "J2 stop dowel (ISO 8734 O3 m6 hardened, r 7.75 mm, F+0.5..F+6.15, pressed in the J2 upper boss)": 7.59,
+     "J2 lower plate keep-out (O20 x 3, link 1b) with the J2 stop slot (r 7.75 mm, 3.1 wide, 125.8 deg of travel + the dowel; its ends = the stops)": 1.96
+    },
+    "under_1mm": [
+     "J1 lower plate keep-out (O20 x 3, link 1"
+    ]
+   },
+   {
+    "pose": [
+     45.0,
+     165.0,
+     -30.0
+    ],
+    "closes": false
+   }
+  ]
+ },
+ "raise_overhead_clip": {
+  "J2 upper boss + cap keep-out (O20, F+3.15..F+12.": {
+   "min_mm": 0.016,
+   "frame": 78,
+   "pose": [
+    30.0,
+    150.0,
+    -60.0
+   ]
+  },
+  "J2 lower plate keep-out (O20 x 3, link 1b) with ": {
+   "min_mm": 0.209,
+   "frame": 78,
+   "pose": [
+    30.0,
+    150.0,
+    -60.0
+   ]
+  },
+  "J1 lower plate keep-out (O20 x 3, link 1a)": {
+   "min_mm": 0.743,
+   "frame": 78,
+   "pose": [
+    30.0,
+    150.0,
+    -60.0
+   ]
+  },
+  "K lower plate keep-out (O20 x 3, link 1a) with t": {
+   "min_mm": 1.009,
+   "frame": 78,
+   "pose": [
+    30.0,
+    150.0,
+    -60.0
+   ]
+  },
+  "K upper boss + clock-spring cap keep-out (O20, F": {
+   "min_mm": 3.062,
+   "frame": 78,
+   "pose": [
+    30.0,
+    150.0,
+    -60.0
+   ]
+  },
+  "K stop dowel (ISO 8734 O3 m6 hardened, r 7.75 mm": {
+   "min_mm": 3.148,
+   "frame": 10,
+   "pose": [
+    30.0,
+    5.7,
+    -30.5
+   ]
+  },
+  "E strap keep-out (8 x 3 mm Ti, fitted underside,": {
+   "min_mm": 3.487,
+   "frame": 0,
+   "pose": [
+    30.0,
+    3.0,
+    -30.0
+   ]
+  },
+  "pad mount to BOTTOM (proxy) (2.38 mm slab at the": {
+   "min_mm": 3.845,
+   "frame": 0,
+   "pose": [
+    30.0,
+    3.0,
+    -30.0
+   ]
+  },
+  "J1 upper boss + cap keep-out (O20, F+3.15..F+12.": {
+   "min_mm": 3.847,
+   "frame": 78,
+   "pose": [
+    30.0,
+    150.0,
+    -60.0
+   ]
+  },
+  "J3 lower plate keep-out (O20 x 3, member 3)": {
+   "min_mm": 4.44,
+   "frame": 0,
+   "pose": [
+    30.0,
+    3.0,
+    -30.0
+   ]
+  },
+  "E boss = pin a lower plate (O12 x 2.38 mm, tr..t": {
+   "min_mm": 4.478,
+   "frame": 0,
+   "pose": [
+    30.0,
+    3.0,
+    -30.0
+   ]
+  },
+  "arm pad = pin b lower plate (O12 x 2.38 mm, tr..": {
+   "min_mm": 4.532,
+   "frame": 0,
+   "pose": [
+    30.0,
+    3.0,
+    -30.0
+   ]
+  },
+  "link 1a strap keep-out (8 x 3 mm Ti, fitted unde": {
+   "min_mm": 4.966,
+   "frame": 78,
+   "pose": [
+    30.0,
+    150.0,
+    -60.0
+   ]
+  },
+  "link 2 strap keep-out (8 x 3 mm Ti, fitted under": {
+   "min_mm": 5.178,
+   "frame": 0,
+   "pose": [
+    30.0,
+    3.0,
+    -30.0
+   ]
+  },
+  "link 1b strap keep-out (8 x 3 mm Ti, fitted unde": {
+   "min_mm": 5.644,
+   "frame": 25,
+   "pose": [
+    30.0,
+    31.2,
+    -35.8
+   ]
+  },
+  "J2 stop dowel (ISO 8734 O3 m6 hardened, r 7.75 m": {
+   "min_mm": 6.48,
+   "frame": 78,
+   "pose": [
+    30.0,
+    150.0,
+    -60.0
+   ]
+  },
+  "knee link keep-out (flat Ti bar 42.4 x 10 x 2.38": {
+   "min_mm": 6.642,
+   "frame": 0,
+   "pose": [
+    30.0,
+    3.0,
+    -30.0
+   ]
+  },
+  "J3 upper boss + cap keep-out (O20, F+3.15..F+12.": {
+   "min_mm": 7.47,
+   "frame": 0,
+   "pose": [
+    30.0,
+    3.0,
+    -30.0
+   ]
+  },
+  "pin a retainer keep-out (O8 x 0.9 mm: DIN 6799 R": {
+   "min_mm": 10.475,
+   "frame": 0,
+   "pose": [
+    30.0,
+    3.0,
+    -30.0
+   ]
+  },
+  "pin b retainer keep-out (O8 x 0.9 mm: DIN 6799 R": {
+   "min_mm": 10.523,
+   "frame": 0,
+   "pose": [
+    30.0,
+    3.0,
+    -30.0
+   ]
+  }
+ },
+ "hub2_lift_to_clear_1mm": 4.076,
+ "stops_in_slot": {
+  "frames_and_poses": 2366,
+  "K_range_deg": [
+   -34.285,
+   0.0
+  ],
+  "J2_range_deg": [
+   -24.979,
+   100.73
+  ],
+  "outside": {
+   "K": 0,
+   "J2": 0
+  },
+  "K_slot": [
+   -34.47,
+   0.0
+  ],
+  "J2_slot": [
+   -24.979,
+   100.843
+  ]
+ },
+ "dowel_check": {
+  "O2": {
+   "shear_MPa": 245.0,
+   "bending_MPa": 1373.0,
+   "bearing_on_Ti_MPa": 154.0,
+   "SF_bending_vs_1500MPa_yield": 1.09,
+   "SF_shear_vs_0p58x1500": 3.55
+  },
+  "O3": {
+   "shear_MPa": 109.0,
+   "bending_MPa": 407.0,
+   "bearing_on_Ti_MPa": 103.0,
+   "SF_bending_vs_1500MPa_yield": 3.69,
+   "SF_shear_vs_0p58x1500": 7.99
+  },
+  "bearing_pair_static": {
+   "radial_N": 770.0,
+   "per_bearing_N": 385.0,
+   "C0_N_each": 280.0,
+   "s0": 0.73,
+   "note": "MR117 C0 ~0.28 kN (docs/HARDWARE.md); s0 < 1 = raceway brinelling at the jam push"
+  },
+  "load": {
+   "F_N": 770.0,
+   "r_mm": 7.75,
+   "joint_torque_Nm": 5.97,
+   "lever_mm": 1.4
+  }
+ },
+ "held": {
+  "Raise overhead": {},
+  "Drink from a cup": {},
+  "Comb hair": {},
+  "Reach a high shelf": {},
+  "Wash opposite shoulder": {},
+  "Reach back pocket": {},
+  "Wave": {},
+  "Walking arm swing": {}
+ },
+ "secs": 624.1
+}
