@@ -88,3 +88,7 @@ Scripts: scratchpad `r3judge/` (knee.py, sph0.py, c2c.py, knuckle continuity) an
    model on the exact bench too.
 4. The exact numbers in the table above come back from the farm (`.cache/r3judge/out_*.json`). Append them to
    docs/concepts/events.jsonl.
+
+## Round 4
+
+The round-4 judge (2026-10-16 ~05:45 UTC) is in docs/concepts/round4_ideation.md.
