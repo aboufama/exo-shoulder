@@ -1883,7 +1883,7 @@
   "name": "Closure-set arc knee: hub 3 on a passive trunnion yoke whose tilt changes the J2-J3 arc, set by the radial closure through the wearer's GH (fold lever, rotations only)",
   "family": "offset axes + closure-set passive orientation DOF",
   "lens": "round3:self-alignment / loop closure through cheap rotational passive joints",
-  "status": "ideated",
+  "status": "screened",
   "t_ideated": "2026-10-16T01:35:52Z",
   "source": "round 3 judge",
   "description": "A skin-normal 3R (snh / osn seats) in which hub 3's housing sits in a fork at the end of link 2 on two trunnion pins, axis dK = u2 x u3 through the hub centre. Tilting the housing by psi changes the J2-J3 arc a2, so the fold window [|a1 - a2| + 10, a1 + a2 - 10] breathes with the pose. psi is set by the radial closure (the one direction the planar cuff pins cannot take); the in-plane drift goes to a pinned cuff link as in skin-normal-3r-pin-knee. Rest: hub level in its fork. Overhead / across the body the closure tilts it (+-31 deg), lifting the rim ~5 mm on one side.",

@@ -82,4 +82,44 @@ Yoke = hub-3 housing (O20 x 12.25), fork cheeks 3 x 8 at +-(HUB_R + 0.25..3.25) 
 | coarse farm sweep, 253 knee configs (model v1: no flank rule, no cam) | best 76.84 | 0.563 | 0.817 | 0.644 | 0.298 | 0.041 | 45 no-root, 7 fold; 116 of 256 structurally invalid (pin b proximal / trunnion outside the housing) |
 | best kin cam, full model, earm_over | 999 (79.44 before the pin-b rule) | 0.688 | 0.783 | 0.550 | 0.328 | 0.066 | knee refit to the real hub height (dh 20.6) brings 27 fold back; hub 2 lifted to 31.8 mm (0 % in band) by the 24 mm J2 line offset; pin b 10 mm proximal of hub 3 |
 
-(CMA-ES, convergence gate, best configuration, frozen exact check and red team: below.)
+| CMA-ES local stream L (model v3: flank rule + cam, earm_over), 81 tries | **68.59** (k322) | 0.663 | 0.983 | 0.487 | 0.276 | 0.035 | o2 30 (cap), chi2 -72, psi_rest 19, b2 0.11, b3 0.17, lE 40 (cap), lc 37, beta0 114, dh 26.6 |
+
+**Convergence gate (stream L, 81 tries): NOT converged** - +3.39 score points over the second half, +2.28 over the last
+third, top-5 spread 2.06. Two parameters sit on their caps (o2 30 mm, lE 40 mm): the search wants a larger cam offset and
+a longer E arm, i.e. more of exactly what costs proximity. Farm streams A-C (3 seeds, 1200 s each) were queued at
+03:10 UTC behind ~110 jobs and write to `.cache/csak/cma{A,B,C}.json`; a v2-model cam sweep (no flank rule, so
+optimistic) is also queued (`.cache/csak/cam_res.json`).
+
+## Verdict (screened)
+
+The closure-set arc knee is a **real kinematic lever and a proximity loss**. Closed form first: with J1 on a GH ray
+the knee can only be moved by J2's line offset, and then it is a cam of the elbow q2; without that offset it is inert
+(the catalogue's 0.832 / 0.836 came from per-pose root picking across both flanks). With an explicit J2 offset in the
+fold plane and only rest-flank roots, the J2 fold disappears in the kinematics (0 of 220 poses vs the leader's 47,
+overhead 0.88 closable). But every degree of knee moves hub 3 ~1.4 mm across the arm (hK ~ 80 mm), the pin dyad has to
+absorb 70-90 mm of drift span over a curved arm, the fork ring pitches with link 2, and the cam offset lifts hub 2
+out of band. Best honest 68.59 vs 31.32 for the identical chain with the knee locked: **the knee costs ~37 gap points
+more than it buys.** Passive translations 0, so it would win ties - it is nowhere near a tie.
+
+**What would remove the measured limiter (next lever, not tried in the time box):** source the cam offset from a
+TILT of J2's axis about hub 2's own seat point (the hub stays on the skin; today the line is translated and the hub
+follows it off the shoulder), and pick seats whose drift direction dK x u3 lies along the humerus (a flat dyad stays in
+band along the arm, not around it). Upper bound on that lever: hub 2 back in band recovers at most its share of the
+samples; the dyad / fork proximity loss stays - it does not reach the control's 31.
+
+## Red team (own best)
+
+* **Flank jump (fixed, measured):** root picking without the flank rule reported 0.841 kin-ok at a cam that is really
+  0.377 - 122 poses take the other flank's root, reachable only through the closure fold. Built in as a rule.
+* **Knee height:** a kin scan at a nominal knee height is optimistic; refitting the trunnion into hub 3's real housing
+  (dh 8 -> 20-27 mm) brought 27 J2-fold poses back at the scan's best cam. Every reported number is refit.
+* **E arm vs fork:** on hub 3's upper member the E arm crosses the cheeks (73 of 220 poses jam); under the housing
+  the dyad stack lifts hub 3 out of band and the tilting fork ring still reaches it (32 jams); only over the cheek
+  tops (12 mm above the hub face) is it clean - the in-band cost is part of every number above.
+* **Pin b:** a pinned cuff whose pad sits proximal of hub 3 is not a cuff; configs with pin b < 20 mm distal score
+  500+ (graded, never valid).
+* **R10:** the knee is closure-set, so a radial GH translation moves it: at the bests 0.8-1.1 deg per mm (authority
+  54-76 mm/rad); 15 mm worst rigid GH translation = 12-17 deg of knee - a jam risk near the closure fold.
+* **Frozen Bench(110,360) exact** (lesson c): run started on the 77.92 shape (`frozen` mode,
+  `.cache/csak/frozen_L.json`), not finished inside the time box; the 68.59 shape is not frozen-checked. Near-touch and the
+  overhead split come with that run (`audit()`).
