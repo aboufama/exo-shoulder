@@ -20,7 +20,7 @@
  "v_inband14": null,
  "v_inband10": null,
  "v_gap": null,
- "n_configs": 6907,
+ "n_configs": 8717,
  "complexity": 45.25,
  "mechanism": {
   "active_dof": 3,
@@ -198,13 +198,13 @@
   "fold_margin": "kit rule as the lead (msub, m3e >= 5 deg of th in every taken state; physical q2 dowel stops)"
  },
  "gate": {
-  "gain_2nd_half": 2.31,
-  "gain_last_third": 1.59,
-  "top5_spread": 0.12,
-  "run": "CMA P1 (1233 evals); not converged - continuation P1c / P1d running; A1 / A2 / B / C converged at 12.70-15.06"
+  "gain_2nd_half": 0.17,
+  "gain_last_third": 0.17,
+  "top5_spread": 0.03,
+  "run": "P1 lineage (P1 + continuations P1c, P1d: 3043 tries, best 11.25 fast); A1 0.89/0.18/0.13, A2 0.35/0.20/0.03, B 0.60/0.24/0.00, C 0.06/0.06/0.16 - converged"
  },
  "doc": "docs/concepts/sidecar-roller-flank-knuckle-3r.md",
  "limiter": "The J2 fold, as in the whole knuckle family: 87 of 360 frozen workspace poses lost to fold (lead 86), overhead 8/28. The drive metal is the second cost: crank 0.856 and L2 0.74 / hub 3 0.60 in band. The cam pair itself no longer limits at the winner (dK_lim 56.2, ended by the law), but only because the lug points straight away from hub 2 (beta -175) and the arm wraps 130 deg around hub K (51.5 mm); at the proposer's beta -85 the horn pressure angle ends the flank after 8.2 deg of K.",
  "verdict": "Contender, self-measured: frozen exact Bench(110,360) 20.08 (score 92.70), near-touch 21.17, connected (flood fill) 20.08 full / 22.90 knn, vs the verified lead 22.82 / 25.63 and the rod sidecar 18.91 / 21.72 (self-measured). 3 active, 0 passive translations, complexity 45.25 (lead 49, rod sidecar 49). Needs the adversarial verifier.",
- "note": "Spherical cam pair synthesised per 0.25 deg of K (pressure angles both sides, force closure, cusp, contact on the lug, arm / roller clearances); the lug is built from the synthesised flank (spherical shell, 5-axis). Kill gate passed: flank >= 30 deg of K (only beta -110..-175), fast near-touch 11.73 <= 14. Progressive law (c) tried and rejected by every stream (cusp at the pitch point). 2 mm near-touch is worse than the lead (46.82 vs 44.08): the drive metal sits at 1-2 mm on 45 frozen poses. K slop from MR63 + pin play ~0.09 deg at the flank, ~0.6 deg through the lobe follower and crank pivot."
+ "note": "Spherical cam pair synthesised per 0.25 deg of K (pressure angles both sides, force closure, cusp, contact on the lug, arm / roller clearances); the lug is built from the synthesised flank (spherical shell, 5-axis). Kill gate passed: flank >= 30 deg of K (only beta -110..-175), fast near-touch 11.73 <= 14. Progressive law (c) tried and rejected by every stream (cusp at the pitch point). 2 mm near-touch is worse than the lead (46.82 vs 44.08): the drive metal sits at 1-2 mm on 45 frozen poses. K slop from MR63 + pin play ~0.09 deg at the flank, ~0.6 deg through the lobe follower and crank pivot. Fast-best P1d (11.25) worn frozen: 20.48 plain / 21.58 near-touch / 39.94 at 2 mm (fold 91 vs 87) - the 0.48 fast gain is fold tuned to the 160-pose sample, so the claim stays on P1 (20.08). Total tries 8717."
 }

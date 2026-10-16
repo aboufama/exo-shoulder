@@ -105,6 +105,9 @@ This file replaces the rod and the RSSR with the cam pair:
 | C | 905 | 15.06 | 0.06 / 0.06 / 0.16 (converged) |
 | P1 | 1233 | **11.73** | 2.31 / 1.59 / 0.12 (not converged: continued as P1c / P1d) |
 | P2 | 793 | 14.38 | 1.08 / 0.68 / 0.13 |
+| P1c (from P1, sigma 0.5 on half scales) | 881 | 11.73 | 0.00 / 0.00 / 0.24 |
+| P1d (same, seed 23) | 929 | 11.25 | 0.06 / 0.05 / 0.03 |
+| **P1 lineage (P1 + P1c + P1d)** | 3043 | **11.25** | **0.17 / 0.17 / 0.03 (converged)** |
 
 The progressive law does not pay. Every stream drove c to about 0 (P1 0.021, P2 -0.046). Near the pitch point, any
 crank acceleration bends the relative path into a cusp (c = 0.4 at the coarse best: cusp at K = 0).
@@ -143,6 +146,10 @@ Cam at the winner, per K step:
 Other numbers at the winner: crest 9.97 (limit 11.5). Arm clearance to hub K's skirt >= 1.58 (core metric). Roller
 clearance to hub K >= 2.47. Low arm to lug >= 14.6.
 
+The fast-best configuration is P1d (11.25). Worn frozen on Bench(110,360) exact it scores 20.48 plain, 21.58 near-touch
+and 39.94 at 2 mm, with fold losses of 91 against P1's 87. Its 0.48 fast gain is fold tuned to the 160-pose sample
+(round-3 lesson c), so the claim stays on P1.
+
 ## Red team (own)
 
 - **The pose that jams.** None jams inside the range: force closure holds to the end of the law (both n . v > 0). The
@@ -169,3 +176,37 @@ clearance to hub K >= 2.47. Low arm to lug >= 14.6.
 - **Lost poses.** Overhead: fast 2/12 taken (fold 7, slide 3); frozen 8/28 (fold 14, slide 3, contact 3). Across the
   body: 18/26 taken (fold 8). Behind the back: 21/24 taken (fold 3). Rest: 56/58 taken (fold 2). The fold walls are
   the lead's: the drive's metal moved the in-band and contact terms, not the fold.
+
+## What next
+
+- The verifier re-measures the P1 claim: frozen exact, held out, flood. The harness is the model's `frozen` / `flood`
+  modes, and the verifier should use its own copy.
+- **Merge with the rod sidecar's dyad.** sidecar-longdyad's frozen 18.91 came from the longer K dyad (bk2 39). P1 sits
+  at bk2 35.7. A roller drive on the rod sidecar's dyad and seats is the cheapest next cell. It is the same model with
+  chain free.
+- **Shorter arm.** The 130-deg wrap is forced by the pitch-point geometry, which needs the lug pointing away from hub 2.
+  A crank pivot placed on the far side of hub K (a pivot seat on link 1b past hub K) would put the roller's chord
+  through K's axis with a short straight arm. That needs a new pivot-seat parameter in the core (dR is fixed at hub
+  2's rim today).
+- The fold walls are the lead's (87 vs 86 frozen fold losses). This drive changes the metal term, not the fold. The
+  fold levers (a2 / bk1 + bk2 / J1 seat walk) stay open as in the round-8 plan.
+
+## New knowledge (predicts beyond this morphology)
+
+1. **A roller pushing a flank between two axes through GH is a spherical cam.** The roller centre's height along the
+   follower's axis moves by roughly (chord) x sin(angle between the axes) x (crank swing): ~10 mm here. A flat lug
+   loses the roller. The lug has to be a shell at the roller's radius from GH, and the flank a ruled cone.
+2. **Pressure-angle window for any two-rotor cam contact.** Let t be the angle between the two contact-point
+   velocities and a the ratio of their speeds. Both pressure angles stay <= 45 iff a lies in
+   [1 / (cos t + sin t), cos t + sin t]. The window is widest at t = 45 ([0.71, 1.41]) and shrinks to a = 1 at t = 0
+   and t = 90.
+   - If the contact slides outward along the driven lug, a falls as K opens and the horn pressure angle ends the
+     stroke. At the proposer's geometry that happens after 8 deg of K.
+   - The workable geometry puts the contact near the pitch point: t ~ 3 deg, the lug pointing away from the crank
+     pivot. That forces a long wrapped arm when the pivot sits on the other side of the driven hub.
+3. **Progressive laws do not work near a pitch point.** The relative velocity there is small, so any crank
+   acceleration turns into a tight curve of the relative path. That makes a cusp at the flank's nose (c = 0.4 cuts
+   at K = 0). Every CMA stream drove c to ~0.
+4. **The rodless swap is worth about the same as the rod.** Frozen 20.08 (roller) vs 18.91 (rod), at the same fold
+   losses. The roller version costs 3.75 complexity points less (no rod, no ball links) and is 1.2 gap points worse:
+   its metal runs closer at 2 mm, and its arm is longer.
