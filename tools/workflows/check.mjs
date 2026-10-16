@@ -3,7 +3,9 @@
 //                                                       (an async body with args / agent / parallel / ... in scope)
 //   node tools/workflows/check.mjs --dry [files...]    also RUN it with stub hooks (every agent returns a dummy object
 //                                                       built from its schema, child workflows return []) - catches
-//                                                       ReferenceErrors and bad args handling; spends nothing
+//                                                       ReferenceErrors and bad args handling; spends nothing. It also
+//                                                       runs each script WITHOUT args.branch / args.trailer and fails
+//                                                       it unless it refuses to start (no commits under an old session)
 // Default files: tools/workflows/*.js and tools/workflows/templates/*.js. (node --check alone does not catch a
 // top-level return / await mismatch the runtime would reject.)
 import fs from 'fs'
@@ -29,7 +31,8 @@ const dummy = (s) => {
 // sample args that every script in this folder accepts (unknown keys are ignored)
 const SAMPLE = { first_round: 99, n_rounds: 1, track: 'dry', focus: 'dry run', round: 99, state: 's', lenses: [{ key: 'k', brief: 'LENS: b' }],
   top_n: 2, exclude: [], slice: 'r99-A', items: [{ id: 'dry-id', name: 'dry', note: 'n' }], lead: 20, gen: 99, id: 'dry-id', winner: 'w',
-  short: 'dry', slug: 'dry-id', new_mechanism: 'm', claim: 'c', context: 'c', task: 't', design: 'd', request: 'r', date: '2026-01-01' }
+  short: 'dry', slug: 'dry-id', new_mechanism: 'm', claim: 'c', context: 'c', task: 't', design: 'd', request: 'r', date: '2026-01-01',
+  branch: 'dry-branch', trailer: 'Dry-Run: a\nDry-Run: b' }
 let bad = 0
 for (const f of files) {
   const src = fs.readFileSync(f, 'utf8')
@@ -46,6 +49,12 @@ for (const f of files) {
   try {
     await fn(SAMPLE, agent, parallel, pipeline, () => {}, () => {}, workflow, { total: null, spent: () => 0, remaining: () => Infinity })
     console.log(`dry ok (${n} agent calls)`, f)
-  } catch (e) { console.log('DRY FAIL', f, e.message); bad++ }
+  } catch (e) { console.log('DRY FAIL', f, e.message); bad++; continue }
+  const { branch, trailer, ...noSession } = SAMPLE
+  n = 0
+  const refused = await fn(noSession, agent, parallel, pipeline, () => {}, () => {}, workflow, { total: null, spent: () => 0, remaining: () => Infinity })
+    .then(() => false, (e) => /args\.branch and args\.trailer are required/.test(e.message) && n === 0)
+  if (refused) console.log('  refuses to start without branch / trailer: ok')
+  else { console.log('DRY FAIL (starts without args.branch / args.trailer: it would commit under another session)', f); bad++ }
 }
 process.exit(bad ? 1 : 0)

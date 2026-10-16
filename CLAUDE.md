@@ -200,3 +200,11 @@ docs/EVOLUTION.md (and its snapshot to pipeline/evolution/) as part of the judge
 **Start with docs/HANDOFF.md** (written for a reader with no context: what the project is, the score, the verified
 leaderboard, the built CADs, what is dead, the open questions for the user, what was running and how to relaunch it,
 the next steps), then **docs/OPERATIONS.md** (how to run the machinery: workflows, farm, watchdog, dashboards, git).
+
+Cold start, one read order (the line-3 list above with the state inserted after METHOD): this file -> docs/METHOD.md
+(Felix Rieseberg, *How to be more ambitious: A tutorial for humans with models*,
+https://felixrieseberg.com/how-to-be-more-ambitious-a-tutorial-for-humans-with-models/) -> docs/HANDOFF.md ->
+docs/OPERATIONS.md -> README.md -> REQUIREMENTS.md -> docs/PLAN.md -> docs/FINDINGS.md -> docs/concepts/ROUNDS.md.
+The work lives on branch `claude/trusting-pasteur-6czobp` (main stopped on 2026-10-14); if your environment assigned
+another branch, merge this branch into yours, then push yours (HANDOFF "Branch"). Workflow scripts need your own `branch` and
+`trailer` in their args. Git commit times are the clock.

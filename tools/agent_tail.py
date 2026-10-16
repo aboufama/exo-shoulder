@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 """What is a running workflow agent doing? Read the tail of its transcript (stdlib only; read-only).
 
-    python3 tools/agent_tail.py                      list the newest workflow runs of every session (runId, agents, age)
+    python3 tools/agent_tail.py                      list the newest workflow runs of every session (runId, agents, age,
+                                                     the script name = the track, e.g. gen5-cad-geneva-rod)
     python3 tools/agent_tail.py wf_ee162f5e-871      list that run's agents: id, label, phase, last activity, done?
     python3 tools/agent_tail.py wf_ee162f5e-871 8    the last 8 entries of every agent of that run still running
     python3 tools/agent_tail.py <agent-id or .jsonl path> [N]   the last N entries (text / tool call / tool result) of one agent
@@ -65,18 +66,36 @@ def agents(run):
     return rows
 
 
+def script_name(run):
+    """the launched script is saved as <session>/workflows/scripts/<name>-<runId>.js: its name says which track the run is"""
+    sess = os.path.dirname(os.path.dirname(os.path.dirname(run)))
+    rid = os.path.basename(run)
+    m = glob.glob(os.path.join(sess, "workflows", "scripts", f"*-{rid}.js"))
+    if m: return os.path.basename(m[0])[: -len(rid) - 4]
+    try: return json.load(open(os.path.join(sess, "workflows", f"{rid}.json"))).get("workflowName") or "?"   # finished runs
+    except (OSError, ValueError): pass
+    # launched from a file path (e.g. the discovery loop from tools/workflows/): name it from its agents' labels
+    labels = set()
+    for mp in glob.glob(os.path.join(run, "agent-*.meta.json"))[:60]:
+        try: labels.add(str(json.load(open(mp)).get("workflowPhase", "")).lstrip("\u25b8 ").split(" #")[0])
+        except (OSError, ValueError): pass
+    return "(path launch: " + ", ".join(sorted(x for x in labels if x))[:40] + ")" if labels else "?"
+
+
 def main(a):
     if not a:
         for r in runs()[:12]:
             n = len(glob.glob(os.path.join(r, "agent-*.jsonl")))
-            print(f"{os.path.basename(r)}  {n:3d} agents  last write {int((time.time() - os.path.getmtime(r)) / 60)} min ago  ({r.split('/')[-4][:8]})")
+            print(f"{os.path.basename(r)}  {n:3d} agents  last write {int((time.time() - os.path.getmtime(r)) / 60):4d} min ago  {script_name(r):<34} (session {r.split('/')[-4][:8]})")
         return
     n = int(a[1]) if len(a) > 1 else 0
     if a[0].startswith("wf_"):
         m = [r for r in runs() if os.path.basename(r) == a[0]]
         if not m: sys.exit(f"no run {a[0]} under {ROOT}")
         for aid, label, ph, age, fin, p in agents(m[0]):
-            print(f"{aid}  {label:<34} {ph:<10} {'done' if fin else 'RUNNING':<8} last write {int(age / 60)} min ago")
+            # no result record and no write for 30+ min: the agent was most likely stopped (an interrupt, a killed workflow)
+            st = "done" if fin else ("RUNNING" if age < 1800 else "STALE?")
+            print(f"{aid}  {label:<34} {ph:<10} {st:<8} last write {int(age / 60)} min ago")
             if n and not fin: tail(p, n)
         return
     p = a[0] if a[0].endswith(".jsonl") else next(iter(glob.glob(os.path.join(ROOT, "*", "*", "subagents", "**", f"agent-{a[0]}.jsonl"), recursive=True)), None)

@@ -80,5 +80,30 @@ p = st.get("_files_index_html", {})
 sha = hashlib.sha256(open("docs/dashboard/simple/index.html", "rb").read()).hexdigest()
 print("PAGE", "unchanged" if p.get("sha") == sha else "changed", "v%s" % p.get("version", "?"))
 PY
-grep -E "baseline gap|warning" "$LOG/dash_build.log" 2>/dev/null | tail -2 || true
+# What the build log's summary means (a cold reader asked): "record" is the best gap any agent LOGGED in a FAST-bench
+# sweep (docs/concepts/sweeps/*.json), not a verified claim - verified numbers are the rows' v_gap (HANDOFF section 2).
+# The "file gap != recomputed" warnings are expected: since 2026-10-16 every search logs its OBJECTIVE gap (near-touch /
+# continuity / penalty terms), which sits above the plain formula the builder recomputes; the builder keeps the larger,
+# so the page never shows a better number than the agent logged. Only "recomputed kept" lines (a logged gap BELOW the
+# formula) are agent errors: 14 on 2026-10-16 - 11 rounding (< 0.2), two of 0.21-0.27 on cam-unfold-4th (dead row) and
+# one 275 vs 375 on offset-axis-skin-hubs (a failed config's sentinel); none touches a leader.
+python3 - "$LOG/dash_build.log" <<'PY' || true
+import re, sys
+try: lines = open(sys.argv[1], errors="replace").read().splitlines()
+except OSError: sys.exit(0)
+summ = [l for l in lines if l.startswith("baseline gap")]
+if summ:
+    m = re.search(r"record ([-\d.]+)", summ[-1])
+    print(summ[-1].split(";")[0] + ";", "fast-sweep record", m.group(1) if m else "-", "(best LOGGED fast-bench gap, not a verified claim)")
+kept_file = sum("file kept (the larger)" in l for l in lines)
+kept_rec = [l for l in lines if "recomputed kept (the larger)" in l]
+other = [l for l in lines if l.startswith("WARNING:") and "(the larger)" not in l]
+big = []
+for l in kept_rec:
+    g = re.search(r"file gap ([-\d.e]+) != recomputed ([-\d.e]+)", l)
+    if g and abs(float(g.group(1)) - float(g.group(2))) > 0.2: big.append(l)
+print(f"WARN {kept_file} sweep rows log their objective gap above the plain formula (expected, the larger kept); "
+      f"{len(kept_rec)} below it ({len(big)} by > 0.2: agent errors to look at); {len(other)} other warning(s)")
+for l in (big + other)[:5]: print("  ", l[:200])
+PY
 python3 tools/dash_public.py "$ST/public_state.json" | python3 -c "import json,sys; d=json.load(sys.stdin); print('PUBLIC', 'unchanged' if not d['changed'] else 'CHANGED ' + json.dumps(d))"

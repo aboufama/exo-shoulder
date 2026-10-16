@@ -22,14 +22,21 @@ Each script starts with a header comment: what it does, its args, when to launch
 
 ```
 Workflow({ scriptPath: "/home/user/exo-shoulder/tools/workflows/discovery-loop.js",
-           args: { first_round: 9, n_rounds: 4, track: "main", focus: "<the last closer's next focus, verbatim>" } })
+           args: { first_round: 9, n_rounds: 4, track: "main", focus: "<the last closer's next focus, verbatim>",
+                   branch: "<your session's branch>", trailer: "<attribution line 1>\n<attribution line 2>" } })
 Workflow({ scriptPath: "/home/user/exo-shoulder/tools/workflows/templates/verify-claim.js",
-           args: { id: "<row id>", claim: "<config, files, claimed numbers>", lead: "<verified leader + held out>" } })
+           args: { id: "<row id>", claim: "<config, files, claimed numbers>", lead: "<verified leader + held out>",
+                   branch: "<your session's branch>", trailer: "<attribution line 1>\n<attribution line 2>" } })
 ```
 
-- `args` is a JSON object (not a JSON string). Every script also takes the session settings `repo`, `branch` and
-  `trailer` (the two commit-attribution lines your environment's system reminder gives, joined by `\n`). The defaults
-  are the 2026-10-16 session's: **a new session passes its own `branch` and `trailer`** if they differ.
+- `args` is a JSON object (not a JSON string). Every script takes the session settings `branch` and `trailer` (the
+  two commit-attribution lines your environment's system reminder gives, joined by `\n`) - **both REQUIRED**: a script
+  launched without them stops at once (`check.mjs --dry` tests this), so no agent commits under an old session's
+  attribution. `repo` defaults to `/home/user/exo-shoulder`. The loop passes all three to its children.
+- Which round to start, and what to do with an interrupted round: ONE rule, in `docs/OPERATIONS.md` section 2 (finish an
+  interrupted round by hand - verify its screened rows, write its results - then start the loop at the next round;
+  never relaunch the loop at the interrupted round, its planner would write a second plan).
+- No Workflow tool in your session: `docs/OPERATIONS.md` section 9 (run the stages as the script lays them out).
 - The loop finds its children through `wf_dir` (default `<repo>/tools/workflows`). A loop runs for hours; if you will
   `git pull` or edit these files meanwhile, copy the three scripts to your session scratchpad and pass `wf_dir` = that
   folder, so the running loop never sees a half-edited file.

@@ -31,8 +31,9 @@ export const meta = {
 //   straps cost R1 80 -> 71 %); judges are outside judges - never edit a judge to pass; the look audit exists because the
 //   user said the detailed renders "look bad" (2026-10-16).
 const REPO = (args && args.repo) || '/home/user/exo-shoulder'
-const BRANCH = (args && args.branch) || 'claude/trusting-pasteur-6czobp'
-const TRAILER = (args && args.trailer) || 'Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>\nClaude-Session: https://claude.ai/code/session_014NJ3o5nJ9b1u4LXnQRjmMh'
+if (!args || !args.branch || !args.trailer) throw new Error('args.branch and args.trailer are required: your session branch and the two commit-attribution lines your system reminder gives, joined by \\n (tools/workflows/README.md)')
+const BRANCH = args.branch
+const TRAILER = args.trailer
 const A = args || {}
 const SHORT = A.short || A.id, SLUG = A.slug || A.short || A.id
 const L1ID = `l1_${SLUG}`, CADID = `user_${SLUG.replace(/-/g, '_')}`

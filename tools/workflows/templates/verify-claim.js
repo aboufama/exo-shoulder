@@ -18,8 +18,9 @@ export const meta = {
 //   flood fill for any passive / sprung / redundant coordinate; stops on a joint's own angle and priced; held-out set
 //   never used for fitting.
 const REPO = (args && args.repo) || '/home/user/exo-shoulder'
-const BRANCH = (args && args.branch) || 'claude/trusting-pasteur-6czobp'
-const TRAILER = (args && args.trailer) || 'Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>\nClaude-Session: https://claude.ai/code/session_014NJ3o5nJ9b1u4LXnQRjmMh'
+if (!args || !args.branch || !args.trailer) throw new Error('args.branch and args.trailer are required: your session branch and the two commit-attribution lines your system reminder gives, joined by \\n (tools/workflows/README.md)')
+const BRANCH = args.branch
+const TRAILER = args.trailer
 const A = args || {}
 const P = A.prefix || 'v_'
 const BASE = `REPO ${REPO} (branch ${BRANCH}). CLAUDE.md is binding - especially "The fold margin is read in ONE metric, and stops must be buildable", the continuity rule, the near-touch rule, "Manufacturable joints only", the golden-target rulings (margin 5, O20 only, J1 seats back + acromion top), the DOF cap (<= 4, 3 preferred).

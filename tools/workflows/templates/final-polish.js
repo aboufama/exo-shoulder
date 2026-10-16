@@ -14,8 +14,9 @@ export const meta = {
 //   + held-out numbers), seeds (string: extra start configs, optional), budget_usd (number, farm cap, default 2),
 //   fields (row field prefix for the confirmed config, default 'polished_'), repo, branch, trailer.
 const REPO = (args && args.repo) || '/home/user/exo-shoulder'
-const BRANCH = (args && args.branch) || 'claude/trusting-pasteur-6czobp'
-const TRAILER = (args && args.trailer) || 'Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>\nClaude-Session: https://claude.ai/code/session_014NJ3o5nJ9b1u4LXnQRjmMh'
+if (!args || !args.branch || !args.trailer) throw new Error('args.branch and args.trailer are required: your session branch and the two commit-attribution lines your system reminder gives, joined by \\n (tools/workflows/README.md)')
+const BRANCH = args.branch
+const TRAILER = args.trailer
 const A = args || {}
 const BUDGET = A.budget_usd || 2, F = A.fields || 'polished_'
 const BASE = `REPO ${REPO} (branch ${BRANCH}). CLAUDE.md is binding - especially the polish rule at the end of "The fold margin is read in ONE metric, and stops must be buildable" (search on a representative envelope sample, claim on the held-out set), the final-polish rule under "Every generation ends in a full CAD + render of its winner" (a polished config replaces the CAD's config only after an independent verifier confirms a gain >= 1 gap point), the continuity rule, near-touch objective, margin 5 in the th metric, O20, "Keep the held-out split held out".

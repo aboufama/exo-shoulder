@@ -18,8 +18,9 @@ export const meta = {
 //   out (findings doc path, default docs/research/<id>_fix.md), spend_usd (number, default 0.4), do_not_edit (optional),
 //   repo, branch, trailer.
 const REPO = (args && args.repo) || '/home/user/exo-shoulder'
-const BRANCH = (args && args.branch) || 'claude/trusting-pasteur-6czobp'
-const TRAILER = (args && args.trailer) || 'Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>\nClaude-Session: https://claude.ai/code/session_014NJ3o5nJ9b1u4LXnQRjmMh'
+if (!args || !args.branch || !args.trailer) throw new Error('args.branch and args.trailer are required: your session branch and the two commit-attribution lines your system reminder gives, joined by \\n (tools/workflows/README.md)')
+const BRANCH = args.branch
+const TRAILER = args.trailer
 const A = args || {}
 const OUT = A.out || `docs/research/${A.id}_fix.md`
 const COMMON = `REPO ${REPO} (branch ${BRANCH}). CLAUDE.md is binding - especially "Manufacturable joints only", "No lofts, ever", O20 hubs only, "The fold margin is read in ONE metric, and stops must be buildable", "Outside judges, never self-assessment", MVP1 = unpowered kinematic proof that tracks the arm.

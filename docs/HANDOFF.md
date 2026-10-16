@@ -1,7 +1,19 @@
-# Handoff: the state of the project (2026-10-16 ~20:25 UTC)
+# Handoff: the state of the project (2026-10-16, last edit ~20:35 UTC by git commit time)
 
 Written for a reader with no context: a new session, a new model, or a person. Every number below comes from a file in
 this repo (rows, verifier outputs, scorecards, ROUNDS.md, FINDINGS.md, EVOLUTION.md); the file is named next to it.
+
+**Branch.** All of this lives on branch `claude/trusting-pasteur-6czobp` of github.com/aboufama/exo-shoulder. `main`
+stopped on 2026-10-14 and is ~935 commits behind it: if you find no `docs/OPERATIONS.md`, you are on an old branch -
+`git fetch origin && git checkout claude/trusting-pasteur-6czobp`. If your environment assigned you another branch, merge
+this one into it first (`git fetch origin claude/trusting-pasteur-6czobp && git merge FETCH_HEAD`), then commit and push
+to YOUR assigned branch (the environment's branch wins: it is the one your session may push) and pass it as `branch` to
+every workflow script. Then write its name here.
+
+**Clock.** Use git commit times (`git log --format='%h %ci %s'`) as the clock. Times agents wrote inside files
+(`docs/concepts/events.jsonl` `time`, "verified at hh:mm" in prose) ran up to ~20 min AHEAD of the wall clock on
+2026-10-16 (events stamped 20:22 and 20:31 sit in commits made at 20:09 and 20:13); never compute "silent for N min"
+from them. The times in this file are commit times.
 
 ## Start here
 
@@ -11,15 +23,18 @@ it. It has at most 4 degrees of freedom, and the user wants exactly 3 if possibl
 track the arm and the user adds rotation sensing. The work is a loop: invent a mechanism, score it on a body-model
 bench, have an outside verifier re-measure it, build CAD of the winner and judge it against 19 requirements.
 
-**Read in this order.**
+**Read in this order** (the one order; CLAUDE.md "Where things stand", OPERATIONS.md and README.md use it too: it is
+CLAUDE.md's line-3 list with this file and OPERATIONS.md inserted after METHOD.md).
 1. `CLAUDE.md`: the user's goal, decisions and hard rules. They are binding, and the user's words outrank everything.
-2. This file: where things stand.
-3. `docs/OPERATIONS.md`: how to run the machinery (workflows, farm, watchdog, dashboards, git).
-4. `docs/METHOD.md`: how we work.
+2. `docs/METHOD.md`: how we work (Felix Rieseberg's essay, applied; link below).
+3. This file: where things stand.
+4. `docs/OPERATIONS.md`: how to run the machinery (workflows, farm, watchdog, dashboards, git).
 5. `README.md`, then `REQUIREMENTS.md`: the 19 numbered requirements (R1-R17 plus R1-aim and R5-aim) and their judges.
 6. `docs/PLAN.md`: the phases and the field's instruments.
 7. `docs/FINDINGS.md`: everything measured so far, newest at the bottom.
 8. `docs/concepts/ROUNDS.md`: the discovery rounds, each with its plan, results, lessons and next focus.
+9. `docs/ALIGNMENT.md` (if present): the misalignment auditor's catalogue - ways a score rises while the exo does not
+   get better. Then `docs/CAD_STANDARD.md` before touching any part, `docs/PIPELINE.md` before running anything.
 
 **How we work, and why.** The method comes from Felix Rieseberg's essay *How to be more ambitious: A tutorial for humans
 with models*: https://felixrieseberg.com/how-to-be-more-ambitious-a-tutorial-for-humans-with-models/ (read it).
@@ -61,9 +76,10 @@ search loop that kept going.
 
 | design | verified gap (score) | held out | active DOF | complexity | status | key files |
 |---|---|---|---|---|---|---|
-| **minarc-stop-knuckle-4r pick1** (envp-F7-g35-6) | **18.40 (93.31)** | 21.31 env fit / 22.69 fit-60 | 4 (K spring-held, sensed) | 33 | verified final polish; it is the CAD config | rows/minarc-stop-knuckle-4r.json, docs/research/minarc_final_polish.md, picks/pick1_priced.json, verify/minarc-final-polish-verify.py |
+| **minarc-stop-knuckle-4r pick1** (envp-F7-g35-6) | **18.40 (93.31)** | 21.31 env fit / 22.69 fit-60 | 4 (K spring-held, sensed) | 33 | verified final polish; it is the CAD config | rows/minarc-stop-knuckle-4r.json, docs/research/minarc_final_polish.md, docs/research/minarc_final_polish/picks/pick1_priced.json, verify/minarc-final-polish-verify.py |
 | minarc-stop-knuckle-4r BDp | 19.54 (92.89) | 24.18 fit-60 / 23.68 env | 4 (K sensed) | 33 | verified; superseded by pick1 for CAD | same row, verify/minarc-bdp-judge.md, docs/research/minarc-bdp-verdict.md |
-| **sidecar-longdyad-knuckle-3r** (round 8) | **18.91 (93.12)** | 22.67 | **3** (K slaved by a strap-level RSSR sidecar drive, never read) | 49 | **verified 2026-10-16 20:20 UTC: best 3-active design**; round 8 not yet closed (no polish, no CAD) | rows/, docs/concepts/sidecar-longdyad-knuckle-3r.md, verify/sidecar-longdyad-knuckle-3r.py |
+| **sidecar-longdyad-knuckle-3r** (round 8) | **18.91 (93.12)** | 22.67 | **3** (K slaved by a strap-level RSSR sidecar drive, never read) | 49 | **verified (commit 63167c0, 20:09 UTC): best 3-active design**; round 8 not yet closed (no polish, no CAD) | rows/, docs/concepts/sidecar-longdyad-knuckle-3r.md, verify/sidecar-longdyad-knuckle-3r.py |
+| sidecar-parallelogram-knuckle-3r (round 8) | 19.13 (93.04) | 22.03 | 3 (K slaved by a strap-level sidecar drive) | 49 | verified (commit c7b5c53, 20:20 UTC); red-team flag: 2 mm near-touch 50.14 against longdyad's 34.03 | rows/, docs/concepts/sidecar-parallelogram-knuckle-3r.md, verify/sidecar-parallelogram-knuckle-3r.py |
 | frontload-lobe-stopb-knuckle-3r | 22.82 (91.70) | 26.75 | 3 (K slaved by a rod drive, never read) | 49 | verified round-7 winner (a seat re-fit of the geneva rod, below the 1-point CAD-swap rule) | rows/, docs/concepts/frontload-lobe-stopb-knuckle-3r.md, verify/frontload-*_corr_*.json |
 | geneva-tail-knuckle-pinknee-3r (rod) | 23.57 (91.43) | 28.12 | 3 (K slaved) | 42.5 (46.75 full record) | verified round-6 winner; gen-5 CAD in progress | rows/, docs/concepts/geneva-tail-knuckle-pinknee-3r.md, verify/geneva-*_corr_*.json, docs/research/geneva_rod_drive_redteam.md |
 | cam-unfold-4th | 26.70 (90.29) | - | 3 | 33.75 | verified, not a contender | rows/, verify/cam-unfold-4th.py |
@@ -78,8 +94,9 @@ within a row's references, not across rows.
 
 **Reading it.**
 - The best design overall needs a 4th, sensed joint: minarc's knuckle K (18.40).
-- The best 3-active design is now within 0.51 of it: sidecar-longdyad (18.91). It is the knuckle family with K slaved
-  to J2, the drive moved down to strap level. Before it, the 3-active lead was the rod drive at 22.82.
+- The best 3-active design is now within 0.51 of it: sidecar-longdyad (18.91), with sidecar-parallelogram verified
+  next to it (19.13). They are the knuckle family with K slaved to J2, the drive moved down to strap level. Before them,
+  the 3-active lead was the rod drive at 22.82.
 - The simplest designs top out at 31-34.
 - Every leader loses mostly REACH to the J2 fold. In-band (~0.89) and follow (~1.0) are close to their targets.
 
@@ -92,8 +109,8 @@ band.
 | design | frozen exact (score) | near-touch 1 mm / 2 mm | held out | complexity | state |
 |---|---|---|---|---|---|
 | sidecar-longdyad-knuckle-3r | 18.91 (93.12) | 20.00 / 34.03 | 22.67 | 49 | **VERIFIED** (`docs/concepts/verify/sidecar-longdyad-knuckle-3r.py`): reproduces to the digit; its added RSSR closure, ball-link tilt and real pressure-angle checks drop 0 poses; min metal 0.28 mm; continuity full 18.91 / knn 21.72 |
-| sidecar-parallelogram-knuckle-3r | 19.13 (93.04) | 20.22 / 50.14 | 22.03 | 49 | screened (self-measured), awaiting the verifier |
-| sidecar-roller-flank-knuckle-3r | 20.08 (92.70) | 21.17 / - | - | 45.25 | screened (self-measured), awaiting the verifier |
+| sidecar-parallelogram-knuckle-3r | 19.13 (93.04) | 20.22 / 50.14 | 22.03 | 49 | **VERIFIED** (commit c7b5c53, `docs/concepts/verify/sidecar-parallelogram-knuckle-3r.py`): reproduces 19.13; added RSSR closure / ball-link tilt / lobe pressure angle / worn idle checks drop 0 poses; in-band14 sits at the 0.90 edge |
+| sidecar-roller-flank-knuckle-3r | 20.08 (92.70) | 21.17 / - | - | 45.25 | screened (self-measured, converged, commit 0d48a62); its verifier was RUNNING at 20:24 UTC (agent verify:sidecar-roller-flank-knuckle-3r in wf_ee162f5e-871; untracked `docs/concepts/verify/sidecar-roller-flank-knuckle-3r.py`) |
 | twist-long-a2-knuckle-3r | 24.46 frozen (16.74 fast vs the lead's 15.57) | - | - | 49 | DEAD: the J3 twist walks back in every CMA stream |
 
 For comparison, the previous verified 3-active lead (frontload) is 22.82, with near-touch 24.46 / 44.08 and held out
@@ -118,7 +135,7 @@ L1 is keep-out CAD and L2 is the user's standard (CLAUDE.md "CAD has two levels"
 | `user_minarc_bdp` | L2 | 7/19 | 80.0 / 51.0 % | 72.0 % | 73.5 % | re-judged after the judge fixes (5/19 when first built) |
 | `user_pinknee_h1b` | L2 | **8/19** | 76.7 / 35.8 % | 71.2 % | 61.7 % | 3 DOF (R5-aim passes); R8 178.0 g |
 | `l1_geneva-rod` | L1 | 7/19 | 81.1 / 51.1 % | 73.0 % | 72.6 % | 3 DOF; R17 fails only because the dynamics judge has no lobe-rod coupling term (a judge gap, not a measured jam) |
-| `user_geneva_rod` | L2 | in progress | - | - | - | STEP parts built (`pipeline/conformal/param_cad/user_style_geneva.py`); judges, stills, EVOLUTION entry and the independent check not yet done |
+| `user_geneva_rod` | L2 | in progress | - | - | - | rebuilt 20:23 UTC (build.json, step/, exo.glb) from builder commit c23fedb (20:15, `pipeline/conformal/param_cad/user_style_geneva.py`); judges, stills, EVOLUTION entry and the independent check not yet done; the CAD agent (cad:user-geneva, wf_14bb06ea-22e) was still running |
 
 - **Every build passes** R3 (follow, 99-100 %), R5 (<= 4 DOF), R6 (no part interference), R7 (valid solids), R8 (mass)
   and R11 (cuff pressure).
@@ -197,7 +214,7 @@ L1 is keep-out CAD and L2 is the user's standard (CLAUDE.md "CAD has two levels"
 ## 7. Open questions waiting on the user (unanswered at handoff)
 
 1. **A sensed 4th joint (minarc pick1, score 93.31, 4 active) against 3 active joints** (sidecar-longdyad, verified
-   93.12 at 20:20 UTC, so the gap between them is now 0.51 gap points). Does a sensed passive used only at static extremes count as passive? If yes,
+   93.12 in commit 63167c0 at 20:09 UTC, so the gap between them is now 0.51 gap points). Does a sensed passive used only at static extremes count as passive? If yes,
    pick1 counts as 3 active.
 2. **The R17 posture margin.** Accept "upright use" as an MVP1 limit for pick1's K, or require the posture-free fix
    (section 6, item 6).
@@ -211,47 +228,105 @@ Ask in chat for big updates only (CLAUDE.md rule 6).
 ## 8. What was running at handoff, and how to relaunch it
 
 Everything below ran inside the lead session and dies with it. The procedures are in `docs/OPERATIONS.md`, and the
-workflow scripts and templates are in `tools/workflows/` (README there).
+workflow scripts and templates are in `tools/workflows/` (README there). Every script REQUIRES `branch` and `trailer`
+in its args (your session's branch and the two commit-attribution lines your system reminder gives); it stops without
+them.
 
-- **Discovery loop, rounds 6-9** (`tools/workflows/discovery-loop.js`, track main).
-  - In round 8, sidecar-longdyad-knuckle-3r was verified (20:20 UTC). The other two sidecar rows awaited their
-    verifiers, and the round's closer had not run.
-  - **Relaunch:**
-    1. Read the ROUNDS.md tail and the `docs/concepts/events.jsonl` tail.
-    2. If round 8 has no "Round 8 results" section, first run an independent verifier on the sidecar rows that still
-       have `status: screened` (the verifier template in `tools/workflows/`; a claim counts only once verified). Then write the round-8 results and
-       lessons in ROUNDS.md and FINDINGS.md, as a closer would.
-    3. Start the loop at the next round: `{first_round: 9, n_rounds: 4, track: "main", focus: "<the last round's next
-       focus>"}`.
-  - On a 4-core box a workflow runs 2 agents at once.
-  - Never SendMessage a running workflow agent: it starts a second copy (`tools/workflows/README.md`).
-- **Gen-5 CAD of geneva-tail-knuckle-pinknee-3r (rod).**
-  - `l1_geneva-rod` is built and judged (7/19). `user_geneva_rod` has its STEP parts but no judge.
-  - **Relaunch from the CAD stage:**
-    1. Check `pipeline/full-exo/designs/user_geneva_rod/` and the builder `pipeline/conformal/param_cad/user_style_geneva.py`.
-    2. Run `python3 tools/cloud_run.py judge user_geneva_rod`.
-    3. Then the stills on the muscled mannequin (exo-blender-cycles, workersMax 1).
-    4. Then an EVOLUTION.md entry with `tools/evolution_snapshot.py`, and an independent check (the generation-winner
-       CAD template).
-- **Watchdog**: a session cron every 15 min. The prompt is in `docs/OPERATIONS.md`. It checks workflows, CPU load and
-  `tools/runpod_guard.py audit`, refreshes the dashboards and messages the user only for big updates.
-- **Dashboards.**
-  - Production: https://claude.ai/artifact/AMhjuE83FBhGXxu8vQBN7r, a Dashboard-type artifact whose datasets live in its
-    store.
-  - Public mirror: https://claude.ai/artifact/5dan8agUow4XR81Pr91XhF.
-  - Both are rebuilt from `python3 tools/dash_build.py`. The upload procedure is in `docs/OPERATIONS.md` and
-    `docs/DASHBOARD.md`. A new session reads each dataset's version first.
-- **Compute.** The CPU farm is RunPod endpoint `exo-cpu1` via `tools/cloud_run.py` (`docs/CLOUD_RUN.md`), with the key
-  in `RUNPOD_API_KEY` or `~/.runpod_key`; never print it.
-  - The user's `exo-blender-cycles` endpoint is for stills only.
-  - Never touch pods named `crl-*`.
-  - Set `workersMin` back to 0 after any search.
-  - The balance was low (~$3.5 shared) when the gen-5 CAD launched (~18:00 UTC); check it with the audit.
+**The runs at 20:24 UTC** (`python3 tools/agent_tail.py` on the same machine; the run id maps to the track through the
+script name it prints). On a new machine all of them are gone; their committed outputs are in git.
+
+| run id | track | state at 20:24 UTC | what a new lead does |
+|---|---|---|---|
+| wf_ee162f5e-871 | discovery loop rounds 6-9 (launched from the old session's scratchpad copy of `discovery-loop.js`) | round 8: longdyad + parallelogram VERIFIED; roller-flank verifier RUNNING; closer not run | the round-8 steps below |
+| wf_14bb06ea-22e | gen-5 CAD of geneva-tail-knuckle-pinknee-3r (rod) | L1 + drive red team done; `cad:user-geneva` RUNNING (build at 20:23) | the gen-5 steps below |
+| wf_0729deda-636 | alignment auditor (the user's request, quoted below) | Audit phase RUNNING (audit:live, audit:catalogue+tool); `docs/ALIGNMENT.md`, `tools/alignment_audit.py`, `tools/alignment_wear_probe.py` being written (check git for what landed); its Wire-in phase (an audit phase in `discovery-loop.js`, `tools/workflows/alignment-audit.js`, a CLAUDE.md rule) and its skeptic review had not run | the auditor steps below |
+| wf_a20bc382-f06 | cad-context zc-frontier-3r (the user's kinematics brief) | DELIVERED (`docs/cad_context/zc-frontier-3r/KINEMATICS_BRIEF.md`); the lead stopped it before its checkers on purpose (the user narrowed the brief); agent_tail still lists check:numbers / check:cold-read as RUNNING / STALE | nothing: do not relaunch |
+| wf_33b5f96b-7b1 | this cold-start handoff (OPERATIONS.md, tools/workflows/, this file) | finishing | nothing |
+| session crons | the 15-min WATCHDOG and the hourly alignment audit (cron ab52224e) | live in the old session only | re-create both (OPERATIONS section 3) |
+
+Older runs listed by agent_tail (pick1-k-hold, judges-fix-and-gen4b, films, polishes) are finished; their results are in
+FINDINGS / EVOLUTION. Before relaunching anything, check git for its outputs (a verifier that finished commits a
+`verify/<id>.py` and the row's `v_gap`; an untracked `verify/<id>.py` means one was still running when the session ended).
+
+**Round 8 (discovery loop).** One rule for an interrupted round (OPERATIONS section 2):
+1. `tail -80 docs/concepts/ROUNDS.md`, `tail -20 docs/concepts/events.jsonl`, and every round-8 row's `status` / `v_gap`
+   (`docs/concepts/rows/sidecar-*.json`, `twist-long-a2-knuckle-3r.json`).
+2. If sidecar-roller-flank-knuckle-3r still has `status: screened` and no `v_gap`, verify it:
+   `Workflow({scriptPath: "<repo>/tools/workflows/templates/verify-claim.js", args: {id: "sidecar-roller-flank-knuckle-3r",
+   claim: "P1 config (docs/concepts/rows/sidecar-roller-flank-knuckle-3r.json, model docs/concepts/models/sidecar-roller-flank-knuckle-3r.py):
+   frozen exact Bench(110,360) 20.08 (score 92.70), near-touch 1 mm 21.17, complexity 45.25, 3 active (K slaved); converged
+   (3043-try P1 lineage, gate 0.17/0.17/0.03); P1d fast 11.25 wears to 20.48", lead: "sidecar-longdyad-knuckle-3r VERIFIED 18.91
+   (score 93.12), held out 22.67", branch, trailer}})`.
+3. Write "## Round 8 results" in ROUNDS.md (and the FINDINGS entry) as a closer would: the verified table above, the
+   lessons (section 3 bullets), the winner and the next focus.
+4. Round 8's winner by the rule (best VERIFIED gap, ties by fewer passive translations, then complexity) is
+   **sidecar-longdyad-knuckle-3r 18.91** unless the roller-flank verifier confirms below it, or the alignment auditor
+   flags it (a flagged claim cannot win; read `docs/ALIGNMENT.md`).
+5. Start the loop at round 9: `Workflow({scriptPath: "<repo>/tools/workflows/discovery-loop.js", args: {first_round: 9,
+   n_rounds: 4, track: "main", focus, branch, trailer}})`. Use the closer's next focus if one was written; otherwise this
+   draft (written from round 7 "Next", the round-8 numbers and section 9):
+
+   > Round 9 (track main). Leads: sidecar-longdyad-knuckle-3r VERIFIED 18.91 (score 93.12, held out 22.67, complexity 49,
+   > 3 active, K slaved by a strap-level RSSR sidecar); sidecar-parallelogram 19.13 verified but its 2 mm near-touch is
+   > 50.14 against 34.03; 4-active minarc pick1 18.40. Round 8 bought in-band only (0.855 -> 0.897, at the 0.90 edge);
+   > reach stayed 0.725, overhead 8/28, fold losses 86 of 360: the gap is reach at the J2 fold. Attack the fold geometry,
+   > not K's law (worth <= 0.2 frozen): (a) the a2 wall - poses past th ~132 need a1e 76-100 at a2 62; (b) the J1 seat
+   > toward the back of the shoulder, inside the allowed seats (back of the shoulder + acromion top only); (c) the knee
+   > window for the overhead slide losses. Keep the sidecar drive at strap level. Target: frozen reach >= 0.775 and
+   > overhead >= 14/28 at in-band14 >= 0.88, contact <= 0.01; report near-touch at 1 mm AND 2 mm. Rules: O20 hubs only,
+   > fold margin 5 deg on th, stops on a joint's own angle, continuity flood fill, near-touch search objective. Dead
+   > directions: HANDOFF section 5 - do not screen them again.
+6. On a 4-core box a workflow runs 2 agents at once. Never SendMessage a running workflow agent: it starts a second copy
+   (`tools/workflows/README.md`).
+
+**Round 8's winner: polish, then gen-6 CAD** (CLAUDE.md "Every generation ends in a full CAD"):
+- `templates/final-polish.js` args: `{id: "sidecar-longdyad-knuckle-3r", winner: "<one paragraph: the verified config in
+  docs/concepts/rows/sidecar-longdyad-knuckle-3r.json, model docs/concepts/models/sidecar-longdyad-knuckle-3r.py, claim
+  harness = the row's frozen protocol, judge harness docs/concepts/verify/sidecar-longdyad-knuckle-3r.py, verified 18.91
+  (score 93.12), near-touch 20.00 / 34.03, held out 22.67, continuity full 18.91 / knn 21.72>", budget_usd: 2, branch, trailer}`.
+- `templates/generation-winner-cad.js` args: `{gen: 6, id: "sidecar-longdyad-knuckle-3r", winner: <the same paragraph, or
+  the polished config if its verifier confirmed a held-out gain >= 1>, short: "sidecar", slug: "sidecar-longdyad",
+  prior_art: "gen-5 geneva rod: pipeline/conformal/param_cad/user_style_geneva.py, pipeline/concept_l1/build_geneva_l1.py,
+  designs l1_geneva-rod / user_geneva_rod (read-only)", new_mechanism: "the strap-level RSSR sidecar drive slaving K to J2",
+  do_not_edit: <files other running workflows edit>, spend_usd: 0.6, date: "<YYYY-MM-DD>", branch, trailer}`.
+- Check its 2 mm near-touch against the lead's before any CAD swap.
+
+**Gen-5 CAD of geneva-tail-knuckle-pinknee-3r (rod).** `l1_geneva-rod` is built and judged (7/19). `user_geneva_rod` was
+rebuilt at 20:23 UTC from builder commit c23fedb; it has no judge yet.
+1. Check that `pipeline/full-exo/designs/user_geneva_rod/build.json` is newer than the builder's last commit
+   (`git log -1 --format=%ci -- pipeline/conformal/param_cad/user_style_geneva.py`); if not, rebuild with the builder.
+2. `python3 tools/cloud_run.py judge user_geneva_rod`.
+3. Stills on the muscled mannequin (exo-blender-cycles, workersMax 1, ~$0.05 a set).
+4. An EVOLUTION.md entry with `tools/evolution_snapshot.py`, and an independent check (the verifier stage of
+   `templates/generation-winner-cad.js`).
+
+**The alignment auditor.** The user, 2026-10-16 ~20:10 UTC (verbatim): "at the same time as all the research is
+happening, please require an agent on the side that is a superfan that targets misalgnment. It should understand the
+goal of the project, to make a super low profile and free range shoulder joint, and see if models are cheating the
+system or gaming the system in some way to scro ehigher witout actually being beter. This coudl be done in many ways,
+but it needs to be a crucial aprt of our loop". If `tools/workflows/alignment-audit.js` and a CLAUDE.md rule exist, the
+auditor finished its wiring: run that workflow hourly (a session cron, like the watchdog) and before any claim is called
+a round's winner. If they do not, the auditor was cut short: commit its files (`docs/ALIGNMENT.md`,
+`tools/alignment_audit.py`, `tools/alignment_wear_probe.py`, `docs/alignment/`), then launch a workflow that finishes
+the wiring (an audit phase in `discovery-loop.js` so a flagged claim cannot win, a standalone `alignment-audit.js`, the
+CLAUDE.md rule) and a skeptic review of the auditor.
+
+**Watchdog, dashboards, compute.**
+- Watchdog: a session cron every 15 min (prompt in `docs/OPERATIONS.md` section 3), plus the hourly alignment audit.
+- Production dashboard: https://claude.ai/artifact/AMhjuE83FBhGXxu8vQBN7r, a Dashboard-type artifact whose datasets
+  live in its store. Public mirror: https://claude.ai/artifact/5dan8agUow4XR81Pr91XhF. Both are rebuilt with
+  `tools/dash_refresh.sh`; the publish procedure is in `docs/OPERATIONS.md` section 4. A new session reads each dataset's
+  version first and seeds the state. The old session published with its own state file (a scratchpad copy of
+  `.state/dash_pub/state.json`); the `if_version` pins catch any drift as a conflict: re-read the doc and redo the write.
+- The CPU farm is RunPod endpoint `exo-cpu1` via `tools/cloud_run.py` (`docs/CLOUD_RUN.md`). Key: OPERATIONS section 5
+  (never print it). The user's `exo-blender-cycles` is for stills only; never touch pods named `crl-*`; `workersMin`
+  back to 0 after any search. Balance at 20:24 UTC: **$36.61**, spend $0.66/h (`tools/runpod_guard.py audit`; it
+  changes, read it, never this line). `python3 tools/cloud_run.py ping` answered at 20:25 UTC (py 3.12, 8 vCPU).
 
 ## 9. Next steps, in priority order
 
 1. **Take the verified sidecar-longdyad (18.91, 3 active) forward.**
-   - Verify the other two sidecar rows (parallelogram 19.13, roller-flank 20.08) and close round 8.
+   - Verify roller-flank (20.08; parallelogram 19.13 is verified) and close round 8 (section 8).
    - Give the round's winner its final polish (env bench, claim held out).
    - Then the gen-6 CAD: L1, L2, stills and EVOLUTION. Check its 2 mm near-touch against the lead's before any CAD
      swap.
@@ -283,7 +358,8 @@ workflow scripts and templates are in `tools/workflows/` (README there).
 
 - **Python deps:** `bash tools/setup.sh`, then `python3 -m pip install libigl`.
 - **The bench cache** (`.cache/`) is git-ignored, so a new machine rebuilds it:
-  - locally: `nice python3 tools/concept_bench.py --build 60 160 --jobs 3` (~15 min on an idle 4-core box);
+  - locally: `nice python3 tools/concept_bench.py --build 60 160 --jobs 2` (~20 min on an idle 4-core box; 2 jobs = the
+    local process cap);
   - on the farm: `tools/bench_cache_farm.py` for Bench(110,360).
   - Then `python3 tools/concept_baseline.py --n-clip 60 --n-ws 160` should reproduce ~68.9.
 - **Local limits:** keep local jobs niced and at <= 4 workers on the user's laptop. Here the lead kept itself to 2

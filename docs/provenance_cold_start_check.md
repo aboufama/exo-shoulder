@@ -204,3 +204,26 @@ https://felixrieseberg.com/how-to-be-more-ambitious-a-tutorial-for-humans-with-m
 - Add a fallback to OPERATIONS for an environment without CronCreate or the Workflow tool.
 - Explain the dashboard build's "record" line and its warnings in `docs/DASHBOARD.md`.
 - Say what the exo-band8-23 endpoints are (retired GPU search endpoints, keep at 0, or delete).
+
+## Follow-up: how each gap was closed (same day, ~20:35 UTC by commit time)
+
+| gap | fix |
+|---|---|
+| running work missing from HANDOFF, no run ids | HANDOFF section 8: a table of every run (id, track, state at 20:24, what a new lead does), the two session crons; `tools/agent_tail.py` now prints each run's script name (= its track) and marks agents silent 30+ min without a result as STALE? |
+| in-flight work outside git (verifiers, gen-5 build) | parallelogram is verified (c7b5c53) and in the tables; roller-flank's running verifier is named; a rule: an untracked `verify/<id>.py` = still running; gen-5: check `build.json` against the builder's last commit |
+| scripts default to the old branch / trailer | `branch` and `trailer` are REQUIRED in all 8 scripts; `check.mjs --dry` proves each refuses to start without them |
+| no fallback for Workflow / CronCreate / Artifact tools | OPERATIONS section 9 (and the cron caveats in section 3) |
+| forward-dated time stamps | HANDOFF "Clock" and OPERATIONS section 1: git commit times are the clock; HANDOFF's times are commit times |
+| stale balance | $36.61 at 20:24 UTC from the audit, with "read the audit, not this line" |
+| wrong pick1_priced path | fixed to `docs/research/minarc_final_polish/picks/pick1_priced.json` |
+| two restart rules for an interrupted round | ONE rule in OPERATIONS section 2 (finish the round by hand, then N+1; never relaunch at N), pointed to from HANDOFF and tools/workflows/README |
+| no branch named | HANDOFF "Branch", OPERATIONS section 1, README, CLAUDE.md pointer: `claude/trusting-pasteur-6czobp`; an environment-assigned branch wins after merging this one in |
+| read orders differ | one order everywhere: CLAUDE -> METHOD -> HANDOFF -> OPERATIONS -> README -> REQUIREMENTS -> PLAN -> FINDINGS -> ROUNDS |
+| --jobs 3 / 2, key source, METHOD "renders only", README R1-R15 | --jobs 2; one key one-liner (file, else env var); OPERATIONS section 5 notes the farm supersedes "renders only"; README says 19 requirements |
+| dashboard "record 6.19" and 27,471 warnings unexplained | `tools/dash_refresh.sh` prints "fast-sweep record ... not a verified claim" and one WARN summary (objective gap above the plain formula = expected; only "below by > 0.2" lines are agent errors, printed) |
+| 16 exo-band endpoints, the advisory cpu1 flag | OPERATIONS section 5 "What the audit lists" |
+| round-9 focus and round-8 polish / CAD args had to be guessed | HANDOFF section 8: a draft round-9 focus and the args for verify-claim (roller-flank), final-polish and generation-winner-cad (gen 6) |
+| `cloud_run.py ping` untested | ran at 20:25 UTC: ok (py 3.12, 8 vCPU, ~$0.001) |
+
+Still untested from here: the dashboard write steps and a real Workflow launch from `tools/workflows/` (no Workflow or
+ArtifactData tool in the checking agent).

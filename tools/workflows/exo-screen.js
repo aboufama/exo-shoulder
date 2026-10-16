@@ -13,11 +13,12 @@ export const meta = {
 // WHEN: launched by discovery-loop.js; standalone to screen one catalogue entry (items = [that entry]).
 // Session settings (a NEW lead session sets these through the Workflow tool's args; the defaults are the 2026-10-16 session's):
 //   args.repo    - absolute repo path            (default /home/user/exo-shoulder)
-//   args.branch  - the branch every agent pushes  (default claude/trusting-pasteur-6czobp)
-//   args.trailer - the commit attribution lines your environment's system reminder gives (two lines, '\n'-joined)
+//   args.branch  - the branch every agent pushes  (REQUIRED: your session's branch; the script stops without it)
+//   args.trailer - the commit attribution lines your environment's system reminder gives (two lines, '\n'-joined; REQUIRED)
 const REPO = (args && args.repo) || '/home/user/exo-shoulder'
-const BRANCH = (args && args.branch) || 'claude/trusting-pasteur-6czobp'
-const TRAILER = (args && args.trailer) || 'Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>\nClaude-Session: https://claude.ai/code/session_014NJ3o5nJ9b1u4LXnQRjmMh'
+if (!args || !args.branch || !args.trailer) throw new Error('args.branch and args.trailer are required: your session branch and the two commit-attribution lines your system reminder gives, joined by \\n (tools/workflows/README.md)')
+const BRANCH = args.branch
+const TRAILER = args.trailer
 
 const items = args.items
 const BASE = 68.93, BIG = 75.94, LEAD = (args.lead || 30.35)
