@@ -140,9 +140,9 @@ this imported path.
 
 | requirement | claimed | re-run | how |
 |---|---|---|---|
-| R1 (2-14 mm) | 80.3 % | R1_RERUN | local, step 3, scratch copy |
-| R1-aim (2-10 mm) | 49.8 % | R1AIM_RERUN | same run |
-| R4 (Raise overhead, 14 mm) | 73.8 % | R4_RERUN | same run |
+| R1 (2-14 mm) | 80.3 % | **80.295 %** (score_14mm.json byte-identical) | local, step 3, scratch copy |
+| R1-aim (2-10 mm) | 49.8 % | **49.797 %** (score.json byte-identical) | same run |
+| R4 (Raise overhead, 14 mm) | 73.8 % | **73.83 %** (min gap 0.2 mm: see correction 3) | same run |
 | R6 | 0.0 mm | not re-run (see below); committed output read: 1337 frames x 7138 pairs incl. dk / dr, max depth 0.0 | - |
 | R16 | 72.6 % | R16_RERUN | R16_HOW |
 | R7 | FAIL (link 1a) | **FAIL, byte-identical**: 25_D8-02a_link_1a.step valid False, 2 bad faces of 132, not watertight; every other part one valid solid; coverage 59 custom, none missing | local OCC |
@@ -155,7 +155,18 @@ ran locally.
 **Correction 4: H scores nothing.** score_design.py on this design scores 8 groups (base, l1a, l1b, l2, l3, l4, dk, dr).
 The arm-fixed group H contributes **0 samples**, because none of its metal is within 110 mm of GH. The committed
 score_14mm.json says the same (`groups_scored` 8). So the CAD agent's candidate cause for the R1 loss against the L1,
-"arm-side parts (cuff, D8-06) scored as H metal within 110 mm", is excluded. LOBESKIN_SENTENCE
+"arm-side parts (cuff, D8-06) scored as H metal within 110 mm", is excluded.
+
+**Which part enters the skin (correction 3, measured).** `lobeskin2.py` takes the signed distance of every chain part
+(groups l1a, l1b, l2, l3, l4, dk, dr) to the judge skin. It covers every frame of Raise overhead and every 3rd frame of
+Comb hair and Reach a high shelf.
+- **Only the D9-01 lobe ring is inside the skin: -0.233 mm at Raise overhead frame 102.**
+- Next nearest: link 1a +1.13 mm, the J2 cap +2.25, link 1b +2.36, the link 2 bar +2.52 mm.
+- The drive groups stay clear: pushrod +5.07, crank igubal housing +6.57 mm.
+So the Raise-overhead minimum gap dropping from 1.1 mm (L1) to 0.24 mm (full CAD) is the lobe ring's extra radius. It
+is metal about 0.23 mm into the skin, not 0.24 mm of clearance: the judge's min_gap is unsigned. That costs at most
+the frames where the ring is under 2 mm. It does not explain the -0.8 R1 points across all clips; the dk / dr groups
+and the link-2 strip lift are the remaining candidates, still unattributed.
 
 **Correction 5: R7 link 1a.** build.json's own `invalid_or_multi_solid` lists link 1a at build time. The claim that "the
 same STEP is valid when checked before tessellation" therefore does not describe the solid the build recorded. Either

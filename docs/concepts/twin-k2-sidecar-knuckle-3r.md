@@ -98,3 +98,67 @@ side of link 2 sits over the part of the cap that the raised deltoid lifts overh
 - **Optimistic number**: every chain-only figure above omits drive 2's metal; the honest embodiment is 50-80 points
   worse on the fit bench. The roller-flank embodiment (merged twin-flank-k2-knuckle-3r) keeps the same K2 hub, links 2a /
   2b and a crank-plus-arm beside hub 2, so the chain-only figure bounds it too: it cannot rescue the morphology.
+
+## CMA-ES on the farm (Bench(60,160) fast, near-touch objective; 16 free parameters: bk3, bk4, kK2, smt2, smlo, dK1cap,
+## the lead's drive-1 beta / La / r_h, J2 az2 / el2, J3 wd / wa / b3, drive 2 r_h2 / La2)
+
+| run | metal | evals | best fast | reach | ib14 | follow | contact | convergence gate (gain 2nd half / last third / top-5 spread, score pts) |
+|---|---|---|---|---|---|---|---|---|
+| A | drive 2 ON (the morphology) | 1049 | **60.86** | 0.644 | 0.753 | 0.783 | 0.013 | 0.00 / 0.00 / 0.87 - converged |
+| B | drive 2 ON | 1601 | 20.32 -> **375** | - | - | - | - | LOOPHOLE (below) |
+| C | drive 2 OFF (upper bound) | 1153 | 18.69 | 0.794 | 0.886 | 0.917 | 0.022 | 1.44 / 0.17 / 0.03 |
+| D | drive 2 OFF (upper bound) | 1057 | **18.09** | 0.788 | 0.876 | 0.917 | 0.011 | 0.60 / 0.60 / 0.04 |
+
+**Red team, CMA loophole (found and closed 21:53):** run B walked K2 to bk3 19.5, where the two O20 hubs are 21.3 mm
+apart and link 2a has no strap sample outside both hub radii; `_rod2_metal` returned early on an empty link and drive 2's
+metal vanished. Fixed (drive 2 is built from hub 2's strap level when link 2a is empty) and the judge's clearance gate
+added (hub 2 - hub K2 >= 22.0 mm at the fitted levels, else dishonest). B's 20.32 re-measures **375** (crank 2 vs hub K2
+on 136 poses, crank 1 vs crank 2 on 30, crank 2 vs hub K on 18). Runs A, C, D never entered that corner (bk3 23-28,
+hub2-K2 26.8-30.2 mm) and re-measure identically through the fixed file (60.86, 18.09).
+
+### Frozen exact Bench(110,360) (fit on Bench(60,160) fast, shape frozen; the lead's verified protocol)
+
+| config | frozen gap | reach | follow | ib14 | contact | near-touch 1 / 2 mm | min metal | overhead /28 | fold / slide / parts / contact |
+|---|---|---|---|---|---|---|---|---|---|
+| lead (verified, for reference) | 18.91 | 0.725 | 1.0 | 0.897 | 0.011 | 20.00 / 34.03 | 0.28 | 8 | 86 / 7 / 2 / 4 |
+| A, drive 2 ON (best honest) | **67.32** | 0.572 | 0.782 | 0.753 | 0.030 | 70.97 / 82.35 | 0.05 | 4 | 93 / 5 / 71 / 9 |
+| D, drive 2 OFF (upper bound) | **27.84** | 0.711 | 0.918 | 0.875 | 0.033 | 29.49 / 56.41 | 0.22 | 4 | 87 / 12 / 2 / 12 |
+| coarse bk3 24 / bk4 50, drive 2 OFF | 38.49 | 0.675 | 0.900 | 0.805 | 0.014 | 41.32 / 56.21 | 0.12 | 6 | 76 / 8 / 39 / 5 |
+
+At D, K2 opens on 25 frozen poses (dK2 up to 17.8, a2e up to 71.9) but the fold count is the lead's (87 vs 86): the
+search set smt2 10.3, so K2 starts before the wall and spends its stroke on poses the lead already took, while its
+hub (0.57 in band, median 13.4 mm) and the stretched contact (12 poses) take the points. At A the K2 law is reduced to
+a token (won 0 on the frozen bench) and drive 2's metal stands 22-29 mm off the skin (crank 2 / rod 2 0.0 in band) with
+crank 1 vs crank 2 on 70 poses.
+
+## Verdict: DEAD (both embodiments)
+
+The kinematic prize is real but small and not overhead (+15-19 workspace poses, overhead +1 at dA2 10-13.5 on the lead's
+own IK), and the metal that buys it costs more than it wins, at every seat the sweeps reached:
+
+1. **Hub K2 cannot park** (the spec's likely killer, confirmed from the per-pose need along its ray): 0.09-0.57 in band
+   against the 0.85 gate; its level is set by overhead frames (elevation 120-135) where the raised deltoid lifts the
+   skin under the bend side of link 2 by 12-15 mm over its median.
+2. **Two drives beside one hub sweep through each other**: crank 1 (link 1b) vs crank 2 (link 2a) on 30-78 poses,
+   crank 1 vs the dog-legged link 2a / hub K2 on 4-35; stacking crank 2 above crank 1 puts drive 2 22-29 mm off the
+   skin (0.0 in band). The roller-flank embodiment keeps hub K2, links 2a / 2b and a crank-plus-arm beside hub 2, so the
+   drive-2-OFF bound (27.84 frozen vs 18.91) bounds it as well.
+3. **The kinematic gate itself fails**: kin 0.783 vs 0.785 at dA2 <= 12 and overhead 11 vs 12 of 28; the twin law ends on
+   "rate" (past the wall dth/dq2 -> 0, so th rises only through K2).
+
+Complexity 75 (tools/simplicity.py on the record in the row) vs the lead's 49: it would have had to buy >= 2 frozen points;
+it loses 8.9 (upper bound) to 48.4 (honest).
+
+## New knowledge (predicts beyond this morphology)
+
+- **A second slaved knuckle near an existing O20 hub inherits that hub's neighbourhood conflicts**: two O20 stacks need
+  >= 22 mm centre to centre (>= 21 deg at F 60), and at that distance a hub on the BEND side of link 2 sits over skin
+  that overhead elevation lifts by 12-15 mm, so its in-band collapses (0.1-0.6) - the skin under the bend side is not the
+  skin under hub 2.
+- **Two strap-level drives cannot share one hub's skirt**: any crank fixed to link 1b and any crank fixed to link 2a
+  within ~25 mm of hub 2's axis sweep through each other over the q2 range (~140 deg); the only escape (stacking)
+  costs the whole drive's in-band. A second q2-driven spare must be driven from somewhere else (or not at all).
+- **The stretched wall is a slope, not a wall**: past the drive wall dth/dq2 -> 0, so a q2-slaved spare can only add
+  th at the K2 gain; with a 3.45 rate cap the law ends after ~10-15 deg of th whatever dA2 the dyad allows.
+- **CMA exploits an empty-sample corner**: a model that skips a part's metal when its host link has no samples gives
+  the search a free exit; every drive-metal routine must build from a fallback level, never return early.
