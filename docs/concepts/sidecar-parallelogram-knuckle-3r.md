@@ -240,3 +240,48 @@ What the claim measures:
    reach 0.773 frozen at this contact, i.e. +20 of the 88 fold poses. Only the window levers (wider arcs at the overhead K state, the J1 seat walk)
    move that.
 4. **A 2-mm near-touch objective** for the CAD-bound config, to buy back the 2-mm margin before the L1 CAD.
+
+## Verification (independent skeptic, 2026-10-16 ~20:35 UTC)
+
+Harness: `docs/concepts/verify/sidecar-parallelogram-knuckle-3r.py`. It loads the claim's wrapper unchanged through its
+own `_prep` (lead dyad 30.05 / 37.57 / 61.72, r_h floor 15.5, RC ball-link envelope). It then runs the core verifier's
+frozen protocol and added checks (`docs/concepts/verify/sidecar-longdyad-knuckle-3r.py`), pointed at the claim's
+module. The protocol: fit on Bench(60,160) fast, freeze the shape, wear it on Bench(110,360) exact. All four runs went
+to the farm. The checks added on every taken pose (none of them are in the claim):
+
+1. **RSSR closure in the world frame.** The rod has to meet the horn ball and the crank-tip ball. Max error 0.000 mm at
+   both ends.
+2. **M2 ball-link tilt, limit 30 deg.** Max 10.9 deg at the crank and 20.0 deg at the horn (95th percentile 17.1).
+3. **Real lobe pressure angle.** The lobe is cut to the exact RSSR phi(dK). The angle peaks at 41.1 deg, inside the
+   45 deg limit. The real ratio is 0.95-1.00 of r_h / La.
+4. **Idle-drive rule on the worn bench.** The drive carries 37.3 deg of K over the taken poses, so it passes the 30 deg
+   rule. The drive's own range ends at dK 41.0 (rod against hub 2), so it does not bind.
+5. **Continuity flood fill.** Over the full grid, 0 poses are dropped. The kNN graph gives 22.21.
+
+No pose fails any of the added checks.
+
+| | gap | score | reach | follow | in-band14 | in-band10 | contact | near-touch 1 / 2 mm | overhead reach |
+|---|---|---|---|---|---|---|---|---|---|
+| fit, Bench(60,160) fast | 10.63 | 96.13 | 0.794 | 1.0 | 0.905 | 0.520 | 0 | | |
+| **verified, Bench(110,360) exact, frozen** | **19.13** | 93.04 | 0.719 | 1.0 | 0.905 | 0.523 | 0.011 | 20.22 / 50.14 | 8/28 |
+| held out, frozen | 22.03 | 91.99 | 0.690 | 1.0 | 0.903 | 0.522 | 0.010 | 24.44 / 48.71 | 19/71 |
+| champion spherical 3R, same bench | 75.94 | 72.39 | | | | | | | |
+
+Lost workspace poses: fold 88, slide 9, contact 4. The lowest metal over taken poses is 0.65 mm (0.28 held out).
+
+**Red team: ball-centre height.** The claim puts the ball centre 3 mm over the lug and arm tops, the low end for an M2
+ball stud with an acetal socket. At 4.0 mm and at 4.5 mm the frozen gap is still 19.13, but the rod falls to 0.61 and
+0.53 in band and in-band14 to 0.901 and 0.900. In-band14 sits only 0.005 above the 0.90 target, so the in-band half of
+the gain is at the edge: one more mm of drive metal, or a slightly thicker part, puts in-band points back into the
+gap. Near-touch at 1 mm rises to 20.77 at 4.5 mm.
+
+**Verdict: VERIFIED, not refuted.** It is 56.8 points better than the champion on the same bench and 3.69 better than
+the verified lead frontload-lobe-stopb-knuckle-3r (22.82, held out 26.75). Hard rules hold: 3 active DOF, K slaved by
+the lobe and the RSSR (determined), 0 passive translations, no gears, pulleys or cables, and every joint is a catalogue
+part. The RC acetal ball link still has to be catalogued.
+
+**It is not a new 3-active leader on the frozen metric.** sidecar-longdyad-knuckle-3r scores 18.91 frozen, 0.22
+better, while this design is 0.64 better held out (22.03 vs 22.67). The two are the same drive on two dyads, and the
+difference between them is inside the noise of the dyad lever. The open CAD items are inherited from the core: the
+crank's short arm and follower are unmodelled metal, and the lobe sits inside hub 2's O20 housing radius. The
+claim's 2-mm near-touch (50.14) is worse than the lead's (44.08), so a 2-mm objective should run before any L1 CAD.
