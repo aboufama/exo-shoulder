@@ -88,7 +88,7 @@ class GridDev:
         else:
             self.G = torch.empty(g.size, dtype=torch.int8, device=device); step = 32; n3 = self.n ** 3
             for i in range(0, g.shape[0], step):
-                a = torch.from_numpy(np.array(g[i:i + step]).reshape(-1))   # a writable copy of the memmap slice; self.G[i * n3:i * n3 + a.numel()] = a.to(device)
+                a = torch.from_numpy(np.array(g[i:i + step]).reshape(-1)); self.G[i * n3:i * n3 + a.numel()] = a.to(device)
         self.outside = 0
 
     def dist(self, I, X):

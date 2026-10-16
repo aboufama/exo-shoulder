@@ -1,0 +1,83 @@
+{
+ "speed2_same110": {
+  "n": 72,
+  "secs": 247.6,
+  "evals_per_s": 0.291,
+  "workers": 9,
+  "device": "cuda",
+  "bench": [
+   110,
+   360
+  ],
+  "fit": null,
+  "margin": 5.0,
+  "s_per_config_median": 0.91,
+  "errors": 0,
+  "gpu": "NVIDIA RTX PRO 4500 Blackwell",
+  "nproc": 48
+ },
+ "speed2_same110_w1": {
+  "n": 18,
+  "secs": 242.89,
+  "evals_per_s": 0.074,
+  "workers": 1,
+  "device": "cuda",
+  "bench": [
+   110,
+   360
+  ],
+  "fit": null,
+  "margin": 5.0,
+  "s_per_config_median": 0.26,
+  "errors": 0,
+  "gpu": "NVIDIA RTX PRO 4500 Blackwell",
+  "nproc": 48
+ },
+ "speed1_same110_w1": {
+  "n": 18,
+  "secs": 262.63,
+  "evals_per_s": 0.069,
+  "workers": 1,
+  "device": "cuda",
+  "bench": [
+   110,
+   360
+  ],
+  "fit": null,
+  "margin": 5.0,
+  "s_per_config_median": 1.4,
+  "errors": 0,
+  "gpu": "NVIDIA RTX PRO 4500 Blackwell",
+  "nproc": 48
+ },
+ "speed2_frozen": {
+  "n": 36,
+  "secs": 114.48,
+  "evals_per_s": 0.314,
+  "workers": 9,
+  "device": "cuda",
+  "bench": [
+   110,
+   360
+  ],
+  "fit": [
+   60,
+   160
+  ],
+  "margin": 5.0,
+  "s_per_config_median": 0.64,
+  "errors": 2,
+  "gpu": "NVIDIA RTX PRO 4500 Blackwell",
+  "nproc": 48
+ },
+ "polish": {
+  "evals": 12004,
+  "secs": 1224,
+  "evals_per_s": 9.8,
+  "streams": 4,
+  "workers_per_stream": 2,
+  "popsize": 16,
+  "gpu_mem_mib": 18401,
+  "gpu_util_pct": 85
+ }
+}

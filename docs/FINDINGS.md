@@ -1051,3 +1051,23 @@ docs/research/golden/README.md and docs/research/golden/gpu_frontier.json).
 * **What follows.** The golden 13.75 is out of reach at complexity 0 under the rulings (measured, not argued): the
   frontier must move by ~2x, which needs a member that follows the skin where the window opens (hub 2 / link 2 or the J3
   side) - i.e. the near-zero track (one sensed passive or a 4th joint), not more search of this class.
+
+## The pin-knee family runs exactly on a GPU pod; its in-sample polish runs out in 20 min (2026-10-16, tools/gpu_bench_knee.py)
+
+* **Port = the kit, accelerated**: knee_polish's whole evaluation (model + verifier extra_checks + near-touch audit)
+  runs the kit's own code; only the per-pose loops (sphere-traced skin requirement, every part pair incl. the 0.15 mm
+  adjacent ones, the verifier's closure / knee / boss checks) and Bench.dist are batched on the device. Parity vs the CPU
+  kit on the pod: **max |diff| 0.0 on every metric** (gap, near-touch < 1 / < 2 mm, model gap, reach, follow, in-band
+  14 / 10, contact) for 53 configs (H1, k4598, P5 + 50 inside the rulings) x 2 protocols (same-bench Bench(110,360);
+  fit Bench(60,160) -> wear Bench(110,360)), and again for v2 + raglan-knee-3r's routed best (54).
+* **Where the kit's time went**: 1.7 s of ~4 s per config was libigl rebuilding the rest-skin AABB + winding-number BVH
+  for the three seats on every call; built once they give the same numbers bit for bit (0.009 s). Port v2: 0.26 s per
+  config alone on the GPU, 0.86 s median with 8 workers (kit 8.2 s same-bench, 10.9 s frozen); the polish ran **9.8
+  evals/s on one $0.72/h pod** (~10x per dollar against the farm, outside the worker quota). The tail is the kit's exact
+  libigl path for samples traced out of the +-260 mm grid box (junk configs, 1-4 min in both implementations).
+* **The in-sample polish converges in 20 min**: knee_polish's CMA on the GPU (near-touch, Bench(110,360), margin 5, O20,
+  12 004 evaluations, every stream stopped by sigma collapse) takes H1 25.68 -> 22.29 (sigma 0.5) and **20.81** (sigma
+  1.5, a new corner: lE 72, lc 37.5, ang_min 24.2; plain 20.26, reach 0.706, follow 1.0, in-band 0.900, min metal
+  0.46 mm), P5 22.08 -> 21.89, raglan's fixed route 36.82 -> 24.18. P5's in-sample gain was refuted on the disjoint
+  held-out bench, so these are candidates for the independent verifier (exact wear, fit-60, held-out, continuity),
+  not results; the next polish wants a held-out-aware objective (the port takes any Bench with a fast grid).

@@ -210,9 +210,10 @@ Files: knee_parity2_same110.json, knee_parity2_frozen.json.
 
 Where the time goes (cProfile, v2 on CPU torch, Bench(60,160)): the batched distance / pair work is the only large
 item and it moves to the GPU; the seats' rest-skin distances fell from 1.72 s to 0.009 s per config (ExactCached). Measured
-throughput in the polish (4 CMA streams x 2 workers, popsize 16, Bench(110,360)): **~10.9 evals/s** on the one pod
-(4.8 k evaluations in the first 440 s) for $0.72/h = ~54 k evals/$, against ~0.4 evals/s for a farm worker at $0.288/h
-(4 kit processes at ~10 s; ~5 k evals/$): **~11x per dollar, ~27x per worker slot**, outside the serverless worker quota. Next lever: batch configurations inside one process (the
+throughput in the polish (4 CMA streams x 2 workers, popsize 16, Bench(110,360)): **12 004 evaluations in 20.4 min =
+9.8 evals/s** on the one pod (GPU 85 % busy, 18.4 of 32 GB) for $0.72/h = ~49 k evals/$, against ~0.4 evals/s for a
+farm worker at $0.288/h (4 kit processes at ~10 s; ~5 k evals/$): **~10x per dollar, ~25x per worker slot**, outside
+the serverless worker quota. Pod cost of this whole task: 08:32-09:30 UTC = ~$0.70. Next lever: batch configurations inside one process (the
 zero-complexity port's design) and port the greedy drop - the CPU-side Python is now the limit, not the GPU.
 
 ### GPU FINAL POLISH (pipeline/gpu_pod/knee_run2.sh, gated on the v2 parity)
@@ -220,19 +221,23 @@ zero-complexity port's design) and port the greedy drop - the CPU-side Python is
 knee_polish's CMA unchanged - same FREE parameters, bounds and scales, the near-touch objective (the verifier-corrected
 gap with metal < 1 mm as contact; CLAUDE.md "Search on the near-touch gap"), Bench(110,360) fast with the shape fitted
 there, margin 5, O20 - with its pool initializer swapped for the device one (`python3 tools/gpu_bench_knee.py cma
-<knee_polish cma args>`). 4 streams x 2 workers, popsize 16, from 09:10 UTC for 2400 s: G1 from H1 (sigma 0.5), G2 from
+<knee_polish cma args>`). 4 streams x 2 workers, popsize 16, from 09:10 UTC (budget 2400 s; every stream converged by 09:30): G1 from H1 (sigma 0.5), G2 from
 P5 (0.5), G3 from H1 wide (1.5), G4 from raglan-knee-3r's best with its route fixed (r1t / r1d / r2t / r2d / rc).
 Rows + CMA state: docs/research/golden/knee_cma_G1..G4.json (+ .state.json, resumable by knee_polish's `--state`).
 
 | stream | start (near-touch) | evals | generations | best near-touch | plain gap | reach | follow | in-band 14 | contact | min metal mm | knee angle | tag |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|
 | G1 | H1 (25.68) | 2497 | 156 | **22.29** | 21.19 | 0.6972 | 1.0 | 0.8991 | 0.0082 | 0.2 | [100.6, 146.9] | G1-g124-13 |
-| G2 | P5 (22.08) | 1937 | 121 | **22.08** | 21.54 | 0.7167 | 1.0 | 0.8866 | 0.0187 | 0.04 | [80.0, 140.7] | G2-g0-x0 |
-| G3 | H1 wide (25.68) | 1265 | 79 | **22.16** | 21.06 | 0.7056 | 1.0 | 0.892 | 0.0082 | 0.18 | [97.5, 150.6] | G3-g79-3 |
-| G4 | raglan best (36.82) | 1985 | 124 | **24.18** | 24.18 | 0.6639 | 1.0 | 0.9 | 0.0057 | 1.01 | [95.4, 149.4] | G4-g106-5 |
+| G2 | P5 (22.08) | 2833 | 177 | **21.89** | 21.34 | 0.7056 | 0.9909 | 0.8973 | 0.0163 | 0.04 | [93.6, 144.3] | G2-g171-14 |
+| G3 | H1 wide (25.68) | 4337 | 271 | **20.81** | 20.26 | 0.7056 | 1.0 | 0.9001 | 0.0082 | 0.46 | [100.7, 153.5] | G3-g115-2 |
+| G4 | raglan best (36.82) | 2337 | 146 | **24.18** | 24.18 | 0.6639 | 1.0 | 0.9 | 0.0057 | 1.01 | [95.4, 149.4] | G4-g106-5 |
 
-Interim (rows fetched 09:21 UTC, 11 min into the 40-min polish): 7684 evaluations. Best in-sample near-touch gap 22.08 (G2, G2-g0-x0) vs H1 25.68 on the same objective (P5 22.08). Its parameters (CANDIDATE, self-measured, fast grid, not verified):
-`{"az1": 101.3136, "el1": 63.0475, "az2": 31.6253, "el2": 44.9795, "wd": 67.6795, "wa": -5.4589, "b3": 0.3392, "lE": 59.5912, "lc": 23.7175, "phiE": -7.4584, "phib": -71.5498, "ang_min": 35.9262, "stk": 5.5412}`
+Final (09:10-09:30 UTC, every stream stopped on its own: sigma collapsed; the pod terminated itself at 09:30): 12004 evaluations. Best in-sample near-touch gap 20.81 (G3, G3-g115-2) vs H1 25.68 on the same objective (P5 22.08). Its parameters (CANDIDATE, self-measured, fast grid, not verified):
+`{"az1": 98.2985, "el1": 64.7969, "az2": 33.5049, "el2": 44.7883, "wd": 63.9916, "wa": -9.3012, "b3": 0.3252, "lE": 72.1759, "lc": 37.5419, "phiE": -4.4957, "phib": -56.7105, "ang_min": 24.2314, "stk": 5.6834}`
+
+What it measured: from H1 the polish lands at or below P5's in-sample level in minutes (G1 22.29, G3 20.81 - G3, the
+wide stream, in a new corner: lE 72 / lc 37.5 / ang_min 24.2 vs H1's 59.6 / 28.2 / 30.5); from P5 only 0.19 more
+(21.89); the raglan route, fixed, polishes 36.82 -> 24.18 but stays above the great-circle links.
 
 Caveat (P5, refuted out of sample at 08:22 UTC): these are IN-SAMPLE numbers on the polish bench. A candidate replaces
 H1 only after the independent verifier confirms a gain >= 1 gap point on the polish protocol with the EXACT wear path,
