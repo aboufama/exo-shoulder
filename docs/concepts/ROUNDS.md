@@ -847,3 +847,133 @@ joints excluded by "Keep O20 only".
 - A fold margin below 5 deg.
 - A sensed passive used only at static extremes counting as passive (minarc pick1 18.40 would be 3 active).
 - Whether msub applies to a cam-slaved (or four-bar-slaved) K.
+
+## Round 8 results (2026-10-16 ~17:15-20:31 UTC; closed by the round-8 closer)
+
+Picks (round-8 judge, docs/concepts/round8_ideation.md):
+- sidecar-parallelogram-knuckle-3r (pick 1, strap-level-drive lens: a sidecar bell crank + M2 ball-link rod at strap
+  level, the lead's chain and K dyad unchanged);
+- sidecar-roller-flank-knuckle-3r (pick 2, strap-level-drive lens: rodless, an MR63 roller on a conjugate flank of link
+  1a's horn);
+- twist-long-a2-knuckle-3r (pick 3, window-geometry lens: J3 re-seat + a2 58-66 + wide K dyad; crest-j3-wide-dyad
+  merged as seed B);
+- sidecar-longdyad-knuckle-3r (pick 4, strap-level-drive x window-geometry: the sidecar on a longer link 1b; wide-dyad
+  merged as a check cell).
+
+Parked for the user at ideation: crank-rod-knuckle-3r and bighorn-crank-rod-knuckle-3r (cx 36; msub question). Not
+picked: lost-motion-swivel-knuckle-3r (0 expected gain, 1 passive translation; revisit only when complexity becomes the
+objective).
+
+All numbers below are frozen exact on Bench(110,360), at the 5-deg margin with O20 hubs only, fitted on Bench(60,160)
+(the round-3 protocol). Every row was re-measured by an independent verifier, and the round-8 sidecars were re-worn a
+third time by the alignment auditor (docs/ALIGNMENT.md, `docs/alignment/remeasure/`): all reproduce to the digit.
+
+| design | fast Bench(60,160), near-touch | frozen exact (verified) | near-touch 1 / 2 mm | held out | complexity (tool) | status |
+|---|---|---|---|---|---|---|
+| **sidecar-longdyad-knuckle-3r** (bk1 28.9 / bk2 39.2 / a1max 63.2, sidecar kK 1.62, r_h 14.9) | 10.30 (= plain) | **18.91** (score 93.12). Reach 0.725, follow 1.0, in-band14 0.897, in-band10 0.534, contact 0.011, overhead 8/28; lost: fold 86, slide 7, contact 4, parts 2. Flood full 18.91 (0 dropped), knn 21.72. | 20.00 / **34.03** | 22.67 | 49 | **verified: round winner, new verified lead** |
+| sidecar-parallelogram-knuckle-3r (the lead's dyad, r_h floor 15.5, RC ball links) | 10.63 (209 ties) | 19.13 (score 93.04). Reach 0.719, in-band14 0.905, contact 0.011, overhead 8/28, fold 88. | 20.22 / 50.14 | **22.03** | 49 | verified; 2 mm shell gamed (alignment audit) |
+| sidecar-roller-flank-knuckle-3r (beta -175, g 2.28, 130-deg wrapped arm) | 11.73 | 20.08 (score 92.70). Reach 0.722, in-band14 0.890, contact 0.013, overhead 8/28, fold 87. Real envelope 19.96. | 21.17 / 46.82 | 22.35 | **45.25** | verified; the simplest strap-level drive |
+| twist-long-a2-knuckle-3r (C0: lead axis + wide dyad bk2 45.2) | 16.74 | 24.46 (score 91.10). Reach 0.733, follow 0.955, in-band14 0.851, contact 0.029. | 27.70 / 37.84 | 28.44 (A2) | 49 | DEAD (converged over 4869 CMA configs); death audited |
+
+Same-protocol references: the round-7 lead frontload-lobe-stopb-knuckle-3r 22.82 (near-touch 24.46 / 44.08, held out
+26.75); geneva-tail-knuckle-pinknee-3r 23.57 (2 mm 38.84); H1 27.20; the 4-active sensed minarc pick1 18.40 (cx 33 by
+its row, 52 counting K as the 4th active DOF, ALIGNMENT.md G5); zero-complexity ceiling 31.04.
+
+**Winner: sidecar-longdyad-knuckle-3r, verified at 18.91 (score 93.12)**: 3 active (K slaved by the lobe and the RSSR
+sidecar, never read), 0 passive translations, complexity 49. It beats the previous verified lead (22.82) by **3.91**,
+so the verified lead number moves to 18.91. The tie rules are not needed: parallelogram is 0.22 behind (19.13) and
+roller-flank 1.17 behind (20.08, at 3.75 lower complexity). Why longdyad and not parallelogram, beyond the 0.22:
+- **2 mm red team.** longdyad is the only round-8 row that is also better than the previous lead with metal under 2 mm
+  counted as contact: 34.03 vs frontload 44.08 (and geneva 38.84). parallelogram is 6.06 worse than frontload there
+  (50.14, 44 taken poses at 1-2 mm); the alignment audit calls its lead "gamed on the 1-2 mm shell" and longdyad's "real".
+- **Held out** parallelogram is 0.64 better (22.03 vs 22.67). The two share the drive; the only difference is the K
+  dyad, whose length is worth under 1 point and flips sign held out (lesson 2). Not a lever either way.
+- **Over the 1-point rule.** The gain is 3.91 frozen and 4.08 held out (22.67 vs 26.75), so the generation-winner CAD
+  and stills run on it (after the final polish below).
+
+Open items on the winner (verifier + audit), to settle in the polish / CAD:
+- the M2 ball centre sits 3 mm over the arm and horn tops (the low end); at 4 / 4.5 mm the fit gap is 10.69 / 10.84 and
+  the rod's in-band falls 0.89 -> 0.62 / 0.52;
+- the crank's short arm and its follower are not sampled metal;
+- the lobe works at r 7.7-10.2 mm inside hub 2's O20 housing (link 1b): the follower needs a window, and at a 16 mm
+  pivot offset it is a sliding pad on an ~8 mm arm, so 'rolling_pairs 1' becomes a sliding pair;
+- the horn socket is 1.37 mm off hub K's housing at r_h 14.9 (CAD: r_h >= 15.5 or a smaller socket);
+- min metal 0.28 mm frozen, 0.14 mm held out (priced in the near-touch columns);
+- the RC acetal M2 ball link is load-bearing (all-metal GE4E ends cost 6.8 fast) and is not yet in
+  tools/hardware_catalogue.json.
+
+Lessons (measured):
+
+1. **The in-band half of 95 is done, and it came from the drive's height, as priced.** The round-8 plan's arithmetic
+   said the crown-high rod (0 % in band) was worth 4.54 frozen; the strap-level sidecar puts the rod at 0.89, rod ends
+   0.96, crank 0.91 and delivers 3.69-3.91 frozen (roller flank 2.74) and 4.1-4.7 held out, on every dyad and both drive
+   types (RSSR rod, roller flank). In-band14 is now 0.890-0.905 on all three drive rows. The remaining in-band headroom is the lead's own
+   chain: hub 3 0.60 and L2 0.75.
+2. **The gap is now reach, and the fold did not move.** longdyad's 18.91 = in-band 0.34 + reach 17.50 + contact 1.07.
+   Fold losses: 86 / 88 / 87 / 76 (twist C0) of 360, against 84-86 on every rod variant in rounds 6-7. Overhead is 8/28
+   on all four rows (20 lost: roller-flank fold 14 / slide 3 / contact 3, frontload 15 / 3 / 2). Score 95 at in-band 0.90 and
+   contact 0.011 needs reach 0.775: **+18-19 of the ~99 lost workspace poses**.
+3. **K-dyad length is not a lever (< 1 point, sign flips held out).** CMA walked bk2 from 44-47 back to 39-41 in every
+   stream: the RSSR's transmission falls 36 -> 22 deg as bk2 goes 37.6 -> 47, and the +15-deg crank phase that restores
+   it swings the rod into hub 2 past dK ~42 (8 frozen / 24 held-out poses, invisible on the fit bench). The wide cell
+   (35 / 45 / 75) is dead at contact 0.12. Stop B never binds (a1max -3 changes nothing); the law ends at the lobe skirt
+   or lift-off first, and the stretched poses past th ~132 need a1e 76-100, i.e. they sit behind the a2 wall.
+4. **The J3 side cannot re-centre the window inside the band.** twist-long-a2's law-only kill gate measured real
+   kinematic headroom (reach 0.814-0.825, overhead 17-21/28, against the lead's 0.742 / 10 through the same IK), but
+   parking failed: J2's GH ray follows the J3 seat (hub 2 0.68, L2 0.49-0.62), or a parked J2 grows a2 to 69-77 and
+   link 2 / hub 3 ride over the deltoid (contact 0.06-0.07). Frozen, the wide window wins 10 fold poses (76 vs 86) and
+   loses them again to contact (+7), knee slide (+5) and clip follow (0.955) on the same overhead / stretched poses.
+   Every free CMA stream walked the twist back to -8..+2 deg (the lead sits at -6.8). Fixed at +8: frozen reach 0.742
+   (the highest of the round) at in-band 0.828, 27.54.
+5. **A rodless roller-flank drive works and is the simplest strap-level drive (cx 45.25 vs 49), 1.17 behind the rod.**
+   It is a spherical cam: lugs must be shells about GH, and both pressure angles stay <= 45 iff the speed ratio a lies
+   in [1/(cos t + sin t), cos t + sin t] (t = angle between the contact velocities). The only workable geometry is the
+   pitch point (t ~3 deg), which forces a 130-deg arm wrapped around hub K. It carries 51.7 deg of K at pressure angles
+   6.3 / 41.0 (the RSSR sidecar carries 37.3, with its own range ending at dK 41-43). Progressive laws cusp at the pitch
+   point (every stream drove c to 0). A drive swap changes the metal and contact terms, never the fold.
+6. **The 1 mm near-touch objective moved the metal to 1-2 mm.** parallelogram (50.14 at 2 mm, 44 poses in the shell)
+   and roller-flank (46.82) are worse than frontload at 2 mm; only longdyad (34.03) is better. Per pose, 169-178 of
+   ~370 taken poses on both sidecars have some metal under 3 mm (ALIGNMENT.md finding 4). Searches need the 2 mm
+   objective, or the dominance gate (plain AND 2 mm), before CAD.
+7. **Fast to frozen widened to 8.4-9.0 points** (10.30 -> 18.91, 10.63 -> 19.13, 11.73 -> 20.08, 16.74 -> 25.70)
+   against round 7's 7.25. The fit bench takes reach 0.79-0.80 and overhead 2/12; frozen takes 0.72-0.73 and 8/28. A
+   fast-bench gain under 1 point did not survive frozen (roller P1d 11.25 -> 20.48 vs P1 11.73 -> 20.08). The fit bench
+   under-samples the overhead end that decides reach now; the final polish must use the representative envelope bench.
+8. **Kill gates must include parking.** The window arithmetic alone over-predicted twist by +0.07 kinematic reach that
+   became +0.005 frozen. Future gates run the model's own IK and the per-part in-band (hub 2, hub 3, L2) together.
+9. **Pipeline findings (alignment audit, same hour):** the dashboard recomputed v_gap without the contact term
+   (longdyad shown 17.84 vs verified 18.91); minarc's row counts its sensed K as passive (cx 33 -> 52 as a 4th active);
+   12 of 17 verified rows have no held-out number and 16 no min-th margin on file. A farm claim batch sat 22 min in
+   upload behind other sweeps; the frozen / held-out / flood claims ran locally in ~10 min.
+
+Next (round 9; verified best 18.91, score 93.12, so 95 is not reached and score stays the objective - complexity second):
+
+1. **Reach, by making the wide window parkable (target: frozen reach >= 0.775, overhead >= 14/28 at in-band >= 0.89,
+   contact <= 0.011, 2 mm near-touch no worse than 34.03).** The kinematic headroom is measured (0.81-0.83, lesson 4);
+   what kills it is metal over the overhead / stretched poses: hub 3 (0.35-0.60 in band), L2 (0.49-0.79), hub 2 when J2
+   follows the J3 seat, and knee slide when b3 tilts. Levers, in order:
+   - **(a) the J1 seat on the back of the shoulder for the knuckle** (round 8 lens-1 lever (a): planned, never run;
+     twist took the J3 side). Law-only kill gate with parking on the winner's model: az1 {95, 75, 55, 35} x el1
+     {67, 45, 25}, kinematic reach, overhead x/28 and hub 2 / hub K / L1b / L2 / hub 3 in band.
+   - **(b) a lower hub 3 / L2 embodiment under the wide window**: the hub-3 crest seat (obliquity 16 deg, 0.82 in band,
+     round-8 State), b3 0 with the knee drift taken by the knee window (lc 34 / phib -75), on twist's seed A / B.
+   - **(c) the roller-flank drive on a longer dyad** (bk2 42-47): the rod sidecar's transmission walls the dyad at
+     dK ~41-43, the roller carries 52 deg of K at pa <= 45. Cheap cell, cx 45.25.
+2. **The winner's final polish, then the generation-winner CAD** (the lead's, not the round's): the representative
+   envelope bench, the 2 mm near-touch objective, the ball centre at 4-4.5 mm, the crank short arm, follower and lobe
+   window modelled as metal, r_h >= 15.5; the verifier; the L1 / user-style CAD and stills; EVOLUTION.md; the RC M2
+   ball link in tools/hardware_catalogue.json.
+3. **Do not screen again:** K-dyad length alone, a J3 twist on the knuckle, stop B / law-shape levers, the wide cell
+   35 / 45 / 75, all-metal GE4E ball links, progressive laws at a pitch point; plus the round-7 list (direct pairs
+   between O20 stacks, followers rigid with link 2, folded-side hubs and lobes, the Geneva tail).
+4. **Complexity (second objective):** the 3-active class sits at 45.25-49 (roller-flank lowest). The cx-36 route
+   (crank-rod / bighorn, positive four-bar K) waits on the msub ruling; lost-motion swivel (cx 43, 1 passive
+   translation) waits on score >= 95.
+
+### Needs the user's say (unchanged, plus one)
+
+- A cuff IMU instead of the two knee-pin encoders (the pin knee 19.5 -> ~11.5; the winner 49 -> ~41).
+- A fold margin below 5 deg.
+- A sensed passive used only at static extremes counting as passive (minarc pick1 18.40 would be 3 active).
+- Whether msub applies to a K positively slaved from q2 (a "no" opens crank-rod / bighorn at cx 36).
+- New: the 2 mm near-touch as the claim column / dominance gate (ALIGNMENT.md A1) - it would rank longdyad first by 4.8.

@@ -1872,3 +1872,74 @@ measured by the encoder, not hidden. The lead / the user has three choices:
     else 0.08). No earlier number moves.
 - **R8 builder fix.** Material now comes from an explicit per-part table in user_style_minarc.py; a part with no row
   stops the build. The CAD's custom mass is 142.1 g, not 178.2: links 1a / 1b / 2 were billed as NdFeB / steel.
+
+## Round 8: a strap-level K drive is verified at 18.91 (score 93.12); the in-band half of 95 is done, the fold did not move (2026-10-16, discovery round 8, closer)
+
+Raw data:
+- rows: `docs/concepts/rows/{sidecar-longdyad-knuckle-3r,sidecar-parallelogram-knuckle-3r,sidecar-roller-flank-knuckle-3r,twist-long-a2-knuckle-3r}.json`;
+- verifier harnesses and outputs: `docs/concepts/verify/<id>.py`, `docs/concepts/verify/<id>_v_*`;
+- the alignment auditor's re-wear: `docs/alignment/remeasure/`, `docs/ALIGNMENT.md`;
+- the judge's picks and red team: `docs/concepts/round8_ideation.md`;
+- the round table: `docs/concepts/ROUNDS.md` "Round 8 results".
+
+All numbers are frozen exact on Bench(110,360), at the 5-deg margin with O20 hubs only, fitted on Bench(60,160), and
+were re-measured by an independent verifier (the sidecars a third time by the alignment auditor; all to the digit).
+
+**What was measured**
+
+* **sidecar-longdyad-knuckle-3r: VERIFIED 18.91 (score 93.12), the round winner and the new verified lead** (previous
+  22.82, gain 3.91 frozen, 4.08 held out: 22.67 vs 26.75). 3 active (K slaved by the lobe and a strap-level RSSR
+  sidecar: bell crank on link 1b, M2 ball-link rod, horn on link 1a), 0 passive translations, complexity 49. Reach
+  0.725, follow 1.0, in-band14 0.897, contact 0.011, overhead 8/28; near-touch 20.00 at 1 mm, **34.03 at 2 mm** (the
+  best of any verified row at 2 mm; frontload 44.08, geneva 38.84). Full-grid flood fill drops 0 (knn 21.72). The
+  verifier's added checks (world-frame RSSR closure 0.000 mm, ball-link tilt <= 21.8 of 30 deg, real lobe pressure angle
+  39.1 of 45) remove no pose.
+* **sidecar-parallelogram-knuckle-3r: VERIFIED 19.13 (93.04)**, the same drive on the lead's dyad. Held out it is the
+  best of the round (22.03), but at 2 mm it is 50.14 (44 taken poses with metal at 1-2 mm): the alignment audit rates
+  its lead gamed on the 1-2 mm shell. In-band14 0.905 sits at the 0.90 edge; a ball centre at 4-4.5 mm keeps the gap but
+  drops the rod's in-band to 0.53-0.61.
+* **sidecar-roller-flank-knuckle-3r: VERIFIED 20.08 (92.70)**, rodless, complexity 45.25 (the lowest strap-level
+  drive). Held out 22.35; the real-envelope correction (the lug strip the model's sampling deleted + the roller pin head)
+  gives 19.96.
+* **twist-long-a2-knuckle-3r: DEAD, death audited.** Converged over 4869 CMA configs; best frozen 24.46 (C0, the lead's
+  axis + a wide dyad), worse than the lead on every margin (min metal 0.03 mm, follow 0.955).
+
+**What it means**
+
+1. **The drive's height was half of the distance to 95, and it is now paid.** The planner's sample arithmetic priced
+   the crown-high rod (0 % in band) at 4.54 frozen; the strap-level drive delivered 3.69-3.91 (rod) and 2.74 (roller),
+   and the gain holds out (4.1-4.7). Rod 0.89, rod ends 0.96, crank 0.91 in band. The worst parts are now the chain's
+   own: hub 3 0.60, L2 0.75.
+2. **The whole remaining gap is reach, and nothing in the drive moves it.** 18.91 = in-band 0.34 + reach 17.50 + contact
+   1.07. Fold losses 86-88 of 360 on the three drive rows (84-86 in rounds 6-7); overhead 8/28 on every row. Score 95
+   needs reach 0.775 at in-band 0.90: 18-19 more workspace poses.
+3. **K-dyad length is worth under 1 point and flips sign held out.** The RSSR's transmission falls 36 -> 22 deg as bk2
+   goes 37.6 -> 47; phasing the crank to fix it jams the rod on hub 2 past dK ~42 (seen only on the frozen and held-out
+   benches). Stop B never binds. The stretched poses past th ~132 sit behind the a2 wall (they need a1e 76-100).
+4. **A J3 re-seat has real kinematic headroom but no parking.** Law-only through the model's own IK: reach 0.814-0.825
+   and overhead 17-21/28 (lead 0.742 / 10). With metal: hub 2 0.68, L2 0.49-0.62, or contact 0.06-0.07 when J2 stays
+   parked; frozen +10 fold poses become +7 contact, +5 knee slide and -0.045 follow. A kinematic kill gate over-predicts
+   by the parking term (+0.07 -> +0.005 reach).
+5. **Spherical-cam rule for any two-rotor contact about GH:** both pressure angles stay <= 45 iff the speed ratio lies
+   in [1/(cos t + sin t), cos t + sin t], t the angle between the contact velocities (widest [0.71, 1.41] at t = 45,
+   closing to 1 at t = 0 and 90). Lugs must be shells about GH, never flat plates. The workable roller geometry sits at
+   the pitch point and needs a 130-deg arm wrapped around hub K; it carries 52 deg of K (the RSSR 37-43).
+6. **The 1 mm near-touch objective moves the metal to 1-2 mm.** Two of the three drive rows are worse than frontload at
+   2 mm. Per pose, 169-178 of ~370 taken poses keep some metal under 3 mm. The 2 mm objective (or a plain AND 2 mm
+   dominance gate) belongs in the next searches and the winner's polish.
+7. **Fast to frozen widened to 8.4-9.0 points** (round 7: 7.25): the fit bench takes overhead 2/12 and reach 0.79-0.80,
+   frozen 8/28 and 0.72-0.73. The fit bench under-samples the overhead end that now decides the score.
+
+**What failed and why**
+
+- twist-long-a2 (the window-geometry lens): parking, not kinematics (point 4). The J1 back-of-the-shoulder seat, the
+  lens's first lever, was never run for the knuckle - it is the next round's first kill gate.
+- The planned bk2 42-48 / a1max 66-75: transmission and hub-2 jam (point 3); the wide 35 / 45 / 75 cell at contact 0.12.
+- All-metal GE4E ball links: +6.8 fast (the horn moves to 19.5 mm and drops into the skin). The RC acetal M2 ball link is
+  load-bearing and must enter tools/hardware_catalogue.json before CAD.
+- Progressive cam laws at the pitch point: cusp (every CMA stream drove the curvature to 0).
+
+**Next:** the winner's final polish (representative envelope bench, 2 mm objective, ball centre 4-4.5 mm, follower and
+lobe window as metal, r_h >= 15.5), its verifier, then the generation-winner CAD and stills. Round 9 attacks reach by
+making the measured kinematic headroom parkable: the J1 back seat for the knuckle (kill gate with parking), a lower hub 3
+/ L2 under the wide window (hub-3 crest seat, b3 0 with the knee window), and the roller-flank drive on a longer dyad.
