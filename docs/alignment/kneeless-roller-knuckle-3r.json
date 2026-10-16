@@ -3,13 +3,9 @@
  "status": "screened",
  "v_gap": null,
  "complexity": 23.75,
- "verdict": "watch",
+ "verdict": "gamed",
  "reasons": [
-  "held_out: no verified bench gap on the row",
-  "continuity: passive / sprung / sensed coordinates but no continuity flood on file (rule 2026-10-16)",
-  "fold_margin: no min-th margin over taken poses on file (rule: each claim reports it)",
-  "idle: a drive is declared but no range of it over the taken poses is on file",
-  "sampling: per-part sample counts not on file (fractions only); 5 moving bodies declared, 0 non-hub metal groups sampled (row frozen)"
+  "idle: IDLE: re-measured K.ang span = 0.0 deg"
  ],
  "checks": [
   {
@@ -25,16 +21,25 @@
   {
    "check": "near_touch",
    "level": "ok",
-   "reason": "plain 21.07, <1 mm 23.23, <2 mm 32.25, 11.18 points live in the 1-2 mm shell (row frozen)",
+   "reason": "plain 21.07, <1 mm 23.23, <2 mm 32.25, <3 mm 87.37, band read 3-14 mm 21.41, 11.18 points live in the 1-2 mm shell (re-measured (this audit))",
    "shell2": 11.18,
    "plain": 21.07,
    "n1": 23.23,
    "n2": 32.25,
-   "n3": null,
-   "band3": null,
-   "hist": null,
-   "minmm": 0.01,
-   "source": "row frozen"
+   "n3": 87.37,
+   "band3": 21.41,
+   "hist": {
+    "0-1": 0.0,
+    "1-2": 0.0002,
+    "2-3": 0.0035,
+    "3-4": 0.0129,
+    "4-6": 0.0834,
+    "6-10": 0.4584,
+    "10-14": 0.3324,
+    ">14": 0.1093
+   },
+   "minmm": 0.006,
+   "source": "re-measured (this audit)"
   },
   {
    "check": "dominance",
@@ -56,16 +61,94 @@
   },
   {
    "check": "idle",
-   "level": "watch",
-   "reason": "a drive is declared but no range of it over the taken poses is on file",
-   "spans": []
+   "level": "gamed",
+   "reason": "IDLE: re-measured K.ang span = 0.0 deg",
+   "spans": [
+    [
+     "re-measured dK span",
+     43.53
+    ],
+    [
+     "re-measured K.ang span",
+     0.0
+    ]
+   ]
   },
   {
    "check": "sampling",
-   "level": "watch",
-   "reason": "per-part sample counts not on file (fractions only); 5 moving bodies declared, 0 non-hub metal groups sampled (row frozen)",
+   "level": "ok",
+   "reason": "sample-weighted in-band 0.891 vs part-weighted 0.912 (-2.15 points); thinly sampled parts: L1a 8 (re-measured)",
    "parts": {
-    "hub3": 0.505
+    "hub1": [
+     1.0,
+     9.1,
+     80
+    ],
+    "hubK": [
+     0.99,
+     8.2,
+     80
+    ],
+    "hub2": [
+     0.986,
+     10.6,
+     80
+    ],
+    "hub3": [
+     0.505,
+     13.9,
+     80
+    ],
+    "E": [
+     0.934,
+     7.8,
+     132
+    ],
+    "boss": [
+     1.0,
+     7.4,
+     32
+    ],
+    "pad": [
+     0.988,
+     9.3,
+     32
+    ],
+    "knee": [
+     0.997,
+     7.6,
+     105
+    ],
+    "crank": [
+     0.863,
+     11.5,
+     129
+    ],
+    "roller": [
+     0.934,
+     10.0,
+     37
+    ],
+    "horn": [
+     0.955,
+     6.6,
+     33
+    ],
+    "L1a": [
+     0.96,
+     10.8,
+     8
+    ],
+    "L1b": [
+     0.949,
+     8.8,
+     32
+    ],
+    "L2": [
+     0.71,
+     11.8,
+     108
+    ]
    }
   },
   {
@@ -83,7 +166,7 @@
   {
    "check": "judge_change",
    "level": "ok",
-   "reason": "no bench / judge / metric file changed in the 1 commits that touched the row"
+   "reason": "no bench / judge / metric file changed in the 2 commits that touched the row"
   },
   {
    "check": "rules",
@@ -92,10 +175,10 @@
   }
  ],
  "remeasured": {
-  "bench": false,
-  "held": false
+  "bench": true,
+  "held": true
  },
  "verifier_files": [],
- "git": "4caa384",
- "t": "2026-10-16T22:57:42Z"
+ "git": "b7e147b",
+ "t": "2026-10-16T23:09:39Z"
 }
