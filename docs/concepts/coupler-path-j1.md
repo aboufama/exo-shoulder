@@ -150,8 +150,19 @@ four-bar result: with B0 on A0 the loop is rigid, and its plain-3R equivalent (J
 J3 seat and knee; sweep entry "plain-3R equivalent") scores 21.22 fast against the bound's 20.58. It is a re-seat of the
 pin knee (A0 2.5 deg off the leader's J1, a2 73.3, J3 wd 66.6 / wa -9.5 / b3 0.30, knee lE 50.3 / lc 17.8 / phiE -4.2 /
 phib -66.5) in the territory the pin-knee polish already holds (H1 verified 26.45 at m = 10). It goes to the polish as a
-seed, not to the leaderboard as a coupler. (Frozen exact of the plain-3R equivalent and of the leader control through
-this code were sent to the farm; their results land in `.cache/cp_runs/frozen_plain3r.json` / `frozen_control.json`.)
+seed, not to the leaderboard as a coupler.
+
+Frozen exact through this code, Bench(110,360), m = 10 (farm): the leader control **30.35** (= the verified k4598,
+to the digit: the frozen path is right) and the **plain-3R equivalent 25.87 (score 90.59)**: reach 0.650, follow 0.964,
+in-band 0.902 / 0.544, contact 0.009 - 4.5 points better than k4598 under the same protocol, 0.6 better than the polish's
+H1 (26.45, m = 10), with zero extra parts (complexity 21.5, the pin knee's). SELF-MEASURED, not verified. In the pin-knee
+model's own parameters (reproduces 21.22 fast exactly through `skin-normal-3r-pin-knee.py`):
+
+    {"lE": 50.2799, "lc": 17.8289, "phiE": -4.2338, "phib": -66.4684, "stk": 5.0, "ang_min": 30.0, "az1": 99.7847, "el1": 65.0641, "az2": 23.7454, "el2": 48.5131, "wd": 66.6237, "wa": -9.5334, "b3": 0.3041, "neck": 13.0}
+
+This is the coupler search's one useful by-product: a full-bench CMA that was free to move J1, the arcs, J3's seat and
+the knee together found a pin-knee basin with J1 2.5 deg off the leader's, a2 73.3, J3 10 deg nearer the arm axis
+(wd 66.6 vs 76.5) and a longer E strap / shorter knee link (lE 50.3 / lc 17.8 vs 42.1 / 24.9).
 
 ## Red team (Bench(60,160) fast, m = 10)
 
