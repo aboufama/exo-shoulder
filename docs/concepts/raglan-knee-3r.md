@@ -79,3 +79,31 @@ as the map predicts.
 
 Best coarse (k for `r1t 0.7, r1d -20`): gap **25.36** (score 90.78), reach 0.7063, follow 0.9667, in-band 14 0.8517,
 in-band 10 0.40, contact 0.0116 - the same 47 fold + 2 skin poses as k10; the whole gain is in band.
+
+**Steeper link-1 turns** (local, Bench(60, 160) fast, every rule on):
+
+| link 1 route | gap | in-band 14 | link 1 in band / samples | turn | gap with link 1 at its great-circle sample count (`gap_fixed_n`) |
+|---|---|---|---|---|---|
+| great circle (k10) | 26.34 | 0.8419 | 0.925 / 36 | 0 | 26.32 |
+| t 0.7, d -20 | 25.36 | 0.8517 | 0.993 / 64 | 90 deg | |
+| t 0.7, d -25 | 25.06 | 0.8547 | 0.996 / 72 | 101 deg | |
+| t 0.7, d -30 | 24.90 | 0.8563 | 0.994 / 80 | 110 deg | |
+| t 0.5, d -30 | 24.96 | 0.8557 | 0.990 / 80 | 107 deg | |
+| **t 0.85, d -30** | **24.79** (score 90.99) | 0.8574 | 0.997 / 84 | 114 deg (arc r 8.7) | **25.89** |
+| t 0.7, d -40 | 27.28 | 0.8325 | 0.81 / 104 | 122 deg | |
+| t 0.7, d -20, arc r 6 | 25.27 | 0.8526 | 0.993 / 64 | 90 deg | |
+
+## Red team: the number that is optimistic (dilution)
+
+In-band 14 is a SHARE of metal samples. The steep turns do not move any out-of-band part closer: link 1 grows from
+36 to 84 samples (43 -> 64 mm, +~9 g Ti) and every new sample sits in band, so the share rises by DILUTING hub 3,
+the knee link and link 2. Weighting link 1 at its great-circle sample count (`gap_fixed_n`, now in every report of
+this model) gives 25.89 for the best route: **the real gain of routing on the leader is 0.45 gap points** (link 1
+0.925 -> 0.997 in band); the other 1.1 points are dilution. A 114 deg hairpin in a 64 mm bar is buildable (a bent
+8 x 3 bar) but no designer would add it for its function - it is the annular-ring skirt artefact
+(docs/concepts/annular-ring-3r.md) in another form. The CMA streams on this model optimise the bench gap, so they will
+chase the same artefact; their bests are re-scored with `gap_fixed_n` below.
+
+The same check on the plain 3R (raglan-routed-3r k3484): link 1 has 340 samples routed vs 245 straight at the same
+axes; at the straight count the gap is 43.97 instead of 42.72, against 49.89 for the straight links at those axes:
+there routing is mostly real (link 1 0.36 -> 0.60 in band, +5.9 points), dilution 1.25 points.

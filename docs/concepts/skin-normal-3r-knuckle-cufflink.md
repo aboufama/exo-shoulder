@@ -128,3 +128,35 @@ third 0.69 (> 0.5: NOT passed), top-5 spread 0.25 (< 3: pass). The b1 = 0.3 stre
 * **The floppy pin.** The knuckle is set only by the cuff's radial constraint. At authority 6.5 mm/rad (p1) a 3 mm
   cuff-liner give lets the knuckle and link 2b swing 0.46 rad (26 deg) unpowered; at the idle optimum the knuckle is
   a pure liability (lock it = the pin knee).
+
+## Frozen wear on Bench(110,360) exact (lesson c)
+
+FROZEN_PLACEHOLDER
+
+## Verdict (02:59 UTC, time box)
+
+**Screened, dominated - the knuckle never earns its place.** Measured on the bench with every part at real size:
+
+1. The premise under test (skin-normal hubs live in band, so a closure joint that permits them buys in-band) is false at
+   the leader's seats: the hubs are already in band there (1.00 / 1.00 / 0.77-0.87 at b = 0); squaring them buys
+   nothing and moves hub 2 out of band (0.14-0.30 at b1 0.3-0.5).
+2. What the knuckle really permits is axis directions decoupled from the seats (b1), and that lever is real for the
+   kinematics - the J2 fold falls 47 -> 28 of 220 poses at b1 0.8 (fold-free ws 0.72 -> 0.81 at b1 0.6, kinematics
+   only) - but with the parts on, the knuckle must swing 30-50 deg, its boss and link 2b sweep the deltoid and the cuff
+   dyad runs out of range, so reach stays at 0.58-0.62 and in-band falls to 0.40. Best working-knuckle configuration
+   45.10 (b1 0.3, re-tuned seats, not converged) vs 28.64 idle.
+3. The optimum is the knuckle idle (qk swing 0-3 deg): 27.60 (J1 site) / 28.64 (J2 site) on Bench(60,160) fast, i.e. the
+   pin-knee leader (26.34 fast, 33.84 exact, 2 pins) plus a third pin and a crank strap. By the tie rule (fewer passive
+   joints) and on the number, skin-normal-3r-pin-knee dominates it.
+4. New knowledge that predicts beyond this morphology: (a) b1 (J1 tilted toward the dome normal) is a genuine fold lever,
+   ~19 poses of 220, for any design that can close a radial drift of 13-21 mm without height - a radial closure through
+   a pin on the J2 rotor cannot, because every rotor part sweeps a circle of the deltoid; a closure joint must sit where
+   its body's skin is fixed (the cuff or the scapula), and a J1-site knuckle moves hub 2 instead. (b) A closure-set pin
+   is only as stiff as its authority times the cuff liner: 6.5 mm/rad at p1 means 26 deg of free swing per 3 mm of liner
+   give - any closure-set passive joint needs its authority floor sized against the liner, not against toggle alone.
+
+What next (loop): the CMA streams B0-B3 (farm, queued) refine the idle and b1 basins; if a working-knuckle stream does not
+reach the idle optimum the morphology is dead by the gate. The b1 fold lever belongs to a design that takes the radial
+drift at the CUFF (where it is skin-fixed): e.g. the pin-knee leader with a cuff-side closure for the radial component
+(a third, skin-normal pin dyad stands up; a flexure or the <= 3 mm liner allowance does not cover 13 mm) - worth a
+kinematic check of how small b1 still buys most of the fold (b1 0.2: 47 -> 42).
