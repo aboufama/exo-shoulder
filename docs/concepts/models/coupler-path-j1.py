@@ -188,3 +188,60 @@ class Skin60:
         return dict(n=int(tk.sum()), reach60=round(float(tk[self.ws].mean()), 4), follow60=round(float(tk[self.clip].mean()), 4),
                     inband=round(inb, 4), h=round(h, 1), p10=round(float(np.percentile(r[fin], 10)), 1),
                     p50=round(float(np.percentile(r[fin], 50)), 1), clip_inband=round(float(((h - r) <= 12.0)[fin & self.clip[I]].mean()), 4) if (fin & self.clip[I]).any() else 0.0)
+
+
+# ---- stage 1b: kinematics on Bench(110,360) + the J2-hub skin proxy on Bench(60,160) --------------------------------
+KEYS = ["dA", "psiA", "alpha", "dAB", "psiB", "beta", "c", "kr", "kg", "a2"]
+LO = np.array([0, -360, 8, 8, -360, 8, 8, 0, -360, 50.0]); HI = np.array([45, 720, 75, 75, 720, 88, 88, 90, 720, 100.0])
+
+
+class Proxy:
+    def __init__(self):
+        self.B, self.Q, self.ws, self.ov, self.acr = poses110()
+        self.clip = ~self.ws
+        self.u1, self.u3, self.a1, self.a2 = leader(); self.P3 = self.Q @ self.u3; self.S = Skin60()
+
+    def j2cost(self, fb, a2, X, branch):
+        S = self.S; P3 = S.Q @ self.u3; R = curve_roots(fb, P3, a2, X, branch); bi = pick_roots(R, len(P3))
+        I = np.nonzero(bi >= 0)[0]
+        if len(I) < 20: return 300.0, {}
+        D = np.einsum("nij,nj->ni", S.RS[I], R["q"][bi[I]]); r = S.K.requirement(S.B, I, D); r = np.where(np.isfinite(r), r, 300.0)
+        rs = np.sort(r); n = len(rs); best = (1e9, None)
+        for k in range(int(0.6 * n), n):                            # hub level h = rs[k]: poses above it are lost
+            h = rs[k]; lost = (n - 1 - k) / n; inb = float(((h - r) <= 12.0).mean())
+            cost = 100 * lost + 50 * max(0.0, 0.9 - inb)
+            if cost < best[0]: best = (cost, dict(h=round(float(h), 1), lost=round(lost, 4), inb=round(inb, 4)))
+        return best[0], best[1]
+
+    def __call__(self, p, X=40.0):
+        fb = fourbar(dict(p, u1=self.u1)); a2 = p.get("a2", self.a2)
+        R = curve_roots(fb, self.P3, a2, X, p["branch"]); good = np.zeros(len(self.P3), bool); np.logical_or.at(good, R["j"], R["good"])
+        cov = float(good[self.ws].mean()); fol = float(good[self.clip].mean())
+        jc, jd = self.j2cost(fb, a2, X, p["branch"])
+        g = 100 * max(0, .9 - cov) + 100 * max(0, .95 - fol) + jc
+        return g, dict(cov=round(cov, 4), ov=round(float(good[self.ov].mean()), 4), acr=round(float(good[self.acr].mean()), 4),
+                       follow=round(fol, 4), j2=jd, crank_valid=round(float(fb["valid"].mean()), 3))
+
+
+def x2p(x, s4, branch):
+    x = np.clip(x, LO, HI); p = dict(zip(KEYS, map(float, x))); p["s4"] = s4; p["branch"] = branch
+    p["psiA"] %= 360; p["psiB"] %= 360; p["kg"] = (p["kg"] + 180) % 360 - 180; return p
+
+
+def kopt(seed, s4, branch, iters, out, x0=None, sig=0.25):
+    import cma
+    PX = Proxy(); rng = np.random.default_rng(seed)
+    if x0 is None:
+        x0 = np.array([rng.uniform(0, 30), rng.uniform(0, 360), rng.uniform(30, 60), rng.uniform(15, 50), rng.uniform(0, 360),
+                       rng.uniform(20, 70), rng.uniform(20, 70), rng.uniform(0, 60), rng.uniform(-180, 180), PX.a2])
+    scale = HI - LO; scale[[1, 4, 8]] = 360
+    es = cma.CMAEvolutionStrategy(((np.asarray(x0) - LO) / scale).tolist(), sig, dict(seed=seed, popsize=14, verbose=-9, bounds=[None, None]))
+    hist = []; best = (1e9, None, None)
+    for it in range(iters):
+        Xs = es.ask(); fs = []
+        for z in Xs:
+            p = x2p(LO + np.asarray(z) * scale, s4, branch); g, d = PX(p); fs.append(g); hist.append(dict(g=round(g, 2), p=p, **d))
+            if g < best[0]: best = (g, p, d)
+        es.tell(Xs, fs)
+    json.dump(dict(best=dict(g=best[0], p=best[1], d=best[2]), hist=hist), open(out, "w"))
+    return best
