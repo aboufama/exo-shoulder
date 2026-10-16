@@ -1,0 +1,78 @@
+{
+ "note": "R17 sensitivity of l1_minarc-pick1 to the K clock-spring preload (judge/dynamics.py, nominal case passive|mu0.005|t0.001|s1|hub, clips Reach a high shelf + Wash opposite shoulder; 0.08 = the judge's full run). Rule: 4R spare (K) drift vs plan <= 5 deg. State A needs 0.048 N.m to hold K on stop A (docs/research/minarc_pick1_redteam.md section 2).",
+ "command": "python3 -c \"import sys; sys.path.insert(0, 'judge'); import dynamics as D; D.K_PRELOAD = <preload>; sys.argv = ['dynamics.py', 'l1_minarc-pick1', '--quick', '--no-validate', '--jobs', '2', '--clips', 'Reach a high shelf,Wash opposite shoulder', '--out', '<out.json>']; D.main()\"",
+ "rows": [
+  {
+   "preload_Nm": 0.08,
+   "moves_freely": false,
+   "clips": {
+    "Reach a high shelf": {
+     "K_drift_deg": 9.28,
+     "cuff_twist_deg": 4.64,
+     "M_GH_Nm": 0.142,
+     "cuff_force_N": 0.22,
+     "K_on_stop_A_share": 0.663,
+     "lags": 7,
+     "worst_missed_deg": 8.7
+    },
+    "Wash opposite shoulder": {
+     "K_drift_deg": 2.42,
+     "cuff_twist_deg": 2.22,
+     "M_GH_Nm": 0.141,
+     "cuff_force_N": 0.62,
+     "K_on_stop_A_share": 0.815,
+     "lags": 0,
+     "worst_missed_deg": 0.0
+    }
+   }
+  },
+  {
+   "preload_Nm": 0.06,
+   "moves_freely": false,
+   "clips": {
+    "Reach a high shelf": {
+     "K_drift_deg": 6.38,
+     "cuff_twist_deg": 3.23,
+     "M_GH_Nm": 0.099,
+     "cuff_force_N": 0.22,
+     "K_on_stop_A_share": 0.578,
+     "lags": 5,
+     "worst_missed_deg": 6.3
+    },
+    "Wash opposite shoulder": {
+     "K_drift_deg": 1.52,
+     "cuff_twist_deg": 1.55,
+     "M_GH_Nm": 0.099,
+     "cuff_force_N": 0.47,
+     "K_on_stop_A_share": 0.805,
+     "lags": 0,
+     "worst_missed_deg": 0.0
+    }
+   }
+  },
+  {
+   "preload_Nm": 0.05,
+   "moves_freely": true,
+   "clips": {
+    "Reach a high shelf": {
+     "K_drift_deg": 4.96,
+     "cuff_twist_deg": 2.6,
+     "M_GH_Nm": 0.08,
+     "cuff_force_N": 0.22,
+     "K_on_stop_A_share": 0.55,
+     "lags": 5,
+     "worst_missed_deg": 5.2
+    },
+    "Wash opposite shoulder": {
+     "K_drift_deg": 1.11,
+     "cuff_twist_deg": 1.2,
+     "M_GH_Nm": 0.078,
+     "cuff_force_N": 0.38,
+     "K_on_stop_A_share": 0.8,
+     "lags": 0,
+     "worst_missed_deg": 0.0
+    }
+   }
+  }
+ ]
+}

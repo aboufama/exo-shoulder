@@ -1715,3 +1715,135 @@ All numbers are frozen exact on Bench(110,360), at the 5-deg margin with O20 hub
   configuration replaces a CAD configuration.
 * **Search hygiene.** Penalise every idle slaved spare (split-knuckle's 22.34 sweep minimum is K2-idle). Gate
   convergence per run, never on a concatenated sweep.
+
+## Gen-4b CAD: pick1 built at L1 and in the user's style with the gen-4 build fixes; it fails R17 on K's opening, not on the CAD (2026-10-16, l1_minarc-pick1, user_minarc_pick1)
+
+**Config and shape.** The CAD carries the verified polished config pick1 (envp-F7-g35-6) as the verifier wore it. Its stops are
+priced by `tools/env_polish.priced()`:
+* J2 stops +0.5 (smhi / smlo 7.377 / 7.3286), read at fold margin 5.5.
+* K stop B: a1max 68.0047 -> 66.4696, i.e. dK 56.65, the 5-deg rule cut.
+* Params file: `docs/research/minarc_final_polish/picks/pick1_priced.json` (= `verify/v_pick1_fit60_bench_params.json`).
+
+The fit on Bench(60,160) fast at margin 5.5 reproduces the verifier's fit to the digit: plain 11.57, near-touch 15.94.
+* Frozen hub levels J1 / K / J2 / J3: 49.11 / 57.90 / 60.71 / 79.97 mm; knee level 87.16 (BDp 49.4 / 56.2 / 62.1 / 81.6, 88.3).
+* q2 window -15.85..97.42 deg (113.3 deg of slot); K window 0..56.65 deg.
+* Clips: all 8 follow 100 %. K opens on Reach a high shelf (to 15.82 deg) and on Wash opposite shoulder (to 6.19 deg),
+  the red team's 15.8 / 6.2. Workspace closes 0.764.
+
+**Built vs model.**
+* L1: rigid samples <= 0.0001 mm and straps 0.000 mm outside the lifted hub zones, at 9 poses incl. the overhead peak
+  and forced K-open (dK -52.5). Dowels sit in their slots.
+* Full CAD: hub / boss / pad features <= 0.144 mm, frames 8.7e-5 mm, dowels in their slots.
+* Full-CAD strap samples outside the hub zones:
+
+| link | max | median | BDp CAD max |
+|---|---|---|---|
+| 1a | 0.19 mm | 0.05 mm | 2.33 mm |
+| 1b | 0.94 mm | 0.29 mm | 0.61 mm |
+| 2 | 1.16 mm | 0.32 mm | 2.19 mm |
+
+  Link 1a passes the 0.5 mm check everywhere; links 1b and 2 do not.
+  * Links 1a / 1b are one side-view profile: their 4 strips do not glue into one valid solid on this shape. That one
+    profile sits <= 0.39 mm over the L1 strap.
+  * Link 2 is 4 glued strips.
+
+**The gen-4 build findings, applied:**
+1. **K stop pair moved off link 1a's root.**
+   * Slot placement now counts the full CAD's pad root: the bar's seat along sd_b, 8 mm wide.
+   * It maximises the clearance of BOTH opposed slots: homes 66 / 246 deg, 17.2 deg clear of the root.
+   * Why gen 4 got this wrong: its L1 saw no strap points in the slot band, so it put the pair at 0 / 180, and the
+     second slot ran through the root.
+   * The L1 now carries the pair too (two slots, two dowels).
+2. **J2 stop strength is stated as a push limit**, because no geometric fix fits:
+   * O20 only leaves no larger radius.
+   * An opposed pair would need two 136-deg slots at r 7.75. That leaves 44-deg webs, narrower than link 1b's 62-deg root.
+
+   The numbers:
+   * Single O3 dowel at r 7.75 mm, MR117 C0 280 N each: the stop is rated **4.34 N.m at s0 1.0**.
+   * A 6 N.m shove gives s0 0.73 (brinelling).
+   * The O3 dowel itself holds 6 N.m at SF 3.67 in bending.
+   * The daily push at the stop is about 0.2 N.m (forced-state cuff force <= 2 N at the 95 mm pad, red team): about 22x
+     under the limit.
+3. **E strap capped at the boss top (tr + tp) under the knee's reach** in the L1 (the full CAD's member-3 rule).
+   * On pick1 no station needed the cap.
+   * Knee link vs E strap is 0.50 mm over the knee's whole range in both the L1 and the CAD: that is the washer gap.
+   * BDp's L1 had a 0.115 mm static overlap there.
+4. **Physical knee stop at 149.5 deg** (knee-window check), built as:
+   * a 2.4 x 2 mm tooth behind pin a, hanging 1.5 mm into the E strap's level, outside the O12 boss (r >= 7.9);
+   * a knee-level web joining it to the knee link.
+
+   It is built in member 3's frame at the stop and carried to the knee link by the rotation about pin a. That rotation
+   is checked against the model's member transforms: 0.0 deg on 28 poses.
+
+   Measured clearance (`pipeline/concept_l1/knee_stop_check.py`; L1 and full CAD identical):
+
+| knee angle | clearance |
+|---|---|
+| 143.6 deg (the bench's highest taken knee) | 0.68 mm |
+| 147 deg | 0.29 mm |
+| 149.4 deg | 0.012 mm |
+| 149.5 deg (the stop) | 0.000 mm |
+| 150 deg | -0.08 mm |
+| 153 deg | -0.57 mm |
+
+   The tooth's face lands flat on the strap's side, over a 3.6 mm2 contact.
+   * Clips stay <= 131.6 deg.
+   * Cost on Bench(110,360): none (taken knee max 143.56, the verifier's knee audit).
+   * Cost held out: 4 of the verifier's taken poses lie past 149.5 (to 152.75). Those 4 poses are what the stop costs;
+     they were not re-scored here.
+   * The fit bench has 2 closing poses past the stop.
+   * The L1 clips / workspace apply the stop: ang_min 30.5 on the frozen shape.
+5. **Spring, as specified by the red team:**
+   * 0.3 x 5 mm 1.4310 +C1900, 0.010 N.m/rad, 0.08 N.m preload.
+   * 215.2 mm + 1.7 mm hook: 13 half-turns at 0.42 mm per half-turn, R2.75..R7.79.
+   * Outer surface R7.94 in the O16 chamber, 36 % annulus fill.
+
+**Judges.** Same judges as the 16:16 re-judge of BDp. FEA (R9) was skipped for every design, as before. Farm cost
+$0.03 build, $0.06 L1 judges, $0.08 CAD judges.
+
+| | l1_minarc-pick1 | user_minarc_pick1 | l1_minarc-bdp | user_minarc_bdp | H1 L1 | user_pinknee_h1b |
+|---|---|---|---|---|---|---|
+| R1 (2-14) | 80.8 % | 80.5 % | 80.5 % | 80.0 % | 80.1 % | 76.7 % |
+| R1-aim (2-10) | 48.7 % | 47.2 % | 52.5 % | 51.0 % | 42.3 % | 35.8 % |
+| R4 overhead | 71.8 % | 71.0 % | 72.7 % | 72.0 % | 74.2 % | 71.2 % |
+| R16 workspace | 74.0 % | 74.0 % | 72.9 % | 73.5 % | 67.9 % | 61.7 % |
+| R3 / R6 / R7 | PASS | PASS | PASS | PASS | PASS | PASS |
+| R11 (kPa) | 0.404 | 0.281 | 0.399 | 0.272 | 0.351 | 0.216 |
+| R8 (g) | 106 | 240 | 106 | 239 | 77 | 178 |
+| R5-aim (3 DOF) | FAIL (4) | FAIL | FAIL | FAIL | PASS | PASS |
+| **R17** | **FAIL** | **FAIL** | PASS | PASS | PASS | PASS |
+| pass | 6 / 19 | 6 / 19 | 7 | 7 | 8 | 8 |
+
+The CAD keeps its L1's numbers: R1 -0.3, R1-aim -1.5, R4 -0.8. Against BDp:
+* R1 and R16 gain a little.
+* R1-aim loses 3.8 points (L1 and CAD alike). The red team predicted that loss: held-out in-band 2-10 mm 0.497 vs 0.574.
+
+**R17 fails on K's opening, not on the CAD.** In the nominal case (rolling bearings, mu 0.005), M_GH is 0.142 N.m, cuff
+force 0.62 N and cuff twist 4.64 deg; all three pass. The failure is the 4R spare-drift rule:
+* On Reach a high shelf, K stays on stop A for 66 % of the clip.
+* It lags its planned 15.8-deg opening by up to 9.28 deg, over the 5-deg rule (7 lags, each under the 10-deg stall rule).
+* The 0.08 N.m preload holds K closed while the cuff tissue (0.03 N.m/deg) twists instead.
+* BDp plans only 0.85 deg of K on that clip, so its drift is 0.03 deg.
+
+A preload sweep (same judge, nominal case, Reach a high shelf + Wash opposite shoulder; `docs/research/gen4b_k_preload_sweep.json`) finds no safe preload:
+
+| preload | K drift | result |
+|---|---|---|
+| 0.08 N.m | 9.28 deg | FAIL |
+| 0.06 N.m | 6.38 deg | FAIL |
+| 0.05 N.m | 4.96 deg | PASS (twist 2.6 deg, M_GH 0.08 N.m) |
+
+* At 0.05 N.m, state A needs 0.048 N.m to hold K on stop A (red team), so the return margin is only 1.04x.
+* The spring rate changes nothing: 0.010 and 0.015 N.m/rad give the same drift.
+
+This is pick1's config (the red team's "K moves on one more clip"), not a CAD defect. K is sensed, so the lag is
+measured by the encoder, not hidden. The lead / the user has three choices:
+* accept R17's drift rule failing on one clip;
+* run preload 0.05 at a 1.04x return margin (red-team the hold first);
+* build BDp, which passes R17 at 7 / 19.
+
+**Open:**
+* An independent verifier of these two CADs.
+* The knee stop's held-out cost, re-scored (or the stop moved to 153.5 deg, which is free on both benches but
+  gives up 4 deg of singularity margin).
+* R8's keyword masses (as BDp).
