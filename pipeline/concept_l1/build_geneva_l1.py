@@ -430,6 +430,9 @@ def main():
                                     feasible_kin_parts=round(float(np.mean([p["eval_feasible"] for p in W["poses"]])), 4),
                                     driven_feasible=int(sum(1 for p in W["poses"] if p["eval_feasible"] and p["knuckle"]["state"] != 0)))
         print(f"workspace.json: {rep_out['workspace']} ({time.time() - t0:.0f} s)", flush=True)
+    import importlib.util as _ilu                                                           # the dynamics judge's slaved-K declaration (judge/dynamics.py "SLAVED COORDINATES")
+    _sp = _ilu.spec_from_file_location("declare_slaved", os.path.join(REPO, "docs", "research", "geneva_rod_drive", "declare_slaved.py")); _ds = _ilu.module_from_spec(_sp); _sp.loader.exec_module(_ds)
+    rep_out["slaved"] = [_ds.declaration(rep_out)]
     json.dump(rep_out, open(os.path.join(dd, "build.json"), "w"), indent=1, default=float)
     print(f"done in {time.time() - t0:.0f} s -> {dd}")
 

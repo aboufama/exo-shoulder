@@ -532,6 +532,8 @@ def main():
     print(f"exported {len(pf)} parts -> {dd}; mass {rep['mass_g']}; invalid or multi-solid: {bad or 'none'}; posing {rep['posing']} ({time.time() - t0:.0f} s)", flush=True)
     rep["drive_kin"] = drive_kin_check(dv, rep["lobe"])
     rep["drive_posed"] = posed_drive_check(dd, dv)
+    _sp = importlib.util.spec_from_file_location("declare_slaved", os.path.join(REPO, "docs", "research", "geneva_rod_drive", "declare_slaved.py"))
+    _ds = importlib.util.module_from_spec(_sp); _sp.loader.exec_module(_ds); rep["slaved"] = [_ds.declaration(rep)]   # the dynamics judge's slaved-K declaration
     print(f"drive: kin {rep['drive_kin']['max_roller_dev_mm']} mm / closure {rep['drive_kin']['max_closure_mm']}; posed {rep['drive_posed']}", flush=True)
     json.dump(rep, open(os.path.join(dd, "build.json"), "w"), indent=1, default=float)
     if ks_deg is not None: M.p["ang_min"] = round(180.0 - float(ks_deg), 4)

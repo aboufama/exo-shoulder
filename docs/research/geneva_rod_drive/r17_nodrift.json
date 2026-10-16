@@ -1,0 +1,81 @@
+{
+ "rule": "judge/dynamics.py --quick (nominal rolling-bearing case + the k-rate 0.010 case), the pre-change judge (git a16c80b) vs the slaved-coupling judge, same machine; whole dynamics.json compared minus version / seconds / jobs / verdict.rule text",
+ "designs": {
+  "l1_minarc-pick1": {
+   "identical": true,
+   "R17_before": true,
+   "R17_after": true,
+   "before": {
+    "moment_gh_peak_Nm": 0.061,
+    "force_peak_N": 0.3,
+    "twist_peak_deg": 1.98,
+    "spare_drift_max_deg": 3.68,
+    "lags_over_10deg": 0
+   },
+   "after": {
+    "moment_gh_peak_Nm": 0.061,
+    "force_peak_N": 0.3,
+    "twist_peak_deg": 1.98,
+    "spare_drift_max_deg": 3.68,
+    "lags_over_10deg": 0
+   }
+  },
+  "user_minarc_pick1": {
+   "identical": true,
+   "R17_before": true,
+   "R17_after": true,
+   "before": {
+    "moment_gh_peak_Nm": 0.062,
+    "force_peak_N": 0.31,
+    "twist_peak_deg": 2.0,
+    "spare_drift_max_deg": 3.72,
+    "lags_over_10deg": 0
+   },
+   "after": {
+    "moment_gh_peak_Nm": 0.062,
+    "force_peak_N": 0.31,
+    "twist_peak_deg": 2.0,
+    "spare_drift_max_deg": 3.72,
+    "lags_over_10deg": 0
+   }
+  },
+  "l1_minarc-bdp": {
+   "identical": true,
+   "R17_before": true,
+   "R17_after": true,
+   "before": {
+    "moment_gh_peak_Nm": 0.152,
+    "force_peak_N": 0.69,
+    "twist_peak_deg": 1.96,
+    "spare_drift_max_deg": 2.13,
+    "lags_over_10deg": 0
+   },
+   "after": {
+    "moment_gh_peak_Nm": 0.152,
+    "force_peak_N": 0.69,
+    "twist_peak_deg": 1.96,
+    "spare_drift_max_deg": 2.13,
+    "lags_over_10deg": 0
+   }
+  },
+  "l1_skin-normal-3r-pin-knee-h1": {
+   "identical": true,
+   "R17_before": true,
+   "R17_after": true,
+   "before": {
+    "moment_gh_peak_Nm": 0.049,
+    "force_peak_N": 0.22,
+    "twist_peak_deg": 1.5,
+    "spare_drift_max_deg": null,
+    "lags_over_10deg": 0
+   },
+   "after": {
+    "moment_gh_peak_Nm": 0.049,
+    "force_peak_N": 0.22,
+    "twist_peak_deg": 1.5,
+    "spare_drift_max_deg": null,
+    "lags_over_10deg": 0
+   }
+  }
+ }
+}
