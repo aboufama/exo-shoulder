@@ -135,7 +135,7 @@ Each dataset is an attached JSON file (an array of row objects). Time-series row
 | events | Event log | docs/concepts/events.jsonl + judged designs (first judge time) + built-CAD R1 records | `events()` |
 | spend | GPU spend log | docs/RUNPOD_COSTS.md audit rows (the 'balance before -> after' column; a single balance is an audit with no spend) | `spend()` |
 | cov3d | Arm reach in 3-D | tools/coverage3d.py (judge/workspace.json), newest 8 designs | `cov3d()` |
-| motion | Motion previews | docs/concepts/viz/thumbs.mjs (node) from the concept kinematics (kin.js + concepts/*.js): one row per concept `{id, kind: "mechanism", n, still, view, closes, body: "", mech, joint, note: ""}`, one shared row `{id: "_shoulder", kind: "shoulder", body}`, and a row `{kind: "skipped", note: <reason>}` for a module that threw; `mech` / `joint` / `body` hold one SVG path per frame, frames separated by `\|`, `=` = the same as the frame before | `motion()`: re-runs thumbs.mjs (niced, 5-15 s) when motion.json is missing, older than kin.js / thumbs.mjs / any concepts/*.js (thumbs.mjs stamps the file with the newest source it read at its start, so a concept written during a run is newer), has no row for a concept module, or has a row whose module is gone; otherwise takes the file as written (bytes unchanged, so no re-upload). Skipped modules are warned about on every build (meta) |
+| motion | Motion previews | docs/concepts/viz/thumbs.mjs (node) from the concept kinematics (kin.js + concepts/*.js): one row per concept `{id, kind: "mechanism", n, still, view, closes, body: "", mech, joint, note: ""}`, one shared row `{id: "_shoulder", kind: "shoulder", body}`, and a row `{kind: "skipped", note: <reason>}` keyed by the file name for a module that threw, registered nothing or registered an id other than its file name; `mech` / `joint` / `body` hold one SVG path per frame, frames separated by `\|`, `=` = the same as the frame before | `motion()`: re-runs thumbs.mjs (niced, 5-15 s) when motion.json is missing, older than kin.js / thumbs.mjs / any concepts/*.js (thumbs.mjs stamps the file with the newest mtime of its sources, each stat'ed before it is read, so a concept saved after thumbs.mjs read it is newer), has no row for a concept file, or has a row whose file is gone (rows are keyed by file name; a file registering another id gets a skipped row, so this does not re-run on every build); otherwise takes the file as written (bytes unchanged, so no re-upload). Skipped modules are warned about on every build (meta) |
 | meta | Data build info | the build itself (built_at, commit, warnings) | `main()` |
 
 Calculations the page defines (`dash.calc`; their formulas are visible in the dashboard's Sources):
@@ -236,37 +236,59 @@ each cell cites that design's row; a design with no concept module gets an empty
 - What is drawn (docs/concepts/viz/thumbs.mjs): each concept runs as the gallery runs it (KIN.run over KIN.motion(240),
   the IK warm-started frame to frame), over two laps so the warm start carries across the loop's wrap (lap 2 is drawn;
   seed-offset-3r-slides drifted onto another IK branch during lap 1 and jumped back at every repeat). The loop (rest ->
-  forward raise -> overhead -> abduction -> across the body -> hand behind the back -> rest) is sampled at 56 frames
-  spaced by equal ARM TRAVEL, not equal time: KIN.motion holds at each key pose and moves fast in between, so equal-time
+  forward raise -> overhead -> abduction -> across the body -> hand behind the back -> rest) is sampled at 60 frames
+  spaced by equal TRAVEL, not equal time: KIN.motion holds at each key pose and moves fast in between, so equal-time
   frames jumped up to half the thumbnail in one tick (round-1 review: 46 units of 100 on abduction -> across). Each key
-  pose is shown twice (one short hold); the frames between two keys spread evenly over the distance the upper arm (its
-  end 200 mm down and four points 40 mm around it, 160 mm down) travels; a frame between two loop frames is solved
-  there, warm-started from the loop frame before. Measured on screen: the arm end and a 45 mm cuff circle move at most
-  9.7 units of 100 per tick (median 7.7; round 1: 46). ONE
+  pose is shown twice (one short hold); the frames between two keys spread evenly over the distance moved, per loop step
+  the larger of the upper arm's (its end 200 mm down and four points 40 mm around it, 160 mm down) and the mechanisms'
+  (the 90th percentile over all concepts of the largest move of any hub / link end / carriage: near overhead ->
+  abduction a spherical 3R swings its hubs ~2.5x as far as the arm end, and with arm travel alone 6 leaderboard rows
+  jumped > 15 units in the same tick, round-2 review); a frame between two loop frames is solved there, warm-started
+  from the loop frame before. Measured on screen (2026-10-16, 30 leaderboard rows): the arm moves at most 10.2 units of
+  100 per tick; the largest part move per tick is 10.7 units for the median row (round 2, 56 frames by arm travel
+  alone: 14.6), 8 rows exceed 15 units once (round 2: 14, 6 of them in the same tick) and no tick has more than 2. What still jumps is in the concepts' own IK (`--stats` lists part moves > 15 units
+  and > 2.5x the arm's): clavicular-front-route (J2 at its fold, 31 units), crossed-skin-tracks (a branch flip and back),
+  seed-spm-3rrr, rail-elbow. ONE
   orthographic camera for every design: from the front-right (45 deg between anterior and lateral) and 12 deg above,
   direction (1, 0.3, 1) in the rig frame, so the overhead arm points up the thumbnail (77 % of its length on screen; the
   round-1 camera from 30 deg above showed 48 % and overhead read as a ring over a circle), forward raise and abduction
-  72 % each. The frame is 430 mm wide around a point 25 mm right / 12 mm below GH on screen, fitted so every
-  leaderboard design (30 on 2026-10-15) stays inside the frame in every frame; designs with a cuff stage far down the
-  arm (offset-axis-skin-hubs) set its size. Four concepts not on the leaderboard (septum-barrel-arm-link,
-  cuff-sleeve-3r, armband-pointer, gh-tripod-telescoping-struts) are clipped at the arm end in some poses
-  (`node docs/concepts/viz/thumbs.mjs --stats --out <scratch file>` prints the counts).
+  72 % each. The frame is 436 mm wide around a point 25 mm right / 12 mm below GH on screen, fitted so every
+  leaderboard design (30 on 2026-10-16) stays inside the frame in every frame, about a unit from the edge at the closest;
+  offset-axis-skin-hubs (its cuff stage reaches 224 mm down the arm) spans the full height and sets the size. Three
+  concepts not on the leaderboard (septum-barrel-arm-link, cuff-sleeve-3r, armband-pointer) are clipped at the arm end
+  in some poses (`node docs/concepts/viz/thumbs.mjs --stats --out <scratch file>` prints the counts and the closest
+  approach to the edge per concept).
 - Layers, monochrome: the shoulder (faint, `--color-fg-muted` at 55 % opacity, 85 % on the dark theme, 1 px): deltoid
   circle, the upper arm clipped 200 mm down the arm, a shoulder line to the neck that drops with `ctx.lift`; the
   mechanism (`--color-fg`, 1.2 px): links, arcs, rails, the cuff and rings as ellipses, plate / carriage outlines;
-  joints (`--color-fg`, 3 px round caps): hubs as short bars along their axis (a dot when the axis faces the camera),
-  slider blocks, telescope splits. Hubs wider than 18 mm (sleeves around the arm) are drawn as their ring. Not drawn:
-  point markers and construction geometry (a part named "construction line", "not metal" or "trace", or a link / arc /
-  rail of radius under 0.75 mm: skin-normal-hubs-selfaligning's three hub-axis lines, coupler-path-j1's trace).
-  Parts whose points are not finite are left out (the gallery hides them too). Roles are not distinguished. Frames
-  where a concept's chain does not close (`closes` = 0) are drawn like the others; the gallery flags them.
-- Size: integers in a 0..100 viewBox, relative path commands, Ramer-Douglas-Peucker at 0.45 units, `=` for a frame
-  identical to the one before; ~15 KB per concept, 1.09 MB for 74 concepts on 2026-10-15 (the dataset limit is 8 MB).
+  joints (`--color-fg`, 2.4 px round caps, 2.1 px in the 44 px cells; 3 px tied the compact designs into knots): hubs
+  as short bars along their axis (a dot when the axis faces the camera), slider blocks, telescope splits, and the
+  rolling-contact axes of rolling cones / fins (a link named "contact ...": the moving joint line, not metal). Hubs
+  wider than 18 mm (sleeves around the arm) are drawn as their ring. Not drawn: point markers and construction geometry
+  (a part named "construction line", "not metal" or "trace", or a link / arc / rail of radius under 0.75 mm:
+  skin-normal-hubs-selfaligning's three hub-axis lines, coupler-path-j1's trace). Parts whose points are not finite are
+  left out (the gallery hides them too). Roles are not distinguished. Frames where a concept's chain does not close
+  (`closes` = 0) are drawn like the others; the gallery flags them.
+- Size: integers in a 0..100 viewBox, relative path commands, Ramer-Douglas-Peucker at 0.45 units measured to the
+  SEGMENT between a run's ends (a ring is an open chain whose ends are neighbours on the circle: measured to the
+  infinite line through them, an edge-on cuff collapsed to a 3-unit dash at the behind-the-back pose in 69 of 74
+  concepts, round-2 review; thumbs.mjs warns when any part comes out under half its projected size, `--stats` prints
+  the census), `=` for a frame identical to the one before; ~16 KB per concept, 1.18 MB for 74 concepts on 2026-10-16
+  (the dataset limit is 8 MB).
+- Rows are keyed by the concept FILE name: a file that registers an id other than its name (or an id another file
+  registers too), registers nothing or throws gets a `skipped` row with the reason in `note`, so tools/dash_build.py
+  sees files and rows agree and does not re-run on every build; it warns about skipped rows on every build.
 - Page: one shared timer at ~10 frames/s (5600 ms / n per frame, so the loop takes ~5.6 s) animates only the
   thumbnails on screen (IntersectionObserver) and stops while none is visible or the tab is hidden;
   `prefers-reduced-motion: reduce` shows one still frame (`still`: the arm on its way up to overhead, where arm and cuff
   are both clear of the shoulder), not moving. Every thumbnail shows the same arm pose at the same moment. While the
-  dataset loads or fails, or for a design without a preview, the cells stay empty.
+  dataset loads or fails, or for a design without a preview, the cells stay empty. The parsed frames are memoised on a
+  fingerprint of the rows (the runtime calls onData ~11 times on a load with a new array each time: 1 parse). The
+  sections below the leaderboard (progress, events, requirements and the detail charts, ~46k SVG dots) carry
+  `content-visibility: auto`: off-screen they are not rendered, so a tick repaints only what is on screen. Chrome trace
+  of the renderer main thread, 5 s with the board in view on the loaded 4-core box: 438-539 ms (round 2, every chart in
+  each paint: 1191-1349 ms, Layerize + PaintArtifactCompositor::Update ~570 ms of it; reduced motion: 0). Chart
+  tooltips flip above / left of the pointer near the chart's edge, because the section clips at its card.
 - Test: the local harness with the type's runtime (serve.py) serving this page as `index.html` (a scratch folder with
   `harness/serve.py`, `index.html` -> docs/dashboard/simple/index.html, `manifest.json` and `data/`), screenshots at 1280
   and 400 px, light and dark, a 3x crop and a frame sequence; zero console/page errors and no runs document (nothing
