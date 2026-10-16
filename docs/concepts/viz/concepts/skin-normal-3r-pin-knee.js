@@ -81,14 +81,18 @@
     if (Math.abs(V.dot(sv, sn)) > 0.5) return 'radial drift > 0.5 mm';
     return null;
   };
-  K.register({
+  /** a frame the loop cannot close (fold, knee out of span) is shown at the least-squares nearest configuration
+   *  warm-started from the previous frame (continuous, drawn red), not at the clipped closed form */
+  const closes = (q, ctx) => { const r = C.residual(q, ctx); return Math.max(...r.map(Math.abs)) <= 0.5; };
+  const solveC = (ctx, qPrev) => { const q = solve(ctx); return (!qPrev || closes(q, ctx)) ? q : K.dls(C, ctx, qPrev, { iters: 40 }).q; };
+  const C = {
     id: 'skin-normal-3r-pin-knee', name: 'Pin-knee 3R: GH-ray J1/J2, offset J3, flat two-pin knee (0 passive translations)',
     dof: { active: 3, passive: 2 },
     params: P,
     q0: ctx => solve(ctx),
     qNames: ['J1', 'J2', 'J3', 'knee pin a', 'knee pin b'], qUnits: ['deg', 'deg', 'deg', 'deg', 'deg'],
     resUnits: ['deg', 'deg', 'deg', 'mm', 'mm', 'mm'],
-    solve,
+    solve: solveC,
     residual: (q, ctx) => { const F = fk(q); return M.rotErrDeg(F.R5, Qof(ctx)).concat(F.t5); },   // arm pose implied by the loop vs the arm
     check,
     parts: (q, ctx) => {
@@ -124,5 +128,6 @@
         { kind: 'point', role: 'link', name: 'GH centre', p: [0, 0, 0], r: 4 }
       ];
     }
-  });
+  };
+  K.register(C);
 })();
