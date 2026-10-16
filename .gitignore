@@ -62,3 +62,6 @@ pipeline/full-exo/designs/cad_r21_*/
 
 # python pickles are caches (CLAUDE.md: never commit caches)
 *.pkl
+
+# per-machine operations state (dashboard publish versions: tools/dash_refresh.sh, docs/OPERATIONS.md)
+.state/
