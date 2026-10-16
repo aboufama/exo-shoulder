@@ -17,7 +17,7 @@ HERE = os.path.dirname(os.path.abspath(__file__)); sys.path.insert(0, HERE); sys
 import scene_export as SE, body_pose as BP, mannequin as MQ
 
 DD, OUT, SPEC = sys.argv[1], sys.argv[2], json.loads(sys.argv[3]); os.makedirs(OUT, exist_ok=True)
-GRID = float(os.environ.get("GRID", 0.2)); CHAIN = ("base", "l1", "l2", "l3", "l4")
+GRID = float(os.environ.get("GRID", 0.2)); CHAIN = ("base", "l1", "l1a", "l1b", "l2", "l3", "l4")   # l1a / l1b: a chain split at a knuckle (minarc)
 ps = SPEC["pose"]
 if "clip" in ps:
     C = json.load(open(os.path.join(DD, "clips.json"))); fr = [c for c in C["clips"] if c["name"] == ps["clip"]][0]["frames"][ps["frame"]]
