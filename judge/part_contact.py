@@ -1,8 +1,21 @@
 """JUDGE R6: do parts that move relative to each other interpenetrate? For every pair of parts in different motion groups,
 every step-th frame: the deepest point of A inside B, both ways (A in B and B in A), by the winding number + exact depth to
-B's welded, closed tessellation (judge/sdist.py, validated in judge/test_sdist.py; open tessellations are listed and never
-used as B). Geometry only - does not use the pipeline's member fields. Designed coaxial fits at a shared joint (pin in
-sleeve, washer on seat) sit within tol.
+B's welded, closed tessellation (judge/sdist.py, validated in judge/test_sdist.py). Geometry only - does not use the
+pipeline's member fields. Designed coaxial fits at a shared joint (pin in sleeve, washer on seat) sit within tol.
+
+OPEN parts are containers too (2026-10-16; until then pair_ok() dropped every B that was not watertight, so a pin fully
+embedded in a link with a tessellation crack was never seen - the verifier found param_r20's base and link 2 3.49 mm inside
+its open link 1, judge/VERIFY_part_contact.md). close_open() makes their oriented 2-chain closed, exactly:
+  - edges shared by 4 faces (two bodies meeting on an edge, the RSR3 rails) already form a closed chain: no change;
+  - otherwise the boundary of the chain (every directed edge without its reverse: the crack's two lips, T-junctions) is
+    split into loops and each loop is capped by ear clipping on the shortest diagonal (the cap zips the crack shut along
+    its lips); the cap's own edges cancel the boundary, so the integer winding number of judge/sdist.py applies unchanged,
+    and the depth is the exact distance to the capped tessellation. part_contact.json lists every open part, the cap
+    (triangles, area) and its deviation from the original surface (cap_max_dev_mm: every cap sample's distance to the open
+    tessellation), so a cap that is not a crack is visible;
+  - a part whose chain still does not close (a non-orientable tessellation) falls back to libigl's exact generalized
+    winding number |w| > 0.5 on the open tessellation (igl.winding_number, no grid, no reject mask) - listed as such.
+judge/test_part_contact.py: a pin fully embedded in a cracked slab must be caught (exact depth) both ways.
 
 A's points are DENSE SURFACE SAMPLES, not only its vertices (2026-10-16: the vertex-only test, every other vertex at step
 12, scored 0.0 mm on the first build of l1_offset-skin-normal-3r while link 2 sat 1.12 mm inside the J3 plate - two thin
@@ -110,18 +123,82 @@ def cached_samples(V, F, h, sharp_deg, m):
     return S, kind
 
 
-def prepare(parts, h=1.0, sharp_deg=SHARP_DEG, build=None):
-    """per part: group, name, samples (local frame) + kind, local box, closed?, Mesh of the welded tessellation (B side;
-    grids built for the indices in build, or for every closed part when build is None)"""
+def prepare(parts, h=1.0, sharp_deg=SHARP_DEG, build=None, open_mode="cap"):
+    """per part: group, name, samples (local frame) + kind, local box, open-part info, Mesh of the welded (open: closed by
+    close_open) tessellation (B side; grids built for the indices in build, or for every part when build is None)"""
     info = []
     for g, n, V, F in parts:
-        Vw, Fw, closed, m = weld(V, F); S, kind = cached_samples(V, F, h, sharp_deg, m)
+        Vw, Fw, closed, m = weld(V, F); S, kind = cached_samples(V, F, h, sharp_deg, m); op = None
+        if not closed: Vw, Fw, closed, op = close_open(m, open_mode)                # A side keeps the original surface
         lo, hi = S.min(0), S.max(0)
-        info.append(dict(g=g, n=n, S=S, kind=kind, closed=closed, reoriented=bool(m.metadata.get("reoriented")), M=Mesh(Vw, Fw) if closed else None, lo=lo, hi=hi,
+        info.append(dict(g=g, n=n, S=S, kind=kind, closed=closed, open=op, reoriented=bool(m.metadata.get("reoriented")), M=Mesh(Vw, Fw), lo=lo, hi=hi,
                          C=np.array([[x, y, z] for x in (lo[0], hi[0]) for y in (lo[1], hi[1]) for z in (lo[2], hi[2])])))
     for i, x in enumerate(info):
-        if x["closed"] and (build is None or i in build): build_B(x)
+        if build is None or i in build: build_B(x)
     return info
+
+
+def _directed_boundary(F, nv):
+    """the boundary of an oriented 2-chain: directed edges (a, b) with multiplicity #(a->b) - #(b->a) > 0, repeated"""
+    d = np.asarray(F)[:, [0, 1, 1, 2, 2, 0]].reshape(-1, 2).astype(np.int64)
+    k, c = np.unique(d[:, 0] * nv + d[:, 1], return_counts=True); cnt = dict(zip(k.tolist(), c.tolist()))
+    out = []
+    for key, c in cnt.items():
+        a, b = divmod(key, nv); net = c - cnt.get(b * nv + a, 0)
+        out += [(a, b)] * max(net, 0)
+    return out
+
+
+def close_open(m, mode="cap"):
+    """(V, F, container?, info) for a welded tessellation trimesh does not call watertight (see the module doc). mode "cap":
+    orient consistently (trimesh fix_winding), cap every boundary loop of the oriented chain by ear clipping on the shortest
+    diagonal, check the chain closes and points outward; "gwn" (or a chain that does not close): the open tessellation, as is,
+    tested with the generalized winding number. info: what was done, for part_contact.json"""
+    import trimesh, igl
+    w = m.copy(); V = np.asarray(w.vertices, float)
+    e = np.sort(np.asarray(w.faces)[:, [0, 1, 1, 2, 2, 0]].reshape(-1, 2), 1); _, ec = np.unique(e, axis=0, return_counts=True)
+    info = dict(open_edges=int((ec == 1).sum()), nonmanifold_edges=int((ec > 2).sum()), faces=int(len(w.faces)))
+    if not w.is_winding_consistent: trimesh.repair.fix_winding(w); info["winding_fixed"] = True
+    F = np.asarray(w.faces); bd = _directed_boundary(F, len(V))
+    info["boundary_edges"] = len(bd); info["boundary_length_mm"] = round(float(sum(np.linalg.norm(V[a] - V[b]) for a, b in bd)), 2)
+    cap = []
+    if mode == "cap" and bd:
+        out = {}
+        for a, b in bd: out.setdefault(a, []).append(b)
+        loops = []
+        while out:                                                                    # Euler: in = out at every vertex of a chain boundary
+            a0 = next(iter(out)); L = [a0]; a = a0
+            while True:
+                b = out[a].pop()
+                if not out[a]: del out[a]
+                if b == a0: break
+                L.append(b); a = b
+                if a not in out: L = None; break                                      # unbalanced: not an oriented chain
+            if L is None: loops = None; break
+            loops.append(L)
+        if loops is not None:
+            for L in loops:                                                           # the cap runs the loop backwards: its edges cancel the lips
+                P = list(L[::-1])
+                while len(P) > 3:
+                    n_ = len(P); i = int(np.argmin([np.linalg.norm(V[P[(j - 1) % n_]] - V[P[(j + 1) % n_]]) for j in range(n_)]))
+                    cap.append((P[(i - 1) % n_], P[i], P[(i + 1) % n_])); del P[i]
+                if len(P) == 3: cap.append(tuple(P))
+            info["loops"] = len(loops)
+    Fc = np.r_[F, np.asarray(cap, int).reshape(-1, 3)]
+    closed = not _directed_boundary(Fc, len(V))
+    if mode == "cap" and closed:
+        vol = trimesh.Trimesh(V, Fc, process=False).volume
+        if vol < 0: Fc = Fc[:, ::-1]; info["inverted"] = True
+        info.update(how="closed chain: " + (f"{len(cap)} cap triangles over {info.get('loops', 0)} boundary loops (ear clipping, shortest diagonal), "
+                                             "integer winding number + exact depth to the capped tessellation" if cap else
+                                             "no boundary (non-manifold edges only), integer winding number + exact depth as is"))
+        if cap:
+            C = trimesh.Trimesh(V, np.asarray(cap, int), process=False); info["cap_triangles"] = len(cap); info["cap_area_mm2"] = round(float(C.area), 4)
+            S, _ = surface_samples(V, np.asarray(cap, int), 0.05, 180.0, C)
+            info["cap_max_dev_mm"] = round(float(np.sqrt(igl.point_mesh_squared_distance(S, V, np.ascontiguousarray(F, np.int64))[0].max())), 4)
+        return V, Fc, True, info
+    info["how"] = "generalized winding number |w| > 0.5 (libigl, exact) + exact depth to the open tessellation (no grid)"
+    return V, F, True, dict(info, gwn=True)
 
 
 def build_B(x):
@@ -132,20 +209,23 @@ def build_B(x):
     so the segment node -> P crosses nothing and P is outside like the node. Exact, never a guess: it only spares the
     kd-tree and the segment crossings for A's samples well clear of B."""
     from scipy.ndimage import maximum_filter
-    M = x["M"]
+    import igl
+    M = x["M"]; x["gwn"] = bool((x.get("open") or {}).get("gwn"))
+    if x["gwn"]:                                                                      # open fallback: no grid, no reject mask
+        x["F64"] = np.ascontiguousarray(M.F, np.int64); M.V = np.ascontiguousarray(M.V, float)
+        x["AABB"] = igl.AABB(); x["AABB"].init(M.V, x["F64"]); return x
     if not hasattr(M, "W"): M.build_grid()
     n = np.asarray(M.W.shape); idx = np.clip(np.rint((M.S - M.glo) / M.g).astype(int), 0, n - 1)
     mark = np.zeros(M.W.shape, np.uint8); mark[idx[:, 0], idx[:, 1], idx[:, 2]] = 1
     k = int(np.floor((M.h + M.g * np.sqrt(3)) / M.g)) + 1
     x["OUT"] = (maximum_filter(mark, size=2 * k + 1, mode="constant") == 0) & (M.W == 0)
-    import igl
     x["F64"] = np.ascontiguousarray(M.F, np.int64); M.V = np.ascontiguousarray(M.V, float)
     x["AABB"] = igl.AABB(); x["AABB"].init(M.V, x["F64"])
     return x
 
 
 def pair_ok(info):
-    """(n, n) bool: ordered pairs (A, B) that are tested - different motion groups, B closed"""
+    """(n, n) bool: ordered pairs (A, B) that are tested - different motion groups (every B is a container: close_open)"""
     g = np.array([x["g"] for x in info]); cl = np.array([x["closed"] for x in info])
     return (g[:, None] != g[None, :]) & cl[None, :]
 
@@ -183,9 +263,11 @@ def depth_in(A, B, Wa, Wb, tol):
     P = A["S"][m] @ (Ra.T @ Rb) + (ta - tb) @ Rb                                     # those samples in B's frame
     k = np.all((P > lo) & (P < hi), axis=1); m, P = m[k], P[k]                       # deeper than tol: inside the box by tol
     if not len(m): return 0.0, None
-    M = B["M"]; i = np.clip(np.rint((P - M.glo) / M.g).astype(int), 0, np.asarray(M.W.shape) - 1)
-    k = ~B["OUT"][i[:, 0], i[:, 1], i[:, 2]]; m, P = m[k], P[k]                       # exact reject: well clear of B, outside
-    if not len(m): return 0.0, None
+    M = B["M"]
+    if not B.get("gwn"):
+        i = np.clip(np.rint((P - M.glo) / M.g).astype(int), 0, np.asarray(M.W.shape) - 1)
+        k = ~B["OUT"][i[:, 0], i[:, 1], i[:, 2]]; m, P = m[k], P[k]                   # exact reject: well clear of B, outside
+        if not len(m): return 0.0, None
     dep, k = max_depth(B, P, tol)
     return (dep, KINDS[A["kind"][m[k]]]) if k is not None and dep > tol else (0.0, None)
 
@@ -199,11 +281,16 @@ def max_depth(B, P, tol):
     a joint puts a whole face on B's surface and costs one distance query per sample, nothing more."""
     M = B["M"]; d = np.sqrt(B["AABB"].squared_distance(M.V, B["F64"], P)[0]); keep = np.where(d > tol)[0]
     if not len(keep): return 0.0, None
-    Pk, dk = P[keep], d[keep]; i = np.clip(np.rint((Pk - M.glo) / M.g).astype(int), 0, np.asarray(M.W.shape) - 1)
-    W = M.W[i[:, 0], i[:, 1], i[:, 2]].astype(int); dn = np.linalg.norm(Pk - (M.glo + M.g * i), axis=1)
-    amb = np.where(dk <= dn + 1e-9)[0]
-    if len(amb): W[amb] = M.winding_at(Pk[amb], dk[amb])
-    ins = np.where(W >= 1)[0]
+    Pk, dk = P[keep], d[keep]
+    if B.get("gwn"):                                                                  # open tessellation: generalized winding number
+        import igl
+        ins = np.where(np.abs(igl.winding_number(M.V, B["F64"], np.ascontiguousarray(Pk, float))) > 0.5)[0]
+    else:
+        i = np.clip(np.rint((Pk - M.glo) / M.g).astype(int), 0, np.asarray(M.W.shape) - 1)
+        W = M.W[i[:, 0], i[:, 1], i[:, 2]].astype(int); dn = np.linalg.norm(Pk - (M.glo + M.g * i), axis=1)
+        amb = np.where(dk <= dn + 1e-9)[0]
+        if len(amb): W[amb] = M.winding_at(Pk[amb], dk[amb])
+        ins = np.where(W >= 1)[0]
     if not len(ins): return 0.0, None
     j = ins[np.argmax(dk[ins])]
     return (float(dk[j]), int(keep[j])) if dk[j] > tol else (0.0, None)
@@ -238,11 +325,11 @@ def _work(item):
     return clip, fi, out, time.process_time() - c0
 
 
-def run(dd, step=3, tol=0.15, h=1.0, jobs=1, select=None, log=print):
+def run(dd, step=3, tol=0.15, h=1.0, jobs=1, select=None, log=print, open_mode="cap"):
     """the judge on a design dir: returns the part_contact.json dict (select(clip, fi) -> bool limits the frames)"""
     t0 = time.time(); c0 = time.process_time(); parts = load_parts(dd)
     todo = [(c, fi, xforms(fr)) for c, fi, fr in frames(dd, step) if select is None or select(c, fi)]
-    probe = prepare(parts, h, build=set())                                          # samples + boxes, no grids yet
+    probe = prepare(parts, h, build=set(), open_mode=open_mode)                      # samples + boxes, no grids yet
     ok = pair_ok(probe); need = set()
     for _, _, W in todo: need |= {int(j) for _, j in candidates(probe, W, ok, tol)}
     for j in need: build_B(probe[j])                                                  # grids only where a part is ever B
@@ -258,11 +345,12 @@ def run(dd, step=3, tol=0.15, h=1.0, jobs=1, select=None, log=print):
                 if dep > r["max_depth"]: r["max_depth"] = round(dep, 2); r["worst"] = [clip, fi]; r["worst_point"] = kind
     for r in res.values():                                                           # keep the series short: the worst 12 frames
         r["per_frame"] = dict(sorted(r["per_frame"].items(), key=lambda kv: -kv[1])[:12])
-    OPEN = [f"{x['g']}|{x['n']}" for x in info if not x["closed"]]
+    OPEN = [f"{x['g']}|{x['n']}" for x in info if not x["closed"]]                  # none since close_open (kept for readers)
     ns = {f"{x['g']}|{x['n']}": int(len(x["S"])) for x in info}
     return dict(step=step, tol_mm=tol, frames_checked=nf, pairs=int(ok.sum()), seconds=round(time.time() - t0), setup_seconds=round(t1 - t0), jobs=jobs,
                 cpu_seconds=round(cpu), cpu_s_per_frame=round((cpu - cs) / max(nf, 1), 3),
                 violations=res, open_parts_not_tested_as_container=OPEN,
+                open_parts={f"{x['g']}|{x['n']}": x["open"] for x in info if x["open"]},
                 reoriented_parts=[f"{x['g']}|{x['n']}" for x in info if x.get("reoriented")],
                 samples=dict(h_mm=h, sharp_deg=SHARP_DEG, total=int(sum(ns.values())), per_part=ns,
                              rule="every vertex + sharp/boundary edges at <= h/2 + longest-edge bisection of every face to edges <= h (midpoints)"),
@@ -277,5 +365,6 @@ if __name__ == "__main__":
     out = run(dd, a.step, a.tol, a.h, a.jobs); res = out["violations"]
     os.makedirs(os.path.join(dd, "judge"), exist_ok=True); json.dump(out, open(os.path.join(dd, "judge", "part_contact.json"), "w"), indent=1)
     print(f"part contact: {out['frames_checked']} frames x {out['pairs']} ordered pairs, {out['samples']['total']} surface samples (h {a.h} mm), "
-          f"{len(res)} interpenetrating by > {a.tol} mm (worst {out['max_depth']} mm); {len(out['open_parts_not_tested_as_container'])} open parts not usable as containers; {out['seconds']} s")
+          f"{len(res)} interpenetrating by > {a.tol} mm (worst {out['max_depth']} mm); {len(out['open_parts'])} open parts closed as containers "
+          f"({len(out['open_parts_not_tested_as_container'])} not usable); {out['seconds']} s")
     for k, v in sorted(res.items(), key=lambda kv: -kv[1]["max_depth"])[:15]: print(f"  {v['max_depth']:6.2f} mm in {v['frames']:3d} frames  {k[:110]}  worst {v['worst']} ({v['worst_point']})")

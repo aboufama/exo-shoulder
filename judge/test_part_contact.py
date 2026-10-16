@@ -7,7 +7,11 @@ either inside the other - the case the vertex-only judge (every other vertex, st
      plate at every frame (verifier: 1.12 mm at Raise overhead 24, dense samples at 0.7 mm) and link 1 / link 2 cross
      by ~0.66 mm in Wave 71-79 and 95-103 (9 frames each, measured at step 1). It must FAIL R6 with >= 1.0 mm.
   3. the final build (the committed design dir): the same frames plus every 12th frame must PASS (<= 0.15 mm).
-    python3 judge/test_part_contact.py [--quick]     (exit 1 on a failure; --quick: the synthetic case only)"""
+  4. (synthetic, in --quick) OPEN containers: a pin fully embedded in a slab whose tessellation is open - T-junction cracks
+     on its top face, and a 2 x 2 mm hole - must be caught at the exact depth (3.0 mm), by the capped chain and by the
+     generalized-winding-number fallback; until 2026-10-16 an open part was never a container and this read 0. A pad
+     resting 0.5 mm above the hole must stay clean (the cap does not inflate the slab).
+    python3 judge/test_part_contact.py [--quick]     (exit 1 on a failure; --quick: the synthetic cases only)"""
 import os, subprocess, sys, tempfile, time
 import numpy as np
 HERE = os.path.dirname(os.path.abspath(__file__)); REPO = os.path.dirname(HERE); sys.path.insert(0, HERE)
@@ -90,6 +94,41 @@ def equivalence(dd, n=20000, seed=0):
             check(abs(d_new - d_ref) < 1e-6, f"{x['n'][:40]} tol {tol}: deepest {d_new:.6f} vs sdist {d_ref:.6f} mm")
 
 
+def cracked_slab():
+    """slab 40 x 10 x 6 (z 0..6), tessellated (edges <= ~2.5 mm), with (a) T-junction cracks: a few top-face triangles split
+    at their edge midpoints while their neighbours keep the long edge, (b) a 2 x 2 mm hole in the top face. Open both ways."""
+    import trimesh
+    m = trimesh.creation.box(extents=(40, 10, 6)); m.apply_translation((0, 0, 3))
+    for _ in range(3): m = m.subdivide()
+    m.merge_vertices(); c = m.triangles_center
+    tj = trimesh.Trimesh(m.vertices, m.faces, process=False).subdivide(face_index=np.where((c[:, 2] > 5.99) & (np.abs(c[:, 0] - 8) < 2.5) & (np.abs(c[:, 1]) < 2))[0])
+    keep = ~((c[:, 2] > 5.99) & (np.abs(c[:, 0] + 8) < 1.0) & (np.abs(c[:, 1]) < 1.0))
+    hole = trimesh.Trimesh(m.vertices, m.faces[keep], process=False)
+    return dict(tjunction=tj, hole=hole)
+
+
+def open_containers():
+    print("4. open containers: a pin fully inside a cracked slab (exact depth 3.0 mm)")
+    import trimesh
+    pin = trimesh.creation.cylinder(radius=1.0, height=10.0, sections=32); pin.apply_transform(trimesh.transformations.rotation_matrix(np.pi / 2, (0, 1, 0)))
+    pin.apply_translation((0, 0, 3))                                                 # axis along x at y 0, z 3: 3.0 mm from the top / bottom faces
+    pad = trimesh.creation.box(extents=(4, 4, 2)); pad.apply_translation((-8, 0, 6.5 + 1.0))   # 0.5 mm above the hole
+    I = (np.eye(3), np.zeros(3))
+    for crack, S in cracked_slab().items():
+        V, F = np.asarray(S.vertices, float), np.asarray(S.faces)
+        check(not PC.weld(V, F)[2], f"{crack}: the slab's tessellation is open (the old judge never used it as a container)")
+        for mode in ("cap", "gwn"):
+            info = PC.prepare([("s", "slab", V, F), ("p", "pin", np.asarray(pin.vertices, float), np.asarray(pin.faces)),
+                               ("q", "pad", np.asarray(pad.vertices, float), np.asarray(pad.faces))], 1.0, build=None, open_mode=mode)
+            out = PC.frame_depths(info, PC.pair_ok(info), {"s": I, "p": I, "q": I}, 0.15, memo={})
+            d = out.get("p|pin  IN  s|slab", (0.0, None))[0]; how = info[0]["open"]
+            print(f"     {crack}, {mode}: pin in slab {d:.3f} mm; other pairs {sorted((k, round(v[0], 2)) for k, v in out.items() if k != 'p|pin  IN  s|slab')}; "
+                  f"{how['how'][:60]}, boundary {how['boundary_edges']} edges, cap {how.get('cap_triangles', 0)} triangles, dev {how.get('cap_max_dev_mm', '-')} mm")
+            check(abs(d - 3.0) < 0.02, f"{crack}, {mode}: the embedded pin is caught at the exact depth ({d:.3f} vs 3.000 mm)")
+            check(set(out) == {"p|pin  IN  s|slab"}, f"{crack}, {mode}: nothing else interpenetrates (the pad above the hole, the slab in the pin)")
+            check(bool(how.get("gwn")) == (mode == "gwn"), f"{crack}, {mode}: part_contact lists the slab as open, closed by {'the GWN fallback' if mode == 'gwn' else 'a cap'}")
+
+
 SELECT = lambda c, fi: (c == "Raise overhead" and 21 <= fi <= 27) or (c == "Wave" and 72 <= fi <= 78)
 
 
@@ -122,6 +161,6 @@ def builds():
 
 
 if __name__ == "__main__":
-    synthetic()
+    synthetic(); open_containers()
     if "--quick" not in sys.argv: builds()
     print("FAILED: " + "; ".join(FAIL) if FAIL else "all R6 judge checks pass"); sys.exit(1 if FAIL else 0)
