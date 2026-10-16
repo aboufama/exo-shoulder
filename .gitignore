@@ -58,3 +58,4 @@ pipeline/full-exo/designs/cad_r21_*/
 # stray numpy scratch dumps that agents write at the repo root (2026-10-16)
 /*.npy
 /*.npz
+/osnp/

@@ -21,3 +21,39 @@
 4. **What else shows the number is right.** The plain-3R control in the same file (rocker=0) reproduces the pin-knee
    leader's 26.34 exactly; the bench (outside judge); the frozen-shape exact bench (lesson c); the red-team pose list
    (rest / overhead / across / behind groups, the closest metal and the near-touch gap); the adversarial verifier.
+
+## What was built (docs/concepts/models/acromial-rocker-3r.py)
+
+On the pin-knee leader (skin-normal-3r-pin-knee k10; its Model = the seed's verified S.VModel rules + knee checks):
+J1's hub rides a passive rocker (member 7) turning about a GH line c (pivot boss O14, MR63ZZ pair, 9 mm crown, on
+the scapula); every chain member is rotated by R0(q0); q0 in closed form from the rod length (one branch, the rest
+pose's); taken only with transmission >= 25 deg, |q0| <= 75 deg, ball-link tilt <= 30 deg and U bend <= 40 deg (fixed
+best mountings over the fit clips), and q0 is in the 10 fps continuity vector. Parts at real size: rocker straps
+8 x 3 (pivot -> hub 1 at f1 + UP, pivot -> stud A), ball link at A and U-joint at C as O8 x 12 bodies, an O12 x 3
+U base plate on the cuff at C, the O4 rod sampled every 2 mm on its skin side. Stud centres derive from the rest skin
+along their rays + h and are then raised (refit loop) to >= 9 mm over their fitted plates. Collisions: rod vs hubs 1-3,
+links, E, knee, pad, boss, rocker strap; rocker / boss / ball vs hubs 2-3, link 2, E, knee, pad, arm base, U (1 mm) and
+link 1 (adjacent at J1, 0.15 mm); arm base / U vs hubs, links, E (1 mm) and knee (adjacent at pin b).
+**Spec fixes:** the arm stud sits on the arm (member 5), not on member 3, so q0 does not inherit the knee drift; the
+first build's bracket strap from the arm pad to C was replaced by a base plate on the cuff (a strap ray toward the
+medial arm traced into the torso and parked the stud at 215 mm).
+
+**Control (same file, rocker=0): 26.34** on Bench(60,160) fast - reach 0.7063, follow 0.9667, in-band 0.8419 / 0.4001,
+contact 0.0116, fold 47 of 220 - identical to the pin-knee row.
+
+## Kill test, measured
+
+| step | what | result |
+|---|---|---|
+| fold census (leader seats) | th = angle(J1, J3), window [43.7, 104.4] deg (a1 40.3, a2 74.1, 10 deg margin) | 23 poses too close (flexion planes 0-45, elev 90-150), 24 too far (across the body planes 75-120; behind -90..-60); needed th 10.4-160.2 |
+| ideal schedule (free q0, +-75) | J1 cone beta 10 / 20 / 30 / 40 deg | fold-free 187 / 201 / 211 / 216 of 220 (control 173) |
+| rod-realisable, free placement | closed-form q0, transmission 25, cap 75, 10 fps jumps; hill-climb | ws fold-free 132-133 of 160 (control 115), 0 jumps - but rA 50-80 / rC 50-83 at any radius |
+| rod-realisable, skin placement | pivot skin <= 66 mm, stud centres h 9-16 mm over the rest skin, C <= 30 deg from hub 3's seat ray; 39 871 tries + hill-climb | best ws fold-free 126 random, 131 hill-climbed (+16 = reach <= 0.79 kinematically) |
+| full model, real parts | 6 hill-climbed proxy picks (local) | **0 poses taken in every one** (gap 275-375) |
+
+Why the kinematic gain does not survive the parts (measured on those 6): the rocker strap to stud A and the ball link
+sweep +-75 deg cones over the acromion/deltoid and must clear the highest skin under the whole sweep: fitted at
+60-87 mm over 45-55 mm skin; the refit then lifts the ball centre to rA 70-98 mm, which changes the rod geometry the
+proxy optimised; 69-129 of 220 poses fail the rod limits (dead point / cap / ball tilt / U bend); the pivot boss
+overlaps hub 1 whenever beta < ~22 deg (boss O14 + hub O20 at r ~50 mm need >= 18 mm, 114 poses); the U base on the
+arm overlaps hub 3 whenever C is < ~20 deg from hub 3's seat (72-124 poses); the ball body hits hub 2 (69 poses).

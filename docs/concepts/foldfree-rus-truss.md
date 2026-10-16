@@ -97,3 +97,44 @@ workspace on its best leg. That is >= 17 gap points from reach alone, before any
 The kill is a closure theorem: only a crank circle on a sphere about GH turns the arm's large angular sweep into a
 bounded angular band. Off-GH cranks turn it into a distance window that compact cranks cannot cover. This is the RUS
 analogue of the osn finding that offsetting J1 / J2 off GH needs a radial slide.
+
+## Measured, step 1: every leg can be fold-free, but every fold-free crank sweeps the trunk or the arm
+
+All data come from Bench(60,160) on the fast grid. The scripts and their JSON are in docs/research/rus/:
+`leg_bands.py`, `crank_park.py`, `skew_kin.py`.
+
+**1. Leg bands (`leg_bands.json`).** The scan covered 8 crank seats x 35 arm studs. A stud is set by s mm down the
+humerus and theta deg about it (+ posterior), with the ball about 61 mm off the axis. For each pair the scan finds the
+smallest crank arc beta, with its best rod angle gamma, whose band (10 deg margins) holds >= 98 % of the workspace
+and every clip frame. 188 of the 280 pairs have such a leg with beta <= 90:
+
+| seat | fold-free studs | beta / gamma (deg) |
+|---|---|---|
+| posterior-horizontal, bvec(-36..-24, 4..16) | humeral-head level, posterior-medial (s 0-20, theta 90-150) | 60-65 / 58-71: compact |
+| top / dome seats (-24,78), (84,82), (60,75), (-10,40) | | 70-90 / 73-107: long cranks, long rods |
+
+A stud is a point, not a line, so the leg uses the signed angle angle(c, Q). The 3R's J3 line can use either end:
+(-24,4) vs wdir(80,-90) spans 10.9-119.3 deg for +w and 60.7-169.1 for -w. The posterior leg is the 3R's
+fold-free 65 / 65 pair with the stud on the +w end.
+
+**2. Crank parking (`crank_park.json`).** For 12 fold-free legs x 2 IK branches, every crank centreline ray (alpha
+0..beta in 5 deg steps), at the crank angle the leg takes in each valid pose, was marched for the K3 skin requirement
+(capped at 160 mm):
+
+| leg | branch | crank radius need p50 / p90 (mm) | skin at the seat |
+|---|---|---|---|
+| posterior seat (all 6) | sigma +1 | >= 160 / 160 (the crank rays run through the trunk or the arm in most poses) | 93-102 |
+| (-24,4), stud (10,90), beta 65 | sigma -1 | 93.1 / 106.7 (the best leg) | ~93 |
+| other posterior legs | sigma -1 | 93-116 / 123-160 | 93-102 |
+| top (-24,78), stud (0,120), beta 80 | sigma -1 | 60.4 / 85.3 | ~51 |
+| top (84,82), stud (30,30), beta 70 | sigma +1 | 62.7 / 93.5 | ~45 |
+| (-10,40), stud (0,150), beta 70 | sigma -1 | 82.8 / 159.7 | ~65 |
+
+**The leg's fold band and its crank parking pull in opposite directions.** This is the same trade the 3R makes
+between J1's band and hub parking (docs/FINDINGS.md):
+- a fold-free leg needs a 60-85 deg crank;
+- a 60-85 deg crank circle about a scapula-fixed axis sweeps the region the arm passes through (or the trunk on the
+  other branch);
+- so a rigid crank must stand 14-60 mm (p90) above the skin at its far end.
+
+The truss has three such cranks, where the 3R has one J2 hub.
