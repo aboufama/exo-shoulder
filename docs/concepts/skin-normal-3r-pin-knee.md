@@ -586,3 +586,65 @@ Checks the round-3 harness does not make:
 
 What it means: under the user's rulings the pin knee stays the verified leader at 27.20 (score 90.1), 13.45 points
 short of 95 at complexity 19.5. Reach (0.658, overhead 0.18) is still the whole deficit, as the rebase track says.
+
+## Verification (P5, margin 5) (independent verifier, 2026-10-16 ~08:22 UTC)
+
+Claim checked: the rebase track's margin-5 re-polish candidate **P5 = HWm5-g23-5** (row field `rebase_polish_m5`,
+self-measured polish protocol exact 21.79 / near-touch 22.34, held-out 24.87) beats the polished H1 (H-g107-1) by
+>= 1 gap point. Harness: `docs/concepts/verify/skin-normal-3r-pin-knee-polish.py` (it imports the round-3 verifier
+unchanged; no code of the search drives these numbers), CB_EXACT=1 on every wear bench, CB_FOLD_MARGIN=5, O20 only,
+P5 and H1 in the SAME farm batch (exo-cpu1, 8 jobs, ~$0.08 shared). Continuity: a new flood fill,
+`docs/concepts/verify/skin-normal-3r-pin-knee-continuity.py`. Raw outputs: `docs/research/verify_p5/`.
+
+**Protocol note (measurement, not design).** The farm jobs had no link to the Bench(110,360) fast cache (14f156cb6fc8;
+`tools/cloud_run.py` links only the local `.cache/concept_bench`), so the polish and held-out protocols fitted the shape
+on Bench(110,360) EXACT instead of fast - for P5 and H1 alike. Effect on the polish protocol: P5 21.92 (self-measured
+with the fast fit 21.79), H1 25.03 (24.48). The round-3 protocol (fit Bench(60,160) fast) ran with the fast fit, and
+the local re-run reproduces it to the digit. H1 at margin 10 in the same batch: fit-60 28.21 / near-touch 33.77, the
+verified numbers to the digit.
+
+**Measured (fold margin 5; gap / near-touch gap (metal < 1 mm = contact) / poses < 1 mm / min metal):**
+
+| protocol | H1 | P5 | gain plain / near-touch |
+|---|---|---|---|
+| polish: fit Bench(110,360) (exact), worn exact, 470 poses = the search's own poses | 25.03 / 26.14 / 2 / 0.20 mm (score 90.90) | **21.92 / 22.47 / 1 / 0.91 mm** (score 92.03; reach 0.7139, follow 1.0, ib14 0.8856, ib10 0.4963, contact 0.0187) | 3.11 / 3.67 |
+| round-3 verifier: fit Bench(60,160) fast, worn exact | 27.20 / 31.75 / 8 / 0.09 mm | 24.88 / 31.95 / 11 / 0.06 mm (follow **0.9455**) | 2.32 / **-0.20** |
+| HELD-OUT: fit Bench(110,360) (exact), worn exact on all 202 fit-clip frames + 952 workspace poses outside Bench(110,360) and Bench(60,160) (1154 poses; Wave / Walking excluded, asserted) | 29.12 / 31.85 / 12 / 0.04 mm (score 89.41) | 28.96 / 31.40 / 11 / 0.07 mm (score 89.47) | **0.16 / 0.45** |
+
+The rebase track's "held-out 24.87" used `tools/knee_polish.py`'s own 470-pose disjoint bench and had no H1 number
+beside it at margin 5; on the larger disjoint set, against H1, the gain is gone.
+
+**Rules - all hold, nothing loosened.** Independent 3D closure on every taken pose (hub-3 centre / pins 0.000 mm, J3 and
+pin axes <= 0.022 deg), knee vs hub 3's upper half, E boss vs hubs / links: 0 poses removed for P5 or H1 on any bench.
+Fold margin over the taken poses >= 5.03 deg (P5, held out) at the 5 deg rule. O20 at J1-J3. Pin stack 5.54 mm ->
+2.52 mm Ti plates on the iglidur pin (between IGLIDUR-PIN 5.0 and the MR63ZZ pair 6.0: a real envelope). Knee link lc
+23.7 mm (>= two O12 bosses + 2), lE 59.6 mm. J1 seat anterior 0.089 / up 0.891 / lateral 0.444: acromion top, rule (4)
+holds. J3 travel 177-195 deg (MR117 pair, full rotation), pins 54-63 deg. Arm at the side (elevation <= 15): 0 poses
+< 1 mm on every bench (lowest 2.09 mm on the round-3 protocol). **Continuity** (full 1432-pose workspace grid, shape frozen, 2-deg slerp edges
+from elevation 0, no joint of q1, q2, q3', pin a, pin b moving > 10 deg per step, knee branch sign constant): P5 1014
+kinematically closed poses, all 1014 connected (0 islands; 843 of 844 edges pass, 1 refused at the fold window), one
+knee branch; on Bench(110,360) connected reach = static reach. H1: 985 closed, 984 connected (1 island, not on the
+bench), one knee branch. Neither design has a static-only island on the bench.
+
+**Red team.**
+* *Where the gain comes from, and why it does not travel.* P5 trades knee window for reach: ang_min 30.5 -> 35.9 but
+  the knee runs 80-141 deg (H1 101-148), farther from the straight singular posture (sing. distance 39 vs 32 deg),
+  and phib -55 -> -72 / lc 28.2 -> 23.7 move the knee. On the 470 search poses reach rises 0.669 -> 0.714 and overhead
+  workspace reach 0.25 -> 0.32. Held out, reach is 0.657 vs 0.633 (+0.02) but in-band 14 drops 0.888 -> 0.884 and
+  contact rises 0.012 -> 0.031 (26 contact poses vs 10): the extra reach lands metal on skin it was not fitted to.
+* *Near-touch on the round-3 protocol is worse.* With the shape fitted on Bench(60,160), P5 has 11 poses with metal
+  < 1 mm (min 0.06 mm) vs H1's 8 (0.09 mm), and follows 0.9455 of the clip frames (below the bench's 95 % follow
+  target; H1 0.9636).
+* *The knee stop is still the edge.* H1's knee reaches 149.5 deg against its 149.54 stop held out (0.04 deg); P5's
+  reaches 142.8 against 144.07 (1.3 deg) - better, but both optima sit on the knee stop, so the stop (ang_min) is
+  a live design variable, not a safety margin; whoever builds either must red-team the feel at that stop.
+* *Overhead clip follow* (Raise overhead, elevation >= 140) is 1.0 for both at margin 5 on the polish and held-out
+  protocols and 0.6 for both on the round-3 protocol (fit-60 shape) - no difference between them.
+
+**Verdict: REFUTED.** P5's gain over H1 is >= 1 point only on the 470 poses it was searched on (3.11 plain / 3.67
+near-touch); held out it is 0.16 / 0.45 and on the round-3 protocol the near-touch gain is -0.20. No rule is broken,
+but the CLAUDE.md bar (a verified gain >= 1 gap point) is not met out of sample. **H1 stays** the polished configuration
+(row: best_k H-g107-1 unchanged; `v_p5_*` fields hold these numbers) and the H1 CAD in progress stands. For polish 2:
+search on a held-out-aware objective (e.g. the near-touch gap averaged over the polish bench AND a disjoint pose set,
+or the fit-60 frozen protocol) - the 470-pose objective is now saturated and over-fitted, and the remaining slack is
+the knee stop and the contact on unseen poses, not reach on the search bench.

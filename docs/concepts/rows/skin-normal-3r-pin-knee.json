@@ -774,7 +774,7 @@
   "delta_gap": -1.01
  },
  "rebase_polish_m5": {
-  "status": "CANDIDATE - self-measured by the rebase track (round-3 verifier harness + knee_polish measure, farm, exact); needs an independent verifier before it replaces H1 (CLAUDE.md: gain >= 1 gap point confirmed)",
+  "status": "REFUTED by the independent verifier 2026-10-16 08:22 UTC (v_p5_* fields): polish-protocol gain 3.11 / 3.67 near-touch is in-sample; held out (1154 disjoint poses) P5 28.96 vs H1 29.12 (gain 0.16 / 0.45 near-touch), round-3 protocol near-touch -0.20. H1 stays. Previous status: CANDIDATE - self-measured by the rebase track (round-3 verifier harness + knee_polish measure, farm, exact); needs an independent verifier before it replaces H1 (CLAUDE.md: gain >= 1 gap point confirmed)",
   "search": "docs/research/rebase/polish_m5/cma_streams.json (4 streams from H1 / HW / R2 at margin 5, 3876 evals; H1's own objective at margin 5: 25.68)",
   "P5": {
    "k": "HWm5-g23-5",
@@ -1113,5 +1113,778 @@
    "docs/research/rebase/verify_rg_m5.json"
   ]
  },
- "v_connected_reach": 0.6583
+ "v_connected_reach": 0.6583,
+ "v_p5_t": "2026-10-16T08:22:01Z",
+ "v_p5_k": "HWm5-g23-5",
+ "v_p5_params": {
+  "rad1": 10.0,
+  "rad2": 10.0,
+  "rad3": 10.0,
+  "az1": 101.3136,
+  "el1": 63.0475,
+  "az2": 31.6253,
+  "el2": 44.9795,
+  "wd": 67.6795,
+  "wa": -5.4589,
+  "b3": 0.3392,
+  "lE": 59.5912,
+  "lc": 23.7175,
+  "phiE": -7.4584,
+  "phib": -71.5498,
+  "ang_min": 35.9262,
+  "stk": 5.5412
+ },
+ "v_p5_refuted": true,
+ "v_p5_verdict": "REFUTED: the gain over H1 does not hold out of sample. Same protocol, same verifier, fold margin 5, O20: polish protocol (fit Bench(110,360), worn exact) P5 21.92 vs H1 25.03 (gain 3.11 plain / 3.67 near-touch) - in-sample, the search's own 470 poses; round-3 protocol (fit Bench(60,160) fast) 24.88 vs 27.2 (gain 2.32 plain / -0.2 near-touch: 11 poses < 1 mm vs 8, follow 0.9455); DISJOINT held-out (1154 poses) 28.96 vs 29.12 (gain 0.16 plain / 0.45 near-touch). Rules all hold (closure, part envelopes, O20, stk 5.54, fold margin, J1 seat, continuity: 0 islands, one knee branch). H1 stays the polished configuration.",
+ "v_p5_gap": 21.92,
+ "v_p5_score": 92.03,
+ "v_p5_reach": 0.7139,
+ "v_p5_follow": 1.0,
+ "v_p5_inband14": 0.8856,
+ "v_p5_inband10": 0.4963,
+ "v_p5_contact": 0.0187,
+ "v_p5_gap_near1": 22.47,
+ "v_p5_min_metal_mm": 0.91,
+ "v_p5_h1_gap": 25.03,
+ "v_p5_h1_gap_near1": 26.14,
+ "v_p5_gain": 3.11,
+ "v_p5_gain_near1": 3.67,
+ "v_p5_gain_fit60": 2.32,
+ "v_p5_gain_fit60_near1": -0.2,
+ "v_p5_gain_held": 0.16,
+ "v_p5_gain_held_near1": 0.45,
+ "v_p5_held_gap": 28.96,
+ "v_p5_h1_held_gap": 29.12,
+ "v_p5_overhead140": {
+  "P5": {
+   "ws_reach": 0.3214,
+   "clip_follow": 1.0,
+   "inband14": 0.8342
+  },
+  "H1": {
+   "ws_reach": 0.25,
+   "clip_follow": 1.0,
+   "inband14": 0.889
+  },
+  "P5_fit60": {
+   "ws_reach": 0.2143,
+   "clip_follow": 0.6,
+   "inband14": 0.8785
+  },
+  "H1_fit60": {
+   "ws_reach": 0.1786,
+   "clip_follow": 0.6,
+   "inband14": 0.9155
+  },
+  "P5_held": {
+   "ws_reach": 0.2394,
+   "clip_follow": 1.0,
+   "inband14": 0.8425
+  },
+  "H1_held": {
+   "ws_reach": 0.2535,
+   "clip_follow": 1.0,
+   "inband14": 0.8877
+  }
+ },
+ "v_p5_knee": {
+  "P5_stop": [
+   35.93,
+   144.07
+  ],
+  "P5_taken": {
+   "fitbig": [
+    80.0,
+    140.7
+   ],
+   "fit60": [
+    80.0,
+    134.3
+   ],
+   "held": [
+    80.0,
+    142.8
+   ]
+  },
+  "H1_stop": [
+   30.46,
+   149.54
+  ],
+  "H1_taken": {
+   "fitbig": [
+    101.1,
+    148.4
+   ],
+   "fit60": [
+    103.0,
+    147.3
+   ],
+   "held": [
+    101.1,
+    149.5
+   ]
+  }
+ },
+ "v_p5_continuity": {
+  "rule": "CLAUDE.md continuity rule: full 1432-pose workspace grid, 2-deg slerp edges from elevation 0, no joint (q1, q2, q3', pin a, pin b) step > 10 deg, knee branch sign constant; nodes = kinematically closed poses at margin 5 (shape frozen from Bench(110,360))",
+  "harness": "docs/concepts/verify/skin-normal-3r-pin-knee-continuity.py",
+  "P5": {
+   "grid": {
+    "poses": 1432,
+    "kin_ok": 1014,
+    "nodes": 1014,
+    "connected": 1014,
+    "islands": 0,
+    "static_reach": 0.7081,
+    "connected_reach": 0.7081,
+    "overhead140": {
+     "poses": 108,
+     "nodes": 31,
+     "connected": 31
+    }
+   },
+   "bench110_360": {
+    "ws": 360,
+    "nodes": 265,
+    "connected": 265,
+    "static_reach": 0.7361,
+    "connected_reach": 0.7361
+   },
+   "knee_branch_signs": [
+    1.0
+   ],
+   "edges": {
+    "tested": 844,
+    "passed": 843,
+    "refused": {
+     "fold_or_window": 1,
+     "jump": 0,
+     "branch": 0
+    }
+   }
+  },
+  "H1": {
+   "grid": {
+    "poses": 1432,
+    "kin_ok": 985,
+    "nodes": 985,
+    "connected": 984,
+    "islands": 1,
+    "static_reach": 0.6878,
+    "connected_reach": 0.6872,
+    "overhead140": {
+     "poses": 108,
+     "nodes": 27,
+     "connected": 27
+    }
+   },
+   "bench110_360": {
+    "ws": 360,
+    "nodes": 253,
+    "connected": 253,
+    "static_reach": 0.7028,
+    "connected_reach": 0.7028
+   },
+   "knee_branch_signs": [
+    1.0
+   ],
+   "edges": {
+    "tested": 813,
+    "passed": 813,
+    "refused": {
+     "fold_or_window": 0,
+     "jump": 0,
+     "branch": 0
+    }
+   }
+  }
+ },
+ "v_p5_protocols": {
+  "P5_fitbig_m5": {
+   "gap": 21.92,
+   "score": 92.03,
+   "reach": 0.7139,
+   "follow": 1.0,
+   "inband14": 0.8856,
+   "inband10": 0.4963,
+   "contact": 0.0187,
+   "gap_near1": 22.47,
+   "near1_poses": 1,
+   "min_metal_mm": 0.91,
+   "gap_near2": 27.97,
+   "overhead140": {
+    "ws_reach": 0.3214,
+    "clip_follow": 1.0,
+    "inband14": 0.8342
+   },
+   "fit_gap": 22.18,
+   "fit_mode": "exact",
+   "wear_mode": "exact",
+   "n_wear": 470,
+   "fold_margin": 5.0,
+   "poses_removed_by_verifier": 0,
+   "fold_margin_min_taken": 5.6,
+   "knee_ang": [
+    80.0,
+    140.7
+   ],
+   "knee_stop": [
+    35.93,
+    144.07
+   ],
+   "knee_sing_dist_min": 39.3,
+   "arm_side_lt1": 0,
+   "j1_seat": {
+    "anterior": 0.0889,
+    "up": 0.8914,
+    "lateral": 0.4444
+   },
+   "hubs": [
+    10.0,
+    10.0,
+    10.0
+   ],
+   "stk": 5.5412,
+   "tp": 2.521,
+   "why": {
+    "fold": 84,
+    "slide": 11,
+    "flip": 0,
+    "closure": 0,
+    "skin": 0,
+    "parts": 1,
+    "contact": 7
+   },
+   "closure_max": {
+    "hub3c": 0.0,
+    "rot3_axis": 0.0155,
+    "pin_a": 0.0,
+    "pin_b": 0.0,
+    "knee_rot_axis": 0.0219,
+    "arm_rot": 0.0
+   },
+   "closure_bad": 0,
+   "knee_vs_hub3_bad": 0,
+   "boss_bad": 0,
+   "spans": {
+    "q3": 185.7,
+    "pin_a": 60.7,
+    "pin_b": 60.4
+   },
+   "secs": 776.3
+  },
+  "H1_fitbig_m5": {
+   "gap": 25.03,
+   "score": 90.9,
+   "reach": 0.6694,
+   "follow": 1.0,
+   "inband14": 0.8888,
+   "inband10": 0.4894,
+   "contact": 0.0085,
+   "gap_near1": 26.14,
+   "near1_poses": 2,
+   "min_metal_mm": 0.2,
+   "gap_near2": 30.03,
+   "overhead140": {
+    "ws_reach": 0.25,
+    "clip_follow": 1.0,
+    "inband14": 0.889
+   },
+   "fit_gap": 25.03,
+   "fit_mode": "exact",
+   "wear_mode": "exact",
+   "n_wear": 470,
+   "fold_margin": 5.0,
+   "poses_removed_by_verifier": 0,
+   "fold_margin_min_taken": 5.49,
+   "knee_ang": [
+    101.1,
+    148.4
+   ],
+   "knee_stop": [
+    30.46,
+    149.54
+   ],
+   "knee_sing_dist_min": 31.6,
+   "arm_side_lt1": 0,
+   "j1_seat": {
+    "anterior": 0.0852,
+    "up": 0.898,
+    "lateral": 0.4316
+   },
+   "hubs": [
+    10.0,
+    10.0,
+    10.0
+   ],
+   "stk": 5.6815,
+   "tp": 2.591,
+   "why": {
+    "fold": 97,
+    "slide": 10,
+    "flip": 0,
+    "closure": 0,
+    "skin": 0,
+    "parts": 9,
+    "contact": 3
+   },
+   "closure_max": {
+    "hub3c": 0.0,
+    "rot3_axis": 0.0155,
+    "pin_a": 0.0,
+    "pin_b": 0.0,
+    "knee_rot_axis": 0.0219,
+    "arm_rot": 0.0
+   },
+   "closure_bad": 0,
+   "knee_vs_hub3_bad": 0,
+   "boss_bad": 0,
+   "spans": {
+    "q3": 188.5,
+    "pin_a": 47.3,
+    "pin_b": 42.7
+   },
+   "secs": 602.8
+  },
+  "P5_fit60_m5": {
+   "gap": 24.88,
+   "score": 90.95,
+   "reach": 0.6944,
+   "follow": 0.9455,
+   "inband14": 0.8861,
+   "inband10": 0.5257,
+   "contact": 0.0248,
+   "gap_near1": 31.95,
+   "near1_poses": 11,
+   "min_metal_mm": 0.06,
+   "gap_near2": 48.43,
+   "overhead140": {
+    "ws_reach": 0.2143,
+    "clip_follow": 0.6,
+    "inband14": 0.8785
+   },
+   "fit_gap": 24.69,
+   "fit_mode": "fast",
+   "wear_mode": "exact",
+   "n_wear": 470,
+   "fold_margin": 5.0,
+   "poses_removed_by_verifier": 0,
+   "fold_margin_min_taken": 5.67,
+   "knee_ang": [
+    80.0,
+    134.3
+   ],
+   "knee_stop": [
+    35.93,
+    144.07
+   ],
+   "knee_sing_dist_min": 45.7,
+   "arm_side_lt1": 0,
+   "j1_seat": {
+    "anterior": 0.0889,
+    "up": 0.8914,
+    "lateral": 0.4444
+   },
+   "hubs": [
+    10.0,
+    10.0,
+    10.0
+   ],
+   "stk": 5.5412,
+   "tp": 2.521,
+   "why": {
+    "fold": 84,
+    "slide": 11,
+    "flip": 0,
+    "closure": 0,
+    "skin": 0,
+    "parts": 12,
+    "contact": 9
+   },
+   "closure_max": {
+    "hub3c": 0.0,
+    "rot3_axis": 0.0155,
+    "pin_a": 0.0,
+    "pin_b": 0.0,
+    "knee_rot_axis": 0.0219,
+    "arm_rot": 0.0
+   },
+   "closure_bad": 0,
+   "knee_vs_hub3_bad": 0,
+   "boss_bad": 0,
+   "spans": {
+    "q3": 177.3,
+    "pin_a": 54.3,
+    "pin_b": 56.1
+   },
+   "secs": 126.1
+  },
+  "H1_fit60_m5": {
+   "gap": 27.2,
+   "score": 90.11,
+   "reach": 0.6583,
+   "follow": 0.9636,
+   "inband14": 0.8953,
+   "inband10": 0.5539,
+   "contact": 0.0256,
+   "gap_near1": 31.75,
+   "near1_poses": 8,
+   "min_metal_mm": 0.09,
+   "gap_near2": 46.85,
+   "overhead140": {
+    "ws_reach": 0.1786,
+    "clip_follow": 0.6,
+    "inband14": 0.9155
+   },
+   "fit_gap": 23.64,
+   "fit_mode": "fast",
+   "wear_mode": "exact",
+   "n_wear": 470,
+   "fold_margin": 5.0,
+   "poses_removed_by_verifier": 0,
+   "fold_margin_min_taken": 5.49,
+   "knee_ang": [
+    103.0,
+    147.3
+   ],
+   "knee_stop": [
+    30.46,
+    149.54
+   ],
+   "knee_sing_dist_min": 32.7,
+   "arm_side_lt1": 0,
+   "j1_seat": {
+    "anterior": 0.0852,
+    "up": 0.898,
+    "lateral": 0.4316
+   },
+   "hubs": [
+    10.0,
+    10.0,
+    10.0
+   ],
+   "stk": 5.6815,
+   "tp": 2.591,
+   "why": {
+    "fold": 97,
+    "slide": 14,
+    "flip": 0,
+    "closure": 0,
+    "skin": 0,
+    "parts": 7,
+    "contact": 9
+   },
+   "closure_max": {
+    "hub3c": 0.0,
+    "rot3_axis": 0.0155,
+    "pin_a": 0.0,
+    "pin_b": 0.0,
+    "knee_rot_axis": 0.0219,
+    "arm_rot": 0.0
+   },
+   "closure_bad": 0,
+   "knee_vs_hub3_bad": 0,
+   "boss_bad": 0,
+   "spans": {
+    "q3": 181.5,
+    "pin_a": 44.3,
+    "pin_b": 40.6
+   },
+   "secs": 92.2
+  },
+  "P5_held_m5": {
+   "gap": 28.96,
+   "score": 89.47,
+   "reach": 0.6565,
+   "follow": 1.0,
+   "inband14": 0.8844,
+   "inband10": 0.4931,
+   "contact": 0.0305,
+   "gap_near1": 31.4,
+   "near1_poses": 11,
+   "min_metal_mm": 0.07,
+   "gap_near2": 39.68,
+   "overhead140": {
+    "ws_reach": 0.2394,
+    "clip_follow": 1.0,
+    "inband14": 0.8425
+   },
+   "fit_gap": 22.18,
+   "fit_mode": "exact",
+   "wear_mode": "exact",
+   "n_wear": 1154,
+   "fold_margin": 5.0,
+   "poses_removed_by_verifier": 0,
+   "fold_margin_min_taken": 5.03,
+   "knee_ang": [
+    80.0,
+    142.8
+   ],
+   "knee_stop": [
+    35.93,
+    144.07
+   ],
+   "knee_sing_dist_min": 37.2,
+   "arm_side_lt1": 0,
+   "j1_seat": {
+    "anterior": 0.0889,
+    "up": 0.8914,
+    "lateral": 0.4444
+   },
+   "hubs": [
+    10.0,
+    10.0,
+    10.0
+   ],
+   "stk": 5.5412,
+   "tp": 2.521,
+   "why": {
+    "fold": 275,
+    "slide": 25,
+    "flip": 0,
+    "closure": 0,
+    "skin": 0,
+    "parts": 1,
+    "contact": 26
+   },
+   "closure_max": {
+    "hub3c": 0.0,
+    "rot3_axis": 0.0157,
+    "pin_a": 0.0,
+    "pin_b": 0.0,
+    "knee_rot_axis": 0.0223,
+    "arm_rot": 0.0
+   },
+   "closure_bad": 0,
+   "knee_vs_hub3_bad": 0,
+   "boss_bad": 0,
+   "spans": {
+    "q3": 195.4,
+    "pin_a": 62.9,
+    "pin_b": 61.9
+   },
+   "secs": 758.6
+  },
+  "H1_held_m5": {
+   "gap": 29.12,
+   "score": 89.41,
+   "reach": 0.6334,
+   "follow": 1.0,
+   "inband14": 0.8877,
+   "inband10": 0.4877,
+   "contact": 0.0123,
+   "gap_near1": 31.85,
+   "near1_poses": 12,
+   "min_metal_mm": 0.04,
+   "gap_near2": 40.33,
+   "overhead140": {
+    "ws_reach": 0.2535,
+    "clip_follow": 1.0,
+    "inband14": 0.8877
+   },
+   "fit_gap": 25.03,
+   "fit_mode": "exact",
+   "wear_mode": "exact",
+   "n_wear": 1154,
+   "fold_margin": 5.0,
+   "poses_removed_by_verifier": 0,
+   "fold_margin_min_taken": 5.32,
+   "knee_ang": [
+    101.1,
+    149.5
+   ],
+   "knee_stop": [
+    30.46,
+    149.54
+   ],
+   "knee_sing_dist_min": 30.5,
+   "arm_side_lt1": 0,
+   "j1_seat": {
+    "anterior": 0.0852,
+    "up": 0.898,
+    "lateral": 0.4316
+   },
+   "hubs": [
+    10.0,
+    10.0,
+    10.0
+   ],
+   "stk": 5.6815,
+   "tp": 2.591,
+   "why": {
+    "fold": 288,
+    "slide": 24,
+    "flip": 0,
+    "closure": 0,
+    "skin": 0,
+    "parts": 27,
+    "contact": 10
+   },
+   "closure_max": {
+    "hub3c": 0.0,
+    "rot3_axis": 0.0153,
+    "pin_a": 0.0,
+    "pin_b": 0.0,
+    "knee_rot_axis": 0.0216,
+    "arm_rot": 0.0
+   },
+   "closure_bad": 0,
+   "knee_vs_hub3_bad": 0,
+   "boss_bad": 0,
+   "spans": {
+    "q3": 191.5,
+    "pin_a": 48.4,
+    "pin_b": 43.5
+   },
+   "secs": 961.5
+  },
+  "H1_fit60_m10": {
+   "gap": 28.21,
+   "score": 89.74,
+   "reach": 0.6444,
+   "follow": 0.9636,
+   "inband14": 0.8994,
+   "inband10": 0.5326,
+   "contact": 0.0259,
+   "gap_near1": 33.77,
+   "near1_poses": 9,
+   "min_metal_mm": 0.09,
+   "gap_near2": 49.45,
+   "overhead140": {
+    "ws_reach": 0.1786,
+    "clip_follow": 0.6,
+    "inband14": 0.9216
+   },
+   "fit_gap": 26.66,
+   "fit_mode": "fast",
+   "wear_mode": "exact",
+   "n_wear": 470,
+   "fold_margin": 10.0,
+   "poses_removed_by_verifier": 0,
+   "fold_margin_min_taken": 10.06,
+   "knee_ang": [
+    103.0,
+    147.3
+   ],
+   "knee_stop": [
+    30.46,
+    149.54
+   ],
+   "knee_sing_dist_min": 32.7,
+   "arm_side_lt1": 0,
+   "j1_seat": {
+    "anterior": 0.0852,
+    "up": 0.898,
+    "lateral": 0.4316
+   },
+   "hubs": [
+    10.0,
+    10.0,
+    10.0
+   ],
+   "stk": 5.6815,
+   "tp": 2.591,
+   "why": {
+    "fold": 116,
+    "slide": 7,
+    "flip": 0,
+    "closure": 0,
+    "skin": 0,
+    "parts": 0,
+    "contact": 9
+   },
+   "closure_max": {
+    "hub3c": 0.0,
+    "rot3_axis": 0.0155,
+    "pin_a": 0.0,
+    "pin_b": 0.0,
+    "knee_rot_axis": 0.0219,
+    "arm_rot": 0.0
+   },
+   "closure_bad": 0,
+   "knee_vs_hub3_bad": 0,
+   "boss_bad": 0,
+   "spans": {
+    "q3": 181.5,
+    "pin_a": 44.3,
+    "pin_b": 40.6
+   },
+   "secs": 116.9
+  },
+  "H1_fitbig_m10": {
+   "gap": 26.87,
+   "score": 90.23,
+   "reach": 0.6472,
+   "follow": 0.9636,
+   "inband14": 0.8958,
+   "inband10": 0.4961,
+   "contact": 0.0117,
+   "gap_near1": 26.87,
+   "near1_poses": 0,
+   "min_metal_mm": 1.5,
+   "gap_near2": 29.71,
+   "overhead140": {
+    "ws_reach": 0.2143,
+    "clip_follow": 0.6,
+    "inband14": 0.938
+   },
+   "fit_gap": 26.87,
+   "fit_mode": "exact",
+   "wear_mode": "exact",
+   "n_wear": 470,
+   "fold_margin": 10.0,
+   "poses_removed_by_verifier": 0,
+   "fold_margin_min_taken": 10.06,
+   "knee_ang": [
+    103.9,
+    149.2
+   ],
+   "knee_stop": [
+    30.46,
+    149.54
+   ],
+   "knee_sing_dist_min": 30.8,
+   "arm_side_lt1": 0,
+   "j1_seat": {
+    "anterior": 0.0852,
+    "up": 0.898,
+    "lateral": 0.4316
+   },
+   "hubs": [
+    10.0,
+    10.0,
+    10.0
+   ],
+   "stk": 5.6815,
+   "tp": 2.591,
+   "why": {
+    "fold": 116,
+    "slide": 11,
+    "flip": 0,
+    "closure": 0,
+    "skin": 0,
+    "parts": 0,
+    "contact": 4
+   },
+   "closure_max": {
+    "hub3c": 0.0,
+    "rot3_axis": 0.0155,
+    "pin_a": 0.0,
+    "pin_b": 0.0,
+    "knee_rot_axis": 0.0219,
+    "arm_rot": 0.0
+   },
+   "closure_bad": 0,
+   "knee_vs_hub3_bad": 0,
+   "boss_bad": 0,
+   "spans": {
+    "q3": 181.7,
+    "pin_a": 45.4,
+    "pin_b": 41.3
+   },
+   "secs": 730.1
+  }
+ },
+ "v_p5_harness": "docs/concepts/verify/skin-normal-3r-pin-knee-polish.py (round-3 verifier imported unchanged), CB_EXACT=1, CB_FOLD_MARGIN=5, O20; farm exo-cpu1 (the fitbig / held jobs fitted the shape on Bench(110,360) EXACT - the farm job had no link to the 14f156cb6fc8 fast cache - for P5 and H1 alike); fit60 reproduced locally to the digit; raw outputs docs/research/verify_p5/",
+ "v_p5_note": "MEASUREMENT: H1 at margin 10 re-run in the same batch: fit-60 28.21 / near-touch 33.77 (the verified numbers to the digit); polish protocol with an exact fit 26.87 / 26.87 / 1.50 mm (fast fit 26.45). P5 at margin 10 not measured."
 }
