@@ -1,0 +1,123 @@
+{
+ "step": 3,
+ "tol_mm": 0.15,
+ "frames_checked": 451,
+ "pairs": 2470,
+ "seconds": 100,
+ "setup_seconds": 15,
+ "jobs": 4,
+ "cpu_seconds": 327,
+ "cpu_s_per_frame": 0.693,
+ "violations": {
+  "base|D7-01 scapula base: J1 hub + tab, 2x M4 counterbored to the scapula handler (Ti-6Al-4V)  IN  l1|D7-02 link 1: bent bar 8x3 + J1/J2 pads + integral O7 pins (Ti-6Al-4V)": {
+   "max_depth": 0.85,
+   "frames": 6,
+   "worst": [
+    "Wave",
+    72
+   ],
+   "worst_point": "vertex",
+   "per_frame": {
+    "Wave|72": 0.85,
+    "Wave|75": 0.85,
+    "Wave|78": 0.85,
+    "Wave|96": 0.85,
+    "Wave|99": 0.85,
+    "Wave|102": 0.85
+   }
+  },
+  "l1|D7-02 link 1: bent bar 8x3 + J1/J2 pads + integral O7 pins (Ti-6Al-4V)  IN  base|D7-01 scapula base: J1 hub + tab, 2x M4 counterbored to the scapula handler (Ti-6Al-4V)": {
+   "max_depth": 0.71,
+   "frames": 6,
+   "worst": [
+    "Wave",
+    72
+   ],
+   "worst_point": "vertex",
+   "per_frame": {
+    "Wave|72": 0.71,
+    "Wave|75": 0.71,
+    "Wave|78": 0.71,
+    "Wave|96": 0.71,
+    "Wave|99": 0.71,
+    "Wave|102": 0.71
+   }
+  }
+ },
+ "open_parts_not_tested_as_container": [
+  "l4|across guide rail THK RSR3R3 3 x 2.6 x 29.0 (catalogue rail, travel +-7.5), on carriage A",
+  "l4|along guide rail THK RSR3R3 3 x 2.6 x 26.6 (catalogue rail, travel +-6.3), rides with carriage A"
+ ],
+ "reoriented_parts": [],
+ "samples": {
+  "h_mm": 1.0,
+  "sharp_deg": 30.0,
+  "total": 1701513,
+  "per_part": {
+   "H|M4x6 ISO 10642 countersunk (upper cuff), polished": 17154,
+   "H|UPPER ARM CUFF (lines and arcs: flat land + inner R arc + outer arc, extruded; AlSi10Mg bead blasted)": 670746,
+   "H|CirPattern1[13]": 282,
+   "H|CirPattern1[17]": 282,
+   "H|CirPattern1[3]": 282,
+   "H|CirPattern1[6]": 282,
+   "H|CirPattern1[1]": 282,
+   "H|Revolve1[3]": 1988,
+   "H|CirPattern1[9]": 282,
+   "H|CirPattern1[2]": 282,
+   "H|Revolve3": 6014,
+   "H|CirPattern1[4]": 282,
+   "H|CirPattern1[10]": 282,
+   "H|CirPattern1[8]": 282,
+   "H|CirPattern1[14]": 282,
+   "H|CirPattern1[12]": 282,
+   "H|CirPattern1[16]": 282,
+   "H|CirPattern1[7]": 282,
+   "H|Revolve1[1]": 6974,
+   "H|CirPattern1[5]": 282,
+   "H|Revolve4": 282,
+   "H|CirPattern1[11]": 282,
+   "H|Revolve1[2]": 1988,
+   "H|CirPattern1[15]": 282,
+   "H|M4 ULTRA LOW PROFILE SOCKET HEAD SCREW, 6mm L, HS STEEL": 9519,
+   "H|5mm D, 2.5mm H, N42 MAGNET": 827,
+   "F|Hex socket head countersunk screw grade C M4x0.7 x 8": 12234,
+   "H|IGUS THRUST WASHER, 30mm ID, 39mm OD, 1.5mm T, IGLIDE J": 10376,
+   "F|MIDDLE": 78680,
+   "H|TOP": 14699,
+   "F|FOREARM CUFF": 264978,
+   "H|M1.6x2.5 ISO 10642 countersunk screw, along block to the base (polished stainless)": 1300,
+   "H|D7-05 BOTTOM + stage base, one 5-axis part (user's bar cut at s 255; base plate 1.5 under the along block + arm + tongue fused into its channel web; 7075-T6)": 273883,
+   "base|D7-01 scapula base: J1 hub + tab, 2x M4 counterbored to the scapula handler (Ti-6Al-4V)": 48364,
+   "l3|carriage B = across guide block THK RSR3M (= HIWIN MGN03C class): W 8.0 x L 12.0 x H 4.0 (catalogue)": 10613,
+   "l4|across guide rail THK RSR3R3 3 x 2.6 x 29.0 (catalogue rail, travel +-7.5), on carriage A": 28073,
+   "l4|carriage A: plus-shaped adapter 1.0 mm, arms 5.0 wide, under both rails (Ti-6Al-4V)": 5958,
+   "l4|along guide rail THK RSR3R3 3 x 2.6 x 26.6 (catalogue rail, travel +-6.3), rides with carriage A": 26697,
+   "H|along guide block THK RSR3M (= HIWIN MGN03C class), INVERTED on the cuff base: W 8.0 x L 12.0 x H 4.0 (catalogue)": 10595,
+   "l3|M1.6x4 ISO 10642 countersunk screw, across block to member 3 (polished stainless)": 2328,
+   "l3|D7-04 member 3: J3 pad + integral O7 pin + ramped neck (60 deg, the model's) + bridge, one sketch (Ti-6Al-4V)": 34725,
+   "l2|D7-03 link 2: bent bar 8x3 + J2/J3 hubs (Ti-6Al-4V)": 89291,
+   "l1|D7-02 link 1: bent bar 8x3 + J1/J2 pads + integral O7 pins (Ti-6Al-4V)": 29841,
+   "l2|J3 cap O20 G2 dome, threaded (Ti-6Al-4V)": 6329,
+   "l3|J3 ring nut M7x0.5 (Ti-6Al-4V)": 336,
+   "l3|J3 inner spacer (ground, preload)": 336,
+   "l2|J3 outer spacer 17-4PH": 336,
+   "l2|J3 bearing 2 MR117-2RS 7x11x3": 2870,
+   "l2|J3 bearing 1 MR117-2RS 7x11x3": 2850,
+   "l2|J2 cap O20 G2 dome, threaded (Ti-6Al-4V)": 5963,
+   "l1|J2 ring nut M7x0.5 (Ti-6Al-4V)": 336,
+   "l1|J2 inner spacer (ground, preload)": 336,
+   "l2|J2 outer spacer 17-4PH": 336,
+   "l2|J2 bearing 2 MR117-2RS 7x11x3": 2864,
+   "l2|J2 bearing 1 MR117-2RS 7x11x3": 2846,
+   "base|J1 cap O20 G2 dome, threaded (Ti-6Al-4V)": 6128,
+   "l1|J1 ring nut M7x0.5 (Ti-6Al-4V)": 336,
+   "l1|J1 inner spacer (ground, preload)": 336,
+   "base|J1 outer spacer 17-4PH": 336,
+   "base|J1 bearing 2 MR117-2RS 7x11x3": 2856,
+   "base|J1 bearing 1 MR117-2RS 7x11x3": 2862
+  },
+  "rule": "every vertex + sharp/boundary edges at <= h/2 + longest-edge bisection of every face to edges <= h (midpoints)"
+ },
+ "inside": "dense surface samples of A (vertices, sharp edges, faces), both ways; integer winding number on welded tessellations (judge/sdist.py grid + segment crossings), depth = exact distance to B's closest point (libigl AABB)",
+ "max_depth": 0.85
+}

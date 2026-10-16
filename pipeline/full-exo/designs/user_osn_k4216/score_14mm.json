@@ -1,0 +1,84 @@
+{
+ "overall": 0.44566648769971934,
+ "follow": 0.9090160340578389,
+ "in_band": 0.49027351664004043,
+ "clips": [
+  {
+   "name": "Raise overhead",
+   "frames": 181,
+   "score": 0.2457461896845411,
+   "follow": 0.4262295081967213,
+   "in_band_when_following": 0.5765583681060387,
+   "median_gap": 13.901474571872171,
+   "min_gap": 1.9925915830405139
+  },
+  {
+   "name": "Drink from a cup",
+   "frames": 178,
+   "score": 0.4518917010256542,
+   "follow": 1.0,
+   "in_band_when_following": 0.4518917010256542,
+   "median_gap": 14.676969202463239,
+   "min_gap": 4.404799982807098
+  },
+  {
+   "name": "Comb hair",
+   "frames": 202,
+   "score": 0.45299535295883897,
+   "follow": 1.0,
+   "in_band_when_following": 0.45299535295883897,
+   "median_gap": 15.662614218524764,
+   "min_gap": 0.0945840025705891
+  },
+  {
+   "name": "Reach a high shelf",
+   "frames": 157,
+   "score": 0.4805437599362374,
+   "follow": 1.0,
+   "in_band_when_following": 0.4805437599362374,
+   "median_gap": 16.979561117161374,
+   "min_gap": 0.13643165237421961
+  },
+  {
+   "name": "Wash opposite shoulder",
+   "frames": 193,
+   "score": 0.3450767856863618,
+   "follow": 1.0,
+   "in_band_when_following": 0.3450767856863618,
+   "median_gap": 17.327527410936913,
+   "min_gap": 4.431969890984733
+  },
+  {
+   "name": "Reach back pocket",
+   "frames": 145,
+   "score": 0.6295824912793133,
+   "follow": 1.0,
+   "in_band_when_following": 0.6295824912793133,
+   "median_gap": 12.36036419165158,
+   "min_gap": 1.763128949387369
+  },
+  {
+   "name": "Wave",
+   "frames": 172,
+   "score": 0.45396967005522904,
+   "follow": 0.896551724137931,
+   "in_band_when_following": 0.5063507858308324,
+   "median_gap": 14.077724859074486,
+   "min_gap": 1.7323897158188548
+  },
+  {
+   "name": "Walking arm swing",
+   "frames": 109,
+   "score": 0.6240074789808632,
+   "follow": 1.0,
+   "in_band_when_following": 0.6240074789808632,
+   "median_gap": 12.370641635617194,
+   "min_gap": 4.129136289009611
+  }
+ ],
+ "band": [
+  2.0,
+  14.0
+ ],
+ "step": 3
+}

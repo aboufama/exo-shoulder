@@ -39,7 +39,10 @@ NAME = "Stop-relay rocker 3R: J1 on a spring-centred acromial rocker that moves 
 PARAMS = dict(az=102.78, el=65.35, a1=40.68, a2=73.76, wd=84.49, wa=-12.76, sigma=-1, q=0.979,
               width=12.0, t_link=3.0, rad0=7.5, rad1=10.0, rad2=7.5, rad3=7.5, end_extra=0.0, vm=0,
               beta=30.0, phi=330.0, az_c=None, el_c=None,   # pivot: u1 tilted by beta about a normal turned phi about u1
-              m_lo=10.0, m_hi=10.0, m_sw=10.0, qmax=75.0, l1_over=1, relay=1, near=0)
+              m_lo=10.0, m_hi=10.0, m_sw=10.0, qmax=75.0, l1_over=1, relay=1, relay_lo=1, relay_hi=1, lift1=0.0, lift2=0.0, near=0)
+# lift1 / lift2 (mm): the upper member's end zone at J1 (link 1) / J2 (link 2) sits lift mm above the 0.15 running gap
+# (a spacer: only raises metal), so a folded link pair clears by >= 1 mm just past K6's 12-mm joint zone
+# relay_lo / relay_hi 0: that side has no relay (J2's stop is then a plain joint limit: poses past it are not taken)
 SLIM = SPM.SLIM
 ELEV_OVER = SPM.ELEV_OVER
 
@@ -68,6 +71,7 @@ def relay(F, p):
     mode = np.where((th >= lo) & (th <= hi), 0, -1); u1 = u1r.copy(); q0 = np.zeros(n); swm = np.full(n, np.nan)
     if p.get("relay", 1):
         for code, ths, sel in ((1, hi, th > hi), (2, lo, th < lo)):
+            if not p.get("relay_hi" if code == 1 else "relay_lo", 1): continue
             if not sel.any(): continue
             R = []
             for s in (1, -1):
@@ -90,14 +94,15 @@ def build(B, F, p):
     ref1 = rotv(c, F.S([1.0, 0, 0]) * np.ones_like(u1), q0)                              # J1 reference carried by the rocker
     q = np.stack([q0, K.axis_angle(u1, ref1, p2), K.axis_angle(p2, u1, p3), K.axis_angle(p3, F.HG([0.0, -1, 0]), p2)], -1)
     r0, r1, r2, r3 = (float(p[k]) for k in ("rad0", "rad1", "rad2", "rad3"))
-    hubs = [K.hub_member("hub0", c, "R0", rad=r0), K.hub_member("hub1", u1, "J1", rad=r1),
-            K.hub_member("hub2", p2, "J2", rad=r2), K.hub_member("hub3", p3, "J3", rad=r3)]
+    l1, l2 = float(p.get("lift1", 0.0)), float(p.get("lift2", 0.0))         # a spacer adds its height to that hub's stack
+    hubs = [K.hub_member("hub0", c, "R0", rad=r0), K.hub_member("hub1", u1, "J1", rad=r1, t=K.CROWN + l1),
+            K.hub_member("hub2", p2, "J2", rad=r2, t=K.CROWN + l2), K.hub_member("hub3", p3, "J3", rad=r3)]
     w, t = p["width"], p["t_link"]; end = K.HUB_R + 2.0 + float(p.get("end_extra", 0.0))
     l1_over = [("rocker", 1.0)] if p.get("l1_over", 1) else []
     links = [K.strap_member("rocker", c, u1, ("R0", "J1"), width=w, t=t, ramp_to=(("hub0", K.STACK), ("hub1", 0.0)), end_mm=end),
-             K.strap_member("link1", u1, p2, ("J1", "J2"), width=w, t=t, ramp_to=(("hub1", K.STACK), ("hub2", 0.0)),
+             K.strap_member("link1", u1, p2, ("J1", "J2"), width=w, t=t, ramp_to=(("hub1", K.STACK + float(p.get("lift1", 0.0))), ("hub2", 0.0)),
                             over=l1_over, end_mm=end),
-             K.strap_member("link2", p2, p3, ("J2", "J3"), width=w, t=t, ramp_to=(("hub2", K.STACK), ("hub3", K.STACK)),
+             K.strap_member("link2", p2, p3, ("J2", "J3"), width=w, t=t, ramp_to=(("hub2", K.STACK + float(p.get("lift2", 0.0))), ("hub3", K.STACK)),
                             over=[("link1", 1.0), ("neck", 1.0), ("rocker", 1.0)], end_mm=end),
              K.neck_member(F, p3, joints=("J3",), ramps=(("hub3", 0.0), (None, 0)))]
     okk = ok & np.isfinite(q).all(-1)
@@ -131,6 +136,17 @@ def declared_audit(r, p):
 _taken = SPM._taken
 
 
+def crown_points(m, rho, rad):
+    """SPM.crown_points with the member's own stack height m.t (12.25 + a spacer) for the crown and the top wall ring"""
+    F0 = float(rho[0]); k = m.K[:, None, :]
+    crown = (F0 + m.t) * k + m.xy[None, :, :1] * m.A[:, None, :] + m.xy[None, :, 1:] * m.Bv[:, None, :]
+    n = max(16, int(round(2 * math.pi * rad / 2.0))); ang = np.linspace(0, 2 * math.pi, n, endpoint=False)
+    c, s = rad * np.cos(ang), rad * np.sin(ang)
+    lv = sorted(set(SPM.CROWN_LEVELS) | {m.t})
+    wall = [(F0 + h) * k + c[None, :, None] * m.A[:, None, :] + s[None, :, None] * m.Bv[:, None, :] for h in lv if h <= m.t + 1e-9]
+    return np.concatenate([crown] + wall, 1)
+
+
 def extras(B, r, p):
     """crown / wall check of every hub (radius = member width / 2), near-touch, overhead >= 140, relay modes of taken poses"""
     L = B._kit_last; ch, prof, take = L["chain"], L["prof"], L["take"]
@@ -138,7 +154,7 @@ def extras(B, r, p):
     hubs = [m for m in ch.members if m.kind == "flat"]
     cmin = np.full(len(B.res), np.inf); cwho = {}
     if len(Pi):
-        parts = [SPM.crown_points(m, prof[m.name], m.width / 2.0)[Pi] for m in hubs]
+        parts = [crown_points(m, prof[m.name], m.width / 2.0)[Pi] for m in hubs]
         C = np.concatenate(parts, 1)
         dc = K.dist_many(B, np.repeat(Pi, C.shape[1]), C.reshape(-1, 3)).reshape(len(Pi), C.shape[1])
         cmin[Pi] = dc.min(1); cut = np.cumsum([0] + [x.shape[1] for x in parts])
@@ -181,7 +197,8 @@ def snap(p):
     for k in ("rad0", "rad1", "rad2", "rad3"): p[k] = min(SLIM, key=lambda x: abs(x - float(p[k])))
     p["beta"] = min(60.0, max(10.0, float(p["beta"]))); p["phi"] = float(p["phi"]) % 360.0
     p["m_lo"] = min(20.0, max(8.0, float(p["m_lo"]))); p["m_hi"] = min(20.0, max(8.0, float(p["m_hi"])))
-    p["m_sw"] = max(10.0, float(p["m_sw"])); p["qmax"] = min(90.0, max(0.0, float(p["qmax"])))
+    p["m_sw"] = max(10.0, float(p["m_sw"])); p["relay_lo"] = int(round(float(p["relay_lo"]))); p["relay_hi"] = int(round(float(p["relay_hi"]))); p["qmax"] = min(90.0, max(0.0, float(p["qmax"])))
+    for k in ("lift1", "lift2"): p[k] = min(4.0, max(0.0, float(p.get(k, 0.0))))
     for k in ("width", "t_link"): p[k] = PARAMS[k]                   # never thinned by a search
     return p
 
