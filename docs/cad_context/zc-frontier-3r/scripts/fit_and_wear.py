@@ -5,7 +5,7 @@ Verifier protocol (docs/concepts/rows/zc-frontier-3r.json "verification", skepti
 docs/concepts/verify/zc-frontier-3r-gpu-skeptic.py frozen --fits fit60): the member undersides are FITTED on
 Bench(60,160) fast (kit K3 march, quantile q), then FROZEN and worn on Bench(110,360) EXACT -> gap 33.51.
 
-    python3 docs/concepts/zc-frontier-3r ... scripts/fit_and_wear.py OUT_DIR [--no-wear]
+    python3 docs/cad_context/zc-frontier-3r/scripts/fit_and_wear.py OUT_DIR [--no-wear]
 
 Writes OUT_DIR/profile_fit60.npz (the frozen per-sample underside radii, sha256 printed) and OUT_DIR/wear.json
 (the exact-wear numbers + per-pose take mask / joint values / pose labels for the range tables).
