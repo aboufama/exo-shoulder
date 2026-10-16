@@ -285,6 +285,33 @@ def frozen_held(P):
     return frozen(P, -1, -1)
 
 
+def frozen_flood(P, nc=110, nw=360):
+    """frozen exact wear + the continuity flood fill on the worn model (the round-6 verifier's connected_report,
+    docs/concepts/verify/minarc-stop-knuckle-4r-mechanism.py): reach static and connected"""
+    out = {}
+    P = _clamp(dict(PARAMS, **P))
+    old = os.environ.pop("CB_EXACT", None)
+    try: B1 = CB.Bench(n_clip=60, n_ws=160)
+    finally:
+        if old is not None: os.environ["CB_EXACT"] = old
+    M1 = SCModel(B1, dict(P)); M1.run(); P2 = dict(M1.p); P2["m_fix"] = [float(x) for x in M1.D.m]
+
+    class Frozen(SCModel):
+        def fit(self):
+            for a in ("g", "fr", "geo", "rigid", "link_pts", "f", "fK", "tr", "zb", "_tr_fit", "cyl", "box", "strap", "cyl_surf", "Emid",
+                      "Hneed", "Lneed", "hEx", "_Ex", "_rod_info", "_viz_rod", "_crown_ok", "_scg", "_sc_info"):
+                if hasattr(M1, a): setattr(self, a, getattr(M1, a))
+            self._sc = None
+            self.contact = list(M1.contact); self.poses_fit = np.nonzero(self.kin_ok)[0]; self.drop = np.zeros(len(self.poses_fit), bool)
+    os.environ["CB_EXACT"] = "1"
+    B = CB.Bench(n_clip=nc, n_ws=nw); M = Frozen(B, P2); r = M.run()
+    out["frozen"] = {k: r[k] for k in ("gap", "reach", "follow", "inband14", "inband10", "contact")}
+    sp_ = importlib.util.spec_from_file_location("minarc_mech_for_sidecar", os.path.join(REPO, "docs", "concepts", "verify", "minarc-stop-knuckle-4r-mechanism.py"))
+    MECH = importlib.util.module_from_spec(sp_); sp_.loader.exec_module(MECH)
+    t = time.time(); out["connected"] = MECH.connected_report(M, B); out["connected"]["secs"] = round(time.time() - t, 1)
+    return out
+
+
 def viz_export(par):
     """geometry of the fitted design (Bench(60,160)) for docs/concepts/viz/concepts/sidecar-longdyad-knuckle-3r.js (the
     lead's exporter on this model's report; rodA = crank-tip ball, rodB = horn ball at rest, horn = link 1a lug)"""
@@ -298,6 +325,10 @@ if __name__ == "__main__":
     par = json.loads(sys.argv[2]) if len(sys.argv) > 2 else {}
     if mode == "viz":
         print(json.dumps(viz_export(par), default=float)); sys.exit()
+    if mode == "flood":
+        t = time.time(); out = frozen_flood(par); out["params"] = par; out["secs"] = round(time.time() - t, 1)
+        if len(sys.argv) > 3: json.dump(out, open(sys.argv[3], "w"), indent=1, default=float)
+        print(json.dumps(out, default=float)[:3000]); sys.exit()
     if mode in ("frozen", "held"):
         t = time.time(); out = frozen(par) if mode == "frozen" else frozen_held(par); out["params"] = par; out["secs"] = round(time.time() - t, 1)
         if len(sys.argv) > 3: json.dump(out, open(sys.argv[3], "w"), indent=1, default=float)

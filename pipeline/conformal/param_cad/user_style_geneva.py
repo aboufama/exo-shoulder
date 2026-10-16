@@ -249,7 +249,7 @@ def horn_parts(dv, M):
         a = th_pin + s_ * math.pi / 2; cs = h["screw_r"] * (math.cos(a) * e + math.sin(a) * f)
         plate = plate.cut(USM.arc_slot_cutter(np.zeros(3), uK, a - math.radians(h["screw_half_deg"]), a + math.radians(h["screw_half_deg"]),
                                               F + h["plate_z"][0] - 0.1, F + h["plate_z"][1] + 0.1, rs=h["screw_r"], w=h["slot_w"]))
-        csk = rev([(0, -0.8), (0.8, -0.8), (1.55, -0.05), (1.55, 0.2), (0, 0.2)], cs + (F + h["plate_z"][1]) * uK, uK)
+        csk = rev([(0, -1.6), (0.95, -1.6), (0.95, -0.6), (1.55, 0.0), (1.55, 0.2), (0, 0.2)], cs + (F + h["plate_z"][1]) * uK, uK)
         plate = plate.cut(csk)
         hub = hub.cut(disc(cs, uK, 0.65, F + h["hub_z"][0] - 0.1, F + h["hub_z"][1] + 0.1))     # M1.6 tapped (minor O1.3)
         sc = rev([(0, -2.45), (0.75, -2.45), (0.75, -0.75), (1.45, -0.05), (0, -0.05)], cs + (F + h["plate_z"][1]) * uK, uK)
@@ -282,11 +282,12 @@ def arbor_pin_geneva(k, F):
     through the crown bore to a shoulder at F + 17.15 and an O3 DD tip (flats 2.4) for the pressed horn hub"""
     c = USM.CAPK; h = HORN; k = unit(k)
     pin = PB.revolved([(0, 1.5), (4.1, 1.5), (4.1, LV["L1"]), (3.5, LV["L1"]), (3.5, LV["N1"]), (c["arbor_r"], LV["N1"]), (c["arbor_r"], h["hub_z"][0]),
-                       (h["tip_r"], h["hub_z"][0]), (h["tip_r"], h["tip_top"]), (0, h["tip_top"])], k, F)
+                       (0, h["hub_z"][0])], k, F)
     e, f = USM.frame2(k); sw = c["slit_w"] / 2
+    tip = disc(np.zeros(3), k, h["tip_r"], F + h["hub_z"][0] - 0.3, F + h["tip_top"]).intersect(           # the DD tip (flats 2.4), glued on the shoulder
+        prism((F + h["hub_z"][0] - 0.5) * k, e, f, [(-h["tip_flat"], -3), (h["tip_flat"], -3), (h["tip_flat"], 3), (-h["tip_flat"], 3)], [0] * 4, h["tip_top"] - h["hub_z"][0] + 1.0))
+    pin = US.glue(pin, tip)
     pin = pin.cut(prism((F + c["ch_z0"] + 0.05) * k, e, f, [(1.3, -sw), (c["arbor_r"] + 0.5, -sw), (c["arbor_r"] + 0.5, sw), (1.3, sw)], [0, 0, 0, 0], c["ch_z1"] - c["ch_z0"] - 0.3))
-    for s_ in (+1, -1):                                                                       # the DD flats (oriented by the hub's frame at assembly)
-        pin = pin.cut(prism((F + h["hub_z"][0]) * k, e, f, [(s_ * HORN["tip_flat"], -3), (s_ * 3.0, -3), (s_ * 3.0, 3), (s_ * HORN["tip_flat"], 3)], [0] * 4, h["tip_top"] - h["hub_z"][0] + 0.1))
     return pin
 
 

@@ -63,4 +63,57 @@ Row: `docs/concepts/rows/sidecar-longdyad-knuckle-3r.json`. Preview: `docs/conce
 
 ## Gate (Bench(60,160) fast, lead seats, near-touch gap; fold losses split by wall)
 
-(filled in below as measured)
+The lead's seats are held fixed and only the dyad and drive change. "near" is the near-touch gap and "plain" the plain
+gap. Wall split of the lost workspace poses:
+
+- **law end**: th past the law's last valid point;
+- **m3e**: the effective dyad margin < 5;
+- **folded**: J2 on its dowel;
+- **mid**: the window.
+
+| cell (bk1 / bk2 / a1max, drive) | near | plain | reach | in-band14 | law end | m3e | folded | mid | th law max | dK taken | trans min |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| lead dyad 30.05 / 37.57 / 61.72, La 20 r_h 15 beta -90 (pick 1's cell, run D) | 19.52 | 13.50 | 0.775 | 0.895 | 14 (skirt) | 8 | 8 | 3 | 121.9 | 36.9 | 36.1 |
+| 30 / 38 / 63 (La 22, s_arm 4, r_lobe 7) | 22.10 | 16.08 | 0.763 | 0.893 | 13 (lift-off) | 9 | 8 | 3 | 123.8 | 37.0 | 31.7 |
+| 30 / 38 / **60** | 22.10 | 16.08 | 0.763 | 0.893 | 14 (stop B) | 8 | 8 | 3 | 121.8 | 37.0 | 31.7 |
+| 30 / 41 / 66 | 20.61 | 15.21 | 0.775 | 0.889 | 12 (lift-off) | 8 | 8 | 3 | 126.5 | 40.4 | **29.3** |
+| 30 / 41 / **63** | 20.61 | 15.21 | 0.775 | 0.889 | 12 (stop B) | 8 | 8 | 3 | 124.9 | 40.4 | 29.3 |
+| 30 / 44 / 69 | 18.54 | 14.63 | 0.775 | 0.902 | 10 (lift-off) | 8 | 8 | 3 | 129.2 | 43.5 | **26.7** |
+| 30 / 44 / **66** | 18.54 | 14.63 | 0.775 | 0.902 | 11 (stop B) | 7 | 8 | 3 | 128.0 | 43.5 | 26.7 |
+| 30 / 47 / 72 | 18.54 | 17.38 | 0.769 | 0.902 | 10 (lift-off) | 7 | 8 | 3 | 132.1 | 49.0 | **21.6** |
+| 30 / 47 / **69** | 18.54 | 17.38 | 0.769 | 0.902 | 10 (stop B) | 7 | 8 | 3 | 131.0 | 49.0 | 21.6 |
+| wide-dyad check cell 35 / 45 / 75 (La 24) | 63.70 | 39.79 | 0.700 | 0.891 | 9 (lift-off) | 9 | 8 | 3 | 132.3 | 39.1 | 27.1 |
+| 30 / 44 / 66, La 20 s_arm 5 r_lobe 7.5, beta -90 | 18.54 | 12.31 | 0.788 | 0.903 | 13 (skirt) | 5 | 8 | 3 | 123.7 | 43.5 | 30.5 |
+| same + crank phase gam +15 | 19.32 | 14.20 | 0.769 | 0.905 | 13 (skirt) | 5 | 8 | 3 | 123.7 | 43.5 | 37.1 |
+| 30 / 47 / 72 + gam +15 (La 20) | 18.16 | 15.82 | 0.769 | 0.903 | 13 (skirt) | 4 | 8 | 3 | 123.9 | 49.0 | 33.1 |
+| proposer's beta -112 at bk2 44 (La 20) | 26.29 | 13.59 | 0.781 | 0.899 | | | | | | 43.5 | 53.1 |
+| balls under the arm / horn (rod at strap level - 3) | 228.14 | 203.94 | 0.381 | 0.763 | | | | | | | |
+
+What the gate measured:
+
+1. **Stop B never binds.** Lowering a1max by 3 deg (bk1 + bk2 - 8 instead of - 5) gives identical metrics in every
+   cell. The law ends at lift-off (or at the lobe skirt) before stop B, as the judge's check 3 predicted. Raising
+   a1max buys nothing by itself.
+2. **The stretched poses beyond th ~132 sit behind the a2 wall, not the K dyad.** At the gam-15 seed the lost
+   stretched poses are at th 100, 110, 116, 118, 118, 120, 123, 124, 127, 128, 132, 133, 134, 139, 140, 142, 143, 147,
+   152 and 157. bk2 47 with its law to th 132.1 wins one of them (116). The poses at th >= 133 need
+   a1e >= th - a2 + 5 = 76-100 at a2 62.2, which is beyond any a1max <= 75. The poses at th 124-132 are lost to m3e,
+   because the law's K opening lags th there. That is the law shape, which the pressure-angle cap
+   kK <= i_rock r_lobe / r_h bounds.
+3. **The longer dyad wins 4 fold poses (30 -> 26) but only 0-2 reach poses fast.** Skin, parts and contact take back
+   the rest. Near-touch improves ~1 point (19.52 -> 18.54) at equal drive. In-band rises 0.895 -> 0.902, mostly the
+   longer rod's share.
+4. **The real RSSR transmission degrades with the K opening.** A strap-level sidecar is a spatial RSSR whose horn
+   swings dK. At gam 0 the minimum transmission angle over the taken range falls 36.1 -> 29.3 -> 26.7 -> 21.6 as bk2
+   goes 37.6 -> 41 -> 44 -> 47. The small-angle gain r_h / La holds only to 0.35-0.68 of its value: it is a
+   nonlinear ratio. Phasing the crank by +15 deg restores 33-37 deg and a near-constant ratio (0.75-0.79) at a cost of
+   ~0.8 near-touch. Without the phase, every cell past bk2 41 fails a 30-deg transmission gate. The proposer's
+   rest-only model could not see this.
+5. **The wide-dyad cell (35 / 45 / 75) is dead.** Contact 0.12 (19 poses) confirms the judge's check 6 in this
+   harness.
+6. **Hanging the ball links under the arm and horn puts the rod into the skin** on 110 of 160 poses. The rod has to
+   ride over the arm, so the sidecar's in-band floor is the crank stack plus the ball height.
+
+GATE VERDICT: the spec's pass (a cell with fold losses <= 26, in-band >= 0.90 and min metal >= 1 mm at the near-touch
+rule) is met on fold losses and in-band (bk2 44-47). It is NOT met on min metal: 0.03-0.96 mm untuned, with crank,
+horn and rod ends among the < 1 mm parts. CMA (near-touch objective) runs from the passing cells, as the spec says.
