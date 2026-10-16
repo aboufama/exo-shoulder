@@ -2587,7 +2587,7 @@
   "name": "Twin knuckle: a second slaved knuckle K2 on link 2 (bk3 >= 22), opened from the lead's drive wall by lobe 2 on hub 2 - rod (RSSR) embodiment first, rodless roller-flank embodiment merged",
   "family": "redundant 5R, two slaved spares (sidecar knuckle K on link 1 + K2 on link 2) + pin knee",
   "lens": "round9:reach-from-the-J3-end (a2-wall split over two knuckles; merged from twin-flank-k2-knuckle-3r)",
-  "status": "ideated",
+  "status": "dead",
   "t_ideated": "2026-10-16T21:14:47Z",
   "source": "round 9 judge (docs/concepts/round9_ideation.md)",
   "merged_from": [
