@@ -382,3 +382,70 @@ was written; H17 (O17 hubs, 23.11 fast) could not be measured exact here because
 non-O20 hubs (tools/concept_kit.py O20_ONLY, changed by another session at ~06:00 UTC; CB_ALLOW_SLIM=1 re-measures).
 Next: re-measure H1 / HW / HL under the repository's current fold-margin default, let an independent verifier rule on
 H1, and run the near-touch-objective polish again from HW / HL with the new rules in force.
+
+## Verification (polish) (independent verifier, 2026-10-16 ~06:30 UTC)
+
+Claim checked: the polished H1 = H-g107-1 (O20 x 3, fold margin 10) scores 26.45 on Bench(110,360) exact with the
+verifier checks (shape fitted on Bench(110,360) fast), near-touch 26.45, min metal 1.38 mm, against k4598 29.95 the
+same way. Harness: `docs/concepts/verify/skin-normal-3r-pin-knee-polish.py` (new; it imports the round-3 verifier
+`docs/concepts/verify/skin-normal-3r-pin-knee.py` UNCHANGED - last edited 03:38 UTC, before the polish - and runs its
+extra checks, then the model's audit on the corrected set; it adds only the fit bench as a choice, a held-out bench and
+red-team numbers; raw outputs in `docs/concepts/verify/skin-normal-3r-pin-knee-polish.results.json`). Not `tools/knee_polish.py`: no code of the polish author drives the numbers below. 10 farm jobs
+(exo-cpu1, 2 vCPU each, CB_EXACT=1 for every wear bench, ~$0.03 in all).
+
+**Checks not loosened.** The model's diff since round 3 only adds rad1-3 (catalogue radii, O20 = the old code path); k4598
+through the unchanged protocol reproduces 30.35 / near-touch 38.41 / 16 poses / 0.02 mm to the digit. Every verifier
+check ran: independent 3D closure (hub-3 centre / pin a / pin b 0.000 mm, J3 and pin axes <= 0.022 deg, arm residual
+<= 0.016 deg), knee vs hub 3's link-2 half at 1 mm, E boss vs hubs / links - 0 poses removed for either config on any
+bench. Fold margin over the taken poses: min 10.06 deg at the 10 deg rule, 5.49 at the 5 deg rule (the rule holds).
+
+**Measured (Bench(110,360) exact unless noted; gap / near-touch gap (metal < 1 mm = contact) / poses < 1 mm / min metal):**
+
+| protocol | fold margin | k4598 | H1 | gain plain / near-touch |
+|---|---|---|---|---|
+| polish: fit Bench(110,360) fast, worn exact | 10 | 29.95 / 36.11 / 13 / 0.39 mm | **26.45 / 26.45 / 0 / 1.38 mm** (reach 0.6472, follow 0.9636, ib14 0.9012, ib10 0.5126, contact 0.0117) | **3.50 / 9.66** |
+| round-3 verifier: fit Bench(60,160) fast, worn exact | 10 | 30.35 / 38.41 / 16 / 0.02 mm | 28.21 / 33.77 / 9 / 0.09 mm | 2.14 / 4.64 |
+| HELD-OUT, mine: fit Bench(110,360) fast, worn exact on all 202 fit-clip frames + 952 workspace poses outside BOTH Bench(110,360) and Bench(60,160) (1154 poses; Wave / Walking excluded, asserted) | 10 | 32.97 / 39.61 / 32 / 0.24 mm | 30.73 / 32.61 / 8 / 0.05 mm | 2.24 / 7.00 |
+| polish protocol | 5 (current rule) | 29.34 / 33.64 / 10 / 0.21 mm | 24.48 / 25.59 / 2 / 0.21 mm | 4.86 / 8.05 |
+| round-3 verifier protocol | 5 | 29.54 / 34.98 / 12 / 0.31 mm | 27.20 / 31.75 / 8 / 0.09 mm | 2.34 / 3.23 |
+
+The margin-5 rows are a MEASUREMENT change (the user's 05:50 UTC ruling), not a design change; H1 was searched at 10.
+
+**Hardware bounds.** Hubs O20 at J1-J3 (the "Keep O20 only" rule holds). Pin stack 5.68 mm -> 2.59 mm Ti plates on the
+iglidur pin (between IGLIDUR-PIN 5.0 and the MR63ZZ pair 6.0; thicker plates only lift the knee, so the envelope is
+real). ang_min 30.46 (knee window stays >= 30 deg off both singular postures). lE 59.55 mm (at the round-1 bound 60), lc
+28.24 mm. Arm pad 82.5 mm from GH, 66.6 mm distal of J3's line foot and 27.1 mm across: on the upper-arm cuff. J1 seat
+direction (scapula frame) anterior 0.085 / up 0.898 / lateral 0.432: acromion top, rule (4) holds (k4598 anterior 0.113).
+J3 travel 181.7 deg (MR117 pair, full rotation), pin a 45.4 deg, pin b 41.3 deg.
+
+**Red team.**
+* *Overhead, the optimistic part of the gain.* At margin 10, H1 follows only 6 of the 10 Raise-overhead clip frames at
+  elevation >= 140 (overhead follow 0.60; k4598 1.00) on the polish and fit-60 protocols, 12 of 19 on the held-out set
+  (k4598 19 of 19); overhead workspace reach 0.21 / 0.18 / 0.15 (k4598 0.25 / 0.25 / 0.21). The cause is the knee window:
+  H1's knee reaches 149.2-149.3 deg against its stop at 149.54 (30.7 deg from the straight singular posture; k4598 stays
+  at <= 143.4, 36.6 deg off), so "knee window" losses rise 4 -> 11 (overhead 4 -> 8). The reach gain is everyday
+  workspace poses (fold losses 133 -> 116). At margin 5 (polish protocol) the refitted shape keeps every overhead frame
+  (follow 1.0, reach 0.25) - this edge is fragile, not robust. k4598's L1 build was the first to pass R4 overhead
+  (83.9 %): **R4 must be re-judged on H1's build before H1 is called better at overhead.**
+* *Near-touch is partly in-sample.* The "0 poses < 1 mm, min 1.38 mm" holds on the 470 poses the shape and the
+  parameters were fitted on. On the held-out poses H1 has 8 poses < 1 mm (min 0.05 mm at plane 60 / elev 75 / axial 30;
+  0.11 mm at 15 / 75 / 60) and 9 on the fit-60 protocol (min 0.09 mm in Raise overhead, elev 148). It is still far
+  better than k4598 there (32 poses, 0.24 mm held out), so the near-touch gain stands (7.00 held out).
+* *Arm at the side (elevation <= 15).* H1: 0 poses with metal < 1 mm on every bench (lowest 1.06 mm held out, 1.77 mm on
+  Bench(110,360), at plane 105-150 / axial -135..-180); k4598: 3 (0.39 mm) and 9 held out. The round-3 near-touch point
+  is fixed.
+* *The knee near hub 3 (the pose that jams).* Knee link vs hub 3's link-2 half >= 41.8 mm (k4598 24.3), E boss vs link 2
+  >= 38.4 mm (25.0): the longer E strap moves the knee away from hub 3. No flips (10 fps continuity) and no closure
+  failures on any bench.
+* *Posterior axillary fold.* Not re-measured on meshes (H1 has no L1 build yet). On the bench every sampled metal point
+  is checked against the posed skin at every pose, and H1's lowest points are at mid / high elevations, not with the arm
+  low and extended; J2's seat moves lower and further back (el2 56.3 -> 47.0, az2 17.7 -> 30.2), toward the fold, so
+  the L1 red team must re-check link 2 there (k4598's built link 2 came to 1.74 mm).
+* *Contact.* On the fit-60 protocol H1's contact fraction is 0.0259 (k4598 0.0091): 9 contact poses, 5 of them overhead
+  clip frames - the same overhead edge.
+
+**Verdict: CONFIRMED, not refuted.** The gain is real and >= 1 gap point, plain and near-touch, on every protocol and at
+both fold margins (smallest: 2.14 plain on the fit-60 protocol, 3.23 near-touch at margin 5); it holds held out (2.24 /
+7.00). H1 replaces k4598 as the design's polished configuration (row: best_k H-g107-1, v_gap 28.21 on the comparable
+fit-60 protocol, v_polish_gap 26.45 = score 90.38 on the polish protocol). Before the generation-3 CAD switches to H1:
+re-judge R4 overhead on the H1 build (the knee-window edge above), and red-team link 2 at the posterior axillary fold.

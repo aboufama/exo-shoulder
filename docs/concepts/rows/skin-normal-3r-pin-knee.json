@@ -15,33 +15,35 @@
  "inband10": 0.5323,
  "contact": 0.0,
  "gap": 20.63,
- "v_reach": 0.6056,
- "v_follow": 1.0,
- "v_inband14": 0.9043,
- "v_inband10": 0.5376,
- "v_gap": 30.35,
+ "v_reach": 0.6444,
+ "v_follow": 0.9636,
+ "v_inband14": 0.8994,
+ "v_inband10": 0.5326,
+ "v_gap": 28.21,
  "n_configs": 7199,
  "verdict": "screened: 20.63 (score 92.50) on Bench(60,160) fast, converged; worn FROZEN on Bench(110,360) exact 30.35 (score 88.96) - 11-12 points better than the zero-passive spherical 3R (41.73) and the 2-slide leader (42.59) with 0 passive translations (2 iglidur pins, 5 mm stack), but short of 90 on the verification bench: the whole gap is reach (J2 fold); freed b3 does not pay (37.04 at b3 0.54)",
  "limiter": "J2 fold = the J1-J3 axis-angle window 2 min(a1, a2) - 20 (~60 deg at a1 ~40) vs 27-141 deg needed (22-146 overhead): reach 0.694 fit -> 0.606 verification, 0.25 overhead; widening a1 moves hub 2 onto skin it cannot clear (93-115 mm off GH, measured; wide LHS best 36.26)",
- "note": "Bench(60,160) fast fit, seed VModel rules + knee part checks (5 mm pin stack); gate (7199 configs): gain 0.25 over the 2nd half, 0.00 over the last third, top-5 spread 0.06 score points -> converged; frozen exact at k4598: near-touch min 0.02 mm, metal<1mm-as-contact gap 38.41; MVP2: knee is a two-force member, J3 torque transmission 0.46-1.38 (never lost), pins need hub-sized bearings for the 25 N m MVP2 moment | VERIFIED 2026-10-16 (independent verifier docs/concepts/verify/skin-normal-3r-pin-knee.py, Bench(110,360) exact, frozen shape from Bench(60,160) fast): v_gap 30.35 (score 88.96; reach 0.6056, follow 1.0, ib14 0.9043, ib10 0.5376, contact 0.0091), reproduced to the digit with added checks (independent 3D closure: hub-3 centre / pin a / pin b 0.000 mm, J3 and pin axes <= 0.022 deg; knee vs hub 3's link-2 half >= 24.3 mm at 1 mm rule; E boss vs hubs 1-2, L1, L2 >= 24.7 mm) - 0 poses removed; champion same bench and checks (offset-skin-normal-3r verifier, champbig_frozen, re-run): 66.97 (near1 71.2); knee near1 38.41 (16 poses < 1 mm, min 0.02 mm at arm-at-side), overhead >=140 reach 0.25",
+ "note": "Bench(60,160) fast fit, seed VModel rules + knee part checks (5 mm pin stack); gate (7199 configs): gain 0.25 over the 2nd half, 0.00 over the last third, top-5 spread 0.06 score points -> converged; frozen exact at k4598: near-touch min 0.02 mm, metal<1mm-as-contact gap 38.41; MVP2: knee is a two-force member, J3 torque transmission 0.46-1.38 (never lost), pins need hub-sized bearings for the 25 N m MVP2 moment | VERIFIED 2026-10-16 (independent verifier docs/concepts/verify/skin-normal-3r-pin-knee.py, Bench(110,360) exact, frozen shape from Bench(60,160) fast): v_gap 30.35 (score 88.96; reach 0.6056, follow 1.0, ib14 0.9043, ib10 0.5376, contact 0.0091), reproduced to the digit with added checks (independent 3D closure: hub-3 centre / pin a / pin b 0.000 mm, J3 and pin axes <= 0.022 deg; knee vs hub 3's link-2 half >= 24.3 mm at 1 mm rule; E boss vs hubs 1-2, L1, L2 >= 24.7 mm) - 0 poses removed; champion same bench and checks (offset-skin-normal-3r verifier, champbig_frozen, re-run): 66.97 (near1 71.2); knee near1 38.41 (16 poses < 1 mm, min 0.02 mm at arm-at-side), overhead >=140 reach 0.25 | POLISH VERIFIED 2026-10-16 (independent verifier, farm, Bench(110,360) exact, verifier checks unchanged): H1 = H-g107-1 (O20 x3, fold margin 10) 26.45 (score 90.38) vs k4598 29.95 with the shape fitted on Bench(110,360) fast; near-touch 26.45 vs 36.11 (min metal 1.38 vs 0.39 mm, 0 vs 13 poses < 1 mm); round-3 fit-60 protocol 28.21 vs 30.35; disjoint held-out (1154 poses) 30.73 vs 32.97 (near-touch 32.61 vs 39.61, 8 vs 32 poses < 1 mm: the 1.38 mm is in-sample); margin 5: 24.48 vs 29.34. Overhead clip follow 0.60 (k4598 1.00) at margin 10: knee window binds - re-judge R4 on the build.",
  "doc": "docs/concepts/skin-normal-3r-pin-knee.md",
  "model_file": "docs/concepts/models/skin-normal-3r-pin-knee.py",
- "best_k": 4598,
+ "best_k": "H-g107-1",
  "best_params": {
-  "lE": 42.1129,
-  "lc": 24.9243,
-  "phiE": 1.5471,
-  "phib": -55.8565,
-  "stk": 5.0,
-  "ang_min": 30.0,
-  "az1": 105.7561,
-  "el1": 65.5039,
-  "az2": 17.6992,
-  "el2": 56.2778,
-  "wd": 76.4693,
-  "wa": -13.3241,
-  "b3": 0.3251,
-  "neck": 13.0
+  "rad1": 10.0,
+  "rad2": 10.0,
+  "rad3": 10.0,
+  "az1": 101.1634,
+  "el1": 63.8986,
+  "az2": 30.153,
+  "el2": 47.0108,
+  "wd": 70.3931,
+  "wa": -8.1248,
+  "b3": 0.2842,
+  "lE": 59.5534,
+  "lc": 28.2401,
+  "phiE": -5.8107,
+  "phib": -54.914,
+  "ang_min": 30.4611,
+  "stk": 5.6815
  },
  "exact_frozen": {
   "k": 4598,
@@ -94,7 +96,7 @@
   "k3326_D2": 31.35,
   "k3326_D2_angmin20": 31.24
  },
- "v_contact": 0.0091,
+ "v_contact": 0.0259,
  "polish_big": {
   "t": "2026-10-16T06:13:55Z",
   "tool": "tools/knee_polish.py",
@@ -186,6 +188,428 @@
     "exact": "not measured: shared model refuses non-O20 hubs since ~06:00 UTC"
    }
   },
-  "status": "self-measured with the verifier harness; NOT independently verified - the CAD keeps k4598 until a verifier confirms >= 1 point"
- }
+  "status": "INDEPENDENTLY VERIFIED 2026-10-16 (v_polish_* fields): gain confirmed >= 1 point on every protocol; H1 replaces k4598 (overhead caveat: re-judge R4 on the build)"
+ },
+ "v_polish_t": "2026-10-16T06:29:30Z",
+ "v_polish_k": "H-g107-1",
+ "v_polish_params": {
+  "rad1": 10.0,
+  "rad2": 10.0,
+  "rad3": 10.0,
+  "az1": 101.1634,
+  "el1": 63.8986,
+  "az2": 30.153,
+  "el2": 47.0108,
+  "wd": 70.3931,
+  "wa": -8.1248,
+  "b3": 0.2842,
+  "lE": 59.5534,
+  "lc": 28.2401,
+  "phiE": -5.8107,
+  "phib": -54.914,
+  "ang_min": 30.4611,
+  "stk": 5.6815
+ },
+ "v_polish_gap": 26.45,
+ "v_polish_reach": 0.6472,
+ "v_polish_follow": 0.9636,
+ "v_polish_inband14": 0.9012,
+ "v_polish_inband10": 0.5126,
+ "v_polish_contact": 0.0117,
+ "v_polish_gap_near1": 26.45,
+ "v_polish_min_metal_mm": 1.38,
+ "v_polish_baseline_k4598": 29.95,
+ "v_polish_baseline_near1": 36.11,
+ "v_polish_gain": 3.5,
+ "v_polish_gain_near1": 9.66,
+ "v_polish_verdict": "CONFIRMED (not refuted): gain >= 1 gap point plain and near-touch on every protocol (margin 10: polish 3.50 / 9.66, round-3 fit-60 2.14 / 4.64, disjoint held-out 2.24 / 7.00; margin 5: polish 4.86 / 8.05, fit-60 2.34 / 3.23). H1 replaces k4598 as the polish winner; caveat: overhead clip frames (Raise overhead, elev >= 140) follow 0.60 vs 1.00 at margin 10 - the knee window binds (knee 149.2 vs stop 149.54) - so R4 must be re-judged on the H1 build.",
+ "v_polish_protocols": {
+  "k4598_fitbig_m10": {
+   "gap": 29.95,
+   "reach": 0.6083,
+   "follow": 1.0,
+   "inband14": 0.8982,
+   "inband10": 0.5106,
+   "contact": 0.006,
+   "gap_near1": 36.11,
+   "near1_poses": 13,
+   "min_metal_mm": 0.39,
+   "gap_near2": 65.79,
+   "overhead140": {
+    "reach": 0.25,
+    "follow": 1.0,
+    "inband14": 0.938
+   },
+   "fit_gap": 30.62,
+   "n_wear": 470,
+   "wear_mode": "exact",
+   "poses_removed_by_verifier": 0,
+   "fold_margin_min_taken": 10.44,
+   "knee_ang": [
+    91.9,
+    143.1
+   ],
+   "arm_side_lt1": 3,
+   "why": {
+    "fold": 133,
+    "slide": 4,
+    "flip": 0,
+    "closure": 0,
+    "skin": 0,
+    "parts": 2,
+    "contact": 2
+   }
+  },
+  "k4598_fit60_m10": {
+   "gap": 30.35,
+   "reach": 0.6056,
+   "follow": 1.0,
+   "inband14": 0.9043,
+   "inband10": 0.5376,
+   "contact": 0.0091,
+   "gap_near1": 38.41,
+   "near1_poses": 16,
+   "min_metal_mm": 0.02,
+   "gap_near2": 64.6,
+   "overhead140": {
+    "reach": 0.25,
+    "follow": 1.0,
+    "inband14": 0.9402
+   },
+   "fit_gap": 20.63,
+   "n_wear": 470,
+   "wear_mode": "exact",
+   "poses_removed_by_verifier": 0,
+   "fold_margin_min_taken": 10.44,
+   "knee_ang": [
+    94.0,
+    148.1
+   ],
+   "arm_side_lt1": 3,
+   "why": {
+    "fold": 133,
+    "slide": 4,
+    "flip": 0,
+    "closure": 0,
+    "skin": 0,
+    "parts": 2,
+    "contact": 3
+   }
+  },
+  "k4598_held_m10": {
+   "gap": 32.97,
+   "reach": 0.5893,
+   "follow": 1.0,
+   "inband14": 0.8965,
+   "inband10": 0.5092,
+   "contact": 0.0155,
+   "gap_near1": 39.61,
+   "near1_poses": 32,
+   "min_metal_mm": 0.24,
+   "gap_near2": 72.96,
+   "overhead140": {
+    "reach": 0.2113,
+    "follow": 1.0,
+    "inband14": 0.9436
+   },
+   "fit_gap": 30.62,
+   "n_wear": 1154,
+   "wear_mode": "exact",
+   "poses_removed_by_verifier": 0,
+   "fold_margin_min_taken": 10.07,
+   "knee_ang": [
+    91.9,
+    143.4
+   ],
+   "arm_side_lt1": 9,
+   "why": {
+    "fold": 360,
+    "slide": 12,
+    "flip": 0,
+    "closure": 0,
+    "skin": 0,
+    "parts": 7,
+    "contact": 12
+   }
+  },
+  "k4598_fitbig_m5": {
+   "gap": 29.34,
+   "reach": 0.6361,
+   "follow": 1.0,
+   "inband14": 0.8764,
+   "inband10": 0.4773,
+   "contact": 0.0059,
+   "gap_near1": 33.64,
+   "near1_poses": 10,
+   "min_metal_mm": 0.21,
+   "gap_near2": 57.64,
+   "overhead140": {
+    "reach": 0.25,
+    "follow": 1.0,
+    "inband14": 0.9232
+   },
+   "fit_gap": 29.97,
+   "n_wear": 470,
+   "wear_mode": "exact",
+   "poses_removed_by_verifier": 0,
+   "fold_margin_min_taken": 5.42,
+   "knee_ang": [
+    91.9,
+    143.1
+   ],
+   "arm_side_lt1": 0,
+   "why": {
+    "fold": 115,
+    "slide": 6,
+    "flip": 0,
+    "closure": 0,
+    "skin": 0,
+    "parts": 8,
+    "contact": 2
+   }
+  },
+  "k4598_fit60_m5": {
+   "gap": 29.54,
+   "reach": 0.6361,
+   "follow": 1.0,
+   "inband14": 0.8773,
+   "inband10": 0.4878,
+   "contact": 0.0088,
+   "gap_near1": 34.98,
+   "near1_poses": 12,
+   "min_metal_mm": 0.31,
+   "gap_near2": 56.69,
+   "overhead140": {
+    "reach": 0.25,
+    "follow": 1.0,
+    "inband14": 0.9202
+   },
+   "fit_gap": 22.88,
+   "n_wear": 470,
+   "wear_mode": "exact",
+   "poses_removed_by_verifier": 0,
+   "fold_margin_min_taken": 5.42,
+   "knee_ang": [
+    91.8,
+    142.9
+   ],
+   "arm_side_lt1": 0,
+   "why": {
+    "fold": 115,
+    "slide": 5,
+    "flip": 0,
+    "closure": 0,
+    "skin": 0,
+    "parts": 8,
+    "contact": 3
+   }
+  },
+  "H1_fitbig_m10": {
+   "gap": 26.45,
+   "reach": 0.6472,
+   "follow": 0.9636,
+   "inband14": 0.9012,
+   "inband10": 0.5126,
+   "contact": 0.0117,
+   "gap_near1": 26.45,
+   "near1_poses": 0,
+   "min_metal_mm": 1.38,
+   "gap_near2": 33.57,
+   "overhead140": {
+    "reach": 0.2143,
+    "follow": 0.6,
+    "inband14": 0.9389
+   },
+   "fit_gap": 26.45,
+   "n_wear": 470,
+   "wear_mode": "exact",
+   "poses_removed_by_verifier": 0,
+   "fold_margin_min_taken": 10.06,
+   "knee_ang": [
+    103.9,
+    149.2
+   ],
+   "arm_side_lt1": 0,
+   "why": {
+    "fold": 116,
+    "slide": 11,
+    "flip": 0,
+    "closure": 0,
+    "skin": 0,
+    "parts": 0,
+    "contact": 4
+   }
+  },
+  "H1_fit60_m10": {
+   "gap": 28.21,
+   "reach": 0.6444,
+   "follow": 0.9636,
+   "inband14": 0.8994,
+   "inband10": 0.5326,
+   "contact": 0.0259,
+   "gap_near1": 33.77,
+   "near1_poses": 9,
+   "min_metal_mm": 0.09,
+   "gap_near2": 49.45,
+   "overhead140": {
+    "reach": 0.1786,
+    "follow": 0.6,
+    "inband14": 0.9216
+   },
+   "fit_gap": 26.66,
+   "n_wear": 470,
+   "wear_mode": "exact",
+   "poses_removed_by_verifier": 0,
+   "fold_margin_min_taken": 10.06,
+   "knee_ang": [
+    103.0,
+    147.3
+   ],
+   "arm_side_lt1": 0,
+   "why": {
+    "fold": 116,
+    "slide": 7,
+    "flip": 0,
+    "closure": 0,
+    "skin": 0,
+    "parts": 0,
+    "contact": 9
+   }
+  },
+  "H1_held_m10": {
+   "gap": 30.73,
+   "reach": 0.6019,
+   "follow": 0.9653,
+   "inband14": 0.8998,
+   "inband10": 0.5106,
+   "contact": 0.009,
+   "gap_near1": 32.61,
+   "near1_poses": 8,
+   "min_metal_mm": 0.05,
+   "gap_near2": 41.87,
+   "overhead140": {
+    "reach": 0.1549,
+    "follow": 0.6316,
+    "inband14": 0.9394
+   },
+   "fit_gap": 26.45,
+   "n_wear": 1154,
+   "wear_mode": "exact",
+   "poses_removed_by_verifier": 0,
+   "fold_margin_min_taken": 10.06,
+   "knee_ang": [
+    103.9,
+    149.3
+   ],
+   "arm_side_lt1": 0,
+   "why": {
+    "fold": 332,
+    "slide": 39,
+    "flip": 0,
+    "closure": 0,
+    "skin": 0,
+    "parts": 8,
+    "contact": 7
+   }
+  },
+  "H1_fitbig_m5": {
+   "gap": 24.48,
+   "reach": 0.6694,
+   "follow": 1.0,
+   "inband14": 0.8943,
+   "inband10": 0.5068,
+   "contact": 0.0085,
+   "gap_near1": 25.59,
+   "near1_poses": 2,
+   "min_metal_mm": 0.21,
+   "gap_near2": 36.32,
+   "overhead140": {
+    "reach": 0.25,
+    "follow": 1.0,
+    "inband14": 0.8902
+   },
+   "fit_gap": 24.57,
+   "n_wear": 470,
+   "wear_mode": "exact",
+   "poses_removed_by_verifier": 0,
+   "fold_margin_min_taken": 5.49,
+   "knee_ang": [
+    101.1,
+    148.4
+   ],
+   "arm_side_lt1": 0,
+   "why": {
+    "fold": 97,
+    "slide": 10,
+    "flip": 0,
+    "closure": 0,
+    "skin": 0,
+    "parts": 9,
+    "contact": 3
+   }
+  },
+  "H1_fit60_m5": {
+   "gap": 27.2,
+   "reach": 0.6583,
+   "follow": 0.9636,
+   "inband14": 0.8953,
+   "inband10": 0.5539,
+   "contact": 0.0256,
+   "gap_near1": 31.75,
+   "near1_poses": 8,
+   "min_metal_mm": 0.09,
+   "gap_near2": 46.85,
+   "overhead140": {
+    "reach": 0.1786,
+    "follow": 0.6,
+    "inband14": 0.9155
+   },
+   "fit_gap": 23.64,
+   "n_wear": 470,
+   "wear_mode": "exact",
+   "poses_removed_by_verifier": 0,
+   "fold_margin_min_taken": 5.49,
+   "knee_ang": [
+    103.0,
+    147.3
+   ],
+   "arm_side_lt1": 0,
+   "why": {
+    "fold": 97,
+    "slide": 14,
+    "flip": 0,
+    "closure": 0,
+    "skin": 0,
+    "parts": 7,
+    "contact": 9
+   }
+  }
+ },
+ "v_polish_harness": "docs/concepts/verify/skin-normal-3r-pin-knee-polish.py (imports the round-3 verifier docs/concepts/verify/skin-normal-3r-pin-knee.py unchanged; farm, CB_EXACT=1; held = all 202 fit-clip frames + 952 workspace poses outside Bench(110,360) and Bench(60,160), Wave / Walking excluded)",
+ "best_k_previous": 4598,
+ "best_params_previous": {
+  "lE": 42.1129,
+  "lc": 24.9243,
+  "phiE": 1.5471,
+  "phib": -55.8565,
+  "stk": 5.0,
+  "ang_min": 30.0,
+  "az1": 105.7561,
+  "el1": 65.5039,
+  "az2": 17.6992,
+  "el2": 56.2778,
+  "wd": 76.4693,
+  "wa": -13.3241,
+  "b3": 0.3251,
+  "neck": 13.0
+ },
+ "v_previous_k4598": {
+  "v_gap": 30.35,
+  "v_reach": 0.6056,
+  "v_follow": 1.0,
+  "v_inband14": 0.9043,
+  "v_inband10": 0.5376,
+  "v_contact": 0.0091
+ },
+ "v_gap_protocol": "H1 (H-g107-1) worn frozen on Bench(110,360) exact, shape fitted on Bench(60,160) fast (the round-3 verifier's protocol, comparable with every other row's v_gap); polish protocol (shape fitted on Bench(110,360) fast) = v_polish_gap 26.45"
 }
