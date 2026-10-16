@@ -193,3 +193,39 @@ the coupler land in the blocked half-plane (0 %).
 * The pole walks up to 35 deg from home, about 40 mm at the hub radius. The "virtual J2" is not where the 3R's J2 is
   for most of the motion, so link 1 moves differently from the 3R whose free-space map placed the pins. The A side
   stays in the free half (0.57-0.69 in band); the B side drifts into the blocked half (0 %).
+
+### Can a virtual-pole J2 widen the fold window instead? (leader seats k4216, measured)
+
+At the seats of the zero-passive 3R at k4216 (J1 bvec(95.9, 65.2), arcs 40.3 / 74.1; spine-parked-j2-3r), the
+free-space map is almost clean. Link-1 rays around J2 are 0.9-1.0 in band over psi 240-90, and link-2 rays 0.92-0.99
+over psi' 285-120. The skin is not that layout's problem; its 47 fold poses are. So the other question for a moving
+pole: does the four-bar's coupler curve sweep a WIDER range of the J1-J3 axis angle alpha than the 3R's circle?
+
+4000 random four-bars were placed in those free sectors (d 12-45, cranks 22-40, beta -125 to -35); 295 assemble inside
+the transmission window. On the monotone branch through home, alpha spans p50 34.8 deg and at most **81.9 deg** (29.1
+-> 111.0). The 3R at the same arcs spans 80.7 raw (33.7 -> 114.4) and 60.7 with its 10 deg margins. Some four-bars
+SHIFT the window (2.4 -> 75.7, or 70.9 -> 143.2), but none widens it. The window still closes at a tangency, where the
+crossing angle goes to 0, so the 12 deg crossing rule trims it like the 3R's margin.
+
+Measured conclusion: a virtual pole moves the fold window; it does not widen it at equal link size. The fold is a
+property of how far the carried axis can swing relative to J1, whatever produces the swing.
+
+## Frozen shape on Bench(110,360) exact, and red team: coarse best honest (v3, k2221 axes)
+
+Files: docs/concepts/sweeps/_big_vp4j2-coarse.json (`tools/concept_bigbench.py --mode frozen`, CB_EXACT=1, 1 mm radial
+part clearance) and _rt_vp4j2-coarse.json / _rtfast_vp4j2-coarse.json (`docs/concepts/verify/virtual-pole-4bar.py`).
+
+| bench | gap | reach | follow | in-band 14 | in-band 10 | contact |
+|---|---|---|---|---|---|---|
+| Bench(60,160) fast (search) | 145.94 | 0.425 | 0.550 | 0.363 | 0.203 | 0.047 |
+| Bench(60,160) exact (fit) | 147.34 | 0.419 | 0.550 | 0.364 | 0.203 | 0.057 |
+| **Bench(110,360) exact, frozen** | **151.43** | 0.361 | 0.564 | 0.365 | 0.203 | 0.054 |
+
+* **Jam poses (frozen, 470 poses).** 192 do not close: the coupler leaves the transmission window or the crossing
+  rule fails. The "Raise overhead" clip jams from elevation 21 deg up. 75 have a part-part collision and 11 skin
+  contact.
+* **Overhead (elevation >= 140).** 7 of 38 taken (27 lost to closure); 0.49 in band on the poses taken.
+* **Pinch.** The closest metal is the K7 neck at 0.28 mm (ws plane 60, elev 165), then the neck at 0.51 mm and the
+  coupler at 0.75 mm (plane 90, elev 150). Counting < 1 mm as contact: gap 153.74, 3 poses.
+* **Mobility.** The 3 x 3 matrix of instantaneous axes (J1, four-bar pole, J3) has rank 3 at all 203 taken poses:
+  sigma_min / sigma_max >= 0.229, p5 0.288. No undetermined coordinate, no singular pose taken.

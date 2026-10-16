@@ -43,7 +43,7 @@ S = OSN.S; unit = S.unit; rotm = S.rotm; D2R = math.pi / 180
 ID = "closure-set-arc-knee-3r"
 NAME = "Closure-set arc knee: hub 3 on a passive trunnion yoke set by the radial closure, pinned cuff dyad"
 HUB_R, CROWN, UP, T_LINK, W_LINK = S.HUB_R, S.CROWN, S.UP, S.T_LINK, S.W_LINK
-EYE_R, PAD_T, GAP, CHEEK, ARM_R = 5.0, 3.0, 0.2, 3.0, HUB_R + 5.0   # GAP: stack gap (>= the 0.15 running clearance)
+EYE_R, PAD_T, GAP, CHEEK, ARM_R, PINB_MIN = 5.0, 3.0, 0.2, 3.0, HUB_R + 5.0, 20.0   # GAP: stack gap (>= the 0.15 running clearance)
 
 PARAMS = dict(OSN.PARAMS)
 PARAMS.update(slides=0, remote=0, ramp=0, inv=0, vfix=1, jam_contact=1, drop=1,
@@ -52,7 +52,9 @@ PARAMS.update(slides=0, remote=0, ramp=0, inv=0, vfix=1, jam_contact=1, drop=1,
               psi_rest=0.0,    # knee angle at the rest pose (deg) - sets the arm pad height c0
               pmax=40.0, auth_min=8.0,
               lE=22.0, lc=22.0, phiE=0.0, beta0=90.0, bmin=20.0,   # dyad: E arm, cuff link (mm), rest E-arm direction
-              jumpk=25.0, toff=6.1, earm_over=0)                                # toff: trunnion axis height above hub 3's face (mm)                                          # (deg, 0 = distal along the humerus), rest elbow (deg)
+              jumpk=25.0, toff=6.1, earm_over=0,
+              lock=0)          # 1: CONTROL - knee locked at psi_rest (hub 3 rigid on link 2, no fork): a 3R + pin dyad, the
+                               #    radial closure must hold by itself (|rad - c0| < 0.5 mm, exact iff b1 = b2 = 0)                                # toff: trunnion axis height above hub 3's face (mm)                                          # (deg, 0 = distal along the humerus), rest elbow (deg)
 
 
 def rodrigues(U, a):
@@ -66,7 +68,11 @@ def rodrigues(U, a):
 class Design(OSN.Design):
     def __init__(self, params=None):
         self._knee = False
-        super().__init__(dict(PARAMS, **(params or {})))
+        P0 = dict(PARAMS, **(params or {}))                          # clamp to the buildable ranges (CMA steps outside)
+        for k, lo, hi in (("b1", 0, 1), ("b2", 0, 1), ("b3", 0, 1), ("lE", 12, 40), ("lc", 12, 40), ("beta0", 35, 145),
+                          ("toff", 1.5, CROWN - 1.5), ("pmax", 20, 60), ("psi_rest", -50, 50)):
+            P0[k] = float(min(hi, max(lo, P0[k])))
+        super().__init__(P0)
         P = self.p; u1, u2, u3 = self.u
         self.dK = unit(np.cross(u2, u3))
         R = OSN.rest(); Q0 = R["Q0"]
@@ -165,7 +171,9 @@ class Model(OSN.Model):
         rest_ref = P["psi_rest"] * D2R
         for nm in CB.FIT:
             ii = np.nonzero(Z["CID"] == names.index(nm))[0]; ii = ii[np.argsort(Z["FI"][ii], kind="stable")]
-            Qc = Z["HG"][ii].astype(float); pr, au = D.roots(Qc)
+            Qc = Z["HG"][ii].astype(float)
+            if P.get("lock"): pr = np.full((1, len(ii)), rest_ref); au = np.full((1, len(ii)), 1e9)
+            else: pr, au = D.roots(Qc)
             prev = None; prevq = None
             for j, gi in enumerate(ii):
                 ref = rest_ref if prev is None else prev
@@ -184,7 +192,8 @@ class Model(OSN.Model):
                 trk[int(gi)] = (float(psi[0]), good); prev = float(psi[0]); prevq = qv
         self.trk = trk
         # 2. bench poses: tracked root (clip frames) or root nearest psi_rest (workspace)
-        pr, au = D.roots(self.Q)
+        if P.get("lock"): pr = np.full((1, len(self.Q)), rest_ref); au = np.full((1, len(self.Q)), 1e9)
+        else: pr, au = D.roots(self.Q)
         psi, auth, has = pick(pr, au, np.full(len(self.Q), rest_ref))
         cont = np.ones(len(self.Q), bool)
         for a, gi in enumerate(B.idx):
@@ -264,7 +273,8 @@ class Model(OSN.Model):
             for y in (-0.75, 0.75):
                 v = math.cos(ang * D2R) * bh + math.sin(ang * D2R) * unit(dK2)
                 if abs(ang) < 70: g.append(c[2] + (ARM_R + y) * v)
-        Bf = np.array(g); geo.groups.append(dict(name="fork", mem=2, B=Bf, N=np.broadcast_to(u[2], Bf.shape).copy(), off=np.zeros(len(Bf))))
+        Bf = np.array(g)
+        if not P.get("lock"): geo.groups.append(dict(name="fork", mem=2, B=Bf, N=np.broadcast_to(u[2], Bf.shape).copy(), off=np.zeros(len(Bf))))
         self.geo = geo
         items = [(gq["mem"], gq["B"], gq["N"], 140.0) for gq in geo.groups]
         res = self.needed(items, poses)
@@ -279,7 +289,7 @@ class Model(OSN.Model):
             for dv, keep, sarc in lk["rows"]:
                 R_ = 0.5 * (np.linalg.norm(c[1] + f2 * u[1]) + np.linalg.norm(c[2] + f3 * u[2])); pts = R_ * dv
                 w = pts - c[2]; off = np.linalg.norm(w - (w @ u[2])[:, None] * u[2], axis=1)
-                rows.append((dv, keep & (off > HUB_R + 3.0), sarc))
+                rows.append((dv, keep & (off > (HUB_R if P.get("lock") else HUB_R + 3.0)), sarc))
             lk["rows"] = rows
         items = []; idx = []
         for lk in geo.links:
@@ -293,7 +303,7 @@ class Model(OSN.Model):
 
     def _greedy(self, keep0=None, links=True):
         H = self.Hneed
-        H["stack"] = np.concatenate([H[n] for n in ("Earm", "clink", "pad", "fork")], 1)   # proxy group for the drop score
+        H["stack"] = np.concatenate([H[n] for n in ("Earm", "clink", "pad", "fork") if n in H], 1)   # proxy group for the drop score
         H["h3"] = H["hub3"]
         S.Model.greedy_drop(self, keep0=keep0, links=links)
 
@@ -302,8 +312,8 @@ class Model(OSN.Model):
         f1 = H["hub1"][keep].max(); f2 = H["hub2"][keep].max(); f3 = H["hub3"][keep].max()
         zE, zc, zp = H["Earm"][keep].max(), H["clink"][keep].max(), H["pad"][keep].max()
         zc = max(zc, zp + PAD_T + GAP); zp = zc - PAD_T - GAP
-        zf = max(H["fork"][keep].max(), self.D.hK - CHEEK)           # cheek: trunnion pin O4 at hK, 3 mm of cheek round it
-        zE = max(zE, f3 + UP, zc + T_LINK + GAP, (self.D.hK + CHEEK + 1.0) if P.get("earm_over") else 0.0)   # earm_over: E arm over the cheek tops
+        zf = max(H["fork"][keep].max(), self.D.hK - CHEEK) if "fork" in H else None           # cheek: trunnion pin O4 at hK, 3 mm of cheek round it
+        zE = max(zE, f3 + UP, zc + T_LINK + GAP, (self.D.hK + CHEEK + 1.0) if P.get("earm_over") and not P.get("lock") else 0.0)   # earm_over: E arm over the cheek tops
         return f1, f2, f3, zE, zc, zp, zf
 
     def _heights(self, keep):
@@ -321,9 +331,11 @@ class Model(OSN.Model):
         self.Hneed["stack"] = np.zeros((len(self.poses_fit), 1)); self.Hneed.pop("h3", None)
         S.Model.finalize(self)                                      # links (ramps to the hub levels) + rigid hub1/2/3
         m2, P2 = self.link_pts["L2"]; c3, u3 = self.D.c[2], self.D.u[2]; w = P2 - c3
-        offa = np.linalg.norm(w - (w @ u3)[:, None] * u3, axis=1); self.link_pts["L2"] = (m2, P2[offa > ARM_R + 0.5])
+        offa = np.linalg.norm(w - (w @ u3)[:, None] * u3, axis=1)
+        if not self.p.get("lock"): self.link_pts["L2"] = (m2, P2[offa > ARM_R + 0.5])
         D = self.D; g = {x["name"]: x for x in self.geo.groups}
         for nm, z in (("Earm", zE), ("clink", zc), ("pad", zp), ("fork", zf)):
+            if nm not in g: continue
             self.rigid[nm] = (g[nm]["mem"], g[nm]["B"] + z * g[nm]["N"])
         self.f = [f1, f2, f3]
         self.trunnion_off = round(float(D.hK - (f3 + self.p["toff"])), 2)  # K line vs its target height in hub 3's housing (mm)
@@ -342,7 +354,8 @@ class Model(OSN.Model):
             g = {x["name"]: x for x in self.geo.groups}
             out.append((4, g["Earm"]["B"] + (lv["zE"] + T_LINK) * g["Earm"]["N"]))
             out.append((6, g["clink"]["B"] + (lv["zc"] + T_LINK) * g["clink"]["N"]))
-            for z in np.linspace(lv["zf"], self.D.hK + CHEEK, 4): out.append((2, g["fork"]["B"] + z * g["fork"]["N"]))
+            if "fork" in g:
+                for z in np.linspace(lv["zf"], self.D.hK + CHEEK, 4): out.append((2, g["fork"]["B"] + z * g["fork"]["N"]))
         self.contact = out
 
     def _solids(self):
@@ -352,8 +365,9 @@ class Model(OSN.Model):
         for nm, (mem, pts) in self.link_pts.items(): self.strap[nm] = (mem, pts + (T_LINK / 2) * unit(pts))
         for nm in ("Earm", "clink"): m, Pt = self.rigid[nm]; self.strap[nm] = (m, Pt + (T_LINK / 2) * u[2])
         m, Pt = self.rigid["pad"]; self.strap["pad"] = (m, Pt + (PAD_T / 2) * u[2])
-        m, Pt = self.rigid["fork"]; top = self.D.hK + CHEEK - self.lv["zf"]
-        self.strap["fork"] = (m, np.concatenate([Pt + z * u[2] for z in np.linspace(0, max(top, 0.0), 4)]))
+        if "fork" in self.rigid:
+            m, Pt = self.rigid["fork"]; top = self.D.hK + CHEEK - self.lv["zf"]
+            self.strap["fork"] = (m, np.concatenate([Pt + z * u[2] for z in np.linspace(0, max(top, 0.0), 4)]))
         ang = np.linspace(0, 2 * np.pi, 24, endpoint=False); self.cyl_surf = {}
         for nm, (mem, cen, ax) in self.cyl.items():
             e, f = S.frame_of(ax); pts = [cen + z * ax + HUB_R * (np.cos(ang)[:, None] * e + np.sin(ang)[:, None] * f) for z in np.linspace(0, CROWN, 5)]
@@ -368,8 +382,8 @@ class Model(OSN.Model):
         W = {k: tf(m, P) for k, (m, P) in self.strap.items()}
         hw = dict(L1=T_LINK / 2, L2=T_LINK / 2, Earm=T_LINK / 2, clink=T_LINK / 2, pad=PAD_T / 2, fork=0.75)
         ex, adj = {}, {}
-        def vs_cyl(a, hub): _, cen, ax = cyl[hub]; return float(self.sd_cyl(W[a], cen, ax).min()) - hw[a] if len(W[a]) else 1e9
-        def vs_pts(a, b): return float(cKDTree(W[b]).query(W[a])[0].min()) - hw[a] - hw[b] if len(W[a]) and len(W[b]) else 1e9
+        def vs_cyl(a, hub): _, cen, ax = cyl[hub]; return float(self.sd_cyl(W[a], cen, ax).min()) - hw[a] if a in W and len(W[a]) else 1e9
+        def vs_pts(a, b): return float(cKDTree(W[b]).query(W[a])[0].min()) - hw[a] - hw[b] if a in W and b in W and len(W[a]) and len(W[b]) else 1e9
         for a in ("Earm", "clink", "pad", "fork"):
             for hub in ("hub1", "hub2"): ex[f"{a}-{hub}"] = vs_cyl(a, hub)
         for a in ("clink", "pad"): ex[f"{a}-hub3"] = vs_cyl(a, "hub3")
@@ -378,8 +392,9 @@ class Model(OSN.Model):
             ex[f"{a}-{b}"] = vs_pts(a, b)
         # adjacent pairs: running gap (yoke vs link 2 and its cheeks through the trunnions; dyad stack)
         _, cen3, ax3 = cyl["hub3"]
-        adj["hub3-L2"] = float(self.sd_cyl(W["L2"], cen3, ax3).min()) - hw["L2"] if len(W["L2"]) else 1e9
-        adj["hub3-fork"] = float(self.sd_cyl(W["fork"], cen3, ax3).min()) - hw["fork"]
+        if "fork" in W:                                              # (lock: hub 3 is rigid on link 2 - one body)
+            adj["hub3-L2"] = float(self.sd_cyl(W["L2"], cen3, ax3).min()) - hw["L2"] if len(W["L2"]) else 1e9
+            adj["hub3-fork"] = float(self.sd_cyl(W["fork"], cen3, ax3).min()) - hw["fork"]
         P3 = tf(*self.cyl_surf["hub3"])
         m, Pc = self.rigid["clink"]; Pc = tf(m, Pc + (T_LINK / 2) * self.D.u[2]); m, Pe = self.rigid["Earm"]; Pe = tf(m, Pe + (T_LINK / 2) * self.D.u[2])
         A_ = tf(4, (self.D.c[2] + self.D.a0[0] * self.D.sa + self.D.a0[1] * self.D.st)[None])[0]
@@ -409,7 +424,7 @@ class Model(OSN.Model):
                          res_mm=round(float(self.rad_err[ok].max()), 4) if ok.any() else None,
                          track=self.track_stats, jump_p50=round(float(np.median(self.jumps)), 2) if self.jumps else None,
                          jump_max=round(float(np.max(self.jumps)), 1) if self.jumps else None)
-        r["levels"] = {k: round(float(v), 1) for k, v in getattr(self, "lv", {}).items()}
+        r["levels"] = {k: round(float(v), 1) for k, v in getattr(self, "lv", {}).items() if v is not None}
         return r
 
 
@@ -422,7 +437,9 @@ def _report(B, params):
         M2 = Model(B, P2); r2 = M2.run(); r2["dh_refit"] = P2["dh"]
         if r2["knee"]["trunnion_off"] is None or abs(r2["knee"]["trunnion_off"]) > abs(off): break
         r, M, P = r2, M2, P2
-    r["trunnion_in_housing"] = bool(getattr(M, "trunnion_in", False))
+    r["pinb_along_mm"] = round(float((M.D.b0 + M.D.s_rest)[0]), 1)   # pin b's pad must sit on the cuff, distal of hub 3
+    r["trunnion_in_housing"] = bool(getattr(M, "trunnion_in", False)) or bool(M.p.get("lock"))
+    if r["pinb_along_mm"] < PINB_MIN: r.setdefault("gap_reported", r["gap"]); r["gap"] = 999.0
     if not r["trunnion_in_housing"]: r["gap_reported"] = r["gap"]; r["gap"] = 999.0     # the trunnion would sit outside hub 3
     r["honest"] = bool(M.p.get("jam_contact")) and all(M.fix.values())
     r["passive_translations"] = 0

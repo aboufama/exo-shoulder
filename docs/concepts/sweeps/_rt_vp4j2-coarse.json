@@ -1,0 +1,132 @@
+{
+ "params": {
+  "at": 2,
+  "az": 0.65,
+  "el": 76.82,
+  "a1": 80.71,
+  "a2": 62.93,
+  "beta": -110.0,
+  "wd": 93.82,
+  "wa": -4.2,
+  "zeta": 0.0,
+  "psiA": 285.0,
+  "dA0": 35.0,
+  "dA1": 60.0,
+  "psiB": 335.0,
+  "dB0": 20.0,
+  "dB1": 45.0,
+  "sigma": 0,
+  "width": 12.0,
+  "t_link": 3.0,
+  "q": 0.97,
+  "slim": 0
+ },
+ "exact": true,
+ "fit": {
+  "gap": 147.34,
+  "reach": 0.4188,
+  "follow": 0.55,
+  "inband14": 0.3644,
+  "inband10": 0.2027,
+  "contact": 0.0566,
+  "honest": true,
+  "audit": [],
+  "inband_member": {
+   "hubJ1": 1.0,
+   "hubA0": 0.596,
+   "hubB0": 0.0,
+   "hubA1": 0.5829,
+   "hubB1": 0.0,
+   "hubJ3": 0.7363,
+   "link1": 0.1267,
+   "crankA": 0.691,
+   "crankB": 0.0,
+   "coupler": 0.1933,
+   "neck": 0.7368
+  }
+ },
+ "bench": {
+  "n": 470,
+  "gap": 151.43,
+  "reach": 0.3611,
+  "follow": 0.5636,
+  "inband14": 0.3652,
+  "inband10": 0.2027,
+  "contact": 0.0542,
+  "honest": true,
+  "inband_member": {
+   "hubJ1": 1.0,
+   "hubA0": 0.5976,
+   "hubB0": 0.0,
+   "hubA1": 0.5868,
+   "hubB1": 0.0,
+   "hubJ3": 0.738,
+   "link1": 0.1262,
+   "crankA": 0.6933,
+   "crankB": 0.0,
+   "coupler": 0.1942,
+   "neck": 0.7382
+  }
+ },
+ "why": {
+  "part-part collision": 75,
+  "skin contact": 11,
+  "closure (transmission / crossing / no root)": 192
+ },
+ "why_ws": {
+  "part-part collision": 50,
+  "skin contact": 11,
+  "closure (transmission / crossing / no root)": 169
+ },
+ "jam_examples": [
+  "closure (transmission / crossing / no root): #2 clip Raise overhead plane 30 elev 21 axial -34",
+  "closure (transmission / crossing / no root): #3 clip Raise overhead plane 30 elev 46 axial -39",
+  "closure (transmission / crossing / no root): #4 clip Raise overhead plane 30 elev 76 axial -45",
+  "closure (transmission / crossing / no root): #5 clip Raise overhead plane 30 elev 107 axial -51",
+  "closure (transmission / crossing / no root): #6 clip Raise overhead plane 30 elev 138 axial -57",
+  "closure (transmission / crossing / no root): #7 clip Raise overhead plane 30 elev 148 axial -60",
+  "closure (transmission / crossing / no root): #8 clip Raise overhead plane 30 elev 150 axial -60",
+  "closure (transmission / crossing / no root): #9 clip Raise overhead plane 30 elev 150 axial -60",
+  "closure (transmission / crossing / no root): #10 clip Raise overhead plane 30 elev 150 axial -60",
+  "closure (transmission / crossing / no root): #11 clip Raise overhead plane 30 elev 149 axial -60",
+  "closure (transmission / crossing / no root): #12 clip Raise overhead plane 30 elev 142 axial -58",
+  "closure (transmission / crossing / no root): #13 clip Raise overhead plane 30 elev 125 axial -55"
+ ],
+ "pinch": [
+  "0.28 mm neck #318 ws Workspace (envelope) plane 60 elev 165 axial -75",
+  "0.51 mm neck #289 ws Workspace (envelope) plane 45 elev 150 axial -90",
+  "0.75 mm coupler #371 ws Workspace (envelope) plane 90 elev 150 axial -60",
+  "1.06 mm neck #333 ws Workspace (envelope) plane 75 elev 75 axial -120",
+  "1.08 mm neck #309 ws Workspace (envelope) plane 60 elev 90 axial -105",
+  "1.18 mm neck #336 ws Workspace (envelope) plane 75 elev 90 axial -105",
+  "1.43 mm neck #357 ws Workspace (envelope) plane 90 elev 60 axial -135",
+  "1.47 mm neck #201 ws Workspace (envelope) plane 0 elev 75 axial 90"
+ ],
+ "min_metal_skin_mm": 0.28,
+ "near_touch_gap": {
+  "gap": 153.74,
+  "reach": 0.3528,
+  "follow": 0.5636,
+  "inband14": 0.3652,
+  "contact": 0.069
+ },
+ "near_touch_poses": 3,
+ "overhead": {
+  "total": 38,
+  "taken": 7,
+  "inband14": 0.493,
+  "why": {
+   "part-part collision": 2,
+   "skin contact": 2,
+   "closure (transmission / crossing / no root)": 27
+  }
+ },
+ "rank": {
+  "min_ratio": 0.2294,
+  "p5": 0.2877,
+  "rank3": 203,
+  "taken": 203,
+  "note": "columns = the three instantaneous rotation axes of the chain (J1 or the four-bar pole, the pole or J2, J3); rank 3 = mobility exactly 3 at that pose"
+ },
+ "pole_angle_to_home_axis_deg": null
+}

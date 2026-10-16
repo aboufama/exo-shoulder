@@ -147,7 +147,9 @@ def design_step(D, Qd):
             if not len(qk): continue
             qs = np.sort(np.degrees(qk)); j = np.searchsorted(qs, qs + 2 * P["kswing"], side="right")
             cnt = j - np.arange(len(qs)); a = int(np.argmax(cnt)); mid = qs[a] + P["kswing"]
-            inw = np.abs(qs - mid) <= P["kswing"]
+            inw = (qs >= qs[a]) & (qs <= qs[a] + 2 * P["kswing"])
+            lo, hi = qs[inw].max() - P["kswing"] + 0.01, qs[inw].min() + P["kswing"] - 0.01
+            mid = float(np.clip(0.0, lo, hi)) if lo <= hi else mid                    # same poses, the window centred near 0
             cands.append((int(cnt[a]), float(np.percentile(np.abs(qs[inw]), 95)), float(c0), sk, float(mid)))
     if not cands: return False
     nmax = max(c[0] for c in cands); good = [c for c in cands if c[0] >= nmax - 0.01 * len(sn_)]
@@ -479,7 +481,7 @@ def _report(B, params):
 
 def evaluate(B, params):
     """tools/concept_cma.py hook: (params incl. design-step outputs, report)"""
-    P = dict(params)
+    P = dict(PARAMS); P.update(params)
     for k in ("k_c0", "k_sk", "k_mid", "cuff_m", "cuff_sig"): P[k] = None
     if P.get("alk_auto") or P.get("alk") is None: P["alk"] = None; P["alk_auto"] = None
     P["lk"] = max(float(P["lk"]), HUB_R + BOSS_R + 1.0)          # the knuckle boss clears hub 2's cap
