@@ -1928,7 +1928,7 @@
   "name": "Fold lever on the pin-knee leader: J1 on a passive acromial rocker whose angle the arm sets through an S-U tie rod (rotations only)",
   "family": "scheduled 4th axis: spherical/offset 3R + passive base rocker + tie rod",
   "lens": "round3:behind / on top of the scapula - a graded-fraction J1 that keeps the J1-J3 angle in the fold window",
-  "status": "ideated",
+  "status": "screened",
   "t_ideated": "2026-10-16T01:35:52Z",
   "source": "round 3 judge",
   "description": "A passive pivot boss on the lateral acromion top (S-quiet skin, 0.95-1.0 in band at 47-50 mm), axis through GH, carries a small rocker plate. One arm holds the J1 hub (axis 14-20 deg from the pivot axis, so J1's line still passes through GH and the pin-knee closure theorem still holds); the other holds a ball stud ~45 deg from the pivot toward the posterior-superior shoulder. A 55-62 mm Ti tie rod joins it to a stud on the arm-end plate by hub 3. Overhead the arm pulls the rod, the rocker turns and J1 precesses on its cone away from J3, widening the fold margin; across the body / behind the back it turns the other way.",

@@ -1,0 +1,340 @@
+[
+{
+"k": 0,
+"t": "2026-10-16T02:11:40Z",
+"params": {
+"rocker": 0
+},
+"inband14": 0.8419,
+"inband10": 0.4001,
+"reach": 0.7063,
+"follow": 0.9667,
+"contact": 0.0116,
+"gap": 26.34,
+"why": {
+"fold": 47,
+"skin": 2
+},
+"src": "local:control (plain pin-knee leader k10, same file)"
+},
+{
+"k": 1,
+"t": "2026-10-16T02:15:30Z",
+"params": {
+"beta": 30.0,
+"psi": 261.1,
+"gam": 58.8,
+"psiA": 262.4,
+"dl": 11.3,
+"psiC": 84.0,
+"q0r": -18.0,
+"rA": 58.8,
+"rC": 79.2
+},
+"inband14": 0.0,
+"inband10": 0.0,
+"reach": 0.0063,
+"follow": 0.0,
+"contact": 0.9811,
+"gap": 372.48,
+"why": {
+"fold": 4,
+"rod": 26,
+"skin": 52,
+"parts": 137
+},
+"src": "local:first spec build (unconstrained proxy pick; arm bracket strap)"
+},
+{
+"k": 2,
+"t": "2026-10-16T02:26:00Z",
+"params": {
+"beta": 25,
+"psi": 250,
+"gam": 60,
+"psiA": 270,
+"dl": 10,
+"psiC": 80,
+"q0r": -20,
+"hA": 12,
+"hC": 12
+},
+"inband14": 0.0,
+"inband10": 0.0,
+"reach": 0.0,
+"follow": 0.0,
+"contact": 1.0,
+"gap": 375.0,
+"why": {
+"fold": 6,
+"rod": 83,
+"skin": 36,
+"parts": 95
+},
+"src": "local:smoke"
+},
+{
+"k": 3,
+"t": "2026-10-16T02:51:26Z",
+"params": {
+"beta": 12.95,
+"psi": 352.92,
+"gam": 51.34,
+"psiA": 252.87,
+"dl": 0.0,
+"psiC": 276.82,
+"q0r": -26.68,
+"hA": 13.33,
+"hC": 9.7
+},
+"inband14": 0.0,
+"inband10": 0.0,
+"reach": 0.0,
+"follow": 0.0,
+"contact": 1.0,
+"gap": 375.0,
+"why": {
+"fold": 2,
+"rod": 77,
+"slide": 0,
+"flip": 0,
+"closure": 0,
+"skin": 15,
+"parts": 126,
+"contact": 0
+},
+"parts_pairs": {
+"brk-hub3": 124,
+"pvt-hub1": 2
+},
+"levels": {
+"pvt": 48.2,
+"rk1": 53.3,
+"rk2": 76.1,
+"brk": 73.6,
+"ball": 79.1,
+"ujt": 76.6
+},
+"src": "local:proxy hill-climbed"
+},
+{
+"k": 4,
+"t": "2026-10-16T02:51:26Z",
+"params": {
+"beta": 9.82,
+"psi": 329.19,
+"gam": 43.03,
+"psiA": 276.88,
+"dl": 2.03,
+"psiC": 193.33,
+"q0r": -56.09,
+"hA": 11.2,
+"hC": 10.38
+},
+"inband14": 0.0,
+"inband10": 0.0,
+"reach": 0.0,
+"follow": 0.0,
+"contact": 1.0,
+"gap": 375.0,
+"why": {
+"fold": 8,
+"rod": 91,
+"slide": 0,
+"flip": 0,
+"closure": 0,
+"skin": 7,
+"parts": 114,
+"contact": 0
+},
+"parts_pairs": {
+"pvt-hub1": 114
+},
+"levels": {
+"pvt": 47.0,
+"rk1": 52.6,
+"rk2": 72.7,
+"brk": 74.0,
+"ball": 76.1,
+"ujt": 77.0
+},
+"src": "local:proxy hill-climbed"
+},
+{
+"k": 5,
+"t": "2026-10-16T02:51:26Z",
+"params": {
+"beta": 15.45,
+"psi": 169.65,
+"gam": 68.39,
+"psiA": 67.39,
+"dl": 4.14,
+"psiC": 89.35,
+"q0r": -45.66,
+"hA": 15.73,
+"hC": 9.18
+},
+"inband14": 0.0,
+"inband10": 0.0,
+"reach": 0.0,
+"follow": 0.0,
+"contact": 1.0,
+"gap": 375.0,
+"why": {
+"fold": 3,
+"rod": 129,
+"slide": 0,
+"flip": 0,
+"closure": 0,
+"skin": 1,
+"parts": 87,
+"contact": 0
+},
+"parts_pairs": {
+"brk-hub3": 85,
+"pvt-hub1": 2
+},
+"levels": {
+"pvt": 55.5,
+"rk1": 58.6,
+"rk2": 64.7,
+"brk": 73.9,
+"ball": 67.7,
+"ujt": 76.9
+},
+"src": "local:proxy hill-climbed"
+},
+{
+"k": 6,
+"t": "2026-10-16T02:51:26Z",
+"params": {
+"beta": 24.64,
+"psi": 31.54,
+"gam": 89.13,
+"psiA": 254.93,
+"dl": 6.49,
+"psiC": 360.0,
+"q0r": -38.3,
+"hA": 14.66,
+"hC": 9.64
+},
+"inband14": 0.0,
+"inband10": 0.0,
+"reach": 0.0,
+"follow": 0.0,
+"contact": 1.0,
+"gap": 375.0,
+"why": {
+"fold": 24,
+"rod": 69,
+"slide": 0,
+"flip": 0,
+"closure": 0,
+"skin": 45,
+"parts": 82,
+"contact": 0
+},
+"parts_pairs": {
+"brk-hub3": 72,
+"ujt-hub3": 10
+},
+"levels": {
+"pvt": 50.1,
+"rk1": 55.6,
+"rk2": 81.5,
+"brk": 73.9,
+"ball": 84.5,
+"ujt": 76.9
+},
+"src": "local:proxy hill-climbed"
+},
+{
+"k": 7,
+"t": "2026-10-16T02:51:26Z",
+"params": {
+"beta": 8.0,
+"psi": 120.92,
+"gam": 64.36,
+"psiA": 185.89,
+"dl": 16.25,
+"psiC": 262.03,
+"q0r": -30.3,
+"hA": 9.0,
+"hC": 12.71
+},
+"inband14": 0.0,
+"inband10": 0.0,
+"reach": 0.0,
+"follow": 0.0,
+"contact": 0.0,
+"gap": 275.0,
+"why": {
+"fold": 8,
+"rod": 126,
+"slide": 0,
+"flip": 0,
+"closure": 0,
+"skin": 0,
+"parts": 86,
+"contact": 0
+},
+"parts_pairs": {
+"pvt-hub1": 86
+},
+"levels": {
+"pvt": 48.3,
+"rk1": 51.5,
+"rk2": 84.1,
+"brk": 66.1,
+"ball": 87.1,
+"ujt": 69.1
+},
+"src": "local:proxy hill-climbed"
+},
+{
+"k": 8,
+"t": "2026-10-16T02:51:26Z",
+"params": {
+"beta": 22.82,
+"psi": 213.84,
+"gam": 52.24,
+"psiA": 0.5,
+"dl": 10.33,
+"psiC": 233.77,
+"q0r": -29.09,
+"hA": 9.0,
+"hC": 14.25
+},
+"inband14": 0.0,
+"inband10": 0.0,
+"reach": 0.0,
+"follow": 0.0,
+"contact": 1.0,
+"gap": 375.0,
+"why": {
+"fold": 0,
+"rod": 114,
+"slide": 0,
+"flip": 0,
+"closure": 0,
+"skin": 11,
+"parts": 95,
+"contact": 0
+},
+"parts_pairs": {
+"rod-brk": 6,
+"rk2-L1": 6,
+"ball-hub2": 69,
+"ujt-hub3": 14
+},
+"levels": {
+"pvt": 57.8,
+"rk1": 60.9,
+"rk2": 60.9,
+"brk": 69.4,
+"ball": 63.9,
+"ujt": 72.4
+},
+"src": "local:proxy hill-climbed"
+}
+]
