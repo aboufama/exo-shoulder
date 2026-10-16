@@ -131,7 +131,7 @@
 
   <section class="card" id="board-sec">
     <h2>Leaderboard</h2>
-    <p class="muted">Every design that has a measured number. Ranked by the independently verified number (frozen shape, exact bench); a score marked "self-measured" is the design's own frozen claim, and one marked "fast search" is an unverified quick-bench number that typically drops 5-14 points when verified - those rank below every verified design. Motion: each design through the same arm loop, at one scale. "Checking" means an independent agent is re-measuring it. "Stopped early" means it was called dead while its search was still improving, so it is being re-opened. Names: R = a hinge (revolute joint), P = a slider; "3R" = three hinges in a row (3 degrees of freedom); "spherical" = all hinge axes meet at the centre of the shoulder joint; "offset" = they do not; "3-RRR" = three hinged legs side by side. Simplicity: points for every freedom, slider, sensor, loop and part beyond the simplest buildable chain (three hinges, three links = 0), lower = simpler; hover a number for where its points come from. It is not part of the score.</p>
+    <p class="muted">Every design that has a measured number. Ranked by the independently verified number (frozen shape, exact bench); a score marked "self-measured" is the design's own frozen claim, and one marked "fast search" is an unverified quick-bench number that typically drops 5-14 points when verified - those rank below every verified design. "Flagged" means the alignment auditor found the score gain is a measurement artefact rather than a better exo (for example metal moved into the 1-2 mm shell next to the skin); it does not count as verified until resolved. Motion: each design through the same arm loop, at one scale. "Checking" means an independent agent is re-measuring it. "Stopped early" means it was called dead while its search was still improving, so it is being re-opened. Names: R = a hinge (revolute joint), P = a slider; "3R" = three hinges in a row (3 degrees of freedom); "spherical" = all hinge axes meet at the centre of the shoulder joint; "offset" = they do not; "3-RRR" = three hinged legs side by side. Simplicity: points for every freedom, slider, sensor, loop and part beyond the simplest buildable chain (three hinges, three links = 0), lower = simpler; hover a number for where its points come from. It is not part of the score.</p>
     <div class="scroll"><table id="board" data-source="board" data-row-key="id">
       <thead><tr><th class="mo" data-source="motion" data-field="mech">Motion</th><th data-field="short">Design</th><th class="num" data-field="score">Score</th><th class="num cx" data-field="complexity">Simplicity<span class="cap">lower = simpler</span></th><th data-field="close" class="cl">Close to skin</th><th data-field="follows" class="hide-sm">Follows arm</th><th data-field="reaches" class="hide-sm">Reaches</th><th data-field="state">Status</th></tr></thead>
       <tbody></tbody>
@@ -216,12 +216,13 @@ dash.calc('board', {
     // score basis (alignment audit 2026-10-16): only a verifier's frozen exact number ranks as a result; a self-measured frozen
     // claim is labelled; a fast search number is never shown as a score that competes with verified ones
     const fz = !v && m.frozen_gap !== null && m.frozen_gap !== undefined, basis = v ? 'verified' : fz ? 'self' : 'fast';
-    const state = m.is_baseline ? 'Baseline' : m.status === 'verified' ? 'Verified' : m.status === 'refuted' ? 'Refuted' : m.status === 'dead' ? (conv[m.id] === false ? 'Stopped early' : 'Dead end') : c ? 'Checking' : 'Sweeping';
+    // the alignment auditor's ledger (docs/ALIGNMENT.md): 'gamed' = the gain is a measurement artefact; never shown as verified
+    const state = m.is_baseline ? 'Baseline' : m.alignment === 'gamed' ? 'Flagged' : m.status === 'verified' ? 'Verified' : m.status === 'refuted' ? 'Refuted' : m.status === 'dead' ? (conv[m.id] === false ? 'Stopped early' : 'Dead end') : c ? 'Checking' : 'Sweeping';
     const short = m.is_baseline ? "Today's 3-hinge chain" : String(m.name || m.id).split(/[:(;]| with | - /)[0].trim().slice(0, 44);
     const g = fz ? m.frozen_gap : m[p + 'gap'];
     return { id: m.id, short: m.v_config ? `${short} (${m.v_config})` : short, basis, score: Math.max(0, Math.round((1 - g / 275) * 1000) / 10), gap: g, close: m[p + 'inband14'], follows: m[p + 'follow'], reaches: m[p + 'reach'], contact: m[p + 'contact'], state, is_baseline: !!m.is_baseline,
       complexity: m.complexity ?? null, complexity_items: m.complexity_items || '', passive_trans: m.passive_trans ?? null };
-  }).filter(Boolean).sort((a, b) => (a.basis === 'fast') - (b.basis === 'fast') || a.gap - b.gap);
+  }).filter(Boolean).sort((a, b) => (a.basis === 'fast' || a.state === 'Flagged') - (b.basis === 'fast' || b.state === 'Flagged') || a.gap - b.gap);
   }
 });
 dash.calc('leader', {
@@ -440,7 +441,7 @@ function drawBoard(rows, mo) {
       if (r.passive_trans > 2) cx.classList.add('bad');
     } else { cx.textContent = '–'; cx.title = 'Not counted yet'; }
     td(meter(r.close, 0.9), 'cl'); td(meter(r.follows, 0.95), 'hide-sm'); td(meter(r.reaches, 0.9), 'hide-sm');
-    const p = document.createElement('span'); p.className = 'pill ' + (r.state === 'Verified' ? 'ver' : r.state === 'Dead end' || r.state === 'Refuted' ? 'dead' : r.state === 'Baseline' ? '' : 'run'); p.textContent = r.state; td(p);
+    const p = document.createElement('span'); p.className = 'pill ' + (r.state === 'Verified' ? 'ver' : r.state === 'Dead end' || r.state === 'Refuted' || r.state === 'Flagged' ? 'dead' : r.state === 'Baseline' ? '' : 'run'); p.textContent = r.state; td(p);
     tb.appendChild(tr);
   });
   moWatch(thumbs);
