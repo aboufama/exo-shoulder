@@ -41,6 +41,7 @@ ER, ZB, BOSS_H, RUNG = SC.ER, SC.ZB, SC.BOSS_H, SC.RUNG                         
 NECK = 1.0                                                                      # socket underside over the arm / lug top (the stud's neck)
 LOBE_Z = (UP + 0.5, UP + 3.5)                                                   # the lobe's 3 mm band in hub 2's upper boss (link 2)
 LOBE_RIN = 6.0
+HORN_END = 3.0                                                                  # lug end past the horn ball (the model samples to r_h + 4; trimmed: the rod clips it at stop B)
 PIN_R, BORE_R, CLIP_H = 1.5, 1.6, 0.9                                           # crank pivot pin O3 h6, boss bore O3.2 (keep-out), DIN 6799 RS 2.3 land
 GROUPS = MIN.GROUPS + ((9, "dk"), (8, "dr"))
 GRP_OF = {0: "base", 1: "l1a", 7: "l1b", 2: "l2", 3: "l3", 6: "l4", 5: "H", 9: "dk", 8: "dr"}
@@ -125,7 +126,7 @@ def law_geom(M):
                                                              stop_B=f"the drive's own range: |dK| = dK_lim {lim:.2f} deg ({M._scg['why_lim']}) at t = {t_stop:.2f} deg past the onset")),
                 K=spK, law=dict(kK=float(P["kK"]), s_q=float(L["s_q"]), q2hi_deg=round(q2hi, 3), t_stop_deg=round(t_stop, 3), dK_stop_deg=round(lim, 3),
                                 law_end_t_deg=round(float(ts[-1]), 3), law_end_dK_deg=round(float(dKl[-1]), 3), why_end=L["why_end"],
-                                pressure_angle_deg=round(float(np.degrees(np.max(L["pa"]))) if np.max(L["pa"]) < 3.2 else float(np.max(L["pa"])), 2)),
+                                pressure_angle_deg=round(float(np.max(L["pa"])), 2)),
                 L=L, ts_deg=ts, dK_deg=dKl)
 
 
@@ -146,6 +147,17 @@ def drive_geom(M):
     lev = float(M._sc_info["lev_L1b"])
     return dict(dR=dR, PV=PV, tip0=tip0, H0=H0, uK=uK, sR=sR, bnR=bnR, sK=sK, bnK=bnK, rs=rs, lvl=lvl, La=La, RH=RH, zboss=zboss,
                 lvK=lvK, lev=lev, L_rod=float(np.linalg.norm(H0 - tip0)), sp=float(g["sp"]), kgrid=g["kgrid"], phig=g["phig"])
+
+
+def boss_level(dg, strap, r=5.0):
+    """underside level (along dR) for the crank boss: link 1b strap's highest top within the O10 footprint + RUNG, never below the model's"""
+    import igl
+    dR = dg["dR"]; e, f = S.frame_of(dR); g = np.linspace(-r, r, 41); X, Y = np.meshgrid(g, g); k = X ** 2 + Y ** 2 <= r * r
+    top = dg["zboss"]
+    for h in np.arange(dg["zboss"] - 2.0, dg["zboss"] + 8.0, 0.05):
+        P = h * dR + X[k][:, None] * e + Y[k][:, None] * f
+        if float(igl.signed_distance(np.ascontiguousarray(P), np.ascontiguousarray(strap.vertices, float), np.ascontiguousarray(strap.faces, np.int64))[0].min()) < 0: top = h
+    return max(dg["zboss"], top + RUNG)
 
 
 def tube(p0, ax, h0, h1, ro, ri, n=64):
@@ -186,19 +198,21 @@ def drive_parts(M, lg, dg):
     D = M.D; P = D.p; out = []
     lobe, linfo = lobe_mesh(M, lg, dg)
     out.append(("l2", 2, f"drive lobe keep-out (hub-2 rim lobe on link 2's rotor: r {linfo['r_lobe']:.2f} -> {linfo['r_at_stopB']:.2f} mm over {linfo['sweep_deg']:.1f} deg "
-                f"of q2, the exact RSSR lift s_arm |phi|; {LOBE_Z[1] - LOBE_Z[0]:.0f} mm band F+{LOBE_Z[0]:.2f}..F+{LOBE_Z[1]:.2f})", lobe, "steel"))
-    dR, PV, zb = dg["dR"], dg["PV"], dg["zboss"]
+                f"of q2, the exact RSSR lift s_arm x phi; {LOBE_Z[1] - LOBE_Z[0]:.0f} mm band F+{LOBE_Z[0]:.2f}..F+{LOBE_Z[1]:.2f})", lobe, "steel"))
+    dR, PV = dg["dR"], dg["PV"]; zb = dg["zboss_built"]                          # the boss raised clear of link 1b's climb into hub 2 (stack_fix)
     # crank boss (group dk): O10 x 6 tube on the O3 pin (two MR63ZZ 3x6x2.5 inside the keep-out), underside on link 1b + 0.15
     out.append(("dk", 9, f"drive bell crank boss keep-out (O10 x {BOSS_H:g} mm, bore O{2 * BORE_R:.1f} on the O3 pivot pin, two MR63ZZ 3x6x2.5 inside; "
-                f"underside {zb:.2f} mm from GH = link 1b's top + {RUNG:g})", tube(np.zeros(3), dR, zb, zb + BOSS_H, 5.0, BORE_R), "ti"))
+                f"underside {zb:.2f} mm from GH = link 1b's highest top under its footprint + {RUNG:g}; the model's {dg['zboss']:.2f})", tube(np.zeros(3), dR, zb, zb + BOSS_H, 5.0, BORE_R), "ti"))
     # long arm (group dk): 6 x 3 at the model's stepped levels (stations 0..La step 2), out to La + 3 round the ball stud
-    rs = np.r_[dg["rs"], dg["La"], dg["La"] + 3.0]; lv = np.r_[dg["lvl"], dg["lvl"][-1], dg["lvl"][-1]]
-    rs[0] = 4.0                                                                 # the arm root starts inside the boss wall (bore stays free)
+    rs = np.r_[np.arange(4.0, 12.0 + 1e-6, 1.0), dg["rs"][dg["rs"] > 12.0 + 1e-6], dg["La"], dg["La"] + 3.0]   # root inside the boss wall (bore free)
+    lv_m = np.interp(np.minimum(rs, dg["rs"][-1]), dg["rs"], dg["lvl"])
+    lv_m = np.where((rs > 10.0) & (rs < 12.0), dg["lvl"][dg["rs"] <= 10.0 + 1e-6][-1] - (rs - 10.0) / 2.0 * (dg["lvl"][dg["rs"] <= 10.0 + 1e-6][-1] - dg["lvl"][dg["rs"] >= 12.0 - 1e-6][0]), lv_m)
+    lv = np.maximum(lv_m, zb - math.tan(math.radians(S.RAMP)) * np.maximum(rs - 5.0, 0.0))   # the model's levels, or the raised root's 60-deg ramp
     ws = np.array([-3.0, -1.0, 1.0, 3.0])
     Bot = np.stack([[dR * lv[j] + rs[j] * dg["sR"] + w_ * dg["bnR"] for w_ in ws] for j in range(len(rs))])
     Off = T_LINK * np.broadcast_to(dR, Bot.shape).copy()
     out.append(("dk", 9, f"drive bell crank long arm keep-out (6 x {T_LINK:g} mm Ti, La {dg['La']:.2f} mm + 3 round the ball stud; steps from the boss level "
-                f"{zb:.1f} to link 1b's layer {dg['lvl'][-1]:.1f} at the model's 60-deg ramp)", REF.grid_solid(Bot, Off), "ti"))
+                f"{zb:.1f} to link 1b's layer {dg['lvl'][-1]:.1f} at <= 60 deg; never below the model's arm levels)", REF.grid_solid(Bot, Off), "ti"))
     # ball-link sockets + rod (group dr): the model's O7 socket envelope about each stud axis, 1 mm neck over the arm / lug top
     tip0, H0 = dg["tip0"], dg["H0"]; uK = dg["uK"]
     out.append(("dr", 8, f"drive M2 ball-link socket at the crank (O{2 * ER:g} envelope, {ZB - NECK:g} below .. 3.5 above the ball centre; ball {ZB:g} over the arm top)",
@@ -215,11 +229,11 @@ def drive_parts(M, lg, dg):
                 tube(np.zeros(3), dR, zb + BOSS_H + RUNG, zb + BOSS_H + RUNG + CLIP_H, 3.0, PIN_R - 0.05), "steel"))
     # horn lug (link 1a): L-bracket from K's lower plate, lug 6 x 3 at hl over hub K's face, r_h + 4 long
     sK, bnK, lvK = dg["sK"], dg["bnK"], dg["lvK"]; fK = M.fK; zl0 = lvK - fK
-    r0, r1, rin, rout = S.HUB_R - 1.0, S.HUB_R + 0.65, S.HUB_R + 0.65, dg["RH"] + 4.0
-    prof = np.array([[r0, 0.0], [r1 + 1.5, 0.0], [r1 + 1.5, zl0], [rout, zl0], [rout, zl0 + T_LINK], [rin, zl0 + T_LINK], [rin, PLATE], [r0, PLATE]])
+    r0, rin, rout = MIN.SLOT_RS + MIN.DOWEL_R + MIN.SLOT_CLR + 0.3, S.HUB_R + 0.65, dg["RH"] + HORN_END   # tab from outside the K slot band
+    prof = np.array([[r0, 0.0], [rin + 1.5, 0.0], [rin + 1.5, zl0], [rout, zl0], [rout, zl0 + T_LINK], [rin, zl0 + T_LINK], [rin, PLATE], [r0, PLATE]])
     HK = fK * uK
-    Fp = np.array([[0, 1, 2], [0, 2, 7], [7, 2, 6], [6, 2, 5], [2, 3, 4], [2, 4, 5]])
-    horn = MIN.extrude2d(prof[:, [0, 1]] * 0 + np.c_[prof[:, 0], prof[:, 1]], Fp, HK - 3.0 * bnK, sK, uK, bnK, 0.0, 6.0)
+    Fp = np.array([[0, 1, 6], [0, 6, 7], [1, 2, 6], [6, 2, 5], [2, 3, 4], [2, 4, 5]])
+    horn = MIN.extrude2d(prof, Fp, HK, sK, uK, -bnK, -3.0, 3.0)
     out.append(("l1a", 1, f"drive horn lug keep-out (link 1a: 6 x {T_LINK:g} mm lug at F+{zl0:.2f} over hub K's face, r {rin:.2f}..{rout:.2f} mm along the horn "
                 f"direction (beta {float(P['beta']):.1f} deg), on an L-bracket from K's lower plate, {rin - S.HUB_R:.2f} mm radially clear of K's upper boss; "
                 f"M2 ball stud at r_h {dg['RH']:.2f})", horn, "ti"))
@@ -275,7 +289,13 @@ def build_parts(M, lg, dg, knee_geom=None):
     out.append(("l2", 2, "link 2 strap keep-out (8 x 3 mm Ti, fitted underside, J2 -> J3)", straps["L2"], "ti"))
     out.append(("l2", 2, "J3 upper boss + cap keep-out (O20, F+3.15..F+12.25, link 2)", REF.cyl(H(3), U[3], UP, CROWN, r=hr[3]), "ti"))
     out.append(("l3", 3, "J3 lower plate keep-out (O20 x 3, member 3)", REF.cyl(H(3), U[3], 0.0, PLATE, r=hr[3]), "ti"))
+    dg["zboss_built"] = boss_level(dg, straps["L1b"])
     dparts, dinfo = drive_parts(M, lg, dg); out += dparts
+    dinfo["stack_fix"] = dict(boss_underside_model_mm=round(dg["zboss"], 3), boss_underside_built_mm=round(dg["zboss_built"], 3),
+                              raised_mm=round(dg["zboss_built"] - dg["zboss"], 3),
+                              why="link 1b's strap climbs into J2's lower plate under the boss's hub-side half (the model stacks the boss on its 6 strap "
+                                  "samples nearest the pivot and has no CRK-L1b check): the boss + the arm root sit on the strap's highest top under the "
+                                  "O10 footprint + 0.15; the arm keeps the model's levels from there, the ball (RSSR) is unchanged")
     Em, Einfo = MIN.e_strap_capped(M)
     out.append(("l3", 3, f"E strap keep-out (8 x 3 mm Ti, fitted underside, hub 3 plate -> pin a, thins to {tp:.2f} at the boss, top capped at the boss top tr+tp under the knee's reach)", Em, "ti"))
     out.append(("l3", 3, f"E boss = pin a lower plate (O{2 * MIN.BOSS_R:.0f} x {tp:.2f} mm, tr..tr+tp, member 3)", REF.cyl(fr["A0"], sn, tr, tr + tp, r=MIN.BOSS_R), "ti"))
@@ -342,12 +362,14 @@ def drive_sweep(M, parts, lg, dg, dq=2.0):
         for gb, mb, nb, mesh_b, _ in cand:
             if mb == ma: continue
             Vb, Fb = np.ascontiguousarray(mesh_b.vertices, float), np.ascontiguousarray(mesh_b.faces, np.int64)
-            best = (1e9, None)
-            for j in range(len(qs)):
+            best = (1e9, None); first = None
+            for j in np.argsort(qs * lg["law"]["s_q"]):                     # from the folded stop toward stop B (|dK| rising)
                 Ra, ta = pose(ma, j); Rb, tb = pose(mb, j); XB = ((XA @ Ra.T + ta) - tb) @ Rb
                 v = float(igl.signed_distance(XB, Vb, Fb)[0].min())
                 if v < best[0]: best = (v, j)
-            out[f"{na[:44]} | {nb[:44]}"] = (round(best[0], 3), round(float(qs[best[1]]), 1), round(float(dks[best[1]]), 1))
+                if v < BASE.ADJ and first is None: first = j
+            out[f"{na[:44]} | {nb[:44]}"] = (round(best[0], 3), round(float(qs[best[1]]), 1), round(float(dks[best[1]]), 1),
+                                             None if first is None else round(float(dks[first]), 1))
     return dict(sorted(out.items(), key=lambda kv: kv[1][0]))
 
 
@@ -560,7 +582,7 @@ def main():
                    law={k_: v for k_, v in law.items()}, stack=stack, mount=mrep, kin_u2_check_deg=kin["u2_check_deg"], dowel_check=MIN.dowel_check())
     json.dump(rep_out, open(os.path.join(dd, "build.json"), "w"), indent=1, default=float)
     dsw = drive_sweep(M, parts, lg, dg)
-    rep_out["drive_sweep"] = dict(rule="signed distance (mm, negative = inside), worst over the J2 window in link 1b's frame; (mm, q2 deg, |dK| deg)",
+    rep_out["drive_sweep"] = dict(rule="signed distance (mm, negative = inside), worst over the J2 window in link 1b's frame; (mm, q2 deg, |dK| deg, first |dK| where < 0.15 mm)",
                                   pairs=dsw, worst=next(iter(dsw.items())) if dsw else None)
     print(f"drive sweep (worst 8): {list(dsw.items())[:8]}", flush=True)
     json.dump(rep_out, open(os.path.join(dd, "build.json"), "w"), indent=1, default=float)
