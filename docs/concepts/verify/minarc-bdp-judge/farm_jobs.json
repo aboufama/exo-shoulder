@@ -1,0 +1,5 @@
+[
+ {"cmd": "mkdir -p docs/concepts/verify/minarc-bdp-judge && OMP_NUM_THREADS=1 CB_EXACT=1 CB_FOLD_MARGIN=5.5 python3 docs/concepts/verify/minarc-bdp-remeasure.py wear bench BDp docs/concepts/verify/minarc-bdp-judge/wear_bench_m5p5.json", "tag": "bdpj_bench_m5p5", "out": ["docs/concepts/verify/minarc-bdp-judge/wear_bench_m5p5*.json"]},
+ {"cmd": "mkdir -p docs/concepts/verify/minarc-bdp-judge && OMP_NUM_THREADS=1 CB_EXACT=1 CB_FOLD_MARGIN=5.5 python3 docs/concepts/verify/minarc-bdp-remeasure.py wear held BDp docs/concepts/verify/minarc-bdp-judge/wear_held_m5p5.json", "tag": "bdpj_held_m5p5", "out": ["docs/concepts/verify/minarc-bdp-judge/wear_held_m5p5*.json"]},
+ {"cmd": "mkdir -p docs/concepts/verify/minarc-bdp-judge && OMP_NUM_THREADS=1 CB_EXACT=1 CB_FOLD_MARGIN=6 python3 docs/concepts/verify/minarc-bdp-remeasure.py wear bench BDp docs/concepts/verify/minarc-bdp-judge/wear_bench_m6.json", "tag": "bdpj_bench_m6", "out": ["docs/concepts/verify/minarc-bdp-judge/wear_bench_m6*.json"]}
+]
