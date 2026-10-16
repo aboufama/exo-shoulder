@@ -27,6 +27,7 @@ harness's checks and the near-touch audit; its CMA-ES driver, patched to this ob
       fit60: fit Bench(60,160) FAST (the verified protocol); env: fit env FAST.  Wear EXACT on Bench(110,360) / the 1154
       held-out poses / env. BDp / a params file are priced as above (the file is the nominal design); H1 runs unpriced
       through the harness's H1 path. Continuity: the harness's own flood fill (fit-consistent) + the fresh-pose edges.
+      ENVP_NOPRICE=1 (with CB_FOLD_MARGIN=5): the nominal reading, stops and stop B as designed.
 """
 import json, math, os, sys, time
 import numpy as np
@@ -263,7 +264,9 @@ def claim(fit, wb, which, outp):
     info = dict(fit=fit, wear=wb, fit_key=FIT.key, fit_mode=FIT.mode)
     if which != "H1":
         P = R.P_bdp() if which == "BDp" else dict(R.KR.PARAMS, **json.load(open(which)))
-        Pp, pinfo = priced(R.KR, P); info.update(nominal=P, priced=Pp, price=pinfo)
+        if os.environ.get("ENVP_NOPRICE") == "1": Pp, pinfo = dict(P), dict(why="unpriced reading (nominal stops, stop B as designed)")
+        else: Pp, pinfo = priced(R.KR, P)
+        info.update(nominal=P, priced=Pp, price=pinfo)
         pf = outp.replace(".json", "_params.json"); json.dump(Pp, open(pf, "w"), indent=1); R.PFILE = pf
         conn0 = R.conn
 

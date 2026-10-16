@@ -1403,3 +1403,53 @@ Next:
 * **Consequence.** A fresh jittered search bench removes the skew, but if it is searched as a fixed sample it will be
   over-fit again. **Choose the pick on a second fresh draw the search never scored**, then accept held out. The
   CLAUDE.md "2-fold cross-fit" line guards a 0.2-point effect; rewording it is a rule change for the user to see.
+
+## The envelope-bench polish of minarc BDp: pick1 gains +2.37 held out (+1.49 on BDp's own protocol), self-measured (2026-10-16, tools/env_bench.py, tools/env_polish.py, docs/research/minarc_final_polish.md)
+
+* **The bench.** `env` is a fresh stratified draw of the continuous workspace envelope: 420 poses plus the 110 clip
+  frames of Bench(110,360).
+  * Its strata are the drawn pose's elevation x plane x signed axial band, with the grid's quotas. A uniform
+    continuous draw under-samples the lattice's boundary rows (6.7 % vs 9.4 % with |axial| >= 150).
+  * No pose lies within 2 deg of a held-out pose, by coordinates or by humerus orientation.
+  * It matches the full grid on every band: |axial| >= 150 9.3 % vs 9.4 %; Bench(110,360) 7.5 %; held out 11.0 %,
+    since the held-out set is the grid minus the aliased benches and so skews the other way.
+  * A second, disjoint draw `envsel` (360 poses) is the pick-selection bench.
+  * Fast caches on the farm: $0.10, validated (p99 1.1 mm).
+* **As a predictor of held out, env is not reliably better.** The bench -> held drop:
+  * BDp: +1.36 on env vs +4.64 on Bench(110,360);
+  * H1: +5.17 on env vs +4.19.
+
+  A 420-pose reach share has a ~2-point binomial error, the size of the skew itself. Fitting the shape on env
+  instead of Bench(60,160) lowers both held-out numbers (BDp 24.18 -> 23.68, H1 31.39 -> 30.04). That is a
+  measurement change, not a design change.
+* **The polish.** CMA on env, in-sample, 3 starts (BDp, F2 seats, F7 seats), 787 evaluations, $0.20.
+  * Objective: near-touch, continuity (grid flood fill plus a slerp edge from each fresh pose), O20, claim-fit guard.
+  * Stops are variables >= 5.0, priced like the judge: the slot is built +0.5 and read at rule 5.5, and K's stop B
+    is drawn at the 5-deg rule cut (BDp: dK 34.47, reproduced).
+  * Every start stopped on patience (10 generations without a gain > 0.02) in a different basin (18.0 / 20.8 / 21.8).
+* **The claim.** The top 3 distinct picks (ranked on envsel) + BDp, in one farm batch through the judge's harness
+  (unchanged, benches swapped). BDp reproduces its verified 19.54 to the digit. Results (gap):
+
+  | pick | held out, env fit | held out, fit 60 (BDp's protocol) | Bench(110,360), fit 60 |
+  |---|---|---|---|
+  | BDp | 23.68 | 24.18 | 19.54 |
+  | **pick1** (from F7) | **21.31** | **22.69** | **18.40** |
+  | pick2 | 23.68 | - | 21.42 |
+  | pick3 | 24.51 | - | 21.77 |
+
+  pick1's near-touch: 23.02 held out (env fit), 26.73 (fit 60), 23.36 on Bench(110,360). Its held-out gain over BDp
+  is **+2.37 / +1.49** gap points; the bench score is 93.31 vs 92.89.
+* **pick1 under the rules.**
+  * Margin >= 5.586 vs the 5.5 priced rule; 0 knock-outs.
+  * Continuity 1106 / 1106, 0 islands.
+  * J1 seat on the acromion top (anterior 0.076).
+* **What the gain is.** Reach (+4.5 points held out), partly paid in skin contact: 3.0 % vs 1.1 %.
+* **Red team for the verifier.**
+  * Contact triples.
+  * K opens to 56.6 deg vs 34.1, so the spring winds further and the forced J1 swing needs re-measuring.
+  * In-band 2-10 drops from 0.57 to 0.50.
+* **New knowledge: the independent selection draw is what makes a polish travel.** The search objective is
+  optimistic by 3.4-4.1 points for every polished config. The envsel number predicts the held-out near-touch within
+  0.6-2.5 points (mean 1.75), in the right rank order for all 4 claimed configs.
+* **Status.** Self-measured. Under the CLAUDE.md final-polish rule, pick1 replaces BDp's CAD config only after an
+  independent verifier confirms the >= 1 held-out gain and clears the red team. Farm total about $0.58.

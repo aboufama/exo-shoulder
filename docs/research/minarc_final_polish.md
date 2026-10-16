@@ -207,11 +207,102 @@ pin a lE +2..9 mm, knee window ang_min 25.1-26.1.
 
 ## 4. The claim
 
-__CLAIM__
+**One farm batch** (`farm/jobs_claim.json`): the 3 picks + BDp, each on 2 protocols. The judge's harness was used,
+imported unchanged, with the judge's built-stop pricing (`tools/env_polish.py claim`):
+* fit env FAST -> wear the 1154 held-out poses EXACT;
+* fit Bench(60,160) FAST -> wear Bench(110,360) EXACT (the verified protocol).
+
+**Follow-up batch** (`farm/jobs_claim2.json`):
+* pick1 fit Bench(60,160) -> held out, priced: the protocol of BDp's verified 24.18;
+* the unpriced readings at margin 5 (nominal stops, stop B as designed), to check that the priced reading is the
+  worst.
+
+Outputs: `farm/claim_*.json`, `farm/claim2_*.json`.
+
+| config | fit env -> held out (gap / near) | fit 60 -> Bench(110,360) (gap / near) | fit 60 -> held out (gap / near) | held-out gain over BDp (env fit / fit 60) |
+|---|---|---|---|---|
+| BDp (priced) | 23.68 / 26.87 | **19.54** / 26.44 (= the judge's verified number, to the digit) | 24.18 / 28.86 (judge) | - |
+| **pick1** F7-g35-6 (priced) | **21.31 / 23.02** | **18.40 / 23.36** (score 93.31) | **22.69 / 26.73** | **+2.37 / +1.49** (near-touch +3.85 / +2.13) |
+| pick2 BDp-g15-7 (priced) | 23.68 / 25.66 | 21.42 / 23.02 | - | 0.00 / - |
+| pick3 BDp-g9-5 (priced) | 24.51 / 26.51 | 21.77 / 24.47 | - | -0.83 / - |
+| BDp (unpriced, margin 5) | 22.85 / 26.00 | 19.06 (judge) | 23.24 (judge) | - |
+| pick1 (unpriced, margin 5) | 20.91 / 21.97 | 17.77 / 22.82 | - | - |
+
+For both configs the priced reading is the worse one, so the priced number is the claim. On the verified bench
+protocol, pick1 gains 1.14 (19.54 -> 18.40).
+
+**pick1 under the rules** (both protocols):
+* Own-state J1-J3 margin: min 5.586 (held) / 5.623 (bench) against the 5.5 priced rule; 0 poses under it.
+* Q2 slot, K one-sided, spring equilibrium: 0 knocked out; 0 forced poses with a lower equilibrium.
+* Continuity: grid 1106 / 1106 nodes connected, 0 islands, 991 / 991 edges, 0 taken poses dropped. The overhead
+  grid nodes rise from 32 to 44.
+* O20 everywhere. J1 seat on the acromion top: anterior 0.076, up 0.926; H1's accepted seat has anterior 0.085.
+* Priced stops: J2 slot drawn at 6.88 / 6.83 deg (built +0.5). K's stop B is drawn at the 5-deg rule cut, dK 56.65
+  deg (th 118.9; the as-designed stop B is at dK 60.42).
+
+**Components, held out** (env fit, priced; pick1 vs BDp):
+* reach 0.728 vs 0.683 (+4.5 points);
+* follow 1.0 vs 1.0;
+* in-band 2-14 0.889 vs 0.891;
+* in-band 2-10 0.497 vs 0.574 (R1-aim worse);
+* contact 0.030 vs 0.011 (+1.9 points);
+* near-touch poses 8 vs 20.
+
+The gain is reach, partly paid back in skin contact.
+
+**Red team (open; for the verifier).**
+* **Skin contact roughly triples.** 3.0-3.8 % of taken poses put metal inside the body, against BDp's 1.1 %. The gap
+  counts those poses as not taken, but "zero contact" is a hard bench target. Where they are (clip vs workspace,
+  which part) is not attributed here.
+* **K swings almost twice as far.** dK reaches 56.6 deg vs BDp's 34.1; 213 vs 141 held-out poses sit in the
+  stretched state. The clock spring then winds further: the buildability lens sized BDp's spring for its stop B at
+  34.5 deg. The forced sub-chain's J1 swing per frame, already flagged for BDp (20-40 deg / frame before stop B), needs
+  re-measuring.
+* **R1-aim drops.** In-band 2-10 mm falls from 0.57 to 0.50.
+* **Selection.** pick1 was chosen on envsel, a draw independent of the search. The held-out set was read only by
+  this claim batch, once, for 4 configs. Its in-sample env objective (18.93) still overstates its held-out
+  near-touch (23.02) by 4.1 points.
+
+**What the envsel draw bought.** Both the search objective and the pick-selection number rank the 4 claimed configs
+in their held-out order, but only the selection number is calibrated:
+
+| config | env objective (in-sample near) | envsel near (independent draw) | held near (env fit) |
+|---|---|---|---|
+| pick1 | 18.93 | 23.58 | 23.02 |
+| pick2 | 22.25 | 23.93 | 25.66 |
+| pick3 | 22.51 | 24.04 | 26.51 |
+| BDp | 24.98 | 29.13 | 26.87 |
+
+* The in-sample objective is optimistic for every config (by 1.9 for BDp and 3.4-4.1 for the polished ones): the
+  selection-on-noise effect the cross-fit check predicted.
+* The envsel number misses by 0.6-2.5 in both directions (mean 1.75).
+* **An independent draw for pick selection is the part of this instrument that works.** The representative sample
+  alone does not stop the in-sample optimism of a polish.
+
+**Verdict.**
+* pick1 gains **+2.37** gap points held out over BDp on the env-fit protocol, and **+1.49** on BDp's own verified
+  protocol (fit Bench(60,160)).
+* It gains +1.14 on the verified bench protocol (19.54 -> 18.40, score 92.89 -> 93.31).
+* Self-measured. Under the CLAUDE.md final-polish rule, pick1 replaces BDp's CAD config only after an independent
+  verifier confirms the >= 1 held-out gain and clears the red-team items above (contact, K travel, spring).
+* pick2 and pick3 do not beat BDp held out.
+* Params: `docs/research/minarc_final_polish/picks/pick1.json` (nominal; the claim prices it).
 
 ## Cost
 
-__COST__
+Farm exo-cpu1 (cpu3c rate, $0.288 / worker-h; the cpu5c fallback is about 15 % more):
+
+| batch | billed | $ |
+|---|---|---|
+| fast caches env + envsel (14 parts) | 1245 worker-s | 0.100 |
+| assemble + validate | 48 worker-s | 0.004 |
+| CMA 3 starts + re-score 4 | 2468 worker-s | 0.198 |
+| claim, 8 jobs | 1995 worker-s | 0.160 |
+| claim follow-up, 4 jobs | 1523 worker-s | 0.122 |
+| **total** | | **about $0.58** (cpu5c up to $0.67; budget $2.00) |
+
+The RunPod balance went from $6.91 to $6.08 over the session, shared with other agents. Local work: at most 1
+process.
 
 ## Files
 
