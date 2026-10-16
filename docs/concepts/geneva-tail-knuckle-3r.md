@@ -55,3 +55,59 @@ crest seed B (az 95.37, el 62.54, a1 44.53, a2 50.26, wd 108.87, wa -3.53, inv3 
 - At these seats hub 2 sits where 2.5 mm more disc radius raises its fitted level by about 25-30 mm.
 - The crest basin is an O15-only basin. Under "Keep O20 only" it is closed.
 - The hub-3 crest map (all-fit 0.85 at wdir(94, -15)) still stands, but no O20 hub 2 lives with it at these seats.
+
+## The model (docs/concepts/models/geneva-tail-knuckle-3r.py)
+
+- **Base.** It is built on the kit-rule variant-A model (minarc-stop-knuckle-4r-a-kitrule.py), loaded as its own module
+  copy. That model supplies the kit's J1-J3 fold rule at 5 deg, the near-touch objective, hub K's +6 mm clock-spring
+  cap, the strict continuity flood fill and the frozen wear.
+- **The law.** The exact one-tooth spherical contact law is ported from geneva-tail-knuckle-pinknee-3r and rewritten for
+  the variant-A chain. Every step is a rotation about an axis through GH.
+  - The roller centre turns with link 2 about u2 and touches ONE half-plane flank. The flank passes through uK and is
+    fixed to link 1a.
+  - The roller's side is chosen so that the pushed flank opens K.
+  - th_law(q) is pose independent and is inverted per pose. Its valid prefix needs all of these:
+    - th rising, with dq/dth <= 3.45;
+    - pressure angle <= 45 deg;
+    - contact radius <= HUB_R (crown) or the lug length (beside);
+    - a1e <= a1max (stop B);
+    - the dyad margin m3e >= 5 and the forced sub-chain margin msub >= 5;
+    - no lift-off along the pose's self-motion.
+  - The folded side has no tooth: a J2 dowel, and the poses beyond it are lost.
+- **The metal, which the spec did not fully specify.** Three changes:
+  - **K's stack is flipped**, so link 1a is the upper member at K and carries the tooth.
+  - **Crown embodiment** (closest approach d < 14 mm): the roller (O8 x 4) rides over K's cap with its bottom >= the cap
+    top + 1.2 mm.
+  - **Beside embodiment** (d >= 14 mm): a 6 mm **lug** on link 1a runs along the flank from K's axis to the largest
+    contact radius + 3 mm. It sits at link 1a's level, over link 1b + 1 mm. The roller runs at the lug's level.
+  - The **tail** is an 8 x 3 Ti strap, rigid with link 2, from hub 2 to the roller. It passes over link 1a, link 1b,
+    hub K and the lug, each + 1 mm.
+  - Every sample is skin-fitted, in band and K6-checked like a link.
+  - Roller and lug share a pseudo-joint "D" on the roller axis. This exempts their designed contact from K6 within 12 mm
+    of the roller axis. It is optimistic for state-A poses in which the roller passes the back of the lug; that is
+    stated, not modelled.
+- **A config with no working drive** scores +100 and is marked dishonest. Without a drive it is a plain 3R with a stuck
+  K and no tail, which is not this design.
+- **Search space:** the seats, the arcs, K's placement (b1, b2), a1max, the onset smhi, smlo, d, psi_c, q, inv3 and
+  end_extra.
+
+## What the law and the tail measured (new knowledge)
+
+1. **The onset margin is the law's fuel.** The driven state must keep the dyad margin a1e + a2 - th >= 5. Since q2 keeps
+   moving past the onset, q2 eats that margin. The law therefore ends at m3e unless the onset sits well inside the
+   window.
+   - At the LA1 seats, onset smhi 6: the law covers th 109 -> 117-131.
+   - At smhi 13-20: it covers th 100-102 -> 129-137, matching the sensed stop law's 136.5.
+   - The best configurations all sit at smhi 13-19. Most poses are then DRIVEN, including 56 of the 57 rest poses
+     (K is open at rest).
+2. **The drive ratio and the tail length trade one-for-one.**
+   - A fast drive (crown, d 7 mm) needs the roller on a long tail. The tip is 39-47 deg from u2.
+   - A short tail (tip 13-20 deg) gives a slow drive (lever ratio about 0.45). It ends at th <= 121.
+   - In between, the beside embodiment at d 14-22 mm (tip 27-40 deg) reaches th 126-137.
+3. **The tail sweep is the metal cost.** The tail is rigid with link 2, so it turns with q2 across the whole state-A
+   window. Its tip sweeps a circle about 40 deg in radius around hub 2.
+   - At LA1, the skin under the roller needs a level of 135-152 mm from GH (p50-max over the fit poses), against hub
+     K's 55 mm.
+   - Tail and roller sit 0-24 % in band in every configuration measured.
+   - At the best configuration the tail metal (tail + roller + lug) costs **9.3 gap points**: 39.36 with it against
+     30.02 with the law alone at the same parameters.
