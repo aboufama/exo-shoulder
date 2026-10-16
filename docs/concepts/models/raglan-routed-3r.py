@@ -80,6 +80,8 @@ def build(B, F, p):
     L2, W2 = routed_strap("link2", h2, h3, p["r2t"], p["r2d"], ("J2", "J3"), width=w, t=t, ramp_to=(("hub2", K.STACK), ("hub3", K.STACK)),
                           over=[("link1", 1.0), ("neck", 1.0)], extra=x2)
     neck = K.neck_member(F, h3, joints=("J3",), ramps=(("hub3", 0.0), (None, 0)))
+    for m, k in ((hubs[1], "qh2"), (L2, "ql2")):                 # per-part underside quantile (None = the global q): a part
+        if p.get(k) is not None: m.q = float(p[k])               # placed lower turns the poses that lift it into contact poses
     res = K.closure_residual(p1, p3, p2, p["a1"], p["a2"])
     lk = [round(math.degrees(float(np.arccos(np.clip(np.median((x * y).sum(-1)), -1, 1)))), 1) for x, y in ((h1, h2), (h2, h3))]
     return K.Chain(members=hubs + [L1, L2, neck], ok=ok, q=q, joints=dict(J1=h1, J2=h2, J3=h3),
@@ -157,7 +159,9 @@ def clean(params):
         if p.get(k) is not None: p[k] = min(0.9, max(0.1, float(p[k])))     # the turns stay between the hubs
     for k in ("r1d", "r2d", "r1d2", "r2d2"):
         if p.get(k) is not None: p[k] = min(60.0, max(-60.0, float(p[k])))
-    p["width"] = max(8.0, float(p["width"]))                               # 8 x 3 mm Ti strap is the narrowest used (osn)
+    p["width"] = max(8.0, float(p["width"]))
+    for k in ("qh2", "ql2"):
+        if p.get(k) is not None: p[k] = min(1.0, max(0.8, float(p[k])))                               # 8 x 3 mm Ti strap is the narrowest used (osn)
     return p
 
 

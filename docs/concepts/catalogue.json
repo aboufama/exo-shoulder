@@ -1962,5 +1962,49 @@
   "sweep_params": "R 24-36, rail level h0 45-60, psi window (-60..-40 / 45..65), carriage 10-16 mm, a1 50-65, a2 70-90, az 85-110, el 55-70, wd 40-90, wa -20..10, q 0.96-1.0",
   "main_risk": "(1) Link 2 is the unsolved limiter: 0.10-0.71 in band along its great circle (frame set by closure, as the champion's link 2 at ceiling 0.04). (2) Rail ends: travel plus the carriage half-length reaches the in-band sector's edge; end stops cost ~2-4 % of poses. (3) A cantilevered custom V-arc with eccentric preload: play, stiffness and arc sensing less mature than a hub encoder. (4) Close to rail-elbow (dead, refuted by its own 3R control): the hub control at identical axes is mandatory.",
   "modelling_cost": "medium"
+ },
+ {
+  "id": "raglan-routed-3r",
+  "name": "Raglan-routed 3R (plain spherical 3R whose links follow the lines of least skin motion, measured in each link's frame)",
+  "topology": "S -> J1: ACTIVE R (O20 hub, axis through GH) -> link 1 (8 x 3 strap with ONE planform turn fixed in the link: hub -> W -> hub, W = cos(d) slerp(h1, h2, t) + sin(d) n_12) -> J2: ACTIVE R (O20 hub, axis through GH) -> link 2 (same, its own turn) -> J3: ACTIVE R (O20 hub, axis through GH) -> arm-end plate + K7 neck rigid to BOTTOM's bar. Each hub may sit at either end of its axis line (e1, e2, e3).",
+  "active_dof": 3,
+  "passive_dof": 0,
+  "dof_reasoning": "Spherical 3R: the three axis directions meet at GH; the exact closure (concept_kit.closure) sets J2 from J1 and J3, so every coordinate is set by the arm (no slide, no undetermined coordinate). The planform turn and the hub-end choice change only the link shapes, not the kinematics.",
+  "description": "A pattern maker's answer to the 3R's floating links: draft each link along the measured line where the skin keeps one distance from THAT link over every pose (raglan map: the K3 requirement on a (t, d) grid of the link's own moving frame), with one planform turn (constant section, tangent-arc corner, no loft). Plus a grading pass over the whole layout space (three-hub band scan) for layouts where all three hubs can be pinned in one 12 mm band. REST: hub 1 on top of the shoulder, hub 2 behind it, hub 3 on the lateral arm; link 1 bows out over the posterior deltoid instead of dropping straight down the back. OVERHEAD / ACROSS / BEHIND: as the plain 3R (same kinematics), the bowed link keeps its skin distance where the straight one crossed the acromion edge.",
+  "why_better": "Link 1 in band 0.37 -> 0.60 at the plain-3R basin, gap 51.33 -> 42.72 (Bench(60,160) fast) with 0 passive translations: the most buildable morphology (3 pins + 2 bent straps).",
+  "main_risk": "Hub 2 floats (F 128-145 mm) in every plain-3R basin with good reach: link 2 and hub 2 stay out of band; the graded family that pins hub 2 (F 65) loses reach to the fold and needs a 100 deg link 2 down the deltoid.",
+  "unpowered_and_mvp2": "Unpowered: three pins on MR117-2RS pairs, links machined or bent from 8 x 3 Ti (or Al 7075) strap; MVP2: remote motors on the three hubs (cables), as the spherical 3R.",
+  "model_spec": "docs/concepts/models/raglan-routed-3r.py on tools/concept_kit.py (K0-K7) + fold-sph3r crown / near-touch / overhead checks; routed_strap() = two (or three) strap_dirs legs concatenated into one Member with one climb-limited grid; map mode = the raglan map; tools/hub_band_scan.py = the grading scan.",
+  "sweep_params": "az, el (J1 bvec), a1, a2, wd, wa (J3 wdir), sigma, e1-e3 (hub ends), r1t, r1d, r2t, r2d (+ r1t2, r1d2, r2t2, r2d2: a second turn), width >= 8, q",
+  "modelling_cost": "low",
+  "prior_art": "Raglan / princess seams (tailoring); Iberall 1964 lines of non-extension, MIT BioSuit (Newman); orthotic casting in functional positions and trim lines on stable landmarks; spherical 3R shoulder exoskeletons (e.g. Harmony, ABLE) route links on great circles.",
+  "lenses": [
+   "weird-tailoring"
+  ],
+  "t_ideated": "2026-10-16T01:20:00Z",
+  "source": "round 3, tailoring / pattern-making / orthotic fitting lens",
+  "status": "screened"
+ },
+ {
+  "id": "far-end-posterior-3r",
+  "name": "Far-end posterior 3R (fold-free posterior J1 line, hubs at either end of their axis lines, raglan-routed links)",
+  "topology": "S -> J1: ACTIVE R (O20 hub on the posterior-horizontal GH line bvec(-24, 4), at either end) -> routed link 1 -> J2: ACTIVE R (hub at either end of its GH line) -> routed link 2 -> J3: ACTIVE R (posterior arm wdir(80, -90), or its far end) -> neck to BOTTOM.",
+  "active_dof": 3,
+  "passive_dof": 0,
+  "dof_reasoning": "Spherical 3R (exact closure); the hub end changes no kinematics.",
+  "description": "The far-end scan found a fold-free J1 line (straight back from GH, horizontal) whose hub stays in one band in 100 % of poses; this morphology builds the 3R on it with every hub-end choice and routed links.",
+  "why_better": "Fold-free on 100 % of poses (orientation level).",
+  "main_risk": "Measured, fatal: the fold-free arcs send link rays through the neck / chest in 10-20 % of poses (links park at 400 mm) and every far end of a GH line lies in the torso, axilla or neck.",
+  "unpowered_and_mvp2": "as raglan-routed-3r",
+  "model_spec": "docs/concepts/models/far-end-posterior-3r.py (the raglan-routed-3r builder, posterior layout)",
+  "sweep_params": "4 fold-free posterior layouts x branch x e1-e3 x route x q",
+  "modelling_cost": "low",
+  "prior_art": "-",
+  "lenses": [
+   "weird-tailoring"
+  ],
+  "t_ideated": "2026-10-16T01:20:00Z",
+  "source": "round 3, far-end-hub lead (ends_scan 2026-10-16)",
+  "status": "killed"
  }
 ]
