@@ -256,8 +256,9 @@ Reading the ranking:
      loss is the 160-pose window fit, not skin;
   3. a verifier run of the 4-DOF lens's park4 (frozen exact, independent harness) and a CMA of it constrained to
      in-band >= 0.88 - it is the only class whose reach moves;
-  4. a two-state relay model: J1-J2 arc 40 <-> ~80 via a detented mid-joint, with hub-2 parking (`relay_parking.py`)
-     as its first gate;
+  4. a two-state relay model only where its parking gate passes: the pin-knee seats give ~+0.1 (hub 2 parks for 30-45 %
+     of the rescued poses); scan seats / a1' for the pair whose two hub-2 requirements overlap within 12 mm, or let
+     hub 2 change level with the state (J2 on a rod in a linear-rotary bushing: 1 slide, cheap under the new weights);
   5. every new fold lever gets the ray-parking gate before any CMA: where hub 2 / the pivot sits in the poses the
      lever rescues.
 * **Red team / what is optimistic here:** the kinematic ceilings ignore skin by construction; the in-band frontier is

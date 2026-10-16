@@ -38,7 +38,8 @@ D2R = math.pi / 180
 # defaults = the ideation k-A seats (az .. end_extra), hubs O20 everywhere, margin 5
 PARAMS = dict(az=102.7408, el=67.9854, wd=81.3566, wa=-14.6101, a1=37.6, a2=60.0, a3=22.307, pz4=98.4478, s1=-1, side=0,
               lim4=400.0, margin=5.0, inner=0.5, width=12.0, t_link=3.0, q=0.9681, rad1=10.0, rad2=10.0, rad3=10.0,
-              rad4=10.0, end_extra=1.02, near=0)
+              rad4=10.0, end_extra=1.02, near=0,
+              spring_rad=12.0)   # hub 4 envelope with the J4 spring (wire 0.95, D 22, 6 coils round the O20 housing; doc "Spring")
 REPORT_KEYS = ("over_reach", "overhead", "gap_near1", "min_metal_skin", "crown_contact_poses", "moved_share", "defl_p95",
                "defl_max", "stop_share", "gap_plain")
 ELEV_OVER = 140.0
@@ -105,6 +106,9 @@ def extras(B, r, p):
     L = B._kit_last; ch, prof, take = L["chain"], L["prof"], L["take"]
     Pi = np.array([j for j in np.nonzero(take)[0] if B.res[j] is not None], int)
     hubs = [m for m in ch.members if m.kind == "flat"]; rad = {"hub%d" % i: p["rad%d" % i] for i in (1, 2, 3, 4)}
+    # J4's torsion spring wraps the O20 housing (coil OD ~23, levels F+3.2..F+9): its skin side is checked as hub 4's
+    # crown / wall at spring_rad (K6 part clearance keeps the kit's O20 disc: the 2 mm coil annulus is stated as a hole)
+    rad["hub4"] = max(float(p["rad4"]), float(p.get("spring_rad", 10.0)))
     cmin = np.full(len(B.res), np.inf); cwho = {}
     if len(Pi):
         parts = [SPM.crown_points(m, prof[m.name], rad[m.name])[Pi] for m in hubs]

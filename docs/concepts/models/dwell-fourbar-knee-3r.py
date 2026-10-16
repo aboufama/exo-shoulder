@@ -49,7 +49,8 @@ SLIM = {10.0: "v5 O20 hub: MR117-2RS pair, 12.25 mm stack (docs/HARDWARE.md)",
         8.5: "O17 hub: MR117-2RS pair in a 2.75 mm Ti wall, 12.25 mm stack",
         7.5: "O15 slim hub: MR117-2RS pair (O11) in a 2.0 mm Ti wall, 12.25 mm stack (spine-parked-j2-3r hand calc)"}
 PIN = {5.0: "passive pin: MR63ZZ pair (3 x 6 x 2.5) in an O10 Ti boss, two 3 mm plates, 6.5 mm stack (catalogue: passive pin)",
-       6.0: "passive pin: MR74ZZ pair (4 x 7 x 2.5) in an O12 Ti boss, 6.5 mm stack"}
+       6.0: "passive pin: MR74ZZ pair (4 x 7 x 2.5) in an O12 Ti boss, 6.5 mm stack",
+       10.0: "v5 O20 hub stack (MR117-2RS pair, 12.25 mm) used as a passive pin (user ruling 2026-10-16: O20 at every joint)"}
 ELEV_OVER = 140.0
 LOOPKEYS = ("a1", "a2", "b", "chi", "gP", "phP", "k", "alq", "sref", "margin", "tq_lo", "tk_lo", "lock")
 
