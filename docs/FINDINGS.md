@@ -957,3 +957,24 @@ Builder fix found on the way: a mount routed to the nearest end of the user's BO
 every frame jammed, 1.18 mm); the builder now sweeps member 3 + the knee bar through the arm frame, cuts BOTTOM clear of it
 and routes the mount clear by >= 1 mm (pipeline/concept_l1/build_pinknee_l1.py). Details: docs/concepts/skin-normal-3r-pin-knee.md
 "L1 keep-out CAD of the polished H1".
+
+## No 1- or 2-passive closure widens the fold; the middle planar knee parks hub 2's pins but its plates float (2026-10-16, docs/research/nzc/closures.md)
+
+Near-zero-closure track of the golden push. Measured / derived:
+* **A single slider (or single pin) cannot close any offset 3R exactly**: a J3 line off GH leaves a 2-D drift (a circle in
+  hub 3's plane), a J2 line off GH an unavoidable radial component d sin a2 |sin q2|. Every 1-passive closure is
+  degenerate (the passive locks at 0).
+* **The only 2-passive closures are planar** (all joints on GH lines or parallel to one w; RR / RP / PP next to the
+  active joint || w): distal (the pin knee / osn cuff), proximal (base-side, no value), and **middle - the new
+  virtual-J2 knee**: J2 as a planar pin triple, link 2 turning about a virtual GH line. In all of them the passives only
+  re-parametrise the rotation about w: **the fold law is unchanged; widening the window needs >= 3 passives (a passive
+  rotation not parallel to an active axis, e.g. the Jarrasse-Morel 2 pins + 1 slide along the arm) or a 4th active joint.**
+* Sensing: on a rigid-GH body the 3 active encoders fix the arm iff the knee pins and the virtual axis are not collinear
+  in the knee plane (|sin| > 0; untuned: min 0.017, reading sigma_min 0.019 -> RIG_MIN 0.17 added); under GH translation
+  the pin angles must be read (or slides used). A pin pair never stays out of the orientation reading.
+* **Virtual-J2 knee gate (Bench(60,160), zc seats):** at a1 / a2 52 / 70 (fold-law reach 0.819) hub 2 ON the w-ray is in
+  band 0.03 (level 123 mm), but a link-1 pin 28 mm off the w-line parks 0.958 at 53 mm and a link-2 pin 0.969 at 63 mm,
+  17.6-38.7 mm apart. **First honest model screen: 103.68** (reach 0.54, in-band 0.40): the pins park, the crank / knee
+  PLATES, swept around the virtual axis at one level each, float (knee 94 mm, 0 % in band; pin b and link 2 stacked on
+  it 0 / 10 %) - the virtual-pole four-bar's "J2 neighbourhood is the worst skin" again. Complexity 19.0 sensed (= the
+  pin-knee class). Not a ceiling yet (22 configs); next: Bench(110,360) gate (farm), a plate-footprint gate, farm CMA.
