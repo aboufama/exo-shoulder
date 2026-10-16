@@ -6,10 +6,11 @@
  * loop. The model (docs/concepts/models/coupler-path-j1.py) closes the arm end with the leader's pin knee; this preview
  * draws the arm end as a neck to the cuff. IK = the model's: roots of angle(p2(t), p3) = a2 over the crank angle t,
  * bisection, root nearest the previous frame; red = the four-bar's transmission angle outside [25, 155] or the
- * osculating-circle fold rule (margin < 10 deg, the bench's m). Parameters: the sweep's best (see the P block). */
+ * osculating-circle fold rule (margin < 10 deg, the bench's m). Parameters: sweep k3257, the best BUILDABLE four-bar (A0-B0 21 deg apart; bound 28.42 on Bench(60,160) fast) - the CMA's
+ * lower-gap configurations collapse B0 onto A0 (a rigid crank = the leader's plain J1). */
 (function () {
   const K = (typeof window !== 'undefined' ? window : globalThis).KIN, V = K.V, M = K.M;
-  const P = {"A0": [0.11259, 0.90999, 0.39905], "B0": [-0.3047, 0.82473, 0.47642], "W0": [-0.18127, -0.0897, 0.97933], "alpha": 40.12, "beta": 40.0, "c": 40.0, "s4": 1, "kd": 0.0, "kphi": 0.0, "a2": 72.31, "branch": 1, "ideal": 1, "tmin": 25, "fold": 10, "faces": [49.9, 60.9, 72.0], "hub_r": 10, "pin_r": 6, "stack": 12.25, "neck_deg": 25, "cuff_at": 165};
+  const P = {"A0": [0.14912, 0.88704, 0.43695], "B0": [-0.04998, 0.71472, 0.69762], "W0": [-0.20673, -0.14817, 0.96711], "alpha": 42.692, "beta": 27.638, "c": 43.038, "s4": -1, "kd": 6.051, "kphi": 50.837, "a2": 74.263, "branch": 1, "ideal": 0, "tmin": 25, "fold": 10, "faces": [50.6, 57.9, 77.2], "hub_r": 10, "pin_r": 6, "stack": 12.25, "neck_deg": 25, "cuff_at": 165};
   const A0 = V.unit(P.A0), B0 = V.unit(P.B0), W0 = V.unit(P.W0), ref = V.unit(V.cross(A0, [0, 1, 0]));
   const Qof = ctx => M.mul(M.T(ctx.S), ctx.H);
   /** four-bar + coupler point for crank angle t (deg), scapula frame */

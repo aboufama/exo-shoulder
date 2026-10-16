@@ -8,8 +8,8 @@
  * circuit crosses between them at its dead points), bisection, root nearest the previous frame. */
 (function () {
   const K = (typeof window !== 'undefined' ? window : globalThis).KIN, V = K.V, M = K.M;
-  const P = { az: 102.74, el: 67.99, wd: 81.36, wa: -14.61, a1: 37.6, a2: 60.0, a3: 22.31, tr: 25.0, tp: 180.0,
-              n_az: 102.74, n_el: 67.99, beta: 20.0, s_c: 0, s_half: 180, mode: 1, pa_min: 0.25,
+  const P = { az: 93.27, el: 66.058, wd: 74.075, wa: -12.955, a1: 30.62, a2: 56.941, a3: 34.762, tr: 18.703, tp: 169.72,
+              n_az: 84.115, n_el: 64.105, beta: 27.549, s_c: -91.572, s_half: 123.432, mode: -1, pa_min: 0.25,
               faces: [55, 64, 70, 66], hub_r: 10, stack: 12.25, slot_w: 14, neck_deg: 25, cuff_at: 165 };
   const u1 = K.bvec(P.az, P.el), W0 = K.wdir(P.wd, P.wa), ns = K.bvec(P.n_az, P.n_el), cb = Math.cos(P.beta * K.D2R);
   const ea = V.unit(V.reject([0, 1, 0], u1)), eb = V.cross(u1, ea);

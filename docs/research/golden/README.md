@@ -183,9 +183,35 @@ three leaders and raglan-knee-3r's routed best (22.69 / 29.82 on both sides) - i
 
 Files: docs/research/golden/knee_parity_same110.json, knee_parity_frozen.json (per config: params, GPU and CPU metrics).
 
+
+Port v2 (+ the bit-identical CPU-side speed-ups and raglan routes; 08:48-08:58 UTC, 8 GPU workers; the CPU rows of v1
+reused for the same 53 configs - the CPU side does not depend on the port - and raglan-knee-3r's best run fresh on
+the CPU):
+
+| protocol (margin 5, O20) | configs compared | max abs diff: gap | near-touch | < 2 mm | model gap | reach | follow | in-band 14 | in-band 10 | contact | configs > 0.5 |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| same-bench Bench(110,360) | 54 / 54 | **0.0** | **0.0** | 0.0 | 0.0 | 0.0 | 0.0 | 0.0 | 0.0 | 0.0 | **0** / 0 |
+| fit Bench(60,160) -> wear Bench(110,360) | 54 / 54 | **0.0** | **0.0** | 0.0 | 0.0 | 0.0 | 0.0 | 0.0 | 0.0 | 0.0 | **0** / 0 |
+
+raglan-knee-3r's best (routed link 1: r1t 0.80, r1d -30.6): same-bench 32.31 / near-touch 36.82, frozen 27.88 / 32.97
+(its verified 27.82 at margin 5 is the exact wear path) - identical on both sides.
+Files: knee_parity2_same110.json, knee_parity2_frozen.json.
+
 ### Speed
 
-(pending: knee_run2.sh measures v2 with 9 workers; filled in below when the job returns)
+| | s per config, configs with gap < 100 (median / mean) | notes |
+|---|---|---|
+| CPU kit (knee_polish.evaluate / frozen_on), one process on the pod | same-bench 8.18 / 8.69, frozen 10.94 / 12.07 | the parity reference, 2-3 processes beside the GPU workers |
+| port v1 (6 workers, 3 CPU processes beside them) | 4.32 / 5.46, frozen 11.42 / 11.43 | v1 still ran the seats' libigl trees per call (1.7 s / config) and the per-frame IK |
+| **port v2** (8 workers) | **0.86 / 1.99, frozen 0.72 / 0.76** | **9.5x (same-bench) - 15x (frozen) per process**; the rest is the kit's CPU-side Python (greedy drop, finalize, report, audit) |
+| port v2, 9 workers, `speed --n 72` (the parity mix incl. 14 uniform-random configs) | 0.91 median, 0.29 evals/s overall | the wall clock is set by 3 junk configs (uniform draws, gap 375) whose traced samples leave the +-260 mm grid box: the kit's exact libigl path per pose, 1-4 min each on the CPU in BOTH implementations (r42: 263 s port, 257 s kit) |
+
+Where the time goes (cProfile, v2 on CPU torch, Bench(60,160)): the batched distance / pair work is the only large
+item and it moves to the GPU; the seats' rest-skin distances fell from 1.72 s to 0.009 s per config (ExactCached). Per
+dollar: in the polish region a v2 worker does ~1.1 configs/s; the pod's 10 vCPU carry ~8 workers -> ~8 evals/s for
+$0.72/h (~40 k evals/$), against ~0.4 evals/s for a farm worker at $0.288/h (4 kit processes at ~10 s; ~5 k evals/$):
+~8x per dollar and outside the serverless worker quota. Next lever: batch configurations inside one process (the
+zero-complexity port's design) and port the greedy drop - the CPU-side Python is now the limit, not the GPU.
 
 ### Search
 

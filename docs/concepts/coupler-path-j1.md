@@ -88,3 +88,53 @@ circle C(p3, a2) whose ray clears the skin below the leader's hub-2 level (60.9 
 taken poses 42 mm). The stretched ones want that J2 73.5 deg from the leader's J1 seat (median), the folded ones 53.7.
 So the J2 skin is not a per-pose barrier; what stops a J1 mechanism is that one rigid hub level and one 1-D path must
 serve every pose, and the links that reach those J2 positions.
+
+## Stage 2 - the bench (pin-knee VModel, every verifier check; Bench(60,160) fast, m = 10)
+
+Full-bench CMA-ES on the farm (`tools/concept_cma.py`, 8 x 8 per generation, every configuration in
+`sweeps/coupler-path-j1.json` with its stream label). Free: the four-bar (dA, psiA, alpha, dAB, psiB, beta, c, kr, kg,
+a2c), J3's seat (wd, wa, b3) and the knee (lE, lc, phiE, phib). BOUND = stage 2a: the crank, the rocker and the pins
+B0 / A1 / B1 are not yet metal (optimistic on in-band, contact and part clearance).
+
+| stream | start | evals | best (bound) | reach | follow | in-band 14 / 10 | contact | A0-B0 apart | gate (2nd half / last third / top-5, score pts) |
+|---|---|---|---|---|---|---|---|---|---|
+| circB (control: re-seated circle, kr = 0) | the proxy's best circle (A0 17 deg off, a1 54) | 1161 | 23.73 | 0.669 | 1.0 | 0.901 / 0.561 | 0.006 | - | 0.44 / 0.23 / 0.00 |
+| cplC (coupler, s4 +1) | leader-equivalent, kr 5 | 1865 | 21.26 | 0.700 | 1.0 | 0.887 / 0.477 | 0 | 2.2 mm | 0.41 / 0.18 / 0.05 |
+| **cplE** (coupler, s4 -1) | leader-equivalent, kr 5 | 2185 | **20.58** | 0.700 | 0.967 | 0.900 / 0.539 | 0.006 | 0.9 mm | 0.68 / 0.12 / 0.00 |
+| cplD (coupler, s4 +1) | the proxy's kr >= 30 best | 1273 | 25.17 | 0.663 | 0.95 | 0.898 / 0.559 | 0.012 | 4.1 mm | 0.00 / 0.00 / 0.01 |
+| leader (control, this code) | - | - | 20.63 | 0.694 | 1.0 | 0.903 / 0.532 | 0 | - | - |
+
+Every stream passed the convergence gate (sigma collapsed; gain < 1 score point over the second half, < 0.5 over the last
+third, top-5 within 3). **Every coupler stream drove the rocker pivot B0 ONTO the crank pivot A0 (0.9-4.1 mm apart;
+two real hubs need >= 17 mm: O20 + O12 + 1).** With B0 = A0 the loop A0-A1-B1 is a rigid triangle, the coupler turns
+rigidly with the crank, and link 1 is a plain revolute about A0: the search on the honest bench dissolved the four-bar
+into the leader's J1 (effective a1 41.7 vs 40.1, kr 5.9 deg). The best bound, 20.58, ties the leader (20.63) within
+one pose, and the re-seated circle that the J2-relief proxy liked (64.05 at the proxy pick) converges back to the
+leader's seats (A0 3 deg off u1, a1 44.9) at 23.73.
+
+Why the proxy's kinematic gain dies on the bench (measured at the proxy picks, `local` stage in the sweep): the fold
+loss drops from 46 to 6-24 poses, but J2's hub has to be fitted at 80-95 mm instead of 61 (its ray passes over the
+raised deltoid / trapezius in poses the circle never used), 18-40 poses become skin contacts, the knee runs out of range
+in 8-41 more (slide) and in-band falls to 0.53-0.59.
+
+## Pricing the four-bar's metal (the lead's second question)
+
+`price4bar`: on the bound's fitted shape, add the crank strap A0 -> A1(t) on top of the A0 hub, the B0 pin boss (O12,
+MR63ZZ pair / iglidur stack 6 mm), the rocker strap B0 -> B1(t) on it, the A1 / B1 pin bosses, and raise link 1 (the
+coupler) by plate + pin stack over the crank at its base end (tapering to 0 at J2). Each new part's level is REFIT (K3
+march, max over the taken poses), so it adds no contact, only metal out of band.
+
+| configuration | bound | priced | in-band 14 bound -> priced | levels (mm: A0 hub face, B0, crank, rocker) |
+|---|---|---|---|---|
+| near-circle coupler (kr 3, default B side) | 48.36 | 67.43 | 0.893 -> 0.702 | 49.9, 54.0, 62.2, 67.0 |
+| cplE (best bound) | 20.58 | 34.77 | 0.900 -> 0.758 | 51.1, 51.1, 63.3, 57.1 |
+| cplC | 21.26 | 53.62 | 0.887 -> 0.564 | 49.8, 49.8, 62.1, 107.0 |
+| cplD | 25.17 | 61.60 | 0.898 -> 0.579 | 51.7, 51.7, 71.0, 80.0 |
+
+**The four-bar's own metal costs 14-36 gap points** (the rocker rides over the moving deltoid / trapezius edge, and link
+1 must climb a pin stack over the crank). Searching the PRICED objective directly (CMA on the farm, 2 streams,
+1329 + 1257 evaluations, both converged: gate 0.35 / 0.35 / 0.24 and 0.25 / 0.12 / 0.03) gives **30.52** (prcG: reach
+0.675, follow 0.967, in-band 0.826 / 0.454, contact 0.006) and 33.28 (prcF) - and again B0 collapses onto A0 (3.3-3.7 deg,
+~3 mm apart, where two hubs need >= 17 mm). No configuration with real, separate base hubs comes near the leader: the best
+bound with A0-B0 >= 19.5 deg (hubs that fit) is 28.42 BEFORE its metal is priced (sweep k3257; its transmission angle
+dips to 26.3 deg, 1.3 deg from the toggle limit).

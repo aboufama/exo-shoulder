@@ -964,7 +964,7 @@ def main():
     ap.add_argument("--budget", type=float, default=1800.0); ap.add_argument("--n0", type=int, default=4096)
     ap.add_argument("--part", default="0/1"); ap.add_argument("--thr", type=float, default=45.0); ap.add_argument("--stacks", default="2")
     ap.add_argument("--basins", type=int, default=50); ap.add_argument("--reserve", type=int, default=30); ap.add_argument("--key", default="near")
-    ap.add_argument("--sigma0", type=float, default=0.6)
+    ap.add_argument("--sigma0", type=float, default=0.6); ap.add_argument("--targets", default="0.65,0.70,0.75,0.80,0.85")
     ap.add_argument("--cpu-from", dest="cpu_from"); ap.add_argument("--sane", action="store_true"); ap.add_argument("--elites", type=int, default=16); ap.add_argument("--lam", type=int, default=24)
     a = ap.parse_args()
     wear = tuple(int(x) for x in a.bench.split(",")); fit = tuple(int(x) for x in a.fit.split(",")) if a.fit else None
@@ -1049,15 +1049,16 @@ def main():
             rows.extend(D.get("rows", [])[:400])
         rows = [r for r in rows if r.get("params") and r.get("reach") is not None]
         starts = []
-        for R in (0.65, 0.70, 0.75, 0.80, 0.85):
+        TG = [float(x) for x in a.targets.split(",")]
+        for R in TG:
             k = f"pareto:{R}"; E = []
             for r in sorted(rows, key=lambda r: objective(k, r)):
                 if len(E) >= a.basins: break
                 p = r["params"]
                 if all(sum(abs(p[x] - e["params"][x]) for x in ("az", "el", "a1", "a2", "wd", "wa")) > 12 for e in E): E.append(r)
-            starts += [dict(e, _key=k) for e in E]
+            starts += [dict(e, _key=k, _lam=a.lam, _sigma0=s0) for e in E for s0 in sorted({a.sigma0, 2 * a.sigma0})]
         log(f"pareto: {len(rows)} rows, {len(starts)} starts")
-        cma_multi(Bw, starts, a.out, a.budget, a.lam, a.sigma0, "pareto:0.65", a.chunk, a.seed, [], log, meta=dict(targets=[0.65, 0.70, 0.75, 0.80, 0.85]))
+        cma_multi(Bw, starts, a.out, a.budget, a.lam, a.sigma0, f"pareto:{TG[0]}", a.chunk, a.seed, [], log, meta=dict(targets=TG))
     elif a.cmd == "search":
         seeds = list(LEADERS) + (json.load(open(a.extra)) if a.extra else [])
         search(Bw, Bf, a.out, a.budget, a.n0, a.elites, a.lam, a.seed, a.chunk, seeds, log)
