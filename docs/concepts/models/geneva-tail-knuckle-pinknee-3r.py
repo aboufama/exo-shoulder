@@ -257,6 +257,16 @@ class GModel(KR.KModel):
         if L_["emb"] == "crown": floor_tip = fK + S.CROWN + capK + 1.0 + ROLLER_H
         else: floor_tip = fK + S.UP + S.T_LINK + 1.0
         self._floor_tip = floor_tip; pts_all = []
+        # stacking over link 1b: the tail turns about u2, so at angular distance g from u2 it sweeps over every point of
+        # link 1b at the same g; its underside clears link 1b's top there by 1 mm (outside hub 2's 4-mm zone, the
+        # adjacent running gap applies inside it)
+        L1b = self.link_pts["L1b"][1]; gL = np.degrees(np.arccos(np.clip(unit(L1b) @ u2, -1, 1))); rL1b = np.linalg.norm(L1b, axis=1)
+        def stack_floor(dirs):
+            gT = np.degrees(np.arccos(np.clip(dirs @ u2, -1, 1))); out = np.zeros(len(dirs))
+            for j, gg in enumerate(gT):
+                sel = np.abs(gL - gg) <= 3.0
+                if sel.any(): out[j] = (rL1b[sel] + S.T_LINK + 1.0).max() / max(float(dirs[j] @ unit(L1b[sel][np.argmax(rL1b[sel])])), 0.5)
+            return out
         tipneed = float(self._TIP_need[keep].max()) if self._TIP_need is not None and keep.any() else 0.0
         for (dv, keep_s, sarc), rr in zip(self._tail_rows, self._LT_need):
             r = (rr[keep].max(0) if keep.any() else rr.max(0)).copy(); Sx = sarc
@@ -264,6 +274,7 @@ class GModel(KR.KModel):
             if not len(idx): continue
             j0 = idx[0]; rc = (f2 + S.UP) / max(float(dv[j0] @ u2), 0.2)
             r = np.maximum(r, rc - k * np.abs(Sx - Sx[j0]))
+            r = np.maximum(r, np.where(np.linalg.norm(np.cross(dv * 65.0, u2), axis=1) > S.HUB_R + 4.0, stack_floor(dv), 0.0))
             Send = Sx[-1]; r = np.maximum(r, np.where(Sx >= Send - BOSS_R, floor_tip, floor_tip - k * (Send - BOSS_R - Sx)))
             r = np.maximum(r, tipneed + ROLLER_H - k * np.maximum(0, Send - BOSS_R - Sx))   # roller bottom clears the skin under the tip
             r = np.max(r[None, :] - k * np.abs(Sx[:, None] - Sx[None, :]), axis=1)
