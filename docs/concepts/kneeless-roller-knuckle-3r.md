@@ -150,3 +150,60 @@ Verifier on A2 (claim file: docs/concepts/rows/kneeless-roller-knuckle-3r.json b
 `frozen` / `held` / `flood` / `redteam` modes, CB_EXACT=1, on the farm). Then the alignment audit vs the lead. The
 lever to try on this class: hub 2's crown (the 9 metal-lost poses) - e.g. the twin kneeless-sidecar's hub-2 geometry,
 or a lower hub-2 cap; and the user's misalignment number decides whether a knee-free cuff is wearable at all.
+
+## Verification
+
+**VERIFIED** (2026-10-16 ~23:25 UTC, independent skeptic, harness `docs/concepts/verify/kneeless-roller-knuckle-3r.py`,
+farm, ~$0.02). Not refuted, and not a lead.
+
+The claim's model was loaded unchanged. The harness retargets the round's roller verifiers
+(`verify/roller-longdyad-knuckle-3r.py` on `verify/sidecar-roller-flank-knuckle-3r.py`) at this model's class, clamp, params
+and best config, and adds the kneeless-sidecar verifier's rigid-bracket and re-collision checks. Protocol: fit on
+Bench(60,160) fast, shape frozen, worn on Bench(110,360) with CB_EXACT=1 (and on the held-out set).
+
+**Checks added, and what they found (taken poses of the worn bench)**
+
+| check | result | poses removed |
+|---|---|---|
+| cam closure in the world (roller centre on the flank's synthesised path) | 0.0 mm | 0 |
+| roller vs lug metal (>= roller radius); K sense | min 3.30 mm; wrong sense 0 | 0 |
+| pressure angles at each pose (claim's 43 deg; also re-read at 45) | crank 8.8 / horn 41.5 deg (held out 42.5); 0 fail at either cap | 0 |
+| real lobe pressure angle | 33.1 deg | 0 |
+| K inside the flank's range | dK taken 43.5 deg (held out 45.8) of dK_lim 46.75 | 0 |
+| rigid bracket, from the body transforms (member 3 and the bracket plate in the pad frame) | drift 0.000 mm over all taken poses | 0 |
+| every taken pose re-collided (non-adjacent >= 1 mm, adjacent >= 0.15 mm) | min 1.53 mm (crank vs hub K); E-L2 3.7 mm (1.4 held out) | 0 |
+| fold margin in the one metric (th) | min 5.41 deg (held out 5.09); 0 poses under 5 | 0 |
+
+**Numbers**
+
+| bench | gap | reach | follow | ib14 | ib10 | contact | 1 mm | 2 mm | overhead | min metal |
+|---|---|---|---|---|---|---|---|---|---|---|
+| Bench(110,360) exact, frozen | **21.07** (score 92.34) | 0.725 | 1.0 | 0.891 | 0.558 | 0.026 | 23.23 | 32.25 | 7/28 | 0.01 mm |
+| same, roller-pin head + lug edge strip added (`--head`) | 20.95 | 0.725 | 1.0 | 0.892 | 0.561 | 0.026 | 23.11 | 32.14 | 7/28 | 0.01 mm |
+| held out, frozen | 24.59 | 0.694 | 1.0 | 0.889 | 0.558 | 0.029 | 27.20 | 36.06 | 16/71 | 0.11 mm |
+
+- The claim's frozen numbers reproduce exactly; the added checks remove nothing. The verified number is the plain wear, 21.07.
+- Lost poses on Bench(110,360): fold 86, contact 10, parts 3 (overhead: fold 15, contact 4, parts 2).
+- Continuity flood fill: full 21.07 (0 dropped), knn 23.35 (8 dropped), bench grid 49.5 (the lead: 18.91 / 21.72 / 43.4).
+- The knee is idle: the model's own report (ptp 0.000 deg, |s| 0.000 mm) and the independent transform check agree.
+
+**Champion on the same bench: 75.94** (risley-turret table; 66.97 through the knuckle code and checks). This design beats
+it by about 55 gap points.
+
+**Against the lead: fails the A1 dominance gate.** The lead (sidecar-longdyad-knuckle-3r) scores 18.91 plain and 34.03 at
+2 mm. This design is better at 2 mm (32.25) but worse plain (21.07) and worse held out (24.59 against 22.67). It stands as a
+verified complexity Pareto point at complexity 23.75 (lead 49), next to kneeless-sidecar (21.11 at complexity 28): the two
+knee-free rows land within 0.04 gap points of each other.
+
+**Watch items (red team)**
+
+1. **Unscored workspace in-band (gaming pattern L2).** 0.855 overall and 0.828 at elevation 90-140 on the worn bench, below
+   the lead's 0.874 / 0.841 bars. Hub 3 is 0.505 in band (median 13.9 mm) and link 2 0.71.
+2. **Metal at the skin.** A taken pose has metal at 0.01 mm (hub 2's crown, the class's metal limiter); 1 mm counted as
+   contact costs +2.2 gap points.
+3. **The drive sits at its caps held out.** The horn pressure angle reaches 42.5 against 43, and dK 45.8 against 46.75.
+   A CAD tolerance on the flank or roller must be priced before build.
+4. **No closure slack for GH error.** The rigid bracket puts all GH-centre misfit on the cuff liner (claim's red team:
+   3 mm of GH error gives median 3.4, p90 4.8 mm misfit). This needs the user's tracking-error budget before CAD.
+5. **K on stop A.** K sits on its spring stop on 499 of 863 held-out taken poses, so stop-A hold under gravity (the R17
+   lag seen on pick1) must be judged in CAD.

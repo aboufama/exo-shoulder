@@ -6,7 +6,7 @@
  "active_dof": 3,
  "passive_dof": 3,
  "passive_translations": 0,
- "status": "screened",
+ "status": "verified",
  "t_ideated": null,
  "t_screened": "2026-10-16T22:57:23Z",
  "reach": 0.775,
@@ -15,11 +15,11 @@
  "inband10": 0.554,
  "contact": 0.0316,
  "gap": 16.7,
- "v_reach": null,
- "v_follow": null,
- "v_inband14": null,
- "v_inband10": null,
- "v_gap": null,
+ "v_reach": 0.725,
+ "v_follow": 1.0,
+ "v_inband14": 0.8905,
+ "v_inband10": 0.5581,
+ "v_gap": 21.07,
  "n_configs": 5914,
  "complexity": 23.75,
  "mechanism": {
@@ -281,7 +281,73 @@
  },
  "verdict": "Complexity Pareto point, not a lead change (self-measured, NOT verified): frozen exact Bench(110,360) 21.07 (score 92.34) / 1 mm 23.23 / 2 mm 32.25 (the lead 18.91 / 20.00 / 34.03), held out 24.59 (lead 22.67), flood full 21.07 / knn 23.35, at complexity 23.75 (lead 49, roller row 45.25), 0 passive translations, 0 sensed passives. Converged (5914 configs); the spec's design gate failed (fast 2 mm 20.02 > 15, plain 16.70 > 13, hub 3 0.50 < 0.60).",
  "limiter": "the J2 fold (86 of 360 frozen, as every knuckle row) and hub 2's crown in scapular-plane abduction 90-165 (9 of 13 metal-lost poses); in-band: hub 3 on a GH ray sits 28.6 deg oblique to the deltoid (0.505 in band, median 13.9 mm). The knee deletion itself is free on the bench (bracket 0.92-1.0 in band, never touches); the cost is losing the b3 tilt (~3.5 fast / ~2.2 frozen points) and a 1.5x larger liner misfit under GH-centre error.",
- "note": "Model docs/concepts/models/kneeless-roller-knuckle-3r.py = the round-9 roller wrapper (roller-longdyad-knuckle-3r.py: PA <= 43, roller stub head, 2 mm objective, ws in-band) on the verified roller-flank model, loaded unchanged; b3 0 forced, knee window dropped, former knee link re-sampled at the bracket level (pin stack removed, 3 mm thick), knee-vs-E / pad-vs-E dropped, bracket >= 0.15 mm off hub 3; knee asserted constant (ptp < 0.5 deg, |s| < 0.05 mm) on every config: 0.000 / 0.000 measured. Search: LHS 258 + CMA 2 rounds x 4 farm streams (5656 tries, 2 mm objective). Seed (b3 0, wd 75, wa -9 on the roller best): plain 15.81 / 2 mm 45.89 fast (the horn lug at 1-2 mm on 12 poses). Fast->frozen +4.37 (knee rows +8.4-9.0). Min th margin 5.14 deg. Spec deviations: chain 'free' (bk2 34-48) so the roller dyad is the start; PA_MAX 43 (round 9) cuts the seed flank to dK 49.0 (56.2 at 45).",
+ "note": "Model docs/concepts/models/kneeless-roller-knuckle-3r.py = the round-9 roller wrapper (roller-longdyad-knuckle-3r.py: PA <= 43, roller stub head, 2 mm objective, ws in-band) on the verified roller-flank model, loaded unchanged; b3 0 forced, knee window dropped, former knee link re-sampled at the bracket level (pin stack removed, 3 mm thick), knee-vs-E / pad-vs-E dropped, bracket >= 0.15 mm off hub 3; knee asserted constant (ptp < 0.5 deg, |s| < 0.05 mm) on every config: 0.000 / 0.000 measured. Search: LHS 258 + CMA 2 rounds x 4 farm streams (5656 tries, 2 mm objective). Seed (b3 0, wd 75, wa -9 on the roller best): plain 15.81 / 2 mm 45.89 fast (the horn lug at 1-2 mm on 12 poses). Fast->frozen +4.37 (knee rows +8.4-9.0). Min th margin 5.14 deg. Spec deviations: chain 'free' (bk2 34-48) so the roller dyad is the start; PA_MAX 43 (round 9) cuts the seed flank to dK 49.0 (56.2 at 45). | VERIFIED 2026-10-16 ~23:25 UTC (skeptic, docs/concepts/verify/kneeless-roller-knuckle-3r.py, farm ~$0.02): frozen exact Bench(110,360) 21.07 reproduced exactly (score 92.34; reach 0.725, ib14 0.891, ib10 0.558, contact 0.026; 1 mm 23.23, 2 mm 32.25; overhead 7/28); with the roller-pin head + lug edge strip added (--head) 20.95; held out 24.59; flood full 21.07 (0 dropped), knn 23.35. Added checks remove 0 poses: cam closure in the world 0.0 mm, roller-lug >= 3.30 mm, K sense never wrong, PA crank 8.8 / horn 41.5 (held 42.5) <= 43 and 0 failures at 45, real lobe PA 33.1, dK taken 43.5 (held 45.8) of 46.75, rigid bracket drift from the transforms 0.000 mm, every taken pose re-collided (min 1.53 mm CRK-hubK, E-L2 3.7 / 1.4 held), min th margin 5.41 (held 5.09). Champion on the same bench 75.94 (risley-turret table; 66.97 through the knuckle code). Fails the A1 dominance gate vs the lead (18.91 plain / 34.03 at 2 mm): a verified complexity Pareto point (cx 23.75), not a leader. Watch: workspace in-band 0.855 / 0.828 below the lead's 0.874 / 0.841; min metal 0.01 mm on a taken pose; horn PA and dK within 0.5-1 deg of their caps held out; knee-free closure puts GH-centre misfit on the liner (needs the user's budget).",
  "doc": "docs/concepts/kneeless-roller-knuckle-3r.md",
- "held_out_gap": 24.59
+ "held_out_gap": 24.59,
+ "t_verified": "2026-10-16T23:25:00Z",
+ "verification": {
+  "harness": "docs/concepts/verify/kneeless-roller-knuckle-3r.py",
+  "bench": "Bench(110,360) exact, frozen (fit Bench(60,160) fast)",
+  "frozen": {
+   "gap": 21.07,
+   "score": 92.34,
+   "reach": 0.725,
+   "follow": 1.0,
+   "inband14": 0.8905,
+   "inband10": 0.5581,
+   "contact": 0.0262,
+   "near1": 23.23,
+   "near2": 32.25,
+   "min_metal_mm": 0.01,
+   "overhead": "7/28"
+  },
+  "head_envelope": {
+   "gap": 20.95,
+   "near1": 23.11,
+   "near2": 32.14
+  },
+  "held_out": {
+   "gap": 24.59,
+   "reach": 0.694,
+   "contact": 0.029,
+   "near1": 27.2,
+   "near2": 36.06,
+   "overhead": "16/71"
+  },
+  "flood": {
+   "full": 21.07,
+   "full_dropped": 0,
+   "knn": 23.35,
+   "knn_dropped": 8,
+   "bench_grid": 49.5
+  },
+  "poses_removed_by_added_checks": 0,
+  "checks": {
+   "cam_closure_world_mm": 0.0,
+   "roller_lug_min_mm": 3.3,
+   "wrong_sense": 0,
+   "pa_crank_max": 8.8,
+   "pa_horn_max": 41.5,
+   "pa_horn_max_held": 42.5,
+   "pa_lobe_real_max": 33.08,
+   "dK_taken_max_deg": 43.53,
+   "dK_taken_max_held_deg": 45.78,
+   "dK_lim_deg": 46.75,
+   "th_margin_min_deg": 5.408,
+   "th_margin_min_held_deg": 5.091,
+   "bracket_drift_mm": 0.0,
+   "min_clearance_taken_mm": 1.53,
+   "E_L2_min_mm": 3.7,
+   "E_L2_min_held_mm": 1.4,
+   "pa45_failing": 0
+  },
+  "ws_inband": {
+   "all": 0.855,
+   "e90_140": 0.828,
+   "ovh140": 0.946
+  },
+  "champion_same_bench": 75.94,
+  "champion_note": "risley-turret verifier table (66.97 through the knuckle code and checks)",
+  "dominance_A1": "fails vs lead 18.91 plain (21.07 worse); better at 2 mm (32.25 vs 34.03); held out 24.59 vs 22.67"
+ }
 }
