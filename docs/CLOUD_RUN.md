@@ -64,7 +64,7 @@ python3 tools/concept_sweep.py docs/concepts/models/<id>.py --configs configs.js
 Options for `run`/`batch`/`judge`: `--design ID` (ships `pipeline/full-exo/designs/ID`, git-ignored files included, the
 viewer-only `parts/` and `preview/` left out), `--include PATH` (file or dir, git-ignored ok), `--out GLOB` (what comes
 back; only files the job created or changed), `--outdir DIR` (write them there instead of the tree, e.g. to compare with
-a local run), `--env K=V`, `--timeout S`, `--bench-cache` (ship `.cache/concept_bench`, the bench's distance grids).
+a local run), `--env K=V`, `--timeout S`, `.cache/concept_bench` (the bench's distance grids) is linked into every job by DEFAULT since 2026-10-16 (`--no-bench-cache` opts out; `--bench-cache` is a no-op kept for old command lines): batch CMA jobs without it had silently run the exact path, 30-50x slower and 1-3 gap points off the fast numbers. `tools/concept_bench.py` now warns on stderr when a Bench has no fast cache and falls back to exact.
 
 Every job prints: return code, run seconds, CPU, the $ it cost, the last log lines; the full log is in
 `~/.cache/cloud_run/logs/<tag>.log`. The batch line gives wall-clock, the parallel speed-up and the billed worker-seconds.

@@ -45,6 +45,7 @@ import body_pose as BP                                      # noqa: E402
 
 FIT = json.load(open(os.path.join(REPO, "data", "raw", "split.json")))["motions"]["fit"]
 CACHE = os.path.join(REPO, ".cache", "concept_bench")
+_WARNED = set()
 H_GRID, HALF, Q = 4.0, 260.0, 0.25                          # voxel mm, box half-size mm, int8 step mm (+-31.75 mm)
 R_SUB = 340.0                                               # skin kept for the unsigned-distance tree (mm from GH)
 
@@ -107,6 +108,15 @@ class Bench:
             self.grid = np.load(os.path.join(d, "grid.npy"), mmap_mode="r")
             self._V = np.load(os.path.join(d, "skins.npy"), mmap_mode="r") if os.path.exists(os.path.join(d, "skins.npy")) else None
             self.mode = "fast"
+        elif os.environ.get("CB_EXACT") != "1" and self.mode != "sdist" and not os.environ.get("CB_QUIET_EXACT"):
+            # no cache for this pose set: say so once (silent fallbacks made farm jobs 30-50x slower and their numbers
+            # incomparable with fast ones, 2026-10-16); CB_EXACT=1 asks for exact on purpose, CB_QUIET_EXACT=1 silences this
+            global _WARNED
+            if self.key not in _WARNED:
+                _WARNED.add(self.key)
+                print(f"concept_bench: no fast cache for Bench({n_clip},{n_ws}) key {self.key} in {CACHE} -> EXACT path "
+                      f"(slow; not comparable with fast numbers). Build it with --build {n_clip} {n_ws}; on the farm the "
+                      f"cache is linked by default (tools/cloud_run.py).", file=sys.stderr)
 
     # ---- poses -------------------------------------------------------------------------------------------------
     def frames(self, i):

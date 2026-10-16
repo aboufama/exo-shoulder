@@ -11,9 +11,10 @@
                                                                   chunks over the farm's slots; per-config reports in R.json
 opts: --design ID (ship pipeline/full-exo/designs/ID, git-ignored parts/ included)   --include PATH (file or dir, repeatable)
       --out GLOB (files to bring back, relative to the repo; only created/changed ones come back)   --env K=V
-      --outdir DIR (write returned files under DIR instead of the tree)   --timeout S (default 3000)   --bench-cache
-      (link .cache/concept_bench, the bench's signed-distance grids: uploaded once to the CAS, copied once per worker to its
-      local disk and symlinked read-only into each job)   --no-base (ship only --include/--design files)
+      --outdir DIR (write returned files under DIR instead of the tree)   --timeout S (default 3000)
+      .cache/concept_bench (the bench's signed-distance grids: uploaded once to the CAS, copied once per worker to its local
+      disk, symlinked read-only into each job) is linked into EVERY job by default; --no-bench-cache opts out (--bench-cache
+      is kept as a no-op for old command lines)   --no-base (ship only --include/--design files)
 Python on the worker: the endpoint image is CPython 3.12; the job's python gets the packages pinned to the local versions
 from /runpod-volume/exo-farm/py312/v1.tar (numpy 2.0.2, scipy 1.13.1, trimesh 4.12.2, libigl 2.6.3, networkx 3.6.1,
 rtree 1.4.1, mujoco 3.16.0, pillow 12.3.0; built on the farm by `pyenv`, extracted once per worker to /tmp, put first
@@ -413,6 +414,7 @@ def main():
     ap.add_argument("--out", action="append", default=[]); ap.add_argument("--env", action="append", default=[])
     ap.add_argument("--shared", action="append", default=[]); ap.add_argument("--outdir"); ap.add_argument("--tag")
     ap.add_argument("--timeout", type=float, default=3000); ap.add_argument("--bench-cache", action="store_true")
+    ap.add_argument("--no-bench-cache", action="store_true")
     ap.add_argument("--no-base", action="store_true")
     argv = sys.argv[1:]; cmd = None
     if "--" in argv:
@@ -430,7 +432,9 @@ def main():
                             "'numpy', numpy.__version__, 'scipy', scipy.__version__, 'trimesh', trimesh.__version__, 'mujoco', mujoco.__version__, "
                             "'networkx', networkx.__version__, 'rtree', rtree.__version__, 'PIL', PIL.__version__, numpy.__file__)\"",
                         tag="ping-pyenv", base=False)], None, 600); return
-    extra = dict(design=a.design, include=a.include, link=[".cache/concept_bench"] if a.bench_cache else [],
+    # the bench cache is linked by DEFAULT (2026-10-16: batch CMA jobs without --bench-cache silently ran the exact path,
+    # 30-50x slower and 1-3 gap points off the fast numbers they were compared with); --no-bench-cache opts out
+    extra = dict(design=a.design, include=a.include, link=[] if a.no_bench_cache else [".cache/concept_bench"],
                  out=a.out, env=env, shared=a.shared, base=not a.no_base)
     if a.what == "pyenv":                                               # (re)build the pinned package tar on the volume
         cmd = (f'set -e; T={PYENV_TAR}; D=${{T%.tar}}; [ -f "$T" ] && {{ echo "exists: $T"; exit 0; }}; rm -rf "$D.tmp"; '
