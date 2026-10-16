@@ -2565,7 +2565,7 @@
   "name": "Roller-flank knuckle on the long dyad: re-cut flank (dK 56-64) lifts the lead's binding drive-stroke wall 109.5 -> 117.5-120.2, parts merged (cx 44.0)",
   "family": "redundant 4R with a determined spare (cam-slaved knuckle), rodless spherical roller-flank drive",
   "lens": "round9:simplest-drive (lens 3; judge re-aimed it at the drive-stroke wall)",
-  "status": "ideated",
+  "status": "screened",
   "t_ideated": "2026-10-16T21:14:47Z",
   "source": "round 9 judge (docs/concepts/round9_ideation.md)",
   "merged_from": [],
