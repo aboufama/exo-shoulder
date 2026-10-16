@@ -135,3 +135,37 @@ the passive stage on its mid travel (the drift is one-sided). Hand (a) to the sp
   docs/concepts/models/seed-offset-3r-slides.py; ~5-9 s per configuration locally, `bench_eval` hook for the farm)
 * sweep log: docs/concepts/sweeps/skin-normal-hubs-selfaligning.json (in order; failed configs recorded with gap 275)
 * sketch: docs/concepts/img/skin-normal-hubs-selfaligning.png (rest and the highest pose taken, best configuration)
+
+## Red team (2026-10-15 22:43-23:45 UTC, two of three lenses; the synthesis and the big-bench lens were lost to a container restart)
+
+Both lenses reproduce k 722 exactly: 35.86 fast, 35.94 with CB_EXACT=1. Neither refutes the arithmetic. Both find that the
+logged configuration is not a buildable or honest design:
+
+- **Jams once the verifier's checks are on (critical).** The sweep model subclasses the screening S.Model, not the
+  verified S.VModel, so it lacks the member-3 riser, the hub3 / bridge vs rail checks and the jam rule. Hub 3's face is at
+  74.6 mm, the rail underside at 83.5 mm and carriage B's underside at 99.2 mm. Member 3 must climb ~20 mm inside a
+  5 mm neck. With the checks on, 121-123 of 220 poses jam riser-vs-rail and the gap reads 148.1. A 12-13 mm neck repairs
+  it: 37.8-38.5 on Bench(60,160); neck sweep 8 -> 89.3, 10 -> 39.9, 12 -> 38.2, 15 -> 38.6.
+- **Missing bodies.** Member 3 did not connect: the neck ended 1 mm above the bridge. The XYZ stage had no across
+  carriage, so carriage B did two jobs. Adding carriage C (20 x 20 x 4 mm) raises the stack to 24.2 mm (real MGN5-class
+  guides add ~1.5-2 mm more) but costs ~0 gap at neck 12. With the repairs: 38.52 on Bench(60,160) exact.
+- **Reach winner's curse.** CMA tuned the J2 fold boundary to the 160 workspace poses. Refit on Bench(110,360) exact,
+  reach falls from 0.656 to 0.592 and the gap is 44.38. With neck 13 the gap is 45.76, against the champion's 75.94.
+  The free undersides transfer almost fully (frozen 44.86 vs refit 44.38).
+- **Real hardware height.**
+  - Moving the stage onto a BOTTOM plate costs +9.9 (3 mm) / +16.2 (6.5 mm).
+  - The radial slide has no real component at this size: block + travel is ~25 mm. That breaks the hard rule
+    "Manufacturable joints only", so the 3-slide form is not buildable.
+- **Near-touch.**
+  - 9 of the 12 greedy-dropped poses count as taken with metal 0.22-1.53 mm off the skin.
+  - Counting metal < 1 mm as contact: 35.86 -> 42.38 (the baseline only moves 68.93 -> 70.05).
+  - Hub 1 / hub 2 crowns are not skin-checked: hub 1's crown is 1.98 mm off the skin overhead.
+- **What is real.**
+  - The chain alone (hubs, links, member 3) scores ib14 0.891, i.e. gap 27.1 by itself: hub 1 99 %, hub 2 94 %,
+    hub 3 92 % in band.
+  - The points go to reach (the fold) and to the stage (rail 0.83, carriage A 0.52 in band).
+  - The 2-slide subfamily that closes exactly is offset-skin-normal-3r.
+  - Where the fold limit really lies: docs/FINDINGS.md "The J2 fold is not a hard limit".
+
+Verdict: **refuted as a buildable design** (v_gap 45.76 on Bench(110,360) exact, repaired; champion 75.94 there).
+Its lessons are built into the round-3 screening and the osn verification.
