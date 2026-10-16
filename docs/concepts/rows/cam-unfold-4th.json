@@ -6,7 +6,7 @@
  "active_dof": 3,
  "passive_dof": 3,
  "passive_translations": 0,
- "status": "screened",
+ "status": "verified",
  "t_ideated": null,
  "t_screened": "2026-10-16T13:09:22Z",
  "reach": 0.7063,
@@ -18,11 +18,11 @@
  "gap_plain": 25.85,
  "gap_near1": 23.23,
  "min_metal_mm": 0.85,
- "v_reach": null,
- "v_follow": null,
- "v_inband14": null,
- "v_inband10": null,
- "v_gap": null,
+ "v_reach": 0.6556,
+ "v_follow": 0.9818,
+ "v_inband14": 0.8889,
+ "v_inband10": 0.5491,
+ "v_gap": 26.7,
  "n_configs": 9792,
  "best_params": {
   "az1": 93.002,
@@ -168,5 +168,10 @@
    "top5_spread": 0.04,
    "passes": true
   }
- }
+ },
+ "v_contact": 0.0115,
+ "v_gap_near1": 28.4,
+ "v_min_metal_mm": 0.83,
+ "v_champion_same_bench": 66.97,
+ "v_note": "Independent verifier 2026-10-16 (docs/concepts/verify/cam-unfold-4th.py, model imported unchanged; outputs docs/concepts/verify/cam-unfold-4th/): fit Bench(60,160) fast -> frozen -> Bench(110,360) EXACT, fold margin 5, O20. Reproduces 26.70 (score 90.29) on the farm AND locally (identical digits); near-touch 28.40 (3 poses < 1 mm, min 0.83 mm); overhead >= 140 reach 8/28. Verifier checks written independently of the closed form (per-joint axes from member frames, hub-3 centre, knee pins, the cam law dK = sign(psiA) c(x(q2)) read back from the frames, q2 inside the dowel slot, effective-dyad margin >= 5, K interior angle, finite-difference transmission >= gmin) knock out 0 of 344 taken poses (max axis error 0.02 deg, cam-law error 0.00 deg, min effective margin 5.06, min gain 0.44 vs floor 0.29). Hardware red team (hub 2 crown +5: the follower lever must ride ABOVE a ring fixed to link 1, since the O20 v5 crown is link 2a's own cap; hub K crown +3 for the crank inside its O20 footprint): 26.70, unchanged. Champion 3R on the same bench and protocol: 66.97 (offset-skin-normal-3r verifier; 64.93 in the arm-parked champbig run; 75.94 risley-turret checks). Not refuted; NOT a new leader: ties the pin knee H1 (27.20 same protocol, 0.5 < 1 point) at +14.25 complexity, 7.6 behind minarc BDp. Open buildability items (not in the bench): the crown cam's pressure angle is ~41 deg at the <= 7 mm pitch radius an O20 crown ring allows (1.5 slope, 4 mm crank, 1:1 lever; the claimed 27 deg needs the 12 mm pitch of the O30 flange) - a 2:1 follower lever brings it to ~23 deg; link 1's pin must pass through hub 2's cap to carry the ring, displacing J2's magnet / PCB encoder; the pushrod must climb to crown height at both ends."
 }

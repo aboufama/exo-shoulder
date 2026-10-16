@@ -179,3 +179,60 @@ only ~5 deg. Fold relief has to act on link 1 (minarc, geneva-tail-knuckle) or a
 **Next (if anyone takes it further):** the same two-sided cam law moved to link 1 (K = c(q2) on the scapula side,
 which is what geneva-tail-knuckle does with a tooth) - the K-atlas says a link-1 hub is >= 0.92 in band over a wide
 arc, and the folded lobe is the new lever; then the independent verifier on C3 only if that variant fails.
+
+## Verification (independent skeptic, 2026-10-16)
+
+Harness: `docs/concepts/verify/cam-unfold-4th.py` (the model imported unchanged). Raw outputs:
+`docs/concepts/verify/cam-unfold-4th/` (`farm_claim.json`, `farm_hw.json`, `local_claim.json`). Protocol: the shape is fitted
+on Bench(60,160) FAST and frozen (hub heights incl. hub K, link profiles, pushrod, E strap, stack, knee centre m). It is
+then worn without refit on Bench(110,360) EXACT, at fold margin 5 with O20 hubs only.
+
+**Checks added by the verifier.** They are written independently of the model's closed form and run on every taken pose.
+- Per-joint rotation axes, read from the member frames:
+  - link 1 turns about u1;
+  - 2a turns against link 1 about u2;
+  - 2b turns against 2a about uK;
+  - member 3 turns against 2b about u3.
+- Hub 3's centre is carried by 2b and by member 3 alike. Both knee pins coincide, and both knee rotations are about the
+  skin normal.
+- **The cam law (R17, 3 active).** q2 and dK are read back from the frames. The check requires dK = sign(psiA) c(x(q2))
+  within 0.1 deg, with x(q2) inside the J2 dowel slot.
+- The effective-dyad J1-J3 margin, re-computed from the frames, is at least 5 deg. K's interior angle stays in [5, 175].
+- The transmission dth/dx, from a finite difference of the verifier's own chain code, is at least the floor gmin.
+- Any pose that fails one of these checks is knocked out and the bench is re-scored.
+
+| run | gap | score | reach | follow | in-band14 | in-band10 | contact | near-touch gap | min metal |
+|---|---|---|---|---|---|---|---|---|---|
+| claim (frozen exact) | 26.70 | 90.29 | 0.656 | 0.982 | 0.889 | 0.549 | 0.012 | 28.40 | 0.83 mm |
+| **re-measured, verifier checks (farm = local, same digits)** | **26.70** | **90.29** | 0.6556 | 0.9818 | 0.8889 | 0.5491 | 0.0115 | **28.40** (3 poses < 1 mm) | 0.83 mm |
+| hardware red team: hub 2 crown +5, hub K crown +3 | 26.70 | 90.29 | 0.6556 | 0.9818 | 0.8889 | 0.5491 | 0.0115 | 28.40 | 0.83 mm |
+| champion 3R, same bench and protocol | 66.97 | 75.65 | | | | | | | |
+
+- **The checks knock out 0 of the 344 taken poses.**
+  - Maximum axis error is 0.02 deg. The cam-law error is 0.00 deg, and the taken x stays at 36.3-139.3 inside the
+    35.2-139.4 slot.
+  - The minimum effective margin is 5.06 deg. The minimum gain is 0.44, against a floor of 0.29.
+  - K is one valued function of q2, so the three joint readings determine the pose. The design is a true 3-active design
+    with no undetermined passive joint. Because the IK is unique, the continuity flood fill is not needed (as the claim
+    said).
+  - Lost poses: 115 fold, 2 knee window, 5 parts (E-L2b), 4 contact. Overhead (elevation >= 140) reach is 8 / 28.
+- **Hardware red team.** The claim's crown cam leaves out two pieces of hardware.
+  - The O20 v5 crown is the cap of the UPPER member at J2, which is link 2a itself. A groove fixed to link 1 therefore
+    needs link 1's pin to pass up through the cap, with 2a's follower lever riding ABOVE the 3 mm ring. That makes
+    hub 2 about 17.25 mm tall, not 15.25.
+  - The 4-6 mm crank on link 2b sits inside hub K's O20 footprint, so it rides on hub K's cap with the rod eye, about
+    +3 mm.
+  - The verifier priced both, re-fitted and froze the design. The number does not move: crowns face away from the skin,
+    and no part passes over them.
+- **Verdict: VERIFIED at 26.70 (score 90.29). Not refuted (the champion is 66.97 on the same bench), but not a new
+  leader.**
+  - It ties the pin knee H1 (27.20 on the same round-3 protocol; 0.5 is under the 1-point rule) at +14.25 complexity.
+  - It is 7.6 points behind minarc BDp.
+- **Open buildability items the bench cannot see.**
+  - **Pressure angle.** The crown cam's pressure angle is about 41 deg. That assumes a 1.5 slope on the folded lobe, a
+    4 mm crank, a 1:1 lever, and the <= 7 mm pitch radius an O20 crown ring allows. The claimed 27 deg needs the 12 mm
+    pitch radius of the O30 flange. A 2:1 follower lever brings it to about 23 deg.
+  - **J2 encoder.** Link 1's pin through hub 2's cap displaces J2's magnet / PCB encoder, so J2 must be read elsewhere,
+    for example off the cam ring.
+  - **Pushrod.** The pushrod has to climb to crown height at both ends. It stays behind link 2a, away from the skin, but
+    it adds stack height.
