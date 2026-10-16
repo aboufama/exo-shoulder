@@ -138,3 +138,23 @@ between J1's band and hub parking (docs/FINDINGS.md):
 - so a rigid crank must stand 14-60 mm (p90) above the skin at its far end.
 
 The truss has three such cranks, where the 3R has one J2 hub.
+
+## Measured, step 2: the full model on the informed legs (Bench(60,160) fast, every model check on)
+
+`docs/concepts/sweeps/foldfree-rus-truss.json`. Each evaluation takes 500-1100 s on the shared box: the rod and crank
+marches leave the grid box and fall back to libigl's exact path.
+
+| config | legs (seat / stud / beta / branch) | p | kin-valid ws | det ok ws | taken | gap | why |
+|---|---|---|---|---|---|---|---|
+| informed-1 | (-24,4)/(10,105)/65/+1, (-42,20)/(10,150)/65/+1, (-10,40)/(0,150)/70/+1 | 100 | 0.58 | 0.675 | 0 | 275.0 | cranks fitted at the 220 mm march ceiling (r_T 230 on all three legs), F 74-148; 125 collisions (bracket / hub vs crank 2, ball / ball) |
+| informed-2 | (-24,4)/(10,90)/65/-1, (-36,16)/(10,120)/65/-1, (-24,78)/(0,120)/80/-1 | 100 | 0.705 | 0.80 | 0 | 275.0 | r_T 230 on all three legs again, rods 212-294 mm; 154 collisions (ball 1 / ball 2: the studs sat 10 mm apart, crank 0 / crank 1) |
+| informed-3 | (-24,4)/(10,90)/65/-1, (-36,16)/(10,120)/65/-1, (-24,78)/(0,150)/85/-1 | 90 | see the row | | | | the 90th-percentile fit (5-10 % of poses given up as contact) |
+
+Each leg's own validity in the model (closure + 15 deg transmission) is 0.93-0.96 of the workspace, so the fold
+lever works per leg. The truss as a whole is limited by three things:
+- the parallel singularity: det >= 0.10 holds on only 0.675-0.80 of the workspace when the fold-free studs cluster
+  on the posterior humeral head;
+- the cranks: every fold-free crank is fitted at or near the ceiling, because in a few % of the valid poses the
+  crank's middle runs under the raised or extended arm (crank_park: mid-span need p50 65, p90 105-130 mm, against
+  55-74 mm at the tip and 93-114 mm at the hub seat);
+- part collisions between three legs that share the posterior shoulder.

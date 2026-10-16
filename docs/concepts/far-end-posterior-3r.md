@@ -74,3 +74,14 @@ Control (same code): the plain 3R at rail-elbow k2221's axes, 51.33.
    every GH line used by the leaders lies inside the torso, axilla or neck.
 3. The leader's direction stays: fold must be beaten by moving J2 METAL off the J2 ray (osn's "next lever"), not by
    choosing fold-free GH-ray layouts.
+
+## Confirmed in the leader's family (2026-10-16 ~02:55, raglan-knee-3r coarse sweep)
+
+The posterior J1 line was also tried in the zero-passive-translation leader family (the pin knee: J1 / J2 hubs on GH
+rays, offset skin-normal J3, flat two-pin knee), 64 layouts on the farm (`docs/concepts/sweeps/raglan-knee-3r.json`,
+stage `coarse-posterior-J1`: J1 bvec(-24, 4) / (-18, 20) / (-18, 24) / (-30, 8), J3 wdir(80 / 100, -90), arcs 65 / 65 and
+65 / 75, b3 0 / 0.35, both branches; J2 seat = the closure's home direction, tools/osn_fold_seeds.py `layout_params`).
+Best 122.45 (median 255.8) against 26.34 for the pin knee's own seats: the fold drops to 6-20 poses of 220 (from 47),
+but 46-69 poses go to skin (hub 2 and link 2 over the neck and chest), in-band 14 0.17-0.25, contact 0.23-0.29, and
+23 of 64 layouts close in no pose at all. Same verdict, other code: the fold-free posterior line moves the poses from
+the fold column to the skin column.

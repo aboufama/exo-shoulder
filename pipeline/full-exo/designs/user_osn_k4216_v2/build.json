@@ -1022,5 +1022,877 @@
    "faces": 4,
    "solids": 1
   }
- ]
+ ],
+ "check": [
+  {
+   "pose_name": "rest (bench first)",
+   "pose": [
+    30.0,
+    3.0,
+    -30.0
+   ],
+   "closes": true,
+   "res_deg": 0.0,
+   "slides": [
+    -0.05,
+    -0.19,
+    0.0
+   ],
+   "samples": {
+    "hub1": {
+     "outside_max": 0.1426,
+     "abs_max": 0.1426
+    },
+    "hub2": {
+     "outside_max": 0.1433,
+     "abs_max": 0.1433
+    },
+    "hub3": {
+     "outside_max": 0.1434,
+     "abs_max": 0.1434
+    },
+    "neck": {
+     "outside_max": 0.1702,
+     "abs_max": 0.8221
+    },
+    "bridge": {
+     "outside_max": -0.0001,
+     "abs_max": 0.0001
+    },
+    "L1": {
+     "outside_max": 4.0203,
+     "abs_max": 4.0203
+    },
+    "L2": {
+     "outside_max": 13.6682,
+     "abs_max": 13.6682
+    }
+   },
+   "within_0p5": true
+  },
+  {
+   "pose_name": "forward reach",
+   "pose": [
+    60.0,
+    90.0,
+    0.0
+   ],
+   "closes": false,
+   "res_deg": 12.3371,
+   "slides": [
+    -1.67,
+    -3.27,
+    0.42
+   ],
+   "samples": {
+    "hub1": {
+     "outside_max": 0.1432,
+     "abs_max": 0.1432
+    },
+    "hub2": {
+     "outside_max": 0.1434,
+     "abs_max": 0.1434
+    },
+    "hub3": {
+     "outside_max": 0.1435,
+     "abs_max": 0.1435
+    },
+    "neck": {
+     "outside_max": 0.1703,
+     "abs_max": 0.822
+    },
+    "bridge": {
+     "outside_max": 0.0,
+     "abs_max": 0.0
+    },
+    "L1": {
+     "outside_max": 4.0203,
+     "abs_max": 4.0203
+    },
+    "L2": {
+     "outside_max": 13.6683,
+     "abs_max": 13.6683
+    }
+   },
+   "within_0p5": true
+  },
+  {
+   "pose_name": "abduction 90",
+   "pose": [
+    0.0,
+    90.0,
+    30.0
+   ],
+   "closes": false,
+   "res_deg": 0.0001,
+   "slides": [
+    -3.94,
+    7.96,
+    0.0
+   ],
+   "samples": {
+    "hub1": {
+     "outside_max": 0.1431,
+     "abs_max": 0.1431
+    },
+    "hub2": {
+     "outside_max": 0.1433,
+     "abs_max": 0.1433
+    },
+    "hub3": {
+     "outside_max": 0.1435,
+     "abs_max": 0.1435
+    },
+    "neck": {
+     "outside_max": 0.1702,
+     "abs_max": 0.822
+    },
+    "bridge": {
+     "outside_max": -0.0,
+     "abs_max": 0.0
+    },
+    "L1": {
+     "outside_max": 4.0203,
+     "abs_max": 4.0203
+    },
+    "L2": {
+     "outside_max": 13.6683,
+     "abs_max": 13.6683
+    }
+   },
+   "within_0p5": true
+  },
+  {
+   "pose_name": "overhead (bench highest)",
+   "pose": [
+    45.0,
+    165.0,
+    -90.0
+   ],
+   "closes": true,
+   "res_deg": 0.0002,
+   "slides": [
+    -10.92,
+    -4.12,
+    0.0
+   ],
+   "samples": {
+    "hub1": {
+     "outside_max": 0.143,
+     "abs_max": 0.143
+    },
+    "hub2": {
+     "outside_max": 0.1433,
+     "abs_max": 0.1433
+    },
+    "hub3": {
+     "outside_max": 0.1436,
+     "abs_max": 0.1436
+    },
+    "neck": {
+     "outside_max": 0.1703,
+     "abs_max": 0.822
+    },
+    "bridge": {
+     "outside_max": 0.0,
+     "abs_max": 0.0
+    },
+    "L1": {
+     "outside_max": 4.0203,
+     "abs_max": 4.0203
+    },
+    "L2": {
+     "outside_max": 13.6682,
+     "abs_max": 13.6682
+    }
+   },
+   "within_0p5": true
+  },
+  {
+   "pose_name": "overhead raise elev 150",
+   "pose": [
+    30.0,
+    150.0,
+    -60.0
+   ],
+   "closes": true,
+   "res_deg": 0.0002,
+   "slides": [
+    -11.16,
+    -3.94,
+    0.0
+   ],
+   "samples": {
+    "hub1": {
+     "outside_max": 0.1416,
+     "abs_max": 0.1416
+    },
+    "hub2": {
+     "outside_max": 0.1433,
+     "abs_max": 0.1433
+    },
+    "hub3": {
+     "outside_max": 0.1435,
+     "abs_max": 0.1435
+    },
+    "neck": {
+     "outside_max": 0.1702,
+     "abs_max": 0.8221
+    },
+    "bridge": {
+     "outside_max": -0.0,
+     "abs_max": 0.0
+    },
+    "L1": {
+     "outside_max": 4.0203,
+     "abs_max": 4.0203
+    },
+    "L2": {
+     "outside_max": 13.6683,
+     "abs_max": 13.6683
+    }
+   },
+   "within_0p5": true
+  },
+  {
+   "pose_name": "behind the back (pocket)",
+   "pose": [
+    -80.0,
+    39.0,
+    101.0
+   ],
+   "closes": true,
+   "res_deg": 0.0001,
+   "slides": [
+    -1.51,
+    6.14,
+    -0.0
+   ],
+   "samples": {
+    "hub1": {
+     "outside_max": 0.1426,
+     "abs_max": 0.1426
+    },
+    "hub2": {
+     "outside_max": 0.1433,
+     "abs_max": 0.1433
+    },
+    "hub3": {
+     "outside_max": 0.1435,
+     "abs_max": 0.1435
+    },
+    "neck": {
+     "outside_max": 0.1702,
+     "abs_max": 0.8221
+    },
+    "bridge": {
+     "outside_max": -0.0001,
+     "abs_max": 0.0001
+    },
+    "L1": {
+     "outside_max": 4.0203,
+     "abs_max": 4.0203
+    },
+    "L2": {
+     "outside_max": 13.6683,
+     "abs_max": 13.6683
+    }
+   },
+   "within_0p5": true
+  },
+  {
+   "pose_name": "behind the back (red-team pinch)",
+   "pose": [
+    -75.0,
+    45.0,
+    120.0
+   ],
+   "closes": true,
+   "res_deg": 0.0001,
+   "slides": [
+    -1.92,
+    6.58,
+    0.0
+   ],
+   "samples": {
+    "hub1": {
+     "outside_max": 0.1443,
+     "abs_max": 0.1443
+    },
+    "hub2": {
+     "outside_max": 0.1433,
+     "abs_max": 0.1433
+    },
+    "hub3": {
+     "outside_max": 0.1435,
+     "abs_max": 0.1435
+    },
+    "neck": {
+     "outside_max": 0.1703,
+     "abs_max": 0.822
+    },
+    "bridge": {
+     "outside_max": -0.0,
+     "abs_max": 0.0
+    },
+    "L1": {
+     "outside_max": 4.0203,
+     "abs_max": 4.0203
+    },
+    "L2": {
+     "outside_max": 13.6683,
+     "abs_max": 13.6683
+    }
+   },
+   "within_0p5": true
+  }
+ ],
+ "check_clips": [
+  {
+   "label": "rest (first frame)",
+   "clip": "Raise overhead",
+   "frame": 0,
+   "pose": [
+    30.0,
+    3.0,
+    -30.0
+   ],
+   "closes": true,
+   "res_deg": 0.0,
+   "slides_model": [
+    -0.047,
+    -0.192,
+    0.0
+   ],
+   "slides_clip": [
+    -0.047,
+    -0.192,
+    0.0
+   ],
+   "frame_dev_mm": 0.0001,
+   "samples": {
+    "hub1": {
+     "outside_max": 0.1426,
+     "n": 80
+    },
+    "hub2": {
+     "outside_max": 0.1433,
+     "n": 80
+    },
+    "hub3": {
+     "outside_max": 0.1434,
+     "n": 80
+    },
+    "neck": {
+     "outside_max": 0.1702,
+     "n": 32
+    },
+    "bridge": {
+     "outside_max": -0.0001,
+     "n": 12
+    },
+    "L1": {
+     "outside_max": 4.0203,
+     "n": 36
+    },
+    "L2": {
+     "outside_max": 13.6682,
+     "n": 145
+    }
+   },
+   "within_0p5": true
+  },
+  {
+   "label": "Raise overhead peak",
+   "clip": "Raise overhead",
+   "frame": 36,
+   "pose": [
+    30.0,
+    65.9,
+    -42.9
+   ],
+   "closes": true,
+   "res_deg": 0.0001,
+   "slides_model": [
+    -4.238,
+    -4.937,
+    0.0
+   ],
+   "slides_clip": [
+    -4.238,
+    -4.937,
+    0.0
+   ],
+   "frame_dev_mm": 7e-05,
+   "samples": {
+    "hub1": {
+     "outside_max": 0.1433,
+     "n": 80
+    },
+    "hub2": {
+     "outside_max": 0.1433,
+     "n": 80
+    },
+    "hub3": {
+     "outside_max": 0.1435,
+     "n": 80
+    },
+    "neck": {
+     "outside_max": 0.1702,
+     "n": 32
+    },
+    "bridge": {
+     "outside_max": -0.0,
+     "n": 12
+    },
+    "L1": {
+     "outside_max": 4.0203,
+     "n": 36
+    },
+    "L2": {
+     "outside_max": 13.6683,
+     "n": 145
+    }
+   },
+   "within_0p5": true
+  },
+  {
+   "label": "Raise overhead middle",
+   "clip": "Raise overhead",
+   "frame": 144,
+   "pose": [
+    30.0,
+    65.9,
+    -42.9
+   ],
+   "closes": true,
+   "res_deg": 0.0001,
+   "slides_model": [
+    -4.238,
+    -4.937,
+    0.0
+   ],
+   "slides_clip": [
+    -4.238,
+    -4.937,
+    0.0
+   ],
+   "frame_dev_mm": 7e-05,
+   "samples": {
+    "hub1": {
+     "outside_max": 0.1433,
+     "n": 80
+    },
+    "hub2": {
+     "outside_max": 0.1433,
+     "n": 80
+    },
+    "hub3": {
+     "outside_max": 0.1435,
+     "n": 80
+    },
+    "neck": {
+     "outside_max": 0.1702,
+     "n": 32
+    },
+    "bridge": {
+     "outside_max": -0.0,
+     "n": 12
+    },
+    "L1": {
+     "outside_max": 4.0203,
+     "n": 36
+    },
+    "L2": {
+     "outside_max": 13.6683,
+     "n": 145
+    }
+   },
+   "within_0p5": true
+  },
+  {
+   "label": "Drink from a cup peak",
+   "clip": "Drink from a cup",
+   "frame": 72,
+   "pose": [
+    95.0,
+    68.7,
+    -48.2
+   ],
+   "closes": true,
+   "res_deg": 0.0001,
+   "slides_model": [
+    -2.349,
+    -3.814,
+    0.0
+   ],
+   "slides_clip": [
+    -2.349,
+    -3.814,
+    0.0
+   ],
+   "frame_dev_mm": 7e-05,
+   "samples": {
+    "hub1": {
+     "outside_max": 0.144,
+     "n": 80
+    },
+    "hub2": {
+     "outside_max": 0.1433,
+     "n": 80
+    },
+    "hub3": {
+     "outside_max": 0.1436,
+     "n": 80
+    },
+    "neck": {
+     "outside_max": 0.1703,
+     "n": 32
+    },
+    "bridge": {
+     "outside_max": 0.0001,
+     "n": 12
+    },
+    "L1": {
+     "outside_max": 4.0203,
+     "n": 36
+    },
+    "L2": {
+     "outside_max": 13.6683,
+     "n": 145
+    }
+   },
+   "within_0p5": true
+  },
+  {
+   "label": "Comb hair peak",
+   "clip": "Comb hair",
+   "frame": 105,
+   "pose": [
+    78.1,
+    143.1,
+    -67.1
+   ],
+   "closes": true,
+   "res_deg": 0.0002,
+   "slides_model": [
+    -9.419,
+    -4.938,
+    -0.0
+   ],
+   "slides_clip": [
+    -9.419,
+    -4.938,
+    -0.0
+   ],
+   "frame_dev_mm": 9e-05,
+   "samples": {
+    "hub1": {
+     "outside_max": 0.1443,
+     "n": 80
+    },
+    "hub2": {
+     "outside_max": 0.1433,
+     "n": 80
+    },
+    "hub3": {
+     "outside_max": 0.1435,
+     "n": 80
+    },
+    "neck": {
+     "outside_max": 0.1702,
+     "n": 32
+    },
+    "bridge": {
+     "outside_max": -0.0001,
+     "n": 12
+    },
+    "L1": {
+     "outside_max": 4.0203,
+     "n": 36
+    },
+    "L2": {
+     "outside_max": 13.6683,
+     "n": 145
+    }
+   },
+   "within_0p5": true
+  },
+  {
+   "label": "Reach a high shelf peak",
+   "clip": "Reach a high shelf",
+   "frame": 75,
+   "pose": [
+    82.0,
+    132.0,
+    -82.0
+   ],
+   "closes": true,
+   "res_deg": 0.0002,
+   "slides_model": [
+    -9.619,
+    -4.855,
+    0.0
+   ],
+   "slides_clip": [
+    -9.619,
+    -4.855,
+    0.0
+   ],
+   "frame_dev_mm": 6e-05,
+   "samples": {
+    "hub1": {
+     "outside_max": 0.1438,
+     "n": 80
+    },
+    "hub2": {
+     "outside_max": 0.1433,
+     "n": 80
+    },
+    "hub3": {
+     "outside_max": 0.1435,
+     "n": 80
+    },
+    "neck": {
+     "outside_max": 0.1703,
+     "n": 32
+    },
+    "bridge": {
+     "outside_max": 0.0,
+     "n": 12
+    },
+    "L1": {
+     "outside_max": 4.0203,
+     "n": 36
+    },
+    "L2": {
+     "outside_max": 13.6682,
+     "n": 145
+    }
+   },
+   "within_0p5": true
+  },
+  {
+   "label": "Wash opposite shoulder peak",
+   "clip": "Wash opposite shoulder",
+   "frame": 102,
+   "pose": [
+    140.0,
+    59.6,
+    -50.3
+   ],
+   "closes": true,
+   "res_deg": 0.0002,
+   "slides_model": [
+    -1.825,
+    -3.331,
+    -0.0
+   ],
+   "slides_clip": [
+    -1.825,
+    -3.331,
+    -0.0
+   ],
+   "frame_dev_mm": 6e-05,
+   "samples": {
+    "hub1": {
+     "outside_max": 0.1444,
+     "n": 80
+    },
+    "hub2": {
+     "outside_max": 0.1433,
+     "n": 80
+    },
+    "hub3": {
+     "outside_max": 0.1436,
+     "n": 80
+    },
+    "neck": {
+     "outside_max": 0.1703,
+     "n": 32
+    },
+    "bridge": {
+     "outside_max": 0.0,
+     "n": 12
+    },
+    "L1": {
+     "outside_max": 4.0203,
+     "n": 36
+    },
+    "L2": {
+     "outside_max": 13.6683,
+     "n": 145
+    }
+   },
+   "within_0p5": true
+  },
+  {
+   "label": "Reach back pocket peak",
+   "clip": "Reach back pocket",
+   "frame": 72,
+   "pose": [
+    -80.0,
+    39.0,
+    101.1
+   ],
+   "closes": true,
+   "res_deg": 0.0001,
+   "slides_model": [
+    -1.512,
+    6.142,
+    -0.0
+   ],
+   "slides_clip": [
+    -1.512,
+    6.142,
+    -0.0
+   ],
+   "frame_dev_mm": 8e-05,
+   "samples": {
+    "hub1": {
+     "outside_max": 0.1422,
+     "n": 80
+    },
+    "hub2": {
+     "outside_max": 0.1434,
+     "n": 80
+    },
+    "hub3": {
+     "outside_max": 0.1435,
+     "n": 80
+    },
+    "neck": {
+     "outside_max": 0.1702,
+     "n": 32
+    },
+    "bridge": {
+     "outside_max": 0.0,
+     "n": 12
+    },
+    "L1": {
+     "outside_max": 4.0203,
+     "n": 36
+    },
+    "L2": {
+     "outside_max": 13.6682,
+     "n": 145
+    }
+   },
+   "within_0p5": true
+  },
+  {
+   "label": "Wave peak",
+   "clip": "Wave",
+   "frame": 63,
+   "pose": [
+    15.0,
+    95.0,
+    -80.0
+   ],
+   "closes": true,
+   "res_deg": 0.0001,
+   "slides_model": [
+    -7.311,
+    -5.417,
+    0.0
+   ],
+   "slides_clip": [
+    -7.311,
+    -5.417,
+    0.0
+   ],
+   "frame_dev_mm": 9e-05,
+   "samples": {
+    "hub1": {
+     "outside_max": 0.1438,
+     "n": 80
+    },
+    "hub2": {
+     "outside_max": 0.1433,
+     "n": 80
+    },
+    "hub3": {
+     "outside_max": 0.1435,
+     "n": 80
+    },
+    "neck": {
+     "outside_max": 0.1702,
+     "n": 32
+    },
+    "bridge": {
+     "outside_max": -0.0,
+     "n": 12
+    },
+    "L1": {
+     "outside_max": 4.0203,
+     "n": 36
+    },
+    "L2": {
+     "outside_max": 13.6683,
+     "n": 145
+    }
+   },
+   "within_0p5": true
+  },
+  {
+   "label": "Walking arm swing peak",
+   "clip": "Walking arm swing",
+   "frame": 18,
+   "pose": [
+    90.0,
+    24.0,
+    -90.0
+   ],
+   "closes": true,
+   "res_deg": 0.0001,
+   "slides_model": [
+    -0.905,
+    -2.17,
+    -0.0
+   ],
+   "slides_clip": [
+    -0.905,
+    -2.17,
+    -0.0
+   ],
+   "frame_dev_mm": 7e-05,
+   "samples": {
+    "hub1": {
+     "outside_max": 0.1444,
+     "n": 80
+    },
+    "hub2": {
+     "outside_max": 0.1433,
+     "n": 80
+    },
+    "hub3": {
+     "outside_max": 0.1435,
+     "n": 80
+    },
+    "neck": {
+     "outside_max": 0.1703,
+     "n": 32
+    },
+    "bridge": {
+     "outside_max": 0.0,
+     "n": 12
+    },
+    "L1": {
+     "outside_max": 4.0203,
+     "n": 36
+    },
+    "L2": {
+     "outside_max": 13.6683,
+     "n": 145
+    }
+   },
+   "within_0p5": true
+  }
+ ],
+ "kinematics_exact": {
+  "clip_frames": 10,
+  "all_within_0p5": true,
+  "max_frame_dev_mm": 0.0001,
+  "max_model_sample_outside_mm": 0.1703
+ }
 }
