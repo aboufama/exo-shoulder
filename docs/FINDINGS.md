@@ -1130,3 +1130,29 @@ What it means:
      the agent's BB stream;
   3. its own two-lens verification;
   4. a MuJoCo feel and stop-impact red team at the J2 stops.
+
+## Feel of the near-fold J2 stop, measured (2026-10-16; docs/research/fold-stop-feel.md)
+
+Method: quasi-static Jacobian analysis (`docs/research/fold_stop_feel.py`); T = 3 N.mm per O20 pair and per knee pin;
+fit clips at their stored 10 fps.
+
+**Rate ratio and J2 contact speed.** At B's claimed stop (phi 162.70) the fold margin is 1.37 deg and the J2 rate
+ratio is **6.36**. With the stops at the kit's 5-deg margin (phi 20.79 / 146.61) it is 3.45; H1 is 3.15. At the clips'
+peak arm speed of 127 deg/s, J2 reaches the stop at 805 / 437 / 399 deg/s.
+
+**Cuff force from bearing friction.** 0.39 N at B's stop, against 0.20 N for both the kit rule and H1. Over the clips
+the peak is 0.28 N for both B variants and 0.19 N for H1, against the 5 N limit. The figures scale linearly with T.
+
+**Stop impact.** 5.5 / 2.1 / 1.0 mJ at 127 deg/s, and 1.2 / 0.47 / 0.21 mJ at the clips' 60 deg/s peak J1-J3 rate.
+For H1 this is the chain only: with no K, its stop also blocks the arm itself.
+
+**Spring K preload.** B needs 45 N.mm (friction 23 + weight 25) and the kit rule needs 33. Over the 63-deg stroke a
+music-wire spring at D 15.5 mm takes 4-7 mm of axial body and does not fit inside the v5 O20 stack. At B's duty the
+4-6 mm candidates exceed their fatigue rating.
+
+**No jam at the stop.** The J1-K-J3 sub-chain has a condition number of 3.9 there, so K opens at 2.1 rad/rad. The
+wearer feels a spring step of about 0.8-1.7 N at the cuff.
+
+**Red team.** The model's stretched state holds phi constant while the J2 joint angle drifts 0 to 14.3 deg off its
+contact value as K opens (15.1 deg for the kit rule). A hard stop on J2 cannot produce that law, so B's stretched poses
+must be re-measured with a q2 stop.
