@@ -2,6 +2,7 @@
 """The exo-gpu-bench RunPod POD (outside the serverless worker quota) - stdlib only, the API key is never printed.
 
     python3 tools/gpu_pod.py create [--gpu "NVIDIA RTX 2000 Ada Generation"]   start the pod (secure EU-RO-1 + the farm volume)
+        [--name N --spool S] [--payload f1,f2,.. --jobs j1.sh,..]            a 2nd pod / code + jobs carried in the pod itself
     python3 tools/gpu_pod.py status                                           its state, $/h, uptime
     python3 tools/gpu_pod.py stop | terminate                                 stop (keeps the container disk) / terminate
     python3 tools/gpu_pod.py submit <script.sh> <job name> [--include PATH]... drop a job (+ files under exo-farm/gpu/code/)
@@ -38,13 +39,25 @@ def pods():
                              "machine { gpuDisplayName } } } }")["myself"]["pods"] if p["name"].startswith("exo-gpu")]
 
 
-def create(gpu, name=NAME, spool="gpu"):
-    """spool = the pod's queue / out folder under exo-farm/ (a 2nd pod gets its own: gpu2, ...; code/ stays in exo-farm/gpu)"""
+def create(gpu, name=NAME, spool="gpu", payload=(), jobs=()):
+    """spool = the pod's queue / out folder under exo-farm/ (a 2nd pod gets its own: gpu2, ...; code/ stays in exo-farm/gpu).
+    payload: repo files carried IN the pod definition (env GB_PAYLOAD, tar.gz + base64, unpacked to /root/xs at start) and
+    jobs: payload scripts queued in the pod's own spool at start - no farm round trip (the farm queue can be 30+ jobs deep)"""
+    import base64, io, tarfile
     if any(p["name"] == name and p["desiredStatus"] == "RUNNING" for p in pods()): print("already running"); return
+    spl = SPOOL.replace("exo-farm/gpu;", f"exo-farm/{spool};"); env = ""
+    if payload:
+        root = os.path.dirname(os.path.dirname(os.path.abspath(__file__))); bio = io.BytesIO()
+        with tarfile.open(fileobj=bio, mode="w:gz") as t:
+            for f in payload: t.add(os.path.join(root, f), arcname=f)
+        env = ', env: [{key: "GB_PAYLOAD", value: "%s"}]' % base64.b64encode(bio.getvalue()).decode()
+        pre = (f"mkdir -p /root/xs /workspace/exo-farm/{spool}/queue; echo $GB_PAYLOAD | base64 -d | tar xz -C /root/xs; "
+               + "".join(f"cp /root/xs/{j} /workspace/exo-farm/{spool}/queue/{k:02d}_{os.path.basename(j)}; " for k, j in enumerate(jobs)))
+        spl = pre + spl
     q = ('mutation { podFindAndDeployOnDemand(input: { cloudType: SECURE, gpuCount: 1, gpuTypeId: %s, name: "%s", '
          'imageName: "%s", containerDiskInGb: 30, volumeInGb: 0, networkVolumeId: "%s", dataCenterId: "EU-RO-1", '
-         'volumeMountPath: "/workspace", startSsh: false, dockerArgs: %s }) { id desiredStatus costPerHr machine { gpuDisplayName } } }'
-         % (json.dumps(gpu), name, IMAGE, VOLUME, json.dumps("bash -c " + json.dumps(SPOOL.replace("exo-farm/gpu;", f"exo-farm/{spool};")))))
+         'volumeMountPath: "/workspace", startSsh: false%s, dockerArgs: %s }) { id desiredStatus costPerHr machine { gpuDisplayName } } }'
+         % (json.dumps(gpu), name, IMAGE, VOLUME, env, json.dumps("bash -c " + json.dumps(spl))))
     print(json.dumps(G.gql(q)["podFindAndDeployOnDemand"]))
 
 
@@ -88,7 +101,8 @@ if __name__ == "__main__":
     a = sys.argv[1:] or ["status"]
     nm = a[a.index("--name") + 1] if "--name" in a else NAME          # a 2nd pod: --name exo-gpu-bench2 --spool gpu2
     sp = a[a.index("--spool") + 1] if "--spool" in a else "gpu"
-    if a[0] == "create": create(a[a.index("--gpu") + 1] if "--gpu" in a else "NVIDIA RTX 2000 Ada Generation", nm, sp)
+    lst = lambda f: a[a.index(f) + 1].split(",") if f in a else []
+    if a[0] == "create": create(a[a.index("--gpu") + 1] if "--gpu" in a else "NVIDIA RTX 2000 Ada Generation", nm, sp, lst("--payload"), lst("--jobs"))
     elif a[0] in ("stop", "terminate"): act(a[0], nm)
     elif a[0] == "submit": submit(a[1], a[2], [x for i, x in enumerate(a) if i > 0 and a[i - 1] == "--include"], sp)
     elif a[0] == "cancel": cancel()

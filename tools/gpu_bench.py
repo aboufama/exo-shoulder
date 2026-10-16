@@ -488,12 +488,16 @@ def score(Bw, ch, prof, okw, overlap):
     nout = torch.zeros(C, dtype=torch.float64, device=dev)            # metal points outside the grid box, per config
     box = lambda Xp: (((Xp + HALF) / H_GRID < 0) | ((Xp + HALF) / H_GRID > Bw.n - 1 - 1e-9)).any(-1).sum(1).to(torch.float64)
     in14 = torch.zeros((C, P), dtype=torch.float64, device=dev); in10 = in14.clone()
+    ms = [ch.weight(n).shape[1] for n in ch.order]; cut = np.r_[0, np.cumsum(ms)]
+    in14m = torch.zeros((C, P, len(ms)), dtype=torch.float64, device=dev)          # per-member in-band sums (reporting)
     ci, pi = torch.nonzero(take, as_tuple=True)
     for c0, p0 in items_chunks(ci, pi, max(1, budget(dev) // 40 // W.shape[1])):
         X = torch.cat([pts[n][c0, p0] for n in ch.order], 1); n_, m_ = X.shape[:2]
         d = Bw.dist(p0[:, None].expand(-1, m_).reshape(-1), X.reshape(-1, 3)).reshape(n_, m_)
         fmin[c0, p0] = d.amin(1); w = W[c0]
         in14[c0, p0] = (w * ((d >= 2) & (d <= 14))).sum(1); in10[c0, p0] = (w * ((d >= 2) & (d <= 10))).sum(1)
+        wi = w * ((d >= 2) & (d <= 14))
+        in14m[c0, p0] = torch.stack([wi[:, cut[k]:cut[k + 1]].sum(1) for k in range(len(ms))], 1)
         CR = torch.cat([crown_pts(ch, h, prof[h][:, 0], c0, p0) for h in ("hub1", "hub2", "hub3")], 1)
         dc = Bw.dist(p0[:, None].expand(-1, CR.shape[1]).reshape(-1), CR.reshape(-1, 3)).reshape(n_, -1)
         cmin[c0, p0] = dc.amin(1)
@@ -510,6 +514,16 @@ def score(Bw, ch, prof, okw, overlap):
     den = nw.sum(1); ib14 = torch.where(den > 0, (in14 * (good & clip)).sum(1) / den.clamp(min=1e-9), torch.zeros_like(den))
     ib10 = torch.where(den > 0, (in10 * (good & clip)).sum(1) / den.clamp(min=1e-9), torch.zeros_like(den))
     ntake = take.sum(1); contact = torch.where(ntake > 0, (take & ~((fmin >= 0) & (cmin >= 0) & (tmin >= 0))).sum(1) / ntake.clamp(min=1), torch.zeros_like(reach))
+    # near-touch (the verifier's v_near1, docs/concepts/verify/spine-parked-j2-3r.py top_check): a taken pose whose
+    # underside or top-face metal is < 1 mm from the skin counts as contact (crowns / walls only below 0, as there)
+    gn = good & (fmin >= 1) & (tmin >= 1)
+    reach_n = (gn & ws).sum(1) / ws.sum(); follow_n = (gn & clip).sum(1) / clip.sum()
+    nwn = (gn & clip).to(torch.float64) * W.sum(1, keepdim=True); denn = nwn.sum(1)
+    ib14_n = torch.where(denn > 0, (in14 * (gn & clip)).sum(1) / denn.clamp(min=1e-9), torch.zeros_like(denn))
+    contact_n = torch.where(ntake > 0, (take & ~gn).sum(1) / ntake.clamp(min=1), torch.zeros_like(reach))
+    wm = torch.stack([W[:, cut[k]:cut[k + 1]].sum(1) for k in range(len(ms))], 1)            # (C, nM)
+    gc = (good & clip).to(torch.float64)
+    ibm = (in14m * gc[..., None]).sum(1) / (gc.sum(1, keepdim=True) * wm).clamp(min=1e-9)
     # audit: median nearest-neighbour spacing of every member's points at the first taken (else closing) pose <= 4 mm
     sel = torch.where(take.any(1, keepdim=True), take, okw); i0 = torch.where(sel.any(1), sel.to(torch.int64).argmax(1), torch.zeros(C, dtype=torch.int64, device=dev))
     sparse = torch.zeros(C, dtype=torch.bool, device=dev); ar = torch.arange(C, device=dev)
@@ -539,6 +553,7 @@ def score(Bw, ch, prof, okw, overlap):
             if max(3, int(math.floor(float(med) * 70.0 / 2.0)) + 1) != int(st["ns"][a]): sparse[a] = True
     hubF = torch.stack([prof[h][:, 0] for h in ("hub1", "hub2", "hub3")], 1)
     return dict(reach=reach, follow=follow, inband14=ib14, inband10=ib10, contact=contact, sparse=sparse, hubF=hubF, nout=nout,
+                reach_n=reach_n, follow_n=follow_n, inband14_n=ib14_n, contact_n=contact_n, ibm=ibm,
                 ok=okw.to(torch.float64).mean(1), collide=torch.where(okw.any(1), (hit & okw).sum(1) / okw.sum(1).clamp(min=1), torch.zeros_like(reach)))
 
 
@@ -591,7 +606,10 @@ def evaluate(configs, Bw, Bf=None, chunk=48, overlap=1.0 - 1e-4, log=None):
                 hubF = [round(float(x), 2) for x in S["hubF"][a]]; hub_ok = all(x <= 140.0 for x in hubF); honest = not bool(S["sparse"][a])
                 if bool(mism[a]):
                     out[i] = dict(params=ps[i], gap=999.0, error="strap sample count differs between the fit and the wear bench"); continue
-                out[i] = dict(params=ps[i], gap=round(v + (0.0 if (honest and hub_ok) else 100.0), 2), v_gap=v, honest=honest and hub_ok,
+                vn = gap_of(float(S["inband14_n"][a]), float(S["follow_n"][a]), float(S["reach_n"][a]), float(S["contact_n"][a]))
+                pen = 0.0 if (honest and hub_ok) else 100.0
+                out[i] = dict(params=ps[i], gap=round(v + pen, 2), v_gap=v, near=round(vn + pen, 2), v_near=vn, honest=honest and hub_ok,
+                              inband_member={n: round(float(S["ibm"][a][k]), 4) for k, n in enumerate(chw.order)},
                               sparse=bool(S["sparse"][a]), hub_F=hubF, hub_F_ok=hub_ok, closure_k2=round(float(S["ok"][a]), 4),
                               collide=round(float(S["collide"][a]), 4), outside=int(S["nout"][a]), **r)
             if log: log(f"  group inv2={inv2} inv3={inv3}: {len(ii)} configs in {time.time() - t0:.1f} s" + (f" {tm.s}" if tm.on else ""))
@@ -619,7 +637,7 @@ def cpu_eval(args):
         _, r = M.evaluate(Bw, dict(p), fixed_prof=prof)
     except Exception as e:                                                    # noqa: BLE001
         return dict(error=f"{type(e).__name__}: {e}"[:200], gap=None)
-    keep = ("gap", "reach", "follow", "inband14", "inband10", "contact", "honest", "hub_F")
+    keep = ("gap", "near", "reach", "follow", "inband14", "inband10", "contact", "honest", "hub_F", "inband_member")
     return {k: r.get(k) for k in keep} | dict(v_gap=(r.get("v") or {}).get("gap"), secs=round(time.time() - t, 2), mode=Bw.mode)
 
 
@@ -703,6 +721,224 @@ def search(Bw, Bf, out_json, budget_s=1800.0, n0=4096, elites=16, lam=24, seed=0
     return min(E, key=lambda x: x["gap"])
 
 
+# ---- exhaustive screen: Sobol map with exact lower bounds, then the full bench on what can still win ---------------
+def sobol_configs(n, seed=0, part=0, nparts=1):
+    """= tools/zc_frontier.py cmd_sobol's map of the zero-complexity box (seat region only; el area-uniform, J3 direction
+    area-uniform on the sphere cap wd 20-175, arcs 12-168, both branches, q 0.8-1, end_extra 0-8); every nparts-th point"""
+    from scipy.stats import qmc
+    m = int(math.ceil(math.log2(max(2, n * 1.15))))
+    X = qmc.Sobol(d=11, scramble=True, seed=seed).random(2 ** m); out = []
+    s0, s1 = math.sin(math.radians(-20)), math.sin(math.radians(90))
+    c0, c1 = math.cos(math.radians(20)), math.cos(math.radians(175))
+    for i, x in enumerate(X):
+        if i % nparts != part: continue
+        az = -110 + x[0] * 245; el = math.degrees(math.asin(s0 + x[1] * (s1 - s0)))
+        if not seat_ok(az, el): continue
+        out.append(dict(az=az, el=el, a1=12 + x[2] * 156, a2=12 + x[3] * 156, wd=math.degrees(math.acos(c0 + x[4] * (c1 - c0))),
+                        wa=-180 + x[5] * 360, sigma=1 if x[6] >= 0.5 else -1, inv2=int(x[7] >= 0.5), inv3=int(x[8] >= 0.5),
+                        q=0.8 + 0.2 * x[9], end_extra=8 * x[10] ** 2, sobol_i=i))
+        if len(out) >= n: break
+    return out
+
+
+def _pr(ps, dev):
+    return {k: torch.tensor([float(p[k]) for p in ps], dtype=torch.float64, device=dev)
+            for k in ("az", "el", "a1", "a2", "wd", "wa", "sigma", "q", "end_extra")}
+
+
+def kin_stage(Bn, pr):
+    """stage A: K1 closure + K2 dense continuity (exactly the full bench's okf) -> okf (C, P)"""
+    p1, p2, p3, ok = kin(Bn.RS, Bn.RHG, pr)
+    return continuity(Bn, pr, ok)
+
+
+def hub_stage(Bn, pr, okf):
+    """stage B: the three O20 hub discs alone - their K3 levels (= the full bench's hub_F, which no strap changes) and
+    the poses where a hub underside / crown / wall / top is inside the skin at that level (such a pose is never `good`
+    in the full bench). -> level (C, 3), clean (C, P)"""
+    C, P = okf.shape; dev = okf.device
+    p1, p2, p3, _ = kin(Bn.RS, Bn.RHG, pr); xy = torch.as_tensor(disc_xy(), device=dev); m = len(xy)
+    H = []
+    for ax in (p1, p2, p3):
+        k = unit(ax); a, b = plane_frame(k); H.append((k, a, b))
+    ci, pi = torch.nonzero(okf, as_tuple=True)
+    R = torch.full((C, P, 3 * m), float("inf"), dtype=torch.float64, device=dev)
+    for c0, p0 in items_chunks(ci, pi, max(1, (RAYS or 6_000_000) // (3 * m))):
+        O = torch.cat([xy[None, :, :1] * a[c0, p0][:, None, :] + xy[None, :, 1:] * b[c0, p0][:, None, :] for k, a, b in H], 1)
+        D = torch.cat([k[c0, p0][:, None, :].expand(-1, m, -1) for k, a, b in H], 1)
+        R[c0, p0] = requirement(Bn, p0[:, None].expand(-1, 3 * m).reshape(-1), O.reshape(-1, 3), D.reshape(-1, 3)).reshape(len(c0), 3 * m)
+    level = torch.stack([lerp_quantile(R[:, :, h * m:(h + 1) * m], okf, pr["q"]).amax(1) for h in range(3)], 1)
+    del R
+    clean = okf.clone()
+    ang = torch.linspace(0, 2 * math.pi, N_WALL + 1, dtype=torch.float64, device=dev)[:-1]
+    cw, sw = HUB_R * torch.cos(ang), HUB_R * torch.sin(ang)
+    for c0, p0 in items_chunks(ci, pi, 65536):
+        mn = torch.full((len(c0),), float("inf"), dtype=torch.float64, device=dev)
+        for h, (k, a, b) in enumerate(H):
+            kk, aa, bb = k[c0, p0], a[c0, p0], b[c0, p0]; f = level[c0, h][:, None, None]
+            O = xy[None, :, :1] * aa[:, None, :] + xy[None, :, 1:] * bb[:, None, :]
+            X = f * kk[:, None, :] + O                                                   # underside disc
+            nn = torch.linalg.norm(X, dim=-1, keepdim=True); T = X * (nn + CROWN) / nn    # top face (the verifier's)
+            Cr = (f + CROWN) * kk[:, None, :] + O                                        # crown + walls
+            Wl = [(f + hh) * kk[:, None, :] + cw[None, :, None] * aa[:, None, :] + sw[None, :, None] * bb[:, None, :] for hh in CROWN_LEVELS]
+            Y = torch.cat([X, T, Cr] + Wl, 1); n_ = Y.shape[1]
+            d = Bn.dist(p0[:, None].expand(-1, n_).reshape(-1), Y.reshape(-1, 3)).reshape(len(c0), n_)
+            mn = torch.minimum(mn, d.amin(1))
+        clean[c0, p0] = mn >= 0
+    return level, clean
+
+
+def bound_of(Bn, okm, hubF=None):
+    """exact lower bound of the plain (and near-touch) gap from a superset of the good poses: reach / follow can only
+    drop, in-band / contact only add; a hub level > 140 mm adds the +100 of hub_F"""
+    ws, clip = Bn.ws[None, :], Bn.clip[None, :]
+    rub = (okm & ws).sum(1) / ws.sum(); fub = (okm & clip).sum(1) / clip.sum()
+    lb = 100 * ((0.90 - rub).clamp(min=0) + (0.95 - fub).clamp(min=0))
+    if hubF is not None: lb = lb + 100.0 * (hubF > 140.0).any(1)
+    return lb, rub, fub
+
+
+def screen(Bw, out_json, n, seed=0, part=0, nparts=1, thr=45.0, budget_s=2400.0, stacks="2", chunk=96, nb=2048, log=print,
+           seeds=()):
+    """Sobol map of the class with exact lower bounds: stage A (closure + K2) and stage B (hub levels + hub skin) on every
+    config, then the full bench (in order of increasing bound, all of them while the budget lasts) on each config whose
+    bound is < thr, for the stack orders `stacks` ("2": inv2 = 0, inv3 = 0 / 1; "4": all four; "s": the Sobol draw).
+    The certificate: every config left out has bound >= the reported cut, so nothing better than that hides there."""
+    t0 = time.time(); dev = Bw.RS.device
+    cf = sobol_configs(n, seed, part, nparts); N = len(cf); log(f"sobol: {N} configs (part {part}/{nparts}) in {time.time() - t0:.1f} s")
+    lbA = np.full(N, np.nan); lbB = np.full(N, np.nan); rubA = np.full(N, np.nan); hubF = np.full((N, 3), np.nan); rubB = np.full(N, np.nan)
+    for o in range(0, N, nb):
+        ps = cf[o:o + nb]; pr = _pr(ps, dev); okf = kin_stage(Bw, pr)
+        lb, rub, _ = bound_of(Bw, okf); lbA[o:o + len(ps)] = lb.cpu().numpy(); rubA[o:o + len(ps)] = rub.cpu().numpy()
+        keep = torch.nonzero(lb < thr)[:, 0]
+        for q0 in range(0, len(keep), 512):
+            kk = keep[q0:q0 + 512]; prk = {k: v[kk] for k, v in pr.items()}
+            lev, clean = hub_stage(Bw, prk, okf[kk])
+            lb2, rub2, _ = bound_of(Bw, clean, lev); ii = (o + kk).cpu().numpy()
+            lbB[ii] = lb2.cpu().numpy(); hubF[ii] = lev.cpu().numpy(); rubB[ii] = rub2.cpu().numpy()
+        log(f"  stage A/B {o + len(ps)}/{N}: A < thr {int((lbA[:o + len(ps)] < thr).sum())}, B < thr {int((lbB[:o + len(ps)] < thr).sum())} "
+            f"({time.time() - t0:.0f} s)")
+    cand = np.nonzero(lbB < thr)[0]; cand = cand[np.argsort(lbB[cand], kind="stable")]
+    stk = {"2": [(0, 0), (0, 1)], "4": [(0, 0), (0, 1), (1, 0), (1, 1)]}
+    rows = []; done_i = []; t_scr = time.time() - t0
+    def dump(tag, cut):
+        np.savez_compressed(out_json.replace(".json", "_bounds.npz"), lbA=lbA, lbB=lbB, rubA=rubA, rubB=rubB, hubF=hubF,
+                            P=np.array([[c[k] for k in ("az", "el", "a1", "a2", "wd", "wa", "sigma", "q", "end_extra")] for c in cf]))
+        top = sorted(rows, key=lambda r: r.get("near", 999))
+        json.dump(dict(t=time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()), tag=tag, secs=round(time.time() - t0, 1), bench=[Bw.nc, Bw.nw],
+                       part=part, nparts=nparts, seed=seed, n_sobol=N, thr=thr, stacks=stacks, screen_secs=round(t_scr, 1),
+                       n_A_below=int((lbA < thr).sum()), n_B_below=int((lbB < thr).sum()), n_hubF_ok=int((np.nan_to_num(hubF, nan=999) <= 140).all(1).sum()),
+                       n_full_configs=len(done_i), n_full_evals=len(rows),
+                       certificate=dict(cut=cut, note="every Sobol config not fully evaluated has a lower bound >= cut (plain and near-touch gap)"),
+                       lbA_hist=np.histogram(np.nan_to_num(lbA, nan=999), [0, 20, 30, 40, 50, 60, 80, 100, 1000])[0].tolist(),
+                       lbB_hist=np.histogram(np.nan_to_num(lbB, nan=999), [0, 20, 30, 40, 50, 60, 80, 100, 1000])[0].tolist(),
+                       rows=top), open(out_json + ".tmp", "w"), default=float)
+        os.replace(out_json + ".tmp", out_json)
+    log(f"screen done: {len(cand)} configs with bound < {thr} ({t_scr:.0f} s); full bench in bound order")
+    dump("screen", float(lbB[cand[0]]) if len(cand) else thr)
+    seeds = [dict(s) for s in seeds]
+    if seeds: rows.extend(dict(r, src="seed") for r in evaluate(seeds, Bw, None, chunk))
+    bs = max(chunk, 192); k = 0
+    while k < len(cand) and time.time() - t0 < budget_s:
+        blk = cand[k:k + bs]; ev, src = [], []
+        for i in blk:
+            base = {kk: cf[i][kk] for kk in ("az", "el", "a1", "a2", "wd", "wa", "sigma", "q", "end_extra")}
+            for (i2, i3) in (stk[stacks] if stacks in stk else [(cf[i]["inv2"], cf[i]["inv3"])]):
+                ev.append(dict(base, inv2=i2, inv3=i3)); src.append(i)
+        R = evaluate(ev, Bw, None, chunk)
+        for i, r in zip(src, R): r.update(sobol_i=cf[i]["sobol_i"], lbA=round(float(lbA[i]), 2), lbB=round(float(lbB[i]), 2))
+        rows.extend(R); done_i.extend(blk.tolist()); k += len(blk)
+        cut = float(lbB[cand[k]]) if k < len(cand) else thr
+        b = min(rows, key=lambda r: r.get("near", 999)); bg = min(rows, key=lambda r: r.get("gap", 999))
+        log(f"  full {k}/{len(cand)} configs ({len(rows)} evals): best near {b.get('near')} (gap {b.get('gap')}), best gap {bg.get('gap')}, "
+            f"bound cut {cut:.2f} ({time.time() - t0:.0f} s)")
+        dump(f"full{k}", cut)
+    cut = float(lbB[cand[k]]) if k < len(cand) else thr
+    dump("end", cut); return rows
+
+
+# ---- batched multi-start CMA-ES (one CMA per basin, every basin's population in the same GPU call) ------------------
+class _CMA:
+    def __init__(self, x0, sigma0, lam, seed):
+        n = len(CONT); self.n = n; self.lam = lam; mu = lam // 2; self.mu = mu
+        w = np.log(mu + 0.5) - np.log(np.arange(1, mu + 1)); self.w = w / w.sum(); self.mueff = 1.0 / (self.w ** 2).sum()
+        me = self.mueff
+        self.cc = (4 + me / n) / (n + 4 + 2 * me / n); self.cs = (me + 2) / (n + me + 5)
+        self.c1 = 2 / ((n + 1.3) ** 2 + me); self.cmu = min(1 - self.c1, 2 * (me - 2 + 1 / me) / ((n + 2) ** 2 + me))
+        self.damps = 1 + 2 * max(0, math.sqrt((me - 1) / (n + 1)) - 1) + self.cs; self.chiN = math.sqrt(n) * (1 - 1 / (4 * n) + 1 / (21 * n * n))
+        self.x0 = dict(x0); self.c0 = np.array([float(x0[k]) for k in CONT]); self.s0 = np.array([SCALE[k] for k in CONT])
+        self.mean = np.zeros(n); self.sigma = sigma0; self.pc = np.zeros(n); self.ps = np.zeros(n); self.C = np.eye(n)
+        self.B = np.eye(n); self.D = np.ones(n); self.gen = 0; self.rng = np.random.default_rng(seed)
+        self.best = None; self.stall = 0; self.done = False; self.why = ""
+
+    def ask(self):
+        Z = self.rng.standard_normal((self.lam, self.n)); self.X = self.mean + self.sigma * (Z * self.D) @ self.B.T
+        return [snap(dict(self.x0, **{k: float(v) for k, v in zip(CONT, self.c0 + self.s0 * x)})) for x in self.X]
+
+    def tell(self, f, rows, stall_max=15):
+        self.gen += 1; f = np.asarray(f, float); i0 = int(np.argmin(f))
+        if self.best is None or f[i0] < self.best[0] - 0.05: self.best = (float(f[i0]), rows[i0]); self.stall = 0
+        else: self.stall += 1
+        idx = np.argsort(f)[:self.mu]; old = self.mean.copy(); X = self.X; self.mean = (self.w[:, None] * X[idx]).sum(0)
+        invsqrtC = self.B @ np.diag(1 / self.D) @ self.B.T
+        self.ps = (1 - self.cs) * self.ps + math.sqrt(self.cs * (2 - self.cs) * self.mueff) * invsqrtC @ (self.mean - old) / self.sigma
+        hsig = np.linalg.norm(self.ps) / math.sqrt(1 - (1 - self.cs) ** (2 * self.gen)) / self.chiN < 1.4 + 2 / (self.n + 1)
+        self.pc = (1 - self.cc) * self.pc + hsig * math.sqrt(self.cc * (2 - self.cc) * self.mueff) * (self.mean - old) / self.sigma
+        art = (X[idx] - old) / self.sigma
+        self.C = (1 - self.c1 - self.cmu) * self.C + self.c1 * (np.outer(self.pc, self.pc) + (1 - hsig) * self.cc * (2 - self.cc) * self.C) \
+            + self.cmu * (art.T * self.w) @ art
+        self.sigma *= math.exp((self.cs / self.damps) * (np.linalg.norm(self.ps) / self.chiN - 1)); self.sigma = min(self.sigma, 3.0)
+        self.C = np.triu(self.C) + np.triu(self.C, 1).T; D2, self.B = np.linalg.eigh(self.C); self.D = np.sqrt(np.maximum(D2, 1e-20))
+        if self.sigma * self.D.max() < 0.02: self.done, self.why = True, "converged (sigma)"
+        elif self.stall >= stall_max: self.done, self.why = True, f"converged (no gain > 0.05 in {stall_max} generations)"
+
+
+def distinct(rows, k, key="near", dmin=12.0):
+    """the k best rows whose (az, el, a1, a2, wd, wa) differ by > dmin deg in sum (or differ in branch / stack order)"""
+    E = []
+    for r in sorted(rows, key=lambda r: r.get(key, 999)):
+        if len(E) >= k: break
+        p = r["params"]
+        if all(sum(abs(p[x] - e["params"][x]) for x in ("az", "el", "a1", "a2", "wd", "wa")) > dmin
+               or any(p[x] != e["params"][x] for x in ("sigma", "inv2", "inv3")) for e in E): E.append(r)
+    return E
+
+
+def cma_multi(Bw, starts, out_json, budget_s=2400.0, lam=12, sigma0=0.6, key="near", chunk=96, seed=1, reserve=(), log=print, meta=None):
+    """one CMA-ES per start (discrete branch / stack order fixed per start), all populations evaluated together; a
+    converged start frees its slot for the next basin in `reserve`. Objective `key` (near-touch gap by the rule)."""
+    t0 = time.time(); reserve = list(reserve); runs = []; act = []; allrows = []
+    def start(r, i):
+        c = _CMA(r["params"], sigma0, lam, seed + 7919 * i); c.start_row = r; c.idx = i; c.best = (r.get(key, 999), r); runs.append(c); return c
+    for i, r in enumerate(starts): act.append(start(r, i))
+    nxt = len(starts); g = 0
+    def dump(tag):
+        bas = []
+        for c in runs:
+            b = c.best[1]
+            bas.append(dict(basin=c.idx, start=c.start_row["params"], start_gap=c.start_row.get("gap"), start_near=c.start_row.get("near"),
+                            gens=c.gen, done=c.done, why=c.why, sigma=round(c.sigma, 4), best=b))
+        json.dump(dict(t=time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()), tag=tag, secs=round(time.time() - t0, 1), key=key, lam=lam,
+                       evals=len(allrows), meta=meta or {}, basins=sorted(bas, key=lambda x: x["best"].get(key, 999))), open(out_json + ".tmp", "w"), default=float)
+        os.replace(out_json + ".tmp", out_json)
+    while act and time.time() - t0 < budget_s:
+        g += 1; cand, own = [], []
+        for c in act:
+            for p in c.ask(): cand.append(p); own.append(c)
+        R = evaluate(cand, Bw, None, chunk); allrows.extend(R)
+        for c in act:
+            mine = [r for r, o in zip(R, own) if o is c]; c.tell([r.get(key, 999) for r in mine], mine)
+        fin = [c for c in act if c.done]; act = [c for c in act if not c.done]
+        for c in fin:
+            if reserve: act.append(start(reserve.pop(0), nxt)); nxt += 1
+        bb = min((c.best for c in runs), key=lambda x: x[0])
+        log(f"cma gen {g}: {len(allrows)} evals, {len(act)} active, {len(runs) - len(act)} done; best {key} {bb[0]} "
+            f"(gap {bb[1].get('gap')} reach {bb[1].get('reach')} follow {bb[1].get('follow')} ib14 {bb[1].get('inband14')} contact {bb[1].get('contact')}) "
+            f"({time.time() - t0:.0f} s)")
+        dump(f"gen{g}")
+    dump("end"); return runs
+
+
 def main():
     import argparse
     ap = argparse.ArgumentParser(); ap.add_argument("cmd"); ap.add_argument("args", nargs="*")
@@ -711,6 +947,9 @@ def main():
     ap.add_argument("--out"); ap.add_argument("--procs", type=int, default=4); ap.add_argument("--seed", type=int, default=0)
     ap.add_argument("--leaders", action="store_true"); ap.add_argument("--extra")
     ap.add_argument("--budget", type=float, default=1800.0); ap.add_argument("--n0", type=int, default=4096)
+    ap.add_argument("--part", default="0/1"); ap.add_argument("--thr", type=float, default=45.0); ap.add_argument("--stacks", default="2")
+    ap.add_argument("--basins", type=int, default=50); ap.add_argument("--reserve", type=int, default=30); ap.add_argument("--key", default="near")
+    ap.add_argument("--sigma0", type=float, default=0.6)
     ap.add_argument("--cpu-from", dest="cpu_from"); ap.add_argument("--sane", action="store_true"); ap.add_argument("--elites", type=int, default=16); ap.add_argument("--lam", type=int, default=24)
     a = ap.parse_args()
     wear = tuple(int(x) for x in a.bench.split(",")); fit = tuple(int(x) for x in a.fit.split(",")) if a.fit else None
@@ -741,6 +980,22 @@ def main():
                                         gpu=torch.cuda.get_device_name(0) if a.device == "cuda" else None, bench=list(wear), fit=list(fit) if fit else None)
         log(json.dumps(res))
         if a.out: json.dump(res, open(a.out, "w"), indent=1)
+    elif a.cmd == "screen":                                         # exhaustive Sobol map with lower bounds + full bench
+        part, nparts = (int(x) for x in a.part.split("/"))
+        seeds = (json.load(open(a.extra)) if a.extra else [])
+        screen(Bw, a.out, a.n, a.seed, part, nparts, a.thr, a.budget, a.stacks, a.chunk, log=log, seeds=seeds)
+    elif a.cmd == "cma":                                            # batched multi-start CMA from merged screen files
+        rows = []
+        for f in a.args:
+            if os.path.exists(f): rows.extend(r for r in json.load(open(f))["rows"] if r.get("params"))
+        rows.extend(evaluate(LEADERS + (json.load(open(a.extra)) if a.extra else []), Bw, None, a.chunk))
+        part, nparts = (int(x) for x in a.part.split("/"))
+        E = distinct(rows, a.basins + a.reserve, a.key)
+        mine = [e for i, e in enumerate(E) if i % nparts == part]; nb = (a.basins + nparts - 1) // nparts
+        log(f"cma: {len(rows)} screened rows, {len(E)} distinct basins, this part {len(mine)} (start {nb}, reserve {len(mine) - nb}): "
+            + str([e.get(a.key) for e in mine[:12]]))
+        cma_multi(Bw, mine[:nb], a.out, a.budget, a.lam, a.sigma0, a.key, a.chunk, a.seed, mine[nb:], log,
+                  meta=dict(part=part, nparts=nparts, n_rows=len(rows), basins_total=len(E)))
     elif a.cmd == "search":
         seeds = list(LEADERS) + (json.load(open(a.extra)) if a.extra else [])
         search(Bw, Bf, a.out, a.budget, a.n0, a.elites, a.lam, a.seed, a.chunk, seeds, log)
@@ -776,9 +1031,10 @@ def main():
                 c[k] = r
                 log(f"  CPU {j + 1}/{len(todo)} ({time.time() - t:.0f} s) gap cpu {r.get('gap')} gpu {g[k].get('gap')} ({r.get('secs')} s; gpu outside-box points {g[k].get('outside')})")
         tc = time.time() - t; log(f"CPU {len(cf)} configs in {tc:.1f} s on {a.procs} processes")
-        keys = ("gap", "reach", "follow", "inband14", "inband10", "contact")
+        keys = ("gap", "near", "reach", "follow", "inband14", "inband10", "contact")
         both = [(x, y) for x, y in zip(g, c) if not x.get("error") and not y.get("error")]
-        diff = {k: [abs(float(x[k]) - float(y[k])) for x, y in both if x.get(k) is not None and y.get(k) is not None] for k in keys}
+        gk = lambda x, k: x.get("v_near") if k == "near" else x.get(k)                 # the CPU's `near` carries no penalty
+        diff = {k: [abs(float(gk(x, k)) - float(y[k])) for x, y in both if gk(x, k) is not None and y.get(k) is not None] for k in keys}
         rows = [dict(params=x["params"], gpu={k: x.get(k) for k in keys + ("honest", "hub_F", "outside")}, cpu=y) for x, y in zip(g, c)]
         summ = dict(n=len(cf), bench=list(wear), fit=list(fit) if fit else None, max_abs_diff={k: round(max(v), 4) if v else None for k, v in diff.items()},
                     n_gap_diff_gt_1=sum(1 for v in diff["gap"] if v > 1.0), gpu_secs=round(tg, 2), cpu_secs=round(tc, 2), cpu_procs=a.procs,
