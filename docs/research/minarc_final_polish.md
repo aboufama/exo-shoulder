@@ -314,3 +314,71 @@ process.
 * `docs/research/minarc_final_polish/env_table.json` - the distribution table.
 * `docs/research/minarc_final_polish/farm/` - job files, CMA rows (`cma_envp-*.json`), re-score and claim outputs.
 * `docs/research/minarc_final_polish/picks/` - the picks' nominal parameters (the claim prices them).
+
+## 5. Independent verification (skeptic): CONFIRMED
+
+The verifier wired the benches itself (`docs/concepts/verify/minarc-final-polish-verify.py`; it does not call
+`env_polish.py claim`). It imports the judge's harness `minarc-bdp-remeasure.py` unchanged and prices the stops with
+`env_polish.priced()`. On BDp that pricing was cross-checked against the judge's own priced file
+(`minarc-bdp-judge/params_BDp_stopB34.47.json`):
+* a1max 54.7481 vs the judge's 54.7479;
+* the only difference is the +0.5 built tolerance on smhi / smlo, which the judge applies through its 5.5 reading.
+
+The verifier added three things:
+* the **contact-aware** flood fill (the harness's `conn taken`) on top of the kinematic one;
+* the **knee window** on every counted pose, from the frozen design's ik;
+* **held-out integrity asserts**: 1154 poses, no fresh env pose, no Bench(110,360) / Bench(60,160) pose.
+
+Six farm jobs ran: 2 configs x 3 protocols. Outputs are in `docs/research/minarc_final_polish/verify/`.
+Cost: $0.25 at the cpu3c rate ($0.29 at cpu5c).
+
+**Every claimed number reproduces to the digit.** Gaps are plain gap / near-touch:
+
+| protocol | BDp | pick1 | gain |
+|---|---|---|---|
+| fit env -> held out (1154, exact) | 23.68 / 26.87 | **21.31 / 23.02** | **+2.37 / +3.85** |
+| fit Bench(60,160) -> held out (exact) | 24.18 / 28.86 | **22.69 / 26.73** | **+1.49 / +2.13** |
+| fit Bench(60,160) -> Bench(110,360) (exact, the verified protocol) | 19.54 / 26.44 (score 92.89) | **18.40 / 23.36 (score 93.31)** | +1.14 / +3.08 |
+
+**Rules on pick1, from the member frames, every protocol:**
+* **Own-state J1-J3 margin:** min 5.586 against the 5.5 priced rule. 0 counted poses under 5.5, 0 knock-outs.
+* **Continuity, kinematic:** 1105-1106 grid nodes, all connected, 0 islands, 0 taken poses dropped.
+* **Continuity, contact-aware:** 1056-1068 taken grid nodes, all connected, 0 islands, 0 extra drops. The same
+  holds for BDp.
+* **Knee window:** the knee angle stays at 93.2-152.7 deg, inside [26.14, 153.86] on every counted pose.
+  * The minimum window margin is 1.11 deg (BDp: 2.67).
+  * 4 held-out poses pass H1's 30.46 window (BDp: 1).
+  * pick1's own window is narrower than BDp's 24.95, so BDp's knee-window ruling covers it.
+* **Mechanism checks:**
+  * q2 forced poses sit on the stop (0 off).
+  * K stays one-sided and within the priced stop B (dK max 56.55 vs 56.65).
+  * Spring equilibrium: 0 of 209-213 forced poses can sit lower.
+  * Hub K cap: skin min 0.47 mm (1 pose, counted near-touch), parts min 1.43 mm.
+* **Build constraints:** O20 hubs; J1 seat on the acromion top.
+
+**Bench integrity:**
+* **Distance to held out.** env / envsel never come within 2 deg per coordinate (min 2.23 / 2.07 deg) and never in
+  thorax-humerus orientation (min 2.04 / 2.03 deg).
+  * Measured in glenohumeral orientation (HG) instead, 2 env poses sit 1.66 / 1.97 deg from a held-out pose. In
+    coordinates those are 2.5 / 3.2 deg away.
+  * These are fresh draws, not reuses. Their effect is at most 2 of 1154 held-out poses, and the same for both
+    configs.
+  * The fit-60 protocol (+1.49) does not use env at all.
+* **Frozen before any reading.** The draw (12:18 UTC, committed 12:30) predates every held-out reading.
+* **Picks registered before the claim.** The picks were written at 12:45, before the claim batch (12:55). Re-ranking
+  the CMA rows by envsel reproduces pick1 as the top pick.
+
+**Red team (open; for the CAD):**
+* **Contact roughly triples.** Contact poses are taken poses with metal inside the skin; the gap counts them as not
+  reached. pick1 has 28 held-out contact poses vs BDp's 9 (env fit), and 35 vs 13 (fit 60).
+  * All of them are workspace-envelope poses; none is on an ADL clip.
+  * The deepest are overhead (elevation 165, plane 30-45): -13.0 / -14.6 mm vs BDp's -7.3.
+  * Next come low-elevation, extreme-axial poses (elevation 30, plane 135-150, axial -165..-180) at about -10 mm.
+  * Which part touches is not attributed yet.
+* **K opens to dK 56.6 vs 34.1 deg.** The clock spring winds about 66 % further. The forced J1 swing per frame needs
+  re-measuring (MuJoCo, feel) before the CAD fixes the spring.
+* **R1-aim drops.** In-band 2-10 mm held out: 0.497 vs 0.574 (env fit), 0.563 vs 0.593 (fit 60).
+
+**Verdict: CONFIRMED.** The held-out gain over BDp is >= 1 gap point on both fits (+2.37 env fit, +1.49 fit 60). It
+holds under kinematic and contact-aware continuity, with the stops priced like the judge. Under the final-polish
+rule, pick1 replaces BDp as the CAD config. Its fields are in the row as `polished_*`; the verified BDp fields stay.

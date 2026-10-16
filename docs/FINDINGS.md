@@ -1453,3 +1453,31 @@ Next:
   0.6-2.5 points (mean 1.75), in the right rank order for all 4 claimed configs.
 * **Status.** Self-measured. Under the CLAUDE.md final-polish rule, pick1 replaces BDp's CAD config only after an
   independent verifier confirms the >= 1 held-out gain and clears the red team. Farm total about $0.58.
+
+## minarc final polish verified: pick1 replaces BDp's CAD config (2026-10-16, independent verifier)
+
+* **What was checked.** An independent skeptic re-ran pick1 (envp-F7-g35-6) and BDp through the judge's harness,
+  imported unchanged, with the judge's built-stop pricing. Its own bench wiring:
+  `docs/concepts/verify/minarc-final-polish-verify.py`.
+* **The claim reproduces to the digit.**
+  * Held out, env fit: pick1 21.31 vs BDp 23.68 (**+2.37**; near-touch +3.85).
+  * Held out, fit Bench(60,160): 22.69 vs 24.18 (**+1.49**; near-touch +2.13).
+  * Bench(110,360): 18.40 vs 19.54 (score 93.31 vs 92.89).
+* **New checks, none of which bites.**
+  * Contact-aware continuity drops 0 poses for either config.
+  * Own-state margin >= 5.586 on every counted pose.
+  * Knee inside its window everywhere (min margin 1.11 deg).
+  * The spring cannot sit lower on any forced pose.
+* **Bench integrity.**
+  * env never reuses a held-out pose.
+  * env poses stay >= 2.23 deg per coordinate and >= 2.04 deg in thorax orientation from every held-out pose.
+  * Measured in glenohumeral orientation, 2 env poses sit 1.66 / 1.97 deg from a held-out pose. The fit-60 gain does
+    not depend on env.
+  * The draw and the picks were frozen before any held-out reading.
+* **What the gain costs.** The gain is reach (+4.5 points held out). The bill:
+  * Skin contact on 28 vs 9 held-out poses, all extreme workspace poses and none on an ADL clip. The deepest are
+    overhead at elevation 165, -14.6 mm vs -7.3.
+  * K travel 56.6 vs 34.1 deg: the spring and the forced J1 swing need re-measuring.
+  * R1-aim -0.03 to -0.08.
+* **Status.** CONFIRMED under the final-polish rule. pick1 is the CAD config (row `polished_*`); the verified BDp
+  record stays. Verifier farm cost: $0.25.
