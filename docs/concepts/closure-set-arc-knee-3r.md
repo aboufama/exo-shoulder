@@ -126,3 +126,44 @@ samples; the dyad / fork proximity loss stays - it does not reach the control's 
   again). Near-touch: 0.09 mm (exact) / 0.48 mm (fast); counting metal < 1 mm as contact: 92.38 / 80.39, < 2 mm:
   100.63 / 89.07. Overhead (elevation >= 140, exact): reach 0.39, follow 0.40, ib14 0.48 (15 contact poses) - the
   overhead does not hold. The 68.59 shape was not frozen-checked inside the time box.
+
+## Verification (adversarial verifier, 2026-10-16) - REFUTED
+
+Harness: `docs/concepts/verify/closure-set-arc-knee-3r.py` (result `docs/concepts/verify/closure-set-arc-knee-3r_big_frozen.json`).
+The claimed best k322 is reproduced exactly on Bench(60,160) fast (68.59). The protocol was the frozen shape: fit on
+Bench(60,160) fast with the trunnion refit to dh 26.59, then worn without refit on Bench(110,360) on the exact path.
+
+| | gap | reach | follow | ib14 | ib10 | contact |
+|---|---|---|---|---|---|---|
+| claim, Bench(60,160) fast | 68.59 | 0.663 | 0.983 | 0.487 | 0.276 | 0.035 |
+| **verified, Bench(110,360) exact, frozen, verifier checks** | **75.28** | 0.589 | 0.991 | 0.486 | 0.277 | 0.027 |
+| champion, same bench, protocol and seed VModel / outer-face checks (osn verifier) | 66.97 | 0.700 | 0.918 | 0.575 | 0.356 | 0.113 |
+
+The champion was measured by the osn verifier through the same seed VModel checks, outer-face audit and frozen
+protocol that this harness uses. Under the risley-turret verifier's kit checks the champion scores 75.94. The verified
+75.28 is 8.3 gap points worse than the champion under equal checks, so the claim is refuted.
+
+What the verifier checked:
+* **DOF (R5 / R17):** there are 3 active joints (J1, J2, J3). The knee and the two cuff pins are passive rotations set by
+  the closure: the radial closure sets psi and the planar 3R dyad sets the pins. There are 0 passive translations and no
+  undetermined coordinate in the rigid model. Caveat: the knee is only weakly determined. Conditioning is 0.84 deg per mm
+  (p50) and 2.04 deg per mm (p95) of radial cuff or GH motion, so the <= 3 mm the rules give to the liner leaves the knee
+  free by ~2.5 deg (p50) to ~6 deg (p95). It would sag inside the liner compliance. This was not scored, but it is an
+  R10/R17 risk.
+* **Strict knee tracking (added check):** the model resets its tracking reference after a no-root frame and continues
+  on the jumped branch after a rejected jump. The verifier keeps the last followed state as the reference instead. At
+  k322 this removed 0 frames and gave 0 different roots: at this configuration the leak is not exploited.
+* **Outer faces (added check):** the strap tops of links 1 and 2 were checked against the skin, with 0 contact poses
+  (lowest 2.66 mm). The model already checks hub walls and crowns, dyad tops and fork walls. Hub seats are 50, 110 and
+  88 mm from GH, all within 140 mm.
+* **Bench artefact (lesson c):** fast to exact with the shape frozen costs 6.7 gap points. Reach falls 0.663 -> 0.589
+  on the new poses. Poses not taken: 72 no-root (the closure's own fold), 51 dyad elbow out of range, 15 J2 fold,
+  9 contact, 1 parts (E arm vs cuff link).
+* **Near-touch:** the minimum metal-to-skin distance is 0.10 mm. Counting metal < 1 mm as contact gives 78.18 (5 poses);
+  < 2 mm gives 87.78 (21 poses).
+* **Overhead (elevation >= 140):** reach 0.50 (28 workspace poses, of which 9 no-root and 3 fold), follow 1.00
+  (10 clip frames), ib14 0.54, ib10 0.37, 2 contact poses.
+
+Verdict: refuted on the number. The number is honest and the part sizes, closure and DOF are sound, but the
+mechanism is worse than the zero-passive champion under the same checks. The knee-locked control (31.32 fast) remains
+this family's best lead, and it has not been verified.

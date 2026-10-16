@@ -1,0 +1,187 @@
+{
+ "task": "big_frozen",
+ "params": {
+  "az1": 94.5191,
+  "el1": 68.9031,
+  "b1": 0.0,
+  "az2": 19.4523,
+  "el2": 53.3244,
+  "b2": 0.1125,
+  "wd": 77.5616,
+  "wa": -20.9113,
+  "b3": 0.173,
+  "o2": 30.0,
+  "chi2": -72.2636,
+  "psi_rest": 19.3538,
+  "pmax": 60.0,
+  "toff": 6.5819,
+  "lE": 40.0,
+  "lc": 37.1893,
+  "phiE": 2.3161,
+  "beta0": 113.9108,
+  "earm_over": 1,
+  "earm_under": 0,
+  "dh": 26.59
+ },
+ "exact": true,
+ "fit60": {
+  "gap": 68.59,
+  "reach": 0.6625,
+  "follow": 0.9833,
+  "inband14": 0.4867,
+  "inband10": 0.2756,
+  "contact": 0.0351,
+  "mode": "fast",
+  "dh": 26.59,
+  "invalid": false,
+  "why": {
+   "noroot": 28,
+   "fold": 4,
+   "auth": 0,
+   "knee": 0,
+   "dyad": 16,
+   "flip": 0,
+   "closure": 0,
+   "skin": 6,
+   "parts": 1,
+   "contact": 0
+  },
+  "pinb": 24.5,
+  "trunnion_in": true
+ },
+ "strict": {
+  "frames": 356,
+  "good": 353,
+  "diff_root": 0,
+  "clip_frames_removed": 0,
+  "clip_frames_other_root": 0
+ },
+ "mode": "exact",
+ "model": {
+  "gap": 75.28,
+  "reach": 0.5889,
+  "follow": 0.9909,
+  "inband14": 0.4856,
+  "inband10": 0.2766,
+  "contact": 0.0273,
+  "why": {
+   "noroot": 72,
+   "fold": 15,
+   "auth": 1,
+   "knee": 0,
+   "dyad": 51,
+   "flip": 0,
+   "closure": 0,
+   "skin": 0,
+   "parts": 1,
+   "contact": 9
+  },
+  "parts_pairs": {
+   "Earm-clink": 1
+  },
+  "levels": {
+   "f1": 50.2,
+   "f2": 105.7,
+   "f3": 87.3,
+   "zE": 100.5,
+   "zc": 97.3,
+   "zp": 94.1,
+   "zf": 89.6
+  },
+  "knee": {
+   "psi_range_deg": [
+    -14.0,
+    49.7
+   ],
+   "auth_p5": 28.1,
+   "auth_p50": 67.9,
+   "deg_per_mm_p50": 0.84,
+   "deg_per_mm_p95": 2.04,
+   "elbow": [
+    31.0,
+    159.8
+   ],
+   "c0": -16.67,
+   "hK": 92.6,
+   "trunnion_off": -1.31,
+   "res_mm": 0.0043,
+   "track": {
+    "frames": 356,
+    "pairs": 350,
+    "jumps": 0,
+    "jumps10": 13,
+    "noroot": 0
+   },
+   "jump_p50": 2.5,
+   "jump_max": 11.9
+  }
+ },
+ "audit": {
+  "hub_seat_mm_from_GH": [
+   50.2,
+   110.3,
+   87.5
+  ],
+  "hub_f": [
+   50.2,
+   105.7,
+   87.3
+  ],
+  "outer_low": [
+   {
+    "mm": 2.66,
+    "part": "L2top",
+    "elev": 45.0
+   },
+   {
+    "mm": 2.71,
+    "part": "L2top",
+    "elev": 30.0
+   },
+   {
+    "mm": 2.75,
+    "part": "L2top",
+    "elev": 30.0
+   },
+   {
+    "mm": 3.11,
+    "part": "L2top",
+    "elev": 45.0
+   },
+   {
+    "mm": 3.7,
+    "part": "L2top",
+    "elev": 15.0
+   }
+  ],
+  "outer_contact_poses": 0,
+  "corrected": {
+   "gap": 75.28,
+   "reach": 0.5889,
+   "follow": 0.9909,
+   "inband14": 0.4856,
+   "inband10": 0.2766,
+   "contact": 0.0273
+  },
+  "near_touch_min_mm": 0.1,
+  "gap_near1": 78.18,
+  "near1_poses": 5,
+  "gap_near2": 87.78,
+  "near2_poses": 21,
+  "overhead140": {
+   "ws": 28,
+   "reach": 0.5,
+   "clip": 10,
+   "follow": 1.0,
+   "inband14": 0.5418,
+   "inband10": 0.3706,
+   "contact_poses": 2,
+   "why_not": {
+    "contact": 2,
+    "fold": 3,
+    "noroot": 9
+   }
+  }
+ },
+ "secs": 1212.6
+}
