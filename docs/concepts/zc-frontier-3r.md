@@ -10,8 +10,8 @@ fit, at complexity 0. With follow ~1.0 and in-band ~0.90 that is reach >= 0.7625
 contact.
 
 **Result: the class cannot get there. Measured ceiling: gap 28.85 on Bench(110,360) fast (score 89.5),
-**31.04 frozen exact** (score 88.7; shape fitted on Bench(110,360) fast, worn on the exact mesh; 33.51 with the round-3 protocol); the frontier is a measured trade-off, not a search failure** - over 8828 full
-evaluations on the verification bench no zero-complexity chain with reach >= 0.7625 has in-band above 0.445, and at
+**31.04 frozen exact** (score 88.7; shape fitted on Bench(110,360) fast, worn on the exact mesh; 33.51 with the round-3 protocol); the frontier is a measured trade-off, not a search failure** - over 15394 full
+evaluations on the verification bench no zero-complexity chain with reach >= 0.7625 has in-band above 0.592, and at
 in-band >= 0.88 no chain reaches more than 0.633. The cap is hub 2: the arcs that open the fold window (shorter arc
 >= ~45 deg) carry hub 2 over skin whose height along its axis varies by more than the 12 mm band.
 
@@ -57,7 +57,7 @@ Bench(110,360) exact) for comparison.
   hub 3 at 130-184 mm down the arm - the full model, with the disc rims, scores them 113-193: hub 3's tilted disc and
   link 2 never reach the band).
 
-## 2. Multi-start CMA on Bench(110,360) fast (8 + 6 streams)
+## 2. Multi-start CMA on Bench(110,360) fast (8 + 6 + 8 streams)
 
 | stream | start | evals | best gap | where it went |
 |---|---|---|---|---|
@@ -69,6 +69,7 @@ Bench(110,360) exact) for comparison.
 | E | J1 (34, 10), 57 / 66 | 633 | 71.09 | |
 | F | posterior-low J1 (-15, -12), 70 / 78 (the "kinematically best seats" family) | 273 | 74.06 | |
 | R2A-R2F | convergence round from 28.85 (sigma 0.25-0.6, 6 seeds) | 1446 | 28.85 | no stream improved by 0.05 in 30 generations: **gate passed, converged** |
+| S-streams (8) | the best's arcs / J3 with J1 restarted over the seat region: back (0, 45), (30, 60) both branches, medial top (-30, 55), lateral (60, 40), top (75, 78) both branches, acromion front edge (120, 70) | 5120 | 32.11 (A120 -> az 107), 33.56 (T75 -> az 94), 38.53 (L60 -> az 83) | every back / medial start either walks back to the acromion top or stays wide-window: P0 57.92 (reach 0.85, in-band 0.42), M30 55.83 (J1 straight up, reach 0.77, in-band 0.58), P30 59.67; branch +1 61.1-72.2 |
 
 **Best: J1 bvec(109.36, 65.94) (acromion top), J3 wdir(85.74, -16.19) (lateral deltoid), a1 36.72, a2 69.06, branch
 -1, inverted J3 stack, q 0.978, strap end hold 1.78 mm** -> 28.85 on Bench(110,360) fast (reach 0.633, follow 0.955,
@@ -87,9 +88,9 @@ in-band 14 0.890, contact 0.012; near-touch 38.14). Per member in band: hub 1 0.
 Every 8 deg of link-1 arc buys at most +0.05 of reach and costs 0.07-0.2 of in-band and 0.04-0.08 of contact: hub 2
 must clear the highest skin its axis sweeps (60 -> 107 mm), so it floats over the rest.
 
-**Frontier over all 8828 evaluations (sweep + round-1 CMA, Bench(110,360) fast; the 1446 convergence evaluations add nothing):** max reach at in-band >= 0.90 / 0.88 /
-0.85 / 0.80 / 0.70 / 0.60 / 0.50 = 0.611 / 0.633 / 0.639 / 0.644 / 0.667 / 0.689 / 0.722; max in-band at reach >=
-0.70 = 0.597, at reach >= 0.7625 = 0.445. On this frontier the gap is never below ~28.7 (in-band 0.88, reach 0.633),
+**Frontier over all 15394 evaluations (sweep + 22 CMA streams, Bench(110,360) fast):** max reach at in-band >= 0.90 / 0.88 /
+0.85 / 0.80 / 0.70 / 0.60 / 0.50 = 0.617 / 0.633 / 0.639 / 0.644 / 0.667 / 0.761 / 0.819; max in-band at reach >=
+0.70 = 0.664, at reach >= 0.7625 = 0.592 (2314 configs reach that far). On this frontier the gap is never below ~28.7 (in-band 0.88, reach 0.633),
 which is what the CMA found.
 
 ## 3. The claim (frozen exact) and where it loses

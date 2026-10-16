@@ -21,7 +21,7 @@
  "v_inband14": null,
  "v_inband10": null,
  "v_gap": null,
- "n_configs": 10274,
+ "n_configs": 15394,
  "best_params": {
   "az": 109.3565,
   "el": 65.94,
@@ -35,9 +35,9 @@
   "q": 0.978,
   "end_extra": 1.784
  },
- "verdict": "class ceiling measured (converged): 28.85 Bench(110,360) fast / 31.04 frozen exact (score 88.7) at complexity 0 - cannot reach 13.75: over 8828 evaluations no chain with reach >= 0.7625 exceeds in-band 0.445, at in-band >= 0.88 reach <= 0.633; not yet re-measured by an independent verifier",
+ "verdict": "class ceiling measured (converged): 28.85 Bench(110,360) fast / 31.04 frozen exact (score 88.7) at complexity 0 - cannot reach 13.75: over 15394 evaluations no chain with reach >= 0.7625 exceeds in-band 0.592, at in-band >= 0.88 reach <= 0.633; not yet re-measured by an independent verifier",
  "limiter": "fold: 121 of 136 lost workspace poses (44 folded, 77 stretched; across the body 49/68, overhead 6/28 taken); widening the window needs shorter arc >= ~45 deg, which carries hub 2 over skin spanning more than the 12 mm band (F 60 -> 86 -> 107 mm at a1 38 -> 54 -> 62) or off the body (2367 of 3560 kinematically viable configs)",
- "note": "global Sobol fold-law map 16384 configs + 4268 full evaluations + 8 CMA streams (4560) on Bench(110,360) fast; best J1 bvec(109.36, 65.94), J3 wdir(85.74, -16.19), a1 36.72, a2 69.06, sigma -1, inverted J3 stack (inv3 1), q 0.978, end hold 1.78; docs/concepts/zc-frontier-3r.md",
+ "note": "global Sobol fold-law map 16384 configs + 4268 full evaluations + 22 CMA streams (11126) on Bench(110,360) fast; best J1 bvec(109.36, 65.94), J3 wdir(85.74, -16.19), a1 36.72, a2 69.06, sigma -1, inverted J3 stack (inv3 1), q 0.978, end hold 1.78; docs/concepts/zc-frontier-3r.md",
  "doc": "docs/concepts/zc-frontier-3r.md",
  "mechanism": {
   "active_dof": 3,
@@ -79,7 +79,7 @@
   "contact": 0.0299,
   "near_touch_gap": 40.57
  },
- "convergence": "6-stream round 2 from the best (sigma 0.25-0.6, 1446 evaluations): no stream improved by 0.05 in 30 generations - converged",
+ "convergence": "6-stream round 2 from the best (sigma 0.25-0.6, 1446 evaluations): no stream improved by 0.05 in 30 generations - converged; 8 more streams restarting J1 over the whole seat region (5120 evaluations) return to the acromion top (32.1-38.5) or stay wide-window (55.8-72.2)",
  "frozen_exact_oos1432": {
   "protocol": "fit Bench(110,360) fast, frozen, worn on Bench(110,1432) exact (all workspace-envelope poses)",
   "gap": 35.04,

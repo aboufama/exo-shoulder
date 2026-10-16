@@ -924,17 +924,18 @@ stack order (`docs/concepts/zc-frontier-3r.md`, `tools/zc_frontier.py`, data `do
   median 63 deg).
 * **Proximity is.** Of the 3560 kinematically viable configs, 3639 of the 4268 evaluated have a hub axis with no skin
   within 170 mm (hub 2 or hub 3 floats), and the 235 with all three hubs on the body reach in-band <= 0.669 (hub 2
-  median 0.06). Over 8828 full evaluations on the verification bench (sweep + 8 CMA streams) the frontier is: reach
-  <= 0.633 at in-band >= 0.88, in-band <= 0.445 at reach >= 0.7625. CMA started from four wide-window basins ends at
-  64.9-74.1; one forced to a1 = 52 walks back to a1 36.7.
+  median 0.06). Over 15394 full evaluations on the verification bench (sweep + 22 CMA streams) the frontier is:
+  reach <= 0.633 at in-band >= 0.88, in-band <= 0.592 at reach >= 0.7625. CMA started from four wide-window basins
+  ends at 64.9-74.1, one forced to a1 = 52 walks back to a1 36.7, and eight restarts of J1 over the back / medial top
+  either return to the acromion top (32.1-38.5) or stay wide-window (55.8-72.2).
 * **Mechanism, measured as a slice (fixed a1, same seats, Bench(60,160)):** a1 38 / 46 / 54 / 62 -> gap 27.2 / 43.8 /
   55.6 / 67.4, hub 2 level 60 / 64 / 86 / 107 mm, hub 2 in band 1.00 / 0.90 / 0.06 / 0.01, reach +0.05 at best.
   A complexity-0 hub is one disc at one level on an axis the closure moves; the arcs that open the fold window
   carry it over skin spanning more than the 12 mm band.
 * **Converged optimum: 28.85 fast / 31.04 frozen exact (score 88.7; round-3 protocol 33.51)** at J1 bvec(109.4,
   65.9), J3 wdir(85.7, -16.2), a1 36.7 / a2 69.1, branch -1, inverted J3 stack (link 2 on hub 3's lower plate: worth
-  ~8 points over the normal stack at these seats on the fast big bench). Six convergence streams (1446 evaluations)
-  found nothing 0.05 better. The fold takes 121 of 136 lost workspace poses (44 folded, 77 stretched; across the body
+  ~8 points over the normal stack at these seats on the fast big bench; +4.1 at k7008's seats). Six convergence
+  streams (1446 evaluations) found nothing 0.05 better. Out of sample (all 1432 workspace poses, exact): 35.04. The fold takes 121 of 136 lost workspace poses (44 folded, 77 stretched; across the body
   19 / 68, overhead 6 / 28).
 * **What follows.** At complexity 0 the measured ceiling is ~31 exact: 13.75 needs reach +0.13 at the same in-band,
   i.e. a second fold window (relay, 4th joint) whose hub 2 stays in band in the poses it rescues. A radial slide at
