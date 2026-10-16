@@ -80,7 +80,9 @@ the 5-deg rule; `refuted_by_prior_claim_bd`, `v_gap_claim_stops_kit_rule`); henc
 **GPU search of the simplest class:** 560,478 = 112,100 + 448,378 Sobol configs bounded, 186,248 fully scored
 (`docs/research/golden/README.md`); dots = the best of each of the 154 CMA / polish / frontier basins in
 `docs/research/golden/gpu_frontier.json` (`basins[].best`: reach, inband14; dots outside the plotted window are not drawn);
-frontier line = the README's "Reach / in-band frontier" table (best in-band14 at reach >= R); the score >= 95 zone =
+frontier line = the README's "Reach / in-band frontier" table (best in-band14 at reach >= R), drawn as a staircase because
+each row holds from its R up to the next R (the last step carried to the furthest drawn basin; the first cut drew a polyline
+through the table points, which put 8 of the 154 basin dots above the line, fixed by the independent check, `CHECK.md`); the score >= 95 zone =
 (0.90 - reach)+ + (0.90 - in-band)+ <= 0.1375 (it assumes follow >= 0.95 and no contact, the best case); ceiling = the class's
 verified 31.04 exact frozen = 88.71.
 
@@ -91,7 +93,12 @@ verifier reproduced the claim to the digit are not drawn (no movement): acromial
 polish candidate (`v_p5_gain` 3.11 in sample, `v_p5_gain_held` 0.16 on 1154 held-out poses, `v_p5_refuted` true).
 
 **The verified leader** (each step is the verifier's number on the protocol of that day; the protocols changed, e.g. the pin knee
-re-measured 27.20 at the 5-deg margin at 08:17, which was not a new best and is not drawn):
+re-measured 27.20 at the 5-deg margin at 08:17, which was not a new best and is not drawn). Three verifier numbers are left out
+on purpose, so a viewer should read the chart as the leader under today's rules: spine-parked-j2-3r's 34.29 (87.53) at 03:39,
+measured on O15 slim hubs that the user's "Keep O20 only" ruling (05:50) voided (its row now reads 41.00), and beaten by the pin knee 19 min later;
+the H1 verifier's margin-5 reading 24.48 (91.10) at 06:30, drawn instead at its polish-protocol number 26.45 (90.38, the lower one);
+and minarc variant B's 18.45 (93.29) at 09:45, a verifier's re-measure of a claim it refuted, before the buildable stop tolerance was
+priced (BDp 19.54 is the first confirmed minarc claim).
 
 | time (UTC) | design | gap | score | source |
 |---|---|---|---|---|
@@ -110,6 +117,9 @@ re-measured 27.20 at the 5-deg margin at 08:17, which was not a new best and is 
   spreads 8, #c3c2b7 spreads 12): the only tint is the dashboard's own warm grey, nothing else carries a hue.
 - No detailed CAD: the film reads only `motion.json`, the data files above and the fonts; no image from `renders/` or
   `pipeline/` is used.
+
+- Independent check (frames at every number-bearing moment, every number recomputed from git at `d7f4bd2`, the user's brief
+  point by point, ffprobe): `CHECK.md`.
 
 ## How it was made
 
