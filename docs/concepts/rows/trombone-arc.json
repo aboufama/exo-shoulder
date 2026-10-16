@@ -38,5 +38,13 @@
   "Jc",
   "Ja"
  ],
- "v_contact": 0.0872
+ "v_contact": 0.0872,
+ "manufacturability": {
+  "verdict": "best scored variant NOT BUILDABLE in MVP1 (single stage buildable)",
+  "passive_translations": 0,
+  "reason": "best k143 is the 2-stage telescoping arc with a 2:1 cable sleeve (MVP1 forbids cables); the single-stage arc is a real part (KAA15XL0 + CF3 cam followers) but its tail runs into the neck",
+  "buildable_variant": "none (dead on the bench)",
+  "t": "2026-10-16",
+  "source": "docs/research/manufacturability_summary.md; docs/research/passive_dof_hardware.md; docs/research/manufacturability_audit.md"
+ }
 }

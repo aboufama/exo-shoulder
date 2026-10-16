@@ -55,5 +55,13 @@
  "model_file": "docs/concepts/models/crossed-skin-tracks.py",
  "v_contact": 0.0259,
  "v_score": 65.08,
- "v_note": "Checker 2026-10-15: k338 re-measured with CB_EXACT=1 on Bench(60,160) (CPU farm, 1761 s; the model's K3 maps take ~35 min per map on the loaded 4-core box), model file unchanged since 6a1a503 (no diff over the polish, nothing uncommitted): gap 96.04 (score 65.08) vs grid 94.55 (65.62), -0.54 pt; model's own checks on; refusals as claimed except contact 3 (grid 2); closure 0.708; per part exact in band 2-14: T_S 0.93, car_A 0.98, neck 0.64, T_H 0.24, car_B 0.05. Kinematic screen reach_kin 0.65, follow_kin 0.717 (gap_kin 48.3). Grid path reproduces 94.55 exactly (locally). Convergence numbers reproduced from the sweep file (2nd-half gain +2.96, best at polish try 160/208 in the last third, top-5 within 2.03 points): NOT converged, as claimed. Stays dead (65.1 < 74.9)."
+ "v_note": "Checker 2026-10-15: k338 re-measured with CB_EXACT=1 on Bench(60,160) (CPU farm, 1761 s; the model's K3 maps take ~35 min per map on the loaded 4-core box), model file unchanged since 6a1a503 (no diff over the polish, nothing uncommitted): gap 96.04 (score 65.08) vs grid 94.55 (65.62), -0.54 pt; model's own checks on; refusals as claimed except contact 3 (grid 2); closure 0.708; per part exact in band 2-14: T_S 0.93, car_A 0.98, neck 0.64, T_H 0.24, car_B 0.05. Kinematic screen reach_kin 0.65, follow_kin 0.717 (gap_kin 48.3). Grid path reproduces 94.55 exactly (locally). Convergence numbers reproduced from the sweep file (2nd-half gain +2.96, best at polish try 160/208 in the last third, top-5 within 2.03 points): NOT converged, as claimed. Stays dead (65.1 < 74.9).",
+ "manufacturability": {
+  "verdict": "NOT BUILDABLE at modelled height",
+  "passive_translations": 1,
+  "reason": "radial slide 0-25 mm: radial rods on LM3UU-class bushings stand ~10 mm + travel; modelled stack too low",
+  "buildable_variant": "none (dead on the bench)",
+  "t": "2026-10-16",
+  "source": "docs/research/manufacturability_summary.md; docs/research/passive_dof_hardware.md; docs/research/manufacturability_audit.md"
+ }
 }

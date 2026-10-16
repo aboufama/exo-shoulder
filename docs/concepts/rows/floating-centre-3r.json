@@ -72,5 +72,13 @@
    120.0,
    200.0
   ]
+ },
+ "manufacturability": {
+  "verdict": "NOT BUILDABLE",
+  "passive_translations": 3,
+  "reason": "XY float + normal travel = 3 translations, over the cap; the slip law needs +-20 / 6-9 mm normal travel, which no part gives in band (radial +-6: >= 15 mm by any route)",
+  "buildable_variant": "champion 3R + 2 in-plane cuff slides (2 x RSR3M ~10.5 mm), radial residual <= 3 mm to the liner",
+  "t": "2026-10-16",
+  "source": "docs/research/manufacturability_summary.md; docs/research/passive_dof_hardware.md; docs/research/manufacturability_audit.md"
  }
 }

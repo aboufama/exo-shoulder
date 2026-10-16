@@ -209,5 +209,13 @@
    "R16": 0.667,
    "passing": "7/19"
   }
+ },
+ "manufacturability": {
+  "verdict": "best scored variant NOT BUILDABLE in MVP1 (rigid rail buildable with changes)",
+  "passive_translations": 0,
+  "reason": "the 2-stage telescoping rail behind k1530's numbers needs a 2:1 cable loop or rack to keep the stages in step (MVP1 forbids cables/gears); the legal rigid rail best 59.34 shrinks to a 21 mm ring = a J2 hub",
+  "buildable_variant": "plain spherical 3R at rail-elbow's axes: 60.03 Bench(110,360) exact (champion 75.94); L1 CAD l1_3r-k2221 R1 56.1 %",
+  "t": "2026-10-16",
+  "source": "docs/research/manufacturability_summary.md; docs/research/passive_dof_hardware.md; docs/research/manufacturability_audit.md"
  }
 }

@@ -24,5 +24,13 @@
  "limiter": "J2 fold: reach 0.656 (51 workspace poses: across the body, behind the back with high axial, elev >= 90 in planes -15..15); near-touch metal 0.2-0.5 mm in 6 taken poses (rail #63, link 2 #152, hub 1 in the overhead peak).",
  "note": "Bench(60,160) fast grid, model conventions of the verified seed-offset-3r-slides (+ bridge strap, hub1-hub2 check, centred stage). Best k 722: {\"az1\": 94.61, \"el1\": 60.68, \"b1\": 0.34, \"az2\": 24.06, \"el2\": 48.54, \"b2\": 0.42, \"wd\": 75.16, \"wa\": -13.04, \"b3\": 0.21, \"S_max\": 21.22, \"centre\": 1}; slide half-ranges [7.8, 8.1, 6.7]; why not taken {'fold': 51, 'slide': 0, 'flip': 0, 'skin': 3, 'parts': 1, 'contact': 0}. Convergence gate: centred-stage tries (452): gain 1.70 over the 2nd half, 0.68 over the last third, top-5 spread 0.73 -> NOT converged (all 754 stage tries: 4.29 / 1.70 / 0.73). Optimistic: undersides fitted on the scored poses (seed lost 6.8 on Bench(110,360)). Next: CMA from k 722 until the gate passes, then the verifier. | red team 2026-10-15: chain alone (hubs + links + member 3) ib14 0.891 / gap 27.1 - the stage and reach (fold) cost the points; reach winner's curse 0.656 -> 0.592 on Bench(110,360); near-touch (<1 mm = contact) +6.5; real stage height +10 (3 mm plate) / +16 (6.5 mm). Champion same bench 75.94.",
  "doc": "docs/concepts/skin-normal-hubs-selfaligning.md",
- "v_contact": 0.027
+ "v_contact": 0.027,
+ "manufacturability": {
+  "verdict": "NOT BUILDABLE as modelled",
+  "passive_translations": 3,
+  "reason": "3-translation cuff (centred +-7.8 / 8.1 / 6.7); radial slide has no real component (~25 mm guide on end); red team: jams at 148 with VModel checks, repaired 45.76 on Bench(110,360) exact",
+  "buildable_variant": "offset-skin-normal-3r (2 slides in hub 3's plane, 2 x RSR3M / MGN03C ~10.5-11.5 mm): 32.61 Bench(60,160) fast, unverified",
+  "t": "2026-10-16",
+  "source": "docs/research/manufacturability_summary.md; docs/research/passive_dof_hardware.md; docs/research/manufacturability_audit.md"
+ }
 }

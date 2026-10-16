@@ -47,5 +47,13 @@
   "pct": 94.0,
   "comp": 1,
   "stage": 1
+ },
+ "manufacturability": {
+  "verdict": "NOT BUILDABLE",
+  "passive_translations": 3,
+  "reason": "3-translation self-aligning stage (25 / 10 / 5 mm) is over the cap; no radial component fits in band",
+  "buildable_variant": "none (dead on the bench anyway)",
+  "t": "2026-10-16",
+  "source": "docs/research/manufacturability_summary.md; docs/research/passive_dof_hardware.md; docs/research/manufacturability_audit.md"
  }
 }

@@ -23,5 +23,13 @@
  "verdict": "Not worth a GPU sweep as it stands (gap 87.6 vs the baseline's 68.9). The track itself is 80 % in band. But the loop that stays on in-band scapula skin closes only 64.5 % of poses, and the rigid link 2 (scapula to arm) is 14 % in band. AUDIT: death stands. Best re-measured on Bench(60,160) fast: gap 87.64. A loop following the full in-band zone (eroded 1-2 cells, no max-smoothing) closes 67-73 % but leaves the zone (track 97-149 mm or link 2 0-3 % in band): gap 111-148.",
  "limiter": "Closure, then link 2. Scapula-fixed metal stays in band only on a cap at el > ~65 deg plus a posterior lobe (45-64 mm from GH). A loop there has a two-circle crossing in 64.5 % of poses: rest (plane 30 elev 30), overhead elev 165, across the body, and the axial-rotation extremes have none. Link 2 is 14 % in band, at a median of 30 mm off the skin with the arm hanging in external rotation. The J3 disc and neck are 63 % in band.",
  "note": "Bench(60,160) fast. Best: thr ib100 (bench in-band loop), W (100,-15), a2 75, sigma -1, q 1.0, closed. Track 51-65 mm, J2 eye 74.7 mm, J3 disc 71.9 mm. The bogie pitch pivot and the 13 mm J2 radial slide are cam-set passive elements (determined by s), not counted. Red team: jam at Reach high shelf (|cos phi| 0.20); pinch 1.9 mm at the carriage (plane 45 elev 30); the loop's smallest turning radius is 8.7 mm, too tight for a 20 mm bogie.",
- "doc": "docs/concepts/scapula-halo-track.md"
+ "doc": "docs/concepts/scapula-halo-track.md",
+ "manufacturability": {
+  "verdict": "NOT BUILDABLE as modelled",
+  "passive_translations": 1,
+  "reason": "custom track: the loop's 8.7 mm smallest turning radius is tighter than a 20 mm bogie can follow; 13 mm J2 radial slide has no in-band component",
+  "buildable_variant": "none (dead on the bench)",
+  "t": "2026-10-16",
+  "source": "docs/research/manufacturability_summary.md; docs/research/passive_dof_hardware.md; docs/research/manufacturability_audit.md"
+ }
 }

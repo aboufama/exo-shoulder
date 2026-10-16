@@ -130,5 +130,13 @@
   "big_exact": null,
   "frozen_big_exact": null,
   "champion_big": 75.94
+ },
+ "manufacturability": {
+  "verdict": "NOT BUILDABLE as modelled",
+  "passive_translations": 3,
+  "reason": "3 passive translations (+-13.0 along / +-9.2 across / +-6.7 radial) is over the 2-translation cap; the radial slide was modelled at 0 height - a real THK RSR3M standing skin-normal is 12 + 13.4 = ~25 mm, a near-flat parallelogram ~16-17 mm: nothing fits in 14 mm",
+  "buildable_variant": "2-slide version (offsets on J3 only): 65.41 on Bench(60,160) fast; exact 2-slide subfamily = offset-skin-normal-3r",
+  "t": "2026-10-16",
+  "source": "docs/research/manufacturability_summary.md; docs/research/passive_dof_hardware.md; docs/research/manufacturability_audit.md"
  }
 }
