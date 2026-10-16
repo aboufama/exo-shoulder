@@ -338,3 +338,65 @@ Limiter, measured:
 **What would be needed instead.** A transmission that sets q0 as a smooth function of the J1-J3 angle, entered with a
 non-zero slope (a coupler that drives the rocker from link 1 / J2, as the round-4 state's "measured hope" says), not a
 force-closed unilateral stop. The fold lever has to be kinematic and continuous, not a relay.
+
+## Verification (adversarial verifier, 2026-10-16 ~06:20 UTC): REFUTED
+
+Verifier: `docs/concepts/verify/stop-relay-rocker-3r.py`. Raw results: `docs/concepts/verify/stop-relay-rocker-3r.results.json`.
+Every run used the frozen-shape protocol: fit on Bench(60,160) fast, every fitted level frozen, then worn on
+Bench(110,360) with CB_EXACT=1, on the exo-cpu1 farm (8 runs, about $0.20).
+
+**What the verifier added on top of the model's own checks** (K1-K7, dense K2 on q0..q3, declared-hub audit, crowns and
+walls of all 4 hubs, near-touch, overhead split):
+- **Continuity on the big bench.** The model's `frozen()` path never ran `connected()`; only `evaluate()` did. So the
+  queued frozen runs (.cache/srr/frozen_*) would have counted static relay islands. The verifier runs the flood fill on
+  Bench(110,360).
+- The spine-parked verifier's outer-face skin check on every member (strap tops, rocker, neck, hub crowns).
+- Near-touch over all faces.
+- 1 mm radial part-part clearance in K6 (the risley-turret rule).
+- Closure residuals (J2 closure and rocker arc), and hub F <= 140 mm for all 4 hubs, the pivot included.
+- An ablation with the rocker locked (relay = 0).
+
+| run (k12072 unless noted) | bench | gap | reach | follow | ib14 | ib10 | contact | near-touch gap | relay poses taken |
+|---|---|---|---|---|---|---|---|---|---|
+| claim as made (O15 R0/J2/J3, 10-deg stops), fit | (60,160) fast | 30.47 | 0.650 | 1.000 | 0.897 | 0.560 | 0.052 | - | 0 |
+| same, exact refit | (60,160) exact | **35.15** | 0.631 | 0.967 | 0.898 | 0.553 | 0.081 | 51.07 | 0 |
+| same, frozen | (110,360) exact | **38.10** | 0.578 | 0.973 | 0.898 | 0.556 | 0.057 | 47.74 | 0 |
+| same, rocker locked | (110,360) exact | 38.21 | 0.575 | 0.973 | 0.901 | 0.571 | 0.057 | 49.08 | - |
+| static best k8134 (27.32 claimed), frozen | (110,360) exact | 36.18 | 0.589 | 1.000 | 0.888 | 0.519 | 0.039 | 48.47 | 0 |
+| **rules of 2026-10-16 05:50 (O20 every hub, fold margin 5)**, frozen | (110,360) exact | **50.36** | 0.575 | 0.882 | 0.837 | 0.488 | 0.047 | 57.06 | 0 |
+| same, rocker locked | (110,360) exact | 50.06 | 0.575 | 0.882 | 0.840 | 0.502 | 0.047 | 56.76 | - |
+
+Other measurements on the claim-as-made frozen run:
+- Closure residual is 4e-10 deg; the rocker arc residual is 1e-5 deg.
+- Hub F: pivot 48, J1 50, J2 60, J3 71 mm (all accessible).
+- Min metal-skin distance is 0.14 mm over all faces. Five poses have top faces inside the skin (hub0, hub2, link2),
+  and they are already counted as contact.
+- Overhead (elevation >= 140): workspace reach is 0.143 (4/28).
+- 36 of the 470 big-bench poses close statically in mode C. None of them is taken: the other checks reject every one
+  before continuity is tested.
+
+**Findings**
+1. **A hard rule is broken.** The claimed configuration uses O15 slim hubs at R0, J2 and J3. The user's ruling of
+   2026-10-16 ~05:50 UTC allows only O20 hubs, at every joint (CLAUDE.md "The golden solution"). Re-measured at O20 with
+   the 5-deg fold margin, the frozen shape scores 50.36 (score 81.7). The shape was not re-optimised for O20, so this is
+   what this configuration is worth under the rules, not a ceiling for the morphology.
+2. **The claimed number does not survive, even under the old rules.**
+   - 29.82 fast was claimed. Through the same checks on the fast path it measures 30.47 (the 1 mm radial K6 is stricter).
+   - The exact path on the same Bench(60,160) gives 35.15.
+   - Frozen on Bench(110,360) exact it gives 38.10, so the fast cache was worth about 4.7 points to this shape.
+3. **The rocker is inert.** No relay pose is taken on any bench. The locked control is within 0.1 points (old rules)
+   and 0.3 points (new rules), in both directions. The design adds complexity 13.5 (a sensed passive pivot plus a
+   spring) and an MVP2 incompatibility (0.87 tau1 of the J1 motor lands on the centring spring) for nothing.
+4. **R17 holds.** The spring-centred spare joint is force-determined. An upper bound with all moving mass (~47 g) at
+   62 mm is 0.029 N.m, against a preload T0 of 0.2 N.m. It is not an undetermined coordinate. The active DOF count is 3.
+
+**Champion on the same bench:** 75.94 (the risley-turret verifier: kit checks plus 1 mm radial clearance). The design
+beats the champion (50.36 / 38.10 against 75.94). The status is still **refuted**, for three reasons:
+- the claimed configuration breaks the O20-only hub rule;
+- its claimed 29.82 becomes 38.10 (old rules) or 50.36 (current rules);
+- its distinguishing element, the relay rocker, is measured inert.
+
+The agent's own recommendation to drop the morphology stands.
+
+New knowledge for the kit: a model's frozen / big-bench path must run every pose filter that its `evaluate()` runs
+(here `connected()`). Otherwise a frozen run silently scores what the search was told not to count.
