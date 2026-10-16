@@ -1,0 +1,91 @@
+[
+{
+"params": {
+"sK": 1,
+"note": "minarc BDp seats, bk 35/50, cs 25 ws 25 mons 8"
+},
+"inband14": 0.7218,
+"inband10": 0.4821,
+"reach": 0.5062,
+"follow": 0.7333,
+"contact": 0.0942,
+"gap": 88.29,
+"gap_plain": 88.29,
+"src": "local",
+"k": 0,
+"t": "2026-10-16T12:23:36Z"
+},
+{
+"params": {
+"sK": -1,
+"note": "minarc BDp seats, bk 35/50, cs 25 ws 25"
+},
+"inband14": 0.7138,
+"inband10": 0.4763,
+"reach": 0.5375,
+"follow": 0.9167,
+"contact": 0.1187,
+"gap": 72.58,
+"gap_plain": 70.07,
+"src": "local",
+"k": 1,
+"t": "2026-10-16T12:23:36Z"
+},
+{
+"params": {
+"sK": 1,
+"cs": 40,
+"ws": 45,
+"bk1": 30,
+"bk2": 45,
+"note": "minarc BDp seats"
+},
+"inband14": 0.7554,
+"inband10": 0.4914,
+"reach": 0.6937,
+"follow": 0.9167,
+"contact": 0.0726,
+"gap": 50.42,
+"gap_plain": 45.68,
+"src": "local",
+"k": 2,
+"t": "2026-10-16T12:23:36Z"
+},
+{
+"params": {
+"sK": 1,
+"cs": 30,
+"ws": 35,
+"note": "H1 seats"
+},
+"inband14": 0.7196,
+"inband10": 0.3964,
+"reach": 0.5062,
+"follow": 0.5333,
+"contact": 0.096,
+"gap": 111.53,
+"gap_plain": 108.69,
+"src": "local",
+"k": 3,
+"t": "2026-10-16T12:23:36Z"
+},
+{
+"params": {
+"sK": 1,
+"cs": 0,
+"bk1": 30,
+"bk2": 45,
+"note": "CONTROL: cam off (rigid K) at the k2 seats"
+},
+"inband14": 0.7219,
+"inband10": 0.4397,
+"reach": 0.45,
+"follow": 0.8,
+"contact": 0.0698,
+"gap": 87.59,
+"gap_plain": 84.79,
+"src": "local",
+"k": 4,
+"t": "2026-10-16T12:23:36Z"
+}
+]
