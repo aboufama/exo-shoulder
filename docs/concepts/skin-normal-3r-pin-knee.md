@@ -1149,3 +1149,88 @@ independent, so this is not a digest copy.
 * Next:
   * The cross-fit polish (`tools/crossfit_polish.py`) should keep ang_min >= 30 unless the user rules otherwise.
   * Ask the user whether a ~22-deg knee window is acceptable for the unpowered MVP1: F7 then gains 1.33-1.44 held out.
+
+## Gen-3 CAD rebuilt: machined bars that follow the model strap (user_pinknee_h1b, 2026-10-16 ~12:20 UTC)
+
+Design `pipeline/full-exo/designs/user_pinknee_h1b` (user_pinknee_h1 is kept as built). Same frozen H1 shape, same L1
+frames, same builder, two flags:
+
+    PK_EAR_DZ="" PK_LINK1_MACHINED=1 PK_LINK2_MACHINED=1 OMP_NUM_THREADS=1 nice -n 10 python3 \
+        pipeline/conformal/param_cad/user_style_pinknee.py --out user_pinknee_h1b --l1 l1_skin-normal-3r-pin-knee-h1 \
+        --shape .cache/pk_shapes/h1_b110_360_m5.pkl
+
+**What changed (design changes only):**
+- **Both link bars are 5-axis machined from solid and hug the model strap** (`sketch2d.hug_chain`): the bar's skin side
+  stays >= 0.1 mm above the strap the evaluator scored (max over its columns, in the bar plane) and is pulled to within
+  0.3 mm of it; climb <= 60 deg; bends down to R3 on the centre line (link 1: 1.5 mm inner; link 2: R3.5, 2.0 mm inner).
+  That is below the 15 mm bent-bar rule, so both parts say "5-axis machined from solid" in their names (the CAD ruling).
+  Link 2 (56 deg of arc) is fitted in 4 pieces pinned to the strap at 22 / 37 / 53 deg (`hug_chain_pieces`): a single
+  6-7 segment chain could not hug it (5.7-7.3 mm over, measured).
+- **Seats shrink to the model's hub footprint:** 11 mm pads with R2 planform rounds (was 14 / R6), inside the model's own
+  lift zone (hr + 2.5 = 12.5 mm).
+- **Pins a, b carry the DIN 6799-3.2 land** (verifier's C2): the O4 pin ends 1.0 mm beyond the groove's outer wall, 0.3 x
+  45 deg chamfer, so it stands 0.9 mm proud of the knee link's outer face (away from the skin), inside the L1's judged
+  retainer envelope (RET 0.9 over the washer).
+- **Link 2's J2 ring-root fillet is left plain:** OCC's fillet segfaults on that root next to the short seat (a forked
+  test now guards it, `build.json` ring_root_fillet_skipped). No other part changed: member 3, knee, BOTTOM + pad mount,
+  cuff and base (the J1 upper member, no ears: at the seat level 13 / 180 headings clear the new link 1, none clears the
+  skin envelope - the same verdict as h1) are rebuilt identically.
+
+**Bars over the model strap, before -> after** (own scripts in the session scratchpad, not in the repo; method: libigl
+distance from the model's strap samples `link_pts` to the built bar in its member frame, and the bar's skin side vs the
+strap envelope in the bar plane (`sketch2d.sample` of build.json's chain); the hub zone = the footprint + the model's own 60-deg ramp stations, the span between = link 1
+15.4-25.6 deg, link 2 12.6-59.7 deg):
+
+| | h1 link 1 | h1b link 1 | h1 link 2 | h1b link 2 |
+|---|---|---|---|---|
+| model samples -> bar, max (all) | 4.13 | **2.58** | 10.90 | **5.56** |
+| same, between the hub zones: max / mean | 4.13 / 2.55 | **2.08 / 0.98** | 10.83 / 4.76 | **4.73 / 1.70** |
+| in-plane skin side over the strap envelope, between: max / mean | 6.24 / 2.97 | **1.45 / 0.48** | 9.42 / 2.36 | **5.22 / 0.45** |
+| share of the span within 0.5 / 1.0 mm (in-plane) | 0 / 0 % | **62 / 87 %** | 45 / 51 % | **86 / 89 %** |
+| process | machined (R5) | machined (R3) | bent (>= 15.5 mm) | machined (R3.5) |
+| mass | 14.0 g | 13.4 g | 19.8 g | 19.4 g |
+
+The 0.5 mm target holds over 62 % (link 1) / 86 % (link 2) of the span, not everywhere. What remains, measured:
+- **the ends of the span are ramp feet:** link 2 is 5.2 mm over at 59.6 deg (the foot of the J3 ramp: R3.5 arcs at both
+  ends of a 60-deg climb widen the model's sharp-cornered ramp by ~4 deg) and 3.4 mm at 12.6-13 deg (the foot of the 5.4 mm
+  drop right after J2's footprint, steeper than 60 deg in the model's l1 rows); link 1 1.45 mm at the foot of J1's drop;
+- **the strap is tilted across its width, the bar is flat:** the model's 4 columns differ by up to 1.22 (link 1) / 2.96 mm
+  (link 2) across 8 mm (mean 0.82 / 2.22). A flat bar sits on the highest column; following the tilt would need a
+  twisted surface (no lofts / no twisted sweeps). That is why the model-sample metric (4.73 max, 1.70 mean on link 2)
+  stays above the in-plane one (0.45 mean).
+- 0.29 mm of the model's strap samples lie inside the bars, inside the hub footprints only (the seat plate is at the
+  plate level; the model lifts its strap 0.2 mm above it there) - no skin consequence.
+
+**Fly-over with the longer pins:** link 2 vs the knee-side parts (knee link, both pins with clips / sleeves / washers,
+BOTTOM + pad, member 3), posed by the judges' path over every 2nd clip frame + every eval-feasible workspace pose (1146
+frames): no knee-side part comes within 4 mm of link 2 in h1 or h1b (none ever enters link 2's bounding box + 4 mm);
+member 3 stays at the stack's designed 0.15 mm at J3. R6 (judge, every 3rd frame, 2586 pairs) 0.0 mm.
+
+**Judges** (farm `cloud_run.py judge user_pinknee_h1b fast`, 1552 s, $0.03-0.15; R7 locally with OCC; h1 = the
+verifier's re-run on the current files, VERIFY.md C1):
+
+| | h1 | h1b | change |
+|---|---|---|---|
+| R1 (2-14 mm) | 71.40 % | **76.72 %** | **+5.3** (L1 80.1) |
+| R1-aim (2-10 mm) | 32.85 % | **35.79 %** | +2.9 (L1 42.3) |
+| R4 overhead | 68.67 % | **71.23 %** | +2.6 (L1 74.2), Raise overhead min gap 1.79 mm (1.78) |
+| R6 | 0.0 mm | 0.0 mm | 451 frames x 2586 pairs |
+| R16 | 61.67 % | 61.67 % | the workspace judge poses the L1 frames: unchanged |
+| R3 / R2 / R7 / R8 / R11 / R17 | 98.7 % / 24.87 mm (user's) / PASS / 178.9 g / 0.303 kPa / PASS | 98.7 % / 24.87 mm / PASS / 178.0 g / 0.213 kPa / PASS | |
+| pass | 8 of 19 | 8 of 19 | |
+
+Every clip gains (14 mm band; h1 per clip from its judged files, 0.2-0.3 above the verifier's re-run): Reach back pocket 85.8 -> 91.5 %, Walking 82.4 -> 91.7 %, Comb hair 76.8 -> 83.3 %, Drink
+70.3 -> 76.2 %, Wash 49.8 -> 54.2 %, Wave 59.8 -> 62.8 %, Raise overhead 69.0 -> 71.2 %. The CAD recovers 5.3 of the 8.7
+R1 points it lost against its L1, 2.9 of 9.5 R1-aim and 2.6 of 5.5 R4. All of these numbers move because of the design;
+the measurement did not change (same judges, same step, same clips).
+
+**Measurement change (R7 judge, separate from the design):** `judge/part_validity.py` skipped every H / F part in its
+L1-mesh branch, so the arm pad, the pad mount and the pin b retainer were never judged. It now skips only the user's own
+unmodified parts and catalogue screws, and the STEP branch checks that every custom part in parts_full.json has a STEP.
+On the L1 `l1_skin-normal-3r-pin-knee-h1` the arm pad, pad mount, pin b retainer and the project's upper-arm cuff pass,
+but **the L1's cut BOTTOM mesh fails** (one open piece + 6 stray triangles): its R7 goes PASS -> FAIL (8 -> 7 of 19). The
+full CADs are unaffected: their BOTTOM is one OCC solid fused with the pad mount (D8-06 valid), coverage 29 / 29.
+
+**Next levers, in order:** the J2 drop / J3 ramp feet of link 2 (a 2 mm centre-line bend at the ramp ends, or letting
+link 2 leave J2's level at 11 mm now that link 1's J2 pad ends there: needs R6 over the J2 sweep); the cross-width tilt
+(a bar plane tilted to the strap's mean tilt, or two flat facets); then the 10-deg cuff trim on followed frames only.

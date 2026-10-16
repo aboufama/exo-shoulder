@@ -407,5 +407,10 @@
    ]
   }
  ],
+ "coverage": {
+  "custom_parts": 29,
+  "arm_fixed_custom": 3,
+  "missing_step": []
+ },
  "all_ok": true
 }
