@@ -184,9 +184,11 @@ def bell_crank(dv):
     ring = np.array(ring); w = ring - ax; rad = np.linalg.norm(w - np.outer(w @ u2, u2), axis=1)
     over = ring[rad < TUBE_R + 0.6] @ u2
     t_top = min(hb + 20.0, float(over.min()) - 0.5) if len(over) else hb + 20.0
-    t_bot = hb + 1.8; boss_top = hb + 1.5
-    post = disc(ax, u2, POST_R, hb - 1.5, t_top)
-    boss = disc(ax, u2, 4.5, hb - 1.6, boss_top)
+    # the CAD's link 1b at the rocker base is its J2 lower pad lifted to the hub level (F2 + 0..3, the L1's hub-zone lift), not the
+    # model's unlifted strap (hb): the boss stands in that pad and 1 mm above it, the post is pressed through it
+    boss_bot, boss_top = f2 + 0.5, f2 + 4.0; t_bot = boss_top + 0.3
+    post = disc(ax, u2, POST_R, f2 + 0.3, t_top)
+    boss = disc(ax, u2, 4.5, boss_bot, boss_top)
     tube = rev([(TUBE_BORE, 0), (TUBE_R, 0), (TUBE_R, t_top - t_bot), (TUBE_BORE, t_top - t_bot)], pa(t_bot), u2)
     for z0, z1 in ((0.0, 2.5), (t_top - t_bot - 2.5, t_top - t_bot)): tube = tube.cut(rev([(0, z0 - 0.01), (MR85_R, z0 - 0.01), (MR85_R, z1 + 0.01), (0, z1 + 0.01)], pa(t_bot), u2))
     # follower arm: tube -> roller pin (O5 eye), plate ARM_F_Z
@@ -209,7 +211,8 @@ def bell_crank(dv):
     rpin = disc(C0 - (C0 @ u2) * u2, u2, PIN_R, f2 + ROLLER_Z[0], f2 + ARM_F_Z[1])
     cpin = disc(A0, eA, PIN_R, s_lo + 0.5, 0.5 * EYE_H + 1.8)
     clipA = rev([(PIN_R - 0.2, 0), (3.0, 0), (3.0, 0.6), (PIN_R - 0.2, 0.6)], A0 + (0.5 * EYE_H + 0.7) * eA, eA)
-    info = dict(post=[round(hb - 1.5, 2), round(t_top, 2)], post_length_mm=round(t_top - hb, 2), tube=[round(t_bot, 2), round(t_top, 2)],
+    info = dict(post=[round(f2 + 0.3, 2), round(t_top, 2)], post_length_mm=round(t_top - hb, 2), post_free_mm=round(t_top - boss_top, 2), boss=[round(boss_bot, 2), round(boss_top, 2)],
+                model_rocker_base_h=round(hb, 2), tube=[round(t_bot, 2), round(t_top, 2)],
                 eye_low_over_tube=round(float(over.min()), 2) if len(over) else None, follower_arm_mm=round(Lf, 3), crank_arm_mm=round(Lc, 3),
                 crank_pin_tilt_deg=round(math.degrees(math.acos(float(np.clip(dv["pin"] @ u2, -1, 1)))), 2), rocker_axis_to_u2_mm=round(float(np.linalg.norm(ax)), 3),
                 valid=dict(crank=crank.isValid(), crank_solids=len(crank.Solids())))
@@ -410,8 +413,9 @@ def main():
             s2 = s.cut(ring_cut); s2 = s2.clean() if s2.clean().isValid() else s2
             lk[i] = (g, n.replace("flies over", "upper ring turned to O18 over F+6.15..8.95 for the lobe ring, flies over"), s2)
         if n.startswith("D8-02b"):
-            s2 = US.glue(s, bc["boss"]).cut(disc(dv["axis"], dv["u2"], POST_R - 0.01, float(dv["Pb"] @ dv["u2"]) - 1.5, float(dv["Pb"] @ dv["u2"]) + 2.0))
+            v0 = s.Volume(); s2 = US.glue(s, bc["boss"]).cut(disc(dv["axis"], dv["u2"], POST_R - 0.01, dv["f2"] + 0.2, dv["f2"] + 4.1))
             s2 = s2.clean() if s2.clean().isValid() else s2
+            assert s2.Volume() > v0 and len(s2.Solids()) == 1, f"link 1b + rocker boss: volume {v0:.1f} -> {s2.Volume():.1f} mm3 (the boss does not seat in the bar)"
             lk[i] = (g, n.replace("J2 pad", "the rocker post boss (O9, press hole O5), J2 pad"), s2)
     parts += lk
     lobe, rep["lobe"] = lobe_ring(dv)
@@ -419,7 +423,7 @@ def main():
     parts += [("l2", f"D9-01 drive lobe ring: 17-4PH H900, wire-EDM, the exact RSSR profile r {rep['lobe']['profile_r'][0]:.2f} -> {rep['lobe']['profile_r'][1]:.2f} mm "
                      f"({rep['lobe']['arcs']} 3-point arcs), R3 concave into the O20.2 dwell, bore O18 on link 2's turned ring, keyed by an O1 dowel at the onset q2 "
                      f"{lg['law']['q2hi_deg']:.3f} deg, F+{LOBE_Z[0]}..F+{LOBE_Z[1]}", lobe),
-              ("l1b", f"drive rocker post: O5 x {bc_info['post_length_mm'] + 1.5:.1f} 17-4PH H900, pressed 1.5 mm in link 1b's boss, axis || J2 "
+              ("l1b", f"drive rocker post: O5 x {bc_info['post'][1] - bc_info['post'][0]:.1f} 17-4PH H900, pressed 3.7 mm through link 1b's J2 pad + boss, axis || J2 "
                       f"({bc_info['rocker_axis_to_u2_mm']:.2f} mm off it)", bc["post"]),
               ("dk", f"D9-02 drive bell crank (Ti-6Al-4V): tube O10 on the post, follower arm {bc_info['follower_arm_mm']:.2f} mm, crank arm {bc_info['crank_arm_mm']:.2f} mm "
                      f"+ crank-pin boss tilted {bc_info['crank_pin_tilt_deg']:.1f} deg (square to the rod)", bc["crank"]),
