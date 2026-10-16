@@ -182,3 +182,14 @@ first CMA round (27 tries) ran on the exact path (missing cache link) and is log
 2. In-band dilution is the dominant way a route "gains" on a good design; a fixed-part-size in-band (`gap_fixed_n`)
    is needed to judge any shape change that also changes part size.
 3. The posterior J1 line is dead in the knee family too (skin, not fold, takes the poses).
+4. With routes free, CMA moves the pin knee's J3 seat 3.3 deg proximal (wdir(75.9, -14.0)): hub 3, the knee link, boss
+   and pad come into band (hub 3 0.75 -> 0.84, knee 0.64 -> 0.80) and the in-band target (0.90) is met on the large
+   bench (31.52 frozen exact, 0 passive translations). From here only reach moves the score: the J2 fold, 139 of 470.
+
+## Next (the loop)
+
+* Independent verifier on A2 (`best_params` in the row): re-measure fast + frozen exact with the pin-knee verifier
+  harness, and re-score at fixed part sizes; check the 0.12 / 0.19 mm near-touch poses and the 2 mm margin (65.38).
+* Hand A2's J3 seat to the pin-knee track (a pin-knee freedom), and the bent link 1 (t 0.80, d -30.6, arc r 10) to the
+  L1 CAD as a bent bar if the verifier confirms >= 1 point at fixed part sizes.
+* The fold is the only lever left on this family: J2 metal off the J2 ray (arc guide / carriage families).
