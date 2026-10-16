@@ -74,6 +74,21 @@ Model: `docs/concepts/models/cam-unfold-4th.py` (subclasses the minarc variant-B
 | **CMA best (S2, 6 streams, 5206 tries)** | **27.07** | **25.85** | **0.700** | 0.950 | 0.842 | 0.000 | score 90.16 near-touch fast |
 | **control**: S2 seats, cam off (rigid K) | 31.57 | 30.05 | 0.688 | 0.983 | 0.824 | 0.012 | cam worth 4.5 points at the optimum |
 | **control**: S2 seats, no K at all (the plain pin knee) | 27.68 | 27.68 | 0.669 | 0.917 | 0.921 | 0.012 | the pin knee alone ties it |
+| S2 continuation (S2b / S2c, 1354 tries) | 26.55 | 25.33 | 0.688 | 0.950 | 0.859 | 0.000 | flange cam converged |
+| **crown cam CMA best C3** (C1-C3, 2779 tries; hub 2 O20 x 15.25, two-sided lobe) | **23.23** | **22.02** | **0.706** | 0.967 | **0.891** | 0.017 | score 91.6 near-touch fast; min metal 0.85 mm |
+| **control**: C3 seats, cam off (rigid K) | 32.06 | 30.81 | 0.644 | 0.917 | 0.902 | 0.019 | the cam is worth 8.8 points |
+| **control**: C3 seats, no K at all (the plain pin knee) | - | 30.85 | 0.631 | 0.917 | 0.928 | 0.006 | |
+
+C3 (the best): J1 bvec(93.00, 67.52), J2 bvec(35.81, 48.14), J3 wd 71.58 / wa -5.69, b3 0.302, knee lE 66.5, lc 31.5,
+phiE -3.0, phib -60.4, ang_min 30.46, stk 5.68; K bk1 21.18 / bk2 50.68, sK -1; crown cam (cam_r 10, cam_h 3);
+stretched lobe mons 13.7, ws 47.4, cs 31.6; folded lobe monf 15.3, wf 12.9, cf 12.9 (slope 1.5 = the pressure-angle cap).
+a1 34.3, a2 66.9; th window 34.5-97.9; a2e 63.8-68.6; 27 fit poses on the stretched lobe, 18 on the folded one.
+Per part in band: hub 1 1.00, hub 2 0.98, **hub K 0.76**, hub 3 0.77, L1 0.92, **L2a 0.18** (a 25 mm stub), L2b 0.78,
+E 0.92, knee 0.95. Overhead (fast): reach 2 of 12, follow 5 of 5.
+
+**Convergence gate (all 11 streams, 9339 tries in generation order): +0.52 score points over the second half, +0.21
+over the last third, top-5 within 0.10 -> passes.** C3 alone: 0.52 / 0.31 / 0.10 (passes); the S2 family 0.18 / 0.13 /
+0.04 (passes). C2 (crown cam, K 24 / 62 on the J1 side) did not converge (8.5 / 7.6) but sat at 32.18, 9 points behind.
 
 CMA best S2: J1 bvec(93.52, 60.83), J2 bvec(35.33, 41.52), J3 wd 62.11 / wa -9.97, b3 0.239, knee lE 63.6, lc 25.7,
 phiE -8.9, phib -51.5, ang_min 30.46, stk 5.68; K bk1 29.15 / bk2 45.94, sK +1; stretched lobe mons 20.9, ws 74.8,
@@ -94,8 +109,10 @@ L2b 0.64, E 0.98, knee 0.98. Lost: 36 fold, 15 knee window. Overhead (elevation 
 2. **Where it is in band, it collides.** K in patch (a) circles J2 at 22-30 deg over the ~136 deg q2 window and
    passes over hub 1 (35 deg from J2): the targeted sweep (192 configurations) loses 40-114 poses to hub1-hubK and
    L1-L2a / L2b-hub1 clashes; its best is 59.47. With the O30 flange cam, patch (a) at 22 deg also overlaps hub 2.
-   The crown cam (hub 2 O20, 15.25 tall) puts hub K at 0.75 in band at bk1 23, but hub 1 still collides in 93 poses.
-3. **So the search turns the cam down.** The best stream (S2) converges to a flat, late lobe (a2e +4 deg, slope 0.5).
+   The crown cam (hub 2 O20, 15.25 tall) puts hub K at 0.75 in band at bk1 23 on the J1 side, but hub 1 still collides
+   in 93 poses. On the OTHER side (sK -1, C3: bk1 21, bk2 51) it clears hub 1 and holds 0.77 in band, but there K's
+   rotation unfolds a2 by only 4.8 deg (a2e 63.8-68.6): enough for 8.8 points, not for the overhead.
+3. **So the search turns the cam down.** The best flange-cam stream (S2) converges to a flat, late lobe (a2e +4 deg, slope 0.5).
    The streams that keep a real lobe buy reach and lose more in-band than they gain:
    - S4, a TWO-SIDED cam (the lever a spring knuckle cannot have): a2e 60.7-76.8, th window 29.1-108.4, 89 fit poses
      on a lobe, reach 0.706, in-band 0.825 (hub K 0.50): 30.24;
@@ -114,11 +131,13 @@ Protocol: fit on Bench(60,160) fast, freeze every level and the knee centre, wea
 
 | configuration | fast fit (plain) | frozen exact (plain) | score | reach | follow | in-band 14 | in-band 10 | contact | near-touch gap | min metal | overhead reach |
 |---|---|---|---|---|---|---|---|---|---|---|---|
-| **CMA best S2** | 25.85 | **31.88** | 88.4 | 0.658 | 0.955 | 0.840 | 0.496 | 0.017 | 35.21 (6 poses < 1 mm) | 0.23 mm (plane 45, elev 165) | 5 of 28 |
+| **CMA best C3 (crown cam, two-sided)** | 22.02 | **26.70** | **90.3** | 0.656 | 0.982 | 0.889 | 0.549 | 0.012 | 28.40 (3 poses < 1 mm) | 0.83 mm (plane 30, elev 165) | **8 of 28** (follow 10 of 10) |
+| CMA best S2 (flange cam) | 25.85 | 31.88 | 88.4 | 0.658 | 0.955 | 0.840 | 0.496 | 0.017 | 35.21 (6 poses < 1 mm) | 0.23 mm (plane 45, elev 165) | 5 of 28 |
 | H1, the verified pin knee (round-3 protocol: fit60 fast -> big exact) | - | 27.20 | 90.1 | | | | | | 31.75 | | |
 | minarc BDp, the verified leader (kit rule) | 12.25 | 19.06 | 93.1 | 0.725 | 1.0 | 0.895 | 0.597 | 0.011 | 26.15 | 0.05 | |
 
-Lost on the big bench: 95 poses to the fold (the cam window th 33.6-105.5), 27 to the knee window, 6 to contact.
+Lost on the big bench: C3 115 poses to the fold (window th 34.5-97.9), 2 to the knee window, 5 to parts, 4 to contact;
+S2 95 to the fold (window 33.6-105.5), 27 to the knee window, 6 to contact.
 Continuity: K is a single-valued function of q2 and th(q2) is strictly monotone on the window, so every arm pose has
 exactly one chain configuration; the 10 fps clip check (K included) drops 0 frames for flips (`why.flip` 0 on both
 benches) and no static island can form (no passive or redundant coordinate: the continuity flood fill is not needed).
@@ -128,10 +147,11 @@ benches) and no static island can form (no passive or redundant coordinate: the 
 1. **The pose that jams.** None by construction (one q2 per arm pose, K slaved, no spare coordinate). What the
    wearer feels instead is J2's dowel stop at the window's stretched end (th 105.5 deg): the overhead and across-body
    poses past it are simply not reachable (overhead 5 of 28 frozen, across-body 24 of 36 fast).
-2. **The point that pinches.** Hub 2's crown: 0.01 mm contact-only clearance at plane 45 / elevation 75 / axial 45
-   (fast); 0.23 mm frozen at plane 45 / elevation 165. 13 fit poses carry metal < 2 mm (near-2 gap 45.50 fast).
-   The O30 cam flange is the widest thing on the chain and sits exactly where hub 2 is tightest.
-3. **The optimistic number.** The fast 25.85 / 27.07 loses 6 points frozen (31.88 / 35.21), the usual sample effect.
+2. **The point that pinches.** C3: 0.83 mm frozen at plane 30 / elevation 165 (overhead), 3 poses under 1 mm. The
+   flange-cam S2 was worse: hub 2's crown at 0.01 mm (plane 45 / elevation 75 / axial 45) and 13 fit poses under 2 mm -
+   the O30 flange is the widest thing on the chain and sits exactly where hub 2 is tightest; the crown cam removes it.
+3. **The optimistic number.** C3's fast 22.02 / 23.23 loses 4.7 points frozen (26.70 / 28.40); S2 lost 6. The usual
+   sample effect; the frozen number is the claim, self-measured and not yet verified.
    The pushrod is modelled as a 3 mm-class strap layer (conservative by 0.5 mm); the cam flange as a full-height O30
    cylinder in part-part checks (conservative); the flange's skin-facing disc is exact.
 4. **Load path (MVP2).** The arm load through link 2b reaches link 2a through K's bearing AND the pushrod: a 0.5 N.m
@@ -139,3 +159,23 @@ benches) and no static island can form (no passive or redundant coordinate: the 
    2500 N. A powered build needs a stouter crank / coupler (the spec's four-bar variant) - not modelled here.
 5. **Backlash.** 0.05 mm groove clearance on a 4 mm crank = 0.7 deg of K play, ~1 mm at J3: inside the knee's
    compliance but not free.
+
+## Verdict
+
+**Screened; a working sensor-free 3-active design, not a new leader.** The arm-side cam knuckle with the crown cam and a
+two-sided lobe (C3) wears its frozen shape at **26.70 on Bench(110,360) exact (score 90.29)**, near-touch 28.40,
+reach 0.656, in-band 0.889, contact 0.012, overhead reach 8 of 28 - self-measured, unverified.
+- The cam earns its place against its own controls: +8.8 points over a rigid K and over the plain pin knee at the
+  same seats (30.85), mostly from the two-sided lobe (18 folded + 27 stretched fit poses). This is the first measured
+  use of a folded-end lobe - the lever a spring knuckle cannot have.
+- It does NOT beat the verified pin knee H1 (27.20 on the same protocol; 0.5 points is inside the noise, below the
+  1-point rule), at +14.25 complexity (33.75 vs 19.5), and it is 7.6 points behind the verified minarc BDp (19.06).
+- 0 passive translations; K is determined by q2 (3 active, R17 holds without a sensor or spring).
+
+**The measured reason (predicts beyond this morphology):** a 4th joint on link 2 has to sit within ~21-30 deg of J2
+to stay in band (its hub sweeps a q1 x q2 patch of skin), and there it either clashes with hub 1 or can unfold a2 by
+only ~5 deg. Fold relief has to act on link 1 (minarc, geneva-tail-knuckle) or at J2 itself.
+
+**Next (if anyone takes it further):** the same two-sided cam law moved to link 1 (K = c(q2) on the scapula side,
+which is what geneva-tail-knuckle does with a tooth) - the K-atlas says a link-1 hub is >= 0.92 in band over a wide
+arc, and the folded lobe is the new lever; then the independent verifier on C3 only if that variant fails.
