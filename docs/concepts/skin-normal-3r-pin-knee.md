@@ -554,6 +554,7 @@ Run on this box (nice, one process at a time), CB_EXACT=1, CB_FOLD_MARGIN=5, O20
 | reach / follow / in-band14 / in-band10 / contact | 0.6583 / 0.9636 / 0.8953 / 0.5539 / 0.0256 | identical |
 | near-touch gap (metal < 1 mm = contact) | 31.75 | 31.75 (8 poses < 1 mm, min metal 0.09 mm, clip frame 30 / 148 / -60) |
 | overhead (elev >= 140) | - | ws reach 0.179 (5 / 28), clip follow 0.60, in-band14 0.916; not taken: fold 15, knee window 7, contact 5 |
+| same harness at margin 10 (CB_FOLD_MARGIN=10) | 28.21 | **28.21** (near-touch 33.77): margin 10 -> 5 = -1.01, a measurement change |
 | raglan-knee-3r (own verifier, `big`, margin 5) | 27.82 | **27.82** (dilution-corrected 28.56, near-touch 32.34) |
 
 Checks the round-3 harness does not make:

@@ -948,5 +948,170 @@
    "polish_protocol_exact": 24.48,
    "fit60_verifier": 27.2
   }
- }
+ },
+ "v_rebase_verify": {
+  "t": "2026-10-16T08:17:52Z",
+  "verdict": "CONFIRMED (not refuted): 27.20 reproduces exactly (margin 5, O20, round-3 protocol, Bench(110,360) exact frozen); margin 10 28.21 exactly; raglan-knee-3r 27.82 exactly",
+  "harness": "docs/research/rebase/verify_rebase_pinknee.py (round-3 verifier unchanged + screw rank, null-space sensing, windows, accounting) + docs/concepts/verify/skin-normal-3r-pin-knee-continuity.py",
+  "m5": {
+   "gap": 27.2,
+   "reach": 0.6583,
+   "follow": 0.9636,
+   "inband14": 0.8953,
+   "inband10": 0.5539,
+   "contact": 0.0256
+  },
+  "m10": {
+   "gap": 28.21,
+   "reach": 0.6444,
+   "follow": 0.9636,
+   "inband14": 0.8994,
+   "inband10": 0.5326,
+   "contact": 0.0259
+  },
+  "near1_m5": 31.75,
+  "min_metal_mm": 0.09,
+  "overhead140": {
+   "ws": 28,
+   "reach": 0.1786,
+   "clip": 10,
+   "follow": 0.6,
+   "inband14": 0.9155,
+   "inband10": 0.6554,
+   "why_not": {
+    "fold": 15,
+    "slide": 7,
+    "flip": 0,
+    "closure": 0,
+    "skin": 0,
+    "parts": 0,
+    "contact": 5
+   }
+  },
+  "dof": {
+   "poses": 343,
+   "mobility": [
+    3
+   ],
+   "chain_rank": [
+    5
+   ],
+   "chain_sigma_min_rel": {
+    "min": 0.0639,
+    "p5": 0.0809,
+    "median": 0.1245
+   },
+   "sixth_sigma_rel_max": 1.56e-09,
+   "hubs_only_sensing": {
+    "sigma_min_min": 0.3919,
+    "sigma_min_p5": 0.4787,
+    "cond_max": 2.3,
+    "cond_p95": 1.9
+   },
+   "note": "mobility 3 + chain rank 5: the loop follows the arm with no undetermined passive coordinate; hubs_only_sensing sigma_min > 0 on every taken pose: the 3 hub rates fix the loop motion (knee pins need no encoder if GH is known; with GH drift they carry its in-plane part)"
+  },
+  "windows": {
+   "fold_margin_rule": 5.0,
+   "fold_window_deg": [
+    27.24,
+    109.28
+   ],
+   "fold_margin_min_taken": 5.49,
+   "fold_margin_lt_rule": 0,
+   "fold_margin_lt_10_taken": 5,
+   "knee_window": [
+    30.4611,
+    149.5389
+   ],
+   "knee_margin_min_taken": 2.239,
+   "knee_out": 0,
+   "radial_drift_max_taken_mm": 0.0,
+   "R_tol": 0.5,
+   "res_deg_max_taken": 0.0151
+  },
+  "accounting": {
+   "n_poses": 470,
+   "taken": 343,
+   "not_taken": 127,
+   "why": {
+    "fold": 97,
+    "slide": 14,
+    "flip": 0,
+    "closure": 0,
+    "skin": 0,
+    "parts": 7,
+    "contact": 9
+   },
+   "why_sum": 127,
+   "silent_drops": [],
+   "n_silent": 0,
+   "n_clip": 110,
+   "n_ws": 360
+  },
+  "envelope": {
+   "hub_r": [
+    10.0,
+    10.0,
+    10.0
+   ],
+   "crown": 12.25,
+   "up": 3.15,
+   "stk": 5.6815,
+   "tp": 2.591,
+   "run": 0.5,
+   "t_link": 3.0,
+   "w_link": 8.0,
+   "boss_r": 6.0,
+   "knee_w": 10.0,
+   "lE": 59.5534,
+   "lc": 28.2401,
+   "o20_only": true,
+   "fold_margin": 5.0
+  },
+  "continuity": {
+   "kin": {
+    "ws": 360,
+    "nodes": 249,
+    "connected": 249,
+    "static_reach": 0.6917,
+    "connected_reach": 0.6917
+   },
+   "taken": {
+    "ws": 360,
+    "nodes": 237,
+    "connected": 237,
+    "static_reach": 0.6583,
+    "connected_reach": 0.6583
+   },
+   "grid_taken": {
+    "poses": 1432,
+    "kin_ok": 971,
+    "nodes": 913,
+    "connected": 913,
+    "islands": 0,
+    "static_reach": 0.6376,
+    "connected_reach": 0.6376,
+    "overhead140": {
+     "poses": 108,
+     "nodes": 15,
+     "connected": 15
+    }
+   }
+  },
+  "complexity": 19.5,
+  "complexity_check": "tools/simplicity.py on the row's mechanism record, checked against the model (members 1, 2, 3, 6, 5; joints J1-J3, pin a, pin b): not understated; hub-only sensing is well conditioned (GH known), the 2 sensed pins stay per SIMPLICITY.md (R10 GH translation)",
+  "caveats": [
+   "model pin stack 5.68 mm omits the top thrust washer + e-clip (+1.4 mm outward of the knee bar; carried by the L1 CAD)",
+   "near-touch gap 31.75 (8 poses < 1 mm, min 0.09 mm)"
+  ],
+  "files": [
+   "docs/research/rebase/verify_pkH1_m5.json",
+   "docs/research/rebase/verify_pkH1_m10.json",
+   "docs/research/rebase/verify_pkH1_m5_r3harness.json",
+   "docs/research/rebase/verify_pkH1_cont_kin_m5.json",
+   "docs/research/rebase/verify_pkH1_cont_taken_m5.json",
+   "docs/research/rebase/verify_rg_m5.json"
+  ]
+ },
+ "v_connected_reach": 0.6583
 }
