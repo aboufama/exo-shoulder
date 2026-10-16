@@ -1,0 +1,169 @@
+{
+ "params": {
+  "az": 109.3565,
+  "el": 65.94,
+  "a1": 36.7226,
+  "a2": 69.0575,
+  "wd": 85.7423,
+  "wa": -16.19210000000001,
+  "sigma": -1,
+  "inv2": 0,
+  "inv3": 1,
+  "q": 0.978,
+  "end_extra": 1.784,
+  "margin": 5.0,
+  "width": 12.0,
+  "t_link": 3.0,
+  "rad1": 10.0,
+  "rad2": 10.0,
+  "rad3": 10.0,
+  "vm": 0,
+  "near": 0
+ },
+ "t0": "2026-10-16T07:15:28Z",
+ "wear_mode": "exact",
+ "wear_bench": [
+  110,
+  1432
+ ],
+ "fit110": {
+  "fit_mode": "fast",
+  "fit": {
+   "gap": 28.85,
+   "near": 38.14,
+   "reach": 0.6333,
+   "follow": 0.9545,
+   "inband14": 0.8901,
+   "contact": 0.0119,
+   "honest": true
+  },
+  "wear": {
+   "gap": 35.04,
+   "near": 42.94,
+   "model_gap": 35.04,
+   "reach": 0.5957,
+   "follow": 0.9545,
+   "inband14": 0.8911,
+   "inband10": 0.4472,
+   "contact": 0.0372,
+   "honest": true,
+   "audit": [],
+   "hub_F": {
+    "hub1": 51.0,
+    "hub2": 58.0,
+    "hub3": 71.0
+   },
+   "min_metal_all_faces": 0.04,
+   "top_contact_poses": 13,
+   "top_contact_who": [
+    "hub1",
+    "hub2",
+    "link2"
+   ],
+   "inband_member": {
+    "hub1": 0.9788,
+    "hub2": 1.0,
+    "hub3": 0.8181,
+    "link1": 0.9549,
+    "link2": 0.8846,
+    "neck": 0.8091
+   },
+   "overhead": {
+    "n_ws": 108,
+    "reach": 0.213,
+    "n_clip": 10,
+    "follow": 1.0,
+    "n_taken": 33,
+    "inband14": 0.9174,
+    "inband10": 0.6676
+   },
+   "mode": "exact",
+   "closure": 0.668,
+   "flips": 0,
+   "crown_contact_poses": 11,
+   "v_near1": {
+    "reach": 0.5691,
+    "follow": 0.9364,
+    "inband14": 0.8925,
+    "inband10": 0.4406,
+    "contact": 0.0774,
+    "gap": 42.94
+   }
+  },
+  "secs": 504.3,
+  "attribution": {
+   "table": {
+    "ws": {
+     "n": 1432,
+     "taken": 853,
+     "fold_folded": 168,
+     "fold_stretched": 339,
+     "jam_K2": 0,
+     "parts": 35,
+     "contact": 37
+    },
+    "clip": {
+     "n": 110,
+     "taken": 105,
+     "fold_folded": 0,
+     "fold_stretched": 5,
+     "jam_K2": 0,
+     "parts": 0,
+     "contact": 0
+    },
+    "overhead": {
+     "n": 108,
+     "taken": 23,
+     "fold_folded": 22,
+     "fold_stretched": 45,
+     "jam_K2": 0,
+     "parts": 6,
+     "contact": 12
+    },
+    "across": {
+     "n": 265,
+     "taken": 67,
+     "fold_folded": 0,
+     "fold_stretched": 196,
+     "jam_K2": 0,
+     "parts": 1,
+     "contact": 1
+    },
+    "behind": {
+     "n": 96,
+     "taken": 65,
+     "fold_folded": 4,
+     "fold_stretched": 24,
+     "jam_K2": 0,
+     "parts": 1,
+     "contact": 2
+    }
+   },
+   "contact_by_member": {
+    "link2": 8,
+    "hub3": 11,
+    "neck": 4,
+    "hub2": 13,
+    "link1": 1
+   },
+   "kin_ws": 0.6459,
+   "kin_overhead": 0.3796,
+   "th_ws_p5_p95": [
+    26.1,
+    146.0
+   ],
+   "window": [
+    37.3,
+    100.8
+   ],
+   "inband_member": {
+    "hub1": 0.9788,
+    "hub2": 1.0,
+    "hub3": 0.8181,
+    "link1": 0.9549,
+    "link2": 0.8846,
+    "neck": 0.8091
+   }
+  }
+ }
+}
