@@ -43,7 +43,7 @@ PARAMS = dict(az=102.7793, el=65.3479, a1=40.6794, a2=73.7554, wd=84.4912, wa=-1
               t_link=3.0, q=0.979, rad1=10.0, rad2=7.5, rad3=7.5, end_extra=0.24,
               b=40.12, chi=-0.49, gP=17.8, phP=14.48, k=15.0, alq=-152.75, sref=188.04,
               rpin=5.0, pin_t=6.5, w_rock=8.0, tq_lo=30.0, tk_lo=20.0, lock=0, near=0, ov=1)
-REPORT_KEYS = ("window", "piece", "rocker_arc", "knee_range", "a2eff_range", "tq_min", "tk_min", "stack_mismatch",
+REPORT_KEYS = ("post_lift", "window", "piece", "rocker_arc", "knee_range", "a2eff_range", "tq_min", "tk_min", "stack_mismatch",
                "gap_near1", "min_metal_skin", "crown_contact_poses", "overhead", "near1", "th_need")
 SLIM = {10.0: "v5 O20 hub: MR117-2RS pair, 12.25 mm stack (docs/HARDWARE.md)",
         8.5: "O17 hub: MR117-2RS pair in a 2.75 mm Ti wall, 12.25 mm stack",
@@ -246,6 +246,38 @@ def collisions_sb(chain, pts, ok, clear=1.0, overlap=0.5, chunk=24):
 K.collisions = collisions_sb
 
 
+# ---- honest joint stacks: a strap end lifted above its joint's stack makes that joint's post taller ----------------------
+_KIT_FIT = K.fit_profiles
+
+
+def adjust_stacks(chain, prof):
+    """the kit only RAISES strap ends onto a joint (>= F, >= F + 3.15), so a strap lifted by `over` / its own skin fit can
+    float above the hub / pin it turns on. Physically that joint's post (housing + shaft) then stands taller: its height
+    t becomes t0 + the largest lift of any member ramped onto it (crown check, K6 and mass use it). Applied in the locked
+    control too."""
+    lv = {m.name: float(prof[m.name][0]) for m in chain.members if m.kind == "flat"}; lift = {}
+    for m in chain.members:
+        if m.kind == "flat" or not m.ramps: continue
+        for mask, other, dz in m.ramps:
+            if other in lv: lift[other] = max(lift.get(other, 0.0), float(prof[m.name][mask].max() - (lv[other] + dz)))
+    flat = chain.info.get("flat", {})
+    for m in chain.members:
+        if m.name in flat:
+            t0 = flat[m.name][1] if len(flat[m.name]) < 3 else flat[m.name][2]
+            m.t = t0 + max(0.0, lift.get(m.name, 0.0)); flat[m.name] = (flat[m.name][0], m.t, t0)
+    chain.info["post_lift"] = {k: round(v, 2) for k, v in lift.items() if v > 0.05}
+    return prof
+
+
+def fit_profiles_adj(B, chain, fit, q=1.0, mode="march"):
+    """fit, make the posts honest, fit again (members passing `over` a post then clear its real height), make honest"""
+    adjust_stacks(chain, _KIT_FIT(B, chain, fit, q, mode))
+    return adjust_stacks(chain, _KIT_FIT(B, chain, fit, q, mode))
+
+
+K.fit_profiles = fit_profiles_adj
+
+
 # ---- audit, crowns, near-touch, overhead --------------------------------------------------------------------------------
 def crown_points(m, rho, rad, t):
     """(P, k, 3) crown disc + wall samples of a flat hub / pin member fitted at level rho[0] (F), radius rad, height t"""
@@ -299,7 +331,7 @@ def extras(B, r, p):
     hubs = [m for m in ch.members if m.kind == "flat"]
     cmin = np.full(len(B.res), np.inf); cwho = {}
     if len(Pi):
-        parts = [crown_points(m, prof[m.name], *flat[m.name])[Pi] for m in hubs]
+        parts = [crown_points(m, prof[m.name], *flat[m.name][:2])[Pi] for m in hubs]
         Cc = np.concatenate(parts, 1)
         dc = K.dist_many(B, np.repeat(Pi, Cc.shape[1]), Cc.reshape(-1, 3)).reshape(len(Pi), Cc.shape[1])
         cmin[Pi] = dc.min(1); cut = np.cumsum([0] + [x.shape[1] for x in parts])
@@ -326,7 +358,7 @@ def extras(B, r, p):
                             axial=B.poses[j]["axial"], crown=cwho.get(int(j)) if cmin[j] <= float(np.min(B.res[j])) else "face")
                        for dd, j in allmin[:5]],
              gap_near1=rn["gap"], near1=dict(reach=rn["reach"], follow=rn["follow"], inband14=rn["inband14"], contact=rn["contact"]),
-             overhead=over, stack_mismatch=stack_mismatch(ch, prof),
+             overhead=over, stack_mismatch=stack_mismatch(ch, prof), post_lift=ch.info.get("post_lift"),
              th_need=dict(p5=round(float(np.percentile(th, 5)), 1), p95=round(float(np.percentile(th, 95)), 1),
                           kin_reach=round(float(((th >= ch.info["window"][0]) & (th <= ch.info["window"][1])).mean()), 4)))
     return r
@@ -420,7 +452,7 @@ def frozen(p0, out, overlap=1.0, fit=(60, 160), big=(110, 360)):
     res["runs"]["fit"] = dict(keep(rf), bench=list(fit), mode=Bf.mode); json.dump(res, open(out, "w"), indent=1, default=float)
     print("fit", Bf.mode, {k: rf[k] for k in ("gap", "reach", "follow", "inband14", "contact", "honest")}, flush=True)
     Bb = K.bench(*big); fp = K.fit_profiles; t0 = time.time()
-    K.fit_profiles = lambda B, chain, fit, q=1.0, mode="march": {k: v.copy() for k, v in prof.items()}
+    K.fit_profiles = lambda B, chain, fit, q=1.0, mode="march": adjust_stacks(chain, {k: v.copy() for k, v in prof.items()})
     try:
         r = K.evaluate(Bb, build, pf); r = declared_audit(r, Bb._kit_last["chain"], Bb._kit_last["pts"]); r = extras(Bb, r, pf)
     finally:
