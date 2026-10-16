@@ -978,3 +978,21 @@ Near-zero-closure track of the golden push. Measured / derived:
   PLATES, swept around the virtual axis at one level each, float (knee 94 mm, 0 % in band; pin b and link 2 stacked on
   it 0 / 10 %) - the virtual-pole four-bar's "J2 neighbourhood is the worst skin" again. Complexity 19.0 sensed (= the
   pin-knee class). Not a ceiling yet (22 configs); next: Bench(110,360) gate (farm), a plate-footprint gate, farm CMA.
+
+## A 3-passive closure widens the fold only through a moving chain centre; hub 2 still caps it (2026-10-16, docs/concepts/fold-widening-3passive.md)
+
+Measured / derived (Bench(110,360) frames, margin 5, H1 seats; `docs/research/fold3p/`):
+* **Passives parallel to active axes never move the fold** (slides rotate nothing): "pin knee + a slide along the arm"
+  cannot widen it. **A passive rotation between GH-centred bodies locks at a constant**: a tilted knee pin, a passive
+  cuff roll or a Jarrasse-Morel cuff (2 pins + slide) on a GH-concentric chain all sit at one value in every pose.
+* **The closure that works: a coupled J1 rocker** - J1 on a rocker pinned about a posterior (anteroposterior) axis
+  passing R mm from GH, closed by the pin knee. The knee's out-of-plane equation fixes the rocker:
+  rho = atan2(B, A) + s acos((A - k) / |A, B|) (A, B = the arm-fixed J3 direction on the pivot's frame, k = h / R):
+  determined, smooth, no islands. Kinematic reach 0.731 -> **0.842 connected** (travel 30; 0.864 at 45), overhead
+  0.46 -> 0.68-0.71, all clip frames close; the per-pose-free bound is 0.92-0.95. The arm-side mirror (cuff roll driven
+  by an offset chain centre) loses (0.72).
+* **Hub 2 caps it again**: the rescued poses put the J2 ray over 78-93 mm skin (q0.97; bulk 55 mm). Parked in band >= 0.8
+  the rocker keeps **0.775** of the workspace (plain H1 0.719 at 0.96): +0.05, 0.005 short of the 0.78 gate. J1 rides
+  down to el 28 (outside the acromion-top seat region), and rho moves 6.5 deg per mm of real GH translation at R 12
+  (sensed: complexity 19.5 -> 29.0); a larger R moves the chain centre 11-21 mm and lifts hubs 1 / 2 out of band.
+  Not catalogued. Next: a joint search with the hub-2 gate and J1 el >= 50 in the objective (seats free).

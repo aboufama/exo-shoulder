@@ -68,7 +68,32 @@ graph would isolate most poses; the kNN graph is the deviation, stated.
 
 ## 3. Hub parking gate (exact skin, Bench(110,360); fold3p_park.py)
 
-PARK_TABLE
+Per taken pose, the skin requirement along each hub's ray (K3 march, 2 mm clearance, exact distance), rays from the
+moving chain centre G' (hub 1: Rc(rho) u1; hub 2: the two-circle J2 of (Rc(rho) u1, w), H1's branch; pivot hub: the c
+line through o, posterior end). R = distance of the pivot line from GH (rho does not depend on R; the chain-centre
+shift 2 R sin(rho / 2) does). First pass: one level = quantile 0.97 over the taken poses (j2knee_gate rule), in band =
+level - requirement <= 12 mm (`fold3p_park.json`). Second pass, THE GATE: the hub-2 level L that keeps the most workspace
+poses with hub 2 in band >= 0.8 among the kept, poses needing more than L dropped as contact (`fold3p_park_gate.json`,
+per-pose requirements in `fold3p_park_req.npy`).
+
+| design | R mm | chain-centre shift p95 / max mm | hub 1 level, in band (q0.97) | hub 2 level, in band (q0.97); req p10 / p50 / p90 | pivot hub level, in band | **GATE: hub-2 level L, in band, workspace reach kept** |
+|---|---|---|---|---|---|---|
+| plain H1 (reference, same metric) | - | 0 | 48, 1.00 | 59, 1.00; 52 / 53 / 56 | - | 64, 0.962, **0.719** |
+| PROX A (travel 30) | 12 | 5.1 / 7.5 | 56, 1.00 | 78.3, **0.06**; 52 / 55 / 62 | 71, 0.98 | **65, 0.833, 0.775** |
+| PROX A | 25 | 10.7 / 15.6 | 59.6, 0.46 | 84.8, 0.05; 53 / 56 / 66 | 64, 1.00 | - |
+| PROX B (travel 45) | 12 | 6.2 / 10.0 | 59, 0.46 | 85.2, 0.05; 52 / 55 / 63 | 78.4, 0.44 | **65, 0.827, 0.769** |
+| PROX B | 25 | 12.9 / 20.8 | 64, 0.19 | 93.4, 0.04; 53 / 57 / 68 | 70, 1.00 | - |
+| PROX C (other side) | 12 / 25 | 6.6 / 10.5, 13.8 / 21.9 | 51 / 50, 1.00 / 0.97 | 68.4 / 66.8, 0.10; 49 / 52 / 57 | 89 / 97, 0.18 / 0.12 | - |
+
+**Hub 2 is still the cap, exactly as for the relay.** Over the bulk of the poses hub 2's requirement is the plain
+chain's (p50 55 vs 53 mm); the poses the rocker RESCUES put the J2 ray over high skin (the q0.97 tail 78-93 mm), so one
+hub-2 level cannot serve both. Holding hub 2 in band >= 0.8, the coupled rocker keeps **0.775** of the workspace (A) /
+0.769 (B) against the plain H1's 0.719 at 0.96 in band: **+0.05 of reach, 0.005 short of the 0.78 gate**, and it pays
+13 points of hub-2 in band. A larger R (less GH sensitivity, section 4) makes it worse: the chain centre moves 11-21 mm
+and hub 1 leaves the band (0.19-0.46).
+**J1 seat rule:** the rocker carries J1 from el 59 down to el 28 (A; 15 for B) at az 93-100 - over the lateral deltoid,
+outside the acromion-top region (el >= 50) for the rescued poses. The handler still holds the pivot on the back of the
+shoulder, but J1 itself leaves the allowed region while the arm is raised.
 
 ## 4. Sensing, determinacy, complexity, components
 
@@ -90,7 +115,20 @@ PARK_TABLE
 
 ## 5. Verdict and next
 
-VERDICT
+**No candidate passes the gate.** Best: PROX A (coupled J1 rocker on a posterior pivot, R 12 mm, travel 30):
+kinematic reach 0.842 connected (plain 0.731), overhead 0.68 (0.46), follow 1.0 - but with hub 2 parked in band >= 0.8
+only **0.775** of the workspace stays (gate 0.78), J1 dips to el 28 (rule: el >= 50 over the acromion top), the rocker
+angle moves 6.5 deg per mm of real GH translation at R 12 (so it must be sensed: complexity 19.5 -> 29.0), and a larger R
+that would tame that sensitivity lifts hubs 1 / 2 out of band. Every other closure the brief named locks (section 1) or
+loses (DIST 0.72). Not catalogued (the brief's gate: reach >= 0.78 at hub-2 in band >= 0.8, continuous).
+
+What the data says to do next, in order: (1) one joint search of the PROX closure with the hub-2 gate IN the objective
+(rocker axis, o^, k, branch AND the seats u1 / u3 / arcs, constraint J1 el >= 50) - the shortfall is 0.005 of reach, so a
+seat re-tune may cross it, but the hub-2 tail (78-93 mm on the rescued poses) is the same physics that capped the relay
+(+0.09-0.14) and the zc frontier; (2) if it crosses, a kit model with the rocker plate as a member (its own level) and the
+knee's extra drift; (3) the honest alternative remains the 4th active joint / sensed 4R class (hub 4 parks the far end).
+A closure that widens the fold without moving hub 2 over the raised arm would need J2's ray to stay on the quiet cap in
+the rescued poses, i.e. a coupling that also moves hub 2 - one more passive (a slide along J2: a ptrans, +2-3 points).
 
 ## 6. Red team
 
