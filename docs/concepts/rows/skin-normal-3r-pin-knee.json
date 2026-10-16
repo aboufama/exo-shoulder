@@ -1888,7 +1888,7 @@
  "v_p5_harness": "docs/concepts/verify/skin-normal-3r-pin-knee-polish.py (round-3 verifier imported unchanged), CB_EXACT=1, CB_FOLD_MARGIN=5, O20; farm exo-cpu1 (the fitbig / held jobs fitted the shape on Bench(110,360) EXACT - the farm job had no link to the 14f156cb6fc8 fast cache - for P5 and H1 alike); fit60 reproduced locally to the digit; raw outputs docs/research/verify_p5/",
  "v_p5_note": "MEASUREMENT: H1 at margin 10 re-run in the same batch: fit-60 28.21 / near-touch 33.77 (the verified numbers to the digit); polish protocol with an exact fit 26.87 / 26.87 / 1.50 mm (fast fit 26.45). P5 at margin 10 not measured.",
  "gpu_port": {
-  "t": "2026-10-16T08:49:20Z",
+  "t": "2026-10-16T09:10:45Z",
   "tool": "tools/gpu_bench_knee.py",
   "what": "GPU port of the pin-knee bench path (knee_polish objective: model + verifier extra_checks + near-touch audit), kit code unchanged, per-pose loops batched on the device",
   "pod": "exo-gpu-pinknee: 1x RTX PRO 4500 Blackwell (32 GB), 10 vCPU, EU-RO-1, $0.72/h",
@@ -1991,13 +1991,141 @@
       "cpu_near1": 31.46
      }
     }
+   },
+   "parity2_same110": {
+    "n": 54,
+    "n_compared": 54,
+    "bench": [
+     110,
+     360
+    ],
+    "fit": null,
+    "margin": 5.0,
+    "max_abs_diff": {
+     "gap": 0.0,
+     "gap_near1": 0.0,
+     "gap_near2": 0.0,
+     "model_gap": 0.0,
+     "reach": 0.0,
+     "follow": 0.0,
+     "inband14": 0.0,
+     "inband10": 0.0,
+     "contact": 0.0
+    },
+    "n_gap_diff_gt_05": 0,
+    "n_near1_diff_gt_05": 0,
+    "n_errors_gpu": 0,
+    "n_errors_cpu": 0,
+    "gpu_secs": 279.84,
+    "cpu_secs": 279.84,
+    "cpu_procs": 2,
+    "leaders": {
+     "H1": {
+      "gpu": 24.57,
+      "cpu": 24.57,
+      "gpu_near1": 25.68,
+      "cpu_near1": 25.68
+     },
+     "k4598": {
+      "gpu": 29.97,
+      "cpu": 29.97,
+      "gpu_near1": 34.23,
+      "cpu_near1": 34.23
+     },
+     "P5": {
+      "gpu": 21.54,
+      "cpu": 21.54,
+      "gpu_near1": 22.08,
+      "cpu_near1": 22.08
+     }
+    }
+   },
+   "parity2_frozen": {
+    "n": 54,
+    "n_compared": 54,
+    "bench": [
+     110,
+     360
+    ],
+    "fit": [
+     60,
+     160
+    ],
+    "margin": 5.0,
+    "max_abs_diff": {
+     "gap": 0.0,
+     "gap_near1": 0.0,
+     "gap_near2": 0.0,
+     "model_gap": 0.0,
+     "reach": 0.0,
+     "follow": 0.0,
+     "inband14": 0.0,
+     "inband10": 0.0,
+     "contact": 0.0
+    },
+    "n_gap_diff_gt_05": 0,
+    "n_near1_diff_gt_05": 0,
+    "n_errors_gpu": 0,
+    "n_errors_cpu": 0,
+    "gpu_secs": 152.43,
+    "cpu_secs": 152.43,
+    "cpu_procs": 2,
+    "leaders": {
+     "H1": {
+      "gpu": 27.28,
+      "cpu": 27.28,
+      "gpu_near1": 30.62,
+      "cpu_near1": 30.62
+     },
+     "k4598": {
+      "gpu": 29.63,
+      "cpu": 29.63,
+      "gpu_near1": 34.48,
+      "cpu_near1": 34.48
+     },
+     "P5": {
+      "gpu": 24.94,
+      "cpu": 24.94,
+      "gpu_near1": 31.46,
+      "cpu_near1": 31.46
+     }
+    }
    }
   },
-  "speed": {},
+  "speed": {
+   "speed2_same110": {
+    "n": 72,
+    "secs": 247.6,
+    "evals_per_s": 0.291,
+    "workers": 9,
+    "s_per_config_median": 0.91,
+    "errors": 0,
+    "gpu": "NVIDIA RTX PRO 4500 Blackwell",
+    "nproc": 48,
+    "fit": null
+   }
+  },
   "doc": "docs/research/golden/README.md section 'Pin-knee port'",
   "files": [
    "docs/research/golden/knee_parity_same110.json",
-   "docs/research/golden/knee_parity_frozen.json"
-  ]
+   "docs/research/golden/knee_parity_frozen.json",
+   "docs/research/golden/knee_parity2_same110.json",
+   "docs/research/golden/knee_parity2_frozen.json"
+  ],
+  "s_per_config_gap_lt_100": {
+   "cpu_kit": {
+    "same": 8.18,
+    "frozen": 10.94
+   },
+   "port_v1": {
+    "same": 4.32,
+    "frozen": 11.42
+   },
+   "port_v2": {
+    "same": 0.86,
+    "frozen": 0.72
+   },
+   "note": "median seconds per configuration per process on the pod (RTX PRO 4500, 10 vCPU)"
+  }
  }
 }
