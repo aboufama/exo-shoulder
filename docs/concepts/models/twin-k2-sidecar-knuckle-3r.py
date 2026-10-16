@@ -355,7 +355,8 @@ class TModel(SC.SCModel):
         lug of link 2b beside hub K2 at strap level (r_h2 out, sideways), M2 ball-link rings at both ends"""
         D = self.D; P = D.p; u2, uK2 = D.u[1], D.uK2; fK2, f2 = self.fK2, self.f[1]
         L2a = self.link_pts["L2a"][1]
-        if not len(L2a): return
+        if not len(L2a):                                              # red team 21:52: a K2 so close to hub 2 that link 2a has no
+            L2a = (f2 + S.UP) * u2[None]                              # strap samples must NOT drop drive 2's metal (CMA loophole)
         ax = unit(np.cross(u2, uK2))
         # no room between the two O20 hubs: the crank-2 pivot sits off the hub2-K2 line, at HUB_R + boss r + 1 from BOTH axes
         c2, cK2 = f2 * u2, fK2 * uK2; dmid = 0.5 * float(np.linalg.norm(cK2 - c2)); rr = S.HUB_R + 5.0 + 1.0
@@ -493,6 +494,11 @@ def _report(B, params):
                    fK2=round(float(getattr(M, "fK2", 0.0)), 1), rod2=getattr(M, "_rod2_info", None))
     if p.get("k2") and r["k2"]["won_ws_taken"] == 0:
         r["k2_idle"] = True; r["honest"] = False              # K2 never opens on a taken pose: the lead + dead metal
+    # the judge's clearance gate: hub 2 and hub K2 (two O20 stacks) >= 20 + 0.5 + 1.5 (lobe 2's crest shares K2's height)
+    # centre to centre at their fitted levels; below it the two housings and lobe 2 overlap (not buildable)
+    if hasattr(M, "fK2"):
+        dc = float(np.linalg.norm(M.fK2 * D.uK2 - M.f[1] * D.u[1])); r["k2"]["hub2_K2_mm"] = round(dc, 1)
+        if dc < 22.0: r["k2_clash"] = True; r["honest"] = False
     return r, M
 
 
