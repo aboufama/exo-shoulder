@@ -40,9 +40,7 @@
 .sx .grid3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr)); gap: var(--cds-gap-md, 12px); }
 .sx .legend { display: flex; flex-wrap: wrap; gap: 6px 14px; margin: 8px 0 0; font-size: 12px; color: var(--color-fg-muted); }
 .sx .legend i { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 5px; vertical-align: -1px; }
-@media (max-width: 640px) { .sx .hide-sm { display: none; } .sx .kpi .big { font-size: 32px; }
-  /* narrow: the simplicity bar goes and its caption wraps (the number stays) */
-  .sx #board .cxbar { display: none; } .sx #board th.cx { font-size: 11px; } .sx #board th.cx .cap { white-space: normal; } }
+@media (max-width: 640px) { .sx .hide-sm { display: none; } .sx .kpi .big { font-size: 32px; } }
 /* motion previews (leaderboard, first column): monochrome, theme tokens only; the shoulder faint, the mechanism in the text colour */
 .sx th.mo, .sx td.mo { width: 56px; padding: 2px 8px 2px 0; }
 .sx td.mo svg { display: block; width: 56px; height: 56px; overflow: hidden; }
@@ -65,13 +63,21 @@
 .sx .cxbar > i { display: block; height: 100%; background: var(--color-fg-muted); }
 .sx td.cx.bad { color: var(--color-bad); }
 .sx td.cx.bad .cxbar > i { background: var(--color-bad); }
+/* the simplicity column needs room (the board was already full between 640 and 760 px): below 860 px the board's
+   meters shorten, the simplicity bar goes (the number stays), its caption wraps and a two-word status pill wraps */
+@media (max-width: 860px) {
+  .sx #board .meter { width: 36px; }
+  .sx #board .cxbar { display: none; }
+  .sx #board th.cx { font-size: 11px; }
+  .sx #board th.cx .cap { white-space: normal; }
+  .sx #board .pill { white-space: normal; text-align: center; }
+}
 @media (max-width: 520px) {
   .sx #board th, .sx #board td { padding-left: 4px; padding-right: 4px; }
   /* the simplicity column made the board 77 px too wide at 400 px. On a phone the board keeps the two numbers that do
      not follow from each other, score and simplicity: close-to-skin goes the way of follows / reaches (the score's
-     parts, all three in the "Two ways to fail" chart) and a two-word status pill wraps */
+     parts, all three in the "Two ways to fail" chart) */
   .sx #board .cl { display: none; }
-  .sx #board .pill { white-space: normal; text-align: center; }
   .sx #board .meter { width: 30px; margin-right: 4px; }
   .sx #board .pill { padding: 1px 6px; font-size: 11px; }
   .sx #board th.mo, .sx #board td.mo { width: 44px; padding: 2px 6px 2px 0; }
@@ -288,11 +294,11 @@ function drawSimple(rows) {
   svg.append('g').selectAll('path').data(order.filter(nbk)).join('path').attr('d', (r) => { const a = px(r), b = y(r.complexity), k = 4.5; return `M${a - k},${b - k}L${a + k},${b + k}M${a - k},${b + k}L${a + k},${b - k}`; })
     .attr('stroke', col).attr('stroke-width', 2).attr('stroke-linecap', 'round').attr('fill', 'none')
     .on('mousemove', (ev, r) => tipAt(tip, box, ev, tipText(r))).on('mouseleave', () => { tip.hidden = true; });
-  // labels: the bar to beat and the five best live designs, placed beside their dot without overlapping (a short tick
-  // joins a label moved off its dot's line)
-  const lab = [pts.find((r) => r.is_baseline), ...live.slice(0, 5)].filter(Boolean), placed = [], cw = 6.6;
+  // labels: the bar to beat and the five best live designs (three on a phone), placed beside their dot without
+  // overlapping (a short tick joins a label moved off its dot's line)
+  const narrow = W < 480, lab = [pts.find((r) => r.is_baseline), ...live.slice(0, narrow ? 3 : 5)].filter(Boolean), placed = [], cw = 6.6;
   lab.forEach((r) => {
-    const t = r.is_baseline ? "today's 3-hinge chain" : r.short.slice(0, 26), w = t.length * cw, ax = px(r), ay = y(r.complexity);
+    const t = r.is_baseline ? "today's 3-hinge chain" : r.short.slice(0, narrow ? 20 : 26).trim(), w = t.length * cw, ax = px(r), ay = y(r.complexity);
     for (const dy of [0, -14, 14, -28, 28, -42, 42, -56, 56]) for (const side of [1, -1]) {
       const x0 = side > 0 ? ax + 10 : ax - 10 - w, yb = ay + 4 + dy;
       if (x0 < m.l + 2 || x0 + w > W - m.r || yb - 11 < m.t || yb + 2 > H - m.b) continue;

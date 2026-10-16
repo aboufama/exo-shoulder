@@ -7,7 +7,7 @@
 | R3 | Follows the arm (frames tracked, not held at a limit) | 100.0% | >= 0.95 | **PASS** | full-exo/score_design.py |
 | R4 | Overhead works (Raise overhead clip score) | 26.9% | >= 0.8 | **FAIL** | full-exo/score_design.py |
 | R5 | At most 4 DOF, counted kinematically (target 3; a torque-free passive self-aligning joint is the one exception) | 3 | <= 4 | **PASS** | design.json |
-| R6 | No interference between parts that move relative to each other | 11.09 | <= 0.15 mm | **FAIL** | judge/part_contact.py (geometry only) |
+| R6 | No interference between parts that move relative to each other | 2.67 mm | <= 0.15 mm | **FAIL** | judge/part_contact.py (geometry only) |
 | R7 | Every custom part is one valid closed solid | True | == True | **PASS** | judge/part_validity.py (OCC BRepCheck on the exported STEP) |
 | R8 | Custom-part mass budget (proposed) | 110.9 | <= 300 g | **PASS** | parts_full.json (mesh volume x density) |
 | R9 | Strength: SF >= 1.5 at 25 N.m worst direction; deflection and fatigue bounded | - |  | **UNVERIFIED** | independent FEA (CalculiX) - only the in-house hex8 study exists (pipeline/conformal/thin_study) |

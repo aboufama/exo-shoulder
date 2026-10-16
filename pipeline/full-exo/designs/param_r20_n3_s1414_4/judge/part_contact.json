@@ -1,47 +1,172 @@
 {
- "step": 12,
+ "step": 1,
  "tol_mm": 0.15,
- "frames_checked": 117,
+ "frames_checked": 1337,
  "pairs": 1703,
- "seconds": 9,
- "jobs": 4,
+ "seconds": 144,
+ "setup_seconds": 18,
+ "jobs": 2,
+ "cpu_seconds": 268,
+ "cpu_s_per_frame": 0.187,
  "violations": {
-  "l1|D5-02 link 1: strap + J1/J2 pads + integral pins (Ti-6Al-4V)  IN  l2|D5-03 link 2: strap + J2/J3 bosses (Ti-6Al-4V)": {
-   "max_depth": 0.79,
-   "frames": 117,
+  "l2|D5-03 link 2: strap + J2/J3 bosses (Ti-6Al-4V)  IN  H|D5-04 arm end: J3 pad + pin + neck + lap plate on BOTTOM (Ti-6Al-4V)": {
+   "max_depth": 3.5,
+   "frames": 1337,
    "worst": [
     "Raise overhead",
-    60
-   ]
+    0
+   ],
+   "worst_point": "face",
+   "per_frame": {
+    "Raise overhead|0": 3.5,
+    "Raise overhead|39": 3.5,
+    "Raise overhead|78": 3.5,
+    "Raise overhead|79": 3.5,
+    "Raise overhead|80": 3.5,
+    "Raise overhead|81": 3.5,
+    "Raise overhead|82": 3.5,
+    "Raise overhead|83": 3.5,
+    "Raise overhead|84": 3.5,
+    "Raise overhead|85": 3.5,
+    "Raise overhead|86": 3.5,
+    "Raise overhead|87": 3.5
+   }
   },
-  "l1|D5-02 link 1: strap + J1/J2 pads + integral pins (Ti-6Al-4V)  IN  base|D5-01 scapula base: J1 boss + handler tab, 2x M4 (Ti-6Al-4V)": {
-   "max_depth": 0.5,
-   "frames": 117,
+  "l1|D5-02 link 1: strap + J1/J2 pads + integral pins (Ti-6Al-4V)  IN  l2|D5-03 link 2: strap + J2/J3 bosses (Ti-6Al-4V)": {
+   "max_depth": 1.48,
+   "frames": 1337,
    "worst": [
     "Wave",
-    168
-   ]
+    150
+   ],
+   "worst_point": "face",
+   "per_frame": {
+    "Raise overhead|26": 1.48,
+    "Raise overhead|27": 1.48,
+    "Raise overhead|28": 1.48,
+    "Raise overhead|29": 1.48,
+    "Raise overhead|30": 1.48,
+    "Raise overhead|31": 1.48,
+    "Raise overhead|32": 1.48,
+    "Raise overhead|33": 1.48,
+    "Raise overhead|34": 1.48,
+    "Raise overhead|35": 1.48,
+    "Raise overhead|36": 1.48,
+    "Raise overhead|37": 1.48
+   }
+  },
+  "l1|D5-02 link 1: strap + J1/J2 pads + integral pins (Ti-6Al-4V)  IN  base|D5-01 scapula base: J1 boss + handler tab, 2x M4 (Ti-6Al-4V)": {
+   "max_depth": 1.44,
+   "frames": 1337,
+   "worst": [
+    "Raise overhead",
+    0
+   ],
+   "worst_point": "face",
+   "per_frame": {
+    "Raise overhead|0": 1.44,
+    "Raise overhead|1": 1.44,
+    "Raise overhead|2": 1.44,
+    "Raise overhead|3": 1.44,
+    "Raise overhead|4": 1.44,
+    "Raise overhead|5": 1.44,
+    "Raise overhead|6": 1.44,
+    "Raise overhead|7": 1.44,
+    "Raise overhead|8": 1.44,
+    "Raise overhead|9": 1.44,
+    "Raise overhead|10": 1.44,
+    "Raise overhead|11": 1.44
+   }
   },
   "H|D5-04 arm end: J3 pad + pin + neck + lap plate on BOTTOM (Ti-6Al-4V)  IN  l2|D5-03 link 2: strap + J2/J3 bosses (Ti-6Al-4V)": {
-   "max_depth": 0.68,
-   "frames": 117,
+   "max_depth": 1.46,
+   "frames": 1337,
    "worst": [
     "Walking arm swing",
-    96
-   ]
-  },
-  "l2|D5-03 link 2: strap + J2/J3 bosses (Ti-6Al-4V)  IN  H|D5-04 arm end: J3 pad + pin + neck + lap plate on BOTTOM (Ti-6Al-4V)": {
-   "max_depth": 1.03,
-   "frames": 7,
-   "worst": [
-    "Reach back pocket",
-    36
-   ]
+    108
+   ],
+   "worst_point": "face",
+   "per_frame": {
+    "Raise overhead|0": 1.46,
+    "Raise overhead|1": 1.46,
+    "Raise overhead|2": 1.46,
+    "Raise overhead|3": 1.46,
+    "Raise overhead|4": 1.46,
+    "Raise overhead|5": 1.46,
+    "Raise overhead|6": 1.46,
+    "Raise overhead|7": 1.46,
+    "Raise overhead|8": 1.46,
+    "Raise overhead|9": 1.46,
+    "Raise overhead|10": 1.46,
+    "Raise overhead|11": 1.46
+   }
   }
  },
  "open_parts_not_tested_as_container": [
   "l1|D5-02 link 1: strap + J1/J2 pads + integral pins (Ti-6Al-4V)"
  ],
- "inside": "integer winding number on welded tessellations (grid + segment crossings), depth = exact distance (judge/sdist.py)",
- "max_depth": 1.03
+ "samples": {
+  "h_mm": 1.0,
+  "sharp_deg": 30.0,
+  "total": 956919,
+  "per_part": {
+   "H|M4x6 ISO 10642 countersunk (upper cuff)": 6087,
+   "H|UPPER ARM CUFF (conformal G2 shell, AlSi10Mg bead blasted)": 62921,
+   "H|CirPattern1[13]": 282,
+   "H|CirPattern1[17]": 282,
+   "H|CirPattern1[3]": 282,
+   "H|CirPattern1[6]": 282,
+   "H|CirPattern1[1]": 282,
+   "H|Revolve1[3]": 1988,
+   "H|CirPattern1[9]": 282,
+   "H|CirPattern1[2]": 282,
+   "H|Revolve3": 6014,
+   "H|CirPattern1[4]": 282,
+   "H|CirPattern1[10]": 282,
+   "H|CirPattern1[8]": 282,
+   "H|CirPattern1[14]": 282,
+   "H|CirPattern1[12]": 282,
+   "H|CirPattern1[16]": 282,
+   "H|CirPattern1[7]": 282,
+   "H|Revolve1[1]": 6974,
+   "H|CirPattern1[5]": 282,
+   "H|Revolve4": 282,
+   "H|CirPattern1[11]": 282,
+   "H|Revolve1[2]": 1988,
+   "H|CirPattern1[15]": 282,
+   "H|M4 ULTRA LOW PROFILE SOCKET HEAD SCREW, 6mm L, HS STEEL": 9519,
+   "H|5mm D, 2.5mm H, N42 MAGNET": 827,
+   "F|Hex socket head countersunk screw grade C M4x0.7 x 8": 12234,
+   "H|IGUS THRUST WASHER, 30mm ID, 39mm OD, 1.5mm T, IGLIDE J": 10376,
+   "F|MIDDLE": 78680,
+   "H|TOP": 14699,
+   "F|FOREARM CUFF": 264978,
+   "H|BOTTOM (user's bar, cut at s 265, 4x M3 countersunk for the neck tongue)": 316350,
+   "l2|D5-03 link 2: strap + J2/J3 bosses (Ti-6Al-4V)": 35912,
+   "l1|D5-02 link 1: strap + J1/J2 pads + integral pins (Ti-6Al-4V)": 30529,
+   "l2|J3 cap O20 G2 dome, threaded (Ti-6Al-4V)": 5222,
+   "H|J3 ring nut M7x0.5 (Ti-6Al-4V)": 508,
+   "H|J3 inner spacer (ground, preload)": 508,
+   "l2|J3 outer spacer 17-4PH": 634,
+   "l2|J3 bearing 2 MR117-2RS 7x11x3": 2482,
+   "l2|J3 bearing 1 MR117-2RS 7x11x3": 2470,
+   "H|D5-04 arm end: J3 pad + pin + neck + lap plate on BOTTOM (Ti-6Al-4V)": 26885,
+   "l2|J2 cap O20 G2 dome, threaded (Ti-6Al-4V)": 5155,
+   "l1|J2 ring nut M7x0.5 (Ti-6Al-4V)": 508,
+   "l1|J2 inner spacer (ground, preload)": 508,
+   "l2|J2 outer spacer 17-4PH": 634,
+   "l2|J2 bearing 2 MR117-2RS 7x11x3": 2398,
+   "l2|J2 bearing 1 MR117-2RS 7x11x3": 2398,
+   "base|J1 cap O20 G2 dome, threaded (Ti-6Al-4V)": 5252,
+   "l1|J1 ring nut M7x0.5 (Ti-6Al-4V)": 508,
+   "l1|J1 inner spacer (ground, preload)": 508,
+   "base|J1 outer spacer 17-4PH": 634,
+   "base|J1 bearing 2 MR117-2RS 7x11x3": 2406,
+   "base|J1 bearing 1 MR117-2RS 7x11x3": 2404,
+   "base|D5-01 scapula base: J1 boss + handler tab, 2x M4 (Ti-6Al-4V)": 29745
+  },
+  "rule": "every vertex + sharp/boundary edges at <= h/2 + longest-edge bisection of every face to edges <= h (midpoints)"
+ },
+ "inside": "dense surface samples of A (vertices, sharp edges, faces), both ways; integer winding number on welded tessellations (judge/sdist.py grid + segment crossings), depth = exact distance to B's closest point (libigl AABB)",
+ "max_depth": 3.5
 }

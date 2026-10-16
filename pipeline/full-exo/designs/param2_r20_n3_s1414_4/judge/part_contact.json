@@ -1,31 +1,125 @@
 {
- "step": 4,
+ "step": 1,
  "tol_mm": 0.15,
- "frames_checked": 339,
+ "frames_checked": 1337,
  "pairs": 1664,
- "seconds": 64,
- "jobs": 4,
+ "seconds": 462,
+ "setup_seconds": 59,
+ "jobs": 2,
+ "cpu_seconds": 825,
+ "cpu_s_per_frame": 0.573,
  "violations": {
   "H|UPPER ARM CUFF (lines and arcs: flat land + inner R arc + outer arc, extruded; AlSi10Mg bead blasted)  IN  F|FOREARM CUFF": {
-   "max_depth": 4.38,
-   "frames": 87,
+   "max_depth": 4.65,
+   "frames": 346,
    "worst": [
     "Drink from a cup",
-    64
-   ]
+    69
+   ],
+   "worst_point": "face",
+   "per_frame": {
+    "Drink from a cup|64": 4.65,
+    "Drink from a cup|65": 4.65,
+    "Drink from a cup|66": 4.65,
+    "Drink from a cup|67": 4.65,
+    "Drink from a cup|69": 4.65,
+    "Drink from a cup|70": 4.65,
+    "Drink from a cup|109": 4.65,
+    "Drink from a cup|111": 4.65,
+    "Drink from a cup|113": 4.65,
+    "Drink from a cup|116": 4.65,
+    "Drink from a cup|117": 4.65,
+    "Drink from a cup|63": 4.64
+   }
   },
   "F|FOREARM CUFF  IN  H|UPPER ARM CUFF (lines and arcs: flat land + inner R arc + outer arc, extruded; AlSi10Mg bead blasted)": {
-   "max_depth": 0.99,
-   "frames": 27,
+   "max_depth": 1.0,
+   "frames": 346,
    "worst": [
     "Drink from a cup",
-    72
-   ]
+    37
+   ],
+   "worst_point": "face",
+   "per_frame": {
+    "Drink from a cup|37": 1.0,
+    "Drink from a cup|39": 1.0,
+    "Drink from a cup|42": 1.0,
+    "Drink from a cup|44": 1.0,
+    "Drink from a cup|45": 1.0,
+    "Drink from a cup|46": 1.0,
+    "Drink from a cup|47": 1.0,
+    "Drink from a cup|49": 1.0,
+    "Drink from a cup|50": 1.0,
+    "Drink from a cup|52": 1.0,
+    "Drink from a cup|56": 1.0,
+    "Drink from a cup|57": 1.0
+   }
   }
  },
  "open_parts_not_tested_as_container": [
   "l2|D6-03 link 2: bent bar 8x3 + J2/J3 hubs (Ti-6Al-4V)"
  ],
- "inside": "integer winding number on welded tessellations (grid + segment crossings), depth = exact distance (judge/sdist.py)",
- "max_depth": 4.38
+ "samples": {
+  "h_mm": 1.0,
+  "sharp_deg": 30.0,
+  "total": 1433662,
+  "per_part": {
+   "H|M4x6 ISO 10642 countersunk (upper cuff), polished": 8951,
+   "H|UPPER ARM CUFF (lines and arcs: flat land + inner R arc + outer arc, extruded; AlSi10Mg bead blasted)": 415110,
+   "H|CirPattern1[13]": 282,
+   "H|CirPattern1[17]": 282,
+   "H|CirPattern1[3]": 282,
+   "H|CirPattern1[6]": 282,
+   "H|CirPattern1[1]": 282,
+   "H|Revolve1[3]": 1988,
+   "H|CirPattern1[9]": 282,
+   "H|CirPattern1[2]": 282,
+   "H|Revolve3": 6014,
+   "H|CirPattern1[4]": 282,
+   "H|CirPattern1[10]": 282,
+   "H|CirPattern1[8]": 282,
+   "H|CirPattern1[14]": 282,
+   "H|CirPattern1[12]": 282,
+   "H|CirPattern1[16]": 282,
+   "H|CirPattern1[7]": 282,
+   "H|Revolve1[1]": 6974,
+   "H|CirPattern1[5]": 282,
+   "H|Revolve4": 282,
+   "H|CirPattern1[11]": 282,
+   "H|Revolve1[2]": 1988,
+   "H|CirPattern1[15]": 282,
+   "H|M4 ULTRA LOW PROFILE SOCKET HEAD SCREW, 6mm L, HS STEEL": 9519,
+   "H|5mm D, 2.5mm H, N42 MAGNET": 827,
+   "F|Hex socket head countersunk screw grade C M4x0.7 x 8": 12234,
+   "H|IGUS THRUST WASHER, 30mm ID, 39mm OD, 1.5mm T, IGLIDE J": 10376,
+   "F|MIDDLE": 78680,
+   "H|TOP": 14699,
+   "F|FOREARM CUFF": 264978,
+   "l2|J3 cap O20 G2 dome, threaded (Ti-6Al-4V)": 6725,
+   "H|J3 ring nut M7x0.5 (Ti-6Al-4V)": 676,
+   "H|J3 inner spacer (ground, preload)": 676,
+   "l2|J3 outer spacer 17-4PH": 676,
+   "l2|J3 bearing 2 MR117-2RS 7x11x3": 3126,
+   "l2|J3 bearing 1 MR117-2RS 7x11x3": 3126,
+   "l2|J2 cap O20 G2 dome, threaded (Ti-6Al-4V)": 6704,
+   "l1|J2 ring nut M7x0.5 (Ti-6Al-4V)": 676,
+   "l1|J2 inner spacer (ground, preload)": 676,
+   "l2|J2 outer spacer 17-4PH": 676,
+   "l2|J2 bearing 2 MR117-2RS 7x11x3": 3028,
+   "l2|J2 bearing 1 MR117-2RS 7x11x3": 3028,
+   "S|J1 cap O20 G2 dome, threaded (Ti-6Al-4V)": 6952,
+   "l1|J1 ring nut M7x0.5 (Ti-6Al-4V)": 676,
+   "l1|J1 inner spacer (ground, preload)": 676,
+   "S|J1 outer spacer 17-4PH": 676,
+   "S|J1 bearing 2 MR117-2RS 7x11x3": 3222,
+   "S|J1 bearing 1 MR117-2RS 7x11x3": 3192,
+   "H|D6-04 BOTTOM + arm end, one 5-axis part (user's bar cut at s 255, strap fused into its channel; 7075-T6)": 349685,
+   "S|D6-01 scapula base: J1 hub + tab, 2x M4 counterbored (Ti-6Al-4V)": 43039,
+   "l2|D6-03 link 2: bent bar 8x3 + J2/J3 hubs (Ti-6Al-4V)": 89679,
+   "l1|D6-02 link 1: bent bar 8x3 + J1/J2 pads + integral O7 pins (Ti-6Al-4V)": 68658
+  },
+  "rule": "every vertex + sharp/boundary edges at <= h/2 + longest-edge bisection of every face to edges <= h (midpoints)"
+ },
+ "inside": "dense surface samples of A (vertices, sharp edges, faces), both ways; integer winding number on welded tessellations (judge/sdist.py grid + segment crossings), depth = exact distance to B's closest point (libigl AABB)",
+ "max_depth": 4.65
 }

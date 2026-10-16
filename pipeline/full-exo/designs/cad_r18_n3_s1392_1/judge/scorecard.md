@@ -9,7 +9,7 @@
 | R4 | Overhead works (Raise overhead clip score) (14 mm band) | 16.7% | >= 0.8 | **FAIL** | full-exo/score_design.py |
 | R5 | Shoulder-chain DOF from the scapula base to the arm, counted kinematically (cap 4; the user's scapula handler is a separate part) | 3 | <= 4 | **PASS** | design.json |
 | R5-aim | Aim: exactly 3 DOF, the minimum (user 2026-10-15) | 3 | <= 3 | **PASS** | design.json |
-| R6 | No interference between parts that move relative to each other | 0.29 mm | <= 0.15 mm | **FAIL** | judge/part_contact.py (geometry only) |
+| R6 | No interference between parts that move relative to each other | 0.3 mm | <= 0.15 mm | **FAIL** | judge/part_contact.py (geometry only) |
 | R7 | Every custom part is one valid closed solid | True | == True | **PASS** | judge/part_validity.py (OCC BRepCheck on the exported STEP) |
 | R8 | Custom-part mass budget (user: 500 g for the shoulder) | 227.8 g | <= 500 g | **PASS** | parts_full.json (mesh volume x density) |
 | R9 | Strength: SF >= 1.5 at 25 N.m worst direction; deflection and fatigue bounded | - |  | **UNVERIFIED** | independent FEA (CalculiX) - only the in-house hex8 study exists (pipeline/conformal/thin_study) |

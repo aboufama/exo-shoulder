@@ -1,45 +1,208 @@
 {
- "step": 12,
+ "step": 1,
  "tol_mm": 0.15,
- "frames_checked": 117,
+ "frames_checked": 1337,
  "pairs": 1110,
- "seconds": 4,
- "jobs": 4,
+ "seconds": 187,
+ "setup_seconds": 53,
+ "jobs": 2,
+ "cpu_seconds": 312,
+ "cpu_s_per_frame": 0.194,
  "violations": {
   "l2|link 2 strap keep-out (8 x 3 mm Ti, fitted underside)  IN  l3|J3 lower plate keep-out (O20 x 3, member 3)": {
-   "max_depth": 0.58,
-   "frames": 117,
+   "max_depth": 1.5,
+   "frames": 1337,
    "worst": [
     "Raise overhead",
-    24
-   ]
+    0
+   ],
+   "worst_point": "sharp edge",
+   "per_frame": {
+    "Raise overhead|0": 1.5,
+    "Raise overhead|1": 1.5,
+    "Raise overhead|2": 1.5,
+    "Raise overhead|3": 1.5,
+    "Raise overhead|4": 1.5,
+    "Raise overhead|5": 1.5,
+    "Raise overhead|6": 1.5,
+    "Raise overhead|7": 1.5,
+    "Raise overhead|8": 1.5,
+    "Raise overhead|9": 1.5,
+    "Raise overhead|10": 1.5,
+    "Raise overhead|11": 1.5
+   }
+  },
+  "l2|link 2 strap keep-out (8 x 3 mm Ti, fitted underside)  IN  l1|J2 lower plate keep-out (O20 x 3, link 1)": {
+   "max_depth": 0.37,
+   "frames": 1337,
+   "worst": [
+    "Raise overhead",
+    7
+   ],
+   "worst_point": "face",
+   "per_frame": {
+    "Raise overhead|7": 0.37,
+    "Raise overhead|14": 0.37,
+    "Raise overhead|27": 0.37,
+    "Raise overhead|35": 0.37,
+    "Raise overhead|145": 0.37,
+    "Raise overhead|153": 0.37,
+    "Raise overhead|166": 0.37,
+    "Raise overhead|173": 0.37,
+    "Drink from a cup|0": 0.37,
+    "Drink from a cup|1": 0.37,
+    "Drink from a cup|2": 0.37,
+    "Drink from a cup|3": 0.37
+   }
   },
   "l3|J3 lower plate keep-out (O20 x 3, member 3)  IN  l2|link 2 strap keep-out (8 x 3 mm Ti, fitted underside)": {
-   "max_depth": 0.54,
-   "frames": 117,
-   "worst": [
-    "Comb hair",
-    156
-   ]
-  },
-  "l2|link 2 strap keep-out (8 x 3 mm Ti, fitted underside)  IN  l1|link 1 strap keep-out (8 x 3 mm Ti, fitted underside)": {
-   "max_depth": 0.79,
-   "frames": 17,
-   "worst": [
-    "Wave",
-    120
-   ]
-  },
-  "l1|link 1 strap keep-out (8 x 3 mm Ti, fitted underside)  IN  l2|link 2 strap keep-out (8 x 3 mm Ti, fitted underside)": {
-   "max_depth": 0.81,
-   "frames": 16,
+   "max_depth": 0.63,
+   "frames": 1337,
    "worst": [
     "Raise overhead",
-    48
-   ]
+    12
+   ],
+   "worst_point": "face",
+   "per_frame": {
+    "Raise overhead|12": 0.63,
+    "Raise overhead|17": 0.63,
+    "Raise overhead|21": 0.63,
+    "Raise overhead|25": 0.63,
+    "Raise overhead|33": 0.63,
+    "Raise overhead|38": 0.63,
+    "Raise overhead|41": 0.63,
+    "Raise overhead|139": 0.63,
+    "Raise overhead|142": 0.63,
+    "Raise overhead|147": 0.63,
+    "Raise overhead|155": 0.63,
+    "Raise overhead|159": 0.63
+   }
+  },
+  "l1|J2 lower plate keep-out (O20 x 3, link 1)  IN  l2|link 2 strap keep-out (8 x 3 mm Ti, fitted underside)": {
+   "max_depth": 0.27,
+   "frames": 1337,
+   "worst": [
+    "Raise overhead",
+    4
+   ],
+   "worst_point": "face",
+   "per_frame": {
+    "Raise overhead|4": 0.27,
+    "Raise overhead|176": 0.27,
+    "Reach a high shelf|11": 0.27,
+    "Reach a high shelf|154": 0.27,
+    "Wash opposite shoulder|96": 0.27,
+    "Wash opposite shoulder|108": 0.27,
+    "Wash opposite shoulder|138": 0.27,
+    "Wave|25": 0.27,
+    "Wave|146": 0.27,
+    "Raise overhead|0": 0.26,
+    "Raise overhead|1": 0.26,
+    "Raise overhead|2": 0.26
+   }
+  },
+  "l2|link 2 strap keep-out (8 x 3 mm Ti, fitted underside)  IN  l1|link 1 strap keep-out (8 x 3 mm Ti, fitted underside)": {
+   "max_depth": 1.04,
+   "frames": 207,
+   "worst": [
+    "Raise overhead",
+    45
+   ],
+   "worst_point": "sharp edge",
+   "per_frame": {
+    "Raise overhead|45": 1.04,
+    "Raise overhead|135": 1.04,
+    "Wave|36": 1.02,
+    "Wave|135": 1.02,
+    "Wave|46": 0.98,
+    "Wave|47": 0.98,
+    "Wave|124": 0.98,
+    "Wave|125": 0.98,
+    "Raise overhead|46": 0.97,
+    "Raise overhead|134": 0.97,
+    "Wave|37": 0.97,
+    "Wave|45": 0.97
+   }
+  },
+  "l1|link 1 strap keep-out (8 x 3 mm Ti, fitted underside)  IN  l2|link 2 strap keep-out (8 x 3 mm Ti, fitted underside)": {
+   "max_depth": 0.82,
+   "frames": 205,
+   "worst": [
+    "Wave",
+    42
+   ],
+   "worst_point": "vertex",
+   "per_frame": {
+    "Wave|42": 0.82,
+    "Wave|43": 0.82,
+    "Wave|128": 0.82,
+    "Wave|129": 0.82,
+    "Raise overhead|48": 0.81,
+    "Raise overhead|49": 0.81,
+    "Raise overhead|50": 0.81,
+    "Raise overhead|51": 0.81,
+    "Raise overhead|52": 0.81,
+    "Raise overhead|53": 0.81,
+    "Raise overhead|54": 0.81,
+    "Raise overhead|55": 0.81
+   }
   }
  },
  "open_parts_not_tested_as_container": [],
- "inside": "integer winding number on welded tessellations (grid + segment crossings), depth = exact distance (judge/sdist.py)",
- "max_depth": 0.81
+ "samples": {
+  "h_mm": 1.0,
+  "sharp_deg": 30.0,
+  "total": 868942,
+  "per_part": {
+   "H|M4 ULTRA LOW PROFILE SOCKET HEAD SCREW, 6mm L, HS STEEL": 9519,
+   "H|BOTTOM (user's bar, cut at s 255, 2x M3 countersunk for the arm-end tongue)": 291431,
+   "F|FOREARM CUFF": 264978,
+   "F|Hex socket head countersunk screw grade C M4x0.7 x 8": 12234,
+   "H|TOP": 14699,
+   "H|IGUS THRUST WASHER, 30mm ID, 39mm OD, 1.5mm T, IGLIDE J": 10376,
+   "F|MIDDLE": 78680,
+   "H|5mm D, 2.5mm H, N42 MAGNET": 827,
+   "H|CirPattern1[15]": 282,
+   "H|Revolve1[2]": 1988,
+   "H|CirPattern1[11]": 282,
+   "H|Revolve4": 282,
+   "H|CirPattern1[5]": 282,
+   "H|Revolve1[1]": 6974,
+   "H|CirPattern1[7]": 282,
+   "H|CirPattern1[16]": 282,
+   "H|CirPattern1[12]": 282,
+   "H|CirPattern1[14]": 282,
+   "H|CirPattern1[8]": 282,
+   "H|CirPattern1[10]": 282,
+   "H|CirPattern1[4]": 282,
+   "H|Revolve3": 6014,
+   "H|CirPattern1[2]": 282,
+   "H|CirPattern1[9]": 282,
+   "H|Revolve1[3]": 1988,
+   "H|CirPattern1[1]": 282,
+   "H|CirPattern1[6]": 282,
+   "H|CirPattern1[3]": 282,
+   "H|CirPattern1[17]": 282,
+   "H|CirPattern1[13]": 282,
+   "H|UPPER ARM CUFF (conformal G2 shell, AlSi10Mg bead blasted)": 62921,
+   "H|M4x6 ISO 10642 countersunk (upper cuff)": 6087,
+   "H|rail mount to BOTTOM (proxy) (4 mm slab, not in the concept model)": 5390,
+   "H|cuff rail keep-out (proxy) (8 x 4 x (20 + 2 S_a), arm-fixed)": 4328,
+   "l4|carriage A keep-out (20 x (20 + 2 S_t) x 4, along slide)": 8846,
+   "l3|carriage B keep-out (20 x 20 x 4, across + radial slides)": 3498,
+   "l3|member-3 bridge keep-out (8 wide, underside at carriage B's underside, top flush with the neck)": 2427,
+   "l3|member-3 neck keep-out (8 x 3 mm, ramp <= 60 deg from the J3 plate to carriage B's top)": 5539,
+   "l2|link 2 strap keep-out (8 x 3 mm Ti, fitted underside)": 7195,
+   "l1|link 1 strap keep-out (8 x 3 mm Ti, fitted underside)": 8379,
+   "l3|J3 lower plate keep-out (O20 x 3, member 3)": 6018,
+   "l2|J3 upper boss + cap keep-out (O20, F+3.15..F+12.25, link 2)": 10498,
+   "l2|J2 upper boss + cap keep-out (O20, F+3.15..F+12.25, link 2)": 10498,
+   "l1|J2 lower plate keep-out (O20 x 3, link 1)": 6018,
+   "l1|J1 lower plate keep-out (O20 x 3, link 1)": 6018,
+   "base|J1 upper boss + cap keep-out (O20, F+3.15..F+12.25; base = J1's upper member)": 10498
+  },
+  "rule": "every vertex + sharp/boundary edges at <= h/2 + longest-edge bisection of every face to edges <= h (midpoints)"
+ },
+ "inside": "dense surface samples of A (vertices, sharp edges, faces), both ways; integer winding number on welded tessellations (judge/sdist.py grid + segment crossings), depth = exact distance to B's closest point (libigl AABB)",
+ "max_depth": 1.5
 }

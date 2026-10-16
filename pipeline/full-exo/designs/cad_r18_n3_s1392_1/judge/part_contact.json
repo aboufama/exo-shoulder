@@ -1,61 +1,224 @@
 {
- "step": 12,
+ "step": 1,
  "tol_mm": 0.15,
- "frames_checked": 117,
+ "frames_checked": 1337,
  "pairs": 2500,
- "seconds": 424,
- "jobs": 4,
+ "seconds": 1709,
+ "setup_seconds": 84,
+ "jobs": 2,
+ "cpu_seconds": 2712,
+ "cpu_s_per_frame": 1.99,
  "violations": {
   "l2|J2 M1.6x3 ISO 10642 Ti (cap)  IN  l1|J2 washer B (igus GTM-1018-005)": {
    "max_depth": 0.17,
-   "frames": 117,
+   "frames": 1337,
    "worst": [
     "Walking arm swing",
     108
-   ]
+   ],
+   "worst_point": "vertex",
+   "per_frame": {
+    "Raise overhead|0": 0.17,
+    "Raise overhead|1": 0.17,
+    "Raise overhead|2": 0.17,
+    "Raise overhead|3": 0.17,
+    "Raise overhead|4": 0.17,
+    "Raise overhead|5": 0.17,
+    "Raise overhead|6": 0.17,
+    "Raise overhead|7": 0.17,
+    "Raise overhead|8": 0.17,
+    "Raise overhead|9": 0.17,
+    "Raise overhead|10": 0.17,
+    "Raise overhead|11": 0.17
+   }
   },
   "l1|J1 M1.6x3 ISO 10642 Ti (cap)  IN  base|J1 washer B (igus GTM-1018-005)": {
    "max_depth": 0.18,
-   "frames": 117,
+   "frames": 1337,
    "worst": [
-    "Comb hair",
-    48
-   ]
-  },
-  "H|J3 washer B (igus GTM-1018-005)  IN  l2|D4-03 link 2 (Ti-6Al-4V)": {
-   "max_depth": 0.28,
-   "frames": 65,
-   "worst": [
-    "Wash opposite shoulder",
-    84
-   ]
+    "Raise overhead",
+    32
+   ],
+   "worst_point": "vertex",
+   "per_frame": {
+    "Raise overhead|32": 0.18,
+    "Raise overhead|148": 0.18,
+    "Drink from a cup|25": 0.18,
+    "Drink from a cup|32": 0.18,
+    "Drink from a cup|44": 0.18,
+    "Drink from a cup|64": 0.18,
+    "Drink from a cup|66": 0.18,
+    "Drink from a cup|115": 0.18,
+    "Drink from a cup|149": 0.18,
+    "Comb hair|40": 0.18,
+    "Comb hair|48": 0.18,
+    "Comb hair|63": 0.18
+   }
   },
   "l2|D4-03 link 2 (Ti-6Al-4V)  IN  H|J3 washer B (igus GTM-1018-005)": {
    "max_depth": 0.25,
-   "frames": 66,
+   "frames": 775,
    "worst": [
-    "Drink from a cup",
-    36
-   ]
+    "Wash opposite shoulder",
+    79
+   ],
+   "worst_point": "vertex",
+   "per_frame": {
+    "Drink from a cup|32": 0.25,
+    "Drink from a cup|33": 0.25,
+    "Drink from a cup|34": 0.25,
+    "Drink from a cup|35": 0.25,
+    "Drink from a cup|36": 0.25,
+    "Drink from a cup|37": 0.25,
+    "Drink from a cup|38": 0.25,
+    "Drink from a cup|39": 0.25,
+    "Drink from a cup|40": 0.25,
+    "Drink from a cup|41": 0.25,
+    "Drink from a cup|42": 0.25,
+    "Drink from a cup|43": 0.25
+   }
+  },
+  "H|J3 washer B (igus GTM-1018-005)  IN  l2|D4-03 link 2 (Ti-6Al-4V)": {
+   "max_depth": 0.28,
+   "frames": 753,
+   "worst": [
+    "Wash opposite shoulder",
+    161
+   ],
+   "worst_point": "sharp edge",
+   "per_frame": {
+    "Drink from a cup|36": 0.28,
+    "Drink from a cup|37": 0.28,
+    "Drink from a cup|38": 0.28,
+    "Drink from a cup|39": 0.28,
+    "Drink from a cup|40": 0.28,
+    "Drink from a cup|41": 0.28,
+    "Drink from a cup|42": 0.28,
+    "Drink from a cup|43": 0.28,
+    "Drink from a cup|44": 0.28,
+    "Drink from a cup|45": 0.28,
+    "Drink from a cup|46": 0.28,
+    "Drink from a cup|47": 0.28
+   }
   },
   "l2|D4-03 link 2 (Ti-6Al-4V)  IN  H|BOTTOM + neck + JN hub (one 5-axis part, 7075-T6 bead blasted)": {
-   "max_depth": 0.29,
-   "frames": 21,
+   "max_depth": 0.3,
+   "frames": 239,
    "worst": [
-    "Reach a high shelf",
-    96
-   ]
+    "Comb hair",
+    103
+   ],
+   "worst_point": "vertex",
+   "per_frame": {
+    "Comb hair|103": 0.3,
+    "Comb hair|107": 0.3,
+    "Comb hair|151": 0.3,
+    "Comb hair|154": 0.3,
+    "Reach a high shelf|66": 0.3,
+    "Reach a high shelf|74": 0.3,
+    "Reach a high shelf|110": 0.3,
+    "Comb hair|97": 0.29,
+    "Comb hair|98": 0.29,
+    "Comb hair|99": 0.29,
+    "Comb hair|100": 0.29,
+    "Comb hair|101": 0.29
+   }
   },
   "H|BOTTOM + neck + JN hub (one 5-axis part, 7075-T6 bead blasted)  IN  l2|D4-03 link 2 (Ti-6Al-4V)": {
-   "max_depth": 0.26,
-   "frames": 16,
+   "max_depth": 0.27,
+   "frames": 184,
    "worst": [
     "Reach a high shelf",
-    72
-   ]
+    114
+   ],
+   "worst_point": "vertex",
+   "per_frame": {
+    "Comb hair|93": 0.27,
+    "Comb hair|94": 0.27,
+    "Comb hair|95": 0.27,
+    "Comb hair|96": 0.27,
+    "Comb hair|97": 0.27,
+    "Comb hair|98": 0.27,
+    "Comb hair|99": 0.27,
+    "Comb hair|100": 0.27,
+    "Comb hair|101": 0.27,
+    "Comb hair|102": 0.27,
+    "Comb hair|103": 0.27,
+    "Comb hair|104": 0.27
+   }
   }
  },
  "open_parts_not_tested_as_container": [],
- "inside": "integer winding number on welded tessellations (grid + segment crossings), depth = exact distance (judge/sdist.py)",
- "max_depth": 0.29
+ "samples": {
+  "h_mm": 1.0,
+  "sharp_deg": 30.0,
+  "total": 1779374,
+  "per_part": {
+   "H|M4x6 ISO 10642 countersunk (upper cuff)": 13021,
+   "H|UPPER ARM CUFF (conformal G2 shell, AlSi10Mg bead blasted)": 148138,
+   "H|CirPattern1[13]": 2865,
+   "H|CirPattern1[17]": 2865,
+   "H|CirPattern1[3]": 2865,
+   "H|CirPattern1[6]": 2865,
+   "H|CirPattern1[1]": 2865,
+   "H|Revolve1[3]": 1684,
+   "H|CirPattern1[9]": 2865,
+   "H|CirPattern1[2]": 2865,
+   "H|Revolve3": 6905,
+   "H|CirPattern1[4]": 2865,
+   "H|CirPattern1[10]": 2865,
+   "H|CirPattern1[8]": 2865,
+   "H|CirPattern1[14]": 2865,
+   "H|CirPattern1[12]": 2865,
+   "H|CirPattern1[16]": 2865,
+   "H|CirPattern1[7]": 2865,
+   "H|Revolve1[1]": 7189,
+   "H|CirPattern1[5]": 2865,
+   "H|Revolve4": 2865,
+   "H|CirPattern1[11]": 2865,
+   "H|Revolve1[2]": 1684,
+   "H|CirPattern1[15]": 2865,
+   "H|M4 ULTRA LOW PROFILE SOCKET HEAD SCREW, 6mm L, HS STEEL": 30080,
+   "H|5mm D, 2.5mm H, N42 MAGNET": 2015,
+   "F|Hex socket head countersunk screw grade C M4x0.7 x 8": 40345,
+   "H|IGUS THRUST WASHER, 30mm ID, 39mm OD, 1.5mm T, IGLIDE J": 15128,
+   "F|MIDDLE": 115268,
+   "H|TOP": 32759,
+   "F|FOREARM CUFF": 632813,
+   "H|J3 ring nut M8x0.5 18x1 (Ti-6Al-4V)": 8338,
+   "H|J3 magnet \u00d84x2 N52 diametric": 1353,
+   "H|J3 washer B (igus GTM-1018-005)": 3578,
+   "H|J3 washer A (igus GTM-1018-005, recessed)": 3578,
+   "H|BOTTOM + neck + JN hub (one 5-axis part, 7075-T6 bead blasted)": 275047,
+   "l2|D4-03 link 2 (Ti-6Al-4V)": 116577,
+   "l2|J3 M1.6x3 ISO 10642 Ti (cap)": 4218,
+   "l2|J3 cap \u00d822 G2 dome (Ti-6Al-4V)": 12366,
+   "l2|J3 angle sensor IC (placeholder)": 166,
+   "l2|J3 position PCB \u00d816 (placeholder)": 2016,
+   "l2|J3 sleeve (igus GSM-1012-04)": 4650,
+   "l2|J2 M1.6x3 ISO 10642 Ti (cap)": 4212,
+   "l2|J2 cap \u00d822 G2 dome (Ti-6Al-4V)": 12601,
+   "l2|J2 angle sensor IC (placeholder)": 162,
+   "l2|J2 position PCB \u00d816 (placeholder)": 2036,
+   "l2|J2 sleeve (igus GSM-1012-04)": 4418,
+   "l1|D4-02 link 1 (Ti-6Al-4V)": 124310,
+   "l1|J2 ring nut M8x0.5 18x1 (Ti-6Al-4V)": 8338,
+   "l1|J2 magnet \u00d84x2 N52 diametric": 1219,
+   "l1|J2 washer B (igus GTM-1018-005)": 3578,
+   "l1|J2 washer A (igus GTM-1018-005, recessed)": 3578,
+   "l1|J1 M1.6x3 ISO 10642 Ti (cap)": 4212,
+   "l1|J1 cap \u00d822 G2 dome (Ti-6Al-4V)": 12601,
+   "l1|J1 angle sensor IC (placeholder)": 162,
+   "l1|J1 position PCB \u00d816 (placeholder)": 2036,
+   "l1|J1 sleeve (igus GSM-1012-04)": 4418,
+   "base|D4-01 scapula base (Ti-6Al-4V)": 44304,
+   "base|J1 ring nut M8x0.5 18x1 (Ti-6Al-4V)": 8343,
+   "base|J1 magnet \u00d84x2 N52 diametric": 1204,
+   "base|J1 washer B (igus GTM-1018-005)": 3578,
+   "base|J1 washer A (igus GTM-1018-005, recessed)": 3578
+  },
+  "rule": "every vertex + sharp/boundary edges at <= h/2 + longest-edge bisection of every face to edges <= h (midpoints)"
+ },
+ "inside": "dense surface samples of A (vertices, sharp edges, faces), both ways; integer winding number on welded tessellations (judge/sdist.py grid + segment crossings), depth = exact distance to B's closest point (libigl AABB)",
+ "max_depth": 0.3
 }

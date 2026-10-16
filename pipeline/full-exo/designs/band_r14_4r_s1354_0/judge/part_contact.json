@@ -1,29 +1,127 @@
 {
- "step": 4,
+ "step": 1,
  "tol_mm": 0.15,
- "frames_checked": 339,
+ "frames_checked": 1337,
  "pairs": 414,
- "seconds": 40,
- "jobs": 4,
+ "seconds": 86,
+ "setup_seconds": 15,
+ "jobs": 2,
+ "cpu_seconds": 175,
+ "cpu_s_per_frame": 0.12,
  "violations": {
   "l2|D4 member l2 (proxy)  IN  l1|D4 member l1 (proxy)": {
-   "max_depth": 0.32,
-   "frames": 339,
+   "max_depth": 3.67,
+   "frames": 1337,
    "worst": [
-    "Walking arm swing",
-    108
-   ]
+    "Reach back pocket",
+    69
+   ],
+   "worst_point": "sharp edge",
+   "per_frame": {
+    "Reach back pocket|69": 3.67,
+    "Reach back pocket|68": 3.65,
+    "Reach back pocket|67": 3.64,
+    "Reach back pocket|66": 3.61,
+    "Reach back pocket|65": 3.59,
+    "Reach back pocket|64": 3.55,
+    "Reach back pocket|63": 3.53,
+    "Reach back pocket|62": 3.48,
+    "Reach back pocket|61": 3.46,
+    "Reach back pocket|60": 3.44,
+    "Reach back pocket|70": 3.43,
+    "Reach back pocket|59": 3.42
+   }
   },
-  "l3|D4 member l3 (proxy)  IN  l2|D4 member l2 (proxy)": {
-   "max_depth": 2.0,
-   "frames": 27,
+  "l1|D4 member l1 (proxy)  IN  l2|D4 member l2 (proxy)": {
+   "max_depth": 0.26,
+   "frames": 1337,
    "worst": [
     "Raise overhead",
-    64
-   ]
+    25
+   ],
+   "worst_point": "face",
+   "per_frame": {
+    "Raise overhead|25": 0.26,
+    "Raise overhead|26": 0.26,
+    "Raise overhead|27": 0.26,
+    "Raise overhead|28": 0.26,
+    "Raise overhead|29": 0.26,
+    "Raise overhead|30": 0.26,
+    "Raise overhead|31": 0.26,
+    "Raise overhead|32": 0.26,
+    "Raise overhead|33": 0.26,
+    "Raise overhead|34": 0.26,
+    "Raise overhead|35": 0.26,
+    "Raise overhead|36": 0.26
+   }
+  },
+  "l3|D4 member l3 (proxy)  IN  l2|D4 member l2 (proxy)": {
+   "max_depth": 2.6,
+   "frames": 102,
+   "worst": [
+    "Raise overhead",
+    117
+   ],
+   "worst_point": "face",
+   "per_frame": {
+    "Raise overhead|63": 2.6,
+    "Raise overhead|117": 2.6,
+    "Raise overhead|64": 2.57,
+    "Raise overhead|116": 2.57,
+    "Raise overhead|65": 2.54,
+    "Raise overhead|66": 2.54,
+    "Raise overhead|114": 2.54,
+    "Raise overhead|115": 2.54,
+    "Raise overhead|67": 2.53,
+    "Raise overhead|113": 2.53,
+    "Raise overhead|75": 2.52,
+    "Raise overhead|76": 2.52
+   }
   }
  },
  "open_parts_not_tested_as_container": [],
- "inside": "integer winding number on welded tessellations (grid + segment crossings), depth = exact distance (judge/sdist.py)",
- "max_depth": 2.0
+ "samples": {
+  "h_mm": 1.0,
+  "sharp_deg": 30.0,
+  "total": 1007348,
+  "per_part": {
+   "H|BOTTOM JN hub block (proxy)": 5425,
+   "H|M4 ULTRA LOW PROFILE SOCKET HEAD SCREW, 6mm L, HS STEEL": 30189,
+   "F|FOREARM CUFF": 631180,
+   "F|Hex socket head countersunk screw grade C M4x0.7 x 8": 40314,
+   "H|TOP": 32619,
+   "H|IGUS THRUST WASHER, 30mm ID, 39mm OD, 1.5mm T, IGLIDE J": 15128,
+   "F|MIDDLE": 115827,
+   "H|5mm D, 2.5mm H, N42 MAGNET": 2112,
+   "H|CirPattern1[15]": 2865,
+   "H|Revolve1[2]": 1684,
+   "H|CirPattern1[11]": 2865,
+   "H|Revolve4": 2865,
+   "H|CirPattern1[5]": 2865,
+   "H|Revolve1[1]": 7189,
+   "H|CirPattern1[7]": 2865,
+   "H|CirPattern1[16]": 2865,
+   "H|CirPattern1[12]": 2865,
+   "H|CirPattern1[14]": 2865,
+   "H|CirPattern1[8]": 2865,
+   "H|CirPattern1[10]": 2865,
+   "H|CirPattern1[4]": 2865,
+   "H|Revolve3": 6905,
+   "H|CirPattern1[2]": 2865,
+   "H|CirPattern1[9]": 2865,
+   "H|Revolve1[3]": 1684,
+   "H|CirPattern1[1]": 2865,
+   "H|CirPattern1[6]": 2865,
+   "H|CirPattern1[3]": 2865,
+   "H|CirPattern1[17]": 2865,
+   "H|CirPattern1[13]": 2865,
+   "l3|D4 member l3 (proxy)": 20578,
+   "l2|D4 member l2 (proxy)": 26050,
+   "l1|D4 member l1 (proxy)": 14200,
+   "base|D4 member base (proxy)": 4694
+  },
+  "rule": "every vertex + sharp/boundary edges at <= h/2 + longest-edge bisection of every face to edges <= h (midpoints)"
+ },
+ "inside": "dense surface samples of A (vertices, sharp edges, faces), both ways; integer winding number on welded tessellations (judge/sdist.py grid + segment crossings), depth = exact distance to B's closest point (libigl AABB)",
+ "max_depth": 3.67
 }

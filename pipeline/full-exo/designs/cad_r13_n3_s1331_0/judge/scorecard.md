@@ -7,7 +7,7 @@
 | R3 | Follows the arm (frames tracked, not held at a limit) | 61.0% | >= 0.95 | **FAIL** | full-exo/score_design.py |
 | R4 | Overhead works (Raise overhead clip score) | 20.5% | >= 0.8 | **FAIL** | full-exo/score_design.py |
 | R5 | At most 4 DOF (3R + sliding cuff, or 4R) | 4 | <= 4 | **PASS** | design.json |
-| R6 | No interference between parts that move relative to each other | 90.07 | <= 0.15 mm | **FAIL** | judge/part_contact.py (geometry only) |
+| R6 | No interference between parts that move relative to each other | 0.25 mm | <= 0.15 mm | **FAIL** | judge/part_contact.py (geometry only) |
 | R7 | Every custom part is one valid closed solid | True | == True | **PASS** | judge/part_validity.py (OCC BRepCheck on the exported STEP) |
 | R8 | Custom-part mass budget (proposed) | 436.1 | <= 300 g | **FAIL** | parts_full.json (mesh volume x density) |
 | R9 | Strength: SF >= 1.5 at 25 N.m worst direction; deflection and fatigue bounded | - |  | **UNVERIFIED** | independent FEA (CalculiX) - only the in-house hex8 study exists (pipeline/conformal/thin_study) |
