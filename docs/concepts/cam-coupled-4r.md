@@ -109,3 +109,42 @@ Kit note (measured): `over` did not keep the tail clear of link 1, or link 1 cle
 The model now lifts both explicitly with ramps: the tail one full level over link 1, and link 1 one level over the
 plate at the fixed distance band from J1 where it crosses the ring. This is conservative: K6 itself never missed a
 collision.
+
+### 3. Search: farm sweeps and CMA-ES
+
+| stage | configurations | best gap (Bench(60,160) fast) | note |
+|---|---|---|---|
+| coarse, plane-fit slot | 320 | 126.87 (honest 152.79) | slot ring over the neck: 400 mm fallback |
+| coarse, eccentric groove (before the level fixes) | 400 | 121.96 | tail / link 1 / plate collisions (kit `over` gap) |
+| proxy-guided, eccentric groove | 300 | 93.63 | proxy = kinematics + hub-centre K3 levels, local, ~3 configs/s |
+| CMA round 1, 4 streams | 6468 | **41.66** (reach 0.869, ib14 0.539, follow 1.0) | **refuted by the red team, see below** |
+| CMA round 2 under the housing rule, 4 streams | 4116 | 50.67 (reach 0.90, follow 0.95, ib14 0.40, contact 0.010) | |
+
+**Red team: the optimistic number (41.66).** The round-1 optimum puts the groove 14.1 deg from an axis 5.8 deg off J1.
+At r 50 mm its inner edge is 0.2 mm from J1's axis plus the 3 mm slot half-width, so it cuts through J1's O20 bearing
+housing (the MR117 pair's 5.5 mm bore and its wall out to 10 mm). The bench cannot see this: the groove plate and
+hub 1 are the same body, and K6 exempts joint partners within 12 mm of J1.
+- The model now enforces the housing. If the groove's inner edge is closer than HUB_R + 1 mm to J1's axis, measured
+  at r 50 (the conservative side), the plate becomes a flange ON hub 1's crown at F1 + 12.75. Link 1, the tail and
+  everything above them stack over it.
+- The same configuration then scores 176.8. Round 2 re-optimised under the rule. Every stream's best still chose the
+  flange: inner edge 3-6 mm, groove beta 17-28 deg, eccentricity 3-14 deg.
+
+**Best honest configuration (round 2, stream B, gap 50.67, score 81.6).** Red team on Bench(60,160):
+- **Reach and follow.** Reach 0.90, follow 0.95. Overhead (elev >= 140): workspace 4 of 12, clips 2 of 5, in-band
+  0.69 on what it takes. Of the 19 poses not taken, 14 are fold / K2, 3 are part collisions and 2 are contact.
+- **In-band by part.** Hub 1 1.00, neck 0.76, hub 4 0.66, groove flange 0.63, hub 3 0.15, link 3 0.09, link 2 0.03,
+  link 1 0.02, hub 2 0, tail 0.
+- **The limiter: hubs 2 and 3 roam.**
+  - Hub 2's flat level (87.8 mm) is set by the elev 150-165 workspace poses; it sits 30+ mm above the skin
+    elsewhere.
+  - Hub 3's level (114 mm) is set by comb hair and the elev 165 / axial -90 poses. With the slot fixing the spare,
+    J3 slides around J4's a3-cone and is no longer humerus-fixed (park4's dwell kept it humerus-fixed on 80 % of
+    poses).
+  - Every strap stacked on these hubs inherits their levels.
+- **The pinch: the roller post is 29.8 mm long.** The tail rides over link 1, which rides over the flange on hub 1's
+  crown, and the roller runs in the flange. A 30 mm cantilevered M3 post under the cam load is a stiffness and wear
+  risk that the bench does not price.
+- **Near-touch.** Minimum metal-skin distance 0.25 mm. Counting metal < 1 mm as contact gives 57.37.
+- **Cam health.** Transmission cos >= 0.59, cross-slot pin travel >= 22 mm/rad of J2, the actuated map >= 8 deg
+  from singular.

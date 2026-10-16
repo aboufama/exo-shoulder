@@ -29,7 +29,7 @@ boots or dies costs only its claimed chunk):
     python3 tools/gpu_knee_search.py run --out DIR [--bench 110,360] [--device cuda] [--workers W]
         deadlines (epoch s, env): GKS_T_SOBOL GKS_T_CMA GKS_T_VERIFY ; sizes: GKS_SCALE (1.0 = 110k Sobol points)
     python3 tools/gpu_knee_search.py points            print the Sobol plan (counts per region, seat rejections)
-    python3 tools/gpu_knee_search.py summary DIR OUT.json     merge a fetched run directory into one summary
+    python3 tools/gpu_knee_search.py digest DIR OUT.json      compact digest of a run directory (+ OUT_all.npz of every evaluation)
 """
 import glob, json, math, os, sys, time, traceback
 from collections import deque
@@ -44,7 +44,8 @@ PERIODIC = ("phiE", "phib")
 MARGIN = (1.0, 5.0, 15.0)                     # CMA scale, floor (the user's 5 deg), ceiling
 R_BASIN = 2.5                                 # basin separation, CMA-scale units
 R_DISTINCT = 1.5                              # distinct finalists
-LAM = 12
+LAM = int(os.environ.get("GKS_LAM", 12))
+N_BASINS = int(os.environ.get("GKS_BASINS", 30))
 CHUNK = 512
 
 
@@ -154,6 +155,16 @@ def _w_init(nc, nw, device):
     _W.update(GB=GB, KP=KP, S=KP.verifier().MK.S, B=GB.bench(nc, nw, device))
 
 
+def gpu_slots(ncpu, per_gb=float(os.environ.get("GKS_GB_PER_WORKER", 1.8))):
+    """workers the device memory holds: each worker keeps its own int8 grid of the bench (470 poses x 131^3 = 1.06 GB on
+    Bench(110,360)) + a CUDA context + the batch temporaries (~1.8 GB in all); capped by the CPUs"""
+    try:
+        mb = float(os.popen("nvidia-smi --query-gpu=memory.total --format=csv,noheader,nounits").read().split()[0])
+        return max(1, min(ncpu - 1, int((mb / 1024.0 - 2.0) / per_gb)))
+    except Exception:                                                                        # noqa: BLE001
+        return max(2, ncpu - 1)
+
+
 def objective(r):
     return float(r["gap_near1"]) + 100.0 * max(0.0, 1.0 - float(r["follow"]))
 
@@ -165,6 +176,9 @@ def _eval(a):
         if m < MARGIN[1] - 1e-9: return dict(tag=tag, p=p, err="margin < 5", obj=400.0)
         S.SING = m; gd = B._gd; gd.mode_out = mode; nb0 = getattr(gd, "n_bound", 0); no0 = gd.outside
         r = GB.evaluate_one({k: v for k, v in p.items() if k != "margin"}, B)
+        if r.get("error") and cuda_err(dict(err=str(r["error"]))):                          # free the cache, retry once
+            import torch
+            torch.cuda.empty_cache(); r = GB.evaluate_one({k: v for k, v in p.items() if k != "margin"}, B)
         out = dict(tag=tag, p=p, secs=round(time.time() - t, 2), nb=getattr(gd, "n_bound", 0) - nb0, nx=gd.outside - no0, mode=mode)
         if r.get("gap") is None or r.get("error") or r.get("gap_near1") is None:
             out.update(err=str(r.get("error", "no gap"))[:120], obj=400.0); return out
@@ -205,6 +219,26 @@ def read_jsonl(pattern):
             try: out.append(json.loads(line))
             except Exception: pass                                                           # noqa: BLE001  (a torn last line)
     return out
+
+
+def cuda_err(r): return bool(r.get("err")) and any(w in r["err"] for w in ("CUDA", "cuda", "out of memory", "AcceleratorError"))
+
+
+def dedupe(rows):
+    """one row per tag: a row that closed beats an error row (a restarted pod re-evaluates its CUDA-error rows)"""
+    best = {}
+    for r in rows:
+        t = r.get("tag"); o = best.get(t)
+        if o is None or (o.get("err") is not None and r.get("err") is None): best[t] = r
+    return list(best.values())
+
+
+def dedupe_last(rows):
+    """CMA rows: one row per tag, the LAST one written wins (a restarted pod re-uses the tag scheme cma-b<j>-g<gen>-<i>
+    for its new basins; rows of the first, out-of-memory run come earlier in the same file)"""
+    best = {}
+    for r in rows: best[r.get("tag")] = r
+    return list(best.values())
 
 
 # ---- CMA (tools/knee_polish.py's update; bounded by clipping + quadratic penalty; periodic angles wrapped) ---------------
@@ -285,7 +319,7 @@ def run(a):
         q = open("/sys/fs/cgroup/cpu.max").read().split()
         if q[0] != "max": ncpu = min(ncpu, max(1, int(int(q[0]) / int(q[1]))))
     except Exception: pass                                                                   # noqa: BLE001
-    W = a.workers or max(2, ncpu - 1); log(f"cpus {ncpu} workers {W} bench {nc},{nw} device {a.device} scale {scale}; deadlines sobol {T_SOB - time.time():.0f}s cma {T_CMA - time.time():.0f}s verify {T_VER - time.time():.0f}s")
+    W = a.workers or (gpu_slots(ncpu) if a.device == "cuda" else max(2, ncpu - 1)); log(f"cpus {ncpu} workers {W} bench {nc},{nw} device {a.device} scale {scale}; deadlines sobol {T_SOB - time.time():.0f}s cma {T_CMA - time.time():.0f}s verify {T_VER - time.time():.0f}s")
     sc, lo, hi = spec(); S = seeds()
     pool = mp.get_context("spawn").Pool(W, initializer=_w_init, initargs=(nc, nw, a.device))
     # 1. seeds + 2. Sobol chunks
@@ -295,7 +329,16 @@ def run(a):
         res = pool.map(_eval, [(f"seed-{k}", p, "exact") for k, p in S.items()]); LS.write(res)
         for r in res: log(f"seed {r['tag']}: obj {r.get('obj')} near1 {r.get('gap_near1')} gap {r.get('gap')} reach {r.get('reach')} follow {r.get('follow')} {r.get('err', '')}")
 
+    own = os.path.join(OUT, f"sobol_{me}.jsonl")
+    prev = read_jsonl(own) if os.path.exists(own) else []
+    okt = {r["tag"] for r in prev if r.get("err") is None}
+    retry = [r for r in dedupe(prev) if cuda_err(r) and r["tag"] not in okt]
+    if retry: log(f"restart: re-evaluating {len(retry)} rows that failed on a CUDA error (of {len(prev)} rows)")
+
     def sob_items():
+        for r in retry:
+            if time.time() >= T_SOB: return
+            yield (r["tag"], r["p"], "exact" if r["tag"].startswith("seed-") else "bound")
         for c in range(nch):
             if time.time() >= T_SOB: return
             if not claim(os.path.join(OUT, "claims", f"s{c}")): continue
@@ -308,29 +351,29 @@ def run(a):
         if len(buf) >= 256:
             LS.write(buf); buf.clear(); log(f"sobol {LS.n} evals ({LS.n / (time.time() - t0):.1f}/s) best obj {best[0]:.2f}")
     feed(pool, sob_items(), W, on_sob, deadline=T_SOB); LS.write(buf); buf.clear()
-    open(os.path.join(OUT, f"sobol_{me}.done"), "w").write(f"{LS.n}"); log(f"sobol done: {LS.n} evals in {time.time() - t0:.0f}s")
+    open(os.path.join(OUT, f"sobol2_{me}.done"), "w").write(f"{LS.n}"); log(f"sobol done: {LS.n} evals in {time.time() - t0:.0f}s")
     # 3. basins (one pod computes them; the others wait)
     while time.time() < T_SOB + 300:
         alive = [os.path.basename(f)[6:] for f in glob.glob(os.path.join(OUT, "alive_*"))]
-        if all(os.path.exists(os.path.join(OUT, f"sobol_{x}.done")) for x in alive): break
+        if all(os.path.exists(os.path.join(OUT, f"sobol2_{x}.done")) for x in alive): break
         time.sleep(10)
-    bpath = os.path.join(OUT, "basins.json")
-    if claim(os.path.join(OUT, "claims", "basins")):
-        rows = read_jsonl(os.path.join(OUT, "sobol_*.jsonl")); B = pick_distinct(rows, sc, 60, R_BASIN)
+    bpath = os.path.join(OUT, "basins_r2.json")
+    if claim(os.path.join(OUT, "claims", "basins_r2")):
+        rows = dedupe(read_jsonl(os.path.join(OUT, "sobol_*.jsonl"))); B = pick_distinct(rows, sc, 60, R_BASIN)
         jdump(dict(n_rows=len(rows), basins=[dict(j=j, tag=r["tag"], obj=r["obj"], p=r["p"]) for j, r in enumerate(B)]), bpath)
         log(f"basins from {len(rows)} rows: " + ", ".join(f"{r['tag']} {r['obj']:.2f}" for r in B[:30]))
     while not os.path.exists(bpath): time.sleep(5)
     time.sleep(2); basins = json.load(open(bpath))["basins"]
     alive = sorted(os.path.basename(f)[6:] for f in glob.glob(os.path.join(OUT, "alive_*"))); rank = alive.index(me) if me in alive else 0
-    quota = max(1, math.ceil(min(30, len(basins)) / max(1, len(alive))))
+    quota = max(1, math.ceil(min(N_BASINS, len(basins)) / max(1, len(alive))))
     LC = Log(os.path.join(OUT, f"cma_{me}.jsonl")); act = []
 
     def take(prefer):
         for j in prefer:
-            if j < len(basins) and claim(os.path.join(OUT, "claims", f"b{j}")):
+            if j < len(basins) and claim(os.path.join(OUT, "claims", f"r2b{j}")):
                 b = basins[j]; cm = CMA(to_vec(b["p"]), 0.6, 9000 + j, sc, lo, hi); cm.j = j; cm.tag0 = b["tag"]; return cm
         return None
-    order = [j for j in range(min(30, len(basins))) if j % max(1, len(alive)) == rank] + list(range(len(basins)))
+    order = [j for j in range(min(N_BASINS, len(basins))) if j % max(1, len(alive)) == rank] + list(range(len(basins)))
     while len(act) < quota:
         cm = take(order)
         if cm is None: break
@@ -356,7 +399,7 @@ def run(a):
             log(f"cma gen {act[0].gen}: {len(act)} active, {LC.n} evals, gen {time.time() - tg:.1f}s, bests " + " ".join(f"b{c.j}:{c.best['f']:.2f}" for c in act))
     for cm in act + done:
         jdump(dict(j=cm.j, tag0=cm.tag0, gen=cm.gen, best=cm.best, stop=cm.stop() or "deadline", sigma=cm.sigma, hist=cm.hist), os.path.join(OUT, f"basin_{cm.j}.json"))
-    open(os.path.join(OUT, f"cma_{me}.done"), "w").write(f"{LC.n}"); log(f"cma done: {LC.n} evals")
+    open(os.path.join(OUT, f"cma2_{me}.done"), "w").write(f"{LC.n}"); log(f"cma done: {LC.n} evals")
     pool.close(); pool.terminate()
 
 
@@ -373,15 +416,15 @@ def final(a):
         q = open("/sys/fs/cgroup/cpu.max").read().split()
         if q[0] != "max": ncpu = min(ncpu, max(1, int(int(q[0]) / int(q[1]))))
     except Exception: pass                                                                   # noqa: BLE001
-    W = a.workers or max(2, ncpu - 1)
+    W = a.workers or (gpu_slots(ncpu) if a.device == "cuda" else max(2, ncpu - 1))
     alive = sorted(os.path.basename(f)[6:] for f in glob.glob(os.path.join(OUT, "alive_*")))
     vpath = os.path.join(OUT, "verify_jobs.json")
-    if claim(os.path.join(OUT, "claims", "final")):
+    if claim(os.path.join(OUT, "claims", "final_r2")):
         pool = mp.get_context("spawn").Pool(W, initializer=_w_init, initargs=(nc, nw, a.device))
         while time.time() < T_CMA + 240:
-            if all(os.path.exists(os.path.join(OUT, f"cma_{x}.done")) for x in alive): break
+            if all(os.path.exists(os.path.join(OUT, f"cma2_{x}.done")) for x in alive): break
             time.sleep(10)
-        rows = read_jsonl(os.path.join(OUT, "sobol_*.jsonl")) + read_jsonl(os.path.join(OUT, "cma_*.jsonl"))
+        rows = dedupe(read_jsonl(os.path.join(OUT, "sobol_*.jsonl"))) + read_jsonl(os.path.join(OUT, "cma_*.jsonl"))   # every CMA row is an evaluation of its own params
         top = pick_distinct(rows, sc, 30, R_DISTINCT)
         rex = pool.map(_eval, [(f"re-{r['tag']}", r["p"], "exact") for r in top], chunksize=1)
         for r, s in zip(rex, top): r["src"] = s["tag"]; r["obj_search"] = s["obj"]
@@ -435,30 +478,136 @@ def verify(jobs, OUT, ncpu, T_VER, log):
     log("verify: nothing left for this pod")
 
 
-# ---- summary (local, after fetching the run directory) -----------------------------------------------------------------
-def summary(d, outp):
-    sc, lo, hi = spec()
-    sob = read_jsonl(os.path.join(d, "sobol_*.jsonl")); cma = read_jsonl(os.path.join(d, "cma_*.jsonl"))
-    ok = lambda rows: [r for r in rows if r.get("err") is None]
+# ---- digest (on the volume, through a farm job) + log (local) ---------------------------------------------------------
+MET = ("obj", "gap_near1", "gap", "reach", "follow", "inband14", "inband10", "contact", "near_min")
+
+
+def digest(d, outp):
+    """compact digest of a run directory: counts, per-region stats, the top 2000 Sobol rows, per-basin best-per-generation,
+    the basins, the exact re-evaluation, the finalists and every verification output; + an npz of every evaluation"""
+    sob_raw = read_jsonl(os.path.join(d, "sobol_*.jsonl")); cma_raw = read_jsonl(os.path.join(d, "cma_*.jsonl"))
+    sob, cma = dedupe(sob_raw), cma_raw
+    n_cuda = dict(sobol=sum(1 for r in sob if cuda_err(r)), cma=sum(1 for r in cma if cuda_err(r)), raw_rows=len(sob_raw) + len(cma_raw))
     reg = {}
     for r in sob:
-        nm = r["tag"].split("-")[1] if r["tag"].startswith("sob-") else "seed"; g = reg.setdefault(nm, dict(n=0, ok=0, best=400.0, lt30=0, lt25=0))
+        nm = r["tag"].split("-")[1] if r["tag"].startswith("sob-") else "seed"; g = reg.setdefault(nm, dict(n=0, ok=0, best=400.0, lt30=0, lt25=0, lt22=0))
         g["n"] += 1
         if r.get("err") is None:
-            g["ok"] += 1; g["best"] = min(g["best"], r["obj"]); g["lt30"] += r["obj"] < 30; g["lt25"] += r["obj"] < 25
-    bas = [json.load(open(f)) for f in sorted(glob.glob(os.path.join(d, "basin_*.json")))]
-    out = dict(n_sobol=len(sob), n_cma=len(cma), n_total=len(sob) + len(cma), n_ok=len(ok(sob)) + len(ok(cma)), regions=reg,
-               basins=[dict(j=b["j"], tag0=b["tag0"], gen=b["gen"], best=b["best"]["f"] if b.get("best") else None, stop=b["stop"],
-                            p=(b.get("best") or {}).get("row", {}).get("p")) for b in bas],
-               secs_median=float(np.median([r.get("secs", 0) for r in sob + cma if r.get("secs")])) if sob else None)
-    if os.path.exists(os.path.join(d, "reeval.json")): out["reeval"] = json.load(open(os.path.join(d, "reeval.json")))["reeval"]
-    if os.path.exists(os.path.join(d, "verify_jobs.json")): out["finalists"] = json.load(open(os.path.join(d, "verify_jobs.json")))["finalists"]
+            g["ok"] += 1; g["best"] = min(g["best"], r["obj"]); g["lt30"] += r["obj"] < 30; g["lt25"] += r["obj"] < 25; g["lt22"] += r["obj"] < 22
+    slim = lambda r: {k: r.get(k) for k in ("tag", "p", "secs", "nb", "err", "b", "g", "pen", "near1_poses", "knee_ang", "gap_near2") + MET if r.get(k) is not None}
+    ok = sorted([r for r in sob if r.get("err") is None], key=lambda r: r["obj"])
+    traj = {}
+    for r in cma:
+        b = r.get("b"); g = r.get("g")
+        if b is None: continue
+        cur = traj.setdefault(b, {}).get(g)
+        if r.get("err") is None and (cur is None or r["obj"] + r.get("pen", 0) < cur["obj"] + cur.get("pen", 0)): traj[b][g] = slim(r)
+    bas = []
+    b2 = os.path.join(d, "basins_r2.json"); want = {b["j"]: b["tag"] for b in json.load(open(b2))["basins"]} if os.path.exists(b2) else None
+    for f in sorted(glob.glob(os.path.join(d, "basin_*.json"))):
+        b = json.load(open(f))
+        if want is not None and want.get(b["j"]) != b["tag0"]: continue                     # a stale basin of the first (OOM) run
+        bas.append(dict(j=b["j"], tag0=b["tag0"], gen=b["gen"], stop=b["stop"], sigma=b["sigma"],
+                                                best=slim(b["best"]["row"]) if b.get("best") else None, best_f=(b.get("best") or {}).get("f"), hist=b.get("hist")))
+    secs = [r["secs"] for r in sob + cma if r.get("secs")]
+    out = dict(run=d, n_cuda_err=n_cuda, n_sobol=len(sob), n_cma=len(cma), n_total=len(sob) + len(cma), n_ok=sum(1 for r in sob + cma if r.get("err") is None),
+               n_bound=sum(1 for r in sob + cma if r.get("nb")), secs_median=float(np.median(secs)) if secs else None, regions=reg,
+               sobol_top=[slim(r) for r in ok[:2000]], seeds=[slim(r) for r in sob if r["tag"].startswith("seed-")],
+               cma_top=[slim(r) for r in sorted([r for r in cma if r.get("err") is None], key=lambda r: r["obj"])[:500]], basin_runs=sorted(bas, key=lambda b: b["j"]),
+               logs={os.path.basename(f): open(f).read()[-6000:] for f in glob.glob(os.path.join(d, "log_*.txt"))},
+               alive=[os.path.basename(f)[6:] for f in glob.glob(os.path.join(d, "alive_*"))])
+    for nm, f in (("basins", "basins_r2.json"), ("reeval", "reeval.json"), ("verify_jobs", "verify_jobs.json")):
+        f = os.path.join(d, f)
+        if os.path.exists(f): out[nm] = json.load(open(f))
     V = {}
     for f in sorted(glob.glob(os.path.join(d, "verify", "*.json"))):
         try: V[os.path.basename(f)[:-5]] = json.load(open(f))
-        except Exception: pass                                                               # noqa: BLE001
-    out["verify"] = V
-    json.dump(out, open(outp, "w"), indent=1, default=float); print(json.dumps({k: v for k, v in out.items() if k not in ("reeval", "verify", "basins")}, default=float)[:3000])
+        except Exception as e: V[os.path.basename(f)[:-5]] = dict(error=repr(e))                 # noqa: BLE001
+    out["verify"] = V; out["verify_logs"] = {os.path.basename(f): open(f).read()[-1500:] for f in glob.glob(os.path.join(d, "verify", "*.log"))}
+    json.dump(out, open(outp, "w"), default=float)
+    A = np.array([[float(r["p"][k]) for k in KEYS] + [float(r.get(m) if r.get(m) is not None else np.nan) for m in MET[:8]]
+                  + [1.0 if r["tag"].startswith("cma-") else 0.0] for r in sob + cma if r.get("p")], np.float32)
+    np.savez_compressed(outp[:-5] + "_all.npz", A=A, cols=np.array(list(KEYS) + list(MET[:8]) + ["is_cma"]))
+    print(json.dumps({k: out[k] for k in ("n_sobol", "n_cma", "n_total", "n_ok", "n_bound", "secs_median", "regions", "alive")}, default=float))
+
+
+def vsum(V, nm):
+    """the verification numbers of one finalist (polish harness fit60 / fitbig / held + continuity)"""
+    o = {}
+    for proto in ("fitbig", "fit60", "held"):
+        v = V.get(f"{nm}_{proto}") or {}
+        if "corrected" not in v: o[proto] = dict(missing=True, error=v.get("error")); continue
+        c, a, rt = v["corrected"], v.get("corrected_audit") or {}, v.get("redteam") or {}
+        o[proto] = dict(gap=c["gap"], gap_near1=a.get("gap_near1"), reach=c["reach"], follow=c["follow"], inband14=c["inband14"],
+                        inband10=c["inband10"], contact=c["contact"], near1_poses=a.get("near1_poses"), min_metal_mm=a.get("near_touch_min_mm"),
+                        overhead140=a.get("overhead140"), fit_gap=(v.get("fit") or {}).get("gap"), fit_mode=v.get("fit_mode"), wear_mode=v.get("wear_mode"),
+                        n_wear=v.get("n_wear"), margin=v.get("fold_margin"), bad_removed=v.get("bad_removed"),
+                        fold_margin_min_taken=rt.get("fold_margin_min_taken_deg"), knee_ang=rt.get("knee_ang_taken"),
+                        knee_sing_min=rt.get("knee_sing_dist_min_deg"), arm_side_lt1=(rt.get("arm_side") or {}).get("lt1"),
+                        j1_seat=rt.get("j1_seat"), hubs=rt.get("hubs"), secs=v.get("secs"))
+    c = V.get(f"{nm}_cont") or {}
+    if c.get("grid"):
+        o["continuity"] = dict(grid=c["grid"], bench110_360=c.get("bench110_360"), knee_branch_signs=c.get("knee_branch_signs"), edges=c.get("edges"))
+    else: o["continuity"] = dict(missing=True)
+    return o
+
+
+def log(dig_path, cost=None):
+    """merge a digest into the sweep log (stage gpu-knee-*) and the rows file (key gpu_knee_massive); re-reads both files
+    right before writing (other workflows write them too)"""
+    import knee_polish as KP
+    D = json.load(open(dig_path)); base = KP.base_params(); t = time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())
+    bench = ("Bench(110,360) fast, same-bench (shape fitted there); GPU port tools/gpu_bench_knee.py (the CPU kit's code, per-pose loops "
+             "on the device, parity 0.0); verifier checks + near-touch audit; fold margin = params.margin; O20; J1 back / acromion top")
+    full = lambda p: dict(base, **{k: v for k, v in p.items() if k != "margin"}, margin=p.get("margin", 5.0))
+    rows = []
+
+    def add(stage, r, **kw):
+        rows.append(dict(t=t, stage=stage, bench=bench, params=full(r["p"]), **{m: r.get(m) for m in ("inband14", "inband10", "reach", "follow", "contact", "gap", "gap_near1", "obj", "near_min")},
+                         honest=r.get("err") is None, tag=r["tag"], src="gpu-knee", **kw))
+    for r in D.get("seeds", []): add("gpu-knee-seed", r)
+    for r in D.get("sobol_top", [])[:300]: add("gpu-knee-sobol", r, outside_bound=bool(r.get("nb")))
+    for r in D.get("cma_top", [])[:200]: add("gpu-knee-cma", r, gen=r.get("g"), basin=r.get("b"))
+    for b in D.get("basin_runs", []):
+        if b.get("best"): add(f"gpu-knee-cma-b{b['j']}", b["best"], gen=b["gen"], basin_best=True, stop=b["stop"])
+    for r in (D.get("reeval") or {}).get("reeval", []): add("gpu-knee-reeval", r, search_tag=r.get("src"), obj_search=r.get("obj_search"), path="exact outside")
+    V = D.get("verify") or {}; fins = (D.get("verify_jobs") or {}).get("finalists", [])
+    for f in fins + [dict(name="H1", p=seeds()["H1"], src="H1")]:
+        vs = vsum(V, f["name"]); fb = vs.get("fitbig", {})
+        rows.append(dict(t=t, stage="gpu-knee-verify", bench="CPU kit exact frozen: fit Bench(110,360) fast -> wear Bench(110,360) exact (fitbig); also fit60 and held "
+                         "(docs/concepts/verify/skin-normal-3r-pin-knee-polish.py, CB_EXACT=1, CB_FOLD_MARGIN = params.margin) + continuity",
+                         params=full(f["p"]), gap=fb.get("gap"), gap_near1=fb.get("gap_near1"), reach=fb.get("reach"), follow=fb.get("follow"),
+                         inband14=fb.get("inband14"), inband10=fb.get("inband10"), contact=fb.get("contact"), honest=not fb.get("missing"),
+                         tag=f"verify-{f['name']}", src="gpu-knee", search_tag=f.get("src"), verify=vs))
+    rows.append(dict(t=t, stage="gpu-knee-summary", tag="gpu-knee-summary", src="gpu-knee", n_sobol=D["n_sobol"], n_cma=D["n_cma"], n_total=D["n_total"],
+                     n_ok=D["n_ok"], regions=D["regions"], secs_median=D["secs_median"], pods=D.get("alive"), cost=cost))
+    SW = os.environ.get("GKS_SWEEP") or os.path.join(REPO, "docs", "concepts", "sweeps", "skin-normal-3r-pin-knee.json")
+    d = json.load(open(SW)); have = {r.get("tag") + "|" + str(r.get("stage")) for r in d if str(r.get("stage", "")).startswith("gpu-knee")}
+    k = max(r.get("k", 0) for r in d) + 1; new = []
+    for r in rows:
+        if r["tag"] + "|" + r["stage"] in have: continue
+        new.append(dict(k=k, **r)); k += 1
+    d += new; json.dump(d, open(SW + ".tmp", "w"), indent=1, default=float); os.replace(SW + ".tmp", SW)
+    print(f"sweep log: {len(new)} new gpu-knee rows (k {new[0]['k'] if new else '-'}..{k - 1})")
+    return rows
+
+
+def report(dig_path):
+    """markdown tables of a digest (doc section / FINDINGS)"""
+    D = json.load(open(dig_path)); L = []
+    L.append(f"Evaluations: {D['n_total']:,} ({D['n_sobol']:,} seeds + Sobol, {D['n_cma']:,} CMA), {D['n_ok']:,} closed a report; "
+             f"{D['n_bound']:,} used the outside-grid bound; median {D['secs_median']:.2f} s per evaluation per worker; pods {len(D.get('alive') or [])}.")
+    L.append("\n| region | evaluated | closed | best obj | < 30 | < 25 | < 22 |\n|---|---|---|---|---|---|---|")
+    for k, g in sorted(D["regions"].items(), key=lambda kv: kv[1]["best"]):
+        L.append(f"| {k} | {g['n']:,} | {g['ok']:,} | {g['best']:.2f} | {g['lt30']:,} | {g['lt25']:,} | {g['lt22']:,} |")
+    L.append("\n| basin | start | start obj | gens | stop | best obj | near1 | gap | reach | follow | in-band 14 | margin |\n|---|---|---|---|---|---|---|---|---|---|---|---|")
+    st = {b["j"]: b for b in (D.get("basins") or {}).get("basins", [])}
+    bl = D.get("basin_runs") or []
+    for b in sorted(bl, key=lambda b: b["best_f"] if b.get("best_f") is not None else 999)[:30]:
+        r = b.get("best") or {}; s0 = st.get(b["j"], {})
+        L.append(f"| b{b['j']} | {b['tag0']} | {s0.get('obj', '')} | {b['gen']} | {b['stop']} | {b['best_f']:.2f} | {r.get('gap_near1')} | {r.get('gap')} | {r.get('reach')} | "
+                 f"{r.get('follow')} | {r.get('inband14')} | {(r.get('p') or {}).get('margin')} |")
+    return "\n".join(L)
 
 
 def main():
@@ -471,7 +620,9 @@ def main():
         print(len(X), dict(zip(u.tolist(), c.tolist()))); print({k: {kk: round(v, 2) for kk, v in p.items()} for k, p in seeds().items()})
     elif a.cmd == "run": run(a)
     elif a.cmd == "final": final(a)
-    elif a.cmd == "summary": summary(a.args[0], a.args[1])
+    elif a.cmd == "digest": digest(a.args[0], a.args[1])
+    elif a.cmd == "log": log(a.args[0], a.args[1] if len(a.args) > 1 else None)
+    elif a.cmd == "report": print(report(a.args[0]))
     else: raise SystemExit(__doc__)
 
 

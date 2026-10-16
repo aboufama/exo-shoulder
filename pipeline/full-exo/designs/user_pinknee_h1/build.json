@@ -2082,6 +2082,7 @@
   "knee link": {
    "step": "24_D8-05_knee_link.step",
    "mass_g": 3.9
-  }
+  },
+  "pin a sleeve": "rebuilt at A0m (pin a in the knee link's home frame); was at A0 (member 3's) - the R6 / R16 interference"
  }
 }

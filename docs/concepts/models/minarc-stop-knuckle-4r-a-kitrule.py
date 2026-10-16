@@ -31,7 +31,7 @@ _sp = importlib.util.spec_from_file_location("minarc_a_for_kitrule", os.path.joi
 KA = importlib.util.module_from_spec(_sp); _sp.loader.exec_module(KA)
 SP = KA.SP; D2R = math.pi / 180
 ID = "minarc-stop-knuckle-4r"; VARIANT = "A kit rule"
-PARAMS = dict(KA.PARAMS, smhi=8.0, smlo=8.0, near=1)
+PARAMS = dict(KA.PARAMS, smhi=8.0, smlo=8.0, near=1, phys=0, capK=0.0)
 REPORT_KEYS = KA.REPORT_KEYS + ("kitrule", "plain")
 STEP, JUMP = 2.0, 10.0
 
@@ -49,8 +49,78 @@ def stops(p):
     p["stops_ok"] = int(th_lo < th_hi - 1.0)
     p["phi_hi"] = dyad_phi(a1, a2, th_hi) if p["stops_ok"] else 170.0
     p["phi_lo"] = dyad_phi(a1, a2, th_lo) if p["stops_ok"] else 10.0
-    p["mstop"] = 0
+    p["mstop"] = 0; p["th_lo"], p["th_hi"] = th_lo, th_hi
     return p
+
+
+def _q2_of(th, a1e, p):
+    """J2's OWN joint angle (deg, signed, about J2 from link 1b's arc to link 2's arc) of the variant-A chain at J1-J3 angle th
+    and J1-J2 arc a1e (per-pose arrays); rotation invariant, so built on a canonical frame. -> q2, valid"""
+    th = np.asarray(th, float); n = len(th); a1e = np.broadcast_to(np.asarray(a1e, float), (n,))
+    P1 = np.broadcast_to(np.array([0.0, 0.0, 1.0]), (n, 3)); P3 = np.stack([np.sin(th * D2R), np.zeros(n), np.cos(th * D2R)], -1)
+    sg = 1 if float(p["sigma"]) >= 0 else -1; sK = 1 if float(p["sK"]) >= 0 else -1
+    p2, h2 = KA.closure_v(P1, P3, a1e, float(p["a2"]), sg); pK, hK = KA.closure_v(P1, p2, np.full(n, float(p["b1"])), np.full(n, float(p["b2"])), sK)
+    return K.axis_angle(p2, pK, P3), (h2 > 0) & (hK > 0)
+
+
+_law0 = KA.law
+
+
+def law(p1, p3, p):
+    """phys 1: J2's stop acts on its own joint angle q2 (a dowel in an arc slot); past the window J2 is locked on the stop and
+    K opens to the smallest a1e >= a1 (<= a1max) that closes the chain with q2 on the stop (scan 0.25 deg + bisection).
+    phys 0: the variant-A model's virtual interior-angle law (unchanged)."""
+    if not p.get("phys"): return _law0(p1, p3, p)
+    a1 = float(p["a1"]); th = np.degrees(np.arccos(np.clip((K.unit(p1) * K.unit(p3)).sum(-1), -1, 1)))
+    a1e = np.full(len(th), a1); state = np.zeros(len(th), int)
+    for m, thb, s in ((th > p["th_hi"], p["th_hi"], 1), (th < p["th_lo"], p["th_lo"], -1)):
+        ii = np.nonzero(m)[0]
+        if not len(ii): continue
+        q2s = float(_q2_of(np.array([thb]), a1, p)[0][0]); state[ii] = s
+        grid = np.arange(a1, float(p["a1max"]) + 1e-9, 0.25)
+        if grid[-1] < float(p["a1max"]) - 1e-9: grid = np.r_[grid, float(p["a1max"])]
+        t = th[ii]; found = np.full(len(ii), np.nan); lo = np.full(len(ii), np.nan)
+        fprev, vprev = _q2_of(t, grid[0], p); fprev = (fprev - q2s + 180) % 360 - 180
+        for g in grid[1:]:
+            f, v = _q2_of(t, g, p); f = (f - q2s + 180) % 360 - 180
+            hit = np.isnan(found) & v & vprev & (np.sign(f) != np.sign(fprev)) & (np.abs(f - fprev) < 90)
+            found[hit] = g; lo[hit] = g - (grid[1] - grid[0]) if g - (grid[1] - grid[0]) >= a1 else a1
+            fprev, vprev = f, v
+        k = np.nonzero(np.isfinite(found))[0]
+        if len(k):
+            A, Bv = lo[k].copy(), found[k].copy(); fa = (_q2_of(t[k], A, p)[0] - q2s + 180) % 360 - 180
+            for _ in range(14):
+                mid = 0.5 * (A + Bv); fm = (_q2_of(t[k], mid, p)[0] - q2s + 180) % 360 - 180
+                left = np.sign(fm) == np.sign(fa); A = np.where(left, mid, A); fa = np.where(left, fm, fa); Bv = np.where(left, Bv, mid)
+            found[k] = Bv
+        a1e[ii] = found
+    return a1e, state, th
+
+
+KA.law = law                                                  # KA.kinematics looks it up as a module global
+
+
+def build(B, F, p):
+    """= KA.build with hub K's cap `capK` mm taller than the O20 stack (the real 0.3 x 5 mm clock spring's cap)"""
+    k = kinematics(F, p); p1, p2, p3, pK, ok = k["p1"], k["p2"], k["p3"], k["pK"], k["ok"]
+    q = np.stack([K.axis_angle(p1, F.S([1.0, 0, 0]), pK), k["psi"], K.axis_angle(p2, pK, p3), K.axis_angle(p3, F.HG([0.0, -1, 0]), p2)], -1)
+    hubs = [K.hub_member("hub1", p1, "J1"), K.hub_member("hubK", pK, "K", t=K.CROWN + float(p.get("capK", 0) or 0)),
+            K.hub_member("hub2", p2, "J2"), K.hub_member("hub3", p3, "J3")]
+    w, t = p["width"], p["t_link"]
+    links = [K.strap_member("link1a", p1, pK, ("J1", "K"), width=w, t=t, ramp_to=(("hub1", K.STACK), ("hubK", 0.0))),
+             K.strap_member("link1b", pK, p2, ("K", "J2"), width=w, t=t, ramp_to=(("hubK", K.STACK + KA.KX), ("hub2", 0.0)),
+                            over=[("link1a", 1.0)], end_mm=K.HUB_R + 6.0),
+             K.strap_member("link2", p2, p3, ("J2", "J3"), width=w, t=t, ramp_to=(("hub2", K.STACK), ("hub3", K.STACK)),
+                            over=[("link1a", 1.0), ("link1b", 1.0), ("neck", 1.0)]),
+             K.neck_member(F, p3, joints=("J3",), ramps=(("hub3", 0.0), (None, 0)))]
+    o = ok
+    info = dict(residual_deg=round(float(k["res"][o].max()), 5) if o.any() else None,
+                forced_share=round(float((k["state"][o] != 0).mean()), 4) if o.any() else None,
+                stretched=int(((k["state"] == 1) & o).sum()), folded=int(((k["state"] == -1) & o).sum()),
+                a1e_max=round(float(k["a1e"][o].max()), 2) if o.any() else None,
+                psi_range=[round(float(np.abs(k["psi"][o]).min()), 1), round(float(np.abs(k["psi"][o]).max()), 1)] if o.any() else None,
+                min_sub_margin=round(float(k["msub"][o & (k["state"] != 0)].min()), 2) if (o & (k["state"] != 0)).any() else None)
+    return K.Chain(members=hubs + links, ok=ok, q=q, joints=dict(J1=p1, K=pK, J2=p2, J3=p3), info=info)
 
 
 _kin0 = KA.kinematics
@@ -64,6 +134,22 @@ def kinematics(F, p):
 
 
 KA.kinematics = kinematics                                   # build() / _extras() look it up as a module global
+
+
+KA.build = build                                              # KA.evaluate builds through this module global
+_crown0 = SP.crown_points
+
+
+def crown_points(m, rho, rad):
+    """the crown-skin samples at the member's own crown height (hub K's taller cap), not the O20 12.25"""
+    t = float(getattr(m, "t", K.CROWN))
+    if t <= K.CROWN + 1e-9: return _crown0(m, rho, rad)
+    old = K.CROWN; K.CROWN = t
+    try: return _crown0(m, rho, rad)
+    finally: K.CROWN = old
+
+
+SP.crown_points = crown_points
 
 
 def evaluate(B, params):
@@ -159,7 +245,7 @@ def frozen(p0, wear="bench", out=None, overlap=1.0):
     Bb = _held() if wear == "held" else K.bench(110, 360); fp = K.fit_profiles
     K.fit_profiles = lambda B, chain, fit, q=1.0, mode="march": {k: v.copy() for k, v in prof.items()}
     try:
-        r = K.evaluate(Bb, KA.build, pf); Bb._kit_last["kin"] = kinematics(Bb._kitF, pf)
+        r = K.evaluate(Bb, build, pf); Bb._kit_last["kin"] = kinematics(Bb._kitF, pf)
         r = SP.declared_audit(r, dict(pf, rad1=10.0, rad2=10.0, rad3=10.0)); r = KA._extras(Bb, r, pf)
     finally:
         K.fit_profiles = fp; K.collisions = coll

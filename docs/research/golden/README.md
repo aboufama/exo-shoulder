@@ -298,3 +298,60 @@ exo-farm/gpu/out/xs, xs2, xs3, xs4, xs5 (`python3 tools/gpu_pod.py fetch xs --ou
 Reproduce: `python3 tools/gpu_pod.py create --gpu "NVIDIA GeForce RTX 5090" --name exo-gpu-bench --spool gpux0 --payload
 <the files in pipeline/gpu_pod/xs.sh's header> --jobs pipeline/gpu_pod/boot.sh,pipeline/gpu_pod/xs_p0.sh` (jobs
 pipeline/gpu_pod/xs*.sh; merge with pipeline/gpu_pod/xs_merge.py, ceiling with pipeline/gpu_pod/xs_ceiling.py).
+
+## Verification of the GPU zero-complexity claim (independent skeptic, 2026-10-16 09:37-10:20 UTC)
+
+Harness: `docs/concepts/verify/zc-frontier-3r-gpu-skeptic.py` (not the claimant's `tools/zc_frontier.py` or
+`tools/gpu_bench.py parity`): it drives the kit model (zc-frontier-3r = the spine-parked model checks + the
+spine-parked verifier's top_check: 1 mm radial K6, every member's top face, near-touch over all faces, hub crowns /
+walls, hub_F <= 140, closure residual), builds the benches itself (fit bench = fast grid, wear bench = EXACT libigl,
+CB_EXACT forced on the wear bench only), re-derives gap / near-touch from their components with `concept_bench.gap_of`,
+re-counts reach / follow / overhead from the per-pose residuals and checks the rulings on the config itself.
+
+**(1) Parity on 20 NEW configs** (seed 20261016, none from the claimant's parity sets: 10 perturbations of the claimed
+basin at 1.5x the zc step scale over all four stack orders and both branches, 10 uniform draws over the zc box inside the
+J1 seat region - all 10 uniform ones put metal outside the +-260 mm grid box, 40 k - 0.73 M points each, which the port
+hands to the kit's exact function). The port's own math re-run on this box's CPU (`tools/gpu_bench.py eval --device
+cpu --bench 60,160`, torch 2.14 CPU) against the kit model on the same bench (Bench(60,160) fast, the local cache;
+the Bench(110,360) grid is only on the farm volume):
+
+| configs | max abs diff: gap | reach | follow | in-band 14 | in-band 10 | contact | configs > 1 gap point |
+|---|---|---|---|---|---|---|---|
+| 20 (10 honest, 10 dishonest) | **0.01** (rounding, 3 configs) | 0.0001 | 0.0 | 0.0 | 0.0 | 0.0 | **0** |
+
+One definitional difference found: on a DISHONEST config (+100) the port also adds the +100 to `near`; the kit model's
+`near` carries no penalty. On honest configs near-touch agrees within 0.01 (the 10 basin configs). It cannot change
+any honest ranking (the port's near-touch objective just pushes dishonest configs further away). Per config:
+docs/research/golden/skeptic/port_parity_cpu60.json. A second parity set, 20 GPU-scored rows sampled from
+gpu_frontier.json (basins + screens, seed 1610, metal inside the box) re-run on the kit FAST on Bench(110,360), was
+queued on the farm (`kitparity`, docs/research/golden/skeptic/kitparity_frontier110.json) - see below for whether it returned.
+
+**(2) The best claim re-measured** - J1 bvec(109.3565, 65.94), a1 36.7226 / a2 69.0575, J3 wdir(85.7423, -16.1921),
+sigma -1, inv2 0, inv3 1, q 0.978, end_extra 1.784:
+
+| protocol | gap | near-touch | reach | follow | in-band 14 | in-band 10 | contact | claim | diff |
+|---|---|---|---|---|---|---|---|---|---|
+| verifier protocol: fit Bench(60,160) fast -> frozen -> worn Bench(110,360) EXACT (this box, 892 s) | **33.51** | 40.57 | 0.6167 | 0.9364 | 0.8917 | 0.4302 | 0.0299 | 33.51 / 40.57 | **0.00** |
+FIT110_ROW
+
+Checks on the 33.51 wear (all pass): honest, audit empty; gap re-derived from its components 33.51, near-touch 40.57;
+reach / follow re-counted from the per-pose residuals 0.6167 / 0.9364; hub_F 51.0 / 58.37 / 71.0 mm (<= 140); hub
+crowns 0 contact poses; member top faces: 1 contact pose (hub 1), min metal over all faces 0.02 mm; 10 taken poses
+with metal under 1 mm (these are what the near-touch gap charges); closure residual 0.0 deg, min fold margin on the taken
+poses 5.0 deg; overhead (elevation >= 140): 5 of 28 workspace poses taken (reach 0.179), overhead clip follow 0.80,
+in-band 0.96 there; per member in-band hub1 0.98, hub2 1.00, hub3 0.81, link1 0.95, link2 0.88, neck 0.82. Lost poses
+(attribution): workspace 138 of 360 = 44 folded + 77 stretched + 9 parts + 8 contact; across-body 49 of 68 lost to the
+stretched fold. Red-team number (not scored): the bench's in-band counts the taken CLIP frames only; over every taken
+pose (workspace too) in-band 14 is 0.853 - the class sits ~4 points worse in band on the workspace poses it reaches.
+
+Rulings on the config: J1 seat allowed (anterior component 0.135 <= 0.20: acromion top / back), O20 at all three joints
+(rad 10, kit HUB_R 10 / STACK 3.15 / CROWN 12.25), fold margin 5, 12 x 3 straps, K7 neck, nothing clamped by the
+model's snap; zero passive joints (complexity 0). No ruling broken.
+
+**(3) Pods**: RunPod account listing at 09:41 UTC: no pod named exo-gpu* exists (all terminated, not merely stopped);
+the only pods are the user's crl-* (all EXITED since 2026-10-13, not touched). Farm note: exo-cpu1 queue 11 deep at
+10:02 UTC (4 of 9 workers running) and the account **balance is $10.85 at $3.57/h spend** - about 3 h of runway.
+
+Verdict: **not refuted** - the claim reproduces to the digit on the verifier protocol (33.51, score 88.0), parity holds
+(0 of 20 new configs differ by > 1 gap point), no ruling is broken. The zero-complexity class stays ~19 points short of the
+golden 13.75 (score 95).

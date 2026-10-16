@@ -1156,3 +1156,38 @@ wearer feels a spring step of about 0.8-1.7 N at the cuff.
 **Red team.** The model's stretched state holds phi constant while the J2 joint angle drifts 0 to 14.3 deg off its
 contact value as K opens (15.1 deg for the kit rule). A hard stop on J2 cannot produce that law, so B's stretched poses
 must be re-measured with a q2 stop.
+
+## Full CAD of the polished pin knee: the J1 ring has no room for side ears; bent bars cost R1 (2026-10-16, user_pinknee_h1)
+
+The polished H1 was built as a full user-style CAD (`pipeline/conformal/param_cad/user_style_pinknee.py`). The verified
+Bench(110,360) shape was carried over as a frozen pickle from the farm (`pipeline/concept_l1/pinknee_shape.py`), and the
+kinematics match the model within 1e-4 mm.
+
+- **Base at the J1 ring (user ruling): side ears do not fit.** Link 1, built and posed over every clip frame and every
+  feasible workspace frame (1.9 M samples), sweeps the whole zone where short ears would sit (radius 10-19 mm):
+  - At the seat level, 9 of 180 headings clear link 1 by >= 1 mm, and none of them clears the skin envelope (best:
+    5.2 mm inside it).
+  - Raised 1.3 mm, 14 headings clear both, but all lie within 304-310 deg, so there is no pair 90-180 deg apart.
+
+  The base is therefore the J1 upper member alone, and the handler's bracket threads onto the M18x0.5 spigot in place of
+  the dome cap. Coming down axially over the crown is the one direction link 1 never occupies. This holds for any 3R
+  whose link 1 sweeps most headings about J1: the handler interface belongs on the J1 axis, above the crown.
+- **Bent bars ride above the evaluator's straps and cost R1.**
+  - Link 1 has to climb 59.6 deg to J2, whose face sits 9.6 mm higher. No chain with every bend >= 15 mm inner radius
+    stays above the L1 strap, so link 1 is 5-axis machined from solid (R 3.5).
+  - Link 2 is a bent 3 mm Ti bar with bends >= 15.5 mm. It sits on average 2.6 mm, and at most 9.4-10.9 mm, above the L1
+    strap at J3.
+  - Against its own L1, R1 drops 80.1 -> 71.6 % and R1-aim 42.3 -> 33.1 %. The upper-arm cuff was trimmed to 10 deg on
+    both side arcs (the trunk comes within 1 mm across the body, at plane 122-145 and elevation 31-48), which also removes
+    arm-side metal near GH.
+  - Next levers: a machined link 2 that hugs the strap (switch `PK_LINK2_MACHINED=1`), and a cuff-trim rule over the
+    followed frames only.
+- **Exporter bugs that the judges caught.**
+  - Pin a's iglidur sleeve was placed in member 3's frame (A0) instead of the knee link's (A0m), 10.2 mm off. That alone
+    gave R6 1.43 mm and 42.5 % of R16's fails.
+  - The knee link's name contains "clip", so it was classed as hardware: no STEP, wrong density, and left out of the
+    kinematic check.
+  - All three are fixed in the builder and in the design.
+- **Open link 2 mesh.** OCC leaves a T-junction crack in link 2's tessellation (71 open edges in one 8 x 6 mm patch).
+  Neither welding up to 0.3 mm, other tolerances, ShapeFix nor sewing closes it, so R17's mass model uses link 2's convex
+  hull (139 g for 19.8 g). R17 still passes. The real fix is to find the offending face pair in the glued bar.

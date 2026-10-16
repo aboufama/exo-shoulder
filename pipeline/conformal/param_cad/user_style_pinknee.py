@@ -387,16 +387,17 @@ def links2(M, out, rep):
 
 
 # ---------------------------------------------------------------------------------------------------- pin hardware
-def pin_stack(name, cen, sn, tr, tp, lower_grp, knee_grp):
+def pin_stack(name, cen, sn, tr, tp, lower_grp, knee_grp, cen_knee=None):
     """IGLIDUR-PIN at (cen, sn): integral O4 pin (returned as a solid to fuse into the lower plate), thrust washer, sleeve
     in the knee link, E-clip. Levels along sn: lower plate tr..tr+tp, gap ..+0.5, knee link tr+tp+0.5..tr+2tp+0.5."""
     zk0 = tr + tp + PK.RUN; zk1 = zk0 + tp; zc0 = zk1 - CB_H                               # knee link, clip seat
+    ck = cen if cen_knee is None else cen_knee                                             # the pin's centre in the KNEE link's home frame (pin a: A0m, not A0)
     r = PIN_D / 2; rg = GROOVE_D / 2
     pin = rev([(0, tr + 0.8), (r, tr + 0.8), (r, zc0), (rg, zc0), (rg, zc0 + CLIP_T), (r, zc0 + CLIP_T), (r - 0.2, zk1), (0, zk1)], cen, sn)
     hw = [(lower_grp, f"pin {name}: iglidur thrust washer 4 x 8 x 0.5 (igus GTM-0408-005 class, in the 0.5 mm running gap; confirm the size, else cut from iglidur sheet)",
            rev([(2.1, tr + tp), (4.0, tr + tp), (4.0, tr + tp + PK.RUN), (2.1, tr + tp + PK.RUN)], cen, sn)),
           (knee_grp, f"pin {name}: iglidur G sleeve bearing igus GSM-0405-03 (4 x 5.5 x 3) faced to {zc0 - zk0:.2f}, pressed in the knee link",
-           rev([(r + 0.01, zk0), (SLEEVE_D / 2, zk0), (SLEEVE_D / 2, zc0), (r + 0.01, zc0)], cen, sn))]
+           rev([(r + 0.01, zk0), (SLEEVE_D / 2, zk0), (SLEEVE_D / 2, zc0), (r + 0.01, zc0)], ck, sn))]
     # DIN 6799 E-clip: a C ring O3.2 / O7.3 x 0.6 with a 3.2 mm mouth
     clip = rev([(rg + 0.01, zc0), (3.65, zc0), (3.65, zc0 + CLIP_T), (rg + 0.01, zc0 + CLIP_T)], cen, sn)
     e, f = (PB.axis_frame(sn)[:, 0], PB.axis_frame(sn)[:, 1])
@@ -453,7 +454,7 @@ def member3(M):
     m3 = disc(c3, u[2], r3, F3, F3 + T).fuse(side)
     boss = disc(fr["A0"], sn, BR, tr, tr + tp); m3 = m3.fuse(boss)
     m3 = m3.fuse(at(US.lower_pin(u[2], F3), c3))
-    pin, hw = pin_stack("a", fr["A0"], sn, tr, tp, "l3", "l4")
+    pin, hw = pin_stack("a", fr["A0"], sn, tr, tp, "l3", "l4", cen_knee=fr["A0m"])        # sleeve in the knee link's frame (R6 / R16 bug, 2026-10-16)
     m3 = m3.fuse(pin)
     m3 = m3.clean() if m3.clean().isValid() else m3
     out = [("l3", 3, "D8-04 member 3: J3 disc + integral O7 pin, E strap (one side-view sketch of lines and tangent arcs, 8 x 3, its top stepping to the "

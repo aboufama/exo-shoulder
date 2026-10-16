@@ -13,6 +13,7 @@ the pose is knocked out), reported as extra.kit_margin_all_states.
 """
 import importlib.util, json, os, sys
 import numpy as np
+from scipy.spatial.transform import Rotation as Rot
 
 HERE = os.path.dirname(os.path.abspath(__file__)); REPO = os.path.abspath(os.path.join(HERE, "..", "..", ".."))
 sys.path.insert(0, os.path.join(REPO, "tools"))
@@ -30,8 +31,13 @@ _checks0 = VER.extra_checks_B
 
 
 def extra_checks_kit(M, B):
-    out, bad = _checks0(M, B)
-    D = M.D; D.ik(M.Q); m3 = np.asarray(D._m3e, float)
+    D = M.D; phys = bool(getattr(D, "phys", False))
+    if phys:                                                  # the physical stop holds q2, not the virtual phi: phi only kept off its fold
+        save = (D.p["phi_lo"], D.p["phi_hi"]); D.p["phi_lo"], D.p["phi_hi"] = 0.0, 180.0
+    try: out, bad = _checks0(M, B)
+    finally:
+        if phys: D.p["phi_lo"], D.p["phi_hi"] = save
+    D.ik(M.Q); m3 = np.asarray(D._m3e, float)
     taken = [i for i in range(len(B.idx)) if B.res[i] is not None and float(np.min(B.res[i])) >= 0]
     low = [i for i in taken if m3[i] < KIT.FOLD_MARGIN - 1e-6]
     st = np.asarray(M.kstate)
@@ -40,7 +46,18 @@ def extra_checks_kit(M, B):
                                         by_state={s: (round(float(m3[[i for i in taken if st[i] == v]].min()), 2) if any(st[i] == v for i in taken) else None)
                                                   for s, v in (("A", 0), ("stretched", 1), ("folded", -1))},
                                         stops=dict(phi_lo=round(D.p["phi_lo"], 2), phi_hi=round(D.p["phi_hi"], 2), smlo=D.p.get("smlo"), smhi=D.p.get("smhi")))
-    return out, set(bad) | set(low)
+    badq2 = []
+    if phys:                                                  # J2's own angle q2 from the member frames, inside the dowel slot
+        lo, hi = D.q2_stops; q2s = []; q0 = np.degrees(D._q2c[2]); sg = D.q2sgn
+        rel = lambda x: ((x - q0 + 180) % 360 - 180) * sg              # position on the branch's half-turn of q2 (0 .. 180)
+        wlo, whi = sorted((rel(lo), rel(hi)))
+        for i in taken:
+            R1b, _ = M.T(7, i); R2, _ = M.T(2, i); rv = Rot.from_matrix(R1b.T @ R2).as_rotvec(); q2 = float(np.degrees(rv @ D.u[1]))
+            q2s.append(q2); r_ = rel(q2)
+            if r_ < wlo - 0.05 or r_ > whi + 0.05: badq2.append(i)
+        out["j2_q2_phys"] = dict(stops=[round(lo, 3), round(hi, 3)], range_taken=[round(min(q2s), 3), round(max(q2s), 3)] if q2s else None, bad=len(badq2),
+                                 note="phi check relaxed to [5, 175] under the physical stop; q2 (link 1b vs link 2) checked against the slot")
+    return out, set(bad) | set(low) | set(badq2)
 
 
 VER.extra_checks_B = extra_checks_kit

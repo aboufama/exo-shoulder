@@ -59,12 +59,16 @@ def per_pose(B, r):
     taken = np.array([SP._taken(B, j) for j in range(len(B.res))])
     mins = np.array([float(np.min(B.res[j])) if B.res[j] is not None else np.nan for j in range(len(B.res))])
     tk = np.nonzero(taken)[0]; d = np.concatenate([B.res[j] for j in tk]) if len(tk) else np.zeros(0)
+    tc = np.nonzero(taken & ~ws)[0]; dc = np.concatenate([B.res[j] for j in tc]) if len(tc) else np.zeros(0)
     over = ws & (el >= 140)
     return dict(n_ws=int(ws.sum()), n_clip=int((~ws).sum()), reach_recount=round(float(taken[ws].mean()), 4),
                 follow_recount=round(float(taken[~ws].mean()), 4), overhead_n=int(over.sum()),
                 overhead_taken=int((taken & over).sum()), overhead_reach=round(float(taken[over].mean()), 4) if over.any() else None,
-                inband14_recount=round(float(((d >= 2) & (d <= 14)).mean()), 4) if len(d) else None,
-                inband10_recount=round(float(((d >= 2) & (d <= 10)).mean()), 4) if len(d) else None,
+                # the bench's in-band is over the taken CLIP frames only (concept_bench.report); the all-taken share
+                # (workspace poses too) is reported beside it as a red-team number, not scored
+                inband14_recount_clip=round(float(((dc >= 2) & (dc <= 14)).mean()), 4) if len(dc) else None,
+                inband14_all_taken=round(float(((d >= 2) & (d <= 14)).mean()), 4) if len(d) else None,
+                inband10_all_taken=round(float(((d >= 2) & (d <= 10)).mean()), 4) if len(d) else None,
                 taken_min_res_mm=round(float(np.nanmin(mins[taken])), 3) if taken.any() else None,
                 taken_poses_under_1mm=int(((mins < 1.0) & taken).sum()))
 

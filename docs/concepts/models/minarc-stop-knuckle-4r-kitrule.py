@@ -78,7 +78,7 @@ class KRDesign(KB.KDesign):
             u1, u2, u3 = self.u
             A = float((u1 @ u2) * (u2 @ u3)); Bc = float(u1 @ u3) - A; Cs = float(u1 @ np.cross(u2, u3))
             self._q2c = (A, math.hypot(Bc, Cs), math.atan2(Cs, Bc))  # cos th = A + R cos(q2 - q0), K on stop A
-            self.q2sgn = None
+            self.q2sgn = float(P["q2sgn"]) if P.get("q2sgn") else None   # the ik branch's half-turn of q2, carried in params
 
     def _q2_at(self, th, sgn):
         A, R, q0 = self._q2c
@@ -100,16 +100,16 @@ class KRDesign(KB.KDesign):
         P = self.p; u1, u2, u3 = self.u; uK = self.uK; n = len(Q); c3 = self.c[2]; m = KIT.FOLD_MARGIN
         b1, b2 = float(P["bk1"]), float(P["bk2"])
         # state A: the variant-B closure with K on stop A (the model's own ik at dK = 0: a1max := a1 forces state A or no root)
-        P0 = dict(P); w = Q @ u3; th = np.degrees(np.arccos(np.clip(w @ u1, -1, 1)))
+        w = Q @ u3; th = np.degrees(np.arccos(np.clip(w @ u1, -1, 1)))
         save = (P["phi_lo"], P["phi_hi"], P["a1max"]); P["phi_lo"], P["phi_hi"] = S.SING, 180 - S.SING
-        try: qA, okA, X1A, X2A, X3A, sA = KB.KDesign.ik(self, Q)
+        try: qA, okA, X1A, X2A, X3A, sA = super().ik(Q)
         finally: P["phi_lo"], P["phi_hi"], P["a1max"] = save
         dKA = self._dK.copy()
         A, R, q0 = self._q2c
         rel = np.degrees(PK.wrap(qA[:, 1] - q0))
         if self.q2sgn is None:                                # the ik branch's half-turn of q2 (fixed per design)
             sel = okA & (np.abs(dKA) < 1e-9) & (np.abs(rel) > 1)
-            self.q2sgn = float(np.sign(np.median(rel[sel]))) if sel.any() else 1.0
+            self.q2sgn = float(np.sign(np.median(rel[sel]))) if sel.any() else 1.0; P["q2sgn"] = self.q2sgn
         sg = self.q2sgn
         q2hi, q2lo = self._q2_at(self.th_hi, sg), self._q2_at(self.th_lo, sg)
         self.q2_stops = (math.degrees(q2lo), math.degrees(q2hi))
@@ -129,7 +129,7 @@ class KRDesign(KB.KDesign):
         rootok &= np.abs(np.nan_to_num(dKf, posinf=9.0)) <= dKB + 1e-9
         dK = np.where(rootok, np.nan_to_num(dKf, posinf=0.0), 0.0)
         RK = S.rotm(uK, dK) if n else np.zeros((0, 3, 3))
-        q1 = S.sub1v(u1, np.einsum("nij,nj->ni", RK, p), w) if hasattr(S, "sub1v") else KB.sub1v(np.broadcast_to(u1, (n, 3)), np.einsum("nij,nj->ni", RK, p), w)
+        q1 = S.sub1(u1, np.einsum("nij,nj->ni", RK, p), w)
         R1 = S.rotm(u1, q1) if n else np.zeros((0, 3, 3))
         R12 = R1 @ RK @ Rq; vv = unit3(np.cross(u3, [0.3, 0.5, 0.8]))
         q3 = S.sub1(u3, np.broadcast_to(vv, (n, 3)), np.einsum("nji,njk,k->ni", R12, Q, vv))
