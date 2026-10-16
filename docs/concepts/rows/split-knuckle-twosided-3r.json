@@ -16,11 +16,11 @@
  "inband10": 0.4381,
  "contact": 0.0053,
  "gap": 26.62,
- "v_reach": null,
- "v_follow": null,
- "v_inband14": null,
- "v_inband10": null,
- "v_gap": null,
+ "v_reach": 0.7278,
+ "v_follow": 1.0,
+ "v_inband14": 0.7463,
+ "v_inband10": 0.4411,
+ "v_gap": 34.18,
  "n_configs": 4034,
  "best_params": {
   "az2": 43.4586,
@@ -110,5 +110,7 @@
   "notes": "J1, J2, J3 active O20; K and K2 slaved O20 + clock-spring caps (not sensed); 2 knee pins sensed (as the winner's hand count); 2 drives, each a lobe, a rocker pin, an O3 rod and 2 M3 rod ends; moving bodies L1a, L1b, L2a, L2b, member 3, knee link, 2 rockers, 2 rods; joints 5 hubs + 2 knee pins + 2 rocker pins + 4 rod ends + 2 cam contacts",
   "source": "hand count from the model",
   "confidence": "medium"
- }
+ },
+ "v_contact": 0.0159,
+ "audit": "AUDIT 2026-10-16: death stands. Reproduced: fast 26.62 and frozen exact 34.18 (near-touch 36.89); the winner scores 16.53 through the same code. The sweep's 22.34 best is K2-idle (flagged): 5.8 points of pure K2 metal. That is more than the whole folded prize (8/160 fit poses, <= 5.0 gap points), so no K2 seat can beat the winner. Gate: stream s3 converged (0.00/0.00/0.03); s1's late gains are idle configs only. No modelling bug found."
 }

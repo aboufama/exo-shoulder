@@ -165,3 +165,18 @@ smlo 7.95; the winner's seats, drive and K are unchanged.
   stretched-side drive on link 1b.
 - (c) For the folded side, the lead's other open lever, a drive with NO out-of-band metal on the existing chain, is
   the better bet than more hubs.
+
+## Audit (round 7, independent auditor)
+
+**The death stands.** The same code, run again:
+
+- **Winner.** The verified winner through the same model module (its own row's best_params) scores 16.53 fast near-touch: reach 0.794, ib14 0.846, fold losses 27.
+- **Claimed best.** The row's best_params reproduce exactly at 26.62: reach 0.794, ib14 0.745. K2 engages on 3 folded workspace poses, but fold losses stay at 27, the same as the winner. K2 moves 3 poses from the plain window onto its own law and adds no new ones. The whole loss is in-band: hub K2 is 0.41 in band and L2a is 0.17.
+- **Sweep bookkeeping.** The sweep's best entry is 22.34, not 26.62 (k 2186, cma-s3; reproduced). It is a K2-idle config: the law takes 0 folded poses, with hub K2 0.52 in band. The model flags these `k2_idle` and CMA adds 100, so they are not claims. Treated as the price of K2's metal alone at its cheapest seat, they cost 5.81 points (22.34 - 16.53).
+- **Bound on the prize.** The folded fit poses (th < th_lo) number 8 of the 160 workspace poses. Even if K2 took all 8 with no new collisions, reach would rise by at most 0.05, which is at most 5.0 gap points. That is less than the 5.8 that K2's cheapest metal costs, so the two-sided split cannot beat the winner on Bench(60,160) at any seat. The engaged seats are worse: hub K2 sits at psi0 <= 135 deg, 70-116 mm from GH.
+- **Convergence gate.**
+  - Stream cma-s3 holds the engaged best. It gained 0.00 over the 2nd half and 0.00 over the last third, and its top 5 lie within 0.03 (engaged) or 4.3 (all). It is converged.
+  - cma-s1 is not converged: it gained 4.58 over the 2nd half and 4.14 over the last third. Its gains all came in K2-idle configs (best 22.69, idle). The bound above covers those, so more CMA cannot refute the death.
+- **Model checks.** The model loads the winner's own module and only adds K2's members and law, and the K2-off path reproduces the winner's 16.53 bit for bit. The folded law's gates (monotone, rate <= 3.45, the kit's m3e >= 5, dyad margin, lift-off, stop, pressure angle) are the same ones the winner's stretched law uses, so none of them is stricter here. I found no convention bug.
+- **Reference threshold.** The auditor template's "within 10 of 68.93" reference is obsolete: the design's 26.62 already beats the old champion. The relevant reference is the round winner, 16.53 fast / 23.57 verified, and against that the death stands.
+- **Frozen exact, measured again.** The row's best_params worn frozen on Bench(110,360) exact (CB_EXACT=1, 136 s) score 34.18: reach 0.728, ib14 0.746, contact 0.016, near-touch 36.89, min metal 0.11 mm. Overhead takes 7 of 28. Fold losses are 84, the same as the winner. The K2 drive's own metal is out of band: rocker2 0.08, rod2 0.00, rod ends2 0.00, L2a 0.18. This matches the claim exactly.
