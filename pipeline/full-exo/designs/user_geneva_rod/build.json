@@ -742,7 +742,7 @@
   "eye_B_bottom_over_plate_mm": 0.5,
   "valid": {
    "hub": true,
-   "plate": false
+   "plate": true
   }
  },
  "bell crank": {
@@ -1055,120 +1055,8 @@
  "base": {
   "rule": "base at the J1 hub ring, no tab (user 2026-10-16); NO ears: link 1 sweeps every ear heading (see diag)",
   "interface": "the handler's bracket threads onto the J1 M18 x 0.5 spigot in place of the dome cap (retains the upper outer ring)",
-  "built_vs_posed_link1_mm": 0.1498511687110023,
-  "diag": [
-   {
-    "rule": "strict",
-    "dz": 0.0,
-    "headings_clear_of_link1": 0,
-    "skin_feasible": 0,
-    "best_skin": []
-   },
-   {
-    "rule": "strict",
-    "dz": 1.3,
-    "headings_clear_of_link1": 2,
-    "skin_feasible": 1,
-    "best_skin": [
-     [
-      220,
-      1.09
-     ],
-     [
-      222,
-      0.42
-     ]
-    ]
-   },
-   {
-    "rule": "strict",
-    "dz": 2.6,
-    "headings_clear_of_link1": 6,
-    "skin_feasible": 6,
-    "best_skin": [
-     [
-      218,
-      3.05
-     ],
-     [
-      216,
-      2.73
-     ],
-     [
-      222,
-      2.38
-     ],
-     [
-      220,
-      2.35
-     ]
-    ]
-   },
-   {
-    "rule": "relaxed",
-    "dz": 0.0,
-    "headings_clear_of_link1": 2,
-    "skin_feasible": 0,
-    "best_skin": [
-     [
-      220,
-      -1.74
-     ],
-     [
-      222,
-      -1.89
-     ]
-    ]
-   },
-   {
-    "rule": "relaxed",
-    "dz": 1.3,
-    "headings_clear_of_link1": 6,
-    "skin_feasible": 6,
-    "best_skin": [
-     [
-      220,
-      1.09
-     ],
-     [
-      222,
-      0.42
-     ],
-     [
-      216,
-      0.24
-     ],
-     [
-      218,
-      0.09
-     ]
-    ]
-   },
-   {
-    "rule": "relaxed",
-    "dz": 2.6,
-    "headings_clear_of_link1": 8,
-    "skin_feasible": 8,
-    "best_skin": [
-     [
-      218,
-      3.05
-     ],
-     [
-      216,
-      2.73
-     ],
-     [
-      228,
-      2.45
-     ],
-     [
-      214,
-      2.44
-     ]
-    ]
-   }
-  ],
+  "built_vs_posed_link1_mm": 0.14979454775732096,
+  "diag": [],
   "valid": true,
   "solids": 1
  },
@@ -1752,13 +1640,13 @@
    "k": 46,
    "group": "l1a",
    "name": "D9-05 drive horn plate: Ti-6Al-4V O13 x 1.4, horn pin at r 2.493 mm, 2x +-5 deg trim slots for M1.6 countersunk",
-   "vol_cm3": 0.17,
+   "vol_cm3": 0.166,
    "material": "Ti-6Al-4V",
-   "mass_g": 0.75,
-   "valid": false,
+   "mass_g": 0.74,
+   "valid": true,
    "faces": 18,
    "solids": 1,
-   "watertight_judge_units": false
+   "watertight_judge_units": true
   },
   {
    "k": 47,
@@ -2458,7 +2346,6 @@
   }
  ],
  "invalid_or_multi_solid": [
-  "D8-02a link 1a: 8x3 bar on a line/arc chain, J1 / K pads + integral O7 pins, K pin continued as the O5 spring arbor (0.4 mm slit, O3 magnet pocket); K's two opposed 53.6-deg stop slots in the K pad, both clear of the bar root (machined from solid Ti-6Al-4V (2.5-D: 4 side-view sketches side by side of lines + tangent arcs through the model's strap stations, extruded 2 mm; 3+2-axis or wire EDM), rounds R2 / R0.5 in the profile)",
-  "D9-05 drive horn plate: Ti-6Al-4V O13 x 1.4, horn pin at r 2.493 mm, 2x +-5 deg trim slots for M1.6 countersunk"
+  "D8-02a link 1a: 8x3 bar on a line/arc chain, J1 / K pads + integral O7 pins, K pin continued as the O5 spring arbor (0.4 mm slit, O3 magnet pocket); K's two opposed 53.6-deg stop slots in the K pad, both clear of the bar root (machined from solid Ti-6Al-4V (2.5-D: 4 side-view sketches side by side of lines + tangent arcs through the model's strap stations, extruded 2 mm; 3+2-axis or wire EDM), rounds R2 / R0.5 in the profile)"
  ]
 }

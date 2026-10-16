@@ -72,3 +72,27 @@ to 69-77 and link 2 / hub 3 run over the deltoid (skin contact 0.06-0.07). The b
 0 -> 7-14) for hub-3 height (0.35 -> 0.59). Lever attribution: the wide K dyad alone +0.030, the twist + a2 alone +0.005,
 together +0.072 (b3 0): the levers only work jointly (the twist moves the overhead th set toward the stretched wall
 a1max + a2 - 5, which only the wider dyad has moved out of the way).
+
+## Search (farm, Bench(60,160) fast, near-touch objective, rod drive metal ON)
+
+LHS 192 over the spec's ranges (e3d 66-92, e3a -8..38, b3 0-0.5, a2 56-70, a1A 33-40, bk1 28-34, bk2 38-48, a1max 62-75,
+knee, law, J1 seat): best 21.77 (e3 wdir(72, 2), a2 64, bk2 44.8). Then 13 CMA-ES streams (popsize 8, 2 processes each,
+4869 configurations in all, every one in docs/concepts/sweeps/twist-long-a2-knuckle-3r.json):
+
+| stream | start | best fast | reach / ib14 / contact | where it ended (effective J3 axis, a2, bk1/bk2/a1max) | gate (gain 2nd half / last third / top-5 spread, score pts) |
+|---|---|---|---|---|---|
+| A1 | seed A wdir(70,15) b3 0.2 a2 66 | 17.44 | 0.794 / 0.853 / 0.021 | wdir(70.9, **+0.1**), 66.2, 28.6/41.7/64.1 | 0.99 / 0.36 / 0.20 |
+| A2 | wdir(72,10) b3 0.38 a2 64 | 17.10 | 0.800 / 0.855 / 0.026 | wdir(73.6, **-6.0**), 63.0, 31.6/42.0/68.6 | 0.55 / 0.51 / 0.31 |
+| A3 | seed A b3 0 | 17.94 | 0.806 / 0.846 / 0.031 | wdir(72.3, **-4.0**), 65.1, 30.0/42.1/65.2 | 0.05 / 0.02 / 0.05 |
+| B1 | seed B wdir(84,28) a2 58 | 20.70 | 0.825 / 0.794 / 0.026 | wdir(73.7, **-0.0**), 58.8, 31.6/50.8/72.1 | 6.11 / 4.52 / 0.56 (walking back) |
+| C0 | lead's axis, wide dyad 30/44/69 | 17.29 | 0.800 / 0.853 / 0.026 | wdir(74.4, -1.1), 61.0, 30.5/45.2/70.7 | 0.16 / 0.16 / 0.16 |
+| L1-L3 | LHS top 3 | 18.17 / **16.74** / 16.99 | L2: 0.788 / 0.856 / 0.011 | L2 wdir(70.4, -1.4), 64.5, 31.9/42.8/69.5; **L3 walked back to the lead's seats** (wdir(75.6,-5.4), a2 62.1, 28.3/38.4/61.7) | all < 0.5 |
+| P1, P2 | J2 parked at the lead's seat, twisted J3 | 17.99 / 17.08 | P2: 0.800 / 0.835 / 0.005 | P2 wdir(80.3, **-7.8**) from (70, +15) | 0.00 / 0.00 / 0.05-0.46 |
+| R1 | restart from A2 | **16.74** | 0.800 / 0.854 / 0.021 | wdir(74.5, -3.8), 61.8, 30.6/42.2/67.8 | 0.13 / 0.13 / 0.17 |
+| T8 | twist FIXED at a = +8 | 18.94 | 0.819 / 0.831 / 0.005 | wdir(70.8, 8), 62.8, 31.7/39.5/66.2 | 0.01 / 0.00 / 0.07 |
+| T15 | twist FIXED at a = +15 | 24.15 | 0.800 / 0.803 / 0.011 | wdir(69.2, 15), 68.1, 28.4/40.5/63.9 | 0.00 / 0.00 / 0.36 |
+
+Combined gate over all 4869: gain over the 2nd half 0.13, last third 0.00, top-5 spread 0.13 score points: CONVERGED at
+16.74 fast (the lead: 15.57 after 9096 configurations). Every free stream that started twisted anterior (+10 to +28 deg)
+walked the twist back to -8..+2 deg (the lead sits at -6.8); with the twist held fixed the converged optimum costs
++2.2 fast at +8 deg and +7.4 at +15 deg.

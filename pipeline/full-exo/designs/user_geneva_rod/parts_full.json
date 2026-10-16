@@ -565,13 +565,13 @@
    "k": 46,
    "group": "l1a",
    "name": "D9-05 drive horn plate: Ti-6Al-4V O13 x 1.4, horn pin at r 2.493 mm, 2x +-5 deg trim slots for M1.6 countersunk",
-   "vol_cm3": 0.17,
+   "vol_cm3": 0.166,
    "material": "Ti-6Al-4V",
-   "mass_g": 0.75,
-   "valid": false,
+   "mass_g": 0.74,
+   "valid": true,
    "faces": 18,
    "solids": 1,
-   "watertight_judge_units": false
+   "watertight_judge_units": true
   },
   {
    "k": 47,
