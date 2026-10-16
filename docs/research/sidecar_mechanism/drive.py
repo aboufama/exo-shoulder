@@ -94,3 +94,72 @@ res["follower_options"] = [dict(pa_max=round(b[0], 1), rr=b[1], part=b[2], a_s=b
 res["follower_n_feasible"] = len(best)
 json.dump(res, open(os.path.join(SP, f"results_{TAG}.json"), "w"), indent=1, default=float)
 print(json.dumps(res, indent=1, default=float))
+# ---------------- stage 2: the chosen follower, loads, play, fold sensitivity ----------------
+A_S, PSI, RR = float(os.environ.get("A_S", 6.0)), R_(float(os.environ.get("PSI", 201.0))), float(os.environ.get("RR", 2.5))
+F = follower(A_S, PSI, RR, hmid); n = F["n"]; C = F["C"]
+kks = kK * ts; mh_t = np.interp(kks, kk, m_h); mc_t = np.interp(kks, kk, m_c); rat_t = np.interp(kks, kk, np.abs(ratio))
+m_f = np.abs(np.einsum("ni,i->n", np.cross(C, n), dR)); m_2 = np.abs(np.einsum("ni,i->n", np.cross(C, n), u2))
+def hertz_line(Fn, R1, R2, l, E=200e3, nu=0.29):
+    Es = E / (2 * (1 - nu ** 2)); R = 1 / (1 / R1 + 1 / R2); return math.sqrt(Fn * Es / (math.pi * l * R))
+loads = {}
+for case, T0 in (("spring 0.08 N.m + 0.015 N.m/rad", 0.08), ("spring + MVP1 0.033 N.m", 0.113), ("low preload 0.05 + MVP1", 0.083)):
+    TK = T0 + 0.015 * kks
+    Frod = TK / (mh_t / 1000); Tc = Frod * mc_t / 1000; Fn = Tc / (m_f / 1000); TJ2 = Fn * m_2 / 1000
+    Rl = np.abs(F["rc"]) - RR
+    ph_ = [hertz_line(fn, RR, rl, 2.2) for fn, rl in zip(Fn, Rl)]
+    lever_pin = 3.0 + 0.6 + 0.0                                         # horn stud: ball centre over the lug top (+0.6 spacer)
+    loads[case] = dict(F_rod_N=[round(float(Frod.min()), 1), round(float(Frod.max()), 1)], crank_torque_Nmm=round(float(Tc.max() * 1000), 1),
+                       F_follower_N=[round(float(Fn.min()), 1), round(float(Fn.max()), 1)], J2_torque_Nm=[round(float(TJ2.min()), 3), round(float(TJ2.max()), 3)],
+                       J2_virtual_work_check_Nm=[round(float((TK * kK).min()), 3), round(float((TK * kK).max()), 3)],
+                       hertz_roller_lobe_MPa=round(float(max(ph_)), 0), horn_pin_O2_MPa=round(32 * float(Frod.max()) * lever_pin / (math.pi * 2 ** 3), 0),
+                       crank_long_arm_root_MPa=round(6 * float(Tc.max() * 1000) / (3 * 6 ** 2), 0),
+                       roller_pin_O25_MPa=round(32 * float(Fn.max()) * 1.75 / (math.pi * 2.5 ** 3), 0),
+                       crank_pin_O3_root_MPa=round(32 * float(np.hypot(Frod.max() * 4.0, Fn.max() * 7.5)) / (math.pi * 3 ** 3), 0))
+res["follower_chosen"] = dict(a_s=A_S, psi_deg=D(PSI), rr=RR, pa_deg=[round(float(F["pa"].min()), 1), round(float(F["pa"].max()), 1)],
+                              pitch_r=[round(float(F["rho"].min()), 2), round(float(F["rho"].max()), 2)], profile_r=[round(float(F["rho"].min() - RR), 2), round(float(F["rho"].max() - RR), 2)],
+                              m_f_mm=[round(float(m_f.min()), 2), round(float(m_f.max()), 2)], drift_mm=round(float(np.abs(F["z"] - F["z"][0]).max()), 2),
+                              pitch_rc_min=round(float(np.abs(F["rc"]).min()), 2), roller_centre_onset=[round(float(x), 3) for x in F["C0"]], s_on_dR=round(F["s"], 2))
+res["loads"] = loads
+# play -> K error (deg) per 10 um at the three interfaces (one-sided under the spring preload: a clearance is a constant offset, trimmed)
+res["K_error_deg_per_10um"] = dict(rod_length=[round(D(0.01 / float(mh_t.max())), 3), round(D(0.01 / float(mh_t.min())), 3)],
+                                   roller_or_lobe_form=[round(D(0.01 / float(m_f.max()) / float(rat_t.max())), 3), round(D(0.01 / float(m_f.min()) / float(rat_t.min())), 3)],
+                                   crank_tip_eye=[round(D(0.01 / float(mc_t.max()) / float(rat_t.max())), 3), round(D(0.01 / float(mc_t.min()) / float(rat_t.min())), 3)])
+# fold margin vs a K offset (the one th metric; the law's own curves)
+a2 = float(g["a2"]); ts_l = g["law_ts"]; dKl = g["law_dK"]; q2t = g["law_q2t"]
+def law_m(off):
+    dk = dKl + sp * R_(off) * (ts_l > 0); th = []; a1e = []
+    for q, k in zip(q2t, dk):
+        RK = rotm(uK, k); th.append(D(math.acos(np.clip(u1 @ (RK @ (rotm(u2, q) @ u3)), -1, 1)))); a1e.append(D(math.acos(np.clip(u1 @ (RK @ u2), -1, 1))))
+    th, a1e = np.array(th), np.array(a1e); return th, np.minimum(th - np.abs(a1e - a2), np.minimum(a1e + a2, 360 - a1e - a2) - th)
+th0, m0 = law_m(0.0); camt = g["camt"]; sel = drv
+thp = np.interp(np.radians(camt[sel]), ts_l, th0)
+rows = []
+for off in (-2.0, -1.0, -0.5, 0.0, 0.5, 1.0, 2.0):
+    th1, m1 = law_m(off); mp = np.interp(thp, th1, m1, left=np.nan, right=np.nan) if np.all(np.diff(th1) > 0) else np.full(len(thp), np.nan)
+    rows.append(dict(K_offset_deg=off, taken_margin_min=round(float(np.nanmin(mp)), 3) if np.isfinite(mp).any() else None, below5=int(np.nansum(mp < 5.0))))
+res["fold_vs_K_offset"] = dict(model_m3e_min_taken=round(float(g["m3e"][sel].min()), 3), law_margin_nominal_min=round(float(m0[ts_l > 0].min()), 3), rows=rows,
+                               note="pose th held fixed; the chain re-solves q2 for the offset K (the encoders read the pose; the cuff does not feel it)")
+# CAD exports: lobe polar (lobe frame: x = pitch dir at onset, y = u2 x x), stroke table, spec points
+prof = F["C2"] - (F["C2"] @ u2)[:, None] * u2
+nrm = []
+for j in range(len(ts)):
+    tg = np.gradient(prof, ts, axis=0)[j]; nn = unit(np.cross(u2, tg)); nn = nn if nn @ prof[j] > 0 else -nn; nrm.append(prof[j] - RR * nn)
+nrm = np.array(nrm)
+with open(os.path.join(SP, f"lobe_polar_{TAG}.csv"), "w") as fh:
+    fh.write("t_deg_q2_past_onset,dK_deg,phi_crank_deg,pitch_az_deg,pitch_r_mm,profile_az_deg,profile_r_mm,pressure_angle_deg,rod_force_N_spring,follower_force_N_spring\n")
+    TK = 0.08 + 0.015 * kks; Frod = TK / (mh_t / 1000); Fn = Frod * mc_t / m_f
+    for j in range(0, len(ts), 4):
+        pa_ = D(math.atan2(prof[j] @ F["by"], prof[j] @ F["bx"])); qa = D(math.atan2(nrm[j] @ F["by"], nrm[j] @ F["bx"]))
+        fh.write(f"{D(ts[j]):.3f},{D(kks[j]):.3f},{D(phs[j]):.3f},{pa_:.3f},{np.linalg.norm(prof[j]):.4f},{qa:.3f},{np.linalg.norm(nrm[j]):.4f},{F['pa'][j]:.2f},{Frod[j]:.1f},{Fn[j]:.1f}\n")
+spec = dict(frame="link 1b at q = 0, K on stop A (the model's rigid-sample frame, mm from GH); lobe frame = link 2 at the onset q2",
+            u2=u2.tolist(), uK=uK.tolist(), dR_crank_axis=dR.tolist(), crank_pivot_on_dR_boss_underside=PV.tolist(), crank_tip_ball_centre=tip0.tolist(),
+            horn_ball_centre=H0.tolist(), rod_centres_mm=res["rod_len"], roller_centre_onset=F["C0"].tolist(), roller_axis=dR.tolist(),
+            lobe_polar_x=F["bx"].tolist(), lobe_polar_y=F["by"].tolist(), lobe_band_u2_levels=[f2 + 6.2, f2 + 9.2], q2_onset_deg=res["q2_onset_deg"],
+            q2_stopB_deg=res["q2_stopB_deg"], K_stopB_dK_deg=res["dK_lim_deg"], r_h=r_h, beta_deg=beta, La=La, f2=f2, fK=fK)
+json.dump(spec, open(os.path.join(SP, f"spec_points_{TAG}.json"), "w"), indent=1)
+# clearance of the crank-tip eye vs hub 2 along the stroke (where it binds)
+eT = [cyl_clear(eye_pts(tips[j], rod[j], rotm(dR, ph[j]) @ dR), u2, f2 - 1, f2 + CROWN, HUB_R) for j in range(len(kk))]
+eH = [cyl_clear(eye_pts(Hs[j], -rod[j], uK), uK, fK - 1, fK + CROWN, HUB_R) for j in range(len(kk))]
+res["eye_clear_vs_dK"] = [dict(dK=round(D(float(kk[j])), 1), tip_eye_hub2=round(eT[j], 2), horn_eye_hubK=round(eH[j], 2), tilt_h=round(float(tilt_h[j]), 1)) for j in range(0, len(kk), 8)]
+json.dump(res, open(os.path.join(SP, f"results_{TAG}.json"), "w"), indent=1, default=float)
+print(json.dumps({k: res[k] for k in ("follower_chosen", "loads", "K_error_deg_per_10um", "fold_vs_K_offset", "eye_clear_vs_dK")}, indent=1, default=float))

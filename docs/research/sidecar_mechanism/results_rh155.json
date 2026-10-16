@@ -61,5 +61,232 @@
    "rc_min": 8.67
   }
  ],
- "follower_n_feasible": 1
+ "follower_n_feasible": 1,
+ "follower_chosen": {
+  "a_s": 6.0,
+  "psi_deg": 201.00000000000003,
+  "rr": 2.5,
+  "pa_deg": [
+   9.1,
+   19.1
+  ],
+  "pitch_r": [
+   12.79,
+   15.59
+  ],
+  "profile_r": [
+   10.29,
+   13.09
+  ],
+  "m_f_mm": [
+   5.67,
+   5.92
+  ],
+  "drift_mm": 0.59,
+  "pitch_rc_min": 8.67,
+  "roller_centre_onset": [
+   -29.123,
+   53.9,
+   31.713
+  ],
+  "s_on_dR": 68.72
+ },
+ "loads": {
+  "spring 0.08 N.m + 0.015 N.m/rad": {
+   "F_rod_N": [
+    5.3,
+    9.5
+   ],
+   "crank_torque_Nmm": 116.7,
+   "F_follower_N": [
+    15.3,
+    20.3
+   ],
+   "J2_torque_Nm": [
+    0.13,
+    0.148
+   ],
+   "J2_virtual_work_check_Nm": [
+    0.13,
+    0.147
+   ],
+   "hertz_roller_lobe_MPa": 417.0,
+   "horn_pin_O2_MPa": 44.0,
+   "crank_long_arm_root_MPa": 6.0,
+   "roller_pin_O25_MPa": 23.0,
+   "crank_pin_O3_root_MPa": 59.0
+  },
+  "spring + MVP1 0.033 N.m": {
+   "F_rod_N": [
+    7.6,
+    13.0
+   ],
+   "crank_torque_Nmm": 159.2,
+   "F_follower_N": [
+    21.5,
+    27.7
+   ],
+   "J2_torque_Nm": [
+    0.183,
+    0.202
+   ],
+   "J2_virtual_work_check_Nm": [
+    0.183,
+    0.201
+   ],
+   "hertz_roller_lobe_MPa": 487.0,
+   "horn_pin_O2_MPa": 60.0,
+   "crank_long_arm_root_MPa": 9.0,
+   "roller_pin_O25_MPa": 32.0,
+   "crank_pin_O3_root_MPa": 81.0
+  },
+  "low preload 0.05 + MVP1": {
+   "F_rod_N": [
+    5.5,
+    9.8
+   ],
+   "crank_torque_Nmm": 120.5,
+   "F_follower_N": [
+    15.8,
+    21.0
+   ],
+   "J2_torque_Nm": [
+    0.135,
+    0.153
+   ],
+   "J2_virtual_work_check_Nm": [
+    0.135,
+    0.152
+   ],
+   "hertz_roller_lobe_MPa": 424.0,
+   "horn_pin_O2_MPa": 45.0,
+   "crank_long_arm_root_MPa": 7.0,
+   "roller_pin_O25_MPa": 24.0,
+   "crank_pin_O3_root_MPa": 61.0
+  }
+ },
+ "K_error_deg_per_10um": {
+  "rod_length": [
+   0.038,
+   0.06
+  ],
+  "roller_or_lobe_form": [
+   0.105,
+   0.13
+  ],
+  "crank_tip_eye": [
+   0.038,
+   0.06
+  ]
+ },
+ "fold_vs_K_offset": {
+  "model_m3e_min_taken": 5.232,
+  "law_margin_nominal_min": 1.379,
+  "rows": [
+   {
+    "K_offset_deg": -2.0,
+    "taken_margin_min": null,
+    "below5": 0
+   },
+   {
+    "K_offset_deg": -1.0,
+    "taken_margin_min": null,
+    "below5": 0
+   },
+   {
+    "K_offset_deg": -0.5,
+    "taken_margin_min": null,
+    "below5": 0
+   },
+   {
+    "K_offset_deg": 0.0,
+    "taken_margin_min": 5.232,
+    "below5": 0
+   },
+   {
+    "K_offset_deg": 0.5,
+    "taken_margin_min": 5.291,
+    "below5": 0
+   },
+   {
+    "K_offset_deg": 1.0,
+    "taken_margin_min": 5.351,
+    "below5": 0
+   },
+   {
+    "K_offset_deg": 2.0,
+    "taken_margin_min": 5.47,
+    "below5": 0
+   }
+  ],
+  "note": "pose th held fixed; the chain re-solves q2 for the offset K (the encoders read the pose; the cuff does not feel it)"
+ },
+ "eye_clear_vs_dK": [
+  {
+   "dK": 0.0,
+   "tip_eye_hub2": 8.01,
+   "horn_eye_hubK": 0.97,
+   "tilt_h": 14.1
+  },
+  {
+   "dK": 4.0,
+   "tip_eye_hub2": 7.26,
+   "horn_eye_hubK": 0.92,
+   "tilt_h": 15.0
+  },
+  {
+   "dK": 8.0,
+   "tip_eye_hub2": 6.5,
+   "horn_eye_hubK": 0.89,
+   "tilt_h": 16.0
+  },
+  {
+   "dK": 12.0,
+   "tip_eye_hub2": 5.72,
+   "horn_eye_hubK": 0.85,
+   "tilt_h": 16.9
+  },
+  {
+   "dK": 16.0,
+   "tip_eye_hub2": 4.93,
+   "horn_eye_hubK": 0.81,
+   "tilt_h": 17.8
+  },
+  {
+   "dK": 20.0,
+   "tip_eye_hub2": 4.12,
+   "horn_eye_hubK": 0.77,
+   "tilt_h": 18.7
+  },
+  {
+   "dK": 24.0,
+   "tip_eye_hub2": 3.31,
+   "horn_eye_hubK": 0.74,
+   "tilt_h": 19.5
+  },
+  {
+   "dK": 28.0,
+   "tip_eye_hub2": 2.51,
+   "horn_eye_hubK": 0.7,
+   "tilt_h": 20.3
+  },
+  {
+   "dK": 32.0,
+   "tip_eye_hub2": 1.69,
+   "horn_eye_hubK": 0.67,
+   "tilt_h": 21.1
+  },
+  {
+   "dK": 36.0,
+   "tip_eye_hub2": 0.87,
+   "horn_eye_hubK": 0.65,
+   "tilt_h": 21.9
+  },
+  {
+   "dK": 40.0,
+   "tip_eye_hub2": 0.07,
+   "horn_eye_hubK": 0.62,
+   "tilt_h": 22.6
+  }
+ ]
 }
