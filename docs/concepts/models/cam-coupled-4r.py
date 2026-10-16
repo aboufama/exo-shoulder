@@ -155,9 +155,9 @@ def build(B, F, p):
     # tail: J2 -> pin, extended by `pad` mm past the pin (the roller pad)
     ang = np.arccos(np.clip((p2 * pin).sum(-1), -1, 1)); ext = ang + p["pad"] / 70.0
     hubs = [K.hub_member("hub1", u1, "J1"), K.hub_member("hub2", p2, "J2"), K.hub_member("hub3", p3, "J3"), K.hub_member("hub4", u4, "J4")]
-    slot = K.Member("slot", F.S(slot_dirs(p)), kind="cap", t=p["slot_t"], width=p["slot_w"], joints=("J1", "JP"), cell=4.0)
+    slot = K.Member("slot", F.S(slot_dirs(p)), kind="cap", t=p["slot_t"], width=p["slot_w"], joints=("J1",), cell=4.0)
     links = [K.strap_member("link1", u1, p2, ("J1", "J2"), width=w, t=t, ramp_to=(("hub1", K.STACK), ("hub2", 0.0)), over=[("slot", 1.0)], end_mm=end),
-             K.strap_member("tail", p2, pin, ("J2", "JP"), ang=ext, width=w, t=t, ramp_to=(("hub2", K.STACK), (None, 0)),
+             K.strap_member("tail", p2, pin, ("J2",), ang=ext, width=w, t=t, ramp_to=(("hub2", K.STACK), (None, 0)),
                             over=[("link1", 1.0), ("slot", 1.0)], end_mm=end),
              K.strap_member("link2", p2, p3, ("J2", "J3"), width=w, t=t, ramp_to=(("hub2", K.STACK), ("hub3", 0.0)),
                             over=[("link1", 1.0), ("neck", 1.0), ("slot", 1.0)], end_mm=end),
