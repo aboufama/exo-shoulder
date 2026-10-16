@@ -23,7 +23,7 @@
  "n_configs": 337,
  "verdict": "screened, far behind its own control: best honest 68.59 (score 75.06) on Bench(60,160) fast vs the SAME chain with the knee locked (pin dyad) 31.32; the knee is inert unless J2's line is offset (closed form: with J1 through GH the radial closure is F(q2, psi) = 0, a cam of the elbow), and with an explicit 24-30 mm J2 offset + the flank rule it removes the J2 fold kinematically (kin-ok 0.895, 0 fold vs 47, overhead 0.88) but the offset lifts hub 2 out of band and the knee's in-plane drift (hK sin dpsi, 70-90 mm span) spreads the pin dyad over the curved arm: in-band 0.49-0.58 vs 0.79. Not converged (CMA still gaining); farm CMA streams A-C queued. Not a candidate for score 90.",
  "limiter": "in-band 0.49 (hub 2 lifted by the cam offset to ~32 mm, fork ring tilting with link 2, E arm / cuff link / pad swept by 70-90 mm of in-plane drift over the curved arm) and the closure's own fold (no-root poses where the cam demands more radial than the parabola's peak); kinematically the J2 fold is gone",
- "note": "Bench(60,160) fast, seed VModel checks (closure < 0.5 mm / 0.5 deg, jam rule, >= 1 mm part clearance, 0.15 mm adjacent), knee tracked at 10 fps from each clip's first frame (jump > 25 deg = not followed), FLANK RULE (only roots on the rest root's side of the closure parabola), conditioning >= 8 mm/rad, trunnion refit into hub 3's housing, pin b >= 20 mm distal; invalid configs score 500+. History: 2 first configs + 256 farm coarse (model v1: no flank rule, no cam; locked control 31.32, best knee 76.84) + 81 local CMA (model v3, earm_over; best k322 68.59). Gate on the v3 CMA stream: NOT converged (+3.39 score pts over the 2nd half, +2.28 over the last third, top-5 spread 2.06). Bounds hit: o2 30 (cap), lE 40 (cap). Frozen Bench(110,360) exact: running on the 77.92 shape when this row was written (.cache/csak/frozen_L.json). R10 conditioning at the CMA bests: authority p50 54-76 mm/rad = 0.8-1.1 deg of knee per mm of radial GH motion (prototype 2-5.7).",
+ "note": "Bench(60,160) fast, seed VModel checks (closure < 0.5 mm / 0.5 deg, jam rule, >= 1 mm part clearance, 0.15 mm adjacent), knee tracked at 10 fps from each clip's first frame (jump > 25 deg = not followed), FLANK RULE (only roots on the rest root's side of the closure parabola), conditioning >= 8 mm/rad, trunnion refit into hub 3's housing, pin b >= 20 mm distal; invalid configs score 500+. History: 2 first configs + 256 farm coarse (model v1: no flank rule, no cam; locked control 31.32, best knee 76.84) + 81 local CMA (model v3, earm_over; best k322 68.59). Gate on the v3 CMA stream: NOT converged (+3.39 score pts over the 2nd half, +2.28 over the last third, top-5 spread 2.06). Bounds hit: o2 30 (cap), lE 40 (cap). Frozen Bench(110,360) exact (fit on Bench(60,160) fast, no refit) of the 77.92 shape (k263): 89.44 (reach 0.542, follow 0.873, ib14 0.535, ib10 0.365, contact 0.094; 78 dyad-out-of-range and 59 no-root poses on the new poses); near-touch 0.09 mm (gap with < 1 mm as contact 92.38, < 2 mm 100.63); overhead (elev >= 140): reach 0.39, follow 0.40, ib14 0.48. The 68.59 shape is not frozen-checked. R10 conditioning at the CMA bests: authority p50 54-76 mm/rad = 0.8-1.1 deg of knee per mm of radial GH motion (prototype 2-5.7).",
  "doc": "docs/concepts/closure-set-arc-knee-3r.md",
  "model_file": "docs/concepts/models/closure-set-arc-knee-3r.py",
  "best_k": 322,
@@ -58,6 +58,24 @@
    "inband14": 0.7921,
    "inband10": 0.3795,
    "contact": 0.0116
+  }
+ },
+ "exact_frozen": {
+  "shape": "k263 (77.92 fast)",
+  "bench": "Bench(110,360) exact, frozen from Bench(60,160) fast",
+  "gap": 89.44,
+  "reach": 0.5417,
+  "follow": 0.8727,
+  "inband14": 0.5347,
+  "inband10": 0.3645,
+  "contact": 0.0935,
+  "near_touch_min_mm": 0.09,
+  "gap_near1": 92.38,
+  "gap_near2": 100.63,
+  "overhead140": {
+   "reach": 0.3929,
+   "follow": 0.4,
+   "inband14": 0.4784
   }
  }
 }

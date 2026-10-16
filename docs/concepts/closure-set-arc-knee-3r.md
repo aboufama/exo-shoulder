@@ -120,6 +120,9 @@ samples; the dyad / fork proximity loss stays - it does not reach the control's 
   500+ (graded, never valid).
 * **R10:** the knee is closure-set, so a radial GH translation moves it: at the bests 0.8-1.1 deg per mm (authority
   54-76 mm/rad); 15 mm worst rigid GH translation = 12-17 deg of knee - a jam risk near the closure fold.
-* **Frozen Bench(110,360) exact** (lesson c): run started on the 77.92 shape (`frozen` mode,
-  `.cache/csak/frozen_L.json`), not finished inside the time box; the 68.59 shape is not frozen-checked. Near-touch and the
-  overhead split come with that run (`audit()`).
+* **Frozen Bench(110,360) exact** (lesson c), the 77.92 shape fitted on Bench(60,160) fast and worn without refit:
+  **89.44** (reach 0.542, follow 0.873, ib14 0.535, ib10 0.365, contact 0.094); the new poses fail on the dyad's elbow
+  range (78) and the closure fold (59) - the cuff dyad and the cam were tuned to the 160 workspace poses (lesson c
+  again). Near-touch: 0.09 mm (exact) / 0.48 mm (fast); counting metal < 1 mm as contact: 92.38 / 80.39, < 2 mm:
+  100.63 / 89.07. Overhead (elevation >= 140, exact): reach 0.39, follow 0.40, ib14 0.48 (15 contact poses) - the
+  overhead does not hold. The 68.59 shape was not frozen-checked inside the time box.
