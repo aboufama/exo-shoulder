@@ -1,0 +1,73 @@
+[
+ {
+  "tag": "scc2-BEST-fit60-held",
+  "cmd": "eval \"$(python3 tools/env_bench.py use env)\" && eval \"$(python3 tools/env_bench.py use envsel)\" && python3 tools/sidecar_env_polish.py claim fit60 held BEST docs/research/sidecar_env_polish/farm/claim2_BEST_fit60_held.json > docs/research/sidecar_env_polish/farm/claim2_BEST_fit60_held.log 2>&1; tail -1 docs/research/sidecar_env_polish/farm/claim2_BEST_fit60_held.log",
+  "out": [
+   "docs/research/sidecar_env_polish/farm/claim2_BEST_fit60_held*"
+  ],
+  "env": {
+   "OMP_NUM_THREADS": "1",
+   "IGL_NUM_THREADS": "2",
+   "CB_EXACT": "1",
+   "CB_FOLD_MARGIN": "5.5"
+  },
+  "timeout": 3300
+ },
+ {
+  "tag": "scc2-pick1-fit60-held",
+  "cmd": "eval \"$(python3 tools/env_bench.py use env)\" && eval \"$(python3 tools/env_bench.py use envsel)\" && python3 tools/sidecar_env_polish.py claim fit60 held docs/research/sidecar_env_polish/picks/pick1.json docs/research/sidecar_env_polish/farm/claim2_pick1_fit60_held.json > docs/research/sidecar_env_polish/farm/claim2_pick1_fit60_held.log 2>&1; tail -1 docs/research/sidecar_env_polish/farm/claim2_pick1_fit60_held.log",
+  "out": [
+   "docs/research/sidecar_env_polish/farm/claim2_pick1_fit60_held*"
+  ],
+  "env": {
+   "OMP_NUM_THREADS": "1",
+   "IGL_NUM_THREADS": "2",
+   "CB_EXACT": "1",
+   "CB_FOLD_MARGIN": "5.5"
+  },
+  "timeout": 3300
+ },
+ {
+  "tag": "scc2-pick2-fit60-held",
+  "cmd": "eval \"$(python3 tools/env_bench.py use env)\" && eval \"$(python3 tools/env_bench.py use envsel)\" && python3 tools/sidecar_env_polish.py claim fit60 held docs/research/sidecar_env_polish/picks/pick2.json docs/research/sidecar_env_polish/farm/claim2_pick2_fit60_held.json > docs/research/sidecar_env_polish/farm/claim2_pick2_fit60_held.log 2>&1; tail -1 docs/research/sidecar_env_polish/farm/claim2_pick2_fit60_held.log",
+  "out": [
+   "docs/research/sidecar_env_polish/farm/claim2_pick2_fit60_held*"
+  ],
+  "env": {
+   "OMP_NUM_THREADS": "1",
+   "IGL_NUM_THREADS": "2",
+   "CB_EXACT": "1",
+   "CB_FOLD_MARGIN": "5.5"
+  },
+  "timeout": 3300
+ },
+ {
+  "tag": "scc2-pick3-fit60-held",
+  "cmd": "eval \"$(python3 tools/env_bench.py use env)\" && eval \"$(python3 tools/env_bench.py use envsel)\" && python3 tools/sidecar_env_polish.py claim fit60 held docs/research/sidecar_env_polish/picks/pick3.json docs/research/sidecar_env_polish/farm/claim2_pick3_fit60_held.json > docs/research/sidecar_env_polish/farm/claim2_pick3_fit60_held.log 2>&1; tail -1 docs/research/sidecar_env_polish/farm/claim2_pick3_fit60_held.log",
+  "out": [
+   "docs/research/sidecar_env_polish/farm/claim2_pick3_fit60_held*"
+  ],
+  "env": {
+   "OMP_NUM_THREADS": "1",
+   "IGL_NUM_THREADS": "2",
+   "CB_EXACT": "1",
+   "CB_FOLD_MARGIN": "5.5"
+  },
+  "timeout": 3300
+ },
+ {
+  "tag": "scc2-pick1_nominal-fit60-held",
+  "cmd": "eval \"$(python3 tools/env_bench.py use env)\" && eval \"$(python3 tools/env_bench.py use envsel)\" && python3 tools/sidecar_env_polish.py claim fit60 held docs/research/sidecar_env_polish/picks/pick1.json docs/research/sidecar_env_polish/farm/claim2_pick1_nominal_fit60_held.json > docs/research/sidecar_env_polish/farm/claim2_pick1_nominal_fit60_held.log 2>&1; tail -1 docs/research/sidecar_env_polish/farm/claim2_pick1_nominal_fit60_held.log",
+  "out": [
+   "docs/research/sidecar_env_polish/farm/claim2_pick1_nominal_fit60_held*"
+  ],
+  "env": {
+   "OMP_NUM_THREADS": "1",
+   "IGL_NUM_THREADS": "2",
+   "CB_EXACT": "1",
+   "CB_FOLD_MARGIN": "5",
+   "ENVP_NOPRICE": "1"
+  },
+  "timeout": 3300
+ }
+]

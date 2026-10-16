@@ -14,7 +14,8 @@ angles, lift-off, cusp, contact-on-lug, arm / roller / lug clearances, the drive
 per-pose metal, the pin knee, the O20 stacks, the kit fold rule - is that model's code, loaded unchanged):
   * chain 'free' always (the parent's 'lead' chain forced the frontload dyad bk1 30.05 / bk2 37.57);
   * component / search limits: bk1 26-32, bk2 38-48, a1max <= bk1 + bk2 - 5, g 1.8-3.0, beta -180..-150, r_c 14.5-19.5,
-    lift 0-4, law 'lin' (cprog 0: the progressive law cusps at the pitch point, measured by the parent);
+    lift 0-4 (lift_max up to 8 widens it: the round-1 CMA streams sat on lift 4.0, measured), law 'lin' (cprog 0: the
+    progressive law cusps at the pitch point, measured by the parent);
   * PA_MAX 43 (2 deg under the 45 gate: ~0.6 deg K slop + flank tolerance; judge's pass rule);
   * the roller's retaining stub head is sampled as metal: an O4.5 x 0.8 head under the MR63ZZ (the O3 stub is integral
     to the crank, the head is on the skin side of the roller), member 9 (crank), skin / in-band / near-touch / part pairs;
@@ -60,7 +61,7 @@ def _c(v, lo, hi): return min(max(float(v), lo), hi)
 def _clamp(p):
     p["chain"] = "free"; p["law_mode"] = "lin"
     p["bk1"] = _c(p["bk1"], 26.0, 32.0); p["bk2"] = _c(p["bk2"], 38.0, 48.0)
-    p["g"] = _c(p["g"], 1.8, 3.0); p["r_c"] = _c(p["r_c"], 14.5, 19.5); p["lift"] = _c(p.get("lift", 0.0), 0.0, 4.0)
+    p["g"] = _c(p["g"], 1.8, 3.0); p["r_c"] = _c(p["r_c"], 14.5, 19.5); p["lift"] = _c(p.get("lift", 0.0), 0.0, min(float(p.get("lift_max", 4.0)), 8.0))
     b = float(p["beta"]); b = b - 360.0 if b > 0 else b; p["beta"] = _c(b, -180.0, -150.0)
     p["cprog"] = 0.0
     return RF._clamp(p)
