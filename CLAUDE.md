@@ -48,6 +48,10 @@ docs/EVOLUTION.md (and its snapshot to pipeline/evolution/) as part of the judge
   jobs at once), local CPU - and starts the next work when anything is idle. An interrupt can stop background agents:
   after one, check what is still running and report what stopped.
 
+- **Discovery never stops at a round** (user, 2026-10-16: "dont just stop on round 4 go as far as you can!"): rounds run as
+  a self-driving loop (tools/workflows/: planner -> ideate -> screen + verify -> close, the next round steered by the
+  last round's measured lessons, docs/concepts/ROUNDS.md); the lead keeps the loop running, launches the polish + CAD of
+  each round's verified winner, and starts a new loop when one ends.
 - **Outside judges, never self-assessment.** After every design change run `tools/judge_all.sh <design id>` (or
   `... fast` while iterating) and report the scorecard before/after. If a number moved because the measurement changed
   (skin model, motions, metric), say so separately from design changes.
