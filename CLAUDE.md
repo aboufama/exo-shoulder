@@ -139,6 +139,16 @@ docs/EVOLUTION.md (and its snapshot to pipeline/evolution/) as part of the judge
   primitive mannequin, honest topology), runs `node docs/concepts/viz/test.mjs <id>` until it passes and
   `node docs/concepts/viz/thumbs.mjs` so docs/dashboard/data/motion.json carries it - in the same task, before the row
   is called screened. Update the preview when the best configuration changes.
+- **The golden solution and the user's 2026-10-16 ~05:50 UTC rulings** ("The golden solution is something 95% plus with
+  complexity at 0 (or near), please push this through, and get here by any means"). Target: verified score >= 95
+  (gap <= 13.75 on Bench(110,360) exact, frozen shape) at complexity ~0 - and the user's answers to the last questions:
+  (1) **fold margin 5 deg** for the unpowered MVP1 (was 10; red-team the feel near the edge; numbers measured at 10 deg
+  are a MEASUREMENT change when re-measured at 5 - report both); (2) **hubs: "Keep O20 only"** - the v5 O20 stack at
+  every joint, no O15 / O17 / O12 slim hubs (designs and verified numbers that used slim hubs, e.g. spine-parked-j2-3r's
+  O15 J2/J3, do not stand under this rule: re-measure at O20); (3) complexity: "slider should count pretty low honestly,
+  have extra rotation degrees is not huge for me" - tools/simplicity.py re-weighted (passive translation 2, sliding pair
+  1, passive rotation 1); (4) **J1 seats: back of the shoulder + acromion top only** (the scapula handler's reach; no
+  seats over the front / clavicle).
 - **No lofts, ever** (user, 2026-10-15: "for all the design you do, lofts look horrible and introduce geometric problems, you
   can combine arcs, but no lofts!"): every surface comes from sketches of lines and tangent arcs - extrudes, revolves,
   sweeps of ONE constant section along a line/arc path, fillets. No lofts, no surfaces fitted or shrink-wrapped to skin

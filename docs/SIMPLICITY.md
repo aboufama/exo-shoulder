@@ -32,6 +32,13 @@ section 5 reports: a chain fixed to a limb is isostatic only when it carries n +
 
 ## 2. The items and the weights
 
+**Re-weighted 2026-10-16 ~05:50 UTC by the user** ("honestly i think slider should count pretty low honestly, have extra
+rotation degrees is not huge for me"): passive translation 5 -> **2**, sliding (track) pair 2 -> **1**, passive rotation
+2 -> **1**. Crossed rails (+5), translations beyond 2 (+20, NOT BUILDABLE), sensed passives (5), springs (3), loops (4)
+and the 4th active DOF (25) are unchanged. A single cuff slider now costs about 3-4 points, the pin knee 19.5, the
+closure-set knee 30. The worked examples and the tables below still show the old weights; `python3 tools/simplicity.py
+--examples` prints the current ones.
+
 Each item adds its points once per count. The total is the sum.
 
 | item | points | why this weight |

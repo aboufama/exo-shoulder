@@ -31,15 +31,15 @@ ROWS = os.path.join(REPO, "docs", "concepts", "rows")
 # Weights (points). Why each one: docs/SIMPLICITY.md section 2.
 W = dict(
     active_extra=25,       # each active DOF beyond 3 (motor + cable + encoder in MVP2, a spare freedom in MVP1)
-    ptrans=5,              # each passive translation (a guide: rail + block + stops, moment-limited, stroke-long)
+    ptrans=2,              # each passive translation (a guide: rail + block + stops). User 2026-10-16: "slider should count pretty low" (was 5)
     crossed=5,             # two translations stacked on each other (adapter, 10.5-11.5 mm stack, squareness)
     ptrans_over_cap=20,    # each passive translation beyond 2: no compact component exists (CLAUDE.md: never)
-    prot=2,                # each passive rotation (a pin on a bearing pair: cheap, still a coordinate to determine)
+    prot=1,                # each passive rotation (a pin on a bearing pair). User 2026-10-16: "extra rotation degrees is not huge for me" (was 2)
     sensed=5,              # each passive coordinate that must be measured (an encoder without a motor)
     loop=4,                # each closed loop inside the mechanism (beyond the one through the wearer's GH)
     body_extra=1,          # each moving rigid body beyond 3
     joint_extra=1,         # each kinematic pair beyond 3
-    sliding=2,             # each track pair (rail, carriage, arc track, sleeve on a rod, slot) vs a sealed bearing
+    sliding=1,             # each track pair (rail, carriage, arc track, sleeve on a rod, slot) vs a sealed bearing (was 2; a slider counts low)
     spring=3,              # each spring or flexure (fatigue, centring force, hysteresis)
     custom_extra=0.5,      # each made part beyond the anchor's 7 (a drawing, a set-up, a tolerance chain)
     catalogue_extra=0.25,  # each bought part beyond the anchor's 6 (handling + insertion, Boothroyd-Dewhurst)
@@ -255,8 +255,8 @@ def self_check():
     expect("anchor recipe parts = 7 made", recipe_parts(EXAMPLES["anchor (three pins on bearing pairs, three links)"])[0], 7)
     expect("anchor recipe parts = 6 bought", recipe_parts(EXAMPLES["anchor (three pins on bearing pairs, three links)"])[1], 6)
     expect("4R", score(EXAMPLES["4R (the anchor + a 4th active hub and link)"])["complexity"], 25 + 1 + 1 + 1 + 0.5)
-    expect("pin knee (doc count)", score(EXAMPLES["skin-normal-3r-pin-knee"])["complexity"], 21.5)
-    expect("closure-set knee (doc count)", score(EXAMPLES["closure-set-arc-knee-3r"])["complexity"], 33)
+    expect("pin knee (doc count)", score(EXAMPLES["skin-normal-3r-pin-knee"])["complexity"], 19.5)
+    expect("closure-set knee (doc count)", score(EXAMPLES["closure-set-arc-knee-3r"])["complexity"], 30)
     base = {mid: m for mid, r, m in rows_dir_records() if m is not None}.get("baseline-3r")
     if base is not None: expect("rows/baseline-3r.json (the census anchor)", score(base)["complexity"], 0)
     s3 = score(EXAMPLES["3P cuff stage (seed-offset-3r-slides, not buildable)"])
