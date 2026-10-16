@@ -100,7 +100,11 @@ which is what the CMA found.
 | **claim: fit Bench(110,360) fast, frozen, worn Bench(110,360) EXACT** | **31.04** | **88.7** | 0.622 | 0.955 | 0.891 / 0.447 | 0.024 | 38.03 | 0.09 mm |
 | round-3 protocol: fit Bench(60,160) fast, frozen, worn Bench(110,360) exact | 33.51 | 87.8 | 0.617 | 0.936 | 0.892 / 0.430 | 0.030 | 40.57 | 0.02 mm |
 
-Data `docs/concepts/zc/frozen_round1.json` (farm job zc-frozen-r1, 357 s). Honest, audit empty, hub levels F 51 / 58 /
+| out of sample: same frozen shape worn on ALL 1432 workspace-envelope poses + 110 clip frames, exact | 35.04 | 87.3 | 0.5957 | 0.9545 | 0.8911 / 0.4472 | 0.0372 | 42.94 | 0.04 mm |
+
+Data `docs/concepts/zc/frozen_round1.json` (farm job zc-frozen-r1, 357 s) and `docs/concepts/zc/frozen_oos1432.json` (1072 of
+the 1432 workspace poses never seen by the search; fold-law reach 0.6459, overhead 0.3796; the
+spine-parked O15 polish read 36.82 on the same out-of-sample set). Honest, audit empty, hub levels F 51 / 58 /
 71 mm (all accessible). Not yet re-measured by an independent verifier: the next step is the verifier run on these
 params (the spine-parked verifier's checks with this build; the params are plain - inv3 is the only non-spine-parked
 freedom).

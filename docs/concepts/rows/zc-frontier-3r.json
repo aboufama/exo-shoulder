@@ -79,5 +79,14 @@
   "contact": 0.0299,
   "near_touch_gap": 40.57
  },
- "convergence": "6-stream round 2 from the best (sigma 0.25-0.6, 1446 evaluations): no stream improved by 0.05 in 30 generations - converged"
+ "convergence": "6-stream round 2 from the best (sigma 0.25-0.6, 1446 evaluations): no stream improved by 0.05 in 30 generations - converged",
+ "frozen_exact_oos1432": {
+  "protocol": "fit Bench(110,360) fast, frozen, worn on Bench(110,1432) exact (all workspace-envelope poses)",
+  "gap": 35.04,
+  "reach": 0.5957,
+  "follow": 0.9545,
+  "inband14": 0.8911,
+  "contact": 0.0372,
+  "near_touch_gap": 42.94
+ }
 }
