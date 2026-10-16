@@ -9,7 +9,11 @@ Modes (OMP_NUM_THREADS=1 nice -n 10 python3 docs/concepts/verify/minarc-stop-knu
   speeds       joint rates (deg/s) on every clip at the clips' real 10 fps (fit + held-out), per joint incl. K.
   spring       quasi-static virtual work on K's self-motion (gravity, any direction at 1 g and 2 g) + the self-motion
                ratios dq_i/dK (bearing friction seen by the spring) + the clock-spring strip's capacity.
-  frozen_phys  the frozen Bench(110,360) exact wear with PHYSICAL J2 stops: J2 locked at the q2 of the model's own state-A
+  frozen_<r>   r = claim | asbuilt | refit | capK<dh>[phys]; env PAR_OVERRIDE='<json>' changes params (e.g. the J2 stops
+               at the 5-deg margin, phi 20.793 / 146.614), FLOOD=1 (default) adds the continuity flood fill in three
+               readings: the literal connected() grid of the bench's 360 ws poses, nearest neighbours, and the FULL
+               15-deg envelope grid (1432 poses). capK<dh>: hub K dh mm taller (the clock-spring cap).
+               With PHYSICAL J2 stops: J2 locked at the q2 of the model's own state-A
                boundary (q2 at phi_hi / phi_lo with K on stop A), K opens to the smallest opening that closes the chain
                (scan + bisection along the self-motion). Two readings: shape fitted by the claim's law and worn with the
                physical stops ("as built"), and shape refitted with the physical stops ("refit").
@@ -78,7 +82,7 @@ def q2_stops(D):
 
 class PhysDesign(ORIG_KDESIGN):
     """same chain, same parts; the J2 stops act on J2's own joint angle q2 (a dowel in an arc slot at J2)"""
-    Q2LO = Q2HI = None
+    Q2LO = Q2HI = Q2STR = None                                  # Q2STR: the stop phi_hi maps to (stretched side)
 
     def ik(self, Q):
         if not hasattr(self, "uK"): return super().ik(Q)
@@ -112,7 +116,9 @@ class PhysDesign(ORIG_KDESIGN):
         u1 = self.u[0]; w = k["w"]
         th = np.degrees(np.arccos(np.clip(w @ u1, -1, 1)))
         q2 = np.degrees(k["q"][:, 1])
-        state = np.where(fA, 0, np.where(np.abs(q2 - hi) < np.abs(q2 - lo), 1, -1))
+        s_ = self.Q2STR if self.Q2STR is not None else hi
+        other = lo if s_ == hi else hi
+        state = np.where(fA, 0, np.where(np.abs(q2 - s_) < np.abs(q2 - other), 1, -1))   # +1 stretched, -1 folded (labels only)
         uKw = np.einsum("nij,j->ni", k["R1"], self.uK); cK = np.degrees(np.arccos(np.clip(np.einsum("ij,ij->i", uKw, w), -1, 1)))
         b1 = float(P["bk1"])
         msub = np.minimum.reduce([th - np.abs(b1 - cK), b1 + cK - th, 360 - b1 - cK - th])
@@ -135,7 +141,7 @@ def setup_phys(P):
     def near(target_phi, around):
         m = np.abs(gd - around) < 15; j = np.argmin(np.abs(phi[m] - target_phi)); return float(gd[m][j])
     hi_end = near(float(P["phi_hi"]), qa.min()); lo_end = near(float(P["phi_lo"]), qa.max())
-    PhysDesign.Q2LO, PhysDesign.Q2HI = min(hi_end, lo_end), max(hi_end, lo_end)
+    PhysDesign.Q2LO, PhysDesign.Q2HI = min(hi_end, lo_end), max(hi_end, lo_end); PhysDesign.Q2STR = hi_end
     return dict(q2_stop_stretched=round(hi_end, 3), q2_stop_folded=round(lo_end, 3), stateA_q2=[round(float(qa.min()), 2), round(float(qa.max()), 2)])
 
 
