@@ -160,6 +160,12 @@ docs/EVOLUTION.md (and its snapshot to pipeline/evolution/) as part of the judge
   Every such design's claim and its verifier must run the workspace continuity flood fill (2-deg slerp edges from the
   rest region, no passive / redundant joint jump > 10 deg, no branch change - `connected()` in
   docs/concepts/models/stop-relay-rocker-3r.py) and score reach on the CONNECTED set only; report static and connected.
+- **Search on the near-touch gap, and treat fold stops as a design variable** (measured 2026-10-16 by the arm-parked-knee-4r
+  screen): plain-gap CMA optima put metal within 1 mm of the skin on 15-20 % of poses and lose 8-27 points when worn
+  frozen; searching on the near-touch gap (metal < 1 mm counted as contact) costs ~2 fast points and holds up frozen. So
+  every search objective is the near-touch gap; claims report plain and near-touch. Where a spring / knee / pin takes the
+  poses past a J2 stop, the stop's margin is a design variable (optimum 9-12 deg there); the user's 5 deg is the lower
+  bound for the plain fold window, not a target.
 - **No lofts, ever** (user, 2026-10-15: "for all the design you do, lofts look horrible and introduce geometric problems, you
   can combine arcs, but no lofts!"): every surface comes from sketches of lines and tangent arcs - extrudes, revolves,
   sweeps of ONE constant section along a line/arc path, fillets. No lofts, no surfaces fitted or shrink-wrapped to skin
