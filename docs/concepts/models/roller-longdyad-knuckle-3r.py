@@ -82,10 +82,23 @@ SC.SCModel = RLModel; SC._clamp = _clamp; SC.PARAMS = PARAMS; RF.PARAMS = PARAMS
 FL.G.KR.KB.KModel = RLModel; FL.FLModel_SC = RLModel
 
 
+def ws_inband(B):
+    """the unscored workspace in-band (round-9 rule, gaming pattern L2): in-band 2-14 / 2-10 over the metal of the TAKEN
+    workspace poses, overall and at elevation 90-140, from the bench's own per-pose distances (B.res)"""
+    out = {}
+    for nm, lo, hi in (("all", -1, 999), ("e90_140", 90, 140), ("ovh140", 140, 999)):
+        d = [B.res[j] for j, k in enumerate(B.kind) if k == "ws" and B.res[j] is not None and float(np.min(B.res[j])) >= 0
+             and lo <= float(B.poses[j]["elev"]) < hi]
+        d = np.concatenate(d) if d else np.zeros(0)
+        out[nm] = [round(float(np.mean((d >= 2) & (d <= 14))), 4), round(float(np.mean((d >= 2) & (d <= 10))), 4)] if len(d) else None
+    return out
+
+
 def _report(B, params):
     p = dict(PARAMS, **params)
     r, M = RF._report(B, p)
     r["plain"] = {k: r[k] for k in ("gap", "reach", "follow", "inband14", "contact")} if "plain" not in r else r["plain"]
+    r["ws_inband"] = ws_inband(B)
     if M.kin_ok.any() and p.get("near2"):
         a = PK.audit(M, B); r["gap_near2"] = a.get("gap_near2"); r["near2_poses"] = a.get("near2_poses")
         r["gap_near1"] = a.get("gap_near1", r.get("gap_near1"))
@@ -163,7 +176,7 @@ def frozen_held(P): return SC.frozen(_clamp(dict(PARAMS, **P)), -1, -1)
 def frozen_flood(P, nc=110, nw=360): return SC.frozen_flood(_clamp(dict(PARAMS, **P)), nc, nw)
 
 
-def viz_export(par): return RF.viz_export(dict(PARAMS, **par))
+def viz_export(par): return RF.viz_export(_clamp(dict(PARAMS, **par)))
 
 
 if __name__ == "__main__":
@@ -188,6 +201,6 @@ if __name__ == "__main__":
     print(json.dumps(dict(gap=r["gap"], plain=r.get("plain"), near1=r.get("gap_near1"), near2=r.get("gap_near2"), min_metal=r.get("min_metal_mm"),
                           reach=r["reach"], follow=r["follow"], inband14=r["inband14"], contact=r["contact"], honest=r.get("honest"),
                           idle=r.get("drive_idle"), cam_short=r.get("cam_short"), pa_fail=r.get("pa_fail"), why=r.get("why"),
-                          ovh=r.get("overhead140"), cam=r.get("cam"), parts=r.get("parts_ib14"), pairs=r.get("parts_pairs"),
+                          ovh=r.get("overhead140"), ws_inband=r.get("ws_inband"), cam=r.get("cam"), parts=r.get("parts_ib14"), pairs=r.get("parts_pairs"),
                           split=contact_split(M, B) if mode == "split" else None,
                           clear=getattr(M, "last_clear", None), secs=round(time.time() - t)), default=float))
