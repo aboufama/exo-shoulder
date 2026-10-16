@@ -134,3 +134,51 @@ What the table shows:
 2. Give the E leg a 1-2 mm joggle under link 2's J3 stack (a real bent-bar feature): this goes after the same 8 poses.
 3. Hub 3's obliquity at the GH-ray seat (0.555 in band) is the structural cost of the kneeless class.
 4. The fold wall (drive stroke, ROD-hub2 at dK 38.5) is unchanged from the lead.
+
+## Verification
+
+**VERIFIED** (2026-10-16 ~23:10 UTC, independent skeptic, harness `docs/concepts/verify/kneeless-sidecar-knuckle-3r.py`, farm, ~$0.02). Not refuted, and not a lead.
+
+The claim's model was loaded unchanged and worn under the claim's frozen protocol: fit on Bench(60,160) fast, shape frozen, then worn on Bench(110,360) exact. The verifier then added its own checks on every taken pose.
+
+**Checks added, and what they found**
+
+| check | result | poses removed |
+|---|---|---|
+| RSSR closure in the world | 0.0 mm | 0 |
+| M2 ball-link tilt, crank / horn (limit 30 deg) | 12.1 / 21.4 deg | 0 |
+| real lobe pressure angle (limit 45 deg) | 37.1 deg | 0 |
+| rigid bracket, measured from the transforms: drift of member 3 (pin a) and of the bracket plate in the pad (arm) frame | 0.000 mm over all 367 taken poses | 0 |
+| every taken pose re-collided | min non-adjacent clearance 1.58 mm (ROD-hub2 1.6); E-L2 3.94 mm on taken poses (it is the 8 lost ones that sit under 0.15 mm) | 0 |
+| min `th` fold margin (5-deg rule holds) | 5.29 deg on the bench, 5.11 deg held out | 0 |
+
+The rigid-bracket check is new here: it reads the bracket's position straight from the body transforms rather than from the model's own knee report. The claim that the knee does no work holds exactly.
+
+Drive: K is taken up to 35.8 deg, against a range that ends at 38.5 deg (ROD-hub2).
+
+**Numbers**
+
+| bench | gap | reach | follow | ib14 | ib10 | contact | 1 mm | 2 mm | overhead |
+|---|---|---|---|---|---|---|---|---|---|
+| Bench(110,360) exact, frozen | **21.11** (score 92.32) | 0.714 | 1.0 | 0.888 | 0.524 | 0.013 | 22.75 | 33.15 | 8/28 |
+| held out | 25.34 | 0.684 | 1.0 | 0.887 | – | 0.024 | 28.41 | 37.26 | 17/71 |
+| Bench(60,160) exact, frozen (artefact check) | 14.00 | – | – | – | – | – | – | – | – |
+
+- The artefact check is no worse than the claim's fast 15.63, so the fast cache is not flattering the design.
+- Lost poses on Bench(110,360): fold 90, E-L2 parts 8, contact 5.
+- Lowest metal: 0.48 mm on the bench, 0.02 mm held out.
+- Continuity flood fill: full 21.11 with 0 dropped; knn 23.65 with 9 dropped; bench grid 44.84. The lead under the same protocol scores 18.91 / 21.72 / 43.4.
+
+**Champion on the same bench: 75.94** (risley-turret table; the added checks do not apply to a rodless 3R). The design beats it by about 55 gap points.
+
+**Against the lead: fails the A1 dominance gate**
+
+The lead (sidecar-longdyad-knuckle-3r) scores 18.91 plain and 34.03 at 2 mm. This design is better at 2 mm (33.15) but worse plain (21.11), so it does not replace the lead. Held out it is also worse: 25.34 against 22.67.
+
+It stands as a verified complexity Pareto point: complexity 28 against the lead's 49.
+
+**Watch items (red team)**
+
+1. **Unscored workspace in-band, gaming pattern L2.** On the worn bench it is 0.843 overall and 0.805 at elevation 90-140, below the lead's 0.874 / 0.841. The 2 mm search objective is the likely cause: it parks metal at about 2.05 mm.
+2. **A rigid cuff link has no slack for GH translation.** The claim's own red team shows a 3 mm GH offset gives 4.8 mm of cuff misfit at p95, more than the 3 mm the liner may take. The lead's knee would have left 4.1 mm of that, so the knee was not solving this either. The fix belongs to the scapula handler's GH estimate, not the bench.
+3. **The E-L2 loss is real and fixable.** It costs 8 poses here and 17 held out. The claim's proposed fix (a joggle in the E leg, plus searching on the envelope bench) is the right next lever. Any such change needs re-verification.
