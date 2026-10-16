@@ -529,3 +529,153 @@ joints that the "Keep O20 only" ruling excludes (cruciate-knuckle-3r, rolling-co
   pins as passive (3 active), and that asymmetry should be stated as a rule.
 - A fold margin below 5 deg (unchanged).
 - A sensed passive used only for static extremes counting as passive: minarc pick1 18.40 would then be 3 active.
+
+## Round 7 results (2026-10-16 ~15:33-17:15 UTC; closed by the round-7 closer)
+
+Picks (round-7 judge, docs/concepts/round7_ideation.md):
+- rim-lobe-arm-knuckle-3r (pick 1, direct-drive lens, with groove-arm merged in as its 'groove' embodiment);
+- k-rim-lobe-stub-knuckle-3r (pick 2, direct-drive lens, the inverse pair);
+- split-knuckle-twosided-3r (pick 3, the only surviving folded-side lever);
+- frontload-lobe-stopb-knuckle-3r (pick 4, the stretched-side / overhead-end control, gated at fast < 16.0).
+
+Dead at ideation, measured by its own proposer: two-rise-lobe-pinknee-3r, the lens-1 lead. msub at the folded onset is
+2.14 deg, so it takes 0 poses under the winner's rules. With metal fitted, hub 2 needs 63-70 mm (against 60.2), and the
+fast gap goes 16.53 -> 18.61. A 750-design re-seat scan found 33.46 at best. long-a2-bilobe was rejected as a duplicate
+of it. recentred-knee-geneva-3r was not picked (a parameter tweak, +2 of 28 overhead, kinematics only). Its lc / phib /
+phiE / lE go to the lead's env-bench polish.
+
+All numbers below are frozen exact on Bench(110,360), at the 5-deg margin with O20 hubs only, fitted on Bench(60,160)
+(the round-3 protocol). Every row was re-measured by an independent verifier.
+
+| design | fast Bench(60,160), near-touch | frozen exact (verified) | held out | active | complexity (tool) | status |
+|---|---|---|---|---|---|---|
+| **frontload-lobe-stopb-knuckle-3r** (best = the winner's rod drive, 1:1, seats re-fitted) | 15.57 (verifier 15.68 with the spring-cap metal) | **22.82** (score 91.70). Reach 0.728, follow 1.0, in-band14 0.855, in-band10 0.558, contact 0.011, near-touch 24.46, overhead 8/28, fold losses 86. | 26.75 | 3 (K slaved, never read) | 49 (the winner's mechanism; 46.75 for the winner's full record, 42.5 by hand) | **verified: round winner** (a seat re-fit) |
+| rim-lobe-arm-knuckle-3r (roller on a link-2 lobe plate, low lug) | 20.57 (reproduced exactly) | 26.21 self-measured (score 90.47). Reach 0.681, in-band14 0.863, near-touch 27.89, fold losses 106. | - | 3 | 35.25 | DEAD at its kill gate (15.5); death audited |
+| split-knuckle-twosided-3r (K2 on link 2, mirrored rod drive) | 26.62 | 34.18 (score 87.6). Reach 0.728, in-band14 0.746, contact 0.016, near-touch 36.89, fold losses 84 (= the winner's). | - | 3 | 68.5 | DEAD; death audited |
+| k-rim-lobe-stub-knuckle-3r (lobe on link 1a, roller on a link-2 stub) | 36.82 (plain 30.79) | 44.79 (score 83.7). Reach 0.622, follow 0.873, in-band14 0.826, contact 0.018, near-touch 53.51, overhead 5/28. | - | 3 | 34.0 (hand) | verified, not a contender (kill gate failed by 21) |
+
+Same-protocol references: the round-6 winner geneva-tail-knuckle-pinknee-3r 23.57 (held out 28.12); its linear law
+re-fitted under the same rules (frontload's control E) 22.92 frozen, self-measured; H1 27.20; sensed minarc pick1 18.40 /
+BDp 19.54 (4 active); zero-complexity ceiling 31.04.
+
+**Winner: frontload-lobe-stopb-knuckle-3r, verified at 22.82 (score 91.70)**, with 0 passive translations. Its gap
+beats the previous verified lead (23.57) by 0.75, so the verified lead number moves to 22.82, but it is not a new
+mechanism:
+- **Control.** The best configuration is the round-6 winner's own rod drive (1:1 rocker, nearly linear law: kA / kB
+  1.05) on re-fitted seats. The CMA control E re-fits the winner's linear law under the same rules and scores 15.54 fast /
+  22.92 frozen / 26.66 held out, against the pick's 15.57 / 22.72 / 26.65 (claim side).
+- **Lever-by-lever controls.** The front-loaded law gives 0.01 frozen, stop B raised to a1max 61.7 gives 0.00, and the
+  2:1 rocker loses ~1.2 fast.
+- **1-point rule.** The gain is below the rule (CLAUDE.md) for a polished config to replace the CAD's config. Held out
+  it is 1.37 (26.75 vs 28.12).
+- **Red team (closer, from the verifier's own audit):** the re-fit buys in-band by sitting closer to the skin.
+  - At the 1 mm near-touch rule it is 0.75 better: 24.46 vs 25.21 bench, 29.39 vs 30.31 held out.
+  - Counting metal under 2 mm as contact, it is 5.2 points WORSE: 44.08 (34 poses) vs 38.84 (28) bench, and 46.73 (80)
+    vs 42.01 (61) held out.
+  - Min metal 0.30 mm (winner 0.45), 0.14 mm held out.
+  - The margin is thin and should be priced before any CAD swap.
+- **Open buildability items:**
+  - the lobe crest is 10.26 mm, 0.26 mm past hub 2's O20 skirt (the winner's is 10.9);
+  - the pressure angle is 44.3 against the 45 limit;
+  - the law prefix dips to m3e 0.58 deg at its end (every taken pose keeps >= 5);
+  - K slop is 1.16 deg per 0.05 mm of rod-end play.
+
+Lessons (measured):
+
+1. **At O20 spacing, the rod (a strap) is the cheapest carrier of a slaved-K law.**
+   - **The prize.** The rod drive's metal costs 4.74 fast points (law-only 11.79 vs 16.53, re-measured). The laws a
+     compact direct pair can carry give 2.0-2.6 of those back (14.38 / 13.76).
+   - **Direct pair (rim-lobe-arm).** An arm aimed along the K-J2 line has a 90-deg pressure angle and is an idle drive
+     (135.63). A usable arm sits 20-35 deg off that line, so its follower is >= 19 mm from u2.
+   - **Why the plate fails.** The skin under hub 2 is low within ~25 mm of u2 and 6-14 mm higher beyond ~27 mm, so a
+     plate swept about J2 is either 18 mm over the skin (8 % in band) or lifted off the ring level. The optimum caps the
+     follower at 31 mm, so dK is 25.9 deg (against 36 law-only) and reach is 0.731.
+   - **Verdict.** The direct pair is 4.0 fast / 2.8 frozen points worse than the rod, and 11.5 complexity points
+     simpler (35.25 vs 46.75). A drive must carry >= ~30 deg of K to beat the rod.
+   - **Groove (positive, no spring).** Its 93-deg dwell flange sweeps the body: best 95.51.
+2. **The swept-volume rule holds at 24-28 mm too.**
+   - The inverse pair (stub rigid with link 2) pays for link 2's whole q2 sweep. Link 1b is the upper member at K, so
+     link 1b, the lobe and the stub stack in three layers ~8 mm above link 1b's in-band level: the lobe is 0 % in band,
+     the stub 11 %, the roller 17 %.
+   - The beside-link-1b variant puts the lobe 100 % in band, but the roller rides into link 2's skin sweep (best 57.2).
+   - Frozen, the roller-vs-lobe collisions in state A grow from 9 to 32 poses (follow 0.873).
+   - Rule: no follower rigid with link 2, at any radius (Geneva tail 38 mm, stub 24-28 mm: both ~20 points or more).
+3. **The folded side is closed.** It holds 23 of the 84 frozen fold losses (8 of 160 fit poses, <= 5.0 fast gap points
+   and <= +0.064 reach).
+   - **On link 1 (two-rise lobe):** msub 2.14 deg at the onset, and hub 2 is pushed into the body (63-70 mm needed).
+   - **On link 2 (K2):** the law engages only when K2 rests bent at psi0 <= 135 deg. At those seats an O20 hub on link 2
+     is <= 0.12 in band and 70-116 mm from GH. Its cheapest metal costs 5.8 points, more than the whole prize.
+   - **Where K2 does engage,** the folded end lays link 2 back over link 1, onto the stretched-side drive (ROD-hubK2
+     -5.2 mm, hubK-hubK2 -0.7 mm).
+   - Rule: folded-side relief comes from the existing chain (seats, smlo, a2), never from another hub.
+4. **The stretched side is walled, not law-limited.**
+   - Stretched losses on the fit bench: 6 at the m3e wall plus lift-off, and 13 at th 124-157 past the K dyad's
+     straight-line wall (a1max + a2 - 5).
+   - How fast K can open is capped by the lift-off gate (K's self-motion slope at fixed th) as well as by the pressure
+     angle: every margin-tracking law below smt 12 ends on lift-off.
+   - Raising stop B buys nothing (taken poses never use K past 44.7 deg). A 2:1 rocker's clevis arm must clear hub K's
+     crown and so sits 9-12 mm over link 1b (-1.2 fast).
+   - Frozen fold losses are 84-86 on every rod-drive variant this round, and 105-106 on the direct pairs (smaller dK).
+     No law or drive change moved them.
+5. **The winner's seats had re-fit headroom:** 0.6-0.75 frozen and 1.37 held out. Most of it is hub K in band (0.945 ->
+   0.976) and the lobe pulled inside the O20 skirt (r_lobe 9 -> 7.35). That is polish territory, and the 2 mm red team
+   above shows that part of it is proximity.
+6. **Metal rules: missed again, now fixed in the harnesses.**
+   - K's spring cap is a cylinder (HUB_R, CROWN + capK). A crown-top check is not enough: the frontload claim's rod
+     ran 4.85 mm inside the cap.
+   - A rod that crosses K must clear crown top + 2 mm within HUB_R + 2 of K's axis. The winner's own rod ran 2.6 mm
+     into the crown; the rule costs it 0.10.
+   - Every swept-plate model needs a plate-height cap. Without one, the greedy fit floats a part 90 mm.
+   - Both checks belong in the shared kit, not in each harness.
+7. **Search hygiene.**
+   - Spare-idle optima reappeared: split-knuckle's sweep minimum 22.34 is K2-idle. The idle-drive penalty must cover
+     every slaved spare, not only K.
+   - A sweep file that concatenates runs hides per-run convergence (rim-lobe: 0.85 combined against 0.11 / 0.09 on run
+     b). Gate each run separately.
+8. **Fast to frozen still loses 5.6-14 points.**
+   - 15.57 -> 22.82, 20.57 -> 26.21, 26.62 -> 34.18, 30.79 -> 44.79 (the last driven by state-A collisions).
+   - Overhead is 8 of 28 on every rod-drive design (5 of 28 on the stub). The frozen winner loses 20 overhead poses:
+     fold 15, slide 3, contact 2.
+   - No round-7 lever touched the overhead end. The overhead-end lens's seat lever (J1 on the back of the shoulder) was
+     never screened.
+
+Next (round 8; verified best 22.82, score 91.70, so 95 is not reached and score stays the objective):
+
+1. **Change the fold window's geometry, not K's law.** Rounds 6-7 measured every lever on K (law shape, stop B,
+   rocker ratio, direct pairs, a folded-side lobe, K2). Frozen fold losses never moved off 84-86, and the walls that
+   bind are geometric:
+   - the K dyad's straight line, a1max + a2 - 5 (13 fit poses at th 124-157);
+   - the m3e / lift-off wall (6);
+   - the folded |a1 - a2| + 5.
+
+   The levers left, in order:
+   - **(a) J1 seat on the back of the shoulder** (the user's allowed set), where the J1-J3 alignment set leaves the
+     overhead cone (alignment-free-knuckle-4r: kinematic 0.953, overhead 26/28), now with the determined rod-drive K
+     and the pin knee. Kill gate first: hub 2 / link 2 in band >= 0.8 at those seats (round 6 measured 0.00-0.20 on
+     the J3 side).
+   - **(b) a2 61-68 with the stretched-only lobe** (untested; it moves the straight-line wall by Delta a2).
+   - **(c) the knee window** for the overhead slide losses (3-4 bench / 13 held out), via lc 34 / phib -75 (+5 bench /
+     +18 held-out workspace poses, kinematic).
+
+   Target: frozen overhead >= 14/28 and reach >= 0.775 at in-band >= 0.88 and contact <= 0.01.
+2. **Do not screen again:**
+   - direct pairs between O20 stacks, followers rigid with link 2, and folded-side hubs (lessons 1-3);
+   - front-load / stop-B laws (lesson 4).
+
+   A simpler drive must beat the rod's 4.74 points of metal while carrying >= 30 deg of K. Nothing measured so far
+   does.
+3. **The lead's polish, not the round's:**
+   - the env-bench polish of the rod-drive knuckle, seeded from the frontload re-fit with lc / phib / phiE / lE free
+     (recentred-knee), priced at the 1 mm and 2 mm near-touch;
+   - the verifier, then the gen-5 CAD and stills if the gain is >= 1 point;
+   - EVOLUTION.md entries for the round-6 and round-7 designs;
+   - the shared-kit spring-cap and plate-cap checks (lesson 6).
+4. **Complexity:** the 3-active knuckle class sits at 42.5-49. The golden 95 at ~0 complexity is out of reach of every
+   measured class: zero-complexity ceiling 31.04, knuckle 22.82.
+
+### Needs the user's say (unchanged)
+
+- A cuff IMU instead of the two knee-pin encoders: the pin knee 19.5 -> ~11.5, the winner ~34.5.
+- A fold margin below 5 deg.
+- A sensed passive used only for static extremes counting as passive (minarc pick1 18.40 would be 3 active).
+- New, rule question: is msub needed for a cam-slaved K? It is moot for the two-rise lobe (its metal kills it).
