@@ -135,7 +135,7 @@ L1 is keep-out CAD and L2 is the user's standard (CLAUDE.md "CAD has two levels"
 | `user_minarc_bdp` | L2 | 7/19 | 80.0 / 51.0 % | 72.0 % | 73.5 % | re-judged after the judge fixes (5/19 when first built) |
 | `user_pinknee_h1b` | L2 | **8/19** | 76.7 / 35.8 % | 71.2 % | 61.7 % | 3 DOF (R5-aim passes); R8 178.0 g |
 | `l1_geneva-rod` | L1 | 7/19 | 81.1 / 51.1 % | 73.0 % | 72.6 % | 3 DOF; R17 fails only because the dynamics judge has no lobe-rod coupling term (a judge gap, not a measured jam) |
-| `user_geneva_rod` | L2 | in progress | - | - | - | rebuilt 20:23 UTC (build.json, step/, exo.glb) from builder commit c23fedb (20:15, `pipeline/conformal/param_cad/user_style_geneva.py`); judges, stills, EVOLUTION entry and the independent check not yet done; the CAD agent (cad:user-geneva, wf_14bb06ea-22e) was still running |
+| `user_geneva_rod` | L2 | 5/19 | 80.3 / 49.8 % | 73.8 % | 72.6 % | 3 DOF; checked NOT REFUTED with 5 corrections (`pipeline/full-exo/designs/user_geneva_rod/VERIFY.md`): the D9-01 lobe ring is 0.23 mm inside the skin at the overhead peak (the only chain part inside), igubal eyes built 4 mm wide (real KGLM-03 is 6), clip pins without grooves, R7 fails on link 1a, R17 cannot run (judge has no slaved-coordinate coupling); 22 stills in `renders/2026-10-16_userstyle_geneva_rod/`; fix run wf_6b8df655-403 (22:16 UTC) |
 
 - **Every build passes** R3 (follow, 99-100 %), R5 (<= 4 DOF), R6 (no part interference), R7 (valid solids), R8 (mass)
   and R11 (cuff pressure).
@@ -238,7 +238,8 @@ script name it prints). On a new machine all of them are gone; their committed o
 | run id | track | state at 20:24 UTC | what a new lead does |
 |---|---|---|---|
 | wf_ee162f5e-871 | discovery loop rounds 6-9 (launched from the old session's scratchpad copy of `discovery-loop.js`) | round 8: longdyad + parallelogram VERIFIED; roller-flank verifier RUNNING; closer not run | the round-8 steps below |
-| wf_14bb06ea-22e | gen-5 CAD of geneva-tail-knuckle-pinknee-3r (rod) | L1 + drive red team done; `cad:user-geneva` RUNNING (build at 20:23) | the gen-5 steps below |
+| wf_14bb06ea-22e | gen-5 CAD of geneva-tail-knuckle-pinknee-3r (rod) | DONE 22:15 UTC: L1 7/19, full CAD 5/19, 22 stills (3 sent), checked NOT REFUTED with 5 corrections | nothing; its open items run in wf_6b8df655-403 |
+| wf_6b8df655-403 | gen-5 fix (template `redteam-fix.js`, id geneva-rod-gen5): FIRST a general slaved-coordinate coupling in `judge/dynamics.py` (law read from build.json; gen-6 needs it too), then the lobe skin hit, real igubal width, pin grooves / retention, R7 link 1a, the -0.8 R1 loss vs the L1, re-judge, 3 re-shot stills if the drive changed | launched 22:16 UTC | if it died: relaunch the same template with the args in `docs/research/geneva-rod-gen5_fix.md` (or re-derive them from VERIFY.md) |
 | wf_0729deda-636 | alignment auditor (the user's request, quoted below) | Audit phase RUNNING (audit:live, audit:catalogue+tool); `docs/ALIGNMENT.md`, `tools/alignment_audit.py`, `tools/alignment_wear_probe.py` being written (check git for what landed); its Wire-in phase (an audit phase in `discovery-loop.js`, `tools/workflows/alignment-audit.js`, a CLAUDE.md rule) and its skeptic review had not run | the auditor steps below |
 | wf_a20bc382-f06 | cad-context zc-frontier-3r (the user's kinematics brief) | DELIVERED (`docs/cad_context/zc-frontier-3r/KINEMATICS_BRIEF.md`); the lead stopped it before its checkers on purpose (the user narrowed the brief); agent_tail still lists check:numbers / check:cold-read as RUNNING / STALE | nothing: do not relaunch |
 | wf_33b5f96b-7b1 | this cold-start handoff (OPERATIONS.md, tools/workflows/, this file) | finishing | nothing |
