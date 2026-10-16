@@ -110,7 +110,9 @@ def extras(B, r):
 
 def evaluate(B, params):
     """tools/concept_cma.py hook -> (params, report)"""
-    p = dict(PARAMS, **params); r = K.evaluate(B, build, p); r = extras(B, r)
+    p = dict(PARAMS, **params); p["q"] = min(1.0, max(0.8, float(p["q"])))   # a CMA coordinate may step past 1
+    p["sigma"] = 1 if float(p["sigma"]) >= 0 else -1
+    r = K.evaluate(B, build, p); r = extras(B, r)
     return p, r
 
 
@@ -147,6 +149,17 @@ def redteam(B, p, r):
               f"poses mostly > 14 mm: {int(hi.sum())}/{len(Pi)} (elev of those: median {np.median(el[Pi[hi]]) if hi.any() else float('nan'):.0f})"
               + (f"; {where(m, None, int(Pi[0]))}" if m.kind == "flat" else ""))
         for j in worst: print(f"       worst {lab(int(j))}  ib {ib[list(Pi).index(j)]:.2f} median {np.median(d[list(Pi).index(j)]):.1f}")
+    print("-- what lifts each strap: the ray / pose with the largest K3 requirement (thorax az 0 ant, 90 lat; el up) --")
+    fitp = np.nonzero(L["ok"])[0]
+    for m in ch.members:
+        if m.kind == "flat" or not len(fitp): continue
+        D = m.D[fitp]; n = D.shape[1]
+        R = K.requirement(B, np.repeat(fitp, n), D.reshape(-1, 3)).reshape(len(fitp), n)
+        R = np.where(np.isfinite(R), R, 400.0); a, j = np.unravel_index(int(np.argmax(R)), R.shape); u = D[a, j]
+        hi = (R.max(1) > 100).mean()
+        print(f"  {m.name:6s} max requirement {R[a, j]:.0f} mm on a ray az {math.degrees(math.atan2(u[2], u[0])):6.1f} el "
+              f"{math.degrees(math.asin(max(-1, min(1, u[1])))):5.1f} in {lab(int(fitp[a]))}; poses with a sample > 100 mm: {hi:.2f}; "
+              f"median of per-pose max {np.median(R.max(1)):.0f} mm")
     print("-- poses not taken (ok = closes + K2; hit = K6; contact = crown / wall) --")
     ok, hit = L["ok"], L["hit"]
     nt = [i for i in range(len(B.res)) if not _taken(B, i)]
