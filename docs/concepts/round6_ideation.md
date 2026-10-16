@@ -107,3 +107,18 @@ Lead order for the modeller (pick 1):
 4. L_t derived from bk2.
 
 ## Judge frozen check (section 4 result)
+
+Run: one tooth (kK_lo 0), exact Geneva law atan(6 t), smhi 8, LB1 seats, `camBfrozen.py` (fit Bench(60,160) fast, worn
+on Bench(110,360) exact). Law only: the tail metal is not modelled.
+
+| | gap | score | reach | in-band14 | follow | contact | near-touch | overhead | min metal |
+|---|---|---|---|---|---|---|---|---|---|
+| frozen, judge | **21.32** | 92.2 | 0.731 | 0.902 | 0.946 | 0.039 | 24.11 | 7/28 | 0.02 mm |
+| proposer's claim (two lobes, linear law) | 20.16 | 92.7 | 0.750 | 0.899 | | 0.046 | 22.80 | | |
+
+Lost poses, frozen: fold 78, slide 7, parts 3, contact 15. The honest figure is 1.16 points worse than the headline.
+It still beats H1's 24.48 / 27.20 at 3 active, before the tail metal.
+
+The decisive unknown is now the tail metal. It must cost < ~3 points for this design to lead the 3-active class.
+
+Also open: the 0.02 mm overhead pinch inherited from LB1. A near-touch CMA has to move it.
