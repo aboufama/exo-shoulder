@@ -1,6 +1,6 @@
 # Independent check: user_geneva_rod (the generation-5 winner's full CAD) and its 22 stills
 
-Checker (a skeptic), 2026-10-16 ~21:40-22:20 UTC. Tested: the full CAD at commit cae6a6e (exo.glb of 20:53, unchanged
+Checker (a skeptic), 2026-10-16 21:39-22:15 UTC. Tested: the full CAD at commit cae6a6e (exo.glb of 20:53, unchanged
 since), its builder `pipeline/conformal/param_cad/user_style_geneva.py`, the L1 builder it imports
 (`pipeline/concept_l1/build_geneva_l1.py`), and the stills in `renders/2026-10-16_userstyle_geneva_rod/` (commit
 ef88ad4). I changed nothing in the design. My scripts are in the session scratchpad `vfy_g5/` and are not committed:
@@ -143,14 +143,14 @@ this imported path.
 | R1 (2-14 mm) | 80.3 % | **80.295 %** (score_14mm.json byte-identical) | local, step 3, scratch copy |
 | R1-aim (2-10 mm) | 49.8 % | **49.797 %** (score.json byte-identical) | same run |
 | R4 (Raise overhead, 14 mm) | 73.8 % | **73.83 %** (min gap 0.2 mm: see correction 3) | same run |
-| R6 | 0.0 mm | not re-run (see below); committed output read: 1337 frames x 7138 pairs incl. dk / dr, max depth 0.0 | - |
+| R6 | 0.0 mm | **0.0 mm at step 3**: 451 frames x 7138 ordered pairs (dk / dr included), 1.64 M samples, 0 above 0.15 mm. The committed step-1 file reads the same (1337 frames, max depth 0.0); I did not re-run step 1 | local, step 3, 1 job, scratch copy, 556 s |
 | R16 | 72.6 % | **72.63 %**, per-pose results identical to the committed file (358 poses; does not close 26.5 %, body 0.8 %, parts 0.0 %) | local, step 4, scratch copy |
 | R7 | FAIL (link 1a) | **FAIL, byte-identical**: 25_D8-02a_link_1a.step valid False, 2 bad faces of 132, not watertight; every other part one valid solid; coverage 59 custom, none missing | local OCC |
 | R17 | NOT RUN (KeyError 'l1') | **reproduced**: the general chain refuses group 'dk' ("no place in the serial chain rule base, l<k>[a-z], cuff"), falls back to the spherical judge, which stops on KeyError 'l1' | local |
 
 The farm batch for R1 / R6 / R16 died after its upload step: the client was gone, and the jobs, if they were
-submitted, are abandoned. I did not resubmit, because of the $0.6 cap. That cost at most about $0.04. R1 and R16 then
-ran locally.
+submitted, are abandoned. I did not resubmit, because of the $0.6 cap. That cost at most about $0.04. R1, R6 (step 3)
+and R16 then ran locally, niced, at most 2 processes.
 
 **Correction 4: H scores nothing.** score_design.py on this design scores 8 groups (base, l1a, l1b, l2, l3, l4, dk, dr).
 The arm-fixed group H contributes **0 samples**, because none of its metal is within 110 mm of GH. The committed
