@@ -51,6 +51,22 @@
 :root[data-theme="dark"] .sx td.mo .mo-b { stroke-opacity: .85; }
 .sx td.mo .mo-m { stroke: var(--color-fg); stroke-width: 1.2; }
 .sx td.mo .mo-j { stroke: var(--color-fg); stroke-width: 2.4; }
+/* tap / click a preview to enlarge it (user 2026-10-16: "pressing on a preview should enlarge it so its easier to see") */
+.sx td.mo svg { cursor: zoom-in; border-radius: 4px; }
+.sx td.mo svg:focus-visible { outline: 2px solid var(--color-fg); outline-offset: 1px; }
+.sx dialog.mo-zoom { position: fixed; inset: 0; margin: auto; height: fit-content; background: var(--cds-surface-popover, var(--color-panel)); color: var(--color-fg); border: 1px solid var(--cds-border, var(--color-border-line)); border-radius: var(--cds-radius, 10px); box-shadow: var(--cds-shadow-popover, none); padding: 14px 16px 16px; width: min(92vw, 560px); max-width: 92vw; max-height: 92vh; overflow: auto; }
+.sx dialog.mo-zoom::backdrop { background: rgba(0, 0, 0, .55); }
+.sx .mo-zoom .zh { display: flex; align-items: flex-start; gap: 12px; }
+.sx .mo-zoom .zh h3 { margin: 0; font-size: 16px; line-height: 1.3; flex: 1; }
+.sx .mo-zoom .zx { background: none; border: 1px solid var(--color-border-line); color: var(--color-fg); border-radius: 999px; width: 30px; height: 30px; font-size: 18px; line-height: 1; cursor: pointer; flex: none; }
+.sx .mo-zoom .zm { margin: 4px 0 10px; font-size: 13px; color: var(--color-fg-muted); }
+.sx .mo-zoom svg { display: block; width: 100%; height: auto; aspect-ratio: 1 / 1; }
+.sx .mo-zoom path { fill: none; vector-effect: non-scaling-stroke; stroke-linecap: round; stroke-linejoin: round; }
+.sx .mo-zoom .mo-b { stroke: var(--color-fg-muted); stroke-opacity: .6; stroke-width: 1.6; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .sx .mo-zoom .mo-b { stroke-opacity: .85; } }
+:root[data-theme="dark"] .sx .mo-zoom .mo-b { stroke-opacity: .85; }
+.sx .mo-zoom .mo-m { stroke: var(--color-fg); stroke-width: 2.6; }
+.sx .mo-zoom .mo-j { stroke: var(--color-fg); stroke-width: 6; }
 /* the sections below the leaderboard hold ~46k chart dots: their rendering is skipped while they are off-screen, so a
    preview tick repaints what is on screen, not every chart (round-2 review: the 10 fps previews kept 22-30 % of the main
    thread busy, Layerize + Paint over the whole page). Placeholder heights ~ their drawn heights at 1280 px. */
@@ -344,6 +360,7 @@ function moSync() {
 function moWatch(svgs) {
   if (MO.io) MO.io.disconnect();
   MO.seen.clear();
+  { const z = document.getElementById('mo-zoom'); if (z && z.open && z._svg) MO.seen.add(z._svg); }   // keep an open zoom animating
   if (!svgs.length) { moSync(); return; }
   if (!('IntersectionObserver' in window)) { svgs.forEach((svg) => MO.seen.add(svg)); moSync(); return; }
   MO.io = MO.io || new IntersectionObserver((entries) => {
@@ -356,16 +373,51 @@ function moWatch(svgs) {
 }
 document.addEventListener('visibilitychange', moSync);
 if (MO.rm) {
-  const onRm = () => { document.querySelectorAll('#board td.mo svg').forEach((svg) => moPaint(svg, moAt())); moSync(); };
+  const onRm = () => { document.querySelectorAll('#board td.mo svg, #mo-zoom svg').forEach((svg) => moPaint(svg, moAt())); moSync(); };
   if (MO.rm.addEventListener) MO.rm.addEventListener('change', onRm); else if (MO.rm.addListener) MO.rm.addListener(onRm);
 }
-function moThumb(id, name) {
+function moThumb(id, name, row) {
   const NS = 'http://www.w3.org/2000/svg', svg = document.createElementNS(NS, 'svg');
-  svg.setAttribute('viewBox', MO.prep.view); svg.setAttribute('role', 'img'); svg.setAttribute('aria-label', `Motion preview: ${name}`);
+  svg.setAttribute('viewBox', MO.prep.view); svg.setAttribute('role', row ? 'button' : 'img'); svg.setAttribute('aria-label', row ? `Enlarge the motion preview: ${name}` : `Motion preview: ${name}`);
   svg.dataset.id = id;
   ['mo-b', 'mo-m', 'mo-j'].forEach((c) => { const p = document.createElementNS(NS, 'path'); p.setAttribute('class', c); svg.appendChild(p); });
   moPaint(svg, moAt());
+  if (row) {
+    svg.setAttribute('tabindex', '0');
+    svg.addEventListener('click', () => moZoom(row));
+    svg.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); moZoom(row); } });
+  }
   return svg;
+}
+// The enlarged preview: a <dialog> (Esc, the x button or a tap on the backdrop closes it), animated by the same timer.
+function moZoom(r) {
+  let dlg = document.getElementById('mo-zoom');
+  if (!dlg) {
+    dlg = document.createElement('dialog'); dlg.id = 'mo-zoom'; dlg.className = 'mo-zoom';
+    const head = document.createElement('div'); head.className = 'zh';
+    const h = document.createElement('h3'), x = document.createElement('button');
+    x.className = 'zx'; x.type = 'button'; x.setAttribute('aria-label', 'Close'); x.textContent = '\u00d7'; x.addEventListener('click', () => dlg.close());
+    head.append(h, x);
+    const meta = document.createElement('p'); meta.className = 'zm';
+    dlg.append(head, meta);
+    dlg.addEventListener('click', (e) => { if (e.target === dlg) dlg.close(); });   // a tap on the backdrop
+    dlg.addEventListener('close', () => { if (dlg._svg) { MO.seen.delete(dlg._svg); dlg._svg.remove(); dlg._svg = null; } moSync(); });
+    (document.querySelector('.sx') || document.body).appendChild(dlg);
+  }
+  if (dlg.open) dlg.close();
+  dlg.querySelector('h3').textContent = r.short || r.id;
+  const bits = [];
+  if (r.score != null) bits.push(`score ${g1(r.score)}`);
+  if (r.reaches != null) bits.push(`reaches ${pct(r.reaches)}`);
+  if (r.follows != null) bits.push(`follows ${pct(r.follows)}`);
+  if (r.close != null) bits.push(`close to skin ${pct(r.close)}`);
+  if (r.complexity != null) bits.push(`simplicity ${cxf(r.complexity)}`);
+  if (r.state) bits.push(r.state);
+  dlg.querySelector('.zm').textContent = bits.join(' \u00b7 ');
+  const svg = moThumb(r.id, r.short || r.id, null); svg.setAttribute('aria-label', `Motion preview, enlarged: ${r.short || r.id}`);
+  dlg._svg = svg; dlg.appendChild(svg);
+  if (dlg.showModal) dlg.showModal(); else dlg.setAttribute('open', '');
+  MO.seen.add(svg); moPaint(svg, moAt()); moSync();
 }
 
 function drawBoard(rows, mo) {
@@ -376,7 +428,7 @@ function drawBoard(rows, mo) {
     const tr = document.createElement('tr'); tr.dataset.key = r.id;
     const td = (c, cls) => { const e = document.createElement('td'); if (cls) e.className = cls; if (c instanceof Node) e.appendChild(c); else e.textContent = c; tr.appendChild(e); return e; };
     const has = mo && mo.byId.has(r.id), cell = td('', 'mo');
-    if (has) { const svg = moThumb(r.id, r.short); cell.appendChild(svg); thumbs.push(svg); }
+    if (has) { const svg = moThumb(r.id, r.short, r); cell.appendChild(svg); thumbs.push(svg); }
     td(r.short); td(g1(r.score), 'num');
     const cx = td('', 'num cx');
     if (r.complexity != null) {
