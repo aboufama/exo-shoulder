@@ -253,7 +253,7 @@ def sweeps():
 SWEEP_CAP = 1500                                     # rows per morphology in the published sweeps dataset (8 MB limit)
 
 
-def thin(rows, cap=SWEEP_CAP):
+def thin(rows, cap=SWEEP_CAP, nbest=300, verbose=True):
     """Published copy of sweeps(): per morphology keep every row that set a running best or the record, its 300 best gaps
     and an even sample of the rest up to `cap` rows (scapular-race alone had 8737). Bests, records and n_configs are
     computed on the full set before this, so no number on the page changes; only the scatter gets sparser."""
@@ -266,12 +266,26 @@ def thin(rows, cap=SWEEP_CAP):
         for i in ix:
             if rows[i]["is_record"] or rows[i]["best_gap"] != prev: must.add(i)
             prev = rows[i]["best_gap"]
-        must.update(sorted((i for i in ix if rows[i]["gap"] is not None), key=lambda i: rows[i]["gap"])[:300])
+        must.update(sorted((i for i in ix if rows[i]["gap"] is not None), key=lambda i: rows[i]["gap"])[:nbest])
         rest = [i for i in ix if i not in must]; n = max(0, cap - len(must))
         if rest and n: must.update(rest[int(j * len(rest) / n)] for j in range(min(n, len(rest))))
         keep.update(must)
-        print(f"sweeps: {mid} thinned {len(ix)} -> {len(must)} rows for the page", file=sys.stderr)
+        if verbose: print(f"sweeps: {mid} thinned {len(ix)} -> {len(must)} rows for the page", file=sys.stderr)
     return [r for i, r in enumerate(rows) if i in keep]
+
+
+SWEEP_BYTES = 7_500_000                              # the page's dataset limit is 8 MB; keep a margin
+
+
+def thin_fit(rows, limit=SWEEP_BYTES):
+    """thin() with the cap lowered step by step until the published JSON fits under the page's dataset limit (10.4 MB at
+    cap 1500 on 2026-10-16 14:10 UTC made the page fail to load the sweeps source)."""
+    for cap, nbest in ((1500, 300), (1200, 250), (1000, 200), (800, 160), (650, 130), (500, 100), (400, 80)):
+        out = thin(rows, cap, nbest, verbose=False)
+        size = len(json.dumps(out, separators=(",", ":"), ensure_ascii=False).encode())
+        if size <= limit: break
+    print(f"sweeps: published {len(out)} of {len(rows)} rows at cap {cap} ({size / 1e6:.2f} MB)", file=sys.stderr)
+    return out
 
 
 def blank(mid):
@@ -710,7 +724,7 @@ def main():
     C = cad([]); E = events(C)
     C = cad(E)                                       # with any rule change the log adds
     R = reqs(C, E)
-    data = dict(morphs=M, sweeps=thin(S), cad=C, gpu_evals=gpu_evals(), gpu_searches=gpu_searches(), reqs=R, events=E, spend=spend(), cov3d=cov3d())
+    data = dict(morphs=M, sweeps=thin_fit(S), cad=C, gpu_evals=gpu_evals(), gpu_searches=gpu_searches(), reqs=R, events=E, spend=spend(), cov3d=cov3d())
     data["motion"] = motion(a.out)                   # raw bytes as thumbs.mjs wrote them (not re-serialised)
     old = {d["id"]: d for d in (load(a.manifest, []) or [])}
     man = []
