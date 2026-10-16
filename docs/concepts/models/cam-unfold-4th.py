@@ -55,7 +55,9 @@ PARAMS.update(az1=95.4669, el1=67.7011, az2=47.212, el2=39.8943, wd=59.8224, wa=
               bk1=35.0, bk2=50.0, sK=-1,               # K on link 2: arc from J2, arc from J3, side of the J2-J3 great circle
               mons=8.0, ws=25.0, cs=25.0,              # stretched lobe: onset margin (deg of th), ramp width (deg of q2), K travel
               monf=8.0, wf=25.0, cf=0.0,               # folded lobe (cf 0 = one-sided cam)
-              gfac=1.0, smax=1.5, cam_r=15.0, rod=2.0, near=1)
+              gfac=1.0, smax=1.5, cam_r=15.0, cam_h=0.0, rod=2.0, near=1)
+# cam_r 15 / cam_h 0 = the FLANGE cam (O30 x 3.5 on link 1 at the skin face); cam_r 10 / cam_h 3 = the CROWN cam (a 3 mm grooved
+# ring on hub 2's crown, the follower lever from link 2a reaching over it: hub 2 stays O20 but stands 15.25 mm)
 XG = np.arange(-60.0, 240.0 + 1e-9, 0.1)                 # x grid (deg)
 
 
@@ -340,6 +342,44 @@ class CModel(_KM0):
         return out
 
 
+class _RC(float):
+    """a hub radius carrying its own (taller) crown"""
+    crown = S.CROWN
+
+
+class _CapT(tuple):
+    cap = True
+
+
+def apply_cap(Mo, name, dh):
+    """hub `name` dh mm taller on the crown side (the CROWN CAM: a 3 mm grooved ring on hub 2's crown, follower lever from
+    link 2a): part-part cylinder, crown samples and skin-contact rings (idempotent, so a frozen copy carries it too)"""
+    if dh <= 0 or name not in getattr(Mo, "cyl", {}): return
+    r = _RC(float(Mo.cyl_r[name])); r.crown = S.CROWN + dh; Mo.cyl_r = dict(Mo.cyl_r); Mo.cyl_r[name] = r
+    base = Mo.sd_cylr
+    def sd_cyl(Pw, cen, ax, r=None):
+        rr = max(Mo.hr) if r is None else r
+        return base(Pw, cen, ax, rr, getattr(rr, "crown", S.CROWN))
+    Mo.sd_cyl = sd_cyl
+    mem, cen, ax = Mo.cyl[name]; e, f = S.frame_of(ax); ang = np.linspace(0, 2 * np.pi, 24, endpoint=False); H = S.CROWN + dh
+    pts = [cen + z * ax + float(r) * (np.cos(ang)[:, None] * e + np.sin(ang)[:, None] * f) for z in np.linspace(0, H, 7)]
+    dd = S.disc(float(r), 4.0); pts.append(cen + H * ax + dd[:, :1] * e + dd[:, 1:] * f); Mo.cyl_surf = dict(Mo.cyl_surf); Mo.cyl_surf[name] = (mem, np.concatenate(pts))
+    ang32 = np.linspace(0, 2 * np.pi, 32, endpoint=False); ring = float(r) * (np.cos(ang32)[:, None] * e + np.sin(ang32)[:, None] * f)
+    extra = [_CapT((mem, cen + z * ax + ring)) for z in np.linspace(S.CROWN, H, 3)]
+    dd2 = S.disc(float(r), 2.0); extra.append(_CapT((mem, cen + H * ax + dd2[:, :1] * e + dd2[:, 1:] * f)))
+    Mo.contact = [c for c in Mo.contact if not isinstance(c, _CapT)] + extra
+
+
+def _run(self, B=None):
+    dh = float(self.p.get("cam_h", 0) or 0)
+    if dh > 0:
+        fit0 = self.fit
+        def fit_cap(): fit0(); apply_cap(self, "hub2", dh)
+        self.fit = fit_cap
+    return _KM0.run(self)
+
+
+CModel.run = _run
 KB.KModel = CModel; KB.KDesign = CDesign                    # KB.frozen() / KB._report build through these globals
 
 
@@ -388,6 +428,40 @@ def frozen(P, nc=110, nw=360):
     return out
 
 
+def redteam(B, M):
+    """the pin knee's red-team listing (poses not taken, closest metal, near-touch, named pose groups), unchanged"""
+    lab = lambda i: f"#{i} {B.kind[i]} {B.clip[i][:22]:22s} plane {B.poses[i]['plane']:6.1f} elev {B.poses[i]['elev']:6.1f} axial {B.poses[i]['axial']:6.1f}"
+    print("-- poses not taken --")
+    for i in [i for i in range(len(B.idx)) if M.why[i]]:
+        print(f"  {M.why[i]:7s} {lab(i)}" + (f" clear {M.clear[i]:.1f} ({M.last_pair.get(i)})" if M.why[i] == "parts" else ""))
+    names = list(M.rigid) + list(M.link_pts); sizes = [len(X) for _, X in M.rigid.values()] + [len(X) for _, X in M.link_pts.values()]
+    cut = np.cumsum([0] + sizes); low = []; taken = lambda i: B.res[i] is not None and float(np.min(B.res[i])) >= 0
+    for i in range(len(B.idx)):
+        if not taken(i): continue
+        d = B.res[i]; j = int(np.argmin(d[:cut[-1]])); low.append((float(d[j]), i, names[int(np.searchsorted(cut, j, side="right") - 1)]))
+    low.sort(); print("-- closest metal over taken poses (scored samples) --")
+    for dd, i, part in low[:6]: print(f"  {dd:5.2f} mm  {part:6s} {lab(i)}")
+    cmin = []
+    for i in range(len(B.idx)):
+        if taken(i):
+            cw = np.concatenate([M.world(m, i, Pc) for m, Pc in M.contact]); cmin.append((float(B.dist(i, cw).min()), i))
+    cmin.sort(); print("-- closest contact-only metal (walls, crowns, tops, edges) --", [(round(a, 2), lab(i)) for a, i in cmin[:4]])
+    allmin = {i: min([x for x, j in cmin if j == i] + [float(np.min(B.res[i]))]) for i in range(len(B.idx)) if taken(i)}
+    for thr in (1.0, 2.0):
+        n = sum(1 for v in allmin.values() if v < thr); rr = B.report()
+        bad = [i for i, v in allmin.items() if v < thr]; sv = {i: B.res[i] for i in bad}
+        for i in bad: B.res[i] = np.r_[B.res[i], -1.0]
+        r2 = B.report(); print(f"near-touch: {n} taken poses with metal < {thr} mm -> gap {r2['gap']:.2f} (from {rr['gap']:.2f})")
+        for i in bad: B.res[i] = sv[i]
+    el = np.array([p["elev"] for p in B.poses]); pl = np.array([p["plane"] for p in B.poses])
+    groups = dict(rest=np.argsort(el)[:5], overhead=np.nonzero(el >= 140)[0], across=np.nonzero((pl >= 100) & (el >= 40))[0],
+                  behind=np.array([i for i in range(len(B.idx)) if "back" in B.clip[i].lower() or (pl[i] < -30 and el[i] > 20)], int))
+    print("-- named pose groups: taken / total, median metal-skin mm, in band 2-14 / 2-10 --")
+    for gname, ii in groups.items():
+        ii = list(ii); tk = [i for i in ii if taken(i)]; dd = np.concatenate([B.res[i] for i in tk]) if tk else np.array([np.nan])
+        print(f"  {gname:9s} {len(tk)}/{len(ii)}  median {float(np.median(dd)):.1f} mm  ib14 {float(((dd >= 2) & (dd <= 14)).mean()):.3f}  ib10 {float(((dd >= 2) & (dd <= 10)).mean()):.3f}  not taken: {[(int(i), M.why[i]) for i in ii if not taken(i)][:10]}")
+
+
 def viz_export(par):
     """geometry of the fitted design (Bench(60,160)) for docs/concepts/viz/concepts/cam-unfold-4th.js"""
     B = CB.Bench(n_clip=60, n_ws=160); r, M = _report(B, par); D = M.D; P = D.p
@@ -432,3 +506,4 @@ if __name__ == "__main__":
     print({k: r[k] for k in ("gap", "reach", "follow", "inband14", "inband10", "contact")}, "plain", r["plain"], "near1", r["gap_near1"],
           "why", r["why"], "knee", r["knee"], "cam", r["cam"], f"{time.time() - t:.0f}s", B.mode)
     print("parts", r.get("parts_ib14"), r.get("parts_pairs"), "min clear", r.get("min_clear_taken"), "res", r.get("res_max"), "oh", r.get("overhead140"))
+    if mode == "redteam": redteam(B, M)

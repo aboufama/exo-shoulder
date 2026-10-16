@@ -1,0 +1,176 @@
+{
+ "design": "H1",
+ "wear_bench": "env",
+ "n_wear": 530,
+ "wear_mode": "exact",
+ "fit_mode": "fast",
+ "exact": true,
+ "fold_margin": 5.0,
+ "o20_only": true,
+ "params": {
+  "rad1": 10.0,
+  "rad2": 10.0,
+  "rad3": 10.0,
+  "az1": 101.1634,
+  "el1": 63.8986,
+  "az2": 30.153,
+  "el2": 47.0108,
+  "wd": 70.3931,
+  "wa": -8.1248,
+  "b3": 0.2842,
+  "lE": 59.5534,
+  "lc": 28.2401,
+  "phiE": -5.8107,
+  "phib": -54.914,
+  "ang_min": 30.4611,
+  "stk": 5.6815
+ },
+ "fit": {
+  "gap": 25.48,
+  "reach": 0.6738,
+  "follow": 1.0,
+  "inband14": 0.884,
+  "inband10": 0.4923,
+  "contact": 0.0126,
+  "mode": "fast"
+ },
+ "model": {
+  "gap": 24.87,
+  "reach": 0.6738,
+  "follow": 1.0,
+  "inband14": 0.8851,
+  "inband10": 0.4951,
+  "contact": 0.0076
+ },
+ "extra": {
+  "h1_verified_checks_bad": 0,
+  "th_margin_min": 5.415,
+  "lt10": 13,
+  "a_deg": [
+   41.02,
+   68.26
+  ]
+ },
+ "bad_removed": 0,
+ "corrected": {
+  "gap": 24.87,
+  "reach": 0.6738,
+  "follow": 1.0,
+  "inband14": 0.8851,
+  "inband10": 0.4951,
+  "contact": 0.0076
+ },
+ "corrected_near": {
+  "gap_near1": 27.69,
+  "near1_poses": 10,
+  "min_mm": 0.299,
+  "low": [
+   {
+    "mm": 0.299,
+    "kind": "ws",
+    "plane": 35.79658508300781,
+    "elev": 158.9941864013672,
+    "axial": -71.12747955322266
+   },
+   {
+    "mm": 0.573,
+    "kind": "clip",
+    "plane": 30.0,
+    "elev": 150.0,
+    "axial": -60.0
+   },
+   {
+    "mm": 0.573,
+    "kind": "clip",
+    "plane": 30.0,
+    "elev": 150.0,
+    "axial": -60.0
+   },
+   {
+    "mm": 0.573,
+    "kind": "clip",
+    "plane": 30.0,
+    "elev": 150.0,
+    "axial": -60.0
+   },
+   {
+    "mm": 0.624,
+    "kind": "clip",
+    "plane": 30.0,
+    "elev": 149.40573120117188,
+    "axial": -59.878719329833984
+   }
+  ]
+ },
+ "connected": null,
+ "final": {
+  "gap": 24.87,
+  "reach": 0.6738,
+  "follow": 1.0,
+  "inband14": 0.8851,
+  "inband10": 0.4951,
+  "contact": 0.0076,
+  "gap_near1": 27.69,
+  "near1_poses": 10,
+  "min_mm": 0.299,
+  "low": [
+   {
+    "mm": 0.299,
+    "kind": "ws",
+    "plane": 35.79658508300781,
+    "elev": 158.9941864013672,
+    "axial": -71.12747955322266
+   },
+   {
+    "mm": 0.573,
+    "kind": "clip",
+    "plane": 30.0,
+    "elev": 150.0,
+    "axial": -60.0
+   },
+   {
+    "mm": 0.573,
+    "kind": "clip",
+    "plane": 30.0,
+    "elev": 150.0,
+    "axial": -60.0
+   },
+   {
+    "mm": 0.573,
+    "kind": "clip",
+    "plane": 30.0,
+    "elev": 150.0,
+    "axial": -60.0
+   },
+   {
+    "mm": 0.624,
+    "kind": "clip",
+    "plane": 30.0,
+    "elev": 149.40573120117188,
+    "axial": -59.878719329833984
+   }
+  ],
+  "score": 90.96
+ },
+ "overhead140_ws": {
+  "ws": 30,
+  "taken": 7
+ },
+ "why": {
+  "fold": 112,
+  "slide": 16,
+  "flip": 0,
+  "closure": 0,
+  "skin": 0,
+  "parts": 6,
+  "contact": 3
+ },
+ "secs": 130.1,
+ "env_claim": {
+  "fit": "env",
+  "wear": "env",
+  "fit_key": "env-72d21f5aa2e5-env",
+  "fit_mode": "fast"
+ },
+ "fit_protocol": "env"
+}

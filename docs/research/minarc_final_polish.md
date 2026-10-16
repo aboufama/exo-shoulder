@@ -92,11 +92,118 @@ fill's node law) per pose set:
 
 ## 2. Does `env` predict held out better than Bench(110,360)?
 
-__PREDICT__
+Re-scored through the judge's harness: fit FAST on the protocol's fit bench, worn EXACT, frozen shape, continuity on.
+BDp carries the judge's built-stop pricing (stops 5.5, stop B at dK 34.47, CB_FOLD_MARGIN 5.5). H1 is unpriced at
+margin 5, as in the judge's ruling. Outputs: `farm/rescore_*`.
+
+| config | protocol | search-bench number (gap / near-touch) | held out, 1154 poses (gap / near-touch) | bench -> held drop |
+|---|---|---|---|---|
+| BDp | fit Bench(60,160) -> wear Bench(110,360) (the verified protocol; judge) | 19.54 / 26.44 | 24.18 / 28.86 | **+4.64** |
+| BDp | fit env -> wear env | 22.32 / 24.75 | 23.68 / 26.87 | **+1.36** |
+| H1 | fit Bench(60,160) -> wear Bench(110,360) (judge) | 27.20 / 31.75 | 31.39 / 34.66 | **+4.19** |
+| H1 | fit env -> wear env | 24.87 / 27.69 | 30.04 / 32.83 | **+5.17** |
+
+**Verdict: not a reliable improvement as a predictor.**
+* BDp: env predicts its held-out number within 1.4 points (Bench(110,360): 4.6).
+* H1: env is off by 5.2 points (Bench(110,360): 4.2). Its reach on env is 0.674 vs 0.627 held out, which matches its
+  kinematic closure: 0.691 on env vs 0.658 held out.
+* Mean absolute error: env 3.3, Bench(110,360) 4.4. With two configs and a 2-point sampling error per 420-pose draw,
+  this difference is noise.
+* The ranking is compressed. The BDp - H1 difference is 6.4 points held out (fit env), 2.6 on env and 7.7 on
+  Bench(110,360).
+
+The reach term carries the drop: env over held-out reach is +1.96 points for BDp and +4.67 for H1. In-band and follow
+agree within 0.3 points. Contact moves the other way for BDp (-0.9). That is the ~2-point binomial noise of a 420-pose
+reach share, plus the held-out set's own skew (see the table above).
+
+**Measurement change, not a design change.** Fitting the shape on env instead of Bench(60,160) lowers the held-out
+gap of both configs:
+* BDp 24.18 -> 23.68 (-0.50);
+* H1 31.39 -> 30.04 (-1.35).
+
+A shape fitted on more, representative workspace poses travels better. The claim below compares every config,
+BDp included, on the same protocol.
+
+**Rules on the re-score.**
+* Own-state J1-J3 margin: min 5.505 (env) / 5.525 (held), 0 poses under the rule.
+* Continuity: grid 1024 / 1024 nodes connected, 0 islands, 898 / 898 edges. The fresh env poses joined the
+  connected grid by edges for 305 / 420; the other 115 are not closed nodes. 0 taken poses dropped.
+* Overhead workspace taken: 6 / 30 on env, 17 / 71 held out.
 
 ## 3. The polish
 
-__POLISH__
+**Objective** (`tools/env_polish.py`, lower is better; the crossfit tool's minarc plug-in and CMA driver, patched to
+this objective):
+1. The plug-in's `full(p)`: O20 hubs, stops smhi / smlo >= 5.0 (the user's floor) as variables, knee window ang_min
+   >= BDp's 24.95. docs/research/knee_window shows the window at H1's 30.46 changes nothing for BDp, so BDp's bound
+   holds.
+2. **Priced like the judge.**
+   * Each J2 stop is drawn s +0.5 / -0. Its worst built case s + 0.5 is read with the all-state rule at 5.5
+     (CB_FOLD_MARGIN 5.5), as in the judge's m5p5 runs.
+   * K's stop B is drawn where the 5-deg rule cuts the stretched branch: a1max' = min(a1max, a1max at the cut). The cut
+     comes from the buildability lens' equilibrium scan, at margin 5 with the nominal stops.
+   * For BDp this reproduces the judge's priced parameters: cut at th 108.5, dK 34.47, a1max 54.748 (judge 54.748).
+3. Fit FAST on env, in-sample. The cross-fit study measured in-fold = out-of-fold, so on a representative sample the
+   in-sample score is the right one.
+4. **Continuity.** The crossfit tool's vectorised flood fill on the 1432-pose grid (the verifier's law). Each fresh pose
+   is joined to the connected grid by a 2-deg slerp edge to one of its 6 nearest connected grid nodes. The same law
+   applies: every sample closes, no joint step > 10 deg, knee branch constant and equal to the seeds'.
+5. The claim harness's knock-outs. The score is the near-touch gap (metal < 1 mm = contact).
+6. **Claim-fit guard.** The same config fitted on Bench(60,160) (the verified protocol's fit) is scored in-sample;
+   obj += max(0, g60_near - env_near - 3). It fired on 27 of the 787 rows; 10 more closed no pose at all (objective 400).
+7. **Logged, not optimised.** The env-fitted shape worn FROZEN on envsel: the pick-selection number.
+
+**Run.**
+* Farm: 3 CMA starts x 8 processes, popsize 8, sigma 0.4, patience 10 generations, budget 1500 s, at most 640
+  evaluations.
+* Starts:
+  * BDp;
+  * BDp with the F2 seats + knee (crossfit refs.json; ang_min raised to 24.95);
+  * BDp with the F7 seats + knee.
+* 787 evaluations, 0 errors, about 16-27 s per generation of 8.
+
+| start | evals | stop | x0 objective (env near) / envsel near | best objective | its envsel near / plain | best envsel near among the start's top 15 |
+|---|---|---|---|---|---|---|
+| BDp | 145 | no gain > 0.02 in 10 generations (sigma 0.31) | 24.98 / 29.13 | 20.83 (g8-4) | 24.52 / 23.43 | 23.93 (g15-7) |
+| F2 | 337 | same (sigma 0.13) | 26.24 / 28.62 | 21.83 (g32-6) | 27.31 / 24.57 | 27.31 |
+| F7 | 305 | same (sigma 0.21) | 24.14 / 26.69 | **18.02** (g28-4) | 24.76 / 21.57 | 23.58 (g35-6) |
+
+**Convergence gate.** Every start stopped on the patience rule, well inside its budget, but sigma did not collapse
+(0.13-0.31). The best value of the last third of each run vs the first two thirds:
+* BDp: +0.00;
+* F2: -0.38;
+* F7: -1.05.
+
+The three starts end in different basins (18.0 / 20.8 / 21.8). This is a multi-start local optimum, not a global
+one. Sampling noise also blunts the objective: the env in-sample gain over BDp is 6.96 for the F7 best, but its gain on
+the independent envsel draw is only 4.37 (near-touch).
+
+**Picks.** The candidates are the best 15 rows by the objective of each start. They are ranked by the envsel
+near-touch number, and the top 3 that differ by >= 1 CMA step in some parameter are kept
+(`docs/research/minarc_final_polish/picks/`):
+
+| pick | row | objective (env near) | envsel near / plain | Bench(60,160) in-sample near | J1 seat (anterior, up) |
+|---|---|---|---|---|---|
+| BDp | - | 24.98 | 29.13 / 24.29 | 15.29 | 0.036, 0.925 |
+| pick1 | F7-g35-6 | 18.93 | 23.58 / 21.98 | 15.94 | 0.076, 0.926 |
+| pick2 | BDp-g15-7 | 22.25 | 23.93 / 22.85 | 14.47 | 0.002, 0.931 |
+| pick3 | BDp-g9-5 | 22.51 | 24.04 / 22.40 | 13.44 | 0.016, 0.933 |
+
+(H1's J1 seat: anterior 0.085, accepted. All picks sit on the acromion top.)
+
+**What moved.** The stops as variables went to 5.1-6.9 deg. Smaller common moves: J2 seat az2 +1.5..6, hub 3 ->
+pin a lE +2..9 mm, knee window ang_min 25.1-26.1.
+
+| key | BDp | pick1 | pick2 | pick3 |
+|---|---|---|---|---|
+| az1 / el1 | 95.47 / 67.70 | 101.64 / 67.86 | 90.34 / 68.59 | 92.57 / 68.98 |
+| az2 / el2 | 47.21 / 39.89 | 48.69 / 42.04 | 49.58 / 40.23 | 53.23 / 42.24 |
+| wd / wa / b3 | 59.82 / -9.03 / 0.458 | 66.60 / -9.63 / 0.335 | 58.91 / -6.66 / 0.416 | 57.96 / -8.15 / 0.373 |
+| lE / lc | 64.66 / 30.39 | 73.87 / 28.70 | 67.27 / 31.55 | 66.43 / 28.55 |
+| phiE / phib | -1.54 / -69.76 | 1.36 / -53.15 | 5.46 / -64.54 | -1.26 / -64.57 |
+| ang_min / stk | 24.95 / 5.27 | 26.15 / 5.79 | 26.01 / 5.23 | 25.10 / 5.47 |
+| bk1 / bk2 / a1max | 30.16 / 47.01 / 66.16 | 33.81 / 47.89 / 68.01 | 30.55 / 48.62 / 63.72 | 28.50 / 44.46 / 64.80 |
+| smhi / smlo (nominal; built +0.5) | 5.0 / 5.0 | 6.88 / 6.83 | 5.77 / 5.10 | 6.04 / 5.62 |
 
 ## 4. The claim
 
