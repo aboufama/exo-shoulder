@@ -1,0 +1,590 @@
+{
+ "params": {
+  "o1a": 0.0,
+  "o1c": 0.0,
+  "o2a": 0.0,
+  "o2c": 0.0,
+  "o3a": 0.0,
+  "o3c": 0.0,
+  "S_a": 15.0,
+  "S_t": 15.0,
+  "R_r": 0.5,
+  "drop": 1,
+  "S_auto": 0,
+  "jam_contact": 1,
+  "remote": 0,
+  "neck": 13.0,
+  "ramp": 1,
+  "slides": 1,
+  "vfix": 1,
+  "branch": 0,
+  "flip3": 0,
+  "az1": 96.9222,
+  "el1": 66.1536,
+  "b1": 0.0,
+  "az2": 12.9801,
+  "el2": 54.6982,
+  "b2": 0.0,
+  "wd": 75.8669,
+  "wa": -13.9683,
+  "b3": 0.2391,
+  "S_max": 25.0,
+  "centre": 1,
+  "R_tol": 0.5,
+  "inv": 0,
+  "lE": 30.0,
+  "lc": 25.0,
+  "phiE": 0.0,
+  "phib": -90.0,
+  "stk": 5.0,
+  "ang_min": 30.0,
+  "r1t": 0.8048,
+  "r1d": -30.5908,
+  "r2t": 0.549,
+  "r2d": -1.2849,
+  "rc": 10.0,
+  "tp": 2.25
+ },
+ "fast60": {
+  "task": "fast60",
+  "flat": false,
+  "mode": "fast",
+  "model": {
+   "gap": 23.0,
+   "reach": 0.6875,
+   "follow": 0.9667,
+   "inband14": 0.9011,
+   "inband10": 0.5167,
+   "contact": 0.0175
+  },
+  "corrected": {
+   "gap": 23.0,
+   "reach": 0.6875,
+   "follow": 0.9667,
+   "inband14": 0.9011,
+   "inband10": 0.5167,
+   "contact": 0.0175,
+   "gap_fixed_n": 23.62,
+   "inband14_fixed_n": 0.8938
+  },
+  "why": {
+   "fold": 49,
+   "slide": 0,
+   "flip": 0,
+   "closure": 0,
+   "skin": 3,
+   "parts": 0,
+   "contact": 0
+  },
+  "parts_pairs": {},
+  "extra_bad": 0,
+  "near_min": 0.22,
+  "gap_near1": 29.06,
+  "gap_near2": 45.9,
+  "overhead140": {
+   "ws": 12,
+   "reach": 0.1667,
+   "clip": 5,
+   "follow": 1.0,
+   "inband14": 0.9402,
+   "inband10": 0.6467,
+   "why_not": {
+    "fold": 10,
+    "slide": 0,
+    "flip": 0,
+    "closure": 0,
+    "skin": 0,
+    "parts": 0,
+    "contact": 0
+   }
+  }
+ },
+ "fast60_flat": {
+  "task": "fast60",
+  "flat": true,
+  "mode": "fast",
+  "model": {
+   "gap": 23.48,
+   "reach": 0.6875,
+   "follow": 0.9667,
+   "inband14": 0.8952,
+   "inband10": 0.4974,
+   "contact": 0.0175
+  },
+  "corrected": {
+   "gap": 23.48,
+   "reach": 0.6875,
+   "follow": 0.9667,
+   "inband14": 0.8952,
+   "inband10": 0.4974,
+   "contact": 0.0175,
+   "gap_fixed_n": 24.25,
+   "inband14_fixed_n": 0.8875
+  },
+  "why": {
+   "fold": 49,
+   "slide": 0,
+   "flip": 0,
+   "closure": 0,
+   "skin": 3,
+   "parts": 0,
+   "contact": 0
+  },
+  "parts_pairs": {},
+  "extra_bad": 0,
+  "near_min": 0.26,
+  "gap_near1": 28.32,
+  "gap_near2": 44.7,
+  "overhead140": {
+   "ws": 12,
+   "reach": 0.1667,
+   "clip": 5,
+   "follow": 1.0,
+   "inband14": 0.9311,
+   "inband10": 0.6421,
+   "why_not": {
+    "fold": 10,
+    "slide": 0,
+    "flip": 0,
+    "closure": 0,
+    "skin": 0,
+    "parts": 0,
+    "contact": 0
+   }
+  }
+ },
+ "exact60_refit": {
+  "task": "fast60",
+  "flat": false,
+  "mode": "exact",
+  "model": {
+   "gap": 24.85,
+   "reach": 0.6813,
+   "follow": 0.9667,
+   "inband14": 0.8936,
+   "inband10": 0.5195,
+   "contact": 0.0234
+  },
+  "corrected": {
+   "gap": 24.85,
+   "reach": 0.6813,
+   "follow": 0.9667,
+   "inband14": 0.8936,
+   "inband10": 0.5195,
+   "contact": 0.0234,
+   "gap_fixed_n": 25.67,
+   "inband14_fixed_n": 0.8854
+  },
+  "why": {
+   "fold": 49,
+   "slide": 0,
+   "flip": 0,
+   "closure": 0,
+   "skin": 4,
+   "parts": 0,
+   "contact": 0
+  },
+  "parts_pairs": {},
+  "extra_bad": 0,
+  "near_min": 0.33,
+  "gap_near1": 30.9,
+  "gap_near2": 40.52,
+  "overhead140": {
+   "ws": 12,
+   "reach": 0.1667,
+   "clip": 5,
+   "follow": 1.0,
+   "inband14": 0.9298,
+   "inband10": 0.6212,
+   "why_not": {
+    "fold": 10,
+    "slide": 0,
+    "flip": 0,
+    "closure": 0,
+    "skin": 0,
+    "parts": 0,
+    "contact": 0
+   }
+  }
+ },
+ "big_frozen_exact": {
+  "task": "big",
+  "flat": false,
+  "mode": "exact",
+  "model": {
+   "gap": 31.52,
+   "reach": 0.6,
+   "follow": 0.9727,
+   "inband14": 0.9016,
+   "inband10": 0.5214,
+   "contact": 0.0152
+  },
+  "corrected": {
+   "gap": 31.52,
+   "reach": 0.6,
+   "follow": 0.9727,
+   "inband14": 0.9016,
+   "inband10": 0.5214,
+   "contact": 0.0152,
+   "gap_fixed_n": 32.09,
+   "inband14_fixed_n": 0.8943
+  },
+  "why": {
+   "fold": 139,
+   "slide": 0,
+   "flip": 0,
+   "closure": 0,
+   "skin": 0,
+   "parts": 3,
+   "contact": 5
+  },
+  "parts_pairs": {
+   "E-L2": 3
+  },
+  "extra_bad": 0,
+  "near_min": 0.12,
+  "gap_near1": 35.02,
+  "gap_near2": 65.38,
+  "overhead140": {
+   "ws": 28,
+   "reach": 0.25,
+   "clip": 10,
+   "follow": 1.0,
+   "inband14": 0.9428,
+   "inband10": 0.6582,
+   "why_not": {
+    "fold": 19,
+    "slide": 0,
+    "flip": 0,
+    "closure": 0,
+    "skin": 0,
+    "parts": 1,
+    "contact": 1
+   }
+  }
+ },
+ "big_frozen_exact_flat": {
+  "task": "big",
+  "flat": true,
+  "mode": "exact",
+  "model": {
+   "gap": 31.38,
+   "reach": 0.6028,
+   "follow": 0.9727,
+   "inband14": 0.8956,
+   "inband10": 0.5018,
+   "contact": 0.0122
+  },
+  "corrected": {
+   "gap": 31.38,
+   "reach": 0.6028,
+   "follow": 0.9727,
+   "inband14": 0.8956,
+   "inband10": 0.5018,
+   "contact": 0.0122,
+   "gap_fixed_n": 32.16,
+   "inband14_fixed_n": 0.8878
+  },
+  "why": {
+   "fold": 139,
+   "slide": 0,
+   "flip": 0,
+   "closure": 0,
+   "skin": 0,
+   "parts": 3,
+   "contact": 4
+  },
+  "parts_pairs": {
+   "E-L2": 3
+  },
+  "extra_bad": 0,
+  "near_min": 0.12,
+  "gap_near1": 34.29,
+  "gap_near2": 64.91,
+  "overhead140": {
+   "ws": 28,
+   "reach": 0.25,
+   "clip": 10,
+   "follow": 1.0,
+   "inband14": 0.9354,
+   "inband10": 0.6535,
+   "why_not": {
+    "fold": 19,
+    "slide": 0,
+    "flip": 0,
+    "closure": 0,
+    "skin": 0,
+    "parts": 1,
+    "contact": 1
+   }
+  }
+ },
+ "champion_big_frozen_exact": {
+  "model": {
+   "gap": 66.97,
+   "reach": 0.7,
+   "follow": 0.9182,
+   "inband14": 0.5752,
+   "inband10": 0.3557,
+   "contact": 0.1131,
+   "why": {
+    "fold": 46,
+    "slide": 0,
+    "flip": 0,
+    "closure": 0,
+    "skin": 0,
+    "parts": 26,
+    "contact": 45
+   },
+   "parts_pairs": {
+    "L1-L2": 26
+   },
+   "parts_ib14": {
+    "hub1": [
+     1.0,
+     6.2,
+     80
+    ],
+    "hub2": [
+     0.0,
+     32.6,
+     80
+    ],
+    "hub3": [
+     0.315,
+     15.8,
+     80
+    ],
+    "neck": [
+     0.63,
+     12.3,
+     48
+    ],
+    "L1": [
+     0.694,
+     11.8,
+     168
+    ],
+    "L2": [
+     0.64,
+     11.7,
+     160
+    ]
+   },
+   "f": [
+    53.2,
+    91.8,
+    69.7
+   ],
+   "res_max": 0.0151,
+   "min_clear_taken": 1.2,
+   "riser_h": null,
+   "jam_fixed": 0
+  },
+  "fit": {
+   "gap": 63.26,
+   "reach": 0.7438,
+   "follow": 0.9167,
+   "inband14": 0.5737,
+   "inband10": 0.3544,
+   "contact": 0.1168,
+   "mode": "fast"
+  },
+  "code": "docs/concepts/verify/offset-skin-normal-3r.py champbig_frozen"
+ },
+ "screw": {
+  "poses": 323,
+  "mobility": [
+   3
+  ],
+  "chain_rank": [
+   5
+  ],
+  "chain_sigma_min_rel": {
+   "min": 0.1142,
+   "p5": 0.1372,
+   "median": 0.165
+  },
+  "sixth_sigma_rel_max": 1.47e-09,
+  "note": "rank(chain) 5 = no undetermined passive coordinate; mobility 3 = the loop follows the arm; the 6th singular value of all 8 screws ~0 = one redundant constraint (overconstrained by 1: J1, J2 through GH, pins parallel to J3)"
+ },
+ "route": {
+  "L1": {
+   "W": [
+    -0.3478,
+    0.9126,
+    -0.2151
+   ],
+   "turn_deg": 114.4,
+   "rc": 8.9,
+   "length": 63.2,
+   "n_samples": 84,
+   "n_great_circle": 36,
+   "inner_edge_r_mm": 4.9
+  },
+  "L2": {
+   "W": [
+    -0.5272,
+    0.2777,
+    0.8031
+   ],
+   "turn_deg": 3.1,
+   "rc": 10.0,
+   "length": 94.0,
+   "n_samples": 149,
+   "n_great_circle": 146,
+   "inner_edge_r_mm": 6.0
+  }
+ },
+ "bank": {
+  "L1": {
+   "stations": 21,
+   "dH_max_mm": 1.1,
+   "dH_p95_mm": 1.08,
+   "dH_mean_mm": 0.67,
+   "bank_max_deg": 10.4,
+   "bank_p95_deg": 10.2
+  },
+  "L2": {
+   "stations": 37,
+   "dH_max_mm": 4.1,
+   "dH_p95_mm": 2.8,
+   "dH_mean_mm": 1.45,
+   "bank_max_deg": 34.3,
+   "bank_p95_deg": 24.8
+  }
+ },
+ "extra": {
+  "axis_sn_vs_u3_deg": 0.0001,
+  "closure_max": {
+   "hub3c": 0.0,
+   "rot3_axis": 0.0152,
+   "pin_a": 0.0,
+   "pin_b": 0.0,
+   "knee_rot_axis": 0.0215,
+   "arm_rot": 0.0
+  },
+  "closure_bad_poses": 0,
+  "res_deg_max_taken": 0.0151,
+  "knee_vs_hub3_upper_low": [
+   {
+    "mm": 13.5,
+    "i": 84,
+    "kind": "clip",
+    "plane": 140.7235107421875,
+    "elev": 57.64652633666992,
+    "axial": -53.06380081176758
+   },
+   {
+    "mm": 13.5,
+    "i": 85,
+    "kind": "clip",
+    "plane": 140.11631774902344,
+    "elev": 59.28593444824219,
+    "axial": -50.74434280395508
+   },
+   {
+    "mm": 13.5,
+    "i": 89,
+    "kind": "clip",
+    "plane": 140.0,
+    "elev": 59.599998474121094,
+    "axial": -50.29999923706055
+   },
+   {
+    "mm": 13.5,
+    "i": 389,
+    "kind": "ws",
+    "plane": 105.0,
+    "elev": 75.0,
+    "axial": -15.0
+   },
+   {
+    "mm": 13.5,
+    "i": 31,
+    "kind": "clip",
+    "plane": 93.01656341552734,
+    "elev": 59.100162506103516,
+    "axial": -52.80157470703125
+   }
+  ],
+  "knee_vs_hub3_upper_bad": 0,
+  "boss_low": [
+   {
+    "mm": 12.3,
+    "pair": "boss-L2",
+    "i": 201,
+    "kind": "ws",
+    "plane": 0.0,
+    "elev": 75.0,
+    "axial": 90.0
+   },
+   {
+    "mm": 12.48,
+    "pair": "boss-L2",
+    "i": 228,
+    "kind": "ws",
+    "plane": 15.0,
+    "elev": 75.0,
+    "axial": 75.0
+   },
+   {
+    "mm": 13.25,
+    "pair": "boss-L2",
+    "i": 163,
+    "kind": "ws",
+    "plane": -30.0,
+    "elev": 60.0,
+    "axial": 75.0
+   },
+   {
+    "mm": 13.37,
+    "pair": "boss-L2",
+    "i": 177,
+    "kind": "ws",
+    "plane": -15.0,
+    "elev": 60.0,
+    "axial": 75.0
+   },
+   {
+    "mm": 13.42,
+    "pair": "boss-L2",
+    "i": 149,
+    "kind": "ws",
+    "plane": -45.0,
+    "elev": 60.0,
+    "axial": 75.0
+   }
+  ],
+  "boss_bad": 0,
+  "spans_deg": {
+   "q3": 175.1,
+   "pin_a": 35.4,
+   "pin_b": 29.5
+  },
+  "pad": {
+   "home_dist_from_GH": 40.4,
+   "tr": 79.17,
+   "c3_dist_from_GH": 7.9,
+   "pad_minus_c3": [
+    23.9,
+    -24.1,
+    0.0
+   ]
+  }
+ },
+ "connectivity": {
+  "fast60": {
+   "taken_ws": 110,
+   "connected": 110,
+   "isolated": 0
+  },
+  "big_fast_grid": {
+   "taken_ws": 216,
+   "connected": 216,
+   "isolated": 0,
+   "overhead_ws_connected": 7
+  },
+  "rule": "arm slerp path to a taken neighbour <= 45 deg, 2-deg steps: IK closes, knee in [30,150], radial |s| <= 0.5, joint steps <= 25 deg"
+ }
+}

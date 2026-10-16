@@ -193,3 +193,87 @@ first CMA round (27 tries) ran on the exact path (missing cache link) and is log
 * Hand A2's J3 seat to the pin-knee track (a pin-knee freedom), and the bent link 1 (t 0.80, d -30.6, arc r 10) to the
   L1 CAD as a bent bar if the verifier confirms >= 1 point at fixed part sizes.
 * The fold is the only lever left on this family: J2 metal off the J2 ray (arc guide / carriage families).
+
+## Verification (k1284, CMA A2) - adversarial verifier, 2026-10-16
+
+**Verdict: verified, not refuted, not 90+ on the large bench.** The claim reproduces exactly on its own bench and on
+the large bench. The verifier checks remove no pose, and no hard rule is broken. **v_gap 31.52** (score 88.54) on
+Bench(110,360), exact path, shape frozen from the Bench(60,160) fast fit. The champion scores 66.97 on the same bench
+through the same checks. That number was re-run on the farm with `docs/concepts/verify/offset-skin-normal-3r.py
+champbig_frozen` and was identical; the hub crowns, strap tops and adjacent pairs it checks are all in this model too.
+Context: the pin knee k4598, verified since this claim was written, scores 30.35 on the same bench, so 31.52 is no
+longer the best large-bench number.
+Script: `docs/concepts/verify/raglan-knee-3r.py`. It runs this model's private copy plus every check of the pin-knee
+verifier, and adds the checks below. Results: `docs/concepts/verify/raglan-knee-3r.results.json` and
+`raglan-knee-3r_big_frozen.json`.
+
+| run | gap | reach | follow | in-band 2-14 | 2-10 | contact | fixed part sizes |
+|---|---|---|---|---|---|---|---|
+| claim, Bench(60,160) fast (reproduced exactly; sweep k1284 = row = doc) | 23.00 | 0.688 | 0.967 | 0.901 | 0.517 | 0.018 | 23.62 |
+| same, flat-bar links (see below) | 23.48 | 0.688 | 0.967 | 0.895 | 0.497 | 0.018 | 24.25 |
+| Bench(60,160), **exact** path (CB_EXACT=1), refit | 24.85 | 0.681 | 0.967 | 0.894 | 0.520 | 0.023 | 25.67 |
+| **Bench(110,360) exact, frozen, all checks (= v_*)** | **31.52** | 0.600 | 0.973 | 0.902 | 0.521 | 0.015 | 32.09 |
+| same, flat-bar links | 31.38 | 0.603 | 0.973 | 0.896 | 0.502 | 0.012 | 32.16 |
+| champion (seed VModel slides 0, r20 s1414 #4), same bench, frozen | 66.97 | 0.700 | 0.918 | 0.575 | 0.356 | 0.113 | - |
+
+What the verifier re-measured:
+* **DOF (screw rank).** At each of the 323 taken big-bench poses the verifier stacks 8 screws in the world frame: the
+  5 chain screws (J1, J2, J3, pin a, pin b) and the arm's 3 rotations about GH. Results:
+  * The chain has rank 5 everywhere, so with the arm held there is no undetermined passive coordinate.
+  * The loop's mobility is 3 everywhere, so it follows every arm motion.
+  * The smallest chain singular value is 0.114 of the largest: no pose taken is near a fold.
+  * The sixth singular value of all 8 screws is 1.5e-9. The loop is overconstrained by exactly one constraint, because
+    J1 and J2 pass through GH and the pins are parallel to J3. The real GH translation and the axis misalignments
+    therefore load the joints along the J3 axis, which pushes the cuff away from or into the skin. Here 0 passive
+    translations means the cuff liner's compliance must take that radial error (stated as such).
+* **Real components.** J1-J3 are MR117-2RS pairs in O20 hubs, modelled with the 12.25 mm stack (hardware_catalogue
+  MR117-2RS). The knee is IGLIDUR-PIN: the catalogue gives about 4.5-5 mm for two 2 mm plates plus a washer, and the
+  model uses a 5.0 mm stack with 2 x 2.25 mm plates plus 0.5 mm running clearance. The knee has O12 bosses and pad and a
+  10 mm wide knee plate, lc 25. The links are 8 x 3 bars. There are no slides, gears, pulleys or cables.
+* **Closure (independent, 3D).** Hub-3 centre 0.000 mm, J3 axis 0.015 deg, pin a and pin b 0.000 mm, knee axes
+  0.022 deg; no pose fails. The spans over the taken poses are J3 175 deg, pin a 35 deg and pin b 30 deg. The knee
+  angle stays at 72-121 deg, inside its 30-150 deg window.
+* **Part-part clearance.** None of these checks fail a pose:
+  * The knee link vs hub 3 above its plate: min 13.5 mm.
+  * The E boss vs hubs 1 and 2, link 1 and link 2: min 12.3 mm (boss to link 2).
+  * The model's own pairs (all non-adjacent at 1 mm and the adjacent pairs at 0.15 mm) take 3 poses, all as E / link 2
+    jams at J3.
+* **Branch continuity across the workspace (new check).** The verifier asks whether every taken workspace pose joins
+  the rest pose through taken poses. Each step is a slerp of the arm of 45 deg or less, in 2-deg steps, with these
+  conditions:
+  * the IK closes;
+  * the knee stays in its window;
+  * the radial drift stays within 0.5 mm;
+  * no joint steps more than 25 deg.
+
+  216 of 216 workspace poses join on the big bench (fast grid) and 110 of 110 on Bench(60,160). The fold does not cut
+  islands out of the reach the score counts.
+* **The routed links as bars (new check).**
+  * **Planform.** Link 1 turns 114.4 deg. Because the tangent length is clipped at 45 % of the leg, the arc radius is
+    8.9 mm, not the 10 mm claimed, so the inner edge radius is 4.9 mm. Link 1 is 63.2 mm long against 36 samples on
+    the great circle. That is a V-shaped planform, cut from 3 mm plate and then bent out of plane: buildable. Link 2 is
+    effectively straight (3.1 deg).
+  * **Banking.** The model fits each of the 4 sample rows to the skin separately. As a result, link 2 is up to 4.1 mm
+    higher on one edge than the other (34 deg bank, p95 25 deg) and link 1 up to 1.1 mm (10 deg). A bent bar with a
+    constant section cannot do that.
+  * **Flat-bar test.** Every station was placed at the highest of its rows, and the result scored on both benches. The
+    gain holds: 23.48 fast and 31.38 big (one contact pose fewer). The bank is a modelling liberty the score does not
+    depend on. The champion and the osn leader use the same per-row fit; the flat-bar rule should become the model
+    default.
+* **Near touch.** Lowest metal 0.12 mm (workspace plane 45, elevation 75, axial -105); next 0.19 mm and 0.21 mm.
+  * Metal under 1 mm counted as contact: 35.02 (6 poses).
+  * Metal under 2 mm counted as contact: 65.38 (49 poses). Most of those are hub crowns and strap tops at 1-2 mm.
+* **Overhead (elevation >= 140).** Reach 0.25 (7 of 28 workspace poses; 19 fold, 1 E / link 2 jam, 1 contact), clips
+  followed 10 of 10, in-band 0.943 (2-14) and 0.658 (2-10).
+* **The number that is optimistic.**
+  * **Dilution: 0.57.** That is 32.09 at the great-circle sample count (link 1: 84 samples counted as 36).
+  * **Fast grid vs exact distances.** On the same Bench(60,160) poses the gap moves from 23.00 to 24.85: the fit on
+    exact distances loses one more pose to the fold and adds a little contact.
+  * **Small to large bench: +8.5.** All of it is reach (0.688 -> 0.600), the J2 fold band on the denser workspace.
+    Neither routes nor checks touch it.
+
+**Limiter, re-measured.** The J2 fold takes 139 of 470 big-bench poses. 90+ (gap <= 27.5) needs 4.0 points, i.e. reach
++0.04 (0.600 -> 0.640, about 15 of the 139 fold poses), and gap 0 needs +0.30. In-band (0.902) and follow (0.973)
+already pass. The next
+lever is the fold (the posterior-J1 / far-end hub lines that are fold-free, with the skin problem solved), not the
+links.

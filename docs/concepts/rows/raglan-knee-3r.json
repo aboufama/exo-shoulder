@@ -6,7 +6,7 @@
  "active_dof": 3,
  "passive_dof": 2,
  "passive_translations": 0,
- "status": "screened",
+ "status": "verified",
  "t_ideated": "2026-10-16T02:10:00Z",
  "t_screened": "2026-10-16T03:46:21Z",
  "reach": 0.6875,
@@ -15,11 +15,11 @@
  "inband10": 0.5167,
  "contact": 0.0175,
  "gap": 23.0,
- "v_reach": null,
- "v_follow": null,
- "v_inband14": null,
- "v_inband10": null,
- "v_gap": null,
+ "v_reach": 0.6,
+ "v_follow": 0.9727,
+ "v_inband14": 0.9016,
+ "v_inband10": 0.5214,
+ "v_gap": 31.52,
  "n_configs": 2797,
  "best_k": 1284,
  "best_stage": "cma-A2",
@@ -270,7 +270,7 @@
  },
  "doc": "docs/concepts/raglan-knee-3r.md",
  "model_file": "docs/concepts/models/raglan-knee-3r.py",
- "verdict": "routing is a small lever on the leader, the seat move found with it a bigger one: raglan map argmax = the great circle at the k4216 seats; routes only 24.79 fast (25.89 at fixed part sizes; 32.33 frozen Bench(110,360) exact, 33.41 fixed) vs the pin knee 26.34 / 33.84; CMA seats + routes (A2, 1009 tries, converged) 23.00 fast (score 91.64; 23.62 at fixed sizes; same seats with straight links 24.49: J3 3.3 deg more proximal brings hub 3 / knee / pad into band); posterior-J1 seats dead (122.45); A2 worn FROZEN on Bench(110,360) exact 31.52 (score 88.54; 32.11 at fixed sizes; in-band 0.90 met, reach 0.600 = 30 of the 31.5 points) vs the pin knee 33.84 and osn 42.59 - best large-bench number so far, unverified",
+ "verdict": "VERIFIED v_gap 31.52 (score 88.54) on Bench(110,360) exact frozen vs champion 66.97 same bench and checks; routing is a small lever on the leader, the seat move found with it a bigger one: raglan map argmax = the great circle at the k4216 seats; routes only 24.79 fast (25.89 at fixed part sizes; 32.33 frozen Bench(110,360) exact, 33.41 fixed) vs the pin knee 26.34 / 33.84; CMA seats + routes (A2, 1009 tries, converged) 23.00 fast (score 91.64; 23.62 at fixed sizes; same seats with straight links 24.49: J3 3.3 deg more proximal brings hub 3 / knee / pad into band); posterior-J1 seats dead (122.45); A2 worn FROZEN on Bench(110,360) exact 31.52 (score 88.54; 32.11 at fixed sizes; in-band 0.90 met, reach 0.600 = 30 of the 31.5 points) vs the pin knee 33.84 and osn 42.59",
  "limiter": "J2 fold: 139 of 470 big-bench poses (reach 0.600, overhead 0.25); routes and seat moves cannot touch it; near-touch: 0.12 mm min, 65.38 with metal < 2 mm as contact",
  "note": "Bench(60,160) fast grid, pin-knee rules (jam, crowns, strap tops, every part pair, 10 fps continuity); parity at d = 0 exact (26.34); 27 first-round CMA tries ran on the exact path (no bench-cache link) and are logged as not comparable; ranking by the dilution-corrected gap_fixed_n is the honest one",
  "gap_fixed_n": 23.62,
@@ -345,5 +345,123 @@
   "notes": "the pin-knee leader with raglan-routed links (one planform tangent arc per link, one rigid bent bar each: no extra part). bodies: link 1, link 2, member 3 (hub-3 lower plate + E strap), knee link, arm pad (arm-end, on the cuff / BOTTOM). joints: J1-J3 O20 hubs, knee pins a, b parallel to J3 (iglidur pin: GSM sleeve + 2 GTM washers on an integral Ti pin, stk 5; counted as bearing-supported revolutes). Open chain, GH closes it (loop mobility 3, nothing sags). sensed: both knee pins - parallel to J3, they add to the arm's twist (q3' = q3 + phi), so tracking the arm needs them read (or the closure solved with GH known). custom: base, 2 links, member 3, knee link, arm pad, 3 hub shafts, 2 Ti pins (est.); catalogue: 3 x MR117 pair + 2 x (GSM sleeve + 2 GTM washers) (est.). [restored from 4d221f1 / 0bfd60a: the row was rewritten without this key twice (0bfd60a -> 95546c6); checker 2026-10-16: custom_parts 10 -> 11, the 11 made parts listed, as the pin knee]",
   "source": "docs/concepts/models/raglan-knee-3r.py:1-20 (routing, imports the pin-knee chain); docs/concepts/models/skin-normal-3r-pin-knee.py:1-25 (chain, knee, pins)",
   "confidence": "counted"
- }
+ },
+ "t_verified": "2026-10-16T04:05:32Z",
+ "v_contact": 0.0152,
+ "v_score": 88.54,
+ "v_gap_fixed_n": 32.09,
+ "v_near_touch": {
+  "min_mm": 0.12,
+  "gap_metal_lt1_as_contact": 35.02,
+  "poses_lt1": 6,
+  "gap_metal_lt2_as_contact": 65.38,
+  "poses_lt2": 49,
+  "lowest": [
+   {
+    "mm": 0.12,
+    "i": 279,
+    "kind": "ws",
+    "plane": 45.0,
+    "elev": 75.0,
+    "axial": -105.0
+   },
+   {
+    "mm": 0.19,
+    "i": 127,
+    "kind": "ws",
+    "plane": -75.0,
+    "elev": 45.0,
+    "axial": 120.0
+   },
+   {
+    "mm": 0.21,
+    "i": 164,
+    "kind": "ws",
+    "plane": -15.0,
+    "elev": 0.0,
+    "axial": -45.0
+   }
+  ]
+ },
+ "v_overhead140": {
+  "ws_reach": 0.25,
+  "ws_taken": "7/28",
+  "clip_follow": 1.0,
+  "inband14_all": 0.9428,
+  "inband10_all": 0.6582,
+  "not_taken": {
+   "fold": 19,
+   "parts": 1,
+   "contact": 1
+  }
+ },
+ "v_runs": {
+  "fast_60_160_reproduced": 23.0,
+  "fast_60_160_flat_bar": 23.48,
+  "exact_60_160_refit": 24.85,
+  "big_frozen_exact": 31.52,
+  "big_frozen_exact_flat_bar": 31.38,
+  "big_frozen_exact_fixed_n": 32.09,
+  "champion_big_frozen_exact_same_checks": 66.97,
+  "verified_pin_knee_k4598_big": 30.35,
+  "osn_k4216_big": 42.59
+ },
+ "v_checks": {
+  "screw": "mobility 3 and chain rank 5 at all 323 taken big-bench poses (min chain sigma/sigma1 0.114); 6th singular value of all 8 screws 1.5e-9: overconstrained by exactly 1 (J1, J2 through GH, pins parallel to J3)",
+  "closure": "max: hub-3 centre 0.000 mm, J3 axis 0.015 deg, pin a / pin b 0.000 mm, knee axes 0.022 deg; 0 bad poses",
+  "parts": "knee vs hub 3 above its plate min 13.5 mm; E boss vs hubs / L1 / L2 min 12.3 mm (boss-L2); 0 bad poses; E-L2 jams 3 (model)",
+  "spans_deg": {
+   "q3": 175.1,
+   "pin_a": 35.4,
+   "pin_b": 29.5
+  },
+  "route": {
+   "L1": {
+    "W": [
+     -0.3478,
+     0.9126,
+     -0.2151
+    ],
+    "turn_deg": 114.4,
+    "rc": 8.9,
+    "length": 63.2,
+    "n_samples": 84,
+    "n_great_circle": 36,
+    "inner_edge_r_mm": 4.9
+   },
+   "L2": {
+    "W": [
+     -0.5272,
+     0.2777,
+     0.8031
+    ],
+    "turn_deg": 3.1,
+    "rc": 10.0,
+    "length": 94.0,
+    "n_samples": 149,
+    "n_great_circle": 146,
+    "inner_edge_r_mm": 6.0
+   }
+  },
+  "bank": {
+   "L1": {
+    "stations": 21,
+    "dH_max_mm": 1.1,
+    "dH_p95_mm": 1.08,
+    "dH_mean_mm": 0.67,
+    "bank_max_deg": 10.4,
+    "bank_p95_deg": 10.2
+   },
+   "L2": {
+    "stations": 37,
+    "dH_max_mm": 4.1,
+    "dH_p95_mm": 2.8,
+    "dH_mean_mm": 1.45,
+    "bank_max_deg": 34.3,
+    "bank_p95_deg": 24.8
+   }
+  },
+  "connectivity": "every taken workspace pose (216 big, 110 fast) joins the rest pose through taken poses by fold-free continuous arm paths (no islands)"
+ },
+ "v_note": "Verifier 2026-10-16, config k1284 (cma-A2; sweep log = row = doc params). Reproduced 23.00 exactly on Bench(60,160) fast (verifier checks: 0 extra poses); exact path refit on 60/160 24.85. v_* = Bench(110,360) exact, shape FROZEN from the 60/160 fast fit, model checks + pin-knee verifier checks run on the routed model: 31.52 (score 88.54) reproduced exactly, 0 poses corrected; 32.09 at fixed part sizes (dilution 0.57). Flat-bar links (each station at its highest row, a constant section that a bent bar can be; the model's per-row skin fit banks link 2 up to 34 deg, p95 25 deg): 31.38 big / 23.48 fast - the gain does not rest on the bank. Champion through the osn verifier code, same bench, frozen: 66.97 (re-run on the farm, identical). 3 active + 2 passive R (0 translations), screw rank: mobility 3, no undetermined coordinate. Not refuted; not 90+ (big). Below the verified pin knee k4598 (30.35) on the big bench. Script docs/concepts/verify/raglan-knee-3r.py."
 }

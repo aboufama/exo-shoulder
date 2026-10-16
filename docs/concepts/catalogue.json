@@ -2091,6 +2091,8 @@
   ],
   "t_ideated": "2026-10-16T02:10:00Z",
   "source": "round 3, tailoring / pattern-making / orthotic fitting lens (second pass)",
-  "status": "screened"
+  "status": "verified",
+  "v_gap": 31.52,
+  "verification": "docs/concepts/raglan-knee-3r.md#verification-k1284-cma-a2---adversarial-verifier-2026-10-16"
  }
 ]
