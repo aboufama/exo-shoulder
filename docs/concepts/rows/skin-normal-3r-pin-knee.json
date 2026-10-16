@@ -3461,5 +3461,1426 @@
   },
   "gain": 0.51,
   "gain_near1": 1.44
+ },
+ "gpu_knee_massive": {
+  "t": "2026-10-16T11:18:44Z",
+  "tool": "tools/gpu_knee_search.py (driver), tools/gpu_bench_knee.py (port)",
+  "run": "exo-farm/gpuk/out/gks1",
+  "pods": [
+   "mueo1pc15i6vyk",
+   "jweafg25qs6wgy",
+   "qy6admw6z0jazt",
+   "3dt2e37357shr8"
+  ],
+  "cost": "about $2.6: 2x RTX PRO 4500 $0.72/h 09:53-11:16 ($1.00 + $0.99), RTX 4090 $0.89/h 09:53-~10:12 (~$0.29, stopped by the lead for budget), RTX PRO 4500 $0.72/h 10:07-~10:30 (~$0.28, stopped by the lead); all exo-gpu pods gone at 11:18 UTC",
+  "n_total": 165927,
+  "n_sobol": 101631,
+  "n_cma": 64296,
+  "n_ok": 101240,
+  "n_cuda_err": {
+   "sobol": 34386,
+   "cma": 29701,
+   "raw_rows": 221042
+  },
+  "regions": {
+   "seed": {
+    "n": 7,
+    "ok": 7,
+    "best": 20.81,
+    "lt30": 5,
+    "lt25": 4,
+    "lt22": 1
+   },
+   "wide": {
+    "n": 24400,
+    "ok": 16859,
+    "best": 59.2,
+    "lt30": 0,
+    "lt25": 0,
+    "lt22": 0
+   },
+   "H1w": {
+    "n": 8064,
+    "ok": 5278,
+    "best": 30.98,
+    "lt30": 0,
+    "lt25": 0,
+    "lt22": 0
+   },
+   "G3w": {
+    "n": 32768,
+    "ok": 21404,
+    "best": 28.51,
+    "lt30": 4,
+    "lt25": 0,
+    "lt22": 0
+   },
+   "k4598w": {
+    "n": 3825,
+    "ok": 2455,
+    "best": 33.73,
+    "lt30": 0,
+    "lt25": 0,
+    "lt22": 0
+   },
+   "G2w": {
+    "n": 8192,
+    "ok": 5303,
+    "best": 26.29,
+    "lt30": 7,
+    "lt25": 0,
+    "lt22": 0
+   },
+   "G3n": {
+    "n": 8192,
+    "ok": 5301,
+    "best": 23.31,
+    "lt30": 810,
+    "lt25": 22,
+    "lt22": 0
+   },
+   "ragw": {
+    "n": 4096,
+    "ok": 2692,
+    "best": 34.67,
+    "lt30": 0,
+    "lt25": 0,
+    "lt22": 0
+   },
+   "P5w": {
+    "n": 8002,
+    "ok": 5229,
+    "best": 29.88,
+    "lt30": 1,
+    "lt25": 0,
+    "lt22": 0
+   },
+   "HWw": {
+    "n": 4085,
+    "ok": 2686,
+    "best": 30.4,
+    "lt30": 0,
+    "lt25": 0,
+    "lt22": 0
+   }
+  },
+  "objective": "near-touch gap (+100 x clip frames lost), Bench(110,360) same-bench fast, GPU port; margin free >= 5; O20; J1 back / acromion top",
+  "gpu_reeval_top": [
+   {
+    "src": "seed-G3",
+    "obj": 20.81,
+    "gap_near1": 20.81,
+    "gap": 20.26,
+    "reach": 0.7056,
+    "follow": 1.0,
+    "inband14": 0.9001,
+    "margin": 5.0
+   },
+   {
+    "src": "cma-b16-g78-7",
+    "obj": 20.85,
+    "gap_near1": 20.85,
+    "gap": 20.3,
+    "reach": 0.7056,
+    "follow": 1.0,
+    "inband14": 0.8996,
+    "margin": 5.0254
+   },
+   {
+    "src": "cma-b13-g79-5",
+    "obj": 21.39,
+    "gap_near1": 21.39,
+    "gap": 20.29,
+    "reach": 0.7083,
+    "follow": 1.0,
+    "inband14": 0.8996,
+    "margin": 5.3701
+   },
+   {
+    "src": "cma-b23-g78-3",
+    "obj": 21.5,
+    "gap_near1": 21.5,
+    "gap": 20.4,
+    "reach": 0.7056,
+    "follow": 1.0,
+    "inband14": 0.8959,
+    "margin": 5.0
+   },
+   {
+    "src": "cma-b20-g65-8",
+    "obj": 21.52,
+    "gap_near1": 21.52,
+    "gap": 20.42,
+    "reach": 0.7056,
+    "follow": 1.0,
+    "inband14": 0.8984,
+    "margin": 5.3817
+   },
+   {
+    "src": "cma-b27-g60-5",
+    "obj": 21.54,
+    "gap_near1": 21.54,
+    "gap": 21.0,
+    "reach": 0.7083,
+    "follow": 1.0,
+    "inband14": 0.8952,
+    "margin": 5.0
+   },
+   {
+    "src": "cma-b0-g77-1",
+    "obj": 21.69,
+    "gap_near1": 21.69,
+    "gap": 21.14,
+    "reach": 0.7028,
+    "follow": 1.0,
+    "inband14": 0.8994,
+    "margin": 5.0956
+   },
+   {
+    "src": "cma-b24-g72-7",
+    "obj": 21.82,
+    "gap_near1": 21.82,
+    "gap": 21.82,
+    "reach": 0.7056,
+    "follow": 1.0,
+    "inband14": 0.8924,
+    "margin": 5.3871
+   },
+   {
+    "src": "cma-b5-g78-9",
+    "obj": 21.86,
+    "gap_near1": 21.86,
+    "gap": 21.32,
+    "reach": 0.7111,
+    "follow": 1.0,
+    "inband14": 0.8945,
+    "margin": 5.1562
+   },
+   {
+    "src": "cma-b4-g72-1",
+    "obj": 21.87,
+    "gap_near1": 21.87,
+    "gap": 20.77,
+    "reach": 0.7056,
+    "follow": 1.0,
+    "inband14": 0.8949,
+    "margin": 5.0461
+   }
+  ],
+  "finalists": [
+   {
+    "name": "F1",
+    "src": "seed-G3",
+    "params": {
+     "az1": 98.2985,
+     "el1": 64.7969,
+     "az2": 33.5049,
+     "el2": 44.7883,
+     "wd": 63.9916,
+     "wa": -9.3012,
+     "b3": 0.3252,
+     "lE": 72.1759,
+     "lc": 37.5419,
+     "phiE": -4.4957,
+     "phib": -56.7105,
+     "ang_min": 24.2314,
+     "stk": 5.6834,
+     "margin": 5.0
+    },
+    "gpu_obj": 20.81,
+    "gpu_gap": 20.26,
+    "fitbig": {
+     "gap": 20.26,
+     "gap_near1": 21.36,
+     "reach": 0.7056,
+     "follow": 1.0,
+     "inband14": 0.9014,
+     "inband10": 0.5518,
+     "contact": 0.0082,
+     "min_metal_mm": 0.46,
+     "fold_margin_min_taken": 5.02,
+     "knee_ang": [
+      100.7,
+      153.5
+     ],
+     "knee_sing_min": 26.5,
+     "arm_side_lt1": 0,
+     "margin": 5.0,
+     "fit_gap": 20.26,
+     "wear_mode": "exact",
+     "missing": null,
+     "gain_vs_H1": 4.22,
+     "gain_near1_vs_H1": 4.23
+    },
+    "fit60": {
+     "gap": 23.33,
+     "gap_near1": 24.44,
+     "reach": 0.6806,
+     "follow": 1.0,
+     "inband14": 0.9064,
+     "inband10": 0.572,
+     "contact": 0.0139,
+     "min_metal_mm": 0.1,
+     "fold_margin_min_taken": 5.02,
+     "knee_ang": [
+      100.0,
+      150.5
+     ],
+     "knee_sing_min": 29.5,
+     "arm_side_lt1": 0,
+     "margin": 5.0,
+     "fit_gap": 21.21,
+     "wear_mode": "exact",
+     "missing": null,
+     "gain_vs_H1": 3.87,
+     "gain_near1_vs_H1": 7.31
+    },
+    "held": {
+     "gap": 27.68,
+     "gap_near1": 29.05,
+     "reach": 0.6366,
+     "follow": 1.0,
+     "inband14": 0.9002,
+     "inband10": 0.5499,
+     "contact": 0.0134,
+     "min_metal_mm": 0.17,
+     "fold_margin_min_taken": 5.08,
+     "knee_ang": [
+      100.7,
+      154.5
+     ],
+     "knee_sing_min": 25.5,
+     "arm_side_lt1": 0,
+     "margin": 5.0,
+     "fit_gap": 20.26,
+     "wear_mode": "exact",
+     "missing": null,
+     "gain_vs_H1": 0.87,
+     "gain_near1_vs_H1": 2.01
+    },
+    "continuity": {
+     "static_reach": 0.6816,
+     "connected_reach": 0.6809,
+     "islands": 1,
+     "bench_connected_reach": 0.7139,
+     "branch_signs": [
+      1.0
+     ],
+     "missing": null
+    }
+   },
+   {
+    "name": "F2",
+    "src": "cma-b16-g78-7",
+    "params": {
+     "az1": 98.4731,
+     "el1": 64.9218,
+     "az2": 33.0495,
+     "el2": 45.1638,
+     "wd": 63.0942,
+     "wa": -9.8431,
+     "b3": 0.3341,
+     "lE": 76.9716,
+     "lc": 38.8158,
+     "phiE": -3.9757,
+     "phib": -55.0689,
+     "ang_min": 22.785,
+     "stk": 5.8703,
+     "margin": 5.0254
+    },
+    "gpu_obj": 20.85,
+    "gpu_gap": 20.3,
+    "fitbig": {
+     "gap": 20.26,
+     "gap_near1": 20.81,
+     "reach": 0.7056,
+     "follow": 1.0,
+     "inband14": 0.9006,
+     "inband10": 0.5224,
+     "contact": 0.0082,
+     "min_metal_mm": 0.35,
+     "fold_margin_min_taken": 5.16,
+     "knee_ang": [
+      101.6,
+      156.7
+     ],
+     "knee_sing_min": 23.3,
+     "arm_side_lt1": 0,
+     "margin": 5.0254,
+     "fit_gap": 20.3,
+     "wear_mode": "exact",
+     "missing": null,
+     "gain_vs_H1": 4.22,
+     "gain_near1_vs_H1": 4.78
+    },
+    "fit60": {
+     "gap": 23.34,
+     "gap_near1": 24.46,
+     "reach": 0.6778,
+     "follow": 1.0,
+     "inband14": 0.9076,
+     "inband10": 0.6063,
+     "contact": 0.0112,
+     "min_metal_mm": 0.11,
+     "fold_margin_min_taken": 5.59,
+     "knee_ang": [
+      100.9,
+      153.2
+     ],
+     "knee_sing_min": 26.8,
+     "arm_side_lt1": 0,
+     "margin": 5.0254,
+     "fit_gap": 21.21,
+     "wear_mode": "exact",
+     "missing": null,
+     "gain_vs_H1": 3.86,
+     "gain_near1_vs_H1": 7.29
+    },
+    "held": {
+     "gap": 27.65,
+     "gap_near1": 29.25,
+     "reach": 0.6366,
+     "follow": 1.0,
+     "inband14": 0.8991,
+     "inband10": 0.5204,
+     "contact": 0.0122,
+     "min_metal_mm": 0.02,
+     "fold_margin_min_taken": 5.04,
+     "knee_ang": [
+      101.6,
+      153.5
+     ],
+     "knee_sing_min": 26.5,
+     "arm_side_lt1": 2,
+     "margin": 5.0254,
+     "fit_gap": 20.3,
+     "wear_mode": "exact",
+     "missing": null,
+     "gain_vs_H1": 0.9,
+     "gain_near1_vs_H1": 1.81
+    },
+    "continuity": {
+     "static_reach": 0.6802,
+     "connected_reach": 0.6802,
+     "islands": 0,
+     "bench_connected_reach": 0.7139,
+     "branch_signs": [
+      1.0
+     ],
+     "missing": null
+    }
+   },
+   {
+    "name": "F3",
+    "src": "cma-b13-g79-5",
+    "params": {
+     "az1": 101.6601,
+     "el1": 63.445,
+     "az2": 36.6078,
+     "el2": 43.7209,
+     "wd": 62.7962,
+     "wa": -9.4459,
+     "b3": 0.3207,
+     "lE": 74.6143,
+     "lc": 37.8215,
+     "phiE": -2.9367,
+     "phib": -53.7666,
+     "ang_min": 22.6057,
+     "stk": 5.1638,
+     "margin": 5.3701
+    },
+    "gpu_obj": 21.39,
+    "gpu_gap": 20.29,
+    "fitbig": {
+     "gap": 20.25,
+     "gap_near1": 21.9,
+     "reach": 0.7083,
+     "follow": 1.0,
+     "inband14": 0.9003,
+     "inband10": 0.5877,
+     "contact": 0.0108,
+     "min_metal_mm": 0.41,
+     "fold_margin_min_taken": 5.82,
+     "knee_ang": [
+      101.4,
+      153.2
+     ],
+     "knee_sing_min": 26.8,
+     "arm_side_lt1": 0,
+     "margin": 5.3701,
+     "fit_gap": 20.29,
+     "wear_mode": "exact",
+     "missing": null,
+     "gain_vs_H1": 4.23,
+     "gain_near1_vs_H1": 3.69
+    },
+    "fit60": {
+     "gap": 25.27,
+     "gap_near1": 30.79,
+     "reach": 0.6778,
+     "follow": 0.9636,
+     "inband14": 0.9143,
+     "inband10": 0.6479,
+     "contact": 0.0305,
+     "min_metal_mm": 0.06,
+     "fold_margin_min_taken": 5.82,
+     "knee_ang": [
+      101.6,
+      149.6
+     ],
+     "knee_sing_min": 30.4,
+     "arm_side_lt1": 0,
+     "margin": 5.3701,
+     "fit_gap": 24.08,
+     "wear_mode": "exact",
+     "missing": null,
+     "gain_vs_H1": 1.93,
+     "gain_near1_vs_H1": 0.96
+    },
+    "held": {
+     "gap": 28.33,
+     "gap_near1": 31.06,
+     "reach": 0.6366,
+     "follow": 1.0,
+     "inband14": 0.8995,
+     "inband10": 0.5869,
+     "contact": 0.0194,
+     "min_metal_mm": 0.01,
+     "fold_margin_min_taken": 5.39,
+     "knee_ang": [
+      101.4,
+      156.2
+     ],
+     "knee_sing_min": 23.8,
+     "arm_side_lt1": 1,
+     "margin": 5.3701,
+     "fit_gap": 20.29,
+     "wear_mode": "exact",
+     "missing": null,
+     "gain_vs_H1": 0.22,
+     "gain_near1_vs_H1": 0.0
+    },
+    "continuity": {
+     "static_reach": 0.6865,
+     "connected_reach": 0.6858,
+     "islands": 1,
+     "bench_connected_reach": 0.7194,
+     "branch_signs": [
+      1.0
+     ],
+     "missing": null
+    }
+   },
+   {
+    "name": "F4",
+    "src": "cma-b23-g78-3",
+    "params": {
+     "az1": 98.9382,
+     "el1": 65.3527,
+     "az2": 33.6365,
+     "el2": 45.3883,
+     "wd": 59.503,
+     "wa": -10.8128,
+     "b3": 0.4059,
+     "lE": 72.11,
+     "lc": 37.5204,
+     "phiE": -1.8125,
+     "phib": -66.6832,
+     "ang_min": 36.1761,
+     "stk": 5.6747,
+     "margin": 5.0
+    },
+    "gpu_obj": 21.5,
+    "gpu_gap": 20.4,
+    "fitbig": {
+     "gap": 20.33,
+     "gap_near1": 21.43,
+     "reach": 0.7056,
+     "follow": 1.0,
+     "inband14": 0.8966,
+     "inband10": 0.5831,
+     "contact": 0.0055,
+     "min_metal_mm": 0.32,
+     "fold_margin_min_taken": 5.08,
+     "knee_ang": [
+      83.7,
+      143.1
+     ],
+     "knee_sing_min": 36.9,
+     "arm_side_lt1": 0,
+     "margin": 5.0,
+     "fit_gap": 20.4,
+     "wear_mode": "exact",
+     "missing": null,
+     "gain_vs_H1": 4.15,
+     "gain_near1_vs_H1": 4.16
+    },
+    "fit60": {
+     "gap": 24.44,
+     "gap_near1": 28.25,
+     "reach": 0.6778,
+     "follow": 1.0,
+     "inband14": 0.889,
+     "inband10": 0.6013,
+     "contact": 0.0112,
+     "min_metal_mm": 0.04,
+     "fold_margin_min_taken": 5.08,
+     "knee_ang": [
+      82.8,
+      139.2
+     ],
+     "knee_sing_min": 40.8,
+     "arm_side_lt1": 0,
+     "margin": 5.0,
+     "fit_gap": 22.97,
+     "wear_mode": "exact",
+     "missing": null,
+     "gain_vs_H1": 2.76,
+     "gain_near1_vs_H1": 3.5
+    },
+    "held": {
+     "gap": 28.71,
+     "gap_near1": 30.09,
+     "reach": 0.6303,
+     "follow": 1.0,
+     "inband14": 0.8949,
+     "inband10": 0.5813,
+     "contact": 0.0123,
+     "min_metal_mm": 0.48,
+     "fold_margin_min_taken": 5.39,
+     "knee_ang": [
+      83.7,
+      140.5
+     ],
+     "knee_sing_min": 39.5,
+     "arm_side_lt1": 0,
+     "margin": 5.0,
+     "fit_gap": 20.4,
+     "wear_mode": "exact",
+     "missing": null,
+     "gain_vs_H1": -0.16,
+     "gain_near1_vs_H1": 0.97
+    },
+    "continuity": {
+     "static_reach": 0.6732,
+     "connected_reach": 0.6732,
+     "islands": 0,
+     "bench_connected_reach": 0.7139,
+     "branch_signs": [
+      1.0
+     ],
+     "missing": null
+    }
+   },
+   {
+    "name": "F5",
+    "src": "cma-b20-g65-8",
+    "params": {
+     "az1": 101.0748,
+     "el1": 64.2948,
+     "az2": 35.0419,
+     "el2": 44.8058,
+     "wd": 63.3181,
+     "wa": -9.0135,
+     "b3": 0.3375,
+     "lE": 75.1958,
+     "lc": 37.825,
+     "phiE": -3.1609,
+     "phib": -57.8472,
+     "ang_min": 27.6146,
+     "stk": 5.8648,
+     "margin": 5.3817
+    },
+    "gpu_obj": 21.52,
+    "gpu_gap": 20.42,
+    "fitbig": {
+     "gap": 20.35,
+     "gap_near1": 22.0,
+     "reach": 0.7056,
+     "follow": 1.0,
+     "inband14": 0.8991,
+     "inband10": 0.5494,
+     "contact": 0.0082,
+     "min_metal_mm": 0.24,
+     "fold_margin_min_taken": 5.4,
+     "knee_ang": [
+      98.0,
+      149.6
+     ],
+     "knee_sing_min": 30.4,
+     "arm_side_lt1": 0,
+     "margin": 5.3817,
+     "fit_gap": 20.42,
+     "wear_mode": "exact",
+     "missing": null,
+     "gain_vs_H1": 4.13,
+     "gain_near1_vs_H1": 3.59
+    },
+    "fit60": {
+     "gap": 25.57,
+     "gap_near1": 30.56,
+     "reach": 0.6722,
+     "follow": 0.9636,
+     "inband14": 0.9079,
+     "inband10": 0.5854,
+     "contact": 0.0279,
+     "min_metal_mm": 0.07,
+     "fold_margin_min_taken": 5.4,
+     "knee_ang": [
+      97.5,
+      145.1
+     ],
+     "knee_sing_min": 34.9,
+     "arm_side_lt1": 0,
+     "margin": 5.3817,
+     "fit_gap": 22.31,
+     "wear_mode": "exact",
+     "missing": null,
+     "gain_vs_H1": 1.63,
+     "gain_near1_vs_H1": 1.19
+    },
+    "held": {
+     "gap": 27.51,
+     "gap_near1": 29.33,
+     "reach": 0.6387,
+     "follow": 1.0,
+     "inband14": 0.8984,
+     "inband10": 0.5475,
+     "contact": 0.0122,
+     "min_metal_mm": 0.13,
+     "fold_margin_min_taken": 5.46,
+     "knee_ang": [
+      98.0,
+      150.3
+     ],
+     "knee_sing_min": 29.7,
+     "arm_side_lt1": 0,
+     "margin": 5.3817,
+     "fit_gap": 20.42,
+     "wear_mode": "exact",
+     "missing": null,
+     "gain_vs_H1": 1.04,
+     "gain_near1_vs_H1": 1.73
+    },
+    "continuity": {
+     "static_reach": 0.6823,
+     "connected_reach": 0.6816,
+     "islands": 1,
+     "bench_connected_reach": 0.7139,
+     "branch_signs": [
+      1.0
+     ],
+     "missing": null
+    }
+   },
+   {
+    "name": "F6",
+    "src": "cma-b27-g60-5",
+    "params": {
+     "az1": 103.0478,
+     "el1": 64.5946,
+     "az2": 36.2854,
+     "el2": 44.8739,
+     "wd": 61.2598,
+     "wa": -8.7805,
+     "b3": 0.3659,
+     "lE": 79.1753,
+     "lc": 33.3284,
+     "phiE": -1.7079,
+     "phib": -62.1905,
+     "ang_min": 27.2555,
+     "stk": 5.4824,
+     "margin": 5.0
+    },
+    "gpu_obj": 21.54,
+    "gpu_gap": 21.0,
+    "fitbig": {
+     "gap": 20.63,
+     "gap_near1": 21.18,
+     "reach": 0.7083,
+     "follow": 1.0,
+     "inband14": 0.8962,
+     "inband10": 0.6,
+     "contact": 0.0108,
+     "min_metal_mm": 0.71,
+     "fold_margin_min_taken": 5.02,
+     "knee_ang": [
+      88.7,
+      147.6
+     ],
+     "knee_sing_min": 32.4,
+     "arm_side_lt1": 0,
+     "margin": 5.0,
+     "fit_gap": 21.0,
+     "wear_mode": "exact",
+     "missing": null,
+     "gain_vs_H1": 3.85,
+     "gain_near1_vs_H1": 4.41
+    },
+    "fit60": {
+     "gap": 24.14,
+     "gap_near1": 29.65,
+     "reach": 0.6861,
+     "follow": 0.9636,
+     "inband14": 0.9015,
+     "inband10": 0.6121,
+     "contact": 0.0275,
+     "min_metal_mm": 0.0,
+     "fold_margin_min_taken": 5.02,
+     "knee_ang": [
+      88.3,
+      142.7
+     ],
+     "knee_sing_min": 37.3,
+     "arm_side_lt1": 0,
+     "margin": 5.0,
+     "fit_gap": 19.83,
+     "wear_mode": "exact",
+     "missing": null,
+     "gain_vs_H1": 3.06,
+     "gain_near1_vs_H1": 2.1
+    },
+    "held": {
+     "gap": 27.62,
+     "gap_near1": 29.89,
+     "reach": 0.6418,
+     "follow": 1.0,
+     "inband14": 0.8953,
+     "inband10": 0.598,
+     "contact": 0.0133,
+     "min_metal_mm": 0.2,
+     "fold_margin_min_taken": 5.04,
+     "knee_ang": [
+      88.7,
+      146.0
+     ],
+     "knee_sing_min": 34.0,
+     "arm_side_lt1": 0,
+     "margin": 5.0,
+     "fit_gap": 21.0,
+     "wear_mode": "exact",
+     "missing": null,
+     "gain_vs_H1": 0.93,
+     "gain_near1_vs_H1": 1.17
+    },
+    "continuity": {
+     "static_reach": 0.6878,
+     "connected_reach": 0.6872,
+     "islands": 1,
+     "bench_connected_reach": 0.7222,
+     "branch_signs": [
+      1.0
+     ],
+     "missing": null
+    }
+   },
+   {
+    "name": "F7",
+    "src": "cma-b0-g77-1",
+    "params": {
+     "az1": 100.8324,
+     "el1": 64.4999,
+     "az2": 34.1949,
+     "el2": 45.0779,
+     "wd": 63.9038,
+     "wa": -9.5043,
+     "b3": 0.3384,
+     "lE": 76.0978,
+     "lc": 31.0158,
+     "phiE": -3.024,
+     "phib": -59.3373,
+     "ang_min": 21.9322,
+     "stk": 5.5696,
+     "margin": 5.0956
+    },
+    "gpu_obj": 21.69,
+    "gpu_gap": 21.14,
+    "fitbig": {
+     "gap": 20.81,
+     "gap_near1": 21.91,
+     "reach": 0.7028,
+     "follow": 1.0,
+     "inband14": 0.9003,
+     "inband10": 0.561,
+     "contact": 0.0109,
+     "min_metal_mm": 0.7,
+     "fold_margin_min_taken": 5.58,
+     "knee_ang": [
+      93.4,
+      157.3
+     ],
+     "knee_sing_min": 22.7,
+     "arm_side_lt1": 0,
+     "margin": 5.0956,
+     "fit_gap": 21.14,
+     "wear_mode": "exact",
+     "missing": null,
+     "gain_vs_H1": 3.67,
+     "gain_near1_vs_H1": 3.68
+    },
+    "fit60": {
+     "gap": 25.57,
+     "gap_near1": 30.56,
+     "reach": 0.6722,
+     "follow": 0.9636,
+     "inband14": 0.9114,
+     "inband10": 0.6053,
+     "contact": 0.0279,
+     "min_metal_mm": 0.09,
+     "fold_margin_min_taken": 5.65,
+     "knee_ang": [
+      92.6,
+      150.7
+     ],
+     "knee_sing_min": 29.3,
+     "arm_side_lt1": 0,
+     "margin": 5.0956,
+     "fit_gap": 22.31,
+     "wear_mode": "exact",
+     "missing": null,
+     "gain_vs_H1": 1.63,
+     "gain_near1_vs_H1": 1.19
+    },
+    "held": {
+     "gap": 27.22,
+     "gap_near1": 29.04,
+     "reach": 0.6418,
+     "follow": 1.0,
+     "inband14": 0.8993,
+     "inband10": 0.5597,
+     "contact": 0.0133,
+     "min_metal_mm": 0.14,
+     "fold_margin_min_taken": 5.1,
+     "knee_ang": [
+      93.4,
+      156.1
+     ],
+     "knee_sing_min": 23.9,
+     "arm_side_lt1": 0,
+     "margin": 5.0956,
+     "fit_gap": 21.14,
+     "wear_mode": "exact",
+     "missing": null,
+     "gain_vs_H1": 1.33,
+     "gain_near1_vs_H1": 2.02
+    },
+    "continuity": {
+     "static_reach": 0.6872,
+     "connected_reach": 0.6865,
+     "islands": 1,
+     "bench_connected_reach": 0.7167,
+     "branch_signs": [
+      1.0
+     ],
+     "missing": null
+    }
+   },
+   {
+    "name": "F8",
+    "src": "cma-b24-g72-7",
+    "params": {
+     "az1": 102.2913,
+     "el1": 64.1446,
+     "az2": 36.932,
+     "el2": 44.2167,
+     "wd": 61.1206,
+     "wa": -10.0974,
+     "b3": 0.3479,
+     "lE": 80.1829,
+     "lc": 24.8471,
+     "phiE": 0.3982,
+     "phib": -70.6318,
+     "ang_min": 32.2186,
+     "stk": 5.4128,
+     "margin": 5.3871
+    },
+    "gpu_obj": 21.82,
+    "gpu_gap": 21.82,
+    "fitbig": {
+     "gap": 21.24,
+     "gap_near1": 21.79,
+     "reach": 0.7056,
+     "follow": 1.0,
+     "inband14": 0.8929,
+     "inband10": 0.5839,
+     "contact": 0.0109,
+     "min_metal_mm": 0.79,
+     "fold_margin_min_taken": 5.41,
+     "knee_ang": [
+      74.7,
+      145.5
+     ],
+     "knee_sing_min": 34.5,
+     "arm_side_lt1": 0,
+     "margin": 5.3871,
+     "fit_gap": 21.82,
+     "wear_mode": "exact",
+     "missing": null,
+     "gain_vs_H1": 3.24,
+     "gain_near1_vs_H1": 3.8
+    },
+    "fit60": {
+     "gap": 24.92,
+     "gap_near1": 30.26,
+     "reach": 0.6778,
+     "follow": 0.9636,
+     "inband14": 0.8981,
+     "inband10": 0.602,
+     "contact": 0.0251,
+     "min_metal_mm": 0.04,
+     "fold_margin_min_taken": 5.41,
+     "knee_ang": [
+      73.7,
+      139.0
+     ],
+     "knee_sing_min": 41.0,
+     "arm_side_lt1": 0,
+     "margin": 5.3871,
+     "fit_gap": 20.39,
+     "wear_mode": "exact",
+     "missing": null,
+     "gain_vs_H1": 2.28,
+     "gain_near1_vs_H1": 1.49
+    },
+    "held": {
+     "gap": 28.9,
+     "gap_near1": 31.61,
+     "reach": 0.6397,
+     "follow": 1.0,
+     "inband14": 0.8918,
+     "inband10": 0.5822,
+     "contact": 0.0205,
+     "min_metal_mm": 0.18,
+     "fold_margin_min_taken": 5.53,
+     "knee_ang": [
+      74.7,
+      142.8
+     ],
+     "knee_sing_min": 37.2,
+     "arm_side_lt1": 0,
+     "margin": 5.3871,
+     "fit_gap": 21.82,
+     "wear_mode": "exact",
+     "missing": null,
+     "gain_vs_H1": -0.35,
+     "gain_near1_vs_H1": -0.55
+    },
+    "continuity": {
+     "static_reach": 0.6885,
+     "connected_reach": 0.6878,
+     "islands": 1,
+     "bench_connected_reach": 0.7222,
+     "branch_signs": [
+      1.0
+     ],
+     "missing": null
+    }
+   },
+   {
+    "name": "F9",
+    "src": "cma-b5-g78-9",
+    "params": {
+     "az1": 102.9015,
+     "el1": 64.1024,
+     "az2": 36.9649,
+     "el2": 44.1798,
+     "wd": 60.127,
+     "wa": -10.1779,
+     "b3": 0.3817,
+     "lE": 72.0228,
+     "lc": 41.6166,
+     "phiE": -0.4717,
+     "phib": -62.0796,
+     "ang_min": 24.1737,
+     "stk": 5.2032,
+     "margin": 5.1562
+    },
+    "gpu_obj": 21.86,
+    "gpu_gap": 21.32,
+    "fitbig": {
+     "gap": 20.68,
+     "gap_near1": 21.23,
+     "reach": 0.7111,
+     "follow": 1.0,
+     "inband14": 0.8956,
+     "inband10": 0.5909,
+     "contact": 0.0135,
+     "min_metal_mm": 0.54,
+     "fold_margin_min_taken": 5.25,
+     "knee_ang": [
+      86.4,
+      140.5
+     ],
+     "knee_sing_min": 39.5,
+     "arm_side_lt1": 0,
+     "margin": 5.1562,
+     "fit_gap": 21.32,
+     "wear_mode": "exact",
+     "missing": null,
+     "gain_vs_H1": 3.8,
+     "gain_near1_vs_H1": 4.36
+    },
+    "fit60": {
+     "gap": 24.04,
+     "gap_near1": 29.36,
+     "reach": 0.6889,
+     "follow": 0.9636,
+     "inband14": 0.8982,
+     "inband10": 0.6195,
+     "contact": 0.0275,
+     "min_metal_mm": 0.03,
+     "fold_margin_min_taken": 5.25,
+     "knee_ang": [
+      86.4,
+      136.2
+     ],
+     "knee_sing_min": 43.8,
+     "arm_side_lt1": 0,
+     "margin": 5.1562,
+     "fit_gap": 21.39,
+     "wear_mode": "exact",
+     "missing": null,
+     "gain_vs_H1": 3.16,
+     "gain_near1_vs_H1": 2.39
+    },
+    "held": {
+     "gap": 28.77,
+     "gap_near1": 30.8,
+     "reach": 0.6429,
+     "follow": 1.0,
+     "inband14": 0.8945,
+     "inband10": 0.5894,
+     "contact": 0.0251,
+     "min_metal_mm": 0.05,
+     "fold_margin_min_taken": 5.32,
+     "knee_ang": [
+      86.4,
+      142.8
+     ],
+     "knee_sing_min": 37.2,
+     "arm_side_lt1": 0,
+     "margin": 5.1562,
+     "fit_gap": 21.32,
+     "wear_mode": "exact",
+     "missing": null,
+     "gain_vs_H1": -0.22,
+     "gain_near1_vs_H1": 0.26
+    },
+    "continuity": {
+     "static_reach": 0.7039,
+     "connected_reach": 0.7018,
+     "islands": 3,
+     "bench_connected_reach": 0.7306,
+     "branch_signs": [
+      1.0
+     ],
+     "missing": null
+    }
+   },
+   {
+    "name": "F10",
+    "src": "cma-b4-g72-1",
+    "params": {
+     "az1": 97.4874,
+     "el1": 64.9305,
+     "az2": 32.9893,
+     "el2": 44.722,
+     "wd": 63.7112,
+     "wa": -10.3642,
+     "b3": 0.2805,
+     "lE": 65.0705,
+     "lc": 31.6667,
+     "phiE": -4.6841,
+     "phib": -58.5603,
+     "ang_min": 26.0477,
+     "stk": 5.7083,
+     "margin": 5.0461
+    },
+    "gpu_obj": 21.87,
+    "gpu_gap": 20.77,
+    "fitbig": {
+     "gap": 20.96,
+     "gap_near1": 21.51,
+     "reach": 0.7028,
+     "follow": 1.0,
+     "inband14": 0.8958,
+     "inband10": 0.537,
+     "contact": 0.0082,
+     "min_metal_mm": 0.39,
+     "fold_margin_min_taken": 5.39,
+     "knee_ang": [
+      99.0,
+      152.0
+     ],
+     "knee_sing_min": 28.0,
+     "arm_side_lt1": 0,
+     "margin": 5.0461,
+     "fit_gap": 20.77,
+     "wear_mode": "exact",
+     "missing": null,
+     "gain_vs_H1": 3.52,
+     "gain_near1_vs_H1": 4.08
+    },
+    "fit60": {
+     "gap": 24.03,
+     "gap_near1": 25.15,
+     "reach": 0.675,
+     "follow": 1.0,
+     "inband14": 0.8987,
+     "inband10": 0.5581,
+     "contact": 0.014,
+     "min_metal_mm": 0.05,
+     "fold_margin_min_taken": 5.39,
+     "knee_ang": [
+      98.3,
+      149.0
+     ],
+     "knee_sing_min": 31.0,
+     "arm_side_lt1": 0,
+     "margin": 5.0461,
+     "fit_gap": 22.0,
+     "wear_mode": "exact",
+     "missing": null,
+     "gain_vs_H1": 3.17,
+     "gain_near1_vs_H1": 6.6
+    },
+    "held": {
+     "gap": 28.33,
+     "gap_near1": 29.92,
+     "reach": 0.6355,
+     "follow": 1.0,
+     "inband14": 0.8946,
+     "inband10": 0.5351,
+     "contact": 0.0134,
+     "min_metal_mm": 0.3,
+     "fold_margin_min_taken": 5.12,
+     "knee_ang": [
+      99.0,
+      152.8
+     ],
+     "knee_sing_min": 27.2,
+     "arm_side_lt1": 0,
+     "margin": 5.0461,
+     "fit_gap": 20.77,
+     "wear_mode": "exact",
+     "missing": null,
+     "gain_vs_H1": 0.22,
+     "gain_near1_vs_H1": 1.14
+    },
+    "continuity": {
+     "static_reach": 0.6788,
+     "connected_reach": 0.6788,
+     "islands": 0,
+     "bench_connected_reach": 0.7139,
+     "branch_signs": [
+      1.0
+     ],
+     "missing": null
+    }
+   }
+  ],
+  "H1": {
+   "name": "H1",
+   "src": "H1",
+   "params": {
+    "az1": 101.1634,
+    "el1": 63.8986,
+    "az2": 30.153,
+    "el2": 47.0108,
+    "wd": 70.3931,
+    "wa": -8.1248,
+    "b3": 0.2842,
+    "lE": 59.5534,
+    "lc": 28.2401,
+    "phiE": -5.8107,
+    "phib": -54.914,
+    "ang_min": 30.4611,
+    "stk": 5.6815,
+    "margin": 5.0
+   },
+   "gpu_obj": null,
+   "gpu_gap": null,
+   "fitbig": {
+    "gap": 24.48,
+    "gap_near1": 25.59,
+    "reach": 0.6694,
+    "follow": 1.0,
+    "inband14": 0.8943,
+    "inband10": 0.5068,
+    "contact": 0.0085,
+    "min_metal_mm": 0.21,
+    "fold_margin_min_taken": 5.49,
+    "knee_ang": [
+     101.1,
+     148.4
+    ],
+    "knee_sing_min": 31.6,
+    "arm_side_lt1": 0,
+    "margin": 5.0,
+    "fit_gap": 24.57,
+    "wear_mode": "exact",
+    "missing": null,
+    "gain_vs_H1": 0.0,
+    "gain_near1_vs_H1": 0.0
+   },
+   "fit60": {
+    "gap": 27.2,
+    "gap_near1": 31.75,
+    "reach": 0.6583,
+    "follow": 0.9636,
+    "inband14": 0.8953,
+    "inband10": 0.5539,
+    "contact": 0.0256,
+    "min_metal_mm": 0.09,
+    "fold_margin_min_taken": 5.49,
+    "knee_ang": [
+     103.0,
+     147.3
+    ],
+    "knee_sing_min": 32.7,
+    "arm_side_lt1": 0,
+    "margin": 5.0,
+    "fit_gap": 23.64,
+    "wear_mode": "exact",
+    "missing": null,
+    "gain_vs_H1": 0.0,
+    "gain_near1_vs_H1": 0.0
+   },
+   "held": {
+    "gap": 28.55,
+    "gap_near1": 31.06,
+    "reach": 0.6324,
+    "follow": 1.0,
+    "inband14": 0.8932,
+    "inband10": 0.505,
+    "contact": 0.0111,
+    "min_metal_mm": 0.11,
+    "fold_margin_min_taken": 5.32,
+    "knee_ang": [
+     101.1,
+     149.5
+    ],
+    "knee_sing_min": 30.5,
+    "arm_side_lt1": 0,
+    "margin": 5.0,
+    "fit_gap": 24.57,
+    "wear_mode": "exact",
+    "missing": null,
+    "gain_vs_H1": 0.0,
+    "gain_near1_vs_H1": 0.0
+   },
+   "continuity": {
+    "static_reach": 0.6878,
+    "connected_reach": 0.6872,
+    "islands": 1,
+    "bench_connected_reach": 0.7028,
+    "branch_signs": [
+     1.0
+    ],
+    "missing": null
+   }
+  },
+  "best": {
+   "name": "F2",
+   "src": "cma-b16-g78-7",
+   "params": {
+    "az1": 98.4731,
+    "el1": 64.9218,
+    "az2": 33.0495,
+    "el2": 45.1638,
+    "wd": 63.0942,
+    "wa": -9.8431,
+    "b3": 0.3341,
+    "lE": 76.9716,
+    "lc": 38.8158,
+    "phiE": -3.9757,
+    "phib": -55.0689,
+    "ang_min": 22.785,
+    "stk": 5.8703,
+    "margin": 5.0254
+   },
+   "gpu_obj": 20.85,
+   "gpu_gap": 20.3,
+   "fitbig": {
+    "gap": 20.26,
+    "gap_near1": 20.81,
+    "reach": 0.7056,
+    "follow": 1.0,
+    "inband14": 0.9006,
+    "inband10": 0.5224,
+    "contact": 0.0082,
+    "min_metal_mm": 0.35,
+    "fold_margin_min_taken": 5.16,
+    "knee_ang": [
+     101.6,
+     156.7
+    ],
+    "knee_sing_min": 23.3,
+    "arm_side_lt1": 0,
+    "margin": 5.0254,
+    "fit_gap": 20.3,
+    "wear_mode": "exact",
+    "missing": null,
+    "gain_vs_H1": 4.22,
+    "gain_near1_vs_H1": 4.78
+   },
+   "fit60": {
+    "gap": 23.34,
+    "gap_near1": 24.46,
+    "reach": 0.6778,
+    "follow": 1.0,
+    "inband14": 0.9076,
+    "inband10": 0.6063,
+    "contact": 0.0112,
+    "min_metal_mm": 0.11,
+    "fold_margin_min_taken": 5.59,
+    "knee_ang": [
+     100.9,
+     153.2
+    ],
+    "knee_sing_min": 26.8,
+    "arm_side_lt1": 0,
+    "margin": 5.0254,
+    "fit_gap": 21.21,
+    "wear_mode": "exact",
+    "missing": null,
+    "gain_vs_H1": 3.86,
+    "gain_near1_vs_H1": 7.29
+   },
+   "held": {
+    "gap": 27.65,
+    "gap_near1": 29.25,
+    "reach": 0.6366,
+    "follow": 1.0,
+    "inband14": 0.8991,
+    "inband10": 0.5204,
+    "contact": 0.0122,
+    "min_metal_mm": 0.02,
+    "fold_margin_min_taken": 5.04,
+    "knee_ang": [
+     101.6,
+     153.5
+    ],
+    "knee_sing_min": 26.5,
+    "arm_side_lt1": 2,
+    "margin": 5.0254,
+    "fit_gap": 20.3,
+    "wear_mode": "exact",
+    "missing": null,
+    "gain_vs_H1": 0.9,
+    "gain_near1_vs_H1": 1.81
+   },
+   "continuity": {
+    "static_reach": 0.6802,
+    "connected_reach": 0.6802,
+    "islands": 0,
+    "bench_connected_reach": 0.7139,
+    "branch_signs": [
+     1.0
+    ],
+    "missing": null
+   }
+  },
+  "protocol": "CPU kit (unpatched) on the pods' CPUs: docs/concepts/verify/skin-normal-3r-pin-knee-polish.py fitbig / fit60 / held, CB_EXACT=1, CB_FOLD_MARGIN = the config's margin; continuity flood fill (kin, fitbig); self-measured by the search's driver, not an independent verifier"
  }
 }

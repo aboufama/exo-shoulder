@@ -290,17 +290,25 @@ def hug_fit(label, ex, ey, start, end, Dq, Rq, axes, hr2, t=T):
     margin = lambda U: np.where(foot(U), -0.8, 0.1); outside = lambda U: ~foot(U)
     tgt = lambda P: np.hypot(P[:, 0], P[:, 1]) - (np.interp(np.arctan2(P[:, 1], P[:, 0]), th, need) + t / 2 + 0.25)
     geo = f"{np.round(ex, 5).tolist()}|{np.round(ey, 5).tolist()}|{np.round(start, 4).tolist()}|{np.round(end, 4).tolist()}|{np.round(need, 3).tolist()}"
-    key = f"{label}|hugM|{HUG_RMIN:g}|{HUG_N[label]}|{geo}"
+    key = f"{label}|hugM2|{HUG_RMIN:g}|{HUG_N[label]}|{geo}"
     cache = json.load(open(CACHE)) if os.path.exists(CACHE) else {}
     if key in cache: fit = cache[key]; fit["segs"] = [tuple(x) for x in fit["segs"]]
     else:
         fits = []
-        for n_ in HUG_N[label]:
+        a0, a1 = math.degrees(math.atan2(start[1], start[0])), math.degrees(math.atan2(end[1], end[0]))
+        if a1 - a0 > 30.0:                                                                 # a long bar (link 2, 56 deg): pinned to the strap
+            c0, c1 = a0 + 12.5, a1 - 13.0; cuts = list(np.linspace(c0, c1, max(2, int(round((c1 - c0) / 15.0)) + 1)))   # in pieces (one
+            for npc in (3, 4):                                                             # chain of n segments does not hug it: 5.7 mm)
+                try: fits.append(SK.hug_chain_pieces(start, end, clear, t, outside, th, need, cuts, n_piece=npc, r_min=HUG_RMIN, margin=margin, tgt_curve=tgt, seeds=6))
+                except RuntimeError as e_: print(f"  {label}: hug in pieces at {np.round(cuts, 1).tolist()} deg, {npc} segments each: {e_}", flush=True); continue
+                print(f"  {label}: hug in pieces at {np.round(cuts, 1).tolist()} deg, {npc} segments each: max {fits[-1]['max_clear']:.2f} outside the footprints "
+                      f"{fits[-1]['max_clear_outside']:.2f} mean {fits[-1]['mean_clear']:.2f} mm", flush=True); break
+        for n_ in (HUG_N[label] if not fits else ()):
             try: fits.append(SK.hug_chain(start, end, clear, t, outside, n=n_, r_min=HUG_RMIN, margin=margin, tgt_curve=tgt, seeds=10)); print(f"  {label}: hug {n_} segments: max {fits[-1]['max_clear']:.2f} outside the footprints {fits[-1]['max_clear_outside']:.2f} mean {fits[-1]['mean_clear']:.2f} mm", flush=True)
             except RuntimeError as e_: print(f"  {label}: hug {n_} segments: {e_}", flush=True)
         if not fits: raise RuntimeError(f"{label}: no hugging chain")
         fit = min(fits, key=lambda f_: f_["objective"])
-        fit = {k: (float(v) if isinstance(v, (np.floating, float)) else v) for k, v in fit.items()}
+        fit = {k: (float(v) if isinstance(v, (np.floating, float)) else ([float(x) for x in v] if k == "cuts_deg" else v)) for k, v in fit.items()}
         cache = json.load(open(CACHE)) if os.path.exists(CACHE) else {}; cache[key] = fit
         os.makedirs(os.path.dirname(CACHE), exist_ok=True); json.dump(cache, open(CACHE + ".tmp", "w"), indent=0); os.replace(CACHE + ".tmp", CACHE)
     P, H, _ = SK.sample(start, fit["segs"], 60); U = P - 0.5 * t * SK.normals(H); cl = clear(U); out_ = outside(U)

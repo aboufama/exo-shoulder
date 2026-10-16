@@ -1,0 +1,6 @@
+[
+ {"cmd": "OMP_NUM_THREADS=1 CB_EXACT=1 CB_FOLD_MARGIN=10 python3 docs/concepts/verify/minarc-bdp-remeasure.py wear bench BDp docs/concepts/verify/minarc-bdp/wear_bench_m10.json", "tag": "bdp_wear_bench_m10",
+  "out": ["docs/concepts/verify/minarc-bdp/wear_bench_m10.json", "docs/concepts/verify/minarc-bdp/wear_bench_m10_conn.json"]},
+ {"cmd": "OMP_NUM_THREADS=1 CB_FOLD_MARGIN=5 python3 docs/concepts/verify/minarc-bdp-remeasure.py conn BDp docs/concepts/verify/minarc-bdp/conn_taken_m5.json taken", "tag": "bdp_conn_taken_m5",
+  "out": ["docs/concepts/verify/minarc-bdp/conn_taken_m5.json"]}
+]
