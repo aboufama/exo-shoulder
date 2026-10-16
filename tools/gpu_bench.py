@@ -731,8 +731,11 @@ def main():
         log(f"GPU {len(cf)} configs in {tg:.1f} s")
         import multiprocessing as mp
         t = time.time()
+        c = [None] * len(cf)
         with mp.get_context("fork").Pool(a.procs) as pool:
-            c = pool.map(cpu_eval, [(p, wear, fit) for p in cf], chunksize=1)
+            for k, r in enumerate(pool.imap(cpu_eval, [(p, wear, fit) for p in cf], chunksize=1)):
+                c[k] = r
+                if (k + 1) % 10 == 0: log(f"  CPU {k + 1}/{len(cf)} ({time.time() - t:.0f} s)")
         tc = time.time() - t; log(f"CPU {len(cf)} configs in {tc:.1f} s on {a.procs} processes")
         keys = ("gap", "reach", "follow", "inband14", "inband10", "contact")
         both = [(x, y) for x, y in zip(g, c) if not x.get("error") and not y.get("error")]

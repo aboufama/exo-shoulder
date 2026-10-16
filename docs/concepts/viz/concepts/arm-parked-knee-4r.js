@@ -10,8 +10,10 @@
  * in MVP1), 0 passive translations, 1 spring, 2 stops. Joint values are measured from the rest pose. */
 (function () {
   const K = (typeof window !== 'undefined' ? window : globalThis).KIN, V = K.V, M = K.M;
-  const P = { az: 102.7408, el: 67.9854, wd: 81.3566, wa: -14.6101, a: [37.6, 60.0, 22.307], pz4: 98.4478, s1: -1,
-              margin: 5, inner: 0.5, faces: [52, 60, 66, 66], hub_r: [10, 10, 10, 10], spring_r: 12, stack: 12.25, cuff_at: 165 };
+  const P = { az: 108.0282, el: 71.0171, wd: 76.2005, wa: -7.9064, a: [32.8519, 72.9724, 25.4941], pz4: 104.0211, s1: -1,
+              margin: 11.7402, inner: 0.5, faces: [49.0, 59.0, 66.2, 77.0], hub_r: [10, 10, 10, 10], spring_r: 12, stack: 12.25, cuff_at: 165 };
+  // best configuration W3n (near-touch objective, farm CMA; Bench(60,160) fast 19.32 / near 21.60; Bench(110,360) exact frozen 25.05);
+  // faces = the model's fitted hub levels (mm from GH) at this configuration
   const D2R = K.D2R, R2D = K.R2D;
   const u1 = K.bvec(P.az, P.el), W0 = K.wdir(P.wd, P.wa), [a1, a2, a3] = P.a;
   const WB = [0, -0.0713, 0.9975], DB = [0, -0.9975, -0.0713];             // BOTTOM's bar (body_pose humerus frame)

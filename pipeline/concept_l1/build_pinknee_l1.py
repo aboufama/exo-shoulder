@@ -4,7 +4,9 @@ workspace.json, design.json, parts_full.json, build.json). Derived from build_os
 chain (hubs, links) carries over, the crossed RSR3M cuff stage is replaced by the knee.
 
 The shape is the VERIFIED model's own fit under the frozen-shape protocol (docs/concepts/verify/skin-normal-3r-pin-knee.py:
-fit on Bench(60,160) FAST, that exact shape - heights, knee centre m - is what the verifier wore on Bench(110,360) exact).
+fit on Bench(60,160) FAST, that exact shape - heights, knee centre m - is what the verifier wore on Bench(110,360) exact;
+the polished H1 was verified on the polish protocol, fit on Bench(110,360) FAST: --fit-bench 110,360, which needs that
+bench's fast grid cache (key 14f156cb6fc8: on the farm, `tools/osn_polish.py assemble 110 360 .cache/osnpb_parts`)).
 Every part is built at its real size from that fit:
   * hubs: keep-outs of the DECLARED per-joint hub (rad1..rad3: O20 v5 / O17 / O15, all an MR117-2RS pair, 12.25 mm stack):
     lower member's plate F..F+3, upper member's boss + cap F+3.15..F+12.25;
@@ -37,13 +39,14 @@ The configuration is an INPUT (the polish run may replace k4598): --params '<jso
 in the params).
 
     OMP_NUM_THREADS=1 nice -n 10 python3 pipeline/concept_l1/build_pinknee_l1.py [--out ID] [--params JSON] [--hubs R1,R2,R3]
-                                                                                 [--jobs 1] [--no-clips]
+                                                                                 [--fit-bench 60,160|110,360] [--jobs 1] [--no-clips]
+    polished H1 (gen-3 winner): --out l1_skin-normal-3r-pin-knee-h1 --fit-bench 110,360 (rows best_params = H-g107-1)
 """
 import argparse, importlib.util, json, math, os, sys, time
 import numpy as np, trimesh
 HERE = os.path.dirname(os.path.abspath(__file__)); REPO = os.path.abspath(os.path.join(HERE, "..", ".."))
 sys.path.insert(0, os.path.join(REPO, "tools")); sys.path.insert(0, os.path.join(REPO, "pipeline", "full-exo")); sys.path.insert(0, HERE)
-os.environ.pop("CB_EXACT", None)                     # the fit bench of the frozen protocol is Bench(60,160) FAST
+os.environ.pop("CB_EXACT", None)                     # the fit bench of the frozen protocol is FAST (Bench(60,160) or Bench(110,360))
 import concept_bench as CB                                                      # noqa: E402
 import build_seed_offset_l1 as REF                                              # noqa: E402  (mesh helpers, HR, skin_min, frame_dict)
 BP = CB.BP
@@ -78,9 +81,12 @@ def params_from(a):
     return P, src
 
 
-def fit(P):
-    """the frozen protocol's fit: Bench(60,160) fast (CB_EXACT unset), the model's own run"""
-    B = CB.Bench(60, 160); M = MK.Model(B, dict(P)); r = M.run(); M._bench = (M.Q, M.s, M.RS, M.X, M.K, M.q)
+def fit(P, bench=(60, 160)):
+    """the frozen protocol's fit, the model's own run on a FAST bench (CB_EXACT unset): Bench(60,160) = the round-3
+    verifier's protocol (k4598); Bench(110,360) = the FINAL POLISH protocol (the polished H1's verified shape: fit on
+    Bench(110,360) fast, worn exact - docs/concepts/verify/skin-normal-3r-pin-knee-polish.py fitbig). The fold margin is
+    the repository's (tools/concept_kit.py FOLD_MARGIN, CB_FOLD_MARGIN; 5 deg = the user's ruling)."""
+    B = CB.Bench(int(bench[0]), int(bench[1])); M = MK.Model(B, dict(P)); r = M.run(); M._bench = (M.Q, M.s, M.RS, M.X, M.K, M.q)
     return M, r
 
 
@@ -447,10 +453,13 @@ def main():
     ap = argparse.ArgumentParser(); ap.add_argument("--out", default="l1_skin-normal-3r-pin-knee")
     ap.add_argument("--params"); ap.add_argument("--params-file"); ap.add_argument("--k", type=int); ap.add_argument("--hubs")
     ap.add_argument("--jobs", type=int, default=1); ap.add_argument("--no-clips", action="store_true")
-    a = ap.parse_args(); t0 = time.time()
+    ap.add_argument("--fit-bench", default="60,160", help="NC,NW of the FAST fit bench: 60,160 = round-3 protocol, 110,360 = polish protocol")
+    a = ap.parse_args(); t0 = time.time(); fb = tuple(int(x) for x in a.fit_bench.split(",")); fbs = f"Bench({fb[0]},{fb[1]})"
+    import concept_kit as KIT
     dd = os.path.join(FULL, "designs", a.out); os.makedirs(dd, exist_ok=True)
-    P0, src = params_from(a); M, rep = fit(P0); D = M.D; P = M.p
-    print(f"fit ({src}) on Bench(60,160) {M.B.mode}: gap {rep['gap']} reach {rep['reach']} follow {rep['follow']} ib14 {rep['inband14']} "
+    P0, src = params_from(a); M, rep = fit(P0, fb); D = M.D; P = M.p
+    if M.B.mode != "fast": print(f"WARNING: the fit bench {fbs} ran {M.B.mode}, not fast - the verified shape was fitted on the fast grid", flush=True)
+    print(f"fit ({src}) on {fbs} {M.B.mode} (fold margin {KIT.FOLD_MARGIN}): gap {rep['gap']} reach {rep['reach']} follow {rep['follow']} ib14 {rep['inband14']} "
           f"ib10 {rep['inband10']} contact {rep['contact']} f {rep['f']} tr {M.tr:.2f} m {np.round(D.m, 3)} hubs {M.hr} ({time.time() - t0:.0f} s)", flush=True)
     parts, stack = build_parts(M)
     up = user_parts(); bot = next(m for g, n, m in up if n.startswith("BOTTOM"))
@@ -484,7 +493,7 @@ def main():
                seats=dict((k_, P[k_]) for k_ in ("az1", "el1", "az2", "el2", "wd", "wa", "b3")),
                knee=dict((k_, P[k_]) for k_ in ("lE", "lc", "phiE", "phib", "stk", "ang_min")), knee_mid_m_mm=np.round(D.m, 3).tolist(), hub_r_mm=list(M.hr))
     pr = {k_: v for k_, v in P0.items()}
-    design = dict(id=a.out, source=f"docs/concepts/{ID}.md, {src}, fit on Bench(60,160) {M.B.mode} = the shape the verifier wore frozen on Bench(110,360) exact",
+    design = dict(id=a.out, source=f"docs/concepts/{ID}.md, {src}, fit on {fbs} {M.B.mode} at fold margin {KIT.FOLD_MARGIN} = the shape the verifier wore frozen on Bench(110,360) exact",
                   params=pr, n_joints=3, sliding_cuff=False, dof=3,
                   passive=dict(count=2, translations=0, rotations=2, outside_dof_count=True,
                                kind="flat two-pin knee closing the 3R loop at the cuff (planar RRR with J3: pins a, b parallel to J3); set by loop closure, nothing sags",
@@ -494,7 +503,7 @@ def main():
                   joints=[dict(joint=f"J{k + 1}", part=f"O{2 * M.hr[k]:.0f} x 12.25 hub, MR117-2RS pair ({MK.HUBS.get(M.hr[k], '')})", axis_offset_mm=kin["axis_line_offsets_mm"][k]) for k in range(3)],
                   kinematics=kin, base=dict(mount="girdle", chain="osn3_pinknee", note="base rides the scapula on the user's scapula handler"),
                   built_with="pipeline/concept_l1/build_pinknee_l1.py (L1 keep-out meshes: declared hub keep-outs, fitted 8 x 3 straps, E strap + boss, knee link, arm pad)",
-                  label=f"skin-normal-3r-pin-knee ({src}), L1 keep-out", faces_mm=[round(float(x), 2) for x in M.f], tr=round(float(M.tr), 2), stack_mm=stack,
+                  label=f"skin-normal-3r-pin-knee ({src}; fit {fbs}, fold margin {KIT.FOLD_MARGIN:g}), L1 keep-out", fit_bench=list(fb), fold_margin=KIT.FOLD_MARGIN, faces_mm=[round(float(x), 2) for x in M.f], tr=round(float(M.tr), 2), stack_mm=stack,
                   bench=dict((k_, rep[k_]) for k_ in ("gap", "reach", "follow", "inband14", "inband10", "contact")),
                   note="R17's dynamics judge models the orientation-equivalent spherical chain (kinematics az/el/a/w); the J3 line offset "
                        f"({kin['axis_line_offsets_mm'][2]} mm) and the knee's 2 passive pins are not in its MuJoCo model")
@@ -503,7 +512,7 @@ def main():
     pts = [(m, X) for m, X in M.rigid.values()] + [(m, X) for m, X in M.link_pts.values()] + list(M.contact)
     for g, mem, n, m, mat in parts:
         pts.append((mem, np.r_[np.asarray(m.vertices), trimesh.sample.sample_surface_even(m, 300, seed=1)[0]]))
-    rep_out = dict(fit=dict(params=pr, source=src, bench="60,160", mode=M.B.mode,
+    rep_out = dict(fit=dict(params=pr, source=src, bench=f"{fb[0]},{fb[1]}", mode=M.B.mode, fold_margin=KIT.FOLD_MARGIN,
                             report={k_: rep.get(k_) for k_ in ("gap", "reach", "follow", "inband14", "inband10", "contact", "why", "f", "min_clear_taken", "parts_ib14", "knee", "hubs")},
                             m=np.round(D.m, 3).tolist(), tr=round(float(M.tr), 3)), stack=stack, mount=mrep, kin_u2_check_deg=kin["u2_check_deg"])
     json.dump(rep_out, open(os.path.join(dd, "build.json"), "w"), indent=1, default=float)

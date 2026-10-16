@@ -23,3 +23,27 @@
    (no refit), an adversarial verifier re-running the model, and a red-team pose list (overhead >= 140, across-body,
    behind-the-back, the near-touch list, the slot lock-angle minimum and where it happens).
 
+## The spec was wrong in one place: the slot cannot sit on link 2b with the roller on link 1
+
+Measured first, before any bench run (`python3 docs/concepts/models/slotted-eccentric-j2-3r.py gate`, synthetic poses
+over the J1-J3 angle th, Amin 60 / Amax 90 / b 25 / c 72 / a1 38.09 / margin 5):
+
+- Over the window the law opens (th 27-123 deg), the crank angle q2 (crank vs link 1 about J2) spans **200.8 deg**:
+  the J2 interior angle runs 0 -> 180 deg across any wide fold window, and the knee offset does not cancel it.
+- With the roller F fixed on link 1 and the slot in a lever on 2b (the spec), the cam is **singular whenever F, K and J2
+  lie on one great circle**: there d/dq2 and d/dpsi move the roller along the same direction in 2b's frame, so the slot
+  cannot hold the knee. That happens whenever the crank's azimuth about J2 passes the roller seat's (or its antipode):
+  with a 200 deg crank sweep, for EVERY seat. Fine-sampled (0.02 deg in th): seat (38, -7.5) lock angle 2.46 deg at
+  th 75.92 where q2 = -7.49 = the seat azimuth; seat (20, 0) 0.024 deg at q2 = -0.02. (A 0.5 deg sampling misses the
+  dip and reads 37 deg - the gate now also tests the alignment angle directly.)
+- **Inverted** (roller G on link 2b at polar (dG, gG) about K, the slot a curved track fixed to link 1 around hub 2) the
+  singular set is G-K-J2 alignment, which depends on the knee angle alone (psi spans 57-134 deg here), so it can be
+  placed out of the way. This is the model. Same parts, same mobility, same complexity.
+- The inverted cam's lock angle (angle between the roller's velocity in the internal four-bar mode at a fixed arm pose
+  and the slot tangent; >= 50 deg = pressure angle <= 40 deg, the spec's number) falls toward the fold edges: the
+  internal mode of the J1-J2-K-J3 loop IS the fold mode, it changes the knee angle only in proportion to sin(J2 interior
+  angle). Best seat at the default law: 41 deg over the whole window, >= 50 deg only over th 27-117.75 (the track
+  ends there: a hard stop, poses beyond are not taken). The slot lock is a fold margin in disguise.
+- The track is long: 106 mm of slot, 152 deg around J2 at 25-45 deg (27-49 mm) from its axis, i.e. a crescent of
+  link 1 plate around hub 2 that reaches the trapezius / neck skin.
+

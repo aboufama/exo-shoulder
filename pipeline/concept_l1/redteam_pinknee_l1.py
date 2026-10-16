@@ -117,7 +117,7 @@ def main():
     # the verifier's near-touch neighbourhood (arm at the side), through the design's own chain
     sys.argv = [sys.argv[0]]; sys.path.insert(0, HERE)
     import build_pinknee_l1 as O
-    bj = json.load(open(os.path.join(dd, "build.json"))); M, rep = O.fit(bj["fit"]["params"])
+    bj = json.load(open(os.path.join(dd, "build.json"))); M, rep = O.fit(bj["fit"]["params"], tuple(int(x) for x in str(bj["fit"].get("bench", "60,160")).split(",")))
     near = [[pl, el, ax, 0.0, 0.0] for pl in (-30, -15, 0, 30, 60, 75, 90) for el in (0.0, 5.0, 10.0) for ax in (-60, -30, 0, 30, 60, 90)]
     K = O.chain(M, np.array(near, float)); kin, clear, adjm, _, worst = O.feasibility(M, K, np.array(near, float), [], skin=False); nt = []
     for j, p in enumerate(near):

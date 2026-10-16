@@ -91,3 +91,82 @@ preload. That is a real MVP2 design question (the user's call), not a bench numb
 golden target's complexity ~0: the 4R is the honest upper bound of what a spare buys, not the golden solution.
 
 ## Results
+
+All Bench(60,160) numbers are fast (grid cache), every check on; frozen = the fit shape (hub levels, strap undersides)
+of Bench(60,160) worn without refit on Bench(110,360) EXACT, K6 at 1 mm. near = metal < 1 mm counted as contact.
+over = reach of the workspace poses at elevation >= 140 (12 on the small bench, 28 on the big one).
+
+### 1. The O20 rebase (measurement change, not a design change)
+
+| config | hubs | margin | fast gap | frozen exact gap | reach (frozen) | over (frozen) | near (frozen) |
+|---|---|---|---|---|---|---|---|
+| ideation k-A (its claim) | O15 J2-J4 | 10 | 19.18 | 22.36 | 0.750 | 0.393 | - |
+| k-A, slim_control (attribution only) | O15 J2-J4 | 10 | 19.19 | - | - | - | - |
+| k-A | O20 | 10 | 30.84 | 33.91 | 0.744 | 0.357 | 46.05 |
+| k-A | O20 | 5 | 38.90 | 44.24 | 0.672 | 0.357 | 54.69 |
+
+O20 costs 11.65 fast points at the ideation seats (hub 2 in band 1.00 -> 0.75 / 0.58, link 3 0.50 -> 0.36 / 0.33).
+
+### 2. Search (farm): 200-config coarse sweep + 16 CMA-ES streams, 13383+ configurations
+
+Coarse random sweep (200, margin 5, sides 0 / +-1, branch +-1): best 45.06 - worse than the start point; the
+landscape is narrow (branch s1 +1 never below 81.9; one-sided springs worse than centred: at k-A side -1 43.47, +1 73.29).
+
+| stream | start | objective | margin | tries | best fast | gate: gain 2nd half / last third / top-5 spread (score pts) |
+|---|---|---|---|---|---|---|
+| A5a | k-A | gap | 5 fixed | 1169 | 27.93 | 0.47 / 0.47 / 0.04 |
+| A5b | k-A | gap | 5 fixed | 1033 | 25.31 | 0.50 / 0.24 / 0.14 |
+| C5 | basin c | gap | 5 fixed | 1505 | 23.87 | 0.01 / 0.01 / 0.01 |
+| A5n | k-A | near | 5 fixed | 1297 | 30.84 | 0.93 / 0.11 / 0.03 |
+| A10 | k-A | gap | 10 fixed | 1057 | 17.47 | 0.04 / 0.04 / 0.01 |
+| C10 | basin c | gap | 10 fixed | 905 | 23.85 | 0.20 / 0.09 / 0.05 |
+| W1 | A10 | gap | free (>= 5) | 785 | 17.30 (m 10.07) | 0.06 / 0.06 / 0.03 |
+| W2n | A10 | near | free | 1041 | 21.79 near / 18.41 plain (m 10.09) | 0.31 / 0.14 / 0.04 |
+| **W3n** | C10 | near | free | 969 | **21.60 near / 19.32 plain (m 11.74)** | 0.87 / 0.27 / 0.03 |
+| W4n | C5 | near | free | 1377 | 29.00 near (m 5.17) | 0.37 / 0.17 / 0.02 |
+| W5l | A10, l3low | gap | free | 1025 | 16.31 (m 9.02) | 0.36 / 0.08 / 0.02 |
+| W6 | A10, sigma 0.8 | gap | free | 1017 | 16.57 (m 10.09) | 0.21 / 0.19 / 0.02 |
+
+Every stream passes the convergence gate (sigma collapsed in all). **The stop position is a design variable and its
+optimum is 9-12 deg from the fold, not 5**: with the margin free, every stream moved it to 9-12 deg (W4n, started at 5,
+stayed in the margin-5 basin at 29.0). The user's 5 deg is the lower bound for the stop; a 4R's spare takes over the
+poses beyond it, so a wider stop gives up nothing the spring cannot pick up, while a stop at 5 deg admits near-fold
+configurations whose links clash and whose hubs must ride higher.
+
+### 3. Frozen on Bench(110,360) exact (the claim)
+
+| config | margin | fast | fast near | **frozen gap** | frozen near | reach | follow | ib14 | ib10 | contact | over | min metal mm | crown-contact poses | spare on stop | defl p95 / max deg |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| **W3n (claim)** | 11.74 | 19.32 | 21.60 | **25.05** (score 90.9) | **29.29** (89.3) | 0.772 | 0.955 | 0.810 | 0.398 | 0.033 | 0.286 | 0.40 | 7 | 38 % | 77 / 130 |
+| W3n | 10 | 20.90 | 24.31 | 24.94 | 30.25 | 0.775 | 0.955 | 0.806 | 0.393 | 0.030 | 0.286 | 0.11 | 5 | 35 % | 69 / 127 |
+| W3n | 5 | 58.21 | 61.99 | 62.11 | 66.84 | 0.572 | 0.900 | 0.698 | 0.325 | 0.041 | 0.286 | 0.30 | 5 | 26 % | 70 / 160 |
+| W6 (plain best) | 10.09 | 16.57 | 39.07 | 24.47 (91.1) | 38.02 | 0.761 | 1.000 | 0.860 | 0.479 | 0.066 | 0.214 | 0.01 | 16 | 28 % | 62 / 137 |
+| W6 | 10 | 16.57 | 40.19 | 24.72 | 39.29 | 0.761 | 1.000 | 0.860 | 0.479 | 0.068 | 0.214 | 0.01 | 17 | 28 % | 62 / 136 |
+| W6 | 5 | 42.21 | 59.14 | 51.04 | 67.67 | 0.586 | 0.900 | 0.839 | 0.479 | 0.086 | 0.214 | 0.01 | 14 | 23 % | 57 / 113 |
+| W2n | 10.09 | 18.41 | 21.79 | 26.47 | 32.26 | 0.764 | 0.991 | 0.819 | 0.392 | 0.047 | 0.286 | 0.13 | 7 | 30 % | 73 / 141 |
+| A10 | 10 | 17.47 | 57.34 | 27.27 | 58.34 | 0.739 | 0.973 | 0.856 | 0.470 | 0.068 | 0.143 | 0.02 | - | 25 % | - / 106 |
+| W5l (l3low) | 9.02 | 16.31 | 56.28 | 42.93 | 72.08 | 0.589 | 0.936 | 0.872 | 0.470 | 0.076 | 0.143 | 0.01 | 8 | 23 % | 60 / 115 |
+| C10 | 10 | 25.93 | - | 33.84 | 41.88 | 0.742 | 0.900 | 0.827 | 0.470 | 0.057 | 0.214 | 0.15 | - | 60 % | - / 138 |
+| C5 | 5 | 28.79 | - | 34.95 | 59.43 | 0.625 | 1.000 | 0.855 | 0.463 | 0.029 | 0.250 | 0.00 | - | 12 % | - / 92 |
+
+The claim is W3n, not W6: they tie on the plain frozen gap (25.05 vs 24.47, 0.6 apart) but W3n keeps its number when
+near-touch counts (29.29 vs 38.02; min metal-skin 0.40 vs 0.01 mm; 7 vs 16 crown-contact poses). The plain-gap optima
+(A10, W5l, W6) buy their fast numbers with metal skimming the skin (fast near 39-57) and lose 8-27 points frozen: the
+fold tuned to the sample (lesson c) is visible here too (A10 17.47 -> 27.27, W5l 16.31 -> 42.93).
+
+W3n best parameters: az 108.03, el 71.02 (J1 on the acromion top / back, inside the user's J1 seats), J4 wdir(76.20, -7.91),
+a1 32.85, a2 72.97, a3 25.49 deg, pz4 104.0 (spring rest azimuth), stops at 11.74 deg from the J2 fold, centred
+spring, q 0.98, end_extra 1.28, all O20 hubs (hub 4 + spring coil r 12). Fitted hub levels F 49 / 59 / 66 / 77 mm. In band per member
+(fast): hub 1 1.00, hub 2 0.99, hub 3 0.88, **hub 4 0.51, link 3 0.32**, link 1 0.99, link 2 0.89, neck 0.74.
+
+### 4. Controls
+
+- J4 locked at the park seat (lim4 0): k-A 58.37 / 65.73 (m 5 / 10), A10 60.34, W3n 82.18 fast - the spare is worth
+  40-60 fast points at its own seats.
+- **Against the best 3R at O20, same protocol**: the polished pin knee H1 (3R + a flat two-pin knee, 0 passive
+  translations, complexity 19.5) on the round-3 verifier protocol (fit Bench(60,160) fast, worn exact; margin 10) is
+  28.21 plain / 33.77 near-touch (docs/concepts/skin-normal-3r-pin-knee.md); W3n here is **25.05 / 29.29** - the 4th
+  joint is worth ~3 plain / ~4.5 near-touch points at O20, not the ideation's ~12 (most of that came from the slim O15
+  hubs at J2-J4 the user ruled out). Price: complexity 32.25 (4 active) or 13.25 (J4 a sprung, sensed passive pin) vs
+  19.5, and a spring the wearer feels on 26-38 % of poses. (The pin knee's 26.45 / 24.48 are on the polish protocol -
+  fit on Bench(110,360) fast - not comparable to the numbers here.)
