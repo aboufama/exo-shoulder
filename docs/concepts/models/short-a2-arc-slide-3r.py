@@ -55,10 +55,11 @@ NAME = ("Short-link-2 3R whose J3 hub rides a spring-returned GH-concentric arc 
 # seed S1 of the round-5 judge (catalogue model_spec): u1 = bvec(107.18, 64.67), u3 = wdir(103.39, -5.90)
 PARAMS = dict(az=107.18, el=64.67, wd=103.39, wa=-5.90, a1=44.138, a2h=40.730, a2max=54.591, sigma=-1,
               m_stop=K.FOLD_MARGIN, q=0.97, width=12.0, t_link=3.0,
-              rail_w=14.0, rail_th=3.0, carr_t=2.0, carr_len=16.0, rail_end=2.0, r_lay=56.0, layout=0, lift1=1.0, l1_end=2.0,
+              rail_w=14.0, rail_th=3.0, carr_t=2.0, carr_len=16.0, rail_end=2.0, r_lay=56.0, layout=0, lift1=1.0, l1_end=2.0, side=0, a2min=None, c_extra=0.0,
               connect=1, near=0)
 ELEV_OVER = SPM.ELEV_OVER
 GAP = 0.15                                                   # running gap carriage / rail
+QS = 4.0                                                     # a2 enters K2 x4: a > 6.25-deg slide step per 2-deg sub-step is a jump
 
 
 def _cosd(x): return np.cos(np.radians(x))
@@ -71,15 +72,17 @@ def dihedral(a1, a2, th):
     return float(np.degrees(np.arccos(np.clip(c, -1, 1))))
 
 
-def stop_root(th, a1, mu, a2h, a2max):
-    """smallest a2 in [a2h, a2max] with cos th = cos a1 cos a2 + sin a1 sin a2 cos mu (nan if none)"""
+def stop_root(th, a1, mu, lo_a2, hi_a2):
+    """all roots a2 in [lo_a2, hi_a2] of cos th = cos a1 cos a2 + sin a1 sin a2 cos mu -> (6, n) array, inf where none"""
     A = math.cos(math.radians(a1)); Bc = math.sin(math.radians(a1)) * math.cos(math.radians(mu))
     R = math.hypot(A, Bc); phi = math.degrees(math.atan2(Bc, A)); C = _cosd(th) / R
     ok = np.abs(C) <= 1.0; d = np.degrees(np.arccos(np.clip(C, -1, 1)))
     X = np.stack([phi + d, phi - d, phi + d + 360.0, phi - d + 360.0, phi + d - 360.0, phi - d - 360.0])
-    X = np.where(ok[None] & (X >= a2h - 1e-7) & (X <= a2max + 1e-7), X, np.inf); best = X.min(0)
-    best = np.where(np.isfinite(best), best, np.nan)
-    return np.clip(best, a2h, a2max)
+    return np.where(ok[None] & (X >= lo_a2 - 1e-7) & (X <= hi_a2 + 1e-7), np.clip(X, lo_a2, hi_a2), np.inf)
+
+
+def th_of(a1, a2, mu):
+    return np.degrees(np.arccos(np.clip(_cosd(a1) * _cosd(a2) + _sind(a1) * _sind(a2) * _cosd(mu), -1, 1)))
 
 
 def closure_var(b, w, a1, a2, sigma):
@@ -94,44 +97,61 @@ def closure_var(b, w, a1, a2, sigma):
 
 
 def kin(p1, p3, p):
-    """relay + closure for axes p1, p3 (P,3) -> dict(p2, a2, mode (0 A / 1 B / 2 C / -1 none), ok, margin, th)"""
-    a1, a2h, a2max, m = p["a1"], p["a2h"], p["a2max"], p["m_stop"]
+    """relay + closure for axes p1, p3 (P,3) -> dict(p2, a2, mode (0 A / 1 B / 2 C / -1 none), ok, margin, th).
+    The spring's energy minimum: the feasible a2 (J2 dihedral within [mu_lo, mu_hi]) nearest a2h in [a2min, a2max];
+    when a2h is infeasible it lies on a stop (a root of th(mu_stop, a2) = th). One-sided (a2min = a2h): the spec."""
+    a1, a2h, a2max, m = p["a1"], p["a2h"], p["a2max"], p["m_stop"]; a2min = min(a2h, float(p.get("a2min", a2h)))
     th = np.degrees(np.arccos(np.clip((K.unit(p1) * K.unit(p3)).sum(-1), -1, 1)))
     lo, hi = abs(a1 - a2h) + m, a1 + a2h - m
     mu_lo, mu_hi = dihedral(a1, a2h, lo), dihedral(a1, a2h, hi)
     a2 = np.full(len(th), float(a2h)); mode = np.where((th >= lo) & (th <= hi), 0, -1)
-    for code, mu, sel in ((1, mu_hi, th > hi), (2, mu_lo, th < lo)):
-        if sel.any():
-            r = stop_root(th[sel], a1, mu, a2h, a2max); g = np.isfinite(r)
-            ii = np.nonzero(sel)[0]; a2[ii[g]] = r[g]; mode[ii[g]] = code
+    sel = mode < 0
+    if sel.any():
+        t = th[sel]; Xh = stop_root(t, a1, mu_hi, a2min, a2max); Xl = stop_root(t, a1, mu_lo, a2min, a2max)
+        X = np.concatenate([Xh, Xl]); code = np.r_[np.ones(len(Xh)), 2 * np.ones(len(Xl))]
+        fin = np.isfinite(X); Xs = np.where(fin, X, a2h)
+        feas = fin & (th_of(a1, Xs, mu_lo) <= t[None] + 1e-6) & (th_of(a1, Xs, mu_hi) >= t[None] - 1e-6)
+        dist = np.where(feas, np.abs(Xs - a2h), np.inf); j = dist.argmin(0); g = np.isfinite(dist.min(0))
+        ii = np.nonzero(sel)[0]; a2[ii[g]] = Xs[j[g], np.nonzero(g)[0]]; mode[ii[g]] = code[j[g]].astype(int)
     p2, h2ok, margin = closure_var(p1, p3, a1, a2, p["sigma"])
     ok = (mode >= 0) & h2ok & (margin >= K.FOLD_MARGIN - 1e-3)
-    return dict(p2=p2, a2=a2, mode=mode, ok=ok, margin=margin, th=th, mu=(mu_lo, mu_hi), lo=lo, hi=hi)
+    return dict(p2=p2, a2=a2, mode=mode, ok=ok, margin=margin, th=th, mu=(mu_lo, mu_hi), lo=lo, hi=hi, a2min=a2min)
 
 
 def _rot_arc(p2, e, s_deg):
     """direction at arc s (deg) along the great circle from p2 toward e (both (P,3))"""
-    s = np.radians(s_deg); return K.unit(np.cos(s) * p2 + np.sin(s) * e)
+    s = np.radians(np.asarray(s_deg, float))
+    if s.ndim: s = s[:, None]
+    return K.unit(np.cos(s) * p2 + np.sin(s) * e)
 
 
 def build(B, F, p):
+    """side 0 (the spec): the slot under hub 3 (hub 3 on the carriage). side 1: the slot at the ROOT of link 2 (hub-2
+    end of link 2a), the carriage carries link 2b to hub 3, which sits at its own level (removes the hub-3-on-rail
+    stack, the measured limiter of side 0); travel bilateral [a2min, a2max] around the spring's home a2h."""
     p1 = F.S(K.bvec(p["az"], p["el"])); p3 = F.HG(K.wdir(p["wd"], p["wa"]))
-    k = kin(p1, p3, p); p2, a2, ok = k["p2"], k["a2"], k["ok"]
+    k = kin(p1, p3, p); p2, a2, ok = k["p2"], k["a2"], k["ok"]; a2min = k["a2min"]
     n = K.unit(np.cross(p2, p3))                                   # slide axis, fixed in link 2a, through GH
     e = K.unit(np.cross(n, p2))                                    # rail direction at hub 2 (toward p3)
-    t3 = K.unit(np.cross(n, p3))                                   # slot tangent at p3
     R = float(p["r_lay"]); deg = lambda mm: math.degrees(mm / R)
     ext = max(p["carr_len"] / 2.0, 7.1) + p["rail_end"]           # carriage / screw + bushing, plus the end wall
-    s0, s1 = p["a2h"] - deg(ext), p["a2max"] + deg(ext)
+    side = int(p.get("side", 0)); infeasible = False
+    if side:                                                       # carriage home c_h (deg from p2, in link 2a)
+        s0 = deg(K.HUB_R + 2.0 + float(p["c_extra"])); c_h = s0 + deg(ext) + (p["a2h"] - a2min)
+        s1 = c_h + (p["a2max"] - p["a2h"]) + deg(ext)
+        infeasible = s1 + deg(K.HUB_R + 1.0) > a2min           # the rail tail would run under hub 3
+        cdir = _rot_arc(p2, e, c_h + (a2 - p["a2h"]))            # carriage centre (moves with the slide)
+    else:
+        s0, s1 = p["a2h"] - deg(ext), p["a2max"] + deg(ext); cdir = p3
+    tc = K.unit(np.cross(n, cdir))                                 # slot tangent at the carriage
     wl = lambda w: w * 70.0 / R                                    # real width at r_lay in the kit's 70-mm layout
     q = np.stack([K.axis_angle(p1, F.S([1.0, 0, 0]), p2), K.axis_angle(p2, p1, p3),
-                  K.axis_angle(p3, F.HG([0.0, -1, 0]), p2), a2], -1)
+                  K.axis_angle(p3, F.HG([0.0, -1, 0]), p2), QS * a2], -1)
     hub1 = K.hub_member("hub1", p1, "J1"); hub2 = K.hub_member("hub2", p2, "J2"); hub3 = K.hub_member("hub3", p3, "J3")
-    hub3.joints = ("J3", "Sc")
     rt = K.strap_member("rail_t", _rot_arc(p2, e, s0), _rot_arc(p2, e, s1), ("S",), ang=math.radians(s1 - s0),
                         width=wl(p["rail_w"]), t=p["rail_th"], climb_deg=None)
     rt.kind = "cap"; rt.joints = ("S", "Sc", "Rj")              # Rj: the root / slot junction of the ONE rail plate
-    lay = int(p.get("layout", 0)); w, t = p["width"], p["t_link"]; end = K.HUB_R + 2.0
+    lay = 1 if side else int(p.get("layout", 0)); w, t = p["width"], p["t_link"]; end = K.HUB_R + 2.0
     rr = K.strap_member("rail_r", p2, p3, ("J2", "S", "Rj"), ang=math.radians(s0), width=wl(p["rail_w"]), t=p["rail_th"],
                         ramp_to=(("hub2", K.STACK if lay else 0.0), ("rail_t", 0.0)), end_mm=end)
     # link 1's J2 end zone is lift1 mm above hub 2's upper flange (a spacer: only raises metal) and l1_end mm long, so
@@ -142,29 +162,37 @@ def build(B, F, p):
                         end_mm=end + float(p["l1_end"]))
     if lay: rr.over = [("link1", 1.0)]
     else: l1.over = [("rail_r", 1.0), ("rail_t", 1.0)]
-    ct = float(p["carr_t"]); mem = [hub1, hub2, rt, rr, l1]
-    hub3.ramps = [(np.ones(len(hub3.xy), bool), "rail_t", p["rail_th"] + GAP + ct)]
-    neck = K.neck_member(F, p3, joints=("J3",), ramps=(("hub3", K.STACK), (None, 0)))
-    neck.over = [("rail_t", 1.0), ("rail_r", 1.0)]
+    ct = float(p["carr_t"]); mem = [hub1, hub2, rt, rr, l1]; carr = None
     if ct > 0:
         xy = K.rect_xy(p["carr_len"], 12.0)
-        D = K.unit(70.0 * p3[:, None] + xy[None, :, :1] * t3[:, None] + xy[None, :, 1:] * n[:, None])
-        carr = K.Member("carriage", D, kind="flat", t=ct, width=12.0, joints=("Sc", "J3"), K=p3, A=t3, Bv=n, xy=xy, cell=4.0,
-                        ramps=[(np.ones(len(xy), bool), "rail_t", p["rail_th"] + GAP)])
-        mem.append(carr); neck.over.append(("carriage", 1.0))
-    mem += [hub3, neck]
-    okk = ok & np.isfinite(q).all(-1)
+        D = K.unit(70.0 * cdir[:, None] + xy[None, :, :1] * tc[:, None] + xy[None, :, 1:] * n[:, None])
+        carr = K.Member("carriage", D, kind="flat", t=ct, width=12.0, joints=("Sc", "J3") if not side else ("Sc",), K=cdir, A=tc,
+                        Bv=n, xy=xy, cell=4.0, ramps=[(np.ones(len(xy), bool), "rail_t", p["rail_th"] + GAP)])
+        mem.append(carr)
+    if not side:                                                   # hub 3 on the carriage, neck = J3's upper member
+        hub3.joints = ("J3", "Sc")
+        hub3.ramps = [(np.ones(len(hub3.xy), bool), "rail_t", p["rail_th"] + GAP + ct)]
+        neck = K.neck_member(F, p3, joints=("J3",), ramps=(("hub3", K.STACK), (None, 0)))
+        neck.over = [("rail_t", 1.0), ("rail_r", 1.0)] + ([("carriage", 1.0)] if carr else [])
+        mem += [hub3, neck]
+    else:                                                          # link 2b: carriage -> hub 3 (upper member at J3)
+        neck = K.neck_member(F, p3, joints=("J3",), ramps=(("hub3", 0.0), (None, 0)))
+        l2b = K.strap_member("link2b", cdir, p3, ("Sc", "J3"), width=w, t=t,
+                             ramp_to=(("carriage", ct) if carr else ("rail_t", p["rail_th"] + GAP), ("hub3", K.STACK)),
+                             end_mm=end, over=[("rail_t", 1.0), ("link1", 1.0), ("neck", 1.0)])
+        mem += [hub3, neck, l2b]
+    okk = ok & np.isfinite(q).all(-1) & (not infeasible)
     mv = okk & (k["mode"] > 0)
     info = dict(residual_deg=round(float(K.closure_residual(p1, p3, p2, p["a1"], a2)[okk].max()), 5) if okk.any() else None,
                 min_margin=round(float(k["margin"][okk].min()), 2) if okk.any() else None,
                 modes=dict(A=int(((k["mode"] == 0) & okk).sum()), B=int(((k["mode"] == 1) & okk).sum()),
                            C=int(((k["mode"] == 2) & okk).sum()), none=int((~okk).sum())),
-                slide_deg_max=round(float((a2[mv] - p["a2h"]).max()), 2) if mv.any() else 0.0,
+                slide_deg_max=round(float(np.abs(a2[mv] - p["a2h"]).max()), 2) if mv.any() else 0.0,
                 stops_mu=[round(k["mu"][0], 2), round(k["mu"][1], 2)], window=[round(k["lo"], 2), round(k["hi"], 2)],
-                th_top=round(float(np.degrees(np.arccos(_cosd(p["a1"]) * _cosd(p["a2max"]) + _sind(p["a1"]) * _sind(p["a2max"]) * _cosd(k["mu"][1])))), 2),
-                rail_span_deg=[round(s0, 2), round(s1, 2)])
-    return K.Chain(members=mem, ok=okk, q=q, joints=dict(J1=p1, J2=p2, J3=p3, S=n, Sc=p3, Rj=_rot_arc(p2, e, s0)),
-                   info=info, hubless=("S", "Rj"))
+                th_top=round(float(th_of(p["a1"], p["a2max"], k["mu"][1])), 2), th_bottom=round(float(th_of(p["a1"], a2min, k["mu"][0])), 2),
+                rail_span_deg=[round(s0, 2), round(s1, 2)], infeasible=bool(infeasible))
+    return K.Chain(members=mem, ok=okk, q=q, joints=dict(J1=p1, J2=p2, J3=p3, S=n, Sc=cdir, Rj=_rot_arc(p2, e, s0)),
+                   info=info, hubless=("S", "Rj") if not side else ("S", "Rj", "Sc"))
 
 
 # ---- continuity over the raw 1432-pose workspace grid (kinematics only) --------------------------------------------
@@ -242,7 +270,7 @@ def extras(B, r, p):
                 n_clip=int(len(ovc)), follow=round(float(np.mean([tk(B, j) for j in ovc])), 4) if len(ovc) else None,
                 n_taken=len(to), inband14=round(float(((d >= 2) & (d <= 14)).mean()), 4) if len(d) else None,
                 inband10=round(float(((d >= 2) & (d <= 10)).mean()), 4) if len(d) else None)
-    a2 = np.asarray(ch.q)[:, 3]; tkn = np.array([tk(B, j) for j in range(len(B.res))]); mv = tkn & (a2 > p["a2h"] + 1e-6)
+    a2 = np.asarray(ch.q)[:, 3] / QS; tkn = np.array([tk(B, j) for j in range(len(B.res))]); mv = tkn & (np.abs(a2 - p["a2h"]) > 1e-6)
     for k in ("reach", "follow", "inband14", "inband10", "contact", "gap"): r[k] = rr[k]
     r.update(crown_contact_poses=int(len(bad)), crown_min=round(float(np.min(cmin[np.isfinite(cmin)])), 2) if np.isfinite(cmin).any() else None,
              min_metal_skin=round(float(allmin[0][0]), 2) if allmin else None,
@@ -252,7 +280,7 @@ def extras(B, r, p):
              gap_near1=rn["gap"], near1=dict(reach=rn["reach"], follow=rn["follow"], inband14=rn["inband14"], contact=rn["contact"]),
              overhead=over,
              taken_slide=dict(home=int((tkn & ~mv).sum()), open=int(mv.sum()), ws_open=int((mv & ws).sum()), clip_open=int((mv & cl).sum()),
-                              slide_p95=round(float(np.percentile(a2[mv] - p["a2h"], 95)), 2) if mv.any() else 0.0),
+                              slide_p95=round(float(np.percentile(np.abs(a2[mv] - p["a2h"]), 95)), 2) if mv.any() else 0.0),
              levels={m.name: round(float(np.max(prof[m.name])), 2) for m in ch.members})
     r["rlay_ok"] = bool(r["levels"]["rail_t"] >= p["r_lay"] - 1e-6)
     return r
@@ -266,6 +294,9 @@ def snap(p):
     p["carr_len"] = min(22.0, max(16.0, float(p["carr_len"])))
     p["layout"] = 1 if float(p.get("layout", 0)) >= 0.5 else 0
     p["r_lay"] = min(80.0, max(40.0, float(p["r_lay"])))
+    p["side"] = 1 if float(p.get("side", 0)) >= 0.5 else 0
+    p["a2min"] = p["a2h"] if (p.get("a2min") is None or not p["side"]) else min(float(p["a2h"]), float(p["a2min"]))
+    p["c_extra"] = min(30.0, max(0.0, float(p.get("c_extra", 0.0))))
     p["lift1"] = min(4.0, max(0.0, float(p["lift1"]))); p["l1_end"] = min(8.0, max(0.0, float(p["l1_end"])))
     for k in ("width", "t_link", "rail_w", "rail_th", "rail_end"): p[k] = PARAMS[k]   # never thinned by a search
     return p
@@ -276,8 +307,8 @@ def evaluate(B, params):
     p = snap(params)
     r = K.evaluate(B, build, p)
     if p.get("connect", 1):                                   # isolated relay islands are not reachable (flood fill)
-        conn, st = flood(p); ch = B._kit_last["chain"]; a2 = np.asarray(ch.q)[:, 3]
-        drop = [j for j in range(len(B.res)) if B.res[j] is not None and B.kind[j] == "ws" and a2[j] > p["a2h"] + 1e-6
+        conn, st = flood(p); ch = B._kit_last["chain"]; a2 = np.asarray(ch.q)[:, 3] / QS
+        drop = [j for j in range(len(B.res)) if B.res[j] is not None and B.kind[j] == "ws" and abs(a2[j] - p["a2h"]) > 1e-6
                 and not conn.get(int(B.idx[j]), False)]
         for j in drop: B.res[j] = None
         B._kit_last["take"] = B._kit_last["take"].copy(); B._kit_last["take"][drop] = False
@@ -303,7 +334,7 @@ def statics(B, p, r, F_spring=1.5, mu_f=0.15):
     """R17 sag check in mode A: the generalised gravity force of the self-motion (a2 +1 deg, arm and scapula fixed:
     link 1, hub 2, rail move) + slot friction vs the spring moment F_spring * r_slot. Masses from the fitted parts."""
     L = B._kit_last; ch, pts, take = L["chain"], L["pts"], L["take"]; F = B._kitF
-    tk = np.nonzero(take)[0]; a2 = np.asarray(ch.q)[:, 3]; A = [j for j in tk if a2[j] <= p["a2h"] + 1e-6]
+    tk = np.nonzero(take)[0]; a2 = np.asarray(ch.q)[:, 3] / QS; A = [j for j in tk if abs(a2[j] - p["a2h"]) <= 1e-6]
     if not A: return None
     mass = {}
     for m in ch.members:
@@ -311,7 +342,7 @@ def statics(B, p, r, F_spring=1.5, mu_f=0.15):
         area = float(m.cell * ((rho / m.r_ref) ** 2).sum()) if m.kind != "flat" else float(m.cell * rho.size)
         mass[m.name] = area * m.t * K.TI
     mass["hub2"] = max(mass.get("hub2", 0), 14.0)               # O20 v5 hub: housing + 2 MR117 + encoder (~14 g)
-    moving = ["link1", "hub2", "rail_r", "rail_t"]
+    moving = ["link1", "hub2", "rail_r", "rail_t"] + (["carriage", "link2b"] if p.get("side") else [])
     # finite self-motion: a2 -> a2 + 1 deg, J2 dihedral free, p1 / p3 fixed -> new p2; body points rotate with their frame
     out = []
     for j in A:
@@ -324,7 +355,7 @@ def statics(B, p, r, F_spring=1.5, mu_f=0.15):
         W = 0.0
         for nm in moving:
             if nm not in pts: continue
-            X = pts[nm][j]; c = X.mean(0) * 1e-3; Rm = R1 if nm in ("link1", "hub2") else R2
+            X = pts[nm][j]; c = X.mean(0) * 1e-3; Rm = R1 if nm in ("link1", "hub2") else R2   # side 1: link 2b / carriage ride with hub 3 about the fixed p3 (~R2)
             W += mass[nm] * 1e-3 * float(g @ (Rm @ c - c))
         out.append(abs(W) / math.radians(1.0))                    # N m per rad of the slide coordinate
     Q = np.array(out); r_slot = r["levels"]["rail_t"] * 1e-3
@@ -336,7 +367,7 @@ def statics(B, p, r, F_spring=1.5, mu_f=0.15):
 
 def redteam(B, p, r):
     SPM.redteam(B, p, r)
-    L = B._kit_last; ch = L["chain"]; a2 = np.asarray(ch.q)[:, 3]; tk = np.array([SPM._taken(B, j) for j in range(len(B.res))])
+    L = B._kit_last; ch = L["chain"]; a2 = np.asarray(ch.q)[:, 3] / QS; tk = np.array([SPM._taken(B, j) for j in range(len(B.res))])
     print("-- slide: taken by state", r.get("taken_slide"), "modes", ch.info.get("modes"), "th_top", ch.info.get("th_top"),
           "window", ch.info.get("window"), "stops", ch.info.get("stops_mu"))
     o = np.argsort(-a2)[:10]
@@ -363,8 +394,8 @@ def frozen(p0, out, overlap=1.0, fit=(60, 160), big=(110, 360)):
     try:
         r = K.evaluate(Bb, build, pf)
         if pf.get("connect", 1):
-            conn, st = flood(pf); a2 = np.asarray(Bb._kit_last["chain"].q)[:, 3]
-            drop = [j for j in range(len(Bb.res)) if Bb.res[j] is not None and Bb.kind[j] == "ws" and a2[j] > pf["a2h"] + 1e-6
+            conn, st = flood(pf); a2 = np.asarray(Bb._kit_last["chain"].q)[:, 3] / QS
+            drop = [j for j in range(len(Bb.res)) if Bb.res[j] is not None and Bb.kind[j] == "ws" and abs(a2[j] - pf["a2h"]) > 1e-6
                     and not conn.get(int(Bb.idx[j]), False)]
             for j in drop: Bb.res[j] = None
             Bb._kit_last["take"] = Bb._kit_last["take"].copy(); Bb._kit_last["take"][drop] = False
