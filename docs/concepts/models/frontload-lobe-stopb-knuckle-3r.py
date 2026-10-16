@@ -231,6 +231,32 @@ def frozen(P, nc=110, nw=360):
     return KB.frozen(_clamp(dict(PARAMS, **P)), nc, nw)
 
 
+def frozen_flood(P, nc=110, nw=360):
+    """frozen exact wear (as KB.frozen) + the continuity flood fill on the worn model (the round-6 verifier's
+    connected_report, docs/concepts/verify/minarc-stop-knuckle-4r-mechanism.py): reach static and connected"""
+    P = _clamp(dict(PARAMS, **P))
+    old = os.environ.pop("CB_EXACT", None)
+    try: B1 = CB.Bench(n_clip=60, n_ws=160)
+    finally:
+        if old is not None: os.environ["CB_EXACT"] = old
+    M1 = FLModel(B1, dict(P)); r1 = M1.run(); fit = {k: r1[k] for k in ("gap", "reach", "follow", "inband14", "inband10", "contact")}
+    P2 = dict(M1.p); P2["m_fix"] = [float(x) for x in M1.D.m]
+
+    class Frozen(FLModel):
+        def fit(self):
+            for a in ("g", "fr", "geo", "rigid", "link_pts", "f", "fK", "tr", "zb", "_tr_fit", "cyl", "box", "strap", "cyl_surf", "Emid",
+                      "Hneed", "Lneed", "hEx", "_Ex", "_rod_info", "_viz_rod", "_crown_ok"):
+                if hasattr(M1, a): setattr(self, a, getattr(M1, a))
+            self.contact = list(M1.contact); self.poses_fit = np.nonzero(self.kin_ok)[0]; self.drop = np.zeros(len(self.poses_fit), bool)
+    os.environ["CB_EXACT"] = "1"
+    B = CB.Bench(n_clip=nc, n_ws=nw); M = Frozen(B, P2); r = M.run()
+    rep = {k: r[k] for k in ("gap", "reach", "follow", "inband14", "inband10", "contact")}
+    sp_ = importlib.util.spec_from_file_location("minarc_mech_for_frontload", os.path.join(REPO, "docs", "concepts", "verify", "minarc-stop-knuckle-4r-mechanism.py"))
+    MECH = importlib.util.module_from_spec(sp_); sp_.loader.exec_module(MECH)
+    t = time.time(); con = MECH.connected_report(M, B); con["secs"] = round(time.time() - t, 1)
+    return dict(fit_fast=fit, frozen=rep, why=r.get("why"), audit=PK.audit(M, B), connected=con)
+
+
 def frozen_held(P):
     """the frozen shape (fit on Bench(60,160) fast) worn on the HELD-OUT poses: every fit-clip frame and workspace pose in
     neither Bench(110,360) nor Bench(60,160), exact path (the verifier's held_bench, docs/concepts/verify/
@@ -269,6 +295,10 @@ if __name__ == "__main__":
     par = json.loads(sys.argv[2]) if len(sys.argv) > 2 else {}
     if mode == "viz":
         print(json.dumps(viz_export(par), default=float)); sys.exit()
+    if mode == "flood":
+        t = time.time(); out = frozen_flood(par); out["params"] = par; out["secs"] = round(time.time() - t, 1)
+        if len(sys.argv) > 3: json.dump(out, open(sys.argv[3], "w"), indent=1, default=float)
+        print(json.dumps(dict(frozen=out["frozen"], connected=out["connected"], secs=out["secs"]), default=float)); sys.exit()
     if mode in ("frozen", "held"):
         t = time.time(); out = frozen(par) if mode == "frozen" else frozen_held(par); out["params"] = par; out["secs"] = round(time.time() - t, 1)
         if len(sys.argv) > 3: json.dump(out, open(sys.argv[3], "w"), indent=1, default=float)
