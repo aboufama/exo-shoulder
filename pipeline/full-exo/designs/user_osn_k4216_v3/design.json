@@ -1,0 +1,208 @@
+{
+ "id": "user_osn_k4216_v3",
+ "source": "docs/concepts/offset-skin-normal-3r.md, sweep log k 4216 (cma2-F), refitted on Bench(60,160) fast",
+ "n_joints": 3,
+ "sliding_cuff": false,
+ "dof": 3,
+ "passive": {
+  "count": 2,
+  "translations": 2,
+  "outside_dof_count": true,
+  "kind": "self-aligning slides at the cuff in hub 3's plane (along, across the arm), set by loop closure (J1, J2 on GH rays: exact 2-slide closure)",
+  "components": [
+   {
+    "slide": "along",
+    "travel_mm": [
+     -6.3,
+     6.3
+    ],
+    "part": "THK RSR3M / HIWIN MGN03C, INVERTED (block on the cuff base, rail rides with carriage A)",
+    "rail_mm": [
+     3.0,
+     2.6,
+     26.6
+    ],
+    "block_mm": [
+     8.0,
+     12.0,
+     4.0
+    ]
+   },
+   {
+    "slide": "across",
+    "travel_mm": [
+     -7.5,
+     7.5
+    ],
+    "part": "THK RSR3M / HIWIN MGN03C crosswise (rail on carriage A, block = carriage B)",
+    "rail_mm": [
+     3.0,
+     2.6,
+     29.0
+    ],
+    "block_mm": [
+     8.0,
+     12.0,
+     4.0
+    ]
+   }
+  ],
+  "radial": "none (0.5 mm closure tolerance; a real GH translation's radial part goes to the cuff liner, R10)"
+ },
+ "joints": [
+  {
+   "joint": "J1",
+   "part": "O20 x 12.25 v5 hub (docs/HARDWARE.md), MR117 bearing pair",
+   "axis_offset_mm": 0.0
+  },
+  {
+   "joint": "J2",
+   "part": "O20 x 12.25 v5 hub (docs/HARDWARE.md), MR117 bearing pair",
+   "axis_offset_mm": 0.0
+  },
+  {
+   "joint": "J3",
+   "part": "O20 x 12.25 v5 hub (docs/HARDWARE.md), MR117 bearing pair",
+   "axis_offset_mm": 7.01
+  }
+ ],
+ "kinematics": {
+  "az": 95.8565,
+  "el": 65.20929999987594,
+  "a": [
+   40.343628593070726,
+   74.06918773570376
+  ],
+  "w": [
+   84.79976841233596,
+   -11.37021137076911
+  ],
+  "branch": -1,
+  "order": [
+   0,
+   1,
+   1
+  ],
+  "axis_points_mm": [
+   [
+    0.0,
+    0.0,
+    0.0
+   ],
+   [
+    0.0,
+    0.0,
+    -0.0
+   ],
+   [
+    -1.423,
+    -6.802,
+    -0.918
+   ]
+  ],
+  "axes": [
+   [
+    0.042785,
+    0.907846,
+    0.417116
+   ],
+   [
+    -0.60493,
+    0.762265,
+    0.230244
+   ],
+   [
+    -0.196336,
+    -0.090637,
+    0.976339
+   ]
+  ],
+  "axis_line_offsets_mm": [
+   0.0,
+   0.0,
+   7.01
+  ],
+  "u2_check_deg": 0.0001,
+  "seats": {
+   "az1": 95.8565,
+   "el1": 65.2093,
+   "az2": 10.8917,
+   "el2": 54.698,
+   "wd": 79.148,
+   "wa": -13.3653,
+   "b3": 0.2282
+  },
+  "passive_slides_mm": {
+   "along": 6.3,
+   "across": 7.5,
+   "radial_tolerance": 0.5
+  },
+  "slide_mid_mm": [
+   -5.642,
+   1.575,
+   0.0
+  ],
+  "neck_mm": 16.8348
+ },
+ "base": {
+  "mount": "girdle",
+  "chain": "osn3_2slides",
+  "note": "base rides the scapula on the user's scapula handler"
+ },
+ "built_with": "pipeline/conformal/param_cad/user_style_osn.py (user_style.py parts: line/arc sketches extruded / swept, planform pads, v5 joints; real RSR3M guides; BOTTOM fused with the stage base) on the L1 design's frames and clips (l1_offset-skin-normal-3r)",
+ "label": "offset-skin-normal-3r k 4216, full CAD in the user's style",
+ "faces_mm": [
+  51.32,
+  61.15,
+  75.68
+ ],
+ "tr": 77.84,
+ "zb": 87.34,
+ "stack_mm": {
+  "base": [
+   0,
+   1.5
+  ],
+  "along_block": [
+   1.5,
+   4.5
+  ],
+  "along_rail": [
+   2.9,
+   5.5
+  ],
+  "adapter": [
+   5.5,
+   6.5
+  ],
+  "across_rail": [
+   6.5,
+   9.1
+  ],
+  "across_block": [
+   7.5,
+   10.5
+  ],
+  "total": 10.5,
+  "model_total": 13.5,
+  "rails_mm": {
+   "along": 26.6,
+   "across": 29.0
+  },
+  "bridge": [
+   10.5,
+   16.5
+  ]
+ },
+ "bench": {
+  "gap": 32.61,
+  "reach": 0.7063,
+  "follow": 0.9667,
+  "inband14": 0.7792,
+  "inband10": 0.3892,
+  "contact": 0.0116
+ },
+ "note": "R17's dynamics judge models the orientation-equivalent spherical chain (kinematics az/el/a/w); the J3 line offset (7.01 mm) and the 2 passive slides are not in its MuJoCo model",
+ "level": "L2 user-style (full CAD of the generation-2 winner)",
+ "l1_design": "l1_offset-skin-normal-3r"
+}

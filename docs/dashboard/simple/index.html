@@ -40,7 +40,9 @@
 .sx .grid3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr)); gap: var(--cds-gap-md, 12px); }
 .sx .legend { display: flex; flex-wrap: wrap; gap: 6px 14px; margin: 8px 0 0; font-size: 12px; color: var(--color-fg-muted); }
 .sx .legend i { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 5px; vertical-align: -1px; }
-@media (max-width: 640px) { .sx .hide-sm { display: none; } .sx .kpi .big { font-size: 32px; } }
+@media (max-width: 640px) { .sx .hide-sm { display: none; } .sx .kpi .big { font-size: 32px; }
+  /* narrow: the simplicity bar goes and its caption wraps (the number stays) */
+  .sx #board .cxbar { display: none; } .sx #board th.cx { font-size: 11px; } .sx #board th.cx .cap { white-space: normal; } }
 /* motion previews (leaderboard, first column): monochrome, theme tokens only; the shoulder faint, the mechanism in the text colour */
 .sx th.mo, .sx td.mo { width: 56px; padding: 2px 8px 2px 0; }
 .sx td.mo svg { display: block; width: 56px; height: 56px; overflow: hidden; }
@@ -55,8 +57,21 @@
    preview tick repaints what is on screen, not every chart (round-2 review: the 10 fps previews kept 22-30 % of the main
    thread busy, Layerize + Paint over the whole page). Placeholder heights ~ their drawn heights at 1280 px. */
 .sx #progress, .sx #now, .sx #built, .sx #all-configs, .sx #targets, .sx #built-time { content-visibility: auto; contain-intrinsic-size: auto 400px; }
+/* simplicity (the complexity count, lower = simpler): a number and a tiny bar, monochrome; a design with 3 passive
+   translations (not buildable, CLAUDE.md) in the fail colour */
+.sx th .cap { display: block; font-weight: 400; font-size: 11px; white-space: nowrap; }
+.sx td.cx { white-space: nowrap; }
+.sx .cxbar { display: inline-block; width: 36px; height: 6px; border-radius: 3px; background: var(--color-border-line); vertical-align: middle; margin-left: 6px; overflow: hidden; }
+.sx .cxbar > i { display: block; height: 100%; background: var(--color-fg-muted); }
+.sx td.cx.bad { color: var(--color-bad); }
+.sx td.cx.bad .cxbar > i { background: var(--color-bad); }
 @media (max-width: 520px) {
   .sx #board th, .sx #board td { padding-left: 4px; padding-right: 4px; }
+  /* the simplicity column made the board 77 px too wide at 400 px. On a phone the board keeps the two numbers that do
+     not follow from each other, score and simplicity: close-to-skin goes the way of follows / reaches (the score's
+     parts, all three in the "Two ways to fail" chart) and a two-word status pill wraps */
+  .sx #board .cl { display: none; }
+  .sx #board .pill { white-space: normal; text-align: center; }
   .sx #board .meter { width: 30px; margin-right: 4px; }
   .sx #board .pill { padding: 1px 6px; font-size: 11px; }
   .sx #board th.mo, .sx #board td.mo { width: 44px; padding: 2px 6px 2px 0; }
@@ -72,7 +87,7 @@
     <p class="muted" id="tz-note">All times are US Eastern.</p>
     <p class="lede" id="lede" data-source="leader">—</p>
     <div class="kpis">
-      <div class="kpi lead" id="kpi-best"><span class="lab">Best design so far</span><span class="big" data-source="leader" data-field="score">—</span><span id="kpi-best-name" class="muted" data-source="leader" data-field="short">—</span></div>
+      <div class="kpi lead" id="kpi-best"><span class="lab">Best design so far</span><span class="big" data-source="leader" data-field="score">—</span><span id="kpi-best-name" class="muted" data-source="leader" data-field="short">—</span><span id="kpi-best-cx" class="muted" data-source="leader" data-field="complexity"></span></div>
       <div class="kpi"><span class="lab">Bar to beat: today's 3-joint chain</span><span class="big" id="kpi-base" data-source="leader" data-field="base_score">—</span><span class="muted">the design you have seen rendered</span></div>
       <div class="kpi"><span class="lab">Goal</span><span class="big">100</span><span class="muted">every target met</span></div>
     </div>
@@ -85,11 +100,18 @@
     <div class="chart" id="scatter" data-source="board"></div>
   </section>
 
+  <section class="card" id="simp-sec">
+    <h2>Score vs simplicity</h2>
+    <p class="muted">Each dot is a design whose parts have been counted. Right = higher score; down = simpler. The simplicity number is points: 0 = the simplest buildable chain (three hinges, three links), and every extra freedom, slider, sensor, loop or part adds points. The goal is the bottom-right corner: once scores reach 95, the simpler design wins. The number is shown beside the score and never changes it.</p>
+    <div class="chart" id="simp" data-source="board" style="min-height:300px"></div>
+    <p class="muted" id="simp-note" data-source="board"></p>
+  </section>
+
   <section class="card" id="board-sec">
     <h2>Leaderboard</h2>
-    <p class="muted">Every design that has a measured number, best first. Motion: each design through the same arm loop, at one scale. "Checking" means an independent agent is re-measuring it. "Stopped early" means it was called dead while its search was still improving, so it is being re-opened. Names: R = a hinge (revolute joint), P = a slider; "3R" = three hinges in a row (3 degrees of freedom); "spherical" = all hinge axes meet at the centre of the shoulder joint; "offset" = they do not; "3-RRR" = three hinged legs side by side.</p>
+    <p class="muted">Every design that has a measured number, best first. Motion: each design through the same arm loop, at one scale. "Checking" means an independent agent is re-measuring it. "Stopped early" means it was called dead while its search was still improving, so it is being re-opened. Names: R = a hinge (revolute joint), P = a slider; "3R" = three hinges in a row (3 degrees of freedom); "spherical" = all hinge axes meet at the centre of the shoulder joint; "offset" = they do not; "3-RRR" = three hinged legs side by side. Simplicity: points for every freedom, slider, sensor, loop and part beyond the simplest buildable chain (three hinges, three links = 0), lower = simpler; hover a number for where its points come from. It is not part of the score.</p>
     <div class="scroll"><table id="board" data-source="board" data-row-key="id">
-      <thead><tr><th class="mo" data-source="motion" data-field="mech">Motion</th><th data-field="short">Design</th><th class="num" data-field="score">Score</th><th data-field="close">Close to skin</th><th data-field="follows" class="hide-sm">Follows arm</th><th data-field="reaches" class="hide-sm">Reaches</th><th data-field="state">Status</th></tr></thead>
+      <thead><tr><th class="mo" data-source="motion" data-field="mech">Motion</th><th data-field="short">Design</th><th class="num" data-field="score">Score</th><th class="num cx" data-field="complexity">Simplicity<span class="cap">lower = simpler</span></th><th data-field="close" class="cl">Close to skin</th><th data-field="follows" class="hide-sm">Follows arm</th><th data-field="reaches" class="hide-sm">Reaches</th><th data-field="state">Status</th></tr></thead>
       <tbody></tbody>
     </table></div>
   </section>
@@ -154,7 +176,7 @@ window.etZone = () => (new Intl.DateTimeFormat('en-US', { timeZone: 'America/New
 const live = (m) => !m.is_baseline && !['dead', 'refuted', 'duplicate'].includes(m.status);
 dash.calc('board', {
   inputs: ['morphs', 'sweeps'], title: 'Designs with a number',
-  description: 'Every morphology with a measured bench number: the verified number if one exists, else the agent\'s claim, else its best sweep so far; score = 100 x (1 - gap / 275) floored at 0, best first. A dead design whose sweep had not converged (still improving when stopped) is marked Stopped early.',
+  description: 'Every morphology with a measured bench number: the verified number if one exists, else the agent\'s claim, else its best sweep so far; score = 100 x (1 - gap / 275) floored at 0, best first. A dead design whose sweep had not converged (still improving when stopped) is marked Stopped early. complexity = the simplicity number from the design\'s parts count (tools/simplicity.py: points, lower = simpler, 0 = three hinges and three links), shown beside the score and never part of it; complexity_items = where its points come from; passive_trans > 2 = not buildable.',
   fn: (morphs, sweeps) => {
     const sc = (g) => Math.max(0, (1 - g / 275) * 100), by = {};
     sweeps.forEach((x) => { if (x.empty !== true && !x.passed_over && x.gap != null && x.gap < 999) (by[x.id] = by[x.id] || []).push(x); });
@@ -172,18 +194,19 @@ dash.calc('board', {
     const state = m.is_baseline ? 'Bar to beat' : m.status === 'verified' ? 'Verified' : m.status === 'refuted' ? 'Refuted' : m.status === 'dead' ? (conv[m.id] === false ? 'Stopped early' : 'Dead end') : c ? 'Checking' : 'Sweeping';
     const short = m.is_baseline ? "Today's 3-hinge chain" : String(m.name || m.id).split(/[:(;]| with | - /)[0].trim().slice(0, 44);
     const g = m[p + 'gap'];
-    return { id: m.id, short, score: Math.max(0, Math.round((1 - g / 275) * 1000) / 10), gap: g, close: m[p + 'inband14'], follows: m[p + 'follow'], reaches: m[p + 'reach'], contact: m[p + 'contact'], state, is_baseline: !!m.is_baseline };
+    return { id: m.id, short, score: Math.max(0, Math.round((1 - g / 275) * 1000) / 10), gap: g, close: m[p + 'inband14'], follows: m[p + 'follow'], reaches: m[p + 'reach'], contact: m[p + 'contact'], state, is_baseline: !!m.is_baseline,
+      complexity: m.complexity ?? null, complexity_items: m.complexity_items || '', passive_trans: m.passive_trans ?? null };
   }).filter(Boolean).sort((a, b) => a.gap - b.gap);
   }
 });
 dash.calc('leader', {
   inputs: ['board', 'morphs'], title: 'Best design so far',
-  description: 'The highest-scoring design that is not the baseline and not a dead end, with the baseline score for comparison. Score = 100 x (1 - gap / 275), floored at 0.',
+  description: 'The highest-scoring design that is not the baseline and not a dead end, with the baseline score for comparison. Score = 100 x (1 - gap / 275), floored at 0. complexity = its simplicity number (lower = simpler; not part of the score).',
   fn: (board, morphs) => {
     const b = board.find((r) => !r.is_baseline && !['Dead end', 'Refuted'].includes(r.state)) || {};
     const base = morphs.find((m) => m.is_baseline) || {};
     const sc = (g) => (g == null ? null : Math.max(0, Math.round((1 - g / 275) * 1000) / 10));
-    return [{ id: b.id ?? null, short: b.short ?? null, score: sc(b.gap), state: b.state ?? null, base_score: sc(base.gap), delta: b.gap != null && base.gap != null ? Math.round((sc(b.gap) - sc(base.gap)) * 10) / 10 : null }];
+    return [{ id: b.id ?? null, short: b.short ?? null, score: sc(b.gap), state: b.state ?? null, base_score: sc(base.gap), delta: b.gap != null && base.gap != null ? Math.round((sc(b.gap) - sc(base.gap)) * 10) / 10 : null, complexity: b.complexity ?? null }];
   }
 });
 dash.calc('reqsum', {
@@ -192,7 +215,8 @@ dash.calc('reqsum', {
   fn: (reqs) => [{ pass: reqs.filter((r) => r.state === 'pass').length, total: reqs.filter((r) => r.empty !== true).length, design: (reqs.find((r) => r.design) || {}).design ?? null }]
 });
 
-const pct = d3.format('.0%'), g1 = d3.format('.1f');
+const pct = d3.format('.0%'), g1 = d3.format('.1f'), cxf = d3.format('.1~f');
+const cxTip = (r) => `Simplicity ${cxf(r.complexity)} points (lower = simpler): ${r.complexity_items || 'not itemised'}`;
 const ok = (s) => s === 'ok';
 /** show `text` at the pointer, inside the chart box: flips above / left of the pointer near an edge (the detail sections
  * clip at their card: content-visibility) */
@@ -230,6 +254,54 @@ function drawScatter(rows) {
     while (used.some((u) => Math.abs(u - py) < 14)) py += 14;
     used.push(py);
     svg.append('text').attr('class', 'lbl').attr('x', left ? px - 10 : px + 10).attr('y', py).attr('text-anchor', left ? 'end' : 'start').text(r.short.slice(0, 26));
+  });
+}
+
+// Score vs simplicity: x = bench score, y = the complexity count (points, lower = simpler); the goal is the bottom-right
+// corner (score 95+, fewest points). Scores under X0 sit on the left edge; 3 passive translations (not buildable) = x.
+function drawSimple(rows) {
+  const box = document.getElementById('simp'); box.querySelectorAll('svg').forEach((n) => n.remove());
+  const pts = rows.filter((r) => r.complexity != null && r.score != null), X0 = 50;
+  const under = pts.filter((r) => r.score < X0).length, nb = pts.filter((r) => r.passive_trans > 2).length;
+  document.getElementById('simp-note').textContent = [`${pts.length} of ${rows.length} designs counted so far.`,
+    under ? `${under} scoring under ${X0} sit on the left edge.` : '', nb ? 'x = three passive translations: not buildable.' : ''].filter(Boolean).join(' ');
+  if (!pts.length) return;
+  const W = Math.max(320, box.clientWidth), H = 300, m = { l: 44, r: 16, t: 12, b: 40 };
+  const x = d3.scaleLinear([X0, 100], [m.l, W - m.r]), y = d3.scaleLinear([0, Math.max(20, d3.max(pts, (r) => r.complexity))], [H - m.b, m.t]).nice();
+  const svg = d3.select(box).append('svg').attr('width', '100%').attr('viewBox', `0 0 ${W} ${H}`);
+  svg.append('rect').attr('x', x(95)).attr('y', m.t).attr('width', x(100) - x(95)).attr('height', H - m.b - m.t).attr('fill', 'var(--color-ok)').attr('opacity', 0.12);
+  svg.append('line').attr('x1', x(95)).attr('x2', x(95)).attr('y1', m.t).attr('y2', H - m.b).attr('stroke', 'var(--color-ok)').attr('stroke-dasharray', '4 4');
+  svg.append('text').attr('x', x(95) - 4).attr('y', m.t + 12).attr('text-anchor', 'end').text('score 95');
+  svg.append('text').attr('x', x(100) - 4).attr('y', H - m.b - 6).attr('text-anchor', 'end').text('goal');
+  svg.append('g').attr('transform', `translate(0,${H - m.b})`).call(d3.axisBottom(x).ticks(W < 480 ? 5 : 10).tickFormat((v) => (v === X0 && under ? '≤' + v : v))).attr('font-size', null).attr('font-family', null);
+  svg.append('g').attr('transform', `translate(${m.l},0)`).call(d3.axisLeft(y).ticks(5)).attr('font-size', null).attr('font-family', null);
+  svg.append('text').attr('x', (m.l + W - m.r) / 2).attr('y', H - 6).attr('text-anchor', 'middle').text('score (higher is better)');
+  svg.append('text').attr('transform', `translate(12,${(H - m.b + m.t) / 2}) rotate(-90)`).attr('text-anchor', 'middle').text('simplicity points (lower = simpler)');
+  const col = (r) => r.is_baseline ? 'var(--color-fg)' : r.state === 'Verified' ? 'var(--color-ok)' : r.state === 'Dead end' || r.state === 'Refuted' ? 'var(--cds-chart-muted, var(--color-fg-muted))' : dash.colors[0];
+  const live = pts.filter((r) => !r.is_baseline && !['Dead end', 'Refuted'].includes(r.state)).sort((a, b) => b.score - a.score);
+  const best = live[0], px = (r) => x(Math.max(X0, r.score)), tip = tipper(box), nbk = (r) => r.passive_trans > 2;
+  const tipText = (r) => `${r.short} - score ${g1(r.score)} of 100 (${r.state}). ${cxTip(r)}`;
+  const order = [...pts].sort((a, b) => (a === best) - (b === best) || (a.state === 'Dead end') - (b.state === 'Dead end'));
+  svg.append('g').selectAll('circle').data(order.filter((r) => !nbk(r))).join('circle').attr('cx', px).attr('cy', (r) => y(r.complexity)).attr('r', (r) => (r === best || r.is_baseline ? 7 : 5))
+    .attr('fill', col).attr('fill-opacity', (r) => (r.state === 'Dead end' || r.state === 'Refuted' ? 0.45 : 0.9)).attr('stroke', 'var(--color-panel)').attr('stroke-width', 1.5)
+    .on('mousemove', (ev, r) => tipAt(tip, box, ev, tipText(r))).on('mouseleave', () => { tip.hidden = true; });
+  svg.append('g').selectAll('path').data(order.filter(nbk)).join('path').attr('d', (r) => { const a = px(r), b = y(r.complexity), k = 4.5; return `M${a - k},${b - k}L${a + k},${b + k}M${a - k},${b + k}L${a + k},${b - k}`; })
+    .attr('stroke', col).attr('stroke-width', 2).attr('stroke-linecap', 'round').attr('fill', 'none')
+    .on('mousemove', (ev, r) => tipAt(tip, box, ev, tipText(r))).on('mouseleave', () => { tip.hidden = true; });
+  // labels: the bar to beat and the five best live designs, placed beside their dot without overlapping (a short tick
+  // joins a label moved off its dot's line)
+  const lab = [pts.find((r) => r.is_baseline), ...live.slice(0, 5)].filter(Boolean), placed = [], cw = 6.6;
+  lab.forEach((r) => {
+    const t = r.is_baseline ? "today's 3-hinge chain" : r.short.slice(0, 26), w = t.length * cw, ax = px(r), ay = y(r.complexity);
+    for (const dy of [0, -14, 14, -28, 28, -42, 42, -56, 56]) for (const side of [1, -1]) {
+      const x0 = side > 0 ? ax + 10 : ax - 10 - w, yb = ay + 4 + dy;
+      if (x0 < m.l + 2 || x0 + w > W - m.r || yb - 11 < m.t || yb + 2 > H - m.b) continue;
+      if (placed.some((b) => x0 < b[1] && x0 + w > b[0] && yb - 11 < b[3] && yb + 2 > b[2])) continue;
+      placed.push([x0, x0 + w, yb - 11, yb + 2]);
+      if (dy) svg.append('line').attr('x1', ax + side * 6).attr('y1', ay).attr('x2', side > 0 ? x0 - 2 : x0 + w + 2).attr('y2', yb - 4).attr('stroke', 'var(--color-fg-muted)').attr('stroke-width', 0.8);
+      svg.append('text').attr('class', 'lbl').attr('x', x0).attr('y', yb).text(t);
+      return;
+    }
   });
 }
 
@@ -293,13 +365,20 @@ function moThumb(id, name) {
 function drawBoard(rows, mo) {
   const tb = document.querySelector('#board tbody'); tb.replaceChildren();
   const meter = (v, target) => { const s = document.createElement('span'); const mtr = document.createElement('span'); mtr.className = 'meter'; const i = document.createElement('i'); i.style.width = Math.max(0, Math.min(1, v)) * 100 + '%'; if (v >= target) i.className = 'ok'; mtr.appendChild(i); s.append(mtr, pct(v)); return s; };
-  const thumbs = [];
+  const thumbs = [], cxMax = Math.max(60, ...rows.map((r) => r.complexity || 0));
   rows.forEach((r) => {
     const tr = document.createElement('tr'); tr.dataset.key = r.id;
     const td = (c, cls) => { const e = document.createElement('td'); if (cls) e.className = cls; if (c instanceof Node) e.appendChild(c); else e.textContent = c; tr.appendChild(e); return e; };
     const has = mo && mo.byId.has(r.id), cell = td('', 'mo');
     if (has) { const svg = moThumb(r.id, r.short); cell.appendChild(svg); thumbs.push(svg); }
-    td(r.short); td(g1(r.score), 'num'); td(meter(r.close, 0.9)); td(meter(r.follows, 0.95), 'hide-sm'); td(meter(r.reaches, 0.9), 'hide-sm');
+    td(r.short); td(g1(r.score), 'num');
+    const cx = td('', 'num cx');
+    if (r.complexity != null) {
+      const bar = document.createElement('span'), i = document.createElement('i'); bar.className = 'cxbar'; i.style.width = Math.min(1, r.complexity / cxMax) * 100 + '%'; bar.appendChild(i);
+      cx.append(cxf(r.complexity), bar); cx.title = cxTip(r);
+      if (r.passive_trans > 2) cx.classList.add('bad');
+    } else { cx.textContent = '–'; cx.title = 'Not counted yet'; }
+    td(meter(r.close, 0.9), 'cl'); td(meter(r.follows, 0.95), 'hide-sm'); td(meter(r.reaches, 0.9), 'hide-sm');
     const p = document.createElement('span'); p.className = 'pill ' + (r.state === 'Verified' ? 'ver' : r.state === 'Dead end' || r.state === 'Refuted' ? 'dead' : r.state === 'Bar to beat' ? '' : 'run'); p.textContent = r.state; td(p);
     tb.appendChild(tr);
   });
@@ -426,9 +505,9 @@ dash.onData(() => {
       ? `${l.short} leads with a score of ${g1(l.score)} out of 100, ${g1(l.delta)} points above today's 3-hinge chain (${g1(l.base_score)}). Status: ${l.state.toLowerCase()}. No design meets every target yet.`
       : `No design beats today's 3-hinge chain (score ${g1(l.base_score)} of 100) yet; the closest is ${l.short} at ${g1(l.score)}.`;
   }
-  if (okd(L) && L.data[0]) { const l = L.data[0]; document.querySelector('#kpi-best .big').textContent = l.score == null ? '—' : g1(l.score); document.getElementById('kpi-base').textContent = l.base_score == null ? '—' : g1(l.base_score); document.getElementById('kpi-best-name').textContent = l.short ? `${l.short} (${String(l.state).toLowerCase()})` : '—'; }
+  if (okd(L) && L.data[0]) { const l = L.data[0]; document.querySelector('#kpi-best .big').textContent = l.score == null ? '—' : g1(l.score); document.getElementById('kpi-base').textContent = l.base_score == null ? '—' : g1(l.base_score); document.getElementById('kpi-best-name').textContent = l.short ? `${l.short} (${String(l.state).toLowerCase()})` : '—'; document.getElementById('kpi-best-cx').textContent = l.complexity == null ? '' : `simplicity ${cxf(l.complexity)} points (lower = simpler)`; }
   const MOT = dash.data('motion'), mo = okd(MOT) && Array.isArray(MOT.data) ? motionPrep(MOT.data) : null;
-  if (okd(B)) { const rows = B.data.filter((r) => r.empty !== true); drawScatter(rows); drawBoard(rows, mo); }
+  if (okd(B)) { const rows = B.data.filter((r) => r.empty !== true); drawScatter(rows); drawSimple(rows); drawBoard(rows, mo); }
   if (okd(S) && okd(M)) drawRecord(S.data.filter((r) => r.empty !== true), (M.data.find((m) => m.is_baseline) || {}).gap);
   if (okd(E)) drawEvents(E.data.filter((r) => r.empty !== true));
   if (okd(R)) drawReqs(R.data.filter((r) => r.empty !== true));

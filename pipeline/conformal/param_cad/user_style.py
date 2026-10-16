@@ -476,16 +476,19 @@ def arm_end(E, F, J3w, X0):
 CUFF = dict(t_land=2.8, t_shell=2.0, land_hw=15.6, wrap_deg=110.0, s0=83.85, s1=164.65, round=0.8)
 
 
-def upper_cuff(E):
+def upper_cuff(E, wrap_neg_deg=None):
     """Upper-arm cuff from one sketch of lines and arcs, extruded straight along BOTTOM (no loft, no fitted shell): a U
     of constant 2 mm wall - a flat top flush with BOTTOM's skin side (the bar sits on it) and two side arcs tangent to it,
     wrapping 110 deg each - whose centre, flat width and arc radius are the smallest that keep the upper-arm skin (the
     posed rig skin weighted to the humerus, every 4th followed frame of the fit clips) 2 mm (the liner) inside it.
-    6x M4 countersunk from inside into BOTTOM's tapped holes. Built in the arm's rest frame (group H)."""
+    6x M4 countersunk from inside into BOTTOM's tapped holes. Built in the arm's rest frame (group H).
+    wrap_neg_deg: the -vB side arc stops at this wrap instead (same fit, same sketch, a shorter arc), where the user's
+    FOREARM CUFF folds onto the upper arm at deep elbow flexion (user_style_osn.py)."""
     from scipy.optimize import fsolve
     import body_pose as BP
     CB, uB, vB, axB = AE.CB, AE.uB, AE.vB, AE.axB; c = CUFF
     zt = AE.Z_SKIN_BAR; W_ = math.radians(c["wrap_deg"])                                    # the bar's skin-side plane (-2.8)
+    Wn = W_ if wrap_neg_deg is None else math.radians(wrap_neg_deg)                        # the -vB side's wrap
     # the upper-arm skin in the arm's rest frame over every 4th followed frame of the fit clips (perpendicular distances
     # matter here, so the posed skin itself rather than the GH-radial maps)
     C_, _ = FR.load(PB.BAND); L = json.load(open(os.path.join(FR.REPO, "pipeline", "avg", "body_mesh.json"))); pts = []
@@ -528,8 +531,8 @@ def upper_cuff(E):
     wp = (cq.Workplane(pl).moveTo(*q(arcp(-1, Ro, 0.0))).lineTo(*q(arcp(1, Ro, 0.0)))
           .threePointArc(q(arcp(1, Ro, W_ / 2)), q(arcp(1, Ro, W_))).lineTo(*q(arcp(1, Rin, W_)))
           .threePointArc(q(arcp(1, Rin, W_ / 2)), q(arcp(1, Rin, 0.0))).lineTo(*q(arcp(-1, Rin, 0.0)))
-          .threePointArc(q(arcp(-1, Rin, W_ / 2)), q(arcp(-1, Rin, W_))).lineTo(*q(arcp(-1, Ro, W_)))
-          .threePointArc(q(arcp(-1, Ro, W_ / 2)), q(arcp(-1, Ro, 0.0))).close())
+          .threePointArc(q(arcp(-1, Rin, Wn / 2)), q(arcp(-1, Rin, Wn))).lineTo(*q(arcp(-1, Ro, Wn)))
+          .threePointArc(q(arcp(-1, Ro, Wn / 2)), q(arcp(-1, Ro, 0.0))).close())
     zc = zi - Rin; Ro_rep = Ro
     cuff = wp.extrude(c["s1"] - c["s0"]).val()
     cuff = rounded(cuff, r=c["round"])
@@ -543,7 +546,7 @@ def upper_cuff(E):
             head = PB.revolved([(0, 0), (3.95, 0), (2.0, 1.95), (2.0, 6.0), (0, 6.0)], np.array([0, 0, 1.0]), 0.0)
             Rz = PB.axis_frame(axB); scr.append(("H", "M4x6 ISO 10642 countersunk (upper cuff), polished", xform(head, Rz, p - hd * axB)))
     cuff = cuff.clean() if cuff.clean().isValid() else cuff
-    rep = dict(side_arc_R=Rin, flat_width=2 * hw, centre_across_bar=vc, shell=T2_, wrap_deg=c["wrap_deg"], length=c["s1"] - c["s0"], valid=cuff.isValid())
+    rep = dict(side_arc_R=Rin, flat_width=2 * hw, centre_across_bar=vc, shell=T2_, wrap_deg=c["wrap_deg"], wrap_neg_deg=None if wrap_neg_deg is None else float(wrap_neg_deg), length=c["s1"] - c["s0"], valid=cuff.isValid())
     print(f"  cuff valid {cuff.isValid()}, faces {len(cuff.Faces())}")
     return [("H", "UPPER ARM CUFF (lines and arcs: flat land + inner R arc + outer arc, extruded; AlSi10Mg bead blasted)", cuff)] + scr, rep
 

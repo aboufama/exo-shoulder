@@ -44,6 +44,7 @@ FULL = US.FR.FULL; SRC = "l1_offset-skin-normal-3r"
 GH_, GW, GL, RW, RH, H1 = L1B.GH, L1B.GW, L1B.GL, L1B.RW, L1B.RH, L1B.H1                   # RSR3M: H 4, W 8, L 12, rail 3 x 2.6, H1 1
 BASE_T, ADAPT_T, ARM_W, CH = L1B.BASE_T, L1B.ADAPT_T, L1B.ARM_W, L1B.CH
 CACHE = os.path.join(REPO, ".cache", "user_style_osn_fits.json")
+CUFF_WRAP_NEG = 12.0                                                                       # deg, the cuff side the forearm cuff folds onto (arm_side)
 SCREW = "M1.6"                                                                            # [est] miniature-guide screws (not in the catalogue json)
 
 
@@ -367,7 +368,10 @@ def arm_side(M):
     for g, n, s in up:
         if n.startswith(("BOTTOM", "UPPER ARM CUFF", "M4x6 ISO 10642 countersunk (upper cuff)")): continue
         out.append((g, n, s))
-    cuff, crep = US.upper_cuff(None); out += cuff
+    # the -vB (anterior) side arc of the user-style U cuff stops at CUFF_WRAP_NEG deg: at deep elbow flexion (Drink from a cup,
+    # flexion 131 deg) the user's FOREARM CUFF folds onto it from 19 deg of wrap to the arc's end (110 deg), 4.38 mm deep
+    # (param2_r20_n3_s1414_4's R6 failure, same cuff); the +vB side keeps 110 deg; a soft strap closes the cuff
+    cuff, crep = US.upper_cuff(None, wrap_neg_deg=CUFF_WRAP_NEG); out += cuff
     print(f"arm side: stage centre at s {sc:.1f}, v {vc:+.1f} on BOTTOM (cut at {AE.S_CUT:g}); BOTTOM + base fused: valid {part.isValid()}, "
           f"solids {len(part.Solids())}", flush=True)
     return out, dict(stage_on_bottom=dict(s=sc, v=vc), bottom_cut_s=AE.S_CUT, fused_valid=part.isValid(), fused_solids=len(part.Solids()), upper_cuff=crep)
