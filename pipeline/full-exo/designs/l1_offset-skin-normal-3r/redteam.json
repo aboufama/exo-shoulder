@@ -154,7 +154,7 @@
    "median_mm": 7.01
   },
   "link 1 strap keep-out (8 x 3 mm Ti, fitted underside)": {
-   "min_mm": 2.77,
+   "min_mm": 3.07,
    "at": {
     "clip": "Comb hair",
     "frame": 105,
@@ -166,7 +166,7 @@
    },
    "share_lt1": 0.0,
    "share_lt2": 0.0,
-   "median_mm": 5.13
+   "median_mm": 5.17
   },
   "J3 lower plate keep-out (O20 x 3, member 3)": {
    "min_mm": 5.88,
@@ -291,7 +291,7 @@
  },
  "adjacent": {
   "link 1 strap keep-out (8 x 3 / link 2 strap keep-out (8 x 3": [
-   -0.594,
+   0.199,
    "Raise overhead",
    36,
    [
@@ -301,17 +301,17 @@
    ]
   ],
   "link 2 strap keep-out (8 x 3 / J3 lower plate keep-out (O20": [
-   -1.004,
-   "Wash opposite shoulder",
-   123,
+   0.35,
+   "Walking arm swing",
+   99,
    [
-    145.0,
-    46.1,
-    -69.4
+    90.0,
+    14.0,
+    -90.0
    ]
   ],
   "link 2 strap keep-out (8 x 3 / member-3 neck keep-out (8 x ": [
-   5.461,
+   5.462,
    "Reach back pocket",
    60,
    [
@@ -321,7 +321,7 @@
    ]
   ],
   "link 2 strap keep-out (8 x 3 / member-3 bridge keep-out (8 ": [
-   22.383,
+   22.312,
    "Reach back pocket",
    60,
    [
@@ -331,7 +331,7 @@
    ]
   ],
   "link 1 strap keep-out (8 x 3 / J2 upper boss + cap keep-out": [
-   0.814,
+   0.813,
    "Walking arm swing",
    105,
    [
@@ -341,13 +341,13 @@
    ]
   ],
   "link 2 strap keep-out (8 x 3 / J2 lower plate keep-out (O20": [
-   0.139,
-   "Drink from a cup",
-   0,
+   0.35,
+   "Wave",
+   171,
    [
-    40.0,
-    4.0,
-    -40.0
+    20.0,
+    4.1,
+    -20.0
    ]
   ],
   "member-3 bridge keep-out (8  / across guide rail (RSR3M rai": [
@@ -421,7 +421,7 @@
    ]
   ],
   "link 2 strap keep-out (8 x 3 / across guide rail (RSR3M rai": [
-   36.86,
+   36.826,
    "Reach back pocket",
    60,
    [
@@ -431,7 +431,7 @@
    ]
   ],
   "link 2 strap keep-out (8 x 3 / carriage A adapter keep-out ": [
-   25.051,
+   25.019,
    "Reach back pocket",
    60,
    [
@@ -441,7 +441,7 @@
    ]
   ],
   "link 2 strap keep-out (8 x 3 / along guide rail (RSR3M rail": [
-   25.074,
+   25.053,
    "Reach back pocket",
    60,
    [
@@ -504,7 +504,7 @@
    ],
    "closes": true,
    "lowest_part": "link 2 strap keep-out (8 x 3 mm Ti, fitted underside)",
-   "lowest_mm": -0.26,
+   "lowest_mm": -0.24,
    "arm_fixed_mm": 0.26
   },
   {
@@ -753,5 +753,5 @@
   },
   "Walking arm swing": {}
  },
- "secs": 41.5
+ "secs": 40.0
 }

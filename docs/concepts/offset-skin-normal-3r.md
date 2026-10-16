@@ -399,3 +399,100 @@ fold column to the skin column.
   docs/research/fold/rayblock.json (its frontier_rows = frontier.json rows + j1_ray_free (one-height band share) /
   j1_ray_free_overhead / j1_lift_p90)
 * sketch: docs/concepts/img/offset-skin-normal-3r.png (rest and highest pose taken, k4216)
+
+## L1 keep-out CAD (k4216) - pipeline/full-exo/designs/l1_offset-skin-normal-3r, 2026-10-16
+
+Builder: `pipeline/concept_l1/build_osn_l1.py` (reuses build_seed_offset_l1.py's mesh helpers). It refits k4216 on
+Bench(60,160) fast: gap 32.61, the claim to the digit. It then builds every part at real size, one closed solid each.
+
+* **Joints.** J1-J3 are O20 x 12.25 v5 hub keep-outs (MR117 pairs), lower plate F..F+3, boss + cap F+3.15..F+12.25.
+* **Links.** 8 x 3 straps through the model's fitted underside samples. **Changed from the model:** every column of
+  a strap within 2.5 mm of a hub rim is held at or above that hub's member level + 0.2 mm. The first build without
+  this step had link 2's edge 0.24-0.46 mm inside the J3 plate (static) and link 1 / link 2 0.59 mm interpenetrating
+  at J2 (Raise overhead frame 36). The R6 judge missed both (see the red team). This lifts link 1 by up to 2.0 mm and
+  link 2 by up to 1.1 mm near the hubs.
+* **Member 3.** The model's ramped neck is unchanged, to the 0.0001 mm. A stepped bridge (one section, extruded 8
+  mm) runs at the neck top to the model's carriage-B edge, then over the block at the model's carriage-B top.
+* **Slide stage: the REAL catalogue parts**, from tools/hardware_catalogue.json THK-RSR3M (H 4, W 8, L 12, rail 3 x
+  2.6).
+  * An inverted along block: a U keep-out with a 3.4 mm rail channel, on a 14 x 10 x 1.5 mm cuff base plate.
+  * Its 26.6 mm rail rides with carriage A.
+  * A 1 mm plus-shaped adapter (carriage A).
+  * The 29 mm across rail on the adapter.
+  * The across block = carriage B.
+  * A 1.5 mm cuff mount slab from the base plate to the user's BOTTOM bar (a proxy; BOTTOM itself is not modified).
+* **The stack built is the real 10.5 mm** (1.5 + 4 + 1 + 4), from the model's fitted cuff level t_r. The model
+  carried 13.5. Why: every stage part then sits at or above the height the model fitted 2 mm off the skin, inside the
+  model's stage footprint. Member 3 keeps the model's levels, which the model checked against the skin, link 2 and
+  the stage. The 3 mm the real stack saves goes into the bridge (t_r + 10.5..16.5). Lowering the neck by 3 mm needs
+  a neck re-fit at the real stack height: that is the next lever, not a build choice.
+* **Frames.** clips.json "G" + "T" per group. Member 4 (along rail, adapter, across rail) is RS Q (x + s_a sa + m_t
+  st + m_n sn). The arm-fixed parts sit in H at HR (x + m).
+* **Kinematic check** at the first, middle and highest bench poses taken, including (45, 165, -90):
+  * built-part frames vs the model's member transforms: 1e-4 mm;
+  * the model's hub and neck samples vs the posed glb: 0.0000 mm;
+  * strap samples: <= 1.99 mm, all of it the lift described above;
+  * closure 0.0002 deg.
+* **Clip building.** The model's fold / slide / closure / collide / 10 fps rules, plus the verifier's link 2 vs member
+  3 check. Added: the BUILT parts' own surface samples on the exact posed skin, and built-mesh adjacency at the shared
+  joints (penetration > 0.15 mm jams).
+
+**Outside judges** (`tools/cloud_run.py judge l1_offset-skin-normal-3r fast`, farm):
+
+| row | l1_offset-skin-normal-3r | l1_3r-k2221 | champion param2_r20_n3_s1414_4 |
+|---|---|---|---|
+| R1 (2-14) | **78.7 %** FAIL | 56.1 % FAIL | 32.9 % FAIL |
+| R1-aim (2-10) | **42.0 %** FAIL | 27.6 % FAIL | 17.3 % FAIL |
+| R2 | 24.87 mm FAIL; **ours 0.0 mm** (the user's forearm cuff) | 24.87 FAIL, ours 0.0 | 24.88 FAIL |
+| R3 follow | 90.9 % **FAIL** | 97.3 % PASS | 98.2 % PASS |
+| R4 overhead | 36.0 % FAIL | 48.2 % FAIL | 30.5 % FAIL |
+| R5 / R5-aim | 3 / 3 PASS | 3 / 3 PASS | 3 / 3 PASS |
+| R6 | **0.0 mm PASS** (see red team) | 2.85 mm FAIL | 4.38 mm FAIL |
+| R7 | PASS (17 parts, 1 solid each) | NOT RUN | PASS |
+| R8 | **79.4 g** PASS | 147.7 g | 148.6 g |
+| R10 | NOT RUN (base_mount.py has no slider mapping for this chain yet) | 15.21 mm FAIL | 15.21 mm FAIL |
+| R11 | 0.382 kPa PASS | 1.822 PASS | 0.601 PASS |
+| R16 | 57.5 % FAIL | 39.2 % FAIL | 80.2 % FAIL |
+| R17 | **PASS** | FAIL (Wave, l1-l2 contact) | FAIL |
+| passes | **7 of 19** | 5 of 19 | 6 of 19 |
+
+The first build, with the straps unclamped, scored R1 78.6 / R1-aim 41.5 / R16 55.8 / R6 0.0. The clamp cost no in
+band. The bench lead carries over to the built CAD on R1 / R1-aim: +22.6 / +14.4 points over the best earlier built
+design. **The limiter is R3 / R4, the J2 fold**, as the bench said. Raise overhead is followed only to elevation 66
+deg. Frames from 87 to 125 deg are in the fold (window 44-104 deg). Above that the chain would have to flip, so the
+arm is held (36 fold + 71 flip frames held of 181). Wave loses 14 frames to the fold. Every other clip follows 100 %.
+
+**Red team** (`pipeline/concept_l1/redteam_osn_l1.py`: exact posed skin, every followed frame at 10 fps (410), built
+meshes; `redteam.json` is the final build's run):
+
+* **The point that pinches.** Lowest metal over the followed frames:
+  * hub 2's plate: 1.49 mm (Wave 114, elevation 95);
+  * the cuff mount slab: 1.75 mm (Reach back pocket 72, plane -80, elevation 39, axial 101);
+  * the base plate: 2.81 mm;
+  * the along block: 4.43 mm.
+  * **The inverted rail's overhanging ends: 5.12 mm** (outer 6 mm, same frame), so the verifier's worry (the real rail
+    1.6-3 mm lower than modelled) does not bite. The across rail's ends: 8.50 mm.
+  * No part comes within 1 mm in any followed frame. Within 2 mm: hub 2 plate in 5.6 % of frames, mount slab 3.7 %.
+* **The verifier's near-touch** (0.64 mm, plane -75, elev 45, axial 120) reproduces exactly on the BUILT mount slab:
+  0.64 mm. One step higher, at plane -75..-90, elev 60, axial 105-120, the chain closes and passes every part check,
+  but link 2 is 2.1-5.4 mm inside the skin and the arm-fixed stack 0.5-1.3 mm inside. Behind-the-back at 60 deg
+  elevation is a contact pose (the bench counts it as contact). No clip goes there: Reach back pocket peaks at elev
+  39.
+* **The number that is optimistic.** R6 = 0.0 mm. The R6 judge tests every other vertex at every 12th frame (fast),
+  and it passed the unclamped first build, which interpenetrated 0.24-0.59 mm in the hub zones at full-rate frames
+  (sample-based, signed distance to the closed mesh). The final build's red team clears every shared-joint pair by
+  at least 0.20 mm over 205 followed frames (link 1 / link 2 at Raise overhead 36: 0.20; link 2 / J3 plate 0.35; the
+  along rail in its block 0.20). R6 at step 1 has not been re-run. Also optimistic: the 6 mm-tall bridge and the
+  1.5 mm Ti mount slab are not strength-checked (R9 not run, no STEP). The RSR3M moment rating (MA 0.29 N.m) caps
+  MVP2.
+* **The pose that jams.** No part jam, no adjacent jam and no slide-range hold in any clip. Every hold is the J2 fold
+  (50 frames) or the flip after it (71).
+
+**Next (the loop):**
+
+1. Lower member 3 by the 3 mm the real stack saves: re-fit the neck at t_r + 10.5 (R1-aim; the bridge is 0 % in
+   band).
+2. The fold: the 90+ path is the fold-frontier re-seed (docs/research/fold/frontier.json) with these hubs. R3 / R4
+   cannot pass at a1 / a2 = 40 / 74.
+3. A base_mount slider mapping, so R10 runs on offset chains.
+4. Re-run R6 at step 1, with surface samples in the judge itself (its vertex-only test passed a 0.59 mm crossing).
