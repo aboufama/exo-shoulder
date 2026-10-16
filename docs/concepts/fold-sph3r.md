@@ -135,3 +135,19 @@ Setup: q 0.95 / 0.97 on the top 20 distinct seeds, strap width 10 mm on the top 
 With q < 1, the score buys in-band with contact poses. The near-touch rule takes most of it back: 70.90 becomes 84.48.
 
 <!-- CMA, frozen, red team, comparison: below -->
+
+## Frozen shape on Bench(110,360), exact (lesson c; farm, `fold-sph3r.py frozen`)
+
+The geometry is fitted on Bench(60,160) on the exact path, every underside is frozen, and the shape is worn on the 470
+poses of Bench(110,360), exact, with K6 at 1 mm radial. This is the verifier's protocol plus the crown, near-touch and
+overhead checks. Wall time 21 min on 2 vCPU.
+
+| | fast Bench(60,160) | exact fit Bench(60,160) | **frozen Bench(110,360) exact** | reach | in-band 14 / 10 | contact | min metal-skin | crown-contact poses | overhead (elev >= 140) reach / in-band 14 |
+|---|---|---|---|---|---|---|---|---|---|
+| plain 3R at k2221's axes (best of this search so far) | 51.33 | 51.36 | **57.99** | 0.839 | 0.393 / 0.241 | 0.012 | 1.69 mm | 2 (crown min -27 mm) | 0.39 (11 / 28) / 0.48 |
+
+Per part on the big bench: hub 1 100 % in band (F 52 mm, over the acromion), hub 2 0 % (F 145 mm, posterolateral,
+median 73 mm off the skin), hub 3 69 %, link 1 37 %, link 2 5 %, neck 65 %. Poses not taken: 58 of 470 (fold / K2 50,
+K6 3, contact 5). The closest metal is a face at 1.69 mm at plane 15, elev 135, axial -60. That pose is unseen by the
+fit, so the frozen underside is 0.3 mm short of the 2 mm rule there. The < 1 mm near-touch rule changes nothing
+(gap_near1 57.99).
