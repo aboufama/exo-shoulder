@@ -64,3 +64,60 @@ Away from home the pole moves.
   other ground pin; coupler: far pin -> near pin -> J3), so a body never collides with itself. Layers: the cranks lie
   lowest. The coupler passes over the cranks, the neck and link 1's pins (`over`, >= 1 mm), and link 1 passes over the
   cranks and the coupler's pins. K6 checks every other pair.
+
+## New instrument: free-space maps in the frames of the MOVING bodies (rawest material first)
+
+The proximity atlas gives the skin seen from the thorax and the scapula. A pin fixed in link 1 or link 2 sees
+something else: the skin as that body moves. Scratch script `pinmap2.py` measures it. For the plain 3R at given axes,
+each ray fixed in a body is laid out around a pole (arc d from the pole, angle psi as `layout()` measures it). The
+script marches the skin requirement in every closing pose (Bench(60,160)) and reports the share of poses inside the
+best 12 mm window: one hub height in band. `*` marks a ray that some pose sends INTO the body (requirement > 220 mm),
+so a rigid part there must lift to 400 mm. Selected rows (d = 30 / 45 deg):
+
+| base 3R axes | body (pole) | best sector | band there | worst sector |
+|---|---|---|---|---|
+| k2221 (J1 bvec(0.65, 76.8), 80.7 / 62.9) | link 1 (around J2) | psi 285-345 | 0.74-0.79 | psi 75-210: 0.17-0.35 * |
+| k2221 | link 2 (around J2) | psi' 0-30 from the J3 arc | 0.78-0.88 | psi' 120-285: 0.17-0.54 * |
+| k2221 | J2 ray itself (d 10) | - | 0.61-0.70 | - |
+| jfront (J1 bvec(120, 60), 60 / 65) | scapula (around J1) | psi 300-90 | **1.00** | psi 165-225: 0.69-0.78 |
+| jfront | link 1 (around J1) | psi 60-270 from the J2 arc | **0.93-1.00** | psi 300-15: 0.67-0.78 |
+| jfront | link 1 (around J2) | psi 315-15 | 0.74-0.86 | psi 120-255: 0.13-0.47 * |
+| jfront | link 2 (around J2) | psi' 255-285 | 0.70-0.81 | psi' 60-195: 0.14-0.37 * |
+| front132 (J1 bvec(132, 16), 50 / 50) | scapula (around J1) | psi 330-60, d 45-60 | 0.93-1.00 | psi 120-240 * |
+| posterior lead (J1 bvec(-24, 4), 65 / 65) | link 1 / link 2 (around J2) | none | <= 0.74, almost all * | - |
+
+What it says:
+* Around J1, metal fixed in the scapula or in link 1 can sit in band at one height in 93-100 % of poses.
+* Around J2, every body has a blocked half-plane where the raised arm or the torso crosses the ray. The free half
+  reaches 0.74-0.88, while the J2 ray itself reaches 0.45-0.70.
+* So the J2 neighbourhood is the worst place for metal in EVERY frame, not only on the J2 ray. A linkage that keeps J2's
+  motion must keep its pins within ~30-60 deg of J2, so it inherits the blocked half-plane. This is the measured reason
+  the four-bar's own pins fail (below).
+
+## Coarse sweeps (farm, Bench(60,160) fast, every kit check on)
+
+| stage | configs | honest | best honest gap | best any gap | closure p50 |
+|---|---|---|---|---|---|
+| v1 random layouts (before the member fix: same-body straps were separate K6 pairs, no layers) | 210 | 2 | 275.0 | 146.20 | 0.00 |
+| v2 structured from the free-space map (before the member fix) | 142 | 14 | 203.29 | 203.29 | 0.32 |
+| v3 = v2 + 60 of v1, final members and layers, q in {0.93, 0.97, 1.0} | 202 | 33 | **145.94** | 104.57 | 0.23 |
+| rp: remote-pole family (cranks 55-115 deg from the pole, nearly parallel) | 210 | 5 | 177.76 | 176.59 | 0.00 |
+
+What the sweeps taught, in order:
+1. **Thickness accommodation is the first wall.** In a random layout the coupler pins sweep over link 1 and the
+   cranks sweep under the coupler. With straps as separate members and no layers, 60-98 % of the closing poses had a
+   part-part collision. The polyline members plus explicit layers (`over`, as thick-panel origami stacks its panels)
+   bring that to 1-30 %. The price is that the upper layer lifts by the lower layer's 12.25 mm hub crown + 1 mm, out of
+   the band wherever the layers cross.
+2. **The four-bar margin is the transmission angle, not the circle-intersection margin.** The first margin (the
+   two-circle closure's distance from its arccos ends) rejected four-bars whose transmission angle was 116 deg.
+   Replaced by the transmission angle at both coupler pins in [25, 155] deg.
+3. **Remote-pole layouts (a spherical "parallelogram") put the pins close to the skin.** Nearly parallel cranks meet
+   about 90 deg away: the instantaneous pole sits ~90 deg from all four pins, the spherical RCM. Hubs fitted at 54-75 mm
+   (the J1 hub sits at 55): pins on quiet skin, as the field promised. But those pins are then 10-20 deg from the J1 or
+   J3 hub and collide with them. With a 22 deg separation rule they collide with hub J3 and the neck instead whenever
+   the J2 angle closes (68 and 39 of 128 closing poses in the probe). Best honest 177.76.
+4. **Crossed cranks through the pole region reach furthest.** These are the v3 rows with dA1 < 0 (crank A runs from a
+   link-1 pin across the pole region to a coupler pin on the J3 side). Best any 104.57: reach 0.69, follow 0.88. But
+   the cranks pass over the pole region, which is the worst skin in every frame (the map above). They park at 400 mm
+   (in-band 0.19, not honest).

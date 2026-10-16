@@ -40,3 +40,35 @@ base.
 Key risk, stated before the sweep: link 1 of the frontier layouts turns about J1 through about 160 deg over the
 workspace (the J2 azimuth spans p5 -162 to p95 +2 deg at bvec(120, 60)). A four-bar coupler turns that far relative to
 its ground only near a change point, and the transmission-angle rule [25, 155] cuts that off.
+
+## Coarse sweeps (farm, Bench(60,160) fast, every kit check on)
+
+All gaps are on the screening bench. Honest means march + dense K2 + K6 + a clean audit. A member that some pose sends
+into the body parks at 400 mm; the audit then flags its sampling as sparse, and the row is not honest.
+
+| stage | configs | honest | best honest gap | best any gap | closure p50 |
+|---|---|---|---|---|---|
+| v1 random layouts (before the member fix: same-body straps were separate K6 pairs) | 220 | 2 | 237.75 | 200.15 | 0.00 |
+| v2 structured from the free-space map (before the member fix) | 150 | 1 | 275.0 | 214.91 | 0.12 |
+| v3 = v2 + 60 of v1, final members, q in {0.93, 0.97, 1.0} | 210 | 15 | 274.37 | 152.69 | 0.08 |
+| rp: remote-pole family (cranks 55-115 deg from the pole, nearly parallel) | 210 | 5 | 268.32 | 182.68 | 0.00 |
+
+The base pins do what the map promised. In the v3 best (152.69), hub A0, hub B0 and the base strap are **100 %** in band.
+They are the first scapula-fixed metal on a fold-free J1 line to be in band in every pose.
+
+The chain dies anyway. Measured with scratch `phidiff.py`: the four-bar's J2 compared with the plain 3R's J2 at the same
+axes, on both 3R branches.
+* **On jfront (J1 bvec(120, 60)) the four-bar reproduces J1 well.** In the v3 best, J2 follows the 3R's +1 branch
+  within 3.4 deg (median; p95 27). It then fails exactly where the 3R fails: the J2 hub, link 1 and link 2 are 0 % in
+  band, which is the known hub-2 failure of that base (it swings over the abducted, externally rotated arm, FINDINGS
+  2026-10-16). The J1 four-bar fixes a hub that was already 93 % in band there and does nothing for hub 2.
+* **On front132 (fold-free 0.96, hub 1 out of band) the four-bar is the right fix, but it cannot turn far enough.**
+  The rp layouts reproduce the 3R's J2 within 0.1-0.2 deg (median), yet they close in only 16-48 of 220 poses. Link 1
+  of that layout must turn almost a full circle about J1: the 3R's J2 azimuth spans p5 -165 to p95 +170 deg.
+* **Coupler turning range.** Measured on the 580 coarse layouts: a four-bar coupler inside the [25, 155] deg
+  transmission window turns p50 53 deg, p90 129 deg, and only 8 % reach 160 deg.
+
+**Verdict after the coarse sweep: dead as a J1 replacement.** Measured reason: a four-bar coupler cannot turn as far
+as J1 must (about 160-330 deg) while keeping its transmission angle, and where it does turn far enough (jfront), J1 was
+not the problem. The 2 CMA streams that had already started ran to their budget as extra evidence (below). The time
+went to virtual-pole-4bar-j2.

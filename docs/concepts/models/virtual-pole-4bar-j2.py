@@ -22,8 +22,8 @@ angle(j1, w) (a 1-D root on a 0.25 deg theta grid, then the closed-form four-bar
 about j1 to carry c onto w. at=1: J2 = c(theta) must satisfy angle(c(theta), w) = a2. Branch: the root whose slope
 sign is sigma, nearest theta = 0 (the home); the dense K2 check catches any jump. Ranges in ok: both transmission
 angles of the loop (at A1 and B1, crank vs coupler) within [M4, 180 - M4] = [25, 155] deg (dead points and toggles
-excluded; this also keeps theta on one assembly branch - conservative: the coupler could continue past a crank's dead
-point on the other branch), crossing angle between the coupler curve and the target circle >= XMIN deg
+excluded; the assembly branch can only change where crank B and the coupler are collinear, a toggle the window
+excludes, so one branch loses nothing), crossing angle between the coupler curve and the target circle >= XMIN deg
 (the 3R's 10 deg fold margin is a 11-34 deg crossing angle at 65 / 65 arcs, so 12 is the same standard), pins of one
 body (and each pin vs the J1 / carried hub of its body) >= PINSEP = 22 deg apart (two O20 bearings side by side). Closure residual reported (< 0.5 deg rule).
 
