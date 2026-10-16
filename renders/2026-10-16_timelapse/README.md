@@ -3,7 +3,7 @@
 `exo_effort_timelapse.mp4` is a short film of every design variation the project tried between Oct 14 and Oct 16, 2026,
 cut as a time-lapse. Its job is to show how much was explored, and to show it honestly.
 
-- **Format:** __SPECS__, no audio.
+- **Format:** 88.0 s (2640 frames), 1920x1080, 30 fps, H.264 yuv420p (crf 20, faststart), 13.9 MB, no audio.
 - **Contact sheet:** `contact_sheet.jpg` holds 24 evenly spaced frames, each labelled with its timecode.
 - **Numbers:** every number on screen comes from the repo snapshot **2026-10-16T05:11Z** (568 commits). The one
   exception is a single line on the end card, which is labelled "after the snapshot" and is described below. The search
