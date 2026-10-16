@@ -217,3 +217,32 @@ spec axes: rail 84.81 (beta 40, chi 60) vs hub 73.57.
    below ~100 deg at reach >= 0.8: the workspace needs it.
 3. **The rail in link 2's frame** (carriage on link 1): the link-2-frame windows are narrower (~60-70 deg at >= 0.7
    in band), so it is worse.
+
+## Verdict (2026-10-16 03:25 UTC): DEAD - the rail does not beat its own hub control
+
+- **Best honest (Bench(60,160) fast, kit checks + crown/top skin checks): k114, gap 71.53** (score 73.99; local
+  re-runs 71.12 / 72.20 from different r_lay starts): reach 0.838, follow 0.883, in-band 14 0.335, in-band 10 0.23,
+  contact 0.021; near-1 mm gap 76.1; overhead (elev >= 140) reach 0.33, in-band 0.38. 0 passive DOF, 0 passive
+  translations, 3 active.
+- **The hub version at identical axes scores 57.75**: the rail costs 13.4 gap points. At the spec axes: 84.81 vs 73.57.
+- **Lead-note kill test:** link 2 never routes above 0.6 in band (max 0.26 over 49 honest configs; 0.45 for the second
+  segment of a two-segment planform-turn link 2), because link 2 starts at the carriage, which sits on the rail's one
+  level.
+- **Convergence gate** (288 configs in evaluation order, score points): +0.15 over the second half, +0.15 over the last
+  third, top-5 within 1.89 -> passes on the numbers. It is a weak pass: the history is a random coarse sweep plus
+  probes. Eight CMA-ES streams (4 near full travel, 4 with the travel share free 0.5-0.9) were submitted to the farm
+  (.cache/j2a/jobs_cma5.json) but had not returned at the time box. The first two waves failed in seconds: the worker
+  had no `.cache/j2a/` directory for `--out` (the same bug lost the previous session's two CMA streams). The frozen
+  Bench(110,360) exact run of k114 (.cache/j2a/jobs_big_k114r.json) was also still queued. No big-bench number is
+  claimed.
+- **The measured limiter, which predicts beyond this morphology:** any joint realised as a guided arc about a
+  virtual axis (an arc rail, a curved guide, a slewing segment) is a body of revolution about that axis. It sits at ONE
+  distance from the centre over its whole travel plus carriage, stops and tab (~150 deg for J2 here). It must clear
+  the highest skin over that whole sector in its frame. The intermediate link frames of a spherical 3R have in-band
+  windows of only 40-108 deg. A hub needs ~23 mm at the axis point; an arc rail needs the window. Inside the window the
+  rail is perfectly in band (0.998 at 59 mm; whole design in band 0.61, twice the hub's 0.28), but the travel then
+  covers ~38 of the 104 deg the workspace needs (reach 0.46).
+- **What next (not this morphology):** the in-window result says a virtual-axis joint pays off only if its travel fits
+  the frame's window. Pair it with a joint layout whose J2 travel is <= ~60 deg, or split the travel over two bodies
+  (variant 1 above, if a gear-free half-speed coupling at this size exists). Otherwise keep the hub at J2 and work on
+  link 2 (fold-sph3r, skin-normal-3r-pin-knee).
