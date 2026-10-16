@@ -60,7 +60,8 @@ END_CLR = BM.END_CLR                                                            
 DOWEL_Z = BM.DOWEL_Z                                                                      # F+0.5 .. F+6.15 (3 mm pressed into the upper boss)
 CAPK = dict(ch_z0=11.35, ch_z1=16.55, ch_r=8.0, arbor_r=2.5, arbor_top=16.35, pocket_r=5.5, pocket_z=17.15, mag_r=1.525, mag_h=1.6,
             slit_w=0.4, hook_slot=(7.8, 9.3, 0.8), groove=(1.6, 0.8))
-SPRING = dict(t=0.3, w=5.0, r0=2.75, d=0.6, n=9, hook_r=0.5, hook_l=0.9)
+SPRING = dict(t=0.3, w=5.0, r0=2.75, d=0.6, n=9, hook_r=0.5, hook_l=0.9, rate=0.015, steel="1.4310 +C1900", preload=0.08)   # --spring-n / -d / -rate
+J2_PUSH = dict(C0_N=280.0)                                                                # MR117 static load rating each (build_minarc_l1.dowel_check)
 GROUPS = {"base": 0, "l1a": 1, "l1b": 7, "l2": 2, "l3": 3, "l4": 6, "H": 5}
 USP.HUG_N.update({"link 1a": (5,), "link 1b": (5,)})
 
@@ -168,9 +169,22 @@ def stop_layout(M, l1_stops):
     sp = BM.stop_specs(M); out = {}
     for key in ("K", "J2"):
         q_lo, q_hi, meta = sp[key]; th = math.radians(l1_stops[key]["dowel_home_angle_deg"])
-        homes = [th] + ([th + math.pi] if key == "K" else [])
-        out[key] = dict(q=(q_lo, q_hi), meta=meta, homes=homes)
+        if l1_stops[key].get("pair"): homes = [math.radians(x) for x in l1_stops[key]["dowel_home_angles_deg"]]     # gen 4b: the L1 placed BOTH slots clear
+        else: homes = [th] + ([th + math.pi] if key == "K" else [])                 # gen 4: the second K slot at home + 180 (crossed link 1a's root)
+        out[key] = dict(q=(q_lo, q_hi), meta=meta, homes=homes, pair_placed_in_l1=bool(l1_stops[key].get("pair")))
     return out
+
+
+def j2_push_limit():
+    """the J2 stop's strength stated as a push limit (gen-4 build finding: a single dowel's stop force is not a couple, the J2
+    MR117 pair carries it radially; O20 only leaves no larger radius and the J2 travel leaves no room for an opposed pair -
+    two 136-deg slots at r 7.75 would cut link 1b's strap root)"""
+    r = SLOT_RS / 1000.0; C0 = J2_PUSH["C0_N"]
+    T1 = 2 * C0 * r; d = BM.dowel_check(T_Nm=6.0)
+    return dict(push_limit_Nm_s0_1=round(T1, 2), push_limit_Nm_s0_1p5=round(T1 / 1.5, 2), s0_at_6Nm=d["bearing_pair_static"]["s0"],
+                dowel_O3_SF_bending_at_6Nm=d["O3"]["SF_bending_vs_1500MPa_yield"],
+                daily_demand_Nm=0.19, daily_note="forced-state cuff force <= 2.0 N at the 95 mm pad (docs/research/minarc_pick1_redteam.md section 3); stop impact 0.24 mJ",
+                rule="J2 stop rated 4.3 N.m (MR117 pair s0 1.0, brinelling onset); ~23x the daily push; a deliberate 6 N.m shove at the stop gives s0 0.73")
 
 
 # ---------------------------------------------------------------------------------------------------- links
@@ -370,7 +384,8 @@ def build_links(M, stops):
     for th in stops["K"]["homes"]: body = body.cut(arc_slot_cutter(H(1), Uu[1], th + q_lo, th + q_hi, -1.0, PL + 0.1))
     body = body.clean() if body.clean().isValid() else body
     out.append(("l1a", f"D8-02a link 1a: 8x3 bar on a line/arc chain, J1 / K pads + integral O7 pins, K pin continued as the O5 spring arbor "
-                       f"(0.4 mm slit, O3 magnet pocket); K's two opposed {math.degrees(q_hi - q_lo):.1f}-deg stop slots in the K pad ({r['process']})", body))
+                       f"(0.4 mm slit, O3 magnet pocket); K's two opposed {math.degrees(q_hi - q_lo):.1f}-deg stop slots in the K pad"
+                       f"{', both clear of the bar root' if stops['K'].get('pair_placed_in_l1') else ''} ({r['process']})", body))
     rep["link 1a"] = dict(fit, **r, pocket=npk, valid=body.isValid(), solids=len(body.Solids()))
     print(f"  link 1a: valid {body.isValid()}, solids {len(body.Solids())}, faces {len(body.Faces())}, pocket {npk}", flush=True)
     # ---- link 1b: K upper (1) -> J2 lower (2)
@@ -416,12 +431,26 @@ def build_links(M, stops):
     for th in stops["J2"]["homes"]:
         dw, hole = dowel_at(H(2), Uu[2], th, F4[2]); body = body.cut(hole)
         out.append(("l2", f"J2 stop dowel: ISO 8734 O3 x 5.65 m6 hardened (q2 stops {stops['J2']['meta']['window_deg'][0]:.2f} / "
-                          f"{stops['J2']['meta']['window_deg'][1]:.2f} deg), pressed 3 mm in the J2 upper boss, polished", dw))
+                          f"{stops['J2']['meta']['window_deg'][1]:.2f} deg), pressed 3 mm in the J2 upper boss, polished; stop push limit "
+                          f"{j2_push_limit()['push_limit_Nm_s0_1']:.1f} N.m (J2 MR117 pair s0 1.0)", dw))
     body = body.clean() if body.clean().isValid() else body
     out.append(("l2", f"D8-03 link 2: 8x3 bar on a line/arc chain + J2 / J3 O20 rings, J2 dowel hole, flies over the knee and the pad ({r['process']})", body))
     gap = float(abs((p3 - (p3 @ ex) * ex - (p3 @ ey) * ey) @ nP))
     rep["link 2"] = dict(fit, **r, seat_mm=Ls, pad_round_mm=rf, pocket=npk, u3_lean_out_of_plane_deg=lean, j3_seat_offset_mm=gap, valid=body.isValid(), solids=len(body.Solids()))
     print(f"  link 2: valid {body.isValid()}, solids {len(body.Solids())}, faces {len(body.Faces())}, pocket {npk}; u3 leans {lean:.2f} deg, J3 seat {gap:.2f} mm off the plane", flush=True)
+    return out, rep
+
+
+def knee_stop_on(M, knee, ang_stop, K):
+    """fuse the physical knee stop (build_minarc_l1.knee_stop_geom: the tooth + its knee-level web, the L1's geometry) into the
+    knee link: line sketches extruded along the pin axis (sn)"""
+    kg = BM.knee_stop_geom(M, ang_stop, K=K); fr = M.fr; sn = M.D.sn; A = fr["A0m"]; out = knee
+    for key in ("tooth", "web"):
+        P2, z0, z1 = kg[key]; c = P2.mean(0); P2 = P2[np.argsort(np.arctan2(P2[:, 1] - c[1], P2[:, 0] - c[0]))]
+        out = out.fuse(prism(A + z0 * sn, fr["eK"], fr["nK"], [tuple(p) for p in P2], [0.0] * len(P2), z1 - z0))
+    out = out.clean() if out.clean().isValid() else out
+    rep = {k: v for k, v in kg.items() if k not in ("tooth", "web")}; rep.update(valid=out.isValid(), solids=len(out.Solids()))
+    print(f"knee stop at {ang_stop} deg fused into the knee link: valid {out.isValid()}, solids {len(out.Solids())}, face {kg['face']}", flush=True)
     return out, rep
 
 
@@ -443,12 +472,16 @@ def hubs(M):
             cap = cap_k(Uu[j], F4[j], crown); sp, Lsp = clock_spring(Uu[j], F4[j])
             out.append((hi, f"K clock-spring cap O20 x crown F+{crown:.2f} ({capK:g} mm taller): spring chamber O16 x {CAPK['ch_z1'] - CAPK['ch_z0']:.1f}, "
                             f"outer-hook slot, O11 x 1.1 sensor pocket + flex groove, threaded M18x0.5 (Ti-6Al-4V)", at(cap, C[j])))
-            out.append((hi, f"K clock spring: 0.3 x 5 mm 1.4310 +C1900 strip, {Lsp:.1f} mm, 9 half-turns R2.75..R7.55, outer hook in the cap slot, inner end in "
-                            f"the arbor slit; <= 0.015 N.m/rad, 0.08 N.m preload on stop A (polished spring steel)", at(sp, C[j])))
+            sp_ = SPRING; rmax = sp_["r0"] + (sp_["n"] - 1) * sp_["d"]
+            out.append((hi, f"K clock spring: 0.3 x 5 mm {sp_['steel']} strip, {Lsp:.1f} mm, {sp_['n']} half-turns R{sp_['r0']:g}..R{rmax:.2f}, outer hook in the cap slot, "
+                            f"inner end in the arbor slit; {sp_['rate']:g} N.m/rad, {sp_['preload']:g} N.m preload on stop A (polished spring steel)", at(sp, C[j])))
             out.append(("l1a", "K encoder magnet O3 x 1.4 diametric NdFeB N35, Ni plated, in the arbor tip (the user's magnetic angle sensor sits in the cap pocket)",
                         at(magnet(Uu[j], F4[j]), C[j])))
+            rmax = SPRING["r0"] + (SPRING["n"] - 1) * SPRING["d"] + SPRING["t"] / 2
             rep["K"] = dict(crown_mm=crown, capK=capK, spring_length_mm=round(Lsp, 1), spring=SPRING, cap=CAPK, cap_valid=cap.isValid(), spring_valid=sp.isValid(),
-                            spring_solids=len(sp.Solids()))
+                            spring_solids=len(sp.Solids()), spring_outer_r_mm=round(rmax, 3), chamber_r_mm=CAPK["ch_r"],
+                            annulus_fill=round(Lsp * SPRING["t"] / (math.pi * (CAPK["ch_r"] ** 2 - CAPK["arbor_r"] ** 2)), 3))
+            assert rmax <= CAPK["ch_r"], f"the spring's free shape (R{rmax:.2f}) does not fit the O{2 * CAPK['ch_r']:g} chamber"
             print(f"hub K: cap valid {cap.isValid()} ({len(cap.Solids())} solid), spring {Lsp:.1f} mm valid {sp.isValid()} ({len(sp.Solids())} solid)", flush=True)
     return out, rep
 
@@ -538,9 +571,13 @@ def main():
     ap = argparse.ArgumentParser(); ap.add_argument("--out", default="user_minarc_bdp"); ap.add_argument("--l1", default="l1_minarc-bdp")
     ap.add_argument("--params"); ap.add_argument("--params-file"); ap.add_argument("--a1max", type=float, default=BM.A1MAX_FIX)
     ap.add_argument("--skip-base-search", action="store_true", help="no ear search (the J1 upper member alone)")
+    ap.add_argument("--label", default="BDp"); ap.add_argument("--gen", default="generation-4 winner")
+    ap.add_argument("--spring-n", type=int, default=9); ap.add_argument("--spring-d", type=float, default=0.6); ap.add_argument("--spring-rate", type=float, default=0.015)
     a = ap.parse_args(MY_ARGV); t0 = time.time(); dd = os.path.join(FULL, "designs", a.out); os.makedirs(os.path.join(dd, "step"), exist_ok=True)
+    SPRING.update(n=a.spring_n, d=a.spring_d, rate=a.spring_rate)
     import concept_kit as KIT
     P0, src = BM.params_from(a); M, rep0 = BM.fit(P0); D = M.D
+    Bf = M.B; M._bench_K = BM.chain(M, np.array([[Bf.poses[i][k] for k in ("plane", "elev", "axial", "flex", "pron")] for i in range(len(Bf.idx))]))
     l1d = json.load(open(os.path.join(FULL, "designs", a.l1, "design.json"))); l1b = json.load(open(os.path.join(FULL, "designs", a.l1, "build.json")))
     same = all(abs(float(l1d["params"].get(k, P0[k])) - float(P0[k])) < 1e-6 for k in P0 if isinstance(P0[k], (int, float)))
     assert same, f"the L1 design {a.l1} was built from other params"
@@ -549,16 +586,22 @@ def main():
     print(f"fit ({src}) on Bench(60,160) {M.B.mode} at fold margin {KIT.FOLD_MARGIN}: near-touch gap {rep0['gap']} plain {rep0['plain']['gap']} hub levels "
           f"{np.round(F4, 2).tolist()} (J1 K J2 J3) tr {M.tr:.2f} m {np.round(D.m, 3).tolist()} ({time.time() - t0:.0f} s)", flush=True)
     l1_stops = l1d["stack_mm"]["stops"]; stops = stop_layout(M, l1_stops)
+    ks_deg = (l1d.get("build_fixes") or {}).get("knee_stop_deg")
     rep = dict(fit=dict(params=P0, source=src, gap_near_touch=rep0["gap"], gap_plain=rep0["plain"]["gap"], hub_levels_J1_K_J2_J3=[float(x) for x in F4],
                         tr=float(M.tr), m=[float(x) for x in D.m], hubs=[float(x) for x in hr], fold_margin_deg=float(KIT.FOLD_MARGIN), l1_design=a.l1),
                style="user (line/arc sketches, extrudes, revolves, single-section sweeps on line/arc paths, rounds; no lofts, no splines)",
                stops={k: dict(q_deg=[round(math.degrees(x), 3) for x in v["q"]], homes_deg=[round(math.degrees(x) % 360, 2) for x in v["homes"]], **v["meta"])
-                      for k, v in stops.items()})
+                      for k, v in stops.items()}, j2_push_limit=j2_push_limit())
     parts = []                                                                              # (group, name, shape) member-local
     hw, rep["hubs"] = hubs(M); parts += hw
     lk, rep["links"] = build_links(M, stops); parts += lk
     m3, rep["member 3"] = USP.member3(M); parts += [(g, n, s) for g, _, n, s in m3]
-    g_, _, n_, s_ = USP.knee_link(M); parts.append((g_, n_, s_))
+    g_, _, n_, s_ = USP.knee_link(M)
+    ks_deg = (l1d.get("build_fixes") or {}).get("knee_stop_deg")
+    if ks_deg is not None:
+        s_, rep["knee stop"] = knee_stop_on(M, s_, ks_deg, M._bench_K)
+        n_ = n_.replace(" (Ti-6Al-4V)", f" + knee stop tooth behind pin a (its face meets the E strap's side at knee angle {ks_deg:g} deg) (Ti-6Al-4V)")
+    parts.append((g_, n_, s_))
     Cc = json.load(open(os.path.join(FULL, "designs", a.l1, "clips.json")))
     cposes = [f["p"] for cl in Cc["clips"] for fi, f in enumerate(cl["frames"]) if fi % 3 == 0]
     arm, users, rep["arm side"] = USP.arm_side(M, l1b["mount"], cposes); parts += [(g, n, s) for g, _, n, s in arm]
@@ -605,7 +648,7 @@ def main():
     json.dump(dict(key=a.out, n=4, level="L2 user-style", FACES={"1": round(float(F4[0]), 2), "K": round(float(F4[1]), 2), "2": round(float(F4[2]), 2),
                                                                  "3": round(float(F4[3]), 2)}, parts=pf), open(os.path.join(dd, "parts_full.json"), "w"), indent=1)
     for f in ("clips.json", "workspace.json"): shutil.copy(os.path.join(FULL, "designs", a.l1, f), os.path.join(dd, f))
-    d = dict(l1d); d.update(id=a.out, label=f"minarc-stop-knuckle-4r BDp ({src}), full CAD in the user's style", level="L2 user-style (full CAD of the generation-4 winner)",
+    d = dict(l1d); d.update(id=a.out, label=f"minarc-stop-knuckle-4r {a.label} ({src}), full CAD in the user's style", level=f"L2 user-style (full CAD of the {a.gen})",
                             l1_design=a.l1, built_with="pipeline/conformal/param_cad/user_style_minarc.py (user_style / user_style_pinknee parts: v5 O20 hubs, K clock-spring "
                             "cap, hugging machined bars 1a / 1b / 2, O3 dowel-in-arc-slot stops (K opposed pair), member 3, knee link + IGLIDUR-PIN stacks, BOTTOM fused "
                             f"with the pad mount) on the L1 design's frames and clips ({a.l1})")
@@ -617,6 +660,7 @@ def main():
     rep["parts"] = pf; rep["ring_root_fillet_skipped"] = USP.RING_ROOT_SKIPPED
     json.dump(rep, open(os.path.join(dd, "build.json"), "w"), indent=1, default=float)
     print(f"exported {len(pf)} parts -> {dd}; mass {rep['mass_g']}; invalid or multi-solid: {bad or 'none'} ({time.time() - t0:.0f} s)", flush=True)
+    if ks_deg is not None: M.p["ang_min"] = round(180.0 - float(ks_deg), 4)                 # the physical knee stop (frozen shape), as the L1
     rep["check"] = check_frames(M, dd, l1_stops, stops)
     rep["kinematics_exact"] = dict(poses=len(rep["check"]), all_within_0p5=all(r["within_0p5"] for r in rep["check"]),
                                    max_frame_dev_mm=max(r["frame_dev_mm"] for r in rep["check"]),

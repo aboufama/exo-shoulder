@@ -223,6 +223,82 @@ def dowel_check(F_N=770.0, T_Nm=None):
     return out
 
 
+# ---------------------------------------------------------------------------------------------------- gen-4b build fixes
+# CFG: the build options (main sets them from the CLI; the defaults rebuild gen 4's BDp L1 unchanged)
+CFG = dict(k_pair=False, e_cap=False, knee_stop=None, spring=dict(rate=0.015, length_mm=145.0, steel="1.4310 +C1900", preload=0.08), label="BDp")
+
+
+def e_strap_capped(M):
+    """build_pinknee_l1.e_strap with its top CAPPED at the boss top tr + tp (the full CAD's member 3 rule): the knee link rides
+    RUN (0.5 mm) above it within its reach of pin a. Gen-4 build finding: the uncapped L1 strap's thinning run stood 0.115 mm
+    into the knee link's static envelope (inside R6's 0.15 mm, so no judge saw it)."""
+    D = M.D; P = D.p; c3 = D.c[2]; sn = D.sn; fr = M.fr; eE, nE = fr["eE"], fr["nE"]
+    r3 = M.hr[2]; lE = float(P["lE"]); tp = P["tp"]; f3, tr = M.f[2], M.tr
+    xs_m = np.unique(np.round(M._Ex, 6)); hx_m = np.array([M.hEx[np.isclose(M._Ex, v)].max() for v in xs_m])
+    x_rim, x_boss = lE - BOSS_R, lE - BOSS_R + 1.5
+    xs = np.unique(np.r_[np.linspace(r3 - 2.0, r3, 3), xs_m, np.linspace(xs_m[-1], x_rim, 4), x_boss])
+    h = np.interp(xs, np.r_[r3 - 2.0, r3, xs_m, x_rim, x_boss], np.r_[f3, f3, hx_m, tr, tr])
+    th = np.where(xs <= xs_m[-1] + 1e-9, T_LINK, np.interp(xs, [xs_m[-1], x_rim], [T_LINK, tp]))
+    top0 = float((h + th).max()); th_c = np.minimum(th, np.maximum(tr + tp - h, 0.6)); capped = th_c < th - 1e-9
+    ys = np.array([-W_LINK / 2, -1.0, 1.0, W_LINK / 2])
+    Bot = c3[None, None] + xs[:, None, None] * eE + ys[None, :, None] * nE + h[:, None, None] * sn
+    Off = th_c[:, None, None] * np.broadcast_to(sn, Bot.shape)
+    return REF.grid_solid(Bot, Off.copy()), dict(x=[round(float(xs[0]), 2), round(float(xs[-1]), 2)], under=[round(float(h.min()), 2), round(float(h.max()), 2)],
+                                                 thin_from=round(float(xs_m[-1]), 2), rim=round(x_rim, 2), cap=round(float(tr + tp), 3),
+                                                 top_before_cap=round(top0, 3), stations_capped=int(capped.sum()),
+                                                 min_thickness=round(float(th_c.min()), 3), knee_link_underside=round(float(tr + tp + RUN), 3))
+
+
+def knee_stop_geom(M, ang_stop, K=None, s1=None, s2=None, depth=1.5, tooth_w=2.0):
+    """the PHYSICAL KNEE STOP (docs/research/knee-window-check.md: a shoulder on the knee link against member 3, at the knee
+    angle ang_stop, here 149.5 = 180 - H1's ang_min 30.46). Knee angle = the model's: the angle at pin a between the E strap
+    (pin a -> J3) and the knee link (pin a -> pin b); 180 = straight (toggle). A tooth hangs from the knee link's back end
+    (behind pin a) down `depth` mm into the E strap's level, outside the E boss (r >= BOSS_R + 0.8); at ang_stop its flat face
+    lies ON the E strap's side face (|l| = W/2), so the knee cannot open past the stop; below the stop the tooth turns away
+    from the strap. A knee-level web joins the tooth to the knee link's back edge. Built in member 3's home frame at the stop
+    and carried into the knee link's home frame by the rotation about pin a. Returns dict(tooth=(P2, z0, z1), web=(P2, z0, z1))
+    with P2 the planform in the knee link's (eK, nK) coordinates about A0m, z along sn (mm), plus checks."""
+    D = M.D; P = D.p; sn = D.sn; fr = M.fr; eE, nE, eK, nK = fr["eE"], fr["nE"], fr["eK"], fr["nK"]
+    tr = M.tr; tp = P["tp"]; z0 = tr + tp + RUN
+    sang = lambda a, b: math.atan2(float(sn @ np.cross(a, b)), float(a @ b))
+    alpha_h = sang(-eE, eK)                                                       # knee direction in the knee's home frame, from -eE about sn
+    chk = None
+    if K is not None:                                                             # the definition vs the model's knee angle, on poses
+        old = (M.Q, M.s, M.RS, M.X, M.K, M.q); BASE.swap_in(M, K); err = []; sg = set()
+        try:
+            for j in np.nonzero(K["ok"] & K["kok"])[0][:400:7]:
+                R3, _ = M.T(3, j); R6, _ = M.T(6, j); kd = R3.T @ R6 @ eK; a_ = sang(-eE, kd)
+                err.append(abs(abs(math.degrees(a_)) - float(K["Kn"]["ang"][j]))); sg.add(int(np.sign(a_)))
+        finally: M.Q, M.s, M.RS, M.X, M.K, M.q = old
+        chk = dict(poses=len(err), max_err_deg=round(float(max(err)), 4) if err else None, sides=sorted(sg))
+        assert err and max(err) < 0.5 and len(sg) == 1, f"knee angle definition mismatch {chk}"
+        alpha_side = float(next(iter(sg)))
+    else: alpha_side = float(np.sign(alpha_h))
+    beta = alpha_side * math.radians(ang_stop)                                    # the knee direction at the stop, in member 3's frame
+    rot = lambda a, v: v * math.cos(a) + np.cross(sn, v) * math.sin(a) + sn * (sn @ v) * (1 - math.cos(a))
+    kst = rot(beta, -eE); back = -kst; sig = float(np.sign(back @ nE))
+    s1 = BOSS_R + 0.8 if s1 is None else s1; s2 = BOSS_R + 3.2 if s2 is None else s2; hw = W_LINK / 2
+    in3 = lambda s_, l_: s_ * (-eE) + l_ * nE                                    # member-3 in-plane vector from A0
+    tooth3 = [in3(s1, sig * hw), in3(s2, sig * hw), in3(s2, sig * (hw + tooth_w)), in3(s1, sig * (hw + tooth_w))]
+    nst = np.cross(sn, kst)
+    back3 = [-BOSS_R * kst + sg_ * (KNEE_W / 2) * nst for sg_ in (-1.0, 1.0)]
+    to_knee = lambda v: rot(alpha_h - beta, v)                                    # member 3 at the stop -> knee home (about pin a)
+    P2 = lambda vs: np.array([[float(to_knee(v) @ eK), float(to_knee(v) @ nK)] for v in vs])
+    from scipy.spatial import ConvexHull
+    T2 = P2(tooth3); Wv = np.r_[T2, P2(back3)]; Wh = Wv[ConvexHull(Wv).vertices]
+    r_min = float(min(np.linalg.norm(v) for v in tooth3))
+    return dict(tooth=(T2, tr + tp - depth, z0 + tp), web=(Wh, z0, z0 + tp), ang_stop=ang_stop, side=sig, alpha_home_deg=round(math.degrees(alpha_h), 3),
+                check=chk, tooth_r_min=round(r_min, 3), face=dict(s=[s1, s2], l=round(sig * hw, 3), z=[round(tr + tp - depth, 3), round(tr + tp, 3)]),
+                contact_area_mm2=round((s2 - s1) * depth, 2))
+
+
+def prism_mesh(P2, cen, e, f, ax, z0, z1):
+    """closed solid: the convex planform P2 ((e, f) coords about cen) extruded z0..z1 along ax"""
+    P2 = np.asarray(P2, float); c = P2.mean(0); a = np.arctan2(P2[:, 1] - c[1], P2[:, 0] - c[0]); P2 = P2[np.argsort(a)]
+    n = len(P2); F2 = [[0, i, i + 1] for i in range(1, n - 1)]
+    return extrude2d(P2, F2, cen, e, f, ax, z0, z1)
+
+
 # ---------------------------------------------------------------------------------------------------- parts
 def build_parts(M):
     """[(group, member, name, mesh in the MEMBER-LOCAL home frame, material)]; member 5 = arm-fixed (canonical arm frame)"""
@@ -240,33 +316,51 @@ def build_parts(M):
     smp = lambda m: np.r_[np.asarray(m.vertices), trimesh.sample.sample_surface_even(m, 4000, seed=2)[0]]
     for key, k, lower_strap, glo, mlo, gup, mup, label in (("K", 1, "L1a", "l1a", 1, "l1b", 7, "K"), ("J2", 2, "L1b", "l1b", 7, "l2", 2, "J2")):
         q_lo, q_hi, meta = sp[key]
-        th, a_lo, a_hi, clr = slot_place(smp(straps[lower_strap]), H(k), U[k], q_lo, q_hi, SLOT_RS, DOWEL_R + SLOT_CLR, DOWEL_R)
-        plate = slotted_plate(H(k), U[k], 0.0, PLATE, hr[k], SLOT_RS, DOWEL_R + SLOT_CLR, a_lo, a_hi)
-        e, f = S.frame_of(U[k]); f = np.cross(U[k], e); pd = H(k) + SLOT_RS * (math.cos(th) * e + math.sin(th) * f)
-        dw = REF.cyl(pd, U[k], DOWEL_Z[0], DOWEL_Z[1], r=DOWEL_R)
+        pair = bool(CFG["k_pair"] and key == "K")
+        spts = smp(straps[lower_strap])
+        if CFG["k_pair"]:                                                       # gen 4b: the full CAD's pad root (user_style_minarc.link_gh: the bar's seat
+            ka_ = 0 if key == "K" else 1; ex_ = unit(U[ka_]); ey_ = unit(U[k] - (U[k] @ ex_) * ex_)   # pad runs from the hub along sd_b, W wide) as points:
+            ph_ = math.acos(float(np.clip(unit(U[k]) @ ex_, -1, 1))); sd_ = math.sin(ph_) * ex_ - math.cos(ph_) * ey_   # the L1 strap stops short of the
+            lat_ = np.cross(U[k], sd_); rr_ = np.linspace(SLOT_RS - DOWEL_R - SLOT_CLR, hr[k], 8); ll_ = np.linspace(-W_LINK / 2, W_LINK / 2, 9)   # slot band
+            spts = np.r_[spts, np.array([H(k) + r_ * sd_ + l_ * lat_ + 1.5 * U[k] for r_ in rr_ for l_ in ll_])]
+        th, a_lo, a_hi, clr = slot_place(spts, H(k), U[k], q_lo, q_hi, SLOT_RS, DOWEL_R + SLOT_CLR, DOWEL_R, pair=pair)
+        plate = slotted_plate(H(k), U[k], 0.0, PLATE, hr[k], SLOT_RS, DOWEL_R + SLOT_CLR, a_lo, a_hi, extra=[(a_lo + np.pi, a_hi + np.pi)] if pair else ())
+        e, f = S.frame_of(U[k]); f = np.cross(U[k], e); homes = [th, th + np.pi] if pair else [th]
+        pds = [H(k) + SLOT_RS * (math.cos(t_) * e + math.sin(t_) * f) for t_ in homes]
+        dws = [REF.cyl(pd, U[k], DOWEL_Z[0], DOWEL_Z[1], r=DOWEL_R) for pd in pds]
         travel = math.degrees(q_hi - q_lo)
-        out.append((glo, mlo, f"{label} lower plate keep-out (O20 x 3, {'link 1a' if key == 'K' else 'link 1b'}) with the {label} stop slot "
+        out.append((glo, mlo, f"{label} lower plate keep-out (O20 x 3, {'link 1a' if key == 'K' else 'link 1b'}) with the {label} stop slot{'s (an opposed pair)' if pair else ''} "
                     f"(r {SLOT_RS} mm, {2 * (DOWEL_R + SLOT_CLR):.1f} wide, {travel:.1f} deg of travel + the dowel; its ends = the stops)", plate, "ti"))
-        out.append((gup, mup, f"{label} stop dowel (ISO 8734 O{2 * DOWEL_R:g} m6 hardened, r {SLOT_RS} mm, F+{DOWEL_Z[0]}..F+{DOWEL_Z[1]:.2f}, pressed in the "
-                    f"{label} upper boss)", dw, "steel"))
-        info[key] = dict(meta, travel_deg=round(travel, 3), dowel_home_angle_deg=round(math.degrees(th), 2), slot_deg=[round(math.degrees(a_lo), 2), round(math.degrees(a_hi), 2)],
+        for i_, dw in enumerate(dws):
+            out.append((gup, mup, f"{label} stop dowel{f' {i_ + 1} of 2' if pair else ''} (ISO 8734 O{2 * DOWEL_R:g} m6 hardened, r {SLOT_RS} mm, F+{DOWEL_Z[0]}..F+{DOWEL_Z[1]:.2f}, "
+                        f"pressed in the {label} upper boss)", dw, "steel"))
+        info[key] = dict(meta, travel_deg=round(travel, 3), dowel_home_angle_deg=round(math.degrees(th), 2), dowel_home_angles_deg=[round(math.degrees(t_), 2) for t_ in homes],
+                         pair=pair, slot_deg=[round(math.degrees(a_lo), 2), round(math.degrees(a_hi), 2)],
                          clearance_to_lower_strap_deg=round(clr, 2), dowel_mm=[2 * DOWEL_R, DOWEL_Z[0], DOWEL_Z[1]], slot_r_mm=SLOT_RS, slot_w_mm=2 * (DOWEL_R + SLOT_CLR),
                          end_clearance_mm=END_CLR, frame="angles in frame_of(axis) of the lower member: dowel centre = home angle + joint angle")
         if key == "K":
-            out.append(("l1b", 7, f"K upper boss + clock-spring cap keep-out (O20, F+3.15..F+{CROWN + capK:.2f}: cap {capK:g} mm taller - 0.3 x 5 mm 1.4310 +C1900 "
-                        f"strip >= 145 mm, <= 0.015 N.m/rad, 0.08 N.m preload; K sensed: 4th encoder)", REF.cyl(H(1), U[1], UP, CROWN + capK, r=hr[1]), "ti"))
+            sp_ = CFG["spring"]
+            out.append(("l1b", 7, f"K upper boss + clock-spring cap keep-out (O20, F+3.15..F+{CROWN + capK:.2f}: cap {capK:g} mm taller - 0.3 x 5 mm {sp_['steel']} "
+                        f"strip {sp_['length_mm']:g} mm, {sp_['rate']:g} N.m/rad, {sp_['preload']:g} N.m preload; K sensed: 4th encoder)", REF.cyl(H(1), U[1], UP, CROWN + capK, r=hr[1]), "ti"))
             out.append(("l1b", 7, "link 1b strap keep-out (8 x 3 mm Ti, fitted underside, K -> J2)", straps["L1b"], "ti"))
     out.append(("l2", 2, "J2 upper boss + cap keep-out (O20, F+3.15..F+12.25, link 2)", REF.cyl(H(2), U[2], UP, CROWN, r=hr[2]), "ti"))
     out.append(("l2", 2, "link 2 strap keep-out (8 x 3 mm Ti, fitted underside, J2 -> J3)", straps["L2"], "ti"))
     out.append(("l2", 2, "J3 upper boss + cap keep-out (O20, F+3.15..F+12.25, link 2)", REF.cyl(H(3), U[3], UP, CROWN, r=hr[3]), "ti"))
     out.append(("l3", 3, "J3 lower plate keep-out (O20 x 3, member 3)", REF.cyl(H(3), U[3], 0.0, PLATE, r=hr[3]), "ti"))
-    Em, Einfo = BASE.e_strap(M)
-    out.append(("l3", 3, f"E strap keep-out (8 x 3 mm Ti, fitted underside, hub 3 plate -> pin a, thins to {tp:.2f} at the boss)", Em, "ti"))
+    Em, Einfo = (e_strap_capped if CFG["e_cap"] else BASE.e_strap)(M)
+    out.append(("l3", 3, f"E strap keep-out (8 x 3 mm Ti, fitted underside, hub 3 plate -> pin a, thins to {tp:.2f} at the boss"
+                + (f", top capped at the boss top tr+tp under the knee's reach)" if CFG["e_cap"] else ")"), Em, "ti"))
     out.append(("l3", 3, f"E boss = pin a lower plate (O{2 * BOSS_R:.0f} x {tp:.2f} mm, tr..tr+tp, member 3)", REF.cyl(fr["A0"], sn, tr, tr + tp, r=BOSS_R), "ti"))
     z0 = tr + tp + RUN; ck = fr["A0m"] + (lc / 2) * fr["eK"] + (z0 + tp / 2) * sn
     out.append(("l4", 6, f"knee link keep-out (flat Ti bar {lc + 2 * BOSS_R:.1f} x {KNEE_W:.0f} x {tp:.2f} mm, pins a, b {BOSS_R:.0f} mm from its ends, tr+tp+0.5)",
                 REF.box(ck, np.stack([fr["eK"], fr["nK"], sn], 1), [lc + 2 * BOSS_R, KNEE_W, tp]), "ti"))
     out.append(("H", 5, f"arm pad = pin b lower plate (O{2 * PAD_R:.0f} x {tp:.2f} mm, tr..tr+tp, arm-fixed on the cuff)", REF.cyl(fr["Bm"], sn, tr, tr + tp, r=PAD_R), "ti"))
+    if CFG["knee_stop"] is not None:
+        ks = CFG["_knee_geom"]; e_, n_ = fr["eK"], fr["nK"]
+        out.append(("l4", 6, f"knee stop tooth keep-out ({ks['face']['s'][1] - ks['face']['s'][0]:.1f} x 2 mm, hangs {tr + tp + RUN + tp - ks['tooth'][1]:.2f} mm from the knee "
+                    f"link top behind pin a; its face meets the E strap's side at knee angle {CFG['knee_stop']:g} deg)", prism_mesh(ks["tooth"][0], fr["A0m"], e_, n_, sn, *ks["tooth"][1:]), "ti"))
+        out.append(("l4", 6, f"knee stop web keep-out (knee link level, {tp:.2f} mm, joins the tooth to the knee link's back edge)",
+                    prism_mesh(ks["web"][0], fr["A0m"], e_, n_, sn, *ks["web"][1:]), "ti"))
     zr = z0 + tp + RUN; RET = BASE.RET
     out.append(("l3", 3, f"pin a retainer keep-out (O8 x {RET} mm: DIN 6799 RS 3.2 e-clip land + pin end, over the 0.5 mm GTM washer on the knee link)",
                 REF.cyl(fr["A0"], sn, zr, zr + RET, r=4.0), "steel"))
@@ -355,7 +449,10 @@ def set_adjacent(parts):
              ("pad mount", "E strap"), ("E strap", "pad mount"), ("E boss", "pad mount"), ("knee link", "pad mount"), ("arm pad", "J3"),
              ("pad mount", "J3 lower plate"), ("pad mount", "J3 upper boss"), ("link 2 strap", "arm pad"), ("link 2 strap", "pad mount"),
              ("pin a retainer", "knee link"), ("pin b retainer", "knee link"), ("pin a retainer", "link 2 strap"), ("pin b retainer", "link 2 strap"),
-             ("pin a retainer", "J3 upper boss"), ("pin b retainer", "E strap"), ("pin b retainer", "E boss"), ("pin a retainer", "pad mount"))
+             ("pin a retainer", "J3 upper boss"), ("pin b retainer", "E strap"), ("pin b retainer", "E boss"), ("pin a retainer", "pad mount"),
+             ("knee stop tooth", "E strap"), ("E strap", "knee stop tooth"), ("knee stop tooth", "E boss"), ("knee stop web", "E strap"),
+             ("knee stop web", "link 2 strap"), ("link 2 strap", "knee stop web"), ("knee stop tooth", "link 2 strap"), ("knee stop web", "pin a retainer"),
+             ("knee stop tooth", "J3 upper boss"), ("knee stop web", "J3 upper boss"))
     for a_, b_ in pairs:
         A, Bp = find(a_), find(b_)
         if A is None or Bp is None or A[1] == Bp[1]: continue
@@ -454,14 +551,32 @@ def main():
     ap = argparse.ArgumentParser(); ap.add_argument("--out", default="l1_minarc-bdp")
     ap.add_argument("--params"); ap.add_argument("--params-file"); ap.add_argument("--a1max", type=float, default=A1MAX_FIX)
     ap.add_argument("--jobs", type=int, default=1); ap.add_argument("--no-clips", action="store_true")
+    ap.add_argument("--label", default="BDp", help="config name in the labels")
+    ap.add_argument("--claim", default="docs/concepts/verify/minarc-bdp-judge.md: 19.54, score 92.89", help="the verified claim the shape carries")
+    ap.add_argument("--k-pair", action="store_true", help="K stop = an opposed dowel pair (a couple), both slots placed clear of link 1a's strap")
+    ap.add_argument("--e-cap", action="store_true", help="E strap top capped at the boss top tr + tp (the full CAD's rule)")
+    ap.add_argument("--knee-stop", type=float, help="physical knee stop at this knee angle (deg; the knee window's upper edge in the clips / workspace)")
+    ap.add_argument("--spring-rate", type=float, default=0.015); ap.add_argument("--spring-len", type=float, default=145.0)
     a = ap.parse_args(); t0 = time.time(); fb = (60, 160); fbs = "Bench(60,160)"
+    CFG.update(k_pair=a.k_pair, e_cap=a.e_cap, knee_stop=a.knee_stop, label=a.label, spring=dict(CFG["spring"], rate=a.spring_rate, length_mm=a.spring_len))
     import concept_kit as KIT
     dd = os.path.join(FULL, "designs", a.out); os.makedirs(dd, exist_ok=True)
     P0, src = params_from(a); M, rep = fit(P0, fb); D = M.D; P = M.p
     if M.B.mode != "fast": print(f"WARNING: the fit bench {fbs} ran {M.B.mode}, not fast", flush=True)
     print(f"fit ({src}) on {fbs} {M.B.mode} (fold margin {KIT.FOLD_MARGIN}): near-touch gap {rep['gap']} plain {rep['plain']} ib10 {rep['inband10']} "
           f"f {np.round(M.f, 3).tolist()} fK {M.fK:.3f} tr {M.tr:.2f} m {np.round(D.m, 3)} q2 stops {np.round(D.q2_stops, 3)} kitrule {rep.get('kitrule')} ({time.time() - t0:.0f} s)", flush=True)
+    knee_rep = None
+    if a.knee_stop is not None:
+        Bf = M.B; allp_ = np.array([[Bf.poses[i][k] for k in ("plane", "elev", "axial", "flex", "pron")] for i in range(len(Bf.idx))])
+        Kf = chain(M, allp_); kin_ = Kf["ok"] & Kf["kok"]
+        CFG["_knee_geom"] = kg = knee_stop_geom(M, a.knee_stop, K=Kf)
+        knee_rep = dict({k_: v for k_, v in kg.items() if k_ not in ("tooth", "web")}, model_window_edge_deg=round(180 - float(P["ang_min"]), 3),
+                        fit_bench_knee_max_deg=round(float(Kf["Kn"]["ang"][kin_].max()), 3), fit_bench_poses_past_stop=int((Kf["Kn"]["ang"][kin_] > a.knee_stop).sum()))
+        print(f"knee stop at {a.knee_stop} deg: {knee_rep}", flush=True)
     parts, stack = build_parts(M)
+    if a.knee_stop is not None:
+        stack["knee_stop"] = knee_rep
+        P["ang_min"] = round(180.0 - a.knee_stop, 4)                            # frozen shape; the physical stop narrows the knee window from here on
     up = BASE.user_parts(); bot = next(m for g, n, m in up if n.startswith("BOTTOM"))
     bottom_c = np.asarray(bot.vertices) @ HR
     dense = lambda m: np.r_[np.asarray(m.vertices), trimesh.sample.sample_surface_even(m, 40000, seed=5)[0]]
@@ -509,8 +624,8 @@ def main():
                             dK_stop_B_deg=stack["stops"]["K"]["stop_B_deg"], q2_stops_deg=stack["stops"]["J2"]["q2_stops_deg"], smlo=P["smlo"], smhi=P["smhi"],
                             note="az/el/a/w = the 3R with K on stop A (state A, every clip frame but 8 of Wash opposite shoulder); K opens about uK through GH past J2's stop"))
     pr = {k_: v for k_, v in P0.items()}
-    design = dict(id=a.out, source=f"docs/concepts/{ID}.md (Kit-rule re-optimisation, config BDp), {src}, fit on {fbs} {M.B.mode} at fold margin {KIT.FOLD_MARGIN} "
-                                   f"= the shape the verifiers wore frozen on Bench(110,360) exact (docs/concepts/verify/minarc-bdp-judge.md: 19.54, score 92.89)",
+    design = dict(id=a.out, source=f"docs/concepts/{ID}.md (Kit-rule re-optimisation, config {a.label}), {src}, fit on {fbs} {M.B.mode} at fold margin {KIT.FOLD_MARGIN} "
+                                   f"= the shape the verifiers wore frozen on Bench(110,360) exact ({a.claim})",
                   params=pr, n_joints=4, sliding_cuff=False, dof=4,
                   passive=dict(count=2, translations=0, rotations=2, outside_dof_count=True,
                                kind="flat two-pin knee closing the loop at the cuff (pins a, b parallel to J3); set by loop closure, nothing sags. K (in the DOF count) "
@@ -519,14 +634,17 @@ def main():
                                                 stack_mm=P["stk"], plates_mm=[P["tp"], P["tp"]]),
                                            dict(pin="b", between="knee link / arm pad (cuff)", part="IGLIDUR-PIN (as pin a)", stack_mm=P["stk"], plates_mm=[P["tp"], P["tp"]])]),
                   joints=[dict(joint="J1", part="O20 x 12.25 v5 hub, MR117-2RS pair", axis_offset_mm=kin["axis_line_offsets_mm"][0]),
-                          dict(joint="K", part=f"O20 v5 hub, MR117-2RS pair, cap {CROWN + float(P.get('capK', 0)):.2f} mm (clock spring 0.3 x 5 1.4310 +C1900 >= 145 mm, <= 0.015 N.m/rad, "
-                                                f"0.08 N.m preload); stops A / B = O3 dowel in a {stack['stops']['K']['travel_deg']:.1f}-deg arc slot; encoder", axis_offset_mm=0.0, passive=True, sensed=True),
+                          dict(joint="K", part=f"O20 v5 hub, MR117-2RS pair, cap {CROWN + float(P.get('capK', 0)):.2f} mm (clock spring 0.3 x 5 {CFG['spring']['steel']} "
+                                                f"{CFG['spring']['length_mm']:g} mm, {CFG['spring']['rate']:g} N.m/rad, {CFG['spring']['preload']:g} N.m preload); stops A / B = "
+                                                f"{'an opposed pair of O3 dowels in two' if a.k_pair else 'O3 dowel in a'} {stack['stops']['K']['travel_deg']:.1f}-deg arc slot{'s' if a.k_pair else ''}; encoder",
+                               axis_offset_mm=0.0, passive=True, sensed=True),
                           dict(joint="J2", part=f"O20 x 12.25 v5 hub, MR117-2RS pair; q2 stops = O3 dowel in a {stack['stops']['J2']['travel_deg']:.1f}-deg arc slot", axis_offset_mm=kin["axis_line_offsets_mm"][1]),
                           dict(joint="J3", part="O20 x 12.25 v5 hub, MR117-2RS pair", axis_offset_mm=kin["axis_line_offsets_mm"][2])],
                   kinematics=kin, base=dict(mount="girdle", chain="minarc_kitrule_bdp", note="base rides the scapula on the user's scapula handler, carried directly at the J1 hub ring (no tab)"),
                   built_with="pipeline/concept_l1/build_minarc_l1.py (L1 keep-out meshes: O20 hub keep-outs incl. hub K's 6 mm taller cap, fitted 8 x 3 straps 1a / 1b / 2, "
                              "stop dowels + arc slots, E strap + boss, knee link, arm pad, pin retainers)",
-                  label=f"minarc-stop-knuckle-4r BDp (fit {fbs}, fold margin {KIT.FOLD_MARGIN:g}), L1 keep-out", fit_bench=list(fb), fold_margin=KIT.FOLD_MARGIN,
+                  label=f"minarc-stop-knuckle-4r {a.label} (fit {fbs}, fold margin {KIT.FOLD_MARGIN:g}), L1 keep-out", fit_bench=list(fb), fold_margin=KIT.FOLD_MARGIN,
+                  build_fixes=dict(k_pair=a.k_pair, e_cap=a.e_cap, knee_stop_deg=a.knee_stop, spring=CFG["spring"]),
                   faces_mm=[round(float(x), 2) for x in M.f], fK_mm=round(float(M.fK), 2), tr=round(float(M.tr), 2), stack_mm=stack,
                   bench=dict(near_touch_gap=rep["gap"], **{k_: rep["plain"][k_] for k_ in ("gap", "reach", "follow", "inband14", "contact")}, inband10=rep["inband10"]),
                   note="R17's dynamics judge models the orientation-equivalent spherical 3R with K on stop A (kinematics az/el/a/w); K (opens past J2's stop on "
