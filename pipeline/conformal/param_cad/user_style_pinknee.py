@@ -30,7 +30,8 @@ line / arc paths, rounds):
             thick at tr + tp + 0.5, O5.5 bores with iglidur sleeves, O8 x 0.7 clip counterbores (pins end flush).
   pins a, b IGLIDUR-PIN stack 5.0 mm (tools/hardware_catalogue.json): integral O4 h9 Ti pin on the lower plate (E boss /
             arm pad), iglidur thrust washer O4.2 x O8 x 0.5 in the 0.5 mm running gap, iglidur sleeve O4 x O5.5 x 1.55 pressed
-            in the knee link, DIN 6799 RS3.2 E-clip (A2) in a 0.7 mm counterbore - nothing stands above the 5.0 mm stack.
+            in the knee link, DIN 6799 RS3.2 E-clip (A2) in a 0.7 mm counterbore; the O4 pin end carries the clip's 1.0 mm
+            land (PIN_LAND) and stands 0.9 mm proud of the knee link (h1: flush, no land - VERIFY.md C2).
   arm side  the arm pad (O12 at pin b) + the pad mount as one planform sketch (lines + tangent arcs, 12 wide, at the pad
             level) on the L1's ROUTE (build_pinknee_l1.pad_mount_sweep: the shortest straight slab >= 1 mm clear of the
             knee's swept parts over 1161 closing poses), its last 6 mm a riser 1 mm into BOTTOM's underside; BOTTOM cut as the
@@ -61,6 +62,9 @@ CACHE = os.path.join(REPO, ".cache", "user_style_pinknee_fits.json")
 CUFF_WRAP_NEG = 12.0                                                                       # deg (user_style_osn: the forearm cuff folds onto the anterior arc)
 S_CUT = 255.0                                                                              # BOTTOM's cut (as the L1's user parts)
 PIN_D, SLEEVE_D, CB_D, CB_H, CLIP_T, GROOVE_D = 4.0, 5.5, 8.0, 0.7, 0.6, 3.2            # pin stack hardware (mm)
+PIN_LAND = float(os.environ.get("PK_PIN_LAND", 1.0))                                       # O4 land beyond the E-clip groove: DIN 6799 RS 3.2 asks
+# n >= 1.0 mm on a 4 mm shaft (user_pinknee_h1 had 0.1: the groove's outer wall had no material, VERIFY.md C2); the pin ends
+# PIN_LAND - 0.1 mm proud of the knee link's outer face (away from the skin), 0.3 x 45 deg chamfer. PK_PIN_LAND=0.1 = h1
 KNEE_R = 5.0                                                                               # (unused since the R1-corner plate)
 KNEE_CR = 1.0                                                                              # knee link planform corner radius
 TI, STEEL, IGL = 4.43, 7.85, 1.46
@@ -262,6 +266,55 @@ CLIMBS = ((60.0, BEND_R), (60.0, 4.0))                                          
                                                                                            # >= 15 mm inner on bent bars; tighter = 5-axis machined
 
 
+# PK_LINK1_MACHINED=1 / PK_LINK2_MACHINED=1 (user_pinknee_h1b, 2026-10-16): that bar is 5-axis machined from solid and HUGS the
+# verified model's strap (sketch2d.hug_chain: within ~0.3 mm of it outside the hub footprints, >= 0.1 mm above it) instead
+# of a bent bar that clears it: the bent bars of user_pinknee_h1 rode up to 4.1 (link 1) / 10.9 mm (link 2) over the strap
+# the evaluator scored (VERIFY.md: R1 80.1 -> 71.4 %). Its seats shrink to the model's hub footprint (pad 11 mm from the
+# axis, R2 planform rounds: the model lifts the strap to the hub level only within hr + 2.5 = 12.5 mm), its bends go down
+# to R3 on the centre line (1.5 mm inner, 4.5 mm outer: a 3 mm ball / bull-nose cutter; below the 15 mm bent-bar rule,
+# hence machined - stated on the part), ramps <= 60 deg (the user's ruling).
+HUG_SEAT, HUG_RF, HUG_RMIN, HUG_N = 11.0, 2.0, 3.0, {"link 1": (5,), "link 2": (6, 7)}
+MACHINED = {"link 1": os.environ.get("PK_LINK1_MACHINED") == "1", "link 2": os.environ.get("PK_LINK2_MACHINED") == "1"}
+
+
+def hug_fit(label, ex, ey, start, end, Dq, Rq, axes, hr2, t=T):
+    """the machined bar: sketch2d.hug_chain on the L1 strap underside (max over the strap's columns, in the bar plane).
+    axes = [(point, direction)] of the two hub axes in the plane (J3's is offset from GH); hr2 their hub radii. Inside a
+    hub's footprint (hr + 2.5, the model's lift zone) the bar's floor is the seat level itself (margin -0.8: the model
+    lifts its strap 0.2 mm above the plate there); outside, >= 0.1 mm above the strap and pulled to within 0.3 mm of it"""
+    th_q = np.arctan2(Dq @ ey, Dq @ ex); rho_q = Rq * np.hypot(Dq @ ex, Dq @ ey)
+    th = th_q.mean(0); order = np.argsort(th); th = th[order]; need = rho_q.max(0)[order]
+    clear = lambda U: np.hypot(U[:, 0], U[:, 1]) - np.interp(np.arctan2(U[:, 1], U[:, 0]), th, need)
+    def offs(U): return [np.abs((U - np.asarray(p_)[None]) @ np.array([-d_[1], d_[0]])) for p_, d_ in axes]
+    foot = lambda U: np.any([o_ < r_ + 2.5 for o_, r_ in zip(offs(U), hr2)], axis=0)
+    margin = lambda U: np.where(foot(U), -0.8, 0.1); outside = lambda U: ~foot(U)
+    tgt = lambda P: np.hypot(P[:, 0], P[:, 1]) - (np.interp(np.arctan2(P[:, 1], P[:, 0]), th, need) + t / 2 + 0.25)
+    geo = f"{np.round(ex, 5).tolist()}|{np.round(ey, 5).tolist()}|{np.round(start, 4).tolist()}|{np.round(end, 4).tolist()}|{np.round(need, 3).tolist()}"
+    key = f"{label}|hugM|{HUG_RMIN:g}|{HUG_N[label]}|{geo}"
+    cache = json.load(open(CACHE)) if os.path.exists(CACHE) else {}
+    if key in cache: fit = cache[key]; fit["segs"] = [tuple(x) for x in fit["segs"]]
+    else:
+        fits = []
+        for n_ in HUG_N[label]:
+            try: fits.append(SK.hug_chain(start, end, clear, t, outside, n=n_, r_min=HUG_RMIN, margin=margin, tgt_curve=tgt, seeds=10)); print(f"  {label}: hug {n_} segments: max {fits[-1]['max_clear']:.2f} outside the footprints {fits[-1]['max_clear_outside']:.2f} mean {fits[-1]['mean_clear']:.2f} mm", flush=True)
+            except RuntimeError as e_: print(f"  {label}: hug {n_} segments: {e_}", flush=True)
+        if not fits: raise RuntimeError(f"{label}: no hugging chain")
+        fit = min(fits, key=lambda f_: f_["objective"])
+        fit = {k: (float(v) if isinstance(v, (np.floating, float)) else v) for k, v in fit.items()}
+        cache = json.load(open(CACHE)) if os.path.exists(CACHE) else {}; cache[key] = fit
+        os.makedirs(os.path.dirname(CACHE), exist_ok=True); json.dump(cache, open(CACHE + ".tmp", "w"), indent=0); os.replace(CACHE + ".tmp", CACHE)
+    P, H, _ = SK.sample(start, fit["segs"], 60); U = P - 0.5 * t * SK.normals(H); cl = clear(U); out_ = outside(U)
+    rr = [abs(r) for r in fit["radii"] if r is not None]; inner = min(rr) - t / 2 if rr else None
+    fit.update(climb_limit=60.0, r_min=HUG_RMIN)
+    print(f"{label} (machined, hugging): radii {[None if r is None else round(r, 1) for r in fit['radii']]}, lengths {[round(l, 2) for _, l in fit['segs']]}, "
+          f"over the L1 underside min {cl.min():.2f} mean {cl.mean():.2f} max {cl.max():.2f} mm, outside the hub footprints max {cl[out_].max():.2f} mm, "
+          f"max climb {fit['max_climb']:.1f} deg, min inner bend R {inner:.2f}", flush=True)
+    return fit, dict(over_L1_min=float(cl.min()), over_L1_mean=float(cl.mean()), over_L1_max=float(cl.max()),
+                     over_L1_max_outside_footprints=float(cl[out_].max()) if out_.any() else None, min_inner_bend_mm=inner,
+                     process=f"5-axis machined from solid Ti-6Al-4V: follows the model strap; bends down to R{min(rr):g} on the centre line "
+                             f"({inner:g} mm inner), below the 15 mm bent-bar rule")
+
+
 def link_fit(label, ex, ey, start, end, Dq, Rq, t=T, climbs=CLIMBS):
     """bent-bar chain (start -> end poses in the plane (GH, ex, ey)) whose skin side stays >= the L1 strap underside
     (user_style_osn.link_fit: fairness weight 4, up to 5 arcs). The 2026-10-16 CAD ruling: ramps up to 60 deg; a bent
@@ -336,8 +389,10 @@ def links(M):
     Dq, Rq = l1_rows(M, *prof["L1"]); fit = None
     # seats: the standard's 14 mm pads (R6 planform rounds) first; if no chain climbs from J1's seat to J2's (k4598: J2's face
     # is 10.9 mm above J1's within 40 deg, the L1 strap needs ~55 deg near J2), 12 / 11 mm pads with R3 planform rounds
-    for Ls, rf in ((L_SEAT, US.RF), (12.0, 3.0), (11.0, 2.0)):
+    for Ls, rf in (((HUG_SEAT, HUG_RF),) if MACHINED["link 1"] else ((L_SEAT, US.RF), (12.0, 3.0), (11.0, 2.0))):
         start = (ha, Ls, math.pi / 2); end = (*(B + Ls * back), math.pi / 2 + phi)
+        if MACHINED["link 1"]:
+            fit, r1 = hug_fit("link 1", ex, ey, start, end, Dq, Rq, [((0.0, 0.0), (1.0, 0.0)), ((0.0, 0.0), (math.cos(phi), math.sin(phi)))], [hr[0], hr[1]]); break
         try: fit, r1 = link_fit("link 1" if Ls == L_SEAT else f"link 1 (seat {Ls:g})", ex, ey, start, end, Dq, Rq); break
         except RuntimeError as e_: print(f"  link 1: seat {Ls:g}: {e_}", flush=True)
     if fit is None: raise RuntimeError("link 1: no chain at any seat length")
@@ -364,15 +419,16 @@ def links2(M, out, rep):
     phi = math.atan2(u3p @ ey, u3p @ ex)
     ha, hb = F[1] + LV["U0"] + T / 2, F[2] + LV["U0"] + T / 2
     p3 = c[2] + hb * u[2]; B = np.array([p3 @ ex, p3 @ ey]); back = np.array([math.sin(phi), -math.cos(phi)])
-    start = (ha, L_SEAT, math.pi / 2); end = (*(B + L_SEAT * back), math.pi / 2 + phi)
-    # PK_LINK2_MACHINED=1: link 2 5-axis machined from solid (bends down to R4, the 60 deg ramps) so it hugs the L1 strap at
-    # J3 - the bent bar (>= 15 mm bends) rides up to 10.9 mm over it there and cost R1-aim 9 points on H1 (user_pinknee_h1)
-    cl2 = ((60.0, 4.0),) if os.environ.get("PK_LINK2_MACHINED") == "1" else CLIMBS
-    Dq, Rq = l1_rows(M, *prof["L2"]); fit, r2 = link_fit("link 2", ex, ey, start, end, Dq, Rq, climbs=cl2)
+    Ls, rf = (HUG_SEAT, HUG_RF) if MACHINED["link 2"] else (L_SEAT, US.RF)
+    start = (ha, Ls, math.pi / 2); end = (*(B + Ls * back), math.pi / 2 + phi)
+    Dq, Rq = l1_rows(M, *prof["L2"])
+    if MACHINED["link 2"]:                                                                 # the hugging machined bar (see HUG_SEAT)
+        fit, r2 = hug_fit("link 2", ex, ey, start, end, Dq, Rq, [((0.0, 0.0), (1.0, 0.0)), (tuple(B), (math.cos(phi), math.sin(phi)))], [hr[1], hr[2]])
+    else: fit, r2 = link_fit("link 2", ex, ey, start, end, Dq, Rq)
     body = US.bar_swept(ex, ey, start, fit["segs"])
     back_w = math.sin(phi) * ex - math.cos(phi) * ey
-    body = US.glue(plate_R(u[1], F[1] + LV["U0"], ey, W, hr[1], upper=True), body)
-    body = US.glue(body, at(plate_R(u[2], F[2] + LV["U0"], back_w, W, hr[2], L=L_SEAT + 0.6, upper=True), c[2]))
+    body = US.glue(plate_R(u[1], F[1] + LV["U0"], ey, W, hr[1], L=Ls, upper=True, rf=rf), body)
+    body = US.glue(body, at(plate_R(u[2], F[2] + LV["U0"], back_w, W, hr[2], L=Ls + 0.6, upper=True, rf=rf), c[2]))
     body, npk = US.with_pocket_r(body, ex, ey, start, fit["segs"])
     body = ring_root_R(US.glue(body, upper_ring_R(u[1], F[1], hr[1])), u[1], F[1], hr[1])
     body = US.glue(body, at(upper_ring_R(u[2], F[2], hr[2]), c[2]))
@@ -380,7 +436,7 @@ def links2(M, out, rep):
     body = body.clean() if body.clean().isValid() else body
     out.append(("l2", 2, f"D8-03 link 2: 8x3 bar on a line/arc chain + J2/J3 hubs, flies over the knee and the pad ({r2['process']})", body))
     gap = float(abs((p3 - (p3 @ ex) * ex - (p3 @ ey) * ey) @ nP))
-    rep["link 2"] = dict(fit, **r2, pocket=npk, u3_lean_out_of_plane_deg=lean, j3_seat_offset_mm=gap, valid=body.isValid(), solids=len(body.Solids()))
+    rep["link 2"] = dict(fit, **r2, seat_mm=Ls, pad_round_mm=rf, pocket=npk, u3_lean_out_of_plane_deg=lean, j3_seat_offset_mm=gap, valid=body.isValid(), solids=len(body.Solids()))
     print(f"  link 2: valid {body.isValid()}, solids {len(body.Solids())}, faces {len(body.Faces())}, pocket {npk}; u3 leans {lean:.2f} deg out of "
           f"the bar plane, J3 seat centre {gap:.2f} mm off it", flush=True)
     return out, rep
@@ -393,7 +449,9 @@ def pin_stack(name, cen, sn, tr, tp, lower_grp, knee_grp, cen_knee=None):
     zk0 = tr + tp + PK.RUN; zk1 = zk0 + tp; zc0 = zk1 - CB_H                               # knee link, clip seat
     ck = cen if cen_knee is None else cen_knee                                             # the pin's centre in the KNEE link's home frame (pin a: A0m, not A0)
     r = PIN_D / 2; rg = GROOVE_D / 2
-    pin = rev([(0, tr + 0.8), (r, tr + 0.8), (r, zc0), (rg, zc0), (rg, zc0 + CLIP_T), (r, zc0 + CLIP_T), (r - 0.2, zk1), (0, zk1)], cen, sn)
+    ztop = zc0 + CLIP_T + PIN_LAND                                                         # groove outer wall + the DIN 6799 land
+    tip = [(r - 0.2, ztop), (0, ztop)] if PIN_LAND <= 0.15 else [(r, ztop - 0.3), (r - 0.3, ztop), (0, ztop)]
+    pin = rev([(0, tr + 0.8), (r, tr + 0.8), (r, zc0), (rg, zc0), (rg, zc0 + CLIP_T), (r, zc0 + CLIP_T)] + tip, cen, sn)
     hw = [(lower_grp, f"pin {name}: iglidur thrust washer 4 x 8 x 0.5 (igus GTM-0408-005 class, in the 0.5 mm running gap; confirm the size, else cut from iglidur sheet)",
            rev([(2.1, tr + tp), (4.0, tr + tp), (4.0, tr + tp + PK.RUN), (2.1, tr + tp + PK.RUN)], cen, sn)),
           (knee_grp, f"pin {name}: iglidur G sleeve bearing igus GSM-0405-03 (4 x 5.5 x 3) faced to {zc0 - zk0:.2f}, pressed in the knee link",

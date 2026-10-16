@@ -123,3 +123,65 @@ def offset_outline(start, segs, t):
     outer = seg_pts(+t / 2); inner = seg_pts(-t / 2)
     rev = [("line", s[2], s[1]) if s[0] == "line" else ("arc", s[3], s[2], s[1]) for s in reversed(inner)]
     return outer + [("line", outer[-1][-1], rev[0][1])] + rev + [("line", rev[-1][-1], outer[0][1])]
+
+
+def hug_chain(start, end, clear, t, outside, n=6, climb_max=60.0, r_min=3.0, target=0.3, margin=0.1, seeds=10, m=24, rng=0,
+              tgt_curve=None, snap=0.5, lmin=0.8):
+    """a chain of n tangent lines / arcs between two fixed poses that HUGS a clearance field (a 5-axis machined bar that
+    follows the strap it replaces, user_style_pinknee.py): skin-side face >= margin above it (margin may be a function of
+    the skin-side points, e.g. relaxed on a hub's own seat level), climb <= climb_max, every centre-line radius >= r_min;
+    objective = mean clearance + 20 x mean((clearance - target)+^2 where outside(U)) + 0.5 x sum(kappa^2 l). Seeds: least
+    squares of the centre line to tgt_curve (radial error, mm) under the end pose; then SLSQP; radii snapped to `snap` mm
+    (to R40, then 2.5 / 5 / 10) with the lengths re-solved exactly for the end pose. Returns dict(segs, ...)."""
+    start = np.asarray(start, float); end = np.asarray(end, float); R = np.random.default_rng(rng)
+    chord = float(np.linalg.norm(end[:2] - start[:2])); kmax = 1.0 / r_min
+    unpack = lambda z: list(zip(z[:n], z[n:2 * n]))
+    mgf = (lambda U: margin(U)) if callable(margin) else (lambda U: np.full(len(U), float(margin)))
+    def under(z):
+        P, H, _ = sample(start, unpack(z), m); return P - 0.5 * t * normals(H), P, H
+    climb = lambda P, H: np.degrees(np.abs(wrap(H - np.arctan2(P[:, 1], P[:, 0]) - math.pi / 2)))
+    def eq(z):
+        e = end_pose(start, unpack(z)) - end; e[2] = wrap(e[2]) * chord / 2; return e
+    def f(z):
+        U, P, H = under(z); c = clear(U); ex_ = np.maximum(c - target, 0.0) * outside(U)
+        return float(np.mean(c)) + 20.0 * float(np.mean(ex_ ** 2)) + 0.5 * float(np.sum(z[:n] ** 2 * z[n:2 * n]))
+    def ineq(z):
+        U, P, H = under(z); return np.concatenate([clear(U) - mgf(U), climb_max - 0.5 - climb(P, H)])
+    best = None
+    for s in range(seeds):
+        k0 = R.uniform(-1, 1, n) * min(kmax, 4.0 / chord); l0 = np.full(n, chord / n) * R.uniform(0.7, 1.3, n)
+        def res(z2):
+            P, H, _ = sample(start, unpack(z2), m); return np.r_[10 * eq(z2), tgt_curve(P) / math.sqrt(len(P))]
+        r = least_squares(res, np.r_[k0, l0], bounds=(np.r_[[-kmax] * n, [lmin] * n], np.r_[[kmax] * n, [3 * chord] * n]))
+        try:
+            o = minimize(f, r.x, method="SLSQP", constraints=[dict(type="eq", fun=eq), dict(type="ineq", fun=ineq)],
+                         bounds=[(-kmax, kmax)] * n + [(lmin, 3 * chord)] * n, options=dict(maxiter=400, ftol=1e-7))
+        except ValueError: continue
+        z = o.x; viol = max(float(np.abs(eq(z)).max()), float(-min(0.0, ineq(z).min())))
+        if viol < 0.03 and (best is None or f(z) < best[0]): best = (f(z), z)
+    if best is None: raise RuntimeError("hug_chain: no feasible chain")
+    z = best[1].copy()
+    def snapk(k):
+        if abs(k) < 1.0 / 2000: return 0.0
+        Rr = 1.0 / abs(k); st = snap if Rr <= 40 else 2.5 if Rr <= 100 else 5.0 if Rr <= 250 else 10.0
+        return math.copysign(1.0 / max(round(Rr / st) * st, r_min), k)
+    def fin(ks):
+        r = least_squares(lambda l: eq(np.r_[ks, l]), z[n:2 * n], bounds=(lmin - 0.2, 3 * chord))
+        zz = np.r_[ks, r.x]; U, P, H = under(zz)
+        return zz, float(np.abs(eq(zz)).max()), float((clear(U) - mgf(U)).min()), float(climb(P, H).max())
+    ok = lambda e, g, cl: e < 1e-6 and g > -0.1 and cl <= climb_max + 0.01
+    ks = np.array([snapk(k) for k in z[:n]]); zz, e, g, cl = fin(ks); snapped = ok(e, g, cl)
+    if not snapped:
+        for i in range(n):                                                     # nudge one radius at a time
+            for d in (+1, -1, +2, -2):
+                if ks[i] == 0: continue
+                k2 = ks.copy(); k2[i] = math.copysign(1 / max(1 / abs(k2[i]) + d * snap, r_min), k2[i])
+                z2, e2, g2, cl2 = fin(k2)
+                if ok(e2, g2, cl2): zz, e, g, cl, ks, snapped = z2, e2, g2, cl2, k2, True; break
+            if snapped: break
+    if not snapped: zz = z; e = float(np.abs(eq(z)).max())                     # the unsnapped optimum (radii to 0.01 mm)
+    U, P, H = under(zz); c = clear(U); o = outside(U)
+    segs = [(float(k), float(l)) for k, l in unpack(zz)]
+    return dict(segs=segs, end_err=e, min_clear=float(c.min()), mean_clear=float(c.mean()), max_clear=float(c.max()),
+                max_clear_outside=float(c[o].max()) if o.any() else None, max_climb=float(climb(P, H).max()),
+                radii=[(1 / k if k else None) for k, _ in segs], objective=float(best[0]), snapped=snapped)

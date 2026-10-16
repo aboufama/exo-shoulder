@@ -1,6 +1,66 @@
 {
  "parts": [
   {
+   "file": "H|UPPER ARM CUFF (conformal G2 shell, AlSi10Mg bead blasted)",
+   "valid": true,
+   "solids": 1,
+   "faces": 7954,
+   "bad_faces": 0,
+   "watertight": true,
+   "volume_cm3": 15.223,
+   "bbox_mm": [
+    86.8,
+    81.7,
+    45.0
+   ],
+   "level": "L1 mesh"
+  },
+  {
+   "file": "H|BOTTOM (user's bar, cut at s 255, 2x M3 countersunk for the arm-end tongue) + cut square to the arm 3.7 mm distal of pin b, clear of the knee sweep",
+   "valid": false,
+   "solids": 7,
+   "faces": 4104,
+   "bad_faces": 0,
+   "watertight": false,
+   "volume_cm3": 22.484,
+   "bbox_mm": [
+    42.4,
+    254.4,
+    31.1
+   ],
+   "level": "L1 mesh"
+  },
+  {
+   "file": "H|pad mount to BOTTOM (proxy) (2.59 mm slab at the pad level, arm pad -> the BOTTOM bar, routed clear of the knee sweep)",
+   "valid": true,
+   "solids": 1,
+   "faces": 44,
+   "bad_faces": 0,
+   "watertight": true,
+   "volume_cm3": 0.857,
+   "bbox_mm": [
+    26.2,
+    21.5,
+    10.1
+   ],
+   "level": "L1 mesh"
+  },
+  {
+   "file": "H|pin b retainer keep-out (O8 x 0.9 mm: DIN 6799 RS 3.2 e-clip + pin end, over the 0.5 mm GTM washer on the knee link)",
+   "valid": true,
+   "solids": 1,
+   "faces": 256,
+   "bad_faces": 0,
+   "watertight": true,
+   "volume_cm3": 0.045,
+   "bbox_mm": [
+    8.0,
+    8.0,
+    2.7
+   ],
+   "level": "L1 mesh"
+  },
+  {
    "file": "l3|pin a retainer keep-out (O8 x 0.9 mm: DIN 6799 RS 3.2 e-clip + pin end, over the 0.5 mm GTM washer on the knee link)",
    "valid": true,
    "solids": 1,
@@ -12,6 +72,21 @@
     8.0,
     8.0,
     2.6
+   ],
+   "level": "L1 mesh"
+  },
+  {
+   "file": "H|arm pad = pin b lower plate (O12 x 2.59075 mm, tr..tr+tp, arm-fixed on the cuff)",
+   "valid": true,
+   "solids": 1,
+   "faces": 256,
+   "bad_faces": 0,
+   "watertight": true,
+   "volume_cm3": 0.293,
+   "bbox_mm": [
+    12.3,
+    12.1,
+    5.2
    ],
    "level": "L1 mesh"
   },
@@ -182,5 +257,5 @@
   }
  ],
  "level": "L1",
- "all_ok": true
+ "all_ok": false
 }
