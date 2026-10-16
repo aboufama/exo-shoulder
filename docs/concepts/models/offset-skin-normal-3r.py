@@ -149,9 +149,12 @@ class Model(S.VModel):
         names = list(Z["NAMES"]); ii = np.nonzero(np.isin(Z["CID"], [names.index(n) for n in CB.FIT]))[0]
         _, okc, _, _, _, sc = self.D.ik(Z["HG"][ii].astype(float))
         sv = np.r_[s[ok], sc[okc]]; cap = float(self.p.get("S_max", 25.0))
-        if self.p.get("centre") and len(sv): self.D.m = 0.5 * (sv.max(0) + sv.min(0))
-        sa = np.abs(sv - self.D.m); mx = sa.max(0) if len(sa) else np.zeros(3)
-        self.p["S_a"] = round(min(cap, max(2.0, float(mx[0]) + 0.5)), 1); self.p["S_t"] = round(min(cap, max(2.0, float(mx[1]) + 0.5)), 1)
+        if self.p.get("S_fix"):                                   # frozen stage (fit elsewhere): [S_a, S_t, mid_a, mid_t, mid_n]
+            fx = self.p["S_fix"]; self.p["S_a"], self.p["S_t"] = float(fx[0]), float(fx[1]); self.D.m = np.array(fx[2:5], float)
+        else:
+            if self.p.get("centre") and len(sv): self.D.m = 0.5 * (sv.max(0) + sv.min(0))
+            sa = np.abs(sv - self.D.m); mx = sa.max(0) if len(sa) else np.zeros(3)
+            self.p["S_a"] = round(min(cap, max(2.0, float(mx[0]) + 0.5)), 1); self.p["S_t"] = round(min(cap, max(2.0, float(mx[1]) + 0.5)), 1)
         self.p["R_r"] = float(self.p.get("R_tol", 0.5))           # no radial slide: the closure tolerance only
         self.radial_span = round(float(sv[:, 2].max() - sv[:, 2].min()), 3) if len(sv) else 0.0
         self.q, self.X = q, {1: X1, 2: X2, 3: X3}; self.s = s
@@ -254,6 +257,68 @@ def bench_eval(B, params):
     return r
 
 
+FROZEN_ATTRS = ("geo", "rigid", "link_pts", "f", "tr", "zb", "_tr_fit", "contact", "cyl", "box", "strap", "cyl_surf", "riser",
+                "riser_h", "riser_pts", "Hneed", "Lneed", "box_strip", "_h12")
+
+
+def frozen_big(P, nc=110, nw=360, fit=(60, 160), out=None):
+    """lesson (c)-(e): fit the shape on Bench(fit) (skin-fitted undersides, slide ranges and stage centre), FREEZE it and
+    wear it on Bench(nc, nw) (CB_EXACT=1 for the exact path) without refitting: a pose whose metal enters the skin is
+    contact, a pose beyond the frozen slide range is not taken. Adds the near-touch numbers (min metal-skin over the poses
+    taken, hub crowns / side walls / box edges included; the gap with metal < 1 mm counted as contact), the overhead split
+    (elevation >= 140) and the red-team lists (poses not taken by reason with the part pair, lowest metal per part)."""
+    t0 = time.time(); B1 = CB.Bench(n_clip=fit[0], n_ws=fit[1]); M1 = Model(B1, dict(P)); r1 = M1.run()
+    P2 = dict(M1.p); P2["S_fix"] = [M1.p["S_a"], M1.p["S_t"]] + [float(x) for x in M1.D.m]
+
+    class Frozen(Model):
+        def fit(self):
+            for a in FROZEN_ATTRS:
+                if hasattr(M1, a): setattr(self, a, getattr(M1, a))
+            self.poses_fit = np.nonzero(self.kin_ok)[0]; self.drop = np.zeros(len(self.poses_fit), bool)
+
+    B = CB.Bench(n_clip=nc, n_ws=nw); M = Frozen(B, P2); r = M.run()
+    keep = ("gap", "reach", "follow", "inband14", "inband10", "contact", "why", "parts_pairs", "parts_ib14", "f", "min_clear_taken", "res_max", "riser_h")
+    res = dict(bench=f"Bench({nc},{nw}) {B.mode}, shape frozen from Bench({fit[0]},{fit[1]}) {B1.mode}", params=P,
+               fit={k: r1.get(k) for k in keep}, frozen={k: r.get(k) for k in keep}, S_fix=P2["S_fix"])
+    taken = lambda i: B.res[i] is not None and float(np.min(B.res[i])) >= 0
+    tk = [i for i in range(len(B.idx)) if taken(i)]
+    wall = {i: min(float(B.dist(i, M.world(m, i, Pc)).min()) for m, Pc in M.contact) for i in tk}      # crowns / walls / edges
+    near = {i: min(float(np.min(B.res[i])), wall[i]) for i in tk}
+    lab = lambda i: dict(i=int(i), kind=B.kind[i], clip=B.clip[i], plane=round(B.poses[i]["plane"], 1), elev=round(B.poses[i]["elev"], 1), axial=round(B.poses[i]["axial"], 1))
+    j = min(near, key=near.get) if near else None
+    res["min_metal_skin"] = dict(mm=round(near[j], 2), crown_or_wall=bool(wall[j] <= float(np.min(B.res[j]))), **lab(j)) if j is not None else None
+    saved = list(B.res)
+    for thr in (1.0, 2.0):
+        for i in tk:
+            if near[i] < thr: B.res[i] = np.r_[saved[i], -0.01]
+        rr = B.report(); res[f"gap_near{int(thr)}"] = rr["gap"]; res[f"near{int(thr)}_poses"] = sum(near[i] < thr for i in tk)
+        B.res = list(saved)
+    el = np.array([p["elev"] for p in B.poses]); kind = np.array(B.kind); hi = el >= 140
+    def split(mask):
+        ws = [i for i in np.nonzero(mask & (kind == "ws"))[0]]; cl = [i for i in np.nonzero(mask & (kind == "clip"))[0]]
+        tt = [i for i in np.nonzero(mask)[0] if taken(i)]; d = np.concatenate([B.res[i] for i in tt]) if tt else np.zeros(0)
+        return dict(ws=len(ws), reach=round(float(np.mean([taken(i) for i in ws])), 4) if ws else None, clip=len(cl),
+                    follow=round(float(np.mean([taken(i) for i in cl])), 4) if cl else None,
+                    inband14=round(float(((d >= 2) & (d <= 14)).mean()), 4) if len(d) else None,
+                    inband10=round(float(((d >= 2) & (d <= 10)).mean()), 4) if len(d) else None,
+                    not_taken={k: int(sum(1 for i in np.nonzero(mask)[0] if not taken(i) and M.why[i] == k)) for k in ("fold", "slide", "flip", "closure", "skin", "parts", "contact")})
+    res["overhead_140"] = split(hi); res["below_140"] = split(~hi)
+    res["jams"] = [dict(lab(i), why=M.why[i], pair=M.last_pair.get(i) if M.why[i] == "parts" else None) for i in range(len(B.idx)) if M.why[i]]
+    names = list(M.rigid) + list(M.link_pts); sizes = [len(X) for _, X in M.rigid.values()] + [len(X) for _, X in M.link_pts.values()]
+    cut = np.cumsum([0] + sizes); low = {}
+    for i in tk:
+        d = B.res[i]
+        for k, n in enumerate(names):
+            v = float(np.min(d[cut[k]:cut[k + 1]])) if sizes[k] else 1e9
+            if n not in low or v < low[n][0]: low[n] = (v, i)
+    for i in tk:
+        if "walls" not in low or wall[i] < low["walls"][0]: low["walls"] = (wall[i], i)
+    res["pinch"] = sorted([dict(part=n, mm=round(v[0], 2), **lab(v[1])) for n, v in low.items()], key=lambda e: e["mm"])
+    res["secs"] = round(time.time() - t0, 1)
+    if out: json.dump(res, open(out, "w"), indent=1, default=float)
+    return res
+
+
 def kin(par):
     """the theorem on data: radial (hub-3 normal) drift the 2-slide cuff cannot absorb, over the fit clips at 10 fps +
     the bench workspace, for the spec's all-skin-normal hubs and for the exact subfamily"""
@@ -275,6 +340,11 @@ if __name__ == "__main__":
     mode = sys.argv[1] if len(sys.argv) > 1 else "check"
     par = json.loads(sys.argv[2]) if len(sys.argv) > 2 else {}
     if mode == "kin": kin(par); sys.exit()
+    if mode == "frozen":                                          # CB_EXACT=1 ... frozen '<json>' --out R.json [--big 110,360]
+        o = sys.argv[sys.argv.index("--out") + 1] if "--out" in sys.argv else "frozen.json"
+        big = tuple(int(x) for x in sys.argv[sys.argv.index("--big") + 1].split(",")) if "--big" in sys.argv else (110, 360)
+        rr = frozen_big(dict(PARAMS, **par), *big, out=o)
+        print(json.dumps({k: rr[k] for k in ("bench", "fit", "frozen", "min_metal_skin", "gap_near1", "gap_near2", "overhead_140", "secs")}, default=float)); sys.exit()
     B = CB.Bench(n_clip=60, n_ws=160); t = time.time()
     r, M = _report(B, par)
     print({k: r[k] for k in ("gap", "reach", "follow", "inband14", "inband10", "contact")}, "why", r["why"], "S", r["S"],

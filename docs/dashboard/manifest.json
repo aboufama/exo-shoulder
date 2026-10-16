@@ -4,20 +4,20 @@
   "title": "Concept bench morphologies",
   "description": "One row per morphology in the swarm's catalogue: status, the agent's claimed bench numbers, the verifier's re-measured numbers (v_), its best sweep configuration so far, and the 3R baseline once (is_baseline). Built from docs/concepts/catalogue.json, families.json, rows/*.json and sweeps/*.json.",
   "file": "data/morphs.json",
-  "sha256": "4b034ead49ff8eba23d7f91f0c95b8bb3f5ce230b2a50209ffa525a1641e17ce",
+  "sha256": "bf9f63ca4085f4ba5c806768960d41a090565a1f9b206ce4f3a41e8aba34eb04",
   "rows": 81,
   "bytes": 94016,
-  "updated": "2026-10-16T00:04:12Z"
+  "updated": "2026-10-16T00:26:32Z"
  },
  {
   "id": "sweeps",
   "title": "Concept bench sweeps",
   "description": "Every configuration a morphology agent evaluated on the concept bench, with its time, gap, its morphology's best gap so far (best_gap) and the record over all morphologies so far (record_gap); passed_over marks a configuration its agent measured before its claimed row and rejected (better than the claim), which counts for no best. Built from docs/concepts/sweeps/*.json; a morphology with more than 1500 configurations is thinned for the page (every running-best and record row, its 300 best gaps and an even sample of the rest), while best_gap, record_gap and n_configs come from the full set.",
   "file": "data/sweeps.json",
-  "sha256": "f836dabe4cc8d2bfa4f872a1079c811451cd86ca60b5ea0a838e42e379c57f09",
+  "sha256": "1a712fc4c3c48a59a09395905f5600b0297f936165ffa2b2b3dd3df20a87e64e",
   "rows": 11534,
-  "bytes": 2941214,
-  "updated": "2026-10-16T00:04:12Z"
+  "bytes": 2941669,
+  "updated": "2026-10-16T00:26:32Z"
  },
  {
   "id": "cad",
@@ -104,9 +104,9 @@
   "title": "Data build info",
   "description": "When tools/dash_build.py last gathered the data, the repo commit, and any warnings it printed.",
   "file": "data/meta.json",
-  "sha256": "01bf73fd4b9309b0394a191d3e5152e31425a1f11576af4989e2b405502405f6",
+  "sha256": "9ed3947fb4acfd440b0c64ceec610f0335e29319bc2a65cb95d832a796f27c46",
   "rows": 1,
   "bytes": 191,
-  "updated": "2026-10-16T00:11:36Z"
+  "updated": "2026-10-16T00:26:32Z"
  }
 ]
