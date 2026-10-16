@@ -118,7 +118,7 @@
 
   function partsOf(G, ctx) {
     const L = P.lv, h = P.stack, top = n => L[n] + h + 1, harm = ctx.armAxis, ng = P.neck_deg * D2R;
-    const nk = V.unit(V.add(V.scale(G.J3, Math.cos(ng)), V.scale(V.unit(V.reject(harm, G.J3)), Math.sin(ng))));
+    const nk = V.unit(V.add(V.scale(G.w, Math.cos(ng)), V.scale(V.unit(V.reject(harm, G.w)), Math.sin(ng))));   // neck on the ARM's J3 axis w
     const neckEnd = V.scale(nk, L.J3 + 1), cuffC = V.scale(harm, P.cuff_at), cuffTop = V.madd(cuffC, V.unit(V.reject(neckEnd, harm)), 47);
     const pin = { A0: G.A0, B0: G.B0, A1: G.A1, B1: G.B1 }, X = pin[near], Yn = near === 'A1' ? 'B1' : 'A1', Yp = pin[Yn];
     const hub = (n, role, label) => ({ kind: 'hub', role, name: label, c: V.scale(n === 'J2' ? G.J2 : n === 'J1' ? G.J1 : n === 'J3' ? G.J3 : pin[n], L[n]),
@@ -149,11 +149,11 @@
       out.push(arc('link', 'link 1 = coupler (between its pins)', Yp, X, top(Yn), top(near)));
       out.push(arc('link', 'link 1 = coupler (to J2)', X, G.J2, top(near), top('J2')));
       out.push(hub('J2', 'active', 'J2 (O20 hub)'));
-      out.push(arc('link', 'link 2', G.J2, G.J3, top('J2'), top('J3')));
+      out.push(arc('link', 'link 2 (true arc a2: a gap to J3 when the loop cannot close)', G.J2, gc(G.J2, G.J3, 0, P.a2), top('J2'), top('J3')));
       out.push({ kind: 'link', role: 'link', name: 'virtual J1 pole at home (construction line)', a: V.scale(G.pole, 30), b: V.scale(G.pole, 90), r: 0.5 });
     }
-    out.push(hub('J3', 'active', 'J3 (O20 hub)'));
-    out.push({ kind: 'arc', role: 'fixed-arm', name: 'neck', u: G.J3, v: nk, r0: L.J3 + 1, r1: L.J3 + 1, r: 3 });
+    out.push(hub('J3', 'active', 'J3 (O20 hub, on the chain side; the neck sits on the arm\'s axis w)'));
+    out.push({ kind: 'arc', role: 'fixed-arm', name: 'neck', u: G.w, v: nk, r0: L.J3 + 1, r1: L.J3 + 1, r: 3 });
     out.push({ kind: 'link', role: 'fixed-arm', name: 'neck to cuff', a: neckEnd, b: cuffTop, r: 3 });
     out.push({ kind: 'strap', role: 'fixed-arm', name: 'arm cuff', c: cuffC, axis: harm, r: 47, w: 26 });
     out.push({ kind: 'point', role: 'link', name: 'GH centre', p: [0, 0, 0], r: 4 });
