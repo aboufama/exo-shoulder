@@ -1,6 +1,6 @@
 # skin-normal-3r-knuckle-cufflink - all-skin-normal 3R closed by three pins (J2 knuckle + pinned cuff link)
 
-## Deeper version (answered before modelling, 2026-10-16 01:55 UTC)
+## Deeper version (answered before modelling, 2026-10-16 01:55 UTC; refined 02:20 UTC)
 
 1. **What a top mechanism designer would do that the spec does not ask for.** Solve both passive sub-loops in closed
    form instead of by grid + secant, so branch, authority and toggle are explicit: the knuckle's radial closure is a
@@ -12,7 +12,11 @@
    seats, not bookkeeping. Keep the family a strict superset of the verified controls: b1 = b2 = 0 makes the knuckle
    idle (constant radial) and the design collapses to the zero-passive spherical 3R at those seats (41.73 exact) plus
    the pinned cuff instead of the 2 guides (45.31 / 42.59). Make the cuff parts one flat rotor plate (hub 3 + E arm)
-   and flat pinned plates: no skin-shaped plates on the new parts.
+   and flat pinned plates: no skin-shaped plates on the new parts. **What the knuckle really buys** (02:20): with
+   b1, b2 > 0 the axis DIRECTIONS (which alone set the J2 fold, i.e. reach) are decoupled from the hub SEATS (which set
+   in-band) - on the b = 0 subfamily a hub must sit where its axis pierces the skin. The rail-elbow control showed
+   re-tuned axis directions alone are worth ~17 gap points; the knuckle is the price of that decoupling, so it must be
+   paid in measured points (its crank and boss stack) and compared with the knuckle-free controls.
 2. **Rawest material.** The posed render skin of every bench pose through the bench's signed distance (grid, then the
    exact libigl path for the frozen check), the rest-pose skin and its face normals for the seats (libigl exact), the
    fit clips at their full 10 fps for continuity of all 6 joint values (q1, q2 - qk, q3 + psi, qk, qa, qb) and for
@@ -22,9 +26,10 @@
    offsets (the verified seed: S.Design.ik), closed-form knuckle and two-circle cuff closure, Grubler-Kutzbach mobility
    (7 bodies, 6 x 1-DOF joints + GH: M = 3, no redundancy), sphere tracing on the signed-distance grid for every
    underside (S.Model.needed), exact cylinder signed distances + mid-surface kd-trees for part-part clearance,
-   tools/concept_sweep.py / tools/concept_cma.py on the cloud CPU farm.
+   tools/cloud_run.py sweep + tools/concept_cma.py on the cloud CPU farm.
 4. **What, other than me, shows the number is right.** tools/concept_bench.py (same poses as the baseline 68.93 and
    the controls), the in-model controls (b1 = b2 = 0 at the leader seats), the frozen-shape wear on Bench(110,360)
    exact (lesson c), the adversarial verifier, and the red-team list below (the pose that jams, the point that
    pinches, the optimistic number).
 
+(Model, sweep, red team and verdict below, filled as measured.)
