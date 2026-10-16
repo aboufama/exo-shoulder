@@ -158,6 +158,17 @@ def cmd_frozen(a):
         print(name, Bf.mode, "->", Bb.mode, json.dumps({k: rb.get(k) for k in ("gap", "near", "reach", "follow", "inband14", "inband10", "contact", "honest", "audit")}, default=float), flush=True)
 
 
+def cmd_levels(a):
+    """hub F and 11-station strap levels (max across the strap width) for the motion preview"""
+    M = model(); B = bench(); p, r = M.evaluate(B, json.loads(a.params)); L = B._kit_last; out = dict(params=p, gap=r.get("gap"))
+    for m in L["chain"].members:
+        pr = np.asarray(L["prof"][m.name])
+        if m.kind == "flat": out[m.name] = round(float(pr[0]), 1); continue
+        ns, nc = m.grid; st = pr.reshape(ns, nc).max(1); x = np.linspace(0, ns - 1, 11)
+        out[m.name] = [round(float(np.interp(v, np.arange(ns), st)), 1) for v in x]
+    print(json.dumps(out, default=float))
+
+
 def cmd_attr(a):
     M = model(); B = bench(); p, r = M.evaluate(B, json.loads(a.params)); at = M.attribute(B, p, r)
     json.dump(dict(params=p, report={k: r.get(k) for k in KEEP}, attribution=at), open(a.out, "w"), indent=1, default=float)
@@ -175,5 +186,6 @@ if __name__ == "__main__":
     s.add_argument("--stall", type=int, default=12)
     s = sp.add_parser("frozen"); s.add_argument("params"); s.add_argument("out")
     s = sp.add_parser("attr"); s.add_argument("params"); s.add_argument("out")
+    s = sp.add_parser("levels"); s.add_argument("params")
     a = ap.parse_args()
-    {"sobol": cmd_sobol, "eval": cmd_eval, "cma": cmd_cma, "frozen": cmd_frozen, "attr": cmd_attr}[a.cmd](a)
+    {"sobol": cmd_sobol, "eval": cmd_eval, "cma": cmd_cma, "frozen": cmd_frozen, "attr": cmd_attr, "levels": cmd_levels}[a.cmd](a)

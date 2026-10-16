@@ -155,6 +155,7 @@ def evaluate(B, params):
     """tools/concept_cma.py hook -> (params, report)"""
     p = dict(PARAMS, **params); p["q"] = min(1.0, max(0.8, float(p["q"])))
     p["s1"] = 1 if float(p["s1"]) >= 0 else -1
+    p["margin"] = max(5.0, float(p["margin"]))                 # the J2 stops: never closer than 5 deg to the fold (user ruling)
     p["side"] = int(round(float(p.get("side", 0)))); p["side"] = max(-1, min(1, p["side"]))
     p["end_extra"] = min(8.0, max(0.0, float(p.get("end_extra", 0.0))))   # never shorter than the K6 exempt zone
     for k in ("a1", "a2", "a3"): p[k] = min(110.0, max(12.0, float(p[k])))

@@ -130,6 +130,16 @@ def evaluate(B, params, fixed_prof=None):
     p = snap(params)
     if not seat_ok(p["az"], p["el"]):
         return p, dict(gap=200.0, honest=False, audit=["J1 seat outside the back / acromion-top region (ruling 4)"])
+    if fixed_prof is None and os.environ.get("ZC_PRESCREEN") == "1":
+        # search-only early out (never in a claim): a hub whose axis has no skin exit within reach makes the config
+        # dishonest anyway (hub_F_ok, F <= 140 mm); its full run can take 90 s (members at the 400 mm sentinel)
+        F = getattr(B, "_kitF", None) or K.frames(B); B._kitF = F
+        ch = build(B, F, p); ok = np.asarray(ch.ok, bool)
+        if ok.sum() < 3: return p, dict(gap=300.0, honest=False, audit=["prescreen: chain closes in < 3 poses"], kin=float(ok.mean()))
+        sub = K.Chain(members=[m for m in ch.members if m.kind == "flat"], ok=ok, q=None, joints=ch.joints)
+        lv = K._levels(B, sub, ok, p["q"], "march"); F_pre = {n: float(np.max(v)) for n, v in lv.items()}
+        if max(F_pre.values()) > 170.0:
+            return p, dict(gap=300.0, honest=False, audit=[f"prescreen: hub axis not accessible {F_pre}"], hub_F=F_pre, kin=float(ok.mean()))
     B.reset(); r = run(B, p, fixed_prof); v = r["verifier"]
     honest = bool(r.get("honest")) and v["hub_F_ok"]
     out = dict(r, model_gap=r["gap"], v=v["v"], v_near1=v["v_near1"], near=v["v_near1"]["gap"], hub_F=v["hub_F"],

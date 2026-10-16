@@ -79,6 +79,10 @@ def geom(p1, p3, p, F=True):
     th = ang(p1, p3); a2e = a2e_of(th, p); a1 = float(p["a1"])
     p2, ok2 = closure_v(p1, p3, np.full(th.shape, a1), a2e, p["sigma"])
     mg = np.minimum.reduce([th - np.abs(a1 - a2e), a1 + a2e - th, 360 - a1 - a2e - th])
+    if p.get("lock"):                                         # control: link 2 straight (K on the J2 -> J3 arc at b), the plain 3R
+        Kw = math.cos(p["b"] * D2R) * p2 + math.sin(p["b"] * D2R) * tangent(p2, p3); psi = np.full(th.shape, 90.0)
+        ok = ok2 & (mg >= p["margin"])
+        return dict(th=th, a2e=a2e, p2=p2, K=Kw, psi=psi, ok=ok, mg=mg)
     Kw, okk = closure_v(p2, p3, np.full(th.shape, float(p["b"])), np.full(th.shape, float(p["c"])), p["sk"])
     psi = ang(tangent(Kw, p2), tangent(Kw, p3))
     ok = ok2 & okk & (mg >= p["margin"]) & (psi >= p["psi_lo"]) & (psi <= 180 - p["psi_lo"])
@@ -241,7 +245,7 @@ def build(B, F, p):
     hubs = [K.hub_member("hub1", p1, "J1", rad=r1), K.hub_member("hub2", p2, "J2", rad=r2), K.hub_member("hub3", p3, "J3", rad=r3)]
     neck = K.neck_member(F, p3, joints=("J3",), ramps=(("hub3", 0.0), (None, 0)))
     knee = K.axis_angle(Kw, p2, p3)
-    q = [K.axis_angle(p1, F.S([1.0, 0, 0]), p2), K.axis_angle(p2, p1, Kw), knee, K.axis_angle(p3, F.HG([0.0, -1, 0]), Kw)]
+    q = [K.axis_angle(p1, F.S([1.0, 0, 0]), p2), K.axis_angle(p2, p1, Kw), K.axis_angle(p3, F.HG([0.0, -1, 0]), Kw)] + ([] if lock else [knee])
     if lock:
         mem = hubs + [K.strap_member("link1", p1, p2, ("J1", "J2"), width=w, t=t, ramp_to=(("hub1", K.STACK), ("hub2", 0.0)), end_mm=end), neck,
                       K.strap_member("L2a", p2, Kw, ("J2", "J3"), width=w, t=t, ramp_to=(("hub2", K.STACK), (None, 0)), over=[("link1", 1.0)], end_mm=end),
@@ -277,7 +281,7 @@ def build(B, F, p):
         flat = dict(hub1=(r1, K.CROWN), hub2=(r2, K.CROWN), hub3=(r3, K.CROWN), pinK=(rp, tp), studG=(3.5, t_stud))
     okw = ok if ok.any() else np.ones(len(ok), bool)
     res = np.maximum(np.abs(ang(p2, p1) - p["a1"]), np.abs(ang(p2, p3) - G["a2e"]))
-    res = np.maximum(res, np.maximum(np.abs(ang(Kw, p2) - p["b"]), np.abs(ang(Kw, p3) - p["c"])))
+    if not lock: res = np.maximum(res, np.maximum(np.abs(ang(Kw, p2) - p["b"]), np.abs(ang(Kw, p3) - p["c"])))
     info = dict(residual_deg=round(float(res[okw].max()), 5), window=[round(sd["lo"], 2), round(sd["hi"], 2)],
                 a2eff_range=[round(float(G["a2e"][okw].min()), 1), round(float(G["a2e"][okw].max()), 1)],
                 knee_range=[round(float(knee[okw].min()), 1), round(float(knee[okw].max()), 1)],
