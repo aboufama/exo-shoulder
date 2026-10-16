@@ -1,0 +1,2252 @@
+{
+ "fit": {
+  "params": {
+   "o1a": 0.0,
+   "o1c": 0.0,
+   "o2a": 0.0,
+   "o2c": 0.0,
+   "o3a": 0.0,
+   "o3c": 0.0,
+   "S_a": 15.0,
+   "S_t": 15.0,
+   "R_r": 0.5,
+   "drop": 1,
+   "S_auto": 0,
+   "jam_contact": 1,
+   "remote": 0,
+   "neck": 13.0,
+   "ramp": 1,
+   "slides": 1,
+   "vfix": 1,
+   "branch": 0,
+   "flip3": 0,
+   "az1": 93.5546,
+   "el1": 67.3642,
+   "b1": 0.0,
+   "az2": 43.4586,
+   "el2": 43.3068,
+   "b2": 0.0,
+   "wd": 63.337,
+   "wa": -9.6473,
+   "b3": 0.3837,
+   "S_max": 25.0,
+   "centre": 1,
+   "R_tol": 0.5,
+   "inv": 0,
+   "lE": 67.832,
+   "lc": 25.8149,
+   "phiE": -2.7863,
+   "phib": -65.6717,
+   "stk": 4.8534,
+   "ang_min": 27.8544,
+   "rad1": 10.0,
+   "rad2": 10.0,
+   "rad3": 10.0,
+   "bk1": 31.2491,
+   "bk2": 37.9937,
+   "sK": -1,
+   "a1max": 58.3565,
+   "phi_lo": 15.0,
+   "phi_hi": 170.0,
+   "mstop": 0,
+   "kitrule": 1,
+   "smhi": 13.6865,
+   "smlo": 5.2777,
+   "near": 1,
+   "phys": 1,
+   "capK": 6.0,
+   "m3e": 1,
+   "cam": 1,
+   "d_mm": 7.0,
+   "psi_c": 0.0,
+   "side": 0,
+   "rho": 3.0,
+   "r_law": 70.0,
+   "pa_max": 45.0,
+   "lug_max": 22.0,
+   "tail": 1,
+   "flipK": 1,
+   "emb_mode": "rod",
+   "kK": 3.1796,
+   "r_lobe": 9.0,
+   "r_horn": 2.4932,
+   "rod_low": 0,
+   "i_rock": 3.0
+  },
+  "source": "docs/concepts/verify/geneva-tail-knuckle-pinknee-3r.py CorrModel + BEST",
+  "bench": "60,160",
+  "mode": "fast",
+  "fold_margin": 5.0,
+  "report": {
+   "gap": 16.73,
+   "plain": null,
+   "gap_near1": 16.73,
+   "near_touch_min_mm": 1.05,
+   "reach": 0.7937,
+   "follow": 1.0,
+   "inband14": 0.8443,
+   "inband10": 0.5279,
+   "contact": 0.0053,
+   "why": {
+    "fold": 27,
+    "slide": 5,
+    "flip": 0,
+    "closure": 0,
+    "skin": 1,
+    "parts": 0,
+    "contact": 0
+   },
+   "min_clear_taken": 1.05,
+   "parts_ib14": {
+    "hub1": [
+     0.994,
+     7.9,
+     80
+    ],
+    "hubK": [
+     0.941,
+     9.3,
+     80
+    ],
+    "hub2": [
+     0.987,
+     10.0,
+     80
+    ],
+    "hub3": [
+     0.589,
+     13.1,
+     80
+    ],
+    "E": [
+     0.955,
+     7.5,
+     104
+    ],
+    "boss": [
+     1.0,
+     7.1,
+     32
+    ],
+    "pad": [
+     1.0,
+     7.6,
+     32
+    ],
+    "knee": [
+     0.984,
+     9.6,
+     95
+    ],
+    "rocker": [
+     0.942,
+     12.6,
+     21
+    ],
+    "rod": [
+     0.0,
+     29.7,
+     16
+    ],
+    "rodends": [
+     0.0,
+     29.5,
+     32
+    ],
+    "L1a": [
+     0.944,
+     9.7,
+     16
+    ],
+    "L1b": [
+     0.926,
+     8.6,
+     36
+    ],
+    "L2": [
+     0.764,
+     11.3,
+     144
+    ]
+   },
+   "drive": null
+  },
+  "m": [
+   -15.315,
+   2.409,
+   0.0
+  ],
+  "tr": 88.137,
+  "fK": 58.019,
+  "rod": {
+   "rocker_level": 60.8,
+   "horn_level": 77.8,
+   "rod_len": 33.0,
+   "rocker_h": 19.0,
+   "corrected": true
+  }
+ },
+ "law": {
+  "kK": 3.1796,
+  "r_horn": 2.4932,
+  "r_lobe": 9.0,
+  "s_q": -1.0,
+  "q2hi_deg": -5.011,
+  "t_end_deg": 16.8,
+  "dK_end_deg": 53.417,
+  "pressure_angle_deg": 41.37,
+  "lobe_lift_mm_per_rad": 7.9274,
+  "lobe_r_end_mm": 11.324,
+  "why_end": "stopB"
+ },
+ "stack": {
+  "pin_stack_mm": 4.8534,
+  "plate_tp": 2.1767,
+  "run": 0.5,
+  "knee_level_tr": 88.137,
+  "f": [
+   49.866,
+   60.236,
+   80.928
+  ],
+  "fK": 58.019,
+  "capK_mm": 6.0,
+  "hubK_crown_mm": 18.25,
+  "horn_plate_top_mm": 19.75,
+  "boss": [
+   88.137,
+   90.314
+  ],
+  "knee": [
+   90.814,
+   92.991
+  ],
+  "E": {
+   "x": [
+    8.0,
+    63.33
+   ],
+   "under": [
+    80.93,
+    88.14
+   ],
+   "thin_from": 61.0,
+   "rim": 61.83,
+   "cap": 90.314,
+   "top_before_cap": 90.314,
+   "stations_capped": 0,
+   "min_thickness": 2.177,
+   "knee_link_underside": 90.814
+  },
+  "knee_link_mm": [
+   37.81,
+   10.0,
+   2.1767
+  ],
+  "hubs_r": [
+   10.0,
+   10.0,
+   10.0,
+   10.0
+  ],
+  "retainer": [
+   93.491,
+   94.391
+  ],
+  "full_pin_stack_mm": 6.253,
+  "stops": {
+   "K": {
+    "stop_A_deg": 0.0,
+    "stop_B_deg": -53.637,
+    "a1max": 58.3565,
+    "travel_deg": 53.637,
+    "dowel_home_angle_deg": 72.0,
+    "dowel_home_angles_deg": [
+     72.0,
+     252.0
+    ],
+    "pair": true,
+    "slot_deg": [
+     7.05,
+     83.31
+    ],
+    "clearance_to_lower_strap_deg": 18.94,
+    "dowel_mm": [
+     3.0,
+     0.5,
+     6.15
+    ],
+    "slot_r_mm": 7.75,
+    "slot_w_mm": 3.1,
+    "end_clearance_mm": 0.02,
+    "frame": "angles in frame_of(axis) of the lower member: dowel centre = home angle + joint angle"
+   },
+   "J2": {
+    "q2_stops_deg": [
+     93.398,
+     -21.811
+    ],
+    "q2_onset_deg": -5.011,
+    "window_deg": [
+     -21.811,
+     93.398
+    ],
+    "stop_B": "end of the law's valid prefix (stopB)",
+    "travel_deg": 115.21,
+    "dowel_home_angle_deg": 210.0,
+    "dowel_home_angles_deg": [
+     210.0
+    ],
+    "pair": false,
+    "slot_deg": [
+     176.88,
+     314.71
+    ],
+    "clearance_to_lower_strap_deg": 77.94,
+    "dowel_mm": [
+     3.0,
+     0.5,
+     6.15
+    ],
+    "slot_r_mm": 7.75,
+    "slot_w_mm": 3.1,
+    "end_clearance_mm": 0.02,
+    "frame": "angles in frame_of(axis) of the lower member: dowel centre = home angle + joint angle"
+   }
+  },
+  "drive": {
+   "lobe": {
+    "r_lobe": 9.0,
+    "r_end_at_stopB": 11.324,
+    "past_O20_skirt_mm": 1.324,
+    "r_at_taken_max": 10.853,
+    "sweep_deg": 16.8,
+    "band_mm": [
+     4.15,
+     7.15
+    ],
+    "rocker_axis_to_hub2_axis_mm": 17.88,
+    "rocker_face_to_hub2_axis_mm": 12.88,
+    "gap_lobe_end_to_rocker_face_mm": 1.55,
+    "rocker_height_at_lobe_band_mm": 5.48,
+    "facing_radius_check_mm": [
+     9.276,
+     11.324
+    ],
+    "note": "the follower that bridges the gap from the rocker post to the lobe is part of the rocker (L2 detail): the model samples neither the lobe (inside the O20 stack) nor a follower"
+   },
+   "rod_len_mm": 33.04,
+   "rocker_post_mm": 19.0,
+   "rocker_base_mm": 60.8,
+   "horn": {
+    "r_horn": 2.4932,
+    "plate_mm": 1.5,
+    "head_bottom_mm": 19.75,
+    "arc_at_stopB_mm": 2.32,
+    "arc_at_taken_max_mm": 1.85
+   },
+   "model_rod_info": {
+    "rocker_level": 60.8,
+    "horn_level": 77.8,
+    "rod_len": 33.0,
+    "rocker_h": 19.0,
+    "corrected": true
+   }
+  },
+  "knee_stop": {
+   "ang_stop": 152.1456,
+   "side": 1.0,
+   "alpha_home_deg": 117.115,
+   "check": {
+    "poses": 27,
+    "max_err_deg": 0.0,
+    "sides": [
+     1
+    ]
+   },
+   "tooth_r_min": 7.889,
+   "face": {
+    "s": [
+     6.8,
+     9.2
+    ],
+    "l": 4.0,
+    "z": [
+     88.814,
+     90.314
+    ]
+   },
+   "contact_area_mm2": 3.6,
+   "model_window_edge_deg": 152.1456,
+   "fit_bench_knee_max_deg": 149.663,
+   "fit_bench_poses_past_stop": 0
+  }
+ },
+ "mount": {
+  "route": "sweep-clear",
+  "angle_deg": 42.0,
+  "length": 24.7,
+  "riser_top_rel_tr": 7.02,
+  "bottom_underside_rel_tr": 6.02,
+  "dir_along_across": [
+   0.743,
+   0.669
+  ],
+  "clearance_rule_mm": 1.0,
+  "bottom": {
+   "cut": true,
+   "verts_in_sweep": 2111,
+   "cut_along_from_pad_mm": 11.8,
+   "bar_along_was": [
+    -26.8,
+    247.0
+   ],
+   "bottom_watertight_after_cut": true
+  },
+  "sweep": {
+   "poses": 2769,
+   "closing_used": 1188,
+   "stride": 2
+  }
+ },
+ "kin_u2_check_deg": 9e-05,
+ "dowel_check": {
+  "O2": {
+   "shear_MPa": 245.0,
+   "bending_MPa": 1373.0,
+   "bearing_on_Ti_MPa": 154.0,
+   "SF_bending_vs_1500MPa_yield": 1.09,
+   "SF_shear_vs_0p58x1500": 3.55
+  },
+  "O3": {
+   "shear_MPa": 109.0,
+   "bending_MPa": 407.0,
+   "bearing_on_Ti_MPa": 103.0,
+   "SF_bending_vs_1500MPa_yield": 3.69,
+   "SF_shear_vs_0p58x1500": 7.99
+  },
+  "bearing_pair_static": {
+   "radial_N": 770.0,
+   "per_bearing_N": 385.0,
+   "C0_N_each": 280.0,
+   "s0": 0.73,
+   "note": "MR117 C0 ~0.28 kN (docs/HARDWARE.md); s0 < 1 = raceway brinelling at the jam push"
+  },
+  "load": {
+   "F_N": 770.0,
+   "r_mm": 7.75,
+   "joint_torque_Nm": 5.97,
+   "lever_mm": 1.4
+  }
+ },
+ "j2_push_limit": {
+  "radial_N": 770.0,
+  "per_bearing_N": 385.0,
+  "C0_N_each": 280.0,
+  "s0": 0.73,
+  "note": "MR117 C0 ~0.28 kN (docs/HARDWARE.md); s0 < 1 = raceway brinelling at the jam push",
+  "rule": "J2 single dowel (gen 4b): rated by the MR117 pair's static load (s0 1.0 at 4.34 N.m)"
+ },
+ "check": [
+  {
+   "label": "arm at side",
+   "bench_pose": 60,
+   "pose": [
+    -90.0,
+    0.0,
+    75.0
+   ],
+   "taken": true,
+   "state": 0,
+   "rigid_samples_max_mm": 0.0504,
+   "strap_samples_max_mm": 1.8567,
+   "strap_samples_outside_hub_zones_max_mm": 0,
+   "per_part": {
+    "hub1": [
+     0.0,
+     0.0
+    ],
+    "hubK (slot band)": [
+     1.4163,
+     56
+    ],
+    "hubK": [
+     0.0,
+     0.0
+    ],
+    "hub2 (slot band)": [
+     1.4163,
+     56
+    ],
+    "hub2": [
+     0.0,
+     0.0
+    ],
+    "hub3": [
+     0.0,
+     0.0
+    ],
+    "E": [
+     0.0,
+     0.0
+    ],
+    "boss": [
+     0.0,
+     0.0
+    ],
+    "pad": [
+     0.0,
+     0.0
+    ],
+    "knee": [
+     0.0,
+     0.0
+    ],
+    "rocker": [
+     0.0,
+     0.0
+    ],
+    "rod": [
+     0.0504,
+     0.0432
+    ],
+    "rodends": [
+     0.0056,
+     0.0056
+    ],
+    "L1a": [
+     0.2,
+     0.2
+    ],
+    "L1a outside hub zones": [
+     0.0,
+     10
+    ],
+    "L1a hub zones (lifted)": [
+     0.2,
+     6
+    ],
+    "L1b": [
+     0.0966,
+     0.0965
+    ],
+    "L1b outside hub zones": [
+     0.0,
+     28
+    ],
+    "L1b hub zones (lifted)": [
+     0.0966,
+     8
+    ],
+    "L2": [
+     1.8567,
+     0.1056
+    ],
+    "L2 outside hub zones": [
+     0.0,
+     128
+    ],
+    "L2 hub zones (lifted)": [
+     1.8567,
+     16
+    ]
+   },
+   "frame_dev_mm": 9.6e-05,
+   "res_deg": 0.0001,
+   "knee_angle": 77.8,
+   "m3e": 14.29,
+   "stops": {
+    "K": {
+     "angle_deg": 0.0,
+     "from_stop_lo_deg": 53.639,
+     "to_stop_hi_deg": -0.001,
+     "inside": true
+    },
+    "J2": {
+     "angle_deg": -3.639,
+     "from_stop_lo_deg": 18.17,
+     "to_stop_hi_deg": 97.039,
+     "inside": true
+    }
+   }
+  },
+  {
+   "label": "first",
+   "bench_pose": 0,
+   "pose": [
+    30.0,
+    3.0,
+    -30.0
+   ],
+   "taken": true,
+   "state": 0,
+   "rigid_samples_max_mm": 0.0504,
+   "strap_samples_max_mm": 1.8567,
+   "strap_samples_outside_hub_zones_max_mm": 0,
+   "per_part": {
+    "hub1": [
+     0.0,
+     0.0
+    ],
+    "hubK (slot band)": [
+     1.4163,
+     56
+    ],
+    "hubK": [
+     0.0,
+     0.0
+    ],
+    "hub2 (slot band)": [
+     1.4163,
+     56
+    ],
+    "hub2": [
+     0.0,
+     0.0
+    ],
+    "hub3": [
+     0.0,
+     0.0
+    ],
+    "E": [
+     0.0,
+     0.0
+    ],
+    "boss": [
+     0.0,
+     0.0
+    ],
+    "pad": [
+     0.0,
+     0.0
+    ],
+    "knee": [
+     0.0001,
+     0.0001
+    ],
+    "rocker": [
+     0.0,
+     0.0
+    ],
+    "rod": [
+     0.0504,
+     0.0431
+    ],
+    "rodends": [
+     0.0056,
+     0.0056
+    ],
+    "L1a": [
+     0.2,
+     0.2
+    ],
+    "L1a outside hub zones": [
+     0.0,
+     10
+    ],
+    "L1a hub zones (lifted)": [
+     0.2,
+     6
+    ],
+    "L1b": [
+     0.0966,
+     0.0965
+    ],
+    "L1b outside hub zones": [
+     0.0,
+     28
+    ],
+    "L1b hub zones (lifted)": [
+     0.0966,
+     8
+    ],
+    "L2": [
+     1.8567,
+     0.1056
+    ],
+    "L2 outside hub zones": [
+     0.0,
+     128
+    ],
+    "L2 hub zones (lifted)": [
+     1.8567,
+     16
+    ]
+   },
+   "frame_dev_mm": 6.1e-05,
+   "res_deg": 0.0,
+   "knee_angle": 78.7,
+   "m3e": 18.42,
+   "stops": {
+    "K": {
+     "angle_deg": 0.0,
+     "from_stop_lo_deg": 53.639,
+     "to_stop_hi_deg": -0.001,
+     "inside": true
+    },
+    "J2": {
+     "angle_deg": 5.26,
+     "from_stop_lo_deg": 27.069,
+     "to_stop_hi_deg": 88.139,
+     "inside": true
+    }
+   }
+  },
+  {
+   "label": "middle",
+   "bench_pose": 99,
+   "pose": [
+    0.0,
+    60.0,
+    75.0
+   ],
+   "taken": true,
+   "state": 1,
+   "rigid_samples_max_mm": 0.0504,
+   "strap_samples_max_mm": 1.8567,
+   "strap_samples_outside_hub_zones_max_mm": 0,
+   "per_part": {
+    "hub1": [
+     0.0,
+     0.0
+    ],
+    "hubK (slot band)": [
+     1.4163,
+     56
+    ],
+    "hubK": [
+     0.0,
+     0.0
+    ],
+    "hub2 (slot band)": [
+     1.4163,
+     56
+    ],
+    "hub2": [
+     0.0,
+     0.0
+    ],
+    "hub3": [
+     0.0,
+     0.0
+    ],
+    "E": [
+     0.0001,
+     0.0001
+    ],
+    "boss": [
+     0.0,
+     0.0
+    ],
+    "pad": [
+     0.0,
+     0.0
+    ],
+    "knee": [
+     0.0,
+     0.0
+    ],
+    "rocker": [
+     0.0,
+     0.0
+    ],
+    "rod": [
+     0.0504,
+     0.0432
+    ],
+    "rodends": [
+     0.0056,
+     0.0056
+    ],
+    "L1a": [
+     0.2,
+     0.2
+    ],
+    "L1a outside hub zones": [
+     0.0,
+     10
+    ],
+    "L1a hub zones (lifted)": [
+     0.2,
+     6
+    ],
+    "L1b": [
+     0.0966,
+     0.0965
+    ],
+    "L1b outside hub zones": [
+     0.0,
+     28
+    ],
+    "L1b hub zones (lifted)": [
+     0.0966,
+     8
+    ],
+    "L2": [
+     1.8567,
+     0.1057
+    ],
+    "L2 outside hub zones": [
+     0.0,
+     128
+    ],
+    "L2 hub zones (lifted)": [
+     1.8567,
+     16
+    ]
+   },
+   "frame_dev_mm": 7.2e-05,
+   "res_deg": 0.0001,
+   "knee_angle": 123.8,
+   "m3e": 12.93,
+   "stops": {
+    "K": {
+     "angle_deg": -6.601,
+     "from_stop_lo_deg": 47.039,
+     "to_stop_hi_deg": 6.6,
+     "inside": true
+    },
+    "J2": {
+     "angle_deg": -7.087,
+     "from_stop_lo_deg": 14.722,
+     "to_stop_hi_deg": 100.486,
+     "inside": true
+    }
+   }
+  },
+  {
+   "label": "highest",
+   "bench_pose": 140,
+   "pose": [
+    45.0,
+    165.0,
+    -90.0
+   ],
+   "taken": true,
+   "state": 0,
+   "rigid_samples_max_mm": 0.0504,
+   "strap_samples_max_mm": 1.8567,
+   "strap_samples_outside_hub_zones_max_mm": 0,
+   "per_part": {
+    "hub1": [
+     0.0,
+     0.0
+    ],
+    "hubK (slot band)": [
+     1.4163,
+     56
+    ],
+    "hubK": [
+     0.0,
+     0.0
+    ],
+    "hub2 (slot band)": [
+     1.4163,
+     56
+    ],
+    "hub2": [
+     0.0,
+     0.0
+    ],
+    "hub3": [
+     0.0,
+     0.0
+    ],
+    "E": [
+     0.0,
+     0.0
+    ],
+    "boss": [
+     0.0,
+     0.0
+    ],
+    "pad": [
+     0.0,
+     0.0
+    ],
+    "knee": [
+     0.0001,
+     0.0001
+    ],
+    "rocker": [
+     0.0,
+     0.0
+    ],
+    "rod": [
+     0.0504,
+     0.0432
+    ],
+    "rodends": [
+     0.0056,
+     0.0056
+    ],
+    "L1a": [
+     0.2,
+     0.2
+    ],
+    "L1a outside hub zones": [
+     0.0,
+     10
+    ],
+    "L1a hub zones (lifted)": [
+     0.2,
+     6
+    ],
+    "L1b": [
+     0.0965,
+     0.0964
+    ],
+    "L1b outside hub zones": [
+     0.0,
+     28
+    ],
+    "L1b hub zones (lifted)": [
+     0.0965,
+     8
+    ],
+    "L2": [
+     1.8567,
+     0.1056
+    ],
+    "L2 outside hub zones": [
+     0.0,
+     128
+    ],
+    "L2 hub zones (lifted)": [
+     1.8567,
+     16
+    ]
+   },
+   "frame_dev_mm": 8.2e-05,
+   "res_deg": 0.0002,
+   "knee_angle": 140.6,
+   "m3e": 20.29,
+   "stops": {
+    "K": {
+     "angle_deg": 0.0,
+     "from_stop_lo_deg": 53.639,
+     "to_stop_hi_deg": -0.001,
+     "inside": true
+    },
+    "J2": {
+     "angle_deg": 9.055,
+     "from_stop_lo_deg": 30.864,
+     "to_stop_hi_deg": 84.344,
+     "inside": true
+    }
+   }
+  },
+  {
+   "label": "2nd highest",
+   "bench_pose": 152,
+   "pose": [
+    60.0,
+    165.0,
+    -90.0
+   ],
+   "taken": true,
+   "state": 1,
+   "rigid_samples_max_mm": 0.0504,
+   "strap_samples_max_mm": 1.8567,
+   "strap_samples_outside_hub_zones_max_mm": 0,
+   "per_part": {
+    "hub1": [
+     0.0,
+     0.0
+    ],
+    "hubK (slot band)": [
+     1.4163,
+     56
+    ],
+    "hubK": [
+     0.0,
+     0.0
+    ],
+    "hub2 (slot band)": [
+     1.4163,
+     56
+    ],
+    "hub2": [
+     0.0,
+     0.0
+    ],
+    "hub3": [
+     0.0,
+     0.0
+    ],
+    "E": [
+     0.0001,
+     0.0001
+    ],
+    "boss": [
+     0.0,
+     0.0
+    ],
+    "pad": [
+     0.0,
+     0.0
+    ],
+    "knee": [
+     0.0001,
+     0.0001
+    ],
+    "rocker": [
+     0.0,
+     0.0
+    ],
+    "rod": [
+     0.0504,
+     0.0432
+    ],
+    "rodends": [
+     0.0056,
+     0.0056
+    ],
+    "L1a": [
+     0.2,
+     0.2
+    ],
+    "L1a outside hub zones": [
+     0.0,
+     10
+    ],
+    "L1a hub zones (lifted)": [
+     0.2,
+     6
+    ],
+    "L1b": [
+     0.0965,
+     0.0965
+    ],
+    "L1b outside hub zones": [
+     0.0,
+     28
+    ],
+    "L1b hub zones (lifted)": [
+     0.0965,
+     8
+    ],
+    "L2": [
+     1.8567,
+     0.1056
+    ],
+    "L2 outside hub zones": [
+     0.0,
+     128
+    ],
+    "L2 hub zones (lifted)": [
+     1.8567,
+     16
+    ]
+   },
+   "frame_dev_mm": 0.00011,
+   "res_deg": 0.0002,
+   "knee_angle": 149.7,
+   "m3e": 12.78,
+   "stops": {
+    "K": {
+     "angle_deg": -7.675,
+     "from_stop_lo_deg": 45.965,
+     "to_stop_hi_deg": 7.674,
+     "inside": true
+    },
+    "J2": {
+     "angle_deg": -7.425,
+     "from_stop_lo_deg": 14.384,
+     "to_stop_hi_deg": 100.824,
+     "inside": true
+    }
+   }
+  },
+  {
+   "label": "behind the back",
+   "bench_pose": 62,
+   "pose": [
+    -90.0,
+    30.0,
+    105.0
+   ],
+   "taken": true,
+   "state": 1,
+   "rigid_samples_max_mm": 0.0504,
+   "strap_samples_max_mm": 1.8567,
+   "strap_samples_outside_hub_zones_max_mm": 0,
+   "per_part": {
+    "hub1": [
+     0.0,
+     0.0
+    ],
+    "hubK (slot band)": [
+     1.4163,
+     56
+    ],
+    "hubK": [
+     0.0,
+     0.0
+    ],
+    "hub2 (slot band)": [
+     1.4163,
+     56
+    ],
+    "hub2": [
+     0.0,
+     0.0
+    ],
+    "hub3": [
+     0.0,
+     0.0
+    ],
+    "E": [
+     0.0,
+     0.0
+    ],
+    "boss": [
+     0.0,
+     0.0
+    ],
+    "pad": [
+     0.0,
+     0.0
+    ],
+    "knee": [
+     0.0,
+     0.0
+    ],
+    "rocker": [
+     0.0,
+     0.0
+    ],
+    "rod": [
+     0.0504,
+     0.0432
+    ],
+    "rodends": [
+     0.0056,
+     0.0056
+    ],
+    "L1a": [
+     0.2,
+     0.2
+    ],
+    "L1a outside hub zones": [
+     0.0,
+     10
+    ],
+    "L1a hub zones (lifted)": [
+     0.2,
+     6
+    ],
+    "L1b": [
+     0.0965,
+     0.0964
+    ],
+    "L1b outside hub zones": [
+     0.0,
+     28
+    ],
+    "L1b hub zones (lifted)": [
+     0.0965,
+     8
+    ],
+    "L2": [
+     1.8567,
+     0.1056
+    ],
+    "L2 outside hub zones": [
+     0.0,
+     128
+    ],
+    "L2 hub zones (lifted)": [
+     1.8567,
+     16
+    ]
+   },
+   "frame_dev_mm": 4.2e-05,
+   "res_deg": 0.0001,
+   "knee_angle": 94.5,
+   "m3e": 13.07,
+   "stops": {
+    "K": {
+     "angle_deg": -5.567,
+     "from_stop_lo_deg": 48.073,
+     "to_stop_hi_deg": 5.566,
+     "inside": true
+    },
+    "J2": {
+     "angle_deg": -6.762,
+     "from_stop_lo_deg": 15.047,
+     "to_stop_hi_deg": 100.161,
+     "inside": true
+    }
+   }
+  },
+  {
+   "label": "across the body",
+   "bench_pose": 214,
+   "pose": [
+    150.0,
+    45.0,
+    -60.0
+   ],
+   "taken": true,
+   "state": 1,
+   "rigid_samples_max_mm": 0.0504,
+   "strap_samples_max_mm": 1.8567,
+   "strap_samples_outside_hub_zones_max_mm": 0,
+   "per_part": {
+    "hub1": [
+     0.0,
+     0.0
+    ],
+    "hubK (slot band)": [
+     1.4163,
+     56
+    ],
+    "hubK": [
+     0.0,
+     0.0
+    ],
+    "hub2 (slot band)": [
+     1.4163,
+     56
+    ],
+    "hub2": [
+     0.0,
+     0.0
+    ],
+    "hub3": [
+     0.0,
+     0.0
+    ],
+    "E": [
+     0.0,
+     0.0
+    ],
+    "boss": [
+     0.0,
+     0.0
+    ],
+    "pad": [
+     0.0,
+     0.0
+    ],
+    "knee": [
+     0.0001,
+     0.0001
+    ],
+    "rocker": [
+     0.0,
+     0.0
+    ],
+    "rod": [
+     0.0504,
+     0.0432
+    ],
+    "rodends": [
+     0.0056,
+     0.0056
+    ],
+    "L1a": [
+     0.2,
+     0.2
+    ],
+    "L1a outside hub zones": [
+     0.0,
+     10
+    ],
+    "L1a hub zones (lifted)": [
+     0.2,
+     6
+    ],
+    "L1b": [
+     0.0966,
+     0.0965
+    ],
+    "L1b outside hub zones": [
+     0.0,
+     28
+    ],
+    "L1b hub zones (lifted)": [
+     0.0966,
+     8
+    ],
+    "L2": [
+     1.8567,
+     0.1057
+    ],
+    "L2 outside hub zones": [
+     0.0,
+     128
+    ],
+    "L2 hub zones (lifted)": [
+     1.8567,
+     16
+    ]
+   },
+   "frame_dev_mm": 8.1e-05,
+   "res_deg": 0.0002,
+   "knee_angle": 78.8,
+   "m3e": 12.1,
+   "stops": {
+    "K": {
+     "angle_deg": -12.068,
+     "from_stop_lo_deg": 41.571,
+     "to_stop_hi_deg": 12.067,
+     "inside": true
+    },
+    "J2": {
+     "angle_deg": -8.807,
+     "from_stop_lo_deg": 13.003,
+     "to_stop_hi_deg": 102.206,
+     "inside": true
+    }
+   }
+  },
+  {
+   "label": "overhead raise peak",
+   "bench_pose": 5,
+   "pose": [
+    30.0,
+    150.0,
+    -60.0
+   ],
+   "taken": true,
+   "state": 0,
+   "rigid_samples_max_mm": 0.0504,
+   "strap_samples_max_mm": 1.8567,
+   "strap_samples_outside_hub_zones_max_mm": 0,
+   "per_part": {
+    "hub1": [
+     0.0,
+     0.0
+    ],
+    "hubK (slot band)": [
+     1.4163,
+     56
+    ],
+    "hubK": [
+     0.0,
+     0.0
+    ],
+    "hub2 (slot band)": [
+     1.4163,
+     56
+    ],
+    "hub2": [
+     0.0,
+     0.0
+    ],
+    "hub3": [
+     0.0001,
+     0.0001
+    ],
+    "E": [
+     0.0001,
+     0.0001
+    ],
+    "boss": [
+     0.0001,
+     0.0001
+    ],
+    "pad": [
+     0.0,
+     0.0
+    ],
+    "knee": [
+     0.0,
+     0.0
+    ],
+    "rocker": [
+     0.0,
+     0.0
+    ],
+    "rod": [
+     0.0504,
+     0.0432
+    ],
+    "rodends": [
+     0.0056,
+     0.0056
+    ],
+    "L1a": [
+     0.2,
+     0.2
+    ],
+    "L1a outside hub zones": [
+     0.0,
+     10
+    ],
+    "L1a hub zones (lifted)": [
+     0.2,
+     6
+    ],
+    "L1b": [
+     0.0965,
+     0.0965
+    ],
+    "L1b outside hub zones": [
+     0.0,
+     28
+    ],
+    "L1b hub zones (lifted)": [
+     0.0965,
+     8
+    ],
+    "L2": [
+     1.8567,
+     0.1056
+    ],
+    "L2 outside hub zones": [
+     0.0,
+     128
+    ],
+    "L2 hub zones (lifted)": [
+     1.8567,
+     16
+    ]
+   },
+   "frame_dev_mm": 7.2e-05,
+   "res_deg": 0.0002,
+   "knee_angle": 126.6,
+   "m3e": 13.81,
+   "stops": {
+    "K": {
+     "angle_deg": 0.0,
+     "from_stop_lo_deg": 53.639,
+     "to_stop_hi_deg": -0.001,
+     "inside": true
+    },
+    "J2": {
+     "angle_deg": 75.517,
+     "from_stop_lo_deg": 97.326,
+     "to_stop_hi_deg": 17.882,
+     "inside": true
+    }
+   }
+  },
+  {
+   "label": "forced, K most open (taken)",
+   "bench_pose": 155,
+   "pose": [
+    75.0,
+    30.0,
+    -135.0
+   ],
+   "taken": true,
+   "state": 1,
+   "rigid_samples_max_mm": 0.0504,
+   "strap_samples_max_mm": 1.8567,
+   "strap_samples_outside_hub_zones_max_mm": 0,
+   "per_part": {
+    "hub1": [
+     0.0,
+     0.0
+    ],
+    "hubK (slot band)": [
+     1.4163,
+     56
+    ],
+    "hubK": [
+     0.0,
+     0.0
+    ],
+    "hub2 (slot band)": [
+     1.4163,
+     56
+    ],
+    "hub2": [
+     0.0,
+     0.0
+    ],
+    "hub3": [
+     0.0,
+     0.0
+    ],
+    "E": [
+     0.0,
+     0.0
+    ],
+    "boss": [
+     0.0,
+     0.0
+    ],
+    "pad": [
+     0.0,
+     0.0
+    ],
+    "knee": [
+     0.0,
+     0.0
+    ],
+    "rocker": [
+     0.0,
+     0.0
+    ],
+    "rod": [
+     0.0504,
+     0.0432
+    ],
+    "rodends": [
+     0.0056,
+     0.0056
+    ],
+    "L1a": [
+     0.2,
+     0.2
+    ],
+    "L1a outside hub zones": [
+     0.0,
+     10
+    ],
+    "L1a hub zones (lifted)": [
+     0.2,
+     6
+    ],
+    "L1b": [
+     0.0965,
+     0.0965
+    ],
+    "L1b outside hub zones": [
+     0.0,
+     28
+    ],
+    "L1b hub zones (lifted)": [
+     0.0965,
+     8
+    ],
+    "L2": [
+     1.8567,
+     0.1056
+    ],
+    "L2 outside hub zones": [
+     0.0,
+     128
+    ],
+    "L2 hub zones (lifted)": [
+     1.8567,
+     16
+    ]
+   },
+   "frame_dev_mm": 6e-05,
+   "res_deg": 0.0002,
+   "knee_angle": 84.7,
+   "m3e": 5.45,
+   "stops": {
+    "K": {
+     "angle_deg": -42.58,
+     "from_stop_lo_deg": 11.06,
+     "to_stop_hi_deg": 42.579,
+     "inside": true
+    },
+    "J2": {
+     "angle_deg": -18.403,
+     "from_stop_lo_deg": 3.407,
+     "to_stop_hi_deg": 111.802,
+     "inside": true
+    }
+   }
+  }
+ ],
+ "law_check": [
+  {
+   "pose": 60,
+   "state": 0,
+   "q2_deg": -3.639,
+   "t_deg": -1.372,
+   "dK_deg": 0.0,
+   "dK_law_deg": 0.0,
+   "err_deg": 0.0
+  },
+  {
+   "pose": 0,
+   "state": 0,
+   "q2_deg": 5.26,
+   "t_deg": -10.271,
+   "dK_deg": 0.0,
+   "dK_law_deg": 0.0,
+   "err_deg": 0.0
+  },
+  {
+   "pose": 99,
+   "state": 1,
+   "q2_deg": -7.087,
+   "t_deg": 2.076,
+   "dK_deg": -6.601,
+   "dK_law_deg": 6.601,
+   "err_deg": 0.0008
+  },
+  {
+   "pose": 140,
+   "state": 0,
+   "q2_deg": 9.055,
+   "t_deg": -14.066,
+   "dK_deg": 0.0,
+   "dK_law_deg": 0.0,
+   "err_deg": 0.0
+  },
+  {
+   "pose": 152,
+   "state": 1,
+   "q2_deg": -7.425,
+   "t_deg": 2.414,
+   "dK_deg": -7.675,
+   "dK_law_deg": 7.676,
+   "err_deg": 0.0008
+  },
+  {
+   "pose": 62,
+   "state": 1,
+   "q2_deg": -6.762,
+   "t_deg": 1.751,
+   "dK_deg": -5.567,
+   "dK_law_deg": 5.567,
+   "err_deg": 0.0008
+  },
+  {
+   "pose": 214,
+   "state": 1,
+   "q2_deg": -8.807,
+   "t_deg": 3.796,
+   "dK_deg": -12.068,
+   "dK_law_deg": 12.069,
+   "err_deg": 0.0008
+  },
+  {
+   "pose": 5,
+   "state": 0,
+   "q2_deg": 75.517,
+   "t_deg": -80.528,
+   "dK_deg": 0.0,
+   "dK_law_deg": 0.0,
+   "err_deg": 0.0
+  },
+  {
+   "pose": 155,
+   "state": 1,
+   "q2_deg": -18.403,
+   "t_deg": 13.392,
+   "dK_deg": -42.58,
+   "dK_law_deg": 42.581,
+   "err_deg": 0.0008
+  },
+  {
+   "pose": 34,
+   "state": 1,
+   "q2_deg": -7.534,
+   "t_deg": 2.523,
+   "dK_deg": -8.022,
+   "dK_law_deg": 8.023,
+   "err_deg": 0.0008
+  },
+  {
+   "pose": 35,
+   "state": 1,
+   "q2_deg": -9.165,
+   "t_deg": 4.154,
+   "dK_deg": -13.207,
+   "dK_law_deg": 13.207,
+   "err_deg": 0.0008
+  },
+  {
+   "pose": 36,
+   "state": 1,
+   "q2_deg": -10.004,
+   "t_deg": 4.993,
+   "dK_deg": -15.876,
+   "dK_law_deg": 15.877,
+   "err_deg": 0.0008
+  },
+  {
+   "pose": 37,
+   "state": 1,
+   "q2_deg": -10.004,
+   "t_deg": 4.993,
+   "dK_deg": -15.876,
+   "dK_law_deg": 15.877,
+   "err_deg": 0.0008
+  },
+  {
+   "pose": 38,
+   "state": 1,
+   "q2_deg": -5.457,
+   "t_deg": 0.446,
+   "dK_deg": -1.418,
+   "dK_law_deg": 1.419,
+   "err_deg": 0.0008
+  },
+  {
+   "pose": 43,
+   "state": 1,
+   "q2_deg": -7.247,
+   "t_deg": 2.236,
+   "dK_deg": -7.109,
+   "dK_law_deg": 7.109,
+   "err_deg": 0.0008
+  },
+  {
+   "pose": 44,
+   "state": 1,
+   "q2_deg": -9.366,
+   "t_deg": 4.355,
+   "dK_deg": -13.846,
+   "dK_law_deg": 13.847,
+   "err_deg": 0.0008
+  },
+  {
+   "pose": 45,
+   "state": 1,
+   "q2_deg": -9.392,
+   "t_deg": 4.381,
+   "dK_deg": -13.928,
+   "dK_law_deg": 13.929,
+   "err_deg": 0.0008
+  },
+  {
+   "pose": 47,
+   "state": 1,
+   "q2_deg": -10.113,
+   "t_deg": 5.102,
+   "dK_deg": -16.222,
+   "dK_law_deg": 16.223,
+   "err_deg": 0.0008
+  },
+  {
+   "pose": 55,
+   "state": 1,
+   "q2_deg": -7.176,
+   "t_deg": 2.165,
+   "dK_deg": -6.883,
+   "dK_law_deg": 6.884,
+   "err_deg": 0.0008
+  },
+  {
+   "pose": 56,
+   "state": 1,
+   "q2_deg": -7.176,
+   "t_deg": 2.165,
+   "dK_deg": -6.883,
+   "dK_law_deg": 6.884,
+   "err_deg": 0.0008
+  },
+  {
+   "pose": 57,
+   "state": 1,
+   "q2_deg": -5.138,
+   "t_deg": 0.127,
+   "dK_deg": -0.402,
+   "dK_law_deg": 0.403,
+   "err_deg": 0.0008
+  },
+  {
+   "pose": 62,
+   "state": 1,
+   "q2_deg": -6.762,
+   "t_deg": 1.751,
+   "dK_deg": -5.567,
+   "dK_law_deg": 5.567,
+   "err_deg": 0.0008
+  },
+  {
+   "pose": 63,
+   "state": 1,
+   "q2_deg": -14.424,
+   "t_deg": 9.413,
+   "dK_deg": -29.929,
+   "dK_law_deg": 29.93,
+   "err_deg": 0.0008
+  },
+  {
+   "pose": 65,
+   "state": 1,
+   "q2_deg": -7.766,
+   "t_deg": 2.755,
+   "dK_deg": -8.76,
+   "dK_law_deg": 8.761,
+   "err_deg": 0.0008
+  },
+  {
+   "pose": 66,
+   "state": 1,
+   "q2_deg": -15.671,
+   "t_deg": 10.66,
+   "dK_deg": -33.894,
+   "dK_law_deg": 33.895,
+   "err_deg": 0.0008
+  },
+  {
+   "pose": 72,
+   "state": 1,
+   "q2_deg": -11.264,
+   "t_deg": 6.253,
+   "dK_deg": -19.881,
+   "dK_law_deg": 19.882,
+   "err_deg": 0.0008
+  },
+  {
+   "pose": 74,
+   "state": 1,
+   "q2_deg": -10.111,
+   "t_deg": 5.1,
+   "dK_deg": -16.215,
+   "dK_law_deg": 16.215,
+   "err_deg": 0.0008
+  },
+  {
+   "pose": 75,
+   "state": 1,
+   "q2_deg": -16.85,
+   "t_deg": 11.839,
+   "dK_deg": -37.644,
+   "dK_law_deg": 37.645,
+   "err_deg": 0.0008
+  },
+  {
+   "pose": 78,
+   "state": 1,
+   "q2_deg": -6.264,
+   "t_deg": 1.253,
+   "dK_deg": -3.982,
+   "dK_law_deg": 3.983,
+   "err_deg": 0.0008
+  },
+  {
+   "pose": 80,
+   "state": 1,
+   "q2_deg": -11.044,
+   "t_deg": 6.033,
+   "dK_deg": -19.18,
+   "dK_law_deg": 19.181,
+   "err_deg": 0.0008
+  },
+  {
+   "pose": 84,
+   "state": 1,
+   "q2_deg": -8.34,
+   "t_deg": 3.329,
+   "dK_deg": -10.584,
+   "dK_law_deg": 10.584,
+   "err_deg": 0.0008
+  },
+  {
+   "pose": 85,
+   "state": 1,
+   "q2_deg": -12.71,
+   "t_deg": 7.699,
+   "dK_deg": -24.478,
+   "dK_law_deg": 24.478,
+   "err_deg": 0.0008
+  },
+  {
+   "pose": 86,
+   "state": 1,
+   "q2_deg": -5.222,
+   "t_deg": 0.211,
+   "dK_deg": -0.669,
+   "dK_law_deg": 0.67,
+   "err_deg": 0.0008
+  },
+  {
+   "pose": 91,
+   "state": 1,
+   "q2_deg": -13.222,
+   "t_deg": 8.211,
+   "dK_deg": -26.106,
+   "dK_law_deg": 26.107,
+   "err_deg": 0.0008
+  },
+  {
+   "pose": 94,
+   "state": 1,
+   "q2_deg": -7.766,
+   "t_deg": 2.755,
+   "dK_deg": -8.76,
+   "dK_law_deg": 8.761,
+   "err_deg": 0.0008
+  },
+  {
+   "pose": 99,
+   "state": 1,
+   "q2_deg": -7.087,
+   "t_deg": 2.076,
+   "dK_deg": -6.601,
+   "dK_law_deg": 6.601,
+   "err_deg": 0.0008
+  },
+  {
+   "pose": 105,
+   "state": 1,
+   "q2_deg": -10.76,
+   "t_deg": 5.749,
+   "dK_deg": -18.28,
+   "dK_law_deg": 18.281,
+   "err_deg": 0.0008
+  },
+  {
+   "pose": 106,
+   "state": 1,
+   "q2_deg": -10.111,
+   "t_deg": 5.1,
+   "dK_deg": -16.215,
+   "dK_law_deg": 16.215,
+   "err_deg": 0.0008
+  },
+  {
+   "pose": 111,
+   "state": 1,
+   "q2_deg": -8.76,
+   "t_deg": 3.749,
+   "dK_deg": -11.921,
+   "dK_law_deg": 11.922,
+   "err_deg": 0.0008
+  },
+  {
+   "pose": 117,
+   "state": 1,
+   "q2_deg": -8.34,
+   "t_deg": 3.329,
+   "dK_deg": -10.584,
+   "dK_law_deg": 10.584,
+   "err_deg": 0.0008
+  },
+  {
+   "pose": 118,
+   "state": 1,
+   "q2_deg": -12.71,
+   "t_deg": 7.699,
+   "dK_deg": -24.478,
+   "dK_law_deg": 24.478,
+   "err_deg": 0.0008
+  },
+  {
+   "pose": 129,
+   "state": 1,
+   "q2_deg": -6.264,
+   "t_deg": 1.253,
+   "dK_deg": -3.982,
+   "dK_law_deg": 3.983,
+   "err_deg": 0.0008
+  },
+  {
+   "pose": 130,
+   "state": 1,
+   "q2_deg": -11.597,
+   "t_deg": 6.586,
+   "dK_deg": -20.939,
+   "dK_law_deg": 20.94,
+   "err_deg": 0.0008
+  },
+  {
+   "pose": 135,
+   "state": 1,
+   "q2_deg": -5.711,
+   "t_deg": 0.7,
+   "dK_deg": -2.224,
+   "dK_law_deg": 2.225,
+   "err_deg": 0.0008
+  },
+  {
+   "pose": 142,
+   "state": 1,
+   "q2_deg": -9.466,
+   "t_deg": 4.455,
+   "dK_deg": -14.164,
+   "dK_law_deg": 14.165,
+   "err_deg": 0.0008
+  },
+  {
+   "pose": 143,
+   "state": 1,
+   "q2_deg": -7.163,
+   "t_deg": 2.152,
+   "dK_deg": -6.841,
+   "dK_law_deg": 6.842,
+   "err_deg": 0.0008
+  },
+  {
+   "pose": 147,
+   "state": 1,
+   "q2_deg": -7.425,
+   "t_deg": 2.414,
+   "dK_deg": -7.674,
+   "dK_law_deg": 7.675,
+   "err_deg": 0.0008
+  },
+  {
+   "pose": 150,
+   "state": 1,
+   "q2_deg": -7.656,
+   "t_deg": 2.645,
+   "dK_deg": -8.408,
+   "dK_law_deg": 8.409,
+   "err_deg": 0.0008
+  },
+  {
+   "pose": 152,
+   "state": 1,
+   "q2_deg": -7.425,
+   "t_deg": 2.414,
+   "dK_deg": -7.675,
+   "dK_law_deg": 7.676,
+   "err_deg": 0.0008
+  },
+  {
+   "pose": 154,
+   "state": 1,
+   "q2_deg": -7.785,
+   "t_deg": 2.774,
+   "dK_deg": -8.82,
+   "dK_law_deg": 8.821,
+   "err_deg": 0.0008
+  },
+  {
+   "pose": 155,
+   "state": 1,
+   "q2_deg": -18.403,
+   "t_deg": 13.392,
+   "dK_deg": -42.58,
+   "dK_law_deg": 42.581,
+   "err_deg": 0.0008
+  },
+  {
+   "pose": 159,
+   "state": 1,
+   "q2_deg": -9.425,
+   "t_deg": 4.414,
+   "dK_deg": -14.034,
+   "dK_law_deg": 14.034,
+   "err_deg": 0.0008
+  },
+  {
+   "pose": 162,
+   "state": 1,
+   "q2_deg": -11.49,
+   "t_deg": 6.479,
+   "dK_deg": -20.601,
+   "dK_law_deg": 20.602,
+   "err_deg": 0.0008
+  },
+  {
+   "pose": 166,
+   "state": 1,
+   "q2_deg": -6.681,
+   "t_deg": 1.67,
+   "dK_deg": -5.31,
+   "dK_law_deg": 5.31,
+   "err_deg": 0.0008
+  },
+  {
+   "pose": 167,
+   "state": 1,
+   "q2_deg": -17.05,
+   "t_deg": 12.039,
+   "dK_deg": -38.28,
+   "dK_law_deg": 38.28,
+   "err_deg": 0.0008
+  },
+  {
+   "pose": 171,
+   "state": 1,
+   "q2_deg": -11.592,
+   "t_deg": 6.581,
+   "dK_deg": -20.924,
+   "dK_law_deg": 20.925,
+   "err_deg": 0.0008
+  },
+  {
+   "pose": 174,
+   "state": 1,
+   "q2_deg": -15.046,
+   "t_deg": 10.035,
+   "dK_deg": -31.907,
+   "dK_law_deg": 31.908,
+   "err_deg": 0.0008
+  },
+  {
+   "pose": 178,
+   "state": 1,
+   "q2_deg": -6.265,
+   "t_deg": 1.254,
+   "dK_deg": -3.986,
+   "dK_law_deg": 3.987,
+   "err_deg": 0.0008
+  },
+  {
+   "pose": 179,
+   "state": 1,
+   "q2_deg": -16.226,
+   "t_deg": 11.215,
+   "dK_deg": -35.659,
+   "dK_law_deg": 35.66,
+   "err_deg": 0.0008
+  },
+  {
+   "pose": 183,
+   "state": 1,
+   "q2_deg": -13.823,
+   "t_deg": 8.812,
+   "dK_deg": -28.018,
+   "dK_law_deg": 28.019,
+   "err_deg": 0.0008
+  },
+  {
+   "pose": 186,
+   "state": 1,
+   "q2_deg": -18.279,
+   "t_deg": 13.268,
+   "dK_deg": -42.188,
+   "dK_law_deg": 42.188,
+   "err_deg": 0.0008
+  },
+  {
+   "pose": 189,
+   "state": 1,
+   "q2_deg": -5.802,
+   "t_deg": 0.791,
+   "dK_deg": -2.515,
+   "dK_law_deg": 2.516,
+   "err_deg": 0.0008
+  },
+  {
+   "pose": 190,
+   "state": 1,
+   "q2_deg": -6.585,
+   "t_deg": 1.574,
+   "dK_deg": -5.005,
+   "dK_law_deg": 5.006,
+   "err_deg": 0.0008
+  },
+  {
+   "pose": 191,
+   "state": 1,
+   "q2_deg": -15.946,
+   "t_deg": 10.935,
+   "dK_deg": -34.77,
+   "dK_law_deg": 34.77,
+   "err_deg": 0.0008
+  },
+  {
+   "pose": 195,
+   "state": 1,
+   "q2_deg": -16.02,
+   "t_deg": 11.009,
+   "dK_deg": -35.004,
+   "dK_law_deg": 35.004,
+   "err_deg": 0.0008
+  },
+  {
+   "pose": 201,
+   "state": 1,
+   "q2_deg": -12.71,
+   "t_deg": 7.699,
+   "dK_deg": -24.478,
+   "dK_law_deg": 24.478,
+   "err_deg": 0.0008
+  },
+  {
+   "pose": 202,
+   "state": 1,
+   "q2_deg": -9.513,
+   "t_deg": 4.502,
+   "dK_deg": -14.314,
+   "dK_law_deg": 14.315,
+   "err_deg": 0.0008
+  },
+  {
+   "pose": 203,
+   "state": 1,
+   "q2_deg": -6.689,
+   "t_deg": 1.678,
+   "dK_deg": -5.335,
+   "dK_law_deg": 5.336,
+   "err_deg": 0.0008
+  },
+  {
+   "pose": 211,
+   "state": 1,
+   "q2_deg": -12.71,
+   "t_deg": 7.699,
+   "dK_deg": -24.478,
+   "dK_law_deg": 24.478,
+   "err_deg": 0.0008
+  },
+  {
+   "pose": 212,
+   "state": 1,
+   "q2_deg": -11.09,
+   "t_deg": 6.079,
+   "dK_deg": -19.328,
+   "dK_law_deg": 19.328,
+   "err_deg": 0.0008
+  },
+  {
+   "pose": 213,
+   "state": 1,
+   "q2_deg": -9.901,
+   "t_deg": 4.89,
+   "dK_deg": -15.547,
+   "dK_law_deg": 15.547,
+   "err_deg": 0.0008
+  },
+  {
+   "pose": 214,
+   "state": 1,
+   "q2_deg": -8.807,
+   "t_deg": 3.796,
+   "dK_deg": -12.068,
+   "dK_law_deg": 12.069,
+   "err_deg": 0.0008
+  },
+  {
+   "pose": 215,
+   "state": 1,
+   "q2_deg": -7.703,
+   "t_deg": 2.692,
+   "dK_deg": -8.56,
+   "dK_law_deg": 8.561,
+   "err_deg": 0.0008
+  },
+  {
+   "pose": 216,
+   "state": 1,
+   "q2_deg": -6.988,
+   "t_deg": 1.977,
+   "dK_deg": -6.285,
+   "dK_law_deg": 6.286,
+   "err_deg": 0.0008
+  },
+  {
+   "pose": 217,
+   "state": 1,
+   "q2_deg": -7.018,
+   "t_deg": 2.007,
+   "dK_deg": -6.382,
+   "dK_law_deg": 6.383,
+   "err_deg": 0.0008
+  },
+  {
+   "pose": 218,
+   "state": 1,
+   "q2_deg": -8.022,
+   "t_deg": 3.011,
+   "dK_deg": -9.574,
+   "dK_law_deg": 9.575,
+   "err_deg": 0.0008
+  },
+  {
+   "pose": 219,
+   "state": 1,
+   "q2_deg": -10.042,
+   "t_deg": 5.031,
+   "dK_deg": -15.996,
+   "dK_law_deg": 15.997,
+   "err_deg": 0.0008
+  }
+ ],
+ "law_check_summary": {
+  "poses": 77,
+  "stretched": 73,
+  "max_err_deg": 0.0008,
+  "dK_max_deg": 42.58,
+  "past_40": 3
+ }
+}

@@ -24,10 +24,10 @@
   "title": "Built CAD judge results",
   "description": "One row per judged design and requirement: value, threshold and pass from the outside judges, timed by the judge output (score files: the earliest of their commit, their file time and the first commit whose docs report the design; scorecard-only values: the scorecard's commit). Built from tools/judged_history.py, judge/scorecard.json files and judge/requirements.json.",
   "file": "data/cad.json",
-  "sha256": "1de0a2103856f705c43570eda5c2255e9d2779cc61b20082d537bfb548b1c090",
-  "rows": 312,
-  "bytes": 97910,
-  "updated": "2026-10-16T16:23:26Z"
+  "sha256": "9e5037cfe43c24c973dfcfeb7b614320b35690cb07123cd279bfb8dc9341e726",
+  "rows": 325,
+  "bytes": 102004,
+  "updated": "2026-10-16T17:38:25Z"
  },
  {
   "id": "gpu_evals",
@@ -64,10 +64,10 @@
   "title": "Event log",
   "description": "What happened and when: the swarm's own log (docs/concepts/events.jsonl), one milestone per judged design and every new built-CAD R1 record (from the judge outputs).",
   "file": "data/events.json",
-  "sha256": "84a98b7bee598a669ad3f60e511960f5f9b458884630dd4f0472fa804c612847",
-  "rows": 516,
-  "bytes": 184077,
-  "updated": "2026-10-16T17:23:33Z"
+  "sha256": "5102650d4542eb59e5b56734419633c458690fdde53031a7f28b02ec6cada2e1",
+  "rows": 517,
+  "bytes": 184246,
+  "updated": "2026-10-16T17:38:25Z"
  },
  {
   "id": "spend",
@@ -84,10 +84,10 @@
   "title": "Arm reach in 3-D",
   "description": "One row per built design and everyday arm pose of the R16 workspace judge: where the upper arm points and whether the built design reaches it, with the reason if not. Built by tools/coverage3d.py from judge/workspace.json files (newest 8 designs).",
   "file": "data/cov3d.json",
-  "sha256": "43489a6bd8c7d9c001ba31514e8b44a7e36c4744c40bf218d72a653c950a2f09",
-  "rows": 2150,
-  "bytes": 677620,
-  "updated": "2026-10-16T14:08:24Z"
+  "sha256": "c2dd7366761d8e4713869b6418c1e5d08583b6d56e944b401a4c6cbb811bef81",
+  "rows": 2388,
+  "bytes": 748155,
+  "updated": "2026-10-16T17:38:25Z"
  },
  {
   "id": "motion",
@@ -104,9 +104,9 @@
   "title": "Data build info",
   "description": "When tools/dash_build.py last gathered the data, the repo commit, and any warnings it printed.",
   "file": "data/meta.json",
-  "sha256": "af6a8956cb425ba6a6246f9f11b1d83a24f33e93aa5177f519bc7f375baf727b",
+  "sha256": "01e027c0f81161e952b97501bb4604c98e240dc69588322cfa6b0dbc9222005a",
   "rows": 1,
   "bytes": 2089,
-  "updated": "2026-10-16T17:23:33Z"
+  "updated": "2026-10-16T17:38:25Z"
  }
 ]
