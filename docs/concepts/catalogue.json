@@ -2361,7 +2361,7 @@
   "name": "Geneva-tail knuckle on the plain spherical chain with a crest-basin J3: the sensor-free knuckle at complexity ~16",
   "family": "redundant 4R with a determined spare (cam-slaved knuckle)",
   "lens": "round6:cam-stop-knuckle (3 active, no K sensor, low complexity) + j3-side-band (crest basin)",
-  "status": "ideated",
+  "status": "dead",
   "t_ideated": "2026-10-16T12:11:50Z",
   "source": "round 6 judge (docs/concepts/round6_ideation.md)",
   "description": "The one-tooth Geneva drive of geneva-tail-knuckle-pinknee-3r on the plain spherical chain (minarc variant A metal, no pin knee): J1 -> link 1a -> K -> link 1b -> J2 -> link 2 + rear tail -> J3 -> neck. At rest and in the window K sits on stop A: a rigid spherical 3R. Overhead and stretched across-body the tail roller drives K's cap tooth and J1-J2 opens toward a1max as q2 runs past the onset. Behind-back: plain 3R. To bring the J3 side into band (variant A's real limiter: link 2 0.43, hub 3 0.70, neck 0.68), the search carries J3 in the crest basin (merged from knuckle-crest-hub3-4r: hub 3 all-fit ceiling 0.85 at wdir(94,-15) vs 0.61 at wd 48), the inverted J3 stack (inv3) and end_extra. The 3-active, sensor-free successor of minarc A.",

@@ -166,3 +166,45 @@ tail is built: contact 0.24, link 2 0.37, neck 0.21.
   elevation-0 pose is driven), so the strict rule gives reach 0 by construction. K is a function of q2 everywhere (the
   law is continuous at the onset, with no branch). The seed-any flood fill is the meaningful reading, and both are
   reported.
+
+## Frozen wear (lesson c) and held out
+
+The best shape was fit on Bench(60,160) fast, its profiles frozen, and worn on the exact path. Jobs ran on the farm:
+
+| bench | gap (plain) | score | reach | follow | in-band14 | contact | near-touch | min metal | overhead ws reach |
+|---|---|---|---|---|---|---|---|---|---|
+| Bench(60,160) fit, fast | 39.36 | 85.7 | 0.825 | 0.95 | 0.673 | 0.091 | 39.36 | 1.13 mm | 4/12 |
+| **Bench(110,360) exact, frozen** | **53.32** | **80.6** | 0.739 | 0.936 | 0.675 | 0.134 | 55.88 | 0.31 mm | 10/28 |
+| held-out bench, exact, frozen | 59.55 | 78.4 | 0.707 | 0.931 | 0.674 | 0.158 | 62.80 | 0.12 mm | 19/71 |
+
+- The continuity flood fill, seed-any (2-deg slerp, no joint jump > 10 deg), connects all 1270 closing workspace nodes,
+  so 0 poses are dropped.
+- The strict seed (K on stop A at elevation 0) has no seed, because every elevation-0 pose is driven. It would read
+  149.46 by construction.
+
+## Verdict: DEAD (converged, every number measured)
+
+- **Bests.** Fast 39.36. Frozen exact on the big bench 53.32 (score 80.6). Held out 59.55. Complexity 14.0
+  (tools/simplicity.py), 0 passive translations, 3 active.
+- **Against the bars.** Every bar is far ahead:
+  - zc-frontier's verified 31.04 at complexity 0;
+  - H1's 24.48 at complexity 21.5;
+  - minarc's 18.40 / 19.54.
+- **The kill gate.** It is passed, but only law-only and only at hub 3 0.80. At those seats the J3-side straps leave the
+  band (link 2 0.37, neck 0.21), and with the honest tail the same configuration scores 75.19.
+- **Limiters, measured.**
+  1. **The J3 side.** Link 2 is 0.33 and the neck 0.23 in band at every seat with reach >= 0.8 (hub 3 0.75). The
+     crest basin that was meant to fix hub 3 is O15-only.
+  2. **The tail sweep.** The tail is rigid with link 2, so its tip, about 40 deg from u2, sweeps the whole state-A
+     window. That metal costs 9.3 points at the best shape.
+  3. **The fold side has no tooth.** The overhead poses with th ~36 are lost.
+- **What did work.** The exact one-tooth law reaches as far as the sensed stop law: th to 136.6, and 0.825 reach fast
+  with the law alone at 30.02. A determined K is no longer the problem. The metal that carries the determination is.
+
+## What next (for the loop)
+
+- The tail sweep is a property of every link-2-mounted driver. A driver that does not orbit hub 2 removes it:
+  - a roller on link 1b, with the tooth on link 2 near hub 2 (the roles swapped), so that only a short lug orbits;
+  - or a crown cam on hub 2 (cam-unfold-4th's C3 measured 22.02 fast with the pin knee).
+- The J3 side needs the pin knee or a different J3 seat family. The plain neck at wd ~36 cannot sit in band under O20.
+- Do not spend more on the crest basin under O20.
