@@ -67,7 +67,7 @@ LB1 = {"o1a": 0.0, "o1c": 0.0, "o2a": 0.0, "o2c": 0.0, "o3a": 0.0, "o3c": 0.0, "
        "phys": 1, "capK": 6.0, "m3e": 1}
 PARAMS = dict(KR.PARAMS, **LB1)
 PARAMS.update(cam=1, d_mm=7.0, psi_c=0.0, side=0, rho=3.0, r_law=70.0, pa_max=45.0, lug_max=22.0, tail=1, flipK=1,
-              emb_mode="tail", kK=3.0, r_lobe=9.0, r_horn=2.6)
+              emb_mode="tail", kK=3.0, r_lobe=9.0, r_horn=2.6, rod_low=0, i_rock=3.0)
 
 
 class GDesign(KR.KRDesign):
@@ -118,7 +118,8 @@ class GDesign(KR.KRDesign):
         pa = np.degrees(np.arccos(np.clip(np.abs(np.einsum("ij,ij->i", nvec, v)) / np.maximum(np.linalg.norm(v, axis=1), 1e-12), 0, 1)))
         r_c = np.sqrt(np.maximum(rp ** 2 - rho_n ** 2, 0)) * float(P["r_law"])     # contact radius on the flank (mm)
         if ROD:                                                    # constant-pressure spiral lobe: tan(pa) = kK r_horn / r_lobe
-            pa = np.full(len(ts), math.degrees(math.atan(float(P["kK"]) * float(P["r_horn"]) / float(P["r_lobe"])))); r_c = np.zeros(len(ts))
+            ir = float(P.get("i_rock", 1.0)) if P.get("rod_low") else 1.0
+            pa = np.full(len(ts), math.degrees(math.atan(float(P["kK"]) * float(P["r_horn"]) / (ir * float(P["r_lobe"]))))); r_c = np.zeros(len(ts))
         kabs = np.abs(dK); dth = np.gradient(th, ts); dk = np.gradient(kabs, ts)
         # lift-off: self-motion slope at fixed th: d|dK|/dt|_C = -(dth/dt|_dK) / (dth/d|dK| |_t)
         h = 1e-4
@@ -322,8 +323,16 @@ class GModel(KR.KModel):
         near = L1b[np.argsort(np.linalg.norm(unit(L1b) - dR, axis=1))[:6]]; lev = float(np.linalg.norm(near, axis=1).max()) + S.T_LINK
         e, f = S.frame_of(dR); dd = S.disc(5.0, 2.0)
         self.rigid["rocker"] = (7, dR * lev + dd[:, :1] * e + dd[:, 1:] * f)
-        top = dR * (lev + 9.0)                                      # rod end on the rocker's top
-        eK, fK_ = S.frame_of(uK); hornP = uK * (fK + S.CROWN + capK * 0.5) + float(P["r_horn"]) * eK
+        if P.get("rod_low"):
+            # LOW rod (variant): the rocker's long arm at its base (link 1b + 1 mm), the horn a lug of link 1a beside hub K at
+            # strap level (r_horn >= 16 mm), rocker ratio i_rock <= 3 sets kK <= i_rock r_lobe tan(pa) / r_horn
+            top = dR * (lev + 1.0)
+            tK = unit(dR - (dR @ uK) * uK); hornP = uK * (fK + S.UP + S.T_LINK + 1.0) + float(P["r_horn"]) * tK
+            rs = np.arange(S.HUB_R, float(P["r_horn"]) + 5.0 + 1e-6, 2.0); ws_ = np.arange(-3.0, 3.01, 2.0); bn = unit(np.cross(uK, tK))
+            self.rigid["horn"] = (1, np.array([uK * (fK + S.UP) + r_ * tK + w_ * bn for r_ in rs for w_ in ws_]))
+        else:
+            top = dR * (lev + 9.0)                                  # rod end on the rocker's top
+            eK, fK_ = S.frame_of(uK); hornP = uK * (fK + S.CROWN + capK * 0.5) + float(P["r_horn"]) * eK
         n = max(3, int(np.linalg.norm(hornP - top) / S.SPACING)); sg = np.linspace(0, 1, n)[:, None]
         rod = top[None] * (1 - sg) + hornP[None] * sg
         self.rigid["rod"] = (7, rod - 1.5 * unit(rod))               # rod underside (O3)

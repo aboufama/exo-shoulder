@@ -56,6 +56,7 @@ LA1 = {"az": 100.6785, "el": 65.4034, "wd": 46.1583, "wa": -6.1871, "a1": 43.879
 PARAMS = dict(KR.PARAMS, **LA1)
 PARAMS.update(near=1, phys=0, capK=6.0, cam=1, d_mm=7.0, psi_c=0.0, side=0, rho=3.0, r_law=70.0, pa_max=45.0, lug_max=22.0,
               tail=1, tail_w=8.0, inv3=0, end_extra=0.0, fold_tooth=0, flipK=1)
+PARAMS["lug_max"] = 50.0
 
 
 def _rot(k, a):
@@ -211,28 +212,35 @@ def build(B, F, p):
         l2 = K.strap_member("link2", p2, p3, ("J2", "J3"), width=w, t=t, ramp_to=(("hub2", K.STACK), ("hub3", K.STACK)),
                             over=[("link1a", 1.0), ("link1b", 1.0), ("neck", 1.0)], end_mm=end)
         mem = hubs + first + [neck, l2]
-    info = {}
+    info = {}; joints = dict(J1=p1, K=pK, J2=p2, J3=p3); hubless = ()
     if cam and L.get("ok"):
         tip = _tip(p2, p3, L["coef"]); tw = float(p.get("tail_w", 8.0))
-        # the roller stub: the last 2 BOSS_R of the tail, its underside >= hub K's cap + 1 mm (crown) / link 1a + 1 (beside)
         tg = K.unit(p2 - np.einsum("ni,ni->n", p2, tip)[:, None] * tip); g = 2 * BOSS_R / 70.0
         tipA = K.unit(math.cos(g) * tip + math.sin(g) * tg)                                       # 8 mm back toward hub 2
-        dz = (K.CROWN + capK + 1.2) if L["emb"] == "crown" else (K.STACK + KA.KX + t + 1.2)
-        roller = K.strap_member("roller", tipA, tip, ("J2",), width=2 * BOSS_R, t=ROLLER_H, ramp_to=(("hubK", dz), ("hubK", dz)),
-                                end_mm=2 * BOSS_R + 2.0, climb_deg=None)
-        tail = K.strap_member("tail", p2, tipA, ("J2",), width=tw, t=t, ramp_to=(("hub2", K.STACK), ("roller", ROLLER_H)),
-                              over=[("link1a", 1.0), ("link1b", 1.0), ("hubK", 1.0)], end_mm=end)
-        mem = mem + [roller, tail]
-        if L["emb"] == "beside":                              # the tooth lug on link 1a: K's rim -> lug_max along the flank, 6 mm wide
+        # D = the drive contact (pseudo-joint on the roller axis): roller and tooth lug are exempt from K6 within
+        # HUB_R + 2 of it (their designed contact; stated as optimistic for state-A poses where they pass close)
+        joints["D"] = tip; hubless = ("D",)
+        if L["emb"] == "crown":                               # roller over K's cap: bottom >= cap top + 1.2 mm
+            roller = K.strap_member("roller", tipA, tip, ("J2",), width=2 * BOSS_R, t=ROLLER_H + 1.0,
+                                    ramp_to=(("hubK", K.CROWN + capK + 1.2), ("hubK", K.CROWN + capK + 1.2)), end_mm=2 * BOSS_R + 2.0, climb_deg=None)
+            extra = [roller]
+        else:                                                 # beside: the roller at the lug's level (link 1a, upper at K)
             fl = K.unit(L["coefL"][0] * K.unit(pK) + L["coefL"][1] * K.unit(p1) + L["coefL"][2] * K.unit(np.cross(pK, p1)))
-            gl = float(p["lug_max"]) / 70.0; lugE = K.unit(math.cos(gl) * K.unit(pK) + math.sin(gl) * fl)
-            mem.append(K.strap_member("lug", pK, lugE, ("K",), width=6.0, t=t, ramp_to=(("hubK", K.STACK + KA.KX), ("hubK", K.STACK + KA.KX)),
-                                      end_mm=float(p["lug_max"]) + 2.0))
+            lug_len = min(float(p["lug_max"]), float(L["r_c"].max()) + 3.0); gl = lug_len / 70.0
+            lugE = K.unit(math.cos(gl) * K.unit(pK) + math.sin(gl) * fl)
+            lug = K.strap_member("lug", pK, lugE, ("K", "D"), width=6.0, t=t, ramp_to=(("hubK", K.STACK + KA.KX), ("hubK", K.STACK + KA.KX)),
+                                 over=[("link1b", 1.0)], end_mm=lug_len + 2.0)
+            roller = K.strap_member("roller", tipA, tip, ("J2", "D"), width=2 * BOSS_R, t=ROLLER_H + 1.0, ramp_to=(("lug", 0.0), ("lug", 0.0)),
+                                    over=[("link1b", 1.0)], end_mm=2 * BOSS_R + 2.0, climb_deg=None)   # after the lug (fit order)
+            extra = [lug, roller]; info["lug_mm"] = round(lug_len, 1)
+        tail = K.strap_member("tail", p2, tipA, ("J2",), width=tw, t=t, ramp_to=(("hub2", K.STACK), ("roller", ROLLER_H + 1.0)),
+                              over=[("link1a", 1.0), ("link1b", 1.0), ("hubK", 1.0)] + ([("lug", 1.0)] if L["emb"] != "crown" else []), end_mm=end)
+        mem = mem + extra + [tail]
         info.update(tail_deg=round(float(_ang(p2, tip).mean()), 1), emb=L["emb"])
     o = ok
     info.update(residual_deg=round(float(k["res"][o].max()), 5) if o.any() else None,
                 stretched=int(((k["state"] == 1) & o).sum()), a1e_max=round(float(k["a1e"][o].max()), 2) if o.any() else None)
-    return K.Chain(members=mem, ok=ok, q=q, joints=dict(J1=p1, K=pK, J2=p2, J3=p3), info=info)
+    return K.Chain(members=mem, ok=ok, q=q, joints=joints, info=info, hubless=hubless)
 
 
 KA.build = build; KR.build = build
@@ -251,6 +259,11 @@ def evaluate(B, params):
     if p.get("cam") and not L.get("ok"):                     # no working drive = not this design (a plain 3R with a stuck K, no tail)
         r["gap_nodrive"] = r["gap"]; r["gap"] = float(r["gap"]) + 100.0; r["honest"] = False
         r.setdefault("audit", []).append("drive: the one-tooth law has no valid prefix (no tail built)")
+    if p.get("gate_obj"):                                    # the kill-gate search: max plain reach s.t. hub 2 / K / hub 3 >= 0.8 in band
+        im = r.get("inband_member") or {}; pl = r.get("plain") or {}
+        short = sum(max(0.0, 0.8 - float(im.get(h, 0.0))) for h in ("hub2", "hubK", "hub3"))
+        r["gate"] = dict(reach_plain=pl.get("reach"), short=round(short, 4), hubs={h: im.get(h) for h in ("hub2", "hubK", "hub3")})
+        r["gap_model"] = r["gap"]; r["gap"] = round(100 * (0.9 - float(pl.get("reach", 0.0))) + 500 * short + (0 if L.get("ok") else 100), 3)
     kin = B._kit_last.get("kin")
     if kin is not None:
         ok = kin["ok"]; st = kin["state"]; ws = np.array([k_ == "ws" for k_ in B.kind])
