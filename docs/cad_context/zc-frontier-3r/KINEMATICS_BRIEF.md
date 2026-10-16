@@ -66,7 +66,7 @@ attached data files are listed at the end.
 - In that plane, a point is (r, phi): r is the distance from GH, phi the angle from the link's first axis (J1 for link 1,
   J2 for link 2).
 - **Hard requirement:** no part of a link may come closer to GH than the keep-out radius r_min(phi) below. The full
-  table is in `link_sketch_profiles.csv`, column `r_underside_mm`.
+  table is in `kinematics_data.json`, `link_keepout`.
 - **Target:** hug the keep-out. The verified design's links are 3 mm thick and lie right on it. Every mm further out
   moves metal away from the 2-14 mm band.
 - **Off the plane:** the keep-out holds within about ±4 mm of the link plane. Route the links along these planes; there
@@ -117,7 +117,7 @@ attached data files are listed at the end.
 - **Suggested landing:** on the top face around b +2 to +20, c ≈ 0. The verified arm end lands near (10.47, -66.90,
   68.03), 96 mm from GH.
 - **Arm end keep-out (hard):** between J3 and BOTTOM, its underside may not come closer to GH than 74 mm at J3,
-  rising to about 94 mm at the landing. The full grid is in `geometry.json`, `links.neck`; it tilts across the width.
+  rising to about 94 mm at the landing. The full grid is in `kinematics_data.json`, `link_keepout.arm_end`; it tilts across the width.
 - **Arm end height (target):** stay close to that keep-out, and within about 10 mm above BOTTOM's top face.
 
 ## 7. Check poses (base fixed)
@@ -134,9 +134,8 @@ outboard of its envelope start: 63.25 mm from GH for J1, 70.62 for J2, 83.25 for
 
 J1's outer centre never moves: (8.547, 57.755, 24.329).
 
-## Data files
+## Data file
 
-All in the same frame:
-- `geometry.json`: axes, joint ranges, key poses, BOTTOM frame, and the full keep-out grids;
-- `link_sketch_profiles.csv`: per link, phi, r_underside_mm (the keep-out) and the in-plane x/y;
-- `skeleton_views.png`: three views of the skeleton at rest.
+`kinematics_data.json`, in the same frame: joint axes and envelopes, required travel, J2 stop window, link keep-out
+profiles (phi, r_min) and the arm end's 3-D keep-out grid, the BOTTOM interface, and the check poses.
+`skeleton_views.png` (optional) shows the skeleton at rest.
