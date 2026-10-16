@@ -146,3 +146,12 @@ farm.
 - **Final encode:** PNG sequence to H.264 with ffmpeg (`-preset slow -crf 20 -pix_fmt yuv420p -movflags +faststart -an`).
 - **Repo access:** the repo was read only during production. Nothing from `data/raw/private/` or any personal folder is
   in the film.
+
+
+## Update 2026-10-16 ~07:10 UTC (end card only)
+
+The end card's "after the snapshot" line now gives the independently verified polish of the pin knee (H1): gap 26.45 =
+score 90.38 on Bench(110,360) exact at fold margin 10 (24.48 = 91.1 at the user's 5 deg margin; 28.21 on the round-3
+protocol; rows/skin-normal-3r-pin-knee.json v_polish_*), the first verified design above 90. "designs built as 3D CAD"
+became "designs built in 3D (14 as full CAD)" - 10 of the 24 builds are evaluator-band geometry (critic's note). Scores are
+rounded to 2 decimals. The rest of the film is unchanged (repo snapshot 05:11Z).
