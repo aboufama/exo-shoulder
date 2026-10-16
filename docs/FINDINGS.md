@@ -1847,3 +1847,28 @@ measured by the encoder, not hidden. The lead / the user has three choices:
 * The knee stop's held-out cost, re-scored (or the stop moved to 153.5 deg, which is free on both benches but
   gives up 4 deg of singularity margin).
 * R8's keyword masses (as BDp).
+
+## pick1's K hold: the lag is cosmetic for proximity, and a detent cannot beat a plain spring (2026-10-16, l1_minarc-pick1, user_minarc_pick1; docs/research/pick1_k_hold.md)
+
+- **What the lag costs.** The dynamics judge's simulated K trajectory (0.08 preload, 9.3 deg behind the plan) was posed
+  by FK through the judge's hinges, with the cuff's simulated twist applied to the arm parts.
+  - On Reach a high shelf it keeps the metal slightly *farther* from the skin: min clearance 1.61 -> 1.78 mm.
+  - In-band 2-14 is unchanged (87.9 / 88.0 %); in-band 2-10 drops 66.6 -> 65.2 %. No frame touches (exact winding number).
+  - Wash opposite shoulder is unchanged.
+  - The R17 failure was a tracking and cuff-twist failure (4.6 deg), not a proximity one.
+- **The hold at stop A sets the peak drift; what K does after breakaway does not.** Measured in the judge:
+  - A flank detent (0.03 spring + 0.035 detent, gone by 2 deg) drifts 7.15 deg.
+  - A two-rate helper leaf (the same torque) drifts 7.08.
+  - A plain 0.06 spring drifts 6.38.
+  - So drift is about 0.0074 N.m of reflected cuff torque per degree of lag at breakaway. Drift <= 4 deg needs <= 0.042
+    N.m at stop A, and no angle-only passive law gives a high hold with a low breakaway.
+- **The 0.048 N.m demand is a worst-direction envelope.** With gravity in its real direction (the red team's method,
+  unchanged), state A needs 0.023 N.m at 1 g and 0.0355 at 2 g (worst pose: elevation 165). In the judge at 2 g,
+  K never leaves stop A on any of the 8 clips at 0.040 N.m.
+- **Design change: K preload 0.08 -> 0.04 N.m (same spring, 0.64 preload turns).**
+  - R17 PASSES on the L1: drift 3.68 deg, twist 1.98, M_GH 0.061 N.m. The L1 goes 6 -> 7 / 19; R11 0.404 -> 0.344 kPa.
+  - The strip stress at stop B halves: about 670 MPa.
+  - Measurement change, stated: `judge/dynamics.py` now reads the preload a design declares (build_fixes.spring.preload,
+    else 0.08). No earlier number moves.
+- **R8 builder fix.** Material now comes from an explicit per-part table in user_style_minarc.py; a part with no row
+  stops the build. The CAD's custom mass is 142.1 g, not 178.2: links 1a / 1b / 2 were billed as NdFeB / steel.

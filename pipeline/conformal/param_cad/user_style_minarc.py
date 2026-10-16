@@ -126,8 +126,12 @@ def arbor_pin(k, F):
     return pin
 
 
+MAG_H = 1.5                                                                                 # stock O3 x 1.5 diametric (was a non-stock 1.4)
+DOWEL_STOCK = "ISO 8734 O3 x 6 m6 hardened (stock length), faced to 5.65 mm"                # stock 3 x 6, one facing op (the press depth stays 3 mm)
+
+
 def magnet(k, F):
-    c = CAPK; return disc(np.zeros(3), unit(k), c["mag_r"] - 0.025, F + c["arbor_top"] - c["mag_h"] + 0.1, F + c["arbor_top"] - 0.1)
+    c = CAPK; return disc(np.zeros(3), unit(k), c["mag_r"] - 0.025, F + c["arbor_top"] - c["mag_h"], F + c["arbor_top"] - c["mag_h"] + MAG_H)   # stock O3 x 1.5 on the pocket floor
 
 
 def clock_spring(k, F):
@@ -343,7 +347,7 @@ def profile_link_split(label, ex, ey, start, end, Dq, Rq, axes, hr2, t=T, w=W, n
     if sol is None or not sol.isValid() or len(sol.Solids()) != 1: return profile_link(label, ex, ey, start, end, Dq, Rq, axes, hr2, t, w)
     rep = dict(split=f"{n} strips of {w / n:.2f} mm glued side by side", strips=reps,
                over_L1_max_outside_footprints=max((r_["over_L1_max_outside_footprints"] or 0) for r_ in reps),
-               max_climb=max(r_["max_climb"] for r_ in reps), process=reps[0]["process"].replace("ONE side-view sketch", f"{n} side-view sketches side by side"))
+               max_climb=max(r_["max_climb"] for r_ in reps), process=reps[0]["process"].replace("ONE side-view sketch", f"{n} side-view sketches side by side").replace("; 3+2-axis or wire EDM)", "; 3+2-axis milling - a wire cannot cut strips of different profiles side by side)") if n > 1 else reps[0]["process"])
     print(f"{label}: {n}-strip bar glued, valid {sol.isValid()}, solids {len(sol.Solids())}", flush=True)
     return sol, rep
 
@@ -400,7 +404,7 @@ def build_links(M, stops):
     for th in stops["J2"]["homes"]: body = body.cut(arc_slot_cutter(H(2), Uu[2], th + q_lo, th + q_hi, -1.0, PL + 0.1))
     dws = []
     for i, th in enumerate(stops["K"]["homes"]):
-        dw, hole = dowel_at(H(1), Uu[1], th, F4[1]); body = body.cut(hole); dws.append(("l1b", f"K stop dowel {i + 1} of 2: ISO 8734 O3 x 5.65 m6 hardened (stop A dK 0 / "
+        dw, hole = dowel_at(H(1), Uu[1], th, F4[1]); body = body.cut(hole); dws.append(("l1b", f"K stop dowel {i + 1} of 2: {DOWEL_STOCK} (stop A dK 0 / "
                                                                                             f"stop B dK {math.degrees(stops['K']['q'][0] if abs(stops['K']['q'][0]) > 1e-9 else stops['K']['q'][1]):.2f}), "
                                                                                             "pressed 3 mm in the K upper boss, polished", dw))
     body = body.clean() if body.clean().isValid() else body
@@ -430,7 +434,7 @@ def build_links(M, stops):
     body = body.cut(USP.bore_cutter_R(u[1], F[1], hr[2])).cut(at(USP.bore_cutter_R(u[2], F[2], hr[3]), c[2]))
     for th in stops["J2"]["homes"]:
         dw, hole = dowel_at(H(2), Uu[2], th, F4[2]); body = body.cut(hole)
-        out.append(("l2", f"J2 stop dowel: ISO 8734 O3 x 5.65 m6 hardened (q2 stops {stops['J2']['meta']['window_deg'][0]:.2f} / "
+        out.append(("l2", f"J2 stop dowel: {DOWEL_STOCK} (q2 stops {stops['J2']['meta']['window_deg'][0]:.2f} / "
                           f"{stops['J2']['meta']['window_deg'][1]:.2f} deg), pressed 3 mm in the J2 upper boss, polished; stop push limit "
                           f"{j2_push_limit()['push_limit_Nm_s0_1']:.1f} N.m (J2 MR117 pair s0 1.0)", dw))
     body = body.clean() if body.clean().isValid() else body
@@ -475,7 +479,7 @@ def hubs(M):
             sp_ = SPRING; rmax = sp_["r0"] + (sp_["n"] - 1) * sp_["d"]
             out.append((hi, f"K clock spring: 0.3 x 5 mm {sp_['steel']} strip, {Lsp:.1f} mm, {sp_['n']} half-turns R{sp_['r0']:g}..R{rmax:.2f}, outer hook in the cap slot, "
                             f"inner end in the arbor slit; {sp_['rate']:g} N.m/rad, {sp_['preload']:g} N.m preload on stop A (polished spring steel)", at(sp, C[j])))
-            out.append(("l1a", "K encoder magnet O3 x 1.4 diametric NdFeB N35, Ni plated, in the arbor tip (the user's magnetic angle sensor sits in the cap pocket)",
+            out.append(("l1a", "K encoder magnet O3 x 1.5 diametric NdFeB N35, Ni plated, in the arbor tip (the user's magnetic angle sensor sits in the cap pocket)",
                         at(magnet(Uu[j], F4[j]), C[j])))
             rmax = SPRING["r0"] + (SPRING["n"] - 1) * SPRING["d"] + SPRING["t"] / 2
             rep["K"] = dict(crown_mm=crown, capK=capK, spring_length_mm=round(Lsp, 1), spring=SPRING, cap=CAPK, cap_valid=cap.isValid(), spring_valid=sp.isValid(),
@@ -567,6 +571,36 @@ def check_frames(M, dd, l1_stops, stops):
 
 
 # ---------------------------------------------------------------------------------------------------- main
+# THE MATERIAL TABLE (2026-10-16, R8 fix): one row per part KIND, matched on the part's identifier at the START of its name -
+# never on feature words further on ("O3 magnet pocket", "2 dowel holes" billed links 1a / 1b / 2 as NdFeB / steel: R8 239.8 g
+# reported vs 203.7 g real, gen-4b verifier). A part no row names stops the build: nothing falls through to a default.
+MATERIALS = [
+    (r"D8-0[1-5][a-z]? ", "Ti-6Al-4V", "TI"),                                    # base, links 1a / 1b / 2, member 3, knee link
+    (r"D8-06 ", "7075-T6 (BOTTOM merged with the pad mount)", 2.81),
+    (r"(J1|K|J2|J3) bearing \d MR117", "bearing steel", 7.8),
+    (r"(J1|K|J2|J3) outer spacer 17-4PH", "17-4PH", 7.8),
+    (r"(J1|K|J2|J3) inner spacer", "Ti-6Al-4V", "TI"),
+    (r"(J1|K|J2|J3) ring nut", "Ti-6Al-4V", "TI"),
+    (r"(J1|J2|J3) cap O20", "Ti-6Al-4V", "TI"),
+    (r"K clock-spring cap", "Ti-6Al-4V", "TI"),
+    (r"K clock spring:", "1.4310 spring steel (polished)", 7.9),
+    (r"K encoder magnet", "NdFeB, Ni plated", 7.5),
+    (r"(K stop dowel \d of 2|J2 stop dowel):", "hardened steel (polished)", 7.85),
+    (r"pin [ab]: iglidur", "iglidur", "IGL"),
+    (r"pin [ab]: retaining E-clip", "stainless (polished)", 7.9),
+    (r"UPPER ARM CUFF", "AlSi10Mg", 2.68),
+    (r"M4x6 ISO 10642", "stainless (polished)", 7.9),
+]
+
+
+def material_of(name):
+    """(material, density g/cm3) of one of OUR parts from MATERIALS; raises on a part no row names"""
+    import re
+    hits = [(m, r) for pat, m, r in MATERIALS if re.match(pat, name)]
+    if len(hits) != 1: raise ValueError(f"material table: {len(hits)} rows match part {name[:80]!r} (exactly one must)")
+    m, r = hits[0]; return m, {"TI": USP.TI, "IGL": USP.IGL}.get(r, r)
+
+
 def main():
     ap = argparse.ArgumentParser(); ap.add_argument("--out", default="user_minarc_bdp"); ap.add_argument("--l1", default="l1_minarc-bdp")
     ap.add_argument("--params"); ap.add_argument("--params-file"); ap.add_argument("--a1max", type=float, default=BM.A1MAX_FIX)
@@ -634,17 +668,7 @@ def main():
         trep = {}; m = USP.tess(s, fine=not user, report=trep)
         sc.add_geometry(m, node_name=f"{g}|{n}|{i}", geom_name=f"{g}|{n}|{i}")
         mm = m.copy(); mm.merge_vertices(); vol = abs(mm.volume) if mm.is_watertight else s.Volume()
-        if user: mat, rho = "user part", None
-        elif "iglidur" in n: mat, rho = "iglidur", USP.IGL
-        elif "bearing" in n: mat, rho = "bearing steel", 7.8
-        elif "17-4PH" in n: mat, rho = "17-4PH", 7.8
-        elif "dowel" in n.lower(): mat, rho = "hardened steel (polished)", 7.85
-        elif "clock spring" in n: mat, rho = "1.4310 spring steel (polished)", 7.9
-        elif "magnet" in n: mat, rho = "NdFeB, Ni plated", 7.5
-        elif hwr: mat, rho = "stainless (polished)", 7.9
-        elif "7075-T6" in n: mat, rho = "7075-T6 (BOTTOM merged with the pad mount)", 2.81
-        elif n.startswith("UPPER ARM CUFF"): mat, rho = "AlSi10Mg", 2.68
-        else: mat, rho = "Ti-6Al-4V", USP.TI
+        mat, rho = ("user part", None) if user else material_of(n)
         pf.append(dict(k=i, group=g, name=n, vol_cm3=round(vol / 1000, 3), material=mat, mass_g=None if rho is None else round(vol / 1000 * rho, 2),
                        valid=bool(s.isValid()), faces=len(s.Faces()), solids=len(s.Solids()), watertight_judge_units=trep.get("watertight_judge_units")))
     sc.export(os.path.join(dd, "exo.glb"))
