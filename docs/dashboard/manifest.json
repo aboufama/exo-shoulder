@@ -4,30 +4,30 @@
   "title": "Concept bench morphologies",
   "description": "One row per morphology in the swarm's catalogue: status, the agent's claimed bench numbers, the verifier's re-measured numbers (v_), its best sweep configuration so far, and the 3R baseline once (is_baseline), and the complexity count (the simplicity number, never part of the gap or score): complexity = points, lower = simpler, 0 = three pins on bearing pairs and three links; complexity_items = where the points come from; passive_trans = passive translations (more than 2 = not buildable); mechanism_confidence = counted or estimated. Built from docs/concepts/catalogue.json, families.json, rows/*.json (complexity: tools/simplicity.py on each row's mechanism record, docs/SIMPLICITY.md) and sweeps/*.json.",
   "file": "data/morphs.json",
-  "sha256": "78b362c7e29d8344d67c5a0cbbe57e40cc3a7f7820dae1fa984973470cfc3180",
+  "sha256": "8708346e1dda7053a59c076f2df73fc44c92a95d059fd748f3b479a5f83f235a",
   "rows": 97,
-  "bytes": 141926,
-  "updated": "2026-10-16T05:11:14Z"
+  "bytes": 141923,
+  "updated": "2026-10-16T05:24:58Z"
  },
  {
   "id": "sweeps",
   "title": "Concept bench sweeps",
   "description": "Every configuration a morphology agent evaluated on the concept bench, with its time, gap, its morphology's best gap so far (best_gap) and the record over all morphologies so far (record_gap); passed_over marks a configuration its agent measured before its claimed row and rejected (better than the claim), which counts for no best. Built from docs/concepts/sweeps/*.json; a morphology with more than 1500 configurations is thinned for the page (every running-best and record row, its 300 best gaps and an even sample of the rest), while best_gap, record_gap and n_configs come from the full set.",
   "file": "data/sweeps.json",
-  "sha256": "f9d2531bc83a48656eb0a316b1ae9076173c05a05b30d4e90e7dc39e713a307c",
-  "rows": 23592,
-  "bytes": 5965479,
-  "updated": "2026-10-16T05:11:14Z"
+  "sha256": "a3c225e5796733fbe6df8942559d97bacd7f469372b72ca7c3af0d3c07fb9af4",
+  "rows": 24828,
+  "bytes": 6278310,
+  "updated": "2026-10-16T05:24:58Z"
  },
  {
   "id": "cad",
   "title": "Built CAD judge results",
   "description": "One row per judged design and requirement: value, threshold and pass from the outside judges, timed by the judge output (score files: the earliest of their commit, their file time and the first commit whose docs report the design; scorecard-only values: the scorecard's commit). Built from tools/judged_history.py, judge/scorecard.json files and judge/requirements.json.",
   "file": "data/cad.json",
-  "sha256": "ccf94e773d86692a8e6de69f712eec22c7a2856ac8a58ee6d212b8c0e627b5ad",
-  "rows": 224,
-  "bytes": 69787,
-  "updated": "2026-10-16T05:11:14Z"
+  "sha256": "8a24e011da0c543251f05503dbb925c2cc737ecaa954ded0e4af76f25fc85738",
+  "rows": 237,
+  "bytes": 74024,
+  "updated": "2026-10-16T05:24:58Z"
  },
  {
   "id": "gpu_evals",
@@ -54,20 +54,20 @@
   "title": "Requirement board",
   "description": "Latest status of R1-R17 (with R1-aim and R5-aim) for the best judged 3-DOF design (most passes on its scorecard, then R1), with the best value any 3-DOF design reached under the current judging rules. Built from judge/scorecard.json files and judge/requirements.json.",
   "file": "data/reqs.json",
-  "sha256": "a50900501d7dafcc9af11a4f667833e4a0add197fb86d28660dc04a1a35e0c9d",
+  "sha256": "692547ffaf5674a8609f72b23a8b878e935a64c16cb973e2e865ad2bf8b6fbe7",
   "rows": 19,
-  "bytes": 8015,
-  "updated": "2026-10-16T05:11:14Z"
+  "bytes": 8126,
+  "updated": "2026-10-16T05:24:58Z"
  },
  {
   "id": "events",
   "title": "Event log",
   "description": "What happened and when: the swarm's own log (docs/concepts/events.jsonl), one milestone per judged design and every new built-CAD R1 record (from the judge outputs).",
   "file": "data/events.json",
-  "sha256": "c86c550607525f61aa06d5480851a1c97bab8b548b17a00709f7d1a6fc01afbe",
-  "rows": 387,
-  "bytes": 124986,
-  "updated": "2026-10-16T05:11:14Z"
+  "sha256": "429dea6e87ef05f67ae3bad332092541ba8ded600649b0cc71aa4044db252019",
+  "rows": 390,
+  "bytes": 125986,
+  "updated": "2026-10-16T05:24:58Z"
  },
  {
   "id": "spend",
@@ -84,29 +84,29 @@
   "title": "Arm reach in 3-D",
   "description": "One row per built design and everyday arm pose of the R16 workspace judge: where the upper arm points and whether the built design reaches it, with the reason if not. Built by tools/coverage3d.py from judge/workspace.json files (newest 8 designs).",
   "file": "data/cov3d.json",
-  "sha256": "3d6a55100a9299ebf6c0731f68dcc2ef295588e225f7e9c0302697a8bef096f8",
-  "rows": 1198,
-  "bytes": 407495,
-  "updated": "2026-10-16T04:57:19Z"
+  "sha256": "529965ef9a9362bdaf37873bfc3490c3fb6a18db9ea443a51f92f2df269a94cc",
+  "rows": 1436,
+  "bytes": 478921,
+  "updated": "2026-10-16T05:24:58Z"
  },
  {
   "id": "motion",
   "title": "Motion previews",
   "description": "Tiny monochrome previews of each concept's mechanism moving with the arm through the gallery's motion loop (frames spaced by equal travel of the arm and the mechanisms, one fixed camera for all), as SVG paths per frame ('=' repeats the frame before); generated by docs/concepts/viz/thumbs.mjs from the concept kinematics (docs/concepts/viz/kin.js and concepts/*.js).",
   "file": "data/motion.json",
-  "sha256": "1de1b475a40e5b4fd97ce54b85c400a00b2e483d78c50821c99795ac9ea5558c",
-  "rows": 81,
-  "bytes": 1249914,
-  "updated": "2026-10-16T05:11:14Z"
+  "sha256": "9a5262cdac3540734f05efe1cad819f056a30d85ff5843e42b4a4f63011a56d1",
+  "rows": 88,
+  "bytes": 1346493,
+  "updated": "2026-10-16T05:29:12Z"
  },
  {
   "id": "meta",
   "title": "Data build info",
   "description": "When tools/dash_build.py last gathered the data, the repo commit, and any warnings it printed.",
   "file": "data/meta.json",
-  "sha256": "e340e7db83b8f4299789721e3620adc31ecd090432f4d95902dbcd3b9819afc1",
+  "sha256": "72d4988cb22dce573900e67f0703d0ddc3dbba994d00f97ac0ab7d6ba547f05b",
   "rows": 1,
   "bytes": 2087,
-  "updated": "2026-10-16T05:11:14Z"
+  "updated": "2026-10-16T05:29:12Z"
  }
 ]

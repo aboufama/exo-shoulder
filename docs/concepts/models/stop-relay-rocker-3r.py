@@ -39,9 +39,11 @@ NAME = "Stop-relay rocker 3R: J1 on a spring-centred acromial rocker that moves 
 PARAMS = dict(az=102.78, el=65.35, a1=40.68, a2=73.76, wd=84.49, wa=-12.76, sigma=-1, q=0.979,
               width=12.0, t_link=3.0, rad0=7.5, rad1=10.0, rad2=7.5, rad3=7.5, end_extra=0.0, vm=0,
               beta=30.0, phi=330.0, az_c=None, el_c=None,   # pivot: u1 tilted by beta about a normal turned phi about u1
-              m_lo=10.0, m_hi=10.0, m_sw=10.0, qmax=75.0, l1_over=1, relay=1, relay_lo=1, relay_hi=1, lift1=0.0, lift2=0.0, near=0)
+              m_lo=10.0, m_hi=10.0, m_sw=10.0, qmax=75.0, l1_over=1, relay=1, relay_lo=1, relay_hi=1, lift1=0.0, lift2=0.0, connect=1, near=0)
 # lift1 / lift2 (mm): the upper member's end zone at J1 (link 1) / J2 (link 2) sits lift mm above the 0.15 running gap
 # (a spacer: only raises metal), so a folded link pair clears by >= 1 mm just past K6's 12-mm joint zone
+# connect 1: a workspace pose taken in relay mode (B/C) counts only if a continuous motion reaches it from the mode-A
+# region (connected(): flood fill over the ws grid; red team 2026-10-16, docs/concepts/stop-relay-rocker-3r.md)
 # relay_lo / relay_hi 0: that side has no relay (J2's stop is then a plain joint limit: poses past it are not taken)
 SLIM = SPM.SLIM
 ELEV_OVER = SPM.ELEV_OVER
@@ -191,6 +193,42 @@ def extras(B, r, p):
     return r
 
 
+def connected(B, p, take):
+    """(P,) bool: workspace poses reachable by CONTINUOUS motion from the mode-A region. Graph: nodes = taken ws poses;
+    an edge joins two grid neighbours (one step in plane, elevation or axial) when every 2-deg frame of the slerped
+    motion between them closes (relay + J2 closure + ranges) and q0 never steps > 10 deg (no rocker snap); seeds = the
+    taken mode-A poses (q0 = 0, the leader's own region). Relay poses not reached are isolated islands: a static pose the
+    rocker cannot get to without passing its own fold (sub-chain margin < m_sw) or a q0 jump. Clip frames are left to K2."""
+    F = getattr(B, "_kitF", None) or K.frames(B); n = len(B.kind)
+    ws = [i for i in range(n) if B.kind[i] == "ws" and take[i]]
+    _, _, _, _, q0, mode, _, _ = relay(F, p)
+    key = {(B.poses[i]["plane"], B.poses[i]["elev"], B.poses[i]["axial"]): i for i in ws}
+    vals = [sorted({B.poses[i][k] for i in range(n) if B.kind[i] == "ws"}) for k in ("plane", "elev", "axial")]
+    def nbrs(i):
+        x = (B.poses[i]["plane"], B.poses[i]["elev"], B.poses[i]["axial"])
+        for d in range(3):
+            j = vals[d].index(x[d])
+            for jj in (j - 1, j + 1):
+                if 0 <= jj < len(vals[d]):
+                    y = list(x); y[d] = vals[d][jj]; t = key.get(tuple(y))
+                    if t is not None: yield t
+    def edge(a, b):
+        sub = K._slerp_frames(F, a, b, step_deg=2.0)
+        if sub is None: return True
+        _, u1, _, p3, qq, _, ok, _ = relay(sub, p)
+        _, ok2, _ = K.closure(u1, p3, p["a1"], p["a2"], p["sigma"], margin_deg=min(p["m_lo"], p["m_hi"]) - 1e-3)
+        return bool((ok & ok2).all() and (np.abs(np.diff(qq)) <= 10.0).all())
+    conn = np.zeros(n, bool); front = [i for i in ws if mode[i] == 0]
+    for i in front: conn[i] = True
+    while front:
+        nxt = []
+        for a in front:
+            for b in nbrs(a):
+                if not conn[b] and edge(a, b): conn[b] = True; nxt.append(b)
+        front = nxt
+    return conn, np.array([mode[i] != 0 for i in range(n)])
+
+
 def snap(p):
     p = dict(PARAMS, **p); p["q"] = min(1.0, max(0.8, float(p["q"]))); p["sigma"] = 1 if float(p["sigma"]) >= 0 else -1
     p["end_extra"] = min(8.0, max(0.0, float(p.get("end_extra", 0.0))))
@@ -206,7 +244,14 @@ def snap(p):
 def evaluate(B, params):
     """tools/concept_cma.py hook -> (params, report)"""
     p = snap(params)
-    r = K.evaluate(B, build, p); r = declared_audit(r, p); r = extras(B, r, p)
+    r = K.evaluate(B, build, p); r = declared_audit(r, p)
+    if p.get("connect", 1):                                    # isolated relay islands are not reached (red team)
+        take = np.array([_taken(B, j) for j in range(len(B.res))]); conn, relayed = connected(B, p, take)
+        drop = [j for j in range(len(B.res)) if take[j] and B.kind[j] == "ws" and relayed[j] and not conn[j]]
+        for j in drop: B.res[j] = None
+        B._kit_last["take"] = B._kit_last["take"].copy(); B._kit_last["take"][drop] = False
+        r["islands_dropped"] = len(drop)
+    r = extras(B, r, p)
     if p.get("near"):
         r["gap_plain"] = r["gap"]; r["gap"] = r["gap_near1"]
         for k in ("reach", "follow", "inband14", "contact"): r[k + "_plain"] = r[k]; r[k] = r["near1"][k]

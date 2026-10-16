@@ -215,3 +215,10 @@ See the "CPU farm" section of `docs/RUNPOD_COSTS.md` for the measured run: R2 bo
   4 long jobs in progress with 12-15 queued: a 0-s diagnostic job waited 102 s, and the on-farm canary (a 2-s job,
   submitted 21:50) was still queued when its client gave up at 900 s. Every agent's sweep, upload (`have` / `put`) and ping shares these 4 slots. That is the case for the
   16-slot fix.
+
+## Scaler (2026-10-16 05:25 UTC)
+
+exo-cpu1 sat at 5 running workers with 9-16 jobs queued and workersMax 9 under `QUEUE_DELAY` (value 4 s), with
+cpu3c-8-16 stock "High" in EU-RO-1 and the account's workersMax sum at its quota of 10 (cpu1 9 + blender 1). The scaler was
+switched to `REQUEST_COUNT` with value 4 (one worker per 4 requests = the 4 job slots of a farm-3 worker). Watch whether
+workers rise above 5; revert to QUEUE_DELAY 4 if it does not help.
