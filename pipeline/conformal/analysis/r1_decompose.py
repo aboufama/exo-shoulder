@@ -23,9 +23,11 @@ HRm = np.array(json.load(open(os.path.join(FX, "..", "avg", "body_mesh.json")))[
 # ---- metal: exactly score_design.py's samples (same node order, same seed), plus a label per sample
 MET, LAB = {}, {}
 labels = []
+sys.path.insert(0, FX); import metal_groups as MG
+SCORED, _EXCL = MG.classify({n.split("|")[0] for n in sc.graph.nodes_geometry}, MG.clip_groups(C))   # score_design.py's group rule (split members l1a / l1b count)
 for node in sc.graph.nodes_geometry:
     T_, gname = sc.graph[node]; g = node.split("|")[0]
-    if not (g == "base" or (g[0] == "l" and g[1:].isdigit()) or g in ("H", "cuff")): continue
+    if g not in SCORED: continue
     m = sc.geometry[gname].copy(); m.apply_transform(T_)
     n = int(np.clip(m.area / 1.5, 500, 60000)); p, _ = trimesh.sample.sample_surface(m, n, seed=3)
     if g == "H":
@@ -51,7 +53,8 @@ def skin(P):
     pts = a + uv[:, :1] * (b - a) + uv[:, 1:] * (c - a); nr = np.cross(b - a, c - a); nr /= np.linalg.norm(nr, axis=1, keepdims=True) + 1e-12
     return pts, nr
 def metal(fr, pose):
-    parts = [MET[g] @ np.array(fr["G"][g]).reshape(3, 3).T for g in GORD if g != "H"]
+    T = fr.get("T", {})                                                          # per-group translation (offset-axis chains), as score_design.py
+    parts = [MET[g] @ np.array(fr["G"][g]).reshape(3, 3).T + np.array(T.get(g, (0.0, 0.0, 0.0)), float) for g in GORD if g != "H"]
     if "H" in MET:
         sg, _ = BP.segs(L_, S_, pose); parts.append(MET["H"] @ sg[2][0].T + sg[2][1])
     return np.concatenate(parts)

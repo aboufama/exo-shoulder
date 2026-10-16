@@ -69,7 +69,7 @@ WIN = {"bk1": 31.2491, "bk2": 37.9937, "a1max": 58.3565, "smhi": 13.6865, "smlo"
        "phib": -65.6717, "stk": 4.8534, "ang_min": 27.8544, "capK": 6.0}
 PARAMS = dict(G.PARAMS, **WIN)
 PARAMS.update(cam=1, tail=1, emb_mode="pair", emb="roller", lay="low", kK=0.6, smhi=28.0, L_arm=23.5, a0=2.0, rr=2.5,
-              r_law=62.0, pa_max=45.0, t_end=75.0)
+              r_law=62.0, pa_max=45.0, t_end=75.0, rho_max=1e9)
 
 
 def _rot(ax, a):
@@ -122,6 +122,7 @@ class RLDesign(G.GDesign):
         rad = 1.0 / np.maximum(np.abs(kap), 1e-9)
         convex_bad = (cen_side < 0) & (rad < rr + 1.0)
         good = (dth > 0) & (rate <= RATE_MAX) & ~lift & (kabs <= dKB + 1e-9) & (pa <= float(P["pa_max"])) & (rho >= S.HUB_R + rr + 1.0)
+        good &= rho <= float(P.get("rho_max", 1e9))                 # plate size cap: the law (q2 stop B) ends where the follower passes rho_max
         if not groove: good &= (side > 0.05) & ~convex_bad
         good[0] = True
         if not (pa[0] <= float(P["pa_max"]) and rho[0] >= S.HUB_R + rr + 1.0 and (groove or side[0] > 0.05)): good[:] = False
@@ -130,7 +131,7 @@ class RLDesign(G.GDesign):
         if nval < len(good):
             j = nval
             why_end = ("rate" if not (dth[j] > 0 and rate[j] <= RATE_MAX) else "liftoff" if lift[j] else "stopB" if kabs[j] > dKB else
-                       "pressure" if pa[j] > float(P["pa_max"]) else "hub2" if rho[j] < S.HUB_R + rr + 1.0 else "side" if side[j] <= 0.05 else "undercut")
+                       "pressure" if pa[j] > float(P["pa_max"]) else "hub2" if rho[j] < S.HUB_R + rr + 1.0 else "rho_max" if rho[j] > float(P.get("rho_max", 1e9)) else "side" if side[j] <= 0.05 else "undercut")
         L = dict(ok=nval > 4, ts=ts[:nval], q2t=q2t[:nval], dK=dK[:nval], th=th[:nval], pa=pa[:nval], rate=rate[:nval], emb=P.get("emb"),
                  q2hi=q2hi, s_q=s_q, why_end=why_end, r_c=np.zeros(nval), side=0.0, Lt=0.0, phi_t=None,
                  dK_max=float(np.degrees(kabs[:nval].max())) if nval else 0.0, t_max=float(np.degrees(ts[nval - 1])) if nval else 0.0,
@@ -380,9 +381,33 @@ def frozen(Pp, nc=110, nw=360):
     return KB.frozen(p, nc, nw)
 
 
+def viz_export(par):
+    """geometry of the fitted design (Bench(60,160)) for docs/concepts/viz/concepts/rim-lobe-arm-knuckle-3r.js"""
+    B = CB.Bench(n_clip=60, n_ws=160); r, M = _report(B, par); D = M.D; P = D.p; L_ = D.law()
+    R = lambda v, n=5: [round(float(x), n) for x in v]
+    def pts(name, step=3):
+        X = M.link_pts[name][1]; return [R(x, 2) for x in X[::step]]
+    sub = slice(None, None, 8)
+    lv = getattr(M, "_pair_lv", {}) or {}
+    fo = unit(L_["p_arm"]) * (lv.get("foll_bot", M.fK) + FOLL_H / 2)
+    G_ = dict(u=[R(x) for x in D.u], c=[R(x) for x in D.c], uK=R(D.uK), sa=R(D.sa), st=R(D.st), sn=R(D.sn), A=[round(D.a1, 3), round(D.a2, 3)],
+              branch=float(D.branch), m=R(D.m), f=[round(float(x), 2) for x in M.f], fK=round(float(M.fK), 2), capK=float(P.get("capK", 0)),
+              tr=round(float(M.tr), 2), tp=round(float(P["tp"]), 3), RUN=S.RUN, A0=R(M.fr["A0"]), A0m=R(M.fr["A0m"]), Bm=R(M.fr["Bm"]), eE=R(M.fr["eE"]),
+              psiA=round(math.degrees(D.psiA), 4), thLo=round(D.th_lo, 4), thHi=round(D.th_hi, 4), q2s=[round(x, 4) for x in D.q2_stops],
+              lawTh=R(L_["th"][sub], 3), lawDK=R(np.degrees(L_["dK"][sub]), 3), lawQ2=R(np.degrees(L_["q2t"][sub]), 3), emb=P.get("emb"),
+              foll=R(fo, 2), lug=[R(x, 2) for x in M.rigid["lug"][1][::4]] if "lug" in M.rigid else [],
+              plate=[R(x, 2) for x in M.rigid["plate"][1][::3]] if "plate" in M.rigid else [],
+              L1a=pts("L1a"), L1b=pts("L1b"), L2=pts("L2", 6))
+    keys = ("az1", "el1", "az2", "el2", "wd", "wa", "b3", "lE", "lc", "phiE", "phib", "stk", "ang_min", "bk1", "bk2", "sK", "a1max", "smhi", "smlo", "capK",
+            "emb", "lay", "kK", "L_arm", "a0", "rr", "rho_max")
+    return dict(P={k: P[k] for k in keys}, G=G_, report={k: r[k] for k in ("gap", "reach", "follow", "inband14", "contact")})
+
+
 if __name__ == "__main__":
     mode = sys.argv[1] if len(sys.argv) > 1 else "check"
     par = json.loads(sys.argv[2]) if len(sys.argv) > 2 else {}
+    if mode == "viz":
+        print(json.dumps(viz_export(par), default=float)); sys.exit()
     if mode == "frozen":
         t = time.time(); out = frozen(par); out["params"] = par; out["secs"] = round(time.time() - t, 1)
         if len(sys.argv) > 3: json.dump(out, open(sys.argv[3], "w"), indent=1, default=float)

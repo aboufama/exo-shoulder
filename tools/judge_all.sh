@@ -4,7 +4,7 @@
 # a crossing that lasts >= 3 frames (0.1 s) is always sampled. The l1_offset-skin-normal-3r first build's link 1 / link 2
 # crossing lasted 9 frames (Wave 71-79, 95-103, step 1); fast used to run every 12th frame on every other vertex and saw 0.0.
 set -e; cd "$(dirname "$0")/.."; ID=$1; PY=${PY:-python3}; S=2; P=1; [ "$2" == "fast" ] && S=6 && P=3
-(cd pipeline/full-exo && $PY -W ignore score_design.py designs/$ID 3 | tail -1 && BAND_HI=14 $PY -W ignore score_design.py designs/$ID 3 | tail -1)   # R1 pass band 2-14 mm, aim 2-10 (user 2026-10-15)
+(cd pipeline/full-exo && BANDS=10,14 $PY -W ignore score_design.py designs/$ID 3 | grep -E "^(shoulder metal|OVERALL)")   # R1 pass band 2-14 mm, aim 2-10 (user 2026-10-15), one pass; every posed group counts (metal_groups.py)
 $PY -W ignore judge/part_validity.py $ID | tail -8
 $PY -W ignore judge/body_contact.py $ID --step $S | head -6
 $PY -W ignore judge/part_contact.py $ID --step $P | head -8   # R6: dense surface samples both ways (judge/test_part_contact.py)
