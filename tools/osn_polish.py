@@ -288,8 +288,55 @@ def measure(task, outp, p):
                           fit=({k: out["fit"][k] for k in ("gap", "mode")} if "fit" in out else None), secs=out["secs"]), default=float), flush=True)
 
 
+def score(gap): return 100.0 * (1.0 - gap / 275.0)
+
+
+def gate(objs):
+    """docs/METHOD.md convergence gate on a history of objectives (gap, in order): < 1 score point gained over the second
+    half, < 0.5 over the last third, top-5 within 3 points"""
+    s = np.array([score(g) for g in objs]); n = len(s)
+    if n < 6: return dict(n=n, ok=False)
+    best = np.maximum.accumulate(s)
+    gh = float(best[-1] - best[n // 2 - 1]); gt = float(best[-1] - best[n - n // 3 - 1]); top = np.sort(s)[::-1][:5]
+    return dict(n=n, gain_half=round(gh, 2), gain_third=round(gt, 2), top5_spread=round(float(top[0] - top[-1]), 2),
+                ok=bool(gh < 1.0 and gt < 0.5 and top[0] - top[-1] < 3.0))
+
+
+def log_rows(files, sweep=os.path.join(REPO, "docs", "concepts", "sweeps", "offset-skin-normal-3r.json"), write=True):
+    """merge the polish rows (CMA outputs) into the sweep log (stage polish-big-<stream>, bench noted); returns the
+    polish history in evaluation order and the gate on it"""
+    d = json.load(open(sweep)); have = {r.get("tag") for r in d if str(r.get("stage", "")).startswith("polish-big")}
+    k = max(r["k"] for r in d) + 1; base = base_params(); new = []; hist = []
+    rows = []
+    for f in files:
+        for r in json.load(open(f)): rows.append(r)
+    rows.sort(key=lambda r: (r.get("gen", 0), r["tag"].split("-")[1], r["tag"]))
+    for r in rows:
+        rep = r.get("report") or {}
+        if r["tag"] in have: continue
+        p = dict(base, **r["params"])
+        if rep.get("S"): p["S_a"], p["S_t"], p["R_r"] = rep["S"]
+        row = dict(k=k, t=time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()), stage="polish-big-" + r["tag"].split("-")[1],
+                   bench="Bench(110,360) fast, verifier checks (crowns / strap tops / link 2 vs member 3)", params=p,
+                   **{m: rep.get(m) for m in ("inband14", "inband10", "reach", "follow", "contact")}, gap=r["obj"] if not r.get("error") else None,
+                   model_gap=rep.get("model_gap"), why=rep.get("why"), S=rep.get("S"), gap_near1=rep.get("gap_near1"),
+                   near_min=rep.get("near_min"), honest=not r.get("error"), tag=r["tag"], gen=r.get("gen"))
+        if r.get("error"): row["error"] = r["error"]
+        new.append(row); k += 1
+    if write and new:
+        d += new; json.dump(d, open(sweep + ".tmp", "w"), indent=1, default=float); os.replace(sweep + ".tmp", sweep)
+    allp = [r for r in d if str(r.get("stage", "")).startswith("polish-big")] if write else new
+    hist = [r["gap"] if r.get("gap") is not None else 400.0 for r in allp]
+    return allp, gate(hist), len(new)
+
+
 def main():
     a = sys.argv[1:]
+    if a[0] == "log":
+        allp, g, nn = log_rows(a[1:]); ok = [r for r in allp if r.get("gap") is not None]; ok.sort(key=lambda r: r["gap"])
+        print(f"logged {nn} new rows; polish history {len(allp)}; gate {g}")
+        for r in ok[:8]: print(r["k"], r["tag"], r["gap"], r["reach"], r["follow"], r["inband14"], r["contact"], {k: r["params"][k] for k in FREE})
+        return
     if a[0] == "buildpart":
         buildpart(int(a[1]), int(a[2]), int(a[3]), int(a[4]), a[5], int(a[6]) if len(a) > 6 else 2)
     elif a[0] == "assemble":

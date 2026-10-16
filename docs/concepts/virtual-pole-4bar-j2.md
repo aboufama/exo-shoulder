@@ -52,16 +52,18 @@ Away from home the pole moves.
 * **Mobility.** Spherical Grubler with 6 bodies and 6 revolutes: 3(6-1) - 2*6 = 3. The loop alone: 3(4-1) - 2*4 = 1.
   The numeric Jacobian of the arm's rotation with respect to (phi1, theta, q3) is checked at the taken poses (red
   team below).
-* **Joints.** 0 passive translations, no slide. Six O20 bearing pairs, each at its real 20 mm x 12.25 mm envelope (K4).
+* **Joints.** 0 passive translations, no slide. Six bearing pairs, each at its real envelope (K4): all O20 x 12.25 mm
+  by default; see Pins below for the slim option.
 * **Undetermined coordinates: none.** The cranks and coupler are set by closure. In MVP1 the arm drives everything
   through the cuff. In MVP2, crank A's pin is the J2 actuator.
 * **Ranges in ok.**
   - Both transmission angles (crank vs coupler at A1 and B1) within [25, 155] deg.
   - Coupler-curve crossing angle >= 12 deg. The 3R's 10 deg fold margin equals 11-34 deg here.
-  - Pins of one body >= 20 deg apart.
+  - Pins of one body, and each pin against its body's J1 / J3 hub, >= 22 deg apart (two O20 bearings side by side).
   - Closure residual < 0.5 deg (measured 1e-4 deg).
-* **Pins. J1, A0 (the J2 drive in MVP2, the encoder in MVP1) and J3 are O20 v5 hubs (MR117-2RS pair, 12.25 mm stack). With `slim=1`, the three PASSIVE pins (B0, A1, B1) are MR63ZZ pairs (3 x 6 x 2.5, tools/hardware_catalogue.json: two plates, ~6 mm stack), crown 6 mm, footprint kept at the O20 disc (conservative). This is the thick-panel-origami move: thin passive hinges so crossing layers lift less. Default slim=0 (all O20).
-* **Members (K4 / K5 / K7).**** Every rigid body's straps form ONE polyline member (link 1: J1 -> nearer ground pin ->
+* **Pins.** J1, A0 (the J2 drive in MVP2, the encoder in MVP1) and J3 are O20 v5 hubs (MR117-2RS pair, 12.25 mm
+  stack). With `slim=1`, the three PASSIVE pins (B0, A1, B1) are MR63ZZ pairs (3 x 6 x 2.5, tools/hardware_catalogue.json: two plates, ~6 mm stack), crown 6 mm, footprint kept at the O20 disc (conservative). This is the thick-panel-origami move: thin passive hinges so crossing layers lift less. Default slim=0 (all O20).
+* **Members (K4 / K5 / K7).** Every rigid body's straps form ONE polyline member (link 1: J1 -> nearer ground pin ->
   other ground pin; coupler: far pin -> near pin -> J3), so a body never collides with itself. Layers: the cranks lie
   lowest. The coupler passes over the cranks, the neck and link 1's pins (`over`, >= 1 mm), and link 1 passes over the
   cranks and the coupler's pins. K6 checks every other pair.
