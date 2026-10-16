@@ -8,7 +8,9 @@
  * (both 50-100), u1 / j3 = the champion's dome J1 and humerus J3 axes; a kinematic loop screen over kappa 15-25,
  * b1 / b2 55-95 and the rocker phases closed every loop frame at these values. Closed form as rolling-cone-elbow: t =
  * the root of angle(u1, R_rel(t) j3) = angle(u1, arm j3) on the monotone segment holding t = 0, 10 deg margin at a fold
- * end; both rockers in ONE 5.5 mm layer at 66 mm (schematic), spanning the contact range used on the loop +- 10 deg. */
+ * end; both rockers in ONE 5.5 mm layer at 66 mm (schematic), spanning the contact range used on the loop +- 10 deg.
+ * As in rolling-cone-elbow, a rocker passes ~21 mm from the humerus axis line (inside the deltoid) somewhere on the loop:
+ * the spec's phase / site sweep has to trade that against closure. */
 (function () {
   const K = (typeof window !== 'undefined' ? window : globalThis).KIN, V = K.V, M = K.M;
   const P = Object.assign({}, { az: 2.43, el: 80.68, wd: 86.33, wa: 21.83, kappa: 20, beta1: 75, beta2: 75, gamma: 0, gamma2: 180,
