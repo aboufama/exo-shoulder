@@ -2428,7 +2428,7 @@
   "name": "Split two-sided knuckle: K on link 1 opens at the stretched end (winner's rod), K2 on link 2 near J2 folds a2 at the folded end (crown follower on hub 2)",
   "family": "redundant 5R with two determined spares (cam-slaved knuckles, both from q2)",
   "lens": "round7:two-rise-lobe -> folded relief moved off link 1 (from the measured kill)",
-  "status": "ideated",
+  "status": "dead",
   "t_ideated": "2026-10-16T15:33:10Z",
   "source": "round 7 judge (docs/concepts/round7_ideation.md)",
   "description": "The winner unchanged on link 1 (K, rod drive, stretched law) plus a slaved knuckle K2 on link 2, 21-40 deg from J2 (the band where a link-2 hub stays in band). K2 is driven by an MR63ZZ roller on link 2a riding a folded-end crown track on hub 2's cap (the rim is fixed to link 1b, so q2 drives both spares: 3 active, K and K2 never read). Folded / overhead-folded (th 10-30): K2 folds link 2b so the effective a2e drops from 61.6 toward 41-45, which lowers th_min = |a1 - a2e| + 5 without opening link 1. Precedent: cam-unfold-4th's folded lobe on link 2 took 18 folded fit poses.",

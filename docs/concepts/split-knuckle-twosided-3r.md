@@ -50,3 +50,118 @@ poses, and no clip frame engages K2 on either bench, so every in-band sample is 
 
 ## Kill gate (lead: 15 min, law-only)
 
+The gate ran at the spec's seat: bK2a 37, bK2b 62, sK2 +1 (K2 rests 79 deg bent), kK2 1.0, linear law from q2lo
+(`gate` mode).
+
+| bench | folded poses (th < th_lo) | law covers | closes with the pin knee too | lead's bar |
+|---|---|---|---|---|
+| fit Bench(60,160) | 8 (th 15.6-29.4, all workspace) | **8** | 5 (3 lost to the knee slide) | >= 6 |
+| verify Bench(110,360) | 23 | **17** | 10 (7 slide, 6 law end) | >= 15 |
+
+Hub levels at the 5 folded fit poses that close, against the 95th percentile of the other kept poses:
+
+- hub 2: 51.8-63.4 mm, against 59.7. One pose is +3.7 mm.
+- K2: 53.7-61.2 mm, against 61.6.
+- hub 3: 49.6-62.8 mm, against 79.2.
+
+**Law-only, the gate passes.** The lead's point holds: hub 2 does swing on its a1 circle, and it is measured above, not
+assumed. The same seat's METAL fails at once:
+
+- K2's hub needs fK2 77 mm over the kept poses and is 0.5 % in band.
+- The dog-leg link 2 drops to L2a 0.38 and L2b 0.22.
+- The control at that seat, with K2's law OFF, measures **52.92** against the winner's 16.53 through the same code.
+
+## Search (farm, Bench(60,160) fast, near-touch objective)
+
+| stage | configs | best (K2 engaged on >= 1 taken pose) |
+|---|---|---|
+| coarse 1 (LHS, t0K2 0-8) | 244 incl. 20 controls (K2 metal, law off) | 29.09; controls best 23.25 |
+| coarse 2 (sampled by K2's rest bend psi0 55-165, t0K2 ~0, smlo 5.3-10) | 256 | 30.88 (reach 0.788, ib14 0.714, 3 folded poses taken) |
+| CMA-ES, 6 streams x ~450-750 (2 seats x high / low horn, sK2 -1, 2 streams also moving a1max, smhi, kK and the J2 / J3 / knee seats) | 3534 | **26.62** (s3) |
+
+In all, 4034 configurations. An idle K2 (no taken pose on the K2 law) is flagged dishonest (+100 in the CMA), because
+it is the winner plus dead metal. **Convergence gate:** every stream passes. The best stream (s3) gained 0.04 gap points
+over its second half and 0.04 over its last third, with a top-5 spread of 0.03. The loosest stream (s6) gained 1.24 gap
+points (0.45 score points) over its second half and 0.13 over its last third, with a top-5 spread of 0.67. All six
+streams settle at 26.6-30.2 against the winner's 16.53.
+
+**Best (s3):** bK2a 20.43, bK2b 46.24, sK2 +1 (rest bend psi0 133), kK2 1.61, high horn r_horn2 4.25, B2 54.3,
+smlo 7.95; the winner's seats, drive and K are unchanged.
+
+- Fast Bench(60,160), near-touch: **26.62** (plain 26.62); reach 0.794, follow 1.0, in-band 0.745 / 0.438,
+  contact 0.005, minimum metal 1.05 mm; overhead 1 of 12 workspace poses taken.
+- **Frozen exact Bench(110,360): 34.18** (score 87.6); near-touch 36.89, minimum metal 0.11 mm; reach 0.728,
+  in-band 0.746, contact 0.016; overhead 7 of 28.
+- Lost poses: fold **84**, slide 8, contact 6. The fold count of 84 is EXACTLY the winner's, so K2 gains nothing on the
+  verify bench.
+- Coarse best A, worn frozen: 38.46 (fold 79, slide 10, contact 9).
+- K2 at the s3 optimum bends only 4.7 deg. Its "3 folded poses taken" have th 32-33. The winner's plain window
+  (th_lo 31.28) takes them already; raising smlo only handed them over to K2. **The search's optimum is to make K2 do
+  nothing.**
+
+## Why it fails (measured limiters)
+
+1. **Engagement against the metal (the bend of K2 at rest, 500 coarse configs).** The law can extend the fold limit only
+   if a2e falls faster than th from the first degree past q2lo. Otherwise the kit margin m3e = th - |a1 - a2e| hits
+   5 deg at once: the winner's smlo is 5.28, which leaves 0.28 deg of slack. a2e falls at kK2 sin bK2a sin bK2b sin
+   psi / sin a2e, so K2 must rest well bent.
+
+   | K2 rest bend psi0 (deg) | law engages | median K2 hub ib14 | median fK2 (mm) |
+   |---|---|---|---|
+   | 150-165 | 0 % | 0.55 | 68 |
+   | 135-150 | 3 % | 0.27 | 69 |
+   | 120-135 | 23 % | 0.12 | 72 |
+   | 90-120 | 14-22 % | 0.01-0.08 | 74-84 |
+
+   A bent K2 sits off the J2-J3 great circle, over skin that rises under some pose. Its O20 hub then stands 70-116 mm
+   from GH, and the link-2 dog-leg leaves the band. Its own metal costs **6.7 points** at the cheapest seat (control
+   23.25, law off, against 16.53) and 10-36 at the engaging seats.
+2. **Where K2 does extend the fold limit, link 2 lands on link 1's drive.** The best config with a 10-deg extension (s1:
+   th_min 20.8 against th_lo 31.3, K2 bending 36 deg, a2e 61.6 -> 51.4) measures 27.44 at the winner's reach of
+   0.794. Its truly folded poses:
+
+   | pose | th | dK2 | result |
+   |---|---|---|---|
+   | #126 | 21.4 | 34.7 | PARTS: ROD-hubK2 -5.2 mm, hub K-hub K2 -0.7, L1b-hub K2 -0.4 |
+   | #127 | 27.0 | 19.1 | PARTS: ROD-hubK2 -2.0 |
+   | #116 | 29.4 | 12.0 | pin-knee slide |
+   | #102, #114 | 20.6, 20.8 | - | past the law's end |
+
+   At the folded end, link 2 lies back over link 1. K2, at 21 deg from J2, therefore lands on the K drive's pushrod and
+   on hub K. **The two drives need the same space at exactly the poses K2 exists for.**
+3. **The arithmetic was against it from the start.** The folded side holds 8 fit and 23 verify poses: about 5 fit-reach
+   points and 6.4 verify-reach points at best. K2 costs >= 6.7 in-band points just by being there, before its drive.
+   Complexity is 68.5 (tools/simplicity.py, full record) against the winner's 42.5 by hand. Rotations only, and 0
+   passive translations.
+
+## Red team
+
+- **The optimistic number.** The CMA best's 3 "folded" poses are a relabelling of poses the winner already takes. The
+  honest gain is 0, confirmed by the frozen fold count of 84 = 84.
+- **The pinch.** On the verify bench, the frozen minimum metal is 0.11 mm (near-touch 36.89). On the fit bench, hub 1
+  is 1.24 mm above the skin on Raise overhead, and hub K2 is 1.36 mm on #210 (plane 135, elev 135).
+- **The jam.** ROD-hubK2 at -5.2 mm on #126 (plane 30, elev 105) whenever K2 does real work.
+- **Simplification still in the model.** K2's rod and horn are sampled on link 2a, and their few-mm motion with K2 is
+  ignored. That motion happens only on folded workspace poses, and no clip frame engages K2, so in-band is unaffected;
+  the collision verdict in limiter 2 would only get worse.
+
+## Verdict
+
+**DEAD (converged, 4034 configurations).**
+
+- Best 26.62 fast near-touch; 34.18 frozen exact on Bench(110,360), against the winner's 16.53 / 23.37-23.57 through
+  the same code.
+- A slaved knuckle on link 2 cannot fold a2 at the folded end. It must rest bent >= 45 deg off straight to out-run th
+  at the 5-deg kit margin, and there its O20 hub and the link-2 dog-leg leave the band.
+- Where it does extend the fold limit (by up to 10.5 deg), link 2 lies over link 1 and K2 collides with the K drive's
+  pushrod and with hub K.
+- The folded side's whole prize (+0.064 verify reach) is smaller than K2's metal cost alone.
+
+**New knowledge** (applies beyond this morphology):
+
+- (a) Any folded-end relief that shortens a2 by a knuckle near J2 must bend it faster than th falls. The engaging
+  window is a rest bend psi0 of 90-135 deg, and there a hub on link 2 is <= 0.12 in band.
+- (b) At the folded end, link 2 occupies link 1's space, so a folded-side mechanism near J2 conflicts with any
+  stretched-side drive on link 1b.
+- (c) For the folded side, the lead's other open lever, a drive with NO out-of-band metal on the existing chain, is
+  the better bet than more hubs.
