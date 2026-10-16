@@ -132,10 +132,11 @@ harmless. The docstring is still wrong.
 | user_minarc_bdp, claimed | 80.0 % | 51.0 % | 72.0 % | PASS | PASS 0.153 N.m / 0.70 N / 2.0 deg | d434fd3 |
 | user_minarc_bdp, re-measured | 80.0355 % | 50.9553 % | 71.9848 % | PASS (41/41) | PASS 0.153 / 0.70 / 1.96 | this check, local |
 | l1_minarc-bdp, claimed | 80.5 % | 52.5 % | 72.7 % | PASS | PASS 0.152 / 0.69 / 1.96 | d434fd3 |
-| l1_minarc-bdp, re-measured | L1_R1 | L1_AIM | L1_R4 | PASS (22/22) | PASS 0.152 / 0.69 / 1.96 | this check |
+| l1_minarc-bdp, re-measured | 80.5116 % | 52.4948 % | 72.7380 % | PASS (22/22) | PASS 0.152 / 0.69 / 1.96 | this check; R1 / R4 on the CPU farm (one job, $0.01-0.05; a first submission lost its client after upload, so at most one more job of the same size) |
 
-user_minarc_bdp's R1 / R1-aim / R4 reproduce the committed score files to all printed digits. Scored groups: base, l1a,
-l1b, l2, l3, l4; F excluded; H gives no samples within 110 mm.
+user_minarc_bdp's R1 / R1-aim / R4 (local run) reproduce the committed score files to all printed digits.
+l1_minarc-bdp's farm run rewrote score.json and score_14mm.json byte-identical to the committed files.
+On both designs the scored groups are base, l1a, l1b, l2, l3, l4; F is excluded, and H gives no samples within 110 mm.
 
 ## What was not checked
 
