@@ -139,19 +139,33 @@ nearest metal 0.20 mm, 34.07 with metal < 1 mm as contact, overhead reach 0.29 /
 
 ## Verdict
 
-**Routing is not the leader's lever.** The raglan map says the leader's links are already on their lines of least
+**Routing is a small lever on the leader; the seat move it came with is the bigger one.** The raglan map says the leader's links are already on their lines of least
 skin motion; the coarse sweep and the steeper turns confirm it: the real gain is 0.4-0.45 gap points (link 1
-0.925 -> 0.99 in band), everything above that is dilution, and every link-2 turn loses. Best: 24.79 fast (score 90.99;
-25.89 at fixed part sizes) and 32.33 frozen big exact (score 88.24; 33.41 at fixed sizes) against the pin knee's
-26.34 / 33.84 (34.06 with the fit on the exact path). The 90+ bar on the large bench needs +0.28 reach, i.e. the J2 fold - nothing a link's route can move.
+0.925 -> 0.99 in band) at the k10 seats, everything above that is dilution, and every link-2 turn loses. Routes only:
+24.79 fast (score 90.99; 25.89 at fixed part sizes), 32.33 frozen big exact (score 88.24; 33.41 at fixed sizes)
+against the pin knee's 26.34 / 33.84. Seats + routes (CMA A2): **23.00 fast (score 91.64; 23.62 at fixed sizes)**, of
+which the seat move alone (straight links) is 24.49 - frozen big exact below. The 90+ bar on the large bench needs
+about +0.28 reach, i.e. the J2 fold - nothing a link's route can move.
 The posterior-J1 seats that remove the fold lose 46-69 poses to skin instead (best 122.45).
 
-Gate: the comparable history (coarse 177 + 6 local) passes the formula trivially (it is a grid, not a search). The
-first CMA round (27 tries) ran on the exact path (missing cache link) and is logged as not comparable; the second
-round (streams C2 routes only, A2 seats + routes, D2 + knee, from the d -30 route) was still running on the farm at the
-end of the time box: **the time box ended before a CMA gate**. Its results land in `.cache/rknee/cma{C2,A2,D2}.json`
-(rebuild the sweep log with the scratch `mksweep.py C A D C2 A2 D2`); judge them by `inband_member.gap_fixed_n`, not
-the bench gap.
+**CMA round 2** (farm, grid cache linked, popsize 8, 2 processes per stream; objective = the bench gap, every report
+also carrying `gap_fixed_n`):
+
+| stream | free | tries | best gap | at fixed part sizes | reach | in-band 14 | where it ended |
+|---|---|---|---|---|---|---|---|
+| C2 | routes only (k10 seats) | 513 | 24.50 | 25.84 | 0.706 | 0.860 | link 1 t 0.85, d -34 (L1 96 samples): more dilution, no new real gain |
+| **A2** | seats + routes | 1009 | **23.00** (score 91.64) | **23.62** | 0.688 | **0.901** | J1 bvec(96.9, 66.2), J2 bvec(13.0, 54.7), J3 wdir(75.9, -14.0), b3 0.239; link 1 t 0.80, d -30.6; link 2 straight (-1.3) |
+| D2 | seats + routes + knee (phiE, lE, lc) | 1065 | 23.54 | 24.04 | 0.688 | 0.895 | J3 wdir(78.5, -14.6), lE 35.9, lc 25.8, link 1 d -20.8, link 2 d +5.4 |
+
+Attribution at A2's seats (local, fast): the same seats with straight links score **24.49** at fixed sizes (24.51 bench):
+the seat move (J3 3.3 deg more proximal: hub 3 0.748 -> 0.838, knee link 0.64 -> 0.79, boss / pad / E 0.81-0.88 ->
+0.89-0.91 in band; one more fold pose and contact 0.0116 -> 0.0175) gives 1.8 points, the route 0.9 real + 0.6
+dilution. The seat move is a pin-knee freedom the leader's seats were tuned without (osn's 2-slide stage has other
+parts at hub 3); it belongs to the pin knee as much as to this morphology.
+
+Gate (per stream, chronological; score = 100 (1 - gap / 275)): C2 gained 0.0 over the second half / 0.0 over the last
+third, top 5 within 0.01; A2 0.10 / 0.0 / 0.0; D2 0.03 / 0.03 / 0.01: **converged** (sigma collapsed in each). The
+first CMA round (27 tries) ran on the exact path (missing cache link) and is logged as not comparable.
 
 ## New knowledge
 
