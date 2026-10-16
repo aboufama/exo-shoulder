@@ -4,7 +4,12 @@ near-touch gap on poses the frozen SHAPE was NOT fitted on (CLAUDE.md "The fold 
 final polishes score only poses the shape was not fitted on, 2-fold cross-fit; "Search on the near-touch gap"; the
 continuity rule; "Keep the held-out split held out").
 
-Why: every in-sample polish of the pin knee lost ~5 points held out (P5 21.92 polish bench vs 28.96 held out, C1 23.04
+MEASURED VERDICT (2026-10-16, docs/research/crossfit_polish.md): on the pin knee this objective does NOT travel either -
+the cross-fit picks lose to H1 held out (XP1 29.50, XP2 29.59 vs 28.55), in-fold vs out-of-fold correlate 0.984: the
+held-out drop is the benches' aliased workspace sample (axial), which no split of the search poses can see. Keep the
+claim-fit guard; the next instrument is a fresh jittered envelope search bench.
+
+Why it was built: every in-sample polish of the pin knee lost ~5 points held out (P5 21.92 polish bench vs 28.96 held out, C1 23.04
 vs 28.22, GPU F7 20.81 vs 27.22; H1 itself 24.48 vs 28.55). The shape (link heights, knee reference, hub heights) is
 FITTED on the bench poses, so a same-bench objective rewards parameters whose fitted shape just clears those poses.
 
@@ -22,6 +27,8 @@ Objective of a parameter set p (lower is better):
                                         reachable from the rest region by the kinematic flood fill are not taken
                                      -> the model's audit: near-touch gap (metal < 1 mm = contact) on fold B
     obj = mean of the two out-of-fold near-touch gaps (+ XFIT_OH_PEN per overhead clip frame lost, default 0)
+          + max(0, claim-fit near-touch - that mean - XFIT_CLAIM_TOL (3))   the claim-fit guard: the shape the claim builds
+            is fitted on Bench(110,360); a config whose fold fits are fine but whose claim fit collapses is penalised
 The in-fold (in-sample) numbers are logged next to it, so the in-sample vs out-of-fold drop is visible per row.
 
 Continuity (CLAUDE.md "Reach must be reachable by moving"): for models with passive / stopped joints the plug-in gives
@@ -67,6 +74,10 @@ SRC = tuple(tuple(int(x) for x in s.split(",")) for s in os.environ.get("XFIT_SR
 XDIR = os.environ.get("XFIT_DIR", "/tmp/xfit")
 CONN = os.environ.get("XFIT_CONN", "1") == "1"
 OH_PEN = float(os.environ.get("XFIT_OH_PEN", 0.0))
+# claim-fit guard (measured 2026-10-16: XP3 scored 25.25 out of fold but its shape fitted on Bench(110,360) - the shape the
+# claim builds - collapsed to 56.02 / held 61.67): the shape is also fitted on the claim bench and scored in-sample there;
+# obj += max(0, claim near-touch - out-of-fold near-touch - XFIT_CLAIM_TOL). XFIT_CLAIM_TOL=off disables it.
+CLAIM_TOL = None if os.environ.get("XFIT_CLAIM_TOL", "3").lower() in ("off", "none", "") else float(os.environ.get("XFIT_CLAIM_TOL", "3"))
 ALLOWED_SRC = {(110, 360), (60, 160)}                        # the search benches; the verifier's held-out set is their complement
 assert set(SRC) <= ALLOWED_SRC, f"XFIT_SRC {SRC}: only the search benches {ALLOWED_SRC} (the held-out set stays held out)"
 
@@ -170,6 +181,8 @@ def fold_benches():
     if any(B.mode != "fast" for B in Bs) and os.environ.get("CB_EXACT") != "1" and os.environ.get("XFIT_ALLOW_EXACT") != "1":
         raise RuntimeError("a fold is not on the fast grid (link Bench(110,360): eval \"$(python3 tools/bench_cache_farm.py use 110 360)\"); "
                            "XFIT_ALLOW_EXACT=1 runs exact on purpose")
+    if CLAIM_TOL is not None:                                 # the claim's fit bench: Bench(110,360) (or the first source locally)
+        Bs.append(parents[(110, 360)] if (110, 360) in parents else parents[SRC[0]])
     return Bs
 
 
@@ -411,6 +424,12 @@ def xfit(pl, benches, p):
     ii = [f["ins"] for f in out["folds"] if f.get("ins")]
     out["ins_near1"] = round(float(np.mean([o["gap_near1"] for o in ii])), 3) if len(ii) == 2 else None
     out["drop_near1"] = round(out["oof_near1"] - out["ins_near1"], 3) if out["ins_near1"] is not None else None
+    if CLAIM_TOL is not None and len(benches) > 2:
+        BC = benches[2]; M1, r1 = pl.fit(BC, P)
+        if r1 is None: out["claim_near1"] = 400.0
+        else: out["claim_near1"] = score_on(pl, M1, BC, None)["gap_near1"]
+        out["claim_pen"] = round(max(0.0, out["claim_near1"] - out["oof_near1"] - CLAIM_TOL), 3)
+        out["obj"] = round(out["obj"] + out["claim_pen"], 3)
     return out
 
 

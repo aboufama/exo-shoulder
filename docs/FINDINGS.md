@@ -1339,3 +1339,39 @@ Next:
 2. The gen-4 L1 CAD and stills.
 3. The user's ruling on the sensed 4th joint.
 4. The cam-stop-knuckle lens: K driven from q2, 3 active DOF.
+
+## A 2-fold cross-fit polish does not travel either: the held-out drop is a workspace-sample shift, not shape over-fit (2026-10-16, tools/crossfit_polish.py, docs/research/crossfit_polish.md)
+
+* **What ran.** The new final-polish objective fits the shape on one stratified half of the search poses
+  (Bench(110,360) U Bench(60,160), 634 poses) and scores the near-touch gap frozen on the other half, and vice versa.
+  The continuity flood fill is on. The held-out set is asserted untouched.
+* **The search.** Short CMA on the pin knee from H1, F2 and F7: 587 evaluations on the farm. The best of each start
+  went through the polish verifier harness (unchanged) held out. Self-measured; farm about $0.18.
+* **Measured.** The cross-fit picks lose to H1 held out:
+
+  | pick | held out | gain over H1 (28.55) |
+  |---|---|---|
+  | XP1 | 29.50 | -0.95 |
+  | XP2 | 29.59 | -1.04 |
+  | XP3 | 61.67 | -33.1 |
+
+  The in-sample picks gained P5 +0.16 (exact-fit protocol; -0.27 fast-fit), C1 +0.33 and F7 +1.33. Both XP1 and XP2
+  drop 8.0 points from the polish bench to held out. Over these 7 configs, the cross-fit objective's rank correlation
+  with the held-out near-touch gap is -0.07; the in-sample objective's is 0.50.
+* **Why: the shape does not over-fit within the sample.** In-fold vs out-of-fold near-touch correlate at 0.984 over the
+  587 rows, mean difference 0.04 points.
+* **Why: the benches' workspace sample is aliased.** Its `linspace` pick over the grid order skews axial rotation:
+  * |axial| >= 150 deg is 6.0 % of the pool vs 11.0 % of the held-out set;
+  * axial -90..-45 is 33.1 % vs 27.9 %.
+
+  Kinematic closure is 4.9 (H1) to 6.9 (P5, F2) points lower on held-out workspace poses for every config. Polishes
+  buy 1.2-2.0 points more closure on the pool than held out, and the fitted shape then touches skin on the newly
+  closed held-out poses: contact 0.019-0.031 vs H1 0.011. A split of the pool carries the same aliasing, so it cannot
+  see this; CMA then selects on fold noise.
+* **New failure: the claim fit can collapse.** XP3 is fine on both 317-pose fold fits, but its shape fitted on all of
+  Bench(110,360) collapses (56.02; in-band 0.61). The tool now applies a claim-fit guard by default: XP3 25.25 -> 53.09,
+  every other config unchanged.
+* **Next instrument (not built).** A fresh jittered sample of the whole workspace envelope (grid pose +- 7.5 deg, no
+  grid pose reused) matches the full grid's closure within 0.005 for every config. Use it as the search bench (own fast
+  cache); the held-out set stays untouched. The minarc BDp cross-fit recipe is ready
+  (`python3 tools/crossfit_polish.py farm minarc ...`) but NOT launched; run it only with the held-out acceptance.
