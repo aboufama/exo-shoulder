@@ -1,53 +1,80 @@
 {
- "step": 3,
+ "step": 1,
  "tol_mm": 0.15,
- "frames_checked": 451,
- "pairs": 2470,
- "seconds": 100,
- "setup_seconds": 15,
- "jobs": 4,
- "cpu_seconds": 327,
- "cpu_s_per_frame": 0.693,
+ "frames_checked": 1337,
+ "pairs": 2586,
+ "seconds": 631,
+ "setup_seconds": 99,
+ "jobs": 8,
+ "cpu_seconds": 1783,
+ "cpu_s_per_frame": 1.281,
  "violations": {
   "base|D7-01 scapula base: J1 hub + tab, 2x M4 counterbored to the scapula handler (Ti-6Al-4V)  IN  l1|D7-02 link 1: bent bar 8x3 + J1/J2 pads + integral O7 pins (Ti-6Al-4V)": {
    "max_depth": 0.85,
-   "frames": 6,
+   "frames": 22,
    "worst": [
     "Wave",
-    72
+    71
    ],
    "worst_point": "vertex",
    "per_frame": {
+    "Wave|71": 0.85,
     "Wave|72": 0.85,
+    "Wave|73": 0.85,
+    "Wave|74": 0.85,
     "Wave|75": 0.85,
+    "Wave|76": 0.85,
+    "Wave|77": 0.85,
     "Wave|78": 0.85,
+    "Wave|79": 0.85,
+    "Wave|95": 0.85,
     "Wave|96": 0.85,
-    "Wave|99": 0.85,
-    "Wave|102": 0.85
+    "Wave|97": 0.85
    }
   },
   "l1|D7-02 link 1: bent bar 8x3 + J1/J2 pads + integral O7 pins (Ti-6Al-4V)  IN  base|D7-01 scapula base: J1 hub + tab, 2x M4 counterbored to the scapula handler (Ti-6Al-4V)": {
    "max_depth": 0.71,
-   "frames": 6,
+   "frames": 22,
    "worst": [
     "Wave",
-    72
+    71
    ],
    "worst_point": "vertex",
    "per_frame": {
+    "Wave|71": 0.71,
     "Wave|72": 0.71,
+    "Wave|73": 0.71,
+    "Wave|74": 0.71,
     "Wave|75": 0.71,
+    "Wave|76": 0.71,
+    "Wave|77": 0.71,
     "Wave|78": 0.71,
+    "Wave|79": 0.71,
+    "Wave|95": 0.71,
     "Wave|96": 0.71,
-    "Wave|99": 0.71,
-    "Wave|102": 0.71
+    "Wave|97": 0.71
    }
   }
  },
- "open_parts_not_tested_as_container": [
-  "l4|across guide rail THK RSR3R3 3 x 2.6 x 29.0 (catalogue rail, travel +-7.5), on carriage A",
-  "l4|along guide rail THK RSR3R3 3 x 2.6 x 26.6 (catalogue rail, travel +-6.3), rides with carriage A"
- ],
+ "open_parts_not_tested_as_container": [],
+ "open_parts": {
+  "l4|across guide rail THK RSR3R3 3 x 2.6 x 29.0 (catalogue rail, travel +-7.5), on carriage A": {
+   "open_edges": 0,
+   "nonmanifold_edges": 6,
+   "faces": 2500,
+   "boundary_edges": 0,
+   "boundary_length_mm": 0.0,
+   "how": "closed chain: no boundary (non-manifold edges only), integer winding number + exact depth as is"
+  },
+  "l4|along guide rail THK RSR3R3 3 x 2.6 x 26.6 (catalogue rail, travel +-6.3), rides with carriage A": {
+   "open_edges": 0,
+   "nonmanifold_edges": 6,
+   "faces": 2488,
+   "boundary_edges": 0,
+   "boundary_length_mm": 0.0,
+   "how": "closed chain: no boundary (non-manifold edges only), integer winding number + exact depth as is"
+  }
+ },
  "reoriented_parts": [],
  "samples": {
   "h_mm": 1.0,

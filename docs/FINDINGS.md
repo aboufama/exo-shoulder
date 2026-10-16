@@ -681,3 +681,66 @@ docs/concepts/fold-sph3r.md.
     every pose.
   - Seed-offset and the osn first build show that a link strap ending on the next hub's plate is the recurring
     pattern. The L1 builders should end straps on the plate's top face, not through it.
+
+## R6 now uses open parts as containers too; the D6 cuff overlap, located (2026-10-16, judge/part_contact.py)
+
+* **The blind spot.** `pair_ok()` never used a part as the container B unless its mesh was watertight after `weld()`.
+  So a pin fully embedded in a link with a meshing crack could not be seen. Six judged design dirs had such parts:
+  - mesh cracks and T-junctions in D5-02 link 1, D6-03 link 2, D7-03 link 2 and the cad_r13 BOTTOM part;
+  - the RSR3R3 rails, which trimesh calls open only because 6 edges are shared by 4 faces.
+* **The fix keeps the exact path.** `close_open()` closes the mesh's oriented surface:
+  - The boundary is every directed edge whose reverse is missing.
+  - Each boundary loop gets a cap, built by ear clipping on the shortest diagonal. The cap's edges cancel the boundary,
+    so the integer winding number and the exact libigl depth apply unchanged.
+  - A mesh that still does not close falls back to libigl's generalized winding number, |w| > 0.5.
+  - `part_contact.json` now has an `open_parts` key listing how each part was closed and the cap's size.
+
+  The caps:
+
+  | part | cap | cap area | max cap distance from the open mesh | what the hole is |
+  |---|---|---|---|---|
+  | D5-02 | 6 triangles | 0.15 mm² | 0.02 mm | T-junction cracks |
+  | D6-03 | 186 triangles | 3.76 mm² | 0.46 mm | two 2.4 x 1.3 mm holes, top face, where the bent bar meets the J2 and J3 hubs |
+  | D7-03 | 15 triangles | 0.009 mm² | 0.0004 mm | cracks |
+  | cad_r13 BOTTOM | 9 triangles | 1.56 mm² | 0.11 mm | one hole |
+  | rails | none | - | - | already closed |
+
+  The D6-03 holes come from the mesh export. The STEP solid is valid, and so is the user's Onshape model.
+* **Checked against an independent method.** We compared the capped winding number with the generalized winding number
+  of the uncapped (open) mesh:
+  - On ~35 000 random points deeper than 0.15 mm per part (D5-02, D6-03, D7-03, rails): 0 disagreements.
+  - At cad_r13's two worst frames: 0 disagreements, and w = 1.00 at the deepest point, 60 mm from the cap.
+  - The quick suite has a new case 4 (1.6 s): a pin fully inside a slab with T-junction cracks or a hole. Both the
+    cap and the GWN fallback catch it at exactly 3.000 mm. A pad 0.5 mm above the hole stays clean.
+  - The full suite passes.
+* **Re-judged at step 1 on the farm** (8 jobs, ~$0.18):
+
+  | design | R6 before | R6 now | what the blind spot hid |
+  |---|---|---|---|
+  | param_r20_n3_s1414_4 (D5) | 3.50 | 3.50 | base and link 2 3.50 mm inside link 1 at every frame (seen before only the other way round, at 1.44 / 1.48) |
+  | param2_r20_n3_s1414_4 (D6) | 4.65 | 4.65 | nothing: no part inside D6-03 link 2 at any depth > 0 (every 3rd frame) nor > 0.15 mm (all 1337 frames) |
+  | cad_r13_n3_s1331_0 | 0.25 | **0.55** | the flank liner 0.55 mm inside the BOTTOM + dovetail rail part, 347 frames (Wash opposite shoulder 192) |
+  | user_osn_k4216 (gen-2 final) | 0.85 (step 3) | 0.85 | nothing new |
+  | dropped gen-2 builds v2 / v3 / v4 | 4.65 / 4.65 / - | 4.65 / 4.65 / 1.10 | nothing new inside D7-03 link 2 or the rails |
+
+  No status flips. Only cad_r13's R6 value changed in the scorecards.
+* **The D6 overlap: the upper-arm cuff against the user's forearm cuff** (param2_r20, 1337 frames). The UPPER ARM
+  CUFF here is the project's U cuff (`user_style.upper_cuff`):
+  - It spans s 83.85 (elbow end) to s 164.65 along BOTTOM, measured from the elbow axis.
+  - Its side arcs are R50 and wrap 110 deg.
+  - The overlap is 4.65 mm deep. The forearm cuff's edge also passes right through the upper cuff's 2 mm wall
+    (1.00 mm = half the wall).
+  - It happens only in deep elbow flexion: Drink from a cup frames 36-145, Comb hair 40-163, Wash opposite shoulder
+    41-152 (346 frames).
+  - The worst frame is Drink from a cup 69, with the elbow rotated 116 deg from the clip's first frame.
+  - Location: only on the -vB (anterior) side arc, never on the flat land. It runs from the elbow end to s 139.1, the
+    distal 55 mm of the 80.8 mm cuff, and from 19.1 deg of wrap to the tip at 110 deg.
+  - Deeper than 3 mm: s 83.9-117.4, wrap 24.5-56.5 deg. The deepest point is 5 mm from the elbow end (s 89.0), at
+    32 deg of wrap.
+* **The cut that removes it:**
+  - Trim the -vB arc to <= 19 deg of wrap. The inner arc goes from 96 mm to 16.7 mm, and its tip moves to
+    v -47.4 / z -7.6. The gen-2 CAD already does this at 12 deg (`CUFF_WRAP_NEG`), which leaves 7 deg of margin.
+  - Or, to keep more grip, notch only the part of that arc beyond 19 deg from the elbow end to s ~142. That keeps
+    full wrap on the proximal 22 mm.
+  - Shortening the cuff from the elbow end instead would cost 55 mm, leaving a cuff 25.5 mm long without its screw
+    rows.

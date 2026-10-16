@@ -42,7 +42,7 @@
  {
   "id": "R6",
   "name": "No interference between parts that move relative to each other",
-  "value": 0.25,
+  "value": 0.55,
   "target": "<= 0.15 mm",
   "status": "FAIL",
   "judge": "judge/part_contact.py (geometry only)"
