@@ -8,7 +8,7 @@ acromion top only.
 
 - Why: the CPU farm is capped at ~5 serverless workers by the account quota and the 4-core box sits at load ~33, so the
   search is compute-bound. A RunPod POD is outside the serverless worker quota.
-- Pod: **exo-gpu-bench (id 9qh3ze1zhuu235), 1x NVIDIA RTX PRO 4000 Blackwell (24 GB), secure cloud EU-RO-1, $0.57/h** (started 06:12 UTC; the RTX 2000 Ada at $0.24/h had no instance with the volume, so the next cheapest that can mount
+- Pod: **exo-gpu-bench (id 2odeqs93uh5ua5; the first one, 9qh3ze1zhuu235, was terminated at 06:47 UTC when its parity job hung on a fork after CUDA init - the CPU reference pool now spawns), 1x NVIDIA RTX PRO 4000 Blackwell (24 GB), secure cloud EU-RO-1, $0.57/h** (started 06:12 UTC; the RTX 2000 Ada at $0.24/h had no instance with the volume, so the next cheapest that can mount
   the farm's network volume exo-farm-cas, where the Bench(110,360) signed-distance grid already lives; community pods
   are cheaper per hour only for the 4080 SUPER class and cannot see the volume). No public port: the pod runs job
   scripts that farm jobs drop on the private network volume and writes results back there. Stopped / terminated the

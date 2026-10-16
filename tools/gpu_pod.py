@@ -9,7 +9,9 @@
 
 How work reaches it: no public port. The pod mounts the farm's private network volume exo-farm-cas at /workspace and runs,
 one at a time, the job scripts that farm jobs (tools/cloud_run.py, authenticated by our RunPod key) drop in
-exo-farm/gpu/queue/*.sh; each job's log goes to exo-farm/gpu/out/<job>.log. After 30 min with no job it stops itself
+exo-farm/gpu/queue/*.sh (alphabetical order); each job's log goes to exo-farm/gpu/out/<job>.log; a file
+exo-farm/gpu/cancel kills the running job (`python3 tools/gpu_pod.py cancel`). A fresh pod needs the boot job first
+(pipeline/gpu_pod/boot.sh: torch with Blackwell kernels, the repo tree, the bench grids). After 30 min with no job it stops itself
 (runpodctl, the pod-scoped key RunPod injects) as a safety net; the search driver stops it when the search ends.
 Never touches pods whose name does not start with exo-gpu (crl-* are the user's).
 """
@@ -23,8 +25,10 @@ IMAGE = "runpod/pytorch:2.4.0-py3.11-cuda12.4.1-devel-ubuntu22.04"
 SPOOL = ("G=/workspace/exo-farm/gpu; mkdir -p $G/queue $G/done $G/out; "
          "echo \"$(date -u +%FT%TZ) up $RUNPOD_POD_ID\" >> $G/pod.log; nvidia-smi -L >> $G/pod.log 2>&1; idle=0; "
          "while true; do j=$(ls $G/queue/*.sh 2>/dev/null | head -1); "
-         "if [ -n \"$j\" ]; then b=$(basename $j .sh); mv $j $G/done/$b.sh; "
-         "(cd $G && timeout 4h bash $G/done/$b.sh > $G/out/$b.log 2>&1; echo \"rc=$?\" >> $G/out/$b.log; touch $G/out/$b.done); idle=0; "
+         "if [ -n \"$j\" ]; then b=$(basename $j .sh); mv $j $G/done/$b.sh; rm -f $G/cancel; "
+         "cd $G; setsid timeout 4h bash $G/done/$b.sh > $G/out/$b.log 2>&1 & p=$!; echo $p > $G/running.pid; "
+         "while kill -0 $p 2>/dev/null; do if [ -f $G/cancel ]; then kill -- -$p; echo cancelled >> $G/out/$b.log; rm -f $G/cancel; fi; sleep 3; done; "
+         "echo \"end $(date -u +%FT%TZ)\" >> $G/out/$b.log; touch $G/out/$b.done; idle=0; "
          "else sleep 5; idle=$((idle+5)); fi; "
          "if [ $idle -ge 1800 ]; then echo \"$(date -u +%FT%TZ) idle-stop\" >> $G/pod.log; runpodctl stop pod $RUNPOD_POD_ID; sleep 600; fi; done")
 
@@ -62,6 +66,13 @@ def submit(script, name, include=()):
                     "--timeout", "600", *inc, "--", cmd], check=False)
 
 
+def cancel():
+    """kill the job the pod is running (through one farm job)"""
+    import subprocess
+    subprocess.run([sys.executable, os.path.join(os.path.dirname(__file__), "cloud_run.py"), "run", "--no-base", "--no-bench-cache",
+                    "--timeout", "300", "--", "touch /runpod-volume/exo-farm/gpu/cancel; ls /runpod-volume/exo-farm/gpu/"], check=False)
+
+
 def fetch(name, outdir=None):
     """print a job's log (and bring exo-farm/gpu/out/<name>/ back under outdir) through one farm job"""
     import subprocess
@@ -77,5 +88,6 @@ if __name__ == "__main__":
     if a[0] == "create": create(a[a.index("--gpu") + 1] if "--gpu" in a else "NVIDIA RTX 2000 Ada Generation")
     elif a[0] in ("stop", "terminate"): act(a[0])
     elif a[0] == "submit": submit(a[1], a[2], [x for i, x in enumerate(a) if i > 0 and a[i - 1] == "--include"])
+    elif a[0] == "cancel": cancel()
     elif a[0] == "fetch": fetch(a[1], a[a.index("--outdir") + 1] if "--outdir" in a else None)
     else: print(json.dumps(pods(), indent=1))

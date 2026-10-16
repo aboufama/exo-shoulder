@@ -732,7 +732,7 @@ def main():
         import multiprocessing as mp
         t = time.time()
         c = [None] * len(cf)
-        with mp.get_context("fork").Pool(a.procs) as pool:
+        with mp.get_context("spawn").Pool(a.procs) as pool:          # spawn: never fork a CUDA process
             for k, r in enumerate(pool.imap(cpu_eval, [(p, wear, fit) for p in cf], chunksize=1)):
                 c[k] = r
                 if (k + 1) % 10 == 0: log(f"  CPU {k + 1}/{len(cf)} ({time.time() - t:.0f} s)")
