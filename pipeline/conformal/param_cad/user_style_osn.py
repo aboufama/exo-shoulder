@@ -372,6 +372,64 @@ def check(M, dd, poses_named):
     return out
 
 
+def clip_picks(C):
+    """(label, clip index, frame index) of followed frames of clips.json: rest, the peak of every clip (highest elevation,
+    for Reach back pocket the most extended), the middle of Raise overhead"""
+    names = [c["name"] for c in C["clips"]]; out = [("rest (first frame)", 0, 0)]
+    for ci, cl in enumerate(C["clips"]):
+        fr = [(fi, f) for fi, f in enumerate(cl["frames"]) if not f["held"]]
+        if not fr: continue
+        if cl["name"] == "Reach back pocket": fi = max(fr, key=lambda x: abs(x[1]["p"][0]) + abs(x[1]["p"][2]))[0]
+        else: fi = max(fr, key=lambda x: x[1]["p"][1])[0]
+        out.append((f"{cl['name']} peak", ci, fi))
+        if cl["name"] == "Raise overhead": out.append(("Raise overhead middle", ci, fr[len(fr) // 2][0]))
+    return out
+
+
+def check_clips(M, dd, parts_local, mv):
+    """the built parts posed by clips.json (scene_export.frame_xforms on the clip frame itself) vs the verified model at the
+    same pose (L1B.chain on the frame's pose): (a) the model's metal samples (hubs 1-3, neck, bridge; links reported apart
+    as the shape change) vs the posed built parts of their member, signed (> 0 = sample outside the built metal);
+    (b) every custom part's vertices posed by the model's own member transforms vs posed by the clip frame (frame dev)"""
+    import scene_export as SE, igl
+    C = json.load(open(os.path.join(dd, "clips.json"))); src = trimesh.load(os.path.join(dd, "exo.glb"))
+    grp_of = {0: "base", 1: "l1", 2: "l2", 3: "l3", 4: "l4", 5: "H"}; out = []
+    loc = {}                                                                                # node -> (member, member-local vertices)
+    for node in src.graph.nodes_geometry:
+        g, n = node.split("|")[:2]
+        if g == "F" or n not in parts_local: continue
+        T_, gn = src.graph[node]; V0 = trimesh.transform_points(src.geometry[gn].vertices, T_)
+        mem = parts_local[n]
+        if mem == 5: V0 = V0 @ L1B.HR - mv                                                  # x_H = HR (x + m)  ->  member-local x
+        loc[node] = (mem, V0[:: max(1, len(V0) // 400)])
+    for lab, ci, fi in clip_picks(C):
+        f = C["clips"][ci]["frames"][fi]; pz = np.array([f["p"]], float); K = L1B.chain(M, pz); L1B.swap_in(M, K)
+        X, _ = SE.frame_xforms(f); meshes = {}; fdev = 0.0
+        for node in src.graph.nodes_geometry:
+            g = node.split("|")[0]
+            if g == "F": continue
+            T_, gn = src.graph[node]; m = src.geometry[gn].copy(); m.apply_transform(T_); R, t = X[g]
+            m.vertices = m.vertices @ np.asarray(R).T + t
+            if "screw" not in node.lower() and not node.split("|")[1].startswith(("M4x6", "UPPER ARM", "TOP", "MIDDLE", "Hex", "IGUS", "5mm", "Revolve", "CirPattern")):
+                meshes.setdefault(g, []).append(m)
+            if node in loc:
+                mem, Vl = loc[node]; Vm = M.world(mem, 0, Vl); R, t = X[g]
+                Vc = (Vl if mem != 5 else (Vl + mv) @ L1B.HR.T) @ np.asarray(R).T + t
+                fdev = max(fdev, float(np.abs(Vm - Vc).max()))
+        meshes = {g: trimesh.util.concatenate(v) for g, v in meshes.items()}; res = {}
+        for name, (mem, Xp) in [(k, v) for k, v in M.rigid.items() if k in ("hub1", "hub2", "hub3", "neck", "bridge")] + list(M.link_pts.items()):
+            Pw = M.world(mem, 0, Xp); g = "l1" if name == "hub1" else grp_of[mem]; mm = meshes[g]
+            sd = igl.signed_distance(np.ascontiguousarray(Pw, float), np.ascontiguousarray(mm.vertices, float), np.ascontiguousarray(mm.faces, np.int64))[0]
+            res[name] = dict(outside_max=round(float(sd.max()), 4), n=int(len(Pw)))
+        ok = all(v["outside_max"] <= 0.5 for k, v in res.items() if k not in ("L1", "L2")) and fdev <= 0.5
+        out.append(dict(label=lab, clip=C["clips"][ci]["name"], frame=fi, pose=[round(float(x), 1) for x in f["p"][:3]], closes=bool(K["ok"][0] and K["sok"][0]),
+                        res_deg=round(float(K["res"][0]), 4), slides_model=[round(float(x), 3) for x in K["s"][0]], slides_clip=f["s"],
+                        frame_dev_mm=round(fdev, 5), samples=res, within_0p5=ok))
+        print(f"  clip check {lab:28s} {np.round(f['p'][:3], 1)} closes {out[-1]['closes']} frame dev {fdev:.1e} mm: "
+              + ", ".join(f"{k} {v['outside_max']:+.3f}" for k, v in res.items()) + f" -> {'OK' if ok else 'OVER 0.5'}", flush=True)
+    return out
+
+
 # ---------------------------------------------------------------------------------------------------- main
 def main():
     ap = argparse.ArgumentParser(); ap.add_argument("--out", default="user_osn_k4216"); ap.add_argument("--k", type=int, default=4216)

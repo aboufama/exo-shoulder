@@ -163,7 +163,13 @@ def evaluate(B, params):
     p["s1"] = 1 if float(p["s1"]) >= 0 else -1; p["beta"] = float(min(60.0, max(12.0, p["beta"])))
     if p.get("pc") is None or p.get("pw") is None or params.get("redesign", False): p = design(B, p)
     p.pop("redesign", None)
-    r = K.evaluate(B, build, p)
+    for it in range(3):     # layout-radius fix point: r_lay = the rail's fitted level (floor: the conservative side - a larger
+        r = K.evaluate(B, build, p)     # r_lay than the real radius would shorten the stops, the carriage arc and the tab)
+        lvl = float(np.max(B._kit_last["prof"]["j2"]))
+        if lvl >= 399 or (p["r_lay"] <= lvl + 0.01 and lvl - p["r_lay"] <= 2.5) or it == 2: break
+        p = dict(p, r_lay=float(math.floor(lvl)))
+    r["r_lay_fix"] = [round(p["r_lay"], 1), round(lvl, 1)]
+    if p["r_lay"] > lvl + 0.01: r["honest"] = False; r["audit"] = list(r.get("audit") or []) + ["r_lay above the fitted rail level (optimistic extents)"]
     L = B._kit_last; nt, tmin = tops(B, L["chain"], L["prof"], L["take"])
     r = FS.extras(B, r); r.update(top_contact_poses=nt, top_min=tmin, level_j2=round(float(L["prof"]["j2"][0]), 1),
                                   level_hub1=round(float(L["prof"]["hub1"][0]), 1), level_hub3=round(float(L["prof"]["hub3"][0]), 1))
