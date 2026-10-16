@@ -79,3 +79,129 @@ The checks are those of the spine-parked model, generalised to the pivot hub:
   height.
 - **Continuity through the relay** (`connect`, the main red-team finding below). Static closure at a workspace pose
   does not mean the rocker can get there.
+
+## Red team (measured, 2026-10-16)
+
+### 1. The relay's entry is singular, and the static gains are islands (the main finding)
+
+The rocker sub-chain is the triangle (c, u1, u3) with arcs beta and the stop angle. At the switch, u1 = u1r and
+angle(u1r, u3) = lo exactly, so q0 = 0 is a root.
+
+That root is regular only if u3 is NOT in the plane of c and u1r. Its sub-chain fold margin is
+min(angle(c, u3) - |beta - lo|, beta + lo - angle(c, u3)).
+
+The CMA optimises static closure at the bench poses, and it picks pivot directions where u3 reaches the switch almost
+in that plane. There the rocker can swing furthest, so a static pose deep in mode C closes. The entry is then at the
+rocker's own fold. q0 grows like sqrt(lo - th) with an infinite rate, and the m_sw >= 10 rule rejects the frames next
+to the switch.
+
+Frame trace at the C-stream best, elevation 30 -> 90 at plane 0, axial -15, Bench(110,360) workspace grid, 2-deg
+slerp:
+
+| frames | th (deg) | relay margin | state |
+|---|---|---|---|
+| 0-7 | 52.2 -> 42.1 | n/a | mode A, q0 = 0 |
+| 8-13 | 40.7 -> 33.5 | 1.4 -> 8.7 | nothing takes the pose (a jam) |
+| 14 | | | q0 = 29.7 deg at once |
+| 14-30 | | | mode C, q0 29.7 -> 65.0 |
+
+So the pose at elevation 90 closes statically, but the arm cannot get there from elevation 30 without the rocker
+passing its own singularity (m_sw < 10) or jumping 30 deg.
+
+Instrument (`connected()` in the model, `connect=1`, the default since this finding):
+- A flood fill over the workspace grid, seeded at the taken mode-A poses.
+- An edge joins two grid neighbours (one step in plane, elevation or axial) when every 2-deg frame between them closes
+  and q0 never steps more than 10 deg.
+- Relay poses that are not reached are dropped.
+- Mode-A poses are never dropped. In mode A, 232 / 232 are connected anyway.
+
+| configuration | bench | relay poses (static) | reachable continuously | static gap | gap with islands dropped |
+|---|---|---|---|---|---|
+| seed (beta 30, phi 330, spacer 1) | Bench(110,360) kinematics | 49 | 23 (elevation chains only) | | |
+| C-stream best (overhead relay only) | Bench(110,360) kinematics | 38 | 13 (elevation chains only) | | |
+| C-stream best | Bench(60,160) fast | 11 | **0** (flood fill) | 27.32 | **31.92** |
+| B-stream best, stops clamped to 10 | Bench(60,160) fast | 15 | **0** | | 34.45 |
+
+Synthetic elevation sequences across the workspace grid (211 on Bench(110,360)), seed configuration:
+- 37 cross the switch.
+- **14 jam**: both ends are taken but frames between them are not. With the relay off there are 0 jams.
+- 1 sequence has a rocker **snap**: q0 jumps 137 deg in one 2-deg step. The least-|q0| root swaps sides, so the rocker
+  state depends on the path (hysteresis). The bench's per-pose rule is optimistic there.
+- The fit clips never cross the switch: clip_BC = 0 in every run. So the bench's K2 never sees any of this, as the
+  lead note warned.
+
+### 2. R17 sag in mode A
+
+Gravity on the moving bodies (rocker 6 g, hub 1 12 g, link 1 7 g, hub 2 9 g, link 2 13 g, at about 62 mm) along the
+mode-A self-motion, by finite difference over the Bench(60,160) poses:
+- median 0.003 N.m, p95 0.009 N.m, max 0.010 N.m;
+- against T0 = 0.2 N.m, a factor of about 19. Mode A cannot sag.
+
+With J1-J3 frictionless, cuff loads put no moment on the rocker in MVP1.
+
+### 3. MVP2 blocker (the spec did not ask)
+
+A J1 motor reacts on the rocker. The share of the J1 torque about c is cos(beta), 0.87 at beta 29. So 1 N.m of J1
+assistance puts 0.87 N.m on a 0.2 N.m centring spring, and the rocker turns under its own actuator in mode A. MVP2
+needs a rocker lock (a brake, effectively a 4th actuator) or a 4th motor on R0. This sits on top of the spec's own
+point that overhead (modes B/C) J2 assistance is lost with J2 on its stop.
+
+### 4. Felt torque and the switch
+
+- The rocker breaks away only once the arm pushes J2 onto its stop with more than T0 = 0.2 N.m about c. The wearer
+  feels a detent at every entry: 0.2 N.m, rising to about 0.35 N.m at |q0| 60 (qmax at the C-stream best is 69 deg,
+  so about 0.37 N.m).
+- With bearing friction about 0.002 N.m, against T0, chatter is not expected. The singular entry (section 1) is the
+  real switch problem.
+
+### 5. Kinematic ceiling WITH continuity, over pivot directions (the proof behind the verdict)
+
+Setup:
+- C-stream seats, stops 10.7 / 10.3 deg.
+- beta 20 / 30 / 40 x phi 0-330 in 30-deg steps x relay_hi 0 / 1: 72 pivot directions.
+- Bench(110,360) workspace kinematics: closure only, no skin, which is an upper bound.
+- "connected" is the flood fill above.
+
+| | best static | best connected | mode A alone |
+|---|---|---|---|
+| workspace reach | 0.906 (beta 40, phi 120) | **0.667** (same) | 0.644 |
+| overhead (elevation >= 140) reach | 0.929 | **0.393** (every one of the 72) | 0.393 |
+
+Under continuity the relay adds at most 0.023 of big-bench reach (8 of 360 poses) and nothing overhead, for every
+pivot direction tried.
+
+Entries into the relay are not always singular. Where elevation chains cross th = lo, the entry sub-chain margin is
+>= 10 in 34-69 % of entries, depending on phi. But the overhead relay poses sit on the opposite root branch from the
+one entered.
+
+Example: plane 0, axial -15.
+- q0 is -49.5 at elevation 90 and +44.2 at elevation 120. The least-|q0| root swaps sides.
+- The rocker would have to cross its infeasible arc, which means J2 going past its stop.
+- So the elevation-150 pose (q0 +20) is a static island.
+
+The ideation proxy's overhead gain (0.357 -> 0.571) is static closure. A motion cannot use it.
+
+## The same rocker under the pin-knee leader (k4598): kinematic proxy only
+
+Setup:
+- The pin knee's J1 / J2 lie on GH rays. J3's DIRECTION (tilted b3 0.325) sets the fold exactly as in the spherical
+  chain: arcs 40.12 / 72.31, u1 = (0.113, 0.910, 0.399) in the scapula frame.
+- The relay is a function of the axis directions only, so the same `relay()` runs on the pin knee's u1 and its
+  arm-frame u3 (RS @ HG @ u3).
+- Bench(110,360) workspace, static closure.
+
+| rocker | workspace reach | overhead | clips |
+|---|---|---|---|
+| none (the verified leader's fold) | 0.631 | 0.393 | 1.000 |
+| beta 30, phi 330 (acromion-top pivot) | 0.772 | 0.607 | 1.000 |
+| beta 40, phi 300 | 0.858 | 0.857 | 1.000 |
+| beta 40, phi 210 (pivot on the anterolateral deltoid) | 0.922 | 0.964 | 1.000 |
+
+Same pattern as the spherical seats: 0.639 -> 0.775 at beta 30 / phi 330, and up to 0.95 at beta 45 / phi 210.
+
+It was NOT built as a full pin-knee VModel. Three reasons, all measured on the spherical version, and none depends on
+how the cuff closes:
+- Continuity removes the gain (section 5).
+- Pivots that give the large static gains sit on the deltoid, where the pivot hub and hub 2 leave the band. At
+  beta 45 / phi 210: in-band 0.20, hub 0 fitted at 141 mm, hub 2 at 176 mm, 0.0-0.05 per member.
+- J1's MVP2 reaction trips the spring (section 3).

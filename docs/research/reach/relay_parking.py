@@ -30,13 +30,18 @@ def main():
     out = dict(leader=leader, a1=a1, a2=a2, a1_relay=a1b, n_ws=int(ws.sum()), A_ws=round(float(inA[ws].mean()), 4),
                AorB_ws=round(float((inA | inB)[ws].mean()), 4), B_only_ws=int((inB & ~inA & ws).sum()),
                B_only_overhead=int((inB & ~inA & ws & (el >= 140)).sum()))
-    I = np.arange(len(B.idx)); res = {}
+    I = np.arange(len(B.idx)); res = {}; sets = []
     for name, a, sel in (("A", a1, inA), ("B", a1b, inB & ~inA)):
         for sg in (1, -1):
-            p2, ok, _ = K.closure(p1, p3, a, a2, sg, margin_deg=10.0); m = sel & ok
-            R = np.full(len(I), np.nan)
-            if m.any(): R[m] = K.requirement(B, I[m], K.unit(p2[m]))
-            R = np.where(np.isfinite(R), R, 400.0)
+            p2, ok, _ = K.closure(p1, p3, a, a2, sg, margin_deg=10.0); sets.append((name, sg, sel & ok, K.unit(p2)))
+    Rall = np.full((len(sets), len(I)), np.nan)
+    for i in I:                                  # pose by pose: the exact path keeps ONE skin tree per pose (no cache thrash)
+        js = [j for j, (_, _, m, _) in enumerate(sets) if m[i]]
+        if not js: continue
+        Rall[js, i] = K.requirement(B, np.full(len(js), i), np.stack([sets[j][3][i] for j in js]))
+    for j, (name, sg, m, _) in enumerate(sets):
+        if True:
+            R = np.where(np.isfinite(Rall[j]), Rall[j], 400.0)
             q = lambda x: round(float(np.percentile(R[m & x], 50)), 1) if (m & x).any() else None
             res[f"{name}_sigma{sg:+d}"] = dict(n=int(m.sum()), med=q(np.ones(len(I), bool)), p10=round(float(np.percentile(R[m], 10)), 1) if m.any() else None,
                                                 p90=round(float(np.percentile(R[m], 90)), 1) if m.any() else None,

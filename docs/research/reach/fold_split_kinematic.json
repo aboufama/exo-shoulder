@@ -1,0 +1,130 @@
+{
+ "pin-knee": {
+  "ws": {
+   "n": 360,
+   "folded": 57,
+   "stretched": 76,
+   "in_window": 227
+  },
+  "overhead": {
+   "n": 28,
+   "folded": 7,
+   "stretched": 10,
+   "in_window": 11
+  },
+  "across": {
+   "n": 68,
+   "folded": 1,
+   "stretched": 47,
+   "in_window": 20
+  },
+  "behind": {
+   "n": 25,
+   "folded": 1,
+   "stretched": 5,
+   "in_window": 19
+  },
+  "clip": {
+   "n": 110,
+   "folded": 0,
+   "stretched": 0,
+   "in_window": 110
+  }
+ },
+ "raglan": {
+  "ws": {
+   "n": 360,
+   "folded": 60,
+   "stretched": 76,
+   "in_window": 224
+  },
+  "overhead": {
+   "n": 28,
+   "folded": 9,
+   "stretched": 10,
+   "in_window": 9
+  },
+  "across": {
+   "n": 68,
+   "folded": 0,
+   "stretched": 48,
+   "in_window": 20
+  },
+  "behind": {
+   "n": 25,
+   "folded": 2,
+   "stretched": 5,
+   "in_window": 18
+  },
+  "clip": {
+   "n": 110,
+   "folded": 3,
+   "stretched": 0,
+   "in_window": 107
+  }
+ },
+ "knuckle": {
+  "ws": {
+   "n": 360,
+   "folded": 55,
+   "stretched": 77,
+   "in_window": 228
+  },
+  "overhead": {
+   "n": 28,
+   "folded": 9,
+   "stretched": 10,
+   "in_window": 9
+  },
+  "across": {
+   "n": 68,
+   "folded": 0,
+   "stretched": 48,
+   "in_window": 20
+  },
+  "behind": {
+   "n": 25,
+   "folded": 1,
+   "stretched": 6,
+   "in_window": 18
+  },
+  "clip": {
+   "n": 110,
+   "folded": 4,
+   "stretched": 0,
+   "in_window": 106
+  }
+ },
+ "spine": {
+  "ws": {
+   "n": 360,
+   "folded": 59,
+   "stretched": 81,
+   "in_window": 220
+  },
+  "overhead": {
+   "n": 28,
+   "folded": 8,
+   "stretched": 10,
+   "in_window": 10
+  },
+  "across": {
+   "n": 68,
+   "folded": 1,
+   "stretched": 51,
+   "in_window": 16
+  },
+  "behind": {
+   "n": 25,
+   "folded": 2,
+   "stretched": 5,
+   "in_window": 18
+  },
+  "clip": {
+   "n": 110,
+   "folded": 0,
+   "stretched": 5,
+   "in_window": 105
+  }
+ }
+}
