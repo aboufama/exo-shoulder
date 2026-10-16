@@ -268,18 +268,24 @@ def member3_and_stage(M):
     z_top, z_over = z_blk + 6.0, ztop                                                      # bridge: 6 mm tall, 3 mm over the block
     P7 = (xt + (z_top - zt) / kr, z_top); P8 = (xt - (zt - (F3 + T)) / kr, F3 + T)
     x_step, x_end = xcs - L1B.S.CAR_L / 2, xcs + GW / 2
-    pts = [(L_SEAT, F3), P1, P2, (x_end, z_blk), (x_end, z_over), (x_step, z_over), (x_step, z_top), P7, P8, (L_SEAT, F3 + T)]
-    rad = [0.0, 3.2, 0.5, 1.0, 1.0, 1.0, 1.0, 2.0, 0.2, 0.0]
+    # beside the block the bridge's underside sits at the model's own bridge level zb (= the model's carriage-B underside,
+    # 1 mm under the real block top: the model's bridge metal, skin-checked there), with a locating shoulder on the
+    # block's side face; over the block it sits on the block top (the real 10.5 mm stack)
+    zb_m = M.zb; P2 = (xn1 - (zn1 - zb_m) / kr, zb_m); x_blk0 = xcs - GW / 2
+    assert P2[0] + 1.0 < x_blk0 and zb_m < z_blk, (P2, x_blk0, zb_m, z_blk)
+    pts = [(L_SEAT, F3), P1, P2, (x_blk0, zb_m), (x_blk0, z_blk), (x_end, z_blk), (x_end, z_over), (x_step, z_over), (x_step, z_top), P7, P8, (L_SEAT, F3 + T)]
+    rad = [0.0, 3.2, 0.5, 0.5, 0.2, 1.0, 1.0, 1.0, 1.0, 2.0, 0.2, 0.0]
     neckb = prism(c3, sa, sn, pts, rad, W, both=True)
     m3 = US.glue(at(US.plate_r(u[2], F3, sa, W), c3), neckb)
     m3 = m3.fuse(at(US.lower_pin(u[2], F3), c3))
     for y_ in (-2.5, 2.5):                                                                 # 2x M1.6 [est] into the across block
         p = c3 + xcs * sa + y_ * st + z_over * sn
         m3 = m3.cut(csk_hole(p, -sn, 1.6, 4.0))
-        out.append(("l3", 3, f"{SCREW}x4 ISO 10642 countersunk, across block to member 3 (polished)", screw_csk(p, -sn, 1.6, 4.0, "")[2]))
+        out.append(("l3", 3, f"{SCREW}x4 ISO 10642 countersunk screw, across block to member 3 (polished stainless)", screw_csk(p, -sn, 1.6, 4.0, "")[2]))
     m3 = m3.clean() if m3.clean().isValid() else m3
     out.insert(0, ("l3", 3, "D7-04 member 3: J3 pad + integral O7 pin + ramped neck (60 deg, the model's) + bridge, one sketch (Ti-6Al-4V)", m3))
     rep["member 3"] = dict(neck_underside=[list(map(float, P1)), list(map(float, P2))], bridge=[float(x_step), float(x_end), float(z_blk), float(z_top)],
+                           bridge_underside_beside_block=[float(P2[0]), float(x_blk0), float(zb_m)],
                            valid=m3.isValid(), solids=len(m3.Solids()))
     print(f"member 3: neck {neck:.1f} mm, ramp 60 deg from F3 {F3:.2f} to the block top {z_blk:.2f}; valid {m3.isValid()}, solids {len(m3.Solids())}", flush=True)
     # ---- the real stage, heights z from the fitted cuff level tr along sn, around the stage centre cs
@@ -351,7 +357,7 @@ def arm_side(M):
     part = bot.fuse(br); part = part.clean() if part.clean().isValid() else part
     out = [("H", "D7-05 BOTTOM + stage base, one 5-axis part (user's bar cut at s 255; base plate 1.5 under the along block + arm + tongue fused into its channel web; 7075-T6)", part)]
     for x_ in (-2.5, 2.5):
-        out.append(("H", f"{SCREW}x4 ISO 10642 countersunk, along block to the base (polished)", screw_csk(O + x_ * aH, nH, 1.6, 4.0, "")[2]))
+        out.append(("H", f"{SCREW}x4 ISO 10642 countersunk screw, along block to the base (polished stainless)", screw_csk(O + x_ * aH, nH, 1.6, 4.0, "")[2]))
     for g, n, s in up:
         if n.startswith(("BOTTOM", "UPPER ARM CUFF", "M4x6 ISO 10642 countersunk (upper cuff)")): continue
         out.append((g, n, s))

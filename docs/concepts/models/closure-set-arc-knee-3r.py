@@ -540,6 +540,7 @@ def frozen(par):
     M = Frozen(B, P2); r = M.run()
     keys = ("gap", "reach", "follow", "inband14", "inband10", "contact")
     out = dict(fit60_fast={k: r1[k] for k in keys}, big={k: r[k] for k in keys}, mode=B.mode, why=r.get("why"), knee=r.get("knee"),
+               why60=r1.get("why"), parts60=r1.get("parts_ib14"), levels=r1.get("levels"), knee60=r1.get("knee"),
                parts_pairs=r.get("parts_pairs"), audit_big=audit(M, B), audit_60=audit(M1, B1))
     return out
 

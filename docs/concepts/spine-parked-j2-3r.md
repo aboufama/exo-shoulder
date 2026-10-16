@@ -228,3 +228,22 @@ contact. The skin inside hub 2's cone (9 deg) in those poses, traced back throug
   slightly behind the frontal plane (cocking a throw, reaching back over the shoulder).
 * The fix is in the seats, not in the hub size. Raising hub 2 to clear #93 would cost hub 2 and link 1 their band
   (+45 mm). A q of 1.0 at the k4216 seats gave 70.30 (in-band 0.41).
+
+## The weird lead: fold-free seats (J1 horizontal, anterolateral)
+
+Two family-1 seat sets were tested, with arcs from the fold law: (a) J1 bvec(120, -6), J3 wdir(63, 6), arcs 38.5 / 48.2;
+(b) J1 bvec(138, -6), J3 wdir(63, 24), arcs 41.8 / 38.8.
+
+* **Closure works.** Both chains close on 0.89-0.90 of the workspace, against 0.72 at the leader's seats.
+* **But the hubs move onto moving skin.**
+  - Hub 1 leaves the rest skin 52-56 mm from GH over the anterior deltoid.
+  - Hub 2 sits on the upper lateral deltoid at rest (sigma -1, axis (0.02, 0.34, 0.94)).
+  - Over the poses, the skin under hub 2's axis ranges **52-104 mm** from GH (sigma -1) and 48-188 mm (sigma +1).
+    A rigid hub must clear the highest skin it ever passes over (proximity atlas), so hub 2 rides ~100 mm out over
+    most poses.
+  - This is the price of the fold: the seats that keep J1-J3 inside a 57-deg window are seats over the deltoid, whose
+    skin moves with the humerus.
+* **Cost.** One evaluation takes > 110 s here (36 s CPU under a load of 25), against 1.3 s at the leader's seats: the
+  hub levels march far out.
+* **Farm runs.** CMA streams H / I (seat set a, sigma -1 / +1) and J / L (seat set b) run on the farm, with stream G
+  (the leader basin re-polished on the plain gap). Results are below.

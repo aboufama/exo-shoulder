@@ -41,6 +41,26 @@ Sister morphologies: `docs/concepts/raglan-routed-3r.md` (routing on the plain 3
 
 Passive translations 0. Every coordinate is set by the 3 actuators and the closure (the knee is a closed planar RRR).
 
-## Results
+## Results (Bench(60, 160) fast grid, every pin-knee rule on)
 
-(written as they come in)
+**Parity.** d = 0 reproduces the pin knee's k10 exactly: gap 26.34, reach 0.7063, follow 0.9667, in-band 14 0.8419,
+in-band 10 0.4001, contact 0.0116 (5 s). Per part (clip poses taken, in-band 2-14 / median mm / samples): hub 1 1.00 /
+9.5 / 80, hub 2 0.996 / 10.5 / 80, hub 3 0.748 / 12.0 / 80, E 0.881 / 8.9 / 28, boss 0.816 / 9.4 / 32, pad 0.80 / 11.5 / 32,
+knee link 0.64 / 12.8 / 90, link 1 0.925 / 7.3 / 36, link 2 0.834 / 10.7 / 141. Not taken: 47 fold, 2 skin (of 220).
+
+**Raglan map at k10** (the measurement, 11 s; `map` mode; 19 t x 21 d cells per link, d -50..+50 deg off the great
+circle, need sphere-traced to 2 mm in each link's own frame over the 173 poses the chain closes in; `ceiling` = the best
+12 mm window share, i.e. what one height can keep in 2-14 mm):
+
+| link | span | great circle (d = 0) ceiling along t | best d per t | what it says |
+|---|---|---|---|---|
+| link 1 (hub 1 -> hub 2) | 40.3 deg | 0.99-1.00 at every t | -20..+10 all within 0.01 of the best | already a raglan line: the whole band d -20..+10 is equally good; no route can add |
+| link 2 (hub 2 -> hub 3) | 77.8 deg | 0.99 (t <= 0.3) falling to 0.80-0.87 (t >= 0.7) | 0 at every t (+-5 at the ends) | the great circle IS the argmax: off it the ceiling falls on both sides (d -20: 0.50-0.83; d +20: 0.67-0.98 near hub 2 only) |
+
+So the leader's CMA (9869 tries on the osn seats) already put both links on their lines of least skin motion; the
+straight bar is the raglan seam here. That differs from the plain 3R (raglan-routed-3r), whose straight link 1 crossed
+the posterior acromion edge and gained 8.6 gap points from one 38 deg turn.
+
+**One routed check** (link 1 t 0.5 d -10, link 2 t 0.7 d +10): gap 28.87 - link 1 0.925 -> 0.949, link 2 0.834 -> 0.768,
+as the map predicts.
+

@@ -171,3 +171,49 @@ spec axes: rail 84.81 (beta 40, chi 60) vs hub 73.57.
   46-64), but link 2 starts 60-80 mm above them.
 - The hub needs ~23 mm of footprint at the J2 point; the rail needs ~150 deg of arc. A rail cannot beat the hub on
   in-band, and when its travel is cut to fit the window, reach falls (spec axes: an in-band rail caps reach at ~0.76).
+
+### Red team of the best coarse config (k114, Bench(60,160))
+
+- **The optimistic number.** The r_lay fix point is not unique: started at 60 mm the rail settles at 132-139 mm and
+  scores 71.12-71.53; started at 132 mm it scores 72.20 (level 138.0). Spread ~1 gap point; the farm number (71.53)
+  is quoted.
+- **The point that pinches.** Closest metal 0.24 mm at workspace plane 60 / elevation 165 / axial -90 (overhead);
+  0.56 and 0.71 mm at elevation 165 too. With metal < 1 mm counted as contact the gap is 76.13-76.80. Two hub crowns
+  sit 4.1 mm inside the skin (those poses count as contact).
+- **The poses that jam.** 34 of 160 workspace poses are not taken: 29 by the J2 fold / K2 branch flip (overhead
+  plane 0-45 elev 135, axial -45; plane 105-120 elev 150-165 axial -90..-135), 4 by contact (elev 150 axial 0), 1
+  by K6.
+- **Named pose groups** (taken / total, in band 2-14): rest 5/5, 0.25; overhead 6/17, 0.38; across the body 29/36,
+  0.21; behind the back 18/19, 0.36. **Overhead (elev >= 140): reach 0.33.**
+- **Where the rail is.** Level 138 mm from GH, i.e. ~30 mm (median) off the skin in every pose; 0.0 in band. The
+  carriage plate is at 142.6 mm. 120 mm of Ti arc rail and a 20 x 16 carriage, both out of band: the "no metal at
+  the J2 point" idea moves metal off the worst spot onto a longer arc that is worse.
+
+### The trade the rail actually offers (local probes, spec axes, beta 34, chi 90 = the rail centred in its window)
+
+| travel share `cov` | rail in band | rail level | in-band 14 (all metal) | reach | follow | gap |
+|---|---|---|---|---|---|---|
+| 0.60 | **0.998** | 59 mm | **0.612** | 0.463 | 0.767 | 92.51 |
+| 0.75 | 0.539 | 63 mm | 0.486 | 0.600 | 0.883 | 80.03 |
+| 0.95 (beta 40, chi 60) | 0.001 | 104 mm | 0.245 | 0.750 | 1.0 | 84.81 |
+| hub control (same axes) | - | - | 0.281 | 0.819 | 1.0 | 73.57 |
+
+- **A rail inside its window is in band** (0.998 at 59 mm, and it lifts the whole design to 0.61 in band, twice the
+  hub control's 0.28). This is the one real gain the morphology has.
+- But inside the window the J2 travel is ~38 deg of the 104 the workspace needs: reach 0.46. Every degree of travel
+  added beyond the window lifts the whole rail (one level), so in-band collapses before reach recovers. No point on
+  this curve beats the hub control (73.57).
+- At beta 40 the roller strips run into hub 1 (K6 0.79 of closing poses) unless the rail rides over hub 1's crown.
+
+### Variants that would remove the limiter (reasoned, not built in this time box)
+
+1. **Two-stage arc (half-speed cage).** A curved telescopic slide whose middle stage is driven at half the J2 angle
+   by rolling contact (the roller cage of a crossed-roller way moves at exactly half the relative speed, no gear): each
+   stage spans travel / 2 + its carriage, at its own level, in link 1's frame and in a half-angle frame. It halves
+   the arc each rigid body needs (~75 deg each, inside the 108 deg window). Risks: no catalogue curved telescopic way at
+   this size (custom), a third body at a third level, cage creep (crossed-roller cages walk without a rack - the
+   cage's rack-and-pinion fix is a gear, MVP1 forbids it).
+2. **Axes chosen for small J2 travel.** The sweep left axes free (az, el, a1, a2, wd, wa) and never found J2 travel
+   below ~100 deg at reach >= 0.8: the workspace needs it.
+3. **The rail in link 2's frame** (carriage on link 1): the link-2-frame windows are narrower (~60-70 deg at >= 0.7
+   in band), so it is worse.
