@@ -122,6 +122,13 @@ docs/EVOLUTION.md (and its snapshot to pipeline/evolution/) as part of the judge
   next to the score and NOT folded into it. Once verified bench scores plateau at >= 95 (gap <= 13.75), the search
   objective switches: minimise complexity subject to score >= 95 (a constrained / Pareto search - drop a passive joint,
   merge bodies, swap a slide for a pin), and a simpler design at score >= 95 beats a more complex one at a higher score.
+- **Reach is the priority now** (user, 2026-10-16 ~05:00 UTC: "i feel like the reach numbers at 60s just isn't good, it seems
+  like they're plateauing near the top, lets try to max these out as much as we can"). Every verified leader sits at reach
+  0.59-0.62 on Bench(110,360) (overhead 0.17-0.25) while in-band (~0.90) and follow (~1.0) are met: the gap IS reach. Push
+  reach toward 0.9 with every lever inside the rules - fold levers (scheduled / relay / coupled elements), a 4th joint
+  (the DOF cap allows 4; MVP1 needs every coordinate determined: spring-centred + stops, or sensed), slimmer hardware,
+  re-seating - and attribute every lost pose to its cause before choosing the lever. Never relax the 1 cm rule or the
+  DOF cap, and never shrink the singularity / transmission margins to buy reach without a red-team and the user's say.
 - **No lofts, ever** (user, 2026-10-15: "for all the design you do, lofts look horrible and introduce geometric problems, you
   can combine arcs, but no lofts!"): every surface comes from sketches of lines and tangent arcs - extrudes, revolves,
   sweeps of ONE constant section along a line/arc path, fillets. No lofts, no surfaces fitted or shrink-wrapped to skin
