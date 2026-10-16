@@ -74,3 +74,74 @@ pad boxes. Skin-checked but not scored: hub side walls and crown discs, strap to
 knee link edges and top. Scored: every underside (2 mm grid). Modes: `check`, `redteam`, `frozen` (fit on
 Bench(60,160) fast, wear the shape on Bench(110,360) without refit; CB_EXACT=1 for the exact path).
 
+
+
+## Results (Bench(60,160) fit; Bench(110,360) exact frozen = the number that counts)
+
+| config | what | Bench(60,160) | Bench(110,360) exact, frozen shape | reach / ib14 / contact (exact) |
+|---|---|---|---|---|
+| k10 | leader k4216 seats, knee posterior (phib -90), lE 30 / lc 25, 5 mm pin stack | 26.34 fast | 33.84 (score 87.69) | 0.619 / 0.845 / 0.003 |
+| k264 | coarse-sweep best (az1 108, el1 66.8, az2 19.4, el2 56.1, b3 0.157, lE 35.6, lc 18.6) | 26.47 fast | **31.22 (score 88.65)** | 0.617 / 0.883 / 0.012 |
+| k299 (D1) | CMA stream D (az1 87.1, el1 60.2, az2 14.4, el2 49.5, b3 0.362, lE 32.7, lc 28.0, phib -56) | 26.17 exact path / 25.87 fast | 31.96 (score 88.38) | 0.597 / 0.895 / 0.012 |
+| reference | zero-passive spherical 3R at the leader's seats (round-3 judge) | - | 41.73 | |
+| reference | 2-slide leader osn k4216, verified | 32.61 fast | 42.59 | |
+
+The flat pin knee beats both references on the verification bench by ~10 gap points with 0 passive translations (the
+2 crossed RSR3M guides, carriages and bridge are gone: a 5 mm pin stack replaces a 10.5 mm guide stack). It does NOT
+cross score 90 on the verification bench: every config loses 28-30 gap points to reach alone.
+
+**Freed b3 (lead-note test).** The knee removes the slide-travel cap on b3, but b3 also turns u3 and shrinks the J2-J3
+arc a2, i.e. the fold window: at the k10 seats and knee, b3 0.23 -> 26.34; 0.40 -> 32.37 (fold 47 -> 50, a2 74.1 ->
+71.0); 0.60 -> 136.84 (drift 33 x 37 mm, the knee link sweeps over the E strap: 98 jams); 0.80 -> 161.67. CMA streams
+started at b3 0.45 / 0.5 / 0.65 end at 34.03 / 34.10 / 28.80 (b3 0.536, Bench(60,160) exact path). The free b3 does not
+pay; the CMA's best sits at b3 0.16-0.36.
+
+**The limiter, measured (IK only, Bench(110,360), 360 workspace poses).** theta = angle(u1, Q u3), the J1-J3 axis
+angle, must lie in [|a1 - a2| + 10, a1 + a2 - 10]. At k10 (a1 40.3, a2 74.1) the window is [43.7, 104.4] = 60 deg; the
+workspace needs 27-141 deg (5th-95th percentile, 6-175 in all): 62 poses fold low, 70 high, kinematic reach 0.633.
+Overhead (elevation >= 140, 28 poses) needs theta 22-146 deg: 9 in the window, 9 below, 10 above. The window width is
+2 min(a1, a2) - 20, so a1 (the angle between the two GH-ray hubs J1 and J2) sets reach: moving J2's seat down
+(az2 / el2, IK only) gives a1 44 -> 0.683, 52 -> 0.733, 57 -> 0.811, 65 -> 0.889, 78 -> 0.939. **Proximity forbids it:**
+on the bench at el2 45 (a1 52) hub 2 must sit 93 mm from GH (61 at k10) and the gap is 64.54; el2 40 (a1 58.5) 99.6 mm,
+71.91; el2 20 (a1 78) 114.7 mm, hub 2 0 % in band, 79.55. Hub 2 rides on link 1 over the posterior shoulder; the lower
+its GH ray, the more deltoid it must clear. Same result as the leader's fold-frontier study (offset-skin-normal-3r.md):
+the knee changes the closure, not the GH-ray hub layout, so the fold frontier stays closed.
+
+**What score 90 on the verification bench needs.** gap = 100 (0.90 - reach) + ... <= 27.5 needs reach >= 0.625 with
+in-band 0.90, follow 0.95 and zero contact; at the measured in-band (0.88-0.90) and contact (0.3-1.2 points), reach
+>= ~0.65. The best frozen reach is 0.619. The remaining lever is a fold lever stacked on this closure (acromial-rocker-3r,
+spine-parked-j2-3r, j2-arc-sector-3r), not more search here.
+
+## Red team (k10, Bench(60,160) fast; k10 / D1 on Bench(110,360) exact frozen)
+
+* **The pose that jams.** No knee jam at the CMA bests on the fit bench; on the big bench the frozen D1 knee is out of its
+  window (`slide`) at 13 poses and jams 9 (knee vs E strap 5, E strap vs link 2 4). At b3 >= 0.6 the knee link sweeps
+  the E strap at ~100 poses: the swept knee is a real R16 constraint, checked at every pose (knee-hub 3, knee-E, knee-L1/L2,
+  pad-hub 3, pad-E, pad-L1/L2, E-L2 adjacent at J3).
+* **The point that pinches.** Hub 2's crown/wall at 0.25 mm (scored underside 0.49 mm) at plane 0 / elev 75 / axial 45
+  (flexion with external rotation): hub 2 on link 1 over the posterior acromion. Near-touch: k10 fast 3 poses < 1 mm ->
+  29.95, 17 poses < 2 mm -> 49.80; k10 exact frozen min 0.2 mm, < 1 mm -> 35.58; D1 exact frozen min 0.1 mm (plane -15,
+  elev 45, axial 60), 11 poses < 1 mm -> 38.45, 31 < 2 mm -> 52.82.
+* **The optimistic number.** The fit-bench gap (25.87-26.47) is 5-7 points optimistic against the frozen big bench
+  (31.2-33.8): the fold boundary is tuned to the 160 sampled workspace poses (lesson c) and the knee window to the fit
+  drift. Overhead (elevation >= 140, exact frozen): reach 0.29 (k10 and D1), in-band 0.90 / 0.96 - the overhead loss is
+  all fold.
+* **Pose groups (k10 fast).** rest 5/5 taken, median 10.4 mm, ib14 0.73; overhead 7/17, 9.1 mm, 0.90; across the body
+  24/36, 13.9 mm, 0.50 (metal high across the body); behind the back 14/19, 10.3 mm, 0.90. Every pose not taken is fold
+  except 2 skin drops.
+
+## MVP2 moment path (pins vs the miniature guides)
+
+The knee link is a two-force member (pins a and b carry no torque), so J3's torque reaches the arm as a force along line
+(a, b). Arm torque about the d3-parallel line through GH per unit J3 torque = dist(GH', ab) / dist(C, ab): measured over
+the Bench(110,360) poses that close, k10 0.79-1.24 (median 1.20, lever of J3 on the knee force >= 27 mm), D1 0.46-1.38
+(lever >= 17.7 mm) - J3 never loses its drive (the [30, 150] deg knee window keeps line ab off C). The in-plane reaction
+goes to the GH joint through the cuff. The elevation drive (J1/J2) reaches the arm as a force along d3 at the pad (lever ~60 mm about GH, the pad's distance
+along the humerus) plus whatever couple the pins pass in tilt: thrust on the GTM washers and a tilting moment ~F x lc
+(25-28 mm) on pins a and b. MVP1 (unpowered, tracking loads < 1 N m [est], docs/research/passive_dof_hardware.md) puts
+< ~0.5 N m on each pin: a 4 mm iglidur sleeve in the 5 mm stack carries it (the RSR3M it replaces is rated 0.29 N m
+static). MVP2's 25 N m design moment needs ~400 N at the pad and ~10 N m of tilting moment per pin [est]: beyond a 4 mm
+sleeve in a 5 mm stack. For MVP2 the knee pins become hub-sized bearing pairs (the O20 MR117 stack, 12.25 mm, or the
+MGN12H-class alternative of the hardware note), i.e. the MVP2 knee costs ~7 mm more stack than the MVP1 knee measured
+here - still no guide (none of the miniature guides carries it either, 10-80x short). The MR63ZZ pair (6 mm stack) was
+33.53 vs 33.09 fast at the k4216 seats (phib +90): 1 mm of stack costs ~0.4 gap points.

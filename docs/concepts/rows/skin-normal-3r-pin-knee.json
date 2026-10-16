@@ -22,7 +22,7 @@
  "v_gap": null,
  "n_configs": 359,
  "verdict": "in progress (resumed 02:05 after the container restart): best k299 26.17 on Bench(60,160) (exact path, CMA stream D); k10 (leader seats, knee posterior) 26.34 fast, worn FROZEN on Bench(110,360) exact 33.84 vs the zero-passive spherical 41.73 and the 2-slide leader's verified 42.59; freed b3 does not pay (0.40: 32.37, 0.60: 136.84 knee-E jams); CMA round 2 on the farm",
- "limiter": "J2 fold (47 of 220 poses, untouched by the knee)",
+ "limiter": "J2 fold = the J1-J3 axis-angle window: 2 min(a1, a2) - 20 = 60 deg at a1 40 vs 27-141 deg needed (overhead 22-146); widening it means a lower J2 GH-ray seat, where hub 2 must ride 93-115 mm off GH (proximity); reach 0.60-0.62 on Bench(110,360) exact = 28-30 gap points",
  "note": "Bench(60,160); CMA round 1 ran on the exact path (no --bench-cache on the farm jobs: 9 evals per stream); round 2 with the cache running; gate pending",
  "doc": "docs/concepts/skin-normal-3r-pin-knee.md",
  "model_file": "docs/concepts/models/skin-normal-3r-pin-knee.py",
@@ -60,6 +60,45 @@
    "follow": 1.0,
    "inband14": 0.8966,
    "inband10": 0.5703
+  }
+ },
+ "exact_frozen_D1": {
+  "k": 299,
+  "bench": "Bench(110,360) exact, shape frozen from Bench(60,160) fast",
+  "gap": 31.96,
+  "reach": 0.5972,
+  "follow": 0.9818,
+  "inband14": 0.8954,
+  "inband10": 0.5386,
+  "contact": 0.0122,
+  "fit_fast_gap": 25.87,
+  "near_touch_min_mm": 0.1,
+  "gap_near1": 38.45,
+  "gap_near2": 52.82,
+  "overhead140": {
+   "reach": 0.2857,
+   "follow": 1.0,
+   "inband14": 0.9591,
+   "inband10": 0.668
+  }
+ },
+ "exact_frozen_k264": {
+  "k": 264,
+  "gap": 31.22,
+  "reach": 0.6167,
+  "follow": 1.0,
+  "inband14": 0.883,
+  "inband10": 0.4898,
+  "contact": 0.0119,
+  "fit_fast_gap": 26.47,
+  "near_touch_min_mm": 0.01,
+  "gap_near1": 40.6,
+  "gap_near2": 66.53,
+  "overhead140": {
+   "reach": 0.25,
+   "follow": 1.0,
+   "inband14": 0.923,
+   "inband10": 0.6335
   }
  }
 }
