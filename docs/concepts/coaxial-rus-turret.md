@@ -48,3 +48,33 @@ red team come from `foldfree-rus-truss.py`. Sweep: `docs/concepts/sweeps/coaxial
 4. **The outside judge.** tools/concept_bench.py, on the same poses, metrics and contact rule as every row. The frozen
    shape is worn on Bench(110,360) exact, with near-touch < 1 mm counted as contact and the overhead split reported.
    The verifier re-measures next.
+
+## Measured (Bench(60,160) fast, every model check on, full model): killed
+
+`docs/concepts/sweeps/coaxial-rus-turret.json`. The seat's fold-free studs come from docs/research/rus/leg_bands.json.
+For bvec(-24..-30, 4..8) they all sit on the posterior humeral head: s 0-20 mm, theta 90-150 deg.
+
+| config | seat / studs / betas / branch | p | kin-valid | det ok ws | gap | reach | contact | why |
+|---|---|---|---|---|---|---|---|---|
+| informed-1 | (-30,8) / (10,120) (10,150) (20,105) / 70 65 60 / +1 | 100 | 0.38 | 0.50 | 320.51 | 0.006 | 0.57 | the parallel singularity on half the workspace (the studs cluster); every crank at the march ceiling (r_T 230-239); crank 0 / crank 1 collide in 69 poses |
+| informed-2 | (-24,4) / (10,90) (10,150) (0,105) / 70 65 60 / -1 | 100 | 0.64 | 0.79 | 358.13 | 0.019 | 0.85 | cranks at the ceiling again (r_T 230-239); stacked cranks collide (crank 0/1 67, crank 1/2 29) |
+| informed-3 | same, 90th-percentile fit | 90 | 0.68 | 0.81 | 275.0 (0 taken) | 0 | 0 | on the -1 branch each rod folds back over its own crank (crank 0 / rod 0 in 145 poses) |
+
+In the model, each leg alone is valid (closure + 15 deg transmission) on 0.93-0.98 of the workspace, so the fold
+lever works per leg. The turret fails on everything else.
+
+**Killed after the coarse screen.** The idea's premise was "one best seat, three fold-free legs". It contradicts
+itself:
+- a single crank axis is fold-free only with studs clustered on one patch of the arm, so the three moment lines
+  T_k x Q_k are nearly coplanar and the turret is parallel-singular on 19-50 % of the workspace;
+- each 60-70 deg crank still sweeps under the arm (crank-parking mid-span need p90 105-130 mm, against a seat skin
+  radius of 93-102 mm);
+- on the branch that keeps the cranks out of the trunk, the rods fold back over their own cranks.
+
+Coaxial SPMs work in robotics because their platform is a rigid body with spread attachment points. On the user's
+arm, the fold-free attachment points are not spread.
+
+A farm coarse sweep (200 random seat / stud / branch configurations) was queued and cancelled: the farm queue stood at
+107 jobs with 20 running, and the informed configurations above had already shown that the failure is structural.
+The CMA streams were cancelled before they started. The convergence gate is not applicable (killed after the coarse
+screen).

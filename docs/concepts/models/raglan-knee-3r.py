@@ -145,6 +145,7 @@ def _report(B, params):
         ib = sum(w[k] * pib[k][0] for k in w) / max(1, sum(w.values()))
         r["inband14_fixed_n"] = round(float(ib), 4)
         r["gap_fixed_n"] = CB.gap_of(ib, r["follow"], r["reach"], r["contact"])
+        r["inband_member"] = dict({k: v[0] for k, v in pib.items()}, n={k: v[2] for k, v in pib.items()}, gap_fixed_n=r["gap_fixed_n"])   # kept by concept_cma
     return r, M
 
 

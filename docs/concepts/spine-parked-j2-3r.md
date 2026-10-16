@@ -39,13 +39,15 @@ Sweep log: `docs/concepts/sweeps/spine-parked-j2-3r.json`. Row: `docs/concepts/r
 
 ## Result (2026-10-16 03:00 UTC)
 
-**Best: gap 30.24 on Bench(60,160) fast** (score 89.0). Worn **frozen on Bench(110,360) exact: 34.79** (score 87.35;
+**Best fast: gap 29.31 on Bench(60,160)** (score 89.34; k2445, found when the whole search history was re-evaluated on the
+plain gap; frozen exact pending). **Best worn frozen on Bench(110,360) exact: 34.79** (CMA-B best, fast 30.24; score 87.35;
 reach 0.619, follow 1.000, in-band 14 0.850, in-band 10 0.444, contact 0.018). **0 passive translations, 0 passive
 rotations, 3 active pins.**
 
 | | fast Bench(60,160) | frozen Bench(110,360) exact | near-touch (metal < 1 mm = contact), exact | min metal-skin | overhead >= 140: reach / in-band 14 |
 |---|---|---|---|---|---|
-| CMA-B best (O15 J2, O15 J3) | **30.24** | **34.79** | 37.64 | 0.15 mm | 7/28 / 0.874 |
+| k2445 (CMA-B gen 46, plain re-evaluation; O15 / O15) | **29.31** | pending (farm job spm-frozen3-k2445) | fast 34.09 | 0.06 mm | fast 0/12 |
+| CMA-B best (O15 J2, O15 J3) | 30.24 | **34.79** | 37.64 | 0.15 mm | 7/28 / 0.874 |
 | CMA-D best (O15 J2, O17 J3) | 31.11 | 34.83 | **36.59** | 0.43 mm | 6/28 / 0.901 |
 | CMA-A best (O17 J2, O15 J3) | 31.42 | 35.09 | 38.55 | 0.01 mm | 6/28 / 0.858 |
 | k4216 seats, O20 hubs, same kit | 38.73 | 46.92 | 52.20 | 0.06 mm | 5/28 / 0.912 |
@@ -288,13 +290,20 @@ Two family-1 seat sets were tested, with arcs from the fold law: (a) J1 bvec(120
 | E (near) | 769 | 34.69 | 0.58 | 0.07 | 32.30 |
 | F (near) | 1065 | 38.86 | 0.49 | 0.00 | - |
 
-* **The gate passes.**
+* **The gate passes, on the whole history too.** The whole history (240 coarse + 5510 CMA tries, re-evaluated on the plain gap on
+  the farm, in the order the streams ran) has best 29.31 (k2445). It gained 0.0 score points over the second half and
+  0.0 over the last third, and the top 5 are within 0.16 score points (29.31-29.75, all in the B basin).
   - Every stream's sigma collapsed.
   - Over the 2nd half, every stream gained < 1 score point (max 0.58). Over the last third, < 0.5 (max 0.11).
   - The top 5 distinct plain configurations are B 30.24, D 31.11, A 31.42, k32 31.90 and E 32.30: within 2.06 gap
     = 0.75 score points.
   - The whole history (coarse, CMA, local probes) is re-evaluated on the plain gap on the farm and appended to the sweep
     log as it lands.
+* **Wide farm probe, done.**
+  - 400 random configurations over az 60-140, el 35-85, a1 30-85, a2 55-115, wd 35-120, wa -45..25, sigma +-1:
+    140 honest, best 54.76 (reach 0.856, in-band 0.43).
+  - 150 long-arc configurations at the leader's seats (a1 42-75, a2 72-110): best 45.52 (a1 42.4).
+  - Reach above 0.85 comes only with in-band 0.36-0.43. No second basin.
 * **Still running on the farm** (results append to the sweep log): stream G, the leader basin re-polished on the plain
   gap; streams H / I / J / L at the fold-free anterolateral seats.
 

@@ -38,6 +38,11 @@ PATCHES = [
      '    if P.get("studs3"): q = q[1:]\n    D["q"] = q; D["sad"] = sad\n'),
     ('        if x.startswith("ball") and (H_body(y)) and (x == "ball0" and y == "bar" or x != "ball0" and y == f"sad{int(x[4:]) - 1}"): return True\n',
      '        if x.startswith("ball") and (H_body(y)) and ((y == "sad" + x[4:]) if D["P"].get("studs3") else (x == "ball0" and y == "bar" or x != "ball0" and y == f"sad{int(x[4:]) - 1}")): return True\n'),
+    # option `crank_over`: every crank rides one strap layer over the S-fixed base brackets it sweeps across
+    # (+ BR_T + 1.5 mm outside its hub disc), as a real crank would be stacked over the base frame
+    ('            prof = env60(np.maximum(prof, plate), alphas * r0)\n',
+     '            prof = env60(np.maximum(prof, plate), alphas * r0)\n'
+     '            if P.get("crank_over") and D["br"]: prof = np.where(onhub, prof, prof + BR_T + 1.5)\n'),
 ]
 
 
