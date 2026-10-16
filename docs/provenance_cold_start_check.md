@@ -205,7 +205,7 @@ https://felixrieseberg.com/how-to-be-more-ambitious-a-tutorial-for-humans-with-m
 - Explain the dashboard build's "record" line and its warnings in `docs/DASHBOARD.md`.
 - Say what the exo-band8-23 endpoints are (retired GPU search endpoints, keep at 0, or delete).
 
-## Follow-up: how each gap was closed (same day, ~20:35 UTC by commit time)
+## Follow-up: how each gap was closed (same day, commit 253adac at 20:30 UTC)
 
 | gap | fix |
 |---|---|

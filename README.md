@@ -16,7 +16,7 @@ scripts that happened to get written:
 | What has been learned so far? | [`docs/FINDINGS.md`](docs/FINDINGS.md) |
 | How do I run it? | [`docs/PIPELINE.md`](docs/PIPELINE.md), [`CLAUDE.md`](CLAUDE.md) for agents |
 
-## Status (2026-10-16, ~20:35 UTC by git commit time)
+## Status (2026-10-16, 20:30 UTC by git commit time)
 
 **New here, with no context?** The work lives on branch `claude/trusting-pasteur-6czobp` (`main` stopped on
 2026-10-14). Read, in this order: [`CLAUDE.md`](CLAUDE.md) (the user's goal and rules, binding),

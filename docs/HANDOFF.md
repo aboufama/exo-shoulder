@@ -1,4 +1,4 @@
-# Handoff: the state of the project (2026-10-16, last edit ~20:35 UTC by git commit time)
+# Handoff: the state of the project (2026-10-16, last edit 20:30 UTC by git commit time)
 
 Written for a reader with no context: a new session, a new model, or a person. Every number below comes from a file in
 this repo (rows, verifier outputs, scorecards, ROUNDS.md, FINDINGS.md, EVOLUTION.md); the file is named next to it.
