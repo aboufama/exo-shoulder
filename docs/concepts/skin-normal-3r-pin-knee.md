@@ -224,3 +224,65 @@ points (32.8 with the 1 mm near-touch rule on both) and beats the verified 2-sli
 translations. **Verdict: VERIFIED, not refuted.** It does not reach score 90 on the verification bench (needs gap <=
 27.5); the whole remaining gap is reach (the J2 fold, 0.25 overhead), and the near-touch at the arm-at-side poses
 (0.02 mm) is the next red-team point for the L1 CAD: a 1 mm liner rule costs 8 points.
+
+## L1 keep-out CAD (generation-3 winner, 2026-10-16 ~05:00 UTC)
+
+Design `pipeline/full-exo/designs/l1_skin-normal-3r-pin-knee`, builder `pipeline/concept_l1/build_pinknee_l1.py` (derived
+from build_osn_l1.py; the configuration is an INPUT: `--params`, `--params-file`, `--k`, default = the rows file's
+best_params, per-joint hubs `--hubs 10,10,10` or rad1..rad3, so the polish run's config drops in), red team
+`pipeline/concept_l1/redteam_pinknee_l1.py`.
+
+**Shape = the verified one.** The fit is the frozen protocol's own (k4598 on Bench(60,160) fast: gap 20.63, reach 0.6937,
+follow 1.0, ib14 0.9033, contact 0; faces 49.9 / 60.9 / 72.0 mm, knee level tr 78.51, knee centre m (-8.635, 2.252, 0)) -
+the shape the verifier wore on Bench(110,360) exact. Parts at real size: O20 x 12.25 hub keep-outs (lower plate F..F+3,
+upper boss + cap F+3.15..F+12.25), 8 x 3 straps through the fitted undersides, the E strap (fitted underside 72.0 -> 78.5
+mm, 3 mm thick, thinning to the 2.25 mm boss thickness over its last 1.1 mm before the boss rim - a 3 mm strap there would
+sit in the knee link, which rides 0.5 mm over the boss), the E boss and arm pad O12 x 2.25 at tr, the knee link a flat Ti
+bar 36.9 x 10 x 2.25 at tr + 2.75 (pins 6 mm from its ends: the model's box), pin stack 2.25 + 0.5 + 2.25 = 5.0 mm
+(IGLIDUR-PIN), and a 2.25 mm pad mount (proxy) from the pad to the proximal end of the user's BOTTOM bar (24.5 mm, at
+61 deg from pin a's direction, outside the boss sweep: E boss / mount >= 3.85 mm over the followed frames). 13 parts,
+72.4 g, each one closed single solid (R7: judge/part_validity.py all_ok).
+
+**Built vs the model's metal (7 fit-bench poses: arm at the side, first, middle, the two highest (elev 165 / 150, knee
+149.8 / 145.8 deg), behind the back (-90 / 30 / 105), across the body (150 / 45)).** Every rigid sample of the model
+(hubs, E strap, E boss, arm pad, knee link) lies on the posed exo.glb within 0.0001 mm; the straps' samples outside the
+hub zones 0.000 mm; inside the hub zones (r < R + 3) the built strap sits up to 1.91 mm (link 1, 12 of 36 samples) /
+1.09 mm (link 2) ABOVE the model's sample - the stated R6 lift of build_osn_l1.py (the strap reaches its hub's member
+level), away from the skin. Built-part frames vs the model's member transforms <= 1e-4 mm (scene_export.frame_xforms on
+the clip frame = the judges' path).
+
+**Clips (30 fps, the champion's 8 incl. the held-out Wave / Walking).** 1323 / 1337 frames followed (98.95 %): every
+frame of Raise overhead (knee 94 -> 145.8 deg), Drink, Comb hair, high shelf, Wash opposite shoulder, back pocket and
+Walking; Wave holds 14 (J2 fold 10, link 1 / link 2 built straps 4 - the only built-pair jam). The knee stays in
+94-146 deg (window 30-150). Lowest metal over the followed frames 0.60 mm (Raise overhead). Workspace (1432 poses):
+chain + knee close 61.8 %, + parts 60.7 % (the J2 fold, as on the bench).
+
+**Outside judges (tools/cloud_run.py judge on the farm, full run: R6 at every frame; R7 local - the farm image has no
+OCC): 9 of 19 pass, the most of any built design.** R1 84.2 % (2-14 mm) / R1-aim 47.2 % (2-10 mm) - the best built
+proximity yet (the 2-slide leader's L1 78.7 / 42.0 %, the user-style champion 32.9 / 17.3 %); R3 follows 98.7 % PASS;
+**R4 overhead 83.9 % PASS - the first built design to pass overhead** (the 2-slide leader 36.0 %: its guide stack and the
+J2 fold held Raise overhead above ~66 deg; this knee follows every frame of it, knee 94 -> 146 deg); R5 / R5-aim 3 DOF;
+R6 0.0 mm at all 1337 frames (1026 pairs, dense samples both ways); R7 every part one closed solid; R8 72.4 g; R11 0.22
+kPa; R17 moves freely unpowered. Fails: R2 24.87 mm is the user's own forearm cuff in the rig's self-intersection (ours
+0.0 mm, as every L1 build), R16 workspace 62.3 % (the J2 fold: 61.8 % of the 1432 poses close, the bench's reach).
+Not run: R9 FEA (no STEP parts at L1), R10 base slip. Measurement unchanged from the 2-slide leader's L1 (same clips,
+skin, judges).
+
+**Red team (built meshes, exo.glb posed by clips.json, exact posed skin; redteam.json).**
+* *The point that pinches:* the J1 / J2 lower plates on link 1, 0.60 / 0.77 mm from the trunk at Raise overhead frame 78
+  (plane 30, elev 150, axial -60); metal < 1 mm in 3.8 / 4.3 % of the followed frames, < 2 mm in 4.7 / 11.2 %. Every other
+  part keeps >= 1.57 mm.
+* *Arm at the side (the verifier's 0.02 mm near-touch):* 126 poses (plane -30..90, elev 0-10, axial -60..90) through the
+  design's chain: 112 close with the parts clear; the lowest built metal is hub 3's lower plate, 0.01 mm from the trunk at
+  (-30, 0, -30) and (0, 0, -60) - the verifier's near-touch reproduced on the built part. At axial -60 with plane -15 / -30
+  (internal rotation, arm at the side) hub 3's plate / link 2 go 4-14 mm INTO the trunk (4 poses): these poses are not
+  taken (skin), as on the bench. A 1 mm liner rule costs ~8 gap points (verifier).
+* *Posterior axillary fold* (trunk skin within 30 mm of the upper-arm region, behind the coronal plane through GH, below
+  it; 409 vertices): link 2's strap comes nearest, 1.74 mm (Comb hair frame 96, 74 / 140 / -65); hub 3 / E strap 3.7 mm;
+  the knee parts >= 7.7 mm. Not the limiter.
+* *The knee near hub 3 (the pose that jams):* knee link vs hub 3's link-2 half >= 24.3 mm (the verifier's number, now on
+  meshes), vs link 2 >= 32.5 mm; knee link vs E strap / E boss / pad mount = the 0.5 mm designed running gap at every
+  frame; E strap vs J3 upper boss 0.13 mm (the 0.15 mm face gap at hub 3's rim, sampled); E strap vs link 2 >= 5.4 mm.
+  The only jam on built meshes is link 1 / link 2 in Wave (4 frames; 0.25 mm at its closest on the followed frames).
+* *The optimistic number:* the fit bench 20.63 vs the verification bench 30.35 (lesson c); the hub-zone strap lift
+  (<= 1.9 mm) moves metal away from the skin, so the built R1 is if anything pessimistic there.

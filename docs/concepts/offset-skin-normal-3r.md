@@ -619,8 +619,25 @@ What each fix bought, measured:
 
 **Verdict: the full CAD does NOT hold its L1's R1 / R6 / R16 (5 of 19 pass against the L1's 7).** The kinematics are the verified model's (1e-4 mm). The losses come from the parts the L1 never carried, and each one is measured: the scapula base tab (R1 -29.7 points: a third of the covered skin at a median 42 mm; R6 0.85 mm against link 1 at Wave 72, 6 frames; 1.64 mm into the skin at Reach a high shelf 78; R16 -1.7 points, 3 overhead workspace poses at elevation 135-165 where the tab is 1.6-3.6 mm in the skin, because the tab was fitted to the clip envelope, not the workspace); the U cuff's +vB arc (R2 ours 7.55 mm into the trunk, arm at the side); and the R17 mesh artefact. What the user-style parts fixed on the way: R6 4.65 -> 0.85, R16 16.7 -> 55.8 %, R1 42.6 -> 49.0 %, R4 21.1 -> 24.6 %.
 
-**Renders** (exo-blender-cycles, ADA_24, Cycles 192 spp, matte black mannequin: base 0.004, rough 0.8, no coat, half
-specular; bead-blasted metal, polished screws, catalogue guides as ground steel): 4 hero sets x 3 cameras (Comb hair at elevation 143, Reach a high shelf, Reach back pocket, Drink from a cup), renders/2026-10-16_userstyle_osn_k4216/. The parts close-up set (5 custom parts, no body) fails on the worker right after the glTF import: the 10-15 parts scene that rendered then fails the same way with both the current and the old render script, and so does a copy with a dummy body. Bodyless scenes are broken on the endpoint; the endpoint was left as it is. When 5 sets go in at once on the 1-worker endpoint, all fail. Run them one at a time.
+**Renders** (exo-blender-cycles, ADA_24, Cycles 192 spp, 1920 x 1080; renders/2026-10-16_userstyle_osn_k4216/README.md).
+
+The mannequin is matte black (base 0.028, rough 0.9, specular 0.2, no coat), so the muscles read; base 0.004 showed only a flat silhouette. The parts are bead-blasted metal, with polished screws and ground-steel guides.
+
+The set has 12 stills:
+- 4 parts close-ups at the shoulder, including the cuff stage, at Raise overhead frame 36 (elevation 66).
+- Raise overhead at its peak (30, 150, -60): the back view and the chain close-up.
+- Reach a high shelf peak.
+- Rest from behind-lateral and lateral.
+
+**The Raise overhead clip is held from elevation 66 to the top (frames 37-143).** In plane 30 the chain closes only at axial -60 or less above about 70 deg (workspace grid), and the clip runs at -43 to -57. So the overhead hero is workspace pose 608, which closes and is feasible in the verified model. It is not a clip frame.
+
+**Measured on the posed skin:**
+- At the shelf peak the base tab is 1.64 mm inside, visible in hero_shelf_chain.
+- Overhead, link 1 clears by 1.6 mm.
+
+**The earlier "bodyless parts scenes fail" diagnosis was wrong.** The worker counts every PNG in /tmp/job_<a>, and a warm worker kept the previous a = 0 job's frames. film_client.py stills now offsets each job's frames. The endpoint is unchanged.
+
+The first pass (silhouette mannequin, with Comb hair as "overhead") is in first_pass_flat_mannequin/.
 
 **Next (the loop):**
 0. The next build's fixes, each measured above: weld link 2 in the judges' units (R17); fit the base tab to the

@@ -196,7 +196,7 @@ def snap(p):
     p["end_extra"] = min(8.0, max(0.0, float(p.get("end_extra", 0.0))))
     for k in ("rad0", "rad1", "rad2", "rad3"): p[k] = min(SLIM, key=lambda x: abs(x - float(p[k])))
     p["beta"] = min(60.0, max(10.0, float(p["beta"]))); p["phi"] = float(p["phi"]) % 360.0
-    p["m_lo"] = min(20.0, max(8.0, float(p["m_lo"]))); p["m_hi"] = min(20.0, max(8.0, float(p["m_hi"])))
+    p["m_lo"] = min(20.0, max(10.0, float(p["m_lo"]))); p["m_hi"] = min(20.0, max(10.0, float(p["m_hi"])))   # stops >= 10 deg short of the fold (the leader's margin)
     p["m_sw"] = max(10.0, float(p["m_sw"])); p["relay_lo"] = int(round(float(p["relay_lo"]))); p["relay_hi"] = int(round(float(p["relay_hi"]))); p["qmax"] = min(90.0, max(0.0, float(p["qmax"])))
     for k in ("lift1", "lift2"): p[k] = min(4.0, max(0.0, float(p.get(k, 0.0))))
     for k in ("width", "t_link"): p[k] = PARAMS[k]                   # never thinned by a search

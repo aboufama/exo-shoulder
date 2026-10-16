@@ -1,0 +1,107 @@
+{
+ "pin-knee": {
+  "model": {
+   "gap": 30.35,
+   "reach": 0.6056,
+   "follow": 1.0,
+   "inband14": 0.9043,
+   "inband10": 0.5376,
+   "contact": 0.0091
+  },
+  "corrected": {
+   "gap": 30.35,
+   "reach": 0.6056,
+   "follow": 1.0,
+   "inband14": 0.9043,
+   "inband10": 0.5376,
+   "contact": 0.0091
+  },
+  "window": [
+   42.19,
+   102.44
+  ],
+  "seats": {
+   "a1": 40.122,
+   "a2": 72.314,
+   "u1": [
+    0.11259,
+    0.90999,
+    0.39905
+   ],
+   "u3_home": [
+    -0.18127,
+    -0.0897,
+    0.97933
+   ]
+  },
+  "summary": {
+   "ws": {
+    "n": 360,
+    "taken": 218,
+    "lost": {
+     "fold_stretched": 76,
+     "contact": 3,
+     "fold_folded": 57,
+     "part_collision": 2,
+     "closure_window_slide": 4
+    }
+   },
+   "ws_overhead": {
+    "n": 28,
+    "taken": 7,
+    "lost": {
+     "fold_folded": 7,
+     "closure_window_slide": 4,
+     "fold_stretched": 10
+    }
+   },
+   "ws_across": {
+    "n": 68,
+    "taken": 20,
+    "lost": {
+     "fold_stretched": 47,
+     "fold_folded": 1
+    }
+   },
+   "ws_behind": {
+    "n": 25,
+    "taken": 17,
+    "lost": {
+     "fold_stretched": 5,
+     "contact": 2,
+     "fold_folded": 1
+    }
+   },
+   "clip": {
+    "n": 110,
+    "taken": 110,
+    "lost": {}
+   },
+   "clip_overhead": {
+    "n": 10,
+    "taken": 10,
+    "lost": {}
+   }
+  },
+  "th_ws_pct": {
+   "0": 7.1,
+   "1": 12.6,
+   "5": 26.3,
+   "10": 32.0,
+   "50": 73.2,
+   "90": 126.4,
+   "95": 140.5,
+   "99": 164.1,
+   "100": 172.7
+  },
+  "mode": "exact",
+  "secs": 364.6,
+  "taken_conditioning": {
+   "smin_min": 0.2879,
+   "smin_p5": 0.3467,
+   "smin_med": 0.4611,
+   "mu_min": 35.68
+  },
+  "margin": {}
+ }
+}

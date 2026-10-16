@@ -780,3 +780,13 @@ user's style".
   * the M1.6x4 block screws reached into the rail's path.
 
   With the channel turned down and M1.6x2.5 screws, R16 went from 16.7 to 55.8 %.
+* **k4216 does not follow the Raise overhead clip past elevation 66 deg, though it reaches the clip's peak.**
+  - The clip holds frames 37-143. In the scapular plane the chain closes only at axial rotation -60 deg or less above about 70 deg (workspace grid: -45 fails from 75 deg up).
+  - The clip climbs at -43 to -57 deg.
+  - The peak (30, 150, -60) itself closes and is feasible.
+  - The overhead stills show that workspace pose, not a clip frame (renders/2026-10-16_userstyle_osn_k4216/README.md).
+* **Stills jobs on exo-blender-cycles failed on stale frames, not on bodyless scenes.**
+  - The worker renders into /tmp/job_<a> and counts every PNG there.
+  - A warm worker still had the previous a = 0 job's frames, so the count check failed. This explains "parts close-ups fail" and "5 sets at once fail".
+  - film_client.py stills now gives each job a fresh frame offset (client side only).
+  - Mannequin look: base 0.004 renders a flat silhouette; 0.028 at roughness 0.9 with no coat reads matte black with the muscles visible.

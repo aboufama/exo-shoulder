@@ -37,7 +37,7 @@ FREE = {
     "wd": (4.0, 50.0, 110.0, "J3 seat on the arm: angle from the humerus axis (band frame w_dir)"),
     "wa": (4.0, -45.0, 20.0, "J3 seat azimuth around the humerus"),
     "b3": (0.08, -0.3, 1.0, "J3 axis tilt from the GH ray toward the skin normal (free: the knee closes any planar drift)"),
-    "lE": (4.0, 20.0, 60.0, "hub 3 centre -> pin a (E strap + O12 boss; >= O20 rim + boss + 4)"),
+    "lE": (4.0, 20.0, 90.0, "hub 3 centre -> pin a (E strap + O12 boss; >= O20 rim + boss + 4; <= 90 keeps the pad on the upper-arm cuff - round 1 used <= 60 and stream H pinned it there)"),
     "lc": (4.0, 14.0, 50.0, "pin a -> pin b (knee link; >= two O12 bosses + 2)"),
     "phiE": (12.0, None, None, "E direction in hub 3's plane at mid drift (deg, periodic)"),
     "phib": (12.0, None, None, "knee link direction at mid drift (deg, periodic); with phiE it sets the arm pad and the branch"),
