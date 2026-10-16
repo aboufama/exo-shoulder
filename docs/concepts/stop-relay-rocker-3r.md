@@ -205,3 +205,101 @@ how the cuff closes:
 - Pivots that give the large static gains sit on the deltoid, where the pivot hub and hub 2 leave the band. At
   beta 45 / phi 210: in-band 0.20, hub 0 fitted at 141 mm, hub 2 at 176 mm, 0.0-0.05 per member.
 - J1's MVP2 reaction trips the spring (section 3).
+
+## Results (Bench(60,160), fast grid cache, kit checks; sweep file docs/concepts/sweeps/stop-relay-rocker-3r.json)
+
+Farm spend for this morphology: exo-cpu1 CPU workers (cpu3c / cpu5c, 8 vCPU). About $0.03 for the coarse sweep and
+$0.17-0.20 for CMA A-D. The later batches (CMA E-K, frozen runs) were queued behind other agents' jobs at write time.
+
+| run | configs | best gap (fast) | score | note |
+|---|---|---|---|---|
+| seed, ideation spec (beta 30, phi 330, CMA-B seats) | 1 | 46.83 | 82.97 | K6: link 1 x link 2 at the folded J2 (27 poses), pivot hub x link 1 / hub 2 |
+| + end_extra 1.02 + J2 spacer 1 mm | 1 | 35.24 | 87.19 | link 1 x link 2 cleared; the pivot hub still hits link 1 in 9 mode-A poses (5 clip frames) |
+| deltoid pivots (beta 40-45, phi 180-210) | 2 | 96.9-134.5 | | static reach 0.72, in-band 0.20: pivot hub F 141 mm, hub 2 F 176 mm |
+| farm coarse (random, 2 seat sets) | 256 | 37.14 | 86.49 | |
+| CMA A (k7008 seats) | 1385 | 30.77 | | m_hi 9.5 < 10: not compliant (compliant best 41.29) |
+| CMA B (CMA-B seats) | 1665 | 26.27 | | m_hi 8.0: J2 stop 8 deg from the fold. NOT compliant; clamped to 10 -> 34.45 |
+| **CMA C** (overhead relay only, relay_hi 0) | 1241 | **27.32** | **90.07** | compliant (m_lo 10.73 / m_hi 10.25), static relay |
+| CMA D (anterior pivot, phi ~185) | 1697 | 39.73 | | m_hi 8: not compliant; pivot hub in band only 0.26 |
+| **C best, continuity enforced** (connect = 1) | 1 | **31.92** | **88.39** | all 7 relay poses are islands; relay taken 0 |
+| C best shape, relay off | 1 | 32.63 | | the relay's usable worth: 0.71 points |
+
+The C best (static, the configuration the gate refers to) is:
+
+| parameter | value |
+|---|---|
+| J1 (az, el) | 98.84, 64.44 |
+| arcs a1, a2 | 41.76, 72.34 |
+| J3 wdir (wd, wa) | 83.01, -15.19 |
+| sigma | -1 |
+| q | 0.963 |
+| rocker beta, phi | 28.83, 324.51 (pivot on the acromion top) |
+| stop margins m_lo, m_hi | 10.73, 10.25 |
+| qmax | 69.1 |
+| relay | lo side only |
+| link 1 over rocker | yes |
+| spacers lift1, lift2 | 0.70, 0.32 |
+| end_extra | 0.50 |
+| hubs | O15 R0, O20 J1, O15 J2, O15 J3 |
+
+Its static report:
+
+| metric | value |
+|---|---|
+| reach / follow | 0.694 / 1.0 |
+| in-band 14 / 10 | 0.888 / 0.514 |
+| contact | 0.055 |
+| per member in band | rocker 1.0, pivot 1.0, hub 1 0.996, hub 2 0.999, hub 3 0.883, link 1 0.983, link 2 0.752, neck 0.859 |
+| mass | 101 g Ti |
+
+With continuity:
+
+| metric | value |
+|---|---|
+| gap | 31.92 |
+| reach / follow | 0.650 / 1.0 |
+| in-band 14 / 10 | 0.888 / 0.514 |
+| contact | 0.0575 |
+| near-touch gap (metal < 1 mm = contact) | 43.80 |
+| min metal-skin | 0.06 mm |
+| overhead (elevation >= 140) workspace reach | 0 / 12 |
+| overhead clip follow | 5 / 5 |
+
+**Convergence gate** (static objective, compliant entries, the whole history of 6255 tries in time order, parallel
+streams interleaved by generation):
+- gain over the 2nd half: 0.06 score points;
+- gain over the last third: 0.01;
+- top-5 spread: 0.01;
+- -> converged.
+
+The continuity objective (CMA H-K, connect = 1, pivot directions 230-360 deg) was queued on the farm at write time.
+Its outputs land in .cache/srr/cma_[E-K].json.
+
+**Frozen Bench(110,360) exact** of the seed-spacer shape and of the B / C bests was queued at write time:
+.cache/srr/frozen_{k6,B,C}.json. These are static-relay numbers from the model as shipped before the continuity filter.
+Read them as an upper bound.
+
+## Verdict
+
+The stop-relay rocker's gains are static closure islands.
+- The CMA's best static shape (27.32 fast, score 90.07) crosses 27.5 only because the bench scores each workspace pose
+  on its own.
+- With the requirement that the arm can MOVE into a pose (flood fill from the mode-A region, 2-deg frames, no rocker
+  snap), every relay pose of that shape is unreachable. The number falls to 31.92, 0.71 points better than the same
+  shape with the rocker locked (32.63).
+- Across 72 pivot directions, the kinematic ceiling with continuity is +0.023 big-bench reach and +0 overhead.
+
+The leader it is built on (spine-parked-j2-3r, 0 passive joints, complexity 0) is 28.49 fast / 34.29 verified. This
+design adds complexity 13.5 (sensed passive pivot + spring) for no usable gain. J1's MVP2 reaction (0.87 tau1 on the
+spring) also rules it out for the powered version.
+
+Limiter, measured:
+- At the switch the rocker sub-chain (c, u1, u3; arcs beta, lo) sits at or near its own fold for the entries the CMA
+  favours (frame trace: margin 1.4-8.7 deg over 6 frames, then a 30-deg q0 jump).
+- Where entries are regular (34-69 % of elevation-chain entries, depending on phi), the overhead poses lie on the
+  other root branch (q0 -49.5 -> +44.2 between elevation 90 and 120).
+- A spring-centred rocker cannot reach them without J2 passing its stop.
+
+**What would be needed instead.** A transmission that sets q0 as a smooth function of the J1-J3 angle, entered with a
+non-zero slope (a coupler that drives the rocker from link 1 / J2, as the round-4 state's "measured hope" says), not a
+force-closed unilateral stop. The fold lever has to be kinematic and continuous, not a relay.
