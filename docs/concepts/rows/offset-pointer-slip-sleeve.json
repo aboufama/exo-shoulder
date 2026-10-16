@@ -86,5 +86,23 @@
    "converged": false
   },
   "note": "independent fast re-measure (Bench 60/160 grid, model as committed) reproduces gap 58.90 to the digit; the CB_EXACT=1 run did not finish in 70 min on a 4-core box at load 12 (per-pose libigl path), so the exact number is still owed; v_* fields above are the earlier audit of a different config (k86 + dpsi 0 + q 0.98) and are not overwritten"
+ },
+ "mechanism": {
+  "active_dof": 3,
+  "passive_trans": 1,
+  "crossed_rails": false,
+  "passive_rot": 2,
+  "moving_bodies": 5,
+  "joints": 5,
+  "closed_loops": 0,
+  "sliding_pairs": 1,
+  "rolling_pairs": 4,
+  "sensed_passive": 2,
+  "springs_or_flexures": 0,
+  "custom_parts": 11,
+  "catalogue_parts": 9,
+  "notes": "counted at the best config (k306, o = 0). bodies: link 1, bar (+ rod boss + O6 rod), linear-rotary sleeve, U ring (cross), cheek bracket on the cuff (arm-end). joints: J1, J2 O20 hubs, sleeve on the rod (one cylindrical pair: ACTIVE spin J3 + PASSIVE slide), U inner and outer axes (MR52). sensed: the 2 U angles - constant on the bench (o = 0) but tilted ~4.5 deg per 15 mm of GH shift on a body (audit), so exact tracking needs them read (or that error judged); J3's encoder must read the spin of a sliding sleeve (keyed magnet carrier). custom: base, link 1, bar, rod, sleeve housing, U ring, cheek bracket, 2 hub shafts, 2 U pins (est.); catalogue: 2 x MR117 pair, drylin RJMP-01-06, 4 x MR52 (est.).",
+  "source": "docs/concepts/models/offset-pointer-slip-sleeve.py:1-15 (chain, DOF), 31-33 (part sizes); docs/research/manufacturability_audit.md (U readout error)",
+  "confidence": "counted"
  }
 }

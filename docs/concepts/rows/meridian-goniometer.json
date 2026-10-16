@@ -54,5 +54,23 @@
   "top5_spread": 5.81,
   "converged": false,
   "n": 195
+ },
+ "mechanism": {
+  "active_dof": 3,
+  "passive_trans": 0,
+  "crossed_rails": false,
+  "passive_rot": 0,
+  "moving_bodies": 3,
+  "joints": 3,
+  "closed_loops": 0,
+  "sliding_pairs": 1,
+  "rolling_pairs": 2,
+  "sensed_passive": 0,
+  "springs_or_flexures": 0,
+  "custom_parts": 9,
+  "catalogue_parts": 9,
+  "notes": "counted at the best config (j3 = 'hub', model defaults). bodies: J1 rotor (root strap + 26 x 6 arc rail, one part), carriage + bridge, arm-end (hub-3 plate + K7 neck). joints: J1, J3 O20 hubs, J2 = 40 mm carriage on the arc rail about the virtual axis a2 (wire-race / crossed-roller curved slide; its ball cage runs at half speed with an anti-creep rack - excluded as a rolling element). The spec form (j3 = 'cslide') swaps J3 for pointer-cslide's C-slide: sliding 2, rolling 1. custom: base, root, rail, carriage, bridge, neck, cage, 2 hub shafts (est.); catalogue: 2 x MR117 pair, 4 race wires, 1 ball set (est.).",
+  "source": "docs/concepts/models/meridian-goniometer.py:1-28 (topology, rail / carriage); rows/meridian-goniometer.json best_params",
+  "confidence": "counted"
  }
 }

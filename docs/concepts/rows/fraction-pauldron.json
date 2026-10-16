@@ -32,5 +32,23 @@
   "buildable_variant": "none (dead on the bench)",
   "t": "2026-10-16",
   "source": "docs/research/manufacturability_summary.md; docs/research/passive_dof_hardware.md; docs/research/manufacturability_audit.md"
+ },
+ "mechanism": {
+  "active_dof": 3,
+  "passive_trans": 0,
+  "crossed_rails": false,
+  "passive_rot": 4,
+  "moving_bodies": 7,
+  "joints": 11,
+  "closed_loops": 4,
+  "sliding_pairs": 6,
+  "rolling_pairs": 5,
+  "sensed_passive": 0,
+  "springs_or_flexures": 4,
+  "custom_parts": 19,
+  "catalogue_parts": 10,
+  "notes": "counted at the best config (k193, n 5). bodies: lames 1-4, tip lame T, strap A (+ its carriage), humerus-fixed arc rail + neck (arm-end); roller sets excluded as rolling elements. joints: 5 telescoping lame pairs about x (S-1 ... 4-T, sliding), 4 rolling-cage couplings (roller sets on lames 1-4 rolling between their neighbours; counted as rolling pairs), J2 O20 hub, J3 carriage on the arm rail (sliding). 4 loops = the 4 cages; passive_rot = the 4 inner lame angles, set by the cages; alpha read on the tip, so none sensed. springs: 4 cage preloads, ESTIMATED (not in the model; the verifier says the friction cages hold only with preload; the audit: NOT BUILDABLE, the coupling needs a rack). custom incl. ~8 stepped rollers (est.); catalogue: 2 MR117 + ~8 roller bearings (est.).",
+  "source": "docs/concepts/models/fraction-pauldron.py:1-36 (topology, geometry), 101-115 (fractions, roller sets k = 1..n-1); rows/fraction-pauldron.json note (k193 n 5)",
+  "confidence": "counted"
  }
 }

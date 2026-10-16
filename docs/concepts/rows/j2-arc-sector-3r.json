@@ -24,5 +24,23 @@
  "verdict": "screening (coarse 268 on the farm); CMA streams running",
  "limiter": "the J2 rail is a body of revolution about p2: one level over J2's whole travel (~150 deg incl. carriage, stops, tab); in band max 0.03 over 49 honest configs, level 72-140 mm (65 % never clear the skin); link 2 inherits that level (max 0.26)",
  "note": "Bench(60,160) fast, kit checks (march, dense K2, K6, audit) + crown/top skin checks; hub control at identical axes 57.75 vs rail 71.12 (local re-run)",
- "doc": "docs/concepts/j2-arc-sector-3r.md"
+ "doc": "docs/concepts/j2-arc-sector-3r.md",
+ "mechanism": {
+  "active_dof": 3,
+  "passive_trans": 0,
+  "crossed_rails": false,
+  "passive_rot": 0,
+  "moving_bodies": 3,
+  "joints": 3,
+  "closed_loops": 0,
+  "sliding_pairs": 1,
+  "rolling_pairs": 2,
+  "sensed_passive": 0,
+  "springs_or_flexures": 0,
+  "custom_parts": 12,
+  "catalogue_parts": 8,
+  "notes": "spherical 3R with J2 as a conical arc-rail sector on link 1 and a V-roller carriage on link 2. bodies: link 1 + rail sector, carriage + link 2, arm-end (hub-3 plate + K7 neck). joints: J1, J3 O20 hubs, J2 carriage on the arc rail (4 x MR63ZZ V-rollers, preloaded on 2 eccentric pins). custom: base, link 1, rail sector (lathe-turned), carriage plate, link 2, neck, 4 roller pins, 2 hub shafts (est.); catalogue: 2 x MR117 pair + 4 MR63ZZ (est.).",
+  "source": "docs/concepts/models/j2-arc-sector-3r.py:1-32 (topology, carriage, DOF)",
+  "confidence": "counted"
+ }
 }

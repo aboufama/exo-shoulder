@@ -55,5 +55,23 @@
   "buildable_variant": "none (dead on the bench anyway)",
   "t": "2026-10-16",
   "source": "docs/research/manufacturability_summary.md; docs/research/passive_dof_hardware.md; docs/research/manufacturability_audit.md"
+ },
+ "mechanism": {
+  "active_dof": 3,
+  "passive_trans": 3,
+  "crossed_rails": true,
+  "passive_rot": 0,
+  "moving_bodies": 6,
+  "joints": 6,
+  "closed_loops": 0,
+  "sliding_pairs": 4,
+  "rolling_pairs": 2,
+  "sensed_passive": 0,
+  "springs_or_flexures": 0,
+  "custom_parts": 11,
+  "catalogue_parts": 13,
+  "notes": "offset trombone + 3-slide cuff stage (NOT BUILDABLE: 3P, the radial slide has no compact part). bodies: link 1 (ring upper race + guide box), link 2 (Ti band + connector), E (hub-3 lower plate), across carriage C, along carriage A (carries the across rail), arm-fixed rail (arm-end). joints: J1 KAA15XL0 ring, J2 band sliding through the guide, J3 O20 hub, radial pin slide, across and along miniature rolling guides. Slides change no orientation: not sensed. custom: base housing, guide box, band, connector, E, C, A, rail mount, J3 shaft, 2 radial pins (est.); catalogue: KAA15XL0, MR117 pair, ~4 guide rollers, 2 LWL3/RSR3 blocks + 2 rails, 2 pin bushings (est.).",
+  "source": "docs/concepts/models/offset-arc-selfalign.py:1-32 (chain, parts), 47-55 (hardware constants)",
+  "confidence": "counted"
  }
 }

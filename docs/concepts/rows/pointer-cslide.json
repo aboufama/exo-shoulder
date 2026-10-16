@@ -75,5 +75,23 @@
   "top5_spread": 1.06,
   "converged": false,
   "n": 479
+ },
+ "mechanism": {
+  "active_dof": 3,
+  "passive_trans": 0,
+  "crossed_rails": false,
+  "passive_rot": 0,
+  "moving_bodies": 3,
+  "joints": 3,
+  "closed_loops": 0,
+  "sliding_pairs": 1,
+  "rolling_pairs": 2,
+  "sensed_passive": 0,
+  "springs_or_flexures": 0,
+  "custom_parts": 9,
+  "catalogue_parts": 9,
+  "notes": "counted at the best config (O20 hubs, saddle band, neck 'down'). bodies: link 1, link 2 + C-rail band (one part), shoe + neck (arm-end). joints: J1, J2 O20 hubs, J3 = arm-fixed shoe on the open wire-race band (caged balls; cage excluded as a rolling element, needs anti-creep). custom: base, link 1, link 2, band, shoe + neck, cage, 2 hub shafts, 1 race insert (est.); catalogue: 2 x MR117 pair, 4 race wires, 1 ball set (est.).",
+  "source": "docs/concepts/models/pointer-cslide.py:1-33 (topology, parts); rows/pointer-cslide.json best_params",
+  "confidence": "counted"
  }
 }
