@@ -88,3 +88,30 @@ This file replaces the rod and the RSSR with the cam pair:
    of 185 taken poses). At the proposer's straight-arm, rod-law geometry this never showed. The `lift` parameter
    (6-7 mm) clears most of it, at the cost of in-band.
 3. **Fast near-touch: the best is 21.90 (coarse farm sweep, 196 LHS configurations), not <= 14.0.** CMA follows.
+
+## Search (Bench(60,160) fast, near-touch objective, farm)
+
+- Local checks: 9 configurations of the current model (after the spherical-lug fix). The first lug version was flat and
+  was replaced, and its numbers are not in the sweep.
+- Farm coarse LHS, 196 configurations: best 21.90.
+- Farm CMA-ES, popsize 8, 2 processes per stream: A1 / A2 / C from the coarse best, B from the second, and P1 / P2
+  with the progressive-law coefficient c free.
+
+| stream | tries | best fast near-touch | gate (2nd half / last third / top-5 spread, score pts) |
+|---|---|---|---|
+| A1 | 929 | 12.89 | 0.89 / 0.18 / 0.13 (converged) |
+| A2 | 1409 | 12.70 | 0.35 / 0.20 / 0.03 (converged) |
+| B | 1433 | 12.86 | 0.60 / 0.24 / 0.00 (converged) |
+| C | 905 | 15.06 | 0.06 / 0.06 / 0.16 (converged) |
+| P1 | 1233 | **11.73** | 2.31 / 1.59 / 0.12 (not converged: continued as P1c / P1d) |
+| P2 | 793 | 14.38 | 1.08 / 0.68 / 0.13 |
+
+The progressive law does not pay. Every stream drove c to about 0 (P1 0.021, P2 -0.046). Near the pitch point, any
+crank acceleration bends the relative path into a cusp (c = 0.4 at the coarse best: cusp at K = 0).
+
+The winning basin (P1) moved the lug to point straight away from hub 2 (beta -175). The arm wraps 130 deg around hub K
+(51.5 mm developed). At rest the two contact velocities are only 3.2 deg apart, so the pair works near its pitch point:
+pressure angles 6.3 / 8.0 deg, and the horn's angle rises to 41.5 over the taken stroke. The flank now covers the
+law's whole range (dK_lim 56.2, ended by the law, not the flank). The CMA also dropped the lift to 1.4 mm and freed the
+K dyad (bk1 27.7, bk2 35.7, a1max 56.6).
+
