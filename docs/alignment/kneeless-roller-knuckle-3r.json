@@ -2,16 +2,14 @@
  "id": "kneeless-roller-knuckle-3r",
  "status": "screened",
  "v_gap": null,
- "complexity": null,
+ "complexity": 23.75,
  "verdict": "watch",
  "reasons": [
   "held_out: no verified bench gap on the row",
-  "near_touch: no near-touch measurement on file (rule since 2026-10-16: claims report plain and near-touch)",
   "continuity: passive / sprung / sensed coordinates but no continuity flood on file (rule 2026-10-16)",
   "fold_margin: no min-th margin over taken poses on file (rule: each claim reports it)",
   "idle: a drive is declared but no range of it over the taken poses is on file",
-  "sampling: no per-part in-band record: unsampled bodies cannot be ruled out",
-  "complexity: no mechanism record: complexity unaudited"
+  "sampling: per-part sample counts not on file (fractions only); 5 moving bodies declared, 0 non-hub metal groups sampled (row frozen)"
  ],
  "checks": [
   {
@@ -26,13 +24,25 @@
   },
   {
    "check": "near_touch",
-   "level": "watch",
-   "reason": "no near-touch measurement on file (rule since 2026-10-16: claims report plain and near-touch)"
+   "level": "ok",
+   "reason": "plain 21.07, <1 mm 23.23, <2 mm 32.25, 11.18 points live in the 1-2 mm shell (row frozen)",
+   "shell2": 11.18,
+   "plain": 21.07,
+   "n1": 23.23,
+   "n2": 32.25,
+   "n3": null,
+   "band3": null,
+   "hist": null,
+   "minmm": 0.01,
+   "source": "row frozen"
   },
   {
    "check": "dominance",
    "level": "ok",
-   "reason": "no reference"
+   "reason": "vs sidecar-longdyad-knuckle-3r: plain -2.16, 2 mm +1.78",
+   "ref": "sidecar-longdyad-knuckle-3r",
+   "gain_plain": -2.16,
+   "gain_2mm": 1.78
   },
   {
    "check": "continuity",
@@ -53,12 +63,17 @@
   {
    "check": "sampling",
    "level": "watch",
-   "reason": "no per-part in-band record: unsampled bodies cannot be ruled out"
+   "reason": "per-part sample counts not on file (fractions only); 5 moving bodies declared, 0 non-hub metal groups sampled (row frozen)",
+   "parts": {
+    "hub3": 0.505
+   }
   },
   {
    "check": "complexity",
-   "level": "watch",
-   "reason": "no mechanism record: complexity unaudited"
+   "level": "ok",
+   "reason": "recomputed 23.75 vs row 23.75",
+   "recomputed": 23.75,
+   "row": 23.75
   },
   {
    "check": "reporting",
@@ -81,6 +96,6 @@
   "held": false
  },
  "verifier_files": [],
- "git": "67e8480",
- "t": "2026-10-16T22:53:29Z"
+ "git": "4caa384",
+ "t": "2026-10-16T22:57:42Z"
 }

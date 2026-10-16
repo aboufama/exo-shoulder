@@ -325,10 +325,13 @@ def set_adjacent(parts):
     """minarc's built-part pairs + the drive's (crank / rod / sockets / pin / lobe / horn vs their neighbours)"""
     MIN.set_adjacent(parts)
     find = lambda s: next((p for p in parts if p[2].startswith(s)), None)
-    drive = [p for p in parts if p[2].startswith("drive")]
-    near = ("link 1b strap", "link 1a strap", "link 2 strap", "J2 upper boss", "J2 lower plate", "K upper boss", "K lower plate", "J1 upper boss", "J1 lower plate")
-    pairs = [(a[2], b) for a in drive for b in near] + [(b, a[2]) for a in drive for b in near] + [(a[2], b[2]) for a in drive for b in drive]
-    seen = set()
+    pairs = [("drive bell crank boss", b) for b in ("link 1b strap", "J2 upper boss", "drive lobe")] + \
+            [("drive bell crank long arm", b) for b in ("link 1b strap", "J2 lower plate", "J2 upper boss", "link 2 strap")] + \
+            [("drive rod keep-out", b) for b in ("drive horn lug", "K upper boss", "J2 upper boss", "link 1b strap")] + \
+            [("drive M2 ball-link socket at the crank", b) for b in ("J2 upper boss", "link 1b strap", "drive bell crank long arm")] + \
+            [("drive M2 ball-link socket at the horn", b) for b in ("K upper boss", "drive horn lug")] + \
+            [("drive horn lug", b) for b in ("link 1b strap", "K upper boss")] + [("drive lobe", b) for b in ("link 1b strap", "J2 lower plate")]
+    seen = set()                                                                # the moving drive pairs that can meet (a lean list: adj_built runs per frame)
     for a_, b_ in pairs:
         A, Bp = find(a_), find(b_)
         if A is None or Bp is None or A[1] == Bp[1] or (A[2], Bp[2]) in seen: continue

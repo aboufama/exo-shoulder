@@ -437,61 +437,61 @@
     -0.978,
     -26.3,
     36.5,
-    43.0
+    13.8
    ],
    "drive bell crank long arm keep-out (6 x 3 mm | J2 lower plate keep-out (O20 x 3, link 1b) w": [
     -0.289,
     -30.3,
     43.0,
-    43.0
+    39.8
    ],
    "drive horn lug keep-out (link 1a: 6 x 3 mm l | drive rod keep-out (O3 Ti-6Al-4V, 26.84 mm b": [
     -0.271,
     -28.3,
     39.8,
-    43.0
+    26.8
    ],
    "drive rod keep-out (O3 Ti-6Al-4V, 26.84 mm b | drive horn lug keep-out (link 1a: 6 x 3 mm l": [
     -0.146,
     -28.3,
     39.8,
-    43.0
+    26.8
    ],
    "drive bell crank boss keep-out (O10 x 6 mm,  | drive crank pivot pin keep-out (O3 h6 harden": [
     0.098,
     -24.3,
     33.3,
-    43.0
+    0.0
    ],
    "drive crank pivot pin keep-out (O3 h6 harden | drive bell crank boss keep-out (O10 x 6 mm, ": [
     0.098,
     -24.3,
     33.3,
-    43.0
+    0.0
    ],
    "drive bell crank boss keep-out (O10 x 6 mm,  | link 1b strap keep-out (8 x 3 mm Ti, fitted ": [
     0.139,
-    -2.3,
+    89.7,
     0.0,
-    39.8
+    0.0
    ],
    "drive bell crank boss keep-out (O10 x 6 mm,  | drive crank pin clip keep-out (DIN 6799 RS 2": [
     0.15,
     -20.3,
     26.8,
-    43.0
+    0.0
    ],
    "drive crank pin clip keep-out (DIN 6799 RS 2 | drive bell crank boss keep-out (O10 x 6 mm, ": [
     0.15,
     -28.3,
     39.8,
-    43.0
+    0.0
    ],
    "drive horn lug keep-out (link 1a: 6 x 3 mm l | K upper boss + clock-spring cap keep-out (O2": [
     0.15,
     -10.3,
     10.5,
-    43.0
+    0.0
    ],
    "drive bell crank long arm keep-out (6 x 3 mm | J2 upper boss + cap keep-out (O20, F+3.15..F": [
     0.278,
@@ -651,13 +651,13 @@
    ],
    "drive rod keep-out (O3 Ti-6Al-4V, 26.84 mm b | K upper boss + clock-spring cap keep-out (O2": [
     3.391,
-    55.7,
+    3.7,
     0.0,
     null
    ],
    "drive M2 ball-link socket at the horn (O7 en | K lower plate keep-out (O20 x 3, link 1a) wi": [
     4.371,
-    -2.3,
+    89.7,
     0.0,
     null
    ],
@@ -729,7 +729,7 @@
    ],
    "drive rod keep-out (O3 Ti-6Al-4V, 26.84 mm b | K lower plate keep-out (O20 x 3, link 1a) wi": [
     6.218,
-    -2.3,
+    89.7,
     0.0,
     null
    ],
@@ -753,19 +753,19 @@
    ],
    "drive bell crank boss keep-out (O10 x 6 mm,  | drive M2 ball-link socket at the crank (O7 e": [
     8.05,
-    -2.3,
+    89.7,
     0.0,
     null
    ],
    "drive M2 ball-link socket at the crank (O7 e | drive bell crank boss keep-out (O10 x 6 mm, ": [
     8.05,
-    -2.3,
+    89.7,
     0.0,
     null
    ],
    "drive horn lug keep-out (link 1a: 6 x 3 mm l | K stop dowel 1 of 2 (ISO 8734 O3 m6 hardened": [
     8.182,
-    -2.3,
+    89.7,
     0.0,
     null
    ],
@@ -837,19 +837,19 @@
    ],
    "drive M2 ball-link socket at the crank (O7 e | drive crank pin clip keep-out (DIN 6799 RS 2": [
     10.625,
-    -2.3,
+    89.7,
     0.0,
     null
    ],
    "drive crank pin clip keep-out (DIN 6799 RS 2 | drive M2 ball-link socket at the crank (O7 e": [
     10.625,
-    -2.3,
+    89.7,
     0.0,
     null
    ],
    "drive M2 ball-link socket at the horn (O7 en | K stop dowel 1 of 2 (ISO 8734 O3 m6 hardened": [
     10.795,
-    -2.3,
+    89.7,
     0.0,
     null
    ],
@@ -963,7 +963,7 @@
    ],
    "drive rod keep-out (O3 Ti-6Al-4V, 26.84 mm b | K stop dowel 1 of 2 (ISO 8734 O3 m6 hardened": [
     13.292,
-    -2.3,
+    89.7,
     0.0,
     null
    ],
@@ -981,13 +981,13 @@
    ],
    "drive bell crank long arm keep-out (6 x 3 mm | K lower plate keep-out (O20 x 3, link 1a) wi": [
     13.701,
-    -2.3,
+    89.7,
     0.0,
     null
    ],
    "drive bell crank long arm keep-out (6 x 3 mm | K upper boss + clock-spring cap keep-out (O2": [
     13.793,
-    -2.3,
+    89.7,
     0.0,
     null
    ],
@@ -1035,7 +1035,7 @@
    ],
    "drive bell crank boss keep-out (O10 x 6 mm,  | link 1a strap keep-out (8 x 3 mm Ti, fitted ": [
     15.027,
-    -2.3,
+    89.7,
     0.0,
     null
    ],
@@ -1047,19 +1047,19 @@
    ],
    "drive bell crank long arm keep-out (6 x 3 mm | K stop dowel 2 of 2 (ISO 8734 O3 m6 hardened": [
     15.753,
-    -2.3,
+    89.7,
     0.0,
     null
    ],
    "drive crank pivot pin keep-out (O3 h6 harden | link 1a strap keep-out (8 x 3 mm Ti, fitted ": [
     15.898,
-    -2.3,
+    89.7,
     0.0,
     null
    ],
    "drive crank pivot pin keep-out (O3 h6 harden | J1 lower plate keep-out (O20 x 3, link 1a)": [
     16.047,
-    -2.3,
+    89.7,
     0.0,
     null
    ],
@@ -1077,19 +1077,19 @@
    ],
    "drive bell crank boss keep-out (O10 x 6 mm,  | J1 lower plate keep-out (O20 x 3, link 1a)": [
     17.525,
-    -2.3,
+    89.7,
     0.0,
     null
    ],
    "drive M2 ball-link socket at the crank (O7 e | K lower plate keep-out (O20 x 3, link 1a) wi": [
     17.6,
-    -2.3,
+    89.7,
     0.0,
     null
    ],
    "drive M2 ball-link socket at the crank (O7 e | K upper boss + clock-spring cap keep-out (O2": [
     17.64,
-    -2.3,
+    89.7,
     0.0,
     null
    ],
@@ -1125,7 +1125,7 @@
    ],
    "drive bell crank long arm keep-out (6 x 3 mm | link 1a strap keep-out (8 x 3 mm Ti, fitted ": [
     19.431,
-    -2.3,
+    89.7,
     0.0,
     null
    ],
@@ -1149,7 +1149,7 @@
    ],
    "drive crank pin clip keep-out (DIN 6799 RS 2 | link 1a strap keep-out (8 x 3 mm Ti, fitted ": [
     20.373,
-    -2.3,
+    89.7,
     0.0,
     null
    ],
@@ -1161,7 +1161,7 @@
    ],
    "drive M2 ball-link socket at the crank (O7 e | K stop dowel 2 of 2 (ISO 8734 O3 m6 hardened": [
     21.054,
-    -2.3,
+    89.7,
     0.0,
     null
    ],
@@ -1185,7 +1185,7 @@
    ],
    "drive rod keep-out (O3 Ti-6Al-4V, 26.84 mm b | link 1a strap keep-out (8 x 3 mm Ti, fitted ": [
     21.71,
-    -2.3,
+    89.7,
     0.0,
     null
    ],
@@ -1209,13 +1209,13 @@
    ],
    "drive bell crank long arm keep-out (6 x 3 mm | J1 lower plate keep-out (O20 x 3, link 1a)": [
     23.576,
-    -2.3,
+    89.7,
     0.0,
     null
    ],
    "drive crank pin clip keep-out (DIN 6799 RS 2 | J1 lower plate keep-out (O20 x 3, link 1a)": [
     23.667,
-    -2.3,
+    89.7,
     0.0,
     null
    ],
@@ -1227,7 +1227,7 @@
    ],
    "drive M2 ball-link socket at the crank (O7 e | link 1a strap keep-out (8 x 3 mm Ti, fitted ": [
     26.414,
-    -2.3,
+    89.7,
     0.0,
     null
    ],
@@ -1251,7 +1251,7 @@
    ],
    "drive bell crank long arm keep-out (6 x 3 mm | K stop dowel 1 of 2 (ISO 8734 O3 m6 hardened": [
     29.189,
-    -2.3,
+    89.7,
     0.0,
     null
    ],
@@ -1263,13 +1263,13 @@
    ],
    "drive rod keep-out (O3 Ti-6Al-4V, 26.84 mm b | J1 lower plate keep-out (O20 x 3, link 1a)": [
     30.191,
-    -2.3,
+    89.7,
     0.0,
     null
    ],
    "drive M2 ball-link socket at the crank (O7 e | J1 lower plate keep-out (O20 x 3, link 1a)": [
     30.37,
-    -2.3,
+    89.7,
     0.0,
     null
    ],
@@ -1281,7 +1281,7 @@
    ],
    "drive M2 ball-link socket at the crank (O7 e | K stop dowel 1 of 2 (ISO 8734 O3 m6 hardened": [
     32.093,
-    -2.3,
+    89.7,
     0.0,
     null
    ],
@@ -1358,7 +1358,7 @@
     -0.978,
     -26.3,
     36.5,
-    43.0
+    13.8
    ]
   ]
  },
