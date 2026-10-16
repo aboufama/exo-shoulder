@@ -147,8 +147,11 @@ def cmd_frozen(a):
         fits = {"fit110": K.bench(110, 360), "fit60": K.bench(60, 160)}
     finally:
         if ex is not None: os.environ["CB_EXACT"] = ex
-    Bb = K.bench(110, 360); res["wear_mode"] = Bb.mode
+    wc, ww = (int(x) for x in os.environ.get("ZC_WEAR", "110,360").split(","))      # 110,1432: out of sample (all ws poses)
+    Bb = K.bench(wc, ww); res["wear_mode"] = Bb.mode; res["wear_bench"] = [wc, ww]
+    only = os.environ.get("ZC_FITS")                                                  # e.g. fit110: one protocol only
     for name, Bf in fits.items():
+        if only and name not in only.split(","): continue
         t = time.time(); pf, rf = M.evaluate(Bf, dict(p0)); prof = {k: np.array(v) for k, v in Bf._kit_last["prof"].items()}
         res[name] = dict(fit_mode=Bf.mode, fit={k: rf.get(k) for k in ("gap", "near", "reach", "follow", "inband14", "contact", "honest")})
         pb, rb = M.evaluate(Bb, dict(p0), fixed_prof=prof)
