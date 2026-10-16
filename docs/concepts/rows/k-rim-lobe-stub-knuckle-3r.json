@@ -1,0 +1,102 @@
+{
+ "id": "k-rim-lobe-stub-knuckle-3r",
+ "name": "Inverse direct pair: lobe sector on link 1a around K, MR52ZZ roller on a short stub of link 2 slaves K to q2 (3 active, K not read)",
+ "lens": "round7:direct-drive-knuckle (c)",
+ "family": "redundant 4R with a determined spare (cam-slaved knuckle), direct higher pair",
+ "active_dof": 3,
+ "passive_dof": 3,
+ "passive_translations": 0,
+ "complexity": 34.0,
+ "status": "screened",
+ "t_ideated": "2026-10-16T15:33:10Z",
+ "t_screened": "2026-10-16T15:53:34Z",
+ "reach": 0.6937,
+ "follow": 0.9333,
+ "inband14": 0.8269,
+ "inband10": 0.5673,
+ "contact": 0.0118,
+ "gap": 36.82,
+ "gap_plain": 30.79,
+ "v_reach": null,
+ "v_follow": null,
+ "v_inband14": null,
+ "v_inband10": null,
+ "v_gap": null,
+ "n_configs": 524,
+ "best_params": {
+  "L_stub": 24.487,
+  "a0": 146.225,
+  "kK": 0.825,
+  "smhi": 22.126,
+  "a1max": 48.0,
+  "bk1": 33.191,
+  "bk2": 39.926,
+  "tip_tol": 3.087,
+  "lobe_w": 3.493,
+  "lobe_lev": 0,
+  "rr": 2.5,
+  "emb_mode": "kstub"
+ },
+ "mechanism": {
+  "joints": [
+   {
+    "name": "J1",
+    "type": "revolute",
+    "active": true,
+    "component": "v5 O20 stack, MR117-2RS pair"
+   },
+   {
+    "name": "K",
+    "type": "revolute",
+    "active": false,
+    "sensed": false,
+    "component": "v5 O20 stack + 6 mm clock-spring cap, stop A",
+    "determined_by": "roller-lobe contact (spring-closed) past the q2 onset, stop A before it"
+   },
+   {
+    "name": "J2",
+    "type": "revolute",
+    "active": true,
+    "component": "v5 O20 stack, folded dowel + stop-B dowel"
+   },
+   {
+    "name": "J3",
+    "type": "revolute",
+    "active": true,
+    "component": "v5 O20 stack"
+   },
+   {
+    "name": "knee a",
+    "type": "revolute",
+    "active": false,
+    "sensed": true,
+    "component": "iglidur pin"
+   },
+   {
+    "name": "knee b",
+    "type": "revolute",
+    "active": false,
+    "sensed": true,
+    "component": "iglidur pin"
+   },
+   {
+    "name": "roller",
+    "type": "revolute",
+    "active": false,
+    "component": "MR52ZZ 2x5x2.5 on an O2 Ti pin (rolling element of the pair, not a DOF)"
+   }
+  ],
+  "higher_pairs": 1,
+  "closed_loops": 1,
+  "passive_translations": 0,
+  "bodies_extra": [
+   "lobe sector (link 1a)",
+   "stub (link 2)"
+  ],
+  "note": "complexity by the catalogue's count 34.0; not recomputed by tools/simplicity.py"
+ },
+ "verdict": "SCREENED, FAILS ITS KILL GATE: best 36.82 fast near-touch (plain 30.79; reach 0.694, follow 0.933, ib14 0.827, contact 0.012) on Bench(60,160) against the gate <= 15.5 and the winner's 16.53. The law alone is worth 13.76 (re-measured to the digit), the honest drive metal costs ~23 points. Not a contender for the leader; no frozen / verify run spent on it.",
+ "limiter": "The stacking at K. A lobe on link 1a must clear link 1b (link 1b is the upper member at K and runs right under the lobe, which is aimed at J2), so it sits >= link 1b + 4 mm and the stub >= lobe + 4 mm: lobe 0 % in band at 19.6 mm, stub 11 % at 21.6 mm, roller 17 % at 19.7 mm (86 out-of-band samples, ib 0.827 vs the law-only 0.887). Putting the lobe BESIDE link 1b at link 1a's level (lobe 100 % in band) moves the roller (on a post) down to the skin, where it sweeps with link 2 over ~110 deg of q2 in state A and loses 14-39 poses to skin / contact (best 57.2) - the Geneva tail's sweep cone on a shorter radius. Plus 9 clip poses lost to roller-vs-lobe in state A (the stub swings back across the lobe), follow 0.933.",
+ "note": "Model: winner chain (kit rule, phys q2 stops, capK 6, pin knee, near-touch objective) + exact spherical roller-lobe pair: roller centre on a small circle about u2, pitch curve C = R(uK, dK) P in link 1a's frame, gates per t: pressure angle (lobe-side pitch normal vs K's velocity) <= 45, convex pitch radius >= rr + 1, lift-off, stop B, stub boss >= 1 mm off hub K (nominal) + per-pose 3-D pairs (LOBE vs hub 2 / hub 3 / L1b / L2 / stub / knee / pad / E, ROL vs LOBE off the law, stub + roller vs hub 1 / hub K incl. cap / hub 3 / L1a / L1b / knee / pad / E). Spec corrections: a0 168 has NO valid law (pa > 45 at the onset: the stub points at K, K's velocity at the roller is ~perpendicular to the push); valid branches a0 144-156 and 204-216. The best stub boss passes 6.6 mm off hub K's rim (the lead's 0.3 mm concern is resolved by a0 146, stub 28.1 mm physical). pa max 35.3 deg (kK 0.825, dK 24.6 deg to stop B, th_max 101.5). Search: 12 hand configs, farm LHS 256 (L_stub, a0, kK, smhi, a1max, bk1, bk2, tip_tol, lobe_w, lobe level) + 2 local-search generations x 128 (sigma 8 % / 4 %), 512 farm configs, ~$0.03. CONVERGENCE GATE: gain over the 2nd half 0.553 score pts (< 1 ok), over the last third 0.549 (< 0.5 NOT met by 0.05), top-5 spread 0.138 (< 3 ok) - so the status stays 'screened', not 'dead', although the kill gate (<= 15.5) is missed by 21 gap points. Overhead (elev >= 140): 2/12 ws taken (lost: fold 8, slide 2). No frozen Bench(110,360) run (kill gate failed first).",
+ "doc": "docs/concepts/k-rim-lobe-stub-knuckle-3r.md"
+}

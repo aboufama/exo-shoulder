@@ -62,3 +62,55 @@ Two structural findings already:
 - **Beside link 1b** the lobe is in band (100 %), but the roller on its post sweeps the skin at link 1a's level with
   link 2 (state A), and the poses whose roller would need lifting are lost (skin 38) - the Geneva tail's sweep cone again,
   on a shorter radius.
+
+## Search (farm, Bench(60,160) fast, near-touch objective)
+
+- LHS 256 over L_stub 18-28, a0 140-224, kK 0.7-1.3, smhi 14-28, a1max 48-60, bk1 29-34, bk2 37-41, tip_tol 0-6,
+  lobe_w 3-5 and the lobe level (over / beside link 1b): best 38.34. 144 of 256 have a valid law. Best over link 1b
+  38.34, best beside 57.2.
+- Two local-search generations of 128 around the top 6 (sigma 8 % and 4 % of each range): 37.17, then **36.82**.
+- **Best:** L_stub 24.49 (28.1 mm physical at the roller radius), a0 146.2, kK 0.825, smhi 22.1, a1max 48.0, bk1 33.19,
+  bk2 39.93, tip_tol 3.1, lobe_w 3.5, lobe over link 1b.
+  - Numbers: **36.82 near-touch, 30.79 plain**; reach 0.694, follow 0.933, ib14 0.827, ib10 0.567, contact 0.012, min
+    metal 0.56 mm. Overhead: 2 of 12 workspace poses taken (fold 8, slide 2).
+  - Law: pa max 35.3 deg, K opens 24.6 deg to stop B, th_max 101.5. The stub boss passes 6.6 mm off hub K's rim.
+- Convergence gate (score points): 2nd-half gain 0.553 (< 1, met); last-third gain 0.549 (< 0.5, NOT met, by 0.05);
+  top-5 spread 0.138 (< 3, met). Status therefore stays **screened**, not dead.
+- **Kill gate (fast near-touch <= 15.5): failed by 21 gap points.**
+
+## Red team
+
+- **The optimistic number was the spec's:** the law-only 13.76 has no drive metal. With honest metal the pair costs
+  about 23 points, five times the rod drive's 4.74.
+- **Where the points go (best config):**
+  - In band: lobe 0 % (45 samples, median 19.6 mm), stub 11 % (32, 21.6 mm), roller 17 % (9, 19.7 mm). Hub 3 0.68,
+    L2 0.78.
+  - Lost poses: fold 38, slide 4, skin 2, and parts 9. All 9 parts losses are ROL-LOBE: in state A the stub swings back
+    across the lobe sector on clip frames, so follow falls to 0.933.
+- **Pose that jams:** the clip frames where q2 sweeps back past the onset while K is still on stop A. The roller's
+  state-A path crosses the lobe's web or band. The lobe would need a relief notch there, which shortens the law.
+- **Point that pinches:** min metal 0.56 mm is on a taken pose, which is why near-touch (36.82) and plain (30.79)
+  differ by 6 points.
+- **Hub K (the lead's concern):** at the proposed a0 168 the law has no valid prefix (pa > 45 deg at t = 0). On the
+  valid branch (a0 about 146) the boss clears hub K's rim by 6.6 mm in the measured run and by at least 4 mm nominally
+  over q2's whole range. The 0.3 mm clash does not arise, but the law moves (kK 0.83, dK 24.6 against 31.3).
+
+## Verdict and what it predicts
+
+The inverse direct pair cannot beat the rod drive under these rules.
+
+- The lobe must ride on link 1a at K.
+- Link 1b leaves K exactly where the lobe has to point (toward J2). The lobe therefore sits one layer above link 1b, and
+  the stub one layer above the lobe: three stacked layers, about 8 mm above link 1b's in-band level.
+- Moving the lobe beside link 1b drops it into band. The roller then rides at link 1a's level, and its stub, rigid with
+  link 2, sweeps the skin through state A.
+
+New knowledge: **a slaving drive whose follower is rigid with link 2 pays for link 2's whole q2 sweep, at any radius, as
+long as it must reach K's level.** This held at about 38 mm (the Geneva tail) and at 24-28 mm (this stub).
+
+A direct pair that keeps the stub's sweep off the skin and out of a third layer has two candidate shapes:
+
+- (a) the follower on a radius that never leaves link 1b's footprint (rim-lobe-arm, pick 1);
+- (b) a lobe cut into link 1b's own strap, as a groove at link 1b's level.
+
+The rod's out-of-band metal remains the cheapest measured drive (4.74 points).
