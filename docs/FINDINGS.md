@@ -609,7 +609,8 @@ docs/concepts/fold-sph3r.md.
   whose straight links are raglan lines. Link-2 turns all lose (parts collisions at the knee / pad, deltoid end).
 * **In-band dilution (red team)**: in-band 14 is a share of metal SAMPLES, so extra metal that sits in band lowers the
   gap without moving any part closer. A 114 deg hairpin in link 1 (36 -> 84 samples, +~9 g) takes the pin knee from
-  26.34 to 24.79 fast (score 90.99), but weighted at the straight sample count it is 25.89: +0.45 real, +1.1 dilution.
+  26.34 to 24.79 fast (score 90.99), but weighted at the straight sample count it is 25.89: +0.45 real, +1.1 dilution;
+  worn frozen on Bench(110,360) exact 32.33 (33.41 at fixed sizes) vs the pin knee's 33.84.
   On the plain 3R the same check gives 43.97 instead of 42.72 (mostly real). Every in-band claim should be re-scored at
   fixed part sizes (raglan-knee-3r reports `gap_fixed_n`); a CMA on the bench gap will chase the artefact (annular-ring
   skirt, docs/concepts/annular-ring-3r.md, is the same thing).

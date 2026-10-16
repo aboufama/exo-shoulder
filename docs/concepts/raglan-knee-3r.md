@@ -119,11 +119,13 @@ conservative side, and the same for the control and the routed shape.
 |---|---|---|---|---|---|---|---|---|---|---|
 | k10 control (great circle) | 26.46 | 34.06 | 87.6 | 0.619 | 0.964 | 0.843 | 0.003 | 34.06 | 35.80 | 57.94 |
 | link 1 t 0.7, d -20 | 25.48 | **33.10** | 87.96 | 0.619 | 0.964 | 0.853 | 0.003 | **33.67** | 34.84 | 56.99 |
-| link 1 t 0.85, d -30 (24.79 fast) | | queued on the farm (`big_L1m30`) | | | | | | | | |
+| **link 1 t 0.85, d -30** (best fast; fit on the fast grid) | 24.79 | **32.33** | 88.24 | 0.619 | 0.964 | 0.860 | 0.003 | **33.41** | 34.07 | 56.88 |
 
-(The pin knee's own frozen run of k10, fit on the fast grid: 33.84.)
+(The pin knee's own frozen run of k10, fit on the fast grid: 33.84 - the like-for-like control for the d -30 row:
+-1.51 on the bench gap, -0.43 at fixed part sizes.)
 
-Red team (frozen big bench, link 1 d -20):
+Red team (frozen big bench, link 1 d -20; the d -30 best is the same pose for pose: 136 fold, 4 E / link 2 jams, 1 contact,
+nearest metal 0.20 mm, 34.07 with metal < 1 mm as contact, overhead reach 0.29 / in-band 0.91):
 * **The pose that jams**: 136 of 470 poses fold (J2 fold, identical to the control: routing does not touch it), 4 jam
   on the adjacent E strap / link 2 pair at J3, 1 contact. Overhead (elevation >= 140): 19 of 28 workspace poses fold,
   reach 0.29, in-band 0.90.
@@ -140,8 +142,8 @@ Red team (frozen big bench, link 1 d -20):
 **Routing is not the leader's lever.** The raglan map says the leader's links are already on their lines of least
 skin motion; the coarse sweep and the steeper turns confirm it: the real gain is 0.4-0.45 gap points (link 1
 0.925 -> 0.99 in band), everything above that is dilution, and every link-2 turn loses. Best: 24.79 fast (score 90.99;
-25.89 at fixed part sizes) and 33.10 frozen big exact (33.67 at fixed sizes) against the pin knee's 26.34 / 34.06 on
-the same code. The 90+ bar on the large bench needs +0.28 reach, i.e. the J2 fold - nothing a link's route can move.
+25.89 at fixed part sizes) and 32.33 frozen big exact (score 88.24; 33.41 at fixed sizes) against the pin knee's
+26.34 / 33.84 (34.06 with the fit on the exact path). The 90+ bar on the large bench needs +0.28 reach, i.e. the J2 fold - nothing a link's route can move.
 The posterior-J1 seats that remove the fold lose 46-69 poses to skin instead (best 122.45).
 
 Gate: the comparable history (coarse 177 + 6 local) passes the formula trivially (it is a grid, not a search). The
