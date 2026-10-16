@@ -15,7 +15,8 @@ model and audit run unchanged; this file only drives them.
     python3 tools/osn_polish.py measure TASK OUT 'PARAMS'           TASK: big | big_frozen_bigfast | held_frozen_bigfast |
                                                                      s60 (CB_EXACT=1 picks the exact path where it applies)
 Free parameters (designer-changeable; bounds keep every hard rule: 2 passive translations, real envelopes, no radial
-slide, J1 / J2 on GH rays = b1 = b2 = 0 by the closure theorem): see FREE below.
+slide, J1 / J2 near the GH rays: |b1|, |b2| <= 0.08 by the closure theorem, poses past the 0.5 mm radial tolerance lost): see FREE below.
+The J2 branch is not a free parameter here: the model takes it from the seats (sign of d2 . (d1 x d3)), so the seat search covers it.
 """
 import fcntl, json, math, multiprocessing as mp, os, shutil, sys, time, traceback
 import importlib.util
@@ -36,8 +37,11 @@ FREE = {
     "b3": (0.1, -0.3, 1.0, "J3 axis tilt from the GH ray toward the skin normal (line 3 is free by the closure theorem)"),
     "neck": (3.0, 5.0, 30.0, "member-3 neck strap length past hub 3's rim to the stage (8 x 3 strap)"),
     "S_max": (4.0, 4.0, 25.0, "slide travel cap (each slide, mm): shorter rails / less stage metal vs slide-range losses"),
+    "b1": (0.02, -0.08, 0.08, "J1 axis tilt off the GH ray toward the skin normal (closure exact at 0; a pose whose radial "
+                              "drift leaves the 0.5 mm tolerance is not taken - the check is unchanged)"),
+    "b2": (0.02, -0.08, 0.08, "J2 axis tilt off the GH ray (as b1)"),
 }
-FIXED_NOTE = ("fixed: b1 = b2 = 0 (closure theorem: J1 / J2 lines through GH, else radial drift > 0.5 mm), R_tol 0.5 "
+FIXED_NOTE = ("fixed: R_tol 0.5 (b1 / b2 are free but small: the closure theorem puts J1 / J2 on GH rays, a tilt costs every pose whose radial drift > 0.5 mm), "
               "(honesty rule, no radial slide), inv 1 (inverted along guide), remote 1 + ramp 1 (stage down the arm), centre 1 "
               "and S_auto 1 (stage centre = mid travel, ranges = needed travel + 0.5 mm, both fitted on the bench + every fit-clip "
               "frame), flip3 0/1 (discrete: checked at the start and the best), hub faces / strap undersides (fitted by the model "
@@ -310,13 +314,14 @@ def log_rows(files, sweep=os.path.join(REPO, "docs", "concepts", "sweeps", "offs
     rows = []
     for f in files:
         for r in json.load(open(f)): rows.append(r)
-    rows.sort(key=lambda r: (r.get("gen", 0), r["tag"].split("-")[1], r["tag"]))
+    stream = lambda r: r["tag"].rsplit("-", 2)[0]                             # tag = <label>-g<gen>-<i>
+    rows.sort(key=lambda r: (r.get("gen", 0), stream(r), r["tag"]))
     for r in rows:
         rep = r.get("report") or {}
         if r["tag"] in have: continue
         p = dict(base, **r["params"])
         if rep.get("S"): p["S_a"], p["S_t"], p["R_r"] = rep["S"]
-        row = dict(k=k, t=time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()), stage="polish-big-" + r["tag"].split("-")[1],
+        row = dict(k=k, t=time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()), stage="polish-big-" + stream(r),
                    bench="Bench(110,360) fast, verifier checks (crowns / strap tops / link 2 vs member 3)", params=p,
                    **{m: rep.get(m) for m in ("inband14", "inband10", "reach", "follow", "contact")}, gap=r["obj"] if not r.get("error") else None,
                    model_gap=rep.get("model_gap"), why=rep.get("why"), S=rep.get("S"), gap_near1=rep.get("gap_near1"),

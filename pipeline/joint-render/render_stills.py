@@ -43,12 +43,16 @@ alu = principled("blasted", (0.60, 0.615, 0.635), 1.0, 0.38, bump=(9000, 0.18))
 stainless = principled("stainless", (0.80, 0.80, 0.81), 1.0, 0.09)
 steel = principled("bearing_steel", (0.82, 0.83, 0.85), 1.0, 0.13)
 iglide = principled("iglide", (0.80, 0.42, 0.03), 0.0, 0.42)
-skin = principled("mannequin", (0.018, 0.018, 0.02), 0.0, 0.55, coat=0.15)
+# MATTE black display mannequin (user look; the 2026-10-15 stills at 0.018 / rough 0.55 / coat 0.15 came out glossy):
+# the film's material (render_film.py): base 0.004, no coat, no sheen, rough 0.8, half the default specular
+skin = principled("mannequin", (0.004, 0.004, 0.0043), 0.0, 0.8)
+for nd in skin.node_tree.nodes:
+    if nd.type == "BSDF_PRINCIPLED" and "Specular IOR Level" in nd.inputs: nd.inputs["Specular IOR Level"].default_value = 0.25
 def mat_for(n):
     l = n.lower()
     if l.startswith("body"): return skin
     if any(k in l for k in ("din 7984", "iso 10642", "dowel", "screw", "set screw")): return stainless   # every screw polished (user look)
-    if "bearing" in l and "igus" not in l: return steel
+    if ("bearing" in l and "igus" not in l) or "rsr3" in l: return steel                               # bearings, ground miniature guides
     if any(k in l for k in ("igus", "iglidur", "liner", "gib", "washer", "sleeve")): return iglide
     return alu
 show_body = bool(FILM.get("body", False))

@@ -53,6 +53,10 @@ PARAMS.update(slides=0, remote=0, ramp=0, inv=0, vfix=1, jam_contact=1, drop=1,
               pmax=40.0, auth_min=8.0,
               lE=22.0, lc=22.0, phiE=0.0, beta0=90.0, bmin=20.0,   # dyad: E arm, cuff link (mm), rest E-arm direction
               jumpk=25.0, toff=6.1, earm_over=0,
+              o2=0.0, chi2=0.0,   # CAM: extra offset of J2's line (mm, normal to u2) and its direction (deg from the u2-u3 plane);
+                                  #   with J1 through GH the radial closure is F(q2, psi) = 0: the knee is a cam of the elbow q2
+              earm_under=0,    # 1: the E arm IS hub 3's lower plate (F..F+3, J3's output), the yoke = the upper housing with the
+                               #    trunnions at F + toff >= F + 7 so the cheeks clear the E arm by 1 mm (no stack lifted)
               lock=0)          # 1: CONTROL - knee locked at psi_rest (hub 3 rigid on link 2, no fork): a 3R + pin dyad, the
                                #    radial closure must hold by itself (|rad - c0| < 0.5 mm, exact iff b1 = b2 = 0)                                # toff: trunnion axis height above hub 3's face (mm)                                          # (deg, 0 = distal along the humerus), rest elbow (deg)
 
@@ -70,12 +74,18 @@ class Design(OSN.Design):
         self._knee = False
         P0 = dict(PARAMS, **(params or {}))                          # clamp to the buildable ranges (CMA steps outside)
         for k, lo, hi in (("b1", 0, 1), ("b2", 0, 1), ("b3", 0, 1), ("lE", 12, 40), ("lc", 12, 40), ("beta0", 35, 145),
-                          ("toff", 1.5, CROWN - 1.5), ("pmax", 20, 60), ("psi_rest", -50, 50)):
+                          ("toff", 1.5, CROWN - 1.5), ("pmax", 20, 60), ("psi_rest", -50, 50), ("o2", 0, 30)):
             P0[k] = float(min(hi, max(lo, P0[k])))
+        if P0.get("earm_under"): P0["toff"] = float(min(CROWN - 1.5, max(T_LINK + 1.0 + CHEEK, P0["toff"])))
         super().__init__(P0)
         P = self.p; u1, u2, u3 = self.u
         self.dK = unit(np.cross(u2, u3))
         R = OSN.rest(); Q0 = R["Q0"]
+        if P.get("o2", 0.0):                                         # CAM: J2's line moved o2 mm off its seat line, normal to u2,
+            m = unit(u3 - (u3 @ u2) * u2)                            # at chi2 from the u2-u3 plane; J3's line re-seated after it
+            self.c[1] = self.c[1] + P["o2"] * (math.cos(P["chi2"] * D2R) * m + math.sin(P["chi2"] * D2R) * self.dK)
+            _, _, _, X2, _, _ = S.Design.ik(self, Q0[None]); R12, tt2 = X2[0][0], X2[1][0]
+            self.c[2] = OSN.foot(R12.T @ (self.seats["P"][2] - tt2), u3)
         _, _, _, X2, _, _ = S.Design.ik(self, Q0[None]); R12, tt2 = X2[0][0], X2[1][0]
         P3h = R12.T @ (self.seats["P"][2] - tt2); self.h_seat = float(P3h @ u3)
         self.hK = self.h_seat + P["dh"]; self.cK = self.c[2] + self.hK * u3
@@ -313,6 +323,9 @@ class Model(OSN.Model):
         zE, zc, zp = H["Earm"][keep].max(), H["clink"][keep].max(), H["pad"][keep].max()
         zc = max(zc, zp + PAD_T + GAP); zp = zc - PAD_T - GAP
         zf = max(H["fork"][keep].max(), self.D.hK - CHEEK) if "fork" in H else None           # cheek: trunnion pin O4 at hK, 3 mm of cheek round it
+        if P.get("earm_under") and not P.get("lock"):            # E arm = hub 3's lower plate: one level for both
+            f3 = max(f3, zE, zc + T_LINK + GAP); zE = f3
+            return f1, f2, f3, zE, zc, zp, zf
         zE = max(zE, f3 + UP, zc + T_LINK + GAP, (self.D.hK + CHEEK + 1.0) if P.get("earm_over") and not P.get("lock") else 0.0)   # earm_over: E arm over the cheek tops
         return f1, f2, f3, zE, zc, zp, zf
 
@@ -322,7 +335,9 @@ class Model(OSN.Model):
         return f1, f2, 0.0, rL
 
     def f3_of(self, tr, keep=None):
-        return float(self.Hneed["hub3"][keep if keep is not None else ~self.drop].max())
+        keep = keep if keep is not None else ~self.drop
+        if self.p.get("earm_under") and not self.p.get("lock"): return float(self._levels(keep)[2])
+        return float(self.Hneed["hub3"][keep].max())
 
     def finalize(self):
         keep = ~self.drop
@@ -340,6 +355,7 @@ class Model(OSN.Model):
         self.f = [f1, f2, f3]
         self.trunnion_off = round(float(D.hK - (f3 + self.p["toff"])), 2)  # K line vs its target height in hub 3's housing (mm)
         self.trunnion_in = 1.5 <= D.hK - f3 <= CROWN - 1.5
+        if zf is not None and zf > D.hK - 2.0: self.trunnion_in = False   # skin pushed the cheeks above the pin: no fork
         self._contact_only(); self._solids()
 
     def _contact_only(self):
@@ -466,11 +482,70 @@ def kin(par):
                          "jump p50/p99/max", np.percentile(M.jumps, [50, 99, 100]).round(1) if M.jumps else None)
 
 
+def _bench(nc, nw, fast=False):
+    old = os.environ.get("CB_EXACT")
+    if fast and old is not None: del os.environ["CB_EXACT"]
+    try: return CB.Bench(n_clip=nc, n_ws=nw)
+    finally:
+        if fast and old is not None: os.environ["CB_EXACT"] = old
+
+
+def audit(M, B):
+    """red team on a run model: near-touch (lowest metal incl. hub walls / crowns and dyad tops over the taken poses), the
+    gap with metal < 1 / 2 mm counted as contact, the overhead split (elevation >= 140)"""
+    taken = lambda i: B.res[i] is not None and float(np.min(B.res[i])) >= 0
+    mins = []
+    for i in range(len(B.idx)):
+        if not taken(i): continue
+        cm = float(B.dist(i, np.concatenate([M.world(m, i, Pc) for m, Pc in M.contact])).min()) if M.contact else 1e9
+        mins.append((min(float(np.min(B.res[i])), cm), i))
+    mins.sort(); out = dict(near_touch_min_mm=round(mins[0][0], 2) if mins else None,
+                            near_touch_low=[dict(mm=round(d, 2), plane=B.poses[i]["plane"], elev=B.poses[i]["elev"], axial=B.poses[i]["axial"], kind=B.kind[i]) for d, i in mins[:5]])
+    res1 = list(B.res)
+    for thr in (1.0, 2.0):
+        for d, i in mins:
+            if d < thr: B.res[i] = np.r_[B.res[i], -1e-3]
+        out[f"gap_near{int(thr)}"] = B.report()["gap"]; out[f"near{int(thr)}_poses"] = int(sum(1 for d, i in mins if d < thr)); B.res = list(res1)
+    el = np.array([p["elev"] for p in B.poses]); kind = np.array(B.kind); hi = np.nonzero(el >= 140)[0]
+    ws = [i for i in hi if kind[i] == "ws"]; cl = [i for i in hi if kind[i] == "clip"]; tk = [i for i in hi if taken(i)]
+    d = np.concatenate([B.res[i] for i in tk]) if tk else np.zeros(0)
+    out["overhead140"] = dict(ws=len(ws), reach=round(float(np.mean([taken(i) for i in ws])), 4) if ws else None,
+                              clip=len(cl), follow=round(float(np.mean([taken(i) for i in cl])), 4) if cl else None,
+                              inband14=round(float(((d >= 2) & (d <= 14)).mean()), 4) if len(d) else None,
+                              inband10=round(float(((d >= 2) & (d <= 10)).mean()), 4) if len(d) else None,
+                              why_not={k: int(sum(1 for i in hi if not taken(i) and M.why[i] == k)) for k in set(M.why[hi]) if k})
+    return out
+
+
+def frozen(par):
+    """lesson (c): fit on Bench(60,160) FAST (the claimed shape: every level, link path, fork, dyad, c0 and hK frozen), then
+    wear it on Bench(110,360) (exact with CB_EXACT=1) without refit; the knee is re-solved and re-tracked per pose"""
+    B1 = _bench(60, 160, fast=True); r1, M1 = _report(B1, par)
+    P2 = {k: v for k, v in M1.p.items() if isinstance(v, (int, float, str, bool)) or v is None}
+    B = _bench(110, 360)
+
+    class Frozen(Model):
+        def fit(self):
+            for a in ("geo", "rigid", "link_pts", "f", "lv", "contact", "cyl", "box", "strap", "cyl_surf", "Hneed", "Lneed", "trunnion_off", "trunnion_in"):
+                if hasattr(M1, a): setattr(self, a, getattr(M1, a))
+            self.contact = list(M1.contact); self.poses_fit = np.nonzero(self.kin_ok)[0]; self.drop = np.zeros(len(self.poses_fit), bool)
+    M = Frozen(B, P2); r = M.run()
+    keys = ("gap", "reach", "follow", "inband14", "inband10", "contact")
+    out = dict(fit60_fast={k: r1[k] for k in keys}, big={k: r[k] for k in keys}, mode=B.mode, why=r.get("why"), knee=r.get("knee"),
+               parts_pairs=r.get("parts_pairs"), audit_big=audit(M, B), audit_60=audit(M1, B1))
+    return out
+
+
 if __name__ == "__main__":
     mode = sys.argv[1] if len(sys.argv) > 1 else "check"
     par = json.loads(sys.argv[2]) if len(sys.argv) > 2 else {}
     if mode == "kin": kin(par); sys.exit()
+    if mode == "frozen":
+        out = frozen(par); print(json.dumps(out, default=float))
+        if len(sys.argv) > 3: json.dump(out, open(sys.argv[3], "w"), indent=1, default=float)
+        sys.exit()
     B = CB.Bench(60, 160); t = time.time()
     r, M = _report(B, par)
-    print({k: r[k] for k in ("gap", "reach", "follow", "inband14", "inband10", "contact")}, "why", r["why"], f"{time.time() - t:.0f}s")
+    print({k: r[k] for k in ("gap", "reach", "follow", "inband14", "inband10", "contact")}, "why", r["why"], f"{time.time() - t:.0f}s",
+          {k: r.get(k) for k in ("gap_reported", "pinb_along_mm", "trunnion_in_housing", "dh_refit")})
     print("knee", r["knee"]); print("levels", r["levels"], "f", r["f"]); print("parts", r["parts_ib14"], r["parts_pairs"], "min clear", r.get("min_clear_taken"))

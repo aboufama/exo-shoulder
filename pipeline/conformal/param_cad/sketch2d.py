@@ -42,16 +42,22 @@ def normals(H):
 def wrap(a): return (a + math.pi) % (2 * math.pi) - math.pi
 
 
-def snap_radius(R, up=None):
-    """round radius: 1 mm steps to 40, 2.5 to 100, 5 to 250, then 10; up = None nearest, False floor, True ceil"""
-    a = abs(R); s = 1.0 if a <= 40 else 2.5 if a <= 100 else 5.0 if a <= 250 else 10.0
+def snap_step(a, scale=1.0):
+    return scale * (1.0 if a <= 40 else 2.5 if a <= 100 else 5.0 if a <= 250 else 10.0)
+
+
+def snap_radius(R, up=None, scale=1.0):
+    """round radius: 1 mm steps to 40, 2.5 to 100, 5 to 250, then 10 (x scale); up = None nearest, False floor, True ceil"""
+    a = abs(R); s = snap_step(a, scale)
     q = round(a / s) if up is None else (math.ceil(a / s) if up else math.floor(a / s))
     return math.copysign(max(s, q * s), R)
 
 
-def fit_chain(start, end, clear, t, n_arcs=3, climb_max=35.0, r_min=12.0, bend=40.0, m=30, seeds=24, rng=0, verbose=False, margin=0.4, l_min=6.0):
+def fit_chain(start, end, clear, t, n_arcs=3, climb_max=35.0, r_min=12.0, bend=40.0, m=30, seeds=24, rng=0, verbose=False, margin=0.4, l_min=6.0,
+              snap_scale=1.0):
     """arcs between two poses. clear(P (N,2) skin-side points) -> clearance (mm, >= 0 required); t = bar thickness.
-    Objective: mean clearance of the skin-side face + bend * sum(kappa^2 l) (fairness). Returns dict(segs, ...)."""
+    Objective: mean clearance of the skin-side face + bend * sum(kappa^2 l) (fairness). Returns dict(segs, ...).
+    snap_scale scales the round-radius steps (0.5: half-mm steps to R40, ...)."""
     start = np.asarray(start, float); end = np.asarray(end, float); R = np.random.default_rng(rng)
     n = n_arcs; chord = float(np.linalg.norm(end[:2] - start[:2])); kmax = 1.0 / r_min
 
@@ -87,7 +93,7 @@ def fit_chain(start, end, clear, t, n_arcs=3, climb_max=35.0, r_min=12.0, bend=4
     opts = []
     for Rr in R0:
         if abs(Rr) > 2000: opts.append([0.0]); continue
-        base = snap_radius(Rr); a = abs(base); s_ = 1.0 if a <= 40 else 2.5 if a <= 100 else 5.0 if a <= 250 else 10.0
+        base = snap_radius(Rr, scale=snap_scale); a = abs(base); s_ = snap_step(a, snap_scale)
         opts.append([1.0 / math.copysign(a + j * s_, Rr) for j in (-2, -1, 0, 1, 2) if a + j * s_ >= max(s_, r_min)])
     for ks in itertools.product(*opts):
         ks = np.array(ks)

@@ -24,6 +24,7 @@ import argparse, contextlib, json, multiprocessing as mp, os, sys, time
 import numpy as np
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from common import design_dir, load_parts, frames
+from scipy.spatial import cKDTree
 from sdist import Mesh
 
 SHARP_DEG = 30.0
@@ -104,12 +105,23 @@ def candidates(info, W, ok, tol):
     return np.argwhere(ov & ok)
 
 
+def _tree(A):
+    if "T" not in A: A["T"] = cKDTree(A["S"])
+    return A["T"]
+
+
 def depth_in(A, B, Wa, Wb, tol):
-    """deepest sample of A inside B (mm, > tol) and its kind, or (0.0, None)"""
-    Ra, ta = Wa; Rb, tb = Wb; P = A["S"] @ (Ra.T @ Rb) + (ta - tb) @ Rb                 # A's samples in B's frame
-    m = np.where(np.all((P > B["lo"] + tol) & (P < B["hi"] - tol), axis=1))[0]   # deeper than tol: inside the box by tol
+    """deepest sample of A inside B (mm, > tol) and its kind, or (0.0, None). A's samples are culled in A's own frame
+    first (a kd-tree ball around B's posed box, shrunk by tol), so a big part (a cuff, the BOTTOM bar) is never posed whole"""
+    Ra, ta = Wa; Rb, tb = Wb; lo, hi = B["lo"] + tol, B["hi"] - tol
+    if np.any(hi <= lo): return 0.0, None
+    c = ((0.5 * (lo + hi)) @ Rb.T + tb - ta) @ Ra                                   # B's box centre in A's frame
+    m = np.asarray(_tree(A).query_ball_point(c, 0.5 * np.linalg.norm(hi - lo) + 1e-6, return_sorted=False), int)
     if not len(m): return 0.0, None
-    dep, k = B["M"].max_depth(P[m], tol)
+    P = A["S"][m] @ (Ra.T @ Rb) + (ta - tb) @ Rb                                     # those samples in B's frame
+    k = np.all((P > lo) & (P < hi), axis=1); m, P = m[k], P[k]                       # deeper than tol: inside the box by tol
+    if not len(m): return 0.0, None
+    dep, k = B["M"].max_depth(P, tol)
     return (dep, KINDS[A["kind"][m[k]]]) if k is not None and dep > tol else (0.0, None)
 
 

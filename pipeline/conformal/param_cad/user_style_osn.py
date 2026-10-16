@@ -129,10 +129,19 @@ def link_fit(label, ex, ey, start, end, Dq, Rq, t=T):
     if key in cache: fit = cache[key]; fit["segs"] = [tuple(x) for x in fit["segs"]]
     else:
         fits = {}
-        for n_ in range(3, 6):
-            for cm in (35.0, 45.0, 60.0):
-                try: fits[n_] = SK.fit_chain(start, end, clear, t, n_arcs=n_, climb_max=cm); fits[n_]["climb_limit"] = cm; break
-                except RuntimeError as e: print(f"  {label}: {n_} arcs, climb {cm}: {e}", flush=True)
+        # the CAD standard's ramp (35 deg, R >= 12) first; then the steeper ramps the verified model itself uses (its link
+        # rows ramp at <= 60 deg from the hub levels, docs/concepts/models/seed-offset-3r-slides.py RAMP) with tighter bends
+        # (centre-line R >= 4: inner R 2.5 on a machined 3 mm bar); radii snapped to round values (half steps if needed)
+        for cm, rm, lm in ((35.0, 12.0, 6.0), (45.0, 6.0, 2.0), (45.0, 4.0, 2.0), (60.0, 4.0, 2.0)):
+            for n_ in (3, 4):
+                for sc_ in (1.0, 0.5):
+                    try:
+                        f_ = SK.fit_chain(start, end, clear, t, n_arcs=n_, climb_max=cm, r_min=rm, l_min=lm, snap_scale=sc_)
+                        f_.update(climb_limit=cm, r_min=rm, snap_scale=sc_); fits[n_] = f_; break
+                    except RuntimeError as e:
+                        print(f"  {label}: {n_} arcs, climb {cm}, R >= {rm}, snap x{sc_}: {e}", flush=True)
+                        if "snapped" not in str(e): break                                  # finer snapping helps only a snapping failure
+            if fits: break
         if not fits: raise RuntimeError(f"{label}: no chain stays above the L1 strap")
         bm = min(f_["mean_clear"] for f_ in fits.values())
         nb = min(n_ for n_, f_ in fits.items() if f_["mean_clear"] <= bm + 1.0); fit = fits[nb]
@@ -505,6 +514,11 @@ def main():
              ("overhead (bench highest)", [45.0, 165.0, -90.0, 0, 0]), ("overhead raise elev 150", [30.0, 150.0, -60.0, 0, 0]),
              ("behind the back (pocket)", [-80.0, 39.0, 101.0, 0, 0]), ("behind the back (red-team pinch)", [-75.0, 45.0, 120.0, 0, 0])]
     rep["check"] = check(M, dd, poses)
+    json.dump(rep, open(os.path.join(dd, "build.json"), "w"), indent=1, default=float)
+    rep["check_clips"] = check_clips(M, dd, {n: mem for g, mem, n, s in parts}, mv)
+    rep["kinematics_exact"] = dict(clip_frames=len(rep["check_clips"]), all_within_0p5=all(r["within_0p5"] for r in rep["check_clips"]),
+                                   max_frame_dev_mm=max(r["frame_dev_mm"] for r in rep["check_clips"]),
+                                   max_model_sample_outside_mm=max(v["outside_max"] for r in rep["check_clips"] for k, v in r["samples"].items() if k not in ("L1", "L2")))
     json.dump(rep, open(os.path.join(dd, "build.json"), "w"), indent=1, default=float)
     print(f"done in {time.time() - t0:.0f} s", flush=True)
 

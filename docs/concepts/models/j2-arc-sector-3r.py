@@ -160,7 +160,7 @@ def tops(B, ch, prof, take):
 def evaluate(B, params):
     """tools/concept_cma.py hook -> (params, report)"""
     p = dict(PARAMS, **params); p["q"] = min(1.0, max(0.8, float(p["q"]))); p["sigma"] = 1 if float(p["sigma"]) >= 0 else -1
-    p["s1"] = 1 if float(p["s1"]) >= 0 else -1; p["beta"] = float(min(60.0, max(12.0, p["beta"])))
+    p["s1"] = 1 if float(p["s1"]) >= 0 else -1; p["beta"] = float(min(75.0, max(12.0, p["beta"])))
     if p.get("pc") is None or p.get("pw") is None or params.get("redesign", False): p = design(B, p)
     p.pop("redesign", None)
     for it in range(3):     # layout-radius fix point: r_lay = the rail's fitted level (floor: the conservative side - a larger
