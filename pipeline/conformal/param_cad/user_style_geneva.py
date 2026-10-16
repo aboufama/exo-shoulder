@@ -488,7 +488,7 @@ def main():
     sc = trimesh.Scene(); pf = []
     for i, (g, n, s, mem) in enumerate(allp):
         user = n.startswith(USER); hwr = not n.startswith(("D8-", "D9-")) and any(k in n.lower() for k in ("screw", "m4x6", "clip"))
-        if not user and not hwr:
+        if not user and (not hwr or "horn screw" in n):                                     # R7 asks a STEP of the horn screws (not on its catalogue list)
             cq.exporters.export(cq.Workplane().add(s), os.path.join(dd, "step", f"{i:02d}_{n.split(':')[0].replace('/', '_').replace(' ', '_')[:40]}.step"))
         trep = {}; m = tess_safe(s, fine=not user, report=trep)
         sc.add_geometry(m, node_name=f"{g}|{n}|{i}", geom_name=f"{g}|{n}|{i}")
