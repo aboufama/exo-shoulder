@@ -33,7 +33,7 @@
   "confidence": "counted"
  },
  "status": "screened",
- "t_screened": "2026-10-16T08:24:00Z",
+ "t_screened": "2026-10-16T08:30:00Z",
  "reach": 0.8438,
  "follow": 1.0,
  "inband14": 0.8994,
@@ -41,9 +41,9 @@
  "contact": 0.0051,
  "gap": 6.19,
  "n_configs": 14443,
- "verdict": "screened: variant B (pin knee + spring knuckle) CMA-converged 6.19 on Bench(60,160) fast (score 97.7; near-touch 8.80); frozen exact Bench(110,360) of the CMA bests pending on the farm; early configs frozen exact 24.00 (knuckle) vs 26.82 (knuckle locked) at the pin knee's seats. Variant A (plain chain + knuckle, complexity 13.5) converged 22.17 fast",
- "limiter": "variant B at the CMA best: reach 0.844 - the stretched side past stop B (th 123-154 needs a1e 77-100 > a1max 66), the folded side th < 20 (J1 and J3 nearly aligned: no chain closes with margin), the knee window (9 poses, 7 of them overhead); overhead reach 2 of 12; link 2 (0.78) and hub 3 (0.67) in band; near-touch: metal 0.07 mm (gap with < 1 mm as contact 8.80, < 2 mm 23.37). Red team: on the gallery loop the forced sub-chain J1-K-J3 swings J1 20-40 deg per frame just before stop B (sub-chain fold margin 7.3 deg): a dynamic jam risk the 10 fps clip continuity does not see",
- "note": "Bench(60,160) fast. Variant A (docs/concepts/models/minarc-stop-knuckle-4r.py, kit): seeds 66.93, 3R control 62.57; coarse LHS 302 configs best 49.10 (3R control at the same seats 52.98). Variant B (docs/concepts/models/minarc-stop-knuckle-4r-pinknee.py, the pin-knee VModel + K): at the pin knee's best seats (row best_params) with bk1 30 / bk2 50: knuckle locked 22.57, phi 15/170 a1max 70: 19.12, a1max 75: 18.46 (reach 0.819, ib14 0.912, follow 0.917, contact 0.070), margin-equivalent stops phi 22/148 (J2 never within 5 deg of its fold): 20.31; the plain pin-knee model at the same params 23.64.",
+ "verdict": "screened: variant B frozen exact 15.42 on Bench(110,360) (score 94.4, self-measured; conservative fold-margin reading 21.40, near-touch 21.37 at BA) - best self-measured frozen number so far, 0 passive translations, complexity 33; needs the independent verifier. Variant A (complexity 13.5) 22.17 fast converged.",
+ "limiter": "B at BD, big bench: the fold (56 poses: stretched past stop B a1max 66, folded with J1 ~ J3), the knee window (16), contact (9); overhead reach 8/28; hub 3 (0.66) and link 2 (0.78) in band; near-touch 0.05 mm overhead. Red team: the forced sub-chain J1-K-J3 swings J1 20-40 deg/frame before stop B on the gallery loop (sub-chain margin 7.3) - dynamic stiffening risk for MuJoCo",
+ "note": "Bench(60,160) fast unless stated. VARIANT B (docs/concepts/models/minarc-stop-knuckle-4r-pinknee.py: the pin-knee VModel + passive spring knuckle K in link 1 + J2 interior-angle stops): CMA (4 streams, 6234 tries) BD 6.19 fast -> FROZEN EXACT Bench(110,360) 15.42 (score 94.4; reach 0.769, follow 1.0, ib14 0.899, contact 0.023; near-touch 22.17, min metal 0.05 mm on the overhead raise clip); BA 7.27 -> 17.98 (near-touch 21.37, min metal 0.76 mm); BB (mstop 1, J2 dyad keeps 5 deg th-margin) 9.43 -> 21.40; at the pin knee's own seats knuckle locked 26.82 vs knuckle 24.00 frozen. Gate (B): 0.23 / 0.23 / 0.03 score pts -> converged. VARIANT A (docs/concepts/models/minarc-stop-knuckle-4r.py, kit, plain spherical chain + K, complexity 13.5): coarse 302 -> 49.10; CMA 6 streams 7886 tries -> 22.17 fast (gate 0.49 / 0.31 / 0.02 converged; 3R control at the same seats 45.91; near-touch 41.79); frozen exact pending (.cache/minarc/frozen_FA.json, FA3R; near-touch CMA AN1/AN2/AG -> .cache/minarc/cma_AN*.json). Judge's prediction 18-24 for the plain chain: refuted on the kit (22.17 fast); the knuckle is worth 23.7 points over its own 3R control only once seats are re-tuned for it. Spring: quasi-static gravity torque <= 0.008 N.m (B) / 0.018 (A) vs 0.08 N.m preload; MuJoCo pending L1 meshes.",
  "best_k": "variant B, CMA stream BD best (6.19 on Bench(60,160) fast, VModel rules)",
  "best_params": {
   "az1": 95.4669,
@@ -180,5 +180,184 @@
    "gap_near1": 28.71
   }
  },
- "gate_B": "4 CMA streams (BA, BB mstop 1, BC sK +1, BD sigma 0.5), 6234 tries: gain 0.23 score pts over the 2nd half, 0.23 over the last third, top-5 spread 0.03 -> converged (BC on the sK +1 branch stalled at 28.73)"
+ "gate_B": "4 CMA streams (BA, BB mstop 1, BC sK +1, BD sigma 0.5), 6234 tries: gain 0.23 score pts over the 2nd half, 0.23 over the last third, top-5 spread 0.03 -> converged (BC on the sK +1 branch stalled at 28.73)",
+ "exact_frozen": {
+  "bench": "Bench(110,360) exact, shape frozen from Bench(60,160) fast (pin-knee VModel frozen protocol), self-measured",
+  "BD": {
+   "fast": 6.19,
+   "gap": 15.42,
+   "reach": 0.7694,
+   "follow": 1.0,
+   "inband14": 0.8991,
+   "inband10": 0.5805,
+   "contact": 0.0227,
+   "gap_near1": 22.17,
+   "gap_near2": 35.0,
+   "min_metal_mm": 0.05,
+   "overhead140": {
+    "ws": 28,
+    "reach": 0.2857,
+    "clip": 10,
+    "follow": 1.0,
+    "inband14": 0.8433,
+    "inband10": 0.5209,
+    "why_not": {
+     "fold": 9,
+     "slide": 9,
+     "flip": 0,
+     "closure": 0,
+     "skin": 0,
+     "parts": 0,
+     "contact": 2
+    }
+   },
+   "why": {
+    "fold": 56,
+    "slide": 16,
+    "flip": 0,
+    "closure": 0,
+    "skin": 0,
+    "parts": 2,
+    "contact": 9
+   },
+   "parts_ib14": {
+    "hub1": 0.991,
+    "hubK": 0.97,
+    "hub2": 0.918,
+    "hub3": 0.664,
+    "E": 0.969,
+    "boss": 1.0,
+    "pad": 0.993,
+    "knee": 0.942,
+    "L1a": 0.983,
+    "L1b": 0.946,
+    "L2": 0.779
+   }
+  },
+  "BA": {
+   "fast": 7.27,
+   "gap": 17.98,
+   "reach": 0.7556,
+   "follow": 1.0,
+   "inband14": 0.9008,
+   "inband10": 0.6078,
+   "contact": 0.0354,
+   "gap_near1": 21.37,
+   "gap_near2": 31.39,
+   "min_metal_mm": 0.76,
+   "overhead140": {
+    "ws": 28,
+    "reach": 0.2857,
+    "clip": 10,
+    "follow": 1.0,
+    "inband14": 0.8831,
+    "inband10": 0.5879,
+    "why_not": {
+     "fold": 9,
+     "slide": 10,
+     "flip": 0,
+     "closure": 0,
+     "skin": 0,
+     "parts": 0,
+     "contact": 1
+    }
+   },
+   "why": {
+    "fold": 53,
+    "slide": 21,
+    "flip": 0,
+    "closure": 0,
+    "skin": 0,
+    "parts": 0,
+    "contact": 14
+   },
+   "parts_ib14": {
+    "hub1": 0.99,
+    "hubK": 0.961,
+    "hub2": 0.952,
+    "hub3": 0.649,
+    "E": 0.964,
+    "boss": 1.0,
+    "pad": 1.0,
+    "knee": 0.99,
+    "L1a": 0.972,
+    "L1b": 0.968,
+    "L2": 0.739
+   }
+  },
+  "BB_margin_reading": {
+   "fast": 9.43,
+   "gap": 21.4,
+   "reach": 0.7528,
+   "follow": 0.9364,
+   "inband14": 0.905,
+   "inband10": 0.5788,
+   "contact": 0.0532,
+   "gap_near1": 24.05,
+   "gap_near2": 52.58,
+   "min_metal_mm": 0.1,
+   "overhead140": {
+    "ws": 28,
+    "reach": 0.25,
+    "clip": 10,
+    "follow": 0.4,
+    "inband14": 0.9798,
+    "inband10": 0.7178,
+    "why_not": {
+     "fold": 11,
+     "slide": 7,
+     "flip": 0,
+     "closure": 0,
+     "skin": 0,
+     "parts": 0,
+     "contact": 9
+    }
+   },
+   "why": {
+    "fold": 61,
+    "slide": 13,
+    "flip": 0,
+    "closure": 0,
+    "skin": 0,
+    "parts": 1,
+    "contact": 21
+   },
+   "parts_ib14": {
+    "hub1": 1.0,
+    "hubK": 0.973,
+    "hub2": 0.981,
+    "hub3": 0.632,
+    "E": 0.941,
+    "boss": 1.0,
+    "pad": 0.99,
+    "knee": 0.929,
+    "L1a": 0.972,
+    "L1b": 0.972,
+    "L2": 0.807
+   }
+  }
+ },
+ "best_params_BA": {
+  "az1": 90.7264,
+  "el1": 65.775,
+  "az2": 37.2986,
+  "el2": 41.4782,
+  "wd": 64.4491,
+  "wa": -11.2566,
+  "b3": 0.2531,
+  "lE": 71.0701,
+  "lc": 24.1191,
+  "phiE": -7.542,
+  "phib": -55.8094,
+  "ang_min": 28.4242,
+  "stk": 5.5861,
+  "bk1": 32.4961,
+  "bk2": 46.4022,
+  "sK": -1,
+  "a1max": 72.31,
+  "phi_lo": 17.1904,
+  "phi_hi": 158.8831,
+  "mstop": 0,
+  "variant": "B"
+ }
 }

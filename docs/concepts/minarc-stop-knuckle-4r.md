@@ -177,3 +177,92 @@ Variant B at 17.58 (bk 36/44, margin-equivalent stops):
 - **Overhead:** reach 2 of 12, follow 2 of 5.
 - **Spring vs gravity:** at most 0.007 N.m (8 mm straps, members 1a / 1b / 2 / 3 weigh 11 / 8 / 7 / 11 g). The
   0.08 N.m preload holds with a 0.073 margin.
+
+### Variant B CMA-ES (4 streams on the farm, 6234 tries, popsize 10, 18 coordinates: the pin knee's 13 + the knuckle's 5)
+
+| stream | setting | tries | best fast gap |
+|---|---|---|---|
+| BA | sK -1, stop-guard reading | 1181 | 7.27 |
+| BB | sK -1, **mstop 1** (the J2 dyad keeps a 5 deg th-margin in state A) | 1421 | 9.43 |
+| BC | sK +1 | 1781 | 28.73 (wrong knuckle branch, stalled) |
+| **BD** | sK -1, sigma 0.5 | 1851 | **6.19** (score 97.7) |
+
+- **Convergence gate:** gain 0.23 score points over the second half and 0.23 over the last third; top-5 spread 0.03.
+  **Converged.**
+- **BD best:**
+  - J1 bvec(95.47, 67.70), J2 seat bvec(47.21, 39.89), J3 wd 59.82 / wa -9.03, b3 0.458.
+  - Knee: lE 64.7, lc 30.4, phiE -1.5, phib -69.8, ang_min 25.0, stack 5.27.
+  - Knuckle: bk1 30.16, bk2 47.01, a1max 66.16, J2 stops 12.3 / 162.7.
+  - At this setting, 28 forced poses close and 27 of them are taken.
+
+### THE CLAIM: frozen shape worn on Bench(110,360) EXACT
+
+Protocol (lesson c): fit on Bench(60,160) fast, freeze every level and the knee centre, wear on Bench(110,360) with
+CB_EXACT=1, using the pin knee's own frozen protocol. Farm jobs `.cache/minarc/frozen_*.json`.
+
+| configuration | fast | **frozen exact** | score | reach | follow | in-band 14 | contact | metal < 1 mm = contact | min metal | overhead reach |
+|---|---|---|---|---|---|---|---|---|---|---|
+| FZ0: knuckle locked, pin knee's seats (the control) | 22.57 | 26.82 | 90.2 | 0.703 | 0.927 | 0.911 | 0.048 | 30.09 | 0.08 | 0.18 |
+| FZ1: bk 30/50, margin-equivalent stops, a1max 75 | 21.28 | 25.68 | 90.7 | 0.739 | 0.927 | 0.911 | 0.073 | 29.40 | 0.13 | 0.18 |
+| FZ2: bk 30/50, stops 15/170, a1max 75 | 18.46 | 24.00 | 91.3 | 0.761 | 0.927 | 0.910 | 0.078 | 28.71 | 0.11 | 0.18 |
+| BB best (mstop 1: conservative fold-margin reading) | 9.43 | 21.40 | 92.2 | 0.753 | 0.936 | 0.905 | 0.053 | 24.05 | 0.10 | 0.25 |
+| BA best | 7.27 | 17.98 | 93.5 | 0.756 | 1.000 | 0.901 | 0.035 | **21.37** | 0.76 | 0.29 |
+| **BD best** | 6.19 | **15.42** | **94.4** | 0.769 | 1.000 | 0.899 | 0.023 | 22.17 | 0.05 | 0.29 |
+
+For reference, the pin knee verified at 30.35. Its polish H1 verified at 26.45 (margin 10) / 24.48 (margin 5).
+
+Reading:
+- **The knuckle earns its place.**
+  - At the pin knee's seats it is worth 2.8 frozen points: 26.82 locked against 24.00.
+  - With seats re-tuned for it, the CMA bests wear at 15.4-18.0 frozen exact. That is 9-15 points better than every
+    verified leader, at 0 passive translations.
+  - The fast-to-frozen loss (6.2 -> 15.4) is the usual sample effect (lesson c): 56 fold-lost poses on 470, against
+    15 on 220.
+- **The conservative margin reading** (J2 never within 5 deg of its fold) costs 3.4-6 points (BB 21.40) and still beats
+  every verified leader.
+- **Near-touch.**
+  - BD's lowest metal is 0.05 mm, on the overhead raise clip (plane 30, elevation 150). With metal < 1 mm counted as
+    contact, the gap is 22.17.
+  - BA keeps 0.76 mm and scores 21.37 under the same rule. BA is the more robust shape and the one to hand to the
+    verifier alongside BD.
+- **Still lost on the big bench (BD):**
+  - 56 poses to the fold: the stretched side past stop B and the folded side with J1 close to J3.
+  - 16 to the knee window.
+  - 9 to contact.
+  - Overhead reach is 8 of 28.
+
+## Red team
+
+1. **Forced sub-chain speed.** On the gallery loop, J1 swings 20-40 deg per frame on the last in-range frames before
+   stop B (overhead), where the forced sub-chain J1-K-J3 nears its fold (minimum margin 7.3 deg at BD). The bench's
+   10 fps clip continuity (25 deg) does not flag it.
+   - Unpowered, this is where the wearer would feel the chain stiffen.
+   - Next check: MuJoCo (judge/dynamics.py, after the L1 CAD) on the overhead clips, and a sub-chain margin of 10 deg
+     as a CMA constraint.
+2. **Preload.** Quasi-static virtual work (thorax y up, member masses from the fitted samples, 10 g per O20 hub)
+   gives at most 0.007-0.008 N.m gravity torque opening K in any state. The 0.08 N.m preload holds with a margin of
+   0.073 N.m (variant A: 0.064).
+   - Arm-acceleration loads on a ~40 g chain are ~0.002 N.m.
+   - Not yet run in MuJoCo, because the dynamics judge needs the L1 meshes.
+3. **The pinch point.** Metal sits 0.05 mm from the skin on the overhead raise clip at BD. Use BA (0.76 mm), or a
+   near-touch objective, for the build.
+4. **The optimistic number.** The fast 6.19 is optimistic by 9.2 points (sample). The claim is the frozen 15.42
+   (self-measured, not yet verified). The conservative-margin 21.40 is the floor if the J2 hard stop is not accepted
+   as the fold guard.
+5. **The stop-guard question for the judge.** With the phi stops at 12.3 / 162.7, the J2 dyad runs up to about 1 deg
+   of th from its fold before the stop engages. The stop makes the fold unreachable, so no branch flip is possible,
+   but the 3R near the stop has a poor transmission angle. The conservative reading (BB) prices this at 6 points.
+
+## Verdict
+
+**Screened, and the strongest self-measured result so far.** Variant B (the pin knee with a spring-held passive
+knuckle in link 1 and J2 hard stops) wears its frozen shape at **15.42 on Bench(110,360) exact** (score 94.4). This
+is self-measured and needs an independent verifier: VModel rules, 3 active DOF, 0 passive translations, 3 sensed
+passive rotations, complexity 33.
+- The conservative fold-margin reading gives 21.40 (score 92.2). The near-touch rule gives 21.37 at BA.
+- The judge's prediction for the plain chain (18-24) was optimistic. Variant A on the kit converges at 22.17 fast
+  (frozen pending: `.cache/minarc/frozen_FA.json`).
+- The judge's expectation that the knuckle trades contact for reach holds only once the seats are re-tuned for it.
+
+**Next:** an independent verifier on BD and BA (docs/concepts/models/minarc-stop-knuckle-4r-pinknee.py frozen), then a
+near-touch polish (objective gap_near1, sub-chain margin >= 10). After that, the L1 CAD and the MuJoCo spring check.
