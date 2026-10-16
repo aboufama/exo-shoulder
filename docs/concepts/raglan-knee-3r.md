@@ -107,3 +107,54 @@ chase the same artefact; their bests are re-scored with `gap_fixed_n` below.
 The same check on the plain 3R (raglan-routed-3r k3484): link 1 has 340 samples routed vs 245 straight at the same
 axes; at the straight count the gap is 43.97 instead of 42.72, against 49.89 for the straight links at those axes:
 there routing is mostly real (link 1 0.36 -> 0.60 in band, +5.9 points), dilution 1.25 points.
+
+## Frozen on Bench(110, 360) exact (lesson c) and red team
+
+Shape fitted on Bench(60, 160), frozen (hub faces, stack level, knee centre m, every link sample height), worn without
+refit on Bench(110, 360) exact (the pin knee's own `frozen`, `.cache/rknee/big_*.json`). These two jobs ran without
+the grid-cache link, so the FIT ran on the exact path too (fit gap 26.46 / 25.48 instead of 26.34 / 25.36 fast): the
+conservative side, and the same for the control and the routed shape.
+
+| shape | fit (60 / 160) | **frozen big exact** | score | reach | follow | in-band 14 | contact | `gap_fixed_n` (link 1 at 36 samples) | metal < 1 mm as contact | < 2 mm |
+|---|---|---|---|---|---|---|---|---|---|---|
+| k10 control (great circle) | 26.46 | 34.06 | 87.6 | 0.619 | 0.964 | 0.843 | 0.003 | 34.06 | 35.80 | 57.94 |
+| link 1 t 0.7, d -20 | 25.48 | **33.10** | 87.96 | 0.619 | 0.964 | 0.853 | 0.003 | **33.67** | 34.84 | 56.99 |
+| link 1 t 0.85, d -30 (24.79 fast) | | queued on the farm (`big_L1m30`) | | | | | | | | |
+
+(The pin knee's own frozen run of k10, fit on the fast grid: 33.84.)
+
+Red team (frozen big bench, link 1 d -20):
+* **The pose that jams**: 136 of 470 poses fold (J2 fold, identical to the control: routing does not touch it), 4 jam
+  on the adjacent E strap / link 2 pair at J3, 1 contact. Overhead (elevation >= 140): 19 of 28 workspace poses fold,
+  reach 0.29, in-band 0.90.
+* **The point that pinches**: 0.12 mm at plane 30, elevation 165, axial -60 (ws #264) and 0.14 mm at plane -60,
+  elevation 60, axial 105 (#139) - both on the contact-only walls / crowns, the same poses as the control; 3 taken
+  poses under 1 mm (34.84 counted as contact); under 2 mm the gap is 56.99 (many crowns ride at 1-2 mm).
+* **The number that is optimistic**: (1) dilution - 0.57 of the 0.96-point frozen gain is extra in-band metal
+  (33.67 at the great-circle sample count vs 34.06); (2) the fast-to-exact transfer costs 7.6 points, all of it reach
+  (0.706 -> 0.619: the fold band on the denser bench).
+* Knee angle over the taken poses 73-116 deg (window 30-150): no knee singularity is approached.
+
+## Verdict
+
+**Routing is not the leader's lever.** The raglan map says the leader's links are already on their lines of least
+skin motion; the coarse sweep and the steeper turns confirm it: the real gain is 0.4-0.45 gap points (link 1
+0.925 -> 0.99 in band), everything above that is dilution, and every link-2 turn loses. Best: 24.79 fast (score 90.99;
+25.89 at fixed part sizes) and 33.10 frozen big exact (33.67 at fixed sizes) against the pin knee's 26.34 / 34.06 on
+the same code. The 90+ bar on the large bench needs +0.28 reach, i.e. the J2 fold - nothing a link's route can move.
+The posterior-J1 seats that remove the fold put hub 2 and link 2 over the neck and chest (best 122.45).
+
+Gate: the comparable history (coarse 177 + 6 local) passes the formula trivially (it is a grid, not a search). The
+first CMA round (27 tries) ran on the exact path (missing cache link) and is logged as not comparable; the second
+round (streams C2 routes only, A2 seats + routes, D2 + knee, from the d -30 route) was still running on the farm at the
+end of the time box: **the time box ended before a CMA gate**. Its results land in `.cache/rknee/cma{C2,A2,D2}.json`
+(rebuild the sweep log with the scratch `mksweep.py C A D C2 A2 D2`); judge them by `inband_member.gap_fixed_n`, not
+the bench gap.
+
+## New knowledge
+
+1. On the leader (pin knee / osn k4216 seats) the straight links ARE the raglan lines: the map's argmax is d = 0 on
+   link 2 and a flat plateau d -20..+10 on link 1. The 9869-try osn CMA already solved the routing problem implicitly.
+2. In-band dilution is the dominant way a route "gains" on a good design; a fixed-part-size in-band (`gap_fixed_n`)
+   is needed to judge any shape change that also changes part size.
+3. The posterior J1 line is dead in the knee family too (skin, not fold, takes the poses).
