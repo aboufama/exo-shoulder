@@ -52,11 +52,13 @@ NAME = "All-skin-normal 3R closed by three pins (J2 knuckle + pinned cuff link)"
 
 PARAMS = dict(OSN.PARAMS)
 PARAMS.update(az1=94.61, el1=60.68, b1=0.34, az2=24.06, el2=48.54, b2=0.42, wd=75.16, wa=-13.04, b3=0.21,  # snh k722 seats
-              lk=30.0, alk=0.0,           # crank length, direction (deg about J2 from the hub2 -> hub3 direction)
+              lk=30.0, alk=None, alk_off=90.0,   # crank length; direction (deg about J2 from the hub2 -> hub3 direction):
+                                                 # alk None = circular median of (chi - q2) + alk_off over the fit set
+                                                 # (alk_off +-90: the crank square to J3's normal at the median pose, max authority)
               LE=45.0, lc=30.0,           # E arm (J3 line -> pin a), cuff link (pin a -> pin b)
               phE=0.0, dB=90.0,           # E arm direction in hub 3's plane (deg from the along-arm axis), link direction rel. E arm at mid
               gmin=25.0, auth=5.0, kswing=35.0,
-              k_c0=None, k_sk=None, k_mid=None, cuff_m=None, cuff_sig=None,     # design-step outputs (auto when None)
+              alk_auto=None, k_c0=None, k_sk=None, k_mid=None, cuff_m=None, cuff_sig=None,     # design-step outputs (auto when None)
               drop=1, jam_contact=1, slides=1, remote=1, ramp=1, vfix=1)
 for k in ("S_a", "S_t", "R_r", "S_max", "centre", "R_tol", "inv", "S_auto", "neck"): PARAMS.pop(k, None)
 
@@ -73,9 +75,12 @@ class Design(OSN.Design):
         w = self.c[2] - self.c[1]; w = unit(w - (w @ u2) * u2)          # hub 2 -> hub 3 direction in hub 2's plane
         if np.linalg.norm(w) < 0.5: w = e
         self.ke = w; self.kf = np.cross(u2, w)                          # knuckle frame: alk 0 = toward hub 3
-        a = P["alk"] * D2R; self.ek = math.cos(a) * self.ke + math.sin(a) * self.kf; self.e0 = P["lk"] * self.ek
+        self.set_alk(P["alk"] if P.get("alk") is not None else 0.0)
         pe = P["phE"] * D2R; self.eE = math.cos(pe) * self.sa + math.sin(pe) * self.st
         pb = (P["phE"] + P["dB"]) * D2R; self.eB = math.cos(pb) * self.sa + math.sin(pb) * self.st
+
+    def set_alk(self, alk):
+        self.p["alk"] = alk; a = alk * D2R; self.ek = math.cos(a) * self.ke + math.sin(a) * self.kf; self.e0 = self.p["lk"] * self.ek
 
     def e0_at(self, th):
         """crank vector rotated by th about u2 (member-1 frame), (n, 3)"""
@@ -124,10 +129,16 @@ class Design(OSN.Design):
 def design_step(D, Qd):
     """c0, knuckle branch and mid; cuff mid drift and elbow sign - from the fit set (fit clips 10 fps + bench poses)"""
     P = D.p; q, okf, X1, X2, X3, s = D.ik(Qd)
+    if P.get("alk") is None or P.get("alk_auto"):
+        P["alk_auto"] = True; D.set_alk(0.0)
+        Phi0, _, _ = D.knuckle_raw(Qd[okf], q[okf], (X1[0][okf], X1[1][okf]), s[okf])     # Phi at alk 0 = q2 - chi
+        if not len(Phi0): return False
+        med = math.degrees(math.atan2(np.median(np.sin(-Phi0)), np.median(np.cos(-Phi0))))
+        D.set_alk(round((med + P["alk_off"] + 180) % 360 - 180, 3))
     Phi, Lr, sn_ = D.knuckle_raw(Qd, q, X1, s)
     Phi, Lr, sn_ = Phi[okf], Lr[okf], sn_[okf]
     if not len(sn_): return False
-    best = None; W = P["kswing"] * D2R
+    cands = []
     for c0 in np.linspace(sn_.min() - 1.6 * P["lk"], sn_.max() + 1.6 * P["lk"], 97):
         kap = (c0 - sn_) / np.maximum(Lr, 1e-9) + np.cos(Phi); okk = np.abs(kap) <= 1
         th = np.arccos(np.clip(kap, -1, 1)); okk &= Lr * np.sin(th) >= P["auth"]
@@ -136,9 +147,11 @@ def design_step(D, Qd):
             if not len(qk): continue
             qs = np.sort(np.degrees(qk)); j = np.searchsorted(qs, qs + 2 * P["kswing"], side="right")
             cnt = j - np.arange(len(qs)); a = int(np.argmax(cnt)); mid = qs[a] + P["kswing"]
-            sc = (int(cnt[a]), float(np.median((Lr * np.sin(th))[okk])))
-            if best is None or sc > best[0]: best = (sc, float(c0), sk, float(mid))
-    if best is None: return False
+            inw = np.abs(qs - mid) <= P["kswing"]
+            cands.append((int(cnt[a]), float(np.percentile(np.abs(qs[inw]), 95)), float(c0), sk, float(mid)))
+    if not cands: return False
+    nmax = max(c[0] for c in cands); good = [c for c in cands if c[0] >= nmax - 0.01 * len(sn_)]
+    c = min(good, key=lambda c: c[1]); best = (None, c[2], c[3], c[4])     # most poses, then the smallest knuckle swing |qk|
     P["k_c0"], P["k_sk"], P["k_mid"] = round(best[1], 3), best[2], round(best[3], 3)
     if P.get("cuff_m") is None:
         P["cuff_m"] = [0.0, 0.0]; P["cuff_sig"] = 1.0
@@ -286,18 +299,39 @@ class Model(S.VModel):
     def _levels(self, keep):
         H = self.Hneed; m = lambda k: float(H[k][keep].max()) if keep.any() else 0.0
         f1, f2, f3 = m("hub1"), m("hub2"), m("h3")
-        zc = max(f2 + UP, m("crank")); zp = m("pad"); zl = max(f3 + UP, zp + UP, m("clink"))
+        zc = max(f2 + UP, m("crank")); zp = m("pad"); nl = max(m("clink"), zp + UP)
+        zl = nl if nl <= f3 - UP else max(nl, f3 + UP)         # pin a: the cuff link passes under the E arm or over it
         return dict(hub1=f1, hub2=f2, h3=f3, crank=zc, pad=zp, clink=zl)
 
     def greedy_drop(self, keep0=None, links=True):
-        """the seed's greedy pose dropping (S.Model.greedy_drop) on this model's groups"""
-        H, L = self.Hneed, self.Lneed; saved = {}
-        tmp = {"hub1": H["hub1"], "hub2": H["hub2"], "stack": np.concatenate([H["crank"], H["clink"], H["pad"]], 1), "h3": H["h3"]}
-        self.Hneed = tmp
-        try:
-            S.Model.greedy_drop(self, keep0=keep0, links=links)
-        finally:
-            self.Hneed = H
+        """the seed's greedy pose dropping (S.Model.greedy_drop), on this model's flat parts (each its own shared height)"""
+        poses = self.poses_fit; kind = np.array([self.B.kind[i] for i in poses])
+        ncl = sum(1 for k in self.B.kind if k == "clip"); nws = len(self.B.kind) - ncl
+        H, L = self.Hneed, self.Lneed
+        groups = [("g", H[k]) for k in self.gnames] + ([("s", r) for rows in L.values() for r in rows] if links else [])
+        keep = np.ones(len(poses), bool) if keep0 is None else keep0.copy()
+        for typ, M in groups: keep &= ~(M >= S.BIG / 2).any(1)
+        def score(keep):
+            if not keep.any(): return 1e9
+            cl = keep & (kind == "clip"); inb = tot = 0
+            for typ, M in groups:
+                top = M[keep].max() if typ == "g" else M[keep].max(0); ex = top - M[cl]
+                inb += float((ex <= 12.0).sum()); tot += ex.size
+            ib = inb / max(tot, 1); fol = cl.sum() / ncl; rch = (keep & (kind == "ws")).sum() / nws
+            return 100 * (max(0, .9 - ib) + max(0, .95 - fol) + max(0, .9 - rch)) + 100 * (~keep).sum() / len(keep)
+        cur = score(keep)
+        for it in range(60 if self.p.get("drop", 1) else 0):
+            best, bk = cur, None
+            for typ, M in groups:
+                order = np.argsort(-np.where(keep, M.max(1), -1e9))
+                for k in range(1, 9):
+                    sel = order[:k]; sel = sel[keep[sel]]
+                    if not len(sel): continue
+                    k2 = keep.copy(); k2[sel] = False; sc = score(k2)
+                    if sc < best - 1e-6: best, bk = sc, k2
+            if bk is None: break
+            keep = bk; cur = best
+        self.drop = ~keep
 
     def finalize(self):
         keep = ~self.drop; D = self.D; u, c = D.u, D.c
@@ -333,7 +367,7 @@ class Model(S.VModel):
         sn = D.sn
         cyl(4, c[1] + D.e0, u[1], BOSS_R, lv["crank"], lv["crank"] + 2 * T_LINK + 0.15 + PIN_HEAD)                   # knuckle pin
         pa = c[2] + self.p["LE"] * D.eE
-        cyl(3, pa, sn, BOSS_R, lv["h3"], lv["clink"] + T_LINK + PIN_HEAD)                                             # pin a
+        cyl(3, pa, sn, BOSS_R, min(lv["h3"], lv["clink"]), max(lv["h3"], lv["clink"]) + T_LINK + PIN_HEAD)          # pin a
         cyl(5, self.Pb3, sn, BOSS_R, lv["pad"], lv["clink"] + T_LINK + PIN_HEAD)                                      # pin b (+ standoff)
         for nm in ("crank", "clink", "pad", "Earm"):
             mem, X = self.rigid[nm]; out.append((mem, X + T_LINK * self.G[[g["name"] for g in self.G].index(nm)]["N"]))
@@ -378,6 +412,7 @@ class Model(S.VModel):
             if a == "L2" and b in ("L1",): A = away(A, "hub2", HUB_R + 4); Bp = away(Bp, "hub2", HUB_R + 4)
             if (a, b) == ("crank", "L1"): A = away(A, "hub2", HUB_R + 2); Bp = away(Bp, "hub2", HUB_R + 2)
             if (a, b) == ("L2", "Earm"): A = away(A, "hub3", HUB_R + 2); Bp = away(Bp, "hub3", HUB_R + 2)
+            if a in self.cyl and b not in self.cyl: a, b = b, a; A, Bp = sl.get(a), None
             if a in self.cyl and b in self.cyl:
                 cen, ax = cylw[b]; return float(self.sd_cyl(surf[a], cen, ax).min())
             if b in self.cyl:
@@ -398,6 +433,10 @@ class Model(S.VModel):
             self.B.reset()
             for i in range(len(self.B.idx)): self.B.record(i, None)
             r = self.B.report(); r["why"] = {"knuckle": len(self.B.idx)}; return r
+        if not self.kin_ok.any():
+            self.B.reset()
+            for i in range(len(self.B.idx)): self.B.record(i, None)
+            r = self.B.report(); r["why"] = {k: int((self.why == k).sum()) for k in ("fold", "knuckle", "cuff", "flip", "closure")}; return r
         r = S.VModel.run(self)
         r["why"] = {k: int((self.why == k).sum()) for k in ("fold", "knuckle", "cuff", "flip", "closure", "skin", "parts", "contact")}
         K = self.K; ok = self.kin_ok
@@ -438,6 +477,7 @@ def evaluate(B, params):
     """tools/concept_cma.py hook: (params incl. design-step outputs, report)"""
     P = dict(params)
     for k in ("k_c0", "k_sk", "k_mid", "cuff_m", "cuff_sig"): P[k] = None
+    if P.get("alk_auto") or P.get("alk") is None: P["alk"] = None; P["alk_auto"] = None
     r, M = _report(B, P)
     p = {k: v for k, v in M.p.items() if isinstance(v, (int, float, str, bool, list)) or v is None}
     r["honest"] = True; r["audit"] = []
