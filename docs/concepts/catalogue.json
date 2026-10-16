@@ -1863,7 +1863,7 @@
   "name": "All-skin-normal 3R closed by three pins: a J2 knuckle takes the radial drift, a pinned cuff link the in-plane drift (the buildable form of skin-normal-hubs-selfaligning)",
   "family": "offset axes, all-revolute self-alignment",
   "lens": "round3:self-alignment / loop closure through cheap rotational passive joints",
-  "status": "ideated",
+  "status": "screened",
   "t_ideated": "2026-10-16T01:35:52Z",
   "source": "round 3 judge",
   "description": "All three O20 hubs sit square on their skin (snh k722 seats: tilts 0.34 / 0.42 / 0.21, lines 5.1 / 6.9 / 6.8 mm off GH). The 3D drift that snh took with a 3-translation stage (refuted: its radial slide would stand ~25 mm) is taken by three pins. (a) Knuckle: link 2 is split 30 mm past hub 2 by a passive pin parallel to J2, flat in hub 2's skin plane; it swings 9..35 deg and supplies the drift along hub 3's normal. (b) Hub 3's 45 mm E arm + a 30 mm cuff link pinned to an arm pad take the in-plane residual (20.6 x 23.0 mm; elbow 68-118 deg). Rest: three flat hubs, two flat straps, one knuckle boss. Overhead / across the body the knuckle folds a few degrees; the radial stroke never appears as height.",

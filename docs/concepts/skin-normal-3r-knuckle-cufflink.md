@@ -87,7 +87,16 @@ than the catalogue's 4.5-5). 3 active, 3 passive rotations, 0 passive translatio
 | local-search (corrected model) | 81 | **28.64** (k 351) | from the knuckle-idle control 30.57; b1 0.007, b2 0.015, qk swing 3 deg |
 | local-search, b1 fixed 0.3 | 36 | 45.10 (k 403) | seats, cuff, crank free around a working knuckle (qk -8..+32 deg): the search buys in-band back by re-tuning the seats until the fold is back at 47 |
 | coarse-v2-farm (corrected model) | 224 | 27.60 (k 437) | J1 knuckle, b1 = b2 = 0: the knuckle IDLE (qk 0); J2 idle control 30.57; no random config in the top 12 |
-| CMA B0-B3 (farm) | queued | - | farm queue 57 deep at 02:39 UTC; filled below if back inside the time box |
+| cma-farm B0 (J2, from b1 0.15) | 425 | 25.72 | b1 0.147, b2 -0.171, lk 20.1, alk -40; gate 1.58 / 0.39 / 0.42 (2nd half NOT met) |
+| cma-farm B1 (J1, from the idle 27.60) | 289 | **24.47** (k 1187) | b1 0.011, b2 -0.084, lk 21.4, alk -22; gate 0.00 / 0.00 / 0.14 (converged) |
+| cma-farm B2 (J2, from b1 0.35) | 593 | 25.97 | b1 0.167, b2 0.090, lk 17.1, alk -34; gate 0.46 / 0.07 / 0.09 (converged) |
+| cma-farm B3 (J2, snh seats, from b1 0.6) | 289 | 28.64 | b1 0.411, b2 0.192, lk 17.0; gate 2.39 / 2.39 / 0.88 (not converged) |
+
+**The knuckle earns measured points at small b (CMA, 03:20 UTC).** Knuckle LOCKED controls (b1 = b2 = 0, every other
+parameter as found): B1 26.91 vs 24.47 working (J1 knuckle swings -5.7..+2.8 deg; fold 53 -> 49) = +2.44 points; B2
+32.93 vs 25.97 working (J2 knuckle swings -15.2..+11.0 deg; fold 59 -> 49) = +6.96 points. The lever is a small
+axis-direction decoupling (|b| <= 0.17, line offsets 0.2-1.5 mm at J1/J2), not the square-to-skin hubs of the spec.
+The large-b basin (b1 >= 0.3) stays 4-90 points worse.
 
 The b1 lever, measured with every part (leader seats, b2 0, J2 knuckle, crank strap lk 20, coarse v2):
 
@@ -133,30 +142,32 @@ third 0.69 (> 0.5: NOT passed), top-5 spread 0.25 (< 3: pass). The b1 = 0.3 stre
 
 FROZEN_PLACEHOLDER
 
-## Verdict (02:59 UTC, time box)
+## Verdict (03:25 UTC, after the CMA)
 
-**Screened, dominated - the knuckle never earns its place.** Measured on the bench with every part at real size:
+**Screened; a fast-bench leader candidate, claim pending the frozen exact wear.** Best k 1187 (J1-site knuckle, CMA B1,
+converged): 24.47 on Bench(60,160) fast = score 91.10 (reach 0.694, follow 0.967, in-band14 0.868, in-band10 0.510,
+contact 0.006), 1.87 points under the pin-knee leader's 26.34 at the same rules; J2-site best 25.97 (B2, converged).
+Red team k 1187 (fast): near-touch min 0.04 mm at #63 (plane -90, elev 45, axial 120 - behind the back), 3 poses
+< 1 mm -> gap 28.10 if near-touch counts as contact; elevation >= 140 reach 0.17 (7 of 17; 6 misses are the J2 fold),
+in-band14 0.91 where taken; across the body reach 0.58, in-band14 0.48 (median 14.3 mm); behind the back reach 0.60.
+Knuckle authority p1 7.6 mm/rad (= 23 deg of free swing per 3 mm of liner give: a stiffness the unpowered MVP1 must
+show on the bench). Cuff dyad: elbow 100-149 deg (31 deg off straight at its limit), rotor turn psi -15..+11 deg.
 
-1. The premise under test (skin-normal hubs live in band, so a closure joint that permits them buys in-band) is false at
-   the leader's seats: the hubs are already in band there (1.00 / 1.00 / 0.77-0.87 at b = 0); squaring them buys
-   nothing and moves hub 2 out of band (0.14-0.30 at b1 0.3-0.5).
-2. What the knuckle really permits is axis directions decoupled from the seats (b1), and that lever is real for the
-   kinematics - the J2 fold falls 47 -> 28 of 220 poses at b1 0.8 (fold-free ws 0.72 -> 0.81 at b1 0.6, kinematics
-   only) - but with the parts on, the knuckle must swing 30-50 deg, its boss and link 2b sweep the deltoid and the cuff
-   dyad runs out of range, so reach stays at 0.58-0.62 and in-band falls to 0.40. Best working-knuckle configuration
-   45.10 (b1 0.3, re-tuned seats, not converged) vs 28.64 idle.
-3. The optimum is the knuckle idle (qk swing 0-3 deg): 27.60 (J1 site) / 28.64 (J2 site) on Bench(60,160) fast, i.e. the
-   pin-knee leader (26.34 fast, 33.84 exact, 2 pins) plus a third pin and a crank strap. By the tie rule (fewer passive
-   joints) and on the number, skin-normal-3r-pin-knee dominates it.
-4. New knowledge that predicts beyond this morphology: (a) b1 (J1 tilted toward the dome normal) is a genuine fold lever,
-   ~19 poses of 220, for any design that can close a radial drift of 13-21 mm without height - a radial closure through
-   a pin on the J2 rotor cannot, because every rotor part sweeps a circle of the deltoid; a closure joint must sit where
-   its body's skin is fixed (the cuff or the scapula), and a J1-site knuckle moves hub 2 instead. (b) A closure-set pin
-   is only as stiff as its authority times the cuff liner: 6.5 mm/rad at p1 means 26 deg of free swing per 3 mm of liner
-   give - any closure-set passive joint needs its authority floor sized against the liner, not against toggle alone.
+Measured, not assumed:
+1. The spec's premise (square-to-skin hubs buy in-band) is false at the leader seats: the hubs are already in band at
+   b = 0 (1.00 / 1.00 / 0.77-0.87); large b moves hub 2 out of band and loses 15-90 points.
+2. The real lever is a SMALL axis-direction decoupling (|b| <= 0.17) that the knuckle closes: +2.4 (J1 site) / +7.0
+   (J2 site) gap points over the knuckle-locked control at the same seats, through the J2 fold (53 -> 49, 59 -> 49).
+3. The J1 knuckle's boss rides a skin-fixed circle on the dome (crank in band 1.00, 7.1 mm) - the cheapest place for
+   a closure pin on the chain; a J2-rotor boss sweeps the deltoid.
+4. New knowledge beyond this morphology: (a) b1 (J1 tilted toward the dome normal) is a genuine fold lever (47 -> 28
+   of 220 at b1 0.8, kinematics) but only small b survives the parts; (b) a closure-set pin is only as stiff as its
+   authority times the cuff liner - size the authority floor against the liner, not against toggle alone; (c) the
+   first model's crank pointed along the line-foot difference: a 15-point modelling error, caught by the knuckle-idle
+   control (always run the locked control).
 
-What next (loop): the CMA streams B0-B3 (farm, queued) refine the idle and b1 basins; if a working-knuckle stream does not
-reach the idle optimum the morphology is dead by the gate. The b1 fold lever belongs to a design that takes the radial
-drift at the CUFF (where it is skin-fixed): e.g. the pin-knee leader with a cuff-side closure for the radial component
-(a third, skin-normal pin dyad stands up; a flexure or the <= 3 mm liner allowance does not cover 13 mm) - worth a
-kinematic check of how small b1 still buys most of the fold (b1 0.2: 47 -> 42).
+What next (loop): the frozen exact wear of B1 / B2 / B0 (farm job kc-frozen-C, queued 03:20 UTC) decides the claim
+against the pin knee's 33.84 exact; then the adversarial verifier (docs/concepts/verify/offset-skin-normal-3r.py
+pattern), a CMA polish of B0 (not converged) and a wider J1-site CMA (the converged B1 basin was reached from the idle
+seed only - seed it from B0 / B2 seats too). The red-team pose #63 (behind the back, 0.04 mm) is the first fix.
+
