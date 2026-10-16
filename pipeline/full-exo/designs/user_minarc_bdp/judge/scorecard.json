@@ -2,7 +2,7 @@
  {
   "id": "R1",
   "name": "Proximity: covered skin 2-14 mm from the metal while following (user 2026-10-15: pass at 14 mm, aim for 10)",
-  "value": 0.7001640661360474,
+  "value": 0.7167331127370702,
   "unit": null,
   "target": ">= 0.9",
   "status": "FAIL",
@@ -11,7 +11,7 @@
  {
   "id": "R1-aim",
   "name": "Aim: the same at 2-10 mm (the 1 cm rule)",
-  "value": 0.35903878012134294,
+  "value": 0.37481663317627095,
   "unit": null,
   "target": ">= 0.9",
   "status": "FAIL",
@@ -38,7 +38,7 @@
  {
   "id": "R4",
   "name": "Overhead works (Raise overhead clip score) (14 mm band)",
-  "value": 0.6729145207802477,
+  "value": 0.7004604383851023,
   "unit": null,
   "target": ">= 0.8",
   "status": "FAIL",
@@ -83,7 +83,7 @@
  {
   "id": "R8",
   "name": "Custom-part mass budget (user: 500 g for the shoulder)",
-  "value": 238.9,
+  "value": 239.1,
   "unit": "g",
   "target": "<= 500 g",
   "status": "PASS",

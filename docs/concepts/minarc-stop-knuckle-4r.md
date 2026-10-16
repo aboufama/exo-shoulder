@@ -475,4 +475,49 @@ strap sample, all columns) one bar edge sits 0.05-0.13 mm on the strap and the o
 tilted across its width, the extruded bar is not (a twist would be needed; no twisted sweeps). No model strap sample is
 inside a bar.
 
-JUDGE_SECTION
+### Judged: full CAD vs its own L1 (farm judge_all, R7 local OCC on the STEP)
+
+| req | L1 `l1_minarc-bdp` | full v1 (one-profile bars) | **full v2 (4-strip bars)** | gen-3 `user_pinknee_h1b` |
+|---|---|---|---|---|
+| R1 | 72.4 % FAIL | 70.0 % FAIL | 71.7 % FAIL | 76.7 % FAIL |
+| R1-aim | 38.6 % FAIL | 35.9 % FAIL | 37.5 % FAIL | 35.8 % FAIL |
+| R2 | 24.87 FAIL | 24.87 FAIL | 24.87 FAIL | 24.87 FAIL |
+| R3 | 100.0 % PASS | 100.0 % PASS | 100.0 % PASS | 98.7 % PASS |
+| R4 | 71.4 % FAIL | 67.3 % FAIL | 70.0 % FAIL | 71.2 % FAIL |
+| R5 | 4 PASS | 4 PASS | 4 PASS | 3 PASS |
+| R5-aim | 4 FAIL | 4 FAIL | 4 FAIL | 3 PASS |
+| R6 | 0.0 PASS | 0.0 PASS | 0.0 PASS | 0.0 PASS |
+| R7 | False FAIL | True PASS | True PASS | True PASS |
+| R8 | 106.0 PASS | 238.9 PASS | 239.1 PASS | 178.0 PASS |
+| R11 | NOT RUN | NOT RUN | NOT RUN | 0.213 PASS |
+| R16 | 72.9 % FAIL | 73.5 % FAIL | 73.5 % FAIL | 61.7 % FAIL |
+| R17 | NOT RUN | NOT RUN | NOT RUN | True PASS |
+| passing | 4 of 19 | 5 of 19 | **5 of 19** | 8 of 19 |
+
+**v1 lost R1 / R1-aim / R4 to its L1; the cause, measured** (`score_design.py`'s metric, 14 mm band, Raise overhead clip, every
+6th frame, the full CAD's metal groups swapped one at a time for the L1's): L1 71.62, full v1 67.61; with the L1's base /
+l3 / l4: 67.76 / 67.60 / 67.62 (no effect); with the L1's l2: 71.51 (all of it). Inside l2: the full bar + rings with the
+L1's boss cylinders (no caps, no hardware) 67.64; the L1 strap with the full caps / hardware 72.16 - so it is **link 2's
+bar**, not the caps or the dome. The bar sat in the bar plane within 0.12 mm (mean) of the strap, but the strap is TILTED
+across its width (the model's strap rows): one edge of the flat bar on the strap, the other 1.7-1.9 mm above it (3-D
+strap samples, mean |dev| 1.05 mm on link 2). Fix tried on the same clip: two half-width profiles 69.48 (70.75 without the
+strap interpolated at the strip edge - rejected: it dips up to ~0.2 mm below the strap at the centre line), **four 2 mm
+strips 70.33** -> v2. v2's strap residual (3-D, outside the hub zones): link 1b mean 0.33 mm (75 % within 0.5), link 2
+0.36 mm (72 %), v1 0.95 / 1.05 mm; no model strap sample inside a bar.
+
+**v2 against its L1:** R1 71.7 vs 72.4 % (-0.8), R1-aim 37.5 vs 38.6 (-1.2), R4 70.0 vs 71.4 (-1.3), R6 0.0 vs 0.0 mm, R16 73.5 vs 72.9 (+0.6); v1 -> v2: R1 70.0 -> 71.7, R4 67.3 -> 70.0. Still below its L1 on R1: see the open items.
+
+What is left on the overhead clip (L1 71.62, v2 70.33; same metric and frames): eight 1 mm strips instead of four 70.69 (+0.36: strip quantization), link 2 without the 60-deg ramp limit 70.59 (+0.26: the user's ramp ruling - kept), the rest (~0.7) is the CAD's own 0.5 mm edge rounds, R2 profile rounds and the 0.1 mm margin over the strap that the sampled L1 strap does not carry (not separated further). All of it is metal sitting <= 0.5 mm farther from the skin than the verified model's.
+
+Measurement notes (not design changes): (1) R1's metal set (`score_design.py`) keeps groups `base`, `l<digits>`, `H` -
+**link 1a / 1b (groups `l1a`, `l1b`) are not counted**, in the L1 and the full CAD alike, so hub K, link 1a / 1b and
+J2's lower pad never enter R1 (the comparison is like for like; the absolute R1 is not the whole mechanism's). (2) R2
+"ours 17.71 / 4.96 mm" is BOTTOM fused into our D8-06 part (the user's bar, counted as the user's in the L1) and the cuff
+in the rig's own self-intersection on Wash opposite shoulder - as gen 3 (h1b: 17.67 / 4.71). (3) R7 runs locally (the farm
+has no OCC): 41 of 41 STEP parts valid single solids. (4) R17 / R11 not run: `judge/dynamics.py` needs a group `l1` and
+has no knuckle (as the L1).
+
+Open items: J2's single stop dowel loads its MR117 pair radially at a jam push (770 N at 6 N.m, s0 0.73) - an opposed
+pair does not fit beside the 126-deg slot; limit the push or move J2's stop to a larger radius. The knee stop at 149.5 deg
+(the knee-window check's build condition) is not in this CAD yet. Hub 2's wall pinch at the overhead peak (0.016 mm in the
+L1) is the verified shape's, unchanged here. The ring-root fillet at hub K on link 1b fails in OCC (plain edge, stated).

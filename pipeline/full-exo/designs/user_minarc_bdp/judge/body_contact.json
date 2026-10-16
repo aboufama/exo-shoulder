@@ -2,7 +2,7 @@
  "step": 2,
  "tol_mm": 0.5,
  "frames_checked": 671,
- "seconds": 273,
+ "seconds": 343,
  "jobs": 4,
  "body_model": "rig",
  "inside": "integer winding number (grid + segment crossings), depth = exact distance to the nearest surface (judge/sdist.py)",
@@ -577,7 +577,7 @@
    "attributable_worst": null,
    "attributable_kind": null
   },
-  "l2|D8-03 link 2: 8x3 bar on a line/arc chain + J2 / J3 O20 rings, J2 dowel hole, flies over the knee and the pad (machined from solid Ti-6Al-4V (2.5-D: ONE side-view sketch of lines + tangent arcs through the model's strap stations, extruded 8 mm; 3+2-axis or wire EDM), rounds R2 / R0.5 in the profile)": {
+  "l2|D8-03 link 2: 8x3 bar on a line/arc chain + J2 / J3 O20 rings, J2 dowel hole, flies over the knee and the pad (machined from solid Ti-6Al-4V (2.5-D: 4 side-view sketches side by side of lines + tangent arcs through the model's strap stations, extruded 2 mm; 3+2-axis or wire EDM), rounds R2 / R0.5 in the profile)": {
    "owner": "ours",
    "max_depth": 0.0,
    "frames": 0,
@@ -617,7 +617,7 @@
    "attributable_worst": null,
    "attributable_kind": null
   },
-  "l1b|D8-02b link 1b: 8x3 bar on a line/arc chain, K upper pad + O20 ring + M18 spigot + bore (2 dowel holes), J2 pad + integral O7 pin with the 125.8-deg q2 stop slot (machined from solid Ti-6Al-4V (2.5-D: ONE side-view sketch of lines + tangent arcs through the model's strap stations, extruded 8 mm; 3+2-axis or wire EDM), rounds R2 / R0.5 in the profile)": {
+  "l1b|D8-02b link 1b: 8x3 bar on a line/arc chain, K upper pad + O20 ring + M18 spigot + bore (2 dowel holes), J2 pad + integral O7 pin with the 125.8-deg q2 stop slot (machined from solid Ti-6Al-4V (2.5-D: 4 side-view sketches side by side of lines + tangent arcs through the model's strap stations, extruded 2 mm; 3+2-axis or wire EDM), rounds R2 / R0.5 in the profile)": {
    "owner": "ours",
    "max_depth": 0.0,
    "frames": 0,
@@ -627,7 +627,7 @@
    "attributable_worst": null,
    "attributable_kind": null
   },
-  "l1a|D8-02a link 1a: 8x3 bar on a line/arc chain, J1 / K pads + integral O7 pins, K pin continued as the O5 spring arbor (0.4 mm slit, O3 magnet pocket); K's two opposed 34.5-deg stop slots in the K pad (machined from solid Ti-6Al-4V (2.5-D: ONE side-view sketch of lines + tangent arcs through the model's strap stations, extruded 8 mm; 3+2-axis or wire EDM), rounds R2 / R0.5 in the profile)": {
+  "l1a|D8-02a link 1a: 8x3 bar on a line/arc chain, J1 / K pads + integral O7 pins, K pin continued as the O5 spring arbor (0.4 mm slit, O3 magnet pocket); K's two opposed 34.5-deg stop slots in the K pad (machined from solid Ti-6Al-4V (2.5-D: 4 side-view sketches side by side of lines + tangent arcs through the model's strap stations, extruded 2 mm; 3+2-axis or wire EDM), rounds R2 / R0.5 in the profile)": {
    "owner": "ours",
    "max_depth": 0.0,
    "frames": 0,
