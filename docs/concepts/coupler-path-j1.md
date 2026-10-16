@@ -33,3 +33,32 @@ the frozen shape on Bench(110,360) exact. The calibration control: the leader's 
 (kr = 0, A0 = u1, alpha = a1) must reproduce the leader's own numbers through this code. The verifier harness
 `docs/concepts/verify/skin-normal-3r-pin-knee.py`. A red-team pose list: rest, overhead (elevation >= 140), across the
 body, behind the back, and the poses where the four-bar comes nearest its dead point.
+
+## Mechanism (as modelled)
+
+```
+scapula base ==A0 (O20, ACTIVE crank)== crank ==A1 (pin)== coupler = link 1 ==J2 (O20, ACTIVE)== link 2 ==J3 (O20, ACTIVE)== member 3 -a- knee -b- arm pad
+             ==B0 (pin)============== rocker ==B1 (pin)==/
+```
+
+All four-bar axes pass through GH (a spherical four-bar), so link 1 still rotates about GH and the pin knee's closure
+theorem (J1, J2 on GH rays -> member 3 drifts in hub 3's plane) holds unchanged. DOF: 3 active (crank, J2, J3); the
+rocker and the pins A1 / B1 are set by the loop (mobility 1 for the four-bar, no undetermined coordinate); pins a / b of
+the knee as in the leader. 0 passive translations; 5 passive rotations (B0, A1, B1, a, b).
+
+Changes from the spec, measured or reasoned:
+* **Fold rule.** The spec's "within 10 deg of a fold" (crossing angle) does not reproduce the bench's 3R rule. I use the
+  OSCULATING-CIRCLE rule: at the root, the kit's 3R rule th in [|a1 - a2| + m, min(a1 + a2, 360 - a1 - a2) - m] with u1
+  replaced by the centre of the coupler curve's osculating circle and a1 by its radius. It is exact for a circle, and
+  it is what makes the control below reproduce the leader to the last digit. (A plain crossing-angle threshold
+  calibrated to the same count, X = 40 deg for m = 10 / X = 25 for m = 5, takes a different pose set: 24.58 vs 20.63.)
+* **Body that carries J2.** With kr = 0 (J2 on the A1 axis) link 1 is the CRANK (a rotation about A0); with kr > 0 it is
+  the coupler, rotation Rc(t) = E(t) E(t_h)^T.
+* **J2's home** is the root of angle(p2(t), u3) = a2c at Q = I (the leader's home convention), so a2c is free.
+* **Base seats** are searched relative to the leader's J1 seat (A0 = u1 moved dA at azimuth psiA).
+
+## The control (calibration)
+
+The leader's own circle written as a degenerate four-bar (`{"circle": 1}`: A0 = u1, alpha = a1, kr = 0) through this
+code, Bench(60,160) fast, m = 10: **gap 20.63, reach 0.6937, follow 1.0, in-band 0.9033 / 0.5323, contact 0, fold 46,
+slide 3** - identical on every metric to `skin-normal-3r-pin-knee.py check` with the verified frozen parameters.

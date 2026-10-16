@@ -373,7 +373,11 @@ def bench_eval(B, params):
 
 def evaluate(B, params):
     """tools/concept_cma.py hook: (params, report); the pin-knee's honest flag (jam rule + every VModel fix)"""
-    PK = _pk(); r, M = PK._report(B, dict(params))
+    PK = _pk()
+    if params.get("price") and not params.get("circle"):          # the honest objective: the bound + the four-bar's metal
+        pr = price4bar({k: v for k, v in params.items() if k != "price"}); r = dict(pr["priced"]); r["honest"] = True
+        r["bound"] = pr["bound"]; r["levels"] = pr["levels"]; r["passive_trans"] = 0; return dict(params), r
+    r, M = PK._report(B, dict(params))
     p = {k: v for k, v in M.p.items() if isinstance(v, (int, float, str, bool)) or v is None}
     r["passive_trans"] = 0; r["t_span"] = round(float(np.ptp(M.D.last_t)), 1) if hasattr(M.D, "last_t") else None
     return p, r
@@ -386,6 +390,89 @@ def frozen(params, nc=110, nw=360):
 if __name__ == "__main__" and len(sys.argv) > 1 and sys.argv[1] == "kopt":
     # kopt <seed> <s4> <branch> <iters> <out.json> : one CMA stream on the stage-1b proxy
     a = sys.argv; b = kopt(int(a[2]), int(a[3]), int(a[4]), int(a[5]), a[6]); print(a[2:5], round(b[0], 2), b[2]); sys.exit()
+
+def redteam(params, nc=60, nw=160):
+    """red team of one configuration (the pin knee's redteam, compact): reasons, near-touch gaps, named pose groups,
+    four-bar transmission angle and crank span over the taken poses"""
+    import concept_bench as CB
+    PK = _pk(); B = CB.Bench(nc, nw); r, M = PK._report(B, dict(params)); out = dict(report={k: r.get(k) for k in ("gap", "reach", "follow", "inband14", "inband10", "contact")})
+    out["why"] = r.get("why"); out["parts_ib14"] = r.get("parts_ib14"); out["audit"] = PK.audit(M, B)
+    taken = lambda i: B.res[i] is not None and float(np.min(B.res[i])) >= 0
+    el = np.array([p["elev"] for p in B.poses]); pl = np.array([p["plane"] for p in B.poses])
+    groups = dict(rest=np.argsort(el)[:5], overhead=np.nonzero(el >= 140)[0], across=np.nonzero((pl >= 100) & (el >= 40))[0],
+                  behind=np.array([i for i in range(len(B.idx)) if "back" in B.clip[i].lower() or (pl[i] < -30 and el[i] > 20)], int))
+    G = {}
+    for g, ii in groups.items():
+        tk = [i for i in ii if taken(i)]; dd = np.concatenate([B.res[i] for i in tk]) if tk else np.array([np.nan])
+        G[g] = dict(taken=f"{len(tk)}/{len(ii)}", median_mm=round(float(np.nanmedian(dd)), 1), ib14=round(float(((dd >= 2) & (dd <= 14)).mean()), 3),
+                    lost={k: sum(1 for i in ii if not taken(i) and M.why[i] == k) for k in ("fold", "slide", "flip", "closure", "skin", "parts", "contact")})
+    out["groups"] = G
+    D = M.D; D.ik(M.Q)
+    if hasattr(D, "last_mu"):
+        tk = np.array([taken(i) for i in range(len(B.idx))])
+        if tk.any():
+            mu = D.last_mu[tk]; out["fourbar"] = dict(mu_min=round(float(mu.min()), 1), mu_max=round(float(mu.max()), 1),
+                                                     crank_span=round(float(360 - np.diff(np.r_[np.sort(D.last_t[tk] % 360), np.sort(D.last_t[tk] % 360)[0] + 360]).max()), 1))
+    return out
+
+
+def price4bar(params, nc=60, nw=160, pin_stack=6.0, plate=3.0, width=8.0):
+    """stage 2b PRICE of the four-bar metal the bound leaves out, on the bound's fitted shape (no refit): the crank
+    strap A0 -> A1(t) on top of the A0 hub (f1 + CROWN), the B0 pin boss (O12, `pin_stack`) at the base level f1, the
+    rocker strap B0 -> B1(t) on it, the A1 / B1 pin bosses, and link 1 (the coupler) raised by plate + pin_stack over the
+    crank at its base end (tapering to 0 at J2). Every sample skin-checked (contact = pose lost) and scored in band."""
+    import concept_bench as CB
+    PK = _pk(); S = PK.S; B = CB.Bench(nc, nw); r0, M = PK._report(B, dict(params)); D = M.D
+    if not hasattr(D, "fb"): return dict(error="no four-bar")
+    D.ik(M.Q); t = D.last_t; fbp = dict(D.fbp); fbp.pop("ideal", None)
+    fb = fourbar(fbp, t); f1 = float(M.f[0]); rc = f1 + S.CROWN; rr = f1 + pin_stack
+    def strap(u, v, R):
+        u = unit(u); v = unit(v); ang = math.acos(float(np.clip(u @ v, -1, 1))); n = max(3, int(R * ang / 2.0))
+        bn = np.cross(u, v); bn = bn / (np.linalg.norm(bn) + 1e-12); pts = []
+        for k in range(n + 1):
+            x = k / n; d = unit(math.sin((1 - x) * ang) * u + math.sin(x * ang) * v) if ang > 1e-6 else u
+            for w in np.arange(-width / 2 + 1, width / 2, 2.0): pts.append(R * unit(d + (w / R) * bn))
+        return np.array(pts)
+    def boss(axis, R, rad=6.0):
+        e1, e2 = tangent_basis(axis); d = [(x, y) for x in np.arange(-rad, rad + 0.1, 2.0) for y in np.arange(-rad, rad + 0.1, 2.0) if x * x + y * y <= rad * rad]
+        return np.array([R * unit(axis) + x * e1 + y * e2 for x, y in d])
+    taken = [i for i in range(len(B.idx)) if B.res[i] is not None and float(np.min(B.res[i])) >= 0]
+    mem1, L1 = M.link_pts["L1"]; extra_n = 0; lost = 0
+    # refit (K3 march, max over the taken poses) the levels of the parts the bound leaves out, stacked as built:
+    # B0 boss >= base level; rocker on the B0 boss (+ pin stack); crank on top of the A0 hub; coupler pins on crank / rocker
+    import concept_kit as KK
+    def need(parts_dirs):
+        I = np.concatenate([np.full(len(d), i) for i, d in parts_dirs]); Dw = np.concatenate([d @ M.RS[i].T for i, d in parts_dirs])
+        q = KK.requirement(B, I, Dw); q = q[np.isfinite(q)]; return float(q.max()) if len(q) else 0.0
+    dirs = lambda P: unit(P)
+    hB0 = max(f1, need([(i, dirs(boss(fb["B0"], 60.0))) for i in taken]))
+    rr = max(hB0 + pin_stack, need([(i, dirs(strap(fb["B0"], fb["B1"][i], 60.0))) for i in taken]))
+    rc = max(rc, need([(i, dirs(strap(D.u[0], fb["A1"][i], 60.0))) for i in taken]))
+    for i in taken:
+        A1, B1 = fb["A1"][i], fb["B1"][i]
+        P = [strap(D.u[0], A1, rc), boss(fb["B0"], hB0), strap(fb["B0"], B1, rr), boss(A1, rc + plate), boss(B1, rr + plate)]
+        Ps = np.concatenate(P); extra_n = len(Ps)
+        W = Ps @ M.RS[i].T
+        # link 1 raised over the crank: + (plate + pin_stack) at the base end, tapering to 0 at J2
+        Xl = M.world(mem1, i, L1); dl = np.linalg.norm(L1 - (L1 @ D.u[1])[:, None] * D.u[1], axis=1)
+        dn = np.linalg.norm(L1 - (L1 @ D.u[0])[:, None] * D.u[0], axis=1); wgt = np.clip(dl / np.maximum(dl + dn, 1e-6), 0, 1)
+        Xl2 = Xl + ((max(rc, rr) + plate + pin_stack - (f1 + S.CROWN)) * wgt)[:, None] * unit(Xl)
+        mp = M.metal_points(i); nL = len(Xl)
+        # metal_points = rigid then link_pts (L1 first among links): replace the L1 block
+        nr = sum(len(X) for _, X in M.rigid.values()); mp2 = np.concatenate([mp[:nr], Xl2, mp[nr + nL:], W])
+        d = B.dist(i, mp2); B.res[i] = d
+        if float(d.min()) < 0: lost += 1
+    r = B.report()
+    return dict(bound={k: r0.get(k) for k in ("gap", "reach", "follow", "inband14", "inband10", "contact")},
+                priced={k: r.get(k) for k in ("gap", "reach", "follow", "inband14", "inband10", "contact")},
+                extra_samples=extra_n, poses_lost_to_4bar_metal=lost, levels=dict(f1=round(f1, 1), B0=round(hB0, 1), crank=round(rc, 1), rocker=round(rr, 1)))
+
+
+if __name__ == "__main__" and len(sys.argv) > 1 and sys.argv[1] == "price":
+    print(json.dumps(price4bar(json.loads(sys.argv[2])), indent=1, default=float)); sys.exit()
+
+if __name__ == "__main__" and len(sys.argv) > 1 and sys.argv[1] == "redteam":
+    print(json.dumps(redteam(json.loads(sys.argv[2])), indent=1, default=float)); sys.exit()
 
 if __name__ == "__main__" and len(sys.argv) > 1 and sys.argv[1] in ("check", "frozen"):
     import concept_bench as CB
@@ -433,3 +520,13 @@ if __name__ == "__main__" and len(sys.argv) > 1 and sys.argv[1] == "local":
         B.reset(); r = bench_eval(B, par)
         n = append_sweep([dict(params=par, report=r, stage=sys.argv[3])])
         print(n, r.get("gap"), r.get("reach"), r.get("inband14"), r.get("why"), flush=True)
+
+
+def viz_params(params, f=(50.0, 61.0, 72.0)):
+    """the motion-preview block (docs/concepts/viz/concepts/coupler-path-j1.js) for a bench configuration"""
+    PK = _pk(); D = PK.Design(dict(params)); fb = D.fb
+    r = lambda v: [round(float(x), 5) for x in v]
+    return dict(A0=r(D.u[0]), B0=r(fb["B0"]), W0=r(D.u[2]), alpha=round(D.fbp["alpha"], 3), beta=round(D.fbp["beta"], 3),
+                c=round(D.fbp["c"], 3), s4=int(D.fbp["s4"]), kd=round(D.fbp["kr"], 3), kphi=round(D.fbp["kg"], 3), a2=round(D.a2c, 3),
+                branch=int(D.brc), ideal=1 if params.get("circle") else 0, tmin=25, fold=10, faces=[round(float(x), 1) for x in f],
+                hub_r=10, pin_r=6, stack=12.25, neck_deg=25, cuff_at=165)
