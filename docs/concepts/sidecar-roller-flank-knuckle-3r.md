@@ -115,3 +115,57 @@ pressure angles 6.3 / 8.0 deg, and the horn's angle rises to 41.5 over the taken
 law's whole range (dK_lim 56.2, ended by the law, not the flank). The CMA also dropped the lift to 1.4 mm and freed the
 K dyad (bk1 27.7, bk2 35.7, a1max 56.6).
 
+## Claim (self-measured, NOT verified): CMA P1 best, frozen shape worn on Bench(110,360) exact
+
+| | this design (P1) | rod sidecar (sidecar-longdyad, self-measured) | verified lead (frontload) |
+|---|---|---|---|
+| fast Bench(60,160) near-touch | 11.73 (plain 11.73) | 10.30 | - |
+| **frozen exact gap (plain)** | **20.08 (score 92.70)** | 18.91 | 22.82 |
+| near-touch 1 mm / 2 mm | 21.17 / 46.82 | 20.00 / 34.03 | 24.46 / 44.08 |
+| reach / follow / in-band14 / contact | 0.722 / 1.0 / 0.890 / 0.013 | 0.725 / 1.0 / 0.897 / 0.011 | 0.728 / 1.0 / 0.855 / 0.011 |
+| overhead (elev >= 140) taken | 8/28 (in-band 0.868) | 8/28 | 8/28 |
+| connected (flood fill) full / knn | 20.08 (0 dropped) / 22.90 (10) | 18.91 / 21.72 | 22.82 / 25.63 |
+| lost workspace poses | fold 87, slide 8, contact 5 | fold 86, slide 7, contact 4, parts 2 | fold 86 |
+| complexity (tools/simplicity.py) | **45.25** | 49.0 | 49.0 |
+
+Best parameters: `docs/concepts/rows/sidecar-roller-flank-knuckle-3r.json` best_params. In short: g 2.28, beta -174.7,
+r_c 15.67, lift 1.41, hl 1.35, zr 3.01, s_arm 4.44, r_lobe 8.14, kK 2.52, c 0.021, bk1 27.7, bk2 35.7, a1max 56.6.
+
+Cam at the winner, per K step:
+
+| K (deg) | crank (deg) | pa crank | pa horn | contact r (mm) | flank radius (mm) |
+|---|---|---|---|---|---|
+| 0 | 0 | 6.3 | 8.0 | 15.8 | 4.2 |
+| 20 | 8.8 | 0.1 | 24.1 | 17.5 | 7.9 |
+| 40 | 17.8 | 3.9 | 35.6 | 19.9 | 11.9 |
+| 55 | 24.6 | 6.8 | 42.3 | 22.0 | 14.9 |
+
+Other numbers at the winner: crest 9.97 (limit 11.5). Arm clearance to hub K's skirt >= 1.58 (core metric). Roller
+clearance to hub K >= 2.47. Low arm to lug >= 14.6.
+
+## Red team (own)
+
+- **The pose that jams.** None jams inside the range: force closure holds to the end of the law (both n . v > 0). The
+  drive stops at the law's dK_max (54.3) and stop B sits at 56.2. Past it the fold takes the pose, so nothing jams.
+  At the proposer's lug azimuth (beta -85) the horn pressure angle hits 45 after 8 deg of K, which would make it a
+  stall, not a jam.
+- **The point that pinches.**
+  - The horn lug comes 1.38 mm from the skin at clip pose 29 (plane 77, elevation 141, axial -67) and the crank arm
+    1.62 mm at workspace pose 130 (fast bench).
+  - Frozen minimum metal is 0.32 mm. 45 frozen poses have drive metal at 1-2 mm, so the 2 mm near-touch (46.82) is
+    worse than the lead's (44.08).
+  - The flank's tightest radius is 3.7-4.2 mm, convex, at the rest end: the pitch-point nose. Contact stress is
+    small at the clock spring's ~2.5 N, but this is the edge to inspect on the part.
+- **The optimistic number.**
+  - Fast 11.73 becomes frozen 20.08 (+8.4). Every knuckle in this family loses 8-10 points between those two benches.
+  - The flank uses the ideal envelope. The wire-EDM / 5-axis tolerance on a 4 mm nose, plus MR63 play (radial
+    clearance ~5-10 um, O3 pin fit ~10 um), gives ~0.09 deg of K slop at the flank and ~0.6 deg through the lobe
+    follower and crank pivot (0.02 mm over the 4.4 mm short arm, times g). This is below the lead's rod-end slop
+    budget (<= 1.2 deg).
+  - The spherical lug and the arm tip over it are 5-axis parts. The 130-deg arc arm (51.5 mm developed, 3 mm Ti) is
+    the longest cantilever in the drive. Its stiffness under the ~2.5 N contact force is not modelled: a 0.1 mm tip
+    deflection would read ~0.3 deg of K.
+  - Held out was not run (the verifier's job). The lead lost ~4 points held out.
+- **Lost poses.** Overhead: fast 2/12 taken (fold 7, slide 3); frozen 8/28 (fold 14, slide 3, contact 3). Across the
+  body: 18/26 taken (fold 8). Behind the back: 21/24 taken (fold 3). Rest: 56/58 taken (fold 2). The fold walls are
+  the lead's: the drive's metal moved the in-band and contact terms, not the fold.
