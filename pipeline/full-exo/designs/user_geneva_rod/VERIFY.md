@@ -144,7 +144,7 @@ this imported path.
 | R1-aim (2-10 mm) | 49.8 % | **49.797 %** (score.json byte-identical) | same run |
 | R4 (Raise overhead, 14 mm) | 73.8 % | **73.83 %** (min gap 0.2 mm: see correction 3) | same run |
 | R6 | 0.0 mm | not re-run (see below); committed output read: 1337 frames x 7138 pairs incl. dk / dr, max depth 0.0 | - |
-| R16 | 72.6 % | R16_RERUN | R16_HOW |
+| R16 | 72.6 % | **72.63 %**, per-pose results identical to the committed file (358 poses; does not close 26.5 %, body 0.8 %, parts 0.0 %) | local, step 4, scratch copy |
 | R7 | FAIL (link 1a) | **FAIL, byte-identical**: 25_D8-02a_link_1a.step valid False, 2 bad faces of 132, not watertight; every other part one valid solid; coverage 59 custom, none missing | local OCC |
 | R17 | NOT RUN (KeyError 'l1') | **reproduced**: the general chain refuses group 'dk' ("no place in the serial chain rule base, l<k>[a-z], cuff"), falls back to the spherical judge, which stops on KeyError 'l1' | local |
 
