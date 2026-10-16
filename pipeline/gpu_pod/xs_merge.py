@@ -46,11 +46,18 @@ def one(d, res=None):
         res.setdefault("cma", []).append({k: c.get(k) for k in ("t", "tag", "secs", "key", "lam", "evals")} | dict(meta=m, file=f"{tag}/{os.path.basename(f)}"))
     pick = os.path.join(d, "verify_pick.json")
     picks = json.load(open(pick)) if os.path.exists(pick) else []
-    for i, e in enumerate(picks):
-        v = dict(rank=i, round=tag, gpu=slim(e), src=e.get("src"))
-        f = os.path.join(d, "verify", f"v{i:02d}.json")
-        if os.path.exists(f):
-            x = json.load(open(f))
+    # each pod picks the list when ITS turn comes (the two lists can differ): match every verified file by its own params
+    K9 = ("az", "el", "a1", "a2", "wd", "wa", "sigma", "inv2", "inv3", "q", "end_extra")
+    sig = lambda p: tuple(round(float(p[k]), 3) for k in K9)
+    gpu_rows = {sig(e["params"]): e for e in picks}
+    for b in res["basins"]:
+        for w in ("best", "best_plain"):
+            if b.get(w) and b[w].get("params"): gpu_rows.setdefault(sig(b[w]["params"]), b[w])
+    for f in sorted(glob.glob(os.path.join(d, "verify", "v*.json"))):
+        x = json.load(open(f)); e = gpu_rows.get(sig(x["params"]), {})
+        v = dict(file=f"{tag}/verify/{os.path.basename(f)}", round=tag, params={k: x["params"][k] for k in K9}, gpu=slim(e) if e else None,
+                 src=e.get("src"))
+        if True:
             for prot in ("fit110", "fit60"):
                 if prot in x:
                     v[prot] = dict(fit_fast=x[prot].get("fit"), wear_exact={k: x[prot]["wear"].get(k) for k in KEYS + ("audit", "min_metal_all_faces", "top_contact_poses")},
