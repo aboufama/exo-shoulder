@@ -1,0 +1,64 @@
+# k-rim-lobe-stub-knuckle-3r: inverse direct pair (lobe sector on link 1a around K, MR52 roller on a stub of link 2)
+
+Round 7, pick 2 (docs/concepts/round7_ideation.md note E). Model: docs/concepts/models/k-rim-lobe-stub-knuckle-3r.py.
+Sweeps: docs/concepts/sweeps/k-rim-lobe-stub-knuckle-3r.json. Row: docs/concepts/rows/k-rim-lobe-stub-knuckle-3r.json.
+
+## Deeper-version answers (written before the model)
+
+1. **What a top mechanism designer would do that the spec does not ask.** Treat the roller-lobe pair as a spherical cam
+   (every axis through GH, roller axis radial, flank a radial ruled surface) and synthesise it exactly in 3-D, not on the
+   planar approximation the 43.9-deg pressure angle came from. Check the pair's whole q2 sweep, not only the law: the
+   stub is rigid with link 2, so in state A it swings ~110 deg about u2 (the Geneva tail's killer was exactly that sweep
+   cone). Ask where the three stacked layers at K go (link 1b, lobe, stub): a lobe stacked over link 1b puts the stub 3
+   layers up; a lobe at link 1a's own level BESIDE link 1b keeps it low but needs the roller on a post. Put both
+   embodiments in the search instead of choosing by hand.
+2. **Rawest material.** The posed skin itself through the bench's signed-distance field (every metal sample of the
+   lobe, roller, post and stub is skin-checked per pose), the 60 / 110 fit clips and the 160 / 360 workspace poses
+   (tools/concept_bench.py), the winner's verified seats (rows/geneva-tail-knuckle-pinknee-3r.json), not the planar
+   synthesis numbers of the proposal.
+3. **Methods and tools.** Exact spherical contact law with per-t gates (pressure angle on K's velocity, pitch-curve
+   geodesic curvature vs roller radius, lift-off on the self-motion curve, stub boss vs hub K), the kit-rule chain with
+   the physical q2 stops (minarc-stop-knuckle-4r-kitrule.py via geneva-tail-knuckle-pinknee-3r.py), part-pair 3-D
+   clearances at every bench pose, farm LHS then CMA-ES on the near-touch gap, frozen exact Bench(110,360).
+4. **What, other than me, shows the number is right.** The bench (Bench(60,160) fast for the search, Bench(110,360)
+   exact frozen for the claim), the independent verifier harness the lead runs on the winner family, and the red-team
+   pose list below (hub K clearance over the whole q2 range, roller vs lobe in state A, LOBE vs link 1b).
+
+## Mechanism
+
+Scapula handler -> J1 (active, O20) -> link 1a [+ lobe sector on K's housing] -> K (passive O20, clock spring + stop A;
+slaved, never read) -> link 1b -> J2 (active, O20; folded dowel + stop-B dowel) -> link 2 [+ stub, O2 pin, MR52ZZ roller]
+-> J3 (active, O20) -> member 3 -> pin knee (2 passive pins) -> pad -> BOTTOM. 3 active, 3 passive rotations, 0 passive
+translations, one closed loop through the unilateral roller-lobe contact (spring-closed). No gears, pulleys or cables.
+
+Law: past the stretched q2 onset, dK = sp kK t (t = q2 travel). Gates per t: th rising (rate <= 3.45), pressure angle
+<= 45 deg (exact: angle between the lobe-side pitch normal and the lobe point's velocity), convex pitch radius >= rr + 1,
+no lift-off, K <= stop B, stub-end boss >= 1 mm off hub K's O20 rim (nominal; collide checks every pose in 3-D).
+
+## Measurements (Bench(60,160) fast unless stated)
+
+Law-only reproduction (winner model, tail 0, kK 1.0, smhi 20, a1max 50): **13.76** (reach 0.775, ib 0.887, contact 0) -
+the judge's number to the digit.
+
+Law synthesis (exact 3-D, winner seats): the law is valid on two stub branches, a0 ~ 144-156 deg and ~ 204-216 deg (K sits
+at 162 deg in link 2's frame at the onset); e.g. L_stub 22, a0 156, kK 1.0: pa max 38.8 deg, K reaches stop B (31.3 deg),
+stub boss >= 4.9 mm off hub K's rim. The proposer's a0 168 has no valid prefix (pa > 45 at t = 0): the stub points almost
+straight at K there, so K's velocity at the roller is near-perpendicular to the push.
+
+First metal fits (hand configs):
+
+| config | gap | reach | ib14 | contact | lost to | note |
+|---|---|---|---|---|---|---|
+| lobe over link 1b, L 22, a0 156 | 147.3 | 0.31 | 0.80 | 0.071 | parts 114 (LOBE-LT) | stub ramp dipped into the lobe -> stub kept flat |
+| same, flat stub, tip-lift drop | 111.9 | 0.51 | 0.78 | 0.019 | parts 78 | lobe 0 % in band (18.9 mm), stub 17 mm |
+| over, L 24, a0 216, kK 0.8 | 76.97 | 0.52 | 0.86 | 0.130 | parts 34, skin 19 | |
+| lobe BESIDE link 1b (link 1a level), L 26, a0 216, kK 0.8 | 97.87 | 0.50 | 0.91 | 0.239 | skin 38, parts 21 | lobe 100 % in band (8.7 mm) |
+
+Two structural findings already:
+
+- **Stacked over link 1b** the lobe is >= link 1b + 4 mm and the stub >= lobe + 4 mm: three layers at K, the lobe sits
+  12-19 mm off the skin and the stub 16-18 mm (0-37 % in band). The roller tip's skin need over the state-A sweep
+  (q2 76-91 deg, the stub swinging about u2) lifted the whole lobe 6.5 mm until those poses were dropped.
+- **Beside link 1b** the lobe is in band (100 %), but the roller on its post sweeps the skin at link 1a's level with
+  link 2 (state A), and the poses whose roller would need lifting are lost (skin 38) - the Geneva tail's sweep cone again,
+  on a shorter radius.

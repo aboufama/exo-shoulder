@@ -332,8 +332,30 @@ def frozen(P, nc=110, nw=360):
     return KB.frozen(dict(PARAMS, **P), nc, nw)
 
 
+def viz_export(par):
+    """geometry of the fitted design (Bench(60,160)) for docs/concepts/viz/concepts/k-rim-lobe-stub-knuckle-3r.js"""
+    B = CB.Bench(n_clip=60, n_ws=160); r, M = _report(B, par); D = M.D; P = D.p; L_ = D.law()
+    R = lambda v, n=5: [round(float(x), n) for x in v]
+    def pts(name, step=3):
+        X = M.link_pts[name][1]; return [R(x, 2) for x in X[::step]]
+    sub = slice(None, None, 10)
+    rtip = M._roller_bottom
+    G = dict(u=[R(x) for x in D.u], c=[R(x) for x in D.c], uK=R(D.uK), sa=R(D.sa), st=R(D.st), sn=R(D.sn), A=[round(D.a1, 3), round(D.a2, 3)],
+             branch=float(D.branch), m=R(D.m), f=[round(float(x), 2) for x in M.f], fK=round(float(M.fK), 2), capK=float(P.get("capK", 0)),
+             tr=round(float(M.tr), 2), tp=round(float(P["tp"]), 3), RUN=S.RUN, A0=R(M.fr["A0"]), A0m=R(M.fr["A0m"]), Bm=R(M.fr["Bm"]), eE=R(M.fr["eE"]),
+             psiA=round(math.degrees(D.psiA), 4), thLo=round(D.th_lo, 4), thHi=round(D.th_hi, 4), q2s=[round(x, 4) for x in D.q2_stops],
+             lawTh=R(L_["th"][sub], 3), lawDK=R(np.degrees(L_["dK"][sub]), 3), lawQ2=R(np.degrees(L_["q2t"][sub]), 3), emb="kstub",
+             tip=R(L_["p0"] * (rtip + ROLLER_H / 2), 2), tipTop=R(L_["p0"] * M._floor_tip, 2), lobe=[R(x, 2) for x in M.rigid["lobe"][1][::2]],
+             L1a=pts("L1a"), L1b=pts("L1b"), L2=pts("L2", 6), LT=pts("LT", 4))
+    keys = ("az1", "el1", "az2", "el2", "wd", "wa", "b3", "lE", "lc", "phiE", "phib", "stk", "ang_min", "bk1", "bk2", "sK", "a1max", "smhi", "smlo", "capK",
+            "emb_mode", "kK", "L_stub", "a0", "rr", "lobe_w", "lobe_lev", "tip_tol")
+    return dict(P={k: P[k] for k in keys}, G=G, report={k: r[k] for k in ("gap", "reach", "follow", "inband14", "contact")})
+
+
 if __name__ == "__main__":
     mode = sys.argv[1] if len(sys.argv) > 1 else "check"
+    if mode == "viz":
+        print(json.dumps(viz_export(json.loads(sys.argv[2]) if len(sys.argv) > 2 else {}), default=float)); sys.exit()
     par = json.loads(sys.argv[2]) if len(sys.argv) > 2 else {}
     if mode == "frozen":
         t = time.time(); out = frozen(par); out["params"] = par; out["secs"] = round(time.time() - t, 1)
