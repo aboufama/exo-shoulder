@@ -411,48 +411,58 @@
   }
  },
  "adjacent": {
-  "pin b retainer keep-out / J3 upper boss + cap keep-out": [
-   56.716,
-   "Wash opposite shoulder",
-   48,
+  "knee link keep-out / J3 upper boss + cap keep-out": [
+   41.749,
+   "Raise overhead",
+   114,
    [
-    121.3,
-    30.4,
-    -79.0
+    30.0,
+    145.8,
+    -59.1
    ]
   ],
-  "pin b retainer keep-out / E strap keep-out": [
-   22.011,
-   "Wash opposite shoulder",
-   60,
+  "knee link keep-out / E strap keep-out": [
+   0.5,
+   "Walking arm swing",
+   108,
    [
-    124.1,
-    31.9,
-    -78.8
+    90.0,
+    4.2,
+    -90.0
    ]
   ],
-  "pin b retainer keep-out / link 2 strap keep-out": [
-   64.825,
+  "knee link keep-out / link 2 strap keep-out": [
+   47.768,
    "Reach back pocket",
-   111,
+   51,
    [
-    -70.2,
-    34.7,
-    88.8
+    -70.1,
+    40.1,
+    83.7
    ]
   ],
-  "pin b retainer keep-out / E boss = pin a lower plate": [
-   18.59,
-   "Comb hair",
-   39,
+  "knee link keep-out / E boss = pin a lower plate": [
+   0.5,
+   "Walking arm swing",
+   108,
    [
-    54.0,
-    94.5,
-    -54.9
+    90.0,
+    4.2,
+    -90.0
    ]
   ],
-  "pin b retainer keep-out / pad mount to BOTTOM": [
-   3.591,
+  "knee link keep-out / arm pad = pin b lower plate": [
+   0.5,
+   "Walking arm swing",
+   108,
+   [
+    90.0,
+    4.2,
+    -90.0
+   ]
+  ],
+  "knee link keep-out / pad mount to BOTTOM": [
+   0.5,
    "Walking arm swing",
    108,
    [
@@ -491,6 +501,16 @@
     21.2
    ]
   ],
+  "E boss = pin a lower plate / arm pad = pin b lower plate": [
+   16.24,
+   "Comb hair",
+   39,
+   [
+    54.0,
+    94.5,
+    -54.9
+   ]
+  ],
   "E strap keep-out / pad mount to BOTTOM": [
    14.205,
    "Wash opposite shoulder",
@@ -499,6 +519,16 @@
     60.3,
     19.3,
     -35.6
+   ]
+  ],
+  "E strap keep-out / arm pad = pin b lower plate": [
+   19.719,
+   "Wash opposite shoulder",
+   60,
+   [
+    124.1,
+    31.9,
+    -78.8
    ]
   ],
   "link 2 strap keep-out / J3 lower plate keep-out": [
@@ -551,23 +581,33 @@
     99.2
    ]
   ],
-  "pin a retainer keep-out / pin b retainer keep-out": [
-   20.24,
-   "Comb hair",
-   39,
+  "link 2 strap keep-out / arm pad = pin b lower plate": [
+   62.33,
+   "Reach back pocket",
+   111,
    [
-    54.0,
-    94.5,
-    -54.9
+    -70.2,
+    34.7,
+    88.8
    ]
   ],
-  "pin b retainer keep-out / pin b retainer keep-out": [
-   -0.0,
+  "pin a retainer keep-out / knee link keep-out": [
+   0.5,
    "Walking arm swing",
-   108,
+   102,
    [
     90.0,
-    4.2,
+    8.2,
+    -90.0
+   ]
+  ],
+  "pin b retainer keep-out / knee link keep-out": [
+   0.5,
+   "Walking arm swing",
+   102,
+   [
+    90.0,
+    8.2,
     -90.0
    ]
   ],
@@ -591,14 +631,34 @@
     21.2
    ]
   ],
-  "pin b retainer keep-out / BOTTOM": [
-   17.093,
-   "Walking arm swing",
-   108,
+  "pin b retainer keep-out / E boss = pin a lower plate": [
+   18.59,
+   "Comb hair",
+   39,
    [
-    90.0,
-    4.2,
-    -90.0
+    54.0,
+    94.5,
+    -54.9
+   ]
+  ],
+  "pin b retainer keep-out / E strap keep-out": [
+   22.011,
+   "Wash opposite shoulder",
+   60,
+   [
+    124.1,
+    31.9,
+    -78.8
+   ]
+  ],
+  "knee link keep-out / BOTTOM": [
+   2.39,
+   "Reach back pocket",
+   129,
+   [
+    -16.8,
+    11.3,
+    21.2
    ]
   ],
   "E boss = pin a lower plate / BOTTOM": [
@@ -2228,5 +2288,5 @@
   },
   "Walking arm swing": {}
  },
- "secs": 158.7
+ "secs": 81.0
 }
