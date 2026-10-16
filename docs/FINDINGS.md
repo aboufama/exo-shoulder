@@ -941,3 +941,19 @@ stack order (`docs/concepts/zc-frontier-3r.md`, `tools/zc_frontier.py`, data `do
   i.e. a second fold window (relay, 4th joint) whose hub 2 stays in band in the poses it rescues. A radial slide at
   hub 2 would have to absorb 26-47 mm of level spread and stands up by its travel (CLAUDE.md): ruled out. That is
   the near-zero track's input.
+
+## The polished pin knee wins the bench but not the built proximity judges (2026-10-16, l1_skin-normal-3r-pin-knee-h1)
+
+Measured: the L1 build of the verified polish H1 (fit on Bench(110,360) fast, fold margin 5) against k4598 through the
+SAME builder at the same margin (control `l1_skin-normal-3r-pin-knee-k4598-m5`): R1 80.1 vs 81.1 %, R1-aim 42.3 vs 43.2 %,
+R4 overhead 74.2 vs 79.6 % (both FAIL at 80; Raise overhead median skin gap 12.1 vs 11.1 mm), R16 67.9 vs 66.5 %, lowest
+metal over the followed frames 1.66 vs 0.60 mm, R6 0.0 both. The verified bench gain (2.3-4.9 gap points at margin 5)
+came from reach (fold losses 115 -> 97) and from removing near-touch poses by moving metal outward (knee level +5.9 mm,
+hub 3 face +2.3 mm); the judges' R1 / R4 measure covered SKIN within 2-14 / 2-10 mm and pay for the outward metal. Lesson:
+the polish objective must carry the judge's coverage term (or cap tr / the faces), or the generation's built winner
+regresses on R1 / R4 while the bench improves. Also measured: k4598's own L1 moved R1 84.2 -> 81.1 and R4 83.9 -> 79.6 from
+the margin-10 -> 5 refit alone (hub 3 +2 mm, more Wave / overhead frames followed) - a measurement change, not a design one.
+Builder fix found on the way: a mount routed to the nearest end of the user's BOTTOM can sit inside the knee's sweep (H1:
+every frame jammed, 1.18 mm); the builder now sweeps member 3 + the knee bar through the arm frame, cuts BOTTOM clear of it
+and routes the mount clear by >= 1 mm (pipeline/concept_l1/build_pinknee_l1.py). Details: docs/concepts/skin-normal-3r-pin-knee.md
+"L1 keep-out CAD of the polished H1".

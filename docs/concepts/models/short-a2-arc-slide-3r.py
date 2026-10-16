@@ -55,7 +55,7 @@ NAME = ("Short-link-2 3R whose J3 hub rides a spring-returned GH-concentric arc 
 # seed S1 of the round-5 judge (catalogue model_spec): u1 = bvec(107.18, 64.67), u3 = wdir(103.39, -5.90)
 PARAMS = dict(az=107.18, el=64.67, wd=103.39, wa=-5.90, a1=44.138, a2h=40.730, a2max=54.591, sigma=-1,
               m_stop=K.FOLD_MARGIN, q=0.97, width=12.0, t_link=3.0,
-              rail_w=14.0, rail_th=3.0, carr_t=2.0, carr_len=16.0, rail_end=2.0, r_lay=56.0, layout=0, lift1=1.0, l1_end=2.0, side=0, a2min=None, c_extra=0.0,
+              rail_w=14.0, rail_th=3.0, carr_t=2.0, carr_len=16.0, rail_end=2.0, r_lay=56.0, layout=0, lift1=1.0, l1_end=2.0, side=0, a2min=None, c_extra=0.0, gam_mm=19.0, gam_sign=1,
               connect=1, near=0)
 ELEV_OVER = SPM.ELEV_OVER
 GAP = 0.15                                                   # running gap carriage / rail
@@ -131,12 +131,23 @@ def build(B, F, p):
     stack, the measured limiter of side 0); travel bilateral [a2min, a2max] around the spring's home a2h."""
     p1 = F.S(K.bvec(p["az"], p["el"])); p3 = F.HG(K.wdir(p["wd"], p["wa"]))
     k = kin(p1, p3, p); p2, a2, ok = k["p2"], k["a2"], k["ok"]; a2min = k["a2min"]
-    n = K.unit(np.cross(p2, p3))                                   # slide axis, fixed in link 2a, through GH
-    e = K.unit(np.cross(n, p2))                                    # rail direction at hub 2 (toward p3)
     R = float(p["r_lay"]); deg = lambda mm: math.degrees(mm / R)
     ext = max(p["carr_len"] / 2.0, 7.1) + p["rail_end"]           # carriage / screw + bushing, plus the end wall
     side = int(p.get("side", 0)); infeasible = False
-    if side:                                                       # carriage home c_h (deg from p2, in link 2a)
+    if side == 2:                                                  # hub 3 BESIDE the rail: p3 sits gam off the rail plane
+        gam = deg(float(p["gam_mm"])); f3 = K.unit(p3 - (p3 * p2).sum(-1, keepdims=True) * p2); g3 = np.cross(p2, f3)
+        cb = np.clip(_sind(gam) / np.maximum(_sind(a2), 1e-9), -1, 1); sb = float(p.get("gam_sign", 1)) * np.sqrt(1 - cb ** 2)
+        n = K.unit(cb[:, None] * f3 + sb[:, None] * g3)            # rail normal (slide axis) with p3 . n = sin gam
+        sl = np.degrees(np.arccos(np.clip(_cosd(a2) / _cosd(gam), -1, 1)))     # slide coordinate along the rail
+        s_h = math.degrees(math.acos(min(1.0, _cosd(p["a2h"]) / _cosd(gam))))
+        s_lo = math.degrees(math.acos(min(1.0, _cosd(a2min) / _cosd(gam)))); s_hi = math.degrees(math.acos(min(1.0, _cosd(p["a2max"]) / _cosd(gam))))
+    else:
+        n = K.unit(np.cross(p2, p3))                               # slide axis, fixed in link 2a, through GH
+    e = K.unit(np.cross(n, p2))                                    # rail direction at hub 2 (toward p3)
+    if side == 2:
+        s0, s1 = s_lo - deg(ext), s_hi + deg(ext); cdir = _rot_arc(p2, e, sl)
+        infeasible = s0 < deg(K.HUB_R + 2.0)
+    elif side:                                                       # carriage home c_h (deg from p2, in link 2a)
         s0 = deg(K.HUB_R + 2.0 + float(p["c_extra"])); c_h = s0 + deg(ext) + (p["a2h"] - a2min)
         s1 = c_h + (p["a2max"] - p["a2h"]) + deg(ext)
         infeasible = s1 + deg(K.HUB_R + 1.0) > a2min           # the rail tail would run under hub 3
@@ -151,7 +162,7 @@ def build(B, F, p):
     rt = K.strap_member("rail_t", _rot_arc(p2, e, s0), _rot_arc(p2, e, s1), ("S",), ang=math.radians(s1 - s0),
                         width=wl(p["rail_w"]), t=p["rail_th"], climb_deg=None)
     rt.kind = "cap"; rt.joints = ("S", "Sc", "Rj")              # Rj: the root / slot junction of the ONE rail plate
-    lay = 1 if side else int(p.get("layout", 0)); w, t = p["width"], p["t_link"]; end = K.HUB_R + 2.0
+    lay = 1 if side == 1 else int(p.get("layout", 0)); w, t = p["width"], p["t_link"]; end = K.HUB_R + 2.0
     rr = K.strap_member("rail_r", p2, p3, ("J2", "S", "Rj"), ang=math.radians(s0), width=wl(p["rail_w"]), t=p["rail_th"],
                         ramp_to=(("hub2", K.STACK if lay else 0.0), ("rail_t", 0.0)), end_mm=end)
     # link 1's J2 end zone is lift1 mm above hub 2's upper flange (a spacer: only raises metal) and l1_end mm long, so
@@ -169,7 +180,15 @@ def build(B, F, p):
         carr = K.Member("carriage", D, kind="flat", t=ct, width=12.0, joints=("Sc", "J3") if not side else ("Sc",), K=cdir, A=tc,
                         Bv=n, xy=xy, cell=4.0, ramps=[(np.ones(len(xy), bool), "rail_t", p["rail_th"] + GAP)])
         mem.append(carr)
-    if not side:                                                   # hub 3 on the carriage, neck = J3's upper member
+    if side == 2:                                                  # carriage bridge rail -> hub 3's upper flange; neck lower
+        if carr is not None: mem.remove(carr)
+        neck = K.neck_member(F, p3, joints=("J3",), ramps=(("hub3", 0.0), (None, 0)))
+        neck.over = [("rail_t", 1.0), ("rail_r", 1.0)]
+        br = K.strap_member("bridge", cdir, p3, ("Sc", "J3"), width=p["carr_len"], t=max(ct, 2.0),
+                            ramp_to=(("rail_t", p["rail_th"] + GAP), ("hub3", K.STACK)), end_mm=end,
+                            over=[("rail_t", 1.0), ("link1", 1.0), ("neck", 1.0)] if lay else [("rail_t", 1.0), ("neck", 1.0)])
+        mem += [hub3, neck, br]
+    elif not side:                                                 # hub 3 on the carriage, neck = J3's upper member
         hub3.joints = ("J3", "Sc")
         hub3.ramps = [(np.ones(len(hub3.xy), bool), "rail_t", p["rail_th"] + GAP + ct)]
         neck = K.neck_member(F, p3, joints=("J3",), ramps=(("hub3", K.STACK), (None, 0)))
@@ -193,6 +212,7 @@ def build(B, F, p):
                 rail_span_deg=[round(s0, 2), round(s1, 2)], infeasible=bool(infeasible))
     return K.Chain(members=mem, ok=okk, q=q, joints=dict(J1=p1, J2=p2, J3=p3, S=n, Sc=cdir, Rj=_rot_arc(p2, e, s0)),
                    info=info, hubless=("S", "Rj") if not side else ("S", "Rj", "Sc"))
+
 
 
 # ---- continuity over the raw 1432-pose workspace grid (kinematics only) --------------------------------------------
@@ -294,7 +314,8 @@ def snap(p):
     p["carr_len"] = min(22.0, max(16.0, float(p["carr_len"])))
     p["layout"] = 1 if float(p.get("layout", 0)) >= 0.5 else 0
     p["r_lay"] = min(80.0, max(40.0, float(p["r_lay"])))
-    p["side"] = 1 if float(p.get("side", 0)) >= 0.5 else 0
+    p["side"] = int(min(2, max(0, round(float(p.get("side", 0))))))
+    p["gam_mm"] = min(30.0, max(18.0, float(p.get("gam_mm", 19.0)))); p["gam_sign"] = 1 if float(p.get("gam_sign", 1)) >= 0 else -1
     p["a2min"] = p["a2h"] if (p.get("a2min") is None or not p["side"]) else min(float(p["a2h"]), float(p["a2min"]))
     p["c_extra"] = min(30.0, max(0.0, float(p.get("c_extra", 0.0))))
     p["lift1"] = min(4.0, max(0.0, float(p["lift1"]))); p["l1_end"] = min(8.0, max(0.0, float(p["l1_end"])))
@@ -342,7 +363,7 @@ def statics(B, p, r, F_spring=1.5, mu_f=0.15):
         area = float(m.cell * ((rho / m.r_ref) ** 2).sum()) if m.kind != "flat" else float(m.cell * rho.size)
         mass[m.name] = area * m.t * K.TI
     mass["hub2"] = max(mass.get("hub2", 0), 14.0)               # O20 v5 hub: housing + 2 MR117 + encoder (~14 g)
-    moving = ["link1", "hub2", "rail_r", "rail_t"] + (["carriage", "link2b"] if p.get("side") else [])
+    moving = ["link1", "hub2", "rail_r", "rail_t"] + (["carriage", "link2b", "bridge"] if p.get("side") else [])
     # finite self-motion: a2 -> a2 + 1 deg, J2 dihedral free, p1 / p3 fixed -> new p2; body points rotate with their frame
     out = []
     for j in A:

@@ -449,3 +449,91 @@ both fold margins (smallest: 2.14 plain on the fit-60 protocol, 3.23 near-touch 
 7.00). H1 replaces k4598 as the design's polished configuration (row: best_k H-g107-1, v_gap 28.21 on the comparable
 fit-60 protocol, v_polish_gap 26.45 = score 90.38 on the polish protocol). Before the generation-3 CAD switches to H1:
 re-judge R4 overhead on the H1 build (the knee-window edge above), and red-team link 2 at the posterior axillary fold.
+
+## L1 keep-out CAD of the polished H1 (generation-3 winner, 2026-10-16 ~07:55 UTC)
+
+Design `pipeline/full-exo/designs/l1_skin-normal-3r-pin-knee-h1` (snapshot `pipeline/evolution/l1_skin-normal-3r-pin-knee-h1/`),
+builder `pipeline/concept_l1/build_pinknee_l1.py --out l1_skin-normal-3r-pin-knee-h1 --fit-bench 110,360` (params = the rows
+file's best_params = H-g107-1; per-joint hubs from rad1..rad3 = O20 x 3), red team `pipeline/concept_l1/redteam_pinknee_l1.py`.
+Built and red-teamed on the farm (the Bench(110,360) fast grid, key 14f156cb6fc8, lives there), judged there (`tools/cloud_run.py
+judge`), R7 locally.
+
+**Shape = the verified one.** The builder gained `--fit-bench`: H1 was verified on the polish protocol (fit on Bench(110,360)
+FAST, worn exact), so the build fits there, at the repository's fold margin 5 (the user's ruling): fit gap 24.57, reach
+0.6694, follow 1.0, ib14 0.8934, contact 0.0085 - the verifier's `H1_fitbig_m5` fit_gap 24.57 to the digit. Faces 51.7 /
+61.3 / 76.3 mm, knee level tr 84.72, knee centre m (-10.03, 2.00, 0).
+
+**What changed in the builder (all inputs, nothing hard-coded to H1).**
+* *Pin stacks at their real envelope.* The model's stk (5.68 mm = 2.59 boss + 0.5 GTM washer + 2.59 knee bar) leaves out
+  the top of each pin: a second O4 x O8 x 0.5 thrust washer and the retainer on the integral O4 Ti pin (DIN 6799 RS 3.2
+  e-clip O7.3 x 0.6 + 0.3 mm pin end). Both are now O8 x 0.9 keep-outs 0.5 mm over the knee bar (pin a's on member 3,
+  pin b's on the arm pad): full stack 7.08 mm over tr. Outward of the knee bar, so no skin number moves.
+* *The pad mount meets the knee's sweep - fixed.* The first H1 build (the k4598 builder unchanged) held EVERY clip frame:
+  the pad mount (pad -> nearest end of the user's BOTTOM bar, at 130 deg from the arm axis) lies inside the swept area of
+  the E boss / E strap (90-165 deg around pin b, r 22-58 mm) - 1.18 mm interpenetration at every pose (workspace 0.0 %).
+  H1's longer E strap and its knee orientation put pin a's arc exactly where k4598's mount ran. The builder now sweeps
+  member 3 and the knee bar through the arm frame over every clip frame + workspace pose that closes (1161 poses, 4.2 M
+  points), (a) cuts the user's BOTTOM square to the arm where it would meet that sweep (BOTTOM may be cut: 3.7 mm distal of
+  pin b; its proximal 22 mm and the 2 x M3 tongue holes go - the knee bar's far end swept to 0.09 mm of them), (b) routes
+  the mount as the shortest straight tp slab at the pad level clear of the sweep by >= 1 mm, with a riser into the bar
+  (one solid): 62 deg from the arm axis, 23.4 mm, riser to tr + 4.41. k4598 at margin 5 through the same code: no cut
+  needed (BOTTOM 8.8 mm from its sweep), mount at 42 deg.
+
+**Built vs the model's metal (7 poses of the fit bench: arm at the side (-90 / 0 / 75), first, middle, the two highest
+(45 / 165 / -75, 60 / 165 / -75; knee 142.1 / 143.3 deg), behind the back (-90 / 30 / 75), across the body (150 / 60 / -60)).**
+Every rigid sample of the model (hubs, E strap, E boss, arm pad, knee bar) lies on the posed exo.glb within 0.0001 mm;
+the straps' samples outside the hub zones 0.000 mm; inside the hub zones (r < R + 3) the built strap sits up to 1.85 mm
+(link 1, 12 of 40 samples) / 1.26 mm (link 2, 15 of 139) ABOVE the model's sample - the stated R6 lift to the hub's member
+level, away from the skin (not within 0.5 mm there, by design). Built-part frames vs the model's member transforms
+<= 1e-4 mm on the judges' path (scene_export.frame_xforms); the J2 line check 0.0001 deg.
+
+**Clips (30 fps, the champion's 8 incl. the held-out Wave / Walking).** 1323 / 1337 followed (98.95 %): every frame of
+Raise overhead (knee 101 -> 144 deg: 5.4 deg inside its 149.54 stop at margin 5 - the margin-10 overhead edge does not
+bite), Drink, Comb hair, high shelf, Wash, back pocket, Walking; Wave holds 14 (the model's part clearance). Lowest metal over
+the followed frames 1.66 mm (k4598's L1: 0.60). Workspace (1432): chain + knee close 68.8 %, + parts 66.0 %. 15 parts,
+77.2 g, each one closed single solid.
+
+**Outside judges (farm; R7 local): 8 of 19 pass.** R1 80.1 % / R1-aim 42.3 % FAIL, R2 24.87 mm (the user's forearm cuff in
+the rig's self-intersection; ours 0.0) FAIL, R3 98.7 % PASS, **R4 overhead 74.2 % FAIL**, R5 / R5-aim 3 PASS, R6 0.0 mm at
+every frame PASS (BOTTOM cut included), R7 PASS, R8 77.2 g PASS, R11 0.35 kPa PASS, R16 67.9 % FAIL, R17 PASS. Not run: R9
+(no STEP at L1), R10. (R7's judge skips every H-group part, so the arm pad, pad mount and pin b retainer are checked only
+by the builder: closed, one piece.)
+
+**Before / after, design vs measurement (the control).** k4598's L1 (9 of 19) was built at fold margin 10 with the old
+mount. Same builder, margin 5, k4598 on its own verified protocol (fit-60) = design `l1_skin-normal-3r-pin-knee-k4598-m5`
+(R1, R4, R3, R6 step 3, R16 judged; dynamics / body contact not run): R1 81.1 %, R1-aim 43.2 %, R3 99.6 %, R4 79.6 % FAIL,
+R6 0.0, R16 66.5 %. So:
+
+| built, margin 5, same builder | k4598 | H1 (polished) | design change |
+|---|---|---|---|
+| R1 2-14 mm / R1-aim 2-10 mm | 81.1 % / 43.2 % | 80.1 % / 42.3 % | -1.0 / -0.9 |
+| R4 Raise overhead (14 mm band); its median skin gap | 79.6 %; 11.1 mm | 74.2 %; 12.1 mm | **-5.4** |
+| R3 follows | 99.6 % (Wave holds 6) | 98.7 % (Wave holds 14) | -0.9 |
+| R16 workspace | 66.5 % | 67.9 % | +1.4 |
+| lowest metal over the followed frames | 0.60 mm | 1.66 mm | +1.06 |
+| hub 3 face / knee level tr | 74.0 / 78.8 mm | 76.3 / 84.7 mm | +2.3 / +5.9 |
+
+Measurement change (k4598 at margin 10, old mount -> margin 5, new builder): R1 84.2 -> 81.1, R4 83.9 -> 79.6, R16 62.3 ->
+66.5 - the margin-5 refit lifts hub 3 by 2 mm and the newly followed frames sit wider. **The polish's verified bench gain
+(2.3-4.9 gap points) does not reach the built proximity judges**: it bought reach (fold losses 115 -> 97) and removed
+every near-touch pose by moving metal OUT (knee +5.9 mm), which the skin-coverage R1 / R4 pay for; R4 overhead fails by
+5.8 points. H1 is still the verified bench winner and the safer build (no metal < 1.66 mm), but it is not the better
+built design on R1 / R4. Next lever: the polish objective needs the judge's own coverage term (skin 2-14 / 2-10 mm from
+metal, overhead weighted) or a cap on tr, not near-touch alone (polish 2, task 26).
+
+**Red team (built meshes posed by clips.json, exact posed skin; redteam.json).**
+* *The point that pinches:* none below 1 mm on any followed frame (k4598: 3.8-4.3 % of frames). Lowest: J1 lower plate
+  1.66 mm (Raise overhead frame 78, 30 / 150 / -60, trunk), the pad mount 1.77 mm and link 2 1.80 mm (Reach back pocket
+  frame 72, -80 / 39 / 101); < 2 mm in <= 3.8 % of frames per part.
+* *Posterior axillary fold* (409 trunk vertices): link 2 nearest, 2.63 mm (Comb hair frame 105, 78 / 143 / -67; k4598's
+  built link 2: 1.74 mm), E strap 4.29, hub 3's plate 4.79, the knee parts >= 22 mm. J2's lower / further-back seat did not
+  bring link 2 closer to the fold.
+* *The knee near hub 3 (the pose that jams):* knee bar vs hub 3's link-2 half >= 41.7 mm, vs link 2 >= 47.8 mm (k4598
+  24.3 / 32.5); knee bar vs E strap / E boss / arm pad / pad mount / both retainers = the 0.5 mm designed running gap at
+  every frame; E strap vs J3 upper boss 0.13 mm (the 0.15 face gap at hub 3's rim, sampled); BOTTOM (cut) vs knee bar
+  >= 2.39 mm, vs E boss 3.93, vs pin a retainer 4.78. The only jam: Wave, 14 frames on the model's part clearance.
+* *Arm at the side (the round-3 near-touch):* 104 of 126 neighbourhood poses (plane -30..90, elev 0-10, axial -60..90)
+  close with the parts clear; at internal rotation (axial -60, plane -15 / -30) hub 3's plate / link 2 go 0.2-7.5 mm INTO
+  the trunk (3 poses: not taken - skin - as on the bench); of the skin-clear ones one is < 1 mm (link 2 0.37 mm at
+  -15 / 10 / -60), the rest >= 2.35 mm (E strap). The verifier's 0.02 mm point does not reproduce on H1.
+* *The optimistic number:* the bench's 26.45 / 24.48 is a gap, not R1; built, H1's coverage is 1 point below k4598's.

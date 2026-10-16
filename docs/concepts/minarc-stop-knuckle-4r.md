@@ -47,6 +47,75 @@ and overhead extras). Sweep: `docs/concepts/sweeps/minarc-stop-knuckle-4r.json`.
    - The judge's contact-aware expectation (gap 18-24), which my number either meets or refutes.
    - The independent verifier of the next stage.
 
-## Results
+## The mechanism
 
-(filled in as measured, below)
+- **Topology.** The chain runs scapula handler -> J1 (O20, active, on a GH ray) -> link 1a (arc b1) -> **K** (O20,
+  passive, sensed) -> link 1b (arc b2) -> J2 (O20, active, with interior-angle hard stops) -> link 2 -> J3 -> arm.
+  - K is set by a clock spring in its cap (preload 0.08 N.m onto stop A, about 0.03 N.m/rad) and a stop dowel in a
+    milled arc slot (stops A and B).
+  - J2's stops are a dowel in an arc slot.
+  - There are 0 passive translations, and no gear, cable or pulley.
+- **The min-arc law (R17: no undetermined coordinate).** With J1 fixed in the scapula and J3 fixed in the humerus, the
+  4R has a 1-DOF self-motion, and on it the arc a1e = angle(J1, J2) changes monotonically with K's angle psi. The
+  spring pushes psi down until a stop holds it:
+  - Inside the window, K rests on stop A (a1e = a1) and the chain is a rigid 3R.
+  - Past the window, J2 rests on its phi_hi stop (stretched) or its phi_lo stop (folded), and K sits at the smallest
+    a1e >= a1 that closes. This is the root of A cos x + B sin x = cos th that is continuous with a1.
+  - A pose is reachable only up to stop B (a1e <= a1max).
+- **Two checks the spec did not ask for.** Both are in the model:
+  - The forced sub-chain J1-K-J3 (J2 locked) keeps its own fold margin of at least FOLD_MARGIN = 5 deg. This is the
+    stop-relay failure, measured and not assumed. On every configuration below the minimum is 6-20 deg.
+  - The J2 stops are capped at [5, 175] deg.
+  - Two readings of the user's fold-margin ruling are reported:
+    - **Stop-guard** (the spec's 15/170). The hard stop keeps J2 off its fold, so the J2 dyad may run closer than
+      5 deg of th to its fold.
+    - **Margin-equivalent stops** (phi 22/148 at a1 41, a2 68). J2 is never within 5 deg of th of its fold; K opens
+      exactly where the 3R's margin would have stopped it.
+- **Complexity** (tools/simplicity.py weights):
+  - Variant A: 13.5. Items: 1 passive rotation, 1 sensed passive, 1 spring, +1 body, +1 joint, about 3 made and
+    4 bought parts over the anchor.
+  - Variant B: about 34 (the pin knee's 21.5 + 12.5).
+
+## Variant A - the plain spherical chain on the kit (`models/minarc-stop-knuckle-4r.py`)
+
+All on Bench(60,160) fast with kit checks: march, dense K2 on all 4 axes, K6, crown/wall, O20 hubs and 12 x 3 straps.
+
+| configuration | gap | reach | follow | in-band 14 | contact | note |
+|---|---|---|---|---|---|---|
+| catalogue seeds (J1 bvec(90.76, 65.50), J3 wdir(74.85, -10.5), 44/74, b 35/55, stop B 78) | 66.93 | 0.894 | 0.95 | 0.29 | 0.057 | hub 2 fitted at **123 mm**: overhead poses need 140-181 mm there |
+| same seats, knuckle locked (3R control) | 62.57 | 0.769 | 0.95 | 0.47 | 0.063 | hub 2 is 2 % in band even without the knuckle: the seats set the band |
+| catalogue spine-parked seed set | 86.59 | | | | | |
+| **coarse LHS best (302 configs on the farm)** | **49.10** | 0.794 | 0.95 | 0.62 | 0.107 | J1 bvec(110.6, 62.4), J3 wdir(62.6, -10.7), 47.7/73.9, b 41.8/48.2, stop B 66.6 |
+| same seats, knuckle locked | 52.98 | 0.756 | 0.95 | 0.61 | 0.092 | **the knuckle is worth 3.9 points here** |
+
+Findings:
+- In variant A the in-band is the limiter, not the fold. At the coarse best, link 2 is 27 % in band (level up to
+  109 mm, riding over link 1a / 1b and the neck), hub 2 is 55 % and hub 3 is 66 %. A plain spherical 3R on the kit with
+  O20 hubs lands at ~47-53 whatever the seats: spine-parked O20 is 47.41.
+- The knuckle's forced poses mostly turn into contact, not into reach. At the coarse best, 10 forced workspace poses
+  are stretched: 6 taken, 4 penetrating. At the seeds there are 20 forced poses: 14 taken, 6 penetrating.
+- The 1.0 mm spacer at K is needed. Without it, links 1a and 1b collide in 196 of 212 poses: they part at psi
+  58-70 deg and still overlap 1-2 mm past K6's 12 mm exempt zone at the 0.15 mm running stack.
+- A kit asymmetry was found on the way. K6's arc distance uses the first member's radius, while `over` uses the raised
+  member's radius, so `over` can leave a pair that K6 then flags (13.1 vs 13.3 mm here). This is noted for the kit owner.
+- Spring vs gravity (quasi-static virtual work, thorax y up, kit straps, 10 g per O20 hub), at the seeds:
+  - On stop A, gravity's opening torque is at most 0.041 N.m against the 0.08 preload.
+  - In the stretched states it reaches 0.085 against a spring of 0.094-0.112 (worst margin -0.004 N.m). A
+    **0.12 N.m preload** is needed there.
+
+## Variant B - the pin knee + the knuckle (`models/minarc-stop-knuckle-4r-pinknee.py`)
+
+The spec ran this variant only if variant A's in-band fell below 0.88; it fell to 0.62.
+
+- **How the model is built.** It subclasses the verified pin-knee model (the seed VModel rules: closure < 0.5 deg,
+  10 fps continuity now including K, the jam rule, part-part clearance of 1 mm non-adjacent / 0.15 mm adjacent, walls,
+  crowns and tops skin-checked).
+- **What it adds.**
+  - Hub K on link 1a. Hub 2 moves onto link 1b (a new member 7).
+  - Straps L1a, L1b and L2, with every new part pair checked: hub K and L1a / L1b against all hubs, straps, the knee
+    link, the pad and the E strap; L1a-L1b adjacent at K; L1b-L2 adjacent at J2.
+- **The kinematics** are exact:
+  - K's rotation carries link 1b, J2, link 2 and J3's offset line.
+  - The spherical 3R (u1, RK u2, RK u3) is then solved in closed form.
+  - The pin knee absorbs the drift as before.
+  - The residual is 0.016 deg.
