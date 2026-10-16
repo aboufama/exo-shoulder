@@ -39,8 +39,11 @@ Nothing was invented. Where a number was not reached, the table says so.
   - The compact remote-centre class cannot ride a 2-14 mm band over the shoulder cap. A concentric shell at the CXD
     radius (60 mm) is in band in only 37 % of cap directions at rest, and 75-83 % of directions lie inside the body
     overhead (section 3, computed here).
+    **[Red team: overreach.]** This holds only for links on one constant-radius sphere. It was tested on a full
+    shell, not on a link patch that moves with the arm. Our own leader is also a concurrent-axis (remote-centre) 3R.
+    See "Red team (independent re-check)", B5.
   - Our leader keeps 90 % of its sampled metal 2-14 mm off a posed skin. It does so with 3 rotations, 2 passive pins
-    and no passive translation.
+    and no passive translation. **[Red team.]** In the user's 2-10 mm aim band the share is 0.538.
   - Every built device that handles girdle / GH translation uses more freedoms:
     - Harmony and MGA: active girdle DOF;
     - NESM-gamma: 6 passive DOF including a slider;
@@ -57,8 +60,8 @@ Nothing was invented. Where a number was not reached, the table says so.
   - **Hardware.** Every device in the table was built. Most were tested on people: Harmony, NESM-gamma, CXD and
     Myoshirt (10 participants), Proietti's soft wearable (10 people with ALS). Ours exists as a bench model and
     keep-out CAD.
-  - **Actuation.** None. MVP1 is unpowered. Every rehab exo here is powered. Passive industrial exos deliver 6-13 N.m
-    of assist [R, Ding 2023 Table 1].
+  - **Actuation.** None. MVP1 is unpowered. Every rehab exo here is powered. Passive industrial exos deliver
+    **5.5-13 N.m** of assist [R, Ding 2023 Table 1; red team corrected from "6-13": Comau MATE gives 5.5 N.m].
   - **Validation.** One body model, with a girdle law that the literature contradicts by 2-3x in superior GH lift
     (docs/research/gh_translation_literature.md). There are no human trials and no measured stand-off.
   - **Mass.** Not yet computed.
@@ -81,13 +84,13 @@ Abbreviations:
 
 | Device (class) | Shoulder DOF act / pas | GH tr. handling | ROM (overhead?) | Stand-off from skin | Mass | Singularity handling | Built / validated | Ref |
 |---|---|---|---|---|---|---|---|---|
-| **Ours: skin-normal-3r-pin-knee k4598** (unpowered PoC, simulated) | 3 sensed pins (axes through GH) / 2 passive pins (cuff knee), 0 passive translations; base on the user's scapula handler (outside the count) | Scapula-handler base + planar two-pin knee that absorbs the J3 drift in hub 3's plane (2-slide closure theorem) | Reach 0.606 of the sampled functional workspace; overhead (elev >= 140) 0.25 | **0.904 of metal points 2-14 mm** on covered poses; contact 0.009 of poses (Bench(110,360), exact) | Not computed (5 mm pin stack, 12.25 mm hubs) | Not avoided: the J2 fold (window 2 min(a1, a2) - 20 ~ 60 deg vs 27-141 deg needed) is the limiter | Bench + L1 keep-out CAD only; no hardware, no subjects | concept doc |
+| **Ours: skin-normal-3r-pin-knee k4598** (unpowered PoC, simulated) | 3 sensed pins (axes through GH) / 2 passive pins (cuff knee), 0 passive translations; base on the user's scapula handler (outside the count) | Scapula-handler base + planar two-pin knee that absorbs the J3 drift in hub 3's plane (2-slide closure theorem) | Reach 0.606 of the sampled functional workspace; overhead (elev >= 140) 0.25 | **0.904 of metal points 2-14 mm** on covered poses; contact 0.009 of poses (Bench(110,360), exact). In the user's 2-10 mm aim band: **0.538** [red team; concept doc, verified numbers] | Not computed (5 mm pin stack, 12.25 mm hubs) | Not avoided: the J2 fold (window 2 min(a1, a2) - 20 ~ 60 deg vs 27-141 deg needed) is the limiter | Bench + L1 keep-out CAD only; no hardware, no subjects | concept doc |
 | **Harmony** (UT Austin; rehab, bilateral) | 5 active (girdle: 1 revolute elevation + 1 parallelogram protraction; GH: 3 revolute) / 0 | Active 2-DOF girdle mechanism with a scapulohumeral-rhythm controller; girdle ROM 50 elev / 5 dep / 20 prot / 45 retr deg [R] | Abd 118 (170 with ER), flex 160, ext 45, ER 79, IR 80 deg (Table 3) [R]: **overhead yes**. With the girdle locked, the arm was "impeded to elevate above 80 deg" [R] | "-". Abduction limited by "interference between J5 and the head" [R], i.e. GH links ride above the shoulder [I] | 31.2 kg excluding the frame, bilateral (Table 1) [R] | Acute joint angles a = b = 60, g = 18 deg trade internal-rotation ROM against the J3-J4-J5 singularity (Fig. 4) [R] | Built; ROM and parasitic forces on users | [H1] |
 | **ANYexo 2.0** (ETH; rehab) | "All relevant DOF of the human arm" incl. a controlled shoulder coupling [S]; exact count not read | Robot shoulder-girdle elevation joint coupled to humeral elevation, GED = -0.0053 theta^2 - 0.0162 theta + 20.5 deg (<= 96 deg), a 51 deg swing [R, earlier read, gh_translation_literature.md] | "Most ADLs" [S]; joint speeds 200 / 398 / 354 % of ADL needs at shoulder / elbow / wrist [S] | "-" | Not confirmed. A secondary source gives 12.98 kg for "ANYexo", version unclear [S] | "-" (full text rate-limited this session) | Built; motion capture with 2 participants for the coupling [R, earlier read] | [A1] |
 | **MGA** (Maryland-Georgetown-Army; rehab) | 4 active (scapula 1 + GH 3) + elbow / passive fit adjustments | 1 active scapula elevation/depression joint, +30 / -30 deg; its axis is normal to the back (Table IV) [R] | GHR1 +180 / -45, GHR2 +90 / -65, GHR3 +210 / -30 deg (Table IV) [R]: overhead yes by joint range | "-"; GHR2 "located to the side and slightly beneath the shoulder" [R] | ~12 kg prototype [R] | Two GH singularities 180 deg apart "can be moved, but cannot be eliminated". J1 tilted 30 deg; J1-J3 at 135 deg at rest "to allow the arm to abduct further" [R] | Built (2 rapid prototypes + final) | [M1] |
-| **CADEN-7 / EXO-UL7** (UW / UCLA; rehab, cable-driven) | 3 active GH / 0 | GH as a fixed ball-and-socket (3 orthogonal axes at the humeral-head centre), justified for activities up to 90 deg elevation (sec. II-D) [R] | Table III title: "achieves 99 % of the ROMs required to perform daily activities" [R] | "-"; humeral rotation by an open semicircular rail (3 x 60 deg THK segments) [R, ring_and_shell_hardware.md] | Link 1 3.5 kg, links 2-7 6.3 kg [R] | J1-J3 singularity placed at "anthropometrically hard to reach" poses (ext 47.5 + abd 53.6, or flex 132.5 + add 53.6 deg); movable in 15 deg steps [R] | Built | [C1] |
+| **CADEN-7** (UW; rehab, cable-driven; EXO-UL7 is its later UCLA successor and is not the source of these numbers [red team]) | 3 active GH / 0 | GH as a fixed ball-and-socket (3 orthogonal axes at the humeral-head centre), justified for activities up to 90 deg elevation (sec. II-D) [R] | Table III title: "achieves 99 % of the ROMs required to perform daily activities" [R] | "-"; humeral rotation by an open semicircular rail (3 x 60 deg THK segments) [R, ring_and_shell_hardware.md] | Link 1 3.5 kg, links 2-7 6.3 kg [R] | J1-J3 singularity placed at "anthropometrically hard to reach" poses (ext 47.5 + abd 53.6, or flex 132.5 + add 53.6 deg); movable in 15 deg steps [R] | Built | [C1] |
 | **ArmeoPower / ARMin III** (ETH / Hocoma; rehab, commercial) | 3 active shoulder + elbow / 0 | "Ergonomic shoulder actuation" that moves the humeral head, from a simplified shoulder model [S] | IE -90 to +90 deg [S, via ring_and_shell_hardware.md] | "-" | "-" | "-" | Commercial. Comfort study (20 subjects): only marginally better than a ball-and-socket design [S] | [AR1, AR2] |
-| **NESM-gamma** (SSSA; rehab) | 4 active (3 shoulder + elbow) / **6 passive** self-alignment DOF (P1 vertical slider, P2-P4 lockable rotations, ...) [R] | Passive chain; median GH-COR deviation < 20 mm and shoulder RMSE < 5 deg with it unlocked (8 subjects) [S] | IE 116 deg [R]; elevation range not read | "-" | ~12.8 kg [R] | "-" | Built; 8 subjects | [N1, N2] |
+| **NESM-gamma** (SSSA; rehab) | 4 active (3 shoulder + elbow) / **6 passive** shoulder self-alignment DOF: P1 vertical slider; P2-P4, three planar pins "allowing free translation and rotation on the horizontal plane"; P5-P6 ball joints on the trunk link. A 7th, P7, is a forearm linear guide [R, red team re-read sec. II] | Passive chain; median GH-COR deviation < 20 mm and shoulder RMSE < 5 deg with it unlocked; up to 50 mm when locked (8 subjects) [R, red team re-read of the TNSRE abstract; was S] | IE 116 deg [R]; elevation range not read | "-" | ~12.8 kg, **movable part only** [R] | "-" | Built; 8 subjects | [N1, N2] |
 | **Dampace / Limpact** (Twente; rehab) | 3 rotations, decoupled from passive translations [S] | Self-aligning: rotations decoupled from passive translations [S] | "-" | "-" | "-" | "-" | Built | [D1] |
 | **ABLE** (CEA; rehab / haptics) | 3 active shoulder + elbow (4-axis) / 0 | None stated | One shoulder axis 110 deg, elbow 130 deg (Table I amplitudes) [R] | "-"; the 2nd joint is a circular guide, "free of singularity and not invasive" [R] | Table I: ~3.0 kg and ~10.0 kg (column assignment unclear in the text) [R] | Circular-guide joint (no 3R singularity at that axis) [R] | Built | [AB1] |
 | **BONES** (UCI; rehab, pneumatic) | 3 shoulder + elbow (4 DOF) via a parallel mechanism with 2 passive sliding rods / 0 | None (fixed GH) [I] | Shoulder 105 / 80 / 100 deg about an arm-horizontal home (Table I) [R]: elevation not to full overhead [I] | "-" | 18.5 kg total incl. grounded actuators; 4.36 kg moved by the user [R] | ZYX singularity "not in the range of motion" [R] | Built | [B1] |
@@ -95,7 +98,7 @@ Abbreviations:
 | **ASU SPM + slip** (Hunt, Artemiadis, Lee) | 3-DOF spherical parallel manipulator / 2-DOF passive slip (1 rot + 1 trans) [S] | Slip interface absorbs GH translation [S] | Spherical surface centred on the shoulder [S] | "-" | ~5.4 kg excl. power and controller (patent) [S] | Parallel (SPM) [S] | Built | [P1] |
 | **CXD scissors shoulder** (Aalborg; compact remote centre) | 3 GH rotations (scissor SPM, serial-equivalent) + 1 elevation joint / 0 [R] | 1 shoulder-elevation DOF [R] | 0.236 m3 = 68.1 % of the full and 95.0 % of the protraction-locked reachable workspace (1 subject) [R]; IR / ER 46 / 58 deg [R] | Sphere radius **60 mm** (Table 2) [R]. On our body a 60 mm shell sits -11 / 12 / 20 mm (p10 / 50 / 90) off the cap at rest and is inside the body in 75-83 % of directions overhead [est., section 3] | "-" | "Practically singularity-free"; singular only fully folded / stretched, kept out by an 8 deg intrusive angle [R] | Built (3D-printed steel links); 1 subject | [X1] |
 | **Double-parallelogram shoulder** (Christensen & Bai 2018) | 3 rotations about a remote centre [S] | None stated | Singularity-free in the shoulder workspace [S, via X1] | "Protrudes out of the shoulder region", "lack of compactness" [R, critique in X1] | "-" | Singularity-free [S] | Prototype | [X1, DP1] |
-| **Passive industrial**: ShoulderX, AirFrame (Levitate), EksoVest, Ekso EVO, Skelex 360-XFR, Paexo (Ottobock), Hilti EXO-O1 / EXO-S | 1 assisted elevation axis + passive joints (typical) [I] | Passive alignment joints [I] | Overhead work is the use case; Ding 2023's own passive exo: flexion 150.7 +- 3.0 deg with the exo vs 155.2 +- 4.9 without (Table 2) [R] | "-" (none publish it) | ShoulderX 3.17, AirFrame 2.7, EksoVest 4.3, Skelex 360-XFR 2.5, PAEXO 1.9 kg (Table 1) [R]; Ekso EVO 4.1 kg (datasheet) [S]; Hilti EXO-O1 < 2 kg, EXO-S 2.4 kg [S]; Skelex 360 2.85 kg [S] | n/a (1 DOF) | Sold commercially; lab and field studies | [I1-I5] |
+| **Passive industrial**: ShoulderX, AirFrame (Levitate), EksoVest, Ekso EVO, Skelex 360-XFR, Paexo (Ottobock), Hilti EXO-O1 / EXO-S | 1 assisted elevation axis + passive joints (typical) [I] | Passive alignment joints [I] | Overhead work is the use case; Ding 2023's own passive exo: flexion 150.7 +- 3.0 deg with the exo vs 155.2 +- 4.9 without (Table 2) [R] | "-" (none publish it) | ShoulderX 3.17, AirFrame 2.7, EksoVest 4.3, Skelex 2.5 (Table 1 does not name the model; "360-XFR" removed by red team), PAEXO 1.9, Comau MATE 3.5 kg (Table 1) [R]; assist 5.5 (MATE) to 13 N.m (EksoVest) [R, red team]; Ekso EVO 4.1 kg (datasheet) [S]; Hilti EXO-O1 < 2 kg, EXO-S 2.4 kg [S]; Skelex 360 2.85 kg [S] | n/a (1 DOF) | Sold commercially; lab and field studies | [I1-I5] |
 | **Soft: Harvard textile pneumatic shoulder** (2017; ALS 2023) | Textile actuators: abduction + horizontal flexion / extension [S] | Garment on the skin [I] | "-" | Folds flat under clothing when deflated [S]; the inflated bulk in the axilla is not stated | **150 g added per limb** (Proietti 2023 abstract) [S] | n/a | Built; 10 people with ALS [S] | [SF1, SF2] |
 | **Soft: Myoshirt** (ETH; cable exosuit) | 1 assisted elevation (cable tendon) [S] | Garment [I] | "-" | Garment on the skin; actuator + control box carried off the arm [S] | Actuator + control box ~4 kg [S] | n/a | Built; 10 unimpaired + 2 impaired; fatigue onset +51.1 s (36.1 %), muscle activity -49.1 % [S] | [SF3] |
 
@@ -184,7 +187,9 @@ GH centre. If the cap were a sphere, such a shell would be the ideal skin-hugger
     which our 14 mm band forbids (hub 2 would sit 93-115 mm from GH).
 - **Built hardware.** None. Every surveyed device exists.
 - **Actuation.** None (MVP1). Rehab exos produce 18-92 N.m at the shoulder: ABLE 18 N.m, Harmony 34.4 N.m, MGA 92 N.m
-  stall [R]. Passive industrial exos give 6-13 N.m [R]. Routing actuation into a 14 mm band is unsolved
+  stall [R]. **[Red team.]** These mix ratings: Harmony's 34.4 is continuous torque (Table 1), MGA's 92 is stall torque
+  (Table IV). ABLE's 18 could not be re-checked (HAL bot wall); its abstract states ~40 N continuous at the hand.
+  Passive industrial exos give **5.5-13 N.m** [R, Ding 2023 Table 1; red team corrected from 6-13]. Routing actuation into a 14 mm band is unsolved
   (docs/research/sim_to_real_gaps.md G1: cable tension 0.9-2.2 kN at a hub-radius pulley).
 - **Validation.** One rig body. Its girdle law under-predicts GH lift 2-3x, with 16-51 mm vector error at 90-135 deg
   (gh_translation_literature.md). No human subjects. No loaded fit: under assist the cuff moves 11-27 mm
@@ -324,3 +329,177 @@ Repo
   docs/concepts/offset-skin-normal-3r.md (closure theorem statement), docs/research/proximity_atlas.md,
   docs/research/gh_translation_literature.md, docs/research/sim_to_real_gaps.md,
   docs/research/ring_and_shell_hardware.md, docs/research/sota_shell_standoff.py (section 3).
+
+---
+
+## Red team (independent re-check, 2026-10-16)
+
+Written by a reviewer who did not write the survey above. It took a 40 min time box. Sources were re-read in full
+where they could be fetched: Harmony, MGA, CADEN-7, NESM-gamma (RA-L and TNSRE), BONES, CXD, Ding 2023 (Europe PMC
+XML) and Jarrasse & Morel 2010. Pages that could not be fetched were read through search excerpts or patent pages,
+marked [S]. Corrections made above are marked "red team" in place.
+
+### A. Numbers re-checked at the source (32 checked)
+
+**Confirmed [R].**
+- **Harmony** [H1].
+  - Table 1: 31.2 kg excluding the frame; 34.4 N.m continuous at the shoulder.
+  - Table 3: abduction 118 (170), flexion 160, extension 45, ER 79, IR 80 deg.
+  - Sec. 6.1: girdle 50 / 5 / 20 / 45 deg.
+  - Sec. 3.2: a, b, g = 60 / 60 / 18 deg. The Fig. 4 caption ties smaller a, b to the internal-rotation singularity.
+  - Sec. 6.2: girdle locked -> "impeded to elevate above 80 deg"; abduction limited by "J5 and the head".
+- **MGA** [M1].
+  - Table IV: GHR1 +180 / -45, GHR2 +90 / -65, GHR3 +210 / -30, scapula +30 / -30 deg; 92 N.m stall.
+  - Sec. III-B: J1 tilted 30 deg; 135 deg J1-J3 angle at rest.
+  - Sec. VI: "about 12 kg".
+- **CADEN-7** [C1].
+  - Table III title: 99 % of ADL ranges.
+  - Sec. III-D: 3.5 / 6.3 kg; GH modelled as a ball and socket "up to 90 deg of arm elevation".
+  - Sec. IV-D: singularity at 47.5 + 53.6 deg and 132.5 + 53.6 deg; movable in 15 deg steps.
+  - Sec. IV-B: three 60 deg THK curved-rail segments.
+- **NESM-gamma** [N1, N2].
+  - Sec. II: 12.8 kg ("the movable part"); P1 slider; P2-P4 planar pins; P5-P6 ball joints; IE 116 deg.
+  - TNSRE abstract: 8 subjects; RMSE < 5 deg; median GH-CoR deviation < 20 mm; up to 50 mm when locked.
+- **BONES** [B1].
+  - Table I: 105 / 80 / 100 deg.
+  - Sec. II-D: 18.5 kg total; 4.359 kg moved (3438 + 921 g); the ZYX singularity "is not in the range of motion".
+- **CAREX** [CX1].
+  - 1.32 kg including the orthosis; 7 cables controlling 4 DOF.
+  - GH centre error < 1.5 cm, in simulation only; translations "not controlled"; one subject.
+- **CXD** [X1].
+  - Table 2: R 60 mm, alpha 35 deg, beta 8 deg, pitch 32-136 deg.
+  - Sec. 3: ER / IR 58 / 46 deg; 5 DOF in total (elevation + 3 SSM + elbow).
+  - Sec. 4: 0.236 m3 = 68.09 % / 94.97 %; one subject.
+- **Ding 2023** [I1].
+  - Table 1 masses: ShoulderX 3.17, AirFrame 2.7, EksoVest 4.3, Skelex 2.5, Paexo 1.9 kg.
+  - Table 2: flexion 150.72 +- 2.97 deg with the exo vs 155.16 +- 4.88 deg without.
+- **Our own row** (docs/concepts/skin-normal-3r-pin-knee.md, "Verified numbers").
+  - 30.35 / 88.96, reach 0.6056, in-band 0.9043, contact 0.0091.
+  - Window [43.7, 104.4] = 60 deg; needed 27-141 deg (22-146 overhead).
+  - Hub 2 at 93-115 mm, gap 64.54-79.55.
+  - Cable tension 0.87-2.2 kN (sim_to_real_gaps.md).
+
+**Confirmed [S]** (search excerpts or patent pages):
+- ASU: 5.4 kg excluding batteries and controller (US 10,800,031). Its slip is one passive cuff joint, 1 rotation + 1
+  translation: an inner cuff sliding axially in an outer cuff (US 10,814,473, Google Patents page).
+- Myoshirt: +51.1 s (36.1 %) to fatigue onset; -49.1 % muscle activity in the functional task; actuator + box 4 kg;
+  10 + 2 participants.
+- Proietti 2023: 150 g per limb; 10 people with ALS.
+- Ekso EVO: 4.1 kg on the maker's sheet. Retailer listings give 4.3 and 7.8 kg.
+- Hilti EXO-S: 2.4 kg.
+
+**Wrong or unsupported (corrected or flagged in place):**
+1. **Passive industrial assist "6-13 N.m" (also "6.1-13").** Wrong lower bound. Ding 2023 Table 1 lists Comau MATE at
+   5.5 N.m, so the commercial range is **5.5-13 N.m**; with research devices (Rossini 3 N.m) it is 3-13. Corrected in
+   sections 1 and 5 and in the table.
+2. **"Skelex 360-XFR 2.5 kg (Table 1)".** Table 1 says "Skelex (de Vries et al., 2019)" and names no model. Corrected.
+   MATE (3.5 kg) was added; it was missing.
+3. **"Rehab exos 18-92 N.m".** This mixes Harmony's continuous rating (34.4) with MGA's stall rating (92). ABLE's
+   "18 N.m" could not be re-checked: HAL returned a bot wall to curl and to the fetcher. ABLE's abstract gives
+   "around 40 N continuous effort at the hand". Flagged in place.
+4. **NESM-gamma "~12.8 kg".** This is the movable part only (sec. II). "6 passive DOF" is right for the shoulder, but
+   the device carries a 7th passive DOF, P7, a forearm linear guide, so it has 2 passive translations in all. Three
+   of its passive joints, P2-P4, are pins that absorb planar translation. That bears on novelty claim 3.
+5. **"CADEN-7 / EXO-UL7".** Every number comes from the 2007 CADEN-7 paper. EXO-UL7 is the later UCLA device.
+   Relabelled.
+6. **Omitted number (optimistic framing).** The survey reports only the 2-14 mm share (0.904). In the user's 2-10 mm
+   aim band the verified share is **0.538**. Added in sections 1 and 2.
+7. **"The compact remote-centre class cannot ride a 2-14 mm band by geometry".** Unsupported as worded; see B5.
+   Flagged in place.
+8. **ANYexo 2.0 mass (12.98 kg, secondary).** Still unconfirmed. The ETH full text is over 15 MB and was not
+   downloaded.
+
+### B. Novelty claims, attacked
+
+1. **Fold-versus-skin frontier: weakened.** Coupling singularity placement to clearance from the body is published:
+   - **Harmony** [H1, sec. 3.2, Fig. 4] trades J4's clearance from the shoulder and head against the J3-J4-J5
+     singularity through the same axis angles. It says that body-surface interactions are "impossible to model
+     accurately" and settles the trade with 3D-printed mock-ups.
+   - **Carmichael & Liu 2015** (Springer STAR 105:245-258, doi 10.1007/978-3-319-07488-7_17) [S]: a genetic algorithm
+     maximises the shoulder exo's ROM "whilst taking into account collisions and kinematic singularities".
+   - **Keemink et al. 2018** (IEEE TNSRE 26(4):817-829, doi 10.1109/TNSRE.2018.2811503) [S]: a non-orthogonal
+     redundant 4R shoulder that avoids the 3R's singularities "and collisions with the human head, arm and trunk".
+     **Lo & Xie 2014** (Robotica) [S] analyse the 3R's ROM loss near singularity and optimise a redundant 4R over 89
+     workspace positions.
+   - What survives is the two-sided version. It has an upper bound on stand-off (14 mm), not only "no collision". It
+     gives a quantitative frontier (window 60 deg vs 27-141 deg needed; hub 2 at 93-115 mm) on one body.
+   - It is a negative result for the GH-ray-hub 3R. It does not cover the redundant non-orthogonal 4R, which the
+     field uses to escape the fold. The 4R fits the user's cap ("or 4 joints"), though the user prefers 3 DOF.
+2. **2-slide closure theorem: weakened.** **Jarrasse & Morel** give the general constructive rank / isostaticity
+   condition for passive fixations (RSS 2010, p15; journal version IEEE T-RO 2012, "Connecting a human limb to an
+   exoskeleton", not re-read).
+   - For an exo ball joint at M1, the arm fixation must generate 3 independent velocities at M1. They name the
+     options: three translations, or "two pivot joints perpendicular to the arm main axis and one translation joint
+     collinear" with it [R, RSS 2010 sec. III].
+   - Our statement is a special case: J1 and J2 on GH rays make the drift planar, so 2 freedoms suffice. It may be new
+     as that special case. It should be stated as a corollary of the isostaticity condition, not as a theorem.
+   - Caveat: with 2 freedoms instead of 3, the loop is isostatic only while the drift stays exactly planar. Real
+     scapular motion and soft tissue break that; the knee-window losses (23 poses) hint at it.
+3. **Two-pin planar knee, 0 passive translations: weakened.**
+   - Pins that absorb translation are published:
+     - Jarrasse & Morel: two pivots perpendicular to the arm at the cuff, plus one slide.
+     - NESM-gamma: P2-P4, three planar pins "allowing free translation ... on the horizontal plane".
+     - Harmony: a pin parallelogram that translates the GH centre (active).
+   - The ASU patent US 10,814,473 does **not** anticipate the knee. Its slip is a translational cuff (1 rotation + 1
+     translation) [S, Google Patents page; the USPTO PDF is a scan].
+   - What survives: the specific layout, two pins in hub 3's plane with no slide, closing a GH-ray-hub 3R. It was not
+     found in this time box.
+4. **Proximity-scored bench: weakened.** Collision-aware design optimisation on human-body models is established:
+   - Carmichael & Liu 2015.
+   - Keemink 2018.
+   - A human-centred kinematic optimisation from HIT (human-device geometric constraints, MOPSO) [S].
+   - Offset-from-scan design at 2-5 mm with intersection checks, standard in custom protective gear and orthoses
+     (e.g. US 11,826,632) [S].
+   - What survives: a per-point, two-sided skin-distance band on posed skins over clip and workspace poses, re-measured
+     by an independent verifier under a frozen-shape protocol. No direct prior was found.
+   - It is a methods contribution, not a device result. Nobody else optimises this metric, so leading on it shows
+     difference, not progress, until the band is shown to matter to wearers (comfort, clothing, snag).
+5. **Concentric-shell yardstick: holds as a number, but the conclusion overreaches.**
+   - It tests a full sphere of rays, including rays into the arm and the trunk. A real CXD-type mechanism occupies a
+     patch that moves with the arm, and at rest 37 % of directions are in band, so a patch could exist.
+   - Our own leader is also a remote-centre (concurrent-axis) 3R. What differs is that its links are not on one
+     constant-radius sphere.
+   - The comparison is not like for like. Ours is a share of metal points; the shell's is a share of directions.
+   - The supportable statement: links of one constant radius around GH cannot stay in band over the cap. That is
+     the CXD and scissor-SPM subclass, not "the compact remote-centre class".
+
+### C. Prior art the survey missed
+
+- Jarrasse N, Morel G. RSS 2010, "On the kinematic design of exoskeletons and their fixations with a human member"
+  (https://roboticsproceedings.org/rss06/p15.pdf) [R]. Journal version: IEEE T-RO 28(3), 2012 (not re-read). This is
+  closure / isostaticity theory, with a worked 4-DOF shoulder-elbow example.
+- Naf MB et al. "Misalignment compensation for full human-exoskeleton kinematic compatibility: state of the art and
+  evaluation". *Appl Mech Rev* 70(5) [S]. A review in 9 categories; the right yardstick for claim 3.
+- Keemink AQL, van Oort G, Wessels M, Stienen AHA (2018). Redundant non-orthogonal 4R shoulder. *IEEE TNSRE*
+  26(4):817-829 [S]. It handles singularity and body collision together, inside a 4-joint cap.
+- Lo HS, Xie SQ (2014). "Optimization and analysis of a redundant 4R spherical wrist mechanism for a shoulder
+  exoskeleton". *Robotica* [S]. Section 6 cites "Lo & Xie (cited in X1)" but this paper was not reached.
+- Carmichael MG, Liu DK (2015). Biomechanical-model-based optimal design of a shoulder exo (ROM vs collisions vs
+  singularities) [S].
+- suitX (US Bionics) US 12,029,699 B2, priority 2020-03-19 [S]: a passive remote-centre shoulder joint whose stated aim
+  is that it "minimizes the profile of the device" throughout its range of motion. Low profile over ROM is therefore
+  already an explicit commercial design objective, though unquantified.
+- AssistOn-SE (Ergin & Patoglu, ICRA 2012) [S]: a self-aligning shoulder-elbow exo that uses passive GH-centre
+  translations. Harmony cites it.
+- Awad et al.: a 3-PRR double-layered elbow interface, +-15 deg and 30 mm self-alignment [S]. A published
+  self-aligning cuff closure.
+- Ding 2023 Table 1 entries left out of the table: Comau MATE (3.5 kg, 5.5 N.m), Hyundai H-VEX (2.5 kg, 10 N.m) and
+  H-PULSE (5 kg, 5.5 N.m) [R].
+- **A published protrusion number exists, though not peer reviewed.** A Northern Arizona University capstone shoulder
+  exo (2022) set "cannot protrude more than 10 cm from the body" and reports 4.5 in at maximum [S]. Hilti publishes the
+  EXO-S envelope as 450 x 250 mm [S]. "Nobody publishes stand-off" should read "no peer-reviewed shoulder exo found
+  reports a measured stand-off distribution".
+
+### D. Bottom line
+
+Real progress against the state of the art has not yet been shown. What exists is a new simulated design point on one
+axis: metal held 2-14 mm off a posed skin (0.904, but only 0.538 at the user's 10 mm aim) with 3 pins and 2 passive
+pins, on one rig body. Its enabling ideas have close prior art: singularity vs body clearance (Harmony, Carmichael &
+Liu, Keemink), pin-based fixation closure (Jarrasse & Morel, NESM-gamma), collision-aware optimisation on body models,
+and low profile over ROM (suitX). On range (0.25 overhead), hardware, actuation and validation it trails every built
+device. For the claim to hold:
+- build MVP1 and measure stand-off on the user at rest, 90 deg and overhead, with in-band >= 0.9 and zero contact;
+- lift overhead reach to >= 0.6 (test the non-orthogonal redundant 4R inside the 4-joint cap alongside the round-4
+  fold levers);
+- re-measure on the user's scan and the literature girdle law;
+- read Jarrasse & Morel 2012 and Cempini 2013 in full before calling the closure or the knee new.
