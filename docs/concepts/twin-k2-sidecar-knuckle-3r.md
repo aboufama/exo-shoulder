@@ -169,3 +169,25 @@ it loses 6.7 (converged upper bound G: 25.64 frozen) to 48.4 (honest A: 67.32 fr
   th at the K2 gain; with a 3.45 rate cap the law ends after ~10-15 deg of th whatever dA2 the dyad allows.
 - **CMA exploits an empty-sample corner**: a model that skips a part's metal when its host link has no samples gives
   the search a free exit; every drive-metal routine must build from a fallback level, never return early.
+
+## Audit (2026-10-16 ~22:40 UTC, independent re-measure): death STANDS
+
+- **Reproduced through the committed model file**: honest run A 60.86 on Bench(60,160) fast (why: fold 33, parts 31 - all
+  CRK-CRK2), frozen exact Bench(110,360) **67.32** (reach 0.572, follow 0.782, ib14 0.753, ib10 0.465, contact 0.030;
+  near-touch 70.97, min metal 0.05 mm; fold 93 / parts 71 / contact 9; K2 wins 0 frozen poses). The upper bound G reproduces at 16.97 fast.
+- **Convergence gate** (recomputed from the sweep): honest run A best 60.86 (the sweep's best "gap" entries of run A, 23.47,
+  are dishonest - K2 idle or hub2-K2 < 22 mm, objective +100 - correctly excluded); bound runs D+G and C+H converged;
+  B/E/F loophole entries are logged as dishonest. Gate holds.
+- **Modelling bugs / over-strict checks looked for**: the K2-idle rule (K2 must open on >= 1 taken pose) and the
+  hub2-K2 >= 22 mm gate are the morphology's definition and O20 geometry, not over-strictness; the 1 mm near-touch
+  objective is the round rule. Crank 2 is placed on one side only (+ax); that side choice was not swept, but it cannot
+  matter: the bound with drive-2 metal deleted already loses.
+- **New decomposition (measured)**: at bound G's seats, turning the K2 law OFF (hub K2 metal kept) gives 18.21 fast vs
+  16.97 with it ON - **the K2 law is worth 1.24 fast points and 0 frozen fold poses** (87 vs 86). The lead scores 10.30
+  through the same parent, so hub K2 + the dog-legged link 2a/2b cost ~8 fast points (hub K2 0.47-0.53 in band, link 2a
+  0.57-0.60), and drive 2's metal another ~44 (crank 2 / rod 2 0.0 in band at 22-29 mm, CRK-CRK2 on 31 poses).
+- The task's legacy criterion (within 10 of the champion 68.93 on Bench(60,160)) is met trivially (60.86), but it is not
+  the kill line in round 9: the lead's verified 18.91 is, and no embodiment of this morphology can reach it.
+
+**One line**: the second slaved knuckle's law buys at most 1.24 fast points (0 frozen fold poses) while its O20 hub over
+the overhead-raised deltoid costs ~8 and a second drive in hub 2's skirt ~44; dead, converged.
