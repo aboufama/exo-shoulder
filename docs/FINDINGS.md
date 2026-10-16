@@ -834,4 +834,7 @@ got a kinematic and an in-band ceiling (`ceilings.py`, `frontier_mine.py`).
   line. Not what the plateau is made of.
 * **What follows.** The zero-complexity levers (the 5 deg margin, 360-pose seats) add ~+0.04-0.07.
   0.90 needs a second window (relay or 4th joint) with hub 2 in band in that state; the next gate for every fold lever
-  is where hub 2 / the pivot parks in the poses it rescues (`relay_parking.py`).
+  is where hub 2 / the pivot parks in the poses it rescues (`relay_parking.py`). Measured for a two-state J1-J2 arc
+  relay at the pin knee's seats (40 <-> 84 deg, kinematic 0.947): state A needs hub 2 at 51-55 mm, the 114 poses only
+  state B closes need a median 70.5 / p90 205 mm, so one hub level keeps A in band and clears only 30-45 % of B:
+  ~+0.09-0.14 of reach at best, not +0.32.

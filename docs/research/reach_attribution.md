@@ -199,13 +199,21 @@ tools/simplicity.py with the user's 2026-10-16 weights (lower = simpler; the pin
 | 5 | **Non-fold fixes** (contact, parts, cuff) | <= 0.008 each (2-5 poses per leader) | - | - | +0 | local part edits |
 | 6 | **Coupled schedule** (dwell four-bar knee 5.7 k tries; closure-set arc knee) | none at 0.88 (dwell: 0.700 at in-band 0.84 vs the plain base's 0.688, +0.012; best gap 26.86 fast at in-band 0.843; arc knee refuted, 0.589 at 0.486) | <= the rocker of the same travel; the dwell moves only the window's low end | the four-bar / cam lifts hub 2 or sweeps the cuff link over the arm | 16 (dwell four-bar), 30 (arc knee) | six-bar / cam: pins only |
 | 7 | **Longer knee link** (pin knee: lc 24.9 -> 28 / 31 mm, refit + frozen exact) | **0** (lc 28: the refit re-centres the knee, the same 4 elevation-165 poses fail its window; lc 31: 2 of them admitted, both touch the skin 0.8 / 1.3 mm, gap 30.94) | +4 overhead poses (+0.011) | contact 0.009 -> 0.015 at lc 31 | +0 | same part |
-| 8 | **Two-state arc relay** (a detented mid-joint in link 1, a1 40 -> 77-84) | not modelled | **+0.30-0.33 (0.93-0.95; overhead 0.89-1.00)** - the largest kinematic headroom of any <= 4-joint option | measuring: hub-2 ray requirement in the rescued poses (`relay_parking.py` -> `relay_parking_pin-knee.json`) | 9.5 (a detented passive rotation, its state sensed; 12.5 if the detent counts as a spring) | detent hinges exist (ball-detent / index plunger); the trigger that flips the state is unsolved |
+| 8 | **Two-state arc relay** (a detented mid-joint in link 1, a1 40 -> 77-84) | not modelled (hub-2 parking gate measured: next column) | **+0.30-0.33 (0.93-0.95; overhead 0.89-1.00)** - the largest kinematic headroom of any <= 4-joint option | hub 2 cannot serve both states at one level (pin knee seats, `relay_parking_pin-knee.json`): state A needs it at 51-55 mm (p10-p90; fitted F 60.9), the 114 poses only state B closes need median 70.5, p90 205 mm; at F <= 60 only 30 % of them clear, at <= 75 59 % (then state A sits 20 mm off the skin). Parking bound: ~+0.09-0.14, not +0.32 | 9.5 (a detented passive rotation, its state sensed; 12.5 if the detent counts as a spring) | detent hinges exist (ball-detent / index plunger); the trigger that flips the state is unsolved |
 | 9 | **Redundant 4R, spring-centred 4th** (4-DOF lens park4; 4 joints = at the DOF cap) | **-0.056 at in-band 0.88** (0.644 vs 0.700, one config, contact 0.053); +0.075 at in-band 0.86 (0.781 vs 0.706) | ~1.0 | link 3 0.51 in band, hub 4 0.86; contact 0.038 | 12.5 (passive sensed spring-centred 4th) or 28.5 (4th active) | one more O15 hub + a centring spring; 4th deflects p95 56 deg, max 86 (the spring must carry the chain) |
 | 10 | **Longer or balanced arcs on the plain 3R** (the fold window is 2 min(a1, a2) - 20) | **-0.055** (spine-parked history: every in-band >= 0.88 config has a1 35-45; a1 40-45 best 0.589 vs 0.644 at 37.6) | +0.13-0.15 at the same a1 + a2 rebalanced to 55 / 57; 65-67 shorter arc for 90 % | hub 2 leaves the skin (a1 >= 55: hub 2 level 186-400 mm, spine-parked doc) | +0 | unchanged parts |
 | 11 | **2 cuff slides** (osn) | excluded: in-band never above 0.81 (9825 tries) | = plain 3R | stage parts 62-70 %, bridge 0 % | 17.75 | crossed rails |
 
 Reading the ranking:
 
+* **The relay's parking gate, measured (pin knee seats, a1 40.1 <-> 84, exact skin, both branches).** In state A the
+  J2 ray needs hub 2 at 51-55 mm (p10-p90, branch -1; the fitted hub sits at 60.9). In state B the 114 workspace poses
+  only B closes (17 of them overhead) need it at a median 70.5 mm, p90 205 mm (overhead median 67; the other branch is
+  worse: median 80, overhead 113). A GH-ray hub has one level on its link, so F must lie within 12 mm above every
+  requirement it serves to stay in band: at F ~ 60-65 state A stays in band and 30-45 % of the B poses clear (+0.09 to
+  +0.14 of reach before links, hub 1 and the knee are checked); covering more of B lifts hub 2 out of band in A. The
+  relay is a real lever, but a ~+0.1 one, not +0.3, unless hub 2 moves between states too (a second, sliding hub
+  level = a passive translation along the J2 axis, 1 slide, complexity +2-3 under the new weights).
 * **Benches:** the rocker / dwell rows are Bench(60,160) fast (their histories); the margin / knee rows are frozen
   Bench(110,360) exact. On the 160-pose bench every class tops out at 0.70-0.72 at in-band >= 0.80.
 * **By measured gain at the bar, the best levers are the small ones** (margin, seats, non-fold fixes: +0.01-0.03 each
@@ -237,7 +245,8 @@ Reading the ranking:
   frozen, gap ~23-26. Worth taking, not 0.90.
 * **0.90 needs a second window** - a two-state arc relay (+0.30-0.33 kinematic) or a fourth joint (~1.0) - AND hub 2
   in band in the second state. The lens's spring-centred 4R is the only measured route above 0.75 (0.75 frozen at
-  in-band 0.864, unverified), and it pays in-band on link 3 / hub 4.
+  in-band 0.864, unverified), and it pays in-band on link 3 / hub 4. The two-state relay's own gate is measured: hub 2
+  parks in band for only 30-45 % of the poses its second state rescues (+0.09-0.14 at best, section 4).
 * **Next (queued / to queue):**
   1. this note's farm batch landed (24 / 24 jobs, exo-cpu1 cpu3c-8-16, ~$0.55); the knee-length probes
      (`runs/pin-knee_m10_lc28.json`, `_lc31.json`) landed too (both 0); `python3 docs/research/reach/analyse.py`
