@@ -233,6 +233,15 @@ def rod_parts(dv):
         centres_mm=round(L, 3), eye=f"O{2 * EYE_R:g} x {EYE_H:g}", housing_open_r_mm=round(ro, 3), rod_valid=rod.isValid(), rod_solids=len(rod.Solids()))
 
 
+def trim_slot(k, e, f, lo, hi, z0, z1, rs, w):
+    """arc slot (half width w at radius rs, lo..hi rad in (e, f)): two concentric arcs + two semicircular ends, extruded along k"""
+    P = lambda r, a: (r * math.cos(a), r * math.sin(a)); mid = 0.5 * (lo + hi); ro, ri = rs + w, rs - w
+    c_hi, c_lo = np.array(P(rs, hi)), np.array(P(rs, lo)); t_hi = np.array([-math.sin(hi), math.cos(hi)]); t_lo = np.array([-math.sin(lo), math.cos(lo)])
+    wp = (cq.Workplane(plane(z0 * unit(k), e, f)).moveTo(*P(ro, lo)).threePointArc(P(ro, mid), P(ro, hi)).threePointArc(tuple(c_hi + w * t_hi), P(ri, hi))
+          .threePointArc(P(ri, mid), P(ri, lo)).threePointArc(tuple(c_lo - w * t_lo), P(ro, lo)).close())
+    return wp.extrude(z1 - z0).val()
+
+
 def horn_parts(dv, M):
     """horn hub + plate + pin + 2 screws (link 1a), all at hub K (axis uK, face fK)"""
     uK = dv["uK"]; F = float(M.fK); h = HORN; e = unit(dv["B0"] - (dv["B0"] @ uK) * uK); f = np.cross(uK, e)
@@ -247,8 +256,8 @@ def horn_parts(dv, M):
     screws = []
     for s_ in (+1, -1):
         a = th_pin + s_ * math.pi / 2; cs = h["screw_r"] * (math.cos(a) * e + math.sin(a) * f)
-        plate = plate.cut(USM.arc_slot_cutter(np.zeros(3), uK, a - math.radians(h["screw_half_deg"]), a + math.radians(h["screw_half_deg"]),
-                                              F + h["plate_z"][0] - 0.1, F + h["plate_z"][1] + 0.1, rs=h["screw_r"], w=h["slot_w"]))
+        plate = plate.cut(trim_slot(uK, e, f, a - math.radians(h["screw_half_deg"]), a + math.radians(h["screw_half_deg"]),
+                                    F + h["plate_z"][0] - 0.1, F + h["plate_z"][1] + 0.1, h["screw_r"], h["slot_w"]))
         csk = rev([(0, -1.6), (0.95, -1.6), (0.95, -0.6), (1.55, 0.0), (1.55, 0.2), (0, 0.2)], cs + (F + h["plate_z"][1]) * uK, uK)
         plate = plate.cut(csk)
         hub = hub.cut(disc(cs, uK, 0.65, F + h["hub_z"][0] - 0.1, F + h["hub_z"][1] + 0.1))     # M1.6 tapped (minor O1.3)
