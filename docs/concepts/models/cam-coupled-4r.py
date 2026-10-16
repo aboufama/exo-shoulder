@@ -52,7 +52,7 @@ NAME = "Cam-coupled 4R: a roller on link 2's tail in a scapula-fixed slot schedu
 D2R = math.pi / 180
 # seeds: park4's frozen seats (round-4 four-dof lens: az 102.7, el 68.0, a1 37.6, a2 60, a3 22.3, J4 = wdir(81.36, -14.61))
 PARAMS = dict(az=102.74, el=67.99, wd=81.36, wa=-14.61, a1=37.6, a2=60.0, a3=22.31, mode=1, q1_off=0.0,
-              pz4=98.45, s1=-1, fit=1, m3=0.5, dn_az=0.0, dn_el=0.0, dbeta=0.0,
+              pz4=98.45, s1=-1, fit=1, m3=0.5, ecc=8.0, phi_e=0.0, dn_az=0.0, dn_el=0.0, dbeta=0.0,
               tr=25.0, tp=180.0, n_az=102.74, n_el=67.99, beta=50.0, s_c=0.0, s_half=180.0, pct_lo=0.0, pct_hi=100.0,
               pa_min=0.25, hold_mm=8.0, sing_deg=K.FOLD_MARGIN, margin=K.FOLD_MARGIN,
               width=12.0, t_link=3.0, q=0.98, slot_w=14.0, slot_t=4.0, pad=6.0, near=0)
@@ -205,9 +205,15 @@ def fit_slot(B, p):
     q = dict(p, n_az=0.0, n_el=0.0, beta=90.0); kn = Kin(F, q); ok = kn.pok
     if ok.sum() < 5: return p
     pin = kn.pin(kn.pp2, kn.pp3); X = np.einsum("pji,pj->pi", F.RS, pin)[ok]          # scapula frame
-    c = X.mean(0); w, V = np.linalg.eigh(np.cov((X - c).T)); n = V[:, 0]; d = float(n @ c)
-    if d < 0: n, d = -n, -d
-    beta = math.degrees(math.acos(min(1.0, d))); rms = float(np.degrees(np.sqrt(np.mean((np.arccos(np.clip(X @ n, -1, 1)) - beta * D2R) ** 2))))
+    if int(p.get("fit")) == 2:      # ECCENTRIC J1 GROOVE: n = J1's axis tilted by ecc toward azimuth phi_e; beta = median dwell
+        u = K.bvec(p["az"], p["el"]); e1 = K.unit(np.cross(u, [0.0, 1.0, 0.0]) + 1e-9); e2 = np.cross(u, e1)
+        n = math.cos(p["ecc"] * D2R) * u + math.sin(p["ecc"] * D2R) * (math.cos(p["phi_e"] * D2R) * e1 + math.sin(p["phi_e"] * D2R) * e2)
+        beta = float(np.degrees(np.median(np.arccos(np.clip(X @ n, -1, 1)))))
+    else:
+        c = X.mean(0); w, V = np.linalg.eigh(np.cov((X - c).T)); n = V[:, 0]; d = float(n @ c)
+        if d < 0: n, d = -n, -d
+        beta = math.degrees(math.acos(min(1.0, d)))
+    rms = float(np.degrees(np.sqrt(np.mean((np.arccos(np.clip(X @ n, -1, 1)) - beta * D2R) ** 2))))
     el = math.degrees(math.asin(np.clip(n[1], -1, 1))); az = math.degrees(math.atan2(n[2], -n[0]))
     p = dict(p, n_az=round(az + p["dn_az"], 4), n_el=round(max(-89.0, min(89.0, el + p["dn_el"])), 4), beta=round(beta + p["dbeta"], 4), fit_rms_deg=round(rms, 2))
     kn = Kin(F, p); p2, p3 = kn.pp2[ok], kn.pp3[ok]; u4 = kn.u4[ok]
