@@ -148,6 +148,7 @@ def build(B, F, p):
     if p["at"] == 2: z, rho = np.broadcast_to(j, (P, 3)), ang(np.broadcast_to(j, (P, 3)), ws)
     else: z, rho = ws, np.full(P, p["a2"])
     theta, ok, xang = solve(cv, z, rho, p["sigma"]) if cv["valid"] else (np.zeros(P), np.zeros(P, bool), np.zeros(P))
+    theta = np.where(ok, theta, 0.0)                                           # not closing: park at home (pose-local layout)
     a1, b1, Rc, mg = fb.at(theta); c = mv(Rc, cv["carried"])
     ok &= (mg >= M4) & (xang >= XMIN)
     res = np.abs(ang(c, z) - rho)
