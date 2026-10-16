@@ -121,3 +121,50 @@ complexity. It is not a lead change:
 - Sweep: docs/concepts/sweeps/roller-longdyad-knuckle-3r.json.
 - Row: docs/concepts/rows/roller-longdyad-knuckle-3r.json.
 - Preview: docs/concepts/viz/concepts/roller-longdyad-knuckle-3r.js.
+
+## Verification (independent skeptic, 2026-10-16 ~23:35 UTC)
+
+Harness: `docs/concepts/verify/roller-longdyad-knuckle-3r.py`. It loads the claim's model unchanged and reuses the
+round's roller-flank verifier (`docs/concepts/verify/sidecar-roller-flank-knuckle-3r.py`), retargeted at this claim's
+model class, clamp, params and best config. It adds two checks:
+
+- the own-state fold margin in `th`;
+- the per-pose pressure-angle check at both 43 and 45 degrees.
+
+Protocol: fit on Bench(60,160) fast, freeze the shape, then wear it on Bench(110,360) exact (CB_EXACT=1, on the farm)
+and on the held-out set. Outputs are in `docs/concepts/verify/roller-longdyad-knuckle-3r_v_*.json`.
+
+| frozen exact | plain | 1 mm | 2 mm | reach | follow | ib14 | ib10 | contact | min metal |
+|---|---|---|---|---|---|---|---|---|---|
+| Bench(110,360), claim's sampling | **18.67** | 20.30 | 33.10 | 0.725 | 1.0 | 0.8937 | 0.5132 | 0.0054 | 0.07 mm |
+| Bench(110,360), envelope-corrected (lug flank-edge strip + O5 x 0.8 head) | 18.56 | 20.19 | 33.02 | 0.725 | 1.0 | 0.8948 | 0.5169 | 0.0054 | 0.07 mm |
+| held out | 23.73 | 26.83 | 37.02 | 0.682 | 1.0 | 0.8926 | 0.5122 | 0.0116 | 0.33 mm |
+| champion spherical 3R, same bench (risley-turret verifier) | 75.94 | | | | | | | | |
+
+**Checks on every taken pose: 0 of 371 fail on the bench, 0 of 851 held out.**
+- Cam closure in the world: 0.0 mm.
+- Roller centre to the lug's mid-shell: 3.73 mm minimum, against the 3.0 mm roller radius.
+- K sense always the drive's (0 wrong-sense poses).
+- Pressure angles: crank 8.1, horn 42.7, both <= 43. The real lobe pressure angle is 23.2.
+- K stays inside the flank: dK 45.6 against dK_lim 46.25.
+- The drive is not idle.
+- Fold margin in `th`: minimum 5.181 on the bench (5.031 held out), no pose under 5.
+- Continuity flood: full grid 0 dropped (18.67); knn 20.34.
+
+**Lost poses.** 99 of 360: fold 88, slide 9, contact 2. Overhead 8 of 28 (fold 14, slide 4, contact 2).
+
+**Hard rules.** 3 active DOF. K is slaved by the spring-closed lobe and roller-flank drive. The pin knee is closed by
+the cuff. 0 passive translations, O20 hubs only, and no gears, pulleys or cables.
+
+**Verdict: VERIFIED (not refuted).** v_gap is 18.67 (score 93.21), against the champion's 75.94 on the same bench.
+
+Versus the verified lead (sidecar-longdyad, 18.91 / 20.00 / 34.03, held out 22.67):
+- better on plain (by 0.24) and at 2 mm (by 0.93);
+- worse at 1 mm (by 0.30) and held out (by 1.06).
+
+It is a lower-complexity point (cx 43.75 vs 49) at a level score, not a robust lead change.
+
+**Red team, still open.** These are not measured here:
+- the two deep contact poses (-10.6 / -5.9 mm overhead at plane 15-30, elev 165);
+- the horn pressure angle sitting at the 43-degree cap on the last taken K step;
+- K slop against that cap.

@@ -6,7 +6,7 @@
  "active_dof": 3,
  "passive_dof": 5,
  "passive_translations": 0,
- "status": "screened",
+ "status": "verified",
  "t_ideated": "2026-10-16T21:14:47Z",
  "t_screened": "2026-10-16T22:15:00Z",
  "reach": 0.775,
@@ -15,11 +15,11 @@
  "inband10": 0.5102,
  "contact": 0.0,
  "gap": 13.19,
- "v_reach": null,
- "v_follow": null,
- "v_inband14": null,
- "v_inband10": null,
- "v_gap": null,
+ "v_reach": 0.725,
+ "v_follow": 1.0,
+ "v_inband14": 0.8937,
+ "v_inband10": 0.5132,
+ "v_gap": 18.67,
  "n_configs": 7236,
  "complexity": 43.75,
  "mechanism": {
@@ -252,6 +252,69 @@
  },
  "verdict": "lever DEAD (measured): the long-stroke re-cut flank passes the law-only gate (kin360 0.7778, +13 poses) but cannot be parked - its flank boss sits on the deltoid (88-94 contact poses), lifting it takes the crank out of band, and every co-fit walks back to bk2 38-40.7 / dK_lim 42-47 (= the lead RSSR's 43). Best co-fit (short dyad, PA <= 43, stub head) worn frozen: 18.67 plain / 20.30 at 1 mm / 33.10 at 2 mm vs the lead 18.91 / 20.00 / 34.03, held out 23.73 vs 22.67 - level with the lead at cx 43.75 vs 49, not a lead change (< 1 point, worse held out and at 1 mm).",
  "limiter": "the skin, not the drive kinematics: a conjugate flank long enough for dK 55-57.5 at pressure angles <= 43 runs its contact from r 18 to 30 mm off hub K's axis (lug to 33 mm), onto the deltoid; frozen loss 99 of 360 = fold 88, slide 9, contact 2",
- "note": "Model: docs/concepts/models/roller-longdyad-knuckle-3r.py = the verified roller-flank model loaded unchanged + chain free, PA_MAX 43, the roller's stub head sampled as metal, 2 mm near-touch objective, law-only gate mode, workspace in-band, per-part contact split. 7236 configs: coarse LHS 245 (farm) + CMA 3 rounds (15 streams, 2 mm objective, farm). Red team: drive PA over taken dK crank 8.2 / horn 43.0 (at the cushion's edge); arm vs hub K 1.14 mm, roller vs hub K 2.02 mm (tightest pairs); frozen min metal 0.07 mm at ws (plane -60, elev 60, axial 105); held out 0.33 mm at (150, 15, -180); fast -> frozen +5.48 (optimistic). The verified roller-flank row fails the PA <= 43 rule at rest (crank 44.8): its 20.08 sits 1.8 deg inside the judge's cushion. Every co-fit pushes bk1 and bk2 to their LOWER bounds (26 / 38): a shorter dyad parks better.",
- "doc": "docs/concepts/roller-longdyad-knuckle-3r.md"
+ "note": "Model: docs/concepts/models/roller-longdyad-knuckle-3r.py = the verified roller-flank model loaded unchanged + chain free, PA_MAX 43, the roller's stub head sampled as metal, 2 mm near-touch objective, law-only gate mode, workspace in-band, per-part contact split. 7236 configs: coarse LHS 245 (farm) + CMA 3 rounds (15 streams, 2 mm objective, farm). Red team: drive PA over taken dK crank 8.2 / horn 43.0 (at the cushion's edge); arm vs hub K 1.14 mm, roller vs hub K 2.02 mm (tightest pairs); frozen min metal 0.07 mm at ws (plane -60, elev 60, axial 105); held out 0.33 mm at (150, 15, -180); fast -> frozen +5.48 (optimistic). The verified roller-flank row fails the PA <= 43 rule at rest (crank 44.8): its 20.08 sits 1.8 deg inside the judge's cushion. Every co-fit pushes bk1 and bk2 to their LOWER bounds (26 / 38): a shorter dyad parks better. | VERIFIED 2026-10-16 ~23:35 UTC (skeptic, farm, CB_EXACT): frozen exact Bench(110,360) 18.67 (score 93.21; reach 0.725, follow 1.0, ib14 0.8937, ib10 0.5132, contact 0.0054), 1 mm 20.30, 2 mm 33.10, min metal 0.07 mm; envelope-corrected (lug flank-edge strip + O5 head) 18.56 / 20.19 / 33.02; held out 23.73 (2 mm 37.02). Added checks found 0 failing taken poses: cam closure 0.0 mm, roller never inside the lug, K sense always the drive's, PA crank 8.1 / horn 42.7 <= 43, lobe 23.2, drive not idle (dK 45.6 of 46.25), th margin min 5.181 (held 5.031), flood full 0 dropped / knn 20.34. Champion same bench 75.94 (risley-turret verifier, Bench(110,360) exact, kit checks + 1 mm clearance). Not refuted. Versus the verified lead sidecar-longdyad (18.91 / 20.00 / 34.03, held out 22.67): better plain (+0.24) and 2 mm (+0.93), worse 1 mm (+0.30) and held out (+1.06); a complexity Pareto point (43.75 vs 49), not a robust lead change.",
+ "doc": "docs/concepts/roller-longdyad-knuckle-3r.md",
+ "v_contact": 0.0054,
+ "t_verified": "2026-10-16T23:35:00Z",
+ "verification": {
+  "harness": "docs/concepts/verify/roller-longdyad-knuckle-3r.py (round roller-flank verifier retargeted at the claim's model, + th margin, PA 43 and 45)",
+  "bench_frozen_exact": {
+   "gap": 18.67,
+   "reach": 0.725,
+   "follow": 1.0,
+   "inband14": 0.8937,
+   "inband10": 0.5132,
+   "contact": 0.0054,
+   "near1": 20.3,
+   "near2": 33.1,
+   "min_metal_mm": 0.07
+  },
+  "bench_frozen_exact_envelope": {
+   "gap": 18.56,
+   "near1": 20.19,
+   "near2": 33.02
+  },
+  "held_out_frozen": {
+   "gap": 23.73,
+   "reach": 0.6817,
+   "inband14": 0.8926,
+   "contact": 0.0116,
+   "near1": 26.83,
+   "near2": 37.02,
+   "min_metal_mm": 0.33
+  },
+  "lost": {
+   "fold": 88,
+   "slide": 9,
+   "contact": 2
+  },
+  "overhead": "8/28 (fold 14, slide 4, contact 2)",
+  "flood": {
+   "full": 18.67,
+   "knn": 20.34,
+   "bench_graph": 50.29
+  },
+  "th_margin_min": {
+   "bench": 5.181,
+   "held": 5.031,
+   "lt5": 0
+  },
+  "drive": {
+   "closure_max_mm": 0.0,
+   "roller_lug_min_mm": 3.728,
+   "wrong_sense": 0,
+   "pa_crank_max": 8.1,
+   "pa_horn_max": 42.7,
+   "pa_lobe_real_max": 23.19,
+   "dK_taken_max": 45.62,
+   "dK_lim": 46.25,
+   "poses_failing_extra": 0
+  },
+  "champion_same_bench": 75.94,
+  "files": [
+   "docs/concepts/verify/roller-longdyad-knuckle-3r_v_bench_frozen.json",
+   "docs/concepts/verify/roller-longdyad-knuckle-3r_v_bench_frozen_env.json",
+   "docs/concepts/verify/roller-longdyad-knuckle-3r_v_held_frozen.json"
+  ]
+ }
 }
