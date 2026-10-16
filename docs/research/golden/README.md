@@ -125,3 +125,68 @@ Method (pipeline/gpu_pod/xs.sh, `tools/gpu_bench.py screen` / `cma`, both pods =
 5. **Outside judge**: the 10 best distinct configs by GPU plain gap -> `tools/zc_frontier.py frozen` (the zc model's
    checks + docs/concepts/verify/spine-parked-j2-3r.py top_check, O20, margin 5) on the pods' CPUs: fit Bench(110,360)
    fast -> wear Bench(110,360) EXACT, and the verifier protocol fit Bench(60,160) fast -> wear Bench(110,360) EXACT.
+
+## Pin-knee port (tools/gpu_bench_knee.py) - pod exo-gpu-pinknee
+
+Why: the leader family (skin-normal-3r-pin-knee, H1; raglan-knee-3r routes) is searched by tools/knee_polish.py on
+the CPU farm, which is capped at 5 serverless workers and had a 37-job queue; the zero-complexity port showed a pod runs
+outside that quota. Pod: **exo-gpu-pinknee = 1x NVIDIA RTX PRO 4500 Blackwell (32 GB), 10 vCPU, secure EU-RO-1, $0.72/h**
+(the RTX PRO 4000 at $0.57/h, A4000, 4000 Ada, 2000 Ada, A5000, L4 and A4500 had no instance with the volume at 08:31 UTC;
+this was the cheapest in stock), spool exo-farm/gpuk (`tools/gpu_pod.py create --name exo-gpu-pinknee --spool gpuk`),
+code through the volume (pipeline/gpu_pod/knee0.sh boots and waits for the code tarball; knee1.sh / knee2.sh run
+knee_run.sh / knee_run2.sh). The pod terminates itself when its search ends (idle self-stop 30 min as the safety net).
+
+### What the port is: the kit, accelerated - not a re-model
+
+Every configuration is built by the CPU kit's own code, unchanged: knee_polish.evaluate (same bench) or
+knee_polish.frozen_on + score_model (frozen) -> the pin-knee model (seats on the rest skin along GH rays for J1 / J2,
+the tilted J3 line b3, the spherical IK and fold margin, the closed-form planar knee, its window [ang_min, 180 - ang_min]
+and fixed branch, 10 fps continuity incl. the knee, the part geometry: O20 hubs with the 12.25 stack, 8 x 3 straps with
+skin-fitted undersides and 60 deg ramps, E strap + E boss (O12) on hub 3's member, knee link, arm pad, pin stack, the
+greedy pose drop, finalize, contact-only walls / crowns / tops / edges) -> the verifier's checks -> the near-touch
+audit. tools/gpu_bench_knee.py replaces only the per-pose loops, with batched torch code on the device:
+
+| replaced | by | arithmetic |
+|---|---|---|
+| S.Model.needed (sphere-traced skin requirement, 16 steps, per-pose break, inside-at-start -> BIG, slab test vs the knee / pad boxes for link 2) | `needed`: every pose at once, a per-pose `done` mask = the CPU break | the model's transforms (numpy, all poses at once), float64 |
+| the run loop (`_run_batched`: every non-adjacent pair >= 1 mm - hubs, straps, E strap, knee link, pad; adjacent E-L2 / knee-hub 3 / knee-E >= 0.15 mm; jam rule; metal + contact-only distances; B.res, cmin, why) | `run` + `collide_all`: all valid poses at once, nearest-neighbour minima by brute force (exact distances, as cKDTree) | same sd_cyl / sd_box formulas |
+| the verifier's extra_checks (independent 3D closure of hub 3 / pin a / pin b / both knee axes, knee vs hub 3's upper half 1 mm, E boss vs hubs 1-2, link 1 (1 mm) and link 2 (0.15 mm)) | `extra_checks`, all taken poses at once | same |
+| Bench.dist (trilinear on the int8 grid) | `GridDev.dist` on the device | concept_bench's corner order, float32 corners x float64 weights; points outside the +-260 mm box -> the kit's exact libigl path |
+| v2 only: the seats' exact distance on the rest skin; S.Design.ik | `ExactCached` (the same libigl AABB + fast-winding-number BVH, built once instead of per call: max diff 0.0 on 6.5k points); `ik_vec` (rotm batched instead of per frame: bitwise equal on 6000 frames x 7 configs) | identical |
+
+Margin is a parameter (`--margin`, CB_FOLD_MARGIN set before the kit loads; 5 = the user's ruling); hubs O20 only;
+raglan-knee-3r's routed links (r1t / r1d / r2t / r2d / rc) are installed on the verifier's pin-knee model by the
+raglan model's own `routed_add_links` (great circle bit for bit when |r1d|, |r2d| < 0.25) in BOTH the port and the CPU
+reference.
+
+### Parity (the gate): port on the pod's GPU vs the CPU kit itself on the pod's CPUs, same configs, same bench
+
+Configs (`--mix --leaders`, seed 0): H1, k4598, P5 (+ raglan-knee-3r's best in v2) + 50 inside the rulings: 40 near the
+three leaders at 0.5 / 1 / 2 / 3 x knee_polish's CMA scale, 10 uniform in the polish bounds (FREE), O20, J1 seat on the
+back / acromion top (anterior component <= 0.20). Metrics compared: the knee_polish objective set - gap (verifier-
+corrected), near-touch gap (metal < 1 mm = contact) and < 2 mm, the model's own gap, reach, follow, in-band 2-14 /
+2-10, contact.
+
+| protocol (margin 5, O20) | configs compared | max abs diff: gap | near-touch gap (< 1 mm) | < 2 mm | model gap | reach | follow | in-band 14 | in-band 10 | contact | configs > 0.5 (gap / near-touch) | GPU s | CPU s (procs) |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| same-bench Bench(110,360) (the polish objective) | 53 / 53 | **0.0** | **0.0** | 0.0 | 0.0 | 0.0 | 0.0 | 0.0 | 0.0 | 0.0 | **0** / 0 | 363.9 (6 workers) | 411.4 (3) |
+| frozen: fit Bench(60,160) -> wear Bench(110,360) (the round-3 verifier's protocol) | 53 / 53 | **0.0** | **0.0** | 0.0 | 0.0 | 0.0 | 0.0 | 0.0 | 0.0 | 0.0 | **0** / 0 | 278.4 (6 workers) | 334.3 (3) |
+
+Port v1 (no CPU-side changes), RTX PRO 4500 pod, 2026-10-16 08:36-08:48 UTC. Every one of the 53 configs agrees to the
+last printed digit on every metric in both protocols (parity is exact, not approximate: the kit's arithmetic is replayed
+step for step; the device's float64 matmuls differ from BLAS by ulps at most, and no threshold sat that close). The set
+spans gap 21.5 ... 375 (29 configs < 100; 13 all-contact at 375 same-bench). Leaders, same-bench (plain / near-touch):
+H1 24.57 / 25.68 (= the rebase track's H1 objective at margin 5, 25.68), k4598 29.97 / 34.23, P5 21.54 / 22.08;
+frozen: H1 27.28 / 30.62, k4598 29.63 / 34.48, P5 24.94 / 31.46 (fast grid on the wear bench; the exact-path claims stay
+with the verifier). Also measured on this box before the pod (CPU torch, Bench(60,160) same-bench): 10 configs incl. the
+three leaders and raglan-knee-3r's routed best (22.69 / 29.82 on both sides) - identical.
+
+Files: docs/research/golden/knee_parity_same110.json, knee_parity_frozen.json (per config: params, GPU and CPU metrics).
+
+### Speed
+
+(pending: knee_run2.sh measures v2 with 9 workers; filled in below when the job returns)
+
+### Search
+
+(pending)

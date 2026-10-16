@@ -595,5 +595,119 @@
   "extra": {},
   "remark": "the model routes its links again (PK._Geo fix in the rebase track): 31.52 reproduces exactly at margin 10",
   "delta_gap": -3.7
+ },
+ "gpu_port": {
+  "t": "2026-10-16T08:49:20Z",
+  "tool": "tools/gpu_bench_knee.py",
+  "what": "GPU port of the pin-knee bench path (knee_polish objective: model + verifier extra_checks + near-touch audit), kit code unchanged, per-pose loops batched on the device",
+  "pod": "exo-gpu-pinknee: 1x RTX PRO 4500 Blackwell (32 GB), 10 vCPU, EU-RO-1, $0.72/h",
+  "parity": {
+   "parity_same110": {
+    "n": 53,
+    "n_compared": 53,
+    "bench": [
+     110,
+     360
+    ],
+    "fit": null,
+    "margin": 5.0,
+    "max_abs_diff": {
+     "gap": 0.0,
+     "gap_near1": 0.0,
+     "gap_near2": 0.0,
+     "model_gap": 0.0,
+     "reach": 0.0,
+     "follow": 0.0,
+     "inband14": 0.0,
+     "inband10": 0.0,
+     "contact": 0.0
+    },
+    "n_gap_diff_gt_05": 0,
+    "n_near1_diff_gt_05": 0,
+    "n_errors_gpu": 0,
+    "n_errors_cpu": 0,
+    "gpu_secs": 363.9,
+    "cpu_secs": 411.41,
+    "cpu_procs": 3,
+    "leaders": {
+     "H1": {
+      "gpu": 24.57,
+      "cpu": 24.57,
+      "gpu_near1": 25.68,
+      "cpu_near1": 25.68
+     },
+     "k4598": {
+      "gpu": 29.97,
+      "cpu": 29.97,
+      "gpu_near1": 34.23,
+      "cpu_near1": 34.23
+     },
+     "P5": {
+      "gpu": 21.54,
+      "cpu": 21.54,
+      "gpu_near1": 22.08,
+      "cpu_near1": 22.08
+     }
+    }
+   },
+   "parity_frozen": {
+    "n": 53,
+    "n_compared": 53,
+    "bench": [
+     110,
+     360
+    ],
+    "fit": [
+     60,
+     160
+    ],
+    "margin": 5.0,
+    "max_abs_diff": {
+     "gap": 0.0,
+     "gap_near1": 0.0,
+     "gap_near2": 0.0,
+     "model_gap": 0.0,
+     "reach": 0.0,
+     "follow": 0.0,
+     "inband14": 0.0,
+     "inband10": 0.0,
+     "contact": 0.0
+    },
+    "n_gap_diff_gt_05": 0,
+    "n_near1_diff_gt_05": 0,
+    "n_errors_gpu": 0,
+    "n_errors_cpu": 0,
+    "gpu_secs": 278.37,
+    "cpu_secs": 334.31,
+    "cpu_procs": 3,
+    "leaders": {
+     "H1": {
+      "gpu": 27.28,
+      "cpu": 27.28,
+      "gpu_near1": 30.62,
+      "cpu_near1": 30.62
+     },
+     "k4598": {
+      "gpu": 29.63,
+      "cpu": 29.63,
+      "gpu_near1": 34.48,
+      "cpu_near1": 34.48
+     },
+     "P5": {
+      "gpu": 24.94,
+      "cpu": 24.94,
+      "gpu_near1": 31.46,
+      "cpu_near1": 31.46
+     }
+    }
+   }
+  },
+  "speed": {},
+  "doc": "docs/research/golden/README.md section 'Pin-knee port'",
+  "files": [
+   "docs/research/golden/knee_parity_same110.json",
+   "docs/research/golden/knee_parity_frozen.json"
+  ],
+  "note": "route parameters r1t / r1d / r2t / r2d / rc ported (the raglan model's own routed_add_links on the verifier's pin-knee model); its best config is in the v2 parity set"
  }
 }

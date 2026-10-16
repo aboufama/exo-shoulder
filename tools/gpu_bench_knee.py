@@ -398,9 +398,69 @@ def extra_checks(M, B):
 
 
 # ---- patching + benches ------------------------------------------------------------------------------------------------
-def patch(KP):
+class ExactCached:
+    """concept_bench._Exact for the REST skin (the seats) with its libigl trees built once: the same AABB squared distance
+    (sub-mesh Fs, full mesh beyond 1.7 x HALF) and the same fast-winding-number BVH (default accuracy) the one-shot calls
+    rebuild on every call - bit-for-bit the same numbers (checked: max |diff| 0.0 on 6.5k points), 5-10x faster"""
+    def __init__(self, ex):
+        import concept_bench as CB
+        igl = ex.igl; self.ex = ex; self.HALF = CB.HALF; self.V, self.F, self.Fs = ex.V, ex.F, ex.Fs
+        self.bvh = igl.FastWindingNumberBVH(); self.bvh.init(ex.V, ex.F)
+        self.ts = igl.AABB(); self.ts.init(ex.V, ex.Fs); self.tf = igl.AABB(); self.tf.init(ex.V, ex.F)
+
+    def __call__(self, P):
+        P = np.ascontiguousarray(P, float).reshape(-1, 3)
+        if not len(P): return np.zeros(0)
+        far = np.linalg.norm(P, axis=1) > self.HALF * 1.7
+        U = np.empty(len(P))
+        if (~far).any(): U[~far] = np.sqrt(self.ts.squared_distance(self.V, self.Fs, np.ascontiguousarray(P[~far]))[0])
+        if far.any(): U[far] = np.sqrt(self.tf.squared_distance(self.V, self.F, np.ascontiguousarray(P[far]))[0])
+        W = self.bvh.winding_number(P)
+        return np.where(W > 0.5, -np.abs(U), np.abs(U))
+
+
+def ik_vec(self, Q):
+    """S.Design.ik with the per-frame rotm stacks batched (rotm is elementwise: the same arithmetic per frame)"""
+    S = _MOD["KP"].verifier().MK.S; rotm, sub1, unit = S.rotm, S.sub1, S.unit
+    u1, u2, u3 = self.u; n = len(Q)
+    w = Q @ u3; c12 = u1 @ u2
+    M = np.array([[1, c12], [c12, 1]]); ab = np.linalg.solve(M, np.stack([w @ u1, np.full(n, u2 @ u3)]))
+    al, be = ab; cr = np.cross(u1, u2); g2 = (1 - al ** 2 - be ** 2 - 2 * al * be * c12) / (cr @ cr)
+    th = np.degrees(np.arccos(np.clip(w @ u1, -1, 1)))
+    a1, a2 = np.degrees(self.A[0]), np.degrees(self.A[1])
+    ok = (th >= abs(a1 - a2) + S.SING) & (th <= min(a1 + a2, 360 - a1 - a2) - S.SING) & (g2 > 0)
+    best = None
+    for sg in (1.0, -1.0):
+        z = al[:, None] * u1 + be[:, None] * u2 + sg * np.sqrt(np.clip(g2, 0, None))[:, None] * cr
+        q1 = sub1(u1, z, w); q2 = sub1(u2, np.broadcast_to(u3, z.shape), z)
+        R1 = rotm(u1, q1) if n else np.zeros((0, 3, 3))
+        p2 = R1 @ u2; br = np.sign(np.einsum("ij,ij->i", p2, np.cross(np.broadcast_to(u1, w.shape), w)))
+        if best is None: best = [q1.copy(), q2.copy(), br]
+        else:
+            pick = br == self.branch; best[0][pick] = q1[pick]; best[1][pick] = q2[pick]
+    q1, q2 = best[0], best[1]
+    R1 = rotm(u1, q1) if n else np.zeros((0, 3, 3))
+    R2 = rotm(u2, q2) if n else np.zeros((0, 3, 3))
+    R12 = R1 @ R2; v = unit(np.cross(u3, [0.3, 0.5, 0.8]))
+    q3 = sub1(u3, np.broadcast_to(v, (n, 3)), np.einsum("nji,njk,k->ni", R12, Q, v))
+    R3 = rotm(u3, q3) if n else np.zeros((0, 3, 3))
+    c1, c2, c3 = self.c
+    t1 = c1 - R1 @ c1; X1 = (R1, t1)
+    t2 = np.einsum("nij,nj->ni", R1, c2[None] - R2 @ c2 - c1[None]) + c1; X2 = (R12, t2)
+    R123 = R12 @ R3
+    t3 = np.einsum("nij,nj->ni", R12, c3[None] - R3 @ c3) + t2; X3 = (R123, t3)
+    sv = np.einsum("nji,nj->ni", Q, t3)
+    s = np.stack([sv @ self.sa, sv @ self.st, sv @ self.sn], 1)
+    return np.stack([q1, q2, q3], 1), ok, X1, X2, X3, s
+
+
+def patch(KP, fast_cpu=True):
     V = KP.verifier(); MKm = V.MK
     MKm.S.Model.needed = needed; MKm.S.Model.run = run; V.extra_checks = extra_checks
+    if fast_cpu and os.environ.get("GBK_FAST_CPU", "1") == "1":     # bit-identical CPU-side speed-ups (seats, IK)
+        R = MKm.OSN.rest()
+        if not isinstance(R["ex"], ExactCached): R["ex"] = ExactCached(R["ex"])
+        MKm.S.Design.ik = ik_vec
 
 
 def bench(nc, nw, device, G=None):
@@ -501,7 +561,7 @@ def random_configs(n, seed=0, around=None, scale=1.0):
 def mixed_configs(n, seed=0):
     """parity / speed set: 4/5 near the three leaders (H1, P5, k4598) at 0.5 / 1 / 2 / 3 x the polish's CMA scale, 1/5
     uniform in the polish bounds - every one inside the rulings (O20, J1 seat region, knee_polish FREE bounds)"""
-    L = [p for _, p in leaders()]; n_uni = max(2, n // 5); out = []
+    L = [p for nm, p in leaders() if nm in ("H1", "k4598", "P5")]; n_uni = max(2, n // 5); out = []
     for k in range(n - n_uni):
         out += random_configs(1, seed * 1000 + k, around=dict(kit().base_params(), **L[k % len(L)]), scale=(0.5, 1.0, 2.0, 3.0)[k % 4])
     return out + random_configs(n_uni, seed * 1000 + 999)
