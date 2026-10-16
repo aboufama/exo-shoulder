@@ -229,7 +229,8 @@ def sweeps():
         try:
             D = load(p)
             if D is None: warn(f"{os.path.relpath(p, REPO)}: not valid JSON, skipped"); continue
-            rows += sweep_file_rows(slug(os.path.splitext(os.path.basename(p))[0]), as_list(D, "configs", "rows", "results"), os.path.relpath(p, REPO))
+            # <id>@<n>.json = an archived part of <id>.json (split off to keep each file under GitHub's 50 MB warning)
+            rows += sweep_file_rows(slug(os.path.splitext(os.path.basename(p))[0].split("@")[0]), as_list(D, "configs", "rows", "results"), os.path.relpath(p, REPO))
         except Exception as e:
             warn(f"{os.path.relpath(p, REPO)}: skipped ({e})")
     rows.sort(key=lambda r: (r["t"], r["id"], r["k"]))
