@@ -78,9 +78,9 @@
    "k": 6,
    "group": "l1",
    "name": "link 1 strap keep-out (8 x 3 mm Ti, fitted underside)",
-   "vol_cm3": 0.499,
+   "vol_cm3": 0.504,
    "material": "Ti-6Al-4V",
-   "mass_g": 2.21,
+   "mass_g": 2.23,
    "valid": true,
    "pieces": 1,
    "faces": 260
@@ -89,9 +89,9 @@
    "k": 7,
    "group": "l2",
    "name": "link 2 strap keep-out (8 x 3 mm Ti, fitted underside)",
-   "vol_cm3": 1.759,
+   "vol_cm3": 1.77,
    "material": "Ti-6Al-4V",
-   "mass_g": 7.79,
+   "mass_g": 7.84,
    "valid": true,
    "pieces": 1,
    "faces": 932

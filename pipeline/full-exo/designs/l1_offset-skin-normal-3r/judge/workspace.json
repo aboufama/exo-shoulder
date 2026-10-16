@@ -1,0 +1,1858 @@
+{
+ "poses": 120,
+ "step": 12,
+ "share_passing": 0.5583,
+ "static_fits_left_to_R6": [],
+ "arm_near_mm": 110.0,
+ "fails": {
+  "chain_does_not_close": 0.3917,
+  "body_contact": 0.0333,
+  "part_interference": 0.0417
+ },
+ "evaluator_agreement": 0.95,
+ "skip_groups": [
+  "F"
+ ],
+ "tol_body_mm": 0.5,
+ "tol_parts_mm": 0.15,
+ "seconds": 12,
+ "per_pose": [
+  {
+   "k": 0,
+   "p": [
+    -90.0,
+    0.0,
+    75.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 1,
+   "p": [
+    -90.0,
+    15.0,
+    135.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 2,
+   "p": [
+    -90.0,
+    45.0,
+    75.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 3,
+   "p": [
+    -90.0,
+    60.0,
+    135.0
+   ],
+   "eval_feasible": false,
+   "closes": false,
+   "body_mm": null,
+   "body_part": null,
+   "parts_mm": null,
+   "parts_pair": null
+  },
+  {
+   "k": 4,
+   "p": [
+    -75.0,
+    15.0,
+    60.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 5,
+   "p": [
+    -75.0,
+    30.0,
+    120.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 6,
+   "p": [
+    -75.0,
+    60.0,
+    60.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 7,
+   "p": [
+    -60.0,
+    0.0,
+    105.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 8,
+   "p": [
+    -60.0,
+    30.0,
+    45.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 9,
+   "p": [
+    -60.0,
+    45.0,
+    105.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 10,
+   "p": [
+    -45.0,
+    0.0,
+    30.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 11,
+   "p": [
+    -45.0,
+    15.0,
+    90.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 12,
+   "p": [
+    -45.0,
+    45.0,
+    30.0
+   ],
+   "eval_feasible": false,
+   "closes": false,
+   "body_mm": null,
+   "body_part": null,
+   "parts_mm": null,
+   "parts_pair": null
+  },
+  {
+   "k": 13,
+   "p": [
+    -45.0,
+    60.0,
+    90.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 14,
+   "p": [
+    -30.0,
+    0.0,
+    90.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 15,
+   "p": [
+    -30.0,
+    15.0,
+    105.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 16,
+   "p": [
+    -30.0,
+    30.0,
+    120.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 17,
+   "p": [
+    -30.0,
+    60.0,
+    -30.0
+   ],
+   "eval_feasible": false,
+   "closes": false,
+   "body_mm": null,
+   "body_part": null,
+   "parts_mm": null,
+   "parts_pair": null
+  },
+  {
+   "k": 18,
+   "p": [
+    -15.0,
+    0.0,
+    -30.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 19,
+   "p": [
+    -15.0,
+    15.0,
+    -15.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 20,
+   "p": [
+    -15.0,
+    30.0,
+    0.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 21,
+   "p": [
+    -15.0,
+    45.0,
+    15.0
+   ],
+   "eval_feasible": false,
+   "closes": false,
+   "body_mm": null,
+   "body_part": null,
+   "parts_mm": null,
+   "parts_pair": null
+  },
+  {
+   "k": 22,
+   "p": [
+    -15.0,
+    60.0,
+    30.0
+   ],
+   "eval_feasible": false,
+   "closes": false,
+   "body_mm": null,
+   "body_part": null,
+   "parts_mm": null,
+   "parts_pair": null
+  },
+  {
+   "k": 23,
+   "p": [
+    -15.0,
+    75.0,
+    45.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 24,
+   "p": [
+    -15.0,
+    90.0,
+    60.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 6.27,
+   "body_part": "l1|J2 lower plate keep-out (O20 x 3, link 1)",
+   "parts_mm": 0.75,
+   "parts_pair": "member-3 neck keep-out (8 x 3 mm, ramp < IN link 2 strap keep-out (8 x 3 mm Ti, fitt",
+   "pairs": {
+    "member-3 neck keep-out (8 x 3 mm, ramp < IN link 2 strap keep-out (8 x 3 mm Ti, fitt": 0.75,
+    "link 2 strap keep-out (8 x 3 mm Ti, fitt IN member-3 neck keep-out (8 x 3 mm, ramp <": 0.29
+   },
+   "parts_motion_mm": 0.75
+  },
+  {
+   "k": 25,
+   "p": [
+    0.0,
+    0.0,
+    -30.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 26,
+   "p": [
+    0.0,
+    15.0,
+    -15.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 27,
+   "p": [
+    0.0,
+    30.0,
+    0.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 28,
+   "p": [
+    0.0,
+    45.0,
+    15.0
+   ],
+   "eval_feasible": false,
+   "closes": false,
+   "body_mm": null,
+   "body_part": null,
+   "parts_mm": null,
+   "parts_pair": null
+  },
+  {
+   "k": 29,
+   "p": [
+    0.0,
+    60.0,
+    30.0
+   ],
+   "eval_feasible": false,
+   "closes": false,
+   "body_mm": null,
+   "body_part": null,
+   "parts_mm": null,
+   "parts_pair": null
+  },
+  {
+   "k": 30,
+   "p": [
+    0.0,
+    75.0,
+    45.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 31,
+   "p": [
+    0.0,
+    90.0,
+    60.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 4.74,
+   "body_part": "l1|J2 lower plate keep-out (O20 x 3, link 1)",
+   "parts_mm": 0.55,
+   "parts_pair": "member-3 neck keep-out (8 x 3 mm, ramp < IN link 2 strap keep-out (8 x 3 mm Ti, fitt",
+   "pairs": {
+    "member-3 neck keep-out (8 x 3 mm, ramp < IN link 2 strap keep-out (8 x 3 mm Ti, fitt": 0.55
+   },
+   "parts_motion_mm": 0.55
+  },
+  {
+   "k": 32,
+   "p": [
+    0.0,
+    120.0,
+    0.0
+   ],
+   "eval_feasible": false,
+   "closes": false,
+   "body_mm": null,
+   "body_part": null,
+   "parts_mm": null,
+   "parts_pair": null
+  },
+  {
+   "k": 33,
+   "p": [
+    0.0,
+    150.0,
+    0.0
+   ],
+   "eval_feasible": false,
+   "closes": false,
+   "body_mm": null,
+   "body_part": null,
+   "parts_mm": null,
+   "parts_pair": null
+  },
+  {
+   "k": 34,
+   "p": [
+    15.0,
+    0.0,
+    -30.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 35,
+   "p": [
+    15.0,
+    15.0,
+    -15.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 36,
+   "p": [
+    15.0,
+    30.0,
+    0.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 37,
+   "p": [
+    15.0,
+    45.0,
+    15.0
+   ],
+   "eval_feasible": false,
+   "closes": false,
+   "body_mm": null,
+   "body_part": null,
+   "parts_mm": null,
+   "parts_pair": null
+  },
+  {
+   "k": 38,
+   "p": [
+    15.0,
+    60.0,
+    30.0
+   ],
+   "eval_feasible": false,
+   "closes": false,
+   "body_mm": null,
+   "body_part": null,
+   "parts_mm": null,
+   "parts_pair": null
+  },
+  {
+   "k": 39,
+   "p": [
+    15.0,
+    75.0,
+    45.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 40,
+   "p": [
+    15.0,
+    90.0,
+    60.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 2.67,
+   "body_part": "l1|J2 lower plate keep-out (O20 x 3, link 1)",
+   "parts_mm": 0.17,
+   "parts_pair": "member-3 neck keep-out (8 x 3 mm, ramp < IN link 2 strap keep-out (8 x 3 mm Ti, fitt",
+   "pairs": {
+    "member-3 neck keep-out (8 x 3 mm, ramp < IN link 2 strap keep-out (8 x 3 mm Ti, fitt": 0.17
+   },
+   "parts_motion_mm": 0.17
+  },
+  {
+   "k": 41,
+   "p": [
+    15.0,
+    120.0,
+    0.0
+   ],
+   "eval_feasible": false,
+   "closes": false,
+   "body_mm": null,
+   "body_part": null,
+   "parts_mm": null,
+   "parts_pair": null
+  },
+  {
+   "k": 42,
+   "p": [
+    15.0,
+    150.0,
+    0.0
+   ],
+   "eval_feasible": false,
+   "closes": false,
+   "body_mm": null,
+   "body_part": null,
+   "parts_mm": null,
+   "parts_pair": null
+  },
+  {
+   "k": 43,
+   "p": [
+    30.0,
+    0.0,
+    -30.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 44,
+   "p": [
+    30.0,
+    15.0,
+    -15.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 45,
+   "p": [
+    30.0,
+    30.0,
+    0.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 46,
+   "p": [
+    30.0,
+    45.0,
+    15.0
+   ],
+   "eval_feasible": false,
+   "closes": false,
+   "body_mm": null,
+   "body_part": null,
+   "parts_mm": null,
+   "parts_pair": null
+  },
+  {
+   "k": 47,
+   "p": [
+    30.0,
+    60.0,
+    30.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 48,
+   "p": [
+    30.0,
+    75.0,
+    45.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 49,
+   "p": [
+    30.0,
+    90.0,
+    60.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.51,
+   "body_part": "l1|J2 lower plate keep-out (O20 x 3, link 1)",
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 50,
+   "p": [
+    30.0,
+    120.0,
+    0.0
+   ],
+   "eval_feasible": false,
+   "closes": false,
+   "body_mm": null,
+   "body_part": null,
+   "parts_mm": null,
+   "parts_pair": null
+  },
+  {
+   "k": 51,
+   "p": [
+    30.0,
+    150.0,
+    0.0
+   ],
+   "eval_feasible": false,
+   "closes": false,
+   "body_mm": null,
+   "body_part": null,
+   "parts_mm": null,
+   "parts_pair": null
+  },
+  {
+   "k": 52,
+   "p": [
+    45.0,
+    0.0,
+    -30.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 53,
+   "p": [
+    45.0,
+    15.0,
+    -15.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 54,
+   "p": [
+    45.0,
+    30.0,
+    0.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 55,
+   "p": [
+    45.0,
+    45.0,
+    15.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 56,
+   "p": [
+    45.0,
+    60.0,
+    30.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 57,
+   "p": [
+    45.0,
+    75.0,
+    45.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 58,
+   "p": [
+    45.0,
+    105.0,
+    -90.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 59,
+   "p": [
+    45.0,
+    135.0,
+    -90.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 60,
+   "p": [
+    45.0,
+    165.0,
+    -90.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.19,
+   "parts_pair": "J3 lower plate keep-out (O20 x 3, member IN link 2 strap keep-out (8 x 3 mm Ti, fitt",
+   "pairs": {
+    "J3 lower plate keep-out (O20 x 3, member IN link 2 strap keep-out (8 x 3 mm Ti, fitt": 0.19
+   },
+   "parts_motion_mm": 0.19
+  },
+  {
+   "k": 61,
+   "p": [
+    60.0,
+    0.0,
+    -30.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 62,
+   "p": [
+    60.0,
+    15.0,
+    -15.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 63,
+   "p": [
+    60.0,
+    30.0,
+    0.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 64,
+   "p": [
+    60.0,
+    45.0,
+    15.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 65,
+   "p": [
+    60.0,
+    60.0,
+    30.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 66,
+   "p": [
+    60.0,
+    90.0,
+    -120.0
+   ],
+   "eval_feasible": false,
+   "closes": false,
+   "body_mm": null,
+   "body_part": null,
+   "parts_mm": null,
+   "parts_pair": null
+  },
+  {
+   "k": 67,
+   "p": [
+    60.0,
+    105.0,
+    -90.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 68,
+   "p": [
+    60.0,
+    135.0,
+    -90.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 69,
+   "p": [
+    60.0,
+    165.0,
+    -90.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 70,
+   "p": [
+    75.0,
+    0.0,
+    -30.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 71,
+   "p": [
+    75.0,
+    15.0,
+    -15.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 72,
+   "p": [
+    75.0,
+    30.0,
+    0.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 73,
+   "p": [
+    75.0,
+    45.0,
+    15.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 74,
+   "p": [
+    75.0,
+    75.0,
+    -135.0
+   ],
+   "eval_feasible": false,
+   "closes": false,
+   "body_mm": null,
+   "body_part": null,
+   "parts_mm": null,
+   "parts_pair": null
+  },
+  {
+   "k": 75,
+   "p": [
+    75.0,
+    90.0,
+    -120.0
+   ],
+   "eval_feasible": false,
+   "closes": false,
+   "body_mm": null,
+   "body_part": null,
+   "parts_mm": null,
+   "parts_pair": null
+  },
+  {
+   "k": 76,
+   "p": [
+    75.0,
+    105.0,
+    -90.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 77,
+   "p": [
+    75.0,
+    135.0,
+    -90.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.76,
+   "parts_pair": "J3 lower plate keep-out (O20 x 3, member IN link 2 strap keep-out (8 x 3 mm Ti, fitt",
+   "pairs": {
+    "J3 lower plate keep-out (O20 x 3, member IN link 2 strap keep-out (8 x 3 mm Ti, fitt": 0.76
+   },
+   "parts_motion_mm": 0.76
+  },
+  {
+   "k": 78,
+   "p": [
+    75.0,
+    165.0,
+    -90.0
+   ],
+   "eval_feasible": false,
+   "closes": false,
+   "body_mm": null,
+   "body_part": null,
+   "parts_mm": null,
+   "parts_pair": null
+  },
+  {
+   "k": 79,
+   "p": [
+    90.0,
+    0.0,
+    -30.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 80,
+   "p": [
+    90.0,
+    15.0,
+    -15.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 81,
+   "p": [
+    90.0,
+    30.0,
+    0.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 82,
+   "p": [
+    90.0,
+    60.0,
+    -150.0
+   ],
+   "eval_feasible": false,
+   "closes": false,
+   "body_mm": null,
+   "body_part": null,
+   "parts_mm": null,
+   "parts_pair": null
+  },
+  {
+   "k": 83,
+   "p": [
+    90.0,
+    75.0,
+    -135.0
+   ],
+   "eval_feasible": false,
+   "closes": false,
+   "body_mm": null,
+   "body_part": null,
+   "parts_mm": null,
+   "parts_pair": null
+  },
+  {
+   "k": 84,
+   "p": [
+    90.0,
+    90.0,
+    -120.0
+   ],
+   "eval_feasible": false,
+   "closes": false,
+   "body_mm": null,
+   "body_part": null,
+   "parts_mm": null,
+   "parts_pair": null
+  },
+  {
+   "k": 85,
+   "p": [
+    90.0,
+    105.0,
+    -90.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 86,
+   "p": [
+    90.0,
+    135.0,
+    -90.0
+   ],
+   "eval_feasible": false,
+   "closes": false,
+   "body_mm": null,
+   "body_part": null,
+   "parts_mm": null,
+   "parts_pair": null
+  },
+  {
+   "k": 87,
+   "p": [
+    90.0,
+    165.0,
+    -90.0
+   ],
+   "eval_feasible": false,
+   "closes": false,
+   "body_mm": null,
+   "body_part": null,
+   "parts_mm": null,
+   "parts_pair": null
+  },
+  {
+   "k": 88,
+   "p": [
+    105.0,
+    0.0,
+    -30.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 89,
+   "p": [
+    105.0,
+    15.0,
+    -15.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 90,
+   "p": [
+    105.0,
+    45.0,
+    -165.0
+   ],
+   "eval_feasible": false,
+   "closes": false,
+   "body_mm": null,
+   "body_part": null,
+   "parts_mm": null,
+   "parts_pair": null
+  },
+  {
+   "k": 91,
+   "p": [
+    105.0,
+    60.0,
+    -150.0
+   ],
+   "eval_feasible": false,
+   "closes": false,
+   "body_mm": null,
+   "body_part": null,
+   "parts_mm": null,
+   "parts_pair": null
+  },
+  {
+   "k": 92,
+   "p": [
+    105.0,
+    75.0,
+    -135.0
+   ],
+   "eval_feasible": false,
+   "closes": false,
+   "body_mm": null,
+   "body_part": null,
+   "parts_mm": null,
+   "parts_pair": null
+  },
+  {
+   "k": 93,
+   "p": [
+    105.0,
+    90.0,
+    -120.0
+   ],
+   "eval_feasible": false,
+   "closes": false,
+   "body_mm": null,
+   "body_part": null,
+   "parts_mm": null,
+   "parts_pair": null
+  },
+  {
+   "k": 94,
+   "p": [
+    105.0,
+    105.0,
+    -90.0
+   ],
+   "eval_feasible": false,
+   "closes": false,
+   "body_mm": null,
+   "body_part": null,
+   "parts_mm": null,
+   "parts_pair": null
+  },
+  {
+   "k": 95,
+   "p": [
+    105.0,
+    135.0,
+    -90.0
+   ],
+   "eval_feasible": false,
+   "closes": false,
+   "body_mm": null,
+   "body_part": null,
+   "parts_mm": null,
+   "parts_pair": null
+  },
+  {
+   "k": 96,
+   "p": [
+    105.0,
+    165.0,
+    -90.0
+   ],
+   "eval_feasible": false,
+   "closes": false,
+   "body_mm": null,
+   "body_part": null,
+   "parts_mm": null,
+   "parts_pair": null
+  },
+  {
+   "k": 97,
+   "p": [
+    120.0,
+    0.0,
+    -30.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 98,
+   "p": [
+    120.0,
+    30.0,
+    -180.0
+   ],
+   "eval_feasible": false,
+   "closes": false,
+   "body_mm": null,
+   "body_part": null,
+   "parts_mm": null,
+   "parts_pair": null
+  },
+  {
+   "k": 99,
+   "p": [
+    120.0,
+    45.0,
+    -165.0
+   ],
+   "eval_feasible": false,
+   "closes": false,
+   "body_mm": null,
+   "body_part": null,
+   "parts_mm": null,
+   "parts_pair": null
+  },
+  {
+   "k": 100,
+   "p": [
+    120.0,
+    60.0,
+    -150.0
+   ],
+   "eval_feasible": false,
+   "closes": false,
+   "body_mm": null,
+   "body_part": null,
+   "parts_mm": null,
+   "parts_pair": null
+  },
+  {
+   "k": 101,
+   "p": [
+    120.0,
+    75.0,
+    -135.0
+   ],
+   "eval_feasible": false,
+   "closes": false,
+   "body_mm": null,
+   "body_part": null,
+   "parts_mm": null,
+   "parts_pair": null
+  },
+  {
+   "k": 102,
+   "p": [
+    120.0,
+    90.0,
+    -120.0
+   ],
+   "eval_feasible": false,
+   "closes": false,
+   "body_mm": null,
+   "body_part": null,
+   "parts_mm": null,
+   "parts_pair": null
+  },
+  {
+   "k": 103,
+   "p": [
+    120.0,
+    105.0,
+    -90.0
+   ],
+   "eval_feasible": false,
+   "closes": false,
+   "body_mm": null,
+   "body_part": null,
+   "parts_mm": null,
+   "parts_pair": null
+  },
+  {
+   "k": 104,
+   "p": [
+    120.0,
+    135.0,
+    -90.0
+   ],
+   "eval_feasible": false,
+   "closes": false,
+   "body_mm": null,
+   "body_part": null,
+   "parts_mm": null,
+   "parts_pair": null
+  },
+  {
+   "k": 105,
+   "p": [
+    120.0,
+    165.0,
+    -90.0
+   ],
+   "eval_feasible": false,
+   "closes": false,
+   "body_mm": null,
+   "body_part": null,
+   "parts_mm": null,
+   "parts_pair": null
+  },
+  {
+   "k": 106,
+   "p": [
+    135.0,
+    15.0,
+    -135.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 107,
+   "p": [
+    135.0,
+    30.0,
+    -90.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 108,
+   "p": [
+    135.0,
+    45.0,
+    -45.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 109,
+   "p": [
+    135.0,
+    75.0,
+    -135.0
+   ],
+   "eval_feasible": false,
+   "closes": false,
+   "body_mm": null,
+   "body_part": null,
+   "parts_mm": null,
+   "parts_pair": null
+  },
+  {
+   "k": 110,
+   "p": [
+    135.0,
+    90.0,
+    -90.0
+   ],
+   "eval_feasible": false,
+   "closes": false,
+   "body_mm": null,
+   "body_part": null,
+   "parts_mm": null,
+   "parts_pair": null
+  },
+  {
+   "k": 111,
+   "p": [
+    135.0,
+    105.0,
+    -45.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 112,
+   "p": [
+    135.0,
+    135.0,
+    -135.0
+   ],
+   "eval_feasible": false,
+   "closes": false,
+   "body_mm": null,
+   "body_part": null,
+   "parts_mm": null,
+   "parts_pair": null
+  },
+  {
+   "k": 113,
+   "p": [
+    150.0,
+    0.0,
+    -105.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 114,
+   "p": [
+    150.0,
+    15.0,
+    -60.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 115,
+   "p": [
+    150.0,
+    45.0,
+    -150.0
+   ],
+   "eval_feasible": false,
+   "closes": false,
+   "body_mm": null,
+   "body_part": null,
+   "parts_mm": null,
+   "parts_pair": null
+  },
+  {
+   "k": 116,
+   "p": [
+    150.0,
+    60.0,
+    -105.0
+   ],
+   "eval_feasible": false,
+   "closes": false,
+   "body_mm": null,
+   "body_part": null,
+   "parts_mm": null,
+   "parts_pair": null
+  },
+  {
+   "k": 117,
+   "p": [
+    150.0,
+    75.0,
+    -60.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 118,
+   "p": [
+    150.0,
+    105.0,
+    -150.0
+   ],
+   "eval_feasible": false,
+   "closes": false,
+   "body_mm": null,
+   "body_part": null,
+   "parts_mm": null,
+   "parts_pair": null
+  },
+  {
+   "k": 119,
+   "p": [
+    150.0,
+    120.0,
+    -105.0
+   ],
+   "eval_feasible": false,
+   "closes": false,
+   "body_mm": null,
+   "body_part": null,
+   "parts_mm": null,
+   "parts_pair": null
+  }
+ ]
+}

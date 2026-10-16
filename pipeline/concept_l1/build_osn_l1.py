@@ -122,6 +122,13 @@ def link_solid(M, lk, rows):
         for q in range(len(cols_d)):
             den = float(cols_d[q][j] @ u[kk])
             if den > 0.2: cols_r[q][j] = max(cols_r[q][j], (cen @ u[kk] + lvl[(lk["name"], kk)]) / den + 0.02)
+    for kk in (lk["ka"], lk["kb"]):                                            # every column and station inside a hub's footprint
+        cen = c[kk] + F[kk] * u[kk]; lv = lvl[(lk["name"], kk)] + 0.2              # (+ 2.5 mm): at or above that hub's member level
+        for q in range(len(cols_d)):
+            Pq = cols_d[q] * cols_r[q][:, None]; w = Pq - c[kk]
+            off = np.linalg.norm(w - (w @ u[kk])[:, None] * u[kk], axis=1); den = cols_d[q] @ u[kk]
+            sel = (off < HUB_R + 2.5) & (den > 0.2)
+            cols_r[q][sel] = np.maximum(cols_r[q][sel], (cen @ u[kk] + lv) / den[sel])
     J = np.arange(j0, j1 + 1)
     Bot = np.stack([cols_d[q][J] * cols_r[q][J][:, None] for q in range(len(cols_d))], 1)
     Off = T_LINK * np.stack([cols_d[q][J] for q in range(len(cols_d))], 1)
@@ -231,6 +238,30 @@ def swap_in(M, K): M.Q, M.s, M.RS = K["Q"], K["s"], K["RS"]; M.X = K["X"]
 def world_pts(M, j, pts): return np.concatenate([M.scap_pts(m, j, X) @ M.RS[j].T for m, X in pts])
 
 
+ADJ_PAIRS = []                                                                  # [(member A, samples A, member B, V_B, F_B)] built meshes
+
+
+def set_adjacent(parts):
+    """built-part pairs that share a joint and move relative to each other: link 1 / link 2 (J2), link 2 / J3 plate,
+    link 1 / J2 boss, link 2 / J2 plate - their real meshes, vertex + surface samples (the seed L1's R6 lesson)"""
+    find = lambda s: next((p for p in parts if s in p[2]), None); ADJ_PAIRS.clear()
+    for a_, b_ in (("link 1 strap", "link 2 strap"), ("link 2 strap", "link 1 strap"), ("link 2 strap", "J3 lower plate"), ("J3 lower plate", "link 2 strap"),
+                   ("link 1 strap", "J2 upper boss"), ("link 2 strap", "J2 lower plate"), ("J2 lower plate", "link 2 strap")):
+        A, Bp = find(a_), find(b_)
+        if A is None or Bp is None: continue
+        XA = np.r_[np.asarray(A[3].vertices), trimesh.sample.sample_surface_even(A[3], 1500, seed=3)[0]]
+        ADJ_PAIRS.append((A[1], XA, Bp[1], np.ascontiguousarray(Bp[3].vertices, float), np.ascontiguousarray(Bp[3].faces, np.int64)))
+
+
+def adj_built(M, j):
+    import igl
+    out = 1e9
+    for ma, XA, mb, VB, FB in ADJ_PAIRS:
+        Ra, ta = M.T(ma, j); Rb, tb = M.T(mb, j); XB = ((XA @ Ra.T + ta) - tb) @ Rb
+        out = min(out, float(igl.signed_distance(np.ascontiguousarray(XB), VB, FB)[0].min()))
+    return out
+
+
 def feasibility(M, K, poses, pts, jobs=1, skin=True):
     swap_in(M, K); n = len(poses)
     kin = K["ok"] & K["sok"] & (K["res"] < 0.5)
@@ -238,6 +269,7 @@ def feasibility(M, K, poses, pts, jobs=1, skin=True):
     for j in range(n):
         if kin[j]:
             clear[j] = M.collide(j); v = VER.l2_vs_member3(M, j); adj[j] = min(v.values()) if v else 1e9
+            if ADJ_PAIRS: adj[j] = min(adj[j], adj_built(M, j) + 2 * ADJ)  # built pairs: a penetration > ADJ (0.15 mm) jams
     if skin:
         todo = [j for j in range(n) if kin[j] and clear[j] >= S.PART_CLEAR and adj[j] >= ADJ]
         items = [(poses[j], world_pts(M, j, pts)) for j in todo]
@@ -393,6 +425,7 @@ def main():
                        f"({kin['axis_line_offsets_mm'][2]} mm) and the 2 passive slides are not in its MuJoCo model")
     json.dump(design, open(os.path.join(dd, "design.json"), "w"), indent=1)
     # skin-check samples: the model's metal + contact-only samples, the verifier's outer faces, every built part's own surface
+    set_adjacent(parts)
     pts = [(m, X) for m, X in M.rigid.values()] + [(m, X) for m, X in M.link_pts.values()] + list(M.contact)
     pts += [(mem, X) for nm, mem, X in VER.outer_samples(M, False)]
     for g, mem, n, m, mat in parts:

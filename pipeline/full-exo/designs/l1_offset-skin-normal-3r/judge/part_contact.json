@@ -1,0 +1,12 @@
+{
+ "step": 12,
+ "tol_mm": 0.15,
+ "frames_checked": 117,
+ "pairs": 1324,
+ "seconds": 4,
+ "jobs": 4,
+ "violations": {},
+ "open_parts_not_tested_as_container": [],
+ "inside": "integer winding number on welded tessellations (grid + segment crossings), depth = exact distance (judge/sdist.py)",
+ "max_depth": 0.0
+}

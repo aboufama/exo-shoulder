@@ -150,7 +150,7 @@
     3.0,
     -30.0
    ],
-   "model_samples_max_mm": 0.0001,
+   "model_samples_max_mm": 1.992,
    "per_part": {
     "hub1": [
      0.0,
@@ -169,12 +169,12 @@
      0.0001
     ],
     "L1": [
-     0.0,
-     0.0
+     1.992,
+     1.852
     ],
     "L2": [
-     0.0,
-     0.0
+     1.0729,
+     0.1805
     ]
    },
    "frame_dev_mm": 0.000102,
@@ -192,7 +192,7 @@
     45.0,
     -30.0
    ],
-   "model_samples_max_mm": 0.0,
+   "model_samples_max_mm": 1.9919,
    "per_part": {
     "hub1": [
      0.0,
@@ -211,12 +211,12 @@
      0.0
     ],
     "L1": [
-     0.0,
-     0.0
+     1.9919,
+     1.852
     ],
     "L2": [
-     0.0,
-     0.0
+     1.0729,
+     0.1805
     ]
    },
    "frame_dev_mm": 5.2e-05,
@@ -234,7 +234,7 @@
     165.0,
     -90.0
    ],
-   "model_samples_max_mm": 0.0,
+   "model_samples_max_mm": 1.992,
    "per_part": {
     "hub1": [
      0.0,
@@ -253,12 +253,12 @@
      0.0
     ],
     "L1": [
-     0.0,
-     0.0
+     1.992,
+     1.852
     ],
     "L2": [
-     0.0,
-     0.0
+     1.0729,
+     0.1805
     ]
    },
    "frame_dev_mm": 6e-05,
@@ -280,15 +280,15 @@
     "flip": 71
    },
    "min_skin_mm": 1.42,
-   "min_adj_mm": 9.54
+   "min_adj_mm": 0.5
   },
   "Drink from a cup": {
    "frames": 178,
    "held": 0,
    "follow": 1.0,
    "reasons": {},
-   "min_skin_mm": 4.18,
-   "min_adj_mm": 18.38
+   "min_skin_mm": 4.21,
+   "min_adj_mm": 0.65
   },
   "Comb hair": {
    "frames": 202,
@@ -296,7 +296,7 @@
    "follow": 1.0,
    "reasons": {},
    "min_skin_mm": 1.76,
-   "min_adj_mm": 12.02
+   "min_adj_mm": 0.65
   },
   "Reach a high shelf": {
    "frames": 157,
@@ -304,7 +304,7 @@
    "follow": 1.0,
    "reasons": {},
    "min_skin_mm": 3.05,
-   "min_adj_mm": 11.76
+   "min_adj_mm": 0.65
   },
   "Wash opposite shoulder": {
    "frames": 193,
@@ -312,7 +312,7 @@
    "follow": 1.0,
    "reasons": {},
    "min_skin_mm": 4.4,
-   "min_adj_mm": 18.29
+   "min_adj_mm": 0.65
   },
   "Reach back pocket": {
    "frames": 145,
@@ -320,7 +320,7 @@
    "follow": 1.0,
    "reasons": {},
    "min_skin_mm": 1.75,
-   "min_adj_mm": 9.97
+   "min_adj_mm": 0.65
   },
   "Wave": {
    "frames": 172,
@@ -330,7 +330,7 @@
     "fold": 14
    },
    "min_skin_mm": 1.48,
-   "min_adj_mm": 13.75
+   "min_adj_mm": 0.5
   },
   "Walking arm swing": {
    "frames": 109,
@@ -338,7 +338,7 @@
    "follow": 1.0,
    "reasons": {},
    "min_skin_mm": 4.09,
-   "min_adj_mm": 18.46
+   "min_adj_mm": 0.65
   }
  },
  "workspace": {
