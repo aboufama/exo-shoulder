@@ -84,12 +84,16 @@ Bench(60,160) fast, wear the shape on Bench(110,360) without refit; CB_EXACT=1 f
 | k264 | coarse-sweep best (az1 108, el1 66.8, az2 19.4, el2 56.1, b3 0.157, lE 35.6, lc 18.6) | 26.47 fast | **31.22 (score 88.65)** | 0.617 / 0.883 / 0.012 |
 | k299 (D1) | CMA stream D (az1 87.1, el1 60.2, az2 14.4, el2 49.5, b3 0.362, lE 32.7, lc 28.0, phib -56) | 26.17 exact path / 25.87 fast | 31.96 (score 88.38) | 0.597 / 0.895 / 0.012 |
 | F1 (freed b3) | CMA stream F (b3 0.536, az1 98.9, el1 66.3, az2 11.1, el2 55.1, lE 30.3, lc 26.0, phib -82) | 28.80 exact path / 28.95 fast | 37.04 (score 86.53) | 0.594 / 0.851 / 0.015 |
+| **k4598 (B2)** | CMA round 2 stream B (az1 105.8, el1 65.5, az2 17.7, el2 56.3, wd 76.5, wa -13.3, b3 0.325, lE 42.1, lc 24.9, phiE 1.5, phib -55.9) | **20.63 fast (score 92.50)**: reach 0.694, ib14 0.903, follow 1.0, contact 0 | **30.35 (score 88.96)** | 0.606 / 0.904 / 0.009 |
+| k3326 (D2) | CMA round 2 stream D (az1 91.5, el1 60.3, az2 17.2, el2 47.9, wd 81.7, wa -12.7, b3 0.403, lE 25.4, lc 34.5, phiE 4.3, phib -50.0) | 21.33 fast | 31.35 (fold 112, knee out of window 23) | 0.603 / 0.899 / 0.015 |
 | reference | zero-passive spherical 3R at the leader's seats (round-3 judge) | - | 41.73 | |
 | reference | 2-slide leader osn k4216, verified | 32.61 fast | 42.59 | |
 
 The flat pin knee beats both references on the verification bench by ~10 gap points with 0 passive translations (the
-2 crossed RSR3M guides, carriages and bridge are gone: a 5 mm pin stack replaces a 10.5 mm guide stack). It does NOT
-cross score 90 on the verification bench: every config loses 28-30 gap points to reach alone.
+2 crossed RSR3M guides, carriages and bridge are gone: a 5 mm pin stack replaces a 10.5 mm guide stack). On the fit bench the converged
+CMA (round 2, 8 farm streams, 6600 configs) crosses score 90: 20.63 = reach only (in-band 0.903, follow 1.0, contact 0).
+It does NOT survive on the verification bench: worn frozen on Bench(110,360) exact it is 30.35 - reach 0.694 -> 0.606
+(the fold boundary tuned to the 160 sampled poses, lesson c) costs 29.4 points, in-band holds (0.904), contact 0.9.
 
 **Freed b3 (lead-note test).** The knee removes the slide-travel cap on b3, but b3 also turns u3 and shrinks the J2-J3
 arc a2, i.e. the fold window: at the k10 seats and knee, b3 0.23 -> 26.34; 0.40 -> 32.37 (fold 47 -> 50, a2 74.1 ->
@@ -152,3 +156,40 @@ sleeve in a 5 mm stack. For MVP2 the knee pins become hub-sized bearing pairs (t
 MGN12H-class alternative of the hardware note), i.e. the MVP2 knee costs ~7 mm more stack than the MVP1 knee measured
 here - still no guide (none of the miniature guides carries it either, 10-80x short). The MR63ZZ pair (6 mm stack) was
 33.53 vs 33.09 fast at the k4216 seats (phib +90): 1 mm of stack costs ~0.4 gap points.
+
+## Verdict (2026-10-16 03:30 UTC)
+
+**Screened, not dead - the best 0-passive-translation closure of the GH-ray 3R measured so far, but it does not reach
+score 90 on the verification bench.** Bench(60,160) fast: 20.63 (score 92.50, k4598), converged (gate over 7199 logged
+configs: gain 0.25 over the second half, 0.00 over the last third, top-5 spread 0.06 score points; CMA round 2 alone,
+6600 configs: 0.25 / 0.00). Worn frozen on Bench(110,360) exact: 30.35 (score 88.96) - better than the zero-passive
+spherical 3R at the leader's seats (41.73) and the 2-slide leader verified (42.59) by 11-12 points, with 2 cheap pins in
+place of 2 crossed guides, carriages and a bridge. The whole remaining gap is reach (the J2 fold): in-band 0.90, follow
+1.0 and contact ~0.01 on the verification bench.
+
+**Limiter (measured).** The J1-J3 axis-angle window 2 min(a1, a2) - 20 deg (~60 deg at a1 ~40) against the 27-141 deg
+the workspace needs (22-146 overhead): reach 0.69 on the 160 fit poses, 0.61 on the 360 verification poses, 0.25-0.29
+overhead. Widening a1 moves hub 2 onto skin it cannot clear (93-115 mm off GH, measured; the wide LHS never beats 36).
+The knee is the right closure; the fold needs a lever that does not ride on a GH ray: next, stack this knee on
+acromial-rocker-3r / spine-parked-j2-3r / j2-arc-sector-3r (their fold levers) - the knee's ~10 points over the slides
+should carry over, since it only touches member 3. For MVP2 the knee pins become hub-sized bearing pairs (~7 mm more
+stack), see the moment path above.
+
+**Knee-window variant (tested, small).** D2 loses 23 verification poses to the frozen knee window (knee near straight,
+max 149 deg on the fit poses). Widening the window to [20, 160] deg (ang_min 20; J3's lever on the knee force falls
+to lE sin 20 = 8.7 mm, a weaker MVP2 closure) gives fit 21.70, frozen exact 31.24 (out-of-window 23 -> 21): the losses
+are the knee's span (|pb - C| beyond lE + lc - 1 on drifts the fit poses never reached), not its angle. A knee sized
+over the full-ROM drift (IK only, a dense grid of the workspace, not a bench sample) is the next small lever (<= ~5
+points at D2, an upper bound that ignores those poses' skin).
+
+**Red-team items for the verifier.** Near-touch on the verification bench (k4598): min 0.02 mm at the arm-at-side poses
+(plane -15 / 75, elevation 0), 16 poses < 1 mm -> 38.41, 47 poses < 2 mm -> 64.60 - the zero-contact fit is a
+0-2 mm skim in places. Knee window: the frozen knee leaves its window at 4 big-bench poses (`slide`), E strap vs link 2
+jams 2. Overhead (elevation >= 140): reach 0.25, in-band 0.94.
+
+## Files
+
+docs/concepts/models/skin-normal-3r-pin-knee.py (model), docs/concepts/sweeps/skin-normal-3r-pin-knee.json (7199
+configs in order: early local checks, coarse farm sweep 256, CMA round 1 on the exact path (no bench cache on the farm
+jobs: 9 evaluations per stream), wide seat LHS 240, CMA round 2 with the cache 6600), docs/concepts/rows/
+skin-normal-3r-pin-knee.json.
