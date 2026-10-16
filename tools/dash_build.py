@@ -9,7 +9,9 @@ the files whose sha256 changed (compare with the manifest of the last upload) an
 
 Datasets (id: sources -> builder):
   morphs        concept bench, one row per morphology: docs/concepts/catalogue.json < families.json < rows/<id>.json,
-                plus each morphology's best sweep configuration (sweeps/<id>.json)                   -> morphs()
+                plus each morphology's best sweep configuration (sweeps/<id>.json) and its complexity count (the
+                user's "simplicity number", tools/simplicity.py on the row's "mechanism" record; lower = simpler,
+                shown beside the score, never part of the gap)                                       -> morphs()
   sweeps        concept bench, every configuration a morphology agent evaluated, with its time, its morphology's best
                 gap so far and the overall record so far (all morphologies)                         -> sweeps()
   cad           built-CAD outside judges, long form: one row per (judged design, requirement) with value, threshold and
@@ -53,6 +55,35 @@ FAILED_GAP = 999.0          # a sweep file's gap at or above this is the agent's
 
 def warn(msg):
     WARN.append(msg); print("WARNING:", msg, file=sys.stderr)
+
+
+try:                                                 # the complexity count (docs/SIMPLICITY.md): shown, never scored
+    sys.path.insert(0, os.path.join(REPO, "tools"))
+    import simplicity as SIMP
+except Exception as _e:                              # the dashboard still builds; the column stays empty
+    SIMP = None; WARN.append(f"tools/simplicity.py did not import ({_e}): no complexity column")
+
+
+def complexity_of(mid, mech):
+    """the row's complexity fields from its "mechanism" record (tools/simplicity.py score()): complexity = points (lower =
+    simpler, 0 = three pins on bearing pairs + three links), complexity_items = where the points come from (short text,
+    a NOT BUILDABLE flag first), passive_trans = passive translations (> 2 = not buildable), mechanism_confidence =
+    the record's own confidence (counted / estimated). None / "" when the row has no record."""
+    out = dict(complexity=None, complexity_items="", passive_trans=None, mechanism_confidence="")
+    if SIMP is None or not isinstance(mech, dict): return out
+    try:
+        s = SIMP.score(mech)
+    except Exception as e:
+        warn(f"complexity of {mid}: not scored ({e})"); return out
+    def item(label, p):
+        return label if re.search(r"\+%g\b" % p, label) else f"{label} = {p:g}"
+    items = "; ".join(item(l, p) for l, p in s["items"]) or "none: the anchor (three pins on bearing pairs, three links)"
+    hard = [f for f in s["flags"] if f.startswith("NOT BUILDABLE")]
+    for f in s["flags"]:
+        if f not in hard: warn(f"complexity of {mid}: {f}")
+    out.update(complexity=s["complexity"], complexity_items=(" | ".join(hard + [items]))[:600],
+               passive_trans=SIMP._n(mech, "passive_trans"), mechanism_confidence=str(mech.get("confidence") or ""))
+    return out
 
 
 def load(p, default=None):
@@ -241,7 +272,8 @@ def blank(mid):
                 t_ideated=None, t_screened=None, reach=None, follow=None, inband14=None, inband10=None, contact=None, gap=None,
                 v_reach=None, v_follow=None, v_inband14=None, v_inband10=None, v_contact=None, v_gap=None,
                 n_configs=0, sweep_gap=None, sweep_t=None, sweep_reach=None, sweep_follow=None, sweep_inband14=None,
-                sweep_contact=None, t_last=None, verdict="", note="", duplicate_of="", doc="", source="")
+                sweep_contact=None, t_last=None, verdict="", note="", duplicate_of="", doc="", source="",
+                complexity=None, complexity_items="", passive_trans=None, mechanism_confidence="")
 
 
 def merge(m, src):
@@ -258,8 +290,11 @@ def merge(m, src):
     return m
 
 
+COMPLEXITY = ("complexity", "complexity_items", "passive_trans", "mechanism_confidence")   # computed here, not merged
+
+
 def morphs(S):
-    by = {}
+    by, mech = {}, {}
     for e in as_list(load(os.path.join(CONCEPTS, "catalogue.json")), "morphologies", "items"):
         if isinstance(e, dict) and e.get("id"):
             mid = slug(e["id"]); by[mid] = merge(by.get(mid) or blank(mid), dict(e, id=mid))
@@ -275,7 +310,8 @@ def morphs(S):
         r = load(p)
         if not isinstance(r, dict): warn(f"{os.path.relpath(p, REPO)}: not a JSON object, skipped"); continue
         mid = slug(r.get("id") or os.path.splitext(os.path.basename(p))[0])
-        by[mid] = merge(by.get(mid) or blank(mid), dict(r, id=mid))
+        if isinstance(r.get("mechanism"), dict): mech[mid] = r["mechanism"]
+        by[mid] = merge(by.get(mid) or blank(mid), {k: v for k, v in dict(r, id=mid).items() if k not in COMPLEXITY})
         if not norm_time(by[mid].get("t_screened")) and r.get("inband14") is not None: by[mid]["t_screened"] = file_time(p)
     per = {}
     for s in S: per.setdefault(s["id"], []).append(s)
@@ -310,6 +346,7 @@ def morphs(S):
                 m.update(sweep_gap=b["gap"], sweep_t=b["t"], sweep_reach=b["reach"], sweep_follow=b["follow"],
                          sweep_inband14=b["inband14"], sweep_contact=b["contact"])
             m["t_last"] = max([x for x in [m["t_ideated"], m["t_screened"]] + [s["t"] for s in sw] if x] or [None]) if (sw or m["t_screened"] or m["t_ideated"]) else None
+            m.update(complexity_of(mid, mech.get(mid)))
             if not m["lens"]: m["lens"] = str(m.get("source") or "")
             for k in ("name", "family", "lens", "verdict", "note", "duplicate_of", "doc"): m[k] = "" if m[k] is None else str(m[k])
             out.append({k: m[k] for k in blank(mid) if k != "source"})
@@ -637,7 +674,7 @@ def motion(out_dir):
 
 # ---------------------------------------------------------------- main
 DESC = {
-    "morphs": ("Concept bench morphologies", "One row per morphology in the swarm's catalogue: status, the agent's claimed bench numbers, the verifier's re-measured numbers (v_), its best sweep configuration so far, and the 3R baseline once (is_baseline). Built from docs/concepts/catalogue.json, families.json, rows/*.json and sweeps/*.json."),
+    "morphs": ("Concept bench morphologies", "One row per morphology in the swarm's catalogue: status, the agent's claimed bench numbers, the verifier's re-measured numbers (v_), its best sweep configuration so far, and the 3R baseline once (is_baseline), and the complexity count (the simplicity number, never part of the gap or score): complexity = points, lower = simpler, 0 = three pins on bearing pairs and three links; complexity_items = where the points come from; passive_trans = passive translations (more than 2 = not buildable); mechanism_confidence = counted or estimated. Built from docs/concepts/catalogue.json, families.json, rows/*.json (complexity: tools/simplicity.py on each row's mechanism record, docs/SIMPLICITY.md) and sweeps/*.json."),
     "sweeps": ("Concept bench sweeps", "Every configuration a morphology agent evaluated on the concept bench, with its time, gap, its morphology's best gap so far (best_gap) and the record over all morphologies so far (record_gap); passed_over marks a configuration its agent measured before its claimed row and rejected (better than the claim), which counts for no best. Built from docs/concepts/sweeps/*.json; a morphology with more than 1500 configurations is thinned for the page (every running-best and record row, its 300 best gaps and an even sample of the rest), while best_gap, record_gap and n_configs come from the full set."),
     "cad": ("Built CAD judge results", "One row per judged design and requirement: value, threshold and pass from the outside judges, timed by the judge output (score files: the earliest of their commit, their file time and the first commit whose docs report the design; scorecard-only values: the scorecard's commit). Built from tools/judged_history.py, judge/scorecard.json files and judge/requirements.json."),
     "gpu_evals": ("GPU evaluator detail runs", "Every GPU band-evaluator detail evaluation of a search candidate (in-band 14 mm, follow, workspace share, overhead follow). Time is the git commit that added the result file, not the run itself. Built from pipeline/conformal/gpu_client/band_eval_*.json via tools/judged_history.py --evals."),

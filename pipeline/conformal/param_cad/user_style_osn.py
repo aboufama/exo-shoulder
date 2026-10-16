@@ -12,8 +12,10 @@ in the user's style (user_style.py, no lofts):
            from GH, tilted b3 toward the skin normal): built about GH, then moved by c3 (c3 is perpendicular to u3).
   links    bent 8 x 3 bars, user_style.bar_swept: the side view is a chain of tangent lines and arcs in the great-circle
            plane the model's strap rides in (link 1: span(u1, u2); link 2: span(C2, C3), C = the hub face centres),
-           fitted (sketch2d.fit_chain) to stay at or above the L1 strap's underside (the model's fitted rows + the L1's
-           hub-rim lift) and hug it; planform pads at the hubs, the user-style pocket, 0.5 mm rounds. Link 2's J3 pad
+           fitted (sketch2d.fit_chain, fairness weight 4, up to 5 tangent arcs, 2 mm minimum segment) to stay at or above
+           the L1 strap's underside (the model's fitted rows + the L1's hub-rim lift) and hug it; the CAD standard's
+           35 deg ramp first, the model's own steeper ramps only where 35 deg has no chain; planform pads at the hubs,
+           the user-style pocket, 0.5 mm rounds. Link 2's J3 pad
            is the J3 seat plane; u3 leans 3.9 deg out of link 2's plane, so the bar ends 0.6 mm inside that pad.
   member 3 hub 3's lower pad + pin + the model's ramped neck (60 deg, its underside = the model's to the arcs) + the
            bridge, ONE side-view sketch of lines and tangent arcs extruded 8 mm, on the across block (carriage B).
@@ -124,7 +126,10 @@ def link_fit(label, ex, ey, start, end, Dq, Rq, t=T):
     th_q = np.arctan2(Dq @ ey, Dq @ ex); rho_q = Rq * np.hypot(Dq @ ex, Dq @ ey)       # in-plane angle / radius of each sample
     th = th_q.mean(0); order = np.argsort(th); th = th[order]; need = rho_q.max(0)[order]
     clear = lambda U: np.hypot(U[:, 0], U[:, 1]) - np.interp(np.arctan2(U[:, 1], U[:, 0]), th, need)
-    key = f"{label}|{np.round(ex, 5).tolist()}|{np.round(ey, 5).tolist()}|{np.round(start, 4).tolist()}|{np.round(end, 4).tolist()}|{np.round(need, 3).tolist()}"
+    # v2 (hug): fairness weight 4 (sketch2d's default 40 kept the bars straight and 5.2 mm over link 2's L1 underside on
+    # average, 13.7 mm at J3's 60 deg ramp) and up to 5 arcs; measured on k4216's link 2 at the standard's 35 deg / R 12:
+    # mean over the L1 underside 5.16 (3 arcs, bend 40) -> 4.16 (4 arcs, bend 4) -> 3.36 (5 arcs) -> 2.85 (6 arcs, 8 min)
+    key = f"{label}|hug4|{np.round(ex, 5).tolist()}|{np.round(ey, 5).tolist()}|{np.round(start, 4).tolist()}|{np.round(end, 4).tolist()}|{np.round(need, 3).tolist()}"
     cache = json.load(open(CACHE)) if os.path.exists(CACHE) else {}
     if key in cache: fit = cache[key]; fit["segs"] = [tuple(x) for x in fit["segs"]]
     else:
@@ -133,18 +138,19 @@ def link_fit(label, ex, ey, start, end, Dq, Rq, t=T):
         # rows ramp at <= 60 deg from the hub levels, docs/concepts/models/seed-offset-3r-slides.py RAMP) with tighter bends
         # (centre-line R >= 4: inner R 2.5 on a machined 3 mm bar); radii snapped to round values (half steps if needed)
         for cm, rm, lm in ((35.0, 12.0, 6.0), (45.0, 6.0, 2.0), (45.0, 4.0, 2.0), (60.0, 4.0, 2.0)):
-            for n_ in (3, 4):
+            for n_ in (3, 4, 5):
                 for sc_ in (1.0, 0.5):
                     try:
-                        f_ = SK.fit_chain(start, end, clear, t, n_arcs=n_, climb_max=cm, r_min=rm, l_min=lm, snap_scale=sc_)
-                        f_.update(climb_limit=cm, r_min=rm, snap_scale=sc_); fits[n_] = f_; break
+                        f_ = SK.fit_chain(start, end, clear, t, n_arcs=n_, climb_max=cm, r_min=rm, l_min=2.0,
+                                          snap_scale=sc_, bend=4.0, seeds=16)
+                        f_.update(climb_limit=cm, r_min=rm, l_min=2.0, snap_scale=sc_, bend=4.0); fits[n_] = f_; break
                     except RuntimeError as e:
                         print(f"  {label}: {n_} arcs, climb {cm}, R >= {rm}, snap x{sc_}: {e}", flush=True)
                         if "snapped" not in str(e): break                                  # finer snapping helps only a snapping failure
             if fits: break
         if not fits: raise RuntimeError(f"{label}: no chain stays above the L1 strap")
         bm = min(f_["mean_clear"] for f_ in fits.values())
-        nb = min(n_ for n_, f_ in fits.items() if f_["mean_clear"] <= bm + 1.0); fit = fits[nb]
+        nb = min(n_ for n_, f_ in fits.items() if f_["mean_clear"] <= bm + 0.5); fit = fits[nb]
         fit = {k: (float(v) if isinstance(v, (np.floating, float)) else v) for k, v in fit.items()}
         fit["segs"] = [(float(k), float(l)) for k, l in fit["segs"]]; fit["radii"] = [None if r is None else float(r) for r in fit["radii"]]
         cache = json.load(open(CACHE)) if os.path.exists(CACHE) else {}; cache[key] = fit
