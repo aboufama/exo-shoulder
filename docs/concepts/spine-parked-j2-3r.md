@@ -207,3 +207,24 @@ on the same sphere in the humerus band frame, the narrowest J1-J3 window that ho
   2. **J1 posterior-medial** over the scapular body, bvec(-42..-24, 6-24), with the axis leaving the skin 86-131 mm
      from GH. Here the second arc must be ~135-140 deg.
 * Family 1 is the "weird" lead this track tested on the bench (next section).
+
+## The q 0.98 dropped poses: the posterior axillary fold rises over hub 2 (red team)
+
+The CMA picks q ~0.98, so hub 2's level is set below the two highest requirements. These are workspace poses #93
+(plane -15, elevation 105, axial 45: 106 mm) and #92 (plane -15, elevation 90, axial 60: 70 mm). They are dropped as
+contact. The skin inside hub 2's cone (9 deg) in those poses, traced back through the rig to its rest position
+(`scratchpad hub2cover.py`):
+
+* **#93**: the vertices that cover hub 2 sit at rest at (-69, -53, +36) mm from GH (posterior, 53 mm below GH,
+  lateral). That is the posterior axillary fold / teres region. In ABER behind the frontal plane it bunches up to
+  r 105 mm along hub 2's axis.
+* **#92**: the vertices sit at rest at (-38, +8, +44): the posterior deltoid at GH level. It rises to r 66 over a hub
+  fitted at F 60.
+* Hub 2 is not parked: J2 rides its circle around J1. Its axis moves from (-0.54, 0.83, 0.12) at rest (posterior-
+  superior, over the scapular spine) to (-0.49, 0.64, 0.58) in these poses (posterior-lateral). The "parked over the
+  spine" idea holds at rest, but in elevated external rotation hub 2 swings onto the posterior deltoid.
+* The bench already charges both poses as contact (not reached, plus 100 x contact share). In the device this is a
+  real pinch: the posterior deltoid / axillary fold presses on hub 2's crown in an abducted-externally-rotated pose
+  slightly behind the frontal plane (cocking a throw, reaching back over the shoulder).
+* The fix is in the seats, not in the hub size. Raising hub 2 to clear #93 would cost hub 2 and link 1 their band
+  (+45 mm). A q of 1.0 at the k4216 seats gave 70.30 (in-band 0.41).
