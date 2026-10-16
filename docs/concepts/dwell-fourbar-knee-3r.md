@@ -140,3 +140,61 @@ translations, 0 sensed passive, 0 springs; moving bodies link 1 (+ P plate), L2a
 L2b, rocker, arm-end neck, 3 hub shafts, 3 pin shafts), catalogue 12 (3 MR117 pairs + 3 MR63ZZ pairs).
 Complexity **19.0** (tools/simplicity.py --score: 3 passive rotations 6, 1 loop 4, +2 bodies 2, +3 joints 3, +5 made
 parts 2.5, +6 bought 1.5); Kutzbach M -3 (6 redundant: the spherical loop relies on axis concurrency).
+
+## Frozen shape on Bench(110,360) EXACT (lesson c; farm, docs/concepts/models/dwell-fourbar-knee-3r.py `frozen`)
+
+Fit on Bench(60,160) fast, every underside / post frozen, worn on Bench(110,360) with CB_EXACT=1 (O15 J2 / J3, margin 10:
+the rules in force when the jobs ran). The red-team stage of these jobs hit the farm's 2400 s timeout; the frozen
+evaluation itself had finished (176 / 165 s) and is in the result files.
+
+| config | Bench(60,160) fast | **Bench(110,360) exact frozen** | reach / in-band 14 / contact | near-touch (< 1 mm = contact) | min metal | overhead >= 140: reach / in-band |
+|---|---|---|---|---|---|---|
+| coarse best k58 (loop) | 41.88 | **45.69** (score 83.4) | 0.633 / 0.747 / 0.037 | 51.31 | 0.01 mm (#149, plane -45 elev 60 axial 75) | 0.18 / 0.81 |
+| its LOCKED CONTROL (same seats, knee rigid) | 32.91 | **37.11** (score 86.5) | 0.611 / 0.853 / 0.035 | 51.06 | 0.03 mm | 0.18 / 0.88 |
+| CMA D best | 26.86 | pending (farm job dwell-frozen-D, re-measured at O20 under the new ruling) | | | | |
+
+At the same seats the loop buys **2.2 reach points** on the verification bench (0.611 -> 0.633; kinematic 0.653 ->
+0.697) and pays **10.6 in-band points** (0.853 -> 0.747: rocker 0.08, pin Q 0.23, L2b tail 0.22): **the loop is 8.6
+points WORSE than its own locked control** on Bench(110,360) exact. The fit-bench gain did not carry over at these
+seats; the D configuration's frozen number is pending.
+
+## User rulings of 2026-10-16 ~05:50 UTC (arrived during this screen): O20 only, fold margin 5
+
+Re-measured (Bench(60,160) fast; a MEASUREMENT change, not a design change), CMA D configuration:
+
+| reading | gap | reach | in-band 14 | window | note |
+|---|---|---|---|---|---|
+| O15 J2 / J3, margin 10 (screened above) | 26.86 | 0.700 | 0.843 | [35.9, 102.5] | old rules |
+| **O20 J2 / J3, O10 MR63ZZ pins, margin 5** | **30.46** (score 88.9) | 0.719 | 0.788 | [30.9, 107.5] | O20 hub 2 lifts the rocker: pin posts P / K / Q +18 / +13 / +12 mm |
+| O20 at EVERY joint incl. the passive pins P, K, Q (12.25 mm stacks) | **275** (nothing taken) | 0 | 0 | | the three loop stacks collide everywhere |
+| locked control at the D seats, O20, margin 5 | 60.96 | 0.569 | 0.837 | [41.2, 107.4] | |
+
+If "O20 at every joint" includes the passive pins, the morphology is dead at this geometry (a four-pin loop of O20
+stacks does not fit over the posterior acromion). With O10 pins it is 30.46 fast, not re-optimised under the new
+rules (CMA round 2, streams E-H, runs on the farm at O20 / margin 10).
+
+## Variant that removes limiter 3 (rocker clear of hub 2), tested
+
+55 loops whose rocker stays >= 12.5 deg from J2 along its whole path and whose window starts <= 36 deg (filtered from
+25 000 random loops, a2 70-90): the first 18 benched locally score 119-275 (best 119.40: in-band 0.23, rocker 0.0 in
+band, window [9.3, 105.9]). A rocker that clears hub 2 leaves the band; one that stays in the band crosses hub 2's crown.
+
+## Verdict (2026-10-16 06:15 UTC)
+
+**Screened; the measured evidence says the loop does not pay on the verification bench.** Best fit-bench number 26.86
+(score 90.23, CMA D, old rules) - 1.6 points better than the converged plain chain of the same family - but (i) worn
+frozen on Bench(110,360) exact at the coarse-best seats the loop is 8.6 points worse than its own locked control
+(45.69 vs 37.11), (ii) under the O20 ruling the D configuration is 30.46 fast, and 275 if the passive pins must be O20
+too, (iii) the dwell moves only the LOW end of the J1-J3 window, while the larger loss (71 of 360 verification poses)
+is ABOVE the window, and every loop that widens both ends puts the rocker / pins / L2b 20-30 mm off the skin.
+**Not called dead**: the convergence gate is not passed (whole ordered history of 5892: gain 0.58 score points over the
+2nd half, 0.58 over the last third (> 0.5), top-5 spread 0.00; stream D alone 0.72 / 0.31 / 0.00), the D frozen run and
+the O20 CMA round 2 are still on the farm.
+
+**What happens next.** (1) Read the farm results when they land (frozen D: `dwell-frozen-D`; CMA E-H:
+`dwell-cma-E..H`; outputs under this agent's scratchpad dwell/cma2/cma_out/) and append them to the sweep file; if
+frozen D is not better than ~37 (its lock family) the morphology is dead on the verification bench. (2) The lever the
+data points to is not on link 2: the high side of the window (71 verification poses above a1 + a2 - 10) needs a2_eff
+LONGER when theta is large, which this dwell cannot give; the round-4 "rocker on J1 driven by the J1-J3 angle" hope is
+the remaining kinematic route, and it must keep hub 2 within the band (the DP of the ideation and limiter 2 here say
+the band, not the kinematics, is the binding constraint).
