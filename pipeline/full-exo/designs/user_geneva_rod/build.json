@@ -3718,5 +3718,61 @@
   "max_frame_dev_mm": 0.000106,
   "max_joint_feature_mm": 0.1444,
   "dowels_in_slots": true
- }
+ },
+ "slaved": [
+  {
+   "slaved": [
+    "l1a",
+    "l1b"
+   ],
+   "driver": [
+    "l1b",
+    "l2"
+   ],
+   "x_key": "q.1",
+   "y_key": "knuckle.dK",
+   "law_x_deg": [
+    -21.811,
+    -20.611,
+    -19.411,
+    -18.211,
+    -17.011,
+    -15.811,
+    -14.611,
+    -13.411,
+    -12.211,
+    -11.011,
+    -9.811,
+    -8.611,
+    -7.411,
+    -6.211,
+    -5.011
+   ],
+   "law_y_deg": [
+    -53.42,
+    -49.6,
+    -45.79,
+    -41.97,
+    -38.16,
+    -34.34,
+    -30.52,
+    -26.71,
+    -22.89,
+    -19.08,
+    -15.26,
+    -11.45,
+    -7.63,
+    -3.82,
+    -0.0
+   ],
+   "rest_y_deg": 0.0,
+   "closure": "force",
+   "drive_groups": {
+    "dk": "l1b",
+    "dr": "l1b"
+   },
+   "source": "build.json drive_kin (exact RSSR + roller rows)",
+   "note": "K = law(q2) past the onset (lobe -> MR63ZZ roller -> bell crank -> pushrod -> horn on link 1a's arbor); below it the clock spring holds K on stop A; the spring also keeps the roller on the lobe (force closure)"
+  }
+ ]
 }

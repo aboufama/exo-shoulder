@@ -187,6 +187,40 @@ def frozen_held(P): return SC.frozen(_clamp(dict(PARAMS, **P)), -1, -1)
 def frozen_flood(P, nc=110, nw=360): return SC.frozen_flood(_clamp(dict(PARAMS, **P)), nc, nw)
 
 
+def redteam_gh(par=None, nc=110, nw=360, mags=(3.0, 5.0, 10.0), liner=3.0):
+    """GH-offset red team (the misfit the deleted knee used to absorb): the chain is spherical about the NOMINAL GH, the
+    arm turns about the TRUE centre g (scapula-handler tracking error / humeral-head translation, constant here). With the
+    bracket bolted at rest, an arm point moves R (p - g) + g while the bracket moves R p, R = Q Q0^T: misfit (I - R) g,
+    |misfit| = 2 |g_perp| sin(theta / 2). Over every pose of Bench(nc, nw) and 26 directions of g per magnitude: the
+    misfit's median / p90 / max, the share of poses within the liner budget, and the same with ONE cuff slide along the
+    humerus (the axial component in the arm frame removed), and what a planar knee in hub 3's plane would leave (only the
+    component along hub 3's axis u3) for comparison with the knee designs"""
+    D = KLDesign(_clamp(dict(PARAMS, **(par or {})))); u3 = D.u[2]
+    Z = CB._poses_all(); B = CB.Bench(n_clip=nc, n_ws=nw); Q = Z["HG"][B.idx].astype(float)
+    sp_ = importlib.util.spec_from_file_location("osn_for_kneeless_rt", os.path.join(HERE, "offset-skin-normal-3r.py"))
+    OSN = importlib.util.module_from_spec(sp_); sp_.loader.exec_module(OSN); Q0 = OSN.rest()["Q0"]
+    dirs = np.array([[x, y, z] for x in (-1, 0, 1) for y in (-1, 0, 1) for z in (-1, 0, 1) if (x, y, z) != (0, 0, 0)], float)
+    dirs /= np.linalg.norm(dirs, axis=1)[:, None]
+    Rr = np.einsum("nij,kj->nik", Q, Q0)                          # Q Q0^T
+    ax_arm = np.array([0.0, -1.0, 0.0])                          # humerus axis in the band humerus frame (rest: along -y)
+    out = {}
+    for mg in mags:
+        mis = np.einsum("nij,kj->nki", np.eye(3)[None] - Rr, dirs * mg)        # (n poses, 26 dirs, 3) scapula frame
+        mag = np.linalg.norm(mis, axis=2); worst = mag.max(1)
+        armf = np.einsum("nji,nkj->nki", Q, mis)                               # in the arm frame
+        perp = armf - (armf @ ax_arm)[..., None] * ax_arm; wp = np.linalg.norm(perp, axis=2).max(1)
+        kn = np.abs(armf @ u3).max(1)
+        out[f"{mg:g}mm"] = dict(knee_equiv_median=round(float(np.median(kn)), 2), knee_equiv_max=round(float(kn.max()), 2),
+                                knee_equiv_within_liner=round(float((kn <= liner).mean()), 3),median=round(float(np.median(worst)), 2), p90=round(float(np.percentile(worst, 90)), 2), max=round(float(worst.max()), 2),
+                                within_liner=round(float((worst <= liner).mean()), 3),
+                                slide_median=round(float(np.median(wp)), 2), slide_p90=round(float(np.percentile(wp, 90)), 2), slide_max=round(float(wp.max()), 2),
+                                slide_within_liner=round(float((wp <= liner).mean()), 3))
+    th = np.degrees(np.arccos(np.clip((np.einsum("nii->n", Rr) - 1) / 2, -1, 1)))
+    out["rotation_from_rest_deg"] = dict(median=round(float(np.median(th)), 1), p90=round(float(np.percentile(th, 90)), 1), max=round(float(th.max()), 1))
+    out["n_poses"] = int(len(Q)); out["liner_mm"] = liner
+    return out
+
+
 def viz_export(par): return RF.viz_export(_clamp(dict(PARAMS, **par)))
 
 
@@ -195,6 +229,8 @@ if __name__ == "__main__":
     par = json.loads(sys.argv[2]) if len(sys.argv) > 2 else {}
     if mode == "viz":
         print(json.dumps(viz_export(par), default=float)); sys.exit()
+    if mode == "redteam_gh":
+        print(json.dumps(redteam_gh(par), default=float)); sys.exit()
     if mode in ("frozen", "held", "flood"):
         t = time.time(); out = {"frozen": frozen, "held": frozen_held, "flood": frozen_flood}[mode](par); out["params"] = par
         out["secs"] = round(time.time() - t, 1)

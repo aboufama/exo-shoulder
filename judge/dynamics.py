@@ -36,6 +36,33 @@ N.m/rad) and its stops A / B, J2 its q2 stops, as joint limits;
 member-member contact is not modelled there (R6). Cross-checked against the spherical path on a 3R
 (judge/test_dynamics.py --general). Until 2026-10-16 these designs were judged as their orientation-equivalent spherical
 3R (minarc crashed: KeyError 'l1').
+SLAVED COORDINATES (2026-10-16 late, MEASUREMENT CHANGE for designs that declare one; every other design's numbers are
+unchanged, judge/test_dynamics.py and docs/research/geneva-rod-gen5_fix.md): a hinge whose angle a drive sets from another
+hinge's angle (geneva's lobe + bell crank + pushrod: K = law(q2); an RSSR-slaved knuckle) is declared in the design's
+build.json under "slaved" (a list; one entry per slaved hinge):
+    {"slaved": ["l1a", "l1b"],           the slaved hinge, by the two member groups it joins (parent, child)
+     "driver": ["l1b", "l2"],            the hinge that drives it
+     "x_key": "q.1", "y_key": "knuckle.dK",   where every clip frame stores the driver / slaved angle in the law's own
+                                         convention (deg; dotted path into the frame dict, integers index lists)
+     "law_x_deg": [...], "law_y_deg": [...],  the law y(x) as a table (deg, the same convention), piecewise linear between
+                                         rows, held at the end values outside the table (a dwell = a flat end)
+     "rest_y_deg": 0.0,                  where the slaved hinge sits when the drive does not push (stop A)
+     "closure": "force" | "form",        force: a cam / follower held on by a spring - the drive only PUSHES (unilateral,
+                                         lift-off allowed and reported); form: a linkage (RSSR) or a form-closed cam - bilateral
+     "drive_groups": {"dk": "l1b", "dr": "l1b"}}   posed drive bodies (any group outside the serial rule) and the member
+                                         whose mass they ride with (null: the member they turn least against, auto)
+The judge maps the law onto its own hinge angles by affine fits of the frames' x_key / y_key values against the fitted
+hinge angles (|slope| 1 within 1e-3 and residual < 0.05 deg, else it stops), checks the clips' own frames against the law
+(reported: law_vs_clips_max_err_deg), and couples the two hinges in MuJoCo with a joint equality re-linearised on the
+law's tangent every step (exact for a piecewise-linear law; the reaction acts on the driver, so the arm feels the drive's
+load); "force" closure switches it on only while the drive pushes (off in the dwell, off on a pull = lift-off, back on
+when the follower meets the law again). Drive bodies' masses / inertias are lumped rigidly on their mount member (their
+own small motion relative to it is reported, not simulated); the drive's own bearing friction (follower roller, crank
+bearings, rod-end balls) is not modelled (all rolling or < 0.01 N.m at these loads; stated). A slaved hinge keeps its
+spring, limits and joint friction and leaves the spare list: it is DRIVEN, so R17 judges it like a driven joint plus its
+drive - its error against the law at the simulated driver (slaved.law_err_deg, incl. any lift-off) must stay <= 5 deg (the
+spare-drift threshold), and its deviation from the plan (slaved.plan_err_deg = the chain's own driver deviation through the
+law's ratio) is reported with config_dev_deg, which R17 does not threshold for any driven joint.
 For N = 4 the passive chain's spare DOF is free: it does what friction, gravity and inertia make it do, and its drift from
 the evaluator's planned path (which the geometric judges assume) is reported. Motor (back-driven gearmotor armature) and
 servo (spare J1 on the plan) cases remain as --cases options; validate() uses the servo only as a numerical device.
@@ -53,7 +80,7 @@ import numpy as np
 from common import design_dir, load_parts, PIPE
 
 D2R = math.pi / 180
-VERSION = "dynamics-2026-10-16 (MVP1: unpowered; rolling bearings main, plain bearings comparison; general N-member chain for offset / split / knee designs)"
+VERSION = "dynamics-2026-10-16 (MVP1: unpowered; rolling bearings main, plain bearings comparison; general N-member chain for offset / split / knee designs; slaved coordinates from build.json)"
 # ---------------------------------------------------------------- assumptions (all stated in docs/research/dynamics_judge.md)
 TISSUE = dict(k_perp=3.5e3, k_ax=2.1e3,                   # N/m across / along the humerus (Schiebl 2025 medians 2.1-4.5 N/mm)
               kr_perp=0.20 / D2R, kr_ax=0.03 / D2R,       # N.m/rad bending / torsion (Schiebl 2025: 0.18-0.22, 0.03 N.m/deg)
@@ -299,6 +326,26 @@ def needs_general(dd):
     N = len(D["kinematics"]["a"]) + 1
     return gs - {"cuff"} != {"base"} | {f"l{k}" for k in range(1, N)}
 
+def load_slaved(dd):
+    """the design's declared slaved coordinates (build.json "slaved": a list of entries, or one dict); [] when none"""
+    p = os.path.join(dd, "build.json")
+    if not os.path.exists(p): return []
+    s_ = json.load(open(p)).get("slaved") or []
+    return [s_] if isinstance(s_, dict) else list(s_)
+
+def frame_val(f, key):
+    """a clip frame's value at a dotted key ('q.1', 'knuckle.dK')"""
+    v = f
+    for k in key.split("."): v = v[int(k)] if isinstance(v, list) else v[k]
+    return float(v)
+
+def law_eval(X, Y, x):
+    """piecewise-linear law y(x) on the table (X ascending) and its slope; ends held (slope 0 outside the table)"""
+    import bisect
+    if x <= X[0]: return Y[0], 0.0
+    if x >= X[-1]: return Y[-1], 0.0
+    k = bisect.bisect_right(X, x) - 1; sl = (Y[k + 1] - Y[k]) / (X[k + 1] - X[k]); return Y[k] + sl * (x - X[k]), sl
+
 class GenDesign(Design):
     """a serial chain of the clips' own posed members (base -> l.. -> arm), every adjacent pair joined by the hinge that
     reproduces the clips' relative motion (axis and point fitted from all frames, residual reported), the arm member =
@@ -317,18 +364,25 @@ class GenDesign(Design):
         self.k_preload = float(sp_["preload"]) if sp_.get("preload") is not None else K_PRELOAD   # K_PRELOAD for every design; a measurement change only where a design declares another)
         self.k_preload_source = "design.json build_fixes.spring.preload" if sp_.get("preload") is not None else "judge default K_PRELOAD"
         posed = sorted({g for c in self.clips for f in c["frames"] for g in f["G"]})
-        self.groups = group_order([g for g in posed if g != "S" or "base" not in posed])
+        self.slaved_decl = load_slaved(self.dd); dg = {}                             # slaved coordinates + their drive bodies (build.json "slaved")
+        for s_ in self.slaved_decl: dg.update(s_.get("drive_groups") or {})
+        if self.slaved_decl:
+            import re
+            dg.update({g: None for g in posed if g not in dg and re.fullmatch(r"d[a-z]+", g)})
+        self.drive_groups = {g: m_ for g, m_ in dg.items() if g in posed}
+        self.groups = group_order([g for g in posed if (g != "S" or "base" not in posed) and g not in self.drive_groups])
         if self.groups[0] != "base": raise ValueError("dynamics (general): the chain starts at 'base'")
         self.members_ = self.groups + ["cuff"]; N = self.N = len(self.members_) - 1          # N hinges: base-m1, ..., m_last-arm
         parts = load_parts(self.dd); byg = {}
         for g, nm, V, F in parts: byg.setdefault(g, []).append((g, nm, V, F))
         # every frame's member poses in the SCAPULA frame (rotation, translation mm); the arm = canonical humerus at GH
-        self.fr = []
+        self.fr = []; frd = []
         for ci, c in enumerate(self.clips):
             for fi, f in enumerate(c["frames"]):
                 Rs = scap(f["p"][1], 0); T = f.get("T", {}); P = {}
                 for g in self.groups:
                     P[g] = (Rs.T @ np.array(f["G"][g]).reshape(3, 3), Rs.T @ np.asarray(T.get(g, (0.0, 0.0, 0.0)), float))
+                if self.drive_groups: frd.append({g: (Rs.T @ np.array(f["G"][g]).reshape(3, 3), Rs.T @ np.asarray(T.get(g, (0.0, 0.0, 0.0)), float)) for g in self.drive_groups})
                 P["cuff"] = (Rs.T @ humerus(np.asarray(f["p"][:3], float)), np.zeros(3)); self.fr.append((ci, fi, P))
         ref = self.fr[0][2]; self.ref = ref
         # hinge fit per adjacent pair: child-frame axis u, child-frame point x (on the axis, at the hub stack centre)
@@ -360,9 +414,24 @@ class GenDesign(Design):
         self.joint_names = [self.joint_name(k) for k in range(N)]
         # mass properties in each member's own (group) frame; base in the scapula frame
         self.mp = {}; self.prims = {g: [] for g in self.members_}
+        extra = {}; self.drive_lumped = {}                                           # drive bodies: lumped rigidly on their mount member (ref pose)
+        for g, mnt in self.drive_groups.items():
+            Rd = np.array([x[g][0] for x in frd]); td = np.array([x[g][1] for x in frd])
+            def rel_rot(m_):
+                Rm = np.array([P_[m_][0] for _, _, P_ in self.fr]); E_ = np.transpose(Rm, (0, 2, 1)) @ Rd
+                return float(np.degrees(np.linalg.norm(rotvec(np.transpose(E_[:1], (0, 2, 1)) @ E_), axis=1)).max())
+            turn = {m_: rel_rot(m_) for m_ in self.groups}
+            if mnt not in self.groups: mnt = min(turn, key=turn.get)
+            Rm0, tm0 = ref[mnt]
+            for gg, nm, V, F in byg.get(g, []):
+                Vs = V @ Rd[0].T + td[0]                                                # the drive body at the reference, scapula frame
+                extra.setdefault(mnt, []).append((gg, nm, Vs if mnt == "base" else (Vs - tm0) @ Rm0, F))
+            self.drive_lumped[g] = dict(mount=mnt, mass_g=round(1000 * mass_props(byg[g])[0], 2) if byg.get(g) else 0.0, turns_on_mount_max_deg=round(turn[mnt], 2),
+                                        declared=self.drive_groups[g] is not None)
         for g in self.groups:
             P = byg.get(g, [])
             if g == "base": Rb, tb = ref["base"]; P = [(gg, nm, V @ Rb.T + tb, F) for gg, nm, V, F in P]
+            if extra.get(g): P = P + extra[g]
             self.mp[g] = mass_props(P) if P else (1e-3, np.zeros(3), 1e-9 * np.eye(3), 0.0)
         Hp = byg.get("H", []); self.H_mass = sum(mass_props([p_])[0] for p_ in Hp) if Hp else 0.0
         self.F_mass = sum(mass_props([p_])[0] for p_ in byg.get("F", [])) if byg.get("F") else 0.0
@@ -393,6 +462,35 @@ class GenDesign(Design):
                         self.limits[i2] = tuple(sorted(a_ * np.asarray(st, float) + b_)); self.q2_fit = dict(joint=self.joint_names[i2], slope=round(float(a_), 6), residual_deg=round(res2, 4))
                     else: self.q2_fit = dict(joint=self.joint_names[i2], slope=round(float(a_), 6), residual_deg=round(res2, 4), note="q2 does not map onto this hinge: stops not applied")
         self.pin_stop_note = "the knee stop (149.5 deg) is not in the CAD and not modelled; the knee pins are free"
+        # slaved coordinates: the declared law mapped onto this judge's hinge angles, checked against the clips' frames
+        self.slaved = []; self.slaved_fit = []
+        fl_ = [f for c in self.clips for f in c["frames"]]
+        for s_ in self.slaved_decl:
+            hid = lambda ab: next((k for k, h in enumerate(self.hinge) if (h["parent"], h["child"]) == tuple(ab)), None)
+            iS, iD = hid(s_["slaved"]), hid(s_["driver"])
+            if iS is None or iD is None: raise ValueError(f"dynamics: slaved {s_['slaved']} / driver {s_['driver']} is not a hinge of the chain {self.members_}")
+            xs = np.array([frame_val(f, s_["x_key"]) for f in fl_]); ys = np.array([frame_val(f, s_["y_key"]) for f in fl_])
+            qd_, qs_ = np.degrees(self.q_frames[:, iD]), np.degrees(self.q_frames[:, iS])
+            ax_, bx_ = np.polyfit(xs, qd_, 1); rx_ = float(np.abs(qd_ - (ax_ * xs + bx_)).max())
+            if np.ptp(ys) > 0.2: ay_, by_ = np.polyfit(ys, qs_, 1); note_y = None
+            else: ay_, by_ = 1.0, float(np.median(qs_ - ys)); note_y = "the slaved hinge never moves in the clips: orientation assumed +1"
+            ry_ = float(np.abs(qs_ - (ay_ * ys + by_)).max())
+            if abs(abs(ax_) - 1) > 1e-3 or abs(abs(ay_) - 1) > 1e-3 or rx_ > 0.05 or ry_ > 0.05:
+                raise ValueError(f"dynamics: the slaved declaration's keys do not read the hinges ({s_['x_key']}: slope {ax_:.4f} res {rx_:.3f} deg; {s_['y_key']}: slope {ay_:.4f} res {ry_:.3f} deg)")
+            X = ax_ * np.asarray(s_["law_x_deg"], float) + bx_; Y = ay_ * np.asarray(s_["law_y_deg"], float) + by_; o_ = np.argsort(X); X, Y = X[o_], Y[o_]
+            rest = ay_ * float(s_.get("rest_y_deg", 0.0)) + by_; far = Y[np.argmax(np.abs(Y - rest))]; push = 1.0 if far >= rest else -1.0
+            Xr, Yr = np.radians(X).tolist(), np.radians(Y).tolist()
+            err = np.array([abs(qs_[i] - math.degrees(law_eval(Xr, Yr, math.radians(qd_[i]))[0])) for i in range(len(qs_))])
+            drv = np.array([(math.degrees(law_eval(Xr, Yr, math.radians(x_))[0]) - rest) * push > 1e-3 for x_ in qd_])
+            clo = s_.get("closure", "form")
+            if clo not in ("force", "form"): raise ValueError(f"dynamics: slaved closure {clo!r} (force | form)")
+            self.slaved.append(dict(i=iS, j=iD, X=Xr, Y=Yr, rest=math.radians(rest), push=push, closure=clo))
+            if iS in self.spare: self.spare.remove(iS)
+            self.slaved_fit.append(dict(joint=self.joint_names[iS], driver=self.joint_names[iD], closure=clo, law_rows=len(X), law_x_judge_deg=[round(float(X[0]), 3), round(float(X[-1]), 3)],
+                                        law_y_judge_deg=[round(float(Y.min()), 3), round(float(Y.max()), 3)], rest_judge_deg=round(rest, 3), push_sense=push,
+                                        x_map=dict(key=s_["x_key"], slope=round(float(ax_), 6), offset_deg=round(float(bx_), 4), residual_deg=round(rx_, 4)),
+                                        y_map=dict(key=s_["y_key"], slope=round(float(ay_), 6), offset_deg=round(float(by_), 4), residual_deg=round(ry_, 4), note=note_y),
+                                        law_vs_clips_max_err_deg=round(float(err.max()), 4), clip_frames_driven=int(drv.sum()), source="build.json slaved"))
     def springs(self, rate):
         """{joint: (stiffness N.m/rad, springref rad)}: the declared preload (else K_PRELOAD) toward stop A at stop A"""
         if not getattr(self, "spring_def", None): return {}
@@ -450,8 +548,10 @@ def build_xml_general(des, friction, R0=None, gravity=True, dt=DT, k_rate=None):
         else:
             body.append(f'<body name="{g}" pos="{fmt(pr)}" quat="{fmt(quat(Rr))}"><joint name="{jn}" type="hinge" pos="{fmt(h["x"] / 1000)}" axis="{fmt(h["u"])}" {fl}{extra}/>{inertial(g)}')
         Rp, tp = Rc, tc
+    eq = "".join(f'<joint name="slave{k}" joint1="J{sv["i"] + 1}" joint2="J{sv["j"] + 1}" polycoef="0 0 0 0 0" solref="0.002 1" active="false"/>'
+                 for k, sv in enumerate(getattr(des, "slaved", []) or []))                # slaved coordinates: re-linearised on the law every step (run)
     return f"""<mujoco model="{des.id}"><compiler angle="radian" autolimits="true"/>{option_xml(dt, gravity)}
-<worldbody>{''.join(body)}{'</body>' * (des.N + 1)}</worldbody></mujoco>"""
+<worldbody>{''.join(body)}{'</body>' * (des.N + 1)}</worldbody>{f'<equality>{eq}</equality>' if eq else ''}</mujoco>"""
 
 # ---------------------------------------------------------------- MuJoCo model
 def option_xml(dt=DT, gravity=True):
@@ -646,6 +746,10 @@ def run(des, ci, friction=0.2, speed=1.0, case="passive", gravity=True, tissue_s
         q1p = sp - sp[0]; dq1p = np.gradient(q1p, dt); ddq1p = np.gradient(dq1p, dt); m1, c1, I1, _ = des.mp["l1"]; Im = arm + float(I1[0, 0] + m1 * (c1[1] ** 2 + c1[2] ** 2))   # J1 inertia about its axis
         kp_s, kd_s = Im * SERVO_WN ** 2, 2 * Im * SERVO_WN
     rec = {k: [] for k in ("t", "s", "F", "M", "Mgh", "q", "qd", "ax", "track", "con", "gap", "servo", "fric", "tilt", "cap")}
+    slv = []                                                                  # slaved coordinates: [eq id, qpos y, qpos x, X, Y, rest, push, form?, active, force]
+    for k_, sv in enumerate(getattr(des, "slaved", []) if gen else []):
+        slv.append([mujoco.mj_name2id(m, mujoco.mjtObj.mjOBJ_EQUALITY, f"slave{k_}"), qa[sv["i"]], qa[sv["j"]], sv["X"], sv["Y"], sv["rest"], sv["push"], sv["closure"] == "form", 0, 0.0])
+    if slv: rec["slv"] = []; EQ = mujoco.mjtConstraint.mjCNSTR_EQUALITY; eqd, eqa = m.eq_data, d.eq_active
     # per-step data as python floats (the loop below is scalar maths: numpy on 3-vectors costs ~10x more)
     Rs_l = Rs.reshape(-1, 9).tolist(); Rh_l = Rh.reshape(-1, 9).tolist(); wh_l = wh.tolist()
     wloc_l = np.einsum("nji,nj->ni", Rs, ws).tolist(); aloc_l = np.einsum("nji,nj->ni", Rs, als).tolist()
@@ -682,6 +786,14 @@ def run(des, ci, friction=0.2, speed=1.0, case="passive", gravity=True, tissue_s
         xfr[cuff] = (F0, F1, F2, M0 + a1 * F2 - a2 * F1, M1 + a2 * F0 - a0 * F2, M2 + a0 * F1 - a1 * F0)
         if servo:
             tau_s = Im * ddq1p[i] + kp_s * (q1p[i] - d.qpos[qa[0]]) + kd_s * (dq1p[i] - qv[va[0]]); qfa[va[0]] = tau_s
+        for sv in slv:                                                        # slaved coordinate: the law's tangent at the current driver angle
+            x_ = d.qpos[sv[2]]; y_ = d.qpos[sv[1]]; yl_, sl_ = law_eval(sv[3], sv[4], x_)
+            eqd[sv[0], 0] = yl_ - sl_ * x_; eqd[sv[0], 1] = sl_
+            if sv[7]: act = 1                                                 # form closure: always coupled
+            elif (yl_ - sv[5]) * sv[6] <= 1e-5: act = 0                       # force closure, dwell: the spring holds the stop
+            elif sv[8]: act = 0 if sv[9] * sv[6] < 0 else 1                   # coupled: a pull = lift-off
+            else: act = 1 if (y_ - yl_) * sv[6] <= 0 else 0                    # lifted: back on when the follower meets the law
+            sv[8] = act; eqa[sv[0]] = act
         if i % REC == 0:
             F = np.array([F0, F1, F2]); M = np.array([M0, M1, M2]); pc = np.array([pc0, pc1, pc2])
             rec["t"].append(t[i]); rec["s"].append(s[i]); rec["F"].append(F); rec["M"].append(M); rec["Mgh"].append(M + np.cross(pc, F))
@@ -699,7 +811,13 @@ def run(des, ci, friction=0.2, speed=1.0, case="passive", gravity=True, tissue_s
                     mujoco.mj_contactForce(m, d, k, cf)
                     if cf[0] > fmax: fmax, pair = cf[0], f"{body_member.get(m.geom_bodyid[cc.geom1])}-{body_member.get(m.geom_bodyid[cc.geom2])}"
             rec["con"].append((fmax, pair)); rec["gap"].append(gmin); rec["tilt"].append(list(tilt_now)); rec["cap"].append([m.dof_frictionloss[a] for a in va])
+            if slv: rec["slv"].append([(d.qpos[sv[1]], law_eval(sv[3], sv[4], d.qpos[sv[2]])[0], sv[8], sv[9], sv[9] * law_eval(sv[3], sv[4], d.qpos[sv[2]])[1]) for sv in slv])
         mujoco.mj_step(m, d)
+        for sv in slv:                                                        # the drive's torque on the slaved hinge (equality row force)
+            sv[9] = 0.0
+            if sv[8]:
+                r_ = np.nonzero((d.efc_type[:d.nefc] == EQ) & (d.efc_id[:d.nefc] == sv[0]))[0]
+                if len(r_): sv[9] = float(d.efc_force[r_[0]])
         if load: load_friction_update(m, d, child, jid, va, r_brg, root, tau0, mu_eff, tilt_now, anchors=gen and tilt != "gh")   # plain bearing: friction grows with the tilt couple
         if i % 500 == 0 and not np.isfinite(d.qacc).all(): raise FloatingPointError(f"{des.id} clip {ci}: simulation diverged at t = {d.time:.3f} s")
     R = {k: (np.array(v) if k not in ("con",) else v) for k, v in rec.items()}
@@ -793,7 +911,18 @@ def summarise(des, tr, R, friction, speed, case):
                             min_gap_mm=round(float(gap.min() * 1000), 2) if np.isfinite(gap.min()) else None),
                worst=W)
     if getattr(des, "general", False):
+        sl_j = [sv["i"] for sv in getattr(des, "slaved", [])]
         if des.spare: out["spare_drift_deg"] = round(float(max(np.degrees(np.abs(q[:, j] - qp[:, j]).max()) for j in des.spare)), 2)   # spring-held K vs its plan
+        if sl_j and "slv" in R:
+            S_ = R["slv"][w]; out["slaved"] = {}
+            for k_, sv in enumerate(des.slaved):
+                y_, yl_, act, f_, fr_ = S_[:, k_, 0], S_[:, k_, 1], S_[:, k_, 2], S_[:, k_, 3], S_[:, k_, 4]
+                drv = (yl_ - sv["rest"]) * sv["push"] > 1e-5; lift = (y_ - yl_) * sv["push"]
+                out["slaved"][des.joint_names[sv["i"]]] = dict(
+                    law_err_deg=round(float(np.degrees(np.abs(y_ - yl_).max())), 3), law_err_driven_deg=round(float(np.degrees(np.abs(y_ - yl_)[drv].max())), 3) if drv.any() else 0.0,
+                    plan_err_deg=round(float(np.degrees(np.abs(q[:, sv["i"]] - qp[:, sv["i"]]).max())), 3), driven_share=round(float(drv.mean()), 3),
+                    liftoff_share_of_driven=round(float((act[drv] < 0.5).mean()), 4) if drv.any() else 0.0, lift_max_deg=round(float(np.degrees(max(0.0, lift[drv].max()))), 3) if drv.any() else 0.0,
+                    drive_torque_peak_Nm=round(float(np.abs(f_).max()), 4), driver_reaction_peak_Nm=round(float(np.abs(fr_).max()), 4), closure=sv["closure"])
         if des.limits: out["on_limit_share"] = {des.joint_names[j]: round(float(((np.degrees(q[:, j]) <= lo + 0.05) | (np.degrees(q[:, j]) >= hi - 0.05)).mean()), 3) for j, (lo, hi) in des.limits.items()}
         out["joints"] = des.joint_names
     elif N == 4: out["spare_drift_deg"] = round(float(np.degrees(np.abs(q[:, 0] - qp[:, 0]).max())), 2)
@@ -1023,6 +1152,9 @@ def main():
                             joints=des.joint_names, hinge_fit=des.fit, limits_deg={des.joint_names[j]: [round(x, 3) for x in v] for j, v in des.limits.items()},
                             springs={des.joint_names[j]: dict(rate_Nm_per_rad=v[0], preload_Nm_at_stop_A=des.k_preload, preload_source=des.k_preload_source, rates_run=list(K_RATES)) for j, v in des.spring.items()},
                             knuckle=getattr(des, "knuckle_fit", None), q2_stops=getattr(des, "q2_fit", None), spare_joints=[des.joint_names[j] for j in des.spare],
+                            **({"slaved": des.slaved_fit, "drive_groups": des.drive_lumped,
+                                "slaved_rule": "joint equality on the declared law's tangent, re-linearised every step; force closure = unilateral (on while the drive pushes); drive bodies lumped on their mount; drive bearing friction not modelled"}
+                               if getattr(des, "slaved", None) else {}),
                             arm_member="the humerus (canonical frame at GH), joined to the last member by its hinge and to the bone by the soft-tissue cuff",
                             contact="member-member contact not modelled in the general chain (R6 judges part interference geometrically: 0.0 mm on these designs); stops are joint limits",
                             notes=[des.pin_stop_note, "joint friction on every hinge incl. K and the knee pins (rolling-bearing law; iglidur knee pins share it - an optimistic note for the plain-bearing pins, see the plain-bearing comparison cases)",
@@ -1063,6 +1195,11 @@ def rollup(C, N):
              cuff_pressure_peak_kPa=max(c["cuff_pressure_kPa"]["peak"] for c in C.values()),
              contact_peak_N=max(c["contact"]["peak_N"] for c in C.values()), amp_qs_max=max(c["amp_qs"]["max"] for c in C.values()))
     if any("spare_drift_deg" in c for c in C.values()): r["spare_drift_max_deg"] = max(c.get("spare_drift_deg", 0) for c in C.values())
+    if any("slaved" in c for c in C.values()):
+        r["slaved_law_err_max_deg"] = max(max(v["law_err_deg"] for v in c["slaved"].values()) for c in C.values() if "slaved" in c)
+        r["slaved_liftoff_share_max"] = max(max(v["liftoff_share_of_driven"] for v in c["slaved"].values()) for c in C.values() if "slaved" in c)
+        r["slaved_plan_err_max_deg"] = max(max(v["plan_err_deg"] for v in c["slaved"].values()) for c in C.values() if "slaved" in c)
+        r["slaved_drive_torque_peak_Nm"] = max(max(v["drive_torque_peak_Nm"] for v in c["slaved"].values()) for c in C.values() if "slaved" in c)
     if any("servo_peak_Nm" in c for c in C.values()): r["servo_peak_Nm"] = max(c.get("servo_peak_Nm", 0) for c in C.values())
     if any("load_friction" in c for c in C.values()):
         r["friction_peak_Nm"] = max(max(c["load_friction"]["friction_peak_Nm"]) for c in C.values()); r["tilt_peak_Nm"] = max(max(c["load_friction"]["tilt_peak_Nm"]) for c in C.values())
@@ -1082,16 +1219,18 @@ def attribution(res, nom, s):
 def verdict(out, nom):
     T = THRESH; c = out["cases"][nom]; v = {}
     def free(x): return bool(x["moment_gh_peak_Nm"] <= T["free_moment_gh_peak_Nm"] and x["moment_gh_rms_max_Nm"] <= T["free_moment_gh_rms_Nm"] and x["force_peak_N"] <= T["free_force_peak_N"]
-                             and x["lags_over_10deg"] == 0 and x["twist_peak_deg"] <= T["free_twist_peak_deg"] and x.get("spare_drift_max_deg", 0) <= T["free_spare_drift_deg"])
+                             and x["lags_over_10deg"] == 0 and x["twist_peak_deg"] <= T["free_twist_peak_deg"] and x.get("spare_drift_max_deg", 0) <= T["free_spare_drift_deg"]
+                             and x.get("slaved_law_err_max_deg", 0) <= T["free_spare_drift_deg"])
     v["moves_freely_nominal"] = free(c); v["drives_nominal"] = not c["lock_clips"]
     v["rule"] = (f"moves freely: |M_GH| peak <= {T['free_moment_gh_peak_Nm']} N.m and rms <= {T['free_moment_gh_rms_Nm']}, cuff force <= {T['free_force_peak_N']} N, cuff twist <= "
-                 f"{T['free_twist_peak_deg']} deg, no stall missing >= {LAG_DEG} deg of planned joint travel, 4R spare drift <= {T['free_spare_drift_deg']} deg; "
+                 f"{T['free_twist_peak_deg']} deg, no stall missing >= {LAG_DEG} deg of planned joint travel, 4R spare drift <= {T['free_spare_drift_deg']} deg, a slaved joint within {T['free_spare_drift_deg']} deg of its law; "
                  f"drives: never |M_GH| > {T['lock_moment_gh_Nm']} N.m or cuff force > {T['iso_ts_15066_upper_arm_N']} N (ISO/TS 15066 upper arm)")
     v["nominal_case"] = nom
     v["cuff_pressure_nominal_kPa"] = dict(peak=round(c["force_peak_N"] / CUFF_AREA_CM2 * 10, 3), budget_for_exo=COMFORT_KPA - STRAP_KPA,
                                           with_arm_parts_weight=round((c["force_peak_N"] + 9.81 * DES.H_mass) / CUFF_AREA_CM2 * 10, 3))
     v["per_case"] = {k: dict(moment_gh_peak_Nm=x["moment_gh_peak_Nm"], force_peak_N=x["force_peak_N"], twist_peak_deg=x["twist_peak_deg"], lags_over_10deg=x["lags_over_10deg"],
                              contact=x["contact_touch"], spare_drift_deg=x.get("spare_drift_max_deg"), lock_clips=x["lock_clips"], free=free(x), drives=not x["lock_clips"],
+                             **({"slaved_law_err_deg": x["slaved_law_err_max_deg"], "slaved_liftoff_share": x["slaved_liftoff_share_max"]} if "slaved_law_err_max_deg" in x else {}),
                              cuff_pressure_peak_kPa=x["cuff_pressure_peak_kPa"], within_pressure_budget=bool(x["cuff_pressure_peak_kPa"] <= COMFORT_KPA - STRAP_KPA),
                              under_iso_15066=bool(x["force_peak_N"] < T["iso_ts_15066_upper_arm_N"])) for k, x in out["cases"].items() if "nofric" not in k}
     return v
@@ -1102,7 +1241,7 @@ def print_report(out):
         if "nofric" in k: continue
         print(f"  {k:30s} worst {c['worst_clip'][:20]:20s} M_GH peak {c['moment_gh_peak_Nm']:6.3f} (rms<= {c['moment_gh_rms_max_Nm']:5.3f}) N.m  F {c['force_peak_N']:6.2f} N  "
               f"twist {c['twist_peak_deg']:6.2f} deg  qdot {c['joint_speed_peak_dps']:6.1f} deg/s ({c['speed_ratio_max']:.2f}x)  lag>10 {c['lags_over_10deg']:2d}  lock {len(c['lock_clips'])} clips  "
-              f"contact {c['contact_peak_N']:6.2f} N" + (f"  spare drift {c['spare_drift_max_deg']:6.1f}" if "spare_drift_max_deg" in c else "") + (f"  servo {c['servo_peak_Nm']:.2f} N.m" if "servo_peak_Nm" in c else ""))
+              f"contact {c['contact_peak_N']:6.2f} N" + (f"  spare drift {c['spare_drift_max_deg']:6.1f}" if "spare_drift_max_deg" in c else "") + (f"  slaved law err {c['slaved_law_err_max_deg']:.2f} deg (plan {c['slaved_plan_err_max_deg']:.2f}), lift-off {c['slaved_liftoff_share_max']:.3f}, drive {c['slaved_drive_torque_peak_Nm']:.3f} N.m" if "slaved_law_err_max_deg" in c else "") + (f"  servo {c['servo_peak_Nm']:.2f} N.m" if "servo_peak_Nm" in c else ""))
 
 if __name__ == "__main__":
     main()

@@ -10,7 +10,7 @@ on BOTTOM. 3 ACTIVE DOF (J1, J2, J3 encoded), K slaved (never read), 0 passive t
 
 What changes in the metal (honest, conservative side):
   * the knee plate drops from the pin stack level (tr + tp + RUN) to the bracket level tr, thickness 3.0 (was tp ~2.35);
-    the pad is 3.0 thick too (stk fixed at 6.15 -> tp 3.0);
+    the pad is 3.0 thick too (stk fixed at 6 + RUN -> tp 3.0);
   * the knee-vs-E and knee-vs-hub3 ADJACENCY (0.15 mm) checks go (same body); the bracket plate vs hub 3's housing is kept
     as a NON-adjacent 1 mm check (the J3 stack turns with link 2); E vs link 2 stays the adjacent 0.15 mm check at J3;
     the bracket / pad vs every other part (hubs, links, crank, horn, rod) stay at 1 mm;
@@ -47,6 +47,7 @@ LEAD = {"bk1": 28.9414, "bk2": 39.236, "a1max": 63.1774, "kK": 1.6232, "r_h": 14
 SEED = dict(LEAD, b3=0.0, wd=75.0, wa=-7.0, stk=6.15, near2=1)
 PARAMS = dict(SC.PARAMS, **SEED)
 _sc_clamp = SC._clamp
+_sc_report = SC._report
 
 
 def _clamp(p):
@@ -135,7 +136,7 @@ def ws_inband(B):
 
 def _report(B, params):
     p = _clamp(dict(PARAMS, **params))
-    r, M = SC._report(B, p)
+    r, M = _sc_report(B, p)
     r["plain"] = {k: r[k] for k in ("gap", "reach", "follow", "inband14", "contact")} if "plain" not in r else r["plain"]
     r["ws_inband"] = ws_inband(B)
     if M.kin_ok.any():
@@ -209,7 +210,7 @@ def ghoff(par, mags=(3.0, 5.0, 10.0), nc=60, nw=160):
 
 
 def viz_export(par):
-    SC._report = lambda B, params: _report(B, params)
+    SC._report = _report
     return SC.viz_export(_clamp(dict(PARAMS, **par)))
 
 

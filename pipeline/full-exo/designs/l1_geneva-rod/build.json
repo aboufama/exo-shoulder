@@ -2613,5 +2613,35 @@
   "closes": 0.7256,
   "feasible_kin_parts": 0.7228,
   "driven_feasible": 406
- }
+ },
+ "slaved": [
+  {
+   "slaved": [
+    "l1a",
+    "l1b"
+   ],
+   "driver": [
+    "l1b",
+    "l2"
+   ],
+   "x_key": "q.1",
+   "y_key": "knuckle.dK",
+   "law_x_deg": [
+    -21.811,
+    -5.011
+   ],
+   "law_y_deg": [
+    -53.4173,
+    -0.0
+   ],
+   "rest_y_deg": 0.0,
+   "closure": "force",
+   "drive_groups": {
+    "dk": "l1b",
+    "dr": "l1b"
+   },
+   "source": "build.json law (kK, q2hi, t_end: linear)",
+   "note": "K = law(q2) past the onset (lobe -> MR63ZZ roller -> bell crank -> pushrod -> horn on link 1a's arbor); below it the clock spring holds K on stop A; the spring also keeps the roller on the lobe (force closure)"
+  }
+ ]
 }

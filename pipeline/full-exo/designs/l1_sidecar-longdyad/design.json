@@ -1,0 +1,512 @@
+{
+ "id": "l1_sidecar-longdyad",
+ "source": "docs/concepts/sidecar-longdyad-knuckle-3r.md (the verified config: docs/concepts/rows/sidecar-longdyad-knuckle-3r.json best_params = docs/concepts/verify/sidecar-longdyad-knuckle-3r.py BEST), fit on Bench(60,160) fast at fold margin 5.0 = the shape the verifier wore frozen on Bench(110,360) exact (v_gap 18.91, score 93.12; held out 22.67)",
+ "params": {
+  "bk1": 28.9414,
+  "bk2": 39.236,
+  "a1max": 63.1774,
+  "law_mode": "lin",
+  "kK": 1.6232,
+  "r_h": 14.8706,
+  "beta": -86.447,
+  "La": 16.5467,
+  "s_arm": 4.3872,
+  "hl": 3.15,
+  "zr": 0.0,
+  "r_lobe": 7.7447,
+  "gam": 0.0,
+  "smhi": 16.5464,
+  "smlo": 5.0,
+  "az1": 96.6954,
+  "el1": 67.5865,
+  "az2": 42.2031,
+  "el2": 44.4209,
+  "wd": 67.5003,
+  "wa": -7.3175,
+  "b3": 0.345,
+  "ang_min": 26.8823,
+  "lc": 25.6915,
+  "phib": -60.7036
+ },
+ "n_joints": 4,
+ "sliding_cuff": false,
+ "dof": 3,
+ "passive": {
+  "count": 2,
+  "translations": 0,
+  "rotations": 2,
+  "outside_dof_count": true,
+  "kind": "flat two-pin knee closing the loop at the cuff (pins a, b parallel to J3); set by loop closure. K (4th revolute) is NOT a DOF: slaved to q2 by the sidecar drive past the onset, spring-held on stop A below it; the bell crank / rod are set by the RSSR closure",
+  "components": [
+   {
+    "pin": "a",
+    "between": "member 3 (E boss) / knee link",
+    "part": "IGLIDUR-PIN: iglidur GSM sleeve + 2 GTM washers on an integral O4 Ti pin, DIN 6799 RS 3.2 e-clip land",
+    "stack_mm": 4.8534,
+    "plates_mm": [
+     2.1767,
+     2.1767
+    ]
+   },
+   {
+    "pin": "b",
+    "between": "knee link / arm pad (cuff)",
+    "part": "IGLIDUR-PIN (as pin a)",
+    "stack_mm": 4.8534,
+    "plates_mm": [
+     2.1767,
+     2.1767
+    ]
+   }
+  ]
+ },
+ "joints": [
+  {
+   "joint": "J1",
+   "part": "O20 x 12.25 v5 hub, MR117-2RS pair, encoder",
+   "axis_offset_mm": 0.0
+  },
+  {
+   "joint": "K",
+   "part": "O20 v5 hub, MR117-2RS pair, cap 18.25 mm (clock spring); stops A / B = an opposed pair of O3 dowels in two 72.4-deg arc slots; slaved (no encoder)",
+   "axis_offset_mm": 0.0,
+   "passive": false,
+   "slaved": true,
+   "sensed": false
+  },
+  {
+   "joint": "J2",
+   "part": "O20 x 12.25 v5 hub, MR117-2RS pair, encoder; drive lobe on its rotor; q2 stops = O3 dowel in a 120.4-deg arc slot (folded stop q2lo, stop B at the drive's range)",
+   "axis_offset_mm": 0.0
+  },
+  {
+   "joint": "J3",
+   "part": "O20 x 12.25 v5 hub, MR117-2RS pair, encoder",
+   "axis_offset_mm": 14.04
+  }
+ ],
+ "drive": {
+  "kind": "sidecar RSSR: hub-2 rim lobe -> bell crank on link 1b (MR63ZZ pair on an O3 pin; short arm s_arm on the lobe, long arm La) -> O3 Ti rod + 2 M2 ball links -> horn lug of link 1a at hub K",
+  "components": [
+   "MR63ZZ 3x6x2.5 x 2 (crank pivot)",
+   "O3 h6 pin + DIN 6799 RS 2.3",
+   "M2 ball link x 2 (O7 socket envelope) + M2 ball studs",
+   "O3 x 26.8 mm Ti rod, M2 ends",
+   "follower roller / pad on the short arm (L2)"
+  ],
+  "lobe": {
+   "r_lobe": 7.7447,
+   "r_at_stopB": 10.432,
+   "past_O20_skirt_mm": 0.432,
+   "sweep_deg": 26.491,
+   "band_mm": [
+    3.65,
+    6.65
+   ],
+   "crank_axis_to_hub2_axis_mm": 17.78,
+   "boss_flank_to_hub2_axis_mm": 12.78,
+   "gap_lobe_crest_to_boss_flank_mm": 2.35,
+   "phi_at_stopB_deg": 35.09,
+   "note": "the follower (on the crank's short arm s_arm, at the boss's hub-side flank) that rides this lobe is an L2 detail: the verified model samples neither the lobe (inside hub 2's O20 stack) nor the follower"
+  },
+  "rod_len_mm": 26.842,
+  "boss_level_mm": 64.744,
+  "arm_levels_mm": [
+   61.09,
+   61.09,
+   61.09,
+   61.09,
+   61.09,
+   61.09,
+   57.94,
+   57.94,
+   57.94
+  ],
+  "La": 16.5467,
+  "s_arm": 4.3872,
+  "r_h": 14.8706,
+  "beta": -86.447,
+  "hl": 3.15,
+  "i_rock": 3.772,
+  "model_sidecar": {
+   "boss_level": 61.1,
+   "lev_L1b": 57.9,
+   "arm_tip_level": 57.9,
+   "rod_len": 26.8,
+   "La": 16.5,
+   "r_h": 14.9,
+   "i_rock": 3.77,
+   "rssr_closed": true,
+   "trans_min_taken": 38.8,
+   "ratio_range": [
+    0.738,
+    0.884
+   ],
+   "ratio_small_angle": 0.899,
+   "phi_max_taken": 31.6,
+   "crest_exact": 10.16,
+   "dK_lim": 43.0,
+   "why_lim": "ROD-hub2"
+  },
+  "stack_fix": {
+   "boss_underside_model_mm": 61.094,
+   "boss_underside_built_mm": 64.744,
+   "raised_mm": 3.65,
+   "why": "link 1b's strap climbs into J2's lower plate under the boss's hub-side half (the model stacks the boss on its 6 strap samples nearest the pivot and has no CRK-L1b check): the boss + the arm root sit on the strap's highest top under the O10 footprint + 0.15; the arm keeps the model's levels from there, the ball (RSSR) is unchanged"
+  }
+ },
+ "kinematics": {
+  "az": 96.6954,
+  "el": 67.58649999986109,
+  "a": [
+   36.368744591822136,
+   61.88888464126717
+  ],
+  "w": [
+   78.13166155081973,
+   -4.448973756835563
+  ],
+  "branch": -1,
+  "order": [
+   0,
+   1,
+   1
+  ],
+  "axis_points_mm": [
+   [
+    0.0,
+    0.0,
+    0.0
+   ],
+   [
+    -0.0,
+    0.0,
+    -0.0
+   ],
+   [
+    -1.544,
+    -13.631,
+    -2.993
+   ]
+  ],
+  "axes": [
+   [
+    0.044455,
+    0.924456,
+    0.378688
+   ],
+   [
+    -0.4799,
+    0.655007,
+    0.583662
+   ],
+   [
+    -0.075913,
+    -0.205663,
+    0.975674
+   ]
+  ],
+  "axis_line_offsets_mm": [
+   0.0,
+   0.0,
+   14.04
+  ],
+  "u2_check_deg": 9e-05,
+  "seats": {
+   "az1": 96.6954,
+   "el1": 67.5865,
+   "az2": 42.2031,
+   "el2": 44.4209,
+   "wd": 67.5003,
+   "wa": -7.3175,
+   "b3": 0.345
+  },
+  "knee": {
+   "lE": 67.832,
+   "lc": 25.6915,
+   "phiE": -2.7863,
+   "phib": -60.7036,
+   "stk": 4.8534,
+   "ang_min": 26.8823
+  },
+  "knee_mid_m_mm": [
+   -12.16,
+   1.762,
+   0.0
+  ],
+  "hub_r_mm": [
+   10.0,
+   10.0,
+   10.0
+  ],
+  "knuckle": {
+   "uK": [
+    -0.29434,
+    0.955618,
+    0.012604
+   ],
+   "bk1": 28.9414,
+   "bk2": 39.236,
+   "psiA_deg": -65.404,
+   "a1max": 63.1774,
+   "dK_stop_B_deg": -72.352,
+   "q2_stops_deg": [
+    90.056,
+    -30.331
+   ],
+   "smlo": 5.0,
+   "smhi": 16.5464,
+   "slaved": {
+    "law": "dK = kK (q2 - q2hi) along the stretching sense (lin), cut at the drive's own range dK_lim",
+    "kK": 1.6232,
+    "q2_onset_deg": -3.84,
+    "s_q": -1.0,
+    "dK_lim_deg": 43.0,
+    "r_lobe": 7.7447,
+    "s_arm": 4.3872,
+    "La": 16.5467,
+    "r_h": 14.8706
+   },
+   "note": "az/el/a/w = the 3R with K on stop A; past the onset q2hi K is SLAVED to q2 by the sidecar drive (lobe -> bell crank -> rod -> horn; 3 active DOF; K never free, never read); the bell crank (dk) and the rod (dr) are posed side members of link 1b"
+  }
+ },
+ "base": {
+  "mount": "girdle",
+  "chain": "sidecar_longdyad_knuckle",
+  "note": "base rides the scapula on the user's scapula handler, carried directly at the J1 hub ring (no tab)"
+ },
+ "built_with": "pipeline/concept_l1/build_sidecar_l1.py (L1 keep-out meshes: O20 hub keep-outs incl. hub K's 6 mm taller cap, fitted 8 x 3 straps 1a / 1b / 2, stop dowels + arc slots, the lobe / bell crank / pin / rod / ball-link / horn drive (crank and rod posed), E strap + boss, knee link + knee stop, arm pad, pin retainers)",
+ "label": "sidecar-longdyad-knuckle-3r (verified config, fit Bench(60,160), fold margin 5), L1 keep-out",
+ "fit_bench": [
+  60,
+  160
+ ],
+ "fold_margin": 5.0,
+ "build_fixes": {
+  "k_pair": true,
+  "j2_single_dowel_push_limit": true,
+  "e_cap": true,
+  "knee_stop_deg": 153.1177
+ },
+ "faces_mm": [
+  49.72,
+  60.34,
+  78.56
+ ],
+ "fK_mm": 55.38,
+ "tr": 86.14,
+ "stack_mm": {
+  "pin_stack_mm": 4.8534,
+  "plate_tp": 2.1767,
+  "run": 0.5,
+  "knee_level_tr": 86.144,
+  "f": [
+   49.723,
+   60.341,
+   78.563
+  ],
+  "fK": 55.375,
+  "capK_mm": 6.0,
+  "hubK_crown_mm": 18.25,
+  "boss": [
+   86.144,
+   88.321
+  ],
+  "knee": [
+   88.821,
+   90.997
+  ],
+  "E": {
+   "x": [
+    8.0,
+    63.33
+   ],
+   "under": [
+    78.56,
+    86.14
+   ],
+   "thin_from": 61.0,
+   "rim": 61.83,
+   "cap": 88.321,
+   "top_before_cap": 88.321,
+   "stations_capped": 0,
+   "min_thickness": 2.177,
+   "knee_link_underside": 88.821
+  },
+  "knee_link_mm": [
+   37.69,
+   10.0,
+   2.1767
+  ],
+  "hubs_r": [
+   10.0,
+   10.0,
+   10.0,
+   10.0
+  ],
+  "retainer": [
+   91.497,
+   92.397
+  ],
+  "full_pin_stack_mm": 6.253,
+  "stops": {
+   "K": {
+    "stop_A_deg": 0.0,
+    "stop_B_deg": -72.352,
+    "a1max": 63.1774,
+    "travel_deg": 72.352,
+    "dowel_home_angle_deg": 77.0,
+    "dowel_home_angles_deg": [
+     77.0,
+     257.0
+    ],
+    "pair": true,
+    "slot_deg": [
+     -6.66,
+     88.31
+    ],
+    "clearance_to_lower_strap_deg": 9.41,
+    "dowel_mm": [
+     3.0,
+     0.5,
+     6.15
+    ],
+    "slot_r_mm": 7.75,
+    "slot_w_mm": 3.1,
+    "end_clearance_mm": 0.02,
+    "frame": "angles in frame_of(axis) of the lower member: dowel centre = home angle + joint angle"
+   },
+   "J2": {
+    "q2_stops_deg": [
+     90.056,
+     -30.331
+    ],
+    "q2_onset_deg": -3.84,
+    "window_deg": [
+     -30.331,
+     90.056
+    ],
+    "stop_B": "the drive's own range: |dK| = dK_lim 43.00 deg (ROD-hub2) at t = 26.49 deg past the onset",
+    "travel_deg": 120.387,
+    "dowel_home_angle_deg": 209.0,
+    "dowel_home_angles_deg": [
+     209.0
+    ],
+    "pair": false,
+    "slot_deg": [
+     167.36,
+     310.37
+    ],
+    "clearance_to_lower_strap_deg": 75.64,
+    "dowel_mm": [
+     3.0,
+     0.5,
+     6.15
+    ],
+    "slot_r_mm": 7.75,
+    "slot_w_mm": 3.1,
+    "end_clearance_mm": 0.02,
+    "frame": "angles in frame_of(axis) of the lower member: dowel centre = home angle + joint angle"
+   }
+  },
+  "drive": {
+   "lobe": {
+    "r_lobe": 7.7447,
+    "r_at_stopB": 10.432,
+    "past_O20_skirt_mm": 0.432,
+    "sweep_deg": 26.491,
+    "band_mm": [
+     3.65,
+     6.65
+    ],
+    "crank_axis_to_hub2_axis_mm": 17.78,
+    "boss_flank_to_hub2_axis_mm": 12.78,
+    "gap_lobe_crest_to_boss_flank_mm": 2.35,
+    "phi_at_stopB_deg": 35.09,
+    "note": "the follower (on the crank's short arm s_arm, at the boss's hub-side flank) that rides this lobe is an L2 detail: the verified model samples neither the lobe (inside hub 2's O20 stack) nor the follower"
+   },
+   "rod_len_mm": 26.842,
+   "boss_level_mm": 64.744,
+   "arm_levels_mm": [
+    61.09,
+    61.09,
+    61.09,
+    61.09,
+    61.09,
+    61.09,
+    57.94,
+    57.94,
+    57.94
+   ],
+   "La": 16.5467,
+   "s_arm": 4.3872,
+   "r_h": 14.8706,
+   "beta": -86.447,
+   "hl": 3.15,
+   "i_rock": 3.772,
+   "model_sidecar": {
+    "boss_level": 61.1,
+    "lev_L1b": 57.9,
+    "arm_tip_level": 57.9,
+    "rod_len": 26.8,
+    "La": 16.5,
+    "r_h": 14.9,
+    "i_rock": 3.77,
+    "rssr_closed": true,
+    "trans_min_taken": 38.8,
+    "ratio_range": [
+     0.738,
+     0.884
+    ],
+    "ratio_small_angle": 0.899,
+    "phi_max_taken": 31.6,
+    "crest_exact": 10.16,
+    "dK_lim": 43.0,
+    "why_lim": "ROD-hub2"
+   },
+   "stack_fix": {
+    "boss_underside_model_mm": 61.094,
+    "boss_underside_built_mm": 64.744,
+    "raised_mm": 3.65,
+    "why": "link 1b's strap climbs into J2's lower plate under the boss's hub-side half (the model stacks the boss on its 6 strap samples nearest the pivot and has no CRK-L1b check): the boss + the arm root sit on the strap's highest top under the O10 footprint + 0.15; the arm keeps the model's levels from there, the ball (RSSR) is unchanged"
+   }
+  },
+  "knee_stop": {
+   "ang_stop": 153.1177,
+   "side": 1.0,
+   "alpha_home_deg": 122.083,
+   "check": {
+    "poses": 27,
+    "max_err_deg": 0.0,
+    "sides": [
+     1
+    ]
+   },
+   "tooth_r_min": 7.889,
+   "face": {
+    "s": [
+     6.8,
+     9.2
+    ],
+    "l": 4.0,
+    "z": [
+     86.821,
+     88.321
+    ]
+   },
+   "contact_area_mm2": 3.6,
+   "model_window_edge_deg": 153.1177,
+   "fit_bench_knee_max_deg": 146.362,
+   "fit_bench_poses_past_stop": 0
+  }
+ },
+ "bench": {
+  "near_touch_gap": 10.3,
+  "reach": 0.8,
+  "follow": 1.0,
+  "inband14": 0.897,
+  "contact": 0.0,
+  "inband10": 0.5291
+ },
+ "note": "R17's dynamics judge orders posed groups as a serial chain (base, l<k>[a-z], cuff); the drive's side members dk / dr have no place in it"
+}
