@@ -4,7 +4,7 @@
  * elbow hub) -> distal link A (ad). Leg B: S -> JB (ACTIVE, O20 hub on the posterior scapula / infraspinous fossa, S lat -5
  * / lon -115) -> proximal B -> vB (PASSIVE) -> distal B, which turns on distal A about the common output axis w (PASSIVE).
  * J3 (ACTIVE): a thin-section turret ring about the same axis w between distal A and the arm, its stator on the lateral
- * arm strip; w = the arm-fixed axis j_o through GH at s ~130 mm, th 10 (wdir(21, -10)). A spherical 5R loop (2-DOF
+ * arm strip; w = the arm-fixed axis j_o through GH at s ~130 mm, th 10 (wdir(21, -10)); the turret sits where that axis meets the lateral arm skin (~142 mm from GH). A spherical 5R loop (2-DOF
  * pointing of w) + a coaxial roll: 3 active, 3 passive, every passive set by closure. Each leg is the spherical 3R
  * (base, elbow, w) of KIN.sph3r (closed form); arcs from a kinematic loop screen inside the spec's 60-100 deg ranges
  * (A: ap 100, ad 60; B: ap 80, ad 100; branches +1 / -1: 140 of 141 screen frames close). Kept out as fivebar-roll:
@@ -13,7 +13,7 @@
   const K = (typeof window !== 'undefined' ? window : globalThis).KIN, V = K.V, D = K.D2R;
   const SL = (lat, lon) => [Math.cos(lat * D) * Math.sin(lon * D), Math.sin(lat * D), Math.cos(lat * D) * Math.cos(lon * D)];
   const P = Object.assign({}, { aLat: 66, aLon: -68, bLat: -5, bLon: -115, ap: [100, 80], ad: [60, 100], wd: 21, wa: -10, s: [1, -1],
-              margin: 8, par: 12, sep: 17, faces: [52, 54], pins: [84, 80], fW: 64, up: 3.15, ring_r: 22, cuff_at: 165 });
+              margin: 8, par: 12, sep: 17, faces: [52, 54], pins: [84, 80], fW: 142, up: 3.15, ring_r: 16, cuff_at: 165 });
   const ua = SL(P.aLat, P.aLon), ub = SL(P.bLat, P.bLon), W0 = K.wdir(P.wd, P.wa);
   const BA = K.sph3r(ua, W0, P.ap[0], P.ad[0], P.s[0]), BB = K.sph3r(ub, W0, P.ap[1], P.ad[1], P.s[1]);
   const split = q => ({ qa: [q[0], q[3], q[2]], qb: [q[1], q[4], q[2] - q[5]] });   // q = JA, JB, J3, vA, vB, w
