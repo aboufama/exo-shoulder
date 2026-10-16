@@ -151,3 +151,19 @@ recovered fold pose is re-lost to skin contact or knee slide on the same overhea
 * The wide K dyad converts ~10 stretched-fold losses into contact / knee-slide losses: the stretched wall and the
   skin-contact wall coincide on the overhead poses, so moving the fold wall alone cannot buy reach. The next lever must
   lower the metal on those poses (drive metal in band, sidecar) rather than widen the window.
+
+## Audit (2026-10-16 ~20:30 UTC, independent re-measurement)
+
+The death stands. The design is behind the verified lead, though well ahead of the 3R champion.
+
+- **Convergence gate** (re-computed on the 4869 CMA entries only): the best gained 0.13 score points over the second half and 0.00 over the last third; the top-5 gaps are 16.74-17.10. Converged. The sweep's 11.16 / 13.14 entries are `seed-lawonly` (drive metal off), so they are not buildable designs.
+- **Ranges**: e3d 61-92, e3a -15..+38, b3 0-0.6, a2t 52-71, bk2 35-54 and a1max 58-78 were all explored, and the best configs sit inside the bounds. No obvious region was missed.
+- **Conventions**: `prep({})` returns the lead's seats (the effective J3 axis round-trips to (76.26, -6.78)). The b3 fixed-point and the circ_int branch take the branch nearest the lead's J2 seat. No modelling bug was found.
+- **Re-measured** (claim harness, lead verifier CorrModel, `CB_EXACT=1`, Bench(110,360) frozen):
+
+| config | frozen gap | reach | follow | ib14 | contact | near-touch 1 mm | min metal | why lost (fold/slide/contact/parts) |
+|---|---|---|---|---|---|---|---|---|
+| C0 (best frozen) | **24.46** (91.10) | 0.733 | 0.955 | 0.851 | 0.029 | 27.70 | 0.03 mm | 76 / 12 / 11 / 2 |
+| lead, same harness | **22.82** (91.70) | 0.728 | 1.000 | 0.855 | 0.011 | 24.46 | 0.30 mm | 86 / 7 / 4 / 1 |
+
+Measured reason in one line: widening the window wins back 10 fold poses, and skin contact (+7), knee slide (+5) and clip follow (-0.045) lose them again on the same overhead and stretched poses, so the design ends 1.64 behind the lead frozen. Next: lower the metal on those poses (put the drive metal in band, or lower hub 3 / L2).

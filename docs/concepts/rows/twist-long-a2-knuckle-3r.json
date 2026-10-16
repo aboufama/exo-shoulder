@@ -7,11 +7,11 @@
  "passive_dof": 6,
  "passive_translations": 0,
  "t_ideated": null,
- "v_reach": null,
- "v_follow": null,
- "v_inband14": null,
- "v_inband10": null,
- "v_gap": null,
+ "v_reach": 0.7333,
+ "v_follow": 0.9545,
+ "v_inband14": 0.851,
+ "v_inband10": 0.5865,
+ "v_gap": 24.46,
  "doc": "docs/concepts/twist-long-a2-knuckle-3r.md",
  "status": "dead",
  "reach": 0.8,
@@ -103,5 +103,23 @@
   "seedB_88_30_b3_0": 0.825,
   "pass_kinematic": true,
   "pass_parking": false
+ },
+ "v_contact": 0.0289,
+ "audit": {
+  "t": "2026-10-16T20:30:00Z",
+  "refuted": false,
+  "bench": "Bench(110,360) exact, frozen C0 (fit Bench(60,160) fast), lead verifier CorrModel via the claim harness",
+  "v_gap": 24.46,
+  "lead_same_harness": 22.82,
+  "near_touch_1mm": 27.7,
+  "lead_near_touch_1mm": 24.46,
+  "min_metal_mm": 0.03,
+  "gate_cma_only": {
+   "n": 4869,
+   "gain_second_half": 0.13,
+   "gain_last_third": 0.0,
+   "top5_spread_gap": 0.36
+  },
+  "note": "Death stands. Gate re-computed on the 4869 CMA entries: converged. The 11.16/13.14 sweep entries are seed-lawonly (drive metal off; not designs). Parameter ranges cover e3d 61-92, e3a -15..38, b3 0-0.6 (best ones interior), a2t 52-71, bk2 35-54. C0 frozen re-measured at 24.46 and the lead control through the same harness at 22.82 (= the verified number): behind the lead by 1.64, worse near-touch (27.70 vs 24.46), min metal 0.03 mm vs 0.30. No modelling bug found: with no designer variables prep() returns the lead's seats, and the lead's effective J3 axis round-trips (76.26, -6.78)."
  }
 }
