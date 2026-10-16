@@ -5,7 +5,7 @@
  "family": "offset axes",
  "active_dof": 3,
  "passive_dof": 2,
- "status": "screened",
+ "status": "verified",
  "t_ideated": null,
  "t_screened": "2026-10-15T23:32:45Z",
  "reach": 0.7063,
@@ -14,11 +14,11 @@
  "inband10": 0.3892,
  "contact": 0.0116,
  "gap": 32.61,
- "v_reach": null,
- "v_follow": null,
- "v_inband14": null,
- "v_inband10": null,
- "v_gap": null,
+ "v_reach": 0.6111,
+ "v_follow": 0.9636,
+ "v_inband14": 0.784,
+ "v_inband10": 0.3984,
+ "v_gap": 42.59,
  "n_configs": 4523,
  "verdict": "screened, a leader on the screening bench: gap 32.61 (score 88.14) with the seed's VModel checks on; the spec's all-skin-normal 2-slide chain cannot close (17.7 % of poses at +-0.5 mm) - the exact form is J1/J2 on GH rays + a free, skin-normal-tilted J3 line + 2 slides in hub 3's plane (no radial slide); J3 tilt + 7 mm offset buys 14.1 gap at the best seats (46.71 -> 32.61); level with / better than the 3-slide skin-normal-hubs-selfaligning (35.86): the radial slide is not needed on this bench; hand to the verifier (Bench(110,360) exact) and then the R10 judge (2 vs 3 slides)",
  "limiter": "J2 fold: 47 of 220 poses (window 44-104 deg of the J1-J3 axis angle vs 13-156 deg over the bench; across-the-body 12/36, overhead 19/41 incl. Raise overhead clip frames #3, #7) - orientation-level, untouched by offsets or slides; hub 3 50 % in band (median 14.0 mm), stage parts 62-70 %, bridge 0 %; pinch: arm-fixed guide block 0.21 mm (plane -90 elev 45 axial 120), hub 2 0.49 mm (plane 0 elev 75 axial 45); within-1 mm poses as contact -> 37.42, within-2 mm -> 41.44",
@@ -67,5 +67,37 @@
   "arm_fixed_rail_b3_02": 142.6,
   "spec_all_skin_normal_closable_share": 0.177,
   "ref_skin_normal_hubs_selfaligning_3slides": 35.86
- }
+ },
+ "v_contact": 0.021,
+ "v_score": 84.51,
+ "t_verified": "2026-10-16T00:32:53Z",
+ "champion_same_bench": 66.97,
+ "v_near_touch": {
+  "min_mm": 0.64,
+  "gap_metal_lt1_as_contact": 43.74,
+  "poses_lt1": 2,
+  "gap_metal_lt2_as_contact": 68.67,
+  "poses_lt2": 40
+ },
+ "v_overhead140": {
+  "ws_reach": 0.25,
+  "ws_taken": "7/28",
+  "clip_follow": 1.0,
+  "inband14_all": 0.86,
+  "inband10_all": 0.57,
+  "not_taken": {
+   "fold": 19,
+   "slide": 1,
+   "contact": 1
+  }
+ },
+ "v_runs": {
+  "fast_60_160_reproduced": 32.61,
+  "big_frozen_exact": 42.59,
+  "champion_fast_60_160_same_checks": 63.26,
+  "champion_big_frozen_exact_same_checks": 66.97,
+  "exact_60_160_refit": "pending (farm + local, .cache/osn_verify/b_*.json)",
+  "big_refit_exact": "pending (farm)"
+ },
+ "v_note": "Verifier 2026-10-16, config k4216 (cma2-F; sweep log = row = doc params). Reproduced 32.61 exactly on Bench(60,160) fast. v_* = Bench(110,360) exact, shape FROZEN from the 60/160 fast fit (slide ranges +-6.3/+-7.5 and stage centre frozen), model checks + verifier checks (hub crowns, strap/box tops skin-checked: 0 contact, min 1.12 mm hub-2 crown; link 2 vs member 3 neck/bridge/carriage B: min 3.61 mm, 0 jams): gap 42.59 (reach 0.611: 136/470 poses in the J2 fold). Champion (seed VModel slides 0, r20 s1414 #4 axes) through the same code and checks on the same bench, frozen: 66.97 (not the risley verifier's kit 75.94; concept_baseline 73.80). 3 active + 2 passive (2 x RSR3M/MGN03C crossed, real stack 10.5 mm vs 13.5 modelled; rails 26.6/29 mm real), radial span 0.000 mm, closure 0.015 deg. Not refuted; not 90+ (needs ~+0.29 large-bench reach: fold frontier re-seed). Script docs/concepts/verify/offset-skin-normal-3r.py."
 }

@@ -172,6 +172,84 @@ Bench(110,360) exact with 1 mm radial clearance; then the R10 judge with the rea
 take). The fold needs a morphology change (a 4th passive DOF at the J2 fold, or link angles a1 ~ a2 ~ 85 deg with
 J2 parked where the arm is not), not more tuning.
 
+## Verification (k4216) - adversarial verifier, 2026-10-16
+
+**Verdict: verified, not 90+.** The claim reproduces exactly on its own bench, no hard rule is broken, and the frozen
+shape beats the champion by 24.4 points on the large exact bench. But it degrades to **v_gap 42.59** (score 84.5) on
+Bench(110,360), exact path, shape frozen from the Bench(60,160) fit. The loss is reach (0.706 -> 0.611): 136 of 470
+poses fall in the J2 fold. Script: `docs/concepts/verify/offset-skin-normal-3r.py` (model checks + the checks below;
+the champion runs through the same code).
+
+| run | gap | reach | follow | in-band 2-14 | 2-10 | contact |
+|---|---|---|---|---|---|---|
+| claim, Bench(60,160), fast grid (reproduced exactly; sweep log k4216 = row = doc) | 32.61 | 0.706 | 0.967 | 0.779 | 0.389 | 0.012 |
+| same + verifier checks (crowns, strap tops, link 2 vs member 3) | 32.61 | 0.706 | 0.967 | 0.779 | 0.389 | 0.012 |
+| **Bench(110,360), exact, FROZEN shape from the 60/160 fast fit, verifier checks (v_*)** | **42.59** | 0.611 | 0.964 | 0.784 | 0.398 | 0.021 |
+| champion (seed VModel, slides 0: r20 s1414 #4 axes, arm-fixed hub-3 block), Bench(60,160) fast, same checks | 63.26 | 0.744 | 0.917 | 0.574 | 0.354 | 0.117 |
+| **champion, Bench(110,360), exact, frozen shape, same checks** | **66.97** | 0.700 | 0.918 | 0.575 | 0.356 | 0.113 |
+
+The champion number is this verifier's own: the same VModel code, part sizes, fitting, pose rules and added checks.
+It is not the risley-turret verifier's 75.94 (kit checks + 1 mm radial). Concept_baseline's own conventions give
+73.80 on the same bench. Either way the margin is 24-33 points. The exact Bench(60,160) refits and the Bench(110,360)
+refits (osn and champion) were submitted to the farm (`.cache/osn_verify/b_*.json`); the 60/160 refits were also
+started locally. On the first try, every exact distance call rebuilt its trees (0.1 s each, ~50 calls per pose), so
+the script now batches each pose's samples into one call. The numbers are identical on the fast grid.
+
+What was checked:
+
+1. **DOF.** 3 active (J1, J2, J3), 2 passive slides, both set by closure: s = (R3^T - I) c3, in hub 3's plane. The
+   radial part is identically 0, since c1 = c2 = 0 (rest error 0.0001 deg). Measured radial span 0.000 mm and closure
+   residual max 0.015 deg on both benches. No undetermined coordinate. **Pass.**
+2. **Real size and sampling.** O20 x 12.25 hubs, 8 x 3 straps, neck 16.8 x 8 x 3 with no riser, bridge 6.3 x 8 x 3,
+   and carriage B are all present. Member 3 is connected: hub 3 -> neck -> bridge -> carriage B. The stage parts
+   (block, carriage A, rail strip) are sampled on a 2 mm grid (1 point / 4 mm2), with walls and edges contact-checked.
+   **Added:** the outward faces (crown discs of hubs 1-3, the tops of links 1-2, neck and bridge, the stage box tops)
+   are now skin-checked. No contact on either bench. The lowest is hub 2's crown at 1.12 mm (plane 60, elev 150,
+   axial -45, under the raised arm). **Pass.**
+3. **Pose-taking.** Fold margin 10 deg, slide ranges frozen at +-6.3 / +-7.5 (1 large-bench pose lost to the slide
+   range), 10 fps continuity (0 flips), closure < 0.5 deg, part clearance >= 1 mm (min over the poses taken: 1.32 mm),
+   jam rule. **Added: link 2 vs member 3** (neck, bridge, carriage B), adjacent via J3. This pair was unchecked; the
+   minimum is 3.61 mm (link 2 over the neck at plane -15, elev 75, axial 90), so no pose is lost. **Pass.**
+4. **Hardware (lesson a).** Every joint maps to a real part.
+   * J1-J3 are the O20 v5 hub (docs/HARDWARE.md), modelled at full size.
+   * Along: an inverted THK RSR3M / HIWIN MGN03C (H 4.0, block 8 x 12, rail 3 x 2.6), the block on the cuff.
+     Travel +-5.8 is used of a +-6.3 range, so the real rail is 12 + 12.6 + 2 = 26.6 mm. Modelled: a 20 x 20 x 4
+     block and an 8 x 4 x 32.6 rail.
+   * Across: a second RSR3M / MGN03C, crosswise. Travel +-7.0 of +-7.5, so the real rail is 12 + 15 + 2 = 29 mm.
+     Modelled: carriage A 20 x 35 x 4 plus carriage B 20 x 20 x 4.
+   * Stack: real 1.5 + 4.0 + 1.0 + 4.0 = 10.5 mm, modelled 13.5 mm. The model is 3 mm taller and larger in
+     footprint, so it is conservative.
+   * 2 passive translations (the cap). Radial residual 0 on the bench. A real GH-vs-scapula translation's radial part
+     must go to the cuff liner (<= 3 mm, stated compliance; not measured here: R10).
+   * Soft notes. (i) The real inverted rail sits 2.9-5.5 mm above the cuff base, against 4.5-8.5 modelled, so its
+     overhanging ends are 1.6-3 mm lower than modelled. They are not skin-checked at that height. (ii) An RSR3M block
+     is rated MA 0.29 N.m (MGN03C 0.7 / 0.5), and the stage carries the arm's orientation torque. That is acceptable
+     for the unpowered MVP1 [est] and short for MVP2.
+   * No lofts: constant straps and boxes. **Pass.**
+5. **Near-touch (lesson d)**, frozen, Bench(110,360) exact. Lowest metal over the poses taken is **0.64 mm** (the
+   arm-fixed block, plane -75, elev 45, axial 120). Metal < 1 mm counted as contact: **gap 43.74** (2 poses). Metal
+   < 2 mm counted as contact: **68.67** (40 poses). The fit pushes the undersides to the 2 mm target, so 40 of the
+   poses taken sit within 2 mm somewhere. The champion on the same rules: 0.02 mm, 71.20 (< 1 mm), 78.34 (< 2 mm).
+6. **Overhead (lesson e)**, elevation >= 140, frozen, Bench(110,360) exact.
+   * osn: workspace reach **0.25** (7 / 28 poses; 19 lost to the J2 fold, 1 to the slide range, 1 to contact). Clip
+     frames 10 / 10 taken. In-band 2-14 0.86 over all taken metal (clip only 0.79), 2-10 0.57.
+   * Champion: reach 0.14 (4 / 28), follow 0.40, in-band 0.73.
+   * Overhead is where osn's reach is lowest: the J2 fold (window 44-104 deg) cuts 3 in 4 overhead workspace poses.
+
+Issues (not refuting):
+* The fast 32.61 is optimistic by 10 points on the large bench. Almost all of it is reach (fold): 136 / 470 poses,
+  versus 47 / 220 on the fit bench. In-band holds (0.784), so the shape transfers. The fold is the limiter, as the
+  model doc says, and only a morphology change moves it (docs/FINDINGS.md fold frontier: arcs 50 / 50 keep 96 % of the
+  workspace fold-free, against a1 / a2 = 40 / 74 here).
+* 40 of the poses taken are within 2 mm somewhere. The 2 mm clearance target is the bench's own rule, but a liner
+  plus real skin motion will eat that margin.
+* The J1 / J2 GH-ray condition is exact only for a fixed GH. The real GH translation's radial part has no slide (R10
+  open). The champion has the same exposure, with 0 slides.
+
+**Next:** the 90+ bar (gap <= 27.5) needs about +0.29 reach on the large bench. Re-seed the J1 / J2 / J3 layout from
+docs/research/fold/frontier.json (a1 + a2 >= 90, |a1 - a2| small). Check that the hub rays stay in band (proximity
+atlas), and re-run this script on the result (frozen, Bench(110,360) exact).
+
 ## Files
 
 * model: docs/concepts/models/offset-skin-normal-3r.py (`check`, `kin`, `redteam [--png]`; built on

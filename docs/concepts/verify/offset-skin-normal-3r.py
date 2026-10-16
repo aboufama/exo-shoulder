@@ -35,6 +35,35 @@ ROW = json.load(open(os.path.join(REPO, "docs", "concepts", "rows", "offset-skin
 CHAMP = dict(slides=0, vfix=1, jam_contact=1, drop=1)
 
 
+def _run_batched(self, B=None):
+    """S.Model.run with the metal and contact-only samples of a pose in ONE distance call (the exact path rebuilds its
+    trees per call: ~0.1 s each); same numbers as S.Model.run"""
+    B = self.B; B.reset(); t0 = time.time()
+    self.fit()
+    valid = set(self.poses_fit.tolist()); dropped = set(self.poses_fit[self.drop].tolist())
+    self.clear = np.full(len(B.idx), np.nan); self.last_pair = {}
+    for i in range(len(B.idx)):
+        if i not in valid: B.record(i, None); continue
+        cl = self.collide(i); self.clear[i] = cl; self.last_pair[i] = min(self.last_clear, key=self.last_clear.get)
+        if cl < S.PART_CLEAR and not (self.p.get("jam_contact") and i in dropped):
+            self.why[i] = "parts"; B.record(i, None); continue
+        mp = self.metal_points(i); cw = [self.world(m, i, Pc) for m, Pc in self.contact]
+        dd = B.dist(i, np.concatenate([mp] + cw)); d = dd[:len(mp)]; B.res[i] = d
+        dc = float(dd[len(mp):].min()) if len(dd) > len(mp) else 1e9
+        if dc < 0: B.res[i] = np.r_[d, dc]
+        if min(dc, float(d.min())) < 0: self.why[i] = "skin" if i in dropped else "contact"
+    r = B.report(); r["why"] = {k: int((self.why == k).sum()) for k in ("fold", "slide", "flip", "skin", "parts", "contact")}
+    r["parts_ib14"] = self.part_inband()
+    pc = [self.last_pair.get(i) for i in range(len(B.idx)) if self.why[i] == "parts"]
+    r["parts_pairs"] = {k: pc.count(k) for k in set(pc)}
+    r["s_abs_max"] = [round(float(np.abs(self.s[self.kin_ok][:, k]).max()), 1) if self.kin_ok.any() else None for k in range(3)]
+    r["f"] = [round(x, 1) for x in self.f]; r["t"] = round(time.time() - t0, 1)
+    return r
+
+
+S.Model.run = _run_batched
+
+
 def bench(nc, nw, fast=False):
     old = os.environ.get("CB_EXACT")
     if fast and old is not None: del os.environ["CB_EXACT"]
@@ -117,13 +146,15 @@ def audit(M, B, r, champ):
     taken = lambda i: B.res[i] is not None and float(np.min(B.res[i])) >= 0
     out = {}
     # 1. outer faces vs skin
-    OS = outer_samples(M, champ); hit = {}; low_outer = []
+    OS = outer_samples(M, champ); hit = {}; low_outer = []; cmin = {}
     for i in range(len(B.idx)):
         if not taken(i): continue
-        worst = (1e9, None)
-        for nm, mem, X in OS:
-            d = float(B.dist(i, M.world(mem, i, X)).min())
+        parts = [M.world(mem, i, X) for nm, mem, X in OS] + [M.world(m, i, Pc) for m, Pc in M.contact]
+        dd = B.dist(i, np.concatenate(parts)); cut = np.cumsum([0] + [len(x) for x in parts]); worst = (1e9, None)
+        for k, (nm, mem, X) in enumerate(OS):
+            d = float(dd[cut[k]:cut[k + 1]].min())
             if d < worst[0]: worst = (d, nm)
+        cmin[i] = min(worst[0], float(dd[cut[len(OS)]:].min()) if cut[-1] > cut[len(OS)] else 1e9)
         low_outer.append((worst[0], i, worst[1]))
         if worst[0] < 0: hit[i] = worst
     low_outer.sort()
@@ -150,10 +181,7 @@ def audit(M, B, r, champ):
     mins = []
     for i in range(len(B.idx)):
         if not taken(i): continue
-        dmin = float(np.min(B.res[i]))
-        dc = min(float(B.dist(i, M.world(m, i, Pc)).min()) for m, Pc in M.contact) if M.contact else 1e9
-        do = min(float(B.dist(i, M.world(mem, i, X)).min()) for nm, mem, X in OS)
-        mins.append((min(dmin, dc, do), i))
+        mins.append((min(float(np.min(B.res[i])), cmin.get(i, 1e9)), i))
     mins.sort(); out["near_touch_min_mm"] = round(mins[0][0], 2) if mins else None
     out["near_touch_low"] = [dict(mm=round(d, 2), i=int(i), plane=B.poses[i]["plane"], elev=B.poses[i]["elev"], axial=B.poses[i]["axial"], kind=B.kind[i]) for d, i in mins[:6]]
     res1 = list(B.res)
