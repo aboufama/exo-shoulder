@@ -35,7 +35,7 @@ OSN = PK.OSN
 unit = S.unit; D2R = math.pi / 180
 ID = "twist-long-a2-knuckle-3r"
 
-LEAD = json.load(open(os.path.join(REPO, "docs", "concepts", "rows", "frontload-lobe-stopb-knuckle-3r.json")))["best_params"]
+LEAD = {"bk1": 30.0536, "bk2": 37.5707, "a1max": 61.7215, "smhi": 14.7672, "smlo": 5.1723, "az1": 95.3594, "el1": 67.6187, "az2": 42.7487, "el2": 43.9031, "wd": 63.5262, "wa": -10.5604, "b3": 0.3825, "ang_min": 27.8606, "r_horn": 2.4709, "r_lobe": 7.3499, "kA": 2.9004, "t1": 6.9414, "kB": 2.7564, "i_rock": 1.0, "law_mode": "seg", "emb_mode": "rod", "capK": 6.0, "tail": 1, "lE": 67.832, "lc": 25.8149, "phiE": -2.7863, "phib": -65.6717, "stk": 4.8534, "crown_rule": 1}   # rows/frontload-lobe-stopb-knuckle-3r.json best_params (the verified lead)
 PARAMS = dict(F.PARAMS, **LEAD)
 # seed A (reach-first): effective J3 wdir(70, 15), a2 66, bk1 30 / bk2 44 / a1max 69, seg law to t_end 100
 SEED_A = dict(e3d=70.0, e3a=15.0, b3=0.0, a1t=36.12, a2t=66.0, bk1=30.0, bk2=44.0, a1max=69.0, t_end=100.0)
@@ -84,7 +84,8 @@ def seats(p):
 
 
 def prep(params):
-    p = dict(PARAMS, **params); info = seats(p); p = F._clamp(p); return p, info
+    p = dict(PARAMS, **params); p["b3"] = min(max(float(p.get("b3", 0.0)), 0.0), 0.6)   # tilt toward the skin normal: 0..0.6
+    info = seats(p); p = F._clamp(p); return p, info
 
 
 def _report(B, params):
