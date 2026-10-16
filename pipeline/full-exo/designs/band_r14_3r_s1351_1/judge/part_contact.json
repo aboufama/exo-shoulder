@@ -3,11 +3,11 @@
  "tol_mm": 0.15,
  "frames_checked": 1337,
  "pairs": 348,
- "seconds": 125,
- "setup_seconds": 31,
- "jobs": 2,
- "cpu_seconds": 193,
- "cpu_s_per_frame": 0.124,
+ "seconds": 374,
+ "setup_seconds": 63,
+ "jobs": 1,
+ "cpu_seconds": 252,
+ "cpu_s_per_frame": 0.156,
  "violations": {
   "l1|D4 member l1 (proxy)  IN  base|D4 member base (proxy)": {
    "max_depth": 1.09,
@@ -31,9 +31,37 @@
     "Raise overhead|10": 1.09,
     "Raise overhead|11": 1.09
    }
+  },
+  "base|D4 member base (proxy)  IN  l1|D4 member l1 (proxy)": {
+   "max_depth": 1.0,
+   "frames": 1337,
+   "worst": [
+    "Walking arm swing",
+    108
+   ],
+   "worst_point": "vertex",
+   "per_frame": {
+    "Raise overhead|0": 1.0,
+    "Raise overhead|1": 1.0,
+    "Raise overhead|2": 1.0,
+    "Raise overhead|3": 1.0,
+    "Raise overhead|4": 1.0,
+    "Raise overhead|5": 1.0,
+    "Raise overhead|6": 1.0,
+    "Raise overhead|7": 1.0,
+    "Raise overhead|8": 1.0,
+    "Raise overhead|9": 1.0,
+    "Raise overhead|10": 1.0,
+    "Raise overhead|11": 1.0
+   }
   }
  },
  "open_parts_not_tested_as_container": [],
+ "reoriented_parts": [
+  "H|BOTTOM JN hub block (proxy)",
+  "l2|D4 member l2 (proxy)",
+  "l1|D4 member l1 (proxy)"
+ ],
  "samples": {
   "h_mm": 1.0,
   "sharp_deg": 30.0,

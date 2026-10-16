@@ -3,14 +3,14 @@
  "tol_mm": 0.15,
  "frames_checked": 1337,
  "pairs": 414,
- "seconds": 86,
- "setup_seconds": 15,
- "jobs": 2,
- "cpu_seconds": 175,
- "cpu_s_per_frame": 0.12,
+ "seconds": 259,
+ "setup_seconds": 42,
+ "jobs": 1,
+ "cpu_seconds": 284,
+ "cpu_s_per_frame": 0.184,
  "violations": {
   "l2|D4 member l2 (proxy)  IN  l1|D4 member l1 (proxy)": {
-   "max_depth": 3.67,
+   "max_depth": 1.84,
    "frames": 1337,
    "worst": [
     "Reach back pocket",
@@ -18,46 +18,92 @@
    ],
    "worst_point": "sharp edge",
    "per_frame": {
-    "Reach back pocket|69": 3.67,
-    "Reach back pocket|68": 3.65,
-    "Reach back pocket|67": 3.64,
-    "Reach back pocket|66": 3.61,
-    "Reach back pocket|65": 3.59,
-    "Reach back pocket|64": 3.55,
-    "Reach back pocket|63": 3.53,
-    "Reach back pocket|62": 3.48,
-    "Reach back pocket|61": 3.46,
-    "Reach back pocket|60": 3.44,
-    "Reach back pocket|70": 3.43,
-    "Reach back pocket|59": 3.42
+    "Reach back pocket|69": 1.84,
+    "Reach back pocket|68": 1.82,
+    "Reach back pocket|67": 1.75,
+    "Reach back pocket|66": 1.69,
+    "Reach back pocket|65": 1.57,
+    "Reach back pocket|64": 1.46,
+    "Reach back pocket|63": 1.41,
+    "Reach back pocket|62": 1.35,
+    "Reach back pocket|61": 1.29,
+    "Reach back pocket|60": 1.24,
+    "Reach back pocket|70": 1.19,
+    "Reach back pocket|59": 1.12
    }
   },
   "l1|D4 member l1 (proxy)  IN  l2|D4 member l2 (proxy)": {
-   "max_depth": 0.26,
+   "max_depth": 1.89,
    "frames": 1337,
    "worst": [
-    "Raise overhead",
-    25
+    "Reach back pocket",
+    69
+   ],
+   "worst_point": "sharp edge",
+   "per_frame": {
+    "Reach back pocket|69": 1.89,
+    "Reach back pocket|68": 1.86,
+    "Reach back pocket|67": 1.84,
+    "Reach back pocket|66": 1.78,
+    "Reach back pocket|65": 1.7,
+    "Reach back pocket|64": 1.59,
+    "Reach back pocket|63": 1.51,
+    "Reach back pocket|62": 1.37,
+    "Reach back pocket|61": 1.26,
+    "Reach back pocket|60": 1.2,
+    "Reach back pocket|70": 1.18,
+    "Reach back pocket|59": 1.15
+   }
+  },
+  "l1|D4 member l1 (proxy)  IN  base|D4 member base (proxy)": {
+   "max_depth": 0.3,
+   "frames": 1337,
+   "worst": [
+    "Walking arm swing",
+    108
    ],
    "worst_point": "face",
    "per_frame": {
-    "Raise overhead|25": 0.26,
-    "Raise overhead|26": 0.26,
-    "Raise overhead|27": 0.26,
-    "Raise overhead|28": 0.26,
-    "Raise overhead|29": 0.26,
-    "Raise overhead|30": 0.26,
-    "Raise overhead|31": 0.26,
-    "Raise overhead|32": 0.26,
-    "Raise overhead|33": 0.26,
-    "Raise overhead|34": 0.26,
-    "Raise overhead|35": 0.26,
-    "Raise overhead|36": 0.26
+    "Raise overhead|0": 0.3,
+    "Raise overhead|1": 0.3,
+    "Raise overhead|2": 0.3,
+    "Raise overhead|3": 0.3,
+    "Raise overhead|4": 0.3,
+    "Raise overhead|5": 0.3,
+    "Raise overhead|6": 0.3,
+    "Raise overhead|7": 0.3,
+    "Raise overhead|8": 0.3,
+    "Raise overhead|9": 0.3,
+    "Raise overhead|10": 0.3,
+    "Raise overhead|11": 0.3
+   }
+  },
+  "base|D4 member base (proxy)  IN  l1|D4 member l1 (proxy)": {
+   "max_depth": 0.49,
+   "frames": 1337,
+   "worst": [
+    "Raise overhead",
+    0
+   ],
+   "worst_point": "vertex",
+   "per_frame": {
+    "Raise overhead|0": 0.49,
+    "Raise overhead|1": 0.49,
+    "Raise overhead|2": 0.49,
+    "Raise overhead|3": 0.49,
+    "Raise overhead|4": 0.49,
+    "Raise overhead|5": 0.49,
+    "Raise overhead|6": 0.49,
+    "Raise overhead|7": 0.49,
+    "Raise overhead|8": 0.49,
+    "Raise overhead|9": 0.49,
+    "Raise overhead|10": 0.49,
+    "Raise overhead|11": 0.49
    }
   },
   "l3|D4 member l3 (proxy)  IN  l2|D4 member l2 (proxy)": {
    "max_depth": 2.6,
-   "frames": 102,
+   "frames": 101,
    "worst": [
     "Raise overhead",
     117
@@ -77,9 +123,39 @@
     "Raise overhead|75": 2.52,
     "Raise overhead|76": 2.52
    }
+  },
+  "l2|D4 member l2 (proxy)  IN  l3|D4 member l3 (proxy)": {
+   "max_depth": 2.69,
+   "frames": 101,
+   "worst": [
+    "Raise overhead",
+    63
+   ],
+   "worst_point": "face",
+   "per_frame": {
+    "Raise overhead|63": 2.69,
+    "Raise overhead|117": 2.69,
+    "Raise overhead|64": 2.68,
+    "Raise overhead|65": 2.68,
+    "Raise overhead|66": 2.68,
+    "Raise overhead|114": 2.68,
+    "Raise overhead|115": 2.68,
+    "Raise overhead|116": 2.68,
+    "Raise overhead|67": 2.67,
+    "Raise overhead|68": 2.67,
+    "Raise overhead|69": 2.67,
+    "Raise overhead|70": 2.67
+   }
   }
  },
  "open_parts_not_tested_as_container": [],
+ "reoriented_parts": [
+  "H|BOTTOM JN hub block (proxy)",
+  "l3|D4 member l3 (proxy)",
+  "l2|D4 member l2 (proxy)",
+  "l1|D4 member l1 (proxy)",
+  "base|D4 member base (proxy)"
+ ],
  "samples": {
   "h_mm": 1.0,
   "sharp_deg": 30.0,
@@ -123,5 +199,5 @@
   "rule": "every vertex + sharp/boundary edges at <= h/2 + longest-edge bisection of every face to edges <= h (midpoints)"
  },
  "inside": "dense surface samples of A (vertices, sharp edges, faces), both ways; integer winding number on welded tessellations (judge/sdist.py grid + segment crossings), depth = exact distance to B's closest point (libigl AABB)",
- "max_depth": 3.67
+ "max_depth": 2.69
 }

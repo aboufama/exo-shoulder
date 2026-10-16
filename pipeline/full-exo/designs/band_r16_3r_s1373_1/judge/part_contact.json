@@ -3,37 +3,65 @@
  "tol_mm": 0.15,
  "frames_checked": 1337,
  "pairs": 348,
- "seconds": 114,
- "setup_seconds": 45,
- "jobs": 2,
- "cpu_seconds": 162,
- "cpu_s_per_frame": 0.11,
+ "seconds": 273,
+ "setup_seconds": 53,
+ "jobs": 1,
+ "cpu_seconds": 248,
+ "cpu_s_per_frame": 0.154,
  "violations": {
   "l2|D4 member l2 (proxy)  IN  l1|D4 member l1 (proxy)": {
-   "max_depth": 3.44,
+   "max_depth": 1.07,
    "frames": 183,
    "worst": [
     "Raise overhead",
-    120
+    121
    ],
-   "worst_point": "vertex",
+   "worst_point": "face",
    "per_frame": {
-    "Raise overhead|60": 3.44,
-    "Raise overhead|61": 3.44,
-    "Raise overhead|62": 3.44,
-    "Raise overhead|63": 3.44,
-    "Raise overhead|64": 3.44,
-    "Raise overhead|65": 3.44,
-    "Raise overhead|66": 3.44,
-    "Raise overhead|67": 3.44,
-    "Raise overhead|68": 3.44,
-    "Raise overhead|69": 3.44,
-    "Raise overhead|70": 3.44,
-    "Raise overhead|71": 3.44
+    "Raise overhead|58": 1.07,
+    "Raise overhead|59": 1.07,
+    "Raise overhead|60": 1.07,
+    "Raise overhead|61": 1.07,
+    "Raise overhead|62": 1.07,
+    "Raise overhead|63": 1.07,
+    "Raise overhead|64": 1.07,
+    "Raise overhead|65": 1.07,
+    "Raise overhead|66": 1.07,
+    "Raise overhead|67": 1.07,
+    "Raise overhead|68": 1.07,
+    "Raise overhead|69": 1.07
+   }
+  },
+  "l1|D4 member l1 (proxy)  IN  l2|D4 member l2 (proxy)": {
+   "max_depth": 1.48,
+   "frames": 183,
+   "worst": [
+    "Raise overhead",
+    60
+   ],
+   "worst_point": "sharp edge",
+   "per_frame": {
+    "Raise overhead|60": 1.48,
+    "Raise overhead|61": 1.48,
+    "Raise overhead|62": 1.48,
+    "Raise overhead|63": 1.48,
+    "Raise overhead|64": 1.48,
+    "Raise overhead|65": 1.48,
+    "Raise overhead|66": 1.48,
+    "Raise overhead|67": 1.48,
+    "Raise overhead|68": 1.48,
+    "Raise overhead|69": 1.48,
+    "Raise overhead|70": 1.48,
+    "Raise overhead|71": 1.48
    }
   }
  },
  "open_parts_not_tested_as_container": [],
+ "reoriented_parts": [
+  "H|BOTTOM JN hub block (proxy)",
+  "l2|D4 member l2 (proxy)",
+  "l1|D4 member l1 (proxy)"
+ ],
  "samples": {
   "h_mm": 1.0,
   "sharp_deg": 30.0,
@@ -76,5 +104,5 @@
   "rule": "every vertex + sharp/boundary edges at <= h/2 + longest-edge bisection of every face to edges <= h (midpoints)"
  },
  "inside": "dense surface samples of A (vertices, sharp edges, faces), both ways; integer winding number on welded tessellations (judge/sdist.py grid + segment crossings), depth = exact distance to B's closest point (libigl AABB)",
- "max_depth": 3.44
+ "max_depth": 1.48
 }

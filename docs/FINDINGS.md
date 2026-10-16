@@ -627,3 +627,57 @@ docs/concepts/fold-sph3r.md.
 * **Farm detail that wasted a round**: `tools/cloud_run.py batch` jobs must carry `"link": [".cache/concept_bench"]`
   (`sweep` adds it): without it the bench runs the exact path, a pin-knee CMA generation takes 660-1060 s instead of
   ~20 s, and the gaps are not comparable with fast-grid ones (49.89 exact vs 46.74 fast at the same configuration).
+
+## The R6 judge was optimistic: it tested only vertices, on every 12th frame (2026-10-16, judge/part_contact.py)
+
+* **What failed.** R6 tested only the vertices of part A inside part B. In fast mode it used every other vertex on every
+  12th frame; the full run used step 4. When two thin plates cross at their edges, no vertex of one lies inside the
+  other.
+  - On the first build of l1_offset-skin-normal-3r (git 06b5a59) the judge scored 0.0 mm.
+  - The verifier's dense check found link 2 1.12 mm inside the J3 plate (VERIFY.md).
+  - Re-measured at step 1 with the new judge: link 2 sits 1.07 mm inside the J3 plate at every frame (a fixed overlap
+    at the joint). Link 1 and link 2 cross by 0.66 mm for 9 frames (Wave 71-79 and 95-103) and by 0.59 mm over Raise
+    overhead 35-145.
+  - The old vertex-only test reads 0.00 mm at those frames. The final build is 0.00 mm at all 1337 frames.
+* **Fix: dense surface samples, both ways, with the same exact depth.** For each part, cached in its own frame:
+  - every vertex;
+  - points along every sharp or open edge, at most 0.5 mm apart;
+  - every face, bisected until no edge is longer than 1.0 mm.
+
+  Inside = sdist's integer winding number. Depth = libigl's exact AABB closest point. Every speed-up is exact, and
+  judge/test_part_contact.py checks the fast path point by point against sdist's Mesh.max_depth.
+  - Cost: 13.5 s of CPU per frame for the first dense version, now 0.06-0.2 s on L1 designs and 0.6-2 s on user-style
+    CADs with many hardware parts.
+  - tools/judge_all.sh now runs R6 on every frame, and on every 3rd frame in fast mode (it was 4 / 12). At 30 fps, a
+    crossing that lasts 3 frames (0.1 s) is always sampled.
+* **A second fault: inverted meshes.** The band_* D4 member proxies have inverted or inconsistently wound bodies (all
+  bodies at negative volume). The grid winding number takes its sign from the face normals, so it put a vertex
+  3.44 mm "inside" a member where the generalized winding number is 0.07.
+  - weld() now re-orients each closed body outward. The geometry does not change, and part_contact.json lists the
+    re-oriented parts.
+  - No other judged design has such a part.
+* **Re-judged at step 1** (the full judge; 12 designs on the farm, ~$0.45; the 3 band designs locally):
+
+| design | R6 old (step) | R6 new | why it moved |
+|---|---|---|---|
+| l1_offset-skin-normal-3r | 0.00 (12) | **0.00 PASS** | true at all 1337 frames |
+| param_r20_n3_s1414_4 (user-style 3R, D5 drawings) | 1.03 (12) | **3.50** | link 2 strap 3.5 mm inside the arm end's J3 pad at every frame; vertex-only reads 0.00 (pure edge crossing) |
+| param2_r20_n3_s1414_4 | 4.38 (4) | 4.65 | upper-arm cuff in forearm cuff (Drink 69) |
+| l1_seed-offset-3r-slides | 0.81 (12) | 1.50 | link 2 strap in J3 plate (as osn's first build) |
+| band_r16_3r_s1373_1 | 0.72 (12) | 1.48 | l1 / l2 members, 183 frames; re-oriented proxies |
+| band_r14_4r_s1354_0 | 2.00 (4) | 2.69 | l2 / l3 members, 101 frames; re-oriented proxies |
+| band_r14_3r_s1351_1 | 1.09 (4) | 1.09 | unchanged |
+| cad_r13_n4_s1343_1 | 0.80 (4) | 0.85 | J4 ring nut in J4 cap |
+| cad_r18_n3_s1392_1 / _f300 | 0.29 (12) | 0.30 | link 2 vs BOTTOM, J3 washer vs link 2 |
+| l1_3r-k2221, l1_rail-elbow | 2.85 (12) | 2.86 | link 2 strap / neck |
+| cad_r13_n3_s1331_0 | 90.07 (12) | 0.25 | stale file from before the 2026-10-15 sdist fix (old sign rule) |
+| l1_3r_offset | 50.84 (12) | 2.73 | stale, before the sdist fix: 50.8 mm cannot fit in a 5.5 mm slab |
+| l1_r14_3r_s1351_1 | 11.09 (12) | 2.67 | stale, before the sdist fix: brute force finds 2.16 at Wave 36, where the old file said 11.09 |
+
+* **No status flips.** Every design that failed R6 still fails, and the leader still passes, so no pass count moves.
+  Only the R6 rows of the scorecards were patched; the other rows were left as judged.
+* **For the design loop:**
+  - The user-style 3R (param_r20, the D5 drawings) needs its link 2 strap / arm-end J3 pad overlap fixed: 3.5 mm at
+    every pose.
+  - Seed-offset and the osn first build show that a link strap ending on the next hub's plate is the recurring
+    pattern. The L1 builders should end straps on the plate's top face, not through it.
