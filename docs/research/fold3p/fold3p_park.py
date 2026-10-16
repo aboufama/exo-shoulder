@@ -24,7 +24,8 @@ CANDS = {   # from fold3p.json (search over c, chi, k, branch at the H1 seats; b
     "B_t45": dict(caz=5.4109, cel=1.6143, chi=27.2107, k=-0.0839, s=1, q0=-7.1772, travel=45.0),
     "C_t45_other_side": dict(caz=5.0123, cel=3.4358, chi=209.6961, k=0.0809, s=-1, q0=-7.0983, travel=45.0),
 }
-RS_MM = (12.0, 25.0)
+RS_MM = tuple(float(x) for x in os.environ.get("F3_R", "12,25").split(","))
+if os.environ.get("F3_CANDS"): CANDS = {k: v for k, v in CANDS.items() if k in os.environ["F3_CANDS"].split(",")}
 
 
 def rays():
@@ -88,8 +89,20 @@ def main():
                                                    req_p10_p50_p90=[round(float(np.percentile(x, q)), 1) for q in (10, 50, 90)])
     for k, v in info.items():
         out["results"].setdefault(k, {}).update({a: (round(b, 4) if isinstance(b, float) else b) for a, b in v.items() if a != "take"})
+    # per-pose requirements -> the level that keeps the most poses with in band >= 0.8 (poses above the level = contact, dropped)
+    ws = np.asarray(F.ws); out["gate"] = {}
+    for d in sorted({r[0] for r in R}):
+        J = {h: {R[j][2]: (req[j] if np.isfinite(req[j]) else 400.0) for j in range(len(R)) if R[j][0] == d and R[j][1] == h} for h in ("hub1", "hub2", "pivot")}
+        idx = sorted(J["hub2"]); x2 = np.array([J["hub2"][i] for i in idx]); best = None
+        for L in np.arange(45.0, 100.0, 0.5):
+            keep = x2 <= L; ib = float(((L - x2[keep]) <= 12.0).mean()) if keep.any() else 0.0
+            reach = float(np.mean([keep[k] for k, i in enumerate(idx) if ws[i]] or [0])) * float(np.mean([ws[i] for i in idx]) and 1.0)
+            r_ws = sum(1 for k, i in enumerate(idx) if ws[i] and keep[k]) / 360.0
+            if ib >= 0.8 and (best is None or r_ws > best["reach_ws"]): best = dict(level=float(L), in_band=round(ib, 4), reach_ws=round(r_ws, 4))
+        out["gate"][d] = best; print("gate", d, best, flush=True)
+    np.save(os.path.join(HERE, "fold3p_park_req.npy"), np.array([(r[0], r[1], int(r[2]), float(v)) for r, v in zip(R, req)], dtype=object), allow_pickle=True)
     out["secs"] = round(time.time() - t0, 1)
-    json.dump(out, open(os.path.join(HERE, "fold3p_park.json"), "w"), indent=1, default=float)
+    json.dump(out, open(os.path.join(HERE, os.environ.get("F3_OUT", "fold3p_park.json")), "w"), indent=1, default=float)
     for d, v in out["results"].items(): print(d, json.dumps(v)[:600])
 
 
