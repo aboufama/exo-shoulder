@@ -1,0 +1,21 @@
+{
+ "id": "virtual-pole-4bar-j1",
+ "mechanism": {
+  "active_dof": 3,
+  "passive_trans": 0,
+  "crossed_rails": false,
+  "passive_rot": 3,
+  "moving_bodies": 5,
+  "joints": 6,
+  "closed_loops": 1,
+  "sliding_pairs": 0,
+  "rolling_pairs": 6,
+  "sensed_passive": 0,
+  "springs_or_flexures": 0,
+  "custom_parts": 12,
+  "catalogue_parts": 12,
+  "notes": "J1 replaced by a spherical four-bar (all axes through GH) whose coupler is link 1 and turns about a virtual pole. bodies: crank A, crank B, coupler = link 1 (carries J2), link 2, arm-end (hub-3 plate + neck). joints: base pins A0 (ACTIVE, the J1 drive) and B0, coupler pins A1, B1 (PASSIVE), J2, J3 O20 hubs; 1 loop (the four-bar). Passives set by the crank angle (loop mobility 1): not sensed. Default slim = 0 (every pin an O20 hub; slim = 1 makes the 3 passive pins MR63ZZ pairs). custom: base, 2 cranks, link 1, link 2, neck, 6 hub shafts (est.); catalogue: 6 x MR117 pair (est.).",
+  "source": "docs/concepts/models/virtual-pole-4bar-j1.py:1-7, 16-17 (at = 1 seed); virtual-pole-4bar-j2.py:1-31 (chain at = 1, mobility), 44-49 (slim)",
+  "confidence": "counted"
+ }
+}

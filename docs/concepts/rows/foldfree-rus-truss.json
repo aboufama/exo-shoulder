@@ -88,5 +88,23 @@
   "crank_park": "docs/research/rus/crank_park.json",
   "crank_park_tip": "docs/research/rus/crank_park_tip.json",
   "skew_kin": "docs/research/rus/skew_kin.json"
+ },
+ "mechanism": {
+  "active_dof": 3,
+  "passive_trans": 0,
+  "crossed_rails": false,
+  "passive_rot": 15,
+  "moving_bodies": 7,
+  "joints": 9,
+  "closed_loops": 2,
+  "sliding_pairs": 0,
+  "rolling_pairs": 3,
+  "sensed_passive": 0,
+  "springs_or_flexures": 0,
+  "custom_parts": 13,
+  "catalogue_parts": 15,
+  "notes": "human-closed 3-RUS truss, three crank hubs on separate scapula seats joined by 2 base brackets. bodies: 3 cranks, 3 O5 Ti rods, arm saddle (arm-end, joined to BOTTOM). joints: 3 crank hubs (ACTIVE), 3 crank-tip U-joints (2 rot each, O12 housing; counted as one joint without its cross), 3 ball studs / rod ends (3 rot each). passive_rot = 3 x (2 + 3) = 15; 2 loops (three legs between the base and the saddle, the user's GH closes the chain); Grubler on the bench 3 x (1 + 2 + 3) + 3 - 18 = 3, rod spins killed by the U pitch pins. sensed 0 on the bench (the 3 crank angles fix the arm by the parallel FK); on a body GH translation enters that FK (the legs absorb it), so exact tracking would need GH's shift - not counted. custom: base, 2 base brackets, 3 cranks, 3 rods, saddle, 3 hub shafts (est.); catalogue: 3 x MR117 pair, 3 miniature U-joints, 3 rod ends, 3 ball studs (est.).",
+  "source": "docs/concepts/models/foldfree-rus-truss.py:1-25 (truss, mobility); human-closed-crank-rods.py:1-12 (legs, U / ball parts)",
+  "confidence": "counted"
  }
 }
