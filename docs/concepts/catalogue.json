@@ -2473,7 +2473,7 @@
   "name": "Sidecar parallelogram K drive: lateral horn on link 1a, bell crank on link 1b, O3 rod on two M2 ball links beside link 1b at strap level",
   "family": "slaved knuckle (frontload rod-drive line), strap-level drive",
   "lens": "round8:strap-level-drive",
-  "status": "ideated",
+  "status": "screened",
   "t_ideated": "2026-10-16T18:20:09Z",
   "source": "round 8 judge (docs/concepts/round8_ideation.md)",
   "merged_from": [],

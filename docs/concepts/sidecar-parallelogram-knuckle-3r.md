@@ -152,3 +152,91 @@ The convergence gate passes on every run: < 1 point over the second half, < 0.5 
   - K slop from 0.05 mm of ball-link play: 0.05 / 15.5 rad = 0.18 deg.
 - **The all-metal GE4E ends cost 6.8 fast points (17.45 vs 10.63).** The 19.5 mm horn and the 12 mm eyes sit high
   and wide. Reach 0.731 and contact 0.017 at the best.
+
+## Claim (frozen shape fit on Bench(60,160) fast, worn on Bench(110,360) exact; self-measured, verifier pending)
+
+| design | fast | frozen plain | score | reach | in-band14 | in-band10 | contact | near-touch 1 mm / 2 mm | min metal | overhead | why (fold / slide / parts / contact) |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| **this row (P3 #626, lead dyad, RC ends, r_h 15.5)** | 10.63 | **19.13** | **93.04** | 0.719 | 0.905 | 0.523 | 0.0107 | **20.22** / 50.14 | 0.65 mm (2 poses < 1 mm) | 8/28 | 88 / 9 / 0 / 4 |
+| coarse LHS best (lead dyad, untuned seats) | 11.25 | 20.52 | 92.54 | 0.708 | 0.901 | 0.525 | 0.0135 | 23.26 / 56.73 | 0.23 mm | 7/28 | 91 / 9 / 0 / 5 |
+| pick 4 control D (dyad floated to bk2 34.6, r_h 15.34) | 10.63 | 19.97 | 92.74 | 0.711 | 0.902 | 0.521 | 0.011 | 21.61 / 35.91 | 0.56 mm | 8/28 | 91 / 9 / 0 / 4 |
+| pick 4 A1 (bk2 39.2, r_h 14.87) | 10.30 | 18.91 | 93.12 | 0.725 | 0.897 | 0.534 | 0.011 | 20.00 / 34.03 | 0.28 mm | 8/28 | 86 / 7 / 2 / 4 |
+| verified lead frontload-lobe-stopb-knuckle-3r | 15.68 | 22.82 | 91.70 | 0.728 | 0.855 | 0.558 | 0.011 | 24.46 / 44.08 | 0.30 mm | 8/28 | 86 / 7 / 1 / 4 |
+
+**Held out** (the frozen shape on every fit-clip frame and workspace pose in neither bench):
+
+- this row: 22.03 plain (score 91.99), near-touch 24.44 / 48.71 at 2 mm, reach 0.690, in-band 0.903, contact 0.0104,
+  overhead 19/71, parts 6 (E-L2, inherited from the lead's arm end);
+- verified lead (same protocol): 26.75 / 29.39;
+- pick 4 A1: 22.67 / 25.75.
+
+**Continuity** (the round-6 verifier's flood fill on the frozen wear):
+
+- full grid 19.13 with 0 dropped (120 / 120 forced poses connected; envelope 490 / 490 forced ok);
+- nearest-neighbour graph 22.21 (11 dropped);
+- bench grid 45.03.
+
+The lead on the same protocol scores 22.82 / 25.63 / 46.09 and A1 18.91 / 21.72 / 43.40.
+
+What the claim measures:
+
+- **The sidecar's gain is the in-band half, and it holds out of sample.**
+  - In-band goes 0.855 -> 0.905 frozen and 0.854 -> 0.903 held out.
+  - That is -3.69 plain frozen and -4.72 held out against the verified lead.
+  - The planner's arithmetic priced it at 4.54.
+- **Reach is the lead's.** Frozen reach is 0.719 against 0.728: 88 fold poses against 86.
+- **The lead's dyad is enough.**
+  - A1's longer link 1b (bk2 39.2) is 0.22 plain better frozen, but 0.64 worse held out (22.67 vs 22.03).
+  - D's shorter link 1b is 0.84 worse frozen.
+  - So the bk2 lever is worth < 1 point either way, and pick 1 needs no dyad change.
+
+## Red team (measured)
+
+- **The pose that jams.**
+  - The drive's own range ends at dK 41.0, where the rod meets hub 2's housing (ROD-hub2). Taken poses use at most
+    35.9.
+  - The law ends earlier, at the lobe skirt (th 117.75, crest 11.5). So the drive range costs 0 poses: the attribution
+    run with the truncation off gives identical frozen numbers.
+  - Stop B (the q2 dowel) belongs at dK ~41, not at the dyad's a1max 61.7, which is never reached.
+- **The point that pinches.**
+  - The horn's ball-link socket sits 2.0 mm off hub K's housing (ROD-hubK) in every taken pose. That is the 15.5 floor
+    working: the judge's r_h 14.5 had 1.0 mm.
+  - knee-E sits 0.9 mm apart on adjacent members (the 0.15 running-gap rule), inherited from the lead.
+  - E-L2 ends 6 held-out poses, also inherited.
+- **The metal that grazes the skin.**
+  - Frozen, 2 workspace poses are under 1 mm: 0.65 mm at plane 30 / elev 90 / axial +30, and 0.80 mm at plane 45 /
+    elev 90 / axial +30.
+  - Held out, 11 poses are under 1 mm. The worst is 0.28 at plane 75 / elev 150 / axial -90.
+  - At 2 mm the near-touch gap is 50.14 frozen and 48.71 held out, against the lead's 44.08 frozen. That is the
+    optimistic number in this row: the 1-mm objective parks the strap-level metal at 1-2 mm on 44 frozen poses. A
+    2-mm objective would trade part of the in-band gain back.
+- **The poses this design does not reach** (fit bench, by region):
+  - rest (elev <= 30): 56/58 taken;
+  - overhead (elev >= 140): 2/12 taken (fold 7, slide 3);
+  - across the body (plane >= 100): 31/43 taken (fold 12);
+  - behind the back (plane <= -30): 21/24 taken (fold 3).
+
+  Overhead is where the morphology fails. The frozen overhead set gives the same picture, 8/28.
+- **Manufacturability.**
+  - The all-metal GE4E ends cost 6.8 fast points (17.45 vs 10.63). An RC-class acetal ball link is the part that makes
+    this drive work, and its vendor envelope must be catalogued before CAD.
+  - The 0.05 mm socket play gives 0.18 deg of K slop. K is never read, so the slop shows up only as K drift.
+- **Kill gate.** The judge's literal gate (<= 14.0 near-touch untuned, per-pose placement) fails at 18.30. The CMA
+  recovers 10.63 on the same dyad.
+- **Selection.** The claim config was picked from 209 fit-bench ties by a rule declared before any frozen wear (max
+  fit in-band). A tie-spread frozen batch (5 other ties) was submitted to the farm, but it sat 22 min in the upload
+  queue behind other agents' sweeps and was stopped, so the spread among ties is unmeasured. A1 / D / this row differ
+  by 1.06 frozen, which bounds it loosely.
+
+## What happens next
+
+1. **Verify.** The verifier wears this row's claim config through the round's harness with this model file, and
+   checks that the shared core and pick 4's own file agree on the drive metal: control D replicates at 10.63 through
+   both.
+2. **Fold the sidecar into the lead.** The sidecar drive is now the lead's drive: -3.7 frozen and -4.7 held out, on
+   the same chain. The bk2 lever is < 1 point. Pick 3 (twist-long-a2) and the knee-window env-bench polish should run
+   on this drive.
+3. **Reach is the whole remaining gap.** Frozen 19.13 = in-band 0 + reach 18.06 + contact 1.07. 95 (gap 13.75) needs
+   reach 0.773 frozen at this contact, i.e. +20 of the 88 fold poses. Only the window levers (wider arcs at the overhead K state, the J1 seat walk)
+   move that.
+4. **A 2-mm near-touch objective** for the CAD-bound config, to buy back the 2-mm margin before the L1 CAD.
