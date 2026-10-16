@@ -108,3 +108,91 @@ At variant A's kit-rule best LA1 (J3 wdir(46.2, -6.2)):
   third / top-5 spread); the C6 -> D2 lineage read as one history (1530 tries) gains 0.84 over its second half and 0.53 over its last third
   (0.03 over the 0.5 bar, the restart at sigma 0.2 inside it); D2 alone passes. **Converged** (one more short stream
   from D2 is the cheap confirmation if this row is ever claimed).
+
+## THE NUMBER: frozen shape worn on Bench(110,360) EXACT
+
+Protocol (lesson c): fit on Bench(60,160) fast (plain), freeze every underside / hub level, wear on Bench(110,360) with
+CB_EXACT=1, K6 at 1 mm, fold margin 5 deg in every state, four O20 hubs with hub K's +6 mm spring cap; the workspace
+continuity flood fill (1432-pose grid, 2-deg slerp edges, no joint step > 10 deg) applied to reach. Farm jobs, outputs
+`.cache/j3n/frozen_*.json` (summarised in the row's `exact_frozen`).
+
+| configuration | stack | fast plain / near | **frozen exact** | score | reach | follow | in-band14 | in-band10 | contact | near-touch | min metal | overhead reach |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| LA1 = variant A kit-rule best (reference, its own file) | 0 | 28.92 / 30.03 | 41.14 | 85.0 | 0.778 | 1.0 | 0.706 | 0.371 | 0.095 | 44.72 | 0.26 | 0.39 |
+| LA1 | 1 | 29.09 / 31.30 | 41.82 | 84.8 | 0.775 | 1.0 | 0.704 | 0.366 | 0.097 | 45.90 | 0.26 | 0.39 |
+| C2 (CMA from LA1, lay 1) | 1 | 27.64 / 27.64 | 41.20 | 85.0 | 0.758 | 0.955 | 0.725 | 0.414 | 0.096 | 43.86 | 0.53 | 0.36 |
+| C4 (lay-0 control stream) | 0 | 27.35 / 31.98 | 31.51 | 88.5 | 0.694 | 1.0 | 0.843 | 0.468 | 0.053 | 39.08 | 0.24 | 0.18 |
+| D4 (lay-0 control CMA'd from C5's seats) | 0 | 30.16 / 30.16 | 35.60 | 87.1 | 0.714 | 1.0 | 0.792 | 0.483 | 0.061 | 40.36 | 0.08 | 0.25 |
+| C5 | 1 | 24.99 / 24.99 | 30.80 | 88.8 | 0.714 | 1.0 | 0.840 | 0.473 | 0.061 | 35.07 | 0.13 | 0.25 |
+| C5's seats | 0 | 32.04 / 33.18 | 35.60 | 87.1 | 0.719 | 1.0 | 0.783 | 0.461 | 0.059 | 41.67 | 0.08 | 0.21 |
+| C3 | 1 | 24.10 / 26.44 | 31.72 | 88.5 | 0.656 | 0.973 | 0.877 | 0.489 | 0.050 | 35.47 | 0.33 | 0.21 |
+| D2 (fast best) | 1 | 22.80 / 23.96 | 30.49 | 88.9 | 0.719 | 0.936 | 0.827 | 0.459 | 0.037 | 35.39 | 0.21 | 0.21 |
+| D2's seats | 0 | 24.91 / 27.21 | 32.44 | 88.2 | 0.719 | 0.936 | 0.810 | 0.456 | 0.040 | 37.33 | 0.09 | 0.21 |
+| **C6 (frozen best)** | 1 | 22.87 / 26.26 | **28.46** | **89.65** | 0.739 | 0.964 | 0.835 | 0.472 | 0.058 | 35.44 | **0.00** | 0.18 |
+
+For reference on the same protocol: H1 (verified pin knee) 27.20, minarc BDp (verified, complexity 33, 4 active by
+the counting rule) 19.06; the zero-complexity ceiling 31.04 / 33.51.
+
+C6 = J1 bvec(101.33, 68.95), J3 wdir(68.93, -3.17), a1 35.29, a2 63.23, b1 30.02, b2 44.21, stop B a1max 71.88, J2
+stops at 8.02 / 8.90 deg of J1-J3 margin (phi 32.97 / 136.87), q 0.965, neck 13.4 x 6, lay 1. Continuity: 1140 of 1143
+grid nodes connected even from the strict rest seeds (K on stop A at elevation 0), 0 taken bench poses dropped.
+
+Reading:
+- **The stack order alone, at fixed seats:** -0.7 (LA1), +4.8 (C5), +1.95 (D2) frozen exact points. It pays only where
+  link 2 rarely sweeps under the neck's exit (crossing share 4.8 % at LA1, 1.6 % at C5, 0.0 % at C6 / D2 with a
+  90-105 deg free sector).
+- **The stack order with re-optimised seats:** best lay 1 28.46 against best lay 0 31.51 (C4): ~3 frozen points.
+- **The seats carry most of the gain over variant A** (41.14 -> 31.51 with lay 0 already): variant A's LA1 was tuned
+  to the 160-pose sample (fast 28.92 -> frozen 41.14, reach 0.86 -> 0.78); the wd 58-71 seats generalise better
+  (fast-to-frozen +5.6 at C6).
+- **What it does not buy: the overhead.** Every configuration that gets the J3 side into band (in-band >= 0.82) keeps
+  overhead workspace reach at 0.18-0.25 and loses the raise-overhead clip at elevation 149-150 (C6 overhead follow 0.6
+  frozen, 0.4 fast; D2 0.4); the LA1 region keeps 0.36-0.39 overhead at in-band 0.70-0.73.
+
+## Red team (my own best, C6)
+
+1. **The point that pinches.** Frozen exact minimum metal-skin distance 0.00 mm (fast 0.65 mm: ws plane 75 / elev 90 /
+   axial -120, plane 60 / elev 120 / axial -90, plane -15 / elev 75 / axial 90, all on a strap face). Near-touch gap
+   35.44 against the plain 28.46: the near-touch figure, not the plain one, is what the wearer would feel. Not
+   buildable as fitted without a re-fit at a stricter quantile (q 0.965 -> ~0.95 costs band).
+2. **The pose that jams.** No jam or branch flip on the clips (K2 dense on J1 / K / J2 / J3; collide 0.0 fast), but
+   the raise-overhead clip frames at elevation 149-150 are LOST (contact on the fast bench; overhead follow 0.6 frozen):
+   the arm would push the chain into the skin there. Not-closing workspace poses sit at th 17 (folded, J1 ~ J3) and
+   129-147 deg (stretched past K's own span b1 + b2 - 5 = 69.2 deg, before stop B at 71.9).
+3. **The optimistic number.** Fast 22.87 -> frozen 28.46 (+5.6): the claim is the frozen figure. D2's fast 22.80 /
+   23.96 looked better and lost 7.7 frozen (30.49). Variant A's own fast optimum lost 12.2.
+4. **The DOF count.** K is sensed in its stretched states (35 % of the fast closing poses at C6, 317 of 1076 grid nodes
+   at D2): under the user's counting rule this is 4 active, like minarc. The J3-side finding does not depend on it.
+5. **Hub 3 got worse, not better.** C6's in-band gain is link 2 (0.25 -> 0.69) and the neck (0.53 -> 0.71); hub 3 fell to
+   0.49 (F 81 mm, its level set by elevation-165 workspace poses where the acromion comes under it). The J3 side is
+   still the in-band limiter: hub 1 / K / hub 2 / link 1 are 0.97-1.00.
+
+## Verdict
+
+**Screened.** The inverted J3 stack is a real, conditional lever: zero parts, worth +2 to +5 frozen exact points on the
+knuckle chain where link 2's swept annulus leaves the neck a free exit sector (and -0.7 where it does not), ~3 points
+after both orders are re-optimised. Searched together with the J3 seat it takes minarc variant A from 41.14 to
+**28.46 frozen exact (score 89.65; fast 22.87 plain / 26.26 near-touch)** at complexity 13.5 and 0 passive
+translations. It does not cross 90 on the big bench, it does not beat H1 (27.20) or minarc BDp (19.06), and it buys the
+band with the overhead (overhead reach 0.18, the raise-overhead clip lost at elevation 150, metal at 0.0 mm). Not a
+contender; its value is the layering rule (every knuckle chain should put the arm member on hub 3's cap when the free
+sector allows) and the two laws below.
+
+**New knowledge (predicts beyond this morphology):**
+- **Hub obliquity law.** A flat O20 hub on an axis through GH is in band only if the axis meets the skin within
+  ~25-30 deg of its normal (a 20 mm disc spans 20 tan(theta) mm; 12 mm band). On the arm a GH ray at d deg from the
+  shaft meets the skin ~(90 - d) deg off normal (plus ~10 deg of deltoid at d 60-75): measured hub 3 in band
+  0.64 / 0.69 / 0.82 at 39 / 30 / 16 deg. Any spherical chain with J3 at wd < ~70 cannot get hub 3 into band by
+  layering, quantile or link routing.
+- **Annulus-crossing price.** The stack order matters in proportion to the share of poses in which link 2 sweeps
+  under the arm member's exit (+-30 deg): ~5 % costs the upper member ~0.2 in band over its first 30 mm; < 2 % makes
+  the neck-over order strictly better. Measure the free sector before choosing the order.
+- **The J3-side / overhead conflict.** On the knuckle chain, the seats that put the J3 side in band (wd 58-71) take
+  overhead reach from 0.36-0.39 to 0.18-0.25, because the elevation-150-165 poses bring the acromion under hub 3 and
+  hub 2; the J3 side and the overhead cannot both be bought by seat choice. The next lever is one that changes hub 3's
+  geometry, not its seat: a J3 axis that does not pass through GH (offset / skin-normal J3 as in the pin knee's
+  b3 tilt), which the spherical knuckle chain cannot take without a closure (the pin knee) - i.e. variant B.
+
+**Next:** none for this row as a standalone design. Hand the layering rule to the knuckle CAD (gen-4 BDp: check link 2
+vs member 3 order at hub 3 against the free sector) and to lens 1 (cam-stop-knuckle): if a determined K lands, re-run
+this J3-side search with lay 1 at the C6 / C5 seats as starts.

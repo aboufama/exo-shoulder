@@ -5,12 +5,12 @@
  * -> member 3. THE CHANGE: at hub 3, link 2 is the LOWER (face) member and member 3 (cap plate + K7 neck) the UPPER one,
  * the neck bridging over link 2's swept zone to BOTTOM's bar. While th = angle(J1, J3) stays in [thLo, thHi] (>= 5 deg of
  * J1-J3 fold margin, kit rule) K rests on stop A (a rigid 3R); past it J2 sits on its q2 stop and the arm opens K to the
- * smallest J1-J2 arc that closes (<= stop B). Levels and seats: the model's fit on Bench(60,160) at the CMA best D2 (lay 1, near-touch 23.96 / plain 22.80 fast).
+ * smallest J1-J2 arc that closes (<= stop B). Levels and seats: the model's fit on Bench(60,160) at C6, the best FROZEN configuration (lay 1; fast plain 22.87 / near-touch 26.26; frozen Bench(110,360) exact 28.46).
  * Red = K would pass stop B / the chain cannot close. 0 passive translations, 1 passive rotation (K). */
 (function () {
   const K = (typeof window !== 'undefined' ? window : globalThis).KIN, V = K.V, M = K.M, D2R = Math.PI / 180;
-  const P = {"az": 97.7115, "el": 68.889, "wd": 70.9498, "wa": -2.1868, "a1": 35.5343, "a2": 63.794, "b1": 28.0314, "b2": 42.5288, "a1max": 72.5548, "smhi": 6.3376, "smlo": 9.2447, "sigma": -1.0, "sK": -1.0, "q": 0.974, "nw": 14.0, "lay": 1.0, "capK": 6.0};
-  const G = {"F": [49.0, 56.0, 60.1, 80.0], "lv1a": [52.1, 52.1, 52.1, 52.1, 49.4, 48.7, 53.2, 56.0, 56.0, 56.0, 56.0], "lv1b": [60.0, 60.0, 60.0, 60.0, 53.3, 53.4, 54.3, 60.1, 60.1, 60.1, 60.1], "lv2": [63.2, 63.2, 61.4, 62.9, 64.1, 66.6, 68.7, 70.7, 74.5, 80.0, 80.0], "lvn": [83.2, 83.2, 83.2, 83.3, 83.7, 84.3, 86.1, 88.0, 90.4, 92.9, 95.2], "thLo": 37.504, "thHi": 92.991};
+  const P = {"az": 101.33, "el": 68.9451, "wd": 68.9274, "wa": -3.17, "a1": 35.2891, "a2": 63.2258, "b1": 30.0182, "b2": 44.2122, "a1max": 71.8786, "smhi": 8.0171, "smlo": 8.8961, "sigma": -1.0, "sK": -1.0, "q": 0.9647, "nw": 13.4109, "lay": 1.0, "capK": 6.0};
+  const G = {"F": [49.0, 56.0, 60.0, 81.0], "lv1a": [52.1, 52.1, 52.1, 52.1, 48.6, 48.3, 51.8, 56.0, 56.0, 56.0, 56.0], "lv1b": [60.0, 60.0, 60.0, 59.7, 53.1, 53.9, 54.8, 59.7, 60.0, 60.0, 60.0], "lv2": [63.1, 63.1, 61.2, 63.2, 65.2, 67.9, 70.0, 72.2, 75.5, 81.0, 81.0], "lvn": [84.1, 84.1, 84.1, 84.2, 85.2, 85.9, 87.3, 89.1, 91.4, 93.6, 95.9], "thLo": 36.833, "thHi": 90.498};
   const u1 = K.bvec(P.az, P.el), u3 = K.wdir(P.wd, P.wa), sg = P.sigma >= 0 ? 1 : -1, sK = P.sK >= 0 ? 1 : -1;
   const WB = [0, -0.0713, 0.9975], DB = [0, -0.9975, -0.0713], BAR0 = V.add(V.scale(WB, 67.5), V.scale(DB, 40));
   /** J2's own angle (deg) of the chain at J1-J3 angle th and J1-J2 arc a1e (canonical frame; = the model's _q2_of) */
