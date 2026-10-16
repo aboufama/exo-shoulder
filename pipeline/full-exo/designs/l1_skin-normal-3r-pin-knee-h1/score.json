@@ -1,0 +1,84 @@
+{
+ "overall": 0.41689791684589944,
+ "follow": 0.9866917700461662,
+ "in_band": 0.4225209224420645,
+ "clips": [
+  {
+   "name": "Raise overhead",
+   "frames": 181,
+   "score": 0.37240846276300416,
+   "follow": 1.0,
+   "in_band_when_following": 0.37240846276300416,
+   "median_gap": 12.148814378045685,
+   "min_gap": 1.8369025329283073
+  },
+  {
+   "name": "Drink from a cup",
+   "frames": 178,
+   "score": 0.3145898123043516,
+   "follow": 1.0,
+   "in_band_when_following": 0.3145898123043516,
+   "median_gap": 11.267529278277173,
+   "min_gap": 4.266169472048456
+  },
+  {
+   "name": "Comb hair",
+   "frames": 202,
+   "score": 0.49734076912108105,
+   "follow": 1.0,
+   "in_band_when_following": 0.49734076912108105,
+   "median_gap": 9.840683677167831,
+   "min_gap": 2.517838774388179
+  },
+  {
+   "name": "Reach a high shelf",
+   "frames": 157,
+   "score": 0.5373354121198579,
+   "follow": 1.0,
+   "in_band_when_following": 0.5373354121198579,
+   "median_gap": 9.805838100446312,
+   "min_gap": 2.6889016888660575
+  },
+  {
+   "name": "Wash opposite shoulder",
+   "frames": 193,
+   "score": 0.22202722670375524,
+   "follow": 1.0,
+   "in_band_when_following": 0.22202722670375524,
+   "median_gap": 13.346751767431087,
+   "min_gap": 4.293041436173553
+  },
+  {
+   "name": "Reach back pocket",
+   "frames": 145,
+   "score": 0.6193915429768235,
+   "follow": 1.0,
+   "in_band_when_following": 0.6193915429768235,
+   "median_gap": 8.498524095987865,
+   "min_gap": 2.1554469215310372
+  },
+  {
+   "name": "Wave",
+   "frames": 172,
+   "score": 0.33121586064126096,
+   "follow": 0.896551724137931,
+   "in_band_when_following": 0.36943307533063713,
+   "median_gap": 11.77406022078674,
+   "min_gap": 2.4771977148661897
+  },
+  {
+   "name": "Walking arm swing",
+   "frames": 109,
+   "score": 0.5461738063454327,
+   "follow": 1.0,
+   "in_band_when_following": 0.5461738063454327,
+   "median_gap": 9.68445465526614,
+   "min_gap": 3.9331596798945045
+  }
+ ],
+ "band": [
+  2.0,
+  10.0
+ ],
+ "step": 3
+}
