@@ -412,6 +412,10 @@ def _report(B, params):
                           dK_taken_max=round(float(np.degrees(np.abs(M.dK[ko & (st == 1)])).max()), 1) if (ko & (st == 1)).any() else 0.0,
                           floor_tip=round(getattr(M, "_floor_tip", 0.0), 1), roller_bottom=round(getattr(M, "_roller_bottom", 0.0), 1),
                           LT_len_mm=round(getattr(M, "_LT_len", 0.0), 1), fK=round(float(getattr(M, "fK", 0)), 1), rod=getattr(M, "_rod_info", None))
+        if not L_.get("ok") or r["drive"]["stretched_kin"] == 0:
+            # red team 13:45: an idle drive (no valid law prefix, or no stretched pose taken) is a plain 3R with a spare
+            # hub, not this morphology: flagged dishonest so tools/concept_cma.py adds 100 and never settles there
+            r["drive_idle"] = True; r["honest"] = False
         if hasattr(M, "link_pts") and "LT" in getattr(M, "link_pts", {}):
             # in-band share of the tail alone over the taken clip frames
             tk = [i for i in range(len(B.idx)) if B.kind[i] == "clip" and B.res[i] is not None and float(np.min(B.res[i])) >= 0]

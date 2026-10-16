@@ -142,23 +142,94 @@ The sweep below searches the seats where the tail can be short (bk2 small, i.e. 
      physical stop B.
 4. **Local against farm:** 30.72 locally against 30.18 on the farm at the coarse best (0.5 points).
 
+## The merged fallback embodiment: lobe -> rocker -> pushrod ("rod", built after the tail failed its gate)
+
+The tail cost more than 4 points, so per the spec the fallback was built in the same model (`emb_mode` "rod"). The drive
+chain is:
+
+1. A constant-pressure spiral lobe on hub 2's rotor rim (link 2, r_lobe 9 mm inside the O20 stack).
+2. A rocker on link 1b beside hub 2 (O10 x 9; its base disc is sampled and counted in band).
+3. An O3 pushrod with M3 rod-end heads (O10, both ends sampled).
+4. A horn of radius r_horn on K's cap (link 1a, flipped stack).
+
+The law is dK = kK t past the onset. The lobe profile makes it linear, with tan(pa) = kK r_horn / r_lobe. The same
+gates apply as for the tail (rate, pressure angle <= 45, K stop B, lift-off), and the end of the valid prefix is the q2
+dowel, stop B.
+
+Nothing in this embodiment sweeps over the skin: the rocker, rod and horn ride on link 1b / K and move a few mm. The rod
+is sampled rigid with link 1b; its 1-2 mm slide and the horn's arc are ignored.
+
+A "rod-low" variant was also built. The rod runs at strap level against a horn lug on link 1a (r_horn >= 16 mm) and needs
+a rocker ratio of 3, so kK <= 1.7. It is also sampled.
+
+| config (Bench(60,160) fast) | near-touch gap | plain | reach | in-band14 | contact | min metal |
+|---|---|---|---|---|---|---|
+| LB1 seats, kK 3, r_horn 2.6, law only (no drive metal) | 15.71 | 14.55 | 0.781 | 0.905 | 0.027 | 0.40 |
+| LB1 seats, kK 3, r_horn 2.6, + rod metal | 20.37 | 19.21 | 0.781 | 0.853 | 0.027 | 0.40 |
+| rod LHS 256, best | 21.18 | 20.03 | 0.781 | 0.850 | 0.032 | 0.78 |
+| rod-low LHS 256, best (kK 1.56, r_horn 16.9) | 19.94 | 19.94 | 0.738 | 0.885 | 0.022 | 1.82 |
+| **rod CMA (4 x 8-process farm jobs, 1957 tries with r_horn >= 2.45), best** | **16.53** | 16.53 | 0.794 | 0.846 | 0.005 | 1.05 |
+
+The rod CMA best has these parameters:
+
+- drive: kK 3.18, r_horn 2.49, pressure angle 41.4;
+- knuckle and stops: bk1 31.25, bk2 37.99, a1max 58.36, smhi 13.69, smlo 5.28;
+- seats: az1 93.55, el1 67.36, az2 43.46, el2 43.31, wd 63.34, wa -9.65, b3 0.384;
+- knee: lE 67.83, lc 25.81, phiE -2.79, phib -65.67, stk 4.85, ang_min 27.85.
+
+At that best, K is driven up to 42.6 deg on 68 stretched poses, the rate dq2/dth stays <= 0.58, and follow is 1.0.
+
+**Gate on the rod search** (LHS + CMA in order, 1957 tries): the best gained 0.36 score points over the second half and
+0.00 over the last third, and the top-5 spread is 0.19. It passes.
+
+The drive metal costs about 4.7 points at LB1, against 25-42 for the tail. The rod-end heads sit 20-22 mm over the skin
+(0 % in band), and the rocker sits at 0.94.
+
+**The tail CMA was an objective loophole (red team).** Its best rows (16.10 fast) are designs where the drive never
+engages: the tooth lies outside r <= 10 mm at the onset, so the law has no valid prefix. That leaves an idle K and a
+plain 3R window at smhi 5, and with bk2 ~ 20 deg link 1b has no exposed strap. Those rows are NOT this morphology. They
+are excluded, and the tail embodiment's honest best stays the stage-2 28.66.
+
+Two lessons for every slaved-knuckle search:
+
+- The objective must require the drive to engage, for example 100 points when stretched_kin = 0.
+- The kit should flag a link with no sampled metal.
+
+## Frozen check (Bench(110,360) exact; shape fit on Bench(60,160) fast and worn without refit, the round-3 protocol)
+
+| design | fit (fast) | frozen gap | score | reach | in-band14 | contact | near-touch | overhead | min metal |
+|---|---|---|---|---|---|---|---|---|---|
+| **rod CMA best** | 16.53 | **23.37** | 91.5 | 0.731 | 0.846 | 0.011 | 25.01 | 8/28 | 0.45 mm |
+| rod, LB1 seats, kK 3 | 19.21 | 26.98 | 90.2 | 0.717 | 0.853 | 0.035 | 29.56 | 7/28 | 0.02 mm |
+| tail, stage-2 best (crown) | 28.66 | 37.00 | 86.5 | 0.656 | 0.874 | 0.059 | 39.79 | 5/28 | 0.56 mm |
+| tail, LHS best (beside) | 30.72 | 39.99 | 85.5 | 0.653 | 0.852 | 0.064 | 42.22 | 5/28 | 0.54 mm |
+| H1 (verified, 3 active), same protocol | | 27.20 | 90.1 | | | | | | |
+
+The rod best's lost poses, frozen, are fold 84, slide 8, parts 1 and contact 4. The fold is still the main loss: K's
+stop B sits at a1max 58, and the folded side has no lobe.
+
 ## Verdict
 
-**Screened. Not a contender at 3 active.**
+**Screened. The FALLBACK embodiment is the first 3-active design measured below H1 frozen exact**: 23.37 against
+H1's 27.20 on the same protocol. It is unverified, and its complexity is 42.5 against H1's 21.5. **The Geneva-tail
+embodiment is not viable.**
 
-- The exact one-tooth law is sound. With a Geneva entry it slaves K up to 56 deg with no lift-off, at rate <= 1.3 and a
-  pressure angle <= 45. It is worth ~10 points over the 3R window when the metal is free.
-- The metal that carries it is not free. A part rigid with link 2 sweeps a cone about u2 and has to:
-  - clear the highest skin under that cone;
-  - clear link 1b, which it crosses;
-  - climb onto K's cap.
-  That costs 10-42 points, against the kill threshold of 4.
-- Best 28.66 fast. For comparison, the verified 3-active H1 has 24.48 frozen and the minarc law-only figure is ~14 fast.
-- **Lesson that predicts beyond this morphology:** any cam follower rigid with a link must be priced by its swept
-  surface of revolution about that link's axis, not by its pose at engagement. A follower rigid with link 2 inherits
-  J2's whole range of motion, and the band (2-14 mm) cannot hold a part whose sweep cone spans 30+ mm of skin height.
-- **Next:**
-  - A follower that does not sweep: put the cam on hub 2's own rotor rim (the merged lobe-rocker fallback; it rides the
-    same link-1b strip, kK <= 3.5).
-  - Or a drive whose moving part stays inside the O20 stacks, such as a face cam in hub 2's crown driving K through a
-    link-1b pushrod. That puts the metal on link 1b, which is in band at 0.97-0.99.
+- **The idea holds.** K slaved to q2, sensor-free, with an exact law, no lift-off and a pressure angle <= 45 deg, buys
+  reach: 0.73 frozen at in-band 0.85.
+- **Where the metal goes decides it.** A follower rigid with link 2 must be priced by its swept surface of revolution
+  about u2, not by its pose at engagement. The tail costs 10-42 points. A lobe inside hub 2's own stack, driving a
+  pushrod that rides link 1b, costs ~4.7.
+- **Lesson that predicts beyond this morphology:** put every coupling element inside an existing O20 stack or on a link
+  that does not turn relative to its neighbour's sweep. Never put it on a member that sweeps J2's range.
+- **Before any claim (for the verifier):**
+  - the independent harness on the rod best;
+  - the continuity flood fill;
+  - held-out clips;
+  - the rod's slide and horn arc;
+  - spring against gravity, and the reflected J2 torque kK tau_K.
+- **Next levers:**
+  - A folded-side lobe. The rod drive can take a second lobe for free on the same rim, which the tail could not. It
+    attacks the 84 fold losses directly. The judge measured +0.6 fast for two lobes on the law.
+  - Lower rod-end heads, for example a horn under the cap's spring at the crown level: the rod-end samples are 0 % in
+    band.
+  - Hub 3, which is 0.59 in band, as in every pin-knee chain.
