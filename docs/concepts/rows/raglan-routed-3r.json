@@ -127,5 +127,23 @@
   },
   "pinch": "0.64 mm at ws plane 15 elev 45 axial -75",
   "jam": "fold at plane 0 elev 120 axial -15 (and 59 more fold poses, mostly elevation >= 75 with axial -45..-15)"
+ },
+ "mechanism": {
+  "active_dof": 3,
+  "passive_trans": 0,
+  "crossed_rails": false,
+  "passive_rot": 0,
+  "moving_bodies": 3,
+  "joints": 3,
+  "closed_loops": 0,
+  "sliding_pairs": 0,
+  "rolling_pairs": 3,
+  "sensed_passive": 0,
+  "springs_or_flexures": 0,
+  "custom_parts": 7,
+  "catalogue_parts": 6,
+  "notes": "plain spherical 3R on far-end-capable hubs (best k3484: e = +1 +1 +1, link 1 bent 38 deg in planform - one rigid bent bar, no extra part). bodies: link 1, link 2, arm-end (member 3: hub-3 plate + K7 neck rigid on BOTTOM); joints: J1, J2, J3 O20 hubs (MR117-2RS pair each). Bench has no GH translation: no cuff slide modelled (the user's cuff slides / liner take GH slip, outside the count; if counted, +2 passive_trans, crossed). custom: base, 2 links, arm-end plate + neck, 3 hub shafts (est.); catalogue: 3 x MR117 pair (est., fasteners excluded).",
+  "source": "docs/concepts/models/raglan-routed-3r.py:1-25 (chain, far-end hubs, raglan routing)",
+  "confidence": "counted"
  }
 }

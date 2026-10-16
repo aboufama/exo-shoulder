@@ -42,5 +42,23 @@
   "width": 12.0,
   "t_link": 3.0
  },
- "verification": "adversarial verifier 2026-10-15: DOF 3 active / 0 passive confirmed, closure residual 0, 0 flips (dense K2), kit audit clean, grid artefact none (same 220 poses, exact path 73.51 vs grid 73.54). One modelling error: the wedge seats' skin-fitted underside was laid out in a thorax-referenced azimuth frame, not in the member that carries it (base at J1, link 2 at J2 / J3 rotate -11..24, -122..110, -171..166 deg about the hub axis relative to that frame); fixed in the material frame: 72.67 -> 73.54 (hub 2 in band 0.237 -> 0.156). Large bench Bench(110,360), exact signed distance, the rigid geometry fitted on Bench(60,160) frozen (250 poses unseen by the fit), non-adjacent parts >= 1 mm: gap 87.47 (reach 0.817, contact 0.114: 52 contact poses, across-body internal rotation plane 60-150 and behind-back plane -90..-60 and overhead elev 135-165 plane -15..15). A refit on the 470 poses was not run (exact K3 march ~1-2 CPU h at load 12-15). Worse than 68.93 on every measure: refuted."
+ "verification": "adversarial verifier 2026-10-15: DOF 3 active / 0 passive confirmed, closure residual 0, 0 flips (dense K2), kit audit clean, grid artefact none (same 220 poses, exact path 73.51 vs grid 73.54). One modelling error: the wedge seats' skin-fitted underside was laid out in a thorax-referenced azimuth frame, not in the member that carries it (base at J1, link 2 at J2 / J3 rotate -11..24, -122..110, -171..166 deg about the hub axis relative to that frame); fixed in the material frame: 72.67 -> 73.54 (hub 2 in band 0.237 -> 0.156). Large bench Bench(110,360), exact signed distance, the rigid geometry fitted on Bench(60,160) frozen (250 poses unseen by the fit), non-adjacent parts >= 1 mm: gap 87.47 (reach 0.817, contact 0.114: 52 contact poses, across-body internal rotation plane 60-150 and behind-back plane -90..-60 and overhead elev 135-165 plane -15..15). A refit on the 470 poses was not run (exact K3 march ~1-2 CPU h at load 12-15). Worse than 68.93 on every measure: refuted.",
+ "mechanism": {
+  "active_dof": 3,
+  "passive_trans": 0,
+  "crossed_rails": false,
+  "passive_rot": 0,
+  "moving_bodies": 3,
+  "joints": 3,
+  "closed_loops": 0,
+  "sliding_pairs": 0,
+  "rolling_pairs": 3,
+  "sensed_passive": 0,
+  "springs_or_flexures": 0,
+  "custom_parts": 7,
+  "catalogue_parts": 6,
+  "notes": "plain spherical 3R, both arcs 90 deg (Cardan; best k14 shorter arcs 75 / 75). 'wedge' hub seats are the lower member's skin-fitted underside, not a part. bodies: link 1, link 2, arm-end (member 3: hub-3 plate + K7 neck rigid on BOTTOM); joints: J1, J2, J3 O20 hubs (MR117-2RS pair each). Bench has no GH translation: no cuff slide modelled (the user's cuff slides / liner take GH slip, outside the count; if counted, +2 passive_trans, crossed). custom: base, 2 links, arm-end plate + neck, 3 hub shafts (est.); catalogue: 3 x MR117 pair (est., fasteners excluded).",
+  "source": "docs/concepts/models/posterior-max-margin-cardan.py:1-24 (chain, DOF, seats)",
+  "confidence": "counted"
+ }
 }

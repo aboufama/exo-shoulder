@@ -79,5 +79,23 @@
  },
  "hubless": [
   "J3"
- ]
+ ],
+ "mechanism": {
+  "active_dof": 3,
+  "passive_trans": 1,
+  "crossed_rails": false,
+  "passive_rot": 0,
+  "moving_bodies": 4,
+  "joints": 4,
+  "closed_loops": 0,
+  "sliding_pairs": 2,
+  "rolling_pairs": 2,
+  "sensed_passive": 0,
+  "springs_or_flexures": 0,
+  "custom_parts": 8,
+  "catalogue_parts": 8,
+  "notes": "bodies: link 1, link 2 + carriage, C-track (on the slide block), arm-end (slide rail on the cuff). joints: J1, J2 O20 hubs, J3 carriage on the open C-track (track pair), PASSIVE slide along d3 (40 x 10 rail + block, RSR5 / MGN5 class). The slide follows the GH translation along d3 (0 on the bench) and changes no orientation: not sensed. custom: base, link 1, link 2, carriage, C-track, slide mount, 2 hub shafts (est.); catalogue: 2 x MR117 pair, 2 iglidur carriage liners, rail + block (est.).",
+  "source": "docs/concepts/models/seed-2r-cring.py:1-37 (topology, passive slide)",
+  "confidence": "counted"
+ }
 }

@@ -49,5 +49,23 @@
  "audit": [],
  "hubless": [
   "J1"
- ]
+ ],
+ "mechanism": {
+  "active_dof": 3,
+  "passive_trans": 0,
+  "crossed_rails": false,
+  "passive_rot": 0,
+  "moving_bodies": 3,
+  "joints": 3,
+  "closed_loops": 0,
+  "sliding_pairs": 1,
+  "rolling_pairs": 2,
+  "sensed_passive": 0,
+  "springs_or_flexures": 0,
+  "custom_parts": 11,
+  "catalogue_parts": 8,
+  "notes": "spherical 3R with J1 spread along a scapula-fixed arc rail. bodies: carriage (= J2 lower plate), link 2, arm-end (hub-3 plate + K7 neck). joints: J1 carriage on the 10 x 4 race (V-rollers on both edges, preloaded by eccentric pins), J2, J3 O20 hubs. custom: base, race rail (custom arc), carriage, link 2, neck, 4 roller pins, 2 hub shafts (est.); catalogue: 2 x MR117 pair + 4 MR83 V-rollers (est.).",
+  "source": "docs/concepts/models/scapular-race-j2-carriage.py:1-29 (topology, carriage, DOF)",
+  "confidence": "counted"
+ }
 }

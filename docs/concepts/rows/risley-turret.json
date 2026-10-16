@@ -85,5 +85,23 @@
    "kit_strict_1mm": 75.94
   },
   "reason": "corrected gap 74.66 > 68.93: the screening axes were tuned on Bench(60,160); on the larger bench closure drops 0.87 -> 0.80 and reach 0.73 -> 0.65, J2 hub rises 72 -> 77 mm (1.5 % in band), link 2 in band 0.44 -> 0.30. No hard rule broken. On identical checks and bench it still edges the champion (74.66 vs 75.94)."
+ },
+ "mechanism": {
+  "active_dof": 3,
+  "passive_trans": 0,
+  "crossed_rails": false,
+  "passive_rot": 0,
+  "moving_bodies": 3,
+  "joints": 3,
+  "closed_loops": 0,
+  "sliding_pairs": 0,
+  "rolling_pairs": 3,
+  "sensed_passive": 0,
+  "springs_or_flexures": 0,
+  "custom_parts": 7,
+  "catalogue_parts": 5,
+  "notes": "counted at the best config (j2hub = 1: J2 an O20 hub, the spec's second ring dropped). bodies: L1 (J1 ring's upper race housing + bridge strap + J2 lower member), L2 (J2 upper member + 14 x 3 strap), arm-end (hub-3 plate + K7 neck). joints: J1 flat thin-section ring bearing about b (hubless, KAA15XL0 class), J2, J3 O20 hubs. custom: ring base housing, upper race housing, bridge, link 2, neck, 2 hub shafts (est.); catalogue: 1 thin-section ring bearing + 2 x MR117 pair (est.).",
+  "source": "docs/concepts/models/risley-turret.py:1-33 (topology, parts), 54-56 (j2hub)",
+  "confidence": "counted"
  }
 }

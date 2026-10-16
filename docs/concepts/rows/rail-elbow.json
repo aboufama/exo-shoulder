@@ -217,5 +217,23 @@
   "buildable_variant": "plain spherical 3R at rail-elbow's axes: 60.03 Bench(110,360) exact (champion 75.94); L1 CAD l1_3r-k2221 R1 56.1 %",
   "t": "2026-10-16",
   "source": "docs/research/manufacturability_summary.md; docs/research/passive_dof_hardware.md; docs/research/manufacturability_audit.md"
+ },
+ "mechanism": {
+  "active_dof": 3,
+  "passive_trans": 0,
+  "crossed_rails": false,
+  "passive_rot": 0,
+  "moving_bodies": 4,
+  "joints": 5,
+  "closed_loops": 1,
+  "sliding_pairs": 2,
+  "rolling_pairs": 2,
+  "sensed_passive": 0,
+  "springs_or_flexures": 0,
+  "custom_parts": 11,
+  "catalogue_parts": 13,
+  "notes": "counted at the best config (k2221, tele = 1: 2-stage telescopic rail driven 2:1 by a cable loop - the audit's NOT BUILDABLE in MVP1). bodies: link 1 (strap 1 + stage-1 rail), stage 2 (rides beside stage 1 at half the carriage travel), carriage + bridge (link 2), arm-end (hub-3 plate + neck). joints: J1, J3 O20 hubs, stage 2 on stage 1, carriage on stage 2 (V-roller track pairs), the 2:1 cable coupling (a constraint pair: 1 loop, no free coordinate). The spec's rigid rail (tele = 0): bodies 3, joints 3, loops 0, sliding 1, rolling 2. custom: base, strap 1, stage-1 rail, stage 2, carriage, bridge, neck, 2 hub shafts, 2 cable pulleys (est.); catalogue: 2 x MR117 pair, 8 MR83 V-rollers, 1 cable (est.).",
+  "source": "docs/concepts/models/rail-elbow.py:1-35 (topology), 53 (best PARAMS tele=1), 136-139 (2-stage 2:1 cable rail)",
+  "confidence": "counted"
  }
 }
