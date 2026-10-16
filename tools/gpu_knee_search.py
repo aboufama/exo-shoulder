@@ -275,6 +275,15 @@ class CMA:
         self.sigma *= math.exp((cs / self.damps) * (np.linalg.norm(self.ps) / self.chiN - 1))
         self.C = np.triu(self.C) + np.triu(self.C, 1).T; D2, self.B = np.linalg.eigh(self.C); self.D = np.sqrt(np.maximum(D2, 1e-20))
 
+    def state(self):
+        return dict(c0=self.c0.tolist(), mean=self.mean.tolist(), sigma=self.sigma, C=self.C.tolist(), pc=self.pc.tolist(), ps=self.ps.tolist(),
+                    gen=self.gen, seed=self.seed, best=self.best, best_gen=self.best_gen, hist=self.hist)
+
+    def load(self, st):
+        self.c0 = np.array(st["c0"]); self.mean = np.array(st["mean"]); self.sigma = st["sigma"]; self.C = np.array(st["C"])
+        self.pc = np.array(st["pc"]); self.ps = np.array(st["ps"]); self.gen = st["gen"]; self.seed = st["seed"]; self.best = st["best"]
+        self.best_gen = st["best_gen"]; self.hist = st["hist"]; D2, self.B = np.linalg.eigh(self.C); self.D = np.sqrt(np.maximum(D2, 1e-20))
+
     def stop(self):
         if self.sigma * self.D.max() < 0.02: return "sigma collapsed"
         if self.gen - self.best_gen >= 40: return "no gain > 0.02 in 40 generations"
@@ -282,11 +291,37 @@ class CMA:
 
 
 # ---- the pool feeder ---------------------------------------------------------------------------------------------------
+class Deadlines:
+    """GKS_T_SOBOL / GKS_T_CMA / GKS_T_VERIFY from the environment, overridden by $OUT/deadlines.json on the volume
+    ({"sob": epoch, "cma": epoch, "ver": epoch}, re-read every 20 s): the schedule can be pulled in without a restart"""
+    def __init__(self, out):
+        self.f = os.path.join(out, "deadlines.json"); self.t = 0.0; self.d = {}
+        sob = float(os.environ.get("GKS_T_SOBOL", time.time() + 1800)); cma = float(os.environ.get("GKS_T_CMA", sob + 1500))
+        self.env = dict(sob=sob, cma=cma, ver=float(os.environ.get("GKS_T_VERIFY", cma + 1800)))
+
+    def __call__(self, k):
+        if time.time() - self.t > 20:
+            self.t = time.time()
+            try: self.d = json.load(open(self.f))
+            except Exception: pass                                                           # noqa: BLE001
+        return float(self.d.get(k, self.env[k]))
+
+
+def dead_pods(out):
+    """pods terminated by the lead ($OUT/dead.txt, one id per line): their unfinished chunks are re-run by a live pod"""
+    try: return {x.strip() for x in open(os.path.join(out, "dead.txt")) if x.strip()}
+    except OSError: return set()
+
+
+def alive_pods(out):
+    return sorted(x for x in (os.path.basename(f)[6:] for f in glob.glob(os.path.join(out, "alive_*"))) if x not in dead_pods(out))
+
+
 def feed(pool, items, W, on_result, deadline=None):
-    """apply_async with at most 3 W in flight; items is an iterator (pulled lazily); returns the number evaluated"""
+    """apply_async with at most 3 W in flight; items is an iterator (pulled lazily); deadline: a callable -> epoch s"""
     pend = deque(); n = 0; it = iter(items)
     while True:
-        while len(pend) < 3 * W and (deadline is None or time.time() < deadline):
+        while len(pend) < 3 * W and (deadline is None or time.time() < deadline()):
             try: a = next(it)
             except StopIteration: break
             pend.append(pool.apply_async(_eval, (a,)))
@@ -309,8 +344,7 @@ def pick_distinct(rows, sc, k, rad, key="obj"):
 def run(a):
     import multiprocessing as mp
     OUT = a.out; os.makedirs(OUT, exist_ok=True); me = os.environ.get("RUNPOD_POD_ID", "local")
-    T_SOB = float(os.environ.get("GKS_T_SOBOL", time.time() + 1800)); T_CMA = float(os.environ.get("GKS_T_CMA", T_SOB + 1500))
-    T_VER = float(os.environ.get("GKS_T_VERIFY", T_CMA + 1800)); scale = float(os.environ.get("GKS_SCALE", 1.0))
+    DL = Deadlines(OUT); scale = float(os.environ.get("GKS_SCALE", 1.0))
     log = lambda s: print(f"[{time.strftime('%H:%M:%S', time.gmtime())} {me}] {s}", flush=True)
     open(os.path.join(OUT, f"alive_{me}"), "w").write(f"{time.time():.0f}")
     nc, nw = (int(x) for x in a.bench.split(","))
@@ -319,7 +353,7 @@ def run(a):
         q = open("/sys/fs/cgroup/cpu.max").read().split()
         if q[0] != "max": ncpu = min(ncpu, max(1, int(int(q[0]) / int(q[1]))))
     except Exception: pass                                                                   # noqa: BLE001
-    W = a.workers or (gpu_slots(ncpu) if a.device == "cuda" else max(2, ncpu - 1)); log(f"cpus {ncpu} workers {W} bench {nc},{nw} device {a.device} scale {scale}; deadlines sobol {T_SOB - time.time():.0f}s cma {T_CMA - time.time():.0f}s verify {T_VER - time.time():.0f}s")
+    W = a.workers or (gpu_slots(ncpu) if a.device == "cuda" else max(2, ncpu - 1)); log(f"cpus {ncpu} workers {W} bench {nc},{nw} device {a.device} scale {scale}; deadlines sobol {DL('sob') - time.time():.0f}s cma {DL('cma') - time.time():.0f}s verify {DL('ver') - time.time():.0f}s")
     sc, lo, hi = spec(); S = seeds()
     pool = mp.get_context("spawn").Pool(W, initializer=_w_init, initargs=(nc, nw, a.device))
     # 1. seeds + 2. Sobol chunks
@@ -334,13 +368,26 @@ def run(a):
     okt = {r["tag"] for r in prev if r.get("err") is None}
     retry = [r for r in dedupe(prev) if cuda_err(r) and r["tag"] not in okt]
     if retry: log(f"restart: re-evaluating {len(retry)} rows that failed on a CUDA error (of {len(prev)} rows)")
+    for dp in sorted(dead_pods(OUT)):                     # a terminated pod: its CUDA-error rows + the rest of its claimed chunks
+        if dp == me or not claim(os.path.join(OUT, "claims", f"orph_{dp}")): continue
+        allrows = dedupe(read_jsonl(os.path.join(OUT, "sobol_*.jsonl"))); okt2 = {r["tag"] for r in allrows if r.get("err") is None}
+        dr = [r for r in dedupe(read_jsonl(os.path.join(OUT, f"sobol_{dp}.jsonl"))) if cuda_err(r) and r["tag"] not in okt2]
+        have = {r["tag"] for r in allrows}; miss = []
+        for c in range(nch):
+            cp = os.path.join(OUT, "claims", f"s{c}")
+            try: owner = open(cp).read().split()[0]
+            except (OSError, IndexError): continue
+            if owner != dp: continue
+            for i in range(c * CHUNK, min(len(X), (c + 1) * CHUNK)):
+                if f"sob-{R[i]}-{i}" not in have: miss.append(dict(tag=f"sob-{R[i]}-{i}", p=to_dict(X[i])))
+        retry += dr + miss; log(f"dead pod {dp}: re-running {len(dr)} CUDA-error rows + {len(miss)} unevaluated points of its chunks")
 
     def sob_items():
         for r in retry:
-            if time.time() >= T_SOB: return
+            if time.time() >= DL("sob"): return
             yield (r["tag"], r["p"], "exact" if r["tag"].startswith("seed-") else "bound")
         for c in range(nch):
-            if time.time() >= T_SOB: return
+            if time.time() >= DL("sob"): return
             if not claim(os.path.join(OUT, "claims", f"s{c}")): continue
             for i in range(c * CHUNK, min(len(X), (c + 1) * CHUNK)):
                 yield (f"sob-{R[i]}-{i}", to_dict(X[i]), "bound")
@@ -350,11 +397,11 @@ def run(a):
         buf.append(r); best[0] = min(best[0], r.get("obj", 400.0))
         if len(buf) >= 256:
             LS.write(buf); buf.clear(); log(f"sobol {LS.n} evals ({LS.n / (time.time() - t0):.1f}/s) best obj {best[0]:.2f}")
-    feed(pool, sob_items(), W, on_sob, deadline=T_SOB); LS.write(buf); buf.clear()
+    feed(pool, sob_items(), W, on_sob, deadline=lambda: DL("sob")); LS.write(buf); buf.clear()
     open(os.path.join(OUT, f"sobol2_{me}.done"), "w").write(f"{LS.n}"); log(f"sobol done: {LS.n} evals in {time.time() - t0:.0f}s")
     # 3. basins (one pod computes them; the others wait)
-    while time.time() < T_SOB + 300:
-        alive = [os.path.basename(f)[6:] for f in glob.glob(os.path.join(OUT, "alive_*"))]
+    while time.time() < DL("sob") + 300:
+        alive = alive_pods(OUT)
         if all(os.path.exists(os.path.join(OUT, f"sobol2_{x}.done")) for x in alive): break
         time.sleep(10)
     bpath = os.path.join(OUT, "basins_r2.json")
@@ -364,22 +411,43 @@ def run(a):
         log(f"basins from {len(rows)} rows: " + ", ".join(f"{r['tag']} {r['obj']:.2f}" for r in B[:30]))
     while not os.path.exists(bpath): time.sleep(5)
     time.sleep(2); basins = json.load(open(bpath))["basins"]
-    alive = sorted(os.path.basename(f)[6:] for f in glob.glob(os.path.join(OUT, "alive_*"))); rank = alive.index(me) if me in alive else 0
+    alive = alive_pods(OUT); rank = alive.index(me) if me in alive else 0
     quota = max(1, math.ceil(min(N_BASINS, len(basins)) / max(1, len(alive))))
     LC = Log(os.path.join(OUT, f"cma_{me}.jsonl")); act = []
 
-    def take(prefer):
+    def take(prefer, resume=False):
         for j in prefer:
-            if j < len(basins) and claim(os.path.join(OUT, "claims", f"r2b{j}")):
-                b = basins[j]; cm = CMA(to_vec(b["p"]), 0.6, 9000 + j, sc, lo, hi); cm.j = j; cm.tag0 = b["tag"]; return cm
+            if j >= len(basins): continue
+            cp = os.path.join(OUT, "claims", f"r2b{j}")
+            if resume:                                    # a restarted pod resumes ITS unfinished basins (state file, else best row)
+                try: mine = open(cp).read().split()[0] == me
+                except (OSError, IndexError): mine = False
+                if not mine or os.path.exists(os.path.join(OUT, f"basin_{j}.json")): continue
+            elif not claim(cp): continue
+            b = basins[j]; cm = CMA(to_vec(b["p"]), 0.6, 9000 + j, sc, lo, hi); cm.j = j; cm.tag0 = b["tag"]
+            if resume:
+                stf = os.path.join(OUT, f"cmastate_{j}.json")
+                if os.path.exists(stf):
+                    cm.load(json.load(open(stf))); log(f"basin {j} resumed from its state at gen {cm.gen} (best {cm.best['f'] if cm.best else None})")
+                else:
+                    rr = [r for r in read_jsonl(os.path.join(OUT, f"cma_{me}.jsonl")) if r.get("b") == j]
+                    okr = [r for r in rr if r.get("err") is None]
+                    if okr:
+                        bst = min(okr, key=lambda r: r["obj"] + r.get("pen", 0)); cm = CMA(to_vec(bst["p"]), 0.3, 9100 + j, sc, lo, hi); cm.j = j; cm.tag0 = b["tag"]
+                        cm.gen = max(r.get("g", 0) for r in rr); cm.best = dict(f=bst["obj"] + bst.get("pen", 0), row=bst, gen=bst.get("g", 0)); cm.best_gen = cm.gen
+                        log(f"basin {j} resumed from its best row {bst['tag']} ({bst['obj']:.2f}) at gen {cm.gen}, sigma 0.3")
+            return cm
         return None
+    for j in range(len(basins)):
+        cm = take([j], resume=True)
+        if cm is not None: act.append(cm)
     order = [j for j in range(min(N_BASINS, len(basins))) if j % max(1, len(alive)) == rank] + list(range(len(basins)))
     while len(act) < quota:
         cm = take(order)
         if cm is None: break
         act.append(cm)
     log(f"cma: {len(act)} basins {[c.j for c in act]} (alive {len(alive)}, rank {rank})"); done = []
-    while act and time.time() < T_CMA:
+    while act and time.time() < DL("cma"):
         tg = time.time(); items = []
         for cm in act:
             for i, (p, pen) in enumerate(cm.ask()): items.append((cm, i, p, pen))
@@ -388,11 +456,14 @@ def run(a):
         k = 0
         for cm in act:
             f = [res[k + i]["obj"] + items[k + i][3] for i in range(cm.lam)]; cm.tell(f, res[k:k + cm.lam]); k += cm.lam
+            try: jdump(cm.state(), os.path.join(OUT, f"cmastate_{cm.j}.json"))
+            except Exception: pass                                                           # noqa: BLE001
         fin = [cm for cm in act if cm.stop()]
         for cm in fin:
             act.remove(cm); done.append(cm)
+            jdump(dict(j=cm.j, tag0=cm.tag0, gen=cm.gen, best=cm.best, stop=cm.stop(), sigma=cm.sigma, hist=cm.hist), os.path.join(OUT, f"basin_{cm.j}.json"))
             log(f"basin {cm.j} ({cm.tag0}) done at gen {cm.gen}: best {cm.best['f']:.2f} ({cm.stop()})")
-            if T_CMA - time.time() > 300:
+            if DL("cma") - time.time() > 300:
                 nx = take(range(len(basins)))
                 if nx is not None: act.append(nx); log(f"basin {nx.j} claimed")
         if act and act[0].gen % 10 == 0:
@@ -408,7 +479,7 @@ def final(a):
     re-evaluated with the port's EXACT outside path by one pod, the top 10 + H1 -> verification jobs for every pod's CPUs"""
     import multiprocessing as mp
     OUT = a.out; me = os.environ.get("RUNPOD_POD_ID", "local"); sc, lo, hi = spec(); S = seeds()
-    T_CMA = float(os.environ.get("GKS_T_CMA", time.time())); T_VER = float(os.environ.get("GKS_T_VERIFY", T_CMA + 1800))
+    DL = Deadlines(OUT)
     log = lambda s: print(f"[{time.strftime('%H:%M:%S', time.gmtime())} {me}] {s}", flush=True)
     nc, nw = (int(x) for x in a.bench.split(","))
     ncpu = len(os.sched_getaffinity(0))
@@ -417,12 +488,12 @@ def final(a):
         if q[0] != "max": ncpu = min(ncpu, max(1, int(int(q[0]) / int(q[1]))))
     except Exception: pass                                                                   # noqa: BLE001
     W = a.workers or (gpu_slots(ncpu) if a.device == "cuda" else max(2, ncpu - 1))
-    alive = sorted(os.path.basename(f)[6:] for f in glob.glob(os.path.join(OUT, "alive_*")))
+    alive = alive_pods(OUT)
     vpath = os.path.join(OUT, "verify_jobs.json")
     if claim(os.path.join(OUT, "claims", "final_r2")):
         pool = mp.get_context("spawn").Pool(W, initializer=_w_init, initargs=(nc, nw, a.device))
-        while time.time() < T_CMA + 240:
-            if all(os.path.exists(os.path.join(OUT, f"cma2_{x}.done")) for x in alive): break
+        while time.time() < DL("cma") + 240:
+            if all(os.path.exists(os.path.join(OUT, f"cma2_{x}.done")) for x in alive_pods(OUT)): break
             time.sleep(10)
         rows = dedupe(read_jsonl(os.path.join(OUT, "sobol_*.jsonl"))) + read_jsonl(os.path.join(OUT, "cma_*.jsonl"))   # every CMA row is an evaluation of its own params
         top = pick_distinct(rows, sc, 30, R_DISTINCT)
@@ -438,12 +509,12 @@ def final(a):
         jdump(dict(finalists=[dict(name=f"F{k + 1}", src=r["src"], obj=r["obj"], gap=r.get("gap"), p=r["p"]) for k, r in enumerate(fin)], jobs=jobs), vpath)
         log("finalists: " + ", ".join(f"F{k + 1} {r['src']} near1 {r.get('gap_near1')} gap {r.get('gap')} m {r['p']['margin']}" for k, r in enumerate(fin)))
         pool.close(); pool.terminate()
-    while not os.path.exists(vpath) and time.time() < T_VER: time.sleep(10)
+    while not os.path.exists(vpath) and time.time() < DL("ver"): time.sleep(10)
     if not os.path.exists(vpath): log("no verification jobs: exit"); return
-    time.sleep(2); verify(json.load(open(vpath))["jobs"], OUT, ncpu, T_VER, log)
+    time.sleep(2); verify(json.load(open(vpath))["jobs"], OUT, ncpu, DL, log)
 
 
-def verify(jobs, OUT, ncpu, T_VER, log):
+def verify(jobs, OUT, ncpu, DL, log):
     """the CPU kit, unpatched, in fresh processes (CB_EXACT=1, CB_FOLD_MARGIN = the config's margin)"""
     import subprocess
     mem = 0
@@ -451,7 +522,7 @@ def verify(jobs, OUT, ncpu, T_VER, log):
     except Exception: pass                                                                   # noqa: BLE001
     if not mem or mem > 1e6:
         mem = float(os.popen("free -g | awk '/Mem/ {print $2}'").read().strip() or 32)
-    slots = max(1, min(ncpu, int(mem / 3.0))); log(f"verify: {len(jobs)} jobs, {slots} slots (mem {mem:.0f} GB)")
+    slots = max(1, min(ncpu - 1, int(mem / float(os.environ.get("GKS_GB_PER_VERIFY", 4.5))))); log(f"verify: {len(jobs)} jobs, {slots} slots (mem {mem:.0f} GB)")
     vd = os.path.join(OUT, "verify"); os.makedirs(vd, exist_ok=True); run_ = []
 
     def start(j):
@@ -465,7 +536,7 @@ def verify(jobs, OUT, ncpu, T_VER, log):
         return subprocess.Popen(cmd, env=env, stdout=lg, stderr=subprocess.STDOUT, cwd=REPO), j, time.time()
     q = list(jobs)
     while True:
-        while len(run_) < slots and q and time.time() < T_VER:
+        while len(run_) < slots and q and time.time() < DL("ver"):
             j = q.pop(0)
             if claim(os.path.join(OUT, "claims", "v_" + j["id"])): run_.append(start(j)); log(f"verify start {j['id']}")
         if not run_: break
@@ -473,7 +544,7 @@ def verify(jobs, OUT, ncpu, T_VER, log):
         for pr, j, t in list(run_):
             if pr.poll() is not None:
                 run_.remove((pr, j, t)); log(f"verify done {j['id']} rc {pr.returncode} {time.time() - t:.0f}s")
-            elif time.time() > T_VER:
+            elif time.time() > DL("ver"):
                 pr.kill(); run_.remove((pr, j, t)); log(f"verify killed at the deadline {j['id']}")
     log("verify: nothing left for this pod")
 
@@ -607,6 +678,17 @@ def report(dig_path):
         r = b.get("best") or {}; s0 = st.get(b["j"], {})
         L.append(f"| b{b['j']} | {b['tag0']} | {s0.get('obj', '')} | {b['gen']} | {b['stop']} | {b['best_f']:.2f} | {r.get('gap_near1')} | {r.get('gap')} | {r.get('reach')} | "
                  f"{r.get('follow')} | {r.get('inband14')} | {(r.get('p') or {}).get('margin')} |")
+    V = D.get("verify") or {}; fins = (D.get("verify_jobs") or {}).get("finalists", [])
+    if fins:
+        L.append("\n| config | search tag | GPU obj | margin | fitbig gap / near1 | fit60 gap / near1 | held gap / near1 | reach / follow / in-band 14 (fitbig) | "
+                 "min metal mm | connected reach (grid) | islands |\n|---|---|---|---|---|---|---|---|---|---|---|")
+        for f in fins + [dict(name="H1", src="H1 (verified leader)", obj=None, p=dict(seeds()["H1"]))]:
+            vs = vsum(V, f["name"]); g = lambda pr, k: (vs.get(pr) or {}).get(k)
+            c = (vs.get("continuity") or {}).get("grid") or {}
+            L.append(f"| {f['name']} | {f['src']} | {f['obj'] if f['obj'] is not None else '-'} | {f['p'].get('margin', 5.0)} | "
+                     f"{g('fitbig', 'gap')} / {g('fitbig', 'gap_near1')} | {g('fit60', 'gap')} / {g('fit60', 'gap_near1')} | {g('held', 'gap')} / {g('held', 'gap_near1')} | "
+                     f"{g('fitbig', 'reach')} / {g('fitbig', 'follow')} / {g('fitbig', 'inband14')} | {g('fitbig', 'min_metal_mm')} | "
+                     f"{c.get('connected_reach')} | {c.get('islands')} |")
     return "\n".join(L)
 
 

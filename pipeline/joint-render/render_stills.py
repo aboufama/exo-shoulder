@@ -26,6 +26,10 @@ for o in objs:                                                                  
     mw = o.matrix_world.copy(); o.parent = None; o.data.transform(Yup.inverted() @ mw)
     o.matrix_world = Yup @ Matrix.Scale(0.001, 4)
     for p in o.data.polygons: p.use_smooth = True
+    # exo parts: smooth by angle (split normals at creases > 30 deg) - with plain smooth shading the welded vertices on a
+    # crease (dome cap rim, bores, plate edges) average across it and the faces next to it show radial streaks / wavy
+    # highlights (the 2026-10-16 stills). The mannequin stays fully smooth.
+    if not o.name.lower().startswith("body") and hasattr(o.data, "set_sharp_from_angle"): o.data.set_sharp_from_angle(angle=math.radians(30))
 
 def principled(name, color, metal, rough, bump=None, coat=0.0):
     m = bpy.data.materials.new(name); m.use_nodes = True; nt = m.node_tree; b = nt.nodes["Principled BSDF"]
@@ -59,7 +63,7 @@ set_skin(SKIN)
 def mat_for(n):
     l = n.lower()
     if l.startswith("body"): return skin
-    if any(k in l for k in ("din 7984", "iso 10642", "dowel", "screw", "set screw")): return stainless   # every screw polished (user look)
+    if any(k in l for k in ("din 7984", "iso 10642", "dowel", "screw", "set screw", "din 6799", "e-clip")): return stainless   # every screw / clip polished (user look)
     if ("bearing" in l and "igus" not in l) or "rsr3" in l: return steel                               # bearings, ground miniature guides
     if any(k in l for k in ("igus", "iglidur", "liner", "gib", "washer", "sleeve")): return iglide
     return alu
