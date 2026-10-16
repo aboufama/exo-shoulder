@@ -59,7 +59,7 @@ def slot_design_real(p):
     """the model's slot with the track widened to the REAL roller: slot = MR52ZZ OD 5 + H7 fit (the model: 2.6 mm,
     i.e. the 2 mm dowel's slot) between 1.95 mm walls -> track width + 2.45 mm"""
     sd = _SD(p)
-    if sd.get("passed") and not sd.get("_real"):
+    if sd.get("passed") and "track" in sd and not sd.get("_real"):
         sd = dict(sd); tr = dict(sd["track"]); tr["width"] = round(tr["width"] + (ROLLER_OD + SLOT_FIT - 2.6), 2)
         sd["track"] = tr; sd["_real"] = True
     return sd

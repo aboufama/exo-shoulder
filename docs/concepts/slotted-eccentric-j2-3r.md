@@ -110,3 +110,36 @@ CMA from E's seats: the plain chain at the same seats, same code), and E's froze
   - only stronger, because the two-sided law bends the knee further.
 - Next (if anyone continues): put the knee on the J1 side (a two-state a1 relay, round-5 plan), where the bent member
   stays over the scapula; or cap Amax at ~80 and let the law act only on the folded side (= the dwell, already measured).
+
+## Verification (independent verifier, 2026-10-16 07:17 UTC) - REFUTED
+
+Harness: `docs/concepts/verify/slotted-eccentric-j2-3r.py` (the model's own `frozen` protocol: fit on Bench(60,160)
+fast, every underside / post frozen, worn on Bench(110,360) with `CB_EXACT=1`, K6 at 1 mm radial), plus corrections:
+
+- K6 shared-joint exemption sized to the real joint: knee K (MR63ZZ, O10) 7 mm, roller stud G (O7 boss) 5.5 mm (the kit
+  exempts 12 mm, sized for an O20 hub).
+- Real roller: the model cuts a 2.6 mm slot (the O2 dowel's) for an MR52ZZ 2 x 5 x 2.5 roller; the slot must take the
+  5 mm OD -> track width + 2.45 mm.
+- Independent closure per pose: link 1 {J1, J2}, crank {J2, K}, link 2b {K, J3, G} keep their rest axis angles and
+  handedness (max error 0.000 deg), and G in link 1's frame lies on the exact slot locus (max 0.0006 mm).
+- Slot lock recomputed at every taken pose (internal four-bar mode vs slot tangent): min 53.6 deg; G-K-J2 alignment
+  min 31.2 deg; no pose would back-drive. The determinacy claim (3 active, knee slaved, R17) holds.
+
+| run (CMA E gen 13, O20) | bench | gap | reach | follow | ib14 | ib10 | contact | near-touch | overhead reach |
+|---|---|---|---|---|---|---|---|---|---|
+| claimed (K6 radial 0.5 mm) | (60,160) fast | 74.00 | 0.719 | 0.867 | 0.486 | 0.278 | 0.062 | 83.50 | 0/17 |
+| own checks, K6 1 mm, fit | (60,160) fast | 124.83 | 0.438 | 0.650 | 0.506 | - | 0.092 | - | - |
+| own checks, frozen | (110,360) exact | 119.31 | 0.450 | 0.673 | 0.516 | 0.296 | 0.082 | 127.98 | 0/28 |
+| **verifier, margin 5** | (110,360) exact | **115.21** | 0.464 | 0.718 | 0.501 | 0.299 | 0.086 | 123.65 (min metal 0.0 mm) | 0/28 |
+| verifier, margin 10 | (110,360) exact | 197.93 | 0.147 | 0.082 | 0.616 | 0.507 | 0.075 | 220.95 | 0/28 |
+| locked control (plain 3R, same seats, a2 76.85), m5 | (110,360) exact | 46.60 | 0.603 | 0.918 | 0.799 | 0.418 | 0.036 | 57.15 | 4/28 |
+| locked control, m10 | (110,360) exact | 49.23 | 0.581 | 0.882 | 0.824 | 0.452 | 0.029 | 56.38 | 3/28 |
+
+Champion on the same protocol: 66.97 (offset-skin-normal verifier, kit checks) - 75.94 (risley-turret verifier).
+Verdict: **refuted** - 115.21 is worse than the champion and 69 points worse than its own locked control through the
+same code. The largest single correction is not mine but the honesty rule's: the screened 74.00 used the kit's 0.5 mm
+radial part-part overlap; at the 1 mm rule the fit alone is 124.83 (the crank / link 2b / arm / track stack around hub
+2 has no radial room). Per part in band (verifier, big bench): link 2b 0.05, arm 0.00, crank 0.26, hub 2 0.25, stud
+0.31, track 8-10 0.02-0.12. The kinematic window is real (kin reach 0.856 vs the control's 0.689); the bodies that
+build it cannot live in the band, and none of the overhead poses is taken. Not counted against it (as for dwell): the
+O10 knee and O7 stud under the O20-only ruling.
