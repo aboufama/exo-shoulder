@@ -594,3 +594,32 @@ docs/concepts/fold-sph3r.md.
   - 3R at k1530's axes: 60.03, which reproduces the earlier verifier's number;
   - best frontier seed: 78.11;
   - CMA bests: queued on the farm.
+
+## Raglan routing and far-end hubs: a tailor's two levers, measured (2026-10-16, raglan-routed-3r / raglan-knee-3r / far-end-posterior-3r)
+
+* **Raglan map** (new instrument, `map` mode of docs/concepts/models/raglan-routed-3r.py and raglan-knee-3r.py): for
+  every direction of a link's OWN moving frame (t along the link, d off its great circle), the sphere-traced need over
+  every pose the chain takes and the share of poses one height keeps in 2-14 mm. The skin-motion map in the link frame.
+* **On the plain 3R it is a real lever**: the straight link 1 crosses the posterior acromion edge; one 38 deg planform
+  turn (two straight legs + a tangent arc, constant 8 x 3 section) keeps it over skin that rides with it. Link 1
+  0.36 -> 0.60 in band; 51.33 -> 42.72 fast (CMA gate converged, 4396 tries) and **50.06 frozen on Bench(110,360)
+  exact** against 57.99 for straight links at k2221's axes: the best plain spherical 3R with no passive DOF at all.
+* **On the leader it is not**: at the pin knee / osn k4216 seats the map's argmax IS the great circle for both links
+  (link 1 ceiling 0.99-1.00 over d -20..+10, link 2 peaks at d 0); the leader's 9869-try CMA had already found seats
+  whose straight links are raglan lines. Link-2 turns all lose (parts collisions at the knee / pad, deltoid end).
+* **In-band dilution (red team)**: in-band 14 is a share of metal SAMPLES, so extra metal that sits in band lowers the
+  gap without moving any part closer. A 114 deg hairpin in link 1 (36 -> 84 samples, +~9 g) takes the pin knee from
+  26.34 to 24.79 fast (score 90.99), but weighted at the straight sample count it is 25.89: +0.45 real, +1.1 dilution.
+  On the plain 3R the same check gives 43.97 instead of 42.72 (mostly real). Every in-band claim should be re-scored at
+  fixed part sizes (raglan-knee-3r reports `gap_fixed_n`); a CMA on the bench gap will chase the artefact (annular-ring
+  skirt, docs/concepts/annular-ring-3r.md, is the same thing).
+* **Far-end hubs** (a revolute axis is a line; the bearing may sit at either end): kinematically free, but on this body
+  the far end of every GH line we can use lies in the torso, axilla, neck or chest wall - all 8 end choices worse on the
+  plain 3R (far-end-posterior-3r, 256 configs).
+* **Posterior J1 line** (bvec(-24, 4), fold-free on 100 % of poses with hub 1 in one band): dead in both families - the
+  plain 3R (best honest 118.55) and the pin-knee family (64 layouts, best 122.45: fold 6-20 poses instead of 47, but
+  46-69 skin poses of 220, hub 2 / link 2 over the neck and chest). The fold-free posterior layout moves the poses from
+  the fold column to the skin column.
+* **Farm detail that wasted a round**: `tools/cloud_run.py batch` jobs must carry `"link": [".cache/concept_bench"]`
+  (`sweep` adds it): without it the bench runs the exact path, a pin-knee CMA generation takes 660-1060 s instead of
+  ~20 s, and the gaps are not comparable with fast-grid ones (49.89 exact vs 46.74 fast at the same configuration).
