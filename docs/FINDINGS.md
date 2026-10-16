@@ -790,3 +790,48 @@ user's style".
   - A warm worker still had the previous a = 0 job's frames, so the count check failed. This explains "parts close-ups fail" and "5 sets at once fail".
   - film_client.py stills now gives each job a fresh frame offset (client side only).
   - Mannequin look: base 0.004 renders a flat silhouette; 0.028 at roughness 0.9 with no coat reads matte black with the muscles visible.
+
+## Reach is the fold, and the fold is set by the arcs proximity allows (2026-10-16, docs/research/reach_attribution.md)
+
+User, 2026-10-16: the reach numbers sit near 0.60 and plateau; max them out. Every lost workspace pose of the four
+verified leaders was given its first cause on Bench(110,360) exact with the verifiers' frozen shapes
+(`docs/research/reach/attribute.py`; the runs reproduce the verified 30.35 and 34.29 exactly), and every topology class
+got a kinematic and an in-band ceiling (`ceilings.py`, `frontier_mine.py`).
+
+* **The J2 fold takes 94-96 % of the lost workspace** (pin knee 133 of 142: 57 folded side, 76 stretched; raglan 136 of
+  143; knuckle 132 of 138; spine-parked 140 of 146). Everything else is 6-9 poses: the pin knee's knee reach (4, all
+  at elevation 165: hub 3 drifts 65.8-70.1 mm against lE + lc - 1 = 66.0; a longer knee measured 0 - lc 31 admits 2
+  and both touch the skin), contact 2-5, parts 1-3, no jams.
+* **Across the body is lost on the stretched side only** (47-51 of 68; th up to 153 against window tops of 101-104).
+  **Overhead is lost on both sides** (7-9 folded at th 24-37, 10 stretched at 110-142): the overhead poses alone span
+  th 18-146, so no shift of the window rescues them, only a wider one or a second one.
+* **The plain 3R loses half its in-window overhead to the skin** (spine-parked: 5 of 10, link 2's top face among
+  them); the pin knee loses none of its in-window overhead to the skin, 4 to its knee reach.
+* **The fast-to-frozen reach loss is kinematic, not proximity.** At the same seats the share of workspace poses in the
+  window is 0.69-0.71 on Bench(60,160)'s 160 poses and 0.61-0.63 on Bench(110,360)'s 360 (overhead 12 vs 28 poses):
+  the CMA fitted the window edges to the 160-pose sample. Searches should score the window on the 360 poses.
+* **Ceilings (360 poses, m = 10).** Plain 3R anywhere: 0.93 at 40 / 40 arcs, 0.97 at 45 / 45, 1.00 at a1 + a2 >= 130,
+  all with axes through the trunk or axilla. At the leaders' arcs, best seats 0.74-0.78; at the leaders' seats 0.61-0.63
+  (verified 0.594-0.617). Seats re-tuned within 5 / 10 / 15 deg: +0.02 / +0.04 / +0.06. Per-pose-free J1 rocker of
+  travel 10 / 20 / 30 deg: +0.08 / +0.17 / +0.24. Two-state relay of the J1-J2 arc (40 <-> 77-84): 0.93-0.95.
+* **At in-band14 >= 0.88 every measured class tops out at ~0.70 fast / ~0.61 frozen** (50 k plain-3R, 22 k pin-knee,
+  9.8 k osn, 12.3 k stop-relay, 5.7 k dwell tries; osn never reaches in-band 0.81; the stop relay lifts the plain 3R
+  to the pin knee's 0.700 at contact 0.055, not above). The pin knee's frontier is flat (0.719 at in-band 0.80, 0.700 at
+  0.88, 0.694 at 0.90): giving up in-band does not buy reach. Longer arcs measured negative (every in-band >= 0.88
+  plain 3R has a1 35-45). The 4-DOF lens's spring-centred 4R reaches 0.78 at in-band 0.86 (+0.075) but 0.644 at 0.88.
+* **Red team: raglan-knee-3r's verified 31.52 no longer reproduces (32.37, in-band 0.886).** Since the 04:07 UTC
+  per-hub-radius change the pin-knee model builds links with its own `_Geo(S.Geometry)`, bound before raglan-knee-3r.py
+  swaps `S.Geometry` for its routed class, so the raglan model silently runs great-circle links. Fix before any raglan
+  polish or re-verification. Pin knee, knuckle and spine-parked reproduce exactly (local and farm, pose by pose).
+* **Fold margin (the user ruled 5 deg for MVP1 at ~05:50 while this ran).** At the window edge sigma_min of U = [u1 u2 u3] is 0.28 (m 10), 0.23 (7), 0.19 (5),
+  0.12 (2) - joint rate per arm rate 3.6x / 4.3x / 5.2x / 8.3x - and the J2 transmission angle 34-44 / 28-36 / 23-31 /
+  14-19 deg. The whole margin is worth at most +0.09-0.11 of kinematic reach at the leaders' seats (m 7: +0.03-0.04).
+  Measured on the four frozen shapes, m 7 buys +0.011-0.025 of reach (gap -0.2 to -2.2) and m 5 +0.019-0.031, and no
+  frozen run gains a single overhead pose: the folded-side poses the wider window admits jam link 1 on link 2 (the
+  dyad stacks as it folds), the stretched-side ones partly hit the skin. At 5 deg (a measurement change): pin knee
+  30.35 -> 29.26 frozen / 29.54 refit, knuckle 31.89 -> 30.03 / 29.10. Red team of the feel: the added poses need
+  J2 4-5x faster than the arm through a 25-36 deg transmission angle - give J2 a soft (elastomer) stop at the 5 deg
+  line. Not what the plateau is made of.
+* **What follows.** The zero-complexity levers (the 5 deg margin, 360-pose seats) add ~+0.04-0.07.
+  0.90 needs a second window (relay or 4th joint) with hub 2 in band in that state; the next gate for every fold lever
+  is where hub 2 / the pivot parks in the poses it rescues (`relay_parking.py`).
