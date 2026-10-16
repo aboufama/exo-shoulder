@@ -7,7 +7,10 @@ extra_checks) + the model's near-touch audit, evaluated exactly as tools/knee_po
     python3 tools/gpu_bench_knee.py eval CFGS.json OUT.json [--bench 110,360] [--fit 60,160] [--margin 5] [--device cuda]
     python3 tools/gpu_bench_knee.py parity --n 50 --bench 110,360 [--fit 60,160] --out P.json [--procs 12] [--leaders]
     python3 tools/gpu_bench_knee.py speed --n 64 --bench 110,360 [--workers 12]
-    python3 tools/gpu_bench_knee.py search --bench 110,360 --budget 3600 --out F.json [--workers 12] [--x0 '{..}']
+    python3 tools/gpu_bench_knee.py cma <tools/knee_polish.py cma arguments>     knee_polish's CMA, evaluated on the device
+    python3 tools/gpu_bench_knee.py table P1.json [P2.json]                      markdown parity rows
+(docs/research/golden/README.md "Pin-knee port": parity 0.0 on 53-54 configs x 2 protocols; ~0.26-0.9 s per config vs
+~8-11 s for the kit; pod jobs pipeline/gpu_pod/knee*.sh)
 
 How (an accelerated kit, not a re-model): the CPU kit's own code builds every configuration - the seats on the rest skin
 (libigl), the spherical IK, the knee closure and its window, 10 fps continuity, the part geometry (_geo, the link straps,
@@ -20,6 +23,9 @@ knee_polish objective - and this file replaces ONLY the per-pose loops with batc
   * the verifier's extra_checks (independent 3D closure, knee vs hub 3's upper half, the E boss vs hubs / links),
   * Bench.dist: concept_bench's trilinear formula on the int8 grid (same corner order, float32 corners x float64
     weights), points outside the +-260 mm box handed to the kit's exact (libigl) path.
+Plus two bit-identical CPU-side speed-ups (GBK_FAST_CPU=1, default): the seats' rest-skin libigl trees built once
+(ExactCached) and the IK's per-frame rotations batched (ik_vec); and raglan-knee-3r's routed links (r1t / r1d / r2t /
+r2d / rc) installed on the verifier's model in the port AND the CPU reference.
 Margin = the fold margin (CB_FOLD_MARGIN, set before the kit is imported; 5 = the user's ruling). Hubs: O20 only.
 Protocols: same-bench (fit = wear) or frozen (fit on --fit, worn on --bench without refit = knee_polish.frozen_on).
 """
@@ -82,7 +88,7 @@ class GridDev:
         else:
             self.G = torch.empty(g.size, dtype=torch.int8, device=device); step = 32; n3 = self.n ** 3
             for i in range(0, g.shape[0], step):
-                a = torch.from_numpy(np.ascontiguousarray(g[i:i + step]).reshape(-1)); self.G[i * n3:i * n3 + a.numel()] = a.to(device)
+                a = torch.from_numpy(np.array(g[i:i + step]).reshape(-1))   # a writable copy of the memmap slice; self.G[i * n3:i * n3 + a.numel()] = a.to(device)
         self.outside = 0
 
     def dist(self, I, X):
