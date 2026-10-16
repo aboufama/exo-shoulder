@@ -115,4 +115,50 @@ axis in every pose; a layout's hub band = share of poses within 12 mm below the 
 
 ## Round 2 (CMA from the graded family + a 2-turn polish)
 
-(see the results section below; written when the farm streams return)
+The first launch (01:55) was lost in the container restart (02:03; the batch client died with it). Relaunched 02:07
+(`jobs_cma2`: E / F from the graded family G at q 1.0 / 0.97, G from a middle layout, H = k3484 + a second turn per
+link, and the frozen big-bench wear of k3484). Measured afterwards: those batch jobs did not link the bench grid cache
+(`link: [".cache/concept_bench"]`), so on the farm they run on the EXACT distance path (a pin-knee CMA generation
+took 660-1060 s instead of ~20 s): their gaps are not comparable with the fast-grid numbers above and stay out of the
+best and the gate (stage suffix `-exactpath`). The frozen wear is unaffected (its large bench is exact by design; its
+fit then runs on the exact path too, the conservative side).
+
+Outcome: E returned 1 generation (9 tries, best 114.19 on the exact path, graded family); F, G, H hit the 3000 s farm
+timeout after their first generation. The graded family stays at 73.99 (fast, coarse) and is not pursued further:
+the round-1 gate on the k3484 basin stands (converged).
+
+## Frozen on Bench(110, 360) exact (lesson c) and red team
+
+k3484, shape fitted on Bench(60, 160) and worn without refit on Bench(110, 360) exact (fold-sph3r's frozen protocol,
+K6 at 1 mm radial; `.cache/raglan/big_rgD.json`; the fit, re-run on the exact path, reproduces 42.73):
+
+| bench | gap | score | reach | follow | in-band 14 | in-band 10 | contact | gap, metal < 1 mm as contact | min metal-skin | crown contact poses |
+|---|---|---|---|---|---|---|---|---|---|---|
+| Bench(60, 160) fit | 42.73 | 84.5 | 0.869 | 1.000 | 0.504 | 0.294 | 0 | 45.00 | 0.77 mm | 0 |
+| **Bench(110, 360) exact, frozen** | **50.06** | 81.8 | 0.803 | 1.000 | 0.504 | 0.295 | 0.0075 | 52.16 | 0.64 mm | 3 |
+| straight links at k2221's axes (fold-sph3r, same protocol) | 57.99 | 78.9 | | | | | | | | |
+
+So routing holds on the large bench: -7.9 gap points against the straight-link 3R, in-band unchanged by the transfer
+(0.504 -> 0.504). The best plain spherical 3R (no passive DOF at all) is now 50.06 frozen; the pin knee (33.84) and
+osn (42.59) stay ahead.
+
+Red team (big bench):
+* **The pose that jams**: 71 of 470 not taken - fold / K2 60 (e.g. plane 0, elevation 120, axial -15; the band of
+  elevation 75-165 with axial -45..-15, and across-the-body plane 90-105 with axial -120..-150), K6 parts 8 (link 2
+  over link 1 at plane -15..15, elevation 75-165, axial +15..+30), contact 3 (elevation 150-165 crowns).
+* **The point that pinches**: 0.64 mm, ws plane 15, elevation 45, axial -75 (pose #220); 4 taken poses come within
+  1 mm (gap 52.16 with them counted as contact).
+* **Overhead** (elevation >= 140): reach 0.46 (13 of 28 workspace poses), in-band 0.56.
+* **Optimistic numbers**: the fast-to-exact transfer costs 7.3 points (reach 0.869 -> 0.803: more fold poses on the
+  denser bench); dilution 1.25 points (section above).
+* Named groups (big bench): rest 5 / 5 taken (median 16.9 mm, in-band 0.39), overhead 23 / 38 (11.0 mm, 0.56), across
+  42 / 78 (18.5 mm, 0.33), behind the back 34 / 40 (12.5 mm, 0.58). Hub 2 stays 0 % in band, link 2 5 %.
+
+
+## Red team: dilution (the number that is optimistic)
+
+In-band 14 is a share of metal samples, so a longer link that sits in band lowers the gap by diluting the parts that
+do not (the annular-ring skirt artefact). k3484's link 1 has 340 samples routed against 245 straight at the same axes.
+Weighted at the straight count, k3484 scores **43.97** (not 42.72); the same axes with straight links score 49.89. So
+routing is mostly real here (+5.9 gap points: link 1 0.36 -> 0.60 in band) and 1.25 points are dilution. On the
+leader (raglan-knee-3r) the ratio is the other way round: +0.45 real, +1.1 dilution.
