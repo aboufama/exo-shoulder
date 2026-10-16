@@ -39,8 +39,8 @@ ID = "dwell-fourbar-knee-3r"
 NAME = "Dwell four-bar knee 3R: a spherical Watt six-bar (rocker loop from link 1 to a split link 2), pins only"
 D2R = math.pi / 180
 # seats = spine-parked-j2-3r CMA-B (its frozen-exact best, verified family), loop = the ideation seed k21
-PARAMS = dict(az=102.7793, el=65.3479, a1=40.6794, a2=73.7554, wd=84.4912, wa=-12.7631, margin=10.0, width=12.0,
-              t_link=3.0, q=0.979, rad1=10.0, rad2=7.5, rad3=7.5, end_extra=0.24,
+PARAMS = dict(az=102.7793, el=65.3479, a1=40.6794, a2=73.7554, wd=84.4912, wa=-12.7631, margin=K.FOLD_MARGIN, width=12.0,
+              t_link=3.0, q=0.979, rad1=10.0, rad2=10.0, rad3=10.0, end_extra=0.24,
               b=40.12, chi=-0.49, gP=17.8, phP=14.48, k=15.0, alq=-152.75, sref=188.04,
               rpin=5.0, pin_t=6.5, w_rock=8.0, tq_lo=30.0, tk_lo=20.0, lock=0, near=0, ov=1)
 REPORT_KEYS = ("post_lift", "window", "piece", "rocker_arc", "knee_range", "a2eff_range", "tq_min", "tk_min", "stack_mismatch",
@@ -368,7 +368,7 @@ def evaluate(B, params):
     """tools/concept_cma.py hook -> (params, report)"""
     p = dict(PARAMS, **params); p["q"] = min(1.0, max(0.8, float(p["q"])))
     p["end_extra"] = min(8.0, max(0.0, float(p.get("end_extra", 0.0))))
-    for k in ("rad2", "rad3"): p[k] = min(SLIM, key=lambda x: abs(x - float(p[k])))
+    for k in ("rad2", "rad3"): p[k] = K.hub_rad(p[k], SLIM)          # O20 only (user 2026-10-16) unless CB_ALLOW_SLIM=1
     p["rpin"] = min(PIN, key=lambda x: abs(x - float(p["rpin"]))); p["lock"] = int(round(float(p.get("lock", 0))))
     p["k"] = max(13.0, float(p["k"]))                          # pin separation K-Q: two O10 bosses + 3 mm at r ~ 60
     cv = curve(p)

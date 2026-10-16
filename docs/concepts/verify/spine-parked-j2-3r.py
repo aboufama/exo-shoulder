@@ -80,7 +80,7 @@ def snap(p):
     """the model's clamps / snaps (M.evaluate) without running it"""
     p = dict(p); p["q"] = min(1.0, max(0.8, float(p["q"]))); p["sigma"] = 1 if float(p["sigma"]) >= 0 else -1
     p["end_extra"] = min(8.0, max(0.0, float(p.get("end_extra", 0.0))))
-    for k in ("rad2", "rad3"): p[k] = min(M.SLIM, key=lambda x: abs(x - float(p[k])))
+    for k in ("rad2", "rad3"): p[k] = K.hub_rad(p[k], M.SLIM)        # O20 only (user 2026-10-16) unless CB_ALLOW_SLIM=1
     return p
 
 
@@ -88,7 +88,8 @@ def main():
     task, out = sys.argv[1], sys.argv[2]
     par = json.loads(sys.argv[3]) if len(sys.argv) > 3 else {}
     coll = K.collisions; K.collisions = functools.partial(coll, overlap=1.0 - 1e-4)       # 1 mm radial K6
-    p0 = dict(M.PARAMS, **par); res = dict(task=task, params=par, exact=os.environ.get("CB_EXACT") == "1", t0=K.now())
+    p0 = dict(M.PARAMS, **par); p0["margin"] = K.FOLD_MARGIN        # the fold margin is the kit rule, not a design parameter
+    res = dict(task=task, params=par, exact=os.environ.get("CB_EXACT") == "1", t0=K.now(), fold_margin=K.FOLD_MARGIN, o20_only=K.O20_ONLY)
     t = time.time()
     if task == "fit60":
         B = K.bench(60, 160); pf = snap(p0)

@@ -38,7 +38,7 @@ PC.EXEMPT |= {frozenset(x) for x in (("rail", "carriage"), ("carriage", "bridge"
 
 ID = "meridian-goniometer"
 NAME = "Goniometer pointer: J2 is an arc rail running beside the arm's elevation path, no J2 hub"
-PARAMS = dict(j3="hub", az=2.43, el=80.68, A1=76.9, A2=66.75, wd=86.33, wa=21.83, sigma=-1, sing=10.0,
+PARAMS = dict(j3="hub", az=2.43, el=80.68, A1=76.9, A2=66.75, wd=86.33, wa=21.83, sigma=-1, sing=K.FOLD_MARGIN,
               side=1, alpha=45.0, dphi=0.0, Lc=40.0, qcov=0.95, bw=26.0, t_rail=6.0, t_car=3.0, r_lay=0.0,
               width=12.0, t_link=3.0, q=0.95,
               # j3='cslide' (pointer-cslide's C-slide; its best params)

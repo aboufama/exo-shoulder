@@ -28,6 +28,15 @@ HUB_R, STACK, CROWN = 10.0, 3.15, 12.25                      # O20 hub v5 (docs/
 # (seed-offset-3r-slides SING -> osn / pin knee / raglan knee / knuckle / arc knee; kit models' PARAMS["margin"]);
 # CB_FOLD_MARGIN=10 re-measures at the old rule for before / after comparisons (docs/FINDINGS.md "Rebase").
 FOLD_MARGIN = float(os.environ.get("CB_FOLD_MARGIN", 5.0))
+# HUBS: "Keep O20 only" (user 2026-10-16 ~05:50 UTC): the v5 O20 stack (rad 10, 12.25 mm) at EVERY joint, no O15 / O17 / O12
+# slim hubs. Models that declare slim components keep the declaration for the record, but every hub radius a search or a
+# verifier sets goes through hub_rad(): O20 unless CB_ALLOW_SLIM=1 (re-measuring an old slim-hub claim only).
+O20_ONLY = os.environ.get("CB_ALLOW_SLIM", "0") != "1"
+
+
+def hub_rad(x, declared=(HUB_R,)):
+    """the hub radius a model may use: HUB_R (O20) under the O20-only rule; else the nearest declared component"""
+    return HUB_R if O20_ONLY else min(declared, key=lambda r: abs(r - float(x)))
 
 
 def bench(n_clip=60, n_ws=160): return CB.Bench(n_clip, n_ws)

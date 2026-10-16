@@ -41,7 +41,7 @@ D2R = math.pi / 180
 RING_HW, RING_H, RING_UP, LUG = 8.0, 9.0, 4.5, 4.5         # land half width, stack, rotor housing level, lug outside the land
 
 # seed: J1 at c* (spec), the template's closure angles / J3 (the champion's), KA025 ring, q 1.0 (never touches)
-PARAMS = dict(az1=22.8, el1=65.6, p1=34.9, a12=76.9, a23=66.75, wd=86.33, wa=21.83, sigma=-1, margin=10.0,
+PARAMS = dict(az1=22.8, el1=65.6, p1=34.9, a12=76.9, a23=66.75, wd=86.33, wa=21.83, sigma=-1, margin=K.FOLD_MARGIN,
               width=14.0, t_link=3.0, w2=12.0, q=1.0, h1=60.0, lug=0.0)
 
 

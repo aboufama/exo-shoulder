@@ -39,7 +39,7 @@ import concept_kit as K                                      # noqa: E402
 ID = "fold-sph3r"
 NAME = "Spherical 3R on fold-frontier axes"
 # defaults = the frontier's best 50/50 layout (frontier.json best_by_sum[100])
-PARAMS = dict(az=132.0, el=16.0, a1=50.0, a2=50.0, wd=75.0, wa=24.0, sigma=1, margin=10.0, width=12.0, t_link=3.0, q=1.0)
+PARAMS = dict(az=132.0, el=16.0, a1=50.0, a2=50.0, wd=75.0, wa=24.0, sigma=1, margin=K.FOLD_MARGIN, width=12.0, t_link=3.0, q=1.0)
 ELEV_OVER = 140.0
 CROWN_LEVELS = (2.0, 4.0, 6.0, 8.0, 10.0, 12.25)
 

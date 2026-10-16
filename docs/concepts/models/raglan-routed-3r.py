@@ -31,7 +31,7 @@ import concept_kit as K                                      # noqa: E402
 
 ID = "raglan-routed-3r"
 NAME = "Raglan-routed 3R on far-end hubs (posterior J1 line, links on the lines of least skin motion)"
-PARAMS = dict(az=-24.0, el=4.0, a1=65.0, a2=65.0, wd=80.0, wa=-90.0, sigma=1, margin=10.0,
+PARAMS = dict(az=-24.0, el=4.0, a1=65.0, a2=65.0, wd=80.0, wa=-90.0, sigma=1, margin=K.FOLD_MARGIN,
               e1=1, e2=1, e3=1,                       # hub ends on the axis lines (+1 / -1)
               r1t=0.5, r1d=0.0, r2t=0.5, r2d=0.0,     # link waypoints: fraction along, deg off the great circle (+ = n_ab side)
               width=12.0, t_link=3.0, q=1.0)

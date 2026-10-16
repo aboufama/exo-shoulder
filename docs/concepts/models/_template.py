@@ -20,7 +20,7 @@ NAME = "Template: spherical 3R on kit conventions"
 # (1.0 = never touches in any pose it takes; 0.95 lets the worst 5 % of poses become contact poses - they then count
 # as NOT taken, so q trades reach against closeness).
 PARAMS = dict(az=2.4305071427308924, el=80.67633718429899, a1=76.90180446920043, a2=66.74921235407174,
-              wd=86.32769021001913, wa=21.829657347343378, sigma=-1, margin=10.0, width=12.0, t_link=3.0, q=0.95)
+              wd=86.32769021001913, wa=21.829657347343378, sigma=-1, margin=K.FOLD_MARGIN, width=12.0, t_link=3.0, q=0.95)
 # SWEEP: the few parameters that matter, coarse first. Keep it small (the bench costs ~2-3 s per configuration).
 SWEEP = dict(q=[0.93, 0.97, 1.0], el=[76.0, 80.7, 85.0], a1=[72.0, 76.9, 82.0])
 

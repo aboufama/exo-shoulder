@@ -126,6 +126,8 @@ class Model(S.VModel):
         self.hr = [round(float(P.get(f"rad{k + 1}", S.HUB_R)), 2) for k in range(3)]
         for r_ in self.hr:
             if r_ not in HUBS: raise ValueError(f"hub radius {r_} is not a catalogue hub {sorted(HUBS)}")
+            if S._KIT.O20_ONLY and r_ != S.HUB_R:              # "Keep O20 only" (user 2026-10-16); CB_ALLOW_SLIM=1 re-measures old claims
+                raise ValueError(f"hub radius {r_}: O20 only (rad {S.HUB_R}) since the user's 2026-10-16 ruling")
         self.cyl_r = {"hub1": self.hr[0], "hub2": self.hr[1], "hub3": self.hr[2]}
         Z = CB._poses_all(); self.Z = Z
         self.RS = Z["RS"][B.idx].astype(float); self.Q = Z["HG"][B.idx].astype(float)

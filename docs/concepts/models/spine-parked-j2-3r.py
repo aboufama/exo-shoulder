@@ -33,8 +33,8 @@ ID = "spine-parked-j2-3r"
 NAME = "Zero-passive spherical 3R at the leader's seats: J2 parked over the posterior acromion, slim O15 J2/J3 hubs"
 # defaults = the leader's k4216 seats as a spherical chain (osn Design at b1 = b2 = 0, b3 0.2282: u1 = bvec(95.86, 65.21),
 # a1 = angle(u1, u2) 40.34, a2 = angle(u2, u3) 74.07, u3 = wdir(84.80, -11.37) in the band humerus frame, branch -1)
-PARAMS = dict(az=95.8565, el=65.2093, a1=40.3436, a2=74.0692, wd=84.7998, wa=-11.3702, sigma=-1, margin=10.0,
-              width=12.0, t_link=3.0, q=0.98, rad1=10.0, rad2=7.5, rad3=7.5, vm=0, end_extra=0.0,
+PARAMS = dict(az=95.8565, el=65.2093, a1=40.3436, a2=74.0692, wd=84.7998, wa=-11.3702, sigma=-1, margin=K.FOLD_MARGIN,
+              width=12.0, t_link=3.0, q=0.98, rad1=10.0, rad2=10.0, rad3=10.0, vm=0, end_extra=0.0,
               near=0)   # near 1: the report's gap / reach / follow / in-band / contact count metal < 1 mm as contact (lesson d)
 # declared hub components (radius mm -> component); a hub radius not in here must pass the kit's O20 audit as is
 SLIM = {10.0: "v5 O20 hub: MR117-2RS pair, 12.25 mm stack (docs/HARDWARE.md)",
@@ -141,7 +141,7 @@ def evaluate(B, params):
     p["sigma"] = 1 if float(p["sigma"]) >= 0 else -1
     p["end_extra"] = min(8.0, max(0.0, float(p.get("end_extra", 0.0))))   # never shorter than the K6 exempt zone
     for k in ("rad2", "rad3"):                                  # CMA steps snap to the declared components
-        p[k] = min(SLIM, key=lambda x: abs(x - float(p[k])))
+        p[k] = K.hub_rad(p[k], SLIM)                           # O20 only (user 2026-10-16) unless CB_ALLOW_SLIM=1
     r = K.evaluate(B, build, p); r = declared_audit(r, p); r = extras(B, r, p)
     if p.get("near"):                                           # lesson (d) as the objective: metal < 1 mm = contact
         r["gap_plain"] = r["gap"]; r["gap"] = r["gap_near1"]
