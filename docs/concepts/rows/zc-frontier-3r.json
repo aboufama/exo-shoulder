@@ -21,7 +21,7 @@
  "v_inband14": null,
  "v_inband10": null,
  "v_gap": null,
- "n_configs": 8828,
+ "n_configs": 10274,
  "best_params": {
   "az": 109.3565,
   "el": 65.94,
@@ -35,8 +35,8 @@
   "q": 0.978,
   "end_extra": 1.784
  },
- "verdict": "class ceiling measured: 28.85 on Bench(110,360) fast (score 89.5) at complexity 0; cannot reach 13.75 - over 8828 evaluations no chain with reach >= 0.7625 exceeds in-band 0.445, at in-band >= 0.88 reach <= 0.633",
- "limiter": "hub 2: the arcs that open the fold window (shorter arc >= ~45 deg) carry hub 2 over skin whose exit height spans more than the 12 mm band (F 60 -> 86 -> 107 mm at a1 38 -> 54 -> 62) or off the body (2367 of 3560 kinematically viable configs); at the optimum a1 ~37 the fold window takes ~37 % of the workspace",
+ "verdict": "class ceiling measured (converged): 28.85 Bench(110,360) fast / 31.04 frozen exact (score 88.7) at complexity 0 - cannot reach 13.75: over 8828 evaluations no chain with reach >= 0.7625 exceeds in-band 0.445, at in-band >= 0.88 reach <= 0.633; not yet re-measured by an independent verifier",
+ "limiter": "fold: 121 of 136 lost workspace poses (44 folded, 77 stretched; across the body 49/68, overhead 6/28 taken); widening the window needs shorter arc >= ~45 deg, which carries hub 2 over skin spanning more than the 12 mm band (F 60 -> 86 -> 107 mm at a1 38 -> 54 -> 62) or off the body (2367 of 3560 kinematically viable configs)",
  "note": "global Sobol fold-law map 16384 configs + 4268 full evaluations + 8 CMA streams (4560) on Bench(110,360) fast; best J1 bvec(109.36, 65.94), J3 wdir(85.74, -16.19), a1 36.72, a2 69.06, sigma -1, inverted J3 stack (inv3 1), q 0.978, end hold 1.78; docs/concepts/zc-frontier-3r.md",
  "doc": "docs/concepts/zc-frontier-3r.md",
  "mechanism": {
@@ -56,5 +56,28 @@
   "notes": "plain spherical 3R (three active pins whose axes meet at GH), O20 v5 hub at every joint (MR117-2RS pair each); bodies: link 1, link 2, arm-end (member 3: hub-3 cap plate + K7 neck rigid on BOTTOM; the inverted J3 stack changes the plate order, not the part count); no slides, springs, loops or sensed passives. custom: base, 2 links, arm-end plate + neck, 3 hub shafts (est.); catalogue: 3 x MR117 pair (est., fasteners excluded).",
   "source": "docs/concepts/models/zc-frontier-3r.py:1-30 (chain, freedoms, rules)",
   "confidence": "counted"
- }
+ },
+ "frozen_exact_gap": 31.04,
+ "frozen_exact": {
+  "protocol": "fit Bench(110,360) fast, frozen, worn Bench(110,360) exact",
+  "gap": 31.04,
+  "score": 88.71,
+  "reach": 0.6222,
+  "follow": 0.9545,
+  "inband14": 0.8911,
+  "inband10": 0.4472,
+  "contact": 0.0237,
+  "near_touch_gap": 38.03,
+  "min_metal_all_faces_mm": 0.09
+ },
+ "frozen_exact_r3_protocol": {
+  "protocol": "fit Bench(60,160) fast, frozen, worn Bench(110,360) exact",
+  "gap": 33.51,
+  "reach": 0.6167,
+  "follow": 0.9364,
+  "inband14": 0.8917,
+  "contact": 0.0299,
+  "near_touch_gap": 40.57
+ },
+ "convergence": "6-stream round 2 from the best (sigma 0.25-0.6, 1446 evaluations): no stream improved by 0.05 in 30 generations - converged"
 }

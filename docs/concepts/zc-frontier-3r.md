@@ -10,7 +10,7 @@ fit, at complexity 0. With follow ~1.0 and in-band ~0.90 that is reach >= 0.7625
 contact.
 
 **Result: the class cannot get there. Measured ceiling: gap 28.85 on Bench(110,360) fast (score 89.5),
-frozen exact CLAIM_FROZEN; the frontier is a measured trade-off, not a search failure** - over 8828 full
+**31.04 frozen exact** (score 88.7; shape fitted on Bench(110,360) fast, worn on the exact mesh; 33.51 with the round-3 protocol); the frontier is a measured trade-off, not a search failure** - over 8828 full
 evaluations on the verification bench no zero-complexity chain with reach >= 0.7625 has in-band above 0.445, and at
 in-band >= 0.88 no chain reaches more than 0.633. The cap is hub 2: the arcs that open the fold window (shorter arc
 >= ~45 deg) carry hub 2 over skin whose height along its axis varies by more than the 12 mm band.
@@ -68,7 +68,7 @@ Bench(110,360) exact) for comparison.
 | D | J1 (48, 3), 68 / 80 (sweep reach 0.778) | 833 | 72.28 | |
 | E | J1 (34, 10), 57 / 66 | 633 | 71.09 | |
 | F | posterior-low J1 (-15, -12), 70 / 78 (the "kinematically best seats" family) | 273 | 74.06 | |
-| R2A-R2F | convergence round from 28.85 (sigma 0.25-0.6, 6 seeds) | R2_EVALS | R2_BEST | R2_NOTE |
+| R2A-R2F | convergence round from 28.85 (sigma 0.25-0.6, 6 seeds) | 1446 | 28.85 | no stream improved by 0.05 in 30 generations: **gate passed, converged** |
 
 **Best: J1 bvec(109.36, 65.94) (acromion top), J3 wdir(85.74, -16.19) (lateral deltoid), a1 36.72, a2 69.06, branch
 -1, inverted J3 stack, q 0.978, strap end hold 1.78 mm** -> 28.85 on Bench(110,360) fast (reach 0.633, follow 0.955,
@@ -87,14 +87,38 @@ in-band 14 0.890, contact 0.012; near-touch 38.14). Per member in band: hub 1 0.
 Every 8 deg of link-1 arc buys at most +0.05 of reach and costs 0.07-0.2 of in-band and 0.04-0.08 of contact: hub 2
 must clear the highest skin its axis sweeps (60 -> 107 mm), so it floats over the rest.
 
-**Frontier over all 8828 evaluations (sweep + CMA, Bench(110,360) fast):** max reach at in-band >= 0.90 / 0.88 /
+**Frontier over all 8828 evaluations (sweep + round-1 CMA, Bench(110,360) fast; the 1446 convergence evaluations add nothing):** max reach at in-band >= 0.90 / 0.88 /
 0.85 / 0.80 / 0.70 / 0.60 / 0.50 = 0.611 / 0.633 / 0.639 / 0.644 / 0.667 / 0.689 / 0.722; max in-band at reach >=
 0.70 = 0.597, at reach >= 0.7625 = 0.445. On this frontier the gap is never below ~28.7 (in-band 0.88, reach 0.633),
 which is what the CMA found.
 
 ## 3. The claim (frozen exact) and where it loses
 
-FROZEN_SECTION
+| protocol | gap | score | reach | follow | in-band 14 / 10 | contact | near-touch gap | min metal (any face) |
+|---|---|---|---|---|---|---|---|---|
+| search: fit + wear Bench(110,360) fast | 28.85 | 89.5 | 0.633 | 0.955 | 0.890 / - | 0.012 | 38.14 | - |
+| **claim: fit Bench(110,360) fast, frozen, worn Bench(110,360) EXACT** | **31.04** | **88.7** | 0.622 | 0.955 | 0.891 / 0.447 | 0.024 | 38.03 | 0.09 mm |
+| round-3 protocol: fit Bench(60,160) fast, frozen, worn Bench(110,360) exact | 33.51 | 87.8 | 0.617 | 0.936 | 0.892 / 0.430 | 0.030 | 40.57 | 0.02 mm |
+
+Data `docs/concepts/zc/frozen_round1.json` (farm job zc-frozen-r1, 357 s). Honest, audit empty, hub levels F 51 / 58 /
+71 mm (all accessible). Not yet re-measured by an independent verifier: the next step is the verifier run on these
+params (the spine-parked verifier's checks with this build; the params are plain - inv3 is the only non-spine-parked
+freedom).
+
+**Every lost pose by first cause (claim run, Bench(110,360) exact; `attribute()` in the model):**
+
+| region | n | taken | fold, folded side | fold, stretched side | jam (K2) | parts | contact (member) |
+|---|---|---|---|---|---|---|---|
+| workspace | 360 | 224 | 44 | 77 | 0 | 7 | 8 (link 2 3, hub 3 2, hub 2 2, neck 1) |
+| clip frames | 110 | 105 | 0 | 5 | 0 | 0 | 0 |
+| overhead (elev >= 140) | 28 | 6 | 7 | 11 | 0 | 0 | 4 |
+| across the body | 68 | 19 | 0 | 49 | 0 | 0 | 0 |
+| behind the back | 25 | 20 | 1 | 3 | 0 | 0 | 1 |
+
+The fold takes 121 of the 136 lost workspace poses (89 %); the window is [37.3, 100.8] deg against a workspace
+J1-J3 angle of 25.3-143.3 (5-95 %), kinematic reach 0.664 (overhead 0.357). In-band by member: hub 1 0.98, hub 2 1.00,
+hub 3 0.82, link 1 0.95, link 2 0.88, neck 0.81 - hub 3, the neck and link 2 hold in-band at 0.89; the metal that
+touches (2 top-face poses on hubs 1 / 2, one hub crown) sits at 0.09 mm.
 
 ## 4. The ceiling, and why (the input of the near-zero track)
 
@@ -104,11 +128,12 @@ FROZEN_SECTION
   (fixed by the closure, one rigid level) sweeps skin whose exit height spans far more than the 12 mm band (F 60 ->
   86 -> 107 mm as a1 goes 38 -> 54 -> 62), or leaves the body (2367 of 3560 viable configs). Link 1 follows it out
   of band (1.00 -> 0.56 -> 0.37).
-* **The cap at the measured optimum (a1 ~37):** the fold. 132 of the 360 workspace poses fail the fold window
-  (folded side and stretched side - see section 3), overhead is reached at ATTR_OVER. The members that cap in-band
+* **The cap at the measured optimum (a1 ~37):** the fold. 121 of the 360 workspace poses fail the fold window
+  (44 folded side, 77 stretched side - across the body 49 of 68 stretched), overhead is reached at 6 of 28 (7 folded, 11
+  stretched, 4 contact). The members that cap in-band
   are hub 3 (0.82), the K7 neck (0.81) and link 2 (0.88).
-* **So the zero-complexity class tops out at gap ~28.9 (score ~89.5) on the verification bench**, about the
-  complexity-19.5 pin knee's polished level (24.48 verified at margin 5) minus ~4 points. What 13.75 needs is reach
+* **So the zero-complexity class tops out at gap 28.85 fast / 31.04 frozen exact (score 88.7) on the verification
+  bench**, ~6.6 points behind the complexity-19.5 pin knee's polished 24.48 (verified, margin 5). What 13.75 needs is reach
   +0.13 at the same in-band, i.e. a second fold window or a hub 2 that can change level: a two-state arc relay
   (kinematic 0.93-0.95), a fourth joint, or a passive radial give at hub 2 (a slide along the J2 axis lets hub 2 ride
   the skin while the window is wide - 1 passive translation, complexity +3). Those are the near-zero track's levers,

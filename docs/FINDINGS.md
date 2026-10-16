@@ -902,3 +902,33 @@ routing changed nothing at 10.
   is 0.19-0.21 (J2 turns ~5x faster than the arm) and the J2 transmission angle 23-31 deg: give J2 a soft elastomer
   stop at the 5 deg line in MVP1. Searches that ran before ~06:05 UTC ran at 10; any farm job shipped after that runs
   at 5 unless it sets `CB_FOLD_MARGIN=10`.
+
+## The zero-complexity 3R tops out at 31 frozen exact: hub 2 caps the fold window (2026-10-16, zc-frontier-3r)
+
+The user's golden target is score >= 95 (gap <= 13.75 on Bench(110,360) exact, frozen shape) at complexity ~0. The
+complexity-0 class (three active O20 pins through GH, three links, nothing else) was mapped globally under the
+05:50 UTC rulings (O20 only, fold margin 5, J1 on the back / acromion top), with every free choice open: J1 anywhere
+on the allowed seats, J3 on the whole arm sphere, both ends of every axis line (arcs 12-168), branch, and the J2 / J3
+stack order (`docs/concepts/zc-frontier-3r.md`, `tools/zc_frontier.py`, data `docs/concepts/zc/`).
+
+* **Kinematics is not the cap.** 22 % of 16384 Sobol configs close >= 0.7625 of the 360 workspace poses at margin 5
+  from allowed seats; the J1 seat hardly matters, the arcs do (shorter arc < 40 deg: 50 of 9652 configs; viable
+  median 63 deg).
+* **Proximity is.** Of the 3560 kinematically viable configs, 3639 of the 4268 evaluated have a hub axis with no skin
+  within 170 mm (hub 2 or hub 3 floats), and the 235 with all three hubs on the body reach in-band <= 0.669 (hub 2
+  median 0.06). Over 8828 full evaluations on the verification bench (sweep + 8 CMA streams) the frontier is: reach
+  <= 0.633 at in-band >= 0.88, in-band <= 0.445 at reach >= 0.7625. CMA started from four wide-window basins ends at
+  64.9-74.1; one forced to a1 = 52 walks back to a1 36.7.
+* **Mechanism, measured as a slice (fixed a1, same seats, Bench(60,160)):** a1 38 / 46 / 54 / 62 -> gap 27.2 / 43.8 /
+  55.6 / 67.4, hub 2 level 60 / 64 / 86 / 107 mm, hub 2 in band 1.00 / 0.90 / 0.06 / 0.01, reach +0.05 at best.
+  A complexity-0 hub is one disc at one level on an axis the closure moves; the arcs that open the fold window
+  carry it over skin spanning more than the 12 mm band.
+* **Converged optimum: 28.85 fast / 31.04 frozen exact (score 88.7; round-3 protocol 33.51)** at J1 bvec(109.4,
+  65.9), J3 wdir(85.7, -16.2), a1 36.7 / a2 69.1, branch -1, inverted J3 stack (link 2 on hub 3's lower plate: worth
+  ~8 points over the normal stack at these seats on the fast big bench). Six convergence streams (1446 evaluations)
+  found nothing 0.05 better. The fold takes 121 of 136 lost workspace poses (44 folded, 77 stretched; across the body
+  19 / 68, overhead 6 / 28).
+* **What follows.** At complexity 0 the measured ceiling is ~31 exact: 13.75 needs reach +0.13 at the same in-band,
+  i.e. a second fold window or a hub 2 that can change level - relay, 4th joint, or a passive give along the J2 axis
+  (1 passive translation). That is the near-zero track's input; judge each lever by where hub 2 parks in the poses
+  it rescues.
