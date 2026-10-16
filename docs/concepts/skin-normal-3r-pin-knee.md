@@ -648,3 +648,81 @@ but the CLAUDE.md bar (a verified gain >= 1 gap point) is not met out of sample.
 search on a held-out-aware objective (e.g. the near-touch gap averaged over the polish bench AND a disjoint pose set,
 or the fit-60 frozen protocol) - the 470-pose objective is now saturated and over-fitted, and the remaining slack is
 the knee stop and the contact on unseen poses, not reach on the search bench.
+
+## Full user-style CAD of the polished H1 (generation-3 winner, 2026-10-16 ~09:40 UTC)
+
+Design `pipeline/full-exo/designs/user_pinknee_h1`. Builder `pipeline/conformal/param_cad/user_style_pinknee.py`; the parameter
+dict and the per-joint hubs are inputs, nothing is hard-coded to H1:
+
+    PK_EAR_DZ="" OMP_NUM_THREADS=1 nice -n 10 python3 pipeline/conformal/param_cad/user_style_pinknee.py \
+        --out user_pinknee_h1 --l1 l1_skin-normal-3r-pin-knee-h1 --shape .cache/pk_shapes/h1_b110_360_m5.pkl
+
+**The verified shape, no refit.** H1 was verified on a shape fitted on Bench(110,360) FAST. That bench's fast grid cache
+(key 14f156cb6fc8) exists only on the farm, and the farm has no OCC. So the farm fits the model and pickles the attributes
+the verifiers hand over in their frozen-shape protocol, plus the fit's link rows. The command is
+`pipeline/concept_l1/pinknee_shape.py --fit-bench 110,360`. The pickled fit gives gap 24.57, f [51.7, 61.308, 76.296],
+tr 84.721 and m [-10.026, 1.995, 0.0], identical to the L1 to the digit. The CAD builder wears that shape on this box's
+Bench(60,160) without refitting. The farm cost was $0.002 of job time. The wait in the farm's queue was 21 min, because
+the queue held 15-31 jobs from other agents. A local build of the cache was measured at 22 s per pose, about 3 h for the
+470 poses, so it was stopped.
+
+**Parts.** All are at real size, and every custom part is one valid closed solid. Each is made only from sketches of
+lines and tangent arcs, extruded, revolved, or swept with one section along a line/arc path, plus rounds. There are no lofts.
+
+| part | how it is made | mass |
+|---|---|---|
+| J1, J2, J3 hubs | the v5 O20 stack from `user_style.py`: 2x MR117-2RS back to back, 17-4PH outer spacer, ground inner spacer, M7x0.5 Ti ring nut, threaded G2 dome cap, integral O7 Ti pins. J3 sits on its offset tilted line. | 2.0 g cap + 2.6 g bearings per hub |
+| D8-01 scapula base | the J1 upper member: O20 ring, seat disc and M18x0.5 spigot. It has **no ears and no tab**. See "Base" below. | 6.5 g Ti-6Al-4V |
+| D8-02 link 1 | 8 x 3 bar on a 3-arc line/arc chain (R -13 / -19 / 5), with the J1 and J2 pads (14 mm seats) and integral O7 pins. It is **5-axis machined from solid**: J2's face sits 9.6 mm above J1's, so the bar must climb 59.6 deg. No chain with every bend >= 15 mm inner radius stays above the L1 strap. | 14.0 g |
+| D8-03 link 2 | a **bent 3 mm Ti-6Al-4V bar**: 4 arcs (R 45 / -17 / -17 / 25), every bend >= 15.5 mm inner radius, max climb 40.1 deg. It carries the J2 / J3 upper rings and the user-style pocket, and flies over the knee and the pad. | 19.8 g |
+| D8-04 member 3 | the J3 disc plus integral O7 pin. The E strap is one side-view sketch: its underside is the upper hull of the model's fitted E profile (76.3 -> 84.7 mm), and its top steps to the boss. The E boss is O12 x 2.59, with pin a as an integral O4 Ti pin. | 11.8 g |
+| D8-05 knee link | flat Ti plate 40.2 x 10 x 2.59 with R1 corners, O5.5 sleeve bores and O8 x 0.7 clip counterbores | 3.9 g |
+| pins a, b | iglidur G sleeve igus GSM-0405-03 (4 x 5.5 x 3), faced to 1.89 mm. An iglidur thrust washer 4 x 8 x 0.5 sits in the 0.5 mm running gap (GTM-0408-005 class; **confirm the size**, else cut it from iglidur sheet). A DIN 6799-3.2 E-clip (A2, polished) sits in the counterbore, flush with the plate. Stack 5.68 mm, nothing above the knee plate. | 0.2 g each |
+| D8-06 BOTTOM + arm pad + pad mount | one 5-axis 7075-T6 part. The user's BOTTOM is cut as the L1 cut it: square to the arm, 3.68 mm distal of pin b, removing 1807 mm3. The O12 arm pad has an integral O4 h9 pin b (hard-anodised). The pad mount is one line/arc planform on the L1's sweep-clear route (62 deg, 23.4 mm). Its last 6 mm are a riser 1 mm into BOTTOM's underside, fused into one solid. | 66.2 g |
+| upper-arm cuff | one U sketch (flat 70 mm, R50 side arcs, 2 mm AlSi10Mg shell), extruded along BOTTOM. Both side arcs are trimmed to 10 deg, clear of the trunk over 451 clip poses; the limiting poses are across the body (plane 122-145, elevation 31-48). The cuff has 6x M4x6 ISO 10642 screws. | 36.7 g |
+
+Custom mass is 112.7 g plus 66.2 g for BOTTOM + mount. The rest of the user's arm parts are unchanged.
+
+**Base at the J1 ring (user ruling 2026-10-16), measured.** The first design put two short ears, each with one M4, on the
+J1 ring, with headings chosen against the posed link 1 over every clip and workspace frame and against the
+scapula-frame skin envelope. That cannot work for H1, because link 1 sweeps the ear zone:
+- **Ears at the seat level:** 9 of 180 headings clear link 1 by >= 1 mm, but none of those clears the skin envelope. The
+  best is 5.2 mm inside it.
+- **Ears raised 1.3 mm:** 35 headings clear link 1 and 14 also clear the skin, but all 14 lie within 304-310 deg, so there
+  is no pair 90-180 deg apart.
+
+So the base is the J1 upper member alone. The handler's bracket threads onto the M18x0.5 spigot in place of the dome
+cap, which retains the upper outer ring. Coming down axially over the crown is the one direction link 1 never occupies.
+The posed link 1 stays 0.15 mm from the built base, which is the stack's designed running gap at the seat. The
+anti-rotation feature of the bracket belongs to the handler, which is the user's part.
+
+**Fixes found on the way, now in the builder:**
+- The knee link's name mentions its clip counterbores, so the export classed it as hardware: no STEP, stainless density,
+  and left out of the kinematic check. The iglidur sleeves were classed as bearing steel.
+- Link 2's mesh was not closed in the judges' units. A T-junction crack in OCC's tessellation left 71 open edges in one
+  8 x 6 mm patch. The builder now retries other tessellation tolerances.
+- `pipeline/conformal/param_cad/fixup_pinknee_export.py` applied both fixes to this build in place. The geometry of every
+  other part is the same file.
+- A bar is now fitted with 3 or 4 arcs only. A 5-arc fit costs 3125 radius snaps, 10+ min each on this box.
+
+
+**Kinematics = the verified model's.** I checked 11 poses, all followed:
+- seven bench poses: arm at the side, first, middle, the highest (45 / 165 / -90), the second highest, behind the back
+  (-90 / 30 / 105) and across the body (150 / 45 / -60);
+- four real clip frames from the L1's `clips.json`: Raise overhead frame 78 at (30, 150, -60), above elevation 120;
+  Walking with the arm at the side; the top of Comb hair; and Reach back pocket.
+
+Results at every one of the 11 poses:
+- **Member frames:** the judges' path (`scene_export.frame_xforms` on the L1's frames) and the model's own member
+  transforms agree within **1e-4 mm**.
+- **Rigid joint features** (hub 1-3 surfaces, E boss, arm pad): the model's metal samples lie within **0.144 mm** of the
+  posed built parts. The 0.144 mm is the cap domes and the rounds.
+- **E strap:** within 0.12 mm.
+- **Knee link:** within 1.75 mm. These samples sit at the pin centres, inside the O5.5 / O8 bores that the pins (other
+  members' parts) fill; the model's knee is a solid box.
+- **Link straps:** the bars sit up to **4.13 mm (link 1) and 10.90 mm (link 2) above** the model's straps. This is a
+  shape change, not a kinematic one. Link 2's 15 mm bends cannot follow the L1's steep hub-zone transition at J3. A
+  machined link 2 (R >= 4) would hug the strap and is the next lever on R1 if the judges ask for it.
+
+
+SCORE_TABLE

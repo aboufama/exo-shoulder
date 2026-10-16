@@ -365,7 +365,10 @@ def links2(M, out, rep):
     ha, hb = F[1] + LV["U0"] + T / 2, F[2] + LV["U0"] + T / 2
     p3 = c[2] + hb * u[2]; B = np.array([p3 @ ex, p3 @ ey]); back = np.array([math.sin(phi), -math.cos(phi)])
     start = (ha, L_SEAT, math.pi / 2); end = (*(B + L_SEAT * back), math.pi / 2 + phi)
-    Dq, Rq = l1_rows(M, *prof["L2"]); fit, r2 = link_fit("link 2", ex, ey, start, end, Dq, Rq)
+    # PK_LINK2_MACHINED=1: link 2 5-axis machined from solid (bends down to R4, the 60 deg ramps) so it hugs the L1 strap at
+    # J3 - the bent bar (>= 15 mm bends) rides up to 10.9 mm over it there and cost R1-aim 9 points on H1 (user_pinknee_h1)
+    cl2 = ((60.0, 4.0),) if os.environ.get("PK_LINK2_MACHINED") == "1" else CLIMBS
+    Dq, Rq = l1_rows(M, *prof["L2"]); fit, r2 = link_fit("link 2", ex, ey, start, end, Dq, Rq, climbs=cl2)
     body = US.bar_swept(ex, ey, start, fit["segs"])
     back_w = math.sin(phi) * ex - math.cos(phi) * ey
     body = US.glue(plate_R(u[1], F[1] + LV["U0"], ey, W, hr[1], upper=True), body)
