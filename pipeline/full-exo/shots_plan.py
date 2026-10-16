@@ -48,8 +48,8 @@ try:
     Fb = np.asarray(MQM.F, np.int64); clr = {}
     for g, vs in parts.items():
         P = np.concatenate(vs); P = P[:: max(1, len(P) // 6000)]
-        wn = igl.fast_winding_number_for_meshes(Vb.astype(np.float64), Fb, P.astype(np.float64))
-        d = np.sqrt(igl.point_mesh_squared_distance(P.astype(np.float64), Vb.astype(np.float64), Fb)[0])
+        wn = igl.fast_winding_number(np.ascontiguousarray(Vb, np.float64), Fb, np.ascontiguousarray(P, np.float64))
+        d = np.sqrt(igl.point_mesh_squared_distance(np.ascontiguousarray(P, np.float64), np.ascontiguousarray(Vb, np.float64), Fb)[0])
         ins = wn > 0.5; clr[g] = dict(inside_n=int(ins.sum()), n=int(len(P)), deepest_mm=round(float(d[ins].max()), 2) if ins.any() else 0.0,
                                       min_gap_mm=round(float(d[~ins].min()), 2) if (~ins).any() else None)
 except Exception as e:                                                               # noqa: BLE001
