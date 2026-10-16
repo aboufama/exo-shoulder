@@ -1,21 +1,21 @@
 {
  "poses": 120,
  "step": 12,
- "share_passing": 0.5583,
+ "share_passing": 0.575,
  "static_fits_left_to_R6": [],
  "arm_near_mm": 110.0,
  "fails": {
   "chain_does_not_close": 0.3917,
   "body_contact": 0.0333,
-  "part_interference": 0.0417
+  "part_interference": 0.0
  },
- "evaluator_agreement": 0.95,
+ "evaluator_agreement": 0.967,
  "skip_groups": [
   "F"
  ],
  "tol_body_mm": 0.5,
  "tol_parts_mm": 0.15,
- "seconds": 12,
+ "seconds": 13,
  "per_pose": [
   {
    "k": 0,
@@ -402,13 +402,10 @@
    "closes": true,
    "body_mm": 6.27,
    "body_part": "l1|J2 lower plate keep-out (O20 x 3, link 1)",
-   "parts_mm": 0.75,
-   "parts_pair": "member-3 neck keep-out (8 x 3 mm, ramp < IN link 2 strap keep-out (8 x 3 mm Ti, fitt",
-   "pairs": {
-    "member-3 neck keep-out (8 x 3 mm, ramp < IN link 2 strap keep-out (8 x 3 mm Ti, fitt": 0.75,
-    "link 2 strap keep-out (8 x 3 mm Ti, fitt IN member-3 neck keep-out (8 x 3 mm, ramp <": 0.29
-   },
-   "parts_motion_mm": 0.75
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
   },
   {
    "k": 25,
@@ -513,12 +510,10 @@
    "closes": true,
    "body_mm": 4.74,
    "body_part": "l1|J2 lower plate keep-out (O20 x 3, link 1)",
-   "parts_mm": 0.55,
-   "parts_pair": "member-3 neck keep-out (8 x 3 mm, ramp < IN link 2 strap keep-out (8 x 3 mm Ti, fitt",
-   "pairs": {
-    "member-3 neck keep-out (8 x 3 mm, ramp < IN link 2 strap keep-out (8 x 3 mm Ti, fitt": 0.55
-   },
-   "parts_motion_mm": 0.55
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
   },
   {
    "k": 32,
@@ -651,12 +646,10 @@
    "closes": true,
    "body_mm": 2.67,
    "body_part": "l1|J2 lower plate keep-out (O20 x 3, link 1)",
-   "parts_mm": 0.17,
-   "parts_pair": "member-3 neck keep-out (8 x 3 mm, ramp < IN link 2 strap keep-out (8 x 3 mm Ti, fitt",
-   "pairs": {
-    "member-3 neck keep-out (8 x 3 mm, ramp < IN link 2 strap keep-out (8 x 3 mm Ti, fitt": 0.17
-   },
-   "parts_motion_mm": 0.17
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
   },
   {
    "k": 41,
@@ -963,12 +956,10 @@
    "closes": true,
    "body_mm": 0.0,
    "body_part": null,
-   "parts_mm": 0.19,
-   "parts_pair": "J3 lower plate keep-out (O20 x 3, member IN link 2 strap keep-out (8 x 3 mm Ti, fitt",
-   "pairs": {
-    "J3 lower plate keep-out (O20 x 3, member IN link 2 strap keep-out (8 x 3 mm Ti, fitt": 0.19
-   },
-   "parts_motion_mm": 0.19
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
   },
   {
    "k": 61,
@@ -1231,12 +1222,10 @@
    "closes": true,
    "body_mm": 0.0,
    "body_part": null,
-   "parts_mm": 0.76,
-   "parts_pair": "J3 lower plate keep-out (O20 x 3, member IN link 2 strap keep-out (8 x 3 mm Ti, fitt",
-   "pairs": {
-    "J3 lower plate keep-out (O20 x 3, member IN link 2 strap keep-out (8 x 3 mm Ti, fitt": 0.76
-   },
-   "parts_motion_mm": 0.76
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
+   "parts_motion_mm": 0.0
   },
   {
    "k": 78,

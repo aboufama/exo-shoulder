@@ -2,7 +2,7 @@
  "step": 6,
  "tol_mm": 0.5,
  "frames_checked": 228,
- "seconds": 69,
+ "seconds": 81,
  "jobs": 4,
  "body_model": "rig",
  "inside": "integer winding number (grid + segment crossings), depth = exact distance to the nearest surface (judge/sdist.py)",

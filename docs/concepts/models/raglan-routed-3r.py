@@ -37,21 +37,28 @@ PARAMS = dict(az=-24.0, el=4.0, a1=65.0, a2=65.0, wd=80.0, wa=-90.0, sigma=1, ma
               width=12.0, t_link=3.0, q=1.0)
 
 
-def routed_strap(name, a, b, t_w, d_w, joints, width=12.0, t=3.0, ramp_to=(), end_mm=K.HUB_R + 2.0, **kw):
-    """one rigid strap hub a -> W -> hub b (two great-circle legs, constant section), W fixed in the link frame"""
+def routed_strap(name, a, b, t_w, d_w, joints, width=12.0, t=3.0, ramp_to=(), end_mm=K.HUB_R + 2.0, extra=None, **kw):
+    """one rigid strap hub a -> W (-> W2) -> hub b (great-circle legs, constant section), every W fixed in the link frame:
+    W = cos(d) slerp(a, b, t) + sin(d) n_ab. extra = (t2, d2): a second planform turn (t2 > t)"""
     a, b = K.unit(a), K.unit(b)
-    if abs(d_w) < 0.25:
+    wps = [(t_w, d_w)] + ([tuple(extra)] if extra is not None else [])
+    wps = [(tt, dd) for tt, dd in sorted(wps) if abs(dd) >= 0.25]
+    if not wps:
         return K.strap_member(name, a, b, joints, width=width, t=t, ramp_to=ramp_to, **kw), a + b
     ang = np.arccos(np.clip((a * b).sum(-1), -1, 1))[:, None]; n = K.unit(np.cross(a, b))
-    g = K.unit(np.sin((1 - t_w) * ang) * a + np.sin(t_w * ang) * b)
-    dr = math.radians(d_w); w = K.unit(math.cos(dr) * g + math.sin(dr) * n)
-    Da = K.strap_dirs(a, w, width=width); Db = K.strap_dirs(w, b, width=width)[:, 1:]
-    D = np.concatenate([Da, Db], 1); ns, nc = D.shape[1:3]
+    W = []
+    for tt, dd in wps:
+        g = K.unit(np.sin((1 - tt) * ang) * a + np.sin(tt * ang) * b); dr = math.radians(dd)
+        W.append(K.unit(math.cos(dr) * g + math.sin(dr) * n))
+    nodes = [a] + W + [b]; legs = []
+    for i in range(len(nodes) - 1):
+        Dl = K.strap_dirs(nodes[i], nodes[i + 1], width=width); legs.append(Dl if i == 0 else Dl[:, 1:])
+    D = np.concatenate(legs, 1); ns, nc = D.shape[1:3]
     n_end = int(math.ceil(end_mm / 2.0)) + 1; s = np.repeat(np.arange(ns), nc); ramps = []
     for (h, dz), m in zip(ramp_to, (s < n_end, s >= ns - n_end)):
         if h: ramps.append((m, h, dz))
     return K.Member(name, D.reshape(len(D), -1, 3), t=t, width=width, joints=tuple(joints), grid=(ns, nc), climb_deg=60.0,
-                    ramps=ramps, strap=True, **kw), w
+                    ramps=ramps, strap=True, **kw), W[0]
 
 
 def axes(F, p):
@@ -67,9 +74,11 @@ def build(B, F, p):
     h1, h2, h3 = e1 * p1, e2 * p2, e3 * p3                     # the hub ends (kinematics unchanged)
     hubs = [K.hub_member("hub1", h1, "J1"), K.hub_member("hub2", h2, "J2"), K.hub_member("hub3", h3, "J3")]
     w, t = p["width"], p["t_link"]
-    L1, W1 = routed_strap("link1", h1, h2, p["r1t"], p["r1d"], ("J1", "J2"), width=w, t=t, ramp_to=(("hub1", K.STACK), ("hub2", 0.0)))
+    x1 = (p["r1t2"], p["r1d2"]) if p.get("r1d2") is not None else None
+    x2 = (p["r2t2"], p["r2d2"]) if p.get("r2d2") is not None else None
+    L1, W1 = routed_strap("link1", h1, h2, p["r1t"], p["r1d"], ("J1", "J2"), width=w, t=t, ramp_to=(("hub1", K.STACK), ("hub2", 0.0)), extra=x1)
     L2, W2 = routed_strap("link2", h2, h3, p["r2t"], p["r2d"], ("J2", "J3"), width=w, t=t, ramp_to=(("hub2", K.STACK), ("hub3", K.STACK)),
-                          over=[("link1", 1.0), ("neck", 1.0)])
+                          over=[("link1", 1.0), ("neck", 1.0)], extra=x2)
     neck = K.neck_member(F, h3, joints=("J3",), ramps=(("hub3", 0.0), (None, 0)))
     res = K.closure_residual(p1, p3, p2, p["a1"], p["a2"])
     lk = [round(math.degrees(float(np.arccos(np.clip(np.median((x * y).sum(-1)), -1, 1)))), 1) for x, y in ((h1, h2), (h2, h3))]
@@ -129,10 +138,37 @@ def best_route(M, link, key="top", step_deg=2.0):
     return dict(key=key, route=round(best[0], 3), t=best[1], d=best[2], great_circle=round(route(0.5, 0.0), 3))
 
 
+_FS = {}
+def fs():
+    """the verified fold-sph3r checks (crown / wall skin check, near-touch, overhead, red team, frozen big bench), reused"""
+    if not _FS:
+        import importlib.util
+        sp = importlib.util.spec_from_file_location("fold_sph3r_checks", os.path.join(REPO, "docs/concepts/models/fold-sph3r.py"))
+        m = importlib.util.module_from_spec(sp); sp.loader.exec_module(m)
+        m.build = build; m.evaluate = evaluate; m.ID = ID; m.PARAMS = PARAMS; _FS["m"] = m
+    return _FS["m"]
+
+
+def clean(params):
+    p = dict(PARAMS); p.update(params or {})
+    p["q"] = min(1.0, max(0.8, float(p["q"]))); p["sigma"] = 1 if float(p["sigma"]) >= 0 else -1
+    for k in ("e1", "e2", "e3"): p[k] = 1 if float(p.get(k, 1)) >= 0 else -1
+    for k in ("r1t", "r2t", "r1t2", "r2t2"):
+        if p.get(k) is not None: p[k] = min(0.9, max(0.1, float(p[k])))     # the turns stay between the hubs
+    for k in ("r1d", "r2d", "r1d2", "r2d2"):
+        if p.get(k) is not None: p[k] = min(60.0, max(-60.0, float(p[k])))
+    p["width"] = max(8.0, float(p["width"]))                               # 8 x 3 mm Ti strap is the narrowest used (osn)
+    return p
+
+
 def evaluate(B, params):
-    """tools/concept_cma.py hook: (params, report)"""
-    p = dict(PARAMS); p.update(params or {}); r = K.evaluate(B, build, p)
+    """tools/concept_cma.py hook: (params, report); the fold-sph3r crown / wall check, near-touch and overhead included"""
+    p = clean(params); r = K.evaluate(B, build, p); r = fs().extras(B, r)
     return p, r
+
+
+def bench_eval(B, params):
+    _, r = evaluate(B, params); return {k: v for k, v in r.items() if fs()._jsonable(v)}
 
 
 if __name__ == "__main__":
@@ -152,5 +188,10 @@ if __name__ == "__main__":
         print(json.dumps(M["routes"]), f"{time.time() - t0:.0f}s")
         json.dump(M, open(sys.argv[3] if len(sys.argv) > 3 else "/dev/stdout", "w"))
         sys.exit()
-    r = K.evaluate(B, build, par)
-    print({k: r[k] for k in ("gap", "reach", "follow", "inband14", "inband10", "contact", "inband_member", "link_span_deg", "mass_g", "honest", "audit")}, f"{time.time() - t0:.0f}s")
+    if mode == "frozen":                                      # CB_EXACT=1: fit on Bench(60,160), freeze, wear on Bench(110,360) exact
+        o = sys.argv[sys.argv.index("--out") + 1] if "--out" in sys.argv else "frozen.json"
+        fs().frozen(clean(par), o); sys.exit()
+    p, r = evaluate(B, par)
+    print({k: r.get(k) for k in ("gap", "reach", "follow", "inband14", "inband10", "contact", "inband_member", "link_span_deg", "mass_g",
+                                 "honest", "audit", "crown_contact_poses", "crown_min", "min_metal_skin", "gap_near1", "overhead")}, f"{time.time() - t0:.0f}s")
+    if mode == "redteam": fs().redteam(B, p, r)

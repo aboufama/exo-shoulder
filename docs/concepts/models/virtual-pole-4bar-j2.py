@@ -64,6 +64,25 @@ def frame2(x, y):
 def mv(R, u): return np.einsum("...ij,...j->...i", R, u)
 
 
+def polystrap(name, pts, joints, width, t, ramps=(), over=()):
+    """one RIGID body's strap along a polyline of GH directions pts[0] -> pts[1] -> ... (each leg a kit K5 strap on its
+    great circle, same width so the same across-count): one Member, so the body's own legs are never a K6 pair, the
+    climb limit runs along the whole path, and every pin it passes gets a stack ramp. ramps: [(hub name or None, dz)]
+    per vertex (start, middle pins..., end)."""
+    legs = [K.strap_member(f"{name}_{i}", pts[i], pts[i + 1], joints, width=width, t=t) for i in range(len(pts) - 1)]
+    nc = legs[0].grid[1]; assert all(L.grid[1] == nc for L in legs)
+    D = np.concatenate([L.D for L in legs], 1); ns = [L.grid[0] for L in legs]; S = sum(ns)
+    s = np.repeat(np.arange(S), nc); n_end = int(math.ceil((K.HUB_R + 2.0) / 2.0)) + 1; cuts = np.cumsum([0] + ns)
+    out = []
+    for v, (h, dz) in enumerate(ramps):
+        if not h: continue
+        c = cuts[v] if v < len(cuts) - 1 else S
+        m = (s >= c - n_end) & (s < c + n_end) if 0 < v < len(pts) - 1 else ((s < n_end) if v == 0 else (s >= S - n_end))
+        out.append((m, h, dz))
+    return K.Member(name, D, t=t, width=width, joints=tuple(joints), grid=(S, nc), climb_deg=60.0, ramps=out, strap=True,
+                    over=list(over))
+
+
 class FourBar:
     """spherical four-bar in its ground frame: ground pins a0, b0; coupler pins a1h, b1h at theta = 0"""
     def __init__(self, a0, b0, a1h, b1h):
@@ -163,16 +182,17 @@ def build(B, F, p):
         X = dict(A1=A1, B1=B1)[near]; Xg = A0 if ang(j, fb.a0) <= ang(j, fb.b0) else B0; g_name = "A0" if Xg is A0 else "B0"
         hubs = [K.hub_member(f"hub{n}", v, n) for n, v in joints.items()]
         w_, t_ = p["width"], p["t_link"]
+        Xo, o_name = (B0, "B0") if g_name == "A0" else (A0, "A0")
+        Y = dict(A1=B1, B1=A1)[near]; y_name = "B1" if near == "A1" else "A1"
         mem = hubs + [
-            K.strap_member("link1", J1, Xg, ("J1", g_name), width=w_, t=t_, ramp_to=(("hubJ1", K.STACK), (f"hub{g_name}", 0.0))),
-            K.strap_member("ground", A0, B0, ("A0", "B0"), width=w_, t=t_, ramp_to=(("hubA0", 0.0), ("hubB0", 0.0))),
-            K.strap_member("crankA", A0, A1, ("A0", "A1"), width=w_, t=t_, ramp_to=(("hubA0", K.STACK), ("hubA1", 0.0)),
-                           over=[("link1", 1.0), ("ground", 1.0)]),
-            K.strap_member("crankB", B0, B1, ("B0", "B1"), width=w_, t=t_, ramp_to=(("hubB0", K.STACK), ("hubB1", 0.0)),
-                           over=[("link1", 1.0), ("ground", 1.0)]),
-            K.strap_member("coupler", A1, B1, ("A1", "B1"), width=w_, t=t_, ramp_to=(("hubA1", K.STACK), ("hubB1", K.STACK))),
-            K.strap_member("link2", X, J3, (near, "J3"), width=w_, t=t_, ramp_to=((f"hub{near}", K.STACK), ("hubJ3", K.STACK)),
-                           over=[("neck", 1.0), ("link1", 1.0), ("ground", 1.0)]),
+            # layers (thickness accommodation, as thick-panel origami must): cranks lowest; the coupler body passes over the
+            # cranks, the neck and link 1's pins; link 1 passes over the cranks and the coupler's pins (K6 checks the rest)
+            polystrap("link1", [J1, Xg, Xo], ("J1", g_name, o_name), w_, t_, ramps=[("hubJ1", K.STACK), (f"hub{g_name}", K.STACK), (f"hub{o_name}", K.STACK)],
+                      over=[("crankA", 1.0), ("crankB", 1.0), ("hubA1", 1.0), ("hubB1", 1.0)]),
+            K.strap_member("crankA", A0, A1, ("A0", "A1"), width=w_, t=t_, ramp_to=(("hubA0", 0.0), ("hubA1", 0.0))),
+            K.strap_member("crankB", B0, B1, ("B0", "B1"), width=w_, t=t_, ramp_to=(("hubB0", 0.0), ("hubB1", 0.0))),
+            polystrap("coupler", [Y, X, J3], (y_name, near, "J3"), w_, t_, ramps=[(f"hub{y_name}", K.STACK), (f"hub{near}", K.STACK), ("hubJ3", K.STACK)],
+                      over=[("neck", 1.0), ("crankA", 1.0), ("crankB", 1.0), ("hubA0", 1.0), ("hubB0", 1.0), ("hubJ1", 1.0)]),
             K.neck_member(F, J3, joints=("J3",), ramps=(("hubJ3", 0.0), (None, 0)))]
     else:
         J2 = S(c); A0, B0 = S(np.broadcast_to(fb.a0, (P, 3))), S(np.broadcast_to(fb.b0, (P, 3))); A1, B1 = S(a1), S(b1)
@@ -184,14 +204,14 @@ def build(B, F, p):
         X = dict(A1=A1, B1=B1)[near]
         hubs = [K.hub_member(f"hub{n}", v, n) for n, v in joints.items()]
         w_, t_ = p["width"], p["t_link"]
+        Y = dict(A1=B1, B1=A1)[near]; y_name = "B1" if near == "A1" else "A1"
         mem = hubs + [
+            # layers: base ground strap and cranks lowest; link 1 (the coupler body) over the cranks and the base pins
             K.strap_member("ground", A0, B0, ("A0", "B0"), width=w_, t=t_, ramp_to=(("hubA0", 0.0), ("hubB0", 0.0))),
-            K.strap_member("crankA", A0, A1, ("A0", "A1"), width=w_, t=t_, ramp_to=(("hubA0", K.STACK), ("hubA1", 0.0)),
-                           over=[("ground", 1.0)]),
-            K.strap_member("crankB", B0, B1, ("B0", "B1"), width=w_, t=t_, ramp_to=(("hubB0", K.STACK), ("hubB1", 0.0)),
-                           over=[("ground", 1.0)]),
-            K.strap_member("coupler", A1, B1, ("A1", "B1"), width=w_, t=t_, ramp_to=(("hubA1", K.STACK), ("hubB1", K.STACK))),
-            K.strap_member("link1", X, J2, (near, "J2"), width=w_, t=t_, ramp_to=((f"hub{near}", K.STACK), ("hubJ2", 0.0))),
+            K.strap_member("crankA", A0, A1, ("A0", "A1"), width=w_, t=t_, ramp_to=(("hubA0", K.STACK), ("hubA1", 0.0))),
+            K.strap_member("crankB", B0, B1, ("B0", "B1"), width=w_, t=t_, ramp_to=(("hubB0", K.STACK), ("hubB1", 0.0))),
+            polystrap("link1", [Y, X, J2], (y_name, near, "J2"), w_, t_, ramps=[(f"hub{y_name}", K.STACK), (f"hub{near}", K.STACK), ("hubJ2", 0.0)],
+                      over=[("ground", 1.0), ("crankA", 1.0), ("crankB", 1.0), ("hubA0", 1.0), ("hubB0", 1.0)]),
             K.strap_member("link2", J2, J3, ("J2", "J3"), width=w_, t=t_, ramp_to=(("hubJ2", K.STACK), ("hubJ3", K.STACK)),
                            over=[("neck", 1.0), ("ground", 1.0)]),
             K.neck_member(F, J3, joints=("J3",), ramps=(("hubJ3", 0.0), (None, 0)))]
