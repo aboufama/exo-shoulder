@@ -735,7 +735,7 @@ def main():
         with mp.get_context("spawn").Pool(a.procs) as pool:          # spawn: never fork a CUDA process
             for k, r in enumerate(pool.imap(cpu_eval, [(p, wear, fit) for p in cf], chunksize=1)):
                 c[k] = r
-                if (k + 1) % 10 == 0: log(f"  CPU {k + 1}/{len(cf)} ({time.time() - t:.0f} s)")
+                log(f"  CPU {k + 1}/{len(cf)} ({time.time() - t:.0f} s) gap cpu {r.get('gap')} gpu {g[k].get('gap')} ({r.get('secs')} s)")
         tc = time.time() - t; log(f"CPU {len(cf)} configs in {tc:.1f} s on {a.procs} processes")
         keys = ("gap", "reach", "follow", "inband14", "inband10", "contact")
         both = [(x, y) for x, y in zip(g, c) if not x.get("error") and not y.get("error")]
