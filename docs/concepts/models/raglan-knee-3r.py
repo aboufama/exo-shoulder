@@ -117,6 +117,21 @@ class RGeometry(S.Geometry):
 
 
 S.Geometry = RGeometry          # this module's PRIVATE copy of the seed / osn / pin-knee chain builds the routed links
+# Since the pin knee's per-hub-radius change (2026-10-16 04:07 UTC) its Model builds links with its own PK._Geo, a subclass
+# of the seed's Geometry bound at import (before the swap above), so the routed links were silently dropped (red team,
+# docs/research/reach_attribution.md section 1: 32.37 instead of the verified 31.52). Route PK._Geo too; parity (r1d = r2d
+# = 0) keeps the pin knee's own add_links bit for bit. Fixed in the rebase track 2026-10-16.
+_pk_add_links = PK._Geo.add_links
+
+
+def _pk_routed_add_links(self, f1, f2, f3):
+    P = self.D.p
+    if all(abs(float(P.get(k, 0.0) or 0.0)) < 0.25 for k in ("r1d", "r2d")):
+        return _pk_add_links(self, f1, f2, f3)
+    return routed_add_links(self, f1, f2, f3)
+
+
+PK._Geo.add_links = _pk_routed_add_links
 
 
 def clean(params):
