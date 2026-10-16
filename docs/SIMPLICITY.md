@@ -9,7 +9,8 @@ So the number goes **down** as a design gets simpler:
 - **0** is the simplest buildable 3-DOF exo: three revolute hubs (pins on bearing pairs), three moving links, no passive
   freedom, nothing to measure beyond the three hubs.
 - Everything a design has beyond that **adds** explicit points. There is no cap.
-- It is **not** part of the bench score or the gap. The dashboard shows it next to the score.
+- It is **not** part of the bench score or the gap. The dashboard shows it next to the score: the leaderboard's
+  "Simplicity" column and the "Score vs simplicity" chart (docs/DASHBOARD.md).
 - CLAUDE.md makes it the second objective. Once verified scores plateau at 95 or more (gap 13.75 or less), the search
   minimises complexity subject to score >= 95.
 

@@ -126,7 +126,7 @@ Each dataset is an attached JSON file (an array of row objects). Time-series row
 
 | id | Title | Sources | `tools/dash_build.py` |
 |---|---|---|---|
-| morphs | Concept bench morphologies | docs/concepts/catalogue.json < families.json < rows/*.json, + best sweep config per id from sweeps/*.json | `morphs()` |
+| morphs | Concept bench morphologies | docs/concepts/catalogue.json < families.json < rows/*.json, + best sweep config per id from sweeps/*.json, + the complexity count of each row's `mechanism` record (tools/simplicity.py `score()`): `complexity` (points, lower = simpler, 0 = three pins on bearing pairs and three links; null without a record), `complexity_items` (where the points come from, "item = points; ...", a NOT BUILDABLE flag first), `passive_trans` (passive translations; > 2 = not buildable), `mechanism_confidence` (the record's own: counted / estimated). Never part of the gap or the score | `morphs()`, `complexity_of()` |
 | sweeps | Concept bench sweeps | docs/concepts/sweeps/*.json (each configuration's `t`), with per-morphology `best_gap`, overall `record_gap`, `is_record` and `passed_over` (see Times and rules); a file gap >= 999 is the agent's failed-configuration marker (no gap) | `sweeps()` |
 | cad | Built CAD judge results | tools/judged_history.py (score.json, score_14mm.json, judge/workspace.json, part_contact.json, dynamics.json) + judge/scorecard.json; thresholds judge/requirements.json | `cad()` |
 | gpu_evals | GPU evaluator detail runs | pipeline/conformal/gpu_client/band_eval_*.json via `judged_history.py --evals` | `gpu_evals()` |
@@ -218,14 +218,43 @@ and cannot load offline, so the harness renders the serif in a fallback face.
 ## The published page is the one-page summary (user, 2026-10-15: "very confusing ... needs to be very easily digestible")
 
 The artifact now shows `docs/dashboard/simple/index.html` - one page read top to bottom: the leader in one sentence
-and three numbers (best design, today's 3-hinge chain = the bar, the goal 0), "two ways to fail" (each design as a dot:
-moves with the arm vs stays 2-14 mm from the skin, the goal corner), the leaderboard (a tiny motion preview, gap, close-to-skin / follows /
+and three numbers (best design with its simplicity, today's 3-hinge chain = the bar, the goal 0), "two ways to fail" (each design as a dot:
+moves with the arm vs stays 2-14 mm from the skin, the goal corner), "score vs simplicity" (see below), the leaderboard (a tiny motion preview, score, simplicity, close-to-skin / follows /
 reaches meters against their targets, status: checking / verified / sweeping / dead end) with a plain-words glossary of
 the joint names, the best gap over time, the latest events and the built prototype's 19 requirements as chips. It
 reads six datasets (morphs, sweeps, events, reqs, cad, motion; the calcs board / leader / reqsum are defined in the page).
 The detailed multi-tab page above (docs/dashboard/*.js) stays in the repo for deeper dives; it is not published.
 Refresh: the lead's watchdog runs tools/dash_build.py and uploads only the datasets the page reads (morphs, sweeps,
 events, reqs, cad, motion) when their sha256 changes.
+
+### Simplicity: the complexity count beside the score (user, 2026-10-16: "it would be cool to have a simplicity score for each design impacted by degrees of freedom moving parts, etc. I think thats a pretty major part and for now shouldn't impact overall score but should show in the chart", then "when score start capping out around 95+ over the night, prioritize lowering that simplicity number")
+
+The number is the complexity count of docs/SIMPLICITY.md (`tools/simplicity.py`): points, **lower = simpler**, 0 = the
+simplest buildable 3-DOF chain (three pins on bearing pairs, three links); every extra active DOF, passive freedom,
+sensed coordinate, closed loop, slider, spring, body, joint and part adds points. It comes from each design's
+`"mechanism"` record in `docs/concepts/rows/<id>.json` (written by the mechanism census), is computed by
+`tools/dash_build.py` into the `morphs` fields `complexity`, `complexity_items`, `passive_trans`,
+`mechanism_confidence`, and is carried by the `board` calc (and `leader`: the best design's number) unchanged. It never
+enters the gap, the score, the board order or the leader choice: a design's score is the same with or without it.
+
+- **Leaderboard column "Simplicity" (caption "lower = simpler")**: the points (one decimal, trailing zero dropped) and a
+  tiny bar on a fixed 0-60 scale (to the largest count if one is above 60), muted; the tooltip (`title`) lists where the
+  points come from. A design with three passive translations (not buildable, CLAUDE.md) shows its number and bar in the
+  fail colour. A design without a record shows "–" ("Not counted yet").
+- **"Score vs simplicity" chart** (below "Two ways to fail"): one dot per counted design, x = its bench score (scale 50-100;
+  designs under 50 sit on the left edge, the tick reads "≤50"), y = its points. The strip right of the dashed score-95
+  line is shaded: the goal is the bottom-right corner (score 95+, fewest points), where per the user simplicity becomes
+  the next objective. Dot colours as in "Two ways to fail" (verified, live, dead/refuted muted, the bar to beat in the
+  text colour); an x marks a not-buildable design. The bar to beat and the five best live designs (three below 480 px)
+  are labelled, placed beside their dot without overlap (a tick joins a label moved off its dot's line). Hover: name,
+  score, state, points and items. The note under it counts the designs counted so far.
+- **Narrow screens**: the board was already full between 640 and 760 px. Below 860 px the board's meters shorten to
+  36 px, the simplicity bar goes (the number stays), its caption wraps and a two-word status pill wraps. Below 520 px
+  close-to-skin is hidden like follows / reaches below 640 px: on a phone the board keeps score and simplicity, the two
+  numbers that do not follow from each other, and all three score parts stay in the "Two ways to fail" chart. Measured
+  (the table's scrollWidth vs its box): 400 px 334/334, 521 445/445, 641 559/559, 1280 1066/1066 (before: 400 px 324/334;
+  360 px overflowed by 27 px before and by 23 now, inside the table's own scroller).
+- Test (2026-10-16): the harness as below, 1280 and 400 px, light and dark: zero console / page errors, no page overflow.
 
 ### Motion previews in the leaderboard (user, 2026-10-15: "small next to each design on the leaderboard just a tiny preview of motion not the whole human needed, just the shoulder maybe and no color or anything flashy")
 
