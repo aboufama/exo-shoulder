@@ -173,8 +173,12 @@ docs/EVOLUTION.md (and its snapshot to pipeline/evolution/) as part of the judge
   from the fold and scored 15.42; at the true 5 deg they score 18.45. A different reading is the user's call, not the
   model's. A hard stop acts on a joint's OWN angle (a dowel in an arc slot between the two bodies that joint connects),
   never on a virtual angle between non-adjacent bodies. Each claim reports the min `th` margin over its taken poses.
-  Final polishes score only poses the shape was not fitted on (2-fold cross-fit). Every in-sample polish so far lost
-  ~5 points held out (polish 2: C1 23.04 in-sample, +0.33 held out).
+  Every in-sample polish so far lost ~5 points held out (polish 2: C1 23.04 in-sample, +0.33 held out). The cause is NOT
+  shape over-fit (a 2-fold cross-fit test: in-fold vs out-of-fold correlate 0.984; cross-fit picks lost to H1 held out,
+  docs/research/crossfit_polish.md). It is the search benches' workspace sample: chosen by linspace over the grid order,
+  it under-samples axial rotation (|axial| >= 150 deg 6 % vs 11 % held out), so polishes buy closure on the bench that
+  turns into skin contact elsewhere. Final polishes therefore search on a representative, jittered workspace-envelope
+  sample (never the held-out poses) and claim on the held-out set.
 - **No lofts, ever** (user, 2026-10-15: "for all the design you do, lofts look horrible and introduce geometric problems, you
   can combine arcs, but no lofts!"): every surface comes from sketches of lines and tangent arcs - extrudes, revolves,
   sweeps of ONE constant section along a line/arc path, fillets. No lofts, no surfaces fitted or shrink-wrapped to skin
