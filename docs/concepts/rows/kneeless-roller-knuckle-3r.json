@@ -8,21 +8,280 @@
  "passive_translations": 0,
  "status": "screened",
  "t_ideated": null,
- "t_screened": "2026-10-16T22:30:00Z",
- "reach": 0.7812,
+ "t_screened": "2026-10-16T22:57:23Z",
+ "reach": 0.775,
  "follow": 1.0,
- "inband14": 0.8819,
- "inband10": null,
- "contact": 0.0212,
- "gap": 15.81,
+ "inband14": 0.8896,
+ "inband10": 0.554,
+ "contact": 0.0316,
+ "gap": 16.7,
  "v_reach": null,
  "v_follow": null,
  "v_inband14": null,
  "v_inband10": null,
  "v_gap": null,
- "n_configs": 258,
- "verdict": "IN PROGRESS (screen running): seed measured; knee proven rigid (ptp 0.000 deg, |s| 0.000 mm, c3 0 on every pose)",
- "limiter": "seed: hub 3 0.46 in band (GH-ray hub oblique to the deltoid, tilt 28 deg at wd 75), 2 mm near-touch 45.89",
- "note": "seed b3 0 / wd 75 / wa -9 on the verified roller drive, PA <= 43 (dK_lim 49.0 pressure_horn): plain 15.81, 1 mm 19.03, 2 mm 45.89 fast; coarse LHS 258 (farm) best 2 mm 25.83 (plain 22.40); CMA running",
- "doc": "docs/concepts/kneeless-roller-knuckle-3r.md"
+ "n_configs": 5914,
+ "complexity": 23.75,
+ "mechanism": {
+  "active_dof": 3,
+  "passive_trans": 0,
+  "crossed_rails": 0,
+  "passive_rot": 3,
+  "moving_bodies": 5,
+  "joints": 7,
+  "closed_loops": 2,
+  "sliding_pairs": 0,
+  "rolling_pairs": 2,
+  "sensed_passive": 0,
+  "springs_or_flexures": 1,
+  "custom_parts": 11,
+  "catalogue_parts": 13,
+  "notes": "J1/K/J2/J3 O20 MR117-2RS; J3 axis on a GH ray (b3 0); K slaved (clock-spring cap), never read; lobe ground into hub 2's cap -> bell crank (MR63ZZ pair, pin in link 1b) -> bent long arm (3 mm Ti) -> MR63ZZ roller on an integral O3 stub (head sampled) -> conjugate flank milled into a lateral boss of link 1a (5-axis / wire EDM); member 3 = hub 3's lower plate + E run + the former knee link = ONE rigid 3 mm Ti bracket bolted to the arm pad on BOTTOM (no knee pins, no knee encoders). Moving bodies: L1a, L1b, L2, crank, roller (member 3 is arm-fixed). Joints: J1, K, J2, J3, crank pivot, roller axle, + the spring-cap stop A counted in the K joint. Loops: drive (lobe-crank-flank-K), K dyad stop. Rolling pairs: lobe-follower, roller-flank. Parts: the round-9 merges of roller-longdyad (lug into link 1a, lobe into hub 2's cap, roller pin into the crank) and the knee link merged into the bracket: custom 15 -> 11; bought 15 - 2 iglidur pins = 13.",
+  "source": "kneeless-roller-knuckle-3r screen 2026-10-16",
+  "confidence": "medium"
+ },
+ "best_params": {
+  "az1": 94.353,
+  "el1": 65.9804,
+  "az2": 41.8875,
+  "el2": 41.0083,
+  "wd": 73.9288,
+  "wa": -11.3645,
+  "lE": 82.2602,
+  "phiE": -2.4165,
+  "lc": 29.9075,
+  "phib": -89.2952,
+  "a1max": 56.0143,
+  "kK": 2.568,
+  "smhi": 16.9881,
+  "bk1": 27.4142,
+  "bk2": 35.6795,
+  "g": 2.2297,
+  "beta": -171.0352,
+  "r_c": 16.2968,
+  "lift": 1.7772,
+  "hl": 0.7328,
+  "zr": 2.9178,
+  "s_arm": 4.7677,
+  "r_lobe": 8.4303,
+  "stk": 4.8534,
+  "b3": 0.0,
+  "ang_min": 0.0,
+  "chain": "free",
+  "law_mode": "lin",
+  "near2": 1,
+  "cprog": 0.0
+ },
+ "fast": {
+  "plain": 16.7,
+  "near1": 17.84,
+  "near2": 20.02,
+  "min_metal_mm": 0.72,
+  "why": {
+   "fold": 30,
+   "skin": 6
+  },
+  "overhead": "1/12",
+  "ws_inband": {
+   "all": [
+    0.8391,
+    0.5219
+   ],
+   "e90_140": [
+    0.8141,
+    0.5145
+   ],
+   "lead_same_formula_fit_bench": {
+    "all": [
+     0.8372,
+     0.5264
+    ],
+    "e90_140": [
+     0.7615,
+     0.5007
+    ]
+   }
+  },
+  "kit_min_th_margin_deg": 5.14,
+  "knee_rigid": {
+   "ang_ptp_deg": 0.0,
+   "s_max_mm": 0.0,
+   "c3_mm": 0.0
+  }
+ },
+ "frozen": {
+  "bench": "Bench(110,360) exact, fit-60 shape frozen (self-measured, NOT verified)",
+  "gap": 21.07,
+  "score": 92.34,
+  "reach": 0.725,
+  "follow": 1.0,
+  "inband14": 0.8905,
+  "inband10": 0.5581,
+  "contact": 0.0262,
+  "near1": 23.23,
+  "near2": 32.25,
+  "min_metal_mm": 0.01,
+  "why": {
+   "fold": 86,
+   "slide": 0,
+   "flip": 0,
+   "closure": 0,
+   "skin": 0,
+   "parts": 3,
+   "contact": 10
+  },
+  "overhead": {
+   "ws": 28,
+   "taken": 7,
+   "reach": 0.25,
+   "why_not": {
+    "fold": 15,
+    "parts": 2,
+    "contact": 4
+   }
+  },
+  "connected": {
+   "static": {
+    "gap": 21.07,
+    "reach": 0.725,
+    "follow": 1.0,
+    "inband14": 0.8905,
+    "contact": 0.0262
+   },
+   "connected_full": {
+    "gap": 21.07,
+    "reach": 0.725,
+    "dropped": 0
+   },
+   "connected_knn": {
+    "gap": 23.35,
+    "dropped": 8
+   }
+  },
+  "parts_ib14": {
+   "hub3": 0.505
+  },
+  "lead": {
+   "plain": 18.91,
+   "near1": 20.0,
+   "near2": 34.03
+  },
+  "near_touch_gap": 23.23,
+  "near_touch_2mm": 32.25,
+  "fold_margin": "kit rule as the lead (msub, m3e >= 5 deg of th in every taken state); min th margin over taken fit-bench poses 5.14 deg",
+  "drive_range_taken": "K opened by the drive over the taken poses: dK up to the flank's dK_lim 46.8 deg (pressure_horn), crank phi max 20.5 deg"
+ },
+ "held_out": {
+  "gap": 24.59,
+  "reach": 0.6943,
+  "follow": 1.0,
+  "inband14": 0.889,
+  "inband10": 0.5581,
+  "contact": 0.0292,
+  "near1": 27.2,
+  "near2": 36.06,
+  "min_metal_mm": 0.11,
+  "overhead": {
+   "ws": 71,
+   "reach": 0.2254
+  },
+  "lead": 22.67
+ },
+ "other_frozen": {
+  "C2": {
+   "gap": 22.06,
+   "near2": 32.72,
+   "held": 24.89
+  },
+  "B2": {
+   "gap": 21.75,
+   "near2": 35.64,
+   "hub3": 0.734
+  },
+  "D2": {
+   "gap": 22.37,
+   "near2": 35.3
+  },
+  "C_round1": {
+   "gap": 21.53,
+   "near2": 37.07,
+   "held": 25.55
+  }
+ },
+ "red_team": {
+  "metal_lost_poses": "13 frozen: hub 2 crown 9 (scapular-plane abduction 90-165, -0.7 to -23 mm), flank lug 2 (elev 165, axial -60), link 2 2; bracket / hub 3 never touch; lowest taken hub 2 crown edge 0.08 mm at (90, 135, -90)",
+  "named_poses": "overhead axial -90 taken (bracket 1.7 mm); overhead axial -15 / -120, across-body extreme IR, behind the back, abduction 90, extreme ER: fold",
+  "gh_offset_3_5_10mm": {
+   "rigid_median_max": [
+    [
+     3.4,
+     5.9
+    ],
+    [
+     5.67,
+     9.84
+    ],
+    [
+     11.34,
+     19.68
+    ]
+   ],
+   "within_3mm_liner": [
+    0.387,
+    0.177,
+    0.079
+   ],
+   "one_axial_cuff_slide_within": [
+    0.402,
+    0.189,
+    0.079
+   ],
+   "planar_knee_equiv_median_max": [
+    [
+     2.27,
+     5.55
+    ],
+    [
+     3.82,
+     9.17
+    ],
+    [
+     7.67,
+     18.46
+    ]
+   ],
+   "knee_within": [
+    0.666,
+    0.364,
+    0.121
+   ]
+  },
+  "drive": "PA crank 9.3 / horn 42.5 taken (<= 43), dK_lim 46.8 pressure_horn, arm-hubK 1.53 mm, roller-hubK 3.08 mm"
+ },
+ "gate": {
+  "convergence": {
+   "gain_2nd_half": 0.32,
+   "gain_last_third": 0.17,
+   "top5_spread": 0.09,
+   "streams": "A2 0.91/0.34/0.09, C2 0.15/0.15/0.07, D2 0.24/0.24/0.06, B2 0.19/0.19/0.34",
+   "passed": true
+  },
+  "design_gate_spec": {
+   "fast_near2_le_15": 20.02,
+   "fast_plain_le_13": 16.7,
+   "contact_le_0.015": 0.0316,
+   "hub3_ge_0.60": 0.501,
+   "ws_inband_ge_0.874_0.841": [
+    0.8391,
+    0.8141
+   ],
+   "knee_assert": true,
+   "passed": false
+  }
+ },
+ "verdict": "Complexity Pareto point, not a lead change (self-measured, NOT verified): frozen exact Bench(110,360) 21.07 (score 92.34) / 1 mm 23.23 / 2 mm 32.25 (the lead 18.91 / 20.00 / 34.03), held out 24.59 (lead 22.67), flood full 21.07 / knn 23.35, at complexity 23.75 (lead 49, roller row 45.25), 0 passive translations, 0 sensed passives. Converged (5914 configs); the spec's design gate failed (fast 2 mm 20.02 > 15, plain 16.70 > 13, hub 3 0.50 < 0.60).",
+ "limiter": "the J2 fold (86 of 360 frozen, as every knuckle row) and hub 2's crown in scapular-plane abduction 90-165 (9 of 13 metal-lost poses); in-band: hub 3 on a GH ray sits 28.6 deg oblique to the deltoid (0.505 in band, median 13.9 mm). The knee deletion itself is free on the bench (bracket 0.92-1.0 in band, never touches); the cost is losing the b3 tilt (~3.5 fast / ~2.2 frozen points) and a 1.5x larger liner misfit under GH-centre error.",
+ "note": "Model docs/concepts/models/kneeless-roller-knuckle-3r.py = the round-9 roller wrapper (roller-longdyad-knuckle-3r.py: PA <= 43, roller stub head, 2 mm objective, ws in-band) on the verified roller-flank model, loaded unchanged; b3 0 forced, knee window dropped, former knee link re-sampled at the bracket level (pin stack removed, 3 mm thick), knee-vs-E / pad-vs-E dropped, bracket >= 0.15 mm off hub 3; knee asserted constant (ptp < 0.5 deg, |s| < 0.05 mm) on every config: 0.000 / 0.000 measured. Search: LHS 258 + CMA 2 rounds x 4 farm streams (5656 tries, 2 mm objective). Seed (b3 0, wd 75, wa -9 on the roller best): plain 15.81 / 2 mm 45.89 fast (the horn lug at 1-2 mm on 12 poses). Fast->frozen +4.37 (knee rows +8.4-9.0). Min th margin 5.14 deg. Spec deviations: chain 'free' (bk2 34-48) so the roller dyad is the start; PA_MAX 43 (round 9) cuts the seed flank to dK 49.0 (56.2 at 45).",
+ "doc": "docs/concepts/kneeless-roller-knuckle-3r.md",
+ "held_out_gap": 24.59
 }

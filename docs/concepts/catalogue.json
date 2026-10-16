@@ -2633,7 +2633,7 @@
   "name": "Knee-free roller-flank knuckle: J3 on a GH ray (b3 0), the pin knee deleted, rodless drive (cx 23.5)",
   "family": "redundant 4R with a determined spare (cam-slaved knuckle) on a spherical (zero-closure) cuff",
   "lens": "round9:simplest-drive (lens 3, weird / low-complexity: drop the largest non-drive complexity item)",
-  "status": "ideated",
+  "status": "screened",
   "t_ideated": "2026-10-16T21:14:47Z",
   "source": "round 9 judge (docs/concepts/round9_ideation.md)",
   "merged_from": [],
