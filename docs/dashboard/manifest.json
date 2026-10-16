@@ -4,10 +4,10 @@
   "title": "Concept bench morphologies",
   "description": "One row per morphology in the swarm's catalogue: status, the agent's claimed bench numbers, the verifier's re-measured numbers (v_), its best sweep configuration so far, and the 3R baseline once (is_baseline), and the complexity count (the simplicity number, never part of the gap or score): complexity = points, lower = simpler, 0 = three pins on bearing pairs and three links; complexity_items = where the points come from; passive_trans = passive translations (more than 2 = not buildable); mechanism_confidence = counted or estimated. Built from docs/concepts/catalogue.json, families.json, rows/*.json (complexity: tools/simplicity.py on each row's mechanism record, docs/SIMPLICITY.md) and sweeps/*.json.",
   "file": "data/morphs.json",
-  "sha256": "4b1947b7268fa551c8a9ad6953d47d7129ab01fbfbb066b35c5f4cd456f5821a",
-  "rows": 112,
-  "bytes": 204283,
-  "updated": "2026-10-16T17:23:33Z"
+  "sha256": "d30bd16330fed0ce9648fbb96f7c690d68052ca89d40a210374c37aacf22d9f4",
+  "rows": 116,
+  "bytes": 207973,
+  "updated": "2026-10-16T18:23:24Z"
  },
  {
   "id": "sweeps",
@@ -24,10 +24,10 @@
   "title": "Built CAD judge results",
   "description": "One row per judged design and requirement: value, threshold and pass from the outside judges, timed by the judge output (score files: the earliest of their commit, their file time and the first commit whose docs report the design; scorecard-only values: the scorecard's commit). Built from tools/judged_history.py, judge/scorecard.json files and judge/requirements.json.",
   "file": "data/cad.json",
-  "sha256": "546a2c26328c6d2be2a876d71f19354963d57809f26d0912977473b096303596",
-  "rows": 338,
-  "bytes": 106071,
-  "updated": "2026-10-16T18:03:05Z"
+  "sha256": "12338526ab9e8d20996403769ef39ecfb039fec4c286a27bd38714b0312895f4",
+  "rows": 351,
+  "bytes": 110192,
+  "updated": "2026-10-16T18:23:24Z"
  },
  {
   "id": "gpu_evals",
@@ -64,10 +64,10 @@
   "title": "Event log",
   "description": "What happened and when: the swarm's own log (docs/concepts/events.jsonl), one milestone per judged design and every new built-CAD R1 record (from the judge outputs).",
   "file": "data/events.json",
-  "sha256": "5062e45a543cd59f25d09242b1d0617c61864148e2292099e00b2b8d04936c9f",
-  "rows": 520,
-  "bytes": 185919,
-  "updated": "2026-10-16T18:03:05Z"
+  "sha256": "d215c798e5494c573cda59245022a83ff4f047576280c94fb4cb549728f85947",
+  "rows": 527,
+  "bytes": 189314,
+  "updated": "2026-10-16T18:23:24Z"
  },
  {
   "id": "spend",
@@ -84,10 +84,10 @@
   "title": "Arm reach in 3-D",
   "description": "One row per built design and everyday arm pose of the R16 workspace judge: where the upper arm points and whether the built design reaches it, with the reason if not. Built by tools/coverage3d.py from judge/workspace.json files (newest 8 designs).",
   "file": "data/cov3d.json",
-  "sha256": "2c7a211db2b3068959fa8abd07c9a79c4e5cfec9a6bf42833ad5e2ebbf1a538d",
+  "sha256": "a8c11cc571e69502969ea0b845bb2ea4ce70a7a6691865a4b7269b90e9625365",
   "rows": 2388,
-  "bytes": 737903,
-  "updated": "2026-10-16T18:03:05Z"
+  "bytes": 729243,
+  "updated": "2026-10-16T18:23:24Z"
  },
  {
   "id": "motion",
@@ -104,9 +104,9 @@
   "title": "Data build info",
   "description": "When tools/dash_build.py last gathered the data, the repo commit, and any warnings it printed.",
   "file": "data/meta.json",
-  "sha256": "279842048d5a2e5638f9074697c17fed7980cef08ece1ab9a34d689df195a6c4",
+  "sha256": "a017cb1730913cc4d0f9768462791b853aedaf1d2254f4a6c86a1ef6a8a76890",
   "rows": 1,
   "bytes": 2089,
-  "updated": "2026-10-16T18:08:23Z"
+  "updated": "2026-10-16T18:23:24Z"
  }
 ]
