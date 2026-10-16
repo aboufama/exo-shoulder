@@ -2407,7 +2407,7 @@
   "name": "Inverse direct pair: lobe plate on link 1a around K, roller on a 24 mm stub of link 2 (kK 1.0, K moves at most 32 deg)",
   "family": "redundant 4R with a determined spare (cam-slaved knuckle), direct higher pair",
   "lens": "round7:direct-drive-knuckle (c)",
-  "status": "screened",
+  "status": "verified",
   "t_ideated": "2026-10-16T15:33:10Z",
   "source": "round 7 judge (docs/concepts/round7_ideation.md)",
   "description": "The winner's chain with the drive inverted and shortened. Link 1a carries a 3 mm lobe plate on K's hub ring (pitch 14.3-26.3 mm off uK, outer 28.8 mm, a 14-deg sector aimed at J2); it moves only with K (<= 32 deg), so outside the law its footprint is fixed beside hub K. Link 2 carries a short stub at hub 2 with an O5 roller aimed back at K (a0 ~168 deg): a Geneva tail cut to about half. State A and folded: the stub turns away, K rests on stop A under its clock spring. Stretched / overhead: the roller enters the lobe and opens K 1:1 with q2 (kK 1.0, smhi 20) to stop B at a1max 50.",

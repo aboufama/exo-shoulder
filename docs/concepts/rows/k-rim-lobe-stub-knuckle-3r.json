@@ -7,7 +7,7 @@
  "passive_dof": 3,
  "passive_translations": 0,
  "complexity": 34.0,
- "status": "screened",
+ "status": "verified",
  "t_ideated": "2026-10-16T15:33:10Z",
  "t_screened": "2026-10-16T15:53:34Z",
  "reach": 0.6937,
@@ -17,11 +17,11 @@
  "contact": 0.0118,
  "gap": 36.82,
  "gap_plain": 30.79,
- "v_reach": null,
- "v_follow": null,
- "v_inband14": null,
- "v_inband10": null,
- "v_gap": null,
+ "v_reach": 0.6222,
+ "v_follow": 0.8727,
+ "v_inband14": 0.8256,
+ "v_inband10": 0.566,
+ "v_gap": 44.79,
  "n_configs": 524,
  "best_params": {
   "L_stub": 24.487,
@@ -97,6 +97,8 @@
  },
  "verdict": "SCREENED, FAILS ITS KILL GATE: best 36.82 fast near-touch (plain 30.79; reach 0.694, follow 0.933, ib14 0.827, contact 0.012) on Bench(60,160) against the gate <= 15.5 and the winner's 16.53. The law alone is worth 13.76 (re-measured to the digit), the honest drive metal costs ~23 points. Not a contender for the leader; no frozen / verify run spent on it.",
  "limiter": "The stacking at K. A lobe on link 1a must clear link 1b (link 1b is the upper member at K and runs right under the lobe, which is aimed at J2), so it sits >= link 1b + 4 mm and the stub >= lobe + 4 mm: lobe 0 % in band at 19.6 mm, stub 11 % at 21.6 mm, roller 17 % at 19.7 mm (86 out-of-band samples, ib 0.827 vs the law-only 0.887). Putting the lobe BESIDE link 1b at link 1a's level (lobe 100 % in band) moves the roller (on a post) down to the skin, where it sweeps with link 2 over ~110 deg of q2 in state A and loses 14-39 poses to skin / contact (best 57.2) - the Geneva tail's sweep cone on a shorter radius. Plus 9 clip poses lost to roller-vs-lobe in state A (the stub swings back across the lobe), follow 0.933.",
- "note": "Model: winner chain (kit rule, phys q2 stops, capK 6, pin knee, near-touch objective) + exact spherical roller-lobe pair: roller centre on a small circle about u2, pitch curve C = R(uK, dK) P in link 1a's frame, gates per t: pressure angle (lobe-side pitch normal vs K's velocity) <= 45, convex pitch radius >= rr + 1, lift-off, stop B, stub boss >= 1 mm off hub K (nominal) + per-pose 3-D pairs (LOBE vs hub 2 / hub 3 / L1b / L2 / stub / knee / pad / E, ROL vs LOBE off the law, stub + roller vs hub 1 / hub K incl. cap / hub 3 / L1a / L1b / knee / pad / E). Spec corrections: a0 168 has NO valid law (pa > 45 at the onset: the stub points at K, K's velocity at the roller is ~perpendicular to the push); valid branches a0 144-156 and 204-216. The best stub boss passes 6.6 mm off hub K's rim (the lead's 0.3 mm concern is resolved by a0 146, stub 28.1 mm physical). pa max 35.3 deg (kK 0.825, dK 24.6 deg to stop B, th_max 101.5). Search: 12 hand configs, farm LHS 256 (L_stub, a0, kK, smhi, a1max, bk1, bk2, tip_tol, lobe_w, lobe level) + 2 local-search generations x 128 (sigma 8 % / 4 %), 512 farm configs, ~$0.03. CONVERGENCE GATE: gain over the 2nd half 0.553 score pts (< 1 ok), over the last third 0.549 (< 0.5 NOT met by 0.05), top-5 spread 0.138 (< 3 ok) - so the status stays 'screened', not 'dead', although the kill gate (<= 15.5) is missed by 21 gap points. Overhead (elev >= 140): 2/12 ws taken (lost: fold 8, slide 2). No frozen Bench(110,360) run (kill gate failed first).",
- "doc": "docs/concepts/k-rim-lobe-stub-knuckle-3r.md"
+ "note": "Model: winner chain (kit rule, phys q2 stops, capK 6, pin knee, near-touch objective) + exact spherical roller-lobe pair: roller centre on a small circle about u2, pitch curve C = R(uK, dK) P in link 1a's frame, gates per t: pressure angle (lobe-side pitch normal vs K's velocity) <= 45, convex pitch radius >= rr + 1, lift-off, stop B, stub boss >= 1 mm off hub K (nominal) + per-pose 3-D pairs (LOBE vs hub 2 / hub 3 / L1b / L2 / stub / knee / pad / E, ROL vs LOBE off the law, stub + roller vs hub 1 / hub K incl. cap / hub 3 / L1a / L1b / knee / pad / E). Spec corrections: a0 168 has NO valid law (pa > 45 at the onset: the stub points at K, K's velocity at the roller is ~perpendicular to the push); valid branches a0 144-156 and 204-216. The best stub boss passes 6.6 mm off hub K's rim (the lead's 0.3 mm concern is resolved by a0 146, stub 28.1 mm physical). pa max 35.3 deg (kK 0.825, dK 24.6 deg to stop B, th_max 101.5). Search: 12 hand configs, farm LHS 256 (L_stub, a0, kK, smhi, a1max, bk1, bk2, tip_tol, lobe_w, lobe level) + 2 local-search generations x 128 (sigma 8 % / 4 %), 512 farm configs, ~$0.03. CONVERGENCE GATE: gain over the 2nd half 0.553 score pts (< 1 ok), over the last third 0.549 (< 0.5 NOT met by 0.05), top-5 spread 0.138 (< 3 ok) - so the status stays 'screened', not 'dead', although the kill gate (<= 15.5) is missed by 21 gap points. Overhead (elev >= 140): 2/12 ws taken (lost: fold 8, slide 2). No frozen Bench(110,360) run (kill gate failed first). | VERIFIED 2026-10-16 (skeptic, docs/concepts/verify/k-rim-lobe-stub-knuckle-3r.py, claim model loaded unchanged): fit reproduces exactly (Bench(60,160) fast 30.79 plain / 36.82 near-touch). Added checks: lobe vs hub 1; roller vs lobe INSIDE the law (geometric undercut over the whole law prefix -0.001 mm, and per pose, roller centre vs every lobe sample >= rr - 0.3 mm): no new losses. Frozen (no refit), exact path, Bench(110,360): v_gap 44.79 plain (score 83.7), near-touch 53.51, reach 0.622, follow 0.873, ib14 0.826, ib10 0.566, contact 0.018; lost: fold 105, slide 7, parts 32 (all ROL-LOBE in state A), contact 6; overhead 5/28 (reach 0.179); continuity flood fill: connected_full = static (131 law poses all connected), knn 46.48. Champion spherical 3R on the same bench: 66.97 (knuckle-family verifier, same code and checks; risley-turret checks 75.94) -> beats the champion, NOT refuted; but 21.2 points behind the round-6 winner (23.57) on the identical protocol: not a contender. The fast-to-frozen loss is 14.0 points (winner's: 6.8), driven by follow (0.933 -> 0.873): the stub swinging back across the lobe in state A costs clip frames.",
+ "doc": "docs/concepts/k-rim-lobe-stub-knuckle-3r.md",
+ "v_contact": 0.0184,
+ "v_gap_near1": 53.51
 }

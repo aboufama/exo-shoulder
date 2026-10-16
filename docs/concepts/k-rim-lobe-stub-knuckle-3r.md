@@ -114,3 +114,49 @@ A direct pair that keeps the stub's sweep off the skin and out of a third layer 
 - (b) a lobe cut into link 1b's own strap, as a groove at link 1b's level.
 
 The rod's out-of-band metal remains the cheapest measured drive (4.74 points).
+
+## Verification (skeptic, 2026-10-16)
+
+Harness: `docs/concepts/verify/k-rim-lobe-stub-knuckle-3r.py`. It loads the claim model unchanged. Result:
+`docs/concepts/verify/k-rim-lobe-stub-knuckle-3r_corr_bench_frozen.json`.
+
+What was checked:
+
+- **Active DOF.** J1, J2 and J3 are active. K is slaved: the clock spring holds it on stop A in state A, and the law
+  sets it while the roller is on the lobe. The two knee pins are closed by the cuff. That gives 3 active joints, 0
+  passive translations and no undetermined coordinate.
+- **Parts at real size.** The lobe is sampled every 1.5 x 1.5 mm, plus a 4 mm web to hub K. The MR52ZZ roller is O5;
+  its boss is O6. The stub strap is 8 x 3. All of these are skin-checked.
+- **Added check: lobe vs hub 1.** Never binding.
+- **Added check: roller vs lobe inside the law.** The claim exempts this pair on law poses, so it was re-checked two ways:
+  - geometrically over the whole law prefix (undercut -0.001 mm);
+  - per pose, the roller centre against every lobe sample, at a tolerance of rr - 0.3 mm.
+
+  Neither check removed a pose. A first per-pose check that sampled the roller rim against the lobe's back rows was an
+  artefact: those rows sit exactly one sample half-thickness behind the flank. It was replaced.
+- **Closure.** The largest residual is 0.015 deg.
+- **Continuity flood fill.** All 131 taken law poses are connected on the full grid, and connected reach equals
+  static reach.
+- **Bench re-check.** The fit was reproduced exactly on Bench(60,160): 30.79 plain, 36.82 near-touch.
+
+Frozen wear (no refit), exact path, Bench(110,360), with the corrected checks:
+
+| | gap | reach | follow | ib14 | ib10 | contact | near-touch gap |
+|---|---|---|---|---|---|---|---|
+| claim, fit Bench(60,160) fast | 30.79 | 0.694 | 0.933 | 0.827 | 0.567 | 0.012 | 36.82 |
+| **verified, Bench(110,360) exact frozen** | **44.79** | 0.622 | 0.873 | 0.826 | 0.566 | 0.018 | 53.51 |
+| round-6 winner (rod), same protocol | 23.57 | 0.731 | 1.000 | 0.844 | 0.531 | 0.011 | - |
+| champion spherical 3R, same code and checks | 66.97 | | | | | | |
+
+**Where the poses go.** Lost: fold 105, parts 32 (all roller vs lobe in state A), slide 7, contact 6. Overhead
+(elevation >= 140): 5 of 28 taken.
+
+**Fast to frozen.** The design loses 14.0 points going from fast to frozen; the winner loses 6.8. Follow causes most of
+it (0.933 -> 0.873): on clip frames in state A, the stub swings back across the lobe.
+
+**Caveat.** The state-A roller-vs-lobe rule also charges a roller that is about to land on the flank onset. That makes
+the rule slightly conservative, but it cannot close a 21-point deficit.
+
+**Verdict: VERIFIED, not refuted** (v_gap 44.79, score 83.7, against the champion's 66.97). It is not a contender: it
+sits 21.2 points behind the rod drive, and the claim's own conclusion (stub follower on link 2 = about 20+ points of
+drive metal) stands.

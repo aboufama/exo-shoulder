@@ -71,7 +71,8 @@ class CorrModel(C.KSModel):
             # roller centre vs every lobe sample, great-circle mm at the lobe level, per pose (members 1 and 2 turn about GH)
             R1, _ = self.T(1, i); R2, _ = self.T(2, i); Rl = float(self._R_lobe)
             pc = R2 @ self._tip_dir; ld = self._lobe_d @ R1.T
-            c["ROL-LOBEpen"] = float(np.arccos(np.clip(ld @ pc, -1, 1)).min() * Rl - float(self.D.p["rr"])) + 0.3   # >= -0.3 mm allowed
+            # penetration >= -0.3 mm passes; shifted by +1 onto the bench's 1 mm part-clearance scale (PART_CLEAR)
+            c["ROL-LOBEpen"] = float(np.arccos(np.clip(ld @ pc, -1, 1)).min() * Rl - float(self.D.p["rr"])) + 0.3 + 1.0
         self.last_clear.update({k_: round(v, 1) for k_, v in c.items()})
         return min(out, min(c.values()))
 
