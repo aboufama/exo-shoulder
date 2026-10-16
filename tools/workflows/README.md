@@ -12,3 +12,14 @@ The user, 2026-10-16: "dont just stop on round 4 go as far as you can!". Discove
 
 The scripts reference the session scratchpad paths of the session that wrote them; a new session copies them to its
 own scratchpad and fixes `SP` before running them with the Workflow tool.
+
+## Do not message a running workflow agent (measured 2026-10-16)
+
+`SendMessage` to the agentId of an agent running inside a workflow does not reach that agent. It **resumes a second
+copy** from the same transcript, as a separate background agent. Both copies then run the same plan on the same files:
+they wait on the same farm batch, write the same model files and race each other on the GPU pods' override driver.
+This happened twice (Track A of wf_b870688f-426 and the pin-knee GPU search wf_9bce650d-b9e). The fix was to stop the
+workflow and keep the informed copy, or to split the duties between the two copies. Later messages to that agentId go
+to the resumed copy only. To steer workflow agents, put the facts in the repo (row / FINDINGS / a note file the
+prompt tells them to read), or stop the workflow and relaunch the stage with the new facts in its prompt (resume keeps
+the finished agents cached).
