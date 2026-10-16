@@ -110,7 +110,6 @@
     <p class="lede" id="lede" data-source="leader">—</p>
     <div class="kpis">
       <div class="kpi lead" id="kpi-best"><span class="lab">Best design so far</span><span class="big" data-source="leader" data-field="score">—</span><span id="kpi-best-name" class="muted" data-source="leader" data-field="short">—</span><span id="kpi-best-cx" class="muted" data-source="leader" data-field="complexity"></span></div>
-      <div class="kpi"><span class="lab">Bar to beat: today's 3-joint chain</span><span class="big" id="kpi-base" data-source="leader" data-field="base_score">—</span><span class="muted">the design you have seen rendered</span></div>
       <div class="kpi"><span class="lab">Goal</span><span class="big">100</span><span class="muted">every target met</span></div>
     </div>
     <p class="muted" style="margin-top:12px">Score: higher is better, 100 = every target met, 0 = nothing works. It is the share of three targets a design meets - metal 2-14 mm from the skin (target 90 % of the metal), following the arm (95 % of motion frames), reaching everyday poses (90 %) - minus a penalty for any pose where metal would touch the skin.</p>
@@ -140,7 +139,7 @@
 
   <section class="card" id="progress">
     <h2>Best score over time</h2>
-    <p class="muted">The best score any design has reached as the agents sweep (higher is better). The dashed line is today's 3-hinge chain.</p>
+    <p class="muted">The best score any design has reached as the agents sweep (higher is better).</p>
     <div class="chart" id="record" data-source="sweeps morphs" style="min-height:260px"></div>
   </section>
 
@@ -213,7 +212,7 @@ dash.calc('board', {
     const v = m.v_gap !== null && m.v_gap !== undefined, c = m.gap !== null && m.gap !== undefined, s = m.sweep_gap !== null && m.sweep_gap !== undefined;
     if (!v && !c && !s) return null;
     const p = v ? 'v_' : c ? '' : 'sweep_';
-    const state = m.is_baseline ? 'Bar to beat' : m.status === 'verified' ? 'Verified' : m.status === 'refuted' ? 'Refuted' : m.status === 'dead' ? (conv[m.id] === false ? 'Stopped early' : 'Dead end') : c ? 'Checking' : 'Sweeping';
+    const state = m.is_baseline ? 'Baseline' : m.status === 'verified' ? 'Verified' : m.status === 'refuted' ? 'Refuted' : m.status === 'dead' ? (conv[m.id] === false ? 'Stopped early' : 'Dead end') : c ? 'Checking' : 'Sweeping';
     const short = m.is_baseline ? "Today's 3-hinge chain" : String(m.name || m.id).split(/[:(;]| with | - /)[0].trim().slice(0, 44);
     const g = m[p + 'gap'];
     return { id: m.id, short, score: Math.max(0, Math.round((1 - g / 275) * 1000) / 10), gap: g, close: m[p + 'inband14'], follows: m[p + 'follow'], reaches: m[p + 'reach'], contact: m[p + 'contact'], state, is_baseline: !!m.is_baseline,
@@ -222,13 +221,12 @@ dash.calc('board', {
   }
 });
 dash.calc('leader', {
-  inputs: ['board', 'morphs'], title: 'Best design so far',
-  description: 'The highest-scoring design that is not the baseline and not a dead end, with the baseline score for comparison. Score = 100 x (1 - gap / 275), floored at 0. complexity = its simplicity number (lower = simpler; not part of the score).',
-  fn: (board, morphs) => {
+  inputs: ['board'], title: 'Best design so far',
+  description: 'The highest-scoring design that is not the baseline and not a dead end. Score = 100 x (1 - gap / 275), floored at 0. complexity = its simplicity number (lower = simpler; not part of the score).',
+  fn: (board) => {
     const b = board.find((r) => !r.is_baseline && !['Dead end', 'Refuted'].includes(r.state)) || {};
-    const base = morphs.find((m) => m.is_baseline) || {};
     const sc = (g) => (g == null ? null : Math.max(0, Math.round((1 - g / 275) * 1000) / 10));
-    return [{ id: b.id ?? null, short: b.short ?? null, score: sc(b.gap), state: b.state ?? null, base_score: sc(base.gap), delta: b.gap != null && base.gap != null ? Math.round((sc(b.gap) - sc(base.gap)) * 10) / 10 : null, complexity: b.complexity ?? null }];
+    return [{ id: b.id ?? null, short: b.short ?? null, score: sc(b.gap), state: b.state ?? null, complexity: b.complexity ?? null }];
   }
 });
 dash.calc('reqsum', {
@@ -250,8 +248,9 @@ function tipAt(tip, box, ev, text) {
 }
 function tipper(box) { let t = box.querySelector('.tip'); if (!t) { t = document.createElement('div'); t.className = 'tip'; t.hidden = true; box.appendChild(t); } return t; }
 
-function drawScatter(rows) {
+function drawScatter(all) {
   const box = document.getElementById('scatter'); box.querySelectorAll('svg').forEach((n) => n.remove());
+  const rows = all.filter((r) => !r.is_baseline);
   if (!rows.length) return;
   const W = Math.max(320, box.clientWidth), H = 340, m = { l: 48, r: 16, t: 12, b: 40 };
   const x = d3.scaleLinear([0, 1], [m.l, W - m.r]), y = d3.scaleLinear([0, 1], [H - m.b, m.t]);
@@ -262,14 +261,14 @@ function drawScatter(rows) {
   svg.append('g').attr('transform', `translate(${m.l},0)`).call(d3.axisLeft(y).ticks(5).tickFormat(pct)).attr('font-size', null).attr('font-family', null);
   svg.append('text').attr('x', (m.l + W - m.r) / 2).attr('y', H - 6).attr('text-anchor', 'middle').text('moves with the arm (average of follow and reach)');
   svg.append('text').attr('transform', `translate(12,${(H - m.b + m.t) / 2}) rotate(-90)`).attr('text-anchor', 'middle').text('metal 2-14 mm from skin');
-  const col = (r) => r.is_baseline ? 'var(--color-fg)' : r.state === 'Verified' ? 'var(--color-ok)' : r.state === 'Dead end' || r.state === 'Refuted' ? 'var(--cds-chart-muted, var(--color-fg-muted))' : dash.colors[0];
+  const col = (r) => r.state === 'Verified' ? 'var(--color-ok)' : r.state === 'Dead end' || r.state === 'Refuted' ? 'var(--cds-chart-muted, var(--color-fg-muted))' : dash.colors[0];
   const tip = tipper(box), mv = (r) => (r.follows + r.reaches) / 2;
-  const best = rows.filter((r) => !r.is_baseline && !['Dead end', 'Refuted'].includes(r.state))[0];
-  svg.append('g').selectAll('circle').data(rows).join('circle').attr('cx', (r) => x(mv(r))).attr('cy', (r) => y(r.close)).attr('r', (r) => (r === best || r.is_baseline ? 8 : 6))
+  const best = rows.filter((r) => !['Dead end', 'Refuted'].includes(r.state))[0];
+  svg.append('g').selectAll('circle').data(rows).join('circle').attr('cx', (r) => x(mv(r))).attr('cy', (r) => y(r.close)).attr('r', (r) => (r === best ? 8 : 6))
     .attr('fill', col).attr('fill-opacity', (r) => (r.state === 'Dead end' ? 0.45 : 0.9)).attr('stroke', 'var(--color-panel)').attr('stroke-width', 1.5)
     .on('mousemove', (ev, r) => tipAt(tip, box, ev, `${r.short} - score ${g1(r.score)} of 100 (${r.state}). Close to skin ${pct(r.close)}, follows ${pct(r.follows)}, reaches ${pct(r.reaches)}.`))
     .on('mouseleave', () => { tip.hidden = true; });
-  const lab = rows.filter((r) => r.is_baseline || r === best || r.close >= 0.7 || mv(r) >= 0.85).slice(0, 7);
+  const lab = rows.filter((r) => r === best || r.close >= 0.7 || mv(r) >= 0.85).slice(0, 7);
   const used = [];
   lab.forEach((r) => {
     const px = x(mv(r)), left = px > W - 190; let py = y(r.close) + 4;
@@ -283,7 +282,7 @@ function drawScatter(rows) {
 // corner (score 95+, fewest points). Scores under X0 sit on the left edge; 3 passive translations (not buildable) = x.
 function drawSimple(rows) {
   const box = document.getElementById('simp'); box.querySelectorAll('svg').forEach((n) => n.remove());
-  const pts = rows.filter((r) => r.complexity != null && r.score != null), X0 = 50;
+  const pts = rows.filter((r) => !r.is_baseline && r.complexity != null && r.score != null), X0 = 50;
   const under = pts.filter((r) => r.score < X0).length, nb = pts.filter((r) => r.passive_trans > 2).length;
   document.getElementById('simp-note').textContent = [`${pts.length} of ${rows.length} designs counted so far.`,
     under ? `${under} scoring under ${X0} sit on the left edge.` : '', nb ? 'x = three passive translations: not buildable.' : ''].filter(Boolean).join(' ');
@@ -299,22 +298,22 @@ function drawSimple(rows) {
   svg.append('g').attr('transform', `translate(${m.l},0)`).call(d3.axisLeft(y).ticks(5)).attr('font-size', null).attr('font-family', null);
   svg.append('text').attr('x', (m.l + W - m.r) / 2).attr('y', H - 6).attr('text-anchor', 'middle').text('score (higher is better)');
   svg.append('text').attr('transform', `translate(12,${(H - m.b + m.t) / 2}) rotate(-90)`).attr('text-anchor', 'middle').text('simplicity points (lower = simpler)');
-  const col = (r) => r.is_baseline ? 'var(--color-fg)' : r.state === 'Verified' ? 'var(--color-ok)' : r.state === 'Dead end' || r.state === 'Refuted' ? 'var(--cds-chart-muted, var(--color-fg-muted))' : dash.colors[0];
-  const live = pts.filter((r) => !r.is_baseline && !['Dead end', 'Refuted'].includes(r.state)).sort((a, b) => b.score - a.score);
+  const col = (r) => r.state === 'Verified' ? 'var(--color-ok)' : r.state === 'Dead end' || r.state === 'Refuted' ? 'var(--cds-chart-muted, var(--color-fg-muted))' : dash.colors[0];
+  const live = pts.filter((r) => !['Dead end', 'Refuted'].includes(r.state)).sort((a, b) => b.score - a.score);
   const best = live[0], px = (r) => x(Math.max(X0, r.score)), tip = tipper(box), nbk = (r) => r.passive_trans > 2;
   const tipText = (r) => `${r.short} - score ${g1(r.score)} of 100 (${r.state}). ${cxTip(r)}`;
   const order = [...pts].sort((a, b) => (a === best) - (b === best) || (a.state === 'Dead end') - (b.state === 'Dead end'));
-  svg.append('g').selectAll('circle').data(order.filter((r) => !nbk(r))).join('circle').attr('cx', px).attr('cy', (r) => y(r.complexity)).attr('r', (r) => (r === best || r.is_baseline ? 7 : 5))
+  svg.append('g').selectAll('circle').data(order.filter((r) => !nbk(r))).join('circle').attr('cx', px).attr('cy', (r) => y(r.complexity)).attr('r', (r) => (r === best ? 7 : 5))
     .attr('fill', col).attr('fill-opacity', (r) => (r.state === 'Dead end' || r.state === 'Refuted' ? 0.45 : 0.9)).attr('stroke', 'var(--color-panel)').attr('stroke-width', 1.5)
     .on('mousemove', (ev, r) => tipAt(tip, box, ev, tipText(r))).on('mouseleave', () => { tip.hidden = true; });
   svg.append('g').selectAll('path').data(order.filter(nbk)).join('path').attr('d', (r) => { const a = px(r), b = y(r.complexity), k = 4.5; return `M${a - k},${b - k}L${a + k},${b + k}M${a - k},${b + k}L${a + k},${b - k}`; })
     .attr('stroke', col).attr('stroke-width', 2).attr('stroke-linecap', 'round').attr('fill', 'none')
     .on('mousemove', (ev, r) => tipAt(tip, box, ev, tipText(r))).on('mouseleave', () => { tip.hidden = true; });
-  // labels: the bar to beat and the five best live designs (three on a phone), placed beside their dot without
-  // overlapping (a short tick joins a label moved off its dot's line)
-  const narrow = W < 480, lab = [pts.find((r) => r.is_baseline), ...live.slice(0, narrow ? 3 : 5)].filter(Boolean), placed = [], cw = 6.6;
+  // labels: the five best live designs (three on a phone), placed beside their dot without overlapping (a short tick
+  // joins a label moved off its dot's line)
+  const narrow = W < 480, lab = live.slice(0, narrow ? 3 : 5), placed = [], cw = 6.6;
   lab.forEach((r) => {
-    const t = r.is_baseline ? "today's 3-hinge chain" : r.short.slice(0, narrow ? 20 : 26).trim(), w = t.length * cw, ax = px(r), ay = y(r.complexity);
+    const t = r.short.slice(0, narrow ? 20 : 26).trim(), w = t.length * cw, ax = px(r), ay = y(r.complexity);
     for (const dy of [0, -14, 14, -28, 28, -42, 42, -56, 56]) for (const side of [1, -1]) {
       const x0 = side > 0 ? ax + 10 : ax - 10 - w, yb = ay + 4 + dy;
       if (x0 < m.l + 2 || x0 + w > W - m.r || yb - 11 < m.t || yb + 2 > H - m.b) continue;
@@ -437,13 +436,13 @@ function drawBoard(rows, mo) {
       if (r.passive_trans > 2) cx.classList.add('bad');
     } else { cx.textContent = '–'; cx.title = 'Not counted yet'; }
     td(meter(r.close, 0.9), 'cl'); td(meter(r.follows, 0.95), 'hide-sm'); td(meter(r.reaches, 0.9), 'hide-sm');
-    const p = document.createElement('span'); p.className = 'pill ' + (r.state === 'Verified' ? 'ver' : r.state === 'Dead end' || r.state === 'Refuted' ? 'dead' : r.state === 'Bar to beat' ? '' : 'run'); p.textContent = r.state; td(p);
+    const p = document.createElement('span'); p.className = 'pill ' + (r.state === 'Verified' ? 'ver' : r.state === 'Dead end' || r.state === 'Refuted' ? 'dead' : r.state === 'Baseline' ? '' : 'run'); p.textContent = r.state; td(p);
     tb.appendChild(tr);
   });
   moWatch(thumbs);
 }
 
-function drawRecord(sweeps, baseGap) {
+function drawRecord(sweeps) {
   const box = document.getElementById('record'); box.querySelectorAll('svg').forEach((n) => n.remove());
   const sc = (g) => Math.max(0, (1 - g / 275) * 100);
   const rec = sweeps.filter((s) => s.is_record && !s.passed_over && s.record_gap != null).map((s) => ({ t: et(s.t), v: sc(s.record_gap) })).sort((a, b) => a.t - b.t);
@@ -455,7 +454,6 @@ function drawRecord(sweeps, baseGap) {
   svg.append('g').attr('transform', `translate(0,${H - m.b})`).call(d3.axisBottom(x).ticks(Math.max(2, Math.floor(W / 120))).tickFormat(d3.utcFormat('%H:%M'))).attr('font-size', null).attr('font-family', null);
   svg.append('g').attr('transform', `translate(${m.l},0)`).call(d3.axisLeft(y).ticks(5)).attr('font-size', null).attr('font-family', null);
   svg.append('text').attr('x', W - m.r).attr('y', y(100) + 12).attr('text-anchor', 'end').text('goal 100');
-  if (baseGap != null) { const b = sc(baseGap); svg.append('line').attr('x1', m.l).attr('x2', W - m.r).attr('y1', y(b)).attr('y2', y(b)).attr('stroke', 'var(--cds-chart-reference, var(--color-fg-muted))').attr('stroke-dasharray', '4 4'); svg.append('text').attr('x', W - m.r).attr('y', y(b) + 16).attr('text-anchor', 'end').text("today's 3-hinge chain"); }
   const pts = [...rec, { t: now, v: rec[rec.length - 1].v }];
   svg.append('path').attr('d', d3.line().curve(d3.curveStepAfter).x((p) => x(p.t)).y((p) => y(p.v))(pts)).attr('fill', 'none').attr('stroke', dash.colors[0]).attr('stroke-width', 2).attr('stroke-linejoin', 'round');
   const last = rec[rec.length - 1]; svg.append('circle').attr('cx', x(last.t)).attr('cy', y(last.v)).attr('r', 4).attr('fill', dash.colors[0]);
@@ -559,14 +557,12 @@ dash.onData(() => {
   }
   if (okd(L) && L.data[0] && L.data[0].score != null) {
     const l = L.data[0];
-    document.getElementById('lede').textContent = l.delta > 0
-      ? `${l.short} leads with a score of ${g1(l.score)} out of 100, ${g1(l.delta)} points above today's 3-hinge chain (${g1(l.base_score)}). Status: ${l.state.toLowerCase()}. No design meets every target yet.`
-      : `No design beats today's 3-hinge chain (score ${g1(l.base_score)} of 100) yet; the closest is ${l.short} at ${g1(l.score)}.`;
+    document.getElementById('lede').textContent = `${l.short} leads with a score of ${g1(l.score)} out of 100. Status: ${l.state.toLowerCase()}. No design meets every target yet.`;
   }
-  if (okd(L) && L.data[0]) { const l = L.data[0]; document.querySelector('#kpi-best .big').textContent = l.score == null ? '—' : g1(l.score); document.getElementById('kpi-base').textContent = l.base_score == null ? '—' : g1(l.base_score); document.getElementById('kpi-best-name').textContent = l.short ? `${l.short} (${String(l.state).toLowerCase()})` : '—'; document.getElementById('kpi-best-cx').textContent = l.complexity == null ? '' : `simplicity ${cxf(l.complexity)} points (lower = simpler)`; }
+  if (okd(L) && L.data[0]) { const l = L.data[0]; document.querySelector('#kpi-best .big').textContent = l.score == null ? '—' : g1(l.score); document.getElementById('kpi-best-name').textContent = l.short ? `${l.short} (${String(l.state).toLowerCase()})` : '—'; document.getElementById('kpi-best-cx').textContent = l.complexity == null ? '' : `simplicity ${cxf(l.complexity)} points (lower = simpler)`; }
   const MOT = dash.data('motion'), mo = okd(MOT) && Array.isArray(MOT.data) ? motionPrep(MOT.data) : null;
   if (okd(B)) { const rows = B.data.filter((r) => r.empty !== true); drawScatter(rows); drawSimple(rows); drawBoard(rows, mo); }
-  if (okd(S) && okd(M)) drawRecord(S.data.filter((r) => r.empty !== true), (M.data.find((m) => m.is_baseline) || {}).gap);
+  if (okd(S)) drawRecord(S.data.filter((r) => r.empty !== true));
   if (okd(E)) drawEvents(E.data.filter((r) => r.empty !== true));
   if (okd(R)) drawReqs(R.data.filter((r) => r.empty !== true));
   if (okd(RS) && RS.data[0]) { const q = RS.data[0]; document.getElementById('reqline').textContent = `${q.pass} of ${q.total} pass on the best judged design (${q.design}). Green = pass, red = fail, dashed = not measured yet.`; }
