@@ -6,7 +6,7 @@
  "active_dof": 3,
  "passive_dof": 2,
  "passive_translations": 0,
- "status": "screened",
+ "status": "verified",
  "t_ideated": null,
  "t_screened": "2026-10-16T03:32:47Z",
  "reach": 0.6937,
@@ -15,15 +15,15 @@
  "inband10": 0.5323,
  "contact": 0.0,
  "gap": 20.63,
- "v_reach": null,
- "v_follow": null,
- "v_inband14": null,
- "v_inband10": null,
- "v_gap": null,
+ "v_reach": 0.6056,
+ "v_follow": 1.0,
+ "v_inband14": 0.9043,
+ "v_inband10": 0.5376,
+ "v_gap": 30.35,
  "n_configs": 7199,
  "verdict": "screened: 20.63 (score 92.50) on Bench(60,160) fast, converged; worn FROZEN on Bench(110,360) exact 30.35 (score 88.96) - 11-12 points better than the zero-passive spherical 3R (41.73) and the 2-slide leader (42.59) with 0 passive translations (2 iglidur pins, 5 mm stack), but short of 90 on the verification bench: the whole gap is reach (J2 fold); freed b3 does not pay (37.04 at b3 0.54)",
  "limiter": "J2 fold = the J1-J3 axis-angle window 2 min(a1, a2) - 20 (~60 deg at a1 ~40) vs 27-141 deg needed (22-146 overhead): reach 0.694 fit -> 0.606 verification, 0.25 overhead; widening a1 moves hub 2 onto skin it cannot clear (93-115 mm off GH, measured; wide LHS best 36.26)",
- "note": "Bench(60,160) fast fit, seed VModel rules + knee part checks (5 mm pin stack); gate (7199 configs): gain 0.25 over the 2nd half, 0.00 over the last third, top-5 spread 0.06 score points -> converged; frozen exact at k4598: near-touch min 0.02 mm, metal<1mm-as-contact gap 38.41; MVP2: knee is a two-force member, J3 torque transmission 0.46-1.38 (never lost), pins need hub-sized bearings for the 25 N m MVP2 moment",
+ "note": "Bench(60,160) fast fit, seed VModel rules + knee part checks (5 mm pin stack); gate (7199 configs): gain 0.25 over the 2nd half, 0.00 over the last third, top-5 spread 0.06 score points -> converged; frozen exact at k4598: near-touch min 0.02 mm, metal<1mm-as-contact gap 38.41; MVP2: knee is a two-force member, J3 torque transmission 0.46-1.38 (never lost), pins need hub-sized bearings for the 25 N m MVP2 moment | VERIFIED 2026-10-16 (independent verifier docs/concepts/verify/skin-normal-3r-pin-knee.py, Bench(110,360) exact, frozen shape from Bench(60,160) fast): v_gap 30.35 (score 88.96; reach 0.6056, follow 1.0, ib14 0.9043, ib10 0.5376, contact 0.0091), reproduced to the digit with added checks (independent 3D closure: hub-3 centre / pin a / pin b 0.000 mm, J3 and pin axes <= 0.022 deg; knee vs hub 3's link-2 half >= 24.3 mm at 1 mm rule; E boss vs hubs 1-2, L1, L2 >= 24.7 mm) - 0 poses removed; champion same bench and checks (offset-skin-normal-3r verifier, champbig_frozen, re-run): 66.97 (near1 71.2); knee near1 38.41 (16 poses < 1 mm, min 0.02 mm at arm-at-side), overhead >=140 reach 0.25",
  "doc": "docs/concepts/skin-normal-3r-pin-knee.md",
  "model_file": "docs/concepts/models/skin-normal-3r-pin-knee.py",
  "best_k": 4598,
@@ -93,5 +93,6 @@
   "F1_b3_0.536": 37.04,
   "k3326_D2": 31.35,
   "k3326_D2_angmin20": 31.24
- }
+ },
+ "v_contact": 0.0091
 }
