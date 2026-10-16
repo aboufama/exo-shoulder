@@ -1,0 +1,103 @@
+{
+ "id": "roller-longdyad-knuckle-3r",
+ "status": "screened",
+ "v_gap": null,
+ "complexity": 43.75,
+ "verdict": "watch",
+ "reasons": [
+  "held_out: no verified bench gap on the row",
+  "near_touch: no near-touch measurement on file (rule since 2026-10-16: claims report plain and near-touch)",
+  "dominance: cannot compare with sidecar-longdyad-knuckle-3r at 2 mm",
+  "continuity: passive / sprung / sensed coordinates but no continuity flood on file (rule 2026-10-16)",
+  "fold_margin: no min-th margin over taken poses on file (rule: each claim reports it)",
+  "idle: a drive is declared but no range of it over the taken poses is on file"
+ ],
+ "checks": [
+  {
+   "check": "held_out",
+   "level": "watch",
+   "reason": "no verified bench gap on the row"
+  },
+  {
+   "check": "fast_frozen",
+   "level": "ok",
+   "reason": "no pair"
+  },
+  {
+   "check": "near_touch",
+   "level": "watch",
+   "reason": "no near-touch measurement on file (rule since 2026-10-16: claims report plain and near-touch)"
+  },
+  {
+   "check": "dominance",
+   "level": "watch",
+   "reason": "cannot compare with sidecar-longdyad-knuckle-3r at 2 mm"
+  },
+  {
+   "check": "continuity",
+   "level": "watch",
+   "reason": "passive / sprung / sensed coordinates but no continuity flood on file (rule 2026-10-16)"
+  },
+  {
+   "check": "fold_margin",
+   "level": "watch",
+   "reason": "no min-th margin over taken poses on file (rule: each claim reports it)"
+  },
+  {
+   "check": "idle",
+   "level": "watch",
+   "reason": "a drive is declared but no range of it over the taken poses is on file",
+   "spans": []
+  },
+  {
+   "check": "sampling",
+   "level": "ok",
+   "reason": "per-part sample counts not on file (fractions only) (row frozen)",
+   "parts": {
+    "hub1": 0.999,
+    "hubK": 0.992,
+    "hub2": 0.953,
+    "hub3": 0.739,
+    "E": 0.966,
+    "boss": 0.988,
+    "pad": 1.0,
+    "knee": 0.941,
+    "crank": 0.797,
+    "roller": 0.935,
+    "horn": 0.957,
+    "L1a": 0.981,
+    "L1b": 0.931,
+    "L2": 0.736
+   }
+  },
+  {
+   "check": "complexity",
+   "level": "ok",
+   "reason": "recomputed 43.75 vs row 43.75; info: 3 active + 2 sensed passive coordinates = 5 read coordinates (cuff-side passives are outside the count by the user's ruling)",
+   "recomputed": 43.75,
+   "row": 43.75
+  },
+  {
+   "check": "reporting",
+   "level": "ok",
+   "reason": "row, verifier files and dashboard agree"
+  },
+  {
+   "check": "judge_change",
+   "level": "ok",
+   "reason": "no bench / judge / metric file changed in the 2 commits that touched the row"
+  },
+  {
+   "check": "rules",
+   "level": "ok",
+   "reason": "O20, margin >= 5, translations <= 2 as recorded"
+  }
+ ],
+ "remeasured": {
+  "bench": false,
+  "held": false
+ },
+ "verifier_files": [],
+ "git": "c6c6947",
+ "t": "2026-10-16T22:44:03Z"
+}

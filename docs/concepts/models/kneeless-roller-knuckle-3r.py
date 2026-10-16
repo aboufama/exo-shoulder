@@ -221,6 +221,59 @@ def redteam_gh(par=None, nc=110, nw=360, mags=(3.0, 5.0, 10.0), liner=3.0):
     return out
 
 
+def redteam(par, nc=110, nw=360):
+    """red team on the frozen exact Bench(nc, nw) wear (fit Bench(60,160) fast, shape frozen): the 12 lowest-metal taken
+    poses with their lowest parts, the parts behind every contact / skin / parts pose, per-part minima at the named
+    red-team poses (overhead axial -135 / 0, across the body, extreme internal / external rotation, behind the back,
+    abduction over the deltoid crest), and the GH-offset misfit (redteam_gh)"""
+    P = _clamp(dict(PARAMS, **par))
+    old = os.environ.pop("CB_EXACT", None)
+    try: B1 = CB.Bench(n_clip=60, n_ws=160)
+    finally:
+        if old is not None: os.environ["CB_EXACT"] = old
+    M1 = SC.SCModel(B1, dict(P)); M1.run(); P2 = dict(M1.p); P2["m_fix"] = [float(x) for x in M1.D.m]
+
+    class Frozen(SC.SCModel):
+        def fit(self):
+            for a in ("g", "fr", "geo", "rigid", "link_pts", "f", "fK", "tr", "zb", "_tr_fit", "cyl", "box", "strap", "cyl_surf", "Emid",
+                      "Hneed", "Lneed", "hEx", "_Ex", "_rod_info", "_viz_rod", "_crown_ok", "_scg", "_sc_info"):
+                if hasattr(M1, a): setattr(self, a, getattr(M1, a))
+            self._sc = None
+            self.contact = list(M1.contact); self.poses_fit = np.nonzero(self.kin_ok)[0]; self.drop = np.zeros(len(self.poses_fit), bool)
+            self._truncate()
+    B = CB.Bench(n_clip=nc, n_ws=nw); M = Frozen(B, P2); r = M.run()
+    res = {"frozen": {k: r[k] for k in ("gap", "reach", "follow", "inband14", "contact")}, "why": r.get("why")}
+    mem_name = {}
+    for nm, (m, X) in M.rigid.items(): mem_name.setdefault(m, []).append(nm)
+    def parts_at(i):
+        d = {}
+        for nm, (m, X) in M.rigid.items():
+            if len(X): d[nm] = round(float(B.dist(i, M.world(m, i, X)).min()), 2)
+        for m, X in M.contact:
+            if len(X):
+                k = "edge/top m%d (%s)" % (m, "/".join(mem_name.get(m, ["?"]))); d[k] = min(d.get(k, 99.0), round(float(B.dist(i, M.world(m, i, X)).min()), 2))
+        return dict(sorted(d.items(), key=lambda kv: kv[1])[:4])
+    pose = lambda i: {k: B.poses[i].get(k) for k in ("plane", "elev", "axial")}
+    taken = [i for i in range(len(B.idx)) if B.res[i] is not None and float(np.min(B.res[i])) >= 0]
+    res["lowest"] = [dict(i=i, pose=pose(i), kind=B.kind[i], mm=round(float(np.min(B.res[i])), 2), parts=parts_at(i))
+                     for i in sorted(taken, key=lambda i: float(np.min(B.res[i])))[:12]]
+    res["lost_to_metal"] = [dict(i=i, pose=pose(i), kind=B.kind[i], why=str(M.why[i]), parts=parts_at(i))
+                            for i in range(len(B.idx)) if M.why[i] in ("contact", "skin", "parts") or (B.res[i] is not None and float(np.min(B.res[i])) < 0)]
+    ws = [i for i in range(len(B.idx)) if B.kind[i] == "ws"]
+    def near(pl, el, ax):
+        return min(ws, key=lambda i: abs(B.poses[i]["plane"] - pl) + abs(B.poses[i]["elev"] - el) + abs(((B.poses[i]["axial"] - ax + 180) % 360) - 180))
+    named = {"overhead axial -135": (0, 150, -135), "overhead axial 0": (0, 150, 0), "overhead plane 90 axial -135": (90, 150, -135),
+             "across the body (plane 120, elev 90)": (120, 90, 0), "across the body, extreme internal rotation": (120, 60, -150),
+             "behind the back (plane -60, elev 45, axial -120)": (-60, 45, -120), "abduction 90 over the deltoid crest": (0, 90, 0),
+             "extreme external rotation (plane 30, elev 30, axial 150)": (30, 30, 150)}
+    res["named"] = {}
+    for nm, (pl, el, ax) in named.items():
+        i = near(pl, el, ax); w = str(M.why[i]) or "taken"
+        res["named"][nm] = dict(i=i, pose=pose(i), status=w, parts=parts_at(i) if w in ("taken", "contact", "skin", "parts") else None)
+    res["gh_offset"] = redteam_gh(par)
+    return res
+
+
 def viz_export(par): return RF.viz_export(_clamp(dict(PARAMS, **par)))
 
 
@@ -229,6 +282,10 @@ if __name__ == "__main__":
     par = json.loads(sys.argv[2]) if len(sys.argv) > 2 else {}
     if mode == "viz":
         print(json.dumps(viz_export(par), default=float)); sys.exit()
+    if mode == "redteam":
+        out = redteam(par)
+        if len(sys.argv) > 3: json.dump(out, open(sys.argv[3], "w"), indent=1, default=float)
+        print(json.dumps(out["frozen"])); sys.exit()
     if mode == "redteam_gh":
         print(json.dumps(redteam_gh(par), default=float)); sys.exit()
     if mode in ("frozen", "held", "flood"):
