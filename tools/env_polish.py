@@ -253,7 +253,12 @@ def claim(fit, wb, which, outp):
     assert FIT.mode == "fast", f"fit bench {fit} not fast"
     WEAR = {"held": held0, "env": lambda: EB.bench("env", exact=True)}.get(wb)
     R.PV.fast_bench = lambda nc, nw: FIT                     # wear() and conn() fit on this bench
-    if WEAR is not None: W = WEAR(); R.PV.held_bench = lambda: W; wbh = "held"
+    if WEAR is not None:
+        W = WEAR(); wbh = "held"
+        if os.environ.get("ENVP_SMOKE"):                     # local smoke test: a few poses of the wear bench
+            n = int(os.environ["ENVP_SMOKE"]); sel = [i for i, k in enumerate(W.kind) if k == "clip"][:n] + [i for i, k in enumerate(W.kind) if k == "ws"][::40][:n]
+            W.idx = np.asarray(W.idx)[sel]; W.kind = [W.kind[i] for i in sel]; W.clip = [W.clip[i] for i in sel]; W.poses = [W.poses[i] for i in sel]; W.res = [None] * len(sel)
+        R.PV.held_bench = lambda: W
     else: W = None; wbh = "bench"
     info = dict(fit=fit, wear=wb, fit_key=FIT.key, fit_mode=FIT.mode)
     if which != "H1":

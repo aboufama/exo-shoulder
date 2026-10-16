@@ -1,0 +1,28 @@
+[
+ {
+  "cmd": "python3 tools/env_bench.py assemble env && ( flock 7; [ -f /tmp/bench-env-72d21f5aa2e5-env/meta.json ] || { rm -rf /tmp/bench-env-72d21f5aa2e5-env.tmp && mkdir -p /tmp/bench-env-72d21f5aa2e5-env.tmp && cp /runpod-volume/exo-farm/shared/bench/env-72d21f5aa2e5-env/grid.npy /runpod-volume/exo-farm/shared/bench/env-72d21f5aa2e5-env/skins.npy /tmp/bench-env-72d21f5aa2e5-env.tmp/ && cp /runpod-volume/exo-farm/shared/bench/env-72d21f5aa2e5-env/meta.json /tmp/bench-env-72d21f5aa2e5-env.tmp/ && rm -rf /tmp/bench-env-72d21f5aa2e5-env && mv /tmp/bench-env-72d21f5aa2e5-env.tmp /tmp/bench-env-72d21f5aa2e5-env; } ) 7>/tmp/bench-env-72d21f5aa2e5-env.lock; mkdir -p .cache/concept_bench && ln -sfn /tmp/bench-env-72d21f5aa2e5-env .cache/concept_bench/env-72d21f5aa2e5-env && python3 tools/env_bench.py validate env",
+  "tag": "ebf-asm-env",
+  "include": [
+   "tools/concept_bench.py",
+   "tools/env_bench.py",
+   "pipeline/avg",
+   "data/raw/split.json",
+   "pipeline/conformal/band_poses_wsf.b64",
+   "docs/research/minarc_final_polish/env_poses.npz"
+  ],
+  "base": false
+ },
+ {
+  "cmd": "python3 tools/env_bench.py assemble envsel && ( flock 7; [ -f /tmp/bench-env-fc171830d1d7-envsel/meta.json ] || { rm -rf /tmp/bench-env-fc171830d1d7-envsel.tmp && mkdir -p /tmp/bench-env-fc171830d1d7-envsel.tmp && cp /runpod-volume/exo-farm/shared/bench/env-fc171830d1d7-envsel/grid.npy /runpod-volume/exo-farm/shared/bench/env-fc171830d1d7-envsel/skins.npy /tmp/bench-env-fc171830d1d7-envsel.tmp/ && cp /runpod-volume/exo-farm/shared/bench/env-fc171830d1d7-envsel/meta.json /tmp/bench-env-fc171830d1d7-envsel.tmp/ && rm -rf /tmp/bench-env-fc171830d1d7-envsel && mv /tmp/bench-env-fc171830d1d7-envsel.tmp /tmp/bench-env-fc171830d1d7-envsel; } ) 7>/tmp/bench-env-fc171830d1d7-envsel.lock; mkdir -p .cache/concept_bench && ln -sfn /tmp/bench-env-fc171830d1d7-envsel .cache/concept_bench/env-fc171830d1d7-envsel && python3 tools/env_bench.py validate envsel",
+  "tag": "ebf-asm-envsel",
+  "include": [
+   "tools/concept_bench.py",
+   "tools/env_bench.py",
+   "pipeline/avg",
+   "data/raw/split.json",
+   "pipeline/conformal/band_poses_wsf.b64",
+   "docs/research/minarc_final_polish/env_poses.npz"
+  ],
+  "base": false
+ }
+]
