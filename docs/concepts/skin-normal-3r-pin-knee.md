@@ -24,6 +24,25 @@
    clearance), the leader's verifier harness pattern (docs/concepts/verify/offset-skin-normal-3r.py: frozen shape worn
    on Bench(110,360) exact, near-touch, overhead split, crowns), and the red-team pose list at the end of this file.
 
+### Deeper version, round-3 lead note (answered 02:05 UTC, before the resumed sweep)
+
+* **What the expert does beyond the spec here.** (i) Test the one freedom the knee newly buys - b3 is no longer capped
+  by slide travel - on the exact bench, not only fast; (ii) check what a knee adds that a slide stage did not: a MOVING
+  body (the knee link sweeps up to lE + lc around hub 3), so the swept-link pairs (knee vs hub 3, knee vs the E strap,
+  knee and pad vs link 2) are part-part checks at every pose (R16); (iii) write the MVP2 moment path: the knee link is
+  a two-force member, so J3's torque reaches the arm as a force along the knee link - measure the transmission ratio per
+  pose instead of assuming it; the out-of-plane (elevation) force crosses the pins as thrust + a tilting moment
+  (lever = lc) that the miniature guides could not carry; (iv) attack the measured limiter (the J1-J3 axis-angle window,
+  i.e. the J2 fold) directly before calling anything converged.
+* **Rawest material.** The per-pose J1-J3 axis angle theta = angle(u1, Q u3) over the 360 workspace poses of
+  Bench(110,360) (no digested reach number), the posed skin under hub 2 when its seat moves, the drift s = Q^T t3 per
+  pose (knee sizing), the 10 fps fit clips (knee branch continuity).
+* **Methods.** IK-only maps of the fold window (no distances, so cheap and exact), closed-form two-circle knee, the bench
+  (fast grid for the search, CB_EXACT=1 for the claim), CMA-ES on the farm (tools/concept_cma.py, one job per stream,
+  `--bench-cache`), the frozen-shape protocol (fit on Bench(60,160) fast, wear on Bench(110,360) exact).
+* **Outside checks.** tools/concept_bench.py, the seed VModel rules, the `frozen` audit (near-touch incl. crowns,
+  overhead split), the red-team pose groups below, and the round-3 verifier.
+
 ## Spec corrections (said, then built)
 
 * **Stack.** The judge's emulation thinned the leader's slide stage (rail/carriage heights 3/3); the real knee has no
