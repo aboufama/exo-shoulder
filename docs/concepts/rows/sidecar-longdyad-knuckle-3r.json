@@ -6,7 +6,7 @@
  "active_dof": 3,
  "passive_dof": 6,
  "passive_translations": 0,
- "status": "screened",
+ "status": "verified",
  "t_ideated": null,
  "t_screened": "2026-10-16T19:06:44Z",
  "reach": 0.8,
@@ -15,11 +15,11 @@
  "inband10": 0.5291,
  "contact": 0.0,
  "gap": 10.3,
- "v_reach": null,
- "v_follow": null,
- "v_inband14": null,
- "v_inband10": null,
- "v_gap": null,
+ "v_reach": 0.725,
+ "v_follow": 1.0,
+ "v_inband14": 0.8966,
+ "v_inband10": 0.5336,
+ "v_gap": 18.91,
  "n_configs": 7267,
  "complexity": 49.0,
  "mechanism": {
@@ -235,5 +235,54 @@
  },
  "limiter": "REACH, unchanged from the lead: frozen reach 0.725 (lead 0.728), overhead 8/28, fold 86 of 360. Fit-bench wall split at the best: law end 15 (the lobe skirt, th 119.3; lift-off at longer dyads), m3e 4, folded 7, mid 4. The stretched poses past th ~132 need a1e >= th - a2 + 5 = 76-100 at a2 62, beyond any stop B <= 75: the a2 wall, not the K dyad. Stop B (a1max) never binds: every cell measured identical at a1max -3 deg. The longer dyad also needs a larger K opening, and the strap-level RSSR's transmission angle falls with dK (36 -> 22 deg as bk2 goes 37.6 -> 47 at zero crank phase); phasing the crank to fix it swings the rod into hub 2 past dK ~42. So the CMA walks bk2 44-47 back to 39-41. In-band 0.897 frozen: hub 3 0.60 and L2 0.75 are now the parts out of band; the drive is 0.89-0.96.",
  "verdict": "SCREENED, a candidate for the verifier. Best self-measured 3-active result so far: frozen exact Bench(110,360) plain 18.91 (score 93.12), near-touch 20.00 / 34.03 at 2 mm, held out 22.67 (near 25.75). Same protocol, the verified lead is 22.82 / 24.46 / 44.08, held out 26.75 / 29.39. 0 passive translations, complexity 49 (= the lead). Most of the gain is the strap-level sidecar (pick 1's lever; its lead-dyad control D measures 19.97 frozen). This row's own lever, the longer link 1b (bk2 39.2), adds 1.06 plain / 1.61 near-touch frozen (fold 91 -> 86). The asked-for bk2 42-48 / a1max 66-75 does not survive the CMA. Score 93.1 on the claim protocol; 95 needs the reach half (pick 3's a2 lever).",
- "note": "Model on the verified lead's module (frontload-lobe-stopb-knuckle-3r.py, per-t gated linear law) with the sidecar metal per pose: bell crank (MR63ZZ pair, pin in link 1b, boss stacked on link 1b + 0.15, arm 3 x 6 joggled to link 1b's level where clear over the swing), O3 Ti rod + M2 ball links over the arm / horn tops, horn lug of link 1a at hub K. The RSSR loop is closed per bench pose (rod = member 8, crank = member 9). The drive's usable range (transmission >= 30 deg, rod / crank >= 1 mm off hub 2 and link 1b) truncates every bench. Gate grid (lead seats): bk2 38 -> 47 moves fold 30 -> 25-26 and the law end th 123.8 -> 132.1, but reach +0.0125 at most; a1max -3 identical in every cell; wide-dyad 35/45/75 contact 0.12 (dead); ball links under the arm put the rod into the skin (110 of 160 poses). Search: farm CMA x8 on the near-touch gap, 7248 configs; A1 10.30 fast (gate 0.29 / 0.13 / 0.01 score pts), E 11.07, G 11.57, A2 11.60, B 12.05, F 12.59, C 13.50, control D (lead dyad basin) 10.63. Red team: horn ball-link socket 1.37 mm off hub K's housing (tightest pair); near-touch CMA parks the horn at 1.00 mm and the crank at 1.24 mm; drive range ends at dK 43.0 (rod vs hub 2) vs 38.1 taken; transmission >= 38.8; ratio 0.74-0.88 (small-angle 0.90); crest 10.16; K slop 0.19 deg per 0.05 mm of play. Untuned seeds: frozen 20.46 (gam 0) / 21.06 (gam +15, before the range rule: ROD-hub2 lost 8 frozen / 24 held-out poses)."
+ "note": "Model on the verified lead's module (frontload-lobe-stopb-knuckle-3r.py, per-t gated linear law) with the sidecar metal per pose: bell crank (MR63ZZ pair, pin in link 1b, boss stacked on link 1b + 0.15, arm 3 x 6 joggled to link 1b's level where clear over the swing), O3 Ti rod + M2 ball links over the arm / horn tops, horn lug of link 1a at hub K. The RSSR loop is closed per bench pose (rod = member 8, crank = member 9). The drive's usable range (transmission >= 30 deg, rod / crank >= 1 mm off hub 2 and link 1b) truncates every bench. Gate grid (lead seats): bk2 38 -> 47 moves fold 30 -> 25-26 and the law end th 123.8 -> 132.1, but reach +0.0125 at most; a1max -3 identical in every cell; wide-dyad 35/45/75 contact 0.12 (dead); ball links under the arm put the rod into the skin (110 of 160 poses). Search: farm CMA x8 on the near-touch gap, 7248 configs; A1 10.30 fast (gate 0.29 / 0.13 / 0.01 score pts), E 11.07, G 11.57, A2 11.60, B 12.05, F 12.59, C 13.50, control D (lead dyad basin) 10.63. Red team: horn ball-link socket 1.37 mm off hub K's housing (tightest pair); near-touch CMA parks the horn at 1.00 mm and the crank at 1.24 mm; drive range ends at dK 43.0 (rod vs hub 2) vs 38.1 taken; transmission >= 38.8; ratio 0.74-0.88 (small-angle 0.90); crest 10.16; K slop 0.19 deg per 0.05 mm of play. Untuned seeds: frozen 20.46 (gam 0) / 21.06 (gam +15, before the range rule: ROD-hub2 lost 8 frozen / 24 held-out poses). | VERIFIED 2026-10-16 ~20:20 UTC (skeptic, docs/concepts/verify/sidecar-longdyad-knuckle-3r.py): frozen exact Bench(110,360) 18.91 reproduced exactly (score 93.12), held out 22.67; added checks (world RSSR closure, M2 ball-link tilt <= 30, real lobe pressure angle <= 45) remove 0 poses. Champion same bench 75.94 (risley-turret table; the added checks do not apply to a rodless 3R). Open CAD items: ball centre 3 mm over the arm is the optimistic end (+0.39 / +0.54 fast at 4 / 4.5 mm); the crank's short arm + follower are unmodelled metal and the lobe (r 7.7-10.2) sits inside hub 2's O20 housing radius on link 1b (inherited from the verified lead). Gain over the verified lead 22.82 -> 18.91 (3.91, mostly the sidecar drive; the longdyad lever alone ~1.06).",
+ "verification": {
+  "t": "2026-10-16T20:20:00Z",
+  "harness": "docs/concepts/verify/sidecar-longdyad-knuckle-3r.py",
+  "bench": "Bench(110,360) exact, frozen shape fit on Bench(60,160) fast (claim's protocol, farm)",
+  "v_gap": 18.91,
+  "score": 93.12,
+  "contact": 0.0107,
+  "near1": 20.0,
+  "near2": 34.03,
+  "min_metal_mm": 0.28,
+  "overhead140": {
+   "reach": 0.2857,
+   "ws": 28,
+   "inband14": 0.8662
+  },
+  "lost": {
+   "fold": 86,
+   "slide": 7,
+   "parts": 2,
+   "contact": 4
+  },
+  "held_out": {
+   "gap": 22.67,
+   "reach": 0.6901,
+   "inband14": 0.8947,
+   "contact": 0.0115,
+   "near1": 25.75,
+   "near2": 37.24
+  },
+  "flood_full": 18.91,
+  "flood_knn": 21.72,
+  "added_checks": {
+   "rssr_closure_max_mm": 0.0,
+   "balllink_tilt_max_deg": {
+    "crank": 10.0,
+    "horn": 21.8,
+    "limit": 30
+   },
+   "lobe_pressure_angle_real_max_deg": 39.11,
+   "pa_limit": 45,
+   "poses_failing": 0
+  },
+  "zb_sensitivity_fast": {
+   "3.0": 10.3,
+   "4.0": 10.69,
+   "4.5": 10.84
+  },
+  "champion_same_bench": 75.94
+ }
 }

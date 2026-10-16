@@ -2541,7 +2541,7 @@
   "name": "Sidecar drive on a longer K dyad: link 1b lengthened (bk2 42-48), stop B raised toward a1max 70-75 (merged with the wide-dyad 35/45 lever)",
   "family": "slaved knuckle, strap-level drive + stretched-wall lever",
   "lens": "round8:strap-level-drive x window-geometry (merged from wide-dyad-knuckle-3r)",
-  "status": "screened",
+  "status": "verified",
   "t_ideated": "2026-10-16T18:20:09Z",
   "source": "round 8 judge (docs/concepts/round8_ideation.md)",
   "merged_from": [

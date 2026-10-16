@@ -253,3 +253,43 @@ Full grid: 18.91 with 0 poses dropped; every forced (K-open) pose is connected (
 21.72 (10 dropped). Bench grid: 43.40. The lead on the same protocol scores full 22.82, knn 25.63, bench grid 46.09.
 The fold margin follows the kit rule: msub and m3e stay >= 5 deg of th in every taken state, with physical q2
 dowels, as the lead.
+
+## Verification (independent skeptic, 2026-10-16 ~20:20 UTC)
+
+Harness: `docs/concepts/verify/sidecar-longdyad-knuckle-3r.py`. It loads the claim's model unchanged and reproduces the
+claim's frozen protocol: fit on Bench(60,160) fast, freeze the shape, wear it on Bench(110,360) exact. Both runs went to
+the farm. It adds three checks on every taken pose, which the claim did not have:
+
+1. **RSSR closure in the world frame.** The rod body (member 8) must meet the horn ball on link 1a (member 1) and the
+   crank-tip ball (member 9). Max error is 0.000 mm at both ends. The sign of the K opening matches the drive side on
+   all 75 driven fit poses.
+2. **M2 ball-link tilt.** The limit is <= 30 deg, the acromial-rocker-3r rule. Measured maxima are 10.0 deg at the crank
+   and 21.8 deg at the horn (95th percentile 19.1).
+3. **Real lobe pressure angle.** The lobe is cut to the exact RSSR phi(dK). The real ratio is 0.82-0.98 of r_h/La over
+   the taken range (the claim gave 0.35-0.68, which refers to other cells). The real pressure angle peaks at 39.1 deg,
+   inside the 45 deg limit.
+
+No pose fails any of the added checks.
+
+| | gap | score | reach | follow | in-band14 | in-band10 | contact | near-touch 1 / 2 mm | overhead reach |
+|---|---|---|---|---|---|---|---|---|---|
+| **verified, Bench(110,360) exact, frozen** | **18.91** | 93.12 | 0.725 | 1.0 | 0.897 | 0.534 | 0.011 | 20.00 / 34.03 | 8/28 |
+| held out, frozen | 22.67 | 91.76 | 0.690 | 1.0 | 0.895 | 0.532 | 0.012 | 25.75 / 37.24 | 18/71 |
+| champion spherical 3R, same bench | 75.94 | 72.39 | | | | | | | |
+
+Lost workspace poses: fold 86, slide 7, contact 4, parts 2. The full-grid flood fill keeps the static number (18.91, 0
+dropped); the kNN graph gives 21.72. The lowest metal over taken poses is 0.28 mm.
+
+**Verdict: VERIFIED, not refuted.** It is 3.91 better than the verified lead (22.82) on the same protocol, and it holds
+out (22.67 vs 26.75). Hard rules hold: 3 active DOF, K slaved by the lobe and the RSSR (determined), 0 passive
+translations, no gears, pulleys or cables, and every joint is a catalogue part.
+
+**Open items for the CAD.** These do not refute the claim, but the numbers are optimistic by about these amounts:
+- **Ball centre height.** The model puts the ball centre 3 mm over the arm and horn tops, the low end for an M2 ball
+  stud plus socket. At 4 mm the fit-bench gap is 10.69, and at 4.5 mm it is 10.84 (claim 10.30), all from the rod's
+  in-band (0.89 -> 0.52-0.62).
+- **Unmodelled crank parts.** The crank's short arm and its follower are not sampled metal.
+- **Lobe inside the hub housing.** The lobe works at r 7.7-10.2 mm about hub 2's axis, inside the O20 housing radius
+  (10 mm), which belongs to link 1b. The follower has to reach link 2's boss through a window or at the crown. A
+  roller on a 4.4 mm tangential arm is not geometrically possible with the pivot 16 mm off the axis; it needs a sliding
+  pad on a ~8 mm arm. The verified lead has the same lobe placement.
