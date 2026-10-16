@@ -35,8 +35,8 @@ Depths are in mm, shown as GWN / ray parity, compared with the judge's part_cont
 | D5-02 link 1 (param_r20_n3_s1414_4) | Raise overhead 0, Wave 150 | D5-01 base **3.494 / 3.494**; D5-03 link 2 **3.477 / 3.477** (w = 1.00 at the deepest point); J2 bearing 1 0.098 (< tol); every other part 0 | 3.50 / 3.50 at all 1337 frames |
 | D6-03 link 2 (param2_r20_n3_s1414_4) | Drink from a cup 37 and 69, Comb hair 100, Wash opposite shoulder 100, Raise overhead 60 | **nothing at any depth > 0.02** (D6-02, D6-04, the J2/J3 nuts, spacers and bearings) | nothing |
 | D7-03 link 2 (user_osn_k4216_v3, read from git e1a3c87^) | Wave 71, Raise overhead 60, Drink from a cup 69, Comb hair 100 | **nothing at any depth > 0.02** (D7-01 base, D7-02 link 1, D7-04 member 3, the J3 ring nut) | nothing new |
-| RSR3R3 rails (user_osn_k4216) | see section 2; no boundary edges, so nothing is capped | - | nothing new |
-| cad_r13 BOTTOM + neck + dovetail rail | see the addendum at the end | | 0.55 (flank liner) |
+| RSR3R3 rails (user_osn_k4216) | not re-run per frame: the rails have no boundary edges, so close_open adds nothing; their closure field equals GWN (section 2) | - | nothing new |
+| cad_r13 BOTTOM + neck + dovetail rail (cad_r13_n3_s1331_0) | Wash opposite shoulder 192, Drink from a cup 33 | flank liner (iglidur J) **0.555 / 0.555** at Wash 192 (w = 1.00, 184 points > tol), 0.50 at Drink 33; the reverse direction (BOTTOM in the liner) 0.248 / 0.248 | 0.55 at Wash 192; 0.25 the other way |
 
 The depths agree to within 0.03 mm, which is the random-sample spacing. GWN and ray parity agree on every one of these
 points.
