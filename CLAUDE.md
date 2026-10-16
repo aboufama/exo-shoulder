@@ -113,6 +113,15 @@ docs/EVOLUTION.md (and its snapshot to pipeline/evolution/) as part of the judge
   the generation-winner CAD + stills still run: "generation winner cad should still run". Quota while no film renders:
   exo-blender-cycles workersMax 1 (stills), exo-cpu1 workersMax 9 - give the render endpoint its 4 back when a film or a
   big render batch is approved.)
+- **Complexity is the second objective** (user, 2026-10-16: "it would be cool to have a simplicity score for each design
+  impacted by degrees of freedom moving parts, etc. I think thats a pretty major part and for now shouldn't impact overall
+  score but should show in the chart", then "when score start capping out around 95+ over the night, prioritize lowering
+  that simplicity number"). Every design carries a complexity count (tools/simplicity.py, docs/SIMPLICITY.md: 0 = three pins
+  on bearing pairs and three links with no passive freedom; each passive translation, crossed rail, passive rotation,
+  extra body / joint, closed loop, sliding pair and sensed passive ADDS points; lower = simpler), shown on the dashboard
+  next to the score and NOT folded into it. Once verified bench scores plateau at >= 95 (gap <= 13.75), the search
+  objective switches: minimise complexity subject to score >= 95 (a constrained / Pareto search - drop a passive joint,
+  merge bodies, swap a slide for a pin), and a simpler design at score >= 95 beats a more complex one at a higher score.
 - **No lofts, ever** (user, 2026-10-15: "for all the design you do, lofts look horrible and introduce geometric problems, you
   can combine arcs, but no lofts!"): every surface comes from sketches of lines and tangent arcs - extrudes, revolves,
   sweeps of ONE constant section along a line/arc path, fillets. No lofts, no surfaces fitted or shrink-wrapped to skin
