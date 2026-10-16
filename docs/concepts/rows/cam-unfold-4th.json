@@ -8,46 +8,47 @@
  "passive_translations": 0,
  "status": "screened",
  "t_ideated": null,
- "t_screened": "2026-10-16T12:56:47Z",
- "reach": 0.7,
- "follow": 0.95,
- "inband14": 0.8415,
- "inband10": 0.4955,
- "contact": 0.0,
- "gap": 27.07,
+ "t_screened": "2026-10-16T13:09:22Z",
+ "reach": 0.7063,
+ "follow": 0.9667,
+ "inband14": 0.8907,
+ "inband10": 0.5515,
+ "contact": 0.0172,
+ "gap": 22.02,
  "gap_plain": 25.85,
- "gap_near1": 27.07,
- "min_metal_mm": 0.01,
+ "gap_near1": 23.23,
+ "min_metal_mm": 0.85,
  "v_reach": null,
  "v_follow": null,
  "v_inband14": null,
  "v_inband10": null,
  "v_gap": null,
- "n_configs": 5659,
+ "n_configs": 9792,
  "best_params": {
-  "az1": 93.5249,
-  "el1": 60.8297,
-  "az2": 35.3296,
-  "el2": 41.5211,
-  "wd": 62.1057,
-  "wa": -9.9748,
-  "b3": 0.2393,
-  "lE": 63.5787,
-  "lc": 25.6805,
-  "phiE": -8.8629,
-  "phib": -51.5292,
+  "az1": 93.002,
+  "el1": 67.5189,
+  "az2": 35.8113,
+  "el2": 48.1385,
+  "wd": 71.5803,
+  "wa": -5.6949,
+  "b3": 0.3015,
+  "lE": 66.4782,
+  "lc": 31.4648,
+  "phiE": -2.9631,
+  "phib": -60.4027,
   "ang_min": 30.4611,
   "stk": 5.6815,
-  "sK": 1,
-  "bk1": 29.1547,
-  "bk2": 45.9392,
-  "cs": 24.9671,
-  "ws": 74.835,
-  "mons": 20.8695,
-  "cf": 1.7785,
-  "wf": 19.5935,
-  "monf": 5.0,
-  "cam_r": 15.0
+  "sK": -1,
+  "bk1": 21.1777,
+  "bk2": 50.6827,
+  "cs": 31.5898,
+  "ws": 47.4064,
+  "mons": 13.6962,
+  "cf": 12.8835,
+  "wf": 12.8935,
+  "monf": 15.2912,
+  "cam_r": 10.0,
+  "cam_h": 3.0
  },
  "mechanism": {
   "active_dof": 3,
@@ -63,14 +64,109 @@
   "springs_or_flexures": 0,
   "custom_parts": 16,
   "catalogue_parts": 15,
-  "notes": "the pin knee (rows/skin-normal-3r-pin-knee.json mechanism) + K: link 2 split into 2a / 2b by an O20 passive bearing-pair pin, NOT sensed (K = c(q2) is read from q2), slaved by a groove face cam on link 1 at J2 (O3 iglidur-sleeved follower pin on a lever of 2a = 1 sliding pair) through an O2 pushrod (2 pins) to a 4 mm crank on 2b: +2 bodies (2b, pushrod), +3 joints, 1 closed loop; complexity 33.75 (tools/simplicity.py; the pin knee 19.5)",
+  "notes": "the pin knee (rows/skin-normal-3r-pin-knee.json mechanism) + K: link 2 split into 2a / 2b by an O20 passive bearing-pair pin, NOT sensed (K = c(q2) is read from q2), slaved by a groove face cam on link 1 at J2 (best build: a 3 mm grooved ring on hub 2's crown) (O3 iglidur-sleeved follower pin on a lever of 2a = 1 sliding pair) through an O2 pushrod (2 pins) to a 4 mm crank on 2b: +2 bodies (2b, pushrod), +3 joints, 1 closed loop; complexity 33.75 (tools/simplicity.py; the pin knee 19.5)",
   "source": "docs/concepts/models/cam-unfold-4th.py",
   "confidence": "counted"
  },
  "complexity": 33.75,
- "verdict": "Screened, not a contender (convergence gate pending on the S2 continuation): best 27.07 near-touch / 25.85 plain fast (score 90.2), reach 0.700, in-band 0.842, contact 0; the plain pin knee at the same seats (no K) scores 27.68 at in-band 0.92, so the cam-slaved arm-side knee earns ~0-2 points for +14.25 complexity.",
- "limiter": "hub K on link 2 sweeps a q1 x q2 patch of skin: an O20 GH-ray disc there is in band only within 22-40 deg of J2, toward J1 (clashes with hub 1 over the q2 window) or along link 2's line (K nearly straight: no leverage on a2); elsewhere its 5-95 % skin-height spread is 19-35 mm vs the 12 mm band (K-atlas). At the CMA best hub K is 0.42 in band, L2a 0.52; fold still costs 36 poses, overhead reach 0/12.",
- "note": "provisional; see doc",
+ "verdict": "Screened (gate passed: 9339 CMA tries, +0.52 / +0.21 score points over the 2nd half / last third, top-5 within 0.10). Best = C3, the CROWN cam (hub 2 stays O20, 15.25 tall) with a TWO-SIDED lobe: 22.02 plain / 23.23 near-touch fast; frozen on Bench(110,360) exact 26.70 (score 90.29), near-touch 28.40, reach 0.656, in-band 0.889, contact 0.012, overhead reach 8/28. The cam is worth 8.8 points over the plain pin knee at the same seats (30.85) and ties the verified pin knee H1 (27.20 same protocol; near-touch 31.75) at +14.25 complexity; 7.6 behind the verified minarc BDp (19.06). Sensor-free 3 active, 0 passive translations. Not a new leader; self-measured, unverified.",
+ "limiter": "The fold still takes 115 of the big bench's lost poses: the cam window is only th 34.5-97.9 because K can unfold a2 by just 4.8 deg (a2e 63.8-68.6) where its hub stays in band. Hub K rides on link 2 (moves with q1 AND q2): a GH-ray O20 disc there is in band only within ~21-30 deg of J2 (K-atlas: elsewhere the 5-95 % skin-height spread under it is 19-35 mm vs the 12 mm band); toward J1 it clashes with hub 1 over the q2 window, along link 2's line it is nearly straight (no leverage). The O30 flange cam made it worse (hub K 0.42 in band); the crown cam lets K sit at 21 deg (0.77). L2a is 0.17 in band (a 25 mm stub between two hubs).",
+ "note": "Coarse farm sweep 256 (best 40.91 near), K-atlas + targeted sweep 192 (59.47), CMA S1-S6 flange cam 5206 tries (27.07 near / 25.85 plain; frozen 31.88), S2 continuation 1354 (26.55), crown-cam CMA C1-C3 2779 (23.23). Controls at the best seats: cam off 30.81, no K 30.85 (plain). Red team: no jam (one q2 per pose), J2 dowel stop felt at th 97.9; pinch 0.83 mm frozen at plane 30 / elev 165 (hub 2 crown cam region on S2: 0.01 mm); MVP2 load path through the O2 pushrod fails at 10 N.m (2500 N on a 4 mm crank).",
  "doc": "docs/concepts/cam-unfold-4th.md",
- "model_file": "docs/concepts/models/cam-unfold-4th.py"
+ "model_file": "docs/concepts/models/cam-unfold-4th.py",
+ "best_k": null,
+ "best_label": "C3 (crown cam, two-sided lobe)",
+ "frozen_exact": {
+  "protocol": "fit Bench(60,160) fast -> wear frozen on Bench(110,360) CB_EXACT=1 (models/cam-unfold-4th.py frozen)",
+  "gap": 26.7,
+  "score": 90.29,
+  "reach": 0.6556,
+  "follow": 0.9818,
+  "inband14": 0.8889,
+  "inband10": 0.5491,
+  "contact": 0.0115,
+  "gap_near1": 28.4,
+  "near1_poses": 3,
+  "min_metal_mm": 0.83,
+  "overhead140": {
+   "ws": 28,
+   "reach": 0.2857,
+   "clip": 10,
+   "follow": 1.0,
+   "inband14": 0.8775,
+   "inband10": 0.5926,
+   "why_not": {
+    "fold": 18,
+    "slide": 2,
+    "flip": 0,
+    "closure": 0,
+    "skin": 0,
+    "parts": 0,
+    "contact": 0
+   }
+  },
+  "why": {
+   "fold": 115,
+   "slide": 2,
+   "flip": 0,
+   "closure": 0,
+   "skin": 0,
+   "parts": 5,
+   "contact": 4
+  },
+  "file": ".cache/camunfold/frozen_C3_local.json (not committed)"
+ },
+ "frozen_exact_S2_flange_cam": {
+  "gap": 31.88,
+  "gap_near1": 35.21,
+  "reach": 0.6583,
+  "inband14": 0.8401,
+  "contact": 0.0172
+ },
+ "controls": {
+  "C3_seats_cam_off_rigid_K": {
+   "gap_near1": 32.06,
+   "gap": 30.81,
+   "reach": 0.6438,
+   "inband14": 0.9018
+  },
+  "C3_seats_no_K_plain_pin_knee": {
+   "gap": 30.85,
+   "reach": 0.6312,
+   "inband14": 0.9283
+  },
+  "S2_seats_cam_off": {
+   "gap_near1": 31.57,
+   "gap": 30.05,
+   "reach": 0.6875
+  },
+  "S2_seats_no_K": {
+   "gap": 27.68,
+   "reach": 0.6687,
+   "inband14": 0.9211
+  }
+ },
+ "gate": {
+  "all_streams": {
+   "n": 9339,
+   "gain_second_half": 0.52,
+   "gain_last_third": 0.21,
+   "top5_spread": 0.1,
+   "passes": true
+  },
+  "C3": {
+   "n": 825,
+   "gain_second_half": 0.52,
+   "gain_last_third": 0.31,
+   "top5_spread": 0.1,
+   "passes": true
+  },
+  "S2_family": {
+   "n": 2291,
+   "gain_second_half": 0.18,
+   "gain_last_third": 0.13,
+   "top5_spread": 0.04,
+   "passes": true
+  }
+ }
 }

@@ -106,3 +106,36 @@ L2b 0.64, E 0.98, knee 0.98. Lost: 36 fold, 15 knee window. Overhead (elevation 
 This predicts beyond this morphology: **a 4th joint whose hub rides on link 2 (between J2 and J3) cannot be in band
 unless it sits within ~25 deg of J2, and there it either clashes with hub 1 or has no leverage on a2.** A fold lever has
 to live on the scapula side (link 1: minarc, geneva-tail-knuckle) or act at J2 itself.
+
+## Frozen shape worn on Bench(110,360) EXACT (lesson c)
+
+Protocol: fit on Bench(60,160) fast, freeze every level and the knee centre, wear on Bench(110,360) with CB_EXACT=1
+(`python3 docs/concepts/models/cam-unfold-4th.py frozen '<S2 params>'`, the minarc-B / pin-knee frozen hand-over).
+
+| configuration | fast fit (plain) | frozen exact (plain) | score | reach | follow | in-band 14 | in-band 10 | contact | near-touch gap | min metal | overhead reach |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| **CMA best S2** | 25.85 | **31.88** | 88.4 | 0.658 | 0.955 | 0.840 | 0.496 | 0.017 | 35.21 (6 poses < 1 mm) | 0.23 mm (plane 45, elev 165) | 5 of 28 |
+| H1, the verified pin knee (round-3 protocol: fit60 fast -> big exact) | - | 27.20 | 90.1 | | | | | | 31.75 | | |
+| minarc BDp, the verified leader (kit rule) | 12.25 | 19.06 | 93.1 | 0.725 | 1.0 | 0.895 | 0.597 | 0.011 | 26.15 | 0.05 | |
+
+Lost on the big bench: 95 poses to the fold (the cam window th 33.6-105.5), 27 to the knee window, 6 to contact.
+Continuity: K is a single-valued function of q2 and th(q2) is strictly monotone on the window, so every arm pose has
+exactly one chain configuration; the 10 fps clip check (K included) drops 0 frames for flips (`why.flip` 0 on both
+benches) and no static island can form (no passive or redundant coordinate: the continuity flood fill is not needed).
+
+## Red team (own best)
+
+1. **The pose that jams.** None by construction (one q2 per arm pose, K slaved, no spare coordinate). What the
+   wearer feels instead is J2's dowel stop at the window's stretched end (th 105.5 deg): the overhead and across-body
+   poses past it are simply not reachable (overhead 5 of 28 frozen, across-body 24 of 36 fast).
+2. **The point that pinches.** Hub 2's crown: 0.01 mm contact-only clearance at plane 45 / elevation 75 / axial 45
+   (fast); 0.23 mm frozen at plane 45 / elevation 165. 13 fit poses carry metal < 2 mm (near-2 gap 45.50 fast).
+   The O30 cam flange is the widest thing on the chain and sits exactly where hub 2 is tightest.
+3. **The optimistic number.** The fast 25.85 / 27.07 loses 6 points frozen (31.88 / 35.21), the usual sample effect.
+   The pushrod is modelled as a 3 mm-class strap layer (conservative by 0.5 mm); the cam flange as a full-height O30
+   cylinder in part-part checks (conservative); the flange's skin-facing disc is exact.
+4. **Load path (MVP2).** The arm load through link 2b reaches link 2a through K's bearing AND the pushrod: a 0.5 N.m
+   moment at K is 125 N in the O2 rod on a 4 mm crank (Euler limit ~530 N at 40 mm); MVP2's 10 N.m would need
+   2500 N. A powered build needs a stouter crank / coupler (the spec's four-bar variant) - not modelled here.
+5. **Backlash.** 0.05 mm groove clearance on a 4 mm crank = 0.7 deg of K play, ~1 mm at J3: inside the knee's
+   compliance but not free.
