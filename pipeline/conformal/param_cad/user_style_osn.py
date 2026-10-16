@@ -210,23 +210,32 @@ def base_part(M, E, l1_dirs):
     d0 = unit(np.array([0.0, 0.6, -0.8])); d0 = unit(d0 - (d0 @ k1) * k1); d1 = np.cross(k1, d0)
     ang = np.degrees(np.arctan2(l1_dirs @ d1, l1_dirs @ d0))                              # link 1's heading about J1, every followed frame
     def dist_sector(al): return float(np.min(np.abs((ang - al + 180) % 360 - 180)))
-    th = math.radians(32); best = None; Rg = np.eye(3)
-    for al in np.arange(-180.0, 180.0, 10.0):
-        if dist_sector(al) < 30.0: continue
-        td = math.cos(math.radians(al)) * d0 + math.sin(math.radians(al)) * d1
-        fld = US.PolarField(E, "S", Rg, k1, td, -5.0, 45.0, 16.0)
-        for h in np.arange(F1 + up_mid, F1 + 60, 0.5):
-            P0 = h * np.array([math.cos(th), math.sin(th)]); hd = np.array([-math.sin(th), math.cos(th)])
-            U = np.array([P0 + s_ * hd for s_ in np.linspace(0, 26, 14)]) - (T / 2) * np.array([math.cos(th), math.sin(th)])
-            if fld(U).min() >= 0.5:
-                if best is None or h < best[0]: best = (h, al, td, fld)
-                break
-    assert best, "base tab: no heading outside link 1's sweep"
-    ht, al, ey_, fld = best; ex_ = k1
+    Rg = np.eye(3); cands = []
+    for thd in (32.0, 45.0):                                                               # the terminal's angle off the J1 axis
+        th = math.radians(thd)
+        for al in np.arange(-180.0, 180.0, 10.0):
+            if dist_sector(al) < 30.0: continue
+            td = math.cos(math.radians(al)) * d0 + math.sin(math.radians(al)) * d1
+            fld = US.PolarField(E, "S", Rg, k1, td, -5.0, 75.0, 16.0)
+            for h in np.arange(F1 + up_mid, F1 + 60, 0.5):
+                P0 = h * np.array([math.cos(th), math.sin(th)]); hd = np.array([-math.sin(th), math.cos(th)])
+                U = np.array([P0 + s_ * hd for s_ in np.linspace(0, 26, 14)]) - (T / 2) * np.array([math.cos(th), math.sin(th)])
+                if fld(U).min() >= 0.5: cands.append((h, al, td, fld, th)); break
+    assert cands, "base tab: no heading outside link 1's sweep"
+    cands.sort(key=lambda c_: c_[0]); fit = None
+    for ht, al, ey_, fld, th in cands[:6]:                                                 # the lowest terminals first; the CAD
+        start = (F1 + up_mid, L_SEAT, math.pi / 2); end = (*(ht * np.array([math.cos(th), math.sin(th)])), th + math.pi / 2)
+        for cm, rm, lm in ((35.0, 12.0, 6.0), (45.0, 6.0, 2.0), (60.0, 4.0, 2.0)):      # standard's ramp first, then steeper
+            for n_ in (3, 4):
+                try: fit = SK.fit_chain(start, end, fld, T, n_arcs=n_, climb_max=cm, r_min=rm, l_min=lm); fit.update(climb_limit=cm, r_min=rm); break
+                except RuntimeError as e_: print(f"  base tab heading {al:.0f} th {math.degrees(th):.0f} h {ht:.1f}: {n_} arcs climb {cm} R >= {rm}: {e_}", flush=True)
+            if fit: break
+        if fit: break
+    assert fit, "base tab: no feasible chain for the six lowest terminals"
+    ex_ = k1
     print(f"base tab: heading {al:.0f} deg about J1 (link 1 sweeps {ang.min():.0f}..{ang.max():.0f}, nearest {dist_sector(al):.0f} deg away), "
-          f"terminal height {ht:.1f} mm", flush=True)
-    start = (F1 + up_mid, L_SEAT, math.pi / 2); end = (*(ht * np.array([math.cos(th), math.sin(th)])), th + math.pi / 2)
-    fit = SK.fit_chain(start, end, fld, T, n_arcs=3, climb_max=US.CLIMB)
+          f"terminal {math.degrees(th):.0f} deg off J1 at height {ht:.1f} mm; radii {[None if r is None else round(r, 1) for r in fit['radii']]}, "
+          f"climb {fit['max_climb']:.1f} (limit {fit['climb_limit']}), clearance min {fit['min_clear']:.2f} mean {fit['mean_clear']:.2f}", flush=True)
     body = US.glue(US.plate_r(k1, F1 + LV["U0"], ey_, 16.0, upper=True), US.bar_swept(ex_, ey_, start, fit["segs"], w=16.0))
     o_mid = ht * (math.cos(th) * ex_ + math.sin(th) * ey_); sd = -math.sin(th) * ex_ + math.cos(th) * ey_; nrm = unit(o_mid)
     body = US.glue(body, US.terminal_r(o_mid, nrm, sd, 16.0, 14.0))
