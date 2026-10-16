@@ -18,6 +18,11 @@ Topology (scapula handler -> user's upper-arm cuff), every joint axis through GH
        the travel + half a carriage + a 3 mm stop each side + an 8 mm tab where link 1 laps onto it (side s1).
     -> link 2 (12 x 3 strap, great circle carriage -> p3), bolted on the carriage plate, over the rail / link 1 / neck
     -> J3 ACTIVE R: O20 hub, axis p3 = HG @ wdir(wd, wa) (humerus-fixed) -> K7 neck (14 x 6) -> BOTTOM -> cuff.
+K6 zones (Chain.joints, declared hubless): Wcar = the carriage centre (shared by rail, carriage plate, link 2: the
+running pair and the bolted carriage-link 2 body are exempt within HUB_R + 2 = 12 mm of it, which covers the whole
+20 x 16 footprint: its farthest samples are 11.4 mm out). Everywhere else every pair is checked; by construction the
+plate is 0.6 mm over the rail top, link 1 1.1 mm over the rail (it laps onto the tab on a 1.1 mm shim, so the 1 mm
+radial K6 of the big-bench run holds too), link 2 0.6 mm over the plate and 1 mm over the rail, link 1 and the neck.
 DOF: theta1, theta2 (= the carriage on its rail), theta3; 3 active, 0 passive, 0 passive translations, nothing
 undetermined (the carriage is preloaded on 2 eccentric rollers; it has no free coordinate).
 
@@ -44,7 +49,7 @@ D2R = math.pi / 180
 RAIL_W, RAIL_T = 8.0, 4.0                                    # rail section (V edges ground on both sides)
 CAR_L, CAR_W = 16.0, 20.0                                    # carriage footprint (along x across)
 ROLL_IN, ROLL_T = 4.0, 4.0                                   # roller strips from |y| 4 to 10, 4 mm tall
-PLATE_DZ, PLATE_T = 4.5, 4.0                                 # plate underside over the rail underside, thickness
+PLATE_DZ, PLATE_T = 4.6, 4.0                                 # plate underside over the rail underside (rail top + 0.6), thickness
 STOP, TAB = 3.0, 8.0
 # spec first run (catalogue model_spec): bvec(95.86, 65.21), a1 60 / a2 80, wdir(79.15, -13.37), R 30 at 52 -> beta 30
 PARAMS = dict(az=95.8565, el=65.2093, a1=60.0, a2=80.0, wd=79.148, wa=-13.3653, sigma=1, margin=10.0, beta=30.0,
@@ -92,21 +97,21 @@ def build(B, F, p):
     def carr(ys):
         X, Y = np.meshgrid(xs, ys, indexing="ij"); X, Y = X.ravel(), Y.ravel()
         return cone_dirs(p2, e1, e2, psi_c[:, None] + X[None, :] / rc / D2R, p["beta"] + Y / rl / D2R)
-    j2 = K.Member("j2", np.concatenate([Dr, carr(ys_r)], 1), kind="cap", t=RAIL_T, width=RAIL_W, joints=("J2",), r_ref=rl, cell=4.0)
-    plate = K.Member("carplate", carr(ys_p), kind="cap", t=PLATE_T, width=CAR_W, joints=("J2",), r_ref=rl, cell=4.0,
+    j2 = K.Member("j2", np.concatenate([Dr, carr(ys_r)], 1), kind="cap", t=RAIL_T, width=RAIL_W, joints=("J2", "Wcar"), r_ref=rl, cell=4.0)
+    plate = K.Member("carplate", carr(ys_p), kind="cap", t=PLATE_T, width=CAR_W, joints=("J2", "Wcar"), r_ref=rl, cell=4.0,
                      ramps=[(np.ones(len(xs) * len(ys_p), bool), "j2", PLATE_DZ)])
     u_tab = cone_dirs(p2, e1, e2, np.full((n, 1), tc), np.array([p["beta"]]))[:, 0]
     u_car = cone_dirs(p2, e1, e2, psi_c[:, None], np.array([p["beta"]]))[:, 0]
     w, t = p["width"], p["t_link"]
     hubs = [K.hub_member("hub1", p1, "J1"), K.hub_member("hub3", p3, "J3")]
     neck = K.neck_member(F, p3, joints=("J3",), ramps=(("hub3", 0.0), (None, 0)))
-    link1 = K.strap_member("link1", p1, u_tab, ("J1",), width=w, t=t, ramp_to=(("hub1", K.STACK), ("j2", RAIL_T + 0.5)),
-                           over=[("j2", 0.5)])                                   # laps onto the rail tab, bolted on top
-    link2 = K.strap_member("link2", u_car, p3, ("J2", "J3"), width=w, t=t, ramp_to=(("carplate", PLATE_T + 0.5), ("hub3", K.STACK)),
-                           over=[("link1", 1.0), ("neck", 1.0), ("j2", 1.0), ("carplate", 0.5)])
+    link1 = K.strap_member("link1", p1, u_tab, ("J1",), width=w, t=t, ramp_to=(("hub1", K.STACK), ("j2", RAIL_T + 1.1)),
+                           over=[("j2", 1.1), ("carplate", 1.0)])   # bridges over the carriage path where it crosses it                                   # laps onto the rail tab, bolted on top
+    link2 = K.strap_member("link2", u_car, p3, ("J2", "J3", "Wcar"), width=w, t=t, ramp_to=(("carplate", PLATE_T + 0.6), ("hub3", K.STACK)),
+                           over=[("link1", 1.0), ("neck", 1.0), ("j2", 1.0), ("carplate", 0.6)])
     q = np.stack([K.axis_angle(p1, F.S([1.0, 0, 0]), p2), th2, K.axis_angle(p3, F.HG([0.0, -1, 0]), p2)], -1)
-    return K.Chain(members=[hubs[0], j2, plate, hubs[1], neck, link1, link2], ok=ok, q=q, joints=dict(J1=p1, J2=p2, J3=p3),
-                   hubless=("J2",),
+    return K.Chain(members=[hubs[0], j2, plate, hubs[1], neck, link1, link2], ok=ok, q=q, joints=dict(J1=p1, J2=p2, J3=p3, Wcar=u_car),
+                   hubless=("J2", "Wcar"),
                    info=dict(residual_deg=round(float(K.closure_residual(p1, p3, p2, p["a1"], p["a2"])[ok].max()), 5) if ok.any() else None,
                              min_margin=round(float(margin[ok].min()), 2) if ok.any() else None,
                              rail_deg=round(hi - lo, 1), rail_mm=round((hi - lo) * D2R * rc, 1), travel=[round(p["pc"] - p["pw"], 1), round(p["pc"] + p["pw"], 1)]))

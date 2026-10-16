@@ -139,6 +139,7 @@ def evaluate(B, params):
     """tools/concept_cma.py hook -> (params, report)"""
     p = dict(PARAMS, **params); p["q"] = min(1.0, max(0.8, float(p["q"])))
     p["sigma"] = 1 if float(p["sigma"]) >= 0 else -1
+    p["end_extra"] = min(8.0, max(0.0, float(p.get("end_extra", 0.0))))   # never shorter than the K6 exempt zone
     for k in ("rad2", "rad3"):                                  # CMA steps snap to the declared components
         p[k] = min(SLIM, key=lambda x: abs(x - float(p[k])))
     r = K.evaluate(B, build, p); r = declared_audit(r, p); r = extras(B, r, p)

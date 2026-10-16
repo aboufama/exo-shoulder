@@ -39,10 +39,14 @@ ID = "virtual-pole-4bar-j2"
 NAME = "Virtual-pole spherical four-bar as J2 (all-pin 3-DOF chain, no slide)"
 D2R = math.pi / 180
 M4, XMIN, PINSEP = 25.0, 12.0, 22.0              # M4: min transmission angle (deg) at both coupler pins
+PIN_T = 6.0                                      # slim passive pin: MR63ZZ pair, F to crown (hardware catalogue)
 # at=2 seed: the plain-3R axes of rail-elbow k2221 (51.33 as a plain 3R) with a converging four-bar around the home J2
 PARAMS = dict(at=2, az=0.65, el=76.82, a1=80.71, a2=62.93, beta=110.0, wd=93.82, wa=-4.20, zeta=0.0,
               psiA=35.0, dA0=22.0, dA1=44.0, psiB=-35.0, dB0=22.0, dB1=44.0, sigma=0,   # sigma 0 = auto (at=2 only); at=1 needs +-1
-              width=12.0, t_link=3.0, q=1.0)
+              width=12.0, t_link=3.0, q=1.0,
+              slim=0)    # 1: the three PASSIVE four-bar pins (B0, A1, B1: no encoder, no drive) as MR63ZZ pairs
+                         #    (3 x 6 x 2.5, tools/hardware_catalogue.json: two 2.5-3 mm plates -> ~6 mm stack), crown 6 mm;
+                         #    footprint kept at the O20 disc (conservative). J1, A0 (the J2 drive) and J3 keep the O20 v5 hub.
 
 
 def unit(x): return K.unit(x)
@@ -190,7 +194,7 @@ def build(B, F, p):
         joints = dict(J1=J1, A0=A0, B0=B0, A1=A1, B1=B1, J3=J3)
         near = "A1" if ang(fb.a1h, cv["carried"]) <= ang(fb.b1h, cv["carried"]) else "B1"
         X = dict(A1=A1, B1=B1)[near]; Xg = A0 if ang(j, fb.a0) <= ang(j, fb.b0) else B0; g_name = "A0" if Xg is A0 else "B0"
-        hubs = [K.hub_member(f"hub{n}", v, n) for n, v in joints.items()]
+        hubs = [K.hub_member(f"hub{n}", v, n, t=PIN_T if (p.get("slim") and n in ("B0", "A1", "B1")) else K.CROWN) for n, v in joints.items()]
         w_, t_ = p["width"], p["t_link"]
         Xo, o_name = (B0, "B0") if g_name == "A0" else (A0, "A0")
         Y = dict(A1=B1, B1=A1)[near]; y_name = "B1" if near == "A1" else "A1"
@@ -212,7 +216,7 @@ def build(B, F, p):
         joints = dict(A0=A0, B0=B0, A1=A1, B1=B1, J2=J2, J3=J3)
         near = "A1" if ang(fb.a1h, cv["carried"]) <= ang(fb.b1h, cv["carried"]) else "B1"
         X = dict(A1=A1, B1=B1)[near]
-        hubs = [K.hub_member(f"hub{n}", v, n) for n, v in joints.items()]
+        hubs = [K.hub_member(f"hub{n}", v, n, t=PIN_T if (p.get("slim") and n in ("B0", "A1", "B1")) else K.CROWN) for n, v in joints.items()]
         w_, t_ = p["width"], p["t_link"]
         Y = dict(A1=B1, B1=A1)[near]; y_name = "B1" if near == "A1" else "A1"
         mem = hubs + [

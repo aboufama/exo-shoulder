@@ -252,7 +252,9 @@ class Model(S.VModel):
         """flat 8 mm strap in the plane normal to n from o + start ev to o + L ev, + an O12 boss at o + L ev (2 mm grid)"""
         ew = np.cross(n, ev); x = np.arange(start + SP / 2, L, SP); y = np.arange(-W_LINK / 2 + SP / 2, W_LINK / 2, SP)
         X, Y = np.meshgrid(x, y); pts = [o + X.ravel()[:, None] * ev + Y.ravel()[:, None] * ew]
-        dd = disc(BOSS_R); dd = dd[(dd[:, 0] > 0) | (np.abs(dd[:, 1]) > W_LINK / 2)]
+        dd = disc(BOSS_R); n_r = int(2 * np.pi * BOSS_R / SP); ang = np.arange(n_r) * 2 * np.pi / n_r
+        dd = np.r_[dd, (BOSS_R - 0.25) * np.stack([np.cos(ang), np.sin(ang)], 1)]      # + the boss rim (its wall is skin-checked)
+        dd = dd[(dd[:, 0] > 0) | (np.abs(dd[:, 1]) > W_LINK / 2)]
         pts.append(o + (L + dd[:, :1]) * ev + dd[:, 1:] * ew)
         return np.concatenate(pts)
 
@@ -300,7 +302,8 @@ class Model(S.VModel):
         H = self.Hneed; m = lambda k: float(H[k][keep].max()) if keep.any() else 0.0
         f1, f2, f3 = m("hub1"), m("hub2"), m("h3")
         zc = max(f2 + UP, m("crank")); zp = m("pad"); nl = max(m("clink"), zp + UP)
-        zl = nl if nl <= f3 - UP else max(nl, f3 + UP)         # pin a: the cuff link passes under the E arm or over it
+        fa = f3 + self.p["k_c0"]                               # the rotor plate's level in the ARM frame (member 3 rides c0 along sn)
+        zl = nl if nl <= fa - UP else max(nl, fa + UP)         # pin a: the cuff link passes under the E arm or over it
         return dict(hub1=f1, hub2=f2, h3=f3, crank=zc, pad=zp, clink=zl)
 
     def greedy_drop(self, keep0=None, links=True):
@@ -367,7 +370,8 @@ class Model(S.VModel):
         sn = D.sn
         cyl(4, c[1] + D.e0, u[1], BOSS_R, lv["crank"], lv["crank"] + 2 * T_LINK + 0.15 + PIN_HEAD)                   # knuckle pin
         pa = c[2] + self.p["LE"] * D.eE
-        cyl(3, pa, sn, BOSS_R, min(lv["h3"], lv["clink"]), max(lv["h3"], lv["clink"]) + T_LINK + PIN_HEAD)          # pin a
+        zl3 = lv["clink"] - self.p["k_c0"]                                                                            # link level in member 3's frame
+        cyl(3, pa, sn, BOSS_R, min(lv["h3"], zl3), max(lv["h3"], zl3) + T_LINK + PIN_HEAD)                             # pin a
         cyl(5, self.Pb3, sn, BOSS_R, lv["pad"], lv["clink"] + T_LINK + PIN_HEAD)                                      # pin b (+ standoff)
         for nm in ("crank", "clink", "pad", "Earm"):
             mem, X = self.rigid[nm]; out.append((mem, X + T_LINK * self.G[[g["name"] for g in self.G].index(nm)]["N"]))
@@ -478,6 +482,9 @@ def evaluate(B, params):
     P = dict(params)
     for k in ("k_c0", "k_sk", "k_mid", "cuff_m", "cuff_sig"): P[k] = None
     if P.get("alk_auto") or P.get("alk") is None: P["alk"] = None; P["alk_auto"] = None
+    P["lk"] = max(float(P["lk"]), HUB_R + BOSS_R + 1.0)          # the knuckle boss clears hub 2's cap
+    P["LE"] = max(float(P["LE"]), HUB_R + BOSS_R + 2.0); P["lc"] = max(float(P["lc"]), 2 * BOSS_R + 2.0)
+    for k in ("b1", "b2", "b3"): P[k] = min(1.2, max(-0.2, float(P[k])))
     r, M = _report(B, P)
     p = {k: v for k, v in M.p.items() if isinstance(v, (int, float, str, bool, list)) or v is None}
     r["honest"] = True; r["audit"] = []

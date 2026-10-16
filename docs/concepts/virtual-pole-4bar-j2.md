@@ -60,7 +60,8 @@ Away from home the pole moves.
   - Coupler-curve crossing angle >= 12 deg. The 3R's 10 deg fold margin equals 11-34 deg here.
   - Pins of one body >= 20 deg apart.
   - Closure residual < 0.5 deg (measured 1e-4 deg).
-* **Members (K4 / K5 / K7).** Every rigid body's straps form ONE polyline member (link 1: J1 -> nearer ground pin ->
+* **Pins. J1, A0 (the J2 drive in MVP2, the encoder in MVP1) and J3 are O20 v5 hubs (MR117-2RS pair, 12.25 mm stack). With `slim=1`, the three PASSIVE pins (B0, A1, B1) are MR63ZZ pairs (3 x 6 x 2.5, tools/hardware_catalogue.json: two plates, ~6 mm stack), crown 6 mm, footprint kept at the O20 disc (conservative). This is the thick-panel-origami move: thin passive hinges so crossing layers lift less. Default slim=0 (all O20).
+* **Members (K4 / K5 / K7).**** Every rigid body's straps form ONE polyline member (link 1: J1 -> nearer ground pin ->
   other ground pin; coupler: far pin -> near pin -> J3), so a body never collides with itself. Layers: the cranks lie
   lowest. The coupler passes over the cranks, the neck and link 1's pins (`over`, >= 1 mm), and link 1 passes over the
   cranks and the coupler's pins. K6 checks every other pair.
@@ -137,3 +138,56 @@ never into the body), and the bearing separation that run allows (two O20 pins n
 At a 0.6 band threshold the wedges widen to 75-105 deg. So a converging four-bar FITS geometrically on k2221
 (d 30-50) and jfront (d 40-60), but only with every pin at 0.7-0.8 band, which is no better than the 3R's own hub 2
 (0.61-0.70). On the fold-free front132 layout no free wedge exists.
+
+## Field options considered and rejected before modelling (with the reason)
+
+* **Planar double-parallelogram RCM** (Taylor; the da Vinci arm). Pins parallel to the J2 axis, the links in the
+  plane normal to it, which is roughly tangent to the skin. It gives an EXACT remote centre on the J2 line, so the
+  kinematics are the 3R's and no slide is needed. It was not built, for two reasons:
+  - Its translating coupler is not a GH-ray body, so the kit's skin-fitted members (radial rays from GH) cannot
+    represent it honestly. It needs a new member kind.
+  - A flat linkage tangent to a 60 mm-radius sphere leaves the skin by x^2 / 2R: 7.5 mm at x = 30 mm. Its links and
+    pins must also orbit the virtual centre, so the metal does not leave the J2 neighbourhood, which the map above
+    shows is the worst skin.
+  Range is fine: a double parallelogram stays clear of its singularities over +-75 deg about the mid position, and the
+  3R's J2 uses ~85-90 deg (p5-p95 of beta).
+* **Spherical double parallelogram.** It does not exist: the planar version works through translations. A spherical
+  four-bar coupler turns about a FIXED non-joint axis only if both crank great circles always pass through it, which
+  happens only if a ground pin sits on it.
+* **Bennett loop as link 2.** Its axes are skew, so its coupler motion is not a rotation about GH. The 2-slide cuff
+  closes exactly only when J1 and J2 pass through GH (offset-skin-normal-3r's closure theorem). A Bennett link 2 would
+  need the radial third slide, i.e. 3 passive translations, which the rules forbid.
+* **Spherical lazy tongs / angulated scissors along a great circle.** The tongs' end pivot moves along the circle,
+  which is a rotation about its pole, but no lame keeps its orientation. A rigid link 2 would need a further
+  constraint (another loop), and the metal would sit 90 deg from J2 at constant radius, which is the remote-pole family
+  that was swept (rp rows).
+
+## Control: the plain 3R at the same axes (same bench, same checks; `_template.py`, q 1.0)
+
+| base axes | plain 3R gap | reach | follow | in-band 14 | hub 2 in band | link 2 in band |
+|---|---|---|---|---|---|---|
+| k2221 | **51.97** | 0.888 | 1.0 | 0.393 | **0.00** | 0.056 |
+| jfront | 119.28 (not honest: parked parts) | 0.70 | 0.967 | 0.082 | 0.00 | 0.00 |
+| front132 | 87.52 (not honest) | 0.888 | 0.95 | 0.103 | 0.026 | 0.00 |
+
+At k2221 the 3R's hub 2 is 0 % in band and link 2 is 6 %. The best coarse four-bar there (145.94) puts its A side in
+band: hub A0 0.59, hub A1 0.57, crank A 0.69. So the virtual pole does improve the skin near J2 on the side where the map
+said the skin is free. It loses on everything else: reach 0.43 / follow 0.55 against 0.89 / 1.0, and the B side and
+the coupler land in the blocked half-plane (0 %).
+
+### How far the virtual pole walks, and how far the coupler turns (best coarse honest layout, k2221 base)
+
+| crank angle theta | coupler turned from home | pole walked from its home ray | transmission margin |
+|---|---|---|---|
+| -49.0 (window end) | 25.3 deg | 25.7 deg | 25.1 |
+| -13.5 | 6.7 | 7.9 | 45.8 |
+| 22.2 | 10.8 | 12.7 | 69.4 |
+| 58.0 | 28.9 | 29.2 | 58.1 |
+| 93.5 (window end) | 55.1 | 35.1 | 25.0 |
+
+* Inside the transmission window the coupler turns about 80 deg in all. The 3R's J2 at these axes uses about 88 deg
+  (p5-p95 of the dihedral beta, -129 to -41), and the overhead poses sit at the ends. That is the measured reason
+  71 of 220 poses do not close (12 of the 17 overhead poses).
+* The pole walks up to 35 deg from home, about 40 mm at the hub radius. The "virtual J2" is not where the 3R's J2 is
+  for most of the motion, so link 1 moves differently from the 3R whose free-space map placed the pins. The A side
+  stays in the free half (0.57-0.69 in band); the B side drifts into the blocked half (0 %).
