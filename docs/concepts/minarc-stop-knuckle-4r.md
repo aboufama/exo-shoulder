@@ -425,3 +425,54 @@ What it means:
 * Variant A (complexity 13.5) under the same rules stays at 41.14 frozen exact (in-band 0.71): not a contender at this
   budget. Its rest pose (elevation 0) is always in the stretched state (K open), so the strict seed rule (rest = K on
   stop A) seeds nothing; seeded at every elevation-0 pose, 1263 of 1263 nodes connect (static = connected).
+
+## Full user-style CAD of BDp (generation 4, `user_minarc_bdp`, 2026-10-16)
+
+Built by `pipeline/conformal/param_cad/user_style_minarc.py` (param dict in: the verified params + the judge's K stop-B fix
+a1max 54.748) on the L1's frames and clips (`l1_minarc-bdp`; the fit is the kit-rule model's own frozen fit60 shape,
+asserted equal: tr 88.30, knee centre m (-19.83, 3.63)). 86 parts; every custom part one valid closed solid (R7: 41 of 41
+STEP parts); 176 g of custom parts + 63 g for BOTTOM fused with the pad mount.
+
+What the CAD is (no lofts, no splines: line / tangent-arc sketches, extrudes, revolves, one constant-section sweep):
+* **Hubs** J1 / K / J2 / J3: the v5 O20 stack only (MR117-2RS pair, 17-4PH outer spacer, ground inner spacer, M7x0.5 Ti
+  ring nut). The gen-3 caps' spline dome is replaced by a torispherical dome of two tangent arcs (R63.6 crown, R1 knuckle).
+* **Hub K** (passive, spring-held, sensed): cap 6 mm taller (crown F + 18.25 = the verified capK 6), threaded on link 1b's
+  M18 x 0.5 spigot; inside, an O16 x 5.2 chamber round an O5 arbor (link 1a's integral O7 pin continued above the ring
+  nut, 0.4 mm slit for the inner end); the clock spring as built: 0.3 x 5 mm 1.4310 +C1900 strip, 145.6 mm, nine tangent
+  half-turns R2.75 + 0.6 mm per half-turn (a two-centre spiral, one constant-section sweep), R0.5 hook into a 0.8 mm slot
+  in the chamber wall; O3 x 1.4 diametric magnet in the arbor tip, O11 x 1.1 sensor pocket in the crown (0.6 mm Ti wall,
+  magnet to sensor ~1.5 mm) + a 1.6 x 0.8 flex groove for the user's angle sensor (the 4th encoder).
+* **Stops** (the verified claim's buildable stop): ISO 8734 O3 m6 hardened dowels pressed 3 mm into the upper boss at
+  r 7.75, running in 3.1 mm arc slots through the lower pad; slot ends are semicircles placed so the dowel touches 0.02 mm
+  past the stop angle. **J2**: one dowel, q2 -24.98 .. 100.84 deg (the 5.0-deg drawn margin). **K**: an OPPOSED PAIR
+  (homes 144 / 324 deg, stop A dK 0, stop B dK -34.47): two dowels 180 deg apart make the stop a couple, so K's bearings
+  carry no radial stop load (the L1 red team: one dowel = 770 N radial at the 6 N.m jam push, s0 0.73 on the MR117
+  pair). O3, not the spec's O2: the O2 fails bending at that push (SF 1.09, `l1_minarc-bdp/build.json` dowel_check).
+  J2 keeps the single dowel (a 126-deg slot leaves no room for an opposed pair): its bearing pair still sees the stop
+  force as a radial load at a jam push - open item.
+* **Links 1a / 1b / 2**: NEW - each is ONE side-view sketch in the bar plane (the plane of its two hub axes; link 2 the
+  plane of J2's axis and hub 3's centre, as gen 3), extruded 8 mm: the underside polyline runs THROUGH the model's strap
+  stations (the L1 strap underside, max over the strap's columns, 0.1 mm above outside the hub footprints), the top is the
+  underside offset 3 mm along its normals (miter), the vertices rounded with tangent arcs (R2 where the round moves metal
+  away from the skin, R0.5 where it adds metal: <= 0.08 mm dip at a 60-deg turn, inside the 0.1 mm margin). A 2.5-D part:
+  3+2-axis or wire-EDM from a Ti-6Al-4V plate, pads milled on. Ramps <= 60 deg (the ruling): where the model's strap
+  steps steeper (link 2's 68-deg drop after J2's lifted footprint) the lower station is raised until the ramp is 59.5 deg.
+  Why not the gen-3 hugging chains: link 1a is too short for one (J1 and K pads 11 mm each, 6.8 mm of rise over ~7 mm of
+  free span: no chain of R >= 3 arcs at <= 60 deg exists, `hug_chain` infeasible at 2-5 segments), and on h1b the chains
+  left 2.6 / 5.6 mm over the strap at the ramp feet.
+* member 3 + E strap + E boss, the knee link, pins a / b (iglidur sleeves + thrust washers, DIN 6799-3.2 clips on the
+  1.0 mm land), the arm pad + pad mount + cut BOTTOM as one 7075 part, the upper-arm cuff: `user_style_pinknee.py`
+  unchanged. Base at the J1 hub ring (no tab): no ear heading clears link 1a's sweep (0-1 of 180 at every level), so the
+  base is the J1 upper member alone and the scapula handler's bracket threads onto the M18 x 0.5 spigot.
+
+Kinematics = the model's (`build.json` check, 9 fit-bench poses incl. the overhead raise peak (30, 150, -60) and the forced
+K-open pose (105, 120, -90; dK -34.16, q2 on its -24.98 stop)): the model's hub discs, E boss and arm pad vs the posed
+exo.glb (the judges' path) <= 0.144 mm; every exported vertex posed by the model's member transforms vs by frame_xforms
+<= 1.2e-4 mm; both dowels inside their slots at every pose. Shape changes (reported, not kinematics): E strap 0.54 mm,
+knee plate corners 1.40 mm (gen-3 parts). Links vs the model strap: in the bar plane the underside is 0.01 / 0.04 /
+0.12 mm (mean) and <= 0.16 / 0.13 / 1.39 mm (max, outside the footprints) over the strap (1a / 1b / 2); in 3-D (every
+strap sample, all columns) one bar edge sits 0.05-0.13 mm on the strap and the other 1.7-1.9 mm above it - the strap is
+tilted across its width, the extruded bar is not (a twist would be needed; no twisted sweeps). No model strap sample is
+inside a bar.
+
+JUDGE_SECTION

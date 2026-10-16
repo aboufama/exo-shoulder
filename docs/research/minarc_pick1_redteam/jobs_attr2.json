@@ -1,0 +1,16 @@
+[
+ {
+  "tag": "p1rt-attr-pick1-fit60",
+  "cmd": "python3 docs/concepts/verify/minarc-pick1-redteam.py attr fit60 pick1 docs/research/minarc_pick1_redteam/attr_pick1_fit60.json > docs/research/minarc_pick1_redteam/attr_pick1_fit60.log 2>&1; tail -1 docs/research/minarc_pick1_redteam/attr_pick1_fit60.log",
+  "out": [
+   "docs/research/minarc_pick1_redteam/attr_pick1_fit60*"
+  ],
+  "env": {
+   "OMP_NUM_THREADS": "1",
+   "IGL_NUM_THREADS": "2",
+   "CB_EXACT": "1",
+   "CB_FOLD_MARGIN": "5.5"
+  },
+  "timeout": 3000
+ }
+]

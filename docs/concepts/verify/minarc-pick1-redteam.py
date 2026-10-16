@@ -53,9 +53,17 @@ def lifted(KR):
     return Lifted
 
 
+STOPB = float(os.environ.get("STOPB_DK", "0") or 0)       # optional: K stop B moved to this opening (deg), below the priced cut
+
+
 def params(R, which):
     P = R.P_bdp() if which == "BDp" else dict(R.KR.PARAMS, **{k: v for k, v in json.load(open(PICK1 if which == "pick1" else which)).items() if not k.startswith("_")})
-    return EP.priced(R.KR, P)
+    Pp, info = EP.priced(R.KR, P)
+    if STOPB > 0:                                           # a1max whose stop B sits at dK = STOPB (closed form of the K dyad)
+        b1, b2 = float(Pp["bk1"]) * D2R, float(Pp["bk2"]) * D2R; psiA = abs(float(info["psiA"])) * D2R
+        a1 = math.degrees(math.acos(math.cos(b1) * math.cos(b2) + math.sin(b1) * math.sin(b2) * math.cos(psiA + STOPB * D2R)))
+        if a1 < float(Pp["a1max"]): Pp["a1max"] = round(a1, 4); info["stopB_override_dK"] = STOPB; info["a1max_override"] = Pp["a1max"]
+    return Pp, info
 
 
 # ---------------------------------------------------------------- contact attribution
@@ -95,7 +103,9 @@ def mode_attr(fit, which, outp):
     R = _load("rt_remeasure", os.path.join(HERE, "minarc-bdp-remeasure.py")); R.KR.KModel = lifted(R.KR)
     Pp, pinfo = params(R, which)
     FIT = EB.bench("env", exact=False) if fit == "env" else R.PV.fast_bench(60, 160); assert FIT.mode == "fast"
-    W = R.PV.held_bench(); assert len(W.idx) == 1154
+    if os.environ.get("WEAR") == "bench":                   # the verified protocol's wear bench Bench(110,360), exact
+        W = CB.Bench(n_clip=110, n_ws=360); assert W.mode == "exact" and len(W.idx) == 470
+    else: W = R.PV.held_bench(); assert len(W.idx) == 1154
     M, fitr, M1, keys = R.freeze(FIT, W, Pp, R.KR.KModel); M.run(); ex, bad, rows = R.checks_B(M, W)
     Z = CB._poses_all(); names = list(Z["NAMES"]); cid = Z["CID"]; HGall = Z["HG"].astype(float)
     clipsel = np.array([not (str(names[c]).startswith("Workspace") or str(names[c]).startswith("Envelope")) for c in cid]); HGc = HGall[clipsel]
@@ -130,11 +140,11 @@ def mode_attr(fit, which, outp):
                            nearest_clip_pose=[round(float(x), 1) for x in Z["POSE"][cl][:3]]))
     fitlv = dict(f=[round(float(x), 2) for x in M.f], fK=round(float(M.fK), 2), tr=round(float(M.tr), 2))
     rep = W.report()
-    out = dict(fit=fit, config=which, lift=LIFT, price=pinfo, fit_report=fitr, levels=fitlv, held_report={k: rep[k] for k in ("gap", "reach", "follow", "inband14", "inband10", "contact")},
+    out = dict(fit=fit, config=which, lift=LIFT, wear=os.environ.get("WEAR", "held"), price=pinfo, fit_report=fitr, levels=fitlv, held_report={k: rep[k] for k in ("gap", "reach", "follow", "inband14", "inband10", "contact")},
                knocked=len(bad), poses=out_pose, contact=detail, secs=round(time.time() - t0, 1))
     json.dump(out, open(outp, "w"), indent=1, default=float)
     con = [x for x in detail if x["status"] == "contact"]
-    print(json.dumps(dict(config=which, fit=fit, lift=LIFT, levels=fitlv, held=out["held_report"], contact=len(con),
+    print(json.dumps(dict(config=which, fit=fit, wear=out["wear"], lift=LIFT, price=pinfo, levels=fitlv, held=out["held_report"], contact=len(con),
                           by_part={p: sum(1 for x in con if x["deepest_part"] == p) for p in sorted({x["deepest_part"] for x in con})},
                           by_region={p: sum(1 for x in con if x["region"] == p) for p in sorted({x["region"] for x in con})}, secs=out["secs"]), default=float), flush=True)
 
