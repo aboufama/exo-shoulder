@@ -13,6 +13,9 @@ Objective (`gap`, lower is better) = the NEAR-TOUCH gap of the verifier (v_near1
 comes within 1 mm of the skin counts as contact) - the buildable gap. The plain verifier gap (v) is reported beside it
 (`v_gap`). A dishonest report or a hub axis that is not accessible scores +100 (`honest` False).
 
+SPM_BIG=110,1432 (with CB_EXACT=1 SPM_ALLOW_EXACT=1) wears the frozen shape on another bench instead: the out-of-sample
+check after a polish that was fitted ON Bench(110,360) (all 1432 workspace-envelope poses, 1072 of them never seen).
+
 Hook for tools/concept_cma.py: evaluate(B, params) -> (params, report) (the B it passes is ignored); REPORT_KEYS lists
 the extra keys concept_cma keeps.
     python3 tools/concept_cma.py docs/concepts/verify/spine-parked-j2-3r-polish.py --x0 '{..}' --scales '{..}' ...
@@ -46,7 +49,8 @@ def benches():
             _B["fit"] = K.bench(60, 160)                                   # the frozen protocol always fits on the FAST grid
         finally:
             if ex is not None: os.environ["CB_EXACT"] = ex
-        _B["big"] = K.bench(110, 360)
+        nc, nw = (int(x) for x in os.environ.get("SPM_BIG", "110,360").split(","))   # an out-of-sample wear bench, e.g. 110,1432
+        _B["big"] = K.bench(nc, nw)
         if _B["big"].mode != "fast" and os.environ.get("SPM_ALLOW_EXACT") != "1" and os.environ.get("CB_EXACT") != "1":
             raise RuntimeError("Bench(110,360) has no fast cache here (tools/bench_cache_farm.py use 110 360)")
     return _B["fit"], _B["big"]
