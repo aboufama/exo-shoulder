@@ -96,3 +96,58 @@ Combined gate over all 4869: gain over the 2nd half 0.13, last third 0.00, top-5
 16.74 fast (the lead: 15.57 after 9096 configurations). Every free stream that started twisted anterior (+10 to +28 deg)
 walked the twist back to -8..+2 deg (the lead sits at -6.8); with the twist held fixed the converged optimum costs
 +2.2 fast at +8 deg and +7.4 at +15 deg.
+
+## Frozen exact claims (fit Bench(60,160) fast, worn on Bench(110,360) exact through the lead's verifier CorrModel)
+
+| config | fit (corr metal) | **frozen** | near-touch 1 mm | reach | follow | ib14 | contact | overhead | lost: fold / slide / contact | min metal |
+|---|---|---|---|---|---|---|---|---|---|---|
+| lead (verified, same harness) | 15.57 | **22.82** | 24.46 | 0.728 | 1.000 | 0.855 | 0.011 | 8/28 | 86 / 7 / 4 | 0.30 |
+| C0 (lead axis, wide dyad 30.5/45.2/70.7) | 17.38 | **24.46** | 27.70 | 0.733 | 0.955 | 0.851 | 0.029 | 8/28 | 76 / 12 / 11 | 0.03 |
+| A2 (wdir(73.6,-6.0), a2 63.0) | 17.20 | 25.52 | 27.19 | 0.731 | 0.964 | 0.851 | 0.037 | 7/28 | 75 / 11 / 14 | 0.18 |
+| R1 = best fast 16.74 (wdir(74.5,-3.8), a2 61.8) | 16.84 | 25.70 | 28.38 | 0.728 | 0.955 | 0.852 | 0.037 | 7/28 | 79 / 10 / 14 | 0.40 |
+| L2 = best fast 16.74 (wdir(70.4,-1.4), a2 64.5) | 16.83 | 25.85 | 27.49 | 0.722 | 0.936 | 0.857 | 0.024 | 7/28 | 85 / 12 / 9 | 0.45 |
+| A1 (wdir(70.9,+0.1), a2 66.2) | 17.54 | 26.16 | 27.25 | 0.722 | 0.936 | 0.854 | 0.024 | 7/28 | 84 / 11 / 9 | 0.43 |
+| T8 (twist fixed +8, converged) | 19.03 | 27.54 | 30.82 | **0.742** | 0.918 | 0.828 | 0.013 | **9/28** | 82 / 14 / 5 | 0.27 |
+| A3 point at +8.5 | 23.17 | 31.01 | 33.73 | 0.739 | 0.918 | 0.807 | 0.024 | 9/28 | 83 / 5 / 9 | 0.04 |
+| LHS best (wdir(72,2)) | 21.86 | 28.55 | 30.71 | 0.739 | 0.936 | 0.816 | 0.026 | - | 86 / 0 / 10 | - |
+
+Held out (A2): 28.44 frozen (the lead 26.75). Flood fill on the worn model (A2, L2): full grid 0 dropped (static = connected).
+Raw outputs: .cache/claim_twist/*.json (farm) and the scratchpad *_bench_local.json (local, same code).
+
+## Red team (own best)
+
+* **The optimistic number** is every fast number: 16.7-17.5 fast became 24.5-26.2 frozen (+7.7 to +9.0), worse than the
+  lead's own +7.25; the twisted configs lose the most in band (T8 ib14 0.828, L2 0.657 in band).
+* **The point that pinches**: C0's metal comes to 0.03 mm of the skin on ws plane 60 / elev 150 / axial -105 (overhead) and
+  0.12 mm at plane -75 / elev 45 / axial 120; near-touch 1 mm costs +3.24, 2 mm 37.84 (lead 44.08 - the wide dyad does not
+  make it worse at 2 mm). The rod post grows from 17 to 20.5 mm to clear K's cap (rod 43 mm long, rocker 0.77 in band).
+* **The pose that jams**: none jams (closure residual <= 0.015 deg, flood fill drops 0), but the law ends at lift-off with
+  m3e 0.0 at its end (dK law 77 deg, taken <= 47.8) - the stretched poses beyond th 130 are not reachable by the drive.
+* **What the wide dyad really buys**: 10 fold poses back (C0 fold 76 vs 86), all of them lost again to contact (11 vs 4),
+  knee slide (12 vs 7) and two clip frames (follow 0.955 vs 1.000): reach 0.733 vs 0.728. The next wall behind the
+  stretched fold wall is skin contact on the same overhead / stretched poses.
+
+## Verdict: DEAD (converged, measured)
+
+The J3 twist is refuted: every free CMA stream that started at +10..+30 deg anterior walked it back to -8..+2 deg (the
+lead sits at -6.8), an LHS start converged onto the lead's own seats, and with the twist held at +8 / +15 the converged
+optimum is +2.2 / +7.4 fast worse and 27.54 frozen (+4.7 over the lead) despite the highest frozen reach of the set (0.742,
+overhead 9/28). The wide K dyad (bk2 42-45, a1max 68-71) is the only part the search keeps, and frozen it buys nothing
+(best 24.46 vs 22.82). Converged gate over 4869 configurations: 0.13 / 0.00 / 0.13 score points.
+
+Limiter, measured: parking, not kinematics. The law-only kill gate shows a real +0.07 kinematic reach (0.814-0.825 vs
+0.742) at b3 0, but (a) a J3 twist moves J2's GH ray lateral / down (az2 57, el2 38) where hub 2 and link 2 lift out of
+the band (0.68 / 0.49-0.62); (b) keeping J2 parked turns the twist into a2 69-77, i.e. link 2 / hub 3 over the deltoid
+(skin contact 0.06-0.07); (c) the b3 tilt that keeps hub 3 low (0.35 -> 0.59 in band) costs 7-14 knee poses. Each
+recovered fold pose is re-lost to skin contact or knee slide on the same overhead / stretched poses.
+
+## New knowledge
+
+* A fold-window lever measured only kinematically (window arithmetic, parking proxy) over-predicts by the parking term:
+  here +0.07 kinematic reach -> +0.005 frozen reach. The proxy's hub-2 parking (0.96) did not see that the J2 seat
+  follows the J3 seat through circ_int.
+* The lead's J3 effective axis (wdir(76, -7), tilt 35 deg toward the skin normal) is a local optimum that independent
+  CMA starts return to; the window cannot be re-centred from the J3 side within the 1 cm band.
+* The wide K dyad converts ~10 stretched-fold losses into contact / knee-slide losses: the stretched wall and the
+  skin-contact wall coincide on the overhead poses, so moving the fold wall alone cannot buy reach. The next lever must
+  lower the metal on those poses (drive metal in band, sidecar) rather than widen the window.

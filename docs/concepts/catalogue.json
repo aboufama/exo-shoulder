@@ -2517,7 +2517,7 @@
   "name": "J3 re-seat for reach on the strap-level drive: J3 turned 15-37 deg anterior about the humerus, a2 58-66, K dyad widened (merged with the crest-seat variant)",
   "family": "redundant 4R, slaved spare (frontload knuckle + pin knee), J3 seat / a2 lever",
   "lens": "round8:window-geometry (J3-side re-centring; merged from crest-j3-wide-dyad-knuckle-3r)",
-  "status": "ideated",
+  "status": "dead",
   "t_ideated": "2026-10-16T18:20:09Z",
   "source": "round 8 judge (docs/concepts/round8_ideation.md)",
   "merged_from": [
