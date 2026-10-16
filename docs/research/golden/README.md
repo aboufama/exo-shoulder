@@ -73,7 +73,7 @@ worker slot, and outside the serverless worker quota (the farm's 9 workers would
 both branches, all four stack orders) + the 4 leaders as seeds, then (1 + 16) evolution around the 24 best distinct
 configs (Gaussian steps on the zc SCALE, x1.25 / x0.85 step control, 5 % sigma / inv flips) until the 30 min budget.
 Metal outside the grid box is read on the grid there (`GB_EXACT_OUTSIDE=0`, the configs that have any are counted per
-row in `outside` and are dishonest, +100, anyway). Frontier: docs/research/golden/gpu_frontier.json (best 64 + history).
+row in `outside` and are dishonest, +100, anyway). Frontier: docs/research/golden/gpu_climb_gpu6.json (best 64 + history; was gpu_frontier.json).
 
 What it measured (new knowledge): the uniform map of 6144 configs found nothing better than the leaders' basin (best
 45.2 after the map, the spine-parked polish seed scores 46.8 on this objective); the climb then moved the basin to
@@ -96,5 +96,28 @@ from the inv3 = 1 basin and a 4-DOF / fold-lever family port - reach, not proxim
 
 Pods (outside the serverless worker quota, both mounting the farm volume exo-farm-cas, secure cloud EU-RO-1; work
 reaches them through the volume spool as before): **exo-gpu-bench = 1x NVIDIA RTX PRO 4000 Blackwell (24 GB), $0.57/h**
-(spool exo-farm/gpu) and **exo-gpu-bench2 = 1x NVIDIA RTX 5090 (32 GB), $1.19/h** (spool exo-farm/gpu2; only if stock
-allows - wall clock is the constraint). Time box ~2.3 h, ~$4 at most; both are terminated the moment the search ends.
+(spool exo-farm/gpux0) and **exo-gpu-bench2 = 1x NVIDIA RTX 5090 (32 GB), $1.19/h** (spool exo-farm/gpux1; wall clock
+is the constraint). Time box ~2.3 h, ~$4 at most; both are terminated the moment the search ends. The farm queue was
+31 jobs deep (golden-push), so the first pods (08:09, spool only) were terminated after 9 min unused and re-created at
+08:18 carrying their code and jobs in the pod definition (`tools/gpu_pod.py create --payload ... --jobs ...`: an env
+var with the tar.gz of the code, unpacked at start, jobs queued in the pod's own spool) - no farm round trip to start.
+
+Method (pipeline/gpu_pod/xs.sh, `tools/gpu_bench.py screen` / `cma`, both pods = 2 halves of one Sobol sequence):
+1. **Sobol map of the whole class** (scrambled Sobol, seed 11, 11 dims = tools/zc_frontier.py cmd_sobol's map: J1 seat
+   az / el area-uniform over the allowed back + acromion-top region only, J3 direction area-uniform over the arm-frame
+   sphere wd 20-175 (both ends of the J3 line), arcs a1 / a2 12-168 (both ends of the J2 line), branch, q 0.8-1, end
+   hold 0-8), on **Bench(110,360)** (the verification pose set).
+2. **Exact lower bounds, no strap needed**: stage A = K1 closure + K2 dense continuity (the full bench's own mask) ->
+   reach / follow upper bounds; stage B = the three O20 hub discs alone: their K3 levels (= the full bench's hub F,
+   which no strap changes; > 140 mm = +100) and the poses where a hub underside / crown / wall / top face is inside the
+   skin at that level (never `good` in the full bench). Bound = 100 (max(0, .90 - reach_ub) + max(0, .95 - follow_ub))
+   (+100 if a hub F > 140): reach / follow can only drop further, in-band and contact only add, so the plain AND the
+   near-touch gap of every config are >= its bound.
+3. **Full bench in bound order** for every config with bound < 45, at both J3 stack orders (inv2 = 0, inv3 = 0 / 1),
+   until the budget: the certificate is the bound of the first config left out (nothing below it was skipped).
+4. **Batched multi-start CMA-ES** (one CMA per basin, lambda 12, all populations in one GPU call, near-touch objective
+   by the CLAUDE.md rule) from the 50 best distinct basins of both screens (+ the CPU optimum 28.85 and the 20-min climb's
+   36.66 as seeds), a converged start (sigma or 15 generations without a 0.05 gain) hands its slot to the next basin.
+5. **Outside judge**: the 10 best distinct configs by GPU plain gap -> `tools/zc_frontier.py frozen` (the zc model's
+   checks + docs/concepts/verify/spine-parked-j2-3r.py top_check, O20, margin 5) on the pods' CPUs: fit Bench(110,360)
+   fast -> wear Bench(110,360) EXACT, and the verifier protocol fit Bench(60,160) fast -> wear Bench(110,360) EXACT.
