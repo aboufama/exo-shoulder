@@ -494,65 +494,88 @@ def link1_posed_check(tab_mesh, l1_mesh, frames):
     return worst
 
 
-def base_part(M, E, l1_body, frames):
-    """J1 upper ring + tab (16 wide) to the user's scapula handler, 2x M4 counterbored; candidates = headings about J1 x
-    terminal angles off J1 (0 = flat in the J1 upper seat plane); feasible = >= 0.5 mm over the scapula-frame skin envelope
-    (2 mm clearance) and >= 0.5 mm from the posed link 1 over every clip frame; best = lowest mean envelope clearance"""
-    D = M.D; k1 = unit(D.u[0]); F1 = M.f[0]; up_mid = LV["U0"] + T / 2; WT = 16.0
+EAR_L, EAR_W, EAR_RF, M4_TAP = 14.5, 9.0, 3.0, 3.3                                        # ear: hole centre from the J1 axis, width, root fillet, M4 tap drill
+
+
+def ear_margins(M, l1_body, rel):
+    """link 1's built surface posed into the base frame over every frame (rel = [(R, t)] l1 local -> base local), kept
+    near the ear level and outside the hub ring; per heading (1 deg) the min 3D distance to an ear slab (capsule axis ->
+    EAR_L, half width EAR_W / 2, levels F1 + U0 .. + T): all points, and without link 1's own J1 pad (its top face is the
+    stack's designed 0.15 mm running gap under the base's upper level)"""
+    D = M.D; k1 = unit(D.u[0]); F1 = M.f[0]; R = M.hr[0]; lev = F1 + LV["U0"]
     d0 = unit(np.array([0.0, 0.6, -0.8])); d0 = unit(d0 - (d0 @ k1) * k1); d1 = np.cross(k1, d0)
-    l1m = tess(l1_body); cands = []
-    for al in np.arange(-180.0, 180.0, 10.0):
-        td = math.cos(math.radians(al)) * d0 + math.sin(math.radians(al)) * d1
-        fld = US.PolarField(E, "S", np.eye(3), k1, td, -5.0, 75.0, WT)
-        # flat: pad (14) + terminal (14 + round end 8) in the J1 upper seat plane, underside at F1 + U0
-        Uf = np.array([(F1 + LV["U0"], x_) for x_ in np.linspace(0, 36, 37)])
-        cf = fld(Uf)
-        if cf.min() >= 0.5: cands.append(dict(al=al, th=0.0, h=F1 + up_mid, score=float(cf.mean()), td=td, fld=fld))
-        for thd in (10.0, 20.0, 30.0):
-            th = math.radians(thd)
-            for h in np.arange(F1 + up_mid, F1 + 40, 0.5):
-                P0 = h * np.array([math.cos(th), math.sin(th)]); hd = np.array([-math.sin(th), math.cos(th)])
-                U = np.array([P0 + s_ * hd for s_ in np.linspace(0, 22, 12)]) - (T / 2) * np.array([math.cos(th), math.sin(th)])
-                cu = fld(U)
-                if cu.min() >= 0.5:
-                    cands.append(dict(al=al, th=thd, h=float(h), score=float(cu.mean()) + 0.5 * (h - F1 - up_mid), td=td, fld=fld)); break
-    assert cands, "base tab: no candidate clears the skin envelope"
-    cands.sort(key=lambda c_: c_["score"]); tried = []
-    for cd in cands[:24]:
-        al, thd, ht, ey_, fld = cd["al"], cd["th"], cd["h"], cd["td"], cd["fld"]; th = math.radians(thd)
-        try:
-            body = plate_R(k1, F1 + LV["U0"], ey_, WT, M.hr[0], upper=True)
-            if thd == 0.0:
-                o_mid = (F1 + up_mid) * k1 + L_SEAT * ey_; nrm = k1; sd = ey_; fit = None
-            else:
-                start = (F1 + up_mid, L_SEAT, math.pi / 2); end = (*(ht * np.array([math.cos(th), math.sin(th)])), th + math.pi / 2); fit = None
-                for cm, rm in ((35.0, 12.0), (45.0, 6.0), (60.0, 4.0)):
-                    for n_ in (2, 3):
-                        try: fit = SK.fit_chain(start, end, fld, T, n_arcs=n_, climb_max=cm, r_min=rm, l_min=2.0, seeds=8); break
-                        except RuntimeError: pass
-                    if fit: break
-                if not fit: tried.append((al, thd, "no chain")); continue
-                body = US.glue(body, US.bar_swept(k1, ey_, start, fit["segs"], w=WT))
-                o_mid = ht * (math.cos(th) * k1 + math.sin(th) * ey_); sd = -math.sin(th) * k1 + math.cos(th) * ey_; nrm = unit(o_mid)
-            body = US.glue(body, US.terminal_r(o_mid, nrm, sd, WT, 14.0))
-            body = US.glue(body, upper_ring_R(k1, F1, M.hr[0]))
-            body = body.cut(bore_cutter_R(k1, F1, M.hr[0]))
-            for x_ in (6.0, 14.0):                                                         # 2x M4: O4.3 through, O7.3 x 1.2 counterbore
-                cc = o_mid + x_ * sd
-                body = body.cut(cq.Solid.makeCylinder(2.15, 12.0, V(cc - 6 * nrm), V(nrm)))
-                body = body.cut(cq.Solid.makeCylinder(3.65, 3.0, V(cc + (T / 2 - 1.2) * nrm), V(nrm)))
-            body = body.clean() if body.clean().isValid() else body
-        except Exception as e_:
-            tried.append((al, thd, f"cad {e_}")); continue
-        cl = link1_posed_check(tess(body), l1m, frames)
-        tried.append((float(al), thd, round(cl, 2)))
-        print(f"  base tab heading {al:.0f}, terminal {thd:.0f} deg off J1 at {ht:.1f}: envelope mean {cd['score']:.2f}, vs posed link 1 {cl:.2f} mm", flush=True)
-        if cl >= 0.5 and body.isValid() and len(body.Solids()) == 1:
-            print(f"base tab: heading {al:.0f} deg, terminal {thd:.0f} deg off J1 at {ht:.1f} mm, link 1 >= {cl:.2f} mm; valid {body.isValid()}", flush=True)
-            return ("base", 0, "D8-01 scapula base: J1 hub + tab, 2x M4 counterbored to the scapula handler (Ti-6Al-4V)", body), \
-                dict(heading_deg=float(al), terminal_deg=thd, terminal_height=float(ht), envelope_mean_clear=cd["score"], link1_min_mm=cl,
-                     radii=None if fit is None else fit["radii"], tried=tried, valid=body.isValid())
-    raise RuntimeError(f"base tab: no candidate clears link 1: {tried}")
+    l1m = tess(l1_body, fine=False); X1 = np.r_[np.asarray(l1m.vertices), trimesh.sample.sample_surface_even(l1m, 8000, seed=4)[0]]
+    keep = []
+    for Rr, tr_ in rel:
+        P = X1 @ Rr.T + tr_; z = P @ k1; rad = np.linalg.norm(P - np.outer(z, k1), axis=1)
+        sel = (z > lev - 2.0) & (z < lev + T + 2.0) & (rad > R + 0.3) & (rad < EAR_L + EAR_W / 2 + 3.0)
+        if sel.any(): keep.append(P[sel])
+    P = np.concatenate(keep) if keep else np.zeros((0, 3))
+    z = P @ k1; x0, y0 = P @ d0, P @ d1; pad = z <= F1 + T + 0.01
+    dz = np.maximum(np.maximum(lev - z, z - (lev + T)), 0.0)
+    m_all, m_np = np.full(360, 99.0), np.full(360, 99.0)
+    for a in range(360):
+        ca, sa = math.cos(math.radians(a)), math.sin(math.radians(a))
+        x = x0 * ca + y0 * sa; y = -x0 * sa + y0 * ca
+        d2 = np.hypot(x - np.clip(x, 0.0, EAR_L), y) - EAR_W / 2
+        d = np.where(dz > 0, np.hypot(np.maximum(d2, 0.0), dz), d2)
+        if len(d): m_all[a] = float(d.min()); m_np[a] = float(d[~pad].min()) if (~pad).any() else 99.0
+    return dict(d0=d0, d1=d1, m_all=m_all, m_nopad=m_np, n_pts=int(len(P)), l1m=l1m)
+
+
+def base_part(M, E, l1_body, rel, frames):
+    """the scapula base AT THE J1 HUB RING (user ruling 2026-10-16: the scapula handler carries the base directly at the
+    J1 ring, no tab out to a remote terminal): J1 upper ring + bore, the upper seat disc, and two short ears in the J1
+    upper seat plane (planform: the hub circle + a 9 wide bar to 14.5 mm with an R4.5 end and R3 root fillets - lines +
+    tangent arcs, extruded 3 mm), each with one M4 tapped hole (O3.3 tap drill, 3 mm Ti = 0.75 D engagement) for the
+    handler's bracket, which bolts on from above (outer side). Ear headings: link 1 (built, posed over every clip and
+    workspace frame) >= 1 mm from each ear above its own pad (>= 0.15 mm designed running gap at the pad), >= 0.5 mm over
+    the scapula-frame skin envelope (2 mm clearance), the two ears 90-180 deg apart, the largest worst margin"""
+    D = M.D; k1 = unit(D.u[0]); F1 = M.f[0]; R = M.hr[0]; lev = F1 + LV["U0"]
+    em = ear_margins(M, l1_body, rel); d0, d1 = em["d0"], em["d1"]
+    hd = lambda a: math.cos(math.radians(a)) * d0 + math.sin(math.radians(a)) * d1
+    ok_link = [a for a in range(0, 360, 2) if em["m_nopad"][a] >= 1.0 and em["m_all"][a] >= 0.15]
+    skin = {}
+    for a in ok_link[::2] if len(ok_link) > 90 else ok_link:
+        fld = US.PolarField(E, "S", np.eye(3), k1, hd(a), -5.0, 75.0, EAR_W)
+        Uf = np.array([(lev, x_) for x_ in np.linspace(R, EAR_L + EAR_W / 2, 12)]); skin[a] = float(fld(Uf).min())
+    feas = [a for a, v in skin.items() if v >= 0.5]
+    print(f"base at the J1 ring: {em['n_pts']} posed link-1 samples near the ear level; headings clear of link 1 {len(ok_link)}/180, "
+          f"of those clear of the skin envelope {len(feas)}/{len(skin)}", flush=True)
+    score = lambda a: min(em["m_nopad"][a], 3.0) + 0.5 * min(em["m_all"][a], 1.0) + 0.2 * min(skin[a], 3.0)
+    best = None
+    for i, a in enumerate(feas):
+        for b in feas[i + 1:]:
+            sep = abs((b - a + 180) % 360 - 180)
+            if sep < 90: continue
+            sc = (min(score(a), score(b)), sep)
+            if best is None or sc > best[0]: best = (sc, a, b)
+    assert best is not None, f"base: no pair of ear headings 90-180 deg apart clears link 1 and the skin ({feas})"
+    _, a1, a2 = best
+    body = None
+    for a in (a1, a2):
+        pl = US.plate(k1, lev, hd(a), EAR_W, T, EAR_L, R=R, rf=EAR_RF)
+        pl = pl.fuse(disc((EAR_L) * hd(a), k1, EAR_W / 2, lev, lev + T)).clean()
+        body = pl if body is None else US.glue(body, pl)
+    body = US.rounded(body, skip=lambda e: e.geomType() == "CIRCLE" and abs(np.array(e.positionAt(0.5).toTuple()) @ k1 - (lev + T)) < 1e-3
+                      and abs(np.linalg.norm((lambda p: p - (p @ k1) * k1)(np.array(e.positionAt(0.5).toTuple()))) - R) < 1e-3)
+    body = US.glue(body, upper_ring_R(k1, F1, R))
+    body = ring_root_R(body, k1, F1, R)
+    body = body.cut(bore_cutter_R(k1, F1, R))
+    for a in (a1, a2):
+        cc = EAR_L * hd(a)
+        body = body.cut(cq.Solid.makeCylinder(M4_TAP / 2, T + 2.0, V(cc + (lev - 1.0) * k1), V(k1)))
+    body = body.clean() if body.clean().isValid() else body
+    cl = link1_posed_check(tess(body), em["l1m"], frames)
+    print(f"base: ears at {a1} / {a2} deg (sep {abs((a2 - a1 + 180) % 360 - 180)}), link 1 margins {em['m_nopad'][a1]:.2f} / {em['m_nopad'][a2]:.2f} mm "
+          f"(incl. its pad {em['m_all'][a1]:.2f} / {em['m_all'][a2]:.2f}), skin envelope {skin[a1]:.2f} / {skin[a2]:.2f} mm; built base vs posed link 1 "
+          f"{cl:.2f} mm; valid {body.isValid()}, solids {len(body.Solids())}", flush=True)
+    return ("base", 0, "D8-01 scapula base AT THE J1 RING: J1 O20 ring + seat disc + 2 ears, each 1x M4 tapped (O3.3 tap drill) for the user's "
+                       "scapula handler bracket from above - no tab (Ti-6Al-4V, 5-axis machined)", body), \
+        dict(rule="base at the J1 hub ring, no tab (user 2026-10-16)", ears_deg=[a1, a2], ear=dict(hole_from_axis=EAR_L, width=EAR_W, thread="M4 tapped, 3 mm",
+             tap_drill=M4_TAP), link1_margin_above_pad_mm=[float(em["m_nopad"][a1]), float(em["m_nopad"][a2])],
+             link1_margin_incl_pad_mm=[float(em["m_all"][a1]), float(em["m_all"][a2])], skin_envelope_mm=[skin[a1], skin[a2]],
+             built_vs_posed_link1_mm=cl, headings_clear_of_link1=len(ok_link), headings_feasible=feas, valid=body.isValid(), solids=len(body.Solids()))
 
 
 # ---------------------------------------------------------------------------------------------------- kinematic check
@@ -631,17 +654,19 @@ def main():
     parts.append(knee_link(M))
     l1b = json.load(open(os.path.join(FULL, "designs", a.l1, "build.json")))
     arm, users, rep["arm side"] = arm_side(M, l1b["mount"]); parts += arm
-    # base tab vs the posed link 1 over every 2nd frame of every clip (the L1's clips = the model's frames)
-    C = json.load(open(os.path.join(FULL, "designs", a.l1, "clips.json"))); frames = []
-    for cl in C["clips"]:
-        for fi, f in enumerate(cl["frames"]):
-            if fi % 2: continue
-            g = lambda k: np.array(f["G"][k]).reshape(3, 3); t_ = lambda k: np.array(f.get("T", {}).get(k, [0, 0, 0]), float)
-            frames.append((g("base"), t_("base"), g("l1"), t_("l1")))
+    # the base at the J1 ring vs the posed link 1: every clip frame + every eval-feasible workspace pose (the L1's frames =
+    # the model's); the built-mesh confirmation on every 3rd clip frame
+    C = json.load(open(os.path.join(FULL, "designs", a.l1, "clips.json"))); frames = []; rel = []
+    Wj = json.load(open(os.path.join(FULL, "designs", a.l1, "workspace.json")))
+    allf = [f for cl in C["clips"] for f in cl["frames"]] + [p for p in Wj["poses"] if p.get("eval_feasible")]
+    for fi, f in enumerate(allf):
+        g = lambda k: np.array(f["G"][k]).reshape(3, 3); t_ = lambda k: np.array(f.get("T", {}).get(k, [0, 0, 0]), float)
+        Gb, Tb, G1, T1 = g("base"), t_("base"), g("l1"), t_("l1"); rel.append((Gb.T @ G1, Gb.T @ (T1 - Tb)))
+        if fi % 3 == 0: frames.append((Gb, Tb, G1, T1))
     E = PB.Envelope(os.path.join(FULL, "designs", PB.BAND))
     for p, G in E.frames: G["S"] = E.RS[p]
     l1_body = next(s for g, mem, n, s in parts if n.startswith("D8-02"))
-    bp, rep["base"] = base_part(M, E, l1_body, frames); parts.append(bp)
+    bp, rep["base"] = base_part(M, E, l1_body, rel, frames); parts.append(bp)
     # ---- export: member-local for members 0-4 / 6, H = HR x for member 5, the user's parts as they are
     HR = PK.HR
     allp = [(g, n, xform(s, HR, np.zeros(3)) if mem == 5 else s, mem) for g, mem, n, s in parts] + [(g, n, s, None) for g, n, s in users]
