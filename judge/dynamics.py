@@ -25,6 +25,16 @@ Model (SI units inside MuJoCo; the body rig frame: thorax, x anterior, y up, z r
   contact  stacked links: hub discs as cylinders, ribbons as capsule chains at their real height and thickness (from the
            meshes), mu 0.2; the designed bearing (hub on hub, hub on the other member's hub-side ribbon root at a shared
            joint) is the hinge itself and is not a contact.
+GENERAL CHAIN (2026-10-16, GenDesign; used automatically when the clips carry per-group offsets T, split members l1a / l1b
+or more member groups than the az/el/a chain has links - knee designs, minarc's knuckle): the members are the clips' own
+posed groups in serial order (base, l1 / l1a / l1b, l2, l3 = member 3, l4 = knee link) and the arm (canonical humerus at
+GH); every adjacent pair is joined by the hinge FITTED to its relative motion over all clip frames (axis and point; the
+residuals are reported and a pair that is not a hinge stops the judge - a design with passive slides falls back to the
+spherical approximation, labelled in dynamics.json "chain"); masses / inertias per group; a knuckle K gets its clock spring
+(0.08 N.m preload at stop A, rate 0.015 nominal and 0.010 N.m/rad) and its stops A / B, J2 its q2 stops, as joint limits;
+member-member contact is not modelled there (R6). Cross-checked against the spherical path on a 3R
+(judge/test_dynamics.py --general). Until 2026-10-16 these designs were judged as their orientation-equivalent spherical
+3R (minarc crashed: KeyError 'l1').
 For N = 4 the passive chain's spare DOF is free: it does what friction, gravity and inertia make it do, and its drift from
 the evaluator's planned path (which the geometric judges assume) is reported. Motor (back-driven gearmotor armature) and
 servo (spare J1 on the plan) cases remain as --cases options; validate() uses the servo only as a numerical device.
