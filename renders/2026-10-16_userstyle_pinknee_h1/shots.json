@@ -1,0 +1,470 @@
+{
+ "design": "pipeline/full-exo/designs/user_pinknee_h1",
+ "tool": "GRID=0.01 pipeline/full-exo/shots_plan.py <design dir> <out dir> '<spec>' ; pipeline/joint-render/film_client.py stills <out>/scene.glb <out>/motion.json <out>/out --spp 192",
+ "skin": "render_stills.py default: base 0.028, roughness 0.9, specular 0.2, no coat, no sheen",
+ "scenes": {
+  "parts": {
+   "pose": {
+    "clip": "Raise overhead",
+    "frame": 36
+   },
+   "cams": [
+    {
+     "dir": "auto",
+     "fov": 22,
+     "aim": "chain",
+     "tight": 1.1,
+     "fstop": 11,
+     "file": "parts_shoulder_top.jpg"
+    },
+    {
+     "dir": [
+      0.15,
+      0.55,
+      0.82
+     ],
+     "fov": 24,
+     "aim": "chain",
+     "tight": 1.25,
+     "fstop": 11,
+     "file": "parts_shoulder_lateral.jpg"
+    },
+    {
+     "dir": [
+      -0.55,
+      0.5,
+      0.67
+     ],
+     "fov": 24,
+     "aim": "chain",
+     "tight": 1.25,
+     "fstop": 11,
+     "file": "parts_shoulder_posterior.jpg"
+    },
+    {
+     "dir": "auto",
+     "fov": 18,
+     "aim": "l3+l4",
+     "tight": 1.0,
+     "fstop": 16,
+     "file": "parts_knee_top.jpg"
+    },
+    {
+     "dir": [
+      0.15,
+      0.55,
+      0.82
+     ],
+     "fov": 18,
+     "aim": "l3+l4",
+     "tight": 1.0,
+     "fstop": 16,
+     "file": "parts_knee_lateral.jpg"
+    },
+    {
+     "dir": [
+      0.15,
+      0.55,
+      0.82
+     ],
+     "fov": 14,
+     "aim": "l4",
+     "tight": 1.0,
+     "fstop": 16,
+     "file": "parts_knee_macro.jpg"
+    }
+   ],
+   "clearance": {
+    "H": {
+     "inside_n": 36,
+     "n": 6837,
+     "deepest_mm": 1.65,
+     "min_gap_mm": 0.02
+    },
+    "F": {
+     "inside_n": 1964,
+     "n": 6869,
+     "deepest_mm": 8.77,
+     "min_gap_mm": 0.0
+    },
+    "base": {
+     "inside_n": 0,
+     "n": 6860,
+     "deepest_mm": 0.0,
+     "min_gap_mm": 10.1
+    },
+    "l4": {
+     "inside_n": 0,
+     "n": 1520,
+     "deepest_mm": 0.0,
+     "min_gap_mm": 10.77
+    },
+    "l3": {
+     "inside_n": 0,
+     "n": 2640,
+     "deepest_mm": 0.0,
+     "min_gap_mm": 7.35
+    },
+    "l2": {
+     "inside_n": 0,
+     "n": 6585,
+     "deepest_mm": 0.0,
+     "min_gap_mm": 5.9
+    },
+    "l1": {
+     "inside_n": 0,
+     "n": 6288,
+     "deepest_mm": 0.0,
+     "min_gap_mm": 3.13
+    }
+   }
+  },
+  "overhead": {
+   "pose": {
+    "clip": "Raise overhead",
+    "frame": 78
+   },
+   "cams": [
+    {
+     "dir": [
+      -0.6,
+      0.35,
+      0.72
+     ],
+     "fov": 30,
+     "aim": "all",
+     "tight": 0.95,
+     "file": "hero_overhead_back.jpg"
+    },
+    {
+     "dir": "auto",
+     "fov": 22,
+     "aim": "chain",
+     "tight": 1.15,
+     "fstop": 11,
+     "file": "hero_overhead_chain.jpg"
+    },
+    {
+     "dir": [
+      -0.25,
+      0.25,
+      0.93
+     ],
+     "fov": 30,
+     "aim": "chain",
+     "tight": 2.2,
+     "file": null
+    },
+    {
+     "dir": [
+      -0.6,
+      0.35,
+      0.72
+     ],
+     "fov": 30,
+     "aim": "chain",
+     "tight": 2.6,
+     "file": "hero_overhead_back_mid.jpg"
+    }
+   ],
+   "clearance": {
+    "H": {
+     "inside_n": 35,
+     "n": 6837,
+     "deepest_mm": 0.94,
+     "min_gap_mm": 0.05
+    },
+    "F": {
+     "inside_n": 1970,
+     "n": 6869,
+     "deepest_mm": 8.83,
+     "min_gap_mm": 0.0
+    },
+    "base": {
+     "inside_n": 0,
+     "n": 6856,
+     "deepest_mm": 0.0,
+     "min_gap_mm": 4.72
+    },
+    "l4": {
+     "inside_n": 0,
+     "n": 1520,
+     "deepest_mm": 0.0,
+     "min_gap_mm": 11.3
+    },
+    "l3": {
+     "inside_n": 0,
+     "n": 2639,
+     "deepest_mm": 0.0,
+     "min_gap_mm": 7.79
+    },
+    "l2": {
+     "inside_n": 0,
+     "n": 6586,
+     "deepest_mm": 0.0,
+     "min_gap_mm": 3.0
+    },
+    "l1": {
+     "inside_n": 0,
+     "n": 6288,
+     "deepest_mm": 0.0,
+     "min_gap_mm": 1.76
+    }
+   }
+  },
+  "shelf": {
+   "pose": {
+    "clip": "Reach a high shelf",
+    "frame": 78
+   },
+   "cams": [
+    {
+     "dir": [
+      0.55,
+      0.25,
+      0.8
+     ],
+     "fov": 30,
+     "aim": "all",
+     "tight": 0.95,
+     "file": "hero_shelf_front.jpg"
+    },
+    {
+     "dir": [
+      -0.6,
+      0.35,
+      0.72
+     ],
+     "fov": 30,
+     "aim": "all",
+     "tight": 0.95,
+     "file": "hero_shelf_back.jpg"
+    },
+    {
+     "dir": [
+      -0.35,
+      0.3,
+      0.89
+     ],
+     "fov": 24,
+     "aim": "chain",
+     "tight": 1.5,
+     "file": "hero_shelf_chain.jpg"
+    }
+   ],
+   "clearance": {
+    "H": {
+     "inside_n": 39,
+     "n": 6837,
+     "deepest_mm": 1.54,
+     "min_gap_mm": 0.02
+    },
+    "F": {
+     "inside_n": 1920,
+     "n": 6870,
+     "deepest_mm": 8.8,
+     "min_gap_mm": 0.0
+    },
+    "base": {
+     "inside_n": 0,
+     "n": 6861,
+     "deepest_mm": 0.0,
+     "min_gap_mm": 9.05
+    },
+    "l4": {
+     "inside_n": 0,
+     "n": 1520,
+     "deepest_mm": 0.0,
+     "min_gap_mm": 8.46
+    },
+    "l3": {
+     "inside_n": 0,
+     "n": 2642,
+     "deepest_mm": 0.0,
+     "min_gap_mm": 4.82
+    },
+    "l2": {
+     "inside_n": 0,
+     "n": 6587,
+     "deepest_mm": 0.0,
+     "min_gap_mm": 6.59
+    },
+    "l1": {
+     "inside_n": 0,
+     "n": 6288,
+     "deepest_mm": 0.0,
+     "min_gap_mm": 6.06
+    }
+   }
+  },
+  "rest": {
+   "pose": {
+    "clip": "Raise overhead",
+    "frame": 0
+   },
+   "cams": [
+    {
+     "dir": [
+      -0.7,
+      0.3,
+      0.65
+     ],
+     "fov": 30,
+     "aim": "all",
+     "tight": 1.05,
+     "shift": [
+      0,
+      40,
+      0
+     ],
+     "file": "rest_back_lateral.jpg"
+    },
+    {
+     "dir": [
+      -0.75,
+      0.45,
+      0.5
+     ],
+     "fov": 24,
+     "aim": "chain",
+     "tight": 1.6,
+     "file": "rest_back_chain.jpg"
+    },
+    {
+     "dir": [
+      0.2,
+      0.25,
+      0.95
+     ],
+     "fov": 24,
+     "aim": "chain",
+     "tight": 1.3,
+     "fstop": 11,
+     "file": "rest_lateral_chain.jpg"
+    }
+   ],
+   "clearance": {
+    "H": {
+     "inside_n": 34,
+     "n": 6837,
+     "deepest_mm": 1.74,
+     "min_gap_mm": 0.01
+    },
+    "F": {
+     "inside_n": 2048,
+     "n": 6870,
+     "deepest_mm": 8.86,
+     "min_gap_mm": 0.0
+    },
+    "base": {
+     "inside_n": 0,
+     "n": 6861,
+     "deepest_mm": 0.0,
+     "min_gap_mm": 12.32
+    },
+    "l4": {
+     "inside_n": 0,
+     "n": 1520,
+     "deepest_mm": 0.0,
+     "min_gap_mm": 7.98
+    },
+    "l3": {
+     "inside_n": 0,
+     "n": 2638,
+     "deepest_mm": 0.0,
+     "min_gap_mm": 4.46
+    },
+    "l2": {
+     "inside_n": 0,
+     "n": 6587,
+     "deepest_mm": 0.0,
+     "min_gap_mm": 8.37
+    },
+    "l1": {
+     "inside_n": 0,
+     "n": 6288,
+     "deepest_mm": 0.0,
+     "min_gap_mm": 8.91
+    }
+   }
+  },
+  "knee_rest": {
+   "pose": {
+    "clip": "Raise overhead",
+    "frame": 0
+   },
+   "cams": [
+    {
+     "dir": [
+      0.2,
+      0.25,
+      0.95
+     ],
+     "fov": 14,
+     "aim": "l4",
+     "tight": 1.0,
+     "fstop": 16,
+     "file": "parts_knee_rest_macro.jpg"
+    },
+    {
+     "dir": [
+      -0.268,
+      0.853,
+      0.447
+     ],
+     "fov": 16,
+     "aim": "l4",
+     "tight": 1.6,
+     "fstop": 16,
+     "file": null
+    }
+   ],
+   "clearance": {
+    "H": {
+     "inside_n": 34,
+     "n": 6837,
+     "deepest_mm": 1.74,
+     "min_gap_mm": 0.01
+    },
+    "F": {
+     "inside_n": 2048,
+     "n": 6870,
+     "deepest_mm": 8.86,
+     "min_gap_mm": 0.0
+    },
+    "base": {
+     "inside_n": 0,
+     "n": 6861,
+     "deepest_mm": 0.0,
+     "min_gap_mm": 12.32
+    },
+    "l4": {
+     "inside_n": 0,
+     "n": 1520,
+     "deepest_mm": 0.0,
+     "min_gap_mm": 7.98
+    },
+    "l3": {
+     "inside_n": 0,
+     "n": 2638,
+     "deepest_mm": 0.0,
+     "min_gap_mm": 4.46
+    },
+    "l2": {
+     "inside_n": 0,
+     "n": 6587,
+     "deepest_mm": 0.0,
+     "min_gap_mm": 8.37
+    },
+    "l1": {
+     "inside_n": 0,
+     "n": 6288,
+     "deepest_mm": 0.0,
+     "min_gap_mm": 8.91
+    }
+   }
+  }
+ },
+ "blast_rough": 0.5,
+ "look_note": "render_stills.py: blasted metal roughness 0.5 via motion.json blast_rough (default 0.38 mirrored the dark world on dome caps); exo parts smooth-by-angle 30 deg"
+}

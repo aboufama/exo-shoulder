@@ -43,7 +43,9 @@ def principled(name, color, metal, rough, bump=None, coat=0.0):
         mr = nt.nodes.new("ShaderNodeMapRange"); mr.inputs["To Min"].default_value = rough - 0.04; mr.inputs["To Max"].default_value = rough + 0.04
         nt.links.new(nz.outputs["Fac"], mr.inputs["Value"]); nt.links.new(mr.outputs["Result"], b.inputs["Roughness"])
     return m
-alu = principled("blasted", (0.60, 0.615, 0.635), 1.0, 0.38, bump=(9000, 0.18))
+# motion.json "blast_rough" overrides the blasted metal roughness (default 0.38): at 0.38 a dome cap facing the camera mirrors
+# the dark studio world and reads near-black (2026-10-16 pin-knee stills); real bead blast is satin, ~0.5.
+alu = principled("blasted", (0.60, 0.615, 0.635), 1.0, float(FILM.get("blast_rough", 0.38)), bump=(9000, 0.18))
 stainless = principled("stainless", (0.80, 0.80, 0.81), 1.0, 0.09)
 steel = principled("bearing_steel", (0.82, 0.83, 0.85), 1.0, 0.13)
 iglide = principled("iglide", (0.80, 0.42, 0.03), 0.0, 0.42)
