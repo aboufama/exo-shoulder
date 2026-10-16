@@ -1481,3 +1481,38 @@ Next:
   * R1-aim -0.03 to -0.08.
 * **Status.** CONFIRMED under the final-polish rule. pick1 is the CAD config (row `polished_*`); the verified BDp
   record stays. Verifier farm cost: $0.25.
+
+## pick1 red team: the extra contact is the extra reach, no CAD lift pays, and the spring needs 0.010 N.m/rad in +C1900 (2026-10-16, docs/research/minarc_pick1_redteam.md)
+
+* **Contact, attributed per part on the 1154 held-out poses** (`docs/concepts/verify/minarc-pick1-redteam.py attr`;
+  every baseline reproduces the verified numbers to the digit).
+  * pick1 touches on 28 poses (env fit) / 35 (fit 60) vs BDp 9 / 13. All are workspace-envelope poses; the nearest
+    daily-clip frame is 11.2 deg away (one fit-60 contact, -0.02 mm, sits 8.4 deg from a "Comb hair" frame).
+  * 19 of the 28 are poses BDp cannot close at all; 20 sit in the stretched state (K open 9-54 deg). The extra
+    contact is the extra reach.
+  * Deepest: hub K's SIDE wall into the raised deltoid at elevation 165 (-14.6 mm; BDp -7.3), and the arm-mounted knee
+    link / pad into the chest wall with the arm across the body at elevation 15-30 and extreme internal rotation
+    (-10.0 mm, K open 41-54 deg). Both structural: lifting hub K 7 mm moves its deepest from -14.58 to -14.23 mm, and
+    no hub level moves an arm-fixed part.
+  * Shallow ones: link 2 / hub 2 into the scapula on overhead across-body poses (-0.1 to -3.6 mm), and link 2 into
+    the shoulder cap behind the back (shared with BDp).
+* **Fixes priced on both protocols: none pays.**
+  * Best lift (hub K +3, link 2 + hub 2 +2 mm): held out 27.47 (env fit) / 26.16 (fit 60), Bench(110,360) 22.52, vs
+    pick1's 21.31 / 22.69 / 18.40. Lifts cost 4-20 points of in-band for a few contacts.
+  * Earlier K stop B (40 / 45 / 50 deg): held out 23.34 / 22.76 / 22.45, bench 18.60 / 19.60 / 18.98. Stop B at 40
+    removes every knee / pad contact (18 contact poses) but keeps only +0.34 held out over BDp, below the 1-point rule.
+  * Capping K at BDp's 34.5 deg would lose about 3.2 held-out points: K's travel is the gain.
+* **Spring at K 56.65 deg.** Return demand on pick1's shape: 0.048 N.m (2 g, worst direction, + 2 mN.m per sealed
+  pair; BDp 0.040), so the 0.08 N.m preload keeps 1.67x.
+  * The specified 0.015 N.m/rad strip reaches 1264 MPa at stop B: inside +C1900's 0.7 Rm (1330) by 5 %, over +C1700's.
+  * **Use 0.010 N.m/rad: 217 mm of 0.3 x 5 mm 1.4310 +C1900, 0.08 N.m preload, 1198 MPa.** It fits the same 6 mm cap
+    (36 % annulus fill).
+  * K opens on "Reach a high shelf" (15.8 deg at up to 52 deg/s; BDp 0.85) and on "Wash opposite shoulder" (6.2 deg).
+* **Forced J1 swing and feel at real timing: not worse than BDp.**
+  * Forced J1 gain max 2.29 vs 2.55 deg/deg: 31 vs 35 deg per 10-fps frame at the clips' peak arm speed (136.5
+    deg/s). The steepest J1 gain of both designs is in state A (3.3-3.4).
+  * Cuff force: 0.24 / 1.99 N in state A / forced (BDp 0.32 / 2.35; the forced value is the preload reflected).
+  * J2-stop impact: 0.24 vs 0.31 mJ.
+* **Verdict: pick1 is buildable as the gen-4 CAD config** with the spring respec and K stop B built at 56.65 deg. The
+  fitted levels stay. Disclosed: deeper contact on extreme envelope poses, already priced in the gap, and R1-aim
+  0.497 vs 0.574 held out. Farm $0.27.

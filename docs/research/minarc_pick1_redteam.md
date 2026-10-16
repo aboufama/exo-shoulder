@@ -19,14 +19,16 @@ the geodesic distance (thorax-humerus) to the nearest frame of any daily clip (f
 Walking).
 
 **Totals.** pick1 28 contact poses (env fit) / 35 (fit 60); BDp 9 / 13. Every one is a workspace-envelope pose; no clip
-frame touches. The nearest daily-clip frame is 11.2 deg away (env fit; 8.4 deg with the fit-60 shape), median 29 deg.
+frame touches. The nearest daily-clip frame is 11.2 deg away (env fit), median 29 deg. With the fit-60 shape one
+contact sits 8.4 deg from a "Comb hair" frame: link 2 at -0.02 mm (plane 75, elevation 150, axial -75), where BDp
+keeps 1.89 mm.
 
 **Five clusters (env fit; fit 60 in brackets):**
 
 | cluster | pick1 poses | deepest | part (deepest) | body region | K state | BDp on the same poses | fix |
 |---|---|---|---|---|---|---|---|
 | A. overhead, elevation 150-165, plane 15-60 | 6 (6) | **-14.6 mm** | hub K wall / cap | upper arm (deltoid) | A, K closed | 3 contact (-5.5 to -7.3), 3 not closed (fold) | structural |
-| B. overhead across the body, elevation 135-165, plane 60-135, axial -60..-105 | 9 (14) | -3.6 mm (-5.0) | link 2 underside, hub 2 wall, link 1b | back (scapula), acromion | stretched, dK 16-49 | 7 not closed, 1 contact, 1 taken (fit 60: 6 taken) | a lift, priced below: does not pay |
+| B. overhead across the body, elevation 135-165, plane 60-135, axial -60..-105 | 9 (14) | -3.6 mm (-5.0) | link 2 underside, hub 2 wall, link 1b | back (scapula), acromion | stretched (1 in A), dK 0-49 | 7 not closed, 1 contact, 1 taken (fit 60: 6 taken) | a lift, priced below: does not pay |
 | C. low across the body, elevation 15-30, plane 105-150, axial -150..-180 | 7 (7) | **-10.0 mm** | knee link wall, pad wall | side of the chest / axilla, back | stretched, dK 41-54 | 6 not closed (fold), 1 taken | structural |
 | D. behind the back, plane -90..-15, elevation 60-75, axial 105-120 | 5 (7) | -6.5 mm | link 2 underside | shoulder cap | stretched, dK 9-51 | 3 not closed, 2 contact | shared with BDp |
 | E. plane 15, elevation 105, axial 15 | 1 (1) | -0.5 mm | hub 2 wall | upper arm | A | parts clash | - |
@@ -52,6 +54,10 @@ near-touch together: pick1 36, BDp 29 held-out poses.
 
 ### Pricing the fixes (LIFT = mm added to the fitted level before the shape is frozen; pick1, priced stops)
 
+Priced with `attr` (fit -> frozen -> worn exact, the judge's checks). It skips the continuity flood fill, which drops
+0 poses for pick1 on every protocol (verifier, section 5 of the polish note); the unfixed rows reproduce the verified
+numbers to the digit.
+
 | fix | env fit -> held out (gap / in-band14 / contact poses) | fit 60 -> Bench(110,360) | fit 60 -> held out |
 |---|---|---|---|
 | none (pick1) | **21.31** / 0.889 / 28 | **18.40** / 0.894 / 11 | **22.69** / 0.892 / 35 |
@@ -61,7 +67,22 @@ near-touch together: pick1 36, BDp 29 held-out poses.
 | hub K +3, link 2 + hub 2 +2 (the best lift) | 27.47 / 0.813 / 21 | 22.52 / 0.837 / 8 | 26.16 / 0.836 / 25 |
 | BDp (reference) | 23.68 / 0.891 / 9 | 19.54 / 0.893 / 4 | 24.18 / 0.890 / 13 |
 
-STOPB_PLACEHOLDER
+**K stop B moved earlier** (`STOPB_DK`: a1max set so stop B engages at that opening; the fit is redone, so the
+levels can drop). It removes the stretched-state poses past the cut, which is where cluster C lives:
+
+| stop B at dK | env fit -> held out (gap / in-band14 / in-band 2-10 / contact poses) | fit 60 -> Bench(110,360) (gap / contact poses) |
+|---|---|---|
+| 56.65 (pick1 as priced) | **21.31** / 0.889 / 0.497 / 28 | **18.40** / 11 |
+| 50 | 22.45 / 0.887 / 0.509 / 24 | 18.98 / 11 |
+| 45 | 22.76 / 0.887 / 0.521 / 22 | 19.60 / 8 |
+| 40 | 23.34 / 0.888 / 0.525 / 18 (no knee / pad contact left) | 18.60 / 5 |
+| BDp (34.47) | 23.68 / 0.891 / 0.574 / 9 | 19.54 / 4 |
+
+Every earlier stop B costs more reach than the contact it removes. Stop B at 40 deg is a middle point (contact 18 vs
+28, R1-aim 0.525 vs 0.497, cluster C gone) but its held-out gain over BDp is only +0.34, below the final-polish
+rule's 1 point, so it is not a config the rule would accept. Capping K at BDp's 34.5 deg would lose about 3.2 points
+held out (43 taken poses lost for 12 contacts removed, counted on the frozen pick1 shape): K's longer travel IS the
+gain.
 
 **Verdict on contact.** No CAD lift pays: the fitted levels are already the in-band / contact optimum, and every lift
 loses 4-20 points on both protocols. The deep contacts (A, C) are structural: the reach pick1 adds is where its metal
@@ -128,9 +149,39 @@ joint per deg of arm, scaled to that peak arm speed.
 
 ## 4. Verdict
 
-VERDICT_PLACEHOLDER
+**pick1 is buildable as the gen-4 CAD config (gen-4b), with two spec changes and no geometric fix.** The CAD does not
+have to stay on BDp.
+
+1. **Spring:** 0.3 x 5 mm 1.4310 **+C1900**, **0.010 N.m/rad** (217 mm strip), 0.08 N.m preload (1.27 turns of preload
+   wind). 1198 MPa at stop B, 10 % under +C1900's 0.7 Rm. Return margin 1.67x pick1's worst demand (0.048 N.m). It fits
+   the same 6 mm cap (36 % annulus fill). The present spec (0.015 N.m/rad) is acceptable only in +C1900, at 5 % margin
+   (1264 MPa).
+2. **K stop B at dK 56.65 deg** (the priced 5-deg rule cut), not the as-designed 60.42.
+3. **No lift.** Every priced CAD lift is 4-20 points worse on both protocols; every earlier stop B is worse than pick1
+   as priced. The fitted levels stay.
+
+**What the CAD inherits and must disclose (red team, open for the user):**
+* **Skin contact on extreme envelope poses: 28 vs 9 held-out poses (env fit), 35 vs 13 (fit 60).** None on a daily
+  clip; the nearest is 11.2 deg from a "Raise overhead" frame (a pose BDp touches too), and the contacts only pick1
+  has are at least 12.9 deg from any clip frame. They are structural: 19 of the 28 are poses BDp cannot reach at all.
+  * Hub K's side wall meets the raised deltoid at elevation 150-165 (to -14.6 mm; BDp -7.3). Lifting the hub does not
+    move it (-14.23 at +7 mm).
+  * The knee link and pad meet the chest wall with the arm across the body at elevation 15-30 and extreme internal
+    rotation (to -10.0 mm; K open 41-54 deg).
+  * The gap already counts every one of them as not reached plus their contact share. The contact-aware continuity
+    shows that no taken pose is reached through one.
+  * Physically, the wearer meets the device there as a soft end stop through tissue, deeper than with BDp.
+* **R1-aim lower:** in-band 2-10 mm held out 0.497 vs 0.574 (env fit), 0.563 vs 0.593 (fit 60).
+* **K moves on one more clip:** "Reach a high shelf" opens K to 15.8 deg at up to 52 deg/s (BDp 0.85 deg). The spring
+  holds it and the sensor tracks it.
+* **The forced swing and the feel are not worse.** Forced J1 gain 2.29 vs 2.55, so 31 vs 35 deg per 10-fps frame at
+  the clips' peak arm speed. Cuff force 0.24 / 1.99 N (state A / forced) vs 0.32 / 2.35 N. Stop impact 0.24 vs
+  0.31 mJ.
+
+**Verified numbers carried to the CAD (unchanged by this red team):** Bench(110,360) 18.40 (score 93.31), held out
+21.31 / 22.69 vs BDp 19.54 / 23.68 / 24.18.
 
 ## Cost
 
-Farm exo-cpu1 (cpu3c rate): attribution 3 jobs $0.096, lift fixes 10 jobs $0.105, stop-B cuts 6 jobs COSTB. Local:
+Farm exo-cpu1 (cpu3c rate): attribution 3 jobs $0.096, lift fixes 10 jobs $0.105, stop-B cuts 6 jobs $0.070; total $0.27 (cpu5c $0.32), within the $0.60 budget. Local:
 the `mech` run and the BDp fit-60 attribution (at most 3 processes, nice 10).
