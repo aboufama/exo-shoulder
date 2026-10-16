@@ -2251,5 +2251,155 @@
     "docs/research/golden/knee_cma_G4.json"
    ]
   }
+ },
+ "polish2_m5": {
+  "t": "2026-10-16T10:21:53Z",
+  "status": "SELF-MEASURED, not independently verified. No config clears the >= 1 gap point bar out of sample: C1 gains 1.44 on the polish protocol but 0.33 plain held out (1.04 near-touch). H1 stays the polished configuration.",
+  "tool": "tools/knee_polish2.py (KP2_VAL=1): near-touch objective on Bench(110,360) fast + frozen-shape near-touch on Bench(60,160) fast (validation term), + 2 per overhead clip frame lost; J2 stops m_lo / m_hi >= 5 free; fold rule 5; O20 x3",
+  "stage": "polish2-m5-* (docs/concepts/sweeps/skin-normal-3r-pin-knee.json; r1* = the earlier no-validation attempt)",
+  "n_evals": 16880,
+  "n_evals_validation_objective": 6520,
+  "gate": {
+   "gain_half": 0.29,
+   "gain_third": 0.29,
+   "top5_spread": 0.11,
+   "ok": true,
+   "history": "validation-objective streams, generation order"
+  },
+  "C1": {
+   "k": "H1-g69-4",
+   "params": {
+    "rad1": 10.0,
+    "rad2": 10.0,
+    "rad3": 10.0,
+    "az1": 96.9026,
+    "el1": 64.7202,
+    "az2": 29.7578,
+    "el2": 45.5349,
+    "wd": 70.1215,
+    "wa": -6.2602,
+    "b3": 0.3277,
+    "lE": 59.7929,
+    "lc": 26.5582,
+    "phiE": -5.4456,
+    "phib": -62.7842,
+    "ang_min": 29.6329,
+    "stk": 5.6258,
+    "m_lo": 5.4014,
+    "m_hi": 5.1188
+   },
+   "obj": 20.62,
+   "polish_protocol_exact": {
+    "gap": 23.04,
+    "reach": 0.6889,
+    "follow": 1.0,
+    "inband14": 0.8972,
+    "inband10": 0.5591,
+    "contact": 0.0165,
+    "gap_near1": 24.15,
+    "near1_poses": 2,
+    "min_metal_mm": 0.04,
+    "overhead_follow": 1.0,
+    "overhead_clip": 10,
+    "overhead_reach": 0.25,
+    "knee_edge_overhead_deg": 3.52,
+    "reach_connected": 0.6889,
+    "static_islands": 0,
+    "fold_margin_min_taken_deg": 5.19,
+    "knee_ang_taken": [
+     91.9,
+     147.7
+    ],
+    "fit_mode": "fast",
+    "wear_mode": "exact",
+    "n_wear": 470
+   },
+   "held_out_exact": {
+    "gap": 28.22,
+    "reach": 0.646,
+    "follow": 1.0,
+    "inband14": 0.8957,
+    "inband10": 0.5575,
+    "contact": 0.0239,
+    "gap_near1": 30.02,
+    "near1_poses": 8,
+    "min_metal_mm": 0.03,
+    "overhead_follow": 1.0,
+    "overhead_clip": 19,
+    "overhead_reach": 0.2113,
+    "knee_edge_overhead_deg": 3.31,
+    "reach_connected": 0.646,
+    "static_islands": 0,
+    "fold_margin_min_taken_deg": 5.15,
+    "knee_ang_taken": [
+     91.9,
+     148.9
+    ],
+    "fit_mode": "fast",
+    "wear_mode": "exact",
+    "n_wear": 1154
+   }
+  },
+  "H1_same_protocol": {
+   "k": "H-g107-1",
+   "polish_protocol_exact": {
+    "gap": 24.48,
+    "reach": 0.6694,
+    "follow": 1.0,
+    "inband14": 0.8943,
+    "inband10": 0.5068,
+    "contact": 0.0085,
+    "gap_near1": 25.59,
+    "near1_poses": 2,
+    "min_metal_mm": 0.21,
+    "overhead_follow": 1.0,
+    "overhead_clip": 10,
+    "overhead_reach": 0.25,
+    "knee_edge_overhead_deg": 1.14,
+    "reach_connected": 0.6694,
+    "static_islands": 0,
+    "fold_margin_min_taken_deg": 5.49,
+    "knee_ang_taken": [
+     101.1,
+     148.4
+    ],
+    "fit_mode": "fast",
+    "wear_mode": "exact",
+    "n_wear": 470
+   },
+   "held_out_exact": {
+    "gap": 28.55,
+    "reach": 0.6324,
+    "follow": 1.0,
+    "inband14": 0.8932,
+    "inband10": 0.505,
+    "contact": 0.0111,
+    "gap_near1": 31.06,
+    "near1_poses": 11,
+    "min_metal_mm": 0.11,
+    "overhead_follow": 1.0,
+    "overhead_clip": 19,
+    "overhead_reach": 0.2535,
+    "knee_edge_overhead_deg": 0.01,
+    "reach_connected": 0.6324,
+    "static_islands": 0,
+    "fold_margin_min_taken_deg": 5.32,
+    "knee_ang_taken": [
+     101.1,
+     149.5
+    ],
+    "fit_mode": "fast",
+    "wear_mode": "exact",
+    "n_wear": 1154
+   }
+  },
+  "gain": {
+   "polish_plain": 1.44,
+   "polish_near1": 1.44,
+   "held_plain": 0.33,
+   "held_near1": 1.04
+  },
+  "claims": "docs/research/polish2_m5/ (knee_polish2.py claim: the polish verifier harness imported unchanged; CB_EXACT=1 wear, fast fit)",
+  "doc": "docs/concepts/skin-normal-3r-pin-knee.md 'Polish 2 (margin 5, near-touch)'"
  }
 }

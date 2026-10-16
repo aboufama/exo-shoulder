@@ -771,3 +771,84 @@ Notes:
 3. Close link 2's tessellation crack: find the face pair in the glued bar.
 
 Stills on the muscled mannequin and the independent verification are the next steps (task #19).
+
+## Polish 2 (margin 5, near-touch) (2026-10-16 08:25-10:45 UTC, self-measured - not an independent verification)
+
+**What ran.** The FINAL POLISH again under the night rules: fold rule 5 deg, O20 at J1-J3 only, near-touch objective,
+the J2 fold stops as design variables, every overhead clip frame kept. Tool: `tools/knee_polish2.py` (drives
+`tools/knee_polish.py` unchanged: the round-3 verifier's extra checks knock poses out, the model's audit counts metal
+< 1 mm as contact). Free: the 13 continuous parameters of the H1 polish (az1 / el1 / az2 / el2, wd / wa, b3, lE 20-90,
+lc, phiE, phib, ang_min 20-45, stk 4.5-6.0) + **m_lo / m_hi**, hard J2 stops at the two fold-window edges, 5-20 deg
+(they can only narrow the window; 5 = the user's floor). Hubs fixed O20 x 3.
+
+**Objective (new: KP2_VAL=1), and why.** The P5 verification measured the over-fit of the 470-pose objective (gain 3.11
+on the search poses, 0.16 held out). So the objective adds a validation term: the shape fitted on Bench(110,360) (fast)
+is worn FROZEN on Bench(60,160) (fast cache 0089c747c10f; 164 of its 220 poses are not in Bench(110,360)), and
+obj = 0.5 x (near-touch gap on Bench(110,360) + frozen near-touch gap on Bench(60,160)) + 2 per overhead clip frame
+(elevation >= 140) not followed. The verifier's held-out set is every pose OUTSIDE both benches, so it stays held out:
+no held-out number entered the search or the choice of the claim (the claim is the best objective, fixed before the
+held-out runs came back).
+
+**Streams (Bench(110,360) fast, popsize 16, farm exo-cpu1, 8 slots, ~$1.4):**
+
+| stream | start | sigma | evals | x0 obj -> best obj | best: near-touch Bench(110,360) / frozen on Bench(60,160) / stops m_lo, m_hi |
+|---|---|---|---|---|---|
+| P5 | P5 = HWm5-g23-5 (first) | 0.5 | 1105 | 22.44 -> 21.56 (P5-g64-11) | 23.26 / 19.86 / 5.06, 5.07 |
+| H1 | H1 = H-g107-1 | 0.5 | 1121 | 25.35 -> **20.62 (H1-g69-4 = C1)** | 24.20 / 17.04 / 5.40, 5.12 |
+| HW | HW-g58-11 | 0.5 | 721 | 23.91 -> 21.48 (HW-g45-8) | 25.25 / 17.70 / 6.33, 5.09 |
+| HLx | HL's best (= H1: HL never beat its x0 in 689 evals) with lE 75 | 0.6 | 721 | 345 -> 23.25 (lE 80.5) | 25.28 / 21.21 / 6.07, 5.11 |
+| K4598 | k4598 | 0.6 | 1329 | 32.23 -> 24.52 | 28.41 / 20.62 / 5.68, 5.55 |
+| R2 | R2-g130-11 (polish-big basin) | 0.5 | 657 | 24.22 -> 24.20 | 26.08 / 22.32 / 6.52, 5.07 |
+| rnd1 | best of 32 uniform-random configs (scan best 121.2) | 0.8 | 497 | 121.2 -> 34.36 | 37.72 / 31.00 (killed by the endpoint's 1 h limit; rows kept) |
+| rnd2 | best of 16 x (P5 + 2 sigma noise) (scan best 59.3) | 0.7 | 369 | 59.3 -> 27.37 | 28.70 / 26.04 |
+| wave 2 | H1b (IPOP, popsize 32 from C1), HW resumed, G (short-E basin, lE 21), W1 (flipped knee branch), rnd3 (16 x H1 + 2 sigma), rnd4 (32 uniform) | | | queued behind other agents on the shared farm (exo-cpu1 queue 9 at 10:13 UTC); not back when this was written | |
+
+An earlier attempt of this track (07:30-08:20 UTC, objective near-touch + overhead only, no validation term; 8 streams,
+10 360 evals) is logged too as `polish2-m5-r1*`: best r1P5-g72-6 near-touch 21.93 (r1Q5 22.27, r1R2m5 22.34, r1H1
+25.31, r1W1 26.44, r1k4598 27.75). All 16 880 rows: docs/concepts/sweeps/skin-normal-3r-pin-knee.json, stages
+`polish2-m5-<stream>` (with near-touch, plain, validation, overhead follow / knee edge, stops, fold margins taken).
+**Gate (docs/METHOD.md) on the validation-objective history (6520 evals, generation order): gain 0.29 score points
+over the second half, 0.29 over the last third, top-5 within 0.11 - passed.** Random restarts end 6.7-13.7 points
+behind: the H1 / P5 basin is the only one found in 16 880 evals at margin 5.
+
+**Claim (fold rule 5 + C1's stops, O20; shape fitted on Bench(110,360) FAST, worn EXACT; `knee_polish2.py claim`,
+which runs the polish verifier harness `docs/concepts/verify/skin-normal-3r-pin-knee-polish.py` imported unchanged;
+H1 in the same protocol; gap / near-touch gap (metal < 1 mm = contact) / poses < 1 mm / min metal):**
+
+| protocol | H1 (H-g107-1) | C1 (H1-g69-4) | gain plain / near-touch |
+|---|---|---|---|
+| polish: Bench(110,360), 470 poses (search poses) | 24.48 / 25.59 / 2 / 0.21 mm (score 91.10); reach 0.6694, follow 1.0, ib14 0.8943, contact 0.0085 | **23.04 / 24.15 / 2 / 0.04 mm (score 91.62)**; reach 0.6889, follow 1.0, ib14 0.8972, ib10 0.5591, contact 0.0165 | 1.44 / 1.44 |
+| HELD-OUT: the verifier's set (202 fit-clip frames + 952 workspace poses outside both benches, 1154) | 28.55 / 31.06 / 11 / 0.11 mm; reach 0.6324, contact 0.0111 | 28.22 / 30.02 / 8 / 0.03 mm; reach 0.6460, contact 0.0239 | **0.33** / 1.04 |
+| overhead (elev >= 140): clip follow, ws reach, knee distance to its stop | polish 10/10, 0.25, **1.14 deg**; held 19/19, 0.254, **0.01 deg** | polish 10/10, 0.25, 3.52 deg; held 19/19, 0.211, 3.31 deg | |
+| continuity (1432-pose grid flood fill) | 0 static islands, connected reach = static | 0 static islands, connected reach = static | |
+
+The H1 row reproduces the verified margin-5 polish numbers (24.48 / 25.59) to the digit. Held out it reads 28.55 here
+against the P5 verifier's 29.12 - a MEASUREMENT difference (that batch fitted the shape on the exact path, these jobs on
+the fast cache the polish protocol names). The fit-60 protocol (round-3 verifier) for both is queued; not back at write time.
+
+**C1 hardware and rules.** az1 96.90, el1 64.72, az2 29.76, el2 45.53, wd 70.12, wa -6.26, b3 0.328, lE 59.79, lc 26.56,
+phiE -5.45, phib -62.78, ang_min 29.63, stk 5.63 (2.56 mm Ti plates on the iglidur pin, between IGLIDUR-PIN 5.0 and the
+MR63ZZ pair 6.0), m_lo 5.40 / m_hi 5.12 (J2 hard stops; fold margin over the taken poses >= 5.19 / 5.15 held out), O20 x 3.
+J1 seat anterior 0.051 / up 0.904 / lateral 0.424 (acromion top, ruling 4). Knee 91.9-148.9 deg inside [29.6, 150.4].
+Arm at the side: 0 poses < 1 mm (lowest 1.16 mm held out).
+
+**Red team.**
+* *The gain does not travel (again).* Plain held-out gain 0.33 < 1. The validation term fell 24.74 -> 17.04 (7.7
+  points) on Bench(60,160) while held out moved 0.33: once a pose set is inside the objective it is fitted too, 690
+  poses as much as 470. The search-to-held-out gap stays ~5 points (23.0 vs 28.2) for every polished config: it lives in
+  the shape fit (link heights fitted to the very poses scored) and in contact on unseen poses, not in reach.
+* *C1 buys reach with contact.* Held out C1 has 20 contact poses vs H1's 9 and 0 part jams vs 29 (stops and seats moved
+  the parts apart and the links closer to the skin); min metal 0.03 mm held out. Near-touch held out still improves by
+  1.04 (8 poses < 1 mm vs 11).
+* *The knee stop overhead - the H1 edge - is bought back.* H1's knee reaches 0.01 deg from its stop on held-out overhead
+  poses (1.14 on the bench); C1 keeps 3.3-3.5 deg with every overhead clip frame followed, at the price of overhead
+  workspace reach held out (0.254 -> 0.211).
+* *Stops.* The optimum puts both J2 stops at the floor (5.1-5.4 deg) in every stream except the random ones: at margin 5
+  a wider stop costs reach and buys nothing on this design (no spring / relay takes poses past the stop).
+
+**Verdict (self-measured).** No configuration from polish 2 clears the CLAUDE.md bar out of sample: C1 gains 1.44 on
+the search poses but 0.33 plain held out (1.04 near-touch). **H1 stays the polished configuration; the H1 CAD stands.**
+C1 is recorded (row field `polish2_m5`) for an independent verifier only for its near-touch / knee-edge gains. Next, if
+the knee is polished again: an objective in which no scored pose is a pose the shape was fitted on (2-fold cross-fit:
+shape fitted on Bench(60,160) worn on Bench(110,360) + the reverse), a near-2 mm contact margin for unseen poses, or a
+larger fast bench (e.g. Bench(220,720)) - more poses, not more streams; the parameter space itself is converged.
