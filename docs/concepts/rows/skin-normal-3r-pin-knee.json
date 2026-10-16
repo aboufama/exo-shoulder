@@ -15,15 +15,15 @@
  "inband10": 0.5323,
  "contact": 0.0,
  "gap": 20.63,
- "v_reach": 0.6444,
+ "v_reach": 0.6583,
  "v_follow": 0.9636,
- "v_inband14": 0.8994,
- "v_inband10": 0.5326,
- "v_gap": 28.21,
+ "v_inband14": 0.8953,
+ "v_inband10": 0.5539,
+ "v_gap": 27.2,
  "n_configs": 7199,
  "verdict": "screened: 20.63 (score 92.50) on Bench(60,160) fast, converged; worn FROZEN on Bench(110,360) exact 30.35 (score 88.96) - 11-12 points better than the zero-passive spherical 3R (41.73) and the 2-slide leader (42.59) with 0 passive translations (2 iglidur pins, 5 mm stack), but short of 90 on the verification bench: the whole gap is reach (J2 fold); freed b3 does not pay (37.04 at b3 0.54)",
  "limiter": "J2 fold = the J1-J3 axis-angle window 2 min(a1, a2) - 20 (~60 deg at a1 ~40) vs 27-141 deg needed (22-146 overhead): reach 0.694 fit -> 0.606 verification, 0.25 overhead; widening a1 moves hub 2 onto skin it cannot clear (93-115 mm off GH, measured; wide LHS best 36.26)",
- "note": "Bench(60,160) fast fit, seed VModel rules + knee part checks (5 mm pin stack); gate (7199 configs): gain 0.25 over the 2nd half, 0.00 over the last third, top-5 spread 0.06 score points -> converged; frozen exact at k4598: near-touch min 0.02 mm, metal<1mm-as-contact gap 38.41; MVP2: knee is a two-force member, J3 torque transmission 0.46-1.38 (never lost), pins need hub-sized bearings for the 25 N m MVP2 moment | VERIFIED 2026-10-16 (independent verifier docs/concepts/verify/skin-normal-3r-pin-knee.py, Bench(110,360) exact, frozen shape from Bench(60,160) fast): v_gap 30.35 (score 88.96; reach 0.6056, follow 1.0, ib14 0.9043, ib10 0.5376, contact 0.0091), reproduced to the digit with added checks (independent 3D closure: hub-3 centre / pin a / pin b 0.000 mm, J3 and pin axes <= 0.022 deg; knee vs hub 3's link-2 half >= 24.3 mm at 1 mm rule; E boss vs hubs 1-2, L1, L2 >= 24.7 mm) - 0 poses removed; champion same bench and checks (offset-skin-normal-3r verifier, champbig_frozen, re-run): 66.97 (near1 71.2); knee near1 38.41 (16 poses < 1 mm, min 0.02 mm at arm-at-side), overhead >=140 reach 0.25 | POLISH VERIFIED 2026-10-16 (independent verifier, farm, Bench(110,360) exact, verifier checks unchanged): H1 = H-g107-1 (O20 x3, fold margin 10) 26.45 (score 90.38) vs k4598 29.95 with the shape fitted on Bench(110,360) fast; near-touch 26.45 vs 36.11 (min metal 1.38 vs 0.39 mm, 0 vs 13 poses < 1 mm); round-3 fit-60 protocol 28.21 vs 30.35; disjoint held-out (1154 poses) 30.73 vs 32.97 (near-touch 32.61 vs 39.61, 8 vs 32 poses < 1 mm: the 1.38 mm is in-sample); margin 5: 24.48 vs 29.34. Overhead clip follow 0.60 (k4598 1.00) at margin 10: knee window binds - re-judge R4 on the build.",
+ "note": "Bench(60,160) fast fit, seed VModel rules + knee part checks (5 mm pin stack); gate (7199 configs): gain 0.25 over the 2nd half, 0.00 over the last third, top-5 spread 0.06 score points -> converged; frozen exact at k4598: near-touch min 0.02 mm, metal<1mm-as-contact gap 38.41; MVP2: knee is a two-force member, J3 torque transmission 0.46-1.38 (never lost), pins need hub-sized bearings for the 25 N m MVP2 moment | VERIFIED 2026-10-16 (independent verifier docs/concepts/verify/skin-normal-3r-pin-knee.py, Bench(110,360) exact, frozen shape from Bench(60,160) fast): v_gap 30.35 (score 88.96; reach 0.6056, follow 1.0, ib14 0.9043, ib10 0.5376, contact 0.0091), reproduced to the digit with added checks (independent 3D closure: hub-3 centre / pin a / pin b 0.000 mm, J3 and pin axes <= 0.022 deg; knee vs hub 3's link-2 half >= 24.3 mm at 1 mm rule; E boss vs hubs 1-2, L1, L2 >= 24.7 mm) - 0 poses removed; champion same bench and checks (offset-skin-normal-3r verifier, champbig_frozen, re-run): 66.97 (near1 71.2); knee near1 38.41 (16 poses < 1 mm, min 0.02 mm at arm-at-side), overhead >=140 reach 0.25 | POLISH VERIFIED 2026-10-16 (independent verifier, farm, Bench(110,360) exact, verifier checks unchanged): H1 = H-g107-1 (O20 x3, fold margin 10) 26.45 (score 90.38) vs k4598 29.95 with the shape fitted on Bench(110,360) fast; near-touch 26.45 vs 36.11 (min metal 1.38 vs 0.39 mm, 0 vs 13 poses < 1 mm); round-3 fit-60 protocol 28.21 vs 30.35; disjoint held-out (1154 poses) 30.73 vs 32.97 (near-touch 32.61 vs 39.61, 8 vs 32 poses < 1 mm: the 1.38 mm is in-sample); margin 5: 24.48 vs 29.34. Overhead clip follow 0.60 (k4598 1.00) at margin 10: knee window binds - re-judge R4 on the build. || REBASE 2026-10-16T06:51 UTC (margin 5 (user 2026-10-16), measurement change): H1 = H-g107-1 (polish winner, O20 x3), own verifier, Bench(110,360) exact frozen: margin 10 28.21 -> margin 5 27.2 (reach 0.6444 -> 0.6583, in-band14 0.8994 -> 0.8953, follow 0.9636 -> 0.9636); v_* = margin 5, v_*_m10 = before. H1 replaced k4598 at 06:29 UTC (polish verifier); k4598 re-measured too",
  "doc": "docs/concepts/skin-normal-3r-pin-knee.md",
  "model_file": "docs/concepts/models/skin-normal-3r-pin-knee.py",
  "best_k": "H-g107-1",
@@ -96,7 +96,7 @@
   "k3326_D2": 31.35,
   "k3326_D2_angmin20": 31.24
  },
- "v_contact": 0.0259,
+ "v_contact": 0.0256,
  "polish_big": {
   "t": "2026-10-16T06:13:55Z",
   "tool": "tools/knee_polish.py",
@@ -611,5 +611,166 @@
   "v_inband10": 0.5376,
   "v_contact": 0.0091
  },
- "v_gap_protocol": "H1 (H-g107-1) worn frozen on Bench(110,360) exact, shape fitted on Bench(60,160) fast (the round-3 verifier's protocol, comparable with every other row's v_gap); polish protocol (shape fitted on Bench(110,360) fast) = v_polish_gap 26.45"
+ "v_gap_protocol": "H1 (H-g107-1) worn frozen on Bench(110,360) exact, shape fitted on Bench(60,160) fast (the round-3 verifier's protocol, comparable with every other row's v_gap); polish protocol (shape fitted on Bench(110,360) fast) = v_polish_gap 26.45",
+ "v_gap_m10": 28.21,
+ "v_reach_m10": 0.6444,
+ "v_follow_m10": 0.9636,
+ "v_inband14_m10": 0.8994,
+ "v_inband10_m10": 0.5326,
+ "v_contact_m10": 0.0259,
+ "v_score": 90.11,
+ "v_near_touch": {
+  "gap_metal_lt1_as_contact": 31.75,
+  "min_mm": 0.09,
+  "margin": 5
+ },
+ "v_overhead140": {
+  "ws": 28,
+  "reach": 0.1786,
+  "clip": 10,
+  "follow": 0.6,
+  "inband14": 0.9155,
+  "inband10": 0.6554,
+  "why_not": {
+   "fold": 15,
+   "slide": 7,
+   "flip": 0,
+   "closure": 0,
+   "skin": 0,
+   "parts": 0,
+   "contact": 5
+  }
+ },
+ "v_rebase": {
+  "t": "2026-10-16T06:51:28Z",
+  "note": "margin 5 (user 2026-10-16), measurement change",
+  "rule": "fold margin 5 deg (tools/concept_kit.py FOLD_MARGIN), O20 hubs only",
+  "harness": "docs/concepts/verify/skin-normal-3r-pin-knee.py",
+  "protocol": "fit Bench(60,160) fast AT the margin, shape frozen, worn on Bench(110,360) exact, verifier checks (farm)",
+  "config": "H1 = H-g107-1 (polish winner, O20 x3)",
+  "m10": {
+   "gap": 28.21,
+   "reach": 0.6444,
+   "follow": 0.9636,
+   "inband14": 0.8994,
+   "inband10": 0.5326,
+   "contact": 0.0259,
+   "near1": 33.77,
+   "near_min_mm": 0.09,
+   "fit_gap": 26.66,
+   "overhead140": {
+    "ws": 28,
+    "reach": 0.1786,
+    "clip": 10,
+    "follow": 0.6,
+    "inband14": 0.9216,
+    "inband10": 0.6156,
+    "why_not": {
+     "fold": 18,
+     "slide": 4,
+     "flip": 0,
+     "closure": 0,
+     "skin": 0,
+     "parts": 0,
+     "contact": 5
+    }
+   },
+   "file": "docs/research/rebase/pkH1_m10.json",
+   "score": 89.74
+  },
+  "m5": {
+   "gap": 27.2,
+   "reach": 0.6583,
+   "follow": 0.9636,
+   "inband14": 0.8953,
+   "inband10": 0.5539,
+   "contact": 0.0256,
+   "near1": 31.75,
+   "near_min_mm": 0.09,
+   "fit_gap": 23.64,
+   "overhead140": {
+    "ws": 28,
+    "reach": 0.1786,
+    "clip": 10,
+    "follow": 0.6,
+    "inband14": 0.9155,
+    "inband10": 0.6554,
+    "why_not": {
+     "fold": 15,
+     "slide": 7,
+     "flip": 0,
+     "closure": 0,
+     "skin": 0,
+     "parts": 0,
+     "contact": 5
+    }
+   },
+   "file": "docs/research/rebase/pkH1_m5.json",
+   "score": 90.11
+  },
+  "extra": {
+   "k4598_m10": {
+    "gap": 30.35,
+    "reach": 0.6056,
+    "follow": 1.0,
+    "inband14": 0.9043,
+    "inband10": 0.5376,
+    "contact": 0.0091,
+    "near1": 38.41,
+    "near_min_mm": 0.02,
+    "fit_gap": 20.63,
+    "overhead140": {
+     "ws": 28,
+     "reach": 0.25,
+     "clip": 10,
+     "follow": 1.0,
+     "inband14": 0.9402,
+     "inband10": 0.6521,
+     "why_not": {
+      "fold": 17,
+      "slide": 4,
+      "flip": 0,
+      "closure": 0,
+      "skin": 0,
+      "parts": 0,
+      "contact": 0
+     }
+    },
+    "file": "docs/research/rebase/pk_m10.json",
+    "score": 88.96
+   },
+   "k4598_m5": {
+    "gap": 29.54,
+    "reach": 0.6361,
+    "follow": 1.0,
+    "inband14": 0.8773,
+    "inband10": 0.4878,
+    "contact": 0.0088,
+    "near1": 34.98,
+    "near_min_mm": 0.31,
+    "fit_gap": 22.88,
+    "overhead140": {
+     "ws": 28,
+     "reach": 0.25,
+     "clip": 10,
+     "follow": 1.0,
+     "inband14": 0.9202,
+     "inband10": 0.5899,
+     "why_not": {
+      "fold": 16,
+      "slide": 4,
+      "flip": 0,
+      "closure": 0,
+      "skin": 0,
+      "parts": 0,
+      "contact": 1
+     }
+    },
+    "file": "docs/research/rebase/pk_m5.json",
+    "score": 89.26
+   }
+  },
+  "remark": "H1 replaced k4598 at 06:29 UTC (polish verifier); k4598 re-measured too",
+  "delta_gap": -1.01
+ }
 }

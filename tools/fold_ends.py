@@ -44,7 +44,7 @@ print("fold hist done", round(time.time() - t0), "s", flush=True)
 res = []
 for a1 in range(35, 96, 5):
     for a2 in range(35, 111, 5):
-        lo, hi = abs(a1 - a2) + 10, min(a1 + a2, 360 - a1 - a2) - 10
+        lo, hi = abs(a1 - a2) + K.FOLD_MARGIN, min(a1 + a2, 360 - a1 - a2) - K.FOLD_MARGIN   # kit rule (5 since 2026-10-16)
         if hi <= lo: continue
         l, h = int(np.ceil(lo)), int(np.floor(hi)) + 1
         rw = (Cw[:, :, h] - Cw[:, :, l]) / ws.sum(); rc = (Cc[:, :, h] - Cc[:, :, l]) / cl.sum()

@@ -838,3 +838,67 @@ got a kinematic and an in-band ceiling (`ceilings.py`, `frontier_mine.py`).
   relay at the pin knee's seats (40 <-> 84 deg, kinematic 0.947): state A needs hub 2 at 51-55 mm, the 114 poses only
   state B closes need a median 70.5 / p90 205 mm, so one hub level keeps A in band and clears only 30-45 % of B:
   ~+0.09-0.14 of reach at best, not +0.32.
+
+## Rebase to the user's rulings: every verified leader at fold margin 5 / O20 (2026-10-16, docs/research/rebase/)
+
+User, 2026-10-16 ~05:50 UTC: fold margin 5 deg for the unpowered MVP1 (was 10), "Keep O20 only". **This is a measurement
+change, not a design change.** The rules now live in ONE place: `tools/concept_kit.py` `FOLD_MARGIN` (5; `CB_FOLD_MARGIN`
+overrides for comparisons) and `O20_ONLY` / `hub_rad()` (`CB_ALLOW_SLIM=1` only to re-measure an old slim claim). Routed:
+the seed `SING` (offset-skin-normal-3r, pin knee, raglan knee, knuckle cufflink, closure-set arc knee, acromial rocker,
+skin-normal-hubs), spine-parked, dwell four-bar knee, stop-relay rocker (stops and switch margin), fold-sph3r,
+raglan-routed, crown-ring, meridian-goniometer, the model template, `tools/fold_frontier.py`, `fold_ends.py`,
+`osn_fold_seeds.py`; slim-hub defaults -> O20 (spine-parked, dwell, stop-relay); the pin-knee model refuses a slim hub.
+Not routed (dead / refuted / killed, or a different margin): annular-ring, back-anchored-ring, floating-centre,
+j2-arc-sector (10, dead); clavicular-front-route, fivebar-roll, convergent-spm, spm-coaxial-turret (8, SPM / five-bar
+legs); cam-unfold-4th, cam-coupled-4r, magrace-arc-chain, seed-arc-rails (10, dead); deltoid-oval-track and
+scapula-halo-track (transversality, not a fold); pointer-cslide (15), posterior-max-margin-cardan / offset-arc-selfalign
+(5 already); the champion reference `tools/concept_baseline.py` + `baseline-3r-kit` (10: a reference config, kept for
+parity); `docs/research/reach/attribute.py` (fits at 10 by design, takes `--margin`). New models written this hour
+(arm-parked-knee-4r, zc-frontier-3r, slotted-eccentric-j2-3r) carry a literal 5.0 = the rule; they should read
+`K.FOLD_MARGIN` so `CB_FOLD_MARGIN` comparisons cover them.
+
+**Red-team fix on the way: raglan-knee-3r routes its links again.** Its model swapped `S.Geometry` for the routed
+class, but since 04:07 UTC the pin knee builds links with its own `_Geo`, bound before the swap, so the raglan model ran
+great-circle links (32.37 instead of the verified 31.52, docs/research/reach_attribution.md). The model now patches
+`PK._Geo.add_links` too (parity at r1d = r2d = 0 keeps the pin knee's own links): **31.52 reproduces to the digit.**
+
+Each leader through ITS OWN verifier harness (farm, Bench(110,360) exact, the shape frozen from a Bench(60,160) fast fit
+made at the same margin, the verifier's checks; `docs/research/rebase/<run>.json`, rows merged by
+`docs/research/rebase/merge_rows.py`: v_* = margin 5 / O20, v_*_m10 = before). Every margin-10 re-run reproduces the
+verified number exactly (pin knee k4598 30.35, raglan 31.52, knuckle 31.89, osn 42.59, spine-parked O15 34.29) - the
+routing changed nothing at 10.
+
+| leader (config) | complexity | v_gap as verified (m 10) | m 10, O20, re-run | **m 5, O20** | delta | reach 10 -> 5 | in-band14 10 -> 5 | follow 10 -> 5 | contact 10 -> 5 |
+|---|---|---|---|---|---|---|---|---|---|
+| **skin-normal-3r-pin-knee H1** (polish winner H-g107-1, O20 x3) | 19.5 | 28.21 (fit-60; 26.45 polish protocol) | 28.21 | **27.20** (polish protocol 24.48) | -1.01 | 0.644 -> 0.658 | 0.899 -> 0.895 | 0.964 -> 0.964 | 0.026 -> 0.026 |
+| skin-normal-3r-pin-knee k4598 (round-3 winner) | 19.5 | 30.35 | 30.35 | **29.54** | -0.81 | 0.606 -> 0.636 | 0.904 -> 0.877 | 1.0 -> 1.0 | 0.009 -> 0.009 |
+| raglan-knee-3r k1284 | 19.5 | 31.52 | 31.52 (routing fixed) | **27.82** | -3.70 | 0.600 -> 0.644 | 0.902 -> 0.895 | 0.973 -> 1.0 | 0.015 -> 0.017 |
+| skin-normal-3r-knuckle-cufflink k1187 | 29.25 | 31.89 | 31.89 | **29.10** | -2.79 | 0.617 -> 0.664 | 0.871 -> 0.856 | 0.964 -> 1.0 | 0.006 -> 0.011 |
+| offset-skin-normal-3r k4216 | 17.75 | 42.59 | 42.59 | **41.02** | -1.57 | 0.611 -> 0.631 | 0.784 -> 0.783 | 0.964 -> 0.973 | 0.021 -> 0.023 |
+| spine-parked-j2-3r k7008 | 0 | 34.29 (O15 J2 / J3: does not stand) | **41.77** (O20) | **41.00** | -0.77 (O15 -> O20: +7.48) | 0.592 -> 0.600 | 0.809 -> 0.805 | 0.955 -> 0.973 | 0.019 -> 0.015 |
+| arm-parked-knee-4r k-A seats at O20 (its own model `frozen`, NO verifier yet; the 22.36 ideation claim used O15 J2-J4) | not counted yet (4 active R + 1 spring) | 22.36 (O15, self-measured: does not stand) | 33.91 | 44.24 | +10.33 | 0.744 -> 0.672 | 0.760 -> 0.726 | 1.0 -> 1.0 | 0.043 -> 0.041 |
+
+* **The 5 deg margin is worth 0.8-3.7 gap points; most of it is follow, then reach.** The knee designs' folded clip
+  frames come back (raglan, knuckle: follow 0.96-0.97 -> 1.0) and reach rises 0.02-0.05, while the shape fitted at 5
+  covers more poses and in-band drops 0.01-0.03 (pin knee 0.904 -> 0.877). The newly admitted folded-side poses jam
+  link 1 on link 2 (pin knee parts losses 2 -> 8). No leader gains more than one overhead workspace pose (raglan 7 -> 8 of
+  28; pin knee 7 -> 7).
+* **O20-only costs the zero-complexity 3R 7.5 points** (spine-parked k7008: 34.29 at O15 -> 41.77 at O20, margin 10):
+  in-band14 0.878 -> 0.809, hub 3 0.84 -> 0.74, link 2 0.79 -> 0.65 and hub 2 1.00 -> 0.95 of their samples in band
+  (same seats, same fit rules; only the J2 / J3 hub radius 7.5 -> 10). At margin 5 it is 41.00. The only complexity-0 verified design is now 27
+  gap points from the golden 13.75; the knee designs (complexity 19.5) lead.
+* **Leader after the rebase: skin-normal-3r-pin-knee H1, 27.20 (score 90.11) at margin 5 / O20**, reproduced to the digit
+  by this track's farm run of the round-3 verifier (the polish verifier measured 27.20 too; 24.48 with the shape fitted on
+  Bench(110,360) itself); raglan-knee-3r 27.82 (89.88) is 0.6 behind and has not been polished; knuckle 29.10, the
+  round-3 k4598 29.54. All three knee designs are complexity 19.5-29.25 (two or three sensed passive pins).
+* **The 4R's margin is a design element, not a rule.** arm-parked-knee-4r's spare is set by J2 stops AT the fold-margin
+  line, so margin 5 moves its stops and the spring parks the knee elsewhere: hub 2 in band 0.75 -> 0.58, gap 33.91 ->
+  44.24. At O20 it keeps the highest frozen reach of any class (0.744 at margin 10, overhead 10 of 28) but link 3 is
+  0.37 in band. Its stop margin should be a free parameter >= the 5 deg rule, searched; it needs its own verifier.
+* **Still far from 95.** At margin 5 the best verified reach is 0.64-0.66 against the ~0.77 that 95 needs at
+  in-band 0.88: the margin moved every leader by a third of the way it moved the kinematic window (+0.02-0.05 of the
+  +0.05-0.06 promised, docs/research/reach_attribution.md section 3), as predicted. The fold is still the plateau.
+* **Red team of the feel at 5 deg** (reach_attribution.md section 3): at the new window edge sigma_min of [u1 u2 u3]
+  is 0.19-0.21 (J2 turns ~5x faster than the arm) and the J2 transmission angle 23-31 deg: give J2 a soft elastomer
+  stop at the 5 deg line in MVP1. Searches that ran before ~06:05 UTC ran at 10; any farm job shipped after that runs
+  at 5 unless it sets `CB_FOLD_MARGIN=10`.

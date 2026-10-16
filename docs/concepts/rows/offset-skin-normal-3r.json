@@ -14,15 +14,15 @@
  "inband10": 0.3892,
  "contact": 0.0116,
  "gap": 32.61,
- "v_reach": 0.6111,
- "v_follow": 0.9636,
- "v_inband14": 0.784,
- "v_inband10": 0.3984,
- "v_gap": 42.59,
+ "v_reach": 0.6306,
+ "v_follow": 0.9727,
+ "v_inband14": 0.7826,
+ "v_inband10": 0.3974,
+ "v_gap": 41.02,
  "n_configs": 9869,
  "verdict": "screened, a leader on the screening bench: gap 32.61 (score 88.14) with the seed's VModel checks on; the spec's all-skin-normal 2-slide chain cannot close (17.7 % of poses at +-0.5 mm) - the exact form is J1/J2 on GH rays + a free, skin-normal-tilted J3 line + 2 slides in hub 3's plane (no radial slide); J3 tilt + 7 mm offset buys 14.1 gap at the best seats (46.71 -> 32.61); level with / better than the 3-slide skin-normal-hubs-selfaligning (35.86): the radial slide is not needed on this bench; hand to the verifier (Bench(110,360) exact) and then the R10 judge (2 vs 3 slides)",
  "limiter": "J2 fold: 47 of 220 poses (window 44-104 deg of the J1-J3 axis angle vs 13-156 deg over the bench; across-the-body 12/36, overhead 19/41 incl. Raise overhead clip frames #3, #7) - orientation-level, untouched by offsets or slides; hub 3 50 % in band (median 14.0 mm), stage parts 62-70 %, bridge 0 %; pinch: arm-fixed guide block 0.21 mm (plane -90 elev 45 axial 120), hub 2 0.49 mm (plane 0 elev 75 axial 45); within-1 mm poses as contact -> 37.42, within-2 mm -> 41.44",
- "note": "Bench(60,160) fast, the seed VModel fit and rules (not the kit march): rotation closure < 0.5 deg (max 0.015), radial drift 0.000 mm, 10 fps continuity, >= 1 mm part clearance incl. moving rail, jam rule); spec fixed twice: (1) 2-slide closure theorem -> J1/J2 lines through GH, (2) inverted along guide (the seed's arm-fixed rail jammed 81-103/220 poses); sweep: 216 coarse (farm) + 3 CMA streams (farm, 1843) + local CMA + round-2 restarts (farm, 2219) + controls = 4523 tries | gate (whole history): NOT converged (+1.11 score pts over 2nd half, +0.67 over last third, top5 0.07); each CMA stream converged alone (A +0.25/+0.08/0.02, B +0.27/+0.09/0.03, C +0.15/+0.15/0.03): multi-basin; round 3 (G,H,I) submitted 23:31 UTC to the farm -> .cache/osn/cma{G,H,I}.json",
+ "note": "Bench(60,160) fast, the seed VModel fit and rules (not the kit march): rotation closure < 0.5 deg (max 0.015), radial drift 0.000 mm, 10 fps continuity, >= 1 mm part clearance incl. moving rail, jam rule); spec fixed twice: (1) 2-slide closure theorem -> J1/J2 lines through GH, (2) inverted along guide (the seed's arm-fixed rail jammed 81-103/220 poses); sweep: 216 coarse (farm) + 3 CMA streams (farm, 1843) + local CMA + round-2 restarts (farm, 2219) + controls = 4523 tries | gate (whole history): NOT converged (+1.11 score pts over 2nd half, +0.67 over last third, top5 0.07); each CMA stream converged alone (A +0.25/+0.08/0.02, B +0.27/+0.09/0.03, C +0.15/+0.15/0.03): multi-basin; round 3 (G,H,I) submitted 23:31 UTC to the farm -> .cache/osn/cma{G,H,I}.json || REBASE 2026-10-16T06:45 UTC (margin 5 (user 2026-10-16), measurement change): k4216 (cma2-F), own verifier, Bench(110,360) exact frozen: margin 10 42.59 -> margin 5 41.02 (reach 0.6111 -> 0.6306, in-band14 0.784 -> 0.7826, follow 0.9636 -> 0.9727); v_* = margin 5, v_*_m10 = before. ",
  "doc": "docs/concepts/offset-skin-normal-3r.md",
  "model_file": "docs/concepts/models/offset-skin-normal-3r.py",
  "best_k": 4216,
@@ -68,16 +68,17 @@
   "spec_all_skin_normal_closable_share": 0.177,
   "ref_skin_normal_hubs_selfaligning_3slides": 35.86
  },
- "v_contact": 0.021,
- "v_score": 84.51,
+ "v_contact": 0.0234,
+ "v_score": 85.08,
  "t_verified": "2026-10-16T00:32:53Z",
  "champion_same_bench": 66.97,
  "v_near_touch": {
-  "min_mm": 0.64,
-  "gap_metal_lt1_as_contact": 43.74,
+  "min_mm": null,
+  "gap_metal_lt1_as_contact": 42.74,
   "poses_lt1": 2,
   "gap_metal_lt2_as_contact": 68.67,
-  "poses_lt2": 40
+  "poses_lt2": 40,
+  "margin": 5
  },
  "v_overhead140": {
   "ws_reach": 0.25,
@@ -119,5 +120,66 @@
   "notes": "counted at the best config (k4216, inv = 1). bodies: link 1, link 2, member 3 (hub-3 plate + neck + riser + bridge + across carriage), member 4 (along carriage + along rail, inverted), member 5 (arm-fixed along-guide block on BOTTOM's top, arm-end). joints: J1-J3 O20 hubs, across and along miniature guides (2 x RSR3M / MGN03C crossed, 10.5-11.5 mm stack). Slides lie in hub 3's plane and change no orientation: not sensed. custom: base, 2 straps, member 3 (2 parts), adapter, arm block mount, 3 hub shafts (est.); catalogue: 3 x MR117 pair, 3 guide blocks (double block on the along axis for the moment) + 2 rails (est.).",
   "source": "docs/concepts/models/offset-skin-normal-3r.py:1-10 (chain), 115-121 (inverted stage members 4, 5); docs/research/manufacturability_audit.md (2 x RSR3M)",
   "confidence": "counted"
+ },
+ "v_gap_m10": 42.59,
+ "v_reach_m10": 0.6111,
+ "v_follow_m10": 0.9636,
+ "v_inband14_m10": 0.784,
+ "v_inband10_m10": 0.3984,
+ "v_contact_m10": 0.021,
+ "v_score_m10": 84.51,
+ "v_near_touch_m10": {
+  "min_mm": 0.64,
+  "gap_metal_lt1_as_contact": 43.74,
+  "poses_lt1": 2,
+  "gap_metal_lt2_as_contact": 68.67,
+  "poses_lt2": 40
+ },
+ "v_overhead140_m10": {
+  "ws_reach": 0.25,
+  "ws_taken": "7/28",
+  "clip_follow": 1.0,
+  "inband14_all": 0.86,
+  "inband10_all": 0.57,
+  "not_taken": {
+   "fold": 19,
+   "slide": 1,
+   "contact": 1
+  }
+ },
+ "v_rebase": {
+  "t": "2026-10-16T06:45:14Z",
+  "note": "margin 5 (user 2026-10-16), measurement change",
+  "rule": "fold margin 5 deg (tools/concept_kit.py FOLD_MARGIN), O20 hubs only",
+  "harness": "docs/concepts/verify/offset-skin-normal-3r.py osnbig_frozen",
+  "protocol": "fit Bench(60,160) fast AT the margin, shape frozen, worn on Bench(110,360) exact, verifier checks (farm)",
+  "config": "k4216 (cma2-F)",
+  "m10": {
+   "gap": 42.59,
+   "reach": 0.6111,
+   "follow": 0.9636,
+   "inband14": 0.784,
+   "inband10": 0.3984,
+   "contact": 0.021,
+   "near1": 43.74,
+   "fit_gap": 32.61,
+   "file": "docs/research/rebase/osn_m10.json",
+   "score": 84.51
+  },
+  "m5": {
+   "gap": 41.02,
+   "reach": 0.6306,
+   "follow": 0.9727,
+   "inband14": 0.7826,
+   "inband10": 0.3974,
+   "contact": 0.0234,
+   "near1": 42.74,
+   "fit_gap": 33.81,
+   "file": "docs/research/rebase/osn_m5.json",
+   "score": 85.08
+  },
+  "extra": {},
+  "remark": "",
+  "delta_gap": -1.57
  }
 }

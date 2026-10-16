@@ -15,15 +15,15 @@
  "inband10": 0.51,
  "contact": 0.0059,
  "gap": 24.47,
- "v_reach": 0.6167,
- "v_follow": 0.9636,
- "v_inband14": 0.8705,
- "v_inband10": 0.5171,
- "v_gap": 31.89,
+ "v_reach": 0.6639,
+ "v_follow": 1.0,
+ "v_inband14": 0.8564,
+ "v_inband10": 0.4977,
+ "v_gap": 29.1,
  "n_configs": 2229,
  "verdict": "VERIFIED at v_gap 31.89 on Bench(110,360) exact frozen (score 88.40, not the claimed 91.10 fast; below the 90 target, behind the pin knee's verified 30.35), far ahead of the champion's 75.94; 0 passive translations, 3 passive pins. Caveats: liner give >= 2 mm swings the knuckle into contact; the pins must be read to track the arm (R5 counting rule, user ruling needed). fast-bench leader candidate, claim pending the frozen exact wear: k1187 (J1-site knuckle, CMA B1 converged) 24.47 on Bench(60,160) fast = score 91.10 vs the pin-knee 26.34; knuckle-locked control at the same seats 26.91 (+2.44 from the knuckle); J2-site best 25.97 (locked 32.93, +6.96). Lever = small axis-direction decoupling |b| <= 0.17 closed by the knuckle, not square-to-skin hubs (large b: -15..-90). 0 passive translations, 3 passive pins (knuckle + 2 cuff pins).",
  "limiter": "J2 fold (49 of 220 at k1187): elevation >= 140 reach 0.17, across-body reach 0.58 / in-band 0.48; near-touch 0.04 mm at #63 (behind the back), 3 poses < 1 mm -> gap 28.10; knuckle authority p1 7.6 mm/rad (23 deg free swing per 3 mm liner give)",
- "note": "Bench(60,160) fast, seed VModel rules + knuckle / cuff closure + 10 fps continuity of all 6 joints. Gate (score pts: 2nd half / last third / top-5): B1 0.00 / 0.00 / 0.14 (converged), B2 0.46 / 0.07 / 0.09 (converged), B0 1.58 / 0.39 / 0.42, B3 2.39 / 2.39 / 0.88. Frozen exact Bench(110,360) of B1/B2/B0: farm job kc-frozen-C queued (not back inside the time box). k < 292: first model, crank aimed along the line-foot difference (bug, fixed 02:18). | VERIFIED 2026-10-16 04:10 UTC (adversarial verifier docs/concepts/verify/skin-normal-3r-knuckle-cufflink.py, farm, frozen k1187 shape fit on Bench(60,160) fast, worn on Bench(110,360) exact, no refit): v_gap 31.89 (score 88.40; reach 0.617, follow 0.964, ib14 0.871, ib10 0.517, contact 0.006); the verifier's added checks (independent 3D closure of all 6 joints: max 0.016 deg / 0.000 mm; the 3 pin posts + E-arm riser as solids vs every non-adjacent part >= 1 mm: min 6.46 mm; the unchecked adjacent pairs E arm-cuff link and cuff link-pad >= 0.15 mm: min 0.18 mm) removed 0 poses, so the model's own frozen number stands. Champion on the same bench: 75.94 (kit checks + 1 mm radial clearance, risley-turret verifier) / 66.97 (through the OSN VModel code). Near-touch 0.19 mm (#317 overhead), metal < 1 mm as contact -> 33.05. Fold 136 of 470; overhead >= 140 reach 0.25. Red team (fast bench): the knuckle is set only through the cuff liner (authority min 6.8 mm/rad): 1 / 2 / 3 mm liner give swings it 8 / 16 / 24 deg and moves link 1 + hubs 2-3 3.0 / 6.0 / 8.9 mm -> gap 23.7-27.3 / 27.3-34.0 / 37.5-47.8 with 1 / 3-5 / 3-19 contact poses; readout from the 3 hub encoders alone is off by 2.9 deg (median) to 8.0 deg (max) about J1 and 1.4 deg about the arm axis per mm of cuff disturbance, so the 3 passive pins need encoders to track the arm - an R5 active-DOF question for the user.",
+ "note": "Bench(60,160) fast, seed VModel rules + knuckle / cuff closure + 10 fps continuity of all 6 joints. Gate (score pts: 2nd half / last third / top-5): B1 0.00 / 0.00 / 0.14 (converged), B2 0.46 / 0.07 / 0.09 (converged), B0 1.58 / 0.39 / 0.42, B3 2.39 / 2.39 / 0.88. Frozen exact Bench(110,360) of B1/B2/B0: farm job kc-frozen-C queued (not back inside the time box). k < 292: first model, crank aimed along the line-foot difference (bug, fixed 02:18). | VERIFIED 2026-10-16 04:10 UTC (adversarial verifier docs/concepts/verify/skin-normal-3r-knuckle-cufflink.py, farm, frozen k1187 shape fit on Bench(60,160) fast, worn on Bench(110,360) exact, no refit): v_gap 31.89 (score 88.40; reach 0.617, follow 0.964, ib14 0.871, ib10 0.517, contact 0.006); the verifier's added checks (independent 3D closure of all 6 joints: max 0.016 deg / 0.000 mm; the 3 pin posts + E-arm riser as solids vs every non-adjacent part >= 1 mm: min 6.46 mm; the unchecked adjacent pairs E arm-cuff link and cuff link-pad >= 0.15 mm: min 0.18 mm) removed 0 poses, so the model's own frozen number stands. Champion on the same bench: 75.94 (kit checks + 1 mm radial clearance, risley-turret verifier) / 66.97 (through the OSN VModel code). Near-touch 0.19 mm (#317 overhead), metal < 1 mm as contact -> 33.05. Fold 136 of 470; overhead >= 140 reach 0.25. Red team (fast bench): the knuckle is set only through the cuff liner (authority min 6.8 mm/rad): 1 / 2 / 3 mm liner give swings it 8 / 16 / 24 deg and moves link 1 + hubs 2-3 3.0 / 6.0 / 8.9 mm -> gap 23.7-27.3 / 27.3-34.0 / 37.5-47.8 with 1 / 3-5 / 3-19 contact poses; readout from the 3 hub encoders alone is off by 2.9 deg (median) to 8.0 deg (max) about J1 and 1.4 deg about the arm axis per mm of cuff disturbance, so the 3 passive pins need encoders to track the arm - an R5 active-DOF question for the user. || REBASE 2026-10-16T06:45 UTC (margin 5 (user 2026-10-16), measurement change): k1187, own verifier, Bench(110,360) exact frozen: margin 10 31.89 -> margin 5 29.1 (reach 0.6167 -> 0.6639, in-band14 0.8705 -> 0.8564, follow 0.9636 -> 1.0); v_* = margin 5, v_*_m10 = before. ",
  "doc": "docs/concepts/skin-normal-3r-knuckle-cufflink.md",
  "model_file": "docs/concepts/models/skin-normal-3r-knuckle-cufflink.py",
  "best_k": 1187,
@@ -64,5 +64,75 @@
   "source": "docs/concepts/models/skin-normal-3r-knuckle-cufflink.py:1-34 (chain, Grubler, parts), 62 + 77 (kat knuckle site), 399-408 (pins)",
   "confidence": "counted"
  },
- "v_contact": 0.0061
+ "v_contact": 0.0113,
+ "v_gap_m10": 31.89,
+ "v_reach_m10": 0.6167,
+ "v_follow_m10": 0.9636,
+ "v_inband14_m10": 0.8705,
+ "v_inband10_m10": 0.5171,
+ "v_contact_m10": 0.0061,
+ "v_score": 89.42,
+ "v_near_touch": {
+  "gap_metal_lt1_as_contact": 33.48,
+  "min_mm": 0.3,
+  "margin": 5
+ },
+ "v_overhead140": {
+  "taken": 18,
+  "total": 38,
+  "reach": 0.286,
+  "ib14": 0.896,
+  "ib10": 0.599
+ },
+ "v_rebase": {
+  "t": "2026-10-16T06:45:14Z",
+  "note": "margin 5 (user 2026-10-16), measurement change",
+  "rule": "fold margin 5 deg (tools/concept_kit.py FOLD_MARGIN), O20 hubs only",
+  "harness": "docs/concepts/verify/skin-normal-3r-knuckle-cufflink.py",
+  "protocol": "fit Bench(60,160) fast AT the margin, shape frozen, worn on Bench(110,360) exact, verifier checks (farm)",
+  "config": "k1187",
+  "m10": {
+   "gap": 31.89,
+   "reach": 0.6167,
+   "follow": 0.9636,
+   "inband14": 0.8705,
+   "inband10": 0.5171,
+   "contact": 0.0061,
+   "near1": 33.05,
+   "near_min_mm": 0.19,
+   "fit_gap": 24.47,
+   "overhead140": {
+    "taken": 17,
+    "total": 38,
+    "reach": 0.25,
+    "ib14": 0.911,
+    "ib10": 0.623
+   },
+   "file": "docs/research/rebase/kn_m10.json",
+   "score": 88.4
+  },
+  "m5": {
+   "gap": 29.1,
+   "reach": 0.6639,
+   "follow": 1.0,
+   "inband14": 0.8564,
+   "inband10": 0.4977,
+   "contact": 0.0113,
+   "near1": 33.48,
+   "near_min_mm": 0.3,
+   "fit_gap": 22.48,
+   "overhead140": {
+    "taken": 18,
+    "total": 38,
+    "reach": 0.286,
+    "ib14": 0.896,
+    "ib10": 0.599
+   },
+   "file": "docs/research/rebase/kn_m5.json",
+   "score": 89.42
+  },
+  "extra": {},
+  "remark": "",
+  "delta_gap": -2.79
+ }
 }

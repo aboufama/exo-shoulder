@@ -9,7 +9,7 @@ For every (a1, a2) on a grid it finds the (u1, u3) pairs (u1 = K.bvec(az, el) in
 in the humerus frame, like the models' parameters) that keep the most bench workspace poses and clip frames in band,
 and writes the top distinct pairs per (a1, a2) to docs/research/fold/frontier.json.
 
-  python3 tools/fold_frontier.py [--margin 10] [--top 3]
+  python3 tools/fold_frontier.py [--margin M (default tools/concept_kit.py FOLD_MARGIN: 5 since 2026-10-16)] [--top 3]
 """
 import argparse, json, os, sys, time
 import numpy as np
@@ -20,7 +20,7 @@ REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
 def main():
-    ap = argparse.ArgumentParser(); ap.add_argument("--margin", type=float, default=10.0); ap.add_argument("--top", type=int, default=3)
+    ap = argparse.ArgumentParser(); ap.add_argument("--margin", type=float, default=K.FOLD_MARGIN); ap.add_argument("--top", type=int, default=3)
     ap.add_argument("--out", default=os.path.join(REPO, "docs", "research", "fold", "frontier.json")); a = ap.parse_args()
     t0 = time.time()
     B = CB.Bench(n_clip=60, n_ws=160); Z = CB._poses_all(); Q = Z["HG"][B.idx].astype(np.float32); kind = np.array(B.kind)

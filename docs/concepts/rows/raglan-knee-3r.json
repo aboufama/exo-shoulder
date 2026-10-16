@@ -15,11 +15,11 @@
  "inband10": 0.5167,
  "contact": 0.0175,
  "gap": 23.0,
- "v_reach": 0.6,
- "v_follow": 0.9727,
- "v_inband14": 0.9016,
- "v_inband10": 0.5214,
- "v_gap": 31.52,
+ "v_reach": 0.6444,
+ "v_follow": 1.0,
+ "v_inband14": 0.8946,
+ "v_inband10": 0.5105,
+ "v_gap": 27.82,
  "n_configs": 2797,
  "best_k": 1284,
  "best_stage": "cma-A2",
@@ -272,7 +272,7 @@
  "model_file": "docs/concepts/models/raglan-knee-3r.py",
  "verdict": "VERIFIED v_gap 31.52 (score 88.54) on Bench(110,360) exact frozen vs champion 66.97 same bench and checks; routing is a small lever on the leader, the seat move found with it a bigger one: raglan map argmax = the great circle at the k4216 seats; routes only 24.79 fast (25.89 at fixed part sizes; 32.33 frozen Bench(110,360) exact, 33.41 fixed) vs the pin knee 26.34 / 33.84; CMA seats + routes (A2, 1009 tries, converged) 23.00 fast (score 91.64; 23.62 at fixed sizes; same seats with straight links 24.49: J3 3.3 deg more proximal brings hub 3 / knee / pad into band); posterior-J1 seats dead (122.45); A2 worn FROZEN on Bench(110,360) exact 31.52 (score 88.54; 32.11 at fixed sizes; in-band 0.90 met, reach 0.600 = 30 of the 31.5 points) vs the pin knee 33.84 and osn 42.59",
  "limiter": "J2 fold: 139 of 470 big-bench poses (reach 0.600, overhead 0.25); routes and seat moves cannot touch it; near-touch: 0.12 mm min, 65.38 with metal < 2 mm as contact",
- "note": "Bench(60,160) fast grid, pin-knee rules (jam, crowns, strap tops, every part pair, 10 fps continuity); parity at d = 0 exact (26.34); 27 first-round CMA tries ran on the exact path (no bench-cache link) and are logged as not comparable; ranking by the dilution-corrected gap_fixed_n is the honest one",
+ "note": "Bench(60,160) fast grid, pin-knee rules (jam, crowns, strap tops, every part pair, 10 fps continuity); parity at d = 0 exact (26.34); 27 first-round CMA tries ran on the exact path (no bench-cache link) and are logged as not comparable; ranking by the dilution-corrected gap_fixed_n is the honest one || REBASE 2026-10-16T06:45 UTC (margin 5 (user 2026-10-16), measurement change): k1284 (cma-A2), own verifier, Bench(110,360) exact frozen: margin 10 31.52 -> margin 5 27.82 (reach 0.6 -> 0.6444, in-band14 0.9016 -> 0.8946, follow 0.9727 -> 1.0); v_* = margin 5, v_*_m10 = before. the model routes its links again (PK._Geo fix in the rebase track): 31.52 reproduces exactly at margin 10",
  "gap_fixed_n": 23.62,
  "exact_frozen_summary": {
   "bench": "Bench(110,360) exact, shape frozen from the Bench(60,160) fast fit",
@@ -347,12 +347,12 @@
   "confidence": "counted"
  },
  "t_verified": "2026-10-16T04:05:32Z",
- "v_contact": 0.0152,
- "v_score": 88.54,
- "v_gap_fixed_n": 32.09,
+ "v_contact": 0.0172,
+ "v_score": 89.88,
+ "v_gap_fixed_n": 28.56,
  "v_near_touch": {
-  "min_mm": 0.12,
-  "gap_metal_lt1_as_contact": 35.02,
+  "min_mm": 0.06,
+  "gap_metal_lt1_as_contact": 32.34,
   "poses_lt1": 6,
   "gap_metal_lt2_as_contact": 65.38,
   "poses_lt2": 49,
@@ -381,16 +381,22 @@
     "elev": 0.0,
     "axial": -45.0
    }
-  ]
+  ],
+  "margin": 5
  },
  "v_overhead140": {
-  "ws_reach": 0.25,
-  "ws_taken": "7/28",
-  "clip_follow": 1.0,
-  "inband14_all": 0.9428,
-  "inband10_all": 0.6582,
-  "not_taken": {
-   "fold": 19,
+  "ws": 28,
+  "reach": 0.2857,
+  "clip": 10,
+  "follow": 1.0,
+  "inband14": 0.9356,
+  "inband10": 0.6384,
+  "why_not": {
+   "fold": 18,
+   "slide": 0,
+   "flip": 0,
+   "closure": 0,
+   "skin": 0,
    "parts": 1,
    "contact": 1
   }
@@ -463,5 +469,131 @@
   },
   "connectivity": "every taken workspace pose (216 big, 110 fast) joins the rest pose through taken poses by fold-free continuous arm paths (no islands)"
  },
- "v_note": "Verifier 2026-10-16, config k1284 (cma-A2; sweep log = row = doc params). Reproduced 23.00 exactly on Bench(60,160) fast (verifier checks: 0 extra poses); exact path refit on 60/160 24.85. v_* = Bench(110,360) exact, shape FROZEN from the 60/160 fast fit, model checks + pin-knee verifier checks run on the routed model: 31.52 (score 88.54) reproduced exactly, 0 poses corrected; 32.09 at fixed part sizes (dilution 0.57). Flat-bar links (each station at its highest row, a constant section that a bent bar can be; the model's per-row skin fit banks link 2 up to 34 deg, p95 25 deg): 31.38 big / 23.48 fast - the gain does not rest on the bank. Champion through the osn verifier code, same bench, frozen: 66.97 (re-run on the farm, identical). 3 active + 2 passive R (0 translations), screw rank: mobility 3, no undetermined coordinate. Not refuted; not 90+ (big). Below the verified pin knee k4598 (30.35) on the big bench. Script docs/concepts/verify/raglan-knee-3r.py."
+ "v_note": "Verifier 2026-10-16, config k1284 (cma-A2; sweep log = row = doc params). Reproduced 23.00 exactly on Bench(60,160) fast (verifier checks: 0 extra poses); exact path refit on 60/160 24.85. v_* = Bench(110,360) exact, shape FROZEN from the 60/160 fast fit, model checks + pin-knee verifier checks run on the routed model: 31.52 (score 88.54) reproduced exactly, 0 poses corrected; 32.09 at fixed part sizes (dilution 0.57). Flat-bar links (each station at its highest row, a constant section that a bent bar can be; the model's per-row skin fit banks link 2 up to 34 deg, p95 25 deg): 31.38 big / 23.48 fast - the gain does not rest on the bank. Champion through the osn verifier code, same bench, frozen: 66.97 (re-run on the farm, identical). 3 active + 2 passive R (0 translations), screw rank: mobility 3, no undetermined coordinate. Not refuted; not 90+ (big). Below the verified pin knee k4598 (30.35) on the big bench. Script docs/concepts/verify/raglan-knee-3r.py.",
+ "v_gap_m10": 31.52,
+ "v_reach_m10": 0.6,
+ "v_follow_m10": 0.9727,
+ "v_inband14_m10": 0.9016,
+ "v_inband10_m10": 0.5214,
+ "v_contact_m10": 0.0152,
+ "v_score_m10": 88.54,
+ "v_near_touch_m10": {
+  "min_mm": 0.12,
+  "gap_metal_lt1_as_contact": 35.02,
+  "poses_lt1": 6,
+  "gap_metal_lt2_as_contact": 65.38,
+  "poses_lt2": 49,
+  "lowest": [
+   {
+    "mm": 0.12,
+    "i": 279,
+    "kind": "ws",
+    "plane": 45.0,
+    "elev": 75.0,
+    "axial": -105.0
+   },
+   {
+    "mm": 0.19,
+    "i": 127,
+    "kind": "ws",
+    "plane": -75.0,
+    "elev": 45.0,
+    "axial": 120.0
+   },
+   {
+    "mm": 0.21,
+    "i": 164,
+    "kind": "ws",
+    "plane": -15.0,
+    "elev": 0.0,
+    "axial": -45.0
+   }
+  ]
+ },
+ "v_overhead140_m10": {
+  "ws_reach": 0.25,
+  "ws_taken": "7/28",
+  "clip_follow": 1.0,
+  "inband14_all": 0.9428,
+  "inband10_all": 0.6582,
+  "not_taken": {
+   "fold": 19,
+   "parts": 1,
+   "contact": 1
+  }
+ },
+ "v_gap_fixed_n_m10": 32.09,
+ "v_rebase": {
+  "t": "2026-10-16T06:45:14Z",
+  "note": "margin 5 (user 2026-10-16), measurement change",
+  "rule": "fold margin 5 deg (tools/concept_kit.py FOLD_MARGIN), O20 hubs only",
+  "harness": "docs/concepts/verify/raglan-knee-3r.py big",
+  "protocol": "fit Bench(60,160) fast AT the margin, shape frozen, worn on Bench(110,360) exact, verifier checks (farm)",
+  "config": "k1284 (cma-A2)",
+  "m10": {
+   "gap": 31.52,
+   "reach": 0.6,
+   "follow": 0.9727,
+   "inband14": 0.9016,
+   "inband10": 0.5214,
+   "contact": 0.0152,
+   "near1": 35.02,
+   "near_min_mm": 0.12,
+   "fit_gap": 23.0,
+   "gap_fixed_n": 32.09,
+   "overhead140": {
+    "ws": 28,
+    "reach": 0.25,
+    "clip": 10,
+    "follow": 1.0,
+    "inband14": 0.9428,
+    "inband10": 0.6582,
+    "why_not": {
+     "fold": 19,
+     "slide": 0,
+     "flip": 0,
+     "closure": 0,
+     "skin": 0,
+     "parts": 1,
+     "contact": 1
+    }
+   },
+   "file": "docs/research/rebase/rg_m10.json",
+   "score": 88.54
+  },
+  "m5": {
+   "gap": 27.82,
+   "reach": 0.6444,
+   "follow": 1.0,
+   "inband14": 0.8946,
+   "inband10": 0.5105,
+   "contact": 0.0172,
+   "near1": 32.34,
+   "near_min_mm": 0.06,
+   "fit_gap": 22.69,
+   "gap_fixed_n": 28.56,
+   "overhead140": {
+    "ws": 28,
+    "reach": 0.2857,
+    "clip": 10,
+    "follow": 1.0,
+    "inband14": 0.9356,
+    "inband10": 0.6384,
+    "why_not": {
+     "fold": 18,
+     "slide": 0,
+     "flip": 0,
+     "closure": 0,
+     "skin": 0,
+     "parts": 1,
+     "contact": 1
+    }
+   },
+   "file": "docs/research/rebase/rg_m5.json",
+   "score": 89.88
+  },
+  "extra": {},
+  "remark": "the model routes its links again (PK._Geo fix in the rebase track): 31.52 reproduces exactly at margin 10",
+  "delta_gap": -3.7
+ }
 }

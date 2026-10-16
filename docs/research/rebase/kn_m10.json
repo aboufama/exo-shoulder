@@ -1,0 +1,353 @@
+{
+ "params": {
+  "az1": 92.6852,
+  "el1": 67.3199,
+  "az2": 16.5662,
+  "el2": 52.0128,
+  "wd": 77.5099,
+  "wa": -10.4922,
+  "b1": 0.011,
+  "b2": -0.084,
+  "b3": 0.2393,
+  "lk": 21.4188,
+  "alk": -22.1892,
+  "LE": 41.1128,
+  "lc": 23.8502,
+  "phE": -5.7556,
+  "dB": -57.6675,
+  "crank_strap": 1,
+  "kat": 1
+ },
+ "design": {
+  "alk": -22.1892,
+  "k_c0": 0.567,
+  "k_sk": -1.0,
+  "k_mid": 0.0,
+  "cuff_m": [
+   -5.668,
+   1.27
+  ],
+  "cuff_sig": 1.0
+ },
+ "mode": "exact",
+ "exact": true,
+ "fit_fast": {
+  "gap": 24.47,
+  "reach": 0.6937,
+  "follow": 0.9667,
+  "inband14": 0.8675,
+  "inband10": 0.51,
+  "contact": 0.0059,
+  "mode": "fast",
+  "why": {
+   "fold": 49,
+   "knuckle": 0,
+   "cuff": 1,
+   "flip": 0,
+   "closure": 0,
+   "skin": 1,
+   "parts": 0,
+   "contact": 0
+  }
+ },
+ "model": {
+  "gap": 31.89,
+  "reach": 0.6167,
+  "follow": 0.9636,
+  "inband14": 0.8705,
+  "inband10": 0.5171,
+  "contact": 0.0061,
+  "why": {
+   "fold": 136,
+   "knuckle": 0,
+   "cuff": 2,
+   "flip": 0,
+   "closure": 0,
+   "skin": 0,
+   "parts": 2,
+   "contact": 2
+  },
+  "parts_pairs": {
+   "L2-Earm": 2
+  },
+  "parts_ib14": {
+   "hub1": [
+    0.992,
+    7.9,
+    80
+   ],
+   "hub2": [
+    0.912,
+    11.7,
+    80
+   ],
+   "hub3": [
+    0.743,
+    11.8,
+    80
+   ],
+   "Earm": [
+    0.832,
+    9.0,
+    97
+   ],
+   "crank": [
+    1.0,
+    7.0,
+    50
+   ],
+   "clink": [
+    0.806,
+    11.1,
+    93
+   ],
+   "pad": [
+    0.933,
+    8.9,
+    64
+   ],
+   "crankL": [
+    1.0,
+    6.3,
+    12
+   ],
+   "L1": [
+    0.628,
+    12.6,
+    10
+   ],
+   "L2": [
+    0.851,
+    10.0,
+    144
+   ]
+  }
+ },
+ "extra": {
+  "closure_max": {
+   "knuckle_pt": 0.0,
+   "knuckle_ax": 0.0001,
+   "J2_line": 0.0,
+   "J2_ax": 0.0002,
+   "J3_line": 0.0,
+   "J3_ax": 0.0002,
+   "pin_a": 0.0,
+   "pin_b": 0.0,
+   "arm_ax": 0.0156
+  },
+  "closure_bad": 0,
+  "pin_a_axial_offset_span": 0.0,
+  "posts_low": [
+   {
+    "mm": 6.46,
+    "margin": 5.46,
+    "pair": "apost-pad",
+    "i": 345,
+    "kind": "ws",
+    "plane": 75.0,
+    "elev": 165.0,
+    "axial": -75.0
+   },
+   {
+    "mm": 6.49,
+    "margin": 5.49,
+    "pair": "apost-pad",
+    "i": 8,
+    "kind": "clip",
+    "plane": 30.0,
+    "elev": 150.0,
+    "axial": -60.0
+   },
+   {
+    "mm": 6.49,
+    "margin": 5.49,
+    "pair": "apost-pad",
+    "i": 9,
+    "kind": "clip",
+    "plane": 30.0,
+    "elev": 150.0,
+    "axial": -60.0
+   },
+   {
+    "mm": 6.49,
+    "margin": 5.49,
+    "pair": "apost-pad",
+    "i": 10,
+    "kind": "clip",
+    "plane": 30.0,
+    "elev": 150.0,
+    "axial": -60.0
+   },
+   {
+    "mm": 6.5,
+    "margin": 5.5,
+    "pair": "apost-pad",
+    "i": 11,
+    "kind": "clip",
+    "plane": 30.0,
+    "elev": 149.40573120117188,
+    "axial": -59.878719329833984
+   },
+   {
+    "mm": 6.51,
+    "margin": 5.51,
+    "pair": "apost-pad",
+    "i": 318,
+    "kind": "ws",
+    "plane": 60.0,
+    "elev": 165.0,
+    "axial": -75.0
+   }
+  ],
+  "posts_bad": 0,
+  "posts_bad_pairs": {},
+  "adj_low": [
+   {
+    "mm": 0.18,
+    "pair": "clink-pad",
+    "i": 462,
+    "kind": "ws",
+    "plane": 150.0,
+    "elev": 75.0,
+    "axial": -75.0
+   },
+   {
+    "mm": 0.18,
+    "pair": "clink-pad",
+    "i": 418,
+    "kind": "ws",
+    "plane": 120.0,
+    "elev": 90.0,
+    "axial": -60.0
+   },
+   {
+    "mm": 0.18,
+    "pair": "clink-pad",
+    "i": 442,
+    "kind": "ws",
+    "plane": 135.0,
+    "elev": 90.0,
+    "axial": -45.0
+   },
+   {
+    "mm": 0.18,
+    "pair": "clink-pad",
+    "i": 177,
+    "kind": "ws",
+    "plane": -15.0,
+    "elev": 60.0,
+    "axial": 75.0
+   },
+   {
+    "mm": 0.18,
+    "pair": "clink-pad",
+    "i": 163,
+    "kind": "ws",
+    "plane": -30.0,
+    "elev": 60.0,
+    "axial": 75.0
+   }
+  ],
+  "adj_bad": 0,
+  "post_sizes": {
+   "kpost": [
+    4,
+    224
+   ],
+   "apost": [
+    3,
+    224
+   ],
+   "bpost": [
+    5,
+    224
+   ],
+   "riser": [
+    3,
+    90
+   ]
+  },
+  "spans_deg": {
+   "knuckle": [
+    -5.6,
+    3.4
+   ],
+   "psi": [
+    -10.7,
+    11.1
+   ],
+   "elbow": [
+    100.4,
+    138.4
+   ]
+  },
+  "knuckle_auth_mm_per_rad": {
+   "p1": 7.96,
+   "min": 6.81
+  },
+  "liner_3mm_swing_deg_at_min_auth": 25.3,
+  "pad": {
+   "dist_from_GH": 59.2,
+   "c3_dist_from_GH": 7.6,
+   "levels": {
+    "hub1": 49.89913208744462,
+    "hub2": 62.169390001460876,
+    "h3": 73.18591650483435,
+    "Earm": 78.30074956706554,
+    "crank": 49.53466735632049,
+    "pad": 79.19974617990202,
+    "clink": 82.34974617990203
+   },
+   "pad_minus_c3_sa_st_sn": [
+    45.9,
+    -24.2,
+    0.0
+   ]
+  }
+ },
+ "removed": [],
+ "corrected": {
+  "gap": 31.89,
+  "reach": 0.6167,
+  "follow": 0.9636,
+  "inband14": 0.8705,
+  "inband10": 0.5171,
+  "contact": 0.0061
+ },
+ "corrected_redteam": {
+  "near_min": 0.19,
+  "near1_poses": 2,
+  "gap_near1": 33.05,
+  "groups": {
+   "rest": {
+    "taken": 5,
+    "total": 5,
+    "reach": 1.0,
+    "ib14": 0.814,
+    "ib10": 0.468
+   },
+   "overhead140": {
+    "taken": 17,
+    "total": 38,
+    "reach": 0.25,
+    "ib14": 0.911,
+    "ib10": 0.623
+   },
+   "across": {
+    "taken": 30,
+    "total": 78,
+    "reach": 0.294,
+    "ib14": 0.565,
+    "ib10": 0.287
+   },
+   "behind": {
+    "taken": 32,
+    "total": 40,
+    "reach": 0.68,
+    "ib14": 0.932,
+    "ib10": 0.581
+   }
+  }
+ },
+ "secs": 2067.2
+}

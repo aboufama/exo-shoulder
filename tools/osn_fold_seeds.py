@@ -56,7 +56,7 @@ def shares(params):
         _POSES.update(Q=Z["HG"][B.idx].astype(float), ws=kind == "ws", cl=kind == "clip")
     D = M.Design(params); u1, u3 = D.u[0], D.u[2]; a1, a2 = (math.degrees(a) for a in D.A)
     th = np.degrees(np.arccos(np.clip((_POSES["Q"] @ u3) @ u1, -1, 1)))
-    lo, hi = abs(a1 - a2) + 10, min(a1 + a2, 360 - a1 - a2) - 10
+    lo, hi = abs(a1 - a2) + M.S.SING, min(a1 + a2, 360 - a1 - a2) - M.S.SING   # the model's margin = tools/concept_kit.py FOLD_MARGIN
     inb = (th >= lo) & (th <= hi)
     return dict(ws=round(float(inb[_POSES["ws"]].mean()), 4), clip=round(float(inb[_POSES["cl"]].mean()), 4),
                 a=[round(a1, 1), round(a2, 1)], band=[round(lo, 1), round(hi, 1)])
