@@ -157,8 +157,9 @@ def judge_close(m):
     j.update_faces(j.nondegenerate_faces()); j.remove_unreferenced_vertices()
     out = trimesh.Trimesh(np.asarray(j.vertices) * 1000.0, np.asarray(j.faces), process=False)
     if not j.is_watertight:
-        w = weld_open(out, tol=0.05)
-        if w.is_watertight: out = w
+        for tol in (0.05, 0.1, 0.2, 0.3):                                                  # OCC seams on glued bent bars (link 2 needed > 0.05)
+            w = weld_open(out, tol=tol)
+            if w.is_watertight: out = w; break
     chk = trimesh.Trimesh(np.asarray(out.vertices, np.float32).astype(float) / 1000.0, np.asarray(out.faces), process=False)
     chk.merge_vertices(digits_vertex=7); chk.update_faces(chk.nondegenerate_faces())
     return out, bool(chk.is_watertight)
@@ -666,7 +667,10 @@ def ear_margins(M, l1_body, rel, dz=0.0, l1m=None):
     return dict(d0=d0, d1=d1, m_all=m_all, m_nopad=m_np, n_pts=int(len(P)), l1m=l1m)
 
 
-EAR_DZ = (0.0, 1.3, 2.6)                                                                   # ear levels above the J1 upper seat (2.6 = flush with the ring top H1)
+EAR_DZ = tuple(float(x) for x in os.environ.get("PK_EAR_DZ", "0,1.3,2.6").split(",") if x.strip())   # ear levels above the J1 upper
+# seat (2.6 = flush with the ring top H1); PK_EAR_DZ="" skips the ear search (H1: link 1 sweeps the ear zone - 9 / 180 headings clear
+# at +0 mm, none of them clear of the skin envelope (best -5.2 mm); at +1.3 mm 14 headings clear both, all within 304-310 deg: no pair
+# 90-180 deg apart; measured 2026-10-16) -> the no-ear base
 
 
 def base_part(M, E, l1_body, rel, frames):
@@ -799,7 +803,7 @@ def check_frames(M, dd, parts):
             Vm = M.world(mem, i, Vl if mem != 5 else Vl @ PK.HR)
             fdev = max(fdev, float(np.abs(Vm - Vc).max()))
             m.vertices = Vc
-            if "screw" not in n.lower() and "clip" not in n.lower(): meshes.setdefault(g, []).append(m)
+            if n.startswith("D8-") or ("screw" not in n.lower() and "clip" not in n.lower()): meshes.setdefault(g, []).append(m)
         meshes = {g: trimesh.util.concatenate(v) for g, v in meshes.items()}
         res = {}
         for name, (m, Xp) in list(M.rigid.items()) + list(M.link_pts.items()):
@@ -880,13 +884,14 @@ def main():
     USER = ("TOP", "MIDDLE", "FOREARM", "Hex", "M4 ULTRA", "IGUS", "5mm", "Revolve", "CirPattern")
     sc = trimesh.Scene(); pf = []
     for i, (g, n, s, mem) in enumerate(allp):
-        user = n.startswith(USER); hwr = any(k in n.lower() for k in ("screw", "m4x6", "clip"))
+        user = n.startswith(USER); hwr = not n.startswith("D8-") and any(k in n.lower() for k in ("screw", "m4x6", "clip"))   # D8-05 names its clip counterbores
         if not user and not hwr:
             cq.exporters.export(cq.Workplane().add(s), os.path.join(dd, "step", f"{i:02d}_{n.split(':')[0].replace('/', '_').replace(' ', '_')[:40]}.step"))
         trep = {}; m = tess(s, fine=not user, report=trep)
         sc.add_geometry(m, node_name=f"{g}|{n}|{i}", geom_name=f"{g}|{n}|{i}")
         mm = m.copy(); mm.merge_vertices(); vol = abs(mm.volume) if mm.is_watertight else s.Volume()
         if user: mat, rho = "user part", None
+        elif "iglidur" in n: mat, rho = "iglidur", IGL
         elif "bearing" in n: mat, rho = "bearing steel", 7.8
         elif "17-4PH" in n: mat, rho = "17-4PH", 7.8
         elif "iglidur" in n: mat, rho = "iglidur", IGL
