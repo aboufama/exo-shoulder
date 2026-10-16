@@ -117,9 +117,9 @@ histories; frozen Bench(110,360) exact where verified):
 | plain 3R, seats re-tuned locally on the 360 poses (arcs fixed) | +-5 deg: +0.014-0.025; +-10 deg: +0.020-0.042; +-15 deg: +0.036-0.064 | (the Bench(110,360) polish in flight measures it) | - |
 | 3R + passive planar closure (pin knee, raglan knee, knuckle) | = plain 3R at the same seats (0.62-0.63 at the leaders') | pin knee 0.700 (0.694 at 0.90, 0.719 at 0.80: flat - fold-capped), raglan 0.700, knuckle 0.681 | pin knee 0.606 (0.904), raglan 0.600 (0.902), knuckle 0.617 (0.871) |
 | 3R + 2 cuff slides (osn) | = plain 3R | none: in-band never above 0.81 in 9825 tries | 0.611 (in-band 0.784) |
-| 3R + per-pose-free J1 rocker, travel beta (pivot scanned) | beta 5: 0.65-0.68, 10: 0.68-0.73, 15: 0.73-0.76, 20: 0.77-0.81, 30: 0.84-0.88 (overhead 0.68-0.82 at 30) | stop-relay-rocker-3r: none yet (best 0.681 at in-band 0.852, round 4 in flight; its own deltoid-pivot relay: kinematic 0.95, in-band 0.20) | - |
+| 3R + per-pose-free J1 rocker, travel beta (pivot scanned) | beta 5: 0.65-0.68, 10: 0.68-0.73, 15: 0.73-0.76, 20: 0.77-0.81, 30: 0.84-0.88 (overhead 0.68-0.82 at 30) | stop-relay-rocker-3r 0.700 at in-band 0.881 (contact 0.055; 12.3 k tries, round 4 in flight; its deltoid-pivot relay: kinematic 0.95, in-band 0.20) | - |
 | 3R + two-state arc relay (a detented mid-joint in link 1: a1 -> a1') | a1' 77-84: 0.93-0.95, overhead 0.89-1.00; relay on a2 (a2' 129-132): 0.82-0.84 | unmeasured (no model); hub-2 parking below | - |
-| 3R + coupled schedule (dwell four-bar knee, arc knee) | <= the per-pose-free rocker of the same travel | dwell four-bar: none (best 0.669 at 0.852); closure-set arc knee: none (refuted) | arc knee 0.589 (in-band 0.486) |
+| 3R + coupled schedule (dwell four-bar knee, arc knee) | <= the per-pose-free rocker of the same travel | dwell four-bar: none (0.700 at 0.84, 5.7 k tries); closure-set arc knee: none (refuted) | arc knee 0.589 (in-band 0.486) |
 | redundant 4R, spring-centred sensed 4th (4-DOF lens park4, 450 tries) | ~1.0 (a 4R folds only with all four axes coplanar) | 0.644 (one config, contact 0.053); 0.781 at in-band 0.864, 0.788 at 0.842 | 0.750 at in-band 0.864, contact 0.038, gap 22.36 (self-measured by the lens, NOT verified) |
 | redundant 4R, ring 4th (lens) | ~1.0 | none (in-band <= 0.79) | 0.683 (in-band 0.786, self-measured) |
 
@@ -192,13 +192,13 @@ tools/simplicity.py with the user's 2026-10-16 weights (lower = simpler; the pin
 
 | rank | lever | measured reach gain at in-band >= 0.88 | kinematic headroom | in-band cost (measured) | complexity | buildability |
 |---|---|---|---|---|---|---|
-| 1 | **Fold margin 10 -> 5** (the MVP1 rule since ~05:50 UTC) | +0.019-0.031 (pin knee 0.606 -> 0.625, gap 29.26; knuckle +0.031, raglan +0.028, spine +0.022) | +0.047-0.056 | in-band 0 to -0.006 frozen (refit: -0.02 to -0.03); contact up to 0.018-0.030; the extra folded-side poses jam parts | +0 | sigma_min 0.21-0.25 at the gains (5x joint rate), transmission 25-36 deg: poor |
-| 2 | **Fold margin 10 -> 7** (superseded by the 5 deg ruling; kept for the curve) | +0.011-0.025 (pin knee 0.606 -> 0.617, gap 30.35 -> 30.11; raglan / knuckle +0.025, gap -2.2 / -1.6; spine +0.020) | +0.033-0.039 | in-band 0 to -0.006 frozen; contact 0.009 -> 0.018 (pin knee), 0.015 -> 0.030 (spine); the folded-side gains jam link 1 on link 2 | +0 (J2 hard stops 7 deg from the fold) | same parts; sigma_min 0.24-0.27 at the gains, transmission 29-39 deg |
-| 3 | **Seats re-tuned on the full 360-pose workspace** (the Bench(110,360) polish in flight; arcs fixed) | pending (the polish measures it) | +0.014-0.025 within 5 deg of the seats, +0.020-0.042 within 10, +0.036-0.064 within 15 | small for 3-5 deg moves (the CMA's own basin) | +0 | unchanged parts |
-| 4 | **Non-fold fixes** (contact, parts, cuff) | <= 0.008 each (2-5 poses per leader) | - | - | +0 | local part edits |
-| 5 | **Longer knee link** (pin knee: lc 24.9 -> 28 / 31 mm, refit + frozen exact) | **0** (lc 28: the refit re-centres the knee, the same 4 elevation-165 poses fail its window; lc 31: 2 of them admitted, both touch the skin 0.8 / 1.3 mm, gap 30.94) | +4 overhead poses (+0.011) | contact 0.009 -> 0.015 at lc 31 | +0 | same part |
-| 6 | **Per-pose-free J1 rocker / stop relay** (stop-relay-rocker-3r, round 4) | none at 0.88 yet (best 0.681 at 0.852, fast) | beta 10: +0.07-0.09, 20: +0.16-0.18, 30: +0.23-0.24 | the gained poses put hub 2 / the pivot hub over high skin (its screen) | 12.5 | rocker + stops + spring; the mode switch is force-closed (sag torque vs preload) |
-| 7 | **Coupled schedule** (dwell four-bar knee, closure-set arc knee) | none at 0.88 (dwell best 0.669 at 0.852; arc knee refuted, 0.589 at 0.486) | <= the rocker of the same travel | the four-bar / cam lifts hub 2 or sweeps the cuff link over the arm | 16 (dwell four-bar), 30 (arc knee) | six-bar / cam: pins only |
+| 1 | **Per-pose-free J1 rocker / stop relay** (stop-relay-rocker-3r, round 4, 12.3 k tries) | **+0.056 over its plain-3R base** (0.644 -> 0.700 at in-band 0.881, fast; contact 0.055; = the pin knee's 0.700, not above it; frozen not yet measured) | beta 10: +0.07-0.09, 20: +0.16-0.18, 30: +0.23-0.24 | contact 0.055; its own screen: the gained poses put hub 2 / the pivot hub over high skin | 12.5 | rocker + stops + spring; the mode switch is force-closed (sag torque vs preload) |
+| 2 | **Fold margin 10 -> 5** (the MVP1 rule since ~05:50 UTC) | +0.019-0.031 (pin knee 0.606 -> 0.625, gap 29.26; knuckle +0.031, raglan +0.028, spine +0.022) | +0.047-0.056 | in-band 0 to -0.006 frozen (refit: -0.02 to -0.03); contact up to 0.018-0.030; the extra folded-side poses jam parts | +0 | sigma_min 0.21-0.25 at the gains (5x joint rate), transmission 25-36 deg: poor |
+| 3 | **Fold margin 10 -> 7** (superseded by the 5 deg ruling; kept for the curve) | +0.011-0.025 (pin knee 0.606 -> 0.617, gap 30.35 -> 30.11; raglan / knuckle +0.025, gap -2.2 / -1.6; spine +0.020) | +0.033-0.039 | in-band 0 to -0.006 frozen; contact 0.009 -> 0.018 (pin knee), 0.015 -> 0.030 (spine); the folded-side gains jam link 1 on link 2 | +0 (J2 hard stops 7 deg from the fold) | same parts; sigma_min 0.24-0.27 at the gains, transmission 29-39 deg |
+| 4 | **Seats re-tuned on the full 360-pose workspace** (the Bench(110,360) polish in flight; arcs fixed) | pending (the polish measures it) | +0.014-0.025 within 5 deg of the seats, +0.020-0.042 within 10, +0.036-0.064 within 15 | small for 3-5 deg moves (the CMA's own basin) | +0 | unchanged parts |
+| 5 | **Non-fold fixes** (contact, parts, cuff) | <= 0.008 each (2-5 poses per leader) | - | - | +0 | local part edits |
+| 6 | **Coupled schedule** (dwell four-bar knee 5.7 k tries; closure-set arc knee) | none at 0.88 (dwell: 0.700 at in-band 0.84 vs the plain base's 0.688, +0.012; best gap 26.86 fast at in-band 0.843; arc knee refuted, 0.589 at 0.486) | <= the rocker of the same travel; the dwell moves only the window's low end | the four-bar / cam lifts hub 2 or sweeps the cuff link over the arm | 16 (dwell four-bar), 30 (arc knee) | six-bar / cam: pins only |
+| 7 | **Longer knee link** (pin knee: lc 24.9 -> 28 / 31 mm, refit + frozen exact) | **0** (lc 28: the refit re-centres the knee, the same 4 elevation-165 poses fail its window; lc 31: 2 of them admitted, both touch the skin 0.8 / 1.3 mm, gap 30.94) | +4 overhead poses (+0.011) | contact 0.009 -> 0.015 at lc 31 | +0 | same part |
 | 8 | **Two-state arc relay** (a detented mid-joint in link 1, a1 40 -> 77-84) | not modelled | **+0.30-0.33 (0.93-0.95; overhead 0.89-1.00)** - the largest kinematic headroom of any <= 4-joint option | RELAY_COST | 9.5 (a detented passive rotation, its state sensed; 12.5 if the detent counts as a spring) | detent hinges exist (ball-detent / index plunger); the trigger that flips the state is unsolved |
 | 9 | **Redundant 4R, spring-centred 4th** (4-DOF lens park4; 4 joints = at the DOF cap) | **-0.056 at in-band 0.88** (0.644 vs 0.700, one config, contact 0.053); +0.075 at in-band 0.86 (0.781 vs 0.706) | ~1.0 | link 3 0.51 in band, hub 4 0.86; contact 0.038 | 12.5 (passive sensed spring-centred 4th) or 28.5 (4th active) | one more O15 hub + a centring spring; 4th deflects p95 56 deg, max 86 (the spring must carry the chain) |
 | 10 | **Longer or balanced arcs on the plain 3R** (the fold window is 2 min(a1, a2) - 20) | **-0.055** (spine-parked history: every in-band >= 0.88 config has a1 35-45; a1 40-45 best 0.589 vs 0.644 at 37.6) | +0.13-0.15 at the same a1 + a2 rebalanced to 55 / 57; 65-67 shorter arc for 90 % | hub 2 leaves the skin (a1 >= 55: hub 2 level 186-400 mm, spine-parked doc) | +0 | unchanged parts |
@@ -206,6 +206,8 @@ tools/simplicity.py with the user's 2026-10-16 weights (lower = simpler; the pin
 
 Reading the ranking:
 
+* **Benches:** the rocker / dwell rows are Bench(60,160) fast (their histories); the margin / knee rows are frozen
+  Bench(110,360) exact. On the 160-pose bench every class tops out at 0.70-0.72 at in-band >= 0.80.
 * **By measured gain at the bar, the best levers are the small ones** (margin, seats, non-fold fixes: +0.01-0.03 each
   measured or bounded, +0.04-0.07 together at most; the longer knee measured 0). By kinematic headroom the order is reversed: the relay (+0.30-0.33),
   the 4R (~+0.37) and the rocker (+0.16-0.24 at 20-30 deg) hold all of it, and none of them has a configuration at
@@ -226,8 +228,9 @@ Reading the ranking:
   in band (J1 over the acromion top, arcs ~40 / 73) the fold window is 60 deg wide against a 114-deg (5-95 %)
   workspace spread of th, so the kinematic ceiling AT THOSE SEATS is 0.61-0.63 - the verified reaches are 0.594-0.617.
   Across the body is lost on the stretched side only; overhead on both sides.
-* **No measured 3-joint configuration beats ~0.70 fast / ~0.61 frozen at in-band >= 0.88**, across 40 k plain-3R,
-  7 k pin-knee, 2.8 k raglan, 2.2 k knuckle and 9.8 k osn tries. The pin knee's frontier is flat in in-band (0.719 at
+* **No measured 3-joint configuration beats ~0.70 fast / ~0.61 frozen at in-band >= 0.88**, across 50 k plain-3R,
+  22 k pin-knee, 2.8 k raglan, 2.2 k knuckle, 9.8 k osn, 12.3 k stop-relay and 5.7 k dwell tries (the stop relay lifts
+  the plain 3R to the pin knee's 0.700, not above). The pin knee's frontier is flat in in-band (0.719 at
   0.80, 0.700 at 0.88, 0.694 at 0.90): giving up in-band does not buy reach; only a wider window does.
 * **The zero-complexity levers add up to about +0.04-0.07** (the 5 deg margin the user just ruled, +0.019-0.031
   measured; seats re-tuned on the 360 poses, +0.02-0.04 kinematic; the longer knee measured 0): reach ~0.65-0.68
