@@ -2383,7 +2383,7 @@
   "name": "Direct-pair knuckle: K's own follower arm on a link-2 lobe plate (no rocker, rod or rod ends); embodiments: roller + clock spring, or a positive groove with no spring",
   "family": "redundant 4R with a determined spare (cam-slaved knuckle), direct higher pair",
   "lens": "round7:direct-drive-knuckle (a) + spring-free groove variant (merged from groove-arm-knuckle-3r)",
-  "status": "ideated",
+  "status": "dead",
   "t_ideated": "2026-10-16T15:33:10Z",
   "source": "round 7 judge (docs/concepts/round7_ideation.md)",
   "merged_from": [
