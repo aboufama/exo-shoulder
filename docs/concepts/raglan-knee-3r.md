@@ -121,6 +121,13 @@ conservative side, and the same for the control and the routed shape.
 | link 1 t 0.7, d -20 | 25.48 | **33.10** | 87.96 | 0.619 | 0.964 | 0.853 | 0.003 | **33.67** | 34.84 | 56.99 |
 | **link 1 t 0.85, d -30** (best fast; fit on the fast grid) | 24.79 | **32.33** | 88.24 | 0.619 | 0.964 | 0.860 | 0.003 | **33.41** | 34.07 | 56.88 |
 
+| **CMA A2: seats + link 1 t 0.80 d -30.6** (best fast; fit on the fast grid) | 23.00 | **31.52** | 88.54 | 0.600 | 0.973 | **0.902** | 0.015 | **32.11** | 35.02 | 65.38 |
+
+A2 on the big bench: 139 fold + 3 E / link 2 jams + 5 contact of 470; in-band 0.90 passes its target, so reach (0.600) is
+now 30 of the 31.5 points; overhead reach 0.25 (19 of 28 fold), in-band 0.94; nearest metal 0.12 mm (plane 45, elevation
+75, axial -105) and 0.19 mm (plane -75, elevation 45, axial 120); metal < 2 mm in many more poses (65.38 counted as
+contact): the lower hub 3 / knee stack pays in margin. Knee angle 72-121 deg.
+
 (The pin knee's own frozen run of k10, fit on the fast grid: 33.84 - the like-for-like control for the d -30 row:
 -1.51 on the bench gap, -0.43 at fixed part sizes.)
 
@@ -144,7 +151,8 @@ skin motion; the coarse sweep and the steeper turns confirm it: the real gain is
 0.925 -> 0.99 in band) at the k10 seats, everything above that is dilution, and every link-2 turn loses. Routes only:
 24.79 fast (score 90.99; 25.89 at fixed part sizes), 32.33 frozen big exact (score 88.24; 33.41 at fixed sizes)
 against the pin knee's 26.34 / 33.84. Seats + routes (CMA A2): **23.00 fast (score 91.64; 23.62 at fixed sizes)**, of
-which the seat move alone (straight links) is 24.49 - frozen big exact below. The 90+ bar on the large bench needs
+which the seat move alone (straight links) is 24.49; worn frozen on Bench(110,360) exact **31.52** (score 88.54; 32.11 at fixed
+sizes) - the best large-bench number of any design so far (unverified), still 4 points short of 90 because of the fold. The 90+ bar on the large bench needs
 about +0.28 reach, i.e. the J2 fold - nothing a link's route can move.
 The posterior-J1 seats that remove the fold lose 46-69 poses to skin instead (best 122.45).
 

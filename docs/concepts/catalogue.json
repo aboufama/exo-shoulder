@@ -2008,28 +2008,6 @@
   "status": "killed"
  },
  {
-  "id": "raglan-knee-3r",
-  "name": "Raglan-knee 3R (pin-knee leader with links bent along the lines of least skin motion)",
-  "topology": "S -> J1: ACTIVE R (O20 hub on a GH ray) -> link 1 (8 x 3 Ti bent bar: two straight legs + ONE tangent arc in the planform, fixed in the link) -> J2: ACTIVE R (O20 hub on a GH ray) -> link 2 (same, its own turn) -> J3: ACTIVE R (offset skin-normal O20 hub on the deltoid) -> E strap -> pin a -> knee link -> pin b -> arm pad on BOTTOM's cuff (flat two-pin knee, 5 mm iglidur pin stack).",
-  "active_dof": 3,
-  "passive_dof": 2,
-  "dof_reasoning": "The pin knee's chain: J1 / J2 on GH rays make the arm-vs-member-3 drift planar in hub 3's plane, and the closed planar RRR knee (two passive pins) absorbs it; every coordinate is set by the arm (closed-form IK + two-circle knee closure). The planform turns change only the link shapes, not the kinematics. Passive translations 0.",
-  "description": "The tailor's raglan seam applied to the best buildable design: measure, in each link's own moving frame, the sphere-traced need of every direction over every pose the chain takes (raglan map), and bend the link along the best line (one planform turn, constant 8 x 3 section, tangent-arc corner, no loft); then let CMA move the seats with the routes, and try the posterior J1 line (the far-end scan's fold-free lead) in this family.",
-  "why_better": "Measured: the raglan map's argmax at the leader seats is the great circle; best route (114 deg link-1 hairpin) 24.79 fast / 25.89 at fixed part sizes vs 26.34; frozen Bench(110,360) exact 33.10 (33.67 fixed sizes) vs 34.06 - a real gain of ~0.4 gap points, the rest in-band dilution.",
-  "main_risk": "The leader's CMA already put both links on their raglan lines (the map's argmax is the great circle); the limiter is the J2 fold (reach), which no routing touches.",
-  "unpowered_and_mvp2": "Unpowered: three MR117-2RS hubs, two iglidur knee pins, two bent 8 x 3 Ti bars; MVP2: remote motors on the three hubs (cables).",
-  "model_spec": "docs/concepts/models/raglan-knee-3r.py: a private import of skin-normal-3r-pin-knee.py with S.Geometry.add_links replaced by the routed path (great-circle legs + tangent arc, resampled at 2 mm, 4 sample rows); `map` mode = the raglan map; `frozen` = the pin knee's frozen protocol.",
-  "sweep_params": "r1t, r1d, r2t, r2d, rc (routes) + az1, el1, az2, el2, wd, wa, b3 (seats) + phiE, lE, lc (knee)",
-  "modelling_cost": "low",
-  "prior_art": "Raglan / princess seams; Iberall 1964 lines of non-extension; orthotic trim lines on stable landmarks; the pin knee (docs/concepts/skin-normal-3r-pin-knee.md).",
-  "lenses": [
-   "weird-tailoring"
-  ],
-  "t_ideated": "2026-10-16T02:10:00Z",
-  "source": "round 3, tailoring / pattern-making / orthotic fitting lens (second pass)",
-  "status": "screened"
- },
- {
   "id": "foldfree-rus-truss",
   "name": "Fold-free human-closed 3-RUS truss: three scapula crank hubs, O5 rods to arm ball studs, the user's GH closes the loop",
   "topology": "- Scapula base (S) on the user's scapula handler: three O20 crank hubs on GH rays (ACTIVE revolutes) joined by 12 x 3 base brackets.\n- Each hub carries a crank of arc beta_k (12 x 3 Ti strap); at its tip an O12 U-joint (passive, 2 rot).\n- O5 Ti rod (rigid, its bow fitted) to an O12 rod end on a ball stud (passive, 3 rot) on a 14 x 4 arm saddle at the humeral-head level.\n- No exo joint at GH: the user's glenohumeral joint closes all three loops.",
@@ -2092,5 +2070,27 @@
    "n_configs": 3,
    "row": "docs/concepts/rows/coaxial-rus-turret.json"
   }
+ },
+ {
+  "id": "raglan-knee-3r",
+  "name": "Raglan-knee 3R (pin-knee leader with links bent along the lines of least skin motion)",
+  "topology": "S -> J1: ACTIVE R (O20 hub on a GH ray) -> link 1 (8 x 3 Ti bent bar: two straight legs + ONE tangent arc in the planform, fixed in the link) -> J2: ACTIVE R (O20 hub on a GH ray) -> link 2 (same, its own turn) -> J3: ACTIVE R (offset skin-normal O20 hub on the deltoid) -> E strap -> pin a -> knee link -> pin b -> arm pad on BOTTOM's cuff (flat two-pin knee, 5 mm iglidur pin stack).",
+  "active_dof": 3,
+  "passive_dof": 2,
+  "dof_reasoning": "The pin knee's chain: J1 / J2 on GH rays make the arm-vs-member-3 drift planar in hub 3's plane, and the closed planar RRR knee (two passive pins) absorbs it; every coordinate is set by the arm (closed-form IK + two-circle knee closure). The planform turns change only the link shapes, not the kinematics. Passive translations 0.",
+  "description": "The tailor's raglan seam applied to the best buildable design: measure, in each link's own moving frame, the sphere-traced need of every direction over every pose the chain takes (raglan map), and bend the link along the best line (one planform turn, constant 8 x 3 section, tangent-arc corner, no loft); then let CMA move the seats with the routes, and try the posterior J1 line (the far-end scan's fold-free lead) in this family.",
+  "why_better": "Measured: at the leader seats the raglan map's argmax is the great circle (routes only: +0.45 real, the rest in-band dilution); CMA over seats + routes: 23.00 fast (23.62 at fixed part sizes) and 31.52 frozen Bench(110,360) exact vs the pin knee's 26.34 / 33.84 - mostly a J3 seat move (hub 3 / knee into band), +0.9 from the bent link 1.",
+  "main_risk": "The leader's CMA already put both links on their raglan lines (the map's argmax is the great circle); the limiter is the J2 fold (reach), which no routing touches.",
+  "unpowered_and_mvp2": "Unpowered: three MR117-2RS hubs, two iglidur knee pins, two bent 8 x 3 Ti bars; MVP2: remote motors on the three hubs (cables).",
+  "model_spec": "docs/concepts/models/raglan-knee-3r.py: a private import of skin-normal-3r-pin-knee.py with S.Geometry.add_links replaced by the routed path (great-circle legs + tangent arc, resampled at 2 mm, 4 sample rows); `map` mode = the raglan map; `frozen` = the pin knee's frozen protocol.",
+  "sweep_params": "r1t, r1d, r2t, r2d, rc (routes) + az1, el1, az2, el2, wd, wa, b3 (seats) + phiE, lE, lc (knee)",
+  "modelling_cost": "low",
+  "prior_art": "Raglan / princess seams; Iberall 1964 lines of non-extension; orthotic trim lines on stable landmarks; the pin knee (docs/concepts/skin-normal-3r-pin-knee.md).",
+  "lenses": [
+   "weird-tailoring"
+  ],
+  "t_ideated": "2026-10-16T02:10:00Z",
+  "source": "round 3, tailoring / pattern-making / orthotic fitting lens (second pass)",
+  "status": "screened"
  }
 ]

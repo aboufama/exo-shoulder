@@ -8,7 +8,7 @@
  "passive_translations": 0,
  "status": "screened",
  "t_ideated": "2026-10-16T02:10:00Z",
- "t_screened": "2026-10-16T03:44:31Z",
+ "t_screened": "2026-10-16T03:46:21Z",
  "reach": 0.6875,
  "follow": 0.9667,
  "inband14": 0.9011,
@@ -72,20 +72,20 @@
  "bench": "Bench(60,160) fast grid, pin-knee rules (jam, crowns, strap tops, every part pair, 10 fps continuity)",
  "exact_frozen": {
   "fit_fast": {
-   "gap": 24.79,
-   "reach": 0.7063,
+   "gap": 23.0,
+   "reach": 0.6875,
    "follow": 0.9667,
-   "inband14": 0.8574,
-   "inband10": 0.4432,
-   "contact": 0.0116
+   "inband14": 0.9011,
+   "inband10": 0.5167,
+   "contact": 0.0175
   },
   "frozen": {
-   "gap": 32.33,
-   "reach": 0.6194,
-   "follow": 0.9636,
-   "inband14": 0.8603,
-   "inband10": 0.4501,
-   "contact": 0.003
+   "gap": 31.52,
+   "reach": 0.6,
+   "follow": 0.9727,
+   "inband14": 0.9016,
+   "inband10": 0.5214,
+   "contact": 0.0152
   },
   "mode": "exact",
   "bench": [
@@ -93,119 +93,119 @@
    360
   ],
   "why": {
-   "fold": 136,
+   "fold": 139,
    "slide": 0,
    "flip": 0,
    "closure": 0,
    "skin": 0,
-   "parts": 4,
-   "contact": 1
+   "parts": 3,
+   "contact": 5
   },
   "parts_pairs": {
-   "E-L2": 4
+   "E-L2": 3
   },
   "parts_ib14": {
    "hub1": [
-    0.999,
-    9.4,
+    1.0,
+    9.5,
     80
    ],
    "hub2": [
-    0.994,
-    10.5,
+    0.988,
+    10.8,
     80
    ],
    "hub3": [
-    0.747,
-    11.9,
+    0.838,
+    10.6,
     80
    ],
    "E": [
-    0.884,
-    8.6,
+    0.907,
+    7.1,
     28
    ],
    "boss": [
-    0.829,
-    9.4,
+    0.901,
+    7.5,
     32
    ],
    "pad": [
-    0.81,
-    11.4,
+    0.886,
+    9.9,
     32
    ],
    "knee": [
-    0.644,
-    12.8,
+    0.798,
+    11.1,
     90
    ],
    "L1": [
     0.997,
-    6.8,
+    6.1,
     84
    ],
    "L2": [
-    0.841,
-    10.6,
-    141
+    0.848,
+    10.3,
+    149
    ]
   },
   "audit": {
-   "near_touch_min_mm": 0.2,
+   "near_touch_min_mm": 0.12,
    "near_touch_low": [
     {
-     "mm": 0.2,
-     "i": 139,
+     "mm": 0.12,
+     "i": 279,
      "kind": "ws",
-     "plane": -60.0,
-     "elev": 60.0,
-     "axial": 105.0
+     "plane": 45.0,
+     "elev": 75.0,
+     "axial": -105.0
     },
     {
-     "mm": 0.26,
-     "i": 264,
+     "mm": 0.19,
+     "i": 127,
      "kind": "ws",
-     "plane": 30.0,
-     "elev": 165.0,
-     "axial": -60.0
+     "plane": -75.0,
+     "elev": 45.0,
+     "axial": 120.0
     },
     {
-     "mm": 0.98,
-     "i": 317,
+     "mm": 0.21,
+     "i": 164,
      "kind": "ws",
-     "plane": 60.0,
-     "elev": 150.0,
+     "plane": -15.0,
+     "elev": 0.0,
      "axial": -45.0
     },
     {
-     "mm": 1.15,
-     "i": 180,
+     "mm": 0.21,
+     "i": 319,
      "kind": "ws",
-     "plane": -15.0,
-     "elev": 75.0,
-     "axial": 90.0
+     "plane": 75.0,
+     "elev": 0.0,
+     "axial": -135.0
     },
     {
-     "mm": 1.19,
-     "i": 288,
+     "mm": 0.38,
+     "i": 268,
      "kind": "ws",
      "plane": 45.0,
-     "elev": 135.0,
-     "axial": -60.0
+     "elev": 15.0,
+     "axial": -105.0
     }
    ],
-   "gap_near1": 34.07,
-   "near1_poses": 3,
-   "gap_near2": 56.88,
-   "near2_poses": 37,
+   "gap_near1": 35.02,
+   "near1_poses": 6,
+   "gap_near2": 65.38,
+   "near2_poses": 49,
    "overhead140": {
     "ws": 28,
-    "reach": 0.2857,
+    "reach": 0.25,
     "clip": 10,
     "follow": 1.0,
-    "inband14": 0.9055,
-    "inband10": 0.5793,
+    "inband14": 0.9428,
+    "inband10": 0.6582,
     "why_not": {
      "fold": 19,
      "slide": 0,
@@ -213,13 +213,13 @@
      "closure": 0,
      "skin": 0,
      "parts": 1,
-     "contact": 0
+     "contact": 1
     }
    }
   },
   "knee_ang": [
-   73.0,
-   115.6
+   71.8,
+   121.1
   ],
   "params": {
    "o1a": 0.0,
@@ -241,15 +241,15 @@
    "vfix": 1,
    "branch": 0,
    "flip3": 0,
-   "az1": 95.8565,
-   "el1": 65.2093,
+   "az1": 96.9222,
+   "el1": 66.1536,
    "b1": 0.0,
-   "az2": 10.8917,
-   "el2": 54.698,
+   "az2": 12.9801,
+   "el2": 54.6982,
    "b2": 0.0,
-   "wd": 79.148,
-   "wa": -13.3653,
-   "b3": 0.2282,
+   "wd": 75.8669,
+   "wa": -13.9683,
+   "b3": 0.2391,
    "S_max": 25.0,
    "centre": 1,
    "R_tol": 0.5,
@@ -260,55 +260,54 @@
    "phib": -90.0,
    "stk": 5.0,
    "ang_min": 30.0,
-   "r1t": 0.85,
-   "r1d": -30.0,
-   "r2t": 0.5,
-   "r2d": 0.0,
+   "r1t": 0.8048,
+   "r1d": -30.5908,
+   "r2t": 0.549,
+   "r2d": -1.2849,
    "rc": 10.0
   },
-  "secs": 74.3
+  "secs": 99.1
  },
  "doc": "docs/concepts/raglan-knee-3r.md",
  "model_file": "docs/concepts/models/raglan-knee-3r.py",
- "verdict": "routing is a small lever on the leader, the seat move found with it a bigger one: raglan map argmax = the great circle at the k4216 seats; routes only 24.79 fast (25.89 at fixed part sizes; 32.33 frozen Bench(110,360) exact, 33.41 fixed) vs the pin knee 26.34 / 33.84; CMA seats + routes (A2, 1009 tries, converged) 23.00 fast (score 91.64; 23.62 at fixed sizes; same seats with straight links 24.49: J3 3.3 deg more proximal brings hub 3 / knee / pad into band); posterior-J1 seats dead (122.45); frozen big exact of A2 on the farm",
- "limiter": "J2 fold (47 of 220 / 136 of 470 poses, untouched by any route): reach 0.706 fast, 0.619 big exact; overhead reach 0.29",
+ "verdict": "routing is a small lever on the leader, the seat move found with it a bigger one: raglan map argmax = the great circle at the k4216 seats; routes only 24.79 fast (25.89 at fixed part sizes; 32.33 frozen Bench(110,360) exact, 33.41 fixed) vs the pin knee 26.34 / 33.84; CMA seats + routes (A2, 1009 tries, converged) 23.00 fast (score 91.64; 23.62 at fixed sizes; same seats with straight links 24.49: J3 3.3 deg more proximal brings hub 3 / knee / pad into band); posterior-J1 seats dead (122.45); A2 worn FROZEN on Bench(110,360) exact 31.52 (score 88.54; 32.11 at fixed sizes; in-band 0.90 met, reach 0.600 = 30 of the 31.5 points) vs the pin knee 33.84 and osn 42.59 - best large-bench number so far, unverified",
+ "limiter": "J2 fold: 139 of 470 big-bench poses (reach 0.600, overhead 0.25); routes and seat moves cannot touch it; near-touch: 0.12 mm min, 65.38 with metal < 2 mm as contact",
  "note": "Bench(60,160) fast grid, pin-knee rules (jam, crowns, strap tops, every part pair, 10 fps continuity); parity at d = 0 exact (26.34); 27 first-round CMA tries ran on the exact path (no bench-cache link) and are logged as not comparable; ranking by the dilution-corrected gap_fixed_n is the honest one",
  "gap_fixed_n": 23.62,
  "exact_frozen_summary": {
   "bench": "Bench(110,360) exact, shape frozen from the Bench(60,160) fast fit",
-  "shape": {
-   "r1t": 0.85,
-   "r1d": -30.0
-  },
-  "gap": 32.33,
-  "reach": 0.6194,
-  "follow": 0.9636,
-  "inband14": 0.8603,
-  "inband10": 0.4501,
-  "contact": 0.003,
-  "gap_fixed_n": 33.41,
-  "control_k10_pin_knee": 33.84,
-  "near_touch_min_mm": 0.2,
-  "gap_near1": 34.07,
-  "gap_near2": 56.88,
+  "shape": "CMA A2 best (best_params)",
+  "gap": 31.52,
+  "reach": 0.6,
+  "follow": 0.9727,
+  "inband14": 0.9016,
+  "inband10": 0.5214,
+  "contact": 0.0152,
+  "gap_fixed_n": 32.11,
+  "near_touch_min_mm": 0.12,
+  "gap_near1": 35.02,
+  "gap_near2": 65.38,
   "why": {
-   "fold": 136,
-   "parts": 4,
-   "contact": 1
+   "fold": 139,
+   "parts": 3,
+   "contact": 5
   },
   "overhead140": {
    "ws": 28,
-   "reach": 0.2857,
-   "inband14": 0.9055,
+   "reach": 0.25,
+   "inband14": 0.9428,
    "why_not": {
     "fold": 19,
-    "parts": 1
+    "parts": 1,
+    "contact": 1
    }
   },
-  "also": {
-   "r1t 0.7 r1d -20 (exact-path fit)": 33.1,
-   "k10 great circle (exact-path fit)": 34.06
-  }
+  "knee_ang": [
+   71.8,
+   121.1
+  ],
+  "routes_only_best_L1m30": 32.33,
+  "pin_knee_k10_control": 33.84
  },
  "cma_round2": {
   "C2": {
@@ -328,23 +327,5 @@
    "fixed_n": 24.04
   },
   "gate": "converged per stream (gain over 2nd half <= 0.10, last third <= 0.03, top 5 within 0.01)"
- },
- "mechanism": {
-  "active_dof": 3,
-  "passive_trans": 0,
-  "crossed_rails": false,
-  "passive_rot": 2,
-  "moving_bodies": 5,
-  "joints": 5,
-  "closed_loops": 0,
-  "sliding_pairs": 0,
-  "rolling_pairs": 5,
-  "sensed_passive": 2,
-  "springs_or_flexures": 0,
-  "custom_parts": 10,
-  "catalogue_parts": 12,
-  "notes": "the pin-knee leader with raglan-routed links (one planform tangent arc per link, one rigid bent bar each: no extra part). bodies: link 1, link 2, member 3 (hub-3 lower plate + E strap), knee link, arm pad (arm-end, on the cuff / BOTTOM). joints: J1-J3 O20 hubs, knee pins a, b parallel to J3 (iglidur pin: GSM sleeve + 2 GTM washers on an integral Ti pin, stk 5; counted as bearing-supported revolutes). Open chain, GH closes it (loop mobility 3, nothing sags). sensed: both knee pins - parallel to J3, they add to the arm's twist (q3' = q3 + phi), so tracking the arm needs them read (or the closure solved with GH known). custom: base, 2 links, member 3, knee link, arm pad, 3 hub shafts, 2 Ti pins (est.); catalogue: 3 x MR117 pair + 2 x (GSM sleeve + 2 GTM washers) (est.). [restored by the dashboard agent from 4d221f1: the row was rewritten without this key]",
-  "source": "docs/concepts/models/raglan-knee-3r.py:1-20 (routing, imports the pin-knee chain); docs/concepts/models/skin-normal-3r-pin-knee.py:1-25 (chain, knee, pins)",
-  "confidence": "counted"
  }
 }

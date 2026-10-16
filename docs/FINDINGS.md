@@ -611,6 +611,9 @@ docs/concepts/fold-sph3r.md.
   gap without moving any part closer. A 114 deg hairpin in link 1 (36 -> 84 samples, +~9 g) takes the pin knee from
   26.34 to 24.79 fast (score 90.99), but weighted at the straight sample count it is 25.89: +0.45 real, +1.1 dilution;
   worn frozen on Bench(110,360) exact 32.33 (33.41 at fixed sizes) vs the pin knee's 33.84.
+  CMA over seats + routes then finds **23.00 fast / 31.52 frozen exact** (32.11 at fixed sizes; in-band 0.902 meets
+  its target): J3 3.3 deg more proximal brings hub 3 / the knee into band (same seats, straight links: 24.49 fast). The
+  remaining 30 points are reach, i.e. the J2 fold.
   On the plain 3R the same check gives 43.97 instead of 42.72 (mostly real). Every in-band claim should be re-scored at
   fixed part sizes (raglan-knee-3r reports `gap_fixed_n`); a CMA on the bench gap will chase the artefact (annular-ring
   skirt, docs/concepts/annular-ring-3r.md, is the same thing).
