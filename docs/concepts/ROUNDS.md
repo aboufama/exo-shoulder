@@ -1191,3 +1191,12 @@ None.
 - msub for a positively slaved K: a "no" opens crank-rod / bighorn at cx 36.
 - The 2 mm near-touch as the claim column / dominance gate (ALIGNMENT A1).
 - A per-pose worst-point cap (ALIGNMENT A3: 48 % of the lead's taken poses have metal under 3 mm).
+
+**Alignment ledger at 22:45 UTC (round-9 note, `python3 tools/alignment_ledger.py latest`).**
+- gamed: seed-offset-3r-slides only (3 passive translations; shown as Flagged).
+- watch (relevant to round 9):
+  - sidecar-longdyad-knuckle-3r (lead): metal close to the skin, near-touch 1 mm 20.00 / 2 mm 34.03 / 3 mm 155.98.
+  - sidecar-parallelogram-knuckle-3r: a continuity spread, static 19.13 vs knn 22.21.
+  - sidecar-roller-flank-knuckle-3r: no held-out number on file.
+- Every round-9 claim goes through the A1 dominance gate: it must beat the lead plain AND at 2 mm. roller-longdyad's self-measured 18.67 / 2 mm 33.10 passes that gate but is worse at 1 mm (20.30) and held out (23.73).
+- Audit run wf_2c9de6ed-0a4 covers four designs: roller-longdyad, the lead, kneeless-roller, and geneva-rod's new R17 slaved-coordinate judge change.
