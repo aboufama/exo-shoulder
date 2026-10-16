@@ -459,8 +459,12 @@ def _report(B, params):
         r, M, P = r2, M2, P2
     r["pinb_along_mm"] = round(float((M.D.b0 + M.D.s_rest)[0]), 1)   # pin b's pad must sit on the cuff, distal of hub 3
     r["trunnion_in_housing"] = bool(getattr(M, "trunnion_in", False)) or bool(M.p.get("lock"))
-    if r["pinb_along_mm"] < PINB_MIN: r.setdefault("gap_reported", r["gap"]); r["gap"] = 999.0
-    if not r["trunnion_in_housing"]: r["gap_reported"] = r["gap"]; r["gap"] = 999.0     # the trunnion would sit outside hub 3
+    # structurally invalid -> gap >= 500 (never a valid number), graded so a search can climb out: 500 + the would-be gap
+    # + 2 per mm pin b sits proximal of PINB_MIN + 50 if the trunnion is outside hub 3's housing
+    bad = 0.0
+    if r["pinb_along_mm"] < PINB_MIN: bad += 2.0 * (PINB_MIN - r["pinb_along_mm"]) + 1.0
+    if not r["trunnion_in_housing"]: bad += 50.0
+    if bad: r["gap_reported"] = r["gap"]; r["gap"] = round(500.0 + r["gap"] + bad, 2); r["invalid"] = True
     r["honest"] = bool(M.p.get("jam_contact")) and all(M.fix.values())
     r["passive_translations"] = 0
     return r, M
