@@ -1,4 +1,4 @@
-# Handoff: the state of the project (2026-10-16 ~20:15 UTC)
+# Handoff: the state of the project (2026-10-16 ~20:25 UTC)
 
 Written for a reader with no context: a new session, a new model, or a person. Every number below comes from a file in
 this repo (rows, verifier outputs, scorecards, ROUNDS.md, FINDINGS.md, EVOLUTION.md); the file is named next to it.
@@ -63,7 +63,8 @@ search loop that kept going.
 |---|---|---|---|---|---|---|
 | **minarc-stop-knuckle-4r pick1** (envp-F7-g35-6) | **18.40 (93.31)** | 21.31 env fit / 22.69 fit-60 | 4 (K spring-held, sensed) | 33 | verified final polish; it is the CAD config | rows/minarc-stop-knuckle-4r.json, docs/research/minarc_final_polish.md, picks/pick1_priced.json, verify/minarc-final-polish-verify.py |
 | minarc-stop-knuckle-4r BDp | 19.54 (92.89) | 24.18 fit-60 / 23.68 env | 4 (K sensed) | 33 | verified; superseded by pick1 for CAD | same row, verify/minarc-bdp-judge.md, docs/research/minarc-bdp-verdict.md |
-| **frontload-lobe-stopb-knuckle-3r** | **22.82 (91.70)** | 26.75 | **3** (K slaved by a rod drive, never read) | 49 | verified round-7 winner (a seat re-fit of the geneva rod, below the 1-point CAD-swap rule) | rows/, docs/concepts/frontload-lobe-stopb-knuckle-3r.md, verify/frontload-*_corr_*.json |
+| **sidecar-longdyad-knuckle-3r** (round 8) | **18.91 (93.12)** | 22.67 | **3** (K slaved by a strap-level RSSR sidecar drive, never read) | 49 | **verified 2026-10-16 20:20 UTC: best 3-active design**; round 8 not yet closed (no polish, no CAD) | rows/, docs/concepts/sidecar-longdyad-knuckle-3r.md, verify/sidecar-longdyad-knuckle-3r.py |
+| frontload-lobe-stopb-knuckle-3r | 22.82 (91.70) | 26.75 | 3 (K slaved by a rod drive, never read) | 49 | verified round-7 winner (a seat re-fit of the geneva rod, below the 1-point CAD-swap rule) | rows/, docs/concepts/frontload-lobe-stopb-knuckle-3r.md, verify/frontload-*_corr_*.json |
 | geneva-tail-knuckle-pinknee-3r (rod) | 23.57 (91.43) | 28.12 | 3 (K slaved) | 42.5 (46.75 full record) | verified round-6 winner; gen-5 CAD in progress | rows/, docs/concepts/geneva-tail-knuckle-pinknee-3r.md, verify/geneva-*_corr_*.json, docs/research/geneva_rod_drive_redteam.md |
 | cam-unfold-4th | 26.70 (90.29) | - | 3 | 33.75 | verified, not a contender | rows/, verify/cam-unfold-4th.py |
 | arm-parked-knee-4r | 26.71 (90.29) | - | 4 | 32.25 | verified, not a contender | rows/, verify/arm-parked-knee-4r.py |
@@ -76,12 +77,13 @@ baseline was 68.93 (`rows/baseline-3r.json`). Held-out numbers come from slightl
 within a row's references, not across rows.
 
 **Reading it.**
-- The best design overall needs a 4th, sensed joint: minarc's knuckle K.
-- The best 3-active design is the knuckle family with K slaved to J2 by a lobe, rocker and rod drive (22.82).
+- The best design overall needs a 4th, sensed joint: minarc's knuckle K (18.40).
+- The best 3-active design is now within 0.51 of it: sidecar-longdyad (18.91). It is the knuckle family with K slaved
+  to J2, the drive moved down to strap level. Before it, the 3-active lead was the rod drive at 22.82.
 - The simplest designs top out at 31-34.
 - Every leader loses mostly REACH to the J2 fold. In-band (~0.89) and follow (~1.0) are close to their targets.
 
-## 3. Round 8, in flight at handoff (self-measured, NOT verified)
+## 3. Round 8, in flight at handoff
 
 The round-8 plan is in ROUNDS.md, its picks in `docs/concepts/round8_ideation.md`, and the timeline in
 `docs/concepts/events.jsonl`. The lever is the "sidecar": the K drive moved down to strap level, so its metal sits in
@@ -89,17 +91,18 @@ band.
 
 | design | frozen exact (score) | near-touch 1 mm / 2 mm | held out | complexity | state |
 |---|---|---|---|---|---|
-| sidecar-longdyad-knuckle-3r | 18.91 (93.12) | 20.00 / 34.03 | 22.67 | 49 | independent verifier running (`docs/concepts/verify/sidecar-longdyad-knuckle-3r.py`, untracked at handoff) |
-| sidecar-parallelogram-knuckle-3r | 19.13 (93.04) | 20.22 / 50.14 | 22.03 | 49 | screened, awaiting the verifier |
-| sidecar-roller-flank-knuckle-3r | 20.08 (92.70) | 21.17 / - | - | 45.25 | screened, awaiting the verifier |
+| sidecar-longdyad-knuckle-3r | 18.91 (93.12) | 20.00 / 34.03 | 22.67 | 49 | **VERIFIED** (`docs/concepts/verify/sidecar-longdyad-knuckle-3r.py`): reproduces to the digit; its added RSSR closure, ball-link tilt and real pressure-angle checks drop 0 poses; min metal 0.28 mm; continuity full 18.91 / knn 21.72 |
+| sidecar-parallelogram-knuckle-3r | 19.13 (93.04) | 20.22 / 50.14 | 22.03 | 49 | screened (self-measured), awaiting the verifier |
+| sidecar-roller-flank-knuckle-3r | 20.08 (92.70) | 21.17 / - | - | 45.25 | screened (self-measured), awaiting the verifier |
 | twist-long-a2-knuckle-3r | 24.46 frozen (16.74 fast vs the lead's 15.57) | - | - | 49 | DEAD: the J3 twist walks back in every CMA stream |
 
-For comparison, the verified lead is 22.82, with near-touch 24.46 / 44.08 and held out 26.75.
+For comparison, the previous verified 3-active lead (frontload) is 22.82, with near-touch 24.46 / 44.08 and held out
+26.75.
 
-- **If verified,** the sidecar is the first 3-active design at the 4-active pick1's level: 3.9 points better than the
-  lead, held out by ~4.
-- **Its gain is in-band only** (0.855 -> ~0.90). Reach is unchanged at 0.72, with overhead 8/28, so the fold still sets
-  the gap.
+- **Verified,** the sidecar is the first 3-active design at the 4-active pick1's level: 3.91 points better than the
+  rod-drive lead, and 4.08 better held out.
+- **Its gain is in-band only** (0.855 -> 0.897). Reach is unchanged at 0.725, with overhead 8/28 and fold losses 86 of
+  360, so the fold still sets the gap.
 - **Red-team flag:** parallelogram's 2 mm near-touch is 50.14 against the lead's 44.08. The 1 mm objective lets metal
   sit 1-2 mm off the skin on 44 frozen poses.
 
@@ -193,8 +196,8 @@ L1 is keep-out CAD and L2 is the user's standard (CLAUDE.md "CAD has two levels"
 
 ## 7. Open questions waiting on the user (unanswered at handoff)
 
-1. **A sensed 4th joint (minarc pick1, score 93.3, 4 active) against 3 active joints** (best verified 22.82 / 91.7;
-   the sidecar is ~93 self-measured). Does a sensed passive used only at static extremes count as passive? If yes,
+1. **A sensed 4th joint (minarc pick1, score 93.31, 4 active) against 3 active joints** (sidecar-longdyad, verified
+   93.12 at 20:20 UTC, so the gap between them is now 0.51 gap points). Does a sensed passive used only at static extremes count as passive? If yes,
    pick1 counts as 3 active.
 2. **The R17 posture margin.** Accept "upright use" as an MVP1 limit for pick1's K, or require the posture-free fix
    (section 6, item 6).
@@ -211,11 +214,12 @@ Everything below ran inside the lead session and dies with it. The procedures ar
 workflow scripts and templates are in `tools/workflows/` (README there).
 
 - **Discovery loop, rounds 6-9** (`tools/workflows/discovery-loop.js`, track main).
-  - Round 8 was in verification of sidecar-longdyad-knuckle-3r, and its closer had not run.
+  - In round 8, sidecar-longdyad-knuckle-3r was verified (20:20 UTC). The other two sidecar rows awaited their
+    verifiers, and the round's closer had not run.
   - **Relaunch:**
     1. Read the ROUNDS.md tail and the `docs/concepts/events.jsonl` tail.
-    2. If round 8 has no "Round 8 results" section, first run an independent verifier on the three sidecar rows (the
-       verifier template in `tools/workflows/`; a claim counts only once verified). Then write the round-8 results and
+    2. If round 8 has no "Round 8 results" section, first run an independent verifier on the sidecar rows that still
+       have `status: screened` (the verifier template in `tools/workflows/`; a claim counts only once verified). Then write the round-8 results and
        lessons in ROUNDS.md and FINDINGS.md, as a closer would.
     3. Start the loop at the next round: `{first_round: 9, n_rounds: 4, track: "main", focus: "<the last round's next
        focus>"}`.
@@ -246,10 +250,13 @@ workflow scripts and templates are in `tools/workflows/` (README there).
 
 ## 9. Next steps, in priority order
 
-1. **Verify the round-8 sidecar family.** If sidecar-longdyad (18.91) or sidecar-parallelogram (19.13) holds:
-   - it is the new 3-active leader;
-   - it gets the final polish (env bench, claim held out), then the gen-6 CAD (L1 + L2 + stills + EVOLUTION);
-   - check its 2 mm near-touch against the lead's before any CAD swap.
+1. **Take the verified sidecar-longdyad (18.91, 3 active) forward.**
+   - Verify the other two sidecar rows (parallelogram 19.13, roller-flank 20.08) and close round 8.
+   - Give the round's winner its final polish (env bench, claim held out).
+   - Then the gen-6 CAD: L1, L2, stills and EVOLUTION. Check its 2 mm near-touch against the lead's before any CAD
+     swap.
+   - With pick1 only 0.51 ahead, a polished 3-active design can lead outright. Report that to the user as a big
+     update.
 2. **Buy reach, the other half of 95.**
    - Round 9 should attack the fold geometry, not K's law.
    - The levers left:

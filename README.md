@@ -16,7 +16,7 @@ scripts that happened to get written:
 | What has been learned so far? | [`docs/FINDINGS.md`](docs/FINDINGS.md) |
 | How do I run it? | [`docs/PIPELINE.md`](docs/PIPELINE.md), [`CLAUDE.md`](CLAUDE.md) for agents |
 
-## Status (2026-10-16 ~20:15 UTC)
+## Status (2026-10-16 ~20:25 UTC)
 
 **New here, with no context? Read [`docs/HANDOFF.md`](docs/HANDOFF.md) first.** It holds the full state, the open
 questions and the next steps. [`docs/OPERATIONS.md`](docs/OPERATIONS.md) says how to run everything. The working method
@@ -29,10 +29,9 @@ comes from Felix Rieseberg's essay
   complexity ~0, and nothing has reached it yet.
 - **Best verified overall:** minarc-stop-knuckle-4r pick1, **18.40 (score 93.31)**, held out 21.31. It has 4 revolutes,
   and the knuckle K is spring-held and sensed.
-- **Best verified with 3 active joints:** frontload-lobe-stopb-knuckle-3r, **22.82 (91.70)**, held out 26.75. Its K is
-  slaved to J2 by a rod drive. The simplest class, a plain 3R at complexity 0, tops out at 31-34.
-- **Round 8 (self-measured, under verification).** The "sidecar" drive at strap level reaches 18.91-19.13 frozen
-  (score ~93.1) with 3 active joints.
+- **Best verified with 3 active joints:** sidecar-longdyad-knuckle-3r (round 8, verified 2026-10-16 20:20 UTC),
+  **18.91 (93.12)**, held out 22.67. Its K is slaved to J2 by a strap-level "sidecar" drive. The previous 3-active lead
+  was 22.82. The simplest class, a plain 3R at complexity 0, tops out at 31-34.
 - **What limits every leader: reach.** The J2 fold costs ~86 of 360 workspace poses and 20 of 28 overhead poses.
   In-band (~0.89) and follow (~1.0) are close to target.
 - **Built CAD.** The best builds pass 7-8 of the 19 requirements:
