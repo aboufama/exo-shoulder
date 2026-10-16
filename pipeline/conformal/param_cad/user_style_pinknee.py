@@ -217,8 +217,23 @@ def bore_cutter_R(k, F, R):
                         (CAP_CB, SLIM_TOP + 1.0), (0, SLIM_TOP + 1.0)], k, F)
 
 
+RING_ROOT_SKIPPED = []
+
+
 def ring_root_R(body, k, F, R):
-    return US.ring_root_fillet(body, k, F) if R == US.HUB_R else body
+    """the O20 ring's root fillet - tried first in a forked child: OCC's fillet SEGFAULTS on link 2's J2 ring root next to the
+    short hugging seat (h1b, 2026-10-16), which a try/except cannot catch; if the child dies or the result is invalid, the
+    root keeps its plain edge (stated in build.json: RING_ROOT_SKIPPED)"""
+    if R != US.HUB_R: return body
+    pid = os.fork()
+    if pid == 0:
+        try: ok = US.ring_root_fillet(body, k, F).isValid()
+        except Exception: ok = False
+        os._exit(0 if ok else 1)
+    _, st = os.waitpid(pid, 0)
+    if os.WIFEXITED(st) and os.WEXITSTATUS(st) == 0: return US.ring_root_fillet(body, k, F)
+    RING_ROOT_SKIPPED.append(dict(F=round(float(F), 2), child_status=int(st))); print(f"  ring root fillet at F {F:.2f}: OCC fails (child status {st}) - plain root edge", flush=True)
+    return body
 
 
 def hardware_R(J, k, F, lower, upper, R):
@@ -997,6 +1012,7 @@ def main():
     rep["parts"] = pf; json.dump(rep, open(os.path.join(dd, "build.json"), "w"), indent=1, default=float)
     print(f"exported {len(pf)} parts -> {dd}; mass {rep['mass_g']}; invalid or multi-solid: {bad or 'none'} ({time.time() - t0:.0f} s)", flush=True)
     rep["check"] = check_frames(M, dd, [(g, mem, n, s) for g, mem, n, s in parts])
+    rep["ring_root_fillet_skipped"] = RING_ROOT_SKIPPED
     rep["kinematics_exact"] = dict(poses=len(rep["check"]), all_within_0p5=all(r["within_0p5"] for r in rep["check"]),
                                    max_frame_dev_mm=max(r["frame_dev_mm"] for r in rep["check"]),
                                    max_joint_feature_mm=max(r["joint_features_max_mm"] for r in rep["check"]))
