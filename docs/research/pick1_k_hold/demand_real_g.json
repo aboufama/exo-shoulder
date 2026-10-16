@@ -1,0 +1,109 @@
+{
+ "config": "pick1",
+ "rule": "demand = max(0, gravity torque along K's opening, REAL direction) x g + 2 mN.m per sealed pair along the self-motion; the red team's state-A 0.0478 N.m is 2 g in the WORST direction + the same friction",
+ "stateA_all": {
+  "n": 1594,
+  "1g_real": {
+   "max_Nm": 0.023,
+   "p99_Nm": 0.0187,
+   "median_Nm": 0.0103,
+   "share_gravity_closes": 0.0,
+   "over_0p040": 0,
+   "over_0p035": 0,
+   "worst_pose": [
+    45.0,
+    165.0,
+    -30.0
+   ]
+  },
+  "1g_any_dir": {
+   "max_Nm": 0.0295
+  },
+  "2g_real": {
+   "max_Nm": 0.0355,
+   "p99_Nm": 0.0278,
+   "median_Nm": 0.0147,
+   "share_gravity_closes": 0.0,
+   "over_0p040": 0,
+   "over_0p035": 1,
+   "worst_pose": [
+    45.0,
+    165.0,
+    -30.0
+   ]
+  },
+  "2g_any_dir": {
+   "max_Nm": 0.0478
+  }
+ },
+ "stateA_clip_frames": {
+  "n": 412,
+  "1g_real": {
+   "max_Nm": 0.0157,
+   "p99_Nm": 0.0157,
+   "median_Nm": 0.0101,
+   "share_gravity_closes": 0.0,
+   "over_0p040": 0,
+   "over_0p035": 0,
+   "worst_pose": [
+    30.0,
+    150.0,
+    -60.0
+   ]
+  },
+  "1g_any_dir": {
+   "max_Nm": 0.0205
+  },
+  "2g_real": {
+   "max_Nm": 0.025,
+   "p99_Nm": 0.025,
+   "median_Nm": 0.0144,
+   "share_gravity_closes": 0.0,
+   "over_0p040": 0,
+   "over_0p035": 0,
+   "worst_pose": [
+    30.0,
+    150.0,
+    -60.0
+   ]
+  },
+  "2g_any_dir": {
+   "max_Nm": 0.0333
+  }
+ },
+ "stateA_workspace": {
+  "n": 1182,
+  "1g_real": {
+   "max_Nm": 0.023,
+   "p99_Nm": 0.0191,
+   "median_Nm": 0.0104,
+   "share_gravity_closes": 0.0,
+   "over_0p040": 0,
+   "over_0p035": 0,
+   "worst_pose": [
+    45.0,
+    165.0,
+    -30.0
+   ]
+  },
+  "1g_any_dir": {
+   "max_Nm": 0.0295
+  },
+  "2g_real": {
+   "max_Nm": 0.0355,
+   "p99_Nm": 0.0293,
+   "median_Nm": 0.0148,
+   "share_gravity_closes": 0.0,
+   "over_0p040": 0,
+   "over_0p035": 1,
+   "worst_pose": [
+    45.0,
+    165.0,
+    -30.0
+   ]
+  },
+  "2g_any_dir": {
+   "max_Nm": 0.0478
+  }
+ }
+}

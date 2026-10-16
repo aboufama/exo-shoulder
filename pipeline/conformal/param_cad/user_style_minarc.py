@@ -573,8 +573,11 @@ def main():
     ap.add_argument("--skip-base-search", action="store_true", help="no ear search (the J1 upper member alone)")
     ap.add_argument("--label", default="BDp"); ap.add_argument("--gen", default="generation-4 winner")
     ap.add_argument("--spring-n", type=int, default=9); ap.add_argument("--spring-d", type=float, default=0.6); ap.add_argument("--spring-rate", type=float, default=0.015)
+    ap.add_argument("--spring-preload", type=float, default=None, help="K preload on stop A, N.m (default: the L1 design's build_fixes.spring.preload, else 0.08)")
     a = ap.parse_args(MY_ARGV); t0 = time.time(); dd = os.path.join(FULL, "designs", a.out); os.makedirs(os.path.join(dd, "step"), exist_ok=True)
     SPRING.update(n=a.spring_n, d=a.spring_d, rate=a.spring_rate)
+    _l1sp = ((json.load(open(os.path.join(FULL, "designs", a.l1, "design.json"))).get("build_fixes") or {}).get("spring") or {})
+    SPRING.update(preload=a.spring_preload if a.spring_preload is not None else float(_l1sp.get("preload", SPRING["preload"])))   # the L1's declared spring
     import concept_kit as KIT
     P0, src = BM.params_from(a); M, rep0 = BM.fit(P0); D = M.D
     Bf = M.B; M._bench_K = BM.chain(M, np.array([[Bf.poses[i][k] for k in ("plane", "elev", "axial", "flex", "pron")] for i in range(len(Bf.idx))]))

@@ -557,8 +557,9 @@ def main():
     ap.add_argument("--e-cap", action="store_true", help="E strap top capped at the boss top tr + tp (the full CAD's rule)")
     ap.add_argument("--knee-stop", type=float, help="physical knee stop at this knee angle (deg; the knee window's upper edge in the clips / workspace)")
     ap.add_argument("--spring-rate", type=float, default=0.015); ap.add_argument("--spring-len", type=float, default=145.0)
+    ap.add_argument("--spring-preload", type=float, default=0.08, help="K clock-spring preload on stop A, N.m (pick1: 0.04, docs/research/pick1_k_hold.md)")
     a = ap.parse_args(); t0 = time.time(); fb = (60, 160); fbs = "Bench(60,160)"
-    CFG.update(k_pair=a.k_pair, e_cap=a.e_cap, knee_stop=a.knee_stop, label=a.label, spring=dict(CFG["spring"], rate=a.spring_rate, length_mm=a.spring_len))
+    CFG.update(k_pair=a.k_pair, e_cap=a.e_cap, knee_stop=a.knee_stop, label=a.label, spring=dict(CFG["spring"], rate=a.spring_rate, length_mm=a.spring_len, preload=a.spring_preload))
     import concept_kit as KIT
     dd = os.path.join(FULL, "designs", a.out); os.makedirs(dd, exist_ok=True)
     P0, src = params_from(a); M, rep = fit(P0, fb); D = M.D; P = M.p

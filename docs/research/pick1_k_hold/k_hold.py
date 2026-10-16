@@ -32,25 +32,39 @@ def law_torque(law, x_deg):
         return H * min(1.0, max(0.0, 1.0 - (x_deg - x0) / (x1 - x0)))
     raise ValueError(kind)
 
+_MjData = mujoco.MjData
+_CB = [None]
+def _mjdata(m):
+    """the judge builds its model then its MjData: the callback goes in only after the compile (MuJoCo's compiler calls the
+    passive callback on an unwrapped model, which the Python binding cannot take)"""
+    d = _MjData(m)
+    if _CB[0] is not None: mujoco.set_mjcb_passive(_CB[0])
+    return d
+mujoco.MjData = _mjdata
+
+_OPT = D.option_xml
 def install(des, law):
-    """set the judge's spring preload and the extra-torque callback for this law"""
-    D.K_PRELOAD = float(law["preload"])
-    if not law.get("extra"):
-        mujoco.set_mjcb_passive(None); return
+    """set the judge's spring preload (springref recomputed: GenDesign caches it at construction) and the extra-torque callback;
+    law["g"] scales gravity (2.0 = the red team's 2 g demand case, real direction: -y in the thorax)"""
+    D.K_PRELOAD = des.k_preload = float(law["preload"]); des.spring = des.springs(des.k_rate)
+    gs = float(law.get("g", 1.0))
+    D.option_xml = (lambda dt=D.DT, gravity=True: _OPT(dt, gravity).replace('gravity="0 -9.81 0"', f'gravity="0 {-9.81 * gs:.6g} 0"')) if gs != 1.0 else _OPT
+    mujoco.set_mjcb_passive(None); _CB[0] = None
+    if not law.get("extra"): return
     iK, qA, sg = des.spring_def; jn = f"J{iK + 1}"
     def cb(m, d):
         j = mujoco.mj_name2id(m, mujoco.mjtObj.mjOBJ_JOINT, jn)
         if j < 0: return
         q = d.qpos[m.jnt_qposadr[j]]; x = math.degrees(sg * (qA - q))
         d.qfrc_passive[m.jnt_dofadr[j]] += sg * law_torque(law, max(0.0, x))
-    mujoco.set_mjcb_passive(cb)
+    _CB[0] = cb
 
 def sim_clip(des, ci, law, k_rate=None, record=True):
     install(des, law)
     try:
         summ, R = D.run(des, ci, record=record, k_rate=k_rate, **NOM)
     finally:
-        mujoco.set_mjcb_passive(None)
+        mujoco.set_mjcb_passive(None); _CB[0] = None
     return summ, R
 
 def frame_q(des, ci, R):
@@ -106,6 +120,8 @@ class Prox:
         A0 = 0.5 * np.linalg.norm(np.cross(V0[F[near, 1]] - V0[F[near, 0]], V0[F[near, 2]] - V0[F[near, 0]]), axis=1)
         rng = np.random.default_rng(1); NS = int(A0.sum() / 0.25)
         self.fi = near[rng.choice(len(near), NS, p=A0 / A0.sum())]; uv = rng.random((NS, 2)); flip = uv.sum(1) > 1; uv[flip] = 1 - uv[flip]; self.uv = uv; self.F = F
+        SUB = int(os.environ.get("SKIN_SUB", "4"))                                     # every SUB-th of score_design's skin samples (same samples, planned and simulated)
+        self.fi, self.uv = self.fi[::SUB], self.uv[::SUB]
     def metal(self, fr, G=None, T=None, dH=None):
         """posed shoulder metal (thorax mm) for frame fr; G / T override the member poses; dH = (R, t) applied to H about GH (cuff deviation)"""
         pose = dict(zip(["plane", "elev", "axial", "flex", "pron"], fr["p"])); G = G or {g: np.array(v).reshape(3, 3) for g, v in fr["G"].items()}
@@ -127,11 +143,12 @@ class Prox:
         out = dict(in14=float(((g >= 2) & (g <= 14)).mean()) if len(g) else 0.0, in10=float(((g >= 2) & (g <= 10)).mean()) if len(g) else 0.0,
                    cov_min=float(g.min()) if len(g) else float("nan"), cov_med=float(np.median(g)) if len(g) else float("nan"))
         # exact metal-to-skin clearance and depth (judge/sdist.py, the R2 instrument) for metal within 12 mm of a body vertex
-        vt = self.cKDTree(X); dv = vt.query(E, distance_upper_bound=12.0)[0]; Q = E[np.isfinite(dv)]
+        vt = self.cKDTree(X); dv = vt.query(E, distance_upper_bound=12.0)[0]; sel = np.isfinite(dv); Q = E[sel]; dq = dv[sel]
         if len(Q):
             M = Mesh(X, F, 2.0).build_grid(1.0, Q.min(0) - 15, Q.max(0) + 15)
-            dep, _ = M.max_depth(Q, 0.0); cl = M.closest(Q)[0]; W = M.winding_at(Q) >= 1
-            clear = float(cl[~W].min()) if (~W).any() else float("nan")
+            W = M.winding_at(Q) >= 1; dep, _ = M.max_depth(Q[W], 0.0) if W.any() else (0.0, None)
+            o = np.where(~W)[0]; o = o[np.argsort(dq[o])[:1500]]                     # exact clearance on the 1500 nearest outside points
+            clear = float(M.closest(Q[o])[0].min()) if len(o) else float("nan")
             out.update(depth=float(dep), clear_min=clear, n_inside=int(W.sum()))
         else: out.update(depth=0.0, clear_min=float("nan"), n_inside=0)
         return out
@@ -154,6 +171,7 @@ def lag(dd, law, out_path, step=1):
             xs, xp = float(knuckle_open(des, qs[fi])), float(knuckle_open(des, des.q_frames[i]))
             # J2 margin from its stops (deg): plan vs sim
             lo2, hi2 = des.limits.get(des.spare[0] + 1, (-1e9, 1e9)); q2s, q2p = math.degrees(qs[fi][des.spare[0] + 1]), math.degrees(des.q_frames[i][des.spare[0] + 1])
+            if fi % 20 == 0: print(c["name"], fi, round(time.time() - t0), "s", flush=True)
             rows.append(dict(frame=fi, held=bool(fr["held"]), dK_plan=round(xp, 2), dK_sim=round(xs, 2), fk_err=err,
                              cuff_dev_deg=round(float(np.degrees(np.linalg.norm(D.rotvec(Rd)))), 2),
                              J2_margin_plan=round(min(q2p - lo2, hi2 - q2p), 2), J2_margin_sim=round(min(q2s - lo2, hi2 - q2s), 2),

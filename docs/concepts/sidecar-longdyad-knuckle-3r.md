@@ -117,3 +117,31 @@ What the gate measured:
 GATE VERDICT: the spec's pass (a cell with fold losses <= 26, in-band >= 0.90 and min metal >= 1 mm at the near-touch
 rule) is met on fold losses and in-band (bk2 44-47). It is NOT met on min metal: 0.03-0.96 mm untuned, with crank,
 horn and rod ends among the < 1 mm parts. CMA (near-touch objective) runs from the passing cells, as the spec says.
+
+## Frozen references before the CMA (fit Bench(60,160) fast, shape frozen, worn on Bench(110,360) exact)
+
+The lead's same-protocol numbers are 22.82 plain, 24.46 near-touch, held out 26.75 / 29.39 (verify/frontload-...).
+
+| config | fast plain / near | frozen plain | score | reach | in-band14 | contact | near-touch 1 mm / 2 mm | overhead | why (fold / slide / parts / contact) | held out |
+|---|---|---|---|---|---|---|---|---|---|---|
+| bk 30 / 44 / 66, La 20 r_h 15 beta -90 gam 0 (dK_lim 44.0, transmission) | 12.31 / 18.54 | **20.46** | 92.56 | 0.717 | 0.903 | 0.021 | 27.23 / 49.66 | 7/28 | 84 / 8 / 2 / 8 | |
+| same + gam +15 (old model, before truncation) | 14.20 / 19.32 | 21.06 | 92.34 | 0.706 | 0.905 | 0.016 | 27.35 / 50.44 | 7/28 | 82 / 8 / 10 (ROD-hub2 8) / 6 | 24.98 (near 31.66; ROD-hub2 24) |
+
+Untuned, the strap-level sidecar plus the longer dyad buys the in-band half the planner priced. Frozen in-band is
+0.903-0.905 vs 0.855, and frozen plain gains 1.8-2.4 points over the lead. Two costs come with it:
+
+- near-touch is worse by ~2.8 (metal within 1 mm on 14 frozen poses);
+- reach does not move: 0.706-0.717 vs 0.728 frozen.
+
+## Red team (measured)
+
+- **Rod into hub 2.** Phasing the crank (+15) to buy transmission swings the rod into hub 2's housing past dK ~42. The
+  fit bench never got there, but the frozen bench lost 8 poses and held out lost 24 (ROD-hub2). The fix is in the
+  model: the drive's usable range ends at the first dK where the transmission < 30 deg or the rod / crank comes
+  < 1 mm to hub 2 or link 1b. Stop B sits there, and poses past it are lost on every bench. A designer would place the
+  q2 dowel there; the K dyad's a1max is not the binding stop.
+- **Transmission.** The longer the dyad, the larger the dK the drive must carry (dK taken 37 -> 49 for bk2 38 -> 47).
+  The strap-level RSSR's transmission falls below 30 deg past bk2 ~41 at zero phase. The longdyad lever and this drive
+  fight each other.
+- **The ball links cannot hang under the arm.** Measured: the rod enters the skin on 110 of 160 poses.
+- **Stop B never binds.** See the gate.

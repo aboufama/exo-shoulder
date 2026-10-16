@@ -98,7 +98,7 @@
   },
   {
    "joint": "K",
-   "part": "O20 v5 hub, MR117-2RS pair, cap 18.25 mm (clock spring 0.3 x 5 1.4310 +C1900 217 mm, 0.01 N.m/rad, 0.08 N.m preload); stops A / B = an opposed pair of O3 dowels in two 56.7-deg arc slots; encoder",
+   "part": "O20 v5 hub, MR117-2RS pair, cap 18.25 mm (clock spring 0.3 x 5 1.4310 +C1900 217 mm, 0.01 N.m/rad, 0.04 N.m preload); stops A / B = an opposed pair of O3 dowels in two 56.7-deg arc slots; encoder",
    "axis_offset_mm": 0.0,
    "passive": true,
    "sensed": true
@@ -239,7 +239,8 @@
    "rate": 0.01,
    "length_mm": 217.0,
    "steel": "1.4310 +C1900",
-   "preload": 0.08
+   "preload": 0.04,
+   "preload_note": "0.08 -> 0.04 N.m (2026-10-16, docs/research/pick1_k_hold.md): R17 drift 9.3 -> 3.7 deg; hold 1.13x the 2 g real-direction state-A demand (0.0355), 1.36x the 1 g any-direction demand; geometry unchanged (0.64 preload turns instead of 1.27)"
   }
  },
  "faces_mm": [

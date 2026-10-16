@@ -31,7 +31,8 @@ posed groups in serial order (base, l1 / l1a / l1b, l2, l3 = member 3, l4 = knee
 GH); every adjacent pair is joined by the hinge FITTED to its relative motion over all clip frames (axis and point; the
 residuals are reported and a pair that is not a hinge stops the judge - a design with passive slides falls back to the
 spherical approximation, labelled in dynamics.json "chain"); masses / inertias per group; a knuckle K gets its clock spring
-(0.08 N.m preload at stop A, rate 0.015 nominal and 0.010 N.m/rad) and its stops A / B, J2 its q2 stops, as joint limits;
+(the preload the design declares in design.json build_fixes.spring.preload, else 0.08 N.m, at stop A; rate 0.015 nominal and 0.010
+N.m/rad) and its stops A / B, J2 its q2 stops, as joint limits;
 member-member contact is not modelled there (R6). Cross-checked against the spherical path on a 3R
 (judge/test_dynamics.py --general). Until 2026-10-16 these designs were judged as their orientation-equivalent spherical
 3R (minarc crashed: KeyError 'l1').
@@ -312,6 +313,9 @@ class GenDesign(Design):
         C = json.load(open(os.path.join(self.dd, "clips.json"))); self.clips = C["clips"]; self.hub_r = float(C.get("design", {}).get("hub_r") or 11.5)
         L = json.load(open(os.path.join(PIPE, "avg", "body_mesh.json"))); RH = np.array(L["landmarks"]["rest_humerus"]); u_, _, vt_ = np.linalg.svd(RH); self.HR = u_ @ vt_
         self.ch = None; self.k_rate = k_rate
+        sp_ = (D.get("build_fixes") or {}).get("spring") or {}                       # the design's DECLARED clock-spring preload (2026-10-16: was the constant
+        self.k_preload = float(sp_["preload"]) if sp_.get("preload") is not None else K_PRELOAD   # K_PRELOAD for every design; a measurement change only where a design declares another)
+        self.k_preload_source = "design.json build_fixes.spring.preload" if sp_.get("preload") is not None else "judge default K_PRELOAD"
         posed = sorted({g for c in self.clips for f in c["frames"] for g in f["G"]})
         self.groups = group_order([g for g in posed if g != "S" or "base" not in posed])
         if self.groups[0] != "base": raise ValueError("dynamics (general): the chain starts at 'base'")
@@ -390,9 +394,9 @@ class GenDesign(Design):
                     else: self.q2_fit = dict(joint=self.joint_names[i2], slope=round(float(a_), 6), residual_deg=round(res2, 4), note="q2 does not map onto this hinge: stops not applied")
         self.pin_stop_note = "the knee stop (149.5 deg) is not in the CAD and not modelled; the knee pins are free"
     def springs(self, rate):
-        """{joint: (stiffness N.m/rad, springref rad)}: K_PRELOAD toward stop A at stop A"""
+        """{joint: (stiffness N.m/rad, springref rad)}: the declared preload (else K_PRELOAD) toward stop A at stop A"""
         if not getattr(self, "spring_def", None): return {}
-        iK, qA, sg = self.spring_def; return {iK: (rate, qA + sg * K_PRELOAD / rate)}
+        iK, qA, sg = self.spring_def; return {iK: (rate, qA + sg * getattr(self, "k_preload", K_PRELOAD) / rate)}
     def joint_name(self, k):
         a, b = self.members_[k], self.members_[k + 1]
         if a == "l1a" and b == "l1b": return "K"
@@ -1017,7 +1021,7 @@ def main():
     if gen:
         out["chain"] = dict(kind="general serial chain from the clips' own member frames (dynamics-2026-10-16): " + " -> ".join(des.members_[:-1]) + " -> arm",
                             joints=des.joint_names, hinge_fit=des.fit, limits_deg={des.joint_names[j]: [round(x, 3) for x in v] for j, v in des.limits.items()},
-                            springs={des.joint_names[j]: dict(rate_Nm_per_rad=v[0], preload_Nm_at_stop_A=K_PRELOAD, rates_run=list(K_RATES)) for j, v in des.spring.items()},
+                            springs={des.joint_names[j]: dict(rate_Nm_per_rad=v[0], preload_Nm_at_stop_A=des.k_preload, preload_source=des.k_preload_source, rates_run=list(K_RATES)) for j, v in des.spring.items()},
                             knuckle=getattr(des, "knuckle_fit", None), q2_stops=getattr(des, "q2_fit", None), spare_joints=[des.joint_names[j] for j in des.spare],
                             arm_member="the humerus (canonical frame at GH), joined to the last member by its hinge and to the bone by the soft-tissue cuff",
                             contact="member-member contact not modelled in the general chain (R6 judges part interference geometrically: 0.0 mm on these designs); stops are joint limits",
