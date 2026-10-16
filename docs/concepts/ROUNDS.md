@@ -977,3 +977,210 @@ Next (round 9; verified best 18.91, score 93.12, so 95 is not reached and score 
 - A sensed passive used only at static extremes counting as passive (minarc pick1 18.40 would be 3 active).
 - Whether msub applies to a K positively slaved from q2 (a "no" opens crank-rod / bighorn at cx 36).
 - New: the 2 mm near-touch as the claim column / dominance gate (ALIGNMENT.md A1) - it would rank longdyad first by 4.8.
+
+## Round 9 plan (2026-10-16 ~20:35 UTC, track main, lead verified gap 18.91)
+
+### State
+
+- **Verified lead** (Bench(110,360) exact, frozen, margin 5, O20, fit Bench(60,160)): sidecar-longdyad-knuckle-3r
+  **18.91** (score 93.12). 3 active (K slaved by the hub-2 lobe and the strap-level RSSR sidecar, never read), 0 passive
+  translations, complexity 49.
+  - Numbers: reach 0.725, follow 1.0, in-band14 0.897, in-band10 0.534, contact 0.011.
+  - Near-touch 20.00 at 1 mm and 34.03 at 2 mm (26 poses under 2 mm); min metal 0.28 mm.
+  - Lost 99 of 360: fold 86, slide 7, contact 4, parts 2 (E-L2).
+  - Overhead 8/28 (lost fold 14, slide 4, contact 2).
+  - Held out 22.67: reach 0.690, overhead 18/71 (lost fold 37, slide 11, contact 5).
+  - Flood fill full 18.91 (0 dropped), knn 21.72.
+  - Verifier json `verify/sidecar-longdyad-knuckle-3r_v_bench_frozen.json`.
+- **Same protocol, verified:**
+
+  | design | gap | note |
+  |---|---|---|
+  | minarc pick1 | 18.40 | 4-active sensed; cx 33 (52 under ALIGNMENT A5) |
+  | sidecar-parallelogram | 19.13 | 2 mm 50.14: shell gamed |
+  | sidecar-roller-flank | 20.08 | cx 45.25, held out 22.35 |
+  | frontload | 22.82 | |
+  | geneva rod | 23.57 | |
+  | H1 | 27.20 | cx 19.5 |
+  | zero-complexity ceiling | 31.04 | cx 0 |
+
+- **Score arithmetic** (tools/dash_build.py line 37): gap = 100 (max(0, 0.90 - ib14) + max(0, 0.95 - follow) +
+  max(0, 0.90 - reach)) + 100 contact.
+  - In-band above 0.90 is worth 0 points.
+  - One workspace pose of 360 is worth 0.278 points. Each 0.01 of in-band below 0.90 costs 1 point, i.e. 3.6 poses.
+  - **95 (gap 13.75)** needs reach 0.777 at in-band 0.897 and contact 0.011, which is +19 poses. At in-band 0.88 it
+    needs reach 0.797 (+26 poses).
+  - So the part headroom (hub 3 0.599 of 80 samples at a median 13.0 mm; L2 0.749 of 132 at 11.6) is not a lever on
+    its own. It is a budget: a reach lever may spend in-band down to 0.90, and it must buy more poses than it spends.
+  - Every other part is >= 0.91 (crank 0.91, rod 0.89).
+- **Complexity 49, by item** (tools/simplicity.py):
+
+  | item | points |
+  |---|---|
+  | 3 loops (drive RSSR, K closure, knee closure) | 12 |
+  | 2 sensed knee pins | 10 |
+  | 10 joints | 7 |
+  | 6 passive rotations | 6 |
+  | custom parts | 4.5 |
+  | 7 bodies | 4 |
+  | K spring | 3 |
+  | catalogue parts | 2.5 |
+
+  - The drive alone (lobe, bell crank, rod, ball links, horn, spring, its loop) is ~14-16 of the 49.
+  - The roller flank drops it to 45.25.
+  - Lower than ~41 needs a user ruling: the cuff IMU (-8), or msub for a positively slaved K (crank-rod / bighorn,
+    cx 36).
+- **Fold walls on the lead (unchanged since round 6):**
+  - Stretched wall: a1max + a2 - 5. The poses past th ~132 need a1e 76-100 at a2 62.
+  - The law ends at the lobe skirt (th 119.3).
+  - The RSSR's own range ends at dK 43.0 (rod vs hub 2). Taken poses reach dK 38.1.
+  - Stop B never binds.
+  - Fold losses: 86-88 of 360 on every round-8 drive row, 84-86 on every rod variant (rounds 6-7).
+- **Measured kinematic headroom, and why it was not parkable** (twist-long-a2, round 8):
+  - Law-only reach 0.814-0.825 and overhead 17-21/28, against 0.742 / 10 through the same IK.
+  - With J2 following the J3 seat: hub 2 0.68, hub 3 0.35-0.60, L2 0.49-0.62, and knee-E collides on every pose at
+    seed B with b3 0.
+  - With J2 parked: a2 69-77 and contact 0.06-0.07.
+  - Frozen: +10 fold poses, re-lost to contact (+7), knee slide (+5) and clip follow (0.955).
+  - CMA (4869 configs, converged) walked the twist back to -8..+2 deg in every stream.
+  - That screen ran on frontload's crown-high rod drive. The strap-level sidecar has never been worn on the
+    wide-window seeds.
+- **J1 back seat, measured so far, on other families only:**
+  - zc S-streams from (0, 45) / (30, 60) walk back to the acromion top (P0 57.92: reach 0.85 at in-band 0.42).
+  - The posterior J1 line in the pin-knee family scored 122.45. Fold dropped from 47 to 6-20 poses, but 46-69 of 220
+    poses hit skin, and no per-part split was taken.
+  - alignment-free-knuckle-4r: hub 2 0.00 and L2 0.065 in band at distal J3 seats.
+  - The 3R kinematic headroom inside the ruling is 0.942 (reach_attribution section 6).
+  - **A knuckle at a back seat has never been measured.** It was round-8 lens-1 lever (a), never run. The knuckle bends
+    link 1 at hub K, so hub 2's parking at a back seat is an open question. The lead's J1 is at az1 96.7 / el1 67.6.
+- **Hub obliquity law:** hub 3 sits 0.64 / 0.69 / 0.82 in band at 39 / 30 / 16 deg. The J3 seats that fix it (wd
+  58-71) cost overhead.
+- **Protocol lessons:**
+  - Fast to frozen is now 8.4-9.0 points: the fit bench takes overhead 2/12, frozen 8/28.
+  - A 1 mm objective parks metal at 1-2 mm (parallelogram 50.14 at 2 mm).
+  - Kinematic gates over-predict by the parking term (+0.07 kinematic became +0.005 frozen reach).
+  - So every search this round uses the representative envelope bench (tools/env_bench.py) and the 2 mm near-touch
+    objective, and every gate includes parking.
+- **Do not screen again:**
+  - K-dyad length alone;
+  - the J3 twist as a search variable;
+  - stop-B and law-shape levers;
+  - the 35/45/75 cell;
+  - GE4E all-metal links;
+  - progressive laws at a pitch point;
+  - the round-7 list: direct pairs between O20 stacks, followers rigid with link 2, folded-side hubs and lobes, the
+    Geneva tail, hubs on link 2, O15 crest basins, K = c(q1), groove / dwell flanges.
+- **Stale rows:** offset-axis-skin-hubs, seed-rcm-parallelogram and virtual-pole-4bar-j1 / -j2 still say "modelling".
+  Nothing runs on them.
+
+### Lenses
+
+1. **back-seat-knuckle (reach; target: frozen reach >= 0.775 and overhead >= 14/28 at in-band >= 0.89, contact <=
+   0.011, 2 mm <= 34.03).** Centre the overhead th set in the knuckle's window from the J1 side. This is lever (a),
+   inside the ruling (back of the shoulder + acromion top, no front seats). Suggested id:
+   backseat-sidecar-knuckle-3r.
+   - **Model:** the lead's model, A1 config, with the drive metal off for the gate.
+   - **Kill gate, <= 25 min:**
+     - Grid: az1 {95, 75, 55, 35} x el1 {67, 45, 25}. Cell (95, 67) is the control.
+     - Per cell, a short re-fit (<= 200 evals, fit bench) of J2 / J3 seats, a2 and bk1 / bk2, with the law held. A
+       cell is never judged at the acromion seats' J2 / J3.
+     - Measure: kinematic reach and overhead x/28 on Bench(110,360) poses; hub 2 / hub K / L1b / L2 / hub 3 / hub 1 /
+       L1a in band (K at rest and open); per-part skin contacts at the lost and the newly won poses; the law-only 2 mm
+       fast gap with parking.
+     - **Pass** on a cell with kinematic reach >= 0.80 and overhead >= 14/28, every part >= 0.80 in band, and a
+       law-only 2 mm gap at least 1.5 better than the control's.
+     - **Else** report the per-part map (which part leaves the band, by how many mm, at which poses) and stop. That
+       closes lever (a) for the knuckle with data.
+   - **Low-complexity check, same grid, law-only:** wear H1 (pin knee, cx 19.5) as a side cell. It shows whether a
+     back seat lifts the simpler class too (its posterior line died at 122.45, but the middle cells were never
+     measured).
+   - **Then CMA** from the passing cells: envelope bench, 2 mm objective, drive metal on.
+     - Buildability floor: r_h >= 15.5, ball centre >= 4 mm, crank short arm and follower as metal.
+     - Free: J1 seat inside the ruling, J2 / J3 seats, a2, bk1 / bk2, a1max, drive geometry.
+   - Attribute every overhead pose won or lost by cause and part.
+   - **Red team:** link 1a / hub 1 over the scapular spine and the posterior deltoid in extension and behind-the-back
+     poses; the scapula handler's reach at the new seat.
+
+2. **spend-the-band (reach from the J3 end, a different angle; same target).** The twist's kinematic headroom (0.81-0.83,
+   overhead 17-21/28) died on contact, knee slide and follow, never measured with the strap-level drive. The in-band
+   surplus above 0.90 is free to spend. Suggested id: widewin-sidecar-knuckle-3r.
+   - **Setup:** wear the lead's sidecar drive and dyad on twist seed A (wdir(70,15), a2 66) and seed B (wdir(82-88,30),
+     a2 58). The J3 axis is HELD at the seed inside a +-3 deg box. It is a constraint, not a search variable: free
+     CMAs walked it back, and that is not re-asked.
+   - **Free (metal and knee only):**
+     - hub 3 at the crest seat (obliquity <= 16 deg, 0.82 in band) or b3 0;
+     - the knee window (lc 34 / phib -75, ang_min) taking the knee drift;
+     - hub 2's level;
+     - an L2 planform turn from the raglan map in L2's own frame (one tangent arc, constant 8 x 3 section);
+     - the drive geometry.
+   - **Kill gate, <= 25 min, no CMA:**
+     - First wear seeds A / B as they are with the sidecar drive and split the twist's +7 contact / +5 slide / follow
+       by part and pose.
+     - Then a <= 300-eval fit-bench re-fit of the free metal.
+     - **Pass:** frozen-shape envelope-bench reach >= 0.76 at in-band >= 0.88, contact <= 0.015, knee-E collisions 0
+       and follow >= 0.99.
+     - **Else** stop with the per-part / per-pose map. That closes lever (b) and the J3 side for the knuckle.
+   - **Then CMA:** envelope bench, 2 mm, same floor as lens 1.
+   - **Red team:** the overhead axial -135 / 0 families, across the body, behind the back, the knee window extremes,
+     and min `th` margin over the taken poses.
+
+3. **simplest-drive (low complexity at the lead's reach, and the stretched wall; target: complexity by the tool <= 44
+   at frozen gap <= 19.9 and 2 mm <= 36; stretch: <= 18.91).**
+   - **Rule:** no user ruling may be assumed (no msub-free positive drive, no cuff IMU).
+   - **Base:** the roller flank (verified 20.08, cx 45.25: rodless, carries 52 deg of K at pressure angles 6.3 / 41.0,
+     no dK 41-43 rod-vs-hub-2 wall) worn on the lead's longer dyad and seats (bk2 39-47, a1max up to ~72; never the
+     35/45/75 cell).
+   - **Simplifications, each priced with tools/simplicity.py from a full mechanism record:**
+     - the crank pivot on link 1b past hub K, giving a short straight arm instead of the 130-deg wrap (roller-flank
+       doc "What next");
+     - the horn flank machined into link 1a (one part fewer);
+     - the pivot pin coaxial with an existing stack;
+     - weird is welcome: any force closure that drops the K spring, or a lobe that is also the K stop, provided K
+       stays determined and continuity holds.
+   - **Gate, <= 20 min, fit bench, 2 mm objective:**
+     - both pressure angles <= 45 over dK >= 45 at bk2 >= 42;
+     - the arm clear of hub K / link 1b / skin;
+     - >= 4 stretched fit poses regained (13 sit at th 124-157 behind a1max + a2 - 5);
+     - or cx <= 44 at the lead's fast 10.30 + 1.
+     Else report and stop.
+   - **Then CMA:** envelope bench, 2 mm. Red team the roller's cantilever stiffness under ~2.5 N and lift-off.
+
+Every lens:
+- takes a new id;
+- writes docs/concepts/viz/concepts/<id>.js and passes `node docs/concepts/viz/test.mjs <id>` + thumbs before the row is
+  called screened;
+- reports plain and near-touch at 1 and 2 mm, fast and frozen exact, held out, full + knn flood fill, overhead x/28,
+  per-part in-band, the min `th` margin and tools/simplicity.py;
+- runs `tools/alignment_audit.py audit <id> --ref sidecar-longdyad-knuckle-3r` before its verifier;
+- gates each CMA run separately;
+- is time-boxed to 75 min of modelling, and on a kill reports the measured reason and stops.
+
+### Carried over (catalogue, ideated, never screened)
+
+None.
+- The round-4 judge picks stay closed. deltoid-crest-j3-3r and crest-knee-3r are O15 crest basins; their hub-3 crest
+  seat is a seat option inside lens 2. slotted-eccentric-pin-knee-3r: its sibling was refuted at 115.21.
+- The other 25 ideated entries are families dead in rounds 1-2 (telescopes, rails, SPMs, tracks, pointers, tapes) or
+  hubless joints excluded by "Keep O20 only".
+- crank-rod / bighorn (cx 36) wait on the msub ruling. lost-motion-swivel (cx 43, 1 passive translation, 0 expected
+  gain) waits on score >= 95.
+
+### Elsewhere, not to be duplicated
+
+- **sidecar-longdyad-knuckle-3r:** the lead's final polish, then its verifier, the generation-winner CAD + stills,
+  EVOLUTION.md, and the RC M2 ball link in tools/hardware_catalogue.json. The polish settings:
+  - envelope bench, 2 mm objective;
+  - ball centre 4-4.5 mm;
+  - crank short arm, follower and lobe window as metal;
+  - r_h >= 15.5.
+- **geneva-tail-knuckle-pinknee-3r:** the gen-5 CAD (user_geneva_rod, wf_14bb06ea-22e).
+- **The alignment auditor** (wf_0729deda-636, audit:live) re-wears rows. It is not a design screen.
+
+### Needs the user's say (listed, not screened)
+
+- A cuff IMU in place of the two knee-pin encoders (winner 49 -> ~41).
+- A fold margin below 5 deg.
+- A sensed passive used only at static extremes counting as passive.
+- msub for a positively slaved K: a "no" opens crank-rod / bighorn at cx 36.
+- The 2 mm near-touch as the claim column / dominance gate (ALIGNMENT A1).
+- A per-pose worst-point cap (ALIGNMENT A3: 48 % of the lead's taken poses have metal under 3 mm).
