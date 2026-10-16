@@ -36,6 +36,12 @@ S = OSN.S; unit = S.unit; D2R = math.pi / 180
 ID = "skin-normal-3r-pin-knee"
 NAME = "Leader 3R closed by a flat two-pin knee (0 passive translations)"
 BOSS_R, PAD_R, KNEE_W = 6.0, 6.0, 10.0       # O12 pin bosses / arm pad, knee link width
+# per-hub radius rad1 / rad2 / rad3 (mm): ONLY these catalogue hubs (same MR117-2RS pair, same 12.25 mm stack F -> crown;
+# docs/concepts/spine-parked-j2-3r.md "Slim hub, hand calc"). Disc, side wall, crown, part-part cylinder and the link ends
+# all use the declared radius; anything else is refused. Default O20 = every result before 2026-10-16 04:15 UTC.
+HUBS = {10.0: "O20 v5 hub: MR117-2RS pair, 12.25 mm stack (docs/HARDWARE.md)",
+        8.5: "O17 hub: MR117-2RS pair in a 2.75 mm Ti wall (conservative slim), 12.25 mm stack",
+        7.5: "O15 slim hub: MR117-2RS pair (O11) in a 2.0 mm Ti wall, 12.25 mm stack (hand calc in spine-parked-j2-3r.md)"}
 
 PARAMS = dict(OSN.PARAMS)
 PARAMS.update(remote=0, ramp=1, S_auto=0, jam_contact=1, drop=1, slides=1, vfix=1, inv=0, centre=1, R_tol=0.5,
@@ -46,7 +52,34 @@ PARAMS.update(remote=0, ramp=1, S_auto=0, jam_contact=1, drop=1, slides=1, vfix=
               phiE=0.0,         # E direction in hub 3's plane at mid drift (deg; 0 = distal along the humerus, 90 = across)
               phib=90.0,        # knee link direction pin a -> pin b at mid drift (deg, same plane basis)
               stk=5.0,          # pin stack (mm): 5.0 iglidur pin over two plates, 6.0 MR63ZZ pair
-              ang_min=30.0)     # knee angle window [ang_min, 180 - ang_min]
+              ang_min=30.0,     # knee angle window [ang_min, 180 - ang_min]
+              rad1=10.0, rad2=10.0, rad3=10.0)   # hub radii (HUBS: 10 O20, 8.5 O17, 7.5 O15)
+
+
+class _Geo(S.Geometry):
+    """the seed's link straps (S.Geometry.add_links) with the link samples kept outside each hub's DECLARED radius (the
+    strap reaches a slim hub's wall; identical to the seed at O20)"""
+    def __init__(self, D, hr):
+        self.D = D; self.groups = []; self.hr = hr
+
+    def add_links(self, f1, f2, f3):
+        D = self.D; u, c = D.u, D.c; SP = S.SPACING
+        C = [c[0] + f1 * u[0], c[1] + f2 * u[1], c[2] + f3 * u[2]]
+        out = []
+        for li, (ka, kb, mem) in enumerate(((0, 1, 1), (1, 2, 2))):
+            da, db = unit(C[ka]), unit(C[kb]); R = 0.5 * (np.linalg.norm(C[ka]) + np.linalg.norm(C[kb]))
+            ang = math.acos(float(np.clip(da @ db, -1, 1))); bn = unit(np.cross(da, db))
+            n = max(4, int(R * ang / SP)); ts = (np.arange(n) + 0.5) / n
+            dirs = np.array([unit(math.sin((1 - t) * ang) * da + math.sin(t * ang) * db) for t in ts])
+            rows = []
+            for v in (-3.0, -1.0, 1.0, 3.0):
+                dv = unit(dirs + (v / R) * bn); pts = R * dv
+                def off_axis(k): w = pts - c[k]; return np.linalg.norm(w - (w @ u[k])[:, None] * u[k], axis=1)
+                keep = (off_axis(ka) > self.hr[ka]) & (off_axis(kb) > self.hr[kb])
+                rows.append((dv, keep, ts * R * ang))
+            out.append(dict(name=f"L{li + 1}", mem=mem, ka=ka, kb=kb, rows=rows))
+        self.links = out
+        return out
 
 
 def rodr(u, a):
@@ -90,6 +123,10 @@ class Model(S.VModel):
         self.fix = dict(S.VModel.fix)
         self.B = B; self.D = Design(params); self.p = self.D.p; self.v = verbose
         P = self.p; P["tp"] = (float(P["stk"]) - S.RUN) / 2
+        self.hr = [round(float(P.get(f"rad{k + 1}", S.HUB_R)), 2) for k in range(3)]
+        for r_ in self.hr:
+            if r_ not in HUBS: raise ValueError(f"hub radius {r_} is not a catalogue hub {sorted(HUBS)}")
+        self.cyl_r = {"hub1": self.hr[0], "hub2": self.hr[1], "hub3": self.hr[2]}
         Z = CB._poses_all(); self.Z = Z
         self.RS = Z["RS"][B.idx].astype(float); self.Q = Z["HG"][B.idx].astype(float)
         q, ok, X1, X2, X3, s = self.D.ik(self.Q)
@@ -147,9 +184,9 @@ class Model(S.VModel):
         pb = P["phib"] * D2R; eK = math.cos(pb) * sa + math.sin(pb) * st; nK = np.cross(sn, eK)
         g = {}
         for k, mem in ((0, 0), (1, 1), (2, 3)):
-            e, f = S.frame_of(u[k]); d = S.disc(S.HUB_R); g[f"hub{k + 1}"] = (mem, c[k][None] + d[:, :1] * e + d[:, 1:] * f, u[k])
-        lE = float(P["lE"]); xs = np.arange(S.HUB_R + 1.0, lE - BOSS_R + 0.5, S.SPACING)
-        if not len(xs): xs = np.array([S.HUB_R + 1.0])
+            e, f = S.frame_of(u[k]); d = S.disc(self.hr[k]); g[f"hub{k + 1}"] = (mem, c[k][None] + d[:, :1] * e + d[:, 1:] * f, u[k])
+        lE = float(P["lE"]); r3 = self.hr[2]; xs = np.arange(r3 + 1.0, lE - BOSS_R + 0.5, S.SPACING)
+        if not len(xs): xs = np.array([r3 + 1.0])
         ys = np.arange(-S.W_LINK / 2 + 1, S.W_LINK / 2, S.SPACING)
         X, Y = np.meshgrid(xs, ys, indexing="ij"); self._Ex = X.ravel()
         g["E"] = (3, c[2][None] + X.ravel()[:, None] * eE + Y.ravel()[:, None] * nE, sn)
@@ -184,7 +221,7 @@ class Model(S.VModel):
         self.Hneed, self.Lneed = H, {}; self._HE = res["E"]
         self.greedy_drop(links=False); keep1 = ~self.drop
         f1 = H["hub1"][keep1].max(); f2 = H["hub2"][keep1].max(); tr = H["stack"][keep1].max(); f3 = H["h3"][keep1].max()
-        geo = S.Geometry.__new__(S.Geometry); geo.D = D; geo.groups = []; geo.add_links(f1, f2, f3); self.geo = geo
+        geo = _Geo(D, self.hr); geo.add_links(f1, f2, f3); self.geo = geo
         self._tr_fit = tr
         items, idx = [], []
         for lk in geo.links:
@@ -203,9 +240,9 @@ class Model(S.VModel):
         x = self._Ex; xs = np.unique(np.round(x, 6)); k = math.tan(S.RAMP * D2R)
         need = np.array([hE[np.isclose(x, v)].max() for v in xs])
         for _ in range(4):
-            r = np.maximum(need, np.maximum(f3 - k * np.abs(xs - S.HUB_R), tr - k * np.abs(xs - (float(self.p["lE"]) - BOSS_R))))
+            r = np.maximum(need, np.maximum(f3 - k * np.abs(xs - self.hr[2]), tr - k * np.abs(xs - (float(self.p["lE"]) - BOSS_R))))
             r = np.max(r[None, :] - k * np.abs(xs[:, None] - xs[None, :]), axis=1)
-            r0 = r[0] - k * abs(xs[0] - S.HUB_R); r1 = r[-1] - k * abs(float(self.p["lE"]) - BOSS_R - xs[-1])
+            r0 = r[0] - k * abs(xs[0] - self.hr[2]); r1 = r[-1] - k * abs(float(self.p["lE"]) - BOSS_R - xs[-1])
             ch = False
             if r0 > f3 + 0.15: f3 = r0; ch = True
             if r1 > tr + 0.15: tr = r1; ch = True
@@ -249,9 +286,9 @@ class Model(S.VModel):
         D = self.D; P = D.p; u, c = D.u, D.c; F = self.f; tr = self.tr; tp = P["tp"]; out = []
         ang = np.linspace(0, 2 * np.pi, 32, endpoint=False)
         for k, mem in ((0, 0), (1, 1), (2, 3)):
-            e, f = S.frame_of(u[k]); ring = S.HUB_R * (np.cos(ang)[:, None] * e + np.sin(ang)[:, None] * f)
+            e, f = S.frame_of(u[k]); ring = self.hr[k] * (np.cos(ang)[:, None] * e + np.sin(ang)[:, None] * f)
             for z in np.linspace(F[k], F[k] + S.CROWN, 4): out.append((mem, c[k] + z * u[k] + ring))
-            dd = S.disc(S.HUB_R, 2.0); out.append((mem, c[k] + (F[k] + S.CROWN) * u[k] + dd[:, :1] * e + dd[:, 1:] * f))
+            dd = S.disc(self.hr[k], 2.0); out.append((mem, c[k] + (F[k] + S.CROWN) * u[k] + dd[:, :1] * e + dd[:, 1:] * f))
         for nm, (mem, pts) in self.link_pts.items():
             if len(pts): out.append((mem, pts + S.T_LINK * unit(pts)))
         sn = D.sn; out.append((3, self.rigid["E"][1] + S.T_LINK * sn))
@@ -277,9 +314,15 @@ class Model(S.VModel):
         self.strap = {nm: (mem, pts + (S.T_LINK / 2) * unit(pts)) for nm, (mem, pts) in self.link_pts.items()}
         ang = np.linspace(0, 2 * np.pi, 24, endpoint=False); self.cyl_surf = {}
         for nm, (mem, cen, ax) in self.cyl.items():
-            e, f = S.frame_of(ax); pts = [cen + z * ax + S.HUB_R * (np.cos(ang)[:, None] * e + np.sin(ang)[:, None] * f) for z in np.linspace(0, S.CROWN, 5)]
-            dd = S.disc(S.HUB_R, 4.0); pts.append(cen + S.CROWN * ax + dd[:, :1] * e + dd[:, 1:] * f); self.cyl_surf[nm] = (mem, np.concatenate(pts))
+            rr = self.cyl_r[nm]
+            e, f = S.frame_of(ax); pts = [cen + z * ax + rr * (np.cos(ang)[:, None] * e + np.sin(ang)[:, None] * f) for z in np.linspace(0, S.CROWN, 5)]
+            dd = S.disc(rr, 4.0); pts.append(cen + S.CROWN * ax + dd[:, :1] * e + dd[:, 1:] * f); self.cyl_surf[nm] = (mem, np.concatenate(pts))
         self.Emid = (3, self.rigid["E"][1] + (S.T_LINK / 2) * D.sn)          # E strap mid-surface (half thickness 1.5)
+
+    def sd_cyl(self, Pw, cen, ax, r=None):
+        """signed distance to a hub cylinder F .. F + CROWN of radius r (None: the largest hub of this design - the
+        conservative side for callers that do not say which hub, e.g. the verifier's boss check)"""
+        return self.sd_cylr(Pw, cen, ax, max(self.hr) if r is None else r, S.CROWN)
 
     @staticmethod
     def sd_cylr(Pw, cen, ax, r, h):
@@ -296,14 +339,14 @@ class Model(S.VModel):
         strap = {k: tf(m, X) for k, (m, X) in self.strap.items()}
         Em = tf(*self.Emid)
         bx = self._boxes_at_final(i)
-        def vcyl(X, nm, extra=0.0): return float(self.sd_cyl(X, *cyl[nm]).min()) - extra if len(X) else 1e9
+        def vcyl(X, nm, extra=0.0): return float(self.sd_cyl(X, *cyl[nm], r=self.cyl_r[nm]).min()) - extra if len(X) else 1e9
         def vbox(X, nm, extra=0.0): cen, R, half = bx[nm]; return float(self.sd_box(X, cen, R, half).min()) - extra if len(X) else 1e9
         c = {}
         c["L2-hub1"] = vcyl(strap["L2"], "hub1", h); c["hub3-hub1"] = vcyl(surf["hub3"], "hub1"); c["L1-hub3"] = vcyl(strap["L1"], "hub3", h)
         c["hub2-hub3"] = vcyl(surf["hub2"], "hub3"); c["hub1-hub2"] = self.hub12()
         cen2, ax2 = cyl["hub2"]
         def far(X, cc, ax, rr): w = X - cc; return np.linalg.norm(w - (w @ ax)[:, None] * ax, axis=1) > rr
-        A, Bq = strap["L1"][far(strap["L1"], cen2, ax2, S.HUB_R + 4)], strap["L2"][far(strap["L2"], cen2, ax2, S.HUB_R + 4)]
+        A, Bq = strap["L1"][far(strap["L1"], cen2, ax2, self.hr[1] + 4)], strap["L2"][far(strap["L2"], cen2, ax2, self.hr[1] + 4)]
         if len(A) and len(Bq): c["L1-L2"] = float(cKDTree(Bq).query(A)[0].min()) - 2 * h
         for nm in ("knee", "pad"):                                   # moving knee / arm pad vs every non-adjacent part
             c[f"{nm}-hub1"] = vbox(surf["hub1"], nm); c[f"{nm}-hub2"] = vbox(surf["hub2"], nm)
@@ -313,7 +356,7 @@ class Model(S.VModel):
         if len(strap["L1"]): c["E-L1"] = float(cKDTree(strap["L1"]).query(Em)[0].min()) - 2 * h
         adj = {}
         c3, ax3 = cyl["hub3"]
-        L2f = strap["L2"][far(strap["L2"], c3, ax3, S.HUB_R + 1)]
+        L2f = strap["L2"][far(strap["L2"], c3, ax3, self.hr[2] + 1)]
         if len(L2f): adj["E-L2"] = float(cKDTree(L2f).query(Em)[0].min()) - 2 * h          # adjacent at J3
         adj["knee-hub3"] = vbox(surf["hub3"], "knee")                                      # adjacent at pin a
         pa = tf(3, fr["A0"][None])[0]
@@ -332,10 +375,10 @@ class Model(S.VModel):
     def hub12(self):
         if not hasattr(self, "_h12"):
             D = self.D; u, c = D.u, D.c; C1 = c[0] + self.f[0] * u[0]; C2 = c[1] + self.f[1] * u[1]
-            e2, f2 = S.frame_of(u[1]); ang = np.linspace(0, 2 * np.pi, 72, endpoint=False); dd = S.disc(S.HUB_R, 1.0)
-            Pp = np.concatenate([C2 + z * u[1] + S.HUB_R * (np.cos(ang)[:, None] * e2 + np.sin(ang)[:, None] * f2) for z in np.linspace(0, S.CROWN, 13)]
+            r2 = self.hr[1]; e2, f2 = S.frame_of(u[1]); ang = np.linspace(0, 2 * np.pi, 72, endpoint=False); dd = S.disc(r2, 1.0)
+            Pp = np.concatenate([C2 + z * u[1] + r2 * (np.cos(ang)[:, None] * e2 + np.sin(ang)[:, None] * f2) for z in np.linspace(0, S.CROWN, 13)]
                                 + [C2 + z * u[1] + dd[:, :1] * e2 + dd[:, 1:] * f2 for z in (0.0, S.CROWN)])
-            self._h12 = float(self.sd_cyl(Pp, C1, u[0]).min())
+            self._h12 = float(self.sd_cyl(Pp, C1, u[0], r=self.hr[0]).min())
         return self._h12
 
 
@@ -418,6 +461,7 @@ def _report(B, params):
     k = M.K["ang"][M.kin_ok]
     r["knee"] = dict(ang=[round(float(k.min()), 1), round(float(k.max()), 1)] if len(k) else None, br=M.K["br"],
                      drift_span=M.drift_span, radial_span=M.radial_span, tr=round(M.tr, 1), stk=M.p["stk"])
+    r["hubs"] = list(M.hr)
     r["honest"] = bool(M.p.get("jam_contact")) and all(M.fix.values())
     return r, M
 

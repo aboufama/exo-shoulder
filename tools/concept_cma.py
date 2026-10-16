@@ -50,6 +50,7 @@ def eval_cfg(arg):
             p = dict(p, r_lay=float(round(fit)))
         keep = ("gap", "reach", "follow", "inband14", "inband10", "contact", "closure", "flips", "collide", "mass_g",
                 "honest", "audit", "inband_member", "sample_mm", "residual_deg", "min_margin", "rail_span_deg")
+        keep += tuple(getattr(_W["m"], "REPORT_KEYS", ()))                   # a model / objective may name extra report keys
         rep = {k: r.get(k) for k in keep}
         obj = r["gap"] + (0.0 if r.get("honest") else 100.0)
         if rlay and it and it[-1][0] is not None and it[-1][0] > it[-1][1] + 1.0: obj += 100.0   # optimistic layout
