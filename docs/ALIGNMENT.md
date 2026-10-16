@@ -363,7 +363,7 @@ roller-flank's bench wear. Their verifier numbers are on file and are used above
 
 Each proposal gives its measured effect on the rows that have the data. A row without the data is listed as such.
 
-**A1. Make the 2 mm near-touch gap the claim column, and add a dominance gate.**
+**A1. Make the 2 mm near-touch gap the claim column, and add a dominance gate.** ADOPTED IN PART by the user 2026-10-16 ~21:05 UTC ("Keep 1 mm, report 2 mm"): the score stays on the 1 mm contact line; every claim reports its 2 mm gap; the dominance gate (beat the lead plain AND at 2 mm) decides lead changes. The overhead proposal: the user chose "Leave the score as is".
 - **Proposal:** a design replaces the lead only if it beats it on the plain gap AND on the 2 mm near-touch gap. Searches
   keep the 1 mm objective but also report 2 mm.
 - **Effect** (2 mm gap; rows without a 2 mm reading are not ranked):

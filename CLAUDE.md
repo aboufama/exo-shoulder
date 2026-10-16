@@ -63,6 +63,10 @@ docs/EVOLUTION.md (and its snapshot to pipeline/evolution/) as part of the judge
   docs/ALIGNMENT.md; the loop runs it between Screen and Close, and on a timer); a design the ledger
   (docs/alignment/ledger.jsonl, `python3 tools/alignment_ledger.py get <id>`) marks 'gamed' cannot be called verified,
   a winner or a leader until the finding is resolved; the auditor's own claims get a skeptic.
+  User rulings on the auditor's first questions (2026-10-16 ~21:05 UTC): (1) contact stays metal < 1 mm ("Keep 1 mm,
+  report 2 mm"): every claim and verification ALSO reports the 2 mm near-touch gap, and a design replaces the lead only
+  if it beats it on the plain gap AND at 2 mm (docs/ALIGNMENT.md A1, dominance gate); (2) overhead: "Leave the score as
+  is" - no overhead condition or extra weight in the score or the 95 target (keep reporting overhead taken / 28).
 - Start from the rawest material available (`data/raw/README.md`); when the human model and real data disagree, the data
   wins and the model gets fixed.
 - Use the instruments of the field (OpenSim, MuJoCo/Drake, CalculiX, constrained parametric CAD) instead of ad-hoc
