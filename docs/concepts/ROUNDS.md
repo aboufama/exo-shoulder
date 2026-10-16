@@ -273,3 +273,106 @@ Lessons:
 - J1 seats off the back of the shoulder and the acromion top.
 - A radial slide that lets hub 2 change level with the state. It stands up by its travel plus block, which is against
   the 1 cm rule.
+
+## Round 6 results (2026-10-16 ~11:10-14:31 UTC; closed by the round-6 closer)
+
+Picks (round-6 judge, docs/concepts/round6_ideation.md): geneva-tail-knuckle-pinknee-3r (pick 1, with
+lobe-rocker-pushrod-knuckle-3r merged in as its fallback embodiment) and geneva-tail-knuckle-3r (pick 2, with the
+crest-basin seats of knuckle-crest-hub3-4r). Carried over: cam-unfold-4th (lens 1's arm-side variant) and
+j3-neck-over-3r (lens 3). Lens 2's candidates (alignment-free-knuckle-4r, alignment-free-swivel-4r,
+across-end-knuckle-4r) were rejected at ideation: each has a sensed K (4 active), and the J3 side refuses them (hub 2 /
+link 2 at 0.00-0.20 in band).
+
+All numbers below are frozen exact on Bench(110,360), at the 5-deg margin with O20 hubs only, fitted on Bench(60,160)
+(the round-3 protocol), and confirmed by an independent verifier.
+
+| design | fast Bench(60,160) | frozen exact (verified) | held out | active | complexity | status |
+|---|---|---|---|---|---|---|
+| **geneva-tail-knuckle-pinknee-3r** (rod embodiment) | 16.53 | **23.57** (score 91.43). Reach 0.731, follow 1.0, in-band14 0.844, contact 0.011, near-touch 25.21, overhead 8/28. | 28.12 | 3 (K driven by a lobe, never read) | 42.5 | **verified: round winner** |
+| cam-unfold-4th (C3 crown cam, two-sided lobe) | 22.02 | 26.70 (score 90.29). Reach 0.656, in-band14 0.889, contact 0.012, near-touch 28.40, overhead 8/28. | - | 3 (K = c(q2)) | 33.75 | verified, not a leader (ties H1 27.20) |
+| j3-neck-over-3r (variant A + inverted J3 stack, C6) | 22.87 | 28.46 (score 89.65). Reach 0.739, in-band14 0.835, contact 0.058, min metal 0.00 mm, overhead reach 0.18. | - | **4** (K sensed) | 13.5 | verified, not a contender |
+| geneva-tail-knuckle-3r (beside tail, no pin knee) | 39.36 (39.34 reproduced) | 53.32 (score 80.6, self) | 59.55 | 3 | 14.0 | DEAD (death audited: gate converged, no model bug) |
+
+Same-protocol references: H1 27.20 (24.48 on the polish protocol, held out 31.39 in the minarc harness); minarc BDp
+19.54 and pick1 18.40, both verified but 4 active (K sensed); the zero-complexity ceiling is 31.04.
+
+**Winner: geneva-tail-knuckle-pinknee-3r**, verified at 23.57 (score 91.43), 0 passive translations, complexity 42.5.
+
+- **Against the previous verified lead (24.48):** it beats it, by 0.91 across protocols. On the same protocol it beats
+  H1 by 3.63 (27.20) and held out by 3.27 (31.39). It is the new leader of the 3-active class.
+- **Against the 4-active knuckle:** the sensed minarc pick1 / BDp (18.40 / 19.54) is still 4-5 points ahead.
+- **What the verifier changed:** the claim was 23.37. The verifier found the horn and rod-end head inside K's +6 mm
+  spring cap and rod vs hub K unchecked; fixed, this costs +0.20. The full-grid continuity drops 0 poses.
+- **Open buildability items (not scored):**
+  - the lobe reaches ~10.9 mm radius, 0.9 mm past the O20 skirt;
+  - the pressure angle is 41.4 deg;
+  - rod-end play gives ~1.2 deg of K per 0.05 mm;
+  - the spring against gravity and the reflected J2 torque (3.18 tau_K) are not checked.
+
+Lessons (measured):
+
+1. **A determined K works: the fold relief is now 3 active.** Two sensor-free laws are verified at 3 active:
+   - a lobe in hub 2's O20 stack driving a rocker, pushrod and horn: 23.57;
+   - a two-sided crown cam K = c(q2): 26.70.
+
+   Each pays for it in complexity (42.5 / 33.75 vs H1 21.5). Neither matches the sensed stop law: on the same chain the
+   sensed K is 4-5 points better (pick1 18.40, BDp 19.54).
+2. **Swept-volume rule.** A follower rigid with link 2 sweeps a surface of revolution about u2 through J2's whole range,
+   and that sweep, not its pose at engagement, sets its height over the skin.
+   - The Geneva tail cost 10-42 points on pick 1 (best 37.00 frozen) and 9.3 points on pick 2.
+   - A lobe inside hub 2's own stack cost ~4.7.
+
+   Put coupling elements inside existing hub stacks, or on members that do not sweep a joint's range.
+3. **Fold levers belong on link 1 or at J2, never on link 2** (cam-unfold-4th K-atlas, 175 poses). A hub on link 2
+   moves with q1 x q2 and sweeps a 2-D skin patch:
+   - it is in band only 21-40 deg from J2 (0.75-0.77);
+   - toward J1 it clashes with hub 1;
+   - along link 2's line it has no leverage on a2.
+
+   The same O20 disc on link 1 is >= 0.92 in band over a wide arc.
+4. **A positive-drive cam allows a TWO-SIDED fold law**, which a spring knuckle cannot have. On cam-unfold-4th the
+   folded-end lobe took 18 fit poses and gave most of the +8.8 points over its same-seat controls (rigid K 30.81, no K
+   30.85).
+   - The winner has no folded-side lobe.
+   - 84 of its 112 lost frozen poses are fold.
+5. **Hub obliquity law.** A flat O20 hub on a GH ray is in band only if its axis meets the skin within ~25-30 deg of
+   the skin normal: the 20 mm disc spans 20 tan(theta) mm against the 12 mm band. Measured on hub 3: 0.64 / 0.69 / 0.82
+   in band at 39 / 30 / 16 deg.
+   - The J3 seats that fix this (wd 58-71) cost overhead: reach 0.36-0.39 -> 0.18-0.25.
+   - Without the pin knee, the J3 side and the overhead cannot both be bought by seat choice: j3-neck-over 28.46 at 4
+     active; geneva-tail-knuckle-3r with link 2 0.33 and the neck 0.23 in band.
+6. **O20-only closes the crest basin.** At the same crest seats hub 2 is 0.9975 in band at O15 and 0.03 at O20.
+   - The 2.5 mm larger disc radius over the crest ridge lifts the fitted level by 25-30 mm.
+   - Re-measure every O15-era basin at O20 before building on it.
+7. **Stack order is a free lever only with a free exit sector.**
+   - Neck over link 2 gains +2 to +5 frozen points when link 2 crosses the arm member's exit on < 2 % of poses.
+   - It loses 0.7 at ~5 %.
+   - Apply this to the gen-4 knuckle CAD.
+8. **Search loopholes and part pairs.**
+   - A slaved-spare objective that does not require the drive to engage settles on idle-drive rows: 16.10, a plain 3R
+     plus a spare hub with an unscored link 1b. Penalise stretched_kin = 0, flag any link with 0 samples, and bound
+     r_horn >= 2.5.
+   - The verifier caught a horn inside K's spring cap. Check every new part against every hub stack before claiming.
+9. **Pressure angles at O20 size.**
+   - A lobe inside O20 caps the gain kK at ~3-3.5.
+   - The crown cam at slope 1.5 runs at ~41 deg (23 deg with a 2:1 lever).
+   - A one-tooth Geneva entry (psi_c 4-8) reaches dK 56 within 45 deg.
+10. **Fast to frozen still loses 4.7-7 points** (22.02 -> 26.70, 16.53 -> 23.37, 22.87 -> 28.46): the 160-pose sample
+    effect. Overhead is 8 of 28 on every round-6 design; no lever this round opened the overhead end of the window.
+
+Next (round 7, verified best 23.57, score 91.4, so 95 is not reached and score stays the objective):
+
+1. **Two-sided law on the winner.** Add a folded-side lobe on the same hub-2 rim of the rod embodiment. This is lesson 4
+   applied on link 1, where lesson 3 puts K in band. It attacks the 84 fold losses.
+   - Target: frozen reach >= 0.80 at in-band >= 0.85 and contact <= 0.01, i.e. gap <= 16 (score 94.2).
+   - Lower the rod-end heads, whose 51 samples sit 0 % in band at 20-22 mm.
+   - Lift hub 3 from 0.59 in band.
+2. **Simplicity at the same law.** Drive K's horn directly from the hub-2 lobe, with K next to hub 2 and no rocker, rod
+   or rod ends, or use cam-unfold-4th's crown cam with a 2:1 lever on link 1.
+   - Price the result with tools/simplicity.py against 42.5.
+   - It only counts at a gap within 1 point of 23.57.
+3. **Overhead (8 of 28 everywhere).** Overhead needs th past both ends of the window. Open the window there by measuring
+   the two-sided lobe's overhead share first, before any seat search.
+4. **Lead's standing duties.** These are not for the round:
+   - the final polish, then the generation CAD and stills of the winner;
+   - EVOLUTION.md entries for the four round-6 designs (none yet).

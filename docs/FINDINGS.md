@@ -1516,3 +1516,62 @@ Next:
 * **Verdict: pick1 is buildable as the gen-4 CAD config** with the spring respec and K stop B built at 56.65 deg. The
   fitted levels stay. Disclosed: deeper contact on extreme envelope poses, already priced in the gap, and R1-aim
   0.497 vs 0.574 held out. Farm $0.27.
+
+## Round 6: a sensor-free knuckle is verified at 3 active (23.57, score 91.4), at twice H1's complexity (2026-10-16, discovery round 6, closer)
+
+Raw data:
+- rows: `docs/concepts/rows/{geneva-tail-knuckle-pinknee-3r,cam-unfold-4th,j3-neck-over-3r,geneva-tail-knuckle-3r}.json`;
+- verifier harnesses and outputs: `docs/concepts/verify/<id>.py`, `docs/concepts/verify/<id>*`;
+- the round table: `docs/concepts/ROUNDS.md` "Round 6 results".
+
+All numbers are frozen exact on Bench(110,360), at the 5-deg margin with O20 hubs only, fitted on Bench(60,160).
+
+**What was measured**
+
+* **geneva-tail-knuckle-pinknee-3r, rod embodiment: VERIFIED 23.57 (score 91.43), the round winner.** It is the pin knee
+  plus a knuckle K in link 1. A spiral lobe in hub 2's O20 stack drives a rocker on link 1b, an O3 pushrod with M3 rod
+  ends, and a horn on K's cap. K is slaved and never read.
+  * 3 active DOF, 0 passive translations, complexity 42.5.
+  * Reach 0.731, follow 1.0, in-band14 0.844, contact 0.011, overhead 8 of 28. Held out 28.12.
+  * On the same protocol H1 is 27.20 (held out 31.39), so the 3-active class moves by 3.6 points. The sensed knuckle
+    (pick1 18.40 / BDp 19.54, 4 active) stays 4-5 points ahead.
+  * The verifier moved the horn and rod-end head out of K's spring cap (+0.20). The full-grid continuity drops 0
+    poses.
+* **cam-unfold-4th: VERIFIED 26.70 (score 90.29), 3 active, complexity 33.75.** K sits on link 2 as a two-sided crown cam
+  with K = c(q2). Inverting the exact table gives one configuration per pose, so the verifier read back the cam law
+  with 0.00 deg of error. The design ties H1.
+* **j3-neck-over-3r: VERIFIED 28.46, but 4 active (K sensed).** Metal touches the skin (0.00 mm) and overhead reach is
+  0.18. Not a contender.
+* **geneva-tail-knuckle-3r: DEAD at 53.32 frozen** (39.34 fast, reproduced). It has the sensor-free law but no pin knee,
+  and its J3 side is out of band (link 2 0.33, neck 0.23).
+
+**What failed and why**
+
+* **The Geneva tail.** Rigid with link 2, it sweeps a cone about u2 across J2's whole range. One workspace pose needs
+  the tip 92 mm from GH, against hub K at 55-60 mm, so the tail is 0.0-0.25 in band.
+  * Cost: 10-42 points on pick 1, 9.3 on pick 2.
+  * **Rule: price a follower by its swept volume.** Put coupling elements inside existing hub stacks (the hub-2 lobe
+    cost ~4.7), or on members that do not sweep a joint's range.
+* **A hub on link 2.** It moves with q1 x q2 and sweeps a 2-D skin patch with 19-35 mm of height spread under it.
+  * It is in band only 21-40 deg from J2. Toward J1 it clashes with hub 1; along link 2's line it has no leverage on
+    a2.
+  * The same disc on link 1 is >= 0.92 in band. **Fold levers belong on link 1 or at J2.**
+* **The J3 side without the pin knee.** Hub obliquity law: a flat O20 hub is in band only if its axis meets the skin
+  within ~25-30 deg of the normal (hub 3: 0.64 / 0.69 / 0.82 at 39 / 30 / 16 deg).
+  * The seats that satisfy it (wd 58-71) cost overhead: 0.36-0.39 -> 0.18-0.25.
+  * Seat choice cannot buy both, so the pin knee stays on every competitive knuckle.
+* **The crest basin is an O15 artefact.** At the same seats hub 2 is 0.9975 in band at O15 and 0.03 at O20.
+* **Idle-drive search optima.** A slaved-spare CMA that did not require the drive to engage found 16.10: a plain 3R
+  with an unscored link 1b. Such objectives must penalise an idle drive, and a link with 0 samples is flagged.
+
+**New knowledge**
+
+* **A positive-drive cam gives a two-sided fold law** (a spring knuckle cannot). On cam-unfold-4th the folded-end lobe
+  took 18 fit poses and most of the +8.8 points over the same-seat controls (rigid K 30.81, no K 30.85).
+* The winner has no folded lobe, and 84 of its 112 lost poses are fold. Its folded-side lobe on the same hub-2 rim is
+  round 7's lead lever. Target: reach >= 0.80 at in-band >= 0.85 and contact <= 0.01, i.e. gap <= 16 (score 94.2).
+* **Pressure angles at O20 size:**
+  * a lobe inside O20 caps kK at ~3-3.5;
+  * a crown cam at slope 1.5 runs ~41 deg (23 deg with a 2:1 lever);
+  * a one-tooth Geneva entry (psi_c 4-8) reaches dK 56 within 45 deg.
+* **The fast-to-frozen loss persists at 4.7-7 points.** Overhead is 8 of 28 on every round-6 design.
