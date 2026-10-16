@@ -193,6 +193,11 @@ def build(B, F, p):
     tilt = math.degrees(math.acos(np.clip(float(_slot_frame(p)[0] @ K.bvec(p["az"], p["el"])), -1, 1)))
     half = math.degrees((p["slot_w"] / 2 + 2.0) / 70.0) + tilt
     l1.ramps.append(((np.abs(np.median(ang1, 0) - p["beta"]) <= half), "slot", p["slot_t"] + 1.0))
+    # the groove must not cut J1's bearing housing (O20, 10 mm): if its inner edge comes within HUB_R + 1 mm of J1's
+    # axis (measured at r 50 mm, the conservative side of the plate's real radius), the groove plate becomes a flange ON
+    # hub 1's crown (lifted to F1 + 12.25 + 0.5 over its whole extent)
+    inner_mm = (p["beta"] - tilt) * D2R * 50.0 - p["slot_w"] / 2
+    if inner_mm < K.HUB_R + 1.0: slot.ramps.append((np.ones(slot.D.shape[1], bool), "hub1", K.CROWN + 0.5))
     okr = ok
     info = dict(residual_deg=round(float(max(K.closure_residual(p2, u4, p3, p["a2"], p["a3"])[okr].max(),
                                           np.degrees(np.abs((pin * kn.n).sum(-1) - kn.cb))[okr].max())), 6) if okr.any() else None,
@@ -201,7 +206,7 @@ def build(B, F, p):
                 hold_min_taken=round(float(k["hold"][okr].min()), 2) if okr.any() else None,
                 sing_min_taken=round(float(k["sing"][okr].min()), 2) if okr.any() else None,
                 cut_noroot=round(float(np.mean(~k["has"])), 4), cut_cam=round(float(np.mean(k["has"] & ~k["ok"])), 4),
-                cut_slot=round(float(np.mean(k["ok"] & ~k["inslot"])), 4))
+                cut_slot=round(float(np.mean(k["ok"] & ~k["inslot"])), 4), groove_inner_mm=round(inner_mm, 1), groove_on_hub1=bool(inner_mm < K.HUB_R + 1.0))
     return K.Chain(members=hubs + [slot] + links, ok=ok, q=q, joints=dict(J1=u1, J2=p2, J3=p3, J4=u4, JP=pin), info=info, hubless=("JP",))
 
 
