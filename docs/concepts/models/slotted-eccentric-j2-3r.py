@@ -48,11 +48,12 @@ DW.PIN[3.5] = "roller stud: hardened O2 dowel + MR52ZZ (2 x 5 x 2.5) roller in a
 ID = "slotted-eccentric-j2-3r"
 NAME = "Eccentric J2 crank + slotted-lever cam: link 2's arc set by q2 (two-sided fold lever) on the zero-passive 3R, O20"
 D2R = math.pi / 180
+TH_NEED = (26.0, 141.0)        # deg: the J1-J3 angle the workspace needs at 5-95 % (docs/research/reach_attribution.md)
 R_NOM = 62.0                    # mm: nominal radius of hub 2 / knee / lever (mm <-> deg for the slot gate only)
 PARAMS = dict(az=97.7506, el=65.294, a1=38.0901, wd=90.0506, wa=-9.2038, sigma=-1, margin=5.0, width=12.0, t_link=3.0,
               q=0.97, rad1=10.0, rad2=10.0, rad3=10.0, end_extra=0.0,
               Amin=60.0, Amax=90.0, w=3.0, sl=1.0, b=25.0, c=72.0, sk=1, psi_lo=15.0,
-              fF=None, phiF=None, rpin=5.0, pin_t=6.5, t_lev=2.0, lock_min=50.0, g_min=0.2,
+              dG=None, gG=None, seg_mm=12.0, rpin=5.0, pin_t=6.5, t_lev=2.0, lock_min=50.0, g_min=0.2,
               a2=74.2679, lock=0, near=0, ov=1)
 ang, tangent, unit = DW.ang, DW.tangent, K.unit
 
@@ -108,87 +109,124 @@ def _seg_dist(P, A, B):
 
 
 _CACHE = {}
-GKEYS = ("a1", "sigma", "margin", "Amin", "Amax", "w", "sl", "b", "c", "sk", "psi_lo", "fF", "phiF", "rad2", "rpin", "lock",
-         "lock_min", "g_min", "a2")
+GKEYS = ("a1", "sigma", "margin", "Amin", "Amax", "w", "sl", "b", "c", "sk", "psi_lo", "dG", "gG", "rad2", "rpin", "lock",
+         "lock_min", "g_min", "a2", "seg_mm")
 
 
-def slot_design(p):
-    """valid th run, slot gate, roller seat F (grid-solved unless given) and the lever polyline in 2b's polar frame"""
-    key = tuple((k, None if p.get(k) is None else round(float(p[k]), 6)) for k in GKEYS)
-    if key in _CACHE: return _CACHE[key]
+def _turn(ax, v, deg):
+    c, si = math.cos(deg * D2R), math.sin(deg * D2R)
+    return v * c + np.cross(ax, v) * si + ax * (ax * v).sum(-1, keepdims=True) * (1 - c)
+
+
+def _lock(e, eta, ea, etaa, eb, etab, ths, dn):
+    """lock angle (deg) between the internal four-bar mode velocity of the roller and the slot tangent, and the normal
+    component of that velocity (deg / deg); polar coords (radius e, azimuth eta) of the roller in the slot body's frame"""
+    se = np.sin(e * D2R)
+    vi = np.stack([(ea - eb) / (2 * dn), se * (((etaa - etab + 180) % 360) - 180) / (2 * dn)], -1)
+    tl = np.stack([np.gradient(e, ths), se * np.gradient(np.unwrap(eta * D2R) / D2R, ths)], -1)
+    tln = tl / np.maximum(np.linalg.norm(tl, axis=-1, keepdims=True), 1e-9)
+    cr = np.abs(vi[:, 0] * tln[:, 1] - vi[:, 1] * tln[:, 0]); nv = np.linalg.norm(vi, axis=-1)
+    return np.degrees(np.arcsin(np.clip(cr / np.maximum(nv, 1e-9), 0, 1))), cr
+
+
+def _synthetic(p):
     th = np.arange(1.0, 179.0, 0.25); z = np.array([0.0, 0, 1])
     p1 = np.broadcast_to(z, (len(th), 3)); p3 = np.stack([np.sin(th * D2R), 0 * th, np.cos(th * D2R)], -1)
-    G = geom(p1, p3, p); ok = G["ok"]
+    return th, p1, p3, geom(p1, p3, p)
+
+
+def _run(ok):
     runs, cur = [], []
-    for i in range(len(th)):
+    for i in range(len(ok)):
         if ok[i]: cur.append(i)
         elif cur: runs.append(cur); cur = []
     if cur: runs.append(cur)
-    out = dict(ok=False, lo=0.0, hi=-1.0, gate=dict(why="no valid th run"))
-    if not runs: _CACHE[key] = out; return out
-    run = np.array(max(runs, key=len)); lo, hi = float(th[run[0]]), float(th[run[-1]])
-    out.update(lo=lo, hi=hi)
+    return np.array(max(runs, key=len)) if runs else None
+
+
+def gate_spec_orientation(p, dn=0.2):
+    """the SPEC's orientation (roller F fixed on link 1, slot in a lever on link 2b): the best worst-case lock angle over
+    a grid of roller seats (fF 10-40, phiF -180..180). Singular whenever F, K and J2 share a great circle, i.e. whenever
+    the crank sweeps through the seat's azimuth seen from J2 - unavoidable once q2 spans >= ~180 deg"""
+    th, p1, p3, G = _synthetic(p); run = _run(G["ok"])
+    if run is None: return dict(best_lock=None)
+    s = run[::2]; P1, P3, P2, KK, ths = p1[s], p3[s], G["p2"][s], G["K"][s], th[s]
+    p2a = _turn(P1, P2, dn); p2b = _turn(P1, P2, -dn); n = len(ths); bc = (np.full(n, float(p["b"])), np.full(n, float(p["c"])))
+    ka = closure_v(p2a, P3, *bc, p["sk"])[0]; kb = closure_v(p2b, P3, *bc, p["sk"])[0]; best = (-1, None)
+    for fF in np.arange(10.0, 41.0, 2.0):
+        for ph in np.arange(-180.0, 180.0, 7.5):
+            d, g = polar_K(KK, P3, seat_F(P1, P2, fF, ph)); da, ga = polar_K(ka, P3, seat_F(P1, p2a, fF, ph))
+            db, gb = polar_K(kb, P3, seat_F(P1, p2b, fF, ph)); lk, _ = _lock(d, g, da, ga, db, gb, ths, dn)
+            if lk.min() > best[0]: best = (float(lk.min()), (float(fF), float(ph)))
+    q2 = K.axis_angle(P2, P1, KK)
+    return dict(best_lock=round(best[0], 2), seat=best[1], q2_span=round(float(np.ptp(np.unwrap(q2 * D2R) / D2R)), 1), n_seats=16 * 48)
+
+
+def slot_design(p):
+    """INVERTED slot (the spec's orientation is singular, see gate_spec_orientation): the roller G is fixed in link 2b
+    (polar dG, gG about K from the K -> J3 arc), the slot is a track fixed to link 1 around hub 2 (the curve G traces in
+    link 1's polar frame about J2: radius e, azimuth eta from the J2 -> J1 arc). Gate + roller seat (grid-solved unless
+    dG / gG given) + the track polyline (link 1's frame)."""
+    key = tuple((k, None if p.get(k) is None else round(float(p[k]), 6)) for k in GKEYS)
+    if key in _CACHE: return _CACHE[key]
+    th, p1, p3, G = _synthetic(p); run = _run(G["ok"])
+    out = dict(ok=False, lo=0.0, hi=-1.0, passed=False, gate=dict(why="no valid th run"))
+    if run is None: _CACHE[key] = out; return out
+    lo, hi = float(th[run[0]]), float(th[run[-1]]); out.update(lo=lo, hi=hi, ok=True)
     if p.get("lock"):
-        out.update(ok=True, gate=dict(lock=True)); _CACHE[key] = out; return out
-    s = run[::2]; P1, P3, P2, KK = p1[s], p3[s], G["p2"][s], G["K"][s]; ths = th[s]
-    q2 = K.axis_angle(P2, P1, KK); dq2 = np.diff(np.unwrap(q2 * D2R) / D2R)
+        out.update(passed=True, gate=dict(lock=True)); _CACHE[key] = out; return out
+    s = run; P1, P3, P2, KK, ths = p1[s], p3[s], G["p2"][s], G["K"][s], th[s]; n = len(ths)
+    q2 = np.unwrap(K.axis_angle(P2, P1, KK) * D2R) / D2R; dq2 = np.diff(q2)
     q2mono = bool(np.all(dq2 > 1e-3) or np.all(dq2 < -1e-3))
-    # internal four-bar mode at fixed th: p2 turned about p1 by +-dn, K re-closed with fixed (b, c)
-    dn = 0.2
-    def turned(sgn):
-        ax = P1; v = P2; c, si = math.cos(sgn * dn * D2R), math.sin(sgn * dn * D2R)
-        p2t = v * c + np.cross(ax, v) * si + ax * (ax * v).sum(-1, keepdims=True) * (1 - c)
-        kt, okt = closure_v(p2t, P3, np.full(len(ths), float(p["b"])), np.full(len(ths), float(p["c"])), p["sk"])
-        return p2t, kt
-    p2a, ka = turned(+1); p2b, kb = turned(-1)
-    rmm = lambda mm: mm / R_NOM / D2R                        # mm -> deg at R_NOM
-    fF_min = rmm(p["rad2"] + 3.5 + 1.0); d_req = rmm(p["rpin"] + 2.5 + 1.0)
-    if p.get("fF") is not None:
-        cands = [(float(p["fF"]), float(p["phiF"]))]
-    else:
-        cands = [(f, ph) for f in np.arange(math.ceil(fF_min), 40.0, 2.0) for ph in np.arange(-90.0, 90.1, 7.5)]
-    best = None; stats = dict(n=len(cands), mono=0, dmin=0, lock=0, lever=0)
-    for fF, phF in cands:
-        F0 = seat_F(P1, P2, fF, phF); d, g = polar_K(KK, P3, F0)
-        dd = np.diff(d)
-        if not (np.all(dd > 1e-3) or np.all(dd < -1e-3)): continue
-        stats["mono"] += 1
-        if d.min() < d_req or fF < fF_min - 1e-9: continue
-        stats["dmin"] += 1
-        da, ga = polar_K(ka, P3, seat_F(P1, p2a, fF, phF)); db, gb = polar_K(kb, P3, seat_F(P1, p2b, fF, phF))
-        sd = np.sin(d * D2R)
-        vi = np.stack([(da - db) / (2 * dn), sd * (((ga - gb + 180) % 360) - 180) / (2 * dn)], -1)       # deg / deg internal
-        tl = np.stack([np.gradient(d, ths), sd * np.gradient(np.unwrap(g * D2R) / D2R, ths)], -1)        # slot tangent
-        tln = tl / np.maximum(np.linalg.norm(tl, axis=-1, keepdims=True), 1e-9)
-        cr = np.abs(vi[:, 0] * tln[:, 1] - vi[:, 1] * tln[:, 0]); nv = np.linalg.norm(vi, axis=-1)
-        lockang = np.degrees(np.arcsin(np.clip(cr / np.maximum(nv, 1e-9), 0, 1)))
-        if lockang.min() < p["lock_min"] or cr.min() < p["g_min"]: continue
+    dn = 0.05; p2a = _turn(P1, P2, dn); p2b = _turn(P1, P2, -dn); bc = (np.full(n, float(p["b"])), np.full(n, float(p["c"])))
+    ka = closure_v(p2a, P3, *bc, p["sk"])[0]; kb = closure_v(p2b, P3, *bc, p["sk"])[0]
+    rmm = lambda mm: mm / R_NOM / D2R
+    e_min = rmm(p["rad2"] + 1.0 + 3.25); dG_min = rmm(p["rpin"] + 3.5 + 1.0)
+    if p.get("dG") is not None: cands = [(float(p["dG"]), float(p["gG"]))]
+    else: cands = [(dg, gg) for dg in np.arange(math.ceil(dG_min), 34.0, 2.0) for gg in np.arange(-180.0, 180.0, 7.5)]
+    stats = dict(n=len(cands), e_min=0, lock=0, self=0); best = None
+    pol = lambda P2_, P1_, X: (ang(P2_, X), K.axis_angle(P2_, P1_, X))
+    need = (ths >= TH_NEED[0]) & (ths <= TH_NEED[1])
+    for dG, gG in cands:
+        Gw = from_polar(KK, P3, np.full(n, dG), np.full(n, gG)); e, eta = pol(P2, P1, Gw)
+        ea, etaa = pol(p2a, P1, from_polar(ka, P3, np.full(n, dG), np.full(n, gG)))
+        eb, etab = pol(p2b, P1, from_polar(kb, P3, np.full(n, dG), np.full(n, gG)))
+        lk, cr = _lock(e, eta, ea, etaa, eb, etab, ths, dn)
+        al = ang(tangent(KK, P2), tangent(KK, Gw)); al = np.minimum(al, 180 - al)     # G-K-J2 alignment = singular
+        good = (lk >= p["lock_min"]) & (cr >= p["g_min"]) & (al >= 10.0) & (e >= e_min)
+        sub = _run(good)                                       # the track ends where the lock is lost: a hard stop
+        if sub is None or len(sub) < 20: continue
         stats["lock"] += 1
-        # lever polyline in 2b's polar frame: K -> slot start (- ext) -> mid -> slot end (+ ext)
-        ext = rmm(2.5 + 1.95); o = np.argsort(d); ds, gs = d[o], np.unwrap(g[o] * D2R) / D2R
-        nodes_d = np.array([0.0, max(0.0, ds[0] - ext), 0.5 * (ds[0] + ds[-1]), ds[-1] + ext])
-        nodes_g = np.array([gs[0], gs[0], np.interp(nodes_d[2], ds, gs), gs[-1]])
-        XY = _xy(nodes_d, nodes_g); S = _xy(ds, gs)
-        dev = np.min(np.stack([_seg_dist(S, XY[i], XY[i + 1]) for i in range(1, 3)], 0), 0).max()
-        width = max(6.5, 2.6 + 2 * 1.95 + 2 * dev)
-        # lever clearance from hub 2 over the run
-        Lw = np.stack([from_polar(KK, P3, np.full(len(ths), nd), np.full(len(ths), ng)) for nd, ng in
-                       zip(np.linspace(nodes_d[1], nodes_d[3], 12), np.interp(np.linspace(nodes_d[1], nodes_d[3], 12), nodes_d[1:], nodes_g[1:]))], 1)
-        clear = float((ang(P2[:, None, :], Lw).min()) * D2R * R_NOM - width / 2)
-        if clear < p["rad2"] + 1.0: continue
-        stats["lever"] += 1
-        score = float(lockang.min()) - 5 * max(0.0, width - 8.0) + 0.2 * min(clear - p["rad2"] - 1.0, 10.0)
+        cov = float((need[sub]).sum()) / max(1, need.sum())
+        e2, et2 = e[sub], np.unwrap(eta[sub] * D2R) / D2R; S = _xy(e2, et2)        # slot centreline (mm, planar about J2)
+        L = np.concatenate([[0], np.cumsum(np.linalg.norm(np.diff(S, axis=0), axis=-1))])
+        far = np.abs(L[:, None] - L[None, :]) > 3 * 6.5
+        dd = np.linalg.norm(S[:, None] - S[None, :], axis=-1)
+        if (dd[far] < 6.5 + 1.0).any(): continue                          # the track would overlap itself
+        stats["self"] += 1
+        nseg = int(min(10, max(2, math.ceil(L[-1] / float(p.get("seg_mm", 12.0))))))
+        ext = 2.5 + 1.95
+        Ln = np.linspace(-ext, L[-1] + ext, nseg + 1)
+        ne = np.interp(np.clip(Ln, 0, L[-1]), L, e2); nh = np.interp(np.clip(Ln, 0, L[-1]), L, et2)
+        XY = _xy(ne, nh); dev = np.min(np.stack([_seg_dist(S, XY[i], XY[i + 1]) for i in range(nseg)], 0), 0).max()
+        width = max(6.5, 6.5 + 2 * dev)
+        score = cov - 0.01 * max(0.0, width - 7.5) - 0.0005 * L[-1]
         if best is None or score > best[0]:
-            best = (score, fF, phF, dict(nodes_d=nodes_d.tolist(), nodes_g=nodes_g.tolist(), width=round(width, 2), dev_mm=round(float(dev), 2),
-                                         lock_min=round(float(lockang.min()), 1), g_min=round(float(cr.min()), 3), d=[round(float(ds[0]), 1), round(float(ds[-1]), 1)],
-                                         lever_clear_hub2=round(clear, 1), slot_len_mm=round(float(np.linalg.norm(np.diff(S, axis=0), axis=-1).sum()), 1)))
-    gate = dict(q2_monotone=q2mono, stats=stats, q2_range=[round(float(q2.min()), 1), round(float(q2.max()), 1)])
+            ispoke = int(np.argmin(np.abs(((nh + 180) % 360) - 180)))
+            best = (score, dG, gG, dict(nodes_e=ne.tolist(), nodes_eta=nh.tolist(), width=round(width, 2), dev_mm=round(float(dev), 2),
+                                        lock_min=round(float(lk[sub].min()), 1), g_min=round(float(cr[sub].min()), 3),
+                                        lock_full_run=round(float(lk.min()), 1), e=[round(float(e2.min()), 1), round(float(e2.max()), 1)],
+                                        slot_len_mm=round(float(L[-1]), 1), eta_span=round(float(np.ptp(et2)), 1), spoke_node=ispoke,
+                                        th_track=[float(ths[sub[0]]), float(ths[sub[-1]])], need_cover=round(cov, 3)))
+    if best is not None:
+        lo, hi = best[3]["th_track"]; out.update(lo=lo, hi=hi)
+    gate = dict(q2_monotone=q2mono, q2_span=round(float(np.ptp(q2)), 1), stats=stats)
     if best is not None and q2mono:
-        gate.update(best[3]); out.update(ok=True, fF=best[1], phiF=best[2], lever=best[3], gate=gate, passed=True)
+        gate.update(best[3]); out.update(passed=True, dG=best[1], gG=best[2], track=best[3], gate=gate)
     else:
-        gate["why"] = "q2 not monotone" if not q2mono else "no roller seat passes (mono / d_min / lock / lever)"
-        out.update(ok=True, passed=False, gate=gate, fF=float(p.get("fF") or 20.0), phiF=float(p.get("phiF") or 0.0),
-                   lever=dict(nodes_d=[0.0, 8.0, 20.0, 32.0], nodes_g=[0.0] * 4, width=6.5))
+        gate["why"] = "q2 not monotone" if not q2mono else "no roller seat passes (e_min / lock / self-overlap)"
+        out.update(gate=gate, dG=float(p.get("dG") or 15.0), gG=float(p.get("gG") or 90.0),
+                   track=dict(nodes_e=[20.0, 25.0, 30.0], nodes_eta=[-40.0, 0.0, 40.0], width=6.5, spoke_node=1))
     if len(_CACHE) > 64: _CACHE.clear()
     _CACHE[key] = out; return out
 
@@ -209,32 +247,34 @@ def build(B, F, p):
                       K.strap_member("L2a", p2, Kw, ("J2", "J3"), width=w, t=t, ramp_to=(("hub2", K.STACK), (None, 0)), over=[("link1", 1.0)], end_mm=end),
                       K.strap_member("L2b", Kw, p3, ("J2", "J3"), width=w, t=t, ramp_to=((None, 0), ("hub3", K.STACK)), over=[("link1", 1.0)], end_mm=end)]
         joints = dict(J1=p1, J2=p2, J3=p3); bodies = [("L2a", "L2b")]
-        flat = dict(hub1=(r1, K.CROWN), hub2=(r2, K.CROWN), hub3=(r3, K.CROWN)); Fw = None
+        flat = dict(hub1=(r1, K.CROWN), hub2=(r2, K.CROWN), hub3=(r3, K.CROWN))
     else:
-        rp, tp, tl = float(p["rpin"]), float(p["pin_t"]), float(p["t_lev"])
-        Fw = seat_F(p1, p2, sd["fF"], sd["phiF"]); lv = sd["lever"]; t_stud = t + 1.0 + tl + 1.0
-        dF, gF = polar_K(Kw, p3, Fw); q += [dF, gF]
-        N = [Kw] + [from_polar(Kw, p3, np.full(len(th), nd), np.full(len(th), ng)) for nd, ng in zip(lv["nodes_d"][1:], lv["nodes_g"][1:])]
-        on1 = abs(sd["phiF"]) < 1e-6 and sd["fF"] < p["a1"] - 8
-        pins = [K.hub_member("pinK", Kw, "K", t=tp, rad=rp, step=1.25), K.hub_member("studF", Fw, "F", t=t_stud, rad=3.5, step=1.0)]
-        l1 = [K.strap_member("link1", p1, p2, ("J1", "J2") + (("F",) if on1 else ()), width=w, t=t, ramp_to=(("hub1", K.STACK), ("hub2", 0.0)), end_mm=end)]
-        if not on1:
-            l1.append(K.strap_member("link1f", p2, Fw, ("J2", "F"), width=8.0, t=t, ramp_to=(("hub2", 0.0), ("studF", 0.0)), end_mm=end))
-        under1 = [(m.name, 1.0) for m in l1]
+        rp, tp, tt = float(p["rpin"]), float(p["pin_t"]), float(p["t_lev"])
+        n = len(th); Gw = from_polar(Kw, p3, np.full(n, sd["dG"]), np.full(n, sd["gG"]))
+        eG, etaG = ang(p2, Gw), K.axis_angle(p2, p1, Gw); q += [eG, etaG]
+        tr = sd["track"]; e1 = tangent(p2, p1); n1 = np.cross(p2, e1)
+        def L1(e, eta):                                        # a point fixed in link 1's polar frame about J2
+            e, eta = e * D2R, eta * D2R
+            return math.cos(e) * p2 + math.sin(e) * (math.cos(eta) * e1 + math.sin(eta) * n1)
+        N = [L1(a, b) for a, b in zip(tr["nodes_e"], tr["nodes_eta"])]
+        t_stud = tt + 1.0 + t
+        pins = [K.hub_member("pinK", Kw, "K", t=tp, rad=rp, step=1.25), K.hub_member("studG", Gw, "G", t=t_stud, rad=3.5, step=0.5)]
+        l1 = [K.strap_member("link1", p1, p2, ("J1", "J2"), width=w, t=t, ramp_to=(("hub1", K.STACK), ("hub2", 0.0)), end_mm=end),
+              K.strap_member("spoke", p2, N[tr["spoke_node"]], ("J2",), width=8.0, t=t, ramp_to=(("hub2", 0.0), (None, 0)), end_mm=end)]
+        trk = [K.strap_member(f"trk{i + 1}", N[i], N[i + 1], ("J2", "G"), width=tr["width"], t=tt, end_mm=6.0) for i in range(len(N) - 1)]
+        under1 = [(m.name, 1.0) for m in l1 + trk]
         crank = K.strap_member("crank", p2, Kw, ("J2", "K"), width=w, t=t, ramp_to=(("hub2", K.STACK), ("pinK", 0.0)), over=list(under1), end_mm=end)
         nk = [("neck", 1.0)] if int(p.get("ov", 1)) >= 2 else []
         l2b = K.strap_member("L2b", Kw, p3, ("K", "J3"), width=w, t=t, ramp_to=(("pinK", K.STACK), ("hub3", K.STACK)),
                              over=under1 + [("crank", 1.0)] + nk, end_mm=end)
-        lev = []
-        for i in range(3):
-            rmp = (("pinK", K.STACK) if i == 0 else (None, 0), ("studF", t + 1.0) if i == 2 else (None, 0))
-            lev.append(K.strap_member(f"lev{i + 1}", N[i], N[i + 1], ("K", "F"), width=lv["width"], t=tl, ramp_to=rmp,
-                                      over=under1 + [("crank", 1.0), ("hub2", 1.0)], end_mm=min(end, 6.0)))
-        mem = hubs + pins + l1 + [neck, crank, l2b] + lev
-        joints = dict(J1=p1, J2=p2, J3=p3, K=Kw, F=Fw)
-        b2 = ["L2b", "lev1", "lev2", "lev3"]
-        bodies = ([("link1", "link1f")] if not on1 else []) + [(b2[i], b2[j]) for i in range(4) for j in range(i + 1, 4)]
-        flat = dict(hub1=(r1, K.CROWN), hub2=(r2, K.CROWN), hub3=(r3, K.CROWN), pinK=(rp, tp), studF=(3.5, t_stud))
+        arm = K.strap_member("armG", Kw, Gw, ("K", "G"), width=8.0, t=t, ramp_to=(("pinK", K.STACK), ("studG", tt + 1.0)),
+                             over=under1 + [("crank", 1.0)], end_mm=min(end, 6.0))
+        mem = hubs + pins + l1 + trk + [neck, crank, l2b, arm]
+        joints = dict(J1=p1, J2=p2, J3=p3, K=Kw, G=Gw)
+        b1 = ["link1", "spoke"] + [m.name for m in trk]
+        b2 = ["L2b", "armG", "studG"]                     # the stud is pressed into link 2b's arm: one body
+        bodies = [(b1[i], b1[j]) for i in range(len(b1)) for j in range(i + 1, len(b1))] + [(b2[i], b2[j]) for i in range(3) for j in range(i + 1, 3)]
+        flat = dict(hub1=(r1, K.CROWN), hub2=(r2, K.CROWN), hub3=(r3, K.CROWN), pinK=(rp, tp), studG=(3.5, t_stud))
     okw = ok if ok.any() else np.ones(len(ok), bool)
     res = np.maximum(np.abs(ang(p2, p1) - p["a1"]), np.abs(ang(p2, p3) - G["a2e"]))
     res = np.maximum(res, np.maximum(np.abs(ang(Kw, p2) - p["b"]), np.abs(ang(Kw, p3) - p["c"])))
@@ -242,7 +282,7 @@ def build(B, F, p):
                 a2eff_range=[round(float(G["a2e"][okw].min()), 1), round(float(G["a2e"][okw].max()), 1)],
                 knee_range=[round(float(knee[okw].min()), 1), round(float(knee[okw].max()), 1)],
                 psi_min=round(float(np.minimum(G["psi"], 180 - G["psi"])[okw].min()), 1),
-                slot_gate=sd.get("gate"), slot_passed=bool(sd.get("passed", lock)), fF=sd.get("fF"), phiF=sd.get("phiF"),
+                slot_gate=sd.get("gate"), slot_passed=bool(sd.get("passed")), dG=sd.get("dG"), gG=sd.get("gG"),
                 bodies=bodies, flat=flat)
     return K.Chain(members=mem, ok=ok, q=np.stack(q, -1), joints=joints, info=info)
 
@@ -270,7 +310,7 @@ def evaluate(B, params):
                        audit=["no valid th run"], closure=0.0, slot_passed=False)
     r = K.evaluate(B, build, p); r = DW.declared_audit(r, B._kit_last["chain"], B._kit_last["pts"]); r = DW.extras(B, r, p)
     ch = B._kit_last["chain"]
-    for k in ("slot_gate", "slot_passed", "fF", "phiF", "window", "a2eff_range", "knee_range", "psi_min", "residual_deg"):
+    for k in ("slot_gate", "slot_passed", "dG", "gG", "window", "a2eff_range", "knee_range", "psi_min", "residual_deg"):
         r[k] = ch.info.get(k)
     if p.get("near"):
         r["gap_plain"] = r["gap"]; r["gap"] = r["gap_near1"]
@@ -318,7 +358,7 @@ if __name__ == "__main__":
     mode = sys.argv[1] if len(sys.argv) > 1 else "check"
     par = json.loads(sys.argv[2]) if len(sys.argv) > 2 and sys.argv[2].startswith("{") else {}
     if mode == "gate":
-        sd = slot_design(_clean(par)); print({k: v for k, v in sd.items()}); sys.exit()
+        sd = slot_design(_clean(par)); print({k: v for k, v in sd.items()}); print("spec orientation:", gate_spec_orientation(_clean(par))); sys.exit()
     if mode == "frozen":
         o = sys.argv[sys.argv.index("--out") + 1] if "--out" in sys.argv else "frozen.json"
         frozen(dict(PARAMS, **par), o); sys.exit()
@@ -327,6 +367,6 @@ if __name__ == "__main__":
     print({k: r.get(k) for k in ("gap", "reach", "follow", "inband14", "inband10", "contact", "honest", "audit", "closure", "flips", "collide")},
           f"{time.time() - t:.1f}s")
     print("per member", r.get("inband_member"), "mass", r.get("mass_g"), "res", r.get("residual_deg"), "declared", r.get("declared_hubs"))
-    print({k: r.get(k) for k in ("window", "a2eff_range", "knee_range", "psi_min", "fF", "phiF", "slot_gate", "post_lift", "gap_near1",
+    print({k: r.get(k) for k in ("window", "a2eff_range", "knee_range", "psi_min", "dG", "gG", "slot_gate", "post_lift", "gap_near1",
                                  "min_metal_skin", "overhead", "th_need", "stack_mismatch")})
     if mode == "redteam": DW.redteam(B, p, r)

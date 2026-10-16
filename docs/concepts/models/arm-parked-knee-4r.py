@@ -98,6 +98,10 @@ def build(B, F, p):
              K.strap_member("link3", p3, u4, ("J3", "J4"), width=w, t=t, ramp_to=(("hub3", K.STACK), ("hub4", K.STACK)),
                             over=[("link1", 1.0), ("neck", 1.0)], end_mm=end),
              K.neck_member(F, u4, joints=("J4",), ramps=(("hub4", 0.0), (None, 0)))]
+    if p.get("l3low"):   # variant: link 3 is J4's LOWER member, the arm-end plate + neck the upper one (neck rides over link 3)
+        links[2] = K.strap_member("link3", p3, u4, ("J3", "J4"), width=w, t=t, ramp_to=(("hub3", K.STACK), ("hub4", 0.0)),
+                                  over=[("link1", 1.0)], end_mm=end)
+        links[3] = K.neck_member(F, u4, joints=("J4",), ramps=(("hub4", K.STACK), (None, 0)))
     return K.Chain(members=hubs + links, ok=ok, q=q, joints=dict(J1=u1, J2=p2, J3=p3, J4=u4), info=info)
 
 
