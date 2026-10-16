@@ -57,3 +57,43 @@ sweep +-75 deg cones over the acromion/deltoid and must clear the highest skin u
 proxy optimised; 69-129 of 220 poses fail the rod limits (dead point / cap / ball tilt / U bend); the pivot boss
 overlaps hub 1 whenever beta < ~22 deg (boss O14 + hub O20 at r ~50 mm need >= 18 mm, 114 poses); the U base on the
 arm overlaps hub 3 whenever C is < ~20 deg from hub 3's seat (72-124 poses); the ball body hits hub 2 (69 poses).
+
+## Constrained sweep (40 configs, beta >= 22, C >= 20 deg from hub 3, gam 20-60) and the measured limiter
+
+Best **k22: gap 125.84** (score 54.2): reach 0.200, follow 0.600, in-band 0.785 / 0.431, contact 0.093; params beta 23,
+psi 220, gam 29.3, psiA 13.9, dl 22.9, psiC 199.9, q0r 13.7, hA 10.6, hC 12.2 (fitted rA 70.6, rC 75.8, L 66.2).
+Control in the same file: 26.34. Pose losses summed over the 40: rod 6631, parts 1467, fold 308, skin 228 - the
+fold is gone (the rocker does widen the window) but the rod takes its place.
+
+Rod-limit split on the four best (closed-form q0 over the 220 bench poses):
+
+| k | gap | dead point | cap 75 | ball > 30 | U > 40 | q0 range (deg) | U bend p50 / max | relaxed (cap 90, trans 15, ball 45, U 50) |
+|---|---|---|---|---|---|---|---|---|
+| 22 | 125.84 | 61 | 34 | 0 | 49 | -173..160 | 42.5 / 111 | rod-ok 98 vs 76 |
+| 39 | 165.20 | 171 | 4 | 0 | 23 | -178..145 | 37.7 / 145 | 61 vs 22 |
+| 34 | 167.39 | 97 | 52 | 0 | 5 | -180..173 | 32.3 / 144 | 75 vs 66 |
+| 48 | 199.67 | 104 | 67 | 0 | 18 | -176..174 | 53.3 / 91 | 41 vs 31 |
+
+**Why (new knowledge).** An arm-fixed stud near hub 3 is carried around the shoulder by the workspace (flexion ->
+abduction -> extension / behind the back): seen from any pivot axis through GH near the J1 seat, it circles almost the
+full azimuth, so a fixed-length rod from a rocker drives q0 through ~330 deg and crosses its dead centre; the rod's
+direction in the arm frame swings by 90-145 deg, beyond any miniature U-joint. Even relaxing every rod-end limit only
+recovers 10-40 poses. A rocker schedule that compresses the J1-J3 angle needs q0 to depend on the POLAR distance of
+J3 from J1 (near -> away, far -> toward), but the rod's q0 is dominated by C's AZIMUTH. The ideal free schedule is
+worth +28 (beta 20) to +43 (beta 40) fold-free poses; the realisable one with real parts is worth less than nothing.
+
+## Gate, verdict, next
+
+- Gate (48 rocker configs, in order): gain over the 2nd half 0.00, over the last third 0.00, top-5 spread 28.01
+  score points -> **not converged**; status stays `screened`. The 168-config farm sweep was lost to a client timeout
+  (its 24 jobs ran orphaned in a 92-113-job queue) and the 61-config resubmission had not started inside the time box.
+- **Verdict: the kill test fails** (needs reach > 0.75 at <= 2 in-band points; best rocker reach 0.20). Passive
+  translations 0; 6 passive rotations (pin, ball 3, U 2), all closure-set.
+- Frozen Bench(110,360) exact not run (the fast best is 100 points behind the control; nothing to claim).
+- Red team (from the measured pairs): the rod sweeps through the arm base (rod-brk 524 pose-hits), link 2 (156), the
+  knee (107); the ball body hits hub 2 (86); the rocker strap is adjacent-jammed with link 1 at J1 (44).
+- **Next, if anyone continues:** replace the azimuth-driven rod by a schedule on the polar angle - e.g. a rod whose
+  arm stud lies ON the J3 axis line (C on d3 at radius rC: its azimuth about c still moves, but its distance to c's
+  axis measures th directly), or drive the rocker from link 2 / J2 (q2 is a monotone function of th: a two-pin
+  coupler J2 -> rocker would schedule exactly the polar term). Both keep rotations only. The second is a planar
+  four-bar on the chain itself, no arm stud, and is the variant that removes the measured limiter.
