@@ -64,3 +64,18 @@ the posterior acromion edge and gained 8.6 gap points from one 38 deg turn.
 **One routed check** (link 1 t 0.5 d -10, link 2 t 0.7 d +10): gap 28.87 - link 1 0.925 -> 0.949, link 2 0.834 -> 0.768,
 as the map predicts.
 
+
+**Coarse farm sweep** (177 configurations, 23 farm jobs, $0.23; stages in the sweep log):
+
+| stage | n | best gap | median | what it says |
+|---|---|---|---|---|
+| k10 control (d = 0) | 1 | 26.34 | | parity on the farm |
+| link 1 routes (t 0.3 / 0.5 / 0.7, d -20 / -10 / +10 / +20) | 12 | **25.36** (t 0.7, d -20) | 45.13 | d -20 at any t: 25.36-25.56 (in-band 0.842 -> 0.850-0.852); d +-10 / +20 worse (link 1 meets hub 3 / link 2 or rises) |
+| link 2 routes (t 0.3-0.85, d -20..+20) | 24 | 31.77 (t 0.3, d -5) | 43.39 | every link-2 turn loses: parts collisions (knee / pad / hub 1) and the deltoid end of link 2 |
+| both links | 8 | 27.22 | 53.48 | link 2's loss dominates |
+| tangent arc r 20 instead of 10 | 4 | 26.03 | | a gentler corner keeps less of the gain |
+| seat jitter (+-4 deg, b3 +-0.06) + random routes | 64 | 33.84 | 56.19 | no seat near k10 is better with routes: the fold rises 47 -> 53-59 poses |
+| posterior J1 line (far-end scan lead: bvec(-24, 4), (-18, 20 / 24), (-30, 8); J3 wdir(80 / 100, -90); arcs 65 / 65, 65 / 75; b3 0 / 0.35; both branches) | 64 | 122.45 | 255.8 | dead: fold 6-20 poses only, but 46-69 skin poses of 220 (hub 2 / link 2 into the neck and chest), in-band 0.17-0.25, contact 0.23-0.29; 23 of 64 close no pose at all |
+
+Best coarse (k for `r1t 0.7, r1d -20`): gap **25.36** (score 90.78), reach 0.7063, follow 0.9667, in-band 14 0.8517,
+in-band 10 0.40, contact 0.0116 - the same 47 fold + 2 skin poses as k10; the whole gain is in band.
