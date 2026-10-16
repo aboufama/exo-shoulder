@@ -3442,5 +3442,24 @@
   }
  },
  "v_polish2_harness": "docs/concepts/verify/skin-normal-3r-pin-knee-polish2-stops.py (verifier-written J2 stops on MK.Design.ik from the solved chain angle, then docs/concepts/verify/skin-normal-3r-pin-knee-polish.py and docs/concepts/verify/skin-normal-3r-pin-knee-continuity.py imported unchanged); CB_EXACT=1 on every wear bench, CB_FOLD_MARGIN=5 (and 10), O20; farm exo-cpu1, Bench(110,360) fast cache 14f156cb6fc8 assembled per job (fast fit = the polish protocol), plus exact-fit re-runs; raw outputs docs/research/polish2_m5/verify/",
- "v_polish2_note": "Stops cost: the unchanged harness without the stops (window 5 both sides) gives C1 22.75 / 23.86, i.e. the stops cost 0.29. Held out C1 has 20 contact poses vs H1's 9 and 0 part-jam poses vs 29; C1 keeps the knee 3.31 deg from its stop on held-out overhead poses (H1 0.01) but 1.45 deg on held-out poses overall; overhead workspace reach held out 0.211 vs 0.254."
+ "v_polish2_note": "Stops cost: the unchanged harness without the stops (window 5 both sides) gives C1 22.75 / 23.86, i.e. the stops cost 0.29. Held out C1 has 20 contact poses vs H1's 9 and 0 part-jam poses vs 29; C1 keeps the knee 3.31 deg from its stop on held-out overhead poses (H1 0.01) but 1.45 deg on held-out poses overall; overhead workspace reach held out 0.211 vs 0.254.",
+ "v_polish2_held_exactfit": {
+  "C1": {
+   "gap": 28.61,
+   "gap_near1": 30.41,
+   "near1_poses": 8,
+   "min_metal_mm": 0.18,
+   "reach": 0.646,
+   "contact": 0.0239
+  },
+  "H1": {
+   "gap": 29.12,
+   "gap_near1": 31.85,
+   "near1_poses": 12,
+   "min_metal_mm": 0.04,
+   "source": "docs/research/verify_p5/ (P5 verifier, same harness, exact fit)"
+  },
+  "gain": 0.51,
+  "gain_near1": 1.44
+ }
 }

@@ -879,7 +879,7 @@ no code from `tools/knee_polish2.py` runs.
   fill `docs/concepts/verify/skin-normal-3r-pin-knee-continuity.py`, both imported unchanged.
 * A smoke test on 3000 poses: this stop code and the claim's wrapper refuse the same 8 poses.
 * Run settings: CB_EXACT=1 on every wear bench, CB_FOLD_MARGIN=5, O20 only.
-* C1 and H1 ran in the same farm batch: exo-cpu1, 13 jobs, about $0.13.
+* C1 and H1 ran in the same farm batch: exo-cpu1, 13 jobs, about $0.17.
 * The Bench(110,360) fast cache (14f156cb6fc8) was assembled in each job, so the fit is fast, as the polish protocol
   names. Exact-fit re-runs were added as a robustness check.
 * Raw outputs: `docs/research/polish2_m5/verify/`.
@@ -893,6 +893,7 @@ min metal.
 | same, shape fitted EXACT (robustness) | 25.03 / 26.14 / 2 / 0.20 mm | 23.39 / 24.50 / 2 / 0.06 mm | 1.64 / 1.64 |
 | same, harness unchanged (no stops: window 5 at both edges) | 24.48 / 25.59 | 22.75 / 23.86 | 1.73 / 1.73 (the stops cost C1 0.29) |
 | HELD-OUT: fit Bench(110,360) fast, worn exact on the 1154 poses outside both benches | 28.55 / 31.06 / 11 / 0.11 mm (score 89.62) | 28.22 / 30.02 / 8 / 0.03 mm (score 89.74); reach 0.646, contact 0.0239 | **0.33** / 1.04 |
+| HELD-OUT, shape fitted EXACT (robustness; H1 = the P5 verifier's run of the same harness, docs/research/verify_p5/) | 29.12 / 31.85 / 12 / 0.04 mm | 28.61 / 30.41 / 8 / 0.18 mm | **0.51** / 1.44 |
 | round-3 protocol: fit Bench(60,160) fast, worn exact | 27.20 / 31.75 / 8 / 0.09 mm | 24.57 / 25.69 / 2 / 0.66 mm | 2.63 / 6.06 (both benches inside C1's objective) |
 | margin 10, polish protocol | 26.45 / 26.45 (verified H1 numbers) | 26.42 / 27.57 / 2 / 0.13 mm; follow 0.9545, overhead clip follow 0.9 (H1 0.6) | 0.03 / **-1.12** |
 
@@ -922,7 +923,8 @@ Every number the claim gives reproduces to the digit:
 * *The gain does not travel.*
   * C1 beats H1 by >= 1 point only on poses the search saw: the polish bench at 1.44 (1.64 exact-fit), and the round-3
     benches, which are its validation term.
-  * Held out the plain gain is 0.33. The near-touch gain of 1.04 comes from 8 poses < 1 mm against 11.
+  * Held out the plain gain is 0.33 (0.51 with the shape fitted exact). The near-touch gain of 1.04 (1.44 exact-fit)
+    comes from 8 poses < 1 mm against 11.
   * Re-measured at margin 10, C1 is level with H1 plain (26.42 against 26.45) and 1.12 worse near-touch.
   * By the standard H1 itself was accepted on (>= 1 plain AND near-touch on every protocol), C1 fails on two
     protocols: held-out plain and margin 10.
