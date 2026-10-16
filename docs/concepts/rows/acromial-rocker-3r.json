@@ -15,12 +15,12 @@
  "inband10": 0.431,
  "contact": 0.0933,
  "gap": 125.84,
- "v_reach": null,
- "v_follow": null,
- "v_inband14": null,
- "v_inband10": null,
- "v_gap": null,
- "n_configs": 48,
+ "v_reach": 0.2,
+ "v_follow": 0.6,
+ "v_inband14": 0.7849,
+ "v_inband10": 0.431,
+ "v_gap": 125.84,
+ "n_configs": 64,
  "verdict": "kill test FAILS (needs reach > 0.75 at <= 2 pts in-band loss): best rocker 125.84 (reach 0.20, follow 0.60) vs the control's 26.34 in the same file; not converged (48 configs, top-5 spread 28 pts), so status stays screened, not dead",
  "limiter": "the rod cannot schedule the rocker: over the bench workspace the arm stud C circles the pivot axis, so the closed-form q0 spans -173..+160 deg (cap +-75), the rod passes its dead point in 61-171 of 220 poses and the U-joint would bend up to 91-145 deg (miniature cardan +-40); best config k22: rod limits take 144 of 220 poses (dead 61, cap 34, U 49). Parts: the rocker strap / ball sweep +-75 deg cones and fit at 54-87 mm over 45-55 mm skin; pivot boss vs hub 1 (beta < ~22) and arm base vs hub 3 (C < ~20 deg from its seat) interfere",
  "note": "Bench(60,160) fast, pin-knee VModel rules + rocker checks (transmission 25, cap 75, ball 30, U 40, q0 in 10 fps continuity, stud refit). Gate: gain over 2nd half 0.00, over last third 0.00, top-5 spread 28.01 score pts -> NOT converged (random + proxy picks, no CMA: farm queue 92-113 jobs, the 168-config farm sweep was lost to a client timeout and the 61-config resubmission had not started at the time box). Kinematic proxy with skin placement: the ideal rod schedule would recover +16 ws poses (reach <= 0.79) - the gain exists only for a free-radius, part-free rod. Frozen Bench(110,360) exact not run: the fast best is 100 pts behind the control. Passive translations 0.",
@@ -55,5 +55,6 @@
   "inband10": 0.4001,
   "contact": 0.0116,
   "note": "plain pin-knee leader k10 in the same file"
- }
+ },
+ "audit": "AUDIT 2026-10-16: death NOT refuted. k22 reproduced exactly (125.84) on Bench(60,160) fast. No modelling bug or convention error found (control rocker=0 = 26.34). 16 local perturbations of k22: best 122.28 (reach 0.19, follow 0.60); rod limits take 133-210 of 220 poses in every one. Upper bound: k22 with every rod limit removed (cap 180, transmission 5, ball 90, U 180) AND the rod-vs-U-base check dropped still scores 108.37 (reach 0.46, overhead reach 0.00), 82 gap behind the control in the same file. Gate over 64 rocker configs: gain 2nd half 1.29, last third 1.29, top-5 spread 3.22 -> formally not converged, so status stays screened, but the limit-free bound shows no tuning can reach the control. Measured reason: an arm-fixed rod stud circles the pivot axis, so q0 is azimuth-driven and the rod's dead point / cap / U bend kill 60-95 % of poses."
 }

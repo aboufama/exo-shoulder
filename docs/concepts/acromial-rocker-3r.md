@@ -106,3 +106,28 @@ beta 30 (139-141 for beta 25-30 over several pivot azimuths) vs the plain leader
 azimuth-dominated and captures none of it once real parts are added. So the lever is right and the transmission is
 wrong: the follow-up morphology is a rocker driven by a quantity that measures the J1-J3 angle - q2 itself (a two-pin
 coupler from link 1 / J2 to the rocker, rotations only) - not by an arm-fixed stud.
+
+## Audit (independent re-measure, 2026-10-16 ~03:15 UTC)
+
+Brief: try to refute the death (convergence gate, modelling bugs, conventions, missed parameter regions, over-strict
+checks). Result: **the death is not refuted.**
+
+- **Reproduction.** k22 re-run through the unmodified model on Bench(60,160) fast: gap 125.84, reach 0.200, follow
+  0.600, in-band 0.785 / 0.431, contact 0.093. That is exact. The losses are rod 144, skin 7, parts 1, fold 0. The
+  control (rocker=0) in the same file reproduces the pin-knee leader's 26.34, so the convention matches the leader /
+  tools/concept_baseline.py path.
+- **Many configs at 375.** This is not a bug. Zero poses are taken (e.g. k45: rod 132, parts 69, mostly rod vs the
+  U base plate). The rocker strap to A then fits at 126 mm because it sweeps a +-75 deg cone.
+- **Is a check too strict?** The rod-vs-U-base-plate check also tests the rod segment that physically sits inside the
+  U-joint yoke, so it is somewhat strict. Bound: k22 with that check removed AND every rod limit opened to
+  non-physical values (cap 180, transmission 5, ball 90, U 180) scores **108.37** (reach 0.46, follow 0.85, in-band
+  0.54, contact 0.19, overhead >= 140 reach 0.00). That is still 82 gap behind the control. Even a perfect fix of
+  every rod-end check cannot bring this transmission close to the plain chain.
+- **Gate / local CMA-like step.** 16 Gaussian perturbations of k22 (local, single process; appended to the sweep as
+  k49-64) gave a best of **122.28** (beta 22.7, psi 236.3, gam 27.3, psiA 13.4, dl 22.3, psiC 196.7, q0r 28.7, hA
+  11.6, hC 15.2). The rod limits take 133-210 of 220 poses in every config. Gate over the 64 rocker configs: gain over
+  the 2nd half 1.29, over the last third 1.29, top-5 spread 3.22. This is formally just short of converged, so the
+  status stays `screened`. The limit-free bound above is the stronger statement.
+- **One line:** an arm-fixed rod stud circles the pivot axis, so the rocker angle is azimuth-driven, and the rod's dead
+  point / cap / U bend remove 60-95 % of poses. The best physical config is 122 gap, against 26 for the same chain
+  without the rocker. The fold lever needs a polar (q2-driven) coupler, not an arm stud.
