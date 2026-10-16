@@ -6,7 +6,7 @@
  "active_dof": 3,
  "passive_dof": 1,
  "passive_translations": 0,
- "status": "screened",
+ "status": "verified",
  "t_ideated": null,
  "t_screened": "2026-10-16T12:56:35Z",
  "reach": 0.8,
@@ -16,11 +16,11 @@
  "contact": 0.0657,
  "gap": 22.87,
  "gap_near1": 26.26,
- "v_reach": null,
- "v_follow": null,
- "v_inband14": null,
- "v_inband10": null,
- "v_gap": null,
+ "v_reach": 0.7389,
+ "v_follow": 0.9636,
+ "v_inband14": 0.8347,
+ "v_inband10": 0.4716,
+ "v_gap": 28.46,
  "n_configs": 9355,
  "best_k": 6617,
  "best_params": {
@@ -271,7 +271,73 @@
  "complexity": 13.5,
  "verdict": "SCREENED, not a contender as a 3-active design: the inverted J3 stack is a real but conditional lever on the knuckle chain (+4.8 frozen exact points at C5's seats, +1.95 at D2's, -0.7 at variant A's LA1), and searched together with the J3 seat it lifts variant A from 41.14 to 28.46 frozen exact (score 89.65; fast plain 22.87 / near-touch 26.26) at complexity 13.5 - but it buys band with the overhead (overhead reach 0.18, overhead clip follow 0.6 frozen / 0.4 fast, min metal 0.0 mm, near-touch 35.44), K is sensed (4 active under the counting rule), and 28.46 does not beat H1 (27.20 on this protocol) or minarc BDp (19.06).",
  "limiter": "Hub-3 OBLIQUITY on the arm and the overhead acromion, not the stack order: a J3 axis through GH meets the arm skin 30-39 deg off its normal at the seats where the knuckle reaches (wd 46-70), so the 20 mm O20 disc spans 12-16 mm of height (hub 3 0.49-0.69 in band); seats at the deltoid crest (wd >= 75-90, obliquity 16 deg, hub 3 0.82) lose reach (0.70 median vs 0.77) and overhead poses push hub 3 / hub 2 up (C6 hub 3 F 81 set by elevation 165). Reach loss at C6 (fast, 160 ws): 22 fold (th 17 folded / 129-147 stretched, K's own span b1 + b2 - 5 = 69.2), 10 contact; overhead 0 of 12 ws, 2 of 17 named.",
- "note": "Lead note honoured: screened only as the J3 side of minarc variant A (variant A's own CMA runs elsewhere; not duplicated). Search: 289 LHS + 6 CMA streams (6526 tries) + 4 CMA streams (2540) on the farm, near-touch objective; C4 / D4 are lay-0 control streams. Convergence gate (score points: gain over 2nd half / last third / top-5 spread): round 2 per stream D1 0.00/0.00/0.31, D2 0.28/0.00/0.13, D3 0.00/0.00/0.09, D4 0.12/0.05/0.01 - converged; C6->D2 lineage as one history 0.84/0.53. Fast-to-frozen: D2's fast gain over C6 (23.96 vs 26.26 near) did not survive (30.49 vs 28.46 frozen) - the sample effect (lesson c). Continuity: C6 1140 of 1143 grid nodes connected even from the strict rest seeds (K on stop A); LA1 / C5 / D4 rest in the stretched state (0 strict seeds; static = connected only from any elevation-0 seed). Held-out clips never loaded.",
+ "note": "Lead note honoured: screened only as the J3 side of minarc variant A (variant A's own CMA runs elsewhere; not duplicated). Search: 289 LHS + 6 CMA streams (6526 tries) + 4 CMA streams (2540) on the farm, near-touch objective; C4 / D4 are lay-0 control streams. Convergence gate (score points: gain over 2nd half / last third / top-5 spread): round 2 per stream D1 0.00/0.00/0.31, D2 0.28/0.00/0.13, D3 0.00/0.00/0.09, D4 0.12/0.05/0.01 - converged; C6->D2 lineage as one history 0.84/0.53. Fast-to-frozen: D2's fast gain over C6 (23.96 vs 26.26 near) did not survive (30.49 vs 28.46 frozen) - the sample effect (lesson c). Continuity: C6 1140 of 1143 grid nodes connected even from the strict rest seeds (K on stop A); LA1 / C5 / D4 rest in the stretched state (0 strict seeds; static = connected only from any elevation-0 seed). Held-out clips never loaded. | VERIFIED 2026-10-16 (skeptic): C6 reproduces to the digit, v_gap 28.46 (score 89.65; reach 0.739, follow 0.964, ib14 0.835, ib10 0.472, contact 0.058; near-touch 35.44; min metal 0.00 mm; overhead reach 0.18, follow 0.6) vs CHAMPION 64.93 on the same bench and protocol (75.94 risley checks). K7 neck at its 14 mm section: 28.86. Independent audit of all 395 taken poses: link arcs exact, J1 / J3 fixed in their frames (1e-4 deg), J1-J3 margin >= 5.28, K within [a1, a1max] and on stop A in every free-state pose, q2 inside its physical stops, 13 clip frame steps > 25 deg all track the arm's own rotation (no branch flip; dense K2 passed). Not a contender: 4 ACTIVE (K sensed), behind H1 27.20 and minarc BDp 19.06; does not cross 90.",
  "doc": "docs/concepts/j3-neck-over-3r.md",
- "model_file": "docs/concepts/models/j3-neck-over-3r.py"
+ "model_file": "docs/concepts/models/j3-neck-over-3r.py",
+ "v_active_dof": 4,
+ "verification": {
+  "t": "2026-10-16T14:15:00Z",
+  "harness": "docs/concepts/verify/j3-neck-over-3r.py",
+  "protocol": "claim's frozen protocol (fit Bench(60,160) fast, freeze, wear Bench(110,360) CB_EXACT=1, K6 radial 1 mm, fold margin 5, continuity flood fill) + independent kinematic audit of every taken pose",
+  "claim_C6": {
+   "gap": 28.46,
+   "gap_near1": 35.44,
+   "reach": 0.7389,
+   "follow": 0.9636,
+   "inband14": 0.8347,
+   "inband10": 0.4716,
+   "contact": 0.0582,
+   "min_metal_mm": 0.0,
+   "overhead_reach": 0.1786,
+   "overhead_follow": 0.6,
+   "connected_gap": 28.46
+  },
+  "nw14_K7_neck": {
+   "gap": 28.86,
+   "gap_near1": 35.83,
+   "inband14": 0.8307
+  },
+  "audit": {
+   "n_taken": 395,
+   "n_taken_no_contact": 372,
+   "arc_err_deg": {
+    "b1": 0.0,
+    "b2": 0.0,
+    "a2": 0.0
+   },
+   "J1_drift_in_scapula_deg": 0.0001,
+   "J3_drift_in_humerus_deg": 0.0001,
+   "min_J1J3_margin_deg": 5.281,
+   "a1e_range": [
+    35.289,
+    64.536
+   ],
+   "a1max": 71.879,
+   "a1e_out_of_K_range": 0,
+   "free_state_K_off_stopA": 0,
+   "q2_stops_deg": [
+    -78.78,
+    177.326
+   ],
+   "q2_mid": -127.343,
+   "q2_window_wraps": false,
+   "q2_range_taken": [
+    -177.875,
+    179.345
+   ],
+   "q2_outside_stops": 0,
+   "states_taken": {
+    "free": 254,
+    "stretched": 141,
+    "folded": 0
+   },
+   "clip_max_joint_step_deg": 46.94,
+   "clip_flips_gt25": 13,
+   "audit_problems": null,
+   "neck_width": 13.4109
+  },
+  "champion_same_bench": 64.93,
+  "champion_note": "champion 3R through the minarc skeptic's frozen margin-5 protocol on Bench(110,360) exact (docs/concepts/verify/minarc-skeptic/champbig_frozen_m5.json); 75.94 on the risley-turret checks",
+  "active_dof_ruling": "4 ACTIVE under the user's DOF rule: in the stretched state (141 of 395 taken poses) J2 sits on its stop and K is off stop A, so q1/q2/q3 do not determine the arm and K must be position-measured. R5 cap (4) met; R5-aim and the 3-active brief failed. The row's active_dof 3 is kept as the agent's field; v_active_dof = 4."
+ }
 }

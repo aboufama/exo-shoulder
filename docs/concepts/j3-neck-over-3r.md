@@ -196,3 +196,49 @@ sector allows) and the two laws below.
 **Next:** none for this row as a standalone design. Hand the layering rule to the knuckle CAD (gen-4 BDp: check link 2
 vs member 3 order at hub 3 against the free sector) and to lens 1 (cam-stop-knuckle): if a determined K lands, re-run
 this J3-side search with lay 1 at the C6 / C5 seats as starts.
+
+## Verification (skeptic, 2026-10-16)
+
+Harness: `docs/concepts/verify/j3-neck-over-3r.py` (loads the model unchanged, runs its frozen protocol on the farm,
+then audits every taken pose of the wear from the built chain's joint axes alone). Results:
+`docs/concepts/verify/j3-neck-over-3r_claim_big_frozen.json`, `..._nw14_big_frozen.json`.
+
+**Verdict: VERIFIED as a number, not a contender, and 4 ACTIVE DOF.**
+
+| C6, frozen, Bench(110,360) exact | gap | near-touch | reach | follow | ib14 | ib10 | contact | min metal | overhead reach |
+|---|---|---|---|---|---|---|---|---|---|
+| claim | 28.46 | 35.44 | 0.739 | 0.964 | 0.835 | 0.472 | 0.058 | 0.00 mm | 0.18 |
+| re-measured (claim metal, neck 13.41 x 6) | **28.46** | 35.44 | 0.739 | 0.964 | 0.835 | 0.472 | 0.058 | 0.00 mm | 0.18 |
+| K7 neck at its 14 x 6 section | 28.86 | 35.83 | 0.739 | 0.964 | 0.831 | 0.470 | 0.058 | 0.00 mm | 0.18 |
+| champion 3R, same bench, frozen margin-5 protocol | 64.93 | | | | | | | | |
+
+Champion reference: `docs/concepts/verify/minarc-skeptic/champbig_frozen_m5.json`. It measures 75.94 on the
+risley-turret checks.
+
+What the independent audit checked (395 taken poses, 254 free / 141 stretched / 0 folded):
+- **Closure.** The link arcs b1 / b2 / a2 are exact, and J1 and J3 stay fixed in the scapula / humerus frames to 1e-4 deg.
+- **Fold margin.** The J1-J3 margin of the effective dyad is at least 5.28 deg, so the 5-deg rule holds.
+- **K.** The J1-J2 arc stays in [a1, a1max] = [35.29, 71.88] (it reaches 64.5 at most). K sits on stop A in every
+  free-state pose.
+- **J2 stop.** J2's own angle q2 stays inside its physical stops. The window is the arc from -78.8 to 177.3 deg that
+  contains the mid value -127.3; 0 poses fall outside it.
+- **Clip continuity.** 13 consecutive-frame steps exceed 25 deg on the sparse 110-frame bench. All of them track the
+  arm's own rotation between the frames: steps of 25-47 deg against arm rotations of 15-46 deg, with margins of 11 deg
+  or more. The kit's dense K2 (2-deg slerp) passed, so none of them is a branch flip.
+- **Continuity flood fill.** 1140 of 1143 grid nodes are connected, 0 taken poses are dropped, and connected = static.
+- **Honesty.** The kit honesty audit is clean.
+- **Parts and stack.** All four O20 hubs are present (hub K has its +6 mm spring cap). The neck rides on hub 3's cap
+  plate and is built over link 2 / link 1a / link 1b with K6 at 1 mm radial in the wear. The inverted stack adds no part.
+
+Issues found:
+1. **4 active DOF.** The row says active_dof 3, but its own verdict concedes the point. In the stretched state (141
+   of 395 taken poses) J2 sits on its stop and K is off stop A, so q1 / q2 / q3 do not fix the arm and K must be
+   position-measured. Under the user's DOF rule that makes it 4 ACTIVE. The R5 cap of 4 is met; R5-aim and the
+   3-active brief fail. The row now carries `v_active_dof: 4`.
+2. **The neck is narrower than K7.** At K7's 14 mm section the design costs 0.40 points (28.86). That is under one
+   point, so it is not material.
+3. **The wearer would feel it.** Metal touches skin (0.00 mm). The near-touch gap of 35.44 is the felt figure.
+   Overhead reach is 0.18, and overhead follow 0.6: the raise-overhead clip is lost at elevation 149-150.
+
+Not refuted: 28.46 beats the champion's 64.93 on the same bench by 36 points. It stays behind H1 (27.20, same
+protocol) and minarc BDp (19.06), and it does not cross score 90.

@@ -165,7 +165,7 @@
    "folded": 0
   }
  },
- "secs": 187.7,
+ "secs": 344.7,
  "variant": "claim",
  "independent_audit": {
   "n_taken": 395,
@@ -189,11 +189,13 @@
    -78.78,
    177.326
   ],
+  "q2_mid": -127.343,
+  "q2_window_wraps": false,
   "q2_range_taken": [
    -177.875,
    179.345
   ],
-  "q2_outside_stops": 254,
+  "q2_outside_stops": 0,
   "states_taken": {
    "free": 254,
    "stretched": 141,
@@ -201,8 +203,322 @@
   },
   "clip_max_joint_step_deg": 46.94,
   "clip_flips_gt25": 13,
+  "clip_big_steps": [
+   {
+    "clip": "Comb hair",
+    "i": [
+     38,
+     39
+    ],
+    "joint": "J2",
+    "step": 25.1,
+    "arm_rot_deg": 14.9,
+    "steps": [
+     18.3,
+     0.0,
+     25.1,
+     0.6
+    ],
+    "th": [
+     84.1,
+     71.6
+    ],
+    "margin": [
+     14.4,
+     26.9
+    ]
+   },
+   {
+    "clip": "Comb hair",
+    "i": [
+     40,
+     41
+    ],
+    "joint": "J3",
+    "step": 26.8,
+    "arm_rot_deg": 26.2,
+    "steps": [
+     6.5,
+     0.0,
+     5.3,
+     26.8
+    ],
+    "th": [
+     61.6,
+     58.5
+    ],
+    "margin": [
+     33.6,
+     30.6
+    ]
+   },
+   {
+    "clip": "Comb hair",
+    "i": [
+     54,
+     55
+    ],
+    "joint": "J3",
+    "step": 36.4,
+    "arm_rot_deg": 34.4,
+    "steps": [
+     10.1,
+     0.0,
+     17.3,
+     36.4
+    ],
+    "th": [
+     69.7,
+     59.9
+    ],
+    "margin": [
+     28.8,
+     32.0
+    ]
+   },
+   {
+    "clip": "Comb hair",
+    "i": [
+     55,
+     56
+    ],
+    "joint": "J3",
+    "step": 30.7,
+    "arm_rot_deg": 32.9,
+    "steps": [
+     6.1,
+     0.0,
+     10.0,
+     30.7
+    ],
+    "th": [
+     59.9,
+     65.6
+    ],
+    "margin": [
+     32.0,
+     32.9
+    ]
+   },
+   {
+    "clip": "Comb hair",
+    "i": [
+     56,
+     57
+    ],
+    "joint": "J2",
+    "step": 38.7,
+    "arm_rot_deg": 25.7,
+    "steps": [
+     24.6,
+     0.0,
+     38.7,
+     4.3
+    ],
+    "th": [
+     65.6,
+     85.3
+    ],
+    "margin": [
+     32.9,
+     13.2
+    ]
+   },
+   {
+    "clip": "Wash opposite shoulder",
+    "i": [
+     91,
+     92
+    ],
+    "joint": "J1",
+    "step": 46.9,
+    "arm_rot_deg": 46.3,
+    "steps": [
+     46.9,
+     0.0,
+     6.4,
+     14.1
+    ],
+    "th": [
+     79.3,
+     76.1
+    ],
+    "margin": [
+     19.2,
+     22.4
+    ]
+   },
+   {
+    "clip": "Reach a high shelf",
+    "i": [
+     60,
+     61
+    ],
+    "joint": "J3",
+    "step": 29.1,
+    "arm_rot_deg": 29.9,
+    "steps": [
+     4.9,
+     0.0,
+     0.6,
+     29.1
+    ],
+    "th": [
+     80.6,
+     80.9
+    ],
+    "margin": [
+     17.9,
+     17.6
+    ]
+   },
+   {
+    "clip": "Reach a high shelf",
+    "i": [
+     61,
+     62
+    ],
+    "joint": "J3",
+    "step": 25.3,
+    "arm_rot_deg": 22.5,
+    "steps": [
+     9.0,
+     0.0,
+     9.6,
+     25.3
+    ],
+    "th": [
+     80.9,
+     85.2
+    ],
+    "margin": [
+     17.6,
+     13.3
+    ]
+   },
+   {
+    "clip": "Reach a high shelf",
+    "i": [
+     70,
+     71
+    ],
+    "joint": "J3",
+    "step": 30.7,
+    "arm_rot_deg": 26.5,
+    "steps": [
+     11.4,
+     0.0,
+     13.4,
+     30.7
+    ],
+    "th": [
+     87.3,
+     81.4
+    ],
+    "margin": [
+     11.3,
+     17.1
+    ]
+   },
+   {
+    "clip": "Reach a high shelf",
+    "i": [
+     71,
+     72
+    ],
+    "joint": "J3",
+    "step": 28.2,
+    "arm_rot_deg": 27.7,
+    "steps": [
+     5.8,
+     0.0,
+     3.7,
+     28.2
+    ],
+    "th": [
+     81.4,
+     79.6
+    ],
+    "margin": [
+     17.1,
+     18.9
+    ]
+   },
+   {
+    "clip": "Raise overhead",
+    "i": [
+     1,
+     2
+    ],
+    "joint": "J2",
+    "step": 27.0,
+    "arm_rot_deg": 15.4,
+    "steps": [
+     23.4,
+     0.0,
+     27.0,
+     0.3
+    ],
+    "th": [
+     86.5,
+     73.6
+    ],
+    "margin": [
+     12.0,
+     24.9
+    ]
+   },
+   {
+    "clip": "Raise overhead",
+    "i": [
+     5,
+     6
+    ],
+    "joint": "J3",
+    "step": 26.9,
+    "arm_rot_deg": 18.9,
+    "steps": [
+     16.0,
+     0.0,
+     6.6,
+     26.9
+    ],
+    "th": [
+     42.5,
+     39.1
+    ],
+    "margin": [
+     14.6,
+     11.2
+    ]
+   },
+   {
+    "clip": "Raise overhead",
+    "i": [
+     13,
+     14
+    ],
+    "joint": "J3",
+    "step": 32.0,
+    "arm_rot_deg": 22.7,
+    "steps": [
+     24.7,
+     0.0,
+     13.5,
+     32.0
+    ],
+    "th": [
+     40.0,
+     47.3
+    ],
+    "margin": [
+     12.1,
+     19.4
+    ]
+   }
+  ],
   "audit_problems": null,
   "neck_width": 13.4109
  },
- "secs_total": 187.7
+ "secs_total": 344.8
 }
