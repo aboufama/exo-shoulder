@@ -1,0 +1,65 @@
+{
+ "tag": "rh155",
+ "r_h": 15.5,
+ "f2": 60.340912230713656,
+ "fK": 55.37541190381168,
+ "dR_to_u2_deg": 15.19,
+ "uK_to_u2_deg": 39.24,
+ "pivot_from_u2_axis_mm": 16.01,
+ "boss_underside_along_dR": 61.09,
+ "dK_lim_deg": 40.5,
+ "dK_taken_max_deg": 37.8,
+ "t_lim_deg": 24.95,
+ "q2_stopB_deg": -28.791,
+ "q2_onset_deg": -3.84,
+ "rod_len": 26.773,
+ "rssr": {
+  "closure_err_mm": 0.0,
+  "phi_end_deg": 35.05,
+  "ratio_dphi_ddK": [
+   0.778,
+   0.921
+  ],
+  "horn_arm_mm": [
+   9.51,
+   14.96
+  ],
+  "crank_arm_mm": [
+   12.24,
+   16.22
+  ],
+  "tilt_crank_deg": [
+   1.3,
+   9.9
+  ],
+  "tilt_horn_deg": [
+   14.1,
+   22.6
+  ],
+  "rod_sense": "push (compression) when K opens"
+ },
+ "kbrm02_clear_mm": {
+  "eyeH_hubK": 0.62,
+  "eyeT_hub2": -0.03,
+  "shankH_hubK": 4.4,
+  "rodmid_hubK": 7.05,
+  "rodmid_hub2": 8.13,
+  "eyeH_low_vs_horn_top": -0.58
+ },
+ "kbrm02_clear_note": "eye = O9 x 4 head (KBRM-02 d2 9, C1 4), shank O4.6; rod mid = O2 stud (+1 mm r); horn top = fK + hl + T_LINK; ball centre 3 mm over the lug top (model ZB)",
+ "follower_neck_level_d_mm": 18.41,
+ "follower_options": [
+  {
+   "pa_max": 19.1,
+   "rr": 2.5,
+   "part": "IKO CFS2.5 stud cam follower (O5 x 3)",
+   "a_s": 6.0,
+   "psi": 201.0,
+   "dwell_r": 10.19,
+   "nose_r": 13.09,
+   "drift": 0.59,
+   "rc_min": 8.67
+  }
+ ],
+ "follower_n_feasible": 1
+}
