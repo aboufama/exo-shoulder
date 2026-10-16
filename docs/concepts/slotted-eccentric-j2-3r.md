@@ -47,3 +47,66 @@ over the J1-J3 angle th, Amin 60 / Amax 90 / b 25 / c 72 / a1 38.09 / margin 5):
 - The track is long: 106 mm of slot, 152 deg around J2 at 25-45 deg (27-49 mm) from its axis, i.e. a crescent of
   link 1 plate around hub 2 that reaches the trapezius / neck skin.
 
+## Model (docs/concepts/models/slotted-eccentric-j2-3r.py)
+
+Kit model on tools/concept_kit.py with dwell-fourbar-knee-3r.py's checks imported unchanged (same-body K6, honest post
+heights, crowns + walls skin-checked, near-touch, overhead split, declared pins). O20 at J1 / J2 / J3 (user ruling),
+fold margin 5 (ruling; 10 reported for the control), J1 seats from the leader family (back of the shoulder / acromion).
+
+- Law: a2e(th) = soft clip of Ac + sl (th - Ac) into [Amin, Amax] (sl = 1 = the spec's clip(th)); J2 by the closure
+  (a1, a2e), K by the closure (b, c) on branch sk = +1 (sk = -1: q2 not monotone, window 27-63 - dead), knee
+  transmission psi in [15, 165].
+- Slot (inverted): roller G = MR52ZZ on an O2 dowel in an O7 boss pressed into an arm of link 2b (dG, gG about K);
+  track = a 2 mm slotted plate of link 1 around hub 2 (slot 2.6 between 1.95 mm walls), polyline along the slot (<= 10
+  segments), widened by its own deviation, ends extended by roller + wall; a spoke from hub 2 joins it to link 1. The
+  seat (dG, gG) is grid-solved per configuration (13 x 48 seats) to cover the most of th 26-141 with the lock >= 50 deg,
+  normal gain >= 0.2 deg / deg, no G-K-J2 alignment within 10 deg, no self-overlap; wL / emax trade track length and
+  radius (CMA-tuned). The track ENDS where the lock is lost: poses beyond are not taken.
+- Members: hub1-3 (O20), knee pin K (MR63ZZ pair, O10, 6.5 stack, post raised to the highest strap end), stud G (O7,
+  post = track 2 + 1 + arm 3), link 1, spoke, track segments, crank (over link 1 / spoke / track), link 2b and the arm
+  (over all of those), the K7 neck. Bodies: link 1 + spoke + track; 2b + arm + stud.
+- Control (lock = 1): the same seats, link 2 straight through K (the plain spherical 3R), same members and checks.
+- Mechanism record (docs/SIMPLICITY.md, re-weighted 2026-10-16): 3 active, 0 passive translations, 1 passive rotation
+  (K, slaved), 1 closed loop, 1 sliding (roller-in-track) pair, 4 moving bodies, 5 joints, 11 made + 5 catalogue parts
+  -> **complexity 11.0** (tools/simplicity.py).
+
+## Results (Bench(60,160) fast, O20, margin 5, slot lock >= 50 deg)
+
+| run | configs | best gap | score | reach | follow | in-band 14 | in-band 10 | contact |
+|---|---|---|---|---|---|---|---|---|
+| CONTROL plain 3R (link 2 straight), D seats, margin 5 | 1 | 47.25 | 82.8 | 0.600 | 0.817 | 0.881 | 0.475 | 0.020 |
+| CONTROL same, margin 10 | 1 | 45.01 | 83.6 | 0.588 | 0.850 | 0.883 | 0.545 | 0.020 |
+| default (spec law clip(60, 90), b 25 / c 72) | 1 | 182.32 | 33.7 | 0.088 | 0.050 | 0.845 | 0.682 | 0.056 |
+| coarse LHS (farm) | 228 | 87.17 (not honest: track samples > 140 mm) | | 0.763 | 0.917 | 0.248 | | 0.048 |
+| CMA A (D seats) / B / C (LHS bests) | 649 / 81 / 89 | 149.77 / 177.17 / 189.82 | | | | | | |
+| **CMA E (spec-law start, wL / emax free)** | 689 | **74.00** | **73.1** | 0.719 | 0.867 | 0.486 | 0.278 | 0.062 |
+
+Best (E gen 13, flat for 73 generations): az 95.18, el 60.96, a1 41.12, wd 86.24, wa -14.13, Amin 61.04, Amax 92.66,
+w 4.12, sl 0.973, b 22.09, c 75.07, q 0.963; seat solved dG 29, gG 7.5; track th 25-125.5 (need-cover 0.97), 116 mm,
+154 deg around J2 at 24-49 deg, width 8.2 mm, lock 50.7 deg min (33.2 over the full run), q2 span 223 deg.
+Red team on that config: min metal-skin 0.27 mm (gap 83.50 if metal < 1 mm counts as contact); overhead (elev >= 140)
+0/17 taken (all K6: neck vs link 2b - the knee is thrown over the head line, pin K's requirement 207-400 mm at elev 150);
+across-body 25/36, behind-the-back 17/19, rest 5/5 (in-band 0.44 at rest); reach loss over 160 ws poses: fold 18, K6 16,
+contact 11. Per part in band: hub 1 0.90, hub 2 0.21, hub 3 0.72, pin K 0.77, stud 0.31, link 1 0.65, crank 0.26,
+link 2b 0.05, arm 0.27, track 1-6 0.94-1.0, track 7-10 0.59 -> 0.02, neck 0.81. Kinematic reach of the law 0.89
+(th_need p5 24.6 / p95 130.4) - the window works, the bodies do not.
+
+Convergence gate (whole ordered history, 1730): best gained 4.79 score points over the second half, 0.00 over the last
+third, top-5 spread 7.77 -> **NOT converged**; status stays "screened", not "dead". Round 2 was in flight on the farm at
+report time: CMA F (from E, sigma 0.25), G (lock_min 35: what the spec's pressure-angle rule costs), H (locked-control
+CMA from E's seats: the plain chain at the same seats, same code), and E's frozen shape worn on Bench(110,360) exact
+(`CB_EXACT=1 ... frozen`). Outputs: .cache/se_cma/{cma_F,cma_G,cma_H,frozen_E}.json via tools/cloud_run.py batch.
+
+## Verdict and what it teaches beyond this morphology
+
+- A roller-in-slot cam between link 1 and link 2b cannot have the roller on link 1: the crank sweeps 200+ deg about J2
+  over any wide fold window, so the roller-crank alignment singularity is unavoidable. Inverted, it works kinematically
+  (lock >= 50 deg over th 25-125.5) - but **the internal mode the slot must lock is the fold mode itself**, so the cam's
+  pressure angle degrades exactly where the window is being extended. Any "slaved knee" (slot, four-bar, relay) has
+  this: its holding stiffness ~ sin(J2 interior angle).
+- The slot law delivers the kinematic window (reach ceiling 0.89), but the knee that realises a2e up to ~93 deg sits
+  off the arc between J2 and J3 and, overhead, lands where there is no skin within 220 mm of GH on its rays. The fold
+  lever must not move a pin off the J2-J3 great circle overhead: the same failure as the dwell four-bar (verified 37.66)
+  - only stronger, because the two-sided law bends the knee further.
+- Next (if anyone continues): put the knee on the J1 side (a two-state a1 relay, round-5 plan), where the bent member
+  stays over the scapula; or cap Amax at ~80 and let the law act only on the folded side (= the dwell, already measured).
