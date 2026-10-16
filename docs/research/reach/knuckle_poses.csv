@@ -1,0 +1,471 @@
+i,kind,clip,plane,elev,axial,th,taken,cause,dmin,smin,mu,groups
+0,clip,Raise overhead,30.0,3.0,-30.0,71.76,True,,4.89,0.4851,82.16,
+1,clip,Raise overhead,30.0,4.89,-30.38,70.3,True,,4.86,0.4841,79.89,
+2,clip,Raise overhead,30.0,21.35,-33.74,58.62,True,,4.97,0.4407,61.7,
+3,clip,Raise overhead,30.0,45.81,-38.74,49.29,True,,2.5,0.3613,46.53,
+4,clip,Raise overhead,30.0,76.5,-45.0,41.72,False,fold_folded,,0.2662,32.73,
+5,clip,Raise overhead,30.0,107.19,-51.26,39.77,False,fold_folded,,0.2354,28.68,
+6,clip,Raise overhead,30.0,137.61,-57.47,42.64,True,,1.87,0.2796,34.55,
+7,clip,Raise overhead,30.0,148.11,-59.62,44.37,True,,1.31,0.3032,37.83,overhead
+8,clip,Raise overhead,30.0,150.0,-60.0,44.71,True,,1.21,0.3077,38.46,overhead
+9,clip,Raise overhead,30.0,150.0,-60.0,44.71,True,,1.21,0.3077,38.46,overhead
+10,clip,Raise overhead,30.0,150.0,-60.0,44.71,True,,1.21,0.3077,38.46,overhead
+11,clip,Raise overhead,30.0,149.41,-59.88,44.6,True,,1.24,0.3063,38.26,overhead
+12,clip,Raise overhead,30.0,142.33,-58.43,43.38,True,,1.62,0.29,35.98,overhead
+13,clip,Raise overhead,30.0,124.51,-54.8,40.94,False,fold_folded,,0.2543,31.16,
+14,clip,Raise overhead,30.0,87.06,-47.15,40.4,False,fold_folded,,0.2458,30.04,
+15,clip,Raise overhead,30.0,55.63,-40.74,46.3,True,,2.02,0.3275,41.33,
+16,clip,Raise overhead,30.0,28.49,-35.2,55.65,True,,4.71,0.4196,56.98,
+17,clip,Raise overhead,30.0,10.67,-31.57,65.91,True,,4.8,0.4753,73.08,
+18,clip,Raise overhead,30.0,3.08,-30.02,71.7,True,,4.89,0.4851,82.07,
+19,clip,Drink from a cup,40.11,4.09,-40.04,71.37,True,,4.88,0.4849,81.56,
+20,clip,Drink from a cup,45.18,8.19,-42.05,68.62,True,,4.82,0.4818,77.28,
+21,clip,Drink from a cup,59.2,19.55,-47.6,62.84,True,,4.66,0.4637,68.31,
+22,clip,Drink from a cup,81.0,37.21,-56.24,65.51,True,,4.51,0.474,72.46,
+23,clip,Drink from a cup,89.2,43.85,-59.48,68.51,True,,4.52,0.4816,77.11,
+24,clip,Drink from a cup,90.08,44.89,-59.61,68.8,True,,4.52,0.4821,77.55,
+25,clip,Drink from a cup,92.5,56.6,-54.0,66.51,True,,4.35,0.477,74.0,
+26,clip,Drink from a cup,95.0,68.7,-48.2,63.18,True,,4.14,0.4652,68.83,
+27,clip,Drink from a cup,95.0,68.7,-48.2,63.18,True,,4.14,0.4652,68.83,
+28,clip,Drink from a cup,95.0,68.7,-48.2,63.18,True,,4.14,0.4652,68.83,
+29,clip,Drink from a cup,95.0,68.7,-48.2,63.18,True,,4.14,0.4652,68.83,
+30,clip,Drink from a cup,94.94,68.42,-48.33,63.26,True,,4.15,0.4656,68.97,
+31,clip,Drink from a cup,93.02,59.1,-52.8,65.89,True,,4.31,0.4752,73.05,
+32,clip,Drink from a cup,90.38,46.35,-58.91,68.57,True,,4.51,0.4817,77.2,
+33,clip,Drink from a cup,89.84,44.37,-59.74,68.78,True,,4.53,0.4821,77.53,
+34,clip,Drink from a cup,77.68,34.52,-54.92,64.59,True,,4.52,0.4708,71.03,
+35,clip,Drink from a cup,58.39,18.9,-47.28,63.1,True,,4.67,0.4648,68.71,
+36,clip,Drink from a cup,43.47,6.81,-41.38,69.51,True,,4.84,0.4832,78.66,
+37,clip,Comb hair,30.0,4.0,-30.0,70.96,True,,4.87,0.4847,80.92,
+38,clip,Comb hair,30.98,7.71,-31.02,68.08,True,,4.82,0.4807,76.44,
+39,clip,Comb hair,35.81,25.95,-36.04,56.95,True,,4.89,0.4293,59.06,
+40,clip,Comb hair,43.85,56.3,-44.4,50.04,True,,3.28,0.3692,47.8,
+41,clip,Comb hair,53.96,94.48,-54.91,53.91,True,,2.85,0.4054,54.18,
+42,clip,Comb hair,57.38,107.39,-58.47,58.27,True,,3.87,0.4384,61.16,
+43,clip,Comb hair,57.76,108.88,-58.81,58.79,True,,3.98,0.4418,61.97,
+44,clip,Comb hair,59.6,118.08,-59.28,60.42,True,,4.02,0.4515,64.53,
+45,clip,Comb hair,62.44,132.22,-59.99,63.78,True,,3.54,0.4677,69.77,
+46,clip,Comb hair,64.11,133.6,-60.73,65.68,True,,3.55,0.4745,72.72,
+47,clip,Comb hair,73.81,140.18,-65.15,76.99,True,,2.48,0.481,90.38,overhead
+48,clip,Comb hair,78.1,143.1,-67.1,82.18,True,,2.32,0.4657,98.71,overhead
+49,clip,Comb hair,70.3,137.8,-63.55,72.83,True,,3.13,0.4852,83.83,
+50,clip,Comb hair,62.75,132.67,-60.11,64.14,True,,3.53,0.4691,70.33,
+51,clip,Comb hair,64.11,133.6,-60.73,65.68,True,,3.55,0.4745,72.72,
+52,clip,Comb hair,73.81,140.18,-65.15,76.99,True,,2.48,0.481,90.38,overhead
+53,clip,Comb hair,77.99,142.79,-67.02,81.97,True,,2.31,0.4666,98.37,overhead
+54,clip,Comb hair,73.12,128.7,-63.26,72.82,True,,3.42,0.4852,83.83,
+55,clip,Comb hair,59.63,89.68,-52.85,54.46,True,,4.49,0.4101,55.07,
+56,clip,Comb hair,43.24,42.28,-40.21,52.33,True,,4.86,0.3914,51.6,
+57,clip,Comb hair,30.77,6.23,-30.6,69.2,True,,4.84,0.4827,78.18,
+58,clip,Reach a high shelf,60.0,4.0,-60.0,72.6,True,,4.84,0.4852,83.48,
+59,clip,Reach a high shelf,60.71,7.94,-60.71,71.15,True,,4.85,0.4848,81.22,
+60,clip,Reach a high shelf,64.2,27.3,-64.2,67.33,True,,4.67,0.4791,75.29,
+61,clip,Reach a high shelf,72.07,70.97,-72.07,74.46,True,,4.32,0.4845,86.38,
+62,clip,Reach a high shelf,77.3,100.02,-77.3,84.56,True,,3.75,0.4552,102.63,
+63,clip,Reach a high shelf,79.77,113.72,-79.77,90.36,True,,3.51,0.4203,112.52,
+64,clip,Reach a high shelf,80.05,115.4,-80.05,91.07,True,,3.51,0.4151,113.77,
+65,clip,Reach a high shelf,81.71,129.54,-81.71,96.14,True,,3.15,0.3717,123.14,
+66,clip,Reach a high shelf,82.0,132.0,-82.0,97.04,True,,3.03,0.3628,124.89,
+67,clip,Reach a high shelf,82.0,132.0,-82.0,97.04,True,,3.03,0.3628,124.89,
+68,clip,Reach a high shelf,82.0,132.0,-82.0,97.04,True,,3.03,0.3628,124.89,
+69,clip,Reach a high shelf,81.75,130.52,-81.75,96.38,True,,3.11,0.3694,123.59,
+70,clip,Reach a high shelf,79.03,114.73,-79.03,89.44,True,,3.44,0.4267,110.91,
+71,clip,Reach a high shelf,73.27,81.22,-73.27,76.85,True,,4.2,0.4813,90.15,
+72,clip,Reach a high shelf,66.57,42.2,-66.57,68.32,True,,4.56,0.4812,76.82,
+73,clip,Reach a high shelf,60.78,8.54,-60.78,70.93,True,,4.84,0.4847,80.87,
+74,clip,Reach a high shelf,60.0,4.0,-60.0,72.6,True,,4.84,0.4852,83.48,
+75,clip,Wash opposite shoulder,31.07,4.31,-30.57,70.7,True,,4.87,0.4845,80.52,
+76,clip,Wash opposite shoulder,49.39,9.6,-40.41,67.38,True,,4.8,0.4792,75.36,
+77,clip,Wash opposite shoulder,76.2,17.35,-54.8,66.65,True,,4.68,0.4774,74.22,
+78,clip,Wash opposite shoulder,103.01,25.1,-69.19,73.06,True,,4.77,0.4852,84.2,
+79,clip,Wash opposite shoulder,119.12,29.75,-77.84,80.01,True,,5.13,0.4734,95.2,
+80,clip,Wash opposite shoulder,122.66,30.88,-79.48,81.74,True,,5.24,0.4674,97.99,
+81,clip,Wash opposite shoulder,131.37,36.81,-75.55,84.92,True,,5.61,0.4534,103.21,
+82,clip,Wash opposite shoulder,143.27,44.92,-70.18,88.24,True,,6.01,0.4346,108.83,across
+83,clip,Wash opposite shoulder,144.88,46.41,-68.96,88.38,True,,6.06,0.4337,109.06,across
+84,clip,Wash opposite shoulder,140.72,57.65,-53.06,78.91,True,,5.47,0.4766,93.43,across
+85,clip,Wash opposite shoulder,140.12,59.29,-50.74,77.19,True,,5.37,0.4806,90.7,across
+86,clip,Wash opposite shoulder,143.16,51.07,-62.37,84.99,True,,5.86,0.453,103.34,across
+87,clip,Wash opposite shoulder,145.0,46.1,-69.4,88.57,True,,6.07,0.4325,109.4,across
+88,clip,Wash opposite shoulder,141.84,54.63,-57.33,81.86,True,,5.66,0.467,98.19,across
+89,clip,Wash opposite shoulder,140.0,59.6,-50.3,76.86,True,,5.35,0.4812,90.17,across
+90,clip,Wash opposite shoulder,134.64,56.89,-49.31,75.31,True,,5.24,0.4836,87.73,across
+91,clip,Wash opposite shoulder,109.73,44.3,-44.71,68.42,True,,4.52,0.4814,76.98,across
+92,clip,Wash opposite shoulder,60.27,19.3,-35.59,61.07,True,,4.55,0.4551,65.55,
+93,clip,Wash opposite shoulder,35.36,6.71,-30.99,68.62,True,,4.84,0.4818,77.29,
+94,clip,Wash opposite shoulder,30.0,4.0,-30.0,70.96,True,,4.87,0.4847,80.92,
+95,clip,Reach back pocket,-1.12,4.58,1.34,69.53,True,,4.86,0.4832,78.7,behind
+96,clip,Reach back pocket,-19.24,13.93,22.95,60.26,True,,4.8,0.4506,64.28,behind
+97,clip,Reach back pocket,-43.06,26.24,51.37,56.43,True,,4.73,0.4255,58.23,behind
+98,clip,Reach back pocket,-62.66,36.36,74.77,64.38,True,,4.79,0.47,70.71,behind
+99,clip,Reach back pocket,-69.74,40.02,83.21,69.3,True,,3.82,0.4829,78.34,behind
+100,clip,Reach back pocket,-72.68,39.8,88.27,72.54,True,,3.24,0.4852,83.38,behind
+101,clip,Reach back pocket,-78.95,39.11,99.27,79.57,True,,2.15,0.4748,94.48,behind
+102,clip,Reach back pocket,-80.0,39.0,101.1,80.73,True,,1.99,0.4711,96.36,behind
+103,clip,Reach back pocket,-80.0,39.0,101.1,80.73,True,,1.99,0.4711,96.36,behind
+104,clip,Reach back pocket,-80.0,39.0,101.1,80.73,True,,1.99,0.4711,96.36,behind
+105,clip,Reach back pocket,-78.46,38.33,99.16,79.35,True,,2.28,0.4754,94.13,behind
+106,clip,Reach back pocket,-63.21,31.65,79.88,67.53,True,,4.81,0.4796,75.59,behind
+107,clip,Reach back pocket,-35.01,19.32,44.25,57.99,True,,4.73,0.4365,60.7,behind
+108,clip,Reach back pocket,-4.63,6.03,5.86,67.97,True,,4.84,0.4805,76.27,behind
+109,clip,Reach back pocket,0.0,4.0,0.0,70.15,True,,4.87,0.484,79.65,behind
+110,ws,Workspace (envelope),-90.0,0.0,75.0,76.13,True,,4.02,0.4825,89.02,
+111,ws,Workspace (envelope),-90.0,0.0,135.0,77.34,True,,4.9,0.4803,90.93,
+112,ws,Workspace (envelope),-90.0,15.0,75.0,69.5,True,,4.04,0.4832,78.65,
+113,ws,Workspace (envelope),-90.0,15.0,135.0,86.26,True,,5.22,0.4463,105.46,
+114,ws,Workspace (envelope),-90.0,30.0,75.0,64.62,True,,3.54,0.4709,71.08,behind
+115,ws,Workspace (envelope),-90.0,30.0,135.0,97.43,True,,2.68,0.3588,125.66,behind
+116,ws,Workspace (envelope),-90.0,45.0,75.0,61.32,True,,2.82,0.4563,65.93,behind
+117,ws,Workspace (envelope),-90.0,45.0,135.0,108.41,False,fold_stretched,,0.1961,152.39,behind
+118,ws,Workspace (envelope),-90.0,60.0,75.0,59.69,True,,2.8,0.4473,63.38,behind
+119,ws,Workspace (envelope),-90.0,60.0,135.0,116.37,False,fold_stretched,,,,behind
+120,ws,Workspace (envelope),-75.0,0.0,60.0,76.13,True,,4.02,0.4825,89.02,
+121,ws,Workspace (envelope),-75.0,0.0,120.0,77.34,True,,4.9,0.4803,90.93,
+122,ws,Workspace (envelope),-75.0,15.0,60.0,66.18,True,,4.69,0.476,73.49,
+123,ws,Workspace (envelope),-75.0,15.0,120.0,82.9,True,,5.01,0.4628,99.89,
+124,ws,Workspace (envelope),-75.0,30.0,60.0,58.09,True,,3.9,0.4372,60.86,behind
+125,ws,Workspace (envelope),-75.0,30.0,120.0,90.9,True,,3.55,0.4163,113.47,behind
+126,ws,Workspace (envelope),-75.0,45.0,60.0,52.1,True,,3.49,0.3893,51.22,behind
+127,ws,Workspace (envelope),-75.0,45.0,120.0,99.22,True,,0.78,0.3392,129.3,behind
+128,ws,Workspace (envelope),-75.0,60.0,60.0,48.97,True,,4.45,0.358,45.99,behind
+129,ws,Workspace (envelope),-75.0,60.0,120.0,105.65,False,fold_stretched,,0.2499,144.23,behind
+130,ws,Workspace (envelope),-60.0,0.0,45.0,76.13,True,,4.02,0.4825,89.02,
+131,ws,Workspace (envelope),-60.0,0.0,105.0,77.34,True,,4.9,0.4803,90.93,
+132,ws,Workspace (envelope),-60.0,15.0,45.0,63.5,True,,5.07,0.4665,69.33,
+133,ws,Workspace (envelope),-60.0,15.0,105.0,79.29,True,,4.8,0.4756,94.04,
+134,ws,Workspace (envelope),-60.0,30.0,45.0,52.73,True,,3.03,0.3951,52.26,behind
+135,ws,Workspace (envelope),-60.0,30.0,105.0,84.1,True,,4.63,0.4574,101.87,behind
+136,ws,Workspace (envelope),-60.0,45.0,45.0,44.15,True,,2.31,0.3003,37.42,behind
+137,ws,Workspace (envelope),-60.0,45.0,105.0,89.99,True,,2.4,0.4229,111.86,behind
+138,ws,Workspace (envelope),-60.0,60.0,45.0,39.09,False,fold_folded,,0.224,27.2,behind
+139,ws,Workspace (envelope),-60.0,60.0,105.0,95.16,False,contact,-0.77,0.3811,121.26,behind
+140,ws,Workspace (envelope),-45.0,0.0,30.0,76.13,True,,4.02,0.4825,89.02,
+141,ws,Workspace (envelope),-45.0,0.0,90.0,77.34,True,,4.9,0.4803,90.93,
+142,ws,Workspace (envelope),-45.0,15.0,30.0,61.64,True,,4.58,0.458,66.43,
+143,ws,Workspace (envelope),-45.0,15.0,90.0,75.65,True,,4.64,0.4832,88.26,
+144,ws,Workspace (envelope),-45.0,30.0,30.0,48.96,True,,2.47,0.3578,45.98,behind
+145,ws,Workspace (envelope),-45.0,30.0,90.0,77.35,True,,4.54,0.4803,90.96,behind
+146,ws,Workspace (envelope),-45.0,30.0,135.0,110.12,False,fold_stretched,,0.1524,158.75,behind
+147,ws,Workspace (envelope),-45.0,45.0,75.0,68.3,True,,4.42,0.4812,76.78,behind
+148,ws,Workspace (envelope),-45.0,45.0,135.0,120.26,False,fold_stretched,,,,behind
+149,ws,Workspace (envelope),-45.0,60.0,75.0,70.51,True,,3.74,0.4843,80.22,behind
+150,ws,Workspace (envelope),-45.0,60.0,135.0,128.49,False,fold_stretched,,,,behind
+151,ws,Workspace (envelope),-30.0,0.0,15.0,76.13,True,,4.02,0.4825,89.02,
+152,ws,Workspace (envelope),-30.0,0.0,75.0,77.34,True,,4.9,0.4803,90.93,
+153,ws,Workspace (envelope),-30.0,15.0,-30.0,76.51,True,,2.52,0.4819,89.62,
+154,ws,Workspace (envelope),-30.0,15.0,30.0,59.94,True,,4.91,0.4488,63.77,
+155,ws,Workspace (envelope),-30.0,15.0,90.0,79.7,True,,4.74,0.4744,94.7,
+156,ws,Workspace (envelope),-30.0,30.0,-15.0,55.5,True,,3.05,0.4184,56.74,
+157,ws,Workspace (envelope),-30.0,30.0,45.0,53.67,True,,4.61,0.4034,53.78,
+158,ws,Workspace (envelope),-30.0,30.0,105.0,92.64,True,,4.69,0.4029,116.59,
+159,ws,Workspace (envelope),-30.0,45.0,0.0,35.35,False,fold_folded,,0.1465,17.52,
+160,ws,Workspace (envelope),-30.0,45.0,60.0,59.98,True,,4.2,0.449,63.84,
+161,ws,Workspace (envelope),-30.0,45.0,120.0,111.53,False,fold_stretched,,0.1025,165.82,
+162,ws,Workspace (envelope),-30.0,60.0,15.0,24.26,False,fold_folded,,,,
+163,ws,Workspace (envelope),-30.0,60.0,75.0,74.74,True,,2.92,0.4842,86.82,
+164,ws,Workspace (envelope),-15.0,0.0,-45.0,89.03,True,,2.13,0.4295,110.19,
+165,ws,Workspace (envelope),-15.0,0.0,15.0,74.16,True,,4.58,0.4847,85.92,
+166,ws,Workspace (envelope),-15.0,0.0,75.0,81.14,True,,5.11,0.4697,97.01,
+167,ws,Workspace (envelope),-15.0,15.0,-30.0,71.34,True,,2.64,0.4849,81.51,
+168,ws,Workspace (envelope),-15.0,15.0,30.0,59.93,True,,4.71,0.4487,63.77,
+169,ws,Workspace (envelope),-15.0,15.0,90.0,84.65,True,,4.85,0.4548,102.77,
+170,ws,Workspace (envelope),-15.0,30.0,-15.0,51.99,True,,2.63,0.3882,51.04,
+171,ws,Workspace (envelope),-15.0,30.0,45.0,56.35,True,,4.33,0.4249,58.1,
+172,ws,Workspace (envelope),-15.0,30.0,105.0,97.64,True,,5.47,0.3566,126.07,
+173,ws,Workspace (envelope),-15.0,45.0,0.0,34.9,False,fold_folded,,0.1345,16.05,
+174,ws,Workspace (envelope),-15.0,45.0,60.0,64.11,True,,3.8,0.469,70.28,
+175,ws,Workspace (envelope),-15.0,60.0,-45.0,48.81,True,,4.5,0.3562,45.71,
+176,ws,Workspace (envelope),-15.0,60.0,15.0,27.9,False,fold_folded,,,,
+177,ws,Workspace (envelope),-15.0,60.0,75.0,78.82,True,,2.57,0.4769,93.28,
+178,ws,Workspace (envelope),-15.0,75.0,-30.0,25.88,False,fold_folded,,,,
+179,ws,Workspace (envelope),-15.0,75.0,30.0,38.11,False,fold_folded,,0.2061,24.93,
+180,ws,Workspace (envelope),-15.0,75.0,90.0,97.0,True,,1.78,0.3632,124.81,
+181,ws,Workspace (envelope),-15.0,90.0,-15.0,2.76,False,fold_folded,,,,
+182,ws,Workspace (envelope),-15.0,90.0,45.0,56.84,False,part_collision,,0.4285,58.88,
+183,ws,Workspace (envelope),-15.0,90.0,105.0,116.07,False,fold_stretched,,,,
+184,ws,Workspace (envelope),-15.0,105.0,15.0,34.66,False,fold_folded,,0.1278,15.24,
+185,ws,Workspace (envelope),0.0,0.0,-45.0,83.85,True,,2.95,0.4586,101.44,
+186,ws,Workspace (envelope),0.0,0.0,15.0,73.7,True,,4.93,0.485,85.2,
+187,ws,Workspace (envelope),0.0,0.0,75.0,85.89,True,,5.3,0.4483,104.85,
+188,ws,Workspace (envelope),0.0,15.0,-30.0,67.0,True,,3.37,0.4783,74.77,
+189,ws,Workspace (envelope),0.0,15.0,30.0,61.62,True,,4.54,0.4579,66.4,
+190,ws,Workspace (envelope),0.0,15.0,90.0,90.16,True,,5.12,0.4217,112.17,
+191,ws,Workspace (envelope),0.0,30.0,-15.0,49.73,True,,2.37,0.366,47.28,
+192,ws,Workspace (envelope),0.0,30.0,45.0,60.17,True,,3.98,0.4501,64.13,
+193,ws,Workspace (envelope),0.0,45.0,-60.0,67.2,True,,2.34,0.4788,75.08,
+194,ws,Workspace (envelope),0.0,45.0,0.0,36.01,False,fold_folded,,0.1624,19.47,
+195,ws,Workspace (envelope),0.0,45.0,60.0,68.48,True,,3.53,0.4815,77.07,
+196,ws,Workspace (envelope),0.0,60.0,-45.0,47.05,True,,4.75,0.3364,42.66,
+197,ws,Workspace (envelope),0.0,60.0,15.0,32.02,False,fold_folded,,,,
+198,ws,Workspace (envelope),0.0,60.0,75.0,82.51,True,,2.67,0.4644,99.24,
+199,ws,Workspace (envelope),0.0,75.0,-30.0,25.99,False,fold_folded,,,,
+200,ws,Workspace (envelope),0.0,75.0,30.0,41.52,False,fold_folded,,0.2633,32.35,
+201,ws,Workspace (envelope),0.0,75.0,90.0,99.62,True,,3.13,0.3347,130.12,
+202,ws,Workspace (envelope),0.0,90.0,-15.0,5.72,False,fold_folded,,,,
+203,ws,Workspace (envelope),0.0,90.0,45.0,58.23,False,part_collision,,0.4381,61.08,
+204,ws,Workspace (envelope),0.0,105.0,-45.0,26.93,False,fold_folded,,,,
+205,ws,Workspace (envelope),0.0,105.0,15.0,32.86,False,fold_folded,,0.0557,6.6,
+206,ws,Workspace (envelope),0.0,120.0,-15.0,14.01,False,fold_folded,,,,
+207,ws,Workspace (envelope),0.0,135.0,-45.0,22.82,False,fold_folded,,,,
+208,ws,Workspace (envelope),0.0,135.0,15.0,46.51,False,closure_window_cuff,,0.33,41.71,
+209,ws,Workspace (envelope),0.0,150.0,-15.0,30.43,False,fold_folded,,,,overhead
+210,ws,Workspace (envelope),0.0,165.0,-45.0,25.94,False,fold_folded,,,,overhead
+211,ws,Workspace (envelope),0.0,165.0,15.0,60.19,False,closure_window_cuff,,0.4502,64.16,overhead
+212,ws,Workspace (envelope),15.0,0.0,-45.0,79.45,True,,3.38,0.4751,94.29,
+213,ws,Workspace (envelope),15.0,0.0,15.0,74.79,True,,4.89,0.4842,86.91,
+214,ws,Workspace (envelope),15.0,0.0,75.0,91.3,True,,5.76,0.4134,114.18,
+215,ws,Workspace (envelope),15.0,15.0,-30.0,63.84,True,,5.15,0.468,69.87,
+216,ws,Workspace (envelope),15.0,15.0,30.0,64.81,True,,4.33,0.4716,71.37,
+217,ws,Workspace (envelope),15.0,30.0,-75.0,81.01,True,,2.53,0.4701,96.81,
+218,ws,Workspace (envelope),15.0,30.0,-30.0,53.8,True,,2.84,0.4045,54.0,
+219,ws,Workspace (envelope),15.0,30.0,30.0,56.45,True,,3.92,0.4257,58.26,
+220,ws,Workspace (envelope),15.0,45.0,-75.0,76.47,True,,2.19,0.4819,89.55,
+221,ws,Workspace (envelope),15.0,45.0,-15.0,39.28,False,fold_folded,,0.2271,27.61,
+222,ws,Workspace (envelope),15.0,45.0,45.0,61.19,True,,3.2,0.4557,65.73,
+223,ws,Workspace (envelope),15.0,60.0,-60.0,58.81,True,,2.06,0.4419,61.99,
+224,ws,Workspace (envelope),15.0,60.0,0.0,29.68,False,fold_folded,,,,
+225,ws,Workspace (envelope),15.0,60.0,60.0,72.02,True,,2.64,0.4852,82.57,
+226,ws,Workspace (envelope),15.0,75.0,-45.0,39.92,False,fold_folded,,0.238,29.02,
+227,ws,Workspace (envelope),15.0,75.0,15.0,31.66,False,fold_folded,,,,
+228,ws,Workspace (envelope),15.0,75.0,75.0,86.62,True,,2.97,0.4443,106.07,
+229,ws,Workspace (envelope),15.0,90.0,-30.0,20.47,False,fold_folded,,,,
+230,ws,Workspace (envelope),15.0,90.0,30.0,43.99,True,,1.38,0.2982,37.13,
+231,ws,Workspace (envelope),15.0,105.0,-60.0,44.26,True,,3.0,0.3019,37.64,
+232,ws,Workspace (envelope),15.0,105.0,0.0,15.84,False,fold_folded,,,,
+233,ws,Workspace (envelope),15.0,120.0,-30.0,11.89,False,fold_folded,,,,
+234,ws,Workspace (envelope),15.0,135.0,-60.0,38.26,False,fold_folded,,0.2089,25.28,
+235,ws,Workspace (envelope),15.0,135.0,0.0,24.87,False,fold_folded,,,,
+236,ws,Workspace (envelope),15.0,150.0,-30.0,17.97,False,fold_folded,,,,overhead
+237,ws,Workspace (envelope),15.0,165.0,-60.0,36.01,False,fold_folded,,0.1625,19.49,overhead
+238,ws,Workspace (envelope),15.0,165.0,0.0,37.02,False,fold_folded,,0.1846,22.23,overhead
+239,ws,Workspace (envelope),30.0,0.0,-60.0,79.45,True,,3.38,0.4751,94.29,
+240,ws,Workspace (envelope),30.0,0.0,0.0,74.79,True,,4.89,0.4842,86.91,
+241,ws,Workspace (envelope),30.0,0.0,60.0,91.3,True,,5.76,0.4134,114.18,
+242,ws,Workspace (envelope),30.0,15.0,-45.0,66.54,True,,5.06,0.4771,74.06,
+243,ws,Workspace (envelope),30.0,15.0,15.0,63.91,True,,4.32,0.4682,69.97,
+244,ws,Workspace (envelope),30.0,30.0,-90.0,87.64,True,,2.83,0.4383,107.8,
+245,ws,Workspace (envelope),30.0,30.0,-30.0,53.09,True,,5.01,0.3983,52.85,
+246,ws,Workspace (envelope),30.0,30.0,30.0,61.08,True,,3.58,0.4551,65.57,
+247,ws,Workspace (envelope),30.0,45.0,-75.0,74.24,True,,2.88,0.4846,86.05,
+248,ws,Workspace (envelope),30.0,45.0,-15.0,41.44,False,fold_folded,,0.262,32.17,
+249,ws,Workspace (envelope),30.0,45.0,45.0,65.47,True,,3.18,0.4738,72.39,
+250,ws,Workspace (envelope),30.0,60.0,-60.0,58.84,True,,2.07,0.4421,62.04,
+251,ws,Workspace (envelope),30.0,60.0,0.0,33.87,False,fold_folded,,0.1022,12.15,
+252,ws,Workspace (envelope),30.0,60.0,60.0,74.69,True,,3.05,0.4843,86.75,
+253,ws,Workspace (envelope),30.0,75.0,-45.0,42.2,False,fold_folded,,0.2734,33.71,
+254,ws,Workspace (envelope),30.0,75.0,15.0,34.67,False,fold_folded,,0.1279,15.25,
+255,ws,Workspace (envelope),30.0,90.0,-90.0,80.46,True,,2.83,0.472,95.91,
+256,ws,Workspace (envelope),30.0,90.0,-30.0,25.02,False,fold_folded,,,,
+257,ws,Workspace (envelope),30.0,90.0,30.0,43.83,True,,1.27,0.2961,36.83,
+258,ws,Workspace (envelope),30.0,105.0,-60.0,48.72,True,,1.85,0.3553,45.57,
+259,ws,Workspace (envelope),30.0,105.0,0.0,14.55,False,fold_folded,,,,
+260,ws,Workspace (envelope),30.0,120.0,-30.0,16.77,False,fold_folded,,,,
+261,ws,Workspace (envelope),30.0,135.0,-60.0,45.23,True,,2.01,0.3143,39.41,
+262,ws,Workspace (envelope),30.0,135.0,0.0,15.82,False,fold_folded,,,,
+263,ws,Workspace (envelope),30.0,150.0,-30.0,19.34,False,fold_folded,,,,overhead
+264,ws,Workspace (envelope),30.0,165.0,-60.0,45.07,False,contact,-0.44,0.3122,39.11,overhead
+265,ws,Workspace (envelope),30.0,165.0,0.0,27.07,False,fold_folded,,,,overhead
+266,ws,Workspace (envelope),45.0,0.0,-60.0,76.13,True,,4.02,0.4825,89.02,
+267,ws,Workspace (envelope),45.0,0.0,0.0,77.34,True,,4.9,0.4803,90.93,
+268,ws,Workspace (envelope),45.0,15.0,-105.0,92.11,True,,2.05,0.4071,115.64,
+269,ws,Workspace (envelope),45.0,15.0,-45.0,64.94,True,,4.76,0.4721,71.57,
+270,ws,Workspace (envelope),45.0,15.0,15.0,68.3,True,,4.23,0.4812,76.79,
+271,ws,Workspace (envelope),45.0,30.0,-90.0,84.04,True,,3.56,0.4577,101.76,
+272,ws,Workspace (envelope),45.0,30.0,-30.0,53.96,True,,4.54,0.4059,54.27,
+273,ws,Workspace (envelope),45.0,30.0,30.0,66.11,True,,3.61,0.4758,73.38,
+274,ws,Workspace (envelope),45.0,45.0,-75.0,73.11,True,,4.62,0.4852,84.27,
+275,ws,Workspace (envelope),45.0,45.0,-15.0,44.68,True,,4.24,0.3073,38.41,
+276,ws,Workspace (envelope),45.0,45.0,45.0,69.39,True,,3.23,0.483,78.47,
+277,ws,Workspace (envelope),45.0,60.0,-60.0,60.09,True,,3.54,0.4496,64.02,
+278,ws,Workspace (envelope),45.0,60.0,0.0,38.06,False,fold_folded,,0.2053,24.82,
+279,ws,Workspace (envelope),45.0,75.0,-105.0,98.09,True,,2.15,0.3518,126.99,
+280,ws,Workspace (envelope),45.0,75.0,-45.0,45.65,True,,2.04,0.3195,40.17,
+281,ws,Workspace (envelope),45.0,75.0,15.0,37.1,False,fold_folded,,0.1863,22.43,
+282,ws,Workspace (envelope),45.0,90.0,-90.0,84.13,True,,2.66,0.4573,101.9,
+283,ws,Workspace (envelope),45.0,90.0,-30.0,30.37,False,fold_folded,,,,
+284,ws,Workspace (envelope),45.0,90.0,30.0,42.89,True,,1.05,0.2831,35.03,
+285,ws,Workspace (envelope),45.0,105.0,-60.0,54.46,True,,1.74,0.4101,55.07,
+286,ws,Workspace (envelope),45.0,120.0,-90.0,83.49,True,,2.2,0.4602,100.86,
+287,ws,Workspace (envelope),45.0,120.0,-30.0,24.05,False,fold_folded,,,,
+288,ws,Workspace (envelope),45.0,135.0,-60.0,53.6,True,,1.39,0.4028,53.68,
+289,ws,Workspace (envelope),45.0,150.0,-90.0,82.79,True,,2.3,0.4633,99.7,overhead
+290,ws,Workspace (envelope),45.0,150.0,-45.0,40.11,False,fold_folded,,0.241,29.41,overhead
+291,ws,Workspace (envelope),45.0,165.0,-75.0,69.01,True,,1.31,0.4824,77.89,overhead
+292,ws,Workspace (envelope),45.0,165.0,-15.0,21.75,False,fold_folded,,,,overhead
+293,ws,Workspace (envelope),60.0,0.0,-75.0,76.13,True,,4.02,0.4825,89.02,
+294,ws,Workspace (envelope),60.0,0.0,-15.0,77.34,True,,4.9,0.4803,90.93,
+295,ws,Workspace (envelope),60.0,15.0,-120.0,95.27,True,,1.63,0.38,121.48,
+296,ws,Workspace (envelope),60.0,15.0,-60.0,68.28,True,,4.77,0.4811,76.76,
+297,ws,Workspace (envelope),60.0,15.0,0.0,68.36,True,,4.3,0.4813,76.87,
+298,ws,Workspace (envelope),60.0,30.0,-105.0,90.9,True,,2.8,0.4164,113.47,
+299,ws,Workspace (envelope),60.0,30.0,-45.0,59.54,True,,4.54,0.4464,63.15,
+300,ws,Workspace (envelope),60.0,30.0,15.0,63.98,True,,3.64,0.4685,70.08,
+301,ws,Workspace (envelope),60.0,45.0,-90.0,83.57,True,,3.44,0.4598,100.98,
+302,ws,Workspace (envelope),60.0,45.0,-30.0,50.61,True,,4.21,0.3749,48.75,
+303,ws,Workspace (envelope),60.0,45.0,30.0,63.37,True,,3.17,0.466,69.12,
+304,ws,Workspace (envelope),60.0,60.0,-75.0,73.59,True,,4.49,0.485,85.03,
+305,ws,Workspace (envelope),60.0,60.0,-15.0,41.25,False,fold_folded,,0.2591,31.79,
+306,ws,Workspace (envelope),60.0,75.0,-120.0,113.95,False,fold_stretched,,,,
+307,ws,Workspace (envelope),60.0,75.0,-60.0,61.48,True,,4.44,0.4572,66.19,
+308,ws,Workspace (envelope),60.0,75.0,0.0,33.5,False,fold_folded,,0.0883,10.48,
+309,ws,Workspace (envelope),60.0,90.0,-105.0,102.91,False,fold_stretched,,0.2925,137.39,
+310,ws,Workspace (envelope),60.0,90.0,-45.0,47.8,True,,3.49,0.345,43.97,
+311,ws,Workspace (envelope),60.0,90.0,15.0,30.62,False,fold_folded,,,,
+312,ws,Workspace (envelope),60.0,105.0,-75.0,75.41,True,,4.09,0.4835,87.88,
+313,ws,Workspace (envelope),60.0,120.0,-105.0,106.13,False,fold_stretched,,0.2415,145.52,
+314,ws,Workspace (envelope),60.0,120.0,-45.0,46.62,True,,1.57,0.3313,41.9,
+315,ws,Workspace (envelope),60.0,135.0,-75.0,77.44,True,,3.24,0.4801,91.08,
+316,ws,Workspace (envelope),60.0,150.0,-105.0,107.26,False,fold_stretched,,0.2204,148.76,overhead
+317,ws,Workspace (envelope),60.0,150.0,-45.0,50.07,True,,0.96,0.3694,47.84,overhead
+318,ws,Workspace (envelope),60.0,165.0,-75.0,80.39,True,,1.88,0.4722,95.81,overhead
+319,ws,Workspace (envelope),75.0,0.0,-135.0,89.03,True,,2.13,0.4295,110.19,
+320,ws,Workspace (envelope),75.0,0.0,-75.0,74.16,True,,4.58,0.4847,85.92,
+321,ws,Workspace (envelope),75.0,0.0,-15.0,81.14,True,,5.11,0.4697,97.01,
+322,ws,Workspace (envelope),75.0,15.0,-120.0,90.57,True,,2.69,0.4188,112.88,
+323,ws,Workspace (envelope),75.0,15.0,-60.0,68.36,True,,4.75,0.4813,76.88,
+324,ws,Workspace (envelope),75.0,15.0,0.0,73.57,True,,4.53,0.485,84.99,
+325,ws,Workspace (envelope),75.0,30.0,-105.0,88.55,True,,2.98,0.4326,109.35,
+326,ws,Workspace (envelope),75.0,30.0,-45.0,61.87,True,,4.46,0.4591,66.79,
+327,ws,Workspace (envelope),75.0,30.0,15.0,69.06,True,,3.91,0.4825,77.96,
+328,ws,Workspace (envelope),75.0,45.0,-90.0,83.95,True,,3.74,0.4581,101.61,
+329,ws,Workspace (envelope),75.0,45.0,-30.0,54.45,True,,4.04,0.41,55.05,
+330,ws,Workspace (envelope),75.0,60.0,-135.0,122.23,False,fold_stretched,,,,
+331,ws,Workspace (envelope),75.0,60.0,-75.0,76.25,True,,4.45,0.4823,89.2,
+332,ws,Workspace (envelope),75.0,60.0,-15.0,45.41,True,,3.55,0.3165,39.73,
+333,ws,Workspace (envelope),75.0,75.0,-120.0,116.81,False,fold_stretched,,,,
+334,ws,Workspace (envelope),75.0,75.0,-60.0,65.83,True,,4.19,0.475,72.95,
+335,ws,Workspace (envelope),75.0,75.0,0.0,36.35,False,fold_folded,,0.1702,20.43,
+336,ws,Workspace (envelope),75.0,90.0,-105.0,107.94,False,fold_stretched,,0.2063,150.87,
+337,ws,Workspace (envelope),75.0,90.0,-45.0,53.36,True,,4.08,0.4007,53.29,
+338,ws,Workspace (envelope),75.0,90.0,15.0,30.05,False,fold_folded,,,,
+339,ws,Workspace (envelope),75.0,105.0,-75.0,82.08,True,,3.82,0.4661,98.54,
+340,ws,Workspace (envelope),75.0,120.0,-105.0,114.04,False,fold_stretched,,,,
+341,ws,Workspace (envelope),75.0,120.0,-45.0,54.52,True,,3.96,0.4105,55.16,
+342,ws,Workspace (envelope),75.0,135.0,-75.0,86.55,True,,2.71,0.4447,105.95,
+343,ws,Workspace (envelope),75.0,150.0,-105.0,117.18,False,fold_stretched,,,,overhead
+344,ws,Workspace (envelope),75.0,150.0,-45.0,60.36,True,,2.27,0.4512,64.44,overhead
+345,ws,Workspace (envelope),75.0,165.0,-75.0,91.71,True,,1.78,0.4103,114.9,overhead
+346,ws,Workspace (envelope),90.0,0.0,-135.0,83.85,True,,2.95,0.4586,101.44,
+347,ws,Workspace (envelope),90.0,0.0,-75.0,73.7,True,,4.93,0.485,85.2,
+348,ws,Workspace (envelope),90.0,0.0,-15.0,85.89,True,,5.3,0.4483,104.85,
+349,ws,Workspace (envelope),90.0,15.0,-120.0,86.8,True,,2.93,0.4433,106.37,
+350,ws,Workspace (envelope),90.0,15.0,-60.0,70.03,True,,4.74,0.4838,79.48,
+351,ws,Workspace (envelope),90.0,15.0,0.0,79.22,True,,4.77,0.4757,93.94,
+352,ws,Workspace (envelope),90.0,30.0,-105.0,87.37,True,,3.39,0.4399,107.35,
+353,ws,Workspace (envelope),90.0,30.0,-45.0,65.38,True,,4.42,0.4735,72.25,
+354,ws,Workspace (envelope),90.0,45.0,-150.0,121.7,False,fold_stretched,,,,
+355,ws,Workspace (envelope),90.0,45.0,-90.0,85.44,True,,4.41,0.4508,104.08,
+356,ws,Workspace (envelope),90.0,45.0,-30.0,58.72,True,,3.96,0.4413,61.85,
+357,ws,Workspace (envelope),90.0,60.0,-135.0,123.17,False,fold_stretched,,,,
+358,ws,Workspace (envelope),90.0,60.0,-75.0,79.67,True,,4.6,0.4745,94.65,
+359,ws,Workspace (envelope),90.0,60.0,-15.0,49.28,True,,3.37,0.3612,46.51,
+360,ws,Workspace (envelope),90.0,75.0,-120.0,120.41,False,fold_stretched,,,,
+361,ws,Workspace (envelope),90.0,75.0,-60.0,70.47,True,,4.24,0.4843,80.16,
+362,ws,Workspace (envelope),90.0,75.0,-15.0,41.84,False,fold_folded,,0.2681,32.99,
+363,ws,Workspace (envelope),90.0,90.0,-120.0,127.24,False,fold_stretched,,,,
+364,ws,Workspace (envelope),90.0,90.0,-60.0,71.98,True,,4.07,0.4852,82.51,
+365,ws,Workspace (envelope),90.0,90.0,0.0,29.14,False,fold_folded,,,,
+366,ws,Workspace (envelope),90.0,105.0,-90.0,103.35,False,fold_stretched,,0.2862,138.43,
+367,ws,Workspace (envelope),90.0,120.0,-120.0,136.61,False,fold_stretched,,,,
+368,ws,Workspace (envelope),90.0,120.0,-60.0,77.03,True,,3.66,0.4809,90.44,
+369,ws,Workspace (envelope),90.0,135.0,-90.0,109.97,False,fold_stretched,,0.1568,158.12,
+370,ws,Workspace (envelope),90.0,150.0,-120.0,138.77,False,fold_stretched,,,,overhead
+371,ws,Workspace (envelope),90.0,150.0,-60.0,84.78,True,,2.48,0.4541,102.99,overhead
+372,ws,Workspace (envelope),90.0,165.0,-90.0,115.32,False,fold_stretched,,,,overhead
+373,ws,Workspace (envelope),105.0,0.0,-150.0,83.85,True,,2.95,0.4586,101.44,
+374,ws,Workspace (envelope),105.0,0.0,-90.0,73.7,True,,4.93,0.485,85.2,
+375,ws,Workspace (envelope),105.0,0.0,-30.0,85.89,True,,5.3,0.4483,104.85,
+376,ws,Workspace (envelope),105.0,15.0,-135.0,89.58,True,,2.56,0.4258,111.15,
+377,ws,Workspace (envelope),105.0,15.0,-75.0,73.81,True,,4.85,0.4849,85.38,
+378,ws,Workspace (envelope),105.0,15.0,-15.0,80.22,True,,4.95,0.4728,95.53,
+379,ws,Workspace (envelope),105.0,30.0,-120.0,94.14,True,,2.6,0.3903,119.34,
+380,ws,Workspace (envelope),105.0,30.0,-60.0,72.11,True,,4.71,0.4852,82.71,
+381,ws,Workspace (envelope),105.0,45.0,-165.0,126.34,False,fold_stretched,,,,across
+382,ws,Workspace (envelope),105.0,45.0,-105.0,96.39,True,,3.6,0.3693,123.62,across
+383,ws,Workspace (envelope),105.0,45.0,-45.0,67.01,True,,4.43,0.4783,74.78,across
+384,ws,Workspace (envelope),105.0,60.0,-150.0,133.32,False,fold_stretched,,,,across
+385,ws,Workspace (envelope),105.0,60.0,-90.0,94.09,True,,5.2,0.3907,119.25,across
+386,ws,Workspace (envelope),105.0,60.0,-30.0,57.51,True,,3.83,0.4333,59.94,across
+387,ws,Workspace (envelope),105.0,75.0,-135.0,136.14,False,fold_stretched,,,,across
+388,ws,Workspace (envelope),105.0,75.0,-75.0,87.29,True,,4.82,0.4404,107.21,across
+389,ws,Workspace (envelope),105.0,75.0,-15.0,44.94,True,,3.27,0.3106,38.88,across
+390,ws,Workspace (envelope),105.0,90.0,-120.0,132.78,False,fold_stretched,,,,across
+391,ws,Workspace (envelope),105.0,90.0,-60.0,77.25,True,,4.25,0.4805,90.79,across
+392,ws,Workspace (envelope),105.0,105.0,-150.0,168.61,False,fold_stretched,,,,across
+393,ws,Workspace (envelope),105.0,105.0,-90.0,109.68,False,fold_stretched,,0.1648,156.97,across
+394,ws,Workspace (envelope),105.0,120.0,-120.0,143.44,False,fold_stretched,,,,across
+395,ws,Workspace (envelope),105.0,135.0,-150.0,161.49,False,fold_stretched,,,,across
+396,ws,Workspace (envelope),105.0,135.0,-90.0,117.72,False,fold_stretched,,,,across
+397,ws,Workspace (envelope),105.0,150.0,-120.0,144.31,False,fold_stretched,,,,overhead;across
+398,ws,Workspace (envelope),105.0,165.0,-150.0,141.72,False,fold_stretched,,,,overhead;across
+399,ws,Workspace (envelope),105.0,165.0,-90.0,124.43,False,fold_stretched,,,,overhead;across
+400,ws,Workspace (envelope),120.0,0.0,-150.0,79.45,True,,3.38,0.4751,94.29,
+401,ws,Workspace (envelope),120.0,0.0,-90.0,74.79,True,,4.89,0.4842,86.91,
+402,ws,Workspace (envelope),120.0,0.0,-30.0,91.3,True,,5.76,0.4134,114.18,
+403,ws,Workspace (envelope),120.0,15.0,-135.0,87.0,True,,3.09,0.4421,106.72,
+404,ws,Workspace (envelope),120.0,15.0,-75.0,76.9,True,,4.96,0.4812,90.23,
+405,ws,Workspace (envelope),120.0,30.0,-180.0,114.29,False,fold_stretched,,,,
+406,ws,Workspace (envelope),120.0,30.0,-120.0,94.29,True,,3.59,0.3889,119.63,
+407,ws,Workspace (envelope),120.0,30.0,-60.0,76.46,True,,5.02,0.482,89.53,
+408,ws,Workspace (envelope),120.0,45.0,-165.0,124.73,False,fold_stretched,,,,across
+409,ws,Workspace (envelope),120.0,45.0,-105.0,98.99,True,,4.86,0.3419,128.82,across
+410,ws,Workspace (envelope),120.0,45.0,-45.0,71.4,True,,4.75,0.4849,81.6,across
+411,ws,Workspace (envelope),120.0,60.0,-150.0,134.76,False,fold_stretched,,,,across
+412,ws,Workspace (envelope),120.0,60.0,-90.0,98.12,True,,5.84,0.3515,127.04,across
+413,ws,Workspace (envelope),120.0,60.0,-30.0,61.1,True,,4.01,0.4552,65.6,across
+414,ws,Workspace (envelope),120.0,75.0,-135.0,140.31,False,fold_stretched,,,,across
+415,ws,Workspace (envelope),120.0,75.0,-75.0,91.84,True,,5.48,0.4092,115.15,across
+416,ws,Workspace (envelope),120.0,90.0,-180.0,157.32,False,fold_stretched,,,,across
+417,ws,Workspace (envelope),120.0,90.0,-120.0,138.27,False,fold_stretched,,,,across
+418,ws,Workspace (envelope),120.0,90.0,-60.0,81.96,True,,4.52,0.4666,98.34,across
+419,ws,Workspace (envelope),120.0,105.0,-150.0,174.85,False,fold_stretched,,,,across
+420,ws,Workspace (envelope),120.0,105.0,-90.0,115.26,False,fold_stretched,,,,across
+421,ws,Workspace (envelope),120.0,120.0,-120.0,148.54,False,fold_stretched,,,,across
+422,ws,Workspace (envelope),120.0,135.0,-150.0,155.48,False,fold_stretched,,,,across
+423,ws,Workspace (envelope),120.0,135.0,-90.0,123.96,False,fold_stretched,,,,across
+424,ws,Workspace (envelope),120.0,150.0,-120.0,145.85,False,fold_stretched,,,,overhead;across
+425,ws,Workspace (envelope),120.0,165.0,-150.0,133.47,False,fold_stretched,,,,overhead;across
+426,ws,Workspace (envelope),120.0,165.0,-90.0,131.42,False,fold_stretched,,,,overhead;across
+427,ws,Workspace (envelope),135.0,0.0,-120.0,73.7,True,,4.93,0.485,85.2,
+428,ws,Workspace (envelope),135.0,0.0,-60.0,85.89,True,,5.3,0.4483,104.85,
+429,ws,Workspace (envelope),135.0,15.0,-135.0,85.76,True,,3.69,0.449,104.62,
+430,ws,Workspace (envelope),135.0,15.0,-75.0,81.13,True,,5.27,0.4697,97.0,
+431,ws,Workspace (envelope),135.0,30.0,-150.0,104.2,False,fold_stretched,,0.2734,140.49,
+432,ws,Workspace (envelope),135.0,30.0,-90.0,87.34,True,,5.63,0.4401,107.28,
+433,ws,Workspace (envelope),135.0,45.0,-165.0,123.95,False,fold_stretched,,,,across
+434,ws,Workspace (envelope),135.0,45.0,-120.0,109.3,False,fold_stretched,,0.1746,155.54,across
+435,ws,Workspace (envelope),135.0,45.0,-60.0,81.41,True,,5.56,0.4687,97.45,across
+436,ws,Workspace (envelope),135.0,60.0,-135.0,130.61,False,fold_stretched,,,,across
+437,ws,Workspace (envelope),135.0,60.0,-75.0,91.99,True,,5.97,0.4081,115.42,across
+438,ws,Workspace (envelope),135.0,75.0,-150.0,153.0,False,fold_stretched,,,,across
+439,ws,Workspace (envelope),135.0,75.0,-90.0,108.84,False,fold_stretched,,0.186,153.88,across
+440,ws,Workspace (envelope),135.0,90.0,-165.0,167.1,False,fold_stretched,,,,across
+441,ws,Workspace (envelope),135.0,90.0,-105.0,129.02,False,fold_stretched,,,,across
+442,ws,Workspace (envelope),135.0,90.0,-45.0,71.65,True,,4.18,0.4851,81.99,across
+443,ws,Workspace (envelope),135.0,105.0,-120.0,149.38,False,fold_stretched,,,,across
+444,ws,Workspace (envelope),135.0,105.0,-60.0,89.85,True,,4.72,0.4239,111.61,across
+445,ws,Workspace (envelope),135.0,120.0,-135.0,160.35,False,fold_stretched,,,,across
+446,ws,Workspace (envelope),135.0,120.0,-75.0,109.77,False,fold_stretched,,0.1623,157.33,across
+447,ws,Workspace (envelope),135.0,135.0,-150.0,147.19,False,fold_stretched,,,,across
+448,ws,Workspace (envelope),135.0,135.0,-90.0,127.99,False,fold_stretched,,,,across
+449,ws,Workspace (envelope),150.0,0.0,-180.0,79.45,True,,3.38,0.4751,94.29,
+450,ws,Workspace (envelope),150.0,0.0,-120.0,74.79,True,,4.89,0.4842,86.91,
+451,ws,Workspace (envelope),150.0,0.0,-60.0,91.3,True,,5.76,0.4134,114.18,
+452,ws,Workspace (envelope),150.0,15.0,-135.0,85.94,True,,4.36,0.4481,104.92,
+453,ws,Workspace (envelope),150.0,15.0,-75.0,86.19,True,,5.59,0.4467,105.35,
+454,ws,Workspace (envelope),150.0,30.0,-150.0,104.17,False,fold_stretched,,0.2739,140.42,
+455,ws,Workspace (envelope),150.0,30.0,-90.0,91.66,True,,6.03,0.4106,114.82,
+456,ws,Workspace (envelope),150.0,45.0,-165.0,124.05,False,fold_stretched,,,,across
+457,ws,Workspace (envelope),150.0,45.0,-105.0,106.31,False,fold_stretched,,0.2382,146.03,across
+458,ws,Workspace (envelope),150.0,60.0,-180.0,138.56,False,fold_stretched,,,,across
+459,ws,Workspace (envelope),150.0,60.0,-120.0,126.29,False,fold_stretched,,,,across
+460,ws,Workspace (envelope),150.0,60.0,-60.0,85.44,True,,6.09,0.4508,104.08,across
+461,ws,Workspace (envelope),150.0,75.0,-135.0,149.5,False,fold_stretched,,,,across
+462,ws,Workspace (envelope),150.0,75.0,-75.0,99.47,True,,6.74,0.3364,129.81,across
+463,ws,Workspace (envelope),150.0,90.0,-150.0,174.19,False,fold_stretched,,,,across
+464,ws,Workspace (envelope),150.0,90.0,-90.0,118.01,False,fold_stretched,,,,across
+465,ws,Workspace (envelope),150.0,105.0,-165.0,158.99,False,fold_stretched,,,,across
+466,ws,Workspace (envelope),150.0,105.0,-105.0,137.07,False,fold_stretched,,,,across
+467,ws,Workspace (envelope),150.0,120.0,-180.0,132.52,False,fold_stretched,,,,across
+468,ws,Workspace (envelope),150.0,120.0,-120.0,149.38,False,fold_stretched,,,,across
+469,ws,Workspace (envelope),150.0,120.0,-60.0,98.65,True,,2.43,0.3457,128.12,across

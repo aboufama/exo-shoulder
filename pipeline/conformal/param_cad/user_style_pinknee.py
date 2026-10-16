@@ -13,7 +13,8 @@ line / arc paths, rounds):
   hubs      J1, J2, J3: the v5 O20 stack exactly as user_style.py builds it (pads + integral O7 pins on the lower member,
             O20 ring + M18 spigot + bore on the upper member, 2x MR117-2RS, 17-4PH outer spacer, ground inner spacer, M7x0.5
             Ti ring nut, threaded G2 dome cap); J3 about its OFFSET line (foot point c3, tilted b3): built about GH, moved by
-            c3. Slim O15 / O17 hubs are refused for now (the v5 cap + M18 spigot do not fit inside them; a slim cap is needed).
+            c3. Per joint (the params' rad1..rad3 / --hubs): slim O15 / O17 = the same MR117-2RS pair, spacers, ring nut and
+            12.25 mm stack in a plain tube of the hub radius with a press-fit O13 cap plug + O(2R) flange (no M18 spigot).
   links     bent 8 x 3 bars (user_style.bar_swept) fitted to stay at or above the L1 strap undersides (the model's fitted
             rows + the L1's hub-rim lift) and hug them (user_style_osn's link fit: the CAD standard's 35 deg ramp first, the
             model's steeper ramps only where 35 deg has no chain); planform pads, the user-style pocket, 0.5 mm rounds.
@@ -146,6 +147,50 @@ def tess(s, fine=True):
     return weld_open(m) if fine else m
 
 
+# ---------------------------------------------------------------------------------------------------- hubs (O20 v5 / slim)
+# O20 = the v5 stack exactly as user_style.py builds it. Slim O15 / O17 (docs/concepts/spine-parked-j2-3r.md "Slim hub, hand
+# calc"): the same MR117-2RS pair, spacers and M7x0.5 ring nut, the same 12.25 mm stack; the O20 M18 spigot + threaded cap do
+# not fit, so the upper member is a plain tube of the hub radius up to F + 11.25 with an O13 counterbore, and the cap is a
+# press-fit O13 annular plug (retains the upper outer ring, clears the ring nut) with an O(2R) x 1.0 flange to the crown.
+SLIM_TOP, CAP_CB = 11.25, 6.5
+
+
+def plate_R(k, level, sdir, w, R, t=T, L=L_SEAT, upper=False, rf=US.RF):
+    if R == US.HUB_R and rf == US.RF: return US.plate_r(k, level, sdir, w, t=t, L=L, upper=upper)
+    s = US.plate(k, level, sdir, w, t, L, R=R, rf=rf); k = unit(k); sd = unit(sdir - (sdir @ k) * k); top = (level + t) * k
+    def skip(e):
+        if not upper or e.geomType() != "CIRCLE": return False
+        p = np.array(e.positionAt(0.5).toTuple()); return abs((p - top) @ k) < 1e-3 and abs(np.linalg.norm(p - (p @ k) * k) - R) < 1e-3
+    return US.rounded(s, keep_plane=(level * k + L * sd, sd), skip=skip)
+
+
+def upper_ring_R(k, F, R):
+    if R == US.HUB_R: return US.upper_ring_r(k, F)
+    z0, zt, r = LV["U0"] + T + F, SLIM_TOP + F, 0.5; q = 1 - math.sqrt(0.5)
+    wp = (cq.Workplane("XZ").moveTo(4.0, z0).lineTo(R, z0).lineTo(R, zt - r).threePointArc((R - r * q, zt - r * q), (R - r, zt)).lineTo(4.0, zt).close())
+    return xform(wp.revolve(360, (0, 0, 0), (0, 1, 0)).val(), PB.axis_frame(k))
+
+
+def bore_cutter_R(k, F, R):
+    if R == US.HUB_R: return US.bore_cutter(k, F)
+    return PB.revolved([(0, LV["U0"] - 1.0), (4.9, LV["U0"] - 1.0), (4.9, LV["L1"]), (5.5, LV["L1"]), (5.5, LV["U1"]), (CAP_CB, LV["U1"]),
+                        (CAP_CB, SLIM_TOP + 1.0), (0, SLIM_TOP + 1.0)], k, F)
+
+
+def ring_root_R(body, k, F, R):
+    return US.ring_root_fillet(body, k, F) if R == US.HUB_R else body
+
+
+def hardware_R(J, k, F, lower, upper, R):
+    """the v5 stack's bearings, spacers, nut, cap (O20) - or, slim, the same minus the O20 cap plus the press-fit cap"""
+    hw = US.hardware(J, k, F, lower, upper)
+    if R == US.HUB_R: return hw
+    hw = [h for h in hw if " cap " not in h[1]]
+    cap = PB.revolved([(4.6, LV["U1"]), (CAP_CB - 0.01, LV["U1"]), (CAP_CB - 0.01, SLIM_TOP), (R - 0.5, SLIM_TOP), (R, SLIM_TOP + 0.5), (R, LV["top"] - 0.4),
+                       (R - 0.4, LV["top"]), (0, LV["top"]), (0, SLIM_TOP + 0.05), (4.6, SLIM_TOP + 0.05)], k, F)
+    return hw + [(upper, f"{J} cap O{2 * R:.0f} press-fit plug O13 + flange, retains the upper outer ring (Ti-6Al-4V) [slim hub]", cap)]
+
+
 # ---------------------------------------------------------------------------------------------------- links
 def l1_rows(M, lk, rows):
     """the L1 strap underside (build_pinknee_l1.link_solid's rows + hub-rim lift, per-joint hub radius): directions
@@ -174,7 +219,7 @@ def l1_rows(M, lk, rows):
     return np.array([cd[J] for cd in cols_d]), np.array([cr[J] for cr in cols_r])
 
 
-def link_fit(label, ex, ey, start, end, Dq, Rq, t=T):
+def link_fit(label, ex, ey, start, end, Dq, Rq, t=T, climbs=((35.0, 12.0), (45.0, 6.0), (45.0, 4.0), (60.0, 4.0))):
     """bent-bar chain (start -> end poses in the plane (GH, ex, ey)) whose skin side stays >= the L1 strap underside
     (user_style_osn.link_fit: fairness weight 4, up to 5 arcs; 35 deg ramp first, then the model's steeper ramps)"""
     th_q = np.arctan2(Dq @ ey, Dq @ ex); rho_q = Rq * np.hypot(Dq @ ex, Dq @ ey)
@@ -185,15 +230,21 @@ def link_fit(label, ex, ey, start, end, Dq, Rq, t=T):
     if key in cache: fit = cache[key]; fit["segs"] = [tuple(x) for x in fit["segs"]]
     else:
         fits = {}
-        for cm, rm in ((35.0, 12.0), (45.0, 6.0), (45.0, 4.0), (60.0, 4.0)):
+        for cm, rm in climbs:
             for n_ in (3, 4, 5):
                 for sc_ in (1.0, 0.5):
-                    try:
-                        f_ = SK.fit_chain(start, end, clear, t, n_arcs=n_, climb_max=cm, r_min=rm, l_min=2.0, snap_scale=sc_, bend=4.0, seeds=16)
-                        f_.update(climb_limit=cm, r_min=rm, l_min=2.0, snap_scale=sc_, bend=4.0); fits[n_] = f_; break
-                    except RuntimeError as e:
-                        print(f"  {label}: {n_} arcs, climb {cm}, R >= {rm}, snap x{sc_}: {e}", flush=True)
-                        if "snapped" not in str(e): break
+                    fk = f"{key}|fail|{cm}|{rm}|{n_}|{sc_}"                                 # negative cache: never repeat a failed fit
+                    cache = json.load(open(CACHE)) if os.path.exists(CACHE) else {}
+                    if fk in cache: print(f"  {label}: {n_} arcs, climb {cm}, R >= {rm}, snap x{sc_}: {cache[fk]} (cached)", flush=True); e = cache[fk]
+                    else:
+                        try:
+                            f_ = SK.fit_chain(start, end, clear, t, n_arcs=n_, climb_max=cm, r_min=rm, l_min=2.0, snap_scale=sc_, bend=4.0, seeds=16)
+                            f_.update(climb_limit=cm, r_min=rm, l_min=2.0, snap_scale=sc_, bend=4.0); fits[n_] = f_; break
+                        except RuntimeError as e_:
+                            e = str(e_); print(f"  {label}: {n_} arcs, climb {cm}, R >= {rm}, snap x{sc_}: {e}", flush=True)
+                            cache = json.load(open(CACHE)) if os.path.exists(CACHE) else {}; cache[fk] = e
+                            os.makedirs(os.path.dirname(CACHE), exist_ok=True); json.dump(cache, open(CACHE, "w"), indent=0)
+                    if "snapped" not in e: break
             if fits: break
         if not fits: raise RuntimeError(f"{label}: no chain stays above the L1 strap")
         bm = min(f_["mean_clear"] for f_ in fits.values())
@@ -210,18 +261,25 @@ def link_fit(label, ex, ey, start, end, Dq, Rq, t=T):
 
 
 def links(M):
-    D = M.D; u, c = D.u, D.c; F = M.f; prof = PK.link_rows(M); out = []; rep = {}
+    D = M.D; u, c = D.u, D.c; F = M.f; prof = PK.link_rows(M); out = []; rep = {}; hr = M.hr
     C = [c[k] + F[k] * u[k] for k in range(3)]
     # ---- link 1: lower at J1 and J2 (both axes through GH), plane span(u1, u2)
     ex = unit(u[0]); ey = unit(u[1] - (u[1] @ ex) * ex); phi = math.acos(np.clip(unit(u[1]) @ ex, -1, 1))
     ha, hb = F[0] + T / 2, F[1] + T / 2
     B = hb * np.array([math.cos(phi), math.sin(phi)]); back = np.array([math.sin(phi), -math.cos(phi)])
-    start = (ha, L_SEAT, math.pi / 2); end = (*(B + L_SEAT * back), math.pi / 2 + phi)
-    Dq, Rq = l1_rows(M, *prof["L1"]); fit, r1 = link_fit("link 1", ex, ey, start, end, Dq, Rq)
+    Dq, Rq = l1_rows(M, *prof["L1"]); fit = None
+    # seats: the standard's 14 mm pads (R6 planform rounds) first; if no chain climbs from J1's seat to J2's (k4598: J2's face
+    # is 10.9 mm above J1's within 40 deg, the L1 strap needs ~55 deg near J2), 12 / 11 mm pads with R3 planform rounds
+    for Ls, rf in ((L_SEAT, US.RF), (12.0, 3.0), (11.0, 2.0)):
+        start = (ha, Ls, math.pi / 2); end = (*(B + Ls * back), math.pi / 2 + phi)
+        try: fit, r1 = link_fit(f"link 1 (seat {Ls:g})", ex, ey, start, end, Dq, Rq); break
+        except RuntimeError as e_: print(f"  link 1: seat {Ls:g}: {e_}", flush=True)
+    if fit is None: raise RuntimeError("link 1: no chain at any seat length")
     body = US.bar_swept(ex, ey, start, fit["segs"])
     he = SK.end_pose(start, fit["segs"])[2]; sd_b = -(math.cos(he) * ex + math.sin(he) * ey)
-    body = US.glue(US.plate_r(u[0], F[0], ey, W), body)
-    body = US.glue(body, US.plate_r(u[1], F[1], sd_b, W))
+    body = US.glue(plate_R(u[0], F[0], ey, W, hr[0], L=Ls, rf=rf), body)
+    body = US.glue(body, plate_R(u[1], F[1], sd_b, W, hr[1], L=Ls, rf=rf))
+    r1.update(seat_mm=Ls, pad_round_mm=rf)
     body, npk = US.with_pocket_r(body, ex, ey, start, fit["segs"])
     for k_ in (0, 1): body = body.fuse(US.lower_pin(u[k_], F[k_]))
     body = body.clean() if body.clean().isValid() else body
@@ -238,12 +296,12 @@ def links(M):
     Dq, Rq = l1_rows(M, *prof["L2"]); fit, r2 = link_fit("link 2", ex, ey, start, end, Dq, Rq)
     body = US.bar_swept(ex, ey, start, fit["segs"])
     back_w = math.sin(phi) * ex - math.cos(phi) * ey
-    body = US.glue(US.plate_r(u[1], F[1] + LV["U0"], ey, W, upper=True), body)
-    body = US.glue(body, at(US.plate_r(u[2], F[2] + LV["U0"], back_w, W, L=L_SEAT + 0.6, upper=True), c[2]))
+    body = US.glue(plate_R(u[1], F[1] + LV["U0"], ey, W, hr[1], upper=True), body)
+    body = US.glue(body, at(plate_R(u[2], F[2] + LV["U0"], back_w, W, hr[2], L=L_SEAT + 0.6, upper=True), c[2]))
     body, npk = US.with_pocket_r(body, ex, ey, start, fit["segs"])
-    body = US.ring_root_fillet(US.glue(body, US.upper_ring_r(u[1], F[1])), u[1], F[1])
-    body = US.glue(body, at(US.upper_ring_r(u[2], F[2]), c[2]))
-    body = body.cut(US.bore_cutter(u[1], F[1])).cut(at(US.bore_cutter(u[2], F[2]), c[2]))
+    body = ring_root_R(US.glue(body, upper_ring_R(u[1], F[1], hr[1])), u[1], F[1], hr[1])
+    body = US.glue(body, at(upper_ring_R(u[2], F[2], hr[2]), c[2]))
+    body = body.cut(bore_cutter_R(u[1], F[1], hr[1])).cut(at(bore_cutter_R(u[2], F[2], hr[2]), c[2]))
     body = body.clean() if body.clean().isValid() else body
     out.append(("l2", 2, "D8-03 link 2: bent bar 8x3 + J2/J3 hubs, flies over the knee and the pad (Ti-6Al-4V)", body))
     gap = float(abs((p3 - (p3 @ ex) * ex - (p3 @ ey) * ey) @ nP))
@@ -442,7 +500,7 @@ def base_part(M, E, l1_body, frames):
     for cd in cands[:24]:
         al, thd, ht, ey_, fld = cd["al"], cd["th"], cd["h"], cd["td"], cd["fld"]; th = math.radians(thd)
         try:
-            body = US.plate_r(k1, F1 + LV["U0"], ey_, WT, upper=True)
+            body = plate_R(k1, F1 + LV["U0"], ey_, WT, M.hr[0], upper=True)
             if thd == 0.0:
                 o_mid = (F1 + up_mid) * k1 + L_SEAT * ey_; nrm = k1; sd = ey_; fit = None
             else:
@@ -456,8 +514,8 @@ def base_part(M, E, l1_body, frames):
                 body = US.glue(body, US.bar_swept(k1, ey_, start, fit["segs"], w=WT))
                 o_mid = ht * (math.cos(th) * k1 + math.sin(th) * ey_); sd = -math.sin(th) * k1 + math.cos(th) * ey_; nrm = unit(o_mid)
             body = US.glue(body, US.terminal_r(o_mid, nrm, sd, WT, 14.0))
-            body = US.glue(body, US.upper_ring_r(k1, F1))
-            body = body.cut(US.bore_cutter(k1, F1))
+            body = US.glue(body, upper_ring_R(k1, F1, M.hr[0]))
+            body = body.cut(bore_cutter_R(k1, F1, M.hr[0]))
             for x_ in (6.0, 14.0):                                                         # 2x M4: O4.3 through, O7.3 x 1.2 counterbore
                 cc = o_mid + x_ * sd
                 body = body.cut(cq.Solid.makeCylinder(2.15, 12.0, V(cc - 6 * nrm), V(nrm)))
@@ -537,9 +595,6 @@ def main():
     ap.add_argument("--l1", default="l1_skin-normal-3r-pin-knee")
     a = ap.parse_args(ARGV); t0 = time.time(); dd = os.path.join(FULL, "designs", a.out); os.makedirs(os.path.join(dd, "step"), exist_ok=True)
     P0, src = PK.params_from(a); M, rep0 = PK.fit(P0); D = M.D; u, c, F = D.u, D.c, M.f
-    if any(r != 10.0 for r in M.hr):
-        raise NotImplementedError(f"hubs {M.hr}: the slim O15 / O17 hub CAD (MR117-2RS pair in a 2.0 / 2.75 mm wall) needs a slim cap and spigot "
-                                  "(the v5 cap is O20 on an M18 spigot); build the L1 with build_pinknee_l1.py --hubs meanwhile")
     l1d = json.load(open(os.path.join(FULL, "designs", a.l1, "design.json")))
     same = all(abs(float(l1d["params"].get(k, P0[k])) - float(P0[k])) < 1e-6 for k in P0 if isinstance(P0[k], (int, float)))
     assert same, f"the L1 design {a.l1} was built from other params: rebuild it first (build_pinknee_l1.py --params-file ...)"
@@ -548,7 +603,7 @@ def main():
                style="user (line/arc sketches, extrudes, revolves, single-section sweeps on line/arc paths, rounds; no lofts)")
     parts = []                                                                              # (group, member, name, shape) member-local
     for J, k_, lo, hi, mlo, mhi in (("J1", 0, "l1", "base", 1, 0), ("J2", 1, "l1", "l2", 1, 2), ("J3", 2, "l3", "l2", 3, 2)):
-        for g, n, s in US.hardware(J, u[k_], F[k_], lo, hi):
+        for g, n, s in hardware_R(J, u[k_], F[k_], lo, hi, M.hr[k_]):
             parts.append((g, mlo if g == lo else mhi, n, at(s, c[k_])))
     lk, rep["links"] = links(M); parts += lk
     m3, rep["member 3"] = member3(M); parts += m3
