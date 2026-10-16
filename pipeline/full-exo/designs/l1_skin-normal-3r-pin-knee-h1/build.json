@@ -140,20 +140,39 @@
    10.0,
    10.0,
    10.0
-  ]
+  ],
+  "retainer": [
+   90.902,
+   91.802
+  ],
+  "full_pin_stack_mm": 7.082
  },
  "mount": {
-  "length": 31.2,
+  "route": "sweep-clear",
+  "angle_deg": 62.0,
+  "length": 23.4,
+  "riser_top_rel_tr": 4.41,
+  "bottom_underside_rel_tr": 3.41,
   "dir_along_across": [
-   -0.627,
-   0.779
+   0.469,
+   0.883
   ],
-  "bottom_verts_near": 20,
-  "bottom_end_dist": 27.0,
-  "bottom_height_rel_tr": [
-   0.4,
-   5.8
-  ]
+  "clearance_rule_mm": 1.0,
+  "bottom": {
+   "cut": true,
+   "verts_in_sweep": 1339,
+   "cut_along_from_pad_mm": 3.68,
+   "bar_along_was": [
+    -18.1,
+    256.9
+   ],
+   "bottom_watertight_after_cut": false
+  },
+  "sweep": {
+   "poses": 2769,
+   "closing_used": 1161,
+   "stride": 2
+  }
  },
  "kin_u2_check_deg": 0.0001,
  "check": [
@@ -222,7 +241,7 @@
      15
     ]
    },
-   "frame_dev_mm": 6.1e-05,
+   "frame_dev_mm": 6.2e-05,
    "res_deg": 0.0001,
    "knee_angle": 101.2
   },
@@ -498,7 +517,7 @@
      15
     ]
    },
-   "frame_dev_mm": 6.3e-05,
+   "frame_dev_mm": 6.4e-05,
    "res_deg": 0.0002,
    "knee_angle": 143.3
   },
@@ -636,7 +655,7 @@
      15
     ]
    },
-   "frame_dev_mm": 9.9e-05,
+   "frame_dev_mm": 0.0001,
    "res_deg": 0.0002,
    "knee_angle": 104.0
   }
@@ -644,18 +663,12 @@
  "clips": {
   "Raise overhead": {
    "frames": 181,
-   "held": 181,
-   "follow": 0.0,
-   "reasons": {
-    "adjacent": 181
-   },
-   "adjacent_pairs": {
-    "pad mount to BOTTOM (pro / E strap keep-out (8 x 3 ": 96,
-    "E boss = pin a lower pla / pad mount to BOTTOM (pro": 12,
-    "pad mount to BOTTOM (pro / E boss = pin a lower pla": 73
-   },
-   "min_skin_mm": null,
-   "min_adj_mm": -1.18,
+   "held": 0,
+   "follow": 1.0,
+   "reasons": {},
+   "adjacent_pairs": {},
+   "min_skin_mm": 1.66,
+   "min_adj_mm": 0.43,
    "knee_angle": [
     101.1,
     144.1
@@ -663,16 +676,12 @@
   },
   "Drink from a cup": {
    "frames": 178,
-   "held": 178,
-   "follow": 0.0,
-   "reasons": {
-    "adjacent": 178
-   },
-   "adjacent_pairs": {
-    "pad mount to BOTTOM (pro / E strap keep-out (8 x 3 ": 178
-   },
-   "min_skin_mm": null,
-   "min_adj_mm": -1.19,
+   "held": 0,
+   "follow": 1.0,
+   "reasons": {},
+   "adjacent_pairs": {},
+   "min_skin_mm": 4.1,
+   "min_adj_mm": 0.43,
    "knee_angle": [
     101.1,
     103.0
@@ -680,18 +689,12 @@
   },
   "Comb hair": {
    "frames": 202,
-   "held": 202,
-   "follow": 0.0,
-   "reasons": {
-    "adjacent": 202
-   },
-   "adjacent_pairs": {
-    "pad mount to BOTTOM (pro / E strap keep-out (8 x 3 ": 104,
-    "E boss = pin a lower pla / pad mount to BOTTOM (pro": 69,
-    "pad mount to BOTTOM (pro / E boss = pin a lower pla": 29
-   },
-   "min_skin_mm": null,
-   "min_adj_mm": -1.19,
+   "held": 0,
+   "follow": 1.0,
+   "reasons": {},
+   "adjacent_pairs": {},
+   "min_skin_mm": 2.41,
+   "min_adj_mm": 0.43,
    "knee_angle": [
     101.1,
     133.2
@@ -699,18 +702,12 @@
   },
   "Reach a high shelf": {
    "frames": 157,
-   "held": 157,
-   "follow": 0.0,
-   "reasons": {
-    "adjacent": 157
-   },
-   "adjacent_pairs": {
-    "pad mount to BOTTOM (pro / E strap keep-out (8 x 3 ": 83,
-    "E boss = pin a lower pla / pad mount to BOTTOM (pro": 28,
-    "pad mount to BOTTOM (pro / E boss = pin a lower pla": 46
-   },
-   "min_skin_mm": null,
-   "min_adj_mm": -1.19,
+   "held": 0,
+   "follow": 1.0,
+   "reasons": {},
+   "adjacent_pairs": {},
+   "min_skin_mm": 2.43,
+   "min_adj_mm": 0.43,
    "knee_angle": [
     101.1,
     135.2
@@ -718,16 +715,12 @@
   },
   "Wash opposite shoulder": {
    "frames": 193,
-   "held": 193,
-   "follow": 0.0,
-   "reasons": {
-    "adjacent": 193
-   },
-   "adjacent_pairs": {
-    "pad mount to BOTTOM (pro / E strap keep-out (8 x 3 ": 193
-   },
-   "min_skin_mm": null,
-   "min_adj_mm": -1.18,
+   "held": 0,
+   "follow": 1.0,
+   "reasons": {},
+   "adjacent_pairs": {},
+   "min_skin_mm": 4.1,
+   "min_adj_mm": 0.43,
    "knee_angle": [
     101.1,
     102.4
@@ -735,18 +728,12 @@
   },
   "Reach back pocket": {
    "frames": 145,
-   "held": 145,
-   "follow": 0.0,
-   "reasons": {
-    "adjacent": 145
-   },
-   "adjacent_pairs": {
-    "pad mount to BOTTOM (pro / E strap keep-out (8 x 3 ": 62,
-    "E strap keep-out (8 x 3  / pad mount to BOTTOM (pro": 4,
-    "E boss = pin a lower pla / pad mount to BOTTOM (pro": 79
-   },
-   "min_skin_mm": null,
-   "min_adj_mm": -1.16,
+   "held": 0,
+   "follow": 1.0,
+   "reasons": {},
+   "adjacent_pairs": {},
+   "min_skin_mm": 1.76,
+   "min_adj_mm": 0.43,
    "knee_angle": [
     101.7,
     118.1
@@ -754,17 +741,14 @@
   },
   "Wave": {
    "frames": 172,
-   "held": 172,
-   "follow": 0.0,
+   "held": 14,
+   "follow": 0.919,
    "reasons": {
-    "adjacent": 158,
     "parts": 14
    },
-   "adjacent_pairs": {
-    "pad mount to BOTTOM (pro / E strap keep-out (8 x 3 ": 158
-   },
-   "min_skin_mm": null,
-   "min_adj_mm": -1.19,
+   "adjacent_pairs": {},
+   "min_skin_mm": 2.41,
+   "min_adj_mm": -0.41,
    "knee_angle": [
     101.1,
     121.1
@@ -772,16 +756,12 @@
   },
   "Walking arm swing": {
    "frames": 109,
-   "held": 109,
-   "follow": 0.0,
-   "reasons": {
-    "adjacent": 109
-   },
-   "adjacent_pairs": {
-    "pad mount to BOTTOM (pro / E strap keep-out (8 x 3 ": 109
-   },
-   "min_skin_mm": null,
-   "min_adj_mm": -1.18,
+   "held": 0,
+   "follow": 1.0,
+   "reasons": {},
+   "adjacent_pairs": {},
+   "min_skin_mm": 3.92,
+   "min_adj_mm": 0.43,
    "knee_angle": [
     101.1,
     101.5
@@ -791,6 +771,6 @@
  "workspace": {
   "poses": 1432,
   "closes": 0.6878,
-  "feasible_kin_parts": 0.0
+  "feasible_kin_parts": 0.6599
  }
 }

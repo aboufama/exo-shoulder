@@ -38,6 +38,17 @@ def load(dd):
     return parts
 
 
+def load_bottom(dd):
+    """the user's BOTTOM bar as built in this design (cut clear of the knee sweep by the builder): for the adjacency pairs only"""
+    src = trimesh.load(os.path.join(dd, "exo.glb"))
+    for node in src.graph.nodes_geometry:
+        g, n = node.split("|")[:2]
+        if g == "H" and n.startswith("BOTTOM"):
+            T_, gn = src.graph[node]; m = src.geometry[gn].copy(); m.apply_transform(T_)
+            return (g, n, m, np.r_[np.asarray(m.vertices), trimesh.sample.sample_surface_even(m, 3000, seed=2)[0]])
+    return None
+
+
 def fold_patch():
     """rest-pose skin vertex ids of the posterior axillary fold, + region per vertex"""
     sk = BPJ._rig().skin; W = np.zeros((sk["n"], 5)); np.add.at(W, (np.repeat(np.arange(sk["n"]), 4), sk["wi"].ravel()), sk["ww"].ravel())
@@ -103,14 +114,19 @@ def main():
     print(f"{len(items)} followed frames (step {a.step}) in {time.time() - t0:.0f} s")
     for n, v in sorted(per.items(), key=lambda x: x[1]["min_mm"]):
         print(f"  {v['min_mm']:6.2f} mm  <1mm {v['share_lt1']:.3f}  <2mm {v['share_lt2']:.3f}  {v['region_at_min']:9s} fold {v['posterior_axillary_fold_min_mm']:6.1f}  {n[:60]:60s} {v['at']}")
-    find = lambda s: next((n for g, n, m, X in parts if s in n), None)
+    find = lambda s: next((n for g, n, m, X in parts if n.startswith(s)), None) or next((n for g, n, m, X in parts if s in n), None)
     pairs = [("knee link", "J3 upper boss"), ("knee link", "E strap"), ("knee link", "link 2 strap"), ("knee link", "E boss"), ("knee link", "arm pad"),
              ("knee link", "pad mount"), ("E strap", "link 2 strap"), ("E strap", "J3 upper boss"), ("E boss", "pad mount"), ("E boss", "arm pad"),
              ("E strap", "pad mount"), ("E strap", "arm pad"), ("link 2 strap", "J3 lower plate"), ("link 1 strap", "link 2 strap"),
              ("link 1 strap", "J2 upper boss"), ("link 2 strap", "J2 lower plate"), ("link 2 strap", "pad mount"), ("link 2 strap", "arm pad")]
+    pairs += [("pin a retainer", "knee link"), ("pin b retainer", "knee link"), ("pin a retainer", "link 2 strap"), ("pin a retainer", "pad mount"),
+              ("pin b retainer", "E boss"), ("pin b retainer", "E strap")]
     pairs = [(find(x), find(y)) for x, y in pairs if find(x) and find(y)]; adj = {}
+    bt = load_bottom(dd); parts_b = parts + ([bt] if bt else [])
+    if bt:                                                                      # the user's BOTTOM (cut by the builder) vs the knee's moving parts
+        pairs += [(find(x), bt[1]) for x in ("knee link", "E boss", "E strap", "pin a retainer", "J3 lower plate") if find(x)]
     for (fr, _, _, _), tg in list(zip(items, tags))[::2]:
-        for k, v in adjacent(fr, parts, pairs).items():
+        for k, v in adjacent(fr, parts_b, pairs).items():
             if k not in adj or v < adj[k][0]: adj[k] = (round(v, 3), tg[0], tg[1], [round(x, 1) for x in tg[2]])
     print("knee / adjacent pairs, min mesh distance over the followed frames (every 2nd; < 0 = inside):")
     for k, v in sorted(adj.items(), key=lambda x: x[1][0]): print(f"  {v[0]:7.3f} mm  {k}  {v[1:]}")

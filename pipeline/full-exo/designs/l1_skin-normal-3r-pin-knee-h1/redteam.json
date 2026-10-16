@@ -1,0 +1,2232 @@
+{
+ "id": "l1_skin-normal-3r-pin-knee-h1",
+ "step": 3,
+ "frames": 445,
+ "fold_patch_vertices": 409,
+ "per_part": {
+  "pad mount to BOTTOM (proxy) (2.59 mm slab at the pad level, arm pad -> the BOTTOM bar, routed clear of the knee sweep)": {
+   "min_mm": 1.77,
+   "at": {
+    "clip": "Reach back pocket",
+    "frame": 72,
+    "pose": [
+     -80.0,
+     39.0,
+     101.1
+    ]
+   },
+   "region_at_min": "upper arm",
+   "at_posterior_axillary_fold": false,
+   "share_lt1": 0.0,
+   "share_lt2": 0.0337,
+   "median_mm": 5.55,
+   "posterior_axillary_fold_min_mm": 39.67,
+   "fold_at": {
+    "clip": "Wave",
+    "frame": 33,
+    "pose": [
+     15.9,
+     76.2,
+     -52.8
+    ]
+   }
+  },
+  "pin b retainer keep-out (O8 x 0.9 mm: DIN 6799 RS 3.2 e-clip + pin end, over the 0.5 mm GTM washer on the knee link)": {
+   "min_mm": 8.32,
+   "at": {
+    "clip": "Reach back pocket",
+    "frame": 72,
+    "pose": [
+     -80.0,
+     39.0,
+     101.1
+    ]
+   },
+   "region_at_min": "upper arm",
+   "at_posterior_axillary_fold": false,
+   "share_lt1": 0.0,
+   "share_lt2": 0.0,
+   "median_mm": 13.15,
+   "posterior_axillary_fold_min_mm": 43.92,
+   "fold_at": {
+    "clip": "Wave",
+    "frame": 33,
+    "pose": [
+     15.9,
+     76.2,
+     -52.8
+    ]
+   }
+  },
+  "pin a retainer keep-out (O8 x 0.9 mm: DIN 6799 RS 3.2 e-clip + pin end, over the 0.5 mm GTM washer on the knee link)": {
+   "min_mm": 8.92,
+   "at": {
+    "clip": "Reach back pocket",
+    "frame": 72,
+    "pose": [
+     -80.0,
+     39.0,
+     101.1
+    ]
+   },
+   "region_at_min": "upper arm",
+   "at_posterior_axillary_fold": false,
+   "share_lt1": 0.0,
+   "share_lt2": 0.0,
+   "median_mm": 12.23,
+   "posterior_axillary_fold_min_mm": 28.22,
+   "fold_at": {
+    "clip": "Wave",
+    "frame": 69,
+    "pose": [
+     15.0,
+     93.5,
+     -62.5
+    ]
+   }
+  },
+  "arm pad = pin b lower plate (O12 x 2.59075 mm, tr..tr+tp, arm-fixed on the cuff)": {
+   "min_mm": 1.97,
+   "at": {
+    "clip": "Reach back pocket",
+    "frame": 72,
+    "pose": [
+     -80.0,
+     39.0,
+     101.1
+    ]
+   },
+   "region_at_min": "upper arm",
+   "at_posterior_axillary_fold": false,
+   "share_lt1": 0.0,
+   "share_lt2": 0.027,
+   "median_mm": 6.69,
+   "posterior_axillary_fold_min_mm": 39.03,
+   "fold_at": {
+    "clip": "Wave",
+    "frame": 33,
+    "pose": [
+     15.9,
+     76.2,
+     -52.8
+    ]
+   }
+  },
+  "knee link keep-out (flat Ti bar 40.2 x 10 x 2.59075 mm, pins a, b 6 mm from its ends, tr+tp+0.5)": {
+   "min_mm": 4.81,
+   "at": {
+    "clip": "Reach back pocket",
+    "frame": 72,
+    "pose": [
+     -80.0,
+     39.0,
+     101.1
+    ]
+   },
+   "region_at_min": "upper arm",
+   "at_posterior_axillary_fold": false,
+   "share_lt1": 0.0,
+   "share_lt2": 0.0,
+   "median_mm": 8.77,
+   "posterior_axillary_fold_min_mm": 23.48,
+   "fold_at": {
+    "clip": "Wave",
+    "frame": 54,
+    "pose": [
+     15.0,
+     93.0,
+     -66.3
+    ]
+   }
+  },
+  "E boss = pin a lower plate (O12 x 2.59075 mm, tr..tr+tp, member 3)": {
+   "min_mm": 2.5,
+   "at": {
+    "clip": "Reach back pocket",
+    "frame": 72,
+    "pose": [
+     -80.0,
+     39.0,
+     101.1
+    ]
+   },
+   "region_at_min": "upper arm",
+   "at_posterior_axillary_fold": false,
+   "share_lt1": 0.0,
+   "share_lt2": 0.0,
+   "median_mm": 5.88,
+   "posterior_axillary_fold_min_mm": 22.44,
+   "fold_at": {
+    "clip": "Wave",
+    "frame": 69,
+    "pose": [
+     15.0,
+     93.5,
+     -62.5
+    ]
+   }
+  },
+  "E strap keep-out (8 x 3 mm Ti, fitted underside, hub 3 plate -> pin a, thins to 2.59075 at the boss)": {
+   "min_mm": 2.51,
+   "at": {
+    "clip": "Reach back pocket",
+    "frame": 72,
+    "pose": [
+     -80.0,
+     39.0,
+     101.1
+    ]
+   },
+   "region_at_min": "upper arm",
+   "at_posterior_axillary_fold": false,
+   "share_lt1": 0.0,
+   "share_lt2": 0.0,
+   "median_mm": 5.39,
+   "posterior_axillary_fold_min_mm": 4.29,
+   "fold_at": {
+    "clip": "Comb hair",
+    "frame": 87,
+    "pose": [
+     64.1,
+     133.6,
+     -60.7
+    ]
+   }
+  },
+  "link 2 strap keep-out (8 x 3 mm Ti, fitted underside)": {
+   "min_mm": 1.8,
+   "at": {
+    "clip": "Reach back pocket",
+    "frame": 72,
+    "pose": [
+     -80.0,
+     39.0,
+     101.1
+    ]
+   },
+   "region_at_min": "trunk",
+   "at_posterior_axillary_fold": false,
+   "share_lt1": 0.0,
+   "share_lt2": 0.0292,
+   "median_mm": 7.25,
+   "posterior_axillary_fold_min_mm": 2.63,
+   "fold_at": {
+    "clip": "Comb hair",
+    "frame": 105,
+    "pose": [
+     78.1,
+     143.1,
+     -67.1
+    ]
+   }
+  },
+  "link 1 strap keep-out (8 x 3 mm Ti, fitted underside)": {
+   "min_mm": 4.36,
+   "at": {
+    "clip": "Comb hair",
+    "frame": 105,
+    "pose": [
+     78.1,
+     143.1,
+     -67.1
+    ]
+   },
+   "region_at_min": "trunk",
+   "at_posterior_axillary_fold": false,
+   "share_lt1": 0.0,
+   "share_lt2": 0.0,
+   "median_mm": 6.65,
+   "posterior_axillary_fold_min_mm": 45.71,
+   "fold_at": {
+    "clip": "Wash opposite shoulder",
+    "frame": 162,
+    "pose": [
+     109.7,
+     44.3,
+     -44.7
+    ]
+   }
+  },
+  "J3 lower plate keep-out (O20 x 3, member 3)": {
+   "min_mm": 3.46,
+   "at": {
+    "clip": "Reach a high shelf",
+    "frame": 42,
+    "pose": [
+     78.5,
+     106.5,
+     -78.5
+    ]
+   },
+   "region_at_min": "upper arm",
+   "at_posterior_axillary_fold": false,
+   "share_lt1": 0.0,
+   "share_lt2": 0.0,
+   "median_mm": 7.14,
+   "posterior_axillary_fold_min_mm": 4.79,
+   "fold_at": {
+    "clip": "Comb hair",
+    "frame": 87,
+    "pose": [
+     64.1,
+     133.6,
+     -60.7
+    ]
+   }
+  },
+  "J3 upper boss + cap keep-out (O20, F+3.15..F+12.25, link 2)": {
+   "min_mm": 6.47,
+   "at": {
+    "clip": "Reach a high shelf",
+    "frame": 42,
+    "pose": [
+     78.5,
+     106.5,
+     -78.5
+    ]
+   },
+   "region_at_min": "upper arm",
+   "at_posterior_axillary_fold": false,
+   "share_lt1": 0.0,
+   "share_lt2": 0.0,
+   "median_mm": 10.08,
+   "posterior_axillary_fold_min_mm": 7.37,
+   "fold_at": {
+    "clip": "Comb hair",
+    "frame": 87,
+    "pose": [
+     64.1,
+     133.6,
+     -60.7
+    ]
+   }
+  },
+  "J2 upper boss + cap keep-out (O20, F+3.15..F+12.25, link 2)": {
+   "min_mm": 2.37,
+   "at": {
+    "clip": "Raise overhead",
+    "frame": 78,
+    "pose": [
+     30.0,
+     150.0,
+     -60.0
+    ]
+   },
+   "region_at_min": "trunk",
+   "at_posterior_axillary_fold": false,
+   "share_lt1": 0.0,
+   "share_lt2": 0.0,
+   "median_mm": 12.1,
+   "posterior_axillary_fold_min_mm": 32.0,
+   "fold_at": {
+    "clip": "Wash opposite shoulder",
+    "frame": 159,
+    "pose": [
+     120.2,
+     49.6,
+     -46.6
+    ]
+   }
+  },
+  "J2 lower plate keep-out (O20 x 3, link 1)": {
+   "min_mm": 1.9,
+   "at": {
+    "clip": "Raise overhead",
+    "frame": 78,
+    "pose": [
+     30.0,
+     150.0,
+     -60.0
+    ]
+   },
+   "region_at_min": "trunk",
+   "at_posterior_axillary_fold": false,
+   "share_lt1": 0.0,
+   "share_lt2": 0.0382,
+   "median_mm": 8.95,
+   "posterior_axillary_fold_min_mm": 29.93,
+   "fold_at": {
+    "clip": "Wash opposite shoulder",
+    "frame": 159,
+    "pose": [
+     120.2,
+     49.6,
+     -46.6
+    ]
+   }
+  },
+  "J1 lower plate keep-out (O20 x 3, link 1)": {
+   "min_mm": 1.66,
+   "at": {
+    "clip": "Raise overhead",
+    "frame": 78,
+    "pose": [
+     30.0,
+     150.0,
+     -60.0
+    ]
+   },
+   "region_at_min": "trunk",
+   "at_posterior_axillary_fold": false,
+   "share_lt1": 0.0,
+   "share_lt2": 0.0337,
+   "median_mm": 8.55,
+   "posterior_axillary_fold_min_mm": 42.68,
+   "fold_at": {
+    "clip": "Raise overhead",
+    "frame": 78,
+    "pose": [
+     30.0,
+     150.0,
+     -60.0
+    ]
+   }
+  },
+  "J1 upper boss + cap keep-out (O20, F+3.15..F+12.25; base = J1's upper member)": {
+   "min_mm": 4.72,
+   "at": {
+    "clip": "Raise overhead",
+    "frame": 78,
+    "pose": [
+     30.0,
+     150.0,
+     -60.0
+    ]
+   },
+   "region_at_min": "trunk",
+   "at_posterior_axillary_fold": false,
+   "share_lt1": 0.0,
+   "share_lt2": 0.0,
+   "median_mm": 11.68,
+   "posterior_axillary_fold_min_mm": 42.9,
+   "fold_at": {
+    "clip": "Raise overhead",
+    "frame": 78,
+    "pose": [
+     30.0,
+     150.0,
+     -60.0
+    ]
+   }
+  }
+ },
+ "adjacent": {
+  "pin b retainer keep-out / J3 upper boss + cap keep-out": [
+   56.716,
+   "Wash opposite shoulder",
+   48,
+   [
+    121.3,
+    30.4,
+    -79.0
+   ]
+  ],
+  "pin b retainer keep-out / E strap keep-out": [
+   22.011,
+   "Wash opposite shoulder",
+   60,
+   [
+    124.1,
+    31.9,
+    -78.8
+   ]
+  ],
+  "pin b retainer keep-out / link 2 strap keep-out": [
+   64.825,
+   "Reach back pocket",
+   111,
+   [
+    -70.2,
+    34.7,
+    88.8
+   ]
+  ],
+  "pin b retainer keep-out / E boss = pin a lower plate": [
+   18.59,
+   "Comb hair",
+   39,
+   [
+    54.0,
+    94.5,
+    -54.9
+   ]
+  ],
+  "pin b retainer keep-out / pad mount to BOTTOM": [
+   3.591,
+   "Walking arm swing",
+   108,
+   [
+    90.0,
+    4.2,
+    -90.0
+   ]
+  ],
+  "E strap keep-out / link 2 strap keep-out": [
+   4.321,
+   "Reach back pocket",
+   51,
+   [
+    -70.1,
+    40.1,
+    83.7
+   ]
+  ],
+  "E strap keep-out / J3 upper boss + cap keep-out": [
+   0.131,
+   "Walking arm swing",
+   108,
+   [
+    90.0,
+    4.2,
+    -90.0
+   ]
+  ],
+  "E boss = pin a lower plate / pad mount to BOTTOM": [
+   6.045,
+   "Reach back pocket",
+   129,
+   [
+    -16.8,
+    11.3,
+    21.2
+   ]
+  ],
+  "E strap keep-out / pad mount to BOTTOM": [
+   14.205,
+   "Wash opposite shoulder",
+   174,
+   [
+    60.3,
+    19.3,
+    -35.6
+   ]
+  ],
+  "link 2 strap keep-out / J3 lower plate keep-out": [
+   0.35,
+   "Walking arm swing",
+   108,
+   [
+    90.0,
+    4.2,
+    -90.0
+   ]
+  ],
+  "link 1 strap keep-out / link 2 strap keep-out": [
+   0.196,
+   "Raise overhead",
+   42,
+   [
+    30.0,
+    87.1,
+    -47.1
+   ]
+  ],
+  "link 1 strap keep-out / J2 upper boss + cap keep-out": [
+   0.467,
+   "Raise overhead",
+   24,
+   [
+    30.0,
+    28.5,
+    -35.2
+   ]
+  ],
+  "link 2 strap keep-out / J2 lower plate keep-out": [
+   0.35,
+   "Walking arm swing",
+   108,
+   [
+    90.0,
+    4.2,
+    -90.0
+   ]
+  ],
+  "link 2 strap keep-out / pad mount to BOTTOM": [
+   62.374,
+   "Reach back pocket",
+   105,
+   [
+    -78.5,
+    38.3,
+    99.2
+   ]
+  ],
+  "pin a retainer keep-out / pin b retainer keep-out": [
+   20.24,
+   "Comb hair",
+   39,
+   [
+    54.0,
+    94.5,
+    -54.9
+   ]
+  ],
+  "pin b retainer keep-out / pin b retainer keep-out": [
+   -0.0,
+   "Walking arm swing",
+   108,
+   [
+    90.0,
+    4.2,
+    -90.0
+   ]
+  ],
+  "pin a retainer keep-out / link 2 strap keep-out": [
+   50.765,
+   "Reach back pocket",
+   51,
+   [
+    -70.1,
+    40.1,
+    83.7
+   ]
+  ],
+  "pin a retainer keep-out / pad mount to BOTTOM": [
+   8.237,
+   "Reach back pocket",
+   129,
+   [
+    -16.8,
+    11.3,
+    21.2
+   ]
+  ],
+  "pin b retainer keep-out / BOTTOM": [
+   17.093,
+   "Walking arm swing",
+   108,
+   [
+    90.0,
+    4.2,
+    -90.0
+   ]
+  ],
+  "E boss = pin a lower plate / BOTTOM": [
+   3.929,
+   "Reach back pocket",
+   129,
+   [
+    -16.8,
+    11.3,
+    21.2
+   ]
+  ],
+  "E strap keep-out / BOTTOM": [
+   13.568,
+   "Reach back pocket",
+   15,
+   [
+    -12.6,
+    10.5,
+    15.0
+   ]
+  ],
+  "pin a retainer keep-out / BOTTOM": [
+   4.78,
+   "Reach back pocket",
+   129,
+   [
+    -16.8,
+    11.3,
+    21.2
+   ]
+  ],
+  "J3 lower plate keep-out / BOTTOM": [
+   59.572,
+   "Reach back pocket",
+   15,
+   [
+    -12.6,
+    10.5,
+    15.0
+   ]
+  ]
+ },
+ "arm_at_side_neighbourhood": [
+  {
+   "pose": [
+    -30,
+    0.0,
+    -60
+   ],
+   "closes": false,
+   "knee_ok": true,
+   "clear": null
+  },
+  {
+   "pose": [
+    -30,
+    0.0,
+    -30
+   ],
+   "closes": true,
+   "lowest_part": "E strap keep-out",
+   "lowest_mm": 2.49,
+   "region": "trunk",
+   "fold": true,
+   "knee_angle": 102.6
+  },
+  {
+   "pose": [
+    -30,
+    0.0,
+    0
+   ],
+   "closes": true,
+   "lowest_part": "E strap keep-out",
+   "lowest_mm": 2.84,
+   "region": "upper arm",
+   "fold": false,
+   "knee_angle": 101.2
+  },
+  {
+   "pose": [
+    -30,
+    0.0,
+    30
+   ],
+   "closes": true,
+   "lowest_part": "pad mount to BOTTOM",
+   "lowest_mm": 3.83,
+   "region": "upper arm",
+   "fold": false,
+   "knee_angle": 101.6
+  },
+  {
+   "pose": [
+    -30,
+    0.0,
+    60
+   ],
+   "closes": true,
+   "lowest_part": "pad mount to BOTTOM",
+   "lowest_mm": 4.78,
+   "region": "upper arm",
+   "fold": false,
+   "knee_angle": 103.7
+  },
+  {
+   "pose": [
+    -30,
+    0.0,
+    90
+   ],
+   "closes": true,
+   "lowest_part": "pad mount to BOTTOM",
+   "lowest_mm": 5.51,
+   "region": "upper arm",
+   "fold": false,
+   "knee_angle": 106.1
+  },
+  {
+   "pose": [
+    -30,
+    5.0,
+    -60
+   ],
+   "closes": false,
+   "knee_ok": true,
+   "clear": null
+  },
+  {
+   "pose": [
+    -30,
+    5.0,
+    -30
+   ],
+   "closes": true,
+   "lowest_part": "pad mount to BOTTOM",
+   "lowest_mm": 2.9,
+   "region": "upper arm",
+   "fold": false,
+   "knee_angle": 102.5
+  },
+  {
+   "pose": [
+    -30,
+    5.0,
+    0
+   ],
+   "closes": true,
+   "lowest_part": "pad mount to BOTTOM",
+   "lowest_mm": 3.37,
+   "region": "upper arm",
+   "fold": false,
+   "knee_angle": 101.1
+  },
+  {
+   "pose": [
+    -30,
+    5.0,
+    30
+   ],
+   "closes": true,
+   "lowest_part": "pad mount to BOTTOM",
+   "lowest_mm": 4.0,
+   "region": "upper arm",
+   "fold": false,
+   "knee_angle": 102.0
+  },
+  {
+   "pose": [
+    -30,
+    5.0,
+    60
+   ],
+   "closes": true,
+   "lowest_part": "pad mount to BOTTOM",
+   "lowest_mm": 4.74,
+   "region": "upper arm",
+   "fold": false,
+   "knee_angle": 105.0
+  },
+  {
+   "pose": [
+    -30,
+    5.0,
+    90
+   ],
+   "closes": true,
+   "lowest_part": "pad mount to BOTTOM",
+   "lowest_mm": 5.28,
+   "region": "upper arm",
+   "fold": false,
+   "knee_angle": 107.8
+  },
+  {
+   "pose": [
+    -30,
+    10.0,
+    -60
+   ],
+   "closes": true,
+   "lowest_part": "J3 lower plate keep-out",
+   "lowest_mm": -7.5,
+   "region": "trunk",
+   "fold": false,
+   "knee_angle": 106.9
+  },
+  {
+   "pose": [
+    -30,
+    10.0,
+    -30
+   ],
+   "closes": true,
+   "lowest_part": "pad mount to BOTTOM",
+   "lowest_mm": 3.13,
+   "region": "upper arm",
+   "fold": false,
+   "knee_angle": 102.4
+  },
+  {
+   "pose": [
+    -30,
+    10.0,
+    0
+   ],
+   "closes": true,
+   "lowest_part": "pad mount to BOTTOM",
+   "lowest_mm": 3.62,
+   "region": "upper arm",
+   "fold": false,
+   "knee_angle": 101.1
+  },
+  {
+   "pose": [
+    -30,
+    10.0,
+    30
+   ],
+   "closes": true,
+   "lowest_part": "pad mount to BOTTOM",
+   "lowest_mm": 4.15,
+   "region": "upper arm",
+   "fold": false,
+   "knee_angle": 102.5
+  },
+  {
+   "pose": [
+    -30,
+    10.0,
+    60
+   ],
+   "closes": true,
+   "lowest_part": "pad mount to BOTTOM",
+   "lowest_mm": 4.74,
+   "region": "upper arm",
+   "fold": false,
+   "knee_angle": 106.4
+  },
+  {
+   "pose": [
+    -30,
+    10.0,
+    90
+   ],
+   "closes": true,
+   "lowest_part": "pad mount to BOTTOM",
+   "lowest_mm": 5.05,
+   "region": "upper arm",
+   "fold": false,
+   "knee_angle": 109.7
+  },
+  {
+   "pose": [
+    -15,
+    0.0,
+    -60
+   ],
+   "closes": true,
+   "lowest_part": "link 2 strap keep-out",
+   "lowest_mm": -0.72,
+   "region": "trunk",
+   "fold": false,
+   "knee_angle": 104.2
+  },
+  {
+   "pose": [
+    -15,
+    0.0,
+    -30
+   ],
+   "closes": true,
+   "lowest_part": "E strap keep-out",
+   "lowest_mm": 2.35,
+   "region": "upper arm",
+   "fold": false,
+   "knee_angle": 101.7
+  },
+  {
+   "pose": [
+    -15,
+    0.0,
+    0
+   ],
+   "closes": true,
+   "lowest_part": "E strap keep-out",
+   "lowest_mm": 3.1,
+   "region": "upper arm",
+   "fold": false,
+   "knee_angle": 101.2
+  },
+  {
+   "pose": [
+    -15,
+    0.0,
+    30
+   ],
+   "closes": true,
+   "lowest_part": "pad mount to BOTTOM",
+   "lowest_mm": 4.34,
+   "region": "upper arm",
+   "fold": false,
+   "knee_angle": 102.5
+  },
+  {
+   "pose": [
+    -15,
+    0.0,
+    60
+   ],
+   "closes": true,
+   "lowest_part": "pad mount to BOTTOM",
+   "lowest_mm": 5.13,
+   "region": "upper arm",
+   "fold": false,
+   "knee_angle": 105.0
+  },
+  {
+   "pose": [
+    -15,
+    0.0,
+    90
+   ],
+   "closes": true,
+   "lowest_part": "pad mount to BOTTOM",
+   "lowest_mm": 5.88,
+   "region": "upper arm",
+   "fold": false,
+   "knee_angle": 106.6
+  },
+  {
+   "pose": [
+    -15,
+    5.0,
+    -60
+   ],
+   "closes": true,
+   "lowest_part": "link 2 strap keep-out",
+   "lowest_mm": -0.21,
+   "region": "trunk",
+   "fold": false,
+   "knee_angle": 104.4
+  },
+  {
+   "pose": [
+    -15,
+    5.0,
+    -30
+   ],
+   "closes": true,
+   "lowest_part": "E strap keep-out",
+   "lowest_mm": 2.95,
+   "region": "upper arm",
+   "fold": false,
+   "knee_angle": 101.7
+  },
+  {
+   "pose": [
+    -15,
+    5.0,
+    0
+   ],
+   "closes": true,
+   "lowest_part": "pad mount to BOTTOM",
+   "lowest_mm": 3.67,
+   "region": "upper arm",
+   "fold": false,
+   "knee_angle": 101.2
+  },
+  {
+   "pose": [
+    -15,
+    5.0,
+    30
+   ],
+   "closes": true,
+   "lowest_part": "pad mount to BOTTOM",
+   "lowest_mm": 4.51,
+   "region": "upper arm",
+   "fold": false,
+   "knee_angle": 103.1
+  },
+  {
+   "pose": [
+    -15,
+    5.0,
+    60
+   ],
+   "closes": true,
+   "lowest_part": "pad mount to BOTTOM",
+   "lowest_mm": 5.12,
+   "region": "upper arm",
+   "fold": false,
+   "knee_angle": 106.5
+  },
+  {
+   "pose": [
+    -15,
+    5.0,
+    90
+   ],
+   "closes": true,
+   "lowest_part": "pad mount to BOTTOM",
+   "lowest_mm": 5.62,
+   "region": "upper arm",
+   "fold": false,
+   "knee_angle": 108.3
+  },
+  {
+   "pose": [
+    -15,
+    10.0,
+    -60
+   ],
+   "closes": true,
+   "lowest_part": "link 2 strap keep-out",
+   "lowest_mm": 0.37,
+   "region": "trunk",
+   "fold": false,
+   "knee_angle": 104.8
+  },
+  {
+   "pose": [
+    -15,
+    10.0,
+    -30
+   ],
+   "closes": true,
+   "lowest_part": "pad mount to BOTTOM",
+   "lowest_mm": 3.35,
+   "region": "upper arm",
+   "fold": false,
+   "knee_angle": 101.7
+  },
+  {
+   "pose": [
+    -15,
+    10.0,
+    0
+   ],
+   "closes": true,
+   "lowest_part": "pad mount to BOTTOM",
+   "lowest_mm": 3.96,
+   "region": "upper arm",
+   "fold": false,
+   "knee_angle": 101.3
+  },
+  {
+   "pose": [
+    -15,
+    10.0,
+    30
+   ],
+   "closes": true,
+   "lowest_part": "pad mount to BOTTOM",
+   "lowest_mm": 4.69,
+   "region": "upper arm",
+   "fold": false,
+   "knee_angle": 103.8
+  },
+  {
+   "pose": [
+    -15,
+    10.0,
+    60
+   ],
+   "closes": true,
+   "lowest_part": "pad mount to BOTTOM",
+   "lowest_mm": 5.1,
+   "region": "upper arm",
+   "fold": false,
+   "knee_angle": 108.3
+  },
+  {
+   "pose": [
+    -15,
+    10.0,
+    90
+   ],
+   "closes": true,
+   "lowest_part": "pad mount to BOTTOM",
+   "lowest_mm": 5.37,
+   "region": "upper arm",
+   "fold": false,
+   "knee_angle": 110.3
+  },
+  {
+   "pose": [
+    0,
+    0.0,
+    -60
+   ],
+   "closes": true,
+   "lowest_part": "E strap keep-out",
+   "lowest_mm": 2.49,
+   "region": "trunk",
+   "fold": true,
+   "knee_angle": 102.6
+  },
+  {
+   "pose": [
+    0,
+    0.0,
+    -30
+   ],
+   "closes": true,
+   "lowest_part": "E strap keep-out",
+   "lowest_mm": 2.84,
+   "region": "upper arm",
+   "fold": false,
+   "knee_angle": 101.2
+  },
+  {
+   "pose": [
+    0,
+    0.0,
+    0
+   ],
+   "closes": true,
+   "lowest_part": "pad mount to BOTTOM",
+   "lowest_mm": 3.83,
+   "region": "upper arm",
+   "fold": false,
+   "knee_angle": 101.6
+  },
+  {
+   "pose": [
+    0,
+    0.0,
+    30
+   ],
+   "closes": true,
+   "lowest_part": "pad mount to BOTTOM",
+   "lowest_mm": 4.78,
+   "region": "upper arm",
+   "fold": false,
+   "knee_angle": 103.7
+  },
+  {
+   "pose": [
+    0,
+    0.0,
+    60
+   ],
+   "closes": true,
+   "lowest_part": "pad mount to BOTTOM",
+   "lowest_mm": 5.51,
+   "region": "upper arm",
+   "fold": false,
+   "knee_angle": 106.1
+  },
+  {
+   "pose": [
+    0,
+    0.0,
+    90
+   ],
+   "closes": true,
+   "lowest_part": "pad mount to BOTTOM",
+   "lowest_mm": 6.2,
+   "region": "upper arm",
+   "fold": false,
+   "knee_angle": 106.2
+  },
+  {
+   "pose": [
+    0,
+    5.0,
+    -60
+   ],
+   "closes": true,
+   "lowest_part": "pad mount to BOTTOM",
+   "lowest_mm": 2.84,
+   "region": "upper arm",
+   "fold": false,
+   "knee_angle": 102.9
+  },
+  {
+   "pose": [
+    0,
+    5.0,
+    -30
+   ],
+   "closes": true,
+   "lowest_part": "pad mount to BOTTOM",
+   "lowest_mm": 3.37,
+   "region": "upper arm",
+   "fold": false,
+   "knee_angle": 101.2
+  },
+  {
+   "pose": [
+    0,
+    5.0,
+    0
+   ],
+   "closes": true,
+   "lowest_part": "pad mount to BOTTOM",
+   "lowest_mm": 4.12,
+   "region": "upper arm",
+   "fold": false,
+   "knee_angle": 101.7
+  },
+  {
+   "pose": [
+    0,
+    5.0,
+    30
+   ],
+   "closes": true,
+   "lowest_part": "pad mount to BOTTOM",
+   "lowest_mm": 4.91,
+   "region": "upper arm",
+   "fold": false,
+   "knee_angle": 104.6
+  },
+  {
+   "pose": [
+    0,
+    5.0,
+    60
+   ],
+   "closes": true,
+   "lowest_part": "pad mount to BOTTOM",
+   "lowest_mm": 5.48,
+   "region": "upper arm",
+   "fold": false,
+   "knee_angle": 107.8
+  },
+  {
+   "pose": [
+    0,
+    5.0,
+    90
+   ],
+   "closes": true,
+   "lowest_part": "pad mount to BOTTOM",
+   "lowest_mm": 5.93,
+   "region": "upper arm",
+   "fold": false,
+   "knee_angle": 107.9
+  },
+  {
+   "pose": [
+    0,
+    10.0,
+    -60
+   ],
+   "closes": true,
+   "lowest_part": "pad mount to BOTTOM",
+   "lowest_mm": 3.0,
+   "region": "upper arm",
+   "fold": false,
+   "knee_angle": 103.4
+  },
+  {
+   "pose": [
+    0,
+    10.0,
+    -30
+   ],
+   "closes": true,
+   "lowest_part": "pad mount to BOTTOM",
+   "lowest_mm": 3.64,
+   "region": "upper arm",
+   "fold": false,
+   "knee_angle": 101.3
+  },
+  {
+   "pose": [
+    0,
+    10.0,
+    0
+   ],
+   "closes": true,
+   "lowest_part": "pad mount to BOTTOM",
+   "lowest_mm": 4.41,
+   "region": "upper arm",
+   "fold": false,
+   "knee_angle": 101.8
+  },
+  {
+   "pose": [
+    0,
+    10.0,
+    30
+   ],
+   "closes": true,
+   "lowest_part": "pad mount to BOTTOM",
+   "lowest_mm": 5.07,
+   "region": "upper arm",
+   "fold": false,
+   "knee_angle": 105.5
+  },
+  {
+   "pose": [
+    0,
+    10.0,
+    60
+   ],
+   "closes": true,
+   "lowest_part": "link 2 strap keep-out",
+   "lowest_mm": 5.43,
+   "region": "trunk",
+   "fold": false,
+   "knee_angle": 109.8
+  },
+  {
+   "pose": [
+    0,
+    10.0,
+    90
+   ],
+   "closes": true,
+   "lowest_part": "pad mount to BOTTOM",
+   "lowest_mm": 5.68,
+   "region": "upper arm",
+   "fold": false,
+   "knee_angle": 109.8
+  },
+  {
+   "pose": [
+    30,
+    0.0,
+    -60
+   ],
+   "closes": true,
+   "lowest_part": "E strap keep-out",
+   "lowest_mm": 2.84,
+   "region": "upper arm",
+   "fold": false,
+   "knee_angle": 101.2
+  },
+  {
+   "pose": [
+    30,
+    0.0,
+    -30
+   ],
+   "closes": true,
+   "lowest_part": "pad mount to BOTTOM",
+   "lowest_mm": 3.83,
+   "region": "upper arm",
+   "fold": false,
+   "knee_angle": 101.6
+  },
+  {
+   "pose": [
+    30,
+    0.0,
+    0
+   ],
+   "closes": true,
+   "lowest_part": "pad mount to BOTTOM",
+   "lowest_mm": 4.78,
+   "region": "upper arm",
+   "fold": false,
+   "knee_angle": 103.7
+  },
+  {
+   "pose": [
+    30,
+    0.0,
+    30
+   ],
+   "closes": true,
+   "lowest_part": "pad mount to BOTTOM",
+   "lowest_mm": 5.51,
+   "region": "upper arm",
+   "fold": false,
+   "knee_angle": 106.1
+  },
+  {
+   "pose": [
+    30,
+    0.0,
+    60
+   ],
+   "closes": true,
+   "lowest_part": "pad mount to BOTTOM",
+   "lowest_mm": 6.2,
+   "region": "upper arm",
+   "fold": false,
+   "knee_angle": 106.2
+  },
+  {
+   "pose": [
+    30,
+    0.0,
+    90
+   ],
+   "closes": false,
+   "knee_ok": true,
+   "clear": null
+  },
+  {
+   "pose": [
+    30,
+    5.0,
+    -60
+   ],
+   "closes": true,
+   "lowest_part": "E strap keep-out",
+   "lowest_mm": 3.2,
+   "region": "upper arm",
+   "fold": false,
+   "knee_angle": 101.3
+  },
+  {
+   "pose": [
+    30,
+    5.0,
+    -30
+   ],
+   "closes": true,
+   "lowest_part": "pad mount to BOTTOM",
+   "lowest_mm": 4.15,
+   "region": "upper arm",
+   "fold": false,
+   "knee_angle": 101.5
+  },
+  {
+   "pose": [
+    30,
+    5.0,
+    0
+   ],
+   "closes": true,
+   "lowest_part": "pad mount to BOTTOM",
+   "lowest_mm": 5.03,
+   "region": "upper arm",
+   "fold": false,
+   "knee_angle": 104.1
+  },
+  {
+   "pose": [
+    30,
+    5.0,
+    30
+   ],
+   "closes": true,
+   "lowest_part": "pad mount to BOTTOM",
+   "lowest_mm": 5.67,
+   "region": "upper arm",
+   "fold": false,
+   "knee_angle": 107.4
+  },
+  {
+   "pose": [
+    30,
+    5.0,
+    60
+   ],
+   "closes": true,
+   "lowest_part": "pad mount to BOTTOM",
+   "lowest_mm": 6.17,
+   "region": "upper arm",
+   "fold": false,
+   "knee_angle": 108.1
+  },
+  {
+   "pose": [
+    30,
+    5.0,
+    90
+   ],
+   "closes": false,
+   "knee_ok": true,
+   "clear": null
+  },
+  {
+   "pose": [
+    30,
+    10.0,
+    -60
+   ],
+   "closes": true,
+   "lowest_part": "pad mount to BOTTOM",
+   "lowest_mm": 3.53,
+   "region": "upper arm",
+   "fold": false,
+   "knee_angle": 101.6
+  },
+  {
+   "pose": [
+    30,
+    10.0,
+    -30
+   ],
+   "closes": true,
+   "lowest_part": "pad mount to BOTTOM",
+   "lowest_mm": 4.48,
+   "region": "upper arm",
+   "fold": false,
+   "knee_angle": 101.4
+  },
+  {
+   "pose": [
+    30,
+    10.0,
+    0
+   ],
+   "closes": true,
+   "lowest_part": "pad mount to BOTTOM",
+   "lowest_mm": 5.31,
+   "region": "upper arm",
+   "fold": false,
+   "knee_angle": 104.3
+  },
+  {
+   "pose": [
+    30,
+    10.0,
+    30
+   ],
+   "closes": true,
+   "lowest_part": "link 2 strap keep-out",
+   "lowest_mm": 5.51,
+   "region": "trunk",
+   "fold": false,
+   "knee_angle": 108.8
+  },
+  {
+   "pose": [
+    30,
+    10.0,
+    60
+   ],
+   "closes": true,
+   "lowest_part": "pad mount to BOTTOM",
+   "lowest_mm": 6.16,
+   "region": "upper arm",
+   "fold": false,
+   "knee_angle": 110.2
+  },
+  {
+   "pose": [
+    30,
+    10.0,
+    90
+   ],
+   "closes": false,
+   "knee_ok": true,
+   "clear": null
+  },
+  {
+   "pose": [
+    60,
+    0.0,
+    -60
+   ],
+   "closes": true,
+   "lowest_part": "pad mount to BOTTOM",
+   "lowest_mm": 3.83,
+   "region": "upper arm",
+   "fold": false,
+   "knee_angle": 101.6
+  },
+  {
+   "pose": [
+    60,
+    0.0,
+    -30
+   ],
+   "closes": true,
+   "lowest_part": "pad mount to BOTTOM",
+   "lowest_mm": 4.78,
+   "region": "upper arm",
+   "fold": false,
+   "knee_angle": 103.7
+  },
+  {
+   "pose": [
+    60,
+    0.0,
+    0
+   ],
+   "closes": true,
+   "lowest_part": "pad mount to BOTTOM",
+   "lowest_mm": 5.51,
+   "region": "upper arm",
+   "fold": false,
+   "knee_angle": 106.1
+  },
+  {
+   "pose": [
+    60,
+    0.0,
+    30
+   ],
+   "closes": true,
+   "lowest_part": "pad mount to BOTTOM",
+   "lowest_mm": 6.2,
+   "region": "upper arm",
+   "fold": false,
+   "knee_angle": 106.2
+  },
+  {
+   "pose": [
+    60,
+    0.0,
+    60
+   ],
+   "closes": false,
+   "knee_ok": true,
+   "clear": null
+  },
+  {
+   "pose": [
+    60,
+    0.0,
+    90
+   ],
+   "closes": false,
+   "knee_ok": true,
+   "clear": null
+  },
+  {
+   "pose": [
+    60,
+    5.0,
+    -60
+   ],
+   "closes": true,
+   "lowest_part": "pad mount to BOTTOM",
+   "lowest_mm": 4.11,
+   "region": "upper arm",
+   "fold": false,
+   "knee_angle": 101.4
+  },
+  {
+   "pose": [
+    60,
+    5.0,
+    -30
+   ],
+   "closes": true,
+   "lowest_part": "pad mount to BOTTOM",
+   "lowest_mm": 5.08,
+   "region": "upper arm",
+   "fold": false,
+   "knee_angle": 103.5
+  },
+  {
+   "pose": [
+    60,
+    5.0,
+    0
+   ],
+   "closes": true,
+   "lowest_part": "pad mount to BOTTOM",
+   "lowest_mm": 5.81,
+   "region": "upper arm",
+   "fold": false,
+   "knee_angle": 106.7
+  },
+  {
+   "pose": [
+    60,
+    5.0,
+    30
+   ],
+   "closes": true,
+   "lowest_part": "pad mount to BOTTOM",
+   "lowest_mm": 6.4,
+   "region": "upper arm",
+   "fold": false,
+   "knee_angle": 107.8
+  },
+  {
+   "pose": [
+    60,
+    5.0,
+    60
+   ],
+   "closes": true,
+   "lowest_part": "pad mount to BOTTOM",
+   "lowest_mm": 6.61,
+   "region": "upper arm",
+   "fold": false,
+   "knee_angle": 104.3
+  },
+  {
+   "pose": [
+    60,
+    5.0,
+    90
+   ],
+   "closes": false,
+   "knee_ok": true,
+   "clear": null
+  },
+  {
+   "pose": [
+    60,
+    10.0,
+    -60
+   ],
+   "closes": true,
+   "lowest_part": "pad mount to BOTTOM",
+   "lowest_mm": 4.38,
+   "region": "upper arm",
+   "fold": false,
+   "knee_angle": 101.2
+  },
+  {
+   "pose": [
+    60,
+    10.0,
+    -30
+   ],
+   "closes": true,
+   "lowest_part": "pad mount to BOTTOM",
+   "lowest_mm": 5.38,
+   "region": "upper arm",
+   "fold": false,
+   "knee_angle": 103.2
+  },
+  {
+   "pose": [
+    60,
+    10.0,
+    0
+   ],
+   "closes": true,
+   "lowest_part": "link 1 strap keep-out",
+   "lowest_mm": 5.69,
+   "region": "trunk",
+   "fold": false,
+   "knee_angle": 107.2
+  },
+  {
+   "pose": [
+    60,
+    10.0,
+    30
+   ],
+   "closes": true,
+   "lowest_part": "link 1 strap keep-out",
+   "lowest_mm": 6.41,
+   "region": "trunk",
+   "fold": false,
+   "knee_angle": 109.3
+  },
+  {
+   "pose": [
+    60,
+    10.0,
+    60
+   ],
+   "closes": true,
+   "lowest_part": "pad mount to BOTTOM",
+   "lowest_mm": 6.65,
+   "region": "upper arm",
+   "fold": false,
+   "knee_angle": 106.2
+  },
+  {
+   "pose": [
+    60,
+    10.0,
+    90
+   ],
+   "closes": false,
+   "knee_ok": true,
+   "clear": null
+  },
+  {
+   "pose": [
+    75,
+    0.0,
+    -60
+   ],
+   "closes": true,
+   "lowest_part": "pad mount to BOTTOM",
+   "lowest_mm": 4.34,
+   "region": "upper arm",
+   "fold": false,
+   "knee_angle": 102.5
+  },
+  {
+   "pose": [
+    75,
+    0.0,
+    -30
+   ],
+   "closes": true,
+   "lowest_part": "pad mount to BOTTOM",
+   "lowest_mm": 5.13,
+   "region": "upper arm",
+   "fold": false,
+   "knee_angle": 105.0
+  },
+  {
+   "pose": [
+    75,
+    0.0,
+    0
+   ],
+   "closes": true,
+   "lowest_part": "pad mount to BOTTOM",
+   "lowest_mm": 5.88,
+   "region": "upper arm",
+   "fold": false,
+   "knee_angle": 106.6
+  },
+  {
+   "pose": [
+    75,
+    0.0,
+    30
+   ],
+   "closes": true,
+   "lowest_part": "pad mount to BOTTOM",
+   "lowest_mm": 6.43,
+   "region": "upper arm",
+   "fold": false,
+   "knee_angle": 104.9
+  },
+  {
+   "pose": [
+    75,
+    0.0,
+    60
+   ],
+   "closes": false,
+   "knee_ok": true,
+   "clear": null
+  },
+  {
+   "pose": [
+    75,
+    0.0,
+    90
+   ],
+   "closes": false,
+   "knee_ok": false,
+   "clear": null
+  },
+  {
+   "pose": [
+    75,
+    5.0,
+    -60
+   ],
+   "closes": true,
+   "lowest_part": "pad mount to BOTTOM",
+   "lowest_mm": 4.65,
+   "region": "upper arm",
+   "fold": false,
+   "knee_angle": 102.0
+  },
+  {
+   "pose": [
+    75,
+    5.0,
+    -30
+   ],
+   "closes": true,
+   "lowest_part": "pad mount to BOTTOM",
+   "lowest_mm": 5.46,
+   "region": "upper arm",
+   "fold": false,
+   "knee_angle": 104.8
+  },
+  {
+   "pose": [
+    75,
+    5.0,
+    0
+   ],
+   "closes": true,
+   "lowest_part": "pad mount to BOTTOM",
+   "lowest_mm": 6.21,
+   "region": "upper arm",
+   "fold": false,
+   "knee_angle": 107.2
+  },
+  {
+   "pose": [
+    75,
+    5.0,
+    30
+   ],
+   "closes": true,
+   "lowest_part": "pad mount to BOTTOM",
+   "lowest_mm": 6.68,
+   "region": "upper arm",
+   "fold": false,
+   "knee_angle": 106.5
+  },
+  {
+   "pose": [
+    75,
+    5.0,
+    60
+   ],
+   "closes": false,
+   "knee_ok": true,
+   "clear": null
+  },
+  {
+   "pose": [
+    75,
+    5.0,
+    90
+   ],
+   "closes": false,
+   "knee_ok": true,
+   "clear": null
+  },
+  {
+   "pose": [
+    75,
+    10.0,
+    -60
+   ],
+   "closes": true,
+   "lowest_part": "pad mount to BOTTOM",
+   "lowest_mm": 4.88,
+   "region": "upper arm",
+   "fold": false,
+   "knee_angle": 101.7
+  },
+  {
+   "pose": [
+    75,
+    10.0,
+    -30
+   ],
+   "closes": true,
+   "lowest_part": "pad mount to BOTTOM",
+   "lowest_mm": 5.8,
+   "region": "upper arm",
+   "fold": false,
+   "knee_angle": 104.5
+  },
+  {
+   "pose": [
+    75,
+    10.0,
+    0
+   ],
+   "closes": true,
+   "lowest_part": "link 1 strap keep-out",
+   "lowest_mm": 6.01,
+   "region": "trunk",
+   "fold": false,
+   "knee_angle": 107.8
+  },
+  {
+   "pose": [
+    75,
+    10.0,
+    30
+   ],
+   "closes": true,
+   "lowest_part": "pad mount to BOTTOM",
+   "lowest_mm": 6.92,
+   "region": "upper arm",
+   "fold": false,
+   "knee_angle": 108.1
+  },
+  {
+   "pose": [
+    75,
+    10.0,
+    60
+   ],
+   "closes": false,
+   "knee_ok": true,
+   "clear": null
+  },
+  {
+   "pose": [
+    75,
+    10.0,
+    90
+   ],
+   "closes": false,
+   "knee_ok": true,
+   "clear": null
+  },
+  {
+   "pose": [
+    90,
+    0.0,
+    -60
+   ],
+   "closes": true,
+   "lowest_part": "pad mount to BOTTOM",
+   "lowest_mm": 4.78,
+   "region": "upper arm",
+   "fold": false,
+   "knee_angle": 103.7
+  },
+  {
+   "pose": [
+    90,
+    0.0,
+    -30
+   ],
+   "closes": true,
+   "lowest_part": "pad mount to BOTTOM",
+   "lowest_mm": 5.51,
+   "region": "upper arm",
+   "fold": false,
+   "knee_angle": 106.1
+  },
+  {
+   "pose": [
+    90,
+    0.0,
+    0
+   ],
+   "closes": true,
+   "lowest_part": "pad mount to BOTTOM",
+   "lowest_mm": 6.2,
+   "region": "upper arm",
+   "fold": false,
+   "knee_angle": 106.2
+  },
+  {
+   "pose": [
+    90,
+    0.0,
+    30
+   ],
+   "closes": false,
+   "knee_ok": true,
+   "clear": null
+  },
+  {
+   "pose": [
+    90,
+    0.0,
+    60
+   ],
+   "closes": false,
+   "knee_ok": true,
+   "clear": null
+  },
+  {
+   "pose": [
+    90,
+    0.0,
+    90
+   ],
+   "closes": false,
+   "knee_ok": false,
+   "clear": null
+  },
+  {
+   "pose": [
+    90,
+    5.0,
+    -60
+   ],
+   "closes": true,
+   "lowest_part": "pad mount to BOTTOM",
+   "lowest_mm": 5.03,
+   "region": "upper arm",
+   "fold": false,
+   "knee_angle": 103.1
+  },
+  {
+   "pose": [
+    90,
+    5.0,
+    -30
+   ],
+   "closes": true,
+   "lowest_part": "pad mount to BOTTOM",
+   "lowest_mm": 5.87,
+   "region": "upper arm",
+   "fold": false,
+   "knee_angle": 105.8
+  },
+  {
+   "pose": [
+    90,
+    5.0,
+    0
+   ],
+   "closes": true,
+   "lowest_part": "pad mount to BOTTOM",
+   "lowest_mm": 6.57,
+   "region": "upper arm",
+   "fold": false,
+   "knee_angle": 107.0
+  },
+  {
+   "pose": [
+    90,
+    5.0,
+    30
+   ],
+   "closes": true,
+   "lowest_part": "pad mount to BOTTOM",
+   "lowest_mm": 6.85,
+   "region": "upper arm",
+   "fold": false,
+   "knee_angle": 104.3
+  },
+  {
+   "pose": [
+    90,
+    5.0,
+    60
+   ],
+   "closes": false,
+   "knee_ok": true,
+   "clear": null
+  },
+  {
+   "pose": [
+    90,
+    5.0,
+    90
+   ],
+   "closes": false,
+   "knee_ok": false,
+   "clear": null
+  },
+  {
+   "pose": [
+    90,
+    10.0,
+    -60
+   ],
+   "closes": true,
+   "lowest_part": "pad mount to BOTTOM",
+   "lowest_mm": 5.27,
+   "region": "upper arm",
+   "fold": false,
+   "knee_angle": 102.5
+  },
+  {
+   "pose": [
+    90,
+    10.0,
+    -30
+   ],
+   "closes": true,
+   "lowest_part": "link 1 strap keep-out",
+   "lowest_mm": 5.93,
+   "region": "trunk",
+   "fold": false,
+   "knee_angle": 105.6
+  },
+  {
+   "pose": [
+    90,
+    10.0,
+    0
+   ],
+   "closes": true,
+   "lowest_part": "link 1 strap keep-out",
+   "lowest_mm": 6.56,
+   "region": "trunk",
+   "fold": false,
+   "knee_angle": 107.7
+  },
+  {
+   "pose": [
+    90,
+    10.0,
+    30
+   ],
+   "closes": true,
+   "lowest_part": "pad mount to BOTTOM",
+   "lowest_mm": 7.14,
+   "region": "upper arm",
+   "fold": false,
+   "knee_angle": 105.9
+  },
+  {
+   "pose": [
+    90,
+    10.0,
+    60
+   ],
+   "closes": false,
+   "knee_ok": true,
+   "clear": null
+  },
+  {
+   "pose": [
+    90,
+    10.0,
+    90
+   ],
+   "closes": false,
+   "knee_ok": false,
+   "clear": null
+  }
+ ],
+ "held_reasons": {
+  "Raise overhead": {},
+  "Drink from a cup": {},
+  "Comb hair": {},
+  "Reach a high shelf": {},
+  "Wash opposite shoulder": {},
+  "Reach back pocket": {},
+  "Wave": {
+   "parts": 14
+  },
+  "Walking arm swing": {}
+ },
+ "secs": 158.7
+}

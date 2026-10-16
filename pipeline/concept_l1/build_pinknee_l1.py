@@ -63,6 +63,8 @@ FULL = os.path.join(REPO, "pipeline", "full-exo"); TEMPLATE = REF.TEMPLATE; USER
 CROWN, UP, T_LINK, W_LINK, RUN = S.CROWN, S.UP, S.T_LINK, S.W_LINK, S.RUN
 BOSS_R, PAD_R, KNEE_W = MK.BOSS_R, MK.PAD_R, MK.KNEE_W
 PLATE = 3.0; RESUME = 4.0; ADJ = 0.15
+RET = 0.9                                                                       # pin retainer over the top washer: e-clip 0.6 + pin end 0.3
+MOUNT_CLR = 1.0; BOTTOM_CLR = 2.0                                               # pad mount / BOTTOM vs the knee's swept parts (mm)
 HR = REF.HR; unit = S.unit
 TI, STEEL = 4.43, 7.85
 
@@ -182,10 +184,116 @@ def build_parts(M):
     out.append(("l4", 6, f"knee link keep-out (flat Ti bar {lc + 2 * BOSS_R:.1f} x {KNEE_W:.0f} x {tp} mm, pins a, b {BOSS_R:.0f} mm from its ends, tr+tp+0.5)",
                 REF.box(ck, np.stack([fr["eK"], fr["nK"], sn], 1), [lc + 2 * BOSS_R, KNEE_W, tp]), "ti"))
     out.append(("H", 5, f"arm pad = pin b lower plate (O{2 * PAD_R:.0f} x {tp} mm, tr..tr+tp, arm-fixed on the cuff)", REF.cyl(fr["Bm"], sn, tr, tr + tp, r=PAD_R), "ti"))
+    # the pin stacks' tops (not in the model's stk = plate + RUN + plate): the second thrust washer (O4 x O8 x 0.5, the RUN
+    # gap over the knee link, as the model's first washer under it) and the retainer on the integral O4 Ti pin = DIN 6799
+    # RS 3.2 e-clip (O7.3 x 0.6) + 0.3 mm pin end: an O8 x RET keep-out over each pin, in the group of the plate the pin is
+    # integral with (pin a: member 3's E boss; pin b: the arm pad)
+    zr = z0 + tp + RUN
+    out.append(("l3", 3, f"pin a retainer keep-out (O8 x {RET} mm: DIN 6799 RS 3.2 e-clip + pin end, over the 0.5 mm GTM washer on the knee link)",
+                REF.cyl(fr["A0"], sn, zr, zr + RET, r=4.0), "steel"))
+    out.append(("H", 5, f"pin b retainer keep-out (O8 x {RET} mm: DIN 6799 RS 3.2 e-clip + pin end, over the 0.5 mm GTM washer on the knee link)",
+                REF.cyl(fr["Bm"], sn, zr, zr + RET, r=4.0), "steel"))
     stack = dict(pin_stack_mm=float(P["stk"]), plate_tp=tp, run=RUN, knee_level_tr=round(float(tr), 3), f=[round(float(x), 3) for x in F],
                  boss=[round(float(tr), 3), round(float(tr + tp), 3)], knee=[round(float(z0), 3), round(float(z0 + tp), 3)], E=Einfo,
-                 knee_link_mm=[round(lc + 2 * BOSS_R, 2), KNEE_W, tp], hubs_r=list(hr))
+                 knee_link_mm=[round(lc + 2 * BOSS_R, 2), KNEE_W, tp], hubs_r=list(hr),
+                 retainer=[round(float(zr), 3), round(float(zr + RET), 3)], full_pin_stack_mm=round(float(zr + RET - tr), 3))
     return out, stack
+
+
+def arm_sweep(M, parts, stride=2, n_samp=600):
+    """every part of member 3 (hub 3's lower plate, E strap, E boss, pin a retainer) and the knee link (6) in the ARM frame
+    (member 5, canonical) over the template's clip frames + workspace poses where the chain and the knee close: the region
+    the arm-fixed parts (pad mount, the user's BOTTOM) must keep clear of. (N, 3) points."""
+    C = json.load(open(os.path.join(FULL, "designs", TEMPLATE, "clips.json"))); W = json.load(open(os.path.join(FULL, "designs", TEMPLATE, "workspace.json")))
+    want = np.array([f["want"] for c in C["clips"] for f in c["frames"]] + [p["want"] for p in W["poses"]], float)
+    K = chain(M, want); kin = np.nonzero(K["ok"] & K["kok"] & (K["res"] < 0.5))[0][::stride]
+    X = [np.r_[np.asarray(m.vertices), trimesh.sample.sample_surface_even(m, n_samp, seed=4)[0]] for g, mem, n, m, mat in parts if mem in (3, 6)]
+    mems = [mem for g, mem, n, m, mat in parts if mem in (3, 6)]
+    old = (M.Q, M.s, M.RS, M.X, M.K, M.q); swap_in(M, K); out = []
+    try:
+        for j in kin:
+            Q = M.T(5, j)[0]
+            for mem, Xm in zip(mems, X):
+                R, t = M.T(mem, j); out.append((Xm @ R.T + t) @ Q)
+    finally: M.Q, M.s, M.RS, M.X, M.K, M.q = old
+    return np.concatenate(out), dict(poses=int(len(want)), closing_used=int(len(kin)), stride=stride)
+
+
+def cut_bottom(M, bottom_c, sweep):
+    """the user's BOTTOM (canonical arm frame) cut square to the arm axis where it would meet the knee's swept parts (BOTTOM
+    may be cut - CLAUDE.md): every BOTTOM vertex within BOTTOM_CLR of the sweep lies proximal of the cut, which keeps the
+    distal bar. (vertex mask kept, info)"""
+    from scipy.spatial import cKDTree
+    D = M.D; x = (bottom_c - M.fr["Bm"]) @ D.sa
+    d = cKDTree(sweep).query(bottom_c, distance_upper_bound=BOTTOM_CLR + 1e-6)[0]; hit = d <= BOTTOM_CLR
+    if not hit.any(): return None, dict(cut=False, min_sweep_mm=round(float(cKDTree(sweep).query(bottom_c)[0].min()), 2))
+    xc = float(x[hit].max()) + 1.0
+    return xc, dict(cut=True, verts_in_sweep=int(hit.sum()), cut_along_from_pad_mm=round(xc, 2), bar_along_was=[round(float(x.min()), 1), round(float(x.max()), 1)])
+
+
+def slice_bottom(mesh_c, M, xc):
+    """keep the part of BOTTOM distal of the plane x_along = xc (pad-relative): triangles clipped exactly at the plane, each
+    boundary loop on the plane capped by a fan from its centroid (no shapely: trimesh's slice_mesh_plane needs it)"""
+    D = M.D; n = D.sa; o = M.fr["Bm"] + xc * n
+    V = np.asarray(mesh_c.vertices, float); F = np.asarray(mesh_c.faces); sd = (V - o) @ n
+    nv = list(V); nf = []; cache = {}
+    def cut(i, j):
+        k = (min(i, j), max(i, j))
+        if k not in cache:
+            t = sd[i] / (sd[i] - sd[j]); cache[k] = len(nv); nv.append(V[i] + t * (V[j] - V[i]))
+        return cache[k]
+    for f in F:
+        keep = sd[f] >= 0
+        if keep.all(): nf.append(list(f)); continue
+        if not keep.any(): continue
+        poly = []
+        for a_ in range(3):
+            i, j = f[a_], f[(a_ + 1) % 3]
+            if sd[i] >= 0: poly.append(i)
+            if (sd[i] >= 0) != (sd[j] >= 0): poly.append(cut(i, j))
+        for q in range(1, len(poly) - 1): nf.append([poly[0], poly[q], poly[q + 1]])
+    m = trimesh.Trimesh(np.array(nv), np.array(nf), process=False); m.remove_unreferenced_vertices()
+    E = m.edges_sorted; grp = trimesh.grouping.group_rows(E, require_count=1); Eb = m.edges[grp]
+    on = np.abs((m.vertices - o) @ n) < 1e-6; Eb = Eb[on[Eb].all(1)]
+    if len(Eb):
+        Vn = list(m.vertices); Fn = list(m.faces)
+        for comp in trimesh.graph.connected_components(Eb, min_len=3):
+            cs = set(comp.tolist()); Ec = [e for e in Eb if e[0] in cs]; c = len(Vn); Vn.append(np.asarray(m.vertices)[list(cs)].mean(0))
+            Fn += [[e[1], e[0], c] for e in Ec]
+        m = trimesh.Trimesh(np.array(Vn), np.array(Fn), process=False)
+    return m
+
+
+def pad_mount_sweep(M, bottom_c, sweep):
+    """the pad mount routed CLEAR of the knee's swept parts: a straight tp slab at the pad level (tr..tr+tp, under the knee
+    link's 0.5 mm running gap) from pin b along the free direction to the nearest point of the user's BOTTOM bar, with a
+    riser at the bar (the slab's thickness steps up to 1 mm into the bar's underside, one solid). Tried every 2 deg; the
+    shortest whose slab keeps MOUNT_CLR from every swept point of member 3 / the knee link in the slab's height band (the
+    knee link rides above, h >= tp + 0.5) and whose riser keeps MOUNT_CLR from every swept point at any height."""
+    D = M.D; tp = D.p["tp"]; tr = M.tr; sn, sa, st = D.sn, D.sa, D.st; Bm = M.fr["Bm"]; c3 = D.c[2]
+    loc = lambda P: np.c_[(P - Bm) @ sa, (P - Bm) @ st, (P - c3) @ sn - tr]
+    Sw = loc(sweep); Bq = loc(bottom_c); band = (Sw[:, 2] > -MOUNT_CLR) & (Sw[:, 2] < tp + 0.45); W2 = PAD_R
+    best = None
+    for th in np.radians(np.arange(0.0, 360.0, 2.0)):
+        e = np.array([math.cos(th), math.sin(th)]); n = np.array([-e[1], e[0]])
+        bt, bn = Bq[:, :2] @ e, Bq[:, :2] @ n; cand = (np.abs(bn) <= W2) & (bt > PAD_R) & (bt < 70) & (Bq[:, 2] > -4) & (Bq[:, 2] < 14)
+        if not cand.any(): continue
+        L = float(bt[cand].min()); end = cand & (bt < L + 4.0); hb = float(Bq[end, 2].min()); htop = max(tp, hb + 1.0); Le = L + 3.0
+        st_, sn_ = Sw[:, :2] @ e, Sw[:, :2] @ n
+        slab = band & (st_ > -MOUNT_CLR) & (st_ < Le + MOUNT_CLR) & (np.abs(sn_) < W2 + MOUNT_CLR)
+        riser = (st_ > L - 3.0 - MOUNT_CLR) & (st_ < Le + MOUNT_CLR) & (np.abs(sn_) < W2 + MOUNT_CLR) & (Sw[:, 2] > -MOUNT_CLR) & (Sw[:, 2] < htop + MOUNT_CLR)
+        if slab.any() or (htop > tp and riser.any()): continue
+        if best is None or L < best[1]: best = (th, L, htop, hb)
+    if best is None: return None, dict(note="no straight route clear of the knee sweep")
+    th, L, htop, hb = best; ex = math.cos(th) * sa + math.sin(th) * st; ey = np.cross(sn, ex)
+    ts = np.array([0.0, max(L - 3.0, 0.5) - 0.01, max(L - 3.0, 0.5), L + 3.0]); th_ = np.array([tp, tp, htop, htop])
+    ys = np.array([-W2, 0.0, W2])
+    Bot = Bm[None, None] + ts[:, None, None] * ex + ys[None, :, None] * ey + tr * sn
+    Off = th_[:, None, None] * np.broadcast_to(sn, Bot.shape)
+    m = REF.grid_solid(Bot, Off.copy())
+    if m.volume < 0: m.invert()
+    return m, dict(route="sweep-clear", angle_deg=round(math.degrees(th), 1), length=round(L + 3.0, 1), riser_top_rel_tr=round(htop, 2),
+                   bottom_underside_rel_tr=round(hb, 2), dir_along_across=[round(math.cos(th), 3), round(math.sin(th), 3)], clearance_rule_mm=MOUNT_CLR)
 
 
 def pad_mount(M, bottom_c):
@@ -259,14 +367,16 @@ def set_adjacent(parts):
     """built-part pairs that move relative to each other and can meet: the chain pairs at J2 / J3 (as build_osn_l1.py),
     the knee pairs (knee link vs the E strap, the E boss, hub 3, link 2; the arm pad + its mount vs the E strap / boss /
     hub 3) - their real meshes, vertex + surface samples"""
-    find = lambda s: next((p for p in parts if s in p[2]), None); ADJ_PAIRS.clear()
+    find = lambda s: next((p for p in parts if p[2].startswith(s)), None) or next((p for p in parts if s in p[2]), None); ADJ_PAIRS.clear()
     for a_, b_ in (("link 1 strap", "link 2 strap"), ("link 2 strap", "link 1 strap"), ("link 2 strap", "J3 lower plate"), ("J3 lower plate", "link 2 strap"),
                    ("link 1 strap", "J2 upper boss"), ("link 2 strap", "J2 lower plate"), ("J2 lower plate", "link 2 strap"),
                    ("E strap", "link 2 strap"), ("link 2 strap", "E strap"), ("E strap", "J3 upper boss"), ("J3 upper boss", "E strap"),
                    ("knee link", "E strap"), ("E strap", "knee link"), ("knee link", "E boss"), ("knee link", "J3 upper boss"), ("knee link", "link 2 strap"),
                    ("link 2 strap", "knee link"), ("arm pad", "E boss"), ("arm pad", "E strap"), ("E strap", "arm pad"), ("pad mount", "E boss"),
                    ("pad mount", "E strap"), ("E strap", "pad mount"), ("E boss", "pad mount"), ("knee link", "pad mount"), ("arm pad", "J3"),
-                   ("pad mount", "J3 lower plate"), ("pad mount", "J3 upper boss"), ("link 2 strap", "arm pad"), ("link 2 strap", "pad mount")):
+                   ("pad mount", "J3 lower plate"), ("pad mount", "J3 upper boss"), ("link 2 strap", "arm pad"), ("link 2 strap", "pad mount"),
+                   ("pin a retainer", "knee link"), ("pin b retainer", "knee link"), ("pin a retainer", "link 2 strap"), ("pin b retainer", "link 2 strap"),
+                   ("pin a retainer", "J3 upper boss"), ("pin b retainer", "E strap"), ("pin b retainer", "E boss"), ("pin a retainer", "pad mount")):
         A, Bp = find(a_), find(b_)
         if A is None or Bp is None: continue
         XA = np.r_[np.asarray(A[3].vertices), trimesh.sample.sample_surface_even(A[3], 1500, seed=3)[0]]
@@ -419,7 +529,7 @@ def check_frames(M, dd, parts):
         X, _ = SE.frame_xforms(fr); meshes = {}; posed = {}
         for node in src.graph.nodes_geometry:
             g = node.split("|")[0]
-            if g == "F" or (g == "H" and not any(s in node for s in ("arm pad", "pad mount"))): continue
+            if g == "F" or (g == "H" and not any(s in node for s in ("arm pad", "pad mount", "pin b retainer"))): continue
             T_, gn = src.graph[node]; m = src.geometry[gn].copy(); m.apply_transform(T_); R, t = X[g]
             m.vertices = m.vertices @ np.asarray(R).T + t; meshes.setdefault(g, []).append(m); posed["|".join(node.split("|")[:2])] = m
         meshes = {g: trimesh.util.concatenate(v) for g, v in meshes.items()}
@@ -464,8 +574,21 @@ def main():
     parts, stack = build_parts(M)
     up = user_parts(); bot = next(m for g, n, m in up if n.startswith("BOTTOM"))
     bottom_c = np.asarray(bot.vertices) @ HR                                    # rest (H) -> canonical arm frame
-    mount, mrep = pad_mount(M, bottom_c)
-    if mount is not None: parts.append(("H", 5, f"pad mount to BOTTOM (proxy) ({P['tp']} mm slab at the pad level, arm pad -> the BOTTOM bar's end)", mount, "ti"))
+    dense = lambda m: np.r_[np.asarray(m.vertices), trimesh.sample.sample_surface_even(m, 40000, seed=5)[0]]   # the bar's long faces carry few vertices
+    mc = trimesh.Trimesh(bottom_c, np.asarray(bot.faces), process=False)
+    sweep, swrep = arm_sweep(M, parts); xc, crep = cut_bottom(M, dense(mc), sweep)
+    if xc is not None:                                                          # BOTTOM may be cut (user rule): square to the arm, distal bar kept
+        mc = slice_bottom(mc, M, xc)
+        k = next(i for i, (g, n, m) in enumerate(up) if n.startswith("BOTTOM")); n0 = up[k][1]
+        up[k] = (up[k][0], n0 + f" + cut square to the arm {xc:.1f} mm distal of pin b, clear of the knee sweep",
+                 trimesh.Trimesh(np.asarray(mc.vertices) @ HR.T, mc.faces, process=False))
+        crep["bottom_watertight_after_cut"] = bool(mc.is_watertight)
+    bottom_c = dense(mc)
+    print(f"knee sweep in the arm frame: {len(sweep)} points ({swrep}); BOTTOM {crep}", flush=True)
+    mount, mrep = pad_mount_sweep(M, bottom_c, sweep)
+    if mount is None: print(f"WARNING: {mrep['note']} -> the nearest-end mount (may meet the sweep)", flush=True); mount, mrep = pad_mount(M, bottom_c)
+    mrep["bottom"] = crep; mrep["sweep"] = swrep
+    if mount is not None: parts.append(("H", 5, f"pad mount to BOTTOM (proxy) ({P['tp']:.2f} mm slab at the pad level, arm pad -> the BOTTOM bar, routed clear of the knee sweep)", mount, "ti"))
     def export_mesh(g, mem, m):
         if mem != 5: return m
         return trimesh.Trimesh(np.asarray(m.vertices) @ HR.T, m.faces, process=False)     # x_H = HR x
