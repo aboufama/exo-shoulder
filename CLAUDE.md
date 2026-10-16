@@ -129,6 +129,12 @@ docs/EVOLUTION.md (and its snapshot to pipeline/evolution/) as part of the judge
   (the DOF cap allows 4; MVP1 needs every coordinate determined: spring-centred + stops, or sensed), slimmer hardware,
   re-seating - and attribute every lost pose to its cause before choosing the lever. Never relax the 1 cm rule or the
   DOF cap, and never shrink the singularity / transmission margins to buy reach without a red-team and the user's say.
+- **Every tested design gets its motion preview** (user, 2026-10-16: "the newer ones dont have the motion diagram drawn, they
+  need to be drawn as they are tested!!! all need to have the little motion graphic"). Whoever models / screens a
+  morphology also writes docs/concepts/viz/concepts/<id>.js (docs/concepts/viz/README.md: the kinematic preview on the
+  primitive mannequin, honest topology), runs `node docs/concepts/viz/test.mjs <id>` until it passes and
+  `node docs/concepts/viz/thumbs.mjs` so docs/dashboard/data/motion.json carries it - in the same task, before the row
+  is called screened. Update the preview when the best configuration changes.
 - **No lofts, ever** (user, 2026-10-15: "for all the design you do, lofts look horrible and introduce geometric problems, you
   can combine arcs, but no lofts!"): every surface comes from sketches of lines and tangent arcs - extrudes, revolves,
   sweeps of ONE constant section along a line/arc path, fillets. No lofts, no surfaces fitted or shrink-wrapped to skin
