@@ -20,10 +20,10 @@
  "v_inband14": null,
  "v_inband10": null,
  "v_gap": null,
- "n_configs": 6487,
- "verdict": "SCREENED: passes its kill gate (15.57 fast near-touch < 16.0) but by a RE-FIT of the winner, not by its own levers: controls on the same seats put the front-loaded law at 0.01 frozen (22.73 linear vs 22.72), stop B raised to a1max 61.7 at 0.00 (identical 15.57 at 58.36: taken poses never use K past 44.7 deg), and the 2:1 rocker at about -1.2 fast (its clevis arm must sit 9-12 mm over link 1b so the rod clears hub K's crown). Best = the winner's 1:1 post, near-linear law (kA 2.90 / kB 2.76) and re-fitted seats: frozen exact Bench(110,360) 22.72 (score 91.74; near-touch 24.36, reach 0.728, ib 0.856, overhead 8/28) vs the winner under the same rod rule 23.47; held out 26.65 vs 28.02. A candidate polish of the winner for the independent verifier (corrected metal: horn plate on the cap top, rod vs hub K).",
+ "n_configs": 9096,
+ "verdict": "SCREENED: passes its kill gate (15.57 fast near-touch < 16.0) but by a RE-FIT of the winner, not by its own levers: controls on the same seats put the front-loaded law at 0.01 frozen (22.73 linear vs 22.72), stop B raised to a1max 61.7 at 0.00 (identical 15.57 at 58.36: taken poses never use K past 44.7 deg), and the 2:1 rocker at about -1.2 fast (its clevis arm must sit 9-12 mm over link 1b so the rod clears hub K's crown). Best = the winner's 1:1 post, near-linear law (kA 2.90 / kB 2.76) and re-fitted seats: frozen exact Bench(110,360) 22.72 (score 91.74; near-touch 24.36, reach 0.728, ib 0.856, overhead 8/28) vs the winner under the same rod rule 23.47; held out 26.65 vs 28.02. Control E (the winner's own linear law re-fitted, same rules) reaches 15.54 fast / 22.92 frozen (near-touch 24.01) / 26.66 held out: the front-loaded lobe and stop B are noise (-0.35 to +0.20). A candidate polish of the winner for the independent verifier (corrected metal: horn plate on the cap top, rod vs hub K).",
  "limiter": "the fold: 86 of 98 frozen losses (overhead 15 of 20). Stretched fit poses past the law's end (th 124-157, beyond the K dyad's straight-line wall a1max + a2 - 5) and 6 at the m3e wall that the law cannot reach because of the lift-off (self-motion) and pressure-angle gates; the folded side has no lobe. In band: hub 3 0.60, L2 0.78, rod and rod ends 0.00 (above hub K's crown by construction).",
- "note": "Model on the verified winner's module (law + rod metal replaced). Searches: farm LHS 192 (best 17.83) + CMA A seg/2:1 2449 (16.82), B seg/1:1 1921 (15.57), C track 945 (17.23), D linear/2:1 977 (16.77); gate on the best run B: gain over 2nd half 0.06, last third 0.04, top-5 spread 0.01 score points (combined CMA 0.10 / 0.01 / 0.01). Red team: the winner's own rod passes 2.6 mm into hub K's crown (rule added: rod centre >= crown top + 2 within HUB_R + 2 of K's axis; costs the winner 0.10 fast, frozen 23.47); min metal frozen 0.30 mm (winner 0.45); pa 44.3 vs 45; lobe crest 10.26 mm; K slop 1.16 deg per 0.05 mm rod-end play at r_horn 2.47. Frozen exact: fit 15.57 -> 22.72 plain / 24.36 near-touch, why {'fold': 86, 'slide': 7, 'flip': 0, 'closure': 0, 'skin': 0, 'parts': 1, 'contact': 4}; held out 26.65 (near 29.29) vs winner+rule 28.02.",
+ "note": "Model on the verified winner's module (law + rod metal replaced). Searches: farm LHS 192 + control CMA E (linear law, 1:1) 2609 (15.54); farm LHS 192 (best 17.83) + CMA A seg/2:1 2449 (16.82), B seg/1:1 1921 (15.57), C track 945 (17.23), D linear/2:1 977 (16.77); gate on the best run B: gain over 2nd half 0.06, last third 0.04, top-5 spread 0.01 score points (combined CMA 0.10 / 0.01 / 0.01). Red team: the winner's own rod passes 2.6 mm into hub K's crown (rule added: rod centre >= crown top + 2 within HUB_R + 2 of K's axis; costs the winner 0.10 fast, frozen 23.47); min metal frozen 0.30 mm (winner 0.45); pa 44.3 vs 45; lobe crest 10.26 mm; K slop 1.16 deg per 0.05 mm rod-end play at r_horn 2.47. Frozen exact: fit 15.57 -> 22.72 plain / 24.36 near-touch, why {'fold': 86, 'slide': 7, 'flip': 0, 'closure': 0, 'skin': 0, 'parts': 1, 'contact': 4}; held out 26.65 (near 29.29) vs winner+rule 28.02.",
  "doc": "docs/concepts/frontload-lobe-stopb-knuckle-3r.md",
  "complexity": 49.0,
  "mechanism": {
@@ -106,6 +106,32 @@
     "full": 23.47,
     "knn": 26.0,
     "bench_grid": 46.55
+   }
+  },
+  "control_linear_refit": {
+   "fast": 15.54,
+   "frozen": 22.92,
+   "near_touch": 24.01,
+   "held_out": 26.66,
+   "params": {
+    "bk1": 28.0006,
+    "bk2": 36.4833,
+    "a1max": 59.483900000000006,
+    "smhi": 18.5085,
+    "smlo": 5.0,
+    "az1": 96.1675,
+    "el1": 67.8982,
+    "az2": 42.2758,
+    "el2": 44.877,
+    "wd": 63.3675,
+    "wa": -10.5251,
+    "b3": 0.4341,
+    "ang_min": 29.1303,
+    "r_horn": 2.45,
+    "r_lobe": 7.0,
+    "kK": 2.2733,
+    "i_rock": 1.0,
+    "law_mode": "lin"
    }
   }
  },

@@ -90,12 +90,14 @@ Gates on this config:
 | the winner + the rod-over-crown rule | 16.63 | 23.47 | 25.11 | 0.7306 | 0.8453 | 0.0106 | 8/28 | 0.45 |
 | **best (CMA B)** | **15.57** | **22.72 (score 91.74)** | **24.36** | 0.7278 | 0.8556 | 0.0106 | 8/28 | 0.30 |
 | best, law made linear (kB = kA) | 16.20 | 22.73 | 24.37 | 0.7278 | 0.8555 | 0.0106 | 8/28 | 0.30 |
+| control E: the winner's linear law re-fitted (1:1) | 15.54 | 22.92 | 24.01 | 0.7222 | 0.8619 | 0.0133 | 8/28 | 0.5 |
 | best, a1max back to 58.36 | 15.57 | - | - | 0.7937 (fast) | 0.8559 (fast) | - | - | - |
 
 Held out (every fit-clip frame and workspace pose in neither bench, exact; the verifier's held_bench), same frozen shapes:
 - best: 26.65 (near-touch 29.29), reach 0.6922, in-band 0.8539, contact 0.0126, overhead 19/71, min metal 0.14 mm.
 - winner + rule: 28.02 (near-touch 30.21), reach 0.6912, in-band 0.8435, contact 0.0149, overhead 19/71, min metal 0.21 mm. The verifier measured the claim at 28.12.
-- Held-out gain: 1.37 gap points. Lost poses held out: best {'fold': 251, 'slide': 25, 'flip': 0, 'closure': 0, 'skin': 0, 'parts': 6, 'contact': 11}; winner {'fold': 252, 'slide': 29, 'flip': 0, 'closure': 0, 'skin': 0, 'parts': 0, 'contact': 13}.
+- control E (linear law re-fitted): 26.66 (near-touch 29.3), reach 0.687, in-band 0.8602.
+- Held-out gain over the winner + rule: 1.37 gap points. Over control E: 0.01. Lost poses held out: best {'fold': 251, 'slide': 25, 'flip': 0, 'closure': 0, 'skin': 0, 'parts': 6, 'contact': 11}; winner {'fold': 252, 'slide': 29, 'flip': 0, 'closure': 0, 'skin': 0, 'parts': 0, 'contact': 13}.
 
 Continuity flood fill on the frozen Bench(110,360) wear. This is the round-6 verifier's connected_report: 2-deg slerp edges, passive
 jumps of at most 10 deg, seeds in state A.
@@ -139,6 +141,11 @@ the same seats:
     9-12 mm over link 1b, and its underside is out of band (rocker in band 0.48-0.51 against 0.94).
   - The best 2:1-class configs: A 16.82 (1.45:1), C 17.23 (1.85:1), D 16.77 (1.51:1).
   - At 1:1 the horn >= 2.45 caps the gain at r_lobe / r_horn = 3.0. The optimum uses 2.90 (pa 44.3).
+- **Control E settles the attribution.** CMA E re-fits the winner's own LINEAR law (1:1, a1max free) and reaches 15.54 fast,
+  against 15.57 for the front-loaded best.
+  - Frozen: 22.92 against 22.72 plain, but 24.01 against 24.36 near-touch.
+  - Held out: 26.66 against 26.65.
+  - The front-loaded lobe and the raised stop B are worth -0.35 to +0.20: noise.
 - **What is left: a re-fit of the winner's seats.**
   - az1 +1.8 deg, smhi +1.1, bk1 -1.2, a1max +3.4 (inert), r_lobe 9.0 -> 7.35 (the lobe now sits inside the O20 skirt).
   - Hub K goes 0.945 -> 0.976 in band, and in-band rises 0.845 -> 0.856.
