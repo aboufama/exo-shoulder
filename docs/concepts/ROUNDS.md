@@ -376,3 +376,156 @@ Next (round 7, verified best 23.57, score 91.4, so 95 is not reached and score s
 4. **Lead's standing duties.** These are not for the round:
    - the final polish, then the generation CAD and stills of the winner;
    - EVOLUTION.md entries for the four round-6 designs (none yet).
+
+## Round 7 plan (2026-10-16 ~14:45 UTC, track main, lead verified gap 23.57)
+
+### State
+
+- **Score arithmetic** (tools/concept_bench.py `gap_of`): gap = 100 [(0.90 - in-band14)+ + (0.95 - follow)+ +
+  (0.90 - reach)+ + contact]. The winner: 5.57 + 0 + 16.94 + 1.06 = 23.57. With follow 1.0 and contact 0.01, score 95
+  (gap 13.75) needs reach >= 0.775 at in-band 0.90, >= 0.8025 at 0.88, >= 0.8325 at 0.85. The round-6 closer's target
+  (reach 0.80, in-band 0.85, contact 0.01) is gap 16, score 94.2.
+- **Verified leaders** (Bench(110,360) exact, frozen, margin 5, O20, fit Bench(60,160)):
+  - geneva-tail-knuckle-pinknee-3r, rod embodiment: **23.57** (score 91.43), 3 active (K slaved by hub-2 lobe -> rocker
+    -> O3 pushrod -> M3 rod ends -> horn), 0 passive translations, complexity 42.5 (hand count). Reach 0.731, in-band14
+    0.844, contact 0.011, near-touch 25.21, overhead 8/28; held out 28.12. Params: kK 3.18, r_horn 2.49, r_lobe 9,
+    pressure angle 41.4, bk1 31.25, bk2 37.99, a1max 58.36, smhi 13.69, smlo 5.28.
+  - cam-unfold-4th 26.70 (3 active, cx 33.75); H1 27.20 same protocol (24.48 polish protocol, cx 19.5-21.5);
+    j3-neck-over-3r 28.46 (4 active); zero-complexity ceiling 31.04 / 33.51.
+  - Sensed knuckle, verified but 4 active (fails R5-aim): minarc pick1 18.40, BDp 19.54.
+- **Where the winner loses** (verifier json `verify/geneva-tail-knuckle-pinknee-3r_corr_bench_frozen.json`):
+  - workspace: 263 of 360 taken; lost fold 84, knee window (slide) 8, contact 4, parts 1: 97 lost (the round-6 text says
+    "84 of 112"; the verifier json counts 97). The drive engages on 123 stretched poses and on 0 folded (`folded_kin` 0); the law
+    ends on stop B at dK 53.4, th_max 116.9; overhead needs th 18-146.
+  - overhead (elev >= 140): 8 of 28 taken; lost fold 14, slide 4, contact 2. Held out: 19 of 71, lost fold 37,
+    **slide 13**, contact 2 (the knee window is a quarter of the held-out overhead loss).
+  - in band per part (samples): hub 1 0.99, hub K 0.95, hub 2 0.99, **hub 3 0.59** (80, 13.0 mm), E 0.95, knee 0.98,
+    rocker 0.93 (21), **rod 0.00 (16) and rod ends 0.00 (32) at 29-30 mm**, L1a 0.95, L1b 0.93, **L2 0.77** (144).
+  - **Sample arithmetic (not a measurement):** without the rocker, rod and rod ends, in-band14 is 696 / 779 = 0.894
+    at the same reach, i.e. gap ~18.6 (score 93.2). Hub 3 at 0.82 (the obliquity law at 16 deg) adds ~+0.024. So a
+    drive with no out-of-band metal puts in-band at ~0.90, and 95 becomes a reach problem: +16 workspace poses
+    (0.731 -> 0.775) of the 84 fold losses, at contact <= 0.01.
+- **Measured on the folded side, so far:**
+  - On link 1 the fold window is th in [|a1(K) - a2| + 5, a1(K) + a2 - 5]. With a1 < a2 (pin-knee arcs ~40 / 73) the
+    folded relief needs a1(K) to RISE toward a2: K OPENS at the folded end too, the same sign as at the stretched end.
+    The folded lobe on the winner is a second rise on hub 2's rim at q2's folded end. On link 2 (cam-unfold-4th) it
+    lowers a2e instead; that took 18 folded fit poses there.
+  - **Kill risk, measured:** the round-6 judge's two-lobe run at LB1 (kK 6, smhi 8; round6_ideation.md section 1) took
+    41 stretched and **1** folded pose (13.70 vs 14.34 one-tooth, +0.64 fast). The folded side may hold few poses that
+    a K-opened a1 rescues with hub 2 still in band. Measure before any metal.
+- **Pressure-angle physics** (lesson 9): tan(pa) = kK r_horn / r_lobe. The winner's kK 3.18 needs r_horn 2.49 at
+  r_lobe 9. A follower on K that reaches hub 2's rim directly has r_horn ~ the K-to-rim distance (>= ~11 mm between
+  adjacent O20 stacks), so kK <= ~0.8-1.2 at 45 deg. Low gain is measured viable: rod-low (kK 1.56, r_horn 16.9)
+  LHS 19.94 fast, in-band 0.885, reach 0.738, against the rod's LHS 21.18; only the rod was CMA'd (16.53).
+- **Complexity bookkeeping:** the winner's row carries a non-standard mechanism record, so tools/simplicity.py prices
+  it at **12.0** and the dashboard shows 12.0 and v_gap 23.04 (no v_contact; it uses the fit contact 0.0053), against
+  the hand count 42.5 and the verified 23.57. Of the 42.5, the pin knee is 19.5 (10 of it the two sensed knee pins,
+  whose angles add to the twist), and the drive (rocker, rod, two rod ends, 2 extra loops x 4, spring, parts) ~20.
+- **Dead, with the reason** (adds to round 6's list):
+  - the Geneva tail (swept cone about u2: 10-42 points);
+  - a hub on link 2 (sweeps a q1 x q2 patch; in band only 21-40 deg from J2);
+  - a knuckle without the pin knee (J3 side: link 2 0.33, neck 0.23);
+  - O15-era crest basins (0.03 in band at O20);
+  - K = c(q1) is coupler-path-j1 by another name (a J2 path set by q1: dead, arcs set the window);
+  - idle-drive search optima (16.10, plain 3R plus an unscored spare).
+- **Open levers:**
+  - the folded-side second rise (gated above);
+  - stop B 10.9 deg short of the K dyad's straight line (bk1 + bk2 = 69.2; the 5-deg margin allows ~64);
+  - a drive with no out-of-band metal (in-band +0.05 by arithmetic, complexity -10 to -15);
+  - hub 3 (0.59) and L2 (0.77);
+  - the knee window on overhead (4 bench / 13 held-out losses);
+  - the 4.7-7 point fast-to-frozen loss (the 160-pose fit sample; the lead's env-bench polish, not this round).
+
+### Lenses
+
+1. **two-rise-lobe (reach >= 0.80 at in-band >= 0.85, contact <= 0.01: gap <= 16; stretch 95).** A second rise on
+   the winner's hub-2 rim, so K opens at q2's folded end too, searched as a new id on the rod carrier.
+   - First, before any CMA (~15 min, kinematic + parking on the frozen winner):
+     - split the 84 fold losses into stretched-past-stop-B and folded (J1 ~ J3);
+     - for each folded loss, the a1(K) that closes it, and hub 2 / hub K / L1b levels at that K;
+     - law-only, with the second rise and no metal, folded fit poses taken.
+   - **Kill gate:** < 10 folded fit poses taken law-only, or their hub 2 / K out of band (< 0.8), means the lens
+     reports the measured reason and stops (the judge's LB1 run took 1).
+   - Then search, together: the second rise (onset smlo', gain kK_lo inside the 45-deg pressure angle on the same
+     r_lobe), stop B / a1max up to the K dyad's 5-deg margin, a2, the seats, the rod-end heads lowered under the
+     crown (now 29-30 mm, 0 % in band), and hub 3.
+   - Rules: near-touch objective; an idle drive scores 100 (stretched_kin = 0 or folded_kin = 0 on a two-rise row);
+     the 5-deg margin in the J1-J3 metric with stops on q2's own angle; rate <= 3.45; every new part checked against
+     every hub stack incl. K's +6 mm spring cap; the lobe's radius checked against the O20 skirt (the winner's is
+     0.9 mm past it).
+   - Claims report frozen exact, near-touch, overhead x/28, folded_kin and the full-grid continuity flood fill. A
+     two-rise law is still monotone per side, but it has two branches in q2; check the flood fill for jumps at the
+     law's minimum.
+2. **direct-drive-knuckle (low complexity at the same reach: cx <= ~30 vs 42.5, gap within 1 of 23.57).** Drive K
+   from the hub-2 lobe with no rocker, pushrod or rod ends.
+   - Embodiments, in order:
+     - (a) K's follower arm or roller rides hub 2's rim lobe directly, with K moved next to hub 2 (bk2 small). By the
+       pressure-angle law kK <= ~0.8-1.2, so the onset (smhi), stop B and bk1 / bk2 are re-fitted for low gain (the
+       rod-low precedent, 19.94 fast at kK 1.56);
+     - (b) cam-unfold-4th's crown cam moved to link 1 with a 2:1 lever (23 deg pressure angle; crown hardware +5 hub
+       2 / +3 hub K, measured);
+     - (c) the lobe on K's rim and the follower on link 1b at hub 2 (the inverse pair), if it parks better.
+   - Its in-band upside is measured arithmetic: removing the 0 %-in-band rod metal gives ~0.894 at equal reach (gap
+     ~18.6). So this lens can beat the winner as well as simplify it.
+   - Gates before metal: kK, pressure angle <= 45, the follower's swept volume (lesson 2: it sits on link 1 and sweeps
+     only K's few degrees), the housing rule for a profile on a hub body, force closure (the K spring keeps the
+     follower on the lobe against gravity over the whole law; no lift-off).
+   - Price every embodiment with tools/simplicity.py from a FULL mechanism record (bodies, joints, loops, springs,
+     parts), and write the same full record for the winner first so the comparison is tool against tool.
+   - If lens 1's gate passes, the second rise goes on the same rim.
+3. **overhead-end (overhead >= 14 of 28 at in-band >= 0.88).** Overhead is 8 of 28 on every round-6 design. Attribute
+   before choosing a lever, on the frozen winner chain.
+   - For each of the 20 bench and 52 held-out lost overhead poses, measure:
+     - th needed against [th_min(K), th_max(K)];
+     - the K that would close it;
+     - hub 2 / hub K / hub 3 / L2 levels at that K (parking);
+     - the knee-window demand (ang_min 27.85).
+   - Then take the lever it names, in this order:
+     - (a) stretched end: stop B from a1max 58.4 toward ~64, with the lobe re-cut for the extra travel inside 45
+       deg;
+     - (b) the knee window for the slide losses (4 bench / 13 held out; the longer knee link measured 0 on H1, so try
+       ang_min and the knee's seat, not lc);
+     - (c) only then seats: J1 on the back of the shoulder (the user's allowed set: back + acromion top), where the
+       J1-J3 alignment set leaves the overhead cone (alignment-free-knuckle-4r: kinematic 0.953, overhead 26/28),
+       now with a determined K and the in-band headroom of lens 2.
+   - The folded-end share comes from lens 1's split; share files, do not duplicate the run.
+   - Target: frozen exact overhead >= 14 / 28 and reach >= 0.775, at in-band >= 0.88 and contact <= 0.01.
+
+Every lens:
+- writes docs/concepts/viz/concepts/<id>.js and passes `node docs/concepts/viz/test.mjs <id>` before the row is called
+  screened;
+- reports plain and near-touch, fast and frozen exact, held out, the continuity flood fill (full grid), and
+  tools/simplicity.py;
+- is time-boxed to 75 min of modelling; on a red-team kill it reports the measured reason and stops.
+
+### Carried over (catalogue, ideated, never screened)
+
+None. The round-4 judge picks:
+- deltoid-crest-j3-3r and crest-knee-3r are O15 crest-basin designs, closed by round-6 lesson 6 (hub 2 0.9975 at O15
+  -> 0.03 at O20); their judge red team measured +0.017 frozen reach;
+- slotted-eccentric-pin-knee-3r: its sibling was refuted at 115.21.
+
+The round 1-2 ideation entries are either families dead in rounds 1-2 (rails, telescopes, SPMs, tracks) or hubless
+joints that the "Keep O20 only" ruling excludes (cruciate-knuckle-3r, rolling-cone-3r).
+
+### Elsewhere, not to be duplicated
+
+- geneva-tail-knuckle-pinknee-3r itself: the lead's final polish and the gen-5 CAD, deferred until this round closes.
+  The round's variants take new ids.
+- minarc-stop-knuckle-4r: the gen-4 CAD (user_minarc_bdp v2, farm judge running) and gen-4b on pick1.
+
+### Lead bookkeeping (not the round's)
+
+- Fill the winner's mechanism record in tools/simplicity.py's schema (the tool says 12.0, the hand count 42.5).
+- Add v_contact 0.0106 to the row (the dashboard shows v_gap 23.04 against the verified 23.57).
+- EVOLUTION.md entries for the four round-6 designs.
+- The winner's open buildability items: lobe radius past the skirt, the 41.4-deg pressure angle, rod-end play, spring
+  vs gravity, the reflected J2 torque 3.18 tau_K.
+
+### Needs the user's say (listed, not screened)
+
+- **A cuff IMU instead of the two knee-pin encoders.** The pin knee would drop from 19.5 to ~11.5 (docs/SIMPLICITY.md)
+  and the winner to ~34.5. Related: the rule counts a sensed K as active (4 active) but the pin knee's sensed twist
+  pins as passive (3 active), and that asymmetry should be stated as a rule.
+- A fold margin below 5 deg (unchanged).
+- A sensed passive used only for static extremes counting as passive: minarc pick1 18.40 would then be 3 active.
