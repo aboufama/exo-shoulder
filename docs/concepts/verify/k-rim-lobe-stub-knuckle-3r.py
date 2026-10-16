@@ -10,7 +10,9 @@ What this harness adds (`corr`):
      touch only at the flank; an undercut (a concave flank tighter than the roller, or the web / back rows crossing the
      roller's path) would let the roller pass through lobe metal unseen. Checked geometrically over the whole valid law
      prefix (pitch point C(t) vs every lobe sample, great-circle mm at the lobe level; must be >= rr - 0.3 mm), and per
-     pose: the roller disc vs the lobe samples NOT on the flank row (back rows + web) >= 0 mm (they sit >= 1.5 mm behind).
+     pose (roller centre in its own pose vs every lobe sample, same metric, same 0.3 mm tolerance). A first try that
+     sampled the roller rim against the back rows was an artefact (the back row sits 1.5 mm behind the flank, exactly
+     the sample half-thickness, so it fired on 97 contact poses with no penetration) and was replaced by this test.
   3. FROZEN WEAR with every drive attribute carried over (the claim's KB.frozen copy list predates the stub; the metal is
      in strap / rigid / contact, which it does copy - this harness copies the drive's own fields too, so nothing is
      rebuilt or silently skipped), exact path on Bench(110,360), held-out clips optional.
@@ -54,12 +56,6 @@ class CorrModel(C.KSModel):
     def finalize(self):
         super().finalize()
         if "LOBE" not in getattr(self, "strap", {}): return
-        # the lobe's non-flank samples (back rows + web): a lobe sample whose distance to the pitch curve exceeds rr + 0.75
-        D = self.D; L_ = D.law(); R = float(self._R_lobe); rr = float(D.p["rr"])
-        Cn = L_["C"] / np.linalg.norm(L_["C"], axis=1)[:, None]
-        dmin = np.arccos(np.clip(self._lobe_d @ Cn.T, -1, 1)).min(1) * R
-        back = self._lobe_d[dmin > rr + 0.75]
-        self.strap["LOBEBK"] = (1, back * (R + S.T_LINK / 2))
         self._undercut = law_undercut(self)
 
     def collide(self, i):
@@ -71,9 +67,11 @@ class CorrModel(C.KSModel):
         m, cen, ax = self.cyl["hub1"]; Rh, th_ = self.T(m, i)
         c["LOBE-hub1"] = float(self.sd_cyl(LO, Rh @ cen + th_, Rh @ ax, r=self.cyl_r["hub1"]).min()) - h
         st = self.kstate[i] if hasattr(self, "kstate") else 0
-        if st == 1 and "LOBEBK" in self.strap and len(self.strap["LOBEBK"][1]):
-            RC = tf(*self.strap["ROLC"]); BK = tf(*self.strap["LOBEBK"])
-            c["ROL-LOBEback"] = float(cKDTree(BK).query(RC)[0].min()) - h      # adjacent pair in rolling contact: >= 0
+        if st == 1 and len(getattr(self, "_lobe_d", [])):
+            # roller centre vs every lobe sample, great-circle mm at the lobe level, per pose (members 1 and 2 turn about GH)
+            R1, _ = self.T(1, i); R2, _ = self.T(2, i); Rl = float(self._R_lobe)
+            pc = R2 @ self._tip_dir; ld = self._lobe_d @ R1.T
+            c["ROL-LOBEpen"] = float(np.arccos(np.clip(ld @ pc, -1, 1)).min() * Rl - float(self.D.p["rr"])) + 0.3   # >= -0.3 mm allowed
         self.last_clear.update({k_: round(v, 1) for k_, v in c.items()})
         return min(out, min(c.values()))
 
