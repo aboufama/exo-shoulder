@@ -1,0 +1,50 @@
+{
+ "leader": "raglan",
+ "a1": 39.54676077108791,
+ "a2": 74.85369898355137,
+ "a1_relay": 81.0,
+ "n_ws": 360,
+ "A_ws": 0.6222,
+ "AorB_ws": 0.9444,
+ "B_only_ws": 116,
+ "B_only_overhead": 19,
+ "hub2_ray_requirement_mm": {
+  "A_sigma+1": {
+   "n": 331,
+   "med": 44.0,
+   "p10": 40.0,
+   "p90": 75.0,
+   "overhead_med": 92.0,
+   "share_le_60": 0.861,
+   "share_le_75": 0.9
+  },
+  "A_sigma-1": {
+   "n": 331,
+   "med": 53.0,
+   "p10": 52.0,
+   "p90": 56.0,
+   "overhead_med": 53.0,
+   "share_le_60": 0.997,
+   "share_le_75": 0.997
+  },
+  "B_sigma+1": {
+   "n": 119,
+   "med": 80.0,
+   "p10": 51.8,
+   "p90": 400.0,
+   "overhead_med": 107.0,
+   "share_le_60": 0.353,
+   "share_le_75": 0.471
+  },
+  "B_sigma-1": {
+   "n": 119,
+   "med": 73.0,
+   "p10": 56.0,
+   "p90": 225.6,
+   "overhead_med": 71.0,
+   "share_le_60": 0.269,
+   "share_le_75": 0.546
+  }
+ },
+ "secs": 426.4
+}

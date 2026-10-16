@@ -212,7 +212,9 @@ Reading the ranking:
   worse: median 80, overhead 113). A GH-ray hub has one level on its link, so F must lie within 12 mm above every
   requirement it serves to stay in band: at F ~ 60-65 state A stays in band and 30-45 % of the B poses clear (+0.09 to
   +0.14 of reach before links, hub 1 and the knee are checked); covering more of B lifts hub 2 out of band in A. The
-  relay is a real lever, but a ~+0.1 one, not +0.3, unless hub 2 moves between states too (a second, sliding hub
+  relay is a real lever, but a ~+0.1 one, not +0.3, unless hub 2 moves between states too. The same gate at the other
+  leaders' seats (farm, `relay_parking_<leader>.json`): state A 51-57 mm, state B median 70-73 / p90 153-226 mm, 27-35 %
+  of B clear at 60 mm and 55-60 % at 75 mm - the same answer at every seat the leaders use (a second, sliding hub
   level = a passive translation along the J2 axis, 1 slide, complexity +2-3 under the new weights).
 * **Benches:** the rocker / dwell rows are Bench(60,160) fast (their histories); the margin / knee rows are frozen
   Bench(110,360) exact. On the 160-pose bench every class tops out at 0.70-0.72 at in-band >= 0.80.
