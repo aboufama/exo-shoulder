@@ -744,3 +744,39 @@ docs/concepts/fold-sph3r.md.
     full wrap on the proximal 22 mm.
   - Shortening the cuff from the elbow end instead would cost 55 mm, leaving a cuff 25.5 mm long without its screw
     rows.
+
+## The full CAD loses R1 to its scapula tab; R17 fails on a mesh artefact (2026-10-16, user_osn_k4216)
+
+The generation-2 winner (offset-skin-normal-3r k4216) was built in the user's style on the L1's exact kinematics (frame
+deviation 1e-4 mm, the model's hub / neck / bridge metal within 0.17 mm). It scores 5 of 19 against its L1's 7: R1
+49.0 vs 78.7 %, R6 0.85 vs 0.0, R16 55.8 vs 57.5 %. Details: docs/concepts/offset-skin-normal-3r.md, "Full CAD in the
+user's style".
+
+* **A scapula-fixed tab from a J1 over the acromion sits 15-42 mm off the skin.** It must clear the arm and deltoid of
+  every pose in the scapula frame. On every heading outside link 1's sweep, a 22-26 mm M4 terminal clears that
+  envelope only 18-58 mm above J1's face. The tab then takes a third of all covered skin, at a median gap of 42 mm,
+  and only 3 % of that skin is in band.
+  * R1 by nearest part, every 15th followed frame: 0.47 with the tab, about 0.68 without it, 0.76 for the L1.
+  * The L1 never modelled the scapula interface, so any L1 with this J1 site is optimistic by up to ~30 R1 points.
+  * Where the user's handler takes the base decides it, not the chain.
+  * The tab fitted to the clip envelope also misses the workspace: 3 overhead poses at 1.6-3.6 mm in the skin, and
+    0.85 mm into link 1 at Wave 72. It needs the workspace envelope and link 1's swept volume, not only link 1's heading.
+* **R17 "does not move freely" is our mesh, not the mechanism.** OCC tessellates two glued seams of link 2 with 0.02 mm
+  gaps, giving an open shell. judge/dynamics.py replaces an open shell with its convex hull, so link 2 weighs 150-158 g
+  instead of 20 g, and the cuff twist reaches 5.85-6.6 deg (limit 5).
+  * A 0.05 mm weld closes the mesh in mm.
+  * The judges then reload it as float32 in metres, merge at 1e-7 m and drop degenerate faces, which reopens 69 edges.
+    Builders must close meshes in the judges' own units.
+  * param2_r20_n3_s1414_4's R17 FAIL is probably the same artefact (untested).
+* **The user-style U cuff's anterior arc meets the user's forearm cuff at deep elbow flexion.** At flexion 131 deg
+  (Drink from a cup), the forearm cuff touches the arc from 19 deg of wrap to its end (110 deg).
+  * Judged result: R6 4.65 mm, and 23.6 mm into the forearm skin (R2, ours).
+  * param2's R6 4.38 is the same contact.
+  * Stopping that arc at 12 deg clears it.
+  * The +vB arc still enters the trunk with the arm at the side (7.55 mm).
+* **Catalogue guides need their screw lengths and channel sides modelled, not just their envelopes.** Two mistakes
+  cost 43 % of the R16 workspace poses:
+  * the across block's channel was drawn in its top face;
+  * the M1.6x4 block screws reached into the rail's path.
+
+  With the channel turned down and M1.6x2.5 screws, R16 went from 16.7 to 55.8 %.

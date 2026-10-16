@@ -496,3 +496,141 @@ meshes; `redteam.json` is the final build's run):
    cannot pass at a1 / a2 = 40 / 74.
 3. A base_mount slider mapping, so R10 runs on offset chains.
 4. Re-run R6 at step 1, with surface samples in the judge itself (its vertex-only test passed a 0.59 mm crossing).
+
+## Full CAD in the user's style (k4216) - pipeline/full-exo/designs/user_osn_k4216, 2026-10-16
+
+The generation-2 winner's full CAD (CLAUDE.md "every generation ends in a full CAD + render of its winner").
+Builder: `pipeline/conformal/param_cad/user_style_osn.py`. It reuses user_style.py / param_build.py / sketch2d.py
+(v5 hub stack, bar sweep, pads, pocket, ring, bore, U cuff, BOTTOM) and the L1 builder's fit, frames and clips
+(build_osn_l1.py: `fit((60, 160), 4216)` reproduces gap 32.61 to the digit). Every part is a line / tangent-arc sketch,
+extruded, revolved or swept as one constant section on a line / arc path, plus rounds. No lofts.
+
+**Parts** (39 of ours, each one valid solid; R7 `judge/part_validity.py`: 29 STEP files, all valid, 1 solid each):
+
+| part | how it is made | material | mass |
+|---|---|---|---|
+| J1, J2, J3 hub stacks | user_style.hardware, exactly as the champion: 2x MR117-2RS 7x11x3 back-to-back, 17-4PH outer spacer, ground inner spacer, M7x0.5 Ti ring nut, threaded O20 G2 dome cap, integral O7 Ti pins on the lower member; J3 built about GH, then moved by its foot point c3 (7.0 mm, perpendicular to u3) onto its offset tilted line | catalogue / Ti-6Al-4V / 17-4PH | 4.9 g per stack |
+| D7-02 link 1 | bent 8 x 3 bar in span(u1, u2): tangent arcs R6 / R90 / R4 (45 deg climb: J2's face is 9.8 mm above J1's within 40 deg, no 35 deg chain exists), J1 / J2 pads, integral pins | Ti-6Al-4V | 13.9 g |
+| D7-03 link 2 | bent 8 x 3 bar in the model's strap plane span(C2, C3): R33 / R13 / R24 / R500 / R13 at the standard's 35 deg, J2 / J3 upper rings + spigots + bores, user-style pocket | Ti-6Al-4V | 20.0 g |
+| D7-04 member 3 | J3 lower pad + integral pin + the model's 60 deg ramped neck (16.8 mm) + bridge, ONE side-view sketch extruded 8 mm; beside the block the bridge sits at the model's own carriage-B level, over the block on its top face; 2x M1.6x4 into the across block | Ti-6Al-4V | 11.7 g |
+| along guide | THK RSR3M (= HIWIN MGN03C class) block W 8 x L 12 x H 4, INVERTED (block on the cuff base, 2x M1.6x2.5 from below); rail RSR3R3 3 x 2.6 x 26.6 (travel +-6.3 + block 12 + 2) riding with carriage A | catalogue | 1.7 + 1.4 g |
+| carriage A | plus-shaped 1 mm adapter under both rails, R1 corners | Ti-6Al-4V | 1.1 g |
+| across guide | rail RSR3R3 3 x 2.6 x 29.0 (travel +-7.5) on carriage A; block RSR3M = carriage B, channel down over the rail, 2x M1.6 tapped 1.0 for member 3 | catalogue | 1.5 + 1.7 g |
+| D7-01 scapula base | J1 upper ring + spigot + bore, a 16 x 3 tab (tangent arcs R7 / R125 / R6, 60 deg climb) to a terminal 28 deg off J1 at 75.5 mm from GH, 2x M4 counterbored to the user's scapula handler; heading -50 deg about J1, 32 deg clear of link 1's sweep (-18..175 deg over the followed frames) | Ti-6Al-4V | 16.5 g |
+| D7-05 BOTTOM + stage base | the user's BOTTOM cut at s 255, fused with the 1.5 mm base plate under the along block + arm + a tongue in BOTTOM's channel web: one 5-axis part (BOTTOM is the one user part we may modify) | 7075-T6 | 75.0 g |
+| upper-arm cuff | user_style.upper_cuff: one U sketch (70 mm flat land, R50 side arcs, 2 mm wall), extruded along BOTTOM s 83.9-164.7, 6x M4x6 countersunk into BOTTOM's tapped holes; **the anterior (-vB) arc stops at 12 deg of wrap** (the +vB arc keeps 110), a soft strap closes it | AlSi10Mg | 75.9 g |
+
+Stack: 1.5 + 4 + 1 + 4 = 10.5 mm (the model carried 13.5). Miniature-guide screws are M1.6: the size-3 blocks and
+rails take M1.6, not M2 (the catalogue json lists no screw size; [est] from the MGN3 / RSR3 drawings). Mass: 165.2 g
+ours + 75.0 g BOTTOM-with-stage (the L1 counted 79.4 g of keep-outs, no cuff and no base tab).
+
+**Kinematics = the verified model's** (build.json `check`, `check_clips`, `kinematics_exact`). The parts are posed by
+clips.json ("G" + "T" per group, the L1's own file) and compared with the model's metal posed by its own member
+transforms:
+* 10 clip frames (rest; the peak of every clip, including Raise overhead, Comb hair at elevation 143, Reach a high
+  shelf at 132, Reach back pocket at plane -80 / axial 101, Wave; the middle of Raise overhead): frame deviation
+  1e-4 mm; the model's hub, neck and bridge samples lie at most 0.17 mm outside the built metal (the hub cap dome
+  and the neck's 0.5 mm rounds). Within 0.5 mm at every frame.
+* 7 bench poses, including the bench's highest (45, 165, -90), overhead raise at elevation 150, behind the back
+  (-80, 39, 101) and the red team's pinch (-75, 45, 120): the same 0.17 mm. The two poses the model leaves in the fold
+  (forward reach 90, abduction 90) do not close in the model either.
+* The links are a deliberate shape change, reported apart: the bent bars sit at or above the L1 strap undersides,
+  link 1 by 1.4-5.9 mm (mean 3.6), link 2 by 0.0-11.1 mm (mean 3.4; the 11 mm is where the L1 strap ramps 60 deg
+  into J3 and the standard's 35 deg bar starts climbing earlier).
+
+**Iterations** (each judged on the farm, `tools/cloud_run.py judge <id> fast`; snapshots of v1-v3 kept in the
+scratchpad, the final design dir is the v5 build):
+
+| build | change | R1 | R1-aim | R4 | R6 | R16 | R17 | passes |
+|---|---|---|---|---|---|---|---|---|
+| L1 (l1_offset-skin-normal-3r) | keep-outs, no base tab, no cuff | 78.7 % | 42.0 % | 36.0 % | 0.0 | 57.5 % | PASS | 7 |
+| v1 | first full CAD (bridge 1 mm under the model's) | 42.7 % | 20.1 % | 21.1 % | 4.65 | 16.7 % | FAIL | 4 |
+| v2 | bridge at the model's carriage-B level | 42.6 % | 20.0 % | 21.1 % | 4.65 | 16.7 % | FAIL | 4 |
+| v3 | links hug the L1 straps (fairness 40 -> 4, up to 5 arcs; link 2 mean over the strap 5.2 -> 3.4 mm) | 44.2 % | 20.2 % | 21.6 % | 4.65 | 16.7 % | FAIL | 4 |
+| **v5 = user_osn_k4216** | across block channel down, along-block screws x2.5, anterior cuff arc 12 deg, base terminal 28 deg / 75.5 mm, watertight weld | 49.0 % | 22.3 % | 24.6 % | 0.85 | 49.0 %6 | 49.0 %7 | 5 |
+
+(R7 ran locally on the final: PASS; the farm reports NOT RUN for STEP designs, so the final scorecard was re-assembled
+locally with `judge/scorecard.py` after the farm's judge files came back.)
+
+What each fix bought, measured:
+* **R6 4.65 mm and R2 23.6 mm (ours) were the U cuff's anterior arc.** At elbow flexion 131 deg (Drink from a cup) the
+  user's FOREARM CUFF folds onto it from 19 deg of wrap to its end (110 deg), and the arc enters the forearm skin.
+  Same cause as param2_r20_n3_s1414_4's R6 4.38 (same cuff). With the arc at 12 deg the cuff no longer meets the
+  forearm cuff (0 overlapping frames; every 3rd frame of every clip, winding number) and the judged R2 (ours) falls
+  from 23.57 to 7.55 mm. **The 7.55 mm left is the cuff's +vB arc in the torso at Walking arm swing 90** (arm at the
+  side, elevation 24, axial -90): the profile clears the arm, not the trunk.
+* **R6 0.6 mm static + R16 part interference 0.43 of the poses were two stage bugs.** The across block's section was
+  flipped, so its rail channel opened on the top face and the across rail sat 0.6 mm inside the block at every
+  frame. The along block's M1.6x4 screws reached 1.1 mm into the along rail's path, so the rail hit the screw tips
+  as it slid (51 of 120 workspace poses). Both fixed: R16 16.7 -> 55.8 %, no part interference left in R16.
+* **R17 FAIL is a mesh artefact on our side, NOT fixed yet.** OCC meshes two glued seams of link 2 with 0.02 mm gaps
+  (88 open edges, 3 pieces). judge/dynamics.py takes the convex hull of an open shell, so link 2 weighs 150-158 g
+  in the dynamics model instead of 20 g, and the cuff twist reaches 5.85-6.6 deg (limit 5; nominal case). The
+  builder's 0.05 mm boundary weld closes the mesh in mm (exo.glb's link 2 is watertight), but the judges reload it
+  as float32 in metres, merge at 1e-7 m and drop degenerate faces, which reopens 69 edges at the J2 ring root.
+  Welding in the judges' own units closes the glb's link 2 (tested), not yet a fresh tessellation: the next build's
+  first fix. param2_r20_n3_s1414_4's R17 FAIL is probably the same artefact (untested).
+* **R1: the scapula base tab is the loss the L1 never carried.** R1 attribution by nearest part (score_design's
+  covered-skin rule, every 15th followed frame, `scratchpad r1_parts.py`):
+
+| part | covered share | in band 2-14 | median gap |
+|---|---|---|---|
+| D7-01 scapula base (v4: terminal 32 deg / 77 mm) | 0.386 | 0.027 | 43.6 mm |
+| D7-01 scapula base (v5: 28 deg / 75.5 mm) | 0.326 | 0.033 | 41.9 mm |
+| D7-05 BOTTOM + stage base | 0.210 | 0.727 | 8.6 mm |
+| D7-02 link 1 | 0.202 | 0.922 | 10.7 mm |
+| D7-04 member 3 | 0.132 | 0.433 | 13.0 mm |
+| D7-03 link 2 (v5) | 0.114 | 0.450 | 14.4 mm |
+| all (v5) | 1 | 0.469 | |
+| all (L1, same sampling) | 1 | 0.759 | |
+
+  The tab is scapula-fixed, so it must clear the skin of every pose in the scapula frame (the arm and deltoid rise
+  under J1's neighbourhood). On every heading outside link 1's sweep, a 22-26 mm terminal pad clears that envelope
+  only 18-58 mm above J1's face (`scratchpad base_exp.py`: heading -50 is the lowest, 70 mm from GH at 16 deg off
+  J1, 77 at 32; headings -60..-150 need 74-110). A tab that high covers a third of all the skin the mechanism
+  covers, at a median 42 mm. Without the tab the rest of the CAD is at about 0.68 in band (this sampling), against
+  the L1's 0.76. The remaining 8 points are link 2 and member 3 riding 3-4 mm higher than the L1's 2 mm-target strap
+  and neck.
+
+**Outside judges, line by line against its own L1** (`tools/cloud_run.py judge user_osn_k4216 fast`, farm; R7 local):
+
+| row | l1_offset-skin-normal-3r (L1) | user_osn_k4216 (full CAD) | what moved |
+|---|---|---|---|
+| R1 | 78.7 % FAIL | 49.0 % FAIL | scapula base tab (the L1 had none): 0.33 of the covered skin at a median 42 mm; links / member 3 3-4 mm over the L1 strap |
+| R1-aim | 42.0 % FAIL | 22.3 % FAIL | same causes |
+| R2 | 24.87 FAIL | 24.94 FAIL |  |
+| R3 | 90.9 % FAIL | 90.9 % FAIL |  |
+| R4 | 36.0 % FAIL | 24.6 % FAIL | same causes (Raise overhead in-band) |
+| R5 | 3 PASS | 3 PASS |  |
+| R5-aim | 3 PASS | 3 PASS |  |
+| R6 | 0.00 PASS | 0.85 FAIL |  |
+| R7 | True PASS | True PASS | local part_validity (29 STEP, 1 valid solid each) |
+| R8 | 79.40 PASS | 240.20 PASS | real parts: hubs, guides, base tab, BOTTOM-with-stage, U cuff |
+| R9 | - NOT RUN | - NOT RUN |  |
+| R10 | - NOT RUN | - NOT RUN |  |
+| R11 | 0.38 PASS | 0.92 PASS | heavier arm parts (U cuff) |
+| R12 | - PARTIAL | - PARTIAL |  |
+| R13 | - NOT DONE | - NOT DONE |  |
+| R14 | - NO DATA | - NO DATA |  |
+| R15 | - NOT DONE | - NOT DONE |  |
+| R16 | 57.5 % FAIL | 55.8 % FAIL |  |
+| R17 | True PASS | False FAIL |  |
+| passes | 7 of 19 | 5 of 19 | |
+
+**Verdict: the full CAD does NOT hold its L1's R1 / R6 / R16 (5 of 19 pass against the L1's 7).** The kinematics are the verified model's (1e-4 mm). The losses come from the parts the L1 never carried, and each one is measured: the scapula base tab (R1 -29.7 points: a third of the covered skin at a median 42 mm; R6 0.85 mm against link 1 at Wave 72, 6 frames; 1.64 mm into the skin at Reach a high shelf 78; R16 -1.7 points, 3 overhead workspace poses at elevation 135-165 where the tab is 1.6-3.6 mm in the skin, because the tab was fitted to the clip envelope, not the workspace); the U cuff's +vB arc (R2 ours 7.55 mm into the trunk, arm at the side); and the R17 mesh artefact. What the user-style parts fixed on the way: R6 4.65 -> 0.85, R16 16.7 -> 55.8 %, R1 42.6 -> 49.0 %, R4 21.1 -> 24.6 %.
+
+**Renders** (exo-blender-cycles, ADA_24, Cycles 192 spp, matte black mannequin: base 0.004, rough 0.8, no coat, half
+specular; bead-blasted metal, polished screws, catalogue guides as ground steel): 4 hero sets x 3 cameras (Comb hair at elevation 143, Reach a high shelf, Reach back pocket, Drink from a cup), renders/2026-10-16_userstyle_osn_k4216/. The parts close-up set (5 custom parts, no body) fails on the worker right after the glTF import: the 10-15 parts scene that rendered then fails the same way with both the current and the old render script, and so does a copy with a dummy body. Bodyless scenes are broken on the endpoint; the endpoint was left as it is. When 5 sets go in at once on the 1-worker endpoint, all fail. Run them one at a time.
+
+**Next (the loop):**
+0. The next build's fixes, each measured above: weld link 2 in the judges' units (R17); fit the base tab to the
+   clip + workspace envelope and keep it clear of link 1's swept volume, not only its heading (R6 0.85, R16 3 poses);
+   clear the cuff's +vB arc of the trunk (R2 ours 7.55).
+1. The scapula interface. Ask the user where the handler can take the base: on the J1 ring itself (no tab: R1 back
+   to about 0.68 on this sampling), or at a lower point on the scapular spine. A tab routed under link 1's sweep at
+   J1's lower level is the other lever. Only the user's handler decides it.
+2. Link 2 and member 3: re-fit the model's neck at the real 10.5 mm stack (the L1's lever 1) and let link 2 take the
+   model's 60 deg ramp into J3. The CAD standard asks for 35 deg; that is the user's call: the 11 mm over the strap at
+   J3 costs in-band.
+3. The fold (R3 / R4) is the morphology's limit (the L1's verdict). The generation-3 winner (pin knee k4598) is next for
+   this builder.
