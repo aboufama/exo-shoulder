@@ -12,9 +12,13 @@
  * cannot take (past the full travel, or the fold) show red. */
 (function () {
   const K = (typeof window !== 'undefined' ? window : globalThis).KIN, V = K.V, M = K.M, D2R = K.D2R;
-  const P = { az: 107.18, el: 64.67, wd: 103.39, wa: -5.9, a1: 44.138, a2h: 40.73, a2max: 54.591, sigma: -1, m_stop: 5,
-              faces: { J1: 52, J2: 64, J3: 73.15 }, rail: 70, rail_span: [31.4, 63.9], stack: 12.25, cuff_at: 165,
-              lv1: [55.2, 55.2, 55.2, 60, 62, 64, 66, 67.2, 67.2, 67.2, 67.2], lvn: [76.3, 76.3, 78, 80, 84, 88, 90, 92, 95, 97, 99] };
+  // best config (CMA stream 3, Bench(60,160) fast 29.38): carriage integrated in hub 3's lower member (carr_t 0), rail plate
+  // the UPPER member at J2 (over link 1), fitted levels F 53 / 63 / 69.15 mm, slot at 66 mm, rail span 36.8-59.8 deg from J2
+  const P = { az: 86.6683, el: 61.6608, wd: 102.6189, wa: -3.6242, a1: 42.143, a2h: 45.5057, a2max: 51.1109, sigma: -1, m_stop: 5,
+              faces: { J1: 53, J2: 63, J3: 69.15 }, rail: 66, rail_span: [36.82, 59.79], stack: 12.25, cuff_at: 165,
+              lv1: [56.1, 56.1, 56.1, 51.0, 52.0, 53.0, 55.0, 59.7, 63.2, 63.2, 63.2],
+              lvr: [66.2, 66.2, 66.2, 67.2, 63.7, 60.0, 60.0, 62.5, 66.0, 66.0, 66.0],
+              lvn: [72.3, 72.3, 70.0, 70.0, 72.0, 75.0, 78.0, 81.0, 86.0, 92.0, 98.0] };
   const u1 = K.bvec(P.az, P.el), u3 = K.wdir(P.wd, P.wa);
   const C0 = K.sph3r(u1, u3, P.a1, P.a2h, P.sigma), u2 = C0.u2, nH = V.unit(V.cross(u2, u3)), v3 = V.unit(V.reject([1, 0, 0], u3));
   const cosd = x => Math.cos(x * D2R), sind = x => Math.sin(x * D2R), acosd = x => Math.acos(Math.max(-1, Math.min(1, x))) / D2R;
@@ -76,7 +80,8 @@
       const f = fk(q, ctx), F = P.faces, h = P.stack, s = q[3];
       const n = V.unit(V.cross(f.p2, f.p3)), e = V.unit(V.cross(n, f.p2));
       const railRoot = [], railSlot = [];
-      for (let i = 0; i <= 16; i++) { const a = P.rail_span[0] * i / 16; railRoot.push(arcPt(f.p2, e, a, F.J2 + (P.rail - F.J2) * Math.min(1, i / 8) + 1.5)); }
+      for (let i = 0; i <= 20; i++) { const a = P.rail_span[0] * i / 20, x = i / 2, j = Math.min(9, Math.floor(x));
+        railRoot.push(arcPt(f.p2, e, a, P.lvr[j] + (P.lvr[j + 1] - P.lvr[j]) * (x - j) + 1.5)); }
       for (let i = 0; i <= 16; i++) { const a = P.rail_span[0] + (P.rail_span[1] - P.rail_span[0]) * i / 16; railSlot.push(arcPt(f.p2, e, a, P.rail + 1.5)); }
       const harm = ctx.armAxis, bar0 = M.mulv(ctx.Hb, BAR0), barDn = M.mulv(ctx.Hb, DB);
       const neck = profArc(f.p3, bar0, P.lvn, 3), neckEnd = neck[neck.length - 1];
@@ -90,7 +95,7 @@
         { kind: 'hub', role: 'active', name: 'J2 (O20, hard stops at the fold margin)', c: V.scale(f.p2, F.J2), axis: f.p2, r: 10, h },
         { kind: 'arc', role: 'link', name: 'link 2a rail plate, root', pts: railRoot, r: 3 },
         { kind: 'arc', role: 'passive', name: 'arc slot (GH-concentric, constant radius)', pts: railSlot, r: 3.2 },
-        { kind: 'carriage', role: 'passive', name: `carriage (iglidur bushings, slide ${s.toFixed(1)} deg)`, c: V.scale(f.p3, P.rail + 4.2), x: t3, z: f.p3, size: [16, 12, 2] },
+        { kind: 'carriage', role: 'passive', name: `hub 3 sole on the slot (iglidur bushings, slide ${s.toFixed(1)} deg)`, c: V.scale(f.p3, P.rail + 3.1), x: t3, z: f.p3, size: [16, 12, 1] },
         { kind: 'hub', role: 'active', name: 'J3 (O20, on the carriage)', c: V.scale(f.p3, F.J3), axis: f.p3, r: 10, h },
         { kind: 'arc', role: 'fixed-arm', name: 'neck (K7 14 x 6, upper member of J3)', pts: neck, r: 3 },
         { kind: 'link', role: 'fixed-arm', name: "BOTTOM's bar", a: neckEnd, b: barEnd, r: 3 },

@@ -7,6 +7,9 @@ l3 = hub 3's member, l4 = the knee link, H = arm-fixed at x_H = HR x), and clips
 design's (l1_skin-normal-3r-pin-knee: "G" + "T" per group = the model's own Model.T(m, i)). The configuration is an
 INPUT (--params JSON | --params-file F | --k K | default: docs/concepts/rows/<id>.json best_params), so a polished config
 drops in; the L1 design dir named by --l1 must have been built from the same config (its clips carry the frames).
+A config whose verified shape was fitted on a bench this box does not hold (the polished H1: fit on Bench(110,360) FAST,
+cache only on the farm) comes in as a FROZEN SHAPE (--shape, pipeline/concept_l1/pinknee_shape.py: the farm fits and
+pickles the attributes the verifiers hand over; here it is worn without a refit, the verifiers' frozen-shape protocol).
 
 Parts (user style, user_style.py; no lofts - line / tangent-arc sketches, extrudes, revolves, single-section sweeps along
 line / arc paths, rounds):
@@ -28,17 +31,19 @@ line / arc paths, rounds):
   pins a, b IGLIDUR-PIN stack 5.0 mm (tools/hardware_catalogue.json): integral O4 h9 Ti pin on the lower plate (E boss /
             arm pad), iglidur thrust washer O4.2 x O8 x 0.5 in the 0.5 mm running gap, iglidur sleeve O4 x O5.5 x 1.55 pressed
             in the knee link, DIN 6799 RS3.2 E-clip (A2) in a 0.7 mm counterbore - nothing stands above the 5.0 mm stack.
-  arm side  the arm pad (O12 at pin b) + the pad mount (the L1's slab footprint, 12 wide, at the pad level) as one planform
-            sketch, a riser under BOTTOM's cut end inside BOTTOM's own footprint, fused with the user's BOTTOM (cut at s
-            255, as the L1) into ONE 5-axis part; the upper-arm cuff from one line/arc sketch (user_style.upper_cuff, the
-            anterior arc stopped at 12 deg as user_style_osn); the user's other arm parts unchanged.
-  base      the scapula base: J1 upper ring + a 16 wide tab with 2x M4 counterbored to the user's scapula handler. The tab
-            is chosen from headings x terminal angles by (1) the skin envelope (>= 0.5 mm over the 2 mm clearance), (2) NO
-            contact with the posed link 1 over every clip frame (>= 0.5 mm, built meshes: gen-2's tab hit link 1 at 0.85
-            mm), (3) the lowest mean clearance (gen-2's climbing tab sat at a median 42 mm and cost R1 29.7 points).
+  arm side  the arm pad (O12 at pin b) + the pad mount as one planform sketch (lines + tangent arcs, 12 wide, at the pad
+            level) on the L1's ROUTE (build_pinknee_l1.pad_mount_sweep: the shortest straight slab >= 1 mm clear of the
+            knee's swept parts over 1161 closing poses), its last 6 mm a riser 1 mm into BOTTOM's underside; BOTTOM cut as the
+            L1 cut it (square to the arm, where the sweep would meet it, the distal bar kept); all fused with pin b's integral
+            pin into ONE 5-axis part; the upper-arm cuff from one line/arc sketch (user_style.upper_cuff, both side arcs
+            trimmed clear of the trunk over the clip poses); the user's other arm parts unchanged.
+  base      the scapula base AT THE J1 HUB RING (user ruling 2026-10-16, no tab): J1 upper ring + two short ears in the J1
+            upper seat plane, each one M4 tapped hole for the user's scapula handler bracket; ear headings clear of the posed
+            link 1 over every clip / workspace frame and of the skin envelope.
 
     OMP_NUM_THREADS=1 nice -n 10 python3 pipeline/conformal/param_cad/user_style_pinknee.py [--out user_pinknee_k4598]
-        [--params JSON | --params-file F | --k K] [--hubs 10,10,10] [--l1 l1_skin-normal-3r-pin-knee]
+        [--params JSON | --params-file F | --k K | --shape PKL] [--hubs 10,10,10] [--l1 l1_skin-normal-3r-pin-knee]
+    polished H1 (gen-3 winner): --out user_pinknee_h1 --l1 l1_skin-normal-3r-pin-knee-h1 --shape .cache/pk_shapes/h1_b110_360_m5.pkl
 """
 import argparse, json, math, os, shutil, sys, time
 ARGV = sys.argv[1:]; sys.argv = sys.argv[:1]
@@ -47,6 +52,7 @@ import user_style as US                                                         
 REPO = US.FR.REPO
 sys.path.insert(0, os.path.join(REPO, "pipeline", "concept_l1"))
 import build_pinknee_l1 as PK                                                             # noqa: E402  (the model fit, link rows, frames)
+import pinknee_shape as PS                                                                # noqa: E402  (a frozen fitted shape, worn without its fit bench)
 import numpy as np, cadquery as cq, trimesh                                               # noqa: E402
 PB, SK, AE, LV, unit, V, xform = US.PB, US.SK, US.AE, US.LV, US.unit, US.V, US.xform
 T, W, L_SEAT = US.T, US.W, US.L_SEAT
@@ -297,7 +303,8 @@ def link_fit(label, ex, ey, start, end, Dq, Rq, t=T, climbs=CLIMBS):
 
 
 def links(M):
-    D = M.D; u, c = D.u, D.c; F = M.f; prof = PK.link_rows(M); out = []; rep = {}; hr = M.hr
+    D = M.D; u, c = D.u, D.c; F = M.f; out = []; rep = {}; hr = M.hr
+    prof = M._link_rows if getattr(M, "_link_rows", None) is not None else PK.link_rows(M)   # a frozen shape carries its fit's rows
     C = [c[k] + F[k] * u[k] for k in range(3)]
     # ---- link 1: lower at J1 and J2 (both axes through GH), plane span(u1, u2)
     ex = unit(u[0]); ey = unit(u[1] - (u[1] @ ex) * ex); phi = math.acos(np.clip(unit(u[1]) @ ex, -1, 1))
@@ -354,16 +361,16 @@ def pin_stack(name, cen, sn, tr, tp, lower_grp, knee_grp):
     zk0 = tr + tp + PK.RUN; zk1 = zk0 + tp; zc0 = zk1 - CB_H                               # knee link, clip seat
     r = PIN_D / 2; rg = GROOVE_D / 2
     pin = rev([(0, tr + 0.8), (r, tr + 0.8), (r, zc0), (rg, zc0), (rg, zc0 + CLIP_T), (r, zc0 + CLIP_T), (r - 0.2, zk1), (0, zk1)], cen, sn)
-    hw = [(lower_grp, f"pin {name}: iglidur thrust washer O4.2 x O8 x 0.5 (GTM class, 0.5 mm running gap) [est size, confirm]",
+    hw = [(lower_grp, f"pin {name}: iglidur thrust washer 4 x 8 x 0.5 (igus GTM-0408-005 class, in the 0.5 mm running gap; confirm the size, else cut from iglidur sheet)",
            rev([(2.1, tr + tp), (4.0, tr + tp), (4.0, tr + tp + PK.RUN), (2.1, tr + tp + PK.RUN)], cen, sn)),
-          (knee_grp, f"pin {name}: iglidur G sleeve O4 x O5.5 x {zc0 - zk0:.2f} (GSM-0405 class, cut to length) [est, confirm]",
+          (knee_grp, f"pin {name}: iglidur G sleeve bearing igus GSM-0405-03 (4 x 5.5 x 3) faced to {zc0 - zk0:.2f}, pressed in the knee link",
            rev([(r + 0.01, zk0), (SLEEVE_D / 2, zk0), (SLEEVE_D / 2, zc0), (r + 0.01, zc0)], cen, sn))]
     # DIN 6799 E-clip: a C ring O3.2 / O7.3 x 0.6 with a 3.2 mm mouth
     clip = rev([(rg + 0.01, zc0), (3.65, zc0), (3.65, zc0 + CLIP_T), (rg + 0.01, zc0 + CLIP_T)], cen, sn)
     e, f = (PB.axis_frame(sn)[:, 0], PB.axis_frame(sn)[:, 1])
     cut = prism(np.asarray(cen) + (zc0 - 0.5) * sn, e, f, [(1.2, -1.6), (4.5, -1.6), (4.5, 1.6), (1.2, 1.6)], [0, 0, 0, 0], CLIP_T + 1.0)
     clip = clip.cut(cut)
-    hw.append((lower_grp, f"pin {name}: DIN 6799 RS3.2 E-clip, A2 stainless (polished, screw-class hardware), seated in the knee link's O8 x 0.7 counterbore", clip))
+    hw.append((lower_grp, f"pin {name}: retaining E-clip DIN 6799 - 3.2 (groove O3.2 on the O4 pin, O7.3 x 0.6), A2 stainless (polished), seated in the knee link's O8 x 0.7 counterbore", clip))
     return pin, hw
 
 
@@ -446,51 +453,62 @@ def knee_link(M):
 
 # ---------------------------------------------------------------------------------------------------- arm side
 def arm_side(M, mount_rep, clip_poses):
-    """arm pad + pad mount (one planform at the pad level, the L1 slab footprint) + a riser inside BOTTOM's footprint, fused
-    with BOTTOM (cut at s 255) and pin b's integral pin; built in the canonical arm frame, exported x_H = HR x"""
-    D = M.D; P = D.p; tr = M.tr; tp = P["tp"]; sn = D.sn; fr = M.fr; Bm = fr["Bm"]; HR = PK.HR
+    """arm pad + pad mount + riser, fused with the user's BOTTOM and pin b's integral pin into ONE 5-axis part, built in the
+    canonical arm frame (exported x_H = HR x). The route is the L1's (build_pinknee_l1.pad_mount_sweep, the judged envelope):
+    a straight tp slab at the pad level (tr..tr+tp) from pin b along the free direction (mount_rep dir_along_across, in
+    the model's (sa, st)) to BOTTOM's bar, the last 6 mm stepping up to 1 mm into the bar's underside (riser_top_rel_tr).
+    BOTTOM is cut as the L1 cut it (mount_rep bottom: square to the arm, plane normal sa, cut_along_from_pad_mm distal of
+    pin b, the distal bar kept - where the knee's swept parts would meet it; cutting BOTTOM is allowed). Old L1s without a
+    routed mount (no riser_top_rel_tr) fall back to the nearest-end mount at BOTTOM's s 255 end."""
+    D = M.D; P = D.p; tr = M.tr; tp = P["tp"]; sn = D.sn; fr = M.fr; Bm = fr["Bm"]; HR = PK.HR; PR = PK.PAD_R
     da = np.array(mount_rep["dir_along_across"]); ex = unit(da[0] * D.sa + da[1] * D.st); ey = np.cross(sn, ex)
-    L = float(mount_rep["length"])
+    Lx = float(mount_rep["length"]); htop = float(mount_rep.get("riser_top_rel_tr", tp)); routed = "riser_top_rel_tr" in mount_rep
     AE.S_CUT = S_CUT; AE.LAP_HOLES = []
     up = AE.user_parts()
     bot = [s for g, n, s in up if n.startswith("BOTTOM")][0]
     botC = xform(bot, HR.T)                                                                # rest (H) -> canonical arm frame
-    CBc, uBc, vBc, aBc = HR.T @ AE.CB, HR.T @ AE.uB, HR.T @ AE.vB, HR.T @ AE.axB
-    best = None
-    for Lx in (L, L + 3.0, L + 6.0, L + 9.0):
-        wp = (cq.Workplane(plane(Bm + tr * sn, ex, ey)).moveTo(0.0, -PK.PAD_R).lineTo(Lx - 1.0, -PK.PAD_R).threePointArc(
-              (Lx - 1.0 + 1.0 * math.sin(math.pi / 4), -PK.PAD_R + 1.0 - 1.0 * math.cos(math.pi / 4)), (Lx, -PK.PAD_R + 1.0)).lineTo(Lx, PK.PAD_R - 1.0)
-              .threePointArc((Lx - 1.0 + 1.0 * math.sin(math.pi / 4), PK.PAD_R - 1.0 + 1.0 * math.cos(math.pi / 4)), (Lx - 1.0, PK.PAD_R))
-              .lineTo(0.0, PK.PAD_R).threePointArc((-PK.PAD_R, 0.0), (0.0, -PK.PAD_R)).close())
-        slab = wp.extrude(tp).val()
-        # riser: the slab's last 10 mm extruded up to 0.5 mm into BOTTOM's web, trimmed to BOTTOM's own planform (s <= cut,
-        # |v| <= 14.5): no metal outside BOTTOM's footprint above the slab
-        riser = prism(Bm + (tr + tp - 0.2) * sn, ex, ey, [(Lx - 10.0, -PK.PAD_R), (Lx, -PK.PAD_R), (Lx, PK.PAD_R), (Lx - 10.0, PK.PAD_R)], [0, 0, 0, 0], 12.0)
-        box = prism(CBc + (S_CUT - 40.0) * uBc - 14.5 * vBc + (-4.9) * aBc, uBc, vBc, [(0, 0), (40.0 - 0.01, 0), (40.0 - 0.01, 29.0), (0, 29.0)], [0, 0, 0, 0],
-                    14.2, both=True)                                                       # ax -12 .. 2.2: 0.5 mm into BOTTOM's web (1.7 .. 3.7)
-        riser = riser.intersect(box)
-        vol = float(riser.Volume()) if riser.Solids() else 0.0
-        ov = float(slab.intersect(botC).Volume())
-        print(f"  pad mount {Lx:.1f} mm: slab-in-BOTTOM {ov:.1f} mm3, riser {vol:.1f} mm3", flush=True)
-        if vol > 60.0 or ov > 60.0: best = (Lx, slab, riser, vol, ov); break
-        best = (Lx, slab, riser, vol, ov)
-    Lx, slab, riser, vol, ov = best
+    bc = mount_rep.get("bottom") or {}; cut_rep = dict(cut=False)
+    if bc.get("cut"):
+        xc = float(bc["cut_along_from_pad_mm"]); o = Bm + xc * D.sa; e1 = PB.axis_frame(D.sa)[:, 0]; e2 = np.cross(D.sa, e1)
+        half = prism(o - 400.0 * D.sa, e1, e2, [(-400, -400), (400, -400), (400, 400), (-400, 400)], [0, 0, 0, 0], 400.0)   # proximal half-space (normal e1 x e2 = sa)
+        v0 = float(botC.Volume()); botC = botC.cut(half); botC = botC.clean() if botC.clean().isValid() else botC
+        cut_rep = dict(cut=True, plane="square to the arm (normal = the model's sa), the L1's cut", along_from_pin_b_mm=xc, removed_mm3=round(v0 - float(botC.Volume()), 1),
+                       solids=len(botC.Solids()), valid=botC.isValid())
+        print(f"  BOTTOM cut {xc:.2f} mm distal of pin b (as the L1): removed {v0 - float(botC.Volume()):.0f} mm3, solids {len(botC.Solids())}, valid {botC.isValid()}", flush=True)
+    rc = 1.0; q45 = math.sqrt(0.5)
+    wp = (cq.Workplane(plane(Bm + tr * sn, ex, ey)).moveTo(0.0, -PR).lineTo(Lx - rc, -PR).threePointArc(
+          (Lx - rc + rc * q45, -PR + rc - rc * q45), (Lx, -PR + rc)).lineTo(Lx, PR - rc)
+          .threePointArc((Lx - rc + rc * q45, PR - rc + rc * q45), (Lx - rc, PR)).lineTo(0.0, PR).threePointArc((-PR, 0.0), (0.0, -PR)).close())
+    slab = wp.extrude(tp).val()
+    part = slab; riser = None; rvol = 0.0
+    if routed and htop > tp + 0.05:
+        x0 = max(Lx - 6.0, PR + 0.5)                                                       # the L1's riser: the last 6 mm (L - 3 .. L + 3)
+        riser = prism(Bm + (tr + tp - 0.2) * sn, ex, ey, [(x0, -PR), (Lx, -PR), (Lx, PR), (x0, PR)], [0.0, rc, rc, 0.0], htop - tp + 0.2)
+        rvol = float(riser.Volume()); part = part.fuse(riser)
+    elif not routed:                                                                        # legacy nearest-end mount: riser into BOTTOM's s-255 end
+        CBc, uBc, vBc, aBc = HR.T @ AE.CB, HR.T @ AE.uB, HR.T @ AE.vB, HR.T @ AE.axB
+        riser = prism(Bm + (tr + tp - 0.2) * sn, ex, ey, [(Lx - 10.0, -PR), (Lx, -PR), (Lx, PR), (Lx - 10.0, PR)], [0, 0, 0, 0], 12.0)
+        box = prism(CBc + (S_CUT - 40.0) * uBc - 14.5 * vBc + (-4.9) * aBc, uBc, vBc, [(0, 0), (40.0 - 0.01, 0), (40.0 - 0.01, 29.0), (0, 29.0)], [0, 0, 0, 0], 14.2, both=True)
+        riser = riser.intersect(box); rvol = float(riser.Volume()) if riser.Solids() else 0.0
+        if rvol > 1.0: part = part.fuse(riser)
+    ov = float(part.intersect(botC).Volume())
     pin, hw = pin_stack("b", Bm, sn, tr, tp, "H", "l4")
-    part = slab
-    if vol > 1.0: part = part.fuse(riser)
     part = part.fuse(pin).fuse(botC)
     part = part.clean() if part.clean().isValid() else part
-    print(f"arm side: BOTTOM + pad mount: valid {part.isValid()}, solids {len(part.Solids())}", flush=True)
-    out = [("H", 5, f"D8-06 BOTTOM + arm pad + pad mount, one 5-axis part (user's bar cut at s {S_CUT:g}; O12 pad at pin b + integral O4 pin, "
-                     f"{tp} mm mount {Lx:.1f} long at the pad level, riser into BOTTOM's channel; 7075-T6)", part)]
+    print(f"arm side: pad mount {Lx:.1f} mm at {math.degrees(math.atan2(da[1], da[0])):.0f} deg, riser to tr + {htop:.2f} ({rvol:.0f} mm3, {ov:.1f} mm3 inside BOTTOM); "
+          f"BOTTOM + mount: valid {part.isValid()}, solids {len(part.Solids())}", flush=True)
+    cut_s = f"cut square to the arm {cut_rep['along_from_pin_b_mm']:.1f} mm distal of pin b" if cut_rep["cut"] else f"cut at s {S_CUT:g}"
+    out = [("H", 5, f"D8-06 BOTTOM + arm pad + pad mount, one 5-axis part (user's bar {cut_s}; O12 pad at pin b + integral O4 h9 pin, hard-anodised; "
+                     f"{tp:.2f} mm mount {Lx:.1f} long at the pad level, riser 1 mm into BOTTOM's underside; 7075-T6)", part)]
     out += [(g, 5 if g == "H" else 6, n, s) for g, n, s in hw]
     users = []
     for g, n, s in up:
         if n.startswith(("BOTTOM", "UPPER ARM CUFF", "M4x6 ISO 10642 countersunk (upper cuff)")): continue
         users.append((g, n, s))
     cuff, crep = upper_cuff_trim(clip_poses); users += cuff
-    return out, users, dict(mount_length=Lx, slab_in_bottom_mm3=round(ov, 1), riser_mm3=round(vol, 1), fused_valid=part.isValid(),
-                            fused_solids=len(part.Solids()), bottom_cut_s=S_CUT, upper_cuff=crep)
+    return out, users, dict(mount_length=Lx, mount_dir_deg=round(math.degrees(math.atan2(da[1], da[0])), 1), riser_top_rel_tr=htop, riser_mm3=round(rvol, 1),
+                            mount_in_bottom_mm3=round(ov, 1), fused_valid=part.isValid(), fused_solids=len(part.Solids()), bottom=cut_rep, bottom_s_end_cut=S_CUT,
+                            upper_cuff=crep, route=mount_rep.get("route", "nearest-end"))
 
 
 # ---------------------------------------------------------------------------------------------------- upper-arm cuff
@@ -761,8 +779,16 @@ def main():
     ap = argparse.ArgumentParser(); ap.add_argument("--out", default="user_pinknee_k4598")
     ap.add_argument("--params"); ap.add_argument("--params-file"); ap.add_argument("--k", type=int); ap.add_argument("--hubs")
     ap.add_argument("--l1", default="l1_skin-normal-3r-pin-knee")
+    ap.add_argument("--shape", help="a frozen fitted shape (pipeline/concept_l1/pinknee_shape.py export, e.g. fit on Bench(110,360) on the farm): "
+                                    "worn here without a refit; its params replace --params / --k")
     a = ap.parse_args(ARGV); t0 = time.time(); dd = os.path.join(FULL, "designs", a.out); os.makedirs(os.path.join(dd, "step"), exist_ok=True)
-    P0, src = PK.params_from(a); M, rep0 = PK.fit(P0); D = M.D; u, c, F = D.u, D.c, M.f
+    if a.shape:
+        M, shape = PS.wear(a.shape); P0 = dict(shape["params"]); rep0 = dict(shape["report"])
+        src = f"{shape['source']}; frozen shape {os.path.relpath(a.shape, REPO)} fit on Bench{tuple(shape['fit_bench'])} {shape['mode']} at fold margin {shape['fold_margin']:g}"
+        os.environ.setdefault("CB_FOLD_MARGIN", f"{shape['fold_margin']:g}")
+    else:
+        P0, src = PK.params_from(a); M, rep0 = PK.fit(P0)
+    D = M.D; u, c, F = D.u, D.c, M.f
     l1d = json.load(open(os.path.join(FULL, "designs", a.l1, "design.json")))
     same = all(abs(float(l1d["params"].get(k, P0[k])) - float(P0[k])) < 1e-6 for k in P0 if isinstance(P0[k], (int, float)))
     assert same, f"the L1 design {a.l1} was built from other params: rebuild it first (build_pinknee_l1.py --params-file ...)"

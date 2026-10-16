@@ -66,3 +66,19 @@ wear bench whenever the FIT-bench gap was >= 200); fixed (= tools/zc_frontier.py
 
 Per dollar: the pod ($0.57/h) gives ~53 k evals/$; a farm worker ($0.288/h) ~13 k evals/$ -> ~4x per dollar, ~8x per
 worker slot, and outside the serverless worker quota (the farm's 9 workers would give ~10 evals/s in total).
+
+### First GPU hill-climb (pipeline/gpu_pod/gpu6.sh, same-bench Bench(110,360) = the golden search objective)
+
+`search`: a uniform map of 6144 configs over the whole zero-complexity box (zc-frontier BOUNDS, J1 seat region only,
+both branches, all four stack orders) + the 4 leaders as seeds, then (1 + 16) evolution around the 24 best distinct
+configs (Gaussian steps on the zc SCALE, x1.25 / x0.85 step control, 5 % sigma / inv flips) until the 30 min budget.
+Metal outside the grid box is read on the grid there (`GB_EXACT_OUTSIDE=0`, the configs that have any are counted per
+row in `outside` and are dishonest, +100, anyway). Frontier: docs/research/golden/gpu_frontier.json (best 64 + history).
+
+What it measured (new knowledge): the uniform map of 6144 configs found nothing better than the leaders' basin (best
+45.2 after the map, the spine-parked polish seed scores 46.8 on this objective); the climb then moved the basin to
+**36.66 at 20 min** (honest, hub F 53 / 62 / 70 mm, reach 0.625, follow 0.936, in-band 14 0.874, contact 0.052) - every
+top config is the spine-parked family (J1 az ~90, el ~62, a1 ~39, a2 ~66, J3 wdir ~(88, -22), sigma -1) with **inv3 = 1**
+(link 2 on hub 3's lower plate, member 3 + neck bridging over it). The gap is still reach (27.5 of 36.7 points), as
+docs/research/reach_attribution.md says: every top-64 config sits at reach 0.58-0.64; a 95+ (gap <= 13.75) needs reach
+~0.80+ with contact ~0, which the climb has not approached in this family on this bench.
