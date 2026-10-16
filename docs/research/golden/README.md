@@ -82,3 +82,12 @@ top config is the spine-parked family (J1 az ~90, el ~62, a1 ~39, a2 ~66, J3 wdi
 (link 2 on hub 3's lower plate, member 3 + neck bridging over it). The gap is still reach (27.5 of 36.7 points), as
 docs/research/reach_attribution.md says: every top-64 config sits at reach 0.58-0.64; a 95+ (gap <= 13.75) needs reach
 ~0.80+ with contact ~0, which the climb has not approached in this family on this bench.
+
+Pod log: exo-gpu-bench #1 (9qh3ze1zhuu235) 06:11-06:47 UTC, #2 (2odeqs93uh5ua5) 06:47-08:01 UTC, both terminated;
+~1.7 h x $0.57 = ~$1.0. Lesson: the pod's cgroup holds 31 GB, so a 40-process CPU reference pool got OOM-killed workers
+and hung (multiprocessing waits forever) - keep the CPU pool at <= 15 processes on this pod type.
+
+Next (the loop): (1) verify the frontier's top configs on the exact path (`python3 tools/zc_frontier.py frozen
+'<params>' OUT.json` on the farm: fit 110/360 fast -> wear exact, and the verifier protocol 60/160 -> 110/360 exact);
+(2) restart the pod (`tools/gpu_pod.py create`, queue pipeline/gpu_pod/boot.sh then a search job) for longer climbs
+from the inv3 = 1 basin and a 4-DOF / fold-lever family port - reach, not proximity, is what is left to win.
