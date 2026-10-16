@@ -246,6 +246,8 @@ def l1_rows(M, lk, rows):
 
 
 BEND_R = 16.5                                                                              # centre-line R of a 3 mm bar bent to >= 15 mm inner radius (5 t)
+N_ARCS = (3, 4)                                                                            # arcs per bar (5 arcs = 3125 radius snaps per fit, 10+ min; never
+                                                                                           # chosen over 4 within 0.5 mm on the earlier fits) - fewer bends
 CLIMBS = ((60.0, BEND_R), (60.0, 4.0))                                                     # user ruling 2026-10-16: ramps <= 60 deg near a hub, bends
                                                                                            # >= 15 mm inner on bent bars; tighter = 5-axis machined
 
@@ -269,19 +271,28 @@ def link_fit(label, ex, ey, start, end, Dq, Rq, t=T, climbs=CLIMBS):
     else:
         fits = {}
         for cm, rm in climbs:
-            for n_ in (3, 4, 5):
+            for n_ in N_ARCS:
                 for sc_ in ((1.0,) if rm == BEND_R else (1.0, 0.5)):
                     fk = f"{label}|hug60|bent-fail|{cm:g}|{rm:g}|{n_}|{sc_}|{geo}" if rm == BEND_R else f"{key}|fail|{cm}|{rm}|{n_}|{sc_}"
+                    ok_k = f"{label}|hug60|ok|{cm:g}|{rm:g}|{n_}|{sc_}|{geo}"           # per-arc-count successes (helpers fill them in parallel)
                     cache = json.load(open(CACHE)) if os.path.exists(CACHE) else {}
+                    if ok_k in cache:
+                        f_ = dict(cache[ok_k]); f_["segs"] = [tuple(x) for x in f_["segs"]]; fits[n_] = f_
+                        print(f"  {label}: {n_} arcs, climb {cm}, R >= {rm}, snap x{sc_}: ok (cached)", flush=True); break
                     if fk in cache: print(f"  {label}: {n_} arcs, climb {cm}, R >= {rm}, snap x{sc_}: {cache[fk]} (cached)", flush=True); e = cache[fk]
                     else:
                         try:
                             f_ = SK.fit_chain(start, end, clear, t, n_arcs=n_, climb_max=cm, r_min=rm, l_min=2.0, snap_scale=sc_, bend=4.0, seeds=16)
-                            f_.update(climb_limit=cm, r_min=rm, l_min=2.0, snap_scale=sc_, bend=4.0); fits[n_] = f_; break
+                            f_.update(climb_limit=cm, r_min=rm, l_min=2.0, snap_scale=sc_, bend=4.0); fits[n_] = f_
+                            cache = json.load(open(CACHE)) if os.path.exists(CACHE) else {}
+                            cache[ok_k] = {k: (float(v) if isinstance(v, (np.floating, float)) else v) for k, v in f_.items()}
+                            cache[ok_k]["segs"] = [(float(a_), float(b_)) for a_, b_ in f_["segs"]]
+                            cache[ok_k]["radii"] = [None if r_ is None else float(r_) for r_ in f_["radii"]]
+                            json.dump(cache, open(CACHE + ".tmp", "w"), indent=0); os.replace(CACHE + ".tmp", CACHE); break
                         except RuntimeError as e_:
                             e = str(e_); print(f"  {label}: {n_} arcs, climb {cm}, R >= {rm}, snap x{sc_}: {e}", flush=True)
                             cache = json.load(open(CACHE)) if os.path.exists(CACHE) else {}; cache[fk] = e
-                            os.makedirs(os.path.dirname(CACHE), exist_ok=True); json.dump(cache, open(CACHE, "w"), indent=0)
+                            os.makedirs(os.path.dirname(CACHE), exist_ok=True); json.dump(cache, open(CACHE + ".tmp", "w"), indent=0); os.replace(CACHE + ".tmp", CACHE)
                     if "snapped" not in e: break
             if fits: break
         if not fits: raise RuntimeError(f"{label}: no chain stays above the L1 strap")
@@ -290,7 +301,7 @@ def link_fit(label, ex, ey, start, end, Dq, Rq, t=T, climbs=CLIMBS):
         fit = {k: (float(v) if isinstance(v, (np.floating, float)) else v) for k, v in fit.items()}
         fit["segs"] = [(float(k), float(l)) for k, l in fit["segs"]]; fit["radii"] = [None if r is None else float(r) for r in fit["radii"]]
         cache = json.load(open(CACHE)) if os.path.exists(CACHE) else {}; cache[key] = fit
-        os.makedirs(os.path.dirname(CACHE), exist_ok=True); json.dump(cache, open(CACHE, "w"), indent=0)
+        os.makedirs(os.path.dirname(CACHE), exist_ok=True); json.dump(cache, open(CACHE + ".tmp", "w"), indent=0); os.replace(CACHE + ".tmp", CACHE)
     P, H, _ = SK.sample(start, fit["segs"], 40); U = P - 0.5 * t * SK.normals(H); cl = clear(U)
     rr = [abs(r) for r in fit["radii"] if r is not None]; inner = min(rr) - t / 2 if rr else None
     machined = bool(inner is not None and inner < BEND_R - t / 2 - 1e-6)
@@ -306,7 +317,9 @@ def links(M):
     D = M.D; u, c = D.u, D.c; F = M.f; out = []; rep = {}; hr = M.hr
     prof = M._link_rows if getattr(M, "_link_rows", None) is not None else PK.link_rows(M)   # a frozen shape carries its fit's rows
     C = [c[k] + F[k] * u[k] for k in range(3)]
+    only = os.environ.get("PK_LINK_ONLY", "")                                              # "2": a helper fits link 2 alone (fills the cache)
     # ---- link 1: lower at J1 and J2 (both axes through GH), plane span(u1, u2)
+    if only == "2": return links2(M, out, rep)
     ex = unit(u[0]); ey = unit(u[1] - (u[1] @ ex) * ex); phi = math.acos(np.clip(unit(u[1]) @ ex, -1, 1))
     ha, hb = F[0] + T / 2, F[1] + T / 2
     B = hb * np.array([math.cos(phi), math.sin(phi)]); back = np.array([math.sin(phi), -math.cos(phi)])
@@ -329,6 +342,12 @@ def links(M):
     out.append(("l1", 1, f"D8-02 link 1: 8x3 bar on a line/arc chain + J1/J2 pads + integral O7 pins ({r1['process']})", body))
     rep["link 1"] = dict(fit, **r1, pocket=npk, valid=body.isValid(), solids=len(body.Solids()))
     print(f"  link 1: valid {body.isValid()}, solids {len(body.Solids())}, faces {len(body.Faces())}, pocket {npk}", flush=True)
+    return links2(M, out, rep)
+
+
+def links2(M, out, rep):
+    D = M.D; u, c = D.u, D.c; F = M.f; hr = M.hr; C = [c[k] + F[k] * u[k] for k in range(3)]
+    prof = M._link_rows if getattr(M, "_link_rows", None) is not None else PK.link_rows(M)
     # ---- link 2: upper at J2 (through GH) and J3 (offset line), plane span(C2, C3) = the model's strap plane
     ex = unit(u[1]); ey = unit(C[2] - (C[2] @ ex) * ex); nP = np.cross(ex, ey)
     u3p = unit(u[2] - (u[2] @ nP) * nP); lean = math.degrees(math.asin(abs(float(u[2] @ nP))))
