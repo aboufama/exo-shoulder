@@ -1,0 +1,794 @@
+[
+ {
+  "label": "V0 model ratio 1, r_h 2.49, MR63 roller",
+  "r_h": 2.493,
+  "a_f": 9.0,
+  "a_c": 9.0,
+  "rr": 3.0,
+  "r_base": 10.1,
+  "L_rod": 36.94,
+  "rocker_turn_deg": 15.53,
+  "lift_mm": 2.416,
+  "pitch_r": [
+   13.1,
+   15.52
+  ],
+  "lobe_r_onset": 10.74,
+  "lobe_r_end": 12.87,
+  "lobe_r_at_dK44": 12.6,
+  "lobe_arc_deg": 15.7,
+  "pa_deg": [
+   11.5,
+   34.3
+  ],
+  "pa_onset": 34.3,
+  "pa_end": 11.5,
+  "rc_pitch_min": 7.31,
+  "rc_profile_min": 4.31,
+  "horn_arm_eff": [
+   1.816,
+   2.469
+  ],
+  "crank_arm_eff": [
+   7.69,
+   7.9
+  ],
+  "follower_arm_eff": [
+   7.43,
+   8.82
+  ],
+  "lobe_arm_eff": [
+   6.65,
+   7.78
+  ],
+  "rod_misalign_deg": {
+   "horn": [
+    6.1,
+    8.4
+   ],
+   "rocker": [
+    27.8,
+    30.2
+   ]
+  },
+  "rod_cap_clear_min": 1.1,
+  "rod_slide_mm": 2.43,
+  "horn_arc_chord_mm": 2.24,
+  "A_end_vs_model_mm": 9.8,
+  "dK_per_0.05mm_rod_deg": [
+   1.16,
+   1.58
+  ],
+  "dK_per_0.05mm_lobe_deg": [
+   1.17,
+   1.38
+  ],
+  "side": 1
+ },
+ {
+  "label": "V0 model ratio 1, r_h 2.49, MR63 roller",
+  "r_h": 2.493,
+  "a_f": 9.0,
+  "a_c": 9.0,
+  "rr": 3.0,
+  "r_base": 10.1,
+  "L_rod": 36.94,
+  "rocker_turn_deg": 15.93,
+  "lift_mm": 2.477,
+  "pitch_r": [
+   13.1,
+   15.58
+  ],
+  "lobe_r_onset": 10.56,
+  "lobe_r_end": 12.94,
+  "lobe_r_at_dK44": 12.54,
+  "lobe_arc_deg": 18.0,
+  "pa_deg": [
+   28.0,
+   40.0
+  ],
+  "pa_onset": 28.0,
+  "pa_end": 40.0,
+  "rc_pitch_min": 10.87,
+  "rc_profile_min": 7.87,
+  "horn_arm_eff": [
+   1.953,
+   2.469
+  ],
+  "crank_arm_eff": [
+   7.69,
+   7.9
+  ],
+  "follower_arm_eff": [
+   6.89,
+   7.95
+  ],
+  "lobe_arm_eff": [
+   6.26,
+   7.11
+  ],
+  "rod_misalign_deg": {
+   "horn": [
+    7.2,
+    9.5
+   ],
+   "rocker": [
+    27.8,
+    30.2
+   ]
+  },
+  "rod_cap_clear_min": 1.07,
+  "rod_slide_mm": 2.49,
+  "horn_arc_chord_mm": 2.24,
+  "A_end_vs_model_mm": 10.5,
+  "dK_per_0.05mm_rod_deg": [
+   1.16,
+   1.47
+  ],
+  "dK_per_0.05mm_lobe_deg": [
+   1.28,
+   1.45
+  ],
+  "side": -1
+ },
+ {
+  "label": "V0b r_h 2.49, base r 9 (model r_lobe)",
+  "r_h": 2.493,
+  "a_f": 9.0,
+  "a_c": 9.0,
+  "rr": 3.0,
+  "r_base": 9.0,
+  "L_rod": 36.94,
+  "rocker_turn_deg": 15.53,
+  "lift_mm": 2.432,
+  "pitch_r": [
+   12.0,
+   14.43
+  ],
+  "lobe_r_onset": 9.64,
+  "lobe_r_end": 11.82,
+  "lobe_r_at_dK44": 11.55,
+  "lobe_arc_deg": 16.8,
+  "pa_deg": [
+   18.8,
+   41.4
+  ],
+  "pa_onset": 41.4,
+  "pa_end": 18.8,
+  "rc_pitch_min": 7.2,
+  "rc_profile_min": 4.2,
+  "horn_arm_eff": [
+   1.816,
+   2.469
+  ],
+  "crank_arm_eff": [
+   7.69,
+   7.9
+  ],
+  "follower_arm_eff": [
+   6.75,
+   8.52
+  ],
+  "lobe_arm_eff": [
+   6.42,
+   7.25
+  ],
+  "rod_misalign_deg": {
+   "horn": [
+    6.1,
+    8.4
+   ],
+   "rocker": [
+    27.8,
+    30.2
+   ]
+  },
+  "rod_cap_clear_min": 1.1,
+  "rod_slide_mm": 2.43,
+  "horn_arc_chord_mm": 2.24,
+  "A_end_vs_model_mm": 9.8,
+  "dK_per_0.05mm_rod_deg": [
+   1.16,
+   1.58
+  ],
+  "dK_per_0.05mm_lobe_deg": [
+   1.26,
+   1.42
+  ],
+  "side": 1
+ },
+ {
+  "label": "V0b r_h 2.49, base r 9 (model r_lobe)",
+  "r_h": 2.493,
+  "a_f": 9.0,
+  "a_c": 9.0,
+  "rr": 3.0,
+  "r_base": 9.0,
+  "L_rod": 36.94,
+  "rocker_turn_deg": 15.93,
+  "lift_mm": 2.495,
+  "pitch_r": [
+   12.0,
+   14.49
+  ],
+  "lobe_r_onset": 9.61,
+  "lobe_r_end": 11.96,
+  "lobe_r_at_dK44": 11.57,
+  "lobe_arc_deg": 16.8,
+  "pa_deg": [
+   24.6,
+   37.1
+  ],
+  "pa_onset": 24.6,
+  "pa_end": 37.1,
+  "rc_pitch_min": 9.66,
+  "rc_profile_min": 6.66,
+  "horn_arm_eff": [
+   1.953,
+   2.469
+  ],
+  "crank_arm_eff": [
+   7.69,
+   7.9
+  ],
+  "follower_arm_eff": [
+   7.18,
+   8.18
+  ],
+  "lobe_arm_eff": [
+   6.45,
+   7.36
+  ],
+  "rod_misalign_deg": {
+   "horn": [
+    7.2,
+    9.5
+   ],
+   "rocker": [
+    27.8,
+    30.2
+   ]
+  },
+  "rod_cap_clear_min": 1.07,
+  "rod_slide_mm": 2.49,
+  "horn_arc_chord_mm": 2.24,
+  "A_end_vs_model_mm": 10.5,
+  "dK_per_0.05mm_rod_deg": [
+   1.16,
+   1.47
+  ],
+  "dK_per_0.05mm_lobe_deg": [
+   1.24,
+   1.41
+  ],
+  "side": -1
+ },
+ {
+  "label": "V0s r_h 2.49, sliding O3 nose (rr 1.5)",
+  "r_h": 2.493,
+  "a_f": 9.0,
+  "a_c": 9.0,
+  "rr": 1.5,
+  "r_base": 10.1,
+  "L_rod": 36.94,
+  "rocker_turn_deg": 15.53,
+  "lift_mm": 2.429,
+  "pitch_r": [
+   11.6,
+   14.03
+  ],
+  "lobe_r_onset": 10.38,
+  "lobe_r_end": 12.71,
+  "lobe_r_at_dK44": 12.38,
+  "lobe_arc_deg": 17.3,
+  "pa_deg": [
+   21.5,
+   44.0
+  ],
+  "pa_onset": 44.0,
+  "pa_end": 21.5,
+  "rc_pitch_min": 7.18,
+  "rc_profile_min": 5.68,
+  "horn_arm_eff": [
+   1.816,
+   2.469
+  ],
+  "crank_arm_eff": [
+   7.69,
+   7.9
+  ],
+  "follower_arm_eff": [
+   6.47,
+   8.37
+  ],
+  "lobe_arm_eff": [
+   6.31,
+   7.04
+  ],
+  "rod_misalign_deg": {
+   "horn": [
+    6.1,
+    8.4
+   ],
+   "rocker": [
+    27.8,
+    30.2
+   ]
+  },
+  "rod_cap_clear_min": 1.1,
+  "rod_slide_mm": 2.43,
+  "horn_arc_chord_mm": 2.24,
+  "A_end_vs_model_mm": 9.8,
+  "dK_per_0.05mm_rod_deg": [
+   1.16,
+   1.58
+  ],
+  "dK_per_0.05mm_lobe_deg": [
+   1.29,
+   1.45
+  ],
+  "side": 1
+ },
+ {
+  "label": "V0s r_h 2.49, sliding O3 nose (rr 1.5)",
+  "r_h": 2.493,
+  "a_f": 9.0,
+  "a_c": 9.0,
+  "rr": 1.5,
+  "r_base": 10.1,
+  "L_rod": 36.94,
+  "rocker_turn_deg": 15.93,
+  "lift_mm": 2.492,
+  "pitch_r": [
+   11.6,
+   14.09
+  ],
+  "lobe_r_onset": 10.39,
+  "lobe_r_end": 12.82,
+  "lobe_r_at_dK44": 12.39,
+  "lobe_arc_deg": 16.3,
+  "pa_deg": [
+   23.3,
+   36.1
+  ],
+  "pa_onset": 23.3,
+  "pa_end": 36.1,
+  "rc_pitch_min": 9.21,
+  "rc_profile_min": 7.71,
+  "horn_arm_eff": [
+   1.953,
+   2.469
+  ],
+  "crank_arm_eff": [
+   7.69,
+   7.9
+  ],
+  "follower_arm_eff": [
+   7.27,
+   8.26
+  ],
+  "lobe_arm_eff": [
+   6.51,
+   7.44
+  ],
+  "rod_misalign_deg": {
+   "horn": [
+    7.2,
+    9.5
+   ],
+   "rocker": [
+    27.8,
+    30.2
+   ]
+  },
+  "rod_cap_clear_min": 1.07,
+  "rod_slide_mm": 2.49,
+  "horn_arc_chord_mm": 2.24,
+  "A_end_vs_model_mm": 10.5,
+  "dK_per_0.05mm_rod_deg": [
+   1.16,
+   1.47
+  ],
+  "dK_per_0.05mm_lobe_deg": [
+   1.22,
+   1.4
+  ],
+  "side": -1
+ },
+ {
+  "label": "V1 r_h 4.0, ratio 1",
+  "r_h": 4.0,
+  "a_f": 9.0,
+  "a_c": 9.0,
+  "rr": 3.0,
+  "r_base": 10.1,
+  "L_rod": 37.08,
+  "rocker_turn_deg": 24.79,
+  "lift_mm": 3.799,
+  "pitch_r": [
+   13.1,
+   16.9
+  ],
+  "lobe_r_onset": 11.29,
+  "lobe_r_end": 14.66,
+  "lobe_r_at_dK44": 14.27,
+  "lobe_arc_deg": 14.1,
+  "pa_deg": [
+   16.7,
+   47.9
+  ],
+  "pa_onset": 47.9,
+  "pa_end": 16.7,
+  "rc_pitch_min": 6.98,
+  "rc_profile_min": 3.98,
+  "horn_arm_eff": [
+   2.86,
+   3.959
+  ],
+  "crank_arm_eff": [
+   7.51,
+   7.91
+  ],
+  "follower_arm_eff": [
+   6.04,
+   8.62
+  ],
+  "lobe_arm_eff": [
+   9.63,
+   11.2
+  ],
+  "rod_misalign_deg": {
+   "horn": [
+    5.2,
+    8.7
+   ],
+   "rocker": [
+    26.9,
+    30.9
+   ]
+  },
+  "rod_cap_clear_min": 1.13,
+  "rod_slide_mm": 3.86,
+  "horn_arc_chord_mm": 3.6,
+  "A_end_vs_model_mm": 10.0,
+  "dK_per_0.05mm_rod_deg": [
+   0.72,
+   1.0
+  ],
+  "dK_per_0.05mm_lobe_deg": [
+   0.81,
+   0.94
+  ],
+  "side": 1
+ },
+ {
+  "label": "V1 r_h 4.0, ratio 1",
+  "r_h": 4.0,
+  "a_f": 9.0,
+  "a_c": 9.0,
+  "rr": 3.0,
+  "r_base": 10.1,
+  "L_rod": 37.08,
+  "rocker_turn_deg": 25.81,
+  "lift_mm": 3.949,
+  "pitch_r": [
+   13.1,
+   17.05
+  ],
+  "lobe_r_onset": 11.06,
+  "lobe_r_end": 14.54,
+  "lobe_r_at_dK44": 13.94,
+  "lobe_arc_deg": 19.7,
+  "pa_deg": [
+   41.6,
+   52.9
+  ],
+  "pa_onset": 41.6,
+  "pa_end": 52.9,
+  "rc_pitch_min": 11.19,
+  "rc_profile_min": 8.19,
+  "horn_arm_eff": [
+   3.211,
+   3.959
+  ],
+  "crank_arm_eff": [
+   7.51,
+   7.91
+  ],
+  "follower_arm_eff": [
+   5.42,
+   6.73
+  ],
+  "lobe_arm_eff": [
+   8.65,
+   9.29
+  ],
+  "rod_misalign_deg": {
+   "horn": [
+    6.8,
+    10.6
+   ],
+   "rocker": [
+    26.9,
+    30.9
+   ]
+  },
+  "rod_cap_clear_min": 1.11,
+  "rod_slide_mm": 4.02,
+  "horn_arc_chord_mm": 3.6,
+  "A_end_vs_model_mm": 11.1,
+  "dK_per_0.05mm_rod_deg": [
+   0.72,
+   0.89
+  ],
+  "dK_per_0.05mm_lobe_deg": [
+   0.98,
+   1.06
+  ],
+  "side": -1
+ },
+ {
+  "label": "V2 r_h 4.0, crank 14.4 (ratio 1.6)",
+  "r_h": 4.0,
+  "a_f": 9.0,
+  "a_c": 14.4,
+  "rr": 3.0,
+  "r_base": 10.1,
+  "L_rod": 35.33,
+  "rocker_turn_deg": 14.87,
+  "lift_mm": 2.315,
+  "pitch_r": [
+   13.1,
+   15.41
+  ],
+  "lobe_r_onset": 10.77,
+  "lobe_r_end": 12.7,
+  "lobe_r_at_dK44": 12.47,
+  "lobe_arc_deg": 15.8,
+  "pa_deg": [
+   9.2,
+   35.1
+  ],
+  "pa_onset": 35.1,
+  "pa_end": 9.2,
+  "rc_pitch_min": 6.75,
+  "rc_profile_min": 3.75,
+  "horn_arm_eff": [
+   2.491,
+   3.985
+  ],
+  "crank_arm_eff": [
+   11.99,
+   12.53
+  ],
+  "follower_arm_eff": [
+   7.36,
+   8.88
+  ],
+  "lobe_arm_eff": [
+   5.9,
+   7.64
+  ],
+  "rod_misalign_deg": {
+   "horn": [
+    1.5,
+    4.7
+   ],
+   "rocker": [
+    28.4,
+    32.6
+   ]
+  },
+  "rod_cap_clear_min": 1.73,
+  "rod_slide_mm": 3.73,
+  "horn_arc_chord_mm": 3.6,
+  "A_end_vs_model_mm": 13.3,
+  "dK_per_0.05mm_rod_deg": [
+   0.72,
+   1.15
+  ],
+  "dK_per_0.05mm_lobe_deg": [
+   1.19,
+   1.55
+  ],
+  "side": 1
+ },
+ {
+  "label": "V2 r_h 4.0, crank 14.4 (ratio 1.6)",
+  "r_h": 4.0,
+  "a_f": 9.0,
+  "a_c": 14.4,
+  "rr": 3.0,
+  "r_base": 10.1,
+  "L_rod": 35.33,
+  "rocker_turn_deg": 15.9,
+  "lift_mm": 2.471,
+  "pitch_r": [
+   13.1,
+   15.57
+  ],
+  "lobe_r_onset": 10.5,
+  "lobe_r_end": 12.97,
+  "lobe_r_at_dK44": 12.54,
+  "lobe_arc_deg": 18.0,
+  "pa_deg": [
+   25.9,
+   41.2
+  ],
+  "pa_onset": 25.9,
+  "pa_end": 41.2,
+  "rc_pitch_min": 11.56,
+  "rc_profile_min": 8.56,
+  "horn_arm_eff": [
+   2.839,
+   3.986
+  ],
+  "crank_arm_eff": [
+   11.99,
+   12.53
+  ],
+  "follower_arm_eff": [
+   6.78,
+   8.09
+  ],
+  "lobe_arm_eff": [
+   5.83,
+   7.21
+  ],
+  "rod_misalign_deg": {
+   "horn": [
+    4.0,
+    7.7
+   ],
+   "rocker": [
+    28.4,
+    32.6
+   ]
+  },
+  "rod_cap_clear_min": 1.55,
+  "rod_slide_mm": 3.98,
+  "horn_arc_chord_mm": 3.6,
+  "A_end_vs_model_mm": 14.5,
+  "dK_per_0.05mm_rod_deg": [
+   0.72,
+   1.01
+  ],
+  "dK_per_0.05mm_lobe_deg": [
+   1.26,
+   1.56
+  ],
+  "side": -1
+ },
+ {
+  "label": "V3 r_h 5.0, crank 18 (ratio 2)",
+  "r_h": 5.0,
+  "a_f": 9.0,
+  "a_c": 18.0,
+  "rr": 3.0,
+  "r_base": 10.1,
+  "L_rod": 33.77,
+  "rocker_turn_deg": 14.25,
+  "lift_mm": 2.22,
+  "pitch_r": [
+   13.1,
+   15.32
+  ],
+  "lobe_r_onset": 10.77,
+  "lobe_r_end": 12.56,
+  "lobe_r_at_dK44": 12.35,
+  "lobe_arc_deg": 15.8,
+  "pa_deg": [
+   7.8,
+   35.1
+  ],
+  "pa_onset": 35.1,
+  "pa_end": 7.8,
+  "rc_pitch_min": 6.56,
+  "rc_profile_min": 3.56,
+  "horn_arm_eff": [
+   2.756,
+   4.94
+  ],
+  "crank_arm_eff": [
+   14.56,
+   15.5
+  ],
+  "follower_arm_eff": [
+   7.36,
+   8.92
+  ],
+  "lobe_arm_eff": [
+   5.39,
+   7.53
+  ],
+  "rod_misalign_deg": {
+   "horn": [
+    0.0,
+    2.7
+   ],
+   "rocker": [
+    29.3,
+    34.8
+   ]
+  },
+  "rod_cap_clear_min": 2.36,
+  "rod_slide_mm": 4.47,
+  "horn_arc_chord_mm": 4.49,
+  "A_end_vs_model_mm": 15.8,
+  "dK_per_0.05mm_rod_deg": [
+   0.58,
+   1.04
+  ],
+  "dK_per_0.05mm_lobe_deg": [
+   1.21,
+   1.7
+  ],
+  "side": 1
+ },
+ {
+  "label": "V3 r_h 5.0, crank 18 (ratio 2)",
+  "r_h": 5.0,
+  "a_f": 9.0,
+  "a_c": 18.0,
+  "rr": 3.0,
+  "r_base": 10.1,
+  "L_rod": 33.77,
+  "rocker_turn_deg": 15.85,
+  "lift_mm": 2.464,
+  "pitch_r": [
+   13.1,
+   15.56
+  ],
+  "lobe_r_onset": 10.45,
+  "lobe_r_end": 12.99,
+  "lobe_r_at_dK44": 12.54,
+  "lobe_arc_deg": 18.0,
+  "pa_deg": [
+   24.3,
+   42.0
+  ],
+  "pa_onset": 24.3,
+  "pa_end": 42.0,
+  "rc_pitch_min": 12.07,
+  "rc_profile_min": 9.07,
+  "horn_arm_eff": [
+   3.26,
+   4.998
+  ],
+  "crank_arm_eff": [
+   14.56,
+   15.5
+  ],
+  "follower_arm_eff": [
+   6.69,
+   8.2
+  ],
+  "lobe_arm_eff": [
+   5.49,
+   7.32
+  ],
+  "rod_misalign_deg": {
+   "horn": [
+    0.9,
+    5.6
+   ],
+   "rocker": [
+    29.3,
+    34.8
+   ]
+  },
+  "rod_cap_clear_min": 1.96,
+  "rod_slide_mm": 4.96,
+  "horn_arc_chord_mm": 4.49,
+  "A_end_vs_model_mm": 17.3,
+  "dK_per_0.05mm_rod_deg": [
+   0.57,
+   0.88
+  ],
+  "dK_per_0.05mm_lobe_deg": [
+   1.24,
+   1.66
+  ],
+  "side": -1
+ }
+]
