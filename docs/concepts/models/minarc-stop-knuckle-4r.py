@@ -37,8 +37,13 @@ D2R = math.pi / 180
 # seeds = the judge's re-seated pin-knee seats (catalogue model_spec): J1 bvec(90.76, 65.50), J3 wdir(74.85, -10.5)
 PARAMS = dict(az=90.76, el=65.50, wd=74.85, wa=-10.5, a1=44.0, a2=74.0, b1=35.0, b2=55.0, a1max=78.0, phi_lo=15.0, phi_hi=170.0,
               sigma=-1, sK=-1, margin=K.FOLD_MARGIN, mstop=0, width=12.0, t_link=3.0, q=0.98, near=0)
-SEED_SP = dict(az=104.41, el=67.05, wd=72.06, wa=0.91)       # second seed set (spine-parked base re-seated)
+SEED_SP = dict(az=119.41, el=67.05, wd=72.06, wa=0.91)       # second seed set (spine-parked base re-seated +15 / 0 / -10 / +15)
 ELEV_OVER = 140.0
+REPORT_KEYS = ("overhead", "gap_near1", "near1", "min_metal_skin", "forced", "forced_share", "stretched", "folded", "a1e_max", "psi_range", "min_sub_margin", "crown_contact_poses")
+# link 1b leaves the knuckle in its own layer: a 1.0 mm spacer over link 1a's end (0.15 running gap + 0.85) for 16 mm, so
+# the two straps, which part at psi >= ~58 deg, clear K6's 0.5 mm radial rule where they still overlap laterally past
+# the 12 mm exempt zone (measured: 196 of 212 poses collided at 13.1-13.3 mm from K with the bare 0.15 mm stack)
+KX = 0.85
 
 
 def law(p1, p3, p):
@@ -102,8 +107,8 @@ def build(B, F, p):
     hubs = [K.hub_member("hub1", p1, "J1"), K.hub_member("hubK", pK, "K"), K.hub_member("hub2", p2, "J2"), K.hub_member("hub3", p3, "J3")]
     w, t = p["width"], p["t_link"]
     links = [K.strap_member("link1a", p1, pK, ("J1", "K"), width=w, t=t, ramp_to=(("hub1", K.STACK), ("hubK", 0.0))),
-             K.strap_member("link1b", pK, p2, ("K", "J2"), width=w, t=t, ramp_to=(("hubK", K.STACK), ("hub2", 0.0)),
-                            over=[("link1a", 1.0)]),
+             K.strap_member("link1b", pK, p2, ("K", "J2"), width=w, t=t, ramp_to=(("hubK", K.STACK + KX), ("hub2", 0.0)),
+                            over=[("link1a", 1.0)], end_mm=K.HUB_R + 6.0),
              K.strap_member("link2", p2, p3, ("J2", "J3"), width=w, t=t, ramp_to=(("hub2", K.STACK), ("hub3", K.STACK)),
                             over=[("link1a", 1.0), ("link1b", 1.0), ("neck", 1.0)]),
              K.neck_member(F, p3, joints=("J3",), ramps=(("hub3", 0.0), (None, 0)))]
