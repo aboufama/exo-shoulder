@@ -286,3 +286,99 @@ skin, judges).
   The only jam on built meshes is link 1 / link 2 in Wave (4 frames; 0.25 mm at its closest on the followed frames).
 * *The optimistic number:* the fit bench 20.63 vs the verification bench 30.35 (lesson c); the hub-zone strap lift
   (<= 1.9 mm) moves metal away from the skin, so the built R1 is if anything pessimistic there.
+
+## Final polish (Bench(110,360))
+
+**What ran (2026-10-16 04:10-06:20 UTC).** The FINAL POLISH of CLAUDE.md: a multi-start CMA-ES of every free parameter
+directly on the verification bench Bench(110,360), fast grid for the search, exact path for the claim, on the CPU farm
+(`tools/knee_polish.py`, new; 11 + 11 farm jobs, <= 12 slots, ~$1.9 at cpu3c). Grid cache: key 14f156cb6fc8,
+assembled on each worker from the parts `tools/osn_polish.py buildpart` left on the farm volume (grid vs exact on 28 136
+points within 20 mm of the skin: mean |error| 0.10 mm, p99 1.08, max 2.24, sign agreement 0.99996). Fast vs exact on
+the same fitted shapes: k4598 30.02 vs 29.95, the polished H1 26.45 vs 26.45.
+
+**One evaluation** = the model refit on Bench(110,360) fast + the round-3 verifier's own checks
+(`docs/concepts/verify/skin-normal-3r-pin-knee.py` extra_checks: independent 3D closure, knee vs hub 3's upper half at
+1 mm, the E boss vs hubs / links) knocking poses out + the model's audit. **Objective = the near-touch gap**: every
+taken pose with ANY metal (scored undersides and hub walls, crowns, strap tops, boss / pad rings, knee edges) < 1 mm
+off the skin counts as contact. The plain corrected gap is logged with every row. No check was loosened.
+
+**Freed (13 continuous + 3 discrete), bounds keep every hard rule and the real envelopes:** az1 60-135, el1 35-80, az2
+-40-60, el2 20-75, wd 50-110, wa -45-20 (axis seats; J1 / J2 on GH rays), b3 -0.3-1.0, lE 20-60 (round 2's HL stream:
+-90), lc 14-50, phiE / phib periodic, ang_min 20-45 (the knee window stays >= 20 deg off both singular postures; J3's
+lever on the knee force is logged per row), stk 4.5-6.0 (4.5 = two 2.0 mm Ti plates + washer on the iglidur pin,
+catalogue IGLIDUR-PIN; 6.0 = MR63ZZ pair); hub radius per joint from the catalogue set only (O20 / O17 / O15, the same
+MR117-2RS pair and 12.25 mm stack; **the model gained rad1-3**: disc, wall, crown, part-part cylinder, link-strap ends
+and the L1-L2 / E-L2 exclusion zones follow the declared radius; default O20 reproduces k4598 to the digit, 20.63 fast
+and 30.35 in the verifier). **Fixed, with the reason:** b1 = b2 = 0 (the knee is planar and closes the link-2 -> arm
+motion exactly only with J1 / J2 on GH rays; a tilt makes the drift non-planar, which two pins parallel to J3 cannot
+absorb), `neck` (not a parameter of this design: k4598 at neck 13 and 25 gives the same report), bosses / pad O12,
+knee link 10 wide, straps 8 x 3, CLEAR 2 / PART_CLEAR 1 / ADJ 0.15 / ramp 60 deg, R_tol 0.5, fold margin 10 deg (the
+rule in force when the streams ran).
+
+**Hub sizes at k4598 first (27 combos, Bench(110,360) fast refit, corrected):** the plain gap hardly moves (30.37-31.78:
+the knee was not hub-limited, unlike spine-parked's +17); the hubs move the NEAR-TOUCH: O20 J2 leaves 8-9 poses with
+metal < 1 mm, O20 J3 4-5, O20 J1 1. O17 at all three: 0 near-touch poses, near-touch gap 36.75 -> 30.52, min metal
+0.50 -> 1.12 mm. O15 at J3 adds 3 part jams. (Full table: the scan file below.)
+
+**Streams (popsize 16, objective near-touch gap, Bench(110,360) fast):**
+
+| stream | start | hubs | evals | best near-touch gap (= plain unless noted) |
+|---|---|---|---|---|
+| A | k4598 | O20 | 1281 | 29.74 |
+| B | k4598 | O20 / O15 / O15 | 2609 | 28.40 |
+| D | k10 | O20 | 1585 | 29.61 (plain 28.45) |
+| E | D1 (k299) | O20 | 1617 | 29.04 |
+| F | k5116 (sweep basin) | O20 | 2129 | 28.63 |
+| G | k3326 (D2) | O20 | 2433 | 28.92 |
+| H | k7076 (sweep basin J) | O20 | 2401 | **26.45** (H1 = H-g107-1) |
+| R1 / R2 / R3 | k4598 + 1.5 / 2.0 sigma noise; uniform-random knee (x0 111.15) | O20 | 1217 / 2497 / 993 | 29.26 / **25.67** / 29.63 |
+| W1 (weird) | k4598 knee flipped to the other two-circle branch (phiE -39.87, phib 17.53; x0 51.37) | O20 | 2545 | 28.97 |
+| HW | H1, sigma 0.6 | O20 | 1633 | **25.58** (HW-g58-11) |
+| H17 / R217 / B17 | H1 / R2 / B bests | O17 x 3 | 1553 / 817 / 1457 | **23.11** / 24.24 / 28.11 |
+| HL | H1, lE up to 90 | O20 | running at 06:20 UTC | - |
+| weird (Bench(60,160)) | J2 hub at the OTHER end of its axis line (az2 + 180, el2 -56.3) | O20 | 1 | dead: hub 2 face 184 mm off GH, gap 372.5 |
+
+Every evaluation is logged in docs/concepts/sweeps/skin-normal-3r-pin-knee.json, stage `polish-big-<stream>` (26 767 rows,
+k 7199-33965, with plain gap, near-touch gap, min metal, knee window, J3 lever, hubs).
+
+**What moved and why.** J2's seat goes lower and further back (el2 56.3 -> 47.0 / 44.5, az2 17.7 -> 30.2 / 35.3 for
+H1 / HW), J3's seat nearer the humerus axis and further round (wd 76.5 -> 70.4 / 70.9, wa -13.3 -> -8.1 / -5.7): arc a2
+72.3 -> 68.3 / 63.4 with a1 ~41. The fold window [|a1 - a2| + 10, a1 + a2 - 10] keeps its ~60-62 deg width but SLIDES
+5-10 deg toward small J1-J3 angles, where the 360 verification workspace poses sit that the 160 fit poses under-sampled
+(lesson c, now used instead of suffered): fold losses 133 -> 116. The E strap lengthens (lE 42 -> 57-60: round 1 hit the
+60 mm bound, hence HL) and the arm pad moves to 82 mm from GH (61): the knee closes the larger drift mid-window (knee
+angle 104-149 deg, J3 lever >= 30.5 mm vs 25.3). The near-touch objective removed k4598's 13 poses with metal < 1 mm
+(min 0.39 -> 1.38 mm exact). Price: hub 3 face +3.5 mm, knee level +6.3 mm (tr 78.4 -> 84.7), still in band (0.90);
+and overhead gets WORSE (elevation >= 140: reach 0.25 -> 0.21 on the bench, 0.19 -> 0.12 held out) - the slide trades
+overhead poses for everyday ones. The slimmer O17 hubs add ~2.5 fast points on top (H17 23.11) through near-touch and
+skin clearance.
+
+**Measured (H1 = H-g107-1, all hubs O20, fold margin 10; k4598 the same way):**
+
+| protocol | k4598 | H1 (polished) |
+|---|---|---|
+| Bench(110,360) shape fitted there (fast), worn EXACT, verifier checks: plain gap | 29.95 (score 89.11) | **26.45 (score 90.38)**: reach 0.6472, follow 0.9636, ib14 0.9012, ib10 0.5126, contact 0.0117 |
+| same, near-touch gap (metal < 1 mm = contact) / min metal / poses < 1 mm | 36.11 / 0.39 mm / 13 | **26.45 / 1.38 mm / 0** |
+| same, fast (search number) | 30.02 | 26.45 |
+| the verifier script unchanged (fit Bench(60,160) fast, worn Bench(110,360) exact) | 30.35 (near-touch 38.41) | 28.21 (near-touch 33.77): reach 0.6444, ib14 0.8994, contact 0.0259; 0 closure / knee-hub 3 / boss poses lost; pad 82 mm from GH |
+| HELD-OUT exact bench (110 clip + 360 workspace poses disjoint from Bench(110,360); shape fitted on Bench(110,360) fast) | 31.37 (near-touch 36.81, min 0.24) | 28.40 (near-touch 29.56, min 0.82, 2 poses) |
+| Bench(60,160) fast (screening bench) | 20.63 | 26.66 (near-touch 29.09) |
+
+H1 params: az1 101.1634, el1 63.8986, az2 30.153, el2 47.0108, wd 70.3931, wa -8.1248, b3 0.2842, lE 59.5534, lc
+28.2401, phiE -5.8107, phib -54.914, ang_min 30.4611, stk 5.6815, rad1-3 10 (O20). J1 seat: anterior component 0.085
+(back / acromion-top region).
+
+**Gate (docs/METHOD.md).** O20 history (20 331 evals, round 1 then round 2): gain 0.41 score points over the second
+half, 0.34 over the last third, top-5 within 0.00 - **passed** (best 25.58, HW). Whole history with the O17 / O15
+streams (26 767): 1.24 / 0.55 / 0.08 - **not passed**: H17 was still improving at its last generation (23.11).
+
+**Verdict.** H1 gains 3.50 gap points on the polish protocol (29.95 -> 26.45, crosses score 90), 2.14 on the verifier's
+unchanged fit-60 protocol and 2.97 held out, and removes every near-touch pose - but it is MY measurement with the
+verifier's harness, not an independent verification: per the polish rule the CAD keeps k4598 until an independent
+verifier confirms the >= 1 point gain. The optimistic number: 26.45 is in-sample (shape fitted on the same 470 poses);
+held out it is 28.40, and overhead reach fell (0.12 held out). HW (25.58 fast, O20) is measured exact on the farm
+(kpol-meas3 jobs, results to kpol/meas/HWb_*.json on the farm volume) but its numbers were not back when this section
+was written; H17 (O17 hubs, 23.11 fast) could not be measured exact here because the shared model now refuses
+non-O20 hubs (tools/concept_kit.py O20_ONLY, changed by another session at ~06:00 UTC; CB_ALLOW_SLIM=1 re-measures).
+Next: re-measure H1 / HW / HL under the repository's current fold-margin default, let an independent verifier rule on
+H1, and run the near-touch-objective polish again from HW / HL with the new rules in force.

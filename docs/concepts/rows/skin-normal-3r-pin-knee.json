@@ -94,5 +94,98 @@
   "k3326_D2": 31.35,
   "k3326_D2_angmin20": 31.24
  },
- "v_contact": 0.0091
+ "v_contact": 0.0091,
+ "polish_big": {
+  "t": "2026-10-16T06:13:55Z",
+  "tool": "tools/knee_polish.py",
+  "stage": "polish-big-*",
+  "objective": "near-touch gap (metal < 1 mm = contact) of the verifier-corrected set, Bench(110,360) fast, shape fitted there",
+  "n_evals": 26767,
+  "fold_margin": 10,
+  "best_k": "H-g107-1",
+  "best_params": {
+   "rad1": 10.0,
+   "rad2": 10.0,
+   "rad3": 10.0,
+   "az1": 101.1634,
+   "el1": 63.8986,
+   "az2": 30.153,
+   "el2": 47.0108,
+   "wd": 70.3931,
+   "wa": -8.1248,
+   "b3": 0.2842,
+   "lE": 59.5534,
+   "lc": 28.2401,
+   "phiE": -5.8107,
+   "phib": -54.914,
+   "ang_min": 30.4611,
+   "stk": 5.6815
+  },
+  "claim": {
+   "protocol": "fit Bench(110,360) fast, worn Bench(110,360) exact, verifier checks",
+   "gap": 26.45,
+   "reach": 0.6472,
+   "follow": 0.9636,
+   "inband14": 0.9012,
+   "inband10": 0.5126,
+   "contact": 0.0117,
+   "gap_near1": 26.45,
+   "min_metal_mm": 1.38,
+   "near1_poses": 0
+  },
+  "verifier_fit60": {
+   "gap": 28.21,
+   "gap_near1": 33.77,
+   "reach": 0.6444,
+   "follow": 0.9636,
+   "inband14": 0.8994,
+   "inband10": 0.5326,
+   "contact": 0.0259
+  },
+  "held_out_exact": {
+   "gap": 28.4,
+   "gap_near1": 29.56,
+   "min_metal_mm": 0.82
+  },
+  "small_fast": {
+   "gap": 26.66,
+   "gap_near1": 29.09
+  },
+  "baseline_k4598": {
+   "fit_big_worn_exact": 29.95,
+   "near1": 36.11,
+   "min_metal_mm": 0.39,
+   "verifier_fit60": 30.35,
+   "held_out_exact": 31.37
+  },
+  "gate_o20": {
+   "n": 20331,
+   "gain_half": 0.41,
+   "gain_third": 0.34,
+   "top5_spread": 0.0,
+   "ok": true
+  },
+  "gate_all": {
+   "n": 26767,
+   "gain_half": 1.24,
+   "gain_third": 0.55,
+   "top5_spread": 0.08,
+   "ok": false
+  },
+  "others": {
+   "HW": {
+    "k": "HW-g58-11",
+    "fast_big": 25.58,
+    "hubs": "O20",
+    "exact": "pending (farm kpol/meas/HWb_*)"
+   },
+   "H17": {
+    "k": "H17-g96-3",
+    "fast_big": 23.11,
+    "hubs": "O17 x3",
+    "exact": "not measured: shared model refuses non-O20 hubs since ~06:00 UTC"
+   }
+  },
+  "status": "self-measured with the verifier harness; NOT independently verified - the CAD keeps k4598 until a verifier confirms >= 1 point"
+ }
 }
