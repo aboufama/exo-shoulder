@@ -20,8 +20,10 @@ closed form (crank A angle theta, B1 by the kit's two-circle closure). The carri
 traces a spherical coupler curve. at=2: the arm's J3 axis w (scapula frame) must satisfy angle(j1, c(theta)) =
 angle(j1, w) (a 1-D root on a 0.25 deg theta grid, then the closed-form four-bar at the root), then J1 turns phi
 about j1 to carry c onto w. at=1: J2 = c(theta) must satisfy angle(c(theta), w) = a2. Branch: the root whose slope
-sign is sigma, nearest theta = 0 (the home); the dense K2 check catches any jump. Ranges in ok: four-bar margin
->= M4 deg from its toggle (transmission), crossing angle between the coupler curve and the target circle >= XMIN deg
+sign is sigma, nearest theta = 0 (the home); the dense K2 check catches any jump. Ranges in ok: both transmission
+angles of the loop (at A1 and B1, crank vs coupler) within [M4, 180 - M4] = [25, 155] deg (dead points and toggles
+excluded; this also keeps theta on one assembly branch - conservative: the coupler could continue past a crank's dead
+point on the other branch), crossing angle between the coupler curve and the target circle >= XMIN deg
 (the 3R's 10 deg fold margin is a 11-34 deg crossing angle at 65 / 65 arcs, so 12 is the same standard), pins of one
 body >= PINSEP deg apart (two O20 bearings side by side). Closure residual reported (< 0.5 deg rule).
 
@@ -36,7 +38,7 @@ import concept_kit as K                                      # noqa: E402
 ID = "virtual-pole-4bar-j2"
 NAME = "Virtual-pole spherical four-bar as J2 (all-pin 3-DOF chain, no slide)"
 D2R = math.pi / 180
-M4, XMIN, PINSEP = 10.0, 12.0, 20.0
+M4, XMIN, PINSEP = 25.0, 12.0, 20.0              # M4: min transmission angle (deg) at both coupler pins
 # at=2 seed: the plain-3R axes of rail-elbow k2221 (51.33 as a plain 3R) with a converging four-bar around the home J2
 PARAMS = dict(at=2, az=0.65, el=76.82, a1=80.71, a2=62.93, beta=110.0, wd=93.82, wa=-4.20, zeta=0.0,
               psiA=35.0, dA0=22.0, dA1=44.0, psiB=-35.0, dB0=22.0, dB1=44.0, sigma=0,   # sigma 0 = auto (at=2 only); at=1 needs +-1
@@ -92,9 +94,15 @@ class FourBar:
         self.E0 = frame2(self.a1h, self.b1h)
 
     def at(self, th):
-        """theta (n,) deg -> a1, b1 (n, 3), coupler rotation Rc (n, 3, 3), four-bar margin (n,) deg"""
+        """theta (n,) deg -> a1, b1 (n, 3), coupler rotation Rc (n, 3, 3), four-bar margin (n,) deg = the smaller
+        TRANSMISSION angle (at A1 between crank A and the coupler, at B1 between crank B and the coupler), folded to
+        [0, 90]: 0 at a toggle / dead point; -90 where the loop does not assemble"""
         a1 = mv(rot(np.broadcast_to(self.a0, np.shape(th) + (3,)), th), self.a1h)
-        b1, ok, mg = K.closure(np.broadcast_to(self.b0, a1.shape), a1, self.aB, self.g, self.s, margin_deg=-999)
+        b1, ok, _ = K.closure(np.broadcast_to(self.b0, a1.shape), a1, self.aB, self.g, self.s, margin_deg=-999)
+        def tang(at, to): return unit(to - (to * at).sum(-1, keepdims=True) * at)
+        muB = ang(tang(b1, np.broadcast_to(self.b0, b1.shape)), tang(b1, a1))
+        muA = ang(tang(a1, np.broadcast_to(self.a0, a1.shape)), tang(a1, b1))
+        mg = np.minimum(np.minimum(muA, 180 - muA), np.minimum(muB, 180 - muB))
         mg = np.where(ok, mg, -90.0)
         Rc = frame2(a1, b1) @ self.E0.T
         return a1, b1, Rc, mg
