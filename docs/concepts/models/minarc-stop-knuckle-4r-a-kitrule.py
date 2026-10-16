@@ -215,7 +215,8 @@ def connected(p):
         if np.abs((np.diff(q, axis=0) + 180) % 360 - 180).max() > JUMP: why["jump"] += 1; return False
         return True
     elev = POSE[:, 1]; cn = np.zeros(len(W), bool)
-    front = [i for i in range(len(W)) if ok[i] and elev[i] == 0 and st[i] == 0]; cn[front] = True
+    seed_any = os.environ.get("MR_SEED_ANY") == "1"            # strict (default): rest = elevation 0 with K on stop A
+    front = [i for i in range(len(W)) if ok[i] and elev[i] == 0 and (seed_any or st[i] == 0)]; cn[front] = True
     while front:
         nxt = []
         for a in front:
