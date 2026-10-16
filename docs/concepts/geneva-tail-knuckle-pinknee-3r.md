@@ -107,3 +107,58 @@ through J2's whole range. Its tip passes over skin that needs it 92 mm from GH (
 sits at 55 mm. The tail also has to stack over link 1b, which it crosses.
 
 The sweep below searches the seats where the tail can be short (bk2 small, i.e. K close to J2).
+
+## Search (farm, Bench(60,160) fast, near-touch objective)
+
+- **Stage 1, LHS 256:** bk1 20-60, bk2 20-50, a1max 42-75, smhi 5-14, smlo 5-10, d 5-18 mm, psi_c 0-12 deg; seats at LB1.
+  Best 30.18 (beside, bk2 34.5, L_t 22 deg).
+- **Stage 2, 256 perturbations of the top 8:** half of them also move the J1 / J2 / J3 seats. Best **28.66** (crown, bk1
+  35.92, bk2 26.54, a1max 50.16, smhi 10.21, smlo 6.17, d 8.54 mm, psi_c 3.62).
+  - Reach 0.713, in-band 0.874, contact 0.040.
+  - The law alone at the same seats gives 18.88, so the tail costs 9.8 points there.
+- **Gate (506 tries):** the best gained 0.55 score points over the second half and 0.02 over the last third, and the
+  top-5 spread is 0.55. That passes, but only over a 2-stage search; CMA was not run inside the time box.
+
+| config | fast gap (near-touch) | law only, same seats | tail cost |
+|---|---|---|---|
+| LB1, crown d 7 | 56.48 | 14.34 | +42.1 |
+| LB1, beside d 15 | 39.24 | ~14.5 | +24.7 |
+| best (stage 2), crown | **28.66** | 18.88 | +9.8 |
+
+## Red team
+
+1. **The pose that sets the tail's height.** One workspace pose (plane -30, elevation 60) alone needs the tip 92 mm from
+   GH. Hub K sits at 55-60 mm. Coupling the tip need into every tail row of the greedy pose drop dropped more poses and
+   scored worse (35.15 against 30.72), so the better pose choice was kept. Either way the rigid height is the maximum
+   over the poses kept.
+2. **The optimistic numbers:**
+   - r_law = 70 mm in the law; the real tip radius differs (the rho / r effect is under 0.5 deg).
+   - K's stack flip is not applied to the link levels: L1a and L1b swap 3.15 mm at K.
+   - The lug of the beside embodiment is sampled for the skin, but not for part pairs.
+3. **The point that pinches:**
+   - The roller axis is fixed in the tail, which turns about u2 at 26-47 deg to uK. A cylindrical roller would therefore
+     edge-load the flank, so a crowned roller with point contact is needed.
+   - At dK > 45 deg, the radial flank's pressure angle passes 45. The law's valid prefix ends there, which is the
+     physical stop B.
+4. **Local against farm:** 30.72 locally against 30.18 on the farm at the coarse best (0.5 points).
+
+## Verdict
+
+**Screened. Not a contender at 3 active.**
+
+- The exact one-tooth law is sound. With a Geneva entry it slaves K up to 56 deg with no lift-off, at rate <= 1.3 and a
+  pressure angle <= 45. It is worth ~10 points over the 3R window when the metal is free.
+- The metal that carries it is not free. A part rigid with link 2 sweeps a cone about u2 and has to:
+  - clear the highest skin under that cone;
+  - clear link 1b, which it crosses;
+  - climb onto K's cap.
+  That costs 10-42 points, against the kill threshold of 4.
+- Best 28.66 fast. For comparison, the verified 3-active H1 has 24.48 frozen and the minarc law-only figure is ~14 fast.
+- **Lesson that predicts beyond this morphology:** any cam follower rigid with a link must be priced by its swept
+  surface of revolution about that link's axis, not by its pose at engagement. A follower rigid with link 2 inherits
+  J2's whole range of motion, and the band (2-14 mm) cannot hold a part whose sweep cone spans 30+ mm of skin height.
+- **Next:**
+  - A follower that does not sweep: put the cam on hub 2's own rotor rim (the merged lobe-rocker fallback; it rides the
+    same link-1b strip, kK <= 3.5).
+  - Or a drive whose moving part stays inside the O20 stacks, such as a face cam in hub 2's crown driving K through a
+    link-1b pushrod. That puts the metal on link 1b, which is in band at 0.97-0.99.

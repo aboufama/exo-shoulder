@@ -230,7 +230,10 @@ class GModel(KR.KModel):
             items.append((2, np.zeros((1, 3)), self._tip_dir[None], 170.0, ())); idx.append(("TIP", 0))
         res = self.needed(items, poses); Lq = {}
         for (nm, ri), r in zip(idx, res): Lq.setdefault(nm, []).append(r)
-        Lq["E"] = [self._HE]; self.Lneed = Lq                    # LT rows + TIP join the greedy pose drop like every link
+        Lq["E"] = [self._HE]
+        # (measured 13:58: coupling the TIP need into every LT row makes the greedy drop more poses: 35.15 vs 30.72 at the coarse
+        #  best - the rigid height stays the max over the poses kept either way, so the better pose choice is kept)
+        self.Lneed = Lq                                            # LT rows + TIP join the greedy pose drop like every link
         self._greedy(keep0=keep1)
         self.finalize()
 

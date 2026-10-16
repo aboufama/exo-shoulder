@@ -2339,7 +2339,7 @@
   "name": "Geneva-tail knuckle on the pin knee: link 2's rear tail turns K through a one-tooth intermittent drive, so q2's encoder determines K (3 active, no K sensor)",
   "family": "redundant 4R with a determined spare (cam-slaved knuckle)",
   "lens": "round6:cam-stop-knuckle (3 active, no K sensor)",
-  "status": "ideated",
+  "status": "screened",
   "t_ideated": "2026-10-16T12:11:50Z",
   "source": "round 6 judge (docs/concepts/round6_ideation.md)",
   "description": "minarc B (pin knee + spring knuckle K splitting link 1) with the J2 hard stop replaced by a ONE-tooth Geneva-style drive. Link 2's Ti strap continues backward past hub 2 as a rigid tail (L_t ~39-41 deg, derived from bk2 so the roller passes 6-8 mm from K's axis) with an MR63ZZ roller at its tip. K's stack is flipped (link 1a upper); its +6 mm clock-spring cap carries one radial (or curved) tooth flank at r 4-10 mm. At rest and through the 3R window K sits on stop A and the tail swings clear: the chain is H1-like. Past the stretched onset (smhi) link 1b and link 2 come near collinear, the tail lies back along link 1b, its roller pushes the tooth and K opens by dK(q2) = atan(L_t t / d) until a q2 dowel stop B; the clock spring keeps the tooth on the roller. The folded side has NO lobe (one tooth only). K is never read: (q1, q2, q3) give the arm pose. 0 passive translations; no gear, cable or pulley. FALLBACK EMBODIMENT (merged lobe-rocker-pushrod-knuckle-3r): a lobe on hub 2's rotor rim + a rocker on link 1b + an O3 pushrod with M3 rod ends to a horn on K's cap - no swinging metal, but kK <= ~3.5 by pressure angle and complexity ~42.5.",
