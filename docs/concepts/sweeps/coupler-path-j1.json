@@ -267,5 +267,41 @@
   "stage": "osc-rule proxy picks (J2 relief / pure kinematic)",
   "honest": true,
   "margin": 10
+ },
+ {
+  "k": 8,
+  "t": "2026-10-16T08:39:08Z",
+  "params": {
+   "dA": 9.20143414146329,
+   "psiA": 288.7054957431483,
+   "alpha": 46.11830100084108,
+   "dAB": 8.0,
+   "psiB": 317.71972158414746,
+   "beta": 42.66529735253209,
+   "c": 31.4592670182644,
+   "kr": 32.7021566424991,
+   "kg": 113.1369996126968,
+   "s4": -1,
+   "branch": 1,
+   "a2c": 79.62087111933947
+  },
+  "inband14": 0.5731,
+  "inband10": 0.2346,
+  "reach": 0.6438,
+  "follow": 0.9167,
+  "contact": 0.202,
+  "gap": 81.84,
+  "why": {
+   "fold": 6,
+   "slide": 10,
+   "flip": 0,
+   "closure": 0,
+   "skin": 40,
+   "parts": 6,
+   "contact": 0
+  },
+  "stage": "osc-rule proxy picks (J2 relief / pure kinematic)",
+  "honest": true,
+  "margin": 10
  }
 ]
