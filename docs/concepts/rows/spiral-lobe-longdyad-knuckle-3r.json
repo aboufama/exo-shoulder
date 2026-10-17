@@ -16,11 +16,11 @@
  "contact": 0.0207,
  "gap": 17.86,
  "bench": "GATE 0 numbers: frozen exact Bench(110,360) (fit Bench(60,160) fast, shape frozen), drive metal GHOSTED (IB_GHOST=all) - the chain's ceiling before any drive metal; not a claim",
- "v_reach": null,
- "v_follow": null,
- "v_inband14": null,
- "v_inband10": null,
- "v_gap": null,
+ "v_reach": 0.6917,
+ "v_follow": 0.8909,
+ "v_inband14": 0.8852,
+ "v_inband10": 0.5082,
+ "v_gap": 38.56,
  "n_configs": 12,
  "best_params": {
   "bk1": 34,
@@ -98,5 +98,51 @@
  "verdict": "DEAD at gate 0: best ghost cell (34/48, lin kK 2.8, onset margin 14) 17.86 frozen exact with 8 contact poses vs the bar <= 17.5 with <= 4, before any drive metal (the drive only adds metal); the long dyad's extra closures are bought only with hub-2 / link-2 skin hits",
  "limiter": "hub 2 and link 2 into the posterior deltoid on the K-open poses: cluster plane -90..-60 / elev 45-60 / axial +105..+135 (link 2 to -15.3 mm, hub-2 rim to -10.3 mm) plus the overhead IR fan plane 60-120 / elev 135-165 / axial -105..-90; contacts sit at K 29.5-64.8 across the same K range as the takes, so stop B cannot split them; the least-opening (track) law sheds all 12 chain contacts but folds 14-15 stretched poses at th 110-115",
  "note": "Gate 0 per pose (docs/concepts/spiral-lobe-longdyad-knuckle-3r.md): judge seed reproduced 18.84 exactly (269 taken, 14 contacts). Laws tried: lin onset 19.46/14/12/10, log spiral (pa 41.9), track base-cap smt 5.2/8, track with spiral cap smt 8/11, look-ahead track smt 6/8 thx 124; conecut knee + J3 stop column 19.09 (no stack). Best 17.86 (onset 14): ib14 0.8949 (0.51 pts), overhead 7/28. New: over-opening K is the chain binder (track law sheds every chain contact, poses 127/137/139/164/319 taken at K 11-26 vs 29-42) but late K folds th 110-115; cell C (groove) shares the chain, not built. Farm at its budget line ($24.42), all runs local (<= 2 niced).",
- "doc": "docs/concepts/spiral-lobe-longdyad-knuckle-3r.md"
+ "doc": "docs/concepts/spiral-lobe-longdyad-knuckle-3r.md",
+ "v_contact": 0.1034,
+ "audit": {
+  "t": "2026-10-17T16:50:00Z",
+  "role": "death auditor",
+  "refuted": false,
+  "v_bench": "frozen exact Bench(110,360) (fit Bench(60,160) fast, shape frozen) WITH drive metal: the row's best_params as built (pick3's drive placement, not refit); v_* are this re-wear",
+  "metal": {
+   "gap": 38.56,
+   "reach": 0.6917,
+   "follow": 0.8909,
+   "inband14": 0.8852,
+   "inband10": 0.5082,
+   "contact": 0.1034,
+   "contact_poses": 40,
+   "depth_sum_mm": 88.08,
+   "depth_max_mm": 8.32,
+   "by_part": {
+    "horn": 29,
+    "rod/rodends": 18,
+    "hub2/ear": 4
+   },
+   "overhead_taken": "4/28",
+   "th_margin_min": 5.239,
+   "fit_fast": 31.21
+  },
+  "ghost_repro": {
+   "gap": 17.86,
+   "ws_taken": 269,
+   "contact_poses": 8,
+   "note": "digit for digit"
+  },
+  "new_cell": {
+   "params": "34/48 kK 2.5 onset 14 ghost",
+   "gap": 18.21,
+   "ws_taken": 267,
+   "contact_poses": 7
+  },
+  "convergence_gate_score_pts": {
+   "second_half": 0.36,
+   "last_third": 0.0,
+   "top5_spread": 0.37,
+   "note": "formally met, vacuous: only law knobs moved (kK/a1max/dyad/seats fixed)"
+  },
+  "context": "desmo-vrocker agent's gate-0 dumps (32/48 kK 2.5 a1max 74.5, its model): 17.48/6 contacts (onset 14), 17.31/9 (onset 16.84 cap 64) - 17.86 is not the family ceiling, but no cell meets <= 17.5 with <= 4 contacts",
+  "reason": "ghost 17.86 / 8 contacts (reproduced) misses the gate (<= 17.5, <= 4); with the row's drive 38.56 (40 contacts, horn + rod); a perfect drive re-placement could at best tie the lead (~18.15) at cx 24.5 vs 18.25"
+ }
 }

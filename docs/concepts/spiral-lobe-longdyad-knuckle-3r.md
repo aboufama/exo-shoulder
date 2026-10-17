@@ -138,3 +138,38 @@ elev 45-60 / high external-rotation cluster. Hub 2's level and a2 are fixed by t
 different J2 seat or a K axis whose opening moves hub 2 along the skin instead of into it. That is a seat/K-axis
 question for the planner, not a law question.
 Cell C (the spring-free groove) was not built: it shares this chain, so the same ghost ceiling kills it.
+
+## Audit (2026-10-17 16:30-16:50 UTC, death auditor)
+
+The death **stands**. The best cell fails the lead's pre-registered gate 0, and the row's mechanism with its own drive
+reads 38.56. All runs are local, one niced process at a time, frozen exact Bench(110,360) (fit Bench(60,160) fast,
+shape frozen). Dumps are in `/tmp/claude-0/-home-user-exo-shoulder/55c580fc-1103-56e5-9e17-3e425f438838/scratchpad/spiral_audit/`.
+
+| check | result |
+|---|---|
+| Re-measure of the claim (onset 14, drive ghosted, same harness) | **17.86**, digit for digit: 269 taken, 8 contact poses, fold 70, slide 13, ib14 0.8949, overhead 7/28 |
+| Same cell **with drive metal** (the row's best_params as built: pick3's drive placement, not refit) | **38.56**: reach 0.6917, follow 0.8909, ib14 0.8852, ib10 0.5082, contact 0.1034 (40 poses, depth sum 88.1 mm, max 8.3 mm; parts: horn 29, rod / rod ends 18, hub 2 / ear 4), overhead 4/28, min th margin 5.239 (0 below 5). Fit fast 31.21 |
+| New ghost cell: 34/48 with kK 2.5, onset 14 (the gain axis was never moved) | 18.21: 267 taken, 7 contacts. On this dyad, lowering the gain makes it worse |
+| Convergence gate, in score points | second half +0.36, last third 0.00, top-5 spread 0.37: formally met. But it is met only vacuously: the 12 cells move law knobs only (onset, law type, smt), at fixed kK, a1max, dyad, seats, axes and knee |
+| Modelling / convention | No bug found. The model loads inband-rssr unchanged. The dumps confirm bk1 / bk2 34 / 48 reached the model (no clamp loss), the ghost list is all five drive parts, and the fold is read in `th` |
+
+Findings for the lead:
+
+1. **The death's "with metal >= 18.5" estimate was unmeasured; it is now measured.** With pick3's drive placement on
+   the 34 / 48 dyad, the drive's horn and rod sit in the skin on 40 poses: 38.56. A re-placed drive was not built. On
+   its own dyad, pick3's re-placement cut the drive cost from 7.57 to 0.29 points. The best case here is then about
+   17.86 + 0.3 = 18.15, with >= 8 contacts. That is inside the tie band of the lead's 18.49 (paired CI about +-1), at
+   complexity 24.5 vs 18.25, so it is no lead.
+2. **17.86 is not the family's ceiling.** The lead directive (ROUNDS.md, 16:20) calls it "measured". The 12 cells
+   never moved the dyad or the gain. The desmo-vrocker agent's gate-0 dumps (32 / 48, kK 2.5, a1max 74.5, its own
+   model, 16:28-16:41) read 17.48 with 6 contacts at onset 14 and 17.31 with 9 contacts at onset 16.84 with a K cap
+   of 64. So the family's ghost floor is at least 0.4-0.55 lower than 17.86. Still no cell reaches <= 17.5 with
+   <= 4 contacts. The binder (hub 2 / link 2 into the posterior deltoid on K-open poses) is unchanged, so the
+   verdict holds and only the "ceiling" wording is too strong.
+3. **The task template's refutation line is stale** ("within 10 of 68.93 on Bench(60,160)"). Every row in this family
+   meets it trivially. This audit judges against the lead (18.49 + the tie rule) and the pre-registered gate 0, as the
+   round-12 state asks (exo-screen.js line 24 still bars vs 68.93).
+
+Measured reason, one line: the chain's own ghost is 17.86 with 8 contacts (reproduced), against the bar of <= 17.5 with
+<= 4. With the row's drive it reads 38.56 (40 contacts, horn and rod). A perfect re-placement could at best tie the
+lead at higher complexity.
