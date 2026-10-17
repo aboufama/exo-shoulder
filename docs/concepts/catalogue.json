@@ -2911,7 +2911,7 @@
   "name": "Desmo V-rocker long dyad: conjugate open lobes (two pins on one V short arm) + the pinned-horn slot on a 32/48 K dyad - the stretched wall without a spring, roller, rod or ball link",
   "family": "slaved-knuckle 3R, positive-motion drive, long K dyad (stretched-wall attack at low complexity)",
   "lens": "round12:spring-free-drive x stretched-wall (lens 3 carried to lens 1's binder, stage 1); judge: 32/48 only, 28/50 measured dead",
-  "status": "ideated",
+  "status": "dead",
   "t_ideated": "2026-10-17T15:19:07Z",
   "source": "round 12 judge (docs/concepts/round12_ideation.md)",
   "merged_from": [],

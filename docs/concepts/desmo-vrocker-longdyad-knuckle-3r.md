@@ -113,13 +113,16 @@ gate 0): <= 17.5 with <= 4 contact poses. Per-pose dumps: scratchpad `vr/g0_<tag
 | kK 2.5, smhi 10, cap 56 | 18.87 | 259 | **3** | 88 | 10 | 0.914 | 7/28 |
 | **kK 2.4, smhi 14, cap 56 (best gap)** | **17.23** | **269** | **6 (18.66)** | 72 | 13 | 0.896 | 8/28 |
 | kK 2.6, smhi 14, cap 56 | 17.48 | 268 | 6 | 72 | 14 | 0.896 | 8/28 |
+| kK 2.3, smhi 14, cap 56 | 17.52 | 268 | 6 | 73 | 13 | 0.896 | 8/28 |
+| kK 2.4, smhi 11, cap 56 | 18.85 | 261 | **3** | 85 | 11 | 0.895 | 7/28 |
 | 30/49 (stop B 73.5), kK 2.5, smhi 14, cap 56 | 17.91 | 267 | 8 | 72 | 13 | 0.901 | 8/28 |
 
 References through the same harness family: the lead slipper-nose 18.49 (261 taken, 2 contacts); spiral-lobe's 34/48
 ghost, best 17.86 (269, 8 contacts); pick3's ghost 18.32 (260, 2).
 
-**Gate 3 fails.** Every cell that takes >= 267 poses (17.23-17.48) carries 6-9 contact poses. The only cell with <= 4
-(onset 10: 3 contacts) takes 259 poses and reads 18.87, worse than the lead. As on 34/48, contacts and takes trade
+**Gate 3 fails.** Every cell that takes >= 267 poses (17.23-17.48) carries 6-9 contact poses. The only cells with <= 4
+(onset 10 / 11: 3 contacts) take 259 / 261 poses and read 18.87 / 18.85, worse than the lead (18.49 at 261 taken,
+2 contacts). As on 34/48, contacts and takes trade
 almost one for one at the bottom of the frontier.
 
 ### The six contact poses are the same in every cell at onset 12-14
@@ -171,11 +174,11 @@ them on contacts. Before any drive metal, the net is +8 takes (269 vs 261) and +
 
 **DEAD at gate 3** (the lead's pre-registered kill rule, carried from pick 1: "a fail there kills this row too"). The
 best ghost cell reads 17.23 frozen exact with 6 contact poses (18.66 mm summed) against the bar of <= 17.5 with <= 4,
-before any drive metal. The only cell under 4 contacts reads 18.87. Gate 1 also fails as specified: no conjugate pair
+before any drive metal. The cells under 4 contacts read 18.85-18.87. Gate 1 also fails as specified: no conjugate pair
 exists once the passing pin clears the other track's base ring, and the pair exists only with the base ring relieved
 to r 7.0 and track B on top, at caps 56-60.
 
-The convergence gate does not apply. This is a ghost-ceiling kill over the judge's cells (gain 2.3-2.6, onset 10-19.46,
+The convergence gate does not apply. This is a ghost-ceiling kill over 14 cells (gain 2.3-2.6, onset 10-19.46,
 caps 56-64, 32/48 and 30/49) on the claim bench, not a converged search. No CMA was run, because the ceiling's contact
 count is above the bar on every cell at the lead's reach or better.
 
