@@ -4,10 +4,10 @@
   "title": "Concept bench morphologies",
   "description": "One row per morphology in the swarm's catalogue: status, the agent's claimed bench numbers, the verifier's re-measured numbers (v_), its best sweep configuration so far, and the 3R baseline once (is_baseline), and the complexity count (the simplicity number, never part of the gap or score): complexity = points, lower = simpler, 0 = three pins on bearing pairs and three links; complexity_items = where the points come from; passive_trans = passive translations (more than 2 = not buildable); mechanism_confidence = counted or estimated. alignment = the alignment auditor's latest verdict (clean / watch / gamed; gamed = the number is not evidence of a better exo, so the design cannot be called verified, a winner or a leader; empty = never audited), alignment_stage = audit (skeptic pending) or skeptic (final), alignment_reasons = the reasons at that level, alignment_t = when, alignment_claim = the number it audited, alignment_stale = the row's claim moved since (a re-audit is due); from docs/alignment/ledger.jsonl (tools/alignment_ledger.py, docs/ALIGNMENT.md). Built from docs/concepts/catalogue.json, families.json, rows/*.json (complexity: tools/simplicity.py on each row's mechanism record, docs/SIMPLICITY.md) and sweeps/*.json.",
   "file": "data/morphs.json",
-  "sha256": "f8ae89f7d3625e0f9779a6e73efcf38bb349ee885170e3d1e4658a8d34e542df",
-  "rows": 130,
-  "bytes": 311127,
-  "updated": "2026-10-17T15:12:46Z"
+  "sha256": "97af76f3d2a2e393a962f92c02d09a3227d7460498cd94778435f44f9cea1ea6",
+  "rows": 134,
+  "bytes": 316296,
+  "updated": "2026-10-17T15:22:29Z"
  },
  {
   "id": "sweeps",
@@ -64,10 +64,10 @@
   "title": "Event log",
   "description": "What happened and when: the swarm's own log (docs/concepts/events.jsonl), one milestone per judged design and every new built-CAD R1 record (from the judge outputs).",
   "file": "data/events.json",
-  "sha256": "78bd47eef232997f0bff95805fdd843f3467114c83dc345b40d61bdbd394ce89",
-  "rows": 659,
-  "bytes": 261740,
-  "updated": "2026-10-17T14:42:45Z"
+  "sha256": "1786b3430adf3ee5296bb01a988558c98c9496ebb2f6e1f02a3009993e7065e7",
+  "rows": 667,
+  "bytes": 267700,
+  "updated": "2026-10-17T15:22:29Z"
  },
  {
   "id": "spend",
@@ -84,10 +84,10 @@
   "title": "Arm reach in 3-D",
   "description": "One row per built design and everyday arm pose of the R16 workspace judge: where the upper arm points and whether the built design reaches it, with the reason if not. Built by tools/coverage3d.py from judge/workspace.json files (newest 8 designs).",
   "file": "data/cov3d.json",
-  "sha256": "706180ee11247d61d44e6353fef5bf116dbd8e5c2df1a22ce9026205146c5e4c",
+  "sha256": "f032a1d2aa0517fcb10a25a1ef13a48985b547a7b3c33c4699f5da494e10ce89",
   "rows": 960,
-  "bytes": 294252,
-  "updated": "2026-10-17T14:42:45Z"
+  "bytes": 293997,
+  "updated": "2026-10-17T15:22:29Z"
  },
  {
   "id": "motion",
@@ -104,9 +104,9 @@
   "title": "Data build info",
   "description": "When tools/dash_build.py last gathered the data, the repo commit, and any warnings it printed.",
   "file": "data/meta.json",
-  "sha256": "7e9fdaa4494f0fa32d89f46cf4b9c1ba31aa24c07db395e351521ceeac6cd739",
+  "sha256": "4056fc6c38623bedd2232ff72aa60bd1f6b16d997783b4e140d0ea999a6a7426",
   "rows": 1,
   "bytes": 2089,
-  "updated": "2026-10-17T15:12:46Z"
+  "updated": "2026-10-17T15:22:29Z"
  }
 ]
