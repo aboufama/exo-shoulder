@@ -1,0 +1,33 @@
+{
+ "id": "inband-rssr-knuckle-3r",
+ "name": "In-band RSSR knuckle: the long-stroke row's phased RSSR K drive repackaged in the band (bell crank on a joggled ear of link 1b in link 1b's own layer, radial M2 ball stud at the crank tip)",
+ "lens": "drive packaging (docs/research/inband_drive.md): make the RSSR K drive's metal cost little",
+ "family": "slaved-knuckle 3R (lead family, pin knee)",
+ "active_dof": 3,
+ "passive_dof": 4,
+ "passive_translations": 0,
+ "status": "screened",
+ "t_ideated": "2026-10-17T09:00:00Z",
+ "best_params": {
+  "La": 19.5042,
+  "s_arm": 4.0515,
+  "r_h": 14.6248,
+  "beta": -140.3863,
+  "gam": 7.7146,
+  "hl": 3.15,
+  "zr": 0.0,
+  "kK": 1.7901,
+  "r_lobe": 7.0,
+  "bk1": 26.0,
+  "bk2": 38.0,
+  "a1max": 59.0,
+  "smhi": 19.0991,
+  "eta": -12.4092,
+  "clay": 1,
+  "zc": 0.8032,
+  "bl_c": 2,
+  "bl_h": 0
+ },
+ "pick_rule": "docs/research/inband_drive/picks.json (committed before any frozen / held-out number)",
+ "doc": "docs/research/inband_drive.md"
+}
