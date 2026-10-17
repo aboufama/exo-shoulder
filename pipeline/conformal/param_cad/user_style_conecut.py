@@ -57,6 +57,7 @@ J3_RS, J3_DR, J3_GW, J3_GD, J3_DTOP, J3_DBOT, J3_END_R = CL1.J3_RS, CL1.J3_DR, C
 UP = float(LV["U0"])                                                                       # 3.15: the upper member's underside over the joint face
 L2_CLIMB = 70.0                                                                            # O4: link 2's drop at J2 up to 70 deg (machined from solid)
 SPACER_RI, SPACER_RO = 1.55, 2.25                                                          # D3: inner-ring spacer / shim O3.1 x O4.5
+SPACER_T, LAND_R = 0.175, 2.5                                                              # D3: spacer 0.175 (select 0.15-0.20) on an O5 land spot-faced on link 1b
 SHIM_T, WAVE_T, WAVE_RO, CLIP_DZ, CLIP_T = 0.10, 0.20, 3.0, 0.30, 0.6                     # D3: shim 0.10 + wave washer 0.20 working = clip at ztop + 0.30
 
 # ---------------------------------------------------------------------------------------------------- O4: link 2's drop up to 70 deg
@@ -214,10 +215,10 @@ def j3_apply(M, parts, l1_stop):
     eE = M.fr["eE"]; eE = eE - (eE @ u3) * u3
     D = M.D; u, c = D.u, D.c; Fm = M.f; ex = unit(u[1]); Cj2 = c[2] + Fm[2] * u[2]; ey = unit(Cj2 - (Cj2 @ ex) * ex); nP = np.cross(ex, ey)
     u3p = unit(u[2] - (u[2] @ nP) * nP); phi = math.atan2(u3p @ ey, u3p @ ex); back_w = math.sin(phi) * ex - math.cos(phi) * ey
-    root = -(back_w - (back_w @ u3) * u3)                                                  # link 2's bar leaves the J3 pad opposite its seat direction
+    root = back_w - (back_w @ u3) * u3                                                     # the J3 pad runs out along its seat direction into link 2's bar
     web_c = (math.degrees(g["th"]) + 0.5 * (J3MIN + J3MAX) + 180.0)
     rep["placement"] = dict(dowel_vs_E_strap_deg=round(((math.degrees(g["th"]) - ang(eE)) + 180) % 360 - 180, 2),
-                            web_centre_deg=round(web_c % 360, 2), link2_bar_root_deg=round(ang(root) % 360, 2), seat_dir_deg=round(ang(back_w) % 360, 2),
+                            web_centre_deg=round(web_c % 360, 2), link2_bar_root_deg=round(ang(root) % 360, 2), web_vs_bar_root_deg=round(((web_c - ang(root)) + 180) % 360 - 180, 2),
                             note="frame_of(u3) angles; the web (108.6 deg of uncut ring) sits under link 2's ring wherever it lands - the groove is inside the O20 ring "
                                  "(r 6.45..8.55, walls 0.95 to the bearing seat / 1.45 to the rim), never in the bar")
     print(f"J3 stop: groove {gi}, link 2 {rep['link2_after_groove']}, member 3 {rep['member3_after_hole']}, placement {rep['placement']}", flush=True)
@@ -226,17 +227,24 @@ def j3_apply(M, parts, l1_stop):
 
 # ---------------------------------------------------------------------------------------------------- D3: the crank's axial stack
 def crank_stack(cp, cinfo, lay, l1b_body):
-    """the spacer under the lower 683ZZ inner ring (on link 1b's face under its O4.5 footprint), the inner-ring shim + wave washer over the
-    upper 683ZZ, the clip moved to ztop + 0.30 (the pin end unchanged). Returns parts, report"""
+    """D3: link 1b's top is inclined under the crank (0.82 mm below the boss underside at the pin, 0.15 at the footprint's high side), so
+    link 1b gets an O5 LAND around the pivot pin, spot-faced perpendicular to dR at zb - SPACER_T (machined with link 1b), and the ground
+    spacer O3.1 x O4.5 x SPACER_T sits on it under the lower 683ZZ inner ring; over the upper 683ZZ the inner-ring shim + wave washer, the
+    clip moved to ztop + 0.30 (the pin end unchanged). Returns parts, report, link 1b with the land"""
     dR = lay["dR"]; zb = float(lay["zb"]); ztop = zb + USS.BOSS_H
     top_sp = USS.l1b_top_under(l1b_body, dR, SPACER_RO + 0.05, zb - 6.0, zb + 1.0)
     top_boss = USS.l1b_top_under(l1b_body, dR, USS.BOSS_R + 0.6, zb - 6.0, zb + 1.0)
     if top_boss is None: top_boss = zb - 0.15
     if top_sp is None: top_sp = top_boss                                                   # nothing of link 1b under the O4.5 footprint in range: sit on the boss reading
-    t_sp = zb - top_sp
-    rep = dict(boss_underside_mm=round(zb, 4), l1b_top_under_spacer_mm=round(top_sp, 4), l1b_top_under_boss_mm=round(top_boss, 4),
+    z_land = zb - SPACER_T; t_sp = SPACER_T
+    land = disc(np.zeros(3), dR, LAND_R, top_sp - 1.0, z_land)
+    l1b_new = l1b_body.fuse(land); l1b_new = l1b_new.clean() if l1b_new.clean().isValid() else l1b_new
+    ok = l1b_new.isValid() and len(l1b_new.Solids()) == 1
+    if not ok: l1b_new = l1b_body
+    rep = dict(boss_underside_mm=round(zb, 4), l1b_top_under_spacer_mm_before_land=round(top_sp, 4), l1b_top_under_boss_mm=round(top_boss, 4),
+               land=dict(r_mm=LAND_R, top_mm=round(z_land, 4), rise_over_l1b_mm=round(z_land - top_sp, 4), fused=ok, valid=l1b_new.isValid(), solids=len(l1b_new.Solids())),
                spacer_t_mm=round(t_sp, 4), spacer_in_0p15_0p20=bool(0.15 - 1e-3 <= t_sp <= 0.20 + 1e-3), boss_gap_to_l1b_mm=round(zb - top_boss, 4))
-    spacer = rev([(SPACER_RI, top_sp), (SPACER_RO, top_sp), (SPACER_RO, zb), (SPACER_RI, zb)], np.zeros(3), dR)
+    spacer = rev([(SPACER_RI, z_land), (SPACER_RO, z_land), (SPACER_RO, zb), (SPACER_RI, zb)], np.zeros(3), dR)
     shim = rev([(SPACER_RI, ztop), (SPACER_RO, ztop), (SPACER_RO, ztop + SHIM_T), (SPACER_RI, ztop + SHIM_T)], np.zeros(3), dR)
     wave = rev([(1.6, ztop + SHIM_T), (WAVE_RO, ztop + SHIM_T), (WAVE_RO, ztop + SHIM_T + WAVE_T), (1.6, ztop + SHIM_T + WAVE_T)], np.zeros(3), dR)
     z_c = ztop + CLIP_DZ
@@ -252,14 +260,14 @@ def crank_stack(cp, cinfo, lay, l1b_body):
         if n_.startswith("drive crank bearing 2"):
             n_ = n_.replace("wave-washer preloaded 5-10 N", "preloaded 5-10 N by the wave washer through the inner-ring shim")
         out.append((g_, n_, s_))
-    out += [("l1b", f"drive crank inner-ring spacer O3.1 x O4.5 x {t_sp:.2f} ground stainless 1.4310 (select-fit 0.15-0.20): on link 1b's spot face under the lower "
-                    "683ZZ inner ring - holds the crank's axial position (D3) (polished)", spacer),
+    out += [("l1b", f"drive crank inner-ring spacer O3.1 x O4.5 x {t_sp:.3f} ground stainless 1.4310 (select-fit 0.15-0.20): on link 1b's O5 spot-faced land under the "
+                    "lower 683ZZ inner ring - holds the crank's axial position (D3) (polished)", spacer),
             ("l1b", f"drive crank preload inner-ring shim O3.1 x O4.5 x {SHIM_T:.2f} stainless (polished)", shim),
             ("l1b", f"drive crank preload wave washer O3.2 x O6 (stainless spring shim: 0.08 strip, free 0.40, drawn at its {WAVE_T:.2f} working height: 5-10 N) (polished)", wave)]
     rep.update(shim_mm=[round(ztop, 3), round(ztop + SHIM_T, 3)], wave_mm=[round(ztop + SHIM_T, 3), round(ztop + SHIM_T + WAVE_T, 3)],
                clip_mm=[round(z_c, 3), round(z_c + CLIP_T, 3)], pin_end_mm=round(ztop + 1.4, 3), land_mm=round(ztop + 1.4 - z_c - CLIP_T, 3))
     print(f"crank stack (D3): {rep}", flush=True)
-    return out, rep
+    return out, rep, l1b_new
 
 
 # ---------------------------------------------------------------------------------------------------- checks
@@ -495,8 +503,10 @@ def main():
     lay = drive_layout(M, lg, dg, l1b_body)
     ring, rep["lobe"], lobe_g = USS.lobe_ring(M, lg, dg, lay)
     cp, rep["crank"] = USS.crank_parts(M, dg, lay, l1b_body)
-    cp, rep["crank_stack"] = crank_stack(cp, rep["crank"], lay, l1b_body)
     z_pp = rep["crank"]["pivot_pin_mm"]; i_1b = next(i for i, (g, n, s) in enumerate(lk) if n.startswith("D8-02b"))
+    cp, rep["crank_stack"], l1b_land = crank_stack(cp, rep["crank"], lay, l1b_body)
+    lk[i_1b] = (lk[i_1b][0], lk[i_1b][1].replace("carries the crank pivot pin", f"carries the crank pivot pin on an O{2 * LAND_R:g} land spot-faced at the boss underside "
+                                                 f"- {SPACER_T:g} (D3)"), l1b_land)
     try:
         b_ = lk[i_1b][2].cut(disc(np.zeros(3), lay["dR"], USS.PIN_R, z_pp[0] - 1.0, z_pp[0] + T + 1.0))
         bad_, zero_, ns_ = USM.step_bad_faces(b_); ok_ = b_.isValid() and len(b_.Solids()) == 1 and bad_ == 0 and ns_ == 1
