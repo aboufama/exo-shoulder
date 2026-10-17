@@ -129,13 +129,15 @@ Frozen exact Bench(110,360) of the same cells:
     skin on 84-104 fit poses;
   - spiral-lobe with pick3's placement read 38.56, and its verifier estimated ~18.15 with >= 8 contacts even perfectly
     re-placed;
-  - the pinned-horn stage 2 is PA-legal on 32/48 only at r_c 20-22 (g 2.3-2.5);
+  - the round-12 judge found the pinned-horn stage 2 PA-legal on 32/48 only at r_c 20-22 (g 2.3-2.5) or at g 2.9-3.2
+    (r_c 14-16), and the lead's nose point reads 0 there;
   - the verified "long-dyad" rows walked back to 26-29 / 38-39.
 
   So the ghost cannot be compared with 18.28 until gate 2 exists.
 - **The in-band loss at wd 71 is mostly the cuff.** Weighted by samples (pib1.log, with the desmo-conecut stack's
-  per-part sample counts as a proxy), ~85 % of wd 71's -0.0116 in-band is the cuff side: knee, E and boss. The proposer's "the whole loss is the
-  unrefit cuff side" is roughly right, and the knee re-fit can recover most of it.
+  per-part sample counts as a proxy), ~85 % of wd 71's -0.0116 in-band is the cuff side: knee, E and
+  boss. The proposer's "the whole loss is the unrefit cuff side" is roughly right, and the knee re-fit can recover most
+  of it.
 
 ### 5. The dog-leg closes itself
 
