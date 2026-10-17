@@ -129,3 +129,7 @@ crank / coupler / horn), and every way out of the pick's corner is measured wors
   checks (crank / coupler / horn vs hubs and links, CRK-hubK included); swept drive clearances + per-pose collide; K-open
   contacts read on the bench's own distances. No modelling bug or convention error that inflates the gap was found. The
   stated gaps stay: the lobe band itself is not sampled, the coarse batch's honest flags used the old crest rule.
+* **Not done within the time box**: a 2-start CMA continuation from run C's plain and objective bests (300 s each) and
+  the auditor's own frozen re-claim of the pick were submitted to the farm at 12:32 UTC and had not returned by 12:47
+  (queue); they are not used. The row's v_* fields carry its own frozen exact claim (Bench(110,360): 23.87, reach 0.739,
+  follow 1.0, ib14 0.856, ib10 0.498, contact 0.033), whose fast leg the audit reproduced exactly.
