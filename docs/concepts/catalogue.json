@@ -2772,7 +2772,7 @@
   "name": "Toggle four-bar knuckle: spring-free positive spherical four-bar from q2 to K (crank pin on link 2, coupler arc on link 1b, horn on link 1a), K at the crank's dead point on the raise-overhead frames - LISTED FOR THE USER'S B1 RULING, not claimable under today's fold reading (merged sidecar-fourbar-knuckle-3r as the strap-level cell)",
   "family": "slaved-knuckle 3R",
   "lens": "round11:lobe-free-fourbar (lens 2; listed for B1 with the count; merged sidecar-fourbar-knuckle-3r)",
-  "status": "ideated",
+  "status": "screened",
   "t_ideated": "2026-10-17T09:57:50Z",
   "source": "round 11 judge (docs/concepts/round11_ideation.md)",
   "merged_from": [
