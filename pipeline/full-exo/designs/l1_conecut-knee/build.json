@@ -5082,5 +5082,17 @@
     "dK_max": 10.29
    }
   }
+ },
+ "slaved_vs_clips": {
+  "driven_frames": 471,
+  "driven_max_err_deg": 0.0021,
+  "dwell_frames": 866,
+  "dwell_max_dK_deg": 0.0
+ },
+ "workspace": {
+  "poses": 1432,
+  "closes": 0.7228,
+  "feasible_kin_parts": 0.7228,
+  "driven_feasible": 522
  }
 }

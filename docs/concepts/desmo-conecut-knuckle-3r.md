@@ -81,3 +81,69 @@ pressure_horn).
   cell B (k 59). At a_s 9.0 / psi 154, stage 1 passes the linear reading at mu 0.15, but cell A's flank then binds at
   dK 43.25 (fast plain 15.13, k 58; the proposer's number).
 
+## Results (Bench(60,160) fast for the search, Bench(110,360) exact frozen for the claim)
+
+| config | mu | fast plain | frozen exact Bench(110,360) | reach | ib14 | contact | overhead | dK lim / why |
+|---|---|---|---|---|---|---|---|---|
+| cell A (control, desmo stage 2, nose on the crank) | 0.087 | 13.18 (= proposer) | 18.87 (proposer; not re-run) | 0.7278 | 0.8941 | 4 | 8/28 | 49.75 flank PA |
+| cell A at its verified a_s 9.5 / psi 150 | 0.15 | 86.67 (stage 1 linear cap side at K 0) | - | | | | | 0 s1-pa-cap |
+| cell A at a_s 9.0 / psi 154 | 0.15 | 15.13 | - | 0.756 fast | | | | 43.25 flank PA |
+| cell B, stock seat r_c 15.37 (O2 nose) | 0.087 | 86.77 | - | | | | | 0: plate vs hub K 0.12 mm |
+| cell B, seat r_c 16.0, O1.5 nose, wall 0.8, glev -0.5 | 0.15 | 13.54 | **19.27** | 0.7278 | 0.8901 | 4 | 8/28 | 46.5 slot end |
+| **cell B claim (k57, pre-registered)** | 0.15 | **13.31** | **19.04** (score 93.08) | 0.7278 | 0.8924 | 4 (0.0106) | 8/28 | 46.5 slot end |
+
+The claim config (k57) is r_c 16.176, beta -177.169, nose O1.5 (nose_r2 0.75), c_slot2 0.01, wall2 0.9, boss_r 2.5,
+kslot 46.5, glev -1.0, blend 10, a_s 9.529, psi 149.71, mu 0.15, s1_read built, plus conecut's knee / J3 stop and the
+lead's seats and law.
+
+* Frozen exact, near-touch: gap at 1 mm 20.68 (3 poses), at 2 mm 35.13. The closest metal over taken poses is 0.07 mm
+  (pose 139, plane -60 / elev 60 / axial 105); then 0.26 mm (203) and 0.62 mm (379).
+* Lost poses: fold 88, contact 4, j3stop 0. The takes and contacts are identical to conecut's (262 taken).
+* Overhead (elev >= 140): taken 8 of 28, reach 0.286, ib14 0.895. Workspace in-band: all 0.863, elev 90-140 0.831,
+  overhead 0.933.
+
+**Equal-sample (S6) comparison.**
+* Against conecut (same knee, E strap 164 samples): 19.04 vs 18.28. The whole +0.76 is in-band by sample weight. Takes
+  and contacts are identical.
+* Decomposition of that +0.76:
+  * with the stage-1 ring sector removed (decomposition only; the ring is real metal), B reads 18.37, so the stage-2
+    inversion itself costs +0.09;
+  * desmo's stage-1 ring sector outside O20 costs +0.67 (19 samples at 0.54 in band, median 13.8 mm).
+* At the lead's E-strap count (104 samples, desmo-slipper's): B reads 19.61, against desmo-slipper's 18.95 and conecut's
+  18.67 at equal strap.
+
+**Drive at mu 0.15 (both stages, claim config).**
+* Stage 2 (inverted):
+  * pressure angles on link 1a 24.7 and on the crank 14.6. On the built pocket: 25.5 / 32.0 (gate 34.47).
+  * Its own PA stroke limit is 64.5 deg of K at mu 0.087-0.15 and 61.0 at 0.20. Cell A's flank stops at 43.25 at
+    mu 0.15.
+  * The slot is 3.72 mm long; the plate is 7.04 x 3.32 x 2.5. Plate clearance to hub K's O20 is 1.23 mm; crank low arm
+    to the boss is 19.9 mm.
+  * Boss vs hub K margin: 3.68 mm beyond the 10 mm rim.
+  * Slop with the crank held: 0.04 deg. The closed end (stop A, the relative pole at 0.525 mm/rad) engages at 0.04 deg.
+* Stage 1 on the built groove:
+  * the forward (pin-side) pressure angle first exceeds 34.47 at K 47.50, 1.0 deg past the slot's end, and the cap side
+    outside the blend at K 58.5;
+  * inside the blend the cap side runs 28.5 -> 90 deg (the dwell lock);
+  * crank-free slop 0.174 deg (0.261 at the worst-tolerance c 0.015: over 0.25), held + free 0.214.
+* Groove centreline radius at the onset: 1.01, ridge 0.25 mm. Line-contact Hertz at 25 N: about 1.5 GPa with the
+  O1.5 440C pin. Ti-6Al-4V yields at p0 ~1.4-1.5 GPa, so the pressed 440C ring insert stays the default (cx 16.5).
+  Blend 24 lifts the ridge to 0.34 mm (~1.35 GPa) at an equal fast number (k128, 13.31). That is not enough to drop the
+  insert.
+
+**Search.** 160+ configurations on Bench(60,160) fast, run locally because the farm window is closed:
+* a coarse seat / hardware grid;
+* a 74-point focused random grid at mu 0.15;
+* a 32-point local refinement.
+
+The best fast plain gap is 13.30 (k131 / k135), a tie with the pre-registered k57 (13.31). The convergence gate over
+the 121 built-read cell-B rows (score points): gain over the second half 0.004 (< 1), over the last third 0.004 (< 0.5),
+top-5 spread 0.004 (< 3). It **passes**.
+
+Where the search space ends (measured):
+* plate vs hub K binds below r_c ~16.0 with an O1.5 nose, or ~16.2 with O2;
+* the inverted-cam PA fails at rest for r_c >= 17;
+* stage 1's built forward PA binds below dK 46.3 when a_s / psi leave 9.4-9.6 / 149.5-150.5;
+* the slot can be cut to 48-49.75 at r_c 16.4-16.5, but reach does not change (0.775 fast). The stroke past 46.5 is
+  not what limits this family. Its fold wall is the seat cap, as round 12 found.
+
