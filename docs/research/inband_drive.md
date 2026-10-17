@@ -214,3 +214,4 @@ python3 tools/simplicity.py --score "$(python3 -c "import json;print(json.dumps(
 Cost: exo-cpu1 only, never GPU (attr1 timed out on unbatched exact distances - fixed; cma1 / cma2 / cma3, attr2 / attr3,
 claimA-D). runpod_guard balance $29.19 (09:06) -> $27.99 (10:10) for every agent on the account; this task's batch lines
 sum to ~$1.4 at the worst-case per-worker billing.
+

@@ -2379,3 +2379,27 @@ constraint is not a reach constraint: gate on the K the taken poses USE.
   the boss) or the follower beside it (a cam re-synthesis).
 - Bookkeeping: name-based material lookup made links 1b / 2 and the crank steel ("dowel hole", "683ZZ"); R8 custom mass
   181.0 -> 149.6 g is a measurement correction.
+
+## The RSSR K drive's metal can be made nearly free - and then the leak-free pick is only at parity with slipper-nose (2026-10-17, docs/research/inband_drive.md)
+
+- **Attribution first (exact, per part, one wear recomputed with parts deleted; `docs/research/inband_drive/attribute.py`,
+  reproduces the model to 0.01).** The long-stroke row's real rod drive at the k30 law costs 7.57 of its 25.83 frozen
+  points: bell crank 3.72 (in band 0.62 - it is STACKED on link 1b, underside = link 1b's top + 0.15 - plus 3 shallow
+  low-arm contacts it makes alone), ball-link sockets 2.62 (in band 0.59 + 3 overhead contacts), rod 0.53, horn lug -0.21
+  (in band, it helps). Its held-out number, not on file before: 28.86.
+- **Two zero-complexity moves remove it.** (1) The crank on a joggled EAR of link 1b, so it runs in link 1b's own layer:
+  crank in band 0.62 -> 0.93 at the same config. (2) The crank-tip M2 ball on a RADIAL stud in the arm's end face, so
+  the rod rides in the crank's mid-plane: rod / sockets 0.58 -> 0.87 / 0.85 after the search; the socket cone (25.5 deg
+  used, ~30 assumed) replaces the rod's lean as the binding angle. The suggested "pivot off link 1b's strap" fails as
+  stated: off the strap the pivot lands on link 1b's hub-2 eye, 3.5 mm HIGHER than the strap.
+- **The pick (leak-free: law free, seeds from fit-bench CMA bests, chosen on the fit bench's 2 mm objective, committed
+  before any number) = inband-rssr-knuckle-3r: frozen exact 18.87 (score 93.14) / held out 23.21; robust build (r_h
+  +0.25, eta +1, all 34 tolerance neighbours pass) 18.83 / 23.16** vs slipper-nose 18.49 / 23.45. Paired per pose: bench
+  +0.39 [-0.28, +1.54], held -0.24 [-0.68, +0.17], pooled -0.06 [-0.44, +0.39] - parity, at complexity 28.5 vs 22.25;
+  held-out contact depth halved (23.2 vs 46.1 mm summed, 0 contacts in the low-arm extreme-rotation class).
+- **The drive's metal now costs 0.29 points** (pick with all drive metal deleted 18.58). The remaining gap is the chain:
+  fold 88 (= slipper-nose's), K used 45.8. Every search, leak-free or not, walks the K dyad back to 26 / 38 / 59, and the
+  steep law ranks ~2 points worse on the fit objective. So the long-dyad lever was never a packaging problem: it is a
+  selection problem (which leak-free bench sees the stretched poses). The instrument that can decide it is the jittered
+  workspace-envelope search bench CLAUDE.md asks for; this row's in-band drive is ready to be searched on it.
+- Spring vs R17: kK 1.79 -> 0.165 N.m at J2, 1.1-1.4 N at the cuff (static; 17 % / 22-28 % of R17). Audit WATCH, 0 gamed.
