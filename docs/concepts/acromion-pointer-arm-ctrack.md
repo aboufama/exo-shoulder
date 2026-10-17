@@ -100,3 +100,54 @@ Preview: `docs/concepts/viz/concepts/acromion-pointer-arm-ctrack.js`. Round J1 (
    K2 dense rebuilds the chain every 2 deg and drops a frame whose path has a gap.
 4. **Fork yoke** (new, measured): shoe 2 on its own tine from hub 2 (kit strap, skin-fitted) instead of a bridge along
    the race (which floats 30+ mm): +11.6 in-band points, gap 89.55 -> 80.15.
+
+## Red team (Bench(60, 160), named poses, twin-shoe config k132; the fork config's own list is in the row)
+
+Attribution of the 160 workspace poses: taken 119; torso on the arm-fixed track 14; both shoes off the race 12;
+link 1 into the deltoid 12; yoke 2; gimbal fold 1. Clip frames: 58 / 60 (2 yoke contacts).
+
+| pose | result | worst metal (mm to skin) |
+|---|---|---|
+| rest | taken | track 4.1, hub 1 7.4; shoe 1 floats 31.7, shoe 2 19.6 |
+| rest + IR 75 | taken (shoe 1 at +13) | track 2.5 |
+| abduction 90 | taken | hub 1 1.6 (near-touch), shoes 28-31 |
+| **abduction 150 (overhead)** | **contact: link 1 -3.3, hub 1 -1.1** (the deltoid bunches under the back seat) | |
+| flexion 165 + IR 90 | gimbal 1.2 deg from its fold (not taken); link 1 would be -14.7 | |
+| **across the body (135 / 90)** | **contact: link 1 -7.0, hub 2 -4.6, yoke -2.7** | shoe 2 2.3 |
+| across low (120 / 45) | taken | shoe 2 4.6 |
+| **behind the back** | **both shoes off the race; the race itself -3.4 into the back** | |
+| abduction 60 + IR 60 | contact: the torso on the race (-1.7) | |
+| abduction 75 + ER 90 | taken (shoe 2 holds) | track 1.2 |
+
+The optimistic numbers: the track's in-band (0.96) is a skin-fitted arm-fixed part (quiet-zone ballast in the
+metal-centric score: 1100+ samples); the moving parts are 0.00-0.66. The circular race radius is the track's highest
+skin face over its arc (q 0.95 of the arm's own skin) - a fatter arm (muscle bulge, other wearers) shifts it.
+
+## Verdict (GATE 0, round J1)
+
+**Dead with its number.** Best 80-81 on Bench(60, 160) fast (fork-yoke twin shoes, 0 passive joints; score ~71),
+frozen exact on Bench(110, 360) in the row - far above the gate (<= 15, dies above 17.5) and the lead (18.49). The
+user's own decomposition does not fail on kinematics (the twin-shoe race carries the twist for 0.92-0.96 of the
+workspace with the gimbal >= 5 deg from its poles) - it fails on WHERE the metal can be: an arm-fixed track only has
+~105 deg of arm that the torso never touches, the twist joint's shoes must ride a circle about the humeral axis over a
+58-89 mm skin radius (18-32 mm of float), and the gimbal's L1 / yoke ride the swing frame over the deltoid (in band
+0.27-0.66, link 1 into the deltoid overhead and across the body).
+
+## New knowledge (predicts beyond this morphology)
+
+1. **The arm's torso-free arc is ~105 deg at every station** (s 25-240, radial skin march from the humeral axis,
+   <= 2 % of the bench poses blocked): -55..+50 deg on the deltoid, -20..+85 distally (0 lateral, +90 posterior). Any
+   ARM-fixed part beyond it meets the torso, the axilla or the folded forearm in 5-30 % of poses. (pointer-cslide
+   measured 150-180 deg for a band in the POINTING frame - the arm frame is the narrower one.)
+2. **Twin shoes break a C-slide's window wall**: two shoes rigid on the moving member, `twin` apart (<= the single-shoe
+   window), on one circular race of arc A carry A - shoe + twin of rotation with no extra joint or passive
+   coordinate: reach ceiling 0.54 -> 0.92-0.96 here. The same trick applies to pointer-cslide's 98-deg band and to any
+   open ring bearing on the arm (ARMin-type C-rings).
+3. **The gimbal + humeral-twist decomposition prefers a BACK-of-shoulder J1** (bvec(-20..0, -10..10)): the twist
+   window for 90 % of the workspace is 148-163 deg there vs 200-299 deg at the acromion top, because the overhead arm
+   passes near an acromion pole and the pointing frame spins there. The densest seat (posterior-medial) is not a seat
+   (its GH ray runs into the trunk).
+4. **Fit arm-fixed parts radially from the humeral axis with a short window** (3 mm): GH rays at s 90 run 100+ mm
+   inside the arm and the 15-mm-window march jumps the torso and parks the part at 400 mm (contact 0.73, k0-k3).
+5. **The spec's skin-shaped track + radial slide** needs 20-34 mm of skin-normal travel at the CMA optimum - the
+   slide stands taller than the float it removes; a circular race on a skin-fitted saddle is the buildable version.
