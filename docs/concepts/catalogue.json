@@ -2889,7 +2889,7 @@
   "name": "Re-centred never-binding pin knee + J3 hard stop: the lead with its knee window moved off the drift cloud and the knee exits turned into a designed J3 stop (a measured tie that every long-dyad pick wears)",
   "family": "slaved-knuckle 3R (pin knee)",
   "lens": "round12:overhead-cone (lens 2; the lens's own levers top out at +0-1 pose, so this runs as the lead's knee column and the stacking delta for lens 1)",
-  "status": "screened",
+  "status": "verified",
   "t_ideated": "2026-10-17T15:19:07Z",
   "source": "round 12 judge (docs/concepts/round12_ideation.md)",
   "merged_from": [],

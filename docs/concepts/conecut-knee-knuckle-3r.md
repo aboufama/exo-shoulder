@@ -265,3 +265,82 @@ knee slides against 32, and the J3 end is a clean dowel stop at 133 N per N m.
    and 205 is a contact at -4.28 mm, both chain metal. A stop at -105 (spec) blocks both.
 3. The verifier: re-run the paired CI, the flood, the clip q3' table, and the per-pose T5 against the lead. Dumps are in
    `docs/alignment/remeasure/conecut-knee-knuckle-3r_{bench,held}_perpose.json`.
+
+## Verification (independent skeptic, 2026-10-17 17:20 UTC)
+
+Harness: `docs/concepts/verify/conecut-knee-knuckle-3r.py`. It loads the claim's model unchanged and wears it through
+its own frozen protocol: fit on Bench(60,160) fast, freeze, then wear on Bench(110,360) exact and on the held-out bench.
+It runs the lead's verifier chain, retargeted at `CCModel`: cam closure in the world, nose vs lug, K sense, pressure
+angles with friction at 43 and 45, nose undercut and relative pole, own-state th margin, and the continuity flood. It
+adds four checks of its own (C1-C4 below). Everything ran locally on 2 niced processes, because the farm is at its
+budget line (balance $24.14).
+
+**Re-measured. Not refuted.**
+
+| wear | gap | reach | follow | ib14 | ib10 | contact | 1 mm | min metal | overhead |
+|---|---|---|---|---|---|---|---|---|---|
+| Bench(110,360) exact, frozen | **18.28** | 0.7278 | 1.0 | 0.9012 | 0.5739 | 0.0106 (4) | 19.92 | 0.07 mm | 8/28 |
+| held out, frozen | **22.38** | 0.6922 | 1.0 | 0.900 | 0.5726 | 0.016 (14) | 25.23 | 0.33 mm | 18/71 |
+| champion spherical 3R, same bench | 75.94 | | | | | | | | |
+
+The champion's 75.94 is the risley-turret verifier's number, with kit checks and 1 mm clearance. The lead's verifier
+used the same number. The knee, stop and cam checks do not apply to the champion.
+
+- **Reproduced exactly.** Both per-pose dumps in `docs/alignment/remeasure/` match pose for pose: 0 of 470 and 0 of
+  1154 poses differ.
+- **Flood.** Full 18.28 and knn 19.97, the same readings as the lead's 18.49 / 20.16.
+- **Lead checks.** 0 failing taken poses (372 bench, 861 held):
+  - cam closure 0.0 mm;
+  - K sense: 0 poses of the wrong sense;
+  - pressure angle plus friction: horn 40.57, crank 37.37 (held 40.87), all <= 43;
+  - nose undercut: 0 points;
+  - th margin 5.181 on the bench and 5.006 held out, 0 poses under 5;
+  - dK: 45.6 of 50.
+- **C1, the stop acts on J3's own angle.** The model's own member transforms give the link 2 -> member 3 rotation
+  R2^T R3. It is a rotation about u3 (axis residual <= 0.015 deg) and equals q3' = q3 + phi to 0.0008 deg, on 382
+  bench and 894 held poses. The dowel bounds a real joint angle, not a virtual one.
+- **C2, buildable stop.** The groove is 234.6 deg of travel plus 16.1 deg of dowel width, 250.7 deg in all. That
+  leaves a 109 deg web in link 2's ring. The stop's margin to a taken pose is 2.7 deg on the bench and 0.74 deg held
+  out (pose at -111.16).
+- **C3, what the stop cuts.** The stopped poses were re-evaluated on the worn shape as if the stop were absent.
+  - Bench, all 6 stopped poses (182/184/208/209/211/238) also clash the E strap against link 2, and their metal goes
+    0.95-14.5 mm into the skin (walls down to 22.5 mm). Unlike the claim's account (hub 2 / K housing alone), the
+    strap would run into link 2 just past J3MIN, so the dowel is the designed version of a limit the chain already
+    has.
+  - Held out, 19 poses are stopped, and every one would put metal in the skin. 3 of them (752/897/965, metal 2.0-3.4 mm
+    in) are cut by the **upper** stop. J3MAX is inert on the bench but not held out.
+- **No-stop control** (same knee, J3MIN off, same protocol): 19.38. The 6 poses fail on parts (E vs link 2), and there
+  are 5 contacts, including 203 at -0.03 mm. So the dowel is worth 1.10 points. That gain comes from two things:
+  - the fit no longer has to clear poses the chain cannot reach, which lifts in-band from 0.8945 to 0.9012;
+  - pose 203 flips from a -0.03 mm contact to taken at 0.72 mm, a near-touch that depends on the fit.
+- **C4, in-band attribution.** With the E strap weighted at the lead's sample count (104 of its 164 points):
+
+  | wear | ib14 at equal strap | gap at equal strap | lead | chain-only ib14 |
+  |---|---|---|---|---|
+  | bench | 0.8961 | 18.67 | 18.49 | 0.859 (lead 0.869) |
+  | held | 0.8948 | 22.90 | 23.45 | 0.857 |
+
+  The bench edge over the lead is the strap's dilution. Held out, a 0.55 edge survives.
+
+**Verdict: VERIFIED at v_gap 18.28 (score 93.35). It is a tie with the lead (18.49), not a new leader.** No hard rule
+is broken:
+
+- 3 ACTIVE DOF; K is slaved, and the knee pins are passive rotations determined by the closure;
+- 0 passive translations;
+- the stop sits on J3's own angle, at a catalogue dowel's real size, inside the O20 stack;
+- MR63ZZ pairs (stk 6.0), per the lead's build rule.
+
+**For the auditor:**
+
+1. The bench gain is dilution plus a stop that relabels would-be skin poses. The equal-strap reading is 18.67. The
+   only pose it adds is 203, at 0.72 mm.
+2. The stop's held margin is 0.74 deg, and the upper stop relabels 3 held contacts.
+3. T5 is worse than the lead's: bench 4 contacts / 20.24 mm against 2 / 14.75; held 14 / 60.97 mm against 10 / 46.12.
+4. The row is stated at stk 6.0 (the build rule), while the lead's 18.49 is at stk 4.85. At 4.85 this knee fails knee
+   vs E on 329 poses (the claim's own measurement).
+
+What is real and worth carrying to the long-dyad picks:
+
+- a knee that never binds: margin 11.4 mm against 0.33, and 0 held knee slides against 32;
+- 12 N of knee-link force per N m about J3, against 31.6;
+- a dowel J3 end that the chain needs anyway, because E meets link 2 just past it.
