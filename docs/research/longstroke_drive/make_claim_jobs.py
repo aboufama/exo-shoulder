@@ -9,8 +9,8 @@ MODEL = "docs/concepts/models/longstroke-slipper-knuckle-3r.py"
 jobs = []
 for c in cols:
     lab = f"ls-{name}-{c['tag']}"
-    one = json.dumps([dict(c, tag=c["tag"])]).replace("'", "'\\''")
+    one = json.dumps([{k: v for k, v in c.items() if k != "env"}]).replace("'", "'\\''")
     cmd = f"mkdir -p {OUT}/{name} && python3 {MODEL} claims '{one}' {OUT}/{name} > {OUT}/{name}/{c['tag']}.run.log 2>&1; tail -2 {OUT}/{name}/{c['tag']}.log"
-    jobs.append(dict(tag=lab, cmd=cmd, out=[f"{OUT}/{name}/{c['tag']}*"], env={"OMP_NUM_THREADS": "1", "IGL_NUM_THREADS": "1"}, timeout=3600))
+    jobs.append(dict(tag=lab, cmd=cmd, out=[f"{OUT}/{name}/{c['tag']}*"], env=dict({"OMP_NUM_THREADS": "1", "IGL_NUM_THREADS": "1"}, **c.get("env", {})), timeout=3600))
 json.dump(jobs, open(os.path.join(HERE, "farm", f"jobs_{name}.json"), "w"), indent=1)
 print(len(jobs), "jobs")
