@@ -55,7 +55,7 @@ OUT = os.path.join(REPO, "docs", "alignment")
 REM = os.path.join(OUT, "remeasure")
 sys.path.insert(0, os.path.join(REPO, "tools"))
 
-VERSION = "2026-10-17.1"   # bump on every change of a check, threshold or reading: a change of the instrument (docs/ALIGNMENT.md section 6)
+VERSION = "2026-10-17.2"   # bump on every change of a check, threshold or reading: a change of the instrument (docs/ALIGNMENT.md section 6)
 ROUND8 = ["sidecar-longdyad-knuckle-3r", "sidecar-parallelogram-knuckle-3r", "sidecar-roller-flank-knuckle-3r", "twist-long-a2-knuckle-3r"]
 # thresholds (gap points unless stated); calibrated on the verified rows, docs/ALIGNMENT.md "Thresholds"
 TH = dict(held_watch=6.0, held_gamed=10.0, shell2_watch=15.0, shell2_gamed=25.0, dom_gamed=0.0, conn_watch=1.0, conn_gamed=3.0,
@@ -275,9 +275,9 @@ def c_near_touch(row, V, rem_b):
     if N.get("n3") is not None: parts.append(f"<3 mm {N['n3']}")
     if N.get("band3") is not None: parts.append(f"band read 3-14 mm {N['band3']}")
     lvl = "ok"
-    if s2 is None: lvl = "watch"; parts.append("2 mm near-touch not measured")
-    elif s2 > TH["shell2_gamed"]: lvl = "gamed"
-    elif s2 > TH["shell2_watch"]: lvl = "watch"
+    # user 2026-10-17: "dont really care about the near touch stuff" - report-only: the numbers are written down, the
+    # level stays ok (contact itself is metal < 1 mm and is scored; T5 contact_depth watches how deep it goes)
+    if s2 is None: parts.append("2 mm near-touch not measured (not required since 2026-10-17)")
     if s2 is not None: parts.append(f"{s2} points live in the 1-2 mm shell")
     return _chk("near_touch", lvl, ", ".join(parts) + f" ({N['src']})", shell2=s2, **{k: v for k, v in N.items() if k != "src"}, source=N["src"])
 
@@ -289,7 +289,8 @@ def c_dominance(row, V, rem_b, ref):
     if not N or not R or N.get("n2") is None or R.get("n2") is None: return _chk("dominance", "watch", f"cannot compare with {ref} at 2 mm")
     dp, d2 = round(R["plain"] - N["plain"], 2), round(R["n2"] - N["n2"], 2)
     if dp > 0 and d2 < 0:
-        return _chk("dominance", "gamed", f"beats {ref} by {dp} plain but loses by {-d2} at 2 mm: the gain is metal moved into the 1-2 mm shell", ref=ref, gain_plain=dp, gain_2mm=d2)
+        # the A1 dominance gate was retired by the user 2026-10-17: reported as a watch, never 'gamed'
+        return _chk("dominance", "watch", f"beats {ref} by {dp} plain but loses by {-d2} at 2 mm: part of the gain is metal moved into the 1-2 mm shell (A1 gate retired 2026-10-17)", ref=ref, gain_plain=dp, gain_2mm=d2)
     return _chk("dominance", "ok", f"vs {ref}: plain {dp:+.2f}, 2 mm {d2:+.2f}", ref=ref, gain_plain=dp, gain_2mm=d2)
 
 
@@ -797,6 +798,11 @@ def _rulings(rid):
     d = json.load(open(f)); return d.get("rulings", []) if isinstance(d, dict) else d
 
 
+# checks whose skeptic rulings predate a user ruling that retired their rule (2026-10-17: "dont really care about the
+# near touch stuff"; the A1 dominance gate retired): the self-test does not hold the tool to those rulings
+SUPERSEDED = {"near_touch", "dominance"}
+
+
 def selftest(ids=None, hard=LEADERS, verbose=True):
     """1. regression against docs/alignment/<id>.rulings.json: a check the skeptic REFUTED must now read ok; a check the
     skeptic UPHELD must still fire (watch / gamed); a judgement finding upheld that a check now measures (contact depth)
@@ -813,6 +819,7 @@ def selftest(ids=None, hard=LEADERS, verbose=True):
         for r in _rulings(rid):
             k = str(r.get("key", "")); refuted = bool(r.get("refuted"))
             chk = k if k in CHECKS else next((c for p, c in JUDGEMENT_CHECK.items() if re.search(p, k)), None)
+            if chk in SUPERSEDED: continue                            # ruled on under a rule the user has since retired
             if chk is None or chk not in C: continue
             lv = C[chk]["level"]
             if chk == "idle" and k.startswith("judgement:"):          # the refuted finding says: idle is NOT gamed

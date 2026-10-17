@@ -20,7 +20,10 @@ minarc-stop-knuckle-4r pick1 is a 4-active design (4 DOF) and the 3-joint leader
 for planners only: the FINAL product is powered, every joint cable driven and rotation tracked - that is WHY fewer
 joints and simplicity matter. "dont account for the powered stuff at all its just useful context for high level
 agents": all building and testing stays a KINEMATIC proof (no drives, cables or motor models in the metrics, benches
-or CAD). (3) Near-touch (2 mm) is not a gate (see Alignment auditor). (4) Keep the alignment auditor (the
+or CAD). (3) Near-touch (2 mm) is not a gate (see Alignment auditor); the auditor reports it only. Lead's rule 2026-10-17
+(from the auditor's T5 contact-depth check): a verifier also writes a per-pose dump of the verified config
+(`python3 tools/alignment_paired.py dump`, bench and held out, reproducing the claim to +-0.05) so contact DEPTH is on
+file - without it the depth check cannot run (16 of 22 audited rows today). (4) Keep the alignment auditor (the
 exploit / gaming agent) running at all times.
 The user wants the design's evolution recorded for a final time-lapse visual: add every judged design to
 docs/EVOLUTION.md (and its snapshot to pipeline/evolution/) as part of the judge loop.

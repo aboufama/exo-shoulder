@@ -516,3 +516,10 @@ Each line is a measurement change: verdicts that move because of it moved becaus
   - Verdicts: kneeless-roller and kneeless-sidecar gamed -> watch; every other row keeps its verdict
     (`audit-all` before / after). `selftest` added. Each audit output now carries `tool_version`.
   - `table`: reads only audit outputs (it crashed on the `*.rulings.json` / `*.findings.json` lists in the folder).
+
+- **2026-10-17.2** (lead, after the user's ruling "dont really care about the near touch stuff" and the retired A1 gate):
+  `near_touch` is report-only (numbers kept, level always ok; a missing 2 mm read is no longer a watch) and
+  `dominance` caps at watch (never gamed). Self-test: the 5 leaders unchanged (all watch, 0 FP / 0 FN); the skeptic-refuted
+  near_touch findings on k-rim-lobe, sidecar-parallelogram and sidecar-roller-flank no longer fire. The self-test skips
+  skeptic rulings on those two checks (`SUPERSEDED`: they were ruled under the retired rule). Not done on purpose: a
+  tool change does not mark every row due (the self-test guards regressions instead).
