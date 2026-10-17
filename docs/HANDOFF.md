@@ -459,6 +459,11 @@ designs (dipped-law-groove-knuckle-3r, seed-offset-3r-slides); every leader is w
    - *Lead, 17:20 UTC (audit 17:15):* the drawn K-phase band +0.75 +0.15/-0.10 deg holds held-out th >= 5 only on an
      RSS stack; on the red team's worst-case linear stack it nets -0.12 deg (~4.996 held out, 1 pose under 5). The
      drawing must state RSS, or the low end becomes -0.02 deg. Close T3 only after the fix pass re-judges the 16:29 build.
+   - *Lead, 18:12 UTC:* round 12 closed; its winner conecut-knee-knuckle-3r (verified 18.28 / 22.38) is ruled a TIE
+     (leader_ruling, ledger 17:57:13Z). Its final polish is SKIPPED on purpose: four env polishes of this family moved
+     nothing and the family's ceiling is measured (ghost 17.86). Its generation CAD = the gen-7 builder with conecut's
+     re-centred never-binding knee (lE 97.1 / lc 24.4) + the J3 dowel stop, queued for when the gen-7 fix pass
+     (wf_788f3848-0a6) finishes its check - the box is saturated (load ~17) and the jump track has priority.
 2. **Reach is the gap.**
    - The lead's gap is reach 17.50 of 18.49 (ROUNDS round 10 results). **Score 95 is gap <= 13.75**: +18 workspace
      poses at the lead's in-band and contact, 0.278 points each (ROUNDS round 11 plan).

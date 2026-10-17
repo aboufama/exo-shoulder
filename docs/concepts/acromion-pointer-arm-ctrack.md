@@ -79,3 +79,24 @@ Preview: `docs/concepts/viz/concepts/acromion-pointer-arm-ctrack.js`. Round J1 (
 | coarse grid: J1 (-20 / 0, -10 / 10), s_t 40 / 70, arc [-60, 55] / [-70, 75], circ 1 / 0 | 32 | 118.93 (slide) / **118.96 (race)** | thc = densest window |
 | CMA-ES (own compact implementation), slide mode, from k15 | ~40 | 109.88 (k33) | stopped: the slide is not buildable (34 mm radial travel) |
 | CMA-ES, race mode (two seeds) | see row | see row | 10 dims: az, el, s_t, tc, tw, dthc, qt, q, al12, al23 |
+| single-shoe race: frozen wear k15 on Bench(110, 360) EXACT | 1 | **116.71** | reach 0.533, follow 0.845, ib14 0.417, 77 contact poses (track 58, link 1 24), overhead 2/28, min th margin 6.28 deg |
+| **twin shoes** (2 shoes `twin` deg apart on L2, bridge along the race) | 6 | 89.55 (k132) | kinematic reach 0.54 -> 0.92-0.96 at the same 115-deg race |
+| twin, frozen wear k132 on Bench(110, 360) EXACT | 1 | **93.65** | reach 0.728, follow 0.955, ib14 0.305, 75 contact poses (track 40, link 1 32, yoke 17, hub 2 15), overhead 5/28, min th margin 6.11 |
+| **fork yoke** (shoe 2 on its own skin-fitted tine from hub 2, no bridge) | 2 + CMA | 80.15 (k159) | see row for the CMA result |
+
+## Spec fixes and improvements made while modelling (each measured)
+
+1. **J1 at the back of the shoulder, not on the acromion** (the twist window is 20-60 % narrower there; the user's J1
+   ruling allows both). The densest-window seats (posterior-medial, az -60..-30) are not seats: their GH ray runs
+   into the trunk (hub 1 at 400 mm, k0-k3).
+2. **No radial slide**: the spec's carriage needs 20-34 mm of skin-normal travel (+ block); replaced by a circular race
+   on a skin-fitted saddle body (0 passive joints). The spec's version scores 109.88 fast (k33) with that slide and
+   is reported only.
+3. **Twin shoes** (new, measured): two shoes rigid on L2, `twin` = 70-86 deg apart round the race: the open ring is
+   held by whichever shoe is on it (an open ring bearing with a carriage pair spanning its gap; no new joint, no
+   passive coordinate - both shoes ride the same circle about the humeral axis, so the pair never over-constrains).
+   This breaks the window wall: 115 deg of torso-free race carries ~160-200 deg of twist (kinematic reach 0.54 ->
+   0.92-0.96, clips 0.72 -> 0.98-1.0). Handover is continuous only if twin <= the single-shoe window (87.5 deg here):
+   K2 dense rebuilds the chain every 2 deg and drops a frame whose path has a gap.
+4. **Fork yoke** (new, measured): shoe 2 on its own tine from hub 2 (kit strap, skin-fitted) instead of a bridge along
+   the race (which floats 30+ mm): +11.6 in-band points, gap 89.55 -> 80.15.

@@ -243,10 +243,13 @@ def CB_gap_near(Bb):
 
 def best_thc(F, p):
     """the carriage angle in the pointing frame that puts the most poses (ws + 0.3 x clips) inside the track window"""
-    best = (-1, 0.0)
-    for c in np.arange(-180, 180, 2.0):
-        _, _, _, _, inw, _ = kin(F, dict(p, thc=float(c)))
-        sc = inw[F.ws].mean() + 0.3 * inw[F.clip].mean()
+    best = (-1, 0.0); _, _, _, th0, _, _ = kin(F, dict(p, thc=0.0)); _, _, _, _, okc, _ = kin(F, dict(p, thc=0.0, tw=720.0, twin=0))
+    half = math.degrees(p["car"] / 2 / 50.0); lo, hi = p["tc"] - p["tw"] / 2 + half, p["tc"] + p["tw"] / 2 - half
+    wrap = lambda x: (x + 180) % 360 - 180
+    for c in np.arange(-180, 180, 2.0):                       # th_arm(thc) = th_arm(0) + thc (rotation about d)
+        t1 = wrap(th0 + c); inw = (t1 >= lo) & (t1 <= hi)
+        if p.get("twin"): t2 = wrap(t1 + p["twin"]); inw = inw | ((t2 >= lo) & (t2 <= hi))
+        inw = inw & okc; sc = inw[F.ws].mean() + 0.3 * inw[F.clip].mean()
         if sc > best[0]: best = (sc, float(c))
     return round(best[1], 1)
 
@@ -324,7 +327,7 @@ if __name__ == "__main__":
                                  "contact_poses_member", "inband_member", "min_margin_taken", "near1_gap", "min_metal", "flips")}
         out["secs"] = round(time.time() - t0); print("WEAR", json.dumps(out), flush=True)
     elif mode == "cma":                                   # cma '{x0}' n_eval circ seed
-        x0 = json.loads(a[1]); best = cma(B, x0, int(a[2]), int(a[3]), seed=int(a[4]) if len(a) > 4 else 0)
+        x0 = json.loads(a[1]); best = cma(B, x0, int(a[2]), int(a[3]), seed=int(a[4]) if len(a) > 4 else 0, sigma0=float(a[5]) if len(a) > 5 else 0.25)
         print("BEST", best)
     elif mode == "run":                                   # evaluate + append to the sweep file: run '[{...}, {...}]' tag
         for pp in json.loads(a[1]): run(B, dict(PARAMS, **pp), tag=a[2] if len(a) > 2 else "")

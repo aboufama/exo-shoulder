@@ -223,7 +223,18 @@ it does not break the trade.
 
 ## Frozen exact wear (Bench(110,360), CB_EXACT=1, levels fitted on Bench(60,160), K6 at 1 mm radial)
 
-(running at commit time; see the row's note when it lands)
+| | gap (plain) | near-touch | reach | overhead / 28 | follow | ib14 / ib10 | contact | min metal |
+|---|---|---|---|---|---|---|---|---|
+| fit, Bench(60,160) fast, K6 1 mm | 44.63 (near-touch) | | 0.856 | | 1.0 | 0.503 | 0.005 | |
+| **frozen exact Bench(110,360)** | **51.83** (score 81.15) | 53.94 | **0.789** (284 / 360) | **10** | 1.0 | 0.503 / 0.337 | 0.010 | 0.51 mm |
+
+More from the frozen wear:
+
+- Relay ws poses taken: 17. Islands dropped by the flood: 0.
+- Min th margin 5.00, min sub-chain margin 5.57. q0 range -36.5..44.0.
+- Per member in band: hub 2 0.057, link 1 0.23, link 2 0.05.
+- For reference: the lead is 18.49, and the champion through the same checks is 66.97-75.94.
+@@T0@@
 
 ## Verdict
 
