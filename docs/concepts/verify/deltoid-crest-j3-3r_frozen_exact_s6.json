@@ -1,0 +1,527 @@
+{
+ "model": "docs/concepts/models/deltoid-crest-j3-3r.py",
+ "params": {
+  "az": 105.4971,
+  "el": 63.1176,
+  "a1": 38.6879,
+  "a2": 44.1129,
+  "wd": 103.3777,
+  "wa": 4.934599999999989,
+  "sigma": -1,
+  "inv2": 1,
+  "inv3": 1,
+  "q": 0.9419,
+  "end_extra": 2.5478,
+  "margin": 5.0,
+  "width": 12.0,
+  "t_link": 3.0,
+  "rad1": 10.0,
+  "rad2": 10.0,
+  "rad3": 10.0,
+  "vm": 0,
+  "near": 0
+ },
+ "fold_margin": 5.0,
+ "t0": "2026-10-17T22:38:51Z",
+ "fit": {
+  "gap": 36.63,
+  "near": 57.59,
+  "reach": 0.65,
+  "follow": 0.9,
+  "inband14": 0.8644,
+  "inband10": 0.4752,
+  "contact": 0.0307,
+  "honest": true,
+  "hub_F": {
+   "hub1": 50.77,
+   "hub2": 59.77,
+   "hub3": 62.0
+  },
+  "inband_member": {
+   "hub1": 0.9861,
+   "hub2": 0.9989,
+   "hub3": 0.901,
+   "link2": 0.9697,
+   "link1": 0.6712,
+   "neck": 0.8258
+  }
+ },
+ "fit_mode": "fast",
+ "fit_attribution": {
+  "table": {
+   "ws": {
+    "n": 160,
+    "taken": 104,
+    "fold_folded": 1,
+    "fold_stretched": 39,
+    "jam_K2": 0,
+    "parts": 14,
+    "contact": 2
+   },
+   "clip": {
+    "n": 60,
+    "taken": 54,
+    "fold_folded": 0,
+    "fold_stretched": 3,
+    "jam_K2": 0,
+    "parts": 0,
+    "contact": 3
+   },
+   "overhead": {
+    "n": 12,
+    "taken": 0,
+    "fold_folded": 0,
+    "fold_stretched": 9,
+    "jam_K2": 0,
+    "parts": 3,
+    "contact": 0
+   },
+   "across": {
+    "n": 31,
+    "taken": 16,
+    "fold_folded": 0,
+    "fold_stretched": 14,
+    "jam_K2": 0,
+    "parts": 0,
+    "contact": 1
+   },
+   "behind": {
+    "n": 10,
+    "taken": 5,
+    "fold_folded": 0,
+    "fold_stretched": 5,
+    "jam_K2": 0,
+    "parts": 0,
+    "contact": 0
+   }
+  },
+  "contact_by_member": {
+   "link2": 4,
+   "neck": 1
+  },
+  "kin_ws": 0.75,
+  "kin_overhead": 0.25,
+  "th_ws_p5_p95": [
+   24.9,
+   116.0
+  ],
+  "window": [
+   10.4,
+   77.8
+  ],
+  "inband_member": {
+   "hub1": 0.9861,
+   "hub2": 0.9989,
+   "hub3": 0.901,
+   "link2": 0.9697,
+   "link1": 0.6712,
+   "neck": 0.8258
+  }
+ },
+ "wear_mode": "exact",
+ "wear": {
+  "reach": 0.575,
+  "follow": 0.8909,
+  "inband14": 0.867,
+  "inband10": 0.4791,
+  "contact": 0.0615,
+  "poses": {
+   "clip": 110,
+   "ws": 360
+  },
+  "mode": "exact",
+  "gap": 47.86,
+  "inband_member": {
+   "hub1": 0.9858,
+   "hub2": 0.9989,
+   "hub3": 0.9046,
+   "link2": 0.9751,
+   "link1": 0.6738,
+   "neck": 0.8276
+  },
+  "mass_g": 99.7,
+  "mass_g_strap55": 108.2,
+  "closure": 0.783,
+  "flips": 0,
+  "collide": 0.1168,
+  "q": 0.9419,
+  "kmode": "march",
+  "residual_deg": 0.0,
+  "min_margin": 6.15,
+  "inv2": 1,
+  "inv3": 1,
+  "honest": true,
+  "audit": [],
+  "sample_mm": {
+   "hub1": 2.0,
+   "hub2": 2.0,
+   "hub3": 2.0,
+   "link2": 1.71,
+   "link1": 1.72,
+   "neck": 1.97
+  },
+  "hubless": [],
+  "declared_hubs": {},
+  "crown_contact_poses": 3,
+  "crown_min": -1.33,
+  "min_metal_skin": 0.05,
+  "near_low": [
+   {
+    "mm": 0.05,
+    "i": 295,
+    "kind": "ws",
+    "plane": 60.0,
+    "elev": 15.0,
+    "axial": -120.0,
+    "crown": "face"
+   },
+   {
+    "mm": 0.13,
+    "i": 263,
+    "kind": "ws",
+    "plane": 30.0,
+    "elev": 150.0,
+    "axial": -30.0,
+    "crown": "face"
+   },
+   {
+    "mm": 0.3,
+    "i": 49,
+    "kind": "clip",
+    "plane": 70.30000305175781,
+    "elev": 137.8000030517578,
+    "axial": -63.54999923706055,
+    "crown": "face"
+   },
+   {
+    "mm": 0.45,
+    "i": 128,
+    "kind": "ws",
+    "plane": -75.0,
+    "elev": 60.0,
+    "axial": 60.0,
+    "crown": "face"
+   },
+   {
+    "mm": 0.48,
+    "i": 54,
+    "kind": "clip",
+    "plane": 73.12089538574219,
+    "elev": 128.7009735107422,
+    "axial": -63.25957107543945,
+    "crown": "face"
+   }
+  ],
+  "gap_near1": 64.84,
+  "near1": {
+   "reach": 0.5333,
+   "follow": 0.8273,
+   "inband14": 0.8702,
+   "contact": 0.1292
+  },
+  "overhead": {
+   "n_ws": 28,
+   "reach": 0.1429,
+   "n_clip": 10,
+   "follow": 0.6,
+   "n_taken": 10,
+   "inband14": 0.8131,
+   "inband10": 0.5073
+  },
+  "verifier": {
+   "v": {
+    "reach": 0.575,
+    "follow": 0.8909,
+    "inband14": 0.867,
+    "inband10": 0.4791,
+    "contact": 0.0615,
+    "gap": 47.86
+   },
+   "v_near1": {
+    "reach": 0.5333,
+    "follow": 0.8273,
+    "inband14": 0.8702,
+    "inband10": 0.4746,
+    "contact": 0.1292,
+    "gap": 64.84
+   },
+   "top_contact_poses": 1,
+   "top_contact_who": [
+    "hub3"
+   ],
+   "top_min": -3.26,
+   "min_metal_all_faces": 0.05,
+   "closure_residual_max_deg": 6.027249810358626e-10,
+   "hub_F": {
+    "hub1": 50.77,
+    "hub2": 59.77,
+    "hub3": 62.0
+   },
+   "strap_levels": {
+    "link2": {
+     "med": 59.8,
+     "max": 62.0
+    },
+    "link1": {
+     "med": 60.0,
+     "max": 63.8
+    },
+    "neck": {
+     "med": 69.0,
+     "max": 96.0
+    }
+   },
+   "hub_F_ok": true,
+   "n_taken": 305,
+   "n": 470
+  },
+  "model_gap": 47.86,
+  "v": {
+   "reach": 0.575,
+   "follow": 0.8909,
+   "inband14": 0.867,
+   "inband10": 0.4791,
+   "contact": 0.0615,
+   "gap": 47.86
+  },
+  "v_near1": {
+   "reach": 0.5333,
+   "follow": 0.8273,
+   "inband14": 0.8702,
+   "inband10": 0.4746,
+   "contact": 0.1292,
+   "gap": 64.84
+  },
+  "near": 64.84,
+  "hub_F": {
+   "hub1": 50.77,
+   "hub2": 59.77,
+   "hub3": 62.0
+  },
+  "hub_F_ok": true,
+  "min_metal_all_faces": 0.05,
+  "top_contact_poses": 1,
+  "top_contact_who": [
+   "hub3"
+  ],
+  "strap_levels": {
+   "link2": {
+    "med": 59.8,
+    "max": 62.0
+   },
+   "link1": {
+    "med": 60.0,
+    "max": 63.8
+   },
+   "neck": {
+    "med": 69.0,
+    "max": 96.0
+   }
+  },
+  "in_box": true
+ },
+ "wear_attribution": {
+  "table": {
+   "ws": {
+    "n": 360,
+    "taken": 207,
+    "fold_folded": 1,
+    "fold_stretched": 96,
+    "jam_K2": 0,
+    "parts": 43,
+    "contact": 13
+   },
+   "clip": {
+    "n": 110,
+    "taken": 98,
+    "fold_folded": 0,
+    "fold_stretched": 5,
+    "jam_K2": 0,
+    "parts": 0,
+    "contact": 7
+   },
+   "overhead": {
+    "n": 28,
+    "taken": 4,
+    "fold_folded": 0,
+    "fold_stretched": 15,
+    "jam_K2": 0,
+    "parts": 4,
+    "contact": 5
+   },
+   "across": {
+    "n": 68,
+    "taken": 19,
+    "fold_folded": 0,
+    "fold_stretched": 48,
+    "jam_K2": 0,
+    "parts": 1,
+    "contact": 0
+   },
+   "behind": {
+    "n": 25,
+    "taken": 13,
+    "fold_folded": 0,
+    "fold_stretched": 11,
+    "jam_K2": 0,
+    "parts": 0,
+    "contact": 1
+   }
+  },
+  "contact_by_member": {
+   "neck": 5,
+   "link2": 7,
+   "hub2": 4,
+   "hub3": 1,
+   "hub1": 3
+  },
+  "kin_ws": 0.7306,
+  "kin_overhead": 0.4643,
+  "th_ws_p5_p95": [
+   19.3,
+   131.2
+  ],
+  "window": [
+   10.4,
+   77.8
+  ],
+  "inband_member": {
+   "hub1": 0.9858,
+   "hub2": 0.9989,
+   "hub3": 0.9046,
+   "link2": 0.9751,
+   "link1": 0.6738,
+   "neck": 0.8276
+  }
+ },
+ "secs": 635.6,
+ "binders": [
+  {
+   "asked": [
+    -75,
+    60,
+    60
+   ],
+   "pose": [
+    -75.0,
+    60.0,
+    60.0
+   ],
+   "i": 128,
+   "result": "taken",
+   "th": 51.1,
+   "j2_exit_mm": 55.0,
+   "hub2_level": 59.8,
+   "min_mm": 0.45
+  },
+  {
+   "asked": [
+    0,
+    150,
+    0
+   ],
+   "pose": [
+    0.0,
+    150.0,
+    -15.0
+   ],
+   "i": 209,
+   "result": "parts",
+   "th": 56.7,
+   "j2_exit_mm": 49.0,
+   "hub2_level": 59.8,
+   "min_mm": null
+  },
+  {
+   "asked": [
+    30,
+    150,
+    0
+   ],
+   "pose": [
+    30.0,
+    135.0,
+    0.0
+   ],
+   "i": 262,
+   "result": "parts",
+   "th": 41.4,
+   "j2_exit_mm": 51.0,
+   "hub2_level": 59.8,
+   "min_mm": null
+  },
+  {
+   "asked": [
+    0,
+    105,
+    0
+   ],
+   "pose": [
+    0.0,
+    105.0,
+    15.0
+   ],
+   "i": 205,
+   "result": "parts",
+   "th": 48.7,
+   "j2_exit_mm": 57.0,
+   "hub2_level": 59.8,
+   "min_mm": null
+  },
+  {
+   "asked": [
+    30,
+    149,
+    -59
+   ],
+   "pose": [
+    30.0,
+    135.0,
+    -60.0
+   ],
+   "i": 261,
+   "result": "taken",
+   "th": 46.9,
+   "j2_exit_mm": 53.0,
+   "hub2_level": 59.8,
+   "min_mm": 1.94
+  },
+  {
+   "asked": [
+    30,
+    124,
+    -54
+   ],
+   "pose": [
+    30.0,
+    135.0,
+    -60.0
+   ],
+   "i": 261,
+   "result": "taken",
+   "th": 46.9,
+   "j2_exit_mm": 53.0,
+   "hub2_level": 59.8,
+   "min_mm": 1.94
+  },
+  {
+   "asked": [
+    30,
+    135,
+    -45
+   ],
+   "pose": [
+    30.0,
+    135.0,
+    -60.0
+   ],
+   "i": 261,
+   "result": "taken",
+   "th": 46.9,
+   "j2_exit_mm": 53.0,
+   "hub2_level": 59.8,
+   "min_mm": 1.94
+  }
+ ],
+ "score": 82.6
+}

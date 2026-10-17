@@ -174,7 +174,9 @@ shorter a2 (44 vs 51) narrows the window further (to [10.4, 77.8]) but buys foll
 half. Passing it in order needs ~900 more no-gain evaluations (not possible inside this box on the shared local CPU, the
 farm is closed). So the row stays `screened`, with the death measured on the kill bar instead: the frozen exact of the
 37.90 config is 47.88, 15.8 points above the spec's own bar (32.10) - a 0.46-point fast gain cannot close that.
-The frozen exact of 36.63 is in docs/concepts/verify/deltoid-crest-j3-3r_frozen_exact_s6.json when it lands.
+**Frozen exact of 36.63 (Bench(110,360), docs/concepts/verify/deltoid-crest-j3-3r_frozen_exact_s6.json): 47.86 (score 82.6)** -
+reach 0.575, follow 0.891, ib14 0.867, contact 0.062, near-touch 64.84, min metal 0.05 mm, overhead 4 / 28; ws losses
+{"n": 360, "taken": 207, "fold_folded": 1, "fold_stretched": 96, "jam_K2": 0, "parts": 43, "contact": 13}. The 1.27-point fast gain did not transfer (37.90 -> 47.88, 36.63 -> 47.86).
 
 ## Verdict: dead on the kill bar (formal gate open; closing screen)
 
@@ -184,7 +186,7 @@ below 36.63.
 
 Frozen exact 47.88 (score 82.59) against the spec's own kill bar (beat j3-neck-over-3r's 32.10 frozen), the
 zero-complexity optimum's 31.04 frozen exact and the lead's 18.28. 2526 configurations on Bench(60,160) (493 Sobol over
-the crest box x branch x both stack orders, CMA streams s1-s7); best fast 36.63 (frozen pending; 37.90 -> 47.88).
+the crest box x branch x both stack orders, CMA streams s1-s7); best fast 36.63 (frozen exact 47.86; 37.90 -> 47.88).
 
 Limiter (measured): the deltoid-crest J3 seat widens the J1-J3 angle range the J2 dyad must span (p95 143 deg on the big
 bench), so the plain spherical dyad loses the stretched side (90 / 360 workspace, 14 / 28 overhead, 51 / 68 across);

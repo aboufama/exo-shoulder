@@ -38,6 +38,285 @@
  "near_gap": 57.59,
  "frozen_exact": {
   "protocol": "fit Bench(60,160) fast, every level frozen, worn Bench(110,360) exact",
+  "of_fast_gap": 36.63,
+  "of_config": {
+   "az": 105.4971,
+   "el": 63.1176,
+   "a1": 38.6879,
+   "a2": 44.1129,
+   "wd": 103.3777,
+   "wa": 4.934599999999989,
+   "sigma": -1,
+   "inv2": 1,
+   "inv3": 1,
+   "q": 0.9419,
+   "end_extra": 2.5478,
+   "margin": 5.0,
+   "width": 12.0,
+   "t_link": 3.0,
+   "rad1": 10.0,
+   "rad2": 10.0,
+   "rad3": 10.0,
+   "vm": 0,
+   "near": 0
+  },
+  "gap": 47.86,
+  "score": 82.6,
+  "reach": 0.575,
+  "follow": 0.8909,
+  "inband14": 0.867,
+  "inband10": 0.4791,
+  "contact": 0.0615,
+  "near_touch_gap": 64.84,
+  "min_metal_all_faces_mm": 0.05,
+  "honest": true,
+  "hub_F": {
+   "hub1": 50.77,
+   "hub2": 59.77,
+   "hub3": 62.0
+  },
+  "inband_member": {
+   "hub1": 0.9858,
+   "hub2": 0.9989,
+   "hub3": 0.9046,
+   "link2": 0.9751,
+   "link1": 0.6738,
+   "neck": 0.8276
+  },
+  "overhead": {
+   "n_ws": 28,
+   "reach": 0.1429,
+   "n_clip": 10,
+   "follow": 0.6,
+   "n_taken": 10,
+   "inband14": 0.8131,
+   "inband10": 0.5073
+  },
+  "attribution": {
+   "ws": {
+    "n": 360,
+    "taken": 207,
+    "fold_folded": 1,
+    "fold_stretched": 96,
+    "jam_K2": 0,
+    "parts": 43,
+    "contact": 13
+   },
+   "clip": {
+    "n": 110,
+    "taken": 98,
+    "fold_folded": 0,
+    "fold_stretched": 5,
+    "jam_K2": 0,
+    "parts": 0,
+    "contact": 7
+   },
+   "overhead": {
+    "n": 28,
+    "taken": 4,
+    "fold_folded": 0,
+    "fold_stretched": 15,
+    "jam_K2": 0,
+    "parts": 4,
+    "contact": 5
+   },
+   "across": {
+    "n": 68,
+    "taken": 19,
+    "fold_folded": 0,
+    "fold_stretched": 48,
+    "jam_K2": 0,
+    "parts": 1,
+    "contact": 0
+   },
+   "behind": {
+    "n": 25,
+    "taken": 13,
+    "fold_folded": 0,
+    "fold_stretched": 11,
+    "jam_K2": 0,
+    "parts": 0,
+    "contact": 1
+   }
+  },
+  "contact_by_member": {
+   "neck": 5,
+   "link2": 7,
+   "hub2": 4,
+   "hub3": 1,
+   "hub1": 3
+  },
+  "binders": [
+   {
+    "asked": [
+     -75,
+     60,
+     60
+    ],
+    "pose": [
+     -75.0,
+     60.0,
+     60.0
+    ],
+    "i": 128,
+    "result": "taken",
+    "th": 51.1,
+    "j2_exit_mm": 55.0,
+    "hub2_level": 59.8,
+    "min_mm": 0.45
+   },
+   {
+    "asked": [
+     0,
+     150,
+     0
+    ],
+    "pose": [
+     0.0,
+     150.0,
+     -15.0
+    ],
+    "i": 209,
+    "result": "parts",
+    "th": 56.7,
+    "j2_exit_mm": 49.0,
+    "hub2_level": 59.8,
+    "min_mm": null
+   },
+   {
+    "asked": [
+     30,
+     150,
+     0
+    ],
+    "pose": [
+     30.0,
+     135.0,
+     0.0
+    ],
+    "i": 262,
+    "result": "parts",
+    "th": 41.4,
+    "j2_exit_mm": 51.0,
+    "hub2_level": 59.8,
+    "min_mm": null
+   },
+   {
+    "asked": [
+     0,
+     105,
+     0
+    ],
+    "pose": [
+     0.0,
+     105.0,
+     15.0
+    ],
+    "i": 205,
+    "result": "parts",
+    "th": 48.7,
+    "j2_exit_mm": 57.0,
+    "hub2_level": 59.8,
+    "min_mm": null
+   },
+   {
+    "asked": [
+     30,
+     149,
+     -59
+    ],
+    "pose": [
+     30.0,
+     135.0,
+     -60.0
+    ],
+    "i": 261,
+    "result": "taken",
+    "th": 46.9,
+    "j2_exit_mm": 53.0,
+    "hub2_level": 59.8,
+    "min_mm": 1.94
+   },
+   {
+    "asked": [
+     30,
+     124,
+     -54
+    ],
+    "pose": [
+     30.0,
+     135.0,
+     -60.0
+    ],
+    "i": 261,
+    "result": "taken",
+    "th": 46.9,
+    "j2_exit_mm": 53.0,
+    "hub2_level": 59.8,
+    "min_mm": 1.94
+   },
+   {
+    "asked": [
+     30,
+     135,
+     -45
+    ],
+    "pose": [
+     30.0,
+     135.0,
+     -60.0
+    ],
+    "i": 261,
+    "result": "taken",
+    "th": 46.9,
+    "j2_exit_mm": 53.0,
+    "hub2_level": 59.8,
+    "min_mm": 1.94
+   }
+  ],
+  "file": "docs/concepts/verify/deltoid-crest-j3-3r_frozen_exact_s6.json"
+ },
+ "frozen_exact_gap": 47.86,
+ "convergence": {
+  "n": 2526,
+  "best": 36.63,
+  "gain_2nd_half": 1.204,
+  "gain_last_third": 0.462,
+  "top5": [
+   36.63,
+   37.33,
+   37.58,
+   37.76,
+   37.79
+  ],
+  "top5_spread": 0.422,
+  "passed": false
+ },
+ "verdict": "EXPECTED DEAD on the kill bar, formal convergence gate open: best fast 36.63 (score 86.68) on Bench(60,160) after 2526 configs; frozen exact Bench(110,360) of 36.63: 47.86 (score 82.60; reach 0.575, follow 0.891, ib14 0.867, contact 0.062, near-touch 64.84, overhead 4/28) - the fast gain did not transfer (37.90 config: 47.88, score 82.59; reach 0.578 = 208/360, follow 0.873, ib14 0.880, contact 0.059, near-touch 72.17, overhead 4/28) - 15.8 points above the spec's kill bar (j3-neck-over-3r 32.10 frozen), behind the zc-frontier optimum (31.04 frozen) and the lead (18.28). Dominated: the zc optimum below the crest (wd 85.7) reads 30.69 fast through the same code; moved onto the crest (wd 95 / 100) it loses 7.7 / 10.3. Gate after the s6 wide restart: 1.204 / 0.462 / 0.422 (2nd half > 1) - the row stays screened; ~900 more no-gain tries would close it formally.",
+ "limiter": "the J2 fold (stretched side): the crest J3 seat widens the J1-J3 angle range to 20-143 deg (p5-p95, Bench(110,360)) against the dyad window 18.4-84.6 at the best arcs 38.1 / 51.5 -> 90 of 360 ws lost stretched (overhead 14 / 28, across 51 / 68); the arcs that widen the window (a1 >= 44) lift hub 2 to 69-83 mm, 0.02-0.07 in band at O20 (the round-4 equal-arc basin was an O15 / margin-10 artefact). Secondary: part-part at the cap binders (link 1 on hub 2's cap plate), near-touch (min metal 0.01 mm).",
+ "note": "Closing screen (round 14 carried pick; lens plain-crest-j3-cap seed; crest-knee-3r's no-knee control). Model = zc-frontier-3r's build + verifier checks unchanged, search clamped to the crest box (J1 bvec az 30-120 / el 48-80 in ruling 4, J3 wdir wd 95-120 / wa -20..20, a1 34-64, a2 38-70, sigma +-1, inv2 / inv3 0/1, q 0.85-1, end_extra 0-6). Local only (farm closed), niced, <= 2 processes. Sweep: 493 Sobol + CMA s1 (441, from Sobol best 48.05) + s2 (369, long-a1 cap basin, pinned at the box edges a1 64 / el 79: 44.62) + s3 (289, 37.90) + s4 (257, 0 gain) + s5 (311, 0 gain) + s6 (221, wide restart sigma 0.7: 36.63) + s7 (145, 0 gain). CONVERGENCE GATE (score points, sweep in evaluation order, n 2526): gain over 2nd half 1.204, over last third 0.462, top-5 spread 0.422 -> NOT passed (the s6 wide restart's +0.46 landed in the 2nd half; it read 0.742 / 0.149 / 0.244, passed, at n 2160 before s6); the converging chain s3+s4 alone 0.149 / 0.0. Seeds at O20 / margin 5: A 71.21, B 69.65, cap cell 60.39 (judge 62.80). Hub 2 in band by a1: 34-40 0.95 (F 61), 40-46 0.07, 46-52 0.03 (F 80), 52-58 0.02, 58-64 0.76. Best gap by wd: 95-100 40.30, 100-105 37.90, 105-110 45.19, 110-115 60.39, 115-120 77.06. Control (same code, fast): zc optimum 30.69 at wd 85.74 -> 38.43 / 41.01 / 74.85 at wd 95 / 100 / 103.08 (docs/concepts/verify/deltoid-crest-j3-3r_wd_slice.json). Red team: near-touch gap 69.09 fast / 72.17 frozen (min metal 0.12 / 0.01 mm, q 0.943 sets levels at the 94th percentile); no K2 jam; contacts link 2 / hub 2 / hub 1; cap binders (0,150,-15), (30,135,0), (0,105,15) lost to part-part (link 1 on hub 2's cap plate), J2 exits 50-60 mm there (hub 2 F 59.6): the short a1 fixes hub 2 and pays in the fold. Spec corrections: O15 -> O20, margin 10 -> 5, no base stub (CAD ruling 1: handler carries the base at the J1 hub ring). 0 passive translations, complexity 0. Frozen exact of 36.63: 47.86 (docs/concepts/verify/deltoid-crest-j3-3r_frozen_exact_s6.json); of 37.90: 47.88 (frozen_exact_37_90).",
+ "doc": "docs/concepts/deltoid-crest-j3-3r.md",
+ "mechanism": {
+  "active_dof": 3,
+  "passive_trans": 0,
+  "crossed_rails": false,
+  "passive_rot": 0,
+  "moving_bodies": 3,
+  "joints": 3,
+  "closed_loops": 0,
+  "sliding_pairs": 0,
+  "rolling_pairs": 3,
+  "sensed_passive": 0,
+  "springs_or_flexures": 0,
+  "custom_parts": 7,
+  "catalogue_parts": 6,
+  "notes": "plain spherical 3R (three active pins whose axes meet at GH; J3 on the deltoid crest), O20 v5 hub at every joint (MR117-2RS pair each); bodies: link 1, link 2, arm-end (member 3: hub-3 plate + K7 neck rigid on BOTTOM; the stack orders inv2 / inv3 change the plate order, not the part count); base carried by the scapula handler at the J1 hub ring (CAD ruling 1). No slides, springs, loops or sensed passives. custom: base ring, 2 links, arm-end plate + neck, 3 hub shafts (est.); catalogue: 3 x MR117 pair (est., fasteners excluded).",
+  "source": "docs/concepts/models/deltoid-crest-j3-3r.py:1-20 (chain, freedoms, rules)",
+  "confidence": "counted"
+ },
+ "complexity": 0,
+ "frozen_exact_37_90": {
+  "protocol": "fit Bench(60,160) fast, every level frozen, worn Bench(110,360) exact",
   "gap": 47.88,
   "score": 82.59,
   "reach": 0.5778,
@@ -273,44 +552,5 @@
    "near": 0
   },
   "of_fast_gap": 37.9
- },
- "frozen_exact_gap": 47.88,
- "convergence": {
-  "n": 2526,
-  "best": 36.63,
-  "gain_2nd_half": 1.204,
-  "gain_last_third": 0.462,
-  "top5": [
-   36.63,
-   37.33,
-   37.58,
-   37.76,
-   37.79
-  ],
-  "top5_spread": 0.422,
-  "passed": false
- },
- "verdict": "EXPECTED DEAD on the kill bar, formal convergence gate open: best fast 36.63 (score 86.68) on Bench(60,160) after 2526 configs; frozen exact Bench(110,360) of the previous best 37.90: 47.88 (score 82.59; reach 0.578 = 208/360, follow 0.873, ib14 0.880, contact 0.059, near-touch 72.17, overhead 4/28) - 15.8 points above the spec's kill bar (j3-neck-over-3r 32.10 frozen), behind the zc-frontier optimum (31.04 frozen) and the lead (18.28). Dominated: the zc optimum below the crest (wd 85.7) reads 30.69 fast through the same code; moved onto the crest (wd 95 / 100) it loses 7.7 / 10.3. Gate after the s6 wide restart: 1.204 / 0.462 / 0.422 (2nd half > 1) - the row stays screened; ~900 more no-gain tries would close it formally.",
- "limiter": "the J2 fold (stretched side): the crest J3 seat widens the J1-J3 angle range to 20-143 deg (p5-p95, Bench(110,360)) against the dyad window 18.4-84.6 at the best arcs 38.1 / 51.5 -> 90 of 360 ws lost stretched (overhead 14 / 28, across 51 / 68); the arcs that widen the window (a1 >= 44) lift hub 2 to 69-83 mm, 0.02-0.07 in band at O20 (the round-4 equal-arc basin was an O15 / margin-10 artefact). Secondary: part-part at the cap binders (link 1 on hub 2's cap plate), near-touch (min metal 0.01 mm).",
- "note": "Closing screen (round 14 carried pick; lens plain-crest-j3-cap seed; crest-knee-3r's no-knee control). Model = zc-frontier-3r's build + verifier checks unchanged, search clamped to the crest box (J1 bvec az 30-120 / el 48-80 in ruling 4, J3 wdir wd 95-120 / wa -20..20, a1 34-64, a2 38-70, sigma +-1, inv2 / inv3 0/1, q 0.85-1, end_extra 0-6). Local only (farm closed), niced, <= 2 processes. Sweep: 493 Sobol + CMA s1 (441, from Sobol best 48.05) + s2 (369, long-a1 cap basin, pinned at the box edges a1 64 / el 79: 44.62) + s3 (289, 37.90) + s4 (257, 0 gain) + s5 (311, 0 gain) + s6 (221, wide restart sigma 0.7: 36.63) + s7 (145, 0 gain). CONVERGENCE GATE (score points, sweep in evaluation order, n 2526): gain over 2nd half 1.204, over last third 0.462, top-5 spread 0.422 -> NOT passed (the s6 wide restart's +0.46 landed in the 2nd half; it read 0.742 / 0.149 / 0.244, passed, at n 2160 before s6); the converging chain s3+s4 alone 0.149 / 0.0. Seeds at O20 / margin 5: A 71.21, B 69.65, cap cell 60.39 (judge 62.80). Hub 2 in band by a1: 34-40 0.95 (F 61), 40-46 0.07, 46-52 0.03 (F 80), 52-58 0.02, 58-64 0.76. Best gap by wd: 95-100 40.30, 100-105 37.90, 105-110 45.19, 110-115 60.39, 115-120 77.06. Control (same code, fast): zc optimum 30.69 at wd 85.74 -> 38.43 / 41.01 / 74.85 at wd 95 / 100 / 103.08 (docs/concepts/verify/deltoid-crest-j3-3r_wd_slice.json). Red team: near-touch gap 69.09 fast / 72.17 frozen (min metal 0.12 / 0.01 mm, q 0.943 sets levels at the 94th percentile); no K2 jam; contacts link 2 / hub 2 / hub 1; cap binders (0,150,-15), (30,135,0), (0,105,15) lost to part-part (link 1 on hub 2's cap plate), J2 exits 50-60 mm there (hub 2 F 59.6): the short a1 fixes hub 2 and pays in the fold. Spec corrections: O15 -> O20, margin 10 -> 5, no base stub (CAD ruling 1: handler carries the base at the J1 hub ring). 0 passive translations, complexity 0. Frozen exact of 36.63 queued (docs/concepts/verify/deltoid-crest-j3-3r_frozen_exact_s6.json when it lands); the row's frozen_exact block is the 37.90 config's (params in that file).",
- "doc": "docs/concepts/deltoid-crest-j3-3r.md",
- "mechanism": {
-  "active_dof": 3,
-  "passive_trans": 0,
-  "crossed_rails": false,
-  "passive_rot": 0,
-  "moving_bodies": 3,
-  "joints": 3,
-  "closed_loops": 0,
-  "sliding_pairs": 0,
-  "rolling_pairs": 3,
-  "sensed_passive": 0,
-  "springs_or_flexures": 0,
-  "custom_parts": 7,
-  "catalogue_parts": 6,
-  "notes": "plain spherical 3R (three active pins whose axes meet at GH; J3 on the deltoid crest), O20 v5 hub at every joint (MR117-2RS pair each); bodies: link 1, link 2, arm-end (member 3: hub-3 plate + K7 neck rigid on BOTTOM; the stack orders inv2 / inv3 change the plate order, not the part count); base carried by the scapula handler at the J1 hub ring (CAD ruling 1). No slides, springs, loops or sensed passives. custom: base ring, 2 links, arm-end plate + neck, 3 hub shafts (est.); catalogue: 3 x MR117 pair (est., fasteners excluded).",
-  "source": "docs/concepts/models/deltoid-crest-j3-3r.py:1-20 (chain, freedoms, rules)",
-  "confidence": "counted"
- },
- "complexity": 0
+ }
 }
