@@ -120,8 +120,15 @@ puts it. A verifier should re-run with the blended law in the IK.
 | spec placement a_s 8.625 psi 184 (fails the slop gate) | 13.65 | 17.21 | 0.775 | 0.8885 | | 0 |
 | **best: a_s 9.25 psi 154 glev -0.5 blend 10** | **12.88** | **16.47** | 0.775 | 0.8962 | 0.5245 | 0 |
 
-Removing the 6 mm spring cap from hub K buys a little in-band (hub K's crown no longer sticks out of band). The new
-ring sector costs a little: 9 samples, median 13.9 mm, 51 % in band.
+Attribution on the fast bench (ablations of the best configuration):
+
+* **capK 6 -> 0 changes nothing.** keep_cap=1 gives identical numbers, because the cap is never the skin-facing metal.
+* **The ring sector costs 0.33.** ring_rigid=0 gives 12.55 instead of 12.88. It has 9 samples, median 13.9 mm, 51 % in band.
+* **Wall sampling density is worth 0.31 and is a measurement effect.** The sweep ran with groove-desmo's dense outer-wall
+  sampling: rows at 0.3 / 1.0 / 1.5 mm and a 1.5 mm step, about 1 pt / 1 mm^2. That adds 111 in-band horn points and
+  gives 12.88. At the standard ~1 pt / 3-4 mm^2 (one row, 2 mm step) the result is **13.19, +0.19 over the lead's 13.00**.
+  The model now defaults to the standard density, and the claim below is re-run with it. The ranking of stage-1
+  placements does not depend on it.
 
 Convergence gate on the near-touch objective, 136 configurations (76-config farm grid, then 5 ES generations of 12 on
 the farm): gain over the 2nd half 0.00 points, over the last third 0.00, top-5 spread 0.00. **Passes.** The landscape is

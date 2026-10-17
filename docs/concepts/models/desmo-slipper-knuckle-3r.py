@@ -21,7 +21,9 @@ g 2.3934 / beta -176.684 / r_c 15.374, pin knee, O20 stacks. Cell A only (the pi
         contact list;
       - link 2's exit vs the short arm and pin (true 3-D, per taken pose, >= 1 mm, else the pose is lost: 'parts').
   * STAGE 2 (cell A): the verified flank (the parent's synthesis, nose_r, PA gate 43 - atan(mu)) plus an OUTER WALL. The
-    slot is the swept envelope of the nose: path offsets -(nose_r + c_slot + s) n, s in 0.3 / 1.0 / 1.8, plus end caps
+    slot is the swept envelope of the nose: path offsets -(nose_r + c_slot + s) n, s in wall_rows (default one row at 0.75,
+    every wall_step 2.0 mm along the path = ~1 pt / 3 mm2, the standard density; groove-desmo's dense rows 0.3 / 1.0 / 1.5
+    every 1.5 mm add 111 in-band points and read 0.31 lower on the fast bench - a sampling effect), plus end caps
     and a filter that keeps only wall points >= nose_r + 0.3 off the path. The wall is sampled as horn metal (link 1a)
     and checked against the low arm per K step ('CRK-WALL'). The outer-wall pressure angle (the closing drive, now
     positive) is gated at 43 - atan(mu).
@@ -36,7 +38,8 @@ g 2.3934 / beta -176.684 / r_c 15.374, pin knee, O20 stacks. Cell A only (the pi
     CB_EXACT=1 ... frozen|held|flood|redteam '<json>' [out.json];  ... slop '<json>' (drive gate only)
     ... claims '[{"tag","mode","params"}]' outdir      (one farm job, claim columns in parallel)
     hooks: bench_eval(B, params) (tools/concept_sweep.py), evaluate(B, params) (tools/concept_cma.py)
-    DS_CONTROL=1: the desmo additions off (capK 6, no groove / wall): must reproduce the lead's 13.0 fast.
+    DS_CONTROL=1: the desmo additions off (capK 6, no groove / wall): reproduces the lead's 13.00 fast, 18.49 frozen exact,
+    23.45 held (farm, 2026-10-17). Ablations: keep_cap=1 (the 6 mm cap back: no change), ring_rigid=0 (ring sector off).
 """
 import importlib.util, json, math, os, sys, time
 import numpy as np

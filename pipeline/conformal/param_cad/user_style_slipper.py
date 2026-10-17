@@ -95,7 +95,19 @@ FITS.append(dict(where="knee pin e-clips", fit="DIN 6799 RS 2.3 in a O2.3 x 0.6 
 FITS.append(dict(where="K phase (assembly; docs/HANDOFF.md 14:30 + docs/research/slipper_flank_robust.md)", fit="build the +0.75 deg K lead: lobe-ring key dowel at the "
                  "onset phase + 0.35 deg of q2, J2 stop B slot end at q2 -15.47 (the CAD draws the nominal -15.82 = the loaded state); keep the verified flank "
                  "(beta -176.684, no beta step); nose hole / crank pivot / lobe profile +-0.02 mm true position, r_c +-0.1 mm; assembly note: K phase at the "
-                 "onset +0.75 +-0.3 deg, shim the key dowel"))
+                 "onset +0.75 +0.15 / -0.10 deg (was +-0.3: wider than the red team's stack covers; docs/research/user_slipper_nose_fix.md), shim the key dowel"))
+FITS.append(dict(where="wear-test pass line (nose on the DLC flank; docs/HANDOFF.md section 9, docs/alignment/slipper-nose-knuckle-3r.md 15:17 audit)",
+                 fit="PASS only if the measured nose / flank friction mu <= 0.105 over the wear test (the horn's 43-deg pressure-angle rule caps mu at "
+                     "0.108-0.113; the R17 forward bound at mu 0.15 is 5.00081 deg raw = FAIL on the unrounded gate (judge/dynamics.py 8f69bd6), "
+                     "at mu 0.12 4.78 deg); verified at mu 0.087"))
+FITS.append(dict(where="knee stop tooth (knee link) against the E strap's side face", fit="stop at knee angle 180 - ang_min = 154.78 deg, 1.62 deg above "
+                 "the workspace's largest knee angle 153.16 (clips <= 130.6): tooth face and the E strap's side face profile +-0.02 mm each (EDM / ground) "
+                 "-> +-0.04 mm stack at the 6.8 mm contact radius = +-0.34 deg, stop 154.44..155.12, >= 1.28 deg margin; ISO 2768-f (+-0.05 each) would "
+                 "leave 0.78 deg"))
+FITS.append(dict(where="crank running faces (D9-01 against links 1a / 1b / 2; the posed drive check's 0.086-0.123 mm running gaps)",
+                 fit="the crank's two boss faces + arm sides and the facing pads of links 1a / 1b / 2: profile +-0.02 mm (worst two-face stack 0.04 "
+                     "< the 0.086 mm smallest gap); ISO 2768-f (+-0.05, stack 0.10) could close the 0.086 gap - never leave these faces to the general "
+                     "tolerance"))
 
 
 # ---------------------------------------------------------------------------------------------------- link 1a
@@ -155,6 +167,7 @@ def arbor_pin_roller(k, F):
 
 
 # ---------------------------------------------------------------------------------------------------- links 1b, 2 (USM.build_links, link 1a replaced)
+LINK_MARGIN = dict(l1b=None, l2=None)          # set by main (--link-margin / --l1b-margin): USM.MARGIN while each bar's profile is built
 def build_links(M, stops, lug):
     """USM.build_links' links 1b and 2 (copied: the 4-strip machined bars, pads, rings, bores, pins, slots, dowels), link 1a = link1a_body"""
     Uu, C, F4, hr = BM.joints4(M); prof = BM.link_rows(M); out = []; rep = {}; H = lambda j: C[j] + F4[j] * Uu[j]
@@ -167,7 +180,9 @@ def build_links(M, stops, lug):
                        f"{math.degrees(q_hi - q_lo):.1f}-deg stop slots in the K pad; the flank lug (the r 1.25 conjugate flank: 4 tangent arcs; 4-axis UV wire-EDM ruled surface, a-C:H DLC) + its web (Ti-6Al-4V)", body))
     print(f"  link 1a: valid {body.isValid()}, solids {len(body.Solids())}, faces {len(body.Faces())}; {rep['link 1a']}", flush=True)
     # ---- link 1b: K upper (1) -> J2 lower (2)   (USM.build_links, copied)
-    body, ex, ey, start, fit, r, Ls, rf, sd_b = link_gh(M, prof, "L1b", "link 1b", 1, 2, True, False)
+    m0 = USM.MARGIN; USM.MARGIN = LINK_MARGIN["l1b"] if LINK_MARGIN["l1b"] is not None else m0
+    try: body, ex, ey, start, fit, r, Ls, rf, sd_b = link_gh(M, prof, "L1b", "link 1b", 1, 2, True, False)
+    finally: r_m1b = USM.MARGIN; USM.MARGIN = m0
     body = US.glue(USP.plate_R(Uu[1], F4[1] + LV["U0"], ey, W, hr[1], L=Ls, upper=True, rf=rf), body)
     body = US.glue(body, USP.plate_R(Uu[2], F4[2], sd_b, W, hr[2], L=Ls, rf=rf))
     body, npk = US.with_pocket_r(body, ex, ey, start, fit["segs"]) if fit["segs"] else (body, 0)
@@ -185,7 +200,7 @@ def build_links(M, stops, lug):
     body, sl_1b = USM.sliver_free(body, "link 1b")
     out.append(("l1b", f"D8-02b link 1b: 8x3 bar on a line/arc chain, K upper pad + O20 ring + M18 spigot + bore (2 dowel holes), J2 pad + integral O7 pin "
                        f"with the {math.degrees(q_hi - q_lo):.1f}-deg q2 stop slot; carries the crank pivot pin ({r['process']})", body))
-    rep["link 1b"] = dict(fit, **r, pocket=npk, valid=body.isValid(), solids=len(body.Solids()), slivers=sl_1b)
+    rep["link 1b"] = dict(fit, **r, pocket=npk, valid=body.isValid(), solids=len(body.Solids()), slivers=sl_1b, margin_mm=r_m1b)
     print(f"  link 1b: valid {body.isValid()}, solids {len(body.Solids())}, faces {len(body.Faces())}, pocket {npk}", flush=True)
     out += dws
     # ---- link 2: J2 upper (2) -> J3 upper (3, offset line)   (USM.build_links, copied)
@@ -198,7 +213,9 @@ def build_links(M, stops, lug):
     Ls, rf = USP.HUG_SEAT, USP.HUG_RF; start = (ha, Ls, math.pi / 2); end = (*(B + Ls * back), math.pi / 2 + phi)
     Dq, Rq = link_cols(M, *prof["L2"])
     axes = [((0.0, 0.0), (1.0, 0.0)), (tuple(B), (math.cos(phi), math.sin(phi)))]
-    body, r = (USM.profile_link_split if USM.SPLIT else USM.profile_link)("link 2", ex, ey, start, end, Dq, Rq, axes, [hr[2], hr[3]]); fit = dict(segs=None)
+    m0 = USM.MARGIN; USM.MARGIN = LINK_MARGIN["l2"] if LINK_MARGIN["l2"] is not None else m0
+    try: body, r = (USM.profile_link_split if USM.SPLIT else USM.profile_link)("link 2", ex, ey, start, end, Dq, Rq, axes, [hr[2], hr[3]]); fit = dict(segs=None)
+    finally: r_m2 = USM.MARGIN; USM.MARGIN = m0
     back_w = math.sin(phi) * ex - math.cos(phi) * ey
     body = US.glue(USP.plate_R(u[1], F[1] + LV["U0"], ey, W, hr[2], L=Ls, upper=True, rf=rf), body)
     body = US.glue(body, at(USP.plate_R(u[2], F[2] + LV["U0"], back_w, W, hr[3], L=Ls + 0.6, upper=True, rf=rf), c[2]))
@@ -215,7 +232,7 @@ def build_links(M, stops, lug):
     body = body.clean() if body.clean().isValid() else body
     body, sl_2 = USM.sliver_free(body, "link 2")
     out.append(("l2", f"D8-03 link 2: 8x3 bar on a line/arc chain + J2 / J3 O20 rings, J2 dowel hole, flies over the knee and the pad ({r['process']})", body))
-    rep["link 2"] = dict(**r, seat_mm=Ls, pad_round_mm=rf, u3_lean_out_of_plane_deg=lean, valid=body.isValid(), solids=len(body.Solids()), slivers=sl_2)
+    rep["link 2"] = dict(**r, seat_mm=Ls, pad_round_mm=rf, u3_lean_out_of_plane_deg=lean, valid=body.isValid(), solids=len(body.Solids()), slivers=sl_2, margin_mm=r_m2)
     print(f"  link 2: valid {body.isValid()}, solids {len(body.Solids())}, faces {len(body.Faces())}", flush=True)
     return out, rep
 
@@ -362,7 +379,18 @@ def lobe_ring(M, lg, dg, lay):
     return ring, info, dict(e_ext=e_ext, O=O, bx=bx, by=by, Cp=Cp, q2=q2, dk=dk)
 
 
-def flank_lug(M, dg):
+def lug_trim_radius(wall):
+    """trimlug-k165-knuckle-3r's cut on the built r 1.25 flank: r_trim = the farthest flank contact from K's axis over the drive's own range
+    [0, dK_lim] (flank_bench_r125.csv contact points, link 1a's frame) + wall; the model's is 19.77 + 1.5 = 21.27 at its r 1.1839 nose"""
+    import csv
+    uK = unit(np.array(SPEC["uK"], float)); lim = float(SPEC["dK_lim_deg"])
+    rows = list(csv.DictReader(open(os.path.join(REPO, "docs", "research", "slipper_mechanism", "flank_bench_r125.csv"))))
+    X = np.array([[float(r_["contact_" + a_]) for a_ in "xyz"] for r_ in rows if float(r_["dK_deg"]) <= lim + 1e-9])
+    rK = np.linalg.norm(X - (X @ uK)[:, None] * uK, axis=1)
+    return float(rK.max()) + float(wall), float(rK.max())
+
+
+def flank_lug(M, dg, trim_wall=None):
     """link 1a's flank lug (link 1a home frame): the red team's 3 tangent arcs (results_bench flank_arcs, fit within 3 um of the
     exact flank, dK 0 -> 48.25) closed by their 6 mm back offsets (concentric arcs) and two normal end lines, in flank_sketch_frame,
     extruded straight along z_c over the 3 mm lug (h0 +- 1.5); the web to the K pad: an inner tab at the pad level (fK .. fK + 3,
@@ -397,12 +425,20 @@ def flank_lug(M, dg):
     hl = float(M.p["hl"])
     riser = prism((fK + hl) * uK, e, f, quad, [0] * 4, 14.0).cut(disc(np.zeros(3), ez, 90.0, h0, h0 + 40.0))   # top = the lug's mid plane (embedded 1.5)
     web = US.glue(inner, riser.intersect(ball))
-    z_lug = h0
+    z_lug = h0; trim = None
+    if trim_wall is not None:                                                                  # trimlug-k165-knuckle-3r: ONE coaxial cylinder cut about uK
+        r_trim, r_c_max = lug_trim_radius(trim_wall); assert np.allclose(uK, unit(np.array(SPEC["uK"], float)), atol=1e-6)
+        cyl = disc(np.zeros(3), uK, r_trim, -120.0, 120.0); v0 = lug.Volume() + web.Volume()
+        lug = lug.intersect(cyl); web = web.intersect(cyl)
+        trim = dict(rule="trimlug-k165-knuckle-3r: lug band kept where r_K <= the farthest flank contact over [0, dK_lim] + wall (one cylinder about uK)",
+                    wall_mm=float(trim_wall), contact_r_max_mm=round(r_c_max, 3), r_trim_mm=round(r_trim, 3), model_r_trim_mm=21.27,
+                    removed_mm3=round(v0 - lug.Volume() - web.Volume(), 2), lug_solids=len(lug.Solids()), web_solids=len(web.Solids()))
+        print(f"  lug trim: r_K <= {r_trim:.2f} (contact max {r_c_max:.2f} + {trim_wall:g}), removed {trim['removed_mm3']} mm3, valid {lug.isValid()} / {web.isValid()}", flush=True)
     info = dict(arcs=[dict(r=r_, dK=a["dK"]) for r_, a in zip(Rs, arcs)], built_to_dK=DK_FLANK, nose_r=NOSE_R,
                 extrude="CAD: the mid-plane section extruded straight along z_c (one constant section); DRAWING: the exact ruled surface by 4-axis UV wire EDM "
                         "(taper 0.14-2.74 deg, <= 0.072 mm off the straight extrude at +-1.5); top trimmed to the sphere r h0 + 1.5 (the model's lug band)",
                 lug_band_mm=[round(h0 - 1.5, 3), round(h0 + 1.5, 3)], back_mm=LUG_BACK, web_bottom_over_fK_mm=round(hl, 3),
-                lug_valid=lug.isValid(), web_valid=web.isValid())
+                lug_valid=lug.isValid(), web_valid=web.isValid(), trim=trim)
     return [lug, web], info
 
 
@@ -556,18 +592,18 @@ def knee_pin_bb(name, cen, sn, tr, tp, lower_grp, knee_grp, cen_knee=None):
     zc0 = z0 + KB_H + KSHIM_T; ztop = zc0 + KCLIP_T + KCLIP_LAND
     pin = rev([(0.0, tr), (r - 0.2, tr), (r, tr + 0.2), (r, zc0), (KGROOVE_R, zc0), (KGROOVE_R, zc0 + KCLIP_T), (r, zc0 + KCLIP_T), (r, ztop - 0.2),
                (r - 0.2, ztop), (0.0, ztop)], cen, sn)
-    hw = [(lower_grp, f"pin {name}: ISO 8734 3 m6 x {ztop - tr:.1f} 440C (1.4125) pressed H7/m6 in the {'E boss' if name == 'a' else 'arm pad'} over its full "
+    hw = [(lower_grp, f"knee pin {name} ISO 8734 3 m6 x 10 faced to {ztop - tr:.1f}: 440C (1.4125) pressed H7/m6 in the {'E boss' if name == 'a' else 'arm pad'} over its full "
                       f"{tp:.2f} mm, O2.3 x 0.6 e-clip groove with a {KCLIP_LAND:g} mm land (polished)", pin),
-          (lower_grp, f"pin {name}: inner-ring spacer O3.1 x O4.5 x {run:g} (stainless, polished)", rev([(r + 0.05, tr + tp), (2.25, tr + tp), (2.25, z0), (r + 0.05, z0)], cen, sn))]
+          (lower_grp, f"knee pin {name} spacer: inner-ring spacer O3.1 x O4.5 x {run:g} (stainless, polished)", rev([(r + 0.05, tr + tp), (2.25, tr + tp), (2.25, z0), (r + 0.05, z0)], cen, sn))]
     hb = (KB_H - KB_SHOULDER) / 2
     for j, zz in enumerate((z0, z0 + hb + KB_SHOULDER)):
-        hw.append((knee_grp, f"pin {name}: knee bearing {j + 1} of 2 MR63ZZ 3x6x2.5 (J6 housing, the pin's free length j5) (polished)",
+        hw.append((knee_grp, f"knee pin {name} bearing {j + 1} MR63ZZ: knee bearing {j + 1} of 2 MR63ZZ 3x6x2.5 (J6 housing, the pin's free length j5) (polished)",
                    rev([(r, zz), (3.0, zz), (3.0, zz + hb), (r, zz + hb)], ck, sn)))
-    hw.append((lower_grp, f"pin {name}: shim O3.1 x O4.5 x {KSHIM_T:g} under the clip (stainless, polished)", rev([(r + 0.05, z0 + KB_H), (2.25, z0 + KB_H), (2.25, zc0), (r + 0.05, zc0)], cen, sn)))
+    hw.append((lower_grp, f"knee pin {name} shim: O3.1 x O4.5 x {KSHIM_T:g} under the e-clip (stainless, polished)", rev([(r + 0.05, z0 + KB_H), (2.25, z0 + KB_H), (2.25, zc0), (r + 0.05, zc0)], cen, sn)))
     clip = rev([(KGROOVE_R + 0.01, zc0), (KCLIP_R, zc0), (KCLIP_R, zc0 + KCLIP_T), (KGROOVE_R + 0.01, zc0 + KCLIP_T)], cen, sn)
     e, f = (PB.axis_frame(sn)[:, 0], PB.axis_frame(sn)[:, 1])
     clip = clip.cut(prism(np.asarray(cen) + (zc0 - 0.5) * sn, e, f, [(0.9, -1.15), (4.0, -1.15), (4.0, 1.15), (0.9, 1.15)], [0, 0, 0, 0], KCLIP_T + 1.0))
-    hw.append((lower_grp, f"pin {name}: retaining e-clip DIN 6799 RS 2.3 (A2 stainless, polished)", clip))
+    hw.append((lower_grp, f"knee pin {name} e-clip DIN 6799 RS 2.3: retaining e-clip (A2 stainless, polished)", clip))
     seat = disc(cen, sn, 1.0, tr + 0.3, tr + tp - 0.3)                                          # inside the plate: the fuse leaves the plate as it was
     return seat, hw
 
@@ -815,6 +851,15 @@ def main():
     ap = argparse.ArgumentParser(); ap.add_argument("--out", default="user_slipper_nose"); ap.add_argument("--l1", default="l1_slipper-nose")
     ap.add_argument("--skip-base-search", action="store_true"); ap.add_argument("--checks-only", action="store_true")
     ap.add_argument("--working-end-only", action="store_true", help="only the working-end check on the built design (no rebuild)")
+    ap.add_argument("--link-margin", type=float, default=0.1, help="links 1b / 2: underside clearance over the model strap outside the hub "
+                    "footprints (USM.MARGIN; gen-7 v1 0.1, the fix 0)")
+    ap.add_argument("--l1b-margin", type=float, default=None, help="link 1b's own margin (default = --link-margin)")
+    ap.add_argument("--lug-trim", type=float, default=None, help="trimlug-k165-knuckle-3r: cut the flank lug + web at r_K <= the farthest flank "
+                    "contact over [0, dK_lim] + this wall (mm; the verified row: 1.5)")
+    ap.add_argument("--e-hull", choices=("hull", "stations"), default="hull", help="member 3's E strap underside: the upper hull of the model's "
+                    "stations (gen-7 v1) or the stations themselves (the fix: no bridge over the strap's dips)")
+    ap.add_argument("--id", default="slipper-nose-knuckle-3r", help="the verified row this CAD builds (label / design.json)")
+    ap.add_argument("--no-checks", action="store_true", help="stop after the export (no posed drive / kinematics / skin / working-end checks)")
     a = ap.parse_args(MY_ARGV); t0 = time.time(); dd = os.path.join(FULL, "designs", a.out); os.makedirs(os.path.join(dd, "step"), exist_ok=True)
     if a.working_end_only:
         r = working_end(dd); print(json.dumps(r, indent=1, default=float)); json.dump(r, open(os.path.join(dd, "judge", "working_end.json"), "w"), indent=1, default=float); return
@@ -834,6 +879,8 @@ def main():
     for key in ("K", "J2"):
         q_lo, q_hi, meta = lg[key]; homes = [math.radians(x) for x in l1_stops[key]["dowel_home_angles_deg"]]
         stops[key] = dict(q=(q_lo, q_hi), meta=meta, homes=homes, pair_placed_in_l1=bool(l1_stops[key].get("pair")))
+    if a.checks_only:                                                                          # the checks alone on the built design (same fit, same stops)
+        rep = json.load(open(os.path.join(dd, "build.json"))); run_checks(M, dd, stops, rep, t0); return
     rep = dict(fit=dict(params=dict(RL1.CFG), source=f"docs/concepts/rows/{RL1.ID}.json best_params (mu {RL1.CFG.get('mu')}, ang_min {RL1.CFG['ang_min']}) through the claim's SNModel, SN_CELL=lead (= {a.l1})",
                         gap_near_touch=rep0["gap"], hub_levels_J1_K_J2_J3=[float(x) for x in F4], tr=float(M.tr), m=[float(x) for x in D.m], hubs=[float(x) for x in hr],
                         fold_margin_deg=float(KIT.FOLD_MARGIN), l1_design=a.l1),
@@ -842,7 +889,9 @@ def main():
                j2_push_limit=USM.j2_push_limit(), law=lg["law"])
     parts = []
     hw, rep["hubs"] = hubs(M); parts += hw
-    lug, rep["flank lug"] = flank_lug(M, dg)
+    LINK_MARGIN.update(l1b=a.l1b_margin if a.l1b_margin is not None else a.link_margin, l2=a.link_margin)
+    USP.E_UNDERSIDE = a.e_hull
+    lug, rep["flank lug"] = flank_lug(M, dg, a.lug_trim)
     lk, rep["links"] = build_links(M, stops, lug)
     l1b_body = next(s for g, n, s in lk if n.startswith("D8-02b"))
     lay = drive_layout(M, lg, dg, l1b_body)
@@ -863,7 +912,7 @@ def main():
     parts.append(("l2", f"D9-02 drive lobe ring: 17-4PH H900, wire-EDM (taper {rep['lobe']['e_ext_to_u2_deg']:.1f} deg along the follower axis), profile r "
                         f"{rep['lobe']['profile_r_mm'][0]:.2f} -> {rep['lobe']['profile_r_mm'][1]:.2f} mm ({rep['lobe']['arcs']} 3-point arcs), dwell r {rep['lobe']['dwell_r_mm']:.2f}, "
                         f"bore O20 on the J2 cap skirt, band F+{rep['lobe']['band_over_f2_mm'][0]:.2f}..F+{rep['lobe']['band_over_f2_mm'][1]:.2f}, keyed by an O1 dowel at the "
-                        "onset + 0.23 deg (K bias)", ring))
+                        "onset phase + 0.35 deg of q2 (the +0.75 deg K lead, +0.15 / -0.10 deg K; the CAD draws the nominal phase = the loaded state)", ring))
     parts += cp
     USP.pin_stack = knee_pin_bb                                                                # the knee pins: MR63ZZ pairs (member3 / arm_side call pin_stack)
     m3, rep["member 3"] = USP.member3(M); parts += [(g, n, s) for g, _, n, s in m3]
@@ -908,13 +957,18 @@ def main():
     # ---- export
     HR = BM.HR
     allp = [(g, n, xform(s, HR, np.zeros(3)) if g == "H" else s, GROUPS[g]) for g, n, s in parts] + [(g, n, s, None) for g, n, s in users]
-    for f in os.listdir(os.path.join(dd, "step")): os.remove(os.path.join(dd, "step", f))
+    for f in os.listdir(os.path.join(dd, "step")):
+        if os.path.isfile(os.path.join(dd, "step", f)): os.remove(os.path.join(dd, "step", f))
+    sd_stock = os.path.join(dd, "step", "stock"); os.makedirs(sd_stock, exist_ok=True)                 # the verifier's item (5b): stock hardware STEPs
+    for f in os.listdir(sd_stock): os.remove(os.path.join(sd_stock, f))                                # for the drawing set, OUTSIDE step/ (R7 judges custom parts)
     USER = ("TOP", "MIDDLE", "FOREARM", "Hex", "M4 ULTRA", "IGUS", "5mm", "Revolve", "CirPattern")
     sc = trimesh.Scene(); pf = []
     for i, (g, n, s, mem) in enumerate(allp):
         user = n.startswith(USER); hwr = not n.startswith(("D8-", "D9-")) and any(k in n.lower() for k in ("screw", "m4x6", "clip"))
         if not user and not hwr:
             cq.exporters.export(cq.Workplane().add(s), os.path.join(dd, "step", f"{i:02d}_{n.split(':')[0].replace('/', '_').replace(' ', '_')[:40]}.step"))
+        elif hwr:
+            cq.exporters.export(cq.Workplane().add(s), os.path.join(sd_stock, f"{i:02d}_{n.split(':')[0].replace('/', '_').replace(' ', '_').replace('.', 'p')[:60]}.step"))
         trep = {}; m = tess_safe(s, fine=not user, report=trep)
         sc.add_geometry(m, node_name=f"{g}|{n}|{i}", geom_name=f"{g}|{n}|{i}")
         mm = m.copy(); mm.merge_vertices(); vol = abs(mm.volume) if mm.is_watertight else s.Volume()
@@ -929,7 +983,13 @@ def main():
         J = json.load(open(os.path.join(L1D, fn))); frs = [f for c in J["clips"] for f in c["frames"]] if fn == "clips.json" else J["poses"]
         assert all("dk" in f["G"] for f in frs if "G" in f and "l1b" in f["G"]), f"{fn}: the L1's frames lack group dk"
         shutil.copy(os.path.join(L1D, fn), os.path.join(dd, fn))
-    d = dict(l1d); d.update(id=a.out, label="slipper-nose-knuckle-3r (verified config, mu 0.087, ang_min 25.22), full CAD in the user's style", level="L2 user-style (full CAD of the generation-7 winner)",
+    lab_ = ("slipper-nose-knuckle-3r (verified config, mu 0.087, ang_min 25.22), full CAD in the user's style" if a.lug_trim is None else
+            f"{a.id} (slipper-nose-knuckle-3r + the horn lug trimmed at the farthest flank contact + {a.lug_trim:g} mm wall; verified 18.51 / 23.47), "
+            "full CAD in the user's style")
+    d = dict(l1d); d.update(id=a.out, label=lab_, row_id=a.id, level=("L2 user-style (full CAD of the generation-7 winner)" if a.lug_trim is None else
+                                                                   "L2 user-style (full CAD of the round-11 winner)"),
+                            build_fixes_2026_10_17=dict(link_margin_mm=dict(l1b=LINK_MARGIN["l1b"], l2=LINK_MARGIN["l2"]), e_underside=a.e_hull,
+                                                        lug_trim_wall_mm=a.lug_trim, note="docs/research/user_slipper_nose_fix.md"),
                             l1_design=a.l1,
                             built_with="pipeline/conformal/param_cad/user_style_slipper.py (user_style_minarc / user_style_pinknee parts: v5 O20 hubs, K plain clock-spring cap, "
                                        "link 1a as one line/arc chain (60-deg ramp, machined) + the r 1.25 flank lug, 4-strip machined bars 1b / 2, O3 dowel-in-arc-slot stops (K opposed "
@@ -939,7 +999,10 @@ def main():
     d["drive_build"] = dict(kind="slipper-nose (docs/research/slipper_mechanism_redteam.md section 6): lobe ring (l2) -> MR63ZZ follower at a_s 6.5 / psi 216 between the two "
                                  "683ZZ of the straddle bell crank (dk, O3 pin in link 1b) -> bent arm -> ISO 8734 O2.5 nose (DLC, mu 0.087) sliding on the r 1.25 conjugate flank "
                                  "(4 arcs, UV wire EDM, DLC) on link 1a's lug (l1a); one clock spring in K's cap closes both pairs",
-                            nose_r=NOSE_R, mu=float(RL1.CFG.get("mu", 0.087)),
+                            nose_r=NOSE_R, mu=float(RL1.CFG.get("mu", 0.087)), wear_test_pass_mu_max=0.105,
+                            wear_test_note="PASS only at measured mu <= 0.105: the horn's 43-deg rule caps mu at 0.108-0.113; the R17 forward bound at mu 0.15 is "
+                                           "5.00081 deg raw = FAIL on the unrounded gate (judge/dynamics.py 8f69bd6); mu 0.12 4.78",
+                            lug_trim=rep["flank lug"].get("trim"),
                             crank_raise_mm=round(lay["raise_mm"], 3), follower_shift_mm=round(lay["follower_shift_mm"], 3), kK=float(RL1.CFG["kK"]), g=float(RL1.CFG["g"]))
     json.dump(d, open(os.path.join(dd, "design.json"), "w"), indent=1, default=float)
     ours = [p for p in pf if p["material"] != "user part"]
@@ -951,10 +1014,27 @@ def main():
     rep["layout"] = {k: (np.round(v, 4).tolist() if isinstance(v, np.ndarray) else v) for k, v in lay.items()}
     json.dump(rep, open(os.path.join(dd, "build.json"), "w"), indent=1, default=float)
     print(f"exported {len(pf)} parts -> {dd}; mass {rep['mass_g']}; invalid or multi-solid: {bad or 'none'} ({time.time() - t0:.0f} s)", flush=True)
+    if a.no_checks:
+        rep["checks"] = "not run in this pass (--no-checks): run --checks-only on this design"
+        json.dump(rep, open(os.path.join(dd, "build.json"), "w"), indent=1, default=float)
+        print(f"--no-checks: stopped after the export ({time.time() - t0:.0f} s)", flush=True); return
+    run_checks(M, dd, stops, rep, t0)
+
+
+def run_checks(M, dd, stops, rep, t0):
+    """the post-export checks (posed drive pairs, the model's metal vs the posed parts, drive skin, working end) on the built design dd"""
+    rep.pop("checks", None)
     rep["drive_posed"] = posed_drive_check(dd); print(f"drive posed (mm, at dK): {rep['drive_posed']}", flush=True)
     json.dump(rep, open(os.path.join(dd, "build.json"), "w"), indent=1, default=float)
     rep["check"] = check_frames(M, dd, stops)
-    rep["kinematics_exact"] = dict(poses=len(rep["check"]), all_within_0p5=all(r["within_0p5"] for r in rep["check"]),
+    keys = sorted({k for r in rep["check"] for k in r["per_part"] if " " not in k})
+    outside = {k: max(float(r["per_part"][k][2]) for r in rep["check"] if k in r["per_part"]) for k in keys}
+    # the gen-7 verifier (VERIFY.md 1 + 4): the old flag all_within_0p5 tested the joint features and frames only; renamed, and the per-part
+    # table of the model's metal OUTSIDE the built solids (winding number, the verifier's measure) added - the crank's is the model artefact
+    rep["kinematics_exact"] = dict(poses=len(rep["check"]), joint_features_and_frames_within_0p5=all(r["within_0p5"] for r in rep["check"]),
+                                   model_metal_outside_built_max_mm={k: round(v, 3) for k, v in outside.items()},
+                                   model_metal_within_0p5_except_crank=all(v <= 0.5 for k, v in outside.items() if k != "crank"),
+                                   crank_note="the model's crank samples (arm root inside link 1b's strap) are a model artefact (gen-6 L1 7.12); the built crank is the red team's",
                                    max_frame_dev_mm=max(r["frame_dev_mm"] for r in rep["check"]), max_joint_feature_mm=max(r["joint_features_max_mm"] for r in rep["check"]),
                                    dowels_in_slots=all(r["stops"]["K"]["inside"] and r["stops"]["J2"]["inside"] for r in rep["check"]))
     json.dump(rep, open(os.path.join(dd, "build.json"), "w"), indent=1, default=float)
