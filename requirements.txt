@@ -6,5 +6,6 @@ trimesh==4.12.2
 scikit-image==0.24.0
 matplotlib==3.9.4
 torch>=2.2          # CPU build is enough for the local evaluator / map cache
+mujoco>=3.1           # judge/dynamics.py (R11, R17); without it those two judges are skipped
 # optional
 # runpod-flash==1.20.1   # GPU search + renders on RunPod (install as a uv tool: uv tool install runpod-flash)
