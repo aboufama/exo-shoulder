@@ -103,7 +103,10 @@
     "axial": 75.0,
     "th": 83.23,
     "dK": 10.37,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 455,
@@ -112,7 +115,10 @@
     "axial": 135.0,
     "th": 83.75,
     "dK": 11.29,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 459,
@@ -121,7 +127,10 @@
     "axial": 75.0,
     "th": 76.83,
     "dK": 0.0,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 463,
@@ -130,7 +139,10 @@
     "axial": 135.0,
     "th": 92.41,
     "dK": 25.28,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 467,
@@ -139,7 +151,10 @@
     "axial": 75.0,
     "th": 71.65,
     "dK": 0.0,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 471,
@@ -148,7 +163,10 @@
     "axial": 135.0,
     "th": 102.99,
     "dK": 40.71,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 475,
@@ -157,7 +175,10 @@
     "axial": 75.0,
     "th": 67.24,
     "dK": 0.0,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 479,
@@ -166,7 +187,10 @@
     "axial": 135.0,
     "th": 112.86,
     "dK": 54.94,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 483,
@@ -175,7 +199,10 @@
     "axial": 75.0,
     "th": 63.73,
     "dK": 0.0,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 487,
@@ -184,7 +211,10 @@
     "axial": 135.0,
     "th": 119.06,
     "dK": 64.51,
-    "kin": false
+    "kin": false,
+    "closed": false,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 491,
@@ -193,7 +223,10 @@
     "axial": 60.0,
     "th": 83.23,
     "dK": 10.37,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 495,
@@ -202,7 +235,10 @@
     "axial": 120.0,
     "th": 83.75,
     "dK": 11.29,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 499,
@@ -211,7 +247,10 @@
     "axial": 60.0,
     "th": 73.51,
     "dK": 0.0,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 503,
@@ -220,7 +259,10 @@
     "axial": 120.0,
     "th": 88.97,
     "dK": 19.96,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 507,
@@ -229,7 +271,10 @@
     "axial": 60.0,
     "th": 65.22,
     "dK": 0.0,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 511,
@@ -238,7 +283,10 @@
     "axial": 120.0,
     "th": 96.23,
     "dK": 30.97,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 515,
@@ -247,7 +295,10 @@
     "axial": 60.0,
     "th": 58.26,
     "dK": 0.0,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 519,
@@ -256,7 +307,10 @@
     "axial": 120.0,
     "th": 103.34,
     "dK": 41.2,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 523,
@@ -265,7 +319,10 @@
     "axial": 60.0,
     "th": 53.22,
     "dK": 0.0,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 527,
@@ -274,7 +331,10 @@
     "axial": 120.0,
     "th": 108.06,
     "dK": 47.95,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 531,
@@ -283,7 +343,10 @@
     "axial": 45.0,
     "th": 83.23,
     "dK": 10.37,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 535,
@@ -292,7 +355,10 @@
     "axial": 105.0,
     "th": 83.75,
     "dK": 11.29,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 539,
@@ -301,7 +367,10 @@
     "axial": 45.0,
     "th": 70.8,
     "dK": 0.0,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 543,
@@ -310,7 +379,10 @@
     "axial": 105.0,
     "th": 85.3,
     "dK": 13.95,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 547,
@@ -319,7 +391,10 @@
     "axial": 45.0,
     "th": 59.98,
     "dK": 0.0,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 551,
@@ -328,7 +403,10 @@
     "axial": 105.0,
     "th": 89.28,
     "dK": 20.45,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 555,
@@ -337,7 +415,10 @@
     "axial": 45.0,
     "th": 50.69,
     "dK": 0.0,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 559,
@@ -346,7 +427,10 @@
     "axial": 105.0,
     "th": 93.9,
     "dK": 27.52,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 563,
@@ -355,7 +439,10 @@
     "axial": 45.0,
     "th": 43.8,
     "dK": 0.0,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 567,
@@ -364,7 +451,10 @@
     "axial": 105.0,
     "th": 97.43,
     "dK": 32.71,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 571,
@@ -373,7 +463,10 @@
     "axial": 30.0,
     "th": 83.23,
     "dK": 10.37,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 575,
@@ -382,7 +475,10 @@
     "axial": 90.0,
     "th": 83.75,
     "dK": 11.29,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 579,
@@ -391,7 +487,10 @@
     "axial": 30.0,
     "th": 68.9,
     "dK": 0.0,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 583,
@@ -400,7 +499,10 @@
     "axial": 90.0,
     "th": 81.62,
     "dK": 7.43,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 587,
@@ -409,7 +511,10 @@
     "axial": 30.0,
     "th": 56.29,
     "dK": 0.0,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 591,
@@ -418,7 +523,10 @@
     "axial": 90.0,
     "th": 82.46,
     "dK": 8.98,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 594,
@@ -427,7 +535,10 @@
     "axial": 135.0,
     "th": 114.38,
     "dK": 57.21,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 598,
@@ -436,7 +547,10 @@
     "axial": 75.0,
     "th": 72.67,
     "dK": 0.0,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 602,
@@ -445,7 +559,10 @@
     "axial": 135.0,
     "th": 123.46,
     "dK": 72.15,
-    "kin": false
+    "kin": false,
+    "closed": false,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 606,
@@ -454,7 +571,10 @@
     "axial": 75.0,
     "th": 73.2,
     "dK": 0.0,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 610,
@@ -463,7 +583,10 @@
     "axial": 135.0,
     "th": 130.09,
     "dK": 0.0,
-    "kin": false
+    "kin": false,
+    "closed": false,
+    "knee": true,
+    "slide_mm": 8.2
    },
    {
     "pose": 614,
@@ -472,7 +595,10 @@
     "axial": 15.0,
     "th": 83.23,
     "dK": 10.37,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 618,
@@ -481,7 +607,10 @@
     "axial": 75.0,
     "th": 83.75,
     "dK": 11.29,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 622,
@@ -490,7 +619,10 @@
     "axial": -30.0,
     "th": 82.74,
     "dK": 9.49,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 626,
@@ -499,7 +631,10 @@
     "axial": 30.0,
     "th": 67.11,
     "dK": 0.0,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 630,
@@ -508,7 +643,10 @@
     "axial": 90.0,
     "th": 85.22,
     "dK": 13.82,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 634,
@@ -517,7 +655,10 @@
     "axial": -15.0,
     "th": 61.91,
     "dK": 0.0,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 638,
@@ -526,7 +667,10 @@
     "axial": 45.0,
     "th": 60.17,
     "dK": 0.0,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 642,
@@ -535,7 +679,10 @@
     "axial": 105.0,
     "th": 96.89,
     "dK": 31.93,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 646,
@@ -544,7 +691,10 @@
     "axial": 0.0,
     "th": 42.49,
     "dK": 0.0,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 650,
@@ -553,7 +703,10 @@
     "axial": 60.0,
     "th": 64.58,
     "dK": 0.0,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 654,
@@ -562,7 +715,10 @@
     "axial": 120.0,
     "th": 114.5,
     "dK": 57.39,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 658,
@@ -571,7 +727,10 @@
     "axial": 15.0,
     "th": 30.9,
     "dK": 0.0,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 662,
@@ -580,7 +739,10 @@
     "axial": 75.0,
     "th": 77.16,
     "dK": 0.0,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 666,
@@ -589,7 +751,10 @@
     "axial": -45.0,
     "th": 95.78,
     "dK": 30.31,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 670,
@@ -598,7 +763,10 @@
     "axial": 15.0,
     "th": 81.24,
     "dK": 6.71,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 674,
@@ -607,7 +775,10 @@
     "axial": 75.0,
     "th": 87.21,
     "dK": 17.14,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 678,
@@ -616,7 +787,10 @@
     "axial": -30.0,
     "th": 77.79,
     "dK": 0.0,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 682,
@@ -625,7 +799,10 @@
     "axial": 30.0,
     "th": 66.88,
     "dK": 0.0,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 686,
@@ -634,7 +811,10 @@
     "axial": 90.0,
     "th": 89.76,
     "dK": 21.21,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 690,
@@ -643,7 +823,10 @@
     "axial": -15.0,
     "th": 58.66,
     "dK": 0.0,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 694,
@@ -652,7 +835,10 @@
     "axial": 45.0,
     "th": 62.36,
     "dK": 0.0,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 698,
@@ -661,7 +847,10 @@
     "axial": 105.0,
     "th": 101.57,
     "dK": 38.68,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 702,
@@ -670,7 +859,10 @@
     "axial": 0.0,
     "th": 42.13,
     "dK": 0.0,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 706,
@@ -679,7 +871,10 @@
     "axial": 60.0,
     "th": 68.29,
     "dK": 0.0,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 710,
@@ -688,7 +883,10 @@
     "axial": -45.0,
     "th": 52.56,
     "dK": 0.0,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 714,
@@ -697,7 +895,10 @@
     "axial": 15.0,
     "th": 34.06,
     "dK": 0.0,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 718,
@@ -706,7 +907,10 @@
     "axial": 75.0,
     "th": 81.08,
     "dK": 6.41,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 722,
@@ -715,7 +919,10 @@
     "axial": -30.0,
     "th": 29.65,
     "dK": 0.0,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 726,
@@ -724,7 +931,10 @@
     "axial": 30.0,
     "th": 40.62,
     "dK": 0.0,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 730,
@@ -733,7 +943,10 @@
     "axial": 90.0,
     "th": 97.55,
     "dK": 32.89,
-    "kin": false
+    "kin": false,
+    "closed": true,
+    "knee": false,
+    "slide_mm": 0.0
    },
    {
     "pose": 734,
@@ -742,7 +955,10 @@
     "axial": -15.0,
     "th": 7.68,
     "dK": 0.0,
-    "kin": false
+    "kin": false,
+    "closed": false,
+    "knee": true,
+    "slide_mm": 0.18
    },
    {
     "pose": 738,
@@ -751,7 +967,10 @@
     "axial": 45.0,
     "th": 56.75,
     "dK": 0.0,
-    "kin": false
+    "kin": false,
+    "closed": true,
+    "knee": false,
+    "slide_mm": 0.0
    },
    {
     "pose": 742,
@@ -760,7 +979,10 @@
     "axial": 105.0,
     "th": 114.91,
     "dK": 58.02,
-    "kin": false
+    "kin": false,
+    "closed": true,
+    "knee": false,
+    "slide_mm": 0.0
    },
    {
     "pose": 746,
@@ -769,7 +991,10 @@
     "axial": 15.0,
     "th": 32.77,
     "dK": 0.0,
-    "kin": false
+    "kin": false,
+    "closed": true,
+    "knee": false,
+    "slide_mm": 0.0
    },
    {
     "pose": 750,
@@ -778,7 +1003,10 @@
     "axial": -45.0,
     "th": 90.75,
     "dK": 22.75,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 754,
@@ -787,7 +1015,10 @@
     "axial": 15.0,
     "th": 80.65,
     "dK": 5.58,
-    "kin": false
+    "kin": false,
+    "closed": false,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 758,
@@ -796,7 +1027,10 @@
     "axial": 75.0,
     "th": 91.65,
     "dK": 24.13,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 762,
@@ -805,7 +1039,10 @@
     "axial": -30.0,
     "th": 73.66,
     "dK": 0.0,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 766,
@@ -814,7 +1051,10 @@
     "axial": 30.0,
     "th": 68.22,
     "dK": 0.0,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 770,
@@ -823,7 +1063,10 @@
     "axial": 90.0,
     "th": 94.96,
     "dK": 29.09,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 774,
@@ -832,7 +1075,10 @@
     "axial": -15.0,
     "th": 56.6,
     "dK": 0.0,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 778,
@@ -841,7 +1087,10 @@
     "axial": 45.0,
     "th": 65.69,
     "dK": 0.0,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 782,
@@ -850,7 +1099,10 @@
     "axial": -60.0,
     "th": 71.62,
     "dK": 0.0,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 786,
@@ -859,7 +1111,10 @@
     "axial": 0.0,
     "th": 43.13,
     "dK": 0.0,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 790,
@@ -868,7 +1123,10 @@
     "axial": 60.0,
     "th": 72.36,
     "dK": 0.0,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 794,
@@ -877,7 +1135,10 @@
     "axial": -45.0,
     "th": 51.41,
     "dK": 0.0,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 798,
@@ -886,7 +1147,10 @@
     "axial": 15.0,
     "th": 37.8,
     "dK": 0.0,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 802,
@@ -895,7 +1159,10 @@
     "axial": 75.0,
     "th": 84.73,
     "dK": 13.0,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 806,
@@ -904,7 +1171,10 @@
     "axial": -30.0,
     "th": 30.78,
     "dK": 0.0,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 810,
@@ -913,7 +1183,10 @@
     "axial": 30.0,
     "th": 44.29,
     "dK": 0.0,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 814,
@@ -922,7 +1195,10 @@
     "axial": 90.0,
     "th": 100.35,
     "dK": 36.93,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 818,
@@ -931,7 +1207,10 @@
     "axial": -15.0,
     "th": 12.65,
     "dK": 0.0,
-    "kin": false
+    "kin": false,
+    "closed": false,
+    "knee": true,
+    "slide_mm": 0.01
    },
    {
     "pose": 822,
@@ -940,7 +1219,10 @@
     "axial": 45.0,
     "th": 58.68,
     "dK": 0.0,
-    "kin": false
+    "kin": false,
+    "closed": true,
+    "knee": false,
+    "slide_mm": 0.0
    },
    {
     "pose": 826,
@@ -949,7 +1231,10 @@
     "axial": -45.0,
     "th": 27.04,
     "dK": 0.0,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 830,
@@ -958,7 +1243,10 @@
     "axial": 15.0,
     "th": 32.25,
     "dK": 0.0,
-    "kin": false
+    "kin": false,
+    "closed": true,
+    "knee": false,
+    "slide_mm": 0.0
    },
    {
     "pose": 834,
@@ -967,7 +1255,10 @@
     "axial": -15.0,
     "th": 9.01,
     "dK": 0.0,
-    "kin": false
+    "kin": false,
+    "closed": false,
+    "knee": false,
+    "slide_mm": 5.91
    },
    {
     "pose": 838,
@@ -976,7 +1267,10 @@
     "axial": -45.0,
     "th": 18.41,
     "dK": 0.0,
-    "kin": false
+    "kin": false,
+    "closed": false,
+    "knee": false,
+    "slide_mm": 2.34
    },
    {
     "pose": 842,
@@ -985,7 +1279,10 @@
     "axial": 15.0,
     "th": 43.33,
     "dK": 0.0,
-    "kin": false
+    "kin": false,
+    "closed": true,
+    "knee": false,
+    "slide_mm": 0.0
    },
    {
     "pose": 846,
@@ -994,7 +1291,10 @@
     "axial": -15.0,
     "th": 25.27,
     "dK": 0.0,
-    "kin": false
+    "kin": false,
+    "closed": true,
+    "knee": false,
+    "slide_mm": 0.0
    },
    {
     "pose": 850,
@@ -1003,7 +1303,10 @@
     "axial": -45.0,
     "th": 19.7,
     "dK": 0.0,
-    "kin": false
+    "kin": false,
+    "closed": false,
+    "knee": false,
+    "slide_mm": 2.38
    },
    {
     "pose": 854,
@@ -1012,7 +1315,10 @@
     "axial": 15.0,
     "th": 56.22,
     "dK": 0.0,
-    "kin": false
+    "kin": false,
+    "closed": true,
+    "knee": false,
+    "slide_mm": 0.0
    },
    {
     "pose": 858,
@@ -1021,7 +1327,10 @@
     "axial": -45.0,
     "th": 86.48,
     "dK": 15.94,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 862,
@@ -1030,7 +1339,10 @@
     "axial": 15.0,
     "th": 81.51,
     "dK": 7.22,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 866,
@@ -1039,7 +1351,10 @@
     "axial": 75.0,
     "th": 96.79,
     "dK": 31.78,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 870,
@@ -1048,7 +1363,10 @@
     "axial": -30.0,
     "th": 70.67,
     "dK": 0.0,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 874,
@@ -1057,7 +1375,10 @@
     "axial": 30.0,
     "th": 71.01,
     "dK": 0.0,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 878,
@@ -1066,7 +1387,10 @@
     "axial": -75.0,
     "th": 86.1,
     "dK": 15.3,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 881,
@@ -1075,7 +1399,10 @@
     "axial": -30.0,
     "th": 60.36,
     "dK": 0.0,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 885,
@@ -1084,7 +1411,10 @@
     "axial": 30.0,
     "th": 62.26,
     "dK": 0.0,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 889,
@@ -1093,7 +1423,10 @@
     "axial": -75.0,
     "th": 80.78,
     "dK": 5.83,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 893,
@@ -1102,7 +1435,10 @@
     "axial": -15.0,
     "th": 46.17,
     "dK": 0.0,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 897,
@@ -1111,7 +1447,10 @@
     "axial": 45.0,
     "th": 65.54,
     "dK": 0.0,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 901,
@@ -1120,7 +1459,10 @@
     "axial": -60.0,
     "th": 62.86,
     "dK": 0.0,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 905,
@@ -1129,7 +1471,10 @@
     "axial": 0.0,
     "th": 36.37,
     "dK": 0.0,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 909,
@@ -1138,7 +1483,10 @@
     "axial": 60.0,
     "th": 74.75,
     "dK": 0.0,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 913,
@@ -1147,7 +1495,10 @@
     "axial": -45.0,
     "th": 43.99,
     "dK": 0.0,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 917,
@@ -1156,7 +1507,10 @@
     "axial": 15.0,
     "th": 36.05,
     "dK": 0.0,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 921,
@@ -1165,7 +1519,10 @@
     "axial": 75.0,
     "th": 87.91,
     "dK": 18.28,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 925,
@@ -1174,7 +1531,10 @@
     "axial": -30.0,
     "th": 25.06,
     "dK": 0.0,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 929,
@@ -1183,7 +1543,10 @@
     "axial": 30.0,
     "th": 45.62,
     "dK": 0.0,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 933,
@@ -1192,7 +1555,10 @@
     "axial": -60.0,
     "th": 45.31,
     "dK": 0.0,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 937,
@@ -1201,7 +1567,10 @@
     "axial": 0.0,
     "th": 17.84,
     "dK": 0.0,
-    "kin": false
+    "kin": false,
+    "closed": false,
+    "knee": true,
+    "slide_mm": 0.91
    },
    {
     "pose": 941,
@@ -1210,7 +1579,10 @@
     "axial": -30.0,
     "th": 11.47,
     "dK": 0.0,
-    "kin": false
+    "kin": false,
+    "closed": false,
+    "knee": true,
+    "slide_mm": 2.37
    },
    {
     "pose": 945,
@@ -1219,7 +1591,10 @@
     "axial": -60.0,
     "th": 36.9,
     "dK": 0.0,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 949,
@@ -1228,7 +1603,10 @@
     "axial": 0.0,
     "th": 21.82,
     "dK": 0.0,
-    "kin": false
+    "kin": false,
+    "closed": false,
+    "knee": false,
+    "slide_mm": 0.93
    },
    {
     "pose": 953,
@@ -1237,7 +1615,10 @@
     "axial": -30.0,
     "th": 11.89,
     "dK": 0.0,
-    "kin": false
+    "kin": false,
+    "closed": false,
+    "knee": false,
+    "slide_mm": 5.89
    },
    {
     "pose": 957,
@@ -1246,7 +1627,10 @@
     "axial": -60.0,
     "th": 32.47,
     "dK": 0.0,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 961,
@@ -1255,7 +1639,10 @@
     "axial": 0.0,
     "th": 32.54,
     "dK": 0.0,
-    "kin": false
+    "kin": false,
+    "closed": true,
+    "knee": false,
+    "slide_mm": 0.0
    },
    {
     "pose": 965,
@@ -1264,7 +1651,10 @@
     "axial": -60.0,
     "th": 86.48,
     "dK": 15.94,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 969,
@@ -1273,7 +1663,10 @@
     "axial": 0.0,
     "th": 81.51,
     "dK": 7.22,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 973,
@@ -1282,7 +1675,10 @@
     "axial": 60.0,
     "th": 96.79,
     "dK": 31.78,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 977,
@@ -1291,7 +1687,10 @@
     "axial": -45.0,
     "th": 73.25,
     "dK": 0.0,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 981,
@@ -1300,7 +1699,10 @@
     "axial": 15.0,
     "th": 70.19,
     "dK": 0.0,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 985,
@@ -1309,7 +1711,10 @@
     "axial": -90.0,
     "th": 92.74,
     "dK": 25.79,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 989,
@@ -1318,7 +1723,10 @@
     "axial": -30.0,
     "th": 59.78,
     "dK": 0.0,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 993,
@@ -1327,7 +1735,10 @@
     "axial": 30.0,
     "th": 66.5,
     "dK": 0.0,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 997,
@@ -1336,7 +1747,10 @@
     "axial": -75.0,
     "th": 78.95,
     "dK": 2.17,
-    "kin": false
+    "kin": false,
+    "closed": false,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 1001,
@@ -1345,7 +1759,10 @@
     "axial": -15.0,
     "th": 48.24,
     "dK": 0.0,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 1005,
@@ -1354,7 +1771,10 @@
     "axial": 45.0,
     "th": 69.66,
     "dK": 0.0,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 1009,
@@ -1363,7 +1783,10 @@
     "axial": -60.0,
     "th": 63.33,
     "dK": 0.0,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 1013,
@@ -1372,7 +1795,10 @@
     "axial": 0.0,
     "th": 40.28,
     "dK": 0.0,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 1017,
@@ -1381,7 +1807,10 @@
     "axial": 60.0,
     "th": 77.56,
     "dK": 0.0,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 1021,
@@ -1390,7 +1819,10 @@
     "axial": -45.0,
     "th": 46.75,
     "dK": 0.0,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 1025,
@@ -1399,7 +1831,10 @@
     "axial": 15.0,
     "th": 39.32,
     "dK": 0.0,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 1029,
@@ -1408,7 +1843,10 @@
     "axial": -90.0,
     "th": 82.29,
     "dK": 8.66,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 1033,
@@ -1417,7 +1855,10 @@
     "axial": -30.0,
     "th": 30.04,
     "dK": 0.0,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 1037,
@@ -1426,7 +1867,10 @@
     "axial": 30.0,
     "th": 46.15,
     "dK": 0.0,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 1041,
@@ -1435,7 +1879,10 @@
     "axial": -60.0,
     "th": 50.48,
     "dK": 0.0,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 1045,
@@ -1444,7 +1891,10 @@
     "axial": 0.0,
     "th": 18.75,
     "dK": 0.0,
-    "kin": false
+    "kin": false,
+    "closed": false,
+    "knee": true,
+    "slide_mm": 0.38
    },
    {
     "pose": 1049,
@@ -1453,7 +1903,10 @@
     "axial": -30.0,
     "th": 18.59,
     "dK": 0.0,
-    "kin": false
+    "kin": false,
+    "closed": false,
+    "knee": true,
+    "slide_mm": 0.81
    },
    {
     "pose": 1053,
@@ -1462,7 +1915,10 @@
     "axial": -60.0,
     "th": 44.76,
     "dK": 0.0,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 1057,
@@ -1471,7 +1927,10 @@
     "axial": 0.0,
     "th": 13.67,
     "dK": 0.0,
-    "kin": false
+    "kin": false,
+    "closed": false,
+    "knee": false,
+    "slide_mm": 3.01
    },
    {
     "pose": 1061,
@@ -1480,7 +1939,10 @@
     "axial": -30.0,
     "th": 15.77,
     "dK": 0.0,
-    "kin": false
+    "kin": false,
+    "closed": false,
+    "knee": false,
+    "slide_mm": 3.07
    },
    {
     "pose": 1065,
@@ -1489,7 +1951,10 @@
     "axial": -60.0,
     "th": 42.44,
     "dK": 0.0,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 1069,
@@ -1498,7 +1963,10 @@
     "axial": 0.0,
     "th": 21.97,
     "dK": 0.0,
-    "kin": false
+    "kin": false,
+    "closed": false,
+    "knee": false,
+    "slide_mm": 1.15
    },
    {
     "pose": 1073,
@@ -1507,7 +1975,10 @@
     "axial": -60.0,
     "th": 83.23,
     "dK": 10.37,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 1077,
@@ -1516,7 +1987,10 @@
     "axial": 0.0,
     "th": 83.75,
     "dK": 11.29,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 1081,
@@ -1525,7 +1999,10 @@
     "axial": -105.0,
     "th": 98.1,
     "dK": 33.68,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 1085,
@@ -1534,7 +2011,10 @@
     "axial": -45.0,
     "th": 71.74,
     "dK": 0.0,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 1089,
@@ -1543,7 +2023,10 @@
     "axial": 15.0,
     "th": 74.21,
     "dK": 0.0,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 1093,
@@ -1552,7 +2035,10 @@
     "axial": -90.0,
     "th": 89.47,
     "dK": 20.75,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 1097,
@@ -1561,7 +2047,10 @@
     "axial": -30.0,
     "th": 60.64,
     "dK": 0.0,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 1101,
@@ -1570,7 +2059,10 @@
     "axial": 30.0,
     "th": 71.24,
     "dK": 0.0,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 1105,
@@ -1579,7 +2071,10 @@
     "axial": -75.0,
     "th": 78.16,
     "dK": 0.5,
-    "kin": false
+    "kin": false,
+    "closed": false,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 1109,
@@ -1588,7 +2083,10 @@
     "axial": -15.0,
     "th": 51.28,
     "dK": 0.0,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 1113,
@@ -1597,7 +2095,10 @@
     "axial": 45.0,
     "th": 73.55,
     "dK": 0.0,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 1117,
@@ -1606,7 +2107,10 @@
     "axial": -60.0,
     "th": 64.9,
     "dK": 0.0,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 1121,
@@ -1615,7 +2119,10 @@
     "axial": 0.0,
     "th": 44.24,
     "dK": 0.0,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 1125,
@@ -1624,7 +2131,10 @@
     "axial": -105.0,
     "th": 100.98,
     "dK": 37.83,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 1129,
@@ -1633,7 +2143,10 @@
     "axial": -45.0,
     "th": 50.41,
     "dK": 0.0,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 1133,
@@ -1642,7 +2155,10 @@
     "axial": 15.0,
     "th": 42.0,
     "dK": 0.0,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 1137,
@@ -1651,7 +2167,10 @@
     "axial": -90.0,
     "th": 86.36,
     "dK": 15.74,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 1141,
@@ -1660,7 +2179,10 @@
     "axial": -30.0,
     "th": 35.39,
     "dK": 0.0,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 1145,
@@ -1669,7 +2191,10 @@
     "axial": 30.0,
     "th": 45.85,
     "dK": 0.0,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 1149,
@@ -1678,7 +2203,10 @@
     "axial": -60.0,
     "th": 56.56,
     "dK": 0.0,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 1153,
@@ -1687,7 +2215,10 @@
     "axial": -90.0,
     "th": 83.91,
     "dK": 11.57,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 1157,
@@ -1696,7 +2227,10 @@
     "axial": -30.0,
     "th": 26.35,
     "dK": 0.0,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 1161,
@@ -1705,7 +2239,10 @@
     "axial": -60.0,
     "th": 53.52,
     "dK": 0.0,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 1165,
@@ -1714,7 +2251,10 @@
     "axial": -90.0,
     "th": 81.39,
     "dK": 7.0,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 1168,
@@ -1723,7 +2263,10 @@
     "axial": -45.0,
     "th": 38.81,
     "dK": 0.0,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 1172,
@@ -1732,7 +2275,10 @@
     "axial": -75.0,
     "th": 66.88,
     "dK": 0.0,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 1176,
@@ -1741,7 +2287,10 @@
     "axial": -15.0,
     "th": 16.65,
     "dK": 0.0,
-    "kin": false
+    "kin": false,
+    "closed": false,
+    "knee": false,
+    "slide_mm": 3.44
    },
    {
     "pose": 1180,
@@ -1750,7 +2299,10 @@
     "axial": -75.0,
     "th": 83.23,
     "dK": 10.37,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 1184,
@@ -1759,7 +2311,10 @@
     "axial": -15.0,
     "th": 83.75,
     "dK": 11.29,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 1188,
@@ -1768,7 +2323,10 @@
     "axial": -120.0,
     "th": 101.38,
     "dK": 38.4,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 1192,
@@ -1777,7 +2335,10 @@
     "axial": -60.0,
     "th": 75.01,
     "dK": 0.0,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 1196,
@@ -1786,7 +2347,10 @@
     "axial": 0.0,
     "th": 74.37,
     "dK": 0.0,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 1200,
@@ -1795,7 +2359,10 @@
     "axial": -105.0,
     "th": 96.46,
     "dK": 31.29,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 1204,
@@ -1804,7 +2371,10 @@
     "axial": -45.0,
     "th": 66.02,
     "dK": 0.0,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 1208,
@@ -1813,7 +2383,10 @@
     "axial": 15.0,
     "th": 69.44,
     "dK": 0.0,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 1212,
@@ -1822,7 +2395,10 @@
     "axial": -90.0,
     "th": 88.61,
     "dK": 19.39,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 1216,
@@ -1831,7 +2407,10 @@
     "axial": -30.0,
     "th": 56.96,
     "dK": 0.0,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 1220,
@@ -1840,7 +2419,10 @@
     "axial": 30.0,
     "th": 68.12,
     "dK": 0.0,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 1224,
@@ -1849,7 +2431,10 @@
     "axial": -75.0,
     "th": 78.14,
     "dK": 0.46,
-    "kin": false
+    "kin": false,
+    "closed": false,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 1228,
@@ -1858,7 +2443,10 @@
     "axial": -15.0,
     "th": 47.53,
     "dK": 0.0,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 1232,
@@ -1867,7 +2455,10 @@
     "axial": -120.0,
     "th": 117.18,
     "dK": 61.51,
-    "kin": false
+    "kin": false,
+    "closed": false,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 1236,
@@ -1876,7 +2467,10 @@
     "axial": -60.0,
     "th": 65.62,
     "dK": 0.0,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 1240,
@@ -1885,7 +2479,10 @@
     "axial": 0.0,
     "th": 39.5,
     "dK": 0.0,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 1244,
@@ -1894,7 +2491,10 @@
     "axial": -105.0,
     "th": 105.18,
     "dK": 43.83,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 1248,
@@ -1903,7 +2503,10 @@
     "axial": -45.0,
     "th": 51.64,
     "dK": 0.0,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 1252,
@@ -1912,7 +2515,10 @@
     "axial": 15.0,
     "th": 35.47,
     "dK": 0.0,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 1256,
@@ -1921,7 +2527,10 @@
     "axial": -75.0,
     "th": 77.17,
     "dK": 0.0,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 1260,
@@ -1930,7 +2539,10 @@
     "axial": -105.0,
     "th": 106.3,
     "dK": 45.43,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 1264,
@@ -1939,7 +2551,10 @@
     "axial": -45.0,
     "th": 48.1,
     "dK": 0.0,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 1268,
@@ -1948,7 +2563,10 @@
     "axial": -75.0,
     "th": 77.15,
     "dK": 0.0,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 1272,
@@ -1957,7 +2575,10 @@
     "axial": -105.0,
     "th": 105.33,
     "dK": 44.04,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 1276,
@@ -1966,7 +2587,10 @@
     "axial": -45.0,
     "th": 48.99,
     "dK": 0.0,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 1280,
@@ -1975,7 +2599,10 @@
     "axial": -75.0,
     "th": 78.19,
     "dK": 0.57,
-    "kin": false
+    "kin": false,
+    "closed": false,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 1284,
@@ -1984,7 +2611,10 @@
     "axial": -135.0,
     "th": 95.78,
     "dK": 30.31,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 1288,
@@ -1993,7 +2623,10 @@
     "axial": -75.0,
     "th": 81.24,
     "dK": 6.71,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 1292,
@@ -2002,7 +2635,10 @@
     "axial": -15.0,
     "th": 87.21,
     "dK": 17.14,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 1296,
@@ -2011,7 +2647,10 @@
     "axial": -120.0,
     "th": 96.91,
     "dK": 31.96,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 1300,
@@ -2020,7 +2659,10 @@
     "axial": -60.0,
     "th": 75.08,
     "dK": 0.0,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 1304,
@@ -2029,7 +2671,10 @@
     "axial": 0.0,
     "th": 79.27,
     "dK": 2.84,
-    "kin": false
+    "kin": false,
+    "closed": false,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 1308,
@@ -2038,7 +2683,10 @@
     "axial": -105.0,
     "th": 94.39,
     "dK": 28.24,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 1312,
@@ -2047,7 +2695,10 @@
     "axial": -45.0,
     "th": 68.27,
     "dK": 0.0,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 1316,
@@ -2056,7 +2707,10 @@
     "axial": 15.0,
     "th": 74.35,
     "dK": 0.0,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 1320,
@@ -2065,7 +2719,10 @@
     "axial": -90.0,
     "th": 89.23,
     "dK": 20.37,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 1324,
@@ -2074,7 +2731,10 @@
     "axial": -30.0,
     "th": 60.62,
     "dK": 0.0,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 1328,
@@ -2083,7 +2743,10 @@
     "axial": -135.0,
     "th": 127.01,
     "dK": 79.48,
-    "kin": false
+    "kin": false,
+    "closed": false,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 1332,
@@ -2092,7 +2755,10 @@
     "axial": -75.0,
     "th": 80.91,
     "dK": 6.08,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 1336,
@@ -2101,7 +2767,10 @@
     "axial": -15.0,
     "th": 51.43,
     "dK": 0.0,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 1340,
@@ -2110,7 +2779,10 @@
     "axial": -120.0,
     "th": 120.37,
     "dK": 66.69,
-    "kin": false
+    "kin": false,
+    "closed": false,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 1344,
@@ -2119,7 +2791,10 @@
     "axial": -60.0,
     "th": 69.92,
     "dK": 0.0,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 1348,
@@ -2128,7 +2803,10 @@
     "axial": 0.0,
     "th": 42.22,
     "dK": 0.0,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 1352,
@@ -2137,7 +2815,10 @@
     "axial": -105.0,
     "th": 110.33,
     "dK": 51.22,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 1356,
@@ -2146,7 +2827,10 @@
     "axial": -45.0,
     "th": 56.97,
     "dK": 0.0,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 1360,
@@ -2155,7 +2839,10 @@
     "axial": 15.0,
     "th": 35.29,
     "dK": 0.0,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 1364,
@@ -2164,7 +2851,10 @@
     "axial": -75.0,
     "th": 83.71,
     "dK": 11.21,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 1368,
@@ -2173,7 +2863,10 @@
     "axial": -105.0,
     "th": 114.01,
     "dK": 56.65,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 1372,
@@ -2182,7 +2875,10 @@
     "axial": -45.0,
     "th": 55.71,
     "dK": 0.0,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 1376,
@@ -2191,7 +2887,10 @@
     "axial": -75.0,
     "th": 86.01,
     "dK": 15.15,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 1380,
@@ -2200,7 +2899,10 @@
     "axial": -105.0,
     "th": 114.74,
     "dK": 57.76,
-    "kin": false
+    "kin": false,
+    "closed": true,
+    "knee": false,
+    "slide_mm": 0.0
    },
    {
     "pose": 1384,
@@ -2209,7 +2911,10 @@
     "axial": -45.0,
     "th": 59.18,
     "dK": 0.0,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 1388,
@@ -2218,7 +2923,10 @@
     "axial": -75.0,
     "th": 89.22,
     "dK": 20.36,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 1392,
@@ -2227,7 +2935,10 @@
     "axial": -135.0,
     "th": 90.75,
     "dK": 22.75,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 1396,
@@ -2236,7 +2947,10 @@
     "axial": -75.0,
     "th": 80.65,
     "dK": 5.58,
-    "kin": false
+    "kin": false,
+    "closed": false,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 1400,
@@ -2245,7 +2959,10 @@
     "axial": -15.0,
     "th": 91.65,
     "dK": 24.13,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 1404,
@@ -2254,7 +2971,10 @@
     "axial": -120.0,
     "th": 93.35,
     "dK": 26.7,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 1408,
@@ -2263,7 +2983,10 @@
     "axial": -60.0,
     "th": 76.64,
     "dK": 0.0,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 1412,
@@ -2272,7 +2995,10 @@
     "axial": 0.0,
     "th": 84.7,
     "dK": 12.94,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 1416,
@@ -2281,7 +3007,10 @@
     "axial": -105.0,
     "th": 93.44,
     "dK": 26.83,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 1420,
@@ -2290,7 +3019,10 @@
     "axial": -45.0,
     "th": 71.62,
     "dK": 0.0,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 1424,
@@ -2299,7 +3031,10 @@
     "axial": -150.0,
     "th": 127.81,
     "dK": 81.41,
-    "kin": false
+    "kin": false,
+    "closed": false,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 1428,
@@ -2308,7 +3043,10 @@
     "axial": -90.0,
     "th": 90.86,
     "dK": 22.91,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 1432,
@@ -2317,7 +3055,10 @@
     "axial": -30.0,
     "th": 64.66,
     "dK": 0.0,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 1436,
@@ -2326,7 +3067,10 @@
     "axial": -135.0,
     "th": 128.33,
     "dK": 82.75,
-    "kin": false
+    "kin": false,
+    "closed": false,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 1440,
@@ -2335,7 +3079,10 @@
     "axial": -75.0,
     "th": 84.32,
     "dK": 12.29,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 1444,
@@ -2344,7 +3091,10 @@
     "axial": -15.0,
     "th": 55.04,
     "dK": 0.0,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 1448,
@@ -2353,7 +3103,10 @@
     "axial": -120.0,
     "th": 124.17,
     "dK": 73.5,
-    "kin": false
+    "kin": false,
+    "closed": false,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 1452,
@@ -2362,7 +3115,10 @@
     "axial": -60.0,
     "th": 74.37,
     "dK": 0.0,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 1455,
@@ -2371,7 +3127,10 @@
     "axial": -15.0,
     "th": 47.28,
     "dK": 0.0,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 1459,
@@ -2380,7 +3139,10 @@
     "axial": -120.0,
     "th": 129.68,
     "dK": 0.0,
-    "kin": false
+    "kin": false,
+    "closed": false,
+    "knee": true,
+    "slide_mm": 3.99
    },
    {
     "pose": 1463,
@@ -2389,7 +3151,10 @@
     "axial": -60.0,
     "th": 74.75,
     "dK": 0.0,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 1467,
@@ -2398,7 +3163,10 @@
     "axial": 0.0,
     "th": 34.69,
     "dK": 0.0,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 1471,
@@ -2407,7 +3175,10 @@
     "axial": -90.0,
     "th": 104.44,
     "dK": 42.77,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 1475,
@@ -2416,7 +3187,10 @@
     "axial": -120.0,
     "th": 135.61,
     "dK": 0.0,
-    "kin": false
+    "kin": false,
+    "closed": false,
+    "knee": false,
+    "slide_mm": 9.26
    },
    {
     "pose": 1479,
@@ -2425,7 +3199,10 @@
     "axial": -60.0,
     "th": 77.41,
     "dK": 0.0,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 1483,
@@ -2434,7 +3211,10 @@
     "axial": -90.0,
     "th": 108.55,
     "dK": 48.65,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 1487,
@@ -2443,7 +3223,10 @@
     "axial": -120.0,
     "th": 134.48,
     "dK": 0.0,
-    "kin": false
+    "kin": false,
+    "closed": false,
+    "knee": false,
+    "slide_mm": 14.99
    },
    {
     "pose": 1491,
@@ -2452,7 +3235,10 @@
     "axial": -60.0,
     "th": 83.04,
     "dK": 10.03,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 1495,
@@ -2461,7 +3247,10 @@
     "axial": -90.0,
     "th": 111.79,
     "dK": 53.35,
-    "kin": false
+    "kin": false,
+    "closed": true,
+    "knee": false,
+    "slide_mm": 0.0
    },
    {
     "pose": 1499,
@@ -2470,7 +3259,10 @@
     "axial": -150.0,
     "th": 90.75,
     "dK": 22.75,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 1503,
@@ -2479,7 +3271,10 @@
     "axial": -90.0,
     "th": 80.65,
     "dK": 5.58,
-    "kin": false
+    "kin": false,
+    "closed": false,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 1507,
@@ -2488,7 +3283,10 @@
     "axial": -30.0,
     "th": 91.65,
     "dK": 24.13,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 1511,
@@ -2497,7 +3295,10 @@
     "axial": -135.0,
     "th": 96.27,
     "dK": 31.03,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 1515,
@@ -2506,7 +3307,10 @@
     "axial": -75.0,
     "th": 80.4,
     "dK": 5.09,
-    "kin": false
+    "kin": false,
+    "closed": false,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 1519,
@@ -2515,7 +3319,10 @@
     "axial": -15.0,
     "th": 85.8,
     "dK": 14.8,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 1523,
@@ -2524,7 +3331,10 @@
     "axial": -120.0,
     "th": 100.4,
     "dK": 37.0,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 1527,
@@ -2533,7 +3343,10 @@
     "axial": -60.0,
     "th": 78.24,
     "dK": 0.69,
-    "kin": false
+    "kin": false,
+    "closed": false,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 1531,
@@ -2542,7 +3355,10 @@
     "axial": -165.0,
     "th": 133.17,
     "dK": 0.0,
-    "kin": false
+    "kin": false,
+    "closed": false,
+    "knee": true,
+    "slide_mm": 0.05
    },
    {
     "pose": 1535,
@@ -2551,7 +3367,10 @@
     "axial": -105.0,
     "th": 101.93,
     "dK": 39.18,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 1539,
@@ -2560,7 +3379,10 @@
     "axial": -45.0,
     "th": 72.66,
     "dK": 0.0,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 1543,
@@ -2569,7 +3391,10 @@
     "axial": -150.0,
     "th": 139.48,
     "dK": 0.0,
-    "kin": false
+    "kin": false,
+    "closed": false,
+    "knee": true,
+    "slide_mm": 0.72
    },
    {
     "pose": 1547,
@@ -2578,7 +3403,10 @@
     "axial": -90.0,
     "th": 98.59,
     "dK": 34.4,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 1551,
@@ -2587,7 +3415,10 @@
     "axial": -30.0,
     "th": 62.75,
     "dK": 0.0,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 1555,
@@ -2596,7 +3427,10 @@
     "axial": -135.0,
     "th": 140.63,
     "dK": 0.0,
-    "kin": false
+    "kin": false,
+    "closed": false,
+    "knee": true,
+    "slide_mm": 2.17
    },
    {
     "pose": 1559,
@@ -2605,7 +3439,10 @@
     "axial": -75.0,
     "th": 90.67,
     "dK": 22.62,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 1563,
@@ -2614,7 +3451,10 @@
     "axial": -15.0,
     "th": 49.95,
     "dK": 0.0,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 1567,
@@ -2623,7 +3463,10 @@
     "axial": -120.0,
     "th": 135.03,
     "dK": 0.0,
-    "kin": false
+    "kin": false,
+    "closed": false,
+    "knee": true,
+    "slide_mm": 4.28
    },
    {
     "pose": 1571,
@@ -2632,7 +3475,10 @@
     "axial": -60.0,
     "th": 79.57,
     "dK": 3.44,
-    "kin": false
+    "kin": false,
+    "closed": false,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 1575,
@@ -2641,7 +3487,10 @@
     "axial": -150.0,
     "th": 168.38,
     "dK": 0.0,
-    "kin": false
+    "kin": false,
+    "closed": false,
+    "knee": false,
+    "slide_mm": 9.29
    },
    {
     "pose": 1579,
@@ -2650,7 +3499,10 @@
     "axial": -90.0,
     "th": 110.24,
     "dK": 51.1,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 1583,
@@ -2659,7 +3511,10 @@
     "axial": -120.0,
     "th": 141.39,
     "dK": 0.0,
-    "kin": false
+    "kin": false,
+    "closed": false,
+    "knee": false,
+    "slide_mm": 11.77
    },
    {
     "pose": 1587,
@@ -2668,7 +3523,10 @@
     "axial": -150.0,
     "th": 154.28,
     "dK": 0.0,
-    "kin": false
+    "kin": false,
+    "closed": false,
+    "knee": true,
+    "slide_mm": 23.5
    },
    {
     "pose": 1591,
@@ -2677,7 +3535,10 @@
     "axial": -90.0,
     "th": 115.47,
     "dK": 58.87,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 1595,
@@ -2686,7 +3547,10 @@
     "axial": -120.0,
     "th": 138.7,
     "dK": 0.0,
-    "kin": false
+    "kin": false,
+    "closed": false,
+    "knee": false,
+    "slide_mm": 18.18
    },
    {
     "pose": 1599,
@@ -2695,7 +3559,10 @@
     "axial": -150.0,
     "th": 135.06,
     "dK": 0.0,
-    "kin": false
+    "kin": false,
+    "closed": false,
+    "knee": false,
+    "slide_mm": 17.72
    },
    {
     "pose": 1603,
@@ -2704,7 +3571,10 @@
     "axial": -90.0,
     "th": 120.02,
     "dK": 66.1,
-    "kin": false
+    "kin": false,
+    "closed": false,
+    "knee": false,
+    "slide_mm": 0.0
    },
    {
     "pose": 1607,
@@ -2713,7 +3583,10 @@
     "axial": -150.0,
     "th": 86.48,
     "dK": 15.94,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 1611,
@@ -2722,7 +3595,10 @@
     "axial": -90.0,
     "th": 81.51,
     "dK": 7.22,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 1615,
@@ -2731,7 +3607,10 @@
     "axial": -30.0,
     "th": 96.79,
     "dK": 31.78,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 1619,
@@ -2740,7 +3619,10 @@
     "axial": -135.0,
     "th": 93.83,
     "dK": 27.42,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 1623,
@@ -2749,7 +3631,10 @@
     "axial": -75.0,
     "th": 83.3,
     "dK": 10.49,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 1627,
@@ -2758,7 +3643,10 @@
     "axial": -180.0,
     "th": 121.38,
     "dK": 68.41,
-    "kin": false
+    "kin": false,
+    "closed": false,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 1631,
@@ -2767,7 +3655,10 @@
     "axial": -120.0,
     "th": 100.68,
     "dK": 37.4,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 1635,
@@ -2776,7 +3667,10 @@
     "axial": -60.0,
     "th": 82.42,
     "dK": 8.9,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 1639,
@@ -2785,7 +3679,10 @@
     "axial": -165.0,
     "th": 131.77,
     "dK": 0.0,
-    "kin": false
+    "kin": false,
+    "closed": false,
+    "knee": true,
+    "slide_mm": 0.15
    },
    {
     "pose": 1643,
@@ -2794,7 +3691,10 @@
     "axial": -105.0,
     "th": 104.56,
     "dK": 42.94,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 1647,
@@ -2803,7 +3703,10 @@
     "axial": -45.0,
     "th": 76.81,
     "dK": 0.0,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 1651,
@@ -2812,7 +3715,10 @@
     "axial": -150.0,
     "th": 141.19,
     "dK": 0.0,
-    "kin": false
+    "kin": false,
+    "closed": false,
+    "knee": true,
+    "slide_mm": 0.44
    },
    {
     "pose": 1655,
@@ -2821,7 +3727,10 @@
     "axial": -90.0,
     "th": 102.48,
     "dK": 39.97,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 1659,
@@ -2830,7 +3739,10 @@
     "axial": -30.0,
     "th": 66.01,
     "dK": 0.0,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 1663,
@@ -2839,7 +3751,10 @@
     "axial": -135.0,
     "th": 144.89,
     "dK": 0.0,
-    "kin": false
+    "kin": false,
+    "closed": false,
+    "knee": true,
+    "slide_mm": 1.98
    },
    {
     "pose": 1667,
@@ -2848,7 +3763,10 @@
     "axial": -75.0,
     "th": 94.85,
     "dK": 28.93,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 1671,
@@ -2857,7 +3775,10 @@
     "axial": -180.0,
     "th": 161.02,
     "dK": 0.0,
-    "kin": false
+    "kin": false,
+    "closed": false,
+    "knee": true,
+    "slide_mm": 13.21
    },
    {
     "pose": 1675,
@@ -2866,7 +3787,10 @@
     "axial": -120.0,
     "th": 140.05,
     "dK": 0.0,
-    "kin": false
+    "kin": false,
+    "closed": false,
+    "knee": true,
+    "slide_mm": 4.72
    },
    {
     "pose": 1679,
@@ -2875,7 +3799,10 @@
     "axial": -60.0,
     "th": 83.69,
     "dK": 11.19,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 1683,
@@ -2884,7 +3811,10 @@
     "axial": -150.0,
     "th": 170.77,
     "dK": 0.0,
-    "kin": false
+    "kin": false,
+    "closed": false,
+    "knee": true,
+    "slide_mm": 26.4
    },
    {
     "pose": 1687,
@@ -2893,7 +3823,10 @@
     "axial": -90.0,
     "th": 115.08,
     "dK": 58.26,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 1691,
@@ -2902,7 +3835,10 @@
     "axial": -120.0,
     "th": 144.97,
     "dK": 0.0,
-    "kin": false
+    "kin": false,
+    "closed": false,
+    "knee": false,
+    "slide_mm": 15.5
    },
    {
     "pose": 1695,
@@ -2911,7 +3847,10 @@
     "axial": -150.0,
     "th": 148.52,
     "dK": 0.0,
-    "kin": false
+    "kin": false,
+    "closed": false,
+    "knee": true,
+    "slide_mm": 21.78
    },
    {
     "pose": 1699,
@@ -2920,7 +3859,10 @@
     "axial": -90.0,
     "th": 120.64,
     "dK": 67.14,
-    "kin": false
+    "kin": false,
+    "closed": false,
+    "knee": false,
+    "slide_mm": 0.0
    },
    {
     "pose": 1703,
@@ -2929,7 +3871,10 @@
     "axial": -120.0,
     "th": 139.12,
     "dK": 0.0,
-    "kin": false
+    "kin": false,
+    "closed": false,
+    "knee": false,
+    "slide_mm": 19.34
    },
    {
     "pose": 1707,
@@ -2938,7 +3883,10 @@
     "axial": -150.0,
     "th": 127.34,
     "dK": 80.25,
-    "kin": false
+    "kin": false,
+    "closed": false,
+    "knee": false,
+    "slide_mm": 0.0
    },
    {
     "pose": 1711,
@@ -2947,7 +3895,10 @@
     "axial": -90.0,
     "th": 125.97,
     "dK": 77.16,
-    "kin": false
+    "kin": false,
+    "closed": false,
+    "knee": false,
+    "slide_mm": 0.0
    },
    {
     "pose": 1715,
@@ -2956,7 +3907,10 @@
     "axial": -120.0,
     "th": 80.65,
     "dK": 5.58,
-    "kin": false
+    "kin": false,
+    "closed": false,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 1719,
@@ -2965,7 +3919,10 @@
     "axial": -60.0,
     "th": 91.65,
     "dK": 24.13,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 1723,
@@ -2974,7 +3931,10 @@
     "axial": -135.0,
     "th": 92.64,
     "dK": 25.63,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 1727,
@@ -2983,7 +3943,10 @@
     "axial": -75.0,
     "th": 87.31,
     "dK": 17.29,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 1731,
@@ -2992,7 +3955,10 @@
     "axial": -150.0,
     "th": 111.06,
     "dK": 52.29,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 1735,
@@ -3001,7 +3967,10 @@
     "axial": -90.0,
     "th": 93.39,
     "dK": 26.75,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 1739,
@@ -3010,7 +3979,10 @@
     "axial": -165.0,
     "th": 131.14,
     "dK": 0.0,
-    "kin": false
+    "kin": false,
+    "closed": false,
+    "knee": true,
+    "slide_mm": 0.29
    },
    {
     "pose": 1742,
@@ -3019,7 +3991,10 @@
     "axial": -120.0,
     "th": 115.17,
     "dK": 58.4,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 1746,
@@ -3028,7 +4003,10 @@
     "axial": -60.0,
     "th": 86.53,
     "dK": 16.02,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 1750,
@@ -3037,7 +4015,10 @@
     "axial": -135.0,
     "th": 136.31,
     "dK": 0.0,
-    "kin": false
+    "kin": false,
+    "closed": false,
+    "knee": true,
+    "slide_mm": 0.75
    },
    {
     "pose": 1754,
@@ -3046,7 +4027,10 @@
     "axial": -75.0,
     "th": 95.99,
     "dK": 30.61,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 1758,
@@ -3055,7 +4039,10 @@
     "axial": -150.0,
     "th": 159.27,
     "dK": 0.0,
-    "kin": false
+    "kin": false,
+    "closed": false,
+    "knee": true,
+    "slide_mm": 0.77
    },
    {
     "pose": 1762,
@@ -3064,7 +4051,10 @@
     "axial": -90.0,
     "th": 111.42,
     "dK": 52.81,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 1766,
@@ -3073,7 +4063,10 @@
     "axial": -165.0,
     "th": 171.71,
     "dK": 0.0,
-    "kin": false
+    "kin": false,
+    "closed": false,
+    "knee": true,
+    "slide_mm": 19.5
    },
    {
     "pose": 1770,
@@ -3082,7 +4075,10 @@
     "axial": -105.0,
     "th": 129.8,
     "dK": 0.0,
-    "kin": false
+    "kin": false,
+    "closed": false,
+    "knee": true,
+    "slide_mm": 5.03
    },
    {
     "pose": 1774,
@@ -3091,7 +4087,10 @@
     "axial": -45.0,
     "th": 72.99,
     "dK": 0.0,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 1778,
@@ -3100,7 +4099,10 @@
     "axial": -120.0,
     "th": 147.11,
     "dK": 0.0,
-    "kin": false
+    "kin": false,
+    "closed": false,
+    "knee": false,
+    "slide_mm": 11.83
    },
    {
     "pose": 1782,
@@ -3109,7 +4111,10 @@
     "axial": -60.0,
     "th": 89.31,
     "dK": 20.5,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 1786,
@@ -3118,7 +4123,10 @@
     "axial": -135.0,
     "th": 153.34,
     "dK": 0.0,
-    "kin": false
+    "kin": false,
+    "closed": false,
+    "knee": true,
+    "slide_mm": 23.48
    },
    {
     "pose": 1790,
@@ -3127,7 +4135,10 @@
     "axial": -75.0,
     "th": 107.39,
     "dK": 46.98,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 1794,
@@ -3136,7 +4147,10 @@
     "axial": -150.0,
     "th": 140.61,
     "dK": 0.0,
-    "kin": false
+    "kin": false,
+    "closed": false,
+    "knee": true,
+    "slide_mm": 19.33
    },
    {
     "pose": 1798,
@@ -3145,7 +4159,10 @@
     "axial": -90.0,
     "th": 123.45,
     "dK": 72.14,
-    "kin": false
+    "kin": false,
+    "closed": false,
+    "knee": false,
+    "slide_mm": 0.0
    },
    {
     "pose": 1802,
@@ -3154,7 +4171,10 @@
     "axial": -180.0,
     "th": 86.48,
     "dK": 15.94,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 1806,
@@ -3163,7 +4183,10 @@
     "axial": -120.0,
     "th": 81.51,
     "dK": 7.22,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 1810,
@@ -3172,7 +4195,10 @@
     "axial": -60.0,
     "th": 96.79,
     "dK": 31.78,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 1814,
@@ -3181,7 +4207,10 @@
     "axial": -135.0,
     "th": 92.77,
     "dK": 25.83,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 1818,
@@ -3190,7 +4219,10 @@
     "axial": -75.0,
     "th": 92.14,
     "dK": 24.88,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 1822,
@@ -3199,7 +4231,10 @@
     "axial": -150.0,
     "th": 111.07,
     "dK": 52.3,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 1826,
@@ -3208,7 +4243,10 @@
     "axial": -90.0,
     "th": 97.56,
     "dK": 32.9,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 1830,
@@ -3217,7 +4255,10 @@
     "axial": -165.0,
     "th": 131.28,
     "dK": 0.0,
-    "kin": false
+    "kin": false,
+    "closed": false,
+    "knee": true,
+    "slide_mm": 0.39
    },
    {
     "pose": 1834,
@@ -3226,7 +4267,10 @@
     "axial": -105.0,
     "th": 111.7,
     "dK": 53.23,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 1838,
@@ -3235,7 +4279,10 @@
     "axial": -180.0,
     "th": 145.76,
     "dK": 0.0,
-    "kin": false
+    "kin": false,
+    "closed": false,
+    "knee": true,
+    "slide_mm": 0.34
    },
    {
     "pose": 1842,
@@ -3244,7 +4291,10 @@
     "axial": -120.0,
     "th": 131.07,
     "dK": 0.0,
-    "kin": false
+    "kin": false,
+    "closed": false,
+    "knee": true,
+    "slide_mm": 1.09
    },
    {
     "pose": 1846,
@@ -3253,7 +4303,10 @@
     "axial": -60.0,
     "th": 89.07,
     "dK": 20.13,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 1850,
@@ -3262,7 +4315,10 @@
     "axial": -135.0,
     "th": 153.67,
     "dK": 0.0,
-    "kin": false
+    "kin": false,
+    "closed": false,
+    "knee": true,
+    "slide_mm": 1.95
    },
    {
     "pose": 1854,
@@ -3271,7 +4327,10 @@
     "axial": -75.0,
     "th": 101.41,
     "dK": 38.45,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 1858,
@@ -3280,7 +4339,10 @@
     "axial": -150.0,
     "th": 175.96,
     "dK": 0.0,
-    "kin": false
+    "kin": false,
+    "closed": false,
+    "knee": true,
+    "slide_mm": 18.76
    },
    {
     "pose": 1862,
@@ -3289,7 +4351,10 @@
     "axial": -90.0,
     "th": 117.94,
     "dK": 62.71,
-    "kin": false
+    "kin": false,
+    "closed": false,
+    "knee": true,
+    "slide_mm": 0.0
    },
    {
     "pose": 1866,
@@ -3298,7 +4363,10 @@
     "axial": -165.0,
     "th": 155.11,
     "dK": 0.0,
-    "kin": false
+    "kin": false,
+    "closed": false,
+    "knee": true,
+    "slide_mm": 21.87
    },
    {
     "pose": 1870,
@@ -3307,7 +4375,10 @@
     "axial": -105.0,
     "th": 134.23,
     "dK": 0.0,
-    "kin": false
+    "kin": false,
+    "closed": false,
+    "knee": false,
+    "slide_mm": 10.53
    },
    {
     "pose": 1874,
@@ -3316,7 +4387,10 @@
     "axial": -180.0,
     "th": 128.82,
     "dK": 84.13,
-    "kin": false
+    "kin": false,
+    "closed": false,
+    "knee": false,
+    "slide_mm": 0.0
    },
    {
     "pose": 1878,
@@ -3325,7 +4399,10 @@
     "axial": -120.0,
     "th": 142.93,
     "dK": 0.0,
-    "kin": false
+    "kin": false,
+    "closed": false,
+    "knee": false,
+    "slide_mm": 19.76
    },
    {
     "pose": 1882,
@@ -3334,9 +4411,13 @@
     "axial": -60.0,
     "th": 95.68,
     "dK": 30.15,
-    "kin": true
+    "kin": true,
+    "closed": true,
+    "knee": true,
+    "slide_mm": 0.0
    }
-  ]
+  ],
+  "R_tol": 0.5
  },
  "held": {
   "n_ws": 952,

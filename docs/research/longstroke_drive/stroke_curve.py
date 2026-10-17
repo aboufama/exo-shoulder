@@ -33,7 +33,9 @@ def curve(par):
                        th_taken_max={str(c): round(float(th[kin & ws & (dK <= c + 1e-6)].max()), 1) for c in CAPS if (kin & ws & (dK <= c + 1e-6)).any()})
         if nm == "bench":
             out["bench"]["law_table"] = [dict(pose=int(B.idx[i]), plane=B.poses[i]["plane"], elev=B.poses[i]["elev"], axial=B.poses[i]["axial"],
-                                              th=round(float(th[i]), 2), dK=round(float(dK[i]), 2), kin=bool(kin[i])) for i in np.nonzero(ws)[0]]
+                                              th=round(float(th[i]), 2), dK=round(float(dK[i]), 2), kin=bool(kin[i]), closed=bool(ok[i]),
+                                              knee=bool(Kn["ok"][i]), slide_mm=round(float(abs(s[i, 2])), 2)) for i in np.nonzero(ws)[0]]
+            out["bench"]["R_tol"] = float(D.p["R_tol"])
     return out
 
 
