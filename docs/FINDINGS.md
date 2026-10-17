@@ -2141,3 +2141,51 @@ Scripts are in `docs/research/fold_ceiling/`. No rule, bench or verified row was
      metal) before any CMA.
 2. Leave the folded side and the window placement alone.
 3. Above ~0.80 reach, a 4th joint or a new seat pair is the next morphology.
+
+## roller-longdyad-knuckle-3r final polish, farm run: no pick replaces the verified config; held-out gain +0.73 (2026-10-17, docs/research/roller-longdyad-knuckle-3r_final_polish.md)
+
+**The farm search ran** (user decision (7)). It made 851 CMA evaluations on the envelope bench `env` (11 runs) and
+claimed 3 picks + the verified config in one 15-job batch, priced at the audit's reading: knee 26.88, smlo +0.5,
+margin 5.5, PA 42. Cost $0.91-1.06 of $1.5.
+
+**Verdict: the verified config stays the CAD config. Robust held-out gain +0.73 (pick2), under the 1-point rule.**
+* **Same-protocol env-fit gain +2.10** (pick1 / pick3, 26.72 -> 24.62). This is the sidecar polish's fit-protocol
+  artifact again. The env fit makes the verified config itself 1.81 worse held out (24.91 -> 26.72). Shape for shape
+  against the CAD's 24.91, pick1 / pick3 gain +0.29.
+* **pick2 is the only pick that gains under both fits** (+0.78 env / +0.73 CAD shape, 24.18).
+  * Its gain is in-band (0.8924 -> 0.8986), plus one pose of reach.
+  * It loses 0.18 on the verified protocol (19.43 vs 19.25).
+  * It presses 2.7 mm deeper held out (41.7 vs 39.0 mm summed), and its 2 mm near-touch is 8 points worse.
+* **pick1 and pick3** lose 2.4-2.6 on the verified protocol and press 15-19 mm deeper held out.
+* **Hard goal** (held out <= 22.0 at depth <= 35.66): not met. Best 24.18 at 41.7 mm.
+
+**Measured:**
+* **env predicts held out the right way round.** The audit-compliant verified config scores 23.0 on env (fit env ->
+  wear env exact), against 19.25 bench / 24.91 held out.
+* **The envsel selection mattered, and depth did not transfer.**
+  * The objective's best rows (obj 23.24, a 1.2 gain on env) ranked worse on the independent envsel draw than the
+    picks.
+  * The picks' envsel depth (22-26 mm, verified 33.9) did not predict held-out depth: every pick is deeper held out.
+  * The envsel depth guard is too weak a proxy. A depth guard has to price held-out-like poses (the overhead and
+    behind-body clusters), not the envsel sum.
+* **The fold is geometric for this morphology.**
+  * The verified config loses 306 of 952 held-out workspace poses: 272 fold, 34 slide.
+  * The losses concentrate in across-body (118 / 159), abs(axial) >= 150 (81 / 105) and overhead (48 / 71).
+  * No pick regains more than 17 poses (pick3, env fit). At most 6 of them come from those classes (pick3: 4
+    across-body, 2 at axial >= 150), and every pick loses 1-3 overhead poses net.
+* **Flank synthesis knife edge (red team).** A new check, `tools/roller_env_polish.py robust`, re-fits with each flank
+  parameter moved one step (beta +-1 deg, r_c +-0.25 mm, g +-0.05).
+  * The **verified config itself** sits 0.10 mm (r_c) from the crank's 1.0 mm clearance to hub K (1.14 nominal) and
+    0.02 (g) from its PA-42 drive range.
+  * beta -178 (the PA fix) sits 0.0 from a flank cusp in r_c and g.
+  * Two CMA runs started at beta -178 under a robustness price (5 points per failing neighbour, 151 evaluations) both
+    walk to beta -171.9..-175.5; best robust objective 25.38 vs x0's 24.45. **beta -178 is not buildable with margin.**
+  * A robust flank exists 2 deg away: pick3's beta -175.64, r_c 15.52, g 2.415 hold dK_lim >= 46 at every neighbour.
+    It is a reference for the CAD's flank cut, not a better config.
+
+**Next:**
+1. Keep the verified config for the CAD.
+2. Give the built flank a tolerance margin. Check pick3's flank values on the verified seats alone (one claim, about
+   $0.02) before the CAD cuts it.
+3. The 4.9-point held-out gap to the goal is the across-body / high-axial fold: a morphology lever (a 4th joint or a
+   new seat pair, `docs/research/fold_ceiling.md`), not a polish.
