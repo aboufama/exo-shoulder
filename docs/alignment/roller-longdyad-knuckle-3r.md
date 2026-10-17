@@ -353,3 +353,156 @@ the design reads 5 coordinates, over the 4-DOF cap. That is the user's question.
    in-band never sees.
 
 **Final verdict: WATCH.** The 0.24 round-9 win is a measured tie; the lead is likelier better out of sample. Not gamed.
+
+
+---
+
+## Skeptic (2026-10-17 04:30-04:45 UTC, metric-change audit; ledger entry 2026-10-17T04:42:07Z, `by skeptic`, run `skeptic:roller-longdyad-knuckle-3r`)
+
+**Final verdict (computed by `tools/alignment_ledger.py skeptic`): WATCH.**
+- 1 of the 10 reasons is refuted with evidence: `judgement:S2`.
+- The other 9 stand at watch. 2 of them stand with their size or attribution corrected (G5, NEW-knee-sensing).
+- Rulings: `docs/alignment/roller-longdyad-knuckle-3r.rulings.json`. None of the reasons is gamed. The ruling's
+  premise holds for this row: the 3 hub encoders fix the pose.
+
+**Re-measured.** No model, bench, row or score was changed.
+- `tools/alignment_knee_sensing.py` was re-run on the bench and held out. It reproduces the auditor to the digit.
+- Two new read-only tools. Both load the model unchanged and use the claim-protocol taken sets.
+  - `tools/alignment_hub_injectivity.py` is a global check over all pairs of taken poses.
+  - `tools/alignment_knee_encoder_value.py` asks what reading the knee pins, or K, adds to the hubs.
+- Outputs: `remeasure/roller-longdyad-knuckle-3r_skeptic_{hub_injectivity,knee_encoder_value}_{bench,held}.json`.
+- Local runs: about 8 of 10-60 s each, at most 2 processes. Farm: none ($0).
+
+### Rulings
+
+**contact_depth: stands.**
+- Re-derived from `remeasure/*_perpose_claim.json`, taking the minimum of `min_mm` and `cmin` over the contact poses.
+- Bench: 16.46 mm against 6.23 mm, x2.64 and +10.23 mm. Both pass TH `depth_ratio` 2 and `depth_floor_mm` 5.
+- Held out: x1.40, under the ratio, as the tool says.
+- Both designs were measured on the same frozen claim protocol.
+
+**complexity: stands.**
+- The v2 tool gives 24.25. The row's own `complexity` field is still 43.75, and its name still ends "(cx 43.75)".
+- The dashboard computes the column live (`tools/dash_build.py` `complexity_of`), so it shows 24.25.
+- The documented check fires on any mismatch. The stale field is the less flattering one, but the record is
+  inconsistent.
+
+**judgement:G5: stands, with its size corrected.** The auditor compared the template with the v1 *record's* knee.
+Against this row's *actual* knee, the template matches on 5 of 6 items.
+
+| item | template | this row's actual knee | source |
+|---|---|---|---|
+| bought | 6 | 6, plus 2 DIN 6799 e-clips | `docs/research/roller_mechanism_redteam.md` line 102: "iglidur GSM sleeve + 2 GTM washers per pin on integral Ti pins"; L1 `part_validity.json` |
+| moving bodies | 2 | 2 | the knee frees member 3 (L1 tag l3) and adds the knee link (l4); in the kneeless twin, member 3 is arm-fixed |
+| loops | 0 | 0 | see below |
+| made | 4 | 1 (the knee link, with integral pins) | build spec |
+
+- The v1 record carries only 6 bodies, 1 short. The topology rule L = J - B then charges the missing body as a
+  "knee closure" loop (+4). That loop is the GH loop, which the anchor and skin-normal never charge.
+- Measured with `tools/simplicity.py`:
+
+  | count | complexity | topology flag |
+  |---|---|---|
+  | this row's own knee removed, its loop with it (= the kneeless twin) | **23.75** | none |
+  | v2 as committed | 24.25 (+0.5, conservative today) | none |
+  | the auditor's 27.75 (proposal A: loop kept) | 27.75 | "closed_loops 3 != joints 7 - moving_bodies 5" |
+  | base record corrected (bodies 7, loops 2, bought 19), template kept | 22.25 (1.5 under the faithful 23.75) | |
+
+- The real template error on this row is the made-part count only, worth at most 1.5 points, not 3.5.
+- The round-9 tie-break keeps its direction under every count.
+
+**judgement:NEW-knee-sensing: stands on GH drift; its encoder-error part is misattributed.**
+- **Determinacy holds globally**, not just locally. Over all pairs of claim-taken poses, two arm orientations more than
+  5 deg apart always differ by at least 4.09 deg (bench) or 2.25 deg (held out) in hub readings. The global
+  amplification is at most 3.07 / 3.13 deg of arm per deg of hub reading, within the local 3.15. No hidden branch.
+- **The 3.2x does not come from the knee.**
+  - The raw sigma_min of 0.3172 equals 1 / (1 + kK) = 1 / 3.1534 exactly.
+  - It sits at that floor on the forced poses: 167 of 371 on the bench and 399 of 851 held out.
+  - It does not depend on the knee angle (correlation -0.015). It is the same with the knee at or below 149.54.
+- **Reading the knee pins does not change it.** Reading the knee pins too (v1 sensing) gives 0.3180, and the
+  amplification goes from 3.152 to 3.144 (3.146 to 3.144 held out). Reading K instead gives 0.574, or 1.74x.
+- So the 3.2x is the unread slaved K's drive ratio, and it was already there in v1. The knee encoders never bought
+  that precision. The same holds for the reference ordering: sidecar-longdyad's 0.378 is about 1 / (1 + 1.62).
+- **The GH drift stands.** It is 1.79 / 1.87 deg per mm, equal to the pin knee the ruling cited (1.83). The pins are
+  what would observe that drift. The user's question 3 is open.
+- The tool's held-out set (852) comes from the non-claim dump. On the claim set (851) the minimum is the same (0.2455).
+
+**judgement:S1: stands.** From `paired_claim.json`:
+- Bench: -0.25, standard deviation 1.35, P(this design better) 0.605.
+- Held out: +1.06, P 0.135. The lead takes 29 workspace poses this design misses, against 21 the other way.
+
+**judgement:NEW-contact-depth: stands.**
+- Bench: 16.46 mm against 6.23 mm. Held out: 49.88 mm against 35.66 mm, with 7 presses deeper than 3 mm against 5.
+- The lead's own audit-compliant reading still presses 39.01 mm held out (`docs/research/roller-longdyad-knuckle-3r_final_polish.md`
+  line 116).
+
+**judgement:NEW-ws-inband: stands.** At elevation 90-140, workspace in-band is 0.7979 against 0.8409 (n 85 each), and
+metal over 14 mm is 0.2012 against 0.1565. Both probes are exact on the frozen claim configs.
+
+**judgement:S2: REFUTED.**
+- The documented S2 detector reads ok, and its sign runs against the design. Tool check `sampling`: sample-weighted
+  in-band 0.894 against part-weighted 0.922, so dd = -2.87. That does not pass TH `part_weight_watch` 3, and it means
+  the sample weighting *under*-states this design.
+- The heavily sampled parts are the worst ones: L2 at 0.736 with 124 samples, the crank at 0.797 with 129.
+- No part is under 0.5 in band. The only thin part, L1a (8 samples), is 0.981 in band.
+- The envelope correction added real metal that the model had left out, and that metal is in band. The roller is at
+  least 5.76 mm off the skin on every taken pose (red team line 94).
+- So the more real envelope reads 18.56, and the claim 18.67 is the conservative reading. ROUNDS.md line 1208
+  headlines 18.67.
+
+**judgement:G4: stands on the knee.**
+- The taken knee reaches 151.92 deg on the bench and 153.16 held out. That is past H1's 149.54 window, on 3 bench and
+  2 held-out claim poses.
+- The hub-only sigma is lowest exactly there: 0.2497 / 0.2455, against 0.2934 / 0.2899 with the knee at or below
+  149.54.
+- The pressure-angle part is answered by the red team (`roller_mechanism/results_bench.json`, finding 4):
+  - the moment arm about uK stays 15.0-15.2 mm over the whole stroke;
+  - PA 45 is reached only at dK 51.05;
+  - the binding stop is the q2 dowel at dK 46.25.
+
+  So there is no transmission singularity at the 43 cap.
+
+**judgement:M5: stands.** "No force file exists" is out of date.
+- `roller_mechanism/results_bench.json` (commit 14cbe6c, 04:13) has:
+  - `liftoff`: static safety factor 2.42-2.79, and a q2 acceleration limit of 43.7 rad/s2, which a throw exceeds;
+  - `loads`: J2 torque 0.17-0.20 N.m, or 0.24-0.27 N.m with the MVP1 load.
+- The red team itself requires R17 lift-off on the clips. No R17 output exists.
+
+### Missed by the auditor (for the next audit; does not change this verdict)
+
+1. **The hub-only error has a different cause.**
+   - The 3.15x arm error per encoder error is 1 + kK. It applies on every forced pose (45 %), not "at the near-straight
+     knee", and it is independent of the knee encoders (3.144 with them).
+   - Proposal B's s8 gate therefore ranks rows by their drive ratio, not by what the knee encoders add.
+   - The quantity that answers the ruling is the knee encoders' marginal value, sigma(hubs + pins) / sigma(hubs). It
+     is 1.003 on this row (`tools/alignment_knee_encoder_value.py`).
+   - For MVP1 tracking, an encoder on K (1.74x) or a 3x finer J2 encoder is what helps.
+2. **The v1 record mis-books the knee**: 6 bodies instead of 7, knee bought parts 2 instead of 6, and a spurious
+   "knee closure" loop. v2 is +0.5 today only because these errors cancel. Correcting the record without changing
+   the template would make v2 understate by 1.5.
+3. **A force file landed inside the audit window**, at 04:13: `docs/research/roller_mechanism_redteam.md` and
+   `roller_mechanism/results_bench.json`.
+   - G2 now has a number: the J2 torque reflected from the clock spring is 0.172-0.198 N.m, or 0.243-0.269 N.m with
+     MVP1. That is under R17's 1 N.m (`geneva_rod_drive_redteam.md` line 170).
+   - Lift-off on the clips is still unrun.
+   - The red team's finding 6 matters under v2. Without the +0.5 deg K bias, the systematic K lag of -0.45 deg puts
+     the held-out fold margin at about 4.98 deg (extrapolated). Hub-only sensing passes the K error 1:1 into the arm
+     estimate (0.65 deg). The bias is not in the claimed config.
+4. **The lead's audit-compliant reading of this config is 19.25 / 24.91**
+   (`roller-longdyad-knuckle-3r_final_polish.md` lines 108-125).
+   - It uses ang_min 26.88, smlo 5.5, a1max 58.53, PA_MAX 42 and margin 5.5. Its own doc says these numbers "belong on
+     the row next to 18.67 / 23.73". The row still carries only 18.67.
+   - The pricing includes tightenings (margin 5.5, PA 42), and sidecar-longdyad has no priced reading, so this is a
+     measurement change, not a gap correction.
+5. **The sensing tool reads the non-claim dump** (`_perpose.json`) before the claim dump. That adds pose 1054 held out.
+   It has no effect here, but the tool should read `_perpose_claim.json` first.
+
+### Questions for the user
+
+1. The knee encoders add almost nothing to this row's pose estimate (3.152x -> 3.144x). The 3.15x comes from K being
+   unread. Should MVP1 read K, or a 3x finer J2, rather than the knee?
+2. Is the knee-free count this row's kneeless twin (23.75)? That count drops the "knee closure" loop, which is the GH
+   loop through the wearer.
+
+**Final verdict: WATCH.** The 3 hub encoders fix this row's pose without the knee encoders, so the ruling's premise
+holds and nothing is gamed.
