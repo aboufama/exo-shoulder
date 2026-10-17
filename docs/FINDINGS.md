@@ -2356,3 +2356,26 @@ constraint is not a reach constraint: gate on the K the taken poses USE.
   970 evaluations): the bell crank and the ball links do not park (in band 0.5-0.65).
 * So the round-11 job is a K drive whose METAL parks at a ~55 deg stroke (not 75) under a steep lobe law, gated against
   the ghost's 18.25 / 21.11 (`LS_GHOST=1`): e.g. a spherical coupler at strap level, or the crank pivot off link 1b's strap.
+
+## Gen-6 CAD fixes: R7 came from strip-glue slivers, and the same slivers made R17's 2x "regression" a mesh artefact (2026-10-17, docs/research/roller-longdyad-gen6_fix.md)
+
+- **R7 (shared builder).** The 4-strip bars (user_style_minarc.profile_link_split) left zero-area faces where two strips
+  share a profile stretch exactly: valid in memory, failing BRepCheck after the STEP round trip (gen-6 link 1b, gen-5
+  link 1a). The builder now accepts a glue only on R7's own test (`step_bad_faces`: STEP write + read + BRepCheck) and
+  removes slivers by fuzzy fuse / re-sewing (`glue_strips`, `sliver_free`; geometry moves <= 0.001 mm). Gen-6 full CAD:
+  R7 FAIL -> PASS (49 / 49 custom parts); gen-4b and gen-5 links all pass the same test (gen-5 link 1a was a FAIL).
+- **R17 at 2x was a measurement artefact of an open mesh, not inertia.** Link 2's slivers tessellated to holes (a
+  10.6 mm seam), so judge/dynamics.py's mass_props took split-piece convex hulls: l2 116.9 g / 26.4 cm3 for ~30 g of
+  metal (3x the L1's inertia about GH), hence twist 5.16-5.22 deg at 2x vs the L1's 4.1. After the fix the judge's own
+  mass_props gives 29.4 g (L1 32.6). Lesson: a full CAD's R17 (and R6, which skips open parts as containers) is only as
+  good as its exported meshes - check `watertight_judge_units` per part before trusting a dynamics delta.
+- **R6 on the L1 was the model's strap, not the design.** Drawing the L1's link 1a as the full CAD's line/arc chain
+  (climb from J1's skirt + 0.15 on a 60-deg ramp, one shared function) took R6 0.98 -> 0.0 and R1 81.9 -> 82.0.
+- **The drive's working end is clean**: 115 closing workspace poses at |dK| 29.4-46.25 (no clip reaches past 29.3):
+  rolling pairs closed, tightest running clearance 0.108 mm (crank vs link 1a), drive skin >= 2.49 mm.
+- **The R1 gap to the L1 is mostly the real lobe ring** (l2 +0.64 of the 1.0): the L1 drew the model's lobe inside hub
+  2 (a follower that does not exist), the real one rides F2 + 9.8..12.8 on the J2 cap because the crank boss is raised
+  3.97 mm by link 1b's bar under it. The L1 is optimistic there; lowering the band needs the boss lower (link 1b under
+  the boss) or the follower beside it (a cam re-synthesis).
+- Bookkeeping: name-based material lookup made links 1b / 2 and the crank steel ("dowel hole", "683ZZ"); R8 custom mass
+  181.0 -> 149.6 g is a measurement correction.

@@ -354,7 +354,7 @@
    "file": "25_D8-02a_link_1a.step",
    "valid": true,
    "solids": 1,
-   "faces": 113,
+   "faces": 115,
    "bad_faces": 0,
    "watertight": false,
    "volume_cm3": 2.845,
@@ -366,10 +366,10 @@
   },
   {
    "file": "26_D8-02b_link_1b.step",
-   "valid": false,
+   "valid": true,
    "solids": 1,
-   "faces": 269,
-   "bad_faces": 3,
+   "faces": 260,
+   "bad_faces": 0,
    "watertight": false,
    "volume_cm3": 3.117,
    "bbox_mm": [
@@ -424,12 +424,12 @@
    "file": "30_D8-03_link_2.step",
    "valid": true,
    "solids": 1,
-   "faces": 712,
+   "faces": 710,
    "bad_faces": 0,
    "watertight": false,
-   "volume_cm3": 4.421,
+   "volume_cm3": 4.572,
    "bbox_mm": [
-    39.3,
+    39.4,
     93.8,
     50.6
    ]
@@ -533,7 +533,7 @@
    ]
   },
   {
-   "file": "39_drive_flank_roller_pin_ISO_2341-B_3x8_he.step",
+   "file": "39_drive_flank_roller_pin_ISO_2341-A_3x6_he.step",
    "valid": true,
    "solids": 1,
    "faces": 7,
@@ -692,5 +692,5 @@
   "arm_fixed_custom": 3,
   "missing_step": []
  },
- "all_ok": false
+ "all_ok": true
 }

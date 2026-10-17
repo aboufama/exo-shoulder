@@ -59,4 +59,56 @@ keep-out (`link1a_strap_mesh`, the 8 x 3 section swept along it, 3 mm into each 
 (h) stays as a stated deviation: the chain runs up to 4.40 mm under the model's strap in the dyad gap (it climbs from
 J1's level where the model's strap is lifted over J1's footprint). Both builds now carry it, so the judges see it.
 
+## 3. The drive's working end (measurement: new check, no design change)
+
+`user_style_roller.working_end` (also `--working-end-only`, -> `judge/working_end.json`): the posed drive pairs and the
+drive skin over the workspace's **115 closing, feasible poses at |dK| 29.39-46.25** (the cap), the range no clip frame
+reaches. **No clash.** Rolling pairs closed on all 58 driven poses (follower on lobe -0.007..-0.028 mm, roller on flank
+-0.000..-0.011: contact, inside R6's 0.15). Tightest running clearances: crank vs link 1a 0.108 mm (dK -44.87), follower
+pin clip vs the lobe ring 0.113 (dK -41.28), crank vs link 1b 0.15, link 1a vs link 1b / hub J1 0.15 (the stack rules).
+Drive skin minimum **2.491 mm** (the crank, workspace pose 56) against the >= 0.3 rule; roller 5.93, flank pin 5.12.
+The full step-1 R16 run (judge/workspace.py --step 1) was not repeated here; the verifier's step-1 run stands (64.2 %).
+
+## 4. R1 vs the L1 (partly done)
+
+- **Arm straight run through the model's stations** (`user_style_roller.arm_profile`, `ROLLER_ARM=profile`): one
+  side-view line/arc sketch in the plane through GH spanned by dR and the arc's tangent point, underside through the
+  model's arm rows (root at the boss + 1.0, <= 60-deg ramp, lifted 0.26 over link 1b's BUILT bar over the swing), R2
+  tangent rounds, extruded 6 across: levels 67.79 -> **58.98** -> 63.35 (the chord held 63.35+). Built as
+  `user_roller_longdyad_arm` (valid crank, 96 parts); its judges were queued on the farm with the main build's and had not
+  returned at the end of the box, so it is NOT adopted (builder default stays `chord`).
+- **Lobe band lower**: not done. The lobe sits at F2 + 9.8..12.8 because the crank boss is raised 3.97 mm (link 1b's
+  built bar top under the O10 footprint is 66.64 vs the model's 62.82; the L1's slab raises it 3.55 too). The follower
+  rides the boss top, so the band only drops with the boss: that needs link 1b's bar lowered under the boss (its lift at
+  hub K's footprint) or the follower beside the boss (a_s >= 8.1, the red team's 8.5 option, nose 13.19): a cam re-synthesis.
+- **pick3's robust flank**: not adopted. pick3 is a different config (bk1 26.8, smhi 18.2, zr 3.77): fit60 ->
+  Bench(110,360) 21.64 vs the verified 18.67, far above the 0.1 allowance; a flank-only transfer (beta / r_c / g on the
+  verified shape) needs its own bench + verification run.
+
+## 5. R17 at 2x clip speed (root cause: the exported mesh, fixed in the builder)
+
+The full CAD's twist at 2x (5.16 / 5.22 deg) was not inertia of the real parts: **link 2's exported mesh was open** (zero-
+area slivers left by the strip glue tessellate to nothing: a 10.6 mm seam), so `judge/dynamics.py mass_props` (seam
+> 5 mm) took the split pieces' convex hulls: **l2 116.9 g / 26.4 cm3** against ~30 g real (link_inertia_about_gh l2 6.0e-4
+vs the L1's 1.96e-4). The sliver fix (section 1) closes all but a 3.0 mm seam, under the judge's 5 mm whole-part rule:
+the judge's own `mass_props` on the rebuilt exo.glb now gives **l2 29.42 g / 6.64 cm3** (L1 32.6 g). The R17 re-run is
+in the queued farm judge. Not changed (reported): the CAD's knee still draws IGLIDUR pins (user_style_pinknee) while
+CLAUDE.md now asks for MR63ZZ pairs, and the dynamics judge assumes rolling bearings at every joint and does not model the
+knee stop (its own note: "the knee pins are free") although this CAD carries the stop tooth at 153.12 deg.
+
+## 6. Cleanups
+
+- (e) link 2's stale O18 groove at F+6.15..8.95 removed (the lobe ring seats on the J2 cap skirt at F2 + 9.8..12.8):
+  link 2 4.42 -> 4.57 cm3.
+- (g) flank roller pin named for what is drawn: **ISO 2341-A 3 x 6** (shank 6.0 under the O5 x 1 head; A: no split-pin
+  hole, it is pressed); the crank pivot pin now sits in a real **O3 bore through link 1b** (the cut passes the STEP round
+  trip on the fuzzy-glued bar; the first build could not cut it).
+- Materials (bookkeeping, R8): `material()` matched "dowel hole(s)" in the names of links 1b / 2 and "683ZZ" in the
+  crank's, so they were weighed as steel; numbered machined parts now take their stated alloy. Custom mass 181.0 ->
+  149.6 g (R8 total 243.8 -> 212.4 g), a measurement correction, not a design change.
+- (f) **lobe ring wall NOT fixed**: dwell r 10.886 over the O20 bore (0.89 mm in the sketch plane, 0.78 measured). The
+  dwell is the follower's free-running locus (0.1 under it), so it cannot grow; the bore sits on the J2 cap's thin
+  threaded skirt (r 9.0..10.0) below U1 = F+10.25. Cheapest real fix: turn the cap's solid crown section (F+10.25..12.25,
+  r 4.5..10) to O19 and step the ring's bore there (wall 1.39 mm over 2 / 3 of the band) - a two-part change, queued.
+
 RESULTS_PLACEHOLDER

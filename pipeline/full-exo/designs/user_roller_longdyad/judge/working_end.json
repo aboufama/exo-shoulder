@@ -30,11 +30,11 @@
    -37.98
   ],
   "D9-01 | D8-03": [
-   2.203,
-   -43.85
+   2.156,
+   -29.39
   ],
   "D9-01 | J2 cap": [
-   2.519,
+   2.522,
    -29.39
   ],
   "D9-01 | K clock-spring cap": [
@@ -92,7 +92,7 @@
   "where": "D9-01 drive bell crank (Ti-6Al-4V, 5-axi: workspace frame 56",
   "passes": true,
   "per_part": {
-   "drive flank roller pin ISO 2341-B 3x8 he": {
+   "drive flank roller pin ISO 2341-A 3x6 he": {
     "min_mm": 5.124,
     "at": "workspace frame 43",
     "frames_lt_0p3": 0,
