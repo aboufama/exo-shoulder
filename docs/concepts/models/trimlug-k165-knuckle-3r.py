@@ -123,9 +123,14 @@ class TLModel(SN.SNModel):
         Y = X.copy(); cut = float(P["crank_cut"]); ce = float(P["crank_edge"])
         if cut > 0: Y[arc] = Y[arc] + cut * unit(Y[arc])
         if ce > 0:
-            edge = arc & (rK > float(rK[arc].max()) - 0.5) if arc.any() else arc
+            ia = np.nonzero(arc)[0]; edge = np.zeros(len(X), bool)
+            if len(ia) and len(ia) % 4 == 0 and ia[-1] == len(X) - 1 and np.all(np.diff(ia) == 1):
+                edge[ia[3::4]] = True                                    # the arc block: per psi the rows w = -3, -1, 1, 3 (outer)
             if edge.any():
-                er = unit(Y[edge] - (Y[edge] @ uK)[:, None] * uK); Y[edge] = Y[edge] - ce * er
+                X0 = X[edge]; er = unit(X0 - (X0 @ uK)[:, None] * uK); Y[edge] = Y[edge] - ce * er
+                wall = np.concatenate([X0 + z * unit(X0) for z in np.unique(np.r_[ce, np.arange(ce, S.T_LINK + 1e-6, 1.0), S.T_LINK])]
+                                      + [X0 - (ce / 2) * er + (ce / 2) * unit(X0)])
+                self.contact.append((9, wall))                           # the side wall above the 45-deg chamfer + the chamfer face
             self._trim_info["crank_edge_n"] = int(edge.sum())
         self.rigid["crank"] = (9, Y); self._trim_info["crank_arc_n"] = int(arc.sum())
         # hub 2's top ring: edge break
