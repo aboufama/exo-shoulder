@@ -2,7 +2,7 @@
  "step": 6,
  "tol_mm": 0.5,
  "frames_checked": 228,
- "seconds": 306,
+ "seconds": 387,
  "jobs": 4,
  "body_model": "rig",
  "inside": "integer winding number (grid + segment crossings), depth = exact distance to the nearest surface (judge/sdist.py)",
@@ -597,7 +597,7 @@
    "attributable_worst": null,
    "attributable_kind": null
   },
-  "dk|drive flank roller pin ISO 2341-B 3x8 headed, head O5 x 1 on the skin side, 0.2 mm step, pressed in the arm tip (polished)": {
+  "dk|drive flank roller pin ISO 2341-A 3x6 headed (no split-pin hole: pressed), head O5 x 1 on the skin side, 0.2 mm step, pressed in the arm tip (polished)": {
    "owner": "ours",
    "max_depth": 0.0,
    "frames": 0,
@@ -667,7 +667,7 @@
    "attributable_worst": null,
    "attributable_kind": null
   },
-  "dk|D9-01 drive bell crank (Ti-6Al-4V, 5-axis machined from solid): boss O10 x 6 (2 x 683ZZ), follower plate 1.5 mm 1.5 under the boss top to the follower pin at 7 mm, bent arm 6 x 3 (straight run 22.7 mm + the arc about hub K at r_c 15.22, a revolve, 132.6 deg), roller pin bore at the tip": {
+  "dk|D9-01 drive bell crank (Ti-6Al-4V, 5-axis machined from solid): boss O10 x 6 (2 x 683ZZ), follower plate 1.5 mm 1.5 under the boss top to the follower pin at 7 mm, bent arm 6 x 3 (straight run 22.7 mm chord + the arc about hub K at r_c 15.22, a revolve, 132.6 deg), roller pin bore at the tip": {
    "owner": "ours",
    "max_depth": 0.0,
    "frames": 0,
@@ -687,7 +687,7 @@
    "attributable_worst": null,
    "attributable_kind": null
   },
-  "l2|D8-03 link 2: 8x3 bar on a line/arc chain + J2 / J3 O20 rings (J2 upper ring turned to O18 over F+6.15..8.95 for the lobe ring), J2 dowel hole, flies over the knee and the pad (machined from solid Ti-6Al-4V (2.5-D: 4 side-view sketches side by side of lines + tangent arcs through the model's strap stations, extruded 2 mm; 3+2-axis milling - a wire cannot cut strips of different profiles side by side), rounds R2 / R0.5 in the profile)": {
+  "l2|D8-03 link 2: 8x3 bar on a line/arc chain + J2 / J3 O20 rings, J2 dowel hole, flies over the knee and the pad (machined from solid Ti-6Al-4V (2.5-D: 4 side-view sketches side by side of lines + tangent arcs through the model's strap stations, extruded 2 mm; 3+2-axis milling - a wire cannot cut strips of different profiles side by side), rounds R2 / R0.5 in the profile)": {
    "owner": "ours",
    "max_depth": 0.0,
    "frames": 0,
@@ -727,7 +727,7 @@
    "attributable_worst": null,
    "attributable_kind": null
   },
-  "l1b|D8-02b link 1b: 8x3 bar on a line/arc chain, K upper pad + O20 ring + M18 spigot + bore (2 dowel holes), J2 pad + integral O7 pin with the 116.3-deg q2 stop slot; carries the crank pivot pin (O3 press bore) (machined from solid Ti-6Al-4V (2.5-D: 4 side-view sketches side by side of lines + tangent arcs through the model's strap stations, extruded 2 mm; 3+2-axis milling - a wire cannot cut strips of different profiles side by side), rounds R2 / R0.5 in the profile)": {
+  "l1b|D8-02b link 1b: 8x3 bar on a line/arc chain, K upper pad + O20 ring + M18 spigot + bore (2 dowel holes), J2 pad + integral O7 pin with the 116.3-deg q2 stop slot; carries the crank pivot pin in an O3 H7 bore (machined from solid Ti-6Al-4V (2.5-D: 4 side-view sketches side by side of lines + tangent arcs through the model's strap stations, extruded 2 mm; 3+2-axis milling - a wire cannot cut strips of different profiles side by side), rounds R2 / R0.5 in the profile)": {
    "owner": "ours",
    "max_depth": 0.0,
    "frames": 0,
@@ -737,7 +737,7 @@
    "attributable_worst": null,
    "attributable_kind": null
   },
-  "l1a|D8-02a link 1a: 8x3 bar on ONE line/arc chain in span(u1, uK) (J1 seat at the J1 skirt + 0.2, 60-deg ramp, R2 centre-line bends: 5-axis machined from solid, tighter than the 15 mm bent-bar rule), J1 / K pads + integral O7 pins, K pin continued as the O5 spring arbor (0.4 mm slit, no magnet: K is slaved); K's two opposed 62.8-deg stop slots in the K pad; the flank lug (3-arc flank, 2-axis wire-EDM along z_c) + its web (Ti-6Al-4V)": {
+  "l1a|D8-02a link 1a: 8x3 bar on ONE line/arc chain in span(u1, uK) (J1 seat at the J1 skirt + 0.15, 60-deg ramp, R2 centre-line bends: 5-axis machined from solid, tighter than the 15 mm bent-bar rule), J1 / K pads + integral O7 pins, K pin continued as the O5 spring arbor (0.4 mm slit, no magnet: K is slaved); K's two opposed 62.8-deg stop slots in the K pad; the flank lug (3-arc flank, 2-axis wire-EDM along z_c) + its web (Ti-6Al-4V)": {
    "owner": "ours",
    "max_depth": 0.0,
    "frames": 0,
