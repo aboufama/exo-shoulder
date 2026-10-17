@@ -42,13 +42,15 @@ _sp = importlib.util.spec_from_file_location("longstroke_for_dogring", os.path.j
 LS = importlib.util.module_from_spec(_sp); _sp.loader.exec_module(LS)
 SC, FL, PK, S, RL = LS.SC, LS.SC.FL, LS.PK, LS.S, LS.RL
 SCBase = LS.SCBase
+_LS_CLAMP = LS._clamp
+_LS_REPORT = LS._report
 KR = FL.KR
 unit = S.unit; D2R = math.pi / 180
-PA_GATE = 42.0; RATE_MAX = 3.45; RUNG = 0.15; EYE_R = 4.5; ARM_W = 6.0; DL_W = 6.0
+PA_GATE = 42.0; RATE_MAX = 3.45; RUNG = 0.15; EYE_R = 4.0; ARM_W = 6.0; DL_W = 6.0
 RING_RI, RING_RO = 10.2, 12.5
 
 # cell seeds: the judge's 34/46 (spec, arm along link 1b) and the beside-arm synthesis rows (arm on the far side of link 1b)
-SEED = dict(bk1=34.0, bk2=46.0, a1max=74.5, smhi=22.0, a1=30.22, t1=61.6, a3=14.53, t3=-9.98, root_off=10.0,
+SEED = dict(bk1=34.0, bk2=46.0, a1max=74.5, smhi=22.0, a1=30.22, t1=61.6, a3=14.53, t3=-9.98, root_off=-12.0,
             ring_layer=0, hl=0.0, zr=0.0, dl_a=1, dl_h=1, sector_gap=0.5)
 PARAMS = dict(LS.PARAMS); PARAMS.update(SEED)
 for k_ in ("La", "r_h", "beta", "gam", "s_arm", "r_lobe", "kK", "kA", "kB"): PARAMS.pop(k_, None)
@@ -59,7 +61,7 @@ def _c(v, lo, hi): return min(max(float(v), lo), hi)
 
 
 def _clamp(p):
-    p = LS._clamp(p)                                         # parent clamp (dyad, inert RSSR fields)
+    p = _LS_CLAMP(p)                                         # parent clamp (dyad, inert RSSR fields)
     p["bk1"] = _c(p["bk1"], 26.0, 40.0); p["bk2"] = _c(p["bk2"], 38.0, 56.0)
     p["a1max"] = min(float(p.get("a1max", 99.0)), float(p["bk1"]) + float(p["bk2"]) - 5.5)
     p["smhi"] = _c(p["smhi"], 12.0, 28.0)
@@ -253,7 +255,6 @@ class DRModel(LS.LSModel):
         lvK = fK + float(P["hl"]); ek = unit(c2_0 - (c2_0 @ uK) * uK); bk = unit(np.cross(uK, ek))
         rh = float(lvK * math.tan(math.radians(float(P["a3"]))))
         horn = np.array([uK * lvK + r_ * ek + w_ * bk for r_ in np.arange(S.HUB_R + 0.5, rh + EYE_R + 1e-6, 2.0) for w_ in (-3.0, -1.0, 1.0, 3.0)])
-        horn = np.concatenate([horn, _disc(uK, lvK, 0.01)[:0]]) if len(horn) else horn
         # ---- drag link: eye over / under the arm tip and the horn, joggled strap between
         la = lv_tip + float(P["dl_a"]) * (S.T_LINK + RUNG); lh = lvK + float(P["dl_h"]) * (S.T_LINK + RUNG)
         dl, Cd = _strap(unit(c1_0), unit(c2_0), la, lh, DL_W)
@@ -293,8 +294,8 @@ class DRModel(LS.LSModel):
                 AR = self.strap["CRK"][1] @ Rr.T; DL = dl_mid @ Rd.T
                 HN = (horn + 1.5 * uK) @ S.rotm(uK, sp * kk)[0]          # R^T applied as row-vector @ R
                 c_ = dict(ring_L1b=float(tree2.query(RG)[0].min()) - S.T_LINK if tree2 is not None else 99.0,
-                          dl_hubK=float(self.sd_cyl(DL, cenK, axK, r=rK).min()) - 1.5, dl_hub2=float(self.sd_cyl(DL, cen2, ax2, r=r2).min()) - 1.5,
-                          arm_hubK=float(self.sd_cyl(AR, cenK, axK, r=rK).min()) - 1.5,
+                          dl_hubK=float(self.sd_cyl(DL, cenK, axK, r=rK).min()), dl_hub2=float(self.sd_cyl(DL, cen2, ax2, r=r2).min()),
+                          arm_hubK=float(self.sd_cyl(AR, cenK, axK, r=rK).min()),
                           dl_L1b=float(treeB.query(farX(farX(DL, cen2, ax2, r2, 4.0), cenK, axK, rK, 1.0))[0].min()) - S.T_LINK if treeB is not None and len(farX(farX(DL, cen2, ax2, r2, 4.0), cenK, axK, rK, 1.0)) else 99.0,
                           horn_L1b=float(treeB.query(farX(HN, cenK, axK, rK, 1.0))[0].min()) - S.T_LINK if treeB is not None and len(farX(HN, cenK, axK, rK, 1.0)) else 99.0)
                 need = dict(ring_L1b=RUNG, dl_hubK=1.0, dl_hub2=1.0, arm_hubK=1.0, dl_L1b=1.0, horn_L1b=1.0)
@@ -317,6 +318,7 @@ class DRModel(LS.LSModel):
                              arm_len=round(float(sarc[-1]), 1), clear_min={k_: round(v, 2) for k_, v in clr.items()}, table_why=dg["why"],
                              trans_min_taken=round(90.0 - pa_max_t, 1))
         self._rod_info = self._sc_info
+        if LS.GHOST: self._ghost()
         self._viz_rod = dict(ring=u2 * zring, ringAx=u2, armA=root_dir * zring, armB=c1_0 * lv_tip, rodA=c1_0 * la, rodB=c2_0 * lh, horn=c2_0 * lvK)
 
     @staticmethod
@@ -345,7 +347,7 @@ class DRModel(LS.LSModel):
 
     def collide(self, i):
         out = super().collide(i)
-        if getattr(self, "_dogg", None) is None or not hasattr(self, "_L2ring"): return out
+        if getattr(self, "_dogg", None) is None or not hasattr(self, "_L2ring") or int(self.D.p.get("ring_layer", 0)) != 0: return out
         # the sector vs link 2's root in the ring layer, in link 1b's frame (push coordinate): link 2 may touch the lug face
         # (the dog contact) but never enter the sector, either side round
         g = self._dogg; dg = self._scg["dog"]
@@ -367,7 +369,7 @@ LS.LSModel = DRModel; LS._clamp = _clamp; LS.PARAMS = PARAMS; LS.CELL = "dogring
 
 
 def _report(B, params):
-    r, M = LS._report(B, dict(params))
+    r, M = _LS_REPORT(B, dict(params))
     info = getattr(M, "_sc_info", None) or {}
     r["cam"] = {k: info.get(k) for k in ("dK_lim", "why_lim", "pa_max_taken", "ratio_range", "phi_max_taken", "ring_level_rel_f2",
                                          "sector_span", "arm_beside", "arm_tip_level", "dl_levels", "horn_level", "r_h", "dl_len",
