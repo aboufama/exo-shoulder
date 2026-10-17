@@ -6,7 +6,7 @@
  "active_dof": 3,
  "passive_dof": 4,
  "passive_translations": 0,
- "status": "screened",
+ "status": "verified",
  "t_ideated": null,
  "t_screened": "2026-10-17T11:22:03Z",
  "reach": 0.775,
@@ -15,11 +15,11 @@
  "inband10": 0.5116,
  "contact": 0.0,
  "gap": 13.02,
- "v_reach": null,
- "v_follow": null,
- "v_inband14": null,
- "v_inband10": null,
- "v_gap": null,
+ "v_reach": 0.725,
+ "v_follow": 1.0,
+ "v_inband14": 0.8953,
+ "v_inband10": 0.515,
+ "v_gap": 18.51,
  "n_configs": 45,
  "complexity": 22.25,
  "best_params": {
@@ -54,7 +54,7 @@
  },
  "verdict": "screened - a T5 depth polish of the lead, not a lead change, and the spec's main lever is refuted. Frozen exact Bench(110,360) 18.51 (score 93.27) vs the lead's 18.49 through the same Frozen class (lead reproduced: 18.49 / held 23.45); held out 23.47. Same reach 261/360, overhead 8/28, same 2 bench contacts: pose 264 is NOT cleared. Contact depth T5 bench 14.74 -> 13.18 mm (264: 5.74 -> 4.18), held out 46.35 -> 40.59 mm (10 contacts, 5 of them the lug, each 1.2-1.7 mm shallower). The spec's radial lift makes both elev-165 contacts DEEPER (T5 16.07 even without the longer nose / raised arm it needs). The crank underside cut gains 0.02 mm at 264 and costs 0.21 fast. The cap edge break misses the hub-2 contact, which is its side wall 4 mm below the cap. The skin comes in laterally (from large r_K) and from above.",
  "limiter": "Measured at ws 264 (30,165,-60), Bench(110,360) exact. The lug band directly behind the END of the flank's stroke (r_K 19.6-20.5 mm, 2.3 mm behind contacts at r_K 19.1-19.8) sits 2.2-3.3 mm in the skin. Clearing it needs the lug to end at r_K ~18.0, i.e. the flank to stop at dK ~35 deg vs the drive's 49.8 (taken 45.6), which is the lead's stroke wall (73 stretched fold losses). Secondary: the crank arm tip's outer side wall (-0.19 even after a 1 mm lower-edge chamfer; it needs a ~0.5 mm narrower tip) and hub 2's O20 housing wall (-0.09 at 8.17 of its 12.25 mm crown; it needs a ~0.3 mm flat). Pose 237 is hub K's own disc (-2.65) plus the crank at the nose (-9.00): no lug cut changes it.",
- "note": "Search: a 21-config grid on Bench(60,160) fast. trim_wall {off, 2.5, 1.5, 1.0, 0.8} x back_t {6, 4, 3}, the spec's rlift 1.5 / 2.5, crank_cut 0.3 / 0.6, cap_break 0.5, and the spec's combination. Fast plain gap 13.00-13.40; the fit bench has no contact pose, so it reads only the in-band cost. Then 14 two-pose exact checks at 237 / 264, then the cone set (110 clips + 47 cone poses, exact) and the full claim columns on the farm: frozen exact Bench(110,360) + held out for lead sparse / lead dense / trim 1.5 / trim 1.0 / trim 1.5 + back 4. Convergence gate on the fast grid (score points): 0.00 / 0.00 / top-5 spread 0.004, which passes. No CMA: the fit bench is flat in these cuts, and on the frozen bench T5 is monotone in the trim, bounded by the wall rule. Cone set (the lead note's first test): in-band 0.8955 lead, 0.8954 rlift 2.5 (optimistic), 0.8953 trim 1.5, a drop of 0.0002 < 0.005. Pose 264 is not cleared, so the note's stop rule applies. Trim 1.0 gives T5 12.67 / held 38.71 at the same 18.51 / 23.47 but leaves a 1.0 mm wall. Back 4 gives 18.56 / 23.52 for the same bench T5. Dense lug sampling (0.5 mm, contact-only) is a measurement change: the lead + dense reads 18.49 / 23.45, T5 14.74 / held 46.35 (sparse 46.13). The +0.02 gap of the trim is in-band accounting: 3 of 23 scored lug samples removed (horn ib14 0.956 -> 0.955, pooled 0.8955 -> 0.8953).",
+ "note": "Search: a 21-config grid on Bench(60,160) fast. trim_wall {off, 2.5, 1.5, 1.0, 0.8} x back_t {6, 4, 3}, the spec's rlift 1.5 / 2.5, crank_cut 0.3 / 0.6, cap_break 0.5, and the spec's combination. Fast plain gap 13.00-13.40; the fit bench has no contact pose, so it reads only the in-band cost. Then 14 two-pose exact checks at 237 / 264, then the cone set (110 clips + 47 cone poses, exact) and the full claim columns on the farm: frozen exact Bench(110,360) + held out for lead sparse / lead dense / trim 1.5 / trim 1.0 / trim 1.5 + back 4. Convergence gate on the fast grid (score points): 0.00 / 0.00 / top-5 spread 0.004, which passes. No CMA: the fit bench is flat in these cuts, and on the frozen bench T5 is monotone in the trim, bounded by the wall rule. Cone set (the lead note's first test): in-band 0.8955 lead, 0.8954 rlift 2.5 (optimistic), 0.8953 trim 1.5, a drop of 0.0002 < 0.005. Pose 264 is not cleared, so the note's stop rule applies. Trim 1.0 gives T5 12.67 / held 38.71 at the same 18.51 / 23.47 but leaves a 1.0 mm wall. Back 4 gives 18.56 / 23.52 for the same bench T5. Dense lug sampling (0.5 mm, contact-only) is a measurement change: the lead + dense reads 18.49 / 23.45, T5 14.74 / held 46.35 (sparse 46.13). The +0.02 gap of the trim is in-band accounting: 3 of 23 scored lug samples removed (horn ib14 0.956 -> 0.955, pooled 0.8955 -> 0.8953). | VERIFIED 2026-10-17T12:25:48Z (skeptic, farm + one local repeat, CB_EXACT; harness docs/concepts/verify/trimlug-k165-knuckle-3r.py = the lead's verifier retargeted at TLModel + trim checks T1-T5): frozen exact Bench(110,360) 18.51 (score 93.27; reach 0.725 = 261/360, follow 1.0, ib14 0.8953, ib10 0.515, contact 0.0054 = 2 poses), overhead 8/28, near1 20.14, near2 33.02, min metal 0.07 mm; held out 23.47 (contact 10 poses); lead control through the same harness 18.49 (T5 14.74). Added checks: 0 failing taken poses (0/371 bench, 0/852 held): closure, nose-lug, K sense, PA+friction horn 40.77 / crank 34.47 <= 43 (and 45), th margin 5.181 (held 5.006), conjugate undercut 0. Trim: T1 contact line (dowel rings -1.25/0/+1.25 along the GH ruling) on retained metal, edge margin 2.53 mm at the trim's own radius (1.99 over the full 49.75-deg stroke; the trim is decided on the lug underside and carried up the GH ray, so the real margin is above the stated 1.5); T2 back thickness behind every used contact >= 4.30 mm (held 4.15; 6 untrimmed); T3 lug connectivity = the lead's; T4 no untrimmed member-1 sample; T5 the dense lug copy (contact-only in the claim) worn against every member at every taken pose: crank 0.153 mm (the arm's 0.15 running gap over the lug, same as the lead), nose 0.424 (its own sliding pair), every other member >= 20.96 mm - same minima as the lead. Flank-edge envelope (lead verifier's strip, trimmed): 18.47. T5 reproduced: bench 14.74 -> 13.18 mm, held 46.35 -> 40.59. Kinematics untouched (same why-list fold 88 / slide 9 / contact 2), so the lead's flood (18.49 / knn 20.16) carries. Champion same bench 75.94 (risley-turret verifier, Bench(110,360) exact, kit checks + 1 mm clearance; 66.97 through the offset-skin-normal verifier). Not refuted. NOT a lead change: +0.02 vs the lead's 18.49 (3 in-band lug samples removed); both elev-165 contacts remain (237: crank 9.00, lug 8.35, hub K 2.65; 264: lug 4.18). Reporting issues: the row's limiter says 237 is hub K's disc plus the crank, but the trimmed lug is also 8.35 mm deep there; the row verdict says 5 lug-deepest held contacts, the doc lists 4; the sweep file has 31 entries (one timestamp) vs n_configs 45.",
  "doc": "docs/concepts/trimlug-k165-knuckle-3r.md",
  "fast": {
   "gap": 13.02,
@@ -442,5 +442,7 @@
   "crank_arc_n": 80
  },
  "model": "docs/concepts/models/trimlug-k165-knuckle-3r.py",
- "sweep": "docs/concepts/sweeps/trimlug-k165-knuckle-3r.json"
+ "sweep": "docs/concepts/sweeps/trimlug-k165-knuckle-3r.json",
+ "v_contact": 0.0054,
+ "verified_t": "2026-10-17T12:25:48Z"
 }

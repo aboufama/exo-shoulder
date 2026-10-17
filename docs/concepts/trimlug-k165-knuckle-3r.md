@@ -196,3 +196,74 @@ comes over the drive from the side and from above.
 
 The lesson that carries beyond this morphology: **near-skin metal at overhead poses must be cut laterally (in r_K / in
 plan), not lifted.** Read the skin normal at the contact before choosing the direction of a relief.
+
+## Verification (independent skeptic, 2026-10-17 12:25 UTC)
+
+**Verified, not refuted. Not a lead change.**
+
+Harness: `docs/concepts/verify/trimlug-k165-knuckle-3r.py`. It loads the claim's model unchanged and reuses the lead's
+verifier (`verify/slipper-nose-knuckle-3r.py`), retargeted at TLModel. The protocol is the lead's: fit on Bench(60,160)
+fast, freeze the shape, wear it exact. The jobs ran on the farm (4 jobs, $0.14), and the bench column was repeated locally
+with identical numbers. Raw outputs are in `verify/trimlug-k165-knuckle-3r_v_{bench_frozen,held_frozen,bench_edge,bench_lead}.json`.
+
+| column | gap | score | reach | follow | ib14 | ib10 | contact poses | T5 (mm) | near1 | min metal |
+|---|---|---|---|---|---|---|---|---|---|---|
+| lead control, same harness (trim off) | 18.49 | 93.28 | 0.725 | 1.0 | 0.8955 | 0.5163 | 2 | 14.74 | 20.12 | 0.07 |
+| **pick: trim 1.5, frozen exact Bench(110,360)** | **18.51** | **93.27** | 0.725 | 1.0 | 0.8953 | 0.515 | 2 | **13.18** | 20.14 | 0.07 |
+| pick + flank-edge strip (trimmed) | 18.47 | 93.28 | 0.725 | 1.0 | 0.8957 | 0.5163 | 2 | 13.18 | 20.10 | 0.07 |
+| pick, held out | 23.47 | 91.47 | 0.6828 | 1.0 | 0.8941 | 0.5136 | 10 | 40.59 | 26.56 | 0.33 |
+
+**Base checks (the lead's verifier).** 0 failing taken poses: 0 of 371 on the bench, 0 of 852 held out.
+
+- Closure, nose vs lug and K sense all pass.
+- Pressure angle plus friction: horn 40.77, crank 34.47. Both are at or under 43 (and 45).
+- th margin: 5.181 on the bench, 5.006 held out.
+- Conjugate undercut: 0 points.
+
+Overhead (elev >= 140): 8 of 28 poses taken, the same as the lead.
+
+The why-list is unchanged (fold 88, knee slide 9, contact 2), so the kinematics are untouched. The lead's continuity
+flood therefore still applies: 18.49 full, 20.16 knn.
+
+**Trim checks added for this claim:**
+
+- **T1, contact line on retained metal.** I took the dowel's contact line along the GH ruling (rings at -1.25 / 0 /
+  +1.25 mm) and read it at the trim's own radius. The edge margin is 2.53 mm over the taken stroke and 1.99 mm over the
+  full 49.75-deg stroke.
+  - The trim is decided on the lug underside and carried up the GH ray. The real margin is therefore larger than the
+    stated "1.5 mm wall".
+- **T2, back thickness behind every used contact.** At least 4.30 mm (4.15 held out), against 6 mm untrimmed. This is
+  more than the doc's red team assumed, so the strength argument is conservative.
+- **T3, connectivity.** The trimmed lug is connected exactly as the lead's lug is: one piece at 3 mm.
+- **T4, consistency.** No member-1 sample is left outside the trim.
+- **T5, dense lug part-to-part.** The claim adds the dense lug copy as contact-only, so it is never checked against
+  other parts. I wore it against every member at every taken pose:
+  - crank: 0.153 mm, the arm's 0.15 running gap over the lug;
+  - nose: 0.424 mm, its own sliding pair;
+  - every other member: at least 20.96 mm.
+
+  These are the same minima as the lead, so there are no new collisions.
+
+**Champion on the same bench:** 75.94, from the risley-turret verifier (Bench(110,360) exact, kit checks plus 1 mm
+clearance). Through the offset-skin-normal verifier it is 66.97. v_gap 18.51 is far below both, and no hard rule is broken:
+
+- 3 active DOF, with K slaved;
+- 0 passive translations;
+- no gears, pulleys or cables;
+- the trim only cuts link 1a's existing lug.
+
+**What the verification does not support:**
+
+- **A gap gain.** The gap is +0.02 worse than the lead's 18.49, because 3 in-band lug samples are removed. Both
+  elev-165 contacts remain:
+  - 237: crank 9.00, the trimmed lug still 8.35, hub K 2.65;
+  - 264: lug 4.18, crank 0.26, hub 2 0.09.
+
+  The row's limiter says 237 is "hub K's disc plus the crank". The lug is also 8.35 mm deep there; it does not set the
+  pose's depth, so the conclusion holds.
+- **The bookkeeping.**
+  - The row verdict says 5 held-out contacts are lug-deepest. The table above lists 4, and the verifier's per-pose
+    reading agrees with 4.
+  - The sweep file holds 31 entries, all with one timestamp, against n_configs 45.
+
+The deliverable that does survive is contact depth: T5 -1.56 mm on the bench and -5.76 mm held out, at +0.02 gap.
