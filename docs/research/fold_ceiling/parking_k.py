@@ -13,7 +13,16 @@ HERE = os.path.dirname(os.path.abspath(__file__)); REPO = os.path.abspath(os.pat
 sys.path.insert(0, os.path.join(REPO, "tools")); import concept_bench as CB; import concept_kit as K  # noqa: E402
 L = json.load(open(os.path.join(HERE, "lost_poses_roller-longdyad-knuckle-3r.json")))
 WHICH = os.environ.get("FC_WEAR", "bench")
-if WHICH == "held":
+if WHICH == "fast":                                          # screening: Bench(60,160) fast grid (taken / th from the model's own IK)
+    B = CB.Bench(60, 160); assert B.grid is not None
+    sp0 = importlib.util.spec_from_file_location("lead_fast", os.path.join(REPO, "docs", "concepts", "models", "roller-longdyad-knuckle-3r.py"))
+    M0 = importlib.util.module_from_spec(sp0); sp0.loader.exec_module(M0)
+    r0, Mf = M0._report(B, M0._clamp(dict(M0.PARAMS, **L["params"])))
+    Zf = CB._poses_all()["HG"][B.idx].astype(float)
+    thf = np.degrees(np.arccos(np.clip((Zf @ np.array(L["u3"])) @ np.array(L["u1"]), -1, 1)))
+    tk = [Mf.why[i] in (None, "ok", "") if hasattr(Mf, "why") else False for i in range(len(B.idx))]
+    rows = [dict(th=float(thf[i]), taken=bool(B.res[i] is not None and float(np.min(B.res[i])) >= 0)) for i in range(len(B.idx))]
+elif WHICH == "held":
     pv = importlib.util.spec_from_file_location("pkpol", os.path.join(REPO, "docs", "concepts", "verify", "skin-normal-3r-pin-knee-polish.py"))
     PV = importlib.util.module_from_spec(pv); pv.loader.exec_module(PV); B = PV.held_bench(); rows = L["held"]
 else:
