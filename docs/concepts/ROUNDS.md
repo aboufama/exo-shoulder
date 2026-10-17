@@ -2838,3 +2838,135 @@ Under the lead directive the main track spends one lens in the knuckle family, o
 
 - **B1:** does m_sub at K's rest, or the coupled reading, decide the fold rule? It still decides G4 for the whole
   family (desmo-conecut: 50 of 205 rest poses under 1 deg, like conecut).
+
+## Round 14 plan (2026-10-17 ~21:45 UTC, track main, lead verified gap 18.28)
+
+Planner's read of the files at 21:35-21:45 UTC. Ledger exits re-read: conecut-knee-knuckle-3r and
+desmo-conecut-knuckle-3r exit 0 (WATCH); crest-knee-3r exit 2 (no entry); gamed: dipped-law-groove-knuckle-3r (fold
+margin 0.184), seed-offset-3r-slides. The lead directive (16:20 UTC) still caps main at ONE lens inside the knuckle
+family at the back-of-shoulder seats, so the round-13 closer's two lenses (complexity, overhead contacts) run as two
+cells of ONE row: the contacts they target are mostly the drive's own metal (205's cap ring, 237's crank and plate).
+The jump track's round-102 judge routed two things here (docs/concepts/round102_ideation.md section 6):
+cap-plateau-knuckle-3r ("main round 14's seat cell, hub-2 tail gate first") and the antcrest basin for crest-knee-3r.
+
+### State
+
+- **Lead (best verified, not gamed): conecut-knee-knuckle-3r 18.28** (score 93.35) frozen exact Bench(110,360), held
+  22.38, reach 0.7278 (262/360), ib14 0.9012, follow 1.0, contact 0.0106 (4 poses), overhead 8/28, cx 18.5, 3 active,
+  0 passive translations. Watch (carry into every summary): bench edge over slipper-nose mostly E-strap dilution
+  (18.67 / held 22.90 at equal strap); T5 depth unscored (bench 4 poses / 20.24 mm, held 14 / 60.97); held th margin
+  5.006 (K play ~0.23 deg puts it near 4.92); NEW-ws-inband (taken elev 90-140 poses 0.8315 in band); dashboard sweep
+  12.5 shown as 95.45; G4 m_sub at K rest (B1, the user's call); NEW-self-reference (T5 reference is the row itself).
+- **Round-13 winner, not a lead: desmo-conecut-knuckle-3r 18.98** (93.10), held 23.19, **cx 16.5**, same 262 takes and
+  4 contact poses as conecut (0 discordant). Paired vs conecut +0.70 bench / +0.81 held, 100 % in-band: desmo stage 1's
+  cap-ring sector outside O20 (19 samples at 0.54 in band) +0.67, the inversion +0.09; ib14 0.8924 (0.76 points under the
+  0.90 knee of the gap). Watch: NEW-pa-reread (built-groove cap PA ungated K 0.33-9.0 at 35-81 deg; linear read mu
+  ~0.139), NEW-friction-cliff (a_s +0.07 mm binds at K 44.75; psi +0.5 deg at 46.0; mu 0.17 at 45.5; held stroke needs
+  46.27), NEW-silent-check (RC_MIN 1.5 never cut: rc 1.01, 0.247 mm ridge; worst-tolerance slop 0.281 > its 0.25 gate),
+  M3 (relief pocket 5 x 4 x 1.5 assumed; plate 0.150 mm over link 1a's boss; plate to hub K 1.23 mm), T3 (held th 5.006
+  -> ~4.92 with K play), continuity (kNN flood held 32.18 vs 23.19), G3 (no R17 / drag / cuff twist).
+- Others at the lead's reach: slipper-nose 18.49 / 23.45 (cx 18.25), trimlug-k165 18.51, inband-rssr 18.33 (polished),
+  roller-longdyad 18.67, desmo-slipper 18.95 / 23.90 (cx 15.75; jams at mu 0.14). 4 active: minarc-stop-knuckle-4r
+  18.40 (polished). **Complexity frontier (v2.2):** cx 0 skin-normal-3r-pin-knee 27.2 (reach 0.658, ib14 0.895,
+  contact 0.026; 23.64 under the current checks), raglan-knee 27.82; geneva-tail-pinknee 23.57 at cx 12; desmo-slipper
+  18.95 at 15.75; desmo-conecut 18.98 at 16.5; lead 18.28 at 18.5.
+- **95 arithmetic** (gap_of, tools/concept_bench.py line 53: 100 (max(0, .90 - ib14) + max(0, .95 - follow) +
+  max(0, .90 - reach)) + 100 contact): at ib14 >= 0.90 and the lead's contact 0.0106, reach 0.7731 = 279/360 (+17
+  takes); at ib14 0.88 and 0 contact, 0.7825 = 282/360. In-band above 0.90 buys nothing; in-band below it costs 1:1.
+- **Where the lead loses poses (bench, 98 lost):** fold 88 (stretched 73 at th 107-176, 64 of them internal rotation
+  >= 90 across the body; folded 15 at th 7.7-22, scapular-plane overhead), J3 stop 6 (182/184/208/209/211/238, bound
+  by hub 2 / K-housing metal 1-22 mm into the skin), contact 4. Overhead (desmo-conecut) 8/28: lost to fold 14,
+  contact 3, J3 stop 3. Stretched wall = dK 52.6 of the 57-deg cap.
+- **The 4 shared contacts** (identical on conecut, desmo-conecut and the round-12 cells; depths on desmo-conecut):
+  237 (plane 15, elev 165: crank -9.42, tip plate -5.87), 205 (hub 2 -4.28, cap ring -3.64), 316 (link 2 -1.23), 264
+  (hub K -1.17; conecut -5.80). Paired: two of them were worth +0.53; all four without a lost take ~1 point (conecut
+  ~17.2). Measured on trimlug (round 11): lateral relief 1 mm toward K's axis gains 0.9-1.0 mm at 237 / 264; the crank
+  tip's outer wall needs ~0.5 mm narrower, hub 2's housing wall a ~0.3 mm flat; a radial lift makes both deeper (T5
+  16.07); trimming 264 by the flank needs the stroke to stop at dK ~35 (the stroke wall).
+- **Measured ceilings:** back-of-shoulder knuckle 269-271 takes (proximal-j3 ghost 16.52 at 271; 16.91 / 269 at the
+  knee rule ang_min 25.22; round-12 long-dyad ghost max 270); plain O20 3R kinematic reach 250/360 at the back seat;
+  cap pole J1 bvec(43.2, 59.9) 50.2/60.3, J3 wdir(92.0, -9.0) 281/360 kinematic (267 with metal frozen, T-0 56.40);
+  U-law a1 = clip(max(40, th - 62), 40, 62), a2 70: 295/360 ws at wdir(90, 10), 285 at wdir(92, -9) (judge-reproduced);
+  fixed 60/70 311-318. Cap-pole revolute J2: hub 2 <= 0.12 in band over 668 configs (ib14 <= 0.68), J2 ray exits the
+  skin 107-116 mm at mode-A poses. U-law hub-2 trade: level 79 -> 271 ws clear, 52/394 in band (~21); level 63-67 ->
+  0.69-0.70 in band, 206-235 ws (>= 25); the planner's stop-box scan keeps <= 100/360 with a 12 mm band >= 0.8.
+  Antcrest seats (J1 bvec(55, 62), J3 wdir(98-104, +5..+18)), Bench(60,160): J2-exit p95 76-77 (cap control 96), > 75 mm
+  on 8-9/160 ws (cap 20) and 0-3/60 clips; fold loss 20-24 of 220 vs H1's 36; H1's knee collides 182-196/220 there; the
+  plain crest cell at bvec(55, 62) / wdir(98, 5) 50/58 reads 62.80 fast with hub 2 0.00 in band at 99 mm. Exact
+  Bench(110,360) J2-exit for the antcrest seats is running (j2exit.py 110 360, the J2 judge's section 7).
+- **Dead, do not rescreen (main):** back-seat J3 / hub-K / link-2 seat moves (proximal-j3), link-2 bar offsets, the wrap
+  region wd 74-78, knee re-fits on Bench(60,160) without an |axial| >= 150 gate, stage-2 slot length as a reach lever,
+  K law / gain / onset / cap / dyad cells (26), positive four-bar K under strict B1 (51.75, 2520 configs), drive cranks
+  beside link 1b, radial lifts of overhead metal, the dip below stop A (gamed), spring-held spare 4R, direct cam pairs
+  between O20 stacks, scapular relays on a plain 3R (acromion-relay 41.62), rigid arm rings (>= 72.2), 2R pointer +
+  arm-axial J3, arm-fixed races, 4R Keemink windows (rounds 2 / 10 / J1).
+- **Process lessons to obey (round 13):** every rule bound is a hard search-box edge (ang_min >= 25.22, th >= 5 incl.
+  K play, O20, own-angle stops), never a starting point; knee re-fits on the envelope bench; the pre-registered search
+  bench is the one the runner uses; held-out pose indices never enter a search / selection bench or a tolerance / box
+  edge (select on the envelope-selection draw, claim held out); every claim reports the plain gap, S6 equal-sample
+  in-band for any added or lengthened in-band metal, min th margin, continuity flood, per-pose dumps
+  (tools/alignment_paired.py dump, bench + held), T5 depth, the motion preview.
+- **Machinery still open:** verify template bar 68.93 / 75.94 -> 18.28; row verdict rewritten from the verification
+  block; near-touch columns from the dumps; slop state in the models; search-box edges enforced by the runner.
+- **Compute:** farm CLOSED (budget line); local only, niced, <= 2 processes per agent, OMP_NUM_THREADS=1, judges
+  --jobs 1. Load ~6.5 on 4 cores at 21:35 (gen-8 CAD score_design + checks, j2exit 110 360).
+
+### Lenses
+
+1. **LENS knuckle-o20-overhead (the one knuckle lens; complexity + contact depth as cells of one row; suggested id
+   desmo-o20-knuckle-3r).** Base: desmo-conecut's chain, knee, J3 dowel and inverted stage 2, verified placement.
+   - *Cell A (complexity):* stage 1's cap-ring sector kept inside hub 2's O20 footprint or under its stack, cx <= 16.5.
+     Worth +0.67 measured (decomposition reads 18.37 without the sector). Gates IN the model: stage-1 forward PA bind
+     >= 1 deg of K above the held stroke at a_s +-0.1 mm, psi +-0.5 deg and mu 0.17; RC_MIN enforced (or retired with
+     the insert's Hertz stress on the part); the K 0.33-9.0 back-drive band gated or force-measured (R17-style); the
+     relief pocket as metal against the hub-2 stack (pair probe incl. r < 11.5); plate-vs-horn running gap >= 0.25 mm;
+     K play carried into th per pose, held min >= 5.
+   - *Cell B (overhead contacts, on cell A's chain):* per-pose attribution first (part, coordinate) for 237 / 205 / 316
+     / 264, then only levers that move the metal sideways (crank / tip-plate routing at 237, cap ring and hub-2 housing
+     at 205, K-side relief at 264, link-2 planform at 316); radial lifts are measured-dead; a stop that turns a contact
+     into a fold or a J3-stop loss is a relabel and does not count.
+   - Target: <= 17.5 frozen exact at cx <= 16.5 with >= 262 takes (a new lead, 2 points simpler); floor: cell A alone
+     <= 18.28 at cx 16.5. Report paired vs conecut (bench + held), S6, T5. Kill: no stage-1 placement keeps the sector
+     inside O20 with dK_lim >= 46.3 at mu 0.15 (report the binding gate); cell B clears < 2 contacts without a lost take.
+2. **LENS cap-seat-ulaw (reach >= 0.77 at ib14 >= 0.88; the jump judge's routed cell, id cap-plateau-knuckle-3r).** The
+   only main-side cell with a kinematic count over 279 (295/360). It is at a NEW seat (cap pole / antcrest, acromion
+   top), so it does not reopen the back-seat reach the directive closed, and no drive work happens here (it borrows
+   lens 1's drive if it passes). Gate 0 (ghost, 30-45 min, metal hubs O20 at their stacks, 3 mm bars at real height,
+   ideal K law): fit the U-law chain at wdir(90, 10), wdir(92, -9) and the antcrest J1 bvec(55, 62) / J3 wdir(98-104,
+   +5..+18), search on the envelope bench, judge frozen exact Bench(110,360) with the continuity flood. Pre-registered
+   pass: hub 2 within 12 mm of its fitted level on >= 0.8 of taken poses, with <= 10 ws lost to a J1 OWN-angle stop
+   (dowel in an arc slot), AND >= 279 takes at ib14 >= 0.88 with <= 4 contacts. Report the per-pose J2-ray skin exit
+   (K3 march), taken / 360, overhead / 28, min th margin. Kill (expected ~90 %): the tail does not separate - write the
+   number to FINDINGS as the knuckle's cap-pole bound and stop.
+3. **LENS crest-pinknee-cx0 (low complexity at reach; catalogue row crest-knee-3r, seeded by the antcrest basin).** A
+   PLAIN O20 3R (three pins on bearing pairs, no drive, no spring) with the two-pin MR63ZZ cuff knee (cx 0 under v2.2)
+   at the antcrest seats, where the fold loss is 20-24 of 220 vs H1's 36. The knee is re-fit on the envelope bench with
+   an |axial| >= 150 contact gate (H1's knee collides there), ang_min >= 25.22 and the knee window as a physical stop.
+   Bar: frozen exact <= 21.0 (beats the cx-0 frontier 27.2 / 23.64 by >= 2.6); stretch <= 18.28 (a cx-0 lead).
+   Kill: hub 2 <= 0.5 in band on taken poses (the cap-pole failure) or frozen exact > 23.64. Shares lens 2's J2-exit
+   measurement (same seats, j2exit_110 when it lands); per-pose table for the antcrest binders and every new loss.
+
+### Carried (ideated, never screened)
+
+- crest-knee-3r (round-4 pick): lens 3's row, re-measured at O20 / margin 5 on the antcrest basin.
+- deltoid-crest-j3-3r (round-4 pick): a closing screen on the jump judge's forwarded O20 numbers (seeds 75.75 / 91.12
+  fast; best crest cell 62.80, hub 2 0.00 at 99 mm); 20-min box, expected dead; doubles as lens 3's no-knee control.
+- slotted-eccentric-pin-knee-3r (round-4 pick): only as lens 3's cell B if lens 3's measured limiter after gate 0 is the
+  fold, with its knee hub at O20 (not O11) and its complexity recorded.
+
+### Elsewhere, not to be duplicated
+
+- Jump track round 102 (J2) screening now: remote-pole-fourbar-j2-3r, cuff-slaved-elbow-fourbar-3r (virtual J2 at the
+  cap pole). Lens 2 / 3 here are revolute-J2 cells at the cap / antcrest seats that its judge routed to main; the J2
+  track's next planner should not re-pick them.
+- Lead: gen-8 full CAD user_conecut_knee (judging), j2exit 110 360 (J2 judge section 7).
+
+### Needs the lead's say
+
+- proximal-j3-geodesic-knuckle-3r with a re-placed drive at the knee rule reads ~17.2 by its verifier's estimate (16.91
+  ghost, drive ~+0.3): a possible ~1-point lead change that the directive ("not reach") and the round-13 closer's
+  do-not-rescreen block. Not a 95 path (269 takes); a score question for the lead.
+
+### Needs the user's say (unchanged)
+
+- B1 (m_sub at K rest vs the coupled reading) still decides G4 for the whole knuckle family.
