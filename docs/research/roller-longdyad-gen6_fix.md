@@ -75,8 +75,10 @@ The full step-1 R16 run (judge/workspace.py --step 1) was not repeated here; the
   side-view line/arc sketch in the plane through GH spanned by dR and the arc's tangent point, underside through the
   model's arm rows (root at the boss + 1.0, <= 60-deg ramp, lifted 0.26 over link 1b's BUILT bar over the swing), R2
   tangent rounds, extruded 6 across: levels 67.79 -> **58.98** -> 63.35 (the chord held 63.35+). Built as
-  `user_roller_longdyad_arm` (valid crank, 96 parts); its judges were queued on the farm with the main build's and had not
-  returned at the end of the box, so it is NOT adopted (builder default stays `chord`).
+  `user_roller_longdyad_arm` (valid crank, 96 parts) and judged fast on the farm: **R1 80.9 -> 81.2, R4 72.9 -> 73.5**,
+  R1-aim 47.6, R6 0.0 PASS, R2 ours 17.67 (= the main build), R16 64.2, R17 PASS: the dk share of the attribution (+0.31)
+  comes back. NOT adopted yet (builder default stays `chord`): its R7 and the builder's drive-skin / working-end checks
+  were not run on it inside the box (the arm dips 4.4 mm lower; the drive-skin rule is >= 0.3 mm on every frame).
 - **Lobe band lower**: not done. The lobe sits at F2 + 9.8..12.8 because the crank boss is raised 3.97 mm (link 1b's
   built bar top under the O10 footprint is 66.64 vs the model's 62.82; the L1's slab raises it 3.55 too). The follower
   rides the boss top, so the band only drops with the boss: that needs link 1b's bar lowered under the boss (its lift at
@@ -92,7 +94,8 @@ area slivers left by the strip glue tessellate to nothing: a 10.6 mm seam), so `
 > 5 mm) took the split pieces' convex hulls: **l2 116.9 g / 26.4 cm3** against ~30 g real (link_inertia_about_gh l2 6.0e-4
 vs the L1's 1.96e-4). The sliver fix (section 1) closes all but a 3.0 mm seam, under the judge's 5 mm whole-part rule:
 the judge's own `mass_props` on the rebuilt exo.glb now gives **l2 29.42 g / 6.64 cm3** (L1 32.6 g). The R17 re-run is
-in the queued farm judge. Not changed (reported): the CAD's knee still draws IGLIDUR pins (user_style_pinknee) while
+**measured**: twist at 2x 5.16 / 5.22 -> **4.10 / 4.02 deg** (mu 0.005 / 0.002; L1 4.09 / 4.01), M_GH 0.143, cuff 0.63 N.
+Not changed (reported): the CAD's knee still draws IGLIDUR pins (user_style_pinknee) while
 CLAUDE.md now asks for MR63ZZ pairs, and the dynamics judge assumes rolling bearings at every joint and does not model the
 knee stop (its own note: "the knee pins are free") although this CAD carries the stop tooth at 153.12 deg.
 
@@ -111,4 +114,37 @@ knee stop (its own note: "the knee pins are free") although this CAD carries the
   threaded skirt (r 9.0..10.0) below U1 = F+10.25. Cheapest real fix: turn the cap's solid crown section (F+10.25..12.25,
   r 4.5..10) to O19 and step the ring's bore there (wall 1.39 mm over 2 / 3 of the band) - a two-part change, queued.
 
-RESULTS_PLACEHOLDER
+## 7. Scorecard, full CAD (tools/judge_all.sh user_roller_longdyad fast, FEA skipped as before)
+
+R1 / R1-aim / R4 / R2 / R16 / R11 from the farm run of the rebuilt CAD; R7 (judge/part_validity.py), R6 (part_contact
+--step 3) and R17 (dynamics) re-run locally on the same files after the farm upload (the farm worker read the old
+part_validity.json it was shipped); scorecard by judge/scorecard.py.
+
+| | before (gen 6, verified) | after | what moved it |
+|---|---|---|---|
+| R1 | 80.9 % | 80.9 % | design (link 1a clr 0.2 -> 0.15, link 2 groove filled): no change |
+| R1-aim | 47.5 % | 47.6 % | design |
+| R4 | 72.9 % | 72.9 % | - |
+| R2 | 24.87 (user's cuff; ours 17.67) | same | - |
+| R6 | 0.0 PASS | 0.0 PASS (link 2 now tested as a container) | measurement got stricter, design holds |
+| R7 | **FAIL** (link 1b, STEP) | **PASS** (49 / 49) | design (strip glue) |
+| R8 | 243.8 g | 212.4 g | MEASUREMENT (material bookkeeping) |
+| R11 | 0.249 kPa | 0.262 kPa | MEASUREMENT (l2 mass now the real one) |
+| R16 | 64.2 % | 64.2 % | - |
+| R17 | PASS, 2x twist 5.16 / 5.22 | PASS, 2x twist 4.10 / 4.02 | MEASUREMENT (closed link-2 mesh; the metal is the same) |
+| passing | 7 / 19 | **8 / 19** | R7 |
+
+Arm option (`user_roller_longdyad_arm`, not adopted): R1 81.2, R4 73.5, the rest as above (R7 not run).
+L1 (`l1_roller-longdyad`): 7 -> 8 of 19 (R6), R1 81.9 -> 82.0 (section 2). The full CAD still trails its L1 by 1.1 on R1
+(0.8 with the arm option): the real lobe ring (section 4) is the rest.
+
+## Open (next)
+
+- Adopt the arm option after its R7 and drive-skin / working-end runs; lower the lobe band (boss under link 1b, or the
+  a_s 8.1+ follower beside the boss with a re-synthesised cam).
+- Lobe ring wall (f): cap crown turned to O19 + stepped ring bore (two-part change).
+- Knee: MR63ZZ pin pairs in user_style_pinknee (CLAUDE.md), and the dynamics judge's knee stop (judge change: the
+  judge owner's call, reported here, not edited).
+- Re-run `strip_glue_regression.py` on the final glue code for gen 4b / gen 5 (v1 results here); flank-only pick3
+  transfer needs a bench run.
+- Farm spend this task: 3 judge jobs, $0.11 shared / $0.52 alone (exo-cpu1, cpu3c), within the $0.6 cap.
