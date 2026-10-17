@@ -1,6 +1,6 @@
 # Alignment audit: desmo-slipper-knuckle-3r
 
-Auditor run `audit:desmo-slipper-knuckle-3r`, 2026-10-17 17:20-18:00 UTC (discovery round 12, slice r12-A verified this
+Auditor run `audit:desmo-slipper-knuckle-3r`, 2026-10-17 17:20-17:50 UTC (discovery round 12, slice r12-A verified this
 design this round). Reference: slipper-nose-knuckle-3r, the verified 3-active lead (18.49), whose drive this design
 rebuilds without its clock spring. Tool VERSION 2026-10-17.4. Farm closed (the 12-hour budget line was reached before
 this audit), so every re-wear ran locally, niced, at most 2 processes.
@@ -11,8 +11,8 @@ this audit), so every re-wear ran locally, niced, at most 2 processes.
   RE-PLACED stage-1 pin (a_s 9.5, psi 150) with the groove's blended onset law in the IK. Held out 23.90. The claim's
   own placement (a_s 9.25, psi 154: 18.63) failed its own 0.25-deg crank-free slop gate under the verifier's dense
   scan (`docs/concepts/rows/desmo-slipper-knuckle-3r.json` verification).
-- **Ledger verdict: LEDGER_VERDICT** (`docs/alignment/ledger.jsonl`, entry by auditor, run
-  `audit:desmo-slipper-knuckle-3r`). The tool's own verdict is watch (reporting only); the judgement pass adds 8 watch
+- **Ledger verdict: WATCH** (2026-10-17T17:46:26Z, claim 18.95 v_gap) (`docs/alignment/ledger.jsonl`, entry by auditor, run
+  `audit:desmo-slipper-knuckle-3r`). The tool's own verdict is watch (reporting only: the dashboard's sweep best 12.79 sits 6.16 below the verified number); the judgement pass adds 8 watch
   findings and no gamed one.
 - **In one line:** the verified number is honest and reproduces (19.00 through the model's own IK, 18.95 with the
   verifier's blended IK); the design is not ranked above a better one (it is 0.46 behind the lead on the same poses).
@@ -26,7 +26,22 @@ placement, passed by hand (`docs/alignment/remeasure/desmo-slipper-knuckle-3r_vc
 best_params is the refuted placement (finding 3). The model's own IK uses the linear K law, the verifier's the blended
 law; the 0.05 difference is the one the verifier measured on the claim placement (-0.04).
 
-REWEAR_TABLE
+| | desmo-slipper (this audit, verified placement) | lead slipper-nose (its audit) |
+|---|---|---|
+| frozen exact Bench(110,360), model IK / verifier IK | 19.0 / 18.95 (reach 0.725, in-band14 0.8904, contact 0.0054; 575.9 s) | 18.49 |
+| held out, model IK | 23.95 (verifier 23.90); reach 0.6828, in-band14 0.8893, contact 0.0116; near 1 / 2 mm 27.04 / 37.52 | 23.45 (verifier 23.45) |
+| reach, workspace | 261 / 360 (0.725); held 650 / 952 | 261 / 360; held 650 / 952 |
+| overhead (elev >= 140) taken / total | 8 / 28 (held 18 / 71) | 8 / 28 (held 18 / 71) |
+| raised arm (elev >= 90) | 46 / 113 (held 114 / 300) | 46 / 113 (held 114 / 300) |
+| taken poses with metal < 1 / 2 / 3 mm, bench | 3 / 30 / 100 (9 overhead under 2 mm) | 3 / 30 / 100 |
+| taken poses with metal < 2 mm, held out | 67 (< 1 mm: 14; 18 overhead) | 67 (< 1 mm: 14) |
+| contact poses, bench | 2: 9.01 mm at (15, 165, -60), 5.72 mm at (30, 165, -60); sum 14.72 mm | 2: 9.01 / 5.74 mm, sum 14.75 mm |
+| contact poses, held out | 10, sum 46.14 mm, deepest 9.05 mm at (30, 165, -45); 4 below elev 150: 3.49 / 5.51 / 1.60 mm at elev 60, 1.22 mm at (15, 105, 15) | 10, sum 46.12 mm, deepest 9.06 mm |
+| workspace in-band 2-14 (unscored), all / elev 90-140 / overhead | 0.8534 / 0.8009 / 0.9378 (over 14 mm: 0.1447 / 0.1983 / 0.06; p95 19.98 mm, max 30.8 mm at elev 90-140 / all) | 0.856 / 0.8004 / 0.94 (over 14 mm 0.142 / 0.1987 / 0.0577) |
+| fold margin in th, min over taken (K on its law) | 5.181 deg (held 5.006) | 5.181 deg (held 5.006) |
+| lowest metal, overhead p10 | 1.82 mm | 1.82 mm |
+
+Files: `docs/alignment/remeasure/desmo-slipper-knuckle-3r_{bench,held,probe_bench,mu_cliff}.json` (this audit) and the verifier's per-pose dumps `docs/alignment/remeasure/desmo-slipper-knuckle-3r_{bench,held}_perpose.json` (recomputed 18.94 / 23.91).
 
 - **Clip metal histogram (scored frames, bench):** 0.01 % of samples under 2 mm, 0.15 % at 2-3 mm, 10.9 % over 14 mm.
   Reading the band as 3-14 mm costs 0.15 points (19.15): the band edge is not exploited (T2 clean).
@@ -61,7 +76,7 @@ Not measured, and why: the arm-vs-hub-2-stack clearance (no geometry of the J2 s
 the wear of the 0.23-mm groove ridge and its contact stress (no contact-mechanics model of the groove; finding
 NEW-silent-check); the fold margin with K offset by its play per pose (the models carry no slop state; finding T3);
 m_sub at rest (the lead's G4) was not re-measured - by construction it is the lead's (same seats, law and rest poses),
-but K at rest is now held positively by the groove's dwell instead of a spring on stop A; held-out wear probe (time box).
+but K at rest is now held positively by the groove's dwell instead of a spring on stop A; the held-out wear probe (time box; the held-out re-wear itself ran: 23.95).
 
 ## Findings
 
@@ -89,18 +104,18 @@ broken (3 active DOF, 0 passive translations, O20 hubs, fold margin 5.006 deg at
    a polish, the CAD) builds the failing placement unless told otherwise. Nothing on the leaderboard is flattered (the
    verified number is the worse one); the risk is building the wrong exo. Action: verified placement into best_params
    (claim's kept as claim_params), or the tools read verified_config.
-4. **R2.** The dashboard still shows "screened", no verified number, and a sweep best of 12.79 (score 95.35, over the
-   golden 95 line). That number is fast, read with the dense outer-wall sampling the screener measured at -0.31 (in-band
+4. **R2.** The dashboard (rebuilt 17:43: verified, 18.95) still shows a sweep best of 12.79 for this design (score
+   95.35, over the golden 95 line); until the rebuild it read "screened" with no verified number. That number is fast, read with the dense outer-wall sampling the screener measured at -0.31 (in-band
    padding), at a placement between two the verifier's dense scan refuted. On the sweep column the design reads ahead
-   of the lead (12.79 vs 13.00); verified it is behind (18.95 vs 18.49). Action: rebuild the dashboard; sweep rows
-   record their sampling convention and slop reading.
+   of the lead (12.79 vs 13.00); verified it is behind (18.95 vs 18.49). Action: sweep rows record their sampling
+   convention and slop reading.
 5. **T3.** Held-out min fold margin 5.006 deg with K on its law; the drive's 0.36-0.48 deg of K play costs about 0.1 deg
    of th, so the held-out minimum is under 5 with play (verifier's estimate). Same class as the lead's spring lag, smaller.
 6. **M3.** The 9.5-mm short arm and the pin pass through hub 2's O20 footprint in the layer of link 1b's J2 seat; no
    check covers them against the hub-2 stack. A 5 x 4 x 1.5 mm relief pocket is assumed, not shown.
 7. **T5 (carried).** Two overhead contacts at 9.01 and 5.72 mm deep (sum 14.72 mm, x2.36 the default reference's 6.23
    mm); held out 10, sum 46.14 mm, deepest 9.05 mm. The lead's own contacts, unchanged by the drive.
-8. **NEW-ws-inband (carried).** WS_INBAND_LINE
+8. **NEW-ws-inband (carried).** The gap reads in-band on clip frames only. On taken workspace poses at elevation 90-140, 0.8009 of the metal is in 2-14 mm and 0.1983 is above 14 mm (p95 19.98 mm), against 0.8004 / 0.1987 on the lead and 0.8904 on the scored clip frames. Same metal, same poses as the lead; carried.
 
 ## Patterns walked and found clean
 
