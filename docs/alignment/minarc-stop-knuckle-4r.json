@@ -5,10 +5,9 @@
  "complexity": 33.0,
  "verdict": "watch",
  "reasons": [
-  "near_touch: plain 19.54, <1 mm 26.44, <2 mm 41.69, <3 mm 152.61, band read 3-14 mm 20.08, 22.15 points live in the 1-2 mm shell (re-measured (this audit))",
   "contact_depth: the score counts contact poses, not depth (report only, score unchanged): polished_gap 18.4: bench 11 contact poses, sum 34.43 mm, deepest 13.17 mm at ['ws', 15.0, 165.0, -60.0], 4 deeper than 3 mm vs sidecar-longdyad-knuckle-3r 6.23 mm over 4 (+28.20 mm, x5.53) - CLEARLY DEEPER; held 35 contact poses, sum 126.1 mm, deepest 14.61 mm at ['ws', 45.0, 165.0, -30.0], 15 deeper than 3 mm vs sidecar-longdyad-knuckle-3r 35.66 mm over 10 (+90.44 mm, x3.54) - CLEARLY DEEPER | v_gap 19.54: bench 4 contact poses, sum 10.03 mm, deepest 6.41 mm at ['ws', 30.0, 165.0, -60.0], 1 deeper than 3 mm vs sidecar-longdyad-knuckle-3r 6.23 mm over 4 (+3.80 mm, x1.61); held 13 contact poses, sum 36.4 mm, deepest 7.27 mm at ['ws', 60.0, 165.0, -30.0], 6 deeper than 3 mm vs sidecar-longdyad-knuckle-3r 35.66 mm over 10 (+0.74 mm, x1.02)",
   "sampling: no per-part in-band record: unsampled bodies cannot be ruled out",
-  "complexity: recomputed 52.0 vs row 33.0; MISMATCH; info: 4 active + 2 sensed passive coordinates = 6 read coordinates (cuff-side passives are outside the count by the user's ruling)",
+  "complexity: recomputed 32.5 vs row 33.0; MISMATCH",
   "reporting: dashboard v_gap 18.4 vs verifier 19.54 (-1.14; the dashboard flatters the design); dashboard sweep best 6.19 (score 97.75) sits 13.35 below the verified number"
  ],
  "checks": [
@@ -31,7 +30,7 @@
   },
   {
    "check": "near_touch",
-   "level": "watch",
+   "level": "ok",
    "reason": "plain 19.54, <1 mm 26.44, <2 mm 41.69, <3 mm 152.61, band read 3-14 mm 20.08, 22.15 points live in the 1-2 mm shell (re-measured (this audit))",
    "shell2": 22.15,
    "plain": 19.54,
@@ -236,8 +235,8 @@
   {
    "check": "complexity",
    "level": "watch",
-   "reason": "recomputed 52.0 vs row 33.0; MISMATCH; info: 4 active + 2 sensed passive coordinates = 6 read coordinates (cuff-side passives are outside the count by the user's ruling)",
-   "recomputed": 52.0,
+   "reason": "recomputed 32.5 vs row 33.0; MISMATCH",
+   "recomputed": 32.5,
    "row": 33.0
   },
   {
@@ -248,7 +247,7 @@
   {
    "check": "judge_change",
    "level": "ok",
-   "reason": "no bench / judge / metric file changed in the 12 commits that touched the row"
+   "reason": "no bench / judge / metric file changed in the 13 commits that touched the row"
   },
   {
    "check": "rules",
@@ -261,7 +260,7 @@
   "held": true
  },
  "verifier_files": [],
- "git": "59539d6",
- "tool_version": "2026-10-17.1",
- "t": "2026-10-17T03:17:34Z"
+ "git": "7d447a7",
+ "tool_version": "2026-10-17.2",
+ "t": "2026-10-17T04:16:52Z"
 }

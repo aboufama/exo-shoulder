@@ -6,7 +6,6 @@
  "verdict": "watch",
  "reasons": [
   "held_out: no held-out measurement on file: the claim has never been worn off its own bench",
-  "near_touch: plain 27.2, <1 mm 31.75, <2 mm 46.85, 19.65 points live in the 1-2 mm shell (row v_polish_protocols.H1_fit60_m5.gap_near1)",
   "continuity: continuity record without the connected numbers (row v_connected_reach)",
   "fold_margin: no min-th margin over taken poses on file (rule: each claim reports it)",
   "sampling: no per-part in-band record: unsampled bodies cannot be ruled out",
@@ -29,7 +28,7 @@
   },
   {
    "check": "near_touch",
-   "level": "watch",
+   "level": "ok",
    "reason": "plain 27.2, <1 mm 31.75, <2 mm 46.85, 19.65 points live in the 1-2 mm shell (row v_polish_protocols.H1_fit60_m5.gap_near1)",
    "shell2": 19.65,
    "plain": 27.2,
@@ -42,9 +41,20 @@
    "source": "row v_polish_protocols.H1_fit60_m5.gap_near1"
   },
   {
+   "check": "contact_depth",
+   "level": "ok",
+   "reason": "no per-pose contact depths on file that reproduce the claim (tools/alignment_paired.py dump skin-normal-3r-pin-knee bench|held, or tools/alignment_wear_probe*.py); not measured",
+   "depths": {
+    "v_gap 27.2": {}
+   }
+  },
+  {
    "check": "dominance",
    "level": "ok",
-   "reason": "no reference"
+   "reason": "vs sidecar-longdyad-knuckle-3r: plain -8.29, 2 mm -12.82",
+   "ref": "sidecar-longdyad-knuckle-3r",
+   "gain_plain": -8.29,
+   "gain_2mm": -12.82
   },
   {
    "check": "continuity",
@@ -60,8 +70,12 @@
   {
    "check": "idle",
    "level": "ok",
-   "reason": "no slaved drive declared",
-   "spans": []
+   "reason": "knee: declared moving, no span on file",
+   "spans": [],
+   "declared": [
+    "knee"
+   ],
+   "rigid": []
   },
   {
    "check": "sampling",
@@ -71,8 +85,8 @@
   {
    "check": "complexity",
    "level": "ok",
-   "reason": "recomputed 19.5 vs row None; info: 3 active + 2 sensed passive coordinates = 5 read coordinates (cuff-side passives are outside the count by the user's ruling)",
-   "recomputed": 19.5,
+   "reason": "recomputed 0.0 vs row None",
+   "recomputed": 0.0,
    "row": null
   },
   {
@@ -83,7 +97,7 @@
   {
    "check": "judge_change",
    "level": "ok",
-   "reason": "no bench / judge / metric file changed in the 24 commits that touched the row"
+   "reason": "no bench / judge / metric file changed in the 25 commits that touched the row"
   },
   {
    "check": "rules",
@@ -96,9 +110,10 @@
   "held": false
  },
  "verifier_files": [
-  "docs/concepts/verify/skin-normal-3r-pin-knee-polish.results.json",
-  "docs/concepts/verify/skin-normal-3r-pin-knee_big_frozen.json"
+  "docs/concepts/verify/skin-normal-3r-pin-knee_big_frozen.json",
+  "docs/concepts/verify/skin-normal-3r-pin-knee-polish.results.json"
  ],
- "git": "c932f10",
- "t": "2026-10-16T20:26:30Z"
+ "git": "7d447a7",
+ "tool_version": "2026-10-17.2",
+ "t": "2026-10-17T04:17:11Z"
 }
