@@ -15,11 +15,11 @@
   {
    "check": "held_out",
    "level": "ok",
-   "reason": "held out 24.18 vs bench 19.54 (+4.64; row held_out_gap)",
+   "reason": "held out 24.18 vs bench 19.54 (+4.64; re-measured (this audit))",
    "held_gap": 24.18,
    "v_gap": 19.54,
    "drop": 4.64,
-   "source": "row held_out_gap"
+   "source": "re-measured (this audit)"
   },
   {
    "check": "fast_frozen",
@@ -109,9 +109,9 @@
  ],
  "remeasured": {
   "bench": true,
-  "held": false
+  "held": true
  },
  "verifier_files": [],
- "git": "6d11b42",
- "t": "2026-10-17T02:21:36Z"
+ "git": "271c09f",
+ "t": "2026-10-17T02:22:59Z"
 }

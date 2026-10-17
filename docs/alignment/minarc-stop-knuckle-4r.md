@@ -6,7 +6,7 @@ user's 2026-10-17 rulings: a sensed joint is a joint (so this design has 4 joint
 
 ## Verdict and claim
 
-- **Ledger verdict: WATCH** (printed by `tools/alignment_ledger.py`, entry 2026-10-17T02:21:41Z in `docs/alignment/ledger.jsonl`;
+- **Ledger verdict: WATCH** (printed by `tools/alignment_ledger.py`, entry 2026-10-17T02:23:12Z in `docs/alignment/ledger.jsonl`, which supersedes 02:21:41Z;
   tool verdict WATCH, 5 tool reasons and 10 judgement findings, all 'watch').
 - **Claim:** the ledger's claim is `polished_gap` **18.40** (score 93.31), the confirmed final polish pick1. The row's
   `v_gap` 19.54 is the earlier verified config BDp. Both were re-worn here.
@@ -18,24 +18,25 @@ user's 2026-10-17 rulings: a sensed joint is a joint (so this design has 4 joint
 ## What the wearer gets (measured)
 
 Re-worn here, fit Bench(60,160) fast -> frozen -> Bench(110,360) exact, through the verifier's harness unchanged
-(both configs reproduce their verified gap to the digit: 18.40 and 19.54). Held out: the verifier's files (fit-60 shape,
-1154 held-out poses). The sidecar-longdyad column is its own re-wear (`remeasure/sidecar-longdyad-knuckle-3r_*`).
+and on the 1154 held-out poses (fit-60 shape). Both configs reproduce their verified gaps to the digit: pick1 18.40 /
+22.69, BDp 19.54 / 24.18. The sidecar-longdyad column is its own re-wear (`remeasure/sidecar-longdyad-knuckle-3r_*`).
 
 | measure | pick1 (claim 18.40) | BDp (v_gap 19.54) | sidecar-longdyad, 3 joints (18.91) |
 |---|---|---|---|
 | overhead workspace taken (elevation >= 140), bench | **7 / 28** | 8 / 28 | 8 / 28 |
 | overhead workspace taken, held out (fit-60) | **12 / 71** | 16 / 71 | not measured |
-| overhead poses lost to contact (bench) | 5 | 2 | 2 |
+| overhead poses lost to contact, bench / held out | 5 / 16 | 2 / 7 | 2 / - |
 | workspace taken (bench) / reach | 270 / 360, 0.750 | 260 / 360, 0.722 | 261 / 360, 0.725 |
 | raised-arm reach by band, bench (taken / total) | 90-120: 28 / 51; 120-140: 13 / 34; 140-160: 5 / 13; 160+: 2 / 15 | 25 / 51; 13 / 34; 5 / 13; 3 / 15 | 25 / 51; 12 / 34; 5 / 13; 3 / 15 |
 | taken poses with metal < 1 / 2 / 3 mm (bench, of 380 / 370 / 371) | 13 / 38 / 171 | 15 / 36 / 168 | 2 / 26 / 178 |
-| taken overhead workspace poses with metal < 1 / 2 / 3 mm | 4 / 6 / 7 of 7 | 2 / 7 / 8 of 8 | 1 / 5 / 8 of 8 |
+| taken overhead workspace poses with metal < 1 / 2 / 3 mm | 4 / 6 / 7 of 7 (held 6 / 11 / 12 of 12) | 2 / 7 / 8 of 8 (held 6 / 14 / 16 of 16) | 1 / 5 / 8 of 8 |
 | gap at 1 / 2 / 3 mm near-touch (reported, not a gate) | 23.36 / 41.29 / 156.01 | 26.44 / 41.69 / 152.61 | 20.00 / 34.03 / 155.98 |
+| same, held out | 26.73 / 47.94 / 162.57 | 28.86 / 45.68 / 160.71 | 25.75 / 37.24 / 163.09 |
 | contact poses (metal inside the skin), bench; deepest | 11; **-13.17 mm** (overhead, elevation 165) | 4; -6.41 mm | 4; -4.61 mm |
 | contact poses, held out (fit-60); deepest | 35; **-14.61 mm** (hub K wall in the deltoid) | 13; -7.27 mm | 11; -8.31 mm |
 | workspace in-band 2-14 (unscored), all / overhead | 0.858 / 0.925 | 0.867 / 0.875 | 0.874 / 0.926 |
 | clip in-band 2-14 (scored) / 2-10 | 0.894 / 0.564 | 0.893 / 0.594 | 0.897 / - |
-| K open on taken poses (bench) | 86 of 380, up to 56.2 deg; 12 clip frames; **0 at elevation >= 140** | 61 of 370, up to 34.0 deg; 6 clip frames; 0 at >= 140 | no K joint (K slaved) |
+| K open on taken poses (bench) | 86 of 380, up to 56.2 deg; 12 clip frames; **0 at elevation >= 140** (held out: 209 of 887, up to 56.6 deg; 0 of 31 at >= 140) | 61 of 370, up to 34.0 deg; 6 clip frames; 0 at >= 140 | no K joint (K slaved) |
 | held out gap (fit-60) / at 1 mm | 22.69 / 26.73 | 24.18 / 28.86 | 22.67 / 25.75 |
 
 
@@ -189,7 +190,5 @@ gate the user retired on 2026-10-17, so it is reported in finding T1 and does no
   `docs/research/minarc_pick1_redteam.md` and `docs/research/pick1_k_hold_check.md`.
 - A K-locked control of pick1 (how many poses K alone buys) was not run. The row's early numbers at the pin knee's
   seats are 26.82 with K locked against 24.00 with K.
-- Held-out re-wear through the adapter (2 mm and overhead floors held out): sent to the farm at 02:06 UTC
-  (`tools/cloud_run.py batch`, 2 jobs, about 32 min each by the verifier's own timing); it had not returned within
-  this audit's time box. The held-out gaps, 1 mm numbers, overhead taken and contact depths above come from the
-  verifier's files. Cost of this audit on the farm: bench batch $0.06 (cpu3c), held batch about $0.10 estimated.
+- Farm cost of this audit (`tools/cloud_run.py batch`, 2 + 2 jobs): bench $0.060, held out $0.078 (cpu3c); total
+  $0.14, under the $1.5 cap.

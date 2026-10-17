@@ -1,0 +1,68 @@
+{
+ "id": "minarc-stop-knuckle-4r",
+ "wear": "held",
+ "config": "BDp (the row's v_gap 19.54 config, judge-priced; the config the tool's v_gap-keyed checks compare with). The ledger's claim pick1 (18.40) is in minarc-stop-knuckle-4r_pick1_probe_bench.json",
+ "frozen": {
+  "gap": 24.18,
+  "reach": 0.6828,
+  "follow": 1.0,
+  "inband14": 0.8904,
+  "inband10": 0.5928,
+  "contact": 0.015
+ },
+ "deep": {
+  "plain": 24.18,
+  "reach": 0.6828,
+  "follow": 1.0,
+  "inband14": 0.8904,
+  "contact": 0.015,
+  "n_poses": 1154,
+  "n_taken": 852,
+  "min_metal_mm": 0.05,
+  "gap_near1": 28.86,
+  "near1_poses": 27,
+  "gap_near2": 45.68,
+  "near2_poses": 82,
+  "gap_near3": 160.71,
+  "near3_poses": 401,
+  "clip_metal_hist": {
+   "0-1": 0.0001,
+   "1-2": 0.0012,
+   "2-3": 0.0054,
+   "3-4": 0.0164,
+   "4-6": 0.1045,
+   "6-10": 0.4666,
+   "10-14": 0.2976,
+   ">14": 0.1082
+  },
+  "gap_band3_14": 24.72,
+  "inband3_14": 0.885,
+  "overhead_min_metal_p10": 0.05,
+  "coord_spans": {
+   "dK_deg_abs": [
+    0.0,
+    34.136
+   ]
+  }
+ },
+ "parts_ib14": null,
+ "mode": "exact",
+ "exact": true,
+ "secs": 874.1,
+ "git": "271c09f",
+ "source": "tools/alignment_wear_probe_minarc.py (docs/concepts/verify/minarc-final-polish-verify.py main('fit60', ...) unchanged; near_touch wrapped); the lowest metal includes the verifier's hub-K cap samples",
+ "verifier_final": {
+  "dropped_kinematic": 0,
+  "dropped_contact_aware_extra": 0,
+  "gap": 24.18,
+  "reach": 0.6828,
+  "follow": 1.0,
+  "inband14": 0.8904,
+  "inband10": 0.5928,
+  "contact": 0.015,
+  "gap_near1": 28.86,
+  "near1_poses": 27,
+  "min_mm": 0.05,
+  "score": 91.21
+ }
+}
