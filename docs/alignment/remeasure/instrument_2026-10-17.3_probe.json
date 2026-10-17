@@ -1,0 +1,798 @@
+{
+ "tool_version": "2026-10-17.3",
+ "git": "c4960fe",
+ "t": "2026-10-17T17:10:32Z",
+ "idle": {
+  "tool_pattern": "\\[[\"']knee_moved[\"']\\]\\s*=\\s*True",
+  "same_as_probe": true,
+  "models": {
+   "conecut-knee-knuckle-3r.py": {
+    "new": false,
+    "old": true,
+    "broad_forms": [],
+    "loads_parents": [
+     "slipper-nose-knuckle-3r"
+    ]
+   },
+   "coupler-longdyad-knuckle-3r.py": {
+    "new": false,
+    "old": true,
+    "broad_forms": [],
+    "loads_parents": [
+     "dogring-draglink-knuckle-3r"
+    ]
+   },
+   "desmo-slipper-knuckle-3r.py": {
+    "new": false,
+    "old": true,
+    "broad_forms": [],
+    "loads_parents": [
+     "slipper-nose-knuckle-3r"
+    ]
+   },
+   "dogring-draglink-knuckle-3r.py": {
+    "new": false,
+    "old": true,
+    "broad_forms": [],
+    "loads_parents": [
+     "longstroke-slipper-knuckle-3r"
+    ]
+   },
+   "groove-desmo-knuckle-3r.py": {
+    "new": false,
+    "old": true,
+    "broad_forms": [],
+    "loads_parents": [
+     "kneeless-roller-knuckle-3r",
+     "roller-longdyad-knuckle-3r"
+    ]
+   },
+   "inband-rssr-knuckle-3r.py": {
+    "new": false,
+    "old": true,
+    "broad_forms": [],
+    "loads_parents": [
+     "longstroke-slipper-knuckle-3r"
+    ]
+   },
+   "kneeless-roller-knuckle-3r.py": {
+    "new": true,
+    "old": true,
+    "broad_forms": [
+     "[\"knee_moved\"] ="
+    ],
+    "loads_parents": [
+     "offset-skin-normal-3r",
+     "roller-longdyad-knuckle-3r"
+    ]
+   },
+   "kneeless-sidecar-knuckle-3r.py": {
+    "new": true,
+    "old": true,
+    "broad_forms": [
+     "[\"knee_moved\"] ="
+    ],
+    "loads_parents": [
+     "sidecar-longdyad-knuckle-3r"
+    ]
+   },
+   "longstroke-slipper-knuckle-3r.py": {
+    "new": false,
+    "old": true,
+    "broad_forms": [],
+    "loads_parents": [
+     "roller-longdyad-knuckle-3r"
+    ]
+   },
+   "slipper-nose-knuckle-3r.py": {
+    "new": false,
+    "old": true,
+    "broad_forms": [],
+    "loads_parents": [
+     "kneeless-roller-knuckle-3r",
+     "roller-longdyad-knuckle-3r"
+    ]
+   },
+   "trimlug-k165-knuckle-3r.py": {
+    "new": false,
+    "old": true,
+    "broad_forms": [],
+    "loads_parents": [
+     "slipper-nose-knuckle-3r"
+    ]
+   }
+  },
+  "missed_by_new": [],
+  "forms": {
+   "r[\"knee_moved\"] = True": {
+    "new": true,
+    "broad": true
+   },
+   "r['knee_moved']=True": {
+    "new": true,
+    "broad": true
+   },
+   "r.update(knee_moved=True)": {
+    "new": false,
+    "broad": true
+   },
+   "r = dict(r, knee_moved=True)": {
+    "new": false,
+    "broad": true
+   },
+   "out = {\"knee_moved\": True}": {
+    "new": false,
+    "broad": true
+   },
+   "setattr(r, \"knee_moved\", True)": {
+    "new": false,
+    "broad": true
+   },
+   "r[\"knee_moved\"] = not kc[\"ok\"]": {
+    "new": false,
+    "broad": true
+   },
+   "r[\"knee_moved\"] = bool(ptp > 0.5)": {
+    "new": false,
+    "broad": true
+   },
+   "r[\"knee_moved\"] = 1": {
+    "new": false,
+    "broad": true
+   },
+   "r[\"knee_moved\"] |= bad": {
+    "new": false,
+    "broad": true
+   },
+   "r[\"bracket_moved\"] = True": {
+    "new": false,
+    "broad": true
+   },
+   "if r.get(\"knee_moved\"): r[\"honest\"] = False": {
+    "new": false,
+    "broad": false
+   },
+   "# r[\"knee_moved\"] = True  (a comment)": {
+    "new": true,
+    "broad": true
+   }
+  },
+  "rows": [
+   {
+    "id": "cam-unfold-4th",
+    "status": "verified",
+    "reading_changed_old_to_new": false,
+    "cuff_knee_joints": 2,
+    "declared": [
+     "K",
+     "crank",
+     "knee"
+    ],
+    "rigid": [],
+    "knee_checked": true,
+    "level_now": "watch",
+    "level_proposal": "watch",
+    "reason_proposal": "a drive is declared but no range of it over the taken poses is on file; K: declared moving, no span on file; crank: declared moving, no span on file; knee: declared moving, no span on file"
+   },
+   {
+    "id": "conecut-knee-knuckle-3r",
+    "status": "screened",
+    "reading_changed_old_to_new": true,
+    "cuff_knee_joints": 2,
+    "declared": [
+     "knee"
+    ],
+    "rigid": [],
+    "knee_checked": true,
+    "level_now": "ok",
+    "level_proposal": "ok",
+    "reason_proposal": "knee: declared moving, no span on file"
+   },
+   {
+    "id": "coupler-longdyad-knuckle-3r",
+    "status": "dead",
+    "reading_changed_old_to_new": true,
+    "cuff_knee_joints": null,
+    "declared": [
+     "K",
+     "crank"
+    ],
+    "rigid": [],
+    "knee_checked": false,
+    "level_now": "ok",
+    "level_proposal": "ok",
+    "reason_proposal": "K moves: smallest recorded span 51.8 deg (row:frozen_exact.dK_taken_max); crank: declared moving, no span on file"
+   },
+   {
+    "id": "coupler-path-j1",
+    "status": "dead",
+    "reading_changed_old_to_new": false,
+    "cuff_knee_joints": 2,
+    "declared": [
+     "K",
+     "crank",
+     "knee"
+    ],
+    "rigid": [],
+    "knee_checked": true,
+    "level_now": "watch",
+    "level_proposal": "watch",
+    "reason_proposal": "a drive is declared but no range of it over the taken poses is on file; K: declared moving, no span on file; crank: declared moving, no span on file; knee: declared moving, no span on file"
+   },
+   {
+    "id": "desmo-slipper-knuckle-3r",
+    "status": "screened",
+    "reading_changed_old_to_new": true,
+    "cuff_knee_joints": 2,
+    "declared": [
+     "K",
+     "crank"
+    ],
+    "rigid": [],
+    "knee_checked": false,
+    "level_now": "ok",
+    "level_proposal": "ok",
+    "reason_proposal": "K moves: smallest recorded span 45.62 deg (docs/concepts/verify/desmo-slipper-knuckle-3r_v_bench_frozen.json:extra.dK_taken_max_deg); crank: declared moving, no span on file; knee: declared moving, no span on file"
+   },
+   {
+    "id": "desmo-vrocker-longdyad-knuckle-3r",
+    "status": "dead",
+    "reading_changed_old_to_new": false,
+    "cuff_knee_joints": 2,
+    "declared": [
+     "K",
+     "crank"
+    ],
+    "rigid": [],
+    "knee_checked": false,
+    "level_now": "watch",
+    "level_proposal": "watch",
+    "reason_proposal": "a drive is declared but no range of it over the taken poses is on file; K: declared moving, no span on file; crank: declared moving, no span on file; knee: declared moving, no span on file"
+   },
+   {
+    "id": "dipped-law-groove-knuckle-3r",
+    "status": "verified",
+    "reading_changed_old_to_new": false,
+    "cuff_knee_joints": 2,
+    "declared": [
+     "K",
+     "crank",
+     "knee"
+    ],
+    "rigid": [],
+    "knee_checked": true,
+    "level_now": "ok",
+    "level_proposal": "ok",
+    "reason_proposal": "_max_deg); crank moves: smallest recorded span 17.7 deg (docs/concepts/verify/dipped-law-groove-knuckle-3r_v_bench_frozen.json:sidecar.phi_max_taken); knee moves: smallest recorded span 42.51 deg (re-measured K.ang span)"
+   },
+   {
+    "id": "dogring-draglink-knuckle-3r",
+    "status": "refuted",
+    "reading_changed_old_to_new": true,
+    "cuff_knee_joints": null,
+    "declared": [],
+    "rigid": [],
+    "knee_checked": false,
+    "level_now": "ok",
+    "level_proposal": "ok",
+    "reason_proposal": "no moving drive / joint declared"
+   },
+   {
+    "id": "frontload-lobe-stopb-knuckle-3r",
+    "status": "verified",
+    "reading_changed_old_to_new": false,
+    "cuff_knee_joints": 2,
+    "declared": [
+     "K",
+     "crank",
+     "knee"
+    ],
+    "rigid": [],
+    "knee_checked": true,
+    "level_now": "ok",
+    "level_proposal": "ok",
+    "reason_proposal": "K moves: smallest recorded span 44.3 deg (docs/concepts/verify/frontload-lobe-stopb-knuckle-3r_claim_bench_frozen.json:drive.dK_taken_max); crank: declared moving, no span on file; knee: declared moving, no span on file"
+   },
+   {
+    "id": "groove-desmo-knuckle-3r",
+    "status": "verified",
+    "reading_changed_old_to_new": true,
+    "cuff_knee_joints": 2,
+    "declared": [
+     "K",
+     "crank",
+     "knee"
+    ],
+    "rigid": [],
+    "knee_checked": true,
+    "level_now": "ok",
+    "level_proposal": "ok",
+    "reason_proposal": " 32.02 deg (docs/concepts/verify/groove-desmo-knuckle-3r_v_bench_frozen_truewin.json:roller.dK_taken_max_deg); crank: declared moving, no span on file; knee moves: smallest recorded span 64.22 deg (re-measured K.qb span)"
+   },
+   {
+    "id": "inband-rssr-knuckle-3r",
+    "status": "screened",
+    "reading_changed_old_to_new": true,
+    "cuff_knee_joints": 2,
+    "declared": [
+     "K",
+     "crank"
+    ],
+    "rigid": [],
+    "knee_checked": false,
+    "level_now": "ok",
+    "level_proposal": "ok",
+    "reason_proposal": "K moves: smallest recorded span 45.83 deg (re-measured dK span); crank: declared moving, no span on file; knee moves: smallest recorded span 62.88 deg (re-measured K.qb span)"
+   },
+   {
+    "id": "longstroke-slipper-knuckle-3r",
+    "status": "screened",
+    "reading_changed_old_to_new": true,
+    "cuff_knee_joints": 2,
+    "declared": [
+     "K",
+     "crank"
+    ],
+    "rigid": [],
+    "knee_checked": false,
+    "level_now": "ok",
+    "level_proposal": "ok",
+    "reason_proposal": "K moves: smallest recorded span 41.52 deg (row:held_out.claim_detail.dK_taken_max); crank: declared moving, no span on file; knee moves: smallest recorded span 64.55 deg (re-measured K.qb span)"
+   },
+   {
+    "id": "minarc-stop-knuckle-4r",
+    "status": "verified",
+    "reading_changed_old_to_new": false,
+    "cuff_knee_joints": 2,
+    "declared": [
+     "K",
+     "knee"
+    ],
+    "rigid": [],
+    "knee_checked": true,
+    "level_now": "ok",
+    "level_proposal": "ok",
+    "reason_proposal": "K moves: smallest recorded span 34.04 deg (re-measured dK_deg_abs span); knee: declared moving, no span on file"
+   },
+   {
+    "id": "raglan-knee-3r",
+    "status": "verified",
+    "reading_changed_old_to_new": false,
+    "cuff_knee_joints": 2,
+    "declared": [
+     "knee"
+    ],
+    "rigid": [],
+    "knee_checked": true,
+    "level_now": "ok",
+    "level_proposal": "ok",
+    "reason_proposal": "knee: declared moving, no span on file"
+   },
+   {
+    "id": "rim-lobe-arm-knuckle-3r",
+    "status": "dead",
+    "reading_changed_old_to_new": false,
+    "cuff_knee_joints": 2,
+    "declared": [
+     "K",
+     "crank",
+     "knee"
+    ],
+    "rigid": [],
+    "knee_checked": true,
+    "level_now": "watch",
+    "level_proposal": "watch",
+    "reason_proposal": "a drive is declared but no range of it over the taken poses is on file; K: declared moving, no span on file; crank: declared moving, no span on file; knee: declared moving, no span on file"
+   },
+   {
+    "id": "roller-longdyad-knuckle-3r",
+    "status": "verified",
+    "reading_changed_old_to_new": false,
+    "cuff_knee_joints": 2,
+    "declared": [
+     "K",
+     "crank",
+     "knee"
+    ],
+    "rigid": [],
+    "knee_checked": true,
+    "level_now": "ok",
+    "level_proposal": "ok",
+    "reason_proposal": "red dK span); crank moves: smallest recorded span 18.7 deg (docs/concepts/verify/roller-longdyad-knuckle-3r_v_bench_frozen.json:sidecar.phi_max_taken); knee moves: smallest recorded span 64.22 deg (re-measured K.qb span)"
+   },
+   {
+    "id": "sidecar-longdyad-knuckle-3r",
+    "status": "verified",
+    "reading_changed_old_to_new": false,
+    "cuff_knee_joints": 2,
+    "declared": [
+     "K",
+     "crank",
+     "knee"
+    ],
+    "rigid": [],
+    "knee_checked": true,
+    "level_now": "ok",
+    "level_proposal": "ok",
+    "reason_proposal": "en_max_deg); crank moves: smallest recorded span 31.6 deg (docs/concepts/verify/sidecar-longdyad-knuckle-3r_v_bench_frozen.json:sidecar.phi_max_taken); knee moves: smallest recorded span 56.08 deg (re-measured K.qb span)"
+   },
+   {
+    "id": "sidecar-parallelogram-knuckle-3r",
+    "status": "verified",
+    "reading_changed_old_to_new": false,
+    "cuff_knee_joints": 2,
+    "declared": [
+     "K",
+     "crank",
+     "knee"
+    ],
+    "rigid": [],
+    "knee_checked": true,
+    "level_now": "ok",
+    "level_proposal": "ok",
+    "reason_proposal": "x_deg); crank moves: smallest recorded span 36.3 deg (docs/concepts/verify/sidecar-parallelogram-knuckle-3r_v_bench_frozen.json:sidecar.phi_max_taken); knee moves: smallest recorded span 52.68 deg (re-measured K.qb span)"
+   },
+   {
+    "id": "sidecar-roller-flank-knuckle-3r",
+    "status": "verified",
+    "reading_changed_old_to_new": false,
+    "cuff_knee_joints": 2,
+    "declared": [
+     "K",
+     "crank",
+     "knee"
+    ],
+    "rigid": [],
+    "knee_checked": true,
+    "level_now": "ok",
+    "level_proposal": "ok",
+    "reason_proposal": "ax_deg); crank moves: smallest recorded span 23.6 deg (docs/concepts/verify/sidecar-roller-flank-knuckle-3r_v_bench_frozen.json:sidecar.phi_max_taken); knee moves: smallest recorded span 70.06 deg (re-measured K.qb span)"
+   },
+   {
+    "id": "skin-normal-3r-pin-knee",
+    "status": "verified",
+    "reading_changed_old_to_new": false,
+    "cuff_knee_joints": 2,
+    "declared": [
+     "knee"
+    ],
+    "rigid": [],
+    "knee_checked": true,
+    "level_now": "ok",
+    "level_proposal": "ok",
+    "reason_proposal": "knee moves: smallest recorded span 40.63 deg (re-measured K.qb span)"
+   },
+   {
+    "id": "skinnormal-shortk-knuckle-4r",
+    "status": "dead",
+    "reading_changed_old_to_new": false,
+    "cuff_knee_joints": 2,
+    "declared": [
+     "K",
+     "knee"
+    ],
+    "rigid": [],
+    "knee_checked": true,
+    "level_now": "watch",
+    "level_proposal": "watch",
+    "reason_proposal": "a drive is declared but no range of it over the taken poses is on file; K: declared moving, no span on file; knee: declared moving, no span on file"
+   },
+   {
+    "id": "slipper-nose-knuckle-3r",
+    "status": "verified",
+    "reading_changed_old_to_new": true,
+    "cuff_knee_joints": 2,
+    "declared": [
+     "K",
+     "crank",
+     "knee"
+    ],
+    "rigid": [],
+    "knee_checked": true,
+    "level_now": "ok",
+    "level_proposal": "ok",
+    "reason_proposal": "measured dK span); crank moves: smallest recorded span 19.3 deg (docs/concepts/verify/slipper-nose-knuckle-3r_v_bench_mu12.json:sidecar.phi_max_taken); knee moves: smallest recorded span 64.22 deg (re-measured K.qb span)"
+   },
+   {
+    "id": "spiral-lobe-longdyad-knuckle-3r",
+    "status": "dead",
+    "reading_changed_old_to_new": false,
+    "cuff_knee_joints": 2,
+    "declared": [
+     "K",
+     "crank",
+     "knee"
+    ],
+    "rigid": [],
+    "knee_checked": true,
+    "level_now": "watch",
+    "level_proposal": "watch",
+    "reason_proposal": "a drive is declared but no range of it over the taken poses is on file; K: declared moving, no span on file; crank: declared moving, no span on file; knee: declared moving, no span on file"
+   },
+   {
+    "id": "split-knuckle-twosided-3r",
+    "status": "dead",
+    "reading_changed_old_to_new": false,
+    "cuff_knee_joints": 2,
+    "declared": [
+     "K",
+     "crank",
+     "knee"
+    ],
+    "rigid": [],
+    "knee_checked": true,
+    "level_now": "watch",
+    "level_proposal": "watch",
+    "reason_proposal": "a drive is declared but no range of it over the taken poses is on file; K: declared moving, no span on file; crank: declared moving, no span on file; knee: declared moving, no span on file"
+   },
+   {
+    "id": "trimlug-k165-knuckle-3r",
+    "status": "verified",
+    "reading_changed_old_to_new": true,
+    "cuff_knee_joints": 2,
+    "declared": [
+     "K",
+     "crank"
+    ],
+    "rigid": [],
+    "knee_checked": false,
+    "level_now": "ok",
+    "level_proposal": "ok",
+    "reason_proposal": "measured dK span); crank moves: smallest recorded span 19.3 deg (docs/concepts/verify/trimlug-k165-knuckle-3r_v_bench_edge.json:sidecar.phi_max_taken); knee moves: smallest recorded span 64.22 deg (re-measured K.qb span)"
+   },
+   {
+    "id": "twin-k2-sidecar-knuckle-3r",
+    "status": "dead",
+    "reading_changed_old_to_new": false,
+    "cuff_knee_joints": 2,
+    "declared": [
+     "K",
+     "crank",
+     "knee"
+    ],
+    "rigid": [],
+    "knee_checked": true,
+    "level_now": "watch",
+    "level_proposal": "watch",
+    "reason_proposal": "a drive is declared but no range of it over the taken poses is on file; K: declared moving, no span on file; crank: declared moving, no span on file; knee: declared moving, no span on file"
+   }
+  ],
+  "pin_knee_unchecked": [
+   "desmo-slipper-knuckle-3r",
+   "desmo-vrocker-longdyad-knuckle-3r",
+   "inband-rssr-knuckle-3r",
+   "longstroke-slipper-knuckle-3r",
+   "trimlug-k165-knuckle-3r"
+  ]
+ },
+ "record": {
+  "record_checks": [
+   "complexity"
+  ],
+  "rulings": [
+   {
+    "id": "dogring-draglink-knuckle-3r",
+    "key": "complexity",
+    "refuted": false,
+    "now": "watch",
+    "reason_now": "no mechanism record: complexity unaudited",
+    "counted_resolved": false,
+    "hard_rule_in_evidence": false,
+    "ruled_numbers_on_file": true
+   },
+   {
+    "id": "dogring-draglink-knuckle-3r",
+    "key": "reporting",
+    "refuted": false,
+    "now": "watch",
+    "reason_now": "dashboard sweep best 17.19 (score 93.75) sits 80.64 below the verified number",
+    "counted_resolved": false,
+    "hard_rule_in_evidence": false,
+    "ruled_numbers_on_file": true
+   },
+   {
+    "id": "groove-desmo-knuckle-3r",
+    "key": "reporting",
+    "refuted": false,
+    "now": "watch",
+    "reason_now": "verdict text still reads as a self-measured screen; dashboard sweep best 17.21 (score 93.74) sits 5.43 below the verified number",
+    "counted_resolved": false,
+    "hard_rule_in_evidence": false,
+    "ruled_numbers_on_file": true
+   },
+   {
+    "id": "k-rim-lobe-stub-knuckle-3r",
+    "key": "complexity",
+    "refuted": false,
+    "now": "ok",
+    "reason_now": "recomputed 4.0 vs row 4.0",
+    "counted_resolved": true,
+    "hard_rule_in_evidence": false,
+    "ruled_numbers_on_file": false
+   },
+   {
+    "id": "k-rim-lobe-stub-knuckle-3r",
+    "key": "reporting",
+    "refuted": false,
+    "now": "watch",
+    "reason_now": "verdict text still reads as a self-measured screen; dashboard sweep best 36.82 (score 86.61) sits 7.97 below the verified number",
+    "counted_resolved": false,
+    "hard_rule_in_evidence": false,
+    "ruled_numbers_on_file": false
+   },
+   {
+    "id": "kneeless-roller-knuckle-3r",
+    "key": "reporting",
+    "refuted": false,
+    "now": "watch",
+    "reason_now": "verdict text still reads as a self-measured screen",
+    "counted_resolved": false,
+    "hard_rule_in_evidence": false,
+    "ruled_numbers_on_file": true
+   },
+   {
+    "id": "kneeless-sidecar-knuckle-3r",
+    "key": "reporting",
+    "refuted": false,
+    "now": "watch",
+    "reason_now": "verdict text still reads as a self-measured screen",
+    "counted_resolved": false,
+    "hard_rule_in_evidence": false,
+    "ruled_numbers_on_file": true
+   },
+   {
+    "id": "minarc-stop-knuckle-4r",
+    "key": "complexity",
+    "refuted": false,
+    "now": "ok",
+    "reason_now": "recomputed 32.5 vs row 32.5",
+    "counted_resolved": true,
+    "hard_rule_in_evidence": false,
+    "ruled_numbers_on_file": true
+   },
+   {
+    "id": "minarc-stop-knuckle-4r",
+    "key": "reporting",
+    "refuted": false,
+    "now": "watch",
+    "reason_now": "dashboard v_gap 18.4 vs verifier 19.54 (-1.14; the dashboard flatters the design); dashboard sweep best 6.19 (score 97.75) sits 13.35 below the verified number",
+    "counted_resolved": false,
+    "hard_rule_in_evidence": false,
+    "ruled_numbers_on_file": true
+   },
+   {
+    "id": "roller-longdyad-knuckle-3r",
+    "key": "complexity",
+    "refuted": false,
+    "now": "ok",
+    "reason_now": "recomputed 20.25 vs row 20.25",
+    "counted_resolved": true,
+    "hard_rule_in_evidence": false,
+    "ruled_numbers_on_file": true
+   },
+   {
+    "id": "sidecar-longdyad-knuckle-3r",
+    "key": "complexity",
+    "refuted": false,
+    "now": "ok",
+    "reason_now": "recomputed 25.5 vs row 25.5; hand count (not derived from the model)",
+    "counted_resolved": true,
+    "hard_rule_in_evidence": false,
+    "ruled_numbers_on_file": true
+   },
+   {
+    "id": "sidecar-longdyad-knuckle-3r",
+    "key": "reporting",
+    "refuted": false,
+    "now": "watch",
+    "reason_now": "verdict text still reads as a self-measured screen; dashboard sweep best 10.3 (score 96.25) sits 8.61 below the verified number",
+    "counted_resolved": false,
+    "hard_rule_in_evidence": false,
+    "ruled_numbers_on_file": true
+   },
+   {
+    "id": "sidecar-parallelogram-knuckle-3r",
+    "key": "reporting",
+    "refuted": false,
+    "now": "watch",
+    "reason_now": "verdict text still reads as a self-measured screen; dashboard sweep best 10.63 (score 96.13) sits 8.50 below the verified number",
+    "counted_resolved": false,
+    "hard_rule_in_evidence": false,
+    "ruled_numbers_on_file": false
+   },
+   {
+    "id": "skin-normal-3r-pin-knee",
+    "key": "reporting",
+    "refuted": false,
+    "now": "watch",
+    "reason_now": "verdict text still reads as a self-measured screen; dashboard sweep best 19.72 (score 92.83) sits 7.48 below the verified number",
+    "counted_resolved": false,
+    "hard_rule_in_evidence": false,
+    "ruled_numbers_on_file": true
+   },
+   {
+    "id": "slipper-nose-knuckle-3r",
+    "key": "reporting",
+    "refuted": false,
+    "now": "watch",
+    "reason_now": "dashboard sweep best 13.0 (score 95.27) sits 5.49 below the verified number",
+    "counted_resolved": false,
+    "hard_rule_in_evidence": false,
+    "ruled_numbers_on_file": true
+   },
+   {
+    "id": "trimlug-k165-knuckle-3r",
+    "key": "reporting",
+    "refuted": false,
+    "now": "watch",
+    "reason_now": "verdict text still reads as a self-measured screen; dashboard sweep best 13.02 (score 95.27) sits 5.49 below the verified number",
+    "counted_resolved": false,
+    "hard_rule_in_evidence": false,
+    "ruled_numbers_on_file": true
+   }
+  ],
+  "mutations": [
+   {
+    "id": "roller-longdyad-knuckle-3r",
+    "mutation": "field +0.25",
+    "level": "watch"
+   },
+   {
+    "id": "roller-longdyad-knuckle-3r",
+    "mutation": "field +4 (the tool's own mutation)",
+    "level": "watch"
+   },
+   {
+    "id": "roller-longdyad-knuckle-3r",
+    "mutation": "active_dof 5",
+    "level": "gamed"
+   },
+   {
+    "id": "roller-longdyad-knuckle-3r",
+    "mutation": "passive_trans 3",
+    "level": "gamed"
+   },
+   {
+    "id": "slipper-nose-knuckle-3r",
+    "mutation": "field +0.25",
+    "level": "watch"
+   },
+   {
+    "id": "slipper-nose-knuckle-3r",
+    "mutation": "field +4 (the tool's own mutation)",
+    "level": "watch"
+   },
+   {
+    "id": "slipper-nose-knuckle-3r",
+    "mutation": "active_dof 5",
+    "level": "gamed"
+   },
+   {
+    "id": "slipper-nose-knuckle-3r",
+    "mutation": "passive_trans 3",
+    "level": "gamed"
+   },
+   {
+    "id": "minarc-stop-knuckle-4r",
+    "mutation": "field +0.25",
+    "level": "watch"
+   },
+   {
+    "id": "minarc-stop-knuckle-4r",
+    "mutation": "field +4 (the tool's own mutation)",
+    "level": "watch"
+   },
+   {
+    "id": "minarc-stop-knuckle-4r",
+    "mutation": "active_dof 5",
+    "level": "gamed"
+   },
+   {
+    "id": "minarc-stop-knuckle-4r",
+    "mutation": "passive_trans 3",
+    "level": "gamed"
+   }
+  ]
+ },
+ "secs": 0.7
+}
