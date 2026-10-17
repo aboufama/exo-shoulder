@@ -207,7 +207,7 @@ def main():
     for i, (g, n, s) in enumerate(adds):
         k = old_1a["k"] if i == 0 else k_next + i - 1
         nl = n.lower(); hwr = not n.startswith(("D8-", "D9-")) and any(w in nl for w in ("screw", "clip", "shim"))
-        if not hwr or "horn screw" in n:
+        if not hwr or "horn screw" in n or "shim" in nl:                                           # the cut shim is a made part: R7 needs its STEP
             cq.exporters.export(cq.Workplane().add(s), os.path.join(dd, "step", f"{k:02d}_{n.split(':')[0].replace('/', '_').replace(' ', '_')[:40]}.step"))
         trep = {}; m = USG.tess_safe(s, fine=True, report=trep); node = f"{g}|{n}|{k}"; sc.add_geometry(m, node_name=node, geom_name=node)
         mm = m.copy(); mm.merge_vertices(); vol = abs(mm.volume) if mm.is_watertight else s.Volume()

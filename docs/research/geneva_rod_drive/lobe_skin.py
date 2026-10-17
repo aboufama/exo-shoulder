@@ -98,7 +98,7 @@ def real_mode(every_frame):
         rep = {k: dvv["rep"].get(k) for k in ("lobe_r_onset", "lobe_r_end", "dK_end", "pa_deg", "lift_mm", "rocker_turn_deg", "rod_cap_clear_min", "horn_arm_eff", "dK_per_0.05mm_rod_deg", "dK_per_0.05mm_lobe_deg")}
         cands.append(dict(label=label, P=P[keep], h=h[keep], r=r[keep], az=az[keep], info=info, rep=rep, worst=(9.0,), n2=0, flank=9.0, dwell=9.0))
         print(f"built {label}: profile r {info.get('profile_r')} az {info.get('profile_az_deg')} valid {info.get('valid')} ({time.time() - t0:.0f} s)", flush=True)
-    if every_frame:                                                             # + the as-built v2 ring (exo.glb)
+    if every_frame and os.environ.get("LOBE_ASBUILT", "1") == "1":              # + the as-built v2 ring (exo.glb)
         dv2 = os.path.join(REPO, "pipeline/full-exo/designs/user_geneva_rod_v2"); src = trimesh.load(os.path.join(dv2, "exo.glb"))
         for node in src.graph.nodes_geometry:
             g, n = node.split("|")[:2]

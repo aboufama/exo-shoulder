@@ -2542,68 +2542,68 @@
  },
  "drive_posed": {
   "drive follower roller | D9-01": [
-   -0.0,
-   211
+   -0.001,
+   23
   ],
   "D9-03 | K clock-spring cap": [
-   3.748,
-   266
+   1.176,
+   35
   ],
   "D9-03 | D9-05": [
-   0.425,
-   266
+   0.173,
+   23
   ],
   "igubal housing at the horn | D9-05": [
-   0.439,
-   266
+   0.437,
+   20
   ],
   "drive horn pin O3 | igubal housing at the horn": [
-   0.267,
-   265
+   1.345,
+   20
   ],
   "D9-03 | drive horn pin O3": [
-   3.462,
-   281
+   3.472,
+   24
   ],
   "D9-02 | D8-03": [
-   0.962,
-   326
+   0.963,
+   14
   ],
   "D9-03 | D8-02b": [
-   11.733,
-   281
+   9.242,
+   13
   ],
   "D9-02 | D9-01": [
-   0.756,
-   253
+   0.51,
+   23
   ],
   "D9-03 | D8-03": [
-   9.866,
-   386
+   10.877,
+   1
   ],
   "D9-02 | D8-02b": [
    0.763,
-   445
+   30
   ],
   "drive follower roller | J2 cap": [
-   0.1,
-   445
+   0.143,
+   36
   ],
   "D9-02 | J2 cap": [
-   0.35,
-   2
+   0.6,
+   7
   ],
   "D9-03 | D9-02": [
-   2.294,
-   266
+   0.473,
+   1
   ],
   "igubal ball at the horn | igubal housing at the horn": [
-   0.0,
-   227
+   -0.002,
+   19
   ],
   "igubal ball at the crank | igubal housing at the crank": [
-   0.001,
-   203
+   -0.008,
+   20
   ]
  },
  "check": [
@@ -3833,87 +3833,5 @@
   "volume_change_mm3": 0.0,
   "fixed_valid": true,
   "name": "renamed: no magnet pocket"
- },
- "gen5_fix": {
-  "src": "user_geneva_rod",
-  "rise_rod_end_B_mm": 3.5999999999999996,
-  "eye_h": 6.0,
-  "hub_h": 3.8,
-  "lobe_fix": {
-   "a_f": 9.0,
-   "a_c": 9.0,
-   "rr": 3.0,
-   "dz": 0.0,
-   "r_h": 2.493,
-   "r_base": 9.6,
-   "side": 1,
-   "arm_half": 2.25
-  },
-  "drive_rep": {
-   "label": "",
-   "r_h": 2.493,
-   "a_f": 9.0,
-   "a_c": 9.0,
-   "rr": 3.0,
-   "r_base": 9.6,
-   "L_rod": 37.74,
-   "rocker_turn_deg": 14.56,
-   "lift_mm": 2.277,
-   "pitch_r": [
-    12.6,
-    14.88
-   ],
-   "lobe_r_onset": 10.19,
-   "lobe_r_end": 12.21,
-   "lobe_r_at_dK44": 11.95,
-   "lobe_arc_deg": 16.3,
-   "pa_deg": [
-    14.1,
-    35.9
-   ],
-   "pa_onset": 35.9,
-   "pa_end": 14.1,
-   "rc_pitch_min": 7.3,
-   "rc_profile_min": 4.3,
-   "horn_arm_eff": [
-    1.785,
-    2.425
-   ],
-   "crank_arm_eff": [
-    8.1,
-    8.27
-   ],
-   "follower_arm_eff": [
-    7.29,
-    8.73
-   ],
-   "lobe_arm_eff": [
-    6.14,
-    7.17
-   ],
-   "rod_misalign_deg": {
-    "horn": [
-     11.8,
-     13.9
-    ],
-    "rocker": [
-     22.4,
-     24.7
-    ]
-   },
-   "rod_cap_clear_min": 3.58,
-   "rod_slide_mm": 2.28,
-   "horn_arc_chord_mm": 2.24,
-   "A_end_vs_model_mm": 9.8,
-   "dK_per_0.05mm_rod_deg": [
-    1.18,
-    1.6
-   ],
-   "dK_per_0.05mm_lobe_deg": [
-    1.27,
-    1.49
-   ]
-  },
-  "seconds": 1070
  }
 }
