@@ -53,30 +53,36 @@ r_face + sec <= r1. "Per-pose bore" lets each pose choose its own ring (an upper
 "fixed bore" is one ring. Reach and follow can only FALL when hubs, spar, continuity and collisions are added, so
 gap >= 100 (max(0, .95 - follow_ub) + max(0, .90 - reach_ub)) for every configuration of the morphology.
 
-Results (Bench(60, 160) fast grid cache; `python3 docs/concepts/models/armband-pointer.py bound '{...}'` reproduces them;
-stations 160-300 mm, axis tilts 0 and 8 deg toward lateral / anterior / medial / posterior, any bore 30-112 mm):
+Results (Bench(60, 160) fast grid cache; `python3 docs/concepts/models/armband-pointer.py bound2 '{...}'` reproduces
+them: 35 cells = stations 240-300 x J3 axes through GH at the humerus axis and tilted 4 / 8 / 12 / 16 deg laterally,
+8 deg anterior / posterior / medial / posterolateral, 16 deg medial at s 240; ring face radius 2-112 mm; the test is the
+general one - the ring's annulus skin-free on all 36 rays AND the humerus line passing through the ring):
 
-| J3 axis, station | per-pose bore (sec 8, clr 0): follow ceiling / reach ceiling | gap lower bound | arm meets body (no gap at all) |
-|---|---|---|---|
-| humerus axis, s 160 | 0.217 / 0.388 | 124.5 | |
-| humerus axis, s 200 | 0.500 / 0.456 | 89.4 | |
-| humerus axis, s 220 | 0.533 / 0.531 | 78.6 | |
-| humerus axis, s 240 | 0.583 / 0.644 | 62.3 | 0.268 |
-| humerus axis, s 260 | 0.467 / 0.675 | 70.8 | 0.250 |
-| humerus axis, s 280 | 0.517 / 0.688 | 64.6 | 0.241 |
-| humerus axis, s 300 | 0.583 / 0.000 (the flexed forearm sits inside every ring) | 126.7 | |
-| 8 deg lateral, s 280 | 0.617 / 0.725 | 50.8 | 0.186 |
-| 8 deg medial, s 280 | 0.767 / 0.744 | 34.0 | 0.150 |
-| 8 deg medial, s 300 (most generous cell) | 0.800 / 0.844 | **20.6** | |
+| J3 axis, station | per-pose ring (sec 8): follow / reach ceiling, gap bound | ONE ring (fixed bore): face, follow / reach, gap bound |
+|---|---|---|
+| humerus axis, s 240 | 0.583 / 0.631, 63.5 | 70, 0.517 / 0.606, 72.7 |
+| humerus axis, s 260 | 0.450 / 0.675, 72.5 | 66, 0.450 / 0.650, 75.0 |
+| humerus axis, s 280 | 0.467 / 0.688, 69.6 | 62, 0.450 / 0.688, 71.2 |
+| humerus axis, s 300 | 0.533 / 0.000 (the flexed forearm fills every ring), 131.7 | 138.3 |
+| 4 deg lateral, s 280 | 0.550 / 0.706, 59.4 | 70, 0.483 / 0.694, 67.3 |
+| 8 deg lateral, s 280 | 0.567 / 0.713, 57.1 | 82, 0.550 / 0.700, 60.0 |
+| 12 deg lateral, s 280 | 0.583 / 0.694, 57.3 | 100, 0.567 / 0.694, 59.0 |
+| 16 deg lateral, s 260-300 | <= 0.5 / <= 0.14 (the ring must exceed 112 mm) | >= 121 |
+| **8 deg posterolateral, s 280** | 0.567 / 0.713, 57.1 | **72, 0.567 / 0.706, 57.7** |
+| 8 deg posterolateral, s 240 (most generous cell) | 0.650 / 0.681, **51.9** | 80, 0.600 / 0.613, 63.7 |
+| 8 deg anterior, s 240-300 | 0.38-0.55 / 0.52-0.64, 66-95 | 73-100 |
+| 8 deg medial, s 240-300 | 0.33-0.43 / 0.49-0.55, 92-148 | 92-148 |
+| 8 deg posterior, s 240-260 | 0.48-0.52 / 0.64-0.66, 70 | 74-76 |
 
-**One rigid ring (fixed bore) - the bound that a real design obeys: gap >= 58.7** at the best cell (8 deg lateral,
-s 280, ring face at 82 mm, follow <= 0.550, reach <= 0.713; 9.35 mm section: 60.0); the next cells are 64.6-69.4. With
-both lattice errors given to the ring (arm exit 2 mm earlier, section 6 mm): **>= 55.8**. The per-pose-bore cells above
-need a different ring in every pose, so 20.6 is not reachable by any mechanism; even it sits above the 17.5 bar.
-Hubs, the spar, continuity and collisions can only lower reach and follow further.
+**One rigid ring - the bound a real design obeys: gap >= 57.7** (8 deg posterolateral, s 280, face 72: follow <= 0.567,
+reach <= 0.706); with the lattice error given to the ring (6 mm section) >= 57.1. Even a new ring in every pose cannot
+beat 51.9. Hubs, the spar, continuity and collisions can only lower reach and follow further. (A first version of the
+probe marched from the ring centre and assumed the centre inside the arm; for tilted axes whose centre leaves the arm it
+"fitted" small rings beside the arm - e.g. per-pose 0.98 at 12 deg lateral - an artefact the general test removes. Its
+humerus-axis numbers agree with the table within 1-4 points.)
 
 **The same bound on Bench(110, 360) EXACT** (libigl path, 470 poses; axis tilts 0 and 8 deg lateral, s 240-280, section
-8, arm clearance 0): fixed bore >= **56.5** at the best cell (8 deg lateral, s 280, ring face 82: follow <= 0.555,
+8, arm clearance 0; first-version centre-march test, exact for the humerus axis): fixed bore >= **56.5** at the best cell (8 deg lateral, s 280, ring face 82: follow <= 0.555,
 reach <= 0.731), 64.9-74.1 elsewhere; per-pose bore 46.3-68.3; the arm meets the body (no gap at all along some ray from
 the axis) on 19.6-26 % of the poses. Bench(60, 160) fast and Bench(110, 360) exact agree within 2.2 points.
 
@@ -120,7 +126,7 @@ contact 0.47**, 87 poses with the ring's outer face inside the trunk / forearm; 
 0.00, link 1 0.39, link 2 strap 0.01, spar 0.00, ring 0.11. Min th margin 6.37 deg (the fold is not the limiter).
 Convergence gate (17 configs): best gained 7.19 score points over the second half, 5.80 over the last third, top-5
 spread 7.19 - NOT converged, and it does not need to be: the verdict rests on the bound, which already takes the best
-of every ring parameter and still sits 38 points above the bar; the sweep only shows how much more the real metal
+of every ring parameter and still sits 40 points above the bar; the sweep only shows how much more the real metal
 loses (hub 2, spar, ring float) on top of it.
 
 ## Red team of the best configuration (k15)
@@ -139,10 +145,10 @@ loses (hub 2, spar, ring float) on top of it.
 ## Verdict (GATE 0, round J1 jump track)
 
 **Dead with its number, by a parameter-free bound.** No rigid closed ring about any axis through GH (humerus axis or
-tilted up to 16 deg, any station s 240-300, any bore, the thinnest real section) exists on more than ~0.55-0.57 of the
-clip frames and ~0.71-0.74 of the workspace, because the medial upper arm meets the flank (rest, walking-like frames,
-IR at the side, across-low) and the folded forearm fills the ring plane near the elbow. That alone is gap >= 56
-(Bench(60, 160) fast; Bench(110, 360) exact 56.5) against the gate's 15 / 17.5, before any hub, spar or float. The
+tilted up to 16 deg, any station s 240-300, any bore up to 112 mm, the thinnest real section) exists on more than
+0.567 of the clip frames and 0.706 of the workspace, because the medial upper arm meets the flank (rest, walking-like frames,
+IR at the side, across-low) and the folded forearm fills the ring plane near the elbow. That alone is gap >= 57.7
+(Bench(60, 160) fast; Bench(110, 360) exact: humerus axis >= 67.0, 8 deg lateral >= 56.5) against the gate's 15 / 17.5, before any hub, spar or float. The
 faithful kit model scores 212.62 honest (score 22.68; reach 0.581, follow 0.367, in-band 0.146): hub 2 of the 90/90
 pointer is never in band, the twist-free spar floats over a 2:1 elliptical arm (0.00 in band), the ring face floats 20+
 mm off the medial skin (0.11 in band). Passive translations: 0. Complexity 0.5 (tools/simplicity.py v2.2) - the
@@ -151,7 +157,7 @@ simplest mechanism screened, and the one the anatomy rules out. Lead 18.49.
 ## New knowledge (predicts beyond this morphology)
 
 1. **Nothing rigid may close around the upper arm.** On this body a closed metal loop about the arm (ring bearing,
-   ring gear, closed cuff shell) is impossible on >= 43 % of clip frames and >= 26 % of workspace poses at every
+   ring gear, closed cuff shell) is impossible on >= 43 % of clip frames and >= 29 % of workspace poses at every
    station 160-300 mm and every axis within 16 deg of the humerus: the medial arm meets the flank (19-27 % of poses
    have no gap at all), and near the elbow the flexed forearm fills the ring plane. A cuff's medial arc must be soft
    (strap / liner); every arm-fixed metal part lives on the ~105-deg torso-free lateral arc (acromion-pointer-arm-ctrack
