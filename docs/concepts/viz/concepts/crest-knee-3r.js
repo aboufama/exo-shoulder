@@ -1,22 +1,11 @@
-/* crest-knee-3r - the verified pin knee (skin-normal-3r-pin-knee, k4598) moved to the DELTOID-CREST seats that keep
- * hub 2 quiet at higher closure (catalogue crest-knee-3r, round 4, ideated; no bench number). Chain as the pin knee:
- * scapula handler -> J1 (ACTIVE, O20, GH ray, anterior acromion top bvec(94, 62)) -> link 1 (8 x 3 Ti) -> J2 (ACTIVE, O20,
- * GH ray, home seat over the supraspinatus bvec(17, 46)) -> link 2 (flies over the knee and pad) -> J3 (ACTIVE, O20 on the
- * crest wdir(108, -7), axis tilted b3 toward the skin normal so its line misses GH) -> member 3 = hub 3's lower plate +
- * E strap -> pin a (PASSIVE, parallel to J3) -> knee link -> pin b (PASSIVE) -> O12 arm pad on the cuff / BOTTOM: no 70 deg
- * K7 neck down the deltoid. 3 active, 2 passive rotations, 0 passive translations. Same code as skin-normal-3r-pin-knee;
- * the home geometry (axes, lines, hub 3's plane, arcs a1 44.9 / a2 47.5, mid drift over the bench's FIT clips, knee home
- * points) is exported from the model's Design (docs/concepts/models/skin-normal-3r-pin-knee.py) at the crest seats. NOT
- * re-tuned: b3 and the knee (lE 42.1, lc 24.9, phiE 1.5, phib -55.9) are k4598's, the spec's stage-1 start; hub levels
- * are seat height + 9 mm and the link centrelines great arcs (schematic, no skin fit). Red = the J2 fold or the knee
- * outside [30, 150] deg / its span. */
+/* crest-knee-3r - the verified pin knee (skin-normal-3r-pin-knee) moved to the DELTOID-CREST seats (round-14 lens 3, screened 2026-10-17). Chain: scapula handler -> J1 (ACTIVE, O20, GH ray, bvec(106.9, 61.5)) -> link 1 (8 x 3 Ti) -> J2 (ACTIVE, O20, GH ray, home bvec(12.8, 57.6)) -> link 2 (flies over the WHOLE member 3: E strap, E boss, knee link, pad) -> J3 (ACTIVE, O20 on the crest wdir(96.3, -13.0), axis tilted b3 0.27 toward the skin normal so its line misses GH; a dowel-in-slot J3 own-angle stop, frozen window 263.4 + 225.7 deg, not drawn) -> member 3 = hub 3's lower plate + E strap (lE 75) -> pin a (PASSIVE, MR63ZZ pair, parallel to J3) -> knee link (lc 32.4) -> pin b (PASSIVE) -> O12 arm pad on the cuff / BOTTOM. 3 active, 2 passive rotations, 0 passive translations, cx 0. Best configuration of the sweep (near-touch 31.29 / plain 27.63 fast on Bench(60,160); frozen exact Bench(110,360) 33.23). The home geometry (axes, lines, hub 3's plane, arcs, mid drift, knee level, pin homes, fitted link centrelines) is exported from docs/concepts/models/crest-knee-3r.py's fit on Bench(60,160). Red = the J2 fold (the J1-J3 axis-angle window) or the knee outside [ang_min, 180 - ang_min] / its span. */
 (function () {
   const K = (typeof window !== 'undefined' ? window : globalThis).KIN, V = K.V, M = K.M, D2R = Math.PI / 180;
   // best configuration (bench model parameters) and the home-frame geometry the model builds from it (exported from the
   // model's Design / fit on Bench(60,160): axis directions u, line points c, hub face levels f along u, hub 3's plane
   // basis sa / st / sn = u3, mid drift m, knee level tr, pin a / pin b home points, fitted link centrelines)
-  const P = {"az1": 94, "el1": 62, "az2": 17, "el2": 46, "wd": 108, "wa": -7, "b3": 0.3251, "lE": 42.1129, "lc": 24.9243, "phiE": 1.5471, "phib": -55.8565, "stk": 5.0, "ang_min": 30.0};
-  const G = {"u":[[0.03275,0.88295,0.46833],[-0.67861,0.61291,0.40475],[-0.0942,0.39398,0.91428]],"c":[[0.0,0.0,0.0],[0.0,-0.0,0.0],[-0.244,-4.777,2.033]],"sa":[-0.04038,-0.91912,0.3919],"st":[0.99473,0.0,0.10249],"sn":[-0.0942,0.39398,0.91428],"A":[44.887,47.51],"branch":-1.0,"m":[-4.732,-0.176,0.0],"f":[51.5,60.54,63.04],"tr":69.54,"tp":2.25,"RUN":0.5,"SING":10.0,"hr":[10.0,10.0,10.0],"A0":[-0.813,-43.469,18.648],"A0m":[-0.797,-39.12,16.775],"Bm":[-21.881,-51.978,20.144],"eE":[-0.01351,-0.91878,0.39453],"eK":[-0.84594,-0.51587,0.13514],"L1":[[1.78,48.12,25.52],[-3.6,48.78,26.49],[-9.16,48.96,27.22],[-14.86,48.62,27.68],[-20.62,47.76,27.88],[-26.39,46.36,27.78],[-32.11,44.42,27.4],[-37.71,41.95,26.71],[-43.12,38.94,25.72]],"L2":[[-44.82,40.48,26.73],[-43.3,40.14,29.74],[-41.67,39.7,32.67],[-39.92,39.16,35.53],[-38.07,38.51,38.29],[-36.11,37.75,40.97],[-34.06,36.9,43.54],[-31.91,35.95,46.0],[-29.67,34.9,48.35],[-27.35,33.76,50.57],[-24.95,32.53,52.67],[-22.48,31.21,54.63],[-19.95,29.8,56.46],[-17.36,28.31,58.14],[-14.72,26.75,59.67],[-12.03,25.11,61.04],[-9.31,23.41,62.26],[-6.56,21.63,63.32]]};
+  const P = {"az1": 106.918, "el1": 61.491, "az2": 12.7607, "el2": 57.6357, "wd": 96.3069, "wa": -13.0327, "b3": 0.274, "lE": 75.0, "lc": 32.3757, "phiE": 7.1505, "phib": -77.184, "stk": 6.0, "ang_min": 25.9224};
+  const G = {"u":[[0.13889,0.87874,0.45664],[-0.5669,0.78745,0.24196],[-0.19969,0.20177,0.95886]],"c":[[0.0,0.0,0.0],[0.0,0.0,-0.0],[-0.823,-5.566,1.0]],"sa":[-0.04114,-0.97943,0.19754],"st":[0.97899,0.0,0.20389],"sn":[-0.19969,0.20177,0.95886],"A":[43.638,59.729],"branch":-1.0,"m":[-5.674,0.6,0.0],"f":[52.24,61.61,65.95],"tr":59.01,"tp":2.75,"RUN":0.5,"SING":5.0,"hr":[10.0,10.0,10.0],"A0":[5.255,-78.453,17.603],"A0m":[6.076,-72.895,16.605],"Bm":[-25.125,-79.929,11.587],"eE":[0.08104,-0.97181,0.22138],"eK":[-0.96373,-0.21726,-0.15499],"L1":[[-2.581,47.881,20.942],[-3.893,45.202,22.303],[-5.604,44.471,20.068],[-7.32,44.846,19.834],[-9.075,45.251,19.605],[-10.865,45.638,19.356],[-12.683,45.966,19.073],[-14.54,46.283,18.771],[-16.431,46.561,18.443],[-19.127,48.763,18.848],[-22.205,51.359,19.354],[-25.477,53.83,19.752]],"L2":[[-35.969,46.626,26.37],[-32.109,43.062,26.896],[-32.167,40.483,29.12],[-30.648,39.959,31.308],[-31.31,38.215,34.111],[-29.766,37.681,36.332],[-30.081,35.465,38.818],[-28.465,34.853,41.019],[-28.508,32.283,43.175],[-26.742,31.495,45.214],[-26.506,28.594,46.924],[-24.705,27.75,48.942],[-24.309,24.673,50.321],[-22.351,23.649,52.065],[-21.945,20.72,53.119],[-20.834,19.377,54.745],[-20.41,18.646,58.428],[-20.173,18.114,63.277]]};
   const u = G.u, c = G.c, sn = G.sn, sa = G.sa, st = G.st, a1 = G.A[0], a2 = G.A[1], hub = 12.25, rad = 10;
   const wrapR = a => { a = (a + Math.PI) % (2 * Math.PI); return (a < 0 ? a + 2 * Math.PI : a) - Math.PI; };
   const pe = P.phiE * D2R, pb = P.phib * D2R, lE = P.lE, lc = P.lc;
@@ -86,7 +75,7 @@
   const closes = (q, ctx) => { const r = C.residual(q, ctx); return Math.max(...r.map(Math.abs)) <= 0.5; };
   const solveC = (ctx, qPrev) => { const q = solve(ctx); return (!qPrev || closes(q, ctx)) ? q : K.dls(C, ctx, qPrev, { iters: 40 }).q; };
   const C = {
-    id: 'crest-knee-3r', name: 'Crest-seat pin-knee 3R: hub 2 parked quiet, J3 on the deltoid crest, flat two-pin knee',
+    id: 'crest-knee-3r', name: 'Crest pin-knee 3R: crest seats, link 2 over member 3, flat two-pin MR63ZZ knee (0 passive translations)',
     dof: { active: 3, passive: 2 },
     params: P,
     q0: ctx => solve(ctx),
@@ -119,9 +108,9 @@
         { kind: 'arc', role: 'link', name: 'link 2 (8 x 3 strap, fitted)', pts: G.L2.map(p => on(F.R12, F.t2, p)), r: 2.5 },
         h3,
         { kind: 'link', role: 'link', name: 'E strap (member 3: hub 3 lower plate -> pin a)', a: rim, b: lvl(paW, G.tr + 1.5), r: 2.5 },
-        { kind: 'hub', role: 'passive', name: 'knee pin a (iglidur pin, parallel to J3)', c: lvl(paW, G.tr), axis: n3, r: 6, h: P.stk, p0: lvl(paW, G.tr) },
+        { kind: 'hub', role: 'passive', name: 'knee pin a (MR63ZZ pair, parallel to J3)', c: lvl(paW, G.tr), axis: n3, r: 6, h: P.stk, p0: lvl(paW, G.tr) },
         { kind: 'link', role: 'link', name: 'knee link (flat Ti plate)', a: lvl(paW, kz), b: lvl(pbW, kz), r: 3 },
-        { kind: 'hub', role: 'passive', name: 'knee pin b (iglidur pin, parallel to J3)', c: lvl(pbW, G.tr), axis: n3, r: 6, h: P.stk, p0: lvl(pbW, G.tr) },
+        { kind: 'hub', role: 'passive', name: 'knee pin b (MR63ZZ pair, parallel to J3)', c: lvl(pbW, G.tr), axis: n3, r: 6, h: P.stk, p0: lvl(pbW, G.tr) },
         { kind: 'plate', role: 'fixed-arm', name: 'arm pad (on the cuff / BOTTOM)', c: padC, z: padN, x: arm(sa), size: [14, 14], t: G.tp },
         { kind: 'link', role: 'fixed-arm', name: 'BOTTOM bar to the cuff (schematic)', a: V.madd(padC, padN, -2), b: lat, r: 3 },
         { kind: 'strap', role: 'fixed-arm', name: 'arm cuff', c: V.scale(ctx.armAxis, 155), axis: ctx.armAxis, r: 47, w: 26 },
