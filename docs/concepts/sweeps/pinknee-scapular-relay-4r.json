@@ -2282,5 +2282,146 @@
     "allowed": 1017
    }
   }
+ },
+ {
+  "k": 31,
+  "t": "2026-10-17T19:21:29Z",
+  "params": {
+   "azu": 45,
+   "a0": 35,
+   "T": 60,
+   "audit": 1
+  },
+  "inband14": 0.8152,
+  "inband10": 0.5046,
+  "reach": 0.325,
+  "follow": 0.4167,
+  "contact": 0.0833,
+  "gap": 127.64,
+  "why": {
+   "relay": 28,
+   "fold": 0,
+   "slide": 7,
+   "flip": 0,
+   "closure": 0,
+   "island": 0,
+   "skin": 7,
+   "parts": 101,
+   "contact": 0
+  },
+  "parts": {
+   "L0-L2": 3,
+   "hub0-hub2": 43,
+   "L0-L1": 27,
+   "hub0-hub3": 2,
+   "E-hub0": 2,
+   "L2-hub0": 24
+  },
+  "T_eff": 15.5,
+  "c_seat_ok": true
+ },
+ {
+  "k": 32,
+  "t": "2026-10-17T19:21:29Z",
+  "params": {
+   "azu": 45,
+   "a0": 25,
+   "T": 60,
+   "audit": 1
+  },
+  "inband14": 0.8605,
+  "inband10": 0.4918,
+  "reach": 0.4313,
+  "follow": 0.6667,
+  "contact": 0.0603,
+  "gap": 85.18,
+  "why": {
+   "relay": 29,
+   "fold": 0,
+   "slide": 7,
+   "flip": 0,
+   "closure": 0,
+   "island": 0,
+   "skin": 7,
+   "parts": 68,
+   "contact": 0
+  },
+  "parts": {
+   "L1-L2": 1,
+   "L2-hub0": 14,
+   "L1-hub0": 53
+  },
+  "T_eff": 22.5,
+  "c_seat_ok": true
+ },
+ {
+  "k": 33,
+  "t": "2026-10-17T19:21:29Z",
+  "params": {
+   "azu": 0,
+   "a0": 45,
+   "T": 60,
+   "audit": 1
+  },
+  "inband14": 0.6583,
+  "inband10": 0.1933,
+  "reach": 0.35,
+  "follow": 0.1167,
+  "contact": 0.137,
+  "gap": 176.2,
+  "why": {
+   "relay": 8,
+   "fold": 0,
+   "slide": 11,
+   "flip": 0,
+   "closure": 0,
+   "island": 0,
+   "skin": 10,
+   "parts": 128,
+   "contact": 0
+  },
+  "parts": {
+   "L0-L2": 11,
+   "hub0-hub2": 45,
+   "L0-L1": 24,
+   "L1-L2": 7,
+   "L0-hub2": 4,
+   "L2-hub0": 37
+  },
+  "T_eff": 60.0,
+  "c_seat_ok": true
+ },
+ {
+  "k": 34,
+  "t": "2026-10-17T19:21:29Z",
+  "params": {
+   "azu": 180,
+   "a0": 45,
+   "T": 60,
+   "audit": 1
+  },
+  "inband14": 0.7407,
+  "inband10": 0.4215,
+  "reach": 0.6875,
+  "follow": 0.8167,
+  "contact": 0.1452,
+  "gap": 65.03,
+  "why": {
+   "relay": 17,
+   "fold": 0,
+   "slide": 11,
+   "flip": 0,
+   "closure": 0,
+   "island": 0,
+   "skin": 27,
+   "parts": 6,
+   "contact": 0
+  },
+  "parts": {
+   "L1-L2": 3,
+   "hub0-hub3": 3
+  },
+  "T_eff": 28.5,
+  "c_seat_ok": false
  }
 ]

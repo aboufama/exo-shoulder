@@ -70,3 +70,37 @@ the seat rule. The seat rule cuts T_eff to 10 deg, and the relay takes 1 pose (q
 hub 0's metal (hub0-hub2 4 jams, hub 0 at 54.9 mm), and its 31.06 is the host's 23.64 minus that metal. It is
 optimistic for a build, because hub 0's handler mount is not modelled. The
 frozen exact wear was launched for azu 265 / a0 25 (32.83 fast) and is reported in the row if it finished.
+
+## Audit (2026-10-17, independent re-measurement): the death STANDS
+
+Script `docs/concepts/verify/pinknee-scapular-relay-4r-audit.py`, results `docs/concepts/verify/pinknee-scapular-relay-4r-audit.results.json`,
+all on Bench(60,160) fast with the model's own checks.
+
+- **Reproduced.** The claimed best, azu 250 / a0 40 / T 40, gives exactly 31.06 (reach 0.675, follow 0.9167, ib14 0.9058,
+  contact 0.0523). The claim message rounded follow to 0.95 and contact to 0.04. The row has the correct values. The host
+  H1 alone scores 23.64 in the host's own model under the current checks, and the wrapper with T 0 and no J0 metal
+  reproduces it exactly, so the wrapper adds no bias. The host row's 20.63 predates those checks.
+- **Convergence gate reproduced:** +2.70 score over the 2nd half, +0.49 over the last third, top-5 spread 1.05. The sweep
+  is not converged on criterion 1, so the audit replaces the placement search with an upper bound.
+- **Upper bound: the relay with NO hub 0 / link 0 metal (a ghost J0) and NO seat rule.** I ran 40 placements at T 60:
+  a0 15/25/35/45/60 x azu 0-315 in 45-deg steps, which covers the whole disc around J1. The best is **18.30** at
+  azu 180 / a0 45, a front seat that is not allowed. The best seat-legal placement is 18.62 at azu 45 / a0 35. The
+  proposer's cells as ghosts score 20.18 (back, T 40), 20.56 (back, T 60) and 21.02 (cap, T 40). A host retune of
+  +-10 % (ang_min 27.4, lE 53.6-65.5, lc 25.4-31.0) gives 18.61-20.14 and does not help. So even a zero-size J0 sits
+  above the gate-0 kill line of 17.5, and that is on the fast bench. The frozen exact Bench(110,360) costs the host
+  another ~3.5 (23.64 fast against verified 27.2).
+- **Why the kinematic flood over-promised.** In the model, the relay recovers 26-29 of the host's 36 fold losses
+  kinematically. Only 5-10 workspace poses survive the host's own checks on the relayed state: the knee reach and slide
+  tolerance add 6-9 losses, skin adds 3-7 and L1-L2 adds 2-5. Overhead stays at 1-2/12.
+- **Real metal at the ghost-best placements:** 65.03-176.2. The jams are hub0-hub2 43-45, L1-hub0 53, L2-hub0 14-37 and
+  L0-L1 24-27. This confirms the proposer's orbit argument at the placements a ghost would pick.
+- **No modelling bug found.** I checked the J0 kinematics (an exact rotation about a GH ray, Q' = Rc^T Q) and hub 0's
+  fixed frame (member 8, identity, like the host's scapula frame). The seat-rule travel cut is honest, and with no
+  seat rule it moves the bound by only 0.3 points. The added part checks are standard (1 mm non-adjacent, 0.15 mm L0-L1).
+  None of these explain the gap.
+- The template's refutation test, "within 10 of 68.93", is stale: the claim's own 31.06 already passes it. I judged
+  the claim on the round-101 gate-0 kill line instead.
+
+**Measured reason (one line):** a J0 relay on the H1 pin-knee host cannot get under 18.30 on Bench(60,160) fast even
+with zero J0 metal and no seat rule, because the poses it un-folds fail the host's knee, skin and L1-L2 checks. With
+real J0 metal, every placement jams on hub 2's orbit (65-176).
