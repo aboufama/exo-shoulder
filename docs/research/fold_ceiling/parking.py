@@ -38,16 +38,27 @@ uK_lead = np.einsum("nij,j->ni", np.asarray(X1[0], float), D.uK)
 xy = K.disc_xy(10.0, 2.0)
 
 
+def brute_req(i, D, O, t0=15, t1=220, clr=2.0, win=15):
+    """the K3 requirement by the brute 1 mm march (= K.requirement, which is exact w.r.t. it) in ONE exact signed-distance
+    call per pose: first t in t0..t1 with d(t) >= clr and d >= 0 on t..t+win (inf if none)"""
+    ts = np.arange(t0, t1 + win + 1, 1.0); X = O[:, None, :] + D[:, None, :] * ts[None, :, None]
+    d = B.dist(int(i), X.reshape(-1, 3)).reshape(len(D), len(ts))
+    neg = d < 0; c = np.cumsum(neg[:, ::-1], 1)[:, ::-1]                       # c[:, k] = # negatives at index >= k
+    c = np.concatenate([c, np.zeros((len(c), 1), c.dtype)], 1); n = len(ts); nwin = np.full((len(c), n), 99); nwin[:, :n - win] = c[:, :n - win] - c[:, win + 1:]
+    good = (d >= clr) & (nwin == 0); good[:, len(ts) - win:] = False; good[:, ts > t1] = False
+    return np.where(good.any(1), ts[np.argmax(good, 1)], np.inf)
+
+
 def req_disc(I, Ks):
     """hub disc requirement (max over the disc's samples, +2 mm clearance) along world axes Ks (n, 3) in poses I (n,)"""
     if not len(I): return np.zeros(0)
-    k = K.unit(Ks); A, Bv = K.plane_frame(k); m = len(xy)
-    O = (xy[None, :, :1] * A[:, None, :] + xy[None, :, 1:] * Bv[:, None, :]).reshape(-1, 3)
-    Dd = np.repeat(k, m, 0); II = np.repeat(np.asarray(I), m); R = np.empty(len(II))
-    for c in np.unique(np.asarray(I)) if True else []:                # pose by pose: the exact-skin cache holds 24 poses
-        sel = II == c; R[sel] = K.requirement(B, II[sel], Dd[sel], O=O[sel])
-    R = R.reshape(len(I), m)
-    return np.where(np.isfinite(R), R, 400.0).max(1)
+    k = K.unit(Ks); A, Bv = K.plane_frame(k); m = len(xy); out = np.empty(len(I)); I = np.asarray(I)
+    O = xy[None, :, :1] * A[:, None, :] + xy[None, :, 1:] * Bv[:, None, :]
+    for c in np.unique(I):
+        sel = np.nonzero(I == c)[0]
+        R = brute_req(c, np.repeat(k[sel], m, 0), O[sel].reshape(-1, 3)).reshape(len(sel), m)
+        out[sel] = np.where(np.isfinite(R), R, 400.0).max(1)
+    return out
 
 
 def world(i, v): return F.RS[i] @ v

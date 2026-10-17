@@ -91,10 +91,11 @@ def cam_curve(D, th):
 
 
 def th_margin(M, B):
-    """docs/concepts/verify/roller-longdyad-knuckle-3r.py th_margin, copied"""
+    """docs/concepts/verify/roller-longdyad-knuckle-3r.py th_margin, copied; dK read as the SIGNED opening so that the dipped
+    (closing, < 0) poses are told apart from the stretched rise (> 0)"""
     D = M.D; u1, u2, u3 = D.u; uK = D.uK; a1, a2 = math.degrees(D.a1) if D.a1 < 4 else D.a1, math.degrees(D.a2) if D.a2 < 4 else D.a2
     taken = [i for i in range(len(B.idx)) if B.res[i] is not None and float(np.min(B.res[i])) >= 0]; rows = []
-    dK = np.asarray(M.dK, float)
+    dK = np.asarray(M.dK, float) * (float(M._scg["sp"]) if getattr(M, "_scg", None) else 1.0)   # SIGNED opening (+ = drive's sense)
     for i in taken:
         R1, _ = M.T(1, i); R1b, _ = M.T(7, i); R2, _ = M.T(2, i)
         jK = R1 @ uK; j2 = R1b @ u2; j3 = R2 @ u3
