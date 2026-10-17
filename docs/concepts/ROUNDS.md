@@ -2059,3 +2059,98 @@ keeps rolling-cone-3r closed.
   new morphology classes that remove the binder, each gated by a ghost bound before any hardware modelling.
 - **Main track, round 13 onward:** spend at most ONE lens inside the knuckle family (complexity or overhead contact
   depth, not reach), and do not duplicate the jump track's lenses - read its plan here first.
+
+## Round J1 plan (round 101, track jump; 2026-10-17 ~16:25 UTC, lead verified gap 18.49)
+
+### State
+
+- **Lead (best verified, not gamed):** slipper-nose-knuckle-3r **18.49** (score 93.28) frozen exact Bench(110,360),
+  held out 23.45, reach 0.725 (261/360), overhead 8/28, ib14 0.8955, 2 contact poses (T5 9.01 + 5.74 mm), cx 22.25
+  (18.25 like-for-like). Ledger WATCH: M5 (clock spring force-closes a sliding nose), G4 (m_sub < 5 at K rest on 106 of
+  204 poses; B1 is the user's), T5 (contact depth unscored), held-out th margin 5.006 vs a predicted 0.42-0.53 deg K
+  lag, NEW-ws-inband (elev 90-140 in-band 0.800), reporting (sweep best 13.0 shown as 95.27). Ties / same family:
+  trimlug-k165 18.51, inband-rssr pick3 18.33 (ruled a tie), roller-longdyad 18.67, sidecar-longdyad 18.91.
+  4-active (a sensed joint is a joint): minarc pick1 18.40, skinnormal-shortk-4r 18.58 (dead: 1:1 fold-for-contact).
+  Gamed: dipped-law-groove (fold margin 0.184), seed-offset-3r-slides. Do not buy points the way the watch reasons do
+  (unscored depth, a margin read in a different angle, a free per-pose policy without the continuity flood).
+- **The family is capped (measured):** the long-dyad ghost with an ideal drive and no drive metal reads 17.86 at best
+  (spiral-lobe gate 0, 269 taken / 8 contacts; every <= 4-contact cell <= 260 taken = 19.4-19.7). Binder: hub 2 /
+  link 2 into the posterior deltoid (to -15.3 mm) at K 29-65, clusters plane -90..-60 / elev 45-60 / axial +105..+135
+  and the overhead IR fan plane 60-120 / elev 135-165 / axial -105..-90. 95 = gap 13.75 = +18 workspace poses at the
+  lead's in-band.
+- **Why the stretched wall exists (fold_ceiling.md):** 64 of the 73 stretched bench losses (held 211) are internal
+  rotation >= 90 across the body: axial rotation swings the humerus-fixed J3 away from J1, so th = angle(J1, J3) depends
+  on axial rotation. The folded 15 (th 7.7-22) are scapular-plane overhead, behind hub 2's disc (4 of 15 clear).
+- **New planner measurement (Bench(110,360), 360 ws poses, kit frames, 1 min):** with J3 COAXIAL with the humerus,
+  th no longer depends on axial rotation. Over J1 seats bvec(az -90..180, el 0..90) the narrowest th span is
+  **95.5 deg at bvec(30, 70) (acromion top): th 78.1-173.6** (95 %: 81.5-171.5); bvec(0, 60) 75.2-174.5; bvec(20, 60)
+  77.6-175.5. So a1 + a2 = 180 (window [|a1 - a2| + 5, 175]) holds **every** workspace pose kinematically at the 5 deg
+  margin for |a1 - a2| <= 73, with 1.4 deg to spare at the anti-pole (the arm near -u1: hanging / adducted, a
+  near-gimbal-lock). A J3 12 deg off the arm axis: span 95.5 (bvec(0, 60)); 25 deg: 89.8 (bvec(-40, 50)); 40 deg: 85.8
+  (bvec(-40, 30)). The kinematic room is not the problem anywhere (FINDINGS: a >= 80-deg window holds 0.99 at allowed
+  seats); every class so far died on WHERE hub 2 must sit.
+- **Classes tried and dead, with the reason (do not rescreen as is):** long-arc / fold-free 3R (fold-sph3r 44.72 fast:
+  hub 2 0 % in band at F 145-154; raglan-routed 42.72: hub 2 F 128); rings at the hubs (annular-ring 77.99: hub 2 at
+  161 mm); 2R pointer + C-slide twist (pointer-cslide 69.84, reach 0.50: twist travel 165 deg needed vs a 98-deg window;
+  a band fixed in the pointing frame has only a 150-180 deg torso-free sector at s 120-160, chest / axilla / head block
+  the rest in 25-60 % of poses; shoe 27-31 mm off the arm); rod-sleeve twist near the deltoid (offset-pointer-slip-sleeve
+  76.42: the rod clamp sinks 0.27 mm per mm into the deltoid); arc slides / rails (j2-arc-sector 66.3, short-a2-arc-slide
+  55.3, trombone-arc 88.29, rail-elbow 64.7, scapular-race 78.54); spare joint on the deltoid (arm-parked-knee-4r 26.71:
+  hub 4 0.51 in band); stop-switched J1 relay (stop-relay-rocker 50.36: relay entry at its own fold); redundant 4R
+  spring-centred (park4 lens, self-measured 22.36 at ib 0.864); K as the 4th joint (minarc 18.40, skinnormal-shortk-4r
+  18.58: 1:1 fold for contact); spherical parallel / RUS trusses (seed-spm 193, foldfree-rus / coaxial-rus 275).
+- **Levers that look open:** (1) remove th's axial dependence (J3 on the humerus axis, a real thin-section ring or a
+  GH-aimed rod-sleeve far down the arm), never measured as a 3-joint ring at the distal arm; (2) a base-side spare on
+  bony scapula skin (acromion / spine: 2-5 mm skin spread) that walks J1 between the two allowed seat regions so the
+  stretched chain lies over the acromion and the deltoid cap (a sphere about GH within 4.7 mm) instead of the
+  posterior deltoid. Per-pose-free J1 rocker, kinematic: beta 20 0.77-0.81, beta 30 0.84-0.88, overhead 0.68-0.82.
+- **Compute:** farm CLOSED (CLAUDE.md (7)); local only, niced, <= 2 processes per agent, OMP_NUM_THREADS=1. The local
+  Bench(110,360) fast cache is missing (the exact path runs; build it with `concept_bench --build 110 360` once, niced,
+  if a lens needs many frozen wears).
+
+### Lenses
+
+1. **Humerus-axial J3 (reach AND low complexity, 3 joints; suggested id axial-ring-gimbal-3r).** A 2R on O20 hubs
+   (J1 acromion top / back, bvec(30, 70) or bvec(0, 60) as seeds, a1 + a2 = 180, |a1 - a2| <= 73) whose third joint is
+   coaxial (cell R) or near-coaxial (cell S) with the humerus. Cell R: a closed thin-section ring bearing round the
+   distal upper arm at s 200-260 where the skin radius is 40-50 mm (catalogue part, e.g. Kaydon Reali-Slim KA040AR0:
+   bore 101.6, OD 111.1, width 4.76 mm, ~45 g; sample its real section as metal all the way round). Cell S: the
+   catalogue's cuff-sleeve-3r, an O5 rod in an MR85-pair sleeve at s ~230 whose axis aims at GH (~12 deg off the arm
+   axis; the sleeve's axial float is 1 passive translation). Link 2 is a spar fixed in the pointing frame down the
+   lateral arm. Hypothesis: the IR-across-body stretched wall disappears by construction (th span 78-174 for every
+   axial angle); the open question is proximity: the ring's medial arc vs chest / waist in adducted, across-body and
+   behind-back poses, the spar over a non-round arm (skin radius 38-73 mm about the humeral axis at s 90-120), hub 2 on
+   a GH ray >= 54 deg from both J1 and the arm. Gate 0 (30-45 min): ghost fit on Bench(60,160) fast, frozen exact
+   Bench(110,360), with hubs 1-2 O20 at their stack, link 1 and the spar as 3 mm bent bars at real height, the ring or
+   sleeve at its real envelope, the cuff's one slide (or a stated liner share); per-pose table of every loss by cause
+   (anti-pole margin, ring vs torso, spar, hub 2). Bar: reach >= 0.80 or gap <= 15 with <= 4 contact poses; > 17.5
+   dies with its number. Report overhead / 28, the min th margin over taken poses (5 deg, read in th), the anti-pole
+   J1 / J2 rates, complexity (tools/simplicity.py; expected ~0-3: 3 bearings, no spring, lobe or knee). Red team: the
+   near-gimbal-lock at th 173.6 (rates ~1/sin(margin)), donning (the hand through a 101.6 bore), the ring under arm
+   flexion bulge, continuity flood (no branch change across the anti-pole).
+2. **Scapular spare that routes the stretched chain over the acromion (reach, 4 joints; suggested id
+   acromion-relay-4r).** A redundant non-orthogonal spherical 4R (Keemink 2018, TNSRE 26(4)): J0 on bony scapula skin
+   (spine / acromion, O20) carries a PLAIN 3R (pin chain, no knuckle, no lobe) so J1 walks between the back-of-shoulder
+   and acromion-top seats; the self-motion is held by a centring spring and two dowel-in-slot stops on J0's own angle.
+   4 DOF: compare like-for-like with minarc pick1 18.40 / skinnormal-shortk-4r 18.58 and state that the user prefers
+   3. Distinct from the dead 4Rs: the spare sits on bone, not on the deltoid (arm-parked hub 4 0.51), it is not a
+   knuckle in link 1 (the 1:1 fold-for-contact), and it is free between stops, not stop-switched (stop-relay). Gate 0:
+   per-pose-free J0 within its travel (upper bound) then the spring-centred policy, both with the continuity flood
+   (2-deg slerp, no spare jump > 10 deg, no branch change; report static and connected), ghost metal = 4 O20 hubs +
+   links at real height; per-pose: where hub 2 / link 2 sit on the 73 stretched and 15 folded losses of the lead. Same
+   bar (reach >= 0.80 or gap <= 15, <= 4 contacts; dies > 17.5); the park4 lens's 22.36 is the number to beat by >= 5.
+   Red team: the spring's preload vs the arm's own torque at the stops (feel), the J0-J1 sub-chain fold, the base on
+   the scapula handler (J1 seat rule: back / acromion top only).
+
+### Carried (ideated, never screened)
+
+- armband-pointer and cuff-sleeve-3r (lens 1's cells R and S), acromion-pointer-arm-ctrack (the user's own 2-hub
+  gimbal + an arm-skin axial track; lens 1's fallback if the ring stands off a non-round arm).
+- Round-4 picks passed over with reason: deltoid-crest-j3-3r (seeds 26.35 fast / 35.90 frozen on O15 hubs, now O20
+  only), crest-knee-3r and slotted-eccentric-pin-knee-3r (pin-knee family, fold-capped at verified reach 0.606; the
+  eccentric's parent refuted at 115.21): none can reach the 17.5 ghost bar.
+
+### Elsewhere, not to be duplicated
+
+- Main track round 12: desmo-slipper-knuckle-3r (modelling), conecut-knee-knuckle-3r (CMA running),
+  desmo-vrocker-longdyad-knuckle-3r (round-12 pick 4); slipper-nose-knuckle-3r / trimlug-k165 (gen-7 CAD fix pass).
