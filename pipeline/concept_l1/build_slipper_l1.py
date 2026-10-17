@@ -667,10 +667,9 @@ def main():
     ap.add_argument("--attrib", type=int, default=0, help="attribute the R16 body contacts of judge/workspace.json run at this --step")
     a = ap.parse_args(); t0 = time.time(); fb = (60, 160); fbs = "Bench(60,160)"
     if a.attrib:
-        dd = os.path.join(BASE.FULL, "designs", a.out); B_ = json.load(open(os.path.join(dd, "build.json")))
-        B_["r16_body_attrib"] = attrib(dd, a.attrib)
-        json.dump(B_, open(os.path.join(dd, "build.json"), "w"), indent=1, default=float)
-        print(json.dumps({k_: v for k_, v in B_["r16_body_attrib"].items() if k_ != "per_pose"}, default=float)); return
+        dd = os.path.join(BASE.FULL, "designs", a.out); R_ = attrib(dd, a.attrib); os.makedirs(os.path.join(dd, "judge_r16s1"), exist_ok=True)
+        json.dump(R_, open(os.path.join(dd, "judge_r16s1", f"body_attrib_step{a.attrib}.json"), "w"), indent=1, default=float)
+        print(json.dumps({k_: v for k_, v in R_.items() if k_ != "per_pose"}, default=float)); return
     if a.skin_only:
         dd = os.path.join(BASE.FULL, "designs", a.out); B_ = json.load(open(os.path.join(dd, "build.json")))
         B_["drive_skin"] = drive_skin(dd); json.dump(B_, open(os.path.join(dd, "build.json"), "w"), indent=1, default=float)
@@ -907,7 +906,9 @@ def attrib(dd, step=1, tol=0.5):
     otherwise the excess is the build's (a keep-out deeper than the verified metal)."""
     import igl, scene_export as SE
     sys.path.insert(0, os.path.join(REPO, "pipeline", "avg")); import body_pose as BP
-    J = json.load(open(os.path.join(dd, "judge", "workspace.json"))); W = json.load(open(os.path.join(dd, "workspace.json")))["poses"][::step]
+    jp = os.path.join(dd, "judge_r16s1", "workspace_step1.json") if step == 1 and os.path.exists(os.path.join(dd, "judge_r16s1", "workspace_step1.json")) else os.path.join(dd, "judge", "workspace.json")
+    J = json.load(open(jp)); W = json.load(open(os.path.join(dd, "workspace.json")))["poses"][::step]
+    assert int(J.get("step", step)) == step, (jp, J.get("step"), step)
     bad = [r for r in J["per_pose"] if r.get("closes") and (r.get("body_mm") or 0) > tol]
     M, _ = fit(); src = trimesh.load(os.path.join(dd, "exo.glb")); BF = np.ascontiguousarray(BP.F, np.int64)
     glb = {}

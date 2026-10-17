@@ -1,0 +1,824 @@
+{
+ "step": 6,
+ "tol_mm": 0.5,
+ "frames_checked": 228,
+ "seconds": 85,
+ "jobs": 4,
+ "body_model": "rig",
+ "inside": "integer winding number (grid + segment crossings), depth = exact distance to the nearest surface (judge/sdist.py)",
+ "parts": {
+  "H|M4x6 ISO 10642 countersunk (upper cuff)": {
+   "owner": "user",
+   "max_depth": 17.59,
+   "frames": 8,
+   "worst": [
+    "Wash opposite shoulder",
+    78,
+    [
+     145,
+     46,
+     -70,
+     119,
+     0
+    ]
+   ],
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "H|UPPER ARM CUFF (conformal G2 shell, AlSi10Mg bead blasted)": {
+   "owner": "user",
+   "max_depth": 19.83,
+   "frames": 14,
+   "worst": [
+    "Wash opposite shoulder",
+    78,
+    [
+     145,
+     46,
+     -70,
+     119,
+     0
+    ]
+   ],
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "H|CirPattern1[13]": {
+   "owner": "user",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "H|CirPattern1[17]": {
+   "owner": "user",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "H|CirPattern1[3]": {
+   "owner": "user",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "H|CirPattern1[6]": {
+   "owner": "user",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "H|CirPattern1[1]": {
+   "owner": "user",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "H|Revolve1[3]": {
+   "owner": "user",
+   "max_depth": 0.51,
+   "frames": 8,
+   "worst": [
+    "Wave",
+    42,
+    [
+     15,
+     91,
+     -59,
+     94,
+     0
+    ]
+   ],
+   "attributable_depth": 0.51,
+   "attributable_frames": 8,
+   "attributable_worst": [
+    "Wave",
+    42,
+    [
+     15,
+     91,
+     -59,
+     94,
+     0
+    ]
+   ],
+   "attributable_kind": "own limb"
+  },
+  "H|CirPattern1[9]": {
+   "owner": "user",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "H|CirPattern1[2]": {
+   "owner": "user",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "H|Revolve3": {
+   "owner": "user",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "H|CirPattern1[4]": {
+   "owner": "user",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "H|CirPattern1[10]": {
+   "owner": "user",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "H|CirPattern1[8]": {
+   "owner": "user",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "H|CirPattern1[14]": {
+   "owner": "user",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "H|CirPattern1[12]": {
+   "owner": "user",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "H|CirPattern1[16]": {
+   "owner": "user",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "H|CirPattern1[7]": {
+   "owner": "user",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "H|Revolve1[1]": {
+   "owner": "user",
+   "max_depth": 0.99,
+   "frames": 132,
+   "worst": [
+    "Wave",
+    42,
+    [
+     15,
+     91,
+     -59,
+     94,
+     0
+    ]
+   ],
+   "attributable_depth": 0.99,
+   "attributable_frames": 132,
+   "attributable_worst": [
+    "Wave",
+    42,
+    [
+     15,
+     91,
+     -59,
+     94,
+     0
+    ]
+   ],
+   "attributable_kind": "own limb"
+  },
+  "H|CirPattern1[5]": {
+   "owner": "user",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "H|Revolve4": {
+   "owner": "user",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "H|CirPattern1[11]": {
+   "owner": "user",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "H|Revolve1[2]": {
+   "owner": "user",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "H|CirPattern1[15]": {
+   "owner": "user",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "H|M4 ULTRA LOW PROFILE SOCKET HEAD SCREW, 6mm L, HS STEEL": {
+   "owner": "user",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "H|5mm D, 2.5mm H, N42 MAGNET": {
+   "owner": "user",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "F|Hex socket head countersunk screw grade C M4x0.7 x 8": {
+   "owner": "user",
+   "max_depth": 8.33,
+   "frames": 228,
+   "worst": [
+    "Wave",
+    42,
+    [
+     15,
+     91,
+     -59,
+     94,
+     0
+    ]
+   ],
+   "attributable_depth": 8.33,
+   "attributable_frames": 228,
+   "attributable_worst": [
+    "Wave",
+    42,
+    [
+     15,
+     91,
+     -59,
+     94,
+     0
+    ]
+   ],
+   "attributable_kind": "own limb"
+  },
+  "H|IGUS THRUST WASHER, 30mm ID, 39mm OD, 1.5mm T, IGLIDE J": {
+   "owner": "user",
+   "max_depth": 2.75,
+   "frames": 220,
+   "worst": [
+    "Comb hair",
+    84,
+    [
+     63,
+     133,
+     -60,
+     115,
+     0
+    ]
+   ],
+   "attributable_depth": 2.75,
+   "attributable_frames": 220,
+   "attributable_worst": [
+    "Comb hair",
+    84,
+    [
+     63,
+     133,
+     -60,
+     115,
+     0
+    ]
+   ],
+   "attributable_kind": "own limb"
+  },
+  "F|MIDDLE": {
+   "owner": "user",
+   "max_depth": 5.76,
+   "frames": 228,
+   "worst": [
+    "Comb hair",
+    150,
+    [
+     78,
+     143,
+     -67,
+     118,
+     0
+    ]
+   ],
+   "attributable_depth": 5.76,
+   "attributable_frames": 228,
+   "attributable_worst": [
+    "Comb hair",
+    150,
+    [
+     78,
+     143,
+     -67,
+     118,
+     0
+    ]
+   ],
+   "attributable_kind": "own limb"
+  },
+  "H|TOP": {
+   "owner": "user",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "F|FOREARM CUFF": {
+   "owner": "user",
+   "max_depth": 24.87,
+   "frames": 228,
+   "worst": [
+    "Wash opposite shoulder",
+    150,
+    [
+     138,
+     59,
+     -50,
+     112,
+     0
+    ]
+   ],
+   "attributable_depth": 24.0,
+   "attributable_frames": 228,
+   "attributable_worst": [
+    "Wash opposite shoulder",
+    42,
+    [
+     115,
+     29,
+     -76,
+     114,
+     0
+    ]
+   ],
+   "attributable_kind": "other region, beyond the buried own skin"
+  },
+  "H|BOTTOM (user's bar, cut at s 255, 2x M3 countersunk for the arm-end tongue) + cut square to the arm 9.1 mm distal of pin b, clear of the knee sweep": {
+   "owner": "user",
+   "max_depth": 17.59,
+   "frames": 228,
+   "worst": [
+    "Wash opposite shoulder",
+    126,
+    [
+     145,
+     46,
+     -69,
+     119,
+     0
+    ]
+   ],
+   "attributable_depth": 4.71,
+   "attributable_frames": 228,
+   "attributable_worst": [
+    "Comb hair",
+    162,
+    [
+     76,
+     136,
+     -65,
+     113,
+     0
+    ]
+   ],
+   "attributable_kind": "own limb"
+  },
+  "H|pad mount to BOTTOM (proxy) (2.18 mm slab at the pad level, arm pad -> the BOTTOM bar, routed clear of the knee sweep)": {
+   "owner": "ours",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "H|pin b retainer keep-out (O6 x 0.9 mm: DIN 6799 RS 2.3 e-clip + pin end over a 0.1 mm shim on the bearing pair; pin b pressed H7/m6 in the arm pad)": {
+   "owner": "ours",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "l3|pin a retainer keep-out (O6 x 0.9 mm: DIN 6799 RS 2.3 e-clip + pin end over a 0.1 mm shim on the bearing pair; pin a pressed H7/m6 in the E boss)": {
+   "owner": "ours",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "l4|knee link bearing boss b keep-out (O9 x 5.5 mm on the knee link, z0..z0+5.5: 2 x MR63ZZ 3x6x2.5 in a J6 housing with a 0.5 mm shoulder between them; pin b ISO 8734 O3 m6 440C)": {
+   "owner": "ours",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "l4|knee link bearing boss a keep-out (O9 x 5.5 mm on the knee link, z0..z0+5.5: 2 x MR63ZZ 3x6x2.5 in a J6 housing with a 0.5 mm shoulder between them; pin a ISO 8734 O3 m6 440C)": {
+   "owner": "ours",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "l4|knee stop web keep-out (knee link level, 2.18 mm, joins the tooth to the knee link's back edge)": {
+   "owner": "ours",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "l4|knee stop tooth keep-out (2.4 x 2 mm, hangs 4.18 mm from the knee link top behind pin a; its face meets the E strap's side at knee angle 154.78 deg)": {
+   "owner": "ours",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "H|arm pad = pin b lower plate (O12 x 2.18 mm, tr..tr+tp, arm-fixed on the cuff)": {
+   "owner": "ours",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "l4|knee link keep-out (flat Ti bar 33.1 x 10 x 2.18 mm, pins a, b 6 mm from its ends, tr+tp+0.5)": {
+   "owner": "ours",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "l3|E boss = pin a lower plate (O12 x 2.18 mm, tr..tr+tp, member 3)": {
+   "owner": "ours",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "l3|E strap keep-out (8 x 3 mm Ti, fitted underside, hub 3 plate -> pin a, thins to 2.18 at the boss, top capped at the boss top tr+tp under the knee's reach)": {
+   "owner": "ours",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "l1a|drive flank lug keep-out (link 1a: the conjugate flank band 0.3..6 mm behind the contact over the used stroke 0..49.75 deg of K, 3 mm Ti on the sphere r 59.81, root from hub K's rim; 5-axis / tilting-head wire-EDM flank)": {
+   "owner": "ours",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "l1b|drive crank pin clip keep-out (DIN 6799 RS 2.3, O6 x 0.9 over the boss top + 0.15)": {
+   "owner": "ours",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "l1b|drive crank pivot pin keep-out (O3 h6 hardened, pressed in link 1b's strap 59.7..62.7, through the boss)": {
+   "owner": "ours",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "dk|drive nose dowel keep-out (ISO 8734 O2.5 x 6 m6 440C, pressed H7/m6 through the 3 mm arm; protruding nose ground to O2.368 g5 + polished over C0-1.25..C0+1.65 (the lug layer), radial axis, centre 61.31 mm from GH at r_c 15.37 from hub K's axis; slides on link 1a's DLC flank, mu 0.087)": {
+   "owner": "ours",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "dk|drive bell crank bent arm keep-out (6 x 3 mm Ti: straight run 19.8 mm at the model's stepped levels, tangent arc r_c 15.37 about hub K's axis over 125.0 deg at radius 62.96 from GH, 3 mm past the roller)": {
+   "owner": "ours",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "dk|drive bell crank boss keep-out (O10 x 6 mm, bore O3.2 on the O3 pivot pin, two MR63ZZ 3x6x2.5 inside; underside 66.37 mm from GH = link 1b's highest top under its footprint + 0.15; the model's 62.82)": {
+   "owner": "ours",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "l2|drive lobe keep-out (hub-2 rim lobe on link 2's rotor: r 8.27 -> 9.72 mm over 23.1 deg of q2, lift s_arm x phi, phi = dK / g; 3 mm band F+3.65..F+6.65)": {
+   "owner": "ours",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "l3|J3 lower plate keep-out (O20 x 3, member 3)": {
+   "owner": "ours",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "l2|J3 upper boss + cap keep-out (O20, F+3.15..F+12.25, link 2)": {
+   "owner": "ours",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "l2|link 2 strap keep-out (8 x 3 mm Ti, fitted underside, J2 -> J3)": {
+   "owner": "ours",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "l2|J2 upper boss + cap keep-out (O20, F+3.15..F+12.25, link 2; the rotor that carries the drive lobe)": {
+   "owner": "ours",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "l2|J2 stop dowel (ISO 8734 O3 m6 hardened, r 7.75 mm, F+0.5..F+6.15, pressed in the J2 upper boss)": {
+   "owner": "ours",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "l1b|J2 lower plate keep-out (O20 x 3, link 1b) with the J2 stop slot (r 7.75 mm, 3.1 wide, 117.9 deg of travel + the dowel; its ends = the stops)": {
+   "owner": "ours",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "l1b|link 1b strap keep-out (8 x 3 mm Ti, fitted underside, K -> J2)": {
+   "owner": "ours",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "l1b|K upper boss + clock-spring cap keep-out (O20, F+3.15..F+18.25: cap 6 mm taller - clock spring holds K on stop A below the drive's onset and force-closes the sliding nose on the flank and the follower on the lobe; K SLAVED to q2 by the roller-flank drive past it, never read)": {
+   "owner": "ours",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "l1b|K stop dowel 2 of 2 (ISO 8734 O3 m6 hardened, r 7.75 mm, F+0.5..F+6.15, pressed in the K upper boss)": {
+   "owner": "ours",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "l1b|K stop dowel 1 of 2 (ISO 8734 O3 m6 hardened, r 7.75 mm, F+0.5..F+6.15, pressed in the K upper boss)": {
+   "owner": "ours",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "l1a|K lower plate keep-out (O20 x 3, link 1a) with the K stop slots (an opposed pair) (r 7.75 mm, 3.1 wide, 62.8 deg of travel + the dowel; its ends = the stops)": {
+   "owner": "ours",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "l1a|link 1a strap keep-out (8 x 3 mm Ti, J1 -> K: the full CAD's line/arc chain, climb from J1's skirt + 0.15 on a 60-deg ramp, R2 bends)": {
+   "owner": "ours",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "l1a|J1 lower plate keep-out (O20 x 3, link 1a)": {
+   "owner": "ours",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "base|J1 upper boss + cap keep-out (O20, F+3.15..F+12.25; base = J1's upper member, carried directly by the scapula handler at the hub ring)": {
+   "owner": "ours",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  }
+ },
+ "worst_part": "F|FOREARM CUFF",
+ "max_depth": 24.87,
+ "max_depth_ours": 0.0,
+ "max_depth_user": 24.87,
+ "attributable": {
+  "rule": "depth beyond the rig's own self-intersection (judge/body_regions.py): in full inside the part's own limb, elsewhere only below its own limb's skin",
+  "max_depth": 24.0,
+  "worst_part": "F|FOREARM CUFF",
+  "max_depth_ours": 0.0,
+  "worst_part_ours": "H|pad mount to BOTTOM (proxy) (2.18 mm slab at the pad level, arm pad -> the BOTTOM bar, routed clear of the knee sweep)",
+  "max_depth_user": 24.0,
+  "worst_part_user": "F|FOREARM CUFF"
+ }
+}
