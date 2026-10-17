@@ -39,6 +39,8 @@ def _load(name, path):
 R = _load("aks_minarc_remeasure", os.path.join(REPO, "docs", "concepts", "verify", "minarc-bdp-remeasure.py"))
 KR = R.KR; KB = KR.KB; PK = KR.PK; S = KR.S
 _LAW0 = KB.KA.law
+# the variant-B design class itself (the kit-rule module rebinds KB.KDesign to its KRDesign, whose phys ik ignores law())
+VB = [c for c in KR.KRDesign.__mro__ if c.__name__ == "KDesign" and c.__module__ == KB.__name__][0]
 
 
 def wrap(a): return (np.asarray(a) + np.pi) % (2 * np.pi) - np.pi
@@ -69,7 +71,7 @@ def closure(D, Q, dK):
         th = np.degrees(np.arccos(np.clip((S.unit(p1) * S.unit(p3)).sum(-1), -1, 1)))
         return a1e.copy(), np.zeros(len(th), int), th
     KB.KA.law = law
-    try: q, ok, X1, X2, X3, s = KB.KDesign.ik(D, Q)
+    try: q, ok, X1, X2, X3, s = VB.ik(D, Q)
     finally: KB.KA.law = _LAW0
     return q, X2, s, np.asarray(D._dK, float).copy()
 
@@ -88,7 +90,9 @@ def sens(Zc, ncol_gh, hub_rows):
     """Zc (6, ncol): coordinate derivatives; GH rows appended (identity on the first ncol_gh columns)"""
     ncol = Zc.shape[1]; G = np.zeros((3, ncol)); G[:, :ncol_gh] = np.eye(3)
     if not np.isfinite(Zc).all(): return float("nan"), float("nan")
-    Z = np.r_[Zc, G]; w, V = np.linalg.eigh(Z.T @ Z); N = Z @ V @ np.diag(w ** -0.5) @ V.T
+    Z = np.r_[Zc, G]; U, sz, _ = np.linalg.svd(Z, full_matrices=False)
+    if sz[-1] < 1e-9 * sz[0]: return float("nan"), float("nan")   # degenerate column (closure did not move): not a sensing number
+    N = U[:, :ncol]                                          # orthonormal basis of the loop's velocity null space (= Z (Z^T Z)^-1/2 up to rotation)
     sh = np.linalg.svd(N[hub_rows], compute_uv=False)
     return float(sh[-1]) if len(sh) >= ncol else 0.0, float(sh[0] / max(sh[-1], 1e-12)) if len(sh) >= ncol else float("inf")
 

@@ -8,7 +8,6 @@
   "held_out: no held-out measurement on file: the claim has never been worn off its own bench",
   "continuity: continuity record without the connected numbers (row v_connected_reach)",
   "fold_margin: no min-th margin over taken poses on file (rule: each claim reports it)",
-  "sampling: no per-part in-band record: unsampled bodies cannot be ruled out",
   "reporting: verdict text still reads as a self-measured screen; dashboard sweep best 19.72 (score 92.83) sits 7.48 below the verified number"
  ],
  "checks": [
@@ -29,24 +28,68 @@
   {
    "check": "near_touch",
    "level": "ok",
-   "reason": "plain 27.2, <1 mm 31.75, <2 mm 46.85, 19.65 points live in the 1-2 mm shell (row v_polish_protocols.H1_fit60_m5.gap_near1)",
+   "reason": "plain 27.2, <1 mm 31.75, <2 mm 46.85, <3 mm 95.88, band read 3-14 mm 27.64, 19.65 points live in the 1-2 mm shell (re-measured (this audit))",
    "shell2": 19.65,
    "plain": 27.2,
    "n1": 31.75,
    "n2": 46.85,
-   "n3": null,
-   "band3": null,
-   "hist": null,
-   "minmm": null,
-   "source": "row v_polish_protocols.H1_fit60_m5.gap_near1"
+   "n3": 95.88,
+   "band3": 27.64,
+   "hist": {
+    "0-1": 0.0002,
+    "1-2": 0.0006,
+    "2-3": 0.0044,
+    "3-4": 0.0117,
+    "4-6": 0.1028,
+    "6-10": 0.435,
+    "10-14": 0.3414,
+    ">14": 0.104
+   },
+   "minmm": 0.086,
+   "source": "re-measured (this audit)"
   },
   {
    "check": "contact_depth",
    "level": "ok",
-   "reason": "no per-pose contact depths on file that reproduce the claim (tools/alignment_paired.py dump skin-normal-3r-pin-knee bench|held, or tools/alignment_wear_probe*.py); not measured",
+   "reason": "the score counts contact poses, not depth (report only, score unchanged): v_gap 27.2: bench 9 contact poses, sum 8.38 mm, deepest 4.08 mm at ['ws', 15.0, 90.0, 30.0], 1 deeper than 3 mm vs sidecar-longdyad-knuckle-3r 6.23 mm over 4 (+2.15 mm, x1.35); held depths not on file",
    "depths": {
-    "v_gap 27.2": {}
-   }
+    "v_gap 27.2": {
+     "bench": {
+      "n": 9,
+      "sum_mm": 8.38,
+      "max_mm": 4.08,
+      "n_deeper3": 1,
+      "overhead140": 5,
+      "deepest": [
+       "ws",
+       15.0,
+       90.0,
+       30.0
+      ],
+      "gap": 27.2,
+      "src": "docs/alignment/remeasure/skin-normal-3r-pin-knee_bench_perpose.json",
+      "cross_check": {
+       "files": 1,
+       "sums": [
+        8.38
+       ],
+       "agree": true
+      }
+     }
+    }
+   },
+   "ref": "sidecar-longdyad-knuckle-3r",
+   "compare": [
+    {
+     "claim": "v_gap 27.2",
+     "wear": "bench",
+     "sum": 8.38,
+     "ref_sum": 6.23,
+     "excess": 2.15,
+     "ratio": 1.35,
+     "watch": false
+    }
+   ]
   },
   {
    "check": "dominance",
@@ -70,8 +113,21 @@
   {
    "check": "idle",
    "level": "ok",
-   "reason": "knee: declared moving, no span on file",
-   "spans": [],
+   "reason": "knee moves: smallest recorded span 40.63 deg (re-measured K.qb span)",
+   "spans": [
+    [
+     "re-measured K.ang span",
+     44.28
+    ],
+    [
+     "re-measured K.qa span",
+     44.28
+    ],
+    [
+     "re-measured K.qb span",
+     40.63
+    ]
+   ],
    "declared": [
     "knee"
    ],
@@ -79,8 +135,55 @@
   },
   {
    "check": "sampling",
-   "level": "watch",
-   "reason": "no per-part in-band record: unsampled bodies cannot be ruled out"
+   "level": "ok",
+   "reason": "sample-weighted in-band 0.895 vs part-weighted 0.917 (-2.20 points) (re-measured)",
+   "parts": {
+    "hub1": [
+     0.995,
+     8.6,
+     80
+    ],
+    "hub2": [
+     0.999,
+     10.1,
+     80
+    ],
+    "hub3": [
+     0.657,
+     12.4,
+     80
+    ],
+    "E": [
+     0.922,
+     7.0,
+     88
+    ],
+    "boss": [
+     0.989,
+     6.8,
+     32
+    ],
+    "pad": [
+     0.998,
+     8.2,
+     32
+    ],
+    "knee": [
+     0.928,
+     10.1,
+     100
+    ],
+    "L1": [
+     0.953,
+     7.6,
+     36
+    ],
+    "L2": [
+     0.815,
+     10.7,
+     139
+    ]
+   }
   },
   {
    "check": "complexity",
@@ -106,14 +209,14 @@
   }
  ],
  "remeasured": {
-  "bench": false,
+  "bench": true,
   "held": false
  },
  "verifier_files": [
   "docs/concepts/verify/skin-normal-3r-pin-knee_big_frozen.json",
   "docs/concepts/verify/skin-normal-3r-pin-knee-polish.results.json"
  ],
- "git": "7d447a7",
+ "git": "44376a0",
  "tool_version": "2026-10-17.2",
- "t": "2026-10-17T04:17:11Z"
+ "t": "2026-10-17T04:25:41Z"
 }
