@@ -60,13 +60,23 @@
   "closed_loops": 1,
   "sliding_pairs": 1,
   "rolling_pairs": 6,
-  "sensed_passive": 2,
+  "sensed_passive": 0,
   "springs_or_flexures": 0,
   "custom_parts": 16,
   "catalogue_parts": 15,
   "notes": "the pin knee (rows/skin-normal-3r-pin-knee.json mechanism) + K: link 2 split into 2a / 2b by an O20 passive bearing-pair pin, NOT sensed (K = c(q2) is read from q2), slaved by a groove face cam on link 1 at J2 (best build: a 3 mm grooved ring on hub 2's crown) (O3 iglidur-sleeved follower pin on a lever of 2a = 1 sliding pair) through an O2 pushrod (2 pins) to a 4 mm crank on 2b: +2 bodies (2b, pushrod), +3 joints, 1 closed loop; complexity 33.75 (tools/simplicity.py; the pin knee 19.5)",
   "source": "docs/concepts/models/cam-unfold-4th.py",
-  "confidence": "counted"
+  "confidence": "counted",
+  "cuff_knee": {
+   "pins": 2,
+   "sensed": false,
+   "passive_rot": 2,
+   "moving_bodies": 2,
+   "joints": 2,
+   "custom_parts": 4,
+   "catalogue_parts": 6,
+   "rule": "user 2026-10-17: no encoders on the knee pins (pose from the hub encoders) -> no added complexity; counts = docs/concepts/skin-normal-3r-pin-knee.md line 584"
+  }
  },
  "complexity": 33.75,
  "verdict": "Screened (gate passed: 9339 CMA tries, +0.52 / +0.21 score points over the 2nd half / last third, top-5 within 0.10). Best = C3, the CROWN cam (hub 2 stays O20, 15.25 tall) with a TWO-SIDED lobe: 22.02 plain / 23.23 near-touch fast; frozen on Bench(110,360) exact 26.70 (score 90.29), near-touch 28.40, reach 0.656, in-band 0.889, contact 0.012, overhead reach 8/28. The cam is worth 8.8 points over the plain pin knee at the same seats (30.85) and ties the verified pin knee H1 (27.20 same protocol; near-touch 31.75) at +14.25 complexity; 7.6 behind the verified minarc BDp (19.06). Sensor-free 3 active, 0 passive translations. Not a new leader; self-measured, unverified.",

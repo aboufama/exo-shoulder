@@ -25,6 +25,10 @@ or CAD). (3) Near-touch (2 mm) is not a gate (see Alignment auditor); the audito
 (`python3 tools/alignment_paired.py dump`, bench and held out, reproducing the claim to +-0.05) so contact DEPTH is on
 file - without it the depth check cannot run (16 of 22 audited rows today). (4) Keep the alignment auditor (the
 exploit / gaming agent) running at all times.
+(5) The cuff knee (2026-10-17, after seeing the pin-knee renders): "if no encoders are needed, it doesn't count as added
+complexity" - the two-pin cuff knee carries NO encoders (the 3 hub encoders fix the pose; docs/concepts/
+skin-normal-3r-pin-knee.md lines 565-568), sits outside the DOF count like the cuff slides, and scores 0 in
+tools/simplicity.py (record key mechanism.cuff_knee, simplicity v2).
 The user wants the design's evolution recorded for a final time-lapse visual: add every judged design to
 docs/EVOLUTION.md (and its snapshot to pipeline/evolution/) as part of the judge loop.
 

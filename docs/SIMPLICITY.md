@@ -217,3 +217,12 @@ The search should take these only while the verified score stays at 95 or more.
 | remove an internal loop | 4 + its joints and bodies |
 
 A 4th active DOF is never a simplification: 25 points.
+
+## Change log
+
+- **v2 (2026-10-17)**, user ruling "if no encoders are needed, it doesn't count as added complexity": an unsensed
+  two-pin cuff knee (record key `mechanism.cuff_knee`: its passive_rot 2, moving_bodies 2, joints 2, custom_parts 4,
+  catalogue_parts 6, from docs/concepts/skin-normal-3r-pin-knee.md line 584) is taken out before scoring and its 2 encoders
+  are dropped (sensed_passive - 2) on the 13 standard pin-knee rows. Kutzbach / topology still read the full mechanism.
+  Not applied: closure-set-arc-knee-3r (a different, trunnion knee) and acromial-rocker-3r (3 sensed, unclear split).
+  Effect: skin-normal-3r-pin-knee 19.5 -> 0, roller-longdyad 43.75 -> 24.25, sidecar-longdyad 49 -> 29.5.

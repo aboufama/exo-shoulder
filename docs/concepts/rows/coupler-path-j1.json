@@ -84,7 +84,17 @@
   "springs_or_flexures": 0,
   "notes": "bodies: crank, rocker, coupler = link 1, link 2, member 3 (hub 3 + E strap), knee link, arm pad (on the cuff). joints: A0 (O20, ACTIVE crank), B0, A1, B1 (MR63ZZ / iglidur pins, passive), J2, J3 (O20, ACTIVE), knee pins a, b (passive). loops: the spherical four-bar + the pin knee. No passive coordinate undetermined.",
   "source": "docs/concepts/models/coupler-path-j1.py (CPDesign, price4bar)",
-  "confidence": "counted"
+  "confidence": "counted",
+  "cuff_knee": {
+   "pins": 2,
+   "sensed": false,
+   "passive_rot": 2,
+   "moving_bodies": 2,
+   "joints": 2,
+   "custom_parts": 4,
+   "catalogue_parts": 6,
+   "rule": "user 2026-10-17: no encoders on the knee pins (pose from the hub encoders) -> no added complexity; counts = docs/concepts/skin-normal-3r-pin-knee.md line 584"
+  }
  },
  "audit": {
   "t": "2026-10-16T10:20:00Z",

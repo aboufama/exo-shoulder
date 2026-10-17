@@ -24,13 +24,23 @@
   "closed_loops": 0,
   "sliding_pairs": 0,
   "rolling_pairs": 6,
-  "sensed_passive": 2,
+  "sensed_passive": 0,
   "springs_or_flexures": 1,
   "custom_parts": 14,
   "catalogue_parts": 16,
   "notes": "the pin knee (mechanism of rows/skin-normal-3r-pin-knee.json) + K: link 1 split into 1a / 1b by an O20 passive sensed hub with a clock spring and stop dowels; complexity 33.0 (tools/simplicity.py) | 2026-10-17 user ruling \"Sensed 4 joint does not count as passive obviously\": K counted as an active joint (active 4, sensed passive 2 = the knee pins, passive rot 2).",
   "source": "docs/concepts/models/minarc-stop-knuckle-4r-pinknee.py",
-  "confidence": "counted"
+  "confidence": "counted",
+  "cuff_knee": {
+   "pins": 2,
+   "sensed": false,
+   "passive_rot": 2,
+   "moving_bodies": 2,
+   "joints": 2,
+   "custom_parts": 4,
+   "catalogue_parts": 6,
+   "rule": "user 2026-10-17: no encoders on the knee pins (pose from the hub encoders) -> no added complexity; counts = docs/concepts/skin-normal-3r-pin-knee.md line 584"
+  }
  },
  "status": "verified",
  "t_screened": "2026-10-16T08:30:00Z",

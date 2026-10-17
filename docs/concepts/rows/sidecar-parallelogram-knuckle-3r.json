@@ -32,13 +32,23 @@
   "closed_loops": 3,
   "sliding_pairs": 0,
   "rolling_pairs": 1,
-  "sensed_passive": 2,
+  "sensed_passive": 0,
   "springs_or_flexures": 1,
   "custom_parts": 16,
   "catalogue_parts": 16,
   "notes": "J1/K/J2/J3 O20 MR117-2RS; K slaved (clock-spring cap, stop A; stop B at the drive's range end dK 41), never read; hub-2 rim lobe -> bell crank (MR63ZZ pair, pin in link 1b, boss stacked on link 1b, La 14.9 / s_arm 4.4) -> O3 Ti rod 25.4 + 2 RC-class M2 ball links (O4.8 ball, acetal socket O7) -> lateral horn lug of link 1a at hub K (r_h 15.5, on link 1a's own layer); pin knee (2 iglidur pins, sensed twist as the lead); loops: drive RSSR, K closure, knee closure",
   "source": "sidecar-parallelogram-knuckle-3r screen 2026-10-16 (same parts as pick 4's sidecar: the drive core is shared)",
-  "confidence": "hand count"
+  "confidence": "hand count",
+  "cuff_knee": {
+   "pins": 2,
+   "sensed": false,
+   "passive_rot": 2,
+   "moving_bodies": 2,
+   "joints": 2,
+   "custom_parts": 4,
+   "catalogue_parts": 6,
+   "rule": "user 2026-10-17: no encoders on the knee pins (pose from the hub encoders) -> no added complexity; counts = docs/concepts/skin-normal-3r-pin-knee.md line 584"
+  }
  },
  "best_params": {
   "kK": 1.3487,

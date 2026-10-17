@@ -72,13 +72,23 @@
   "closed_loops": 5,
   "sliding_pairs": 0,
   "rolling_pairs": 2,
-  "sensed_passive": 2,
+  "sensed_passive": 0,
   "springs_or_flexures": 2,
   "custom_parts": 21,
   "catalogue_parts": 22,
   "notes": "the lead's (J1/K/J2/J3 O20 MR117-2RS, K slaved by the sidecar RSSR, pin knee with sensed twist) + K2 (O20 MR117-2RS pair, clock-spring cap, never read) splitting link 2 into 2a/2b, lobe 2 on link 1b's side of hub 2, bell crank 2 (MR63ZZ pair) on link 2a, O3 rod 2 + 2 M2 ball links to a horn lug of link 2b; loops: drive 1 RSSR, K closure, drive 2 RSSR, K2 closure, knee closure",
   "source": "twin-k2-sidecar-knuckle-3r screen 2026-10-16",
-  "confidence": "hand count"
+  "confidence": "hand count",
+  "cuff_knee": {
+   "pins": 2,
+   "sensed": false,
+   "passive_rot": 2,
+   "moving_bodies": 2,
+   "joints": 2,
+   "custom_parts": 4,
+   "catalogue_parts": 6,
+   "rule": "user 2026-10-17: no encoders on the knee pins (pose from the hub encoders) -> no added complexity; counts = docs/concepts/skin-normal-3r-pin-knee.md line 584"
+  }
  },
  "best_params": {
   "bk3": 24.5926,

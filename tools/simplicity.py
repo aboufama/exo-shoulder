@@ -24,7 +24,7 @@ Input: the "mechanism" record of each design, in docs/concepts/rows/<id>.json:
 """
 import glob, json, os, sys
 
-VERSION = "1 (2026-10-16)"          # bump when a weight or a rule changes; the dashboard shows it
+VERSION = "2 (2026-10-17)"          # bump when a weight or a rule changes; the dashboard shows it
 REPO = os.path.abspath(os.path.join(os.path.dirname(os.path.abspath(__file__)), ".."))
 ROWS = os.path.join(REPO, "docs", "concepts", "rows")
 
@@ -74,6 +74,14 @@ def score(mech):
     """mechanism record -> {complexity, items: [(item, points)], kutzbach_M, redundant, flags, version}.
     complexity = sum of the item points (lower = simpler, 0 = the anchor). Nothing here touches the bench gap."""
     m = dict(mech or {})
+    # user 2026-10-17: "if no encoders are needed, it doesn't count as added complexity" - an UNSENSED two-pin cuff knee
+    # (pins a, b; the arm's pose is read from the hub encoders) is cuff alignment like the cuff slides: its own items
+    # (record "cuff_knee": passive_rot, moving_bodies, joints, custom_parts, catalogue_parts) are taken out before scoring
+    ck = m.get("cuff_knee") if isinstance(m.get("cuff_knee"), dict) and not m["cuff_knee"].get("sensed") else None
+    full = dict(m)
+    if ck:
+        for k in ("passive_rot", "moving_bodies", "joints", "custom_parts", "catalogue_parts"):
+            if m.get(k) is not None: m[k] = max(0, _n(m, k) - _n(ck, k))
     A, P, R = _n(m, "active_dof", 3), _n(m, "passive_trans"), _n(m, "passive_rot")
     X = bool(m.get("crossed_rails")) and P >= 2
     B, J, L = _n(m, "moving_bodies", 3), _n(m, "joints", 3), _n(m, "closed_loops")
@@ -108,6 +116,9 @@ def score(mech):
     tag = " (recipe)" if est else ""
     add(f"{c_x} made parts beyond 7 x {W['custom_extra']}{tag}", c_x * W["custom_extra"])
     add(f"{k_x} bought parts beyond 6 x {W['catalogue_extra']}{tag}", k_x * W["catalogue_extra"])
+    if ck: items.append(("unsensed two-pin cuff knee: 0 (user 2026-10-17, cuff alignment like the cuff slides)", 0.0))
+    # Kutzbach and the topology checks below read the FULL mechanism (the knee is still there, it just costs nothing)
+    R, B, J = _n(full, "passive_rot"), _n(full, "moving_bodies", 3), _n(full, "joints", 3)
 
     # Grubler-Kutzbach (spatial) for the whole loop set, the wearer's GH taken as a ball joint (3 freedoms) and the
     # arm-side end fixed to the cuff: L_total = closed_loops + 1, M = sum f - 6 L_total. The arm has 3 DOF, so

@@ -36,13 +36,23 @@
   "closed_loops": 3,
   "sliding_pairs": 0,
   "rolling_pairs": 1,
-  "sensed_passive": 2,
+  "sensed_passive": 0,
   "springs_or_flexures": 1,
   "custom_parts": 16,
   "catalogue_parts": 16,
   "notes": "J1/K/J2/J3 O20 MR117-2RS; K slaved (clock-spring cap 6 mm, horn r >= 2.45), never read; lobe on hub 2 rotor rim -> rocker (MR63ZZ pin, i_rock:1 clevis arm) -> O3 Ti rod + 2 M3 rod ends; pin knee (2 iglidur pins, sensed twist as the winner); loops: drive (lobe-rocker-rod-horn), K closure, knee closure",
   "source": "frontload-lobe-stopb-knuckle-3r screen 2026-10-16",
-  "confidence": "hand count"
+  "confidence": "hand count",
+  "cuff_knee": {
+   "pins": 2,
+   "sensed": false,
+   "passive_rot": 2,
+   "moving_bodies": 2,
+   "joints": 2,
+   "custom_parts": 4,
+   "catalogue_parts": 6,
+   "rule": "user 2026-10-17: no encoders on the knee pins (pose from the hub encoders) -> no added complexity; counts = docs/concepts/skin-normal-3r-pin-knee.md line 584"
+  }
  },
  "best_params": {
   "bk1": 30.0536,

@@ -32,11 +32,21 @@
   "closed_loops": 3,
   "sliding_pairs": 0,
   "rolling_pairs": 2,
-  "sensed_passive": 2,
+  "sensed_passive": 0,
   "springs_or_flexures": 1,
   "custom_parts": 15,
   "catalogue_parts": 15,
-  "notes": "J1/K/J2/J3 O20 MR117-2RS; K slaved (clock-spring cap), never read; hub-2 rim lobe -> bell crank (MR63ZZ pair, pin in link 1b, boss stacked on link 1b) -> bent long arm (3 mm Ti, straight run + arc concentric with hub K, 5-axis tip over the lug shell) -> MR63ZZ roller (O6 x 2.5, radial axis, O3 shoulder pin) -> conjugate flank on a lateral horn lug of link 1a (spherical-shell lug, 5-axis / tilting-head wire-EDM flank); pin knee (2 iglidur pins, sensed as the lead). Rolling pairs: lobe-follower, roller-flank. Loops: drive (lobe-crank-flank-K), knee closure, K dyad stop. No rod, no ball links, 0 passive translations."
+  "notes": "J1/K/J2/J3 O20 MR117-2RS; K slaved (clock-spring cap), never read; hub-2 rim lobe -> bell crank (MR63ZZ pair, pin in link 1b, boss stacked on link 1b) -> bent long arm (3 mm Ti, straight run + arc concentric with hub K, 5-axis tip over the lug shell) -> MR63ZZ roller (O6 x 2.5, radial axis, O3 shoulder pin) -> conjugate flank on a lateral horn lug of link 1a (spherical-shell lug, 5-axis / tilting-head wire-EDM flank); pin knee (2 iglidur pins, sensed as the lead). Rolling pairs: lobe-follower, roller-flank. Loops: drive (lobe-crank-flank-K), knee closure, K dyad stop. No rod, no ball links, 0 passive translations.",
+  "cuff_knee": {
+   "pins": 2,
+   "sensed": false,
+   "passive_rot": 2,
+   "moving_bodies": 2,
+   "joints": 2,
+   "custom_parts": 4,
+   "catalogue_parts": 6,
+   "rule": "user 2026-10-17: no encoders on the knee pins (pose from the hub encoders) -> no added complexity; counts = docs/concepts/skin-normal-3r-pin-knee.md line 584"
+  }
  },
  "best_params": {
   "g": 2.2817,
