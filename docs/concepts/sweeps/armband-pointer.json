@@ -285,5 +285,53 @@
   "audit": [
    "link2a: sparse sampling (4.11 mm median spacing > 4 mm)"
   ]
+ },
+ {
+  "k": 6,
+  "t": "2026-10-17T19:01:29Z",
+  "params": {
+   "az": 30.0,
+   "el": 70.0,
+   "sigma": -1,
+   "A1": 90.0,
+   "A2": 90.0,
+   "tilt": 8.0,
+   "tilt_a": 0.0,
+   "s": 280.0,
+   "bore": 82.55,
+   "ring_w": 10.0,
+   "c": 0.0,
+   "s0": 80.0,
+   "q": 1.0,
+   "q_spar": 1.0,
+   "r_block": 110.0,
+   "width": 12.0,
+   "t_link": 3.0,
+   "w_spar": 16.0,
+   "t_spar": 4.0
+  },
+  "inband14": 0.1132,
+  "inband10": 0.09,
+  "reach": 0.3187,
+  "follow": 0.5,
+  "contact": 0.6267,
+  "gap": 244.48,
+  "closure": 0.9864,
+  "honest": false,
+  "kmode": "march",
+  "outer_contact_poses": 77,
+  "inband_member": {
+   "hub1": 1.0,
+   "hub2": 0.0,
+   "link1": 0.0,
+   "link2a": 0.0,
+   "spar": 0.0,
+   "ring": 0.2005
+  },
+  "min_margin": 6.62,
+  "audit": [
+   "link1: sparse sampling (10.24 mm median spacing > 4 mm)",
+   "link2a: sparse sampling (11.13 mm median spacing > 4 mm)"
+  ]
  }
 ]
