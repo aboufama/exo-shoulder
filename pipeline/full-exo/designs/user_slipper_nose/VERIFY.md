@@ -172,7 +172,12 @@ R17 notes:
   - It is still the design's thinnest number. The design's claim of "exactly the 5.0 limit" should read "fails the gate
     by 0.0008 deg at mu 0.15, passes at mu <= 0.12".
 
-Working end (the drive pairs on the 116 workspace closing poses at |dK| 29.4-46.3): see the addendum below.
+**Working end.** I re-ran the builder's `--working-end-only` check on the copy: 116 workspace closing poses at |dK|
+29.39-46.27, 11 min. Every pair matches judge/working_end.json exactly:
+- both rolling / sliding pairs stay closed on all 58 driven frames (follower -0.026..-0.004 mm, nose -0.010..-0.002);
+- the smallest running gaps are crank to link 1a 0.103, link 1a to link 1b 0.15, crank to link 1b 0.15, and crank bearing
+  to link 1b 0.158;
+- drive skin minimum 1.851 mm (crank).
 
 ## 5. Stills
 
