@@ -47,7 +47,7 @@
    "level": "ok",
    "reason": "no per-pose contact depths on file that reproduce the claim (tools/alignment_paired.py dump inband-rssr-knuckle-3r bench|held, or tools/alignment_wear_probe*.py); not measured",
    "depths": {
-    "gap 16.47": {}
+    "polished_gap 18.33": {}
    }
   },
   {
@@ -221,12 +221,12 @@
   {
    "check": "reporting",
    "level": "ok",
-   "reason": "row, verifier files and dashboard agree"
+   "reason": "dashboard status 'verified' vs row 'screened'"
   },
   {
    "check": "judge_change",
    "level": "ok",
-   "reason": "no bench / judge / metric file changed in the 3 commits that touched the row"
+   "reason": "no bench / judge / metric file changed in the 5 commits that touched the row"
   },
   {
    "check": "rules",
@@ -239,7 +239,7 @@
   "held": true
  },
  "verifier_files": [],
- "git": "0465565",
+ "git": "a3b0434",
  "tool_version": "2026-10-17.2",
- "t": "2026-10-17T12:04:44Z"
+ "t": "2026-10-17T13:07:01Z"
 }

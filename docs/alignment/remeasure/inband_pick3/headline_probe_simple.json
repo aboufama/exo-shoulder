@@ -1,0 +1,97 @@
+{
+ "page": "docs/dashboard/simple/index.html",
+ "morphs": "docs/dashboard/data/morphs.json",
+ "tie_rows": [
+  {
+   "id": "inband-rssr-knuckle-3r",
+   "v_gap": 18.33,
+   "target": "slipper-nose-knuckle-3r"
+  }
+ ],
+ "runs": [
+  {
+   "label": "as published",
+   "headline": "slipper-nose-knuckle-3r",
+   "headline_gap": 18.49,
+   "headline_text": "Slipper-nose knuckle (tied with In-band RSSR knuckle (pick3))",
+   "score": 93.3,
+   "lower_gap_3joint_verified_not_headline": [
+    {
+     "id": "inband-rssr-knuckle-3r",
+     "gap": 18.33,
+     "ruling": "tie: slipper-nose-knuckle-3r | lead's ru",
+     "named_in_headline": true
+    }
+   ]
+  },
+  {
+   "label": "A slipper-nose-knuckle-3r flagged gamed",
+   "headline": "trimlug-k165-knuckle-3r",
+   "headline_gap": 18.51,
+   "headline_text": "Trimmed horn lug on the slipper-nose lead",
+   "score": 93.3,
+   "lower_gap_3joint_verified_not_headline": [
+    {
+     "id": "inband-rssr-knuckle-3r",
+     "gap": 18.33,
+     "ruling": "tie: slipper-nose-knuckle-3r | lead's ru",
+     "named_in_headline": false
+    }
+   ]
+  },
+  {
+   "label": "B slipper-nose-knuckle-3r refuted",
+   "headline": "trimlug-k165-knuckle-3r",
+   "headline_gap": 18.51,
+   "headline_text": "Trimmed horn lug on the slipper-nose lead",
+   "score": 93.3,
+   "lower_gap_3joint_verified_not_headline": [
+    {
+     "id": "inband-rssr-knuckle-3r",
+     "gap": 18.33,
+     "ruling": "tie: slipper-nose-knuckle-3r | lead's ru",
+     "named_in_headline": false
+    }
+   ]
+  },
+  {
+   "label": "C new verified 3-joint row 0.04 below slipper-nose-knuckle-3r",
+   "headline": "whatif-new-leader-3r",
+   "headline_gap": 18.45,
+   "headline_text": "whatif new leader",
+   "score": 93.3,
+   "lower_gap_3joint_verified_not_headline": [
+    {
+     "id": "inband-rssr-knuckle-3r",
+     "gap": 18.33,
+     "ruling": "tie: slipper-nose-knuckle-3r | lead's ru",
+     "named_in_headline": false
+    }
+   ]
+  },
+  {
+   "label": "D inband-rssr-knuckle-3r ruling removed",
+   "headline": "inband-rssr-knuckle-3r",
+   "headline_gap": 18.33,
+   "headline_text": "In-band RSSR knuckle (pick3)",
+   "score": 93.3,
+   "lower_gap_3joint_verified_not_headline": []
+  },
+  {
+   "label": "E inband-rssr-knuckle-3r ruling with a leading space",
+   "headline": "inband-rssr-knuckle-3r",
+   "headline_gap": 18.33,
+   "headline_text": "In-band RSSR knuckle (pick3)",
+   "score": 93.3,
+   "lower_gap_3joint_verified_not_headline": []
+  },
+  {
+   "label": "F inband-rssr-knuckle-3r status screened (before the polished promotion)",
+   "headline": "slipper-nose-knuckle-3r",
+   "headline_gap": 18.49,
+   "headline_text": "Slipper-nose knuckle (tied with In-band RSSR knuckle (pick3))",
+   "score": 93.3,
+   "lower_gap_3joint_verified_not_headline": []
+  }
+ ]
+}
