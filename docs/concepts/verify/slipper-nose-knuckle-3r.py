@@ -145,7 +145,9 @@ def _params(argv):
 
 
 if __name__ == "__main__":
-    sets = [a for a in sys.argv if a.startswith("--set=")]
+    # both spellings: '--set=k=v' and the docstring's '--set k=v' (alignment skeptic 2026-10-17 16:25: the spaced form was
+    # silently ignored and the run measured the nominal config; arg parsing only, no measurement changes)
+    sets = [a for a in sys.argv if a.startswith("--set=")] + ["--set=" + sys.argv[i + 1] for i, a in enumerate(sys.argv[:-1]) if a == "--set"]
     P = _params(sets); nr = retarget(P)
     if sys.argv[1] == "cam":
         old = os.environ.pop("CB_EXACT", None)

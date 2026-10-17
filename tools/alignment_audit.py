@@ -55,7 +55,7 @@ OUT = os.path.join(REPO, "docs", "alignment")
 REM = os.path.join(OUT, "remeasure")
 sys.path.insert(0, os.path.join(REPO, "tools"))
 
-VERSION = "2026-10-17.2"   # bump on every change of a check, threshold or reading: a change of the instrument (docs/ALIGNMENT.md section 6)
+VERSION = "2026-10-17.3"   # bump on every change of a check, threshold or reading: a change of the instrument (docs/ALIGNMENT.md section 6)
 ROUND8 = ["sidecar-longdyad-knuckle-3r", "sidecar-parallelogram-knuckle-3r", "sidecar-roller-flank-knuckle-3r", "twist-long-a2-knuckle-3r"]
 # thresholds (gap points unless stated); calibrated on the verified rows, docs/ALIGNMENT.md "Thresholds"
 TH = dict(held_watch=6.0, held_gamed=10.0, shell2_watch=15.0, shell2_gamed=25.0, dom_gamed=0.0, conn_watch=1.0, conn_gamed=3.0,
@@ -567,7 +567,10 @@ def _declared_joints(row):
     if re.search(r"\bK slaved|slaves? K\b|slaved knuckle|\bK\b[^.;|]{0,80}(sensed|clock spring)", notes):
         moving["K"] = "mechanism / name: K slaved or sensed"
     knee_gone = re.search(r"no knee pins|knee[^.;|]{0,60}deleted|kneeless", notes + " " + row["id"], re.I)
-    knee_assert = re.search(r"knee_moved", src)                 # the model refuses (honest False) any pose that moves it
+    # the model refuses (honest False) any pose that moves it: match the ASSIGNMENT r["knee_moved"] = True only - a bare
+    # read r.get("knee_moved") (every slaved-knuckle model since round 10) is not an assertion (2026-10-17.3: four skeptic
+    # rulings refuted 'idle' on slipper-nose because the old pattern matched the read)
+    knee_assert = re.search(r"""\[["']knee_moved["']\]\s*=\s*True""", src)
     if knee_gone or knee_assert:
         rigid["knee"] = "; ".join(x for x in ("mechanism notes: knee deleted, one rigid bracket" if knee_gone else "",
                                              "model asserts the knee angle constant (knee_moved -> dishonest)" if knee_assert else "") if x)
@@ -801,6 +804,11 @@ def _rulings(rid):
 # checks whose skeptic rulings predate a user ruling that retired their rule (2026-10-17: "dont really care about the
 # near touch stuff"; the A1 dominance gate retired): the self-test does not hold the tool to those rulings
 SUPERSEDED = {"near_touch", "dominance"}
+# record checks: an upheld ruling on a stale record (a row field that disagreed with the instrument) is RESOLVED once the
+# record is fixed and the check reads ok - not a lost true positive (2026-10-17.3: the complexity fields refreshed at
+# 04:55 / 15:21 resolved the upheld 'complexity' rulings on roller-longdyad, minarc, sidecar-longdyad). The check's
+# sensitivity is kept by the 'stale complexity field' mutation below.
+RECORD_CHECKS = {"complexity"}
 
 
 def selftest(ids=None, hard=LEADERS, verbose=True):
@@ -815,7 +823,7 @@ def selftest(ids=None, hard=LEADERS, verbose=True):
     for rid in ids:
         if not os.path.exists(os.path.join(ROWS, rid + ".json")): continue
         a = audit(rid, ref=DEPTH_REF, write=False); C = {c["check"]: c for c in a["checks"]}
-        tp = fp = fn = tn = 0; bad = []
+        tp = fp = fn = tn = rs = 0; bad = []
         for r in _rulings(rid):
             k = str(r.get("key", "")); refuted = bool(r.get("refuted"))
             chk = k if k in CHECKS else next((c for p, c in JUDGEMENT_CHECK.items() if re.search(p, k)), None)
@@ -826,12 +834,13 @@ def selftest(ids=None, hard=LEADERS, verbose=True):
                 ok_ = (lv != "gamed") if refuted else (lv == "gamed")
             else:
                 ok_ = (lv == "ok") if refuted else (lv != "ok")
+            if not refuted and not ok_ and chk in RECORD_CHECKS: rs += 1; continue     # resolved by a record fix
             if refuted and ok_: tn += 1
             elif refuted: fp += 1; bad.append(f"FALSE POSITIVE {k} -> {chk} {lv} (skeptic refuted)")
             elif ok_: tp += 1
             else: fn += 1; bad.append(f"LOST TRUE POSITIVE {k} -> {chk} {lv} (skeptic upheld)")
         if rid in hard and a["verdict"] == "gamed": bad.append("verdict 'gamed' on a leader no skeptic upheld as gamed")
-        line = f"{rid}: verdict {a['verdict']}; vs rulings TP {tp} TN {tn} FP {fp} FN {fn}" + ("" if not bad else " - " + "; ".join(bad))
+        line = f"{rid}: verdict {a['verdict']}; vs rulings TP {tp} TN {tn} FP {fp} FN {fn}" + (f" resolved {rs}" if rs else "") + ("" if not bad else " - " + "; ".join(bad))
         rep.append(("HARD " if rid in hard else "info ") + line)
         if rid in hard and bad: fails.append(line)
     # mutation tests: doctored copies of real rows (in memory only)
@@ -840,7 +849,8 @@ def selftest(ids=None, hard=LEADERS, verbose=True):
         row, V, rb = fn(row, V, rb); lv = fn_check[check](row, V, rb)["level"]
         good = lv in want; rep.append(f"{'mut  ' if good else 'MUT! '}{name}: {check} {lv} (want {'/'.join(want)})")
         if not good: fails.append(f"mutation {name}: {check} {lv}, want {want}")
-    fn_check = dict(idle=lambda r, V, rb: c_idle(r, V, rb), fold_margin=lambda r, V, rb: c_fold_margin(r, V, rb))
+    fn_check = dict(idle=lambda r, V, rb: c_idle(r, V, rb), fold_margin=lambda r, V, rb: c_fold_margin(r, V, rb),
+                    complexity=lambda r, V, rb: c_complexity(r))
     def strip_K(row, V, rb):                                   # the drive idle: every K / crank reading 0
         for d in [row] + [x[1] for x in V]:
             for p, v in _find_keys(d, r"(dK_taken_max(_deg)?|dK_max|K_span|phi_max_taken)$"):
@@ -859,6 +869,8 @@ def selftest(ids=None, hard=LEADERS, verbose=True):
     mut("kneeless-roller rigid knee moves 3 deg", "kneeless-roller-knuckle-3r", move_knee, "idle", ("watch", "gamed"))
     mut("roller-longdyad pin knee idle", "roller-longdyad-knuckle-3r", idle_knee, "idle", ("gamed",))
     mut("kneeless-roller fold margin 4.8 (kit_min_th_margin_deg)", "kneeless-roller-knuckle-3r", thin_fold, "fold_margin", ("gamed",))
+    def stale_cx(row, V, rb): row["complexity"] = float(row.get("complexity") or 0) + 4.0; return row, V, rb
+    mut("roller-longdyad stale complexity field (+4)", "roller-longdyad-knuckle-3r", stale_cx, "complexity", ("watch", "gamed"))
     ref_self = c_contact_depth(_row(DEPTH_REF), DEPTH_REF)["level"]
     rep.append(f"{'mut  ' if ref_self == 'ok' else 'MUT! '}reference vs itself: contact_depth {ref_self} (want ok)")
     if ref_self != "ok": fails.append("contact_depth fires on the reference itself")

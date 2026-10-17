@@ -523,3 +523,9 @@ Each line is a measurement change: verdicts that move because of it moved becaus
   near_touch findings on k-rim-lobe, sidecar-parallelogram and sidecar-roller-flank no longer fire. The self-test skips
   skeptic rulings on those two checks (`SUPERSEDED`: they were ruled under the retired rule). Not done on purpose: a
   tool change does not mark every row due (the self-test guards regressions instead).
+- **2026-10-17.3** (lead, from the 16:03 skeptic's instrument findings): the idle check's knee assertion matches only the
+  ASSIGNMENT `r["knee_moved"] = True` (kneeless-roller / -sidecar), not the read `r.get("knee_moved")` every slaved-knuckle
+  model carries (four skeptic rulings had refuted the resulting 'idle' on slipper-nose). Selftest: an upheld ruling on a
+  record check (`complexity`) whose row field has since been fixed counts as RESOLVED, not a lost true positive, and a
+  new mutation (stale complexity field +4 -> watch) keeps that check's sensitivity. SELFTEST PASS on the 5 leaders.
+  A tool change: audits before and after it read 'idle' differently on slipper-family rows.
