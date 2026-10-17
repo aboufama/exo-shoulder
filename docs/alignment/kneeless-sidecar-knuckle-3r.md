@@ -159,3 +159,76 @@ workspace and deep contact at elevation 165, and both are invisible to the gap.
 - Then round 10 lens 3 picks its base on measured grounds:
   - this design has less contact than its twin (27.45 mm against 44.0 mm summed);
   - the twin has lower complexity (23.75 against 28) and a better held-out gap (24.59 against 25.34).
+
+## Skeptic (2026-10-17, 02:31-02:45 UTC, git 14dd5d1)
+
+The skeptic was a separate agent. It edited no bench, judge, kit, model, row, dashboard page or CLAUDE.md, and
+changed no score. Local compute only (nice 15, OMP_NUM_THREADS=1, at most 2 processes); the farm was not used.
+
+**Re-measured this session (models unchanged).**
+- **Exact re-wear.** `tools/alignment_audit.py` `remeasure`, unchanged, with its output dir redirected to the
+  scratchpad. CB_EXACT=1, Bench(110,360), 115 s. It reproduces frozen **21.11** / 1 mm 22.75 / 2 mm 33.15 / 3 mm
+  130.78 and why = fold 90, parts 8, contact 5. Its `deep`, `frozen` and `parts_ib14` are identical to the auditor's
+  `remeasure/kneeless-sidecar-knuckle-3r_bench.json`.
+  - coord_spans: dK -0.6242..0 rad (**35.76 deg**). K.ang is constant at 128.5952.
+- **Fast check.** `docs/concepts/models/kneeless-sidecar-knuckle-3r.py check <best_params>` reproduces row.fast:
+  plain 15.63 / 1 mm 16.78 / 2 mm 20.32, min metal 0.32 mm, honest True. Bracket: knee_ptp 0.0, drift 0.0 mm, bend
+  128.6 deg. Own span read: dK **36.64 deg** over 185 taken poses, with K at stop A on 110 and moved on 75.
+- **GH offset for this design.** `tools/alignment_ghoff_twin.py` (new) is the twin's `redteam_gh` logic run with this
+  design's hub-3 axis, with no wear. Output: `remeasure/kneeless-sidecar-knuckle-3r_ghoffset.json`.
+  - At 3 mm, 38.7 % of the 470 claim-bench poses stay within the 3 mm liner with no knee, against **66.4 %** with a
+    planar knee (one slide along the arm: 40.2 %).
+  - At 5 mm: 17.7 % against 36.8 %.
+  - This fills the audit's "not obtained" item.
+
+**Rulings** (also in `docs/alignment/kneeless-sidecar-knuckle-3r.rulings.json`):
+
+| key | refuted | evidence |
+|---|---|---|
+| fold_margin (watch) | **yes** | On file five times, all >= TH fold_min 5.0. Row `verification.added_checks.min_th_margin_deg` 5.293 / `min_th_margin_held_deg` 5.106 and `fast.min_th_margin_taken_deg` 5.01. verify `_v_bench_frozen.json` `th_margin` {min 5.293, lt5 0}, `_v_held_frozen.json` {5.106, lt5 0} and `_v_fitexact.json` {5.007, lt5 0}. The margin is in th, both sub-chains on forced poses (verifier lines 54-58). The tool's regex skips `*_deg` keys, and the dict `th_margin` gives no number. |
+| idle (gamed) | **yes** | dK spans 35.76 deg on the bench (the auditor's exact file and the own exact re-wear, identical) and 36.34 held out. The own fast run gives 36.64. verify `extra.dK_taken_max_deg` is 35.77 / 36.34 and `sidecar.phi_max_taken` 34.1. All are far above TH idle_deg 2.0. K.ang belongs to the deleted knee: `KLDesign.knee` only places the pad, and K.ang is constant at 128.5952, with bracket drift 0.000 mm. No knee is a declared joint. M4 is absent. |
+| reporting (watch) | no | The row's status is verified, but its verdict opens "SCREENED, a Pareto point", which is the tool's documented trigger. The record also still decides on the retired A1 gate. A stale record is not refuted by a number. |
+| NEW-idle-check-false-positive (watch) | **yes** | Every fact is confirmed. It is a defect of `c_idle`, not a pattern of this design: its design-side numbers are ok (above). The base-choice concern is now moot, because the twin was cleared to watch by its skeptic (ledger, 02:18:29Z). Proposal 1 stays open as a tool action. |
+| NEW-free-deletion (watch) | no | Measured for this design (above): 38.7 % within the liner without a knee, against 66.4 % with one, at 3 mm. The row's `gh_offset_redteam` (p95 4.83, knee 4.14) is confirmed. The no-knee share is design independent: it equals the twin's 0.387 because it depends only on the poses and the rest pose. **Correction:** the deletion is not free on the bench either. It needs b3 = 0, and the result is plain 21.11 against the lead's 18.91 (b3 0.345), held out 25.34 against 22.67, seed frozen 22.68. No number refutes the misfit. |
+| NEW-contact-depth (watch) | no | `_probe.json` is confirmed: 5 poses, 27.45 mm summed, deepest -17.6 mm at (0,165,-45). Held out: 21 poses, 76.79 mm. **Caveat (c):** the comparison is not pose-matched. In `sidecar-longdyad-knuckle-3r_bench_perpose_claim.json` the lead does not evaluate either of this design's two deepest poses (ev false), and at (30,165,-60) the lead is in contact at -4.61 mm where this design takes the pose at 0.48 mm. Reach at elevation 165 is equal; what differs is how the arm is stopped. No number shows that the intrusion costs nothing. |
+| NEW-ws-inband (watch) | no | Two independent files agree: verify `ws_inband` 0.8426 / 0.8049 (held out 0.8465 / 0.8282) and the probe. The lead on the same probe and bench is 0.8736 / 0.8409, with over14 0.1257 against 0.1566. Selection does not explain it: this design takes fewer poses at elevation 90-140 (34 against 37). The floor is in ROUNDS.md lines 1017-1020 and 1265. |
+| T1 (watch) | no | The verifier's own audit confirms it: 0.48 / 0.51 / 0.67 mm taken, gap at 1 mm 22.75. Held out: 14 poses, lowest 0.025 mm, 28.41. This is the user's line (CLAUDE.md line 76: contact stays metal < 1 mm). The tool's 1-2 mm shell trigger is not met (12.04 < 15), but these are 0-1 mm poses. |
+| G1 (watch) | no | Overhead floor hist {0-1: 1, 1-2: 5, 2-3: 2} of 8 taken; held out {3, 9, 5} of 17. The lead is {1, 4, 3}: one pose better at < 2 mm overhead, and worse overall (near3 178 against 130). The whole-bench shell (12.04 < 15) cannot see an 8-pose overhead subset, and the goal puts overhead first. |
+| M5 (watch) | no | Missing measurement: there is no R17, dynamics or posture-sweep output for this id. The lead's static load sheet (`docs/research/sidecar_mechanism_redteam.md` row 5) covers another geometry, and its line 112 has R17 still pending. The stop-A share is confirmed from the verifier's definition (forced = abs(dK) > 1e-6): 227 / 367 and 534 / 853. The own fast run gives 110 / 185. |
+| S1 (watch) | **yes** | (b) The documented S1 trigger is held out minus bench > +6 (TH held_watch). The measured value is **+4.23**; the lead on the same protocol is +3.76. (a) "The fit bench never shows the clash" is true only of fast labels. On the same 220 poses, the exact wear has E-L2 on 3 (`_v_fitexact.json`). That is 1.4 %, against 1.7 % on the claim bench and 1.5 % held out, so the sample is not skewed against the clash. Fast mode loses the same 35 poses under another label (fold 30 + skin 5, against exact fold 30 + parts 3 + contact 2, with reach 0.7812 in both), so the objective was charged for them. The claim counts every loss (8 / 17). |
+| R1 (watch) | no | Row verdict, note and `verification.dominance_A1` still cite A1. The twin (21.07 / 24.59 / cx 23.75) is ahead on all three, so "Pareto point" is a stale label that flatters. The dashboard shows sweep_gap 20.24 with v_contact null. |
+
+**Missed by the audit** (not counted in this verdict; for the next audit):
+1. **The search's fast 2 mm objective cannot see the 1-2 mm shell.**
+   - The CMA searched the 2 mm near-touch gap on Bench(60,160) **fast**: 20.32, min metal 0.32 mm (row `fast`, own
+     check).
+   - The verifier's exact wear of the **same 220 poses** (`verify/kneeless-sidecar-knuckle-3r_v_fitexact.json`) reads
+     **32.75** at 2 mm (16 poses under 2 mm). That is 12.43 points the objective never saw. One taken pose sits at
+     **0.00 mm**, at (135,135,-45).
+   - The fast 1 mm and plain numbers are slightly pessimistic (16.78 against 15.15; 15.63 against 14.00). Only the 2 mm
+     shell is blind.
+   - **For the wearer:** the search optimised a 1-2 mm metric through a lens that misses most of that shell. Metal it
+     "kept off" 2 mm may sit at 1-2 mm, which ALIGNMENT section 1.1 calls metal on the skin.
+   - Under the 2026-10-17 ruling the 2 mm shell is not a gate, and the 1 mm objective (fast slightly pessimistic) stays.
+     Measured on this design only: no other row has a fit-exact file.
+   - **Reporting proposal** (no score moves): report the fit-bench exact near-touch beside any fast objective.
+2. **The knee deletion's bench price is hidden in b3, and hub 3 pays it.**
+   - Deleting the knee needs b3 = 0, which costs +2.20 bench and +2.67 held out against the lead.
+   - Hub 3 is 0.555 in band (median 13.5 mm), against the lead's 0.599 (13.0 mm). That is under the round-9 spec gate's
+     0.60.
+   - The row's own `gate.spec_gate.passed` is false on five counts: fast 15.63 > 12.5, 2 mm 20.32 > 14.5, contact
+     0.026 > 0.012, hub 3 0.551 < 0.60, and workspace in-band.
+   - The audit reports only the workspace in-band count. ROUNDS.md line 1324 still offers this design as the round-10
+     base "(cx 28, not gamed)".
+3. **Two evidence gaps for proposal 3 and the contact-depth finding.**
+   - The no-knee GH-offset share is design independent (0.387 for every rigid-bracket row under that harness), so it
+     cannot rank one kneeless row against another. Only the knee-equivalent share moves with u3 (0.664 here, 0.666 for
+     the twin).
+   - Contact depth should be compared on pose-matched sets. The lead never evaluates this design's two deepest contact
+     poses.
+
+**Final verdict (ledger, skeptic entry 2026-10-17T02:39:47Z): WATCH.**
+- Refuted with evidence: idle, fold_margin, NEW-idle-check-false-positive and S1.
+- Upheld as watch: reporting, NEW-free-deletion, NEW-contact-depth, NEW-ws-inband, T1, G1, M5 and R1.
+- The 'gamed' rested only on the tool's idle false positive. It no longer blocks the row.
+- The row is still not a leader: plain 21.11 against 18.67 / 18.91, held out 25.34 against 23.73 / 22.67.
