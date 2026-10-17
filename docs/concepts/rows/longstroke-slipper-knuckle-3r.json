@@ -225,8 +225,8 @@
   "a1max": 68.2225,
   "smhi": 12.1012
  },
- "verdict": "SCREENED - the lever does not pay in this family. The drive exists: a phased RSSR rod (O3 Ti, 2 M2 ball links) turns K 65-77 deg with every pressure angle <= 42 (transmission >= 48 at both ball ends; one-sided cams cap at 46.5 (nose, mu 0.087) / 51.8 (roller)). But no search uses it: 13 farm CMA runs (14,207 evaluations, free, stroke-constrained >= 65, 2 mm and 1 mm objectives) settle on configs whose taken poses turn K only 42-49 deg. Claim (s65n2d, committed before its frozen number): frozen exact Bench(110,360) 21.27 (score 92.27) vs slipper-nose 18.49; held out 26.19 vs 23.45; complexity 30.5 vs 22.25. Attribution: the same lever with the drive metal DELETED (ghost) gives 19.50 frozen / 22.69 held - the drive metal costs ~1.8 bench points (crank and ball links over the band), and even a perfectly parked drive is not a bench gain (+1.01) though it is a held-out gain (-0.76).",
- "limiter": "The LAW, not the stroke: the hub-2 lobe caps the law slope at kK <= tan(42) g r_lobe / s_arm (~2.0 at the searched seats), and with kK <= 2 the stretched poses past th ~109 fail closure at the 5 deg margin, so K is never asked for more than ~42-49 deg; the extra stroke is idle. Then the drive metal: the bell crank (median 13.8-15.3 mm, in band 0.50) and the ball links (0.67) sit over the band because a 40-55 deg crank swing keeps the arm stacked over link 1b; the claim parks the rod 0.25 mm from its 1 mm ROD-hubK clearance (knife edge). Frozen loss 100/360 = fold 87, slide 10, contact 3 (horn / hub K / rod, depth max 12.8 mm).",
+ "verdict": "SCREENED - the drive exists, the lever is real only without the drive's metal. A phased RSSR rod (O3 Ti, 2 M2 ball links) turns K 65-77 deg with every pressure angle <= 42 (one-sided cams cap at 46.5 nose / 51.8 roller). Claim s65n2d (committed before its frozen number): frozen exact Bench(110,360) 21.27 (score 92.27), held out 26.19, vs slipper-nose 18.49 / 23.45; complexity 30.5 vs 22.25. No search uses the stroke at the lobe law the CMA picks (K used 42-49). With the hub-2 lobe law at its PA-42 limit (kK 3.0) and the drive metal DELETED (attribution only) the long-dyad chain measures 18.25 / 21.11 (held 2.34 better than slipper-nose); through the real rod drive the same law is 25.83 and its own re-search (cma5) 23.31 / 27.67: the rod drive's crank and ball links do not park (in band 0.5-0.65).",
+ "limiter": "Two walls after the stroke. (1) The K LAW: along a q2-driven lobe law th rises ~1.9 deg per q2 degree while a1e rises 1.5 -> 0.9, so the 5 deg margin is lost at th ~109 (kK 2) / ~114 (kK 3.0, the lobe's PA-42 limit); the chain uses ~52-54 deg of K at most, not 75. (2) The DRIVE METAL: the bell crank stacks over link 1b through its 30-55 deg swing (median ~14 mm, in band 0.5-0.6), the ball links sit at 0.55-0.65 and the horn / rod make the contacts (max depth 12.8-14.7 mm); the claim also parks the horn ball 0.25 mm from its ROD-hubK 1 mm pair (r_h +0.25 is the robust build, identical).",
  "note": "Model docs/concepts/models/longstroke-slipper-knuckle-3r.py (LS_DRIVE nose|roller|rssr; LS_STROKE_MIN, LS_OBJ, LS_GHOST for the searches / attribution). Control: slipper-nose verified config through this model at every PA <= 42 = 18.49 frozen (identical: the 42 rule does not bind there). Research note docs/research/longstroke_drive.md.",
  "doc": "docs/concepts/longstroke-slipper-knuckle-3r.md",
  "frozen": {
@@ -867,6 +867,71 @@
       "L2": 0.765
      }
     }
+   }
+  },
+  "steep_law_cma5_k27b": {
+   "params": {
+    "La": 22.8723,
+    "s_arm": 4.0,
+    "r_h": 15.9448,
+    "beta": -149.8132,
+    "gam": 29.1695,
+    "hl": 2.27,
+    "zr": 1.5851,
+    "kK": 2.7,
+    "r_lobe": 8.4846,
+    "bk1": 28.7724,
+    "bk2": 41.9799,
+    "a1max": 60.8797,
+    "smhi": 13.4632
+   },
+   "frozen": {
+    "gap": 23.31,
+    "reach": 0.7278,
+    "follow": 1.0,
+    "inband14": 0.8524,
+    "inband10": 0.4899,
+    "contact": 0.0133
+   },
+   "why": {
+    "fold": 85,
+    "slide": 8,
+    "flip": 0,
+    "closure": 0,
+    "skin": 0,
+    "parts": 0,
+    "contact": 5
+   },
+   "held": {
+    "gap": 27.67,
+    "reach": 0.6891,
+    "follow": 1.0,
+    "inband14": 0.8503,
+    "inband10": 0.4877,
+    "contact": 0.0161
+   },
+   "contact_depth": {
+    "n": 5,
+    "sum_mm": 21.378,
+    "max_mm": 13.006
+   },
+   "dK_taken_max": 44.37,
+   "parts_ib14": {
+    "hub1": 0.999,
+    "hubK": 0.985,
+    "hub2": 0.949,
+    "hub3": 0.601,
+    "E": 0.95,
+    "boss": 0.987,
+    "pad": 1.0,
+    "knee": 0.941,
+    "crank": 0.626,
+    "horn": 0.958,
+    "rod": 0.655,
+    "rodends": 0.631,
+    "L1a": 0.969,
+    "L1b": 0.943,
+    "L2": 0.713
    }
   }
  },

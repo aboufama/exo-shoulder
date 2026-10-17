@@ -2343,3 +2343,16 @@ What was measured (farm, ~15,200 configurations, <= $1.10):
 steeper lobe law at PA <= 42 (bigger lobe base / smaller follower arm, hub-2 skirt), measured with the ghost drive
 (`LS_GHOST=1`, `docs/research/longstroke_drive/stroke_curve.py`); if the ghost does not gain, no drive will. A stroke
 constraint is not a reach constraint: gate on the K the taken poses USE.
+
+**Update 08:50 UTC (same row, follow-up): the law steepened, and the lever's ceiling measured.**
+
+* The law table (`docs/research/longstroke_drive/law_table.py`): along the hub-2 lobe law, th rises ~1.9 deg per q2 degree
+  while a1e rises 1.5 -> 0.9 deg (the K sub-dyad's efficiency falls as K opens), so the 5 deg margin goes at th ~114 even
+  at kK 3.0, the lobe's PA-42 limit at its base circle (s_arm 4, r_lobe 8.5). kK 3.4 kills the law; two-slope and
+  'track' laws are worse (the slope jump hits the lobe's PA).
+* **With the drive's metal deleted (attribution) and kK 3.0, the long-dyad chain (30.0 / 42.9) measures 18.25 frozen /
+  21.11 held** against slipper-nose's 18.49 / 23.45: fold 88 -> 77, K used 52-54 deg. The lever is real held out.
+* **With the real rod drive it is not:** 25.83 at the same law, 23.31 / 27.67 after its own steep-law re-search (cma5,
+  970 evaluations): the bell crank and the ball links do not park (in band 0.5-0.65).
+* So the round-11 job is a K drive whose METAL parks at a ~55 deg stroke (not 75) under a steep lobe law, gated against
+  the ghost's 18.25 / 21.11 (`LS_GHOST=1`): e.g. a spherical coupler at strap level, or the crank pivot off link 1b's strap.

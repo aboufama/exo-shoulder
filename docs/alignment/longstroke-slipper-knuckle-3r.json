@@ -61,7 +61,7 @@
   {
    "check": "fold_margin",
    "level": "ok",
-   "reason": "min fold margin on file 5.003 deg (claims.ghost_g65d_ATTRIBUTION_ONLY.held.th_margin_min; 6 readings)",
+   "reason": "min fold margin on file 5.003 deg (claims.ghost_g65d_ATTRIBUTION_ONLY.held.th_margin_min; 9 readings)",
    "min_margin": 5.003,
    "where": "claims.ghost_g65d_ATTRIBUTION_ONLY.held.th_margin_min"
   },
@@ -93,6 +93,22 @@
     [
      "row:claims.ghost_g65d_ATTRIBUTION_ONLY.held.dK_taken_max",
      43.33
+    ],
+    [
+     "row:claims.steep_law_k30.ghost_ATTRIBUTION_ONLY.bench.dK_taken_max",
+     51.75
+    ],
+    [
+     "row:claims.steep_law_k30.ghost_ATTRIBUTION_ONLY.held.dK_taken_max",
+     53.97
+    ],
+    [
+     "row:claims.steep_law_k30.real_rod_drive_not_researched.bench.dK_taken_max",
+     51.75
+    ],
+    [
+     "row:claims.steep_law_cma5_k27b.dK_taken_max",
+     44.37
     ]
    ],
    "declared": [
@@ -200,7 +216,7 @@
   {
    "check": "judge_change",
    "level": "ok",
-   "reason": "no bench / judge / metric file changed in the 1 commits that touched the row"
+   "reason": "no bench / judge / metric file changed in the 3 commits that touched the row"
   },
   {
    "check": "rules",
@@ -213,7 +229,7 @@
   "held": false
  },
  "verifier_files": [],
- "git": "c57ad8d",
+ "git": "0f27dc1",
  "tool_version": "2026-10-17.2",
- "t": "2026-10-17T08:07:46Z"
+ "t": "2026-10-17T08:49:38Z"
 }

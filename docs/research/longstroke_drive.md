@@ -262,8 +262,8 @@ LS_DRIVE=rssr python3 docs/research/longstroke_drive/stroke_curve.py "$P"; LS_DR
 ```
 
 Cost: exo-cpu1 only, never GPU: 6 sweeps, 4 CMA batches (15 runs), 6 claim batches. `tools/runpod_guard.py audit`
-before (06:56 UTC, balance $30.55) and after (08:08 UTC, balance $29.45, workersMin 0, queue empty): $1.10 for every
-agent on the account in that window, so at most $1.10 for this task (the client's own billing lines sum to ~$1.0-1.1).
+before (06:56 UTC, balance $30.55), after the main search (08:08, $29.45) and after the follow-up (08:49, $29.22;
+workersMin 0, queue empty): $1.33 for every agent on the account in that window, so at most $1.33 for this task.
 
 ## 8. Follow-up (08:10-08:45 UTC): steepen the law, then re-wear the ghost and the real drive
 
@@ -300,4 +300,9 @@ drive's metal deleted, beats the reference: -0.24 on the frozen bench and **-2.3
 parks: the same law through the rod drive's real metal is 25.83 (crank in band 0.62, ball links 0.59, 14 contacts).
 And the stroke this chain can use is ~55 deg, not 75: the law, not the drive, sets it.
 
-**cma5 (running, 08:19 UTC):** the real rod drive re-searched with the law held steep (LS_KK_MIN 2.7, stroke >= 55), 2 runs seeded at this config.
+**cma5: the real rod drive re-searched with the law held steep** (LS_KK_MIN 2.7, stroke >= 55; 2 runs, 970 evaluations,
+each run's gate passes: k27a 0.00 / 0.00 / 0.02, k27b 0.41 / 0.08 / 0.01): best 2 mm 20.44 (k27a), best 1 mm 15.51 =
+plain (k27b; reach 0.794, in-band 0.851). The metal does not park under the steep law either: bell crank in band
+0.51-0.62, rod 0.48-0.65, ball links 0.54-0.63. k27b worn frozen (farm `claimH`): **23.31** (reach 0.728, in-band 0.852,
+contact 0.013 = 5 poses, max depth 13.0 mm; K used 44.4) and held out **27.67**. So: the lever is the ghost's
+18.25 / 21.11; the rod drive turns it into 23-26.
