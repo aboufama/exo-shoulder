@@ -1,0 +1,25 @@
+held 1154 clip 202 ws 952
+clip frames in held: 0
+held ws |axial|>=150: 0.1103
+{
+ "env": {
+  "n": 420,
+  "min_cheb": 2.227,
+  "n_cheb_lt2": 0,
+  "min_geo": 2.036,
+  "n_geo_lt2": 0,
+  "median_geo": 7.46,
+  "exact_reuse": 0,
+  "ax_ge150": 0.0929
+ },
+ "envsel": {
+  "n": 360,
+  "min_cheb": 2.065,
+  "n_cheb_lt2": 0,
+  "min_geo": 2.025,
+  "n_geo_lt2": 0,
+  "median_geo": 7.29,
+  "exact_reuse": 0,
+  "ax_ge150": 0.0972
+ }
+}

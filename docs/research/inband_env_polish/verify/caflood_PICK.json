@@ -1,0 +1,40 @@
+{
+ "which": "PICK",
+ "grid": 1432,
+ "kin_ok": 1003,
+ "known": 1312,
+ "taken_known": 897,
+ "seed_elev": 15.0,
+ "kinematic_strict": {
+  "nodes": 1003,
+  "seeds": 51,
+  "connected": 1003,
+  "taken_dropped": 0,
+  "taken_dropped_held": 0,
+  "dropped_poses": []
+ },
+ "contact_cons_strict": {
+  "nodes": 897,
+  "seeds": 49,
+  "connected": 897,
+  "taken_dropped": 0,
+  "taken_dropped_held": 0,
+  "dropped_poses": []
+ },
+ "contact_opt_strict": {
+  "nodes": 991,
+  "seeds": 51,
+  "connected": 991,
+  "taken_dropped": 0,
+  "taken_dropped_held": 0,
+  "dropped_poses": []
+ },
+ "contact_cons_unforced": {
+  "nodes": 897,
+  "seeds": 423,
+  "connected": 897,
+  "taken_dropped": 0,
+  "taken_dropped_held": 0,
+  "dropped_poses": []
+ }
+}

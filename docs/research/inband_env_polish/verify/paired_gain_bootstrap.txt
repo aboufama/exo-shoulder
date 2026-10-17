@@ -1,0 +1,18 @@
+# env fit -> held exact (polish farm dumps, recomputed by the verifier)
+A 24.748 {'reach': 0.6723, 'follow': 1.0, 'ib': 0.8908, 'contact': 0.0106, 'nev': 851.0} frozen 24.75
+B 23.573 {'reach': 0.6807, 'follow': 1.0, 'ib': 0.8929, 'contact': 0.0093, 'nev': 858.0} frozen 23.57
+ws taken A/B 640 648  gained 10 lost 2  contacts A/B 9 8
+clip taken A/B 202 202
+gain A-B 1.175 bootstrap 5/50/95 % [0.488 1.107 1.812] P(gain>=1) 0.596 P(gain>0) 0.999
+# fit60 -> held exact (verifier's own local re-run dumps)
+A 24.38 {'reach': 0.6712, 'follow': 1.0, 'ib': 0.8956, 'contact': 0.0106, 'nev': 850.0} frozen 24.38
+B 22.865 {'reach': 0.6807, 'follow': 1.0, 'ib': 0.9056, 'contact': 0.0093, 'nev': 858.0} frozen 22.86
+ws taken A/B 639 648  gained 10 lost 1  contacts A/B 9 8
+clip taken A/B 202 202
+gain A-B 1.515 bootstrap 5/50/95 % [0.55  1.505 2.499] P(gain>=1) 0.792 P(gain>0) 0.999
+# fit60 -> Bench(110,360) exact (verifier's own re-run dumps)
+A 19.433 {'reach': 0.7167, 'follow': 1.0, 'ib': 0.8971, 'contact': 0.0081, 'nev': 371.0} frozen 19.43
+B 18.326 {'reach': 0.7194, 'follow': 1.0, 'ib': 0.9071, 'contact': 0.0027, 'nev': 370.0} frozen 18.33
+ws taken A/B 258 259  gained 3 lost 2  contacts A/B 3 1
+clip taken A/B 110 110
+gain A-B 1.108 bootstrap 5/50/95 % [-0.269  1.174  2.837] P(gain>=1) 0.594 P(gain>0) 0.892
