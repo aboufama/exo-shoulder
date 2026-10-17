@@ -65,14 +65,19 @@ def slerp(a, b, f):
     return K.unit((np.sin((1 - f) * om) * a + np.sin(f * om) * b) / np.sin(om))
 
 
-def multi_eval(u1, u3, a1, a2, a1max, sigma, taus=(0.95, 0.9, 0.8, 0.7, 0.6), fmin=0.95):
+def multi_eval(u1, u3, a1, a2, a1max, sigma, taus=(0.95, 0.9, 0.8, 0.7, 0.6), fmin=0.95, bk1=None, sK=-1.0):
     """ALL O20 hub discs (1, 2, 3) and link samples (link 1 at 1/2, link 2 at 1/3, 2/3 of its arc) as rigid parts at one
     level each: for a per-part in-band floor tau, part k's level can be at most F_k = 12 + the (1 - tau) quantile of its
     requirement over the followed clip frames (iterated to a fixed point); a pose is taken iff it closes and every part
     clears (req_k <= F_k). Returns {tau: (R160, follow, kin360, ovh160)}"""
     w = Q60 @ u3; th = np.degrees(np.arccos(np.clip(w @ u1, -1, 1)))
     a1e, ok = law(th, a1, a2, a1max); U1 = np.broadcast_to(u1, w.shape); u2, okc = closure_v(U1, w, a1e, a2, sigma); ok &= okc
-    dirs = [U1, u2, w, slerp(U1, u2, 0.5), slerp(u2, w, 1 / 3), slerp(u2, w, 2 / 3)]
+    if bk1 is None:
+        dirs = [U1, u2, w, slerp(U1, u2, 0.5), slerp(u2, w, 1 / 3), slerp(u2, w, 2 / 3)]
+    else:                                  # the knuckle: hub K on circles bk1 (J1) / bk2 = a1max + 5 - bk1 (J2), branch sK
+        bk2 = a1max + 5.0 - bk1
+        uK, okK, _ = K.closure(U1, u2, bk1, bk2, sK, margin_deg=0.0); ok &= okK
+        dirs = [U1, uK, u2, w, slerp(U1, uK, 0.5), slerp(uK, u2, 0.5), slerp(u2, w, 1 / 3), slerp(u2, w, 2 / 3)]
     R_ = np.stack([reqD[np.arange(len(w)), tree.query(d)[1]] for d in dirs])            # (parts, P)
     res = {}
     for tau in taus:

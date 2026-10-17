@@ -718,7 +718,11 @@ def main():
     for p, G in E.frames: G["S"] = E.RS[p]
     l1_body = next(s for g, n, s in parts if n.startswith("D8-02a"))
     if a.skip_base_search: USP.EAR_DZ = ()
-    bp, rep["base"] = USP.base_part(M, E, l1_body, rel, frames); parts.append((bp[0], bp[2], bp[3]))
+    try: bp, rep["base"] = USP.base_part(M, E, l1_body, rel, frames)
+    except (FileNotFoundError, OSError) as e_:                                                 # the ear skin check reads the envelope maps (.cache/maps_s1.pt)
+        print(f"base: ear search needs {e_} - built without ears (as user_geneva_rod: the J1 upper member alone)", flush=True)
+        USP.EAR_DZ = (); bp, rep["base"] = USP.base_part(M, E, l1_body, rel, frames); rep["base"]["ear_search"] = f"not run: {e_}"
+    parts.append((bp[0], bp[2], bp[3]))
     print(f"parts built ({time.time() - t0:.0f} s)", flush=True)
     # ---- export
     HR = BM.HR
