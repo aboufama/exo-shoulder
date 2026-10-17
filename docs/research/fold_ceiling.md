@@ -302,8 +302,13 @@ clearing every closed pose; R_est = the share of workspace poses closed and clea
 |---|---|---|---|---|---|
 | 26 / 38, 46.25 (leader) | 272 | 0.656 / **0.722** / 0.731 | 0.923 / **0.768** / 0.496 | 1 of 11 | hub 2 2/11, link 2 at 1/3 6/11 |
 | **28 / 50, 57.5** | 290 | 0.678 / **0.761** / 0.778 | 0.921 / **0.760** / 0.460 | **15 of 29** | hub 2 18/29, link 2 at 1/3 20/29, link 1b 23/29 |
+| held out (952): 26 / 38, 46.25 (leader) | 691 | 0.622 / **0.695** / 0.704 | 0.917 / **0.764** / 0.492 | 16 of 42 | - |
+| held out (952): **28 / 50, 57.5** | 730 | 0.644 / **0.732** / 0.742 | 0.914 / **0.757** / 0.458 | 49 of 81 | - |
 
-- **Calibration.** At +4 the leader row gives 0.722 against the verified 0.725: within one pose.
+- **Calibration.** At +4 the leader row gives 0.722 against the verified 0.725: within one pose. Held out it gives
+  0.695 against the verified 0.682 (+13 of 952).
+- **Held out confirms the lever:** +0.037 (+35 poses) at the same parts' in-band (0.764 -> 0.757). On the verified
+  config that is held reach ~0.719 against 0.682.
 - **The stroke-57.5 lever** buys +0.039 (+14 poses) at the same parts' in-band (0.768 -> 0.760). On the verified
   config that is reach ~0.764, gap ~14.8, score ~94.6, before the drive's own metal.
 - Going to +8 mm adds 6 more poses but halves the parts' in-band. Not a trade.
@@ -373,26 +378,30 @@ Bench(60,160) fast):
 
 ## 7. For the round-11 planner
 
-The fold is two walls with two different causes, and both are now measured.
+Every leader loses the same 88 poses. They are two walls with two different causes, both now measured on the frozen
+exact bench and held out.
 
-**Stretched wall: 73 of the 88 bench fold losses, 211 of 261 held out.**
+**The stretched wall: 73 bench / 211 held.**
 
-- These are internal rotation across the body.
-- The wall is the K DRIVE'S STROKE: dK 46 -> a1e 54.3 -> th 106.6. It is not stop B, and it is not hub 2.
-- Hub 2 clears 47 of the 73 at its current 62 mm level (142 of 211 held out).
-- At the leader's seats, a K dyad of 28 / 50 with every modelled part at one level admits +14 poses at the same
-  in-band (exact; reach ~0.764, score ~94.6), IF K can turn 60-90 deg.
-- So round 11 should screen K DRIVES with a 60-90 deg stroke at pressure angle <= 43 whose metal stays off the
-  deltoid. Candidates are a K-on-K four-bar or a two-stage roller.
-- Gate every drive with `parking_k.py` plus its own metal, never with a per-part relaxation that drops poses
-  (section 5).
-- Do not spend a round on re-placing the window: a2 +2.8 on the real model measured 20.84 against 18.67.
+- These are internal rotation >= 90 deg across the body.
+- The wall is the K DRIVE'S STROKE (dK 46 -> a1e 54.3 -> th 106.6). It is not stop B, not hub 2 and not kinematics.
+- The clip frames never get there (th 41-96), so taking these poses costs in-band only through the part levels.
+- **Exact one-level parking** (`docs/research/fold_ceiling/parking_k.py`; it reproduces the leader to one pose):
+  - a K dyad of 28 / 50 driven through 57.5 deg admits +14 poses at the same parts' in-band;
+  - that is reach ~0.764, score ~94.6, before the drive's own metal;
+  - an unlimited stroke reaches 0.778;
+  - the binding parts for the new poses are hub 2, link 2 near J2 and link 1b.
+- **So round 11's one in-family job:** a K drive with a 57.5-75 deg stroke at pressure angle <= 43 whose metal stays
+  off the deltoid, on a 28-32 / 48-50 K dyad at the leader's seats.
+  - Gate every candidate drive with `parking_k.py` plus the drive's own metal before any CMA.
+  - Do not gate with a per-part relaxation that drops uncleared poses: it is refuted, section 5.
 
-**Folded wall: 15 bench, 50 held.**
+**Do not spend the round on:**
 
-- These are scapular-plane abduction overhead.
-- It IS a hub-2 clearance trade: hub 2 clears 4 of 15 at 62 mm and needs a median 71 mm. Leave it.
+- re-placing the window (a2 +2.8 on the real model: 20.84 against 18.67, held out 24.17 against 23.73);
+- the folded side, where hub 2 IS the wall (4 of 15 clear; median need 71 mm against 62);
+- seat searches judged by kinematics: 0.99 is available kinematically everywhere, so kinematics proves nothing.
 
-**Above ~0.80 reach**, the family needs both walls moved. That is the point where a 4th joint (pick1-type) or a
-different J1 / J3 seat pair stops being optional.
-
+**95 is not provably out of the family, and nothing here reached it.** Reaching the hard goal (reach >= 0.80,
+overhead >= 14 / 28) needs both walls moved. That is the point where a 4th joint (pick1-type) or a different J1 / J3
+seat pair, gated by the same exact one-level test, stops being optional.

@@ -2118,6 +2118,7 @@ Scripts are in `docs/research/fold_ceiling/`. No rule, bench or verified row was
 * The estimate is calibrated: with the leader's own drive cap (stroke 46.25) it gives 0.722 against the verified 0.725.
 * A K dyad of 28 / 50 with a 57.5 deg K stroke at the leader's seats admits **+14 poses**: R_est 0.722 -> 0.761 at
   the same parts' clip in-band (0.768 -> 0.760), i.e. reach ~0.764, score ~94.6 before the drive's metal.
+  Held out: +0.037 (+35 of 952) at in-band 0.764 -> 0.757.
 * Uncapped (a1max 73, K turning ~89 deg) it gives 0.778.
 * Link 1b (K -> J2) is the binding part.
 * **But K must turn 78-89 deg.** The leader's drive turns 46; the round-9 flank caps at 55-57.5 at pressure angle
