@@ -111,3 +111,49 @@ the frozen pick did not follow it (see red team).
 2. Select on the law-only Bench(110,360) count + frozen in-band (not fast): the high-gain arms (279 law-only) need the
    drag link to clear link 1b (dl_L1b is the binding check in 66 of 84 high-gain configs).
 3. A shorter sector (ring arc ~40 deg) by moving the dog ahead of link 2's root.
+
+## Verification (independent skeptic, 2026-10-17 11:39 UTC) - REFUTED
+
+Harness: `docs/concepts/verify/dogring-draglink-knuckle-3r.py` (the claim's model loaded unchanged, worn by its own
+frozen protocol; outputs `docs/concepts/verify/dogring-draglink-knuckle-3r_v_{bench,held}_frozen.json`). Local CPU, one
+process, `CB_EXACT=1`.
+
+| bench | gap | score | reach | follow | ib14 | ib10 | contact | overhead |
+|---|---|---|---|---|---|---|---|---|
+| claim reproduced, Bench(110,360) exact frozen | 22.64 | 91.77 | 0.7333 | 1.0 | 0.8638 | 0.5198 | 0.0235 | 8/28 |
+| **corrected, Bench(110,360) exact frozen** | **97.83** | **64.43** | 0.3472 | 0.60 | 0.8695 | 0.4992 | 0.045 | 4/28 |
+| claim reproduced, held out | 25.36 | 90.78 | 0.7038 | 1.0 | 0.8617 | 0.5182 | 0.0191 | |
+| corrected, held out | 101.1 | 63.24 | 0.3277 | 0.584 | 0.8651 | 0.4932 | 0.038 | 13/71 |
+| champion spherical 3R, same bench (risley-turret verifier) | | 75.94 | | | | | | |
+
+**The fault: the Ti arm sweeps through link 1b's root.** The arm (member 9) turns with the ring about J2's axis by phi (up
+to -31.5 deg at K 44). Nothing checks it against link 1b per pose. The parent's `collide()` has CRK vs hub 1 / hub K /
+hub 3 / L1a / L2 / knee / pad / E, but no CRK vs L1b. The design-stage rule ("stacked over link 1b at base + T_LINK + 1")
+reads `base` at phi 0, at the link-1b point nearest the arm's centreline. Link 1b's root ramps down from f2 to f2 - 5.8
+between r 11.5 and 14.5 mm of J2's axis. The arm at r 15.2 mm (underside radial level 61.5 mm) passes 1.35 mm
+tangentially from link 1b's ramp (underside 59.1). The two 3-mm plates overlap.
+
+- Plate rule (stacked OR side by side, edge-row insets 1.0 / 0.5; lenient on ramps and diagonals): clearance **-0.18 mm**.
+  It is < 0.15 on **every** K-open pose with K >= 3.2 deg: 183 of 374 taken bench poses and 442 of 872 held out. It
+  passes only for K <= 2.8.
+- At rest the arm clears link 1b by only 0.5 mm. The model holds the horn-link 1b pair (also adjacent, through K) to its
+  1 mm `collide()` rule. Held to that rule here, all 374 taken poses fail.
+- Dropping the 183 poses gives **v_gap 97.83**, worse than the champion's 75.94 on the same bench, so the claim is
+  **refuted**.
+
+**What passed (checked here, not taken from the claim):**
+
+- 3 active DOF, 0 passive translations, no undetermined coordinate (with K on stop A the 4R parks the ring).
+- Dog closure: link 2's leading edge sits on the lug face within 0.000 mm on all 200 K-open poses. At rest it never
+  enters the sector (max -0.06 mm).
+- Drag-link closure 0.0001 mm. Arm root vs link 2 never within 8 mm. Sector vs link 1b >= 2.54 mm.
+- Own-state fold margin min 5.389 (held 5.189), none under 5.
+
+**Second finding (no score effect):** the claim's own sector-vs-link-2 check (RING-L2 in `DRModel.collide`) reads
+`_dogg` / `_L2ring`. `LS._frozen_model`'s `Frozen.fit` does not copy those, so on every frozen bench the check silently
+returned early. Re-instated here, it loses 0 poses.
+
+**Not refuted on the morphology.** The coaxial dog itself closes exactly. The repair is to lift the arm >= 1 mm above
+link 1b's root ramp over the whole swing (the highest link-1b top under its sweep, not the one under its rest
+centreline), or to route it beside link 1b. Either costs in-band, unmeasured here; the drag link and horn levels follow
+the arm tip. The convergence gate was not met in the claim either.
