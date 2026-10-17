@@ -302,6 +302,13 @@ class FBModel(LS.LSModel):
                              mu_c_win=[round(float(T["mu_c"][i0w:i1w + 1].min()), 1), round(float(T["mu_c"][i0w:i1w + 1].max()), 1)] if iv else None,
                              K_win=[round(float(np.degrees(T["kr"][i0w:i1w + 1].min())), 2), round(float(np.degrees(T["kr"][i0w:i1w + 1].max())), 2)] if iv else None)
         self._rod_info = self._sc_info
+        if os.environ.get("FB_GHOST") == "1":
+            # ATTRIBUTION ONLY (never a claim): the four-bar keeps its law but its own metal (lugs, coupler, eyes) is deleted
+            nC, nH = len(crank), len(horn)
+            for k_ in ("crank", "horn", "coupler"): self.rigid.pop(k_, None)
+            self.contact = [(m, X) for (m, X) in self.contact if m != 8 and not (m in (1, 2) and len(X) in (nC + 32, nH + 32))]
+            for k_ in ("CPL", "CPLE", "CRKL", "HRNL"): self.strap.pop(k_, None)
+            self._sc_info["ghost"] = True
         self._viz_rod = dict(crankPin=cen_c, hornPin=cen_h, cplA=pc_r * fl_c, cplB=ph_r * fl_h)
 
     def collide(self, i):

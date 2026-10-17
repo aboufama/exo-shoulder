@@ -1,0 +1,30 @@
+[
+ {
+  "tag": "chk-prefix-r16-step1",
+  "design": [
+   "chkprefix_user_roller_longdyad"
+  ],
+  "cmd": "python3 -W ignore judge/workspace.py chkprefix_user_roller_longdyad --step 1 --jobs 8 2>&1 | tail -2",
+  "out": [
+   "pipeline/full-exo/designs/chkprefix_user_roller_longdyad/judge/workspace.json"
+  ],
+  "env": {
+   "OMP_NUM_THREADS": "1"
+  },
+  "timeout": 3000
+ },
+ {
+  "tag": "chk-l1-r16-step1",
+  "design": [
+   "l1_roller-longdyad"
+  ],
+  "cmd": "python3 -W ignore judge/workspace.py l1_roller-longdyad --step 1 --jobs 8 2>&1 | tail -2",
+  "out": [
+   "pipeline/full-exo/designs/l1_roller-longdyad/judge/workspace.json"
+  ],
+  "env": {
+   "OMP_NUM_THREADS": "1"
+  },
+  "timeout": 3000
+ }
+]
