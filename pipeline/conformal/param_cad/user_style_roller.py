@@ -157,9 +157,10 @@ def build_links(M, stops, lug):
         dws.append(("l1b", f"K stop dowel {i + 1} of 2: {USM.DOWEL_STOCK} (stop A dK 0 / stop B dK {math.degrees(stops['K']['q'][0] if abs(stops['K']['q'][0]) > 1e-9 else stops['K']['q'][1]):.2f}), "
                            "pressed 3 mm in the K upper boss, polished", dw))
     body = body.clean() if body.clean().isValid() else body
+    body, sl_1b = USM.sliver_free(body, "link 1b")
     out.append(("l1b", f"D8-02b link 1b: 8x3 bar on a line/arc chain, K upper pad + O20 ring + M18 spigot + bore (2 dowel holes), J2 pad + integral O7 pin "
                        f"with the {math.degrees(q_hi - q_lo):.1f}-deg q2 stop slot; carries the crank pivot pin ({r['process']})", body))
-    rep["link 1b"] = dict(fit, **r, pocket=npk, valid=body.isValid(), solids=len(body.Solids()))
+    rep["link 1b"] = dict(fit, **r, pocket=npk, valid=body.isValid(), solids=len(body.Solids()), slivers=sl_1b)
     print(f"  link 1b: valid {body.isValid()}, solids {len(body.Solids())}, faces {len(body.Faces())}, pocket {npk}", flush=True)
     out += dws
     # ---- link 2: J2 upper (2) -> J3 upper (3, offset line)   (USM.build_links, copied)
@@ -187,8 +188,9 @@ def build_links(M, stops, lug):
     # (gen-6 fix) no O18 groove on the J2 upper ring any more: the lobe ring seats on the J2 cap's O20 skirt (band F2 + 9.8..12.8), so the
     # groove at LOBE_Z (the first lobe seat) was a stale cut (the verifier's finding e)
     body = body.clean() if body.clean().isValid() else body
+    body, sl_2 = USM.sliver_free(body, "link 2")
     out.append(("l2", f"D8-03 link 2: 8x3 bar on a line/arc chain + J2 / J3 O20 rings, J2 dowel hole, flies over the knee and the pad ({r['process']})", body))
-    rep["link 2"] = dict(**r, seat_mm=Ls, pad_round_mm=rf, u3_lean_out_of_plane_deg=lean, valid=body.isValid(), solids=len(body.Solids()))
+    rep["link 2"] = dict(**r, seat_mm=Ls, pad_round_mm=rf, u3_lean_out_of_plane_deg=lean, valid=body.isValid(), solids=len(body.Solids()), slivers=sl_2)
     print(f"  link 2: valid {body.isValid()}, solids {len(body.Solids())}, faces {len(body.Faces())}", flush=True)
     return out, rep
 
@@ -637,6 +639,11 @@ def tess_safe(s, fine=True, report=None):
 def material(n, user):
     nl = n.lower()
     if user: return "user part", None
+    import re
+    if re.match(r"D\d+-\d+", n):                                                                # our numbered machined parts: by their stated alloy, never by feature
+        if "17-4ph" in nl: return "17-4PH", 7.8                                                   # words (gen-6 fix: "dowel hole(s)" made links 1b / 2 hardened steel)
+        if "7075-T6" in n: return "7075-T6 (BOTTOM merged with the pad mount)", 2.81
+        return "Ti-6Al-4V", USP.TI
     if "iglidur" in nl or "igubal" in nl: return "iglidur", USP.IGL
     if "bearing" in nl or "mr63zz" in nl or "683zz" in nl or "mr117" in nl: return "bearing steel", 7.8
     if "17-4ph" in nl: return "17-4PH", 7.8

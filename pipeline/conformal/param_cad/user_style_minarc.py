@@ -338,6 +338,39 @@ def step_bad_faces(s):
 GLUE_FUZZ = (None, 1e-4, 1e-3)                                                             # exact glue first, then fuzzy fuses (mm)
 
 
+def sliver_free(body, label):
+    """a finished part with zero-area faces (left by the later fuses / cuts on a strip bar) re-sewn without them, kept only if it is
+    one valid solid whose STEP round trip stays clean (R7) - the slivers otherwise tessellate to nothing and leave holes in the
+    judges' mesh (gen-6 link 2: a 10.6 mm open seam, so judge/dynamics.py took split hulls: l2 117 g instead of ~47 g)"""
+    zero = sum(1 for fc in body.Faces() if fc.Area() < 1e-4)
+    if not zero: return body, "no zero-area faces"
+    r_ = drop_zero_faces(body)
+    if r_ is None: return body, f"{zero} zero-area faces kept (re-sew failed)"
+    bad, z2, ns = step_bad_faces(r_)
+    if bad or z2 or ns != 1: return body, f"{zero} zero-area faces kept (re-sewn part: {bad} bad faces after STEP, {z2} zero-area)"
+    print(f"  {label}: {zero} zero-area faces removed by re-sewing (STEP round trip clean)", flush=True)
+    return r_, f"{zero} zero-area faces removed by re-sewing"
+
+
+def drop_zero_faces(s, tol=1e-4, amin=1e-4):
+    """re-sew a solid without its zero-area faces (area < amin mm2: the zero-width slivers a glue leaves where two strips share an
+    edge exactly; their two bounding edges coincide, so sewing at tol merges them and closes the shell). Returns the solid or None."""
+    from OCP.BRepBuilderAPI import BRepBuilderAPI_Sewing, BRepBuilderAPI_MakeSolid
+    from OCP.TopoDS import TopoDS
+    from OCP.ShapeFix import ShapeFix_Solid
+    from OCP.TopAbs import TopAbs_SHELL
+    from OCP.TopExp import TopExp_Explorer
+    sw = BRepBuilderAPI_Sewing(tol)
+    for f in s.Faces():
+        if f.Area() > amin: sw.Add(f.wrapped)
+    sw.Perform(); ex = TopExp_Explorer(sw.SewedShape(), TopAbs_SHELL); shells = []
+    while ex.More(): shells.append(TopoDS.Shell_s(ex.Current())); ex.Next()
+    if len(shells) != 1: return None
+    sf = ShapeFix_Solid(BRepBuilderAPI_MakeSolid(shells[0]).Solid()); sf.Perform(); r = cq.Shape.cast(sf.Solid())
+    ok = r.isValid() and len(r.Solids()) == 1 and abs(r.Volume() - s.Volume()) < 1e-3 * max(1.0, abs(s.Volume()))
+    return r if ok else None
+
+
 def glue_strips(parts, label, keep=None):
     """glue the side-by-side strips into ONE solid that passes R7 after a STEP round trip (gen-6 link 1b: the exact glue left 8
     zero-area faces on the strip planes, valid in memory, 1 face failing BRepCheck in the exported STEP). Tries the exact glue
@@ -353,6 +386,12 @@ def glue_strips(parts, label, keep=None):
         except Exception as e_: tried.append(f"{tag}: {e_}"); continue
         if not sol.isValid() or len(sol.Solids()) != 1: tried.append(f"{tag}: invalid in memory"); continue
         bad, zero, ns = step_bad_faces(sol); tried.append(f"{tag}: {bad} bad faces after STEP, {zero} zero-area")
+        if zero:                                                                           # zero-width slivers: re-sew without them
+            r_ = drop_zero_faces(sol)
+            if r_ is not None:
+                b2, z2, n2 = step_bad_faces(r_)
+                if b2 <= bad and z2 == 0 and n2 == 1:
+                    sol, bad, zero, ns, tag = r_, b2, z2, n2, tag + " + re-sewn without its zero-area faces"; tried.append(f"{tag}: {bad} bad faces after STEP, 0 zero-area")
         if bad == 0 and ns == 1 and (keep is None or keep(sol)):
             ok.append((zero, len(ok), sol, tag))
             if zero == 0: break                                                            # clean: no sliver either
