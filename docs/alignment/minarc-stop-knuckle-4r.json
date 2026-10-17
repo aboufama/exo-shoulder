@@ -6,7 +6,7 @@
  "verdict": "watch",
  "reasons": [
   "near_touch: plain 19.54, <1 mm 26.44, <2 mm 41.69, <3 mm 152.61, band read 3-14 mm 20.08, 22.15 points live in the 1-2 mm shell (re-measured (this audit))",
-  "continuity: continuity record without the connected numbers (row kitrule_continuity)",
+  "contact_depth: the score counts contact poses, not depth (report only, score unchanged): polished_gap 18.4: bench 11 contact poses, sum 34.43 mm, deepest 13.17 mm at ['ws', 15.0, 165.0, -60.0], 4 deeper than 3 mm vs sidecar-longdyad-knuckle-3r 6.23 mm over 4 (+28.20 mm, x5.53) - CLEARLY DEEPER; held 35 contact poses, sum 126.1 mm, deepest 14.61 mm at ['ws', 45.0, 165.0, -30.0], 15 deeper than 3 mm vs sidecar-longdyad-knuckle-3r 35.66 mm over 10 (+90.44 mm, x3.54) - CLEARLY DEEPER | v_gap 19.54: bench 4 contact poses, sum 10.03 mm, deepest 6.41 mm at ['ws', 30.0, 165.0, -60.0], 1 deeper than 3 mm vs sidecar-longdyad-knuckle-3r 6.23 mm over 4 (+3.80 mm, x1.61); held 13 contact poses, sum 36.4 mm, deepest 7.27 mm at ['ws', 60.0, 165.0, -30.0], 6 deeper than 3 mm vs sidecar-longdyad-knuckle-3r 35.66 mm over 10 (+0.74 mm, x1.02)",
   "sampling: no per-part in-band record: unsampled bodies cannot be ruled out",
   "complexity: recomputed 52.0 vs row 33.0; MISMATCH; info: 4 active + 2 sensed passive coordinates = 6 read coordinates (cuff-side passives are outside the count by the user's ruling)",
   "reporting: dashboard v_gap 18.4 vs verifier 19.54 (-1.14; the dashboard flatters the design); dashboard sweep best 6.19 (score 97.75) sits 13.35 below the verified number"
@@ -53,6 +53,144 @@
    "source": "re-measured (this audit)"
   },
   {
+   "check": "contact_depth",
+   "level": "watch",
+   "reason": "the score counts contact poses, not depth (report only, score unchanged): polished_gap 18.4: bench 11 contact poses, sum 34.43 mm, deepest 13.17 mm at ['ws', 15.0, 165.0, -60.0], 4 deeper than 3 mm vs sidecar-longdyad-knuckle-3r 6.23 mm over 4 (+28.20 mm, x5.53) - CLEARLY DEEPER; held 35 contact poses, sum 126.1 mm, deepest 14.61 mm at ['ws', 45.0, 165.0, -30.0], 15 deeper than 3 mm vs sidecar-longdyad-knuckle-3r 35.66 mm over 10 (+90.44 mm, x3.54) - CLEARLY DEEPER | v_gap 19.54: bench 4 contact poses, sum 10.03 mm, deepest 6.41 mm at ['ws', 30.0, 165.0, -60.0], 1 deeper than 3 mm vs sidecar-longdyad-knuckle-3r 6.23 mm over 4 (+3.80 mm, x1.61); held 13 contact poses, sum 36.4 mm, deepest 7.27 mm at ['ws', 60.0, 165.0, -30.0], 6 deeper than 3 mm vs sidecar-longdyad-knuckle-3r 35.66 mm over 10 (+0.74 mm, x1.02)",
+   "depths": {
+    "polished_gap 18.4": {
+     "bench": {
+      "n": 11,
+      "sum_mm": 34.43,
+      "max_mm": 13.17,
+      "n_deeper3": 4,
+      "overhead140": 5,
+      "deepest": [
+       "ws",
+       15.0,
+       165.0,
+       -60.0
+      ],
+      "gap": 18.4,
+      "src": "docs/alignment/remeasure/minarc-stop-knuckle-4r_pick1_probe_bench.json",
+      "cross_check": {
+       "files": 1,
+       "sums": [
+        34.43
+       ],
+       "agree": true
+      }
+     },
+     "held": {
+      "n": 35,
+      "sum_mm": 126.1,
+      "max_mm": 14.61,
+      "n_deeper3": 15,
+      "overhead140": 16,
+      "deepest": [
+       "ws",
+       45.0,
+       165.0,
+       -30.0
+      ],
+      "gap": 22.69,
+      "src": "docs/alignment/remeasure/minarc-stop-knuckle-4r_pick1_probe_held.json",
+      "cross_check": {
+       "files": 1,
+       "sums": [
+        126.1
+       ],
+       "agree": true
+      }
+     }
+    },
+    "v_gap 19.54": {
+     "bench": {
+      "n": 4,
+      "sum_mm": 10.03,
+      "max_mm": 6.41,
+      "n_deeper3": 1,
+      "overhead140": 2,
+      "deepest": [
+       "ws",
+       30.0,
+       165.0,
+       -60.0
+      ],
+      "gap": 19.54,
+      "src": "docs/alignment/remeasure/minarc-stop-knuckle-4r_BDp_probe_bench.json",
+      "cross_check": {
+       "files": 1,
+       "sums": [
+        10.03
+       ],
+       "agree": true
+      }
+     },
+     "held": {
+      "n": 13,
+      "sum_mm": 36.4,
+      "max_mm": 7.27,
+      "n_deeper3": 6,
+      "overhead140": 7,
+      "deepest": [
+       "ws",
+       60.0,
+       165.0,
+       -30.0
+      ],
+      "gap": 24.18,
+      "src": "docs/alignment/remeasure/minarc-stop-knuckle-4r_BDp_probe_held.json",
+      "cross_check": {
+       "files": 1,
+       "sums": [
+        36.4
+       ],
+       "agree": true
+      }
+     }
+    }
+   },
+   "ref": "sidecar-longdyad-knuckle-3r",
+   "compare": [
+    {
+     "claim": "polished_gap 18.4",
+     "wear": "bench",
+     "sum": 34.43,
+     "ref_sum": 6.23,
+     "excess": 28.2,
+     "ratio": 5.53,
+     "watch": true
+    },
+    {
+     "claim": "polished_gap 18.4",
+     "wear": "held",
+     "sum": 126.1,
+     "ref_sum": 35.66,
+     "excess": 90.44,
+     "ratio": 3.54,
+     "watch": true
+    },
+    {
+     "claim": "v_gap 19.54",
+     "wear": "bench",
+     "sum": 10.03,
+     "ref_sum": 6.23,
+     "excess": 3.8,
+     "ratio": 1.61,
+     "watch": false
+    },
+    {
+     "claim": "v_gap 19.54",
+     "wear": "held",
+     "sum": 36.4,
+     "ref_sum": 35.66,
+     "excess": 0.74,
+     "ratio": 1.02,
+     "watch": false
+    }
+   ]
+  },
+  {
    "check": "dominance",
    "level": "ok",
    "reason": "vs sidecar-longdyad-knuckle-3r: plain -0.63, 2 mm -7.66",
@@ -62,22 +200,33 @@
   },
   {
    "check": "continuity",
-   "level": "watch",
-   "reason": "continuity record without the connected numbers (row kitrule_continuity)",
-   "record": "{'grid_nodes': 1041, 'connected': 1041, 'islands': 0, 'edges_passed': '1785 / 1785', 'bench_dropped': 0, 'held_dropped': 0}"
+   "level": "ok",
+   "reason": "static 19.54, connected 19.54: the flood drops 0 claim poses (dropped_kinematic 0, dropped_contact_aware_extra 0; docs/alignment/remeasure/minarc-stop-knuckle-4r_BDp_probe_bench.json:contact_aware_verifier)",
+   "static": 19.54,
+   "connected_full": 19.54
   },
   {
    "check": "fold_margin",
    "level": "ok",
-   "reason": "min fold margin on file 5.007 deg (v_kitrule_lenses.remeasure.min_th; 8 readings)",
+   "reason": "min fold margin on file 5.007 deg (v_kitrule_min_th.min; 9 readings)",
    "min_margin": 5.007,
-   "where": "v_kitrule_lenses.remeasure.min_th"
+   "where": "v_kitrule_min_th.min"
   },
   {
    "check": "idle",
    "level": "ok",
-   "reason": "no slaved drive declared",
-   "spans": []
+   "reason": "K moves: smallest recorded span 34.04 deg (re-measured dK_deg_abs span); knee: declared moving, no span on file",
+   "spans": [
+    [
+     "re-measured dK_deg_abs span",
+     34.04
+    ]
+   ],
+   "declared": [
+    "K",
+    "knee"
+   ],
+   "rigid": []
   },
   {
    "check": "sampling",
@@ -112,6 +261,7 @@
   "held": true
  },
  "verifier_files": [],
- "git": "271c09f",
- "t": "2026-10-17T02:22:59Z"
+ "git": "59539d6",
+ "tool_version": "2026-10-17.1",
+ "t": "2026-10-17T03:17:34Z"
 }

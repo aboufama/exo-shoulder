@@ -5,7 +5,7 @@
  "complexity": 43.75,
  "verdict": "watch",
  "reasons": [
-  "fold_margin: no min-th margin over taken poses on file (rule: each claim reports it)"
+  "contact_depth: the score counts contact poses, not depth (report only, score unchanged): v_gap 18.67: bench 2 contact poses, sum 16.46 mm, deepest 10.55 mm at ['ws', 15.0, 165.0, -60.0], 2 deeper than 3 mm vs sidecar-longdyad-knuckle-3r 6.23 mm over 4 (+10.23 mm, x2.64) - CLEARLY DEEPER; held 10 contact poses, sum 49.88 mm, deepest 9.54 mm at ['ws', 30.0, 165.0, -45.0], 7 deeper than 3 mm vs sidecar-longdyad-knuckle-3r 35.66 mm over 10 (+14.22 mm, x1.4)"
  ],
  "checks": [
   {
@@ -49,6 +49,80 @@
    "source": "re-measured (this audit)"
   },
   {
+   "check": "contact_depth",
+   "level": "watch",
+   "reason": "the score counts contact poses, not depth (report only, score unchanged): v_gap 18.67: bench 2 contact poses, sum 16.46 mm, deepest 10.55 mm at ['ws', 15.0, 165.0, -60.0], 2 deeper than 3 mm vs sidecar-longdyad-knuckle-3r 6.23 mm over 4 (+10.23 mm, x2.64) - CLEARLY DEEPER; held 10 contact poses, sum 49.88 mm, deepest 9.54 mm at ['ws', 30.0, 165.0, -45.0], 7 deeper than 3 mm vs sidecar-longdyad-knuckle-3r 35.66 mm over 10 (+14.22 mm, x1.4)",
+   "depths": {
+    "v_gap 18.67": {
+     "bench": {
+      "n": 2,
+      "sum_mm": 16.46,
+      "max_mm": 10.55,
+      "n_deeper3": 2,
+      "overhead140": 2,
+      "deepest": [
+       "ws",
+       15.0,
+       165.0,
+       -60.0
+      ],
+      "gap": 18.67,
+      "src": "docs/alignment/remeasure/roller-longdyad-knuckle-3r_bench_perpose_claim.json",
+      "cross_check": {
+       "files": 4,
+       "sums": [
+        16.46
+       ],
+       "agree": true
+      }
+     },
+     "held": {
+      "n": 10,
+      "sum_mm": 49.88,
+      "max_mm": 9.54,
+      "n_deeper3": 7,
+      "overhead140": 6,
+      "deepest": [
+       "ws",
+       30.0,
+       165.0,
+       -45.0
+      ],
+      "gap": 23.73,
+      "src": "docs/alignment/remeasure/roller-longdyad-knuckle-3r_held_perpose_claim.json",
+      "cross_check": {
+       "files": 3,
+       "sums": [
+        49.88
+       ],
+       "agree": true
+      }
+     }
+    }
+   },
+   "ref": "sidecar-longdyad-knuckle-3r",
+   "compare": [
+    {
+     "claim": "v_gap 18.67",
+     "wear": "bench",
+     "sum": 16.46,
+     "ref_sum": 6.23,
+     "excess": 10.23,
+     "ratio": 2.64,
+     "watch": true
+    },
+    {
+     "claim": "v_gap 18.67",
+     "wear": "held",
+     "sum": 49.88,
+     "ref_sum": 35.66,
+     "excess": 14.22,
+     "ratio": 1.4,
+     "watch": false
+    }
+   ]
+  },
+  {
    "check": "dominance",
    "level": "ok",
    "reason": "vs sidecar-longdyad-knuckle-3r: plain +0.24, 2 mm +0.93",
@@ -67,13 +141,15 @@
   },
   {
    "check": "fold_margin",
-   "level": "watch",
-   "reason": "no min-th margin over taken poses on file (rule: each claim reports it)"
+   "level": "ok",
+   "reason": "min fold margin on file 5.011 deg (docs/concepts/verify/roller-longdyad-knuckle-3r_v_held_frozen.json:fit_fast.extra.th_margin.min; 8 readings)",
+   "min_margin": 5.011,
+   "where": "docs/concepts/verify/roller-longdyad-knuckle-3r_v_held_frozen.json:fit_fast.extra.th_margin.min"
   },
   {
    "check": "idle",
    "level": "ok",
-   "reason": "declared drive moves: smallest recorded span 18.7 (docs/concepts/verify/roller-longdyad-knuckle-3r_v_held_frozen.json:sidecar.phi_max_taken)",
+   "reason": "K moves: smallest recorded span 45.61 deg (re-measured dK span); crank moves: smallest recorded span 18.7 deg (docs/concepts/verify/roller-longdyad-knuckle-3r_v_bench_frozen.json:sidecar.phi_max_taken); knee moves: smallest recorded span 64.22 deg (re-measured K.qb span)",
    "spans": [
     [
      "row:verification.drive.dK_taken_max",
@@ -88,10 +164,6 @@
      46.17
     ],
     [
-     "docs/concepts/verify/roller-longdyad-knuckle-3r_v_held_frozen.json:sidecar.phi_max_taken",
-     18.7
-    ],
-    [
      "docs/concepts/verify/roller-longdyad-knuckle-3r_v_bench_frozen_env.json:fit_fast.extra.dK_taken_max_deg",
      46.25
     ],
@@ -100,14 +172,32 @@
      45.62
     ],
     [
+     "docs/concepts/verify/roller-longdyad-knuckle-3r_v_bench_frozen.json:fit_fast.extra.dK_taken_max_deg",
+     46.25
+    ],
+    [
+     "docs/concepts/verify/roller-longdyad-knuckle-3r_v_bench_frozen.json:extra.dK_taken_max_deg",
+     45.62
+    ],
+    [
+     "docs/concepts/verify/roller-longdyad-knuckle-3r_v_held_frozen.json:sidecar.phi_max_taken",
+     18.7
+    ],
+    [
      "docs/concepts/verify/roller-longdyad-knuckle-3r_v_bench_frozen_env.json:sidecar.phi_max_taken",
      18.7
     ],
     [
-     "docs/concepts/verify/roller-longdyad-knuckle-3r_v_bench_frozen.json:fit_fast.extra.dK_taken_max_deg",
-     46.25
+     "docs/concepts/verify/roller-longdyad-knuckle-3r_v_bench_frozen.json:sidecar.phi_max_taken",
+     18.7
     ]
-   ]
+   ],
+   "declared": [
+    "K",
+    "crank",
+    "knee"
+   ],
+   "rigid": []
   },
   {
    "check": "sampling",
@@ -218,6 +308,7 @@
   "docs/concepts/verify/roller-longdyad-knuckle-3r_v_bench_frozen_env.json",
   "docs/concepts/verify/roller-longdyad-knuckle-3r_v_bench_frozen.json"
  ],
- "git": "b3a24be",
- "t": "2026-10-17T01:42:57Z"
+ "git": "59539d6",
+ "tool_version": "2026-10-17.1",
+ "t": "2026-10-17T03:17:33Z"
 }

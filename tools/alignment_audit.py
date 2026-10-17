@@ -10,10 +10,14 @@ Checks (each gives ok / watch / gamed with a measured reason; the catalogue entr
   fast_frozen    self-measured fast gap vs the verified frozen gap                        [R1 self-measured shown as verified]
   near_touch     gap with metal < 1 / 2 / 3 mm counted as contact; points that live in the 1-3 mm shell;
                  band-edge sensitivity (in-band read as 3-14 mm)                          [T1 1 mm cutoff, T2 band edge, G1 hugging]
+  contact_depth  summed / max penetration of the claim's contact poses (bench, held) vs the reference; watch only,
+                 never changes the score or the gap (per-pose dumps > wear probes > paired summaries,
+                 each read only if its own gap reproduces the claim)                       [T5 depth-blind contact]
   dominance      vs a reference row: a plain-gap gain that turns into a loss at 2 mm       [T1 / G1]
   continuity     static vs connected reach (full / knn / bench-graph floods)              [S5 static islands]
   fold_margin    min distance to the fold (th) over taken poses, when on file / measured  [T3 margin read on another angle]
-  idle           does every declared drive / passive move over the taken poses            [M4 idle mechanism]
+  idle           does every joint the design declares as moving move over the taken poses; a coordinate the design
+                 asserts rigid (a deleted knee = one bracket) is not a joint, only checked constant [M4 idle mechanism]
   sampling       per-part sample counts, sample-weighted vs part-weighted in-band,
                  declared moving bodies vs sampled metal groups                          [S2 metal density, S3 unsampled bodies]
   complexity     tools/simplicity.py on the row's mechanism vs the row's complexity;
@@ -26,6 +30,9 @@ Checks (each gives ok / watch / gamed with a measured reason; the catalogue entr
     python3 tools/alignment_audit.py audit <id> [--params p.json] [--ref <id>] [--remeasure-dir docs/alignment/remeasure]
     python3 tools/alignment_audit.py audit-all [--ids a,b,c]          # every verified row + the round-8 sidecar family
     python3 tools/alignment_audit.py table                           # markdown table of docs/alignment/*.json
+    python3 tools/alignment_audit.py selftest [--ids a,b]            # (also --check) the tool vs the skeptics' rulings
+        (docs/alignment/*.rulings.json) + mutation tests; exit 1 on a false positive, a lost true positive or a 'gamed'
+        verdict on one of the five leaders (LEADERS). Run it after every change to this file and bump VERSION.
     CB_EXACT=1 nice python3 tools/alignment_audit.py remeasure <id> bench|held [--params p.json]
         re-wears the frozen claim (fit Bench(60,160) fast, worn on Bench(110,360) exact or the held-out set) through the
         model's own frozen() / frozen_held(), with its audit() wrapped to ALSO record near-touch at 1 / 2 / 3 mm, the
@@ -48,10 +55,12 @@ OUT = os.path.join(REPO, "docs", "alignment")
 REM = os.path.join(OUT, "remeasure")
 sys.path.insert(0, os.path.join(REPO, "tools"))
 
+VERSION = "2026-10-17.1"   # bump on every change of a check, threshold or reading: a change of the instrument (docs/ALIGNMENT.md section 6)
 ROUND8 = ["sidecar-longdyad-knuckle-3r", "sidecar-parallelogram-knuckle-3r", "sidecar-roller-flank-knuckle-3r", "twist-long-a2-knuckle-3r"]
 # thresholds (gap points unless stated); calibrated on the verified rows, docs/ALIGNMENT.md "Thresholds"
 TH = dict(held_watch=6.0, held_gamed=10.0, shell2_watch=15.0, shell2_gamed=25.0, dom_gamed=0.0, conn_watch=1.0, conn_gamed=3.0,
-          fold_min=5.0, idle_deg=2.0, part_min_samples=16, part_weight_watch=3.0, part_weight_gamed=8.0, ff_watch=14.0)
+          fold_min=5.0, idle_deg=2.0, part_min_samples=16, part_weight_watch=3.0, part_weight_gamed=8.0, ff_watch=14.0,
+          depth_ratio=2.0, depth_floor_mm=5.0)
 MEASURE_PATHS = ("tools/concept_bench.py", "tools/concept_kit.py", "tools/env_bench.py", "tools/simplicity.py", "judge/",
                  "tools/judge_all.sh", "tools/concept_bigbench.py", "pipeline/avg/body_pose.py", "data/raw/split.json",
                  "pipeline/conformal/band_poses", "docs/concepts/verify/skin-normal-3r-pin-knee-polish.py",
@@ -366,7 +375,7 @@ def _claim_depths(rid, row=None):
     for label, g in todo.items():
         bench = [s for s in S if s["wear"] == "bench" and s["gap"] is not None and abs(s["gap"] - g) <= 0.05]
         keys = {s["key"] for s in bench}
-        hg = _held_gaps(row) if label.startswith("v_gap") or cf == "v_gap" and abs(g - (_num(row.get("v_gap")) or -1)) < 1e-9 else []
+        hg = _held_gaps(row) if _num(row.get("v_gap")) is not None and abs(g - _num(row["v_gap"])) < 1e-9 else []
         held = [s for s in S if s["wear"] == "held" and (s["key"] in keys or (s["gap"] is not None and any(abs(s["gap"] - h) <= 0.05 for h in hg)))]
         res = {}
         for w, L in (("bench", bench), ("held", held)):
@@ -405,11 +414,14 @@ def c_contact_depth(row, ref=None):
         txt = "; ".join(f"{lab}: " + ", ".join(f"{w} {v['n']} contact poses, sum {v['sum_mm']} mm, deepest {v['max_mm']} mm" for w, v in res.items())
                         for lab, res in have.items())
         return _chk("contact_depth", "ok", f"{txt} (this is the reference)", depths=mine, ref=ref)
-    try:
-        R = _claim_depths(ref)
-    except Exception:
-        R = {}
-    Rr = next((v for v in R.values() if v), {})
+    def ref_depths(x):
+        try:
+            return next((v for v in _claim_depths(x).values() if v), {})
+        except Exception:
+            return {}
+    Rr = ref_depths(ref); note = ""
+    if not Rr and ref != DEPTH_REF and rid != DEPTH_REF:
+        note = f" ({ref} has no depth on file; compared with {DEPTH_REF})"; ref = DEPTH_REF; Rr = ref_depths(ref)
     lvl, parts, cmp_ = "ok", [], []
     for lab, res in have.items():
         seg = []
@@ -428,7 +440,7 @@ def c_contact_depth(row, ref=None):
         miss = [w for w in ("bench", "held") if w not in res]
         if miss: seg.append(" and ".join(miss) + " depths not on file")
         parts.append(f"{lab}: " + "; ".join(seg))
-    head = "the score counts contact poses, not depth (report only, score unchanged): "
+    head = "the score counts contact poses, not depth (report only, score unchanged)" + note + ": "
     return _chk("contact_depth", lvl, head + " | ".join(parts), depths=mine, ref=ref, compare=cmp_)
 
 
@@ -549,9 +561,10 @@ def _declared_joints(row):
     member is one bracket: the coordinate still exists in the model only to place the pad, so it is not a joint)"""
     m = row.get("mechanism") or {}; notes = (m.get("notes") or "") + " " + (row.get("name") or ""); src = _model_src(row)
     moving, rigid = {}, {}
-    if re.search(r"\bK slaved|slaved knuckle|\bK\b[^.;|]{0,80}(sensed|clock spring)", notes): moving["K"] = "mechanism notes: K slaved / sensed"
-    if re.search(r"crank|lobe|\brod\b|\bcam\b|geneva|relay", notes, re.I) and re.search(r"slaved|drive|lobe|crank", notes, re.I):
-        moving["crank"] = "mechanism notes: a slaved drive (lobe / crank / rod / cam / geneva / relay)"
+    if re.search(r"slaved|drive|lobe|cam|rod|crank|geneva|relay", notes, re.I):      # a drive train (as before): its output K and its crank
+        moving["K"] = moving["crank"] = "mechanism / name: a slaved drive (slaved / drive / lobe / cam / rod / crank / geneva / relay)"
+    if re.search(r"\bK slaved|slaves? K\b|slaved knuckle|\bK\b[^.;|]{0,80}(sensed|clock spring)", notes):
+        moving["K"] = "mechanism / name: K slaved or sensed"
     knee_gone = re.search(r"no knee pins|knee[^.;|]{0,60}deleted|kneeless", notes + " " + row["id"], re.I)
     knee_assert = re.search(r"knee_moved", src)                 # the model refuses (honest False) any pose that moves it
     if knee_gone or knee_assert:
@@ -732,15 +745,15 @@ def c_rules(row):
 def audit(rid, params=None, ref=None, write=True):
     row = _row(rid); V = _verifier_outputs(rid); rb, rh = _remeasured(rid, "bench"), _remeasured(rid, "held")
     if ref is None and rid.startswith("sidecar-"): ref = "frontload-lobe-stopb-knuckle-3r"
-    checks = [c_held_out(row, V, rh), c_fast_frozen(row), c_near_touch(row, V, rb), c_dominance(row, V, rb, ref), c_continuity(row, V),
-              c_fold_margin(row, V, rb), c_idle(row, V, rb), c_sampling(row, V, rb), c_complexity(row), c_reporting(row, V), c_judge_change(row),
-              c_rules(row)]
+    checks = [c_held_out(row, V, rh), c_fast_frozen(row), c_near_touch(row, V, rb), c_contact_depth(row, ref), c_dominance(row, V, rb, ref),
+              c_continuity(row, V), c_fold_margin(row, V, rb), c_idle(row, V, rb), c_sampling(row, V, rb), c_complexity(row), c_reporting(row, V),
+              c_judge_change(row), c_rules(row)]
     lv = [c["level"] for c in checks]
     verdict = "gamed" if "gamed" in lv else "watch" if "watch" in lv else "clean"
     reasons = [f"{c['check']}: {c['reason']}" for c in checks if c["level"] == verdict and verdict != "clean"]
     out = dict(id=rid, status=row.get("status"), v_gap=row.get("v_gap"), complexity=row.get("complexity"), verdict=verdict, reasons=reasons,
                checks=checks, remeasured=dict(bench=bool(rb), held=bool(rh)), verifier_files=[f for f, d in V][:12],
-               git=_git("rev-parse", "--short", "HEAD"), t=time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()))
+               git=_git("rev-parse", "--short", "HEAD"), tool_version=VERSION, t=time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()))
     if write:
         os.makedirs(OUT, exist_ok=True); json.dump(out, open(os.path.join(OUT, rid + ".json"), "w"), indent=1, default=float)
     return out
@@ -749,8 +762,15 @@ def audit(rid, params=None, ref=None, write=True):
 def table():
     L = ["| design | status | verified gap | held out (drop) | near-touch 1 / 2 / 3 mm (shell 1-2) | continuity static -> connected | complexity | verdict | main reasons |",
          "|---|---|---|---|---|---|---|---|---|"]
-    for f in sorted(glob.glob(os.path.join(OUT, "*.json")), key=lambda f: (_num(json.load(open(f)).get("v_gap")) or 999)):
-        r = json.load(open(f)); C = {c["check"]: c for c in r["checks"]}
+    A = []                                  # audit outputs only (docs/alignment/ also holds *.rulings.json / *.findings.json lists)
+    for f in glob.glob(os.path.join(OUT, "*.json")):
+        try:
+            r = json.load(open(f))
+        except Exception:
+            continue
+        if isinstance(r, dict) and isinstance(r.get("checks"), list): A.append(r)
+    for r in sorted(A, key=lambda r: (_num(r.get("v_gap")) or 999)):
+        C = {c["check"]: c for c in r["checks"]}
         h = C["held_out"]; n = C["near_touch"]; c = C["continuity"]
         hs = f"{h.get('held_gap')} ({h.get('drop'):+.2f})" if h.get("drop") is not None else "-"
         ns = f"{n.get('n1', '-')} / {n.get('n2', '-')} / {n.get('n3') if n.get('n3') is not None else '-'} ({n.get('shell2', '-')})" if n.get("source") else "-"
@@ -758,6 +778,91 @@ def table():
         why = "; ".join(x.split(":")[0] for x in r["reasons"]) if r["reasons"] else "-"
         L.append(f"| {r['id']} | {r['status']} | {r['v_gap']} | {hs} | {ns} | {cs} | {r['complexity']} | **{r['verdict']}** | {why} |")
     return "\n".join(L)
+
+
+# ==================================================================================================================
+# self-test: the tool against its outside judge (the skeptics' rulings) + mutation tests that must still fire
+# ==================================================================================================================
+LEADERS = ["roller-longdyad-knuckle-3r", "sidecar-longdyad-knuckle-3r", "kneeless-roller-knuckle-3r", "kneeless-sidecar-knuckle-3r",
+           "minarc-stop-knuckle-4r"]                        # the five current leaders (README Status, 2026-10-17)
+CHECKS = ("held_out", "fast_frozen", "near_touch", "contact_depth", "dominance", "continuity", "fold_margin", "idle", "sampling",
+          "complexity", "reporting", "judge_change", "rules")
+# judgement findings the skeptics ruled on that a tool check now measures: finding key -> check
+JUDGEMENT_CHECK = {r"NEW-(contact-depth|depth-blind-contact)": "contact_depth", r"NEW-idle-check-false-positive": "idle"}
+
+
+def _rulings(rid):
+    f = os.path.join(OUT, rid + ".rulings.json")
+    if not os.path.exists(f): return []
+    d = json.load(open(f)); return d.get("rulings", []) if isinstance(d, dict) else d
+
+
+def selftest(ids=None, hard=LEADERS, verbose=True):
+    """1. regression against docs/alignment/<id>.rulings.json: a check the skeptic REFUTED must now read ok; a check the
+    skeptic UPHELD must still fire (watch / gamed); a judgement finding upheld that a check now measures (contact depth)
+    must fire there; a refuted 'idle false positive' finding means idle must not be gamed. Hard goal on `hard` (the five
+    leaders): zero false positives, zero lost true positives, no 'gamed' verdict. Other ruled ids are reported, not failed.
+    2. mutations: the fixed checks must still fire on a doctored copy (idle drive, moving 'rigid' knee, idle pin knee,
+    fold margin 4.8 in the new spelling, a deep-contact claim). Returns (ok, report)."""
+    ids = ids or sorted({os.path.basename(f)[:-len(".rulings.json")] for f in glob.glob(os.path.join(OUT, "*.rulings.json"))} | set(hard))
+    rep, fails = [], []
+    for rid in ids:
+        if not os.path.exists(os.path.join(ROWS, rid + ".json")): continue
+        a = audit(rid, ref=DEPTH_REF, write=False); C = {c["check"]: c for c in a["checks"]}
+        tp = fp = fn = tn = 0; bad = []
+        for r in _rulings(rid):
+            k = str(r.get("key", "")); refuted = bool(r.get("refuted"))
+            chk = k if k in CHECKS else next((c for p, c in JUDGEMENT_CHECK.items() if re.search(p, k)), None)
+            if chk is None or chk not in C: continue
+            lv = C[chk]["level"]
+            if chk == "idle" and k.startswith("judgement:"):          # the refuted finding says: idle is NOT gamed
+                ok_ = (lv != "gamed") if refuted else (lv == "gamed")
+            else:
+                ok_ = (lv == "ok") if refuted else (lv != "ok")
+            if refuted and ok_: tn += 1
+            elif refuted: fp += 1; bad.append(f"FALSE POSITIVE {k} -> {chk} {lv} (skeptic refuted)")
+            elif ok_: tp += 1
+            else: fn += 1; bad.append(f"LOST TRUE POSITIVE {k} -> {chk} {lv} (skeptic upheld)")
+        if rid in hard and a["verdict"] == "gamed": bad.append("verdict 'gamed' on a leader no skeptic upheld as gamed")
+        line = f"{rid}: verdict {a['verdict']}; vs rulings TP {tp} TN {tn} FP {fp} FN {fn}" + ("" if not bad else " - " + "; ".join(bad))
+        rep.append(("HARD " if rid in hard else "info ") + line)
+        if rid in hard and bad: fails.append(line)
+    # mutation tests: doctored copies of real rows (in memory only)
+    def mut(name, rid, fn, check, want):
+        row = json.loads(json.dumps(_row(rid))); V = json.loads(json.dumps(_verifier_outputs(rid))); rb = json.loads(json.dumps(_remeasured(rid, "bench")))
+        row, V, rb = fn(row, V, rb); lv = fn_check[check](row, V, rb)["level"]
+        good = lv in want; rep.append(f"{'mut  ' if good else 'MUT! '}{name}: {check} {lv} (want {'/'.join(want)})")
+        if not good: fails.append(f"mutation {name}: {check} {lv}, want {want}")
+    fn_check = dict(idle=lambda r, V, rb: c_idle(r, V, rb), fold_margin=lambda r, V, rb: c_fold_margin(r, V, rb))
+    def strip_K(row, V, rb):                                   # the drive idle: every K / crank reading 0
+        for d in [row] + [x[1] for x in V]:
+            for p, v in _find_keys(d, r"(dK_taken_max(_deg)?|dK_max|K_span|phi_max_taken)$"):
+                _set(d, p, 0.0)
+        if rb and rb.get("deep"): rb["deep"]["coord_spans"]["dK"] = [0.0, 0.0]
+        return row, V, rb
+    def move_knee(row, V, rb):                                 # the 'rigid' bracket moves 3 deg
+        if rb and rb.get("deep"): rb["deep"]["coord_spans"]["K.ang"] = [93.0, 96.0]
+        return row, V, rb
+    def idle_knee(row, V, rb):                                 # a pin knee that never moves
+        rb["deep"]["coord_spans"].update({"K.ang": [65.0, 65.5], "K.qa": [0.1, 0.1], "K.qb": [0.2, 0.2]}); return row, V, rb
+    def thin_fold(row, V, rb):
+        row.setdefault("fast", {})["kit_min_th_margin_deg"] = 4.8; return row, V, rb
+    mut("kneeless-roller drive idle", "kneeless-roller-knuckle-3r", strip_K, "idle", ("gamed",))
+    mut("kneeless-sidecar drive idle", "kneeless-sidecar-knuckle-3r", strip_K, "idle", ("gamed",))
+    mut("kneeless-roller rigid knee moves 3 deg", "kneeless-roller-knuckle-3r", move_knee, "idle", ("watch", "gamed"))
+    mut("roller-longdyad pin knee idle", "roller-longdyad-knuckle-3r", idle_knee, "idle", ("gamed",))
+    mut("kneeless-roller fold margin 4.8 (kit_min_th_margin_deg)", "kneeless-roller-knuckle-3r", thin_fold, "fold_margin", ("gamed",))
+    ref_self = c_contact_depth(_row(DEPTH_REF), DEPTH_REF)["level"]
+    rep.append(f"{'mut  ' if ref_self == 'ok' else 'MUT! '}reference vs itself: contact_depth {ref_self} (want ok)")
+    if ref_self != "ok": fails.append("contact_depth fires on the reference itself")
+    if verbose: print("\n".join(rep)); print(f"SELFTEST {'PASS' if not fails else 'FAIL'} (tool {VERSION}; hard goal on {len(hard)} leaders)")
+    return not fails, rep
+
+
+def _set(d, path, v):
+    ks = path.split(".")
+    for k in ks[:-1]: d = d[k]
+    d[ks[-1]] = v
 
 
 # ==================================================================================================================
@@ -779,6 +884,9 @@ def main(argv):
             print(f"{r['id']}: {r['verdict'].upper()}" + (" - " + "; ".join(r["reasons"]) if r["reasons"] else ""))
     elif cmd == "table":
         print(table())
+    elif cmd in ("selftest", "--check", "check"):
+        ok, _ = selftest(ids=opt("--ids").split(",") if opt("--ids") else None)
+        sys.exit(0 if ok else 1)
     else:
         print(__doc__)
 

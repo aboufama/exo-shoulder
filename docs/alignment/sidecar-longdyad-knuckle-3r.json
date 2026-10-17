@@ -50,6 +50,61 @@
    "source": "re-measured (this audit)"
   },
   {
+   "check": "contact_depth",
+   "level": "ok",
+   "reason": "v_gap 18.91: bench 4 contact poses, sum 6.23 mm, deepest 4.61 mm, held 10 contact poses, sum 35.66 mm, deepest 8.37 mm (this is the reference)",
+   "depths": {
+    "v_gap 18.91": {
+     "bench": {
+      "n": 4,
+      "sum_mm": 6.23,
+      "max_mm": 4.61,
+      "n_deeper3": 1,
+      "overhead140": 2,
+      "deepest": [
+       "ws",
+       30.0,
+       165.0,
+       -60.0
+      ],
+      "gap": 18.91,
+      "src": "docs/alignment/remeasure/sidecar-longdyad-knuckle-3r_bench_perpose_claim.json",
+      "cross_check": {
+       "files": 5,
+       "sums": [
+        6.23
+       ],
+       "agree": true
+      }
+     },
+     "held": {
+      "n": 10,
+      "sum_mm": 35.66,
+      "max_mm": 8.37,
+      "n_deeper3": 5,
+      "overhead140": 5,
+      "deepest": [
+       "ws",
+       15.0,
+       150.0,
+       -60.0
+      ],
+      "gap": 22.67,
+      "src": "docs/alignment/remeasure/sidecar-longdyad-knuckle-3r_held_perpose_claim.json",
+      "cross_check": {
+       "files": 2,
+       "sums": [
+        35.66,
+        35.67
+       ],
+       "agree": true
+      }
+     }
+    }
+   },
+   "ref": "sidecar-longdyad-knuckle-3r"
+  },
+  {
    "check": "dominance",
    "level": "ok",
    "reason": "no reference"
@@ -73,7 +128,7 @@
   {
    "check": "idle",
    "level": "ok",
-   "reason": "declared drive moves: smallest recorded span 31.6 (docs/concepts/verify/sidecar-longdyad-knuckle-3r_v_bench_frozen.json:sidecar.phi_max_taken)",
+   "reason": "K moves: smallest recorded span 37.8 deg (docs/concepts/verify/sidecar-longdyad-knuckle-3r_v_bench_frozen.json:extra.dK_taken_max_deg); crank moves: smallest recorded span 31.6 deg (docs/concepts/verify/sidecar-longdyad-knuckle-3r_v_bench_frozen.json:sidecar.phi_max_taken); knee moves: smallest recorded span 56.08 deg (re-measured K.qb span)",
    "spans": [
     [
      "docs/concepts/verify/sidecar-longdyad-knuckle-3r_v_bench_frozen.json:fit_fast.extra.dK_taken_max_deg",
@@ -84,16 +139,16 @@
      37.8
     ],
     [
-     "docs/concepts/verify/sidecar-longdyad-knuckle-3r_v_bench_frozen.json:sidecar.phi_max_taken",
-     31.6
-    ],
-    [
      "docs/concepts/verify/sidecar-longdyad-knuckle-3r_v_held_frozen.json:fit_fast.extra.dK_taken_max_deg",
      38.13
     ],
     [
      "docs/concepts/verify/sidecar-longdyad-knuckle-3r_v_held_frozen.json:extra.dK_taken_max_deg",
      38.47
+    ],
+    [
+     "docs/concepts/verify/sidecar-longdyad-knuckle-3r_v_bench_frozen.json:sidecar.phi_max_taken",
+     31.6
     ],
     [
      "docs/concepts/verify/sidecar-longdyad-knuckle-3r_v_held_frozen.json:sidecar.phi_max_taken",
@@ -106,8 +161,22 @@
     [
      "re-measured K.ang span",
      57.44
+    ],
+    [
+     "re-measured K.qa span",
+     57.44
+    ],
+    [
+     "re-measured K.qb span",
+     56.08
     ]
-   ]
+   ],
+   "declared": [
+    "K",
+    "crank",
+    "knee"
+   ],
+   "rigid": []
   },
   {
    "check": "sampling",
@@ -222,6 +291,7 @@
   "docs/concepts/verify/sidecar-longdyad-knuckle-3r_v_bench_frozen.json",
   "docs/concepts/verify/sidecar-longdyad-knuckle-3r_v_held_frozen.json"
  ],
- "git": "ebfd87c",
- "t": "2026-10-17T01:51:54Z"
+ "git": "59539d6",
+ "tool_version": "2026-10-17.1",
+ "t": "2026-10-17T03:17:33Z"
 }

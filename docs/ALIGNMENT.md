@@ -79,9 +79,32 @@ Each entry gives:
 - **Why not better:** near the fold the J2 dyad is near-singular. Small arm motions swing the links fast and the
   transmission stiffens: the wearer feels a jerk or a jam.
 - **Detect:** `fold_margin` takes the minimum `th` margin on file over the taken poses. It flags gamed below 5 deg,
-  and watch when no claim reports it.
+  and watch when no claim reports it. Since tool VERSION 2026-10-17.1 it reads every spelling on file:
+  `th_margin_min[_held][_deg]`, `min_th_margin[_taken][_held][_deg]`, `kit_min_th_margin_deg`, and a dict reading
+  (`extra.th_margin {min, n, lt5}`, `th_margin_min {bench, held}`) through its measured fields, not its counts.
 - **Here:** minarc variant B scored 15.42 with stops at 5 deg of the J2 interior angle, which is 1.4 deg of `th`. At the
   true 5 deg it scores 18.45 (FINDINGS "The knuckle's 15.42 needs J2 stops inside the fold margin"; rows/minarc *.v_kitrule_*).
+
+**T5. Depth-blind contact.**
+- **Looks like:** the contact term is 100 x the share of poses with metal inside the skin. A pose pressed 0.1 mm in
+  and a pose pressed 17 mm in cost the same. A claim gains by trading many shallow presses for a few deep ones, or by
+  taking a pose in deep contact that another design loses to the fold.
+- **Why not better:** metal 5-17 mm into the arm is not something a liner absorbs: the exo blocks or bruises the arm
+  there. "Never touching" is the goal's first line.
+- **Detect:** `contact_depth` (tool VERSION 2026-10-17.1) reads the claim's contact poses from the rawest file on
+  record (per-pose dump > wear probe > paired summary), only from files whose own gap reproduces the claim (+-0.05). It
+  reports the count, summed and max penetration, poses deeper than 3 mm, and the deepest pose, bench and held out, and
+  compares with the reference (default the verified 3-active lead). It gives watch when, on a wear both have, the claim
+  presses at least 2x the reference's summed depth AND at least 5 mm more. It never gives gamed and never changes the
+  score or the gap (user 2026-10-17: the score stays as is).
+  - Why that margin: re-fits of the same design move the summed depth by at most 0.4 mm (roller-longdyad 16.46 / 16.53
+    bench, 49.88 / 49.88 held; sidecar-longdyad 6.23 / 5.89, 35.66 / 35.25; `remeasure/*_perpose*.json`), so 2x and
+    5 mm are more than 10x the instrument's own noise. One pose that one design takes in contact and the other loses
+    moves the sum by one press (the lead's deepest is 4.6 mm bench, 8.4 mm held), so the excess must be more than one
+    shallow press; 5 mm is half the 1 cm aim, beyond a 2-3 mm liner.
+- **Here:** knee-free rows sum 27-44 mm on the bench against the lead's 6.23 mm (kneeless-sidecar 5 poses, deepest
+  17.6 mm at elev 165; kneeless-roller 10 poses, 5 of them side raises at elev 90-105). Each skeptic upheld it
+  (`docs/alignment/kneeless-*-knuckle-3r.rulings.json`, roller-longdyad, minarc pick1).
 
 **T4. Self-set search bounds walk toward a singular posture.**
 - **Looks like:** a polish gains reach, and its knee or other window bound sits at the search tool's own limit.
@@ -161,8 +184,14 @@ Each entry gives:
 **M4. Idle mechanisms.**
 - **Looks like:** a declared drive or joint never moves over the taken poses, so the score belongs to a simpler
   mechanism while the complexity and the story belong to the complex one.
-- **Detect:** `idle` reads the recorded drive ranges (dK) and the re-measured coordinate spans. It flags gamed below 2
-  deg, and watch when no range is on file.
+- **Detect:** `idle` reads the recorded drive ranges (dK, crank phi) and the re-measured coordinate spans of the joints
+  the design declares as moving (row mechanism and name, model). It flags gamed below 2 deg, and watch when a drive is
+  declared but no range is on file. Since tool VERSION 2026-10-17.1: units are explicit per coordinate (dK rad, knee
+  `K.ang` deg), and a coordinate the design asserts constant by design (a deleted knee whose member is one rigid
+  bracket: the mechanism says so and the model refuses any pose that moves it, `knee_moved`) is not a joint. It is
+  reported, and it gives watch only if it moves more than the model's own 0.5 deg tolerance. The old check read the
+  deleted knee's constant `K.ang` (span 0.0) as an idle drive on kneeless-roller and kneeless-sidecar; both skeptics
+  refuted it (their drive moves 43.53 / 35.76 deg).
 - **Here:** the geneva tail CMA's idle drive (16.10, K idle) and split-knuckle's K2-idle 22.34 sweep minimum (FINDINGS
   round 6 and round 7 "Search hygiene").
 
@@ -451,6 +480,39 @@ before / after of every built design.**
   - 1-2 mm shell: watch > 15, gamed > 25 (the 3-active leaders sit at 15-31);
   - connected loss: watch > 1, gamed > 3;
   - idle: < 2 deg;
-  - part-weighted in-band: watch > 3 points, gamed > 8.
+  - part-weighted in-band: watch > 3 points, gamed > 8;
+  - contact depth (watch only): summed depth >= 2x the reference's and >= 5 mm more, on a wear both have.
 
   Changing a threshold is a measurement change and is stated as one.
+- **Self-test:** `python3 tools/alignment_audit.py selftest` (also `--check`) runs the tool against its outside judge,
+  the skeptics' rulings (`docs/alignment/*.rulings.json`): a check a skeptic refuted must read ok, a check a skeptic
+  upheld must still fire, and an upheld contact-depth finding must fire `contact_depth`. On the five leaders
+  (`LEADERS` in the tool) a false positive, a lost true positive or a `gamed` verdict fails it (exit 1). Mutation
+  tests then doctor real rows in memory (an idle drive, a moving "rigid" knee, an idle pin knee, a 4.8 deg fold margin
+  in the new spelling, the reference against itself) and require each fixed check to still fire. Run it after every
+  change to the tool and bump `VERSION`.
+
+## 6. Change log of the instrument
+
+Each line is a measurement change: verdicts that move because of it moved because the tool changed, not the design.
+
+- **2026-10-17.1** (`tools/alignment_audit.py` VERSION; audit run wf_824e062d-913 found three tool defects).
+  - `idle`: reads the joints the design declares as moving, with explicit units; a coordinate asserted rigid by design
+    is not a joint. kneeless-roller and kneeless-sidecar: idle gamed -> ok (the refuted false positive).
+  - `fold_margin`: reads the third and later spellings and dict readings. roller-longdyad, kneeless-roller,
+    kneeless-sidecar: watch -> ok at 5.011 / 5.091 / 5.007 deg (the refuted read misses).
+  - `contact_depth` (new, T5): watch on roller-longdyad (bench 16.46 vs 6.23 mm; held 49.88 vs 35.66 is x1.40, under
+    the margin), kneeless-roller (44.0 / 112.17 vs 6.23 / 35.66), kneeless-sidecar (27.45 / 76.79), minarc pick1
+    (34.43 / 126.1; BDp 10.03 / 36.4 is under the margin), and outside the five on geneva-tail (12.51 vs 6.23, x2.01,
+    the one borderline row: it drops out at a 10 mm floor). The score and the gap are unchanged. The five leaders'
+    verdicts are the same for any margin from x1.5 to x2 and 3 to 10 mm.
+  - New raw material: `remeasure/kneeless-roller-knuckle-3r_{bench,held}_perpose.json` (tools/alignment_paired.py
+    dump, CB_EXACT=1, models unchanged; they reproduce 21.07 and 24.59 to the digit; the bench dump's 10 contact poses
+    sum to 44.0 mm, the same as the wear probe). Held out: 26 contact poses, 112.17 mm, deepest 11.35 mm at (30, 165,
+    -45), 13 of the 26 below elevation 140 (9.43 mm at (15, 120, 15), 9.17 mm at (0, 105, 30)).
+  - `continuity`: a flood record that states 0 dropped claim poses (minarc's verifier `dropped_*` counts in a
+    re-measure whose gap reproduces the claim) counts as connected = static. minarc: watch -> ok (refuted by its
+    skeptic: 0 / 0 dropped on every config).
+  - Verdicts: kneeless-roller and kneeless-sidecar gamed -> watch; every other row keeps its verdict
+    (`audit-all` before / after). `selftest` added. Each audit output now carries `tool_version`.
+  - `table`: reads only audit outputs (it crashed on the `*.rulings.json` / `*.findings.json` lists in the folder).
