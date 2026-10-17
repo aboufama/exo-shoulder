@@ -282,7 +282,11 @@ def frozen_flood(P, nc=110, nw=360):
     return out
 
 
-def viz_export(par): return RF.viz_export(_clamp(dict(PARAMS, **par)))
+def viz_export(par):
+    if DRIVE == "rssr":                                         # the sidecar's exporter (rocker / rod / horn geometry) on this model
+        FL._report = lambda B, p: _report(B, p)
+        return FL.viz_export(_clamp(dict(PARAMS, **par)))
+    return RF.viz_export(_clamp(dict(PARAMS, **par)))
 
 
 if __name__ == "__main__":
