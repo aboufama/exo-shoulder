@@ -51,7 +51,8 @@ def table(M, B, reg=None):
     for i in range(len(B.idx)):
         if B.res[i] is None: continue                       # not kinematically valid / part clash: no metal recorded
         # ONE distance call per pose (the exact path costs per call), split back by part
-        blocks = [(("R", nm), M.world(m, i, X)) for nm, (m, X) in M.rigid.items() if len(X)]
+        # the bench's metal_points(i) = every rigid part + every link strap (link_pts): both are skin-facing metal
+        blocks = [(("R", nm), M.world(m, i, X)) for nm, (m, X) in list(M.rigid.items()) + list(M.link_pts.items()) if len(X)]
         blocks += [(("C", j), M.world(m, i, X)) for j, (m, X) in enumerate(M.contact) if len(X)]
         dd = B.dist(i, np.concatenate([X for _, X in blocks])); k = 0; rig = {}; con = {}
         for (typ, key), X in blocks:
@@ -145,7 +146,7 @@ def main():
     P = json.loads(sys.argv[1]); which = sys.argv[2] if len(sys.argv) > 2 else "bench"; outp = sys.argv[3] if len(sys.argv) > 3 else None
     mpath = sys.argv[4] if len(sys.argv) > 4 else os.path.join(REPO, "docs", "concepts", "models", "longstroke-slipper-knuckle-3r.py")
     t = time.time(); MOD = load(mpath)
-    nc, nw = (-1, -1) if which == "held" else (110, 360)
+    nc, nw = (-1, -1) if which == "held" else (60, 160) if which == "fast" else (110, 360)
     fit, M1, M, B, r = MOD._frozen_model(P, nc, nw)
     rows = table(M, B, getattr(MOD, "DRIVE_LABELS", None))
     base = score(B, rows, M.why)
