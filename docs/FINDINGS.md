@@ -2458,3 +2458,87 @@ The picks were committed before any claim and ranked on the independent `envsel`
 * **The horn ball's 1 mm part-pair edge (r_h -0.25 loses every pose or most of them) is the family's knife edge.**
   Every config in this family, picks included, needs r_h +0.25 over its nominal to be buildable.
 * Cost $1.05 / $1.23 (cpu3c / cpu5c) against the $1.2 budget.
+
+## Round 11: no lead change - the overhead lug trim verifies at 18.51 (contact depth -12 % held out), both long-stroke drives die on their own metal, and the dog drive's 22.64 is refuted at 97.83 (2026-10-17, discovery round 11, closer)
+
+Raw data:
+- rows: `docs/concepts/rows/{trimlug-k165-knuckle-3r,coupler-longdyad-knuckle-3r,fourbar-longdyad-knuckle-3r,dogring-draglink-knuckle-3r}.json`;
+- models: `docs/concepts/models/<id>.py`; verifier harnesses and outputs: `docs/concepts/verify/<id>.py`,
+  `docs/concepts/verify/<id>_v_*`;
+- the alignment audits, skeptic rulings and re-wears: `docs/alignment/{trimlug-k165-knuckle-3r,dogring-draglink-knuckle-3r}.md`,
+  `docs/alignment/<id>.rulings.json`, `docs/alignment/remeasure/dogring-draglink-knuckle-3r_vflood_bench.json`,
+  `docs/alignment/ledger.jsonl`;
+- the round table: `docs/concepts/ROUNDS.md` "Round 11 results".
+
+All numbers are frozen exact on Bench(110,360), fitted on Bench(60,160), and re-measured by an independent verifier.
+No bench, judge or kit file changed this round. Ledger re-read at 13:19 UTC: trimlug and dogring WATCH, coupler and
+four-bar not audited (dead), none gamed.
+
+**What was measured**
+
+* **trimlug-k165-knuckle-3r: VERIFIED 18.51 (score 93.27), held out 23.47, ledger WATCH - the round winner, not a lead
+  change** (slipper-nose-knuckle-3r stays at 18.49 / 23.45).
+  * The lead with its horn-lug band trimmed at r_K <= 21.27 mm (farthest flank contact 19.77 + 1.5 mm wall): one cut on
+    link 1a, complexity unchanged (22.25 recorded, 18.25 like-for-like).
+  * Same 261 poses, the same 2 elev-165 contacts and 8/28 overhead as the lead (0 of 1624 poses differ). The +0.02 is
+    3 in-band lug samples removed.
+  * Contact depth (T5): bench 14.74 -> 13.18 mm, held out 46.35 -> 40.59 mm over the same 10 contacts.
+  * Failed levers, measured: a radial lift deepens both contacts (T5 16.07); the crank underside cut gains 0.02 mm and
+    costs 0.21 fast in-band; the hub-2 cap break misses (the contact is on the housing wall 8.17 mm up the crown).
+* **coupler-longdyad-knuckle-3r (spherical-4R coupler, lens 1): DEAD by the hard kill, death upheld.** Frozen pick
+  23.87 (reach 0.739 = 266/360, ib14 0.856, contact 0.033 = 13 poses / 47.7 mm, overhead 4/28); CMA best 29.73 held
+  out with 11 K-open drive contacts. 1540 configs, one CMA batch; no working config reaches drive in-band 0.755 at
+  <= 2 K-open contacts (best 0.729). The pick sits on a 0.1 mm knife edge (cr_zr 7.9 -> 144.98).
+* **fourbar-longdyad-knuckle-3r (lobe-free four-bar, lens 2, cx 14): DEAD, death upheld.** Strict B1 reading: 51.75
+  (held 55.30); coupled reading, listed for B1 and never claimed: 36.46 frozen / 39.80 held. Chain alone with the drive
+  metal deleted: 43.95 / 26.26. Convergence gate passed on all 4 CMA runs.
+* **dogring-draglink-knuckle-3r (coaxial dog + drag link, lens 1): REFUTED.** The claim reproduces (22.64 / 25.36) but
+  the arm turning with the dog ring overlaps link 1b's root by 0.18 mm on 183 of 374 bench poses and 442 of 872 held
+  out; no per-pose check covered the pair. Corrected 97.83 (score 64.43; held 101.1), worn with the drive parked.
+
+**What failed and why**
+
+1. **Long stroke beside link 1b fails on the skin.** Every spherical 4R reaching K >= 75 deg at PA <= 42 from a crank
+   beside hub 2 points its arm 55-110 deg off link 1b, where the skin rises up to ~33 mm above link 1b's level; back
+   over the corridor the PA-legal stroke shrinks to 60-65 deg. The coupler's +5 poses (-1.4 gap) cost -3.9 in-band and
+   +2.8 contact.
+2. **A J2-to-K 4R horn must cross link 1b's root.** With PA <= 42 up to K >= 60 the horn pin sits at t3 in
+   [-110, +35] deg from link 1b (0 of ~3000 survivors outside, four K-dyad cells).
+3. **A positively slaved K under the strict B1 reading cannot sit near rest.** Every four-bar pose under |K| ~20 deg
+   fails m_sub; the optimum holds K at 27.6-53.8 deg and hub 2 needs 80.6 mm from GH overhead (lead ~62, in band on
+   0.10 of the frames). A stacked third layer (coupler over link 1b) plus a lug circling hub 2 costs 8-21 gap points.
+4. **Unchecked pairs make numbers.** The dogring 22.64 came from a missing arm-vs-link-1b check (stacked level read at
+   phi 0 only) - worth 75 gap points. A second check (RING-L2) was silently skipped because the frozen model copy did
+   not carry its attributes (0 poses here, but the mechanism is general).
+5. **Overhead contacts approach from the side and above.** At elev 150-165 the skin meets the drive metal near K from
+   large r_K and from above; relieve laterally, read the distance gradient first. The lug band behind the flank's
+   stroke end is the lead's overhead contact limiter and grows with K's stroke.
+6. **The fast bench does not see the stretched wall (third measurement).** Strokes 46-87 deg all read 0.7875 on
+   Bench(60,160); on Bench(110,360) the longer ones return contacts (26 vs 9). K-open contacts read 1 fast / 2 bench /
+   11 held out on the coupler's CMA best.
+
+**Alignment (watch reasons carried, with the numbers)**
+
+* **trimlug-k165-knuckle-3r, WATCH (6 upheld, 4 refuted):** reporting (verdict "screened -" on a verified row;
+  dashboard sweep best 13.02 = 95.27 vs verified 18.51 = 93.27); T5 (bench 9.01 + 4.18 = 13.19 mm, pose 237's lug also
+  8.35 mm; held out 10 contacts 40.58 vs the lead's 46.12 mm; still 2.12x / +6.96 mm sidecar-longdyad's 6.23); M5
+  (clock spring 0.08 N.m + 0.03 N.m/rad on a sliding nose at assumed mu 0.087, horn 40.77 / crank 34.47 deg; no R17);
+  G4 (K at rest: m_sub < 5 on 106 of 204, < 1 on 50, min 0.000 at (15, 75, 15); claim reads m_plain 5.181 / 5.006);
+  NEW-ws-inband (elev 90-140 in-band 0.8002, 19.9 % metal above 14 mm, p95 20.16 mm; held 0.8218; sidecar 0.841); R1
+  (row text: 5 vs 4 lug-deepest held contacts, fit-bench headline 13.02 / 0.775, limiter omits the lug's 8.35 mm,
+  n_configs 45 vs 31 sweep entries). Skeptic additions: held th 5.006 falls to 4.95-4.97 under the predicted
+  0.42-0.53 deg K lag unless the +0.75 deg K lead is built; the real lobe ring / follower / straddle boss are unsampled;
+  the verifier skipped the continuity flood (audit flood clean: full 18.51, knn 20.18).
+* **dogring-draglink-knuckle-3r, WATCH (8 upheld, 5 refuted) on its corrected 97.83:** M3 (the arm-vs-link-1b clash,
+  -0.18 mm on 183 / 374 and 442 / 872); sampling (sample- vs part-weighted in-band 0.864 vs 0.852, +1.23; horn 0.23 in
+  band, median 16.8 mm); M2 (drag-link eyes O8 vs stated O9: +0.12); M5 (one-sided dog back-driven by K's spring
+  through the 4R, PA 35.5 taken / 42 table end, no R17); R3 (picked by frozen among >= 4 frozen wears 22.64 / 24.34 /
+  29.84 / 26.07, spread not on file); G5 / complexity (no record; 25.25-27.25 vs the lead's 22.25); reporting (sweep
+  best 17.19 shown 80.64 above the verified number). Skeptic additions: the 97.83 is worn with K <= 2.8 deg; the
+  refuted claim's knn flood lost 2.83.
+* **coupler-longdyad / fourbar-longdyad:** not in the ledger (dead). Verifier notes: the coupler's 0.1 mm knife edge
+  and literally-false kill wording; the four-bar's over-strict CRKL-L1b pair (0 poses on either best).
+
+**Next:** the overhead cone (hub-2 axis tilt, knee re-cut, lateral relief at elev 165) - 26 losses no K drive moves,
+never built in round 11; the stretched wall only with the in-band RSSR drive on the long dyad plus lateral overhead
+relief, selected held out; and a pair-coverage probe in the toolkit before the next claim.
