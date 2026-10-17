@@ -1527,3 +1527,186 @@ stays first: +18 workspace poses at the lead's in-band and contact (0.278 points
   slipper's record fixes (verdict text, v_contact, like-for-like complexity).
 - **Do not rescreen:** the dip below stop A, the planar groove gate, the spring-held spare 4R past the 3R wall, and
   stroke beyond the a1max window without lengthening the dyad.
+
+## Round 11 plan (2026-10-17 ~07:25 UTC, track main, lead verified gap 18.49)
+
+### State
+
+- **Lead (best verified gap, not gamed):** slipper-nose-knuckle-3r **18.49** (score 93.28), Bench(110,360) exact
+  frozen, fit Bench(60,160), margin 5, O20. Ledger **watch** (`alignment_ledger.py get`: exit 0).
+  - Reach 0.725 (261/360), overhead 8/28, follow 1.0, ib14 0.8955, contact 0.0054 (2 poses). Gap = reach 17.50 +
+    in-band 0.45 + contact 0.54. Held out 23.45. Flood full / knn 18.49 / 20.16.
+  - Lost 99: fold 88 (73 stretched at th >= 106.6, 15 folded at th 7.7-22), knee slide 9, contact 2. Overhead
+    losses 20: stretched 9, folded 5, knee 4, contact 2.
+  - Drive: O2.37 nose on the re-fit flank, mu 0.087, PA + friction 40.8 <= 43, dK_lim 49.8. K's dyad window (a1max)
+    binds before the drive: 52.8-60 deg of flank at lower mu bought 0 poses.
+  - 3 active, 0 passive translations. Complexity 22.25 on the record, 18.25 like-for-like (the lead roller 20.25).
+  - **Watch reasons carried (do not buy points the same way):**
+    - M5: a clock spring force-closes a SLIDING nose (return stroke at crank PA 34.47 with friction vs 8.2 rolling);
+      no R17 / preload / lift-off number;
+    - G4 (family): with K on stop A (204 of 371 bench poses) m_sub < 5 deg on 106, < 1 deg on 50, min 0.000 at
+      (15, 75, 15); the fold margin on file (5.181 / 5.006) reads m_plain. This is the user's open B1 question;
+    - T5: the 2 elev-165 contacts press 9.01 + 5.74 = 14.75 mm (held out 10 contacts, 46.12 mm), 2.37x
+      sidecar-longdyad's 6.23 mm;
+    - NEW-ws-inband (unscored): raised-arm workspace in-band 0.800 at elev 90-140, 0.199 of the metal above 14 mm
+      (max 30.8 mm); sidecar-longdyad 0.841;
+    - reporting: verdict text "screened -", no v_contact, complexity shown 22.25 vs 18.25 like-for-like; the
+      dashboard shows sweep best 13.0 (95.27), 5.49 below the verified number.
+- **Same protocol, verified (ledger):**
+
+  | design | gap | held out | cx | note |
+  |---|---|---|---|---|
+  | dipped-law-groove-knuckle-3r | 18.64 | 24.07 | 24.25 | **gamed** (fold margin 0.184, m_sub waiver, P1 in-sample): not a leader |
+  | roller-longdyad-knuckle-3r | 18.67 | 23.73 | 20.25 | watch; same 261 poses; the roller on the re-fit arm 18.36 (attribution run, not a claim) |
+  | sidecar-longdyad-knuckle-3r | 18.91 | 22.67 | 25.5 | watch; shallowest contacts (6.23 mm), ws-inband 0.841 |
+  | sidecar-parallelogram-knuckle-3r | 19.13 | 22.03 | 25.5 | watch (knn flood 22.21) |
+  | kneeless-roller / -sidecar | 21.07 / 21.11 | 24.59 / 25.34 | 23.75 / 28 | watch; GH-offset liner 38.7 % vs 66.6 % with the knee |
+  | groove-desmo-knuckle-3r | 22.64 | 28.77-28.90 | 18.25 | watch; spring-free K, held out +6.13 |
+  | minarc pick1 / skinnormal-shortk-4r | 18.40 / 18.58 | - / 22.43 | 32.5 | 4 active (a sensed joint is a joint): not 3-joint leads |
+
+- **95 arithmetic.** Gap 13.75 = +18 workspace poses at the lead's in-band and contact (0.278 points each); at
+  ib14 0.88, +23. Every pose won with K far open has cost about one contact pose so far (lens 1, round 10).
+- **The stretched wall (73 bench / 211 held out):** internal rotation >= 90 across the body (64 of 73). It is the K
+  drive's stroke on a short K dyad (dK 46 -> a1e 54.3 -> th 106.6), and K's window (a1max) right behind it.
+  - fold_ceiling exact one-level parking, calibrated 0.722 vs verified 0.725 (held 0.695 vs 0.682). The window holds
+    272 today; 28 / 50 at 57.5 deg: 290 (R_est +4 0.761, ~94.6); 28 / 50 at 75: 298 (0.772, ~95.0, held +0.067);
+    **32 / 48 at 75: 300 (0.775 -> est. verified 0.778, ~95.1)**. Before the drive's metal and the knee.
+  - Binding parts on the new poses at +4 mm: hub 2 18/29, link 2 near J2 20/29, link 1b 23/29. +8 mm halves the
+    parts' in-band.
+  - **The drive (longstroke_drive.md, in progress elsewhere):** one-sided contacts cap at the involute arc of action:
+    nose 46.5, roller 51.8 (its contact walks to r 31 mm, the deltoid), groove 41.2. The phased RSSR reaches 77.2
+    (PA <= 42, transmission >= 48; crank-tip PA never under ~27: the rod's lean). The spherical-4R coupler (C4: an arc
+    on two radial pins, all four axes through GH) has a PA-42 range of 78.5 kinematically, cx 28.0 vs the RSSR's
+    30.5. It is not modelled with metal.
+  - **NEW wall, stage 1 (longstroke_drive.md section 1):** the hub-2 rim lobe that writes K's law must keep its crest
+    inside hub 2's O20 + 1.5 skirt (r_lobe + s_arm phi <= 11.5) and its PA <= 42. On 28 / 50 with a 77-deg stage 2,
+    the linear law kK 1.96 closes 267 / 360, kK 2.3 closes 272, kK >= 2.7 kills the lobe at its base radius,
+    two-slope 1.8 / 2.8 gives 269, the 'track' law 194-229. The window holds 298: **26 poses sit between the law and
+    the window** (knee, closure at the margin, the law's slope). A long stage 2 alone does not reach 95.
+- **The folded side and the overhead cone (26 poses, 11 of the 20 overhead losses):** scapular-plane abduction,
+  plane -20..45, elev 90-165.
+  - 15 folded (th 7.7-22 vs the wall |a1 - a2| + 5 = 24.67). Hub 2 is the wall there: its disc clears 4 of 15 at
+    F2 62 mm (median need 71; held out 21 of 46).
+  - 9 knee slide (R_tol; plane -15..15, elev 90-165, external rotation 15-45). The knee runs to 151.92 of its
+    154.78 window; the build rule holds ang_min >= 26.88.
+  - 2 contacts at elev 165 (plane 15 / 30, axial -60): the horn lug on hub K / the crank, 9.01 + 5.74 mm.
+  - Dead for this cone, measured: K in any layout (the K sub-chain's own fold |bk1 - cK| + 5.5 = 32.8 vs th_lo 29.7,
+    0 poses); a2 re-placement (a2 60: 20.84, held 24.17, parts in-band 0.55-0.63); J1 re-seats (back 20.29-73.21,
+    eave 27.92, crown-lateral 25.29); folded-side lobes; the longer knee link on H1 (0); the centred-knee control
+    (19.33 bench, but held out 22.97 vs the lead's 23.73 - the only held-out gain on file).
+- **Complexity (second objective):** the 3-active class runs 18.25-25.5 like-for-like; the drive is ~14-16 of a
+  knuckle's points (lobe, follower, crank, spring, stage-2 pair). The positive four-bar K (crank-rod / bighorn, cx 36
+  on the old ruler) was parked in rounds 8-9 on the msub question, which is now B1.
+- **Closed with measured reasons (do not rescreen):** the dip below stop A (one budget with the stroke; gamed); the
+  planar groove gate (3-D crest +0.69 mm = 3.35 points); a spring-held spare 4R past the 3R wall (1:1 fold-for-
+  contact; fast does not rank the class: fast 12.18-16.14 -> frozen 18.58-21.05, scrambled); stroke beyond the a1max
+  window without a longer dyad (dK_lim 46.5 -> 60 bought 0); stop B within 5.5 deg of the K dyad's stretch (refuses
+  every pose at the priced margin: keep a1max <= bk1 + bk2 - 5.5); re-placing the window; seat re-fits judged on the
+  fit bench (CMA B 19.81 frozen, 24.78 held); per-part relaxations that drop uncleared poses (fold_ceiling section 5);
+  twin K2; J3 twist; in-sample and env-fit polishes.
+- **Machinery:** fresh container, the local .cache bench rebuilds (~20 min): gates run first on the CPU farm
+  (tools/cloud_run.py, exo-cpu1). Farm spend approved $8 per 12 h until ~17:20 UTC; RunPod balance ~$34. Small
+  batches, `tools/runpod_guard.py audit` before and after, workersMin 0 after each batch.
+
+### Lenses
+
+1. **coupler-longstroke (reach, the stretched wall, both stages; suggested id: coupler-longdyad-knuckle-3r).**
+   Target: frozen exact gap <= 13.75 (reach >= 0.775, ib14 >= 0.88, contact <= 0.01), held out <= 22.67.
+   - **The pair the RSSR agent is not building:** stage 2 as the spherical-4R coupler (C4): an arc coupler on two
+     radial MR63ZZ pins, all four axes through GH, no rod lean, the swing phased to straddle the 90-deg transmission.
+     Seeds: the verified seats (stop A 37.55, a2 57.22), K dyad 32 / 48 (then 28 / 50), a1max <= bk1 + bk2 - 5.5,
+     stroke >= 75 deg with every PA <= 42.
+   - **Fix stage 1 in the same model:** split the gain so the lobe stays legal - a higher stage-2 ratio g lowers the
+     lobe's PA (tan pa = kK s_arm / (g r)) and its lift; or let the coupler's own ratio rise toward the stretched end
+     so a linear lobe suffices. Report the law-only closure against the 298-300 window.
+   - **Gates, <= 25 min each, farm:**
+     - A, law-only on Bench(110,360) exact kinematics with the real stage 1 + stage 2: >= 290 / 360 closed (the lobe
+       law today: 272).
+     - B, the exact one-level parking (`docs/research/fold_ceiling/parking_k.py`) with the coupler, its pins and the
+       crank sampled as parts: R_est(+4) >= 0.765 and parts in-band >= 0.755; coupler parts >= 0.85 in band.
+   - **Search and select:** the fast bench does not rank K-open designs. Search on the 1 mm near-touch gap plus a
+     K-open term (metal under 1 mm on any fit pose with dK > 20 counted twice); select the top 8 by frozen exact
+     wear, never by fast.
+   - **Stack the free gains:** the drive-arm re-fit (the lead roller on it: 18.36) and the stock O2.5 nose wherever a
+     contact follower remains (stage 1), its PA + friction <= 43.
+   - **Report:** per-pose fold (stretched / folded) / contact / slide against the law-only ceiling and the window;
+     contact depth (T5, vs the lead's 14.75 mm); m_plain, m_sub (rest and moved), m_eff and the family reading
+     (`tools/alignment_msub_rest_probe_model.py`); raised-arm workspace in-band (not below the lead's 0.800).
+   - **Coordinate:** read docs/research/longstroke_drive.md and events.jsonl first. If the longstroke agent has started
+     C4 with metal, do not duplicate it: take the stage-1 law (gain split) on its model instead, under this id.
+   - **Kill:** gate A < 280 or gate B < 0.755: report the binding stage and part, and stop.
+   - **Red team:** the coupler's assembly mode across the full-grid flood (no branch change); the coupler arc and pins
+     against hub 2's crown and link 1b in the K-open poses; K slop from pin play at 75 deg of stroke.
+2. **lobe-free four-bar (low complexity at the same reach; suggested id: fourbar-longdyad-knuckle-3r).** Target:
+   complexity <= 15 by tools/simplicity.py v2.2 (lead 18.25 like-for-like), frozen gap <= 18.49 (stretch <= 16),
+   0 springs, 0 sliding pairs, 0 sensed passives, 0 passive translations.
+   - **Topology:** delete the whole drive (lobe, follower, crank, spring, nose). A positive spherical four-bar from
+     q2 to K: ground = link 1b, input = a crank pin rigid with link 2 inside hub 2's O20 stack (r <= 7.5), output =
+     link 1a's horn, coupler = the C4 arc on two radial pins (not two ball links: fewer passive rotations). K is
+     determined everywhere, positively, so it needs no force closure (M5 disappears).
+   - **The law is the risk, measured:** a four-bar from near-toggle averages kK ~1 unless r_horn ~2.5, and kK 1.56
+     lost 0.043 reach (round 8). On the 32 / 48 dyad the stroke may open early (law shape was worth <= 0.2 frozen);
+     size the four-bar for the window, not for the lobe's dwell.
+   - **The fold reading, without waiting on B1:** a positively slaved K is never at rest, so the strict reading
+     min(m_sub, m_eff) >= 5 must hold on every taken pose. Gate it; a design that passes it rests on no ruling.
+   - **Gate, <= 25 min, farm:** law-only Bench(110,360) closure >= 272 / 360 (the lobe law's), transmission >= 48
+     over the used q2 range, strict fold reading failing <= 5 taken poses, and cx <= 15 from a full mechanism record.
+   - **Kill:** report the binding term (gain, transmission, m_sub) and stop. If only m_sub fails, list the design for
+     the user's B1 ruling with the count; do not claim it.
+   - **Red team:** the toggle near the folded end (dead point under a disturbance); the crank pin in hub 2's stack;
+     the full-grid flood (assembly mode).
+3. **overhead-cone (reach, the OTHER wall; suggested id: conehub-knuckle-3r).** Target: >= +6 of the 26
+   scapular-plane overhead-cone losses taken frozen on the lead's drive (gap <= 16.9, overhead >= 12/28) with no loss
+   elsewhere; a stackable delta for lens 1 / the RSSR.
+   - **Lever: move hub 2's DISC and the knee, not the window** (K and a2 are measured dead here). Cheap first, each
+     priced by an exact per-part march on the 26 poses plus every clip frame:
+     - (a) a hub-2 axis tilt b2 off the GH ray (the lead already tilts J3 by b3; the cuff knee takes the drift), chosen
+       so the disc lies along the bunched deltoid in the cone. Price the knee load: the knee must stay inside
+       [ang_min, 180 - ang_min] with ang_min >= 26.88;
+     - (b) a knee re-cut aimed at the 9 overhead knee poses (lc, phib, pin offsets), claimed held out: the centred
+       knee is the only held-out gain on file (22.97 vs 23.73);
+     - (c) the 2 elev-165 contacts: move the horn lug / crank off hub K's crown there.
+   - **Gate, <= 25 min, farm:** law-only plus exact per-part parking: >= +6 of the 26 closed and cleared, hub 2 /
+     link 1b / link 2 in band >= the lead's at +4, the knee inside its window, 0 new losses on the other 334 poses.
+   - **Report:** the GH-offset liner share (3 / 5 mm, docs/alignment/remeasure/*_ghoffset.json harness) for any knee
+     change, contact depth, raised-arm workspace in-band, the min th and m_sub margins.
+   - **Kill:** fewer than +3 poses at the gate: report which part binds each of the 26 and stop.
+   - **Red team:** the knee at its window edges under a 3 mm GH-centre error; the hub-2 tilt's cuff twist at the
+     knee pins (MR63ZZ pairs).
+
+**Every lens:**
+- takes a new id and never re-screens an id in the exclude list below;
+- writes its motion preview (docs/concepts/viz/concepts/<id>.js, `node docs/concepts/viz/test.mjs <id>`,
+  `node docs/concepts/viz/thumbs.mjs`) before the row is called screened;
+- reports plain gap fast and frozen exact, held out, flood full + knn, overhead x/28, per-part and workspace in-band,
+  min th margin, m_sub (rest / moved), contact depth, v_contact and tools/simplicity.py v2.2 like-for-like with the
+  lead; the 2 mm near-touch is optional, contact stays metal < 1 mm;
+- writes the verifier's per-pose dump (`tools/alignment_paired.py dump`, bench and held out, +-0.05);
+- searches on the envelope bench, fits the shape on Bench(60,160), selects frozen and claims held out;
+- runs `tools/alignment_audit.py audit <id> --ref slipper-nose-knuckle-3r` before its verifier;
+- has a 75-min modelling box; on a kill it reports the measured reason and stops.
+
+### Carried over (catalogue, ideated, never screened)
+
+None. The round-4 picks stay closed (deltoid-crest-j3-3r and crest-knee-3r: the crest seat; slotted-eccentric-pin-knee-3r:
+its sibling refuted at 115.21). The other 25 ideated entries are families dead in rounds 1-2 (telescopes, rails, SPMs,
+pauldrons, tapes). crank-rod / bighorn (never catalogued, parked on msub) are revived inside lens 2.
+
+### Elsewhere, not to be duplicated
+
+- longstroke-slipper-knuckle-3r: the RSSR long-stroke drive (77.2 deg), CMA on the farm (jobs_cma1 / jobs_cma2),
+  docs/research/longstroke_drive.md.
+- roller-longdyad-knuckle-3r: the gen-6 user-style CAD (user_style_roller.py) and its R1 attribution.
+- slipper-nose-knuckle-3r: the round-10 winner's final polish and generation CAD (the lead's).
+
+### Lead bookkeeping (not the round's)
+
+- Fix slipper-nose-knuckle-3r's record: verdict text (verified, not "screened -"), v_contact 0.0054, complexity
+  like-for-like (18.25), the dashboard sweep-best display.
+- Its M5 action: R17 on the return stroke at mu 0.087 / 0.12 / 0.15 when CAD exists; the wear test before CAD.
+
+### Needs the user's say (listed, not screened)
+
+- **B1:** does m_sub at K's rest, or the coupled reading, decide the fold rule? It decides G4 for the whole family
+  (lead included) and whether a positively slaved K must pass m_sub. Lens 2 is gated on the strict reading so it
+  needs no ruling; no claim rests on the lenient one.
