@@ -56,7 +56,7 @@ SPEC = json.load(open(os.path.join(REPO, "docs", "research", "roller_mechanism",
 RES = json.load(open(os.path.join(REPO, "docs", "research", "roller_mechanism", "results_bench.json")))
 
 # ---- link 1a (the short dyad)
-L1A = dict(ramp_deg=60.0, R=2.0, clr_J1=0.2, seat_K=11.0)
+L1A = dict(ramp_deg=60.0, R=2.0, clr_J1=0.2, run_K=0.2, rf=0.5)
 # ---- drive dimensions (red team build spec)
 ROLL_R, ROLL_W = 3.0, 2.5                    # MR63ZZ 3 x 6 x 2.5 (flank roller and lobe follower)
 A_S, PSI_DEG = 7.0, 219.0                    # the real lobe follower: short arm 7.0 at psi 219 deg (red team finding 1)
@@ -75,23 +75,26 @@ HEAD_R, HEAD_T, STEP_T = 2.5, 1.0, 0.2       # ISO 2341-B 3 x 8 head O5 x 1.0, 0
 # ---------------------------------------------------------------------------------------------------- link 1a
 def link1a_path(M):
     """the centre-line chain of link 1a in span(u1, uK) (2-D: x along u1, y across): start at the J1 seat face (J1 skirt +
-    clr), concave bend R, ramp, convex bend R onto the K pad plane, run to the K seat face. Returns (ex, ey, start, segs, info)"""
+    clr), concave bend R, ramp at ramp_deg, convex bend R onto the K pad plane, a short run to the K seat face; the K seat length
+    is solved (>= 10.05, outside the K skirt). Returns (ex, ey, start, segs, info)"""
     Uu, C, F4, hr = BM.joints4(M); u1, uK = unit(Uu[0]), unit(Uu[1])
     ex = u1; ey = unit(uK - (uK @ ex) * ex); phi = math.acos(float(np.clip(uK @ ex, -1, 1)))
-    ha, hb = F4[0] + T / 2, F4[1] + T / 2; R = L1A["R"]; Ls_a = hr[0] + L1A["clr_J1"]; Ls_b = L1A["seat_K"]
-    B = hb * np.array([math.cos(phi), math.sin(phi)]); back = np.array([math.sin(phi), -math.cos(phi)]); E = B + Ls_b * back
-    for a_deg in np.arange(L1A["ramp_deg"], 20.0, -1.0):
-        a = math.radians(a_deg); start = (ha, Ls_a, math.pi / 2)
-        x1, y1, p1 = SK.advance(*start, -1.0 / R, R * a)
-        d1 = np.array([math.cos(p1), math.sin(p1)])
-        x2, y2, p2 = SK.advance(0.0, 0.0, p1, 1.0 / R, R * (a + phi)); v2 = np.array([x2, y2])
-        d2 = np.array([math.cos(p2), math.sin(p2)])
-        A_ = np.c_[d1, d2]; sol = np.linalg.solve(A_, E - np.array([x1, y1]) - v2); Lr, a1 = float(sol[0]), float(sol[1])
-        if Lr >= 0.0 and a1 >= 0.0: break
+    ha, hb = F4[0] + T / 2, F4[1] + T / 2; R = L1A["R"]; Ls_a = hr[0] + L1A["clr_J1"]; a1 = L1A["run_K"]
+    B = hb * np.array([math.cos(phi), math.sin(phi)]); back = np.array([math.sin(phi), -math.cos(phi)])
+    start = (ha, Ls_a, math.pi / 2); best = None
+    for a_deg in np.arange(L1A["ramp_deg"], 20.0, -0.5):
+        a = math.radians(a_deg)
+        x1, y1, p1 = SK.advance(*start, -1.0 / R, R * a); d1 = np.array([math.cos(p1), math.sin(p1)])
+        x2, y2, p2 = SK.advance(0.0, 0.0, p1, 1.0 / R, R * (a + phi)); v2 = np.array([x2, y2]); d2 = np.array([math.cos(p2), math.sin(p2)])
+        sol = np.linalg.solve(np.c_[d1, -back], B - np.array([x1, y1]) - v2 - a1 * d2); Lr, Ls_b = float(sol[0]), float(sol[1])
+        if Lr >= 0.0 and Ls_b >= hr[1] + 0.05: best = (a, Lr, Ls_b); break
+    assert best is not None, "link 1a: no ramp <= 60 deg closes the dyad"
+    a, Lr, Ls_b = best
     segs = [(-1.0 / R, R * a), (0.0, Lr), (1.0 / R, R * (a + phi)), (0.0, a1)]
-    end = SK.end_pose(start, segs); assert np.allclose(end[:2], E, atol=1e-6) and abs(end[2] - (math.pi / 2 + phi)) < 1e-9, (end, E)
-    return ex, ey, start, segs, dict(ramp_deg=round(math.degrees(a), 2), ramp_mm=round(Lr, 3), K_run_mm=round(a1, 3), bend_R_centre_mm=R, bend_R_inner_mm=R - T / 2,
-                                    seat_J1_mm=round(Ls_a, 3), seat_K_mm=Ls_b, dyad_deg=round(math.degrees(phi), 3), sd_b=back)
+    end = SK.end_pose(start, segs); E = B + Ls_b * back
+    assert np.allclose(end[:2], E, atol=1e-6) and abs(end[2] - (math.pi / 2 + phi)) < 1e-9, (end, E)
+    return ex, ey, start, segs, dict(ramp_deg=round(math.degrees(a), 2), ramp_mm=round(Lr, 3), K_run_mm=a1, bend_R_centre_mm=R, bend_R_inner_mm=R - T / 2,
+                                    seat_J1_mm=round(Ls_a, 3), seat_K_mm=round(Ls_b, 3), dyad_deg=round(math.degrees(phi), 3), sd_b=back)
 
 
 def link1a_vs_model(M, ex, ey, start, segs):
@@ -118,9 +121,9 @@ def link1a_body(M, stops, lug):
     Uu, C, F4, hr = BM.joints4(M); H = lambda j: C[j] + F4[j] * Uu[j]
     ex, ey, start, segs, info = link1a_path(M)
     bar = US.bar_swept(ex, ey, start, segs, t=T, w=W, r=0.3)
-    padA = USP.plate_R(Uu[0], F4[0], ey, W, hr[0], L=info["seat_J1_mm"], rf=USP.HUG_RF)
+    padA = USP.plate_R(Uu[0], F4[0], ey, W, hr[0], L=info["seat_J1_mm"], rf=L1A["rf"])
     sd_b = info["sd_b"][0] * ex + info["sd_b"][1] * ey
-    padB = USP.plate_R(Uu[1], F4[1], sd_b, W, hr[1], L=info["seat_K_mm"], rf=USP.HUG_RF)
+    padB = USP.plate_R(Uu[1], F4[1], sd_b, W, hr[1], L=info["seat_K_mm"], rf=L1A["rf"])
     body = US.glue(US.glue(padA, bar), padB)
     body = body.fuse(US.lower_pin(Uu[0], F4[0])).fuse(arbor_pin_roller(Uu[1], F4[1]))
     if lug is not None:

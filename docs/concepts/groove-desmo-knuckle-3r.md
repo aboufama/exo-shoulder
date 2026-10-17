@@ -108,3 +108,47 @@ to 0.
   which is where the lead's flank boss already pays its contact poses. This is the only route found back to the
   spring-loaded 48.5-deg stroke.
 
+
+## Control: the lead through this file's protocol
+
+`GD_CONTROL=1` runs the parent itself through this file: MR63 roller, capK 6, no slot, no groove gates. It reproduces
+the verified lead exactly, so the protocol adds nothing of its own. Same-protocol numbers:
+
+| | fast plain / 2 mm | frozen exact Bench(110,360) | 1 mm / 2 mm | held out | workspace in-band all / elev 90-140 | overhead taken |
+|---|---|---|---|---|---|---|
+| lead (control) | 13.19 / 16.57 | **18.67** (reach 0.725, ib14 0.8937, contact 0.0054) | 20.30 / 33.10 | 23.73 | 0.854 / 0.798 | 8/28 |
+| groove-desmo, interim (lead seats, g 2.47, beta -170, r_c 16) | 14.67 / 17.21 | **19.29** (reach 0.714, ib14 0.8986, contact 0.0054) | 20.94 / 33.68 | 24.96 | 0.853 / 0.781 | 8/28 |
+
+## Red team of the interim configuration (frozen exact Bench(110,360), `redteam` mode)
+
+- **Lowest metal: 0.07 mm** at ws (plane -60, elev 60, axial 105). It is the same pose and the same value as the lead,
+  so it is not the drive. The next lowest are 0.75 mm (E strap / hub 3, across the body) and 1.02 mm (hub 2's crown
+  edge, plane 15, elev 90).
+- **Contact poses: 2**, both overhead at elevation 165: (15, 165, -60) and (30, 165, -60). The horn boss and the crank
+  arm go 6-11 mm into the deltoid. These are the lead's own two contact poses; the slot's outer wall adds none.
+- **Named poses:**
+  - rest (dK 4.6, groove pitch 7.19) and overhead axial -135 (dK 5.8): taken. The lowest part is the horn boss at
+    2.5-2.8 mm.
+  - across the body: taken (dwell, link 2 clears the short arm by 3.42 mm).
+  - overhead axial 0 / plane 90, extreme internal rotation, behind the back, abduction 90: lost to the fold or to the
+    knee slide, as in the lead.
+  - extreme external rotation: needs dK 62.1 (pitch 8.84 > 8.44, past the groove), lost to the fold.
+- **Link 2 vs the short arm and dowel (planform, link 2's level):**
+  - fit bench: min 2.47 mm;
+  - Bench(110,360): min 1.22 mm;
+  - held out: min 1.22 mm (834 taken poses);
+  - exit azimuth >= 70.2 deg from the pivot side on every taken pose.
+
+  The tightest is 0.28 mm at (0, 90, 0), a pose already lost to the fold. If a future fit takes it, it is the first
+  pose this gate will cut.
+- **Optimistic number:** fast -> frozen +4.62, and held out +5.67 over frozen. These are the lead's own deltas
+  (+5.48 / +5.06): the drive change does not make the shape generalise worse.
+- **Jams and pinches the bench does not see:**
+  - **Onset corner.** The lin law kinks at the dwell's end. In the cap frame the groove turns from the base circle to
+    an almost radial rise, because the dowel moves with the cap: about an 85-deg pitch corner. A real groove needs a
+    blended onset (cycloidal over a few degrees of q2). That shifts K by < 1 deg near the onset, inside the 5.18-deg
+    fold margin. Not modelled.
+  - **Materials and friction.** The sliding dowel needs a hardened groove ring. Friction is in the groove's
+    pressure-angle budget (mu 0.1).
+  - **Backlash.** About ±0.54 deg of K (groove 0.014 / s_arm · g + slot 0.014 / r_c). The spring parent drifted
+    4.1-7.7 deg with the thorax tilted (pick1's R17 note), so the positive hold is a real gain in R17 terms.
