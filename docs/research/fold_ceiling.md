@@ -242,8 +242,11 @@ level:
 **Not provably impossible.**
 
 - Kinematics allows 0.99 (section 2).
-- At the leader's seats, every modelled part at one level admits **+14 poses** (R_est 0.778) at the same parts'
-  in-band with a K dyad of 28 / 50.
+- At the leader's seats, every modelled part at one level admits **+14 poses** at the same parts' in-band with a K
+  dyad of 28 / 50:
+  - with a 57.5 deg K stroke (the PA-43 maximum of the round-9 flank): R_est 0.722 -> 0.761, exact and calibrated
+    against the leader to one pose (section 4b);
+  - with an unlimited stroke (a1max 73): R_est 0.739 -> 0.778 (section 3, uncapped calibration).
 - That is 0.725 + 0.039 = **0.764**, gap ~14.8, score ~94.6. It is just under 95, before the drive.
 
 **Not reached either.**
@@ -263,10 +266,10 @@ taken.
 | K drive stroke (dK_max, deg) | reach estimate | th_hi with the 28 / 50 K dyad |
 |---|---|---|
 | 46 | 0.725, measured | - |
-| 57.5 | 0.76-0.77 | 115 |
-| 75-90 | 0.78-0.80 | 120-125 |
+| 57.5 | 0.764 (exact parking, calibrated) | 115.3 |
+| 75 | see the farm rows in 4b | 121.4 |
 
-The 75-90 deg row is still below the hard goal's 0.80 at the same in-band. **Above ~0.80 the family needs a wider
+The ~90 deg stroke (uncapped, a1max 73) gives R_est 0.778 at the same in-band: still below the hard goal's 0.80. **Above ~0.80 the family needs a wider
 window on the folded side too**, and there hub 2 IS the wall: only 4 of 15 clear.
 
 ### 4b. The drive-stroke curve (exact kinematics; parking in the next table)
@@ -292,7 +295,20 @@ Leader's seats; K stays on stop A while th <= a1 + a2 - 5. The window top is a1e
 **The arithmetic.** +18 window poses on the leader's 261 is reach 0.775: gap ~13.7, score 95, IF every one of them
 parks and the drive's own metal adds no loss. The exact parking of these windows is in the farm table below.
 
-(Farm table pending: `parking_k_{bench,held}_{lead,k2850,k3248}.json`, exo-cpu1.)
+**Exact parking with the stroke cap** (`parking_k_bench_local_k2850_575.json`: every modelled part at its clip max + d,
+clearing every closed pose; R_est = the share of workspace poses closed and cleared, before knee and drive metal):
+
+| K dyad, stroke | in window | R_est +0 / **+4** / +8 | parts in-band +0 / **+4** / +8 | new cleared at +4 | binding parts at +4 (of the new) |
+|---|---|---|---|---|---|
+| 26 / 38, 46.25 (leader) | 272 | 0.656 / **0.722** / 0.731 | 0.923 / **0.768** / 0.496 | 1 of 11 | hub 2 2/11, link 2 at 1/3 6/11 |
+| **28 / 50, 57.5** | 290 | 0.678 / **0.761** / 0.778 | 0.921 / **0.760** / 0.460 | **15 of 29** | hub 2 18/29, link 2 at 1/3 20/29, link 1b 23/29 |
+
+- **Calibration.** At +4 the leader row gives 0.722 against the verified 0.725: within one pose.
+- **The stroke-57.5 lever** buys +0.039 (+14 poses) at the same parts' in-band (0.768 -> 0.760). On the verified
+  config that is reach ~0.764, gap ~14.8, score ~94.6, before the drive's own metal.
+- Going to +8 mm adds 6 more poses but halves the parts' in-band. Not a trade.
+
+__FARMTABLE__
 
 ## 5. The family-wide relaxation, and why it is not a bound (red team of my own instrument)
 
@@ -346,10 +362,10 @@ Bench(60,160) fast):
   every check unchanged.
 - The real model refutes it:
 
-  | a2 | fast plain | frozen exact Bench(110,360) | why |
-  |---|---|---|---|
-  | 57.22 (verified) | 13.19 | 18.67 | fold 88, slide 9, contact 2 |
-  | 59.98 | 14.66 | **20.84** (reach 0.714, in-band 0.886, contact 0.008, near1 23.62, near2 32.16) | fold 89, slide 11, contact 3 |
+  | a2 | fast plain | frozen exact Bench(110,360) | why | held out |
+  |---|---|---|---|---|
+  | 57.22 (verified) | 13.19 | 18.67 | fold 88, slide 9, contact 2 | 23.73 |
+  | 59.98 | 14.66 | **20.84** (reach 0.714, in-band 0.886, contact 0.008, near1 23.62, near2 32.16) | fold 89, slide 11, contact 3 | **24.17** (reach 0.687, contact 0.013; fold 253, slide 34, contact 11) |
 
 - The reason is the drive wall. At the drive's real width (81.8, not stop B's 86.3) the shifted window holds 271
   poses against 272, and the refit loses in-band.

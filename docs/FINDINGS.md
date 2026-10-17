@@ -2111,12 +2111,14 @@ Scripts are in `docs/research/fold_ceiling/`. No rule, bench or verified row was
 * Re-placing the window does not help:
   * a2 ~62 would add 10 poses only at the stop-B width;
   * at the drive's width it adds nothing;
-  * measured on the real model, a2 59.98 gives frozen exact 20.84 against 18.67.
+  * measured on the real model, a2 59.98 gives frozen exact 20.84 against 18.67, and 24.17 against 23.73 held out.
 
 **Realisability, exact (`parking_k.py`; every hub and link sample at ONE level, clearing every closed pose)**
 
-* A K dyad of 28 / 50 (a1max 73) at the leader's seats admits **+14 poses**, R_est 0.739 -> 0.778. The parts' clip
-  in-band stays at 0.768 -> 0.760.
+* The estimate is calibrated: with the leader's own drive cap (stroke 46.25) it gives 0.722 against the verified 0.725.
+* A K dyad of 28 / 50 with a 57.5 deg K stroke at the leader's seats admits **+14 poses**: R_est 0.722 -> 0.761 at
+  the same parts' clip in-band (0.768 -> 0.760), i.e. reach ~0.764, score ~94.6 before the drive's metal.
+* Uncapped (a1max 73, K turning ~89 deg) it gives 0.778.
 * Link 1b (K -> J2) is the binding part.
 * **But K must turn 78-89 deg.** The leader's drive turns 46; the round-9 flank caps at 55-57.5 at pressure angle
   <= 43.
