@@ -226,3 +226,77 @@ text; keep fit-bench numbers out of the headline columns (proposal R-a below).
 - The S1 flip is the family's: the next audit of slipper-nose should carry it, and the round planner should read the
   pooled bench + held order before naming a winner between the slipper family and sidecar-longdyad.
 - The three instrument fixes (I-a, I-b, I-c) belong to the audit tool's owner; each needs `selftest` after the change.
+
+## Skeptic (2026-10-17 13:08-13:20 UTC)
+
+Ledger entry 2026-10-17T13:18:11Z, `by skeptic`, run `skeptic:trimlug-k165-knuckle-3r`. Rulings:
+`docs/alignment/trimlug-k165-knuckle-3r.rulings.json`.
+
+**Final verdict: WATCH.** 6 of the 10 reasons are upheld: reporting, T5, M5, G4, NEW-ws-inband, R1. 4 are refuted
+with evidence: continuity, idle, S1, NEW-stale-complexity-ruler. No reason reaches gamed.
+
+What I re-measured or re-derived (models unchanged):
+
+- **The continuity flood, re-run by me.** Same lead-module `frozen_flood`, model class TLModel, CB_EXACT=1, 144.7 s,
+  output in scratch, not committed. It matches the file on record exactly: full 18.51 with 0 dropped, knn 20.18 with 6
+  dropped, bench graph 50.13 with 113 dropped.
+- **The paired bootstrap against sidecar-longdyad,** re-run with seeds 1-3:
+  - bench -0.40, interval [-2.76, +1.69], P 0.62-0.63;
+  - held out +0.81, interval [-0.65, +2.17], P 0.18-0.19.
+- **Contact depth from the dumps:** bench 13.19 / 14.75 / 6.23 mm (trimlug / lead / sidecar-longdyad), held out
+  40.58 / 46.12 / 35.66. Four held-out contacts get shallower, not five.
+- **Against the lead, pose by pose:** 0 of 470 bench and 0 of 1154 held-out poses differ in taken or contact. The metal
+  floor rises on 60 bench and 135 held-out poses and falls on none.
+- **Complexity, recomputed** with `tools/simplicity.py` v2.2: 22.25 as recorded, 18.25 with the roller-longdyad
+  convention.
+
+### Rulings
+
+| key | ruling | evidence (short; full text in the rulings file) |
+|---|---|---|
+| continuity | **refuted** | The flood is on file (`remeasure/..._flood_bench.json` `connected.connected_full`: 18.51, 0 dropped) and my re-run is identical. The tool's own rule reads full (loss 0.00 <= 1.0); knn +1.67 is under the 3.0 escalation line, so the check reads ok. Same as the lead (18.49 / 20.16). The watch comes from the tool not reading the file (I-b). Process gap: the verifier's files carry no `connected` key. |
+| idle | **refuted** | The model only reads `knee_moved` (line 167; SN_CELL lead at line 37); only the kneeless models set it. The 65.71 deg is the pin knee's designed travel, 86.21-151.92 inside [25.22, 154.78]. K moves 45.61 deg and the crank 19.3, both far above 2.0. The third occurrence (I-c). |
+| reporting | upheld | Status verified, but the verdict text starts "screened -". The dashboard shows sweep 13.02 (score 95.27) against verified 18.51, and gap 13.02 / reach 0.775 from the fit bench. |
+| S1 | **refuted** | The numbers reproduce, but the watch level does not follow. The documented S1 line is the held-out drop: +4.96 against TH 6.0, and the tool reads ok. Every interval includes 0, so neither the bench win nor the held-out loss is established. Ranking on pooled bench + held out would be a rule change (proposal only). The pair's order flips with the flood reading: knn 20.18 vs 21.72, bench graph 50.13 vs 43.40. The contact-count share is T5's. 0 poses differ from the lead. |
+| T5 | upheld | The documented margin is met against sidecar-longdyad on the bench: x2.12 and +6.96 mm. Both sides are claim dumps on an unchanged bench. The rank over sidecar is exactly the trade of 2 deep presses for 4 shallow ones. Correction: at 237 the 8.35 mm is the body-1 contact group; the rigid horn reads 6.75 mm. |
+| M5 | upheld | No R17 or dynamics output exists. The red team (`docs/research/slipper_mechanism_redteam.md`) is quasi-static: return factor 92-158, hysteresis <= 0.020 N.m. It also measures the lag M5 is about: K lag -0.42 to -0.53 deg takes the held-out th margin to 4.950-4.966 unless a +0.75 deg K lead is built in, and the claim's model does not carry that lead. |
+| G4 | upheld | Confirmed: m_sub at rest is under 5 deg on 106 of 204 poses, min 0.000. The active chain at rest passes (m_plain 5.389), but m_sub at rest is the open B1 question for the user and depends on K holding its stop (M5). |
+| NEW-ws-inband | upheld | Confirmed. Raised-arm in-band 0.8002, 19.9 % of the metal above 14 mm, max 30.8 mm (held out 0.8218). The 2-14 mm band is the goal's own. |
+| NEW-stale-complexity-ruler | **refuted** | The measurement is right (22.25 vs 18.25), but the error overstates this design by 4.0. It cannot raise its score or rank, and G5 is the opposite direction (complexity hidden). The tool's complexity check reads ok. The record fix stays a writer's action. |
+| R1 | upheld | Confirmed, and the errors flatter the design: 5 vs 4 shallower contacts; fit-bench gap and reach as the headline; the lug left out of the limiter at 237; n_configs 45 against 31 sweep entries. |
+
+### Missed by the audit (not counted in this verdict; for the next audit)
+
+1. **The held-out fold margin depends on the K lag of a real build.** Applies to the whole slipper family, the lead too.
+   - The claim reads min th 5.006 deg held out (`verify/trimlug-k165-knuckle-3r_v_held_frozen.json`
+     `extra.th_margin.min`, at ws (135, 30, -135), a forced pose). That is 0.006 deg above the user's 5 deg rule.
+   - The red team's slaved-law re-solve (`docs/research/slipper_mechanism_redteam.md`, verdict item 2 and finding 9;
+     committed a3b0434 before this audit's ledger entry) predicts a systematic K lag of -0.42 to -0.53 deg, with
+     +-0.24 deg random. A lag of only 0.07-0.1 deg puts a held-out pose under 5 deg, and -0.5 to -0.7 deg reads
+     4.966-4.950 with 2 poses under 5.
+   - The +0.75 deg K lead that fixes it is a build instruction. The claim's model does not carry it.
+   - Pattern: M5 / T3. A spring-slaved coordinate scored at its planned value, on a margin that sits at the rule's edge.
+2. **The modelled lobe follower is not the real part.** Pattern M1 / M2, the gen-6 drive carried by the family.
+   - The red team (lines 53-56 and 185-186) finds the modelled follower (s_arm 4.0 on r 8.27) inside hub 2's O20.
+   - The real part is an MR63ZZ on a 6.5 mm arm at psi 216, with the lobe ring at r 10.79-12.77.
+   - The real lobe ring, the follower plate and the 10 mm straddle boss are unsampled ("the CAD sweep decides them").
+   - So the claim's metal does not include parts the build must carry. The audit's M1 / M2 walk read "no new part" and
+     missed this.
+3. **The verifier skipped the continuity flood the 2026-10-16 rule asks of it.** No
+   `docs/concepts/verify/trimlug-k165-knuckle-3r_*.json` has a `connected` block. The audit's flood (re-run here) is
+   clean, so nothing is lost. It is a protocol gap, not a number.
+
+Reported, not a finding:
+- The model's `t5()` part breakdown covers only `M.rigid` / `M.contact`. At 3 of the 10 held-out contacts the deepest
+  member is unnamed: 224 (-90, 60, 105) depth 3.49 with listed parts to 1.70; 252 (-75, 60, 105) depth 1.60 with none;
+  820 (75, 150, -90) depth 0.18 with none.
+- Two of those (224 and 252), and 225 (5.51 mm), are elevation-60 contacts at plane -90 / -75, not overhead.
+
+### What happens next
+
+- Fix the audit tool (I-b, I-c), then run `selftest`. This row's refuted `continuity` / `idle` rulings will hold it to ok.
+- R17 on the slipper CAD at mu 0.087 / 0.12 / 0.15, as M5 asks.
+- Re-measure the held-out th margin with the +0.75 deg K lead and with the worst-case lag as claim columns.
+- Re-wear the claim with the real follower, lobe ring and straddle boss sampled.
+- Correct the row text: 4 contacts, not 5; fit-bench numbers out of the headline; the limiter at 237; n_configs.
+- Fix the complexity record (cuff_knee.closed_loops).
