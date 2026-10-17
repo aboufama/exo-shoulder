@@ -187,3 +187,82 @@ All on the frozen claim (exact Bench(110,360) unless stated). Sources: `remeasur
    440C insert is the answer, the model should say `RC_MIN = pin radius + ridge_min` and cut on it.
 4. **Back-drive force-flow judge** (new instrument): in a closed chain with a self-locking back-drive band, the dynamics
    judge (R17) should report where the wearer's force must come through and how large it gets. No judge does this.
+
+## Skeptic (2026-10-17, 21:20-21:30 UTC)
+
+Ledger entry 2026-10-17T21:28:48Z, by skeptic, run `skeptic:desmo-conecut-knuckle-3r`.
+
+**Final verdict: WATCH.** The ledger tool takes the worst level among the reasons not refuted with evidence: 12 of 14
+reasons are upheld, 2 are refuted (S2 and T1, both on the documented threshold). Rulings:
+`docs/alignment/desmo-conecut-knuckle-3r.rulings.json`.
+
+**How I checked.**
+- Every number was re-read from the verifier files (`verify/desmo-conecut-knuckle-3r_v_{bench,held}_frozen{,_blend}.json`),
+  the row's `verification` block, the audit's remeasure files and the `+blend` per-pose dumps, with my own short
+  scripts. I did not import the audit tool.
+- One new measurement: `tools/alignment_msub_rest_probe_model.py desmo-conecut-knuckle-3r bench` (CB_EXACT=1, nice 10,
+  OMP_NUM_THREADS=1, 1 process, 339 s, model unchanged). It reproduces the frozen claim (19.04, reach 0.7278, ib14
+  0.8924). Output: `remeasure/desmo-conecut-knuckle-3r_msub_rest_bench.json`. The farm was not used.
+
+### Rulings
+
+1. **continuity: upheld.** The held blend file reads static 23.19, full flood 23.19 (0 dropped), knn 32.18 (84
+   dropped, all forced; 271 of 355 forced poses connected), bench-grid 24.47. The linear-IK held file shows the same
+   pattern (knn 31.48, 77 dropped). The tool's line 503 rule (knn loss > 3 -> watch) is applied to the right number.
+   - Partly not apples to apples: the tool takes the newest verifier file by mtime (`_verifier_outputs`, line 185), here
+     the held blend file. On this row's own bench file the same check reads knn 20.67 vs 18.98 (-1.69): ok, and the
+     same -1.67 to -1.69 every sibling reads on its bench file (conecut, desmo-slipper, slipper-nose).
+   - Still upheld: no sibling has a held knn flood, so the held -8.99 cannot be shown to be a sample property, and the
+     full flood checks no skin at its intermediate envelope nodes (minarc mechanism verifier lines 329-331). Whether the
+     84 held poses can be reached without passing a contact pose is unmeasured.
+2. **reporting: upheld.** The row verdict (20:48:45) still starts "SCREENED, not a new lead" under status verified,
+   v_gap 18.98. morphs.json (21:12:45) carries the same text, with an empty alignment field.
+3. **NEW-pa-reread: upheld.** The model's own arrays reproduce: the cap angle is above the 34.47 gate for K 0-8.995,
+   above 60 for K 0-3.14, and self-locking only for K 0-0.326; at K 4.577 it is 52.71. The linear read at mu 0.15 gives
+   86.52 (dK_lim 0, s1-pa-cap), and at mu 0.135 it gives 13.31. tan(43 - 35.05) = 0.1397. In the code (lines 226-243),
+   s1-pa-cap cuts only when `s1_read == "linear"`; the claim uses `built`. This is a label, and its feel is unmeasured.
+4. **NEW-friction-cliff: upheld.** The verifier's own `friction_probe`: a_s 9.60 binds at 44.75 (14.56), a_s 9.65 at
+   43.0 (15.17), psi 150.2 at 46.0 (13.94), mu 0.17 at 45.5 (14.56). All are below the held stroke of 46.27.
+5. **NEW-silent-check: upheld.** RC_MIN is imported (line 58) and used only in `lim_by_gate` (line 376). The cut dict
+   has no radius entry. rc_min is 1.01 and the ridge 0.247 mm; worst-tolerance slop is 0.281 deg, over 0.25.
+6. **M3: upheld.** The plate-to-horn radial gap is 0.150 mm on all 372 bench and 861 held poses: the rule's own value
+   everywhere. plate_hubK is 1.23 mm. No CAD of this design exists (pipeline/ and judge/ have no desmo-conecut entry),
+   so the hub-2 relief pocket is unmodelled.
+7. **T3: upheld.** Held th 5.006 at i 1054 (dK 46.27, dth/dK 0.403). 5.006 - 0.403 x 0.227 = 4.91, and with 0.281
+   deg it is 4.89. 46.27 + 0.227 = 46.497 is still inside stop B at 46.5, so the play is physically available there. No
+   model carries a slop state.
+8. **S2: refuted.** The measurement is confirmed: part-weighted 0.8844 vs sample-weighted 0.8923, which is +0.79
+   points. The documented threshold is TH part_weight_watch 3.0 (ALIGNMENT.md section 5), and the tool's own sampling
+   check reads ok. There is no rank effect: about 19.77 when part-weighted, behind all three siblings either way.
+9. **T1: refuted.** The numbers are confirmed from the `+blend` dumps. Bench: 33 taken poses under 2 mm, 3 under 1 mm,
+   closest 0.072 mm, 4 of 8 overhead poses under 2 mm. Held: 71 / 13 / 0.325 mm, 10 of 18 overhead under 2 mm. The 1-2
+   mm shell is 16.09. Near-touch is report-only by the user's 2026-10-17 ruling (CLAUDE.md decisions 3 and 6), and
+   `c_near_touch` keeps the level at ok (lines 277-281; SUPERSEDED in the self-test). A watch here applies the retired
+   shell gate. The numbers stay in this report.
+10. **NEW-ws-inband: upheld.** Workspace in-band at elevation 90-140 is 0.8308 (16.83 % of metal above 14 mm, max
+    30.74 mm), against 0.8924 on the scored clip frames. The workspace number is unscored and off the 1 cm goal.
+11. **G4: upheld, now measured on this row.** m_sub at rest: n 205, min 0.0, p10 0.267, under 1 deg on 50, under 2 deg
+    on 65, under 5 deg on 107. This is identical to conecut. Moved poses: m_sub min 10.805, m_eff min 5.181. m_plain at
+    rest min 5.389.
+12. **G3: upheld.** There is no CAD, R17, cuff twist or drag reading anywhere.
+13. **R1: upheld.** The row verdict still says "mu 0.15 on BOTH stages", but the verification text says "mu 0.15 is
+    nominal only". The board's sweep_gap of 86.19 is not the sweep's best: the sweep file's minimum is 13.18 (k0, cell
+    A, 146 rows). That is a display error, and an unflattering one.
+14. **P2: upheld.** Concept doc line 15 cites the held stroke of 46.27. The "46.5 = lead dK_lim" match is slipper-nose
+    `claims.lead_mu050.dK_lim` (a mu 0.05 friction limit; that row's frozen dK_lim is 49.8), so it does not show the
+    value was chosen without held data. The bench claim does not depend on it, and the held drop is 4.21 < 6.
+
+### Missed (gaming the auditor did not list)
+
+None found. I checked these:
+- **Claim selection:** two configs were worn exact (r_c 16.0 at 19.27, k57 at 19.04). k57 was pre-registered at 19:58
+  (commit b368ebf), before the claim's exact wear, and was chosen on fast 13.31 vs 13.54.
+- **The verified number is 0.06 better than the claim's own:** this comes from the verifier's blended-law IK, which
+  follows the groove as built. The linear-law IK leaves the pin up to 0.162 mm off the groove on 93 of 184 fit poses.
+  The blend is the more faithful reading.
+- **Thin new-metal sampling:** the plate has 8 samples and L1a has 8. The S2 arithmetic shows the effect is under 1
+  point.
+
+Instrument notes for the next audit (not gaming):
+- The continuity source depends on file mtime order.
+- The held overhead near-touch (10 of 18 poses under 2 mm) was not in the audit's table.
