@@ -287,3 +287,64 @@ per pose against that body at the family's 1 mm rule.
   97.83 -> 275.
 - Effect on the verified rows: **not measured.** In the lead family the crank only pivots on link 1b, so the expected
   effect is 0, but this audit did not wear them with the added pair.
+
+## Skeptic (2026-10-17 12:46 UTC)
+
+Run `skeptic:dogring-draglink-knuckle-3r`. Rulings: `docs/alignment/dogring-draglink-knuckle-3r.rulings.json`.
+Ledger entry by `skeptic`, 2026-10-17T12:46:25Z. Local, nice, OMP_NUM_THREADS=1, 1 process, $0 farm. Models,
+verifier, benches and judges unchanged.
+
+New raw material:
+- `tools/alignment_flood_dogring_verifier.py` (new adapter). It runs the continuity flood (`connected_report()`, the
+  function the claim's own `LS.frozen_flood` calls) inside the verifier harness (`wear --ring`, exact Bench(110,360),
+  frozen) on the corrected wear and on the claim wear.
+- Its output: `remeasure/dogring-draglink-knuckle-3r_vflood_bench.json`. Its static gaps reproduce 97.83 and 22.64 to
+  the digit.
+
+### Final verdict: WATCH
+
+5 reasons refuted with evidence, 8 upheld. Nothing reaches gamed, and the number on record (v_gap 97.83, refuted)
+stands.
+
+### Rulings
+
+| key | ruling | evidence (short; full text in the rulings file) |
+|---|---|---|
+| fast_frozen | **refuted** | The detector is for P3 / R3 search inflation, and that inflation is small here. The claimed config goes from fit_fast 17.19 to frozen 22.64: +5.45, inside the verified rows' 4.6-14, under ff_watch 14, and equal to the lead's +5.49. 17.19 is not a best of many: the sweep best is 16.57. The other +75.19 is the M3 clash, ruled under M3. The display is ruled under `reporting`. |
+| continuity | **refuted** | Measured here (`_vflood_bench.json`). Corrected wear: static 97.83, connected_full 97.83 (0 dropped; envelope 1062 ok, 607 / 607 forced connected), knn 97.83 (0 dropped). Loss 0 <= conn_watch 1. For the record: the literal bench-grid reading is 99.03 (4 dropped), and the claim wear reads full 22.64, knn 25.47 (+2.83), bench-grid 59.37. |
+| idle | **refuted** | Instrument false positive. `knee_moved` is set only in the two kneeless models; dogring line 392 only reads it. K.ang 86.20-151.67 is the pin knee's designed range. K moves 44.04 deg on the claim wear and 2.8 / 2.5 deg (bench / held) on the wear on record, both above idle_deg 2.0. See missed 1. |
+| sampling | upheld | horn [0.227, 16.8 mm, 32]. It is sampled on the family's 2 mm grid (nn 2.0), so it is not thin. But 77 % of its metal is beyond 14 mm. The part-weighted delta is +1.23, under 3. |
+| complexity | upheld | There is no `mechanism` record on the row, and the dashboard shows null. The only number on file is prose (events line 582). |
+| reporting | upheld | The bench table shows 17.19 (score 93.75) in 'Sweep best gap' and 'Claimed gap' next to 'refuted'. The column is also mislabelled: the sweep best is 16.57. |
+| judgement:M3 | upheld | -0.18 mm on 183 of 374 taken poses (held 442 of 872); arm_L1b_pass_K_max_deg 2.8; lt1 374 / 374. Re-worn to the digit. |
+| judgement:NEW-silent-check | **refuted** | It costs 0 on this claim, measured on both benches. With RING-L2 skipped (model frozen()) the wear gives 22.64 / 25.36, why.parts 0 / 0. With it re-instated (verifier ring_fix true) it gives 22.64 / 25.36, why.parts 0 / 0. Proposal A (M6) stays a proposal for future claims. |
+| judgement:G1 | **refuted** (level) | The counts are confirmed: bench 20 / 52 of 374, held 50 / 122 of 872, against the lead's 3 / 30 and 14 / 67; p10 0.06 mm. Near-touch is report-only, as documented (ALIGNMENT.md 2026-10-17.2, c_near_touch lvl ok, CLAUDE.md decisions 3 and 6). Scored contact depth is x1.77 the lead's, under T5. Same ruling as inband-rssr G1. |
+| judgement:M2 | upheld | EYE_R 4.0 (O8) against the stated O9 on MR63ZZ (O6 OD). Worn at 4.5: 22.76 / 97.95, +0.12. |
+| judgement:M5 | upheld | Missing. No dynamics / R17 / CAD file for this design; the doc's 'R17 ok' is static determinacy only. |
+| judgement:R3 | upheld | Missing spread. The sweep file has no frozen field, and no frozen records are in the cloud-sweep cache. Held +2.72 / +3.27 is a mitigation, not the spread. |
+| judgement:G5 | upheld | Re-derived with simplicity.py v2.2: 25.25-27.25 against the lead's 22.25. |
+
+### Missed by the auditor (for the next audit; not counted in this verdict)
+
+1. **The number on record is worn with its drive parked.**
+   - Every pose that survives the verifier's clash check has K <= 2.8 deg on the bench and 2.5 deg held
+     (`verify _v_*_frozen.json checks.arm_L1b_pass_K_max_deg`). Every K-open pose from 3.2 / 3.1 deg up is dropped.
+   - So 97.83 is the lead's chain with K essentially on stop A. The drive is 0.8 / 0.5 deg above `idle_deg` 2.0.
+   - The audit's "the drive: ring up to 32 deg, K 0-44 deg" and proposal D's `dK_taken_max` 44.04 / 45.73 describe the
+     refuted claim wear, not the wear the 97.83 belongs to.
+   - Proposal: the tool's idle reading, and every "what the wearer gets" span, should be read on the pose set of the
+     number on record (the corrected taken set) whenever a verifier drops poses.
+   - Not gaming: it makes the number worse. It does mean the drive contributes no tracking to the record.
+2. **The refuted claim leaned on envelope stepping stones.**
+   - Claim-wear flood: knn 25.47, which loses 2.83, just under the 3-point escalation (`conn_gamed`).
+   - Bench-grid 59.37, with 128 forced poses dropped and 22 of them without a taken neighbour.
+   - The full-envelope reading (the rule) keeps 22.64.
+   - It is moot for this refuted row. Record it for a repaired re-claim, whose arm lift will move the forced poses.
+
+### Proposals (measurement changes; none is an input to this verdict)
+
+- **Read idle and spans on the corrected set.** As in missed 1. Effect on this row: idle reads K 2.8 / 2.5 deg, still
+  ok at 2.0. Effect on the other rows: only rows whose verifier drops K-open poses; not measured.
+- **Store the flood next to the verifier's corrected wear.** When a verifier drops poses, the flood should run on the
+  corrected wear in the same harness, so the continuity check reads the number on record.
+  `tools/alignment_flood_dogring_verifier.py` is the pattern, and it costs about 2 s on top of the wear.
