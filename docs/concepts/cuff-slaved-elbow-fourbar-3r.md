@@ -72,9 +72,10 @@ test as a penalty (0 iff ws closure >= 0.80, follow >= 0.95, every part <= 75 mm
 |---|---|---|---|---|---|
 | A (arm-cuff slave) | 2727 | **0.789** (a part escapes the skin, 400 mm) | **0.833** | 42 | 0.678 / 0.733 |
 | B (base tether) | 1253 | 0.489 | 0.783 | 33 | 0.481 / 0.783 |
+| A, the other three assembly branches (s2, sgn) = (-1, 1) / (1, 1) / (1, -1) | 643 / 524 / 582 | 0.747 / 0.653 / 0.739 | 0.667 / 0.750 / 0.833 | | best kill-test layouts at closure 0.41 / 0.58 / 0.46 |
 
-Not one layout of 3980 meets any one of the three conditions at the same time as the other two; no layout reaches
-closure 0.80 or follow 0.95 at all. **The kill test fails on all three counts.** (The plain cap 3R closes 281/360 =
+No layout of the 5729 reaches ws closure 0.80 or kinematic follow 0.95 at all, let alone with every part <= 75 mm.
+**The kill test fails on all three counts.** (The plain cap 3R closes 281/360 =
 0.781 at the same seats; the slave can only remove poses from the free 4R path, and here it removes more than it
 saves.)
 
@@ -83,3 +84,103 @@ Where the arm cell loses its ws poses (best kill-test layout, Bench(110,360), fi
 circle round J3 that never comes within d0 + L - 5 of J1: the 4R path's own th window), transmission < 30 4-6, loop
 singular 3, root only on the other branch 1. Overhead (elev >= 140, 28 poses): taken 7-9, no root 9-11, 2R open 9.
 The binder (-75, 60, +60) is lost on both readings (no root / transmission 27 deg).
+
+## Honest kit numbers (Bench(60,160) fast, K3 march + K2 dense + K6 + audit, q 1.0)
+
+| config | gap | score | reach | follow | ib14 | ib10 | contact | ws closure | note |
+|---|---|---|---|---|---|---|---|---|---|
+| plain cap-pole O20 3R (control, same kit; cruciate-knuckle-3r) | 63.18 | 77.0 | 0.794 | 1.0 | 0.375 | 0.192 | 0 | | the bar |
+| arm seed 1 (judge's 41.84 proxy) | 119.23 | 56.6 | 0.731 | 0.617 | 0.210 | | 0 | 0.731 | final layering (181.18 with the spec's layering) |
+| arm seed 2 (48.36 proxy) | 171.13 | 37.8 | 0.313 | 0.450 | 0.276 | | 0 | 0.463 | |
+| tether seed 1 / 2 (44.10 / 47.61 proxy) | 216.14 / 239.82 | | 0.225 / 0.194 | 0.083 / 0.083 | 0.280 / 0.075 | | 0 | 0.35 / 0.25 | |
+| cell B (tether) best, 143 configs | 132.86 | 51.7 | 0.300 | 0.750 | 0.371 | | 0 | 0.456 | B1 / crank A / coupler 0-0.17 in band |
+| **cell A (arm) best** | **110.11** | **59.96** | 0.750 | 0.683 | 0.216 | | 0 | 0.738 | near-touch gap 110.11, min metal 1.16 mm |
+
+Best params (cell A): d0 29.78, L 30.37, d1 73.61, sb 43.49, db 45.0, rho 60.82, bx -170.87, by 22.0, home 89.21, s2 -1,
+sgn -1. Per member in band: hub J1 1.00, hub J3 0.69, neck 0.76, hub B1 0.34, tab 0.31; hub A0 0.00, hub A1 0.00,
+hub B0 0.04, crank A 0.00, link 1 0.00, coupler 0.00, crank B 0.09. Kit hub levels: J1 54, A0 97, A1 112, B0 130,
+B1 68, J3 70 mm. Mass 243 g Ti. Every elbow part is a rigid body whose level is the highest skin it passes over across
+the taken poses, and the elbow wanders over the whole shoulder dome: **the elbow's per-pose spread sets in-band, as the
+judge said; the binder poses are lost, not served**.
+
+## Frozen exact on the verification bench (lesson c)
+
+The 110.11 shape (every underside fitted on Bench(60,160) fast, frozen) worn on Bench(110,360), exact libigl path,
+K2 dense + K6 rebuilt there (`scratchpad/cse/frozen.py`): **gap 117.71 (score 57.20)**, reach 0.689, follow 0.673,
+ib14 0.2175, ib10 0.091, contact 0.0062 (min metal **-2.86 mm**: 3 poses penetrate), near-touch gap 117.71, ws closure
+0.733, K2 flips 32, collide 0.044, **overhead (elev >= 140) 7 / 28**. The plain cap 3R through the same protocol reads
+56.40 frozen exact (T-0 control): this cell is 61 points behind it.
+
+Binder table (Bench(110,360) nearest ws pose, frozen best):
+
+| binder | bench pose | closes | K2 | collides | taken |
+|---|---|---|---|---|---|
+| (-75, 60, +60) | (-75, 60, 60), idx 128 | yes | yes | **yes** | no |
+| (0, 150, 0) | (0, 150, -15), idx 209 | **no** | | | no |
+| (30, 150, 0) | (30, 135, 0), idx 262 | **no** | | | no |
+| (0, 105, 0) | (0, 105, 15), idx 205 | yes | yes | **yes** | no |
+
+## Red team (my own best config)
+
+- **The motion that jams** (dense K2 on the best, first failing check): Raise overhead 11/11 and Drink / Comb 10/10, 9/9
+  are followed, but **Reach a high shelf loses 5 of 9** transitions - from (72, 71, -72) toward (78-82, 105-132,
+  -78..-82) the slave loop has NO ROOT 16-18 deg into the motion (an internally rotated climb); **Wash opposite shoulder
+  loses 7 of 9** - from (42, 8, -37) toward the cross-body (120-145, 30-60) the root vanishes 18-28 deg in; **Reach back
+  pocket loses 3 of 8** within 4 deg of (-63, 36, 75) -> (-80, 39, 101). Two more transitions are a root SWITCH (J1
+  jumps 166-167 deg, the A0 axis 59 deg in one 2-deg step). A static bench cannot see these; the dense K2 does.
+- **The point that pinches**: fast min metal 1.16 mm over the taken poses (near-touch gap = plain gap); frozen on the
+  big bench three poses penetrate to -2.86 mm.
+- **The optimistic numbers**: (1) the proxy's "every part <= 75 mm" (centre rays; the O20 disc edges are 90-130 mm);
+  (2) the proxy's follow 0.918 (static closure of the clip frames; continuity along the motion is 0.68-0.83 kinematic,
+  0.62-0.70 honest); (3) the judge's +20 calibration (proxy 41.84 -> honest 119.23 for the same seed: +77, because the
+  proxy has no layering, no disc edges and no continuity).
+- **Loads** (not measured, stated): crank B is a two-force member that carries the wearer's moment about J3 between the
+  arm cuff and the elbow plate; at the 30-deg transmission floor its force is 2x the tangential load. The arm-end tab
+  makes the cuff part of the loop, so cuff slip on the arm moves B1 and with it the elbow (the self-aligning slides must
+  sit below BOTTOM, outside the loop).
+
+## Search and convergence (Bench(60,160) fast, honest kit, objective = the 1 mm near-touch gap)
+
+Honest sweep `docs/concepts/sweeps/cuff-slaved-elbow-fourbar-3r.json`, in time order: the entries tagged `model: v1`
+ran before the layering fix (more collisions, every one of them worse); the gate is read on the `v2` entries (final
+model). Runs (local, niced, <= 2 processes; the farm is closed): the kinematic kill-test ES (5729 layouts over the
+four assembly branches (s2, sgn) and the tether cell, `scratchpad/cse/kin*.json`), then honest (mu, lambda)-ES runs
+from the kill-test elite (16 layouts), from the four seeds, from the best two layouts of each other branch and a
+restart from the honest top 4 twice. Branches: (s2, sgn) = (-1, -1) holds every good layout (kin obj 27.1; the others
+49-99, honest 135.42 at best); cell B (tether) honest best 132.86.
+
+GATE_PLACEHOLDER
+
+## Verdict
+
+**DEAD at gate 0.** Best honest 107.61 fast (score 60.87) against the plain cap-pole 3R's 63.18 through the same kit
+(round gate bar 17.5 frozen exact); frozen exact Bench(110,360) of the 110.11 shape 117.71 against the control's 56.40.
+The lead's kill test fails on all three counts over 5729 layouts (ws closure max 0.789 < 0.80, kinematic follow max
+0.833 < 0.95, every part <= 75 mm only at closure <= 0.68). Binding, measured: (1) the slave loop's ROOT vanishes along
+internally rotated climbs, cross-body and behind-back motions (dense K2), and on 53 ws poses; (2) the 4R path's own
+window (the elbow 2R never closes on 43-49 ws poses); (3) the elbow parts (A0, A1, B0, crank A, link 1, coupler) are
+0-4 % in band at 76-130 mm because they roam the shoulder dome.
+
+## New knowledge (beyond this morphology)
+
+1. **A slave crank grounded on the arm cuff cannot follow internal rotation.** The loop's root exists only while the
+   arm-fixed pin B1 stays within reach of the crank-A pin; an internally rotated climb (Reach a high shelf) or a
+   cross-body sweep carries B1 round J3 out of that reach and the root disappears mid-motion. Any 1-DOF coupling loop
+   closed THROUGH the arm inherits the arm's axial rotation in its root existence - a bench that scores poses one by
+   one cannot see it (proxy follow 0.918 vs dense 0.62-0.83).
+2. **Centre-ray hub levels are 15-60 mm optimistic for pins that roam the dome.** The O20 disc edge (K4) reads A0 95 /
+   A1 90 / B0 121 where the centre ray reads 62 / 75 / 62. Any proxy that marches only pin centres (anch.py, lens 1's
+   opt.py) overstates in-band for every moving pin; the "every part <= 75 mm" screens of round 102 lens 1 were made
+   that way.
+3. **The proxy -> honest calibration (+20) does not hold for loop mechanisms**: +77 on arm seed 1 (41.84 -> 119.23):
+   the proxy has no layering (the spec's layering collided in 97 % of closing poses), no disc edges, no continuity.
+4. **A virtual J2 must make its extra pins move LESS than the J2 axis would, not just stay off the J2 ray**: here the
+   elbow pins wander as far as a plain J2 hub (97-130 mm at the best), so the 3R's hub-2 problem comes back in three
+   pins instead of one.
+
+## What next
+
+Lens 1's slaved-elbow branch is closed with these numbers; the J3 closer's ceiling statement can cite: no 1-DOF slave
+(arm-grounded or base-grounded) of a cap-pole 4R path closes >= 0.80 of Bench(110,360) ws with continuous motion. The
+remaining J2 lever named by the planner (a J2 with no metal on its axis) is now down to the open four-bar
+(remote-pole-fourbar-j2-3r, pick 1, running) - and finding 2 applies to its pins too.

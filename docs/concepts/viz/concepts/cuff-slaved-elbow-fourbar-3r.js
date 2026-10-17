@@ -8,13 +8,14 @@
  * solve() (docs/concepts/models/cuff-slaved-elbow-fourbar-3r.py). Working range (check): 2R margin >= 5 deg, loop slope
  * |df/dsigma| >= sin 8 deg, four-bar transmissions at A1 / B0 in [30, 150] deg, pins >= 22 deg apart. 3 ACTIVE (J1, A0,
  * J3) + 3 PASSIVE pins (A1, B0, B1), 0 passive translations, six O20 v5 stacks. Drawn at the screen's best HONEST
- * config; hub levels = the kit's fitted K4 levels for that config (see the row / the .md). */
+ * config (kit 110.11 on Bench(60,160) fast, 117.71 frozen exact Bench(110,360); DEAD at gate 0, plain cap 3R 63.18 through
+ * the same kit); hub levels = the kit's fitted K4 levels for that config (J1 54, A0 97, A1 112, B0 130, B1 68, J3 70 mm). */
 (function () {
   const K = (typeof window !== 'undefined' ? window : globalThis).KIN, V = K.V, M = K.M, D2R = K.D2R;
   const P = { az: 43.15, el: 59.93, wd: 92.03, wa: -9.03,
-              d0: 31.6, L: 29.5, d1: 71.0, sb: 36.3, db: 43.6, rho: 53.7, bx: -168.1, by: 22.2, home: 27.3, s2: -1, sgn: -1,
+              d0: 29.784, L: 30.373, d1: 73.614, sb: 43.486, db: 45.0, rho: 60.818, bx: -170.868, by: 22.0, home: 89.205, s2: -1, sgn: -1,
               MU: 30, MARGIN: 5, PINSEP: 22,
-              lv: { J1: 53, A0: 95, A1: 90, B0: 121, B1: 70, J3: 70 }, hub_r: 10, stack: 12.25, neck_deg: 25, cuff_at: 165 };
+              lv: { J1: 54, A0: 97, A1: 112, B0: 130, B1: 68, J3: 70 }, hub_r: 10, stack: 12.25, neck_deg: 25, cuff_at: 165 };
   const ID = 'cuff-slaved-elbow-fourbar-3r', NAME = 'Cuff-slaved elbow: 4R path at the cap pole, elbow slaved to an arm-cuff pin';
   const ang = (u, v) => V.angle(u, v);
   const gcv = (c, ref, psi, d) => {
