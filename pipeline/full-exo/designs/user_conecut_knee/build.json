@@ -3318,5 +3318,2259 @@
     "past_window_deg": -0.003
    }
   }
+ },
+ "drive_posed": {
+  "drive lobe follower roller | D9-02": [
+   -0.04,
+   -1.51
+  ],
+  "drive nose dowel | D8-02a": [
+   -0.027,
+   -29.31
+  ],
+  "D9-01 | D8-02a": [
+   0.106,
+   -15.75
+  ],
+  "D9-01 | D9-02": [
+   0.378,
+   -15.75
+  ],
+  "D9-01 | D8-02b": [
+   0.15,
+   -10.03
+  ],
+  "D9-01 | D8-03": [
+   0.109,
+   0.0
+  ],
+  "D9-01 | J2 cap": [
+   1.333,
+   0.0
+  ],
+  "D9-01 | K clock-spring cap": [
+   2.879,
+   0.0
+  ],
+  "drive lobe follower roller | J2 cap": [
+   0.659,
+   0.0
+  ],
+  "drive lobe follower roller | D8-03": [
+   0.531,
+   0.0
+  ],
+  "drive follower pin | D9-02": [
+   1.421,
+   -1.17
+  ],
+  "drive follower inner-ring shim | D9-02": [
+   0.788,
+   -29.31
+  ],
+  "drive nose dowel | K clock-spring cap": [
+   5.103,
+   0.0
+  ],
+  "drive nose dowel | D8-02b": [
+   3.885,
+   0.0
+  ],
+  "D8-02a | D8-02b": [
+   0.15,
+   -29.31
+  ],
+  "D8-02a | K clock-spring cap": [
+   0.2,
+   -29.31
+  ],
+  "D8-02a | D8-01": [
+   0.15,
+   -29.31
+  ],
+  "drive crank pivot pin clip | D9-01": [
+   0.581,
+   -6.51
+  ],
+  "D9-02 | D8-02b": [
+   3.637,
+   -15.75
+  ],
+  "drive crank bearing 1 | D8-02b": [
+   0.152,
+   -1.51
+  ],
+  "drive crank inner-ring spacer | D9-01": [
+   1.248,
+   -29.31
+  ],
+  "drive crank preload wave washer | D9-01": [
+   0.507,
+   -8.52
+  ],
+  "drive crank preload inner-ring shim | D9-01": [
+   1.248,
+   -29.31
+  ],
+  "drive crank pivot pin clip | D8-03": [
+   8.3,
+   0.0
+  ],
+  "drive crank preload wave washer | D8-03": [
+   8.149,
+   0.0
+  ],
+  "drive crank pivot pin clip | J2 cap": [
+   6.887,
+   0.0
+  ],
+  "J3 stop dowel | D8-03": [
+   0.044,
+   -1.51
+  ],
+  "contact drive lobe follower roller | D9-02 (driven frames: min, max of the per-frame min)": [
+   42,
+   -0.042,
+   0.003
+  ],
+  "contact drive nose dowel | D8-02a (driven frames: min, max of the per-frame min)": [
+   42,
+   -0.028,
+   -0.015
+  ]
+ },
+ "check": [
+  {
+   "label": "arm at side",
+   "bench_pose": 60,
+   "pose": [
+    -90.0,
+    0.0,
+    75.0
+   ],
+   "taken": true,
+   "state": 1,
+   "joint_features_max_mm": 0.143,
+   "rigid_non_drive_max_mm": 1.3298,
+   "strap_samples_outside_hub_zones_max_mm": 0.9873,
+   "drive_samples_mm": {
+    "crank": [
+     7.5375,
+     7.1538,
+     7.5375
+    ],
+    "roller": [
+     0.1,
+     0.0695,
+     0.0029
+    ],
+    "horn": [
+     1.0548,
+     0.985,
+     1.0095
+    ]
+   },
+   "within_0p5": true,
+   "per_part": {
+    "hub1": [
+     0.143,
+     0.0,
+     0.143
+    ],
+    "hubK (slot band)": [
+     1.4195,
+     56
+    ],
+    "hubK": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "hub2 (slot band)": [
+     1.4199,
+     56
+    ],
+    "hub2": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "hub3 (slot band)": [
+     0.1001,
+     36
+    ],
+    "hub3": [
+     0.0001,
+     0.0001,
+     0.0001
+    ],
+    "E": [
+     1.3298,
+     1.0376,
+     1.3298
+    ],
+    "boss": [
+     0.0001,
+     0.0001,
+     0.0001
+    ],
+    "pad": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "knee": [
+     0.8501,
+     0.0,
+     0.8501
+    ],
+    "crank": [
+     7.5375,
+     7.1538,
+     7.5375
+    ],
+    "roller": [
+     0.1,
+     0.0695,
+     0.0029
+    ],
+    "horn": [
+     1.0548,
+     0.985,
+     1.0095
+    ],
+    "L1a": [
+     1.1304,
+     1.1304,
+     0.0
+    ],
+    "L1a outside hub zones": [
+     null,
+     0,
+     null,
+     null
+    ],
+    "L1b": [
+     0.7019,
+     0.5812,
+     0.7019
+    ],
+    "L1b outside hub zones": [
+     0.7019,
+     24,
+     0.8333,
+     0.2441
+    ],
+    "L2": [
+     1.6272,
+     0.8455,
+     1.6272
+    ],
+    "L2 outside hub zones": [
+     0.9873,
+     108,
+     0.787,
+     0.0855
+    ]
+   },
+   "frame_dev_mm": 7.4e-05,
+   "res_deg": 0.0001,
+   "knee_angle": 59.5,
+   "q3p_deg": 1.137,
+   "stops": {
+    "K": {
+     "angle_deg": -8.795,
+     "from_stop_lo_deg": 54.054,
+     "to_stop_hi_deg": 8.795,
+     "inside": true
+    },
+    "J2": {
+     "angle_deg": 3.194,
+     "from_stop_lo_deg": 19.135,
+     "to_stop_hi_deg": 98.874,
+     "inside": true
+    },
+    "J3": {
+     "angle_deg": 1.137,
+     "model_q3p_deg": 1.137,
+     "frame_vs_model_deg": 0.0,
+     "dowel_angle_in_link2_deg": 1.137,
+     "from_stop_lo_deg": 113.04,
+     "to_stop_hi_deg": 121.605,
+     "inside": true,
+     "dowel_r_in_link2_mm": 7.5
+    }
+   }
+  },
+  {
+   "label": "first",
+   "bench_pose": 0,
+   "pose": [
+    30.0,
+    3.0,
+    -30.0
+   ],
+   "taken": true,
+   "state": 1,
+   "joint_features_max_mm": 0.1424,
+   "rigid_non_drive_max_mm": 1.3299,
+   "strap_samples_outside_hub_zones_max_mm": 0.9873,
+   "drive_samples_mm": {
+    "crank": [
+     7.5375,
+     7.1538,
+     7.5375
+    ],
+    "roller": [
+     0.1,
+     0.0695,
+     0.0029
+    ],
+    "horn": [
+     1.0548,
+     0.985,
+     1.0095
+    ]
+   },
+   "within_0p5": true,
+   "per_part": {
+    "hub1": [
+     0.1424,
+     0.0,
+     0.1424
+    ],
+    "hubK (slot band)": [
+     1.4195,
+     56
+    ],
+    "hubK": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "hub2 (slot band)": [
+     1.4199,
+     56
+    ],
+    "hub2": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "hub3 (slot band)": [
+     0.1001,
+     36
+    ],
+    "hub3": [
+     0.0001,
+     0.0001,
+     0.0001
+    ],
+    "E": [
+     1.3299,
+     1.0376,
+     1.3299
+    ],
+    "boss": [
+     0.0001,
+     0.0001,
+     0.0001
+    ],
+    "pad": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "knee": [
+     0.8502,
+     0.0,
+     0.8502
+    ],
+    "crank": [
+     7.5375,
+     7.1538,
+     7.5375
+    ],
+    "roller": [
+     0.1,
+     0.0695,
+     0.0029
+    ],
+    "horn": [
+     1.0548,
+     0.985,
+     1.0095
+    ],
+    "L1a": [
+     1.1304,
+     1.1304,
+     0.0
+    ],
+    "L1a outside hub zones": [
+     null,
+     0,
+     null,
+     null
+    ],
+    "L1b": [
+     0.7018,
+     0.5812,
+     0.7018
+    ],
+    "L1b outside hub zones": [
+     0.7018,
+     24,
+     0.8333,
+     0.2441
+    ],
+    "L2": [
+     1.6272,
+     0.8454,
+     1.6272
+    ],
+    "L2 outside hub zones": [
+     0.9873,
+     108,
+     0.787,
+     0.0855
+    ]
+   },
+   "frame_dev_mm": 0.000106,
+   "res_deg": 0.0,
+   "knee_angle": 59.9,
+   "q3p_deg": -3.238,
+   "stops": {
+    "K": {
+     "angle_deg": -1.507,
+     "from_stop_lo_deg": 61.342,
+     "to_stop_hi_deg": 1.507,
+     "inside": true
+    },
+    "J2": {
+     "angle_deg": 6.579,
+     "from_stop_lo_deg": 22.519,
+     "to_stop_hi_deg": 95.489,
+     "inside": true
+    },
+    "J3": {
+     "angle_deg": -3.238,
+     "model_q3p_deg": -3.238,
+     "frame_vs_model_deg": 0.0,
+     "dowel_angle_in_link2_deg": -3.238,
+     "from_stop_lo_deg": 108.666,
+     "to_stop_hi_deg": 125.98,
+     "inside": true,
+     "dowel_r_in_link2_mm": 7.5
+    }
+   }
+  },
+  {
+   "label": "middle",
+   "bench_pose": 97,
+   "pose": [
+    0.0,
+    45.0,
+    -30.0
+   ],
+   "taken": true,
+   "state": 0,
+   "joint_features_max_mm": 0.1444,
+   "rigid_non_drive_max_mm": 1.3298,
+   "strap_samples_outside_hub_zones_max_mm": 0.9873,
+   "drive_samples_mm": {
+    "crank": [
+     7.5376,
+     7.1538,
+     7.5376
+    ],
+    "roller": [
+     0.1,
+     0.0695,
+     0.0029
+    ],
+    "horn": [
+     1.0548,
+     0.985,
+     1.0095
+    ]
+   },
+   "within_0p5": true,
+   "per_part": {
+    "hub1": [
+     0.1444,
+     0.0037,
+     0.1444
+    ],
+    "hubK (slot band)": [
+     1.4195,
+     56
+    ],
+    "hubK": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "hub2 (slot band)": [
+     1.4199,
+     56
+    ],
+    "hub2": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "hub3 (slot band)": [
+     0.1,
+     36
+    ],
+    "hub3": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "E": [
+     1.3298,
+     1.0376,
+     1.3298
+    ],
+    "boss": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "pad": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "knee": [
+     0.8501,
+     0.0001,
+     0.8501
+    ],
+    "crank": [
+     7.5376,
+     7.1538,
+     7.5376
+    ],
+    "roller": [
+     0.1,
+     0.0695,
+     0.0029
+    ],
+    "horn": [
+     1.0548,
+     0.985,
+     1.0095
+    ],
+    "L1a": [
+     1.1305,
+     1.1305,
+     0.0
+    ],
+    "L1a outside hub zones": [
+     null,
+     0,
+     null,
+     null
+    ],
+    "L1b": [
+     0.7019,
+     0.5812,
+     0.7019
+    ],
+    "L1b outside hub zones": [
+     0.7019,
+     24,
+     0.8333,
+     0.2441
+    ],
+    "L2": [
+     1.6273,
+     0.8455,
+     1.6273
+    ],
+    "L2 outside hub zones": [
+     0.9873,
+     108,
+     0.787,
+     0.0855
+    ]
+   },
+   "frame_dev_mm": 8.7e-05,
+   "res_deg": 0.0001,
+   "knee_angle": 59.4,
+   "q3p_deg": 13.462,
+   "stops": {
+    "K": {
+     "angle_deg": 0.0,
+     "from_stop_lo_deg": 62.849,
+     "to_stop_hi_deg": 0.0,
+     "inside": true
+    },
+    "J2": {
+     "angle_deg": 54.647,
+     "from_stop_lo_deg": 70.587,
+     "to_stop_hi_deg": 47.421,
+     "inside": true
+    },
+    "J3": {
+     "angle_deg": 13.462,
+     "model_q3p_deg": 13.462,
+     "frame_vs_model_deg": 0.0,
+     "dowel_angle_in_link2_deg": 13.462,
+     "from_stop_lo_deg": 125.365,
+     "to_stop_hi_deg": 109.28,
+     "inside": true,
+     "dowel_r_in_link2_mm": 7.5
+    }
+   }
+  },
+  {
+   "label": "highest",
+   "bench_pose": 140,
+   "pose": [
+    45.0,
+    165.0,
+    -90.0
+   ],
+   "taken": true,
+   "state": 1,
+   "joint_features_max_mm": 0.1412,
+   "rigid_non_drive_max_mm": 1.3298,
+   "strap_samples_outside_hub_zones_max_mm": 0.9873,
+   "drive_samples_mm": {
+    "crank": [
+     7.5376,
+     7.1539,
+     7.5376
+    ],
+    "roller": [
+     0.1,
+     0.0695,
+     0.0029
+    ],
+    "horn": [
+     1.0548,
+     0.985,
+     1.0095
+    ]
+   },
+   "within_0p5": true,
+   "per_part": {
+    "hub1": [
+     0.1412,
+     0.0,
+     0.1412
+    ],
+    "hubK (slot band)": [
+     1.4195,
+     56
+    ],
+    "hubK": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "hub2 (slot band)": [
+     1.4199,
+     56
+    ],
+    "hub2": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "hub3 (slot band)": [
+     0.1,
+     36
+    ],
+    "hub3": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "E": [
+     1.3298,
+     1.0375,
+     1.3298
+    ],
+    "boss": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "pad": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "knee": [
+     0.8502,
+     0.0001,
+     0.8502
+    ],
+    "crank": [
+     7.5376,
+     7.1539,
+     7.5376
+    ],
+    "roller": [
+     0.1,
+     0.0695,
+     0.0029
+    ],
+    "horn": [
+     1.0548,
+     0.985,
+     1.0095
+    ],
+    "L1a": [
+     1.1304,
+     1.1304,
+     0.0
+    ],
+    "L1a outside hub zones": [
+     null,
+     0,
+     null,
+     null
+    ],
+    "L1b": [
+     0.7019,
+     0.5812,
+     0.7019
+    ],
+    "L1b outside hub zones": [
+     0.7019,
+     24,
+     0.8333,
+     0.244
+    ],
+    "L2": [
+     1.6273,
+     0.8455,
+     1.6273
+    ],
+    "L2 outside hub zones": [
+     0.9873,
+     108,
+     0.787,
+     0.0855
+    ]
+   },
+   "frame_dev_mm": 0.000101,
+   "res_deg": 0.0002,
+   "knee_angle": 99.6,
+   "q3p_deg": 113.605,
+   "stops": {
+    "K": {
+     "angle_deg": -3.906,
+     "from_stop_lo_deg": 58.943,
+     "to_stop_hi_deg": 3.906,
+     "inside": true
+    },
+    "J2": {
+     "angle_deg": 5.465,
+     "from_stop_lo_deg": 21.405,
+     "to_stop_hi_deg": 96.603,
+     "inside": true
+    },
+    "J3": {
+     "angle_deg": 113.605,
+     "model_q3p_deg": 113.605,
+     "frame_vs_model_deg": 0.0,
+     "dowel_angle_in_link2_deg": 113.604,
+     "from_stop_lo_deg": 225.508,
+     "to_stop_hi_deg": 9.137,
+     "inside": true,
+     "dowel_r_in_link2_mm": 7.5
+    }
+   }
+  },
+  {
+   "label": "2nd highest",
+   "bench_pose": 152,
+   "pose": [
+    60.0,
+    165.0,
+    -90.0
+   ],
+   "taken": true,
+   "state": 1,
+   "joint_features_max_mm": 0.1441,
+   "rigid_non_drive_max_mm": 1.3298,
+   "strap_samples_outside_hub_zones_max_mm": 0.9873,
+   "drive_samples_mm": {
+    "crank": [
+     7.5375,
+     7.1538,
+     7.5375
+    ],
+    "roller": [
+     0.1,
+     0.0695,
+     0.0029
+    ],
+    "horn": [
+     1.0548,
+     0.985,
+     1.0095
+    ]
+   },
+   "within_0p5": true,
+   "per_part": {
+    "hub1": [
+     0.1441,
+     0.0029,
+     0.1441
+    ],
+    "hubK (slot band)": [
+     1.4195,
+     56
+    ],
+    "hubK": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "hub2 (slot band)": [
+     1.4199,
+     56
+    ],
+    "hub2": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "hub3 (slot band)": [
+     0.1,
+     36
+    ],
+    "hub3": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "E": [
+     1.3298,
+     1.0375,
+     1.3298
+    ],
+    "boss": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "pad": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "knee": [
+     0.8501,
+     0.0,
+     0.8501
+    ],
+    "crank": [
+     7.5375,
+     7.1538,
+     7.5375
+    ],
+    "roller": [
+     0.1,
+     0.0695,
+     0.0029
+    ],
+    "horn": [
+     1.0548,
+     0.985,
+     1.0095
+    ],
+    "L1a": [
+     1.1304,
+     1.1304,
+     0.0
+    ],
+    "L1a outside hub zones": [
+     null,
+     0,
+     null,
+     null
+    ],
+    "L1b": [
+     0.7019,
+     0.5812,
+     0.7019
+    ],
+    "L1b outside hub zones": [
+     0.7019,
+     24,
+     0.8333,
+     0.2441
+    ],
+    "L2": [
+     1.6272,
+     0.8454,
+     1.6272
+    ],
+    "L2 outside hub zones": [
+     0.9873,
+     108,
+     0.787,
+     0.0855
+    ]
+   },
+   "frame_dev_mm": 9.1e-05,
+   "res_deg": 0.0002,
+   "knee_angle": 101.6,
+   "q3p_deg": 116.771,
+   "stops": {
+    "K": {
+     "angle_deg": -21.592,
+     "from_stop_lo_deg": 41.258,
+     "to_stop_hi_deg": 21.592,
+     "inside": true
+    },
+    "J2": {
+     "angle_deg": -2.748,
+     "from_stop_lo_deg": 13.192,
+     "to_stop_hi_deg": 104.816,
+     "inside": true
+    },
+    "J3": {
+     "angle_deg": 116.771,
+     "model_q3p_deg": 116.771,
+     "frame_vs_model_deg": 0.0,
+     "dowel_angle_in_link2_deg": 116.771,
+     "from_stop_lo_deg": 228.675,
+     "to_stop_hi_deg": 5.971,
+     "inside": true,
+     "dowel_r_in_link2_mm": 7.5
+    }
+   }
+  },
+  {
+   "label": "behind the back",
+   "bench_pose": 62,
+   "pose": [
+    -90.0,
+    30.0,
+    105.0
+   ],
+   "taken": true,
+   "state": 1,
+   "joint_features_max_mm": 0.1439,
+   "rigid_non_drive_max_mm": 1.3298,
+   "strap_samples_outside_hub_zones_max_mm": 0.9873,
+   "drive_samples_mm": {
+    "crank": [
+     7.5375,
+     7.1539,
+     7.5375
+    ],
+    "roller": [
+     0.1,
+     0.0695,
+     0.0029
+    ],
+    "horn": [
+     1.0548,
+     0.985,
+     1.0095
+    ]
+   },
+   "within_0p5": true,
+   "per_part": {
+    "hub1": [
+     0.1439,
+     0.0065,
+     0.1439
+    ],
+    "hubK (slot band)": [
+     1.4195,
+     56
+    ],
+    "hubK": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "hub2 (slot band)": [
+     1.4199,
+     56
+    ],
+    "hub2": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "hub3 (slot band)": [
+     0.1,
+     36
+    ],
+    "hub3": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "E": [
+     1.3298,
+     1.0376,
+     1.3298
+    ],
+    "boss": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "pad": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "knee": [
+     0.8502,
+     0.0,
+     0.8502
+    ],
+    "crank": [
+     7.5375,
+     7.1539,
+     7.5375
+    ],
+    "roller": [
+     0.1,
+     0.0695,
+     0.0029
+    ],
+    "horn": [
+     1.0548,
+     0.985,
+     1.0095
+    ],
+    "L1a": [
+     1.1304,
+     1.1304,
+     0.0
+    ],
+    "L1a outside hub zones": [
+     null,
+     0,
+     null,
+     null
+    ],
+    "L1b": [
+     0.7019,
+     0.5812,
+     0.7019
+    ],
+    "L1b outside hub zones": [
+     0.7019,
+     24,
+     0.8333,
+     0.2441
+    ],
+    "L2": [
+     1.6272,
+     0.8454,
+     1.6272
+    ],
+    "L2 outside hub zones": [
+     0.9873,
+     108,
+     0.787,
+     0.0855
+    ]
+   },
+   "frame_dev_mm": 4.7e-05,
+   "res_deg": 0.0001,
+   "knee_angle": 72.6,
+   "q3p_deg": -47.811,
+   "stops": {
+    "K": {
+     "angle_deg": -12.358,
+     "from_stop_lo_deg": 50.492,
+     "to_stop_hi_deg": 12.358,
+     "inside": true
+    },
+    "J2": {
+     "angle_deg": 1.54,
+     "from_stop_lo_deg": 17.48,
+     "to_stop_hi_deg": 100.528,
+     "inside": true
+    },
+    "J3": {
+     "angle_deg": -47.811,
+     "model_q3p_deg": -47.811,
+     "frame_vs_model_deg": 0.0,
+     "dowel_angle_in_link2_deg": -47.811,
+     "from_stop_lo_deg": 64.092,
+     "to_stop_hi_deg": 170.553,
+     "inside": true,
+     "dowel_r_in_link2_mm": 7.5
+    }
+   }
+  },
+  {
+   "label": "across the body",
+   "bench_pose": 214,
+   "pose": [
+    150.0,
+    45.0,
+    -60.0
+   ],
+   "taken": true,
+   "state": 1,
+   "joint_features_max_mm": 0.1418,
+   "rigid_non_drive_max_mm": 1.3298,
+   "strap_samples_outside_hub_zones_max_mm": 0.9873,
+   "drive_samples_mm": {
+    "crank": [
+     7.5375,
+     7.1538,
+     7.5375
+    ],
+    "roller": [
+     0.1,
+     0.0695,
+     0.0029
+    ],
+    "horn": [
+     1.0548,
+     0.985,
+     1.0095
+    ]
+   },
+   "within_0p5": true,
+   "per_part": {
+    "hub1": [
+     0.1418,
+     0.007,
+     0.1418
+    ],
+    "hubK (slot band)": [
+     1.4195,
+     56
+    ],
+    "hubK": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "hub2 (slot band)": [
+     1.4199,
+     56
+    ],
+    "hub2": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "hub3 (slot band)": [
+     0.1,
+     36
+    ],
+    "hub3": [
+     0.0001,
+     0.0001,
+     0.0
+    ],
+    "E": [
+     1.3298,
+     1.0375,
+     1.3298
+    ],
+    "boss": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "pad": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "knee": [
+     0.8502,
+     0.0,
+     0.8502
+    ],
+    "crank": [
+     7.5375,
+     7.1538,
+     7.5375
+    ],
+    "roller": [
+     0.1,
+     0.0695,
+     0.0029
+    ],
+    "horn": [
+     1.0548,
+     0.985,
+     1.0095
+    ],
+    "L1a": [
+     1.1304,
+     1.1304,
+     0.0
+    ],
+    "L1a outside hub zones": [
+     null,
+     0,
+     null,
+     null
+    ],
+    "L1b": [
+     0.7018,
+     0.5811,
+     0.7018
+    ],
+    "L1b outside hub zones": [
+     0.7018,
+     24,
+     0.8333,
+     0.244
+    ],
+    "L2": [
+     1.6272,
+     0.8454,
+     1.6272
+    ],
+    "L2 outside hub zones": [
+     0.9873,
+     108,
+     0.787,
+     0.0855
+    ]
+   },
+   "frame_dev_mm": 6.3e-05,
+   "res_deg": 0.0002,
+   "knee_angle": 60.0,
+   "q3p_deg": 21.098,
+   "stops": {
+    "K": {
+     "angle_deg": -20.243,
+     "from_stop_lo_deg": 42.606,
+     "to_stop_hi_deg": 20.243,
+     "inside": true
+    },
+    "J2": {
+     "angle_deg": -2.122,
+     "from_stop_lo_deg": 13.818,
+     "to_stop_hi_deg": 104.19,
+     "inside": true
+    },
+    "J3": {
+     "angle_deg": 21.098,
+     "model_q3p_deg": 21.098,
+     "frame_vs_model_deg": 0.0,
+     "dowel_angle_in_link2_deg": 21.098,
+     "from_stop_lo_deg": 133.002,
+     "to_stop_hi_deg": 101.643,
+     "inside": true,
+     "dowel_r_in_link2_mm": 7.5
+    }
+   }
+  },
+  {
+   "label": "overhead raise peak",
+   "bench_pose": 5,
+   "pose": [
+    30.0,
+    150.0,
+    -60.0
+   ],
+   "taken": true,
+   "state": 0,
+   "joint_features_max_mm": 0.143,
+   "rigid_non_drive_max_mm": 1.3297,
+   "strap_samples_outside_hub_zones_max_mm": 0.9873,
+   "drive_samples_mm": {
+    "crank": [
+     7.5375,
+     7.1538,
+     7.5375
+    ],
+    "roller": [
+     0.1,
+     0.0695,
+     0.0029
+    ],
+    "horn": [
+     1.0548,
+     0.985,
+     1.0095
+    ]
+   },
+   "within_0p5": true,
+   "per_part": {
+    "hub1": [
+     0.143,
+     0.0,
+     0.143
+    ],
+    "hubK (slot band)": [
+     1.4195,
+     56
+    ],
+    "hubK": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "hub2 (slot band)": [
+     1.4199,
+     56
+    ],
+    "hub2": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "hub3 (slot band)": [
+     0.1,
+     36
+    ],
+    "hub3": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "E": [
+     1.3297,
+     1.0375,
+     1.3297
+    ],
+    "boss": [
+     0.0001,
+     0.0001,
+     0.0
+    ],
+    "pad": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "knee": [
+     0.8502,
+     0.0001,
+     0.8502
+    ],
+    "crank": [
+     7.5375,
+     7.1538,
+     7.5375
+    ],
+    "roller": [
+     0.1,
+     0.0695,
+     0.0029
+    ],
+    "horn": [
+     1.0548,
+     0.985,
+     1.0095
+    ],
+    "L1a": [
+     1.1304,
+     1.1304,
+     0.0
+    ],
+    "L1a outside hub zones": [
+     null,
+     0,
+     null,
+     null
+    ],
+    "L1b": [
+     0.7018,
+     0.5812,
+     0.7018
+    ],
+    "L1b outside hub zones": [
+     0.7018,
+     24,
+     0.8333,
+     0.2441
+    ],
+    "L2": [
+     1.6273,
+     0.8455,
+     1.6273
+    ],
+    "L2 outside hub zones": [
+     0.9873,
+     108,
+     0.787,
+     0.0855
+    ]
+   },
+   "frame_dev_mm": 0.000103,
+   "res_deg": 0.0002,
+   "knee_angle": 87.5,
+   "q3p_deg": 94.278,
+   "stops": {
+    "K": {
+     "angle_deg": 0.0,
+     "from_stop_lo_deg": 62.849,
+     "to_stop_hi_deg": 0.0,
+     "inside": true
+    },
+    "J2": {
+     "angle_deg": 68.637,
+     "from_stop_lo_deg": 84.578,
+     "to_stop_hi_deg": 33.431,
+     "inside": true
+    },
+    "J3": {
+     "angle_deg": 94.278,
+     "model_q3p_deg": 94.278,
+     "frame_vs_model_deg": 0.0,
+     "dowel_angle_in_link2_deg": 94.278,
+     "from_stop_lo_deg": 206.181,
+     "to_stop_hi_deg": 28.464,
+     "inside": true,
+     "dowel_r_in_link2_mm": 7.5
+    }
+   }
+  },
+  {
+   "label": "K most open, taken (drive extreme)",
+   "bench_pose": 174,
+   "pose": [
+    90.0,
+    120.0,
+    -90.0
+   ],
+   "taken": true,
+   "state": 1,
+   "joint_features_max_mm": 0.1431,
+   "rigid_non_drive_max_mm": 1.3299,
+   "strap_samples_outside_hub_zones_max_mm": 0.9873,
+   "drive_samples_mm": {
+    "crank": [
+     7.5376,
+     7.1538,
+     7.5376
+    ],
+    "roller": [
+     0.1,
+     0.0695,
+     0.0029
+    ],
+    "horn": [
+     1.0548,
+     0.985,
+     1.0095
+    ]
+   },
+   "within_0p5": true,
+   "per_part": {
+    "hub1": [
+     0.1431,
+     0.0,
+     0.1431
+    ],
+    "hubK (slot band)": [
+     1.4195,
+     56
+    ],
+    "hubK": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "hub2 (slot band)": [
+     1.4199,
+     56
+    ],
+    "hub2": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "hub3 (slot band)": [
+     0.1001,
+     36
+    ],
+    "hub3": [
+     0.0001,
+     0.0001,
+     0.0001
+    ],
+    "E": [
+     1.3299,
+     1.0376,
+     1.3299
+    ],
+    "boss": [
+     0.0001,
+     0.0001,
+     0.0001
+    ],
+    "pad": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "knee": [
+     0.8502,
+     0.0,
+     0.8502
+    ],
+    "crank": [
+     7.5376,
+     7.1538,
+     7.5376
+    ],
+    "roller": [
+     0.1,
+     0.0695,
+     0.0029
+    ],
+    "horn": [
+     1.0548,
+     0.985,
+     1.0095
+    ],
+    "L1a": [
+     1.1304,
+     1.1304,
+     0.0
+    ],
+    "L1a outside hub zones": [
+     null,
+     0,
+     null,
+     null
+    ],
+    "L1b": [
+     0.7019,
+     0.5812,
+     0.7019
+    ],
+    "L1b outside hub zones": [
+     0.7019,
+     24,
+     0.8333,
+     0.244
+    ],
+    "L2": [
+     1.6273,
+     0.8455,
+     1.6273
+    ],
+    "L2 outside hub zones": [
+     0.9873,
+     108,
+     0.787,
+     0.0855
+    ]
+   },
+   "frame_dev_mm": 0.000114,
+   "res_deg": 0.0002,
+   "knee_angle": 93.2,
+   "q3p_deg": 103.636,
+   "stops": {
+    "K": {
+     "angle_deg": -46.248,
+     "from_stop_lo_deg": 16.602,
+     "to_stop_hi_deg": 46.248,
+     "inside": true
+    },
+    "J2": {
+     "angle_deg": -14.198,
+     "from_stop_lo_deg": 1.743,
+     "to_stop_hi_deg": 116.266,
+     "inside": true
+    },
+    "J3": {
+     "angle_deg": 103.636,
+     "model_q3p_deg": 103.636,
+     "frame_vs_model_deg": 0.0,
+     "dowel_angle_in_link2_deg": 103.636,
+     "from_stop_lo_deg": 215.54,
+     "to_stop_hi_deg": 19.106,
+     "inside": true,
+     "dowel_r_in_link2_mm": 7.5
+    }
+   }
+  },
+  {
+   "label": "J3 q3' min, taken",
+   "bench_pose": 91,
+   "pose": [
+    -15.0,
+    75.0,
+    90.0
+   ],
+   "taken": true,
+   "state": 1,
+   "joint_features_max_mm": 0.1423,
+   "rigid_non_drive_max_mm": 1.3297,
+   "strap_samples_outside_hub_zones_max_mm": 0.9873,
+   "drive_samples_mm": {
+    "crank": [
+     7.5375,
+     7.1538,
+     7.5375
+    ],
+    "roller": [
+     0.1,
+     0.0695,
+     0.0029
+    ],
+    "horn": [
+     1.0548,
+     0.985,
+     1.0095
+    ]
+   },
+   "within_0p5": true,
+   "per_part": {
+    "hub1": [
+     0.1423,
+     0.0,
+     0.1423
+    ],
+    "hubK (slot band)": [
+     1.4195,
+     56
+    ],
+    "hubK": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "hub2 (slot band)": [
+     1.4199,
+     56
+    ],
+    "hub2": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "hub3 (slot band)": [
+     0.1,
+     36
+    ],
+    "hub3": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "E": [
+     1.3297,
+     1.0375,
+     1.3297
+    ],
+    "boss": [
+     0.0001,
+     0.0001,
+     0.0
+    ],
+    "pad": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "knee": [
+     0.8503,
+     0.0001,
+     0.8503
+    ],
+    "crank": [
+     7.5375,
+     7.1538,
+     7.5375
+    ],
+    "roller": [
+     0.1,
+     0.0695,
+     0.0029
+    ],
+    "horn": [
+     1.0548,
+     0.985,
+     1.0095
+    ],
+    "L1a": [
+     1.1304,
+     1.1304,
+     0.0
+    ],
+    "L1a outside hub zones": [
+     null,
+     0,
+     null,
+     null
+    ],
+    "L1b": [
+     0.7018,
+     0.5812,
+     0.7018
+    ],
+    "L1b outside hub zones": [
+     0.7018,
+     24,
+     0.8333,
+     0.2441
+    ],
+    "L2": [
+     1.6273,
+     0.8454,
+     1.6273
+    ],
+    "L2 outside hub zones": [
+     0.9873,
+     108,
+     0.787,
+     0.0855
+    ]
+   },
+   "frame_dev_mm": 9.3e-05,
+   "res_deg": 0.0002,
+   "knee_angle": 99.7,
+   "q3p_deg": -98.431,
+   "stops": {
+    "K": {
+     "angle_deg": -31.159,
+     "from_stop_lo_deg": 31.69,
+     "to_stop_hi_deg": 31.159,
+     "inside": true
+    },
+    "J2": {
+     "angle_deg": -7.191,
+     "from_stop_lo_deg": 8.749,
+     "to_stop_hi_deg": 109.259,
+     "inside": true
+    },
+    "J3": {
+     "angle_deg": -98.431,
+     "model_q3p_deg": -98.431,
+     "frame_vs_model_deg": 0.0,
+     "dowel_angle_in_link2_deg": -98.431,
+     "from_stop_lo_deg": 13.473,
+     "to_stop_hi_deg": 221.172,
+     "inside": true,
+     "dowel_r_in_link2_mm": 7.5
+    }
+   }
+  },
+  {
+   "label": "J3 q3' max, taken",
+   "bench_pose": 152,
+   "pose": [
+    60.0,
+    165.0,
+    -90.0
+   ],
+   "taken": true,
+   "state": 1,
+   "joint_features_max_mm": 0.1441,
+   "rigid_non_drive_max_mm": 1.3298,
+   "strap_samples_outside_hub_zones_max_mm": 0.9873,
+   "drive_samples_mm": {
+    "crank": [
+     7.5375,
+     7.1538,
+     7.5375
+    ],
+    "roller": [
+     0.1,
+     0.0695,
+     0.0029
+    ],
+    "horn": [
+     1.0548,
+     0.985,
+     1.0095
+    ]
+   },
+   "within_0p5": true,
+   "per_part": {
+    "hub1": [
+     0.1441,
+     0.0029,
+     0.1441
+    ],
+    "hubK (slot band)": [
+     1.4195,
+     56
+    ],
+    "hubK": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "hub2 (slot band)": [
+     1.4199,
+     56
+    ],
+    "hub2": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "hub3 (slot band)": [
+     0.1,
+     36
+    ],
+    "hub3": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "E": [
+     1.3298,
+     1.0375,
+     1.3298
+    ],
+    "boss": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "pad": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "knee": [
+     0.8501,
+     0.0,
+     0.8501
+    ],
+    "crank": [
+     7.5375,
+     7.1538,
+     7.5375
+    ],
+    "roller": [
+     0.1,
+     0.0695,
+     0.0029
+    ],
+    "horn": [
+     1.0548,
+     0.985,
+     1.0095
+    ],
+    "L1a": [
+     1.1304,
+     1.1304,
+     0.0
+    ],
+    "L1a outside hub zones": [
+     null,
+     0,
+     null,
+     null
+    ],
+    "L1b": [
+     0.7019,
+     0.5812,
+     0.7019
+    ],
+    "L1b outside hub zones": [
+     0.7019,
+     24,
+     0.8333,
+     0.2441
+    ],
+    "L2": [
+     1.6272,
+     0.8454,
+     1.6272
+    ],
+    "L2 outside hub zones": [
+     0.9873,
+     108,
+     0.787,
+     0.0855
+    ]
+   },
+   "frame_dev_mm": 9.1e-05,
+   "res_deg": 0.0002,
+   "knee_angle": 101.6,
+   "q3p_deg": 116.771,
+   "stops": {
+    "K": {
+     "angle_deg": -21.592,
+     "from_stop_lo_deg": 41.258,
+     "to_stop_hi_deg": 21.592,
+     "inside": true
+    },
+    "J2": {
+     "angle_deg": -2.748,
+     "from_stop_lo_deg": 13.192,
+     "to_stop_hi_deg": 104.816,
+     "inside": true
+    },
+    "J3": {
+     "angle_deg": 116.771,
+     "model_q3p_deg": 116.771,
+     "frame_vs_model_deg": 0.0,
+     "dowel_angle_in_link2_deg": 116.771,
+     "from_stop_lo_deg": 228.675,
+     "to_stop_hi_deg": 5.971,
+     "inside": true,
+     "dowel_r_in_link2_mm": 7.5
+    }
+   }
+  },
+  {
+   "label": "knee angle min, taken",
+   "bench_pose": 89,
+   "pose": [
+    -15.0,
+    60.0,
+    -15.0
+   ],
+   "taken": true,
+   "state": 0,
+   "joint_features_max_mm": 0.1444,
+   "rigid_non_drive_max_mm": 1.3298,
+   "strap_samples_outside_hub_zones_max_mm": 0.9873,
+   "drive_samples_mm": {
+    "crank": [
+     7.5376,
+     7.1538,
+     7.5376
+    ],
+    "roller": [
+     0.1,
+     0.0695,
+     0.0029
+    ],
+    "horn": [
+     1.0548,
+     0.985,
+     1.0095
+    ]
+   },
+   "within_0p5": true,
+   "per_part": {
+    "hub1": [
+     0.1444,
+     0.0,
+     0.1444
+    ],
+    "hubK (slot band)": [
+     1.4195,
+     56
+    ],
+    "hubK": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "hub2 (slot band)": [
+     1.4199,
+     56
+    ],
+    "hub2": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "hub3 (slot band)": [
+     0.1,
+     36
+    ],
+    "hub3": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "E": [
+     1.3298,
+     1.0376,
+     1.3298
+    ],
+    "boss": [
+     0.0001,
+     0.0001,
+     0.0001
+    ],
+    "pad": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "knee": [
+     0.8502,
+     0.0,
+     0.8502
+    ],
+    "crank": [
+     7.5376,
+     7.1538,
+     7.5376
+    ],
+    "roller": [
+     0.1,
+     0.0695,
+     0.0029
+    ],
+    "horn": [
+     1.0548,
+     0.985,
+     1.0095
+    ],
+    "L1a": [
+     1.1304,
+     1.1304,
+     0.0
+    ],
+    "L1a outside hub zones": [
+     null,
+     0,
+     null,
+     null
+    ],
+    "L1b": [
+     0.7019,
+     0.5812,
+     0.7019
+    ],
+    "L1b outside hub zones": [
+     0.7019,
+     24,
+     0.8333,
+     0.2441
+    ],
+    "L2": [
+     1.6273,
+     0.8455,
+     1.6273
+    ],
+    "L2 outside hub zones": [
+     0.9873,
+     108,
+     0.787,
+     0.0855
+    ]
+   },
+   "frame_dev_mm": 8.5e-05,
+   "res_deg": 0.0001,
+   "knee_angle": 59.3,
+   "q3p_deg": 8.426,
+   "stops": {
+    "K": {
+     "angle_deg": 0.0,
+     "from_stop_lo_deg": 62.849,
+     "to_stop_hi_deg": 0.0,
+     "inside": true
+    },
+    "J2": {
+     "angle_deg": 85.894,
+     "from_stop_lo_deg": 101.834,
+     "to_stop_hi_deg": 16.174,
+     "inside": true
+    },
+    "J3": {
+     "angle_deg": 8.426,
+     "model_q3p_deg": 8.426,
+     "frame_vs_model_deg": 0.0,
+     "dowel_angle_in_link2_deg": 8.426,
+     "from_stop_lo_deg": 120.33,
+     "to_stop_hi_deg": 114.315,
+     "inside": true,
+     "dowel_r_in_link2_mm": 7.5
+    }
+   }
+  },
+  {
+   "label": "knee angle max, taken",
+   "bench_pose": 152,
+   "pose": [
+    60.0,
+    165.0,
+    -90.0
+   ],
+   "taken": true,
+   "state": 1,
+   "joint_features_max_mm": 0.1441,
+   "rigid_non_drive_max_mm": 1.3298,
+   "strap_samples_outside_hub_zones_max_mm": 0.9873,
+   "drive_samples_mm": {
+    "crank": [
+     7.5375,
+     7.1538,
+     7.5375
+    ],
+    "roller": [
+     0.1,
+     0.0695,
+     0.0029
+    ],
+    "horn": [
+     1.0548,
+     0.985,
+     1.0095
+    ]
+   },
+   "within_0p5": true,
+   "per_part": {
+    "hub1": [
+     0.1441,
+     0.0029,
+     0.1441
+    ],
+    "hubK (slot band)": [
+     1.4195,
+     56
+    ],
+    "hubK": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "hub2 (slot band)": [
+     1.4199,
+     56
+    ],
+    "hub2": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "hub3 (slot band)": [
+     0.1,
+     36
+    ],
+    "hub3": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "E": [
+     1.3298,
+     1.0375,
+     1.3298
+    ],
+    "boss": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "pad": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "knee": [
+     0.8501,
+     0.0,
+     0.8501
+    ],
+    "crank": [
+     7.5375,
+     7.1538,
+     7.5375
+    ],
+    "roller": [
+     0.1,
+     0.0695,
+     0.0029
+    ],
+    "horn": [
+     1.0548,
+     0.985,
+     1.0095
+    ],
+    "L1a": [
+     1.1304,
+     1.1304,
+     0.0
+    ],
+    "L1a outside hub zones": [
+     null,
+     0,
+     null,
+     null
+    ],
+    "L1b": [
+     0.7019,
+     0.5812,
+     0.7019
+    ],
+    "L1b outside hub zones": [
+     0.7019,
+     24,
+     0.8333,
+     0.2441
+    ],
+    "L2": [
+     1.6272,
+     0.8454,
+     1.6272
+    ],
+    "L2 outside hub zones": [
+     0.9873,
+     108,
+     0.787,
+     0.0855
+    ]
+   },
+   "frame_dev_mm": 9.1e-05,
+   "res_deg": 0.0002,
+   "knee_angle": 101.6,
+   "q3p_deg": 116.771,
+   "stops": {
+    "K": {
+     "angle_deg": -21.592,
+     "from_stop_lo_deg": 41.258,
+     "to_stop_hi_deg": 21.592,
+     "inside": true
+    },
+    "J2": {
+     "angle_deg": -2.748,
+     "from_stop_lo_deg": 13.192,
+     "to_stop_hi_deg": 104.816,
+     "inside": true
+    },
+    "J3": {
+     "angle_deg": 116.771,
+     "model_q3p_deg": 116.771,
+     "frame_vs_model_deg": 0.0,
+     "dowel_angle_in_link2_deg": 116.771,
+     "from_stop_lo_deg": 228.675,
+     "to_stop_hi_deg": 5.971,
+     "inside": true,
+     "dowel_r_in_link2_mm": 7.5
+    }
+   }
+  }
+ ],
+ "kinematics_exact": {
+  "poses": 13,
+  "joint_features_and_frames_within_0p5": true,
+  "model_metal_outside_built_max_mm": {
+   "E": 1.33,
+   "L1a": 0.0,
+   "L1b": 0.702,
+   "L2": 1.627,
+   "boss": 0.0,
+   "crank": 7.538,
+   "horn": 1.01,
+   "hub1": 0.144,
+   "hub2": 0.0,
+   "hub3": 0.0,
+   "hubK": 0.0,
+   "knee": 0.85,
+   "pad": 0.0,
+   "roller": 0.003
+  },
+  "model_metal_within_0p5_except_crank": false,
+  "crank_note": "the model's crank samples (arm root inside link 1b's strap) are a model artefact (gen-6 L1 7.12); the built crank is the red team's",
+  "max_frame_dev_mm": 0.000114,
+  "max_joint_feature_mm": 0.1444,
+  "dowels_in_slots": true,
+  "q3p_frames_vs_model_max_deg": 0.0
  }
 }
