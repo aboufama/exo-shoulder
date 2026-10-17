@@ -104,6 +104,22 @@ Every taken pose under |K| 20 deg fails today's reading in every configuration m
 |K| 10"; on these four-bars it is every pose under 20 except 6 of 51 at 10-20 on k444). So the family-optimal four-bar keeps
 K open 27-54 deg on EVERY pose, i.e. it never uses the toggle.
 
+## Claim protocol (fit Bench(60,160) fast, shape frozen, worn on Bench(110,360) EXACT and on the held-out bench; farm)
+
+Plain gap (the lead's v_gap convention, 18.49 / held 23.45); near2 = the 2 mm near-touch reading.
+
+| config | fit (fast, plain) | frozen Bench(110,360) exact | reach | ib14 | ib10 | contact | overhead | near2 | min metal | contact depth | held out |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| coupled coarse toggle best k444 (LISTED FOR B1) | 28.99 | 34.52 | 0.706 | 0.773 | 0.474 | 0.024 | 9/28 | 49.68 | 0.43 mm | 9 poses, 32.2 mm (max 9.8) | 37.25 (reach 0.682, ib14 0.772) |
+| **family CMA best (THE ROW)** | 48.43 | **51.75** | 0.617 | 0.689 | 0.461 | 0.024 | 8/28 | 71.48 | 1.31 mm | 8 poses, 49.7 mm (max 16.2) | 55.30 (reach 0.586, ib14 0.689) |
+| coupled CMA best (LISTED FOR B1) | 32.21 | 36.46 | 0.753 | 0.713 | 0.475 | 0.031 | 10/28 | 49.22 | 0.03 mm | 12 poses, 61.6 mm (max 10.9) | 39.80 (reach 0.726, ib14 0.712) |
+| family coarse best k344 | 49.83 | 52.89 | 0.619 | 0.675 | 0.445 | 0.024 | 9/28 | 73.84 | 0.62 mm | 8 poses, 52.1 mm (max 16.6) | 56.86 (reach 0.587, ib14 0.675) |
+
+Fold reading on the worn frozen shape (the lead verifier's th_margin, own state): family best min 5.017, 0 of 332 taken
+poses under 5 (it passes today's reading by construction); coupled best min 0.0, 151 of 381 under 5 - the B1 count again.
+The fit-to-frozen drop is small (family 48.43 -> 51.75, coupled 32.21 -> 36.46; held 55.30 / 39.80): the numbers are not
+tuned to the sample, they are simply far from the lead's 18.49 / 23.45.
+
 ## Measured limiters
 
 1. **Family reading (the row): B1 -> hub 2 off the skin.** With K held >= 27 deg on every pose, hub 2 never returns to the

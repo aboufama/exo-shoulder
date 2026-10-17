@@ -15,11 +15,11 @@
  "inband10": 0.4584,
  "contact": 0.0238,
  "gap": 53.26,
- "v_reach": null,
- "v_follow": null,
- "v_inband14": null,
- "v_inband10": null,
- "v_gap": null,
+ "v_reach": 0.6167,
+ "v_follow": 1.0,
+ "v_inband14": 0.6893,
+ "v_inband10": 0.4606,
+ "v_gap": 51.75,
  "n_configs": 2520,
  "best_params": {
   "rc": 10.4867,
@@ -84,9 +84,12 @@
   "springs": 0,
   "note": "J1, K, J2, J3 O20 hubs; crank pin + horn pin (ISO 8734 3 m6 dowels in MR63ZZ eyes); coupler = its own body; pin knee (2 iglidur pins); no gears / pulleys / cables / springs"
  },
- "verdict": "dead as a lead and as a complexity Pareto point under both B1 readings (gate passed on 4 CMA runs). Today's (family) reading: 53.26 fast on Bench(60,160) (score 80.63) - B1 fails every four-bar pose under |K| 20, so K stays open 27-54 deg and hub 2 rides 80 mm from GH overhead; chain alone without drive metal 43.95. Coupled reading (LISTED FOR B1, never claimed): 34.56 fast (score 87.43), chain alone 26.26 - still behind the lead's verified 18.49, and dominated at cx 14 by spine-parked-j2-3r (cx 0, 34.29 verified). The strap seed as specified is not buildable: its horn eye boss sits 0.7 mm inside hub K's O20 housing (gap 375).",
+ "verdict": "dead as a lead and as a complexity Pareto point under both B1 readings (gate passed on 4 CMA runs). Frozen Bench(110,360) exact: family 51.75 (held 55.30), coupled 36.46 (held 39.80). Today's (family) reading: 53.26 fast on Bench(60,160) (score 80.63) - B1 fails every four-bar pose under |K| 20, so K stays open 27-54 deg and hub 2 rides 80 mm from GH overhead; chain alone without drive metal 43.95. Coupled reading (LISTED FOR B1, never claimed): 34.56 fast (score 87.43), chain alone 26.26 - still behind the lead's verified 18.49, and dominated at cx 14 by spine-parked-j2-3r (cx 0, 34.29 verified). The strap seed as specified is not buildable: its horn eye boss sits 0.7 mm inside hub K's O20 housing (gap 375).",
  "limiter": "family (row): B1 - fails min(m_sub, m_eff) >= 5 on every law-only pose under |K| 20 (coupled best: 1-3 27/27, 3-6 21/21, 6-10 19/19, 10-20 41/41, >= 20 8/178; m_sub < 1 on 62), so the family-optimal four-bar never uses the toggle: K 27.6-53.8 deg, hub 2 needs 80.6 mm on the elev-150 clip frames, hub 2 in band 0.10 (median 24 mm). Coupled: the four-bar's own metal - crank lug of link 2 sweeping a 16-20 mm circle round hub 2 (in band 0.03-0.08) and the coupler stacked over link 1b + 1 mm (in band 0.02-0.20); ghost attribution 34.56 -> 26.26 (coarse toggle best 45.24 -> 24.06).",
  "note": "Gate (score points): CMA family-0 n 457 best 53.26 gain2nd 0.073 gainLast3rd 0.036 top5 0.022; family-1 n 369 53.35 0.196/0.156/0.025; coupled-0 n 793 34.56 0.000/0.000/0.182; coupled-1 n 377 45.69 0.818/0.113/0.076 - all passed. 2520 configs on the farm (Bench(60,160) fast). B1 by |K| band (law-only, Bench(110,360) ws): seed 313 coupled / 180 family (0-1 27/27, 1-3 19/19, 3-6 15/15, 6-10 20/20, 10-20 38/38, >=20 14/194); coupled best 286/170; family best 250/234 (K never under 27). Spec corrections: horn eye >= 15.5 mm lateral beside an O20 housing (seed r 11.3 jams on hub K on every pose); coupler 1 mm (not 0.15) over link 1b; the judge's strap knee re-fit hits pad-E on 109 poses (lead knee, ang_min 26.88 used); the proposer's seeds were synthesised on Bench(110,360) law-only counts. Flat coupler (in link 1b's layer) measured: collides with link 1b on 121 poses. Toggle red team (coupled best): dead point th 44.3, K 1.96, mu_c 179.9, mu_h 88.7 - positive both ways; pin play 0.02 mm -> 0.07 deg K. 0 passive translations, 5 passive rotations (K, crank pin, horn pin, 2 knee pins), no springs, no sliding / rolling pairs. Compact cell not built (crown-level coupler; same B1 count; ghost bound applies). Frozen Bench(110,360) exact / held-out claims: see v_* (filled if the farm returned them).",
  "complexity": 14.0,
- "best_params_coupled_reading": "see coupled_best"
+ "best_params_coupled_reading": "see coupled_best",
+ "v_contact": 0.0235,
+ "v_note": "family-reading CMA best, fit Bench(60,160) fast (plain 48.43), frozen, worn on Bench(110,360) EXACT (farm): plain 51.75 (score 81.18), near2 71.48, overhead 8/28, min metal 1.31 mm, contact depth 8 poses 49.7 mm (max 16.2), th_margin min 5.017 (0/332 under 5); held out 55.30 (reach 0.586, ib14 0.689). Coupled CMA best (LISTED FOR B1): frozen 36.46 (reach 0.753, ib14 0.713, overhead 10/28, th_margin 151/381 under 5), held 39.80. Lead: 18.49 / held 23.45.",
+ "t_verified": null
 }
