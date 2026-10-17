@@ -2834,3 +2834,16 @@ closed, so everything ran locally.
   their per-pose skin requirement, frozen, with the continuity flood). It bounds every mechanism that moves hub 2 per
   pose. Then screen a polycentric J2 (spherical four-bar, as orthotic polycentric hinges do it) and the cap-pole seat
   only if that ceiling is <= 13.75.
+
+### proximal-j3-geodesic-knuckle-3r (round 13 main, gate 1 ghost) - DEAD at the pre-registered take bar
+
+J3's seat up the lateral deltoid on the 32/48 long-dyad chain, knee re-fit at the MR63ZZ stack (stk 6.0) and K law
+re-tuned (372 fit-bench tries on the 1 mm near-touch objective, converged): frozen exact Bench(110,360) **16.52 (score
+93.99), 271 taken, 4 contacts**, overhead 8/28, 2 taken poses under 1 mm, flood-connected, th margin 5.035 - the bar's
+<= 17.5 / <= 4 contacts pass, **>= 274 taken fails**. Per-pose cause: fold 73 (the family's seat cap, unchanged by the
+seat), 129 link 2 -3.79 mm across its full width over the lateral-deltoid crest (radial: a +-1.5 mm bar offset moves it
+<= 0.4 mm), 264 hub K -3.97 overhead at the stretched end of the law, 139 / 316 link 2 -0.41 / -0.64. On the independent
+envsel draw the re-fit knee LOSES to the unrefit seat (19.75 / 10 contacts vs 18.84 / 7): the long knee (lE 90) the
+search found puts the knee link 4.9-7.8 mm into the skin at axial -166 across the body, the |axial| >= 150 region
+Bench(60,160) under-samples. Lesson: seat levers on a fixed J1 / hub-2 chain buy binder depth, not takes; knee re-fits
+need an |axial| >= 150 contact check (or the env bench). stk 6.0 costs ~0.2 on this chain.

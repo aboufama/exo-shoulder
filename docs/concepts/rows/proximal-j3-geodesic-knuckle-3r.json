@@ -1,0 +1,359 @@
+{
+ "id": "proximal-j3-geodesic-knuckle-3r",
+ "name": "Proximal-J3 geodesic knuckle (J3's seat moved up and back the lateral deltoid on the long-dyad 32/48 chain)",
+ "lens": "round13:reach-hub2-seat-ghost (J1-J3 geodesic's arm end; merged posterior-wrap-j3-envfit wrap region + K-law re-tune, dogleg-link2's posterior-edge column)",
+ "family": "slaved-knuckle 3R (long-dyad 32/48 chain on pick3's J1 / hub-2 seats)",
+ "active_dof": 3,
+ "passive_dof": 3,
+ "passive_translations": 0,
+ "status": "dead",
+ "t_ideated": "2026-10-17T19:23:12Z",
+ "t_screened": "2026-10-17T20:10:29Z",
+ "reach": 0.7528,
+ "follow": 1.0,
+ "inband14": 0.8924,
+ "inband10": 0.5482,
+ "contact": 0.0104,
+ "gap": 16.52,
+ "bench": "GATE 1 (ghost) numbers: frozen exact Bench(110,360) (fit Bench(60,160) fast, shape frozen) of the frozen-exact best config (CMA k211); the K drive's metal is NOT sampled (IB_GHOST=all) - the chain's ceiling before the drive; never a claim",
+ "fit_fast": {
+  "gap": 10.21,
+  "reach": 0.8125,
+  "follow": 1.0,
+  "inband14": 0.8906,
+  "inband10": 0.5447,
+  "contact": 0.0052
+ },
+ "v_reach": null,
+ "v_follow": null,
+ "v_inband14": null,
+ "v_inband10": null,
+ "v_gap": null,
+ "n_configs": 372,
+ "best_params": {
+  "wd": 71.8879,
+  "wa": -9.7321,
+  "b3": 0.3445,
+  "lE": 90.2078,
+  "lc": 22.196,
+  "phiE": 3.7737,
+  "phib": -56.1306,
+  "ang_min": 22.2576,
+  "smhi": 14.0617,
+  "kK": 2.3647,
+  "kcap": 56.3817,
+  "l2v": 0.1414,
+  "stk": 6.0
+ },
+ "why": {
+  "fold": 73,
+  "slide": 8,
+  "flip": 0,
+  "closure": 0,
+  "skin": 0,
+  "parts": 4,
+  "contact": 4
+ },
+ "n_taken_ws": 271,
+ "n_contact_poses": 4,
+ "overhead": {
+  "ws": 28,
+  "taken": 8
+ },
+ "near_touch": {
+  "taken_under_1mm": 2,
+  "taken_under_2mm": 17,
+  "min_taken_metal_mm": 0.66,
+  "gap_near1": 17.6,
+  "gap_near2": 32.53
+ },
+ "th_margin": {
+  "min": 5.035,
+  "n": 381,
+  "lt5": 0,
+  "forced": 150,
+  "th_max_taken": 112.09,
+  "dK_taken_max": 52.58,
+  "lowest": {
+   "own": 5.035,
+   "forced": true,
+   "kind": "ws",
+   "plane": -90.0,
+   "elev": 45.0,
+   "axial": 135.0
+  }
+ },
+ "connected": {
+  "static": {
+   "gap": 16.52,
+   "reach": 0.7528,
+   "follow": 1.0,
+   "inband14": 0.8924,
+   "contact": 0.0104
+  },
+  "connected_bench": {
+   "gap": 44.38,
+   "reach": 0.4778,
+   "dropped": 99,
+   "dropped_forced": 99,
+   "forced_taken": 125,
+   "forced_taken_connected": 26,
+   "dropped_with_no_taken_neighbour": 20
+  },
+  "connected_knn": {
+   "gap": 19.04,
+   "reach": 0.7278,
+   "dropped": 9,
+   "dropped_forced": 9,
+   "forced_taken": 125,
+   "forced_taken_connected": 116
+  },
+  "connected_full": {
+   "gap": 16.52,
+   "reach": 0.7528,
+   "dropped": 0,
+   "dropped_forced": 0,
+   "forced_taken": 125,
+   "forced_taken_connected": 125,
+   "envelope": {
+    "env_ok": 1093,
+    "env_forced_ok": 505,
+    "env_forced_connected": 505
+   }
+  },
+  "secs": 1.1
+ },
+ "contacts": [
+  [
+   129,
+   "ws",
+   -75,
+   60,
+   120,
+   -3.79
+  ],
+  [
+   139,
+   "ws",
+   -60,
+   60,
+   105,
+   -0.41
+  ],
+  [
+   264,
+   "ws",
+   30,
+   165,
+   -60,
+   -4.62
+  ],
+  [
+   316,
+   "ws",
+   60,
+   150,
+   -105,
+   -0.64
+  ]
+ ],
+ "contact_worst": {
+  "129": [
+   -3.79,
+   "link:L2",
+   -3.79
+  ],
+  "139": [
+   -0.41,
+   "link:L2",
+   -0.41
+  ],
+  "264": [
+   -4.62,
+   "hubK",
+   -3.97
+  ],
+  "316": [
+   -0.64,
+   "link:L2",
+   -0.64
+  ]
+ },
+ "binder": {
+  "117": [
+   1.93,
+   "link:L2",
+   1.93
+  ],
+  "127": [
+   2.04,
+   "pad",
+   2.04
+  ],
+  "129": [
+   -3.79,
+   "link:L2",
+   -3.79
+  ],
+  "139": [
+   -0.41,
+   "link:L2",
+   -0.41
+  ],
+  "316": [
+   -0.64,
+   "link:L2",
+   -0.64
+  ],
+  "264": [
+   -4.62,
+   "hubK",
+   -3.97
+  ],
+  "237": "slide"
+ },
+ "envsel": {
+  "k211": {
+   "gap": 19.75,
+   "ws_taken": 265,
+   "contacts": 10,
+   "contact_worst": {
+    "222": [
+     "knee",
+     -4.91
+    ],
+    "225": [
+     "pad",
+     -1.84
+    ],
+    "226": [
+     "knee",
+     -7.81
+    ],
+    "259": [
+     "link:L2",
+     -0.17
+    ],
+    "260": [
+     "link:L2",
+     -4.04
+    ],
+    "264": [
+     "link:L2",
+     -2.12
+    ],
+    "365": [
+     "hub2",
+     -1.18
+    ],
+    "367": [
+     "hub2",
+     -1.93
+    ],
+    "451": [
+     "hubK",
+     -0.47
+    ],
+    "452": [
+     "hubK",
+     -5.49
+    ]
+   },
+   "under_1mm": 6,
+   "under_2mm": 21
+  },
+  "wd73_unrefit_stk6": {
+   "gap": 18.84,
+   "ws_taken": 265,
+   "contacts": 7,
+   "contact_worst": {
+    "224": [
+     "link:L2",
+     -0.33
+    ],
+    "259": [
+     "link:L2",
+     -1.02
+    ],
+    "260": [
+     "link:L2",
+     -4.51
+    ],
+    "264": [
+     "link:L2",
+     -2.42
+    ],
+    "452": [
+     "hubK",
+     -3.57
+    ],
+    "454": [
+     "hubK",
+     -8.76
+    ],
+    "455": [
+     "hubK",
+     -7.44
+    ]
+   },
+   "under_1mm": 13,
+   "under_2mm": 37
+  },
+  "base_round12": {
+   "gap": 21.31,
+   "ws_taken": 260,
+   "contacts": 12
+  },
+  "judge_wd73_stk485": {
+   "gap": 18.62,
+   "ws_taken": 265,
+   "contacts": 7
+  }
+ },
+ "controls": {
+  "wd73_unrefit_stk6_bench": {
+   "gap": 16.94,
+   "ws_taken": 269,
+   "contacts": 4,
+   "under_1mm": 7,
+   "under_2mm": 39,
+   "near1": 20.56
+  },
+  "k266_fit_best_bench": {
+   "gap": 16.79,
+   "ws_taken": 269,
+   "contacts": 4,
+   "envsel": 19.49
+  },
+  "l2v_plus1p5_bench": {
+   "gap": 17.11,
+   "ws_taken": 271,
+   "contacts": 6
+  },
+  "l2v_minus1p5_bench": {
+   "gap": 16.99,
+   "ws_taken": 270,
+   "contacts": 4
+  }
+ },
+ "complexity": 16.0,
+ "complexity_note": "drive-dependent (spec): 16.0 with the pinned-horn desmo + conecut-style knee + J3 dowel, ~24.5 with the in-band RSSR; the seat move adds 0; no drive is placed in this ghost",
+ "mechanism": {
+  "active_dof": 3,
+  "passive_trans": 0,
+  "crossed_rails": 0,
+  "passive_rot": "K (slaved) + gate-2 drive pivot",
+  "cuff_knee": {
+   "pins": 2,
+   "bearings": "MR63ZZ pairs at stk 6.0",
+   "sensed": false,
+   "rule": "outside the DOF count, 0 complexity (user 2026-10-17)"
+  },
+  "drive": "NOT PLACED (gate 2)"
+ },
+ "gate": "converged on the search objective (1 mm near-touch gap, Bench(60,160) fast; 372 tries: 120 coarse + 252 CMA): gain over the 2nd half 0.40 score points (< 1), over the last third 0.33 (< 0.5), top-5 spread 0.40 (< 3). The pre-registered gate-1 bar (<= 17.5, <= 4 contacts, >= 274 taken on Bench(110,360) exact frozen): 16.52 / 4 / 271 - takes MISSED",
+ "verdict": "DEAD at gate 1 (pre-registered kill: the bar missed after the knee re-fit at stk 6.0 and the K-law re-tune). Ghost 16.52 (score 93.99) frozen exact Bench(110,360), 271 taken, 4 contacts, overhead 8/28, 2 taken poses under 1 mm, th margin 5.035, flood-connected 16.52 - but takes 271 < 274, and on the independent envsel draw the re-fit knee LOSES to the unrefit seat (19.75 / 10 contacts vs 18.84 / 7): the CMA's long knee (lE 90) is fit to Bench(60,160)'s under-sampled |axial| >= 150 and puts the knee link 4.9-7.8 mm into the skin across the body at axial -166. The seat lever is real (117 / 127 cleared) but caps at the family's 269-271 takes.",
+ "limiter": "the J2 fold (73 of 360 bench poses, the family's seat cap: K stroke at the stretched wall, th_max_taken 112) + three binder contacts the seat cannot clear: 129 (plane -75 elev 60 axial 120) link 2 at -3.79 mm across its full width over the lateral-deltoid crest (radial, not lateral: a +-1.5 mm bar offset moves it <= 0.4 mm), 264 (plane 30 elev 165 axial -60, overhead) hub K -3.97 at the stretched end of the law, 139 / 316 link 2 -0.41 / -0.64; 8 knee slides incl. 237 (elev 165)",
+ "note": "Ghost (no K drive metal). Search: Bench(60,160) fast, 1 mm near-touch objective, local 2 niced procs (farm window closed); best fit 9.31 (k266) did not carry (16.79 frozen); k211 (fit 10.21) is the frozen-exact best. Equal-sample in-band (S6, E strap at the base's 104 samples instead of 148): ib14 0.8924 -> 0.890, gap ~16.77. kK ran to the box floor 2.2 in the fit best (lower gain). Knee re-fit at stk 6.0 bought near-touch on Bench(110,360) (under 1 mm 7 -> 2, under 2 mm 39 -> 17, near1 20.56 -> 17.60) not takes (+2). stk 6.0 itself costs ~0.2 (envsel 18.62 -> 18.84; bench 16.72 -> 16.94).",
+ "doc": "docs/concepts/proximal-j3-geodesic-knuckle-3r.md"
+}

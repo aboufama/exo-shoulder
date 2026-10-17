@@ -2981,7 +2981,7 @@
   "name": "Proximal-J3 geodesic knuckle (J3's seat moved up and back the lateral deltoid on the long-dyad 32/48 chain)",
   "family": "slaved-knuckle 3R (long-dyad 32/48 chain on pick3's J1 / hub-2 seats)",
   "lens": "round13:reach-hub2-seat-ghost (cell a re-aimed at the J1-J3 geodesic's ARM end; merged posterior-wrap-j3-envfit-knuckle-3r as the wrap region + K-law re-tune cell, and dogleg-link2-knuckle-3r's posterior-edge residue as a column)",
-  "status": "ideated",
+  "status": "dead",
   "t_ideated": "2026-10-17T19:23:12Z",
   "source": "round 13 judge (docs/concepts/round13_ideation.md)",
   "merged_from": [
