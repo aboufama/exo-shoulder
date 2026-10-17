@@ -212,3 +212,54 @@ loops 3, sliding 2, springs 0, catalogue 14); **22.0** strict (the conjugate pai
   law cut at the 56-deg cap, the V-rocker drawn schematically: crank on link 1b, V arm with two pins on hub 2's two
   tracks, long arm to the nose on link 1a).
 - Scratch harnesses (not committed): `vr/gdump.py` (per-pose frozen dump), `vr/pack.py` (gate 1), `vr/mkviz.py`.
+
+## Audit (2026-10-17 17:25 UTC, independent auditor of the death; time box 25 min, local, 2 niced processes)
+
+**Verdict: the death stands.** The best ghost cell fails gate 3 because 6 of its poses are in contact. The judge's
+last gate (law + metal >= 274 taken) also bounds it: no cell takes more than 270, and the drive's metal can only
+remove takes. Every check below ran on the frozen exact Bench(110,360) with an audit copy of the per-pose harness
+(scratchpad `audit_vr/adump.py`). The copy adds a two-sided J3 stop on q3' = q3 + knee phi, J3's own angle, applied
+to the fit and the wear as in conecut-knee-knuckle-3r, and dumps q3' for every pose.
+
+- **Reproduction.** The best cell (kK 2.4, smhi 14, cap 56) reads **17.23** exactly: reach 0.7472 (269 / 360),
+  follow 1.0, ib14 0.8961, ib10 0.5648, contact 0.0156. That is 6 contact poses (117, 127, 129, 139, 264, 316),
+  overhead 8 / 28, and the fit 12.17, the same as the row. Wall time was 196 s.
+- **Convergence gate, on the 14 cells in run order.** Gain over the second half 0.03 score points, over the last
+  third 0.00, top-5 spread 0.09. The gate passes as written. But these cells only vary the law (gain, onset, cap,
+  dyad), and the chain is pick3's frozen shape. That is legitimate here: the judge pre-registered gate 3 as "re-run
+  once on 32/48 at kK 2.5 / caps 56-64; a fail there kills this row too", with the bar <= 17.5 and <= 4 contact poses
+  (round12_ideation.md, notes for pick 4). Re-fitting the seats or link 2 on the fit bench is on the round-12 dead list.
+- **The gate is read correctly.** Every cell at onset 12-14 contacts the same 6 poses whatever the gain or cap
+  (dumps in `vr/g0_*.json`). The <= 4-contact cells (onset 10 / 11) contact 129, 264 and 369, with 259 / 261 taken,
+  and read 18.87 / 18.85.
+- **The lever the screen did not try: the J3-stop column.** The judge wrote that pick 3's knee and J3 stop "stacks on
+  picks 1 and 4 as their knee column". Measured:
+  - conecut's own window [-111.90, 122.74] changes nothing: every taken and contact pose lies inside it (taken q3'
+    -105.3..112.1, clip -62.3..103.3), so the result is 17.23 again;
+  - the contacts' q3' are 117 -66.5, 127 -74.4, 129 -95.4, 139 -97.7, 264 +105.1 and 316 +110.3. They sit among the
+    takes, so a stop sheds a contact only by stopping takes too. A post-hoc search over windows on the claim bench
+    finds the best window with <= 4 contacts at [-97.5, 110.0] (estimated 17.55). That window is a knife edge: it
+    sits 0.02 deg from take 109.98 and 0.29 deg from contact 110.29. With a 0.5-deg margin the best is 17.83; with
+    1 deg (conecut's rejection rule), 18.96;
+  - worn for real (the stop also changes the fit, so the frozen shape changes): [-97.5, 110.0] reads **17.71**
+    (265 taken, 5 contacts: 117, 127, 129, 264, 369; ib14 0.910; overhead 7 / 28). [-97, 109] reads **17.99**
+    (264 taken, 5 contacts). Both still fail the bar. They are also worse than the cell without a stop, and they
+    are in-sample knife edges that would be rejected as tuned anyway. A stop sheds 139 and 316, but the re-fit moves
+    the metal so that 369 comes in.
+- **Gate 4 bound (independent of contacts).** The judge's last gate needs law + metal >= 274 taken. The ghost maximum
+  over all 14 cells is 270 (cells s1684c64 and s1946c64), before the V arm, the pins, the slotted plate or the nose
+  boss are sampled. The drive's metal only adds contacts or collisions, so 274 cannot be reached.
+- **Model conventions checked.** The file loads spiral-lobe and inband-rssr unchanged and only swaps the RSSR range
+  limiter for min(kcap, s2cap). `contact` is n_contact / (n_ok + n_contact) (6 / 385 = 0.0156), as the bench
+  defines it. The contacts are real depths in mm: link 2 down to -7.7 and hub 2 down to -3.8, sampled at the
+  chain's own metal with no drive metal. No check is stricter than the lead's. The motion preview passes
+  `node docs/concepts/viz/test.mjs` (239 frames close; residual max 0.0005 mm) and is in motion.json.
+- **The template's refutation bar is stale.** The task template's bar ("within 10 of 68.93 on Bench(60,160)") is the
+  old champion bar that tools/workflows/exo-screen.js line 24 still carries. The round-12 state says verifiers judge
+  against the lead (18.49) and the tie rule. On that template this row's fit (12.17) would "refute" trivially, but
+  that number is a ghost with no drive metal and is never a claim. This audit judges against the pre-registered gates.
+
+**Measured reason, in one line:** the 32/48 chain ghost cannot reach <= 17.5 with <= 4 contact poses. The best is
+17.23 with 6 contacts. With <= 4 contacts the best is 18.85 by onset or 17.71 by a knife-edge J3 stop, which itself
+brings in a contact. The posterior-deltoid link-2 / hub-2 cluster sits at q3' and th values among the takes, so no
+law, cap or J3 stop separates it. The ghost's 270-take maximum is also below the judge's 274 before any drive metal.

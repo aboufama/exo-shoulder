@@ -16,11 +16,11 @@
  "contact": 0.0156,
  "gap": 17.23,
  "bench": "GATE 3 numbers: frozen exact Bench(110,360) (fit Bench(60,160) fast, shape frozen); the parent's RSSR deleted and the V-rocker's own metal NOT sampled (V arm, pins, slotted crank plate, nose boss) - the chain's ceiling before the drive's metal; never a claim",
- "v_reach": null,
- "v_follow": null,
- "v_inband14": null,
- "v_inband10": null,
- "v_gap": null,
+ "v_reach": 0.7472,
+ "v_follow": 1.0,
+ "v_inband14": 0.8961,
+ "v_inband10": 0.5648,
+ "v_gap": 17.23,
  "n_configs": 14,
  "best_params": {
   "bk1": 32,
@@ -109,5 +109,18 @@
  "verdict": "DEAD at gate 3 (the lead's pre-registered kill: chain ghost <= 17.5 with <= 4 contact poses). Best ghost 17.23 frozen exact (269/360 ws, 6 contact poses) before any drive metal; the only cell with <= 4 contacts reads 18.85 (261 taken). Gate 1 also fails as specified: no conjugate pair once the passing pin clears the other track's base ring (floor 7.3) by 0.3 mm; pairs exist only with the base ring relieved to r 7.0 and track B on top (40 to K 56, 6 to 60, 0 to 64).",
  "limiter": "chain metal on the K-open stretched poses: link 2 (to -7.7 mm) and hub 2's rim (to -3.5) at plane -90..-60 / elev 45-60 / axial 105-135 (poses 117, 127, 129, 139) and link 2 at 316 (60/150/-105), the same 5 poses in every cell at onset 12-14 whatever the gain (2.3-2.6), cap (56-64) or dyad (32/48, 30/49); two get DEEPER as K falls, so no stop-B / cap / onset cut sheds them without losing more takes; plus the lead's hub-K-top pose 264 (-5.05, K closed). Gate 1: the conjugate tracks' base ring (each pin spans the full pitch window, so the passing pin meets the other track's floor).",
  "note": "Model = spiral-lobe-longdyad-knuckle-3r.py (pick3's chain, loaded unchanged) on 32/48, stop B 74.5, linear kK past the onset, K range = min(conjugate-lobe cap, 78.5 slot); RSSR deleted, V-rocker metal not sampled (ghost). Best ghost: kK 2.4, onset smhi 14, cap 56 (the cap is idle from onset 14: K max taken 52); loss split fold 72 (54 stretched th >= 117.3, 18 folded), slide 13, contact 6 (18.66 mm summed); overhead 8/28; min metal over taken 1.25 mm (near-touch gap = plain). vs the lead 18.49 (261, 2 contacts): +8 takes, +4 contacts before any drive metal. Gate 1 harness (closed form, pin paths per stage1.follower on the 32/48 geometry, control reproduces the proposer's pins exactly): as specified (O2.5 pins r 1.25, track B 1.5 lower) 0 pairs; proposer's convention (r 1.18, one level) 72 / 15 / 2 to K 56 / 60 / 64; packing in azimuth never binds (lobe A's contact arc and pin B's arc never share an azimuth). Convergence gate: n/a - ghost-ceiling kill (the lead's pre-registered gate 3, carried from pick 1), not a converged search: 14 judge cells on the claim bench (frozen exact Bench(110,360)); no CMA, because every cell at the lead's reach or better carries 6-9 contact poses against the bar of 4. Complexity 16.0 (desmo-slipper convention) / 22.0 strict.",
- "doc": "docs/concepts/desmo-vrocker-longdyad-knuckle-3r.md"
+ "doc": "docs/concepts/desmo-vrocker-longdyad-knuckle-3r.md",
+ "v_contact": 0.0156,
+ "audit": {
+  "t": "2026-10-17T17:25:00Z",
+  "verdict": "death stands",
+  "bench": "frozen exact Bench(110,360) ghost (V-rocker metal not sampled), audit copy of the per-pose harness with a two-sided J3 stop on q3' (J3's own angle)",
+  "repro": "best cell kK 2.4 / smhi 14 / cap 56 reproduced exactly: 17.23, 269/360, 6 contacts (117,127,129,139,264,316), fit 12.17",
+  "convergence_gate": "14 cells in run order: 2nd half +0.03 pts, last third 0.00, top-5 spread 0.09 (law-only grid on pick3's frozen chain; pre-registered gate 3)",
+  "j3stop_column": "conecut window [-111.90,122.74] sheds nothing (taken q3' -105.3..112.1): 17.23; best post-hoc <=4-contact window [-97.5,110.0] est 17.55 at 0.02/0.29 deg knife edges, worn for real 17.71 (265 taken, 5 contacts incl. new 369); [-97,109] 17.99; 1-deg margin est 18.96",
+  "gate4_bound": "ghost max taken 270 (s1684c64, s1946c64) < the judge's law+metal >= 274 before any drive metal",
+  "reason": "no law, cap, onset or J3 stop gets the 32/48 chain ghost to <= 17.5 with <= 4 contact poses (best 17.23/6; <= 4 contacts: 18.85 by onset, 17.71 by a knife-edge J3 stop); ghost max 270 taken < 274",
+  "template_bar_note": "the template's 'within 10 of 68.93 on Bench(60,160)' is the stale exo-screen.js BASE bar; judged against the pre-registered gates and the lead 18.49",
+  "doc_section": "docs/concepts/desmo-vrocker-longdyad-knuckle-3r.md#audit"
+ }
 }
