@@ -55,5 +55,62 @@
    "foot": 11
   },
   "tag": "seed"
+ },
+ {
+  "k": 1,
+  "t": "2026-10-17T18:42:33Z",
+  "params": {
+   "az": 0,
+   "el": 30,
+   "sigma": 1,
+   "a1": 90.0,
+   "a2": 90.0,
+   "psi3": 0.0,
+   "s3": 230.0,
+   "psi_b": 0.0,
+   "s_a": 45.0,
+   "margin": 5.0,
+   "width": 12.0,
+   "t_link": 3.0,
+   "q": 0.95,
+   "qf": 0.9
+  },
+  "inband14": 0.1875,
+  "inband10": 0.123,
+  "reach": 0.6875,
+  "follow": 0.7167,
+  "contact": 0.2949,
+  "gap": 145.32,
+  "closure": 0.9864,
+  "honest": false,
+  "overhead": "3/12",
+  "gamma": 15.1,
+  "junction_step": 291.5,
+  "kmode": "march",
+  "bench": "60,160",
+  "mode": "fast",
+  "inband_member": {
+   "hub1": 0.9334,
+   "hub2": 0.0,
+   "link1": 0.0,
+   "cap": 0.0,
+   "spar": 0.0,
+   "crank": 0.08,
+   "rod": 0.4,
+   "sleeve": 0.8285,
+   "foot": 0.9921
+  },
+  "contact_poses_member": {
+   "hub1": 2,
+   "hub2": 9,
+   "link1": 16,
+   "cap": 17,
+   "spar": 37,
+   "crank": 56,
+   "rod": 11,
+   "sleeve": 11,
+   "foot": 11
+  },
+  "tag": "seed"
  }
 ]

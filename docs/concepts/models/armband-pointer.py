@@ -219,3 +219,16 @@ if __name__ == "__main__":
     if a[0] == "check":
         import time; t0 = time.time(); r = bench_eval(B, p); print(round(time.time() - t0, 1), "s")
         print({k: r.get(k) for k in ("gap", "reach", "follow", "inband14", "inband10", "contact", "closure", "honest", "outer_contact_poses", "inband_member", "residual_deg", "min_margin", "th_min", "th_max", "audit")})
+    elif a[0] == "sweep":                     # sweep '{}' configs.json : append every evaluated config to the sweep file, in order
+        SW = os.path.join(REPO, "docs", "concepts", "sweeps", f"{ID}.json")
+        for cfg in json.load(open(a[2])):
+            pp = dict(PARAMS, **cfg)
+            try: r = bench_eval(B, pp)
+            except Exception as ex: print("FAIL", cfg, ex, flush=True); continue
+            rows = json.load(open(SW)) if os.path.exists(SW) else []
+            rows.append(dict(k=len(rows), t=K.now(), params=pp, **{x: r[x] for x in ("inband14", "inband10", "reach", "follow", "contact", "gap")},
+                             closure=r.get("closure"), honest=r.get("honest"), kmode=r.get("kmode"), outer_contact_poses=r.get("outer_contact_poses"),
+                             inband_member=r.get("inband_member"), min_margin=r.get("min_margin"), audit=r.get("audit")))
+            json.dump(rows, open(SW + ".tmp", "w"), indent=1); os.replace(SW + ".tmp", SW)
+            print(len(rows) - 1, cfg, "gap", r["gap"], "reach", r["reach"], "follow", r["follow"], "ib14", r["inband14"], "contact", r["contact"],
+                  "outer", r.get("outer_contact_poses"), r.get("inband_member"), flush=True)
