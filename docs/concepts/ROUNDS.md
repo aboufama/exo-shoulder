@@ -2330,3 +2330,103 @@ does not duplicate the jump track (axial J3 / arm-track, scapular relays).
 
 - Main track round 12: desmo-slipper-knuckle-3r (modelling), conecut-knee-knuckle-3r (CMA running),
   desmo-vrocker-longdyad-knuckle-3r (round-12 pick 4); slipper-nose-knuckle-3r / trimlug-k165 (gen-7 CAD fix pass).
+
+## Round 13 plan (2026-10-17 ~18:10 UTC, track main, lead verified gap 18.49)
+
+Planner's read of the files at 18:05-18:10 UTC. Ledger exits re-read: slipper-nose, conecut-knee and desmo-slipper
+exit 0 (WATCH); gamed: dipped-law-groove-knuckle-3r (fold margin 0.184), seed-offset-3r-slides. Under the lead directive
+(16:20 UTC) this round spends ONE lens in the knuckle family (complexity) and one time-boxed reach gate that the round-12
+closer sent to the lead; everything that moves the base or replaces J3 belongs to the jump track.
+
+### State
+
+- **Verified lead (reference for the audit): slipper-nose-knuckle-3r 18.49** (score 93.28), held out 23.45, reach 0.725
+  (261/360), overhead 8/28 (held 18/71), ib14 0.8955, 2 contact poses (T5 9.01 + 5.74 mm), cx 18.25. Bench losses: fold
+  88, knee slide 9, contact 2; held: fold 260, slide 32, contact 10. Watch: T5 depth unscored; M5 (clock spring
+  force-closes the sliding nose; R17 forward bound misses the unrounded 5.0 by 0.0008 deg at mu 0.15); G4 (m_sub < 5 at
+  K rest on 106/204 poses, B1 is the user's call); held th margin 5.006; NEW-ws-inband (elev 90-140 in-band 0.800,
+  19.9 % above 14 mm); reporting (sweep 13.0 shown as 95.27).
+- **Lowest verified number, ruled a TIE (8e50534, 18:05): conecut-knee-knuckle-3r 18.28** (93.35), held 22.38, cx 18.5,
+  262/360. Paired vs lead pooled -0.82, CI90 [-1.46, +0.09]. The edge is E-strap in-band dilution (equal strap 18.67 /
+  held 22.90) plus pose 203 at 0.26 mm (worth 0.55); contact deeper (bench 4 / 20.24 mm, held 14 / 60.97 vs 10 /
+  46.12); held th margin 5.006 (a +-0.3 deg K phase crosses it). What holds: the knee never binds (window margin 11.4 /
+  13.2 mm vs 0.33; 0 held slides vs 32), knee link 12 N per N.m vs 31.6, J3 2 mm 440C dowel on its own angle.
+- **desmo-slipper-knuckle-3r 18.95** (93.11), held 23.90, **cx 15.75** (lowest at the lead's reach). +0.46 vs lead, all
+  in-band (ring sector outside O20 0.33 fast, dense-gate placement 0.36), takes and contacts identical. Watch: friction
+  cliff (sliding stage 1 holds to mu 0.135, dK_lim 44.5; jams at 0.14, fast 86.71; the lead's roller holds 43.0 at
+  0.15); groove radius gate declared, never enforced (rc 0.99 at the verified placement, 0.23 mm ridge); stage-1 PA read
+  on the linear law (built groove: cap side 89 deg at the dwell exit); M3 short arm / O1.5 pin vs the hub-2 stack
+  unchecked (l2_check skips r < 11.5); T3 K play ~0.36 deg nominal (0.48 worst) -> ~0.1 deg of th, held min would fall
+  under 5; best_params still the refuted claim placement (a_s 9.25 / psi 154; verified a_s 9.5 / psi 150).
+- Other ties / same family: trimlug-k165 18.51, inband-rssr 18.33 (tie), roller-longdyad 18.67, sidecar-longdyad 18.91,
+  sidecar-parallelogram 19.13. 4 active (a sensed joint is a joint): minarc-stop-knuckle-4r 18.40.
+- **Complexity frontier (v2.2):** skin-normal-3r-pin-knee 27.2 at cx 0 (score 90.1, reach 0.658, ib14 0.895, contact
+  0.026), raglan-knee 27.82 at cx 0, geneva-tail-pinknee 23.57 at cx 12, desmo-slipper 18.95 at 15.75, lead 18.25.
+  Knuckle cx is mostly closed loops (2 x 4) + 3 joints beyond 3 + 2 passive rotations; the spring is 3, a sliding pair 1.
+- **The limiter is the J2 fold, both walls.** Bench fold 88 = 73 stretched (th 107-176; 64 are internal rotation >= 90
+  across the body) + 15 folded (th 7.7-22, scapular-plane overhead). The stretched wall is the K drive's stroke (taken
+  poses end at th 106.3: a1e 54.3 at dK 45.6 of 46.25). 95 = gap 13.75 = +18 workspace poses at the lead's in-band and
+  contact (reach ~0.775).
+- **The family's reach cap is a seat cap (round 12, measured):** best long-dyad chain ghost 17.23 (32/48, kK 2.4, onset
+  14, cap 56; 269 taken, 6 contacts); every <= 4-contact cell 18.85-19.71 and never > 270 taken. The same 5-pose
+  binder (117, 127, 129, 139 at plane -90..-60 / elev 45-60 / axial +105..+135; 316 at 60 / 150 / -105; link 2 to
+  -7.7 mm, hub 2 rim to -3.8) in every cell, invariant to dyad, gain, cap, onset, drive and J3 stop; two deepen as K
+  falls. Real drive metal on the long dyad: 38.56 (40 contacts) with pick3's drive placement unrefit.
+- **Dead, do not rescreen:** K law / gain / onset / stop B / cap / dyad cells on pick3's seats (26 cells); a J3 stop as
+  a reach lever (it relabels, never takes); stacked conjugate lobes without base-ring relief; desmo spec placement (psi
+  184); long knee links at stk 4.85; 9-point slop scans; humerus-axial J3 rings / spars / epicondyle hubs (J1: ring in
+  contact on 169-204 / 220 poses; epicondyle axis 12.8-16 mm inside the skin); scapular relays on a plain 3R
+  (acromion-relay-4r gate 0 41.62 fast, hub 2 0.06 in band).
+- **Machinery still by hand** (open since round 11): exo-screen.js still words the verify bar as 68.93 / 75.94 (LEAD
+  comes from this plan's lead_gap 18.49; the verifier judges against it with the pooled-CI tie rule); no pair-coverage
+  probe; continuity flood not a hard step; no slop state in the models; no mu column for sliding pairs; no equal-sample
+  in-band comparison (S6); best_params can hold a refuted placement.
+- **Lead bookkeeping status:** conecut's leader_ruling is written (8e50534). Still open for the lead: desmo-slipper's
+  best_params -> the verified placement; generation-12 CAD = the gen-7 slipper-nose CAD + conecut knee re-cut (lE 97.14,
+  lc 24.35, phiE 0.75, phib -91.80, ang_min 25.22, MR63ZZ pairs stk 6.0) + dowel [-111.90, 122.74] on q3', with the new
+  knee's cuff twist and R17 measured (M5).
+- **Compute:** the farm approval window ended ~17:20 UTC and the balance sat at the $24.40 line ($24.14 at 17:07), so
+  local only unless the user renews: <= 2 niced processes per agent, OMP_NUM_THREADS=1. Box load ~17 on 4 cores at
+  18:08 (jump-track CMAs, trimlug R16 judge, gen-7 CAD scoring).
+
+### Lenses
+
+1. **LENS complexity-desmo-conecut (the one knuckle lens; suggested id desmo-conecut-knuckle-3r, expected cx 16.0).**
+   Stack desmo-slipper's spring-free, roller-free K drive (crowned O1.5 stage-1 pin in the 3-D skirt groove under hub
+   2's cap ring, verified placement a_s 9.5 / psi 150 / blend 10, two-walled slot round the O2.5 nose; no clock spring,
+   no stop A, no stage-1 roller) on conecut's knee and J3 dowel. Why: desmo's +0.46 vs the lead is all in-band on
+   identical takes and contacts, and conecut's knee is measurably ahead of desmo (pooled -1.28, CI90 [-1.90, -0.13]).
+   Target: pooled paired tie with the lead (CI90 includes 0) at cx <= 16.0, held out <= 23.45. Gates enforced IN the
+   model (a failing gate rejects the placement, never a footnote): dense crank-free slop <= 0.25 deg (>= 200 points,
+   both directions, full taken K range); groove centreline radius >= 1.5 mm (or retired with a measured reason and the
+   ridge stress on the part); stage-1 PA read on the BUILT blended groove; dK_lim >= 44 at mu 0.15 with a mu column
+   (0.087 / 0.12 / 0.135 / 0.15); the short arm's relief pocket in link 1b's J2 boss modelled as metal and checked
+   against the hub-2 stack (pair probe including r < 11.5); K play carried into th per pose (both signs), held out, min
+   th >= 5 (a th re-margin by K phase or stop is allowed and priced); best_params = the verified placement. Report at
+   equal E-strap samples (S6) next to the plain number, per-pose dumps (tools/alignment_paired.py dump, bench and held),
+   T5 depth, the motion preview. Fallback (claim either way): keep a stage-1 roller in a two-walled groove and delete
+   only the spring. Kill: no stage-1 placement passes every gate with dK_lim >= 44 at mu 0.15 - report the binding gate.
+2. **LENS reach-hub2-seat-ghost (reach >= 0.77 at ib14 >= 0.88; the gate the round-12 closer sent to the lead).** The
+   5-pose binder moves only if hub 2 and link 2 slide ALONG the posterior deltoid. Cells, all on the best long-dyad
+   ghosts (32/48 kK 2.4 onset 14 cap 56: 17.23 / 6; 34/48 kK 2.8: 17.86 / 8): (a) hub-2 seat (az2 / el2) along the
+   deltoid's long axis; (b) K axis re-aim (bk1 / bk2 / psiA) so the a1e path parks hub 2 off the binder; (c) link 2
+   routed by a planform turn + 60-deg climb (inner radius >= 15 mm) over the five poses. J1 seats stay in the allowed
+   region (back / acromion top); no new joint, no spring. One 30-45 min gate: chain ghost (hubs O20 at their stack,
+   3 mm bent bars at real height, knee as built, ideal drive), searched on the envelope bench (never the fit bench,
+   never held out), judged frozen exact on Bench(110,360) with a per-pose table for 117 / 127 / 129 / 139 / 316 and
+   every new loss, min th margin in th, continuity flood. Bar: <= 17.5 with <= 4 contacts and >= 274 takes. Pass: one
+   hardware cell (drive re-placed on its own dyad, round-12 lesson 3) inside the round. Fail: the family is closed for
+   reach with that number, written to FINDINGS.
+
+### Carried (ideated, never screened)
+
+- None for the main track. The round-4 picks (deltoid-crest-j3-3r, crest-knee-3r, slotted-eccentric-pin-knee-3r) were
+  passed over with measured reasons in the J1 plan (O15 seeds, pin-knee fold cap); armband-pointer, cuff-sleeve-3r and
+  acromion-pointer-arm-ctrack carry J1's forwarded numbers and belong to the jump track.
+
+### Elsewhere, not to be duplicated
+
+- Jump track (round J1): acromion-relay-4r (frozen wear running), acromion-pointer-arm-ctrack (CMA running; twin shoes
+  89.55 fast), pinknee-scapular-relay-4r (pick 1, expected 18-22); armband-pointer / cuff-sleeve-3r forwarded. J1's
+  lesson for the next jump: move hub 2 itself, not the base.
+- Lead: generation-12 CAD (slipper-nose CAD + conecut knee + dowel), user_trimlug_k165 R16 judging, desmo best_params.
