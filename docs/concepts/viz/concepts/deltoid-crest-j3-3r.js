@@ -9,12 +9,12 @@
  * rotations, complexity 0. The fold (J1-J3 angle outside the window) shows red - with hub 2's level spread, the limiter. */
 (function () {
   const K = (typeof window !== 'undefined' ? window : globalThis).KIN, V = K.V, M = K.M;
-  const P = { az: 103.4879, el: 65.8246, a: [38.1218, 51.4912], w: [103.0802, -7.0294], branch: -1, inv2: 1, inv3: 1,
-              faces: [50.0, 59.6, 62.0], stack: 12.25, margin_deg: 5, cuff_at: 165,
-              // fitted underside level (mm from GH) at 11 stations along each strap (Bench(60,160) fast fit of the screen's best, gap 37.90)
-              lv1: [53.1, 53.1, 56.4, 53.1, 58.4, 56.2, 63.6, 63.6, 62.7, 62.7, 62.7],
-              lv2: [59.6, 59.6, 59.6, 56.1, 55.0, 56.6, 58.0, 58.5, 62.0, 62.0, 62.0],
-              lvn: [65.2, 65.2, 66.0, 67.0, 66.0, 70.0, 75.0, 74.1, 81.0, 90.5, 88.0] };
+  const P = { az: 105.4971, el: 63.1176, a: [38.6879, 44.1129], w: [103.3777, 4.9346], branch: -1, inv2: 1, inv3: 1,
+              faces: [50.8, 59.8, 62.0], stack: 12.25, margin_deg: 5, cuff_at: 165,
+              // fitted underside level (mm from GH) at 11 stations along each strap (Bench(60,160) fast fit of the screen's best, gap 36.63)
+              lv1: [53.9, 53.9, 53.9, 53.9, 55.3, 56.3, 61.0, 63.8, 62.9, 62.9, 62.9],
+              lv2: [59.8, 59.8, 59.8, 59.8, 55.0, 56.0, 57.2, 62.0, 62.0, 62.0, 62.0],
+              lvn: [65.2, 65.2, 66.0, 65.7, 67.0, 68.9, 71.8, 78.1, 79.0, 88.7, 89.0] };
   const C = K.sph3r(K.bvec(P.az, P.el), K.wdir(P.w[0], P.w[1]), P.a[0], P.a[1], P.branch);
   const lo = Math.abs(P.a[0] - P.a[1]), hi = Math.min(P.a[0] + P.a[1], 360 - P.a[0] - P.a[1]);
   const WB = [0, -0.0713, 0.9975], DB = [0, -0.9975, -0.0713];             // BOTTOM's bar (body_pose humerus frame)

@@ -159,15 +159,32 @@ The short first arc fixes the cap pole's hub-2 problem (the J2 ray exits 50-60 m
 band) - and pays for it with the fold: 90 stretched workspace poses. The binders that hub 2 used to lose are now lost to
 part-part clearance (link 1 bridging over link 2 at the overhead poses).
 
-## Verdict: DEAD (closing screen)
+## Late update: wide restarts s6 / s7 (2026-10-17 22:35-22:46 UTC)
 
-Convergence gate (score points, the whole sweep in evaluation order, n 2160 before the s6 wide restart): gain over the
-second half 0.742 (< 1), over the last third 0.149 (< 0.5), top-5 spread 0.244 (< 3): passed. The converging chain
-s3 + s4 alone reads 0.149 / 0.0; s4 (257) and s5 (311) found nothing below 37.90.
+| step | configs | best gap (score) | reach / follow / ib14 / contact | where |
+|---|---|---|---|---|
+| CMA s6, wide restart from 37.90 (sigma 0.7) | 221 | **36.63 (86.68)**, near-touch 57.59 | 0.650 / 0.900 / 0.864 / 0.031 | J1 bvec(105.50, 63.12), J3 wdir(103.38, +4.93), a1 38.69 / a2 44.11, inv2 1 / inv3 1, q 0.942, end_extra 2.55 |
+| CMA s7 from 36.63 (sigma 0.3) | 145 | 36.63 (no gain) | | |
+
+Hub levels 50.8 / 59.8 / 62.0 mm; in band hub 1 0.99, hub 2 1.00, hub 3 0.90, link 2 0.97, link 1 0.67, neck 0.83. The
+shorter a2 (44 vs 51) narrows the window further (to [10.4, 77.8]) but buys follow (0.90) and 11.5 near-touch points.
+
+**Convergence gate after s7 (n 2526, evaluation order): gain over the second half 1.204 (> 1), over the last third
+0.462 (< 0.5), top-5 spread 0.422 (< 3): NOT formally passed** - the wide restart's +0.46 points landed in the second
+half. Passing it in order needs ~900 more no-gain evaluations (not possible inside this box on the shared local CPU, the
+farm is closed). So the row stays `screened`, with the death measured on the kill bar instead: the frozen exact of the
+37.90 config is 47.88, 15.8 points above the spec's own bar (32.10) - a 0.46-point fast gain cannot close that.
+The frozen exact of 36.63 is in docs/concepts/verify/deltoid-crest-j3-3r_frozen_exact_s6.json when it lands.
+
+## Verdict: dead on the kill bar (formal gate open; closing screen)
+
+Convergence gate before the s6 wide restart (n 2160): 0.742 / 0.149 / 0.244 - passed then; after s6 / s7 (n 2526):
+1.204 / 0.462 / 0.422 - not formally passed (above). s4 (257) and s5 (311) found nothing below 37.90; s7 (145) nothing
+below 36.63.
 
 Frozen exact 47.88 (score 82.59) against the spec's own kill bar (beat j3-neck-over-3r's 32.10 frozen), the
-zero-complexity optimum's 31.04 frozen exact and the lead's 18.28. 1849+ configurations on Bench(60,160) (493 Sobol over
-the crest box x branch x both stack orders, CMA streams s1-s5); best fast 37.90.
+zero-complexity optimum's 31.04 frozen exact and the lead's 18.28. 2526 configurations on Bench(60,160) (493 Sobol over
+the crest box x branch x both stack orders, CMA streams s1-s7); best fast 36.63 (frozen pending; 37.90 -> 47.88).
 
 Limiter (measured): the deltoid-crest J3 seat widens the J1-J3 angle range the J2 dyad must span (p95 143 deg on the big
 bench), so the plain spherical dyad loses the stretched side (90 / 360 workspace, 14 / 28 overhead, 51 / 68 across);

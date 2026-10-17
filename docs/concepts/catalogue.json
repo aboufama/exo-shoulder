@@ -2195,7 +2195,7 @@
   "name": "Deltoid-crest J3 equal-arc 3R: J3 ~25 deg higher on the arm at the deltoid crest, ~45/50 deg arcs, hub 2 on quiet posterior-superior skin at 0.83-0.85 closure, inverted J3 stack",
   "family": "spherical 3R (zero passive), new seat basin",
   "lens": "round4:keep hub 2 on scapula-side skin at fold-freer axis directions (hub-2 parking mapped over all seat pairs on the atlas height maps)",
-  "status": "dead",
+  "status": "screened",
   "t_ideated": "2026-10-16T05:47:46Z",
   "source": "round 4 judge (docs/concepts/round4_ideation.md)",
   "merged_from": [
