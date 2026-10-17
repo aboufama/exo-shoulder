@@ -296,7 +296,7 @@ def blank(mid):
                 n_configs=0, sweep_gap=None, sweep_t=None, sweep_reach=None, sweep_follow=None, sweep_inband14=None,
                 sweep_contact=None, t_last=None, verdict="", note="", duplicate_of="", doc="", source="",
                 complexity=None, complexity_items="", passive_trans=None, mechanism_confidence="",
-                frozen_gap=None, v_config="",
+                frozen_gap=None, v_config="", leader_ruling="",
                 alignment="", alignment_stage="", alignment_reasons="", alignment_t=None, alignment_claim=None, alignment_stale=False)
 
 
@@ -399,11 +399,18 @@ def morphs(S):
             # a polished configuration CONFIRMED by an independent verifier replaces the row's verified number (final-polish rule)
             rw = raw.get(mid, {})
             if str(rw.get("polished_status") or "").upper().startswith("CONFIRMED") and num(rw.get("polished_gap")) is not None:
-                pb = ((rw.get("polished_bench") or {}).get("pick1") or {}) if isinstance(rw.get("polished_bench"), dict) else {}
+                # the claimed pick is named by polished_id's first word ("pick3 = ..."), not always pick1 (alignment audit
+                # 2026-10-17, inband-rssr pick3 skeptic: a pick3 row showed v_gap with v_reach / v_follow / v_inband14 empty)
+                pbs = rw.get("polished_bench") if isinstance(rw.get("polished_bench"), dict) else {}
+                pk = str(rw.get("polished_id") or "").split(" ")[0]
+                pb = next((pbs[k] for k in (pk, "pick1") if isinstance(pbs.get(k), dict)), None) or \
+                     next((v for k, v in pbs.items() if k.startswith("pick") and isinstance(v, dict)), {})
                 m["v_gap"] = round(num(rw["polished_gap"]), 2)
                 for k in ("reach", "follow", "inband14", "inband10", "contact"):
                     if pb.get(k) is not None: m["v_" + k] = share(pb[k])
                 m["v_config"] = str(rw.get("polished_id") or "polished").split(" ")[0]
+                # its number IS an independent verifier's: the board must not call it "Checking" (screened rows only)
+                if m["status"] in ("ideated", "modelling", "screened"): m["status"] = "verified"
             # a self-measured FROZEN EXACT claim (not verified) - shown as such, never as a fast number
             fz = rw.get("frozen_exact")
             # rows store the frozen exact claim under several keys (frozen_exact / frozen / claim.frozen); the first number
@@ -412,6 +419,9 @@ def morphs(S):
                      (rw.get("frozen") or {}).get("gap") if isinstance(rw.get("frozen"), dict) else None,
                      (rw.get("claim") or {}).get("gap") if isinstance(rw.get("claim"), dict) else None]
             m["frozen_gap"] = next((num(c) for c in cands if num(c) is not None), None)
+            # the lead's ruling after a leader-change audit (e.g. "tie: slipper-nose-knuckle-3r | ..."): a row ruled a tie or no
+            # lead stays on the board at its verified number but does not take the headline (docs/OPERATIONS.md section 4)
+            m["leader_ruling"] = str(rw.get("leader_ruling") or "")
             m["n_configs"] = len(sw) or to_int(m.get("n_configs"), 0) or 0
             scored = [s for s in sw if s["gap"] is not None and not s["passed_over"]]
             if scored:

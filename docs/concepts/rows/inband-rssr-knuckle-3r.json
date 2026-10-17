@@ -1076,5 +1076,6 @@
   "not_rerun": "fit env -> held (env fast cache only on the farm volume; farm budget spent)",
   "cost": "$0 farm; local 2 processes, about 18 min"
  },
- "polished_verdict": "CONFIRMED: pick3 (CAD: r_h +0.25) priced 18.33 on Bench(110,360) vs the row's pick 19.43 (+1.10) and 22.86 held out vs 24.38 (+1.52, fit60; env fit 23.57 vs 24.75, +1.18). Hard goal: 18.33 meets <= 18.5, 22.86 misses <= 22.0. Against the leader slipper-nose (18.49 / 23.45, unpriced) it is an edge, not a clear lead (paired held -0.59, CI crosses 0)."
+ "polished_verdict": "CONFIRMED: pick3 (CAD: r_h +0.25) priced 18.33 on Bench(110,360) vs the row's pick 19.43 (+1.10) and 22.86 held out vs 24.38 (+1.52, fit60; env fit 23.57 vs 24.75, +1.18). Hard goal: 18.33 meets <= 18.5, 22.86 misses <= 22.0. Against the leader slipper-nose (18.49 / 23.45, unpriced) it is an edge, not a clear lead (paired held -0.59, CI crosses 0).",
+ "leader_ruling": "tie: slipper-nose-knuckle-3r | lead's ruling 2026-10-17 12:45 UTC after the leader-change audit (48be5d5, final WATCH): read under the leader's protocol (unpriced, margin 5) pick3 is 18.32 bench / 23.54 held vs the leader's 18.49 / 23.45 - ahead on the bench, behind held out, paired held CI [-0.83, +1.31]: a tie, not a lead. pick3 was chosen best of 3 after the claim numbers were known (the pre-registered envsel #1, pick1, reads 19.15 bench); with the catalogue igus KBRM-02 O9 head it needs r_h >= 15.65 (build 15.9: 18.32 / 23.62). No leader change."
 }

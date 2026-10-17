@@ -114,7 +114,10 @@ WATCHDOG (exo-shoulder, every 15 min; docs/OPERATIONS.md):
 https://claude.ai/artifact/DjCGir1xvu6es36Lx1nwRA - the public-mirror page (`docs/dashboard/public/index.html` + its
 `data/*.json` files map from the PUBLIC line), republished by the same `file_path` from this session (a new session
 passes `url` after an `Artifact read`). Its headline is the best verified design with <= 3 active joints (user ruling
-2026-10-17: a sensed joint is a joint).
+2026-10-17: a sensed joint is a joint). A row whose JSON carries `leader_ruling: "tie: <leader id> | why"` (or `"no lead: ..."`)
+- the lead's ruling after a leader-change audit - keeps its board place at its verified number, shows "Verified (tie)"
+with the ruling on hover, and does not take the headline (the headline names the tie instead). First use: inband-rssr pick3
+(2026-10-17, audit 48be5d5).
 
 | | production | public mirror |
 |---|---|---|
