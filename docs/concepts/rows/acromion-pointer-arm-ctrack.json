@@ -14,15 +14,15 @@
  "inband10": 0.2935,
  "contact": 0.0547,
  "gap": 58.71,
- "v_reach": null,
- "v_follow": null,
- "v_inband14": null,
- "v_inband10": null,
- "v_gap": null,
+ "v_reach": 0.7833,
+ "v_follow": 0.9818,
+ "v_inband14": 0.4403,
+ "v_inband10": 0.2907,
+ "v_gap": 65.66,
  "n_configs": 599,
  "verdict": "DEAD at GATE 0 (round J1): best 58.71 (score 78.65) on Bench(60,160) fast (k474, twin shoes on a fork yoke, 0 passive), frozen exact Bench(110,360) 65.66 (reach 0.7833, 34 contact poses) vs gate <= 15-17.5; single-shoe race 118.96 fast / 116.71 frozen exact; the spec's radial-slide version 109.88 fast with a 34 mm skin-normal slide (not buildable). Lead 18.49.",
  "limiter": "(1) the arm's torso-free arc: an ARM-fixed track has ~105 deg of arc where the torso / axilla / folded forearm never reaches it (radial skin march, s 25-240), while the gimbal's twist needs 133-200 deg for reach 0.81-0.94 at housable J1 seats -> single shoe reach 0.50 (fixed by twin shoes: kinematic 0.92-0.96); (2) in-band: the shoes ride a CIRCULAR race at the track's highest skin radius (58-89 mm span under it) and float 18-32 mm (0.00-0.12 in band); link 1 / yoke tines 0.27-0.44 (pointing / swing frames over the rotating deltoid); (3) contact: the torso on the arm-fixed track (40 of 34 frozen contact poses), link 1 into the deltoid overhead (abd 150: -3.3 mm) and across the body",
- "note": "GATE 0 numbers: ghost fit Bench(60,160) fast best 58.71 (k474); frozen exact Bench(110,360): {\"gap\": 65.66, \"reach\": 0.7833, \"follow\": 0.9818, \"inband14\": 0.4403, \"inband10\": 0.2907, \"contact\": 0.0802, \"overhead\": \"4/28\", \"taken_ws\": 282, \"contact_poses\": 34, \"contact_poses_member\": {\"hub1\": 1, \"hub2\": 6, \"link1\": 13, \"yoke\": 3, \"track\": 19, \"carriage\": 0, \"carriage2\": 2, \"yoke2\": 1}, \"min_margin_taken\": 5.89, \"near1_gap\": 75.41, \"min_metal\": -17.43, \"flips\": 0}; convergence (score points): fork-yoke twin (438 configs): gain over the 2nd half 4.45, over the last third 1.92, top-5 within 0.48 -> NOT converged (still improving ~5 gap points per 150 configs when the time box ended; 41 gap points short of the 17.5 death line); single-shoe race (101 configs): 0.00 / 0.00 / 1.47 -> converged at 118.96; spec radial-slide version (34 configs): 3.29 / 0.00 / 4.12; all 599: 5.76 / 2.76 / 0.48; model: kit + arm-axis-fitted track + per-pose shoes (docs/concepts/models/acromion-pointer-arm-ctrack.py: eval / run / coarse / cma / wear); honest checks: K3 march, K2 dense, K6 (fork tines exempt from each other only), audit; sweep k0-k3 = early model versions (GH-ray track; superseded); compute local only (farm closed), <= 2 niced processes",
+ "note": "GATE 0 numbers: ghost fit Bench(60,160) fast best 58.71 (k474); frozen exact Bench(110,360): {\"gap\": 65.66, \"reach\": 0.7833, \"follow\": 0.9818, \"inband14\": 0.4403, \"inband10\": 0.2907, \"contact\": 0.0802, \"overhead\": \"4/28\", \"taken_ws\": 282, \"contact_poses\": 34, \"contact_poses_member\": {\"hub1\": 1, \"hub2\": 6, \"link1\": 13, \"yoke\": 3, \"track\": 19, \"carriage\": 0, \"carriage2\": 2, \"yoke2\": 1}, \"min_margin_taken\": 5.89, \"near1_gap\": 75.41, \"min_metal\": -17.43, \"flips\": 0}; convergence (score points): fork-yoke twin (438 configs): gain over the 2nd half 4.45, over the last third 1.92, top-5 within 0.48 -> NOT converged (still improving ~5 gap points per 150 configs when the time box ended; 41 gap points short of the 17.5 death line); single-shoe race (101 configs): 0.00 / 0.00 / 1.47 -> converged at 118.96; spec radial-slide version (34 configs): 3.29 / 0.00 / 4.12; all 599: 5.76 / 2.76 / 0.48; model: kit + arm-axis-fitted track + per-pose shoes (docs/concepts/models/acromion-pointer-arm-ctrack.py: eval / run / coarse / cma / wear); honest checks: K3 march, K2 dense, K6 (fork tines exempt from each other only), audit; sweep k0-k3 = early model versions (GH-ray track; superseded); compute local only (farm closed), <= 2 niced processes; AUDIT: death stands (see audit field): 58.71 / 65.66 reproduced exactly, 70-config CMA continuation best 60.46, ghost bound without shoes / hub 1 / tine 2 = 44.53",
  "doc": "docs/concepts/acromion-pointer-arm-ctrack.md",
  "model_file": "docs/concepts/models/acromion-pointer-arm-ctrack.py",
  "best_params": {
@@ -122,5 +122,40 @@
   "notes": "counted at the best config: bodies link 1, L2 fork yoke + 2 shoes (one rigid part), arm-end C-track (saddle body + circular race, BOTTOM cut and merged). joints J1, J2 O20 hubs, J3 = the arm-fixed race held by whichever shoe is on it (4 MR63 V-rollers per shoe). custom: base, link 1, fork yoke, 2 shoe bodies, track; catalogue: 2 x MR117 pair, 8 x MR63 V-roller (est.).",
   "source": "docs/concepts/models/acromion-pointer-arm-ctrack.py (build: members), rows best_params",
   "confidence": "counted"
+ },
+ "v_contact": 0.0802,
+ "audit": {
+  "t": "2026-10-17T19:29:12Z",
+  "refuted": false,
+  "reproduced": {
+   "fast_bench_60_160": 58.71,
+   "frozen_exact_110_360": 65.66,
+   "contact_poses": 34,
+   "taken_ws": 282
+  },
+  "cma_continuation": {
+   "configs": 70,
+   "sigma0": 0.05,
+   "seed": 11,
+   "best": 60.46,
+   "note": "no gain over k474 58.71"
+  },
+  "gate_fork_after_audit": {
+   "configs": 508,
+   "gain_second_half": 2.16,
+   "gain_last_third": 0.0,
+   "top5_spread": 0.48
+  },
+  "ghost_bounds_fast": {
+   "no_shoes": 51.48,
+   "no_shoes_no_hub1": 48.27,
+   "no_shoes_no_hub1_no_tine2": 44.53,
+   "hubs_links_only": 53.83
+  },
+  "shoe_radius_slip": {
+   "note": "kin/car_local size the 24 mm shoe at r 50 mm (27.5 deg) on a ~94 mm race: shoe sampled ~45 mm long, window 13 deg narrower; corrected (r 94) 59.86 at k474 thc, 60.53-62.58 at thc +-3: neutral"
+  },
+  "el_bound": "el -20 is the project's J1 seat rule (tools/gpu_bench.py seat_ok: -20 <= el <= 90), not a missed region",
+  "verdict": "death STANDS at round J1 GATE 0: reproduced 58.71 fast / 65.66 frozen exact; with no shoe, hub 1 or tine-2 metal at all the chain still scores 44.53 (link 1 0.48 / yoke 0.47 in band in the swing frame, reach 0.825), 27 points above the 17.5 kill line"
  }
 }

@@ -170,3 +170,28 @@ workspace with the gimbal >= 5 deg from its poles) - it fails on WHERE the metal
    inside the arm and the 15-mm-window march jumps the torso and parks the part at 400 mm (contact 0.73, k0-k3).
 5. **The spec's skin-shaped track + radial slide** needs 20-34 mm of skin-normal travel at the CMA optimum - the
    slide stands taller than the float it removes; a circular race on a skin-fitted saddle is the buildable version.
+
+## Audit (independent auditor, 2026-10-17 ~19:45 UTC): the death STANDS
+
+Task: refute the GATE 0 death (a modelling bug, a wrong convention, a missed parameter region, an over-strict check,
+or an unconverged sweep). Local only, niced, <= 2 processes. Scratch scripts under the auditor's scratchpad; the 70
+CMA evaluations are appended to the sweep file (tag `audit cma s11`).
+
+| check | measured | effect on the verdict |
+|---|---|---|
+| reproduce k474, Bench(60, 160) fast | **58.71** (reach 0.825, follow 0.967, ib14 0.443, contact 0.055), audit clean, collide 0.0 | exact |
+| reproduce frozen wear, Bench(110, 360) EXACT | **65.66** (reach 0.7833 = 282/360, follow 0.982, ib14 0.440, ib10 0.291, contact 0.080 = 34 poses, overhead 4/28, min th margin 5.89, near-touch 75.41) | exact |
+| convergence: CMA-ES continued from k474 (sigma 0.05, 70 configs) | best 60.46, no gain | fork-yoke gate now 2.16 / 0.00 / 0.48 (2nd half / last third / top-5): the last third has stopped improving |
+| CMA box: every top-30 config sits on el = -20 | -20 is the project's J1 seat rule (tools/gpu_bench.py `seat_ok`: -20 <= el <= 90) | not a missed region; lower seats are outside the user's back / acromion-top ruling |
+| GHOST bound: drop members from the scoring (same poses, same chain) | no shoes 51.48; no shoes + no hub 1 48.27; no shoes + hub 1 + tine 2 **44.53**; hubs + links only (no race, no shoes) 53.83 | even a weightless twist joint leaves link 1 (0.48 in band) and the yoke (0.47) in the swing frame over the deltoid: 27 points above the 17.5 line |
+| modelling slip: `kin` / `car_local` size the 24 mm shoe at r = 50 mm (27.5 deg) while the race sits at ~94 mm, so the shoe is sampled ~45 mm long and the window loses ~13 deg | corrected (shoe at r 94): 59.86 at k474's thc, 60.53 / 62.58 / 61.65 at thc -77.3 / -71.3 / -70.0 | neutral: the wider window takes a few more race-end poses, where the torso reaches the arm-fixed race |
+| K6 over-strictness | collide 0.0 at k474 (no pose lost to a part-part check) | none |
+| convention vs concept_baseline | B.report() on every sampled skin face; O20 hubs 81 samples each; kit audit empty | none |
+
+Note on the legacy refutation bar ("within 10 of the champion's 68.93 on Bench(60, 160)"): this row already sits
+below it (58.71). The death is by round J1 GATE 0 (> 17.5 dies; lead 18.49), and nothing found here moves the number
+by more than ~2 points either way.
+
+**Measured reason (one line):** the gimbal's link 1 and yoke ride the swing frame over the rotating deltoid (in band
+0.47-0.48 even with every shoe, race and hub-1 sample removed: ghost 44.53), and the circular race's shoes float 18-32
+mm over a 61-90 mm skin radius - structural, not a bug; reproduced 58.71 / 65.66 exactly.
