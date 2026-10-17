@@ -34,7 +34,9 @@ plain iglidur pins R17 fails: ~10 deg cuff twist, ~10 N), and the knee window [a
 knee stop the model checks like the J2 stops. (7) CPU-farm spending APPROVED by the user 2026-10-17 ~05:20 UTC ("yes they can spend, i want higher scores! get to
 work and do it well!"): agents may run tools/cloud_run.py batches on the exo-cpu1 CPU endpoint within $8 per 12 hours
 (until 2026-10-17 ~17:20 UTC; renew with the user after). GPU renders (exo-blender-cycles) still need a separate yes.
-Keep workersMin 0; tools/runpod_guard.py audit before and after each batch.
+Keep workersMin 0; tools/runpod_guard.py audit before and after each batch. BUDGET LINE: the account balance was
+~$32.40 at the approval, so the $8 is spent when tools/runpod_guard.py audit shows balance <= $24.40 - from then on
+run locally (<= 2 niced processes) unless the user renews (status 12:07 UTC: $25.44, ~$1 left).
 (6) Sensing is OUT OF SCOPE (user 2026-10-17: "dont wory about the sensor stuff the purpose of this is to find a
 kinematic solution if we sensor every joint we can just use inverse kinematics to get a perfect position"): encoders
 cost 0 complexity (tools/simplicity.py v2.2), and no agent spends time on sensing, determinacy-from-encoders or
