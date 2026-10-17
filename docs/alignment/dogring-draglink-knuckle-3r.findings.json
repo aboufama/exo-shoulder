@@ -1,0 +1,44 @@
+[
+ {
+  "key": "M3",
+  "level": "watch",
+  "reason": "The claimed 22.64 (held 25.36) was bought by a clash nobody checked: member 9 (dog sector + Ti arm) against link 1b. The parent's per-pose collide() exempts the crank-link 1b pair as adjacent (in the lead the crank only pivots on link 1b); here the same slot is a 24.4 mm arm that turns up to phi 32 deg about J2's axis over link 1b's root ramp, and its design-stage 'stacked over link 1b' level is read once, at phi 0. The verifier measured -0.18 mm (overlap) at r 15.2 mm from J2's axis on 183 of 374 taken bench poses (every pose with K 3.2-44.0 deg) and 442 of 872 held out; dropping them gives 97.83 (held 101.1). Re-worn here through the verifier harness, unchanged: 22.64 -> 97.83 and 25.36 -> 101.1 to the digit. Under the model's own 1 mm rule for adjacent pairs (the horn-link 1b pair), all 374 taken poses fail (verifier strict_1mm), so 97.83 is the lenient reading. Not gamed: the number on record (v_gap 97.83, status refuted) already prices the clash, and no live ranking shows the old numbers (docs/dashboard/core.js line 9 and leader.js line 4 drop refuted rows). The exempted pair is still missing from the model, so any repaired re-claim would carry the same blind spot.",
+  "evidence": "docs/concepts/verify/dogring-draglink-knuckle-3r_v_bench_frozen.json checks.arm_L1b_min_mm -0.18, arm_L1b_lt015 183, arm_L1b_lt1 374, arm_L1b_fail_K_deg [3.2, 44.0]; _v_held_frozen.json 442 of 872; docs/alignment/remeasure/dogring-draglink-knuckle-3r_vprobe_{bench,held}.json (this audit: corrected 97.83 / 101.1, claim 22.64 / 25.36); docs/concepts/models/dogring-draglink-knuckle-3r.py line 238 (base read at phi 0, nearest link-1b point to the arm centreline), line 244 (arm_up root level); model check on Bench(60,160): cam.phi_max_taken 32.0, arm_len 24.4, arm_beside 0.0"
+ },
+ {
+  "key": "NEW-silent-check",
+  "level": "watch",
+  "reason": "The model's own per-pose check of the sector against link 2 (RING-L2, DRModel.collide) never ran on any claim bench. The family's frozen protocol (LS._frozen_model, docs/concepts/models/longstroke-slipper-knuckle-3r.py lines 224-229) copies a fixed list of attributes from the fit model, and _dogg / _L2ring are not on it, so collide() returns early (dogring model line 355) on Bench(110,360) and on the held-out set. The check guarded the fit bench only. The verifier re-instated it and lost 0 poses, so 0 points depend on it here. The pattern is new: a check written into the model, silently skipped by the claim protocol. The same whitelist is copied in 9 other model files; among the ones that load the longstroke parent, only dogring's collide() guards on an attribute the list leaves out.",
+  "evidence": "docs/concepts/verify/dogring-draglink-knuckle-3r.py docstring item 0 and install_ring_fix(); rows/dogring-draglink-knuckle-3r.json verification.passed 'RING-L2 re-instated in the worn bench: 0 poses lost'; grep 'for a in (\"g\", \"fr\"' docs/concepts/models/*.py (10 files)"
+ },
+ {
+  "key": "G1",
+  "level": "watch",
+  "reason": "Metal hugs the skin far more than the lead's does, overhead most of all. Claim wear, bench: 52 of 374 taken poses have metal under 2 mm and 20 under 1 mm, against the lead's 30 and 3 on the same bench. The 10th-percentile overhead pose has metal at 0.06 mm (the lead: 1.82 mm). 6 of the 10 overhead clip frames are under 1 mm (the lead: 0). Held out: 122 under 2 mm and 50 under 1 mm, against the lead's 67 and 14; 10 of the 19 taken overhead workspace poses are under 1 mm (the lead: 1 of 18). The verifier's corrected wear keeps it: 33 of 191 taken bench poses are under 2 mm, and all 4 overhead workspace poses it still takes are under 2 mm (held: 12 of 13). The gap with metal under 1 mm counted as contact is 31.89, against the lead's 20.12. Near-touch is report-only by the user's ruling (tool 2026-10-17.2), and the score is unchanged. Not gamed: the design is already behind the lead on the plain gap.",
+  "evidence": "docs/alignment/remeasure/dogring-draglink-knuckle-3r_bench.json deep (near1_poses 20, near2_poses 52, overhead_min_metal_p10 0.06) and _held.json (50 / 122); _vprobe_bench.json / _vprobe_held.json probes (claim and corrected floors); lead: remeasure/slipper-nose-knuckle-3r_bench.json (3 / 30, p10 1.82), _probe_bench.json, _probe_held.json"
+ },
+ {
+  "key": "M2",
+  "level": "watch",
+  "reason": "The drag-link eyes are modelled smaller than the part the design names. The model and row describe 'O9 eyes on 2 x MR63ZZ', but the model samples them as O8 discs (EYE_R = 4.0, model line 51, used in _disc(..., EYE_R) and in the horn's reach r_h + EYE_R). The arm tip's own eye at c1 is not sampled as a disc at all, only as the 6 mm strap. Worn here with EYE_R = 4.5 set in memory only (model unchanged, verifier harness, exact Bench(110,360)): the claim moves 22.64 -> 22.76 and the corrected number 97.83 -> 97.95 (in-band 0.8638 -> 0.8626), +0.12 points. Small, and it does not change any ranking.",
+  "evidence": "docs/alignment/remeasure/dogring-draglink-knuckle-3r_vprobe_bench_EYE_R4.5.json vs _vprobe_bench.json; docs/concepts/models/dogring-draglink-knuckle-3r.py docstring line 13 and line 51"
+ },
+ {
+  "key": "M5",
+  "level": "watch",
+  "reason": "No spring-return or dynamics number exists for this drive. The dog is one-sided: link 2's flank pushes the sector only while K opens. On the way back, K's spiral spring (the lead's) has to back-drive horn -> drag link -> Ti arm -> sector through the 4R. It works against the sector's turn on hub 2's housing and 4 MR63ZZ, with transmission angles down to 54.5 deg (pa_max_taken 35.5 deg; table end at PA 42). If the return lags, K lags q2 and the cuff twists or the chain binds (G3). Nothing on file measures it: no R17 / judge/dynamics.py run and no CAD for this design. The row's 'R17 ok' covers only static determinacy (with K on stop A, the 4R parks the ring). This is the same open measurement as the lead's M5, which its skeptic upheld as missing.",
+  "evidence": "docs/concepts/dogring-draglink-knuckle-3r.md 'Jam' bullet (lift-off gate on the law only); model check on Bench(60,160) this audit: cam.pa_max_taken 35.5, table_why 'pressure', ratio_range [1.24, 1.9]; docs/alignment/slipper-nose-knuckle-3r.rulings.json judgement:M5 refuted=false"
+ },
+ {
+  "key": "R3",
+  "level": "watch",
+  "reason": "The claim is the best of several frozen-exact wears, picked on the claim bench, with no spread on file. The red team says 'Selection was by frozen'. The doc names at least 4 frozen wears of this design (22.64 the pick, 24.34 the gen-8 fast best, 29.84 the high-gain arm, 26.07 the first stacked build), but the sweep file keeps only fast numbers (1448 rows, no frozen field), so the number of frozen candidates and their spread are unknown. The held-out drop shows no measurable in-sample gain: +2.72 claim and +3.27 corrected, against the lead's +4.96.",
+  "evidence": "docs/concepts/dogring-draglink-knuckle-3r.md 'Red team (own)' and 'Verdict' sections; docs/concepts/sweeps/dogring-draglink-knuckle-3r.json (keys: k, params, gap, gap_near2, ... no frozen); remeasure/dogring-draglink-knuckle-3r_{bench,held}.json 22.64 / 25.36"
+ },
+ {
+  "key": "G5",
+  "level": "watch",
+  "reason": "The design is more complex than the lead, and no record says so. The row has no structured mechanism record, so the dashboard shows complexity null. Built from the row note's own counts (prot 6, bodies 6, joints 9, loops 3, sliding 0, rolling 0, springs 1, the lead's two-pin cuff knee) and scored with tools/simplicity.py v2.2, it comes to 25.25-27.25 for 12-14 made and 15-19 bought parts (the ideation event's 25.75 is inside that range), against the lead's 22.25: 3-5 points more complex. The difference comes from +2 passive rotations, +1 body and +1 joint, less 1 point for the deleted sliding pair. Not gamed: the row is refuted and does not rank.",
+  "evidence": "python3 tools/simplicity.py --score '<record from rows/dogring-draglink-knuckle-3r.json note>' (this audit); rows/slipper-nose-knuckle-3r.json complexity 22.25; docs/concepts/events.jsonl line 582 (complexity 25.75)"
+ }
+]
