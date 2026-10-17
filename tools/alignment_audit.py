@@ -306,6 +306,14 @@ def c_continuity(row, V):
     st = C.get("static") or {}; g0 = _num(st.get("gap")) or _num(row.get("v_gap"))
     vals = {k: _num((C.get(k) or {}).get("gap")) for k in ("connected_full", "connected_knn", "connected_bench") if isinstance(C.get(k), dict)}
     if not vals:
+        # VERSION 2026-10-17.1: a flood record that states how many claim poses it dropped (minarc's kit-rule / final-polish
+        # verifiers: bench_dropped / held_dropped / dropped_unconnected / dropped_kinematic + dropped_contact_aware_extra)
+        # IS the connected number when every count is 0 (connected = static); any drop it cannot price stays a watch.
+        drops = {p: _num(v) for p, v in _find_keys(C, r"^(bench_dropped|held_dropped|dropped_unconnected|dropped_kinematic|dropped_contact_aware_extra|islands)$")}
+        drops = {p: v for p, v in drops.items() if v is not None}
+        if drops and all(v == 0 for v in drops.values()):
+            return _chk("continuity", "ok", f"static {g0}, connected {g0}: the flood drops 0 claim poses (" + ", ".join(f"{p} 0" for p in drops) + f"; {src})",
+                        static=g0, connected_full=g0)
         return _chk("continuity", "watch", f"continuity record without the connected numbers ({src})", record=str(C)[:300])
     full = vals.get("connected_full"); knn = vals.get("connected_knn")
     rule = full if full is not None else knn
@@ -328,10 +336,26 @@ def _find_keys(d, pat, path=""):
     return out
 
 
+# every spelling of "the min th margin over taken poses" on file (rows, verifier outputs): min_th, fold_margin_min,
+# th_margin, own_state_margin_min, and (VERSION 2026-10-17.1) th_margin_min[_held][_deg], min_th_margin[_taken][_held][_deg],
+# kit_min_th_margin_deg. A dict value is read through its measured fields (min / bench / held), never its counts (n, lt5).
+FOLD_KEY = r"(min_th|fold_margin_min|own_state_margin_min|th_margin|(min_th_margin|th_margin_min)(_taken)?(_bench|_held)?(_deg)?)$"
+FOLD_DICT_FIELDS = ("min", "bench", "held", "held_out", "min_any_taken_pose")
+
+
+def _fold_readings(d, prefix=""):
+    out = []
+    for p, v in _find_keys(d, FOLD_KEY):
+        if _num(v) is not None: out.append((prefix + p, _num(v)))
+        elif isinstance(v, dict):
+            out += [(f"{prefix}{p}.{k}", _num(v[k])) for k in FOLD_DICT_FIELDS if _num(v.get(k)) is not None]
+    return out
+
+
 def c_fold_margin(row, V, rem_b):
-    hits = [(p, _num(v)) for p, v in _find_keys(row, r"(min_th|fold_margin_min|th_margin|own_state_margin_min)$") if _num(v) is not None]
+    hits = _fold_readings(row)
     for f, d in V[:6]:
-        hits += [(f + ":" + p, _num(v)) for p, v in _find_keys(d, r"(min_th|fold_margin_min|th_margin)$") if _num(v) is not None]
+        hits += _fold_readings(d, f + ":")
     if not hits:
         return _chk("fold_margin", "watch", "no min-th margin over taken poses on file (rule: each claim reports it)")
     lo = min(hits, key=lambda t: t[1])
@@ -339,24 +363,92 @@ def c_fold_margin(row, V, rem_b):
     return _chk("fold_margin", lvl, f"min fold margin on file {lo[1]} deg ({lo[0]}; {len(hits)} readings)", min_margin=lo[1], where=lo[0])
 
 
-def c_idle(row, V, rem_b):
-    """every declared drive must move: dK spans / drive ranges over the taken poses"""
-    m = row.get("mechanism") or {}; notes = (m.get("notes") or "") + " " + (row.get("name") or "")
-    has_drive = bool(re.search(r"slaved|drive|lobe|cam|rod|crank|geneva|relay", notes, re.I))
-    spans = []
-    for p, v in _find_keys(row, r"(dK_taken_max(_deg)?|dK_max|phi_max_taken|K_span)$"):
-        if _num(v) is not None: spans.append(("row:" + p, _num(v)))
+# re-measured per-pose coordinates -> (joint, unit), explicit (VERSION 2026-10-17.1; it used to guess radians from the
+# span's size, which reads a 0.05-deg knee as 2.9 deg). In the pin-knee / knuckle family M.K is the KNEE dict (ang in deg,
+# qa / qb wrapped rad) and dK is the slaved or sensed knuckle K (rad); verify phi_max_taken is the drive crank (deg).
+# Every other coordinate (kstate, a1e, msub, clear, K.phi / K.th / K.psi ...) is not a joint and is not read.
+IDLE_COORDS = {"dK": ("K", "rad"), "dK_deg_abs": ("K", "deg"), "K.ang": ("knee", "deg"), "K.qa": ("knee", "rad"), "K.qb": ("knee", "rad")}
+IDLE_FILE_KEYS = ((r"(dK_taken_max(_deg)?|dK_max|K_span)$", "K"), (r"phi_max_taken$", "crank"))
+RIGID_TOL_DEG = 0.5                     # the kneeless models' own rigidity assertion (KNEE_TOL_DEG / DRIFT_TOL_DEG = 0.5)
+
+
+def _model_src(row):
+    for f in (row.get("model_file"), os.path.join(MODELS, row["id"] + ".py")):
+        if not f: continue
+        p = f if os.path.isabs(f) else os.path.join(REPO, f) if os.path.exists(os.path.join(REPO, f)) else f
+        try:
+            return open(p).read()
+        except Exception:
+            continue
+    return ""
+
+
+def _declared_joints(row):
+    """what the design says moves (row mechanism + model), and what it asserts is rigid by design (a deleted knee whose
+    member is one bracket: the coordinate still exists in the model only to place the pad, so it is not a joint)"""
+    m = row.get("mechanism") or {}; notes = (m.get("notes") or "") + " " + (row.get("name") or ""); src = _model_src(row)
+    moving, rigid = {}, {}
+    if re.search(r"\bK slaved|slaved knuckle|\bK\b[^.;|]{0,80}(sensed|clock spring)", notes): moving["K"] = "mechanism notes: K slaved / sensed"
+    if re.search(r"crank|lobe|\brod\b|\bcam\b|geneva|relay", notes, re.I) and re.search(r"slaved|drive|lobe|crank", notes, re.I):
+        moving["crank"] = "mechanism notes: a slaved drive (lobe / crank / rod / cam / geneva / relay)"
+    knee_gone = re.search(r"no knee pins|knee[^.;|]{0,60}deleted|kneeless", notes + " " + row["id"], re.I)
+    knee_assert = re.search(r"knee_moved", src)                 # the model refuses (honest False) any pose that moves it
+    if knee_gone or knee_assert:
+        rigid["knee"] = "; ".join(x for x in ("mechanism notes: knee deleted, one rigid bracket" if knee_gone else "",
+                                             "model asserts the knee angle constant (knee_moved -> dishonest)" if knee_assert else "") if x)
+    elif re.search(r"pin knee|\bknee\b", notes, re.I):
+        moving["knee"] = "mechanism notes: a knee"
+    return moving, rigid
+
+
+def _idle_readings(row, V, rem_b):
+    """[(joint, span_deg, where)] over the taken poses, from the row, the verifier outputs and the re-measure"""
+    out = []
+    for pat, j in IDLE_FILE_KEYS:
+        out += [(j, abs(_num(v)), "row:" + p) for p, v in _find_keys(row, pat) if _num(v) is not None]
+        for f, d in V[:4]:
+            out += [(j, abs(_num(v)), f + ":" + p) for p, v in _find_keys(d, pat) if _num(v) is not None and "dK_max" not in p]
+    for rem in [r for r in (rem_b,) if r and r.get("deep")]:
+        for k, ab in (rem["deep"].get("coord_spans") or {}).items():
+            if k in IDLE_COORDS and isinstance(ab, (list, tuple)) and len(ab) == 2:
+                j, unit = IDLE_COORDS[k]; s = float(ab[1]) - float(ab[0])
+                out.append((j, round(abs(math.degrees(s) if unit == "rad" else s), 2), f"re-measured {k} span"))
+    for p, v in _find_keys(row, r"(knee_rigid|ang_ptp_deg|knee_ptp(_deg)?)$"):     # the model's own rigidity readings
+        if _num(v) is not None: out.append(("knee", abs(_num(v)), "row:" + p))
     for f, d in V[:4]:
-        for p, v in _find_keys(d, r"(dK_taken_max(_deg)?|phi_max_taken)$"):
-            if _num(v) is not None: spans.append((f + ":" + p, _num(v)))
-    if rem_b and rem_b.get("deep"):
-        for k, (a, b) in rem_b["deep"].get("coord_spans", {}).items():
-            if re.fullmatch(r"dK|K\.ang|phi|q[0-9]?K?", k): spans.append((f"re-measured {k} span", round(math.degrees(b - a) if abs(b - a) < 7 else (b - a), 2)))
-    if not has_drive: return _chk("idle", "ok", "no slaved drive declared", spans=spans[:6])
-    if not spans: return _chk("idle", "watch", "a drive is declared but no range of it over the taken poses is on file", spans=[])
-    lo = min(spans, key=lambda t: abs(t[1]))
-    lvl = "gamed" if abs(lo[1]) < TH["idle_deg"] else "ok"
-    return _chk("idle", lvl, f"declared drive moves: smallest recorded span {lo[1]} ({lo[0]})" if lvl == "ok" else f"IDLE: {lo[0]} = {lo[1]} deg", spans=spans[:8])
+        out += [("knee", abs(_num(v)), f + ":" + p) for p, v in _find_keys(d, r"knee_ptp(_deg)?$") if _num(v) is not None]
+    return out
+
+
+def c_idle(row, V, rem_b):
+    """every joint the design declares as moving must move over the taken poses (M4). A coordinate the design asserts
+    constant by design (a deleted knee = one rigid bracket) is not a joint: it is reported, and its constancy is checked
+    against the model's own tolerance (a 'rigid' coordinate that moves is a watch, not an idle joint)."""
+    moving, rigid = _declared_joints(row); R = _idle_readings(row, V, rem_b)
+    per = {}
+    for j, s, w in R: per.setdefault(j, []).append((s, w))
+    reasons, lvl = [], "ok"
+    for j, why in rigid.items():
+        rs = per.get(j, [])
+        if not rs: reasons.append(f"{j}: rigid by design, not a joint ({why}); no span on file"); continue
+        hi = max(rs)
+        if hi[0] > RIGID_TOL_DEG:
+            lvl = "watch"; reasons.append(f"{j}: asserted rigid by design ({why}) but moves {hi[0]} deg ({hi[1]}) > {RIGID_TOL_DEG}")
+        else: reasons.append(f"{j}: rigid by design, not a joint ({why}); measured span {hi[0]} deg ({hi[1]}) <= {RIGID_TOL_DEG}")
+    idle, read = [], []
+    for j in moving:
+        rs = per.get(j, [])
+        if not rs: reasons.append(f"{j}: declared moving, no span on file"); continue
+        lo = min(rs); read.append((j, lo))
+        if lo[0] < TH["idle_deg"]: idle.append(f"IDLE: {j} {lo[1]} = {lo[0]} deg")
+        else: reasons.append(f"{j} moves: smallest recorded span {lo[0]} deg ({lo[1]})")
+    spans = [(w, s) for j, s, w in R][:10]
+    if idle: return _chk("idle", "gamed", "; ".join(idle + reasons), spans=spans, declared=list(moving), rigid=list(rigid))
+    if not moving: return _chk("idle", lvl, "; ".join(["no moving drive / joint declared"] + reasons), spans=spans, declared=[], rigid=list(rigid))
+    if not read and any(j in moving for j in ("K", "crank")):
+        return _chk("idle", "watch", "; ".join(["a drive is declared but no range of it over the taken poses is on file"] + reasons), spans=spans,
+                    declared=list(moving), rigid=list(rigid))
+    return _chk("idle", lvl, "; ".join(reasons), spans=spans, declared=list(moving), rigid=list(rigid))
 
 
 def c_sampling(row, V, rem_b):
