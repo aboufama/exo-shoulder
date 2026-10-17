@@ -1,56 +1,50 @@
 [
- {
-  "key": "T1",
-  "level": "watch",
-  "reason": "The bench edge over the lead rests on one pose with metal 0.26 mm off the skin, and the held edge on 11 poses with metal at 0.76-3.68 mm. Bench re-wear: 3 / 33 / 105 taken poses have metal under 1 / 2 / 3 mm (lead 3 / 30 / 100). The only bench pose taken here and not by the lead is 203 (ws 0, 90, 45): lowest metal 0.26 mm (wall / crown, cmin), 0.72 mm on the sampled metal. In the verifier's no-stop control it was a -0.03 mm contact, so it is worth 0.55 points (reach 0.28 + contact 0.27), more than the whole 0.21 bench edge. Held out, the 11 poses taken here and not by the lead (elev 75-90 at axial 45-90, plus 1099) all have lowest metal 0.76-3.68 mm, 6 of them under 2 mm. Near-touch gaps, this row against the lead: bench plain 18.28 / 18.49, 1 mm 19.92 / 20.12, 2 mm 34.84 / 33.02, 3 mm 86.16 / 83.15; held 22.38 / 23.45, 25.23 / 26.54, 37.10 / 36.95, 83.12 / 79.25. Ahead plain and at 1 mm, behind at 2 mm on the bench (+1.82), even at 2 mm held out (+0.15), and behind at 3 mm on both (+3.01 / +3.87). These numbers are report-only (user ruling 2026-10-17, near-touch is not a gate), so the level is watch. The tool's dominance check gives the same watch: +0.21 plain, -1.82 at 2 mm.",
-  "evidence": "docs/alignment/remeasure/conecut-knee-knuckle-3r_bench.json, _held.json (deep); slipper-nose-knuckle-3r_bench.json, _held.json (deep); per-pose dumps docs/alignment/remeasure/{conecut-knee-knuckle-3r,slipper-nose-knuckle-3r}_{bench,held}_perpose.json (pose 203: min_mm 0.716, cmin 0.263); docs/concepts/verify/conecut-knee-knuckle-3r_v_bench_nostop.json (203 at -0.03 mm)"
- },
- {
-  "key": "NEW-strap-dilution",
-  "level": "watch",
-  "reason": "The bench in-band gain comes from the longer E strap's extra samples, not from metal moving into the band. The re-centred knee lengthens the E strap from lE 67.8 to 97.1 mm, which takes it from 104 to 164 samples per pose at 97.9 % in band. The point-weighted in-band share rises from 0.8955 to 0.9012, while the chain's own metal gets slightly worse: chain-only in-band is 0.859 against the lead's 0.869 (held out 0.857), hub 2 is 0.912 against 0.953, and the crank 0.801 against 0.818. With the strap weighted at the lead's sample count, the bench reads 18.67, 0.18 BEHIND the lead's 18.49, instead of 18.28, 0.21 ahead. Held out at equal strap it reads 22.90, which keeps a 0.55 edge over 23.45. On the clip frames the metal share above 14 mm barely moves (9.88 % against 10.44 %). The extra share in band is new strap metal at 4-6 mm (12.5 % against 9.0 %). It is not gamed, because the held edge survives the reweighting, but the bench ranking is a sampling effect. Proposed catalogue entry S6, below.",
-  "evidence": "docs/concepts/verify/conecut-knee-knuckle-3r_v_bench_frozen.json and _v_held_frozen.json c4_inband; row frozen.dilution and frozen.parts_ib14; clip_metal_hist in docs/alignment/remeasure/conecut-knee-knuckle-3r_bench.json vs slipper-nose-knuckle-3r_bench.json"
- },
- {
-  "key": "NEW-stop-relabel",
-  "level": "watch",
-  "reason": "The score charges a contact pose twice: it loses the reach point and adds 100 x 1/N_evaluated to the contact term. A pose a hard stop removes is not evaluated, so it costs reach only. A stop that blocks a pose the chain would press into the skin therefore scores better than the metal that blocks it, although the wearer is blocked either way. Held out, the upper stop J3MAX 122.74 is placed on the fast bench and is inert on the exact bench. It cuts 3 held poses (752 / 897 / 965, all overhead at elev 150-165) whose metal would be 2.0-3.4 mm in the skin. As contacts they would move the held contact term from 14/875 to 17/878, which is +0.34 points (held 22.72, not 22.38), and the held edge over the lead would shrink from 1.07 to about 0.73. On the bench the 6 stopped poses would also clash the E strap against link 2 (a parts failure, which costs no contact), so the lower stop relabels a limit the chain already has. The dowel is the honest, buildable version of that limit (verifier C1-C3), so this is watch, not gamed. Proposed catalogue entry T6, below.",
-  "evidence": "docs/concepts/verify/conecut-knee-knuckle-3r_v_held_frozen.json c3_stopped (19 stopped, 3 by the upper stop, metal 2.0-3.4 mm in); _v_bench_nostop.json (6 parts E-L2, 5 contacts); scoring in tools/concept_bench.py report() lines 185-195 (contact = share of evaluated poses with metal < 0; reach requires metal >= 0)"
- },
- {
-  "key": "T5",
-  "level": "watch",
-  "reason": "Contact is deeper than the lead's, and the lead is already on T5 watch. Bench: 4 contact poses, 20.24 mm summed, deepest 8.93 mm at ws (15, 165, -60). The lead has 2, 14.75 mm (x1.37, +5.49 mm; the tool's 2x / 5 mm margin is not crossed against the lead). Against the tool's default depth reference, sidecar-longdyad (6.23 mm), it is x3.25 and +14.01 mm: 'CLEARLY DEEPER'. Held out: 14 poses, 60.97 mm, deepest 9.86 mm at (45, 165, -30), 9 of them deeper than 3 mm, against the lead's 10 poses and 46.12 mm (and sidecar-longdyad's 35.66 mm, x1.71). The new contacts are on the wearer's daily range. Bench: 205 (0, 105, 15), hub 2 at -4.28 mm, a pose the lead's knee blocked as a slide, and 316 (60, 150, -105), link 2 at -1.23 mm. Held out: 835 (90, 15, -150) at -3.55 mm and 978 (120, 15, -165) at -1.33 mm. These are arm-down poses at extreme rotation that the lead takes at 0.81 / 0.62 mm, and the held contact split puts arm-pad and knee-link metal there. The knee group itself now touches the hanging arm.",
-  "evidence": "docs/alignment/conecut-knee-knuckle-3r.json contact_depth; in-memory audit with --ref sidecar-longdyad-knuckle-3r (same tool 2026-10-17.4); per-pose dumps docs/alignment/remeasure/*_{bench,held}_perpose.json; row frozen.held.split.by_part (pad 2, knee 1)"
- },
- {
-  "key": "NEW-tie-headline",
-  "level": "watch",
-  "reason": "The board will crown a measured tie. The headline 'Best 3-joint design so far' is the first verified row with 3 or fewer active joints that has no 'tie' ruling (docs/dashboard/simple/index.html lines 234-236, sorted by gap). docs/dashboard/data/morphs.json (built 17:28 UTC) carries this row as verified at 18.28 with leader_ruling ''. So it takes the headline from the lead at score 93.35 against 93.28. Both the proposer and the verifier call it a tie and not a leader: paired bench -0.20, CI90 [-1.05, +0.80], P(better) 0.60. The bench part of the edge is strap dilution (18.67 at equal strap) plus pose 203 at 0.26 mm (T1). The headline reaches the user's dashboard, and a 'new leader' is one of the few updates that goes to the user by chat.",
-  "evidence": "docs/dashboard/simple/index.html 228-240; docs/dashboard/data/morphs.json (conecut-knee-knuckle-3r: status verified, v_gap 18.28, leader_ruling ''); docs/OPERATIONS.md section 4 (tie ruling must cite a non-gamed skeptic ledger entry); row verification.verdict 'NOT a leader: tie with 18.49'"
- },
- {
-  "key": "M5",
-  "level": "watch",
-  "reason": "Carried from the lead, plus one unmeasured part. The K clock spring, the K law and the drive are the lead's, unchanged. The re-wear's chain coordinate spans equal the lead's (dK [-0.796, 0] rad, a1e [37.55, 54.26] deg, msub [10.81, 99] deg on moved poses). The lead's R17 forward bound fails the unrounded 5.0 deg gate by 0.0008 deg at mu 0.15 (the lead's ledger M5). The re-centred knee changes the cuff's alignment path: the knee runs 59-107 deg against 86-152, and the knee-link force is 12 N per N m against 31.6. Its cuff twist and its R17 have not been measured for this row, because there is no CAD and no dynamics run.",
-  "evidence": "docs/alignment/remeasure/conecut-knee-knuckle-3r_bench.json deep.coord_spans vs slipper-nose-knuckle-3r_bench.json; docs/alignment/remeasure/slipper-nose-knuckle-3r_r17_newgate_fb150.json; python3 tools/alignment_ledger.py get slipper-nose-knuckle-3r (M5)"
- },
- {
-  "key": "G4",
-  "level": "watch",
-  "reason": "Carried from the lead, unchanged. The chain and the K law are identical, as the coordinate spans above show. With K at rest on stop A, the lead's m_sub is under 5 deg on 106 of 204 at-rest bench poses and under 1 deg on 50. The family's th reading (5.181 / 5.006) does not read m_sub at rest. It was not re-measured for this row, whose taken set differs from the lead's by 1 bench pose.",
-  "evidence": "docs/alignment/remeasure/slipper-nose-knuckle-3r_msub_rest_bench.json; coord spans in docs/alignment/remeasure/conecut-knee-knuckle-3r_{bench,held}.json"
- },
- {
-  "key": "T3",
-  "level": "watch",
-  "reason": "The stop part is clean, but the held fold margin is inherited at 0.006 deg above the line. The J3 stop acts on J3's own angle: the verifier's C1 finds R2^T R3 is a rotation about u3 with axis residual at most 0.015 deg, equal to q3' to 0.0008 deg. The fold margin is read on th: 5.181 on the bench and 5.006 held out (0 poses under 5). That is the lead's own reading, on the lead's chain, and it holds only with K on its law. A K-phase build error of +-0.3 deg (the lead's T3) is enough to cross 5.0 held out.",
-  "evidence": "docs/concepts/verify/conecut-knee-knuckle-3r_v_held_frozen.json extra.th_margin (min 5.006 at ws 135/30/-135, forced); c1_own_angle; lead ledger T3"
- },
- {
-  "key": "NEW-ws-inband",
-  "level": "watch",
-  "reason": "Carried from the lead, and slightly better here. The gap reads in-band on clip frames only. On taken workspace poses at elevation 90-140, bench, 83.2 % of the metal is in 2-14 mm and 16.8 % is above 14 mm (p95 20.04 mm, max 30.74 mm); the lead has 80.0 % and 19.9 %. Held out it is 84.8 % and 14.9 % (max 31.46 mm), against the lead's 82.2 % and 17.6 %. Over all taken workspace poses in-band is 0.868 on the bench and 0.871 held out (lead 0.856 / 0.861). Overhead (elev >= 140) is 8 of 28 on the bench and 18 of 71 held out, the same counts as the lead; the held losses are fold 36, J3 stop 10 and contact 7.",
-  "evidence": "docs/alignment/remeasure/conecut-knee-knuckle-3r_probe_bench.json (and _probe_held.json) vs slipper-nose-knuckle-3r_probe_{bench,held}.json"
- }
+  {
+    "key": "NEW-incumbent-tie-rule",
+    "level": "watch",
+    "reason": "The lead's tie ruling (commit 8e50534, row field leader_ruling) keeps slipper-nose (18.49 / 23.45) ahead of this row although this row's PLAIN verified gap is lower on both legs (18.28 / 22.38). The user's rule (CLAUDE.md 2026-10-17, added d0778dd 01:39 UTC): 'a design replaces the lead on the plain verified gap'. The tie rule the round used ('paired pooled 90 % CI including 0 = tie') is the lead's own, first written in the round-12 plan (0c5b95b, 13:31 UTC). It was set before this design existed (model a56358d 16:06), so it is not post hoc, but it was never put to the user. It is also applied to challengers only. The incumbent took the lead at 06:23 on bench -0.18 / held -0.28, pooled -0.25, CI90 [-0.40, 0.00], P 0.947 (remeasure/slipper-nose-knuckle-3r_vs_roller-longdyad-knuckle-3r_paired_claim.json), 100 % in-band. That CI touches 0, so a literal reading of the rule makes it a tie too. Its predecessor roller-longdyad was made lead (round-10 plan 5329155) on pooled +0.69, P 0.191, held 1.06 WORSE (remeasure/roller-longdyad_vs_sidecar-longdyad_paired_claim.json). This row: pooled -0.82, CI90 [-1.46, +0.09], P 0.918; held -1.08, CI90 [-1.86, +0.06], P 0.935 (remeasure/conecut_vs_slipper-nose_paired.json). That is the same held P as the incumbent's own lead change (0.938), with 3.3x the pooled effect. The ruling's written reasons are readings the user retired or never adopted: 2 mm near-touch (decision (3): not a gate), contact depth (T5: report only), and equal-strap reweighting (proposal S6, not adopted, never applied to the incumbent). The only documented rule that yields the ruling's outcome is the round tie rule plus the tie-break on complexity (0 = 0 passive translations; complexity 18.25 vs 18.5, a 0.25 difference that is one bought dowel pin). The ruling does not cite that rule. The design's number is not gamed. The finding is that the decision rule was tightened by the lead, applied one-sidedly and justified with retired readings, so the decision the user's rule names was not put to the user.",
+    "evidence": "CLAUDE.md line 96 (user rule); docs/concepts/ROUNDS.md 1943-1944 (tie rule, 0c5b95b 13:31) and 2069-2072 (round-12 winner); rows/conecut-knee-knuckle-3r.json leader_ruling; docs/alignment/remeasure/{conecut-knee-knuckle-3r_vs_slipper-nose-knuckle-3r_paired, slipper-nose-knuckle-3r_vs_roller-longdyad-knuckle-3r_paired_claim, roller-longdyad-knuckle-3r_vs_sidecar-longdyad-knuckle-3r_paired_claim, desmo-slipper-knuckle-3r_vs_slipper-nose-knuckle-3r_paired}.json; tools/simplicity.py --json (bought parts beyond 6: 4 vs 3)"
+  },
+  {
+    "key": "NEW-strap-dilution",
+    "level": "watch",
+    "reason": "Carried and upheld (skeptic 17:57). Bench split against the lead: reach -0.28, in-band -0.45, contact +0.53 (paired file). At the lead's E-strap sample count (104 of 164) the bench reads 18.67, 0.18 behind the lead. Held at equal strap: 22.90 vs 23.45, so the held edge survives. New in this audit: the tool's part-weighted in-band, its own dilution-free reading, is 0.925 here and 0.924 on the lead (docs/alignment/{id}.json sampling). That reading agrees the bench in-band edge is a sampling effect. It also removes the incumbent's own 0.18 lead change over roller-longdyad, which was all in-band (part-weighted 0.924 vs 0.922). The artefact is real, but it is not specific to this row.",
+    "evidence": "docs/alignment/remeasure/conecut-knee-knuckle-3r_vs_slipper-nose-knuckle-3r_paired.json split; row frozen.dilution; verifier C4; docs/alignment/conecut-knee-knuckle-3r.json, slipper-nose-knuckle-3r.json, roller-longdyad-knuckle-3r.json sampling checks"
+  },
+  {
+    "key": "T1",
+    "level": "watch",
+    "reason": "Carried and upheld. The one bench pose taken here and not by the lead (203, ws 0/90/45) has metal 0.263 mm off the skin (cmin) and is worth 0.29 against the lead (skeptic correction). Without it the bench reads 18.57, behind 18.49. Held out: the 11 poses taken only here sit 0.76-3.68 mm off the skin, 6 of them under 2 mm. At 2 mm the bench reads +1.82 against the lead and the held +0.15. Report only (decision (3)): this is NOT a reason to withhold the lead under the user's rule.",
+    "evidence": "docs/alignment/remeasure/conecut-knee-knuckle-3r_bench.json, _held.json; docs/alignment/conecut-knee-knuckle-3r.rulings.json ruling 3"
+  },
+  {
+    "key": "T5",
+    "level": "watch",
+    "reason": "Carried and upheld. Bench: 4 contact poses, 20.24 mm summed, deepest 8.93 mm at ws 15/165/-60. The lead has 2 and 14.75 mm. Held: 14 poses, 60.97 mm (9 deeper than 3 mm), deepest 9.86 mm at ws 45/165/-30. The lead has 10 and 46.12 mm. Pooled, 6 contact poses are this row's only and 0 are the lead's only. New contacts on the hanging, rotated arm: 835 (-3.55 mm) and 978 (-1.33 mm), where the lead clears by 0.81 / 0.62 mm. Report only; the plain gap already charges each contact.",
+    "evidence": "docs/alignment/conecut-knee-knuckle-3r.json contact_depth (no-ref run, 18:0x UTC); paired discordant counts"
+  },
+  {
+    "key": "M5",
+    "level": "watch",
+    "reason": "Carried. The K clock spring and the sliding nose drive are the lead's, unchanged; the lead's R17 forward bound fails by 0.0008 deg at mu 0.15. The re-centred knee's cuff twist and its R17 have never been measured: no CAD and no dynamics run exist for this row.",
+    "evidence": "docs/alignment/conecut-knee-knuckle-3r.rulings.json ruling 8; no file under pipeline/full-exo/designs mentions conecut"
+  },
+  {
+    "key": "G4",
+    "level": "watch",
+    "reason": "Carried. The chain is the lead's (dK, a1e, m_sub spans equal), and the lead's m_sub at K rest is under 1 deg on 50 of 204 rest poses: a near-singular sub-dyad at rest.",
+    "evidence": "docs/alignment/remeasure/slipper-nose-knuckle-3r_msub_rest_bench.json; rulings ruling 9"
+  },
+  {
+    "key": "T3",
+    "level": "watch",
+    "reason": "Carried. The stop acts on J3's own angle (C1 residual 0.015 deg), which is clean. But the held th margin minimum is 5.006 deg, 0.006 above the user's 5 deg line, on the lead's K law, and a +-0.3 deg K-phase build error crosses it. The J3 dowel's held margin is 0.74 deg.",
+    "evidence": "docs/concepts/verify/conecut-knee-knuckle-3r_v_held_frozen.json extra.th_margin; docs/alignment/conecut-knee-knuckle-3r.json fold_margin"
+  },
+  {
+    "key": "NEW-ws-inband",
+    "level": "watch",
+    "reason": "Carried, and slightly better than the lead. On unscored workspace poses at elevation 90-140 (bench), in-band is 0.832 and 16.8 % of the metal sits above 14 mm (max 30.7 mm); the lead reads 0.800 / 19.9 %. Held out: 0.848 / 14.9 % (max 31.5 mm). The scored clip in-band (0.901) does not see this.",
+    "evidence": "docs/alignment/remeasure/conecut-knee-knuckle-3r_probe_bench.json, _probe_held.json"
+  }
 ]

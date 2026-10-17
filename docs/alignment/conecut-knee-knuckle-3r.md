@@ -1,44 +1,142 @@
 # Alignment audit: conecut-knee-knuckle-3r
 
-This audit ran on 2026-10-17 from 17:27 to about 17:55 UTC. It was due because discovery round 12 (slice r12-B) screened
-the design and its verifier verified it (commit d943974, 17:20).
-- Ledger entry: 2026-10-17T17:48:48Z, by auditor, run `audit:conecut-knee-knuckle-3r`. Verdict **watch**. Tool
-  reasons: dominance (+0.21 plain, -1.82 at 2 mm against the lead) and reporting (the row's verdict text still reads
-  "SCREENED"; dashboard sweep best 12.5 sits 5.78 under the verified number). Plus 9 judgement findings, all watch.
-- Checks: `docs/alignment/conecut-knee-knuckle-3r.json` (13 checks, tool 2026-10-17.4), with reference
-  slipper-nose-knuckle-3r.
-- Findings: `docs/alignment/conecut-knee-knuckle-3r.findings.json` (9, all watch).
-- Re-wears, new in this audit. The models ran unchanged, locally, on 2 niced processes. The farm is past its budget
-  line (CLAUDE.md (7)), so nothing went there.
-  - `docs/alignment/remeasure/conecut-knee-knuckle-3r_bench.json` reproduces 18.28 exactly (247 s).
-  - `docs/alignment/remeasure/conecut-knee-knuckle-3r_held.json` reproduces 22.38 exactly (552 s).
-  - `docs/alignment/remeasure/conecut-knee-knuckle-3r_probe_bench.json` and `_probe_held.json` come from
-    `tools/alignment_wear_probe_model.py`, on the unscored workspace.
-- The verifier's knee and cuff placement check C5 (`docs/concepts/verify/conecut-knee-knuckle-3r.py place`) had never
-  run. It ran here and is read-only.
+This is the hourly audit of 2026-10-17, run from 18:06 to about 18:20 UTC. It was due for two lead decisions:
+- the lead's tie ruling on this row (commit 8e50534, row field `leader_ruling`);
+- the auditor tool's version 2026-10-17.4 (commit 4302b86).
 
-## Verdict: WATCH (ledger verdict; the tool's checks alone also give watch)
+The box was saturated (load 15.5 on 4 cores) and the farm is closed, so this audit only read files and ran the
+1-minute selftest. No model ran.
 
-- **The claim:** v_gap 18.28 (score 93.35), frozen exact Bench(110,360), verified 17:20 UTC. Held out it is 22.38.
-  - Both numbers were reproduced to the digit by this audit's own re-wear.
-  - Both per-pose dumps reproduce the claim.
-- **No gamed reason, and no hard rule broken.**
-  - 3 active DOF, 0 passive translations, O20 hubs, MR63ZZ knee pairs (stk 6.0).
-  - The stop is on J3's own angle (verifier C1).
-  - The `th` margin is 5.181 deg on the bench and 5.006 held out.
-  - The continuity flood reads full 18.28 / knn 19.97.
-- **What the number does not say:** this is a tie with the lead slipper-nose-knuckle-3r (18.49), not a better exo.
-  - The 0.21 bench edge is the longer E strap's in-band dilution plus one pose with metal 0.26 mm off the skin. At
-    equal strap the bench reads 18.67, behind the lead.
-  - The 1.07 held-out edge is real in the plain score. It is built on 11 poses whose metal sits 0.76-3.68 mm off the
-    skin, and it is gone at the 2 mm reading: 37.10 against 36.95.
-  - Contact is deeper than the lead's, and the knee group now touches the hanging, rotated arm.
-  - What is genuinely better: the knee never binds (window margin 11.4 mm against 0.33), and the knee link carries
-    12 N per N m of J3 moment against 31.6.
-- **Board risk (NEW-tie-headline):** the dashboard headline will show this row as the best 3-joint design at 93.35
-  unless the lead writes the tie ruling. See finding 5.
+- **Ledger entry:** 2026-10-17T18:11:38Z, by auditor, run `audit:conecut-knee-knuckle-3r`. Verdict **watch**.
+- **Reasons:** two tool reasons (dominance, reporting) and 8 judgement findings, all watch.
+- **Checks:** `docs/alignment/conecut-knee-knuckle-3r.json` (13 checks, tool 2026-10-17.4, reference
+  slipper-nose-knuckle-3r).
+- **Findings:** `docs/alignment/conecut-knee-knuckle-3r.findings.json`.
+- **No new re-wear.** The claim has not moved since the verifier's commit d943974 (17:20). The 18:05 commit only added
+  `leader_ruling` to the row. The re-wears on file reproduce the claim to the digit:
+  - `docs/alignment/remeasure/conecut-knee-knuckle-3r_bench.json` (17:31) reads 18.28;
+  - `_held.json` (17:36) reads 22.38.
 
-## What the wearer gets (measured)
+## Verdict: WATCH, claim v_gap 18.28 (score 93.35), held out 22.38
+
+The number is honest. Nothing in it is gamed and no hard rule is broken:
+- 3 active DOF and 0 passive translations, with O20 hubs and MR63ZZ knee pairs;
+- a J3 stop on J3's own angle;
+- a `th` margin of 5.181 / 5.006 deg;
+- a continuity flood of 18.28 full and 19.97 knn.
+
+The watch reasons are the known ones:
+- metal parked near the skin (T1);
+- deeper contact (T5);
+- the strap dilution;
+- the lead's spring and near-singular K (M5, G4);
+- a 0.006 deg fold margin (T3);
+- unscored workspace in-band (NEW-ws-inband).
+
+The new finding is about the ruling, not the design: NEW-incumbent-tie-rule.
+
+## Lead decision 1: the tie ruling. Honest in outcome by the lead's own rule; not the user's rule
+
+**Answer: the ruling is not gaming, but it does not follow the user's rule.** It applies a stricter rule the lead wrote
+itself, never put to the user, and so far applied only to challengers. Its written reasons are readings the user
+retired. Under the user's rule as written, this row is the leader, so the call belongs to the user.
+
+**Measured basis, paired per pose on the frozen exact protocol:**
+
+| lead change | bench diff (CI90, P better) | held diff (CI90, P better) | pooled diff (CI90, P better) | what the lead did | file |
+|---|---|---|---|---|---|
+| roller-longdyad over sidecar-longdyad | -0.25 ([-2.62, +1.73], 0.605) | **+1.06 worse** ([-0.47, +2.39], 0.135) | +0.69 worse ([-0.56, +1.83], 0.191) | made lead (round-10 plan 5329155) | `remeasure/roller-longdyad-knuckle-3r_vs_sidecar-longdyad-knuckle-3r_paired_claim.json` |
+| slipper-nose over roller-longdyad | -0.18 ([-0.26, 0.00], 0.698), all in-band | -0.28 ([-0.47, 0.00], 0.938) | -0.25 ([-0.40, 0.00], 0.947) | made lead (a6c23c0, 06:23) | `remeasure/slipper-nose-knuckle-3r_vs_roller-longdyad-knuckle-3r_paired_claim.json` |
+| **conecut over slipper-nose** | -0.20 ([-1.05, +0.80], 0.601) | **-1.08** ([-1.86, +0.06], 0.935) | **-0.82** ([-1.46, +0.09], 0.918) | **ruled a tie** (8e50534) | `remeasure/conecut-knee-knuckle-3r_vs_slipper-nose-knuckle-3r_paired.json` |
+| desmo-slipper against slipper-nose (reference) | +0.46 ([0.00, 0.56], 0.0) | +0.45 ([0.00, 0.53], 0.0) | +0.45 ([0.00, 0.53], 0.0) | called "behind" | `remeasure/desmo-slipper-knuckle-3r_vs_slipper-nose-knuckle-3r_paired.json` |
+
+**What is fair in the ruling:**
+- **The tie rule was set before the design existed.** The rule is "paired pooled 90 % CI including 0 = tie". It was
+  written in the round-12 plan (0c5b95b, 13:31 UTC, `docs/concepts/ROUNDS.md` 1943-1944), and this design was first
+  modelled at 16:06 (a56358d). So the rule is not post hoc.
+- **The pooled CI includes 0.** It is [-1.46, +0.09], so the row is a tie under that rule.
+- **The documented tie-break gives the ruling's outcome.** Passive translations are equal (0 and 0). Complexity is
+  18.25 for the lead and 18.5 here (`tools/simplicity.py --json`). The 0.25 difference is one more bought part, the
+  440C dowel.
+- **That rule reproduces the whole lead chain.** Pooled-CI ties plus the complexity tie-break give sidecar-longdyad,
+  then roller-longdyad (20.25 against 25.5), then slipper-nose (18.25 against 20.25), and slipper-nose kept against
+  this row (18.25 against 18.5).
+- **The bench edge is mostly a sampling effect, and two readings agree.**
+  - The equal-strap bench reads 18.67, behind the lead.
+  - The tool's part-weighted in-band, its dilution-free reading, gives 0.925 here and 0.924 on the lead
+    (`docs/alignment/{id}.json` sampling).
+  - With in-band read that way, the bench is +0.25 behind: reach -0.28, contact +0.53.
+
+**What is not fair:**
+- **It is not the user's rule.** The user's rule (CLAUDE.md, written into the file at 01:39 UTC by d0778dd) says "a
+  design replaces the lead on the plain verified gap". It names no significance gate. On the plain verified gap this row
+  is ahead on both legs: 18.28 against 18.49, and 22.38 against 23.45.
+- **The tie rule is a tightening of a user rule.** CLAUDE.md treats a tightening as a measurement change for the user,
+  not something the lead adopts on its own.
+- **It is applied to challengers only.**
+  - The incumbent's own lead change has a pooled CI of [-0.40, 0.00]. Read literally, "including 0", that is a tie
+    too.
+  - The incumbent's predecessor was made lead while worse held out (+1.06, P 0.191).
+  - The rule is also read loosely when convenient: desmo-slipper's [0.00, 0.53] "includes 0" in the same literal sense,
+    yet it is called behind.
+  - This row's held-out evidence (P 0.935) equals the incumbent's own (0.938), and its pooled effect is 3.3 times
+    larger.
+- **The ruling's written reasons are readings the user retired or never adopted.**
+  - "11 poses 0.76-3.68 mm off the skin" and "one 0.26 mm pose" are near-touch, which the user made report-only
+    (decision (3)).
+  - "Contact is deeper" is T5, which is report-only by the lead's own rule.
+  - "Equal strap 18.67" is a reweighting proposal (S6) that was never adopted. It was never applied to the incumbent,
+    whose 0.18 lead was 100 % in-band; its part-weighted edge was 0.924 against 0.922.
+  - Using these readings to decide a lead brings back the retired A1 gate.
+  - The rule that actually yields the outcome, the complexity tie-break, is not cited in the ruling.
+- **The held edge is real in the plain score, and it is reach.** The held split is reach -0.95, in-band -0.57 and
+  contact +0.44. Taken only here: 11 held poses (2 for the lead). It survives equal strap: 22.90 against 23.45.
+
+**What it is for the wearer** (mixed, so it is the user's call):
+- **Better here:**
+  - 12 poses reached only here, pooled, against 2 reached only by the lead;
+  - the knee never binds (window margin 11.4 mm against 0.33; 0 held knee-window slides against 32);
+  - the knee link carries 12 N per N m against 31.6;
+  - the raised-arm workspace is a little more in band (0.832 against 0.800).
+- **Worse here:**
+  - 6 more contact poses, pooled, against 0;
+  - deeper contact: 20.24 against 14.75 mm on the bench, 60.97 against 46.12 mm held out;
+  - the knee group touches the hanging, rotated arm (835 at -3.55 mm, 978 at -1.33 mm);
+  - 6 of the 11 extra held poses carry metal under 2 mm.
+
+**Action (lead, not the auditor).**
+- Rewrite the `leader_ruling` text to cite the rule that actually decides: the round tie rule plus the complexity
+  tie-break, 18.25 against 18.5.
+- Then put one question to the user as a big update:
+  - Under your plain-gap rule, conecut leads (18.28 / 22.38 against 18.49 / 23.45).
+  - Under the lead's pooled-CI tie rule plus the complexity tie-break, slipper-nose keeps the lead, by one dowel pin.
+  - Which rule stands?
+- Until the user answers, the board should show the conflict rather than a settled tie (proposal C5 below).
+
+## Lead decision 2: tools/alignment_audit.py 2026-10-17.4 (commit 4302b86)
+
+**Confirmed: SELFTEST PASS, exit 0.** It ran here, niced, in about 1 minute.
+- The three new mutations fire:
+  - roller-longdyad's stale complexity field +0.25 gives watch;
+  - slipper-nose with 5 active DOF gives gamed;
+  - slipper-nose with 3 passive translations gives gamed.
+- The older mutations still fire: idle drive, rigid knee, pin knee, fold 4.8, stale +4, and the reference against
+  itself.
+- The resolution guard is in place (`selftest`, line 838). An upheld complexity ruling counts as "resolved by a record
+  fix" only when its evidence does not match `DOF|cap 4|passive translation`.
+
+**Caveats** (instrument notes, not verdict inputs; proposals P-T1 and P-T2 below):
+- **The "hard goal" runs on a stale leader list.** `LEADERS` (line 790) holds roller-longdyad, sidecar-longdyad,
+  kneeless-roller, kneeless-sidecar and minarc-stop-knuckle-4r. It does not hold the verified lead slipper-nose (lead
+  since 06:23) or this row.
+- **The PASS covers 5 of 19 ruled rows.** Six "info" rows fail the hard goal's own criteria. There are false positives
+  on dogring (2), inband-rssr (1), longstroke-slipper (1), skin-normal-3r-pin-knee (3 or more) and trimlug (1), and
+  2 LOST TRUE POSITIVES on sidecar-roller-flank (held_out, continuity). Slipper-nose and this row read clean (TP only).
+- **The new "never resolved" guard has no test.** No mutation runs through it: the three new mutations test
+  `c_complexity`'s level, not the resolution path. It matches free-text evidence, so a hard-rule ruling worded "4
+  active joints" or "translations beyond 2" would still be counted as resolved.
+
+## What the wearer gets (measured; files from the 17:27-17:58 audit and skeptic, claim unchanged since)
 
 | | this row | lead slipper-nose | file |
 |---|---|---|---|
@@ -46,152 +144,113 @@ the design and its verifier verified it (commit d943974, 17:20).
 | why overhead is lost (bench) | fold 14, J3 stop 3, contact 3 | fold 14, knee slide 4, contact 2 | probe `ws_overhead_why_not` |
 | raised arm, ws elev 90-140 taken, bench / held | 39 / 85, 105 / 229 | 38 / 85, 96 / 229 | per-pose dumps |
 | all ws taken, bench / held | 262 / 360, 659 / 952 | 261 / 360, 650 / 952 | per-pose dumps |
-| taken poses with metal < 1 / 2 / 3 mm, bench | 3 / 33 / 105 | 3 / 30 / 100 | `remeasure/*_bench.json` deep |
-| the same, held out | 13 / 71 / 218 | 14 / 67 / 200 | `remeasure/*_held.json` deep |
-| min metal on taken poses, bench / held | 0.07 / 0.33 mm | 0.07 / 0.33 mm | deep |
-| overhead p10 of per-pose min metal, bench / held | 1.83 / 1.50 mm | 1.82 / 1.50 mm | deep |
+| taken poses with metal < 1 / 2 / 3 mm, bench | 3 / 33 / 105 | 3 / 30 / 100 | `remeasure/*_bench.json` |
+| the same, held out | 13 / 71 / 218 | 14 / 67 / 200 | `remeasure/*_held.json` |
 | contact poses, bench (summed depth, deepest) | 4 (20.24 mm, 8.93 mm at ws 15/165/-60) | 2 (14.75 mm, 9.01 mm) | `conecut-knee-knuckle-3r.json` contact_depth |
-| contact poses, held | 14 (60.97 mm, 9.86 mm at ws 45/165/-30; 9 deeper than 3 mm) | 10 (46.12 mm, 9.05 mm) | same |
-| clip in-band 2-14 (scored) / chain only | 0.9012 / 0.859 | 0.8955 / 0.869 | row `frozen.dilution`, verifier C4 |
-| ws in-band, unscored, all / elev 90-140 (bench) | 0.868 / 0.832 (16.8 % > 14 mm, max 30.7 mm) | 0.856 / 0.800 (19.9 %) | probe |
-| the same, held out | 0.871 / 0.848 (14.9 % > 14 mm, max 31.5 mm) | 0.861 / 0.822 (17.6 %) | probe |
-| why overhead is lost, held | fold 36, J3 stop 10, contact 7 | - | `_probe_held.json` |
-| knee angle over taken poses (window 25.2-154.8) | 59.3-107.1 deg | 86.2-152.2 deg | deep `K.ang` |
+| contact poses, held | 14 (60.97 mm, 9.86 mm at ws 45/165/-30) | 10 (46.12 mm, 9.05 mm) | same |
+| scored clip in-band 2-14 / part-weighted | 0.901 / 0.925 | 0.896 / 0.924 | sampling check |
+| ws in-band, unscored, elev 90-140, bench / held | 0.832 / 0.848 (max 31.5 mm) | 0.800 / 0.822 | probe |
+| knee-window slides, held | 0 (margin 11.4 / 13.2 mm) | 32 (margin 0.33 mm) | row `frozen.knee`, verifier C2 |
 | knee-link force per N m about J3 | 12.0 N | 31.6 N | row `frozen.knee` |
-| J3 stop | 2 mm 440C dowel; held margin 0.74 deg; 19 held poses stopped | none (knee slides: 9 bench, 32 held) | verifier C2 / C3 |
-| springs | the lead's K clock spring, unchanged; R17 not run for this knee | R17 forward bound fails by 0.0008 deg at mu 0.15 | lead ledger M5 |
+| J3 stop | 2 mm 440C dowel, held margin 0.74 deg, 19 held poses stopped | none | verifier C2 / C3 |
+| springs | the lead's K clock spring; R17 not run for this knee | R17 forward bound fails by 0.0008 deg at mu 0.15 | lead ledger M5 |
 | fold margin `th`, bench / held | 5.181 / 5.006 deg | 5.181 / 5.006 deg | verifier extra.th_margin |
-| m_sub with K at rest | not re-measured (same chain) | under 1 deg on 50 of 204 rest poses | `remeasure/slipper-nose-knuckle-3r_msub_rest_bench.json` |
+| near-singular K at rest | not re-measured (same chain) | m_sub under 1 deg on 50 of 204 rest poses | `remeasure/slipper-nose-knuckle-3r_msub_rest_bench.json` |
 | cuff twist | not measured (no CAD, no dynamics) | R17 nominal 4.04 deg | - |
-| knee pad down the humerus at rest (C5, fast bench) | 96.0 mm (pin a 96.7, hub 3 13.4) | 78.8 mm (pin a 68.1) | `verify/conecut-knee-knuckle-3r.py place`, run here |
 
-Paired near-touch gaps, from the two re-wears (this row against the lead):
+## Findings (all watch)
 
-| wear | plain | < 1 mm | < 2 mm | < 3 mm | band read 3-14 mm |
-|---|---|---|---|---|---|
-| bench | 18.28 / 18.49 (-0.21) | 19.92 / 20.12 (-0.20) | 34.84 / 33.02 (+1.82) | 86.16 / 83.15 (+3.01) | 18.34 / 18.64 |
-| held | 22.38 / 23.45 (-1.07) | 25.23 / 26.54 (-1.31) | 37.10 / 36.95 (+0.15) | 83.12 / 79.25 (+3.87) | 22.55 / 23.60 |
+1. **NEW-incumbent-tie-rule (new; proposed catalogue entry R5).** This is section "Lead decision 1".
+   - **Pattern:** a lead-change criterion stricter than the user's, set by the lead, applied to challengers but not to
+     the incumbent's own lead change, and justified with readings the user retired.
+   - **Why it matters:** it withholds a leader the user's rule names (misalignment in the other direction), and it
+     hides from the user a choice that is genuinely mixed for the wearer.
+   - **Action:** the lead asks the user (above).
+   - **Why only watch:** the design's number is not gamed, and a 'gamed' level would block this row, the opposite of
+     the finding.
+2. **NEW-strap-dilution (carried, upheld).** The bench edge's in-band part is a sampling effect:
+   - the equal-strap bench reads 18.67;
+   - part-weighted in-band is 0.925 against 0.924.
 
-## Findings
+   The same reading also erases the incumbent's own 0.18 lead change, so the artefact is family-wide, not this row's.
+   The held edge survives it: 22.90 against 23.45.
+3. **T1 (carried, upheld).**
+   - Bench pose 203 has metal 0.263 mm off the skin and is worth 0.29.
+   - 6 of the 11 extra held poses carry metal under 2 mm.
+   - At 2 mm the bench reads +1.82 and the held +0.15.
+   - Report only.
+4. **T5 (carried, upheld).**
+   - Contact is deeper: 20.24 against 14.75 mm on the bench, 60.97 against 46.12 mm held out.
+   - There are new contacts on the hanging, rotated arm (835, 978).
+   - Size the knee on the low-elevation, extreme-rotation held poses.
+5. **M5 (carried).** The cuff twist and R17 of the new knee have never been measured. Measure them on the gen-7 CAD
+   with the knee re-cut.
+6. **G4 (carried).** The lead's near-singular K at rest: m_sub is under 1 deg on 50 of 204 rest poses.
+7. **T3 (carried).**
+   - The held `th` margin is 5.006 deg, 0.006 above the line, and a +-0.3 deg K-phase error crosses it.
+   - The dowel's held margin is 0.74 deg.
+8. **NEW-ws-inband (carried, better than the lead).** At elevation 90-140, 16.8 % of the metal sits above 14 mm on the
+   bench (max 30.7 mm). The lead's figure is 19.9 %.
 
-1. **T1, metal parked just past the contact line (watch, report-only).**
-   - **Evidence, bench.** The only bench pose taken here and not by the lead is 203 (ws 0, 90, 45). Its lowest metal
-     is 0.26 mm (wall / crown; 0.72 mm on the sampled metal). In the verifier's no-stop control it was a -0.03 mm
-     contact. That one pose is worth 0.55 points, more than the whole 0.21 bench edge.
-   - **Evidence, held out.** All 11 held poses taken here and not by the lead have metal at 0.76-3.68 mm, 6 of them
-     under 2 mm. They are side and front raises at elev 75-90 with external rotation 45-90, plus pose 1099.
-   - **Why it is not better.** At 2 mm the bench ranking flips (+1.82) and the held edge disappears (+0.15). At 3 mm
-     this row is behind on both wears.
-   - **Action.** Report the 2 mm column next to the claim. Under the user's ruling it is not a gate.
-2. **NEW-strap-dilution (watch; proposed catalogue entry S6).**
-   - **Evidence.** The longer E strap carries 164 samples per pose against 104. The equal-strap bench reads 18.67
-     (0.18 behind the lead). Chain-only in-band is 0.859 against 0.869, hub 2 0.912 against 0.953, and the crank 0.801
-     against 0.818.
-   - **Why it is not better.** The share of metal above 14 mm barely moves (9.88 % against 10.44 %). The in-band share
-     rises because new, well-placed strap metal was added, not because any out-of-band part moved into the band.
-   - **Mitigation.** The held edge survives at equal strap (22.90 against 23.45).
-   - **Action.** Rank ties at equal strap. See proposal C2.
-3. **NEW-stop-relabel (watch; proposed T6).**
-   - **How the score treats it.** A contact pose costs reach plus 100 / N_evaluated. A stopped pose costs reach only.
-   - **Evidence.** The upper stop is inert on the exact bench. It cuts 3 overhead held poses (752 / 897 / 965) whose
-     metal would be 2.0-3.4 mm in the skin. That is worth 0.34 held points: held would read 22.72, not 22.38, and the
-     edge would shrink from 1.07 to about 0.73.
-   - **Why it is only watch.** The dowel stands in for an E-strap-on-link-2 clash the chain already has (verifier C3),
-     and the wearer is blocked either way. So it is honest hardware, but the score prefers it to touching by a margin
-     the wearer does not get.
-   - **Action.** Proposal C3.
-4. **T5, deeper contact (watch).**
-   - **Evidence, bench.** 20.24 mm over 4 poses against the lead's 14.75 mm over 2. That is x1.37, under the tool's
-     margin against the lead, but x3.25 / +14.01 mm against sidecar-longdyad, the tool's default reference.
-   - **Evidence, held out.** 60.97 mm over 14 poses, against 46.12 mm over 10.
-   - **New contacts.** Hub 2 at -4.28 mm (205, elev 105) and link 2 at -1.23 mm (316). Held out, 835 (90, 15, -150) at
-     -3.55 mm and 978 (120, 15, -165) at -1.33 mm: the arm pad and the knee link on the hanging, rotated arm, poses
-     the lead takes clear at 0.81 / 0.62 mm.
-   - **Action.** Size the knee on the held low-elevation, extreme-rotation poses, as the proposer's own next step 1
-     says.
-5. **NEW-tie-headline (watch).**
-   - **Evidence.** The board headline ("Best 3-joint design so far", `docs/dashboard/simple/index.html` 234-236) is
-     the first verified row with 3 or fewer joints that has no `tie` ruling. `docs/dashboard/data/morphs.json`
-     (17:28) carries this row as verified 18.28 with no ruling. So the headline moves to it at 93.35 against 93.28.
-   - **Why it is not better.** The proposer and the verifier both measured a tie: CI90 [-1.05, +0.80], P(better)
-     0.60.
-   - **Action, for the lead.** After the skeptic rules, set the row's `leader_ruling` to
-     `tie: slipper-nose-knuckle-3r | ledger <skeptic time> | ...` (docs/OPERATIONS.md section 4). Do not report a new
-     leader to the user.
-6. **M5, spring and cuff (watch, carried).** The K spring and the drive are the lead's, unchanged; the re-wear's dK,
-   a1e and m_sub spans equal the lead's. The lead's R17 forward bound fails by 0.0008 deg at mu 0.15. The new knee's
-   cuff twist is unmeasured.
-7. **G4, near-singular K at rest (watch, carried).** This is the lead's m_sub at rest (under 1 deg on 50 rest poses).
-   The chain is identical.
-8. **T3, fold margin (watch, inherited).**
-   - **Clean.** The stop is on J3's own angle (C1 residual 0.015 deg).
-   - **Inherited.** The held `th` margin is 5.006 deg, 0.006 above the line, on the lead's K law. A +-0.3 deg K-phase
-     build error crosses it.
-9. **NEW-ws-inband (watch, carried, slightly better than the lead).** On raised-arm workspace poses (elev 90-140),
-   16.8 % of the metal is above 14 mm (max 30.7 mm), against 19.9 % for the lead. The scored in-band does not see it.
+**Resolved since the last audit.** NEW-tie-headline: the row now carries `leader_ruling: tie: slipper-nose-...`, which
+cites the non-gamed skeptic entry of 17:57:13Z. The page's headline rule (`docs/dashboard/simple/index.html` line 235)
+excludes tie rows, so the headline no longer crowns this row.
 
-### Patterns walked and found absent
+**Still open (reporting, tool reason).**
+- The row's verdict text begins "SCREENED".
+- The dashboard `gap` column shows the sweep best, 12.5 (score 95.45), 5.78 under the verified number.
 
-- **T2.** The band edge costs 0.06 points (lead 0.15).
-- **T4.**
-  - The knee window minimum is held at the rule's 25.22 deg by clamp, and the taken knee angle stays 34 deg or more
-    inside it.
-  - lE 97.14 sits 0.86 mm under the coarse LHS box edge (98). The CMA searched past it to 101, and the clamp is 110,
-    so it is not a box edge.
-  - The stop's 0.74 deg held margin is a robustness note: a 3 mm GH error moves phi by about 2 deg (proposer), which
-    can only cost reach, never add contact.
-- **S1.** Held minus bench is +4.10.
-- **S2.** Part-weighted in-band is 0.925, above the sample-weighted 0.901. L1a carries 8 samples, the same as the lead.
-- **S3.** The dowel sits inside the hub-3 stack, with no skin-facing metal.
-- **S5.** The full flood equals static; knn costs 1.69 (lead 1.67).
-- **M1, M2.** None; this is the catalogue dowel ISO 8734 2 m6, at O20.
-- **M3.** The knee against E is checked by the model's parts check (329 poses fail at stk 4.85, 0 at 6.0).
-  - The groove at r 6.45-8.55 leaves a 0.95 mm wall to the MR117 seat (r 5.5) over the seat's first 0.5 mm (LV L1
-    3.65 to the groove floor 4.15, `pipeline/conformal/param_cad/param_build.py` line 35). This is a CAD-stage note,
-    not a score issue.
-- **M4.** The knee moves 46.7 deg and the drive 45.6 deg.
-- **P1, P2.** The search used the fast bench only. The row best is the two-sided CMA's objective argmin, and it was
-  picked over the one-sided CMA's by the fast plain gap (12.50 against 13.44).
-- **P3, R3.** It is the best of 3 worn configurations (bench 18.28 / 18.36 / 18.84, held 22.38 / 22.79 / 23.90). The
-  spread is on file in the concept doc's column table.
-- **P4.** No bench or judge file changed in the row's 4 commits.
-- **R2, R4.** The dashboard v_gap equals the verifier's.
-- **G5, G6.** Complexity recomputes to 18.5, and the stop adds no DOF.
+**Patterns walked and found absent this hour.** None of these changed, since the claim, model and verifier did not
+move: T2, T4, S1-S5, M1-M4, P1-P4, R1-R4, G1-G3, G5, G6.
+- P4: no bench, judge or metric file is in the row's 5 commits.
+- G5: complexity recomputes to 18.5.
 
 ## Numbers I could not get, and why
 
-- The cuff twist and R17 for the re-centred knee: there is no CAD and no dynamics run for this row.
-- m_sub at rest for this row: the lead's script was not re-run, because the chain is identical (same spans).
-- Per-pose q3' near the stops: the re-wear records only the range ([-109.20, 116.10] bench, [-111.16, 119.44] held).
-  So I cannot count how many taken poses sit within 2 deg of a stop.
-- The 2 mm and 3 mm readings of the one-sided CMA column (18.84 / 23.90): it was not re-worn.
-- The farm was not used. It is past its budget line, so everything ran on 2 local niced processes.
+- **No new re-wear.** The box was saturated (load 15.5 on 4 cores), the farm is closed, and the claim did not move.
+- **The new knee's cuff twist and R17:** no CAD and no dynamics run exist for this row.
+- **m_sub at rest for this row:** it was not re-run, because the chain is identical to the lead's.
+- **Per-pose q3' near the stops:** the re-wear records only the range.
+- **The pooled CI of each earlier lead change at equal strap:** that would need new reweighted dumps for the
+  incumbents. It is not measured.
 
-## Proposals (measurement or reporting changes; not applied, none feeds the verdict)
+## Proposals (measurement, rule or reporting changes; not applied, none feeds the verdict)
 
-- **C1. Tool defect: near-touch and dominance read a control file.** Before this audit's re-wear existed,
-  `_near_numbers` in `tools/alignment_audit.py` read the newest non-held verifier file with an audit block. That was
-  the no-stop control (`_v_bench_nostop.json`, plain 19.38), not the claim (18.28).
-  - Effect: near_touch reported a 10.02-point shell instead of 16.56, and dominance reported ok (-0.89 plain) instead
-    of watch (+0.21 plain, -1.82 at 2 mm).
-  - Proposal: apply `contact_depth`'s guard, which uses a file only if its own gap reproduces the claim to 0.05.
-  - Effect on rows: any row whose verifier folder holds a control column. This one moves ok to watch on dominance.
-- **C2. Catalogue entry S6, in-band dilution.**
-  - Looks like: in-band rises when a member is lengthened or added in band, with the out-of-band parts unchanged.
-  - Detect: the chain-only in-band and the equal-sample-count reweighting (verifier C4) next to every claim that
-    changes a member's length. A tie is ranked at equal strap.
-  - Effect on this row: bench 18.28 -> 18.67, which ranks it behind the lead. Held is 22.90 against 23.45. Other rows
-    are not measured.
-- **C3. Catalogue entry T6, stop relabel.**
-  - Looks like: a hard stop, or any "not taken" label, removes a would-be contact pose from both the contact numerator
-    and denominator. It then costs reach only, while a contact costs reach plus contact.
-  - Detect: re-evaluate the stopped poses without the stop, on the worn shape (verifier C3), and report the gap with
-    those contacts counted.
-  - Effect on this row: held 22.38 -> 22.72 (3 upper-stop poses). Bench: no change (its stopped poses are parts
-    clashes). Rows with knee windows or J2 stops are not measured.
-- **C4. Headline needs a ruling when the paired CI spans 0.** The board takes the headline only when the paired
-  bench CI90 excludes 0, or after a lead ruling. Effect: this row stays off the headline until the ruling. The lead's
-  headline is unchanged.
+- **C5. Board shows a rule conflict, not a settled tie.** When a challenger is ahead on the plain verified gap on both
+  legs and the lead rules a tie by a rule the user did not set, the row shows "ahead by the user's plain-gap rule; lead
+  ruled tie (rule: ...), user decision pending".
+  - Effect today: this row only. No number changes.
+- **C6 (a TIGHTENING; for the user, not the lead).** Make the round-12 tie rule a user rule, apply it to every lead
+  change, and fix its boundary.
+  - The boundary: "the CI90 strictly straddles 0, i.e. lower < 0 < upper". With that, [x, 0.00] and [0.00, x] are
+    decided, not tied.
+  - Measured effect on every lead change on file:
+    - roller over sidecar: a tie, and roller wins the complexity tie-break (20.25 against 25.5), so no change;
+    - slipper over roller: [-0.40, 0.00] is decided for slipper, so no change;
+    - conecut over slipper: [-1.46, +0.09] is a tie, and slipper wins the complexity tie-break (18.25 against 18.5),
+      so no change;
+    - desmo-slipper against slipper: [0.00, 0.53] is decided against desmo, so no change.
+  - With the user's plain-gap rule instead, the only change is that conecut leads.
+- **P-T1. Selftest hard set.** Make `LEADERS` follow the board, not a hand list: the verified lead plus every row with
+  a `tie` ruling against it, plus the 4-active pick.
+  - Effect today: slipper-nose and conecut join the hard goal, and both read clean.
+  - Also report the non-hard rows' false positives and lost true positives in the PASS line, so it does not read as
+    a full pass: today that is 6 rows, with 2 lost true positives on sidecar-roller-flank.
+- **P-T2. Test the "never resolved" guard.** Add a mutation that feeds a synthetic upheld complexity ruling (evidence
+  "5 active joints", the record fixed) through the resolution path. It must count as a lost true positive, not as
+  resolved.
+  - Also match on the check's own hard-rule reasons (`active DOF > cap 4`, `passive translations > 2`) rather than the
+    skeptic's free text.
+- **Carried, from the 17:27 audit:**
+  - C1: near_touch and dominance should use only files that reproduce the claim;
+  - C2: S6 dilution;
+  - C3: T6 stop relabel, made symmetric as the skeptic required;
+  - C4: the board headline needs a ruling when the paired CI spans 0.
+
+
+---
+
+*Below this rule (2026-10-17, 18:20 UTC): the earlier skeptic section of the 17:27-17:58 audit, kept as written.*
 
 ## Skeptic (2026-10-17, 17:50-17:58 UTC)
 
