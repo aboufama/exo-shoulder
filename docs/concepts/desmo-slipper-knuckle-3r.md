@@ -133,3 +133,43 @@ Attribution on the fast bench (ablations of the best configuration):
 Convergence gate on the near-touch objective, 136 configurations (76-config farm grid, then 5 ES generations of 12 on
 the farm): gain over the 2nd half 0.00 points, over the last third 0.00, top-5 spread 0.00. **Passes.** The landscape is
 flat at the lead's own 16.47: stage-1 placement only moves the ring sector and the gates.
+
+## Claim protocol (frozen shape fitted on Bench(60,160) fast, worn on Bench(110,360) EXACT; farm, then local)
+
+Everything was run through this same file. The lead control is DS_CONTROL=1.
+
+| | frozen exact Bench(110,360) | held out | flood full / knn | near1 | min metal |
+|---|---|---|---|---|---|
+| lead through this file (control) | **18.49** (reach 0.725, ib14 0.8955, contact 0.0054) | **23.45** | (18.49 / 20.16 lead row) | 20.12 | 0.07 |
+| desmo, dense wall sampling (sweep convention) | 18.25 (reach 0.725, ib14 0.8979, contact 0.0054) | 23.20 | 18.25 / 19.92 | 19.88 | 0.07 |
+| desmo, standard wall sampling (the claim) | see "Claim at standard density" below | | | | |
+
+In every column the reach, the losses and the contacts are identical to the lead: fold 88, knee slide 9, contact 2
+(poses 237 / 264 at elev 165, the lead's lug and crank), overhead 8 / 28, dK taken max 45.62 (held 46.27). On every
+taken pose the link-2 exit stays >= 11.89 mm from the short arm (371 bench / 852 held poses). Held out, the ring sector
+shows up inside 2 of the lead's own 10 contact poses (m2:ring2) and creates no new contact pose. The dense-wall -0.24
+comes entirely from in-band, from the extra in-band wall samples, so it is a measurement effect and not a design gain.
+
+## Red team (own best configuration, frozen exact wear, tools: the model's redteam mode + the slop maps)
+
+* **The pose that jams.** No jam was found. Engagement pressure angles stay <= 19.8 at the slot (both rho_e) and <= 26.1
+  at the K0 = 0 reversal, against a 38.03 budget. The binder is **slop, not jam**. With the crank free, K play peaks at
+  0.245 deg at x0 = +8 deg past the onset (the corner exit). It reaches 0.367 at the worst groove tolerance (c 0.015),
+  and 0.36 in series with the slot's 0.115. That passes the 0.25 gate at nominal fit only. The lead's spring had no play
+  but lagged 0.42-0.53 deg under load, so the two are comparable in size and opposite in kind (play vs lag).
+* **The point that pinches.**
+  * The lead's two dwell contacts remain: pose 237 (crank -9.0, lug -8.5 mm) and pose 264 (lug -5.7 mm). Deleting the
+    spring cannot touch them.
+  * The new ring sector sits at 3.42 mm at its lowest taken pose (230), and hub 2 is lower there (1.02).
+  * The lowest taken pose overall is 139 at 0.07 mm, on the cuff end E: the lead's own.
+* **The optimistic numbers.**
+  1. The dense wall sampling (-0.31 fast), now removed.
+  2. The 10-deg q2 onset blend: the groove leads the linear K law by up to 2.61 deg of K, which the bench IK does not
+     carry. It is benign for the stretched margin and unmodelled for the metal.
+  3. The proposer's spec placement (a_s 8.625, psi 184) passes every gate the spec listed (stroke, PA, pitch, drift) and
+     fails the one it did not list: crank-free play 1.12 deg in the dwell and up to 3.7 deg at the onset corner.
+* **Named poses** (frozen exact):
+  * Taken: rest (dK 4.6, lowest the horn at 3.57 mm), overhead axial -135 (dK 5.8, lowest hub K at 2.94), across the body
+    at plane 120 / elev 90 (horn 3.38).
+  * Lost: overhead axial 0 (knee slide), plane-90 overhead, extreme internal rotation, behind the back, abduction 90 and
+    extreme external rotation (all fold, the lead's walls).
