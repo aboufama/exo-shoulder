@@ -24,7 +24,7 @@ Input: the "mechanism" record of each design, in docs/concepts/rows/<id>.json:
 """
 import glob, json, os, sys
 
-VERSION = "2.1 (2026-10-17)"          # bump when a weight or a rule changes; the dashboard shows it
+VERSION = "2.2 (2026-10-17)"          # bump when a weight or a rule changes; the dashboard shows it
 REPO = os.path.abspath(os.path.join(os.path.dirname(os.path.abspath(__file__)), ".."))
 ROWS = os.path.join(REPO, "docs", "concepts", "rows")
 
@@ -35,7 +35,7 @@ W = dict(
     crossed=5,             # two translations stacked on each other (adapter, 10.5-11.5 mm stack, squareness)
     ptrans_over_cap=20,    # each passive translation beyond 2: no compact component exists (CLAUDE.md: never)
     prot=1,                # each passive rotation (a pin on a bearing pair). User 2026-10-16: "extra rotation degrees is not huge for me" (was 2)
-    sensed=5,              # each passive coordinate that must be measured (an encoder without a motor)
+    sensed=0,              # was 5; user 2026-10-17: sensing is out of scope (every joint can carry an encoder, IK gives the pose)
     loop=4,                # each closed loop inside the mechanism (beyond the one through the wearer's GH)
     body_extra=1,          # each moving rigid body beyond 3
     joint_extra=1,         # each kinematic pair beyond 3
@@ -266,8 +266,8 @@ def self_check():
     expect("anchor recipe parts = 7 made", recipe_parts(EXAMPLES["anchor (three pins on bearing pairs, three links)"])[0], 7)
     expect("anchor recipe parts = 6 bought", recipe_parts(EXAMPLES["anchor (three pins on bearing pairs, three links)"])[1], 6)
     expect("4R", score(EXAMPLES["4R (the anchor + a 4th active hub and link)"])["complexity"], 25 + 1 + 1 + 1 + 0.5)
-    expect("pin knee (doc count)", score(EXAMPLES["skin-normal-3r-pin-knee"])["complexity"], 19.5)
-    expect("closure-set knee (doc count)", score(EXAMPLES["closure-set-arc-knee-3r"])["complexity"], 30)
+    expect("pin knee (doc count)", score(EXAMPLES["skin-normal-3r-pin-knee"])["complexity"], 9.5)   # v2.2: was 19.5 with 2 sensed pins x 5
+    expect("closure-set knee (doc count)", score(EXAMPLES["closure-set-arc-knee-3r"])["complexity"], 15)   # v2.2: was 30 with 3 sensed coordinates x 5
     base = {mid: m for mid, r, m in rows_dir_records() if m is not None}.get("baseline-3r")
     if base is not None: expect("rows/baseline-3r.json (the census anchor)", score(base)["complexity"], 0)
     s3 = score(EXAMPLES["3P cuff stage (seed-offset-3r-slides, not buildable)"])

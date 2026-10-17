@@ -31,7 +31,11 @@ skin-normal-3r-pin-knee.md lines 565-568), sits outside the DOF count like the c
 tools/simplicity.py (record key mechanism.cuff_knee, simplicity v2.1: the knee's closure loop is free too). Lead's
 build rules that follow (2026-10-17, from the audit): the knee pins are built as MR63ZZ ball-bearing pairs (with
 plain iglidur pins R17 fails: ~10 deg cuff twist, ~10 N), and the knee window [ang_min, 180 - ang_min] is a physical
-knee stop the model checks like the J2 stops. The leaderboard's plain verified gap counts contact as penetration
+knee stop the model checks like the J2 stops. (6) Sensing is OUT OF SCOPE (user 2026-10-17: "dont wory about the sensor stuff the purpose of this is to find a
+kinematic solution if we sensor every joint we can just use inverse kinematics to get a perfect position"): encoders
+cost 0 complexity (tools/simplicity.py v2.2), and no agent spends time on sensing, determinacy-from-encoders or
+encoder-value analysis. DOF counting is unchanged: a joint in the shoulder chain is a joint (pick1 = 4 DOF); the cuff
+knee pins are cuff alignment outside the count. The leaderboard's plain verified gap counts contact as penetration
 (metal past 0 mm) as the verifiers compute it; the 1 mm / 2 mm near-touch readings are reported only.
 The user wants the design's evolution recorded for a final time-lapse visual: add every judged design to
 docs/EVOLUTION.md (and its snapshot to pipeline/evolution/) as part of the judge loop.

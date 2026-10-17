@@ -87,7 +87,7 @@
  },
  "best_k": 4179,
  "limiter": "hub 3 rides the slot: F3 = slot radius + 3.15 (hub 3 0.31-0.33 in band vs 0.87 for the plain 3R at the same seats) and the neck becomes J3's upper member (0.64 vs 0.83); the slot zone must be ONE radius over the whole travel, so CMA shrank the travel to 5.6 deg (slide opens on 13/220 poses) which caps the relay; fast -> frozen reach 0.744 -> 0.661 (seats tuned to the 160-pose sample); overhead workspace 7/28 frozen (hub 3's lateral-deltoid seat is buried at elev 150); near-touch: gap 61.62 frozen if metal < 1 mm counts as contact",
- "complexity": 14.75,
+ "complexity": 9.75,
  "overhead": {
   "n_ws": 12,
   "reach": 0.0,

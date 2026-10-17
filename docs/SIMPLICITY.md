@@ -231,3 +231,6 @@ A 4th active DOF is never a simplification: 25 points.
   (`cuff_knee.closed_loops: 1` on the 6 knuckle rows that charged it; skin-normal-3r-pin-knee never did). Row
   `complexity` fields refreshed. roller-longdyad 20.25, sidecar-longdyad 25.5, kneeless twins 23.75 / 28.0. Known
   residual: the template knee differs from a row's own knee by <= 1.5 made-part points (skeptic, roller-longdyad).
+- **v2.2 (2026-10-17)**, user: sensing is out of scope ("if we sensor every joint we can just use inverse kinematics"):
+  the sensed-passive weight goes 5 -> 0. Only rows that still recorded sensed coordinates move (e.g. closure-set-arc-knee-3r,
+  acromial-rocker-3r); the pin-knee rows had already dropped theirs in v2.

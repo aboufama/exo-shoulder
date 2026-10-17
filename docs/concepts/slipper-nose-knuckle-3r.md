@@ -134,3 +134,50 @@ contact 2. Held out 23.73.
     (dK_lim 42.2): +1.23 points.
   - Below mu 0.05 the extra stroke is worth nothing (mu 0: dK_lim 52.8, still 18.75): K's dyad window (a1max) binds
     first.
+
+## The deeper move: re-fit the flank at the honest friction (CMA-ES on the farm, 3 runs, 3603 evaluations)
+
+The objective is the round-9 one, the 2 mm near-touch gap on Bench(60,160) fast. Each run started from the lead's
+drive with an O2 nose (nose_r 1.0, 16 per generation, sigma 0.5):
+
+| run | what moves | mu | evals | start (2 mm) | best (2 mm) | best plain | dK_lim | gate (2nd half / last third / top-5, score points) |
+|---|---|---|---|---|---|---|---|---|
+| A | drive + nose (9) | 0.087 | 993 | 16.79 | **16.47** | 13.00 | 49.8 | 0.00 / 0.00 / 0.00 (passes) |
+| B | drive + nose + 11 seats (20) | 0.087 | 1617 | 16.79 | 15.57 | 14.52 | 44.0 | 0.36 / 0.31 / 0.12 (passes) |
+| C | drive + nose (9) | 0.05 | 993 | 16.66 | 16.47 | 13.09 | 52.8 | 0.00 / 0.00 / 0.00 (passes) |
+
+A's best: g 2.3934, beta -176.684, r_c 15.3739, lift 0.7882, hl 1.9442, zr 4.0293, s_arm 4.0, r_lobe 8.2661, nose_r
+1.1839 (an O2.37 nose: an O2.4 ground 440C pin, or an O2.5 m6 dowel at r 1.25), with the lead's seats.
+
+**The flank re-fit takes back everything friction cost.** At mu 0.087 the horn's kinematic pressure angle peaks at
+36.1 deg over the taken stroke, under the 38.0 cap: 41.1 with the friction angle, against 43. Its own range is 49.8
+deg, against the lead roller's 46.2. The same flank keeps the following fast numbers, all honest:
+
+| mu | dK_lim | fast plain |
+|---|---|---|
+| 0 | 60.0 | 12.98 |
+| 0.05 | 54.0 | 12.97 |
+| 0.12 | 46.2 | 13.00 |
+| 0.15 | 43.2 | 14.90 (3 poses lost) |
+
+So the friction risk is retired up to mu 0.12, i.e. greased steel on DLC with margin, and dry 440C on DLC at its
+better end. The price is a crank-side pressure angle of 29.5 deg (34.5 with friction; the lead's was 8.2), still far
+inside 43.
+
+### Frozen exact Bench(110,360), A's shape worn unchanged at mu 0.087 (the central case)
+
+**18.49 (score 93.28)**, against the lead roller's 18.67 through the same Frozen class. The best fit on the fast bench
+was 13.00.
+
+- **Gap terms.** Reach 0.725 (261/360), follow 1.0, ib14 0.8955, ib10 0.5163, contact 0.0054 (2 poses).
+- **Lost poses:** fold 88, slide 9, contact 2. These are the lead's exact losses. The contact split is horn / hub K /
+  crank, the lead's own pair.
+- **Overhead (elevation >= 140):** 8/28 taken, in-band 0.894, lost fold 14, slide 4, contact 2. Same as the lead.
+- **Near-touch.** The lowest metal is 0.07 mm, at plane -60, elevation 60, axial 105: the lead's own pose and metal.
+  - Counting metal < 1 mm as contact: 20.12 (lead 20.30), 3 poses.
+  - Counting metal < 2 mm as contact: 33.02 (lead 33.10), 30 poses.
+- **Workspace in-band (unscored):** 0.856 / 0.509 overall, 0.800 at elevation 90-140, 0.940 overhead. The lead,
+  same harness: 0.854 / 0.798 / 0.937.
+- **Parts in band.** The re-cut arm runs lower: crank 0.797 -> 0.818. Hub 3 0.739 and L2 0.736 are unchanged.
+- **Cam check.** Horn PA 36.1 + 5.0 friction; crank PA 29.5 + 5.0. The flank's smallest radius is 1.3 mm, a concave
+  pocket around the 1.18 nose. Hub K clearance 1.31; nose-to-hub-K clearance 3.92; contact radius 14.9-19.8 mm.
