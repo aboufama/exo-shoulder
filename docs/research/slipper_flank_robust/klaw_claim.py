@@ -21,7 +21,9 @@ H = EP.H
 OFF = float(os.environ.get("KLAW_OFF", "0"))
 CASE = os.environ.get("KLAW_CASE", "")
 if CASE:
-    cs = json.load(open(os.path.join(HERE, "asbuilt.json")))["cases"][CASE]["err_law"]
+    cs = {}
+    for fn in ("asbuilt.json", "asbuilt_extra.json"): cs.update(json.load(open(os.path.join(HERE, fn)))["cases"])
+    cs = cs[CASE]["err_law"]
     KL, ER = np.array(cs["k"], float), np.array(cs["err"], float)
 else:
     KL, ER = np.array([0.0, 90.0]), np.zeros(2)

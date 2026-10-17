@@ -234,3 +234,7 @@ A 4th active DOF is never a simplification: 25 points.
 - **v2.2 (2026-10-17)**, user: sensing is out of scope ("if we sensor every joint we can just use inverse kinematics"):
   the sensed-passive weight goes 5 -> 0. Only rows that still recorded sensed coordinates move (e.g. closure-set-arc-knee-3r,
   acromial-rocker-3r); the pin-knee rows had already dropped theirs in v2.
+- **Record fix, 2026-10-17 14:25 UTC (lead, no rule change)**: five slaved-knuckle pin-knee rows written after v2.1 still charged
+  the knee's closure loop (`mechanism.cuff_knee.closed_loops` missing): slipper-nose and trimlug-k165 22.25 -> 18.25,
+  dipped-law-groove 24.25 -> 20.25, inband-rssr 28.5 -> 24.5, longstroke-slipper 30.5 -> 26.5 (alignment audit
+  NEW-stale-complexity-ruler). A MEASUREMENT change of the complexity column only; no score moved.

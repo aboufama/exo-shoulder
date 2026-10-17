@@ -430,6 +430,13 @@ def morphs(S):
                         le.get("verdict") != "gamed" and num(le.get("claim")) is not None and \
                         abs(num(le["claim"]) - m["v_gap"]) <= 0.005:
                     m["status"] = "verified"
+            # a verified row without v_contact showed contact-free on the board (alignment skeptic 2026-10-17 07:15 / 14:20: 12
+            # verified rows, the lead's frozen contact 0.0054 shown as 0.0); the gap is linear in contact, so the verifier's own
+            # v_gap and v_inband14 / v_follow / v_reach fix it (rounding error ~1e-4)
+            if m["v_contact"] is None and m["v_gap"] is not None and all(m["v_" + k] is not None for k in ("inband14", "follow", "reach")):
+                c = round((m["v_gap"] - gap(m["v_inband14"], m["v_follow"], m["v_reach"], 0.0)) / 100.0, 4)
+                if -0.0002 <= c <= 0.3: m["v_contact"] = max(0.0, c)
+                else: warn(f"{mid}: no v_contact, and v_gap {m['v_gap']} is not the plain formula of its v_* fields (contact {c})")
             # a self-measured FROZEN EXACT claim (not verified) - shown as such, never as a fast number
             fz = rw.get("frozen_exact")
             # rows store the frozen exact claim under several keys (frozen_exact / frozen / claim.frozen); the first number

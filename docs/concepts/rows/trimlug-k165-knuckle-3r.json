@@ -413,7 +413,9 @@
    "joints": 2,
    "custom_parts": 4,
    "catalogue_parts": 6,
-   "rule": "user 2026-10-17: no encoders on the knee pins (pose from the hub encoders) -> no added complexity; counts = docs/concepts/skin-normal-3r-pin-knee.md line 584"
+   "rule": "user 2026-10-17: no encoders on the knee pins (pose from the hub encoders) -> no added complexity; counts = docs/concepts/skin-normal-3r-pin-knee.md line 584",
+   "closed_loops": 1,
+   "rule_loop": "simplicity v2.1 (2026-10-17): the knee's closure loop is free, as on roller-longdyad / groove-desmo / sidecar-*; added by the lead 2026-10-17 14:25 UTC after the alignment audit's NEW-stale-complexity-ruler (this row charged it, the lead's record did not)"
   }
  },
  "cam": {
