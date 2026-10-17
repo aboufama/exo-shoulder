@@ -1,0 +1,47 @@
+[
+ {
+  "key": "fold_margin",
+  "refuted": true,
+  "evidence": "The margin is on file 4 times, all >= TH fold_min 5.0 (tools/concept_kit.py FOLD_MARGIN 5.0): rows/roller-longdyad-knuckle-3r.json verification.th_margin_min {bench 5.181, held 5.031, lt5 0}; verify/roller-longdyad-knuckle-3r_v_bench_frozen.json extra.th_margin {min 5.181, n 371, lt5 0}; _v_held_frozen.json extra.th_margin {min 5.031, n 851, lt5 0}; fit_fast.extra.th_margin min 5.011 (184 taken). Tool read miss: c_fold_margin's key regex ends at th_margin$, so th_margin_min.* is skipped and the dict extra.th_margin gives no number."
+ },
+ {
+  "key": "judgement:S1",
+  "refuted": false,
+  "evidence": "Re-measured on the exact claim protocol, which the auditor could not obtain: the fit-bench grid cache (key 0089c747c10f, Bench(60,160)) is rebuilt, and 4 farm dumps (tools/alignment_paired.py, models unchanged) reproduce 18.67 / 23.73 / 18.91 / 22.67 to the digit. Paired (compare_sets): bench -0.25, SD 1.35, 90 % [-2.62, +1.73], P(roller better) 0.605; held +1.06 (reach term +0.84, discordant ws 21 vs 29), 90 % [-0.47, +2.39], P 0.135; pooled +0.69, 90 % [-0.56, +1.83], P 0.191 (remeasure/roller-longdyad-knuckle-3r_vs_sidecar-longdyad-knuckle-3r_paired_claim.json). Own bootstrap of the auditor's perturbed dumps: bench SD 1.39, [-2.74, +1.82], P 0.58; held [-0.71, +2.07], P 0.22. Confirmed and slightly stronger: the 0.24 is noise, the lead is likelier better out of sample."
+ },
+ {
+  "key": "judgement:NEW-contact-depth",
+  "refuted": false,
+  "evidence": "Confirmed per pose on the claim protocol (paired_claim.json contact_depth). Bench: roller 2 contacts, sum 16.46 mm, deepest -10.55 at (15,165,-60); lead 4, sum 6.23, deepest -4.61. Held: roller 10, sum 49.88, deepest -9.54 at (30,165,-45), 7 deeper than 3 mm; lead 10, sum 35.67, deepest -8.37, 5 deeper than 3 mm. One correction: not every press is overhead. 4 of the roller's 10 held contacts are below elevation 150 (-5.51 / -3.49 / -1.60 at elevation 60, planes -90/-75; -1.22 at elevation 105), and the lead presses at the same poses. The presses are real metal inside the skin model. Stands."
+ },
+ {
+  "key": "judgement:NEW-ws-inband",
+  "refuted": false,
+  "evidence": "Confirmed from live_audit_2026-10-16/probe_*.json (claim protocol, exact). ws_unscored inband14 is 0.854 against 0.8736. ws_elev90_140 is 0.7979 against 0.8409 (38 against 37 poses taken); the shortfall is metal standing off more than 14 mm (over14 0.2012 against 0.1565), a bulkier raised-arm profile. Clip in-band is 0.8937 against 0.8966 on the bench and 0.8926 against 0.8947 held out. Taken poses under 2 mm on the claim protocol (paired_claim.json taken_lt2): bench 30 against 26, held 66 against 63; under 1 mm, 3 against 2 and 14 against 14. No number refutes it. Stands."
+ },
+ {
+  "key": "judgement:S2",
+  "refuted": false,
+  "evidence": "Confirmed: rows verification.bench_frozen_exact_envelope.gap is 18.56 against bench_frozen_exact.gap 18.67; verify _v_bench_frozen_env.json gives frozen.inband14 0.8948 against 0.8937, with env {head_pts 9, edge_pts 10}. ROUNDS.md line 1208 prints 'envelope-corrected 18.56' in the winner's row. The ledger claim stays v_gap 18.67. This is proxy credit, not harm to the wearer, but the reporting the watch names is on file. Stands."
+ },
+ {
+  "key": "judgement:G4",
+  "refuted": false,
+  "evidence": "Confirmed, and tighter held out than stated. Bench (verify _v_bench_frozen.json): sidecar.pa_horn_max_taken 43.0 = PA_MAX 43.0 (model line 45); extra.pa_horn_max 42.7; dK_taken_max_deg 45.62 of dK_lim_deg 46.25 (why_lim pressure_horn); clear_hubK_min 1.14, clear_roll_hubK_min 2.02. Held out (_v_held_frozen.json extra): pa_horn_max 43.0, dK_taken_max_deg 46.17 of 46.25, 0.08 deg from the cap. at_pa45.poses_failing is 0 on both sets, so the drive passes the 45 gate. The lead has margin (rows added_checks: lobe PA real max 39.11 of 45, ball-link tilt 21.8 of 30). No force or stiffness file exists. Stands."
+ },
+ {
+  "key": "judgement:T4",
+  "refuted": true,
+  "evidence": "Re-measured: the walked bounds do not buy the number. ang_min: bench 18.67 at 26.88, 18.71 at 30.46 (remeasure _angmin26.8823 / _angmin30.46.json); held out (own farm re-wear) 23.72 at 26.88, 23.55 at 30.46 vs 23.73 claimed (remeasure/roller-longdyad-knuckle-3r_angmin*_held_skeptic.json frozen.gap). K dyad: a1e max taken 54.43 held, 9.61 deg under stretch bk1+bk2 64.03 (remeasure _held.json coord_spans a1e); stop B 0.27 inside the 5-deg guard (lead 0.00), interior 134.5 deg; th margin 5.181 / 5.031 >= TH fold_min 5. bk1 = 26 is a length box edge."
+ },
+ {
+  "key": "judgement:M5",
+  "refuted": false,
+  "evidence": "A missing measurement, and none is on file: every repo file naming this id (rows, model, verifier, verify JSONs, alignment, ROUNDS, catalogue) was checked, and none holds spring torque or closure force. The verify readings closure_max_mm 0.0 and wrong_sense 0 are kinematic. The cap is loaded wherever K moves: extra.dK_sign_counts neg is 167 of 371 bench and 399 of 851 held taken poses. Stands."
+ },
+ {
+  "key": "judgement:G5",
+  "refuted": false,
+  "evidence": "Confirmed: rows mechanism {active_dof 3, sensed_passive 2, joints 9}; its notes read 'pin knee (2 iglidur pins, sensed as the lead)'. The CLAUDE.md line 18 ruling says a sensed joint is a joint, and the line 17 exemption names passive self-aligning slides at the cuff. If the 2 encoded pins count, there are 5 read coordinates, over the 4-DOF cap. The knee is the lead's, so the ranking does not change. It is the user's question, and no number refutes it. Stands."
+ }
+]

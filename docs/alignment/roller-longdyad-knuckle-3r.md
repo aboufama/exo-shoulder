@@ -278,3 +278,118 @@ it as a reported reading.
 - **Spring torque, K lag and cuff twist:** out of scope by the kinematic ruling, and not run.
 
 Farm cost of this audit: 4 jobs, about 500 worker-s, $0.04.
+
+## Skeptic (2026-10-17 02:20-02:30 UTC, ledger entry 2026-10-17T02:29:27Z, `by skeptic`, run `skeptic:roller-longdyad-knuckle-3r`)
+
+**Final verdict (computed by `tools/alignment_ledger.py skeptic`): WATCH.**
+- 2 of the 9 reasons are refuted with measured evidence: `fold_margin` and `judgement:T4`.
+- The other 7 stand at watch.
+- Rulings: `docs/alignment/roller-longdyad-knuckle-3r.rulings.json`.
+
+**New measurements.** No model, bench, row or score was changed.
+
+The fit-bench grid cache (key 0089c747c10f, Bench(60,160)) was rebuilt locally at 01:59. That made the auditor's
+"not obtained" paired comparison on the exact claim protocol possible.
+- 4 farm dumps with `tools/alignment_paired.py` reproduce the claims to the digit:
+
+  | design | bench | held out |
+  |---|---|---|
+  | this design | 18.67 | 23.73 |
+  | the lead | 18.91 | 22.67 |
+
+  Files: `remeasure/*_perpose_claim.json` and `remeasure/roller-longdyad-knuckle-3r_vs_sidecar-longdyad-knuckle-3r_paired_claim.json`.
+- 2 held-out re-wears at the knee bounds ang_min 26.88 and 30.46:
+  `remeasure/roller-longdyad-knuckle-3r_angmin{26.8823,30.46}_held_skeptic.json`.
+- Farm cost: 6 jobs, about 860 worker-s, about $0.07.
+
+### Rulings
+
+**fold_margin: REFUTED.** The margin is on file 4 times, and every reading is at or above TH fold_min 5.0.
+- `rows/roller-longdyad-knuckle-3r.json` `verification.th_margin_min`: bench 5.181, held 5.031, lt5 0.
+- `verify/roller-longdyad-knuckle-3r_v_bench_frozen.json` `extra.th_margin`: min 5.181, n 371, lt5 0.
+- `_v_held_frozen.json` `extra.th_margin`: min 5.031, n 851, lt5 0.
+- The fit-fast reading is 5.011.
+- Cause of the false watch: the tool's regex ends at `th_margin$`, so it skips `th_margin_min.*`. The dict
+  `extra.th_margin` carries no plain number.
+
+**judgement:S1: stands, and is now measured on the claim protocol.**
+- Bench: difference -0.25, paired SD 1.35, 90 % interval [-2.62, +1.73], P(this design better) 0.605.
+- Held out: +1.06. The reach term is +0.84, and the lead takes 29 workspace poses this design misses, against 21.
+  The 90 % interval is [-0.47, +2.39], and P(better) is 0.135.
+- Pooled: +0.69, 90 % interval [-0.56, +1.83], P(better) 0.191.
+- The perturbed fit had given P 0.23 / 0.29, so it understated the lead's out-of-sample edge.
+- My own bootstrap of the auditor's perturbed dumps reproduces his numbers: SD 1.39, P 0.58 on the bench and P 0.22
+  held out.
+- The 0.24 is noise.
+
+**judgement:NEW-contact-depth: stands.** Per pose, on the claim protocol:
+
+| set | design | contacts | depth sum | deepest | deeper than 3 mm |
+|---|---|---|---|---|---|
+| bench | this design | 2 | 16.46 mm | -10.55 mm | |
+| bench | the lead | 4 | 6.23 mm | -4.61 mm | |
+| held out | this design | 10 | 49.88 mm | -9.54 mm | 7 |
+| held out | the lead | 10 | 35.67 mm | -8.37 mm | 5 |
+
+One correction to the auditor: not every press is overhead. Held out, 4 of this design's 10 presses are below
+elevation 150:
+- -5.51, -3.49 and -1.60 mm at elevation 60 (planes -90 / -75, axial 105-120);
+- -1.22 mm at elevation 105.
+
+**judgement:NEW-ws-inband: stands.** From the probe files on the claim protocol:
+- At elevation 90-140, workspace in-band is 0.7979 against 0.8409.
+- The shortfall is metal standing off more than 14 mm (over14 0.2012 against 0.1565), so the raised-arm profile is
+  bulkier.
+- Taken poses with metal under 2 mm: 30 against 26 on the bench and 66 against 63 held out.
+
+**judgement:S2: stands.** The envelope-corrected gap is 18.56 against 18.67 (in-band 0.8948 against 0.8937, with 9 head
+points and 10 edge points). ROUNDS.md line 1208 prints 18.56 in the winner's row.
+
+**judgement:G4: stands, and is tighter held out.**
+- Held out (`_v_held_frozen.json` `extra`): pa_horn_max 43.0 = PA_MAX. dK_taken_max is 46.17 of the 46.25 limit, which
+  is 0.08 deg from the cap; the bench figure was 45.62.
+- At PA 45, no pose fails on either set.
+- No force file exists.
+
+**judgement:T4: REFUTED by re-wear.** The walked bounds do not buy the number.
+
+| ang_min | bench | held out |
+|---|---|---|
+| 25.22 (claim) | 18.67 | 23.73 |
+| 26.88 | 18.67 | 23.72 |
+| 30.46 | 18.71 | 23.55 |
+
+- K dyad: the largest a1e on a taken pose is 54.43, 9.61 deg short of stretch (bk1 + bk2 = 64.03).
+- Stop B sits 0.27 inside the 5-deg guard (the lead sits at 0.00). The interior angle is 134.5 deg.
+- The th margin is at least 5.031.
+
+**judgement:M5: stands.** No spring-torque or closure-force output exists for this design. K moves on 167 of 371 taken
+bench poses and 399 of 851 held out, so the cap is loaded on about 45 % of poses.
+
+**judgement:G5: stands.** The mechanism record has 2 sensed_passive knee pins. If they count under the 2026-10-17 ruling,
+the design reads 5 coordinates, over the 4-DOF cap. That is the user's question.
+
+### Missed by the auditor (for the next audit; does not change this verdict)
+
+1. **The pin knee runs closer to straight than the lead's, for no score.**
+   - The knee window is [ang_min, 180 - ang_min] (`docs/concepts/models/skin-normal-3r-pin-knee.py` lines 14 and 55).
+     Walking ang_min from 26.88 to 25.22 therefore also raised the straight-knee limit from 153.12 to 154.78 deg.
+   - The taken knee reaches 151.92 deg on the bench and 153.16 held out (`remeasure/*_bench|held.json`
+     `deep.coord_spans` K.ang). The lead reaches 146.14 and 150.86.
+   - Held out, the claim uses 0.04 deg of window the lead does not have.
+   - That walk is worth 0.00 on the bench and 0.01 held out. At H1's 30.46 window the gap is 18.71 / 23.55.
+   - The auditor's "re-wear identical" was bench only.
+   - Action for the polish or CAD: restore ang_min to at least 26.88 (better 30.46) at no measured cost.
+2. **Below-shoulder presses held out.** 4 of the 10 held-out contacts (both designs) sit at elevation 60-105, at plane
+   -90 / -75 with axial 105-120, which is the arm across the body and rotated. The "all overhead" reading hid them.
+3. **The drive cap is tighter than reported.** Held out, dK reaches 46.17 of the 46.25 limit (0.08 deg from the cap),
+   and the horn pressure angle reaches 43.0.
+4. **The claim-protocol paired numbers** strengthen S1. Out of sample, P(this design better) is 0.135 (pooled 0.191).
+   The auditor's perturbed-fit P was 0.23 / 0.29. Proposal A's held-out form ("the held-out gap under the same harness
+   is not worse") blocks this lead change on the exact protocol: 23.73 against 22.67.
+5. **Where the extra 1-2 mm poses come from.** On the claim protocol, taken poses with metal under 2 mm on the scored
+   (in-band) samples are equal on the bench (25 against 25), and 61 against 58 held out. This design's extra
+   near-touch poses (30 against 26 on the bench) come from the model's contact-only walls and crowns (`M.cmin`), which
+   in-band never sees.
+
+**Final verdict: WATCH.** The 0.24 round-9 win is a measured tie; the lead is likelier better out of sample. Not gamed.
