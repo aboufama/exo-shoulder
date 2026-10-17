@@ -2840,7 +2840,7 @@
   "name": "Spiral-lobe long-dyad knuckle 3R: inband-rssr pick3's in-band RSSR K drive on an efficient 34/48 (or 36/48) K dyad, early K onset, constant-pressure-angle (log-spiral) hub-2 lobe; spring-free groove cell and the re-centred knee + J3 stop as columns",
   "family": "slaved-knuckle 3R (3 active, K slaved by a cam + RSSR, pin knee)",
   "lens": "round12:stretched-wall (lens 1; merged desmo-spiral-rssr-knuckle-3r as the spring-free cell C and conecut-longdyad-knuckle-3r as the knee + J3-stop column)",
-  "status": "ideated",
+  "status": "dead",
   "t_ideated": "2026-10-17T15:19:07Z",
   "source": "round 12 judge (docs/concepts/round12_ideation.md)",
   "merged_from": [
