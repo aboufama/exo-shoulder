@@ -6,7 +6,8 @@
  "verdict": "watch",
  "reasons": [
   "held_out: no verified bench gap on the row",
-  "sampling: sample-weighted in-band 0.873 vs part-weighted 0.878 (-0.48 points); thinly sampled parts: L1a 8; mostly out-of-band parts: crank (0.50 in band, median 14.0 mm, 6.9 % of samples) (row frozen)"
+  "idle: knee: asserted rigid by design (model asserts the knee angle constant (knee_moved -> dishonest)) but moves 65.21 deg (re-measured K.qa span) > 0.5; K moves: smallest recorded span 41.52 deg (row:held_out.claim_detail.dK_taken_max); crank: declared moving, no span on file",
+  "sampling: sample-weighted in-band 0.873 vs part-weighted 0.878 (-0.48 points); thinly sampled parts: L1a 8; mostly out-of-band parts: crank (0.50 in band, median 14.0 mm, 6.9 % of samples) (re-measured)"
  ],
  "checks": [
   {
@@ -22,16 +23,25 @@
   {
    "check": "near_touch",
    "level": "ok",
-   "reason": "plain 21.27, <1 mm 25.2, <2 mm 41.58, 20.31 points live in the 1-2 mm shell (row frozen)",
+   "reason": "plain 21.27, <1 mm 25.2, <2 mm 41.58, <3 mm 154.83, band read 3-14 mm 21.76, 20.31 points live in the 1-2 mm shell (re-measured (this audit))",
    "shell2": 20.31,
    "plain": 21.27,
    "n1": 25.2,
    "n2": 41.58,
-   "n3": null,
-   "band3": null,
-   "hist": null,
-   "minmm": 0.27,
-   "source": "row frozen"
+   "n3": 154.83,
+   "band3": 21.76,
+   "hist": {
+    "0-1": 0.0,
+    "1-2": 0.0003,
+    "2-3": 0.0049,
+    "3-4": 0.0182,
+    "4-6": 0.108,
+    "6-10": 0.3988,
+    "10-14": 0.3432,
+    ">14": 0.1266
+   },
+   "minmm": 0.275,
+   "source": "re-measured (this audit)"
   },
   {
    "check": "contact_depth",
@@ -67,8 +77,8 @@
   },
   {
    "check": "idle",
-   "level": "ok",
-   "reason": "knee: rigid by design, not a joint (model asserts the knee angle constant (knee_moved -> dishonest)); no span on file; K moves: smallest recorded span 41.52 deg (row:held_out.claim_detail.dK_taken_max); crank: declared moving, no span on file",
+   "level": "watch",
+   "reason": "knee: asserted rigid by design (model asserts the knee angle constant (knee_moved -> dishonest)) but moves 65.21 deg (re-measured K.qa span) > 0.5; K moves: smallest recorded span 41.52 deg (row:held_out.claim_detail.dK_taken_max); crank: declared moving, no span on file",
    "spans": [
     [
      "row:claim.dK_taken_max",
@@ -122,7 +132,7 @@
   {
    "check": "sampling",
    "level": "watch",
-   "reason": "sample-weighted in-band 0.873 vs part-weighted 0.878 (-0.48 points); thinly sampled parts: L1a 8; mostly out-of-band parts: crank (0.50 in band, median 14.0 mm, 6.9 % of samples) (row frozen)",
+   "reason": "sample-weighted in-band 0.873 vs part-weighted 0.878 (-0.48 points); thinly sampled parts: L1a 8; mostly out-of-band parts: crank (0.50 in band, median 14.0 mm, 6.9 % of samples) (re-measured)",
    "parts": {
     "hub1": [
      0.999,
@@ -225,11 +235,11 @@
   }
  ],
  "remeasured": {
-  "bench": false,
-  "held": false
+  "bench": true,
+  "held": true
  },
  "verifier_files": [],
- "git": "8c0194d",
+ "git": "5a3c8e4",
  "tool_version": "2026-10-17.2",
- "t": "2026-10-17T09:03:50Z"
+ "t": "2026-10-17T09:23:25Z"
 }

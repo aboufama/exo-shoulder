@@ -1,0 +1,244 @@
+{
+ "params": {
+  "La": 19.654,
+  "s_arm": 4.0,
+  "r_h": 14.6689,
+  "beta": -124.0829,
+  "gam": 14.5934,
+  "hl": 3.15,
+  "zr": 0.0,
+  "kK": 1.957,
+  "r_lobe": 7.0,
+  "bk1": 26.0,
+  "bk2": 47.2225,
+  "a1max": 68.2225,
+  "smhi": 12.1012
+ },
+ "ratio_small_angle": 0.7464,
+ "ratio_at_0": 0.745,
+ "ratio_range_law": [
+  0.716,
+  0.794
+ ],
+ "pa_law_max": 39.85,
+ "pa_exact_max": 39.8,
+ "pa_exact_max_over_fit_taken": 39.8,
+ "pa_exact_max_sarm_p025": 41.51,
+ "pa_law_max_sarm_p025": 41.57,
+ "dK_taken_max_fit": 41.749353886153195,
+ "n_exact_over_42": 0,
+ "dK_first_over_42": null,
+ "sc_info": {
+  "dK_lim": 65.0,
+  "why_lim": "transmission",
+  "ratio_range": [
+   0.745,
+   0.794
+  ],
+  "ratio_small_angle": 0.746,
+  "crest_exact": 9.28,
+  "trans_min_taken": 61.5
+ },
+ "rows": [
+  {
+   "dK": 0.0,
+   "ratio": 0.745,
+   "pa_law": 39.85,
+   "pa_lin": 39.85,
+   "pa_exact": 39.8,
+   "r": 7.0
+  },
+  {
+   "dK": 3.13,
+   "ratio": 0.754,
+   "pa_law": 39.2,
+   "pa_lin": 39.2,
+   "pa_exact": 39.49,
+   "r": 7.16
+  },
+  {
+   "dK": 6.26,
+   "ratio": 0.7623,
+   "pa_law": 38.57,
+   "pa_lin": 38.57,
+   "pa_exact": 39.15,
+   "r": 7.33
+  },
+  {
+   "dK": 9.39,
+   "ratio": 0.7695,
+   "pa_law": 37.96,
+   "pa_lin": 37.96,
+   "pa_exact": 38.78,
+   "r": 7.5
+  },
+  {
+   "dK": 12.52,
+   "ratio": 0.7756,
+   "pa_law": 37.36,
+   "pa_lin": 37.36,
+   "pa_exact": 38.38,
+   "r": 7.67
+  },
+  {
+   "dK": 15.66,
+   "ratio": 0.7807,
+   "pa_law": 36.78,
+   "pa_lin": 36.78,
+   "pa_exact": 37.95,
+   "r": 7.84
+  },
+  {
+   "dK": 18.79,
+   "ratio": 0.7849,
+   "pa_law": 36.21,
+   "pa_lin": 36.21,
+   "pa_exact": 37.5,
+   "r": 8.01
+  },
+  {
+   "dK": 21.92,
+   "ratio": 0.7883,
+   "pa_law": 35.66,
+   "pa_lin": 35.66,
+   "pa_exact": 37.03,
+   "r": 8.18
+  },
+  {
+   "dK": 25.05,
+   "ratio": 0.7908,
+   "pa_law": 35.13,
+   "pa_lin": 35.13,
+   "pa_exact": 36.55,
+   "r": 8.35
+  },
+  {
+   "dK": 28.18,
+   "ratio": 0.7926,
+   "pa_law": 34.6,
+   "pa_lin": 34.6,
+   "pa_exact": 36.05,
+   "r": 8.52
+  },
+  {
+   "dK": 31.31,
+   "ratio": 0.7936,
+   "pa_law": 34.09,
+   "pa_lin": 34.09,
+   "pa_exact": 35.54,
+   "r": 8.7
+  },
+  {
+   "dK": 34.44,
+   "ratio": 0.794,
+   "pa_law": 33.6,
+   "pa_lin": 33.6,
+   "pa_exact": 35.01,
+   "r": 8.87
+  },
+  {
+   "dK": 37.57,
+   "ratio": 0.7936,
+   "pa_law": 33.11,
+   "pa_lin": 33.11,
+   "pa_exact": 34.48,
+   "r": 9.05
+  },
+  {
+   "dK": 40.71,
+   "ratio": 0.7926,
+   "pa_law": 32.64,
+   "pa_lin": 32.64,
+   "pa_exact": 33.94,
+   "r": 9.22
+  },
+  {
+   "dK": 43.84,
+   "ratio": 0.7909,
+   "pa_law": 32.18,
+   "pa_lin": 32.18,
+   "pa_exact": 33.39,
+   "r": 9.39
+  },
+  {
+   "dK": 46.97,
+   "ratio": 0.7885,
+   "pa_law": 31.73,
+   "pa_lin": 31.73,
+   "pa_exact": 32.84,
+   "r": 9.56
+  },
+  {
+   "dK": 50.1,
+   "ratio": 0.7855,
+   "pa_law": 31.3,
+   "pa_lin": 31.3,
+   "pa_exact": 32.27,
+   "r": 9.74
+  },
+  {
+   "dK": 53.23,
+   "ratio": 0.7816,
+   "pa_law": 30.87,
+   "pa_lin": 30.87,
+   "pa_exact": 31.7,
+   "r": 9.91
+  },
+  {
+   "dK": 56.36,
+   "ratio": 0.777,
+   "pa_law": 30.45,
+   "pa_lin": 30.45,
+   "pa_exact": 31.11,
+   "r": 10.08
+  },
+  {
+   "dK": 59.49,
+   "ratio": 0.7715,
+   "pa_law": 30.05,
+   "pa_lin": 30.05,
+   "pa_exact": 30.51,
+   "r": 10.25
+  },
+  {
+   "dK": 62.62,
+   "ratio": 0.765,
+   "pa_law": 29.65,
+   "pa_lin": 29.65,
+   "pa_exact": 29.9,
+   "r": 10.42
+  },
+  {
+   "dK": 65.76,
+   "ratio": 0.7574,
+   "pa_law": 29.26,
+   "pa_lin": 29.26,
+   "pa_exact": 29.26,
+   "r": 10.58
+  },
+  {
+   "dK": 68.89,
+   "ratio": 0.7485,
+   "pa_law": 28.89,
+   "pa_lin": 28.89,
+   "pa_exact": 28.6,
+   "r": 10.75
+  },
+  {
+   "dK": 72.02,
+   "ratio": 0.7381,
+   "pa_law": 28.52,
+   "pa_lin": 28.52,
+   "pa_exact": 27.91,
+   "r": 10.91
+  },
+  {
+   "dK": 75.15,
+   "ratio": 0.7259,
+   "pa_law": 28.16,
+   "pa_lin": 28.16,
+   "pa_exact": 27.17,
+   "r": 11.07
+  }
+ ]
+}
