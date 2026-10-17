@@ -51,8 +51,18 @@ exactly as before.
 
 ## Verdict (screened 2026-10-17 ~04:45 UTC)
 
-**Not a lead change.** The dip works the way the judge predicted: it lifts hub 2 and removes skin contacts. But the
-roller-flank drive pays for it with the stretched stroke.
+**Level with the lead, not a lead change.** At the best dip, frozen exact Bench(110,360) is **18.64** (score 93.22).
+The lead is 18.67 and this cell's own D = 0 control is 19.33. The difference, -0.03, is under the 1-point rule.
+
+The dip works the way the judge predicted: it lifts hub 2 and removes skin contacts. The best dip is dipD 1, th_c 53,
+w 12, with the bent arm built at the dip floor. Against the control:
+
+- Contact poses 6 -> 4.
+- But the roller-flank drive pays with stretched stroke: dK_lim 46.2 -> 43.8, fold losses 88 -> 90.
+- Reach 0.725 is unchanged, overhead 8/28 is unchanged, in-band 14 rises 0.8976 -> 0.8993.
+- The recovered pose 203 sits at 0.48 mm. At 1 mm counted as contact, the dip gives 20.81 against the lead's 20.30, and
+  the 2 mm gap is 35.69 against the lead's 33.10.
+- Deeper dips lose: dipD 4 gives 21.10.
 
 The one roller and flank must carry K both ways. The flank's usable stroke under the 43-degree pressure-angle rule is
 ~46 deg of K, counted from where the bent arm is built. A dip of D degrees of a1e needs ~2.35 D degrees of K below the old
@@ -66,7 +76,7 @@ So the arm has to be built at the dip floor (dip_ref 1), and that moves the whol
 | lead cell (lead + kneewin centred knee), same code | fast plain | fast near-2 mm | dK_lim | frozen exact Bench(110,360) |
 |---|---|---|---|---|
 | dipD 0 (control = kneewin) | 14.28 | 20.20 | 46.2 | 19.33 (kneewin, reproduced fast to the digit) |
-| dipD 1, th_c 53, w 12, arm at floor | 15.39 | 23.71 | 43.8 | see below |
+| **dipD 1, th_c 53, w 12, arm at floor (best)** | 15.39 | 23.71 | 43.8 | **18.64** (1 mm 20.81, 2 mm 35.69) |
 | dipD 1, th_c 50, w 8 (best D > 0, fast) | 15.26 | 28.11 | 43.5 | |
 | dipD 2 (3 band shapes) | 15.90 | 34.5-35.6 | 41.0-41.2 | |
 | dipD 3 (3 band shapes) | 17.17 | 48.3-51.8 | 38.5-38.8 | |
