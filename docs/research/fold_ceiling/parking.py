@@ -43,8 +43,10 @@ def req_disc(I, Ks):
     if not len(I): return np.zeros(0)
     k = K.unit(Ks); A, Bv = K.plane_frame(k); m = len(xy)
     O = (xy[None, :, :1] * A[:, None, :] + xy[None, :, 1:] * Bv[:, None, :]).reshape(-1, 3)
-    Dd = np.repeat(k, m, 0); II = np.repeat(np.asarray(I), m)
-    R = K.requirement(B, II, Dd, O=O).reshape(len(I), m)
+    Dd = np.repeat(k, m, 0); II = np.repeat(np.asarray(I), m); R = np.empty(len(II))
+    for c in np.unique(np.asarray(I)) if True else []:                # pose by pose: the exact-skin cache holds 24 poses
+        sel = II == c; R[sel] = K.requirement(B, II[sel], Dd[sel], O=O[sel])
+    R = R.reshape(len(I), m)
     return np.where(np.isfinite(R), R, 400.0).max(1)
 
 

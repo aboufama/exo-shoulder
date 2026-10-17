@@ -66,7 +66,7 @@ DK_FLANK = 48.25                             # flank built to dK 48.25 (+2 deg r
 LUG_BACK = 6.0                               # lug depth behind the flank
 BOSS_R, BOSS_H, BRG_R, BRG_W = 5.0, 6.0, 3.5, 3.0    # crank boss O10 x 6, 2 x 683ZZ (3 x 7 x 3)
 PIN_R, BORE_R = 1.5, 1.6
-PLATE_T = 1.5                                # follower plate (the boss top 1.5 mm, merged)
+PLATE_T, PLATE_DROP = 1.5, 1.5              # follower plate 1.5 mm, its top 1.5 under the boss top (its plane is square to dR, the ring's to u2)
 GAP = 0.6                                    # follower roller over the plate (an integral O4 step on the follower pin clears the shield)
 ARM_W, ARM_T = 6.0, 3.0
 ARM_UP = 1.0                                 # the straight run's underside at the boss axis, over the boss underside
@@ -234,8 +234,13 @@ def hubs(M):
             if " cap " in n: continue
             out.append((g, n, at(s, C[j])))
         if J != "K":
-            cap, Rc = USM.cap_v5(Uu[j], F4[j]); rep["dome_crown_R"] = None if Rc is None else round(Rc, 2)
-            out.append((hi, f"{J} cap O20, torispherical dome R{Rc:.1f} / R1 (tangent arcs), threaded M18x0.5 (Ti-6Al-4V)", at(cap, C[j])))
+            style = USM.CAP_STYLE
+            if J == "J2": USM.CAP_STYLE = "flat"                                                  # the lobe ring's seat: a cylindrical skirt to the crown
+            try: cap, Rc = USM.cap_v5(Uu[j], F4[j])
+            finally: USM.CAP_STYLE = style
+            rep.setdefault("caps", {})[J] = "flat" if Rc is None else f"dome R{Rc:.1f}"
+            out.append((hi, (f"{J} cap O20, torispherical dome R{Rc:.1f} / R1 (tangent arcs)" if Rc else f"{J} cap O20 x crown F+12.25, flat crown, R0.5 corner (the lobe ring's seat)")
+                        + ", threaded M18x0.5 (Ti-6Al-4V)", at(cap, C[j])))
         else:
             cap = cap_k_plain(Uu[j], F4[j], crown); sp, Lsp = USM.clock_spring(Uu[j], F4[j]); sp_ = USM.SPRING
             out.append((hi, f"K clock-spring cap O20 x crown F+{crown:.2f} ({capK:g} mm taller), FLAT crown, no sensor pocket (K is slaved, never read): spring "
@@ -260,7 +265,7 @@ def rotm(ax, a):
 
 def l1b_top_under(body, ax, r, z_lo, z_hi):
     """highest point (along ax, through GH) of a solid within radius r of the axis line, between z_lo and z_hi (tessellation)"""
-    vs, fs = body.tessellate(0.02, 0.15); V = np.array([[v.x, v.y, v.z] for v in vs]); m = trimesh.Trimesh(V, np.array(fs), process=False)
+    vs, fs = body.tessellate(0.05, 0.3); V = np.array([[v.x, v.y, v.z] for v in vs]); m = trimesh.Trimesh(V, np.array(fs), process=False)
     P = np.r_[V, trimesh.sample.sample_surface_even(m, 60000, seed=3)[0]]; h = P @ ax; w = P - np.outer(h, ax); rr = np.linalg.norm(w, axis=1)
     sel = (rr < r) & (h > z_lo) & (h < z_hi)
     return float(h[sel].max()) if sel.any() else None
@@ -368,6 +373,8 @@ def flank_lug(M, dg):
     wp = wp.lineTo(*back[3])
     for i in (2, 1, 0): wp = wp.threePointArc(tuple(bmid[i]), tuple(back[i]))
     lug = wp.close().extrude(3.0).val()
+    ball = cq.Solid.makeSphere(h0 + 1.5, US.V(np.zeros(3)), angleDegrees1=-90, angleDegrees2=90)
+    lug = lug.intersect(ball)
     # web: planform in the K pad plane (frame2(uK)), from inside the pad to 2 mm behind the flank's dK-0 end and the back corner
     Uu, C, F4, hr = BM.joints4(M); uK = unit(Uu[1]); fK = float(F4[1]); e, f = USM.frame2(uK)
     X3 = lambda p, h: p[0] * ex + p[1] * ey + h * ez
@@ -382,9 +389,9 @@ def flank_lug(M, dg):
     quad = [pol(r_mid - 0.4, am - hw), o_lo, o_hi, pol(r_mid - 0.4, am + hw)]
     hl = float(M.p["hl"])
     riser = prism((fK + hl) * uK, e, f, quad, [0] * 4, 14.0).cut(disc(np.zeros(3), ez, 90.0, h0, h0 + 40.0))   # top = the lug's mid plane (embedded 1.5)
-    web = US.glue(inner, riser)
+    web = US.glue(inner, riser.intersect(ball))
     z_lug = h0
-    info = dict(arcs=[dict(r=r_, dK=a["dK"]) for r_, a in zip(Rs, arcs)], built_to_dK=DK_FLANK, extrude="straight along z_c (2-axis wire-EDM)",
+    info = dict(arcs=[dict(r=r_, dK=a["dK"]) for r_, a in zip(Rs, arcs)], built_to_dK=DK_FLANK, extrude="straight along z_c (2-axis wire-EDM); top trimmed to the sphere r h0 + 1.5 (the model's spherical lug band; the arm runs 0.17 over it)",
                 lug_band_mm=[round(h0 - 1.5, 3), round(h0 + 1.5, 3)], back_mm=LUG_BACK, web_bottom_over_fK_mm=round(hl, 3),
                 lug_valid=lug.isValid(), web_valid=web.isValid())
     return [lug, web], info
@@ -419,7 +426,7 @@ def crank_parts(M, dg, lay):
     ztop = zb + BOSS_H
     boss = rev([(BRG_R, 0.0), (BOSS_R, 0.0), (BOSS_R, BOSS_H), (BRG_R, BOSS_H)], zb * dR, dR)
     foot = F0 - (F0 @ dR) * dR; xf = unit(foot); yf = np.cross(dR, xf)
-    plate = USP.stadium((ztop - PLATE_T) * dR, xf, yf, A_S, 3.0, PLATE_T)
+    zpt = ztop - PLATE_DROP; plate = USP.stadium((zpt - PLATE_T) * dR, xf, yf, A_S, 2.5, PLATE_T)
     # straight run: chord from the boss (on the axis, underside ARM_UP over the boss underside) to the arc's tangent point
     T3 = uK * dg["h_tip"] + dg["rc"] * (math.cos(dg["psT"]) * dg["tK0"] + math.sin(dg["psT"]) * dg["bK0"]); B = unit(T3) * (dg["rA"] + ARM_T / 2)
     A = (zb + ARM_UP + ARM_T / 2) * dR; ex = unit(B - A); up = unit(dR - (dR @ ex) * ex); L = float(np.linalg.norm(B - A)) + 1.0
@@ -428,14 +435,14 @@ def crank_parts(M, dg, lay):
     crank = US.glue(boss, plate)
     for part in (straight, arc): crank = crank.fuse(part)
     crank = crank.cut(disc(np.zeros(3), dR, BRG_R, zb - 1.0, ztop + 1.0))                     # the bearing bore O7 through boss + plate
-    crank = crank.cut(disc(foot, dR, PIN_R, ztop - PLATE_T - 0.5, ztop + 0.5))                 # follower pin press hole
+    crank = crank.cut(disc(foot, dR, PIN_R, zpt - PLATE_T - 0.5, zpt + 0.5))                   # follower pin press hole
     z_arm_top = dg["rA"] + ARM_T - dg["R0"]
     crank = crank.cut(disc(C0, cr, PIN_R, 0.0, z_arm_top + 1.0))                                # roller pin press hole in the arm tip
-    crank = crank.clean() if crank.clean().isValid() else crank
+    # (no clean(): OCC's same-domain unify hangs on the revolve + pipe faces of this crank)
     brg = [rev([(PIN_R, 0.0), (BRG_R, 0.0), (BRG_R, BRG_W), (PIN_R, BRG_W)], (zb + z0) * dR, dR) for z0 in (0.0, BRG_W)]
     froll = rev([(PIN_R, -ROLL_W / 2), (ROLL_R, -ROLL_W / 2), (ROLL_R, ROLL_W / 2), (PIN_R, ROLL_W / 2)], F0, dR)
     zr0 = s_f - ROLL_W / 2; zr1 = s_f + ROLL_W / 2
-    fpin = rev([(0.0, ztop - PLATE_T), (PIN_R, ztop - PLATE_T), (PIN_R, ztop), (2.0, ztop), (2.0, zr0), (PIN_R, zr0), (PIN_R, zr1 + 1.2), (0.0, zr1 + 1.2)], foot, dR)
+    fpin = rev([(0.0, zpt - PLATE_T), (PIN_R, zpt - PLATE_T), (PIN_R, zpt), (2.0, zpt), (2.0, zr0), (PIN_R, zr0), (PIN_R, zr1 + 1.2), (0.0, zr1 + 1.2)], foot, dR)
     fclip = rev([(1.15, zr1 + 0.1), (3.0, zr1 + 0.1), (3.0, zr1 + 0.7), (1.15, zr1 + 0.7)], foot, dR)
     roller = rev([(PIN_R, -ROLL_W / 2), (ROLL_R, -ROLL_W / 2), (ROLL_R, ROLL_W / 2), (PIN_R, ROLL_W / 2)], C0, cr)
     z_h = -ROLL_W / 2 - STEP_T
@@ -447,15 +454,328 @@ def crank_parts(M, dg, lay):
                 follower_centre_on_dR_mm=round(s_f, 3), follower_shift_along_dR_mm=round(lay["follower_shift_mm"], 3), follower_hmid_over_f2_mm=round(lay["follower_hmid_over_f2"], 3),
                 straight_run_mm=round(L, 2), arm_root_up_mm=ARM_UP, arc=ainfo, crank_valid=crank.isValid(), crank_solids=len(crank.Solids()),
                 roller_centre_r_mm=round(dg["R0"], 3), arm_bottom_over_roller_top_mm=round(dg["rA"] - dg["R0"] - ROLL_W / 2, 3))
-    parts = [("dk", f"D9-01 drive bell crank (Ti-6Al-4V, 5-axis machined from solid): boss O10 x {BOSS_H:g} (2 x 683ZZ), follower plate {PLATE_T:g} mm on the boss top "
+    parts = [("dk", f"D9-01 drive bell crank (Ti-6Al-4V, 5-axis machined from solid): boss O10 x {BOSS_H:g} (2 x 683ZZ), follower plate {PLATE_T:g} mm {PLATE_DROP:g} under the boss top "
                     f"to the follower pin at {A_S:g} mm, bent arm 6 x 3 (straight run {L:.1f} mm + the arc about hub K at r_c {dg['rc']:.2f}, a revolve, "
                     f"{ainfo['span_deg']:.1f} deg), roller pin bore at the tip", crank),
              ("dk", "drive crank bearing 1 683ZZ 3x7x3 (polished)", brg[0]), ("dk", "drive crank bearing 2 683ZZ 3x7x3, 0.1 mm wave-washer preloaded (polished)", brg[1]),
              ("dk", f"drive lobe follower roller MR63ZZ 3x6x2.5 at a_s {A_S:g} mm, psi {PSI_DEG:g} deg (polished)", froll),
-             ("dk", f"drive follower pin O3 h6 17-4PH H900 with an integral O4 x {GAP:g} step, pressed in the follower plate (polished)", fpin),
+             ("dk", f"drive follower pin O3 h6 17-4PH H900 with an integral O4 x {GAP + PLATE_DROP:g} step, pressed in the follower plate (polished)", fpin),
              ("dk", "drive follower pin clip DIN 6799 RS 2.3 (polished)", fclip),
              ("dk", "drive flank roller MR63ZZ 3x6x2.5, radial axis (polished)", roller),
              ("dk", f"drive flank roller pin ISO 2341-B 3x8 headed, head O{2 * HEAD_R:g} x {HEAD_T:g} on the skin side, {STEP_T:g} mm step, pressed in the arm tip (polished)", rpin),
              ("l1b", "drive crank pivot pin O3 h6 17-4PH H900, pressed in link 1b (polished)", ppin),
              ("l1b", "drive crank pivot pin clip DIN 6799 RS 2.3 (polished)", pclip)]
     return parts, info
+
+
+# ---------------------------------------------------------------------------------------------------- checks
+def check_frames(M, dd, stops):
+    """USM.check_frames (copied) on this chain: + the crank (member 9 -> group dk) and the flank lug / horn samples (member 1); the model's
+    metal samples posed by the model's member transforms vs the posed exo.glb (scene_export.frame_xforms = the judges' path), exported
+    vertices posed both ways, the dowels inside their slots"""
+    import scene_export as SE, igl
+    from scipy.spatial.transform import Rotation as Rot
+    M.Q, M.s, M.RS, M.X, M.K, M.q = M._bench; B = M.B
+    allp = np.array([[B.poses[i][k] for k in ("plane", "elev", "axial", "flex", "pron")] for i in range(len(B.idx))])
+    K = BM.chain(M, allp)
+    taken = [i for i in range(len(B.idx)) if B.res[i] is not None and float(np.min(B.res[i])) >= 0]
+    el = lambda i: B.poses[i]["elev"]; pl = lambda i: B.poses[i]["plane"]
+    behind = [i for i in taken if "back" in B.clip[i].lower() or (pl(i) < -30 and el(i) > 20)]
+    across = [i for i in taken if pl(i) >= 100 and el(i) >= 40]
+    kin = [i for i in range(len(B.idx)) if K["ok"][i] and K["kok"][i] and K["res"][i] < 0.5]
+    pick = {"arm at side": min(taken, key=el), "first": taken[0], "middle": taken[len(taken) // 2], "highest": max(taken, key=el),
+            "2nd highest": next(j for j in sorted(taken, key=el)[::-1] if j != max(taken, key=el))}
+    if behind: pick["behind the back"] = max(behind, key=lambda i: -pl(i))
+    if across: pick["across the body"] = max(across, key=pl)
+    tgt = np.array([30.0, 150.0, -60.0]); pick["overhead raise peak"] = min(kin, key=lambda i: float(np.linalg.norm(allp[i, :3] - tgt)))
+    st1 = [i for i in taken if K["state"][i] == 1]
+    if st1: pick["K most open, taken (drive extreme)"] = max(st1, key=lambda i: abs(K["dK"][i]))
+    src = trimesh.load(os.path.join(dd, "exo.glb"))
+    grp_of = {0: "base", 1: "l1a", 7: "l1b", 2: "l2", 3: "l3", 6: "l4", 5: "H", 9: "dk"}; out = []
+    Uu, C, F4, hr = BM.joints4(M); D = M.D
+    for lab, i in pick.items():
+        pz = allp[i]; fr = BM.frame_dict(K, i, pz, pz, False)
+        X, _ = SE.frame_xforms(fr); meshes = {}; fdev = 0.0
+        old = (M.Q, M.s, M.RS, M.X, M.K, M.q); BM.BASE.swap_in(M, K); res = {}
+        try:
+            for node in src.graph.nodes_geometry:
+                g, n = node.split("|")[:2]
+                if g == "F" or g not in GROUPS: continue
+                if g == "H" and not n.startswith("D8-06"): continue
+                T_, gn = src.graph[node]; m = src.geometry[gn].copy(); m.apply_transform(T_); R, t = X[g]
+                Vl = np.asarray(m.vertices); mem = GROUPS[g]; Vc = Vl @ np.asarray(R).T + t
+                Vm = M.world(mem, i, Vl if mem != 5 else Vl @ BM.HR); fdev = max(fdev, float(np.abs(Vm - Vc).max()))
+                m.vertices = Vc
+                if not any(s_ in n.lower() for s_ in ("screw", "clip din", "e-clip")): meshes.setdefault(g, []).append(m)
+            meshes = {g: trimesh.util.concatenate(v) for g, v in meshes.items()}
+            for name, (m, Xp) in list(M.rigid.items()) + list(M.link_pts.items()):
+                Pw = M.world(m, i, Xp); g = "l1a" if name == "hub1" else grp_of[m]
+                d = np.sqrt(igl.point_mesh_squared_distance(np.ascontiguousarray(Pw, float), np.ascontiguousarray(meshes[g].vertices, float),
+                                                            np.ascontiguousarray(meshes[g].faces, np.int64))[0])
+                win = igl.fast_winding_number(np.ascontiguousarray(meshes[g].vertices, float), np.ascontiguousarray(meshes[g].faces, np.int64), np.ascontiguousarray(Pw, float))
+                dout = np.where(win > 0.5, 0.0, d)
+                if name == "hub2":
+                    dl = np.sqrt(igl.point_mesh_squared_distance(np.ascontiguousarray(Pw, float), np.ascontiguousarray(meshes["l1b"].vertices, float),
+                                                                 np.ascontiguousarray(meshes["l1b"].faces, np.int64))[0]); d = np.minimum(d, dl)
+                if name in ("hubK", "hub2"):
+                    k = 1 if name == "hubK" else 2; cen = C[k] + F4[k] * Uu[k]; w = Xp - cen; rr = np.linalg.norm(w - (w @ Uu[k])[:, None] * Uu[k], axis=1)
+                    inslot = (rr > USM.SLOT_RS - USM.SLOT_W - 0.6) & (rr < USM.SLOT_RS + USM.SLOT_W + 0.6)
+                    res[name + " (slot band)"] = [round(float(d[inslot].max()), 4) if inslot.any() else None, int(inslot.sum())]; d = d[~inslot]; dout = dout[~inslot]
+                res[name] = [round(float(d.max()), 4), round(float(np.percentile(d, 95)), 4), round(float(dout.max()), 4)]
+                if name in ("L1a", "L1b", "L2"):
+                    lk = next(x for x in M.geo.links if x["name"] == name); zone = np.zeros(len(Xp), bool)
+                    for kk in (lk["ka"], lk["kb"]):
+                        w = Xp - C[kk]; zone |= np.linalg.norm(w - (w @ Uu[kk])[:, None] * Uu[kk], axis=1) < hr[kk] + 2.5 + 0.5
+                    do = d[~zone]
+                    res[name + " outside hub zones"] = [round(float(do.max()), 4) if len(do) else None, int((~zone).sum()),
+                                                        round(float(np.mean(do <= 0.5)), 4) if len(do) else None, round(float(np.median(do)), 4) if len(do) else None]
+            R1, _ = M.T(1, i); R1b, _ = M.T(7, i); R2, _ = M.T(2, i)
+            dK = float(np.degrees(Rot.from_matrix(R1.T @ R1b).as_rotvec() @ D.uK)); q2 = float(np.degrees(Rot.from_matrix(R1b.T @ R2).as_rotvec() @ D.u[1]))
+            inside = {}
+            for key, ang in (("K", dK), ("J2", q2)):
+                q_lo, q_hi = [math.degrees(x) for x in stops[key]["q"]]
+                inside[key] = dict(angle_deg=round(ang, 3), from_stop_lo_deg=round(ang - q_lo, 3), to_stop_hi_deg=round(q_hi - ang, 3), inside=bool(q_lo - 0.01 <= ang <= q_hi + 0.01))
+        finally: M.Q, M.s, M.RS, M.X, M.K, M.q = old
+        joint_keys = [k for k in ("hub1", "hubK", "hub2", "hub3", "boss", "pad") if k in res]
+        joint = max(res[k][0] for k in joint_keys)
+        worst_o = max((res[k][0] or 0) for k in ("L1a outside hub zones", "L1b outside hub zones", "L2 outside hub zones") if k in res)
+        drv = {k: res[k] for k in ("crank", "roller", "horn") if k in res}
+        others = {k: v for k, v in res.items() if not k.startswith(("L1", "L2")) and "slot band" not in k and k not in drv and v[0] is not None}
+        out.append(dict(label=lab, bench_pose=int(i), pose=[round(float(x), 2) for x in pz[:3]], taken=bool(i in set(taken)), state=int(K["state"][i]),
+                        joint_features_max_mm=round(joint, 4), rigid_non_drive_max_mm=round(max(v[0] for v in others.values()), 4),
+                        strap_samples_outside_hub_zones_max_mm=round(worst_o, 4), drive_samples_mm=drv,
+                        within_0p5=bool(joint <= 0.5 and fdev <= 0.5), per_part=res, frame_dev_mm=round(fdev, 6), res_deg=round(float(K["res"][i]), 4),
+                        knee_angle=round(float(K["Kn"]["ang"][i]), 1), stops=inside))
+        print(f"  check {lab:34s} pose {i} {np.round(pz[:3], 1)} st {int(K['state'][i]):+d}: joints vs posed glb {joint:.3f} mm, other rigid {out[-1]['rigid_non_drive_max_mm']:.3f}, "
+              f"drive [max, p95, outside] {drv}, straps outside zones {worst_o:.2f}; frames {fdev:.1e}; dK {inside['K']['angle_deg']:.2f} q2 {inside['J2']['angle_deg']:.2f} "
+              f"in slot {inside['K']['inside']}/{inside['J2']['inside']}", flush=True)
+    return out
+
+
+def posed_drive_check(dd, n=60):
+    """posed exo.glb at clip frames (every len/n-th frame + the frames of largest |dK|): signed distance (mm, negative = inside) of the
+    moving drive pairs"""
+    import igl
+    src = trimesh.load(os.path.join(dd, "exo.glb")); C = json.load(open(os.path.join(dd, "clips.json")))
+    by = {}
+    for node in src.graph.nodes_geometry:
+        T_, gn = src.graph[node]; g, nm = node.split("|")[:2]; m = src.geometry[gn].copy(); m.apply_transform(T_); by[nm] = (g, m)
+    def get(sub): return next(v for k, v in by.items() if k.startswith(sub))
+    pairs = [("drive lobe follower roller", "D9-02"), ("drive flank roller MR63ZZ", "D8-02a"), ("drive flank roller pin", "D8-02a"), ("D9-01", "D8-02a"),
+             ("D9-01", "D9-02"), ("D9-01", "D8-02b"), ("D9-01", "D8-03"), ("D9-01", "J2 cap"), ("D9-01", "K clock-spring cap"), ("drive lobe follower roller", "J2 cap"),
+             ("drive follower pin clip", "D9-02"), ("drive follower pin clip", "D8-03"), ("drive flank roller MR63ZZ", "K clock-spring cap"), ("D8-02a", "D8-02b"),
+             ("D8-02a", "K clock-spring cap"), ("D8-02a", "D8-01"), ("drive crank pivot pin clip", "D9-01")]
+    frs = [f for c in C["clips"] for f in c["frames"]]
+    pick = frs[::max(1, len(frs) // n)] + sorted(frs, key=lambda f: -abs(f.get("knuckle", {}).get("dK", 0.0)))[:12]
+    res = {}
+    for a_, b_ in pairs:
+        try: (ga, ma), (gb, mb) = get(a_), get(b_)
+        except StopIteration: res[f"{a_} | {b_}"] = "missing"; continue
+        XA = np.r_[np.asarray(ma.vertices), trimesh.sample.sample_surface_even(ma, 3000, seed=4)[0]]; worst = (1e9, None)
+        for fi, f in enumerate(pick):
+            G = lambda g: np.array(f["G"][g]).reshape(3, 3) if g in f["G"] else np.eye(3); T = lambda g: np.array(f.get("T", {}).get(g, [0, 0, 0]), float)
+            Xw = XA @ G(ga).T + T(ga); Xb = (Xw - T(gb)) @ G(gb)
+            d = float(igl.signed_distance(np.ascontiguousarray(Xb), np.ascontiguousarray(mb.vertices, float), np.ascontiguousarray(mb.faces, np.int64))[0].min())
+            if d < worst[0]: worst = (round(d, 3), round(float(f.get("knuckle", {}).get("dK", 0.0)), 2))
+        res[f"{a_} | {b_}"] = worst
+    # the two rolling pairs over the driven frames: per-frame min distance (contact = ~0; a positive max = lift-off / play in the CAD)
+    drv = sorted([f for f in frs if abs(f.get("knuckle", {}).get("dK", 0.0)) > 0.5], key=lambda f: abs(f["knuckle"]["dK"]))
+    drv = drv[::max(1, len(drv) // 40)]
+    for a_, b_ in (("drive lobe follower roller", "D9-02"), ("drive flank roller MR63ZZ", "D8-02a")):
+        (ga, ma), (gb, mb) = get(a_), get(b_); XA = np.r_[np.asarray(ma.vertices), trimesh.sample.sample_surface_even(ma, 4000, seed=5)[0]]; ds = []
+        for f in drv:
+            G = lambda g: np.array(f["G"][g]).reshape(3, 3); T = lambda g: np.array(f.get("T", {}).get(g, [0, 0, 0]), float)
+            Xb = ((XA @ G(ga).T + T(ga)) - T(gb)) @ G(gb)
+            ds.append(float(igl.signed_distance(np.ascontiguousarray(Xb), np.ascontiguousarray(mb.vertices, float), np.ascontiguousarray(mb.faces, np.int64))[0].min()))
+        res[f"contact {a_} | {b_} (driven frames: min, max of the per-frame min)"] = [len(ds), round(min(ds), 3) if ds else None, round(max(ds), 3) if ds else None]
+    return res
+
+
+def drive_skin(dd, every=1):
+    """RL1.drive_skin (copied) on this build's drive parts (D9-* + drive hardware + link 1a with its flank lug): min signed skin distance per
+    part over EVERY clip frame (body_pose.posed, winding-number sign)"""
+    import igl
+    sys.path.insert(0, os.path.join(REPO, "pipeline", "avg")); import body_pose as BP
+    C = json.load(open(os.path.join(dd, "clips.json"))); src = trimesh.load(os.path.join(dd, "exo.glb")); BF = np.ascontiguousarray(BP.F, np.int64)
+    parts = {}
+    for node in src.graph.nodes_geometry:
+        g, nm = node.split("|")[:2]
+        if not (nm.startswith(("D9-", "drive", "D8-02a"))) or "pivot pin" in nm: continue
+        T_, gn = src.graph[node]; m = src.geometry[gn].copy(); m.apply_transform(T_)
+        parts[nm[:40]] = (g, np.r_[np.asarray(m.vertices), trimesh.sample.sample_surface_even(m, 6000, seed=11)[0]])
+    best = {k: (1e9, None) for k in parts}; n03 = {k: 0 for k in parts}; n2 = {k: 0 for k in parts}; nfr = 0; per_clip = {}
+    for cl in C["clips"]:
+        cmin = 1e9
+        for k, f in enumerate(cl["frames"]):
+            if k % every: continue
+            nfr += 1; Vb = np.ascontiguousarray(BP.posed(dict(zip(["plane", "elev", "axial", "flex", "pron"], f["p"]))), float)
+            for nm, (g, X) in parts.items():
+                Qp = np.ascontiguousarray(X @ np.array(f["G"][g]).reshape(3, 3).T + np.array(f.get("T", {}).get(g, [0, 0, 0])), float)
+                d = np.sqrt(igl.point_mesh_squared_distance(Qp, Vb, BF)[0]); w = igl.fast_winding_number(Vb, BF, Qp) > 0.5; v = float(np.where(w, -d, d).min())
+                if v < best[nm][0]: best[nm] = (v, f"{cl['name']} frame {k}{' (held)' if f['held'] else ''}")
+                n03[nm] += v < 0.3; n2[nm] += v < 2.0; cmin = min(cmin, v)
+        per_clip[cl["name"]] = round(cmin, 3)
+    worst = min(best.items(), key=lambda kv: kv[1][0])
+    return dict(rule=">= 0.3 mm on every frame (gen-5 lobe ring: -0.26)", frames=nfr, every=every, min_mm=round(worst[1][0], 3), where=f"{worst[0]}: {worst[1][1]}",
+                passes=bool(worst[1][0] >= 0.3), per_part={k: dict(min_mm=round(v[0], 3), at=v[1], frames_lt_0p3=n03[k], frames_lt_2=n2[k]) for k, v in best.items()},
+                per_clip=per_clip)
+
+
+def tess_safe(s, fine=True, report=None):
+    """user_style_geneva.tess_safe (copied): 0.02 / 0.15 with a coarser retry when the welded mesh is not watertight"""
+    vs, fs = s.tessellate(0.02 if fine else 0.08, 0.15 if fine else 0.4)
+    m = trimesh.Trimesh(np.array([[v.x, v.y, v.z] for v in vs]), np.array(fs), process=False)
+    if not fine: return m
+    m, wt = USP.judge_close(USP.weld_open(m))
+    if not wt:
+        for tl, ta in ((0.03, 0.2), (0.05, 0.25)):
+            vs, fs = s.tessellate(tl, ta)
+            m2, wt2 = USP.judge_close(USP.weld_open(trimesh.Trimesh(np.array([[v.x, v.y, v.z] for v in vs]), np.array(fs), process=False)))
+            if wt2:
+                m, wt = m2, wt2
+                if report is not None: report["tessellation"] = [tl, ta]
+                break
+    if report is not None: report["watertight_judge_units"] = wt
+    return m
+
+
+def material(n, user):
+    nl = n.lower()
+    if user: return "user part", None
+    if "iglidur" in nl or "igubal" in nl: return "iglidur", USP.IGL
+    if "bearing" in nl or "mr63zz" in nl or "683zz" in nl or "mr117" in nl: return "bearing steel", 7.8
+    if "17-4ph" in nl: return "17-4PH", 7.8
+    if "dowel" in nl or "iso 2341" in nl: return "hardened steel (polished)", 7.85
+    if "clock spring" in nl: return "1.4310 spring steel (polished)", 7.9
+    if any(k in nl for k in ("screw", "m4x6", "clip")): return "stainless (polished)", 7.9
+    if "7075-T6" in n: return "7075-T6 (BOTTOM merged with the pad mount)", 2.81
+    if n.startswith("UPPER ARM CUFF"): return "AlSi10Mg", 2.68
+    return "Ti-6Al-4V", USP.TI
+
+
+# ---------------------------------------------------------------------------------------------------- main
+def main():
+    ap = argparse.ArgumentParser(); ap.add_argument("--out", default="user_roller_longdyad"); ap.add_argument("--l1", default="l1_roller-longdyad")
+    ap.add_argument("--skip-base-search", action="store_true"); ap.add_argument("--checks-only", action="store_true")
+    a = ap.parse_args(MY_ARGV); t0 = time.time(); dd = os.path.join(FULL, "designs", a.out); os.makedirs(os.path.join(dd, "step"), exist_ok=True)
+    import concept_kit as KIT
+    M, rep0 = RL1.fit(); D = M.D; lg = RL1.law_geom(M); M._lg = lg; dg = RL1.drive_geom(M)
+    Bf = M.B; M._bench_K = BM.chain(M, np.array([[Bf.poses[i][k] for k in ("plane", "elev", "axial", "flex", "pron")] for i in range(len(Bf.idx))]))
+    L1D = os.path.join(FULL, "designs", a.l1)
+    l1d = json.load(open(os.path.join(L1D, "design.json"))); l1b = json.load(open(os.path.join(L1D, "build.json")))
+    same = all(abs(float(l1d["params"][k]) - float(v)) < 1e-6 for k, v in RL1.CFG.items() if isinstance(v, (int, float)))
+    assert same, f"the L1 design {a.l1} was built from other params"
+    assert abs(float(l1b["fit"]["tr"]) - float(M.tr)) < 1e-2 and np.allclose(l1b["fit"]["m"], D.m, atol=1e-2), "the fit differs from the L1's"
+    assert np.allclose(l1b["stack"]["f"], M.f, atol=1e-2) and abs(l1b["stack"]["fK"] - M.fK) < 1e-2
+    Uu, C, F4, hr = BM.joints4(M)
+    print(f"fit (claim RLModel, BEST + ang_min {RL1.CFG['ang_min']}) on Bench(60,160) {M.B.mode} at fold margin {KIT.FOLD_MARGIN}: near-touch gap {rep0['gap']}; hub levels "
+          f"{np.round(F4, 2).tolist()} (J1 K J2 J3) tr {M.tr:.2f}; law {lg['law']} ({time.time() - t0:.0f} s)", flush=True)
+    l1_stops = l1d["stack_mm"]["stops"]; stops = {}
+    for key in ("K", "J2"):
+        q_lo, q_hi, meta = lg[key]; homes = [math.radians(x) for x in l1_stops[key]["dowel_home_angles_deg"]]
+        stops[key] = dict(q=(q_lo, q_hi), meta=meta, homes=homes, pair_placed_in_l1=bool(l1_stops[key].get("pair")))
+    rep = dict(fit=dict(params=dict(RL1.CFG), source=f"docs/concepts/rows/{RL1.ID}.json best_params + ang_min {RL1.CFG['ang_min']} through the claim's RLModel (= {a.l1})",
+                        gap_near_touch=rep0["gap"], hub_levels_J1_K_J2_J3=[float(x) for x in F4], tr=float(M.tr), m=[float(x) for x in D.m], hubs=[float(x) for x in hr],
+                        fold_margin_deg=float(KIT.FOLD_MARGIN), l1_design=a.l1),
+               style="user (line/arc sketches, extrudes, revolves, single-section sweeps on line/arc paths; no lofts, no splines)",
+               stops={k: dict(q_deg=[round(math.degrees(x), 3) for x in v["q"]], homes_deg=[round(math.degrees(x) % 360, 2) for x in v["homes"]], **v["meta"]) for k, v in stops.items()},
+               j2_push_limit=USM.j2_push_limit(), law=lg["law"])
+    parts = []
+    hw, rep["hubs"] = hubs(M); parts += hw
+    lug, rep["flank lug"] = flank_lug(M, dg)
+    lk, rep["links"] = build_links(M, stops, lug)
+    l1b_body = next(s for g, n, s in lk if n.startswith("D8-02b"))
+    lay = drive_layout(M, lg, dg, l1b_body)
+    ring, rep["lobe"], lobe_g = lobe_ring(M, lg, dg, lay)
+    cp, rep["crank"] = crank_parts(M, dg, lay)
+    for i, (g, n, s) in enumerate(lk):
+        if n.startswith("D8-02b"):
+            s2 = s.cut(disc(np.zeros(3), lay["dR"], PIN_R, lay["l1b_top"] - T - 1.0, lay["l1b_top"] + 0.5)); s2 = s2.clean() if s2.clean().isValid() else s2
+            lk[i] = (g, n.replace("carries the crank pivot pin", "carries the crank pivot pin (O3 press bore)"), s2)
+    parts += lk
+    parts.append(("l2", f"D9-02 drive lobe ring: 17-4PH H900, wire-EDM (taper {rep['lobe']['e_ext_to_u2_deg']:.1f} deg along the follower axis), profile r "
+                        f"{rep['lobe']['profile_r_mm'][0]:.2f} -> {rep['lobe']['profile_r_mm'][1]:.2f} mm ({rep['lobe']['arcs']} 3-point arcs), dwell r {rep['lobe']['dwell_r_mm']:.2f}, "
+                        f"bore O20 on the J2 cap skirt, band F+{rep['lobe']['band_over_f2_mm'][0]:.2f}..F+{rep['lobe']['band_over_f2_mm'][1]:.2f}, keyed by an O1 dowel at the "
+                        "onset + 0.23 deg (K bias)", ring))
+    parts += cp
+    m3, rep["member 3"] = USP.member3(M); parts += [(g, n, s) for g, _, n, s in m3]
+    g_, _, n_, s_ = USP.knee_link(M)
+    ks_deg = (l1d.get("build_fixes") or {}).get("knee_stop_deg")
+    if ks_deg is not None:
+        s_, rep["knee stop"] = USM.knee_stop_on(M, s_, ks_deg, M._bench_K)
+        n_ = n_.replace(" (Ti-6Al-4V)", f" + knee stop tooth behind pin a (its face meets the E strap's side at knee angle {ks_deg:g} deg = 180 - ang_min {RL1.CFG['ang_min']}) (Ti-6Al-4V)")
+    parts.append((g_, n_, s_))
+    Cc = json.load(open(os.path.join(L1D, "clips.json")))
+    cposes = [f["p"] for cl in Cc["clips"] for fi, f in enumerate(cl["frames"]) if fi % 3 == 0]
+    arm, users, rep["arm side"] = USP.arm_side(M, l1b["mount"], cposes); parts += [(g, n, s) for g, _, n, s in arm]
+    Wj = json.load(open(os.path.join(L1D, "workspace.json"))); frames = []; rel = []
+    allf = [f for cl in Cc["clips"] for f in cl["frames"]] + [p for p in Wj["poses"] if p.get("eval_feasible")]
+    for fi, f in enumerate(allf):
+        g = lambda k: np.array(f["G"][k]).reshape(3, 3); t_ = lambda k: np.array(f.get("T", {}).get(k, [0, 0, 0]), float)
+        Gb, Tb, G1, T1 = g("base"), t_("base"), g("l1a"), t_("l1a"); rel.append((Gb.T @ G1, Gb.T @ (T1 - Tb)))
+        if fi % 3 == 0: frames.append((Gb, Tb, G1, T1))
+    E = PB.Envelope(os.path.join(FULL, "designs", PB.BAND))
+    for p, G in E.frames: G["S"] = E.RS[p]
+    l1_body = next(s for g, n, s in parts if n.startswith("D8-02a"))
+    if a.skip_base_search: USP.EAR_DZ = ()
+    bp, rep["base"] = USP.base_part(M, E, l1_body, rel, frames); parts.append((bp[0], bp[2], bp[3]))
+    print(f"parts built ({time.time() - t0:.0f} s)", flush=True)
+    # ---- export
+    HR = BM.HR
+    allp = [(g, n, xform(s, HR, np.zeros(3)) if g == "H" else s, GROUPS[g]) for g, n, s in parts] + [(g, n, s, None) for g, n, s in users]
+    for f in os.listdir(os.path.join(dd, "step")): os.remove(os.path.join(dd, "step", f))
+    USER = ("TOP", "MIDDLE", "FOREARM", "Hex", "M4 ULTRA", "IGUS", "5mm", "Revolve", "CirPattern")
+    sc = trimesh.Scene(); pf = []
+    for i, (g, n, s, mem) in enumerate(allp):
+        user = n.startswith(USER); hwr = not n.startswith(("D8-", "D9-")) and any(k in n.lower() for k in ("screw", "m4x6", "clip"))
+        if not user and not hwr:
+            cq.exporters.export(cq.Workplane().add(s), os.path.join(dd, "step", f"{i:02d}_{n.split(':')[0].replace('/', '_').replace(' ', '_')[:40]}.step"))
+        trep = {}; m = tess_safe(s, fine=not user, report=trep)
+        sc.add_geometry(m, node_name=f"{g}|{n}|{i}", geom_name=f"{g}|{n}|{i}")
+        mm = m.copy(); mm.merge_vertices(); vol = abs(mm.volume) if mm.is_watertight else s.Volume()
+        mat, rho = material(n, user)
+        pf.append(dict(k=i, group=g, name=n, vol_cm3=round(vol / 1000, 3), material=mat, mass_g=None if rho is None else round(vol / 1000 * rho, 2),
+                       valid=bool(s.isValid()), faces=len(s.Faces()), solids=len(s.Solids()), watertight_judge_units=trep.get("watertight_judge_units")))
+    sc.export(os.path.join(dd, "exo.glb"))
+    json.dump(dict(key=a.out, n=4, level="L2 user-style", FACES={"1": round(float(F4[0]), 2), "K": round(float(F4[1]), 2), "2": round(float(F4[2]), 2),
+                                                                 "3": round(float(F4[3]), 2)}, parts=pf), open(os.path.join(dd, "parts_full.json"), "w"), indent=1)
+    # ---- clips / workspace: the L1's frames (group dk = the model's member 9, posed by the law) - copied unchanged
+    for fn in ("clips.json", "workspace.json"):
+        J = json.load(open(os.path.join(L1D, fn))); frs = [f for c in J["clips"] for f in c["frames"]] if fn == "clips.json" else J["poses"]
+        assert all("dk" in f["G"] for f in frs if "G" in f and "l1b" in f["G"]), f"{fn}: the L1's frames lack group dk"
+        shutil.copy(os.path.join(L1D, fn), os.path.join(dd, fn))
+    d = dict(l1d); d.update(id=a.out, label="roller-longdyad-knuckle-3r (verified config, ang_min 26.88), full CAD in the user's style", level="L2 user-style (full CAD of the generation-6 winner)",
+                            l1_design=a.l1,
+                            built_with="pipeline/conformal/param_cad/user_style_roller.py (user_style_minarc / user_style_pinknee parts: v5 O20 hubs, K plain clock-spring cap, "
+                                       "link 1a as one line/arc chain (60-deg ramp, machined) + the flank lug, 4-strip machined bars 1b / 2, O3 dowel-in-arc-slot stops (K opposed pair, "
+                                       "J2 single at the drive's range), member 3, knee link + knee stop + IGLIDUR-PIN stacks, BOTTOM fused with the pad mount; the drive: lobe ring, bell "
+                                       f"crank on 2 x 683ZZ with the real follower, MR63ZZ flank roller on an ISO 2341-B pin) on the L1 design's frames ({a.l1})")
+    d["drive_build"] = dict(kind="roller-flank (docs/research/roller_mechanism_redteam.md section 6): lobe ring (l2) -> MR63ZZ follower at a_s 7.0 / psi 219 on the bell crank "
+                                 "(dk, 2 x 683ZZ on an O3 pin in link 1b) -> bent arm -> MR63ZZ roller -> 3-arc flank on link 1a's lug (l1a); one clock spring in K's cap",
+                            crank_raise_mm=round(lay["raise_mm"], 3), follower_shift_mm=round(lay["follower_shift_mm"], 3), kK=float(RL1.CFG["kK"]), g=float(RL1.CFG["g"]))
+    json.dump(d, open(os.path.join(dd, "design.json"), "w"), indent=1, default=float)
+    ours = [p for p in pf if p["material"] != "user part"]
+    rep["mass_g"] = dict(custom=round(sum(p["mass_g"] or 0 for p in ours if "7075" not in p["material"]), 1),
+                         bottom_plus_mount=round(sum(p["mass_g"] or 0 for p in ours if "7075" in p["material"]), 1))
+    bad = [p["name"] for p in ours if not p["valid"] or p["solids"] != 1]
+    rep["parts"] = pf; rep["invalid_or_multi_solid"] = bad
+    rep["slaved"] = l1b["slaved"]                                                                 # the L1's declaration (same law, same frame keys, drive group dk rides l1b)
+    rep["layout"] = {k: (np.round(v, 4).tolist() if isinstance(v, np.ndarray) else v) for k, v in lay.items()}
+    json.dump(rep, open(os.path.join(dd, "build.json"), "w"), indent=1, default=float)
+    print(f"exported {len(pf)} parts -> {dd}; mass {rep['mass_g']}; invalid or multi-solid: {bad or 'none'} ({time.time() - t0:.0f} s)", flush=True)
+    rep["drive_posed"] = posed_drive_check(dd); print(f"drive posed (mm, at dK): {rep['drive_posed']}", flush=True)
+    json.dump(rep, open(os.path.join(dd, "build.json"), "w"), indent=1, default=float)
+    rep["check"] = check_frames(M, dd, stops)
+    rep["kinematics_exact"] = dict(poses=len(rep["check"]), all_within_0p5=all(r["within_0p5"] for r in rep["check"]),
+                                   max_frame_dev_mm=max(r["frame_dev_mm"] for r in rep["check"]), max_joint_feature_mm=max(r["joint_features_max_mm"] for r in rep["check"]),
+                                   dowels_in_slots=all(r["stops"]["K"]["inside"] and r["stops"]["J2"]["inside"] for r in rep["check"]))
+    json.dump(rep, open(os.path.join(dd, "build.json"), "w"), indent=1, default=float)
+    print(f"kinematics: {rep['kinematics_exact']} ({time.time() - t0:.0f} s)", flush=True)
+    rep["drive_skin"] = drive_skin(dd)
+    print(f"drive skin: { {k: v for k, v in rep['drive_skin'].items() if k != 'per_clip'} }", flush=True)
+    json.dump(rep, open(os.path.join(dd, "build.json"), "w"), indent=1, default=float)
+    print(f"done in {time.time() - t0:.0f} s", flush=True)
+
+
+if __name__ == "__main__":
+    main()
