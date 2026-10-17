@@ -125,3 +125,74 @@ morphology, where the drive law, beta, g, r_c and the seats are fixed. Even if i
 1 mm chamfer) and hub 2's housing wall (-0.09) would keep it in contact unless the arm tip is narrowed ~0.5 mm and hub 2
 gets a ~0.3 mm flat. The lead note's stop rule ("stop if ... pose 264 is not cleared") applies. What remains is the T5
 depth.
+
+## Results: the claim columns (the lead's protocol, the farm)
+
+All rows are frozen: fit on Bench(60,160) fast, worn exact without a refit, through the lead's own Frozen class.
+
+| config | Bench(110,360) exact | score | reach | ib14 | contact poses | T5 bench (mm) | held out | T5 held (mm, 10 poses) | near1 | min metal |
+|---|---|---|---|---|---|---|---|---|---|---|
+| lead (sparse lug = the lead's row) | 18.49 | 93.28 | 0.725 | 0.8955 | 2 | 14.74 | 23.45 | 46.13 | 20.12 | 0.07 |
+| lead + dense lug check (measurement) | 18.49 | 93.28 | 0.725 | 0.8955 | 2 | 14.74 | 23.45 | 46.35 | 20.12 | 0.07 |
+| **trim_wall 1.5 (pick)** | **18.51** | **93.27** | 0.725 | 0.8953 | 2 | **13.18** | **23.47** | **40.59** | 20.14 | 0.07 |
+| trim_wall 1.0 | 18.51 | 93.27 | 0.725 | 0.8953 | 2 | 12.67 | 23.47 | 38.71 | 20.14 | 0.07 |
+| trim_wall 1.5 + back_t 4 | 18.56 | 93.25 | 0.725 | 0.8948 | 2 | 13.18 | 23.52 | 40.22 | 20.19 | 0.07 |
+
+- **Unchanged against the lead.** Reach 261/360, overhead 8/28 (held 18/71), follow 1.0. The why-list is the same:
+  fold 88, knee slide 9, contact 2. Parts 0. The drive is unchanged: dK_lim 49.8, horn PA 36.1 + friction 5.0 = 41.1,
+  CRK-HORN clearance 15.71.
+- **Gap.** 18.49 -> 18.51. The +0.02 is in-band accounting: 3 of the 23 scored lug samples are removed, and they were
+  in band (horn ib14 0.956 -> 0.955).
+- **Contact depth (T5).** Bench 14.74 -> 13.18 mm (pose 264: 5.74 -> 4.18). Held out 46.35 -> 40.59 mm. The five held-out
+  contacts where the lug is the deepest part each get 1.2-1.7 mm shallower:
+  - (15, 150, -60): 7.29 -> 6.13
+  - (30, 150, -45): 5.33 -> 4.07
+  - (45, 165, -45): 5.80 -> 4.18
+  - (60, 165, -30): 6.87 -> 5.15
+  - (30, 165, -45): still 9.06, the crank
+- **The lead note's first test (cone set: 110 clips + 47 cone poses, exact).** In-band 0.8955 (lead), 0.8954 (rlift 2.5,
+  optimistic), 0.8953 (trim 1.5). The in-band gate (drop <= 0.005) passes. The pose gate (264 cleared) fails, so the
+  note's stop rule applies, and no wider search was run.
+- **Fast grid (Bench(60,160), the fit bench; it has no contact pose, so it reads only the in-band cost).**
+  - Trims: 13.00-13.06.
+  - back_t 3-4: 13.0-13.06 (in-band 0.8941-0.8944).
+  - rlift 2.5: 13.02.
+  - crank_cut 0.3 / 0.6: 13.21 / 13.40. The arm's arc rises out of band, crank ib14 0.819 -> 0.804, which is exactly the cost
+    the judge predicted for the lift.
+  - cap_break: 13.00.
+- **Convergence gate on the grid (score points).** 0.00 / 0.00 / top-5 spread 0.004: passes. CMA-ES was not run, because
+  the fit bench is flat in these cuts and on the frozen bench T5 is monotone in the trim, bounded by the wall rule.
+
+## Red team of the pick
+
+- **The pose that jams.** None new: parts 0 on both benches. The trim only removes lug metal, so the low-arm-to-lug
+  clearance can only grow.
+- **The point that pinches.** The lead's own 0.07 mm at (-60, 60, 105) is unchanged. near1 is 20.14 against the lead's
+  20.12.
+- **The optimistic numbers.**
+  - (1) The lift test leaves out the 2.5 mm longer nose and the raised arm tip. It loses anyway (T5 16.07, cone in-band
+    -0.0001 before the arm's cost, and the arm alone costs ~0.2 fast per 0.3 mm, per crank_cut).
+  - (2) The trimmed lug's edge is sampled by the dense contact-only copy (0.5 mm). Its top sets 264's 4.18.
+  - (3) The lead's own held-out T5 was 0.22 mm optimistic with the sparse lug (46.13 vs 46.35 dense).
+  - (4) The wall. 1.5 mm behind the farthest contact (r_K 19.77) at the end of the drive's stroke only. Elsewhere the 6 mm
+    band is intact. Under MVP1 (clock spring, 5-15 N at the nose) this is trivial. Under MVP2's ~175 N line load the wall
+    is in compression over the 3 mm lug layer (~40 MPa), fine in the DLC-coated Ti flank. The 1.0 mm wall (T5 12.67) is
+    listed, not picked.
+- **What would clear 264.** It is not in this morphology. All three would be needed:
+  - the lug band ending at r_K ~18 (dK ~35, the stroke wall);
+  - a ~0.5 mm narrower arm tip;
+  - a ~0.3 mm flat on hub 2's housing.
+
+  The first one costs the K stroke that the round-11 levers are trying to buy.
+
+## Verdict
+
+**Screened.** This is a T5 depth polish of the lead, not a lead change: 18.51 against 18.49 frozen exact, 23.47 against 23.45
+held out, -1.56 mm bench and -5.76 mm held-out contact depth.
+
+The spec's central claim is refuted by the skin itself. A radial lift of the flank / nose layer, the crank underside cut
+and the cap edge break do not clear 264. The lift deepens both elev-165 contacts, because at elev 165 the upper arm's skin
+comes over the drive from the side and from above.
+
+The lesson that carries beyond this morphology: **near-skin metal at overhead poses must be cut laterally (in r_K / in
+plan), not lifted.** Read the skin normal at the contact before choosing the direction of a relief.
