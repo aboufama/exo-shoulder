@@ -152,3 +152,69 @@ the verified lead exactly, so the protocol adds nothing of its own. Same-protoco
     pressure-angle budget (mu 0.1).
   - **Backlash.** About ±0.54 deg of K (groove 0.014 / s_arm · g + slot 0.014 / r_c). The spring parent drifted
     4.1-7.7 deg with the thorax tilted (pick1's R17 note), so the positive hold is a real gain in R17 terms.
+
+## Search (Bench(60,160), the 2 mm near-touch objective; files: `docs/concepts/sweeps/groove-desmo-knuckle-3r.json`)
+
+1. **Gate-0 checks** at both parents' verified parameters (2 configs, above).
+2. **Drive-only pole maps** at the lead seats and the kneeless seats. These cover 1,191 drive cells (beta x r_c x g)
+   through the model's own cam loop, with no bench. They locate the cusp-free region.
+3. **Wide LHS on the farm:** 288 configs, drive box widened to RF's own limits, plus kK, a1max and bk2. Best 2 mm gap
+   44.9: the wide box is mostly infeasible (pressure_crank 112, pressure_horn 50, groove-pa 45, flank_cusp 28, CRK-hubK
+   27, wall2_cusp 19).
+4. **CMA-ES on the farm, lead cell.** Three streams, 2,595 evaluations, from the cusp-free cell (g 2.47, beta -170,
+   r_c 16):
+   - A: drive only (g, beta, r_c, lift, hl, zr, s_arm, r_lobe, kK, a1max);
+   - B and C: drive plus seats (az2, el2, lc, phib, smhi, bk1, bk2, wd, wa, b3).
+
+   No stream improved on the start point. Best 2 mm gap 17.21 in every stream; stream A's top 5 are distinct
+   parameter sets at the same 17.21, a plateau. B found a reach-0.80 shape, but at in-band 0.867 (2 mm gap 26.2).
+5. **Convergence gate** (score points = gap / 2.75), as gain over the 2nd half / gain over the last third / top-5
+   spread:
+
+   | stream | gain 2nd half | gain last third | top-5 spread | gate |
+   |---|---|---|---|---|
+   | A | 0.00 | 0.00 | 0.00 | passes |
+   | B | 0.00 | 0.00 | 3.51 | fails on the spread (269 of 833 dishonest: the seats walk off the drive's feasible set) |
+   | C | 0.00 | 0.00 | 1.09 | passes |
+   | pooled | 0.00 | 0.00 | 0.00 | passes |
+
+## Result (lead cell; best configuration = the lead's verified params with g 2.47, beta -170, r_c 16, r_lobe 7.06, capK 0, MR52)
+
+| bench | gap (score) | reach | follow | in-band 14 | in-band 10 | contact | 1 mm / 2 mm | min metal |
+|---|---|---|---|---|---|---|---|---|
+| Bench(60,160) fast, fit | 14.67 (94.67) | 0.756 | 1.0 | 0.897 | 0.526 | 0 | - / 17.21 | - |
+| **Bench(110,360) exact, frozen** | **19.29 (92.99)** | 0.714 | 1.0 | 0.899 | 0.530 | 0.0054 | 20.94 / 33.68 | 0.07 mm |
+| held out, frozen | 24.96 | 0.664 | 1.0 | 0.897 | 0.528 | 0.0107 | 27.64 / 37.04 | 0.33 mm |
+| lead, same protocol | 18.67 / held 23.73 | 0.725 | 1.0 | 0.894 | 0.513 | 0.0054 | 20.30 / 33.10 | 0.07 mm |
+
+- **Overhead (elev >= 140):** 8/28 taken, in-band 0.899. That is the lead's 8/28: nothing traded away.
+- **Frozen losses:** fold 92, slide 9, contact 2 (the lead's: 88 / 9 / 2). The 4 extra fold poses are the 5 deg of
+  drive stroke the outer wall costs: dK_lim 41.2 vs 46.2, dK taken 40.5 vs 45.6.
+- **Flood:** full 19.29 (0 dropped), knn 21.52 (lead 20.34).
+- **Workspace in-band** (unscored, taken poses): all 0.853 / elev 90-140 0.781, vs the lead's 0.854 / 0.798 through
+  the same function. This is below the lead at elev 90-140 (pattern L2).
+- **Complexity** (tools/simplicity.py v2.1): **18.25** vs the lead's 20.25. The clock spring goes (-3); the sliding
+  dowel comes in (+1). 0 passive translations, 3 active DOF.
+- **Hold (R17):** K is positively held at every pose, with slop about ±0.54 deg, where the spring parent drifted 4-8 deg
+  with the thorax tilted. The dwell holds K with a radial groove normal, so the K torque puts no moment on J2.
+
+## Verdict
+
+**Screened: a complexity and hold Pareto point, not a lead change.**
+
+The spring-free positive K drive exists:
+
+- The **groove at hub 2** passes gate 0: it fits the cap, its real pressure angle is 30.5 deg, and link 2 clears the
+  short arm by >= 1.22 mm on every taken pose of all three benches.
+- The **two-walled slot at K** only works once the roller moves off the crank / link-1a relative-rotation pole. That
+  costs 5 deg of drive stroke (41.2 vs 46.2).
+
+The cost is +0.62 frozen and +1.23 held out against the lead through the same protocol, with overhead unchanged. The
+gain is 2 complexity points (18.25 vs 20.25) and K held both ways (about ±0.5 deg of slop instead of the spring's 4-8
+deg of tilted drift).
+
+**Open lever, measured geometrically but not benched:** a conjugate return roller about 16 mm from the main roller. It
+would restore the 48.5-deg MR52 stroke, at the price of a second flank on the deltoid.
+
+**Kneeless control:** the same wall, a 35.2-deg cusp-free stroke, fast 18.57. Its farm CMA stream was still pending
+when this was written.

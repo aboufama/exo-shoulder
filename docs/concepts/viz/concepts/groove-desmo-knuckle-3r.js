@@ -3,7 +3,7 @@
  * track groove (1.52 wide, pitch r 7.06-8.44) under hub 2's cap ring, ridden by an ISO 8734 O1.5 dowel in the crank's short
  * arm; the flank becomes a closed two-walled slot (outer wall 1.5 mm) in link 1a's boss holding an MR52ZZ roller (O5 x 2.5).
  * K's clock spring, its 6 mm cap and stop A are gone (the groove's dwell holds K both ways; its ends are stops A and B).
- * Interim: lead seats, drive g 2.47 / beta -170 / r_c 16 (cusp-free slot), dK_lim 41.2.
+ * Best measured: lead seats, drive g 2.47 / beta -170 / r_c 16 (cusp-free slot), dK_lim 41.2; fast 14.67, frozen exact Bench(110,360) 19.29.
  * Geometry exported from docs/concepts/models/groove-desmo-knuckle-3r.py (GD_CELL=lead, mode viz). */
 (function () {
   const K = (typeof window !== 'undefined' ? window : globalThis).KIN, V = K.V, M = K.M, D2R = Math.PI / 180;
