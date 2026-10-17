@@ -106,14 +106,54 @@ K open 27-54 deg on EVERY pose, i.e. it never uses the toggle.
 
 ## Measured limiters
 
-1. **Family reading (the row): B1 -> hub 2 off the skin.** With K held >= 27 deg everywhere, hub 2 never returns to the
+1. **Family reading (the row): B1 -> hub 2 off the skin.** With K held >= 27 deg on every pose, hub 2 never returns to the
    lead's rest seat: on the raise-overhead clip frames (elev 150, th 43) it needs 80.6 mm from GH (the proposer predicted
-   71-79 at a1e 40), so its fitted level is 80.6 vs ~62 and hub 2 is in band on 0.10 of the clip frames (median 24 mm off
-   the skin). The chain alone (four-bar metal deleted, attribution only) scores 46.5: B1 costs the chain ~22 points before
-   any drive metal.
-2. **Coupled reading: the four-bar's own metal.** Ghost attribution on the coupled k444 (law kept, lugs + coupler + eyes
-   deleted): 45.24 -> 24.06 (plain 31.31 -> 18.54; ib14 0.773 -> 0.868; reach 0.769 -> 0.800). The crank lug of link 2
-   sweeps a ~17-20 mm circle round hub 2 with q2 (in band 0.03, median 18.9 mm off the skin: it must clear the highest skin
-   it ever passes over) and the coupler stacked over link 1b (link 1b top + 1 mm) is in band 0.20 (median 18.7 mm). The
-   drive costs ~21 gap points - the planner's "the drive is ~14-16 of a knuckle's points", plus the third layer.
-3. **The 2 mm near-touch** adds 14 points on the coupled best (plain 31.31 vs near2 45.24 on k444; min metal 0.82 mm).
+   71-79 at a1e 40), so its fitted level is ~80 vs ~62 and hub 2 is in band on 0.10 of the clip frames (median 24 mm off
+   the skin). The chain ALONE (four-bar metal deleted, attribution only, FB_GHOST=1) scores 43.95 (plain 39.38): B1 costs
+   this morphology ~25 points before any drive metal; the four-bar metal adds 9.3 (crank lug in band 0.08, coupler 0.02).
+2. **Coupled reading: the four-bar's own metal + hub 2.** Ghost attribution on the coupled CMA best: 34.56 -> 26.26 (plain
+   32.21 -> 23.97; ib14 0.712 -> 0.795): the drive costs 8.3 points. On the coarse toggle best k444 (hub 2 in band 0.81) it
+   cost 21.2 (45.24 -> 24.06; ib14 0.773 -> 0.868). The crank lug of link 2 sweeps a ~16-20 mm circle round hub 2 with q2
+   (in band 0.03, median 19-24 mm off the skin: it must clear the highest skin it ever passes over - the Geneva-tail lesson)
+   and the coupler, stacked over link 1b (link 1b top + 1 mm), is in band 0.18-0.20. CMA then traded hub 2's in-band
+   (0.81 -> 0.12) for reach (0.769 -> 0.806): with K swinging 2-66 deg hub 2 covers more skin than the lead's parked hub 2.
+3. **Near-touch**: min metal 1.77-1.82 mm on both bests (near2 vs plain +2.3 coupled, +4.8 family).
+
+## Red team (own best configurations)
+
+* **The seed as specified jams on hub K** (above): every pose, both readings.
+* **Toggle frames** (coupled best): the 7 fit-bench poses with th 41-44.5 sit at K 2.0-2.3 deg (not within 0.75 of stop A
+  as specified: CMA moved the dead point to th 44.3, K 1.96, mu_c 179.9, mu_h 88.7). At the dead point the coupler force
+  passes through the crank axis, so a K load puts no torque on J2 and the horn (mu_h 88.7) holds K both ways - positive,
+  as claimed. Pin play 0.02 mm at the horn eye (r 16.2 mm) reads as 0.07 deg of K (the compact cell's r 3-4.4 would be
+  0.26-0.38 deg). Gain dK/dq2 spans -1.21..+1.43 (K reverses through the dead point).
+* **Pose classes** (coupled best, Bench(60,160) workspace): across the body (plane <= -45) 14/18 taken (2 skin, 2 fold);
+  behind the back (plane >= 90 or axial >= 90) 42/52 (9 fold, 1 skin); overhead elev >= 140 3/12 (5 fold, 3 knee slide,
+  1 skin); contacts on 8 poses, hub 2 on 5 of them (the CMA lifted it), crank / coupler / horn on 1 each.
+* **Optimistic numbers flagged**: the coupled numbers need the user's B1 ruling; the proposer's law-only 289-291 were tuned
+  on Bench(110,360) itself; the parking estimate (R_est 0.747) counted no drive metal and no contacts - the bench says the
+  drive metal alone costs 8-21 points.
+
+## Verdict
+
+**Dead as a lead and as a complexity Pareto point, under both readings; the B1 count is the reason under today's.**
+
+* Today's reading (family, the row): 53.26 fast on Bench(60,160) (score 80.63; reach 0.650, ib14 0.690). B1 fails every
+  four-bar pose under |K| 20, so the best four-bar keeps K open 27-54 deg everywhere and hub 2 rides 80 mm from GH on
+  the raise-overhead frames. The chain alone without any drive metal scores 43.95 - no cell of this law family can reach
+  the lead's 18.49 under this reading.
+* Coupled reading (LISTED FOR B1, never claimed): 34.56 fast (score 87.43; reach 0.806, ib14 0.712); the same chain
+  without its four-bar metal 26.26. Even a free drive under the user's most favourable ruling stays ~8 points behind the
+  lead's verified 18.49 on the fit bench, and at cx 14 it is dominated on the complexity front by spine-parked-j2-3r
+  (cx 0, 34.29 verified on Bench(110,360) exact).
+* Convergence gate passed on all 4 CMA runs (gains <= 0.82 / 0.16 score points, top-5 spread <= 0.18).
+* Not built: the compact cell (crank pin on hub 2's cap, horn pin on hub K's cap, coupler at crown level). Its coupler
+  and eyes sit at crown level (>= 12.25 mm above the hub bases), i.e. higher than the strap cell's stacked coupler, and its
+  law family has the same B1 count (judge: 122 / 289), so the strap cell's ghost bound applies.
+
+What predicts beyond this morphology: (1) a positively slaved K that is never parked on a stop is judged pose by pose
+under the family reading, and on a 28-32 / 48-50 K dyad every pose under |K| ~20 deg fails m_sub - a toggle (dead point)
+does not help, because the toggle's whole value is K near rest; (2) a third mechanism layer (coupler over link 1b) and a
+lug that turns with q2 around hub 2 cost 8-21 gap points of in-band on this chain, about the same as the lead's whole
+drive; (3) an O9 eye boss needs >= 15.5 mm lateral beside an O20 housing below its crown - law-only seeds that place a pin
+inside that ring are not buildable.
