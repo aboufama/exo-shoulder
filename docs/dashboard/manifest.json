@@ -24,10 +24,10 @@
   "title": "Built CAD judge results",
   "description": "One row per judged design and requirement: value, threshold and pass from the outside judges, timed by the judge output (score files: the earliest of their commit, their file time and the first commit whose docs report the design; scorecard-only values: the scorecard's commit). Built from tools/judged_history.py, judge/scorecard.json files and judge/requirements.json.",
   "file": "data/cad.json",
-  "sha256": "9cf1850d0f079a10d63cd68a7f473e59116385c062d3c2a1ddf3d54dd1a222d4",
-  "rows": 377,
-  "bytes": 118414,
-  "updated": "2026-10-17T04:55:58Z"
+  "sha256": "e9dfec7d1529a92e8ee9cb07f113f9deb8dc7e15d35f0809c417966bf5a27f63",
+  "rows": 383,
+  "bytes": 120208,
+  "updated": "2026-10-17T04:57:21Z"
  },
  {
   "id": "gpu_evals",
@@ -54,20 +54,20 @@
   "title": "Requirement board",
   "description": "Latest status of R1-R17 (with R1-aim and R5-aim) for the best judged 3-DOF design (most passes on its scorecard, then R1), with the best value any 3-DOF design reached under the current judging rules. Built from judge/scorecard.json files and judge/requirements.json.",
   "file": "data/reqs.json",
-  "sha256": "bd1fa050151a2e769c65072ec33db70ca315c5f6be567fc7abc70af9ac569142",
+  "sha256": "2f4a98857981f62155bca635c017e40860a59eba858adc7e8f36a5ad227091e0",
   "rows": 19,
   "bytes": 8044,
-  "updated": "2026-10-17T04:55:58Z"
+  "updated": "2026-10-17T04:57:21Z"
  },
  {
   "id": "events",
   "title": "Event log",
   "description": "What happened and when: the swarm's own log (docs/concepts/events.jsonl), one milestone per judged design and every new built-CAD R1 record (from the judge outputs).",
   "file": "data/events.json",
-  "sha256": "762bc15847414599e153ed85fb61c8ae079041be2b858a99ab377e47fc79d937",
-  "rows": 599,
-  "bytes": 227765,
-  "updated": "2026-10-17T04:55:58Z"
+  "sha256": "7989e05e9ac6d2d6c94ce17311d0cbbd6083c6ba29661c24f3dc4b30a6a8d630",
+  "rows": 600,
+  "bytes": 227925,
+  "updated": "2026-10-17T04:57:21Z"
  },
  {
   "id": "spend",
@@ -104,9 +104,9 @@
   "title": "Data build info",
   "description": "When tools/dash_build.py last gathered the data, the repo commit, and any warnings it printed.",
   "file": "data/meta.json",
-  "sha256": "41185f46fc6e322623305fc45039566c187ce795b422c21f76e0207cc911b8da",
+  "sha256": "66e9c565e0e0f3ddb0723e6970984a0f496df39f80c610868a50b1d944b8869b",
   "rows": 1,
   "bytes": 2089,
-  "updated": "2026-10-17T04:55:58Z"
+  "updated": "2026-10-17T04:57:21Z"
  }
 ]
