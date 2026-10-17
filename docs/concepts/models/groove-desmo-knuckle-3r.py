@@ -79,17 +79,20 @@ CLEAR_L2 = 1.0
 MU_GROOVE = 0.10
 PA_GATE = 43.0
 PA_GROOVE = PA_GATE - math.degrees(math.atan(MU_GROOVE))       # 37.29
+CONTROL = os.environ.get("GD_CONTROL") == "1"                 # the parent itself through this file's protocol (MR63, capK 6, no slot)
+if CONTROL: ROLL_R, HEAD_R = 3.0, 2.25
 RF.ROLL_R = ROLL_R; RL.HEAD_R = HEAD_R; RL.HEAD_T = HEAD_T; RF.PA_MAX = PA_GATE
 
 GROOVE = dict(capK=0.0, groove_gate=1)
-PARAMS = dict(BM.PARAMS, **BEST, **GROOVE)
-PARAMS["r_lobe"] = R_LO
+PARAMS = dict(BM.PARAMS, **BEST, **({} if CONTROL else GROOVE))
+if not CONTROL: PARAMS["r_lobe"] = R_LO
 
 
 def _c(v, lo, hi): return min(max(float(v), lo), hi)
 
 
 def _clamp(p):
+    if CONTROL: return BM._clamp(p)
     s_raw = float(p.get("s_arm", 4.0)); b_raw = float(p.get("beta", -170.0)); rc_raw = float(p.get("r_c", 16.0)); g_raw = float(p.get("g", 2.4))
     p = BM._clamp(p)
     # the slot's outer wall moves the roller off the relative-rotation pole: the drive search box is widened (RF's own limits)
@@ -110,6 +113,8 @@ class GDModel(BaseModel):
     def _rod_metal(self):
         RF.ROLL_R = ROLL_R; RL.HEAD_R = HEAD_R; RL.HEAD_T = HEAD_T; RF.PA_MAX = PA_GATE
         super()._rod_metal()
+        if CONTROL:
+            self._groove = None; return
         D = self.D; P = D.p; g = self._scg; info = self._sc_info
         PV, dR, uK, sp, sig, gg, cc = g["PV"], g["dR"], g["uK"], g["sp"], g["sig"], g["g"], g.get("c", 0.0)
         kgrid = g["kgrid"]; lim0 = float(g["dK_lim"]); why0 = g["why_lim"]
@@ -260,7 +265,7 @@ class GDModel(BaseModel):
         try:
             Bn = self.B; why = [str(w) for w in self.why]
             taken = [i for i in range(len(Bn.idx)) if why[i] == "" and Bn.res[i] is not None]
-            if taken and P_L2GATE:
+            if taken and P_L2GATE and getattr(self, "_groove", None):
                 cl, az = self.l2_check(taken); badi = [taken[j] for j in np.nonzero(cl < CLEAR_L2)[0]]
                 for i in badi: Bn.res[i] = None; self.why[i] = "parts"
                 self._l2 = dict(n=len(taken), clear_min=round(float(cl.min()), 2), az_abs_min=round(float(np.abs(az).min()), 1),
@@ -366,6 +371,46 @@ def frozen_flood(P, nc=110, nw=360):
     return out
 
 
+def redteam(P, nc=110, nw=360):
+    """red team on the frozen exact wear: the 10 lowest-metal taken poses with their lowest parts, the parts behind every
+    contact / skin / parts pose, the named poses (rest, overhead, across the body, behind the back, extreme rotations),
+    the drive's per-pose groove / slot state (crank angle, pitch radius, link-2 planform clearance) at each named pose"""
+    fit, M1, M, B, r = _frozen_model(P, nc, nw)
+    res = {"frozen": {k: r[k] for k in ("gap", "reach", "follow", "inband14", "contact")}, "why": r.get("why")}
+    mem_name = {}
+    for nm, (m, X) in M.rigid.items(): mem_name.setdefault(m, []).append(nm)
+    def parts_at(i):
+        d = {}
+        for nm, (m, X) in M.rigid.items():
+            if len(X): d[nm] = round(float(B.dist(i, M.world(m, i, X)).min()), 2)
+        for m, X in M.contact:
+            if len(X):
+                k = "edge/top m%d (%s)" % (m, "/".join(mem_name.get(m, ["?"]))); d[k] = min(d.get(k, 99.0), round(float(B.dist(i, M.world(m, i, X)).min()), 2))
+        return dict(sorted(d.items(), key=lambda kv: kv[1])[:4])
+    pose = lambda i: {k: B.poses[i].get(k) for k in ("plane", "elev", "axial")}
+    taken = [i for i in range(len(B.idx)) if B.res[i] is not None and float(np.min(B.res[i])) >= 0]
+    res["lowest"] = [dict(i=i, pose=pose(i), kind=B.kind[i], mm=round(float(np.min(B.res[i])), 2), parts=parts_at(i))
+                     for i in sorted(taken, key=lambda i: float(np.min(B.res[i])))[:10]]
+    res["lost_to_metal"] = [dict(i=i, pose=pose(i), why=str(M.why[i]), parts=parts_at(i)) for i in range(len(B.idx)) if str(M.why[i]) in ("contact", "skin", "parts")]
+    ws = [i for i in range(len(B.idx)) if B.kind[i] == "ws"]
+    def near(pl, el, ax):
+        return min(ws, key=lambda i: abs(B.poses[i]["plane"] - pl) + abs(B.poses[i]["elev"] - el) + abs(((B.poses[i]["axial"] - ax + 180) % 360) - 180))
+    named = {"rest (plane 0, elev 15)": (0, 15, 0), "overhead axial -135": (0, 150, -135), "overhead axial 0": (0, 150, 0),
+             "overhead plane 90": (90, 150, -135), "across the body (plane 120, elev 90)": (120, 90, 0),
+             "across the body, extreme internal rotation": (120, 60, -150), "behind the back (plane -60, elev 45, axial -120)": (-60, 45, -120),
+             "abduction 90 over the deltoid crest": (0, 90, 0), "extreme external rotation (plane 30, elev 30, axial 150)": (30, 30, 150)}
+    g = M._scg; gd = M._groove; res["named"] = {}
+    for nm, (pl, el, ax) in named.items():
+        i = near(pl, el, ax); w = str(M.why[i]) or "taken"; k = abs(float(M.dK[i]))
+        cl, az = M.l2_check([i]) if gd else (np.array([np.nan]), np.array([np.nan]))
+        res["named"][nm] = dict(i=i, pose=pose(i), status=w, dK=round(math.degrees(k), 1),
+                                phi=round(math.degrees(float(RF.phi_of(k, g["g"], g.get("c", 0.0)))), 1),
+                                r_pitch=round(gd["rl0"] + gd["s_arm"] * float(RF.phi_of(k, g["g"], g.get("c", 0.0))), 2) if gd else None,
+                                l2_clear=round(float(cl[0]), 2), l2_az=round(float(az[0]), 1),
+                                parts=parts_at(i) if w in ("taken", "contact", "skin", "parts") else None)
+    return res
+
+
 def viz_export(par): return RF.viz_export(_clamp(dict(PARAMS, **par)))
 
 
@@ -384,6 +429,10 @@ if __name__ == "__main__":
         print("claims done", [pr.returncode for pr in procs]); sys.exit()
     if mode == "viz":
         print(json.dumps(viz_export(par), default=float)); sys.exit()
+    if mode == "redteam":
+        out = redteam(par)
+        if len(sys.argv) > 3: json.dump(out, open(sys.argv[3], "w"), indent=1, default=float)
+        print(json.dumps(dict(frozen=out["frozen"], named={k: (v["status"], v["dK"], v["l2_clear"]) for k, v in out["named"].items()}), default=float)); sys.exit()
     if mode in ("frozen", "held", "flood"):
         t = time.time(); out = {"frozen": frozen, "held": frozen_held, "flood": frozen_flood}[mode](par); out["params"] = par
         out["secs"] = round(time.time() - t, 1)

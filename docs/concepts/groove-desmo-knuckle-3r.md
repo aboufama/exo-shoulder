@@ -89,6 +89,22 @@ The lead's CMA put the roller near the pole on purpose. It keeps the flank short
 Worn at the lead's drive, the groove-desmo variant scores fast plain 86.2 (reach 0.34). The drive's own range collapses
 to 0.
 
-**The variant that removes it:** move the roller ≥ 6 mm from the pole. That means re-choosing beta, r_c and g, so the
-drive box is widened to RF's own limits. The pressure angles (≤ 43) and the reach then have to survive. A 288-config LHS
-over the drive on the lead seats is running on the farm (results below).
+**The variant that removes it: move the roller off the pole.**
+
+- **Single roller.** A drive-only map at the lead seats (`scratchpad polemap`: beta x r_c x g, 273 + 594 cells, plus the
+  full 288-config LHS on the farm) finds a sharp boundary. Cells near the lead's drive (beta -171.5, r_c 15.6) still
+  have the outer wall convex below 3.5 mm up to K 18.5 deg. One step further out (g 2.47, beta -170, r_c 16) the outer
+  wall is concave or convex at >= 4.1 mm everywhere. The drive's own range then ends at the parent's horn pressure
+  angle, at **dK_lim 41.2** instead of 46.2 (lead, MR63) or 48.5 (MR52, spring-loaded). The best cusp-free cells cluster
+  at dK_lim 37-41 (horn pressure-angle limited). The wide LHS (drive box widened to RF's own limits: beta -215..-125,
+  r_c 13-22, g 1.6-3.2) found nothing better: best 2 mm gap 44.9 (plain 34.3).
+- **Kneeless control.** The same wall at its verified drive: cusp K 0-5.75, convex < 3.5 to K 22. The groove also needs
+  kK / g <= ~0.9 (pressure angle 54 at its kK 2.57 / g 2.23). The best cusp-free cell is dK_lim 35.2 (g 2.23,
+  beta -165, r_c 18, kK 2.0).
+- **Conjugate return roller (geometry only, not benched).** At the lead's own drive (MR52, inner flank to dK 48.5), a
+  second roller on the crank arm can carry the return wall: about 16 mm from the main roller (tangent-plane offset 13.5
+  / -9), return wall concave everywhere, both pressure angles <= 35.4, 15 mm off hub K's axis. No point within 12 mm of
+  the main roller qualifies. It would cost a second arm branch, a second bearing and a second flank on the deltoid,
+  which is where the lead's flank boss already pays its contact poses. This is the only route found back to the
+  spring-loaded 48.5-deg stroke.
+
