@@ -256,5 +256,39 @@ Cost: exo-cpu1 only, never GPU: 6 sweeps, 4 CMA batches (15 runs), 6 claim batch
 before (06:56 UTC, balance $30.55) and after (08:08 UTC, balance $29.45, workersMin 0, queue empty): $1.10 for every
 agent on the account in that window, so at most $1.10 for this task (the client's own billing lines sum to ~$1.0-1.1).
 
+## 8. Follow-up (08:10-08:45 UTC): steepen the law, then re-wear the ghost and the real drive
 
+Section 4 left one question open: is the law the wall, or the parking? The law table (`law_table.py`,
+`law_table_ghost_k30.json`, the rawest material for this question) answers it. Along the lobe's law, per degree of q2
+past the onset, th rises ~1.6-1.96 deg while a1e rises only 1.47 -> 0.90 deg (the K sub-dyad's efficiency
+da1e / dK = sin bk1 sin bk2 sin psi / sin a1e falls as K opens). So the dyad margin m3e = a1e + a2 - th falls along the law
+and crosses the 5 deg rule at th ~114 even at kK 3.0. The parking test's IDEAL law (a1e = th - a2 + 5) needs
+da1e / dth = 1 the whole way: a law that gets steeper as K opens. The lobe allows some of that: its pressure angle FALLS
+along the stroke (40.4 at the base circle -> 32.5 at the crest, kK 3.0), because its radius grows.
 
+Law-only kinematics on the ghost config (g65d's dyad 30.0 / 42.9; `stroke_curve_ghost_*.json`):
+
+| law | lobe | bench closable / 360 | held / 952 | th taken max |
+|---|---|---|---|---|
+| kK 1.98 (the CMA's) | s_arm 5.69, r_lobe 7.61 | 267 | 671 | 108.6 |
+| kK 2.3 | s_arm 4.0, r_lobe 8.5 | 268 | 679 | 110.3 |
+| **kK 3.0** (the lobe's PA-42 limit at its base circle) | s_arm 4.0, r_lobe 8.5 | **273** | **689** | 112.9 |
+| kK 3.4 | same | law dies (lobe PA > 42 at t = 0) | - | - |
+| two slopes kA 2.8 / kB 4.0 at 12 deg, kA 3.0 / kB 4.4 at 15 deg | same | 249 / 264 (the law ends at the slope jump: lobe PA) | 623 / 663 | 100-107 |
+| 'track' (least opening holding m3e >= 5.5 / 9, gain clipped to the PA cap) | same | 221 / 258 | 555 / 645 | 93-103 |
+
+Frozen exact (farm `claimG`), the same kK 3.0 config:
+
+| | K used (bench / held) | frozen exact Bench(110,360) | reach | in-band | contact (poses, max depth) | held out |
+|---|---|---|---|---|---|---|
+| slipper-nose (reference) | 46 | 18.49 | 0.725 | 0.8955 | 0.0054 (2) | 23.45 |
+| **ghost kK 3.0 (drive metal deleted, ATTRIBUTION)** | 51.8 / 54.0 | **18.25** | 0.739 (fold 77) | 0.897 | 0.018 (7, 7.1 mm) | **21.11** |
+| real rod drive, kK 3.0, not re-searched | 51.8 | 25.83 | 0.719 | 0.859 | 0.037 (14, 14.7 mm) | - |
+
+**Reading.** With the lobe at its pressure-angle limit the long-dyad chain DOES use more K (52-54 deg) and, with the
+drive's metal deleted, beats the reference: -0.24 on the frozen bench and **-2.34 held out** (fold 88 -> 77 on the bench,
+261 -> 228 held). So the lever is real once the law is steep; the part that does not exist yet is a drive whose METAL
+parks: the same law through the rod drive's real metal is 25.83 (crank in band 0.62, ball links 0.59, 14 contacts).
+And the stroke this chain can use is ~55 deg, not 75: the law, not the drive, sets it.
+
+**cma5 (running, 08:19 UTC):** the real rod drive re-searched with the law held steep (LS_KK_MIN 2.7, stroke >= 55), 2 runs seeded at this config.

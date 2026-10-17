@@ -83,6 +83,7 @@ def _clamp(p):
         # law, integrated with the gain clipped to the lobe's pressure-angle cap); every law keeps the parents' per-t gates
         # (th monotone, rate, lobe pressure angle <= pa_max, lift-off, stop B, skirt)
         law_in = p.get("law_in", "lin")
+        if KK_MIN > 0: p["kK"] = max(float(p["kK"]), KK_MIN)        # search switch: hold the law steep (LS_KK_MIN)
         if law_in == "track":
             p["law_mode"] = "track"; p["law_mode_in"] = "track"; p["smt"] = max(float(p.get("smt", 6.0)), 5.2)
             p["kK"] = max(float(p["kK"]), 0.0); p["kA"] = p["kB"] = p["kK"]; p["t1"] = 6.0
@@ -95,6 +96,7 @@ def _clamp(p):
             p["smt"] = max(float(p.get("smt", 12.0)), 5.2)
         p["a1max"] = min(float(p["a1max"]), float(p["bk1"]) + float(p["bk2"]) - 5.0)
         return p
+    if KK_MIN > 0: p["kK"] = max(float(p["kK"]), KK_MIN)            # search switch: hold the law steep (LS_KK_MIN)
     p["g"] = _c(p["g"], 1.2, 3.0); p["r_c"] = _c(p["r_c"], 13.0, 22.0)
     p["lift"] = _c(p.get("lift", 0.0), 0.0, min(float(p.get("lift_max", 4.0)), 8.0))
     b = float(p["beta"]); b = b - 360.0 if b > 0 else b; p["beta"] = _c(b, -180.0, -120.0)
@@ -166,6 +168,7 @@ def _report(B, params):
     return r, M
 
 
+KK_MIN = float(os.environ.get("LS_KK_MIN", "0"))               # search switch: the law slope kK clamped >= this (rssr)
 GHOST = os.environ.get("LS_GHOST", "0") == "1"                # attribution only: drive metal deleted (see LSModel._ghost)
 STROKE_MIN = float(os.environ.get("LS_STROKE_MIN", "0"))      # search constraint: the drive's own range must stay >= this
 OBJ = os.environ.get("LS_OBJ", "near2")                        # search objective: near2 (the round-9 rule) | near1

@@ -622,6 +622,252 @@
     "parts": 0,
     "contact": 2
    }
+  },
+  "steep_law_k30": {
+   "params": {
+    "La": 25.7026,
+    "s_arm": 4.0,
+    "r_h": 15.491,
+    "beta": -147.3923,
+    "gam": 22.4633,
+    "hl": 2.929,
+    "zr": 2.091,
+    "r_lobe": 8.5,
+    "bk1": 30.0377,
+    "bk2": 42.9378,
+    "a1max": 67.9755,
+    "smhi": 15.2738,
+    "kK": 3.0
+   },
+   "note": "kK 3.0 = the hub-2 lobe at its PA-42 limit (s_arm 4.0, r_lobe 8.5) on the ghost g65d dyad 30.0 / 42.9",
+   "ghost_ATTRIBUTION_ONLY": {
+    "bench": {
+     "frozen": {
+      "gap": 18.25,
+      "reach": 0.7389,
+      "follow": 1.0,
+      "inband14": 0.8969,
+      "inband10": 0.5645,
+      "contact": 0.0183
+     },
+     "why": {
+      "fold": 77,
+      "slide": 10,
+      "flip": 0,
+      "closure": 0,
+      "skin": 0,
+      "parts": 0,
+      "contact": 7
+     },
+     "near1": 18.79,
+     "near2": 33.27,
+     "overhead": {
+      "ws": 28,
+      "taken": 8
+     },
+     "contact_depth": {
+      "n": 7,
+      "sum_mm": 18.906,
+      "max_mm": 7.109,
+      "per_pose": [
+       0.85,
+       0.154,
+       7.07,
+       2.891,
+       7.109,
+       0.09,
+       0.742
+      ]
+     },
+     "th_margin_min": 5.389,
+     "th_max_taken": 111.7,
+     "dK_taken_max": 51.75,
+     "dK_lim": 73.0,
+     "split": {
+      "n": 7,
+      "by_part": {
+       "m7:hub2": 3,
+       "m2:?": 2,
+       "m5:pad": 1,
+       "hub2": 1,
+       "m1:hubK": 1,
+       "hubK": 1
+      }
+     },
+     "parts_ib14": {
+      "hub1": 0.999,
+      "hubK": 0.976,
+      "hub2": 0.953,
+      "hub3": 0.593,
+      "E": 0.949,
+      "boss": 0.998,
+      "pad": 1.0,
+      "knee": 0.973,
+      "L1a": 0.976,
+      "L1b": 0.949,
+      "L2": 0.765
+     }
+    },
+    "held": {
+     "frozen": {
+      "gap": 21.11,
+      "reach": 0.709,
+      "follow": 1.0,
+      "inband14": 0.8956,
+      "inband10": 0.5637,
+      "contact": 0.0157
+     },
+     "why": {
+      "fold": 228,
+      "slide": 35,
+      "flip": 0,
+      "closure": 0,
+      "skin": 0,
+      "parts": 0,
+      "contact": 14
+     },
+     "near1": 23.28,
+     "near2": 32.94,
+     "overhead": {
+      "ws": 71,
+      "taken": 21
+     },
+     "contact_depth": {
+      "n": 14,
+      "sum_mm": 38.1,
+      "max_mm": 9.209,
+      "per_pose": [
+       0.569,
+       1.474,
+       6.16,
+       9.209,
+       0.215,
+       4.787,
+       1.619,
+       0.531,
+       1.974,
+       1.222,
+       1.253,
+       1.023,
+       7.813,
+       0.251
+      ]
+     },
+     "th_margin_min": 5.28,
+     "th_max_taken": 113.03,
+     "dK_taken_max": 53.97,
+     "dK_lim": 73.0,
+     "split": {
+      "n": 14,
+      "by_part": {
+       "m2:?": 3,
+       "hubK": 3,
+       "m1:hubK": 3,
+       "hub2": 2,
+       "m7:hub2": 2,
+       "m5:pad": 2
+      }
+     },
+     "parts_ib14": {
+      "hub1": 0.999,
+      "hubK": 0.973,
+      "hub2": 0.953,
+      "hub3": 0.587,
+      "E": 0.948,
+      "boss": 0.998,
+      "pad": 1.0,
+      "knee": 0.973,
+      "L1a": 0.975,
+      "L1b": 0.949,
+      "L2": 0.765
+     }
+    }
+   },
+   "real_rod_drive_not_researched": {
+    "bench": {
+     "frozen": {
+      "gap": 25.83,
+      "reach": 0.7194,
+      "follow": 1.0,
+      "inband14": 0.8589,
+      "inband10": 0.519,
+      "contact": 0.0366
+     },
+     "why": {
+      "fold": 77,
+      "slide": 10,
+      "flip": 0,
+      "closure": 0,
+      "skin": 0,
+      "parts": 0,
+      "contact": 14
+     },
+     "near1": 28.85,
+     "near2": 54.32,
+     "overhead": {
+      "ws": 28,
+      "taken": 5
+     },
+     "contact_depth": {
+      "n": 14,
+      "sum_mm": 35.884,
+      "max_mm": 14.73,
+      "per_pose": [
+       0.85,
+       0.154,
+       7.07,
+       2.891,
+       0.601,
+       14.73,
+       3.707,
+       0.005,
+       0.68,
+       1.06,
+       0.742,
+       2.155,
+       0.638,
+       0.601
+      ]
+     },
+     "th_margin_min": 5.389,
+     "th_max_taken": 111.7,
+     "dK_taken_max": 51.75,
+     "dK_lim": 73.0,
+     "split": {
+      "n": 14,
+      "by_part": {
+       "m8:rod/rodends": 6,
+       "rodends": 5,
+       "m7:hub2": 3,
+       "crank": 3,
+       "horn": 3,
+       "m1:hubK/horn": 3,
+       "m2:?": 2,
+       "m5:pad": 1,
+       "hub2": 1,
+       "rod": 1,
+       "hubK": 1
+      }
+     },
+     "parts_ib14": {
+      "hub1": 0.999,
+      "hubK": 0.976,
+      "hub2": 0.953,
+      "hub3": 0.593,
+      "E": 0.949,
+      "boss": 0.998,
+      "pad": 1.0,
+      "knee": 0.973,
+      "crank": 0.619,
+      "horn": 0.953,
+      "rod": 0.583,
+      "rodends": 0.586,
+      "L1a": 0.976,
+      "L1b": 0.949,
+      "L2": 0.765
+     }
+    }
+   }
   }
  },
  "convergence_gate": {
