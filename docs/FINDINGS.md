@@ -2132,7 +2132,7 @@ Scripts are in `docs/research/fold_ceiling/`. No rule, bench or verified row was
 * **But K must turn 78-89 deg.** The leader's drive turns 46; the round-9 flank caps at 55-57.5 at pressure angle
   <= 43.
 * With 57.5 deg: th_hi ~115-118, reach ~0.764-0.767, score ~94.6-94.7, before the drive's own metal.
-* **Score 95 in the family is therefore not provably impossible, and it is not reached.** The gate is a 60-90 deg K
+* **Score 95 in the family is therefore not provably impossible, and it is not reached.** The gate is a ~75 deg K
   drive whose metal parks. Above ~0.80 reach the folded wall (hub 2) must move too.
 
 **An instrument that failed**

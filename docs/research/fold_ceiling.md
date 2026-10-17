@@ -214,14 +214,15 @@ the arm; 247,860 pairs):
 **Calibration.** At +4 the estimate is 0.739 against the verified 0.725: the knee, drive and collision checks remove
 5 more poses.
 
-**The long K dyad buys +0.039 (+14 poses) at the same parts' in-band.** Of the 40 newly closed poses, at the clip
-level:
+**The long K dyad buys +0.039 (+14 poses) at the same parts' in-band.** This is the uncapped stroke; the capped strokes
+are in section 4b. Of the 40 newly closed poses, at the clip level:
 
 - hub K clears 36;
 - link 1a clears 31;
 - hub 3 clears 40;
 - hub 2 clears 17 (26 at +4);
-- **link 1b (K -> J2) clears 9** (30 at +4). It is the binding part.
+- **link 1b (K -> J2) clears 9** (30 at +4). It is the binding part at the clip level.
+- With the stroke capped (section 4b), the binding parts at +4 are hub 2 and link 2 near J2.
 
 **The binding coordinate is K's rotation.**
 
@@ -252,7 +253,8 @@ level:
 **Not reached either.**
 
 - No configuration reaching the hard goal (frozen reach >= 0.80, overhead >= 14 / 28) was MEASURED here.
-- The lever needs a K drive with a 60-90 deg stroke at pressure angle <= 43, its metal parked off the deltoid.
+- The lever needs a K drive with a ~75 deg stroke at pressure angle <= 43, its metal parked off the deltoid
+  (section 4b).
 - No such drive exists in the repo:
   - rod RSSR 43;
   - roller flank 46 / 55-57.5;
