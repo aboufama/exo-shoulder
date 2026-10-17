@@ -153,7 +153,7 @@
   "R1"
  ],
  "R1_attribution": {
-  "method": "score_design.py's own covered-skin rule (nearest shoulder metal along the skin normal, cos >= 0.8, within 60 mm; same skin samples and seeds) with the nearest metal sample's PART recorded, every 9th clip frame (154 following frames), both designs; scratch script, not committed",
+  "method": "score_design.py's own covered-skin rule (nearest shoulder metal along the skin normal, cos >= 0.8, within 60 mm; same skin samples and seeds) with the nearest metal sample's PART recorded, every 9th clip frame (154 following frames), both designs; tools/r1_attrib.py <design dir> 9",
   "L1": {
    "covered": 3621234,
    "in_band_2_14": 2845486,
