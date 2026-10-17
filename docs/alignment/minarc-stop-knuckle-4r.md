@@ -310,3 +310,69 @@ No re-wear was needed: every number in the reasons was on file and was reproduce
 - The refuted `continuity` reason is a format gap in the tool, which reads only a `connected_full` / `connected_knn`
   dict. Both floods of the verifier are on file and drop 0 poses. A tool fix (read `connected.dropped_unconnected` and
   the `_conn*.json` files) is a change to the tool and is left to its owner.
+
+## Skeptic (2026-10-17, 04:30-04:45 UTC, simplicity v2 metric-change audit)
+
+The skeptic was a separate agent. It edited no bench, judge, kit, model, row, dashboard page or CLAUDE.md, and changed
+no score. It re-derived each reason from the probe files, the verifier files, the rows, `tools/simplicity.py` and the
+pick1 CAD parts list. It re-ran the auditor's determinacy tool on both configs. Local CPU only, at most 2 processes.
+Farm spend $0.
+
+**Final verdict (ledger, `stage skeptic`, 2026-10-17T04:44:39Z): WATCH.** None of the 16 reasons was refuted, and
+all stand at 'watch'. The claim is 18.40 (pick1).
+
+**Re-measured here:**
+- `tools/alignment_knee_sensing_minarc.py` re-run on pick1 and BDp. Every summary matches the committed files to the
+  digit: pick1 0.3691 / cond 2.54 on 1056 taken grid poses, 0.3902 overhead, 0.2839 on the library; BDp 0.0958 / 9.83.
+- The finite-difference step was varied from 1e-3 to 1e-5. sigma_min did not change to 4 digits.
+- simplicity v1 / v2 was recomputed for every row that has a v_gap, along with the (v_gap, complexity) fronts.
+- New: `tools/alignment_knee_ghdrift_minarc_skeptic.py`, output
+  `docs/alignment/remeasure/minarc-stop-knuckle-4r_skeptic_ghdrift_arm.json` (see missed item 1).
+
+**Rulings** (also in `docs/alignment/minarc-stop-knuckle-4r.rulings.json`):
+
+| key | refuted | evidence |
+|---|---|---|
+| contact_depth | no | **Re-derived** from the probes' `contact_poses`: bench 11 poses, 34.43 mm summed, deepest -13.17; held out 35 poses, 126.1 mm, deepest -14.61. sidecar-longdyad `_perpose_claim`: 4 poses / 6.23 mm / deepest -4.61 on the bench; 10 / 35.66 / -8.37 held out. **Threshold.** TH depth_ratio 2.0 and floor 5 mm, applied to summed depth: x5.53 (+28.2 mm) and x3.54 (+90.4 mm). **Label slip.** In the condensed reason, "6.23 mm" is the reference's summed depth; its deepest is 4.61 mm. |
+| sampling | no | No per-part sample counts in any probe or verify file. Not measured. |
+| complexity | no | v2 gives 32.5 against the row's 33.0. The mismatch is over the check's 0.01 tolerance. **Direction.** The stale field overstates complexity by 0.5, so it does not flatter the design. The dashboard already shows 32.5. The notes are stale. |
+| reporting | no | morphs.json (04:28): the 18.4 half is the named false positive. The second half is true: sweep_gap 6.19 sits 13.35 under the verified number, and the verdict text is "VERIFIED LEADER ... BDp". |
+| G6 | no | Numbers confirmed. Complexity v2: 32.5 / 29.5 / 24.25 (v1: 52 / 49 / 43.75). The earlier pricing correction still applies: pick1 leads priced longdyad by +0.96 bench and +0.60 held out. It is still a 4th joint for a few workspace poses, none of them overhead. |
+| NEW-overhead-traded | no | overhead140_ws taken: 7 vs 8 of 28 (bench), 12 vs 16 of 71 (fit-60 held out), 16 vs 17 (env fit). why_not: contact 5. K is open on 0 of 7 ws and 0 of 10 clip poses at elevation >= 140. |
+| NEW-depth-blind-contact | no | contact_raw: 11 vs 4 bench (-13.17 vs -6.41); 35 vs 13 fit-60 held out; 28 vs 9 env-fit held out. 5 of 11 bench and 16 of 35 held-out contacts are at elevation >= 150. |
+| G5 | no | The subtraction leaves B 4, J 4, R 0, made 10, bought 10, which is exactly mechanism_A. In the CAD (parts 15-22) the knee has no encoder, no MR63ZZ and no shared plate; the template is within 1 part. The stale 33.0 and notes are confirmed. |
+| R2 | no | The row's verdict / v_verdict and the dashboard verdict open "VERIFIED LEADER" (BDp). The dashboard row mixes pick1 and BDp. |
+| NEW-mixed-protocol | no | README line 33 gives 21.31 (env fit, `polished_held_out.env_fit`). Line 36 gives 22.67 (fit-60). |
+| T4 | no | verifier.knee held out: ang_min 26.1449, max 152.746, margin 1.109, outside_H1 4 (BDp: 2.665, 1). |
+| G4 | no | th_margin_own_state: min 5.623, lt10 107, plain dyad on forced -22.763 (BDp: lt10 98, -10.867). |
+| M5 | no | k_hold_check line 16: 5.69 / 6.12 / 4.12 / 7.70. Line 48: twist 3.83. CAD part 6 still names a 0.08 N.m preload (already known). |
+| T1 | no | near1 / 2 / 3 poses: 13 / 38 / 171. All 7 overhead ws poses are under 3 mm (4 under 1 mm). |
+| NEW-hub-only-sensing | no | **Reproduced** to the digit, stable over the FD step. **Structure.** In the null space K's row is (0, 0, 0, 1), so hub4 determinacy reduces to forward kinematics of J1-J3 at fixed K. K's encoder is required on forced poses. **R10 caveat is larger than reported:** see missed item 1. |
+| P4 | no | c_judge_change compares only gap / v_gap, confirmed in the code. Every knee row moves by -19.5. The tie-break is unchanged. The v2 front is roller-longdyad, rim-lobe, geneva-tail and skin-normal (plus minarc at 18.40). There is no flip that involves minarc. |
+
+**Missed by the audit** (not counted in this verdict; for the next audit):
+1. **The R10 caveat understates the arm error that hub-only sensing makes under GH drift.**
+   - What the audit reported: the knee's member-3 twist, 1.69 deg/mm (pick1) and 1.91 (BDp).
+   - What a fixed-GH estimator gets wrong: it inverts the 4 hub rows and reads a GH rotation that did not happen.
+     That error is the twist times the gain from J3 to the arm.
+   - pick1: median 0.68, max **2.03 deg/mm** (overhead 1.84); **8.1 deg at R10's 4 mm**.
+   - BDp: median 0.70, max **7.66 deg/mm** (overhead 6.19), 30.6 deg at 4 mm. Its ill-conditioned poses
+     (sigma_min 0.096) amplify the drift up to 4x.
+   - Assumptions: sn is parallel to u3 within 1.2e-4 deg; J1, K and J2 are held by their stop or spring.
+   - This matches the sidecar-longdyad skeptic's finding: 0.73-2.41 deg/mm, up to 9.6 deg at 4 mm.
+   - It does not change the v2 count. It tells the user what dropping the knee encoders costs once GH translates.
+   - Tool: `tools/alignment_knee_ghdrift_minarc_skeptic.py`. Output:
+     `remeasure/minarc-stop-knuckle-4r_skeptic_ghdrift_arm.json`.
+2. **A label slip in the condensed contact_depth reason.**
+   - It sets pick1's deepest contact (13.17 mm) against sidecar-longdyad's "6.23 mm". 6.23 is the reference's
+     *summed* depth.
+   - The reference's deepest contact is 4.61 mm bench and 8.37 mm held out (`_perpose_claim`). The audit's table says
+     -8.31.
+   - The check itself compares summed depths correctly.
+3. **Carried over, still open:** K reaches 56.55 deg held out, against stop B at 56.65 deg, and stop B carries no build
+   tolerance (02:40 skeptic, missed item 1). Not re-measured here.
+
+**Questions for the user** (added to the audit's):
+- Under GH drift, hub-only sensing reads up to about 2 deg of false arm rotation per mm on pick1, and up to 7.7 on BDp.
+  Is that acceptable for MVP2 control? Or should "no encoders needed" be conditional on a bound on that error, for
+  example under 1 deg/mm at the taken poses? That bound would be a tightening, and it would be measured per row.
