@@ -174,3 +174,84 @@ rebuilding); the priced-plus-catalogue-drive combined wear (never run).
 ## Cost
 
 No farm jobs, no local re-wear (claim unchanged). About 15 min of reading and table work.
+
+## Skeptic (2026-10-17, 02:24-02:40 UTC, git e99f42f -> 0a574f3)
+
+The skeptic was a separate agent. It edited no bench, judge, kit, model, row, dashboard page or CLAUDE.md, and changed
+no score. It used local compute only: nice, OMP_NUM_THREADS=1, one process. A farm batch was tried, but this session's
+permission policy refused it, so the farm was not used ($0).
+
+**Final verdict (ledger, `stage skeptic`, 2026-10-17T02:32:17Z): WATCH.** None of the 9 reasons was refuted, and all
+are watch. The claim is 18.91.
+
+**Re-measured this session (model unchanged).**
+- **Exact re-wear.** `tools/alignment_audit.py` `remeasure`, unchanged, with its output dir redirected to the scratchpad.
+  CB_EXACT=1, HEAD e99f42f, 232 s.
+  - Frozen: **18.91**, 1 mm 20.00, 2 mm 34.03, 3 mm 155.98; band 3-14 mm 19.22.
+  - Poses: near1 2 (0.28 and 0.38 mm), near2 26, near3 178. Lost: fold 86, slide 7, parts 2, contact 4.
+  - Overhead p10 min metal 1.02 mm; overhead lost: fold 14, slide 4, contact 2.
+  - Spans: dK 0..37.80 deg; knee K.ang 88.7-146.1 deg.
+  - The fit used the rebuilt fast cache (`.cache/concept_bench`, created 01:59 UTC); fit_fast 10.3 matches row.gap.
+  - Every figure matches `remeasure/sidecar-longdyad-knuckle-3r_bench.json` to the digit.
+- **Measurement files.** `git diff --stat 63167c0 HEAD` changes only judge/dynamics.py. The diff covered the bench,
+  kit, env bench, simplicity, judge/, body_pose, split.json, the band poses, both verify helpers, this model, its
+  frontload parent and the pin-knee model.
+
+**Rulings** (also in `docs/alignment/sidecar-longdyad-knuckle-3r.rulings.json`):
+
+| key | refuted | evidence |
+|---|---|---|
+| near_touch (watch) | no | **Measurement.** Re-worn: the numbers are reproduced to the digit (above). **Threshold.** TH shell2_watch 15.0 is applied to gap_near2 - plain = 15.12, the same quantity the section-5 calibration ("15-31") used. **Label correction.** 15.12 is the 0-2 mm shell. The strict 1-2 mm shell (gap_near2 - gap_near1) is **14.03**, under 15. The watch crosses the line by 0.12 only through the 2 poses under 1 mm (+1.09). Held out: 14.57 for 0-2 mm, 11.49 for 1-2 mm. Re-reading the shell is a measurement change, so it is not used. **Wearer cost.** It is real (section 1 item 1): 24 taken bench poses sit at 1-2 mm and 2 at 0.28 / 0.38 mm. |
+| reporting (watch) | no | **After the 02:13 refresh (fc0f574).** morphs.json still has gap 10.3, sweep_gap 10.3, reach 0.8 and the verdict "SCREENED, a candidate for the verifier". 100 (1 - 10.3/275) = 96.25. **Row.** t_verified and v_contact are null, while verification.contact is 0.0107. |
+| S1 (watch) | no | **Numbers confirmed.** v_gap 18.67 / 18.91 / 19.13. Held out, exact, n 1154: 23.73 / 22.67 / 22.03. Held 1 mm: 26.83 / 25.75 / 24.44. One pose = 100/360 = 0.278. **Paired file.** 8 / 8 discordant, CI90 [-2.62, +1.77], pooled P(roller better) 0.287. **New.** At 1 mm the bench order reverses again: this design 20.00, parallelogram 20.22, roller-longdyad 20.30. This strengthens the finding. |
+| NEW-sensed-knee-pins (watch) | no | **Recomputed** with `tools/simplicity.py`, the 2 pins moved to active and out of passive_rot: 49 -> 87 at 5 DOF (89 if passive_rot is kept). roller-longdyad 81.75, parallelogram 87, roller-flank 83.25, frontload 87; kneeless 23.75 / 28.0 unchanged. **No ruling.** A grep of CLAUDE.md, REQUIREMENTS, HANDOFF and ROUNDS finds no user ruling on the knee pins, only proposals (HANDOFF 222; ROUNDS 527-528, 738). |
+| NEW-catalogue-drive (watch) | no | **Confirmed.** `_rh155cap354_bench.json` 19.76 / 20.85, 368 taken. `_held.json` 23.53 / 26.63. Control `_rh155_bench.json` 18.92. **No judge.** l1_sidecar-longdyad has no judge/. **Correction.** "about 1.2 behind roller-longdyad" uses roller's envelope-corrected 18.56, which the roller audit's S2 says never to quote. Like-for-like, the gap is **1.09** (18.67). |
+| NEW-unpriced-stops (watch) | no | **Stops.** smlo 5.0. a1max 63.1774 = 28.9414 + 39.236 - 5 exactly. min th 5.232. **Priced.** 19.36 / held 23.29, min th 5.513. **Roller-longdyad.** smlo 5.0, a1max 0.27 inside its rule, so the comparison is like-for-like within 0.3 deg. **Wearer.** A built stop at exactly 5 deg with +-0.5 tolerance reaches 4.5 deg of the fold. |
+| G1 (watch) | no | **Probe.** clip overhead floor < 2 mm on 8/10 frames (all 10 < 3 mm); workspace overhead 5/8 (1 < 1 mm). **p10.** 1.02 bench (own re-wear), 0.64 held. **Under 3 mm.** near3 178 vs roller 133. **Correction.** The shell figures mix two definitions. Bench 15.12 is n2 - plain, but its own parenthesis "20.00 -> 34.03" is 14.03. Held 11.49 is n2 - n1. Like-for-like: 14.03 / 11.49 for 1-2 mm, or 15.12 / 14.57 for 0-2 mm. |
+| M5 (watch) | no | **Missing measurement.** No R17 / dynamics output for this design or l1_sidecar-longdyad anywhere in judge/ or pipeline/. The red team doc only plans it. |
+| R1 (watch) | no | **HANDOFF.** Lines 81 ("no polish, no CAD") and 97 ("within 0.51") are unchanged since 4e5b038 (22:15). The polish closed at 22:03. **Row and dashboard.** The verdict still opens "SCREENED". |
+
+**Missed by the audit** (not counted in this verdict; for the next audit):
+1. **The round-9 lead change reverses at the user's own contact line.**
+   - CLAUDE.md says "contact stays metal < 1 mm". The plain v_gap counts only penetration (< 0 mm) as contact, so
+     poses with metal at 0-1 mm count as clearance.
+   - At 1 mm, the exact bench reads: this design **20.00**, parallelogram 20.22, roller-longdyad **20.30**
+     (`remeasure/*_bench.json` deep.gap_near1). Held out at 1 mm: 25.75 / 24.44 / 26.83.
+   - Roller-longdyad's plain 0.24 lead becomes a 0.30 deficit on the bench and 1.08 held out. It has 3 taken bench
+     poses under 1 mm, the closest at **0.072 mm** (deep.min_metal_mm). This design has 2, at 0.28 / 0.38 mm.
+   - This is T1 at the 0 mm line: the round-9 winner's gain lives where metal sits within 0.1 mm of the skin.
+   - The finding bears on the lead decision, not on this design's verdict. Proposal (a rule question for the user, not
+     applied): state which line the "plain verified gap" uses for contact, 0 mm as the verifier computes it or 1 mm as
+     CLAUDE.md words it. Effect on the verified rows, from the files above: at 1 mm this design ranks first of the
+     three on the bench (20.00 / 20.22 / 20.30); held out, parallelogram first (24.44 / 25.75 / 26.83).
+2. **The ball links are not at their real size in any reading (M2 / M3).**
+   - The model samples an O7 socket (`ER, ZB = 3.5, 3.0`, model line 43). The build spec uses catalogue KBRM-02 /
+     KBLM-02 heads, O9 x 4, with the horn ball centre **3.6 mm** over the lug top (0.6 mm spacer;
+     `docs/research/sidecar_mechanism_redteam.md` lines 166-170).
+   - `tools/alignment_drive_cap_wear.py` changes only the dK cap ("Nothing else changes"), so the 19.76 catalogue
+     reading still samples O7 heads at ZB 3.0.
+   - The verifier's own fast ZB sensitivity is +0.39 at ZB 4.0 and +0.54 at 4.5 (row
+     `verification.zb_sensitivity_fast`).
+   - The real-size envelope wear (O9 heads, ZB 3.6, cap 35.4) has not been run. Neither 18.91 nor 19.76 is yet the
+     built exo's number.
+
+**Notes** (not gaming):
+- **The per-pose floor peaks just above 2 mm.** In the paired exact-fit dump (`_bench_perpose.json`, gap 19.66, not the
+  claim), 74 of 371 taken bench poses have their floor at 2.25-2.5 mm, against 10 at 2.0-2.25 mm.
+  - Held out: 153 of 859.
+  - Most are arm-low poses (median elevation 22.9 deg), and the model's crown / wall term `cmin` binds on 58 of the 74.
+  - It is a fixed hub-crown standoff, not a search line: the objective was the 1 mm near-touch gap.
+  - Roller-longdyad has 19 poses in the same bin.
+  - It explains the 3 mm cliff (34.03 -> 155.98). A report of each hub's floor would show it (proposal A3).
+- **The tool's near_touch label.** `c_near_touch` prints "points live in the 1-2 mm shell" for gap_near2 - plain, which
+  is the 0-2 mm shell.
+  - Proposal (reporting only; no threshold or score moves): print both shells, 0-2 mm and 1-2 mm, with their labels.
+  - Effect on the verified rows on file:
+
+    | design | 0-2 mm | 1-2 mm |
+    |---|---|---|
+    | this design | 15.12 | 14.03 |
+    | parallelogram | 31.01 | 29.92 |
+    | roller-longdyad | 14.43 | 12.80 |
+
+**Cost:** one local exact re-wear (232 s, one process, nice), no farm, $0.
