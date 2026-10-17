@@ -2818,7 +2818,7 @@
   "name": "Spherical-coupler long-stroke knuckle with a split gain (planner's C4; stage 1 kept as the hub-2 lobe with an O2.5 nose) - the lobe-input control for dogring-draglink, hard kill on its measured drive contacts",
   "family": "slaved-knuckle 3R (lead family with the free pin knee), long K dyad, lobe + spherical 4R drive",
   "lens": "round11:coupler-longstroke (lens 1, the planner's suggested id; ranked behind dogring-draglink: same kinematic ceiling, measured drive contacts)",
-  "status": "ideated",
+  "status": "dead",
   "t_ideated": "2026-10-17T09:57:50Z",
   "source": "round 11 judge (docs/concepts/round11_ideation.md)",
   "merged_from": [],
