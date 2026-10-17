@@ -30,7 +30,7 @@ the drive skin sweep). What is new here (docs/research/roller_mechanism_redteam.
              levels + the arc concentric with hub K at r_c as a REVOLVE of its annular section), the flank roller MR63ZZ on an
              ISO 2341-B 3 x 8 headed pin (head O5 x 1.0 on the skin side); the lobe follower MR63ZZ on an O3 pin at a_s 7.0,
              psi 219 deg (the red team's real follower; the model's s_arm 4.05 one sits inside hub 2's housing).
-  lobe ring  (group l2) 17-4PH H900 on link 2's upper ring turned to O18: synthesised here from the posed follower (the claim's
+  lobe ring  (group l2) 17-4PH H900 on the J2 cap's O20 skirt (gen-6 fix: link 2's stale O18 groove removed): synthesised here from the posed follower (the claim's
              law dK(q2) -> phi -> the follower centre in link 2's frame), offset by the roller radius in the plane square to the
              follower axis at mid-stroke, drawn as 3-point arcs, the onset joined by the roller's own circle into the dwell, a
              straight return flank; band F2 + 6.15..8.75 under the J2 cap skirt; keyed by an O1 dowel at the onset + 0.23 deg of
@@ -56,11 +56,11 @@ SPEC = json.load(open(os.path.join(REPO, "docs", "research", "roller_mechanism",
 RES = json.load(open(os.path.join(REPO, "docs", "research", "roller_mechanism", "results_bench.json")))
 
 # ---- link 1a (the short dyad)
-L1A = dict(ramp_deg=60.0, R=2.0, clr_J1=0.2, run_K=0.2, rf=0.5)
+L1A = dict(RL1.L1A_PATH, rf=0.5)                 # the chain: build_roller_l1.L1A_PATH (climb from J1's skirt + 0.15, was 0.2)
 # ---- drive dimensions (red team build spec)
 ROLL_R, ROLL_W = 3.0, 2.5                    # MR63ZZ 3 x 6 x 2.5 (flank roller and lobe follower)
 A_S, PSI_DEG = 7.0, 219.0                    # the real lobe follower: short arm 7.0 at psi 219 deg (red team finding 1)
-LOBE_Z = (6.15, 8.75)                        # lobe ring band over hub 2's face (under the J2 cap skirt at H1 + 0.05 = 8.80)
+LOBE_Z = (6.15, 8.75)                        # the FIRST lobe seat (link 2's ring turned to O18): no longer cut; the ring band is the follower's (F2 + 9.8..12.8)
 HMID = 7.45                                  # follower mid-plane F2 + 7.45 (the red team's hmid)
 DK_FLANK = 48.25                             # flank built to dK 48.25 (+2 deg run-out past dK_lim 46.25)
 LUG_BACK = 6.0                               # lug depth behind the flank
@@ -70,32 +70,15 @@ PLATE_T, PLATE_DROP = 1.5, 1.5              # follower plate 1.5 mm, its top 1.5
 GAP = 0.6                                    # follower roller over the plate (an integral O4 step on the follower pin clears the shield)
 ARM_W, ARM_T = 6.0, 3.0
 ARM_UP = 1.0                                 # the straight run's underside at the boss axis, over the boss underside
-HEAD_R, HEAD_T, STEP_T = 2.5, 1.0, 0.2       # ISO 2341-B 3 x 8 head O5 x 1.0, 0.2 mm step under the roller's inner ring
+HEAD_R, HEAD_T, STEP_T = 2.5, 1.0, 0.2       # ISO 2341-A 3 x 6 head O5 x 1.0 (d 3: dk 5, k 1), 0.2 mm step under the roller's inner ring
 
 
 # ---------------------------------------------------------------------------------------------------- link 1a
 def link1a_path(M):
-    """the centre-line chain of link 1a in span(u1, uK) (2-D: x along u1, y across): start at the J1 seat face (J1 skirt +
-    clr), concave bend R, ramp at ramp_deg, convex bend R onto the K pad plane, a short run to the K seat face; the K seat length
-    is solved (>= 10.05, outside the K skirt). Returns (ex, ey, start, segs, info)"""
-    Uu, C, F4, hr = BM.joints4(M); u1, uK = unit(Uu[0]), unit(Uu[1])
-    ex = u1; ey = unit(uK - (uK @ ex) * ex); phi = math.acos(float(np.clip(uK @ ex, -1, 1)))
-    ha, hb = F4[0] + T / 2, F4[1] + T / 2; R = L1A["R"]; Ls_a = hr[0] + L1A["clr_J1"]; a1 = L1A["run_K"]
-    B = hb * np.array([math.cos(phi), math.sin(phi)]); back = np.array([math.sin(phi), -math.cos(phi)])
-    start = (ha, Ls_a, math.pi / 2); best = None
-    for a_deg in np.arange(L1A["ramp_deg"], 20.0, -0.5):
-        a = math.radians(a_deg)
-        x1, y1, p1 = SK.advance(*start, -1.0 / R, R * a); d1 = np.array([math.cos(p1), math.sin(p1)])
-        x2, y2, p2 = SK.advance(0.0, 0.0, p1, 1.0 / R, R * (a + phi)); v2 = np.array([x2, y2]); d2 = np.array([math.cos(p2), math.sin(p2)])
-        sol = np.linalg.solve(np.c_[d1, -back], B - np.array([x1, y1]) - v2 - a1 * d2); Lr, Ls_b = float(sol[0]), float(sol[1])
-        if Lr >= 0.0 and Ls_b >= hr[1] + 0.05: best = (a, Lr, Ls_b); break
-    assert best is not None, "link 1a: no ramp <= 60 deg closes the dyad"
-    a, Lr, Ls_b = best
-    segs = [(-1.0 / R, R * a), (0.0, Lr), (1.0 / R, R * (a + phi)), (0.0, a1)]
-    end = SK.end_pose(start, segs); E = B + Ls_b * back
-    assert np.allclose(end[:2], E, atol=1e-6) and abs(end[2] - (math.pi / 2 + phi)) < 1e-9, (end, E)
-    return ex, ey, start, segs, dict(ramp_deg=round(math.degrees(a), 2), ramp_mm=round(Lr, 3), K_run_mm=a1, bend_R_centre_mm=R, bend_R_inner_mm=R - T / 2,
-                                    seat_J1_mm=round(Ls_a, 3), seat_K_mm=round(Ls_b, 3), dyad_deg=round(math.degrees(phi), 3), sd_b=back)
+    """the centre-line chain of link 1a in span(u1, uK): build_roller_l1.link1a_path (one source for the L1 keep-out and this part:
+    J1 seat face at J1's skirt + clr_J1 -> concave bend R -> <= 60-deg ramp -> convex bend R onto the K pad plane -> K run -> K seat
+    face). Returns (ex, ey, start, segs, info)"""
+    return RL1.link1a_path(M)
 
 
 def link1a_vs_model(M, ex, ey, start, segs):
@@ -201,11 +184,10 @@ def build_links(M, stops, lug):
         out.append(("l2", f"J2 stop dowel: {USM.DOWEL_STOCK} (q2 stops {stops['J2']['meta']['window_deg'][0]:.2f} / {stops['J2']['meta']['window_deg'][1]:.2f} deg: "
                           f"stop B = the drive's range dK 46.25), pressed 3 mm in the J2 upper boss, polished; stop push limit "
                           f"{USM.j2_push_limit()['push_limit_Nm_s0_1']:.1f} N.m (J2 MR117 pair s0 1.0)", dw))
-    ring_cut = rev([(9.0, LOBE_Z[0]), (HUB_R + 0.8, LOBE_Z[0]), (HUB_R + 0.8, LV["H1"] + 0.2), (9.0, LV["H1"] + 0.2)], F[1] * unit(u[1]), unit(u[1]))
-    body = body.cut(ring_cut)
+    # (gen-6 fix) no O18 groove on the J2 upper ring any more: the lobe ring seats on the J2 cap's O20 skirt (band F2 + 9.8..12.8), so the
+    # groove at LOBE_Z (the first lobe seat) was a stale cut (the verifier's finding e)
     body = body.clean() if body.clean().isValid() else body
-    out.append(("l2", f"D8-03 link 2: 8x3 bar on a line/arc chain + J2 / J3 O20 rings (J2 upper ring turned to O18 over F+{LOBE_Z[0]}..{LV['H1'] + 0.2:.2f} "
-                      f"for the lobe ring), J2 dowel hole, flies over the knee and the pad ({r['process']})", body))
+    out.append(("l2", f"D8-03 link 2: 8x3 bar on a line/arc chain + J2 / J3 O20 rings, J2 dowel hole, flies over the knee and the pad ({r['process']})", body))
     rep["link 2"] = dict(**r, seat_mm=Ls, pad_round_mm=rf, u3_lean_out_of_plane_deg=lean, valid=body.isValid(), solids=len(body.Solids()))
     print(f"  link 2: valid {body.isValid()}, solids {len(body.Solids())}, faces {len(body.Faces())}", flush=True)
     return out, rep
@@ -453,7 +435,8 @@ def crank_parts(M, dg, lay):
     info = dict(boss_mm=[round(zb, 3), round(ztop, 3)], boss_raised_over_model_mm=round(lay["raise_mm"], 3), l1b_top_under_boss_mm=None if lay["l1b_top"] is None else round(lay["l1b_top"], 3),
                 follower_centre_on_dR_mm=round(s_f, 3), follower_shift_along_dR_mm=round(lay["follower_shift_mm"], 3), follower_hmid_over_f2_mm=round(lay["follower_hmid_over_f2"], 3),
                 straight_run_mm=round(L, 2), arm_root_up_mm=ARM_UP, arc=ainfo, crank_valid=crank.isValid(), crank_solids=len(crank.Solids()),
-                roller_centre_r_mm=round(dg["R0"], 3), arm_bottom_over_roller_top_mm=round(dg["rA"] - dg["R0"] - ROLL_W / 2, 3))
+                roller_centre_r_mm=round(dg["R0"], 3), arm_bottom_over_roller_top_mm=round(dg["rA"] - dg["R0"] - ROLL_W / 2, 3),
+                flank_pin_shank_mm=round(z_arm_top - 0.1 - z_h, 3), pivot_pin_mm=[round(l1b_top - T, 3), round(ztop + 1.4, 3)])
     parts = [("dk", f"D9-01 drive bell crank (Ti-6Al-4V, 5-axis machined from solid): boss O10 x {BOSS_H:g} (2 x 683ZZ), follower plate {PLATE_T:g} mm {PLATE_DROP:g} under the boss top "
                     f"to the follower pin at {A_S:g} mm, bent arm 6 x 3 (straight run {L:.1f} mm + the arc about hub K at r_c {dg['rc']:.2f}, a revolve, "
                     f"{ainfo['span_deg']:.1f} deg), roller pin bore at the tip", crank),
@@ -462,7 +445,8 @@ def crank_parts(M, dg, lay):
              ("dk", f"drive follower pin O3 h6 17-4PH H900 with an integral O4 x {GAP + PLATE_DROP:g} step, pressed in the follower plate (polished)", fpin),
              ("dk", "drive follower pin clip DIN 6799 RS 2.3 (polished)", fclip),
              ("dk", "drive flank roller MR63ZZ 3x6x2.5, radial axis (polished)", roller),
-             ("dk", f"drive flank roller pin ISO 2341-B 3x8 headed, head O{2 * HEAD_R:g} x {HEAD_T:g} on the skin side, {STEP_T:g} mm step, pressed in the arm tip (polished)", rpin),
+             ("dk", f"drive flank roller pin ISO 2341-A 3x{z_arm_top - 0.1 - z_h:.0f} headed (no split-pin hole: pressed), head O{2 * HEAD_R:g} x {HEAD_T:g} on the skin side, "
+                    f"{STEP_T:g} mm step, pressed in the arm tip (polished)", rpin),
              ("l1b", "drive crank pivot pin O3 h6 17-4PH H900, pressed in link 1b (polished)", ppin),
              ("l1b", "drive crank pivot pin clip DIN 6799 RS 2.3 (polished)", pclip)]
     return parts, info
@@ -552,11 +536,11 @@ def check_frames(M, dd, stops):
     return out
 
 
-def posed_drive_check(dd, n=60):
-    """posed exo.glb at clip frames (every len/n-th frame + the frames of largest |dK|): signed distance (mm, negative = inside) of the
-    moving drive pairs"""
+def posed_drive_check(dd, n=60, frames=None):
+    """posed exo.glb at clip frames (every len/n-th frame + the frames of largest |dK|; or the given frames, e.g. the workspace's closing
+    poses at the drive's working end): signed distance (mm, negative = inside) of the moving drive pairs"""
     import igl
-    src = trimesh.load(os.path.join(dd, "exo.glb")); C = json.load(open(os.path.join(dd, "clips.json")))
+    src = trimesh.load(os.path.join(dd, "exo.glb")); C = json.load(open(os.path.join(dd, "clips.json"))) if frames is None else dict(clips=[dict(name="given", frames=frames)])
     by = {}
     for node in src.graph.nodes_geometry:
         T_, gn = src.graph[node]; g, nm = node.split("|")[:2]; m = src.geometry[gn].copy(); m.apply_transform(T_); by[nm] = (g, m)
@@ -566,7 +550,7 @@ def posed_drive_check(dd, n=60):
              ("drive follower pin clip", "D9-02"), ("drive follower pin clip", "D8-03"), ("drive flank roller MR63ZZ", "K clock-spring cap"), ("D8-02a", "D8-02b"),
              ("D8-02a", "K clock-spring cap"), ("D8-02a", "D8-01"), ("drive crank pivot pin clip", "D9-01")]
     frs = [f for c in C["clips"] for f in c["frames"]]
-    pick = frs[::max(1, len(frs) // n)] + sorted(frs, key=lambda f: -abs(f.get("knuckle", {}).get("dK", 0.0)))[:12]
+    pick = (frs[::max(1, len(frs) // n)] + sorted(frs, key=lambda f: -abs(f.get("knuckle", {}).get("dK", 0.0)))[:12]) if frames is None else frs
     res = {}
     for a_, b_ in pairs:
         try: (ga, ma), (gb, mb) = get(a_), get(b_)
@@ -591,12 +575,12 @@ def posed_drive_check(dd, n=60):
     return res
 
 
-def drive_skin(dd, every=1):
+def drive_skin(dd, every=1, frames=None):
     """RL1.drive_skin (copied) on this build's drive parts (D9-* + drive hardware + link 1a with its flank lug): min signed skin distance per
-    part over EVERY clip frame (body_pose.posed, winding-number sign)"""
+    part over EVERY clip frame (body_pose.posed, winding-number sign); or over the given frames (the workspace's closing poses)"""
     import igl
     sys.path.insert(0, os.path.join(REPO, "pipeline", "avg")); import body_pose as BP
-    C = json.load(open(os.path.join(dd, "clips.json"))); src = trimesh.load(os.path.join(dd, "exo.glb")); BF = np.ascontiguousarray(BP.F, np.int64)
+    C = json.load(open(os.path.join(dd, "clips.json"))) if frames is None else dict(clips=[dict(name="workspace", frames=[dict(f, held=f.get("held", False)) for f in frames])]); src = trimesh.load(os.path.join(dd, "exo.glb")); BF = np.ascontiguousarray(BP.F, np.int64)
     parts = {}
     for node in src.graph.nodes_geometry:
         g, nm = node.split("|")[:2]
@@ -619,6 +603,17 @@ def drive_skin(dd, every=1):
     return dict(rule=">= 0.3 mm on every frame (gen-5 lobe ring: -0.26)", frames=nfr, every=every, min_mm=round(worst[1][0], 3), where=f"{worst[0]}: {worst[1][1]}",
                 passes=bool(worst[1][0] >= 0.3), per_part={k: dict(min_mm=round(v[0], 3), at=v[1], frames_lt_0p3=n03[k], frames_lt_2=n2[k]) for k, v in best.items()},
                 per_clip=per_clip)
+
+
+def working_end(dd, dk_min=29.3):
+    """the drive's working end (the gen-6 verifier's finding d: no judged clip frame reaches |dK| > 29.3 of the 46.25 cap): the posed
+    drive pairs and the drive skin over the workspace's closing, feasible poses at |dK| >= dk_min (workspace.json, the L1's frames)"""
+    W = json.load(open(os.path.join(dd, "workspace.json")))
+    frs = [p for p in W["poses"] if p.get("eval_feasible") and abs(p.get("knuckle", {}).get("dK", 0.0)) >= dk_min]
+    dks = [abs(p["knuckle"]["dK"]) for p in frs]
+    out = dict(poses=len(frs), dK_range=[round(min(dks), 2), round(max(dks), 2)] if dks else None)
+    if frs: out.update(pairs=posed_drive_check(dd, frames=frs), skin=drive_skin(dd, frames=frs))
+    return out
 
 
 def tess_safe(s, fine=True, report=None):
@@ -657,7 +652,10 @@ def material(n, user):
 def main():
     ap = argparse.ArgumentParser(); ap.add_argument("--out", default="user_roller_longdyad"); ap.add_argument("--l1", default="l1_roller-longdyad")
     ap.add_argument("--skip-base-search", action="store_true"); ap.add_argument("--checks-only", action="store_true")
+    ap.add_argument("--working-end-only", action="store_true", help="only the working-end check on the built design (no rebuild)")
     a = ap.parse_args(MY_ARGV); t0 = time.time(); dd = os.path.join(FULL, "designs", a.out); os.makedirs(os.path.join(dd, "step"), exist_ok=True)
+    if a.working_end_only:
+        r = working_end(dd); print(json.dumps(r, indent=1, default=float)); json.dump(r, open(os.path.join(dd, "judge", "working_end.json"), "w"), indent=1, default=float); return
     import concept_kit as KIT
     M, rep0 = RL1.fit(); D = M.D; lg = RL1.law_geom(M); M._lg = lg; dg = RL1.drive_geom(M)
     Bf = M.B; M._bench_K = BM.chain(M, np.array([[Bf.poses[i][k] for k in ("plane", "elev", "axial", "flex", "pron")] for i in range(len(Bf.idx))]))
@@ -688,8 +686,17 @@ def main():
     lay = drive_layout(M, lg, dg, l1b_body)
     ring, rep["lobe"], lobe_g = lobe_ring(M, lg, dg, lay)
     cp, rep["crank"] = crank_parts(M, dg, lay)
-    rep["crank"]["pivot_pin"] = ("O3 h6 pressed in link 1b: drawn as the press fit (pin overlapping its bore); a boolean bore through link 1b's 4-strip bar "
-                                 "raises OCC tolerances in place and its STEP then fails BRepCheck")
+    z_pp = rep["crank"]["pivot_pin_mm"]; i_1b = next(i for i, (g, n, s) in enumerate(lk) if n.startswith("D8-02b"))
+    try:
+        b_ = lk[i_1b][2].cut(disc(np.zeros(3), lay["dR"], PIN_R, z_pp[0] - 1.0, z_pp[0] + T + 1.0))
+        bad_, zero_, ns_ = USM.step_bad_faces(b_); ok_ = b_.isValid() and len(b_.Solids()) == 1 and bad_ == 0 and ns_ == 1
+    except Exception as e_: ok_, bad_, zero_ = False, str(e_), None
+    if ok_:
+        lk[i_1b] = (lk[i_1b][0], lk[i_1b][1].replace("carries the crank pivot pin", "carries the crank pivot pin in an O3 H7 bore"), b_)
+        rep["crank"]["pivot_pin"] = f"O3 h6 pressed in an O3 H7 bore through link 1b (bore cut; STEP round trip 0 bad faces, {zero_} zero-area)"
+    else:
+        rep["crank"]["pivot_pin"] = (f"O3 h6 pressed in link 1b: drawn as the press fit (pin overlapping its bore); the bore cut fails R7's STEP round trip ({bad_} bad faces)")
+    print(f"crank pivot pin: {rep['crank']['pivot_pin']}", flush=True)
     parts += lk
     parts.append(("l2", f"D9-02 drive lobe ring: 17-4PH H900, wire-EDM (taper {rep['lobe']['e_ext_to_u2_deg']:.1f} deg along the follower axis), profile r "
                         f"{rep['lobe']['profile_r_mm'][0]:.2f} -> {rep['lobe']['profile_r_mm'][1]:.2f} mm ({rep['lobe']['arcs']} 3-point arcs), dwell r {rep['lobe']['dwell_r_mm']:.2f}, "
@@ -775,6 +782,9 @@ def main():
     print(f"kinematics: {rep['kinematics_exact']} ({time.time() - t0:.0f} s)", flush=True)
     rep["drive_skin"] = drive_skin(dd)
     print(f"drive skin: { {k: v for k, v in rep['drive_skin'].items() if k != 'per_clip'} }", flush=True)
+    json.dump(rep, open(os.path.join(dd, "build.json"), "w"), indent=1, default=float)
+    rep["working_end"] = working_end(dd)
+    print(f"working end (workspace |dK| >= 29.3): {json.dumps(rep['working_end'], default=float)[:1500]}", flush=True)
     json.dump(rep, open(os.path.join(dd, "build.json"), "w"), indent=1, default=float)
     print(f"done in {time.time() - t0:.0f} s", flush=True)
 

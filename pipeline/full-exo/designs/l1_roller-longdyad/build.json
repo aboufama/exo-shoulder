@@ -1082,7 +1082,7 @@
    ],
    "drive flank lug keep-out (link 1a: the conju | drive roller keep-out (MR63ZZ 3x6x2.5, radia": [
     0.142,
-    99.8,
+    101.8,
     0.0,
     0.0
    ],
@@ -1214,7 +1214,7 @@
    ],
    "drive bell crank bent arm keep-out (6 x 3 mm | K lower plate keep-out (O20 x 3, link 1a) wi": [
     3.103,
-    7.8,
+    97.8,
     0.0,
     null
    ],
@@ -1332,6 +1332,12 @@
     33.3,
     null
    ],
+   "drive bell crank bent arm keep-out (6 x 3 mm | link 1a strap keep-out (8 x 3 mm Ti, J1 -> K": [
+    12.155,
+    101.8,
+    0.0,
+    null
+   ],
    "drive crank pivot pin keep-out (O3 h6 harden | K lower plate keep-out (O20 x 3, link 1a) wi": [
     12.197,
     -6.2,
@@ -1342,12 +1348,6 @@
     12.441,
     -14.2,
     46.3,
-    null
-   ],
-   "drive bell crank bent arm keep-out (6 x 3 mm | link 1a strap keep-out (8 x 3 mm Ti, fitted ": [
-    12.492,
-    101.8,
-    0.0,
     null
    ],
    "drive bell crank boss keep-out (O10 x 6 mm,  | K lower plate keep-out (O20 x 3, link 1a) wi": [
@@ -1368,14 +1368,14 @@
     46.3,
     null
    ],
-   "drive roller keep-out (MR63ZZ 3x6x2.5, radia | link 1a strap keep-out (8 x 3 mm Ti, fitted ": [
-    14.397,
+   "drive roller keep-out (MR63ZZ 3x6x2.5, radia | link 1a strap keep-out (8 x 3 mm Ti, J1 -> K": [
+    13.618,
     101.8,
     0.0,
     null
    ],
-   "drive roller stub + retaining head keep-out  | link 1a strap keep-out (8 x 3 mm Ti, fitted ": [
-    14.889,
+   "drive roller stub + retaining head keep-out  | link 1a strap keep-out (8 x 3 mm Ti, J1 -> K": [
+    14.133,
     101.8,
     0.0,
     null
@@ -1386,20 +1386,20 @@
     46.3,
     null
    ],
-   "drive bell crank boss keep-out (O10 x 6 mm,  | link 1a strap keep-out (8 x 3 mm Ti, fitted ": [
-    16.418,
-    101.8,
-    0.0,
-    null
-   ],
    "drive bell crank bent arm keep-out (6 x 3 mm | link 2 strap keep-out (8 x 3 mm Ti, fitted u": [
     16.622,
     101.8,
     0.0,
     null
    ],
-   "drive crank pivot pin keep-out (O3 h6 harden | link 1a strap keep-out (8 x 3 mm Ti, fitted ": [
-    16.712,
+   "drive bell crank boss keep-out (O10 x 6 mm,  | link 1a strap keep-out (8 x 3 mm Ti, J1 -> K": [
+    16.914,
+    101.8,
+    0.0,
+    null
+   ],
+   "drive crank pivot pin keep-out (O3 h6 harden | link 1a strap keep-out (8 x 3 mm Ti, J1 -> K": [
+    16.989,
     101.8,
     0.0,
     null
@@ -1482,8 +1482,8 @@
     0.0,
     null
    ],
-   "drive crank pin clip keep-out (DIN 6799 RS 2 | link 1a strap keep-out (8 x 3 mm Ti, fitted ": [
-    22.058,
+   "drive crank pin clip keep-out (DIN 6799 RS 2 | link 1a strap keep-out (8 x 3 mm Ti, J1 -> K": [
+    22.554,
     101.8,
     0.0,
     null
@@ -1548,8 +1548,8 @@
     11.8,
     null
    ],
-   "drive lobe keep-out (hub-2 rim lobe on link  | link 1a strap keep-out (8 x 3 mm Ti, fitted ": [
-    27.831,
+   "drive lobe keep-out (hub-2 rim lobe on link  | link 1a strap keep-out (8 x 3 mm Ti, J1 -> K": [
+    28.287,
     7.8,
     0.0,
     null
@@ -1877,9 +1877,9 @@
      0.1541
     ],
     "L1a": [
-     1.6656,
-     1.6647,
-     1.6656
+     1.1225,
+     1.1225,
+     0.0
     ],
     "L1b": [
      0.0984,
@@ -2006,9 +2006,9 @@
      0.1541
     ],
     "L1a": [
-     1.6657,
-     1.6647,
-     1.6657
+     1.1225,
+     1.1225,
+     0.0
     ],
     "L1b": [
      0.0984,
@@ -2135,9 +2135,9 @@
      0.1541
     ],
     "L1a": [
-     1.6657,
-     1.6647,
-     1.6657
+     1.1225,
+     1.1225,
+     0.0
     ],
     "L1b": [
      0.0984,
@@ -2264,9 +2264,9 @@
      0.1541
     ],
     "L1a": [
-     1.6657,
-     1.6647,
-     1.6657
+     1.1225,
+     1.1225,
+     0.0
     ],
     "L1b": [
      0.0983,
@@ -2393,9 +2393,9 @@
      0.1541
     ],
     "L1a": [
-     1.6656,
-     1.6646,
-     1.6656
+     1.1225,
+     1.1225,
+     0.0
     ],
     "L1b": [
      0.0984,
@@ -2522,9 +2522,9 @@
      0.1541
     ],
     "L1a": [
-     1.6657,
-     1.6647,
-     1.6657
+     1.1225,
+     1.1225,
+     0.0
     ],
     "L1b": [
      0.0984,
@@ -2651,9 +2651,9 @@
      0.1541
     ],
     "L1a": [
-     1.6657,
-     1.6647,
-     1.6657
+     1.1225,
+     1.1225,
+     0.0
     ],
     "L1b": [
      0.0984,
@@ -2780,9 +2780,9 @@
      0.1541
     ],
     "L1a": [
-     1.6657,
-     1.6647,
-     1.6657
+     1.1225,
+     1.1225,
+     0.0
     ],
     "L1b": [
      0.0984,
@@ -2909,9 +2909,9 @@
      0.1541
     ],
     "L1a": [
-     1.6656,
-     1.6647,
-     1.6656
+     1.1225,
+     1.1225,
+     0.0
     ],
     "L1b": [
      0.0983,
@@ -3038,9 +3038,9 @@
      0.1541
     ],
     "L1a": [
-     1.6656,
-     1.6647,
-     1.6656
+     1.1225,
+     1.1225,
+     0.0
     ],
     "L1b": [
      0.0983,
@@ -3981,205 +3981,5 @@
   "max_err_deg": 0.0006,
   "dK_max_deg": 46.248,
   "cam_closure_max_mm": 0.0
- },
- "clips": {
-  "Raise overhead": {
-   "frames": 181,
-   "held": 0,
-   "follow": 1.0,
-   "reasons": {},
-   "adjacent_pairs": {},
-   "min_skin_mm": 1.82,
-   "min_adj_mm": 0.28,
-   "knee_angle": [
-    86.2,
-    123.2
-   ],
-   "knuckle": {
-    "frames_K_open": 16,
-    "dK_max": 1.51
-   }
-  },
-  "Drink from a cup": {
-   "frames": 178,
-   "held": 0,
-   "follow": 1.0,
-   "reasons": {},
-   "adjacent_pairs": {},
-   "min_skin_mm": 2.58,
-   "min_adj_mm": 0.28,
-   "knee_angle": [
-    86.2,
-    88.2
-   ],
-   "knuckle": {
-    "frames_K_open": 13,
-    "dK_max": 0.91
-   }
-  },
-  "Comb hair": {
-   "frames": 202,
-   "held": 0,
-   "follow": 1.0,
-   "reasons": {},
-   "adjacent_pairs": {},
-   "min_skin_mm": 2.38,
-   "min_adj_mm": 0.28,
-   "knee_angle": [
-    86.2,
-    130.4
-   ],
-   "knuckle": {
-    "frames_K_open": 33,
-    "dK_max": 5.4
-   }
-  },
-  "Reach a high shelf": {
-   "frames": 157,
-   "held": 0,
-   "follow": 1.0,
-   "reasons": {},
-   "adjacent_pairs": {},
-   "min_skin_mm": 2.32,
-   "min_adj_mm": 0.28,
-   "knee_angle": [
-    86.2,
-    130.5
-   ],
-   "knuckle": {
-    "frames_K_open": 118,
-    "dK_max": 29.31
-   }
-  },
-  "Wash opposite shoulder": {
-   "frames": 193,
-   "held": 0,
-   "follow": 1.0,
-   "reasons": {},
-   "adjacent_pairs": {},
-   "min_skin_mm": 2.69,
-   "min_adj_mm": 0.28,
-   "knee_angle": [
-    86.2,
-    89.2
-   ],
-   "knuckle": {
-    "frames_K_open": 128,
-    "dK_max": 24.79
-   }
-  },
-  "Reach back pocket": {
-   "frames": 145,
-   "held": 0,
-   "follow": 1.0,
-   "reasons": {},
-   "adjacent_pairs": {},
-   "min_skin_mm": 2.56,
-   "min_adj_mm": 0.28,
-   "knee_angle": [
-    87.5,
-    113.9
-   ],
-   "knuckle": {
-    "frames_K_open": 54,
-    "dK_max": 13.17
-   }
-  },
-  "Wave": {
-   "frames": 172,
-   "held": 0,
-   "follow": 1.0,
-   "reasons": {},
-   "adjacent_pairs": {},
-   "min_skin_mm": 2.35,
-   "min_adj_mm": 0.28,
-   "knee_angle": [
-    86.2,
-    107.9
-   ],
-   "knuckle": {
-    "frames_K_open": 0,
-    "dK_max": 0.0
-   }
-  },
-  "Walking arm swing": {
-   "frames": 109,
-   "held": 0,
-   "follow": 1.0,
-   "reasons": {},
-   "adjacent_pairs": {},
-   "min_skin_mm": 2.7,
-   "min_adj_mm": 0.28,
-   "knee_angle": [
-    86.2,
-    86.9
-   ],
-   "knuckle": {
-    "frames_K_open": 109,
-    "dK_max": 10.29
-   }
-  }
- },
- "slaved_vs_clips": {
-  "driven_frames": 471,
-  "driven_max_err_deg": 0.0021,
-  "dwell_frames": 866,
-  "dwell_max_dK_deg": 0.0
- },
- "workspace": {
-  "poses": 1432,
-  "closes": 0.7095,
-  "feasible_kin_parts": 0.7095,
-  "driven_feasible": 513
- },
- "drive_skin": {
-  "rule": ">= 0.3 mm on every frame (gen-5 lobe ring: -0.26)",
-  "frames": 1337,
-  "every": 1,
-  "min_mm": 2.317,
-  "where": "drive flank lug keep-out (link 1a: the c: Reach a high shelf frame 125",
-  "passes": true,
-  "per_part": {
-   "drive flank lug keep-out (link 1a: the c": {
-    "min_mm": 2.317,
-    "at": "Reach a high shelf frame 125",
-    "frames_lt_0p3": 0,
-    "frames_lt_2": 0
-   },
-   "drive roller stub + retaining head keep-": {
-    "min_mm": 6.035,
-    "at": "Comb hair frame 105",
-    "frames_lt_0p3": 0,
-    "frames_lt_2": 0
-   },
-   "drive roller keep-out (MR63ZZ 3x6x2.5, r": {
-    "min_mm": 6.363,
-    "at": "Comb hair frame 105",
-    "frames_lt_0p3": 0,
-    "frames_lt_2": 0
-   },
-   "drive bell crank bent arm keep-out (6 x ": {
-    "min_mm": 5.447,
-    "at": "Comb hair frame 91",
-    "frames_lt_0p3": 0,
-    "frames_lt_2": 0
-   },
-   "drive lobe keep-out (hub-2 rim lobe on l": {
-    "min_mm": 4.472,
-    "at": "Raise overhead frame 77",
-    "frames_lt_0p3": 0,
-    "frames_lt_2": 0
-   }
-  },
-  "per_clip": {
-   "Raise overhead": 3.444,
-   "Drink from a cup": 2.584,
-   "Comb hair": 2.465,
-   "Reach a high shelf": 2.317,
-   "Wash opposite shoulder": 2.687,
-   "Reach back pocket": 2.561,
-   "Wave": 3.669,
-   "Walking arm swing": 2.7
-  }
  }
 }

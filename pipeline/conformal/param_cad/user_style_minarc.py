@@ -320,6 +320,49 @@ N_STRIPS = int(os.environ.get("MINARC_STRIPS", "4"))                            
 CAP_STYLE = os.environ.get("MINARC_CAP", "dome")                                        # dome (torispherical) | flat (the O20 x 12.25 envelope)
 
 
+def step_bad_faces(s):
+    """R7's own test (judge/part_validity.py) run on a solid in memory: write it to STEP, read it back as a supplier would and
+    count the faces that fail BRepCheck; plus the zero-area faces in memory (the slivers a glue leaves where two strips' side
+    profiles share an edge exactly: a face bounded by the same line and the same arc twice, valid in memory, invalid in STEP).
+    Returns (bad faces after the round trip, zero-area faces in memory, solid count after the round trip)."""
+    import tempfile
+    from OCP.BRepCheck import BRepCheck_Analyzer
+    fd, fn = tempfile.mkstemp(suffix=".step"); os.close(fd)
+    try:
+        cq.exporters.export(cq.Workplane().add(s), fn); r = cq.importers.importStep(fn).val()
+        bad = sum(1 for fc in r.Faces() if not BRepCheck_Analyzer(fc.wrapped).IsValid()) + (0 if r.isValid() else 1)
+        return bad, sum(1 for fc in s.Faces() if fc.Area() < 1e-4), len(r.Solids())
+    finally: os.remove(fn)
+
+
+GLUE_FUZZ = (None, 1e-4, 1e-3)                                                             # exact glue first, then fuzzy fuses (mm)
+
+
+def glue_strips(parts, label, keep=None):
+    """glue the side-by-side strips into ONE solid that passes R7 after a STEP round trip (gen-6 link 1b: the exact glue left 8
+    zero-area faces on the strip planes, valid in memory, 1 face failing BRepCheck in the exported STEP). Tries the exact glue
+    (US.glue), then fuzzy fuses (GLUE_FUZZ: coincident strip edges within the fuzz merge into one edge, so no sliver face is left);
+    of the candidates that are one valid solid with 0 bad faces after the round trip, the one with the fewest zero-area faces wins
+    (the first clean one stops the search; keep: an extra acceptance test on the candidate). Returns (solid or None, how)."""
+    tried, ok = [], []
+    for fz in GLUE_FUZZ:
+        tag = "exact glue" if fz is None else f"fuzzy fuse {fz:g} mm"
+        try:
+            sol = parts[0]
+            for p_ in parts[1:]: sol = US.glue(sol, p_) if fz is None else sol.fuse(p_, tol=fz).clean()
+        except Exception as e_: tried.append(f"{tag}: {e_}"); continue
+        if not sol.isValid() or len(sol.Solids()) != 1: tried.append(f"{tag}: invalid in memory"); continue
+        bad, zero, ns = step_bad_faces(sol); tried.append(f"{tag}: {bad} bad faces after STEP, {zero} zero-area")
+        if bad == 0 and ns == 1 and (keep is None or keep(sol)):
+            ok.append((zero, len(ok), sol, tag))
+            if zero == 0: break                                                            # clean: no sliver either
+    if not ok:
+        print(f"  {label}: no glue passes the STEP round trip ({'; '.join(tried)}) - one profile", flush=True); return None, "; ".join(tried)
+    zero, _, sol, tag = min(ok, key=lambda c: c[:2])
+    print(f"  {label}: strips glued by {tag} ({'; '.join(tried)})", flush=True)
+    return sol, f"{tag}; STEP round trip 0 bad faces, {zero} zero-area (tried: {'; '.join(tried)})"
+
+
 def profile_link_split(label, ex, ey, start, end, Dq, Rq, axes, hr2, t=T, w=W, n=None):
     """the strap is tilted across its width (one edge of a flat bar 1.7-1.9 mm above it on links 1b / 2): the bar as N_STRIPS
     side-view profiles side by side across the width (each w / N wide), each through the strap stations of ITS strip (max over
@@ -340,12 +383,9 @@ def profile_link_split(label, ex, ey, start, end, Dq, Rq, axes, hr2, t=T, w=W, n
         D_, R_ = np.concatenate(D_), np.concatenate(R_)
         sol_i, r_i = profile_link(f"{label} (strip {i + 1}/{n})", ex, ey, start, end, D_, R_, axes, hr2, t, hi - lo, side=(lo, hi))
         parts.append(sol_i); reps.append(r_i)
-    try:
-        sol = parts[0]
-        for p_ in parts[1:]: sol = US.glue(sol, p_)
-    except Exception as e_: sol = None; print(f"  {label}: strips do not glue ({e_}) - one profile", flush=True)
-    if sol is None or not sol.isValid() or len(sol.Solids()) != 1: return profile_link(label, ex, ey, start, end, Dq, Rq, axes, hr2, t, w)
-    rep = dict(split=f"{n} strips of {w / n:.2f} mm glued side by side", strips=reps,
+    sol, how = glue_strips(parts, label)
+    if sol is None: return profile_link(label, ex, ey, start, end, Dq, Rq, axes, hr2, t, w)
+    rep = dict(split=f"{n} strips of {w / n:.2f} mm glued side by side ({how})", strips=reps,
                over_L1_max_outside_footprints=max((r_["over_L1_max_outside_footprints"] or 0) for r_ in reps),
                max_climb=max(r_["max_climb"] for r_ in reps), process=reps[0]["process"].replace("ONE side-view sketch", f"{n} side-view sketches side by side").replace("; 3+2-axis or wire EDM)", "; 3+2-axis milling - a wire cannot cut strips of different profiles side by side)") if n > 1 else reps[0]["process"])
     print(f"{label}: {n}-strip bar glued, valid {sol.isValid()}, solids {len(sol.Solids())}", flush=True)

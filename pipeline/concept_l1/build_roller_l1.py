@@ -358,6 +358,57 @@ def drive_parts(M, lg, dg):
 
 
 # ---------------------------------------------------------------------------------------------------- parts
+L1A_PATH = dict(ramp_deg=60.0, R=2.0, clr_J1=0.15, run_K=0.2, ext=3.0)      # link 1a's line/arc chain (the full CAD's: one source for both)
+
+
+def link1a_path(M):
+    """the centre-line chain of link 1a in span(u1, uK) (2-D: x along u1, y across; origin GH, both axes through it): start at the
+    J1 seat face (J1 skirt + clr_J1: the climb starts outside the base's J1 upper boss - the gen-6 L1's R6 fault was the model
+    strap's footprint lift rising INSIDE it), concave bend R, ramp at <= ramp_deg (the user's 60-deg ruling), convex bend R onto the
+    K pad plane, a short run to the K seat face (solved, >= hr_K + 0.05). Returns (ex, ey, start, segs, info). Used by the L1 strap
+    keep-out below and by pipeline/conformal/param_cad/user_style_roller.py (link 1a), so both are the same part."""
+    sys.path.insert(0, os.path.join(REPO, "pipeline", "conformal", "param_cad")); import sketch2d as SK
+    Uu, C, F4, hr = MIN.joints4(M); u1, uK = unit(Uu[0]), unit(Uu[1]); T = T_LINK
+    assert np.linalg.norm(C[0]) < 1e-6 and np.linalg.norm(C[1]) < 1e-6, "link 1a's chain assumes J1 and K axes through GH"
+    ex = u1; ey = unit(uK - (uK @ ex) * ex); phi = math.acos(float(np.clip(uK @ ex, -1, 1)))
+    ha, hb = F4[0] + T / 2, F4[1] + T / 2; R = L1A_PATH["R"]; Ls_a = hr[0] + L1A_PATH["clr_J1"]; a1 = L1A_PATH["run_K"]
+    B = hb * np.array([math.cos(phi), math.sin(phi)]); back = np.array([math.sin(phi), -math.cos(phi)])
+    start = (ha, Ls_a, math.pi / 2); best = None
+    for a_deg in np.arange(L1A_PATH["ramp_deg"], 20.0, -0.5):
+        a = math.radians(a_deg)
+        x1, y1, p1 = SK.advance(*start, -1.0 / R, R * a); d1 = np.array([math.cos(p1), math.sin(p1)])
+        x2, y2, p2 = SK.advance(0.0, 0.0, p1, 1.0 / R, R * (a + phi)); v2 = np.array([x2, y2]); d2 = np.array([math.cos(p2), math.sin(p2)])
+        sol = np.linalg.solve(np.c_[d1, -back], B - np.array([x1, y1]) - v2 - a1 * d2); Lr, Ls_b = float(sol[0]), float(sol[1])
+        if Lr >= 0.0 and Ls_b >= hr[1] + 0.05: best = (a, Lr, Ls_b); break
+    assert best is not None, "link 1a: no ramp <= 60 deg closes the dyad"
+    a, Lr, Ls_b = best
+    segs = [(-1.0 / R, R * a), (0.0, Lr), (1.0 / R, R * (a + phi)), (0.0, a1)]
+    end = SK.end_pose(start, segs); E = B + Ls_b * back
+    assert np.allclose(end[:2], E, atol=1e-6) and abs(end[2] - (math.pi / 2 + phi)) < 1e-9, (end, E)
+    return ex, ey, start, segs, dict(ramp_deg=round(math.degrees(a), 2), ramp_mm=round(Lr, 3), K_run_mm=a1, bend_R_centre_mm=R, bend_R_inner_mm=R - T / 2,
+                                    seat_J1_mm=round(Ls_a, 3), seat_K_mm=round(Ls_b, 3), dyad_deg=round(math.degrees(phi), 3), sd_b=back,
+                                    climb_starts_at_J1_skirt_plus_mm=L1A_PATH["clr_J1"])
+
+
+def link1a_strap_mesh(M):
+    """the L1 keep-out of link 1a = the full CAD's bar: the 8 x 3 section swept along link1a_path, extended ext mm straight into each
+    pad (over the J1 / K lower plates, same member) so the strap closes onto the plate keep-outs; a closed mesh, member-1 frame"""
+    sys.path.insert(0, os.path.join(REPO, "pipeline", "conformal", "param_cad")); import sketch2d as SK
+    ex, ey, start, segs, info = link1a_path(M); e = L1A_PATH["ext"]; nP = unit(np.cross(ex, ey))
+    st = SK.advance(*start, 0.0, -e); segs2 = [(0.0, e)] + list(segs) + [(0.0, e)]
+    P, Hd, _ = SK.sample(st, segs2, m=24); keep = np.r_[True, np.linalg.norm(np.diff(P, axis=0), axis=1) > 1e-6]; P, Hd = P[keep], Hd[keep]
+    nrm = np.c_[np.sin(Hd), -np.cos(Hd)]; T, W = T_LINK, W_LINK
+    ring = lambda p, n_: [(p[0] + s * T / 2 * n_[0]) * ex + (p[1] + s * T / 2 * n_[1]) * ey + w * W / 2 * nP for s, w in ((-1, -1), (1, -1), (1, 1), (-1, 1))]
+    V = np.array([v for p, n_ in zip(P, nrm) for v in ring(p, n_)]); F = []; N = len(P)
+    for i in range(N - 1):
+        for k in range(4):
+            a, b = 4 * i + k, 4 * i + (k + 1) % 4; F += [[a, b, b + 4], [a, b + 4, a + 4]]
+    F += [[0, 2, 1], [0, 3, 2], [4 * (N - 1), 4 * (N - 1) + 1, 4 * (N - 1) + 2], [4 * (N - 1), 4 * (N - 1) + 2, 4 * (N - 1) + 3]]
+    m = trimesh.Trimesh(V, np.array(F), process=True); trimesh.repair.fix_normals(m)
+    assert m.is_watertight and m.volume > 0, "link 1a strap mesh not closed"
+    info.pop("sd_b"); return m, info
+
+
 def build_parts(M, lg, dg, knee_geom=None):
     """[(group, member, name, mesh in the MEMBER-LOCAL home frame, material)]; member 5 = arm-fixed (canonical arm frame)"""
     D = M.D; P = D.p; tr = M.tr; tp = P["tp"]; sn = D.sn; fr = M.fr; lc = float(P["lc"])
@@ -366,10 +417,12 @@ def build_parts(M, lg, dg, knee_geom=None):
     prof = MIN.link_rows(M); straps = {}
     for nm in ("L1a", "L1b", "L2"):
         lk, rows = prof[nm]; straps[nm] = MIN.link_solid(M, lk, rows)
+    straps["L1a_model"] = straps["L1a"]                                         # the model's strap (its footprint lift rises inside J1's upper boss: R6 0.98)
+    straps["L1a"], dg["link1a_chain"] = link1a_strap_mesh(M)                    # gen-6 fix: the full CAD's chain, climb from J1's skirt + 0.15 on a <= 60-deg ramp
     out.append(("base", 0, "J1 upper boss + cap keep-out (O20, F+3.15..F+12.25; base = J1's upper member, carried directly by the scapula handler at the hub ring)",
                 REF.cyl(H(0), U[0], UP, CROWN, r=hr[0]), "ti"))
     out.append(("l1a", 1, "J1 lower plate keep-out (O20 x 3, link 1a)", REF.cyl(H(0), U[0], 0.0, PLATE, r=hr[0]), "ti"))
-    out.append(("l1a", 1, "link 1a strap keep-out (8 x 3 mm Ti, fitted underside, J1 -> K)", straps["L1a"], "ti"))
+    out.append(("l1a", 1, f"link 1a strap keep-out (8 x 3 mm Ti, J1 -> K: the full CAD's line/arc chain, climb from J1's skirt + {L1A_PATH['clr_J1']:g} on a {dg['link1a_chain']['ramp_deg']:g}-deg ramp, R{L1A_PATH['R']:g} bends)", straps["L1a"], "ti"))
     info = {}
     smp = lambda m: np.r_[np.asarray(m.vertices), trimesh.sample.sample_surface_even(m, 4000, seed=2)[0]]
     for key, k, lower_strap, glo, mlo, gup, mup, label in (("K", 1, "L1a", "l1a", 1, "l1b", 7, "K"), ("J2", 2, "L1b", "l1b", 7, "l2", 2, "J2")):
