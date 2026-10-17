@@ -277,3 +277,42 @@ What the class taught (new knowledge, beyond this morphology):
   q0 policy.
 - The open lever this control points at is the one the round plan lists first: remove th's axial dependence with a
   humerus-axial J3, which changes which poses bind hub 2. A base-side relay does not change them.
+
+## Audit (independent auditor, 2026-10-17 ~19:13 UTC): the death STANDS
+
+The question: is the bad number a modelling bug, a wrong convention, a parameter range that missed the obvious region,
+or an over-strict check? Measured, in order:
+
+1. **Reproduction.** The best (clampC-g31-1) re-evaluated through `docs/concepts/models/acromion-relay-4r.py check` on
+   Bench(60,160) fast gives the claim exactly: 42.74 near-touch / 41.62 plain, reach 0.875, follow 1.0, ib14 0.5026,
+   ib10 0.3334, contact 0.005, hub 2 0.061 in band, link 2 0.048, min metal 0.63 mm, 14 relay poses, 0 islands.
+2. **Convergence gate**, recomputed from the sweep file in time order: +0.36 score over the second half, +0.36 over the
+   last third, top-5 spread 0.13. Converged, as claimed.
+3. **Coverage (the one gap found).** All 555 configurations were on the sigma -1 closure branch. The catalogue's sweep
+   box lists sigma +-1. I ran two probes, 2 niced processes, appended to the sweep as runs `audit-cma-sigma+1` and
+   `audit-lhs-specbox`:
+   - CMA-ES on sigma +1 from the best: 17 configurations before the budget cap. Best **52.20** (reach 0.831, ib14 0.467,
+     hub 2 0.00 in band).
+   - Latin hypercube over the catalogue's whole sweep box, both branches: 96 configurations, 79 honest. Best **56.45**
+     (sigma -1) and **56.66** (sigma +1); max ib14 0.652; max hub 2 in band 0.117.
+   Neither probe comes near 42.74. The other branch puts hub 2 just as far out.
+4. **The bound on the class, from every configuration on file (668).** Hub 2 is never above 0.12 in band, and ib14 is
+   never above 0.68. The 0.68 comes at reach 0.65 with gap 67. At the best in-band seen, the in-band term alone costs
+   >= 22 gap points. That is above the round's 17.5 line even with perfect reach and zero contact. The explored
+   in-band / reach front is: ib14 0.68 at reach 0.65, 0.55 at 0.83, 0.51 at 0.875, 0.43 at 0.90.
+5. **Model reading.**
+   - The q0 clamp policy, closure branch, J1 reference carried by link 0, own-angle stops and th margin read in `th`
+     follow tools/concept_kit.py. Mode-A poses are the plain 3R.
+   - No over-strict check moves the number. The near-touch objective costs 1.12 points (plain 41.62). The full-grid
+     flood drops 0 islands, so static equals connected. The sub-chain margin rule touches only relay poses.
+   - One check is lenient: hub 0 is modelled at the standard 12.25 mm crown, without the +5 mm J0 spring stack that
+     the catalogue lists. That extra height faces outward and changes the crown / link-0 clearance, not the skin face.
+     It does not move the death. pinknee-scapular-relay-4r should model it.
+6. **The template's reference line is stale.** "Within 10 of 68.93 (the champion 3R) or better" is met by the claim
+   itself. The binding lines are this round's: 30 fast at 300 evaluations (catalogue gate 0) and <= 17.5 frozen exact
+   Bench(110,360) (round J1 bar). The design misses them by 12.7 (fast) and 34.3 (frozen exact 51.83, not re-run in this
+   time box).
+
+**Measured reason the death stands:** hub 2 of a plain O20 spherical 3R at the acromion-cap seats must clear a
+60-116 mm skin span about GH (p50 / max of the claim's K3 march; not re-marched here), so it is at most 0.12 in band on every branch and in every corner of the spec box. That
+puts ib14 at 0.68 or below, so gap >= 22 even at perfect reach. The base-side relay adds reach only and never moves hub 2.

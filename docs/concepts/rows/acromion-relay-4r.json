@@ -15,12 +15,12 @@
  "inband10": 0.3334,
  "contact": 0.005,
  "gap": 42.74,
- "v_reach": null,
- "v_follow": null,
- "v_inband14": null,
- "v_inband10": null,
- "v_gap": null,
- "n_configs": 555,
+ "v_reach": 0.875,
+ "v_follow": 1.0,
+ "v_inband14": 0.5026,
+ "v_inband10": 0.3334,
+ "v_gap": 42.74,
+ "n_configs": 668,
  "verdict": "DEAD at gate 0: 42.74 near-touch / 41.62 plain Bench(60,160) fast (score 84.46) after 555 configs (43.72 at 300 > the 30 kill line), converged (0.36 / 0.36 / 0.13). Relay worth 8.84 gap points, all reach (T-0 control 51.58, reach 0.788 -> 0.875); in-band unchanged 0.502 -> 0.503. Frozen exact Bench(110,360): 51.83 plain / 53.94 near-touch (reach 0.789, overhead 10/28, ib14 0.503, contact 0.010, 0 islands) vs its T-0 control 56.40 (reach 0.742, overhead 10/28): relay worth 4.57 frozen, 0 overhead poses. Twin cell worse at every k2 (45.73 / 52.28 / 55.60). Value: the control for pinknee-scapular-relay-4r, the shared full-grid flood, and the stop-relay re-measure.",
  "limiter": "hub 2 at F 124 mm (in band 0.06; link 1 0.23, link 2 0.05), set by MODE-A poses (q0 = 0) where J2 crosses deltoid / acromion skin 107-116 mm out: ws (-75, 60, +60) 116 mm (J2 S 32/10), overhead (0..30, 150, 0) 107-113 mm, (0, 105, 0) 110 mm. The relay acts only with J2 on a stop, so it cannot move this binder (T-0 control has identical levels).",
  "note": "BEST clampC-g31-1: az_c 43.15 el_c 88.23 a0 28.30 T 47.4 (T_eff 47) a1 50.21 a2 60.26 wd 92.03 wa -9.03 sigma -1 q 0.997 m_lo 5.0 m_hi 5.01 m_sw 5 lift1 1.08 lift2 1.08 end_extra 0 -> near-touch 42.74 / plain 41.62, reach 0.875, follow 1.0, ib14 0.503, ib10 0.333, contact 0.005, min metal 0.63 mm, overhead ws 6/12 clip 5/5, min th margin 5.05, sub-chain 7.91, q0 -11.5..38.5, 14 relay ws poses taken, 0 islands (grid conn 0.836); K6 1 mm radial 44.63. GATE (merged time order): 0.36 / 0.36 / 0.13 (clampC 0.36/0.36/0.13; clampA 1.30/0.77/0.80, best 45.82). Proposer's pole20 45/70 kit number 45.82 reproduced exactly (connect 0). FLOOD (tools/spare_flood.py, shared): stop-relay section-5 setup sparse 360-node 0.669 / full grid 0.908 (rest seeds) / 0.911 (mode-A seeds) / static 0.922 - judge's 0.67 / 0.91 reproduced. STOP-RELAY RE-MEASURE (instrument change, C best k4771 at O20, Bench(60,160) fast): old connected() 47.75 (7 islands) -> full-grid flood 43.09 (0 islands) = static; kinematic Bench(110,360) ws plain 0.644 / sparse 0.647 / full 0.764, overhead 11 -> 16/28. Feel: J0 0.090 N.m at max |q0| = 0.69 N at the cuff. Held-out envelope poses are flood transit nodes only. FROZEN EXACT Bench(110,360) (fit Bench(60,160) fast, K6 1 mm): 51.83 plain / 53.94 near-touch, reach 0.789 (284/360), overhead 10/28, follow 1.0, ib14 0.503, ib10 0.337, contact 0.010, min metal 0.51 mm, 17 relay ws taken, 0 islands, th margin 5.00, sub 5.57; T-0 control frozen 56.40 (reach 0.742, overhead 10/28).",
@@ -34,5 +34,7 @@
   "closed_loops": 0,
   "springs": 1,
   "components": "4 x O20 hub (MR117-2RS pair, 12.25 stack); J0 +5 mm stack for a preloaded double-leg torsion spring; O3 dowel stops in arc slots on J0's and J2's own angles; 3 x 12x3 Ti straps; K7 neck"
- }
+ },
+ "v_contact": 0.005,
+ "audit": "AUDIT 2026-10-17 ~19:13 UTC: death STANDS. Best clampC-g31-1 reproduced exactly through the model (Bench(60,160) fast: 42.74 near-touch / 41.62 plain, reach 0.875, ib14 0.5026, contact 0.005, hub 2 0.061, 5 s). Gate recomputed from the sweep in time order: +0.36 / +0.36 / spread 0.13 = converged. Coverage gap found and closed: the 555 configs were all sigma -1 (the spec box lists sigma +-1) - CMA-ES on sigma +1 from the best (17 configs, budget-capped) best 52.20 (reach 0.831, ib14 0.467, hub 2 0.00); Latin-hypercube over the catalogue's full sweep box, both branches (96 configs, 79 honest): best 56.45 (sigma -1) / 56.66 (sigma +1), max ib14 0.652, max hub 2 in band 0.117. Over all 668 configs hub 2 is never > 0.12 in band and ib14 never > 0.68 (at reach 0.65, gap 67): the in-band term alone costs >= 22 points at the best in-band seen, above the 17.5 round line at perfect reach. No modelling bug or over-strict check found (near-touch costs 1.12; the flood drops 0 islands; the sub-chain rule only touches relay poses). One LENIENT item: hub 0 is modelled at the standard 12.25 crown without the +5 mm J0 spring stack the catalogue lists (outward; does not move the death; model it in pinknee-scapular-relay-4r). v_* = the auditor's fast-bench reproduction; frozen exact 51.83 not re-run (time box)."
 }
