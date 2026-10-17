@@ -1,0 +1,32 @@
+[
+ {
+  "tag": "rlr-b1-r",
+  "cmd": "mkdir -p docs/research/roller_env_polish/farm && eval \"$(python3 tools/env_bench.py use env)\" && eval \"$(python3 tools/env_bench.py use envsel)\" && python3 tools/roller_env_polish.py cma --x0 '{\"ang_min\": 26.8823, \"beta\": -178.0}' --label rlr-b1 --out docs/research/roller_env_polish/farm/cma_rlr-b1.json --sigma 0.3 --popsize 8 --jobs 2 --max-evals 640 --budget-s 1200 --state docs/research/roller_env_polish/farm/cma_rlr-b1.json.state.json --patience 12 --seed 12 > docs/research/roller_env_polish/farm/cma_rlr-b1_resume.log 2>&1; tail -3 docs/research/roller_env_polish/farm/cma_rlr-b1_resume.log",
+  "out": [
+   "docs/research/roller_env_polish/farm/cma_rlr-b1*"
+  ],
+  "env": {
+   "OMP_NUM_THREADS": "1",
+   "IGL_NUM_THREADS": "1",
+   "CB_FOLD_MARGIN": "5.5",
+   "ENVP_ROBUST": "1",
+   "ENVP_ROBUST_W": "5"
+  },
+  "timeout": 2700
+ },
+ {
+  "tag": "rlr-b2-r",
+  "cmd": "mkdir -p docs/research/roller_env_polish/farm && eval \"$(python3 tools/env_bench.py use env)\" && eval \"$(python3 tools/env_bench.py use envsel)\" && python3 tools/roller_env_polish.py cma --x0 '{\"ang_min\": 26.8823, \"beta\": -178.0}' --label rlr-b2 --out docs/research/roller_env_polish/farm/cma_rlr-b2.json --sigma 0.4 --popsize 8 --jobs 2 --max-evals 640 --budget-s 1200 --state docs/research/roller_env_polish/farm/cma_rlr-b2.json.state.json --patience 12 --seed 13 > docs/research/roller_env_polish/farm/cma_rlr-b2_resume.log 2>&1; tail -3 docs/research/roller_env_polish/farm/cma_rlr-b2_resume.log",
+  "out": [
+   "docs/research/roller_env_polish/farm/cma_rlr-b2*"
+  ],
+  "env": {
+   "OMP_NUM_THREADS": "1",
+   "IGL_NUM_THREADS": "1",
+   "CB_FOLD_MARGIN": "5.5",
+   "ENVP_ROBUST": "1",
+   "ENVP_ROBUST_W": "5"
+  },
+  "timeout": 2700
+ }
+]

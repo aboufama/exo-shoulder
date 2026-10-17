@@ -34,7 +34,7 @@ kind = np.array(B.kind); taken = np.array([r["taken"] for r in rows]); th = np.a
 w = Q @ u3
 sp = importlib.util.spec_from_file_location("pk_core", os.path.join(HERE, "parking.py"))
 src = open(os.path.join(HERE, "parking.py")).read(); s0 = src.index("def brute_req"); s1 = src.index("def world(i, v)")
-G = dict(np=np, K=K, B=B, xy=K.disc_xy(10.0, 2.0)); exec(src[s0:s1], G)
+G = dict(np=np, K=K, B=B, os=os, xy=K.disc_xy(10.0, 2.0)); exec(src[s0:s1], G)
 brute_req = G["brute_req"]
 
 

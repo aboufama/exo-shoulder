@@ -1,4 +1,4 @@
-"""balanced-upj3-knuckle-3r (fold-ceiling study, docs/research/fold_ceiling.md): the leaders' family re-seated where the
+"""fold-ceiling PAIRED KIT INSTRUMENT (not a catalogued design; was drafted as balanced-upj3-knuckle-3r). (fold-ceiling study, docs/research/fold_ceiling.md): the leaders' family re-seated where the
 fold-ceiling scan says the J1-J3 window covers the workspace AND every rigid part can park: BALANCED arcs (a1 ~ a2, so the
 folded wall sits at the 5-deg margin itself) and J3 pointing UP the arm toward the shoulder (wdir d ~ 105-120 instead of the
 leaders' ~70-77), which shrinks the spread of th = angle(J1, J3) under internal rotation (the leaders' stretched losses).
@@ -10,19 +10,19 @@ HONESTY: the knuckle's DRIVE (the leaders' cam / roller / rod: crank, flank boss
 slaved law. Compare only against the CONTROL (the same kit model at the verified leader's seats and arcs, `control`
 mode), never against the leader's verified number; the drive metal costs the leaders ~2-5 frozen points.
 
-    OMP_NUM_THREADS=1 nice -n 10 python3 docs/concepts/models/balanced-upj3-knuckle-3r.py fit '<json params>'
+    OMP_NUM_THREADS=1 nice -n 10 python3 docs/research/fold_ceiling/kit_paired.py fit '<json params>'
     ... frozen|held '<json>' [out.json]        (fit on Bench(60,160) fast, shape frozen, worn on Bench(110,360) / held out EXACT)
     ... control frozen|held                     (the leader's seats / arcs in this kit model)
     ... search '<json start>' n                 (local search on Bench(60,160) fast, objective = the 1 mm near-touch gap)
 """
 import importlib.util, json, math, os, sys, time
 import numpy as np
-REPO = os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
+REPO = os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))  # docs/research/fold_ceiling -> repo
 sys.path.insert(0, os.path.join(REPO, "tools"))
 import concept_kit as K                                      # noqa: E402
 import concept_bench as CB                                   # noqa: E402
 
-ID = "balanced-upj3-knuckle-3r"
+ID = "fold-ceiling-kit-paired"
 NAME = "Balanced dyad, J3 up the arm, slaved knuckle (fold-ceiling seat)"
 # the fold-ceiling local search's acromion-top design (docs/research/fold_ceiling/local_search_tau0.8.json, result 3)
 PARAMS = dict(az1=96.97, el1=60.99, d3=106.91, a3=1.94, a1=46.32, a2=48.60, a1max=70.23, bk1=28.67, sK=-1.0, sigma=-1.0,

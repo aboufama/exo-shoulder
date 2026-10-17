@@ -382,11 +382,11 @@ def flank_lug(M, dg):
     p2 = lambda X: np.array([X @ e, X @ f]); a2, b2 = p2(A3), p2(B3); ang = [math.atan2(v[1], v[0]) for v in (a2, b2)]
     am = math.atan2(math.sin(ang[0]) + math.sin(ang[1]), math.cos(ang[0]) + math.cos(ang[1])); hw = math.radians(13.0)
     pol = lambda r, a: (r * math.cos(a), r * math.sin(a))
-    r_in, r_mid = 8.0, HUB_R + 0.4
-    inner = prism(fK * uK, e, f, [pol(r_in, am - hw), pol(r_mid, am - hw), pol(r_mid, am + hw), pol(r_in, am + hw)], [0] * 4, 3.0)
+    r_in, r_tab, r_ris = 8.0, 11.0, (HUB_R + 0.5) / math.cos(hw)                              # the riser's inner chord stays >= 10.5 from uK (link 1b's K boss / cap: r 10)
+    inner = prism(fK * uK, e, f, [pol(r_in, am - hw), pol(r_tab, am - hw), pol(r_tab, am + hw), pol(r_in, am + hw)], [0] * 4, 3.0)
     rel = lambda a: (a - am + math.pi) % (2 * math.pi) - math.pi
     o_lo, o_hi = sorted([tuple(a2), tuple(b2)], key=lambda q: rel(math.atan2(q[1], q[0])))
-    quad = [pol(r_mid - 0.4, am - hw), o_lo, o_hi, pol(r_mid - 0.4, am + hw)]
+    quad = [pol(r_ris, am - hw), o_lo, o_hi, pol(r_ris, am + hw)]
     hl = float(M.p["hl"])
     riser = prism((fK + hl) * uK, e, f, quad, [0] * 4, 14.0).cut(disc(np.zeros(3), ez, 90.0, h0, h0 + 40.0))   # top = the lug's mid plane (embedded 1.5)
     web = US.glue(inner, riser.intersect(ball))
@@ -688,10 +688,11 @@ def main():
     lay = drive_layout(M, lg, dg, l1b_body)
     ring, rep["lobe"], lobe_g = lobe_ring(M, lg, dg, lay)
     cp, rep["crank"] = crank_parts(M, dg, lay)
-    for i, (g, n, s) in enumerate(lk):
-        if n.startswith("D8-02b"):
-            s2 = s.cut(disc(np.zeros(3), lay["dR"], PIN_R, lay["l1b_top"] - T - 1.0, lay["l1b_top"] + 0.5)); s2 = s2.clean() if s2.clean().isValid() else s2
-            lk[i] = (g, n.replace("carries the crank pivot pin", "carries the crank pivot pin (O3 press bore)"), s2)
+    for i, (g, n, s) in enumerate(lk):                                                         # the O3 press bore for the crank pivot pin: cut only if the bar
+        if n.startswith("D8-02b"):                                                              # stays one valid solid (else the pin is drawn pressed = overlapping)
+            s2 = s.cut(disc(np.zeros(3), lay["dR"], PIN_R, lay["l1b_top"] - T - 1.0, lay["l1b_top"] + 0.5))
+            ok = s2.isValid() and len(s2.Solids()) == 1; rep["crank"]["pivot_bore_cut_in_link_1b"] = bool(ok)
+            if ok: lk[i] = (g, n.replace("carries the crank pivot pin", "carries the crank pivot pin (O3 press bore)"), s2)
     parts += lk
     parts.append(("l2", f"D9-02 drive lobe ring: 17-4PH H900, wire-EDM (taper {rep['lobe']['e_ext_to_u2_deg']:.1f} deg along the follower axis), profile r "
                         f"{rep['lobe']['profile_r_mm'][0]:.2f} -> {rep['lobe']['profile_r_mm'][1]:.2f} mm ({rep['lobe']['arcs']} 3-point arcs), dwell r {rep['lobe']['dwell_r_mm']:.2f}, "

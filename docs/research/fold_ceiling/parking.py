@@ -38,7 +38,7 @@ uK_lead = np.einsum("nij,j->ni", np.asarray(X1[0], float), D.uK)
 xy = K.disc_xy(10.0, 2.0)
 
 
-def brute_req(i, D, O, t0=15, t1=220, clr=2.0, win=15):
+def brute_req(i, D, O, t0=15, t1=int(os.environ.get("FC_T1", 220)), clr=2.0, win=15):
     """the K3 requirement by the brute 1 mm march (= K.requirement, which is exact w.r.t. it) in ONE exact signed-distance
     call per pose: first t in t0..t1 with d(t) >= clr and d >= 0 on t..t+win (inf if none)"""
     ts = np.arange(t0, t1 + win + 1, 1.0); X = O[:, None, :] + D[:, None, :] * ts[None, :, None]

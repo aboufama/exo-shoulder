@@ -628,7 +628,8 @@
   "crank_valid": true,
   "crank_solids": 1,
   "roller_centre_r_mm": 61.704,
-  "arm_bottom_over_roller_top_mm": 0.4
+  "arm_bottom_over_roller_top_mm": 0.4,
+  "pivot_bore_cut_in_link_1b": false
  },
  "member 3": {
   "underside_hull": [
@@ -895,8 +896,7 @@
   "built_vs_posed_link1_mm": 0.14993432073008384,
   "diag": [],
   "valid": true,
-  "solids": 1,
-  "ear_search": "not run: [Errno 2] No such file or directory: '/home/user/exo-shoulder/pipeline/conformal/fair_cad/../../../.cache/maps_s1.pt'"
+  "solids": 1
  },
  "mass_g": {
   "custom": 181.0,
@@ -1218,12 +1218,12 @@
   {
    "k": 26,
    "group": "l1b",
-   "name": "D8-02b link 1b: 8x3 bar on a line/arc chain, K upper pad + O20 ring + M18 spigot + bore (2 dowel holes), J2 pad + integral O7 pin with the 116.3-deg q2 stop slot; carries the crank pivot pin (O3 press bore) (machined from solid Ti-6Al-4V (2.5-D: 4 side-view sketches side by side of lines + tangent arcs through the model's strap stations, extruded 2 mm; 3+2-axis milling - a wire cannot cut strips of different profiles side by side), rounds R2 / R0.5 in the profile)",
-   "vol_cm3": 3.116,
+   "name": "D8-02b link 1b: 8x3 bar on a line/arc chain, K upper pad + O20 ring + M18 spigot + bore (2 dowel holes), J2 pad + integral O7 pin with the 116.3-deg q2 stop slot; carries the crank pivot pin (machined from solid Ti-6Al-4V (2.5-D: 4 side-view sketches side by side of lines + tangent arcs through the model's strap stations, extruded 2 mm; 3+2-axis milling - a wire cannot cut strips of different profiles side by side), rounds R2 / R0.5 in the profile)",
+   "vol_cm3": 3.119,
    "material": "hardened steel (polished)",
-   "mass_g": 24.46,
+   "mass_g": 24.48,
    "valid": false,
-   "faces": 269,
+   "faces": 265,
    "solids": 1,
    "watertight_judge_units": true
   },
@@ -2057,7 +2057,7 @@
   }
  ],
  "invalid_or_multi_solid": [
-  "D8-02b link 1b: 8x3 bar on a line/arc chain, K upper pad + O20 ring + M18 spigot + bore (2 dowel holes), J2 pad + integral O7 pin with the 116.3-deg q2 stop slot; carries the crank pivot pin (O3 press bore) (machined from solid Ti-6Al-4V (2.5-D: 4 side-view sketches side by side of lines + tangent arcs through the model's strap stations, extruded 2 mm; 3+2-axis milling - a wire cannot cut strips of different profiles side by side), rounds R2 / R0.5 in the profile)"
+  "D8-02b link 1b: 8x3 bar on a line/arc chain, K upper pad + O20 ring + M18 spigot + bore (2 dowel holes), J2 pad + integral O7 pin with the 116.3-deg q2 stop slot; carries the crank pivot pin (machined from solid Ti-6Al-4V (2.5-D: 4 side-view sketches side by side of lines + tangent arcs through the model's strap stations, extruded 2 mm; 3+2-axis milling - a wire cannot cut strips of different profiles side by side), rounds R2 / R0.5 in the profile)"
  ],
  "slaved": [
   {
