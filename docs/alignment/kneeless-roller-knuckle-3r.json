@@ -1,7 +1,7 @@
 {
  "id": "kneeless-roller-knuckle-3r",
- "status": "screened",
- "v_gap": null,
+ "status": "verified",
+ "v_gap": 21.07,
  "complexity": 23.75,
  "verdict": "gamed",
  "reasons": [
@@ -10,13 +10,20 @@
  "checks": [
   {
    "check": "held_out",
-   "level": "watch",
-   "reason": "no verified bench gap on the row"
+   "level": "ok",
+   "reason": "held out 24.59 vs bench 21.07 (+3.52; re-measured (this audit))",
+   "held_gap": 24.59,
+   "v_gap": 21.07,
+   "drop": 3.52,
+   "source": "re-measured (this audit)"
   },
   {
    "check": "fast_frozen",
    "level": "ok",
-   "reason": "no pair"
+   "reason": "self/fast 16.7 -> verified 21.07 (+4.37)",
+   "fast": 16.7,
+   "verified": 21.07,
+   "drop": 4.37
   },
   {
    "check": "near_touch",
@@ -51,8 +58,12 @@
   },
   {
    "check": "continuity",
-   "level": "watch",
-   "reason": "passive / sprung / sensed coordinates but no continuity flood on file (rule 2026-10-16)"
+   "level": "ok",
+   "reason": "static 21.07, connected full 21.07, knn 23.35, bench 49.5 (docs/concepts/verify/kneeless-roller-knuckle-3r_v_bench_frozen.json)",
+   "static": 21.07,
+   "connected_full": 21.07,
+   "connected_knn": 23.35,
+   "connected_bench": 49.5
   },
   {
    "check": "fold_margin",
@@ -65,12 +76,36 @@
    "reason": "IDLE: re-measured K.ang span = 0.0 deg",
    "spans": [
     [
-     "re-measured dK span",
+     "row:verification.checks.dK_taken_max_deg",
      43.53
     ],
     [
-     "re-measured K.ang span",
-     0.0
+     "docs/concepts/verify/kneeless-roller-knuckle-3r_v_bench_head.json:fit_fast.extra.dK_taken_max_deg",
+     45.61
+    ],
+    [
+     "docs/concepts/verify/kneeless-roller-knuckle-3r_v_bench_head.json:extra.dK_taken_max_deg",
+     43.53
+    ],
+    [
+     "docs/concepts/verify/kneeless-roller-knuckle-3r_v_bench_head.json:sidecar.phi_max_taken",
+     20.5
+    ],
+    [
+     "docs/concepts/verify/kneeless-roller-knuckle-3r_v_held_frozen.json:fit_fast.extra.dK_taken_max_deg",
+     45.61
+    ],
+    [
+     "docs/concepts/verify/kneeless-roller-knuckle-3r_v_held_frozen.json:extra.dK_taken_max_deg",
+     45.78
+    ],
+    [
+     "docs/concepts/verify/kneeless-roller-knuckle-3r_v_held_frozen.json:sidecar.phi_max_taken",
+     20.5
+    ],
+    [
+     "docs/concepts/verify/kneeless-roller-knuckle-3r_v_bench_frozen.json:fit_fast.extra.dK_taken_max_deg",
+     45.61
     ]
    ]
   },
@@ -160,13 +195,13 @@
   },
   {
    "check": "reporting",
-   "level": "ok",
-   "reason": "row, verifier files and dashboard agree"
+   "level": "watch",
+   "reason": "verdict text still reads as a self-measured screen"
   },
   {
    "check": "judge_change",
    "level": "ok",
-   "reason": "no bench / judge / metric file changed in the 2 commits that touched the row"
+   "reason": "no bench / judge / metric file changed in the 3 commits that touched the row"
   },
   {
    "check": "rules",
@@ -178,7 +213,11 @@
   "bench": true,
   "held": true
  },
- "verifier_files": [],
- "git": "b7e147b",
- "t": "2026-10-16T23:09:39Z"
+ "verifier_files": [
+  "docs/concepts/verify/kneeless-roller-knuckle-3r_v_bench_head.json",
+  "docs/concepts/verify/kneeless-roller-knuckle-3r_v_held_frozen.json",
+  "docs/concepts/verify/kneeless-roller-knuckle-3r_v_bench_frozen.json"
+ ],
+ "git": "b3a24be",
+ "t": "2026-10-17T01:43:07Z"
 }
