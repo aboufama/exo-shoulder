@@ -213,7 +213,7 @@ if __name__ == "__main__":
         import subprocess
         od = sys.argv[3] if len(sys.argv) > 3 else "sn_out"; os.makedirs(od, exist_ok=True); procs = []
         for c in par:
-            env = dict(os.environ, SN_CELL=c.get("cell", "lead"), CB_EXACT="1", OMP_NUM_THREADS="1", CB_QUIET_EXACT="1")
+            env = dict(os.environ, SN_CELL=c.get("cell", "lead"), CB_EXACT="1", OMP_NUM_THREADS="1", IGL_NUM_THREADS="1", CB_QUIET_EXACT="1")
             lg = open(os.path.join(od, c["tag"] + ".log"), "w")
             procs.append(subprocess.Popen([sys.executable, os.path.abspath(__file__), c.get("mode", "frozen"), json.dumps(c.get("params", {})),
                                            os.path.join(od, c["tag"] + ".json")], env=env, stdout=lg, stderr=subprocess.STDOUT))
