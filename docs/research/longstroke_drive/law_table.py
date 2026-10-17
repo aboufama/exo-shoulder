@@ -14,7 +14,8 @@ LS = importlib.util.module_from_spec(sp_); sp_.loader.exec_module(LS)
 par = json.loads(sys.argv[1]) if len(sys.argv) > 1 else {}
 p = LS._clamp(dict(LS.PARAMS, **par)); B = CB.Bench(60, 160); r, M = LS._report(B, p); D = M.D; L = D.law()
 u1, u2, uK = D.u[0], D.u[1], D.uK; sp = float(np.sign(D.psiA)) or 1.0
-dK = np.radians(np.abs(np.asarray(L["dK"], float))); th = np.asarray(L["th"], float); q2 = np.degrees(np.asarray(L["q2t"], float))
+dK = np.abs(np.asarray(L["dK"], float))                       # the law table is in radians
+th = np.asarray(L["th"], float); q2 = np.degrees(np.asarray(L["q2t"], float)); th = np.asarray(L["th"], float); q2 = np.degrees(np.asarray(L["q2t"], float))
 a1e = np.degrees(np.arccos(np.clip(np.einsum("nij,j->ni", LS.S.rotm(uK, sp * dK), u2) @ u1, -1, 1)))
 m3e = a1e + D.a2 - th; dth = np.gradient(th, q2)
 rows = [dict(q2_past_onset=round(abs(float(q - q2[0])), 2), dK=round(float(np.degrees(k)), 2), a1e=round(float(a), 2), th=round(float(t), 2), m3e=round(float(m), 2),
