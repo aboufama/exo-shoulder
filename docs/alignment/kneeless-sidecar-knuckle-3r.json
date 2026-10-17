@@ -3,20 +3,19 @@
  "status": "verified",
  "v_gap": 21.11,
  "complexity": 28.0,
- "verdict": "watch",
+ "verdict": "gamed",
  "reasons": [
-  "fold_margin: no min-th margin over taken poses on file (rule: each claim reports it)",
-  "reporting: verdict text still reads as a self-measured screen"
+  "idle: IDLE: re-measured K.ang span = 0.0 deg"
  ],
  "checks": [
   {
    "check": "held_out",
    "level": "ok",
-   "reason": "held out 25.34 vs bench 21.11 (+4.23; row held_out)",
+   "reason": "held out 25.34 vs bench 21.11 (+4.23; re-measured (this audit))",
    "held_gap": 25.34,
    "v_gap": 21.11,
    "drop": 4.23,
-   "source": "row held_out"
+   "source": "re-measured (this audit)"
   },
   {
    "check": "fast_frozen",
@@ -29,16 +28,25 @@
   {
    "check": "near_touch",
    "level": "ok",
-   "reason": "plain 21.11, <1 mm 22.75, <2 mm 33.15, 12.04 points live in the 1-2 mm shell (docs/concepts/verify/kneeless-sidecar-knuckle-3r_v_bench_frozen.json)",
+   "reason": "plain 21.11, <1 mm 22.75, <2 mm 33.15, <3 mm 130.78, band read 3-14 mm 21.65, 12.04 points live in the 1-2 mm shell (re-measured (this audit))",
    "shell2": 12.04,
    "plain": 21.11,
    "n1": 22.75,
    "n2": 33.15,
-   "n3": null,
-   "band3": null,
-   "hist": null,
-   "minmm": 0.48,
-   "source": "docs/concepts/verify/kneeless-sidecar-knuckle-3r_v_bench_frozen.json"
+   "n3": 130.78,
+   "band3": 21.65,
+   "hist": {
+    "0-1": 0.0,
+    "1-2": 0.0005,
+    "2-3": 0.0053,
+    "3-4": 0.0145,
+    "4-6": 0.0721,
+    "6-10": 0.4322,
+    "10-14": 0.3642,
+    ">14": 0.1111
+   },
+   "minmm": 0.476,
+   "source": "re-measured (this audit)"
   },
   {
    "check": "dominance",
@@ -64,8 +72,8 @@
   },
   {
    "check": "idle",
-   "level": "ok",
-   "reason": "declared drive moves: smallest recorded span 34.1 (row:fast.rssr.phi_max_taken)",
+   "level": "gamed",
+   "reason": "IDLE: re-measured K.ang span = 0.0 deg",
    "spans": [
     [
      "row:fast.rssr.phi_max_taken",
@@ -104,7 +112,7 @@
   {
    "check": "sampling",
    "level": "ok",
-   "reason": "sample-weighted in-band 0.889 vs part-weighted 0.904 (-1.57 points); thinly sampled parts: rod 14, L1a 12 (docs/concepts/verify/kneeless-sidecar-knuckle-3r_v_bench_frozen.json)",
+   "reason": "sample-weighted in-band 0.889 vs part-weighted 0.904 (-1.57 points); thinly sampled parts: rod 14, L1a 12 (re-measured)",
    "parts": {
     "hub1": [
      1.0,
@@ -207,14 +215,14 @@
   }
  ],
  "remeasured": {
-  "bench": false,
-  "held": false
+  "bench": true,
+  "held": true
  },
  "verifier_files": [
   "docs/concepts/verify/kneeless-sidecar-knuckle-3r_v_bench_frozen.json",
   "docs/concepts/verify/kneeless-sidecar-knuckle-3r_v_held_frozen.json",
   "docs/concepts/verify/kneeless-sidecar-knuckle-3r_v_fitexact.json"
  ],
- "git": "d69723b",
- "t": "2026-10-17T01:59:07Z"
+ "git": "f032197",
+ "t": "2026-10-17T02:05:18Z"
 }
