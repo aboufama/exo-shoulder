@@ -218,3 +218,77 @@ the crank's tip. It has no spring, no roller, no flank lug band and no outer wal
    (the proposer: no groove inside O20 passes 34.47 at g 2.39-3.0). Cell C's g 2.8 lowers and narrows it but is
    knife-edged on the seat (r_c 13.5; at g 2.39 the plate gate here binds below r_c ~16.0, so C at 13.5 likely fails it - measure first).
 4. Cell C was not built inside the time box.
+
+## Verification (independent skeptic, 2026-10-17 20:10-20:55 UTC)
+
+**Verdict: VERIFIED at v_gap 18.98 (score 93.10)** on Bench(110,360), exact path, frozen shape, with the built groove's
+blended law in the IK. The champion spherical 3R scores 75.94 on the same bench (the risley-turret verifier's checks, the
+reference this family's verifications use; 66.97 through the offset-skin-normal verifier). No hard rule is broken. Not a
+new lead: the lead is 18.49, the tie-ruled lowest verified row is conecut at 18.28.
+
+Harness: `docs/concepts/verify/desmo-conecut-knuckle-3r.py`. It loads the claim's model unchanged and wears it through
+its own frozen protocol, then adds the checks below. Dense groove scan:
+`docs/concepts/verify/desmo-conecut-knuckle-3r_groove_scan.py`. Local only, at most 2 niced processes (the farm window
+is closed).
+
+| wear | gap | score | reach | ib14 | ib10 | contact | overhead | connected (full flood) |
+|---|---|---|---|---|---|---|---|---|
+| claim reproduced, linear-law IK, bench | 19.04 | 93.08 | 0.7278 | 0.8924 | 0.5625 | 4 poses (0.0106) | 8/28 | 19.04 (0 dropped) |
+| **blended-law IK (verified), bench** | **18.98** | **93.10** | 0.7278 | 0.8930 | 0.5629 | 4 poses (0.0106) | 8/28 | 18.98 (0 dropped) |
+| claim reproduced, linear-law IK, held out | 23.24 | 91.55 | 0.6922 | 0.8914 | 0.5617 | 14 poses (0.016) | 18/71 | 23.24 (0 dropped) |
+| blended-law IK, held out | HELD_BLEND |
+
+What was checked, and what it found:
+
+1. **Active DOF and determinacy.** J1, J2 and J3 are the only active joints. K is slaved: the crank's angle is fixed by
+   the stage-1 pin in the two-walled groove, and K is fixed by the nose in the two-walled slot. Nothing is left to a
+   spring. There are no passive translations, gears, pulleys or cables. The knee pins are outside the count (user rule).
+   The slot's far end is a real stop between the two bodies of that pair, like the lead's stop B. Poses that need more
+   than 46.5 deg of K are counted as lost, not taken.
+2. **The fit model's own gates (the frozen protocol never reads them).** `_desmo_fail` is empty. dK_lim is 46.5 at the
+   slot end. Slot slop is 0.04 deg; the pocket pressure angles are 25.5 / 32.0 against a 34.47 gate. The plate clears
+   hub K by 1.23 mm.
+3. **Dense crank-free groove scan** (every 0.25 deg of K, 211 rows; the claim's own gate samples 9 points). Worst
+   0.187 deg at K 44, so none over 0.25. Held plus free, nominal: 0.227 deg. At the worst-tolerance groove (c 0.015)
+   this becomes 0.281 deg, over 0.25; the claim reported 0.261 from its 9 points.
+4. **Pin on the groove (frame check).** With the claim's linear-law IK, the pin carried by the crank sits up to 0.162 mm
+   off the built groove's centreline (93 of 184 fast poses beyond the 0.01 clearance, worst at K 0.74, inside the
+   blend). The model's IK ignores the blend's lead of up to 2.69 deg of K. **Correction:** the IK now carries the blended
+   law (desmo-slipper verifier B1, copied). Nine bench poses are re-solved on the blended table: 19.04 -> 18.98, takes
+   and contacts unchanged. This is the verified number.
+5. **New check, plate against horn as solids.** The claim's CRK-BOSS gate tests only the crank's low arm. The per-pose
+   strap checks never pair the tip plate (ROD) with link 1a's boss and root (HORN). Per taken pose, in link 1a's frame:
+   the plate underside sits at R 63.16 and the horn's highest top at R 63.01. The root dips toward hub K (underside
+   58.18-60.01). The radial gap where they overlap is 0.150 mm at every pose, bench and held out: the designed running
+   gap, never less. **Passes.**
+6. **Own-state fold margin th.** Bench min 5.181 (0 of 372 under 5). The lowest is pose 313, forced at dK 45.62, where
+   dth/dK = 0.405. The dense nominal K play of 0.227 deg moves th by about 0.09 deg there, so the margin still holds
+   on the bench. HELD_TH
+7. **Takes, contacts, contact depth (T5).** Taken and contact poses are identical to conecut's (372 / 4 on the bench:
+   205, 237, 264, 316). Depths: 237 at -9.47 (conecut -8.93), 264 at -1.17 (conecut -5.80), 205 at -4.28, 316 at -1.23.
+   Per-pose dumps: `docs/alignment/remeasure/desmo-conecut-knuckle-3r{,+blend}_{bench,held}_perpose.json`. Each one's
+   recomputed gap matches the report to within 0.01.
+8. **Continuity flood.** The full-envelope flood drops 0 poses (connected = static). The kNN graph reads 20.67 on the
+   bench, against conecut's 19.97.
+9. **Bench artefacts.** Every number is on the exact path. The fast fit is 13.31 (linear) and 13.27 (blended).
+
+**The friction claim (mu 0.15), probed on the fast bench**
+(`docs/concepts/verify/desmo-conecut-knuckle-3r_v_probe_fast.json`):
+
+* **The score does not depend on the auditor's ruling.** At the family's standard mu 0.087, stage 1 read on the linear
+  law gives the same 13.31 (slot end binds). Only the mu 0.15 claim rests on the built-groove reading. On the linear
+  read at mu 0.15 the drive fails at K 0 (86.52).
+* **At mu 0.15 the claim sits on a 0.07 mm cliff.**
+  * a_s 9.60 (+0.07 mm): stage 1's built forward pressure angle binds at K 44.75, fast 14.56.
+  * a_s 9.65: binds at 43.0, fast 15.17.
+  * psi 150.2 (+0.5 deg): fast 13.94.
+  * mu 0.17: 14.56.
+  * The same a_s 9.60 and psi 149.3 are flat at mu 0.087 (13.31).
+  * So the mu 0.15 margin is a placement tolerance below a machining tolerance. Read "holds mu 0.15" as nominal only.
+* Seat tolerance: r_c 15.95 and 16.05 are flat (13.35 / 13.33).
+
+**For the auditor and the lead.**
+* The verified number uses the blended IK. The claim's 19.04 (linear IK) reproduces exactly.
+* The stage-1 built-groove reading changes only the friction claim, not the score.
+* Watch items carried from the family: G4 (m_sub at rest), T5 depths now on file, and K play into th held out.
+* Complexity is unchanged at 16.5.
