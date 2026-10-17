@@ -1,0 +1,212 @@
+[
+ {
+  "tag": "rlc-BEST-env-held",
+  "cmd": "mkdir -p docs/research/roller_env_polish/farm && eval \"$(python3 tools/env_bench.py use env)\" && eval \"$(python3 tools/env_bench.py use envsel)\" && python3 tools/roller_env_polish.py claim env held BEST docs/research/roller_env_polish/farm/claim_BEST_env_held.json > docs/research/roller_env_polish/farm/claim_BEST_env_held.log 2>&1; tail -1 docs/research/roller_env_polish/farm/claim_BEST_env_held.log",
+  "out": [
+   "docs/research/roller_env_polish/farm/claim_BEST_env_held*"
+  ],
+  "env": {
+   "OMP_NUM_THREADS": "1",
+   "IGL_NUM_THREADS": "2",
+   "CB_EXACT": "1",
+   "CB_FOLD_MARGIN": "5.5"
+  },
+  "timeout": 3300
+ },
+ {
+  "tag": "rlc-BEST-fit60-bench",
+  "cmd": "mkdir -p docs/research/roller_env_polish/farm && eval \"$(python3 tools/env_bench.py use env)\" && eval \"$(python3 tools/env_bench.py use envsel)\" && python3 tools/roller_env_polish.py claim fit60 bench BEST docs/research/roller_env_polish/farm/claim_BEST_fit60_bench.json > docs/research/roller_env_polish/farm/claim_BEST_fit60_bench.log 2>&1; tail -1 docs/research/roller_env_polish/farm/claim_BEST_fit60_bench.log",
+  "out": [
+   "docs/research/roller_env_polish/farm/claim_BEST_fit60_bench*"
+  ],
+  "env": {
+   "OMP_NUM_THREADS": "1",
+   "IGL_NUM_THREADS": "2",
+   "CB_EXACT": "1",
+   "CB_FOLD_MARGIN": "5.5"
+  },
+  "timeout": 3300
+ },
+ {
+  "tag": "rlc-BEST-fit60-held",
+  "cmd": "mkdir -p docs/research/roller_env_polish/farm && eval \"$(python3 tools/env_bench.py use env)\" && eval \"$(python3 tools/env_bench.py use envsel)\" && python3 tools/roller_env_polish.py claim fit60 held BEST docs/research/roller_env_polish/farm/claim_BEST_fit60_held.json > docs/research/roller_env_polish/farm/claim_BEST_fit60_held.log 2>&1; tail -1 docs/research/roller_env_polish/farm/claim_BEST_fit60_held.log",
+  "out": [
+   "docs/research/roller_env_polish/farm/claim_BEST_fit60_held*"
+  ],
+  "env": {
+   "OMP_NUM_THREADS": "1",
+   "IGL_NUM_THREADS": "2",
+   "CB_EXACT": "1",
+   "CB_FOLD_MARGIN": "5.5"
+  },
+  "timeout": 3300
+ },
+ {
+  "tag": "rlc-BESTam-env-held",
+  "cmd": "mkdir -p docs/research/roller_env_polish/farm && eval \"$(python3 tools/env_bench.py use env)\" && eval \"$(python3 tools/env_bench.py use envsel)\" && python3 tools/roller_env_polish.py claim env held BEST_am docs/research/roller_env_polish/farm/claim_BESTam_env_held.json > docs/research/roller_env_polish/farm/claim_BESTam_env_held.log 2>&1; tail -1 docs/research/roller_env_polish/farm/claim_BESTam_env_held.log",
+  "out": [
+   "docs/research/roller_env_polish/farm/claim_BESTam_env_held*"
+  ],
+  "env": {
+   "OMP_NUM_THREADS": "1",
+   "IGL_NUM_THREADS": "2",
+   "CB_EXACT": "1",
+   "CB_FOLD_MARGIN": "5.5"
+  },
+  "timeout": 3300
+ },
+ {
+  "tag": "rlc-BESTam-fit60-bench",
+  "cmd": "mkdir -p docs/research/roller_env_polish/farm && eval \"$(python3 tools/env_bench.py use env)\" && eval \"$(python3 tools/env_bench.py use envsel)\" && python3 tools/roller_env_polish.py claim fit60 bench BEST_am docs/research/roller_env_polish/farm/claim_BESTam_fit60_bench.json > docs/research/roller_env_polish/farm/claim_BESTam_fit60_bench.log 2>&1; tail -1 docs/research/roller_env_polish/farm/claim_BESTam_fit60_bench.log",
+  "out": [
+   "docs/research/roller_env_polish/farm/claim_BESTam_fit60_bench*"
+  ],
+  "env": {
+   "OMP_NUM_THREADS": "1",
+   "IGL_NUM_THREADS": "2",
+   "CB_EXACT": "1",
+   "CB_FOLD_MARGIN": "5.5"
+  },
+  "timeout": 3300
+ },
+ {
+  "tag": "rlc-BESTam-fit60-held",
+  "cmd": "mkdir -p docs/research/roller_env_polish/farm && eval \"$(python3 tools/env_bench.py use env)\" && eval \"$(python3 tools/env_bench.py use envsel)\" && python3 tools/roller_env_polish.py claim fit60 held BEST_am docs/research/roller_env_polish/farm/claim_BESTam_fit60_held.json > docs/research/roller_env_polish/farm/claim_BESTam_fit60_held.log 2>&1; tail -1 docs/research/roller_env_polish/farm/claim_BESTam_fit60_held.log",
+  "out": [
+   "docs/research/roller_env_polish/farm/claim_BESTam_fit60_held*"
+  ],
+  "env": {
+   "OMP_NUM_THREADS": "1",
+   "IGL_NUM_THREADS": "2",
+   "CB_EXACT": "1",
+   "CB_FOLD_MARGIN": "5.5"
+  },
+  "timeout": 3300
+ },
+ {
+  "tag": "rlc-pick1-env-held",
+  "cmd": "mkdir -p docs/research/roller_env_polish/farm && eval \"$(python3 tools/env_bench.py use env)\" && eval \"$(python3 tools/env_bench.py use envsel)\" && python3 tools/roller_env_polish.py claim env held docs/research/roller_env_polish/picks/pick1.json docs/research/roller_env_polish/farm/claim_pick1_env_held.json > docs/research/roller_env_polish/farm/claim_pick1_env_held.log 2>&1; tail -1 docs/research/roller_env_polish/farm/claim_pick1_env_held.log",
+  "out": [
+   "docs/research/roller_env_polish/farm/claim_pick1_env_held*"
+  ],
+  "env": {
+   "OMP_NUM_THREADS": "1",
+   "IGL_NUM_THREADS": "2",
+   "CB_EXACT": "1",
+   "CB_FOLD_MARGIN": "5.5"
+  },
+  "timeout": 3300
+ },
+ {
+  "tag": "rlc-pick1-fit60-bench",
+  "cmd": "mkdir -p docs/research/roller_env_polish/farm && eval \"$(python3 tools/env_bench.py use env)\" && eval \"$(python3 tools/env_bench.py use envsel)\" && python3 tools/roller_env_polish.py claim fit60 bench docs/research/roller_env_polish/picks/pick1.json docs/research/roller_env_polish/farm/claim_pick1_fit60_bench.json > docs/research/roller_env_polish/farm/claim_pick1_fit60_bench.log 2>&1; tail -1 docs/research/roller_env_polish/farm/claim_pick1_fit60_bench.log",
+  "out": [
+   "docs/research/roller_env_polish/farm/claim_pick1_fit60_bench*"
+  ],
+  "env": {
+   "OMP_NUM_THREADS": "1",
+   "IGL_NUM_THREADS": "2",
+   "CB_EXACT": "1",
+   "CB_FOLD_MARGIN": "5.5"
+  },
+  "timeout": 3300
+ },
+ {
+  "tag": "rlc-pick1-fit60-held",
+  "cmd": "mkdir -p docs/research/roller_env_polish/farm && eval \"$(python3 tools/env_bench.py use env)\" && eval \"$(python3 tools/env_bench.py use envsel)\" && python3 tools/roller_env_polish.py claim fit60 held docs/research/roller_env_polish/picks/pick1.json docs/research/roller_env_polish/farm/claim_pick1_fit60_held.json > docs/research/roller_env_polish/farm/claim_pick1_fit60_held.log 2>&1; tail -1 docs/research/roller_env_polish/farm/claim_pick1_fit60_held.log",
+  "out": [
+   "docs/research/roller_env_polish/farm/claim_pick1_fit60_held*"
+  ],
+  "env": {
+   "OMP_NUM_THREADS": "1",
+   "IGL_NUM_THREADS": "2",
+   "CB_EXACT": "1",
+   "CB_FOLD_MARGIN": "5.5"
+  },
+  "timeout": 3300
+ },
+ {
+  "tag": "rlc-pick2-env-held",
+  "cmd": "mkdir -p docs/research/roller_env_polish/farm && eval \"$(python3 tools/env_bench.py use env)\" && eval \"$(python3 tools/env_bench.py use envsel)\" && python3 tools/roller_env_polish.py claim env held docs/research/roller_env_polish/picks/pick2.json docs/research/roller_env_polish/farm/claim_pick2_env_held.json > docs/research/roller_env_polish/farm/claim_pick2_env_held.log 2>&1; tail -1 docs/research/roller_env_polish/farm/claim_pick2_env_held.log",
+  "out": [
+   "docs/research/roller_env_polish/farm/claim_pick2_env_held*"
+  ],
+  "env": {
+   "OMP_NUM_THREADS": "1",
+   "IGL_NUM_THREADS": "2",
+   "CB_EXACT": "1",
+   "CB_FOLD_MARGIN": "5.5"
+  },
+  "timeout": 3300
+ },
+ {
+  "tag": "rlc-pick2-fit60-bench",
+  "cmd": "mkdir -p docs/research/roller_env_polish/farm && eval \"$(python3 tools/env_bench.py use env)\" && eval \"$(python3 tools/env_bench.py use envsel)\" && python3 tools/roller_env_polish.py claim fit60 bench docs/research/roller_env_polish/picks/pick2.json docs/research/roller_env_polish/farm/claim_pick2_fit60_bench.json > docs/research/roller_env_polish/farm/claim_pick2_fit60_bench.log 2>&1; tail -1 docs/research/roller_env_polish/farm/claim_pick2_fit60_bench.log",
+  "out": [
+   "docs/research/roller_env_polish/farm/claim_pick2_fit60_bench*"
+  ],
+  "env": {
+   "OMP_NUM_THREADS": "1",
+   "IGL_NUM_THREADS": "2",
+   "CB_EXACT": "1",
+   "CB_FOLD_MARGIN": "5.5"
+  },
+  "timeout": 3300
+ },
+ {
+  "tag": "rlc-pick2-fit60-held",
+  "cmd": "mkdir -p docs/research/roller_env_polish/farm && eval \"$(python3 tools/env_bench.py use env)\" && eval \"$(python3 tools/env_bench.py use envsel)\" && python3 tools/roller_env_polish.py claim fit60 held docs/research/roller_env_polish/picks/pick2.json docs/research/roller_env_polish/farm/claim_pick2_fit60_held.json > docs/research/roller_env_polish/farm/claim_pick2_fit60_held.log 2>&1; tail -1 docs/research/roller_env_polish/farm/claim_pick2_fit60_held.log",
+  "out": [
+   "docs/research/roller_env_polish/farm/claim_pick2_fit60_held*"
+  ],
+  "env": {
+   "OMP_NUM_THREADS": "1",
+   "IGL_NUM_THREADS": "2",
+   "CB_EXACT": "1",
+   "CB_FOLD_MARGIN": "5.5"
+  },
+  "timeout": 3300
+ },
+ {
+  "tag": "rlc-pick3-env-held",
+  "cmd": "mkdir -p docs/research/roller_env_polish/farm && eval \"$(python3 tools/env_bench.py use env)\" && eval \"$(python3 tools/env_bench.py use envsel)\" && python3 tools/roller_env_polish.py claim env held docs/research/roller_env_polish/picks/pick3.json docs/research/roller_env_polish/farm/claim_pick3_env_held.json > docs/research/roller_env_polish/farm/claim_pick3_env_held.log 2>&1; tail -1 docs/research/roller_env_polish/farm/claim_pick3_env_held.log",
+  "out": [
+   "docs/research/roller_env_polish/farm/claim_pick3_env_held*"
+  ],
+  "env": {
+   "OMP_NUM_THREADS": "1",
+   "IGL_NUM_THREADS": "2",
+   "CB_EXACT": "1",
+   "CB_FOLD_MARGIN": "5.5"
+  },
+  "timeout": 3300
+ },
+ {
+  "tag": "rlc-pick3-fit60-bench",
+  "cmd": "mkdir -p docs/research/roller_env_polish/farm && eval \"$(python3 tools/env_bench.py use env)\" && eval \"$(python3 tools/env_bench.py use envsel)\" && python3 tools/roller_env_polish.py claim fit60 bench docs/research/roller_env_polish/picks/pick3.json docs/research/roller_env_polish/farm/claim_pick3_fit60_bench.json > docs/research/roller_env_polish/farm/claim_pick3_fit60_bench.log 2>&1; tail -1 docs/research/roller_env_polish/farm/claim_pick3_fit60_bench.log",
+  "out": [
+   "docs/research/roller_env_polish/farm/claim_pick3_fit60_bench*"
+  ],
+  "env": {
+   "OMP_NUM_THREADS": "1",
+   "IGL_NUM_THREADS": "2",
+   "CB_EXACT": "1",
+   "CB_FOLD_MARGIN": "5.5"
+  },
+  "timeout": 3300
+ },
+ {
+  "tag": "rlc-pick3-fit60-held",
+  "cmd": "mkdir -p docs/research/roller_env_polish/farm && eval \"$(python3 tools/env_bench.py use env)\" && eval \"$(python3 tools/env_bench.py use envsel)\" && python3 tools/roller_env_polish.py claim fit60 held docs/research/roller_env_polish/picks/pick3.json docs/research/roller_env_polish/farm/claim_pick3_fit60_held.json > docs/research/roller_env_polish/farm/claim_pick3_fit60_held.log 2>&1; tail -1 docs/research/roller_env_polish/farm/claim_pick3_fit60_held.log",
+  "out": [
+   "docs/research/roller_env_polish/farm/claim_pick3_fit60_held*"
+  ],
+  "env": {
+   "OMP_NUM_THREADS": "1",
+   "IGL_NUM_THREADS": "2",
+   "CB_EXACT": "1",
+   "CB_FOLD_MARGIN": "5.5"
+  },
+  "timeout": 3300
+ }
+]
