@@ -1,21 +1,78 @@
-# Alignment audit: minarc-stop-knuckle-4r (2026-10-17)
+# Alignment audit: minarc-stop-knuckle-4r (2026-10-17, simplicity v2 metric-change audit)
 
-Auditor run `audit:minarc-stop-knuckle-4r`, new session after the old one hit its usage limit. This audit applies the
-user's 2026-10-17 rulings: a sensed joint is a joint (so this design has 4 joints), the 2 mm near-touch dominance gate
-(A1) is retired (the plain verified gap decides, contact stays metal < 1 mm), and every check stays kinematic.
+Auditor run `audit:minarc-stop-knuckle-4r`, hourly 04:03 UTC. It audits commit 3ceacea (2026-10-17 03:40 UTC), which
+put the user's ruling "if no encoders are needed, it doesn't count as added complexity" into `tools/simplicity.py` v2.
+An unsensed two-pin cuff knee is taken out before scoring, and its 2 encoders are dropped. Bench gaps did not change.
 
 ## Verdict and claim
 
-- **Ledger verdict: WATCH** (printed by `tools/alignment_ledger.py`, entry 2026-10-17T02:23:12Z in `docs/alignment/ledger.jsonl`, which supersedes 02:21:41Z;
-  tool verdict WATCH, 5 tool reasons and 10 judgement findings, all 'watch').
-- **Claim:** the ledger's claim is `polished_gap` **18.40** (score 93.31), the confirmed final polish pick1. The row's
-  `v_gap` 19.54 is the earlier verified config BDp. Both were re-worn here.
-- **In one line:** the number is real (re-worn to the digit), but it is not evidence of a better exo than the 3-joint
-  rows. The 4th joint buys about 9 mid-range workspace poses and no overhead pose. The polish that produced 18.40
-  takes fewer overhead poses than BDp and presses metal twice as deep into the arm on the poses next to its new reach.
-  No finding reaches 'gamed': no design that is better for the wearer on every axis is ranked below it.
+- **Ledger verdict: WATCH.** `tools/alignment_ledger.py` printed it in entry 2026-10-17T04:27:34Z of
+  `docs/alignment/ledger.jsonl`. The tool verdict is WATCH, with 4 tool reasons and 12 judgement findings, all 'watch'.
+- **Claim:** `polished_gap` **18.40** (score 93.31, pick1). The row's `v_gap` is 19.54 (BDp). Neither moved since
+  the 02:21 re-wear, which reproduced both to the digit.
+- **In one line:** the v2 subtraction is faithful for this row, and its premise holds. With the 4 hub encoders the
+  CAD carries, the knee pins are determined at every taken pose. So the complexity drop (52.0 -> 32.5) is not gamed,
+  and no ranking or tie-break moves. The earlier wearer findings stand unchanged: a 4th joint for 1-2 workspace poses, overhead traded,
+  deeper contact and a spring with a narrow window (findings 1-3 and 9).
 
-## What the wearer gets (measured)
+## Metric change (simplicity v2) audited for this row
+
+**(1) Faithfulness of the subtraction.**
+- The row's record: active 4, passive_rot 2, bodies 6, joints 6, sensed 0 (was 2), 1 spring, made 14, bought 16.
+- v1 gives 52.0: 25 for the 4th active joint, 2 passive rotations, 10 for 2 sensed pins, 3 bodies, 3 joints, 3 for
+  the spring, 3.5 for made parts and 2.5 for bought parts.
+- v2 gives 32.5: 25 + 1 body + 1 joint + 3 for the spring + 1.5 made + 1.0 bought, and the knee scores 0.
+  Kutzbach M = 3, and the tool raises no flags.
+- What is left after the template is taken out (bodies 4, joints 4, passive rot 0, made 10, bought 10) is **exactly**
+  this row's knee-less variant-A record (`mechanism_A`: bodies 4, joints 4, made 10, bought 10, with K then counted as
+  a sensed passive). The record was built as "the pin knee + K", so the subtraction removes the knee it added and
+  nothing else: no over-count and no under-count against the record.
+- Against the built CAD (`pipeline/full-exo/designs/l1_minarc-pick1/parts_full.json`, L1 keep-out), the knee is: the
+  knee link (40.7 x 10 x 2.65 mm Ti, with its window-stop tooth and web made in one piece), the arm pad (pin b plate),
+  the pad mount to BOTTOM, 2 DIN 6799 e-clips and 2 GTM 0.5 mm washers. The pins and bushings are not listed at L1.
+  That is 3-5 made and 4-6 bought parts against the template's 4 made and 6 bought: at most 1 part either way, worth
+  0.5 points. The knee carries no encoder in the CAD; K carries the "4th encoder".
+- No MR63ZZ pairs and no shared knee plate: pin a's lower plate is the E strap's boss (member 3), as in the pin knee
+  the template was counted from.
+
+**(2) Determinacy without the knee encoders** (`tools/alignment_knee_sensing_minarc.py`, new; output
+`docs/alignment/remeasure/minarc-stop-knuckle-4r_{pick1,BDp}_knee_determinacy.json`).
+- Method. The loop with GH taken as a ball joint has 4 freedoms: the arm's 3 rotations plus the self-motion of the
+  spherical 4-bar J1-K-J2-J3. The tool builds the null-space Jacobian from the model's own closure, at a prescribed K.
+  That closure matches the model's phys ik to 6e-10 deg. The hub rows are J1, J2, J3 and K. sigma_min is the
+  smallest singular value of those rows of the orthonormal null space, the same quantity as the pin knee's 0.39.
+
+| set | pick1 sigma_min (min / p5 / median), condition max | BDp sigma_min (min), condition max |
+|---|---|---|
+| contact-aware taken grid poses (pick1 1056 / BDp 1005, the verifier's conn_taken nodes) | **0.369** / 0.490 / 0.529, 2.54 | **0.096**, 9.83 (worst forced pose 150 / 120 / -75, dK -27.5 deg) |
+| taken overhead (elevation >= 140; 20 / 26) | 0.390, 2.41 | 0.117, 8.12 |
+| every library pose the frozen design closes (1556 / 1481 of 1883; contains every taken bench, held-out and clip pose) | 0.284, 3.30 | 0.084, 11.26 |
+| K's encoder dropped (K free, J1-J3 read) | 0 at every pose | 0 at every pose |
+| K from its spring / stop law, unsensed (J1-J3 read) | 0 on the 294 forced poses (J2 sits on its stop and reads nothing); state A min 0.380 | 0 on the 204 forced poses |
+| hub-only arm-twist error per mm of in-plane GH drift (R10; the pins absorb it) | max 1.69 deg / mm, median 0.79 | max 1.91, median 0.92 |
+
+- The calibration is skin-normal-3r-pin-knee: 0.39 in its doc (lines 565-568) and 0.383 when re-run with
+  `tools/alignment_knee_sensing.py`. pick1 matches it. BDp is determined at every pose, but up to 4x worse
+  conditioned: an encoder error can become up to about 10x that error in a knee pin or the GH estimate.
+- **The premise holds for this row.** The 4 hub encoders fix every passive coordinate at every taken pose. K's own
+  encoder is needed: with it dropped, sigma_min is 0 everywhere. That encoder is in the CAD and is paid for by the
+  25 points of the 4th active joint, so nothing is hidden. The R10 caveat that made the pin knee keep its pin
+  encoders in v1 still applies: GH translation is not in the model.
+
+**(3) Rankings and tie-breaks.**
+- v1 -> v2 moves minarc, sidecar-longdyad and roller-longdyad by the same -19.5 (52 / 49 / 43.75 -> 32.5 / 29.5 /
+  24.25). Their gaps stay +3.0 and +8.25, so round 9's tie-break (roller-longdyad 24.25 vs sidecar-longdyad 29.5)
+  is unchanged.
+- minarc is the most complex of the 9 rows with v_gap <= 23 in both versions.
+- On (v_gap, complexity), roller-longdyad dominates it in both versions (18.67 / 24.25 vs 19.54 / 32.5). With the
+  polished 18.40 it sits on the front in both versions.
+- Its only closer neighbour is arm-parked-knee-4r, which has no knee: 32.25 in both versions, 0.25 below minarc
+  (19.75 below under v1). That row has the worse gap (26.71), so no choice flips.
+- Outside this row, v2 does change the (v_gap, complexity) front: kneeless-roller-knuckle-3r (21.07 / 23.75) drops
+  off it, and skin-normal-3r-pin-knee (27.20 / 0) joins it. This is reported for the lead; it is not this design's
+  finding.
+
+## What the wearer gets (measured, unchanged since the 02:21 re-wear; the claim did not move)
 
 Re-worn here, fit Bench(60,160) fast -> frozen -> Bench(110,360) exact, through the verifier's harness unchanged
 and on the 1154 held-out poses (fit-60 shape). Both configs reproduce their verified gaps to the digit: pick1 18.40 /
@@ -66,7 +123,7 @@ Each finding is in `docs/alignment/minarc-stop-knuckle-4r.findings.json` with it
      exact) it is 22.69 against sidecar-parallelogram 22.03, sidecar-longdyad 22.67 and roller-longdyad 23.73. At
      1 mm it is 23.36 against 20.00 / 20.22 / 20.30 on the bench, and 26.73 against 25.75 / 24.44 / 26.83 held out.
    - Why it is not a better exo: the 4th joint buys 9 workspace poses on the bench (reach 0.750 vs 0.725), none
-     overhead (7 of 28 vs sidecar-longdyad's 8 of 28). It costs a joint, complexity 52 vs 49, and contact
+     overhead (7 of 28 vs sidecar-longdyad's 8 of 28). It costs a joint, complexity 32.5 vs 29.5 under simplicity v2 (52 vs 49 under v1; the 19.5-point knee subtraction is the same for both), and contact
      (11 vs 4 bench poses with metal inside the skin, deepest -13.17 vs -4.61 mm).
    - Action: none on the score. README's "Best verified overall" line should say the lead it holds is plain-only and
      within one to two poses; the user's ruling already names the 3-joint rows as the leaders.
@@ -85,11 +142,11 @@ Each finding is in `docs/alignment/minarc-stop-knuckle-4r.findings.json` with it
    - Why it is not a better exo: "never touching" is the first line of the goal; the score charges a 14.6 mm press and
      a 0.1 mm graze the same, and both only as poses not taken.
    - Action: proposal B2. Not gamed: no clip frame touches, and BDp cannot close 19 of pick1's 28 env-fit contact poses.
-4. **G5, complexity hidden by a stale field.** The row's `complexity` is still 33.0 (and its mechanism note and HANDOFF
-   lines 79-80 say 33) after the record was changed to 4 active; `tools/simplicity.py` gives 52.0, which the
-   dashboard shows. The knee's 2 sensed pins are the same open question as in the sidecar-longdyad audit: counted as
-   joints, this design reads 6 coordinates, over the cap of 4. Action: proposal B4; the knee-pin question is the
-   user's.
+4. **G5, complexity after simplicity v2.** v2 gives 32.5 (v1 52.0). The template subtraction leaves exactly
+   this row's knee-less variant-A record (bodies 4, joints 4, made 10, bought 10) with K active, so it removes the knee
+   the record added and nothing else. Against the pick1 CAD's knee parts the template is within one part either way
+   (0.5 points). Stale text: the row's `complexity` field is still 33.0 (recomputed 32.5) and `mechanism.notes` still
+   says 'sensed passive 2 = the knee pins' while `sensed_passive` is 0. Action: proposal B4.
 5. **R2, stale leader text and a mixed row.** The row's and the dashboard's verdict strings still open with "VERIFIED
    LEADER" (BDp 19.54). The dashboard pairs pick1's v_gap 18.40 with BDp's verdict, held-out and complexity text. The
    sweep record is still the refuted 6.19. The tool's reason "the dashboard flatters the design" (18.4 vs 19.54) is
@@ -115,43 +172,25 @@ Each finding is in `docs/alignment/minarc-stop-knuckle-4r.findings.json` with it
     and every one of its 7 taken overhead workspace poses has metal under 3 mm; overhead p10 lowest metal 0.56 mm.
     sidecar-longdyad: 2 / 26 poses, overhead p10 1.02 mm. Under the retired A1 gate this would be 'gamed' against
     sidecar-longdyad (0.51 ahead plain, 7.26 behind at 2 mm). Per the user's 2026-10-17 ruling it is information only.
+11. **NEW-hub-only-sensing, the v2 premise re-run for this design.** See the metric-change section: with the 4 hub
+    encoders the CAD carries, both knee pins and the GH rotation are determined at every taken pose (pick1 sigma_min
+    0.369, condition <= 2.54; BDp 0.096, condition 9.83). K's own encoder is needed and is already paid for (25 points).
+    Caveat: GH drift is absorbed by the pins, so the hub-only arm twist errs by up to 1.69 deg per mm of drift.
+12. **P4, the complexity judge changed in the same commit as the row.** 3ceacea changed `tools/simplicity.py` and this
+    row's mechanism record together (52.0 -> 32.5). It is stated as a measurement change and follows the user's
+    ruling. The tool's `judge_change` check reads 'ok' because it follows only gap moves. Action: proposal B7.
 
-## Checks of the tool (`docs/alignment/minarc-stop-knuckle-4r.json`)
+## Checks of the tool (`docs/alignment/minarc-stop-knuckle-4r.json`, 04:16 UTC)
 
-After the re-wear, `python3 tools/alignment_audit.py audit minarc-stop-knuckle-4r --ref sidecar-longdyad-knuckle-3r`
-gives WATCH:
-- `near_touch` watch: BDp 19.54 / 1 mm 26.44 / 2 mm 41.69 / 3 mm 152.61; 22.15 points in the 0-2 mm shell (re-measured).
-- `dominance` ok: BDp vs sidecar-longdyad, plain -0.63, 2 mm -7.66. This check is the retired A1 gate in the tool's
-  code; it decides nothing here.
-- `continuity` watch: the row's flood record has no connected gap fields in the tool's format; the verifier's floods
-  drop 0 poses for both configs.
-- `sampling` watch: no per-part sample counts on file.
-- `complexity` watch: recomputed 52.0 against the row's 33.0 (finding G5).
-- `reporting` watch: the dashboard shows 18.40 against v_gap 19.54, and the sweep record 6.19 (finding R2: the first
-  half is partly a false positive).
-- `held_out`, `fast_frozen`, `fold_margin` (5.007), `idle`, `judge_change`, `rules`: ok.
-
-The tool's remeasure slot (`remeasure/minarc-stop-knuckle-4r_bench.json`) holds **BDp**, because every check of the
-tool is keyed to the row's `v_gap` (19.54 = BDp). The ledger's claim, pick1 18.40, is in
-`remeasure/minarc-stop-knuckle-4r_pick1_probe_bench.json`. Had pick1 been put in the slot, the tool's unchanged
-`dominance` check would print 'gamed' (0.51 ahead of sidecar-longdyad plain, 7.26 behind at 2 mm). That is the A1
-gate the user retired on 2026-10-17, so it is reported in finding T1 and does not set the verdict.
-
-
-## Rule changes of 2026-10-17 applied here
-
-- **A1 retired.** No reason in this entry cites the 2 mm dominance gate. The 2 mm numbers are reported, not used as a
-  gate. The tool's `dominance` check still compares at 2 mm (it is the tool's code, unchanged); it reads 'watch' or
-  'ok' here and decides nothing.
-- **K is a joint.** This entry counts K as the 4th active joint: complexity 52 (`tools/simplicity.py`), not 33.
-  The earlier ledger entry for this design (seed, 2026-10-16 20:26) carried no reason that treats K as passive; the
-  ALIGNMENT.md text that does (G5, G6, section 3 item 6, proposal A5) is listed below for whoever next edits that file.
-- **ALIGNMENT.md text now out of date** (not edited by this audit; other auditors are working in that file):
-  - G5: "Its mechanism record still counts K as a sensed passive: 6 points instead of 25" - the record now counts K as
-    active (active 4, sensed passive 2); only the row's `complexity` field (33.0) is stale.
-  - G5 / G6 / item 6: "The user's question ... is open" - answered on 2026-10-17: a sensed joint is a joint.
-  - A5 ("Count a sensed joint in the shoulder chain as active until the user rules"): adopted by the user's ruling.
-  - A1: already marked "ADOPTED IN PART"; the dominance-gate part is now retired.
+`python3 tools/alignment_audit.py audit minarc-stop-knuckle-4r --ref sidecar-longdyad-knuckle-3r` gives WATCH:
+- `contact_depth` watch: pick1 has 11 bench contact poses, deepest 13.17 mm, against sidecar-longdyad's 4 and 6.23 mm.
+  Held out it has 35 poses, deepest 14.61 mm.
+- `sampling` watch: no per-part in-band record on file.
+- `complexity` watch: recomputed 32.5 (v2) against the row's 33.0 (finding G5).
+- `reporting` watch: the dashboard shows 18.40 against v_gap 19.54, and the sweep record 6.19 (finding R2).
+- `held_out`, `fast_frozen`, `near_touch` (BDp in the slot), `dominance` (retired A1 gate; decides nothing),
+  `continuity`, `fold_margin` (5.007), `idle`, `rules`: ok. `judge_change` is ok because it follows only gap moves
+  (finding P4).
 
 ## Proposals (measurement or reporting changes for the lead or the user; none applied, none used in the verdict)
 
@@ -170,28 +209,41 @@ gate the user retired on 2026-10-17, so it is reported in finding T1 and does no
 - **B3. Compare held-out numbers only within one fit protocol in status lines.** README's "held out 21.31" (env fit)
   sits next to sidecar-longdyad's 22.67 (fit 60). Effect: minarc's line reads 22.69 (fit 60), a tie with 22.67.
 - **B4. Recompute a row's `complexity` in the same commit that changes its mechanism record.** Effect today: minarc
-  33.0 -> 52.0 (the tool's complexity check flags the mismatch).
+  33.0 -> 32.5 (v2), and its `mechanism.notes` should drop 'sensed passive 2 = the knee pins'.
 - **B5. Hold the knee window at the CAD's stop (ang_min 30.5) in claims, or re-score the claim with it.** Effect:
   pick1 loses about 4 held-out poses (about 0.4 gap points held out), 0 on the bench; BDp 1 held-out pose.
+- **B6. Keep the knee encoders' points on a row whose hub-only sensing is ill-conditioned (proposal, a tightening).**
+  For example, if sigma_min < 0.2 on the taken poses, then +10 is charged. Measured effect: pick1 (0.369) 32.5,
+  unchanged; BDp (0.096) 42.5. Other rows need the same check (roller-longdyad 0.250 / 0.246 from its audit). This is
+  the user's call; it is not used in the verdict.
+- **B7. `judge_change` should also follow complexity moves.** A commit that changes `tools/simplicity.py` and a row's
+  mechanism record together should be listed, as gap moves are. Effect today: it lists 3ceacea on the 13 pin-knee rows
+  as a stated measurement change ('watch'); no verdict moves.
+
+## Questions for the user
+
+- Does "it doesn't count as added complexity" cover the whole two-pin knee (pins, knee link, arm pad, 2 rotations:
+  9.5 points), or only its 2 encoders (10 points)? v2 takes out both (19.5 points). For the pin knee the earlier doc
+  said "9.5 if the user accepts hub-only sensing".
+- Hub-only sensing assumes GH does not translate. The knee absorbs GH drift, and the arm-twist reading then errs by up
+  to 1.69 deg per mm of drift on pick1. Is that accuracy acceptable for MVP2's control, or should a cuff IMU or the
+  knee encoders come back there?
+- Should a row whose hub-only sensing is ill-conditioned keep its knee encoders in the count (proposal B6: BDp sigma_min
+  0.096 vs pick1 0.369)?
 
 ## Not measured, and why
 
-- `tools/alignment_audit.py remeasure` cannot wear this design: it loads the variant-A model
-  (`docs/concepts/models/minarc-stop-knuckle-4r.py`) with variant-B params, while the verified numbers come from the
-  kit-rule model through the judge's harness with built-stop pricing. The new adapter
-  `tools/alignment_wear_probe_minarc.py` wears both verified configs exactly as their verifier did. Its pick1 bench
-  output is also written in the remeasure format (`remeasure/minarc-stop-knuckle-4r_bench.json`) so that `audit`
-  reads it.
-- Per-part sample counts (S2): the harness does not export its metal groups per sample. Only the screen's per-part
-  fractions are on file (hub 3 0.664, link 2 0.779 in band for BD), so the tool's `sampling` check stays 'watch'.
-- The knn continuity flood (proposal A4) was not run. Both of the verifier's floods (kinematic and contact-aware) drop
-  0 poses for pick1 and BDp.
-- The spring, the feel and the forced swing were not re-run here. Their numbers come from the independent checks
-  `docs/research/minarc_pick1_redteam.md` and `docs/research/pick1_k_hold_check.md`.
-- A K-locked control of pick1 (how many poses K alone buys) was not run. The row's early numbers at the pin knee's
-  seats are 26.82 with K locked against 24.00 with K.
-- Farm cost of this audit (`tools/cloud_run.py batch`, 2 + 2 jobs): bench $0.060, held out $0.078 (cpu3c); total
-  $0.14, under the $1.5 cap.
+- **No re-wear in this run.** The row's last commit (3ceacea, 03:40) changed only the mechanism record. The params,
+  `v_gap` 19.54, `polished_gap` 18.40 and the model files are untouched, and bench gaps did not change. The 02:21
+  re-wear (`remeasure/minarc-stop-knuckle-4r_{pick1,BDp}_probe_{bench,held}.json`) reproduced both claims to the digit
+  and stands. Farm spend in this run: $0.
+- The determinacy check uses the model's kinematics only. GH translation (R10) and encoder resolution are not modelled.
+  The per-mm twist figure is the only drift number.
+- Per-part sample counts (S2): still not exported by the harness (the tool's `sampling` stays 'watch').
+- Clip frames were checked as part of the library superset (all 1883 library poses, 1556 closed), not as the exact
+  taken clip set.
+
+---
 
 ## Skeptic (2026-10-17, 02:30-02:40 UTC, git 14dd5d1)
 
