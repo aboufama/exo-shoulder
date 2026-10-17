@@ -195,6 +195,16 @@
    "arm_hub2": 5.08
   }
  ],
+ "hubK_clear_where": {
+  "arm_min": 1.14,
+  "arm_at_dK": 0.0,
+  "roller_min": 2.02,
+  "roller_at_dK": 0.0
+ },
+ "flank_extrude_roller_edge_gap_mm": [
+  -0.0105,
+  0.0103
+ ],
  "flank": {
   "length_mm": 6.55,
   "built_to_dK": 48.25,
@@ -325,41 +335,8 @@
   ]
  },
  "follower_neck_level_d_mm": 18.33,
- "follower_n_feasible": 49,
+ "follower_n_feasible": 23,
  "follower_options": [
-  {
-   "pa_max": 19.2,
-   "rr": 3.0,
-   "part": "MR63ZZ (3x6x2.5) on an O3 pin",
-   "a_s": 9.0,
-   "psi": 135.0,
-   "dwell_r": 10.26,
-   "nose_r": 10.36,
-   "drift": 0.44,
-   "rc_min": 7.18
-  },
-  {
-   "pa_max": 21.0,
-   "rr": 3.0,
-   "part": "MR63ZZ (3x6x2.5) on an O3 pin",
-   "a_s": 9.0,
-   "psi": 132.0,
-   "dwell_r": 10.73,
-   "nose_r": 10.83,
-   "drift": 0.47,
-   "rc_min": 7.59
-  },
-  {
-   "pa_max": 16.0,
-   "rr": 3.0,
-   "part": "MR63ZZ (3x6x2.5) on an O3 pin",
-   "a_s": 8.5,
-   "psi": 135.0,
-   "dwell_r": 10.42,
-   "nose_r": 10.52,
-   "drift": 0.41,
-   "rc_min": 8.76
-  },
   {
    "pa_max": 28.0,
    "rr": 3.0,
@@ -370,28 +347,6 @@
    "nose_r": 13.19,
    "drift": 0.57,
    "rc_min": 10.58
-  },
-  {
-   "pa_max": 13.2,
-   "rr": 3.0,
-   "part": "MR63ZZ (3x6x2.5) on an O3 pin",
-   "a_s": 8.0,
-   "psi": 135.0,
-   "dwell_r": 10.6,
-   "nose_r": 10.7,
-   "drift": 0.39,
-   "rc_min": 10.27
-  },
-  {
-   "pa_max": 15.6,
-   "rr": 3.0,
-   "part": "MR63ZZ (3x6x2.5) on an O3 pin",
-   "a_s": 8.0,
-   "psi": 138.0,
-   "dwell_r": 10.21,
-   "nose_r": 10.31,
-   "drift": 0.36,
-   "rc_min": 10.23
   },
   {
    "pa_max": 23.7,
@@ -416,17 +371,6 @@
    "rc_min": 11.16
   },
   {
-   "pa_max": 18.1,
-   "rr": 3.0,
-   "part": "MR63ZZ (3x6x2.5) on an O3 pin",
-   "a_s": 7.5,
-   "psi": 135.0,
-   "dwell_r": 10.8,
-   "nose_r": 10.9,
-   "drift": 0.36,
-   "rc_min": 11.5
-  },
-  {
    "pa_max": 21.2,
    "rr": 3.0,
    "part": "MR63ZZ (3x6x2.5) on an O3 pin",
@@ -436,36 +380,102 @@
    "nose_r": 12.82,
    "drift": 0.49,
    "rc_min": 11.62
+  },
+  {
+   "pa_max": 23.2,
+   "rr": 3.0,
+   "part": "MR63ZZ (3x6x2.5) on an O3 pin",
+   "a_s": 7.5,
+   "psi": 225.0,
+   "dwell_r": 10.8,
+   "nose_r": 13.22,
+   "drift": 0.51,
+   "rc_min": 11.85
+  },
+  {
+   "pa_max": 16.8,
+   "rr": 3.0,
+   "part": "MR63ZZ (3x6x2.5) on an O3 pin",
+   "a_s": 7.0,
+   "psi": 219.0,
+   "dwell_r": 10.35,
+   "nose_r": 12.52,
+   "drift": 0.43,
+   "rc_min": 12.51
+  },
+  {
+   "pa_max": 18.8,
+   "rr": 3.0,
+   "part": "MR63ZZ (3x6x2.5) on an O3 pin",
+   "a_s": 7.0,
+   "psi": 222.0,
+   "dwell_r": 10.67,
+   "nose_r": 12.89,
+   "drift": 0.45,
+   "rc_min": 12.53
+  },
+  {
+   "pa_max": 14.7,
+   "rr": 3.0,
+   "part": "MR63ZZ (3x6x2.5) on an O3 pin",
+   "a_s": 6.5,
+   "psi": 219.0,
+   "dwell_r": 10.63,
+   "nose_r": 12.63,
+   "drift": 0.4,
+   "rc_min": 13.42
+  },
+  {
+   "pa_max": 16.9,
+   "rr": 3.0,
+   "part": "MR63ZZ (3x6x2.5) on an O3 pin",
+   "a_s": 6.5,
+   "psi": 216.0,
+   "dwell_r": 10.35,
+   "nose_r": 12.3,
+   "drift": 0.38,
+   "rc_min": 13.4
+  },
+  {
+   "pa_max": 28.7,
+   "rr": 2.5,
+   "part": "IKO CFS2.5 stud cam follower (O5 x 3)",
+   "a_s": 9.0,
+   "psi": 222.0,
+   "dwell_r": 10.3,
+   "nose_r": 13.22,
+   "drift": 0.58,
+   "rc_min": 9.57
   }
  ],
  "follower_chosen": {
-  "a_s": 9.0,
-  "psi_deg": 135.0,
+  "a_s": 8.5,
+  "psi_deg": 225.0,
   "rr": 3.0,
   "pa_deg": [
-   7.1,
-   19.2
+   16.0,
+   28.0
   ],
   "pitch_r": [
-   10.86,
-   13.36
+   13.52,
+   16.19
   ],
   "profile_r": [
-   7.86,
-   10.36
+   10.52,
+   13.19
   ],
   "m_f_mm": [
-   8.5,
-   8.93
+   7.5,
+   8.17
   ],
-  "drift_mm": 0.44,
-  "pitch_rc_min": 7.18,
+  "drift_mm": 0.57,
+  "pitch_rc_min": 10.58,
   "follower_centre_onset": [
-   -36.957,
-   49.998,
-   33.797
+   -26.024,
+   53.416,
+   38.492
   ],
-  "s_on_dR": 70.19
+  "s_on_dR": 70.28
  },
  "loads": {
   "spring 0.08 N.m + 0.015 N.m/rad": {
@@ -482,18 +492,17 @@
     227.1
    ],
    "F_follower_N": [
-    23.3,
-    25.4
+    24.2,
+    30.2
    ],
    "J2_torque_Nm": [
     0.172,
     0.198
    ],
-   "tilt_moment_on_crank_pair_Nmm": 157.0,
-   "axial_on_pair_N": 2.8,
-   "bearing_radial_worst_N": 78.0,
-   "hertz_roller_flank_MPa": 193.0,
-   "hertz_follower_lobe_MPa": 481.0
+   "hertz_roller_flank_MPa": 157.0,
+   "hertz_follower_lobe_MPa": 454.0,
+   "follower_axial_from_PV_mm": 7.46,
+   "roller_axial_from_PV_mm": -13.98
   },
   "spring + MVP1 0.033 N.m": {
    "F_roller_N": [
@@ -509,18 +518,17 @@
     308.5
    ],
    "F_follower_N": [
-    32.8,
-    34.6
+    34.1,
+    41.0
    ],
    "J2_torque_Nm": [
     0.243,
     0.269
    ],
-   "tilt_moment_on_crank_pair_Nmm": 213.3,
-   "axial_on_pair_N": 4.0,
-   "bearing_radial_worst_N": 106.0,
-   "hertz_roller_flank_MPa": 229.0,
-   "hertz_follower_lobe_MPa": 561.0
+   "hertz_roller_flank_MPa": 183.0,
+   "hertz_follower_lobe_MPa": 529.0,
+   "follower_axial_from_PV_mm": 7.46,
+   "roller_axial_from_PV_mm": -13.98
   },
   "low preload 0.05 + MVP1": {
    "F_roller_N": [
@@ -536,29 +544,100 @@
     234.5
    ],
    "F_follower_N": [
-    24.1,
-    26.3
+    25.1,
+    31.2
    ],
    "J2_torque_Nm": [
     0.179,
     0.204
    ],
-   "tilt_moment_on_crank_pair_Nmm": 162.1,
-   "axial_on_pair_N": 2.9,
-   "bearing_radial_worst_N": 80.5,
-   "hertz_roller_flank_MPa": 196.0,
-   "hertz_follower_lobe_MPa": 489.0
+   "hertz_roller_flank_MPa": 159.0,
+   "hertz_follower_lobe_MPa": 461.0,
+   "follower_axial_from_PV_mm": 7.46,
+   "roller_axial_from_PV_mm": -13.98
   }
  },
- "loads_note": "crank pair span 2.5 mm (bearing centres); Hertz roller-flank uses the convex flank radius (worst) and Ti-6Al-4V flank",
- "crank_pair_C0r_N": 73.0,
- "crank_pair_SF_static": 0.94,
- "bearing_radial_vs_span_N_approx": {
-  "2.5": 92.8,
-  "4.0": 69.2,
-  "6.0": 56.2,
-  "8.0": 49.6
+ "crank_pair_layouts": {
+  "spring 0.08 N.m + 0.015 N.m/rad": {
+   "A: 2x MR63ZZ (3x6x2.5) in the O10 x 6 boss, 1 mm spacer (as modelled)": {
+    "worst_radial_N": 28.0,
+    "axial_N": 5.3,
+    "C0r_N": 73.0,
+    "SF_static": 2.6
+   },
+   "B: 2x 683ZZ (3x7x3) in an O10 x 6 boss, no spacer": {
+    "worst_radial_N": 31.1,
+    "axial_N": 5.3,
+    "C0r_N": 120.0,
+    "SF_static": 3.86
+   },
+   "C: 2x MR63ZZ straddling the follower, boss O10 x 9.5": {
+    "worst_radial_N": 26.3,
+    "axial_N": 5.3,
+    "C0r_N": 73.0,
+    "SF_static": 2.77
+   },
+   "D: 2x 683ZZ straddling the follower, boss O10 x 10": {
+    "worst_radial_N": 27.5,
+    "axial_N": 5.3,
+    "C0r_N": 120.0,
+    "SF_static": 4.36
+   }
+  },
+  "spring + MVP1 0.033 N.m": {
+   "A: 2x MR63ZZ (3x6x2.5) in the O10 x 6 boss, 1 mm spacer (as modelled)": {
+    "worst_radial_N": 39.6,
+    "axial_N": 7.2,
+    "C0r_N": 73.0,
+    "SF_static": 1.84
+   },
+   "B: 2x 683ZZ (3x7x3) in an O10 x 6 boss, no spacer": {
+    "worst_radial_N": 44.0,
+    "axial_N": 7.2,
+    "C0r_N": 120.0,
+    "SF_static": 2.73
+   },
+   "C: 2x MR63ZZ straddling the follower, boss O10 x 9.5": {
+    "worst_radial_N": 35.8,
+    "axial_N": 7.2,
+    "C0r_N": 73.0,
+    "SF_static": 2.04
+   },
+   "D: 2x 683ZZ straddling the follower, boss O10 x 10": {
+    "worst_radial_N": 37.4,
+    "axial_N": 7.2,
+    "C0r_N": 120.0,
+    "SF_static": 3.21
+   }
+  },
+  "low preload 0.05 + MVP1": {
+   "A: 2x MR63ZZ (3x6x2.5) in the O10 x 6 boss, 1 mm spacer (as modelled)": {
+    "worst_radial_N": 29.1,
+    "axial_N": 5.4,
+    "C0r_N": 73.0,
+    "SF_static": 2.51
+   },
+   "B: 2x 683ZZ (3x7x3) in an O10 x 6 boss, no spacer": {
+    "worst_radial_N": 32.3,
+    "axial_N": 5.4,
+    "C0r_N": 120.0,
+    "SF_static": 3.72
+   },
+   "C: 2x MR63ZZ straddling the follower, boss O10 x 9.5": {
+    "worst_radial_N": 27.2,
+    "axial_N": 5.4,
+    "C0r_N": 73.0,
+    "SF_static": 2.68
+   },
+   "D: 2x 683ZZ straddling the follower, boss O10 x 10": {
+    "worst_radial_N": 28.4,
+    "axial_N": 5.4,
+    "C0r_N": 120.0,
+    "SF_static": 4.22
+   }
+  }
  },
+ "loads_note": "Hertz roller-flank on a flat Ti-6Al-4V flank (conservative vs the concave r 6.1-13.6 arcs); C0r: MR63ZZ 73 N (NMB 673ZZ class, as the sidecar red team), 683ZZ ~120 N (to confirm)",
  "arm": {
   "polyline_len_mm": 57.4,
   "n_pts": 27,
@@ -581,10 +660,11 @@
    0.038
   ],
   "lobe_or_follower_normal": [
-   0.157,
-   0.168
+   0.171,
+   0.191
   ],
-  "crank_pair_tilt_per_10um_radial_over_span": 0.572,
+  "crank_pair_tilt_per_10um_radial_over_span": 0.408,
+  "crank_pair_tilt_per_10um_over_7mm_span": 0.204,
   "lever_roller_from_dR_mm": 37.55,
   "m_horn_mm": [
    15.05,
