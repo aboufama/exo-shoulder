@@ -2752,3 +2752,85 @@ spiral-lobe and desmo-vrocker not audited (dead); none gamed. The farm sat at it
 groove-radius, built-groove PA and mu 0.15 gates enforced in the model and the arm pocket checked; reach in this family
 only through a J2-seat / K-axis chain-ghost gate (<= 17.5 with <= 4 contacts and >= 274 takes), at the lead's call; the
 machinery (template bar, pair-coverage probe, flood, slop state, mu column, S6) before the next claim.
+
+## Round J1 (round 101, track jump): no lead change - all five designs die at gate 0; no rigid ring closes round this arm, any 2R pointer + arm-axial J3 parks hub 2 at its pole, and a base-side spare buys reach only (2026-10-17, discovery round 101, closer)
+
+Raw data:
+- rows: `docs/concepts/rows/{armband-pointer,cuff-sleeve-3r,acromion-pointer-arm-ctrack,pinknee-scapular-relay-4r,acromion-relay-4r}.json`;
+- models: `docs/concepts/models/<id>.py`, with the shared flood in `tools/spare_flood.py`;
+- docs: `docs/concepts/<id>.md`, each with an Audit section;
+- sweeps: `docs/concepts/sweeps/<id>.json` (the audit configs are tagged);
+- verifier harnesses: `docs/concepts/verify/{armband-pointer-audit-stops.py,armband-pointer-audit-cells.py,armband-pointer_audit.json,pinknee-scapular-relay-4r-audit.py,pinknee-scapular-relay-4r-audit.results.json}`;
+- the round table: `docs/concepts/ROUNDS.md` "Round J1 results".
+
+Benches: "fast" is Bench(60,160) fast; "frozen" is frozen exact Bench(110,360). No bench, judge or kit file changed this
+round. Ledger re-read at 19:54 UTC: none of the five designs has an entry (exit 2), so none is gamed. The farm was
+closed, so everything ran locally.
+
+**What was measured.** Every death was upheld by an independent verifier (0 of 5 refuted).
+
+* **pinknee-scapular-relay-4r: 31.06 fast** (reach 0.675, follow 0.9167, ib14 0.9058, contact 0.0523; 4 active;
+  cx 40.5 by the tool, 31.5 in the row).
+  - The pin-knee host H1 alone scores 23.64 on the same bench, so all 31 placements lose 7.4-150 points to J0's metal.
+  - Ghost J0 (no metal, no seat rule): 18.30 at a front seat the rule forbids, 18.62 at a legal seat.
+* **acromion-relay-4r: 42.74 near-touch / 41.62 plain fast; frozen 51.83** (claimant's figure, reach 0.789,
+  overhead 10/28).
+  - The relay is worth +4.57 frozen (+17 ws poses, 0 overhead) and in-band +0.001 (T-0 control 56.40).
+  - Over all 668 configs on file, hub 2 is at most 0.12 in band and ib14 at most 0.68.
+* **acromion-pointer-arm-ctrack: VERIFIED frozen 65.66** (reach 0.783, 282/360; 34 contacts; overhead 4/28; min th
+  margin 5.89; cx 1; 0 passive). Fast 58.71.
+  - Ghost with no shoe, hub-1 or tine-2 metal: 44.53. With hubs and links only: 53.83.
+* **cuff-sleeve-3r: 110.96 fast** (cx 4, 1 passive translation).
+  - Ghost with no spar or crank: 101.02.
+* **armband-pointer: 212.62 fast** (cx 0.5).
+  - Any rigid ring, every other part ideal: >= 72.2 with ideal stops, >= 90.9 with none.
+  - Bound re-measured on Bench(110,360) on the humerus axis: >= 67.0.
+
+**What failed and why**
+
+1. **Anatomy rules out a closed rigid loop round the upper arm.**
+   - The medial arm meets the flank on 19-27 % of poses, and the flexed forearm fills the ring plane near the elbow.
+   - At every station s 200-300, every axis within 16 deg of the humerus and every bore up to 112 mm, no ring exists on
+     >= 43 % of clip frames and >= 29 % of the workspace. A ring cannot vanish on those poses.
+   - The humerus axis is off-centre (58-74 mm posterior vs 34-46 mm medial at s 220-280), so a coaxial ring floats
+     >= 20 mm off the medial skin.
+   - Arm-fixed metal belongs on the ~105-deg torso-free lateral arc, which holds at every station from s 25 to 240.
+2. **Decomposing the shoulder into a gimbal plus humeral twist moves the binder to hub 2's pole.**
+   - With a 2R pointer and any arm-axial J3, hub 2 sits at the pole of the (p1, e3) great circle: 0.00-0.03 in band.
+   - A link fixed in the pointing frame down the arm rides a 184-269 deg twist (5-95 % of poses): in band 0.04-0.51,
+     falling with station.
+   - The gimbal's link 1 and yoke ride over the rotating deltoid (0.47-0.48 in band), and the shoes float 18-32 mm.
+   - Removing th's axial dependence works kinematically (th 78-174, margin >= 6.37). Proximity is what kills it.
+3. **A base-side spare cannot move an in-band binder.**
+   - It engages only where J2 is on a stop. Hub 2's level is set by mode-A poses with J2 inside its stops: at the cap
+     pole, (-75, 60, +60) 116 mm, (0..30, 150, 0) 107-113 mm, (0, 105, 0) 110 mm.
+   - On the pin-knee host, J0's hub and link must stay outside hub 2's orbit about J1 (radius a1 + ~25 deg), which at
+     a1 41 covers every allowed seat. The relay class needs a1 <= ~20 or a J0 coaxial under J1.
+   - The relay un-folds 26-29 of the host's 36 fold losses, but only 5-10 of those poses survive the host's own knee /
+     slide, skin and L1-L2 checks.
+4. **The plain O20 3R trades reach against hub 2's height.** Back seat, 41.8 / 72.3 dyad: hub 2 0.70 in band, reach
+   0.68. Cap pole, 50 / 60 dyad: hub 2 0.06, reach 0.875 fast.
+5. **Claims leaned on optimistic instruments.**
+   - The armband ring bound dropped ring-less poses without charging contact (57.7 -> >= 72.2).
+   - cuff-sleeve's CMA box excluded its own best seat (el 0).
+   - acromion-relay never searched sigma +1 (re-run best 52.20).
+   - The shoe's angle was set at r 50 vs a race at ~94 (neutral).
+   - Four of five claims ran without convergence, and three of five frozen wears were stopped in the time box. The
+     deaths stand on parameter-covering ghost bounds, not on the sweeps.
+
+**New knowledge**
+- **Twin shoes:** two shoes `twin` deg apart on one race of arc A carry A - shoe + twin of rotation with no new joint.
+  The reach ceiling went 0.54 -> 0.92-0.96.
+- **Reusable pre-screens (minutes, before any hardware):**
+  - `armband-pointer.py bound2` for any arm-encircling part;
+  - the ghost-J0 bound (`docs/concepts/verify/pinknee-scapular-relay-4r-audit.py`, ~4 min) for any relay;
+  - the hub-2 azimuth histogram about J1 for any spare;
+  - `tools/spare_flood.py`, a full-grid path-tracked flood (3 s; 0.669 sparse vs 0.908 / 0.911 full).
+- **The lever left is moving hub 2 itself.** Both J1 lenses are closed by measurement: the axial J3 moves the binder
+  onto hub 2's pole, and the spare moves the base. The main track's round-13 ghost (proximal-j3-geodesic-knuckle-3r,
+  J3 seat up the lateral deltoid: frozen 16.72 unrefit, 11.44 fast after a knee re-fit) is the first number under the
+  17.5 gate from moving hub 2.
+- **Next (round J2):** first measure the hub-2-free ceiling of the plain O20 3R at both seats (hub 2 and links 1-2 at
+  their per-pose skin requirement, frozen, with the continuity flood). It bounds every mechanism that moves hub 2 per
+  pose. Then screen a polycentric J2 (spherical four-bar, as orthotic polycentric hinges do it) and the cap-pole seat
+  only if that ceiling is <= 13.75.

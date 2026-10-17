@@ -2438,3 +2438,137 @@ closer sent to the lead; everything that moves the base or replaces J3 belongs t
   never the user's, applied to challengers only. The user's rule (plain verified gap) decides; a noise / tie rule is
   put to the user. Caveats: bench edge mostly E-strap dilution (18.67 at equal strap); held edge survives (22.90).
 - Planners: the reference for "beat the lead" is now 18.28 / 22.38.
+
+## Round J1 results (round 101, track jump; 2026-10-17 ~16:25-19:55 UTC, closer)
+
+Ledger re-read with `tools/alignment_ledger.py get <id>` at 19:54 UTC, just before naming the winner: all five round-J1
+designs exit 2 (no entry: dead rows, never audited; the round's audit pass recorded nothing). Complexity is
+tools/simplicity.py v2.2 (the row's own figure in brackets where they differ). Every verifier upheld its death (0 of 5
+refuted). The farm was closed all round, so every claim, verification and bound ran locally (<= 2 niced processes).
+"Fast" = Bench(60,160) fast; "frozen" = frozen exact Bench(110,360), the verification protocol.
+
+| design (lens) | verified number | frozen | reach / overhead | act / P / cx | ledger | outcome |
+|---|---|---|---|---|---|---|
+| pinknee-scapular-relay-4r (2, pick 1: spare J0 under the pin-knee host H1) | 31.06 fast (score 88.71) | not finished (stopped in the time box) | 0.675 fast / 0-1 of 12 | 4 / 0 / 40.5 (row 31.5) | exit 2 | dead at gate 0; ghost J0 (no metal, no seat rule) 18.30, seat-legal 18.62 |
+| acromion-relay-4r (2: spare J0 under a plain O20 3R; control + instrument) | 42.74 near-touch / 41.62 plain fast | 51.83 (claimant's; not re-run by the verifier), reach 0.789 (284/360), overhead 10/28 | 0.875 fast | 4 / 0 / 0 (row 31.5; stale record) | exit 2 | dead at gate 0; over 668 configs hub 2 <= 0.12 and ib14 <= 0.68 in band |
+| acromion-pointer-arm-ctrack (1, fallback: back-of-shoulder gimbal + twin shoes on an arm-fixed circular race) | 58.71 fast | **65.66 verified**: reach 0.783 (282/360), 34 contacts, overhead 4/28, min th margin 5.89 | 0.825 fast | 3 / 0 / 1 | exit 2 | dead at gate 0; ghost with no shoe, hub-1 or tine-2 metal 44.53 |
+| cuff-sleeve-3r (1, cell S: GH-aimed rod in a sleeve at s 230) | 110.96 fast | not finished | 0.763 fast / 0 of 12 | 3 / 1 / 4 | exit 2 | dead at gate 0; ghost with no spar or crank 101.02 |
+| armband-pointer (1, cell R: closed ring bearing round the distal arm) | 212.62 fast | bound only: >= 67.0 on the humerus axis | 0.581 fast | 3 / 0 / 0.5 | exit 2 | dead at gate 0; any rigid ring >= 72.2 with ideal stops, >= 90.9 without |
+| conecut-knee-knuckle-3r (lead since the 18:21 lead note; reference) | 18.28 frozen (93.35), held 22.38 | - | 0.728 (262/360) / 8 of 28 | 3 / 0 / 18.5 | watch | stays the verified lead |
+
+**Winner: none eligible. Every round-J1 design died at gate 0, and every verifier upheld the death.** The best number a
+verifier confirmed is pinknee-scapular-relay-4r's 31.06 on the fast bench (4 active, 0 passive translations, cx 40.5).
+That is not on the verification protocol: its frozen wear never finished. Even the verifier's ghost bound with a
+zero-size J0 is 18.30 fast at a front seat the J1 seat rule forbids, and 18.62 at a legal seat, both above the 17.5
+gate. The only frozen number a verifier confirmed this round is acromion-pointer-arm-ctrack's 65.66 (score 76.12).
+**Neither beats the previous verified lead 18.49 (slipper-nose-knuckle-3r) or the current one, 18.28
+(conecut-knee-knuckle-3r).** No generation CAD for J1: a dead gate-0 row is not a build candidate, so the generation
+CAD of record stays the lead's. Passed over as gamed: none (no round-J1 design has a ledger entry).
+
+**Alignment.** The ledger holds no verdict, and so no watch reason, for any round-J1 design (5 of 5 exit 2 at 19:54
+UTC). The verifiers' own findings are carried here at watch level, with the numbers:
+- **pinknee-scapular-relay-4r**
+  - *reporting:* the claim message gave follow 0.95 and contact 0.04; the run reproduces 0.9167 and 0.0523. The row
+    file has the right values.
+  - *convergence:* the gate was not met (+2.70 score over the 2nd half, +0.49 over the last third, top-5 spread 1.05).
+    It was replaced by the ghost-J0 bound (40 placements at T 60, a0 15-60 x azu 0-315), not by more search.
+  - *stale host row:* skin-normal-3r-pin-knee.json still lists 20.63 / follow 1.0 / contact 0. Under the current
+    checks the same H1 scores 23.64 / 0.95 / 0.0343.
+  - *flood over-promise:* the kinematic flood's 0.83-0.90 connected reach left out J0's metal. Besides that, the relay
+    un-folds 26-29 of the host's 36 fold losses, but only 5-10 of those poses survive the host's knee / slide, skin
+    and L1-L2 checks.
+  - *complexity:* the simplicity tool reads 40.5 and the row 31.5.
+- **acromion-relay-4r**
+  - *coverage:* all 555 claimed configs sat on the sigma -1 branch. The verifier closed it: sigma +1 CMA best 52.20,
+    and a both-branch LHS (96 configs) best 56.45.
+  - *lenient:* hub 0 has no +5 mm J0 spring stack.
+  - *reporting:* the doc's three twin-policy numbers (45.73 / 52.28 / 55.60) are not in the sweep file; the v_* fields
+    are fast reproductions, and the frozen 51.83 was not re-run.
+  - *complexity:* the mechanism record is stale. tools/simplicity.py reads cx 0 with 3 active (no J0, no spring); the
+    row says 31.5 with 4 active.
+- **acromion-pointer-arm-ctrack**
+  - *modelling slip, neutral:* the shoe's angular size was set at r 50, but the race sits at r ~94. Corrected: 59.86,
+    and 60.53-62.58 at a re-tuned thc.
+  - *convergence:* now 2.16 / 0.00 / 0.48 after 70 more CMA configs (best 60.46).
+  - *search box:* every top-30 config sits on el -20. That is the J1 seat rule, not a missed region.
+- **cuff-sleeve-3r**
+  - *search box:* CMA_BOX el 20-85 excluded the best seat (el 0). Re-run at el 0-85: 129.98 best.
+  - *wrong stated cause:* hub 2 is the pole of the (p1, e3) great circle, so J3 never enters it. Its 0 % in band comes
+    from that pole, not from the arm's twist. The number is right.
+  - *reporting:* the end event says 15 configs; the row has 14 (24 with the audit's runs).
+- **armband-pointer**
+  - *bound favoured the design:* the claim's ring bound of 57.7 dropped ring-less poses without charging contact, but a
+    closed ring cannot vanish. Charged: >= 90.9 with no stops and >= 72.2 with generous stops.
+  - *coverage:* proximal tilted stations (s 200-220) read 66.2-83.1.
+  - *over-strict, cannot rescue:* the ring's skin face is modelled as a circle.
+  - *instrument:* the 31.8 mm median skin distance is the fast cache's clamp, not a measurement.
+- **Process, all rows:**
+  - three of five verifiers again found the verify template's refutation bar stale (68.93 + 10 = 78.93);
+  - four of five claims ran without convergence;
+  - three of five frozen wears were stopped inside the time box (no local Bench(110,360) fast cache).
+
+**What the round measured (lessons).**
+1. **No rigid closed loop can ride round this upper arm.** The medial arm meets the flank on 19-27 % of poses, and the
+   flexed forearm fills the ring plane near the elbow. The bound covers every station s 200-300, every axis within
+   16 deg of the humerus and every bore up to 112 mm: no ring exists on >= 43 % of clip frames and >= 29 % of the
+   workspace, so any ring is >= 72.2 even with ideal stops. The humerus axis also sits off-centre (58-74 mm posterior
+   vs 34-46 mm medial), so a coaxial ring floats >= 20 mm off the medial skin. ARMin / NESM-style closed humeral rings
+   are out for this wearer.
+2. **The arm's torso-free arc is ~105 deg at every station from s 25 to 240** (<= 2 % of poses blocked). The pointing
+   frame's free sector is 150-180 deg.
+3. **Any 2R pointer plus an arm-axial J3 parks hub 2 at the pole of the (p1, e3) great circle** (0.00-0.03 in band),
+   and any pointing-frame link down the arm rides a 184-269 deg twist (in band 0.04-0.51, falling with station). Ghost
+   bounds: sleeve class with no spar or crank 101.02; arm-race class with hubs and links only 53.83; arm-race class
+   with no shoe, hub-1 or tine-2 metal 44.53.
+4. **Twin shoes break a C-slide's window wall.** Two shoes rigid on the moving member, `twin` deg apart, carry
+   A - shoe + twin of rotation on one race of arc A, with no new joint. Reach ceiling went 0.54 -> 0.92-0.96. This is
+   reusable for any open-ring idea.
+5. **A base-side spare buys reach only.**
+   - acromion-relay-4r: the relay is worth +4.57 frozen (+17 ws poses, 0 overhead poses) and in-band +0.001.
+   - pinknee-scapular-relay-4r: a zero-size J0 is bounded at 18.30 / 18.62 seat-legal. With real metal, every
+     placement jams on hub 2's orbit about J1, which has radius a1 + ~25 deg and covers every allowed back and
+     acromion seat.
+   - The relay class needs a short a1 (<= ~20 deg) or a J0 stacked coaxially under J1 (one hub stack higher).
+6. **The plain O20 3R trades reach against hub 2's height across the two seats measured.**
+   - Back seat, 41.8 / 72.3 dyad: hub 2 0.70 in band, reach 0.68.
+   - Acromion-cap pole, 50 / 60 dyad: hub 2 0.06 in band (F 124 mm), reach 0.875 fast.
+   - At the cap pole, hub 2's level is set by mode-A poses with J2 off its stops: (-75, 60, +60) 116 mm,
+     (0..30, 150, 0) 107-113 mm, (0, 105, 0) 110 mm.
+7. **Instruments now on file:**
+   - tools/spare_flood.py: a full 1432-node path-tracked flood, 3 s per flood, validated 0.669 sparse vs 0.908 / 0.911
+     full.
+   - `armband-pointer.py bound2`: a pre-screen for any arm-encircling part.
+   - docs/concepts/verify/pinknee-scapular-relay-4r-audit.py: a ~4-min ghost-J0 bound for any relay on a
+     pin-knee-class host.
+8. **J1's two levers are both closed by measurement.** The humerus-axial J3 (lens 1) moves the binder onto hub 2's
+   pole. The scapular spare (lens 2) moves the base, not hub 2. The planner's open question ("move hub 2 itself, not
+   the base") is the lever left, and the main track's round-13 ghost (proximal-j3-geodesic-knuckle-3r: J3 seat up the
+   lateral deltoid, 16.72 frozen unrefit, 11.44 fast after a knee re-fit) is the first measurement that hub 2 moving
+   per seat beats the 17.5 gate.
+
+**Next focus (round J2, track jump).** The score has not reached 95. The best verified gap is 18.28 (conecut), and 95
+needs 13.75: reach >= 0.8025 at ib14 0.88 (289 of 360 taken vs 262), with ~0 contact. Close in the catalogue, with
+the numbers above: arm-encircling rigid parts, pointing-frame spars down the arm, 2R pointer + any arm-axial J3, arm-
+fixed races, base-side spares / relays on O20 hosts with a1 >= 40.
+- **Instrument first, 30 min, no hardware: the hub-2-free ceiling.** Take the plain O20 3R at both measured seats (back
+  41.8 / 72.3, cap pole 50 / 60) and set hub 2 and links 1-2 at their per-pose skin requirement (the K3 march along
+  hub 2's axis, the ideal of every mechanism that moves hub 2 per pose). Wear it frozen exact on Bench(110,360) with
+  the continuity flood, and report taken / 360, overhead / 28, contacts, and the losses by cause (jam, fold, contact).
+  - Measured reason: every J1 class died on where hub 2 must sit (0-0.12 in band), and the cap pole reaches 0.875 fast
+    at hub 2 0.06. Nobody has measured what the cap pole's reach is worth once hub 2 is free.
+  - If the ceiling is > 13.75 at both seats, no hub-2-moving class can reach 95 there, and J2 attacks the jams /
+    folds (the reach term) instead.
+  - If it is <= 13.75 (with <= 4 contacts), J2's lenses are the cheapest real mechanisms that realise that level.
+- **Lens A (outside field, orthotics): a polycentric J2.** A spherical four-bar in place of the J2 revolute, so the J2
+  axis is virtual and its two pins sit off the binder (orthotic polycentric hinges are built this way). Gate 0 is a
+  ghost with the four-bar's two O20 pin stacks at their real height; the bar is the track's gate, <= 17.5 with
+  <= 4 contacts. Complexity: 1 closed loop + 2 pins, against the knuckle family's 18.5.
+- **Lens B: the cap-pole seat itself** (a seat class no verified row uses). The plain cap-pole chain plus the cheapest
+  per-pose hub-2 lift the ceiling allows. It is distinct from main round 13, which moves J3's seat on pick3's
+  back-of-shoulder J1, and it must not reuse the knuckle drives (track rule).
+- **Machinery before the next claim:**
+  - set the verify template's bar to the lead 18.28;
+  - build the local Bench(110,360) fast cache once, niced (3 of 5 frozen wears died in the box);
+  - fix the simplicity mechanism records for acromion-relay-4r and pinknee-scapular-relay-4r;
+  - relabel skin-normal-3r-pin-knee's row to 23.64 under the current checks;
+  - every claim message's numbers come from the row file.
