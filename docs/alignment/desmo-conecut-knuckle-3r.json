@@ -6,17 +6,17 @@
  "verdict": "watch",
  "reasons": [
   "continuity: static 23.19, connected full 23.19, knn 32.18, bench 24.47 (docs/concepts/verify/desmo-conecut-knuckle-3r_v_held_frozen_blend.json); the knn flood (no envelope stepping stones) loses 8.99",
-  "reporting: verdict text still reads as a self-measured screen; dashboard shows no verified number (row v_gap 18.98); dashboard status 'screened' vs row 'verified'"
+  "reporting: verdict text still reads as a self-measured screen"
  ],
  "checks": [
   {
    "check": "held_out",
    "level": "ok",
-   "reason": "held out 23.19 vs bench 18.98 (+4.21; docs/concepts/verify/desmo-conecut-knuckle-3r_v_held_frozen_blend.json)",
-   "held_gap": 23.19,
+   "reason": "held out 23.24 vs bench 18.98 (+4.26; re-measured (this audit))",
+   "held_gap": 23.24,
    "v_gap": 18.98,
-   "drop": 4.21,
-   "source": "docs/concepts/verify/desmo-conecut-knuckle-3r_v_held_frozen_blend.json"
+   "drop": 4.26,
+   "source": "re-measured (this audit)"
   },
   {
    "check": "fast_frozen",
@@ -52,10 +52,45 @@
   {
    "check": "contact_depth",
    "level": "ok",
-   "reason": "no per-pose contact depths on file that reproduce the claim (tools/alignment_paired.py dump desmo-conecut-knuckle-3r bench|held, or tools/alignment_wear_probe*.py); not measured",
+   "reason": "the score counts contact poses, not depth (report only, score unchanged): v_gap 18.98: held 14 contact poses, sum 43.84 mm, deepest 10.38 mm at ['ws', 45.0, 165.0, -30.0], 5 deeper than 3 mm vs slipper-nose-knuckle-3r 46.12 mm over 10 (-2.28 mm, x0.95); bench depths not on file",
    "depths": {
-    "v_gap 18.98": {}
-   }
+    "v_gap 18.98": {
+     "held": {
+      "n": 14,
+      "sum_mm": 43.84,
+      "max_mm": 10.38,
+      "n_deeper3": 5,
+      "overhead140": 7,
+      "deepest": [
+       "ws",
+       45.0,
+       165.0,
+       -30.0
+      ],
+      "gap": 23.24,
+      "src": "docs/alignment/remeasure/desmo-conecut-knuckle-3r_held_perpose.json",
+      "cross_check": {
+       "files": 1,
+       "sums": [
+        43.84
+       ],
+       "agree": true
+      }
+     }
+    }
+   },
+   "ref": "slipper-nose-knuckle-3r",
+   "compare": [
+    {
+     "claim": "v_gap 18.98",
+     "wear": "held",
+     "sum": 43.84,
+     "ref_sum": 46.12,
+     "excess": -2.28,
+     "ratio": 0.95,
+     "watch": false
+    }
+   ]
   },
   {
    "check": "dominance",
@@ -226,7 +261,7 @@
   {
    "check": "reporting",
    "level": "watch",
-   "reason": "verdict text still reads as a self-measured screen; dashboard shows no verified number (row v_gap 18.98); dashboard status 'screened' vs row 'verified'"
+   "reason": "verdict text still reads as a self-measured screen"
   },
   {
    "check": "judge_change",
@@ -241,7 +276,7 @@
  ],
  "remeasured": {
   "bench": true,
-  "held": false
+  "held": true
  },
  "verifier_files": [
   "docs/concepts/verify/desmo-conecut-knuckle-3r_v_held_frozen_blend.json",
@@ -250,7 +285,7 @@
   "docs/concepts/verify/desmo-conecut-knuckle-3r_groove_scan_claim.json",
   "docs/concepts/verify/desmo-conecut-knuckle-3r_v_bench_frozen.json"
  ],
- "git": "175e475",
+ "git": "e407772",
  "tool_version": "2026-10-17.6",
- "t": "2026-10-17T20:56:32Z"
+ "t": "2026-10-17T21:05:28Z"
 }

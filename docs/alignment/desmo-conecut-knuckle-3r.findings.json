@@ -42,6 +42,12 @@
   "evidence": "docs/alignment/remeasure/desmo-conecut-knuckle-3r_bench.json deep (gap_near1/2/3, near2_poses 33, min_metal_mm 0.072, overhead_min_metal_p10 1.83); docs/alignment/remeasure/desmo-conecut-knuckle-3r+blend_{bench,held}_perpose.json (min over min_mm, cmin of taken poses)"
  },
  {
+  "key": "NEW-ws-inband",
+  "level": "watch",
+  "reason": "Carried, family-wide (catalogued on desmo-slipper and conecut): the gap reads in-band on clip frames only. On the taken workspace poses at elevation 90-140 (unscored), 0.8308 of the metal is in 2-14 mm and 0.1683 is above 14 mm (p95 20.06 mm, max 30.74 mm), against 0.8924 on the scored clip frames; all taken workspace poses 0.8626. Overhead (elev >= 140) 0.9333 in band, but 4 of the 8 taken overhead poses have their lowest metal under 2 mm. Same metal as conecut (0.8315, overhead 4 of 8), ahead of slipper-nose (0.8004). Not gamed: it ranks the design above nothing; it is the score's blind spot for the whole family, and metal 14-31 mm off a raised arm is against the 1 cm goal.",
+  "evidence": "docs/alignment/remeasure/desmo-conecut-knuckle-3r_probe_bench.json probe.ws_elev90_140 / ws_unscored / ws_overhead140 / clip_scored; docs/alignment/remeasure/{conecut-knee,slipper-nose}-knuckle-3r_probe_bench.json"
+ },
+ {
   "key": "G4",
   "level": "watch",
   "reason": "Carried, same chain as conecut / slipper-nose: the re-measured m_sub span over taken poses is [10.8052, 99.0], identical to both; on conecut the sub-dyad margin at K rest is under 1 deg on 50 of 205 rest poses (p10 0.267 deg). A near-singular sub-dyad at rest is a posture where small arm motions swing the links fast. Not re-measured at rest for this row.",
@@ -56,8 +62,8 @@
  {
   "key": "R1",
   "level": "watch",
-  "reason": "The row's top-level verdict still reads as the screen ('SCREENED, not a new lead: ... passes every drive gate at mu 0.15 on BOTH stages ... the first desmo-family drive that does'), while the verifier wrote 'mu 0.15 nominal only (a_s +0.07 mm binds stage 1 at K 44.75)' and the stage-1 reading under NEW-pa-reread. The dashboard (rebuilt 20:27, before the 20:48 verification) shows status 'screened', v_gap null and a sweep best of 86.19 (reach 0.344, a failing linear-read record). The ranking reads v_gap, so this is a label, not a rank.",
-  "evidence": "docs/concepts/rows/desmo-conecut-knuckle-3r.json verdict and verification.verdict; docs/dashboard/data/morphs.json (commit 336bc2d 20:27)"
+  "reason": "The row's top-level verdict still reads as the screen ('SCREENED, not a new lead: ... passes every drive gate at mu 0.15 on BOTH stages ... the first desmo-family drive that does'), while the verifier wrote 'mu 0.15 nominal only (a_s +0.07 mm binds stage 1 at K 44.75)' and the stage-1 reading is the re-read one (NEW-pa-reread). The dashboard, rebuilt 20:57 (f489cb4), now shows status 'verified' and v_gap 18.98, but carries that same screen verdict text and a sweep best of 86.19 (reach 0.344: a failing linear-read sweep record, sweep_t 19:38). The ranking reads v_gap, so this is a label, not a rank.",
+  "evidence": "docs/concepts/rows/desmo-conecut-knuckle-3r.json verdict and verification.verdict; docs/dashboard/data/morphs.json (commit f489cb4, 20:57) row desmo-conecut-knuckle-3r: status verified, v_gap 18.98, sweep_gap 86.19, verdict = the screen text"
  },
  {
   "key": "P2",

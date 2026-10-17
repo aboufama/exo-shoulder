@@ -24,10 +24,10 @@
   "title": "Built CAD judge results",
   "description": "One row per judged design and requirement: value, threshold and pass from the outside judges, timed by the judge output (score files: the earliest of their commit, their file time and the first commit whose docs report the design; scorecard-only values: the scorecard's commit). Built from tools/judged_history.py, judge/scorecard.json files and judge/requirements.json.",
   "file": "data/cad.json",
-  "sha256": "632a8772fecc8a9f9bd5735f55ea5504fe0d69a485648d86e77fa0d21ba6b400",
+  "sha256": "93754c6bb5e06c5c9c80ba51aa4fc5eb2b3006493786ac9f88103ce6249fa38f",
   "rows": 467,
   "bytes": 147002,
-  "updated": "2026-10-17T20:57:52Z"
+  "updated": "2026-10-17T21:12:45Z"
  },
  {
   "id": "gpu_evals",
@@ -104,9 +104,9 @@
   "title": "Data build info",
   "description": "When tools/dash_build.py last gathered the data, the repo commit, and any warnings it printed.",
   "file": "data/meta.json",
-  "sha256": "44b8dc3d45244bdc2b34794ccd7fa53a6862df41504f3dcaeaa7bdd1494ed9c2",
+  "sha256": "7c55e79433e2c81f4dae7b9259717441e81bd947e3b91752f68d0c4ae473cd93",
   "rows": 1,
   "bytes": 2089,
-  "updated": "2026-10-17T20:57:52Z"
+  "updated": "2026-10-17T21:12:45Z"
  }
 ]
