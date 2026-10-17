@@ -26,6 +26,9 @@ WHAT IS CHECKED ON TOP OF THE LEAD'S MODEL (everything else is the lead's code, 
     extended to the dip floor - 1 deg): the flank, both pressure angles, lift-off, cusp, contact on the lug, arm / roller
     vs hub K, arm vs hub 2, the low arm vs the swinging lug. The horn lug is built over the whole used stroke
     [dK_neg, dK_lim]. Stop A sits at the last good negative step (dK_neg); dipped poses past it are lost (_truncate);
+  * dip_ref (0-1): the crank phase at which the bent arm is built (its arc concentric with hub K): 0 = the old rest (the
+    lead's), 1 = the dip floor. Measured: built at the old rest, the lead's arm closes on hub K at 0.18 mm per deg of
+    backward swing (1.14 mm at rest, < 1 mm at -0.75 deg) and the flank cusps below ~-5 deg;
   * the crank's per-pose transform uses the SIGNED opening (it swings backward in the dip), so its metal, the roller and
     the lug are skin- and part-checked at the dipped K on every pose;
   * the lobe crest grows by s_arm |k_floor| / g (the old rest is lifted by the dip): it enters the law's skirt rule and
@@ -58,7 +61,7 @@ ID = "dipped-law-groove-knuckle-3r"
 
 LEAD_BEST = json.load(open(os.path.join(REPO, "docs", "concepts", "rows", "roller-longdyad-knuckle-3r.json")))["best_params"]
 KNEEWIN = {"lE": 82.0, "lc": 27.0, "phiE": 3.8, "phib": -96.6, "ang_min": 20.0}
-DIP0 = {"dipD": 0.0, "dip_thc": 53.0, "dip_w": 12.0, "dip_shape": 1}
+DIP0 = {"dipD": 0.0, "dip_thc": 53.0, "dip_w": 12.0, "dip_shape": 1, "dip_ref": 0.0}
 PARAMS = dict(RL.PARAMS, **LEAD_BEST); PARAMS.update(KNEEWIN); PARAMS.update(DIP0)
 
 
@@ -70,6 +73,7 @@ def dip_bump(th, thc, w, shape=1):
 def _clamp(p):
     p = RL._clamp(p)
     p["dipD"] = min(max(float(p.get("dipD", 0.0)), 0.0), 14.0); p["dip_thc"] = min(max(float(p.get("dip_thc", 53.0)), 35.0), 75.0)
+    p["dip_ref"] = min(max(float(p.get("dip_ref", 0.0)), 0.0), 1.0)
     p["dip_w"] = min(max(float(p.get("dip_w", 12.0)), 4.0), 30.0); p["dip_shape"] = 1 if int(p.get("dip_shape", 1)) else 0
     return p
 
@@ -208,7 +212,7 @@ class DipModel(RL.RLModel):
     def _sc_pose(self):
         """RF's per-pose crank transform on the SIGNED opening (the crank swings backward in the dip)"""
         g = self._scg; ks = g["sp"] * np.asarray(self.dK, float); n = len(ks)
-        php = g["sig"] * phi_of(ks, g["g"], g.get("c", 0.0))
+        php = g["sig"] * phi_of(ks - g.get("kref", 0.0), g["g"], g.get("c", 0.0))
         Rc = S.rotm(g["dR"], php); tc = g["PV"][None] - np.einsum("nij,j->ni", Rc, g["PV"])
         self._sc = dict(n=n, X={9: (Rc, tc), 8: (Rc, tc)})
 
@@ -239,6 +243,7 @@ class DipModel(RL.RLModel):
         [kneg, 0) (marked DIP): the flank, both pressure angles, lift-off, cusp, contact on the lug and the arm / roller / lug
         clearances are synthesised and checked on the negative side too; stop A sits at the last good negative step."""
         kneg = self.D.dip_kneg()                                            # DIP: rad, <= 0 (dip floor - 1 deg)
+        kref = self.D.dip_floor() * min(max(float(self.D.p.get("dip_ref", 0.0)), 0.0), 1.0)   # DIP: crank build phase (0 old rest, 1 floor)
         D = self.D; P = D.p; u2, uK = D.u[1], D.uK; fK, f2 = self.fK, self.f[1]
         L1b = self.link_pts["L1b"][1]
         g0 = (S.HUB_R + 5.0 + 1.0) / max(f2, 30.0); ax = unit(np.cross(u2, uK)); dR = unit(S.rotm(ax, g0)[0] @ u2)
@@ -270,7 +275,7 @@ class DipModel(RL.RLModel):
         rad0 = np.array([float(np.linalg.norm(P0 + s * ch)) for s in ss_])
         # phi range of the arm swing (for the stacking rule): the law's K range / g
         L_ = D.law(); dKmax = math.radians(float(L_.get("dK_max", 0.0)) + 2.0) if L_.get("ok") else 0.2
-        phis = sig * phi_of(np.linspace(kneg, dKmax, 9), gg, cc)          # DIP: the backward swing too
+        phis = sig * phi_of(np.linspace(kneg, dKmax, 9) - kref, gg, cc)          # DIP: the backward swing too
         lvl = np.zeros(ns)
         for j, (d_, s_) in enumerate(zip(dirs, ss_)):
             over = False
@@ -300,13 +305,13 @@ class DipModel(RL.RLModel):
         kng = -np.radians(np.arange(0.25, -math.degrees(kneg) + 1e-6, 0.25))[::-1] if kneg < 0 else np.zeros(0)
         kgrid = np.concatenate([kng, kpos]); nk = len(kgrid); j0 = len(kng)            # DIP: kgrid[j0] = 0 (rest)
         Rk = S.rotm(uK, sp * kgrid)                                       # link 1b -> link 1a: X_1a = Rk X_1b
-        Rcg = S.rotm(dR, sig * phi_of(kgrid, gg, cc))
+        Rcg = S.rotm(dR, sig * phi_of(kgrid - kref, gg, cc))                  # DIP: the arm is built at K = kref
         Cg = np.einsum("nij,j->ni", Rcg, C0 - PV) + PV
         pac = np.zeros(nk); pah = np.zeros(nk); Qg = np.zeros((nk, 3)); ng = np.zeros((nk, 3)); lift = np.zeros(nk, bool)
         nprev = None
         for j in list(range(j0, nk)) + list(range(j0 - 1, -1, -1)):           # DIP: seed at rest, then up, then down
             if j == j0 - 1: nprev = ng[j0]
-            C = Cg[j]; vC = sig * float(dphi_of(kgrid[j], gg, cc)) * np.cross(dR, C); vh = vH(C); vr = vC - vh; rh = unit(C)
+            C = Cg[j]; vC = sig * float(dphi_of(kgrid[j] - kref, gg, cc)) * np.cross(dR, C); vh = vH(C); vr = vC - vh; rh = unit(C)
             n = np.cross(rh, vr); nn = float(np.linalg.norm(n))
             n = n / nn if nn > 1e-9 else (nprev if nprev is not None else unit(vh))
             if nprev is None: n = n if float(n @ vh) >= 0 else -n
@@ -377,9 +382,9 @@ class DipModel(RL.RLModel):
                 if jl2 < jl: jl, lim, why_lim = jl2, float(kgrid[jl2]), "CRK-HORN"
             badN = cL[jneg: j0] < 1.0                                              # DIP: the low arm vs the lug, closing side
             if badN.any(): jneg = jneg + int(np.nonzero(badN)[0].max()) + 1; why_neg = "CRK-HORN"
-        self._cam_table = dict(k=np.degrees(kgrid), phi=np.degrees(phi_of(kgrid, gg, cc)), pa_crank=pac, pa_horn=pah, contact_r=rQ, flank_rho=flank_rho,
+        self._cam_table = dict(k=np.degrees(kgrid), phi=np.degrees(phi_of(kgrid - kref, gg, cc)), pa_crank=pac, pa_horn=pah, contact_r=rQ, flank_rho=flank_rho,
                                clear_hubK=cK, clear_roll_hubK=cR, clear_hub2=c2, lift=lift, cusp=flank_bad)
-        self._scg = dict(PV=PV, dR=dR, uK=uK, sp=sp, sig=sig, g=gg, c=cc, kgrid=kgrid, dK_lim=lim, why_lim=why_lim, j0=j0, dK_neg=float(kgrid[jneg]), why_neg=why_neg, lowarm=low, lugM=lugM)
+        self._scg = dict(PV=PV, dR=dR, uK=uK, sp=sp, sig=sig, g=gg, c=cc, kgrid=kgrid, dK_lim=lim, why_lim=why_lim, j0=j0, kref=kref, dK_neg=float(kgrid[jneg]), why_neg=why_neg, lowarm=low, lugM=lugM)
         self._sc = None
         # metal: crank (boss underside disc + arm underside), roller underside, horn lug underside
         self.rigid["crank"] = (9, np.concatenate([boss, arm]))
