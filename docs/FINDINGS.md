@@ -1988,3 +1988,39 @@ Raw data: `docs/research/sidecar_env_polish/` (CMA rows, picks, re-scores, claim
   horn.
 
 **Next:** the gen-6 CAD proceeds on the verified config (`best_params`). Cost: about $0.47 on the farm.
+
+## Gen-5 CAD fix: the lobe's skin hit is fixed by a 0.5 mm radial offset; ratio fixes overload the roller and a mirrored follower hits its own crank (2026-10-17, user_geneva_rod -> user_geneva_rod_v2; docs/research/geneva-rod-gen5_fix.md)
+
+**Measured**
+* **Real parts move the lobe on their own.** The igus igubal KGLM-03 is 6 mm high, against the 4 mm the CAD modelled.
+  Its eyes plus the 3.8 mm horn hub that the M1.6 thread needs raise the rod end 3.6 mm. The re-solved lobe then enters
+  the skin by only -0.09 mm (gen-5: -0.26).
+* **Stop B is not a lever for the skin.** Ending the law earlier costs nothing on the bench down to dK 50 deg. It costs
+  +0.28 gap at 44 and +1.20 at 40, and even dK 35 leaves the ring 0.04 mm short of the 0.3 mm requirement. Bench:
+  the verifier's harness, a1max only.
+* **A higher drive ratio passes the skin by loading the roller.** A longer crank or a shorter horn shrinks the lobe
+  (+0.86 to +1.26 mm). It also raises the MR63ZZ roller load to 85-155 N, against a static rating of about 0.07-0.10 kN.
+  The earlier v2 draft (crank 14, horn r 1.8) was one of these.
+* **A mirrored follower clears the skin by 2.26 mm and hits its own bell crank.** Its lobe nose sweeps through the
+  O10 tube (-1.16 mm) over the J2 window. The skin screen alone passed it. The builder's posed drive check caught it.
+* **The fix: the dwell from r 10.1 to 9.6.** The profile comes in 0.5 mm with the same law, forces and parts. The
+  ring clears the skin by **+0.41 mm on all 1337 clip frames**, and Raise overhead's min gap goes 0.24 -> 0.72 mm.
+  The follower eye shrinks to O4.5 to stay 0.35 mm off the J2 cap.
+* **v2 judged (fast, two local queues):** R1 80.30 -> 80.17, R1-aim 49.80 -> 49.77, R4 73.83 -> 74.06, R6 0.0, link 1a
+  valid. R16 is unchanged on the same poses (68.33 % both). R17 / R11 were not run: no mujoco in this container.
+* **R1 vs the L1:** link 2's group (hubs 2 / 3, the machined bar, the J2 dowel) carries 0.53 of the 0.62 non-drive
+  points. Link 1b's group carries -0.04.
+
+**Lessons**
+* A lobe fix must be screened by the posed drive check AND the follower / rod load, not by the skin alone. Two of the three
+  skin-passing families failed on a part or a catalogue rating.
+* Catalogue retaining rings have size-dependent lands: DIN 6799 RS 4 needs n >= 1.2 mm (RS 2.3: 1.0). The project's
+  "1.0 mm land" rule holds only up to RS 3.2.
+* The full CAD's R1 deficit against its L1 is now located in one group: link 2's hub-zone geometry. It belongs to the
+  shared bar builder (user_style_minarc), not to the drive.
+
+**Next:**
+- a full judge run of v2, with R17 / R11 on the farm;
+- the Comb hair -0.83 attribution (drive parts);
+- a bar-only / hubs-only swap of link 2;
+- then the re-shoot, if the user says yes.

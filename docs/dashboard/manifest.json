@@ -4,10 +4,10 @@
   "title": "Concept bench morphologies",
   "description": "One row per morphology in the swarm's catalogue: status, the agent's claimed bench numbers, the verifier's re-measured numbers (v_), its best sweep configuration so far, and the 3R baseline once (is_baseline), and the complexity count (the simplicity number, never part of the gap or score): complexity = points, lower = simpler, 0 = three pins on bearing pairs and three links; complexity_items = where the points come from; passive_trans = passive translations (more than 2 = not buildable); mechanism_confidence = counted or estimated. alignment = the alignment auditor's latest verdict (clean / watch / gamed; gamed = the number is not evidence of a better exo, so the design cannot be called verified, a winner or a leader; empty = never audited), alignment_stage = audit (skeptic pending) or skeptic (final), alignment_reasons = the reasons at that level, alignment_t = when, alignment_claim = the number it audited, alignment_stale = the row's claim moved since (a re-audit is due); from docs/alignment/ledger.jsonl (tools/alignment_ledger.py, docs/ALIGNMENT.md). Built from docs/concepts/catalogue.json, families.json, rows/*.json (complexity: tools/simplicity.py on each row's mechanism record, docs/SIMPLICITY.md) and sweeps/*.json.",
   "file": "data/morphs.json",
-  "sha256": "f10f5cdb0fccf930123e33a169b965fc45e5a05f350fdc5cb9d242261ec452e7",
+  "sha256": "dc56e929c3aa0ebcad9949214f09c6f11e4a626b443e10fdb0043906b7206189",
   "rows": 120,
-  "bytes": 265014,
-  "updated": "2026-10-17T02:43:56Z"
+  "bytes": 265262,
+  "updated": "2026-10-17T03:42:11Z"
  },
  {
   "id": "sweeps",
@@ -24,10 +24,10 @@
   "title": "Built CAD judge results",
   "description": "One row per judged design and requirement: value, threshold and pass from the outside judges, timed by the judge output (score files: the earliest of their commit, their file time and the first commit whose docs report the design; scorecard-only values: the scorecard's commit). Built from tools/judged_history.py, judge/scorecard.json files and judge/requirements.json.",
   "file": "data/cad.json",
-  "sha256": "18e75642b779ef0031c0f5012d1e785d9b5d0469b2b3e59f2fc3591338b85800",
-  "rows": 371,
-  "bytes": 116379,
-  "updated": "2026-10-17T03:27:22Z"
+  "sha256": "f8518c4c6ba4436e78e4b146158c497178d32df2cb1db8975f13f41a10d681bb",
+  "rows": 364,
+  "bytes": 114282,
+  "updated": "2026-10-17T03:42:11Z"
  },
  {
   "id": "gpu_evals",
@@ -54,20 +54,20 @@
   "title": "Requirement board",
   "description": "Latest status of R1-R17 (with R1-aim and R5-aim) for the best judged 3-DOF design (most passes on its scorecard, then R1), with the best value any 3-DOF design reached under the current judging rules. Built from judge/scorecard.json files and judge/requirements.json.",
   "file": "data/reqs.json",
-  "sha256": "5a12fb0c4a3d84edcc3052b124f9206b3d41b2f91328a9ca6f341abd35e6381c",
+  "sha256": "55f20c15c10f4285475ad43ff47e913e389ee33292249e6e9831032372bf1eab",
   "rows": 19,
-  "bytes": 8031,
-  "updated": "2026-10-17T03:27:22Z"
+  "bytes": 8019,
+  "updated": "2026-10-17T03:42:11Z"
  },
  {
   "id": "events",
   "title": "Event log",
   "description": "What happened and when: the swarm's own log (docs/concepts/events.jsonl), one milestone per judged design and every new built-CAD R1 record (from the judge outputs).",
   "file": "data/events.json",
-  "sha256": "670ccc83c7d590b43333ead00c997aaa0d5d2bc1706a7eb3955190ce7ed7bde2",
-  "rows": 583,
-  "bytes": 217763,
-  "updated": "2026-10-17T03:27:22Z"
+  "sha256": "eb2f9d76f1c56cdc87a3d296a761c6645e0f7ee0f71c80990535cbda401c1daa",
+  "rows": 582,
+  "bytes": 217603,
+  "updated": "2026-10-17T03:42:11Z"
  },
  {
   "id": "spend",
@@ -104,9 +104,9 @@
   "title": "Data build info",
   "description": "When tools/dash_build.py last gathered the data, the repo commit, and any warnings it printed.",
   "file": "data/meta.json",
-  "sha256": "062de80ceb02b876bc7d790982269b325cbdbc93ac61cc46f2266cbcbac36c35",
+  "sha256": "649aab1d3b26c65880cbbda39009ad39c2ca454c75e9fca32393ec0405407688",
   "rows": 1,
   "bytes": 2089,
-  "updated": "2026-10-17T03:27:22Z"
+  "updated": "2026-10-17T03:42:11Z"
  }
 ]

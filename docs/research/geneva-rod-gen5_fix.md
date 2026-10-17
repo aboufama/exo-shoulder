@@ -5,6 +5,21 @@ slaved to q2 by a lobe on hub 2 -> MR63ZZ roller -> bell crank -> pushrod with i
 Builds: `pipeline/full-exo/designs/l1_geneva-rod` (L1), `user_geneva_rod` (full CAD), `user_geneva_rod_v2` (this fix).
 Open items came from the independent check `pipeline/full-exo/designs/user_geneva_rod/VERIFY.md` (NOT REFUTED, 5 corrections).
 
+**Status 2026-10-17 (this run closes sections 2-5).**
+- Lobe: radial offset (dwell r 9.6) + an O4.5 follower eye, +0.41 mm on every frame.
+- Real parts: KGLM-03 at 6 mm, DIN 6799 grooves with catalogue lands, the post clip, M1.6 x 4.
+- Link 1a: repaired.
+- R1: link 2's group holds 0.53 of the 0.62 points.
+- v2: built and judged (fast).
+
+**Open:**
+- a FULL judge run of v2 (R6 at step 1, R2 at step 2, R16 at step 4), and R17 / R11 on the farm (no mujoco here);
+- the Comb hair -0.83 attribution;
+- a bar-only / hubs-only split of link 2's 0.53;
+- the horn pin tilt (misalignment 11.8-13.9 deg on the KGLM-03);
+- the MR63ZZ static rating from the maker's datasheet;
+- the re-shoot (needs the user's yes).
+
 ## 1. Judge: a general slaved-coordinate coupling in judge/dynamics.py (MEASUREMENT change)
 
 **What was wrong.** The general chain modelled K as a free, spring-held knuckle. A slaved K has no free spring path: the
@@ -198,4 +213,75 @@ frames, so the swapped group sits where the L1 put it.
 - Link 1b's group is worth -0.04 R1 (+0.29 R1-aim): nothing. The l1a and base swaps were stopped unfinished to free the
   CPU for the judges. With l2 at 0.53 and l1b at -0.04, they and l3 / l4 share the remaining 0.13.
 
-V2_SECTION
+## 5. V2: rebuild and re-judge (DESIGN change, measured separately from the measurement changes)
+
+**Build.** `user_style_geneva_fix.py --r-base 9.6 --arm-half 2.25` on `user_geneva_rod` -> `user_geneva_rod_v2`. It rebuilds
+the drive parts: the lobe ring, the bell crank set, the pushrod set and the horn set. It repairs link 1a's solid
+(BRepAlgoAPI_Defeaturing removes the 0.24 mm2 sliver face 78, the face that failed BRepCheck after tessellation; volume
+change 0.0 mm3). It copies every other part, STEP and chain frame unchanged, and re-poses the drive groups dk / dr by the
+exact RSSR closure. Result: 108 parts, 244.1 g, no invalid or multi-solid part, roller-to-lobe deviation 0.000 mm and
+closure 0.000 mm on the law table. The slaved-K declaration is regenerated from the build's own drive_kin rows (same law).
+
+The builder's posed drive check over 400 workspace poses (worst signed clearance between moving drive parts):
+
+| pair | gen-5 | v2 |
+|---|---|---|
+| roller on the lobe | -0.001 (contact) | -0.000 (contact) |
+| bell crank vs the lobe ring | +0.51 | +0.76 |
+| follower eye vs the J2 cap | +0.60 | +0.35 (eye O4.5) |
+| roller vs the J2 cap | +0.14 | +0.10 |
+| pushrod vs the K clock-spring cap | +1.18 | **+3.75** (rod line 3.6 mm higher) |
+| pushrod vs the horn plate | +0.17 | +0.43 |
+| horn pin vs the igubal housing | - | +0.27 |
+| igubal balls in their housings | - | 0.000 (seated) |
+
+**How it was judged.** The run was `tools/judge_all.sh user_geneva_rod_v2 fast`, split into two queues of the same
+commands, each judge with `--jobs 1` (at most 2 local processes). The farm was not permitted in this session, and the
+full run does not fit the remaining box on this 4-core machine. That gives these MEASUREMENT differences from the
+before-scorecard (a full run, partly on the farm). None of them is a design effect:
+- R1 / R1-aim / R3 / R4 run at step 3 in both modes: identical measurement.
+- R6 at step 3 (every 3rd frame) instead of 1. The checker re-ran gen-5 at step 3 and also got 0.0.
+- R2 at step 6 instead of 2.
+- R16 at step 12 (120 poses) instead of 4 (358). **On the same 120 poses gen-5 also scores 68.33 %**, so R16 does not
+  move; the 72.6 -> 68.3 difference is sampling only.
+- R17 / R11 NOT RUN: this container's Python has no mujoco. The before values came from the farm.
+
+| | gen-5 `user_geneva_rod` (full) | v2 `user_geneva_rod_v2` (fast) | what changed it |
+|---|---|---|---|
+| R1 (2-14 mm) | 80.30 % | **80.17 %** (-0.12) | design (Raise overhead +0.23, Comb hair -0.83, the rest within 0.11) |
+| R1-aim (2-10 mm) | 49.80 % | 49.77 % | design |
+| R4 Raise overhead | 73.83 % (min gap 0.24 mm, the lobe 0.26 mm INSIDE) | **74.06 %** (min gap **0.72 mm**) | design: the lobe fix |
+| R2 | 24.87 mm (user's forearm cuff; ours 17.71) | 24.87 mm (ours 17.67) | step 2 -> 6; the drive parts 0.0 in both |
+| R3 | 100 % | 100 % | - |
+| R5 / R5-aim | 3 / 3 | 3 / 3 | - |
+| R6 | 0.0 mm | 0.0 mm | step 1 -> 3 (gen-5 at step 3: 0.0) |
+R7_ROW
+| R8 | 242.6 g | 244.1 g | design (+1.5 g: the 6 mm igubals, the 3.8 mm horn hub, the clips, the shim) |
+| R10 | NOT RUN | NOT RUN | base_slip.py handles spherical chains only |
+| R11 | 0.254 kPa PASS | NOT RUN | environment (no mujoco here) |
+| R16 | 72.6 % (358 poses) | 68.3 % (120 poses) = gen-5 on the same 120 | sampling (measurement) |
+| R17 | PASS | NOT RUN | environment (no mujoco here) |
+
+PASS_COUNT
+
+**What the numbers say.**
+- The lobe fix does what it was for. The ring clears the judges' skin by 0.41 mm on every frame, and Raise overhead's
+  nearest metal goes from 0.26 mm inside to 0.72 mm out (R4 +0.23).
+- R1 falls 0.12 net. Comb hair loses 0.83. The lobe is an unlikely cause: it only moved 0.5 mm inward, away from the skin.
+  The candidates are the drive parts that moved more. The rod line
+  rose 3.6 mm and the eyes widened to 6 mm, so the pushrod and igubal heads sit 1-3.6 mm higher over K's cap. The
+  crank-pin tilt went from 29.0 to 23.5 deg. The section-4 attribution found the drive TAKING Comb hair coverage
+  before (88.30 without it, 87.11 with it). Attributing the 0.83 to one drive part is the next r1_swap / r1_attr step.
+- The 0.62 non-drive points against the L1 sit in link 2's group (section 4). They are the next lever, not this fix's.
+
+**Stills that would change** (not rendered; a re-shoot needs the user's yes for the GPU):
+- The drive close-ups and macros, which change part sizes: kopen_drive_closeup, kopen_drive_lobe_macro,
+  parts_drive_closeup, parts_drive_lobe_macro, parts_drive_lobe_side, parts_drive_lobe_side2 and parts_drive_oblique.
+  They show 6 mm igubals, the taller horn hub with M1.6 x 4 screws, grooved pins with clips, the post clip and shim,
+  the slimmer follower eye, and a lobe 0.5 mm smaller.
+- The overhead heroes, where the lobe sits under the J2 cap: hero_overhead_chain, hero_overhead_chain_back,
+  hero_overhead_back and hero_overhead_back_mid.
+- The K-open views, where the pushrod line is 3.6 mm higher: kopen_chain and kopen_back.
+- parts_shoulder_top, which shows the horn plate 2.6 mm higher on the K cap.
+- Unchanged: rest_*, parts_knee_* and parts_four_hubs_posterior. Their parts are copied byte for byte, and the drive is
+  not in their frame. hero_shelf_* changes only where the drive shows.
