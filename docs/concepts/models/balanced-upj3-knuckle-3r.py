@@ -52,6 +52,8 @@ def build(B, F, p):
     pK, okK, mK = K.closure(p1, p2, bk1, bk2, float(p["sK"]), margin_deg=0.0); ok &= okK
     q = np.stack([K.axis_angle(p1, F.S([1.0, 0, 0]), pK), K.axis_angle(pK, p1, p2), K.axis_angle(p2, pK, p3),
                   K.axis_angle(p3, F.HG([0.0, -1, 0]), p2)], -1)
+    for j, (s_lo, s_hi) in (p.get("stops") or {}).items():      # hard stops on a joint's OWN angle (dowel in an arc slot)
+        ok &= ((q[:, int(j)] - s_lo) % 360.0) <= ((s_hi - s_lo) % 360.0)
     hubs = [K.hub_member("hub1", p1, "J1"), K.hub_member("hubK", pK, "K"), K.hub_member("hub2", p2, "J2"), K.hub_member("hub3", p3, "J3")]
     w, t = p["width"], p["t_link"]
     links = [K.strap_member("link1a", p1, pK, ("J1", "K"), width=w, t=t, ramp_to=(("hub1", K.STACK), ("hubK", 0.0))),
@@ -63,6 +65,18 @@ def build(B, F, p):
     return K.Chain(members=hubs + links, ok=ok, q=q, joints=dict(J1=p1, K=pK, J2=p2, J3=p3),
                    info=dict(min_margin=round(float(np.min(np.minimum(th - lo, hi - th)[ok])), 2) if ok.any() else None,
                              a1e_open_max=round(float(np.nanmax(dK)), 2) if ok.any() else None))
+
+
+def clip_stops(p, delta, joints=(0, 2, 3)):
+    """joint-range stops from the FIT bench's clip frames (never the wear / held poses): each joint's own angle limited to
+    the arc its clip-frame values span, widened by delta deg on both sides (circular)"""
+    B = K.bench(60, 160); F = K.frames(B); ch = build(B, F, dict(p, stops=None)); ok = np.asarray(ch.ok, bool) & F.clip
+    st = {}
+    for j in joints:
+        a = np.sort(np.asarray(ch.q)[ok, j] % 360.0); gaps = np.diff(np.r_[a, a[0] + 360.0]); k = int(np.argmax(gaps))
+        lo = a[(k + 1) % len(a)]; hi = a[k]                     # the arc that leaves out the largest empty gap
+        st[str(j)] = [float((lo - delta) % 360.0), float((hi + delta) % 360.0)]
+    return st
 
 
 def held_bench():
@@ -144,6 +158,8 @@ if __name__ == "__main__":
         if len(a) > 2: json.dump(out, open(a[2], "w"), indent=0, default=float)
         print(json.dumps({k: v for k, v in out.items() if k != "poses"}, default=float)); sys.exit()
     par = dict(PARAMS, **(json.loads(a[1]) if len(a) > 1 else {}))
+    if "stop_delta" in par and par.get("stops") is None:
+        par["stops"] = clip_stops(par, float(par["stop_delta"]))
     if mode == "fit":
         r = K.evaluate(K.bench(60, 160), build, par)
         print(json.dumps({k: r[k] for k in ("gap", "reach", "follow", "inband14", "contact", "honest", "audit", "inband_member", "mass_g", "flips", "collide", "min_margin", "a1e_open_max")}, default=float))

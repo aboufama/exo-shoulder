@@ -1,0 +1,1020 @@
+{
+ "id": "roller-longdyad-knuckle-3r",
+ "bench": "bench",
+ "F2_fit": 62.04,
+ "FK_fit": 55.12,
+ "a1": 37.551659306338074,
+ "a2": 57.218408376139465,
+ "a1max": 58.7678,
+ "poses": [
+  {
+   "i": 117,
+   "plane": -90.0,
+   "elev": 45.0,
+   "axial": 135.0,
+   "th": 112.86,
+   "wall": "stretched_stopB",
+   "a1e_need": 63.64,
+   "req2": 66.0
+  },
+  {
+   "i": 119,
+   "plane": -90.0,
+   "elev": 60.0,
+   "axial": 135.0,
+   "th": 119.06,
+   "wall": "stretched_stopB",
+   "a1e_need": 66.84,
+   "req2": 74.0
+  },
+  {
+   "i": 129,
+   "plane": -75.0,
+   "elev": 60.0,
+   "axial": 120.0,
+   "th": 108.06,
+   "wall": "stretched_law",
+   "a1e_need": 58.84,
+   "req2": 70.0
+  },
+  {
+   "i": 146,
+   "plane": -45.0,
+   "elev": 30.0,
+   "axial": 135.0,
+   "th": 114.38,
+   "wall": "stretched_stopB",
+   "a1e_need": 62.16,
+   "req2": 58.0
+  },
+  {
+   "i": 148,
+   "plane": -45.0,
+   "elev": 45.0,
+   "axial": 135.0,
+   "th": 123.46,
+   "wall": "stretched_stopB",
+   "a1e_need": 74.24,
+   "req2": 65.0
+  },
+  {
+   "i": 150,
+   "plane": -45.0,
+   "elev": 60.0,
+   "axial": 135.0,
+   "th": 130.09,
+   "wall": "stretched_stopB",
+   "a1e_need": 77.87,
+   "req2": 73.0
+  },
+  {
+   "i": 161,
+   "plane": -30.0,
+   "elev": 45.0,
+   "axial": 120.0,
+   "th": 114.5,
+   "wall": "stretched_stopB",
+   "a1e_need": 62.28,
+   "req2": 60.0
+  },
+  {
+   "i": 181,
+   "plane": -15.0,
+   "elev": 90.0,
+   "axial": -15.0,
+   "th": 7.68,
+   "wall": "folded",
+   "a1e_need": 57.54,
+   "req2": 78.0
+  },
+  {
+   "i": 183,
+   "plane": -15.0,
+   "elev": 90.0,
+   "axial": 105.0,
+   "th": 114.91,
+   "wall": "stretched_stopB",
+   "a1e_need": 65.69,
+   "req2": 81.0
+  },
+  {
+   "i": 202,
+   "plane": 0.0,
+   "elev": 90.0,
+   "axial": -15.0,
+   "th": 12.65,
+   "wall": "folded",
+   "a1e_need": 55.57,
+   "req2": 66.0
+  },
+  {
+   "i": 206,
+   "plane": 0.0,
+   "elev": 120.0,
+   "axial": -15.0,
+   "th": 9.01,
+   "wall": "folded",
+   "a1e_need": 59.21,
+   "req2": 90.0
+  },
+  {
+   "i": 207,
+   "plane": 0.0,
+   "elev": 135.0,
+   "axial": -45.0,
+   "th": 18.41,
+   "wall": "folded",
+   "a1e_need": 46.81,
+   "req2": 49.0
+  },
+  {
+   "i": 210,
+   "plane": 0.0,
+   "elev": 165.0,
+   "axial": -45.0,
+   "th": 19.7,
+   "wall": "folded",
+   "a1e_need": 52.52,
+   "req2": 56.0
+  },
+  {
+   "i": 232,
+   "plane": 15.0,
+   "elev": 105.0,
+   "axial": 0.0,
+   "th": 17.84,
+   "wall": "folded",
+   "a1e_need": 44.38,
+   "req2": 64.0
+  },
+  {
+   "i": 233,
+   "plane": 15.0,
+   "elev": 120.0,
+   "axial": -30.0,
+   "th": 11.47,
+   "wall": "folded",
+   "a1e_need": 60.75,
+   "req2": 88.0
+  },
+  {
+   "i": 235,
+   "plane": 15.0,
+   "elev": 135.0,
+   "axial": 0.0,
+   "th": 21.82,
+   "wall": "folded",
+   "a1e_need": 40.4,
+   "req2": 111.0
+  },
+  {
+   "i": 236,
+   "plane": 15.0,
+   "elev": 150.0,
+   "axial": -30.0,
+   "th": 11.89,
+   "wall": "folded",
+   "a1e_need": 53.33,
+   "req2": 54.0
+  },
+  {
+   "i": 259,
+   "plane": 30.0,
+   "elev": 105.0,
+   "axial": 0.0,
+   "th": 18.75,
+   "wall": "folded",
+   "a1e_need": 46.47,
+   "req2": 63.0
+  },
+  {
+   "i": 260,
+   "plane": 30.0,
+   "elev": 120.0,
+   "axial": -30.0,
+   "th": 18.59,
+   "wall": "folded",
+   "a1e_need": 58.63,
+   "req2": 71.0
+  },
+  {
+   "i": 262,
+   "plane": 30.0,
+   "elev": 135.0,
+   "axial": 0.0,
+   "th": 13.67,
+   "wall": "folded",
+   "a1e_need": 63.55,
+   "req2": 112.0
+  },
+  {
+   "i": 263,
+   "plane": 30.0,
+   "elev": 150.0,
+   "axial": -30.0,
+   "th": 15.77,
+   "wall": "folded",
+   "a1e_need": 61.45,
+   "req2": 127.0
+  },
+  {
+   "i": 265,
+   "plane": 30.0,
+   "elev": 165.0,
+   "axial": 0.0,
+   "th": 21.97,
+   "wall": "folded",
+   "a1e_need": 55.25,
+   "req2": 102.0
+  },
+  {
+   "i": 292,
+   "plane": 45.0,
+   "elev": 165.0,
+   "axial": -15.0,
+   "th": 16.65,
+   "wall": "folded",
+   "a1e_need": 45.57,
+   "req2": 53.0
+  },
+  {
+   "i": 306,
+   "plane": 60.0,
+   "elev": 75.0,
+   "axial": -120.0,
+   "th": 117.18,
+   "wall": "stretched_stopB",
+   "a1e_need": 70.96,
+   "req2": 57.0
+  },
+  {
+   "i": 330,
+   "plane": 75.0,
+   "elev": 60.0,
+   "axial": -135.0,
+   "th": 127.01,
+   "wall": "stretched_stopB",
+   "a1e_need": 77.79,
+   "req2": 58.0
+  },
+  {
+   "i": 333,
+   "plane": 75.0,
+   "elev": 75.0,
+   "axial": -120.0,
+   "th": 120.37,
+   "wall": "stretched_stopB",
+   "a1e_need": 74.15,
+   "req2": 58.0
+  },
+  {
+   "i": 336,
+   "plane": 75.0,
+   "elev": 90.0,
+   "axial": -105.0,
+   "th": 110.33,
+   "wall": "stretched_law",
+   "a1e_need": 73.11,
+   "req2": 58.0
+  },
+  {
+   "i": 340,
+   "plane": 75.0,
+   "elev": 120.0,
+   "axial": -105.0,
+   "th": 114.01,
+   "wall": "stretched_stopB",
+   "a1e_need": 76.79,
+   "req2": 60.0
+  },
+  {
+   "i": 343,
+   "plane": 75.0,
+   "elev": 150.0,
+   "axial": -105.0,
+   "th": 114.74,
+   "wall": "stretched_stopB",
+   "a1e_need": 77.52,
+   "req2": 64.0
+  },
+  {
+   "i": 354,
+   "plane": 90.0,
+   "elev": 45.0,
+   "axial": -150.0,
+   "th": 127.81,
+   "wall": "stretched_stopB",
+   "a1e_need": 78.59,
+   "req2": 62.0
+  },
+  {
+   "i": 357,
+   "plane": 90.0,
+   "elev": 60.0,
+   "axial": -135.0,
+   "th": 128.33,
+   "wall": "stretched_stopB",
+   "a1e_need": 79.11,
+   "req2": 58.0
+  },
+  {
+   "i": 360,
+   "plane": 90.0,
+   "elev": 75.0,
+   "axial": -120.0,
+   "th": 124.17,
+   "wall": "stretched_stopB",
+   "a1e_need": 86.95,
+   "req2": 58.0
+  },
+  {
+   "i": 363,
+   "plane": 90.0,
+   "elev": 90.0,
+   "axial": -120.0,
+   "th": 129.68,
+   "wall": "stretched_stopB",
+   "a1e_need": 92.46,
+   "req2": 57.0
+  },
+  {
+   "i": 367,
+   "plane": 90.0,
+   "elev": 120.0,
+   "axial": -120.0,
+   "th": 135.61,
+   "wall": "stretched_stopB",
+   "a1e_need": 98.39,
+   "req2": 59.0
+  },
+  {
+   "i": 369,
+   "plane": 90.0,
+   "elev": 135.0,
+   "axial": -90.0,
+   "th": 108.55,
+   "wall": "stretched_law",
+   "a1e_need": 62.33,
+   "req2": 62.0
+  },
+  {
+   "i": 370,
+   "plane": 90.0,
+   "elev": 150.0,
+   "axial": -120.0,
+   "th": 134.48,
+   "wall": "stretched_stopB",
+   "a1e_need": 97.26,
+   "req2": 64.0
+  },
+  {
+   "i": 372,
+   "plane": 90.0,
+   "elev": 165.0,
+   "axial": -90.0,
+   "th": 111.79,
+   "wall": "stretched_stopB",
+   "a1e_need": 74.57,
+   "req2": 66.0
+  },
+  {
+   "i": 381,
+   "plane": 105.0,
+   "elev": 45.0,
+   "axial": -165.0,
+   "th": 133.17,
+   "wall": "stretched_stopB",
+   "a1e_need": 80.95,
+   "req2": 64.0
+  },
+  {
+   "i": 384,
+   "plane": 105.0,
+   "elev": 60.0,
+   "axial": -150.0,
+   "th": 139.48,
+   "wall": "stretched_stopB",
+   "a1e_need": 87.26,
+   "req2": 59.0
+  },
+  {
+   "i": 387,
+   "plane": 105.0,
+   "elev": 75.0,
+   "axial": -135.0,
+   "th": 140.63,
+   "wall": "stretched_stopB",
+   "a1e_need": 91.41,
+   "req2": 58.0
+  },
+  {
+   "i": 390,
+   "plane": 105.0,
+   "elev": 90.0,
+   "axial": -120.0,
+   "th": 135.03,
+   "wall": "stretched_stopB",
+   "a1e_need": 85.81,
+   "req2": 58.0
+  },
+  {
+   "i": 392,
+   "plane": 105.0,
+   "elev": 105.0,
+   "axial": -150.0,
+   "th": 168.38,
+   "wall": "stretched_stopB",
+   "a1e_need": 119.16,
+   "req2": 54.0
+  },
+  {
+   "i": 393,
+   "plane": 105.0,
+   "elev": 105.0,
+   "axial": -90.0,
+   "th": 110.24,
+   "wall": "stretched_law",
+   "a1e_need": 64.02,
+   "req2": 57.0
+  },
+  {
+   "i": 394,
+   "plane": 105.0,
+   "elev": 120.0,
+   "axial": -120.0,
+   "th": 141.39,
+   "wall": "stretched_stopB",
+   "a1e_need": 104.17,
+   "req2": 57.0
+  },
+  {
+   "i": 395,
+   "plane": 105.0,
+   "elev": 135.0,
+   "axial": -150.0,
+   "th": 154.28,
+   "wall": "stretched_stopB",
+   "a1e_need": 117.06,
+   "req2": 65.0
+  },
+  {
+   "i": 396,
+   "plane": 105.0,
+   "elev": 135.0,
+   "axial": -90.0,
+   "th": 115.47,
+   "wall": "stretched_stopB",
+   "a1e_need": 78.25,
+   "req2": 61.0
+  },
+  {
+   "i": 397,
+   "plane": 105.0,
+   "elev": 150.0,
+   "axial": -120.0,
+   "th": 138.7,
+   "wall": "stretched_stopB",
+   "a1e_need": 101.48,
+   "req2": 62.0
+  },
+  {
+   "i": 398,
+   "plane": 105.0,
+   "elev": 165.0,
+   "axial": -150.0,
+   "th": 135.06,
+   "wall": "stretched_stopB",
+   "a1e_need": 97.84,
+   "req2": 90.0
+  },
+  {
+   "i": 399,
+   "plane": 105.0,
+   "elev": 165.0,
+   "axial": -90.0,
+   "th": 120.02,
+   "wall": "stretched_stopB",
+   "a1e_need": 77.8,
+   "req2": 67.0
+  },
+  {
+   "i": 405,
+   "plane": 120.0,
+   "elev": 30.0,
+   "axial": -180.0,
+   "th": 121.38,
+   "wall": "stretched_stopB",
+   "a1e_need": 69.16,
+   "req2": 63.0
+  },
+  {
+   "i": 408,
+   "plane": 120.0,
+   "elev": 45.0,
+   "axial": -165.0,
+   "th": 131.77,
+   "wall": "stretched_stopB",
+   "a1e_need": 82.55,
+   "req2": 64.0
+  },
+  {
+   "i": 411,
+   "plane": 120.0,
+   "elev": 60.0,
+   "axial": -150.0,
+   "th": 141.19,
+   "wall": "stretched_stopB",
+   "a1e_need": 91.97,
+   "req2": 61.0
+  },
+  {
+   "i": 414,
+   "plane": 120.0,
+   "elev": 75.0,
+   "axial": -135.0,
+   "th": 144.89,
+   "wall": "stretched_stopB",
+   "a1e_need": 92.67,
+   "req2": 58.0
+  },
+  {
+   "i": 416,
+   "plane": 120.0,
+   "elev": 90.0,
+   "axial": -180.0,
+   "th": 161.02,
+   "wall": "stretched_stopB",
+   "a1e_need": 123.8,
+   "req2": 218.0
+  },
+  {
+   "i": 417,
+   "plane": 120.0,
+   "elev": 90.0,
+   "axial": -120.0,
+   "th": 140.05,
+   "wall": "stretched_stopB",
+   "a1e_need": 90.83,
+   "req2": 55.0
+  },
+  {
+   "i": 419,
+   "plane": 120.0,
+   "elev": 105.0,
+   "axial": -150.0,
+   "th": 170.77,
+   "wall": "stretched_stopB",
+   "a1e_need": 121.55,
+   "req2": 52.0
+  },
+  {
+   "i": 420,
+   "plane": 120.0,
+   "elev": 105.0,
+   "axial": -90.0,
+   "th": 115.08,
+   "wall": "stretched_stopB",
+   "a1e_need": 68.86,
+   "req2": 56.0
+  },
+  {
+   "i": 421,
+   "plane": 120.0,
+   "elev": 120.0,
+   "axial": -120.0,
+   "th": 144.97,
+   "wall": "stretched_stopB",
+   "a1e_need": 102.75,
+   "req2": 54.0
+  },
+  {
+   "i": 422,
+   "plane": 120.0,
+   "elev": 135.0,
+   "axial": -150.0,
+   "th": 148.52,
+   "wall": "stretched_stopB",
+   "a1e_need": 111.3,
+   "req2": 74.0
+  },
+  {
+   "i": 423,
+   "plane": 120.0,
+   "elev": 135.0,
+   "axial": -90.0,
+   "th": 120.64,
+   "wall": "stretched_stopB",
+   "a1e_need": 83.42,
+   "req2": 59.0
+  },
+  {
+   "i": 424,
+   "plane": 120.0,
+   "elev": 150.0,
+   "axial": -120.0,
+   "th": 139.12,
+   "wall": "stretched_stopB",
+   "a1e_need": 101.9,
+   "req2": 65.0
+  },
+  {
+   "i": 425,
+   "plane": 120.0,
+   "elev": 165.0,
+   "axial": -150.0,
+   "th": 127.34,
+   "wall": "stretched_stopB",
+   "a1e_need": 90.12,
+   "req2": 107.0
+  },
+  {
+   "i": 426,
+   "plane": 120.0,
+   "elev": 165.0,
+   "axial": -90.0,
+   "th": 125.97,
+   "wall": "stretched_stopB",
+   "a1e_need": 88.75,
+   "req2": 66.0
+  },
+  {
+   "i": 431,
+   "plane": 135.0,
+   "elev": 30.0,
+   "axial": -150.0,
+   "th": 111.06,
+   "wall": "stretched_stopB",
+   "a1e_need": 58.84,
+   "req2": 57.0
+  },
+  {
+   "i": 433,
+   "plane": 135.0,
+   "elev": 45.0,
+   "axial": -165.0,
+   "th": 131.14,
+   "wall": "stretched_stopB",
+   "a1e_need": 78.92,
+   "req2": 60.0
+  },
+  {
+   "i": 434,
+   "plane": 135.0,
+   "elev": 45.0,
+   "axial": -120.0,
+   "th": 115.17,
+   "wall": "stretched_stopB",
+   "a1e_need": 62.95,
+   "req2": 55.0
+  },
+  {
+   "i": 436,
+   "plane": 135.0,
+   "elev": 60.0,
+   "axial": -135.0,
+   "th": 136.31,
+   "wall": "stretched_stopB",
+   "a1e_need": 84.09,
+   "req2": 58.0
+  },
+  {
+   "i": 438,
+   "plane": 135.0,
+   "elev": 75.0,
+   "axial": -150.0,
+   "th": 159.27,
+   "wall": "stretched_stopB",
+   "a1e_need": 107.05,
+   "req2": 59.0
+  },
+  {
+   "i": 439,
+   "plane": 135.0,
+   "elev": 75.0,
+   "axial": -90.0,
+   "th": 111.42,
+   "wall": "stretched_stopB",
+   "a1e_need": 59.2,
+   "req2": 53.0
+  },
+  {
+   "i": 440,
+   "plane": 135.0,
+   "elev": 90.0,
+   "axial": -165.0,
+   "th": 171.71,
+   "wall": "stretched_stopB",
+   "a1e_need": 125.49,
+   "req2": 206.0
+  },
+  {
+   "i": 441,
+   "plane": 135.0,
+   "elev": 90.0,
+   "axial": -105.0,
+   "th": 129.8,
+   "wall": "stretched_stopB",
+   "a1e_need": 83.58,
+   "req2": 52.0
+  },
+  {
+   "i": 443,
+   "plane": 135.0,
+   "elev": 105.0,
+   "axial": -120.0,
+   "th": 147.11,
+   "wall": "stretched_stopB",
+   "a1e_need": 104.89,
+   "req2": 50.0
+  },
+  {
+   "i": 445,
+   "plane": 135.0,
+   "elev": 120.0,
+   "axial": -135.0,
+   "th": 153.34,
+   "wall": "stretched_stopB",
+   "a1e_need": 116.12,
+   "req2": 53.0
+  },
+  {
+   "i": 446,
+   "plane": 135.0,
+   "elev": 120.0,
+   "axial": -75.0,
+   "th": 107.39,
+   "wall": "stretched_law",
+   "a1e_need": 70.17,
+   "req2": 57.0
+  },
+  {
+   "i": 447,
+   "plane": 135.0,
+   "elev": 135.0,
+   "axial": -150.0,
+   "th": 140.61,
+   "wall": "stretched_stopB",
+   "a1e_need": 103.39,
+   "req2": 84.0
+  },
+  {
+   "i": 448,
+   "plane": 135.0,
+   "elev": 135.0,
+   "axial": -90.0,
+   "th": 123.45,
+   "wall": "stretched_stopB",
+   "a1e_need": 86.23,
+   "req2": 58.0
+  },
+  {
+   "i": 454,
+   "plane": 150.0,
+   "elev": 30.0,
+   "axial": -150.0,
+   "th": 111.07,
+   "wall": "stretched_stopB",
+   "a1e_need": 58.85,
+   "req2": 57.0
+  },
+  {
+   "i": 456,
+   "plane": 150.0,
+   "elev": 45.0,
+   "axial": -165.0,
+   "th": 131.28,
+   "wall": "stretched_stopB",
+   "a1e_need": 82.06,
+   "req2": 62.0
+  },
+  {
+   "i": 457,
+   "plane": 150.0,
+   "elev": 45.0,
+   "axial": -105.0,
+   "th": 111.7,
+   "wall": "stretched_stopB",
+   "a1e_need": 62.48,
+   "req2": 53.0
+  },
+  {
+   "i": 458,
+   "plane": 150.0,
+   "elev": 60.0,
+   "axial": -180.0,
+   "th": 145.76,
+   "wall": "stretched_stopB",
+   "a1e_need": 96.54,
+   "req2": 87.0
+  },
+  {
+   "i": 459,
+   "plane": 150.0,
+   "elev": 60.0,
+   "axial": -120.0,
+   "th": 131.07,
+   "wall": "stretched_stopB",
+   "a1e_need": 78.85,
+   "req2": 52.0
+  },
+  {
+   "i": 461,
+   "plane": 150.0,
+   "elev": 75.0,
+   "axial": -135.0,
+   "th": 153.67,
+   "wall": "stretched_stopB",
+   "a1e_need": 104.45,
+   "req2": 54.0
+  },
+  {
+   "i": 463,
+   "plane": 150.0,
+   "elev": 90.0,
+   "axial": -150.0,
+   "th": 175.96,
+   "wall": "stretched_stopB",
+   "a1e_need": null,
+   "req2": Infinity
+  },
+  {
+   "i": 464,
+   "plane": 150.0,
+   "elev": 90.0,
+   "axial": -90.0,
+   "th": 117.94,
+   "wall": "stretched_stopB",
+   "a1e_need": 71.72,
+   "req2": 51.0
+  },
+  {
+   "i": 465,
+   "plane": 150.0,
+   "elev": 105.0,
+   "axial": -165.0,
+   "th": 155.11,
+   "wall": "stretched_stopB",
+   "a1e_need": 117.89,
+   "req2": 134.0
+  },
+  {
+   "i": 466,
+   "plane": 150.0,
+   "elev": 105.0,
+   "axial": -105.0,
+   "th": 134.23,
+   "wall": "stretched_stopB",
+   "a1e_need": 97.01,
+   "req2": 48.0
+  },
+  {
+   "i": 467,
+   "plane": 150.0,
+   "elev": 120.0,
+   "axial": -180.0,
+   "th": 128.82,
+   "wall": "stretched_stopB",
+   "a1e_need": 91.6,
+   "req2": 156.0
+  },
+  {
+   "i": 468,
+   "plane": 150.0,
+   "elev": 120.0,
+   "axial": -120.0,
+   "th": 142.93,
+   "wall": "stretched_stopB",
+   "a1e_need": 105.71,
+   "req2": 51.0
+  }
+ ],
+ "leader": {
+  "req2_clip": [
+   52.0,
+   54.0,
+   55.0,
+   60.0,
+   62.0
+  ],
+  "req2_ws": [
+   51.0,
+   54.0,
+   56.0,
+   60.0,
+   67.0
+  ],
+  "reqK_clip": [
+   47.0,
+   50.9,
+   53.0,
+   54.0,
+   55.0
+  ],
+  "reqK_ws": [
+   42.0,
+   50.0,
+   52.0,
+   54.0,
+   55.0
+  ],
+  "n_taken": 371,
+  "n_clip": 110,
+  "req2_max_taken": 67.0
+ },
+ "stretched": {
+  "n": 73,
+  "closable": 72,
+  "req2_pct": [
+   48.0,
+   53.0,
+   57.0,
+   59.0,
+   65.0,
+   83.7,
+   218.0
+  ],
+  "le_F2fit": 47,
+  "le_F2fit_plus": {
+   "2": 52,
+   "4": 58,
+   "6": 59,
+   "8": 60,
+   "12": 63,
+   "20": 64,
+   "40": 67
+  }
+ },
+ "folded": {
+  "n": 15,
+  "closable": 15,
+  "req2_pct": [
+   49.0,
+   53.4,
+   59.5,
+   71.0,
+   96.0,
+   111.6,
+   127.0
+  ],
+  "le_F2fit": 4,
+  "le_F2fit_plus": {
+   "2": 6,
+   "4": 7,
+   "6": 7,
+   "8": 7,
+   "12": 8,
+   "20": 9,
+   "40": 12
+  }
+ },
+ "price": {
+  "F2+0": {
+   "F2": 62.0,
+   "hub2_clip_out_of_band": 0.0,
+   "stretched_parkable": 47,
+   "folded_parkable": 4
+  },
+  "F2+2": {
+   "F2": 64.0,
+   "hub2_clip_out_of_band": 0.073,
+   "stretched_parkable": 52,
+   "folded_parkable": 6
+  },
+  "F2+4": {
+   "F2": 66.0,
+   "hub2_clip_out_of_band": 0.264,
+   "stretched_parkable": 58,
+   "folded_parkable": 7
+  },
+  "F2+6": {
+   "F2": 68.0,
+   "hub2_clip_out_of_band": 0.764,
+   "stretched_parkable": 59,
+   "folded_parkable": 7
+  },
+  "F2+8": {
+   "F2": 70.0,
+   "hub2_clip_out_of_band": 0.855,
+   "stretched_parkable": 60,
+   "folded_parkable": 7
+  },
+  "F2+10": {
+   "F2": 72.0,
+   "hub2_clip_out_of_band": 0.909,
+   "stretched_parkable": 60,
+   "folded_parkable": 8
+  },
+  "F2+15": {
+   "F2": 77.0,
+   "hub2_clip_out_of_band": 1.0,
+   "stretched_parkable": 63,
+   "folded_parkable": 8
+  },
+  "F2+20": {
+   "F2": 82.0,
+   "hub2_clip_out_of_band": 1.0,
+   "stretched_parkable": 64,
+   "folded_parkable": 9
+  }
+ }
+}
