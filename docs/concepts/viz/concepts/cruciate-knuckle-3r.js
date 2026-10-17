@@ -12,8 +12,8 @@
 (function () {
   const K = (typeof window !== 'undefined' ? window : globalThis).KIN, V = K.V, M = K.M, D2R = K.D2R;
   const P = { az: 43.15, el: 59.93, wd: 92.03, wa: -9.03,
-              th0: 70, dA0: 30, pA0: 40, dB0: 30, pB0: -40, dA1: 30, pA1: 40, dB1: 30, pB1: -40, MU: 30, MARGIN: 5,
-              lv: { J1: 50, A0: 55, B0: 55, A1: 60, B1: 60, J3: 62 }, hub_r: 10, stack: 12.25, neck_deg: 25, cuff_at: 165 };
+              th0: 21.46, dA0: 46.64, pA0: 21.88, dB0: 26.79, pB0: 49.2, dA1: 34.95, pA1: 8.6, dB1: 61.7, pB1: 16.06, MU: 30, MARGIN: 5,
+              lv: { J1: 55, A0: 150, B0: 65, A1: 101, B1: 164, J3: 70 }, hub_r: 10, stack: 12.25, neck_deg: 25, cuff_at: 165 };
   const ID = 'cruciate-knuckle-3r', NAME = 'Cruciate knuckle J2: crossed four-bar at the cap pole (3R)';
 
   const ang = (u, v) => V.angle(u, v);
