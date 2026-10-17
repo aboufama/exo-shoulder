@@ -739,5 +739,62 @@
    "foot": 15
   },
   "tag": "cma1"
+ },
+ {
+  "k": 13,
+  "t": "2026-10-17T18:51:27Z",
+  "params": {
+   "az": -30.0,
+   "el": 20.0,
+   "sigma": 1,
+   "a1": 88.43,
+   "a2": 91.57,
+   "psi3": -7.6,
+   "s3": 233.2,
+   "psi_b": -35.13,
+   "s_a": 62.47,
+   "margin": 5.0,
+   "width": 12.0,
+   "t_link": 3.0,
+   "q": 0.92,
+   "qf": 0.9
+  },
+  "inband14": 0.1912,
+  "inband10": 0.1231,
+  "reach": 0.625,
+  "follow": 0.6,
+  "contact": 0.3761,
+  "gap": 170.99,
+  "closure": 0.9955,
+  "honest": false,
+  "overhead": "0/12",
+  "gamma": 14.64,
+  "junction_step": 147.1,
+  "kmode": "march",
+  "bench": "60,160",
+  "mode": "fast",
+  "inband_member": {
+   "hub1": 0.5758,
+   "hub2": 0.0,
+   "link1": 0.0,
+   "cap": 0.0,
+   "spar": 0.0342,
+   "crank": 0.1205,
+   "rod": 0.4,
+   "sleeve": 0.8182,
+   "foot": 0.996
+  },
+  "contact_poses_member": {
+   "hub1": 0,
+   "hub2": 9,
+   "link1": 42,
+   "cap": 13,
+   "spar": 40,
+   "crank": 59,
+   "rod": 14,
+   "sleeve": 14,
+   "foot": 15
+  },
+  "tag": "cma1"
  }
 ]

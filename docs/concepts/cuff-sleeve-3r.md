@@ -106,8 +106,9 @@ longer spar (s3 260: gamma 13.3, the same table to +-0.02).
 
 (The full list, in order, with every member's numbers, is in the sweep file. The CMA-ES rows are tagged `cma1`.)
 
-Frozen wear of k2 on Bench(110, 360) exact (no refit): see the row's note (the exact path at load ~20 took most of
-the time box).
+Frozen wear of k2 on Bench(110, 360) exact (no refit): NOT completed - the exact path (no local fast cache for
+Bench(110, 360)) did not finish inside the 75-min box at load 15-20, so it was stopped; the fast number is 93 gap points
+over the death line, and frozen wears have only ever lost points.
 
 ## Why it dies (the limiter, measured)
 
