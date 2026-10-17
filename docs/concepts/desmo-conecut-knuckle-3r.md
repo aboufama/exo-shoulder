@@ -131,7 +131,7 @@ lead's seats and law.
   Blend 24 lifts the ridge to 0.34 mm (~1.35 GPa) at an equal fast number (k128, 13.31). That is not enough to drop the
   insert.
 
-**Search.** 160+ configurations on Bench(60,160) fast, run locally because the farm window is closed:
+**Search.** 146 configurations on Bench(60,160) fast, run locally because the farm window is closed:
 * a coarse seat / hardware grid;
 * a 74-point focused random grid at mu 0.15;
 * a 32-point local refinement.
@@ -147,3 +147,74 @@ Where the search space ends (measured):
 * the slot can be cut to 48-49.75 at r_c 16.4-16.5, but reach does not change (0.775 fast). The stroke past 46.5 is
   not what limits this family. Its fold wall is the seat cap, as round 12 found.
 
+## Held out (the claim config, frozen, not refit)
+
+| | held gap | reach | ib14 | contact | overhead | dK taken max |
+|---|---|---|---|---|---|---|
+| desmo-conecut cell B (k57) | **23.24** | 0.6922 | 0.8914 | 0.016 (14) | 18/71 | 46.27 (slot end 46.5) |
+| conecut-knee-knuckle-3r | 22.38 | | | 14 | | |
+| desmo-slipper-knuckle-3r | 23.90 | | | | | |
+| slipper-nose (lead) | 23.45 | | | | | |
+
+Lost poses: fold 260 and contact 14. Near-touch: gap at 1 mm 26.09; closest metal 0.33 mm. Held out, the knee never
+slides (0, as on conecut; the lead slipper-nose slid on 32). The held stroke uses 46.27 of the 46.5 deg the slot allows.
+
+## Red team (own best config, frozen exact Bench(110,360))
+
+* **The pose that jams.** None within the stroke. Every drive gate holds at mu 0.15. The tightest margins:
+  * stage 1's forward pressure angle on the built groove exceeds 34.47 at K 47.5, only 1.2 deg past the held stroke
+    (46.27). A friction coefficient above 0.15 or a K overshoot meets stage 1 first. Stage 2 has 18 deg of margin.
+  * the worst-tolerance crank-free slop (groove c 0.015) is 0.261 deg, over the 0.25 gate. Held + free nominal is 0.214.
+* **The point that pinches.** The 4 contact poses are conecut's. The new metal appears in them:
+  * pose 237: the crank arm reaches -9.42 and the tip plate -5.87;
+  * pose 264: the hub-K / boss edge -1.17, the crank -1.02, the plate edge -0.37;
+  * pose 205: hub 2 -4.28 and desmo's cap-ring sector -3.64;
+  * pose 316.
+
+  The closest taken pose is 139 at 0.07 mm (plane -60 / elev 60 / axial 105). The closest held-out metal is 0.33 mm.
+* **The optimistic number.**
+  * The stage-1 pressure angles are read on the built groove (cap side inside the blend reported, not gated). Under
+    desmo-slipper's linear read the same placement fails at K 0 at mu 0.15. The auditor must rule on this reading.
+  * The plate clears hub K's O20 by 1.23 mm. A crank-pivot position error of ~0.25 mm toward the K axis takes it to
+    1.0.
+  * The plate's sample count (8) is small, and its in-band (0.72) enters the bench at that weight. The S6 numbers
+    above show the comparison at equal strap samples.
+* **Named poses (claim config).**
+  * Taken: rest (dK 4.6), overhead axial -135 (dK 5.8), across the body plane 120 / elev 90.
+  * Not taken: overhead axial 0 is j3stop; overhead plane 90, behind the back, abduction 90 and across-body internal
+    rotation are fold; extreme external rotation (plane 30 / elev 30 / axial 150) needs dK 62.1, past stop B.
+
+## Verdict
+
+**Screened, not a new lead. It is a complexity / friction frontier point at the lead's reach.**
+
+Cell B is the first desmo-family drive that holds mu 0.15 on both stages: a nose fixed in link 1a and a 3.7 mm slot in
+the crank's tip. It has no spring, no roller, no flank lug band and no outer wall.
+
+| design | frozen exact Bench(110,360) | score | held | cx |
+|---|---|---|---|---|
+| desmo-conecut cell B (this) | 19.04 | 93.08 | 23.24 | 16.5 (16.0 without the groove insert) |
+| conecut-knee-knuckle-3r | 18.28 | | 22.38 | 18.5 |
+| desmo-slipper-knuckle-3r | 18.95 | | 23.90 | 15.75 |
+
+* Against conecut: +0.76 on the bench and +0.86 held out, all in-band by sample weight. The takes are identical, and
+  the contacts are identical on the bench.
+* Against desmo-slipper: +0.09 on the bench and -0.66 held out. Desmo-slipper jams at mu 0.14; this one holds mu 0.15.
+* The limiter is unchanged: the family's J2 fold (88 / 260 poses). The slot could be cut longer (49.75) and fast reach
+  would not move, so the drive stroke is not this family's reach lever.
+
+## Next
+
+1. Verifier, on the claim config:
+   * tools/alignment_paired.py dump against conecut and desmo-slipper (bench + held: T5 depths at 205 / 237 / 264 /
+     316);
+   * the continuity flood;
+   * the dense groove scan (desmo-slipper-knuckle-3r_groove_scan.py) on this placement;
+   * K play carried into th;
+   * an envsel wear.
+2. The auditor rules on the built-groove stage-1 reading. It is the condition for every desmo-family number at
+   mu >= 0.12.
+3. The in-band lever is desmo's cap-ring sector (+0.67). A ring that stays inside O20 at the lead's g fails forward PA
+   (the proposer: no groove inside O20 passes 34.47 at g 2.39-3.0). Cell C's g 2.8 lowers and narrows it but is
+   knife-edged on the seat (r_c 13.5; at g 2.39 the plate gate here binds below r_c ~16.0, so C at 13.5 likely fails it - measure first).
+4. Cell C was not built inside the time box.

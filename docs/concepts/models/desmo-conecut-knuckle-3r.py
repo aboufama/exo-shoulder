@@ -29,12 +29,16 @@ loaded and copied unchanged), stage 2 =
     Metal (sampled like the baseline): boss underside disc + root strip (link 1a, rigid 'horn'), its top and edges
     (contact); the tip plate's two walls (one mid row each, every ~2 mm, rigid 'plate' on the crank) + slot edges, outer
     edges, end caps and the top (contact). The plate is crank body 9 on the strap / part checks ('ROD').
-  * cell C: cell B with g 2.6-2.8 (the stage-1 ratio moved into stage 2); the nose seat re-placed with beta / r_c.
+  * cell C: cell B with g 2.6-2.8 (the stage-1 ratio moved into stage 2); the nose seat re-placed with beta / r_c (param g;
+    NOT screened in round 13's time box).
+  Stage 1 (cell B) is read on the BUILT blended groove (s1_read "built", default): the forward / pin-side pressure angle is
+  gated wherever the pin moves, the cap side outside the blend (inside it the cap side is the dwell lock, reported) - the
+  planner's gate (a), a measurement change against desmo-slipper's linear read (s1_read "linear" restores it).
 
 3 ACTIVE DOF (J1, J2, J3 encoded); K slaved, never read; crank pivot, both higher pairs and the knee pins are passive
 rotations / higher pairs (no translation). 0 passive translations, no springs, no gears / pulleys / cables (MVP1).
 
-    OMP_NUM_THREADS=1 nice -n 10 python3 docs/concepts/models/desmo-conecut-knuckle-3r.py [check] ['<json>']
+    OMP_NUM_THREADS=1 nice -n 10 python3 docs/concepts/models/desmo-conecut-knuckle-3r.py [check] ['<json>']   ('"best"' = BEST)
     CB_EXACT=1 ... frozen|held|flood|redteam '<json>' [out.json]
     hooks: bench_eval(B, params) (tools/concept_sweep.py), evaluate(B, params) (tools/concept_cma.py)
 """
@@ -61,6 +65,10 @@ CC_P = {"stk": 6.0, "lE": 97.1443, "lc": 24.3508, "phiE": 0.7526, "phib": -91.80
 DC = dict(a_s=9.5, psi=150.0, glev=-0.5, blend=10.0, nose_r=1.25, mu=0.087, stage2="B", nose_r2=1.0, c_slot2=0.01, wall2=1.0, boss_r=2.75,
           kslot=46.5, s2_gate=1, s1_read="built")
 PARAMS = dict(DS.PARAMS); PARAMS.update(CC_P); PARAMS.update(DC)
+# the claim config (sweep k57, pre-registered; frozen exact Bench(110,360) 19.04, held 23.24 at mu 0.15). The defaults above are the
+# spec's base (the sweep rows' params are overrides of these defaults); the stock seat r_c 15.37 fails the plate gate (0.12 mm to hub K)
+BEST = {"r_c": 16.176, "beta": -177.169, "nose_r2": 0.75, "wall2": 0.9, "boss_r": 2.5, "glev": -1.0, "blend": 10.0, "kslot": 46.5,
+        "a_s": 9.529, "psi": 149.71, "mu": 0.15}
 
 
 def wr(a): return (a + 180.0) % 360.0 - 180.0
@@ -436,6 +444,7 @@ def _report_dc(B, params):
 if __name__ == "__main__":
     mode = sys.argv[1] if len(sys.argv) > 1 else "check"
     par = json.loads(sys.argv[2]) if len(sys.argv) > 2 else {}
+    if par == "best": par = dict(BEST)
     if mode == "viz":
         print(json.dumps(viz_export(par), default=float)); sys.exit()
     if mode == "redteam":
