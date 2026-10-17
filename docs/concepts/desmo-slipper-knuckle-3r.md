@@ -210,3 +210,105 @@ nominal fit (0.36 in series with the slot) and an onset blend the bench does not
 3. **Cell B (pinned horn), not built.** It deletes the 6 mm lug band, which is the lowest part on 71 taken poses.
    That is the only lever here that could make this design better than a tie on the bench.
 4. **L1 CAD.** Use the lead's builder: swap the stage-1 roller for a pin, cut the cap groove, add the slot's outer wall.
+
+## Verification (independent skeptic, 2026-10-17)
+
+**Verdict: VERIFIED, not refuted.** Corrected frozen exact Bench(110,360): **18.95 (score 93.11)** against the
+champion's 75.94 on the same bench (risley-turret verifier checks, the reference the lead's verification used). Held
+out: 23.90. No hard rule is broken. Against the lead it does **not** tie in its own favour: it is +0.46 on the bench and
++0.45 held out, all of it in-band, on identical poses and contacts.
+
+Harness: docs/concepts/verify/desmo-slipper-knuckle-3r.py. It loads the claim's model unchanged, as the last module, and
+retargets the lead's verifier (docs/concepts/verify/slipper-nose-knuckle-3r.py) at DSModel. That verifier runs N1-N3
+(pressure angle with friction at every taken pose, conjugate undercut, relative pole), the closure in the world, nose vs
+lug, K sense and the th margin. The harness adds the continuity flood and per-pose dumps in tools/alignment_paired.py
+format. A dense groove probe is in docs/concepts/verify/desmo-slipper-knuckle-3r_groove_scan.py. Everything ran
+locally, niced, at most 2 processes (the farm is past its budget line).
+
+| run (frozen exact Bench(110,360) unless noted) | gap | reach | ib14 | ib10 | contact | why lost (fold / slide / contact) | flood full / knn |
+|---|---|---|---|---|---|---|---|
+| claim config, claim IK (reproduction) | 18.63 | 0.725 | 0.8941 | 0.5182 | 0.0054 | 88 / 9 / 2 | 18.63 / 20.30 |
+| claim config, blended onset law in the IK | 18.59 | 0.725 | 0.8945 | 0.5191 | 0.0054 | 88 / 9 / 2 | |
+| **verified: pin re-placed a_s 9.5, psi 150, blended IK** | **18.95** | 0.725 | 0.8909 | 0.5148 | 0.0054 | 88 / 9 / 2 | 18.95 / 20.62 |
+| verified config, held out | 23.90 | 0.6828 | 0.8898 | 0.5137 | 0.0116 | 260 / 32 / 10 | |
+| lead slipper-nose (reference) | 18.49 / held 23.45 | 0.725 | 0.8955 | 0.5163 | 0.0054 | 88 / 9 / 2 | 18.49 / 20.16 |
+
+**What held up.**
+
+* The claim reproduces exactly: 18.63.
+* Every check the lead's verifier runs is clean on all 371 bench and 852 held poses:
+  * closure 0.0 mm and 0 failing poses;
+  * pressure angle plus friction (atan 0.087) <= 43: horn 40.87, crank 34.47 on the bench (horn 41.27 held), and <= 45;
+  * no N2 undercut;
+  * wrong sense 0;
+  * dK taken 45.62 against a limit of 49.5.
+* The th margin minimum is 5.181 on the bench and 5.006 held out, the lead's own numbers.
+* Overhead taken is 8/28, also the lead's.
+* The two contacts sit at the lead's poses and depths: 237 at -9.0 mm and 264 at -5.72 mm. Held out, there are 10
+  contacts with 46.13 mm total depth, against the lead's 46.12.
+* Complexity reproduces with tools/simplicity.py v2.2: 15.75, against the lead's 18.25.
+
+**What did not.**
+
+1. **The claimed config fails its own determinacy gate under a dense scan.**
+   * Method: the claim's own union-of-discs groove test with the crank FREE, evaluated every 0.25 deg of the K law in
+     both directions. That is 223 points, against the claim's 9 points up to K 15 and a smooth-groove formula beyond.
+   * Result: K play reaches **0.273 deg at K 42** at the nominal c 0.01. It exceeds 0.25 at 10 points: K 6.5-7.3 (the
+     corner exit), K 41.75-45.25 (the late rise, inside the taken range) and K 49.4.
+   * Cause: the pin moves more and more with the cap, so the centreline radius in link 2's frame falls to
+     **0.46-0.63 mm in the late rise, below the pin's 0.75**. The milled groove then has no inner wall there.
+   * The docstring lists a "centreline radius >= 1.5" gate. It is computed (rc_min 0.37) but never enforced.
+   * By the claim's own rule (free play > 0.25 deg -> not honest) the claimed config is out.
+   * Re-placements, dense:
+
+     | placement | dense max | result |
+     |---|---|---|
+     | a_s 9.5, psi 150 | 0.241 | pass |
+     | a_s 9.75, psi 148 | 0.228 | pass, but friction-fragile (below) |
+     | a_s 9.25, psi 150 | 0.252 | fail |
+     | a_s 9.5, psi 154 | 0.280 | fail |
+
+   * At mu 0.12, a_s 9.75 / psi 148 fails the stage-1 cap-side pressure angle at the dwell exit (dK_lim 0, fast 99.88).
+     a_s 9.5 / psi 150 holds to K 46.0 at mu 0.12, where stage 2 binds first, as on the lead.
+   * The verified number is therefore a_s 9.5, psi 150. It costs **+0.36**, all of it from more ring metal.
+2. **The bench IK does not follow the groove (the claim flagged this; now measured).**
+   * The claim's IK uses the linear K law, but its groove leads that law by up to 2.69 deg of K over 10 deg of q2. So on
+     the claim's poses the crank's pin sits **up to 0.156 mm off its own groove**: 83 of 184 fit poses are beyond the
+     0.01 clearance and 17 are beyond 0.05 mm.
+   * The harness's BlendDesign solves those poses on the blended table (t, K) with the parent's closure and fold
+     margins. It also restricts the cam calibration to the linear part, so the groove geometry is unchanged.
+   * With BlendDesign the pin sits on the groove: 0.020 mm, the centreline sample spacing. The number moves by -0.04.
+     The effect is benign, as the claim said.
+3. **Paired comparison with the lead** (docs/alignment/remeasure/desmo-slipper-knuckle-3r_vs_slipper-nose-knuckle-3r_paired.json):
+
+   | config | bench | held | pooled |
+   |---|---|---|---|
+   | verified | +0.46 (CI90 [0.00, +0.56]) | +0.45 (CI90 [0.00, +0.53]) | +0.45, P(desmo better) 0.00 |
+   | claim | +0.15 (CI90 [0.00, +0.25]) | | |
+
+   * Every point of the difference is in-band, from the ring sector and the outer wall.
+   * There are zero discordant poses: the same ws poses are taken and the contacts are the same.
+   * The gain is complexity only: -2.5.
+
+**Watch (not refutations).**
+
+* **Unmodelled clash.** The 9.5 mm short arm and the pin enter hub 2's O20 footprint under link 2's ring, in the layer of
+  link 1b's J2 seat. No check covers the arm against the hub-2 stack: l2_check excludes r < 11.5. Link 1b's J2 boss needs
+  a relief pocket of about 5 x 4 x 1.5 mm, and the L1 CAD must show it.
+* **Arm and pin are contact samples only.** They are not in-band samples. They sit about 1 mm below the ring, whose median
+  is 13.9 mm, so they would read in band. Leaving them out is conservative.
+* **K play costs fold margin.**
+  * Play in series: about 0.36 deg at nominal fit and about 0.48 at c 0.015.
+  * Cost: about 0.1 deg of fold margin (da1e/dK 0.22-0.38). The bench margin goes from 5.181 to about 5.08, and held out
+    5.006 drops below 5.
+  * This is the same class of risk as the lead's spring lag, which was larger (0.42-0.53).
+* **Stage 1 now slides where the lead rolled.** The pin pressure angle is about 38 against the 38.03 gate at mu 0.087,
+  so the friction coefficient of the 440C pin in the DLC groove carries the margin.
+
+**Next.**
+
+* Re-run the stage-1 placement search with the dense slop gate and the centreline-radius gate enforced, and with mu 0.12
+  as a robustness column. The nearest passing placement costs 0.36, so a cheaper one may exist.
+* Build cell B (the pinned horn), which deletes the lug band. It is the only lever here that can beat the lead on the
+  bench.
+* Add the arm-vs-hub-2 pocket to the L1 CAD.
