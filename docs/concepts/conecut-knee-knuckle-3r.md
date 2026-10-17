@@ -92,13 +92,13 @@ J3 between the arm and member 3 crosses the knee as a force F = M / d_perp along
 d_perp = lE sin(knee angle) is the distance from the J3 centre to the knee link's line. At the stop, the same M ends
 on the dowel: F_dowel = M / r = M / 7.5 mm = 133 N per N m.
 
-| | lead (lE 67.8, lc 21.1) | this row, best (lE ~97, lc ~24-27) |
+| exact Bench(110,360), taken poses | lead (lE 67.8, lc 21.1, stk 4.85) | this row, best (lE 97.1, lc 24.4, stk 6.0) |
 |---|---|---|
-| knee angle over taken poses (fast) | 86-152 deg | ~65-107 deg |
-| d_perp min / median (fast, taken) | 31.9 / 67.6 mm | 86-89 / 91-93 mm |
-| knee link force per N m about J3 (worst taken pose) | 31.3 N | 11-12 N |
-| window margin (deg, fast taken) | 61.0 / 2.8 | 40 / 48 |
-| window margin in d (mm) | 20.2 / 0.36 | ~15 / ~13 |
+| knee angle | 86.2-152.2 deg | 59.3-105.9 deg (held 59.3-107.1) |
+| d_perp min / median | 31.6 / - mm | 83.5 / 87.7 mm |
+| knee link force per N m about J3 (worst taken pose) | 31.6 N | 12.0 N |
+| window margin (deg) | 61.0 / 2.6 | 34.1 / 48.8 |
+| window margin in d (mm) | - / 0.33 | 11.4 / 13.2 |
 
 What the wearer feels at the stop. It is a rigid end of J3 travel: the arm's internal/external rotation moment about
 J3's axis, which lies within 19 deg and 14 mm of the humeral axis, comes to rest on the dowel. In the unpowered MVP1
@@ -198,3 +198,70 @@ This is a **tie on the bench** under the 1-point rule. Held out it gains a point
    No branch change and no knee jump: the knee stays 34 deg or more inside its window everywhere.
 6. **Fold margin and K-at-rest watches (G4, M5).** These are the lead's, unchanged. The chain, the K law and the drive
    are the lead's. The fold-side losses are identical (88 fold on the bench).
+7. **A longer knee buys fast-bench points and loses them held out.** The one-sided CMA pick (lE 101, lc 31.2) is
+   clean on the fast bench: 1 mm gap = plain 13.44, no metal under 1 mm. Worn exact it scores **18.84** (4 contacts:
+   203 at -0.03, 237, 264, 316) and held out **23.90** (20 contacts). The held contacts include 9 by the arm pad and the
+   knee link, at 764 / 835 / 907 / 978 / 1047: elev 15, axial -135 to -165. The fast bench does not sample
+   low-elevation extreme rotation, so it cannot bound the knee's size. The bound is held out, on the arm hanging down
+   and rotated, which is the same lesson as "select on the envelope bench".
+8. **The knee needs the MR63ZZ stack.** The row best worn at the lead's stk 4.8534 (like-for-like) fails knee vs E
+   clearance on 329 poses (fast fit 160.0, exact 164.88). At that stack the long knee link crosses the E strap's end
+   inside the 0.15 mm adjacent gap. The row is stated at stk 6.0, the MR63ZZ pair from the lead's build rule. The
+   lead's own 18.49 is at 4.8534, so the comparison is "this row as it would be built" against "the lead as verified".
+
+## Sweep and convergence
+
+There are 352 configurations on Bench(60,160) fast, in `docs/concepts/sweeps/conecut-knee-knuckle-3r.json`:
+
+- 200 coarse Latin-hypercube configurations over lE 70-98, lc 20-38, phiE -10..12, phib in both assembly modes
+  (-112..-74 and 74..112), J3MIN -112..-100, J3MAX off or 114-124, and stk 4.85 / 6.0. Each configuration was
+  pre-filtered on the exact kinematic knee margin (>= 10 deg) over the drift cloud: bench, held out and every fit-clip
+  frame.
+- Two CMA-ES runs at stk 6.0, 1 worker each: two-sided 80 configurations, one-sided 72.
+
+Objective: the 1 mm near-touch gap + 2 x max(0, 18 - knee margin) + the stop-margin penalty (< 4 deg) + 100 if dishonest.
+
+- The phib > 0 assembly mode collides everywhere (best 17.48; most configurations fail on parts).
+- 62 of the 200 coarse configurations fail on part-part clearance (knee or pad vs link 2 / E); 14 of the 21 in the
+  phib > 0 mode are among them.
+- Plain gap: the floor is 12.50, which is the reach term alone (reach 0.775 is fixed by the chain). Below it are only
+  the tuned-stop configurations at 11.88 (red team above).
+
+**Convergence gate (binding), passed.**
+
+| measure | gain over the 2nd half | gain over the last third | top-5 spread |
+|---|---|---|---|
+| search objective | 0.08 pt | 0.04 pt | 0.02 pt |
+| plain gap | 0.23 pt | 0.01 pt | 0.23 pt |
+
+The fast landscape is a plateau. Once ib14 >= 0.90, the knee earns nothing on the fast bench, and the only lever
+left is relabelling one contact pose with a stop.
+
+## Verdict
+
+**Screened: a measured tie with the lead, not a new leader.**
+
+- Frozen exact Bench(110,360): 18.28 (score 93.35) vs 18.49. Paired diff -0.20, CI90 [-1.05, +0.80].
+- Held out: 22.38 vs 23.45. Diff -1.08, CI90 [-1.86, +0.06], P(better) 0.935. The gain comes from 11 held-out poses
+  where the lead's knee ran out of its window.
+- Flood: full 18.28, knn 19.97.
+- Complexity 18.5, against the lead's 18.25 plus one catalogue dowel.
+
+No bench pose is newly taken except 203, and that one is a 0.72 mm near-touch. The stopped poses bind on hub 2 and the
+K-housing metal of the chain. The in-band gain is the longer E strap's dilution: the chain's own in-band falls
+0.8689 -> 0.8590. Contacts get worse: bench 4 vs 2 (20.24 vs 14.75 mm), held 14 vs 10 (60.97 vs 46.12 mm), with new
+pad / knee contacts at low elevation and extreme rotation held out. So the T5 watch reason on the lead gets worse here.
+
+What it does deliver, measured: a knee that never binds and a better force path. The window margin is 11.4 / 12.8 mm
+in d against the lead's 0.33 mm, the knee link carries 12 N per N m of J3 moment against 31-35, there are 0 held
+knee slides against 32, and the J3 end is a clean dowel stop at 133 N per N m.
+
+**What next (for the knee column the long-dyad picks wear).**
+
+1. Cap the knee's size by the held-out low-elevation extreme-rotation poses, not by the fast bench. lE ~82 / lc ~27
+   (the spec) had 14 held contacts against 20 for lE 101 / lc 31. Add 764 / 835 / 907 / 978 / 1047 to the envelope
+   search bench.
+2. Do not place J3MIN to admit the 203 / 205 pair. On the exact bench they straddle any stop: 203 is taken at 0.72 mm
+   and 205 is a contact at -4.28 mm, both chain metal. A stop at -105 (spec) blocks both.
+3. The verifier: re-run the paired CI, the flood, the clip q3' table, and the per-pose T5 against the lead. Dumps are in
+   `docs/alignment/remeasure/conecut-knee-knuckle-3r_{bench,held}_perpose.json`.
