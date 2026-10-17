@@ -197,3 +197,44 @@ reach, leave the cell above the 17.5 bar.
 - Next: per the round-102 plan, the J3 closer writes the J2 bound. On the evidence here, the cruciate cell adds
   nothing to the open cell. Any further virtual-J2 synthesis should keep the fixed centrode within ~30 deg of J1 on
   the J2 side (New knowledge 3) and run with the kit in the loop.
+
+## Audit (2026-10-17, independent auditor): the death stands
+
+The audit tried to refute the death against the bar "corrected gap within 10 of the champion 68.93", that is <= 78.93
+on Bench(60,160). It did not refute it.
+
+1. **Convergence gate.** Re-computed from the sweep (729 entries). The best is 79.77 (k1, flagged) and did not move
+   over the second half or the last third (0.00 / 0.00). The top 5 are 79.77-86.95. The gate passes as claimed.
+2. **Reproduction.** The honest best k25 re-measures 86.95 exactly on Bench(60,160) fast with the kit checks: reach
+   0.7125, follow 0.8833, ib14 0.2847, contact 0, collide 7.2 %, no audit flag. `ovh` 0 against 1 makes no difference
+   (k1 = k27, k25 = k26), so the over-lift is not the limiter.
+3. **Modelling-bug hunt.**
+   - Every top configuration follows exactly 0.8833. The 7 lost frames are all from the overhead "Raise" clip. Their
+     th is 24.2-29.6, below every top window's floor (32.8-33.5). The chain does not close there; continuity and
+     collisions play no part.
+   - So the follow loss is a real kinematic loss on the overhead clip, not a convention bug. The plain cap 3R's floor
+     is 15.1.
+   - The transmission guard [30, 150] was kept. It is a transmission margin, which CLAUDE.md says not to shrink without
+     the user.
+4. **Targeted re-search: a window floor <= 24.2.**
+   - Sampled 980 valid crossed layouts near the top 5 (proxy-free, from `curve()`). Their floor is <= 24.2, with W up
+     to 129.
+   - Ran 9 kit evaluations on them. The best kit read is 75.05: follow 1.0, reach 0.925, ib14 0.164, th window
+     [20.6, 147.9], min th margin 7.97, min transmission 33.9.
+   - That read is NOT honest. Cranks A and B, link 1 and the coupler float far off the skin: sample spacing is
+     9.7-11.5 mm against the kit's 4 mm rule, and their in-band is 0. The sample-weighted ib14 counts them at about
+     1/30 of their real area.
+   - Weighting each member by its real area (spacing / 2 mm, squared) gives ib14 0.012 and gap **90.21**. The wide
+     window is bought by parking the four-bar off the skin.
+5. **The row's "best measured" 79.77 (k1) is the same artefact on a smaller scale.** Its crank B is at 4.59 mm
+   spacing. Area-weighted, it reads ib14 0.104 and gap **91.28**. The honest k25 reads 93.30 area-weighted, against the
+   kit's 86.95.
+
+**Measured reason.** A crossed J2 cell at the cap pole can either cover the overhead clip (floor <= 24) or keep its
+four-bar metal near the skin, not both. The honest best is 86.95, 18 points above the champion's 68.93 and 23.8 above
+the plain cap 3R (63.18) through the same kit. Every wider-window read below 79 is a sampling-density artefact.
+
+**For the alignment auditor.** The kit's ib14 is sample-weighted. Straps are laid out at 2 mm at r_ref 70 mm, so a
+member parked far off the skin is under-counted in ib14 roughly in proportion to its radius squared. The audit flag
+("sparse sampling") already marks such configurations as not honest. Any leaderboard or "best measured" figure must
+quote the honest one.

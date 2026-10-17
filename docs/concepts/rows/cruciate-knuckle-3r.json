@@ -14,11 +14,11 @@
  "inband10": 0.1341,
  "contact": 0.0,
  "gap": 86.95,
- "v_reach": null,
- "v_follow": null,
- "v_inband14": null,
- "v_inband10": null,
- "v_gap": null,
+ "v_reach": 0.7125,
+ "v_follow": 0.8833,
+ "v_inband14": 0.2847,
+ "v_inband10": 0.1341,
+ "v_gap": 86.95,
  "n_configs": 729,
  "verdict": "DEAD at gate 0: honest best 86.95 (score 68.4) fast, best measured 79.77, vs the plain cap-pole 3R 63.18 through the same code and the 17.5 bar; converged (kit gate 0.00 / 0.00 / 2.61).",
  "note": "Lens virtual-j2's CROSSED cell at the cap pole (J1 bvec(43.15,59.93), J3 wdir(92.03,-9.03)), six O20 pins. Row = best HONEST config (sweep k25, anchored {\"th0\": 113.146, \"dA0\": 21.991, \"pA0\": -10.129, \"dB0\": 42.537, \"pB0\": -26.186, \"dA1\": 42.26, \"pA1\": 27.24, \"dB1\": 25.022, \"pB1\": -11.892}): W 76.6 th [33.5, 110.1], min th margin 5.796, min transmission 33.7, collide 0.0722, mass 231.9 g. Best measured 79.77 (sweep k1, reach 0.85, ib14 0.219) carries the audit flag ['crankB: sparse sampling (4.59 mm median spacing > 4 mm)']. CONTROL plain cap-pole O20 3R same kit + bench: 63.18 (reach 0.794, ib14 0.375). Per member in band: {\"hubJ1\": 1.0, \"hubA0\": 0.0, \"hubB0\": 0.0, \"hubA1\": 0.003, \"hubB1\": 0.8064, \"hubJ3\": 0.6601, \"crankA\": 0.109, \"crankB\": 0.1501, \"link1\": 0.0051, \"coupler\": 0.0963, \"neck\": 0.7363}. Convergence gate (kit sweep, 729 tries incl. non-assembling layouts at 275): gain 2nd half 0.00 score pts, last third 0.00, top-5 spread 2.61 -> passes. Proxy search (lens 1 rp4/opt.py + crossing penalty): ~26k tries, proxy best 42.34 (plain cap 3R 36.6 on the proxy) but proxy 42.34 -> kit 103.72: the proxy misses layering and K6. No frozen exact Bench(110,360) wear (fast number 4.5x the 17.5 bar); kinematic window reach Bench(110,360) ws 0.733, clips 0.891. Ideal pose-drop (proxy ib) 0.62 -> 0.78 at 20 dropped poses, plateau 0.80.",
@@ -52,5 +52,6 @@
   "q": 1.0
  },
  "audit": [],
- "hubless": []
+ "hubless": [],
+ "audit_note": "AUDIT 2026-10-17 (death stands, not refuted): honest best k25 re-measured 86.95 exactly on Bench(60,160) fast with kit checks (density-corrected 93.30). Sweep gate re-computed: best 79.77 at k1, unchanged over the 2nd half and the last third (0.00 / 0.00). Constant follow 0.8833 on every top config = 7 frames of the overhead 'Raise' clip at th 24.2-29.6, below every top window floor (32.8-33.5): a real kinematic loss, not a bug. Targeted search for crossed windows with floor <= 24.2 (980 kinematic layouts near the top-5, 9 kit evals): follow 1.0, reach 0.925, kit 75.05 - but NOT honest: crank A / B, link 1 and the coupler float so high (sample spacing 9.7-11.5 mm vs the 4 mm rule) that the sample-weighted ib14 under-counts them; area-weighted ib14 0.012, gap 90.21. The row's 'best measured' 79.77 (k1) is the same artefact in small (crank B 4.59 mm): area-weighted 91.28. Every reading >= 86.95 honest, > 18 points over 68.93."
 }
