@@ -2847,3 +2847,81 @@ envsel draw the re-fit knee LOSES to the unrefit seat (19.75 / 10 contacts vs 18
 search found puts the knee link 4.9-7.8 mm into the skin at axial -166 across the body, the |axial| >= 150 region
 Bench(60,160) under-samples. Lesson: seat levers on a fixed J1 / hub-2 chain buy binder depth, not takes; knee re-fits
 need an |axial| >= 150 contact check (or the env bench). stk 6.0 costs ~0.2 on this chain.
+
+## Round 13: no lead change - the inverted desmo drive verifies at 18.98 (complexity 16.5, +0.70 behind the lead, all in-band) and the J3-seat ghost closes the back-of-shoulder knuckle for reach at 269 takes (2026-10-17, discovery round 13, closer)
+
+Raw data:
+- rows: `docs/concepts/rows/{desmo-conecut-knuckle-3r,proximal-j3-geodesic-knuckle-3r}.json`; sweeps
+  `docs/concepts/sweeps/<id>.json`; models `docs/concepts/models/<id>.py`; docs `docs/concepts/<id>.md`;
+- verifier harnesses and outputs: `docs/concepts/verify/desmo-conecut-knuckle-3r{.py,_groove_scan.py}`,
+  `docs/concepts/verify/desmo-conecut-knuckle-3r_v_{bench,held}_frozen{,_blend}.json`, `_v_probe_fast.json`;
+- per-pose dumps: `docs/alignment/remeasure/desmo-conecut-knuckle-3r{,+blend}_{bench,held}_perpose.json`; the closer's
+  paired comparisons `docs/alignment/remeasure/desmo-conecut-knuckle-3r_vs_{conecut-knee,slipper-nose,desmo-slipper}-knuckle-3r_paired.json`;
+- the audit, skeptic rulings and re-measures: `docs/alignment/desmo-conecut-knuckle-3r{.md,.json,.rulings.json}`,
+  `docs/alignment/remeasure/desmo-conecut-knuckle-3r_{s1read_check,blendband_fast,msub_rest_bench,probe_bench}.json`,
+  `docs/alignment/ledger.jsonl`;
+- the round table: `docs/concepts/ROUNDS.md` "Round 13 results"; proximal-j3's own section above (under round J1).
+
+All numbers are frozen exact on Bench(110,360), fitted on Bench(60,160), and re-measured by an independent verifier.
+No bench, judge or kit file changed this round. Ledger re-read at 21:33 UTC: desmo-conecut WATCH; proximal-j3 not
+audited (dead); none gamed. The farm was closed, so everything ran locally.
+
+**What was measured**
+
+* **desmo-conecut-knuckle-3r: VERIFIED 18.98 (score 93.10), held out 23.19, complexity 16.5, 0 passive translations,
+  ledger WATCH (12 upheld, 2 refuted) - the round winner, not a lead** (conecut-knee 18.28 stays the lead; the plan's
+  18.49 is not beaten either).
+  * Conecut's chain, knee and J3 dowel with desmo-slipper's spring-free stage 1 (O1.5 pin in a blended 3-D groove under
+    hub 2's cap ring, 440C insert) and an INVERTED stage 2 (O1.5 440C nose pressed in link 1a, 3.7 mm two-walled slot in
+    the crank tip; slot end = stop B at 46.5 deg of K; seat r_c 16.18).
+  * The claim 19.04 reproduced to the digit; the verifier's IK carries the built groove's blended law (the linear-law IK
+    put the pin up to 0.162 mm off the groove centreline on 93 of 184 fast poses): 18.98, held 23.19.
+  * Paired against conecut: +0.70 bench, +0.81 held, CI90 [0.00, +0.93], P(better) 0.00, 0 discordant takes or contacts:
+    all in-band. Against slipper-nose: +0.51 bench, -0.26 held, pooled -0.05 ([-0.75, +0.55]). Against desmo-slipper:
+    +0.05 bench, -0.72 held, pooled -0.50 ([-1.14, +0.16], P 0.89).
+  * Verifier checks added: plate-vs-horn solids (exactly the 0.150 mm running gap on every pose), dense groove scan
+    (worst 0.187 deg nominal, 0.281 at worst tolerance > the 0.25 gate), th with dth/dK (held 5.006, ~4.92 with K play),
+    a tolerance / friction probe (a_s +0.07 mm binds stage 1 at K 44.75 at mu 0.15).
+* **proximal-j3-geodesic-knuckle-3r: DEAD at gate 1, death upheld and made firmer.** Ghost (no K-drive metal), 372 tries,
+  converged: claimed 16.52 / 271 taken; at the round's knee rule (ang_min 25.22, the claim ran 22.26) 16.91 (score
+  93.85), 269 taken, 12 knee slides, 4 contacts, overhead 6/28 - against the pre-registered >= 274 takes.
+
+**What failed and why**
+
+1. **Reach: the back-of-shoulder knuckle family is closed.** A J3 seat up the lateral deltoid moves the round-12 binder
+   2-4 mm out of the skin but not one take: 269-271 frozen for every seat, knee and K law (269 at the knee rule), round
+   12's ghost maximum was 270, 95 needs 279. The cap is the stretched-wall fold (73 bench poses; dK 52.6 of the 57-deg
+   cap), and the remaining binders are radial (pose 129: link 2 -3.79 mm across its full width over the deltoid crest;
+   pose 264: hub K -3.97 overhead), not lateral (a +-1.5 mm bar offset moves 129 <= 0.4 mm). The wrap region (wd 74-78)
+   stays worse with the K law free (13.87 vs 11.44 fast). The MR63ZZ stack (stk 6.0) costs ~0.2 points unrefit.
+2. **The claimed takes were margin.** The search box's knee floor (ang_min 22.0) sat below the round's 25.22 rule; the
+   top-8 configs sat at 22.0-23.2, and +2 takes / +2 overhead poses came from the singularity margin. A rule bound must
+   be a hard box edge.
+3. **The fit bench's axial under-sampling now shows in the cuff knee.** The knee re-fit on Bench(60,160) (lE 67.8 ->
+   90) lost 0.9 on envsel (19.75 / 10 contacts vs 18.84 / 7; knee link 4.9-7.8 mm into the skin at axial -166 across the
+   body) while reading as a near-touch win on Bench(110,360). The pre-registered envelope-bench search was not run.
+4. **The desmo drive is a complexity point, not a score point.** Its +0.70 against conecut is desmo stage 1's cap-ring
+   sector outside O20 (+0.67, 19 samples at 0.54 in band) plus the inversion (+0.09); without the sector it reads 18.37.
+   Cutting the slot to 49.75 leaves fast reach at 0.775: the drive stroke is not a reach lever.
+5. **The friction claim is a reading.** "mu 0.15 on both stages" holds only with stage 1 read on the built groove,
+   whose cap side is gated only outside the blend (K 0-10.72): from K 0.33 to 9.0 the back-drive runs at 35-81 deg,
+   ungated, and the rest pose (dK 4.6, ~52.7 deg) sits in that band. On the linear read the limit is mu ~0.139. At mu
+   0.15 the forward PA is 0.07 mm (a_s) from a bind. The score is the same under either reading (13.31 fast).
+
+**New knowledge**
+- **Inverting a spherical slipper stage** (nose fixed in the driven link, slot in the crank) takes its friction limit
+  from 43.25 to 64.5 deg of K at mu 0.15 (61.0 at 0.20; PAs 25 / 15 deg on the lead's geometry). The nose's relative
+  path runs ~3.7 mm toward the K axis, so any inverted cam beside a hub needs a slot-plate-vs-hub gate (seat out
+  ~0.8 mm here; r_c >= 17 fails the inverted PA at rest).
+- **A blended groove cannot pass a 43 - atan(mu) back-drive gate next to its dwell** (the cap angle goes to 90 as the
+  law's slope goes to 0), and the linear read's 35.05 at K 0 is an artefact of the law's kink: neither reading measures
+  what the wearer feels in the first 9 deg of K. A force measurement (R17-style) has to replace both.
+- **Same contact poses, shallower:** the inverted drive cuts conecut's T5 depth on the identical four poses (bench
+  20.24 -> 16.15 mm; held 60.97 -> 43.84 mm), unscored.
+- **Groove onset ridge vs blend:** 0.20-0.25 mm at blend 10, 0.34 mm at blend 24 at equal fast score; line-contact
+  Hertz at 25 N 1.56 GPa at 0.23 mm, ~1.35 GPa at 0.34 mm: still at the Ti-6Al-4V limit, so the 440C insert stays.
+- **Next (round 14, main):** complexity - keep desmo stage 1's cap-ring sector inside O20 (the measured +0.67; 18.37
+  at cx 16.5) with the friction margin restored (bind >= 1 deg of K above the held stroke at a_s +-0.1 mm, mu 0.17) and
+  the back-drive band measured; and overhead contact depth on the family's four shared contacts (237 / 205 / 316 / 264,
+  ~1 point if cleared without losing a take). Reach belongs to the jump track's cap-pole J2 (plain 3R kinematic bound
+  281/360 there vs 250 at the back seat).
