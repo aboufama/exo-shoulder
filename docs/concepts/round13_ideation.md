@@ -107,20 +107,20 @@ plane <= -55, elev 40-70, axial 90-150 (7 envsel poses).
 
 Frozen exact Bench(110,360) of the same cells:
 
-| cell | gap | taken | contacts | source |
-|---|---|---|---|---|
-| base | 17.23 | 269 | 6 | proposer |
-| wd 71 | 17.31 | 271 | 4 | proposer |
-| wd 73 | **16.72** (score 93.92), ib14 0.896, overhead 8/28, 7 taken < 1 mm, 1 part collision; 117 / 127 taken at 0.88 / 1.13, 237 no longer a contact | 269 | 4 (129 -4.07, 139 -0.87, 264 -2.33, 316 -0.61) | judge, `frozen_judge_wd73.json` |
+| cell | gap (score) | taken | contacts (depth mm) | ib14 | notes | source |
+|---|---|---|---|---|---|---|
+| base | 17.23 (93.73) | 269 | 6 (117 / 127 / 129 / 139 / 264 / 316) | 0.8961 | 0 taken < 1 mm | proposer |
+| wd 71 | 17.31 (93.70) | 271 | 4 (129 -3.87, 237 -11.16, 264 -2.73, 316 -0.66) | 0.8845 | 8 taken < 1 mm; 237 was a knee slide | proposer |
+| wd 73 | **16.72** (93.92) | 269 | 4 (129 -4.07, 139 -0.87, 264 -2.33, 316 -0.61) | 0.8960 | 7 taken < 1 mm; 117 / 127 taken at 0.88 / 1.13; 237 not a contact; 1 part collision; overhead 8/28 | judge, `frozen_judge_wd73.json` |
 
-- **Out of sample the lever is real, and larger than on the claim bench.** On the claim bench wd 71 moves -0.08
-  unrefit and wd 73 -0.51 (16.72: it keeps the base's in-band and 4 contacts, but still takes only 269, under the
-  planner's 274); on envsel wd 71 moves -2.11 and wd 73 -2.69. On envsel, J3 up the deltoid takes 5-7 more poses and sheds 5 contacts (the overhead
-  452 / 454 contacts get shallower too). In-band does not have to fall: wd 73 keeps 0.896 with pick3's knee, and its fit
-  bench improves (11.48 vs 12.17).
+- **Out of sample the lever is real, and larger than on the claim bench.** On the claim bench, unrefit, wd 71 moves
+  -0.08 and wd 73 moves -0.51. wd 73 reads 16.72: it keeps the base's in-band and 4 contacts, but still takes only 269,
+  under the planner's 274. On envsel wd 71 moves -2.11 and wd 73 -2.69. There, J3 up the deltoid takes 5-7 more poses
+  and sheds 5 contacts, and the overhead contacts 452 / 454 get shallower. In-band does not have to fall: wd 73 keeps
+  0.896 with pick3's knee, and its fit bench improves (11.48 vs 12.17).
 - **It pays in near-touch.** Taken poses under 2 mm rise from 18 to 31-37. CLAUDE.md says to search on the 1 mm
-  near-touch gap, which will give some of the takes back. Three of the binder "gains" are relabels to fold (255, 261,
-  262).
+  near-touch gap, which will give some of the takes back. Two of the binder "gains" (255, 261) are contacts relabelled
+  as folds.
 - **The wrap region dies at pick3's law.** wd 76 / wa -18 folds 94 envsel poses (the stretched wall), so it must carry
   the K-law re-tune its proposer named, or be dropped. It is kept only as a re-tune cell.
 - **It is still a ghost: no drive metal, and the knee at stk 4.85, not the 6.0 build rule.** The drive on a 32/48 dyad
@@ -133,8 +133,8 @@ Frozen exact Bench(110,360) of the same cells:
   - the verified "long-dyad" rows walked back to 26-29 / 38-39.
 
   So the ghost cannot be compared with 18.28 until gate 2 exists.
-- **The in-band loss at wd 71 is mostly the cuff.** Weighted by samples (pib1.log, the desmo-conecut stack's per-pose
-  counts), ~85 % of wd 71's -0.0116 in-band is the cuff side: knee, E and boss. The proposer's "the whole loss is the
+- **The in-band loss at wd 71 is mostly the cuff.** Weighted by samples (pib1.log, with the desmo-conecut stack's
+  per-part sample counts as a proxy), ~85 % of wd 71's -0.0116 in-band is the cuff side: knee, E and boss. The proposer's "the whole loss is the
   unrefit cuff side" is roughly right, and the knee re-fit can recover most of it.
 
 ### 5. The dog-leg closes itself
