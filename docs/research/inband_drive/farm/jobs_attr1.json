@@ -1,0 +1,58 @@
+[
+ {
+  "tag": "ib-attr1-k30-bench",
+  "cmd": "mkdir -p docs/research/inband_drive/farm/attr1 && CB_EXACT=1 python3 docs/research/inband_drive/attribute.py '{\"La\": 25.7026, \"s_arm\": 4.0, \"r_h\": 15.491, \"beta\": -147.3923, \"gam\": 22.4633, \"hl\": 2.929, \"zr\": 2.091, \"r_lobe\": 8.5, \"bk1\": 30.0377, \"bk2\": 42.9378, \"a1max\": 67.9755, \"smhi\": 15.2738, \"kK\": 3.0}' bench docs/research/inband_drive/farm/attr1/attr_k30_bench.json docs/concepts/models/longstroke-slipper-knuckle-3r.py > docs/research/inband_drive/farm/attr1/attr_k30_bench.log 2>&1; tail -c 1500 docs/research/inband_drive/farm/attr1/attr_k30_bench.log",
+  "out": [
+   "docs/research/inband_drive/farm/attr1/attr_k30_bench*"
+  ],
+  "env": {
+   "OMP_NUM_THREADS": "1",
+   "IGL_NUM_THREADS": "1",
+   "LS_DRIVE": "rssr",
+   "CB_QUIET_EXACT": "1"
+  },
+  "timeout": 2400
+ },
+ {
+  "tag": "ib-attr1-k30-held",
+  "cmd": "mkdir -p docs/research/inband_drive/farm/attr1 && CB_EXACT=1 python3 docs/research/inband_drive/attribute.py '{\"La\": 25.7026, \"s_arm\": 4.0, \"r_h\": 15.491, \"beta\": -147.3923, \"gam\": 22.4633, \"hl\": 2.929, \"zr\": 2.091, \"r_lobe\": 8.5, \"bk1\": 30.0377, \"bk2\": 42.9378, \"a1max\": 67.9755, \"smhi\": 15.2738, \"kK\": 3.0}' held docs/research/inband_drive/farm/attr1/attr_k30_held.json docs/concepts/models/longstroke-slipper-knuckle-3r.py > docs/research/inband_drive/farm/attr1/attr_k30_held.log 2>&1; tail -c 1500 docs/research/inband_drive/farm/attr1/attr_k30_held.log",
+  "out": [
+   "docs/research/inband_drive/farm/attr1/attr_k30_held*"
+  ],
+  "env": {
+   "OMP_NUM_THREADS": "1",
+   "IGL_NUM_THREADS": "1",
+   "LS_DRIVE": "rssr",
+   "CB_QUIET_EXACT": "1"
+  },
+  "timeout": 2400
+ },
+ {
+  "tag": "ib-attr1-k27b-bench",
+  "cmd": "mkdir -p docs/research/inband_drive/farm/attr1 && CB_EXACT=1 python3 docs/research/inband_drive/attribute.py '{\"La\": 22.8723, \"s_arm\": 4.0, \"r_h\": 15.9448, \"beta\": -149.8132, \"gam\": 29.1695, \"hl\": 2.27, \"zr\": 1.5851, \"kK\": 2.7, \"r_lobe\": 8.4846, \"bk1\": 28.7724, \"bk2\": 41.9799, \"a1max\": 60.8797, \"smhi\": 13.4632}' bench docs/research/inband_drive/farm/attr1/attr_k27b_bench.json docs/concepts/models/longstroke-slipper-knuckle-3r.py > docs/research/inband_drive/farm/attr1/attr_k27b_bench.log 2>&1; tail -c 1500 docs/research/inband_drive/farm/attr1/attr_k27b_bench.log",
+  "out": [
+   "docs/research/inband_drive/farm/attr1/attr_k27b_bench*"
+  ],
+  "env": {
+   "OMP_NUM_THREADS": "1",
+   "IGL_NUM_THREADS": "1",
+   "LS_DRIVE": "rssr",
+   "CB_QUIET_EXACT": "1"
+  },
+  "timeout": 2400
+ },
+ {
+  "tag": "ib-attr1-k27b-held",
+  "cmd": "mkdir -p docs/research/inband_drive/farm/attr1 && CB_EXACT=1 python3 docs/research/inband_drive/attribute.py '{\"La\": 22.8723, \"s_arm\": 4.0, \"r_h\": 15.9448, \"beta\": -149.8132, \"gam\": 29.1695, \"hl\": 2.27, \"zr\": 1.5851, \"kK\": 2.7, \"r_lobe\": 8.4846, \"bk1\": 28.7724, \"bk2\": 41.9799, \"a1max\": 60.8797, \"smhi\": 13.4632}' held docs/research/inband_drive/farm/attr1/attr_k27b_held.json docs/concepts/models/longstroke-slipper-knuckle-3r.py > docs/research/inband_drive/farm/attr1/attr_k27b_held.log 2>&1; tail -c 1500 docs/research/inband_drive/farm/attr1/attr_k27b_held.log",
+  "out": [
+   "docs/research/inband_drive/farm/attr1/attr_k27b_held*"
+  ],
+  "env": {
+   "OMP_NUM_THREADS": "1",
+   "IGL_NUM_THREADS": "1",
+   "LS_DRIVE": "rssr",
+   "CB_QUIET_EXACT": "1"
+  },
+  "timeout": 2400
+ }
+]

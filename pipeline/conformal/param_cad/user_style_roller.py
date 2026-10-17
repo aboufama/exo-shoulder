@@ -404,7 +404,58 @@ def arm_arc(dg, lay):
     return arc, dict(span_deg=round(span, 2), from_deg=round(math.degrees(a0), 2), to_deg=round(math.degrees(a1), 2), r_c=rc, bottom_sphere_r=round(rA, 3), direction_ok=ok)
 
 
-def crank_parts(M, dg, lay):
+ARM_MODE = os.environ.get("ROLLER_ARM", "chord")                                           # profile (gen-6 fix: through the model's stations) | chord (gen 6 first build)
+
+
+def arm_profile(dg, lay, l1b_body):
+    """the arm's straight run as ONE side-view sketch (lines + tangent arcs, 2.5-D, extruded ARM_W across) in the plane through GH
+    spanned by the boss axis dR and the arc's tangent point T3: its underside runs THROUGH the model's arm stations (the L1's
+    arm_mesh rule: the model's levels, the root raised to the boss underside + ARM_UP and let down on the <= 60-deg ramp, every row
+    lifted to keep RUNG over link 1b's BUILT bar over the crank's whole swing), the top offset ARM_T along the normals; it ends on
+    the arc's start section (bottom rA at T3). Replaces the gen-6 first build's chord, which held the run up to the boss level
+    while the model's arm dips to its strap (R1: dk -15.6k skin samples in band vs the L1). Returns (solid, info)."""
+    dR = unit(lay["dR"]); zb = lay["zb"]; st = dg["straight"]; Lch = dg["Lch"]; ns = dg["ns"]; d_s = np.linspace(0.0, Lch, ns)
+    keep = d_s > RL1.ARM_ROOT + 1e-6; dd = np.r_[RL1.ARM_ROOT, d_s[keep]]
+    rows = np.array([[np.interp(x, d_s, st[:, c, k]) for k in range(3)] for x in dd for c in range(4)]).reshape(len(dd), 4, 3)
+    lv = np.linalg.norm(rows.mean(axis=1), axis=1); z0 = zb + ARM_UP
+    want = np.maximum(lv, z0 - math.tan(math.radians(60.0)) * np.maximum(dd - BOSS_R, 0.0)); rows = rows * (want / lv)[:, None, None]
+    vs, fs = l1b_body.tessellate(0.05, 0.3); dg2 = dict(dg, strap_L1b=trimesh.Trimesh(np.array([[v.x, v.y, v.z] for v in vs]), np.array(fs), process=False))
+    lifted = RL1.arm_over_strap(dg2, rows)
+    ex = dR; T3 = np.asarray(dg["T3"], float); ey = unit(T3 - (T3 @ ex) * ex)
+    th = np.array([math.atan2(float(r.mean(0) @ ey), float(r.mean(0) @ ex)) for r in rows])
+    rho = np.array([float(np.linalg.norm(r, axis=1).max()) for r in rows]) + lifted
+    thB = math.atan2(float(T3 @ ey), float(T3 @ ex)); rA = float(dg["rA"])
+    sel = th < thB - math.radians(0.3)
+    U = [np.array([z0, 0.0])] + [r_ * np.array([math.cos(t_), math.sin(t_)]) for t_, r_ in zip(th[sel], rho[sel])] + [rA * np.array([math.cos(thB), math.sin(thB)])]
+    U2 = [U[0]]
+    for p_ in U[1:]:
+        if np.linalg.norm(p_ - U2[-1]) > 0.3: U2.append(p_)
+    U = U2; n = len(U)
+    d = [unit(U[i + 1] - U[i]) for i in range(n - 1)]; nr = [np.array([-v[1], v[0]]) for v in d]
+    if float(nr[0] @ unit(U[1])) < 0: nr = [-v for v in nr]                                   # normals away from GH (the top side)
+    top = [U[0] + ARM_T * nr[0]]
+    for i in range(1, n - 1): top.append(U[i] + ARM_T * (nr[i - 1] + nr[i]) / (1.0 + float(nr[i - 1] @ nr[i])))
+    top.append(U[-1] * (rA + ARM_T) / rA)                                                       # the end face on the arc's radial start section
+    changed = True
+    while changed and len(top) > 2:
+        changed = False
+        for i in range(1, len(top) - 1):
+            if float((top[i] - top[i - 1]) @ (top[i + 1] - top[i])) < 0: del top[i]; changed = True; break
+    pts = [tuple(p_) for p_ in U] + [tuple(p_) for p_ in reversed(top)]
+    want_r = [0.0] + [2.0] * (len(pts) - 1); rad = USP.safe_radii(pts, want_r)
+    for i in (0, n - 1, n, len(pts) - 1): rad[i] = 0.0                                          # root (in the boss) and the arc joint stay sharp
+    sol = USP.prism(np.zeros(3), ex, ey, pts, rad, ARM_W, both=True)
+    over = [float(np.linalg.norm(p_)) - float(np.interp(math.atan2(p_[1], p_[0]), th, np.linalg.norm(rows, axis=2).max(1))) for p_ in U[1:-1]] or [0.0]
+    info = dict(stations=int(len(rows)), vertices=len(pts), underside_over_model_rows_mm=[round(min(over), 3), round(max(over), 3)],
+                lifted_over_built_l1b_mm=[round(float(x), 3) for x in lifted], root_level_mm=round(z0, 3), min_level_mm=round(float(min(np.linalg.norm(u_) for u_ in U)), 3),
+                level_end_mm=round(rA, 3), valid=sol.isValid(),
+                process="2.5-D side-view sketch (lines + R2 tangent arcs) through the model's arm stations, extruded 6 across; part of the 5-axis crank")
+    print(f"arm straight run (profile through the model's stations): {len(rows)} rows, {len(pts)} vertices, levels {z0:.2f} -> min {info['min_level_mm']:.2f} -> {rA:.2f}, "
+          f"lifted over link 1b {max(lifted):.2f}, valid {sol.isValid()}", flush=True)
+    return sol, info
+
+
+def crank_parts(M, dg, lay, l1b_body=None):
     """the bell crank (member 9 home frame = link 1b at phi 0) + its hardware; the pivot pin + clip (link 1b)"""
     dR, zb, F0, s_f = lay["dR"], lay["zb"], lay["F0"], lay["s_f"]; uK = unit(dg["uK"]); C0 = np.asarray(dg["C0"], float); cr = unit(C0)
     ztop = zb + BOSS_H
@@ -414,7 +465,9 @@ def crank_parts(M, dg, lay):
     # straight run: chord from the boss (on the axis, underside ARM_UP over the boss underside) to the arc's tangent point
     T3 = uK * dg["h_tip"] + dg["rc"] * (math.cos(dg["psT"]) * dg["tK0"] + math.sin(dg["psT"]) * dg["bK0"]); B = unit(T3) * (dg["rA"] + ARM_T / 2)
     A = (zb + ARM_UP + ARM_T / 2) * dR; ex = unit(B - A); up = unit(dR - (dR @ ex) * ex); L = float(np.linalg.norm(B - A)) + 1.0
-    straight = US.bar_swept(ex, up, (0.0, 0.0, 0.0), [(0.0, L)], t=ARM_T, w=ARM_W, origin=A, r=0.3)
+    straight = US.bar_swept(ex, up, (0.0, 0.0, 0.0), [(0.0, L)], t=ARM_T, w=ARM_W, origin=A, r=0.3); arm_info = dict(mode="chord")
+    if ARM_MODE == "profile" and l1b_body is not None:
+        straight, arm_info = arm_profile(dg, lay, l1b_body); arm_info["mode"] = "profile"
     arc, ainfo = arm_arc(dg, lay)
     crank = US.glue(boss, plate)
     for part in (straight, arc): crank = crank.fuse(part)
@@ -436,11 +489,11 @@ def crank_parts(M, dg, lay):
     pclip = rev([(1.15, ztop + 0.15), (3.0, ztop + 0.15), (3.0, ztop + 0.75), (1.15, ztop + 0.75)], np.zeros(3), dR)
     info = dict(boss_mm=[round(zb, 3), round(ztop, 3)], boss_raised_over_model_mm=round(lay["raise_mm"], 3), l1b_top_under_boss_mm=None if lay["l1b_top"] is None else round(lay["l1b_top"], 3),
                 follower_centre_on_dR_mm=round(s_f, 3), follower_shift_along_dR_mm=round(lay["follower_shift_mm"], 3), follower_hmid_over_f2_mm=round(lay["follower_hmid_over_f2"], 3),
-                straight_run_mm=round(L, 2), arm_root_up_mm=ARM_UP, arc=ainfo, crank_valid=crank.isValid(), crank_solids=len(crank.Solids()),
+                straight_run_mm=round(L, 2), arm_root_up_mm=ARM_UP, arc=ainfo, straight_run=arm_info, crank_valid=crank.isValid(), crank_solids=len(crank.Solids()),
                 roller_centre_r_mm=round(dg["R0"], 3), arm_bottom_over_roller_top_mm=round(dg["rA"] - dg["R0"] - ROLL_W / 2, 3),
                 flank_pin_shank_mm=round(z_arm_top - 0.1 - z_h, 3), pivot_pin_mm=[round(l1b_top - T, 3), round(ztop + 1.4, 3)])
     parts = [("dk", f"D9-01 drive bell crank (Ti-6Al-4V, 5-axis machined from solid): boss O10 x {BOSS_H:g} (2 x 683ZZ), follower plate {PLATE_T:g} mm {PLATE_DROP:g} under the boss top "
-                    f"to the follower pin at {A_S:g} mm, bent arm 6 x 3 (straight run {L:.1f} mm + the arc about hub K at r_c {dg['rc']:.2f}, a revolve, "
+                    f"to the follower pin at {A_S:g} mm, bent arm 6 x 3 (straight run {'through the model arm stations (side-view line/arc profile)' if arm_info['mode'] == 'profile' else f'{L:.1f} mm chord'} + the arc about hub K at r_c {dg['rc']:.2f}, a revolve, "
                     f"{ainfo['span_deg']:.1f} deg), roller pin bore at the tip", crank),
              ("dk", "drive crank bearing 1 683ZZ 3x7x3 (polished)", brg[0]), ("dk", "drive crank bearing 2 683ZZ 3x7x3, 0.1 mm wave-washer preloaded (polished)", brg[1]),
              ("dk", f"drive lobe follower roller MR63ZZ 3x6x2.5 at a_s {A_S:g} mm, psi {PSI_DEG:g} deg (polished)", froll),
@@ -692,7 +745,7 @@ def main():
     l1b_body = next(s for g, n, s in lk if n.startswith("D8-02b"))
     lay = drive_layout(M, lg, dg, l1b_body)
     ring, rep["lobe"], lobe_g = lobe_ring(M, lg, dg, lay)
-    cp, rep["crank"] = crank_parts(M, dg, lay)
+    cp, rep["crank"] = crank_parts(M, dg, lay, l1b_body)
     z_pp = rep["crank"]["pivot_pin_mm"]; i_1b = next(i for i, (g, n, s) in enumerate(lk) if n.startswith("D8-02b"))
     try:
         b_ = lk[i_1b][2].cut(disc(np.zeros(3), lay["dR"], PIN_R, z_pp[0] - 1.0, z_pp[0] + T + 1.0))
