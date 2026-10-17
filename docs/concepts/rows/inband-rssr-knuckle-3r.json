@@ -655,6 +655,57 @@
     "rod+rodends": 18.61,
     "all_drive": 18.58
    }
+  },
+  "alt_cma3_o_near1": {
+   "params": {
+    "La": 25.9092,
+    "s_arm": 5.3886,
+    "r_h": 14.7868,
+    "beta": -154.4704,
+    "gam": 16.6733,
+    "hl": 2.2268,
+    "zr": 0.0,
+    "kK": 1.7402,
+    "r_lobe": 7.771,
+    "bk1": 28.4028,
+    "bk2": 41.0644,
+    "a1max": 64.46719999999999,
+    "smhi": 14.8924,
+    "eta": 13.9068,
+    "clay": 1,
+    "zc": 0.4815,
+    "bl_c": 0,
+    "bl_h": 0
+   },
+   "note": "the 1 mm objective's best (longer dyad), worn post hoc, reported only",
+   "bench": {
+    "gap": 19.43,
+    "reach": 0.7167,
+    "follow": 1.0,
+    "inband14": 0.8998,
+    "inband10": 0.5403,
+    "contact": 0.0108
+   },
+   "why": {
+    "fold": 89,
+    "slide": 9,
+    "flip": 0,
+    "closure": 0,
+    "skin": 0,
+    "parts": 0,
+    "contact": 4
+   },
+   "contact_depth": {
+    "n": 4,
+    "sum_mm": 16.437,
+    "max_mm": 11.619
+   },
+   "held": 24.89,
+   "held_contact_depth": {
+    "n": 14,
+    "sum_mm": 45.905,
+    "max_mm": 12.385
+   }
   }
  },
  "n_configs": 11576,

@@ -133,6 +133,7 @@ the fit bench still does not want the long dyad: the long-dyad lever is not a me
 | long-stroke real rod at k30 (parent, control) | 51.8 | 25.83 | 0.719 | 0.859 | 0.037 (14, 35.9 / 14.7) | - | 5.389 | **28.86** (new) |
 | **PICK cma3 p (in-band RSSR, 26 / 38 / 59, kK 1.79)** | 45.8 | **18.87** (score 93.14) | 0.722 (8/28) | **0.8971** | 0.008 (3, **9.86 / 9.72**) | 19.96 / 34.12 | 5.231 | **23.21** (9 contacts, **23.20 / 8.71** mm; th margin 5.045) |
 | robust build (r_h +0.25, eta +1) | 45.8 | **18.83** | 0.722 | 0.8975 | 0.008 (3, 9.83 / 9.69) | 19.92 / 34.12 | 5.231 | **23.16** |
+| alt cma3 o (1 mm objective, 28.4 / 41.1 / 64.5, kK 1.74; post hoc, reported only) | 36.5 | 19.43 | 0.717 (7/28) | 0.8998 | 0.0108 (4, 16.44 / 11.62) | 23.26 / 40.23 | 5.296 | 24.89 (14 contacts, 45.9 / 12.4) |
 | secondary cma1 f (law floor 2.7, axial studs) | 49.3 | 18.21 | 0.728 (8/28) | 0.8954 | 0.0053 (2, 10.17 / 10.08) | 20.94 / 35.49 | 5.133 | 23.42 (11 contacts, 27.6 / 8.71) |
 
 - Per-pose dumps (lead's rule, `tools/alignment_paired.py dump --out`): `farm/claimA/inband-rssr-knuckle-3r_{bench,held}_perpose.json`,
