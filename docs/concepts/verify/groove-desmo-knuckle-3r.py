@@ -33,7 +33,9 @@ Checks on every TAKEN pose of the worn bench, ADDED here:
   6. CONTINUITY FLOOD (--flood: connected_report, unchanged).
 Corrected gap: poses failing 1-3 dropped.
 
-    GD_CELL=lead CB_EXACT=1 OMP_NUM_THREADS=1 nice -n 10 python3 docs/concepts/verify/groove-desmo-knuckle-3r.py wear <bench|held|fit> <out.json> [--flood] [--env]
+    GD_CELL=lead CB_EXACT=1 OMP_NUM_THREADS=1 nice -n 10 python3 docs/concepts/verify/groove-desmo-knuckle-3r.py wear <bench|held|fit> <out.json> [--flood] [--env] [--truewin]
+    (--truewin: the drive's stop B moved to where the 3-D crest meets the claim's own window R_HI 8.44, before the fit:
+     the honest re-run of the claim protocol with the corrected groove-fit limiter)
 """
 import importlib.util, json, math, os, sys, time
 import numpy as np
@@ -281,12 +283,26 @@ def th_margin(M, B, taken):
 
 
 # ---------------------------------------------------------------------------------------------------- protocol
-def wear(P, which="bench", flood=False, env=False):
+def wear(P, which="bench", flood=False, env=False, truewin=False):
     if env:
         orig = GD.GDModel._rod_metal
         def _rm(self):
             orig(self); add_envelope(self)
         GD.GDModel._rod_metal = _rm
+    if truewin:                                                         # stop B moved to where the TRUE crest meets the window
+        orig2 = GD.GDModel._rod_metal
+        def _rm2(self):
+            orig2(self)
+            gd = self._groove; g = self._scg
+            if not gd: return
+            u2 = unit(np.asarray(gd["u2"], float)); F0 = np.asarray(gd["F0"], float); dR = unit(np.asarray(g["dR"], float)); PV = np.asarray(g["PV"], float)
+            kgr = np.asarray(g["kgrid"], float)
+            F = np.array([S.rotm(dR, float(g["sig"]) * float(RF.phi_of(k, g["g"], g.get("c", 0.0))))[0] @ (F0 - PV) + PV for k in kgr])
+            rr_ = np.linalg.norm(F - (F @ u2)[:, None] * u2[None], axis=1); j = np.nonzero(rr_ > GD.R_HI + 1e-9)[0]
+            if len(j) and float(kgr[max(j[0] - 1, 0)]) < float(g["dK_lim"]):
+                g["dK_lim"] = float(kgr[max(j[0] - 1, 0)]); g["why_lim"] = "groove-fit-3d"
+                self._sc_info.update(dK_lim=round(math.degrees(g["dK_lim"]), 2), why_lim="groove-fit-3d")
+        GD.GDModel._rod_metal = _rm2
     nc, nw = {"bench": (110, 360), "held": (-1, -1), "fit": (60, 160)}[which]
     fit, M1, M, B, r = GD._frozen_model(dict(P), nc, nw)
     rep = {k: r[k] for k in ("gap", "reach", "follow", "inband14", "inband10", "contact")}
@@ -327,8 +343,8 @@ def wear(P, which="bench", flood=False, env=False):
 if __name__ == "__main__":
     if sys.argv[1] == "wear":
         which, path = sys.argv[2], sys.argv[3]
-        t = time.time(); out = wear(dict(BEST), which, "--flood" in sys.argv, "--env" in sys.argv)
-        out.update(secs=round(time.time() - t, 1), exact=os.environ.get("CB_EXACT") == "1", env_flag="--env" in sys.argv, params=BEST)
+        t = time.time(); out = wear(dict(BEST), which, "--flood" in sys.argv, "--env" in sys.argv, "--truewin" in sys.argv)
+        out.update(secs=round(time.time() - t, 1), exact=os.environ.get("CB_EXACT") == "1", env_flag="--env" in sys.argv, truewin="--truewin" in sys.argv, params=BEST)
         os.makedirs(os.path.dirname(os.path.abspath(path)), exist_ok=True)
         json.dump(out, open(path, "w"), indent=1, default=float)
         print(json.dumps({k: out.get(k) for k in ("which", "mode", "fit_fast", "frozen", "corrected", "corrected_overhead", "poses_failing", "why_failing",
