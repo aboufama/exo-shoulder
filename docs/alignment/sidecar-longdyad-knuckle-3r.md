@@ -38,6 +38,11 @@ n 1154, exact); `docs/alignment/roller-longdyad-knuckle-3r.md`; this design's `r
 - **But not a better exo either.** One workspace pose is worth 0.278 gap points. The plain differences among the top
   three are 0.24 and 0.22, each under one pose, and held out reverses the whole order (22.03 < 22.67 < 23.73).
   Roller-longdyad's gain is 2 fewer contact poses, with the remaining contact 2.3x deeper.
+- **The concurrent roller-longdyad audit's paired re-wear agrees** (`remeasure/roller-longdyad-knuckle-3r_vs_
+  sidecar-longdyad-knuckle-3r_paired_exactfit.json`; an exact-fit variant, so its levels are 19.34 / 19.66, not the
+  verified 18.67 / 18.91): on the bench each design takes 8 workspace poses the other does not, the difference is all
+  contact (-0.53) against in-band (+0.21), and the paired bootstrap 90 % interval is [-2.62, +1.77]; pooled bench plus
+  held out, roller-longdyad is better with probability 0.29.
 - **This design's own lead was the same kind of number.** Its round-8 lead over sidecar-parallelogram is 0.22 plain
   (2 more workspace poses, less in-band), and it is 0.64 behind parallelogram held out (same reach 0.6901, in-band
   0.8947 vs 0.9031). That lead rested on the 2 mm column (34.03 vs 50.14), which the user has now retired.
