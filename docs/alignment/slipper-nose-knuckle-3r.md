@@ -214,3 +214,90 @@ in each one the ranking either does not move against a design that is better for
 
 Farm cost of this audit: 8 jobs, about 1690 worker-seconds, about $0.14 (cpu3c rate), within the $1.5 cap.
 `tools/runpod_guard.py audit` before: exo-cpu1 workersMin 0.
+
+## Skeptic (2026-10-17, ~07:15 UTC)
+
+Every reason re-derived from the rawest file on disk (per-pose dumps, wear probes, the m_sub probe rows, the verifier's
+frozen JSON, the model and row files, `tools/simplicity.py` v2.2). No re-wear was needed: every number the reasons
+cite reproduced from the auditor's dumps, which themselves reproduce the claim (18.49 / held 23.45). No model, bench,
+judge, row or score was touched. Rulings: `docs/alignment/slipper-nose-knuckle-3r.rulings.json`.
+
+**Final verdict (ledger, `--by skeptic`): WATCH.** 2 reasons refuted with evidence (`idle`, `NEW-filler-metal`), 6 upheld.
+
+### Rulings
+
+- **`idle`: refuted (an instrument false positive).**
+  - The claim runs the lead cell. The model's line 36 defaults `SN_CELL` to `lead`, and the verifier's line 34 sets the
+    same default. The row records `frozen.cell 'lead'` and `mechanism.cuff_knee.pins 2`.
+  - `knee_moved` is set only at `kneeless-roller-knuckle-3r.py:166`. The slipper model only reads it at line 136, and
+    that text is what `c_idle` matched.
+  - The 65.71 deg is the pin knee's designed motion: 151.92 - 86.21, inside its window of 25.22-154.78
+    (`remeasure/..._probe_bench.json extras`).
+  - The drives move: K 45.62 deg and the crank 19.3 deg, both far above the 2 deg idle threshold. This is the same
+    ruling as groove-desmo's.
+- **`reporting`: upheld.**
+  - The row's verdict begins "screened -" while its status is verified. In `morphs.json`, sweep_gap 13.0 sits 5.49
+    under v_gap 18.49, past the 5-point trigger.
+  - Measured mitigation, which does not refute it: the dashboard's headline sweep best is minarc's 6.19, so this 13.0
+    shows only in the row's own column, and the fast-to-frozen drop (+5.49) matches the lead's (+5.48).
+  - The verdict text still says "Complexity 22.25 vs 24.25", using the lead's pre-v2.1 number.
+- **`judgement:M5`: upheld (missing measurement).**
+  - What is on file: only the row note's hand calculation (about 9 N normal force, Hertz about 340 MPa, drag
+    0.01-0.02 N.m). There is no R17, lift-off or preload output for this design, and no CAD.
+  - The verifier's `extra.pa_rule` is confirmed: crank 34.47 and horn 40.77 deg effective, friction 4.97 deg = atan(0.087).
+  - The lead's lift-off safety factor (2.42-2.79, `docs/research/roller_mechanism/results_bench.json`) is for a rolling
+    contact and does not carry over.
+  - New: the hand calculation assumes a 3.5 mm convex flank. The verifier's own N3 check reads
+    `extra.nose.flank_rho_min_mm` **1.285 at k 0.5 deg**, at the rest end of the stroke where the nose sits on 204 of 371
+    bench poses, against a 1.18 mm nose. The check stores the magnitude only, so the sign is unknown. If that section is
+    convex, the line-contact Hertz figure rises by about 20 %. The wear test should load that section.
+- **`judgement:G4`: upheld.**
+  - Recomputed from both probes' `rows`: max |m_sub difference| over the 371 shared poses is 0.0. 204 poses are at
+    rest; m_sub is under 5 deg on 106 and under 1 deg on 50, with a minimum of 0.0 at pose 227.
+  - 30 of the 50 poses under 1 deg are workspace poses at elevation 60-119: the ordinary raised arm, not an overhead
+    corner.
+  - The ruling on B1 is still open with the user.
+- **`judgement:T5`: upheld.**
+  - The per-pose dumps give 14.75 mm on the bench (9.01 + 5.74) against sidecar-longdyad's 6.23 (x2.37, +8.52 mm), past
+    TH 2.0 / 5 mm. Both sides use the same claim protocol, and each dump reproduces its claim.
+  - Held out it is 46.12 against 35.67 (x1.29). It is shallower than the lead (16.46 / 49.88).
+- **`judgement:NEW-ws-inband`: upheld.**
+  - Probe numbers confirmed: elevation 90-140 in-band 0.8004, over 14 mm 0.1987, max 30.8 mm. The lead reads 0.7979 and
+    sidecar-longdyad 0.8409.
+  - Floor at those poses: 19 under 3 mm against sidecar's 25. The comparison is mixed.
+- **`judgement:NEW-stale-complexity-ruler`: upheld.**
+  - `simplicity.score` v2.2: the row as recorded 22.25; the same record with `cuff_knee.closed_loops 1` 18.25; the lead
+    20.25.
+  - Otherwise the records differ only by the deleted roller (joints, bodies, passive rotations, rolling and sliding
+    pairs). It is a real inconsistency in the records, even though it runs against the design.
+- **`judgement:NEW-filler-metal`: refuted for this claim. The measurement is right; C1 stays in the catalogue.**
+  - The numbers are confirmed: 21.18 to 20.12, hub 3 in band 0.505 to 0.799, 4.73 g added, a drop of 3.4 mm mean and
+    7.61 mm max, and the crown at a median 21.9 mm in both columns.
+  - Every wedge column is `cell 'kneeless'`. The claim is `frozen.cell 'lead'`, its params carry no wedge, and 18.49
+    reproduces without one.
+  - On the lead cell the wedge cannot exist. The design doc (lines 104-108) measured all 36 tilt-by-azimuth
+    configurations at 0.0 mm of drop.
+  - The wearer of the claimed exo carries none of that metal.
+
+### Missed by the audit (not counted in this verdict; for the next audit)
+
+1. **The dashboard shows the verified slipper as contact-free.**
+   - The row has no `v_contact` field. `docs/dashboard/bench.js` line 5 (`contact: m.v_contact ?? m.contact`) therefore
+     shows the screen's `contact` 0.0 under "evidence: verified".
+   - The verified frozen contact is 0.0054 (`rows/...json verification.frozen.contact`): 2 poses, 9.01 + 5.74 mm.
+   - The lead, with the same 2 contact poses, shows 0.0054. Side by side, the slipper looks contact-free and the lead
+     does not.
+   - The defect is pipeline-wide, not this design's doing: 12 verified rows in `morphs.json` lack `v_contact`, among them
+     sidecar-longdyad, groove-desmo, the kneeless pair and dipped-law. It is an R-family reporting flatter that
+     `c_reporting` does not read.
+   - Proposal (instrument, no score moves): `c_reporting` should compare the dashboard's verified contact with the
+     verifier's frozen contact, as it already does for v_gap. Effect on this row: the reporting watch gains a second
+     reason. On the other 11 rows: not measured.
+2. **The hand-calculated contact stress uses a flank radius the verifier did not find.** The note says "a convex 3.5 mm
+   flank", but `verify _v_bench_frozen.json extra.nose.flank_rho_min_mm` is 1.285 at k 0.5 deg. This is part of M5's
+   missing measurement. Before the wear test, report the signed flank curvature at rest.
+3. **Small correction to the stated horn margin.**
+   - The exact bench probe's `extras.sc_info` reads `pa_horn_max_taken` 36.1 and `pa_eff_horn` 41.1 deg. The audit
+     quotes 35.8 and 40.77 from the verifier: 1.9 deg under the 43 cap, not 2.2.
+   - The friction coefficient at the cap is then tan(43 - 36.1) = 0.121, which agrees with "holds to mu 0.12" and leaves
+     no margin beyond it.

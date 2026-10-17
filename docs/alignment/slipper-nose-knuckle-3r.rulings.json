@@ -1,0 +1,42 @@
+[
+ {
+  "key": "idle",
+  "refuted": true,
+  "evidence": "Instrument false positive, re-derived from the files. The claim runs the lead cell: docs/concepts/models/slipper-nose-knuckle-3r.py line 36 CELL = os.environ.get('SN_CELL', 'lead'); docs/concepts/verify/slipper-nose-knuckle-3r.py line 34 setdefault SN_CELL lead; rows/slipper-nose-knuckle-3r.json frozen.cell 'lead', mechanism.cuff_knee.pins 2. 'knee_moved' is SET only in kneeless-roller-knuckle-3r.py:166 (the kneeless control's ptp < 0.5 deg assertion); the slipper model only READS r.get('knee_moved') at line 136, which is the text c_idle matched. The 65.71 deg span is the pin knee's designed motion: remeasure/slipper-nose-knuckle-3r_probe_bench.json extras.knee_ang_taken [86.21, 151.92] (151.92 - 86.21 = 65.71) inside extras.knee_window [25.22, 154.78]. Declared drives move well above TH idle_deg 2.0: dK 45.62 deg (verify _v_bench_frozen.json extra.dK_taken_max_deg; remeasure _bench.json deep.coord_spans dK [-0.7961, 0] rad = 45.61 deg), crank 19.3 deg (probe extras.sc_info.phi_max_taken). Same ruling as groove-desmo-knuckle-3r.rulings.json idle."
+ },
+ {
+  "key": "reporting",
+  "refuted": false,
+  "evidence": "Confirmed. rows/slipper-nose-knuckle-3r.json status 'verified', verdict begins 'screened - a Pareto move of the lead' (c_reporting trigger, tools/alignment_audit.py c_reporting). docs/dashboard/data/morphs.json: sweep_gap 13.0, v_gap 18.49, 18.49 - 13.0 = 5.49 > 5. Mitigation measured, not a refutation: the dashboard headline sweep best is minarc-stop-knuckle-4r 6.19 (core.js best(live,'sweep_gap')), so 13.0 only shows in this row's 'Sweep best gap' column, and the fast->frozen drop +5.49 equals the lead's +5.48. The same verdict text also still compares 'Complexity 22.25 vs 24.25' with the lead's pre-v2.1 number. Stands (as groove-desmo's reporting ruling)."
+ },
+ {
+  "key": "judgement:M5",
+  "refuted": false,
+  "evidence": "Missing measurement; no number on file. Checked: rows/slipper-nose-knuckle-3r.json note has only the hand calc (clock spring 0.08 N.m + 0.03 N.m/rad ~9 N normal at r 15 mm; Hertz ~340 MPa 'on a convex 3.5 mm flank'; drag 0.01-0.02 N.m; Archard wear; 'wear test at 5-15 N before CAD'). grep of docs/research and pipeline/full-exo/designs for 'slipper': only the unrelated longstroke_drive files; no R17 / lift-off / preload output, no CAD. verify _v_bench_frozen.json extra.pa_rule: mu 0.087, friction_deg 4.97 (= atan 0.087), pa_eff_crank_max 34.47, pa_eff_horn_max 40.77 - confirmed. The lead's lift-off number (docs/research/roller_mechanism/results_bench.json static_SF_MVP1 2.42-2.79) is for a rolling contact and does not transfer. One inconsistency found: the hand calc assumes a 3.5 mm flank radius, but the verifier's own N3 check reads nose.flank_rho_min_mm 1.285 at k 0.5 deg (verify _v_bench_frozen.json extra.nose), i.e. at the rest end of the stroke where the nose sits most of the time; the 340 MPa is not checked there. Stands."
+ },
+ {
+  "key": "judgement:G4",
+  "refuted": false,
+  "evidence": "Re-derived from the probe rows (remeasure/slipper-nose-knuckle-3r_msub_rest_bench.json and roller-longdyad-knuckle-3r_msub_rest_bench.json, both model_frozen reproducing 18.49 / 18.67): 371 shared taken poses, max |m_sub difference| 0.0; K at rest on 204, m_sub < 5 deg on 106, < 1 deg on 50, min 0.0 at pose 227 (15, 75, 15). The < 1 deg rest poses are mostly mid-elevation workspace poses (ws elev 60-119: 30 of 50), not an overhead corner. The family reading (family_reading.min 5.181, m_plain at rest min 5.389) does not read m_sub at rest. Whether m_sub at rest is the right margin is proposal B1, open with the user; nothing on file rules it harmless. Not bought by this design, but it is on the claimed exo. Stands."
+ },
+ {
+  "key": "judgement:T5",
+  "refuted": false,
+  "evidence": "Re-derived from the per-pose dumps (min of min_mm and cmin over contact poses): slipper bench 2 contacts, 9.01 at (15,165,-60) + 5.74 at (30,165,-60) = 14.75 mm (dump frozen.gap 18.49); sidecar-longdyad _bench_perpose_claim.json 4 contacts, 6.23 mm, deepest 4.61 (gap 18.91); ratio 2.37, excess +8.52 mm, past TH depth_ratio 2.0 and depth_floor_mm 5.0 (tools/alignment_audit.py line 61-63; docs/ALIGNMENT.md section 5). Same claim protocol both sides (frozen exact, dumps reproduce their claims). Held out 46.12 vs 35.67 (x1.29, inside). The lead (_bench_perpose_claim.json) 16.46 / held 49.88, so the slipper is shallower than its parent. A 9 mm overhead press is felt by the wearer. Stands, as on the lead and groove-desmo."
+ },
+ {
+  "key": "judgement:NEW-ws-inband",
+  "refuted": false,
+  "evidence": "Confirmed: remeasure/slipper-nose-knuckle-3r_probe_bench.json probe.ws_elev90_140 inband14 0.8004, over14 0.1987, d_p95 20.15, d_max 30.8 (n 85, taken 38); _probe_held.json 0.8218 / 0.1762. live_audit_2026-10-16/probe_roller-longdyad-knuckle-3r.json 0.7979 / 0.2012; probe_sidecar-longdyad-knuckle-3r.json 0.8409 / 0.1565. Floor at those poses: slipper 19 poses < 3 mm vs sidecar-longdyad 25 (poses_floor_lt3). Unscored standoff above 14 mm is felt bulk at the raised arm; family carry. Stands."
+ },
+ {
+  "key": "judgement:NEW-stale-complexity-ruler",
+  "refuted": false,
+  "evidence": "Confirmed with tools/simplicity.py score() VERSION 2.2: the row's mechanism 22.25; the same record with cuff_knee.closed_loops 1 (the lead's convention) 18.25; the lead's record 20.25 (= its row field). The two records differ only in cuff_knee.closed_loops, joints 8/9, moving_bodies 5/6, passive_rot 4/5, rolling 1/2, sliding 1/0 (the roller deletion). morphs.json shows 22.25 vs 20.25. The defect understates the design; it is a real record inconsistency (the same standard the lead's complexity ruling upheld). Stands."
+ },
+ {
+  "key": "judgement:NEW-filler-metal",
+  "refuted": true,
+  "evidence": "The measurement is right and does not bear on the claim. Confirmed: rows/slipper-nose-knuckle-3r.json claims.kl_mu050_flat 21.18 -> kl_mu050_w25 20.12 (kl_mu087 21.76 -> 20.70), hub3 [0.505,...] flat, wedge {mean_drop 3.4, max_drop 7.61, mass_g 4.73}, crown_mm median 21.9 (min 13.0, max 37.3) in both columns. But every one of those columns has cell 'kneeless'. The claim is frozen.cell 'lead' with best_params (no wedge, tau or psi key; identical to verify _v_bench_frozen.json params), and the claimed 18.49 reproduces without a wedge (remeasure _bench.json frozen.gap 18.49). On the claimed cell the wedge cannot exist: docs/concepts/slipper-nose-knuckle-3r.md lines 104-108, 36 configurations (tilt 15/25/35 x azimuth 0-330) all drop 0.0 mm (hub 3 at 0.38 mm over the skin at a fit pose). The wearer of the 18.49 carries none of the 4.73 g. The doc itself already calls the wedge in-band-only with an unmoved crown (lines 126-128, 253). C1 stays a catalogue entry for any future wedge claim."
+ }
+]
