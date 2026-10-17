@@ -1,0 +1,142 @@
+[
+ {
+  "ok": false,
+  "n_fail": 2,
+  "min_dK_lim": 0.0,
+  "dK_need": 43.4,
+  "rows": [
+   {
+    "k": "beta",
+    "d": -1.0,
+    "dK_lim": 44.8,
+    "why": "pressure_horn",
+    "pa_horn": 41.4,
+    "pa_crank": 7.7,
+    "honest": true,
+    "ok": true
+   },
+   {
+    "k": "beta",
+    "d": 1.0,
+    "dK_lim": 43.0,
+    "why": "pressure_horn",
+    "pa_horn": 42.0,
+    "pa_crank": 7.8,
+    "honest": true,
+    "ok": true
+   },
+   {
+    "k": "r_c",
+    "d": -0.25,
+    "dK_lim": 0.0,
+    "why": "CRK-hubK",
+    "pa_horn": 6.8,
+    "pa_crank": 9.2,
+    "honest": true,
+    "ok": false
+   },
+   {
+    "k": "r_c",
+    "d": 0.25,
+    "dK_lim": 42.5,
+    "why": "pressure_horn",
+    "pa_horn": 41.9,
+    "pa_crank": 8.7,
+    "honest": true,
+    "ok": true
+   },
+   {
+    "k": "g",
+    "d": -0.05,
+    "dK_lim": 47.0,
+    "why": "pressure_horn",
+    "pa_horn": 40.3,
+    "pa_crank": 16.7,
+    "honest": true,
+    "ok": true
+   },
+   {
+    "k": "g",
+    "d": 0.05,
+    "dK_lim": 0.0,
+    "why": "flank_cusp",
+    "pa_horn": 28.0,
+    "pa_crank": 13.9,
+    "honest": true,
+    "ok": false
+   }
+  ],
+  "which": "BEST_am",
+  "secs": 17.4
+ },
+ {
+  "ok": false,
+  "n_fail": 4,
+  "min_dK_lim": 0.0,
+  "dK_need": 43.4,
+  "rows": [
+   {
+    "k": "beta",
+    "d": -1.0,
+    "dK_lim": 49.0,
+    "why": "pressure_horn",
+    "pa_horn": 39.3,
+    "pa_crank": 7.1,
+    "honest": true,
+    "ok": true
+   },
+   {
+    "k": "beta",
+    "d": 1.0,
+    "dK_lim": 47.2,
+    "why": "pressure_horn",
+    "pa_horn": 40.3,
+    "pa_crank": 7.4,
+    "honest": true,
+    "ok": true
+   },
+   {
+    "k": "r_c",
+    "d": -0.25,
+    "dK_lim": 0.0,
+    "why": "CRK-hubK",
+    "pa_horn": 13.4,
+    "pa_crank": 25.4,
+    "honest": true,
+    "ok": false
+   },
+   {
+    "k": "r_c",
+    "d": 0.25,
+    "dK_lim": 0.0,
+    "why": "flank_cusp",
+    "pa_horn": 34.0,
+    "pa_crank": 23.6,
+    "honest": true,
+    "ok": false
+   },
+   {
+    "k": "g",
+    "d": -0.05,
+    "dK_lim": 0.0,
+    "why": "pressure_crank",
+    "pa_horn": 32.3,
+    "pa_crank": 42.8,
+    "honest": false,
+    "ok": false
+   },
+   {
+    "k": "g",
+    "d": 0.05,
+    "dK_lim": 0.0,
+    "why": "pressure_horn",
+    "pa_horn": 49.3,
+    "pa_crank": 40.8,
+    "honest": false,
+    "ok": false
+   }
+  ],
+  "which": "docs/research/roller_env_polish/local/probe_beta178.json",
+  "secs": 17.1
+ }
+]

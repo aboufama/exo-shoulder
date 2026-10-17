@@ -83,6 +83,7 @@ CONTROL = os.environ.get("GD_CONTROL") == "1"                 # the parent itsel
 if CONTROL: ROLL_R, HEAD_R = 3.0, 2.25
 RF.ROLL_R = ROLL_R; RL.HEAD_R = HEAD_R; RL.HEAD_T = HEAD_T; RF.PA_MAX = PA_GATE
 
+REPORT_KEYS = ("plain", "gap_near1", "gap_near2", "min_metal_mm", "why", "cam", "l2", "overhead140", "ws_inband", "parts_ib14", "knee_rigid")
 GROOVE = dict(capK=0.0, groove_gate=1)
 PARAMS = dict(BM.PARAMS, **BEST, **({} if CONTROL else GROOVE))
 if not CONTROL: PARAMS["r_lobe"] = R_LO

@@ -257,13 +257,42 @@ def obj_of(p):
     mins = [x["th"].get("min") for x in (e, e60) if x["th"].get("min") is not None]
     marg_bad = bool(mins) and min(mins) < KIT.FOLD_MARGIN - 1e-6
     out["honest"] = honest; out["margin_bad"] = bool(marg_bad)
-    out["obj"] = round(0.5 * (a + b) + out["claim_pen"] + out["depth_pen"] + (0.0 if honest else 100.0) + (100.0 if marg_bad else 0.0), 3)
+    rob_pen = 0.0
+    if os.environ.get("ENVP_ROBUST") == "1" and honest and not marg_bad:      # flank synthesis-robustness margin: ROBUST_W per failing neighbour
+        rb = robust(Pp, B60, float((r6.get("drive") or {}).get("dK_taken_max") or 0.0)); out["robust"] = {k: rb[k] for k in ("ok", "n_fail", "min_dK_lim", "dK_need")}
+        rob_pen = float(os.environ.get("ENVP_ROBUST_W", "5")) * rb["n_fail"]   # soft (graded, so CMA can walk out of the knife edge); picks need n_fail 0
+    out["robust_pen"] = rob_pen
+    out["obj"] = round(0.5 * (a + b) + out["claim_pen"] + out["depth_pen"] + (0.0 if honest else 100.0) + (100.0 if marg_bad else 0.0) + rob_pen, 3)
     out.update(env_near1=a, env60_near1=b, env_gap=e["gap"], env60_gap=e60["gap"], secs=round(time.time() - t0, 1))
     if not nosel:
         out.update(sel_near1=sel["near1"], sel60_near1=s60["near1"], sel_gap=sel["gap"], sel60_gap=s60["gap"],
                    sel_depth=round(0.5 * (sel["depth"]["sum"] + s60["depth"]["sum"]), 3),
                    sel_mean_near1=round(0.5 * (sel["near1"] + s60["near1"]), 3), sel_worst_near1=max(sel["near1"], s60["near1"]))
     return out
+
+
+ROBUST_TOL = {"beta": 1.0, "r_c": 0.25, "g": 0.05}          # flank cut tolerance: deg / mm / ratio (one at a time, +-)
+
+
+def robust(Pp, B, dK_need=None):
+    """SYNTHESIS-ROBUSTNESS of the flank (the beta -178 knife edge: 22 / 27 nearby cuts failed synthesis): re-fit the priced
+    config with each flank parameter moved by +-ROBUST_TOL (one at a time) on bench B; every neighbour must synthesise
+    (honest, drive not idle, pressure angles under the read cap) AND keep a drive range >= the nominal's taken dK - 1 deg
+    (the poses the nominal takes stay drivable by a toleranced cut). Returns dict(ok, n_fail, min_dK_lim, rows)."""
+    if dK_need is None:
+        B.reset(); r0, _ = RL._report(B, Pp); dK_need = float((r0.get("drive") or {}).get("dK_taken_max") or 0.0)
+    rows = []; ok = True; mins = []
+    for k, d in ROBUST_TOL.items():
+        lo, hi = FREE[k][1], FREE[k][2]
+        for s in (-1, 1):
+            q = dict(Pp); q[k] = float(min(max(float(Pp[k]) + s * d, lo), hi))
+            B.reset(); r, M = RL._report(B, q); cam = r.get("cam") or {}
+            lim = float(cam.get("dK_lim") or 0.0); good = _honest(r) and bool(np.asarray(M.kin_ok).any()) and lim >= dK_need - 1.0
+            ok &= good; mins.append(lim)
+            rows.append(dict(k=k, d=s * d, dK_lim=round(lim, 2), why=cam.get("why_lim"), pa_horn=cam.get("pa_horn_max_taken"),
+                             pa_crank=cam.get("pa_crank_max_taken"), honest=_honest(r), ok=bool(good)))
+    return dict(ok=bool(ok), n_fail=int(sum(not r["ok"] for r in rows)), min_dK_lim=round(min(mins), 2) if mins else None,
+                dK_need=round(dK_need, 2), rows=rows)
 
 
 def _benches():
@@ -506,6 +535,33 @@ def claim(fit, wb, which, outp):
                           ghoff={k: (ex.get("ghoff") or {}).get(k) for k in ("3mm", "5mm")}, secs=out["secs"]), default=float), flush=True)
 
 
+def _cls(r):
+    el, pl, ax = float(r["elev"]), float(r["plane"]), float(r["axial"])
+    reg = "overhead" if el >= 140 else "across" if (pl >= 100 and el >= 40) else "behind" if (pl < -30 and el > 20) else f"el{int(min(el, 139.9) // 35) * 35}"
+    axb = "|ax|>=150" if abs(ax) >= 150 else "ax>=0" if ax >= 0 else "ax<0"
+    return reg, axb
+
+
+def classes(dump_a, dump_b, outp=None):
+    """which workspace pose classes a config regains / loses vs another on the same worn bench (per-pose dumps of claim):
+    state per pose = taken (metal >= 0) / contact (metal < 0) / lost (not evaluated: fold, slide, continuity)"""
+    A = json.load(open(dump_a))["poses"]; Bd = json.load(open(dump_b))["poses"]; assert len(A) == len(Bd)
+    st = lambda r: "taken" if r["taken"] else "contact" if r["contact"] else "lost"
+    tab = {}
+    for ra, rb in zip(A, Bd):
+        if ra["kind"] != "ws": continue
+        assert abs(ra["elev"] - rb["elev"]) < 1e-6 and abs(ra["plane"] - rb["plane"]) < 1e-6
+        for key in (_cls(ra)[0], _cls(ra)[1], "all"):
+            t = tab.setdefault(key, dict(n=0, a_taken=0, b_taken=0, a_contact=0, b_contact=0, a_lost=0, b_lost=0, gained=0, lost_new=0))
+            t["n"] += 1; sa, sb = st(ra), st(rb); t["a_" + sa] += 1; t["b_" + sb] += 1
+            t["gained"] += int(sa != "taken" and sb == "taken"); t["lost_new"] += int(sa == "taken" and sb != "taken")
+    for k, t in sorted(tab.items()):
+        print(f"{k:10s} n {t['n']:4d} | taken {t['a_taken']:4d} -> {t['b_taken']:4d} | contact {t['a_contact']:3d} -> {t['b_contact']:3d} | "
+              f"lost {t['a_lost']:4d} -> {t['b_lost']:4d} | gained {t['gained']:3d} newly lost {t['lost_new']:3d}")
+    if outp: json.dump(dict(a=dump_a, b=dump_b, classes=tab), open(outp, "w"), indent=1)
+    return tab
+
+
 def claimjobs(picks_dir, outp, farm_dir="docs/research/roller_env_polish/farm"):
     """the ONE claim batch (task step 4): the picks + the verified config (as verified, and with the knee window at 26.88),
     priced, each fit env FAST -> held-out EXACT and fit Bench(60,160) FAST -> Bench(110,360) EXACT (the verified protocol),
@@ -538,4 +594,12 @@ if __name__ == "__main__":
     elif a[0] == "rescore": rescore(a[1], a[2])
     elif a[0] == "claim": claim(a[1], a[2], a[3], a[4])
     elif a[0] == "claimjobs": claimjobs(a[1], a[2])
+    elif a[0] == "classes": classes(a[1], a[2], a[3] if len(a) > 3 else None)   # classes <dump A> <dump B> [out.json]
+    elif a[0] == "robust":                                     # robust <BEST|BEST_am|params.json ...> [--out O.json]: the flank tolerance check on Bench(60,160)
+        outp = a[a.index("--out") + 1] if "--out" in a else None; whos = [x for x in a[1:] if x != "--out" and x != outp]; set_pa(); res = []
+        B = CB.Bench(60, 160)
+        for w in whos:
+            Pp, _ = priced(params_of(w)); t = time.time(); rb = robust(Pp, B); rb.update(which=w, secs=round(time.time() - t, 1)); res.append(rb)
+            print(json.dumps({k: rb[k] for k in ("which", "ok", "n_fail", "min_dK_lim", "dK_need", "secs")}), [(r["k"], r["d"], r["dK_lim"], r["why"], r["ok"]) for r in rb["rows"]], flush=True)
+        if outp: json.dump(res, open(outp, "w"), indent=1, default=float)
     else: raise SystemExit(__doc__)

@@ -67,8 +67,9 @@ LUG_BACK = 6.0                               # lug depth behind the flank
 BOSS_R, BOSS_H, BRG_R, BRG_W = 5.0, 6.0, 3.5, 3.0    # crank boss O10 x 6, 2 x 683ZZ (3 x 7 x 3)
 PIN_R, BORE_R = 1.5, 1.6
 PLATE_T = 1.5                                # follower plate (the boss top 1.5 mm, merged)
-GAP = 0.35                                   # follower roller over the plate (an integral 0.35 step on the pin clears the shield)
+GAP = 0.6                                    # follower roller over the plate (an integral O4 step on the follower pin clears the shield)
 ARM_W, ARM_T = 6.0, 3.0
+ARM_UP = 1.0                                 # the straight run's underside at the boss axis, over the boss underside
 HEAD_R, HEAD_T, STEP_T = 2.5, 1.0, 0.2       # ISO 2341-B 3 x 8 head O5 x 1.0, 0.2 mm step under the roller's inner ring
 
 
@@ -208,3 +209,253 @@ def build_links(M, stops, lug):
     rep["link 2"] = dict(**r, seat_mm=Ls, pad_round_mm=rf, u3_lean_out_of_plane_deg=lean, valid=body.isValid(), solids=len(body.Solids()))
     print(f"  link 2: valid {body.isValid()}, solids {len(body.Solids())}, faces {len(body.Faces())}", flush=True)
     return out, rep
+
+
+# ---------------------------------------------------------------------------------------------------- hubs (K: plain clock-spring cap)
+def cap_k_plain(k, F, crown):
+    """hub K's clock-spring cap without the sensor pocket (K is never read): the v5 skirt / flange, the wall to the crown with an
+    R0.5 corner, a FLAT crown; inside the spring chamber O16 round the arbor, the outer-hook slot. Lines + tangent arcs, revolved."""
+    c = USM.CAPK; R = HUB_R; z0, z1, zc = LV["H1"] + 0.05 + F, LV["U1"] + F, crown + F; q = 1 - math.sqrt(0.5); r = 0.5
+    wp = (cq.Workplane("XZ").moveTo(9.0, z0).lineTo(R, z0).lineTo(R, zc - r).threePointArc((R - r * q, zc - r * q), (R - r, zc))
+          .lineTo(0.0, zc).lineTo(0.0, c["ch_z1"] + F).lineTo(c["ch_r"], c["ch_z1"] + F).lineTo(c["ch_r"], c["ch_z0"] + F).lineTo(4.5, c["ch_z0"] + F)
+          .lineTo(4.5, z1).lineTo(9.0, z1).close())
+    cap = xform(wp.revolve(360, (0, 0, 0), (0, 1, 0)).val(), PB.axis_frame(k))
+    e, f = USM.frame2(k); k = unit(k); r0, r1, w = c["hook_slot"]
+    cap = cap.cut(prism(F * k + c["ch_z0"] * k, e, f, [(-r1, -w - 0.1), (-r0, -w - 0.1), (-r0, -0.1), (-r1, -0.1)], [0, 0, 0, 0], c["ch_z1"] - c["ch_z0"]))
+    return cap.clean() if cap.clean().isValid() else cap
+
+
+def hubs(M):
+    """USM.hubs with hub K's plain clock-spring cap (no sensor pocket, no magnet: K is slaved, never read)"""
+    Uu, C, F4, hr = BM.joints4(M); out = []; rep = {}
+    capK = float(M.p.get("capK", 0) or 0); crown = LV["top"] + capK
+    for J, j, lo, hi in (("J1", 0, "l1a", "base"), ("K", 1, "l1a", "l1b"), ("J2", 2, "l1b", "l2"), ("J3", 3, "l3", "l2")):
+        for g, n, s in US.hardware(J, Uu[j], F4[j], lo, hi):
+            if " cap " in n: continue
+            out.append((g, n, at(s, C[j])))
+        if J != "K":
+            cap, Rc = USM.cap_v5(Uu[j], F4[j]); rep["dome_crown_R"] = None if Rc is None else round(Rc, 2)
+            out.append((hi, f"{J} cap O20, torispherical dome R{Rc:.1f} / R1 (tangent arcs), threaded M18x0.5 (Ti-6Al-4V)", at(cap, C[j])))
+        else:
+            cap = cap_k_plain(Uu[j], F4[j], crown); sp, Lsp = USM.clock_spring(Uu[j], F4[j]); sp_ = USM.SPRING
+            out.append((hi, f"K clock-spring cap O20 x crown F+{crown:.2f} ({capK:g} mm taller), FLAT crown, no sensor pocket (K is slaved, never read): spring "
+                            f"chamber O16 x {USM.CAPK['ch_z1'] - USM.CAPK['ch_z0']:.1f}, outer-hook slot, threaded M18x0.5, pinned to link 1b's ring at the spring's "
+                            "preload index (Ti-6Al-4V)", at(cap, C[j])))
+            rmax = sp_["r0"] + (sp_["n"] - 1) * sp_["d"]
+            out.append((hi, f"K clock spring: 0.3 x 5 mm {sp_['steel']} strip, {Lsp:.1f} mm, {sp_['n']} half-turns R{sp_['r0']:g}..R{rmax:.2f}, outer hook in the cap slot, "
+                            f"inner end in the arbor slit; {sp_['rate']:g} N.m/rad, {sp_['preload']:g} N.m preload on stop A = the closing spring of both rolling pairs "
+                            "(flank on the roller, follower on the lobe) (polished spring steel)", at(sp, C[j])))
+            rmax = sp_["r0"] + (sp_["n"] - 1) * sp_["d"] + sp_["t"] / 2
+            rep["K"] = dict(crown_mm=crown, capK=capK, spring_length_mm=round(Lsp, 1), spring=dict(sp_), cap_valid=cap.isValid(), spring_valid=sp.isValid(),
+                            spring_outer_r_mm=round(rmax, 3), chamber_r_mm=USM.CAPK["ch_r"], cap="flat crown, no sensor (K slaved)")
+            assert rmax <= USM.CAPK["ch_r"]
+    return out, rep
+
+
+# ---------------------------------------------------------------------------------------------------- drive geometry
+def rotm(ax, a):
+    ax = unit(np.asarray(ax, float)); Kx = np.array([[0, -ax[2], ax[1]], [ax[2], 0, -ax[0]], [-ax[1], ax[0], 0]])
+    return np.eye(3) + math.sin(a) * Kx + (1 - math.cos(a)) * Kx @ Kx
+
+
+def l1b_top_under(body, ax, r, z_lo, z_hi):
+    """highest point (along ax, through GH) of a solid within radius r of the axis line, between z_lo and z_hi (tessellation)"""
+    vs, fs = body.tessellate(0.02, 0.15); V = np.array([[v.x, v.y, v.z] for v in vs]); m = trimesh.Trimesh(V, np.array(fs), process=False)
+    P = np.r_[V, trimesh.sample.sample_surface_even(m, 60000, seed=3)[0]]; h = P @ ax; w = P - np.outer(h, ax); rr = np.linalg.norm(w, axis=1)
+    sel = (rr < r) & (h > z_lo) & (h < z_hi)
+    return float(h[sel].max()) if sel.any() else None
+
+
+def drive_layout(M, lg, dg, l1b_body):
+    """crank stack on the BUILT link 1b: boss underside zb = max(model's, link 1b's top under the O10 footprint + 0.15) (the
+    L1's stack fix: the model stacks its boss on strap samples the ramp rule lifts), boss O10 x 6 (2 x 683ZZ), the follower
+    plate = the boss's top 1.5 mm, the follower MR63ZZ on it (+ GAP); the follower = the red team's a_s 7.0 / psi 219 deg moved
+    along dR with the boss (the crank turns about dR: the same law; the lobe is synthesised for it)"""
+    D = M.D; u2 = unit(D.u[1]); dR = unit(dg["dR"]); f2 = float(M.f[1])
+    top = l1b_top_under(l1b_body, dR, BOSS_R + 0.6, dg["zboss"] - 6.0, dg["zboss"] + 12.0)
+    zb = max(dg["zboss"], (top if top is not None else -1e9) + 0.15)
+    s_f = zb + BOSS_H + GAP + ROLL_W / 2
+    e1 = -unit(u2 - (u2 @ dR) * dR); e2 = np.cross(dR, e1); psi = math.radians(PSI_DEG)
+    v = math.cos(psi) * e1 + math.sin(psi) * e2; F0 = s_f * dR + A_S * v
+    # the red team's follower at the model's stack (hmid = f2 + 7.45) for the record
+    s0 = (f2 + HMID - A_S * (v @ u2)) / (dR @ u2); F0_rt = s0 * dR + A_S * v
+    chk = float(np.linalg.norm(F0_rt - np.array(SPEC["follower_centre_onset"])))
+    assert chk < 0.02, f"follower frame differs from the red team's: {chk}"
+    return dict(zb=zb, l1b_top=top, raise_mm=zb - dg["zboss"], s_f=s_f, F0=F0, v=v, F0_redteam=F0_rt, follower_shift_mm=s_f - s0,
+                follower_hmid_over_f2=float(F0 @ u2) - f2, dR=dR, u2=u2, f2=f2)
+
+
+def lobe_pitch(M, lg, dg, lay, n=97):
+    """the follower centre over the stroke in link 2's HOME frame: t (q2 past the onset) 0 .. t_stop, q2 = q2hi + s_q t, dK = the
+    law, phi = sig |dK| / g about dR (the model's _sc_pose), link 2 = rotm(u2, q2) in link 1b's frame (the L1's drive sweep)"""
+    law = lg["law"]; ts = np.linspace(0.0, law["t_stop_deg"], n); q2 = law["q2hi_deg"] + law["s_q"] * ts
+    dk = RL1.dK_of_q2(lg, q2); u2 = lay["u2"]; out = []
+    for q_, k_ in zip(q2, dk):
+        ph = dg["sig"] * float(RL1.RF.phi_of(math.radians(k_), dg["g"], dg["c"]))
+        C1b = dg["PV"] + rotm(dg["dR"], ph) @ (lay["F0"] - dg["PV"])
+        out.append(rotm(u2, math.radians(q_)).T @ C1b)
+    return np.array(out), ts, q2, dk
+
+
+def circ3(a, m, b):
+    A_ = 2 * np.array([[m[0] - a[0], m[1] - a[1]], [b[0] - a[0], b[1] - a[1]]]); c = np.linalg.solve(A_, [m @ m - a @ a, b @ b - a @ a]); return c, float(np.linalg.norm(a - c))
+
+
+def lobe_ring(M, lg, dg, lay):
+    """the lobe ring (link 2's home frame). The wall is ruled along the follower axis at mid-stroke (e_ext, wire-EDM with the
+    taper), the faces square to u2 (band = the follower roller +- 1.3 along u2): sketch in the plane square to e_ext through the
+    follower mid-level on the u2 axis - the projected pitch curve offset by the roller radius (3-point arcs through the profile),
+    the onset joined by the roller's own circle and a radial line into the dwell circle (0.1 mm under the projected dwell
+    locus: the follower runs free there, K on stop A), a straight return flank 8 deg past the end; extruded, cut to the band,
+    bore O20 (on the J2 cap skirt)"""
+    Cp, ts, q2, dk = lobe_pitch(M, lg, dg, lay); u2 = lay["u2"]; f2 = lay["f2"]
+    qm = 0.5 * (q2[0] + q2[-1]); e_ext = unit(rotm(u2, math.radians(qm)).T @ lay["dR"])
+    if e_ext @ u2 < 0: e_ext = -e_ext
+    hz = float(np.mean(Cp @ u2)); O = hz * u2                                                    # sketch origin: the u2 axis at the follower mid-level
+    bx = unit(Cp[0] - (Cp[0] @ e_ext) * e_ext - (O - (O @ e_ext) * e_ext)); by = np.cross(e_ext, bx)
+    pr = lambda X: np.c_[(X - O) @ bx, (X - O) @ by] if X.ndim == 2 else np.array([(X - O) @ bx, (X - O) @ by])
+    P = pr(Cp)                                                                                   # projected pitch curve (2-D)
+    T_ = np.gradient(P, axis=0); T_ = T_ / np.linalg.norm(T_, axis=1)[:, None]; N_ = np.c_[-T_[:, 1], T_[:, 0]]
+    if float(np.mean(np.einsum("ij,ij->i", N_, P))) > 0: N_ = -N_                                # inward (toward the u2 axis)
+    prof = P + ROLL_R * N_
+    # dwell: the follower's locus with phi = 0 is the circle |C| about u2 (projected: an ellipse); the dwell circle sits 0.1 under it
+    rho0 = float(np.linalg.norm(Cp[0] - (Cp[0] @ u2) * u2)); tilt = math.acos(float(abs(e_ext @ u2)))
+    r_dw = rho0 * math.cos(tilt) - ROLL_R - 0.1
+    az = lambda p: math.atan2(p[1], p[0]); pol = lambda r, a: np.array([r * math.cos(a), r * math.sin(a)])
+    pc0 = P[0]; Qr = pc0 - ROLL_R * unit(pc0); Qd = pol(r_dw, az(pc0)); P0 = prof[0]
+    aQ, aP = az(Qr - pc0), az(P0 - pc0); da = (aP - aQ + math.pi) % (2 * math.pi) - math.pi; Mq = pc0 + ROLL_R * np.array([math.cos(aQ + da / 2), math.sin(aQ + da / 2)])
+    nP = len(prof); idx = list(range(0, nP - 1, 16)) + [nP - 1]
+    if idx[-1] - idx[-2] < 6: idx.pop(-2)
+    sgn = 1.0 if az(prof[-1]) - az(prof[0]) > 0 else -1.0
+    a_f = az(prof[-1]) + sgn * math.radians(8.0); Pf = pol(r_dw, a_f)
+    a_q = az(Qd); span = (sgn * (a_q - a_f)) % (2 * math.pi); Mb = pol(r_dw, a_f + sgn * span / 2)      # the long way round, past the return flank
+    pl = cq.Plane(origin=tuple(map(float, O)), xDir=tuple(map(float, bx)), normal=tuple(map(float, e_ext)))
+    wp = cq.Workplane(pl).moveTo(*Pf).threePointArc(tuple(Mb), tuple(Qd))
+    if np.linalg.norm(Qr - Qd) > 1e-3: wp = wp.lineTo(*Qr)
+    wp = wp.threePointArc(tuple(Mq), tuple(P0))
+    for i, j in zip(idx[:-1], idx[1:]): wp = wp.threePointArc(tuple(prof[(i + j) // 2]), tuple(prof[j]))
+    ring = wp.lineTo(*Pf).close().extrude(6.0, both=True).val()
+    hlo, hhi = float((Cp @ u2).min()) - ROLL_W / 2 - 0.05, float((Cp @ u2).max()) + ROLL_W / 2 + 0.05
+    ring = ring.intersect(disc(np.zeros(3), u2, 30.0, hlo, hhi)).cut(disc(np.zeros(3), u2, HUB_R, hlo - 1, hhi + 1))
+    ring = ring.clean() if ring.clean().isValid() else ring
+    dev = []
+    for i, j in zip(idx[:-1], idx[1:]):
+        c_, R_ = circ3(prof[i], prof[(i + j) // 2], prof[j]); dev += [abs(float(np.linalg.norm(prof[k] - c_)) - R_) for k in range(i, j + 1)]
+    pr_r = np.linalg.norm(prof, axis=1)
+    info = dict(e_ext_to_u2_deg=round(math.degrees(tilt), 2), band_over_f2_mm=[round(hlo - f2, 3), round(hhi - f2, 3)], pitch_r_mm=[round(float(np.linalg.norm(P, axis=1).min()), 3), round(float(np.linalg.norm(P, axis=1).max()), 3)],
+                profile_r_mm=[round(float(pr_r.min()), 3), round(float(pr_r.max()), 3)], dwell_r_mm=round(r_dw, 3), arcs=len(idx) - 1,
+                arc_chain_dev_max_mm=round(max(dev), 5), stroke_q2_deg=[round(float(q2[0]), 3), round(float(q2[-1]), 3)],
+                past_O20_max_mm=round(float(pr_r.max()) - HUB_R, 3), valid=ring.isValid(), solids=len(ring.Solids()),
+                key="O1 dowel key at the onset phase + 0.23 deg of q2 (red team K bias +0.5 deg; drawn at the nominal = loaded phase)")
+    return ring, info, dict(e_ext=e_ext, O=O, bx=bx, by=by, Cp=Cp, q2=q2, dk=dk)
+
+
+def flank_lug(M, dg):
+    """link 1a's flank lug (link 1a home frame): the red team's 3 tangent arcs (results_bench flank_arcs, fit within 3 um of the
+    exact flank, dK 0 -> 48.25) closed by their 6 mm back offsets (concentric arcs) and two normal end lines, in flank_sketch_frame,
+    extruded straight along z_c over the 3 mm lug (h0 +- 1.5); the web to the K pad: an inner tab at the pad level (fK .. fK + 3,
+    r <= 10.4 of uK) + an outer riser (r >= 10.4) up into the lug, each a line sketch extruded along uK"""
+    fr = SPEC["flank_sketch_frame"]; ex, ey, ez = (np.array(fr[k], float) for k in ("ex", "ey", "ez")); h0 = float(SPEC["flank_mid_plane_h"])
+    arcs = RES["flank_arcs"]; Cs = [np.array(a["centre"]) for a in arcs]; Rs = [float(a["r"]) for a in arcs]
+    pts = [np.array(arcs[0]["p0"])] + [np.array(a["p1"]) for a in arcs]; mids = [np.array(a["pm"]) for a in arcs]
+    off = lambda c, r, p: c + (r + LUG_BACK) * unit(p - c)
+    # back chain: junctions offset along the shared normal
+    back = [off(Cs[0], Rs[0], pts[0])] + [0.5 * (off(Cs[i], Rs[i], pts[i + 1]) + off(Cs[min(i + 1, 2)], Rs[min(i + 1, 2)], pts[i + 1])) if i < 2 else off(Cs[2], Rs[2], pts[3]) for i in range(3)]
+    bmid = [off(Cs[i], Rs[i], mids[i]) for i in range(3)]
+    pl = cq.Plane(origin=tuple(map(float, (h0 - 1.5) * ez)), xDir=tuple(map(float, ex)), normal=tuple(map(float, ez)))
+    wp = cq.Workplane(pl).moveTo(*pts[0])
+    for i in range(3): wp = wp.threePointArc(tuple(mids[i]), tuple(pts[i + 1]))
+    wp = wp.lineTo(*back[3])
+    for i in (2, 1, 0): wp = wp.threePointArc(tuple(bmid[i]), tuple(back[i]))
+    lug = wp.close().extrude(3.0).val()
+    # web: planform in the K pad plane (frame2(uK)), from inside the pad to 2 mm behind the flank's dK-0 end and the back corner
+    Uu, C, F4, hr = BM.joints4(M); uK = unit(Uu[1]); fK = float(F4[1]); e, f = USM.frame2(uK)
+    X3 = lambda p, h: p[0] * ex + p[1] * ey + h * ez
+    A3 = X3(pts[0] + 2.0 * unit(pts[0] - Cs[0]), h0); B3 = X3(back[0], h0)
+    p2 = lambda X: np.array([X @ e, X @ f]); a2, b2 = p2(A3), p2(B3); ang = [math.atan2(v[1], v[0]) for v in (a2, b2)]
+    am = math.atan2(math.sin(ang[0]) + math.sin(ang[1]), math.cos(ang[0]) + math.cos(ang[1])); hw = math.radians(13.0)
+    pol = lambda r, a: (r * math.cos(a), r * math.sin(a))
+    r_in, r_mid = 8.0, HUB_R + 0.4
+    inner = prism(fK * uK, e, f, [pol(r_in, am - hw), pol(r_mid, am - hw), pol(r_mid, am + hw), pol(r_in, am + hw)], [0] * 4, 3.0)
+    rel = lambda a: (a - am + math.pi) % (2 * math.pi) - math.pi
+    o_lo, o_hi = sorted([tuple(a2), tuple(b2)], key=lambda q: rel(math.atan2(q[1], q[0])))
+    quad = [pol(r_mid - 0.4, am - hw), o_lo, o_hi, pol(r_mid - 0.4, am + hw)]
+    hl = float(M.p["hl"])
+    riser = prism((fK + hl) * uK, e, f, quad, [0] * 4, 14.0).cut(disc(np.zeros(3), ez, 90.0, h0, h0 + 40.0))   # top = the lug's mid plane (embedded 1.5)
+    web = US.glue(inner, riser)
+    z_lug = h0
+    info = dict(arcs=[dict(r=r_, dK=a["dK"]) for r_, a in zip(Rs, arcs)], built_to_dK=DK_FLANK, extrude="straight along z_c (2-axis wire-EDM)",
+                lug_band_mm=[round(h0 - 1.5, 3), round(h0 + 1.5, 3)], back_mm=LUG_BACK, web_bottom_over_fK_mm=round(hl, 3),
+                lug_valid=lug.isValid(), web_valid=web.isValid())
+    return [lug, web], info
+
+
+def arm_arc(dg, lay):
+    """the arm's arc concentric with hub K: a REVOLVE about uK of its annular section (bottom on the sphere r rA, 3 mm thick
+    radially from GH, 6 wide about r_c) from the tangent point (psT) to ARM_END past the roller (beta)"""
+    uK, tK0, bK0 = unit(dg["uK"]), dg["tK0"], dg["bK0"]; rc, rA, h = dg["rc"], dg["rA"], dg["h_tip"]
+    a0, a1 = dg["psT"], dg["beta"] + dg["sgn_b"] * 3.0 / rc; lo, hi = min(a0, a1), max(a0, a1); span = math.degrees(hi - lo)
+    d = lambda a: math.cos(a) * tK0 + math.sin(a) * bK0
+    def sect(r_):
+        n = math.hypot(r_, h); return (r_ * rA / n, h * rA / n)
+    pb0, pb1 = sect(rc - ARM_W / 2), sect(rc + ARM_W / 2); pbm = sect(rc)
+    s_ = lambda p, f_: (p[0] * f_, p[1] * f_); ft = (rA + ARM_T) / rA
+    def build(x0, ang):
+        pl = cq.Plane(origin=(0.0, 0.0, 0.0), xDir=tuple(map(float, x0)), normal=tuple(map(float, np.cross(x0, uK))))
+        wp = (cq.Workplane(pl).moveTo(*pb0).threePointArc(pbm, pb1).lineTo(*s_(pb1, ft)).threePointArc(s_(pbm, ft), s_(pb0, ft)).close())
+        return wp.revolve(ang, (0, 0, 0), (0, 1, 0)).val()
+    arc = build(d(lo), span)
+    cm = np.array(arc.Center().toTuple()); cm_ang = math.atan2(float(cm @ bK0), float(cm @ tK0))
+    if abs(((cm_ang - 0.5 * (lo + hi)) + math.pi) % (2 * math.pi) - math.pi) > math.radians(5):
+        arc = build(d(hi), span)
+        cm = np.array(arc.Center().toTuple()); cm_ang = math.atan2(float(cm @ bK0), float(cm @ tK0))
+    ok = abs(((cm_ang - 0.5 * (lo + hi)) + math.pi) % (2 * math.pi) - math.pi) < math.radians(5)
+    return arc, dict(span_deg=round(span, 2), from_deg=round(math.degrees(a0), 2), to_deg=round(math.degrees(a1), 2), r_c=rc, bottom_sphere_r=round(rA, 3), direction_ok=ok)
+
+
+def crank_parts(M, dg, lay):
+    """the bell crank (member 9 home frame = link 1b at phi 0) + its hardware; the pivot pin + clip (link 1b)"""
+    dR, zb, F0, s_f = lay["dR"], lay["zb"], lay["F0"], lay["s_f"]; uK = unit(dg["uK"]); C0 = np.asarray(dg["C0"], float); cr = unit(C0)
+    ztop = zb + BOSS_H
+    boss = rev([(BRG_R, 0.0), (BOSS_R, 0.0), (BOSS_R, BOSS_H), (BRG_R, BOSS_H)], zb * dR, dR)
+    foot = F0 - (F0 @ dR) * dR; xf = unit(foot); yf = np.cross(dR, xf)
+    plate = USP.stadium((ztop - PLATE_T) * dR, xf, yf, A_S, 3.0, PLATE_T)
+    # straight run: chord from the boss (on the axis, underside ARM_UP over the boss underside) to the arc's tangent point
+    T3 = uK * dg["h_tip"] + dg["rc"] * (math.cos(dg["psT"]) * dg["tK0"] + math.sin(dg["psT"]) * dg["bK0"]); B = unit(T3) * (dg["rA"] + ARM_T / 2)
+    A = (zb + ARM_UP + ARM_T / 2) * dR; ex = unit(B - A); up = unit(dR - (dR @ ex) * ex); L = float(np.linalg.norm(B - A)) + 1.0
+    straight = US.bar_swept(ex, up, (0.0, 0.0, 0.0), [(0.0, L)], t=ARM_T, w=ARM_W, origin=A, r=0.3)
+    arc, ainfo = arm_arc(dg, lay)
+    crank = US.glue(boss, plate)
+    for part in (straight, arc): crank = crank.fuse(part)
+    crank = crank.cut(disc(np.zeros(3), dR, BRG_R, zb - 1.0, ztop + 1.0))                     # the bearing bore O7 through boss + plate
+    crank = crank.cut(disc(foot, dR, PIN_R, ztop - PLATE_T - 0.5, ztop + 0.5))                 # follower pin press hole
+    z_arm_top = dg["rA"] + ARM_T - dg["R0"]
+    crank = crank.cut(disc(C0, cr, PIN_R, 0.0, z_arm_top + 1.0))                                # roller pin press hole in the arm tip
+    crank = crank.clean() if crank.clean().isValid() else crank
+    brg = [rev([(PIN_R, 0.0), (BRG_R, 0.0), (BRG_R, BRG_W), (PIN_R, BRG_W)], (zb + z0) * dR, dR) for z0 in (0.0, BRG_W)]
+    froll = rev([(PIN_R, -ROLL_W / 2), (ROLL_R, -ROLL_W / 2), (ROLL_R, ROLL_W / 2), (PIN_R, ROLL_W / 2)], F0, dR)
+    zr0 = s_f - ROLL_W / 2; zr1 = s_f + ROLL_W / 2
+    fpin = rev([(0.0, ztop - PLATE_T), (PIN_R, ztop - PLATE_T), (PIN_R, ztop), (2.0, ztop), (2.0, zr0), (PIN_R, zr0), (PIN_R, zr1 + 1.2), (0.0, zr1 + 1.2)], foot, dR)
+    fclip = rev([(1.15, zr1 + 0.1), (3.0, zr1 + 0.1), (3.0, zr1 + 0.7), (1.15, zr1 + 0.7)], foot, dR)
+    roller = rev([(PIN_R, -ROLL_W / 2), (ROLL_R, -ROLL_W / 2), (ROLL_R, ROLL_W / 2), (PIN_R, ROLL_W / 2)], C0, cr)
+    z_h = -ROLL_W / 2 - STEP_T
+    rpin = rev([(0.0, z_h - HEAD_T), (HEAD_R, z_h - HEAD_T), (HEAD_R, z_h), (2.0, z_h), (2.0, -ROLL_W / 2), (PIN_R, -ROLL_W / 2), (PIN_R, z_arm_top - 0.1), (0.0, z_arm_top - 0.1)], C0, cr)
+    l1b_top = lay["l1b_top"] if lay["l1b_top"] is not None else dg["lev"] + T
+    ppin = rev([(0.0, l1b_top - T - 0.0), (PIN_R, l1b_top - T), (PIN_R, ztop + 1.4), (0.0, ztop + 1.4)], np.zeros(3), dR)
+    pclip = rev([(1.15, ztop + 0.15), (3.0, ztop + 0.15), (3.0, ztop + 0.75), (1.15, ztop + 0.75)], np.zeros(3), dR)
+    info = dict(boss_mm=[round(zb, 3), round(ztop, 3)], boss_raised_over_model_mm=round(lay["raise_mm"], 3), l1b_top_under_boss_mm=None if lay["l1b_top"] is None else round(lay["l1b_top"], 3),
+                follower_centre_on_dR_mm=round(s_f, 3), follower_shift_along_dR_mm=round(lay["follower_shift_mm"], 3), follower_hmid_over_f2_mm=round(lay["follower_hmid_over_f2"], 3),
+                straight_run_mm=round(L, 2), arm_root_up_mm=ARM_UP, arc=ainfo, crank_valid=crank.isValid(), crank_solids=len(crank.Solids()),
+                roller_centre_r_mm=round(dg["R0"], 3), arm_bottom_over_roller_top_mm=round(dg["rA"] - dg["R0"] - ROLL_W / 2, 3))
+    parts = [("dk", f"D9-01 drive bell crank (Ti-6Al-4V, 5-axis machined from solid): boss O10 x {BOSS_H:g} (2 x 683ZZ), follower plate {PLATE_T:g} mm on the boss top "
+                    f"to the follower pin at {A_S:g} mm, bent arm 6 x 3 (straight run {L:.1f} mm + the arc about hub K at r_c {dg['rc']:.2f}, a revolve, "
+                    f"{ainfo['span_deg']:.1f} deg), roller pin bore at the tip", crank),
+             ("dk", "drive crank bearing 1 683ZZ 3x7x3 (polished)", brg[0]), ("dk", "drive crank bearing 2 683ZZ 3x7x3, 0.1 mm wave-washer preloaded (polished)", brg[1]),
+             ("dk", f"drive lobe follower roller MR63ZZ 3x6x2.5 at a_s {A_S:g} mm, psi {PSI_DEG:g} deg (polished)", froll),
+             ("dk", f"drive follower pin O3 h6 17-4PH H900 with an integral O4 x {GAP:g} step, pressed in the follower plate (polished)", fpin),
+             ("dk", "drive follower pin clip DIN 6799 RS 2.3 (polished)", fclip),
+             ("dk", "drive flank roller MR63ZZ 3x6x2.5, radial axis (polished)", roller),
+             ("dk", f"drive flank roller pin ISO 2341-B 3x8 headed, head O{2 * HEAD_R:g} x {HEAD_T:g} on the skin side, {STEP_T:g} mm step, pressed in the arm tip (polished)", rpin),
+             ("l1b", "drive crank pivot pin O3 h6 17-4PH H900, pressed in link 1b (polished)", ppin),
+             ("l1b", "drive crank pivot pin clip DIN 6799 RS 2.3 (polished)", pclip)]
+    return parts, info
