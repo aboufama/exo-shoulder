@@ -83,7 +83,7 @@
    97.2
   ]
  },
- "R1_cause": "every clip loses 0-2.1 pts and every clip's min gap grows 0.3-0.6 mm (metal farther from the skin): candidates the crank raised 3.97 mm onto the built link 1b (the L1 raised it 3.55 but kept the model's dipping arm), the arm's straight run on the chord (the model dips to 60.3), the flat-plate lug (up to 0.7 mm over the model's spherical band), the hub stacks / dome caps vs the L1's full O20 x 12.25 cylinders (gen 5 lost 0.8 the same way); the per-group swap attribution (scratch r1_swap.py, step 12) was not finished inside the time box",
+ "R1_cause": "group-swap attribution (score_design's metric, same skin samples, step 12, followed frames): full 81.52 / L1 82.51 (-0.99, = the judge's -1.0); swapping ONE group's metal back to the L1's: l2 -> 82.16 (+0.64), dk -> 81.83 (+0.31), base / l1a / l1b / l3 / l4 within +-0.06. l2: +19.1k skin samples covered beyond 14 mm (the lobe ring at r 10.9..13.3 on hub 2's top, F2 + 9.8..12.8, new metal far from the skin); dk: -15.6k samples in band (the crank raised 3.97 mm and the arm's straight run on the chord, where the L1 kept the model's arm dipping to 60.3 mm). Fix for the next step: the straight run as a line/arc chain through the model's arm stations (dk), and the lobe band lower on hub 2 (needs the follower lower: a shorter boss or the straddle layout, red team finding 2)",
  "drive_skin": {
   "min_mm": 1.836,
   "where": "D9-02 drive lobe ring: 17-4PH H900, wire: Raise overhead frame 78",
@@ -176,5 +176,16 @@
    -0.015,
    -0.001
   ]
+ },
+ "R1_swap_step12": {
+  "full": 81.52,
+  "L1": 82.51,
+  "base<-L1": 81.51,
+  "l4<-L1": 81.5,
+  "l3<-L1": 81.56,
+  "l1b<-L1": 81.47,
+  "dk<-L1": 81.83,
+  "l2<-L1": 82.16,
+  "l1a<-L1": 81.58
  }
 }
