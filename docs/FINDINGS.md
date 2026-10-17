@@ -2542,3 +2542,42 @@ four-bar not audited (dead), none gamed.
 **Next:** the overhead cone (hub-2 axis tilt, knee re-cut, lateral relief at elev 165) - 26 losses no K drive moves,
 never built in round 11; the stretched wall only with the in-band RSSR drive on the long dyad plus lateral overhead
 relief, selected held out; and a pair-coverage probe in the toolkit before the next claim.
+
+## slipper-nose-knuckle-3r final polish on the envelope bench: no pick replaces the lead; the pre-registered pick is +0.38 priced / -0.59 unpriced held out, and the lead's flank is 0.2 mm from an immovable drive (2026-10-17, docs/research/slipper-nose-knuckle-3r_final_polish.md)
+
+Self-measured. The verified lead (18.49 / 23.45) was polished with a new tool, `tools/slipper_env_polish.py`, adapted
+from the roller polish:
+* the representative envelope bench `env`;
+* 3 CMA runs, 379 tries; the gate passes combined (0.00 / 0.00 / 0.54);
+* the objective averages the env-fit and Bench(60,160)-fit 1 mm readings;
+* stops priced at +0.5 and read at margin 5.5; full-grid flood continuity; mu and the nose radius fixed.
+
+The inband-rssr audit's three rulings were applied:
+* the single pick was pre-registered by a committed rule (the top envsel rank whose flank passes the 6-neighbour
+  robustness check: pick1) before any claim number existed (commit e95a8aa);
+* every config was claimed at both readings;
+* bench and held out are compared side by side.
+
+The claim wrapper reproduces the lead's 18.49 / 20.12 / 33.02 to the digit.
+
+* **No gain at the 1-point rule; the lead stays the CAD config.** pick1 against the lead, same protocol, same reading:
+  * held out, CAD shape: **+0.38 priced** (24.63 -> 24.25, P better 0.70); **-0.59 unpriced** (23.45 -> 24.04,
+    P 0.22);
+  * verified protocol: -0.39 priced, **-0.95 unpriced** (18.49 -> 19.44).
+  * The priced gain exists only because pick1 moved its stops off the fold: smlo 5.0 -> 6.1, a1max 58.8 -> 55.9,
+    min th 5.7 against 5.18. So the 5.5 reading costs it 0.21 held out, and the lead 1.18.
+  * The 1 mm objective pushed metal into the 1-2 mm shell: 2 mm near-touch is 11 points worse on both benches.
+  * The report-only picks: pick2 +0.60 held out but -0.66 on the bench and a cusping flank; pick3 -0.13 / -2.16.
+* **The env-fit protocol is a cliff for the lead, not a reading of it.** Fitted on env, the lead's cam synthesis puts
+  the crank pressure angle at its 38.03-deg cap at rest (29.5 on the Bench(60,160) fit): stroke 0, K never moves, 89.1
+  held out. Every pick "gains" 63-65 points on that protocol for that reason alone. The CMA objective's x0 (57.2) is the
+  same cliff.
+* **The lead's flank has no crank-side margin.** On its own fit bench, r_c -0.2 mm, g -0.02 or beta -1 deg drives the
+  crank PA over 38.03 and the stroke to 0 (fit gap 14.25 -> 86). The + side is robust. pick1's flank (beta -171,
+  crank PA 11.7) passes all 6 neighbours but is not better held out. A flank-only beta step toward -171 on the lead's
+  seats is the buildability check to run before the flank is cut.
+* **Headroom was under 1 point for the CAD shape**: the best of 250 honest rows wears the Bench(60,160)-fit shape on env
+  1.2 points better in-sample, and the claim realised -0.95 to +0.38. One CMA batch, no second.
+* The fold is untouched: across-body 41-43 / 175, abs(axial) >= 150 24-26 / 105, overhead 15-18 / 71 taken held out on
+  every config. This is the fourth env polish of the K-drive family that leaves the fold where it was.
+* Cost $0.30 (cpu3c) / $0.35 (cpu5c) against $0.30; balance $24.69 after, above the $24.40 line.
