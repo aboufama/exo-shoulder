@@ -326,3 +326,128 @@ reasons are upheld and 1 is refuted. Rulings: `docs/alignment/conecut-knee-knuck
   0.55. Neither changes a conclusion.
 
 **Final verdict: WATCH.**
+
+---
+
+*Below this rule: the skeptic of the 18:03 hourly audit.*
+
+## Skeptic (2026-10-17, 18:14-18:22 UTC, hourly audit of 18:03)
+
+Ledger entry 2026-10-17T18:21:12Z, by skeptic, run `skeptic:conecut-knee-knuckle-3r`.
+
+**Final verdict: WATCH.** The ledger tool takes the worst level among the reasons not refuted with evidence. 9 of 10
+reasons are upheld and 1 (T5) is refuted. Rulings: `docs/alignment/conecut-knee-knuckle-3r.rulings.json`.
+
+**How I checked.**
+- Every number was re-derived from the per-pose dumps, the probe files and the verifier files with my own scripts.
+  I did not import the audit tool or `tools/alignment_paired.py`.
+- My own paired bootstrap ran over bench + held pooled, with resampling within kind (seeds 1 and 2, 4000 resamples).
+- Nothing new was worn and no file the running agents use was touched. Local only, niced, `OMP_NUM_THREADS=1`, one
+  process, a few seconds each. The farm was not used.
+
+### Rulings
+
+1. **dominance: upheld.**
+   - The plain gap reads 18.29 against 18.48 from the dumps (the files' rounding of 18.28 / 18.49).
+   - At 2 mm: bench 34.84 against 33.02 (+1.82), held 37.11 against 36.95 (+0.16).
+   - Same harness on both sides. The c_dominance rule gives watch, capped. Report-only.
+   - Taken poses under 2 mm: 33 against 30 on the bench, 71 against 67 held.
+2. **reporting: upheld.**
+   - The row's verdict begins "SCREENED".
+   - `morphs.json` at HEAD (3a4a1a0, 18:13) has gap and sweep_gap 12.5 against v_gap 18.28: 5.78 apart, which reads as
+     score 95.45.
+   - The lead carries the same defect (13.0 against 18.49, watch in its audit json).
+3. **NEW-incumbent-tie-rule: upheld, with two corrections.**
+   - **Provenance.**
+     - The user's rule is CLAUDE.md line 96, added by d0778dd at 01:39.
+     - The tie rule first appears in 0c5b95b at 13:31 (`git log -S` finds nothing earlier). The design dates from
+       a56358d, 16:06.
+   - **The ruling text.** The `leader_ruling` cites near-touch poses, the equal-strap 18.67 and deeper contact. It never
+     names the CI rule or the complexity tie-break.
+   - **Complexity** (`tools/simplicity.py` today): 18.25 for the lead against 18.5 here.
+   - **The tie is robust under the lead's rule.** My bootstrap gives [-1.45, +0.10], P 0.92, against the file's
+     [-1.46, +0.09], P 0.918.
+   - **Under the user's rule as written, this row leads:** 18.28 against 18.49, and held 22.38 against 23.45.
+   - **The dilution-free reading.** On the part-weighted in-band, every one of the six wears is at least 0.921, so the
+     in-band term is 0. This row then reads +0.25 on the bench, -0.51 held and -0.29 pooled. The incumbent's own change
+     reads 0 / -0.11 / -0.08. So the "erase" reading leaves this row's pooled edge larger than the edge the incumbent
+     won the lead on.
+   - **Correction 1.** The incumbent's CI upper bound of 0.00 is a hinge artefact, not a tie.
+     - In 4.8 % of my resamples the difference is exactly 0, because both resampled in-band terms clip at the 0.90
+       hinge.
+     - That mass sits right at the 5 % tail. My seed gives [-0.398, -0.018], P 0.952.
+     - So "the incumbent is a tie too, read literally" depends on the seed.
+     - Retroactive application would change no past outcome either way, because of the complexity tie-break.
+   - **Correction 2.** "All of it in-band" holds for the incumbent's bench edge only. Its pooled split is reach -0.08,
+     in-band -0.17.
+   - **What stands.** The lead's rule conflicts with the user's rule. That conflict is real and it is the user's call.
+4. **NEW-strap-dilution: upheld.**
+   - The strap really is longer metal: the verifier's C4 scales the sample count by sampled length.
+   - At 104 samples the gap reads 18.67 on the bench and 22.91 held.
+   - Part-mean in-band: 0.9249 / 0.9237 here, 0.9241 / 0.9230 on the lead, 0.9225 / 0.9214 on roller-longdyad.
+   - The held in-band is 0.89999 exactly, so the claim sits on the 0.90 hinge, and the strap carries it there.
+5. **T1: upheld.**
+   - Pose 203 sits at cmin 0.263 mm. Given the lead's treatment (ev false), the bench reads 18.57, behind 18.49.
+   - The 11 held-only poses lie at 0.758-3.68 mm, 6 of them under 2 mm.
+   - At 2 mm: bench +1.82, held +0.16 (the reason's +0.15 is rounding).
+6. **T5: REFUTED, on (b) and (d).**
+   - **(b) The documented threshold is not met.**
+     - Section 5 runs the audit with `--ref <current verified lead>`. The T5 watch needs at least 2x the reference's
+       summed depth and at least 5 mm more.
+     - Against slipper-nose: x1.37 on the bench (20.24 against 14.75 mm) and x1.32 held (60.97 against 46.12 mm).
+     - The auditor's own run this hour (`--ref slipper-nose`) reads `contact_depth` ok.
+     - It fires only against `DEPTH_REF = sidecar-longdyad` (tool line 301). That constant is labelled "the verified
+       3-active lead", but that row has not been the lead since before 06:23.
+     - The lead fires against it too (x2.37), so it does not separate the two rows.
+   - **(d) The depth-blind trade is absent.**
+     - The extra contacts are charged in the plain gap: contact split +0.53 on the bench and +0.44 held.
+     - The mean depth per contact is lower here: 5.06 against 7.38 mm on the bench, 4.36 against 4.61 mm held.
+     - The hanging-arm contacts 835 (-3.55 mm) and 978 (-1.33 mm) are real. They are priced as contact, not hidden by
+       depth.
+7. **M5: upheld (missing measurement).**
+   - No conecut file exists under `judge/` or `pipeline/`, so there is no CAD, no dynamics run, no R17 and no cuff twist.
+   - The lead's forward bound reads raw twist 5.00081 deg at mu 0.15 (`_m5_forward_bound_fullcad_raw.json`). Its new
+     gate gives moves_freely false.
+   - The knee path is new (K.ang 59.3-107.1 against 86.2-153.2), so the lead's numbers do not transfer.
+8. **G4: upheld (carried).**
+   - The dK, a1e and msub spans equal the lead's.
+   - The lead's `_msub_rest_bench.json` shows lt1 50 of 204.
+   - There is no rest file for this row.
+9. **T3: upheld.**
+   - The th margin is 5.006 held (lt5 0) and 5.181 on the bench.
+   - The J3 stop_margin_deg is 0.74 held and 2.7 on the bench.
+   - No tolerance study is on file.
+10. **NEW-ws-inband: upheld.**
+    - Bench, elevation 90-140: in-band 0.8315, 16.8 % of the metal above 14 mm, max 30.74 mm. Held: 0.8478, 14.9 %,
+      max 31.46 mm.
+    - The lead reads 0.8004 / 19.9 % on the bench and 0.8218 held.
+    - Better than the lead, but it is unscored metal past the 14 mm pass line.
+    - The report table's "max 31.5 mm" is the held figure.
+
+### Missed by the auditor (for the next audit; not in this verdict)
+
+- **The T5 default reference is stale.**
+  - `DEPTH_REF = "sidecar-longdyad-knuckle-3r"` (tools/alignment_audit.py line 301) is the default `contact_depth`
+    reference. The self-test also uses it to replay the T5 rulings (line 825).
+  - Section 5 prescribes the current verified lead.
+  - Sidecar is the shallowest verified row (6.23 mm bench), so every challenger, and the lead itself (x2.37), fires T5
+    against it.
+  - The 17:57 skeptic's T5 uphold on this row rested on that constant.
+  - Proposal: make `DEPTH_REF` follow the board's verified lead, as P-T1 proposes for `LEADERS`. Alternatively, keep a
+    fixed best-in-class depth reference and document it as that, not as "the lead".
+  - Measured effect today: this row's and the lead's T5 both read ok.
+- **The literal "CI includes 0" tie rule reads hinge artefacts as ties.**
+  - The (0.90 - in-band)+ term clips at 0, so a pair of rows whose in-band sits near 0.90 gets an atom of exactly-0
+    resamples. That atom is 4.8 % for slipper over roller, right at the 5 % tail, so the bound reads 0.00 or -0.018
+    depending on the seed.
+  - The same holds for desmo's [0.00, 0.53].
+  - Proposal C6's strict-straddle boundary removes the seed dependence. Its measured effect is unchanged (no outcome
+    moves).
+- **The claim's held in-band is 0.89999.** It sits on the hinge to 5 decimals, and the longer strap carries it there.
+  Any part-weighted or equal-strap reading moves it below 0.90. This is the S6 dilution seen from the held side, and it
+  is not new gaming.
+- **Two factual slips in the NEW-incumbent-tie-rule reason**, neither of which changes the finding:
+  - "100 % / all of it in-band" is true only of the incumbent's bench edge;
+  - the incumbent's [-0.40, 0.00] is seed-dependent (see above).
+
+**Final verdict: WATCH.**
