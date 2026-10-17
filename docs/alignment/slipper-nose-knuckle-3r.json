@@ -5,6 +5,7 @@
  "complexity": 22.25,
  "verdict": "watch",
  "reasons": [
+  "contact_depth: the score counts contact poses, not depth (report only, score unchanged): v_gap 18.49: bench 2 contact poses, sum 14.75 mm, deepest 9.01 mm at ['ws', 15.0, 165.0, -60.0], 2 deeper than 3 mm vs sidecar-longdyad-knuckle-3r 6.23 mm over 4 (+8.52 mm, x2.37) - CLEARLY DEEPER; held 10 contact poses, sum 46.12 mm, deepest 9.05 mm at ['ws', 30.0, 165.0, -45.0], 7 deeper than 3 mm vs sidecar-longdyad-knuckle-3r 35.66 mm over 10 (+10.46 mm, x1.29)",
   "idle: knee: asserted rigid by design (model asserts the knee angle constant (knee_moved -> dishonest)) but moves 65.71 deg (re-measured K.qa span) > 0.5; K moves: smallest recorded span 45.61 deg (re-measured dK span); crank moves: smallest recorded span 19.3 deg (docs/concepts/verify/slipper-nose-knuckle-3r_v_bench_mu12.json:sidecar.phi_max_taken)",
   "reporting: verdict text still reads as a self-measured screen; dashboard sweep best 13.0 (score 95.27) sits 5.49 below the verified number"
  ],
@@ -51,8 +52,8 @@
   },
   {
    "check": "contact_depth",
-   "level": "ok",
-   "reason": "the score counts contact poses, not depth (report only, score unchanged): v_gap 18.49: bench 2 contact poses, sum 14.75 mm, deepest 9.01 mm at ['ws', 15.0, 165.0, -60.0], 2 deeper than 3 mm vs roller-longdyad-knuckle-3r 16.46 mm over 2 (-1.71 mm, x0.9); held 10 contact poses, sum 46.12 mm, deepest 9.05 mm at ['ws', 30.0, 165.0, -45.0], 7 deeper than 3 mm vs roller-longdyad-knuckle-3r 49.88 mm over 10 (-3.76 mm, x0.92)",
+   "level": "watch",
+   "reason": "the score counts contact poses, not depth (report only, score unchanged): v_gap 18.49: bench 2 contact poses, sum 14.75 mm, deepest 9.01 mm at ['ws', 15.0, 165.0, -60.0], 2 deeper than 3 mm vs sidecar-longdyad-knuckle-3r 6.23 mm over 4 (+8.52 mm, x2.37) - CLEARLY DEEPER; held 10 contact poses, sum 46.12 mm, deepest 9.05 mm at ['ws', 30.0, 165.0, -45.0], 7 deeper than 3 mm vs sidecar-longdyad-knuckle-3r 35.66 mm over 10 (+10.46 mm, x1.29)",
    "depths": {
     "v_gap 18.49": {
      "bench": {
@@ -103,24 +104,24 @@
      }
     }
    },
-   "ref": "roller-longdyad-knuckle-3r",
+   "ref": "sidecar-longdyad-knuckle-3r",
    "compare": [
     {
      "claim": "v_gap 18.49",
      "wear": "bench",
      "sum": 14.75,
-     "ref_sum": 16.46,
-     "excess": -1.71,
-     "ratio": 0.9,
-     "watch": false
+     "ref_sum": 6.23,
+     "excess": 8.52,
+     "ratio": 2.37,
+     "watch": true
     },
     {
      "claim": "v_gap 18.49",
      "wear": "held",
      "sum": 46.12,
-     "ref_sum": 49.88,
-     "excess": -3.76,
-     "ratio": 0.92,
+     "ref_sum": 35.66,
+     "excess": 10.46,
+     "ratio": 1.29,
      "watch": false
     }
    ]
@@ -128,10 +129,7 @@
   {
    "check": "dominance",
    "level": "ok",
-   "reason": "vs roller-longdyad-knuckle-3r: plain +0.18, 2 mm +0.08",
-   "ref": "roller-longdyad-knuckle-3r",
-   "gain_plain": 0.18,
-   "gain_2mm": 0.08
+   "reason": "no reference"
   },
   {
    "check": "continuity",
@@ -316,7 +314,7 @@
   "docs/concepts/verify/slipper-nose-knuckle-3r_v_bench_edge.json",
   "docs/concepts/verify/slipper-nose-knuckle-3r_v_bench_frozen.json"
  ],
- "git": "0d91d4c",
+ "git": "61c686c",
  "tool_version": "2026-10-17.2",
- "t": "2026-10-17T07:05:59Z"
+ "t": "2026-10-17T14:03:52Z"
 }

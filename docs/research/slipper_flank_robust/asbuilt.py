@@ -81,8 +81,10 @@ for rng in (range(j0, nk), range(j0, -1, -1)):
         n, vC = _norm_at(j, nprev); nprev = n; ng[j] = n
         pac[j] = ang(n, vC); pah[j] = ang(n, vH(Cg[j] + NR * n))
 P1 = np.einsum("nij,nj->ni", Rk, Cg); N1 = np.einsum("nij,nj->ni", Rk, ng); F = P1 + NR * N1     # link 1a frame
-kdeg = D(1) * kg
+kdeg = D(1) * kg; kdeg_all = kdeg.copy()
 BUILT = (0.0, 51.75)                                      # the built flank (red team: dK 0 -> dK_lim + 2 deg run-out)
+KEEP = (kdeg >= BUILT[0] - 1e-9) & (kdeg <= BUILT[1] + 1e-9)      # only the BUILT flank exists (no conjugate continuation before rest)
+F, N1, kdeg = F[KEEP], N1[KEEP], kdeg[KEEP]
 TREE = cKDTree(F)
 
 
@@ -109,25 +111,20 @@ def crank_C(phi_rad, dC=np.zeros(3), dP=np.zeros(3), dbeta=0.0, dr=0.0):
 def solve(case, phis_deg, Kscan=np.arange(-2.0, 60.0 + 1e-9, 0.02)):
     """K(phi) by continuation: the smallest K >= 0 at which the nose clears the fixed flank, tracked from the float end"""
     out = []
-    Kp = None
     for ph in phis_deg:
         C, PVb = crank_C(R_(ph), **case)
         C = C[0]
-        X = np.einsum("nij,j->ni", rotms(uK, sp * np.radians(Kscan)), C)
+        Kg = gg * max(ph, 0.0)
+        Ks = Kscan[(Kscan >= Kg - 8.0) & (Kscan <= Kg + 8.0)]
+        X = np.einsum("nij,j->ni", rotms(uK, sp * np.radians(Ks)), C)
         c, jj = clearance(X)
-        # crossings - -> + (the spring closes K down to the first K whose clearance is >= 0 from above)
-        ok = c >= 0
-        if ok[0] and Kscan[0] < 0:
-            pass
-        # physical K: largest K below which every K... = the first index from the high end where clearance turns negative, + 1
-        neg = np.nonzero(~ok)[0]
-        if not len(neg): Kst = Kscan[0]
+        neg = np.nonzero(c < 0)[0]
+        if not len(neg): Kst = Ks[0]
         else:
-            jn = neg[neg <= (np.searchsorted(Kscan, Kp + 3.0) if Kp is not None else len(Kscan) - 1)]
-            jn = jn.max() if len(jn) else neg.min()
-            if jn + 1 >= len(Kscan): Kst = np.nan
+            jn = neg.max()
+            if jn + 1 >= len(Ks): Kst = np.nan
             else:
-                a, b = Kscan[jn], Kscan[jn + 1]
+                a, b = Ks[jn], Ks[jn + 1]
                 for _ in range(30):
                     m = 0.5 * (a + b); cm, _ = clearance((rotm(uK, sp * R_(m)) @ C)[None])
                     if cm[0] >= 0: b = m
@@ -135,7 +132,6 @@ def solve(case, phis_deg, Kscan=np.arange(-2.0, 60.0 + 1e-9, 0.02)):
                 Kst = b
         Kphys = max(0.0, Kst) if np.isfinite(Kst) else np.nan
         on_stop = np.isfinite(Kst) and Kst <= 0.0
-        Kp = Kphys
         row = dict(phi=ph, K=Kphys, Kfree=Kst, on_stop=bool(on_stop))
         if np.isfinite(Kphys) and not on_stop:
             Xc = rotm(uK, sp * R_(Kphys)) @ C
@@ -182,7 +178,7 @@ def fold_rows(Zx, efun):
 if __name__ == "__main__":
     outp = sys.argv[1] if len(sys.argv) > 1 else os.path.join(HERE, "asbuilt.json")
     sel = np.arange(j0, nk); ktk = 46.3
-    jt = sel[kdeg[sel] <= ktk]
+    jt = sel[kdeg_all[sel] <= ktk]
     nominal_syn = dict(pa_crank_rest=round(float(pac[j0]), 2), pa_crank_max_taken=round(float(pac[jt].max()), 2), pa_horn_max_taken=round(float(pah[jt].max()), 2),
                        cap_kin=round(CAP, 2), dK_lim=dK_lim, R0=round(R0, 3), nose_r=NR, g=gg, r_c=r_c, beta=beta, kK=kK)
     e1 = unit((C0 - PV) - ((C0 - PV) @ dR) * dR); e2 = np.cross(dR, e1)
@@ -201,7 +197,7 @@ if __name__ == "__main__":
         rest = [r for r in rows if r["phi"] < 0]
         K_rest = float(np.nanmin([r["K"] for r in rest] + [K[ph == 0][0]]))
         kl = np.arange(0.0, dK_lim + 1e-9, 0.05)
-        Kact = np.interp(kl / gl, np.radians(ph) * 0 + ph * math.pi / 180 * 0 + ph / 1.0 * 1.0 * (math.pi / 180) / (math.pi / 180), K) if False else np.interp(np.degrees(np.radians(kl) / gl), ph, K)
+        Kact = np.interp(kl / gl, ph, K)                       # the lobe: phi = |dK_law| / g'  (deg)
         err = Kact - kl
         tk = kl <= ktk
         on = [r for r in rows if r["phi"] >= 0 and "pa_crank" in r]
