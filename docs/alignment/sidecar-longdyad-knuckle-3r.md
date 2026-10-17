@@ -1,183 +1,171 @@
-# Alignment audit: sidecar-longdyad-knuckle-3r (verified lead, round-8 winner)
+# Alignment audit: sidecar-longdyad-knuckle-3r (verified, round-8 lead, reference for round 9)
 
-Hourly audit, 2026-10-16 22:45 UTC, at git 5bc1adf onward. The audit wrote one new tool,
-`tools/alignment_drive_cap_wear.py`. It edited no bench, judge, model, row or dashboard.
+Audit of 2026-10-17 ~01:45-02:00 UTC, in the fresh session after the old one hit its usage limit. Ledger entry
+2026-10-17T01:56:50Z (`by auditor`, run `audit:sidecar-longdyad-knuckle-3r`). It edited no bench, judge, kit, model,
+row, dashboard or CLAUDE.md, and wrote no new tool. The earlier audit (2026-10-16 22:45 UTC, commit 67e8480) is
+superseded by this one; its measurements are reused where the claim has not moved.
 
 ## Verdict: WATCH (ledger)
 
-- **Claim:** verified v_gap **18.91**, score 93.12, frozen exact Bench(110,360).
-- **Ledger reasons** (all watch):
-  - two from the tool: near_touch and reporting;
-  - five from the judgement pass: NEW-catalogue-drive, NEW-unpriced-stops, G1, M5 and R1.
-- **The number reproduces to the digit.** Both re-wears ran on the farm with the row's best_params and the model
-  unchanged:
-  - bench: 18.91 / 1 mm 20.00 / 2 mm 34.03 / 3 mm 155.98;
-  - held out: 22.67 / 25.75 / 37.24 / 163.09.
+- **Claim:** verified v_gap **18.91**, score 93.12, frozen exact Bench(110,360), fit Bench(60,160); held out 22.67.
+- **Ledger reasons** (all watch): two from the tool (near_touch, reporting) and seven from the judgement pass (S1,
+  NEW-sensed-knee-pins, NEW-catalogue-drive, NEW-unpriced-stops, G1, M5, R1). None is gamed.
+- **No re-wear this time, by the rule.** The row's last commit is b3d426a (2026-10-16 22:03 UTC); the re-wears in
+  `docs/alignment/remeasure/sidecar-longdyad-knuckle-3r_*.json` were committed at 22:52 UTC and reproduced 18.91 /
+  held 22.67 to the digit. `git diff 63167c0 HEAD` (the verification commit to now) shows no change to
+  `tools/concept_bench.py`, `tools/concept_kit.py`, `tools/env_bench.py`, `pipeline/avg/body_pose.py`,
+  `data/raw/split.json`, this model or its parent model. Only `judge/dynamics.py` changed (R17's slaved coupling), and
+  R17 is not in the gap. So the number on file is the number the current bench gives.
+- **What changed since the last audit is the rules, not the design.** The user retired the 2 mm dominance gate (A1) and
+  ruled that a sensed joint is a joint (CLAUDE.md "User decisions 2026-10-17"). This audit re-reads every finding under
+  those rules. No ledger reason of this design now cites A1 or 2 mm as a gate.
 
-  Files: `docs/alignment/remeasure/sidecar-longdyad-knuckle-3r_bench.json` and `_held.json`. The 3 mm held-out wear is
-  new; it was missing from the 20:26 audit.
-- **The number describes a modelled drive, not yet a buildable one.** With the catalogue ball link and the build
-  spec's stop B, the same harness measures:
-  - bench: **19.76** (score 92.81) / 20.85 / 34.39;
-  - held out: 23.53 / 26.63 / 37.95.
+## The lead question (round 9): is roller-longdyad's 0.24 real?
 
-  The ranking order among the 3-active rows does not change, and nothing better for the wearer drops below it, so
-  the verdict is watch, not gamed.
+Seen from this design's side, under the same harness (exact, 371 bench poses fit / 1154 held-out poses):
 
-## What the wearer gets (measured)
+| design | plain | held out | held 1 mm | reach (bench) | in-band14 | contact poses | cx |
+|---|---|---|---|---|---|---|---|
+| roller-longdyad-knuckle-3r | **18.67** | 23.73 | 26.83 | 0.725 (261) | 0.8937 | 2 (deepest -10.55 mm) | 43.75 |
+| sidecar-longdyad-knuckle-3r (this) | 18.91 | 22.67 | 25.75 | 0.725 (261) | 0.8966 | 4 (deepest -4.61 mm) | 49 |
+| sidecar-parallelogram-knuckle-3r | 19.13 | **22.03** | **24.44** | 0.7194 (259) | 0.9049 | 4 | 49 |
+
+Sources: rows (`v_gap`, `v_reach`, `v_inband14`, `held_out`); `docs/concepts/verify/*_v_held_frozen.json` (all three
+n 1154, exact); `docs/alignment/roller-longdyad-knuckle-3r.md`; this design's `remeasure/..._probe.json`.
+
+- **Not a bench artefact.** Both designs were verified on the same bench code (no measurement file changed between
+  the two verifications, see above).
+- **But not a better exo either.** One workspace pose is worth 0.278 gap points. The plain differences among the top
+  three are 0.24 and 0.22, each under one pose, and held out reverses the whole order (22.03 < 22.67 < 23.73).
+  Roller-longdyad's gain is 2 fewer contact poses, with the remaining contact 2.3x deeper.
+- **This design's own lead was the same kind of number.** Its round-8 lead over sidecar-parallelogram is 0.22 plain
+  (2 more workspace poses, less in-band), and it is 0.64 behind parallelogram held out (same reach 0.6901, in-band
+  0.8947 vs 0.9031). That lead rested on the 2 mm column (34.03 vs 50.14), which the user has now retired.
+- **Reading for the lead.** Under the user's rule (plain verified gap decides) roller-longdyad is the lead, and the
+  rule is applied correctly. The three rows are a tie within one workspace pose; nothing in the bench number says one
+  is better for the wearer than another. What does separate them for the wearer is outside the score: roller-longdyad
+  is simpler (43.75) and keeps metal off the skin at 3 mm far better (133 vs 178 bench poses under 3 mm), but presses
+  deeper where it touches; parallelogram generalises best but hugs at 1-2 mm; this design sits between.
+
+## What the wearer gets (measured; files from the 2026-10-16 re-wears, unchanged claim)
 
 | item | value | file |
 |---|---|---|
-| Overhead reach (elev >= 140), workspace | **8 / 28 taken** on the bench, 18 / 71 held out. Lost on the bench: fold 14, slide 4, contact 2 | `remeasure/..._bench.json` audit.overhead140; `_held.json` |
+| Overhead reach (elev >= 140), workspace | **8 / 28 taken** on the bench (lost: fold 14, slide 4, contact 2); 18 / 71 held out | `remeasure/..._bench.json` audit.overhead140; row held_out |
 | Raised-arm reach by elevation (taken / total) | 0-60: 161/172; 60-90: 55/75; 90-120: 25/51; 120-140: 12/34; 140-160: 5/13; 160-200: **3/15** | `remeasure/..._probe.json` ws_reach_by_elev |
-| Taken poses with metal < 2 mm | 26 of 371 on the bench (near2_poses), 63 of 859 held out. Overhead: **8 of 10 clip frames and 5 of 8 taken workspace poses** | `_bench.json` / `_held.json` deep; `_probe.json` clip_overhead140 / ws_overhead140 |
-| Metal < 1 mm on taken poses | 2 on the bench, 14 held out. Min metal 0.28 mm on the bench, 0.14 mm held out. 10th-percentile overhead min metal 1.02 mm on the bench, **0.64 mm held out** | same |
-| Contact (metal into skin, penalised) | 4 bench workspace poses (contact 0.0107 = 1.07 gap points). Deepest **-4.61 mm** at plane 30 / elev 165 / axial -60 (overhead); then -0.77 (plane 60 / elev 150), -0.74 (plane -60 / elev 60), -0.11 (plane 15 / elev 135). Held out: 10 poses | `_probe.json` contact_poses |
-| Workspace in-band (unscored) | 2-14 mm: 0.874 over the 261 taken workspace poses (clips 0.897); 2-10 mm: 0.554; > 14 mm: 12.6 %; > 20 mm: 2.8 %. Overhead workspace 0.926 | `_probe.json` ws_unscored |
-| Band read 3-14 mm | 19.22 on the bench (+0.31), 23.00 held out (+0.33). The band edge is not exploited | `_bench.json` / `_held.json` deep.gap_band3_14 |
-| Fold margin (th, the one metric) | min 5.232 deg over taken poses (5.513 priced; 5.021 held out at r_h 15.5) | row final_polish; `docs/research/sidecar_mechanism_redteam.md` section 5 |
-| Continuity | full flood 18.91 (0 dropped); knn flood 21.72 (10 dropped) | `verify/sidecar-longdyad-knuckle-3r_v_bench_frozen.json` |
-| Springs | K clock spring 0.08 N.m preload (0.05 enough), 0.015 N.m/rad | red team table, section 2 |
-| J2 step felt at drive onset | 0.13-0.20 N.m | red team finding 5 |
-| Drive play | about 0.2 deg RSS of K. The cuff does not feel it: K is slaved and the 3 active joints close the chain | red team section 4 |
-| Cuff twist, R17 | **not measured**: R17 with the slaved coupling has not run on this design (gen-6 L1 has build.json, no judge/ yet) | `pipeline/full-exo/designs/l1_sidecar-longdyad/` |
-| DOF and complexity | 3 active, 0 passive translations, complexity 49 (recomputed). O20 hubs | `docs/alignment/sidecar-longdyad-knuckle-3r.json` |
+| Taken poses with metal < 2 mm | 26 of 371 bench, 63 of 859 held out. Overhead: 8 of 10 clip frames, 5 of 8 taken workspace poses | `_bench.json` / `_held.json` deep; `_probe.json` |
+| Metal < 1 mm / < 3 mm | < 1 mm: 2 bench, 14 held out (min 0.28 / 0.14 mm). < 3 mm: 178 bench, 427 held out | same |
+| Deepest contact | **-4.61 mm at plane 30 / elev 165 / axial -60** (overhead); then -0.77 (60, 150, -105), -0.74 (-60, 60, 105), -0.11 (15, 135, -60). Held out 10 contact poses. Which part presses: not measured | `_probe.json` contact_poses |
+| Workspace in-band (unscored) | 2-14 mm 0.874 over 261 taken workspace poses; overhead 0.926; clips 0.897 | `_probe.json` ws_unscored |
+| Fold margin (th) | min 5.232 deg over taken poses (no build tolerance on the stops) | row final_polish |
+| Continuity | full flood 18.91 (0 dropped), knn 21.72 | `verify/..._v_bench_frozen.json` |
+| Springs / stops | one K clock spring, 0.08 N.m preload; J2 stops smlo 5.0 / smhi 16.55; K stop B a1max 63.18 never binds | row best_params; red team |
+| Cuff twist, K lag, lift-off | **not measured**: R17 with the slaved coupling has not run (no `judge/` under `pipeline/full-exo/designs/l1_sidecar-longdyad/`) | - |
+| Near-singular postures | knee angle up to 146.1 deg bench (150.9 held out); crank swing 31.6-33.2 deg; transmission >= 30 gated | `_bench.json` coord_spans K.ang; verifier |
+| DOF / complexity | 3 active (J1, J2, J3), K slaved and never read, 0 passive translations, pin knee with 2 sensed pins; complexity 49 (recomputed) | `docs/alignment/sidecar-longdyad-knuckle-3r.json` |
+
+Numbers this audit could not get: cuff twist / K lag / lift-off (R17 not run on this design); which part makes each
+contact (the probe records the pose, not the part; not re-run because the claim did not move and the local cache is
+rebuilding); the priced-plus-catalogue-drive combined wear (never run).
 
 ## Findings
 
-### NEW-catalogue-drive (watch): the verified number uses a ball-link eye smaller than the catalogue part
+### S1 (watch): a sub-pose ranking that reverses held out
 
-- **Evidence.**
-  - The model samples an O7 socket at both rod ends.
-  - The gen-6 red team found the real M2 ball link, igus KBRM-02 / KBLM-02 (head O9 x 4), comes within 0.87 mm of
-    hub 2 at dK 36 and 0.07 mm at dK 40, and within 0.62 mm of hub K's O20 cylinder
-    (`docs/research/sidecar_mechanism_redteam.md`, finding 2).
-  - The taken K opening reaches 37.8 deg on the bench and 38.5 deg held out (coord_spans.dK in the re-wears).
-- **The build spec's stop B at dK 35.4 was "counted, not measured".** Measured now with
-  `tools/alignment_drive_cap_wear.py`: the model runs unchanged, and only its own drive-range truncation is capped at
-  35.4 on every bench. With r_h 15.5:
+- **Evidence.** The table above. Plain margins 0.24 and 0.22 against 0.278 per pose; held out the order reverses
+  (parallelogram 22.03, this design 22.67, roller-longdyad 23.73), and again at 1 mm held out (24.44 / 25.75 / 26.83).
+- **Why the exo is not actually better.** Whichever of the three the plain gap puts first, the bench cannot tell them
+  apart; the ranking is pose sampling. With A1 retired, nothing but sampling now separates this design from
+  parallelogram.
+- **Why watch.** No design that is clearly better for the wearer is ranked below this one: parallelogram wins held out
+  but hugs at 1-2 mm (held-out 2 mm 48.71 vs 37.24).
+- **Action.** Proposal P-1 below.
 
-| reading | bench plain | 1 mm | 2 mm | held out | held 1 mm | held 2 mm | poses lost |
-|---|---|---|---|---|---|---|---|
-| verified (O7 eye, r_h 14.87) | 18.91 | 20.00 | 34.03 | 22.67 | 25.75 | 37.24 | - |
-| r_h 15.5, uncapped (control) | 18.92 | 20.01 | 34.03 | - | - | - | 0 |
-| r_h 15.5, stop B at dK 35.4 (KBRM-02) | **19.76** | 20.85 | 34.39 | **23.53** | 26.63 | 37.95 | 3 bench / 10 held out, none overhead |
+### NEW-sensed-knee-pins (watch): the knee's two encoder-read pins and the 2026-10-17 ruling
 
-  Files: `docs/alignment/remeasure/sidecar-longdyad-knuckle-3r_rh155_bench.json`, `_rh155cap354_bench.json` and
-  `_rh155cap354_held.json`.
-- **Why the exo is not yet as good as 18.91 says.** The 0.85 points belong to a custom O7 x 3 crank-tip eye with a
-  pressed iglidur cup, and to a horn eye that clears hub K's real dome by >= 1 mm. Neither has been built or judged.
-  With catalogue parts, the design scores 19.76. That is behind the verified sidecar-parallelogram's 19.13 on the plain
-  gap, though still far ahead of it at 2 mm (34.39 against 50.14). The 0.6 mm horn spacer the red team prices at about
-  +0.2 fast is not in this wear.
-- **Action.**
-  1. Show the buildable reading next to 18.91 on HANDOFF and the dashboard: 19.76 with KBRM-02, or 18.91 if the custom
-     eye passes the L1's R6 / R16 at 1 mm.
-  2. Compare a challenger against the lead's buildable reading only when the challenger's own drive is priced the
-     same way.
+- **Evidence.** The mechanism record keeps the pin knee's 2 sensed pins as sensed passives outside the DOF count, as
+  cuff-side self-aligning freedoms (CLAUDE.md, 2026-10-15). The user's 2026-10-17 ruling: "Sensed 4 joint does not count
+  as passive obviously". ROUNDS.md round 6 already lists the asymmetry (sensed K counts active, sensed knee pins
+  passive) as needing the user's say.
+- **Measured effect if the knee pins counted as joints** (`tools/simplicity.py` on each record, sensed moved to
+  active): every pin-knee row becomes 5 DOF, over the cap of 4, and complexity rises by 38. This design 49 -> 87,
+  roller-longdyad 43.75 -> 81.75, parallelogram 49 -> 87, roller-flank 45.25 -> 83.25, frontload 49 -> 87. Only the
+  kneeless rows (21.07 / 21.11, no sensed pins) would remain 3-joint designs within the cap.
+- **Why watch, not gamed.** The cuff-side rule is an explicit user ruling and the 2026-10-17 quote names the
+  shoulder-chain 4th joint. The order among the pin-knee rows does not change.
+- **Action.** The lead should put the question to the user: do the two knee-pin encoders make the knee pins joints
+  under the DOF cap? (A cuff IMU instead of the encoders is the alternative listed in round 6.)
 
-### NEW-unpriced-stops (watch): an unpriced verified number on a leaderboard of priced ones
+### NEW-catalogue-drive (watch, still open)
 
-- **Evidence.**
-  - The verified reading has smlo 5.0, and a1max 63.1774 = bk1 + bk2 - 5 exactly. Its min th margin is 5.232.
-  - Priced with the minarc judge's built-stop tolerance (+0.5, CB_FOLD_MARGIN 5.5), it reads 19.36 / 20.45 / 34.63,
-    held out 23.29 (row final_polish.priced; `docs/research/sidecar-longdyad-knuckle-3r_final_polish.md` lines 174-175).
-  - minarc pick1 (18.40) and BDp (19.54, of which +0.48 is priced) carry that pricing
-    (`docs/research/minarc_final_polish.md` lines 96 and 140-142).
-- **Why it matters.** HANDOFF says "the best 3-active design is now within 0.51" of the 4-active lead. Priced alike,
-  the gap is 0.96. With the catalogue drive as well it is about 1.8; that is an estimate, as the combined wear was not
-  run. The order is unchanged, so this is watch.
-- **Action.** Rank only priced readings against priced readings (proposal P-b).
+- **Evidence.** With the catalogue M2 ball link (KBRM-02, O9 x 4) and the build spec's stop B at dK 35.4, the same
+  harness gives 19.76 (score 92.81) / 1 mm 20.85, held out 23.53 / 26.63 (`remeasure/..._rh155cap354_*.json`). The
+  gen-6 CAD still has no judge output, so the custom O7 crank-tip eye that would keep 18.91 is unjudged.
+- **Why not better.** 0.85 of the number belongs to a part that has not been built or judged. On buildable readings
+  roller-longdyad (envelope-corrected 18.56, ROUNDS round 9) is ahead by about 1.2, not 0.24.
+- **Action.** Judge the gen-6 L1's crank-tip and horn eyes at 1 mm; then 18.91 or 19.76 is the build's number.
 
-### G1 (watch): metal hugs the skin overhead
+### NEW-unpriced-stops (watch)
 
-- **Evidence.**
-  - 15.12 points of the bench gap live in the 1-2 mm shell (20.00 -> 34.03), and 11.49 held out (25.75 -> 37.24).
-  - Overhead (elev >= 140), 8 of 10 clip frames and 5 of 8 taken workspace poses have metal < 2 mm, one < 1 mm.
-  - The 10th-percentile overhead min metal is 1.02 mm on the bench and 0.64 mm held out.
-- **Why not better.** On a real, bulging arm, metal at 1-2 mm overhead is metal on skin, and overhead is where the goal
-  asks most.
-- **Why watch, not gamed.**
-  - It is below the 25-point line.
-  - It beats every verified 3-active row at 2 mm: frontload 43.98, parallelogram 50.14, roller-flank 46.8 per the
-    ledger.
-- **Action.** Keep reporting 2 mm and the overhead floor. The overhead hub crowns are the next lever for the wearer
-  (hub 3 in-band 0.60 and L2 0.75 are the out-of-band parts).
+- **Evidence.** smlo 5.0 and a1max 63.1774 = bk1 + bk2 - 5 exactly; min th margin 5.232; priced (+0.5 on the stops,
+  CB_FOLD_MARGIN 5.5) 19.36 / held 23.29 (row final_polish.priced).
+- **Change under the new rules.** minarc pick1 (priced) is now 4-active, so the "within 0.51" comparison is moot; the
+  round-9 comparison with roller-longdyad (also smlo 5.0, unpriced) is like-for-like. The dashboard still mixes priced
+  and unpriced verified numbers.
+- **Action.** Show which verified numbers carry build-tolerance pricing (proposal P-b of the 22:45 audit, unchanged).
 
-### M5 (watch): one spring holds the whole drive, and R17 has not judged it
+### G1 (watch): metal hugs the skin overhead (for the wearer, not a gate)
 
-- **Evidence.**
-  - K's clock spring (0.08 N.m) keeps the train horn -> rod -> crank -> roller -> lobe in compression.
-  - Lift-off above about 30 rad/s2 of q2 acceleration is gen-5's estimate.
-  - The new R17 slaved coupling (commits 5d6b819 / 9f28755: force closure, lift-off switched off on a pull) has not run
-    on this design. The gen-6 L1 is still building.
-- **Why it matters.** The verified number assumes K exactly on its law in every pose.
-- **Action.** Run R17 on l1_sidecar-longdyad with the slaved entry, and report K against the law, lift-off and cuff
-  twist.
+- **Evidence.** Overhead 8 of 10 clip frames and 5 of 8 taken workspace poses with metal < 2 mm; overhead p10 min
+  metal 1.02 mm bench, 0.64 mm held out; 15.12 points in the 1-2 mm shell (11.49 held out).
+- **Why not better.** On a real, bulging arm, 1-2 mm overhead is metal on skin. The user ruled 2 mm is not a gate, so
+  this is reported for the wearer only.
+- **Action.** Keep reporting the overhead floor; hub 3 (in-band 0.60) and L2 (0.75) are the out-of-band parts.
 
-### R1 (watch): stale text on a verified row
+### M5 (watch): one spring holds the drive, R17 not run
 
-- **Evidence.**
-  - The row's and the dashboard's verdict text still opens "SCREENED, a candidate for the verifier. Best self-measured".
-  - HANDOFF line 81 says "no polish, no CAD", but the polish closed at 22:03 with no replacement and gen-6 CAD is
-    running.
-  - The dashboard row still holds the CMA fast best (10.3, reach 0.80) in its gap / reach fields. It is labelled as a
-    sweep, 8.61 below the verified number.
-- **Action.** Refresh the verdict text and the HANDOFF line at the next dashboard refresh.
+- **Evidence.** K's 0.08 N.m clock spring keeps the whole drive train in compression; lift-off above ~30 rad/s2 of q2 is
+  an estimate. No R17 output for this design.
+- **Action.** Run R17 with the slaved entry on the gen-6 L1: K against its law, lift-off, cuff twist.
 
-## Patterns checked and clean (with the measured reason)
+### R1 (watch): stale text
+
+- **Evidence.** Row and dashboard verdict still open "SCREENED, a candidate for the verifier"; the dashboard row carries
+  the fast 10.3 / reach 0.80 in its gap / reach fields; HANDOFF line 81 "no polish, no CAD", line 97 "within 0.51" of
+  minarc pick1.
+- **Action.** Refresh at the next dashboard / HANDOFF update.
+
+## Patterns checked and clean
 
 | pattern | result |
 |---|---|
-| T2 (band edge) | the 3-14 mm read costs 0.31 / 0.33 |
-| T3 (margin read on another angle) | th margin 5.232 on file in the one metric |
-| T4 (search bound walks toward a singular posture) | a1max sits on its clamp bk1 + bk2 - 5, but stop B never binds: a1max -3 is identical in every gate cell (row limiter). The polish bounded ang_min at the verified 26.88 |
-| S1 / P1 (in-sample tuning) | held out +3.76, under 6 |
-| S2 (sparse sampling) | part-weighted in-band 0.923 >= sample-weighted 0.897. Rod (13 samples) and L1a (12) are thin but in band |
-| S3 (unsampled bodies) | crank, rod and horn are sampled groups |
-| S5 (static islands) | full flood drops 0 |
-| M1 (virtual parts) | 0 passive translations |
-| M2 (slim hubs) | O20 only |
-| M3 (unchecked clash) | the verifier's RSSR closure, ball-link tilt and pressure-angle checks drop 0 poses. The O9 eye clash is NEW-catalogue-drive above |
-| M4 (idle drive) | crank swings 31.6-33.2 deg |
-| P2 (held-out leakage) | the polish picks were registered on envsel before the held-out claim, and none replaced the config |
-| P3 / R3 (re-measuring until lucky; best of many without spread) | the number reproduced exactly 4 times. The polish reported all 3 picks and their spread |
-| P4 (judge changed with the design) | no bench, judge or metric file in the row's 4 commits. The R17 coupling change is a judge change for slaved designs, but it has not touched this row's number |
-| R2 / R4 (refuted records shown; recomputed number) | the dashboard shows the verifier's v_gap 18.91 (fixed in 448f6af) |
-| G2 (stiff spring) | K preload 0.08 N.m, J2 step 0.13-0.20 N.m. Small, pending R17 |
-| G3 (cuff twist) | not measured (R17 pending), listed under M5 |
-| G5 / G6 (complexity hidden; 4th joint) | 49 recomputed. 3 active joints; K is slaved, not sensed |
+| T1 / T2 | contact line held at 1 mm; band read 3-14 mm costs 0.31 bench / 0.33 held out |
+| T3 | th margin 5.232 on file in the one metric |
+| T4 | a1max at its clamp, but stop B never binds (row limiter); polish kept ang_min at 26.88 |
+| S2 / S3 | part-weighted in-band 0.923 >= sample-weighted 0.897; crank, rod and horn sampled (rod 13, L1a 12 samples, both in band) |
+| S5 | full flood 0 dropped |
+| M1 / M2 / M3 / M4 | 0 passive translations; O20 hubs; RSSR closure, ball-link tilt, pressure angle drop 0 poses; crank swings 31.6-33.2 deg |
+| P1 (in-sample) / P2 / P3 / R3 | held out +3.76 (< 6); polish picks registered before the held-out claim; number reproduced 4 times exactly |
+| P4 | no measurement file changed in the row's 4 commits, nor since the verification (only judge/dynamics.py, outside the gap) |
+| R2 / R4 | dashboard shows v_gap 18.91 |
+| G2 / G3 | K preload 0.08 N.m, J2 step 0.13-0.20 N.m (red team); twist unmeasured (M5) |
+| G5 / G6 | complexity 49 recomputed; K is slaved, never read, so it is not a sensed 4th joint. The knee pins are NEW-sensed-knee-pins |
 
-## Proposals (not applied; each is a measurement or reporting change for the lead or the user)
+## Proposals (not applied; measurement / reporting changes for the lead or the user)
 
-- **P-a. Proposed catalogue entry "M6. A modelled component envelope smaller than the catalogue part".**
-  - Looks like: a joint maps to a real part number, but the model samples a smaller envelope (here an O7 eye for an
-    O9 x 4 igubal).
-  - Detect: the CAD red team's part table against the model's sampled radii, then a capped or enlarged re-wear
-    (`tools/alignment_drive_cap_wear.py`).
-  - Here: this design, +0.85.
-  - Effect on the verified rows: sidecar-longdyad 18.91 -> 19.76. Not measured for sidecar-parallelogram or
-    roller-flank, which may carry the same M2 eyes; their drives were not red-teamed with KBRM-02.
-- **P-b. Proposed catalogue entry "R5. Readings priced differently on one leaderboard".** Rank a verified number
-  against another only when both carry the same build-tolerance pricing.
-  - Measured effect: sidecar-longdyad 18.91 -> 19.36 (priced), and minarc pick1 / BDp unchanged (already priced).
-  - Not measured: sidecar-parallelogram and roller-flank priced.
-- **P-c. A held-out non-regression term for the A1 dominance gate.** A challenger replaces the lead only if it beats
-  the lead on the plain gap and at 2 mm, and is not worse held out by more than 0.5.
-  - Effect on past decisions: longdyad over frontload (held 22.67 against 26.75) still passes.
-  - It would hold back the round-9 roller-longdyad claim if its verifier confirms the claim: 18.67 / 33.10 beats the lead
-    on plain and at 2 mm, but its held out is 23.73 against 22.67 and its 1 mm reading 20.30 against 20.00 (the claim's
-    own numbers, `docs/alignment/remeasure/roller-longdyad-knuckle-3r_*.json` are that design's audit).
-  - Against the buildable lead (19.76 / 34.39 / held 23.53) roller-longdyad would pass, if its own drive is buildable
-    as modelled.
+- **P-1. A lead change needs a margin of at least one workspace pose (0.28) on the plain verified gap, or no held-out
+  loss.** This replaces the retired A1 gate's role with no near-touch term. Measured effect on the verified rows (exact
+  bench, held out n 1154): roller-longdyad (18.67, held 23.73) would not replace this design (18.91, held 22.67): plain
+  margin 0.24 < 0.28 and held out -1.06. This design would not have replaced parallelogram on these rules (0.22 < 0.28,
+  held -0.64). frontload -> this design (3.91 plain, +4.08 held) passes. kneeless-roller (21.07 / 24.59) and
+  kneeless-sidecar (21.11 / 25.34) are behind on both. This is a tightening of a rule, so it is the user's call.
+- **P-2. Ask the user whether the knee's sensed pins are joints** (NEW-sensed-knee-pins). Effect: see the finding;
+  every pin-knee row would leave the DOF cap.
+- **P-3. ALIGNMENT.md wording** (for the lead, not edited by this audit, since other auditors run on the same file):
+  mark A1 "RETIRED 2026-10-17 (plain verified gap decides; contact stays < 1 mm)"; in G1 "Detect", drop `dominance` as
+  a gate and keep it as a report; in G5 / G6, state that minarc pick1 is 4-active by the user's ruling and that the
+  knee-pin question (P-2) is open.
 
-## What happens next
+## Cost
 
-1. **Gen-6 CAD** (wf_fe302450-e0e) should judge the horn eye against hub K's real dome, and the crank-tip eye against
-   hub 2, at 1 mm.
-2. **The re-wear that settles the drive.** If the custom O7 crank-tip eye passes those checks, 18.91 stands for the
-   build. If not, 19.76 is the build's number. This audit's adapter re-wears either in about 3 min on the farm.
-3. **R17 with the slaved entry** on l1_sidecar-longdyad: lift-off and cuff twist.
-4. **Re-audit the lead** when any of these land, or when roller-longdyad's verifier reports.
-
-Cost of this audit on the farm: about $0.07 (6 jobs).
+No farm jobs, no local re-wear (claim unchanged). About 15 min of reading and table work.
