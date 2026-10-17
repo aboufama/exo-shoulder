@@ -192,3 +192,69 @@ gate the user retired on 2026-10-17, so it is reported in finding T1 and does no
   seats are 26.82 with K locked against 24.00 with K.
 - Farm cost of this audit (`tools/cloud_run.py batch`, 2 + 2 jobs): bench $0.060, held out $0.078 (cpu3c); total
   $0.14, under the $1.5 cap.
+
+## Skeptic (2026-10-17, 02:30-02:40 UTC, git 14dd5d1)
+
+The skeptic was a separate agent. It edited no bench, judge, kit, model, row, dashboard page or CLAUDE.md, and changed
+no score. It re-derived every number from the verifier files (`docs/research/minarc_final_polish/verify/v_*`), the
+audit's re-wear files (`docs/alignment/remeasure/minarc-stop-knuckle-4r_*`), the rows and `tools/simplicity.py`.
+No re-wear was needed: every number in the reasons was on file and was reproduced. Farm $0.
+
+**Final verdict (ledger, `stage skeptic`, 2026-10-17T02:39:15Z): WATCH.** One of the 15 reasons was refuted
+(`continuity`). The other 14 stand, all at 'watch'. The claim is 18.40 (pick1).
+
+**Rulings** (also in `docs/alignment/minarc-stop-knuckle-4r.rulings.json`):
+
+| key | refuted | evidence |
+|---|---|---|
+| near_touch | no | **Numbers.** `_bench.json` (config BDp) gives 19.54 / 26.44 / 41.69 / 152.61, the same as the verifier. **Threshold.** TH shell2_watch 15 is applied to n2 - plain = 22.15, as documented. **Label correction.** 22.15 is the 0-2 mm shell; the strict 1-2 mm shell is 15.25. **Keyed to BDp, not the claim.** pick1's own numbers are 22.89 (0-2 mm) and 17.93 (1-2 mm), both in the watch band. **Wearer.** 38 taken bench poses sit under 2 mm. It is not a gate (user, 2026-10-17). |
+| continuity | **yes** | **The connected numbers are on file; the tool misses them only because of its record format.** `v_pick1_fit60_bench_conn.json`: 1105 / 1105 grid nodes, 0 islands, 990 / 990 edges, bench ws 281 / 281. `_conn_taken.json`: 1056 / 1056 nodes, ws 270 / 270. `_pick1_probe_{bench,held}.json` contact_aware_verifier: 0 / 0 dropped, gap 18.40 / 22.69. BDp is likewise 0 / 0 at 19.54 / 24.18. **Result.** Connected minus static is 0.00 everywhere, under TH conn_watch 1.0. **knn flood.** Not on file, but the tool's rule only uses it to raise a watch, so 'ok' does not need it. |
+| sampling | no | **Missing measurement.** `parts_ib14` is null in the remeasure files and absent from every verify file. The row has fractions only, for the older configs BD / BA (hub3 0.664, L2 0.779). There are no sample counts, and nothing for pick1 or BDp. Not measured in this time box. |
+| complexity | no | **Recomputed.** `simplicity.py` on the row mechanism gives **52.0** (+25 for the 4th active DOF, +10 for 2 sensed passives). The row field says 33.0. **Shown.** The dashboard shows 52.0; HANDOFF lines 79-80 say 33. |
+| reporting | no | **First half, a false positive.** After the 02:28 refresh, morphs.json has v_config 'pick1', v_gap 18.4, v_reach 0.75, v_contact 0.0281, v_inband14 0.8941: pick1's confirmed numbers. **Second half stands.** gap / sweep_gap 6.19 (score 97.75), reach 0.8438 from the sweep, and the verdict string 'VERIFIED LEADER ... BDp 19.54'. |
+| G6 | no | **Numbers.** Confirmed from the files. **Correction (apples to apples).** pick1 is judge-priced: CB_FOLD_MARGIN 5.5, J2 slot +0.5. The 3-joint reference numbers are unpriced (smlo 5.0). Priced the same way, sidecar-longdyad reads 19.36 bench and 23.29 held out (`final_polish.priced`). Like-for-like, pick1 leads it by **0.96 bench and 0.60 held out**, so "held out it does not lead" is wrong against longdyad. At 1 mm pick1 still trails priced longdyad (23.36 vs 20.45 bench, 26.73 vs 26.39 held). Held out at 1 mm it beats roller (26.73 vs 26.83). **Wearer points stand.** A 4th joint at the cap, overhead 7 vs 8 of 28, contact 11 vs 4 poses. |
+| NEW-overhead-traded | no | **Overhead taken.** overhead140_ws: 7 / 28 vs 8 (bench), 12 / 71 vs 16 (fit-60 held), 16 / 71 vs 17 (env held). **Lost to contact.** 5 vs 2 bench, 16 vs 7 held. **K overhead.** K is open on 0 overhead ws / clip poses. **Size.** 1 pose on the bench, 4 of 71 held out. |
+| NEW-depth-blind-contact | no | **contact_raw.** 11 / -13.17 vs 4 / -6.41 bench; 35 / -14.61 vs 13 / -7.27 fit-60 held; 28 / -14.58 vs 9 / -7.27 env held. All are ws poses, no clip frame. 5 of the 11 bench contacts are at elevation >= 150. **Fold losses.** 70 vs 86 bench, 209 vs 257 held: pick1 closes more poses and loses more of them to contact. |
+| G5 | no | **Stale field.** The row says 33.0; HANDOFF 79-80 say 33; simplicity.py gives 52.0. **Knee pins.** Counted active, simplicity.py gives **90.0 at 6 DOF**, over the cap. CLAUDE.md line 18 names K only. A5 keeps cuff-side passives out of the count. The question is open. |
+| R2 | no | **Stale text.** The row verdict / v_verdict and the dashboard verdict open "VERIFIED LEADER ... BDp 19.54", next to v_config pick1, and the sweep shows 6.19. **Caveat.** 18.40 itself is confirmed. |
+| NEW-mixed-protocol | no | **README.** Line 33 says 21.31 (env fit); line 36 says 22.67 (fit-60): confirmed. **Correction.** The finding's "tie" (22.69 vs 22.67) also mixes stop pricing. Priced, longdyad held out is 23.29, so pick1 leads by 0.60. README's implied 1.36 overstates that by 0.76. |
+| T4 | no | **Knee.** ang_min 26.1449, held knee max 152.746, margin 1.109, 4 poses past H1 (BDp 1). **Correction.** "BDp 4.66" is BDp's **bench** margin; held vs held it is 1.11 vs **2.67**. **Size.** 4 / 952 held ws poses = about 0.42 points. |
+| G4 | no | **Margins.** min own 5.623 / 5.586; lt10 107 of 380 (held 273 of 887); plain dyad on forced poses -22.763. **Swing.** J1 gain 3.30 / 2.29, 31 deg per frame. **Context.** BDp swings more (3.41 / 2.55 / 35 deg) with lt10 98 of 370, so this is not a polish regression. |
+| M5 | no | **Hold check.** Drift 3.72 upright and 5.69 / 6.12 / 4.12 / 7.70 tilted (3 of 4 over 5); twist up to 3.83; 9.28 at 0.08 N.m. **Red team.** Demand 0.048 N.m; Reach a high shelf moves K 15.8 deg vs BDp 0.85. **Mitigating.** At 2 g upright, K lifts at most 0.47 deg. The tilted cases are a robustness sweep, not the judge's R17 posture. |
+| T1 | no | **Numbers.** 18.40 / 23.36 / 41.29 / 156.01; 13 / 38 / 171 poses; the 7 overhead ws floors are 4 / 2 / 1 in the 0-1 / 1-2 / 2-3 mm bins. **Correction.** Priced against longdyad, pick1 is 0.96 ahead plain and 6.66 behind at 2 mm (not 0.51 / 7.26). Information only. |
+
+**Correction that runs through G6, T1 and NEW-mixed-protocol** (stop pricing, not a design change):
+- pick1 and BDp are read at the judge's built-stop pricing: rule 5.5, J2 slot +0.5 (`rows polished_pricing`;
+  probe `fold_margin_env` 5.5).
+- The 3-joint numbers they are set against (18.91, 18.67, 19.13; 22.67, 23.73, 22.03) are unpriced (smlo 5.0). The
+  sidecar-longdyad skeptic's NEW-unpriced-stops finding says so.
+- Like-for-like, against sidecar-longdyad's own priced reading (19.36 / 23.29 / 1 mm 20.45 / 26.39 / 2 mm 34.63),
+  pick1's lead is **+0.96 bench and +0.60 held out**. That is about 3.5 and 2 workspace poses, larger than the
+  audit says.
+- No priced number is on file for roller-longdyad or sidecar-parallelogram.
+- This favours minarc, but it does not change any level. The 4th joint, the deeper contact and the overhead count
+  are wearer facts either way.
+- Proposal for the next audit (a measurement change, not used here): compare a priced claim only with priced
+  references, or price both.
+
+**Missed by the audit** (not counted in this verdict; for the next audit):
+1. **K runs to within 0.1 deg of stop B, and stop B carries no build tolerance.**
+   - Stop B sits at the 5-deg rule cut, dK 56.652 (`rows polished_pricing`).
+   - The taken K reaches 56.244 deg on the bench and **56.551 deg held out**, 0.10 deg from the stop
+     (`_pick1_probe_{bench,held}.json` K_open_deg_taken.max).
+   - The J2 slot is priced +0.5 for machining; stop B is not.
+   - A stop B that engages 0.5 deg early would cut every pose that needs K above 56.15 deg. The count is not
+     measured, because the probe stores only the maximum.
+   - This is the same pattern as roller-longdyad's dK 46.17 of 46.25: a coordinate parked at its cutoff.
+   - Proposal (measurement change): re-wear pick1 with stop B at 56.15 and report the delta.
+2. **The audit report contradicts itself about the slot file.**
+   - "Not measured" says pick1's bench output is written to `remeasure/minarc-stop-knuckle-4r_bench.json`.
+   - That file's `config` field is BDp (19.54), as the "Checks of the tool" section states correctly.
+   - So the tool's `near_touch`, `held_out` and `fast_frozen` checks describe BDp, not the claim. pick1's own
+     numbers put those checks at the same levels (near_touch watch 22.89; held drop 4.29; fast drop 12.21 < 14).
+
+**Notes** (not gaming):
+- No new gaming pattern was found.
+- The refuted `continuity` reason is a format gap in the tool, which reads only a `connected_full` / `connected_knn`
+  dict. Both floods of the verifier are on file and drop 0 poses. A tool fix (read `connected.dropped_unconnected` and
+  the `_conn*.json` files) is a change to the tool and is left to its owner.
