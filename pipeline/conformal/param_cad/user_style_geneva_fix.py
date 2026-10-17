@@ -21,9 +21,11 @@ The changes (each closes an item of the independent check, pipeline/full-exo/des
              slaved, never read; the arbor ends in the DD O3 tip for the horn hub).
 
     OMP_NUM_THREADS=1 nice -n 10 python3 pipeline/conformal/param_cad/user_style_geneva_fix.py [--src user_geneva_rod] [--out user_geneva_rod_v2]
-        [--a-f 9.0] [--a-c 9.0] [--r-h 2.493] [--rr 3.0] [--dz 0.0] [--r-base 10.1] [--side 1] [--hub-h 3.8] [--eye-h 6.0]
-    gen-5 fix as built: --side -1 (the mirrored follower: the lobe fix measured in docs/research/geneva_rod_drive/lobe_skin.py real;
-    the earlier draft --a-c 14 --r-h 1.8 cleared the skin by 1.26 mm but loads the MR63ZZ roller to 115-155 N, over its static rating)
+        [--a-f 9.0] [--a-c 9.0] [--r-h 2.493] [--rr 3.0] [--dz 0.0] [--r-base 10.1] [--side 1] [--arm-half 2.5] [--hub-h 3.8] [--eye-h 6.0]
+    gen-5 fix as built: --r-base 9.6 --arm-half 2.25 (the lobe's radial offset, measured in docs/research/geneva_rod_drive/lobe_skin.py
+    real: +0.41 mm to the skin; the slimmer follower eye keeps it 0.35 mm off the J2 cap skirt). Rejected on the way: --side -1 (skin
+    +2.26 mm, but the lobe nose then sweeps through the bell-crank tube: -1.16 mm in this builder's posed check) and the draft
+    --a-c 14 --r-h 1.8 (skin +1.26 mm, but the MR63ZZ roller carries 115-155 N, over its static rating)
 """
 import argparse, json, math, os, shutil, sys, time
 MY_ARGV = sys.argv[1:]; sys.argv = sys.argv[:1]
@@ -33,6 +35,7 @@ import numpy as np, cadquery as cq, trimesh                                     
 DV, GL1, USP, US = USG.DV, USG.GL1, USG.USP, USG.US
 FULL, disc, rev, unit, prism = USG.FULL, USG.disc, USG.rev, USG.unit, USG.prism
 PIN_R = USG.PIN_R
+ARM_HALF = 2.5         # follower arm half-width = its eye radius round the O3 roller pin (--arm-half); its inner edge runs r_base + RR - ARM_HALF from u2
 SCREW_L = 4.0          # ISO 7046 M1.6 x 4 (was x 5): 2.6 mm (1.6 d) of thread in the 3.65 mm blind hole leaves 1.05 mm (3 P) for the tap lead
 CLIP23 = dict(groove_r=1.15, groove_w=0.64, s=0.6, outer_r=3.15, gap=0.15, land=1.0)      # DIN 6799 RS 2.3 (shaft 3-4; m 0.64, n min 1.0, d3 max 6.3)
 CLIP4 = dict(groove_r=2.0, groove_w=0.74, s=0.7, outer_r=4.65, shim=0.3, land=1.2)         # DIN 6799 RS 4 (shaft 5-7; n min 1.2, d3 max 9.3) + 0.3 shim O5.1/O6.5
@@ -68,7 +71,7 @@ def bell_crank_fix(dv):
     tube = rev([(TUBE_BORE, 0), (TUBE_R, 0), (TUBE_R, t_top - t_bot), (TUBE_BORE, t_top - t_bot)], pa(t_bot), u2)
     for z0, z1 in ((0.0, 2.5), (t_top - t_bot - 2.5, t_top - t_bot)): tube = tube.cut(rev([(0, z0 - 0.01), (MR85_R, z0 - 0.01), (MR85_R, z1 + 0.01), (0, z1 + 0.01)], pa(t_bot), u2))
     C0 = dv["C0"]; cr = C0 - ax - (C0 @ u2) * u2; Lf = float(np.linalg.norm(cr)); xf = unit(cr); yf = np.cross(u2, xf)
-    armf = USP.stadium(pa(f2 + ARM_F_Z[0]), xf, yf, Lf, 2.5, ARM_F_Z[1] - ARM_F_Z[0])
+    armf = USP.stadium(pa(f2 + ARM_F_Z[0]), xf, yf, Lf, ARM_HALF, ARM_F_Z[1] - ARM_F_Z[0])    # ARM_HALF: the eye round the roller pin
     bore = disc(ax, u2, TUBE_BORE, t_bot - 1.0, t_top + 1.0); armf = armf.cut(bore)
     armf_hub = rev([(TUBE_BORE, 0), (TUBE_R, 0), (TUBE_R, ARM_F_Z[1] - ARM_F_Z[0]), (TUBE_BORE, ARM_F_Z[1] - ARM_F_Z[0])], pa(f2 + ARM_F_Z[0]), u2)
     ca = A0 - ax - (A0 @ u2) * u2; Lc = float(np.linalg.norm(ca)); xc = unit(ca); yc = np.cross(u2, xc)
@@ -88,7 +91,7 @@ def bell_crank_fix(dv):
     info = dict(post=[round(f2 + 0.3, 2), round(post_end, 2)], post_length_mm=round(post_end - hb, 2), post_free_mm=round(post_end - boss_top, 2),
                 boss=[round(boss_bot, 2), round(boss_top, 2)], model_rocker_base_h=round(hb, 2), tube=[round(t_bot, 2), round(t_top, 2)],
                 eye_low_over_post_clip_zone=round(lo(over), 2) if len(over) else None, post_end_below_eye_mm=round(lo(over) - post_end, 2) if len(over) else None,
-                follower_arm_mm=round(Lf, 3), crank_arm_mm=round(Lc, 3),
+                follower_arm_mm=round(Lf, 3), follower_eye_r_mm=ARM_HALF, follower_eye_to_u2_at_dwell_mm=round(Lf * 0 + float(np.linalg.norm(C0 - (C0 @ u2) * u2)) - ARM_HALF, 3), crank_arm_mm=round(Lc, 3),
                 crank_pin_tilt_deg=round(math.degrees(math.acos(float(np.clip(dv["pin"] @ u2, -1, 1)))), 2), rocker_axis_to_u2_mm=round(float(np.linalg.norm(ax)), 3),
                 post_retention=f"0.3 shim O5.1/O6.5 on the top MR85ZZ inner ring + DIN 6799 RS 4 in an O4 x 0.74 groove, {k4['land']:.1f} mm land (DIN n min 1.2)",
                 crank_pin=cinfo, roller_retention="MR63ZZ inner race pressed on the O3 m6 pin (+ retaining compound); pin pressed in the follower arm",
@@ -128,6 +131,7 @@ def main():
     ap.add_argument("--a-f", type=float, default=9.0); ap.add_argument("--a-c", type=float, default=9.0); ap.add_argument("--rr", type=float, default=3.0); ap.add_argument("--r-h", type=float, default=2.493)
     ap.add_argument("--dz", type=float, default=0.0); ap.add_argument("--hub-h", type=float, default=3.8); ap.add_argument("--eye-h", type=float, default=6.0)
     ap.add_argument("--r-base", type=float, default=10.1)                                        # the lobe's dwell radius (radial offset of the whole profile)
+    ap.add_argument("--arm-half", type=float, default=2.5)                                       # follower arm eye radius (2.25: 0.75 wall round the O3 pin)
     ap.add_argument("--side", type=int, default=+1)                                              # follower side about the rocker axis (-1: mirrored, the lobe's phase moves)
     a = ap.parse_args(MY_ARGV); t0 = time.time()
     src = os.path.join(FULL, "designs", a.src); dd = os.path.join(FULL, "designs", a.out)
@@ -137,6 +141,7 @@ def main():
     USG.EYE_H = a.eye_h; USG.A_F, USG.A_C, USG.RR, USG.R_HORN = a.a_f, a.a_c, a.rr, a.r_h
     USG.LOBE_Z = tuple(z + a.dz for z in USG.LOBE_Z); USG.ROLLER_Z = tuple(z + a.dz for z in USG.ROLLER_Z); USG.ARM_F_Z = tuple(z + a.dz for z in USG.ARM_F_Z)
     hub0 = USG.HORN["hub_z"][0]; USG.HORN["hub_z"] = (hub0, hub0 + a.hub_h); USG.HORN["plate_z"] = (hub0 + a.hub_h, hub0 + a.hub_h + 1.4)
+    global ARM_HALF; ARM_HALF = a.arm_half
     _run0 = DV.run; DV.run = lambda **kw: _run0(**dict(kw, r_base=a.r_base, side=a.side))       # drive_solution() calls DV.run(side=+1) without r_base
     rise = (a.eye_h - 4.0) / 2 + (a.hub_h - 1.2)                                                  # rod-end centre over the old one (eye 0.5 over the plate kept)
     DV.hB = DV.hB + rise; DV.hL = DV.hL + a.dz
@@ -222,7 +227,7 @@ def main():
     D = json.load(open(os.path.join(src, "design.json"))); D.update(id=a.out, label=D["label"] + " - gen-5 fix (real igubal width, retained drive, lobe fix, link 1a repaired)",
                                                                      built_with="pipeline/conformal/param_cad/user_style_geneva_fix.py on " + a.src + " (drive parts rebuilt, link 1a repaired, every other part copied)")
     D["drive_build"] = dict(D.get("drive_build", {}), rod_centres_mm=round(dv["L"], 3), post_mm=bc_info["post_length_mm"], igubal="igus KGLM-03 at 6 mm", horn_hub_mm=a.hub_h,
-                            lobe_fix=dict(a_f=a.a_f, a_c=a.a_c, rr=a.rr, dz=a.dz, r_h=a.r_h, r_base=a.r_base, side=a.side))
+                            lobe_fix=dict(a_f=a.a_f, a_c=a.a_c, rr=a.rr, dz=a.dz, r_h=a.r_h, r_base=a.r_base, side=a.side, arm_half=a.arm_half))
     json.dump(D, open(os.path.join(dd, "design.json"), "w"), indent=1, default=float)
     B = json.load(open(os.path.join(src, "build.json")))
     B.update(lobe=lobe_info, rod=rod_info, horn=horn_info, posing=posing, parts=pf, link_1a_fix=dict(l1a_info, name="renamed: no magnet pocket"))
@@ -232,7 +237,7 @@ def main():
     json.dump(B, open(os.path.join(dd, "build.json"), "w"), indent=1, default=float)
     B["drive_posed"] = USG.posed_drive_check(dd, dv, n=400)
     spec = importlib_spec(os.path.join(USG.REPO, "docs", "research", "geneva_rod_drive", "declare_slaved.py")); B["slaved"] = [spec.declaration(B)]
-    B["gen5_fix"] = dict(src=a.src, rise_rod_end_B_mm=rise, eye_h=a.eye_h, hub_h=a.hub_h, lobe_fix=dict(a_f=a.a_f, a_c=a.a_c, rr=a.rr, dz=a.dz, r_h=a.r_h, r_base=a.r_base, side=a.side), drive_rep=dv["rep"], seconds=round(time.time() - t0))
+    B["gen5_fix"] = dict(src=a.src, rise_rod_end_B_mm=rise, eye_h=a.eye_h, hub_h=a.hub_h, lobe_fix=dict(a_f=a.a_f, a_c=a.a_c, rr=a.rr, dz=a.dz, r_h=a.r_h, r_base=a.r_base, side=a.side, arm_half=a.arm_half), drive_rep=dv["rep"], seconds=round(time.time() - t0))
     json.dump(B, open(os.path.join(dd, "build.json"), "w"), indent=1, default=float)
     print(f"done -> {dd}: invalid {B['invalid_or_multi_solid'] or 'none'}; drive_kin max roller dev {B['drive_kin']['max_roller_dev_mm']} closure {B['drive_kin']['max_closure_mm']}; "
           f"posed {B['drive_posed']} ({time.time() - t0:.0f} s)", flush=True)

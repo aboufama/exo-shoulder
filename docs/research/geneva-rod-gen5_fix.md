@@ -98,9 +98,9 @@ frame. Forces are the red team's spring case (0.08 N.m + 0.015 N.m/rad on K) and
 | (i) stop B at dK 40 (a1max 53.46) | +0.155 | 67 | -> 12.30 | bench **24.77** (+1.20), reach 0.7139 | FAIL |
 | (i) stop B at dK 35 | +0.258 | 65 | -> 12.14 | > +1.2 | FAIL |
 | (v) thinner band 2.1 / 1.6 mm (top kept) | -0.094 / -0.096 | 69 | unchanged | - | FAIL: the end enters over the whole height |
-| (iv) radial offset: dwell r 9.6 | **+0.409** | 65 | 10.19 -> 12.21 | forces unchanged; the follower-arm eye comes **0.1 mm** off the J2 cap skirt (r 10 from F2+8.8; was 0.6) and the roller top sits 0.1 mm under it | passes the skin, not buildable at normal tolerance |
+| **(iv) radial offset: dwell r 9.6** | **+0.409** | 65 | 10.19 -> 12.21 | forces unchanged (rod 53 / 71 N, roller 49 / 66 N), pressure angle 14.1-35.9 deg; with the O5 follower eye its edge comes **0.1 mm** off the J2 cap skirt (r 10 from F2+8.8; was 0.6), so the eye shrinks to O4.5 (0.75 mm wall round the pressed O3 pin): **0.35 mm** | **chosen (built)** |
 | (iv) radial offset: dwell r 9.1 | +0.902 | 59 | 9.69 -> 11.73 | the eye 0.4 mm INTO the J2 cap | infeasible |
-| **(iv) phase: mirrored follower (side -1)** | **+2.255** (the dwell, r 10.1) | **0** | 10.52 -> 12.76 at az -21.9 -> -5.8 (was 47.9 -> 60.6) | rod 42 / 59 N, roller 46 / 63 N (both LOWER); pressure angle 26.5-38.2 deg (limit 45); horn misalignment 12.8-15.0 deg (igubal swivel 32 deg) | **chosen** |
+| (iv) phase: mirrored follower (side -1) | **+2.255** (the dwell, r 10.1) | **0** | 10.52 -> 12.76 at az -21.9 -> -5.8 (was 47.9 -> 60.6) | rod 42 / 59 N, roller 46 / 63 N (both lower); pressure angle 26.5-38.2 deg; horn misalignment 12.8-15.0 deg. **Built, then rejected: the lobe nose now sweeps through the bell crank's O10 tube, -1.16 mm** (the builder's posed drive check over 400 workspace poses) | FAIL (part clash) |
 | (iii) crank 12, horn r 2.0 | +0.931 | 57 | 10.36 -> 11.57 | roller **85 / 114 N** | passes the skin, overloads the roller |
 | (iii) crank 13, horn r 2.0 | +1.046 | 57 | 10.32 -> 11.44 | roller **94 / 127 N** | same |
 | (iii) crank 14, horn r 2.493 | +0.864 | 59 | 10.39 -> 11.64 | roller **84 / 113 N** | same |
@@ -117,13 +117,18 @@ What the table says:
   and none does: the follower arm must stay >= 8.3 mm (round 2). The earlier v2 draft in the tree (crank 14, horn r 1.8)
   was one of these, and this run replaces it.
 - **The radial offset passes the skin but not the shop.** At r 9.6 the follower-arm eye runs 0.1 mm from the J2 cap skirt.
-- **The mirrored follower moves the profile 70 deg round link 2, away from the deltoid.** It does not shrink the profile
-  away from the skin. At the overhead peak the ring's nearest metal is then the O20.2 dwell (+2.26 mm), and no sampled
-  frame has the ring under 2 mm. It changes no part count and no law: same lobe law, same K, same frames for every chain
-  group. Only the bell crank's follower arm points the other way round the rocker post. Its forces are lower and its
-  pressure angle higher (still 7 deg under the 45 deg limit). The horn's misalignment rises to 15.0 deg. That is within
-  the KGLM-03's 32 deg swivel if the swivel is the full angle, with 1 deg spare if it is +-16. A horn pin tilted to the
-  mid-stroke rod line, as the crank pin already is, would take that back. That is a later refinement, stated here.
+- **The mirrored follower moves the profile about 70 deg round link 2, away from the deltoid.** The ring's nearest metal at
+  the overhead peak is then the O20.2 dwell (+2.26 mm), and no sampled frame has the ring under 2 mm. I built it first
+  (`--side -1`). The fix builder's own posed check then found the cost: the profile now runs past the rocker post's
+  azimuth, and over the J2 window the lobe nose sweeps through the bell crank's O10 tube (-1.16 mm, and the tube spans the
+  band height). Moving the post is a new drive layout, so the mirrored follower is out for this fix.
+- **The radial offset is the fix.** The dwell moves from r 10.1 to 9.6, so the roller rides 0.5 mm closer to J2's axis and
+  the whole profile comes in by 0.5 mm. The law, K, the frames, the forces and the part list do not change. The one
+  clearance it eats is the follower eye against the J2 cap skirt (0.6 -> 0.1 mm). An O4.5 eye (0.75 mm wall round the
+  pressed O3 pin) gives back 0.35 mm. The arm's net section is then 2.25 mm2, at about 120 MPa in-plane bending at 66 N,
+  against 880 MPa yield for Ti-6Al-4V. The roller's top face stays 0.1 mm under the cap skirt, as it already was in gen-5
+  (0.143 mm in that build's posed check). It now overlaps the skirt radially by 0.4 mm. An open MR63 (3 x 6 x 2) would
+  give 0.6 mm there if the build wants more.
 
 LOBE_ALL
 
@@ -162,5 +167,29 @@ the judges' own score_design.py (BANDS 10,14, step 3). This ran on the farm ($0.
   show in every clip: Drink -1.1, Wave -0.9, Walking -0.7, Wash -0.5, and Raise overhead -1.3 without the drive.
 - That pattern fits the checker's hub-zone bar lift (up to 1.85 mm over the model strap on link 2). The next attribution
   step is a per-group swap (each CAD group replaced by its L1 group).
+
+**Per-group swap (this run).** `docs/research/geneva_rod_drive/r1_swap.py` starts from the full CAD without its drive
+metal. It puts back ONE member group as the L1 built it, leaving out the L1's own drive keep-outs, and scores with the
+judges' score_design.py (BANDS 10,14, step 3, locally, 26 min a variant). Both builds pose every chain group by the same
+frames, so the swapped group sits where the L1 put it.
+
+| variant | R1 (2-14) | R1-aim (2-10) | Raise overhead | Comb hair | Wave | Drink | Wash | Walking |
+|---|---|---|---|---|---|---|---|---|
+| full CAD minus all drive metal (section 4 above) | 80.48 | 49.89 | 71.68 | 88.30 | 65.94 | 86.97 | - | - |
+| ... with **link 2's group (l2) from the L1** | **81.01** | **50.55** | 72.68 | 88.53 | 66.94 | 88.02 | 60.35 | 96.45 |
+| L1 (l1_geneva-rod, with its drive keep-outs) | 81.10 | 51.10 | 72.97 | 88.38 | 66.85 | 88.09 | 60.38 | 97.08 |
+
+- **Link 2's group carries 0.53 of the 0.62 non-drive points** (85 %), and 0.66 of R1-aim. With l2 swapped, the CAD sits
+  0.09 under the L1. Drink, Wave and Raise overhead come back to within 0.3 of the L1.
+- The l2 group is hubs 2 and 3 (v5 O20 stacks, torispherical caps), the 4-strip machined link 2 bar, and the J2 stop
+  dowel. The checker measured the bar riding up to 1.85 mm over the model strap in the hub zones, where the 60 deg ramp
+  rule lifts it. That is the leading cause, but this swap does not separate the bar from the hub stacks. The next
+  attribution step is a bar-only and a hubs-only swap (`r1_swap.py` takes the group, and a name filter is a one-line
+  addition).
+- **The fix is not local to this builder.** The bar comes from user_style_minarc.py's strip builder, imported unchanged by
+  every gen-4 / gen-5 CAD. Its hub-zone ramp follows the user's 2026-10-16 ruling (ramps up to 60 deg near a hub, bend
+  radius >= 15 mm). Lowering it is a change to the shared bar builder that every user-style CAD would inherit, so it
+  needs its own judged run on all of them, not a patch inside the geneva fix. The l1b swap was started and stopped to
+  free the CPU for the judges. With l2 at 0.53, the other groups share at most 0.09.
 
 V2_SECTION
