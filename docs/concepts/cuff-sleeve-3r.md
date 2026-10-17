@@ -140,3 +140,30 @@ somewhere. The ring (cell R) rides it ON the bearing, a part concentric with the
   in-band at q 0.95 counts 5 % contact PER STATION as acceptable; the union is 29 poses (13 %). The foot's qf 0.9
   hides 11 contact poses that are counted, not removed. Overhead 0/12 at the best configuration: the design takes no
   overhead pose.
+
+## Audit (2026-10-17, independent auditor) - death STANDS
+
+Refutation line: corrected gap <= 78.93 (champion 68.93 + 10) on Bench(60, 160). Every number below came from the
+model's own `evaluate`, Bench(60, 160) fast, local niced, one process per run.
+
+- **Reproduced**: k2 gives 110.96 (reach 0.7625, follow 0.85, in-band14 0.2379, in-band10 0.1512, contact 0.21,
+  overhead 0/12, honest True), identical to the claim. On a quiet core one evaluation takes 3 s; under load 15 it took
+  about 60 s.
+- **Ghost bound (independent of the spar's shape)**: with the spar and crank removed from the metal and from K6 at k2,
+  the gap is still **101.02** (reach 0.781, follow 0.867, in-band14 0.284, contact 0.192). Hub 2 (0.00 in band,
+  13 contact poses), link 1 (0.02, 24) and the cap (0.01, 21) keep it 22 points above the line however good a spar
+  might be. A ghost CMA-ES over the corrected box (9 evaluations) found 104.84 at best, nothing below the k2 ghost.
+- **Search-box bug (found, does not change the verdict)**: the model's `CMA_BOX` has el 20-85, but the best seat k2 is
+  bvec(-20, 0), so all four original CMA rows were clipped to el 20 (129-171). I re-ran the audit CMA-ES from k2 with
+  el 0-85, s3 120-270 and az -40..90: 10 evaluations (sweep k14-23, tag `audit-cma`), best 129.98, none below 110.96.
+  A proximal sleeve (s3 161, gamma 21) scored 207.19.
+- **Explanation fix**: hub 2's loss is not the twist. p2 = K.closure(p1, e3) depends only on the J1 seat and e3's
+  direction, and J3 never enters it. With a 90 / 90 dyad, p2 is the pole of the (p1, e3) great circle. That is the
+  2R pointer's hub-2 placement (the planner's "WHERE hub 2 sits"), and this design inherits it whatever its J3 is.
+- **Convergence gate**: still not met (24 evaluations; I stopped the audit CMA at the 25-min box). The death does not
+  rest on it, because the ghost bound covers every spar and crank shape at k2. Conventions match the champion (p95
+  profile quantile, the same `report`).
+
+One line: removing the spar and crank entirely still leaves 101.02 (the 2R pointer's hub 2, link 1 and cap are
+0-2 % in band), and the search with the corrected box, which can now reach el 0, found nothing below 110.96. Cell S
+stays dead.
