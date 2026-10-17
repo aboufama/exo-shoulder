@@ -15,6 +15,13 @@ possible solution is 3 dof" - so push for 3 before settling for 4.
 Scope 2026-10-15: MVP1 is an UNPOWERED kinematic proof of concept that tracks the arm (basic rolling bearings, the
 user adds rotation sensing); no gears, pulleys or cables (MVP2 powers it, remote motors on cables). Passive
 self-aligning slides at the cuff (outside the count). Right shoulder; fit the user: 6'1" (185 cm), 6'4" wingspan.
+User decisions 2026-10-17: (1) "Sensed 4 joint does not count as passive obviously": a sensed joint is a joint, so
+minarc-stop-knuckle-4r pick1 is a 4-active design (4 DOF) and the 3-joint leaders are the real leaders. (2) Context
+for planners only: the FINAL product is powered, every joint cable driven and rotation tracked - that is WHY fewer
+joints and simplicity matter. "dont account for the powered stuff at all its just useful context for high level
+agents": all building and testing stays a KINEMATIC proof (no drives, cables or motor models in the metrics, benches
+or CAD). (3) Near-touch (2 mm) is not a gate (see Alignment auditor). (4) Keep the alignment auditor (the
+exploit / gaming agent) running at all times.
 The user wants the design's evolution recorded for a final time-lapse visual: add every judged design to
 docs/EVOLUTION.md (and its snapshot to pipeline/evolution/) as part of the judge loop.
 
@@ -64,8 +71,9 @@ docs/EVOLUTION.md (and its snapshot to pipeline/evolution/) as part of the judge
   (docs/alignment/ledger.jsonl, `python3 tools/alignment_ledger.py get <id>`) marks 'gamed' cannot be called verified,
   a winner or a leader until the finding is resolved; the auditor's own claims get a skeptic.
   User rulings on the auditor's first questions (2026-10-16 ~21:05 UTC): (1) contact stays metal < 1 mm ("Keep 1 mm,
-  report 2 mm"): every claim and verification ALSO reports the 2 mm near-touch gap, and a design replaces the lead only
-  if it beats it on the plain gap AND at 2 mm (docs/ALIGNMENT.md A1, dominance gate); (2) overhead: "Leave the score as
+  report 2 mm") - SUPERSEDED 2026-10-17: the user "dont really care about the near touch stuff", so the 2 mm near-touch
+  is no longer a gate or a claim column (the A1 dominance gate is retired; a design replaces the lead on the plain
+  verified gap); contact stays metal < 1 mm and the 1 mm near-touch search objective stays as a robustness technique; (2) overhead: "Leave the score as
   is" - no overhead condition or extra weight in the score or the 95 target (keep reporting overhead taken / 28).
 - Start from the rawest material available (`data/raw/README.md`); when the human model and real data disagree, the data
   wins and the model gets fixed.
