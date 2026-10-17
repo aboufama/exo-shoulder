@@ -1,0 +1,20 @@
+{
+ "id": "slipper-nose-knuckle-3r",
+ "what": "flank-only beta step on the verified seats (question B of the flank-robustness task, 2026-10-17)",
+ "committed_before_any_claim": true,
+ "grid": {"beta": [-175.684, -174.684, -173.684, -172.684, -171.684],
+          "lead_beta": -176.684,
+          "fixed": "every other parameter = rows/slipper-nose-knuckle-3r.json best_params as the verifier merges them (tools/slipper_env_polish.py full()), mu 0.087, nose_r 1.1839"},
+ "readings": {"unpriced": "CB_FOLD_MARGIN=5 ENVP_NOPRICE=1 (the lead's reading)",
+              "priced": "CB_FOLD_MARGIN=5.5 (smlo + 0.5, stop B at bk1 + bk2 - 5.5)"},
+ "protocols": ["verified: fit Bench(60,160) fast -> Bench(110,360) exact, flood on (tools/slipper_env_polish.py claim fit60 bench)",
+               "held out: fit Bench(60,160) fast -> held out exact, flood on (claim fit60 held)"],
+ "rule": {
+   "R1_robust": "tools/slipper_env_polish.py robust (priced, Bench(60,160)): beta +-1 deg, r_c +-0.25 mm, g +-0.05, one at a time; all 6 neighbours synthesise honestly and keep a drive range >= the nominal's taken dK - 1 deg",
+   "R2_caps": "on the nominal flank, verified protocol, unpriced claim, taken stroke: crank PA_kin <= 38.03 - 2 = 36.03 and horn PA_kin + atan(0.087) <= 43 - 2 = 41.0 (>= 2 deg to both caps at the claim's mu 0.087); the horn at mu 0.12 is REPORTED, not gated (the verified lead itself reads 42.58-42.89 effective there, 0.1-0.4 under 43)",
+   "pick": "the grid beta closest to the lead's -176.684 that passes R1 and R2",
+   "recommend_for_CAD": "the pick replaces the lead's flank only if it TIES or beats the lead: the 90 % paired bootstrap CI of (lead gap - pick gap) per pose (docs/research/slipper_env_polish/paired.py method) contains 0 or lies above 0 on held out at the unpriced reading AND on the verified protocol at the unpriced reading; else no flank change is recommended and the finding is reported",
+   "none_passes": "if no grid beta passes R1 and R2, no beta is recommended"
+ },
+ "run_order": "robust check for all five; verified-protocol claims (both readings) for all five as time allows, the pick first; held-out claims (both readings) for the pick first, then the others as time allows; every claim writes its per-pose dump"
+}
