@@ -117,7 +117,39 @@ def bench_eval(B, params):
     r.pop("params", None); return r
 
 
+def viz_export(params):
+    """geometry of the fitted design (Bench(60,160)) for docs/concepts/viz/concepts/skinnormal-shortk-knuckle-4r.js (same G
+    layout as minarc-stop-knuckle-4r.js: axes, hub levels, knee frames, q2 stops, strap centrelines in member frames)"""
+    B = CB.Bench(n_clip=60, n_ws=160); r, M = _report(B, params); D = M.D; P = D.p; S = KR.S
+    def line(nm, k=18):
+        pts = np.asarray(M.link_pts.get(nm, (0, np.zeros((0, 3))))[1], float)
+        if not len(pts): return []
+        a = pts[:, :1] * 0; d = pts - pts.mean(0); ax = np.linalg.svd(d, full_matrices=False)[2][0]; t = d @ ax
+        bins = np.linspace(t.min(), t.max(), k + 1); out = []
+        for j in range(k):
+            sel = (t >= bins[j]) & (t <= bins[j + 1])
+            if sel.any(): out.append([round(float(x), 2) for x in pts[sel].mean(0)])
+        return out
+    fr = M.fr; cb = lambda x: math.cos(x * D2R)
+    b1, b2 = float(P["bk1"]) * D2R, float(P["bk2"]) * D2R
+    cps = (math.cos(float(P["a1max"]) * D2R) - math.cos(b1) * math.cos(b2)) / (math.sin(b1) * math.sin(b2))
+    G = dict(u=[[round(float(x), 5) for x in v] for v in D.u], uK=[round(float(x), 5) for x in D.uK], c=[[round(float(x), 5) for x in v] for v in D.c],
+             sa=[round(float(x), 5) for x in D.sa], st=[round(float(x), 5) for x in D.st], sn=[round(float(x), 5) for x in D.sn],
+             A=[round(D.a1, 3), round(D.a2, 3)], branch=float(getattr(D, "q2sgn", 1.0) or 1.0), m=[round(float(x), 5) for x in D.m],
+             f=[round(float(x), 2) for x in M.f], fK=round(float(M.fK), 2), capK=float(P.get("capK", 0)), tr=round(float(M.tr), 2), tp=round(float(P["tp"]), 3),
+             RUN=S.RUN, SING=S.SING, hr=[float(x) for x in M.hr], A0=[round(float(x), 5) for x in fr["A0"]], A0m=[round(float(x), 5) for x in fr["A0m"]],
+             Bm=[round(float(x), 5) for x in fr["Bm"]], eE=[round(float(x), 5) for x in fr["eE"]], eK=[round(float(x), 5) for x in fr["eK"]],
+             psiA=round(math.degrees(D.psiA), 4), dKB=round(math.degrees(abs(math.acos(max(-1, min(1, cps))) - abs(D.psiA))), 4),
+             thLo=round(D.th_lo, 4), thHi=round(D.th_hi, 4), q2s=[round(float(x), 4) for x in D.q2_stops],
+             L1a=line("L1a", 3), L1b=line("L1b", 7), L2=line("L2", 18))
+    keys = ("az1", "el1", "az2", "el2", "wd", "wa", "b3", "lE", "lc", "phiE", "phib", "stk", "ang_min", "bk1", "bk2", "sK", "a1max", "smlo", "smhi", "capK")
+    return dict(P={k: round(float(P[k]), 4) for k in keys}, G=G, report={k: r[k] for k in ("gap", "reach", "follow", "inband14", "contact")},
+                links=sorted(M.link_pts))
+
+
 if __name__ == "__main__":
+    if len(sys.argv) > 1 and sys.argv[1] == "viz":
+        print(json.dumps(viz_export(json.loads(sys.argv[2]) if len(sys.argv) > 2 else {}), default=float)); sys.exit()
     par = json.loads(sys.argv[1]) if len(sys.argv) > 1 else {}
     B = CB.Bench(n_clip=60, n_ws=160); t = time.time()
     r, M = _report(B, par)
