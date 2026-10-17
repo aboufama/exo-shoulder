@@ -1,7 +1,73 @@
 {
  "note": "diff = gap A - gap B (negative: A better); paired bootstrap over poses within kind (tools/alignment_paired.py compare_sets)",
  "vs_D0control": {
-  "bench": "missing",
+  "bench": {
+   "gap_A": 18.63,
+   "gap_B": 19.33,
+   "diff": -0.7,
+   "split": {
+    "reach": 0.0,
+    "follow": 0.0,
+    "inband": -0.18,
+    "contact": -0.52
+   },
+   "discordant": {
+    "ws_taken_A_only": 1,
+    "ws_taken_B_only": 1,
+    "contact_A_only": 0,
+    "contact_B_only": 2,
+    "contact_both": 4
+   },
+   "boot": {
+    "n": 4000,
+    "ci90": [
+     -1.83,
+     0.36
+    ],
+    "sd": 0.67,
+    "p_A_better": 0.801
+   },
+   "frozen": {
+    "A": 18.64,
+    "B": 19.33
+   },
+   "contact_A": {
+    "n": 4,
+    "sum_mm": 21.88,
+    "max": [
+     10.904,
+     "ws",
+     15.0,
+     165.0,
+     -60.0
+    ],
+    "deeper3": 3
+   },
+   "floor_A": {
+    "lt1": 4,
+    "lt2": 34,
+    "lt3": 147,
+    "n_taken": 371
+   },
+   "contact_B": {
+    "n": 6,
+    "sum_mm": 23.88,
+    "max": [
+     10.547,
+     "ws",
+     15.0,
+     165.0,
+     -60.0
+    ],
+    "deeper3": 3
+   },
+   "floor_B": {
+    "lt1": 3,
+    "lt2": 32,
+    "lt3": 137,
+    "n_taken": 371
+   }
+  },
   "held": {
    "gap_A": 24.07,
    "gap_B": 22.98,
@@ -71,7 +137,73 @@
   }
  },
  "vs_lead_claim": {
-  "bench": "missing",
+  "bench": {
+   "gap_A": 18.63,
+   "gap_B": 18.66,
+   "diff": -0.03,
+   "split": {
+    "reach": 0.0,
+    "follow": 0.0,
+    "inband": -0.56,
+    "contact": 0.53
+   },
+   "discordant": {
+    "ws_taken_A_only": 1,
+    "ws_taken_B_only": 1,
+    "contact_A_only": 2,
+    "contact_B_only": 0,
+    "contact_both": 2
+   },
+   "boot": {
+    "n": 4000,
+    "ci90": [
+     -0.82,
+     1.18
+    ],
+    "sd": 0.61,
+    "p_A_better": 0.413
+   },
+   "frozen": {
+    "A": 18.64,
+    "B": 18.67
+   },
+   "contact_A": {
+    "n": 4,
+    "sum_mm": 21.88,
+    "max": [
+     10.904,
+     "ws",
+     15.0,
+     165.0,
+     -60.0
+    ],
+    "deeper3": 3
+   },
+   "floor_A": {
+    "lt1": 4,
+    "lt2": 34,
+    "lt3": 147,
+    "n_taken": 371
+   },
+   "contact_B": {
+    "n": 2,
+    "sum_mm": 16.46,
+    "max": [
+     10.547,
+     "ws",
+     15.0,
+     165.0,
+     -60.0
+    ],
+    "deeper3": 2
+   },
+   "floor_B": {
+    "lt1": 3,
+    "lt2": 30,
+    "lt3": 133,
+    "n_taken": 371
+   }
+  },
   "held": {
    "gap_A": 24.07,
    "gap_B": 23.73,

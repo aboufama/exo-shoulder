@@ -11,11 +11,11 @@
   {
    "check": "held_out",
    "level": "ok",
-   "reason": "held out 24.07 vs bench 18.64 (+5.43; docs/concepts/verify/dipped-law-groove-knuckle-3r_v_held_frozen.json)",
+   "reason": "held out 24.07 vs bench 18.64 (+5.43; re-measured (this audit))",
    "held_gap": 24.07,
    "v_gap": 18.64,
    "drop": 5.43,
-   "source": "docs/concepts/verify/dipped-law-groove-knuckle-3r_v_held_frozen.json"
+   "source": "re-measured (this audit)"
   },
   {
    "check": "fast_frozen",
@@ -51,10 +51,77 @@
   {
    "check": "contact_depth",
    "level": "ok",
-   "reason": "no per-pose contact depths on file that reproduce the claim (tools/alignment_paired.py dump dipped-law-groove-knuckle-3r bench|held, or tools/alignment_wear_probe*.py); not measured",
+   "reason": "the score counts contact poses, not depth (report only, score unchanged): v_gap 18.64: bench 4 contact poses, sum 21.88 mm, deepest 10.9 mm at ['ws', 15.0, 165.0, -60.0], 3 deeper than 3 mm vs roller-longdyad-knuckle-3r 16.46 mm over 2 (+5.42 mm, x1.33); held 17 contact poses, sum 81.2 mm, deepest 10.36 mm at ['ws', 45.0, 165.0, -30.0], 10 deeper than 3 mm vs roller-longdyad-knuckle-3r 49.88 mm over 10 (+31.32 mm, x1.63)",
    "depths": {
-    "v_gap 18.64": {}
-   }
+    "v_gap 18.64": {
+     "bench": {
+      "n": 4,
+      "sum_mm": 21.88,
+      "max_mm": 10.9,
+      "n_deeper3": 3,
+      "overhead140": 2,
+      "deepest": [
+       "ws",
+       15.0,
+       165.0,
+       -60.0
+      ],
+      "gap": 18.64,
+      "src": "docs/alignment/remeasure/dipped-law-groove-knuckle-3r_bench_perpose.json",
+      "cross_check": {
+       "files": 2,
+       "sums": [
+        21.87,
+        21.88
+       ],
+       "agree": true
+      }
+     },
+     "held": {
+      "n": 17,
+      "sum_mm": 81.2,
+      "max_mm": 10.36,
+      "n_deeper3": 10,
+      "overhead140": 10,
+      "deepest": [
+       "ws",
+       45.0,
+       165.0,
+       -30.0
+      ],
+      "gap": 24.07,
+      "src": "docs/alignment/remeasure/dipped-law-groove-knuckle-3r_held_perpose.json",
+      "cross_check": {
+       "files": 1,
+       "sums": [
+        81.2
+       ],
+       "agree": true
+      }
+     }
+    }
+   },
+   "ref": "roller-longdyad-knuckle-3r",
+   "compare": [
+    {
+     "claim": "v_gap 18.64",
+     "wear": "bench",
+     "sum": 21.88,
+     "ref_sum": 16.46,
+     "excess": 5.42,
+     "ratio": 1.33,
+     "watch": false
+    },
+    {
+     "claim": "v_gap 18.64",
+     "wear": "held",
+     "sum": 81.2,
+     "ref_sum": 49.88,
+     "excess": 31.32,
+     "ratio": 1.63,
+     "watch": false
+    }
+   ]
   },
   {
    "check": "dominance",
@@ -235,7 +302,7 @@
  ],
  "remeasured": {
   "bench": true,
-  "held": false
+  "held": true
  },
  "verifier_files": [
   "docs/concepts/verify/dipped-law-groove-knuckle-3r_v_bench_frozen.json",
@@ -243,7 +310,7 @@
   "docs/concepts/verify/dipped-law-groove-knuckle-3r_v_bench_frozen_env.json",
   "docs/concepts/verify/dipped-law-groove-knuckle-3r_v_held_frozen.json"
  ],
- "git": "a6c23c0",
+ "git": "8e60d0e",
  "tool_version": "2026-10-17.2",
- "t": "2026-10-17T06:26:59Z"
+ "t": "2026-10-17T06:37:37Z"
 }
