@@ -128,7 +128,7 @@
 
   /* ---------- table */
   const COLS = [
-    ['name', 'Morphology', 'txt', ''], ['status', 'Status', 'txt', ''], ['sweep_gap', 'Sweep best gap', 'gap', ''], ['gap', 'Claimed gap', 'gap', ''], ['v_gap', 'Verified gap', 'gap', ''],
+    ['name', 'Morphology', 'txt', ''], ['status', 'Status', 'txt', ''], ['sweep_gap', 'Sweep best gap', 'gap', ''], ['gap', 'Self / fast gap (unverified)', 'gap', ''], ['v_gap', 'Verified gap', 'gap', ''],
     ['reach', 'Reach', 'pct', 'sw-hide-n'], ['v_reach', 'Reach, verified', 'pct', 'sw-hide-n'], ['inband14', 'In-band 14', 'pct', 'sw-hide-n'], ['v_inband14', 'In-band 14, verified', 'pct', 'sw-sec'],
     ['follow', 'Follow', 'pct', 'sw-sec'], ['contact', 'Contact', 'pct', 'sw-sec'], ['n_configs', 'Configs', 'int', 'sw-sec'], ['family', 'Family', 'txt', 'sw-sec'], ['lens', 'Lens', 'txt', 'sw-sec'],
     ['t_last', 'Last activity', 'time', 'sw-hide-n'], ['id', 'Id', 'txt', 'sw-sec']];

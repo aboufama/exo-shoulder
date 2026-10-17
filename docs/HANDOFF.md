@@ -469,6 +469,10 @@ designs (dipped-law-groove-knuckle-3r, seed-offset-3r-slides); every leader is w
      its last judges run as scratchpad/fix/judge_rest.sh). Gen-8 CAD of conecut-knee launched (wf_5f217f1a-14b, local,
      no render) from the gen-7 builders, closing the verifier's D1 / D2 / D3 / O3 items. Lead ruling O4: link 2 is
      machined from solid (3+2-axis), so CLAUDE.md CAD ruling (2) allows its up-to-70-deg drop at J2, stated on the part.
+   - *Lead, 20:25 UTC (audit 20:15):* the gen-8 L1 builder (pipeline/concept_l1/build_conecut_l1.py line ~86) sets the
+     J3 stop's acceptance window (-112.40 <= J3MIN <= -111.25) from HELD-OUT q3' values - a held-out leak into a part
+     spec. The window must come from the fit / envelope benches (fit evidence allows -112.79 to -98.43; the exact bench
+     prefers -110.9) and the held margin is then reported, not designed to. Fix in the gen-8 CAD's fix pass.
 2. **Reach is the gap.**
    - The lead's gap is reach 17.50 of 18.49 (ROUNDS round 10 results). **Score 95 is gap <= 13.75**: +18 workspace
      poses at the lead's in-band and contact, 0.278 points each (ROUNDS round 11 plan).

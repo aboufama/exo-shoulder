@@ -1855,7 +1855,9 @@ pick3 18.33 is ruled a tie), 95 needs 13.75. Reach stays first: +18 workspace po
 - **If the stretched wall is attacked again, use only the in-band drive and the corridor rule.** inband-rssr's drive
   metal costs 0.29 points; its long-dyad report-only row regains 20 held-out fold poses but gives them back in overhead
   contact depth (29.3 vs 10.8 mm). So the next stretched-wall step is that drive on the long dyad WITH the overhead
-  parts relieved laterally, searched on the envelope bench and selected held out - never a new drive beside link 1b
+  parts relieved laterally, searched on the envelope bench and selected on the envelope-selection draw (envsel), then
+  CLAIMED held out [lead 2026-10-17 20:25: was "selected held out" - selecting on held-out poses leaks the split;
+  alignment skeptic 20:15, P2] - never a new drive beside link 1b
   (lesson 2) and never a slaved-everywhere K under the strict reading (lesson 5).
 - **Machinery before the next claims:** a pair-coverage probe (every member pair in relative motion has a per-pose
   check over the full swing, and the frozen copy carries every attribute collide() reads); the verify template's bar
@@ -2175,8 +2177,10 @@ it is 0.21 lower, but by the round's own tie rule (paired pooled 90 % CI includi
    bench points by itself (18.28 vs 18.67 at equal strap); desmo's dense outer wall read 0.31 lower fast. Every claim
    that adds or lengthens in-band metal states its sampling density and is compared at equal sample counts (S6).
 6. **Size the knee on held-out low-elevation extreme rotation.** lE 101 / lc 31 takes 20 held contacts (9 arm pad /
-   knee link) at elev 15, axial -135..-165 (poses 764 / 835 / 907 / 978 / 1047), which the fast bench never samples;
-   those poses belong in the envelope search bench. A long knee link needs MR63ZZ stk 6.0 (stk 4.85: knee-vs-E clash
+   knee link) at elev 15, axial -135..-165 (held-out poses 764 / 835 / 907 / 978 / 1047), which the fast bench never
+   samples; [lead 2026-10-17 20:25: STRUCK "those poses belong in the envelope search bench" - they are HELD-OUT poses;
+   draw fresh low-elevation extreme-rotation poses for the envelope bench instead (tools/env_bench.py, >= 2 deg from
+   every held-out pose); alignment skeptic 20:15, P2]. A long knee link needs MR63ZZ stk 6.0 (stk 4.85: knee-vs-E clash
    on 329 poses).
 7. **A desmodromic groove has a determinacy failure no PA or stroke gate catches.** Crank-free K play is
    g c / |v_F . e_r|; the follower needs a radial velocity component of ~40 deg in the dwell (psi 148-156 here; the
