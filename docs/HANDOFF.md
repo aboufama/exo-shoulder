@@ -438,6 +438,14 @@ designs (dipped-law-groove-knuckle-3r, seed-offset-3r-slides); every leader is w
      mm wall: T5 contact depth bench 14.74 -> 13.18 mm, held 46.35 -> 40.59 mm, same params and complexity). So its
      generation CAD is the gen-7 slipper-nose CAD (wf_ecb7b6f8-d22) with that cut applied - a judged design change on
      user_slipper_nose, not a third builder - and its final polish is slipper-nose's (wf_f38de10b-cb2, same params).
+   - *Lead, 14:30 UTC:* the slipper-nose polish adopted nothing (pre-registered pick1 -0.59 held out unpriced,
+     docs/research/slipper-nose-knuckle-3r_final_polish.md). Its 'crank-side cliff' is a design-space artefact, not a
+     buildability problem (docs/research/slipper_flank_robust.md: as built, crank PA reaches its 38.03 cap only at r_c
+     -0.4..-0.5 mm). Carry into the gen-7 full CAD (and its drawing notes) if its builder has not: keep the verified flank
+     (beta -176.684, no beta step), build the +0.75 deg K lead (lobe-ring dowel +0.35 deg of q2, stop B at q2 -15.47),
+     nose hole / crank pivot / lobe profile +-0.02 mm true position, r_c +-0.1 mm, assembly note "K phase at onset
+     +0.75 +-0.3 deg, shim the dowel". Held-out th stays 5.068 with the lead (5.5 is not reachable by a lead). R17's
+     forward-stroke twist is 4.97 of 5.0 deg at mu 0.15 (audit 14:03, rate + preload de-rated) - the thinnest margin.
 2. **Reach is the gap.**
    - The lead's gap is reach 17.50 of 18.49 (ROUNDS round 10 results). **Score 95 is gap <= 13.75**: +18 workspace
      poses at the lead's in-band and contact, 0.278 points each (ROUNDS round 11 plan).
