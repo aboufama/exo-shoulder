@@ -123,9 +123,10 @@ class TLModel(SN.SNModel):
         Y = X.copy(); cut = float(P["crank_cut"]); ce = float(P["crank_edge"])
         if cut > 0: Y[arc] = Y[arc] + cut * unit(Y[arc])
         if ce > 0:
-            ia = np.nonzero(arc)[0]; edge = np.zeros(len(X), bool)
-            if len(ia) and len(ia) % 4 == 0 and ia[-1] == len(X) - 1 and np.all(np.diff(ia) == 1):
-                edge[ia[3::4]] = True                                    # the arc block: per psi the rows w = -3, -1, 1, 3 (outer)
+            edge = np.zeros(len(X), bool); n_t = 0                       # the arc block closes the crank's samples: per psi the
+            while n_t < len(X) and arc[len(X) - 1 - n_t]: n_t += 1      # rows w = -3, -1, 1, 3 (the last one = the outer edge)
+            n_t -= n_t % 4
+            if n_t: edge[np.arange(len(X) - n_t, len(X))[3::4]] = True
             if edge.any():
                 X0 = X[edge]; er = unit(X0 - (X0 @ uK)[:, None] * uK); Y[edge] = Y[edge] - ce * er
                 wall = np.concatenate([X0 + z * unit(X0) for z in np.unique(np.r_[ce, np.arange(ce, S.T_LINK + 1e-6, 1.0), S.T_LINK])]
