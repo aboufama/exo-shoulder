@@ -2,7 +2,7 @@
  * slaved knuckle K, rodless bell-crank drive) with the MR63ZZ roller DELETED: the crank's bent long arm ends in a pressed,
  * hardened, polished O2.4 440C nose (ISO 8734 dowel) that SLIDES on the conjugate flank milled into link 1a's boss (flank =
  * nose-centre path offset by 1.18 mm; both kinematic pressure angles <= 43 - atan(mu)).
- * Best measured (CMA A, drive re-fit at mu 0.087, PA_kin 38.0): O2.37 nose, flank beta -176.7, r_c 15.37, g 2.39: dK_lim 49.8 (horn PA 36.1 + friction 5.0 = 41.1); fast Bench(60,160) plain 13.00 / 2 mm 16.47.
+ * Best measured (CMA A, drive re-fit at mu 0.087, PA_kin 38.0; O2.37 nose, flank beta -176.7, r_c 15.37, g 2.39): dK_lim 49.8 (horn PA 36.1 + friction 5.0 = 41.1); fast Bench(60,160) plain 13.00 / 2 mm 16.47; frozen exact Bench(110,360) 18.49 (lead roller 18.67).
  * Geometry exported from docs/concepts/models/slipper-nose-knuckle-3r.py (SN_CELL=lead, mode viz). */
 (function () {
   const K = (typeof window !== 'undefined' ? window : globalThis).KIN, V = K.V, M = K.M, D2R = Math.PI / 180;

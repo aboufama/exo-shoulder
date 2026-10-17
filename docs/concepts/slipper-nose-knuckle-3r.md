@@ -181,3 +181,44 @@ was 13.00.
 - **Parts in band.** The re-cut arm runs lower: crank 0.797 -> 0.818. Hub 3 0.739 and L2 0.736 are unchanged.
 - **Cam check.** Horn PA 36.1 + 5.0 friction; crank PA 29.5 + 5.0. The flank's smallest radius is 1.3 mm, a concave
   pocket around the 1.18 nose. Hub K clearance 1.31; nose-to-hub-K clearance 3.92; contact radius 14.9-19.8 mm.
+
+## Red team (my own best configuration)
+
+- **The pose that jams.** The driven side is the horn on the outward stroke and the crank on the return. The horn
+  peaks at 36.1 + 5.0 = 41.1 deg at the last taken K step. Stop B sits at dK 49.8, past every taken pose (the dyad
+  window binds first). Jamming needs PA + friction angle -> 90. At the 43 rule, the flank keeps all its taken poses
+  up to mu 0.12. At mu 0.15 (dry Ti-Ti would be ~0.3-0.4 and galls: never run without the DLC + grease) it loses 3
+  fast poses.
+- **The point that pinches.** The lowest metal over the taken frozen poses is 0.07 mm at plane -60, elev 60, axial
+  105. That is the lead's own pose and part (the nose metal stays >= 7 mm off the skin over every taken pose). 3 poses
+  are under 1 mm (gap 20.12), 30 under 2 mm (gap 33.02); the lead's numbers are 20.30 / 33.10. The 2 contact poses
+  are the lead's (horn lug and hub K / crank).
+- **The optimistic number.**
+  1. mu 0.05 is the optimistic friction. The claim uses mu 0.087, and the shape is honest to 0.12.
+  2. The flank's smallest radius is 1.3 mm, a concave pocket 0.12 mm larger than the nose radius. It is wire-EDM
+     friendly, but nose wear (~14 um over 1e6 cycles) eats a tenth of that clearance. The pocket is where the contact
+     is conformal, so the stress there is lowest.
+  3. The +0.18 over the lead is all in-band (crank 0.797 -> 0.818). It is below the 1-point rule.
+  4. The spec's 22.0 complexity leaves the dowel out; 22.25 counts it.
+  5. Workspace in-band at elevation 90-140 is 0.800. The lead is at 0.798 in the same harness, but both sit under
+     the 0.874 / 0.841 bar quoted for the lead.
+- **The wedge, both columns.** On the kneeless control the planar wedge is worth -1.06 points frozen at mu 0.05 and
+  -1.06 at 0.087. The gain is in-band only: hub 3 in band 0.505 -> 0.799 while its crown stays at a median 21.9 mm
+  above the skin. That is a share-metric gain of the floating-centre kind, so it is left to the auditor. On the lead
+  the wedge cannot exist (0 mm of drop at 2 mm clearance).
+
+## More claim columns (farm job sn_claims2, local held-out of A)
+
+| configuration | frozen exact Bench(110,360) | held out | note |
+|---|---|---|---|
+| lead roller (reference) | 18.67 | 23.73 | flood full 18.67, knn 20.34 |
+| lead drive, O3 nose, mu 0.026 (PA_kin 41.5) | 18.77 | - | dK_lim 49.5 |
+| lead drive, O3 nose, mu 0.05 (PA_kin 40) | 18.77 | 23.73 | flood full 18.77 / knn 20.44 (the lead's +0.10 everywhere) |
+| lead drive, O2 nose, mu 0.05 | 18.79 | - | dK_lim 48.8 |
+| lead drive, O3 nose, mu 0.087 (PA_kin 38) | 19.90 | 25.23 | 4 poses (16 held out) lost to the shorter stroke |
+| lead drive, O2 nose, mu 0.087 | 19.09 | 24.83 | the smaller nose alone gets back 0.81 of the 1.23 |
+| **A: re-fit flank, O2.37 nose, mu 0.087** | **18.49** | **23.45** | equal reach; +0.0018 in-band; held out 0.28 better than the lead |
+
+The held-out column for A is held-out clips only (never used in a fit): 23.45 (reach 0.683, ib14 0.8943, contact
+0.0116; lost fold 260, slide 32, contact 10; overhead 18/71; min metal 0.33 mm). The lead roller scores 23.73 on the
+same column.
