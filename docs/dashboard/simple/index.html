@@ -110,7 +110,7 @@
     <p class="muted" id="tz-note">All times are US Eastern.</p>
     <p class="lede" id="lede" data-source="leader">—</p>
     <div class="kpis">
-      <div class="kpi lead" id="kpi-best"><span class="lab">Best design so far</span><span class="big" data-source="leader" data-field="score">—</span><span id="kpi-best-name" class="muted" data-source="leader" data-field="short">—</span><span id="kpi-best-cx" class="muted" data-source="leader" data-field="complexity"></span></div>
+      <div class="kpi lead" id="kpi-best"><span class="lab">Best 3-joint design so far</span><span class="big" data-source="leader" data-field="score">—</span><span id="kpi-best-name" class="muted" data-source="leader" data-field="short">—</span><span id="kpi-best-cx" class="muted" data-source="leader" data-field="complexity"></span></div>
       <div class="kpi"><span class="lab">Goal</span><span class="big">100</span><span class="muted">every target met</span></div>
     </div>
     <p class="muted" style="margin-top:12px">Score: higher is better, 100 = every target met, 0 = nothing works. It is the share of three targets a design meets - metal 2-14 mm from the skin (target 90 % of the metal), following the arm (95 % of motion frames), reaching everyday poses (90 %) - minus a penalty for any pose where metal would touch the skin.</p>
@@ -221,15 +221,16 @@ dash.calc('board', {
     const short = m.is_baseline ? "Today's 3-hinge chain" : String(m.name || m.id).split(/[:(;]| with | - /)[0].trim().slice(0, 44);
     const g = fz ? m.frozen_gap : m[p + 'gap'];
     return { id: m.id, short: m.v_config ? `${short} (${m.v_config})` : short, basis, score: Math.max(0, Math.round((1 - g / 275) * 1000) / 10), gap: g, close: m[p + 'inband14'], follows: m[p + 'follow'], reaches: m[p + 'reach'], contact: m[p + 'contact'], state, is_baseline: !!m.is_baseline,
-      complexity: m.complexity ?? null, complexity_items: m.complexity_items || '', passive_trans: m.passive_trans ?? null };
+      complexity: m.complexity ?? null, complexity_items: m.complexity_items || '', passive_trans: m.passive_trans ?? null, active_dof: m.active_dof ?? null };
   }).filter(Boolean).sort((a, b) => (a.basis === 'fast' || a.state === 'Flagged') - (b.basis === 'fast' || b.state === 'Flagged') || a.gap - b.gap);
   }
 });
 dash.calc('leader', {
-  inputs: ['board'], title: 'Best design so far',
+  inputs: ['board'], title: 'Best 3-joint design so far',
   description: 'The highest-scoring design whose number an independent verifier confirmed (frozen exact bench). Score = 100 x (1 - gap / 275), floored at 0. complexity = its simplicity number (lower = simpler; not part of the score).',
   fn: (board) => {
-    const b = board.find((r) => !r.is_baseline && r.state === 'Verified' && r.basis === 'verified') || {};
+    // user 2026-10-17: a sensed joint is a joint and the goal is 3 joints, so the headline is the best verified design with <= 3 active joints
+    const b = board.find((r) => !r.is_baseline && r.state === 'Verified' && r.basis === 'verified' && (r.active_dof == null || r.active_dof <= 3)) || {};
     const sc = (g) => (g == null ? null : Math.max(0, Math.round((1 - g / 275) * 1000) / 10));
     return [{ id: b.id ?? null, short: b.short ?? null, score: sc(b.gap), state: b.state ?? null, complexity: b.complexity ?? null }];
   }

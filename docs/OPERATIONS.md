@@ -109,6 +109,13 @@ WATCHDOG (exo-shoulder, every 15 min; docs/OPERATIONS.md):
 
 ## 4. Dashboards (two artifacts, one dataset build)
 
+**2026-10-17: the session now runs under the user's second account, which cannot write to the two artifacts below
+(they belong to the first account's org).** The live dashboard for this account is
+https://claude.ai/artifact/DjCGir1xvu6es36Lx1nwRA - the public-mirror page (`docs/dashboard/public/index.html` + its
+`data/*.json` files map from the PUBLIC line), republished by the same `file_path` from this session (a new session
+passes `url` after an `Artifact read`). Its headline is the best verified design with <= 3 active joints (user ruling
+2026-10-17: a sensed joint is a joint).
+
 | | production | public mirror |
 |---|---|---|
 | URL | https://claude.ai/artifact/AMhjuE83FBhGXxu8vQBN7r | https://claude.ai/artifact/5dan8agUow4XR81Pr91XhF |
