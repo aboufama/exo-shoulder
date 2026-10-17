@@ -5,7 +5,6 @@
  "complexity": 18.5,
  "verdict": "watch",
  "reasons": [
-  "dominance: beats slipper-nose-knuckle-3r by 0.21 plain but loses by 1.82 at 2 mm: part of the gain is metal moved into the 1-2 mm shell (A1 gate retired 2026-10-17)",
   "reporting: verdict text still reads as a self-measured screen; dashboard sweep best 12.5 (score 95.45) sits 5.78 below the verified number"
  ],
  "checks": [
@@ -52,7 +51,7 @@
   {
    "check": "contact_depth",
    "level": "ok",
-   "reason": "the score counts contact poses, not depth (report only, score unchanged): v_gap 18.28: bench 4 contact poses, sum 20.24 mm, deepest 8.93 mm at ['ws', 15.0, 165.0, -60.0], 3 deeper than 3 mm vs slipper-nose-knuckle-3r 14.75 mm over 2 (+5.49 mm, x1.37); held 14 contact poses, sum 60.97 mm, deepest 9.86 mm at ['ws', 45.0, 165.0, -30.0], 9 deeper than 3 mm vs slipper-nose-knuckle-3r 46.12 mm over 10 (+14.85 mm, x1.32)",
+   "reason": "v_gap 18.28: bench 4 contact poses, sum 20.24 mm, deepest 8.93 mm, held 14 contact poses, sum 60.97 mm, deepest 9.86 mm (this is the reference)",
    "depths": {
     "v_gap 18.28": {
      "bench": {
@@ -102,35 +101,12 @@
      }
     }
    },
-   "ref": "slipper-nose-knuckle-3r",
-   "compare": [
-    {
-     "claim": "v_gap 18.28",
-     "wear": "bench",
-     "sum": 20.24,
-     "ref_sum": 14.75,
-     "excess": 5.49,
-     "ratio": 1.37,
-     "watch": false
-    },
-    {
-     "claim": "v_gap 18.28",
-     "wear": "held",
-     "sum": 60.97,
-     "ref_sum": 46.12,
-     "excess": 14.85,
-     "ratio": 1.32,
-     "watch": false
-    }
-   ]
+   "ref": "conecut-knee-knuckle-3r"
   },
   {
    "check": "dominance",
-   "level": "watch",
-   "reason": "beats slipper-nose-knuckle-3r by 0.21 plain but loses by 1.82 at 2 mm: part of the gain is metal moved into the 1-2 mm shell (A1 gate retired 2026-10-17)",
-   "ref": "slipper-nose-knuckle-3r",
-   "gain_plain": 0.21,
-   "gain_2mm": -1.82
+   "level": "ok",
+   "reason": "no reference"
   },
   {
    "check": "continuity",
@@ -296,7 +272,7 @@
   "docs/concepts/verify/conecut-knee-knuckle-3r_v_bench_nostop.json",
   "docs/concepts/verify/conecut-knee-knuckle-3r_v_bench_frozen.json"
  ],
- "git": "22d934d",
- "tool_version": "2026-10-17.4",
- "t": "2026-10-17T18:10:43Z"
+ "git": "75bd3ef",
+ "tool_version": "2026-10-17.5",
+ "t": "2026-10-17T18:23:21Z"
 }

@@ -533,3 +533,7 @@ Each line is a measurement change: verdicts that move because of it moved becaus
   finding (DOF cap, passive translations); new mutations: stale complexity field +0.25 -> watch, 5 active DOF -> gamed,
   3 passive translations -> gamed. SELFTEST PASS. P-I2 / P-I4 (rulings store the ruled record; `reporting` as a record
   check) are open: they change the ruling format the skeptic writes.
+- **2026-10-17.5** (lead, from the 18:21 skeptic): the T5 contact-depth reference DEPTH_REF follows the CURRENT lead
+  (section 5; it had stayed sidecar-longdyad since ~05:00, so every challenger fired T5 against the shallowest row);
+  the selftest replays rulings on RULINGS_DEPTH_REF (sidecar-longdyad, the reference they were made against). SELFTEST
+  PASS. A measurement change: T5 readings after it compare with the current lead.

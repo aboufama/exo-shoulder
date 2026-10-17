@@ -2430,3 +2430,11 @@ closer sent to the lead; everything that moves the base or replaces J3 belongs t
   89.55 fast), pinknee-scapular-relay-4r (pick 1, expected 18-22); armband-pointer / cuff-sleeve-3r forwarded. J1's
   lesson for the next jump: move hub 2 itself, not the base.
 - Lead: generation-12 CAD (slipper-nose CAD + conecut knee + dowel), user_trimlug_k165 R16 judging, desmo best_params.
+
+## LEAD NOTE (2026-10-17 ~18:30 UTC): leader change by the user's rule
+
+- **conecut-knee-knuckle-3r is the verified lead: 18.28 (score 93.35), held out 22.38**, complexity 18.5, ledger
+  WATCH. The lead's "tie" ruling (CI includes 0) is withdrawn: the 18:21 skeptic showed it was the lead's own rule,
+  never the user's, applied to challengers only. The user's rule (plain verified gap) decides; a noise / tie rule is
+  put to the user. Caveats: bench edge mostly E-strap dilution (18.67 at equal strap); held edge survives (22.90).
+- Planners: the reference for "beat the lead" is now 18.28 / 22.38.

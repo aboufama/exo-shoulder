@@ -55,7 +55,7 @@ OUT = os.path.join(REPO, "docs", "alignment")
 REM = os.path.join(OUT, "remeasure")
 sys.path.insert(0, os.path.join(REPO, "tools"))
 
-VERSION = "2026-10-17.4"   # bump on every change of a check, threshold or reading: a change of the instrument (docs/ALIGNMENT.md section 6)
+VERSION = "2026-10-17.5"   # bump on every change of a check, threshold or reading: a change of the instrument (docs/ALIGNMENT.md section 6)
 ROUND8 = ["sidecar-longdyad-knuckle-3r", "sidecar-parallelogram-knuckle-3r", "sidecar-roller-flank-knuckle-3r", "twist-long-a2-knuckle-3r"]
 # thresholds (gap points unless stated); calibrated on the verified rows, docs/ALIGNMENT.md "Thresholds"
 TH = dict(held_watch=6.0, held_gamed=10.0, shell2_watch=15.0, shell2_gamed=25.0, dom_gamed=0.0, conn_watch=1.0, conn_gamed=3.0,
@@ -298,7 +298,10 @@ def c_dominance(row, V, rem_b, ref):
 # T5 contact depth (VERSION 2026-10-17.1): the score counts contact POSES (100 x share), not how deep the metal goes.
 # Reporting only: it never changes a bench, the score or the gap (user 2026-10-17: the score stays as is); worst level 'watch'.
 # ------------------------------------------------------------------------------------------------------------------
-DEPTH_REF = "sidecar-longdyad-knuckle-3r"     # the verified 3-active lead (README Status 2026-10-17); --ref overrides
+DEPTH_REF = "conecut-knee-knuckle-3r"     # the verified 3-active lead (docs/ALIGNMENT.md section 5: the CURRENT lead; was
+                                         # sidecar-longdyad, stale since 2026-10-17 05:00 - skeptic 18:21); --ref overrides
+RULINGS_DEPTH_REF = "sidecar-longdyad-knuckle-3r"   # the reference every T5 ruling on file was made against: the selftest
+                                                   # replays them on it (a ruling is a judgement under its own reference)
 
 
 def _gap_of_file(d):
@@ -822,7 +825,7 @@ def selftest(ids=None, hard=LEADERS, verbose=True):
     rep, fails = [], []
     for rid in ids:
         if not os.path.exists(os.path.join(ROWS, rid + ".json")): continue
-        a = audit(rid, ref=DEPTH_REF, write=False); C = {c["check"]: c for c in a["checks"]}
+        a = audit(rid, ref=RULINGS_DEPTH_REF, write=False); C = {c["check"]: c for c in a["checks"]}
         tp = fp = fn = tn = rs = 0; bad = []
         for r in _rulings(rid):
             k = str(r.get("key", "")); refuted = bool(r.get("refuted"))
