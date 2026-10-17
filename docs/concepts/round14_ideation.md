@@ -201,7 +201,7 @@ everyone.
   face, as-built arm and S-bend levels, held paired at the same K-play rule, and the full claim set (blended IK, flood,
   dumps, S6, T5, viz).
   - New lead only if B lands at >= 0.2 mm on 316 with in-band loss <= 0.0035.
-  - Otherwise it records the cx-16.5 tie, and the knuckle lens's contact cell closes at 205 / 237 / 264 = uncleareable
+  - Otherwise it records the cx-16.5 tie, and the knuckle lens's contact cell closes at 205 / 237 / 264 = unclearable
     by the measured attribution.
 - Pick 2: a 45-min gate 0 (C, then B, then A's exact J2-exit). On the kill, the cap-pole bound goes to FINDINGS.
 - Neither pick is a 95 path. The 95 arithmetic still needs +17 takes at the lead, and the back-seat knuckle ceiling is
