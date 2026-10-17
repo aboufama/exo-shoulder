@@ -27,7 +27,12 @@ J3 axis, then J3 turns q3. Mobility: spherical Grubler n = 6, j = 6: M = 3 (5) -
 (B0, A1, B1) set by theta in closed form: 0 passive translations, no undetermined coordinate (R17). Pins of one body
 >= 22 deg apart (two O20 discs side by side at a ~52 mm level), each crank >= 22 deg long.
 
-    OMP_NUM_THREADS=1 nice -n 10 python3 docs/concepts/models/cruciate-knuckle-3r.py [check '<json>' | coarse N seed | cma ...]
+Measured (2026-10-17, Bench(60,160) fast, kit checks; docs/concepts/cruciate-knuckle-3r.md): DEAD at gate 0. Honest
+best 86.95 (sweep k25), best measured 79.77 (k1, sparse-sampling flag), plain cap-pole O20 3R through the same kit 63.18;
+converged (729 kit tries). Limiter: the cap pole's mode-A binder zone pushes the link-1 pins / crank B / link 1 to
+79-130 mm, and the crossing puts crank metal on the pole itself.
+
+    OMP_NUM_THREADS=1 nice -n 10 python3 docs/concepts/models/cruciate-knuckle-3r.py check '<json params>'
 """
 import importlib.util, json, math, os, sys, time
 import numpy as np

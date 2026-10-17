@@ -118,7 +118,7 @@ The binder poses are the cap pole's mode-A poses from the round-102 plan: (0, 15
 The best honest gap is 86.95, and 79.77 is the best measured. Both are far above lens 1's 17.5 kill bar, and the cell
 is 16.6-23.8 points worse than the plain cap-pole 3R through the same code (63.18).
 
-**Convergence gate (kit sweep, 662+ tries):**
+**Convergence gate (kit sweep, 729 tries, 197 of them assembling a crossed window):**
 
 - best gained 0.00 score points over the second half and 0.00 over the last third;
 - the top 5 distinct configurations (79.77, 83.36, 84.65, 86.45, 86.95) lie within 2.61 score points.
@@ -181,3 +181,19 @@ reach, leave the cell above the 17.5 bar.
   fast number is 4.5x the kill bar, and the 360-pose workspace would only add binder poses (the plain cap 3R loses
   63 -> 56 frozen).
 - **Follow.** The honest best follows 0.883: the knuckle's run ends cut some clip frames, unlike the control's 1.0.
+
+## Record
+
+- Row: `docs/concepts/rows/cruciate-knuckle-3r.json` (status dead). Complexity is cx 16 under tools/simplicity.py
+  v2.2, the same as virtual-pole-4bar-j2: 1 closed loop, 3 passive pins, 5 bodies, 6 joints.
+- Preview: `docs/concepts/viz/concepts/cruciate-knuckle-3r.js`, drawn at the honest best.
+- Scripts are in this session's scratchpad `cruc/`:
+  - `xopt.py` and `cmax.py`: the proxy search;
+  - `evalk.py` and `kcma.py`: the honest kit evaluation, and CMA with the kit in the loop;
+  - `binder.py`: per-member binder poses and the pose-drop bound;
+  - `ring.py`: the link-1 metal bound;
+  - `control.py`: the plain cap 3R through the same kit;
+  - `merge.py`, `final.py` and `row.py`: the sweep merge, the final evaluation and the row.
+- Next: per the round-102 plan, the J3 closer writes the J2 bound. On the evidence here, the cruciate cell adds
+  nothing to the open cell. Any further virtual-J2 synthesis should keep the fixed centrode within ~30 deg of J1 on
+  the J2 side (New knowledge 3) and run with the kit in the loop.
