@@ -38574,5 +38574,64 @@
    "yoke2": 0.0
   },
   "tag": "audit cma s11 circ1"
+ },
+ {
+  "k": 668,
+  "t": "2026-10-17T19:28:16Z",
+  "params": {
+   "az": -20.048013182117106,
+   "el": -19.38486411158751,
+   "sigma": 1,
+   "al12": 93.80189915020286,
+   "al23": 97.31461171886292,
+   "s_t": 61.07824296242974,
+   "tc": 4.919923015964791,
+   "tw": 116.63569440732805,
+   "thc": -84.6,
+   "car": 24.0,
+   "circ": 1,
+   "twin": 79.00218497149379,
+   "fork": 1,
+   "margin": 5.0,
+   "width": 12.0,
+   "t_link": 3.0,
+   "q": 0.9918673291082456,
+   "qt": 0.9882280549782756
+  },
+  "inband14": 0.4011,
+  "inband10": 0.2455,
+  "reach": 0.8125,
+  "follow": 0.9667,
+  "contact": 0.0505,
+  "gap": 63.69,
+  "closure": 0.9,
+  "honest": true,
+  "overhead": "2/12",
+  "slide_travel": 0.0,
+  "race_float": 26.0,
+  "kmode": "march",
+  "bench": "60,160",
+  "mode": "fast",
+  "inband_member": {
+   "hub1": 0.0098,
+   "hub2": 0.7825,
+   "link1": 0.3389,
+   "yoke": 0.4715,
+   "track": 0.8309,
+   "carriage": 0.0,
+   "carriage2": 0.0246,
+   "yoke2": 0.2933
+  },
+  "contact_member": {
+   "hub1": 0.0,
+   "hub2": 0.0,
+   "link1": 0.01,
+   "yoke": 0.005,
+   "track": 0.035,
+   "carriage": 0.0,
+   "carriage2": 0.0,
+   "yoke2": 0.0
+  },
+  "tag": "audit cma s11 circ1"
  }
 ]
