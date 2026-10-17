@@ -472,3 +472,85 @@ Missed by the audit (for the next audit; not counted in this verdict):
    missed 2). The EVOLUTION row's text ("every one the verified model's own contact") is right; the file field is not.
 
 No gaming found. Final verdict: **WATCH**.
+
+## Skeptic (2026-10-17, ~16:20-16:35 UTC, on the 16:03 hourly audit)
+
+Final verdict (ledger tool, `alignment_ledger.py skeptic`, entry 2026-10-17T16:26:35Z): **WATCH**. 1 of 10 reasons
+refuted with evidence (idle); 9 upheld. Nothing the score counts was found wrong, and no gaming was found.
+
+**New measurements (local, niced, 1 process; the verifier and model unchanged on disk):**
+- **The claim reproduces.** `docs/concepts/verify/slipper-nose-knuckle-3r.py wear bench` at the claimed config, 119 s:
+  frozen 18.49 (reach 0.725, ib14 0.8955, ib10 0.5163, contact 0.0054), 1 mm 20.12, 2 mm 33.02, min metal 0.07 mm, th
+  min 5.181, overhead 8/28 = `_v_bench_frozen.json` digit for digit. (This run was meant for the mu 0.15 case; the
+  `--set nose_r=1.25` form that the verifier's own docstring prints, line 23 / 27, is silently ignored - the code only
+  takes `--set=k=v`, lines 141 / 148 - so it ran nominal. Every stored verify file records the `--set=` form in its
+  `sets` field and the expected params: `_v_bench_mu12` mu 0.12, `_v_bench_r100` 1.0, `_v_bench_r125` / `_v_held_r125`
+  1.25, so no file on record was mismeasured by it.)
+- **Grease lost on the built nose (r 1.25, mu 0.15), bench, 131 s:** frozen **19.05** (+0.56): the horn cap shortens the
+  stroke to dK 43.0 (< the 45.62 the claim takes), 2 more poses fold (88 -> 90, reach 0.725 -> 0.7194). Contact 0.0054,
+  in-band 0.8955 / 0.5162, overhead 8/28 unchanged; 1 mm 20.69, 2 mm 33.08 (29 poses); th min 5.389; horn PA with
+  friction 42.73 <= 43, crank 38.03 <= 38.03; 0 failing poses. File:
+  `docs/alignment/remeasure/slipper-nose-knuckle-3r_bench_r125_mu15.json`. So the wearer's cost of lost grease is 2
+  bench poses of reach (plus the R17 forward bound's 0.0008 deg over the twist gate); the claim at mu 0.087 is untouched.
+- **Threshold scan re-done:** 36 files match `pipeline/full-exo/designs/*/judge*/{dynamics*,forward_bound*}.json` (the
+  audit says 34; same conclusion). The only NOMINAL case whose rounded value sits on a gate is
+  `user_slipper_nose/judge_m5/forward_bound_mu150.json` (twist 5.0); the two non-nominal `passive|f0.05|s2` force-5.0
+  cases fail on twist 7.76 / 7.67.
+
+Rulings (full evidence in `docs/alignment/slipper-nose-knuckle-3r.rulings.json`):
+
+- **contact_depth - upheld.** Re-derived from the claim dumps: bench 9.005 + 5.741 = 14.75 mm (both > 3 mm) against
+  sidecar-longdyad's claim dump 6.23 mm over 4 (deepest 4.613): x2.37, +8.52 mm, past TH 2.0 AND 5 mm (tool lines
+  61-63). Both dumps reproduce their claims (18.48 / 18.91 recomputed). Held 46.12 vs 35.66 (x1.29). 9 mm of metal into
+  the arm overhead is a real cost.
+- **idle - refuted (instrument false positive, fourth ruling).** The claim runs cell `lead` (row frozen.cell); the model
+  only reads `knee_moved` (line 136); the flag is set only in kneeless-roller:166 and kneeless-sidecar:150; the tool's
+  regex (line 570) matches the read. The knee's 65.71 deg (K.qa) is its designed travel, 86.21-151.92 deg inside its
+  window [25.22, 154.78] (probe_bench extras); the drive moves dK 45.62, crank 19.3 deg, far above TH 2.0.
+- **reporting - upheld.** morphs.json sweep_gap 13.0 vs v_gap 18.49 (5.49 > 5); 17 verified / cad rows trip it. The same
+  13.0 (score 95.27, over the 95 line) also sits under the dashboard column labelled **'Claimed gap'** (bench.js line
+  131); 8 verified rows show a 'Claimed gap' <= 13.75. Ranking reads v_gap first (core.js 18, leader.js 73): a label.
+- **judgement:M5 - upheld.** gate_raw twist 5.000811524 > 5.0, and free() reads gate_raw first (judge/dynamics.py
+  lines 99, 1227-1231): FAIL; the builder's file still stores the old-gate pass. Horn edge re-derived: tan(43 - 36.3) =
+  0.1175 (r 1.25) vs tan(43 - 36.1) = 0.1210 (r 1.1839). mu 0.12 held 23.66 (fold 262, dK_lim 46.0 < 46.27) confirmed
+  from the file; mu 0.15 bench 19.05 measured here.
+- **judgement:NEW-one-sided-proxy - upheld.** docs/EVOLUTION.md line 52 still reads "**5.00 deg at mu 0.15 = the
+  limit**" (last commit c93c86a, 15:13).
+- **judgement:T3 - upheld.** th min 5.006 held at both noses; design.json fits still says "+0.75 +-0.3 deg"; at the low
+  end (+0.45) the red team's worst lag (-0.53 - 0.24) nets -0.32 deg, about 4.98 held out (redteam finding 9).
+- **judgement:T1 - upheld, re-derived pose by pose.** All 11 full-CAD body contacts are scored contact poses of the
+  claim dumps (contact True, taken False). Built minus claim depth: +0.265..+0.524 mm on 9, +0.055 at (15,165,-60),
+  -0.206 at (15,105,15). No build-only pose.
+- **judgement:G4 - upheld.** msub_rest_bench.json: 50 of 204 rest poses under 1 deg (min 0.0 at (15,75,15)); m_sub
+  moved min 10.805. Small correction: the "30 of the 50 at elevation 60-119" counts workspace poses only; with clip
+  frames it is 33. B1 is open with the user.
+- **judgement:T5 - upheld.** Same depths as contact_depth; the full CAD presses 9.06 / 9.32 mm (bell crank) and
+  5.68-7.59 mm (link 1a) overhead. Mixed for the wearer, as stated.
+- **judgement:NEW-ws-inband - upheld.** probe_bench ws_elev90_140: inband14 0.8004, over14 0.1987, d_max 30.8 mm;
+  vs_l1.json R1 -0.94, R1-aim -1.22, R4 -1.39.
+
+Missed by the audit (for the next audit; not counted in this verdict):
+
+1. **Instrument: the idle check still fires on a read.** `tools/alignment_audit.py` line 570 matches the string
+   `knee_moved` anywhere in the model source, so `r.get("knee_moved")` (a read) counts as an assertion. Four skeptic
+   rulings have now refuted it on this row; the self-test reports it as a FALSE POSITIVE each run but does not fail,
+   because the row is not in LEADERS (line 787). Proposal (an instrument change, bump VERSION): match the assignment
+   `r\[["']knee_moved["']\]\s*=\s*True` (hits kneeless-roller:166 and kneeless-sidecar:150 only). Measured effect: idle
+   reads ok on this row; the two kneeless mutations still fire.
+2. **Instrument trap: the verifier's docstring prints `--set k=v`, the code takes only `--set=k=v`.** A robustness run
+   typed as documented silently measures the nominal config and labels nothing (this skeptic's first run: `sets` []).
+   No stored file is affected (each records the `--set=` form). Proposal: make the verifier refuse unknown argv or
+   accept both forms.
+3. **Reporting, runs against the design: the full-CAD attribution's "model" depth is not the claim's.**
+   `judge_r16s1/body_attrib_step1.json` reads model 8.50 vs the claim dump's 9.005 at (15,165,-60), 7.98 vs 9.055 at
+   (30,165,-45), 1.07 vs 1.216 at (15,105,15), so its "build excess 0.52-1.38 mm" on 7 poses and the EVOLUTION row's
+   "adds 0.5-1.4 mm on 7 of them, loses none" overstate the build's excess against the claim (+0.06..+0.52, and one pose
+   0.21 mm shallower). Not in the design's favour; same model-fit instrument issue as `model_own` 4.
+4. **Watch next: the CAD fix pass rebuilds the judged directory in place.** At 16:19 UTC
+   `user_style_slipper.py --out user_slipper_nose --link-margin 0 --l1b-margin 0.1 --skip-base-search --no-checks` was
+   running (not touched). The gen-7 judged files (scorecard, R16 step-1 attribution, M5 bounds) will sit next to an
+   unjudged build until it is re-judged; and link margin 0 drops link 2 onto the model strap. The next audit should see
+   judge_all + R16 step 1 + R7 (the run skips checks) + the M5 bounds re-run on the rebuilt files before any EVOLUTION /
+   dashboard number cites them, and compare body contacts against this file's 11.
+
+No gaming found. Final verdict: **WATCH**.
