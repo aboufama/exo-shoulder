@@ -21,7 +21,7 @@
  "v_inband10": 0.515,
  "v_gap": 18.51,
  "n_configs": 45,
- "complexity": 22.25,
+ "complexity": 18.25,
  "best_params": {
   "g": 2.3934,
   "beta": -176.684,

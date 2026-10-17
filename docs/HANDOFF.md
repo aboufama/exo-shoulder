@@ -446,6 +446,11 @@ designs (dipped-law-groove-knuckle-3r, seed-offset-3r-slides); every leader is w
      nose hole / crank pivot / lobe profile +-0.02 mm true position, r_c +-0.1 mm, assembly note "K phase at onset
      +0.75 +-0.3 deg, shim the dowel". Held-out th stays 5.068 with the lead (5.5 is not reachable by a lead). R17's
      forward-stroke twist is 4.97 of 5.0 deg at mu 0.15 (audit 14:03, rate + preload de-rated) - the thinnest margin.
+   - *Lead, 15:35 UTC (audit 15:17, ledger WATCH):* the full CAD user_slipper_nose is 8/19; its mu 0.15 forward bound is
+     5.00081 deg raw = FAIL (judge/dynamics.py now gates unrounded). The drive's horn rule caps mu at 0.108-0.113, so the
+     wear-test pass line is mu <= 0.105 (forward twist < 4.78 there) and the drawing should say so. The drawing's K-phase
+     tolerance "+0.75 +-0.3 deg" is wider than the red team's stack covers (+0.45 nets 1 held-out pose under th 5; the
+     high end pushes the horn PA past 43 at mu 0.12): tighten it (about +0.75 +0.15/-0.1) in the next CAD fix pass.
 2. **Reach is the gap.**
    - The lead's gap is reach 17.50 of 18.49 (ROUNDS round 10 results). **Score 95 is gap <= 13.75**: +18 workspace
      poses at the lead's in-band and contact, 0.278 points each (ROUNDS round 11 plan).

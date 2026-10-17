@@ -21,7 +21,7 @@
  "v_inband10": 0.5197,
  "v_gap": 18.64,
  "n_configs": 14,
- "complexity": 24.25,
+ "complexity": 20.25,
  "mechanism": {
   "active_dof": 3,
   "passive_trans": 0,

@@ -181,7 +181,7 @@
   "slipper_nose": 23.45
  },
  "n_configs": 15200,
- "complexity": 30.5,
+ "complexity": 26.5,
  "mechanism": {
   "active_dof": 3,
   "passive_trans": 0,

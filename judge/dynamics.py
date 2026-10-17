@@ -901,6 +901,10 @@ def summarise(des, tr, R, friction, speed, case):
                joint_speed_dps=[round(float(x), 1) for x in np.degrees(np.abs(qd).max(0))], arm_speed_dps=round(float(np.degrees(warm_w.max())), 1),
                speed_ratio_max=round(float(ratio.max()), 2), joint_acc_dps2=[round(float(x)) for x in np.degrees(np.abs(qdd).max(0))],
                tracking_deg=dict(peak=round(float(np.degrees(tt.max())), 2), rms=round(float(np.degrees(rms(tt))), 2), twist_peak=round(float(np.degrees(tw.max())), 2), swing_peak=round(float(np.degrees(sw.max())), 2)),
+               # the gate quantities UNROUNDED: the verdict compares these, the rounded fields are for display (alignment
+               # audit 2026-10-17 15:17: a 5.00081 deg twist read 5.0 and passed the <= 5.0 gate)
+               gate_raw=dict(twist_peak_deg=float(np.degrees(tw.max())), moment_gh_peak_Nm=float(Mgn.max()), moment_gh_rms_Nm=float(rms(Mgn)),
+                             force_peak_N=float(Fn.max())),
                config_dev_deg=[round(float(x), 2) for x in np.degrees(np.abs(q - qp).max(0))],
                amp_qs=dict(p95=round(float(np.percentile(amp, 95)), 2), max=round(float(amp.max()), 2)), cond_U_max=round(float(cond.max()), 1),
                stalls=dict(events=len(stall_ev), lags_over_10deg=sum(e["kind"].startswith("lag>10") for e in stall_ev), worst_ms=max([e["ms"] for e in stall_ev], default=0),
@@ -1194,6 +1198,8 @@ def rollup(C, N):
              frames_over_felt_max=max(c["drive"]["frames_over_felt"] for c in C.values()), contact_touch=any(c["contact"]["touch"] for c in C.values()),
              cuff_pressure_peak_kPa=max(c["cuff_pressure_kPa"]["peak"] for c in C.values()),
              contact_peak_N=max(c["contact"]["peak_N"] for c in C.values()), amp_qs_max=max(c["amp_qs"]["max"] for c in C.values()))
+    if all("gate_raw" in c for c in C.values()):
+        r["gate_raw"] = {k: max(c["gate_raw"][k] for c in C.values()) for k in ("twist_peak_deg", "moment_gh_peak_Nm", "moment_gh_rms_Nm", "force_peak_N")}
     if any("spare_drift_deg" in c for c in C.values()): r["spare_drift_max_deg"] = max(c.get("spare_drift_deg", 0) for c in C.values())
     if any("slaved" in c for c in C.values()):
         r["slaved_law_err_max_deg"] = max(max(v["law_err_deg"] for v in c["slaved"].values()) for c in C.values() if "slaved" in c)
@@ -1218,8 +1224,11 @@ def attribution(res, nom, s):
 
 def verdict(out, nom):
     T = THRESH; c = out["cases"][nom]; v = {}
-    def free(x): return bool(x["moment_gh_peak_Nm"] <= T["free_moment_gh_peak_Nm"] and x["moment_gh_rms_max_Nm"] <= T["free_moment_gh_rms_Nm"] and x["force_peak_N"] <= T["free_force_peak_N"]
-                             and x["lags_over_10deg"] == 0 and x["twist_peak_deg"] <= T["free_twist_peak_deg"] and x.get("spare_drift_max_deg", 0) <= T["free_spare_drift_deg"]
+    def free(x):
+        g = x.get("gate_raw") or dict(twist_peak_deg=x["twist_peak_deg"], moment_gh_peak_Nm=x["moment_gh_peak_Nm"], moment_gh_rms_Nm=x["moment_gh_rms_max_Nm"],
+                                      force_peak_N=x["force_peak_N"])          # results written before 2026-10-17 15:30 carry rounded values only
+        return bool(g["moment_gh_peak_Nm"] <= T["free_moment_gh_peak_Nm"] and g["moment_gh_rms_Nm"] <= T["free_moment_gh_rms_Nm"] and g["force_peak_N"] <= T["free_force_peak_N"]
+                             and x["lags_over_10deg"] == 0 and g["twist_peak_deg"] <= T["free_twist_peak_deg"] and x.get("spare_drift_max_deg", 0) <= T["free_spare_drift_deg"]
                              and x.get("slaved_law_err_max_deg", 0) <= T["free_spare_drift_deg"])
     v["moves_freely_nominal"] = free(c); v["drives_nominal"] = not c["lock_clips"]
     v["rule"] = (f"moves freely: |M_GH| peak <= {T['free_moment_gh_peak_Nm']} N.m and rms <= {T['free_moment_gh_rms_Nm']}, cuff force <= {T['free_force_peak_N']} N, cuff twist <= "

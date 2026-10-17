@@ -709,7 +709,7 @@
   }
  },
  "n_configs": 11576,
- "complexity": 28.5,
+ "complexity": 24.5,
  "mechanism": {
   "active_dof": 3,
   "passive_trans": 0,

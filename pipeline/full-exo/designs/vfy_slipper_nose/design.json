@@ -1,0 +1,761 @@
+{
+ "id": "user_slipper_nose",
+ "source": "docs/concepts/slipper-nose-knuckle-3r.md (the verified config: docs/concepts/rows/slipper-nose-knuckle-3r.json best_params on the claim model's PARAMS (SN_CELL=lead) = docs/concepts/verify/slipper-nose-knuckle-3r.py BEST, ang_min 25.2189, nose_r 1.1839, mu 0.087), fit on Bench(60,160) fast at fold margin 5.0 = the shape the verifier wore frozen on Bench(110,360) exact (v_gap 18.49, score 93.28, envelope-corrected 18.44; held out 23.45; min fold margin th 5.006)",
+ "params": {
+  "g": 2.3934,
+  "beta": -176.684,
+  "r_c": 15.3739,
+  "lift": 0.7882,
+  "hl": 1.9442,
+  "zr": 4.0293,
+  "s_arm": 4.0,
+  "r_lobe": 8.2661,
+  "nose_r": 1.1839,
+  "az2": 45.8211,
+  "el2": 41.0855,
+  "lE": 67.832,
+  "phiE": -2.7863,
+  "lc": 21.1499,
+  "phib": -58.8084,
+  "a1max": 58.7678,
+  "kK": 2.1534,
+  "smhi": 16.8433,
+  "bk1": 26.0,
+  "bk2": 38.0336,
+  "mu": 0.087,
+  "ang_min": 25.2189
+ },
+ "n_joints": 4,
+ "sliding_cuff": false,
+ "dof": 3,
+ "passive": {
+  "count": 2,
+  "translations": 0,
+  "rotations": 2,
+  "outside_dof_count": true,
+  "sensed": 0,
+  "kind": "flat two-pin knee closing the loop at the cuff (pins a, b parallel to J3; NO encoders - pose from the 3 hub encoders, user 2026-10-17); set by loop closure. K (4th revolute) is NOT a DOF: slaved to q2 by the roller-flank drive past the onset, spring-held on stop A below it; the bell crank is set by the law phi = |dK| / g",
+  "components": [
+   {
+    "pin": "a",
+    "between": "member 3 (E boss) / knee link",
+    "part": "MR63ZZ pair (3x6x2.5) in an O9 x 5.5 knee-link boss (J6 housing, 0.5 shoulder) on an ISO 8734 O3 m6 440C pin pressed H7/m6 in the E boss; DIN 6799 RS 2.3 e-clip over a 0.1 shim",
+    "stack_mm": 9.177,
+    "model_stack_mm": 4.8534,
+    "plates_mm": [
+     2.1767,
+     2.1767
+    ]
+   },
+   {
+    "pin": "b",
+    "between": "knee link / arm pad (cuff)",
+    "part": "MR63ZZ pair (as pin a), pin pressed H7/m6 in the arm pad",
+    "stack_mm": 9.177,
+    "model_stack_mm": 4.8534,
+    "plates_mm": [
+     2.1767,
+     2.1767
+    ]
+   }
+  ],
+  "knee_stop": {
+   "window_deg": [
+    25.2189,
+    154.7811
+   ],
+   "part": "tooth on the knee link vs the E strap's side (physical stop at 180 - ang_min; ang_min side never reached, the fold side of the knee)"
+  }
+ },
+ "joints": [
+  {
+   "joint": "J1",
+   "part": "O20 x 12.25 v5 hub, MR117-2RS pair, encoder",
+   "axis_offset_mm": 0.0
+  },
+  {
+   "joint": "K",
+   "part": "O20 v5 hub, MR117-2RS pair, cap 18.25 mm (clock spring: holds stop A, force-closes both rolling pairs); stops A / B = an opposed pair of O3 dowels in two 62.8-deg arc slots; slaved (no encoder)",
+   "axis_offset_mm": 0.0,
+   "passive": false,
+   "slaved": true,
+   "sensed": false
+  },
+  {
+   "joint": "J2",
+   "part": "O20 x 12.25 v5 hub, MR117-2RS pair, encoder; drive lobe on its rotor; q2 stops = O3 dowel in a 117.9-deg arc slot (folded stop q2lo, stop B at the drive's range)",
+   "axis_offset_mm": 0.0
+  },
+  {
+   "joint": "J3",
+   "part": "O20 x 12.25 v5 hub, MR117-2RS pair, encoder",
+   "axis_offset_mm": 13.84
+  }
+ ],
+ "drive": {
+  "kind": "slipper-nose: hub-2 rim lobe -> bell crank on link 1b (MR63ZZ pair on an O3 pin; follower on the short arm s_arm, bent long arm to r_c about hub K) -> pressed ISO 8734 O2.5 m6 440C dowel, nose ground O2.368 -> SLIDES (mu 0.087, a-C:H DLC, greased) on the conjugate spherical flank wire-EDM'd into link 1a's lateral boss (5-axis / tilting-head wire-EDM); one clock spring on K force-closes both rolling pairs; no rod, no ball links",
+  "components": [
+   "MR63ZZ 3x6x2.5 x 2 (crank pivot)",
+   "ISO 8734 O3 m6 pin pressed H7/m6 in link 1b + DIN 6799 RS 2.3",
+   "ISO 8734 O2.5 x 6 m6 440C nose dowel (nose ground O2.368 g5)",
+   "follower on the short arm (L2)"
+  ],
+  "lobe": {
+   "r_lobe": 8.2661,
+   "r_at_stopB": 9.717,
+   "past_O20_skirt_mm": -0.283,
+   "sweep_deg": 23.103,
+   "band_mm": [
+    3.65,
+    6.65
+   ],
+   "crank_axis_to_hub2_axis_mm": 17.72,
+   "boss_flank_to_hub2_axis_mm": 12.72,
+   "gap_lobe_crest_to_boss_flank_mm": 3.01,
+   "phi_at_stopB_deg": 20.79,
+   "note": "inside hub 2's O20 skirt over the whole stroke (r <= HUB_R): the follower (the crank's short arm s_arm, at the boss's hub-side flank) that rides it reaches through a window in hub 2's cap ring - an L2 detail; the verified model samples neither the lobe nor the follower"
+  },
+  "arm": {
+   "root_mm": 4.0,
+   "stations": 27,
+   "raised_root_rows": 4,
+   "lifted_over_strap_mm": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.198,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ],
+   "level_root_mm": 66.37,
+   "level_tip_mm": 62.96
+  },
+  "lug": {
+   "band_rows": 5,
+   "root_rows": 5,
+   "s_mm": [
+    0.3,
+    1.73,
+    3.15,
+    4.58,
+    6.0
+   ],
+   "shell_r_mm": 59.808,
+   "r_from_uK_mm": [
+    10.5,
+    23.03
+   ],
+   "nose_path_clear_mm": 0.155,
+   "stroke_deg": 49.75
+  },
+  "boss_level_mm": 66.371,
+  "nose_centre_mm": [
+   -14.018,
+   59.019,
+   -8.884
+  ],
+  "nose_r_from_GH_mm": 61.308,
+  "nose_r": 1.1839,
+  "mu": 0.087,
+  "r_c": 15.3739,
+  "beta_deg": -176.684,
+  "g": 2.3934,
+  "sig": 1.0,
+  "s_arm": 4.0,
+  "r_lobe": 8.2661,
+  "hl": 1.9442,
+  "lift": 0.7882,
+  "arc_vs_model_mm": 0.0,
+  "dK_lim_deg": 49.75,
+  "cam": {
+   "dK_lim": 49.8,
+   "why_lim": "pressure_horn",
+   "pa_crank_rest": 29.5,
+   "pa_horn_rest": 23.5,
+   "pa_crank_max_taken": 29.5,
+   "pa_horn_max_taken": 36.1,
+   "flank_rho_min": 1.3,
+   "contact_r": [
+    14.9,
+    19.8
+   ],
+   "clear_hubK_min": 1.31,
+   "clear_roll_hubK_min": 3.92,
+   "clear_lowarm_lug_min": 15.71,
+   "phi_max_taken": 19.3,
+   "crest_exact": 9.62,
+   "arm_len": 53.3,
+   "arc_deg": 125.0,
+   "lug_r_max": 23.0,
+   "nose_r": 1.1839,
+   "mu": 0.087,
+   "friction_deg": 4.97,
+   "pa_kin_max": 38.03,
+   "pa_eff_horn": 41.1,
+   "pa_eff_crank": 34.5
+  },
+  "model_sidecar": {
+   "boss_level": 62.8,
+   "lev_L1b": 59.7,
+   "arm_tip_level": 63.0,
+   "g": 2.393,
+   "sig": 1.0,
+   "r_c": 15.37,
+   "beta": -176.68,
+   "arm_len": 53.3,
+   "arc_deg": 125.0,
+   "rssr_closed": true,
+   "pa_crank_rest": 29.5,
+   "pa_horn_rest": 23.5,
+   "vel_angle_rest": 2.1,
+   "pa_crank_max_taken": 29.5,
+   "pa_horn_max_taken": 36.1,
+   "flank_rho_min": 1.3,
+   "contact_r": [
+    14.9,
+    19.8
+   ],
+   "clear_hubK_min": 1.31,
+   "clear_roll_hubK_min": 3.92,
+   "clear_lowarm_lug_min": 15.71,
+   "n_lowarm": 32,
+   "phi_max_taken": 19.3,
+   "cprog": 0.0,
+   "crest_exact": 9.62,
+   "dK_lim": 49.8,
+   "why_lim": "pressure_horn",
+   "law_dK_max": 62.7,
+   "lug_r_max": 23.0,
+   "nose_r": 1.1839,
+   "mu": 0.087,
+   "friction_deg": 4.97,
+   "pa_kin_max": 38.03,
+   "pa_eff_horn": 41.1,
+   "pa_eff_crank": 34.5
+  },
+  "stack_fix": {
+   "boss_underside_model_mm": 62.821,
+   "boss_underside_built_mm": 66.371,
+   "raised_mm": 3.55,
+   "why": "the model stacks the boss on its 6 link-1b strap samples nearest the pivot; the built boss + the arm root sit on the strap's highest top under the O10 footprint + 0.15 (raised only if the strap climbs there); the arm keeps the model's levels from there, the nose / flank (the cam) are unchanged"
+  }
+ },
+ "kinematics": {
+  "az": 95.3929,
+  "el": 67.89739999985892,
+  "a": [
+   37.551659306338074,
+   57.218408376139465
+  ],
+  "w": [
+   77.25454830347874,
+   -8.200075855810184
+  ],
+  "branch": -1,
+  "order": [
+   0,
+   1,
+   1
+  ],
+  "axis_points_mm": [
+   [
+    0.0,
+    0.0,
+    0.0
+   ],
+   [
+    -0.0,
+    0.0,
+    -0.0
+   ],
+   [
+    -0.739,
+    -13.446,
+    -3.179
+   ]
+  ],
+  "axes": [
+   [
+    0.035363,
+    0.926512,
+    0.374601
+   ],
+   [
+    -0.465446,
+    0.616819,
+    0.63474
+   ],
+   [
+    -0.139116,
+    -0.22062,
+    0.965388
+   ]
+  ],
+  "axis_line_offsets_mm": [
+   0.0,
+   0.0,
+   13.84
+  ],
+  "u2_check_deg": 9e-05,
+  "seats": {
+   "az1": 95.3929,
+   "el1": 67.8974,
+   "az2": 45.8211,
+   "el2": 41.0855,
+   "wd": 66.8662,
+   "wa": -10.6559,
+   "b3": 0.329
+  },
+  "knee": {
+   "lE": 67.832,
+   "lc": 21.1499,
+   "phiE": -2.7863,
+   "phib": -58.8084,
+   "stk": 4.8534,
+   "ang_min": 25.2189
+  },
+  "knee_mid_m_mm": [
+   -11.739,
+   1.163,
+   0.0
+  ],
+  "hub_r_mm": [
+   10.0,
+   10.0,
+   10.0
+  ],
+  "knuckle": {
+   "uK": [
+    -0.314411,
+    0.944796,
+    0.092227
+   ],
+   "bk1": 26.0,
+   "bk2": 38.0336,
+   "psiA_deg": -71.686,
+   "a1max": 58.7678,
+   "dK_stop_B_deg": -62.849,
+   "q2_stops_deg": [
+    102.068,
+    -15.824
+   ],
+   "smlo": 5.0,
+   "smhi": 16.8433,
+   "slaved": {
+    "law": "dK = kK (q2 - q2hi) along the stretching sense (lin), cut at the drive's own range dK_lim",
+    "kK": 2.1534,
+    "q2_onset_deg": 7.279,
+    "s_q": -1.0,
+    "dK_lim_deg": 49.75,
+    "r_lobe": 8.2661,
+    "s_arm": 4.0,
+    "g": 2.3934,
+    "beta": -176.684,
+    "r_c": 15.3739,
+    "lift": 0.7882,
+    "hl": 1.9442,
+    "zr": 4.0293
+   },
+   "note": "az/el/a/w = the 3R with K on stop A; past the onset q2hi K is SLAVED to q2 by the slipper-nose drive (lobe -> bell crank -> sliding dowel nose -> conjugate flank on link 1a; 3 active DOF; K never free, never read); the bell crank (dk) is a posed side member of link 1b"
+  }
+ },
+ "base": {
+  "mount": "girdle",
+  "chain": "slipper_nose_knuckle",
+  "note": "base rides the scapula on the user's scapula handler, carried directly at the J1 hub ring (no tab)"
+ },
+ "built_with": "pipeline/conformal/param_cad/user_style_slipper.py (user_style_minarc / user_style_pinknee parts: v5 O20 hubs, K plain clock-spring cap, link 1a as one line/arc chain (60-deg ramp, machined) + the r 1.25 flank lug, 4-strip machined bars 1b / 2, O3 dowel-in-arc-slot stops (K opposed pair, J2 single at the drive's range), member 3, knee link with MR63ZZ-pair bosses + knee stop, BOTTOM fused with the pad mount; the drive: lobe ring, STRADDLE bell crank (2 x 683ZZ around the MR63ZZ follower), ISO 8734 O2.5 nose dowel on the DLC flank) on the L1 design's frames (l1_slipper-nose)",
+ "label": "slipper-nose-knuckle-3r (verified config, mu 0.087, ang_min 25.22), full CAD in the user's style",
+ "fit_bench": [
+  60,
+  160
+ ],
+ "fold_margin": 5.0,
+ "build_fixes": {
+  "k_pair": true,
+  "j2_single_dowel_push_limit": true,
+  "e_cap": true,
+  "knee_stop_deg": 154.7811,
+  "ang_min": 25.2189,
+  "knee_pins": "MR63ZZ pairs",
+  "link1a": "line/arc chain (gen-6 fix)"
+ },
+ "fits": [
+  {
+   "where": "nose dowel in the crank arm's O6 tip boss",
+   "fit": "ISO 8734 2.5 m6 x 6 type C (1.4125, >= 52 HRC cert), reamed O2.495-2.500 (2-13 um interference with m6; H7/m6 alone is a transition fit with 0 N pull-out possible), Loctite 648, pressed 3.0 mm with anti-seize, flush with the arm's outer face; a-C:H DLC with the flank batch"
+  },
+  {
+   "where": "conjugate flank on link 1a",
+   "fit": "exact ruled surface, 4-axis UV wire EDM + skim (contours flank_bench_r125.csv top / bot at +-1.5 mm), profile +-0.02 (target +-0.01), ruling parallelism to the nose axis <= 0.005 over 2.2 mm, a-C:H DLC 2-3 um on a Cr / Si interlayer (< 250 C), PAO grease without EP additives; the CAD shows the mid-plane section extruded along z_c"
+  },
+  {
+   "where": "crank pivot pin in link 1b",
+   "fit": "O3 17-4PH H900 pin, ground m6 over its 3 mm press length in link 1b (H7) and h5 over the 683ZZ inner rings; DIN 6799 RS 2.3 e-clip in a groove with a 0.3 mm land, wave washer under it"
+  },
+  {
+   "where": "crank pivot bearings (2 x 683ZZ straddling the follower in the O10 x 10 boss)",
+   "fit": "pin O3 h5 17-4PH H900 (pressed H7/m6 in link 1b), housings O7 J6 at both boss ends with 0.5 mm floors to the follower pocket, wave washer 5-10 N preload under the DIN 6799 RS 2.3 clip"
+  },
+  {
+   "where": "lobe follower (MR63ZZ in the crank's clevis pocket)",
+   "fit": "pin O3 h5 pressed H7/m6 through both clevis prongs (flush), 2 x 0.2 mm inner-ring shims, pocket 3.0 x O7 (0.25 axial, 0.5 radial running)"
+  },
+  {
+   "where": "knee pins a, b (2 x MR63ZZ each, knee link boss O9 x 5.5)",
+   "fit": "pin ISO 8734 O3 m6 pressed H7/m6 in the lower plate (E boss / arm pad, full plate depth); bearing seats shaft O3 j5 on the pin's free length, housing O6 J6 with a 0.5 mm shoulder; DIN 6799 RS 2.3 e-clip over a 0.1 shim"
+  },
+  {
+   "where": "stop dowels (K pair, J2)",
+   "fit": "O3 H7/m6 press in the upper boss (ISO 8734 3 m6); slot width 3 + 2 x clearance, ends = the stops"
+  },
+  {
+   "where": "hubs J1 / K / J2 / J3 (v5 O20 stack)",
+   "fit": "MR117-2RS pair: shaft O7 j5 / housing O11 J6 (the v5 stack drawing)"
+  },
+  {
+   "where": "crank-to-link 1a / link 1b running faces",
+   "fit": "ISO 2768-f (+-0.05) on these 5-axis Ti faces (the gen-6 check: 0.108 mm at dK -44.87 on the roller arm)"
+  },
+  {
+   "where": "lobe ring on hub 2",
+   "fit": "bore O20 H7 on the J2 upper ring / cap skirt O20 g6, keyed by an O1 dowel at the onset phase + 0.35 deg of q2 (the red team's +0.75 deg K lead)"
+  },
+  {
+   "where": "knee pin e-clips",
+   "fit": "DIN 6799 RS 2.3 in a O2.3 x 0.6 groove (H13) with a 0.3 mm land to the pin end, 0.1 mm shim under the clip"
+  },
+  {
+   "where": "K phase (assembly; docs/HANDOFF.md 14:30 + docs/research/slipper_flank_robust.md)",
+   "fit": "build the +0.75 deg K lead: lobe-ring key dowel at the onset phase + 0.35 deg of q2, J2 stop B slot end at q2 -15.47 (the CAD draws the nominal -15.82 = the loaded state); keep the verified flank (beta -176.684, no beta step); nose hole / crank pivot / lobe profile +-0.02 mm true position, r_c +-0.1 mm; assembly note: K phase at the onset +0.75 +-0.3 deg, shim the key dowel"
+  }
+ ],
+ "faces_mm": [
+  50.45,
+  62.04,
+  78.21
+ ],
+ "fK_mm": 55.12,
+ "tr": 88.63,
+ "stack_mm": {
+  "pin_stack_mm": 4.8534,
+  "plate_tp": 2.1767,
+  "run": 0.5,
+  "knee_level_tr": 88.627,
+  "f": [
+   50.453,
+   62.043,
+   78.214
+  ],
+  "fK": 55.117,
+  "capK_mm": 6.0,
+  "hubK_crown_mm": 18.25,
+  "boss": [
+   88.627,
+   90.804
+  ],
+  "knee": [
+   91.304,
+   93.481
+  ],
+  "E": {
+   "x": [
+    8.0,
+    63.33
+   ],
+   "under": [
+    78.21,
+    88.63
+   ],
+   "thin_from": 61.0,
+   "rim": 61.83,
+   "cap": 90.804,
+   "top_before_cap": 90.804,
+   "stations_capped": 0,
+   "min_thickness": 2.177,
+   "knee_link_underside": 91.304
+  },
+  "knee_link_mm": [
+   33.15,
+   10.0,
+   2.1767
+  ],
+  "hubs_r": [
+   10.0,
+   10.0,
+   10.0,
+   10.0
+  ],
+  "retainer": [
+   96.904,
+   97.804
+  ],
+  "full_pin_stack_mm": 9.177,
+  "stops": {
+   "K": {
+    "stop_A_deg": 0.0,
+    "stop_B_deg": -62.849,
+    "a1max": 58.7678,
+    "travel_deg": 62.849,
+    "dowel_home_angle_deg": 259.0,
+    "dowel_home_angles_deg": [
+     259.0,
+     439.0
+    ],
+    "pair": true,
+    "slot_deg": [
+     184.84,
+     270.31
+    ],
+    "clearance_to_lower_strap_deg": 13.95,
+    "dowel_mm": [
+     3.0,
+     0.5,
+     6.15
+    ],
+    "slot_r_mm": 7.75,
+    "slot_w_mm": 3.1,
+    "end_clearance_mm": 0.02,
+    "frame": "angles in frame_of(axis) of the lower member: dowel centre = home angle + joint angle"
+   },
+   "J2": {
+    "q2_stops_deg": [
+     102.068,
+     -15.824
+    ],
+    "q2_onset_deg": 7.279,
+    "window_deg": [
+     -15.824,
+     102.068
+    ],
+    "stop_B": "the drive's own range: |dK| = dK_lim 49.75 deg (pressure_horn) at t = 23.10 deg past the onset",
+    "travel_deg": 117.892,
+    "dowel_home_angle_deg": 196.0,
+    "dowel_home_angles_deg": [
+     196.0
+    ],
+    "pair": false,
+    "slot_deg": [
+     168.87,
+     309.38
+    ],
+    "clearance_to_lower_strap_deg": 76.71,
+    "dowel_mm": [
+     3.0,
+     0.5,
+     6.15
+    ],
+    "slot_r_mm": 7.75,
+    "slot_w_mm": 3.1,
+    "end_clearance_mm": 0.02,
+    "frame": "angles in frame_of(axis) of the lower member: dowel centre = home angle + joint angle"
+   }
+  },
+  "drive": {
+   "lobe": {
+    "r_lobe": 8.2661,
+    "r_at_stopB": 9.717,
+    "past_O20_skirt_mm": -0.283,
+    "sweep_deg": 23.103,
+    "band_mm": [
+     3.65,
+     6.65
+    ],
+    "crank_axis_to_hub2_axis_mm": 17.72,
+    "boss_flank_to_hub2_axis_mm": 12.72,
+    "gap_lobe_crest_to_boss_flank_mm": 3.01,
+    "phi_at_stopB_deg": 20.79,
+    "note": "inside hub 2's O20 skirt over the whole stroke (r <= HUB_R): the follower (the crank's short arm s_arm, at the boss's hub-side flank) that rides it reaches through a window in hub 2's cap ring - an L2 detail; the verified model samples neither the lobe nor the follower"
+   },
+   "arm": {
+    "root_mm": 4.0,
+    "stations": 27,
+    "raised_root_rows": 4,
+    "lifted_over_strap_mm": [
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.198,
+     0.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "level_root_mm": 66.37,
+    "level_tip_mm": 62.96
+   },
+   "lug": {
+    "band_rows": 5,
+    "root_rows": 5,
+    "s_mm": [
+     0.3,
+     1.73,
+     3.15,
+     4.58,
+     6.0
+    ],
+    "shell_r_mm": 59.808,
+    "r_from_uK_mm": [
+     10.5,
+     23.03
+    ],
+    "nose_path_clear_mm": 0.155,
+    "stroke_deg": 49.75
+   },
+   "boss_level_mm": 66.371,
+   "nose_centre_mm": [
+    -14.018,
+    59.019,
+    -8.884
+   ],
+   "nose_r_from_GH_mm": 61.308,
+   "nose_r": 1.1839,
+   "mu": 0.087,
+   "r_c": 15.3739,
+   "beta_deg": -176.684,
+   "g": 2.3934,
+   "sig": 1.0,
+   "s_arm": 4.0,
+   "r_lobe": 8.2661,
+   "hl": 1.9442,
+   "lift": 0.7882,
+   "arc_vs_model_mm": 0.0,
+   "dK_lim_deg": 49.75,
+   "cam": {
+    "dK_lim": 49.8,
+    "why_lim": "pressure_horn",
+    "pa_crank_rest": 29.5,
+    "pa_horn_rest": 23.5,
+    "pa_crank_max_taken": 29.5,
+    "pa_horn_max_taken": 36.1,
+    "flank_rho_min": 1.3,
+    "contact_r": [
+     14.9,
+     19.8
+    ],
+    "clear_hubK_min": 1.31,
+    "clear_roll_hubK_min": 3.92,
+    "clear_lowarm_lug_min": 15.71,
+    "phi_max_taken": 19.3,
+    "crest_exact": 9.62,
+    "arm_len": 53.3,
+    "arc_deg": 125.0,
+    "lug_r_max": 23.0,
+    "nose_r": 1.1839,
+    "mu": 0.087,
+    "friction_deg": 4.97,
+    "pa_kin_max": 38.03,
+    "pa_eff_horn": 41.1,
+    "pa_eff_crank": 34.5
+   },
+   "model_sidecar": {
+    "boss_level": 62.8,
+    "lev_L1b": 59.7,
+    "arm_tip_level": 63.0,
+    "g": 2.393,
+    "sig": 1.0,
+    "r_c": 15.37,
+    "beta": -176.68,
+    "arm_len": 53.3,
+    "arc_deg": 125.0,
+    "rssr_closed": true,
+    "pa_crank_rest": 29.5,
+    "pa_horn_rest": 23.5,
+    "vel_angle_rest": 2.1,
+    "pa_crank_max_taken": 29.5,
+    "pa_horn_max_taken": 36.1,
+    "flank_rho_min": 1.3,
+    "contact_r": [
+     14.9,
+     19.8
+    ],
+    "clear_hubK_min": 1.31,
+    "clear_roll_hubK_min": 3.92,
+    "clear_lowarm_lug_min": 15.71,
+    "n_lowarm": 32,
+    "phi_max_taken": 19.3,
+    "cprog": 0.0,
+    "crest_exact": 9.62,
+    "dK_lim": 49.8,
+    "why_lim": "pressure_horn",
+    "law_dK_max": 62.7,
+    "lug_r_max": 23.0,
+    "nose_r": 1.1839,
+    "mu": 0.087,
+    "friction_deg": 4.97,
+    "pa_kin_max": 38.03,
+    "pa_eff_horn": 41.1,
+    "pa_eff_crank": 34.5
+   },
+   "stack_fix": {
+    "boss_underside_model_mm": 62.821,
+    "boss_underside_built_mm": 66.371,
+    "raised_mm": 3.55,
+    "why": "the model stacks the boss on its 6 link-1b strap samples nearest the pivot; the built boss + the arm root sit on the strap's highest top under the O10 footprint + 0.15 (raised only if the strap climbs there); the arm keeps the model's levels from there, the nose / flank (the cam) are unchanged"
+   }
+  },
+  "knee_pins": {
+   "kind": "MR63ZZ pair",
+   "boss": [
+    91.304,
+    96.804
+   ],
+   "boss_d": 9.0,
+   "proud_of_bar_mm": 3.323,
+   "model_stack_mm": 4.8534,
+   "built_stack_mm": 9.177
+  },
+  "knee_stop": {
+   "ang_stop": 154.7811,
+   "side": 1.0,
+   "alpha_home_deg": 123.978,
+   "check": {
+    "poses": 27,
+    "max_err_deg": 0.0,
+    "sides": [
+     1
+    ]
+   },
+   "tooth_r_min": 7.889,
+   "face": {
+    "s": [
+     6.8,
+     9.2
+    ],
+    "l": 4.0,
+    "z": [
+     89.304,
+     90.804
+    ]
+   },
+   "contact_area_mm2": 3.6,
+   "model_window_edge_deg": 154.7811,
+   "fit_bench_knee_max_deg": 151.948,
+   "fit_bench_poses_past_stop": 0
+  }
+ },
+ "bench": {
+  "near_touch_gap": 13.0,
+  "reach": 0.775,
+  "follow": 1.0,
+  "inband14": 0.895,
+  "contact": 0.0,
+  "inband10": 0.5128
+ },
+ "note": "R17's dynamics judge orders posed groups as a serial chain (base, l<k>[a-z], cuff); the drive's side member dk rides link 1b (build.json 'slaved', drive_groups)",
+ "level": "L2 user-style (full CAD of the generation-7 winner)",
+ "l1_design": "l1_slipper-nose",
+ "drive_build": {
+  "kind": "slipper-nose (docs/research/slipper_mechanism_redteam.md section 6): lobe ring (l2) -> MR63ZZ follower at a_s 6.5 / psi 216 between the two 683ZZ of the straddle bell crank (dk, O3 pin in link 1b) -> bent arm -> ISO 8734 O2.5 nose (DLC, mu 0.087) sliding on the r 1.25 conjugate flank (4 arcs, UV wire EDM, DLC) on link 1a's lug (l1a); one clock spring in K's cap closes both pairs",
+  "nose_r": 1.25,
+  "mu": 0.087,
+  "crank_raise_mm": 3.974,
+  "follower_shift_mm": 1.312,
+  "kK": 2.1534,
+  "g": 2.3934
+ }
+}
