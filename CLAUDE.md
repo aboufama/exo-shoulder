@@ -31,7 +31,11 @@ skin-normal-3r-pin-knee.md lines 565-568), sits outside the DOF count like the c
 tools/simplicity.py (record key mechanism.cuff_knee, simplicity v2.1: the knee's closure loop is free too). Lead's
 build rules that follow (2026-10-17, from the audit): the knee pins are built as MR63ZZ ball-bearing pairs (with
 plain iglidur pins R17 fails: ~10 deg cuff twist, ~10 N), and the knee window [ang_min, 180 - ang_min] is a physical
-knee stop the model checks like the J2 stops. (6) Sensing is OUT OF SCOPE (user 2026-10-17: "dont wory about the sensor stuff the purpose of this is to find a
+knee stop the model checks like the J2 stops. (7) CPU-farm spending APPROVED by the user 2026-10-17 ~05:20 UTC ("yes they can spend, i want higher scores! get to
+work and do it well!"): agents may run tools/cloud_run.py batches on the exo-cpu1 CPU endpoint within $8 per 12 hours
+(until 2026-10-17 ~17:20 UTC; renew with the user after). GPU renders (exo-blender-cycles) still need a separate yes.
+Keep workersMin 0; tools/runpod_guard.py audit before and after each batch.
+(6) Sensing is OUT OF SCOPE (user 2026-10-17: "dont wory about the sensor stuff the purpose of this is to find a
 kinematic solution if we sensor every joint we can just use inverse kinematics to get a perfect position"): encoders
 cost 0 complexity (tools/simplicity.py v2.2), and no agent spends time on sensing, determinacy-from-encoders or
 encoder-value analysis. DOF counting is unchanged: a joint in the shoulder chain is a joint (pick1 = 4 DOF); the cuff
