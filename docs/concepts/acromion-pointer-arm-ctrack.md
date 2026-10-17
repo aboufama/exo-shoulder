@@ -27,3 +27,55 @@ Preview: `docs/concepts/viz/concepts/acromion-pointer-arm-ctrack.js`. Round J1 (
    alignment auditor, and the red-team list: rest, overhead (elev >= 140), across-body, behind-the-back, the pose
    that ends the carriage's travel, the anteromedial track end against the chest, hub 1 when the arm comes nearest
    to the gimbal pole, and the radial slide's travel (the spec's hidden stand-up).
+
+## Kinematics as built (spec fixes in **bold**)
+
+- J1 axis a1 = scapula-fixed `bvec(az, el)` through GH; J2 axis u2 = `K.closure(a1, d, al12, al23, sigma)` (90/90 =
+  the spec's orthogonal gimbal, u2 = sigma unit(a1 x d)); d = the GH -> elbow axis (body_pose humerus frame).
+  Pointing frame r_ref = unit(u2 - (u2.d) d), t_ref = d x r_ref. The carriage sits at angle thc about d from r_ref;
+  its place on the arm th_arm (0 lateral, +90 posterior) is the third active coordinate. Taken only if the gimbal is
+  >= 5 deg (the user's fold margin, `K.FOLD_MARGIN`) from its fold/poles and the 24 mm carriage stays on the track.
+- **The twist window is measured first, per J1 seat** (circular sliding window over the closing poses, best thc):
+
+  | J1 seat (bvec az, el) | reach ceiling, W 103 | W 133 | W 176 | W 200 | note |
+  |---|---|---|---|---|---|
+  | (-50..-30, -10..0) posterior-medial | 0.69 | 0.84 | 0.97 (360 ws) | 0.99 | **not a seat**: the GH ray runs under the scapula into the trunk, hub 1 / link 1 park at 400 mm (k0-k3) |
+  | (-20..0, -10..10) back of the shoulder | 0.65-0.675 | 0.78-0.81 | 0.92 (0, 0) | 0.94 | housable; (0, 0) flips 44 of 60 clip frames (reaching forward passes the pole) |
+  | (30, 0) posterolateral | | | 0.886 | 0.914 | |
+  | (90, 40) / (30, 40) / (0, 60) / **(30, 70) acromion top** (spec sdir(40, 0) ~ here) | | | 0.62-0.84 | 0.68-0.91 | the overhead arm swings the twist frame: the acromion seat is the WORST class |
+
+  (W = the carriage's usable travel = track span - the carriage's own 27 deg; Bench(60, 160) ws unless noted; the
+  spec's "311-353 deg for the functional workspace" is the 100 % number, the 90 % number is 148-200 deg.)
+- **The arm's torso-free arc (the class limiter, measured on the raw posed skin).** Radial skin march from the humeral
+  axis outward (3 mm window), every bench pose, stations s 25-240 mm: the share of poses in which the torso, the axilla
+  or the folded forearm sits on that ray within 3 mm of the arm (an arm-fixed part there is in contact):
+
+  | station s | arc with <= 1-2 % blocked (p95 skin radius sane) | blocked share beyond it |
+  |---|---|---|
+  | 25-90 (deltoid) | -55 .. +50 deg (105 deg) | 6-33 % anterior (-65..-111), 2-20 % posterior (+61..+118) |
+  | 150 | -8 .. +84 (92 deg) | 3-30 % |
+  | 200-240 (distal) | -20 .. +85 (105 deg) | 2-22 % (the forearm folds onto the anterior arm) |
+
+  So an ARM-fixed C-track has the same wall as pointer-cslide's pointing-frame band: ~105 deg of clean arc at any
+  station -> ~80 deg of carriage travel -> reach ceiling ~0.54 (W 78); every degree beyond it buys reach with torso
+  contact on the track.
+- **The spec's radial slide stands up.** The skin radius under the track spans 58-89 mm over the arc the carriage
+  uses (track_R of the best configs); the slide-mode CMA optimum needs 20-34 mm of radial travel (+ 8 mm block) - a
+  skin-normal passive slide that CLAUDE.md rules out at this size. **Screened build: `circ=1`** - the track's top is a
+  circular race about the humeral axis (radius = its highest skin face + 3; the body under it skin-fitted, a saddle -
+  pointer-cslide's lesson 2), the carriage is rigid on L2: 0 passive joints, 3 active. Cost: the carriage floats
+  18-32 mm over the skin (race_float 23-26 mm median), in band 0.00.
+- **Track fitted from the arm axis, not on GH rays** (pointer-cslide lesson 3, measured again here: GH rays at s 90
+  run 100+ mm inside the arm and jump over the torso; 30-50 % of the track samples parked at 400 mm, contact 0.73).
+  A pose where the torso reaches the arm-fixed track is a contact pose (the fit ignores blocked rays and takes the
+  0.85-1.0 quantile of the arm's own skin).
+- The track is the arm end (BOTTOM cut and merged into it): no K7 neck crosses the carriage's path.
+
+## Sweep (Bench(60, 160) fast grid cache, K3 march, K2 dense, K6 + `over`, local niced, farm closed)
+
+| stage | configs | best gap | note |
+|---|---|---|---|
+| k0-k3, early model versions (GH-ray track, posterior-medial J1) | 4 | 166.46 | superseded: track parked / hub 1 not seated |
+| coarse grid: J1 (-20 / 0, -10 / 10), s_t 40 / 70, arc [-60, 55] / [-70, 75], circ 1 / 0 | 32 | 118.93 (slide) / **118.96 (race)** | thc = densest window |
+| CMA-ES (own compact implementation), slide mode, from k15 | ~40 | 109.88 (k33) | stopped: the slide is not buildable (34 mm radial travel) |
+| CMA-ES, race mode (two seeds) | see row | see row | 10 dims: az, el, s_t, tc, tw, dthc, qt, q, al12, al23 |

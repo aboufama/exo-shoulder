@@ -2,7 +2,7 @@
  {
   "id": "R1",
   "name": "Proximity: covered skin 2-14 mm from the metal while following (user 2026-10-15: pass at 14 mm, aim for 10)",
-  "value": 0.8109500242966065,
+  "value": 0.8118144612080511,
   "unit": null,
   "target": ">= 0.9",
   "status": "FAIL",
@@ -11,7 +11,7 @@
  {
   "id": "R1-aim",
   "name": "Aim: the same at 2-10 mm (the 1 cm rule)",
-  "value": 0.47431306960132746,
+  "value": 0.4753555280955338,
   "unit": null,
   "target": ">= 0.9",
   "status": "FAIL",
@@ -38,7 +38,7 @@
  {
   "id": "R4",
   "name": "Overhead works (Raise overhead clip score) (14 mm band)",
-  "value": 0.7308386334122786,
+  "value": 0.7315371695437398,
   "unit": null,
   "target": ">= 0.8",
   "status": "FAIL",

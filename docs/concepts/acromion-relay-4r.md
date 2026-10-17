@@ -110,4 +110,56 @@ The stop-relay's "static gains are islands" verdict (its section 5: connected 0.
 was the 360-node instrument. On the full grid, 0.91 of the ws poses are reachable by continuous motion, and 23-24 of
 the 28 overhead poses.
 
-## Results
+### The stop-relay re-measured under the full-grid flood (INSTRUMENT change, the design is unchanged)
+
+stop-relay-rocker-3r C best (k4771: seats 98.84 / 64.44, a1 41.76 / a2 72.34, J3 wdir(83.01, -15.19), beta 28.83,
+phi 324.51, m_lo 10.73 / m_hi 10.25, qmax 69.1, overhead-relay only), all hubs at O20 (the user's ruling: no O15).
+Measured on Bench(60,160) fast with the kit checks, its own model file, and only connected() swapped:
+
+| instrument | gap | reach | relay ws poses taken | islands dropped |
+|---|---|---|---|---|
+| static (connect 0) | 43.09 | 0.675 | 7 | - |
+| old connected() (360-node bench graph) | **47.75** | 0.631 | 0 | 7 |
+| full-grid flood (tools/spare_flood.py) | **43.09** | 0.675 | 7 | **0** |
+
+The kinematic picture on Bench(110,360) ws: plain 0.644, sparse 0.647, static = full-grid connected = 0.764, and
+overhead 11 -> 16 / 28.
+
+- Under the corrected instrument, every static relay pose of the C best is reachable by continuous motion. The
+  instrument change is worth 4.66 gap points on this config.
+- The proposer quoted 43.37 -> 38.75. The direction and the sign agree; that pair was not reproduced on this config.
+- The stop-relay's death still stands on its numbers. Its relay was lo-side only, and Bench(60,160) overhead reach is
+  0 / 12 even statically. Its hub 2 is 0.70 in band at the back-of-shoulder seat, and reach is its limiter.
+
+## Results (Bench(60,160) fast, kit checks K1-K7 + dense K2 on q0..q3, crowns / walls of all 4 hubs, near-touch objective, islands dropped by the full-grid flood)
+
+Gate 0 is two CMA-ES runs: clampA from the pole60 cell and clampC from the pole20 cell, both sigma -1. A twin-cell run
+was started and stopped after 1 configuration because the first twin flood was slow. Totals: 555 configurations,
+sweep `docs/concepts/sweeps/acromion-relay-4r.json`.
+
+**Best (clampC-g31-1)**, near-touch **42.74** (score 84.46), plain 41.62:
+
+- Metrics: reach 0.875, follow 1.0, in-band14 0.503, in-band10 0.333, contact 0.005, min metal-skin 0.63 mm.
+- Overhead: ws 6 / 12, clip 5 / 5.
+- Margins: min th margin 5.05, min sub-chain margin 7.91.
+- J0: q0 -11.5..+38.5 (T_eff 47). Relay ws poses taken: 14, and the flood dropped 0 islands (grid connectivity 0.836).
+
+Parameters: az_c 43.15, el_c 88.23, a0 28.30, T 47.4, a1 50.21, a2 60.26, wd 92.03, wa -9.03, sigma -1, q 0.997,
+m_lo 5.0, m_hi 5.01, lift1 1.08, lift2 1.08, end_extra 0.
+
+Per member in band: hub 0 1.00, hub 1 1.00, **hub 2 0.06**, hub 3 0.72, link 0 1.00, **link 1 0.23, link 2 0.05**,
+neck 0.72.
+
+**The kill.** The best was 43.72 at 300 evaluations and 42.74 at 555. Both are above the lead's 30 line, so the class
+DIES AT GATE 0 with that number, inside the judge's expected 38-45 range.
+
+**Convergence gate** (merged, time order): +0.36 over the second half, +0.36 over the last third, top-5 spread 0.13 ->
+converged. Per run: clampC 0.36 / 0.36 / 0.13, clampA 1.30 / 0.77 / 0.80 (best 45.82).
+
+| configuration (same code, Bench(60,160) fast) | gap | reach | ib14 | note |
+|---|---|---|---|---|
+| proposer's pole20 45/70 cell (connect 0, plain gap) | **45.82** | 0.831 | 0.531 | reproduces the proposer's kit number exactly |
+| best, relay on (flood) | **42.74** | 0.875 | 0.503 | |
+| best, static (connect 0) | 42.74 | 0.875 | 0.503 | the flood drops nothing |
+| **control: best with T 0 (relay locked = plain 3R)** | **51.58** | 0.788 | 0.502 | the relay is worth 8.84 gap points, all of it reach (+14 ws poses) |
+| twin cell k2 0.5 / 2 / 8 at the best | 45.73 / 52.28 / 55.60 | 0.875-0.881 | 0.468 / 0.439 / 0.396 | J0 moves on 189-192 taken poses, hub 1 in band falls to 0.79 / 0.43, worse at every k2 |

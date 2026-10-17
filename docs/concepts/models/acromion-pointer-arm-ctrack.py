@@ -50,9 +50,12 @@ def kin(F, p):
     rr = K.unit(u2 - (u2 * d).sum(-1, keepdims=True) * d); tt = np.cross(d, rr)
     c = math.cos(math.radians(p["thc"])) * rr + math.sin(math.radians(p["thc"])) * tt
     th_arm = K.axis_angle(d, F.H(LAT), c)
-    half = math.degrees(p["car"] / 2 / 50.0)
-    ok = ok & (th_arm >= p["tc"] - p["tw"] / 2 + half) & (th_arm <= p["tc"] + p["tw"] / 2 - half)
-    return d, a1, u2, th_arm, ok, margin
+    half = math.degrees(p["car"] / 2 / 50.0); lo, hi = p["tc"] - p["tw"] / 2 + half, p["tc"] + p["tw"] / 2 - half
+    inw = (th_arm >= lo) & (th_arm <= hi)
+    if p.get("twin"):                                         # a second shoe on L2, `twin` deg further round the race:
+        t2 = (th_arm + p["twin"] + 180) % 360 - 180           # the open race is held by whichever shoe is on it
+        inw = inw | ((t2 >= lo) & (t2 <= hi))
+    return d, a1, u2, th_arm, ok & inw, margin
 
 
 def track_grid(p):
@@ -93,6 +96,22 @@ def build(B, F, p):
     Rf = np.sqrt((np.sqrt(sc ** 2 + Rf[:, :, None] ** 2) + 3.6) ** 2 - sc ** 2)  # above the track face ALONG the GH ray (K6's metric)
     Pc = sc[..., None] * E + Rf[..., None] * nvec(tq)[:, :, None, :]
     Pc = np.einsum("pij,pmkj->pmki", F.RH, Pc).reshape(len(tq), -1, 3)
+    extra = []
+    if p.get("twin") and p["circ"]:                          # shoe 2 (rigid on L2, on the race when it is over the track)
+        Pc2 = sc[..., None] * E + Rf[..., None] * nvec(tq + p["twin"])[:, :, None, :]
+        Pc2 = np.einsum("pij,pmkj->pmki", F.RH, Pc2).reshape(len(tq), -1, 3)
+        Rb = float(np.sqrt((np.sqrt(p["s_t"] ** 2 + Rf.max() ** 2) + CAR_H + 1.0) ** 2 - p["s_t"] ** 2))   # bridge over both shoes
+        tb = np.linspace(0, 1, max(3, int(abs(p["twin"]) * math.pi / 180 * Rb / 2) + 1))
+        tbq = th_arm[:, None] + tb[None] * p["twin"]; sb = np.arange(-6.0, 6.0 + 1e-6, 2.0)
+        Pb = (p["s_t"] + sb)[None, None, :, None] * E + Rb * nvec(tbq)[:, :, None, :]
+        Pb = np.einsum("pij,pmkj->pmki", F.RH, Pb).reshape(len(tq), -1, 3)
+        extra = [K.Member("carriage2", Pc2, kind="free", t=CAR_H, width=16.0, joints=("J3",), cell=4.0, r_ref=1e4)]
+        if not p.get("fork"):                                # shoe 2 on a bridge along the race (over both shoes) ...
+            extra.append(K.Member("bridge", Pb, kind="free", t=3.0, width=12.0, joints=("J3",), cell=4.0, r_ref=1e4))
+        else:                                                # ... or on its own tine from hub 2 (a fork yoke, skin-fitted)
+            c2 = np.einsum("pij,pj->pi", F.RH, p["s_t"] * E + Rcol.max() * nvec(th_arm + p["twin"]))
+            fork = K.strap_member("yoke2", u2, K.unit(c2), ("J2",), width=p["width"], t=p["t_link"], ramp_to=(("hub2", K.STACK), (None, 0.0)),
+                                  over=[("link1", 1.0), ("track", 1.0), ("carriage", 1.0), ("carriage2", 1.0)])
     Rcc = np.full(len(th_arm), Rcol.max()) if p["circ"] else np.interp(th_arm, th, Rcol)
     cc = np.einsum("pij,pj->pi", F.RH, p["s_t"] * E + Rcc[:, None] * nvec(th_arm))
     yt = K.unit(cc)                                          # yoke end: over the carriage centre (pointing frame)
@@ -102,14 +121,14 @@ def build(B, F, p):
     members = [K.hub_member("hub1", a1, "J1"), K.hub_member("hub2", u2, "J2"),
                K.strap_member("link1", a1, u2, ("J1", "J2"), width=w, t=t, ramp_to=(("hub1", K.STACK), ("hub2", 0.0))),
                K.strap_member("yoke", u2, yt, ("J2",), width=w, t=t, ramp_to=(("hub2", K.STACK), (None, 0.0)),
-                              over=[("link1", 1.0), ("track", 1.0), ("carriage", 1.0)]),
-               track, car]
+                              over=[("link1", 1.0), ("track", 1.0), ("carriage", 1.0)] + [(m.name, 1.0) for m in extra]),  # yoke (tine 1)
+               track, car] + extra + ([fork] if p.get("twin") and p["circ"] and p.get("fork") else [])
     return K.Chain(members=members, ok=ok, q=q, joints=dict(J1=a1, J2=u2, J3=d), hubless=("J3",),
                    info=dict(residual_deg=round(float(K.closure_residual(a1, d, u2, p["al12"], p["al23"])[ok].max()), 5) if ok.any() else None,
                              min_margin=round(float(margin[ok].min()), 2) if ok.any() else None))
 
 
-FIXED = ("track", "carriage")                                # placed by the model: profile 1 (D holds the points)
+FIXED = ("track", "carriage", "carriage2", "bridge")                                # placed by the model: profile 1 (D holds the points)
 
 
 def evaluate(B, p, verbose=False, q=None):
@@ -124,13 +143,15 @@ def evaluate(B, p, verbose=False, q=None):
     p["_Rt"] = fit_track(B, F, p, ok0).tolist()
     ch = build(B, F, p); ok, flips = K.continuity_dense(B, F, build, p, np.asarray(ch.ok, bool))
     fitm = [m for m in ch.members if m.name not in FIXED]
-    yk = [m for m in fitm if m.name == "yoke"][0]; over = yk.over; yk.over = [("link1", 1.0)]
+    yks = [m for m in fitm if m.name in ("yoke", "yoke2")]; overs = [m.over for m in yks]
+    for m in yks: m.over = [("link1", 1.0)]
     prof = K.fit_profiles(B, K.Chain(members=fitm, ok=ok, joints=ch.joints), ok, q, "march")
     for m in ch.members:
         if m.name in FIXED: prof[m.name] = np.ones(m.D.shape[1])
-    yk.over = over; r = K._over(ch, yk, prof["yoke"], prof, ok)
-    ns, nc = yk.grid; R2 = r.reshape(ns, nc); x = np.arange(ns) * yk.step_mm; sl = math.tan(yk.climb_deg * K.D2R)
-    prof["yoke"] = (R2[None, :, :] - sl * np.abs(x[:, None, None] - x[None, :, None])).max(1).ravel()
+    for yk, over in zip(yks, overs):                          # the yoke tines pass over the arm-fixed parts + the shoes
+        yk.over = over; r = K._over(ch, yk, prof[yk.name], prof, ok)
+        ns, nc = yk.grid; R2 = r.reshape(ns, nc); x = np.arange(ns) * yk.step_mm; sl = math.tan(yk.climb_deg * K.D2R)
+        prof[yk.name] = (R2[None, :, :] - sl * np.abs(x[:, None, None] - x[None, :, None])).max(1).ravel()
     pts = {m.name: K.member_points(m, prof[m.name]) for m in ch.members}
     hit = K.collisions(ch, pts, ok); take = ok & ~hit; Pi = np.nonzero(take)[0]
     allp = np.concatenate([pts[m.name][Pi] for m in ch.members], 1)
@@ -212,13 +233,12 @@ def CB_gap_near(Bb):
 
 def best_thc(F, p):
     """the carriage angle in the pointing frame that puts the most poses (ws + 0.3 x clips) inside the track window"""
-    q = dict(p, thc=0.0, tc=0.0, tw=720.0); _, _, _, th, ok, _ = kin(F, q)
-    W = p["tw"] - 2 * math.degrees(p["car"] / 2 / 50.0); best = (-1, 0.0)
+    best = (-1, 0.0)
     for c in np.arange(-180, 180, 2.0):
-        x = (th - c + 180) % 360 - 180; inw = ok & (np.abs(x) <= W / 2)
+        _, _, _, _, inw, _ = kin(F, dict(p, thc=float(c)))
         sc = inw[F.ws].mean() + 0.3 * inw[F.clip].mean()
-        if sc > best[0]: best = (sc, c)
-    return round(float(((p["tc"] - best[1]) + 180) % 360 - 180), 1)
+        if sc > best[0]: best = (sc, float(c))
+    return round(best[1], 1)
 
 
 def log_sweep(entry):
@@ -231,7 +251,7 @@ def log_sweep(entry):
     return entry
 
 
-CMA_BOX = dict(az=(-30, 90), el=(-20, 85), s_t=(30, 110), tc=(-40, 40), tw=(100, 200), dthc=(-60, 60), qt=(0.85, 1.0),
+CMA_BOX = dict(twin=(60, 120), az=(-30, 90), el=(-20, 85), s_t=(30, 110), tc=(-40, 40), tw=(100, 200), dthc=(-60, 60), qt=(0.85, 1.0),
                q=(0.85, 1.0), al12=(70, 110), al23=(70, 110))
 
 

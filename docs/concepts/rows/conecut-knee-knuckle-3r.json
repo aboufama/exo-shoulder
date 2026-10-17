@@ -987,5 +987,6 @@
   "champion_same_bench": 75.94,
   "champion_note": "champion spherical 3R 75.94 on Bench(110,360) exact, kit checks + 1 mm clearance (risley-turret verifier; the lead's verifier used the same number; the knee / stop / cam checks do not apply to it)",
   "refuted": false
- }
+ },
+ "leader_ruling": "tie: slipper-nose-knuckle-3r | ledger 2026-10-17T17:57:13Z | lead's ruling 2026-10-17 ~18:05 UTC after the verifier (17:21, 'tie, not a leader') and the audit / skeptic (final WATCH, NEW-strap-dilution upheld): the 0.21 bench edge is the longer E strap's in-band dilution plus one 0.26 mm pose - at equal strap the bench reads 18.67, behind the lead; the held-out plain edge (22.38 vs 23.45, paired CI90 [-1.86, +0.06]) rests on 11 poses 0.76-3.68 mm off the skin; contact is deeper (bench 4 / 20.24 mm vs 2 / 14.75, held 14 / 60.97 vs 10 / 46.12). Kept for what it does better: the knee never binds (window margin 11.4 vs 0.33 mm) and the knee link carries 12 N per N m of J3 moment vs 31.6 - a candidate CAD change for the lead's knee. No leader change."
 }

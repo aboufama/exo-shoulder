@@ -2,11 +2,11 @@
 
 | | requirement | value | target | status | judge |
 |---|---|---|---|---|---|
-| R1 | Proximity: covered skin 2-14 mm from the metal while following (user 2026-10-15: pass at 14 mm, aim for 10) | 81.1% | >= 0.9 | **FAIL** | full-exo/score_design.py BAND_HI=14 (exact posed skin, 30 fps clips) |
-| R1-aim | Aim: the same at 2-10 mm (the 1 cm rule) | 47.4% | >= 0.9 | **FAIL** | full-exo/score_design.py (exact posed skin, 30 fps clips) |
+| R1 | Proximity: covered skin 2-14 mm from the metal while following (user 2026-10-15: pass at 14 mm, aim for 10) | 81.2% | >= 0.9 | **FAIL** | full-exo/score_design.py BAND_HI=14 (exact posed skin, 30 fps clips) |
+| R1-aim | Aim: the same at 2-10 mm (the 1 cm rule) | 47.5% | >= 0.9 | **FAIL** | full-exo/score_design.py (exact posed skin, 30 fps clips) |
 | R2 | No part enters the body, any frame of any clip | 24.87 mm | <= 0.5 mm | **FAIL** | judge/body_contact.py (exact signed distance) |
 | R3 | Follows the arm (frames tracked, not held at a limit) | 100.0% | >= 0.95 | **PASS** | full-exo/score_design.py |
-| R4 | Overhead works (Raise overhead clip score) (14 mm band) | 73.1% | >= 0.8 | **FAIL** | full-exo/score_design.py |
+| R4 | Overhead works (Raise overhead clip score) (14 mm band) | 73.2% | >= 0.8 | **FAIL** | full-exo/score_design.py |
 | R5 | Shoulder-chain DOF from the scapula base to the arm, counted kinematically (cap 4; the user's scapula handler is a separate part) | 3 | <= 4 | **PASS** | design.json |
 | R5-aim | Aim: exactly 3 DOF, the minimum (user 2026-10-15) | 3 | <= 3 | **PASS** | design.json |
 | R6 | No interference between parts that move relative to each other | 0.0 mm | <= 0.15 mm | **PASS** | judge/part_contact.py (geometry only) |
