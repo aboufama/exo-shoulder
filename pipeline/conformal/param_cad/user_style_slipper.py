@@ -856,8 +856,6 @@ def main():
     ap.add_argument("--l1b-margin", type=float, default=None, help="link 1b's own margin (default = --link-margin)")
     ap.add_argument("--lug-trim", type=float, default=None, help="trimlug-k165-knuckle-3r: cut the flank lug + web at r_K <= the farthest flank "
                     "contact over [0, dK_lim] + this wall (mm; the verified row: 1.5)")
-    ap.add_argument("--e-hull", choices=("hull", "stations"), default="hull", help="member 3's E strap underside: the upper hull of the model's "
-                    "stations (gen-7 v1) or the stations themselves (the fix: no bridge over the strap's dips)")
     ap.add_argument("--id", default="slipper-nose-knuckle-3r", help="the verified row this CAD builds (label / design.json)")
     ap.add_argument("--no-checks", action="store_true", help="stop after the export (no posed drive / kinematics / skin / working-end checks)")
     a = ap.parse_args(MY_ARGV); t0 = time.time(); dd = os.path.join(FULL, "designs", a.out); os.makedirs(os.path.join(dd, "step"), exist_ok=True)
@@ -890,7 +888,6 @@ def main():
     parts = []
     hw, rep["hubs"] = hubs(M); parts += hw
     LINK_MARGIN.update(l1b=a.l1b_margin if a.l1b_margin is not None else a.link_margin, l2=a.link_margin)
-    USP.E_UNDERSIDE = a.e_hull
     lug, rep["flank lug"] = flank_lug(M, dg, a.lug_trim)
     lk, rep["links"] = build_links(M, stops, lug)
     l1b_body = next(s for g, n, s in lk if n.startswith("D8-02b"))
@@ -988,8 +985,7 @@ def main():
             "full CAD in the user's style")
     d = dict(l1d); d.update(id=a.out, label=lab_, row_id=a.id, level=("L2 user-style (full CAD of the generation-7 winner)" if a.lug_trim is None else
                                                                    "L2 user-style (full CAD of the round-11 winner)"),
-                            build_fixes_2026_10_17=dict(link_margin_mm=dict(l1b=LINK_MARGIN["l1b"], l2=LINK_MARGIN["l2"]), e_underside=a.e_hull,
-                                                        lug_trim_wall_mm=a.lug_trim, note="docs/research/user_slipper_nose_fix.md"),
+                            build_fixes_2026_10_17=dict(link_margin_mm=dict(l1b=LINK_MARGIN["l1b"], l2=LINK_MARGIN["l2"]), lug_trim_wall_mm=a.lug_trim, note="docs/research/user_slipper_nose_fix.md"),
                             l1_design=a.l1,
                             built_with="pipeline/conformal/param_cad/user_style_slipper.py (user_style_minarc / user_style_pinknee parts: v5 O20 hubs, K plain clock-spring cap, "
                                        "link 1a as one line/arc chain (60-deg ramp, machined) + the r 1.25 flank lug, 4-strip machined bars 1b / 2, O3 dowel-in-arc-slot stops (K opposed "
