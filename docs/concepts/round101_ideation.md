@@ -15,7 +15,7 @@ variants of entries already queued elsewhere, and the proposer's own pre-screen 
 one dead. Those numbers go to the queued entries' screens (section 3).
 
 Scripts and logs for the judge's checks: `/tmp/claude-0/-home-user-exo-shoulder/55c580fc-1103-56e5-9e17-3e425f438838/scratchpad/judge101/`
-(`graph.py`, `pksurv.py` / `pksurv.out`, `epi.py`). Every check runs on the repo's own bench and kit (Bench(60,160) fast
+(`graph.py`, `pksurv.py` / `pksurv.out`, `epi2.py`). Every check runs on the repo's own bench and kit (Bench(60,160) fast
 cache 0089c747c10f, Bench(110,360) poses), niced, single-threaded, local only (farm closed).
 
 ## 1. Red-team checks made by the judge
@@ -73,7 +73,22 @@ counts the relay (newly taken) poses on which **both** hubs clear the plain chai
 
 ### 1.3 Epicondyle hub: an O20 hub on the GH -> lateral-epicondyle axis has no room outside the skin
 
-EPI_RESULT
+The proposal seats an O20 hub "on the bony lateral epicondyle" with its axis on the line GH -> lateral epicondyle, 5.6 deg
+off the GH-elbow line. A hub's disc is normal to its own axis. With the axis 5.6 deg off the arm, that disc stands
+perpendicular to the arm, edge-on to the epicondyle skin; its plate cannot lie flat on the skin. `epi2.py` places the O20
+envelope (disc r 10 at the hub's base and its 12.25 mm crown) on that axis, axis wdir(5.6, 0), on 44 Bench(60,160)
+poses, exact distance (beyond the +-260 mm fast box):
+
+- s 300: the axis itself is **16.0 mm inside the skin** (median; q10-q90 18.3-15.9). The deepest disc point is 24.8 mm
+  inside. The whole hub is outside the skin on **0 / 44** poses.
+- s 325 (the epicondyle station): the axis is **12.8 mm inside** (15.7-12.8), the disc 21.7 mm. Again **0 / 44**.
+- The axis leaves the arm only past the distal humerus (s > 340). There it runs into the proximal forearm whenever the
+  elbow is extended.
+
+So J3 has no place for a real component on that axis near the elbow. This is the reason the queued cuff-sleeve-3r uses an
+O5 rod in a sleeve lying along the arm, and pays 1 passive translation (the sleeve's float) for it. The hub version
+fails the CLAUDE.md per-joint test ("is there actually a component ... at the size presented?"). Rejected on hardware.
+Even with a real J3, link 2 would carry the cell-R spar's measured twist exposure (in-band ceiling 0.53-0.56).
 
 ### 1.4 Complexity (tools/simplicity.py v2.2, `--score` on the mechanism records)
 
