@@ -3031,7 +3031,7 @@
   "name": "Remote-pole spherical four-bar J2 at the cap pole (open near-isogram, six O20 pins, no metal on the J2 ray; the instrument-cell placement merged as a measured-dead cell)",
   "family": "virtual-J2 spherical four-bar 3R (polycentric J2, one closed loop, pins only)",
   "lens": "round102:virtual-j2 (lens 1, the planner's suggested id; merged cap-cell-fourbar-j2-3r from lens 0 as cell B)",
-  "status": "ideated",
+  "status": "dead",
   "t_ideated": "2026-10-17T21:34:34Z",
   "source": "round 102 (J2) judge (docs/concepts/round102_ideation.md)",
   "merged_from": [

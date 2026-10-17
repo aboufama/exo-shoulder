@@ -107,3 +107,82 @@ follow 0.60, ib14 0.189), the best honest iso config is unchanged (90.59 both wa
 fixing, but it does not rescue the cluster: with a correct lift it is still 70 gap points behind the plain cap 3R
 (63.18): four bodies stacked on one 25-deg patch put the coupler over three O20 stacks, in band 0.19.
 
+## Gate 0: the honest kit on Bench(60,160) fast (the decision)
+
+Kit checks on (K3 march, K2 dense continuity, K6 collisions, audit); objective = the 1 mm near-touch gap; 389 kit
+evaluations (245 honest; the rest are non-assembling layouts at 275 or audit-flagged members fitted off the body):
+lens 1's seeds and ES optima, the step-0 and full-pose minimax layouts, 13 proxy-ranked random layouts (2191 kin-valid
+draws ranked by lens 1's proxy), and CMA-ES restarts (sigma 0.12 / 0.25 / 0.06 / 0.05 / 0.02) from the best.
+Local only (farm closed), 2 niced processes, OMP_NUM_THREADS=1. Sweep: docs/concepts/sweeps/remote-pole-fourbar-j2-3r.json.
+
+| configuration | gap fast | score | reach | follow | ib14 | contact | note |
+|---|---|---|---|---|---|---|---|
+| plain cap-pole O20 3R, same kit (control, cruciate-knuckle-3r) | 63.18 | 77.03 | 0.794 | | 0.375 | | the bar this lens must beat first |
+| lens 1 s1 (proxy 33.67) | 245.81 | 10.6 | 0.05 | 0.017 | 0.225 | 0 | collide 0.945 |
+| lens 1 s2 (proxy 35.72) | 170.09 | 38.2 | 0.338 | 0.483 | 0.228 | 0 | collide 0.561 |
+| lens 1 s3 (proxy 34.25) | 275 | 0 | - | - | - | - | no valid window at the pin separations |
+| step-0 minimax layout | 86.41 | - | 0.85 | | 0.163 | 0 | NOT honest: members fitted off the body (8-11 mm sample spacing) |
+| full-pose minimax cluster | 274.37 | 0.2 | 0.006 | 0 | 0 | 0 | collide 0.995 (crank A vs link 1); 133.04 with a fixed-point lift (side experiment) |
+| **best honest, sweep k298** | **90.11** | **67.23** | 0.769 | 0.883 | 0.197 | 0 | ib10 0.105, near-touch gap 90.11, min metal 2.0 mm |
+
+Best (iso [th0, dA0, pA0, dA1, pA1, g, gam, eps, tw] = [101.107, 36.279, 96.125, 61.148, 31.223, 32.812, 28.934,
+-7.652, 11.424]): th window [19.0, 110.0] (W 91.0), min th margin 6.909 deg over the taken poses (>= 5), min
+transmission 41.1 deg on the taken poses (30.2 at the run ends behind the stops), pin separations >= 27.0 deg, closure
+residual 0.0003 deg, collide 0.088, 0 flips, mass 250.2 g (six O20 stacks). Kinematic window on Bench(110,360): ws
+286/360 (0.794; folded 14, stretched 60), clips 1.000, overhead (elev >= 140) 16/28 - so the four-bar's window IS wider
+than the plain cap 3R's 281/360 [15.1, 105.5]: the reach lever exists, the metal is what fails. Taken overhead on
+Bench(60,160): 4/12.
+
+Fitted levels (mm) and per-member in band: J1 55 (1.00), A0 90 (0.00), B0 100 (0.00), **A1 127 (0.00)**, B1 86 (0.01),
+J3 70 (0.66), **crank A 127 (0.00)**, crank B 100 (0.18), link 1 104 (0.00), **coupler 130 (0.05)**, neck 101 (0.74).
+The binding member is **A1 / crank A / the coupler** (the coupler pin farther from J3 and the strap that carries it):
+A1's centre ray reads p50 58 / p90 71 / max 113 mm, the max at the overhead binder (30,150,-60) and 101-105 mm at
+(0,150,0) / (30,150,0) / (0,105,0) - lens 1's binder exactly; one pose sets a rigid O20 disc's level for all poses.
+
+**Convergence gate** (honest gap, score points, 389 tries in time order): gain over the 2nd half 0.08, over the last
+third 0.08, top-5 distinct configurations 90.11 / 90.32 / 90.59 / 92.28 / 97.57 = spread 2.71 -> **passes**.
+
+## Red team (own best config)
+
+- **The optimistic number is the best itself.** Ten perturbations of the 90.59 config by ~1-2 deg per pin coordinate
+  (sweep src cma7:s0..s9) scored 90.32, 105.86, 121.72, 128.84, 129.99, 158.32, 174.14, 180.96, 212.04, 273.75: the
+  optimum is a narrow spike (one rigid O20 disc's level is set by its single worst pose, and K6 is binary). A machined
+  linkage with ~1 deg pin-position tolerance does not hold 90.
+- **The proxy is optimistic by 130-240 points here.** Lens 1's proxy (K3 on hub rays and strap centre lines, no
+  layering, no K6) put s1-s3 at 33.67-35.72; the kit puts them at 170-275. The centre-ray full-pose minimax put every
+  member <= 76 mm; the kit fits the same layout at 85-152 mm (O20 discs, the coupler's lift over three stacks).
+- **The pose that jams.** The run ends are toggles / folds: the rotation Jacobian's sigma_min / sigma_max falls to 0.005
+  at the run ends (measured on the 90.59 neighbour) and stays >= 0.111 (median 0.455) inside the window; the 5-deg th stop on crank A's own angle keeps
+  every taken pose off them (min th margin 6.909), transmission >= 41.1 on taken poses. An unpowered MVP1 would feel
+  the stop near th 19 / 110 (arm stretched far across / folded overhead).
+- **The point that pinches.** Min metal-skin distance over the taken poses 2.0 mm (no near-touch pose); the risk is
+  the other way: metal 30-75 mm off the skin at most poses (in band 0.197).
+- **K6 by construction is not a fixed point** (Kit note above): it costs the compact cluster layouts, not the best.
+
+## Verdict
+
+**DEAD at gate 0.** Best honest 90.11 fast on Bench(60,160) (score 67.23), 27 points WORSE than the plain cap-pole O20
+3R through the same kit (63.18) and 72.6 points over the 17.5 bar; converged (gate above). No frozen exact
+Bench(110,360) wear (the fast number is 5x the bar, as cruciate-knuckle-3r). What dies is the metal, not the
+kinematics: the open four-bar's window reaches 286/360 on Bench(110,360) (W 91, overhead 16/28 kinematically), but its
+six O20 stacks and layered straps sit 86-130 mm out, because a rigid O20 disc takes its level from its single worst
+pose and the coupler-side pin always meets the J2 zone at one of the binder poses.
+
+What this lens taught, measured:
+1. The step-0 binder test as written (four poses) is passed by a directed minimax search (67 mm, W 101.8) that 90000
+   random layouts missed - and is useless as a filter: that layout's coupler pins go to 94-126 mm (p50-p90) at rest /
+   across-body poses and the kit rejects it as dishonest.
+2. A FULL-POSE minimax on centre rays finds the cool cell: all four pins clustered within ~25-30 deg of J1 on the
+   acromion top (<= 76 mm on every taken pose, W 91.8, reach_kin 0.794). It dies on stacking: four bodies on one
+   ~25-deg patch (kit 274.37; 133.04 even with a fixed-point lift).
+3. So a four-bar J2 at the cap pole has two cells and each has its own wall: spread out, the coupler pin meets the J2
+   zone (A1 113 mm); clustered at J1, the layers pile up. The plain 3R's single O20 J2 is cheaper than either, so the
+   J3 closer's ceiling statement for the cap seats stands with this lens closed.
+
+Mechanism: 3 active (J1, A0, J3) + 3 passive pins (B0, A1, B1), 0 passive translations, 1 closed loop, complexity 16.0
+(tools/simplicity.py v2.2: 3 passive rotations, 1 loop, 2 extra bodies, 3 extra joints, parts).
+
+Files: model docs/concepts/models/remote-pole-fourbar-j2-3r.py (`check` / `jac` modes); sweep
+docs/concepts/sweeps/remote-pole-fourbar-j2-3r.json; row docs/concepts/rows/remote-pole-fourbar-j2-3r.json; preview
+docs/concepts/viz/concepts/remote-pole-fourbar-j2-3r.js (best config). Scratch scripts (not in the repo): binder
+minimax bopt.py, full-pose minimax fbopt.py, kit search rs.py, kit side experiments asym.py / fixpt.py / k6why.py.

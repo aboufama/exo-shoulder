@@ -8,12 +8,13 @@
  * window is that run minus 5 deg of th at each end (a dowel on crank A's own angle). Per frame th = angle(J1, arm's J3
  * axis) -> theta by interpolation on the run (monotone: no branch choice), then J1 turns phi to carry c onto w, then J3
  * turns q3. Outside the window the frame shows red. 3 ACTIVE (J1, A0, J3) + 3 PASSIVE pins (B0, A1, B1), 0 passive
- * translations, six O20 v5 stacks. Drawn at the screen's best honest config (P below; numbers in the .md). */
+ * translations, six O20 v5 stacks. Drawn at the screen's best honest config (sweep k298: kit gap 90.11 on Bench(60,160) fast, W 91.0, th window [19.0, 110.0]); hub levels = the
+ * kit's fitted levels for that config (mm). */
 (function () {
   const K = (typeof window !== 'undefined' ? window : globalThis).KIN, V = K.V, M = K.M, D2R = K.D2R;
   const P = { az: 43.15, el: 59.93, wd: 92.03, wa: -9.03,
-              th0: 65.8, dA0: 22.4, pA0: 60.4, dA1: 47.7, pA1: 38.6, g: 30.2, gam: -96.2, eps: 2.1, tw: 13.6, MU: 30, MARGIN: 5,
-              lv: { J1: 56, A0: 63, B0: 65, A1: 73, B1: 127, J3: 71 }, hub_r: 10, stack: 12.25, neck_deg: 25, cuff_at: 165 };
+              th0: 101.107, dA0: 36.279, pA0: 96.125, dA1: 61.148, pA1: 31.223, g: 32.812, gam: 28.934, eps: -7.652, tw: 11.424, MU: 30, MARGIN: 5,
+              lv: { J1: 55, A0: 90, B0: 100, A1: 127, B1: 86, J3: 70 }, hub_r: 10, stack: 12.25, neck_deg: 25, cuff_at: 165 };
   const ID = 'remote-pole-fourbar-j2-3r', NAME = 'Remote-pole four-bar J2 at the cap pole (open near-isogram, 3R)';
 
   const ang = (u, v) => V.angle(u, v);
