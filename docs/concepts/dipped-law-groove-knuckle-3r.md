@@ -160,3 +160,113 @@ Frozen exact Bench(110,360), dipD 4, compared with its own D = 0 control (kneewi
 - Row: docs/concepts/rows/dipped-law-groove-knuckle-3r.json.
 - Preview: docs/concepts/viz/concepts/dipped-law-groove-knuckle-3r.js (best D > 0 config: dipD 1, th_c 50, w 8, arm at
   the floor).
+
+## Verification (independent skeptic, 2026-10-17 ~06:10 UTC)
+
+**Verdict: VERIFIED (not refuted). v_gap 18.64 (score 93.22) on Bench(110,360) exact, fit-60 shape frozen. The
+champion spherical 3R scores 75.94 on the same bench (risley-turret verifier; 66.97 through the knuckle code and
+checks).** Level with the lead, and not a lead change.
+
+Harness: `docs/concepts/verify/dipped-law-groove-knuckle-3r.py`. It loads the claim's model unchanged and runs the
+round's roller-flank verifier protocol (fit on Bench(60,160) fast, freeze, wear on Bench(110,360) exact and on the
+held-out set), retargeted at `DipModel`.
+
+The parent verifier's per-pose drive checks read |dK| and build the crank at K = 0, which is wrong for this design. The
+dip runs K negative and builds the crank at the dip floor, so read that way every dipped pose would look like
+wrong-sense or off-flank. The harness rewrites those checks on the signed opening and the build phase kref.
+
+It also adds checks that no parent verifier had:
+
+- **Frame consistency:** J2's axis must agree between link 1b and link 2, J3's axis between link 2 and member 3. K's
+  angle read from the frames must equal dK, and a1e read from the frames must equal a1 - dip(th).
+- **Lobe cam closure:** every taken state-A pose must sit on the cam curve (q2 from the frames, K) of the dipped
+  closure at its own th.
+- **Single-valued cam:** q2(th) must be monotone over the whole dwell [th_lo, th_hi], not only over the band.
+- **Coupled rate:** dq2/dth at each dipped taken pose.
+- **Envelope:** a run with the lug's flank-edge strip rebuilt on the signed flank path.
+- **Control:** the same harness run on the D = 0 control.
+
+All wears ran locally, one process at a time (nice, OMP 1, 2-4 min each). The farm rule (>= 3x saving) did not apply,
+and the claimant had seen the farm queue stall. Outputs are in `docs/concepts/verify/dipped-law-groove-knuckle-3r_v_*.json`.
+
+| frozen exact | plain | 1 mm | 2 mm | reach | follow | ib14 | ib10 | contact | min metal |
+|---|---|---|---|---|---|---|---|---|---|
+| Bench(110,360), claim's sampling | **18.64** | 20.81 | 35.69 | 0.725 | 1.0 | 0.8993 | 0.5197 | 0.0107 | 0.07 mm |
+| Bench(110,360), envelope-corrected (lug flank-edge strip on the signed path) | 18.57 | 20.74 | 35.69 | 0.725 | 1.0 | 0.9002 | 0.5234 | 0.0107 | 0.07 mm |
+| held out | 24.07 | 26.94 | 38.72 | 0.681 | 1.0 | 0.8982 | 0.5188 | 0.0196 | 0.33 mm |
+| D = 0 control (kneewin), same harness, Bench(110,360) | 19.33 | 20.96 | 35.08 | 0.725 | 1.0 | 0.8976 | 0.5152 | 0.0159 | 0.07 mm |
+| lead roller-longdyad-knuckle-3r (verified) | 18.67 | 20.30 | 33.10 | 0.725 | 1.0 | 0.8937 | 0.5132 | 0.0054 | 0.07 mm |
+| champion spherical 3R, same bench (risley-turret verifier) | 75.94 | | | | | | | | |
+
+The claim's frozen bench, held-out and D = 0 numbers all reproduce to the digit. The fast fit numbers also reproduce:
+15.39 for the dip and 14.28 for the control.
+
+**Checks on every taken pose: 0 of 371 fail on the bench and 0 of 850 held out, at a pressure-angle rule of 43 and of
+45 degrees.**
+
+- **Roller-flank drive, on the signed K:**
+  - Cam closure in the world is 0.0 mm.
+  - The roller centre stays at least 3.733 mm from the lug's mid-shell (roller radius 3.0).
+  - K stays inside the drive's range [-3.0, 43.75]. Taken poses span -2.37 to 43.66 on the bench and up to 42.52 held
+    out.
+  - Pressure angles: crank 8.3, horn 42.9.
+  - Lobe pressure angle: 23.2 on the stretched rise, 2.1 on the dip.
+  - The drive is not idle.
+- **Frames:** every consistency error is <= 0.0001 deg, and a1e equals a1 - dip(th) exactly.
+- **Lobe cam closure:**
+  - q2 and K sit on the cam curve to 0.0 deg on every taken state-A pose (85 dipped on the bench, 203 held out).
+  - The cam is single-valued over the whole dwell: q2(th) is monotone on th 24.7-77.9 with rate <= 2.29. That maximum
+    is at the folded end of the dwell, where K = 0, so it is not caused by the dip.
+  - The coupled rate at dipped taken poses is <= 1.764, against the 3.45 limit.
+- **Continuity flood:** the full grid drops 0 poses (18.64). The knn grid drops 6 (20.32; the lead is 20.34).
+- **Fold margin:** under its literal rule, the lead verifier's `th_margin` fails 84 bench and 202 held-out poses. That
+  rule takes min(m_sub, m_eff) on every pose where K is off its rest. Every failing pose is dipped, with m_sub
+  0.20 / 0.18. This is not a singularity of this chain:
+  - With K slaved to q2, the active Jacobian [s1, s2 + K'(q2) sK, s3] is singular iff the coupled dth/dq2 = 0. Rotations
+    about s1 and s3 leave th unchanged, so the q2 column changes th exactly when it lies outside span(s1, s3).
+  - m_sub ~ 0 only says that K moves th little. In the dip, J2 does the moving: q2 spans 40 deg while K moves 2.4 deg.
+  - The coupled reading uses m_eff on the dipped poses (min 21.7 bench, 21.4 held out) and the lead's rule elsewhere.
+    Its minimum is 5.389 on the bench and 5.406 held out, with 0 poses under 5. Together with the coupled rate <= 1.76,
+    this means the claim's correction (msub not required on dipped poses) stands.
+  - The D = 0 control reads 5.181, with 0 under 5, the same as the lead.
+  - Family verifiers should carry the coupled-rate check for any non-monotone K law.
+
+**What the dip is worth.** Measured with this harness, against its own control on the same code:
+
+| | dip vs control |
+|---|---|
+| bench | 0.69 better (contact poses 6 -> 4, fold 88 -> 90, reach 261/360 unchanged, overhead 8/28 unchanged) |
+| 1 mm | 0.15 better |
+| 2 mm | 0.61 worse |
+| held out | 1.10 worse (fold 261 -> 273, contacts 17 = 17) |
+
+Against the lead:
+
+| | dip vs lead |
+|---|---|
+| bench | 0.03 better (under the 1-point rule) |
+| 1 mm | 0.51 worse |
+| 2 mm | 2.59 worse |
+| held out | 0.34 worse |
+
+**Issues the verifier raises.** None of them breaks a hard rule.
+
+1. **The dip is a 0.068 mm feature on the lobe.** 10 um of lobe-profile error is 0.35 deg of K, against a 2.37 deg dip
+   floor: 15 % of the dip per 10 um. The follower's MR63ZZ radial play is in that range. The two bench poses the dip
+   recovers sit on that tolerance, and pose 203 ends at 0.48 mm.
+2. **The gain does not generalise.** It is 2 contact poses on the bench. Held out, the stroke cost (dK_lim 46.25 ->
+   43.75) wins.
+3. **The motion preview shows th_c 50 / w 8,** the best D > 0 fast configuration. The row's best_params are th_c 53 /
+   w 12, the configuration whose frozen number is claimed.
+4. **The search is not converged.** The 242-configuration farm co-fit of the drive did not return, so "screened, not
+   dead" is right. The claim's prediction (deep dips cannot be rescued by the flank) is untested.
+
+**Hard rules hold:**
+
+- 3 active DOF (J1, J2, J3).
+- K is slaved by the spring-closed lobe and the roller-flank. It is never read and sits on the cam curve at every taken
+  pose.
+- The knee pins are closed by the cuff.
+- 0 passive translations.
+- No gears, pulleys or cables.
+- Parts are at the lead's verified sizes, with the crank, roller and lug posed at the signed K.

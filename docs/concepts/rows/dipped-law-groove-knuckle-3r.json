@@ -6,7 +6,7 @@
  "active_dof": 3,
  "passive_dof": 5,
  "passive_translations": 0,
- "status": "screened",
+ "status": "verified",
  "t_ideated": null,
  "t_screened": "2026-10-17T04:43:40Z",
  "reach": 0.7688,
@@ -15,11 +15,11 @@
  "inband10": 0.5168,
  "contact": 0.0214,
  "gap": 15.39,
- "v_reach": null,
- "v_follow": null,
- "v_inband14": null,
- "v_inband10": null,
- "v_gap": null,
+ "v_reach": 0.725,
+ "v_follow": 1.0,
+ "v_inband14": 0.8993,
+ "v_inband10": 0.5197,
+ "v_gap": 18.64,
  "n_configs": 14,
  "complexity": 24.25,
  "mechanism": {
@@ -366,6 +366,111 @@
  },
  "verdict": "Level with the lead, not a lead change. Frozen exact Bench(110,360) at the best dip (dipD 1, th_c 53, w 12, arm built at the dip floor) is 18.64 (score 93.22) against the lead's 18.67 and its own D=0 control (kneewin centred knee) 19.33. The dip recovers 2 contact poses (6 -> 4), but the shared flank stroke costs 2 fold poses (88 -> 90, dK_lim 46.2 -> 43.8). Reach stays 0.725 and overhead 8/28. That is -0.03, under the 1-point rule. The recovered 203 sits at 0.48 mm (near-1 20.81 vs the lead's 20.30). Held out, the dip LOSES: 24.07 vs its own D=0 control 22.97 (fold 261 -> 273, contacts 17 = 17) and the lead's 23.73. The bench gain is the two poses 182 / 203; the stroke cost generalises and the contact gain does not. Deeper dips lose on the bench too: dipD 4 gives 21.10.",
  "limiter": "The roller-flank's pressure-angle-capped K stroke (~46 deg, counted from the arm's build phase) is shared by the dip and the stretched rise: a dip of D deg of a1e costs ~2.35 D deg of K off dK_lim (46.2 -> 43.8 / 41.2 / 38.8 / 36.5 at D 1 / 2 / 3 / 4), at ~1 fold pose per deg of K on Bench(110,360). Built at the old rest, the bent arm closes on hub K at 0.18 mm per deg of backward swing (CRK-hubK < 1 mm at -0.75 deg) and the flank cusps below -5 deg, so the arm must be built at the dip floor. Measured on the lead cell, frozen exact Bench(110,360), workspace poses at th ~109-112 (the stretched drive wall).",
- "note": "Model: the lead's code loaded unchanged. A DipDesign subclass changes the state-A IK to a1e = a1 - D (1-x^2)^2 on the design's own closure branch; a DipModel subclass synthesises the drive over the closing range and puts the crank on the SIGNED opening. Spec corrections: (1) a C1 bump instead of the parabola, which kinks at the band edges; (2) msub (the stretched law's free-K rule) is not required on dipped poses: state-A poses sit at msub 0.2-0.6 and requiring it dropped all 41 dipped fit poses; (3) the cam is checked on q2: monotone, rate <= 1.9 (limit 3.45), lobe pressure angle <= 25 at D 8, lobe dip 0.07-0.53 mm. Frozen exact Bench(110,360): D 0 19.33 (control), D 1 18.64, D 4 21.10; the lead 18.67. Held out: D 1 24.07, D 0 control 22.97, lead 23.73. Side finding for the planner: the centred-knee control (kneewin), rejected on the bench at 19.33 vs 18.67, is 0.76 BETTER than the lead held out (22.97 vs 23.73). Red team: the 0.07 mm pinch at (-60, 60, 105) is unchanged; the recovered 203 is at 0.48 mm; at D 4, 83 poses sit under 2 mm (near-2 78.38); the arm vs hub K at the dip floor is 1.04 mm, the edge of the rule. Prediction: a 4-deg dip on top of the lead's 46-deg stretched stroke needs ~55.6 deg of flank in total, which is the round-9 long-flank regime measured dead (boss on the deltoid), so co-fitting the drive should not rescue the deep dip. The lever needs an independent K input below stop A (embodiment 2, groove + nose, after groove-desmo's fit gate). Kneeless control cell (b) not run: kneeless imports its own copy of the lead's module, and the patch did not fit the time box.",
- "doc": "docs/concepts/dipped-law-groove-knuckle-3r.md"
+ "note": "Model: the lead's code loaded unchanged. A DipDesign subclass changes the state-A IK to a1e = a1 - D (1-x^2)^2 on the design's own closure branch; a DipModel subclass synthesises the drive over the closing range and puts the crank on the SIGNED opening. Spec corrections: (1) a C1 bump instead of the parabola, which kinks at the band edges; (2) msub (the stretched law's free-K rule) is not required on dipped poses: state-A poses sit at msub 0.2-0.6 and requiring it dropped all 41 dipped fit poses; (3) the cam is checked on q2: monotone, rate <= 1.9 (limit 3.45), lobe pressure angle <= 25 at D 8, lobe dip 0.07-0.53 mm. Frozen exact Bench(110,360): D 0 19.33 (control), D 1 18.64, D 4 21.10; the lead 18.67. Held out: D 1 24.07, D 0 control 22.97, lead 23.73. Side finding for the planner: the centred-knee control (kneewin), rejected on the bench at 19.33 vs 18.67, is 0.76 BETTER than the lead held out (22.97 vs 23.73). Red team: the 0.07 mm pinch at (-60, 60, 105) is unchanged; the recovered 203 is at 0.48 mm; at D 4, 83 poses sit under 2 mm (near-2 78.38); the arm vs hub K at the dip floor is 1.04 mm, the edge of the rule. Prediction: a 4-deg dip on top of the lead's 46-deg stretched stroke needs ~55.6 deg of flank in total, which is the round-9 long-flank regime measured dead (boss on the deltoid), so co-fitting the drive should not rescue the deep dip. The lever needs an independent K input below stop A (embodiment 2, groove + nose, after groove-desmo's fit gate). Kneeless control cell (b) not run: kneeless imports its own copy of the lead's module, and the patch did not fit the time box. VERIFIED 2026-10-17 06:12 UTC (independent skeptic, docs/concepts/verify/dipped-law-groove-knuckle-3r.py): v_gap 18.64 (score 93.22) on Bench(110,360) exact frozen with signed-K drive checks, frame and lobe-cam closure, coupled rate, flood (full 0 dropped, knn 20.32) - 0 of 371 bench / 0 of 850 held-out taken poses fail; envelope-corrected 18.57; held out 24.07; D=0 control through the same harness 19.33. Champion spherical 3R on the same bench: 75.94 (risley-turret verifier; 66.97 through the knuckle code and checks). Level with the lead, not a lead change.",
+ "doc": "docs/concepts/dipped-law-groove-knuckle-3r.md",
+ "verification": {
+  "t": "2026-10-17T06:12:00Z",
+  "harness": "docs/concepts/verify/dipped-law-groove-knuckle-3r.py (claim model unchanged; round roller-flank verifier retargeted at DipModel, drive checks rewritten on the SIGNED K and the crank build phase kref; added frame consistency, lobe cam closure on q2, whole-dwell cam monotonicity, coupled rate per dipped pose, lead th_margin in both readings, flood, --head envelope, D=0 control through the same harness)",
+  "bench_frozen_exact": {
+   "gap": 18.64,
+   "reach": 0.725,
+   "follow": 1.0,
+   "inband14": 0.8993,
+   "inband10": 0.5197,
+   "contact": 0.0107,
+   "near1": 20.81,
+   "near2": 35.69,
+   "min_metal_mm": 0.07,
+   "overhead_reach": 0.2857,
+   "why": {
+    "fold": 90,
+    "parts": 5,
+    "contact": 4
+   },
+   "poses_failing": 0,
+   "n_taken": 371
+  },
+  "bench_envelope": {
+   "gap": 18.57,
+   "near1": 20.74,
+   "near2": 35.69
+  },
+  "held_out": {
+   "gap": 24.07,
+   "reach": 0.6807,
+   "inband14": 0.8982,
+   "contact": 0.0196,
+   "near1": 26.94,
+   "near2": 38.72,
+   "poses_failing": 0,
+   "n_taken": 850
+  },
+  "control_D0_same_harness": {
+   "gap": 19.33,
+   "near1": 20.96,
+   "near2": 35.08,
+   "why": {
+    "fold": 88,
+    "parts": 5,
+    "contact": 6
+   }
+  },
+  "flood": {
+   "full": 18.64,
+   "knn": 20.32,
+   "full_dropped": 0,
+   "knn_dropped": 6
+  },
+  "drive": {
+   "closure_mm": 0.0,
+   "roller_lug_min_mm": 3.733,
+   "pa_crank": 8.3,
+   "pa_horn": 42.9,
+   "dK_range": [
+    -3.0,
+    43.75
+   ],
+   "dK_taken": [
+    -2.37,
+    43.66
+   ],
+   "lobe_pa_dip": 2.1,
+   "lobe_dip_mm": 0.068,
+   "K_deg_per_10um_lobe": 0.35
+  },
+  "cam": {
+   "frames_max_deg": 0.0001,
+   "lobe_cam_closure_deg": 0.0,
+   "whole_dwell_mono": true,
+   "whole_dwell_rate_max": 2.29,
+   "dipped_rate_max": 1.764,
+   "rate_rule": 3.45
+  },
+  "th_margin": {
+   "lead_rule_lt5": {
+    "bench": 84,
+    "held": 202
+   },
+   "lead_rule_min": {
+    "bench": 0.204,
+    "held": 0.184
+   },
+   "coupled_min": {
+    "bench": 5.389,
+    "held": 5.406
+   },
+   "coupled_lt5": 0,
+   "reason": "all lead-rule failures are dipped poses with m_sub 0.18-0.20; with K slaved to q2 the active Jacobian is singular iff the coupled dth/dq2 = 0 (<= 1.76 rate, m_eff >= 21.4 on dipped poses), so m_sub is not a singularity of this chain"
+  },
+  "champion_same_bench": 75.94,
+  "champion_through_knuckle_code": 66.97,
+  "verdict": "VERIFIED (not refuted): 18.64 vs champion 75.94 same bench. Level with the lead (18.67, -0.03, under the 1-point rule), not a lead change: worse at 1 mm (+0.51), 2 mm (+2.59), held out (+0.34); vs its own D=0 control better on the bench by 0.69 but worse held out by 1.10.",
+  "issues": [
+   "the dip is a 0.068 mm lobe feature: 10 um of profile error = 0.35 deg of K vs a 2.37 deg floor (15 %); the 2 recovered bench poses sit on that tolerance (203 at 0.48 mm)",
+   "bench gain (2 contact poses) does not generalise: held out 24.07 vs control 22.97 / lead 23.73",
+   "motion preview uses th_c 50 / w 8 (fast best D>0), not the row's best_params th_c 53 / w 12 whose frozen number is claimed",
+   "the lead verifier's literal th_margin fails 84 / 202 dipped poses (m_sub ~0.2); not a singularity here (coupled reading 0 under 5), but family verifiers need the coupled-rate check for non-monotone K laws",
+   "drive co-fit (242-config farm LHS) not converged: screened, not dead"
+  ]
+ }
 }

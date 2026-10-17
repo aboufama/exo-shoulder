@@ -82,20 +82,20 @@
     "lowest": {
      "own": 0.204,
      "forced": true,
-     "dK": 0.01,
+     "dK": -0.01,
      "kind": "clip",
      "plane": 30.0,
      "elev": 124.50949096679688,
      "axial": -54.797855377197266
     },
     "dipped": {
-     "n": 88,
-     "m_sub_min": 11.114,
-     "m_eff_min": 5.78
+     "n": 40,
+     "m_sub_min": 0.204,
+     "m_eff_min": 21.675
     },
     "coupled": {
-     "min": 0.204,
-     "lt5": 40
+     "min": 5.78,
+     "lt5": 0
     }
    },
    "at_pa45": {
@@ -348,20 +348,20 @@
    "lowest": {
     "own": 0.204,
     "forced": true,
-    "dK": 0.01,
+    "dK": -0.01,
     "kind": "clip",
     "plane": 30.0,
     "elev": 124.50949096679688,
     "axial": -54.797855377197266
    },
    "dipped": {
-    "n": 166,
-    "m_sub_min": 10.805,
-    "m_eff_min": 5.714
+    "n": 84,
+    "m_sub_min": 0.204,
+    "m_eff_min": 21.675
    },
    "coupled": {
-    "min": 0.204,
-    "lt5": 84
+    "min": 5.389,
+    "lt5": 0
    }
   },
   "at_pa45": {
@@ -460,10 +460,10 @@
     "env_forced_connected": 526
    }
   },
-  "secs": 1.2
+  "secs": 1.4
  },
  "wear": "bench",
  "d0": false,
- "secs": 119.7,
+ "secs": 127.6,
  "exact": true
 }

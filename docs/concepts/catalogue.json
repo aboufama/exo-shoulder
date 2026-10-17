@@ -2680,7 +2680,7 @@
   "name": "Dipped K law: the slaved knuckle closes below stop A in the mid-folded band to lift hub 2 off the bunched deltoid (spring-closed lobe dip first, on the lead with a centred knee and on kneeless-roller; groove + nose embodiment at cx 19.75 / 19.25 after the fit gate)",
   "family": "slaved-knuckle 3R, non-monotone K law (lead family with the free pin knee; kneeless control)",
   "lens": "round10:low-complexity-at-the-lead's-reach (lens 3; judge re-aimed at hub 2's scapular-plane abduction wall, the limiter that killed all three lens-1 steps, and onto the lead after simplicity v2)",
-  "status": "screened",
+  "status": "verified",
   "t_ideated": "2026-10-17T03:50:33Z",
   "source": "round 10 judge (docs/concepts/round10_ideation.md)",
   "merged_from": [
