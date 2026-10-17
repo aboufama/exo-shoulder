@@ -23,3 +23,39 @@ Round 13 (main track), screened 2026-10-17. A GHOST row (gate 1): the K drive's 
    wear on Bench(110,360) and the independent envsel draw are out-of-sample checks; the red-team pose list (binder
    117 / 127 / 129 / 139 / 316 / 264 / 237, overhead >= 140, every new loss) with per-pose depths; the round's adversarial
    verifier and the alignment auditor re-measure. Nothing here is a claim until gate 2 places drive metal on 32/48.
+
+## The morphology
+
+scapula handler (base at the J1 hub ring, outside the count) -> **J1** ACTIVE (O20, pick3's acromion-top seat bvec(95.3,
+67.7)) -> link 1a (bk1 32) -> **K** PASSIVE (O20 knuckle, slaved to th by the K drive) -> link 1b (bk2 48) -> **J2** ACTIVE
+(O20, posterolateral cap bvec(46.4, 41.6)) -> link 2 (3 mm Ti bar, 8 mm wide) -> **J3** ACTIVE (O20, seat wd ~72 deg from the
+humeral shaft, wa ~ -9.7) -> member 3 / E strap -> two-pin knee (MR63ZZ pairs at stk 6.0, outside the count) -> arm pad on
+BOTTOM. 3 ACTIVE DOF, 0 passive translations, passive rotations: K (slaved) + 2 knee pins (+ the drive's pivot in gate 2).
+
+Change vs the round-12 best long-dyad ghost (desmo-vrocker g0_s14c56k24, frozen exact 17.23): J3's seat moves up the J1-J3
+geodesic's arm end (wd 66.07 -> 71.9-73), hub 3 sits higher on the lateral deltoid and link 2 shortens (a2 58.3 -> ~55),
+lifting link 2's mid-span posterior edge off the lateral-deltoid bulge (the round-12 binder 117 / 127 / 129 / 139 / 316).
+
+## Model (docs/concepts/models/proximal-j3-geodesic-knuckle-3r.py)
+
+* Loads desmo-vrocker-longdyad-knuckle-3r.py UNCHANGED (-> spiral-lobe -> inband-rssr -> longstroke-slipper ...), every
+  member's metal, closure, knee, J2 stops, slaved K law and the claim protocol (`frozen`: fit Bench(60,160) fast, shape
+  frozen, worn on Bench(110,360) exact) are the parents'. IB_GHOST=all: **the K drive's metal is not sampled** (a GHOST).
+* Free: wd, wa, b3 (J3 seat / tilt); lE, lc, phiE, phib, ang_min (the knee) at **stk 6.0** (MR63ZZ build rule; the round-12
+  seed had pick3's 4.85); smhi, kK, kcap (the K law, allowed because the seats moved); l2v = link 2's 8 mm bar offset
+  across its great circle (+-2 mm on the O20 hub faces; the posterior-edge column).
+* Search objective: the 1 mm near-touch gap (LS_OBJ=near1), dishonest +100.
+* Reproduction: the base cell reads fit 12.17 (dump 12.17) - the parent loads exactly.
+
+## Search (Bench(60,160) fast, local, 2 niced processes; the farm window had closed)
+
+| phase | configs | best near1 (fit) | where |
+|---|---|---|---|
+| unrefit seats (wd 69-77 x wa -22..-6, knee at stk 6.0) | 20 | 13.39 (wd 75) | wd 73 unrefit: plain 11.69, near1 14.00 (min metal 0.32 mm) |
+| knee re-fit at wd 73 (LHS 36) | 36 | **11.44** (lE 89.8, lc 28.5, phib -62.1, ang_min 22.3) | knee re-fit buys 2.6 near-touch points |
+| wrap region wd 74-78 / wa -22..-12 + K-law re-tune (LHS 32) | 32 | 13.87 (wd 74.9, wa -12.3) | the wrap seat stays worse even with the law free |
+| full 12-D box (LHS 32) | 32 | 13.92 | |
+| CMA-ES (pop 14, 18 generations, 12 params) from the best | 252 | **9.31** (k266) | converged: wd 71.5-72.5, wa -9.7, lE 84-90, lc 22-26, phib -56..-61, ang_min 22.3-23, smhi ~14, kK 2.2-2.36, kcap ~57, l2v ~0 |
+
+Convergence gate (372 tries, score points): gain over the 2nd half 0.40 (< 1), over the last third 0.33 (< 0.5), top-5
+spread 0.40 (< 3) -> **converged**. The bar offset l2v never moved off 0 (+-0.3): the posterior-edge column is closed.
