@@ -188,6 +188,12 @@ if __name__ == "__main__":
     for d in (-0.05, 0.05):
         CASES[f"pivot e1 {d:+g} mm"] = (dict(dP=d * e1), gg); CASES[f"pivot e2 {d:+g} mm"] = (dict(dP=d * e2), gg)
     for d in (-0.02, 0.02): CASES[f"g {d:+g} (lobe)"] = ({}, gg + d)
+    if os.environ.get("ASB_EXTRA") == "1":                   # where does the PHYSICAL crank cap sit, and the stacked worst lag
+        CASES = {f"r_c {d:+g} mm": (dict(dr=d), gg) for d in (-0.3, -0.4, -0.5, -0.6, -0.8, -1.0)}
+        for d in (-3.0, -2.0, 2.0, 3.0): CASES[f"beta {d:+g} deg"] = (dict(dbeta=d), gg)
+        CASES["stack lag: r_c -0.05, beta -0.25, pivot e2 -0.05, g +0.02"] = (dict(dr=-0.05, dbeta=-0.25, dP=-0.05 * e2), gg + 0.02)
+        CASES["stack lag at +-0.02 mm: r_c -0.02, beta -0.075, pivot e2 -0.02, g +0.01"] = (dict(dr=-0.02, dbeta=-0.075, dP=-0.02 * e2), gg + 0.01)
+        CASES["stack lead: r_c +0.05, beta +0.25, pivot e2 +0.05, g -0.02"] = (dict(dr=0.05, dbeta=0.25, dP=0.05 * e2), gg - 0.02)
     phis = np.r_[np.arange(-0.9, 0.0, 0.1), np.arange(0.0, 22.0 + 1e-9, 0.05)]
     res = dict(nominal_synthesis=nominal_syn, note=__doc__.split("\n\n")[0], cases={})
     for name, (case, gl) in CASES.items():
