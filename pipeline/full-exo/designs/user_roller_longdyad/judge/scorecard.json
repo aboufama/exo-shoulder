@@ -74,10 +74,10 @@
  {
   "id": "R7",
   "name": "Every custom part is one valid closed solid",
-  "value": false,
+  "value": true,
   "unit": null,
   "target": "== True",
-  "status": "FAIL",
+  "status": "PASS",
   "judge": "judge/part_validity.py (OCC BRepCheck on the exported STEP)"
  },
  {

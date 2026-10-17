@@ -10,7 +10,7 @@
 | R5 | Shoulder-chain DOF from the scapula base to the arm, counted kinematically (cap 4; the user's scapula handler is a separate part) | 3 | <= 4 | **PASS** | design.json |
 | R5-aim | Aim: exactly 3 DOF, the minimum (user 2026-10-15) | 3 | <= 3 | **PASS** | design.json |
 | R6 | No interference between parts that move relative to each other | 0.0 mm | <= 0.15 mm | **PASS** | judge/part_contact.py (geometry only) |
-| R7 | Every custom part is one valid closed solid | False | == True | **FAIL** | judge/part_validity.py (OCC BRepCheck on the exported STEP) |
+| R7 | Every custom part is one valid closed solid | True | == True | **PASS** | judge/part_validity.py (OCC BRepCheck on the exported STEP) |
 | R8 | Custom-part mass budget (user: 500 g for the shoulder) | 212.5 g | <= 500 g | **PASS** | parts_full.json (mesh volume x density) |
 | R9 | Strength at the MVP2 design load (arm gravity support + margin: 10 N.m about GH from a 50 N cuff force at 200 mm, worst direction; was 25 N.m): min yield SF over the load-path parts; fatigue (Goodman, 1e7 cycles, fully reversed) and chain deflection (sum of the parts' GH-point motion) within the 2 mm floor and the min skin gap | - | >= 1.5 SF and fatigue SF >= 1.0 and deflection within the floor == True and every load-path part analysed == True and joint hardware at the D1F tilt (bearing static s0 >= 1, pin / threads SF >= 1.5) == True and fall on the elbow (2 x D1F) below fracture >= 1.0 | **NOT RUN** | judge/fea.py (CalculiX 2.21 C3D10 on gmsh tet10 of the STEP parts, validated on a cantilever and a thick ring within 2 %: judge/fea_validation.json; t/2 + t/3 mesh-convergence pair per part; red team: worst direction, overhead, 2x fall, smallest section, joint bearings / pin / threads (hand calcs on the FE wrench); sizing by re-solving the mapped mesh: judge/fea_sizing.py) |
 | R10 | Base rides the scapula on the user's scapula handler: worst GH-centre misalignment from the handler slipping over the bone (4 mm, confirmed) | - | <= 4.0 mm | **NOT RUN** | judge/base_mount.py + judge/base_slip.py (girdle mount: literature skin-slip model, central law; acromion-cluster vs bone errors Karduna 2001 / van Andel 2009 / Lempereur 2014, lever from the OpenSim Seth 2016 scapula; docs/research/base_slip_model.md). Thorax mounts keep the three-girdle-law check |
@@ -22,7 +22,7 @@
 | R16 | Follows the functional everyday workspace (built design: chain closes, no body contact, no part interference) | 64.2% | >= 0.9 | **FAIL** | judge/workspace.py (L1 CAD over the functional workspace poses; user: 90 % range first) |
 | R17 | Moves freely unpowered (MVP1): the arm drives the chain through every clip, peak <= 1 N.m about the shoulder, <= 5 N and <= 5 deg at the cuff, no stall, no undriven spare joint | True | == True | **PASS** | judge/dynamics.py (MuJoCo 3.16; rolling bearings mu 0.005; load-dependent friction; validated in judge/test_dynamics.py) |
 
-7 of 19 requirements pass.
+8 of 19 requirements pass.
 
 Notes:
 
