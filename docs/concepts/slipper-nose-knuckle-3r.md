@@ -254,3 +254,88 @@ same column.
   lead.
 - **Next.** Wear test of the 440C / DLC pair at 5-15 N to pin mu. Then CAD of the re-cut flank: its 1.3 mm concave
   pocket and the O2.4 pin seat in the 3 mm Ti arm tip.
+
+## Verification (independent skeptic, 2026-10-17 ~06:30 UTC)
+
+Harness: `docs/concepts/verify/slipper-nose-knuckle-3r.py`. It loads the claim's model unchanged (SN_CELL=lead) and
+reuses the lead's verifier (`docs/concepts/verify/roller-longdyad-knuckle-3r.py`, on the round's roller-flank verifier),
+retargeted at the claim's model class, clamp, params, best config and nose radius. The parent harness hard-codes the
+roller's 3 mm in its nose-vs-lug check, so the retarget sets it to nose_r. It adds four checks for the sliding nose:
+
+- **N1, pressure angle with friction.** At every taken pose, kinematic PA + atan(mu) <= 43 (the claim's rule) and
+  <= 45 (the judge's gate).
+- **N2, conjugate validity.** Every flank contact point over the used stroke must stay >= nose_r - 0.02 mm from the
+  nose centre at every other K step (0.05 deg grid). Otherwise the flank has an undercut and the scored flank does not
+  exist there. The parent's lug sampling deletes every sample within ROLL_R + 0.3 of the path, which would hide one.
+- **N3, relative pole.** The nose centre's sliding speed per unit of K, and the flank's smallest radius.
+- **N4, stock nose and friction.** The shape worn again with stock ISO 8734 radii (O2.5, O2) and at mu 0.12. The flank
+  is re-cut for each nose by the claim's own synthesis; the drive parameters are unchanged.
+- `--edge`: an envelope correction with no head (a pressed dowel has none). It re-adds the lug's flank-edge strip at
+  nose_r + 0.1 from the path.
+
+Protocol: fit on Bench(60,160) fast, freeze the shape, then wear it on Bench(110,360) exact (CB_EXACT=1, farm batch,
+6 jobs, $0.06) and on the held-out set. Outputs are in `docs/concepts/verify/slipper-nose-knuckle-3r_v_*.json`.
+
+| frozen exact | plain | 1 mm | 2 mm | reach | follow | ib14 | ib10 | contact | min metal |
+|---|---|---|---|---|---|---|---|---|---|
+| Bench(110,360), the claim (A, nose_r 1.1839, mu 0.087) | **18.49** | 20.12 | 33.02 | 0.725 | 1.0 | 0.8955 | 0.5163 | 0.0054 | 0.07 mm |
+| Bench(110,360), envelope-corrected (lug flank-edge strip, no head) | 18.44 | 20.07 | 33.02 | 0.725 | 1.0 | 0.8960 | 0.5175 | 0.0054 | 0.07 mm |
+| Bench(110,360), stock O2.5 dowel (nose_r 1.25) | 18.49 | 20.12 | 33.02 | 0.725 | 1.0 | 0.8955 | 0.5162 | 0.0054 | 0.07 mm |
+| Bench(110,360), stock O2 dowel (nose_r 1.0) | 18.49 | 20.12 | 33.02 | 0.725 | 1.0 | 0.8955 | 0.5160 | 0.0054 | 0.07 mm |
+| Bench(110,360), mu 0.12 (PA_kin cap 36.16) | 18.49 | 20.12 | 33.02 | 0.725 | 1.0 | 0.8955 | 0.5163 | 0.0054 | 0.07 mm |
+| held out | 23.45 | 26.54 | 36.95 | 0.683 | 1.0 | 0.8943 | 0.5148 | 0.0116 | 0.33 mm |
+| champion spherical 3R, same bench (risley-turret verifier) | 75.94 | | | | | | | | |
+
+**Checks on every taken pose: 0 of 371 fail on the bench, 0 of 852 held out, in every column.**
+
+- **Cam closure in the world:** 0.0 mm.
+- **Nose vs lug:** the nose centre stays 2.70-3.28 mm from the lug's mid-shell metal, against the nose's 1.18 mm radius.
+- **K sense:** always the drive's (0 wrong-sense poses).
+- **Pressure angles:**
+  - Kinematic: crank 29.5, horn 35.8 (36.1 held out), under the claim's friction cap of 38.03.
+  - With friction (mu 0.087): horn 40.8 (41.1 held out), crank 34.5. That passes both 43 and 45.
+  - At mu 0.12: horn 42.6 with friction, still <= 43.
+  - The real lobe pressure angle is 23.5.
+- **Stroke:** dK taken 45.6 deg (46.3 held out), inside dK_lim 49.75.
+  - dK_lim is 49.5 with the O2.5 nose, 50.5 with O2, and 46.25 at mu 0.12.
+  - The drive is not idle.
+- **Fold margin in th:** minimum 5.181 on the bench and 5.006 held out; no pose is under 5.
+- **Continuity flood:** the full grid drops 0 poses (18.49); knn 20.16 (6 dropped); bench-only 50.11. These match the
+  claim.
+- **N2, conjugate validity:** 0 undercut points over 913 steps (0.0 mm). The flank exists everywhere the nose uses it.
+- **N3, relative pole:**
+  - The nose sits 0.66 mm/rad from the relative pole at rest (8.5 at the end of the stroke).
+  - The flank there is a conformal pocket: radius 1.285 at K 0.5 deg, against nose 1.184 (0.10 mm clearance). With the
+    O2.5 dowel the pocket is 1.351.
+  - This is wire-EDM-able. Conformal contact keeps the stress lowest exactly there. Normals and pressure angles are well
+    conditioned, because both stay under the cap.
+
+**Lost poses:** 99 of 360 (fold 88, slide 9, contact 2), the lead's own. Overhead: 8 of 28 (fold 14, slide 4,
+contact 2).
+
+**Parts in band:** hub3 0.739, L2 0.736, crank 0.818, nose 0.938; the rest >= 0.93. Mechanism: 3 active, 0 passive
+translations, no gears / pulleys / cables.
+
+**Where the +0.18 over the lead comes from (attribution, not a refutation).** The score does not move with the nose:
+
+- O2, O2.37 and O2.5 all give 18.49, and so does mu 0.087 -> 0.12. The drive stroke never binds, because K's dyad
+  window caps first: taken 45.6 against dK_lim 46.25-50.5.
+- The gain is the re-fit arm geometry (beta, r_c, lift): the crank's in-band rises 0.797 -> 0.818.
+- The lead's own MR63ZZ roller (O6 plus the O4.5 head, PA 43, mu 0) worn on A's re-fit arm scores 12.88 plain on the
+  fast bench, against the nose's 13.00. Its dK_lim is 52.2, the crank 0.819 in band.
+- Frozen exact Bench(110,360), the same protocol through the lead model's own code (farm, not re-run through this
+  harness): **18.36**. Reach 0.725, ib14 0.8968, contact 0.0054. Lost: fold 88, slide 9, contact 2. 1 mm 19.99, 2 mm
+  34.66 (the O4.5 head).
+
+So against a roller given the same arm re-fit, the nose costs 0.13 plain (18.49 vs 18.36) and 0.13 at 1 mm, and gains
+1.64 at 2 mm (no head under the tip). It saves one bearing and 2.0 complexity. The claim's "+0.18 over the lead"
+compares with the lead's un-refit arm, so it is not the nose's gain. The claim itself files the move as a
+simplification rather than a points lead, which is the correct reading. File it as a simplification at -0.13 plain:
+below the 1-point rule either way.
+
+**Verdict: VERIFIED, not refuted.**
+
+- **The numbers:** 18.49 frozen exact Bench(110,360), score 93.28, against the champion's 75.94 on the same bench.
+- **Hard rules:** none broken.
+- **Recommendation:** build it with the stock ISO 8734 O2.5 m6 dowel (nose_r 1.25, measured 18.49) instead of the
+  O2.37 ground pin.

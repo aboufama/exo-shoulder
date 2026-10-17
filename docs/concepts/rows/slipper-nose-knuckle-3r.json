@@ -6,7 +6,7 @@
  "active_dof": 3,
  "passive_dof": 4,
  "passive_translations": 0,
- "status": "screened",
+ "status": "verified",
  "t_ideated": null,
  "t_screened": "2026-10-17T05:45:50Z",
  "reach": 0.775,
@@ -15,11 +15,11 @@
  "inband10": 0.5128,
  "contact": 0.0,
  "gap": 13.0,
- "v_reach": null,
- "v_follow": null,
- "v_inband14": null,
- "v_inband10": null,
- "v_gap": null,
+ "v_reach": 0.725,
+ "v_follow": 1.0,
+ "v_inband14": 0.8955,
+ "v_inband10": 0.5163,
+ "v_gap": 18.49,
  "n_configs": 3763,
  "complexity": 22.25,
  "mechanism": {
@@ -75,7 +75,7 @@
  },
  "verdict": "screened - a Pareto move of the lead, not a reach move. The roller is deleted and the flank re-fit at the honest friction (mu 0.087, PA_kin 38): frozen exact Bench(110,360) 18.49 (score 93.28) vs the lead roller's 18.67 through the same Frozen class. Same reach (261/360, overhead 8/28) and the same 2 contact poses; +0.0018 in-band from the re-cut arm. Complexity 22.25 vs 24.25, one bought bearing fewer, 0 passive translations. With the lead's drive left unchanged the nose costs +0.10 at mu 0.05 and +1.23 at mu 0.087; the re-fit flank holds its fast number to mu 0.12. The +0.18 is below the 1-point rule: claim it as a simplification at equal score, not as a new lead by points. Kneeless + wedge control reproduced (21.18 flat / 20.12 wedged at mu 0.05; 21.76 / 20.70 at 0.087). The planar wedge cannot drop on the pin-knee lead (hub 3 already passes 0.38 mm over the skin at a fit pose).",
  "limiter": "Measured on the frozen claim: the lead's own walls. Fold 88 (overhead 14): K's dyad window a1max binds before the drive; the re-fit flank reaches dK 49.8, and even 52.8-60 at lower mu buys 0 poses. Knee slide 9 (overhead 4). Contact 2: the horn lug on hub K / the crank, at the lead's poses. Gap = reach 17.50 + in-band 0.45 + contact 0.54. Parts in band: hub3 0.739, L2 0.736, crank 0.818. Near-touch: 0.07 mm at the lead's pose (plane -60, elev 60, axial 105).",
- "note": "Search: the 160-config farm sweep (coarse1: nose radius x friction, wedge tau x psi, a random drive re-fit at mu 0.087), then CMA-ES on the farm. A = drive + nose at mu 0.087, 993 evals; B = + 11 seats, 1617; C = drive + nose at mu 0.05, 993. Convergence gate (2 mm objective, score points): A 0.00 / 0.00 / 0.00, B 0.36 / 0.31 / 0.12, C 0.00 / 0.00 / 0.00 - all pass. Friction enters as PA_kin = 43 - atan(mu) on both sides. A smaller nose lowers the horn PA at a given dK (~+2.3 deg of stroke per -0.5 mm of radius). Claim columns, frozen exact: lead drive mu 0 / 0.05 / 0.087 = 18.75 / 18.77 / 19.90; held out (mu 0.05) 23.73 = the lead's; A at mu 0.087 = 18.49. The mechanism record counts the ISO 8734 dowel as a bought part (22.25; the spec's 22.0 left it out). Loads, MVP1 (unpowered): clock spring 0.08 N.m + 0.03 N.m/rad gives ~9 N normal at r 15 mm. Hertz on O2.4 vs a convex 3.5 mm flank: ~340 MPa. Friction drag ~0.01-0.02 N.m vs R17's 1 N.m. Wear (Archard, k 1e-7, 1e6 cycles): ~1 um on the flank, ~14 um on the nose generatrix. Wear test at 5-15 N before CAD. The nose on DLC-coated Ti carries ~175 N static vs the MR63ZZ's ~70 N. Frozen columns (farm sn_claims3, identical to the local run): A at mu 0.05 18.46; C (re-fit at mu 0.05) 18.55; B (seats re-fit too) 19.81 / held out 24.78 - the seat refit tunes to the fit sample (round-3 lesson c), so the seats stay the lead's; A flood: full 18.49, knn 20.16 (lead 18.67 / 20.34).",
+ "note": "Search: the 160-config farm sweep (coarse1: nose radius x friction, wedge tau x psi, a random drive re-fit at mu 0.087), then CMA-ES on the farm. A = drive + nose at mu 0.087, 993 evals; B = + 11 seats, 1617; C = drive + nose at mu 0.05, 993. Convergence gate (2 mm objective, score points): A 0.00 / 0.00 / 0.00, B 0.36 / 0.31 / 0.12, C 0.00 / 0.00 / 0.00 - all pass. Friction enters as PA_kin = 43 - atan(mu) on both sides. A smaller nose lowers the horn PA at a given dK (~+2.3 deg of stroke per -0.5 mm of radius). Claim columns, frozen exact: lead drive mu 0 / 0.05 / 0.087 = 18.75 / 18.77 / 19.90; held out (mu 0.05) 23.73 = the lead's; A at mu 0.087 = 18.49. The mechanism record counts the ISO 8734 dowel as a bought part (22.25; the spec's 22.0 left it out). Loads, MVP1 (unpowered): clock spring 0.08 N.m + 0.03 N.m/rad gives ~9 N normal at r 15 mm. Hertz on O2.4 vs a convex 3.5 mm flank: ~340 MPa. Friction drag ~0.01-0.02 N.m vs R17's 1 N.m. Wear (Archard, k 1e-7, 1e6 cycles): ~1 um on the flank, ~14 um on the nose generatrix. Wear test at 5-15 N before CAD. The nose on DLC-coated Ti carries ~175 N static vs the MR63ZZ's ~70 N. Frozen columns (farm sn_claims3, identical to the local run): A at mu 0.05 18.46; C (re-fit at mu 0.05) 18.55; B (seats re-fit too) 19.81 / held out 24.78 - the seat refit tunes to the fit sample (round-3 lesson c), so the seats stay the lead's; A flood: full 18.49, knn 20.16 (lead 18.67 / 20.34). | VERIFIED 2026-10-17T06:22:57Z (skeptic, farm, CB_EXACT): frozen exact Bench(110,360) 18.49 (score 93.28; reach 0.725, follow 1.0, ib14 0.8955, ib10 0.5163, contact 0.0054), 1 mm 20.12, 2 mm 33.02, min metal 0.07 mm, overhead 8/28 = the claim; envelope-corrected (lug flank-edge strip, no head) 18.44; held out 23.45; flood full 18.49 / knn 20.16. Added checks: 0 failing taken poses (0/371 bench, 0/852 held): closure 0.0 mm, nose-lug 2.70-3.28 mm vs nose r 1.18, K sense always the drive's, PA kinematic crank 29.5 / horn 35.8 <= 38.03, with friction 34.5 / 40.8 <= 43 (and 45), lobe 23.5, dK 45.6 of 49.75, th margin 5.181 (held 5.006), conjugate undercut 0 points, nose 0.66 mm/rad off the relative pole at rest in a 1.285 mm conformal pocket. Robustness: stock ISO 8734 O2.5 (nose_r 1.25) 18.49, O2 18.49, mu 0.12 18.49 (horn PA+friction 42.6) - build it with the stock O2.5 dowel. Attribution: the score does not depend on the nose (dyad window binds first); the lead roller on A's re-fit arm scores 18.36 frozen (2 mm 34.66), so the +0.18 vs the lead is the arm re-fit and the nose itself is -0.13 plain / +1.64 at 2 mm / -2.0 complexity. Champion same bench 75.94 (risley-turret verifier, Bench(110,360) exact, kit checks + 1 mm clearance). Not refuted.",
  "doc": "docs/concepts/slipper-nose-knuckle-3r.md",
  "fast": {
   "gap": 13.0,
@@ -1631,5 +1631,92 @@
   "fast_near2": 17.64,
   "frozen": 18.18,
   "note": "the CMA-A evaluation with the best PLAIN fast gap (nose_r 1.106); worn frozen alongside A before either result was seen; 18.18 frozen (ib14 0.8986, same reach / contact / near-touch); held out not run. The primary claim stays A (selected by the declared objective) so the frozen bench is not used to choose."
+ },
+ "t_verified": "2026-10-17T06:22:57Z",
+ "verification": {
+  "harness": "docs/concepts/verify/slipper-nose-knuckle-3r.py (the lead's verifier retargeted at SNModel + nose radius; adds N1 PA+friction per pose at 43 and 45, N2 conjugate undercut, N3 relative pole, N4 stock dowels / mu 0.12, --edge envelope without head)",
+  "bench": "Bench(110,360) exact (CB_EXACT=1), frozen shape (fit Bench(60,160) fast), farm",
+  "frozen": {
+   "gap": 18.49,
+   "reach": 0.725,
+   "follow": 1.0,
+   "inband14": 0.8955,
+   "inband10": 0.5163,
+   "contact": 0.0054,
+   "near1": 20.12,
+   "near2": 33.02,
+   "min_metal_mm": 0.07,
+   "overhead140": [
+    8,
+    28
+   ]
+  },
+  "edge_corrected": {
+   "gap": 18.44,
+   "near1": 20.07,
+   "near2": 33.02,
+   "inband14": 0.896
+  },
+  "nose_r_1.25_O2.5_dowel": 18.49,
+  "nose_r_1.0_O2_dowel": 18.49,
+  "mu_0.12": 18.49,
+  "held_out": {
+   "gap": 23.45,
+   "reach": 0.6828,
+   "inband14": 0.8943,
+   "contact": 0.0116,
+   "near1": 26.54,
+   "near2": 36.95,
+   "min_metal_mm": 0.33
+  },
+  "flood": {
+   "full": 18.49,
+   "knn": 20.16,
+   "bench": 50.11
+  },
+  "checks": {
+   "failing_taken_poses": {
+    "bench": "0/371",
+    "held": "0/852"
+   },
+   "closure_max_mm": 0.0,
+   "nose_lug_mm": [
+    2.698,
+    3.276
+   ],
+   "wrong_sense": 0,
+   "pa_kin_crank_horn": [
+    29.5,
+    35.8
+   ],
+   "pa_eff_mu087": [
+    34.47,
+    40.77
+   ],
+   "pa_eff_horn_mu012": 42.64,
+   "pa_lobe": 23.53,
+   "dK_taken_vs_lim": [
+    45.62,
+    49.75
+   ],
+   "th_margin_min": [
+    5.181,
+    5.006
+   ],
+   "undercut_points": 0,
+   "vrel_rest_mm_per_rad": 0.659,
+   "pocket_r_vs_nose_mm": [
+    1.285,
+    1.184
+   ]
+  },
+  "roller_at_A_frozen": {
+   "gap": 18.36,
+   "near1": 19.99,
+   "near2": 34.66,
+   "note": "the lead's MR63ZZ roller (+O4.5 head, PA 43, mu 0) on A's re-fit arm, lead model's own frozen protocol: the +0.18 over the lead is the arm re-fit, the nose itself costs 0.13 plain and gains 1.64 at 2 mm"
+  },
+  "champion_same_bench": 75.94,
+  "refuted": false
  }
 }

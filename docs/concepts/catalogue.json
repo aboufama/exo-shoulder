@@ -2704,7 +2704,7 @@
   "name": "Slipper-nose knuckle: the drive's roller deleted (hardened O3 nose sliding on the flank) - re-aimed onto the lead (cx 24.25 -> 22.0), with the proposer's kneeless + hub-3 wedge chain (20.12 frozen) as the measured control",
   "family": "slaved-knuckle 3R (lead family with the free pin knee; kneeless control)",
   "lens": "round10:low-complexity-at-the-lead's-reach (lens 3; re-aimed onto the lead after simplicity v2)",
-  "status": "screened",
+  "status": "verified",
   "t_ideated": "2026-10-17T03:50:33Z",
   "source": "round 10 judge (docs/concepts/round10_ideation.md)",
   "merged_from": [],
