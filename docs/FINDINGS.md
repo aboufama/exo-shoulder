@@ -2107,7 +2107,7 @@ Scripts are in `docs/research/fold_ceiling/`. No rule, bench or verified row was
 
 * Over all 247,860 seat pairs the user's ruling allows, a window >= 80 deg wide holds 0.99 of the 360 poses (held
   out 0.97-0.99 on the same seats).
-* At the leader's seats, the best placement holds 0.797 at its width and 0.872 at 105.
+* At the leader's seats, a window of the stop-B width (86.3) holds at most 0.797 and one of width 105 holds 0.872. The drive's real width is 81.8.
 * Re-placing the window does not help:
   * a2 ~62 would add 10 poses only at the stop-B width;
   * at the drive's width it adds nothing;

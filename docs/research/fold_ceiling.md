@@ -101,6 +101,13 @@ By region:
 | behind the back | 25 | 19 | 6, all stretched |
 | the rest | 245 | 214 | stretched 16, folded 10, knee 5 |
 
+**The 11 non-fold losses are also overhead abduction.**
+
+- 9 are knee / slide (R_tol): plane -15..15, elevation 90-165, mostly external rotation 15-45. One more is at (60, 150,
+  -105).
+- 2 are contact at elevation 165 (plane 15 / 30, axial -60), with metal 10.5 and 5.9 mm inside the skin.
+- With the 5 folded overhead poses, the scapular-plane overhead cone is the leader's second loss region.
+
 **Held out (952 workspace poses):**
 
 - Taken 649.

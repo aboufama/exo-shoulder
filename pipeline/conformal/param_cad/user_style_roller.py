@@ -265,7 +265,7 @@ def rotm(ax, a):
 
 def l1b_top_under(body, ax, r, z_lo, z_hi):
     """highest point (along ax, through GH) of a solid within radius r of the axis line, between z_lo and z_hi (tessellation)"""
-    vs, fs = body.copy().tessellate(0.05, 0.3); V = np.array  # (a copy: a triangulated part exports a STEP that fails BRepCheck)([[v.x, v.y, v.z] for v in vs]); m = trimesh.Trimesh(V, np.array(fs), process=False)
+    vs, fs = body.copy().tessellate(0.05, 0.3); V = np.array([[v.x, v.y, v.z] for v in vs]); m = trimesh.Trimesh(V, np.array(fs), process=False)   # a copy: a triangulated part exports a STEP that fails BRepCheck
     P = np.r_[V, trimesh.sample.sample_surface_even(m, 60000, seed=3)[0]]; h = P @ ax; w = P - np.outer(h, ax); rr = np.linalg.norm(w, axis=1)
     sel = (rr < r) & (h > z_lo) & (h < z_hi)
     return float(h[sel].max()) if sel.any() else None
@@ -688,11 +688,8 @@ def main():
     lay = drive_layout(M, lg, dg, l1b_body)
     ring, rep["lobe"], lobe_g = lobe_ring(M, lg, dg, lay)
     cp, rep["crank"] = crank_parts(M, dg, lay)
-    for i, (g, n, s) in enumerate(lk):                                                         # the O3 press bore for the crank pivot pin: cut only if the bar
-        if n.startswith("D8-02b"):                                                              # stays one valid solid (else the pin is drawn pressed = overlapping)
-            s2 = s.cut(disc(np.zeros(3), lay["dR"], PIN_R, lay["l1b_top"] - T - 1.0, lay["l1b_top"] + 0.5))
-            ok = s2.isValid() and len(s2.Solids()) == 1; rep["crank"]["pivot_bore_cut_in_link_1b"] = bool(ok)
-            if ok: lk[i] = (g, n.replace("carries the crank pivot pin", "carries the crank pivot pin (O3 press bore)"), s2)
+    rep["crank"]["pivot_pin"] = ("O3 h6 pressed in link 1b: drawn as the press fit (pin overlapping its bore); a boolean bore through link 1b's 4-strip bar "
+                                 "raises OCC tolerances in place and its STEP then fails BRepCheck")
     parts += lk
     parts.append(("l2", f"D9-02 drive lobe ring: 17-4PH H900, wire-EDM (taper {rep['lobe']['e_ext_to_u2_deg']:.1f} deg along the follower axis), profile r "
                         f"{rep['lobe']['profile_r_mm'][0]:.2f} -> {rep['lobe']['profile_r_mm'][1]:.2f} mm ({rep['lobe']['arcs']} 3-point arcs), dwell r {rep['lobe']['dwell_r_mm']:.2f}, "

@@ -324,12 +324,12 @@
   {
    "k": 26,
    "group": "l1b",
-   "name": "D8-02b link 1b: 8x3 bar on a line/arc chain, K upper pad + O20 ring + M18 spigot + bore (2 dowel holes), J2 pad + integral O7 pin with the 116.3-deg q2 stop slot; carries the crank pivot pin (machined from solid Ti-6Al-4V (2.5-D: 4 side-view sketches side by side of lines + tangent arcs through the model's strap stations, extruded 2 mm; 3+2-axis milling - a wire cannot cut strips of different profiles side by side), rounds R2 / R0.5 in the profile)",
-   "vol_cm3": 3.119,
+   "name": "D8-02b link 1b: 8x3 bar on a line/arc chain, K upper pad + O20 ring + M18 spigot + bore (2 dowel holes), J2 pad + integral O7 pin with the 116.3-deg q2 stop slot; carries the crank pivot pin (O3 press bore) (machined from solid Ti-6Al-4V (2.5-D: 4 side-view sketches side by side of lines + tangent arcs through the model's strap stations, extruded 2 mm; 3+2-axis milling - a wire cannot cut strips of different profiles side by side), rounds R2 / R0.5 in the profile)",
+   "vol_cm3": 3.116,
    "material": "hardened steel (polished)",
-   "mass_g": 24.48,
+   "mass_g": 24.46,
    "valid": false,
-   "faces": 265,
+   "faces": 269,
    "solids": 1,
    "watertight_judge_units": true
   },
