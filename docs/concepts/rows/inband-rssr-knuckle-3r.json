@@ -29,5 +29,760 @@
   "bl_h": 0
  },
  "pick_rule": "docs/research/inband_drive/picks.json (committed before any frozen / held-out number)",
- "doc": "docs/research/inband_drive.md"
+ "doc": "docs/research/inband_drive.md",
+ "t_screened": "2026-10-17T10:30:00Z",
+ "reach": 0.775,
+ "follow": 1.0,
+ "inband14": 0.8971,
+ "contact": 0.0,
+ "gap": 16.47,
+ "gap_plain_fast": 12.79,
+ "v_reach": null,
+ "v_follow": null,
+ "v_inband14": null,
+ "v_inband10": null,
+ "v_gap": null,
+ "claim": {
+  "bench": "Bench(110,360) exact, frozen shape fit on Bench(60,160) fast (farm, docs/research/inband_drive/farm/claimA/p_bench.json)",
+  "gap": 18.87,
+  "score": 93.14,
+  "frozen": {
+   "gap": 18.87,
+   "reach": 0.7222,
+   "follow": 1.0,
+   "inband14": 0.8971,
+   "inband10": 0.5109,
+   "contact": 0.008
+  },
+  "why": {
+   "fold": 88,
+   "slide": 9,
+   "flip": 0,
+   "closure": 0,
+   "skin": 0,
+   "parts": 0,
+   "contact": 3
+  },
+  "near1": 19.96,
+  "near2": 34.12,
+  "min_metal_mm": 0.65,
+  "overhead": {
+   "ws": 28,
+   "taken": 8
+  },
+  "contact_depth": {
+   "n": 3,
+   "sum_mm": 9.856,
+   "max_mm": 9.724,
+   "per_pose": [
+    0.044,
+    9.724,
+    0.088
+   ]
+  },
+  "th_margin_min": 5.231,
+  "th_max_taken": 106.3,
+  "dK_taken_max": 45.83,
+  "dK_lim": 65.8,
+  "split": {
+   "n": 3,
+   "by_part": {
+    "hubK": 1,
+    "rod": 1,
+    "horn": 1,
+    "m8:rod/rodends": 1,
+    "m1:hubK/horn": 1,
+    "rodends": 1,
+    "m7:hub2/ear": 1
+   }
+  },
+  "parts_ib14": {
+   "hub1": 0.999,
+   "hubK": 0.992,
+   "hub2": 0.959,
+   "hub3": 0.741,
+   "E": 0.966,
+   "boss": 0.988,
+   "pad": 1.0,
+   "knee": 0.942,
+   "crank": 0.71,
+   "horn": 0.933,
+   "rod": 0.87,
+   "rodends": 0.849,
+   "ear": 1.0,
+   "L1a": 0.981,
+   "L1b": 0.931,
+   "L2": 0.739
+  }
+ },
+ "held_out": {
+  "claim": 23.21,
+  "claim_detail": {
+   "frozen": {
+    "gap": 23.21,
+    "reach": 0.6828,
+    "follow": 1.0,
+    "inband14": 0.8956,
+    "inband10": 0.5096,
+    "contact": 0.0105
+   },
+   "why": {
+    "fold": 260,
+    "slide": 33,
+    "flip": 0,
+    "closure": 0,
+    "skin": 0,
+    "parts": 0,
+    "contact": 9
+   },
+   "near1": 26.53,
+   "near2": 36.97,
+   "min_metal_mm": 0.03,
+   "overhead": {
+    "ws": 71,
+    "taken": 19
+   },
+   "contact_depth": {
+    "n": 9,
+    "sum_mm": 23.199,
+    "max_mm": 8.708,
+    "per_pose": [
+     3.851,
+     5.499,
+     1.821,
+     1.185,
+     1.065,
+     0.923,
+     8.708,
+     0.003,
+     0.144
+    ]
+   },
+   "th_margin_min": 5.045,
+   "th_max_taken": 106.67,
+   "dK_taken_max": 46.44,
+   "dK_lim": 65.8,
+   "split": {
+    "n": 9,
+    "by_part": {
+     "m7:hub2/ear": 3,
+     "horn": 3,
+     "m2:?": 2,
+     "hub2": 2,
+     "rodends": 1,
+     "m1:hubK/horn": 1,
+     "hubK": 1,
+     "rod": 1,
+     "m8:rod/rodends": 1
+    }
+   },
+   "parts_ib14": {
+    "hub1": 0.999,
+    "hubK": 0.99,
+    "hub2": 0.957,
+    "hub3": 0.735,
+    "E": 0.966,
+    "boss": 0.989,
+    "pad": 1.0,
+    "knee": 0.943,
+    "crank": 0.705,
+    "horn": 0.926,
+    "rod": 0.866,
+    "rodends": 0.845,
+    "ear": 1.0,
+    "L1a": 0.979,
+    "L1b": 0.932,
+    "L2": 0.738
+   }
+  },
+  "robust_build": 23.16,
+  "secondary_cma1_f": 23.42,
+  "slipper_nose": 23.45,
+  "paired_vs_slipper_nose": {
+   "bench": {
+    "diff": 0.39,
+    "ci90": [
+     -0.28,
+     1.54
+    ],
+    "p_A_better": 0.216,
+    "discordant": {
+     "ws_taken_A_only": 0,
+     "ws_taken_B_only": 1,
+     "contact_A_only": 1,
+     "contact_B_only": 0,
+     "contact_both": 2
+    }
+   },
+   "held": {
+    "diff": -0.24,
+    "ci90": [
+     -0.68,
+     0.17
+    ],
+    "p_A_better": 0.77,
+    "discordant": {
+     "ws_taken_A_only": 1,
+     "ws_taken_B_only": 1,
+     "contact_A_only": 0,
+     "contact_B_only": 1,
+     "contact_both": 9
+    }
+   },
+   "pooled_bench_plus_held": {
+    "diff": -0.06,
+    "ci90": [
+     -0.44,
+     0.39
+    ],
+    "p_A_better": 0.546,
+    "discordant": {
+     "ws_taken_A_only": 1,
+     "ws_taken_B_only": 2,
+     "contact_A_only": 1,
+     "contact_B_only": 1,
+     "contact_both": 11
+    }
+   }
+  },
+  "per_pose_dumps": "docs/research/inband_drive/farm/claimA/inband-rssr-knuckle-3r_{bench,held}_perpose.json (tools/alignment_paired.py dump --out; recomputed gaps 18.87 / 23.21 = the claim)"
+ },
+ "frozen": {
+  "bench": "Bench(110,360) exact, frozen shape fit on Bench(60,160) fast",
+  "gap": 18.87,
+  "reach": 0.7222,
+  "follow": 1.0,
+  "inband14": 0.8971,
+  "inband10": 0.5109,
+  "contact": 0.008,
+  "score": 93.14,
+  "near_touch_gap": 19.96,
+  "near_touch_2mm": 34.12,
+  "min_metal_mm": 0.65,
+  "why": {
+   "fold": 88,
+   "slide": 9,
+   "flip": 0,
+   "closure": 0,
+   "skin": 0,
+   "parts": 0,
+   "contact": 3
+  },
+  "overhead_taken": "8/28",
+  "parts_ib14": {
+   "hub1": [
+    0.999,
+    8.6,
+    80
+   ],
+   "hubK": [
+    0.992,
+    7.9,
+    80
+   ],
+   "hub2": [
+    0.959,
+    11.1,
+    80
+   ],
+   "hub3": [
+    0.741,
+    11.5,
+    80
+   ],
+   "E": [
+    0.966,
+    6.5,
+    104
+   ],
+   "boss": [
+    0.988,
+    8.5,
+    32
+   ],
+   "pad": [
+    1.0,
+    8.1,
+    32
+   ],
+   "knee": [
+    0.942,
+    10.7,
+    85
+   ],
+   "crank": [
+    0.71,
+    13.2,
+    57
+   ],
+   "horn": [
+    0.933,
+    7.5,
+    20
+   ],
+   "rod": [
+    0.87,
+    12.4,
+    12
+   ],
+   "rodends": [
+    0.849,
+    11.7,
+    40
+   ],
+   "ear": [
+    1.0,
+    9.5,
+    44
+   ],
+   "L1a": [
+    0.981,
+    10.1,
+    8
+   ],
+   "L1b": [
+    0.931,
+    8.1,
+    36
+   ],
+   "L2": [
+    0.739,
+    11.9,
+    124
+   ]
+  },
+  "parts_pairs": {},
+  "contact_depth": {
+   "n": 3,
+   "sum_mm": 9.856,
+   "max_mm": 9.724,
+   "per_pose": [
+    0.044,
+    9.724,
+    0.088
+   ]
+  },
+  "th_margin": {
+   "min": 5.231,
+   "n": 370,
+   "lt5": 0,
+   "forced": 185,
+   "th_max_taken": 106.3,
+   "dK_taken_max": 45.83,
+   "lowest": {
+    "own": 5.231,
+    "forced": true,
+    "kind": "ws",
+    "plane": 60.0,
+    "elev": 120.0,
+    "axial": -105.0
+   }
+  },
+  "cam": {
+   "dK_lim": 65.8,
+   "why_lim": "law",
+   "pa_crank_max_taken": null,
+   "pa_horn_max_taken": null,
+   "pa_kin_max": null,
+   "friction_deg": null,
+   "pa_eff_horn": null,
+   "pa_eff_crank": null,
+   "flank_rho_min": null,
+   "clear_hubK_min": null,
+   "clear_roll_hubK_min": null,
+   "clear_lowarm_lug_min": null,
+   "arm_len": null,
+   "contact_r": null,
+   "lug_r_max": null,
+   "nose_r": null,
+   "mu": null,
+   "trans_min_taken": 52.0,
+   "ratio_range": [
+    0.696,
+    0.748
+   ],
+   "rod_len": 25.5,
+   "La": 19.5,
+   "r_h": 14.6,
+   "crest_exact": 9.41
+  }
+ },
+ "flood": {
+  "static": {
+   "gap": 18.87,
+   "reach": 0.7222,
+   "follow": 1.0,
+   "inband14": 0.8971,
+   "contact": 0.008
+  },
+  "connected_full": {
+   "gap": 18.87,
+   "reach": 0.7222,
+   "dropped": 0,
+   "dropped_forced": 0,
+   "forced_taken": 136,
+   "forced_taken_connected": 136,
+   "envelope": {
+    "env_ok": 1018,
+    "env_forced_ok": 547,
+    "env_forced_connected": 547
+   }
+  },
+  "connected_knn": {
+   "gap": 21.39,
+   "reach": 0.6972,
+   "dropped": 9,
+   "dropped_forced": 9,
+   "forced_taken": 136,
+   "forced_taken_connected": 127
+  },
+  "connected_bench": {
+   "gap": 51.74,
+   "reach": 0.3972,
+   "dropped": 117,
+   "dropped_forced": 117,
+   "forced_taken": 136,
+   "forced_taken_connected": 19,
+   "dropped_with_no_taken_neighbour": 19
+  },
+  "source": "docs/research/inband_drive/farm/claimA/p_flood.json"
+ },
+ "claims": {
+  "robust_build": {
+   "params_change": "r_h +0.25 (14.8748), eta +1 (-11.4092): the knife-edge-robust build (all 34 tolerance neighbours synthesise)",
+   "bench": {
+    "frozen": {
+     "gap": 18.83,
+     "reach": 0.7222,
+     "follow": 1.0,
+     "inband14": 0.8975,
+     "inband10": 0.5117,
+     "contact": 0.008
+    },
+    "why": {
+     "fold": 88,
+     "slide": 9,
+     "flip": 0,
+     "closure": 0,
+     "skin": 0,
+     "parts": 0,
+     "contact": 3
+    },
+    "near1": 19.92,
+    "near2": 34.12,
+    "min_metal_mm": 0.65,
+    "overhead": {
+     "ws": 28,
+     "taken": 8
+    },
+    "contact_depth": {
+     "n": 3,
+     "sum_mm": 9.826,
+     "max_mm": 9.694,
+     "per_pose": [
+      0.044,
+      9.694,
+      0.088
+     ]
+    },
+    "th_margin_min": 5.231,
+    "th_max_taken": 106.3,
+    "dK_taken_max": 45.83,
+    "dK_lim": 65.8,
+    "split": {
+     "n": 3,
+     "by_part": {
+      "rod": 1,
+      "m1:hubK/horn": 1,
+      "m8:rod/rodends": 1,
+      "hubK": 1,
+      "horn": 1,
+      "rodends": 1,
+      "m7:hub2/ear": 1
+     }
+    },
+    "parts_ib14": {
+     "hub1": 0.999,
+     "hubK": 0.992,
+     "hub2": 0.959,
+     "hub3": 0.741,
+     "E": 0.966,
+     "boss": 0.988,
+     "pad": 1.0,
+     "knee": 0.942,
+     "crank": 0.714,
+     "horn": 0.933,
+     "rod": 0.87,
+     "rodends": 0.853,
+     "ear": 1.0,
+     "L1a": 0.981,
+     "L1b": 0.931,
+     "L2": 0.739
+    }
+   },
+   "held": 23.16
+  },
+  "secondary_cma1_f": {
+   "params": {
+    "La": 21.1008,
+    "s_arm": 4.0,
+    "r_h": 14.916,
+    "beta": -123.5919,
+    "gam": 20.6508,
+    "hl": 3.15,
+    "zr": 0.0,
+    "kK": 2.7,
+    "r_lobe": 8.5,
+    "bk1": 26.0,
+    "bk2": 38.0,
+    "a1max": 59.0,
+    "smhi": 15.9695,
+    "eta": -1.6444,
+    "clay": 1,
+    "zc": 1.1228,
+    "bl_c": 0,
+    "bl_h": 0
+   },
+   "note": "law floor kK >= 2.7 / stroke >= 55 from the long-stroke law table that counted held-out poses: reported, NOT the claim",
+   "bench": {
+    "frozen": {
+     "gap": 18.21,
+     "reach": 0.7278,
+     "follow": 1.0,
+     "inband14": 0.8954,
+     "inband10": 0.5143,
+     "contact": 0.0053
+    },
+    "why": {
+     "fold": 87,
+     "slide": 9,
+     "flip": 0,
+     "closure": 0,
+     "skin": 0,
+     "parts": 0,
+     "contact": 2
+    },
+    "near1": 20.94,
+    "near2": 35.49,
+    "min_metal_mm": 0.11,
+    "overhead": {
+     "ws": 28,
+     "taken": 8
+    },
+    "contact_depth": {
+     "n": 2,
+     "sum_mm": 10.168,
+     "max_mm": 10.078,
+     "per_pose": [
+      10.078,
+      0.09
+     ]
+    },
+    "th_margin_min": 5.133,
+    "th_max_taken": 107.39,
+    "dK_taken_max": 49.25,
+    "dK_lim": 58.2,
+    "split": {
+     "n": 2,
+     "by_part": {
+      "hubK": 1,
+      "rodends": 1,
+      "rod": 1,
+      "m8:rod/rodends": 1,
+      "horn": 1,
+      "m1:hubK/horn": 1,
+      "m7:hub2/ear": 1
+     }
+    },
+    "parts_ib14": {
+     "hub1": 0.999,
+     "hubK": 0.992,
+     "hub2": 0.952,
+     "hub3": 0.74,
+     "E": 0.966,
+     "boss": 0.988,
+     "pad": 1.0,
+     "knee": 0.941,
+     "crank": 0.911,
+     "horn": 0.924,
+     "rod": 0.591,
+     "rodends": 0.632,
+     "ear": 1.0,
+     "L1a": 0.981,
+     "L1b": 0.931,
+     "L2": 0.73
+    }
+   },
+   "held": 23.42
+  },
+  "attribution_parent_k30": {
+   "source": "docs/research/inband_drive/farm/claimA/k30_attr_bench.json",
+   "reported": 25.83,
+   "ghost": {
+    "none": 25.82,
+    "crank": 22.1,
+    "horn": 26.03,
+    "rod": 25.29,
+    "rodends": 23.2,
+    "crank+horn": 22.28,
+    "crank+rod": 21.49,
+    "crank+rodends": 19.31,
+    "horn+rod": 25.49,
+    "horn+rodends": 22.86,
+    "rod+rodends": 22.63,
+    "all_drive": 18.25
+   }
+  },
+  "attribution_pick": {
+   "source": "docs/research/inband_drive/farm/claimA/p_attr_bench.json",
+   "reported": 18.87,
+   "ghost": {
+    "none": 18.87,
+    "crank": 18.58,
+    "ear": 19.39,
+    "horn": 18.95,
+    "rod": 18.84,
+    "rodends": 18.65,
+    "crank+ear": 18.58,
+    "crank+horn": 18.58,
+    "crank+rod": 18.58,
+    "crank+rodends": 18.58,
+    "ear+horn": 19.49,
+    "ear+rod": 19.36,
+    "ear+rodends": 19.19,
+    "horn+rod": 18.92,
+    "horn+rodends": 18.73,
+    "rod+rodends": 18.61,
+    "all_drive": 18.58
+   }
+  }
+ },
+ "n_configs": 11576,
+ "complexity": 28.5,
+ "mechanism": {
+  "active_dof": 3,
+  "passive_trans": 0,
+  "crossed_rails": 0,
+  "passive_rot": 8,
+  "moving_bodies": 6,
+  "joints": 9,
+  "closed_loops": 3,
+  "sliding_pairs": 0,
+  "rolling_pairs": 1,
+  "sensed_passive": 0,
+  "springs_or_flexures": 1,
+  "custom_parts": 14,
+  "catalogue_parts": 16,
+  "notes": "slipper-nose's mechanism with the nose / flank sliding pair replaced by the RSSR: an O3 Ti rod (+1 moving body) with two M2 ball links (+2 joints, 3 rotations each, minus the rod's idle spin = +5 passive rotations); the nose-flank joint and its rotation removed (-1 joint, -1 passive rotation, -1 sliding pair): bodies 6, joints 9, loops 9 - 6 = 3 (the wearer loop, the lobe loop link 1b - link 2 - crank, the RSSR loop link 1a - K - link 1b - crank - rod). The crank's EAR is a joggled tab of link 1b (same part); the radial ball stud is the same M2 ball link screwed into the arm's end face. Custom +2 (rod, horn lug), catalogue -1 dowel +2 ball links (the long-stroke row's counts, joints corrected 10 -> 9 so the topology flag is clean).",
+  "source": "inband-rssr-knuckle-3r 2026-10-17",
+  "confidence": "hand count; tools/simplicity.py --score 28.5, flags []",
+  "cuff_knee": {
+   "pins": 2,
+   "sensed": false,
+   "passive_rot": 2,
+   "moving_bodies": 2,
+   "joints": 2,
+   "custom_parts": 4,
+   "catalogue_parts": 6,
+   "rule": "user 2026-10-17: no encoders on the knee pins -> no added complexity"
+  }
+ },
+ "convergence_gate": {
+  "objective": "2 mm near-touch gap, Bench(60,160) fast (1 mm for runs b / e / h / o)",
+  "cma3_p_claim_run": {
+   "evals": 1449,
+   "gain_2nd_half_pts": 0.04,
+   "gain_last_third_pts": 0.0,
+   "top5_spread_pts": 0.0
+  },
+  "cma3_combined": {
+   "evals": 5470,
+   "gain_2nd_half_pts": 0.17,
+   "gain_last_third_pts": 0.03,
+   "top5_spread_pts": 0.0
+  },
+  "passes": true
+ },
+ "cost_usd": "<= ~1.4 by the batch lines (exo-cpu1 only, never GPU: 3 CMA batches, 4 attribution / claim batches); runpod_guard balance 29.19 (09:06) -> 27.99 (10:10) for every agent on the account",
+ "verdict": "SCREENED - the drive's metal is no longer the cost (7.57 -> 0.29 points on the frozen bench), but with a leak-free pick the row is at PARITY with slipper-nose, not ahead: frozen exact 18.87 (score 93.14) / held out 23.21 vs 18.49 / 23.45 (paired pooled -0.06, 90% CI [-0.44, +0.39], P 0.55); robust build 18.83 / 23.16. The fit bench picks the short K dyad (26 / 38 / 59) and kK 1.79: the long-dyad steep-law lever does not survive fit-bench-only selection.",
+ "limiter": "The chain, not the drive: fold 88 of 360 (= slipper-nose's 88), K used 45.8 deg. With the drive's metal deleted the pick is 18.58 - every remaining point is the chain's. The leak-free fit objective (2 mm near-touch, Bench(60,160)) does not select the steep law / long dyad (cma1 a / d seeded there: 18.45-18.60 vs 16.47); a jittered workspace-envelope search bench (CLAUDE.md, not yet built) is the instrument that could.",
+ "note": "Model docs/concepts/models/inband-rssr-knuckle-3r.py = docs/concepts/models/longstroke-slipper-knuckle-3r.py (LS_DRIVE=rssr, loaded unchanged) with the drive metal re-placed by switches eta / clay / zc / bl_c / bl_h; defaults reproduce the long-stroke row (fast 42.91 / 19.40, frozen 25.83 via attribute.py). Pick rule committed before any frozen / held number (docs/research/inband_drive/picks.json). Research note docs/research/inband_drive.md.",
+ "spring_R17": {
+  "kK": 1.7901,
+  "tau_K": "0.08 N.m + 0.015 N.m/rad (the lead's clock spring)",
+  "J2_static_Nm": 0.165,
+  "cuff_N_150_120": [
+   1.1,
+   1.37
+  ],
+  "at": "held dK_taken_max 46.44 deg (0.811 rad)",
+  "R17": "<= 1 N.m about the shoulder, <= 5 N and <= 5 deg twist at the cuff: static spring 17 % of the moment, 22-28 % of the cuff force; dynamic twist not measured (judge/dynamics.py needs the CAD)"
+ },
+ "red_team": {
+  "knife_edge": {
+   "neighbours": 34,
+   "source": "docs/research/inband_drive/out/tol_p.jsonl (fast Bench(60,160), +-1 deg beta / gam / eta, +-0.25 mm La / r_h / s_arm / hl / zc / r_lobe, 16 corners)",
+   "failures": "pick: r_h -0.25 loses every pose to a 1 mm part pair (the horn ball parked 0.25 mm from it, as the parent) and so do the 9 corners with r_h -0.25; eta -1 costs +7.1 (the pivot leaves link 1b's low strap for the higher hub-2 eye: lev 59.7 -> 63.2). Every other neighbour 16.47-16.53 (2 mm) / 12.68-13.12 (plain).",
+   "robust_variant": {
+    "params_change": "r_h +0.25, eta +1",
+    "neighbours": 34,
+    "failures": 0,
+    "near2_range": [
+     16.47,
+     17.64
+    ],
+    "plain_range": [
+     12.5,
+     13.05
+    ],
+    "frozen": {
+     "gap": 18.83,
+     "reach": 0.7222,
+     "follow": 1.0,
+     "inband14": 0.8975,
+     "inband10": 0.5117,
+     "contact": 0.008
+    },
+    "held": 23.16,
+    "source": "docs/research/inband_drive/out/tol_rob.jsonl"
+   }
+  },
+  "jam": "no dead centre inside the range: the RSSR range scan stops at transmission 48 (PA 42 at both ball ends); over the taken K (<= 46.4 deg) the transmission stays >= 52.0 (PA <= 38.0). The radial crank-tip stud's socket tilt peaks at 25.5 deg over the taken range (25.9 robust) against the 30 deg cone assumed for an M2 ball link: a 25 deg (short-neck) socket would bind at the top of the taken range - buy a long-neck stud / +-30 deg link, or fall back to the axial stud (secondary cma1 f: 18.21 / 23.42).",
+  "liftoff": {
+   "stage2": "rod with two ball links: bilateral, cannot lift off",
+   "stage1": "lobe follower held by the K clock spring as the lead (0.08 N.m preload + 0.015 N.m/rad): static factor 0.08 / 0.033 (exo weight about K) = 2.4; a cuff force cannot drive the chain's self-motion (K vs q2 at a fixed arm pose)",
+   "cuff_feel_N": "reflected J2 torque kK x tau_K = 1.79 x (0.08 + 0.015 x 0.811) = 0.165 N.m -> 1.10 / 1.37 N at 150 / 120 mm (<= 2.5 N; R17 <= 5 N)"
+  },
+  "held_out_survives": "frozen 18.87 -> held 23.21 (+4.34, the reference +4.96); paired vs slipper-nose: bench +0.39 [-0.28, +1.54] P 0.22, held -0.24 [-0.68, +0.17] P 0.77, pooled -0.06 [-0.44, +0.39] P 0.55 - parity, not a lead",
+  "contact_depth": {
+   "bench": {
+    "n": 3,
+    "sum_mm": 9.856,
+    "max_mm": 9.724,
+    "per_pose": [
+     0.044,
+     9.724,
+     0.088
+    ]
+   },
+   "held": {
+    "n": 9,
+    "sum_mm": 23.199,
+    "max_mm": 8.708,
+    "per_pose": [
+     3.851,
+     5.499,
+     1.821,
+     1.185,
+     1.065,
+     0.923,
+     8.708,
+     0.003,
+     0.144
+    ]
+   },
+   "low_arm_extreme_rotation_class": "0 contact poses in elev < 60 with |axial| >= 120 on either wear (the class where the steep-law ghost's held gain and its 7 new contacts lived); overhead contact depth held 10.8 mm summed vs slipper-nose's 34.3"
+  },
+  "optimistic_number": "the ghost's 18.25 / 21.11 (leaky law, lead correction): with leak-free selection the same chain family measures 18.87 / 23.21 with metal and 18.58 frozen without the drive's metal"
+ }
 }

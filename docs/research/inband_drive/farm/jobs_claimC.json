@@ -1,0 +1,16 @@
+[
+ {
+  "tag": "ib-claimC-f_held",
+  "cmd": "mkdir -p docs/research/inband_drive/farm/claimC && python3 docs/concepts/models/inband-rssr-knuckle-3r.py claims '[{\"tag\": \"f_held\", \"mode\": \"held\", \"params\": {\"La\": 21.1008, \"s_arm\": 4.0, \"r_h\": 14.916, \"beta\": -123.5919, \"gam\": 20.6508, \"hl\": 3.15, \"zr\": 0.0, \"kK\": 2.7, \"r_lobe\": 8.5, \"bk1\": 26.0, \"bk2\": 38.0, \"a1max\": 59.0, \"smhi\": 15.9695, \"eta\": -1.6444, \"clay\": 1, \"zc\": 1.1228, \"bl_c\": 0, \"bl_h\": 0}}]' docs/research/inband_drive/farm/claimC > docs/research/inband_drive/farm/claimC/f_held.run.log 2>&1; tail -c 2500 docs/research/inband_drive/farm/claimC/f_held.log",
+  "out": [
+   "docs/research/inband_drive/farm/claimC/f_held*"
+  ],
+  "env": {
+   "OMP_NUM_THREADS": "1",
+   "IGL_NUM_THREADS": "1",
+   "LS_DRIVE": "rssr",
+   "CB_QUIET_EXACT": "1"
+  },
+  "timeout": 3000
+ }
+]

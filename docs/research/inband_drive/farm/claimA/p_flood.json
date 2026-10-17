@@ -1,0 +1,75 @@
+{
+ "cell": "lead",
+ "drive": "rssr",
+ "frozen": {
+  "gap": 18.87,
+  "reach": 0.7222,
+  "follow": 1.0,
+  "inband14": 0.8971,
+  "inband10": 0.5109,
+  "contact": 0.008
+ },
+ "connected": {
+  "static": {
+   "gap": 18.87,
+   "reach": 0.7222,
+   "follow": 1.0,
+   "inband14": 0.8971,
+   "contact": 0.008
+  },
+  "connected_bench": {
+   "gap": 51.74,
+   "reach": 0.3972,
+   "dropped": 117,
+   "dropped_forced": 117,
+   "forced_taken": 136,
+   "forced_taken_connected": 19,
+   "dropped_with_no_taken_neighbour": 19
+  },
+  "connected_knn": {
+   "gap": 21.39,
+   "reach": 0.6972,
+   "dropped": 9,
+   "dropped_forced": 9,
+   "forced_taken": 136,
+   "forced_taken_connected": 127
+  },
+  "connected_full": {
+   "gap": 18.87,
+   "reach": 0.7222,
+   "dropped": 0,
+   "dropped_forced": 0,
+   "forced_taken": 136,
+   "forced_taken_connected": 136,
+   "envelope": {
+    "env_ok": 1018,
+    "env_forced_ok": 547,
+    "env_forced_connected": 547
+   }
+  },
+  "secs": 1.1
+ },
+ "params": {
+  "La": 19.5042,
+  "s_arm": 4.0515,
+  "r_h": 14.6248,
+  "beta": -140.3863,
+  "gam": 7.7146,
+  "hl": 3.15,
+  "zr": 0.0,
+  "kK": 1.7901,
+  "r_lobe": 7.0,
+  "bk1": 26.0,
+  "bk2": 38.0,
+  "a1max": 59.0,
+  "smhi": 19.0991,
+  "eta": -12.4092,
+  "clay": 1,
+  "zc": 0.8032,
+  "bl_c": 2,
+  "bl_h": 0
+ },
+ "row": "inband-rssr-knuckle-3r",
+ "ghost": [],
+ "secs": 98.6
+}

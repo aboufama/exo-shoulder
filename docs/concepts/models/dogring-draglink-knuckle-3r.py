@@ -19,7 +19,9 @@ translations; no gears, pulleys, cables; one spring (K's spiral spring, the lead
 while K rests on stop A, so no coordinate is undetermined (R17).
 
 Layering (the judge's main risk, priced POOLED by the bench itself - every drive point is a rigid part sample):
-  ring_layer 0: sector in hub 2's skin-face layer (f2), link 1b's layer (this build); 1: the spec's control - but the spec's
+  ring_layer -1: a sub-ring UNDER hub 2's skin face (f2 - 3.15, on a 3.15 mm spigot of the housing; hub 2 rides ~10.5 mm off
+  the skin, link 2's root flank ramps down through this layer at r 12-13 and is the dog); 0: sector in hub 2's skin-face
+  layer (f2), link 1b's layer; 1: the spec's control - but the spec's
   'link 1b top + 0.15' at hub 2 IS link 2's root layer (f2 + 3.15), which link 2 sweeps over its whole q2 range, so the
   honest stacked control sits above link 2's root: f2 + 6.3 (inside the 12.25 housing).
   dl_a / dl_h: drag link above (+1) or below (-1) the arm-tip eye / the horn eye; the strap joggles between the two ends.
@@ -51,7 +53,7 @@ RING_RI, RING_RO = 10.2, 12.5
 
 # cell seeds: the judge's 34/46 (spec, arm along link 1b) and the beside-arm synthesis rows (arm on the far side of link 1b)
 SEED = dict(bk1=34.0, bk2=46.0, a1max=74.5, smhi=22.0, dr_a1=34.93, dr_t1=42.73, dr_a3=14.04, dr_t3=-22.57, root_off=-30.0,
-            ring_layer=0, dr_hl=0.0, dr_zr=0.0, dl_a=1, dl_h=1, dl_lift=0.0, sector_gap=0.5)
+            ring_layer=0, dr_hl=0.0, dr_zr=0.0, dl_a=1, dl_h=1, dl_lift=0.0, sector_gap=0.5, arm_up=0)
 PARAMS = dict(LS.PARAMS); PARAMS.update(SEED)
 for k_ in ("La", "r_h", "beta", "gam", "s_arm", "r_lobe", "kK", "kA", "kB"): PARAMS.pop(k_, None)
 PARAMS.update(La=20.0, r_h=15.0, beta=-112.0, gam=0.0, s_arm=4.0, r_lobe=7.5, kK=2.0)   # inert: the parent's clamp reads them
@@ -68,9 +70,9 @@ def _clamp(p):
     p["dr_a1"] = _c(p["dr_a1"], 20.0, 40.0); p["dr_t1"] = _c(p["dr_t1"], -120.0, 120.0); p["dr_a3"] = _c(p["dr_a3"], 12.0, 20.0)
     p["dr_t3"] = _c(p["dr_t3"], -180.0, 180.0); p["root_off"] = _c(p.get("root_off", 0.0), -60.0, 30.0)
     p["dr_hl"] = _c(p.get("dr_hl", 0.0), 0.0, 9.0); p["dl_lift"] = _c(p.get("dl_lift", 0.0), 0.0, 8.0); p["dr_zr"] = _c(p.get("dr_zr", 0.0), 0.0, 3.0)
-    p["ring_layer"] = int(round(_c(p.get("ring_layer", 0), 0, 1)))
+    p["ring_layer"] = int(round(_c(p.get("ring_layer", 0), -1, 1)))
     p["dl_a"] = 1 if float(p.get("dl_a", 1)) >= 0 else -1; p["dl_h"] = 1 if float(p.get("dl_h", 1)) >= 0 else -1
-    p["sector_gap"] = _c(p.get("sector_gap", 0.5), 0.15, 3.0)
+    p["sector_gap"] = _c(p.get("sector_gap", 0.5), 0.15, 3.0); p["arm_up"] = 1 if float(p.get("arm_up", 0)) >= 0.5 else 0
     p["law_mode"] = "seg"; p["law_mode_in"] = "dog"; p["emb_mode"] = "rod"
     return p
 
@@ -219,8 +221,9 @@ class DRModel(LS.LSModel):
         psi_root = psi0 + ((psi_root - psi0) % 360.0)
         root_dir = unit(u2 * math.cos(math.radians(11.5)) + unit(S.rotm(u2, math.radians(s_q * psi_root))[0] @ e2) * math.sin(math.radians(11.5)))
         arm_half = math.degrees((ARM_W / 2 + 1.0) / RING_RO)
-        span = (psi_root - psi0) + arm_half                   # sector: psi0 + gap .. psi_root + arm half width
-        zring = f2 if int(P["ring_layer"]) == 0 else f2 + 2 * (S.T_LINK + RUNG)
+        arm_up = int(P.get("arm_up", 0)) == 1 and int(P["ring_layer"]) != 1
+        span = (psi_root - psi0) + (0.0 if arm_up else arm_half)   # sector: psi0 + gap .. psi_root (+ arm half width when the arm root stays in the ring layer)
+        zring = {0: f2, 1: f2 + 2 * (S.T_LINK + RUNG), -1: f2 - (S.T_LINK + RUNG)}[int(P["ring_layer"])]
         push_end = float(dg["push"][-1]) if dg["ok"] else 0.0
         WOK = S.W_LINK / 2 + 1.0
         om = math.acos(max(-1, min(1, float(root_dir @ c1_0)))); na = max(3, int(62.0 * om / 2.0) + 1); ta = np.linspace(0, 1, na)[:, None]
@@ -236,7 +239,9 @@ class DRModel(LS.LSModel):
         lvl = np.where(beside, base + float(P["dr_zr"]), base + S.T_LINK + 1.0)   # stacked over link 1b: non-adjacent, 1 mm
         # near hub 2 the arm is the sector's own body (ring layer) - the root stays at zring out to r 14.5
         rr_ = np.array([math.sin(math.acos(max(-1, min(1, float(c @ u2))))) * 62.0 for c in Ca])
-        lvl = np.where(rr_ <= 14.5, zring, lvl)
+        # arm_up: ahead of the lug face link 2 never comes, so the arm root joggles up into link 2's hub layer (link 1b top + 1 mm)
+        # and crosses OVER link 1b's root; else it stays in the ring layer out to r 14.5
+        lvl = np.where(rr_ <= 14.5, max(zring, f2 + S.T_LINK + 1.0) if arm_up else zring, lvl)
         sarc = np.concatenate([[0.0], np.cumsum(np.linalg.norm(np.diff(Ca, axis=0), axis=1) * 62.0)])
         k = math.tan(S.RAMP * D2R)
         lvl = np.max(lvl[None, :] - k * np.abs(sarc[:, None] - sarc[None, :]), axis=1)
@@ -290,7 +295,7 @@ class DRModel(LS.LSModel):
                 kk = float(Kt[j]); Rr = S.rotm(u2, float(PHt[j]))[0]
                 c1 = Rr @ c1_0; c2 = S.rotm(uK, sp * kk)[0].T @ c2_0
                 Rd = self._dl_rot(c1_0, c2_0, c1, c2)
-                RG = (np.concatenate([sec_mid, arm_mid[~far_root]]) @ Rr.T) if (~far_root).any() else sec_mid @ Rr.T
+                RG = (np.concatenate([sec_mid, arm_mid[~far_root]]) @ Rr.T) if ((~far_root).any() and not arm_up) else sec_mid @ Rr.T
                 AR = self.strap["CRK"][1] @ Rr.T; DL = dl_mid @ Rd.T
                 HN = (horn + 1.5 * uK) @ S.rotm(uK, sp * kk)[0]          # R^T applied as row-vector @ R
                 c_ = dict(ring_L1b=float(tree2.query(RG)[0].min()) - S.T_LINK if tree2 is not None else 99.0,
@@ -347,7 +352,7 @@ class DRModel(LS.LSModel):
 
     def collide(self, i):
         out = super().collide(i)
-        if getattr(self, "_dogg", None) is None or not hasattr(self, "_L2ring") or int(self.D.p.get("ring_layer", 0)) != 0: return out
+        if getattr(self, "_dogg", None) is None or not hasattr(self, "_L2ring") or int(self.D.p.get("ring_layer", 0)) == 1: return out
         # the sector vs link 2's root in the ring layer, in link 1b's frame (push coordinate): link 2 may touch the lug face
         # (the dog contact) but never enter the sector, either side round
         g = self._dogg; dg = self._scg["dog"]
@@ -399,8 +404,25 @@ gate = LS.gate; frozen = LS.frozen; frozen_held = LS.frozen_held; frozen_flood =
 
 
 def viz_export(par):
-    p = _clamp(dict(PARAMS, **par)); B = CB.Bench(n_clip=60, n_ws=160); r, M = _report(B, p)
-    return dict(params=p, gap=r["gap"], cam=r.get("cam"), viz=getattr(M, "_viz_rod", None))
+    """geometry of the fitted design (Bench(60,160)) for docs/concepts/viz/concepts/dogring-draglink-knuckle-3r.js: the chain
+    (as frontload's exporter) + the dog sector / arm (link 1b frame, turned by phi(K) about u2), drag link eyes, horn (link 1a)"""
+    B = CB.Bench(n_clip=60, n_ws=160); r, M = _report(B, _clamp(dict(PARAMS, **par))); D = M.D; P = D.p; L_ = D.law()
+    R = lambda v, n=5: [round(float(x), n) for x in v]
+    def pts(name, step=3):
+        X = M.link_pts[name][1]; return [R(x, 2) for x in X[::step]]
+    sub = slice(None, None, 8); vr = M._viz_rod; dg = M._scg["dog"]
+    G_ = dict(u=[R(x) for x in D.u], c=[R(x) for x in D.c], uK=R(D.uK), sa=R(D.sa), st=R(D.st), sn=R(D.sn), A=[round(D.a1, 3), round(D.a2, 3)],
+              branch=float(D.branch), m=R(D.m), f=[round(float(x), 2) for x in M.f], fK=round(float(M.fK), 2), capK=float(P.get("capK", 0)),
+              tr=round(float(M.tr), 2), tp=round(float(P["tp"]), 3), RUN=S.RUN, A0=R(M.fr["A0"]), A0m=R(M.fr["A0m"]), Bm=R(M.fr["Bm"]), eE=R(M.fr["eE"]),
+              psiA=round(math.degrees(D.psiA), 4), thLo=round(D.th_lo, 4), thHi=round(D.th_hi, 4), q2s=[round(x, 4) for x in D.q2_stops],
+              lawTh=R(L_["th"][sub], 3), lawDK=R(np.degrees(L_["dK"][sub]), 3), lawQ2=R(np.degrees(L_["q2t"][sub]), 3), emb="rod",
+              dogK=R(np.degrees(dg["K"][::8]), 3) if dg["ok"] else [0, 1], dogPhi=R(np.degrees(dg["phi"][::8]), 3) if dg["ok"] else [0, 0],
+              dKlim=round(math.degrees(float(M._scg["dK_lim"])), 2), ring=R(vr["ring"], 3), ringAx=R(vr["ringAx"]), armA=R(vr["armA"], 3), armB=R(vr["armB"], 3),
+              rodA=R(vr["rodA"], 3), rodB=R(vr["rodB"], 3), horn=R(vr["horn"], 3), hornRoot=R(D.uK * (float(M.fK) + float(P["dr_hl"])) + 10.5 * unit(vr["horn"] - (vr["horn"] @ D.uK) * D.uK), 3),
+              L1a=pts("L1a"), L1b=pts("L1b"), L2=pts("L2", 6))
+    keys = ("az1", "el1", "az2", "el2", "wd", "wa", "b3", "lE", "lc", "phiE", "phib", "stk", "ang_min", "bk1", "bk2", "a1max", "smhi", "smlo", "capK",
+            "dr_a1", "dr_t1", "dr_a3", "dr_t3", "root_off", "ring_layer", "dr_hl", "dr_zr", "dl_a", "dl_h", "dl_lift", "sector_gap")
+    return dict(P={k: P[k] for k in keys if k in P}, G=G_, report={k: r[k] for k in ("gap", "reach", "follow", "inband14", "contact")}, plain=r.get("plain"))
 
 
 if __name__ == "__main__":
@@ -419,7 +441,7 @@ if __name__ == "__main__":
                               minmetal=a.get("near_touch_min_mm"), ovh=out.get("overhead"), depth={k: v for k, v in (out.get("contact_depth") or {}).items() if k != "per_pose"},
                               th_margin=out.get("th_margin"), connected=out.get("connected"), secs=out["secs"]), default=float)); sys.exit()
     if mode == "viz":
-        print(json.dumps(viz_export(par), default=lambda o: o.tolist() if hasattr(o, "tolist") else float(o))); sys.exit()
+        print(json.dumps(viz_export(par), default=float)); sys.exit()
     B = CB.Bench(n_clip=60, n_ws=160); t = time.time()
     r, M = _report(B, par)
     print(json.dumps(dict(gap=r["gap"], plain=r.get("plain"), near1=r.get("gap_near1"), near2=r.get("gap_near2"), min_metal=r.get("min_metal_mm"),

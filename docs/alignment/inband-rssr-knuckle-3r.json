@@ -1,0 +1,219 @@
+{
+ "id": "inband-rssr-knuckle-3r",
+ "status": "screened",
+ "v_gap": null,
+ "complexity": 28.5,
+ "verdict": "watch",
+ "reasons": [
+  "held_out: no verified bench gap on the row"
+ ],
+ "checks": [
+  {
+   "check": "held_out",
+   "level": "watch",
+   "reason": "no verified bench gap on the row"
+  },
+  {
+   "check": "fast_frozen",
+   "level": "ok",
+   "reason": "no pair"
+  },
+  {
+   "check": "near_touch",
+   "level": "ok",
+   "reason": "plain 18.87, <1 mm 19.96, <2 mm 34.12, 15.25 points live in the 1-2 mm shell (row frozen)",
+   "shell2": 15.25,
+   "plain": 18.87,
+   "n1": 19.96,
+   "n2": 34.12,
+   "n3": null,
+   "band3": null,
+   "hist": null,
+   "minmm": 0.65,
+   "source": "row frozen"
+  },
+  {
+   "check": "contact_depth",
+   "level": "ok",
+   "reason": "no per-pose contact depths on file that reproduce the claim (tools/alignment_paired.py dump inband-rssr-knuckle-3r bench|held, or tools/alignment_wear_probe*.py); not measured",
+   "depths": {
+    "gap 16.47": {}
+   }
+  },
+  {
+   "check": "dominance",
+   "level": "ok",
+   "reason": "vs slipper-nose-knuckle-3r: plain -0.38, 2 mm -1.10",
+   "ref": "slipper-nose-knuckle-3r",
+   "gain_plain": -0.38,
+   "gain_2mm": -1.1
+  },
+  {
+   "check": "continuity",
+   "level": "ok",
+   "reason": "static 18.87, connected full 18.87, knn 21.39, bench 51.74 (row flood)",
+   "static": 18.87,
+   "connected_full": 18.87,
+   "connected_knn": 21.39,
+   "connected_bench": 51.74
+  },
+  {
+   "check": "fold_margin",
+   "level": "ok",
+   "reason": "min fold margin on file 5.045 deg (held_out.claim_detail.th_margin_min; 5 readings)",
+   "min_margin": 5.045,
+   "where": "held_out.claim_detail.th_margin_min"
+  },
+  {
+   "check": "idle",
+   "level": "ok",
+   "reason": "knee: rigid by design, not a joint (model asserts the knee angle constant (knee_moved -> dishonest)); no span on file; K moves: smallest recorded span 45.83 deg (row:claim.dK_taken_max); crank: declared moving, no span on file",
+   "spans": [
+    [
+     "row:claim.dK_taken_max",
+     45.83
+    ],
+    [
+     "row:held_out.claim_detail.dK_taken_max",
+     46.44
+    ],
+    [
+     "row:frozen.th_margin.dK_taken_max",
+     45.83
+    ],
+    [
+     "row:claims.robust_build.bench.dK_taken_max",
+     45.83
+    ],
+    [
+     "row:claims.secondary_cma1_f.bench.dK_taken_max",
+     49.25
+    ]
+   ],
+   "declared": [
+    "K",
+    "crank"
+   ],
+   "rigid": [
+    "knee"
+   ]
+  },
+  {
+   "check": "sampling",
+   "level": "ok",
+   "reason": "sample-weighted in-band 0.897 vs part-weighted 0.912 (-1.54 points); thinly sampled parts: rod 12, L1a 8 (row frozen)",
+   "parts": {
+    "hub1": [
+     0.999,
+     8.6,
+     80
+    ],
+    "hubK": [
+     0.992,
+     7.9,
+     80
+    ],
+    "hub2": [
+     0.959,
+     11.1,
+     80
+    ],
+    "hub3": [
+     0.741,
+     11.5,
+     80
+    ],
+    "E": [
+     0.966,
+     6.5,
+     104
+    ],
+    "boss": [
+     0.988,
+     8.5,
+     32
+    ],
+    "pad": [
+     1.0,
+     8.1,
+     32
+    ],
+    "knee": [
+     0.942,
+     10.7,
+     85
+    ],
+    "crank": [
+     0.71,
+     13.2,
+     57
+    ],
+    "horn": [
+     0.933,
+     7.5,
+     20
+    ],
+    "rod": [
+     0.87,
+     12.4,
+     12
+    ],
+    "rodends": [
+     0.849,
+     11.7,
+     40
+    ],
+    "ear": [
+     1.0,
+     9.5,
+     44
+    ],
+    "L1a": [
+     0.981,
+     10.1,
+     8
+    ],
+    "L1b": [
+     0.931,
+     8.1,
+     36
+    ],
+    "L2": [
+     0.739,
+     11.9,
+     124
+    ]
+   }
+  },
+  {
+   "check": "complexity",
+   "level": "ok",
+   "reason": "recomputed 28.5 vs row 28.5; hand count (not derived from the model)",
+   "recomputed": 28.5,
+   "row": 28.5
+  },
+  {
+   "check": "reporting",
+   "level": "ok",
+   "reason": "row, verifier files and dashboard agree"
+  },
+  {
+   "check": "judge_change",
+   "level": "ok",
+   "reason": "no bench / judge / metric file changed in the 1 commits that touched the row"
+  },
+  {
+   "check": "rules",
+   "level": "ok",
+   "reason": "O20, margin >= 5, translations <= 2 as recorded"
+  }
+ ],
+ "remeasured": {
+  "bench": false,
+  "held": false
+ },
+ "verifier_files": [],
+ "git": "4962afd",
+ "tool_version": "2026-10-17.2",
+ "t": "2026-10-17T10:26:00Z"
+}

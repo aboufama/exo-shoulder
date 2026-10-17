@@ -66,7 +66,7 @@ RATE_MAX = 3.45; MU_MIN = 48.0; KSTOP_A = -1.5
 FB_SEED = {"rc": 16.0, "gc": 54.0903, "rh": 11.5967, "c": 38.6253, "br": -1.0, "k0": 22.5886}
 KNEE_SEED = {"lE": 74.3, "lc": 15.7, "phiE": 18.4, "phib": -77.8, "ang_min": 26.88}
 PARAMS = dict(LS.PARAMS); PARAMS.update(FB_SEED); PARAMS.update(KNEE_SEED)
-PARAMS.update(b1read="family", hl=0.0, zc=0.0, zcp=0.0, a1max=72.5)
+PARAMS.update(b1read="family", hl=0.0, zc=0.0, zcp=0.0, a1max=72.5, clay=0)
 for _k in ("La", "r_h", "beta", "gam", "s_arm", "r_lobe", "zr", "i_rock", "r_horn"): PARAMS.pop(_k, None)
 
 
@@ -79,6 +79,7 @@ def _clamp(p):
     p["a1max"] = min(float(p["a1max"]), float(p["bk1"]) + float(p["bk2"]) - 5.5)      # stop B >= 5.5 deg off the K dyad stretch
     p["rc"] = _c(p["rc"], 2.0, 26.0); p["rh"] = _c(p["rh"], 2.0, 26.0); p["c"] = _c(p["c"], 10.0, 80.0)
     p["gc"] = float(p["gc"]); p["k0"] = float(p["k0"]); p["br"] = 1.0 if float(p.get("br", -1.0)) > 0 else -1.0
+    p["clay"] = 1 if int(round(float(p.get("clay", 0)))) == 1 else 0
     p["hl"] = _c(p.get("hl", 0.0), 0.0, 3.15); p["zc"] = _c(p.get("zc", 0.0), 0.0, 6.0); p["zcp"] = _c(p.get("zcp", 0.0), 0.0, 8.0)
     p["ang_min"] = max(float(p.get("ang_min", 26.88)), 26.88)
     p["b1read"] = "coupled" if str(p.get("b1read", "family")) == "coupled" else "family"
@@ -241,8 +242,14 @@ class FBModel(LS.LSModel):
         pcB, ph0 = unit(T["pcB"]), unit(T["ph0"])
         # levels: crank lug at link 2's layer at hub 2, horn lug at link 1a's layer at hub K
         lc_ = f2 + UP + float(P["zc"]); lh_ = fK + float(P["hl"])
-        fl_c = max(lc_ + TL + RUN_, f2 + TL + 1.0) + float(P["zcp"])            # coupler underside floor at the crank end
-        fl_h = max(lh_ + TL + RUN_, fK + UP + TL + 1.0) + float(P["zcp"])       # ... at the horn end (over link 1b's layer at K)
+        if int(P.get("clay", 0)) == 1:
+            # FLAT: the coupler runs IN link 1b's own layer (beside it, 1 mm lateral clearance checked per pose), under the crank
+            # lug of link 2 (0.15 running gap at the crank eye) and over the horn lug of link 1a (0.15 at the horn eye)
+            fl_c = f2 + float(P["zcp"]); fl_h = max(fK + UP, lh_ + TL + RUN_) + float(P["zcp"])
+            lc_ = max(lc_, fl_c + CPL_T + RUN_)
+        else:
+            fl_c = max(lc_ + TL + RUN_, f2 + TL + 1.0) + float(P["zcp"])        # coupler underside floor at the crank end
+            fl_h = max(lh_ + TL + RUN_, fK + UP + TL + 1.0) + float(P["zcp"])   # ... at the horn end (over link 1b's layer at K)
 
         def lug(ax, pin, lev):
             e = unit(pin - (pin @ ax) * ax); bn = np.cross(ax, e)
@@ -267,7 +274,7 @@ class FBModel(LS.LSModel):
         def col(pin, z0, z1):
             return np.concatenate([_ring(pin * z / max(float(pin @ pin), 1e-9) ** 0.5, EYE_R, pin) for z in np.linspace(z0, z1, 4)])
         # the eye centres in link 1b's frame at tau = 0: pin directions pc_r / ph_r
-        eye_c = col(pc_r, lc_ + TL + RUN_, fl_c + CPL_T); eye_h = col(ph_r, lh_ + TL + RUN_, fl_h + CPL_T)
+        eye_c = col(pc_r, min(lc_ + TL + RUN_, fl_c), max(fl_c + CPL_T, lc_ + TL)); eye_h = col(ph_r, min(lh_ + TL + RUN_, fl_h), max(fl_h + CPL_T, lh_ + TL))
         a_, b_ = S.frame_of(pc_r); dd = S.disc(EYE_R, S.SPACING); disc_c = pc_r * fl_c + dd[:, :1] * a_ + dd[:, 1:] * b_
         a_, b_ = S.frame_of(ph_r); disc_h = ph_r * fl_h + dd[:, :1] * a_ + dd[:, 1:] * b_
         self.rigid["crank"] = (2, crank); self.rigid["horn"] = (1, horn)
@@ -436,9 +443,24 @@ def frozen(P, nc=110, nw=360):
 
 
 def viz_export(par):
-    p = _clamp(dict(PARAMS, **par)); B = CB.Bench(n_clip=60, n_ws=160); r, M = _report(B, p); D = M.D
-    return dict(id=ID, gap=r["gap"], u=[list(map(float, x)) for x in D.u], uK=list(map(float, D.uK)), c=[list(map(float, x)) for x in D.c],
-                f=[float(x) for x in M.f], fK=float(M.fK), cam=M._sc_info, viz={k: list(map(float, v)) for k, v in M._viz_rod.items()})
+    """geometry of the fitted design (Bench(60,160)) for docs/concepts/viz/concepts/fourbar-longdyad-knuckle-3r.js: the chain,
+    the four-bar law table over its window (th -> q2, dK), the crank pin (link 2 body frame), the horn pin (link 1a frame)"""
+    B = CB.Bench(n_clip=60, n_ws=160); r, M = _report(B, par); D = M.D; P = D.p; T = D.fb_table(); iv = T["iv"]
+    R = lambda v, n=5: [round(float(x), n) for x in v]
+    def pts(name, step=3):
+        X = M.link_pts[name][1]; return [R(x, 2) for x in X[::step]]
+    i0, i1 = (iv[0], iv[1]) if iv else (T["i0"], T["i0"] + 1)
+    sub = slice(i0, i1 + 1, 4)
+    fl = M._sc_info["coupler_floor"]
+    G_ = dict(u=[R(x) for x in D.u], c=[R(x) for x in D.c], uK=R(D.uK), sa=R(D.sa), st=R(D.st), sn=R(D.sn), A=[round(D.a1, 3), round(D.a2, 3)],
+              branch=float(D.branch), m=R(D.m), f=[round(float(x), 2) for x in M.f], fK=round(float(M.fK), 2), capK=float(P.get("capK", 0)),
+              tr=round(float(M.tr), 2), tp=round(float(P["tp"]), 3), RUN=S.RUN, A0=R(M.fr["A0"]), A0m=R(M.fr["A0m"]), Bm=R(M.fr["Bm"]), eE=R(M.fr["eE"]),
+              lawTh=R(T["th"][sub], 3), lawDK=R(np.degrees(T["dK"][sub]), 3), lawQ2=R(np.degrees(T["q2"][sub]), 3),
+              pcB=R(T["pcB"]), ph0=R(T["ph0"]), levC=round(float(M._sc_info["lug_c_level"]), 2), levH=round(float(M._sc_info["lug_h_level"]), 2),
+              cplC=round(float(fl[0]), 2), cplH=round(float(fl[1]), 2), L1a=pts("L1a"), L1b=pts("L1b"), L2=pts("L2", 6))
+    keys = ("az1", "el1", "az2", "el2", "wd", "wa", "b3", "lE", "lc", "phiE", "phib", "stk", "ang_min", "bk1", "bk2", "sK", "a1max", "smhi", "smlo", "capK",
+            "rc", "gc", "rh", "c", "br", "k0", "hl", "zc", "zcp", "b1read", "clay")
+    return dict(P={k: P[k] for k in keys}, G=G_, report={k: r[k] for k in ("gap", "reach", "follow", "inband14", "contact")})
 
 
 if __name__ == "__main__":
