@@ -266,7 +266,7 @@ taken.
 | K drive stroke (dK_max, deg) | best K dyad | est. reach (bench), exact parking, calibrated | est. score | held delta |
 |---|---|---|---|---|
 | 46 (today's roller) | 26 / 38 (verified) | 0.725 | 93.2 | 0 |
-| 57.5 (round-9 flank, PA 43) | 32 / 48 | 0.767 | ~94.9 | +0.037 (28 / 50) |
+| 57.5 (round-9 flank, PA 43) | 32 / 48 | 0.767 | ~94.7 | +0.037 (28 / 50) |
 | 75 | 32 / 48 | 0.778 | ~95.1 | +0.067 (28 / 50) |
 
 The ~90 deg stroke (uncapped, a1max 73) gives R_est 0.778 at the same in-band: still below the hard goal's 0.80. **Above ~0.80 the family needs a wider
@@ -322,11 +322,11 @@ leader's calibration row on the same wear.
 | K dyad | stroke | bench: in window | bench: R_est +4 | bench: delta | held: R_est +4 | held: delta | parts in-band +4 | est. verified reach (bench) | est. score |
 |---|---|---|---|---|---|---|---|---|---|
 | 26 / 38 (leader) | 46.25 | 272 | 0.722 | 0 | 0.695 | 0 | 0.768 | 0.725 (verified) | 93.2 |
-| 26 / 38 | 57.5 | 275 | 0.728 | +0.006 | 0.709 | +0.014 | 0.768 | 0.731 | ~93.8 |
-| 28 / 50 | 46.25 | 277 | 0.733 | +0.011 | 0.716 | +0.021 | 0.760 | 0.736 | ~94.2 |
+| 26 / 38 | 57.5 | 275 | 0.728 | +0.006 | 0.709 | +0.014 | 0.768 | 0.731 | ~93.4 |
+| 28 / 50 | 46.25 | 277 | 0.733 | +0.011 | 0.716 | +0.021 | 0.760 | 0.736 | ~93.6 |
 | 28 / 50 | 57.5 | 290 | 0.761 | +0.039 | 0.732 | +0.037 | 0.760 | 0.764 | ~94.6 |
 | 28 / 50 | 75 | 298 | 0.772 | +0.050 | 0.762 | +0.067 | 0.760 | 0.775 | ~95.0 |
-| 32 / 48 | 57.5 | 292 | 0.764 | +0.042 | - | - | 0.762 | 0.767 | ~94.9 |
+| 32 / 48 | 57.5 | 292 | 0.764 | +0.042 | - | - | 0.762 | 0.767 | ~94.7 |
 | **32 / 48** | **75** | 300 | **0.775** | **+0.053** | - | - | 0.762 | **0.778** | **~95.1** |
 | 28 / 50, a2 60 | 57.5 | 289 | 0.767 | +0.045 | - | - | **0.549** | - | in-band collapses |
 | 26 / 38, a2 60 | 46.25 | 271 | 0.728 | +0.006 | 0.711 | +0.016 | **0.629** | - | in-band collapses |
@@ -341,7 +341,7 @@ How the last two columns are read:
 
 - **Score 95 inside the family needs a ~75 deg K stroke on a 28-32 / 48-50 K dyad.** Today's drives stop at
   43-57.5 deg.
-  - With <= 57.5 deg, the family tops out at about 94.6-94.9 at these seats.
+  - With <= 57.5 deg, the family tops out at about 94.6-94.7 at these seats.
 - **Even the 75 deg row stays under the hard goal** (reach 0.80): 0.775 at +4.
   - At +8 it would reach 0.797, but the parts' in-band halves.
 - **The re-cut flank on the leader's own dyad (26 / 38 at 57.5) is worth +0.006.** This is why round 9's
@@ -425,10 +425,14 @@ exact bench and held out.
 - **Exact one-level parking** (`docs/research/fold_ceiling/parking_k.py`; it reproduces the leader to one pose):
   - a K dyad of 28 / 50 driven through 57.5 deg admits +14 poses at the same parts' in-band;
   - that is reach ~0.764, score ~94.6, before the drive's own metal;
-  - an unlimited stroke reaches 0.778;
+  - 75 deg on 32 / 48 reaches 0.778 (~95.1);
   - the binding parts for the new poses are hub 2, link 2 near J2 and link 1b.
-- **So round 11's one in-family job:** a K drive with a 57.5-75 deg stroke at pressure angle <= 43 whose metal stays
-  off the deltoid, on a 28-32 / 48-50 K dyad at the leader's seats.
+- **The stroke curve** (section 4b, exact, calibrated):
+  - 57.5 deg: ~94.7;
+  - **75 deg on a 32 / 48 dyad: est. reach 0.778, score ~95.1** (28 / 50: 0.775, held out +0.067).
+- **So round 11's one in-family job:** a K drive with a ~75 deg stroke at pressure angle <= 43, its metal off the
+  deltoid.
+  - Seed: bk1 32 / bk2 48 (inside the roller model's clamps), stop A at a1 37.55, a2 57.22, the verified seats.
   - Gate every candidate drive with `parking_k.py` plus the drive's own metal before any CMA.
   - Do not gate with a per-part relaxation that drops uncleared poses: it is refuted, section 5.
 

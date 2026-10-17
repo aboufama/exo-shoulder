@@ -2120,10 +2120,18 @@ Scripts are in `docs/research/fold_ceiling/`. No rule, bench or verified row was
   the same parts' clip in-band (0.768 -> 0.760), i.e. reach ~0.764, score ~94.6 before the drive's metal.
   Held out: +0.037 (+35 of 952) at in-band 0.764 -> 0.757.
 * Uncapped (a1max 73, K turning ~89 deg) it gives 0.778.
+* **The stroke curve** (farm, exact, calibrated; est. verified reach / score on the bench):
+  * 46 deg (today's roller), 26 / 38: 0.725 / 93.2, verified;
+  * 57.5 deg (the round-9 flank's PA-43 maximum): 0.767 / ~94.7 with a 32 / 48 dyad. On the leader's own 26 / 38
+    dyad the flank is worth +0.006, which is why round 9 measured it level;
+  * 75 deg: 0.778 / ~95.1 with 32 / 48, and 0.775 / ~95.0 with 28 / 50 (held out +0.067).
+  * So **score 95 in-family needs a ~75 deg K stroke on a 28-32 / 48-50 K dyad**, and even that stays under the
+    hard goal's reach 0.80.
+  * Sliding the window (a2 60) halves the parts' in-band.
 * Link 1b (K -> J2) is the binding part.
 * **But K must turn 78-89 deg.** The leader's drive turns 46; the round-9 flank caps at 55-57.5 at pressure angle
   <= 43.
-* With 57.5 deg: th_hi ~115, reach ~0.76-0.77, score ~94.5-95 at best, before the drive's own metal.
+* With 57.5 deg: th_hi ~115-118, reach ~0.764-0.767, score ~94.6-94.7, before the drive's own metal.
 * **Score 95 in the family is therefore not provably impossible, and it is not reached.** The gate is a 60-90 deg K
   drive whose metal parks. Above ~0.80 reach the folded wall (hub 2) must move too.
 
@@ -2138,8 +2146,9 @@ Scripts are in `docs/research/fold_ceiling/`. No rule, bench or verified row was
 
 **Next**
 
-1. Screen K drives with a 57.5-75 deg stroke at pressure angle <= 43 on a 28-32 / 48-50 K dyad at the leader's
-   seats, with the drive metal parked off the deltoid.
+1. Screen K drives with a ~75 deg stroke at pressure angle <= 43 on a 28-32 / 48-50 K dyad at the leader's seats
+   (seed: bk1 32, bk2 48, stop A at a1 37.55, a2 57.22, seats as verified), with the drive metal parked off the
+   deltoid.
    * Gate each one with `docs/research/fold_ceiling/parking_k.py` (exact, every part at one level, plus the drive's own
      metal) before any CMA.
 2. Leave the folded side and the window placement alone.
