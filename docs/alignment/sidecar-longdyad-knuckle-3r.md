@@ -1,179 +1,251 @@
-# Alignment audit: sidecar-longdyad-knuckle-3r (verified, round-8 lead, reference for round 9)
+# Alignment audit: sidecar-longdyad-knuckle-3r (verified, round-8 lead, round-9 tie with roller-longdyad)
 
-Audit of 2026-10-17 ~01:45-02:00 UTC, in the fresh session after the old one hit its usage limit. Ledger entry
-2026-10-17T01:56:50Z (`by auditor`, run `audit:sidecar-longdyad-knuckle-3r`). It edited no bench, judge, kit, model,
-row, dashboard or CLAUDE.md, and wrote no new tool. The earlier audit (2026-10-16 22:45 UTC, commit 67e8480) is
-superseded by this one; its measurements are reused where the claim has not moved.
+This is the metric-change audit of 2026-10-17, 04:03-04:15 UTC. Ledger entry 2026-10-17T04:14:33Z (`by auditor`, run
+`audit:sidecar-longdyad-knuckle-3r`). The audit is about commit 3ceacea (simplicity v2: an unsensed two-pin cuff knee
+scores 0, and the 2 knee encoders are dropped). It does not re-check the bench claim. It edited no bench, judge, kit,
+model, row, dashboard page or CLAUDE.md, and changed no score. It added one new tool,
+`tools/alignment_knee_determinacy.py`. Local compute only: nice, OMP_NUM_THREADS=1, at most 2 processes. No farm, $0.
+The earlier auditor sections (01:45-02:00 UTC) are replaced by this one. Their findings that the change did not touch
+are carried over below. The skeptic's section is kept under the dated rule at the end.
 
 ## Verdict: WATCH (ledger)
 
-- **Claim:** verified v_gap **18.91**, score 93.12, frozen exact Bench(110,360), fit Bench(60,160); held out 22.67.
-- **Ledger reasons** (all watch): two from the tool (near_touch, reporting) and seven from the judgement pass (S1,
-  NEW-sensed-knee-pins, NEW-catalogue-drive, NEW-unpriced-stops, G1, M5, R1). None is gamed.
-- **No re-wear this time, by the rule.** The row's last commit is b3d426a (2026-10-16 22:03 UTC); the re-wears in
-  `docs/alignment/remeasure/sidecar-longdyad-knuckle-3r_*.json` were committed at 22:52 UTC and reproduced 18.91 /
-  held 22.67 to the digit. `git diff 63167c0 HEAD` (the verification commit to now) shows no change to
-  `tools/concept_bench.py`, `tools/concept_kit.py`, `tools/env_bench.py`, `pipeline/avg/body_pose.py`,
-  `data/raw/split.json`, this model or its parent model. Only `judge/dynamics.py` changed (R17's slaved coupling), and
-  R17 is not in the gap. So the number on file is the number the current bench gives.
-- **What changed since the last audit is the rules, not the design.** The user retired the 2 mm dominance gate (A1) and
-  ruled that a sensed joint is a joint (CLAUDE.md "User decisions 2026-10-17"). This audit re-reads every finding under
-  those rules. No ledger reason of this design now cites A1 or 2 mm as a gate.
+- **Claim:** verified v_gap **18.91** (score 93.12), frozen exact Bench(110,360), held out 22.67. The claim did not
+  move. Complexity moved from 49 to **29.5** (simplicity v2). The row's top-level `complexity` field still reads 49.0.
+- **Ledger reasons** (all watch):
+  - From the tool (2): complexity MISMATCH (row field 49.0 vs 29.5 recomputed; hand count), and reporting.
+  - From this judgement pass (8): G5, NEW-law-dependent-sensing, S1, NEW-catalogue-drive, NEW-unpriced-stops, G1,
+    M5, R1.
+  - None is gamed.
+- **What the user asked about the change, answered for this design:**
+  1. **Faithfulness.** The standard knee subtraction does not match this row's own knee. It takes 2.5 points too much
+     (bodies, made and bought parts) and leaves the knee's loop in (4 points). Net, the recorded 29.5 is **1.5 higher**
+     than a faithful reading (28.0, its kneeless twin). The error does not flatter this design.
+  2. **Determinacy.** The 3 hub encoders do fix the pose at every taken pose, as long as K follows its law:
+     sigma_min 0.310 and condition 2.80 at worst, against the reference 0.39 / 2.3. With K off its law they do not
+     (sigma 0). So the ruling's premise holds in the model. In the real exo it rests on one clock spring that R17 has
+     never tested.
+  3. **Ranking.** No flip for this design. The round-9 tie-break margin, roller-longdyad against this design, stays
+     at 5.25 (v1 43.75 vs 49; v2 24.25 vs 29.5).
 
-## The lead question (round 9): is roller-longdyad's 0.24 real?
+## Re-wear (by the rule: the row's last commit, 3ceacea 03:40 UTC, is newer than the remeasure file)
 
-Seen from this design's side, under the same harness (exact, 371 bench poses fit / 1154 held-out poses):
+`CB_EXACT=1 tools/alignment_audit.py remeasure sidecar-longdyad-knuckle-3r bench`, model unchanged, 229 s. It
+reproduces every figure to the digit:
 
-| design | plain | held out | held 1 mm | reach (bench) | in-band14 | contact poses | cx |
-|---|---|---|---|---|---|---|---|
-| roller-longdyad-knuckle-3r | **18.67** | 23.73 | 26.83 | 0.725 (261) | 0.8937 | 2 (deepest -10.55 mm) | 43.75 |
-| sidecar-longdyad-knuckle-3r (this) | 18.91 | 22.67 | 25.75 | 0.725 (261) | 0.8966 | 4 (deepest -4.61 mm) | 49 |
-| sidecar-parallelogram-knuckle-3r | 19.13 | **22.03** | **24.44** | 0.7194 (259) | 0.9049 | 4 | 49 |
+- plain 18.91
+- 1 mm 20.00, 2 mm 34.03, 3 mm 155.98
+- min metal 0.278 mm
+- near1 2 / near2 26 / near3 178 poses
+- band 3-14 mm 19.22
+- overhead p10 floor 1.02 mm
 
-Sources: rows (`v_gap`, `v_reach`, `v_inband14`, `held_out`); `docs/concepts/verify/*_v_held_frozen.json` (all three
-n 1154, exact); `docs/alignment/roller-longdyad-knuckle-3r.md`; this design's `remeasure/..._probe.json`.
+File: `docs/alignment/remeasure/sidecar-longdyad-knuckle-3r_bench.json`. No measurement file has changed since the
+skeptic's re-wear: `git diff e99f42f HEAD` on bench, kit, env bench, judge/, body_pose, split, band poses and the
+models shows only tools/simplicity.py and the audit tool. I did not re-run the held-out wear: the claim did not move
+and no measurement file changed.
 
-- **Not a bench artefact.** Both designs were verified on the same bench code (no measurement file changed between
-  the two verifications, see above).
-- **But not a better exo either.** One workspace pose is worth 0.278 gap points. The plain differences among the top
-  three are 0.24 and 0.22, each under one pose, and held out reverses the whole order (22.03 < 22.67 < 23.73).
-  Roller-longdyad's gain is 2 fewer contact poses, with the remaining contact 2.3x deeper.
-- **The concurrent roller-longdyad audit's paired re-wear agrees** (`remeasure/roller-longdyad-knuckle-3r_vs_
-  sidecar-longdyad-knuckle-3r_paired_exactfit.json`; an exact-fit variant, so its levels are 19.34 / 19.66, not the
-  verified 18.67 / 18.91): on the bench each design takes 8 workspace poses the other does not, the difference is all
-  contact (-0.53) against in-band (+0.21), and the paired bootstrap 90 % interval is [-2.62, +1.77]; pooled bench plus
-  held out, roller-longdyad is better with probability 0.29.
-- **This design's own lead was the same kind of number.** Its round-8 lead over sidecar-parallelogram is 0.22 plain
-  (2 more workspace poses, less in-band), and it is 0.64 behind parallelogram held out (same reach 0.6901, in-band
-  0.8947 vs 0.9031). That lead rested on the 2 mm column (34.03 vs 50.14), which the user has now retired.
-- **Reading for the lead.** Under the user's rule (plain verified gap decides) roller-longdyad is the lead, and the
-  rule is applied correctly. The three rows are a tie within one workspace pose; nothing in the bench number says one
-  is better for the wearer than another. What does separate them for the wearer is outside the score: roller-longdyad
-  is simpler (43.75) and keeps metal off the skin at 3 mm far better (133 vs 178 bench poses under 3 mm), but presses
-  deeper where it touches; parallelogram generalises best but hugs at 1-2 mm; this design sits between.
+## (1) Faithfulness: does the standard knee match THIS row's knee?
 
-## What the wearer gets (measured; files from the 2026-10-16 re-wears, unchanged claim)
+The v2 rule subtracts the knee of skin-normal-3r-pin-knee (line 584): passive_rot 2, moving_bodies 2, joints 2,
+custom_parts 4, catalogue_parts 6. It drops sensed_passive from 2 to 0 and keeps closed_loops. This design has a
+kneeless twin, `kneeless-sidecar-knuckle-3r`. Its record says "knee link, 2 iglidur pins and 2 knee encoders deleted"
+and "the knee loop is gone". The difference between the two records is this row's own knee:
+
+| field | this row | kneeless twin | the knee by the twin | v2 subtracts | points (weight) |
+|---|---|---|---|---|---|
+| passive_rot | 6 | 4 | 2 | 2 | match |
+| joints | 10 | 8 | 2 | 2 | match |
+| moving_bodies | 7 | 6 | **1** | 2 | 1.0 over-subtracted |
+| custom_parts | 16 | 14 | **2** | 4 | 1.0 over-subtracted |
+| catalogue_parts | 16 | 12 | **4** | 6 | 0.5 over-subtracted |
+| closed_loops | 3 | 2 | **1** | 0 | 4.0 left in |
+| sensed_passive (v1) | 2 | 0 | 2 | 2 | match |
+
+`tools/simplicity.py` on each record:
+
+| reading | complexity |
+|---|---|
+| v1 | 49.0 |
+| v2 as recorded | **29.5** |
+| the twin's knee subtracted, loop kept | 32.0 |
+| the twin's knee and its loop subtracted (= the kneeless twin) | **28.0** |
+
+Read literally ("the knee adds no complexity"), the ruling makes this row equal to its kneeless twin, 28.0. v2 gives
+29.5. The loop the rule leaves in outweighs the parts it over-subtracts. The same holds for roller-longdyad: 24.25
+against kneeless-roller's 23.75 (twin delta bodies 1, made 1, bought 2, loops 1).
+
+Which count is right? The built CAD (`pipeline/full-exo/designs/l1_sidecar-longdyad/parts_full.json`) has these knee
+parts:
+- the knee link (37.7 x 10 x 2.18 Ti), with a knee stop tooth and web that the standard count does not name;
+- a separate arm pad (the pin b plate);
+- the E boss (the pin a plate) on member 3;
+- 2 pin retainers (DIN 6799 e-clip + GTM washer).
+
+That supports the standard 4 made / 6 bought. The twin's hand count is the low one. Both records are hand counts
+("confidence": "hand count") and neither is derived from the model. MR63ZZ pairs: the knee has none here (iglidur pins);
+the MR63ZZ pair belongs to the bell crank and is not subtracted. Nothing is shared between the knee and another part,
+except the E boss, which is merged into member 3's E strap; the standard count already treats it that way.
+
+## (2) Determinacy without the knee encoders
+
+New tool: `tools/alignment_knee_determinacy.py`. It loads the design's verifier and model unchanged and wears them on
+the verifier's frozen protocol. At every taken pose it writes the loop J1 - K - J2 - J3 - pin a - pin b - GH(3R) as
+unit screws (GH fixed, the arm a ball about it) and repeats the null-space Jacobian test of
+docs/concepts/skin-normal-3r-pin-knee.md lines 565-568.
+
+How the frames were checked:
+- Each joint's axis and point is read from both members it joins. The largest disagreement is 5e-6 mm and 4e-7 in
+  direction.
+- K's law is regressed from the taken poses: dK = 1.6232 x q2 past the onset, which is exactly the row's kK; the fit
+  residual is 0.0 deg. On stop A, K is held, so its rate is 0.
+
+Output: `docs/alignment/remeasure/sidecar-longdyad-knuckle-3r_knee_determinacy_bench.json`. Exact Bench(110,360);
+the frozen gap reproduces 18.91. 375 taken poses: 123 with K open, 252 with K on stop A.
+
+| case | mobility | sigma_min of the hub rows (min / p5 / median) | condition (max) | poses < 0.05 |
+|---|---|---|---|---|
+| **K slaved by its law, J1 J2 J3 read** | 3 at every pose | **0.310** / 0.311 / 0.553 | **2.80** | **0** |
+| K known (law or reading), J1 K J2 J3 | 4 | 0.332 / 0.445 / 0.520 | 2.87 | 0 |
+| K free, only J1 J2 J3 read | 4 | **0** at every pose | inf | all |
+| reference: skin-normal-3r-pin-knee | 3 | >= 0.39 | <= 2.3 | 0 |
+
+- **The premise holds for this design.** With K on its law, the 3 hub encoders fix every passive coordinate (both
+  knee pins and the 3 GH angles) at every taken pose. The knee pins cost no encoders here, as the ruling assumes.
+- **Conditioning is a little worse than the reference.** The worst pose is workspace pose 345: K open 6.5 deg, q2
+  -7.8 deg, knee angle 146.1 deg (the knee nearly straight, 7 deg inside its 153.1 stop). There, a hub-encoder error
+  maps to up to 2.34 x that error in a knee pin (median 0.43), and up to 2.84 x into the passive coordinates as a
+  whole.
+- **The premise rests on K's law.** If K leaves its law (drive lift-off, K lag, the clock spring losing preload), the
+  loop has a 4th freedom the hub encoders cannot see (sigma 0), and the arm pose read from the hubs is wrong by that
+  error. Nothing else in the design measures it: K is never read and the knee encoders are gone. R17 (lift-off, K lag)
+  has never run on this design (M5). So "no encoders needed" is proven kinematically, not for the spring-held drive.
+- **Not checked: GH translation.** The pin knee exists because GH drifts (round-9 lesson). With GH translating, the
+  knee pins take that drift, and hub-only sensing cannot separate it from arm rotation. This was the reason the
+  verified pin-knee record kept its 2 sensed pins (SIMPLICITY.md, R10). The user's ruling accepts that. I did not
+  quantify it.
+
+## (3) Rankings and tie-breaks
+
+| row | v_gap | held | v1 cx | v2 cx | twin-consistent cx |
+|---|---|---|---|---|---|
+| roller-longdyad-knuckle-3r | 18.67 | 23.73 | 43.75 | 24.25 | 23.75 |
+| **sidecar-longdyad-knuckle-3r** | 18.91 | 22.67 | 49 | **29.5** | 28.0 |
+| sidecar-parallelogram-knuckle-3r | 19.13 | 22.03 | 49 | 29.5 | - |
+| sidecar-roller-flank-knuckle-3r | 20.08 | - | 45.25 | 25.75 | - |
+| kneeless-roller-knuckle-3r | 21.07 | 24.59 | 23.75 | 23.75 | 23.75 |
+| kneeless-sidecar-knuckle-3r | 21.11 | 25.34 | 28.0 | 28.0 | 28.0 |
+
+Effect on this design:
+- **Round-9 tie-break: no flip.** The tie-break is fewer passive translations, then complexity. Roller-longdyad
+  stays ahead of this design by the same 5.25 points (4.25 twin-consistent).
+- **This design's complexity order against every other row: unchanged.** It stays just behind its kneeless twin
+  (29.5 vs 28.0).
+
+What does flip:
+- **roller-longdyad (24.25) is now simpler than kneeless-sidecar (28.0).** Under v1 it was 43.75 against 28.0.
+  roller-longdyad now dominates kneeless-sidecar on gap and complexity together. kneeless-sidecar was already
+  dominated by kneeless-roller, so the Pareto front of gap against complexity does not change.
+- **ROUNDS.md round-9 lesson (1) no longer holds.** It says the kneeless bracket "halves complexity (49 -> 24-27)".
+  Under v2 it saves 1.5 (sidecar) and 0.5 (roller), while costing ~2.2 gap points on the bench.
+
+## What the wearer gets (measured)
 
 | item | value | file |
 |---|---|---|
-| Overhead reach (elev >= 140), workspace | **8 / 28 taken** on the bench (lost: fold 14, slide 4, contact 2); 18 / 71 held out | `remeasure/..._bench.json` audit.overhead140; row held_out |
-| Raised-arm reach by elevation (taken / total) | 0-60: 161/172; 60-90: 55/75; 90-120: 25/51; 120-140: 12/34; 140-160: 5/13; 160-200: **3/15** | `remeasure/..._probe.json` ws_reach_by_elev |
-| Taken poses with metal < 2 mm | 26 of 371 bench, 63 of 859 held out. Overhead: 8 of 10 clip frames, 5 of 8 taken workspace poses | `_bench.json` / `_held.json` deep; `_probe.json` |
-| Metal < 1 mm / < 3 mm | < 1 mm: 2 bench, 14 held out (min 0.28 / 0.14 mm). < 3 mm: 178 bench, 427 held out | same |
-| Deepest contact | **-4.61 mm at plane 30 / elev 165 / axial -60** (overhead); then -0.77 (60, 150, -105), -0.74 (-60, 60, 105), -0.11 (15, 135, -60). Held out 10 contact poses. Which part presses: not measured | `_probe.json` contact_poses |
-| Workspace in-band (unscored) | 2-14 mm 0.874 over 261 taken workspace poses; overhead 0.926; clips 0.897 | `_probe.json` ws_unscored |
-| Fold margin (th) | min 5.232 deg over taken poses (no build tolerance on the stops) | row final_polish |
-| Continuity | full flood 18.91 (0 dropped), knn 21.72 | `verify/..._v_bench_frozen.json` |
-| Springs / stops | one K clock spring, 0.08 N.m preload; J2 stops smlo 5.0 / smhi 16.55; K stop B a1max 63.18 never binds | row best_params; red team |
-| Cuff twist, K lag, lift-off | **not measured**: R17 with the slaved coupling has not run (no `judge/` under `pipeline/full-exo/designs/l1_sidecar-longdyad/`) | - |
-| Near-singular postures | knee angle up to 146.1 deg bench (150.9 held out); crank swing 31.6-33.2 deg; transmission >= 30 gated | `_bench.json` coord_spans K.ang; verifier |
-| DOF / complexity | 3 active (J1, J2, J3), K slaved and never read, 0 passive translations, pin knee with 2 sensed pins; complexity 49 (recomputed) | `docs/alignment/sidecar-longdyad-knuckle-3r.json` |
+| Overhead reach (elev >= 140) | **8 / 28 taken** workspace poses (lost: fold 14, slide 4, contact 2); 18 / 71 held out | `remeasure/..._bench.json`; row held_out |
+| Raised-arm reach (taken / total) | 0-60: 161/172; 60-90: 55/75; 90-120: 25/51; 120-140: 12/34; 140-160: 5/13; 160-200: 3/15 | `remeasure/..._probe.json` |
+| Taken poses with metal < 2 mm | **26 of 371** bench (2 < 1 mm, min 0.278 mm); 63 of 859 held out; 178 < 3 mm | `remeasure/..._bench.json` (re-worn today) |
+| Deepest contact | **-4.61 mm at plane 30 / elev 165 / axial -60** (overhead); 4 contact poses on the bench, 10 held out (deepest 8.37 mm) | `_probe.json`; audit contact_depth |
+| Workspace in-band (unscored) | 0.874 over 261 taken workspace poses; overhead 0.926 | `_probe.json` |
+| Springs / stops | one K clock spring (0.08 N.m), J2 stops smlo 5.0 / smhi 16.55, K stop B 63.18 never binds, knee stop tooth at 153.1 deg | row; CAD parts_full |
+| Sensing | 3 hub encoders; with K on its law they fix the pose (sigma_min >= 0.310, condition <= 2.80); with K off its law they cannot | `remeasure/..._knee_determinacy_bench.json` |
+| Cuff twist, K lag, lift-off | **not measured** (R17 never run) | - |
+| Near-singular postures | none in the loop (hub sigma_min >= 0.31); knee up to 146.1 deg, 7 deg inside its stop; fold margin >= 5.232 deg | determinacy file; row |
 
-Numbers this audit could not get: cuff twist / K lag / lift-off (R17 not run on this design); which part makes each
-contact (the probe records the pose, not the part; not re-run because the claim did not move and the local cache is
-rebuilding); the priced-plus-catalogue-drive combined wear (never run).
+Numbers I could not get:
+- cuff twist, K lag and lift-off: R17 has not run, and running it is the lead's L1 job;
+- the arm-pose error per mm of GH drift with hub-only sensing: not built in this time box;
+- the held-out determinacy: not run, because the bench and fit benches agree (0.310 / 0.310) and the time box was
+  spent.
 
 ## Findings
 
-### S1 (watch): a sub-pose ranking that reverses held out
+### G5 (watch): the knee subtraction is a standard count, not this row's knee
 
-- **Evidence.** The table above. Plain margins 0.24 and 0.22 against 0.278 per pose; held out the order reverses
-  (parallelogram 22.03, this design 22.67, roller-longdyad 23.73), and again at 1 mm held out (24.44 / 25.75 / 26.83).
-- **Why the exo is not actually better.** Whichever of the three the plain gap puts first, the bench cannot tell them
-  apart; the ranking is pose sampling. With A1 retired, nothing but sampling now separates this design from
-  parallelogram.
-- **Why watch.** No design that is clearly better for the wearer is ranked below this one: parallelogram wins held out
-  but hugs at 1-2 mm (held-out 2 mm 48.71 vs 37.24).
-- **Action.** Proposal P-1 below.
+- **Evidence.** Section (1). The subtraction over-subtracts 1 body, 2 made and 2 bought parts (2.5 points) and leaves
+  the knee loop in (4 points). The net is +1.5 against the twin. The row's top-level `complexity` is still 49.0, while
+  the dashboard shows 29.5.
+- **Why it matters for the wearer.** It does not hurt them: the error costs this design 1.5 points. But the
+  complexity order between pin-knee rows and their kneeless twins is now set by hand-count noise of 0.5-1.5 points.
+- **Action.** Proposal P-1.
 
-### NEW-sensed-knee-pins (watch): the knee's two encoder-read pins and the 2026-10-17 ruling
+### NEW-law-dependent-sensing (watch): "no encoders needed" holds only while K follows its law
 
-- **Evidence.** The mechanism record keeps the pin knee's 2 sensed pins as sensed passives outside the DOF count, as
-  cuff-side self-aligning freedoms (CLAUDE.md, 2026-10-15). The user's 2026-10-17 ruling: "Sensed 4 joint does not count
-  as passive obviously". ROUNDS.md round 6 already lists the asymmetry (sensed K counts active, sensed knee pins
-  passive) as needing the user's say.
-- **Measured effect if the knee pins counted as joints** (`tools/simplicity.py` on each record, sensed moved to
-  active): every pin-knee row becomes 5 DOF, over the cap of 4, and complexity rises by 38. This design 49 -> 87,
-  roller-longdyad 43.75 -> 81.75, parallelogram 49 -> 87, roller-flank 45.25 -> 83.25, frontload 49 -> 87. Only the
-  kneeless rows (21.07 / 21.11, no sensed pins) would remain 3-joint designs within the cap.
-- **Why watch, not gamed.** The cuff-side rule is an explicit user ruling and the 2026-10-17 quote names the
-  shoulder-chain 4th joint. The order among the pin-knee rows does not change.
-- **Action.** The lead should put the question to the user: do the two knee-pin encoders make the knee pins joints
-  under the DOF cap? (A cuff IMU instead of the encoders is the alternative listed in round 6.)
+- **Evidence.** Section (2): sigma_min 0.310 with K slaved; 0 with K free.
+- **Why the exo is not certainly better.** A drive that lifts off would make the arm pose read from the hubs wrong,
+  with nothing to detect it.
+- **Action.** Run R17 on the gen-6 L1 (M5) and report the K lag. Proposal P-2.
+- **Proposed catalogue entry (ALIGNMENT.md section 2, G7 "sensing proven only kinematically").** A complexity credit
+  for an unsensed coordinate is valid only if (a) the null-space test passes at every taken pose and (b) every slaved
+  coordinate it relies on is shown to follow its law under load (R17). Detect: the null-space test with the slaved
+  coordinates freed; if sigma drops to 0, list the springs or drives that hold the law.
 
-### NEW-catalogue-drive (watch, still open)
+### Carried over (claim unchanged; re-worn numbers identical)
 
-- **Evidence.** With the catalogue M2 ball link (KBRM-02, O9 x 4) and the build spec's stop B at dK 35.4, the same
-  harness gives 19.76 (score 92.81) / 1 mm 20.85, held out 23.53 / 26.63 (`remeasure/..._rh155cap354_*.json`). The
-  gen-6 CAD still has no judge output, so the custom O7 crank-tip eye that would keep 18.91 is unjudged.
-- **Why not better.** 0.85 of the number belongs to a part that has not been built or judged. On buildable readings
-  roller-longdyad (envelope-corrected 18.56, ROUNDS round 9) is ahead by about 1.2, not 0.24.
-- **Action.** Judge the gen-6 L1's crank-tip and horn eyes at 1 mm; then 18.91 or 19.76 is the build's number.
+- **S1 (watch).** The round-9 trio is within one workspace pose plain, and the order reverses held out and at 1 mm.
+  The tie-break still picks roller-longdyad, now by a complexity margin of 5.25 that rests on hand counts.
+- **NEW-catalogue-drive (watch).** The catalogue ball link with stop B at 35.4 reads 19.76 (held 23.53). The O9
+  heads are unsampled.
+- **NEW-unpriced-stops (watch).** The stops sit exactly on the rule. Priced, it reads 19.36 (held 23.29).
+- **G1 (watch).** 26 poses < 2 mm. The overhead p10 floor is 1.02 mm (wearer only; not a gate).
+- **M5 (watch).** One clock spring holds the drive, and R17 has not run. Under v2 this now carries the sensing claim
+  too.
+- **R1 (watch).** Stale records: row complexity 49.0, dashboard fast 10.3, verdict "SCREENED", ROUNDS round-9
+  lesson (1).
 
-### NEW-unpriced-stops (watch)
-
-- **Evidence.** smlo 5.0 and a1max 63.1774 = bk1 + bk2 - 5 exactly; min th margin 5.232; priced (+0.5 on the stops,
-  CB_FOLD_MARGIN 5.5) 19.36 / held 23.29 (row final_polish.priced).
-- **Change under the new rules.** minarc pick1 (priced) is now 4-active, so the "within 0.51" comparison is moot; the
-  round-9 comparison with roller-longdyad (also smlo 5.0, unpriced) is like-for-like. The dashboard still mixes priced
-  and unpriced verified numbers.
-- **Action.** Show which verified numbers carry build-tolerance pricing (proposal P-b of the 22:45 audit, unchanged).
-
-### G1 (watch): metal hugs the skin overhead (for the wearer, not a gate)
-
-- **Evidence.** Overhead 8 of 10 clip frames and 5 of 8 taken workspace poses with metal < 2 mm; overhead p10 min
-  metal 1.02 mm bench, 0.64 mm held out; 15.12 points in the 1-2 mm shell (11.49 held out).
-- **Why not better.** On a real, bulging arm, 1-2 mm overhead is metal on skin. The user ruled 2 mm is not a gate, so
-  this is reported for the wearer only.
-- **Action.** Keep reporting the overhead floor; hub 3 (in-band 0.60) and L2 (0.75) are the out-of-band parts.
-
-### M5 (watch): one spring holds the drive, R17 not run
-
-- **Evidence.** K's 0.08 N.m clock spring keeps the whole drive train in compression; lift-off above ~30 rad/s2 of q2 is
-  an estimate. No R17 output for this design.
-- **Action.** Run R17 with the slaved entry on the gen-6 L1: K against its law, lift-off, cuff twist.
-
-### R1 (watch): stale text
-
-- **Evidence.** Row and dashboard verdict still open "SCREENED, a candidate for the verifier"; the dashboard row carries
-  the fast 10.3 / reach 0.80 in its gap / reach fields; HANDOFF line 81 "no polish, no CAD", line 97 "within 0.51" of
-  minarc pick1.
-- **Action.** Refresh at the next dashboard / HANDOFF update.
-
-## Patterns checked and clean
+## Patterns checked and clean (this pass)
 
 | pattern | result |
 |---|---|
-| T1 / T2 | contact line held at 1 mm; band read 3-14 mm costs 0.31 bench / 0.33 held out |
-| T3 | th margin 5.232 on file in the one metric |
-| T4 | a1max at its clamp, but stop B never binds (row limiter); polish kept ang_min at 26.88 |
-| S2 / S3 | part-weighted in-band 0.923 >= sample-weighted 0.897; crank, rod and horn sampled (rod 13, L1a 12 samples, both in band) |
-| S5 | full flood 0 dropped |
-| M1 / M2 / M3 / M4 | 0 passive translations; O20 hubs; RSSR closure, ball-link tilt, pressure angle drop 0 poses; crank swings 31.6-33.2 deg |
-| P1 (in-sample) / P2 / P3 / R3 | held out +3.76 (< 6); polish picks registered before the held-out claim; number reproduced 4 times exactly |
-| P4 | no measurement file changed in the row's 4 commits, nor since the verification (only judge/dynamics.py, outside the gap) |
-| R2 / R4 | dashboard shows v_gap 18.91 |
-| G2 / G3 | K preload 0.08 N.m, J2 step 0.13-0.20 N.m (red team); twist unmeasured (M5) |
-| G5 / G6 | complexity 49 recomputed; K is slaved, never read, so it is not a sensed 4th joint. The knee pins are NEW-sensed-knee-pins |
+| P4 (judge changed with the design) | 3ceacea changed tools/simplicity.py and 13 records' `mechanism` in one commit, but no gap moved and no design changed; it is a declared metric change with a change log (docs/SIMPLICITY.md) |
+| G6 (DOF cap) | 3 active (J1, J2, J3); K slaved, never read; knee pins unsensed under v2, so they are not sensed joints. 3 DOF, within the cap |
+| M4 (idle) | K opens 37.8 deg, crank 31.6 deg, knee pins 56.1 deg span (tool idle check) |
+| T1-T4, S2-S5, M1-M3, P1-P3, R2-R4 | unchanged since the 01:56 audit (claim and measurement files unchanged; re-wear identical) |
 
-## Proposals (not applied; measurement / reporting changes for the lead or the user)
+## Proposals (not applied; for the lead or the user)
 
-- **P-1. A lead change needs a margin of at least one workspace pose (0.28) on the plain verified gap, or no held-out
-  loss.** This replaces the retired A1 gate's role with no near-touch term. Measured effect on the verified rows (exact
-  bench, held out n 1154): roller-longdyad (18.67, held 23.73) would not replace this design (18.91, held 22.67): plain
-  margin 0.24 < 0.28 and held out -1.06. This design would not have replaced parallelogram on these rules (0.22 < 0.28,
-  held -0.64). frontload -> this design (3.91 plain, +4.08 held) passes. kneeless-roller (21.07 / 24.59) and
-  kneeless-sidecar (21.11 / 25.34) are behind on both. This is a tightening of a rule, so it is the user's call.
-- **P-2. Ask the user whether the knee's sensed pins are joints** (NEW-sensed-knee-pins). Effect: see the finding;
-  every pin-knee row would leave the DOF cap.
-- **P-3. ALIGNMENT.md wording** (for the lead, not edited by this audit, since other auditors run on the same file):
-  mark A1 "RETIRED 2026-10-17 (plain verified gap decides; contact stays < 1 mm)"; in G1 "Detect", drop `dominance` as
-  a gate and keep it as a report; in G5 / G6, state that minarc pick1 is 4-active by the user's ruling and that the
-  knee-pin question (P-2) is open.
+- **P-1. Derive the knee subtraction from each row's own kneeless twin (or its CAD part list), and decide whether the
+  knee's closure loop is part of "the knee".** Measured effect on the rows with a twin:
+  - this design 29.5 -> 28.0 if the loop goes, 32.0 if it stays;
+  - roller-longdyad 24.25 -> 23.75 if the loop goes, 27.75 if it stays (twin delta bodies 1, made 1, bought 2);
+  - no ranking among verified rows changes either way.
+  This is a measurement change, the user's call.
+- **P-2. Make the v2 credit conditional on a determinacy file** (null-space test on the frozen wear, sigma_min > 0
+  at every taken pose with the slaved coordinates on their laws). For a slaved-K row, also require R17's K lag on
+  file. Measured effect on this row: the first part passes (0.310); the second is missing, so the credit would be on
+  hold until R17 runs.
+- **P-3.** Fix the stale R1 items (row `complexity` 49.0 -> 29.5; ROUNDS round-9 lesson (1)).
+
+## Questions for the user
+
+1. Is the knee's closure loop part of the knee your ruling made free? Under v2 it still costs 4 points on every
+   knuckle pin-knee row, while the simpler pin-knee record (skin-normal) never counted it.
+2. Your ruling rests on "the 3 hub encoders fix the pose". For this design that is true only while the slaved K
+   follows its law, which one clock spring holds. Do you accept that for MVP1, or should the knee-encoder credit wait
+   for R17's K-lag measurement?
+3. With GH drifting (the reason the knee exists), the hub encoders cannot tell GH drift from arm rotation. Is
+   hub-only sensing acceptable to you under GH drift, or do you want a cuff IMU (round 6's alternative)?
 
 ## Cost
 
-No farm jobs, no local re-wear (claim unchanged). About 15 min of reading and table work.
+- One exact re-wear (229 s) and one exact determinacy wear (274 s), plus a fast debug pass.
+- Local, nice, at most 2 processes. No farm, $0.
+
+---
+
+*Auditor sections above: 2026-10-17 04:15 UTC (metric-change audit of simplicity v2). Skeptic section below: 2026-10-17
+02:24-02:40 UTC, made on the earlier auditor pass; kept unchanged.*
 
 ## Skeptic (2026-10-17, 02:24-02:40 UTC, git e99f42f -> 0a574f3)
 
