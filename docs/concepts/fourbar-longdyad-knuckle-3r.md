@@ -173,3 +173,49 @@ does not help, because the toggle's whole value is K near rest; (2) a third mech
 lug that turns with q2 around hub 2 cost 8-21 gap points of in-band on this chain, about the same as the lead's whole
 drive; (3) an O9 eye boss needs >= 15.5 mm lateral beside an O20 housing below its crown - law-only seeds that place a pin
 inside that ring are not buildable.
+
+## Audit (2026-10-17, outside auditor): the death stands
+
+**Measured reason (one line):** under today's (strict) B1 reading, every four-bar pose under |K| 20 deg fails m_sub. The
+family-optimal four-bar therefore holds K at 27.6-53.8 deg and hub 2 rides off the skin (in band 0.10). The chain alone,
+with every piece of drive metal deleted, scores 43.95 fast. Under the coupled reading the chain alone scores 26.26. Both
+are above the lead's verified 18.49, so no drive, law or knee re-tune of this morphology can reach the lead.
+
+* **Reproduced exactly** (local, Bench(60,160) fast): family best 53.26 near2 / 48.43 plain (reach 0.650, ib14 0.6895,
+  contact 0.0238; losses fold 40, slide 12, skin 4, parts 0). Ghost 43.95. Coupled best 34.56 / 32.21, ghost 26.26.
+  **Frozen family best on Bench(110,360) EXACT** (local, 133 s; the row's v_* re-measured, not copied): plain 51.75
+  (score 81.18; reach 0.6167, follow 1.0, ib14 0.6893, ib10 0.4606, contact 0.0235), near2 71.48, min metal 1.31 mm,
+  overhead 8/28, 8 contact poses with 49.7 mm total depth (max 16.2), th_margin min 5.017 (0 of 332 under 5).
+  Losses: fold 104, slide 22, parts 4, contact 8. All of these match the row.
+* **Convergence gate, re-applied to the whole sweep file** (2520 entries, split by reading, running best in file order;
+  score points): family 1088 entries, best 53.26, gain over the second half 0.036, over the last third 0.000, top-5
+  53.26-53.32 (0.02 points). Coupled 1432 entries, best 34.56, 0.000 / 0.000, top-5 34.56-35.06 (0.18 points).
+  **Passed**, consistent with the agent's per-run numbers.
+* **Code read, no bug found.**
+  * The law is the closed-form spherical four-bar: crank cone about u2, horn azimuth from A cos b + B sin b = C.
+  * In the IK, m_sub = min(th - |bk1 - cK|, bk1 + cK - th, 360 - bk1 - cK - th) with cK = angle(uK, R(u2,q2) u3). That is
+    term for term the lead verifier's `_dm(th, b1, c)` in `th_margin`. The frozen th_margin agrees: 0 of 332 under 5.
+  * The family gate applies min(m_sub, m_eff) >= 5 to every pose. ROUNDS.md's Round 11 plan, lens 2, requires exactly
+    that ("a positively slaved K is never at rest, so the strict reading ... must hold on every taken pose").
+  * The bench, the gap formula and the score are tools/concept_bench.py's, so there is no convention drift against
+    tools/concept_baseline.py.
+* **Parameter range: the obvious region was covered.** The search held the K dyad at the plan's 28-32 / 48-50, so I
+  probed outside it: bk1 24 / 28 / 32 / 36 x bk2 38 / 44 / 50 / 56 on both bests, family reading, four-bar not re-tuned,
+  a1max = bk1 + bk2 - 5.5 (32 configs). The best family four-bar reached 53.85 (36 / 38) and 54.63 (32 / 44), against
+  53.26. Worn under the family reading, the toggle (coupled-best) four-bar scores 104-160 on every dyad, with 58-107 fold
+  losses: B1 kills the toggle on every K dyad tried, not only on 28-32 / 48-50.
+* **One over-strict check found; it costs the bests nothing.** CRKL-L1b (link 2's crank lug against link 1b, outside hub
+  2's zone) is held to PART_CLEAR 1.0 mm. Link 2 and link 1b are the two members of J2, and the honesty rule gives
+  adjacent members of one joint the 0.15 mm running gap. The pair binds on 0 poses of either best (both lose 0 poses to
+  parts). It did shape the landscape:
+  * the family four-bar worn under the coupled reading loses 112 poses on it (gap 195.03);
+  * dyad variants lose 110-171 poses to parts.
+
+  Any relaxation of drive-metal pairs is bounded below by the ghost numbers above (43.95 / 26.26), so it cannot change
+  the verdict.
+* **Criterion note.** The audit template's numeric bar (within 10 of the round-3 champion's 68.93 score on Bench(60,160),
+  i.e. gap 85.44) is met by this design's own 53.26 (score 80.63), as it is by every round-11 design. The claim under
+  audit is "dead as a lead (18.49 verified) and as a complexity Pareto point", and that claim stands. The Pareto part is
+  firm under the family reading (51.75 frozen against spine-parked-j2-3r's 34.29 at cx 0). Under the coupled reading
+  (36.46 frozen) the margin is only 2.2 points, against a round-4 number measured with older checks.
+* The dyad probe and the part-pair readout were one-off scratch scripts and are not committed. Champion on the same bench: 68.93 (from its row, not re-run).
