@@ -146,3 +146,49 @@ model `docs/concepts/models/proximal-j3-geodesic-knuckle-3r.py` (modes check / f
 `docs/concepts/rows/proximal-j3-geodesic-knuckle-3r.json`, motion preview
 `docs/concepts/viz/concepts/proximal-j3-geodesic-knuckle-3r.js` (k211; drive not drawn - ghost).
 Reproduce the gate number: `CB_EXACT=1 OMP_NUM_THREADS=1 nice -n 10 python3 docs/concepts/models/proximal-j3-geodesic-knuckle-3r.py frozen '<best_params>'`.
+
+## Audit (death audit, 2026-10-17 20:20 UTC)
+
+**Verdict: the death stands (not refuted).** It is now firmer: at the round's knee rule the takes are 269, not 271.
+
+* **Reproduced to the digit.** I re-ran k211 as claimed, frozen exact on Bench(110,360) with the unchanged model:
+  16.52, reach 0.7528 (271 taken), why = fold 73 / slide 8 / parts 4 / contact 4, contact depth 3.79 + 0.41 + 4.62 + 0.64
+  mm, overhead 8/28, min th margin 5.035, near1 17.60, near2 32.53 (276 s).
+* **Convergence gate, recomputed from the sweep (372 tries):** on the near1 objective, +0.40 over the 2nd half, +0.33 over
+  the last third, top-5 spread 0.40. On the plain gap: +0.25 / +0.25 / 0.33. **Converged.**
+* **Model read.** The l2v link-2 patch reproduces the parent's add_links exactly (rows at v + off). IB_GHOST=all keeps the
+  drive's range truncation and drops only its metal. The parent loads unchanged. No modelling bug or convention error was
+  found that moves the number.
+* **Finding 1, a knee-margin spend (ALIGNMENT T4 / A6).** k211 runs the knee window at ang_min 22.26. That is 2.96 deg
+  below the round's rule of 25.22 (ROUNDS.md round-12 plan: knee re-cuts hold ang_min >= 25.22, with no knee-margin
+  relaxation; conecut clamps it, "never below"). It is also 0.26 deg off the search's own box floor of 22.0, and the
+  top-8 configs all sit at 22.0-23.2. I re-wore k211 at ang_min 25.2189, frozen exact, everything else the same:
+  - gap **16.91** (score 93.85), reach 0.7472 = **269 taken**;
+  - why = fold 73 / slide 12 / parts 2 / contact 4;
+  - **overhead 6/28** (vs 8);
+  - near1 18.53, near2 37.44, contact depth 3.79 + 0.41 + 4.62 + 1.51 mm;
+  - fit fast 11.28.
+
+  The claimed +2 takes and +2 overhead poses came from the singularity margin. At the rule, the re-fit knee is worth
+  ~0.03 over the unrefit control (16.94, 269 taken). The row's v_* fields carry this rule-compliant number.
+* **Finding 2, a protocol deviation.** The pre-registered gate (round-13 plan, lens 2) said to search on the envelope bench,
+  never the fit bench. The search ran on Bench(60,160) fast. The agent's own envsel loss through the knee link at
+  axial -166 (19.75 vs 18.84) is the predicted cost of that. It does not change the takes verdict: the 73 fold poses are
+  the 32/48 stretched wall (stop B), which no knee or law cell moved.
+* **Finding 3, reporting.** The row's `near_touch.min_taken_metal_mm` of 0.66 does not match the frozen audit. The audit
+  reads 0.30 mm at ws pose 230 (plane 15, elev 90, axial 30) and 0.68 mm at 204. near2 poses: 30 (all kinds).
+* **Finding 4, the drive argument in the verdict misreads round 12.** "A perfectly re-placed drive ~18.15 with >= 8
+  contacts" was spiral's 17.86 ghost + 0.29: the 8 contacts were the ghost's own. A re-placed in-band drive costs ~0.3.
+  At the rule this ghost would then read ~17.2, which is ~1.1 under the lead 18.28. That is probably a pooled-CI tie, as
+  conecut's -0.82 was. This is a score question for a gate-2 cell (a drive re-placed on 32/48, searched on env, with
+  ang_min >= 25.22). It does not refute the reach death: the reach bar (>= 274 taken) is missed by 5 at the rule.
+* **The template's refutation bar** (within 10 of 68.93 on Bench(60,160)) is stale. Every knuckle ghost meets it
+  trivially (fit 10.21-11.28). I judged against the pre-registered gate and the lead instead, as the round-12 verifiers
+  did.
+
+**One line:** at the round's knee rule (ang_min >= 25.22), the converged best wears 16.91 with 269/360 taken, against the
+pre-registered >= 274. The fold (73 poses at 32/48 stop B) caps takes for every seat, knee and law tried, so the family
+is closed for reach at this number.
+Raw: `.../scratchpad/aud/k211_frozen.json`, `.../scratchpad/aud_pj3/k211_amin2522_frozen.json` (not committed;
+reproduce with `CB_EXACT=1 OMP_NUM_THREADS=1 nice -n 10 python3 docs/concepts/models/proximal-j3-geodesic-knuckle-3r.py
+frozen '<best_params with ang_min 25.2189>'`).
