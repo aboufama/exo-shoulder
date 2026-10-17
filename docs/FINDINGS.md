@@ -2201,3 +2201,95 @@ margin 5.5, PA 42. Cost $0.91-1.06 of $1.5.
    $0.02) before the CAD cuts it.
 3. The 4.9-point held-out gap to the goal is the across-body / high-axial fold: a morphology lever (a 4th joint or a
    new seat pair, `docs/research/fold_ceiling.md`), not a polish.
+
+## Round 10: a nose for the roller is the new verified lead at 18.49 (score 93.28); reach did not move, the 4th joint trades fold for contact 1:1, and the dip is gamed (2026-10-17, discovery round 10, closer)
+
+Raw data:
+- rows: `docs/concepts/rows/{slipper-nose-knuckle-3r,skinnormal-shortk-knuckle-4r,dipped-law-groove-knuckle-3r,groove-desmo-knuckle-3r}.json`;
+- verifier harnesses and outputs: `docs/concepts/verify/<id>.py`, `docs/concepts/verify/<id>_v_*`,
+  `docs/concepts/verify/skinnormal-shortk-knuckle-4r/`;
+- the alignment audits, skeptic rulings and re-wears: `docs/alignment/<id>.md`, `docs/alignment/<id>.rulings.json`,
+  `docs/alignment/remeasure/`, `docs/alignment/ledger.jsonl`;
+- the judge's picks and red team: `docs/concepts/round10_ideation.md`;
+- the round table: `docs/concepts/ROUNDS.md` "Round 10 results".
+
+All numbers are frozen exact on Bench(110,360), fitted on Bench(60,160), and re-measured by an independent verifier.
+No bench, judge or kit file changed this round.
+
+**What was measured**
+
+* **slipper-nose-knuckle-3r: VERIFIED 18.49 (score 93.28), ledger WATCH. It is the round winner and the new verified
+  lead, by 0.18 over roller-longdyad-knuckle-3r's 18.67.**
+  * The design is the lead with its MR63ZZ drive roller replaced by a hardened O2.37 440C nose sliding on DLC. The flank
+    is re-fit at mu 0.087 (kinematic PA cap 38).
+  * Reach 0.725 (261/360, overhead 8/28), follow 1.0, ib14 0.8955, contact 0.0054 (2 poses). Held out 23.45 (the
+    lead 23.73). Flood full / knn 18.49 / 20.16.
+  * Paired against the lead: bench -0.18, interval [-0.26, 0.00]; held out -0.28, interval [-0.47, 0.00]. These are
+    the same poses: all of the gain is in-band, below the 1-point rule.
+  * The 0.18 comes from the drive-arm re-fit, not the nose. The lead roller on the same arm scores 18.36.
+  * What the nose does buy, with the same number of points:
+    * -2.0 complexity like-for-like (18.25 vs 20.25). The row record reads 22.25 on tools/simplicity.py v2.2, which
+      is an open reporting fix.
+    * The metal floor is higher on 93 bench poses and 224 held-out poses.
+    * Taken poses under 3 mm: 100 vs 133.
+  * The score is independent of nose radius (O2, O2.37, O2.5) and of mu up to 0.12. Build it with the stock O2.5 m6
+    dowel (18.49).
+* **skinnormal-shortk-knuckle-4r (4th joint): VERIFIED 18.58 and DEAD by the kill rule** (>= pick1's 18.40).
+  * Held out 22.43, 4 active, cx 32.5. Seven frozen claims ran 18.58-21.05. The best frozen reach is k33 at 0.769,
+    the reach the 95 target needs, but contact 0.048 and follow 0.9455 cost it 5.2 points.
+  * The skinnormal seed as specified refuses every pose at margin 5.5: its stop B 64.95 is above bk1 + bk2 - 5.5 = 64.85.
+* **dipped-law-groove-knuckle-3r: VERIFIED 18.64, ledger GAMED.**
+  * The dip makes K close below stop A in the mid-fold band so that hub 2 lifts off the deltoid. Held out 24.07,
+    worse than its own D=0 control (22.97).
+  * Gamed for three reasons:
+    * fold margin 0.184 deg;
+    * the design waived the family m_sub reading for itself: 84 of 371 bench poses fail it;
+    * the gain is in-sample (held out P(dip better) 0.000).
+* **groove-desmo-knuckle-3r: VERIFIED 22.64 (the claim's 19.29 refuted), ledger WATCH.** The design is a spring-free K
+  on the lead (cx 18.25).
+  * The claim's planar groove-fit gate missed the 14.78-deg crank-axis tilt and the 15.6-deg dowel drift. The true
+    crest is 8.93 against the claim's own 8.44 window, so stop B moves from 41.25 to 32.25 deg.
+  * Held out 28.77-28.90. A straight dowel binds; the fixes measure 23.48-23.77.
+
+**What failed, and why (measured)**
+
+* **Reach did not move.** Every 3-joint row takes the lead's 261 / 360 workspace poses and 8/28 overhead, and the 88
+  fold poses stand. The stretched wall is the K drive's stroke (~46 deg at the PA-43 cap; dK taken 45.6). The
+  slipper's re-fit flank reaches dK 49.8 (54-60 at lower mu) and gains 0 poses, because K's dyad window (a1max) caps
+  first.
+* **The 4th joint gives back what it wins (lens 1).**
+  * In the K-open states, every stretched pose won costs about one contact pose. Fold / contact loss runs 74 / 8 ->
+    59 / 19 -> 55 / 19 -> 50 / 24, so the net stays flat at ~18.6.
+  * The folded state takes 0 poses whatever K does, including with a two-way centred spring. The K sub-chain's own
+    fold sits at |bk1 - cK| + 5.5 = 32.8 deg, against th_lo 29.7 (verifier probe `audit_kwin.py`).
+  * Fast Bench(60,160) does not rank this class. Frozen = law-only reach minus 19-28 poses, and the loss grows with
+    K's opening.
+* **The dip spends the stroke it needs (lens 2).** On one slaved flank, the pressure-angle-capped stroke is a single
+  budget counted from the arm's build phase: each degree of K below stop A costs one degree of stretched stroke, about
+  one fold pose. dK_lim 46.2 -> 36.5 at D 4.
+  * The bench gain was exactly the two targeted poses (182 / 203). Pose 203 ends 0.48 mm from the skin and 182 is
+    still in contact.
+  * The 0.068 mm dip is smaller than its machining tolerance: 10 um of lobe error is 0.35 deg of K.
+* **The desmodromic groove costs stroke (lens 3).** The follower must sit >= R + rho_min off the relative-rotation
+  pole. The spring-loaded optimum puts it 1.5 mm from the pole, and moving it off costs 5 deg of K. The groove's true
+  3-D pressure angle (36.17 vs a 37.29 gate) passes only for mu <= 0.12.
+
+**Watch reasons carried with the winner** (full list with numbers in ROUNDS.md "Round 10 results" -> Alignment):
+* **M5:** the nose is held by a spring, sliding, with no measured R17 / preload / lift-off (crank PA 34.47 with
+  friction vs the lead's 8.2).
+* **G4 (family, identical to the lead):** m_sub < 1 deg on 50 of the 204 bench poses where K is at rest (min 0.000),
+  pending the user's B1 ruling.
+* **T5:** 2 overhead contacts 14.75 mm deep summed (held 46.12 mm), 2.37x sidecar-longdyad's.
+* **NEW-ws-inband:** raised-arm workspace in-band 0.800 (unscored).
+* **Reporting:** the row verdict text, a missing v_contact, and the complexity record (22.25 shown, 18.25 like-for-like).
+
+**Next**
+
+1. Attack the stretched wall with a ~75 deg slaved K stroke on a 28-32 / 48-50 K dyad, a1max raised with it.
+   * Estimate (fold_ceiling): reach 0.775-0.778, score ~95.0-95.1 before the drive's metal.
+   * Use a bilateral linkage. One-sided contacts cap at 46.5-51.8 deg; the RSSR reaches 77.2 (longstroke_drive.md).
+   * Select on a frozen or K-open-aware contact objective, because lens 1 says the open-K metal costs ~1 contact
+     pose per pose won.
+2. Stack the nose and the re-fit arm on the result.
+3. Fix the slipper's record (verdict text, v_contact, like-for-like complexity) and get the user's B1 ruling before
+   any claim that rests on m_sub at K's rest.
