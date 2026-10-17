@@ -92,7 +92,7 @@
   },
   {
    "joint": "J3",
-   "part": "O20 x 12.25 v5 hub, MR117-2RS pair, encoder; HARD STOP on J3's own angle q3' (link 2 -> member 3) at -111.90 / 122.74 deg: ISO 8734 2 m6 x 5 440C dowel ground to 3.90, pressed through member 3's J3 disc at r 7.5, in a 2.10 x 1.00 arc groove (251.5 deg, R1.05 ends) under link 2's J3 ring - inside the O20 stack",
+   "part": "O20 x 12.25 v5 hub, MR117-2RS pair, encoder; HARD STOP on J3's own angle q3' (link 2 -> member 3) at -111.90 / 122.74 deg: ISO 8734 2 m6 x 5 440C dowel ground to 3.90, pressed through member 3's J3 disc at r 7.5, in a 2.10 x 1.00 arc groove (249.98 deg, R1.05 ends) under link 2's J3 ring - inside the O20 stack",
    "axis_offset_mm": 13.84
   }
  ],
@@ -415,20 +415,12 @@
    "fit": "pin ISO 8734 O3 m6 pressed H7/m6 in the lower plate (E boss / arm pad, full plate depth); bearing seats shaft O3 j5 on the pin's free length, housing O6 J6 with a 0.5 mm shoulder; DIN 6799 RS 2.3 e-clip over a 0.1 shim"
   },
   {
-   "where": "stop dowels (K pair, J2)",
-   "fit": "O3 H7/m6 press in the upper boss (ISO 8734 3 m6); slot width 3 + 2 x clearance, ends = the stops"
-  },
-  {
    "where": "hubs J1 / K / J2 / J3 (v5 O20 stack)",
    "fit": "MR117-2RS pair: shaft O7 j5 / housing O11 J6 (the v5 stack drawing)"
   },
   {
    "where": "J3 stop dowel in hub 3's lower plate",
    "fit": "ISO 8734 (DIN 6325) 2 m6 x 5 (or x 4), 440C grade >= 56 HRC with cert, surface-ground to 3.90 +-0.02, edges re-broken; through hole reamed O2.000 -0.005/0 (2-13 um interference: H7/m6 is a transition fit), at r 7.500, true position 0.02 (+-0.01 tangential) to the J3 bore and member 3's angular datum, perpendicular 0.01 to the J3 face, 0.1 x 45 top chamfer; pressed from the top to a gauge: top 0.85 +-0.02 above the plate (F+4.00), skin end recessed 0.10 (never proud)"
-  },
-  {
-   "where": "J3 stop groove under link 2's ring",
-   "fit": "arc slot 2.10 +0.02/0 wide x 1.00 +0.05/0 deep (F+3.15..4.15) at centre radius 7.500, walls concentric to the J3 bore within 0.02 (dowel floats 0.046 per side, >= 0.026 running), FULL R1.05 ends; end-arc centres 0.382 deg beyond the dowel-centre stop angles, true position 0.02 (+-0.01 tangential); 3+2-axis from below with an O2.0 / O1.5 end mill; cut BEFORE the bearing-1 seat finish bore (0.95 wall)"
   },
   {
    "where": "J3 stop acceptance + rating",
@@ -441,6 +433,14 @@
   {
    "where": "knee pin e-clips",
    "fit": "DIN 6799 RS 2.3 in a O2.3 x 0.6 groove (H13) with a 0.3 mm land to the pin end, 0.1 mm shim under the clip"
+  },
+  {
+   "where": "stop dowels (K pair, J2) and their arc slots",
+   "fit": "O3 H7/m6 press in the upper boss (ISO 8734 3 m6 x 6 faced to 5.65); slot width 3.10 (3 + 2 x 0.05), centre radius 7.75; the semicircular slot ends' centres sit (1.55 - 1.50 - 0.02) / 7.75 rad = 0.22 deg INSIDE the dowel-centre stop angles (toward the slot's middle): the dowel meets an end when its centre is 0.05 mm beyond the end centre, so it stops 0.02 mm (0.15 deg) past the model's stop. The gen-4..7 rule (end centres BEYOND the stop) let the built K / J2 stops run 0.88 deg past (K stop A = K's sprung rest phase); end-centre true position 0.02 (+-0.01 tangential)"
+  },
+  {
+   "where": "J3 stop groove under link 2's ring",
+   "fit": "arc slot 2.10 +0.02/0 wide x 1.00 +0.05/0 deep (F+3.15..4.15) at centre radius 7.500, walls concentric to the J3 bore within 0.02 (dowel floats 0.046 per side, >= 0.026 running), FULL R1.05 ends whose centres sit 0.382 deg INSIDE the dowel-centre stop angles (toward the groove's middle; the O2 dowel meets an R1.05 end when its centre is 0.05 mm beyond the end centre = exactly at J3MIN / J3MAX - the L1 / red-team note 'beyond' would stop 0.76 deg late, outside the 0.585 deg held margin), true position 0.02 (+-0.01 tangential); 3+2-axis from below with an O2.0 / O1.5 end mill; cut BEFORE the bearing-1 seat finish bore (0.95 wall)"
   },
   {
    "where": "crank pivot bearings + axial stack (2 x 683ZZ straddling the follower in the O10 x 10 boss; D3)",
@@ -1046,12 +1046,12 @@
     122.7417
    ],
    "r_mm": 7.5,
-   "end_centre_beyond_stop_deg": 0.382,
+   "end_centre_inside_stop_deg": 0.382,
    "groove_deg": [
-    88.714,
-    324.124
+    89.478,
+    323.36
    ],
-   "groove_arc_deg": 251.5,
+   "groove_arc_deg": 249.98,
    "groove_z_mm": [
     3.15,
     4.15
@@ -1062,7 +1062,7 @@
     "valid": true,
     "solids": 1,
     "slivers": "no zero-area faces",
-    "removed_mm3": 68.18
+    "removed_mm3": 67.76
    },
    "member3_after_hole": {
     "valid": true,

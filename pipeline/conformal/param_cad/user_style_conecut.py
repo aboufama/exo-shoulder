@@ -60,6 +60,30 @@ SPACER_RI, SPACER_RO = 1.55, 2.25                                               
 SPACER_T, LAND_R = 0.175, 2.5                                                              # D3: spacer 0.175 (select 0.15-0.20) on an O5 land spot-faced on link 1b
 SHIM_T, WAVE_T, WAVE_RO, CLIP_DZ, CLIP_T = 0.10, 0.20, 3.0, 0.30, 0.6                     # D3: shim 0.10 + wave washer 0.20 working = clip at ztop + 0.30
 
+# ---------------------------------------------------------------------------------------------------- stop slots: end centres INSIDE the stop angles
+# Measured on this build's first export (scratchpad stop_engage.py: the exported dowel turned about its joint's bearing axis vs the slotted
+# part, bisection): USM.arc_slot_cutter (gen 4..7, every full CAD since) puts each semicircular end's centre (w - r_d + clr) / rs BEYOND
+# the stop angle, but a dowel of radius r_d in an end of radius w meets that end only when its centre is (w - r_d) BEYOND the end centre
+# (internal tangency on the far side), so the built K / J2 stops engaged 0.88 deg past the model's stop angles (K stop A = K's sprung rest:
+# 6x the K-phase band) and the R1.05-ended J3 groove 0.76 deg past (outside the 0.585 deg held margin). Fixed here: the end centres sit
+# (w - r_d - clr) / rs INSIDE the stop angles (toward the slot's middle), so the dowel meets the end clr past the stop (K / J2: 0.02 mm,
+# USM's stated intent; J3: 0).
+_arc_slot0 = USM.arc_slot_cutter
+
+
+def arc_slot_cutter(cen, k, a_lo, a_hi, z0, z1, rs=USM.SLOT_RS, w=USM.SLOT_W, rd=USM.DOWEL_R, clr=USM.END_CLR):
+    """USM.arc_slot_cutter with the end centres (w - rd - clr) / rs INSIDE the dowel-centre stop angles (the dowel meets the end clr mm past)"""
+    k = unit(k); e, f = USM.frame2(k); dl = (w - rd - clr) / rs; lo, hi = a_lo + dl, a_hi - dl
+    P = lambda r, a: (r * math.cos(a), r * math.sin(a)); ro, ri = rs + w, rs - w; mid = 0.5 * (lo + hi)
+    c_hi, c_lo = np.array(P(rs, hi)), np.array(P(rs, lo)); t_hi = np.array([-math.sin(hi), math.cos(hi)]); t_lo = np.array([-math.sin(lo), math.cos(lo)])
+    wp = (cq.Workplane(plane(np.asarray(cen) + z0 * k, e, f)).moveTo(*P(ro, lo)).threePointArc(P(ro, mid), P(ro, hi))
+          .threePointArc(tuple(c_hi + w * t_hi), P(ri, hi)).threePointArc(P(ri, mid), P(ri, lo)).threePointArc(tuple(c_lo - w * t_lo), P(ro, lo)).close())
+    return wp.extrude(z1 - z0).val()
+
+
+USM.arc_slot_cutter = arc_slot_cutter                                                      # link1a_body (K pair) and USS.build_links (J2) call it via USM
+
+
 # ---------------------------------------------------------------------------------------------------- O4: link 2's drop up to 70 deg
 _profile_link0 = USM.profile_link
 CLIMB_USED = {}
@@ -126,12 +150,24 @@ def drive_layout(M, lg, dg, l1b_body):
 
 # ---------------------------------------------------------------------------------------------------- the fits table (one entry per feature)
 def fits(crank_stack=None):
-    drop = ("crank-to-link 1a / link 1b running faces", "crank-to-link 1a / 1b running faces", "K phase (assembly", "K-phase band (D2)",
+    drop = ("stop dowels (K pair, J2)", "J3 stop groove under link 2's ring", "crank-to-link 1a / link 1b running faces", "crank-to-link 1a / 1b running faces", "K phase (assembly", "K-phase band (D2)",
             "knee stop tooth (knee link)", "knee stop tooth vs E strap side", "wear-test pass line", "slipper nose / DLC flank wear test", "crank pivot axial stack (D3)",
             "crank pivot bearings (2 x 683ZZ", "crank running faces (D9-01")
     out = [dict(f) for f in USS.FITS if not f["where"].startswith(drop)]
     cs = crank_stack or {}
     out += [
+        dict(where="stop dowels (K pair, J2) and their arc slots",
+             fit=("O3 H7/m6 press in the upper boss (ISO 8734 3 m6 x 6 faced to 5.65); slot width 3.10 (3 + 2 x 0.05), centre radius 7.75; the semicircular "
+                  "slot ends' centres sit (1.55 - 1.50 - 0.02) / 7.75 rad = 0.22 deg INSIDE the dowel-centre stop angles (toward the slot's middle): the dowel "
+                  "meets an end when its centre is 0.05 mm beyond the end centre, so it stops 0.02 mm (0.15 deg) past the model's stop. The gen-4..7 rule "
+                  "(end centres BEYOND the stop) let the built K / J2 stops run 0.88 deg past (K stop A = K's sprung rest phase); end-centre true position "
+                  "0.02 (+-0.01 tangential)")),
+        dict(where="J3 stop groove under link 2's ring",
+             fit=("arc slot 2.10 +0.02/0 wide x 1.00 +0.05/0 deep (F+3.15..4.15) at centre radius 7.500, walls concentric to the J3 bore within 0.02 "
+                  "(dowel floats 0.046 per side, >= 0.026 running), FULL R1.05 ends whose centres sit 0.382 deg INSIDE the dowel-centre stop angles "
+                  "(toward the groove's middle; the O2 dowel meets an R1.05 end when its centre is 0.05 mm beyond the end centre = exactly at J3MIN / "
+                  "J3MAX - the L1 / red-team note 'beyond' would stop 0.76 deg late, outside the 0.585 deg held margin), true position 0.02 (+-0.01 "
+                  "tangential); 3+2-axis from below with an O2.0 / O1.5 end mill; cut BEFORE the bearing-1 seat finish bore (0.95 wall)")),
         dict(where="crank pivot bearings + axial stack (2 x 683ZZ straddling the follower in the O10 x 10 boss; D3)",
              fit=("pin O3 h5 17-4PH H900 (pressed H7/m6 in link 1b), housings O7 J6 at both boss ends with 0.5 mm floors to the follower pocket. AXIAL STACK "
                   f"(the crank's height is HELD): ground stainless inner-ring spacer O3.1 x O4.5 x {cs.get('spacer_t_mm', 0.15):.2f} (select-fit 0.15-0.20, +-0.005 "
@@ -172,15 +208,15 @@ def j3_geom(M, l1_stop):
 
 def j3_groove_cutter(g, z0, z1):
     """the arc groove (link 2): half width w = 1.05 at r 7.5 between the dowel-centre stop angles th + J3MIN .. th + J3MAX, FULL R1.05 ends
-    whose centres sit (w - r_dowel) / r = 0.382 deg beyond them (the O2 dowel touches the end exactly at the stop); two concentric arcs +
-    two semicircles (threePointArc), extruded z0..z1 along u3 from the J3 face"""
+    whose centres sit (w - r_dowel) / r = 0.382 deg INSIDE them (the O2 dowel meets an R1.05 end when its centre is 0.05 mm beyond the
+    end centre: exactly at the stop); two concentric arcs + two semicircles (threePointArc), extruded z0..z1 along u3 from the J3 face"""
     w = J3_GW / 2; rs = J3_RS; dl = (w - J3_DR) / rs; e, f, u3, H3 = g["e"], g["f"], g["u3"], g["H3"]
-    lo, hi = g["th"] + math.radians(J3MIN) - dl, g["th"] + math.radians(J3MAX) + dl
+    lo, hi = g["th"] + math.radians(J3MIN) + dl, g["th"] + math.radians(J3MAX) - dl
     P = lambda r, a: (r * math.cos(a), r * math.sin(a)); ro, ri = rs + w, rs - w; mid = 0.5 * (lo + hi)
     c_hi, c_lo = np.array(P(rs, hi)), np.array(P(rs, lo)); t_hi = np.array([-math.sin(hi), math.cos(hi)]); t_lo = np.array([-math.sin(lo), math.cos(lo)])
     wp = (cq.Workplane(plane(H3 + z0 * u3, e, f)).moveTo(*P(ro, lo)).threePointArc(P(ro, mid), P(ro, hi))
           .threePointArc(tuple(c_hi + w * t_hi), P(ri, hi)).threePointArc(P(ri, mid), P(ri, lo)).threePointArc(tuple(c_lo - w * t_lo), P(ro, lo)).close())
-    return wp.extrude(z1 - z0).val(), dict(end_centre_beyond_stop_deg=round(math.degrees(dl), 3), groove_deg=[round(math.degrees(lo), 3), round(math.degrees(hi), 3)],
+    return wp.extrude(z1 - z0).val(), dict(end_centre_inside_stop_deg=round(math.degrees(dl), 3), groove_deg=[round(math.degrees(lo), 3), round(math.degrees(hi), 3)],
                                            groove_arc_deg=round(math.degrees(hi - lo) + 2 * math.degrees(math.asin(w / rs)), 2))
 
 
@@ -339,6 +375,41 @@ def j3_sweep_built(dd, M, g, dq=1.0):
     return res
 
 
+def stop_engagement(dd, rep):
+    """where the BUILT K / J2 / J3 stops engage: each exported stop dowel turned about its joint axis (taken from the joint's own bearing mesh:
+    PCA, least-variance direction; both signs tried) against the slotted part, the engagement angle bisected past each window end"""
+    import igl
+    src = trimesh.load(os.path.join(dd, "exo.glb")); Mm = {}
+    for node in src.graph.nodes_geometry:
+        T_, gn = src.graph[node]; nm = node.split("|")[1]; m = src.geometry[gn].copy(); m.apply_transform(T_); Mm[nm] = m
+    get = lambda p_: [v for k_, v in Mm.items() if k_.startswith(p_)]
+    def axis_of(bm):
+        V = np.asarray(bm.vertices); c = V.mean(0); _, S_, Vt = np.linalg.svd(V - c); return c, Vt[np.argmin(S_)]
+    def sdm(X, m): return float(igl.signed_distance(np.ascontiguousarray(X, float), np.ascontiguousarray(m.vertices, float), np.ascontiguousarray(m.faces, np.int64))[0].min())
+    def engage(dw, part, c, u, q_lo, q_hi, sgn):
+        X = np.r_[np.asarray(dw.vertices), trimesh.sample.sample_surface_even(dw, 3000, seed=2)[0]]
+        fq = lambda q: sdm((X - c) @ CL1.S.rotm(u, sgn * math.radians(q))[0].T + c, part); out = {}
+        for end, q0, d in (("lo", q_lo, -1), ("hi", q_hi, 1)):
+            a_, b_ = q0 - d * 1.0, q0 + d * 3.0; fa, fb = fq(a_), fq(b_)
+            if not (fa > 0 > fb): return None
+            for _ in range(18):
+                mq = 0.5 * (a_ + b_)
+                if fq(mq) > 0: a_ = mq
+                else: b_ = mq
+            out[end] = dict(window_deg=round(q0, 4), engages_deg=round(0.5 * (a_ + b_), 3), past_window_deg=round(d * (0.5 * (a_ + b_) - q0), 3))
+        return out
+    jobs = [("K dowel %d" % (i + 1), dw, get("D8-02a")[0], get("K bearing 1")[0], rep["stops"]["K"]["q_deg"]) for i, dw in enumerate(get("K stop dowel"))]
+    jobs += [("J2 dowel", get("J2 stop dowel")[0], get("D8-02b")[0], get("J2 bearing 1")[0], rep["stops"]["J2"]["q_deg"]),
+             ("J3 dowel", get("J3 stop dowel")[0], get("D8-03")[0], get("J3 bearing 1")[0], [J3MIN, J3MAX])]
+    res = dict(rule="exported dowel turned about its joint's bearing axis vs the slotted part; engagement = first contact past the window (bisection, "
+                    "0.0002 deg); target: K / J2 0.02 mm past (0.15 deg at r 7.75), J3 0 (exactly at J3MIN / J3MAX)")
+    for lab, dw, part, brg, (q_lo, q_hi) in jobs:
+        c, u = axis_of(brg)
+        r_ = engage(dw, part, c, u, q_lo, q_hi, 1) or engage(dw, part, c, u, q_lo, q_hi, -1)
+        res[lab] = r_ if r_ is not None else "no clean engagement found with either axis sign"
+    return res
+
+
 def check_frames(M, dd, stops, g3):
     """USS.check_frames (copied) + the L1's check poses for the J3 stop and the knee (q3' extremes, knee-angle extremes); hub 3's groove band
     excluded from the joint-feature reading like the K / J2 slot bands (the model samples solid plate where the groove is cut), and the J3
@@ -436,8 +507,9 @@ def run_checks(M, dd, stops, rep, t0, g3):
     """the post-export checks: posed drive pairs (+ the D3 stack and the J3 dowel), the built J3 stop sweep, the model's metal vs the posed
     parts at the check poses (kinematics_exact + the outside table), drive skin, working end"""
     rep.pop("checks", None); W = lambda: json.dump(rep, open(os.path.join(dd, "build.json"), "w"), indent=1, default=float)
-    rep["drive_posed"] = posed_drive_check(dd); print(f"drive posed (mm, at dK): {rep['drive_posed']}", flush=True); W()
     rep["j3_stop_built"] = j3_sweep_built(dd, M, g3); print(f"J3 stop (built): {rep['j3_stop_built']}", flush=True); W()
+    rep["stop_engagement_built"] = stop_engagement(dd, rep); print(f"stop engagement (built): {rep['stop_engagement_built']}", flush=True); W()
+    rep["drive_posed"] = posed_drive_check(dd); print(f"drive posed (mm, at dK): {rep['drive_posed']}", flush=True); W()
     rep["check"] = check_frames(M, dd, stops, g3)
     keys = sorted({k for r in rep["check"] for k in r["per_part"] if " " not in k})
     outside = {k: max(float(r["per_part"][k][2]) for r in rep["check"] if k in r["per_part"]) for k in keys}

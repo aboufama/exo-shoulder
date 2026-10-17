@@ -853,12 +853,12 @@
    122.7417
   ],
   "r_mm": 7.5,
-  "end_centre_beyond_stop_deg": 0.382,
+  "end_centre_inside_stop_deg": 0.382,
   "groove_deg": [
-   88.714,
-   324.124
+   89.478,
+   323.36
   ],
-  "groove_arc_deg": 251.5,
+  "groove_arc_deg": 249.98,
   "groove_z_mm": [
    3.15,
    4.15
@@ -869,7 +869,7 @@
    "valid": true,
    "solids": 1,
    "slivers": "no zero-area faces",
-   "removed_mm3": 68.18
+   "removed_mm3": 67.76
   },
   "member3_after_hole": {
    "valid": true,
@@ -1736,9 +1736,9 @@
    "k": 25,
    "group": "l1a",
    "name": "D8-02a link 1a: 8x3 bar on ONE line/arc chain in span(u1, uK) (J1 seat at the J1 skirt + 0.15, 60-deg ramp, R2 centre-line bends: 5-axis machined from solid, tighter than the 15 mm bent-bar rule), J1 / K pads + integral O7 pins, K pin continued as the O5 spring arbor (0.4 mm slit, no magnet: K is slaved); K's two opposed 62.8-deg stop slots in the K pad; the flank lug (the r 1.25 conjugate flank: 4 tangent arcs; 4-axis UV wire-EDM ruled surface, a-C:H DLC) + its web (Ti-6Al-4V)",
-   "vol_cm3": 2.826,
+   "vol_cm3": 2.83,
    "material": "Ti-6Al-4V",
-   "mass_g": 12.52,
+   "mass_g": 12.54,
    "valid": true,
    "faces": 114,
    "solids": 1,
@@ -1748,7 +1748,7 @@
    "k": 26,
    "group": "l1b",
    "name": "D8-02b link 1b: 8x3 bar on a line/arc chain, K upper pad + O20 ring + M18 spigot + bore (2 dowel holes), J2 pad + integral O7 pin with the 118.0-deg q2 stop slot; carries the crank pivot pin in an O3 H7 bore on an O5 land spot-faced at the boss underside - 0.175 (D3) (machined from solid Ti-6Al-4V (2.5-D: 4 side-view sketches side by side of lines + tangent arcs through the model's strap stations, extruded 2 mm; 3+2-axis milling - a wire cannot cut strips of different profiles side by side), rounds R2 / R0.5 in the profile)",
-   "vol_cm3": 3.139,
+   "vol_cm3": 3.141,
    "material": "Ti-6Al-4V",
    "mass_g": 13.91,
    "valid": true,
@@ -1795,8 +1795,8 @@
   {
    "k": 30,
    "group": "l2",
-   "name": "D8-03 link 2 (5-axis / 3+2 machined from solid Ti-6Al-4V, drop 68.0 deg at J2 (<= 70: CAD ruling 2, tighter transition on a part machined from solid)): 8x3 bar on a line/arc chain + J2 / J3 O20 rings, J2 dowel hole, the J3 stop's 2.10 x 1.00 arc groove (r 7.5, 251.5 deg, R1.05 ends) under the J3 pad / ring, flies over the knee and the pad (machined from solid Ti-6Al-4V (2.5-D: 4 side-view sketches side by side of lines + tangent arcs through the model's strap stations, extruded 2 mm; 3+2-axis milling - a wire cannot cut strips of different profiles side by side), rounds R2 / R0.5 in the profile)",
-   "vol_cm3": 4.437,
+   "name": "D8-03 link 2 (5-axis / 3+2 machined from solid Ti-6Al-4V, drop 68.0 deg at J2 (<= 70: CAD ruling 2, tighter transition on a part machined from solid)): 8x3 bar on a line/arc chain + J2 / J3 O20 rings, J2 dowel hole, the J3 stop's 2.10 x 1.00 arc groove (r 7.5, 250.0 deg, R1.05 ends) under the J3 pad / ring, flies over the knee and the pad (machined from solid Ti-6Al-4V (2.5-D: 4 side-view sketches side by side of lines + tangent arcs through the model's strap stations, extruded 2 mm; 3+2-axis milling - a wire cannot cut strips of different profiles side by side), rounds R2 / R0.5 in the profile)",
+   "vol_cm3": 4.438,
    "material": "Ti-6Al-4V",
    "mass_g": 19.66,
    "valid": true,
@@ -3243,124 +3243,5 @@
    "child_status": 11
   }
  ],
- "drive_posed": {
-  "drive lobe follower roller | D9-02": [
-   -0.04,
-   -1.51
-  ],
-  "drive nose dowel | D8-02a": [
-   -0.027,
-   -29.31
-  ],
-  "D9-01 | D8-02a": [
-   0.106,
-   -15.75
-  ],
-  "D9-01 | D9-02": [
-   0.378,
-   -15.75
-  ],
-  "D9-01 | D8-02b": [
-   0.15,
-   -10.03
-  ],
-  "D9-01 | D8-03": [
-   0.109,
-   0.0
-  ],
-  "D9-01 | J2 cap": [
-   1.333,
-   0.0
-  ],
-  "D9-01 | K clock-spring cap": [
-   2.879,
-   0.0
-  ],
-  "drive lobe follower roller | J2 cap": [
-   0.659,
-   0.0
-  ],
-  "drive lobe follower roller | D8-03": [
-   0.531,
-   0.0
-  ],
-  "drive follower pin | D9-02": [
-   1.421,
-   -1.17
-  ],
-  "drive follower inner-ring shim | D9-02": [
-   0.788,
-   -29.31
-  ],
-  "drive nose dowel | K clock-spring cap": [
-   5.103,
-   0.0
-  ],
-  "drive nose dowel | D8-02b": [
-   3.885,
-   0.0
-  ],
-  "D8-02a | D8-02b": [
-   0.15,
-   -29.31
-  ],
-  "D8-02a | K clock-spring cap": [
-   0.2,
-   -29.31
-  ],
-  "D8-02a | D8-01": [
-   0.15,
-   -29.31
-  ],
-  "drive crank pivot pin clip | D9-01": [
-   0.581,
-   -6.51
-  ],
-  "D9-02 | D8-02b": [
-   3.637,
-   -15.75
-  ],
-  "drive crank bearing 1 | D8-02b": [
-   0.152,
-   -1.51
-  ],
-  "drive crank inner-ring spacer | D9-01": [
-   1.248,
-   -29.31
-  ],
-  "drive crank preload wave washer | D9-01": [
-   0.507,
-   -8.52
-  ],
-  "drive crank preload inner-ring shim | D9-01": [
-   1.248,
-   -29.31
-  ],
-  "drive crank pivot pin clip | D8-03": [
-   8.3,
-   0.0
-  ],
-  "drive crank preload wave washer | D8-03": [
-   8.149,
-   0.0
-  ],
-  "drive crank pivot pin clip | J2 cap": [
-   6.887,
-   0.0
-  ],
-  "J3 stop dowel | D8-03": [
-   0.044,
-   -1.17
-  ],
-  "contact drive lobe follower roller | D9-02 (driven frames: min, max of the per-frame min)": [
-   42,
-   -0.042,
-   0.003
-  ],
-  "contact drive nose dowel | D8-02a (driven frames: min, max of the per-frame min)": [
-   42,
-   -0.028,
-   -0.015
-  ]
- }
+ "checks": "not run in this pass (--no-checks): run --checks-only on this design"
 }

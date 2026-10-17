@@ -357,7 +357,7 @@
    "faces": 114,
    "bad_faces": 0,
    "watertight": true,
-   "volume_cm3": 2.828,
+   "volume_cm3": 2.832,
    "bbox_mm": [
     39.5,
     25.2,
@@ -371,7 +371,7 @@
    "faces": 273,
    "bad_faces": 0,
    "watertight": false,
-   "volume_cm3": 3.141,
+   "volume_cm3": 3.143,
    "bbox_mm": [
     30.2,
     33.7,
@@ -427,7 +427,7 @@
    "faces": 702,
    "bad_faces": 0,
    "watertight": false,
-   "volume_cm3": 4.436,
+   "volume_cm3": 4.437,
    "bbox_mm": [
     39.6,
     94.1,
