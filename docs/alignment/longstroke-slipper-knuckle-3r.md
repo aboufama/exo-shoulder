@@ -233,3 +233,126 @@ Patterns checked and not present:
 - R17 dynamics (spring hold, cuff twist) at kK 3.0: no harness for this model.
 - The nose control: not re-run (see question 5).
 - The exact lobe PA on the verified rssr rows: proposal B.
+
+## Skeptic (2026-10-17, 09:25-09:50 UTC)
+
+Ledger: `by skeptic`, run `skeptic:longstroke-slipper-knuckle-3r`, rulings
+`docs/alignment/longstroke-slipper-knuckle-3r.rulings.json`. **Final verdict (computed by the ledger tool): WATCH.**
+3 of 8 reasons refuted (held_out, idle, M4); 5 upheld (sampling, NEW-ghost-ceiling, P2, S1, G2).
+
+**What I ran.** Local only, 2 processes or fewer, nice 10, OMP_NUM_THREADS=1, $0 on the farm. Models, benches, judges
+and rows were unchanged. The read-only probes live in the session scratchpad, not in the repo:
+
+- **Fit-bench probe of the claim** (LS_DRIVE=rssr, Bench(60,160) fast): reproduces the claim 19.37.
+- **Fit-bench probe of the ghost config with LS_GHOST=0**: lists the contact, strap and rigid entries the ghost rule
+  removes.
+- **The frozen protocol's fit-bench reading of the ghost (LS_GHOST=1)** at kK 1.98 / 2.3 / 2.65 / 3.0.
+- **An independent paired recomputation** from the per-pose dumps: own gap formula and own bootstrap, no audit-tool
+  import.
+
+### Rulings
+
+**held_out: REFUTED (measured).**
+
+- Both wears are on file, exact, frozen, with the model unchanged:
+  - `remeasure/longstroke-slipper-knuckle-3r_bench.json` frozen.gap 21.27;
+  - `_held.json` frozen.gap 26.19.
+- Recomputed from their reach, in-band and contact fields: 21.27 / 26.19. The bench equals the row's frozen.gap.
+- My fit-bench run reproduces the claim 19.37 (reach 0.7812, in-band 0.8734).
+- The drop is +4.92, under TH held_watch 6.0. What is missing is a verifier run, not a held-out measurement.
+
+**idle: REFUTED (instrument false positive).**
+
+- The model only reads `knee_moved` (line 179). It is set only in the two kneeless models, and my claim probe reports
+  knee_moved None.
+- K.ang spans [86.22, 151.44] bench and [86.22, 149.44] held. That is the pin knee's designed motion, inside
+  [25.22, 154.78].
+- Every declared drive moves well past 2 deg:
+  - K 41.63 / 41.52 deg;
+  - the crank, the "no span on file" item: measured here at 32.61 deg (phi_max_taken 32.6). It is at least 0.716 x 41.63
+    = 29.8 deg on the claim bench, because phi(|dK|) is monotone.
+
+**sampling: UPHELD.**
+
+- parts_ib14.crank is [0.499, 14.0, 61]: below 0.5. Half of the bell crank's sampled metal sits more than 14 mm off the
+  skin.
+- My probe confirms the crank is sampled with the same 61 points.
+
+**NEW-ghost-ceiling: UPHELD.** The auditor's mechanics are confirmed.
+
+- The ghost rule removes exactly 3 skin-contact entries (rod n=81, crank n=116, horn n=20) and no chain metal. No other
+  member-1 entry has n=20.
+- The range scan runs before the deletion: dK_lim 73.0, why 'law', transmission min 54.8.
+- The metal costs 7.28 already on the fit bench: plain 19.40 with metal vs 12.12 for the ghost (skin 2, contact 3,
+  parts 0). That reproduces farm `real_k30` fit_fast 19.4.
+- Still not on file: the with-metal held-out wear and the ghost's flood. No drive with metal reaches the number.
+
+**P2: UPHELD, and sharper than the audit says.**
+
+- The frozen protocol's fit bench (Bench(60,160) fast, LS_GHOST=1, s_arm 4.0, r_lobe 8.5) does not pick kK 3.0 on the
+  row's own objective:
+
+  | kK | plain | 2 mm objective (near2) |
+  |---|---|---|
+  | 1.98 | 12.23 | 15.60 |
+  | 2.3 | 12.93 | 16.35 |
+  | 2.65 | 12.77 | 16.22 |
+  | 3.0 | 12.12 | 16.73 |
+
+- On the 2 mm objective kK 3.0 ranks last of the four. On plain it ranks first by 0.11.
+- So the steep law could only have been picked from the claim-bench and held-out counts in the law table
+  (`stroke_curve.py` wears `held_bench()`; held 679 / 689 sit in `stroke_curve_ghost_g65d_k{23,30}.json`). 21.11 is
+  not a frozen-protocol held-out number.
+
+**S1: UPHELD, and every number reproduced independently.**
+
+- Bench: -0.24, 90 % CI [-2.17, +1.83], P 0.585.
+- Held out: -2.35, CI [-3.69, -0.93], P 0.998.
+  - The ghost takes 30 workspace poses that slipper-nose does not, and loses 5.
+  - Of the 30: 17 at elevation < 60 (16 with |axial| >= 120), 6 at 60-90, 4 at 90-140 and 3 overhead.
+- k30 vs g65d: +17 / -6 poses.
+  - 11 of the 17 sit below elevation 60 with |axial| >= 120. None are overhead.
+  - 7 contact-only poses; g65d takes 5 of them cleanly.
+
+**G2: UPHELD (dynamics missing).**
+
+- The arithmetic reproduces:
+  - kK 3.0: 0.282 N.m, which is 1.88 / 2.35 N at a 150 / 120 mm lever;
+  - the claim: 0.178 N.m, which is 1.19 / 1.48 N.
+- Correction: the "2.5 N line" is the row's own limit. REQUIREMENTS R17 sets <= 1 N.m peak about the shoulder and
+  <= 5 N / <= 5 deg at the cuff. The static spring alone uses about 28 % and 47 % of those.
+- The dynamic half (K at 3x q2, follower hold, cuff twist) has no `judge/dynamics.py` run at kK 3.0.
+
+**M4: REFUTED.**
+
+- The documented M4 rule is a declared drive that never moves, flagged below 2 deg. Here K moves 41.63 / 41.52 deg and
+  the crank 32.61 deg.
+- The +8.25 complexity is the RSSR topology, not the stroke. `tools/simplicity.py` has no stroke input. Against
+  slipper-nose the breakdown is: passive rotations 7 vs 2 (+5), joints +2, bodies +1, parts +1.25, track pair -1.
+- The unused 23.4 deg is stroke reserve, and its metal is in the scored samples. The score already ranks the claim
+  behind the reference (21.27 / 26.19 vs 18.49 / 23.45).
+
+### Missed by the audit (for the next audit; not counted in this verdict)
+
+1. **The complexity record's topology is inconsistent, and the tool flags it.**
+   - `simplicity.score(row.mechanism)` flags "closed_loops 3 != joints 10 - moving_bodies 6". Slipper-nose's 8 - 5 = 3
+     is consistent. The record is a hand count.
+   - If the fourth loop is real, complexity is 34.5, not 30.5: +12.25 against the reference, not +8.25.
+   - The audit's G5 / G6 line ("recomputed and matches") did not report the flag.
+2. **The fit objective ranks the steep law last** (P2 above). kK 3.0 is +1.13 worse than kK 1.98 on the frozen
+   protocol's own 2 mm fit objective. The pick goes AGAINST the fit bench, not merely "unseen by it" (the audit said
+   -0.11 on plain only).
+3. **The leak-free part of the held-out gain is not robust.**
+   - Ghost g65d (the CMA's own law, no held-out view) vs slipper-nose, held out: -0.76, 90 % CI [-1.91, +0.07],
+     P 0.933, so the interval crosses 0.
+   - The robust -2.35 needs the hand-picked steep law. The audit reported g65d's +14 / -0 poses but not its interval.
+4. **Threshold label.** G2 measured against the row's own 2.5 N line instead of REQUIREMENTS R17 (5 N, 1 N.m,
+   5 deg). Not gaming; the next audit should cite R17.
+
+### Question for the user (added)
+
+Should an attribution's free law be picked on the fit bench's own objective (the 2 mm near-touch gap)? On that
+objective the ghost's kK 3.0 is the worst of four laws (16.73 vs 15.60). If yes, the "ceiling" to chase is g65d's
+held-out 22.69 (-0.76 vs slipper-nose, CI [-1.91, +0.07]), not 21.11.
+
+**Final verdict: WATCH** (ledger 2026-10-17T09:32:33Z; worst unrefuted level watch; no gamed reason).
