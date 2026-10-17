@@ -284,6 +284,154 @@ def c_dominance(row, V, rem_b, ref):
     return _chk("dominance", "ok", f"vs {ref}: plain {dp:+.2f}, 2 mm {d2:+.2f}", ref=ref, gain_plain=dp, gain_2mm=d2)
 
 
+# ------------------------------------------------------------------------------------------------------------------
+# T5 contact depth (VERSION 2026-10-17.1): the score counts contact POSES (100 x share), not how deep the metal goes.
+# Reporting only: it never changes a bench, the score or the gap (user 2026-10-17: the score stays as is); worst level 'watch'.
+# ------------------------------------------------------------------------------------------------------------------
+DEPTH_REF = "sidecar-longdyad-knuckle-3r"     # the verified 3-active lead (README Status 2026-10-17); --ref overrides
+
+
+def _gap_of_file(d):
+    for path in (("frozen", "gap"), ("model_frozen", "gap"), ("probe", "scored", "gap"), ("plain",)):
+        x = d
+        for k in path: x = x.get(k) if isinstance(x, dict) else None
+        if _num(x) is not None: return _num(x)
+    return None
+
+
+def _depth_sources(rid):
+    """every per-pose contact-depth record of a design on file, rawest first:
+    per-pose dumps (tools/alignment_paired.py dump: each pose, contact = evaluated with metal < 0 mm),
+    wear probes (tools/alignment_wear_probe*.py: probe.contact_poses), paired-claim summaries (contact_depth.all).
+    -> [dict(wear, key, gap, depths=[(mm > 0, kind, plane, elev, axial)], src, rank)]; key pairs a bench file with its held twin"""
+    out = []
+    def wear_of(d, f): return d.get("wear") if d.get("wear") in ("bench", "held") else ("held" if "held" in os.path.basename(f) else "bench")
+    def key_of(f): return (os.path.dirname(f), re.sub(r"_(bench|held)(?=_|\.json$|$)", "", os.path.basename(f)))
+    for f in sorted(glob.glob(os.path.join(REM, rid + "_*perpose*.json"))):
+        try:
+            d = json.load(open(f)); P = d["poses"]
+            dep = [(-float(p["min_mm"]), p.get("kind"), p.get("plane"), p.get("elev"), p.get("axial")) for p in P if p.get("contact")]
+            out.append(dict(wear=wear_of(d, f), key=key_of(f), gap=_gap_of_file(d), depths=dep, n_poses=len(P), src=os.path.relpath(f, REPO), rank=0))
+        except Exception:
+            continue
+    for f in sorted(glob.glob(os.path.join(REM, rid + "_*probe*.json")) + glob.glob(os.path.join(OUT, "live_audit_*", "probe_" + rid + "*.json"))):
+        try:
+            d = json.load(open(f)); cp = (d.get("probe") or {}).get("contact_poses")
+            if cp is None: continue
+            dep = [(-float(p["mm"]), p.get("kind"), p.get("plane"), p.get("elev"), p.get("axial")) for p in cp]
+            out.append(dict(wear=wear_of(d, f), key=key_of(f), gap=_gap_of_file(d), depths=dep, n_poses=(d.get("probe") or {}).get("n"),
+                            src=os.path.relpath(f, REPO), rank=1))
+        except Exception:
+            continue
+    for f in sorted(glob.glob(os.path.join(REM, "*_paired*.json"))):
+        try:
+            d = json.load(open(f))
+        except Exception:
+            continue
+        side = "A" if d.get("A") == rid else "B" if d.get("B") == rid else None
+        if not side: continue
+        for w in ("bench", "held"):
+            cd = ((d.get(w) or {}).get("contact_depth") or {}).get(rid)
+            if not isinstance(cd, dict) or not isinstance(cd.get("all"), list): continue
+            dep = [(-float(a[0]), "ws", a[1], a[2], a[3]) for a in cd["all"]]
+            out.append(dict(wear=w, key=(f, "paired"), gap=_num((d.get(w) or {}).get("gap_" + side)), depths=dep, n_poses=None,
+                            src=os.path.relpath(f, REPO) + f":{w}.contact_depth", rank=2))
+    return out
+
+
+def _held_gaps(row):
+    """the held-out gaps on file for the row's v_gap claim (re-measure, row) - a held depth file must reproduce one"""
+    g = []
+    rh = _remeasured(row["id"], "held")
+    if rh and isinstance(rh.get("frozen"), dict): g.append(_num(rh["frozen"].get("gap")))
+    if isinstance(row.get("held_out"), dict): g.append(_num(row["held_out"].get("gap")))
+    g.append(_num(row.get("held_out_gap")))
+    return [x for x in g if x is not None]
+
+
+def _claim_depths(rid, row=None):
+    """the contact depths of every number the row claims (the ledger's claim and v_gap), bench and held, read ONLY from
+    files whose own gap reproduces that claim (+-0.05): a dump of another fit is a different design state, not evidence.
+    -> {claim_label: {wear: summary}}"""
+    row = row or _row(rid)
+    try:
+        from alignment_ledger import claim_of
+        c, cf, claims = claim_of(row)
+    except Exception:
+        c, cf, claims = _num(row.get("v_gap")), "v_gap", {"v_gap": _num(row.get("v_gap"))}
+    todo = {}
+    if c is not None: todo[f"{cf} {c}"] = c
+    if _num(row.get("v_gap")) is not None and _num(row.get("v_gap")) != c: todo[f"v_gap {row['v_gap']}"] = _num(row["v_gap"])
+    S = _depth_sources(rid); out = {}
+    for label, g in todo.items():
+        bench = [s for s in S if s["wear"] == "bench" and s["gap"] is not None and abs(s["gap"] - g) <= 0.05]
+        keys = {s["key"] for s in bench}
+        hg = _held_gaps(row) if label.startswith("v_gap") or cf == "v_gap" and abs(g - (_num(row.get("v_gap")) or -1)) < 1e-9 else []
+        held = [s for s in S if s["wear"] == "held" and (s["key"] in keys or (s["gap"] is not None and any(abs(s["gap"] - h) <= 0.05 for h in hg)))]
+        res = {}
+        for w, L in (("bench", bench), ("held", held)):
+            if not L: continue
+            L = sorted(L, key=lambda s: s["rank"]); best = L[0]; dd = [x[0] for x in best["depths"]]
+            sums = sorted({round(sum(x[0] for x in s["depths"]), 2) for s in L})
+            deepest = max(best["depths"], key=lambda x: x[0]) if best["depths"] else None
+            res[w] = dict(n=len(dd), sum_mm=round(sum(dd), 2), max_mm=round(max(dd), 2) if dd else 0.0,
+                          n_deeper3=sum(1 for x in dd if x > 3), overhead140=sum(1 for x in best["depths"] if _num(x[3]) is not None and x[3] >= 140),
+                          deepest=list(deepest[1:]) if deepest else None, gap=best["gap"], src=best["src"],
+                          cross_check=dict(files=len(L), sums=sums, agree=(max(sums) - min(sums) <= 0.5) if sums else True))
+        out[label] = res
+    return out
+
+
+def c_contact_depth(row, ref=None):
+    """T5: summed / max penetration of the claim's contact poses vs the reference's, per wear (bench, held out).
+    watch when, on a wear both have, the claim presses >= TH depth_ratio x the reference's summed depth AND the excess is
+    >= TH depth_floor_mm. Why that margin: (1) repeatability - re-fits of the same design move the summed depth by <= 0.4
+    mm (roller-longdyad 16.46 / 16.53 bench, 49.88 / 49.88 held; sidecar-longdyad 6.23 / 5.89, 35.66 / 35.25:
+    remeasure/*_perpose*.json), so 2x and 5 mm are > 10x the instrument's own noise; (2) granularity - one pose that a
+    design takes in contact where the other loses it to the fold moves the sum by one press (the lead's deepest: 4.6 mm
+    bench, 8.4 mm held), so the excess must be more than a single shallow press, and 5 mm is half the 1 cm aim (metal
+    5 mm into the arm is beyond a 2-3 mm liner); (3) 2x: a doubled total is a pattern, not one pose's bookkeeping.
+    Never 'gamed': depth is not in the score by the user's ruling; this check reports what the score cannot see."""
+    rid = row["id"]; ref = ref or DEPTH_REF
+    try:
+        mine = _claim_depths(rid, row)
+    except Exception as e:
+        return _chk("contact_depth", "ok", f"contact depths not readable ({e}); not measured")
+    have = {k: v for k, v in mine.items() if v}
+    if not have:
+        return _chk("contact_depth", "ok", "no per-pose contact depths on file that reproduce the claim (tools/alignment_paired.py dump "
+                    f"{rid} bench|held, or tools/alignment_wear_probe*.py); not measured", depths=mine)
+    if ref == rid:
+        txt = "; ".join(f"{lab}: " + ", ".join(f"{w} {v['n']} contact poses, sum {v['sum_mm']} mm, deepest {v['max_mm']} mm" for w, v in res.items())
+                        for lab, res in have.items())
+        return _chk("contact_depth", "ok", f"{txt} (this is the reference)", depths=mine, ref=ref)
+    try:
+        R = _claim_depths(ref)
+    except Exception:
+        R = {}
+    Rr = next((v for v in R.values() if v), {})
+    lvl, parts, cmp_ = "ok", [], []
+    for lab, res in have.items():
+        seg = []
+        for w, v in res.items():
+            s = f"{w} {v['n']} contact poses, sum {v['sum_mm']} mm, deepest {v['max_mm']} mm at {v['deepest']}, {v['n_deeper3']} deeper than 3 mm"
+            if not v["cross_check"]["agree"]: s += f" (files disagree: sums {v['cross_check']['sums']})"
+            r = Rr.get(w)
+            if r:
+                ex = round(v["sum_mm"] - r["sum_mm"], 2); ratio = round(v["sum_mm"] / r["sum_mm"], 2) if r["sum_mm"] > 0 else None
+                hit = ex >= TH["depth_floor_mm"] and (ratio is None or ratio >= TH["depth_ratio"])
+                s += f" vs {ref} {r['sum_mm']} mm over {r['n']} ({ex:+.2f} mm, x{ratio})" + (" - CLEARLY DEEPER" if hit else "")
+                cmp_.append(dict(claim=lab, wear=w, sum=v["sum_mm"], ref_sum=r["sum_mm"], excess=ex, ratio=ratio, watch=hit))
+                if hit: lvl = "watch"
+            else: s += f" (no {w} depth of {ref} on file)"
+            seg.append(s)
+        miss = [w for w in ("bench", "held") if w not in res]
+        if miss: seg.append(" and ".join(miss) + " depths not on file")
+        parts.append(f"{lab}: " + "; ".join(seg))
+    head = "the score counts contact poses, not depth (report only, score unchanged): "
+    return _chk("contact_depth", lvl, head + " | ".join(parts), depths=mine, ref=ref, compare=cmp_)
+
+
 def _needs_flood(row):
     m = row.get("mechanism") or {}
     return any((_num(m.get(k)) or 0) > 0 for k in ("passive_rot", "passive_trans", "springs_or_flexures", "sensed_passive")) or (_num(row.get("passive_dof")) or 0) > 0
