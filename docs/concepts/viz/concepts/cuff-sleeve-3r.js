@@ -11,8 +11,11 @@
  * Closed form (KIN.sph3r) + the determined float: 3 active, 1 passive. */
 (function () {
   const K = (typeof window !== 'undefined' ? window : globalThis).KIN, V = K.V, M = K.M, D2R = K.D2R;
-  const P = { p1: [0.46, 0.84, 0.30], a12: 64, a23: 90, gamma: 13.6, psi3: 0, sb: -1, s3: 230, rod: [200, 260], sleeve: [5.5, 30],
-              float: 5, rho1: 58, rho2: 62, cap_beta: 42, hub_r: 10, stack: 12.25, margin: 10, j3_cap: 100, cuff_at: 165 };
+  // screened best (k2, docs/concepts/cuff-sleeve-3r.md): J1 at the back of the shoulder bvec(-20, 0), a1 = a2 = 90,
+  // e3 tilted 15.1 deg lateral (set by the sleeve's saddle), spar at psi_b -41 deg about e3 from J2's side, crank at s 211
+  const P = { p1: [-0.9397, 0.0, -0.3420], a12: 90, a23: 90, gamma: 15.1, psi3: 0, sb: 1, s3: 230, rod: [211, 250], sleeve: [5.5, 30],
+              float: 5, rho1: 58, rho2: 60, psi_b: -41, s_a: 45, spar_off: 52, crank_off: 40, hub_r: 10, stack: 12.25, margin: 5,
+              j3_cap: 180, cuff_at: 165 };
   const p1 = V.unit(P.p1), e3 = K.wdir(P.gamma, P.psi3);
   const C = K.sph3r(p1, e3, P.a12, P.a23, P.sb);
   const j3med = (() => { const a = K.motion(240).map(f => C.solve(K.makeCtx(f.pose, f.t))[2]).sort((x, y) => x - y); return a[a.length >> 1]; })();
@@ -37,8 +40,12 @@
     },
     parts: (q, ctx) => {
       const f = C.fk(q, ctx), E3 = f.p3, harm = ctx.armAxis, s1 = ctx.attach.scapDir([1, 0, 0]);
-      // link 2: over the cap from J2 toward e3 (great circle at the cap radius), then straight down to the rod top
-      const capDir = K.onCone(E3, f.p2, P.cap_beta, 0), capPt = V.scale(capDir, P.rho2 + 4);
+      // link 2: over the deltoid cap from J2 toward e3, then a spar FIXED IN THE POINTING FRAME (azimuth psi_b about e3
+      // from J2's side) down the arm, then a crank in to the rod's proximal end (the arm turns +-90 deg under the spar)
+      const r0 = V.unit(V.reject(f.p2, E3)), t0 = V.cross(E3, r0), cb = Math.cos(P.psi_b * D2R), sb = Math.sin(P.psi_b * D2R);
+      const nb = V.unit(V.add(V.scale(r0, cb), V.scale(t0, sb)));
+      const sparTop = V.madd(V.scale(E3, P.s_a), nb, P.spar_off), capDir = V.unit(sparTop), capPt = sparTop;
+      const sparEnd = V.madd(V.scale(E3, P.rod[0]), nb, P.crank_off);
       const rodTop = V.scale(E3, P.rod[0] + q[3]), rodEnd = V.scale(E3, P.rod[1] + q[3]);
       const sl0 = V.scale(E3, P.s3 - P.sleeve[1] / 2);
       // bracket side: toward the arm axis from the sleeve
@@ -46,12 +53,13 @@
       const fl = s => V.madd(V.scale(E3, P.s3 + s), inw, 9);
       const cuffC = V.scale(harm, P.cuff_at + 40), cuffTop = V.madd(cuffC, V.unit(V.reject(fl(0), harm)), 47);
       return [
-        { kind: 'plate', role: 'fixed-scapula', name: 'base (anterior acromion)', c: V.scale(f.p1, P.rho1 - 3), z: f.p1, x: s1, size: [40, 28], t: 3 },
+        { kind: 'plate', role: 'fixed-scapula', name: 'base (back of the shoulder)', c: V.scale(f.p1, P.rho1 - 3), z: f.p1, x: s1, size: [40, 28], t: 3 },
         { kind: 'hub', role: 'active', name: 'J1', c: V.scale(f.p1, P.rho1), axis: f.p1, r: P.hub_r, h: P.stack },
-        { kind: 'arc', role: 'link', name: 'link 1 (64 deg)', u: f.p1, v: f.p2, r0: P.rho1 + 7, r1: P.rho2 + 2, r: 2.5 },
+        { kind: 'arc', role: 'link', name: 'link 1 (90 deg)', u: f.p1, v: f.p2, r0: P.rho1 + 7, r1: P.rho2 + 2, r: 2.5 },
         { kind: 'hub', role: 'active', name: 'J2', c: V.scale(f.p2, P.rho2), axis: f.p2, r: P.hub_r, h: P.stack },
-        { kind: 'arc', role: 'link', name: 'link 2 over the deltoid cap', u: f.p2, v: capDir, r0: P.rho2 + 9, r1: P.rho2 + 4, r: 2.5 },
-        { kind: 'link', role: 'link', name: 'link 2 down the lateral arm', a: capPt, b: rodTop, r: 2.5 },
+        { kind: 'arc', role: 'link', name: 'link 2 over the deltoid cap', u: f.p2, v: capDir, r0: P.rho2 + 9, r1: V.norm(capPt), r: 2.5 },
+        { kind: 'link', role: 'link', name: 'link 2 spar (pointing frame)', a: capPt, b: sparEnd, r: 2.5 },
+        { kind: 'link', role: 'link', name: 'crank to the rod', a: sparEnd, b: rodTop, r: 2.5 },
         { kind: 'link', role: 'link', name: 'O5 rod on e3 (aimed at GH)', a: rodTop, b: rodEnd, r: 2.5 },
         { kind: 'hub', role: 'active', name: 'J3: sleeve bearing about e3', c: sl0, axis: E3, r: P.sleeve[0], h: P.sleeve[1] },
         { kind: 'slider', role: 'passive', name: 'sleeve axial float (set by closure)', a: fl(-P.float - 6), b: fl(P.float + 6), at: fl(q[3]), z: inw, size: [12, 8, 4] },
