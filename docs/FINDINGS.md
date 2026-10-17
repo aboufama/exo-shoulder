@@ -2403,3 +2403,17 @@ constraint is not a reach constraint: gate on the K the taken poses USE.
   selection problem (which leak-free bench sees the stretched poses). The instrument that can decide it is the jittered
   workspace-envelope search bench CLAUDE.md asks for; this row's in-band drive is ready to be searched on it.
 - Spring vs R17: kK 1.79 -> 0.165 N.m at J2, 1.1-1.4 N at the cuff (static; 17 % / 22-28 % of R17). Audit WATCH, 0 gamed.
+
+## Lead note, 2026-10-17 11:45 UTC: audit of inband-rssr-knuckle-3r (final WATCH, 0 gamed; docs/alignment/inband-rssr-knuckle-3r.md)
+
+- The buildable number is the robust build **18.83 / 23.17** (r_h 15.9 with the catalogue igus KBRM-02 O9 x 4 head). The
+  row's best_params score 275 with the catalogue head (ROD-hubK 1 mm pair on every pose); the modelled O7 head is not a
+  catalogue part. Even at r_h 15.9 the O9 head rim dips 0.10-0.38 mm under the horn lug top (needs a spacer).
+- **Sampling artefact, do not exploit:** the crank ear is sampled twice (pivot disc + strip over the same area, 0.50
+  samples/mm2 vs 0.29-0.42 on every other plate) - worth ~0.16 points, i.e. the row's whole in-band edge over the leader.
+  Any search on this model (the envelope polish wf_d261725f-27c included) that grows the ear or moves zc/clay to win
+  in-band is reading the artefact; its claim must be re-scored with the ear de-duplicated
+  (tools/alignment_part_density.py measures it). Proposal on file: sample every plate on one de-duplicated grid.
+- Transmission with the catalogue head is 49.8 deg against the 48 deg gate - must not be walked.
+- Dashboard fix (tools/dash_build.py): rows that store the frozen exact claim under `frozen` / `claim` now show it as
+  self-measured instead of the in-sample fit gap (inband-rssr was listed at 12.79).

@@ -1,0 +1,982 @@
+[
+ {
+  "ok": false,
+  "n_fail": 2,
+  "min_dK_lim": 11.2,
+  "dK_need": 49.44,
+  "near1_nominal": 13.77,
+  "rows": [
+   {
+    "k": "beta",
+    "d": -1.0,
+    "dK_lim": 63.8,
+    "why": "law",
+    "near1": 13.8,
+    "tilt": [
+     19.5,
+     18.6
+    ],
+    "honest": true,
+    "ok": true
+   },
+   {
+    "k": "beta",
+    "d": 1.0,
+    "dK_lim": 61.8,
+    "why": "cone",
+    "near1": 13.73,
+    "tilt": [
+     21.4,
+     19.1
+    ],
+    "honest": true,
+    "ok": true
+   },
+   {
+    "k": "gam",
+    "d": -1.0,
+    "dK_lim": 63.8,
+    "why": "law",
+    "near1": 13.8,
+    "tilt": [
+     19.6,
+     18.8
+    ],
+    "honest": true,
+    "ok": true
+   },
+   {
+    "k": "gam",
+    "d": 1.0,
+    "dK_lim": 62.0,
+    "why": "cone",
+    "near1": 13.74,
+    "tilt": [
+     21.2,
+     18.9
+    ],
+    "honest": true,
+    "ok": true
+   },
+   {
+    "k": "eta",
+    "d": -1.0,
+    "dK_lim": 63.0,
+    "why": "cone",
+    "near1": 13.8,
+    "tilt": [
+     20.4,
+     18.9
+    ],
+    "honest": true,
+    "ok": true
+   },
+   {
+    "k": "eta",
+    "d": 1.0,
+    "dK_lim": 63.0,
+    "why": "cone",
+    "near1": 13.75,
+    "tilt": [
+     20.4,
+     18.8
+    ],
+    "honest": true,
+    "ok": true
+   },
+   {
+    "k": "La",
+    "d": -0.25,
+    "dK_lim": 63.0,
+    "why": "cone",
+    "near1": 13.76,
+    "tilt": [
+     20.3,
+     18.9
+    ],
+    "honest": true,
+    "ok": true
+   },
+   {
+    "k": "La",
+    "d": 0.25,
+    "dK_lim": 63.0,
+    "why": "cone",
+    "near1": 13.73,
+    "tilt": [
+     20.6,
+     18.8
+    ],
+    "honest": true,
+    "ok": true
+   },
+   {
+    "k": "r_h",
+    "d": -0.25,
+    "dK_lim": 63.0,
+    "why": "cone",
+    "near1": 44.27,
+    "tilt": [
+     20.5,
+     18.8
+    ],
+    "honest": true,
+    "ok": false
+   },
+   {
+    "k": "r_h",
+    "d": 0.25,
+    "dK_lim": 62.8,
+    "why": "cone",
+    "near1": 13.77,
+    "tilt": [
+     20.4,
+     18.9
+    ],
+    "honest": true,
+    "ok": true
+   },
+   {
+    "k": "s_arm",
+    "d": -0.25,
+    "dK_lim": 63.0,
+    "why": "cone",
+    "near1": 13.77,
+    "tilt": [
+     20.4,
+     18.9
+    ],
+    "honest": true,
+    "ok": true
+   },
+   {
+    "k": "s_arm",
+    "d": 0.25,
+    "dK_lim": 11.2,
+    "why": "law",
+    "near1": 98.55,
+    "tilt": [
+     9.8,
+     9.5
+    ],
+    "honest": false,
+    "ok": false
+   },
+   {
+    "k": "hl",
+    "d": -0.25,
+    "dK_lim": 62.8,
+    "why": "cone",
+    "near1": 13.72,
+    "tilt": [
+     20.5,
+     18.4
+    ],
+    "honest": true,
+    "ok": true
+   },
+   {
+    "k": "hl",
+    "d": 0.25,
+    "dK_lim": 63.0,
+    "why": "cone",
+    "near1": 13.77,
+    "tilt": [
+     20.4,
+     18.9
+    ],
+    "honest": true,
+    "ok": true
+   },
+   {
+    "k": "zc",
+    "d": -0.25,
+    "dK_lim": 63.2,
+    "why": "cone",
+    "near1": 13.72,
+    "tilt": [
+     20.3,
+     19.4
+    ],
+    "honest": true,
+    "ok": true
+   },
+   {
+    "k": "zc",
+    "d": 0.25,
+    "dK_lim": 62.8,
+    "why": "cone",
+    "near1": 13.91,
+    "tilt": [
+     20.5,
+     18.4
+    ],
+    "honest": true,
+    "ok": true
+   },
+   {
+    "k": "r_lobe",
+    "d": -0.25,
+    "dK_lim": 63.0,
+    "why": "cone",
+    "near1": 13.77,
+    "tilt": [
+     20.4,
+     18.9
+    ],
+    "honest": true,
+    "ok": true
+   },
+   {
+    "k": "r_lobe",
+    "d": 0.25,
+    "dK_lim": 63.0,
+    "why": "cone",
+    "near1": 13.77,
+    "tilt": [
+     20.4,
+     18.9
+    ],
+    "honest": true,
+    "ok": true
+   }
+  ],
+  "which": "docs/research/inband_env_polish/picks/pick1.json",
+  "secs": 51.3
+ },
+ {
+  "ok": false,
+  "n_fail": 1,
+  "min_dK_lim": 58.5,
+  "dK_need": 45.4,
+  "near1_nominal": 14.17,
+  "rows": [
+   {
+    "k": "beta",
+    "d": -1.0,
+    "dK_lim": 58.5,
+    "why": "law",
+    "near1": 13.03,
+    "tilt": [
+     18.8,
+     18.3
+    ],
+    "honest": true,
+    "ok": true
+   },
+   {
+    "k": "beta",
+    "d": 1.0,
+    "dK_lim": 58.5,
+    "why": "law",
+    "near1": 14.16,
+    "tilt": [
+     17.0,
+     18.8
+    ],
+    "honest": true,
+    "ok": true
+   },
+   {
+    "k": "gam",
+    "d": -1.0,
+    "dK_lim": 58.5,
+    "why": "law",
+    "near1": 13.03,
+    "tilt": [
+     19.1,
+     18.5
+    ],
+    "honest": true,
+    "ok": true
+   },
+   {
+    "k": "gam",
+    "d": 1.0,
+    "dK_lim": 58.5,
+    "why": "law",
+    "near1": 14.16,
+    "tilt": [
+     16.7,
+     18.6
+    ],
+    "honest": true,
+    "ok": true
+   },
+   {
+    "k": "eta",
+    "d": -1.0,
+    "dK_lim": 58.5,
+    "why": "law",
+    "near1": 13.04,
+    "tilt": [
+     17.9,
+     18.6
+    ],
+    "honest": true,
+    "ok": true
+   },
+   {
+    "k": "eta",
+    "d": 1.0,
+    "dK_lim": 58.5,
+    "why": "law",
+    "near1": 14.16,
+    "tilt": [
+     17.9,
+     18.5
+    ],
+    "honest": true,
+    "ok": true
+   },
+   {
+    "k": "La",
+    "d": -0.25,
+    "dK_lim": 58.5,
+    "why": "law",
+    "near1": 14.17,
+    "tilt": [
+     18.5,
+     18.6
+    ],
+    "honest": true,
+    "ok": true
+   },
+   {
+    "k": "La",
+    "d": 0.25,
+    "dK_lim": 58.5,
+    "why": "law",
+    "near1": 14.18,
+    "tilt": [
+     17.4,
+     18.5
+    ],
+    "honest": true,
+    "ok": true
+   },
+   {
+    "k": "r_h",
+    "d": -0.25,
+    "dK_lim": 58.5,
+    "why": "law",
+    "near1": 275.0,
+    "tilt": [
+     17.5,
+     18.5
+    ],
+    "honest": true,
+    "ok": false
+   },
+   {
+    "k": "r_h",
+    "d": 0.25,
+    "dK_lim": 58.5,
+    "why": "law",
+    "near1": 14.18,
+    "tilt": [
+     18.4,
+     18.6
+    ],
+    "honest": true,
+    "ok": true
+   },
+   {
+    "k": "s_arm",
+    "d": -0.25,
+    "dK_lim": 58.5,
+    "why": "law",
+    "near1": 14.17,
+    "tilt": [
+     17.9,
+     18.6
+    ],
+    "honest": true,
+    "ok": true
+   },
+   {
+    "k": "s_arm",
+    "d": 0.25,
+    "dK_lim": 58.5,
+    "why": "law",
+    "near1": 14.17,
+    "tilt": [
+     17.9,
+     18.6
+    ],
+    "honest": true,
+    "ok": true
+   },
+   {
+    "k": "hl",
+    "d": -0.25,
+    "dK_lim": 58.5,
+    "why": "law",
+    "near1": 14.14,
+    "tilt": [
+     17.8,
+     18.0
+    ],
+    "honest": true,
+    "ok": true
+   },
+   {
+    "k": "hl",
+    "d": 0.25,
+    "dK_lim": 58.5,
+    "why": "law",
+    "near1": 14.17,
+    "tilt": [
+     17.9,
+     18.6
+    ],
+    "honest": true,
+    "ok": true
+   },
+   {
+    "k": "zc",
+    "d": -0.25,
+    "dK_lim": 58.5,
+    "why": "law",
+    "near1": 14.14,
+    "tilt": [
+     18.0,
+     19.1
+    ],
+    "honest": true,
+    "ok": true
+   },
+   {
+    "k": "zc",
+    "d": 0.25,
+    "dK_lim": 58.5,
+    "why": "law",
+    "near1": 13.05,
+    "tilt": [
+     17.9,
+     18.0
+    ],
+    "honest": true,
+    "ok": true
+   },
+   {
+    "k": "r_lobe",
+    "d": -0.25,
+    "dK_lim": 58.5,
+    "why": "law",
+    "near1": 14.17,
+    "tilt": [
+     17.9,
+     18.6
+    ],
+    "honest": true,
+    "ok": true
+   },
+   {
+    "k": "r_lobe",
+    "d": 0.25,
+    "dK_lim": 58.5,
+    "why": "law",
+    "near1": 14.17,
+    "tilt": [
+     17.9,
+     18.6
+    ],
+    "honest": true,
+    "ok": true
+   }
+  ],
+  "which": "docs/research/inband_env_polish/picks/pick2.json",
+  "secs": 57.5
+ },
+ {
+  "ok": false,
+  "n_fail": 1,
+  "min_dK_lim": 65.5,
+  "dK_need": 47.46,
+  "near1_nominal": 14.3,
+  "rows": [
+   {
+    "k": "beta",
+    "d": -1.0,
+    "dK_lim": 65.5,
+    "why": "law",
+    "near1": 14.3,
+    "tilt": [
+     20.5,
+     16.3
+    ],
+    "honest": true,
+    "ok": true
+   },
+   {
+    "k": "beta",
+    "d": 1.0,
+    "dK_lim": 65.5,
+    "why": "law",
+    "near1": 14.3,
+    "tilt": [
+     18.7,
+     16.8
+    ],
+    "honest": true,
+    "ok": true
+   },
+   {
+    "k": "gam",
+    "d": -1.0,
+    "dK_lim": 65.5,
+    "why": "law",
+    "near1": 14.3,
+    "tilt": [
+     20.8,
+     16.5
+    ],
+    "honest": true,
+    "ok": true
+   },
+   {
+    "k": "gam",
+    "d": 1.0,
+    "dK_lim": 65.5,
+    "why": "law",
+    "near1": 14.3,
+    "tilt": [
+     18.4,
+     16.7
+    ],
+    "honest": true,
+    "ok": true
+   },
+   {
+    "k": "eta",
+    "d": -1.0,
+    "dK_lim": 65.5,
+    "why": "law",
+    "near1": 14.3,
+    "tilt": [
+     19.6,
+     16.6
+    ],
+    "honest": true,
+    "ok": true
+   },
+   {
+    "k": "eta",
+    "d": 1.0,
+    "dK_lim": 65.5,
+    "why": "law",
+    "near1": 14.3,
+    "tilt": [
+     19.6,
+     16.5
+    ],
+    "honest": true,
+    "ok": true
+   },
+   {
+    "k": "La",
+    "d": -0.25,
+    "dK_lim": 65.5,
+    "why": "law",
+    "near1": 14.3,
+    "tilt": [
+     20.1,
+     16.6
+    ],
+    "honest": true,
+    "ok": true
+   },
+   {
+    "k": "La",
+    "d": 0.25,
+    "dK_lim": 65.5,
+    "why": "law",
+    "near1": 14.3,
+    "tilt": [
+     19.1,
+     16.5
+    ],
+    "honest": true,
+    "ok": true
+   },
+   {
+    "k": "r_h",
+    "d": -0.25,
+    "dK_lim": 65.5,
+    "why": "law",
+    "near1": 39.8,
+    "tilt": [
+     19.2,
+     16.5
+    ],
+    "honest": true,
+    "ok": false
+   },
+   {
+    "k": "r_h",
+    "d": 0.25,
+    "dK_lim": 65.5,
+    "why": "law",
+    "near1": 14.3,
+    "tilt": [
+     20.0,
+     16.6
+    ],
+    "honest": true,
+    "ok": true
+   },
+   {
+    "k": "s_arm",
+    "d": -0.25,
+    "dK_lim": 65.5,
+    "why": "law",
+    "near1": 14.3,
+    "tilt": [
+     19.6,
+     16.6
+    ],
+    "honest": true,
+    "ok": true
+   },
+   {
+    "k": "s_arm",
+    "d": 0.25,
+    "dK_lim": 65.5,
+    "why": "law",
+    "near1": 14.3,
+    "tilt": [
+     19.6,
+     16.6
+    ],
+    "honest": true,
+    "ok": true
+   },
+   {
+    "k": "hl",
+    "d": -0.25,
+    "dK_lim": 65.5,
+    "why": "law",
+    "near1": 14.3,
+    "tilt": [
+     19.5,
+     16.1
+    ],
+    "honest": true,
+    "ok": true
+   },
+   {
+    "k": "hl",
+    "d": 0.25,
+    "dK_lim": 65.5,
+    "why": "law",
+    "near1": 14.3,
+    "tilt": [
+     19.6,
+     16.6
+    ],
+    "honest": true,
+    "ok": true
+   },
+   {
+    "k": "zc",
+    "d": -0.25,
+    "dK_lim": 65.5,
+    "why": "law",
+    "near1": 14.3,
+    "tilt": [
+     19.7,
+     17.1
+    ],
+    "honest": true,
+    "ok": true
+   },
+   {
+    "k": "zc",
+    "d": 0.25,
+    "dK_lim": 65.5,
+    "why": "law",
+    "near1": 14.3,
+    "tilt": [
+     19.6,
+     16.0
+    ],
+    "honest": true,
+    "ok": true
+   },
+   {
+    "k": "r_lobe",
+    "d": -0.25,
+    "dK_lim": 65.5,
+    "why": "law",
+    "near1": 14.3,
+    "tilt": [
+     19.6,
+     16.6
+    ],
+    "honest": true,
+    "ok": true
+   },
+   {
+    "k": "r_lobe",
+    "d": 0.25,
+    "dK_lim": 65.5,
+    "why": "law",
+    "near1": 14.3,
+    "tilt": [
+     19.6,
+     16.6
+    ],
+    "honest": true,
+    "ok": true
+   }
+  ],
+  "which": "docs/research/inband_env_polish/picks/pick3.json",
+  "secs": 60.6
+ },
+ {
+  "ok": false,
+  "n_fail": 1,
+  "min_dK_lim": 65.2,
+  "dK_need": 36.39,
+  "near1_nominal": 14.78,
+  "rows": [
+   {
+    "k": "beta",
+    "d": -1.0,
+    "dK_lim": 67.0,
+    "why": "transmission",
+    "near1": 14.82,
+    "tilt": [
+     13.7,
+     13.2
+    ],
+    "honest": true,
+    "ok": true
+   },
+   {
+    "k": "beta",
+    "d": 1.0,
+    "dK_lim": 65.2,
+    "why": "transmission",
+    "near1": 14.75,
+    "tilt": [
+     11.9,
+     13.9
+    ],
+    "honest": true,
+    "ok": true
+   },
+   {
+    "k": "gam",
+    "d": -1.0,
+    "dK_lim": 66.0,
+    "why": "transmission",
+    "near1": 14.82,
+    "tilt": [
+     13.9,
+     13.4
+    ],
+    "honest": true,
+    "ok": true
+   },
+   {
+    "k": "gam",
+    "d": 1.0,
+    "dK_lim": 66.2,
+    "why": "transmission",
+    "near1": 14.75,
+    "tilt": [
+     11.7,
+     13.7
+    ],
+    "honest": true,
+    "ok": true
+   },
+   {
+    "k": "eta",
+    "d": -1.0,
+    "dK_lim": 66.0,
+    "why": "transmission",
+    "near1": 14.81,
+    "tilt": [
+     12.8,
+     13.6
+    ],
+    "honest": true,
+    "ok": true
+   },
+   {
+    "k": "eta",
+    "d": 1.0,
+    "dK_lim": 66.0,
+    "why": "transmission",
+    "near1": 14.72,
+    "tilt": [
+     12.8,
+     13.5
+    ],
+    "honest": true,
+    "ok": true
+   },
+   {
+    "k": "La",
+    "d": -0.25,
+    "dK_lim": 66.5,
+    "why": "transmission",
+    "near1": 14.76,
+    "tilt": [
+     13.2,
+     13.7
+    ],
+    "honest": true,
+    "ok": true
+   },
+   {
+    "k": "La",
+    "d": 0.25,
+    "dK_lim": 65.8,
+    "why": "transmission",
+    "near1": 14.81,
+    "tilt": [
+     12.3,
+     13.4
+    ],
+    "honest": true,
+    "ok": true
+   },
+   {
+    "k": "r_h",
+    "d": -0.25,
+    "dK_lim": 65.8,
+    "why": "transmission",
+    "near1": 275.0,
+    "tilt": [
+     12.4,
+     13.5
+    ],
+    "honest": true,
+    "ok": false
+   },
+   {
+    "k": "r_h",
+    "d": 0.25,
+    "dK_lim": 66.5,
+    "why": "transmission",
+    "near1": 14.78,
+    "tilt": [
+     13.2,
+     13.6
+    ],
+    "honest": true,
+    "ok": true
+   },
+   {
+    "k": "s_arm",
+    "d": -0.25,
+    "dK_lim": 66.0,
+    "why": "transmission",
+    "near1": 14.78,
+    "tilt": [
+     12.8,
+     13.5
+    ],
+    "honest": true,
+    "ok": true
+   },
+   {
+    "k": "s_arm",
+    "d": 0.25,
+    "dK_lim": 66.0,
+    "why": "transmission",
+    "near1": 14.78,
+    "tilt": [
+     12.8,
+     13.5
+    ],
+    "honest": true,
+    "ok": true
+   },
+   {
+    "k": "hl",
+    "d": -0.25,
+    "dK_lim": 66.2,
+    "why": "transmission",
+    "near1": 14.76,
+    "tilt": [
+     12.7,
+     13.1
+    ],
+    "honest": true,
+    "ok": true
+   },
+   {
+    "k": "hl",
+    "d": 0.25,
+    "dK_lim": 66.0,
+    "why": "transmission",
+    "near1": 14.78,
+    "tilt": [
+     12.8,
+     13.5
+    ],
+    "honest": true,
+    "ok": true
+   },
+   {
+    "k": "zc",
+    "d": -0.25,
+    "dK_lim": 65.8,
+    "why": "transmission",
+    "near1": 14.66,
+    "tilt": [
+     12.8,
+     14.0
+    ],
+    "honest": true,
+    "ok": true
+   },
+   {
+    "k": "zc",
+    "d": 0.25,
+    "dK_lim": 66.2,
+    "why": "transmission",
+    "near1": 14.95,
+    "tilt": [
+     12.7,
+     13.1
+    ],
+    "honest": true,
+    "ok": true
+   },
+   {
+    "k": "r_lobe",
+    "d": -0.25,
+    "dK_lim": 66.0,
+    "why": "transmission",
+    "near1": 14.78,
+    "tilt": [
+     12.8,
+     13.5
+    ],
+    "honest": true,
+    "ok": true
+   },
+   {
+    "k": "r_lobe",
+    "d": 0.25,
+    "dK_lim": 66.0,
+    "why": "transmission",
+    "near1": 14.78,
+    "tilt": [
+     12.8,
+     13.5
+    ],
+    "honest": true,
+    "ok": true
+   }
+  ],
+  "which": "docs/research/inband_env_polish/picks/longdyad_report.json",
+  "secs": 59.2
+ }
+]

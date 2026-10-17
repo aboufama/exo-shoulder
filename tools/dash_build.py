@@ -406,7 +406,12 @@ def morphs(S):
                 m["v_config"] = str(rw.get("polished_id") or "polished").split(" ")[0]
             # a self-measured FROZEN EXACT claim (not verified) - shown as such, never as a fast number
             fz = rw.get("frozen_exact")
-            m["frozen_gap"] = num(rw.get("frozen_exact_gap")) if num(rw.get("frozen_exact_gap")) is not None else (num(fz.get("gap")) if isinstance(fz, dict) else None)
+            # rows store the frozen exact claim under several keys (frozen_exact / frozen / claim.frozen); the first number
+            # found wins (alignment audit 2026-10-17, inband-rssr R4: reading frozen_exact only showed the in-sample fit gap)
+            cands = [rw.get("frozen_exact_gap"), fz.get("gap") if isinstance(fz, dict) else None,
+                     (rw.get("frozen") or {}).get("gap") if isinstance(rw.get("frozen"), dict) else None,
+                     (rw.get("claim") or {}).get("gap") if isinstance(rw.get("claim"), dict) else None]
+            m["frozen_gap"] = next((num(c) for c in cands if num(c) is not None), None)
             m["n_configs"] = len(sw) or to_int(m.get("n_configs"), 0) or 0
             scored = [s for s in sw if s["gap"] is not None and not s["passed_over"]]
             if scored:
