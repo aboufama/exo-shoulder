@@ -132,6 +132,30 @@ def ingest(path, phase):
     append_sweep(out); print(f"ingested {len(out)} rows from {path}")
 
 
+# the red-team pose list fixed before the search: the cap pole's binders and the crest binders the jump judge forwarded
+BINDERS = [(-75, 60, 60), (0, 150, 0), (30, 150, 0), (0, 105, 0), (30, 149, -59), (30, 124, -54), (30, 135, -45)]
+
+
+def binders(B, p):
+    """per red-team pose: the nearest workspace pose of B, taken or the first cause, J1-J3 angle vs the window, the J2 ray's
+    skin exit (K3 march along the J2 axis) against hub 2's frozen level, and the closest metal"""
+    L = B._kit_last; ch, take, ok, hit = L["chain"], L["take"], L["ok"], L["hit"]; F = B._kitF; okk = ZC.kin(F, p)
+    p1 = F.S(K.bvec(p["az"], p["el"])); p3 = F.HG(K.wdir(p["wd"], p["wa"]))
+    th = np.degrees(np.arccos(np.clip((K.unit(p1) * K.unit(p3)).sum(-1), -1, 1)))
+    ws = [i for i in range(len(B.idx)) if B.kind[i] == "ws"]; hub2F = float(L["prof"]["hub2"][0]); out = []
+    for pl, el, ax in BINDERS:
+        i = min(ws, key=lambda j: (B.poses[j]["plane"] - pl) ** 2 + (B.poses[j]["elev"] - el) ** 2 + ((B.poses[j]["axial"] - ax) / 2) ** 2)
+        tk = B.res[i] is not None and float(np.min(B.res[i])) >= 0
+        why = "taken" if tk else ("fold" if not okk[i] else ("K2" if not ok[i] else ("parts" if hit[i] else "contact")))
+        ex = None
+        if okk[i]:
+            J2 = ch.joints["J2"][i:i + 1]; ex = float(K.requirement(B, np.array([i]), K.unit(J2))[0])
+        out.append(dict(asked=[pl, el, ax], pose=[round(float(B.poses[i][k]), 1) for k in ("plane", "elev", "axial")], i=int(i),
+                        result=why, th=round(float(th[i]), 1), j2_exit_mm=None if ex is None or not np.isfinite(ex) else round(ex, 1),
+                        hub2_level=round(hub2F, 1), min_mm=round(float(np.min(B.res[i])), 2) if B.res[i] is not None else None))
+    return out
+
+
 def frozen(p0, out):
     """fit Bench(60,160) FAST, freeze every level, wear Bench(110,360) (CB_EXACT=1: exact) - zc_frontier's cmd_frozen
     fit60 protocol on this file's snap; + the loss attribution"""
@@ -149,6 +173,7 @@ def frozen(p0, out):
     pb, rb = evaluate(Bb, dict(p0), fixed_prof=prof)
     res["wear_mode"] = Bb.mode; res["wear"] = {k: v for k, v in rb.items() if ZC.SPM._jsonable(v) and k != "checks"}
     res["wear_attribution"] = ZC.attribute(Bb, pb, rb); res["secs"] = round(time.time() - t, 1)
+    res["binders"] = binders(Bb, pb)
     res["score"] = round(100 * (1 - float(rb["gap"]) / 275), 2)
     json.dump(res, open(out, "w"), indent=1, default=float)
     print("wear", Bb.mode, json.dumps({k: rb.get(k) for k in ("gap", "near", "reach", "follow", "inband14", "inband10", "contact", "honest",
