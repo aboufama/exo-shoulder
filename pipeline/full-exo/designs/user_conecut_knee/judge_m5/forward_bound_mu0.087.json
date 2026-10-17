@@ -1,0 +1,4228 @@
+{
+ "version": "dynamics-2026-10-16 (MVP1: unpowered; rolling bearings main, plain bearings comparison; general N-member chain for offset / split / knee designs; slaved coordinates from build.json)",
+ "design": "m5copy_user_conecut_knee_0.087",
+ "n_joints": 6,
+ "seconds": 86,
+ "jobs": 1,
+ "model": {
+  "frame": "thorax rig frame (x anterior, y up, z right, origin GH); gravity -y",
+  "timestep_s": 0.0002,
+  "integrator": "implicitfast, Newton, noslip 20 (exact Coulomb joint friction)",
+  "scapula": "ball joint at GH, prescribed: body_pose.scap law with the 20 deg kink rounded over 1.5 deg (softplus)",
+  "arm": "humerus follows the clip's followed pose p (PCHIP through the clip's knots), cuff on its axis",
+  "cuff_mm": 200.0,
+  "tissue": {
+   "k_perp": 3500.0,
+   "k_ax": 2100.0,
+   "kr_perp": 11.459155902616464,
+   "kr_ax": 1.7188733853924696,
+   "c_t": 20.0,
+   "cr_perp": 0.1,
+   "cr_ax": 0.02,
+   "source": "Schiebl et al. 2025, Sensors 25(15):4605 (upper-arm interface, median stiffness); damping assumed"
+  },
+  "link_mass_g": {
+   "l1a": 12.76981625974301,
+   "l1b": 32.590131386287155,
+   "l2": 28.1846871836057,
+   "l3": 16.24021388805934,
+   "l4": 5.919444884671761
+  },
+  "link_volume_cm3": {
+   "l1a": 2.883,
+   "l1b": 7.423,
+   "l2": 6.362,
+   "l3": 3.666,
+   "l4": 1.336
+  },
+  "link_com_mm": {
+   "l1a": [
+    -8.7,
+    53.1,
+    11.2
+   ],
+   "l1b": [
+    -25.0,
+    55.9,
+    16.2
+   ],
+   "l2": [
+    -23.5,
+    7.4,
+    61.9
+   ],
+   "l3": [
+    -10.8,
+    -68.9,
+    70.4
+   ],
+   "l4": [
+    -19.3,
+    -116.8,
+    66.0
+   ]
+  },
+  "link_inertia_about_gh_kgm2": {
+   "l1a": 4.15e-05,
+   "l1b": 0.0001425,
+   "l2": 0.0001678,
+   "l3": 0.0001805,
+   "l4": 0.0001096
+  },
+  "arm_parts_mass_g": 113.5,
+  "forearm_parts_mass_g": 362.3,
+  "densities_g_cm3": {
+   "ti": 4.43,
+   "iglidur": 1.46,
+   "magnet": 7.5,
+   "pcb": 1.85,
+   "ic": 2.0,
+   "steel": 7.9,
+   "alsi10mg": 2.67,
+   "7075": 2.81,
+   "user": 2.8
+  },
+  "cases_run": [
+   "passive"
+  ],
+  "mvp1": "unpowered (user, 2026-10-15): every joint passive, no motor / gear / cable; motor and servo cases exist only as --cases options",
+  "cuff_pressure": {
+   "area_cm2": 68.0,
+   "strap_preload_kPa": 6.5,
+   "sustained_budget_kPa": 14.0,
+   "rule": "mean pressure = cuff force / skin-side shell area; the budget left for the exo is COMFORT - STRAP (edge peaks ~2x the mean)",
+   "arm_parts_weight_N": 1.1130398286927985
+  },
+  "contact": {
+   "mu": 0.2,
+   "primitives": {
+    "base": 0,
+    "l1a": 0,
+    "l1b": 0,
+    "l2": 0,
+    "l3": 0,
+    "l4": 0,
+    "cuff": 0
+   },
+   "hub_r_mm": 10.0,
+   "margin_mm": 0.0,
+   "near_miss_band_mm": 2.0,
+   "rule": "every member pair incl. adjacent ones; at a shared joint the bearing (hub on hub, hub on the other member's hub-side ribbon root) is the hinge, not a contact"
+  }
+ },
+ "load_friction": {
+  "model": "tau_f,i = tau0 + mu_eff |M_perp,i| each step (red team G6, pipeline/redteam/rt_wedge.py); M_perp from cfrc_int one step behind",
+  "rolling": {
+   "mu_eff": [
+    0.005
+   ],
+   "tau0_Nm": 0.001,
+   "tilt_ref": "hub",
+   "speeds": [
+    1.0
+   ],
+   "basis": "pair of shielded deep-groove / needle bearings at the hub, bore d ~10 mm, spacing L ~5 mm: the tilt couple is a force couple M/L, SKF simplified friction M_f = 0.5 mu P d per bearing (mu 0.0015 deep groove, 0.0025 needle) -> mu_eff = mu d / L = 0.003-0.005; tau0 = grease drag of 2 shielded bearings"
+  },
+  "plain": {
+   "mu_eff": [],
+   "tau0_Nm": 0.05,
+   "tilt_refs": [
+    "hub",
+    "gh"
+   ],
+   "speed": 1.0
+  },
+  "cases": [
+   "passive"
+  ],
+  "tilt_ref_note": "hub: moment about the hub stack's mid-height on the axis (the pin carries the force); gh: about the GH centre, rt_wedge.py's model without R x F",
+  "bearing_r_mm": {
+   "1": 53.1,
+   "2": 66.6,
+   "3": 70.9,
+   "4": 83.2,
+   "5": 144.8,
+   "6": 139.3
+  }
+ },
+ "chain_vs_clip_G_max_deg": {
+  "l1a": 0.0001,
+  "l1b": 0.0001,
+  "l2": 0.0001,
+  "l3": 0.0001,
+  "l4": 0.0001,
+  "cuff": 0.0,
+  "l1a_mm": 0.0,
+  "l1b_mm": 0.0,
+  "l2_mm": 0.0,
+  "l3_mm": 0.0002,
+  "l4_mm": 0.0002,
+  "cuff_mm": 0.0002
+ },
+ "thresholds": {
+  "free_moment_gh_peak_Nm": 1.0,
+  "free_moment_gh_rms_Nm": 0.5,
+  "free_force_peak_N": 5.0,
+  "free_twist_peak_deg": 5.0,
+  "free_spare_drift_deg": 5.0,
+  "iso_ts_15066_upper_arm_N": 150.0,
+  "lock_moment_gh_Nm": 10.0
+ },
+ "nominal": "passive|mu0.005|t0.001|s1|hub",
+ "cases": {
+  "passive|mu0.005|t0.001|s1|hub": {
+   "clips": {
+    "Raise overhead": {
+     "duration_s": 6.0,
+     "held_share": 0.0,
+     "force_N": {
+      "peak": 0.6410817728823276,
+      "rms": 0.21382945679609028
+     },
+     "cuff_pressure_kPa": {
+      "peak": 0.094,
+      "rms": 0.031,
+      "axial_shear_peak": 0.078
+     },
+     "moment_cuff_Nm": {
+      "peak": 0.033,
+      "rms": 0.023,
+      "axial_peak": 0.033
+     },
+     "moment_gh_Nm": {
+      "peak": 0.142,
+      "rms": 0.047,
+      "perp_peak": 0.142,
+      "axial_peak": 0.033
+     },
+     "joint_speed_dps": [
+      70.6,
+      16.6,
+      72.9,
+      92.9,
+      34.3,
+      42.4
+     ],
+     "arm_speed_dps": 108.5,
+     "speed_ratio_max": 3.2466761077159054,
+     "joint_acc_dps2": [
+      2645,
+      2376,
+      4768,
+      3621,
+      1169,
+      685
+     ],
+     "tracking_deg": {
+      "peak": 1.1130502707118304,
+      "rms": 0.7422562177569387,
+      "twist_peak": 1.1130223150215264,
+      "swing_peak": 0.05404299998937774
+     },
+     "gate_raw": {
+      "twist_peak_deg": 1.1130223150215264,
+      "moment_gh_peak_Nm": 0.14224682564650457,
+      "moment_gh_rms_Nm": 0.04702605508810171,
+      "force_peak_N": 0.6410817728823276
+     },
+     "config_dev_deg": [
+      1.700824475970298,
+      0.22769875172253706,
+      1.7854580543469853,
+      0.6840126290469318,
+      0.3323442251155497,
+      0.35952642660344586
+     ],
+     "amp_qs": {
+      "p95": 3.9513013126712573,
+      "max": 4.279382635969099
+     },
+     "cond_U_max": 5.0,
+     "stalls": {
+      "events": 0,
+      "lags_over_10deg": 0,
+      "worst_ms": 0,
+      "worst_missed_deg": 0.0,
+      "list": []
+     },
+     "drive": {
+      "frames_over_felt": 0.0,
+      "frames_over_lock": 0.0,
+      "first_lock_frame": null,
+      "drives": true
+     },
+     "contact": {
+      "touch": false,
+      "peak_N": 0.0,
+      "time_s": 0.0,
+      "pairs": {},
+      "min_gap_mm": null,
+      "planned_overlap_mm": {},
+      "adjacent_pairs_checked": 0
+     },
+     "worst": [
+      {
+       "frame": 173,
+       "t_s": 5.755,
+       "pose": [
+        30.0,
+        4.0,
+        -30.2,
+        12.0
+       ],
+       "moment_gh_Nm": 0.142,
+       "moment_gh_axial_Nm": 0.011,
+       "force_N": 0.6410817728823276,
+       "amp_qs": 3.9642736925040203,
+       "friction_qs_Nm": 0.004,
+       "cond_U": 5.0,
+       "joint_speed_dps": [
+        -25.6,
+        7.2,
+        -1.2,
+        -17.1,
+        5.2,
+        3.7
+       ],
+       "arm_speed_dps": 13.3,
+       "twist_deg": 0.17291382515638287
+      },
+      {
+       "frame": 0,
+       "t_s": 0.0,
+       "pose": [
+        30.0,
+        3.0,
+        -30.0,
+        12.0
+       ],
+       "moment_gh_Nm": 0.109,
+       "moment_gh_axial_Nm": 0.02,
+       "force_N": 0.4968284774375151,
+       "amp_qs": 0.0,
+       "friction_qs_Nm": 0.0,
+       "cond_U": 4.9,
+       "joint_speed_dps": [
+        0.0,
+        0.0,
+        -0.0,
+        0.0,
+        0.0,
+        0.0
+       ],
+       "arm_speed_dps": 0.0,
+       "twist_deg": 0.6809025611415069
+      },
+      {
+       "frame": 9,
+       "t_s": 0.305,
+       "pose": [
+        30.0,
+        4.9,
+        -30.4,
+        12.0
+       ],
+       "moment_gh_Nm": 0.045,
+       "moment_gh_axial_Nm": 0.004,
+       "force_N": 0.2192245698077272,
+       "amp_qs": 3.71552397735756,
+       "friction_qs_Nm": 0.004,
+       "cond_U": 4.9,
+       "joint_speed_dps": [
+        21.8,
+        0.0,
+        28.8,
+        -2.0,
+        -0.0,
+        -0.0
+       ],
+       "arm_speed_dps": 17.8,
+       "twist_deg": 0.09364874266151599
+      }
+     ],
+     "slaved": {
+      "K": {
+       "law_err_deg": 0.072,
+       "law_err_driven_deg": 0.072,
+       "plan_err_deg": 0.228,
+       "driven_share": 0.082,
+       "liftoff_share_of_driven": 0.0,
+       "lift_max_deg": 0.0,
+       "drive_torque_peak_Nm": 0.0344,
+       "driver_reaction_peak_Nm": 0.0741,
+       "closure": "force"
+      }
+     },
+     "on_limit_share": {
+      "K": 0.921,
+      "J2": 0.0
+     },
+     "joints": [
+      "J1",
+      "K",
+      "J2",
+      "J3",
+      "pin a",
+      "pin b"
+     ],
+     "load_friction": {
+      "mu_eff": 0.005,
+      "tau0_Nm": 0.001,
+      "tilt_ref": "hub",
+      "tilt_peak_Nm": [
+       0.175,
+       0.187,
+       0.139,
+       0.099,
+       0.046,
+       0.052
+      ],
+      "friction_peak_Nm": [
+       0.002,
+       0.002,
+       0.002,
+       0.001,
+       0.001,
+       0.001
+      ]
+     }
+    },
+    "Drink from a cup": {
+     "duration_s": 5.9,
+     "held_share": 0.0,
+     "force_N": {
+      "peak": 0.600435270249531,
+      "rms": 0.2226135233907623
+     },
+     "cuff_pressure_kPa": {
+      "peak": 0.088,
+      "rms": 0.033,
+      "axial_shear_peak": 0.059
+     },
+     "moment_cuff_Nm": {
+      "peak": 0.027,
+      "rms": 0.018,
+      "axial_peak": 0.025
+     },
+     "moment_gh_Nm": {
+      "peak": 0.132,
+      "rms": 0.044,
+      "perp_peak": 0.132,
+      "axial_peak": 0.025
+     },
+     "joint_speed_dps": [
+      54.7,
+      9.7,
+      46.8,
+      41.3,
+      4.2,
+      7.7
+     ],
+     "arm_speed_dps": 70.6,
+     "speed_ratio_max": 2.0150803972885383,
+     "joint_acc_dps2": [
+      1949,
+      1321,
+      3506,
+      2330,
+      685,
+      583
+     ],
+     "tracking_deg": {
+      "peak": 0.7677771828897627,
+      "rms": 0.5643350711966485,
+      "twist_peak": 0.766382732769975,
+      "swing_peak": 0.05102618852225115
+     },
+     "gate_raw": {
+      "twist_peak_deg": 0.766382732769975,
+      "moment_gh_peak_Nm": 0.1323809429773554,
+      "moment_gh_rms_Nm": 0.04438816021208574,
+      "force_peak_N": 0.600435270249531
+     },
+     "config_dev_deg": [
+      0.5254370542166991,
+      0.24228406932220947,
+      0.8799906186913321,
+      0.8095008458881815,
+      0.26645255284900793,
+      0.33299313938886527
+     ],
+     "amp_qs": {
+      "p95": 3.956988973111943,
+      "max": 4.456305530899169
+     },
+     "cond_U_max": 5.0,
+     "stalls": {
+      "events": 0,
+      "lags_over_10deg": 0,
+      "worst_ms": 0,
+      "worst_missed_deg": 0.0,
+      "list": []
+     },
+     "drive": {
+      "frames_over_felt": 0.0,
+      "frames_over_lock": 0.0,
+      "first_lock_frame": null,
+      "drives": true
+     },
+     "contact": {
+      "touch": false,
+      "peak_N": 0.0,
+      "time_s": 0.0,
+      "pairs": {},
+      "min_gap_mm": null,
+      "planned_overlap_mm": {},
+      "adjacent_pairs_checked": 0
+     },
+     "worst": [
+      {
+       "frame": 172,
+       "t_s": 5.727,
+       "pose": [
+        40.8,
+        4.7,
+        -40.3,
+        16.8
+       ],
+       "moment_gh_Nm": 0.132,
+       "moment_gh_axial_Nm": 0.015,
+       "force_N": 0.600435270249531,
+       "amp_qs": 3.964123295138244,
+       "friction_qs_Nm": 0.004,
+       "cond_U": 5.0,
+       "joint_speed_dps": [
+        -17.5,
+        2.8,
+        -1.5,
+        -13.7,
+        4.2,
+        4.5
+       ],
+       "arm_speed_dps": 13.0,
+       "twist_deg": 0.23102602878687328
+      },
+      {
+       "frame": 0,
+       "t_s": 0.0,
+       "pose": [
+        40.0,
+        4.0,
+        -40.0,
+        15.0
+       ],
+       "moment_gh_Nm": 0.11,
+       "moment_gh_axial_Nm": 0.022,
+       "force_N": 0.4999334295688814,
+       "amp_qs": 0.0,
+       "friction_qs_Nm": 0.0,
+       "cond_U": 4.9,
+       "joint_speed_dps": [
+        0.0,
+        0.0,
+        -0.0,
+        0.0,
+        0.0,
+        -0.0
+       ],
+       "arm_speed_dps": 0.0,
+       "twist_deg": 0.7402399551621471
+      },
+      {
+       "frame": 9,
+       "t_s": 0.305,
+       "pose": [
+        42.4,
+        6.0,
+        -41.0,
+        20.2
+       ],
+       "moment_gh_Nm": 0.044,
+       "moment_gh_axial_Nm": 0.002,
+       "force_N": 0.20636300389551282,
+       "amp_qs": 3.5512052928976887,
+       "friction_qs_Nm": 0.004,
+       "cond_U": 4.9,
+       "joint_speed_dps": [
+        4.1,
+        0.0,
+        24.4,
+        -3.3,
+        -0.0,
+        -0.6
+       ],
+       "arm_speed_dps": 21.7,
+       "twist_deg": 0.06669478350303332
+      }
+     ],
+     "slaved": {
+      "K": {
+       "law_err_deg": 0.058,
+       "law_err_driven_deg": 0.058,
+       "plan_err_deg": 0.242,
+       "driven_share": 0.064,
+       "liftoff_share_of_driven": 0.0,
+       "lift_max_deg": 0.0,
+       "drive_torque_peak_Nm": 0.0335,
+       "driver_reaction_peak_Nm": 0.0721,
+       "closure": "force"
+      }
+     },
+     "on_limit_share": {
+      "K": 0.942,
+      "J2": 0.0
+     },
+     "joints": [
+      "J1",
+      "K",
+      "J2",
+      "J3",
+      "pin a",
+      "pin b"
+     ],
+     "load_friction": {
+      "mu_eff": 0.005,
+      "tau0_Nm": 0.001,
+      "tilt_ref": "hub",
+      "tilt_peak_Nm": [
+       0.173,
+       0.185,
+       0.136,
+       0.097,
+       0.045,
+       0.049
+      ],
+      "friction_peak_Nm": [
+       0.002,
+       0.002,
+       0.002,
+       0.001,
+       0.001,
+       0.001
+      ]
+     }
+    },
+    "Comb hair": {
+     "duration_s": 6.7,
+     "held_share": 0.0,
+     "force_N": {
+      "peak": 0.2519533450247158,
+      "rms": 0.16228034843019565
+     },
+     "cuff_pressure_kPa": {
+      "peak": 0.037,
+      "rms": 0.024,
+      "axial_shear_peak": 0.234
+     },
+     "moment_cuff_Nm": {
+      "peak": 0.104,
+      "rms": 0.036,
+      "axial_peak": 0.1
+     },
+     "moment_gh_Nm": {
+      "peak": 0.101,
+      "rms": 0.044,
+      "perp_peak": 0.053,
+      "axial_peak": 0.1
+     },
+     "joint_speed_dps": [
+      83.8,
+      5.5,
+      109.4,
+      156.3,
+      65.6,
+      75.9
+     ],
+     "arm_speed_dps": 175.5,
+     "speed_ratio_max": 1.8294463760981836,
+     "joint_acc_dps2": [
+      12609,
+      1382,
+      15630,
+      8912,
+      4006,
+      5203
+     ],
+     "tracking_deg": {
+      "peak": 3.3356318638898683,
+      "rms": 1.1663914520236855,
+      "twist_peak": 3.332624705897433,
+      "swing_peak": 0.14162935842188928
+     },
+     "gate_raw": {
+      "twist_peak_deg": 3.332624705897433,
+      "moment_gh_peak_Nm": 0.10112701102327505,
+      "moment_gh_rms_Nm": 0.04361374789272827,
+      "force_peak_N": 0.2519533450247158
+     },
+     "config_dev_deg": [
+      7.518695800541356,
+      5.4140538389715385,
+      2.50175767259869,
+      1.3279494659517195,
+      0.922504234398286,
+      0.8923116860420558
+     ],
+     "amp_qs": {
+      "p95": 3.7253283870331084,
+      "max": 4.473200326399704
+     },
+     "cond_U_max": 5.0,
+     "stalls": {
+      "events": 17,
+      "lags_over_10deg": 0,
+      "worst_ms": 198,
+      "worst_missed_deg": 8.1,
+      "list": [
+       {
+        "joint": "J1",
+        "frame": 156,
+        "ms": 198,
+        "missed_deg": 8.1,
+        "kind": "lag-reversal"
+       },
+       {
+        "joint": "K",
+        "frame": 108,
+        "ms": 166,
+        "missed_deg": 4.9,
+        "kind": "lag-stuck"
+       },
+       {
+        "joint": "K",
+        "frame": 156,
+        "ms": 167,
+        "missed_deg": 4.9,
+        "kind": "lag-stuck"
+       },
+       {
+        "joint": "K",
+        "frame": 97,
+        "ms": 157,
+        "missed_deg": 4.7,
+        "kind": "lag-stuck"
+       },
+       {
+        "joint": "K",
+        "frame": 145,
+        "ms": 157,
+        "missed_deg": 4.7,
+        "kind": "lag-stuck"
+       },
+       {
+        "joint": "J1",
+        "frame": 111,
+        "ms": 67,
+        "missed_deg": 4.3,
+        "kind": "lag-stuck"
+       },
+       {
+        "joint": "J1",
+        "frame": 97,
+        "ms": 60,
+        "missed_deg": 4.0,
+        "kind": "lag-stuck"
+       },
+       {
+        "joint": "J1",
+        "frame": 145,
+        "ms": 60,
+        "missed_deg": 4.0,
+        "kind": "lag-stuck"
+       },
+       {
+        "joint": "J2",
+        "frame": 108,
+        "ms": 169,
+        "missed_deg": 3.8,
+        "kind": "lag-stuck"
+       },
+       {
+        "joint": "J1",
+        "frame": 108,
+        "ms": 81,
+        "missed_deg": 2.9,
+        "kind": "lag-stuck"
+       }
+      ]
+     },
+     "drive": {
+      "frames_over_felt": 0.0,
+      "frames_over_lock": 0.0,
+      "first_lock_frame": null,
+      "drives": true
+     },
+     "contact": {
+      "touch": false,
+      "peak_N": 0.0,
+      "time_s": 0.0,
+      "pairs": {},
+      "min_gap_mm": null,
+      "planned_overlap_mm": {},
+      "adjacent_pairs_checked": 0
+     },
+     "worst": [
+      {
+       "frame": 153,
+       "t_s": 5.089,
+       "pose": [
+        78.1,
+        143.1,
+        -67.1,
+        118.1
+       ],
+       "moment_gh_Nm": 0.101,
+       "moment_gh_axial_Nm": 0.1,
+       "force_N": 0.15443059623610697,
+       "amp_qs": 2.1470333451314345,
+       "friction_qs_Nm": 0.002,
+       "cond_U": 5.0,
+       "joint_speed_dps": [
+        -0.3,
+        -0.0,
+        -0.0,
+        0.3,
+        0.2,
+        0.2
+       ],
+       "arm_speed_dps": 1.1,
+       "twist_deg": 3.3281803966928343
+      },
+      {
+       "frame": 105,
+       "t_s": 3.489,
+       "pose": [
+        78.1,
+        143.1,
+        -67.1,
+        118.1
+       ],
+       "moment_gh_Nm": 0.101,
+       "moment_gh_axial_Nm": 0.1,
+       "force_N": 0.154430596236202,
+       "amp_qs": 2.1470333451314363,
+       "friction_qs_Nm": 0.002,
+       "cond_U": 5.0,
+       "joint_speed_dps": [
+        -0.3,
+        -0.0,
+        -0.0,
+        0.3,
+        0.2,
+        0.2
+       ],
+       "arm_speed_dps": 1.1,
+       "twist_deg": 3.3281803966928454
+      },
+      {
+       "frame": 0,
+       "t_s": 0.0,
+       "pose": [
+        30.0,
+        4.0,
+        -30.0,
+        15.0
+       ],
+       "moment_gh_Nm": 0.055,
+       "moment_gh_axial_Nm": 0.015,
+       "force_N": 0.2445423536675863,
+       "amp_qs": 0.0,
+       "friction_qs_Nm": 0.0,
+       "cond_U": 5.0,
+       "joint_speed_dps": [
+        0.0,
+        0.0,
+        -0.0,
+        -0.0,
+        0.0,
+        0.0
+       ],
+       "arm_speed_dps": 0.0,
+       "twist_deg": 0.4946703065792719
+      }
+     ],
+     "slaved": {
+      "K": {
+       "law_err_deg": 0.126,
+       "law_err_driven_deg": 0.126,
+       "plan_err_deg": 5.414,
+       "driven_share": 0.155,
+       "liftoff_share_of_driven": 0.0,
+       "lift_max_deg": 0.0,
+       "drive_torque_peak_Nm": 0.0326,
+       "driver_reaction_peak_Nm": 0.0702,
+       "closure": "force"
+      }
+     },
+     "on_limit_share": {
+      "K": 1.0,
+      "J2": 0.0
+     },
+     "joints": [
+      "J1",
+      "K",
+      "J2",
+      "J3",
+      "pin a",
+      "pin b"
+     ],
+     "load_friction": {
+      "mu_eff": 0.005,
+      "tau0_Nm": 0.001,
+      "tilt_ref": "hub",
+      "tilt_peak_Nm": [
+       0.133,
+       0.147,
+       0.117,
+       0.103,
+       0.102,
+       0.101
+      ],
+      "friction_peak_Nm": [
+       0.002,
+       0.002,
+       0.002,
+       0.002,
+       0.002,
+       0.002
+      ]
+     }
+    },
+    "Reach a high shelf": {
+     "duration_s": 5.2,
+     "held_share": 0.0,
+     "force_N": {
+      "peak": 0.6538375298338865,
+      "rms": 0.2583964500473186
+     },
+     "cuff_pressure_kPa": {
+      "peak": 0.096,
+      "rms": 0.038,
+      "axial_shear_peak": 0.318
+     },
+     "moment_cuff_Nm": {
+      "peak": 0.142,
+      "rms": 0.102,
+      "axial_peak": 0.136
+     },
+     "moment_gh_Nm": {
+      "peak": 0.145,
+      "rms": 0.109,
+      "perp_peak": 0.145,
+      "axial_peak": 0.136
+     },
+     "joint_speed_dps": [
+      67.7,
+      51.8,
+      59.9,
+      132.2,
+      52.9,
+      56.2
+     ],
+     "arm_speed_dps": 136.5,
+     "speed_ratio_max": 1.4609385033023,
+     "joint_acc_dps2": [
+      9995,
+      10608,
+      11510,
+      9331,
+      3437,
+      3869
+     ],
+     "tracking_deg": {
+      "peak": 4.543953607755304,
+      "rms": 3.2528668096422813,
+      "twist_peak": 4.539896185152806,
+      "swing_peak": 0.1960080755196626
+     },
+     "gate_raw": {
+      "twist_peak_deg": 4.539896185152806,
+      "moment_gh_peak_Nm": 0.14492334880365118,
+      "moment_gh_rms_Nm": 0.10884939445872537,
+      "force_peak_N": 0.6538375298338865
+     },
+     "config_dev_deg": [
+      9.059533819488546,
+      6.887043509973723,
+      3.184202333592828,
+      2.904699590101277,
+      1.5431294866890493,
+      1.8364538631620027
+     ],
+     "amp_qs": {
+      "p95": 4.350653976501621,
+      "max": 4.6236603579546784
+     },
+     "cond_U_max": 5.0,
+     "stalls": {
+      "events": 4,
+      "lags_over_10deg": 0,
+      "worst_ms": 121,
+      "worst_missed_deg": 4.7,
+      "list": [
+       {
+        "joint": "K",
+        "frame": 29,
+        "ms": 121,
+        "missed_deg": 4.7,
+        "kind": "lag-stuck"
+       },
+       {
+        "joint": "K",
+        "frame": 126,
+        "ms": 108,
+        "missed_deg": 4.3,
+        "kind": "lag-stuck"
+       },
+       {
+        "joint": "J2",
+        "frame": 126,
+        "ms": 114,
+        "missed_deg": 3.4,
+        "kind": "lag-stuck"
+       },
+       {
+        "joint": "J2",
+        "frame": 30,
+        "ms": 74,
+        "missed_deg": 1.5,
+        "kind": "lag-stuck"
+       }
+      ]
+     },
+     "drive": {
+      "frames_over_felt": 0.0,
+      "frames_over_lock": 0.0,
+      "first_lock_frame": null,
+      "drives": true
+     },
+     "contact": {
+      "touch": false,
+      "peak_N": 0.0,
+      "time_s": 0.0,
+      "pairs": {},
+      "min_gap_mm": null,
+      "planned_overlap_mm": {},
+      "adjacent_pairs_checked": 0
+     },
+     "worst": [
+      {
+       "frame": 147,
+       "t_s": 4.908,
+       "pose": [
+        60.8,
+        8.5,
+        -60.8,
+        34.0
+       ],
+       "moment_gh_Nm": 0.145,
+       "moment_gh_axial_Nm": 0.01,
+       "force_N": 0.6538375298338865,
+       "amp_qs": 0.9085448893774665,
+       "friction_qs_Nm": 0.001,
+       "cond_U": 5.0,
+       "joint_speed_dps": [
+        -29.4,
+        8.6,
+        0.4,
+        -52.2,
+        10.8,
+        -0.0
+       ],
+       "arm_speed_dps": 38.0,
+       "twist_deg": 0.014843509421250371
+      },
+      {
+       "frame": 72,
+       "t_s": 2.399,
+       "pose": [
+        82.0,
+        131.6,
+        -82.0,
+        6.3
+       ],
+       "moment_gh_Nm": 0.139,
+       "moment_gh_axial_Nm": 0.136,
+       "force_N": 0.15777294276810047,
+       "amp_qs": 4.361225057221468,
+       "friction_qs_Nm": 0.004,
+       "cond_U": 4.7,
+       "joint_speed_dps": [
+        -2.8,
+        2.5,
+        -1.1,
+        5.5,
+        3.2,
+        3.1
+       ],
+       "arm_speed_dps": 7.3,
+       "twist_deg": 4.537377634593
+      },
+      {
+       "frame": 81,
+       "t_s": 2.699,
+       "pose": [
+        82.0,
+        132.0,
+        -82.0,
+        6.0
+       ],
+       "moment_gh_Nm": 0.137,
+       "moment_gh_axial_Nm": 0.136,
+       "force_N": 0.17559787061445353,
+       "amp_qs": 0.0,
+       "friction_qs_Nm": 0.0,
+       "cond_U": 4.7,
+       "joint_speed_dps": [
+        -0.0,
+        0.0,
+        -0.0,
+        0.0,
+        0.0,
+        -0.0
+       ],
+       "arm_speed_dps": 0.0,
+       "twist_deg": 4.519571331374101
+      }
+     ],
+     "slaved": {
+      "K": {
+       "law_err_deg": 0.111,
+       "law_err_driven_deg": 0.111,
+       "plan_err_deg": 6.887,
+       "driven_share": 0.752,
+       "liftoff_share_of_driven": 0.0,
+       "lift_max_deg": 0.0,
+       "drive_torque_peak_Nm": 0.0349,
+       "driver_reaction_peak_Nm": 0.0752,
+       "closure": "force"
+      }
+     },
+     "on_limit_share": {
+      "K": 0.293,
+      "J2": 0.0
+     },
+     "joints": [
+      "J1",
+      "K",
+      "J2",
+      "J3",
+      "pin a",
+      "pin b"
+     ],
+     "load_friction": {
+      "mu_eff": 0.005,
+      "tau0_Nm": 0.001,
+      "tilt_ref": "hub",
+      "tilt_peak_Nm": [
+       0.183,
+       0.195,
+       0.148,
+       0.14,
+       0.139,
+       0.138
+      ],
+      "friction_peak_Nm": [
+       0.002,
+       0.002,
+       0.002,
+       0.002,
+       0.002,
+       0.002
+      ]
+     }
+    },
+    "Wash opposite shoulder": {
+     "duration_s": 6.4,
+     "held_share": 0.0,
+     "force_N": {
+      "peak": 0.6703776715833698,
+      "rms": 0.41044137314922113
+     },
+     "cuff_pressure_kPa": {
+      "peak": 0.099,
+      "rms": 0.06,
+      "axial_shear_peak": 0.17
+     },
+     "moment_cuff_Nm": {
+      "peak": 0.076,
+      "rms": 0.043,
+      "axial_peak": 0.073
+     },
+     "moment_gh_Nm": {
+      "peak": 0.148,
+      "rms": 0.094,
+      "perp_peak": 0.148,
+      "axial_peak": 0.073
+     },
+     "joint_speed_dps": [
+      131.1,
+      58.8,
+      56.6,
+      95.2,
+      17.7,
+      22.5
+     ],
+     "arm_speed_dps": 128.4,
+     "speed_ratio_max": 2.3777082492585366,
+     "joint_acc_dps2": [
+      4010,
+      6486,
+      9829,
+      8627,
+      1882,
+      340
+     ],
+     "tracking_deg": {
+      "peak": 2.4190638383215424,
+      "rms": 1.3245135612468326,
+      "twist_peak": 2.416607349358938,
+      "swing_peak": 0.12996388178522889
+     },
+     "gate_raw": {
+      "twist_peak_deg": 2.416607349358938,
+      "moment_gh_peak_Nm": 0.14786083664675634,
+      "moment_gh_rms_Nm": 0.09441964771098145,
+      "force_peak_N": 0.6703776715833698
+     },
+     "config_dev_deg": [
+      1.6298953005959964,
+      2.8634784414435144,
+      1.3148150974672839,
+      1.0042132876814507,
+      0.37530609137440457,
+      0.39553841507571913
+     ],
+     "amp_qs": {
+      "p95": 4.360321486265415,
+      "max": 4.464777544573408
+     },
+     "cond_U_max": 5.0,
+     "stalls": {
+      "events": 2,
+      "lags_over_10deg": 0,
+      "worst_ms": 70,
+      "worst_missed_deg": 1.5,
+      "list": [
+       {
+        "joint": "K",
+        "frame": 155,
+        "ms": 65,
+        "missed_deg": 1.5,
+        "kind": "lag-stuck"
+       },
+       {
+        "joint": "J2",
+        "frame": 155,
+        "ms": 70,
+        "missed_deg": 1.3,
+        "kind": "lag-stuck"
+       }
+      ]
+     },
+     "drive": {
+      "frames_over_felt": 0.0,
+      "frames_over_lock": 0.0,
+      "first_lock_frame": null,
+      "drives": true
+     },
+     "contact": {
+      "touch": false,
+      "peak_N": 0.0,
+      "time_s": 0.0,
+      "pairs": {},
+      "min_gap_mm": null,
+      "planned_overlap_mm": {},
+      "adjacent_pairs_checked": 0
+     },
+     "worst": [
+      {
+       "frame": 34,
+       "t_s": 1.147,
+       "pose": [
+        97.5,
+        23.5,
+        -66.3,
+        93.2
+       ],
+       "moment_gh_Nm": 0.148,
+       "moment_gh_axial_Nm": 0.004,
+       "force_N": 0.6703776715833698,
+       "amp_qs": 3.9642056652943833,
+       "friction_qs_Nm": 0.004,
+       "cond_U": 5.0,
+       "joint_speed_dps": [
+        -101.0,
+        32.3,
+        -7.7,
+        -3.2,
+        3.2,
+        3.2
+       ],
+       "arm_speed_dps": 51.7,
+       "twist_deg": 0.1563116123846423
+      },
+      {
+       "frame": 105,
+       "t_s": 3.506,
+       "pose": [
+        140.1,
+        59.3,
+        -50.7,
+        114.1
+       ],
+       "moment_gh_Nm": 0.134,
+       "moment_gh_axial_Nm": 0.072,
+       "force_N": 0.5200256625652294,
+       "amp_qs": 3.9313608006140193,
+       "friction_qs_Nm": 0.004,
+       "cond_U": 4.9,
+       "joint_speed_dps": [
+        -13.2,
+        12.1,
+        -5.6,
+        -5.0,
+        0.0,
+        0.0
+       ],
+       "arm_speed_dps": 11.7,
+       "twist_deg": 2.3700607298296648
+      },
+      {
+       "frame": 78,
+       "t_s": 2.605,
+       "pose": [
+        144.7,
+        45.9,
+        -69.5,
+        119.1
+       ],
+       "moment_gh_Nm": 0.128,
+       "moment_gh_axial_Nm": 0.051,
+       "force_N": 0.5491585521048282,
+       "amp_qs": 4.385534374070009,
+       "friction_qs_Nm": 0.004,
+       "cond_U": 4.7,
+       "joint_speed_dps": [
+        -6.3,
+        1.1,
+        -0.5,
+        3.6,
+        0.9,
+        0.9
+       ],
+       "arm_speed_dps": 6.3,
+       "twist_deg": 1.7202926276338526
+      }
+     ],
+     "slaved": {
+      "K": {
+       "law_err_deg": 0.113,
+       "law_err_driven_deg": 0.113,
+       "plan_err_deg": 2.863,
+       "driven_share": 0.663,
+       "liftoff_share_of_driven": 0.0,
+       "lift_max_deg": 0.0,
+       "drive_torque_peak_Nm": 0.0374,
+       "driver_reaction_peak_Nm": 0.0805,
+       "closure": "force"
+      }
+     },
+     "on_limit_share": {
+      "K": 0.373,
+      "J2": 0.0
+     },
+     "joints": [
+      "J1",
+      "K",
+      "J2",
+      "J3",
+      "pin a",
+      "pin b"
+     ],
+     "load_friction": {
+      "mu_eff": 0.005,
+      "tau0_Nm": 0.001,
+      "tilt_ref": "hub",
+      "tilt_peak_Nm": [
+       0.212,
+       0.229,
+       0.182,
+       0.137,
+       0.091,
+       0.086
+      ],
+      "friction_peak_Nm": [
+       0.002,
+       0.002,
+       0.002,
+       0.002,
+       0.001,
+       0.001
+      ]
+     }
+    },
+    "Reach back pocket": {
+     "duration_s": 4.8,
+     "held_share": 0.0,
+     "force_N": {
+      "peak": 0.45681386532521245,
+      "rms": 0.273183896530639
+     },
+     "cuff_pressure_kPa": {
+      "peak": 0.067,
+      "rms": 0.04,
+      "axial_shear_peak": 0.216
+     },
+     "moment_cuff_Nm": {
+      "peak": 0.096,
+      "rms": 0.052,
+      "axial_peak": 0.093
+     },
+     "moment_gh_Nm": {
+      "peak": 0.127,
+      "rms": 0.073,
+      "perp_peak": 0.087,
+      "axial_peak": 0.093
+     },
+     "joint_speed_dps": [
+      106.1,
+      70.4,
+      119.2,
+      88.2,
+      33.3,
+      26.6
+     ],
+     "arm_speed_dps": 69.6,
+     "speed_ratio_max": 2.862772887383866,
+     "joint_acc_dps2": [
+      24319,
+      15067,
+      10924,
+      8698,
+      4413,
+      3097
+     ],
+     "tracking_deg": {
+      "peak": 3.0252899669905116,
+      "rms": 1.637039506122783,
+      "twist_peak": 3.022652405185008,
+      "swing_peak": 0.16008448180997947
+     },
+     "gate_raw": {
+      "twist_peak_deg": 3.022652405185008,
+      "moment_gh_peak_Nm": 0.12650409017963676,
+      "moment_gh_rms_Nm": 0.07328252271887878,
+      "force_peak_N": 0.45681386532521245
+     },
+     "config_dev_deg": [
+      6.634686939387407,
+      3.59853141747417,
+      1.8716759834080792,
+      1.4093647327374272,
+      0.8417805834705854,
+      0.46678513630103124
+     ],
+     "amp_qs": {
+      "p95": 3.9102560931012227,
+      "max": 4.280485013294399
+     },
+     "cond_U_max": 5.0,
+     "stalls": {
+      "events": 4,
+      "lags_over_10deg": 0,
+      "worst_ms": 102,
+      "worst_missed_deg": 7.1,
+      "list": [
+       {
+        "joint": "J1",
+        "frame": 56,
+        "ms": 102,
+        "missed_deg": 7.1,
+        "kind": "lag-reversal"
+       },
+       {
+        "joint": "K",
+        "frame": 57,
+        "ms": 73,
+        "missed_deg": 3.0,
+        "kind": "lag-stuck"
+       },
+       {
+        "joint": "J2",
+        "frame": 56,
+        "ms": 90,
+        "missed_deg": 2.2,
+        "kind": "lag-stuck"
+       },
+       {
+        "joint": "K",
+        "frame": 110,
+        "ms": 56,
+        "missed_deg": 2.0,
+        "kind": "lag-stuck"
+       }
+      ]
+     },
+     "drive": {
+      "frames_over_felt": 0.0,
+      "frames_over_lock": 0.0,
+      "first_lock_frame": null,
+      "drives": true
+     },
+     "contact": {
+      "touch": false,
+      "peak_N": 0.0,
+      "time_s": 0.0,
+      "pairs": {},
+      "min_gap_mm": null,
+      "planned_overlap_mm": {},
+      "adjacent_pairs_checked": 0
+     },
+     "worst": [
+      {
+       "frame": 60,
+       "t_s": 1.991,
+       "pose": [
+        -75.0,
+        39.5,
+        92.2,
+        73.0
+       ],
+       "moment_gh_Nm": 0.127,
+       "moment_gh_axial_Nm": 0.092,
+       "force_N": 0.4543403467270818,
+       "amp_qs": 3.960814828632322,
+       "friction_qs_Nm": 0.004,
+       "cond_U": 5.0,
+       "joint_speed_dps": [
+        -24.3,
+        24.6,
+        -11.4,
+        -0.0,
+        -1.2,
+        0.0
+       ],
+       "arm_speed_dps": 28.6,
+       "twist_deg": 2.8587039398541014
+      },
+      {
+       "frame": 70,
+       "t_s": 2.336,
+       "pose": [
+        -79.9,
+        39.0,
+        100.9,
+        69.3
+       ],
+       "moment_gh_Nm": 0.114,
+       "moment_gh_axial_Nm": 0.082,
+       "force_N": 0.3764863070485536,
+       "amp_qs": 4.239672885772633,
+       "friction_qs_Nm": 0.004,
+       "cond_U": 4.7,
+       "joint_speed_dps": [
+        -3.4,
+        2.8,
+        -1.3,
+        0.0,
+        0.4,
+        0.0
+       ],
+       "arm_speed_dps": 2.4,
+       "twist_deg": 2.737724783399293
+      },
+      {
+       "frame": 79,
+       "t_s": 2.647,
+       "pose": [
+        -80.0,
+        39.0,
+        101.1,
+        69.2
+       ],
+       "moment_gh_Nm": 0.114,
+       "moment_gh_axial_Nm": 0.082,
+       "force_N": 0.37733531326357206,
+       "amp_qs": 0.0,
+       "friction_qs_Nm": 0.0,
+       "cond_U": 4.7,
+       "joint_speed_dps": [
+        -0.0,
+        0.0,
+        -0.0,
+        0.0,
+        0.0,
+        -0.0
+       ],
+       "arm_speed_dps": 0.0,
+       "twist_deg": 2.7260316800831346
+      }
+     ],
+     "slaved": {
+      "K": {
+       "law_err_deg": 0.104,
+       "law_err_driven_deg": 0.104,
+       "plan_err_deg": 3.599,
+       "driven_share": 0.375,
+       "liftoff_share_of_driven": 0.0,
+       "lift_max_deg": 0.0,
+       "drive_torque_peak_Nm": 0.0351,
+       "driver_reaction_peak_Nm": 0.0755,
+       "closure": "force"
+      }
+     },
+     "on_limit_share": {
+      "K": 0.646,
+      "J2": 0.0
+     },
+     "joints": [
+      "J1",
+      "K",
+      "J2",
+      "J3",
+      "pin a",
+      "pin b"
+     ],
+     "load_friction": {
+      "mu_eff": 0.005,
+      "tau0_Nm": 0.001,
+      "tilt_ref": "hub",
+      "tilt_peak_Nm": [
+       0.18,
+       0.184,
+       0.153,
+       0.123,
+       0.103,
+       0.112
+      ],
+      "friction_peak_Nm": [
+       0.002,
+       0.002,
+       0.002,
+       0.002,
+       0.002,
+       0.002
+      ]
+     }
+    },
+    "Wave": {
+     "duration_s": 5.7,
+     "held_share": 0.0,
+     "force_N": {
+      "peak": 0.24342888914514652,
+      "rms": 0.17721206876356116
+     },
+     "cuff_pressure_kPa": {
+      "peak": 0.036,
+      "rms": 0.026,
+      "axial_shear_peak": 0.12
+     },
+     "moment_cuff_Nm": {
+      "peak": 0.051,
+      "rms": 0.026,
+      "axial_peak": 0.051
+     },
+     "moment_gh_Nm": {
+      "peak": 0.057,
+      "rms": 0.039,
+      "perp_peak": 0.049,
+      "axial_peak": 0.051
+     },
+     "joint_speed_dps": [
+      155.3,
+      0.1,
+      283.0,
+      126.0,
+      56.4,
+      65.8
+     ],
+     "arm_speed_dps": 181.9,
+     "speed_ratio_max": 2.0438522775347345,
+     "joint_acc_dps2": [
+      2483,
+      13,
+      4387,
+      1997,
+      1383,
+      1486
+     ],
+     "tracking_deg": {
+      "peak": 1.6458102707462217,
+      "rms": 0.8613459844959775,
+      "twist_peak": 1.6457318725918193,
+      "swing_peak": 0.03536513230573469
+     },
+     "gate_raw": {
+      "twist_peak_deg": 1.6457318725918193,
+      "moment_gh_peak_Nm": 0.05702448196021531,
+      "moment_gh_rms_Nm": 0.03929294481162859,
+      "force_peak_N": 0.24342888914514652
+     },
+     "config_dev_deg": [
+      2.9653210692776497,
+      0.04242844240346756,
+      5.266103377813028,
+      2.3336281378472647,
+      1.2227480687160537,
+      1.333568515650286
+     ],
+     "amp_qs": {
+      "p95": 3.711058052886121,
+      "max": 4.085693508446293
+     },
+     "cond_U_max": 4.9,
+     "stalls": {
+      "events": 0,
+      "lags_over_10deg": 0,
+      "worst_ms": 0,
+      "worst_missed_deg": 0.0,
+      "list": []
+     },
+     "drive": {
+      "frames_over_felt": 0.0,
+      "frames_over_lock": 0.0,
+      "first_lock_frame": null,
+      "drives": true
+     },
+     "contact": {
+      "touch": false,
+      "peak_N": 0.0,
+      "time_s": 0.0,
+      "pairs": {},
+      "min_gap_mm": null,
+      "planned_overlap_mm": {},
+      "adjacent_pairs_checked": 0
+     },
+     "worst": [
+      {
+       "frame": 67,
+       "t_s": 2.227,
+       "pose": [
+        15.0,
+        94.3,
+        -71.8,
+        95.0
+       ],
+       "moment_gh_Nm": 0.057,
+       "moment_gh_axial_Nm": 0.051,
+       "force_N": 0.16177233146837808,
+       "amp_qs": 3.242416601101037,
+       "friction_qs_Nm": 0.003,
+       "cond_U": 4.4,
+       "joint_speed_dps": [
+        99.5,
+        0.0,
+        170.2,
+        -82.4,
+        -38.8,
+        -44.4
+       ],
+       "arm_speed_dps": 113.8,
+       "twist_deg": 1.5972891210446576
+      },
+      {
+       "frame": 91,
+       "t_s": 3.027,
+       "pose": [
+        15.0,
+        94.3,
+        -71.8,
+        95.0
+       ],
+       "moment_gh_Nm": 0.057,
+       "moment_gh_axial_Nm": 0.051,
+       "force_N": 0.16169666495650828,
+       "amp_qs": 3.2424559397005277,
+       "friction_qs_Nm": 0.003,
+       "cond_U": 4.4,
+       "joint_speed_dps": [
+        99.7,
+        -0.0,
+        170.5,
+        -82.5,
+        -38.9,
+        -44.4
+       ],
+       "arm_speed_dps": 113.8,
+       "twist_deg": 1.598394043611175
+      },
+      {
+       "frame": 115,
+       "t_s": 3.828,
+       "pose": [
+        15.0,
+        94.3,
+        -75.3,
+        95.0
+       ],
+       "moment_gh_Nm": 0.051,
+       "moment_gh_axial_Nm": 0.046,
+       "force_N": 0.14694896177460265,
+       "amp_qs": 3.3260821929737325,
+       "friction_qs_Nm": 0.003,
+       "cond_U": 4.5,
+       "joint_speed_dps": [
+        59.5,
+        -0.0,
+        99.6,
+        -52.1,
+        -25.1,
+        -28.3
+       ],
+       "arm_speed_dps": 66.6,
+       "twist_deg": 1.4682757198180043
+      }
+     ],
+     "slaved": {
+      "K": {
+       "law_err_deg": 0.042,
+       "law_err_driven_deg": 0.0,
+       "plan_err_deg": 0.042,
+       "driven_share": 0.0,
+       "liftoff_share_of_driven": 0.0,
+       "lift_max_deg": 0.0,
+       "drive_torque_peak_Nm": 0.0,
+       "driver_reaction_peak_Nm": 0.0,
+       "closure": "force"
+      }
+     },
+     "on_limit_share": {
+      "K": 1.0,
+      "J2": 0.0
+     },
+     "joints": [
+      "J1",
+      "K",
+      "J2",
+      "J3",
+      "pin a",
+      "pin b"
+     ],
+     "load_friction": {
+      "mu_eff": 0.005,
+      "tau0_Nm": 0.001,
+      "tilt_ref": "hub",
+      "tilt_peak_Nm": [
+       0.038,
+       0.06,
+       0.072,
+       0.051,
+       0.052,
+       0.052
+      ],
+      "friction_peak_Nm": [
+       0.001,
+       0.001,
+       0.001,
+       0.001,
+       0.001,
+       0.001
+      ]
+     }
+    },
+    "Walking arm swing": {
+     "duration_s": 3.6000000000000005,
+     "held_share": 0.0,
+     "force_N": {
+      "peak": 0.5587222414195502,
+      "rms": 0.48843247918103416
+     },
+     "cuff_pressure_kPa": {
+      "peak": 0.082,
+      "rms": 0.072,
+      "axial_shear_peak": 0.116
+     },
+     "moment_cuff_Nm": {
+      "peak": 0.052,
+      "rms": 0.039,
+      "axial_peak": 0.05
+     },
+     "moment_gh_Nm": {
+      "peak": 0.12,
+      "rms": 0.109,
+      "perp_peak": 0.117,
+      "axial_peak": 0.05
+     },
+     "joint_speed_dps": [
+      29.3,
+      15.6,
+      7.2,
+      61.2,
+      2.5,
+      8.7
+     ],
+     "arm_speed_dps": 65.8,
+     "speed_ratio_max": 1.0103650055910123,
+     "joint_acc_dps2": [
+      574,
+      537,
+      248,
+      899,
+      329,
+      343
+     ],
+     "tracking_deg": {
+      "peak": 1.6486289281977213,
+      "rms": 1.2196942411953857,
+      "twist_peak": 1.6467332238812848,
+      "swing_peak": 0.08977743252857712
+     },
+     "gate_raw": {
+      "twist_peak_deg": 1.6467332238812848,
+      "moment_gh_peak_Nm": 0.11965655568049531,
+      "moment_gh_rms_Nm": 0.10883679966228019,
+      "force_peak_N": 0.5587222414195502
+     },
+     "config_dev_deg": [
+      0.7767212764936299,
+      1.053572368905927,
+      0.4748153404117125,
+      0.8552081413690269,
+      0.4062930210832359,
+      0.2650794912140326
+     ],
+     "amp_qs": {
+      "p95": 4.240690553577334,
+      "max": 4.243442804847744
+     },
+     "cond_U_max": 4.8,
+     "stalls": {
+      "events": 0,
+      "lags_over_10deg": 0,
+      "worst_ms": 0,
+      "worst_missed_deg": 0.0,
+      "list": []
+     },
+     "drive": {
+      "frames_over_felt": 0.0,
+      "frames_over_lock": 0.0,
+      "first_lock_frame": null,
+      "drives": true
+     },
+     "contact": {
+      "touch": false,
+      "peak_N": 0.0,
+      "time_s": 0.0,
+      "pairs": {},
+      "min_gap_mm": null,
+      "planned_overlap_mm": {},
+      "adjacent_pairs_checked": 0
+     },
+     "worst": [
+      {
+       "frame": 75,
+       "t_s": 2.504,
+       "pose": [
+        90.0,
+        4.7,
+        -90.0,
+        18.5
+       ],
+       "moment_gh_Nm": 0.12,
+       "moment_gh_axial_Nm": 0.023,
+       "force_N": 0.5586614251648367,
+       "amp_qs": 4.243162250734025,
+       "friction_qs_Nm": 0.004,
+       "cond_U": 4.8,
+       "joint_speed_dps": [
+        -5.2,
+        2.0,
+        -0.9,
+        12.8,
+        -0.0,
+        0.0
+       ],
+       "arm_speed_dps": 14.8,
+       "twist_deg": 0.7780891917285983
+      },
+      {
+       "frame": 39,
+       "t_s": 1.304,
+       "pose": [
+        90.0,
+        4.7,
+        -90.0,
+        18.5
+       ],
+       "moment_gh_Nm": 0.12,
+       "moment_gh_axial_Nm": 0.023,
+       "force_N": 0.5586614251647216,
+       "amp_qs": 4.243162250734022,
+       "friction_qs_Nm": 0.004,
+       "cond_U": 4.8,
+       "joint_speed_dps": [
+        -5.2,
+        2.0,
+        -0.9,
+        12.8,
+        -0.0,
+        -0.0
+       ],
+       "arm_speed_dps": 14.8,
+       "twist_deg": 0.7780891917285941
+      },
+      {
+       "frame": 3,
+       "t_s": 0.104,
+       "pose": [
+        90.0,
+        4.7,
+        -90.0,
+        18.5
+       ],
+       "moment_gh_Nm": 0.12,
+       "moment_gh_axial_Nm": 0.023,
+       "force_N": 0.5483034077415678,
+       "amp_qs": 4.243152385864832,
+       "friction_qs_Nm": 0.004,
+       "cond_U": 4.8,
+       "joint_speed_dps": [
+        -5.2,
+        2.0,
+        -0.9,
+        12.8,
+        -0.0,
+        -0.0
+       ],
+       "arm_speed_dps": 14.8,
+       "twist_deg": 0.7781289474227696
+      }
+     ],
+     "slaved": {
+      "K": {
+       "law_err_deg": 0.032,
+       "law_err_driven_deg": 0.032,
+       "plan_err_deg": 1.054,
+       "driven_share": 1.0,
+       "liftoff_share_of_driven": 0.0,
+       "lift_max_deg": 0.0,
+       "drive_torque_peak_Nm": 0.0317,
+       "driver_reaction_peak_Nm": 0.0683,
+       "closure": "force"
+      }
+     },
+     "on_limit_share": {
+      "K": 0.0,
+      "J2": 0.0
+     },
+     "joints": [
+      "J1",
+      "K",
+      "J2",
+      "J3",
+      "pin a",
+      "pin b"
+     ],
+     "load_friction": {
+      "mu_eff": 0.005,
+      "tau0_Nm": 0.001,
+      "tilt_ref": "hub",
+      "tilt_peak_Nm": [
+       0.165,
+       0.168,
+       0.125,
+       0.094,
+       0.058,
+       0.055
+      ],
+      "friction_peak_Nm": [
+       0.002,
+       0.002,
+       0.002,
+       0.001,
+       0.001,
+       0.001
+      ]
+     }
+    }
+   },
+   "worst_clip": "Wash opposite shoulder",
+   "force_peak_N": 0.6703776715833698,
+   "force_rms_max_N": 0.48843247918103416,
+   "moment_gh_peak_Nm": 0.148,
+   "moment_gh_rms_max_Nm": 0.109,
+   "moment_cuff_peak_Nm": 0.142,
+   "twist_peak_deg": 4.539896185152806,
+   "tracking_peak_deg": 4.543953607755304,
+   "joint_speed_peak_dps": 283.0,
+   "speed_ratio_max": 3.2466761077159054,
+   "joint_acc_peak_dps2": 24319,
+   "stall_events": 27,
+   "lags_over_10deg": 0,
+   "worst_missed_deg": 8.1,
+   "lock_clips": [],
+   "frames_over_lock_max": 0.0,
+   "frames_over_felt_max": 0.0,
+   "contact_touch": false,
+   "cuff_pressure_peak_kPa": 0.099,
+   "contact_peak_N": 0.0,
+   "amp_qs_max": 4.6236603579546784,
+   "gate_raw": {
+    "twist_peak_deg": 4.539896185152806,
+    "moment_gh_peak_Nm": 0.14786083664675634,
+    "moment_gh_rms_Nm": 0.10884939445872537,
+    "force_peak_N": 0.6703776715833698
+   },
+   "slaved_law_err_max_deg": 0.126,
+   "slaved_liftoff_share_max": 0.0,
+   "slaved_plan_err_max_deg": 6.887,
+   "slaved_drive_torque_peak_Nm": 0.0374,
+   "friction_peak_Nm": 0.002,
+   "tilt_peak_Nm": 0.229
+  },
+  "passive|mu0.005|t0.001|s1|hub|krate0.0112956": {
+   "clips": {
+    "Raise overhead": {
+     "duration_s": 6.0,
+     "held_share": 0.0,
+     "force_N": {
+      "peak": 0.6410930473948977,
+      "rms": 0.21368698555615698
+     },
+     "cuff_pressure_kPa": {
+      "peak": 0.094,
+      "rms": 0.031,
+      "axial_shear_peak": 0.078
+     },
+     "moment_cuff_Nm": {
+      "peak": 0.033,
+      "rms": 0.023,
+      "axial_peak": 0.033
+     },
+     "moment_gh_Nm": {
+      "peak": 0.142,
+      "rms": 0.047,
+      "perp_peak": 0.142,
+      "axial_peak": 0.033
+     },
+     "joint_speed_dps": [
+      70.6,
+      16.7,
+      72.9,
+      92.9,
+      34.3,
+      42.4
+     ],
+     "arm_speed_dps": 108.5,
+     "speed_ratio_max": 3.2466858229663234,
+     "joint_acc_dps2": [
+      2645,
+      2376,
+      4768,
+      3621,
+      1169,
+      685
+     ],
+     "tracking_deg": {
+      "peak": 1.1130503605339894,
+      "rms": 0.742215382764469,
+      "twist_peak": 1.1130224048577706,
+      "swing_peak": 0.0540057500547899
+     },
+     "gate_raw": {
+      "twist_peak_deg": 1.1130224048577706,
+      "moment_gh_peak_Nm": 0.14224929586760038,
+      "moment_gh_rms_Nm": 0.04699584842162107,
+      "force_peak_N": 0.6410930473948977
+     },
+     "config_dev_deg": [
+      1.7008222427341595,
+      0.2276075145993174,
+      1.7854583665881578,
+      0.6840138648709055,
+      0.3323442534945919,
+      0.35952651843644245
+     ],
+     "amp_qs": {
+      "p95": 3.9512978883472405,
+      "max": 4.279382251333717
+     },
+     "cond_U_max": 5.0,
+     "stalls": {
+      "events": 0,
+      "lags_over_10deg": 0,
+      "worst_ms": 0,
+      "worst_missed_deg": 0.0,
+      "list": []
+     },
+     "drive": {
+      "frames_over_felt": 0.0,
+      "frames_over_lock": 0.0,
+      "first_lock_frame": null,
+      "drives": true
+     },
+     "contact": {
+      "touch": false,
+      "peak_N": 0.0,
+      "time_s": 0.0,
+      "pairs": {},
+      "min_gap_mm": null,
+      "planned_overlap_mm": {},
+      "adjacent_pairs_checked": 0
+     },
+     "worst": [
+      {
+       "frame": 173,
+       "t_s": 5.755,
+       "pose": [
+        30.0,
+        4.0,
+        -30.2,
+        12.0
+       ],
+       "moment_gh_Nm": 0.142,
+       "moment_gh_axial_Nm": 0.011,
+       "force_N": 0.6410930473948977,
+       "amp_qs": 3.964273757623459,
+       "friction_qs_Nm": 0.004,
+       "cond_U": 5.0,
+       "joint_speed_dps": [
+        -25.6,
+        7.2,
+        -1.2,
+        -17.1,
+        5.2,
+        3.7
+       ],
+       "arm_speed_dps": 13.3,
+       "twist_deg": 0.1729148022713369
+      },
+      {
+       "frame": 0,
+       "t_s": 0.0,
+       "pose": [
+        30.0,
+        3.0,
+        -30.0,
+        12.0
+       ],
+       "moment_gh_Nm": 0.109,
+       "moment_gh_axial_Nm": 0.02,
+       "force_N": 0.49579004281827327,
+       "amp_qs": 0.0,
+       "friction_qs_Nm": 0.0,
+       "cond_U": 4.9,
+       "joint_speed_dps": [
+        0.0,
+        0.0,
+        -0.0,
+        0.0,
+        0.0,
+        0.0
+       ],
+       "arm_speed_dps": 0.0,
+       "twist_deg": 0.6800954985032932
+      },
+      {
+       "frame": 9,
+       "t_s": 0.305,
+       "pose": [
+        30.0,
+        4.9,
+        -30.4,
+        12.0
+       ],
+       "moment_gh_Nm": 0.045,
+       "moment_gh_axial_Nm": 0.004,
+       "force_N": 0.21916877739884127,
+       "amp_qs": 3.7155242095810634,
+       "friction_qs_Nm": 0.004,
+       "cond_U": 4.9,
+       "joint_speed_dps": [
+        21.8,
+        0.0,
+        28.8,
+        -2.0,
+        -0.0,
+        0.0
+       ],
+       "arm_speed_dps": 17.8,
+       "twist_deg": 0.09364833464773716
+      }
+     ],
+     "slaved": {
+      "K": {
+       "law_err_deg": 0.072,
+       "law_err_driven_deg": 0.072,
+       "plan_err_deg": 0.228,
+       "driven_share": 0.082,
+       "liftoff_share_of_driven": 0.0,
+       "lift_max_deg": 0.0,
+       "drive_torque_peak_Nm": 0.0344,
+       "driver_reaction_peak_Nm": 0.0741,
+       "closure": "force"
+      }
+     },
+     "on_limit_share": {
+      "K": 0.921,
+      "J2": 0.0
+     },
+     "joints": [
+      "J1",
+      "K",
+      "J2",
+      "J3",
+      "pin a",
+      "pin b"
+     ],
+     "load_friction": {
+      "mu_eff": 0.005,
+      "tau0_Nm": 0.001,
+      "tilt_ref": "hub",
+      "tilt_peak_Nm": [
+       0.175,
+       0.187,
+       0.139,
+       0.099,
+       0.046,
+       0.052
+      ],
+      "friction_peak_Nm": [
+       0.002,
+       0.002,
+       0.002,
+       0.001,
+       0.001,
+       0.001
+      ]
+     }
+    },
+    "Drink from a cup": {
+     "duration_s": 5.9,
+     "held_share": 0.0,
+     "force_N": {
+      "peak": 0.6004401846996146,
+      "rms": 0.2225611893601606
+     },
+     "cuff_pressure_kPa": {
+      "peak": 0.088,
+      "rms": 0.033,
+      "axial_shear_peak": 0.059
+     },
+     "moment_cuff_Nm": {
+      "peak": 0.027,
+      "rms": 0.018,
+      "axial_peak": 0.025
+     },
+     "moment_gh_Nm": {
+      "peak": 0.132,
+      "rms": 0.044,
+      "perp_peak": 0.132,
+      "axial_peak": 0.025
+     },
+     "joint_speed_dps": [
+      54.7,
+      9.7,
+      46.8,
+      41.3,
+      4.2,
+      7.7
+     ],
+     "arm_speed_dps": 70.6,
+     "speed_ratio_max": 2.0149394601506394,
+     "joint_acc_dps2": [
+      1949,
+      1321,
+      3506,
+      2330,
+      685,
+      583
+     ],
+     "tracking_deg": {
+      "peak": 0.7677080383177876,
+      "rms": 0.5643096157050991,
+      "twist_peak": 0.7663142317795947,
+      "swing_peak": 0.05100670276132744
+     },
+     "gate_raw": {
+      "twist_peak_deg": 0.7663142317795947,
+      "moment_gh_peak_Nm": 0.13238201511320563,
+      "moment_gh_rms_Nm": 0.04437580292262727,
+      "force_peak_N": 0.6004401846996146
+     },
+     "config_dev_deg": [
+      0.5254166865268012,
+      0.24212861481835124,
+      0.8799912654093291,
+      0.8095015519255717,
+      0.2664527424859846,
+      0.33299349350787966
+     ],
+     "amp_qs": {
+      "p95": 3.9569867705067767,
+      "max": 4.456305672617438
+     },
+     "cond_U_max": 5.0,
+     "stalls": {
+      "events": 0,
+      "lags_over_10deg": 0,
+      "worst_ms": 0,
+      "worst_missed_deg": 0.0,
+      "list": []
+     },
+     "drive": {
+      "frames_over_felt": 0.0,
+      "frames_over_lock": 0.0,
+      "first_lock_frame": null,
+      "drives": true
+     },
+     "contact": {
+      "touch": false,
+      "peak_N": 0.0,
+      "time_s": 0.0,
+      "pairs": {},
+      "min_gap_mm": null,
+      "planned_overlap_mm": {},
+      "adjacent_pairs_checked": 0
+     },
+     "worst": [
+      {
+       "frame": 172,
+       "t_s": 5.727,
+       "pose": [
+        40.8,
+        4.7,
+        -40.3,
+        16.8
+       ],
+       "moment_gh_Nm": 0.132,
+       "moment_gh_axial_Nm": 0.015,
+       "force_N": 0.6004401846996146,
+       "amp_qs": 3.9641233073838285,
+       "friction_qs_Nm": 0.004,
+       "cond_U": 5.0,
+       "joint_speed_dps": [
+        -17.5,
+        2.8,
+        -1.5,
+        -13.7,
+        4.2,
+        4.5
+       ],
+       "arm_speed_dps": 13.0,
+       "twist_deg": 0.23102739816187376
+      },
+      {
+       "frame": 0,
+       "t_s": 0.0,
+       "pose": [
+        40.0,
+        4.0,
+        -40.0,
+        15.0
+       ],
+       "moment_gh_Nm": 0.11,
+       "moment_gh_axial_Nm": 0.022,
+       "force_N": 0.4993929859556607,
+       "amp_qs": 0.0,
+       "friction_qs_Nm": 0.0,
+       "cond_U": 4.9,
+       "joint_speed_dps": [
+        0.0,
+        0.0,
+        -0.0,
+        0.0,
+        0.0,
+        0.0
+       ],
+       "arm_speed_dps": 0.0,
+       "twist_deg": 0.7397488791635595
+      },
+      {
+       "frame": 9,
+       "t_s": 0.305,
+       "pose": [
+        42.4,
+        6.0,
+        -41.0,
+        20.2
+       ],
+       "moment_gh_Nm": 0.044,
+       "moment_gh_axial_Nm": 0.002,
+       "force_N": 0.20634864274058673,
+       "amp_qs": 3.551205415550436,
+       "friction_qs_Nm": 0.004,
+       "cond_U": 4.9,
+       "joint_speed_dps": [
+        4.1,
+        0.0,
+        24.4,
+        -3.3,
+        0.0,
+        -0.6
+       ],
+       "arm_speed_dps": 21.7,
+       "twist_deg": 0.06669359509842185
+      }
+     ],
+     "slaved": {
+      "K": {
+       "law_err_deg": 0.058,
+       "law_err_driven_deg": 0.058,
+       "plan_err_deg": 0.242,
+       "driven_share": 0.064,
+       "liftoff_share_of_driven": 0.0,
+       "lift_max_deg": 0.0,
+       "drive_torque_peak_Nm": 0.0335,
+       "driver_reaction_peak_Nm": 0.0721,
+       "closure": "force"
+      }
+     },
+     "on_limit_share": {
+      "K": 0.942,
+      "J2": 0.0
+     },
+     "joints": [
+      "J1",
+      "K",
+      "J2",
+      "J3",
+      "pin a",
+      "pin b"
+     ],
+     "load_friction": {
+      "mu_eff": 0.005,
+      "tau0_Nm": 0.001,
+      "tilt_ref": "hub",
+      "tilt_peak_Nm": [
+       0.173,
+       0.185,
+       0.136,
+       0.097,
+       0.045,
+       0.049
+      ],
+      "friction_peak_Nm": [
+       0.002,
+       0.002,
+       0.002,
+       0.001,
+       0.001,
+       0.001
+      ]
+     }
+    },
+    "Comb hair": {
+     "duration_s": 6.7,
+     "held_share": 0.0,
+     "force_N": {
+      "peak": 0.25195343401362325,
+      "rms": 0.1622803454693487
+     },
+     "cuff_pressure_kPa": {
+      "peak": 0.037,
+      "rms": 0.024,
+      "axial_shear_peak": 0.234
+     },
+     "moment_cuff_Nm": {
+      "peak": 0.104,
+      "rms": 0.036,
+      "axial_peak": 0.1
+     },
+     "moment_gh_Nm": {
+      "peak": 0.101,
+      "rms": 0.044,
+      "perp_peak": 0.053,
+      "axial_peak": 0.1
+     },
+     "joint_speed_dps": [
+      83.8,
+      5.5,
+      109.4,
+      156.3,
+      65.6,
+      75.9
+     ],
+     "arm_speed_dps": 175.5,
+     "speed_ratio_max": 1.8294462926325905,
+     "joint_acc_dps2": [
+      12609,
+      1382,
+      15630,
+      8912,
+      4006,
+      5203
+     ],
+     "tracking_deg": {
+      "peak": 3.335632540232634,
+      "rms": 1.1663916773760215,
+      "twist_peak": 3.332625381882632,
+      "swing_peak": 0.14162938151539814
+     },
+     "gate_raw": {
+      "twist_peak_deg": 3.332625381882632,
+      "moment_gh_peak_Nm": 0.10112703175116092,
+      "moment_gh_rms_Nm": 0.04361375717108468,
+      "force_peak_N": 0.25195343401362325
+     },
+     "config_dev_deg": [
+      7.518697370509881,
+      5.414054962742378,
+      2.501758194264261,
+      1.327950204964948,
+      0.9225046752103949,
+      0.8923121100593697
+     ],
+     "amp_qs": {
+      "p95": 3.7253284373941455,
+      "max": 4.473200387322567
+     },
+     "cond_U_max": 5.0,
+     "stalls": {
+      "events": 17,
+      "lags_over_10deg": 0,
+      "worst_ms": 198,
+      "worst_missed_deg": 8.1,
+      "list": [
+       {
+        "joint": "J1",
+        "frame": 156,
+        "ms": 198,
+        "missed_deg": 8.1,
+        "kind": "lag-reversal"
+       },
+       {
+        "joint": "K",
+        "frame": 108,
+        "ms": 166,
+        "missed_deg": 4.9,
+        "kind": "lag-stuck"
+       },
+       {
+        "joint": "K",
+        "frame": 156,
+        "ms": 167,
+        "missed_deg": 4.9,
+        "kind": "lag-stuck"
+       },
+       {
+        "joint": "K",
+        "frame": 97,
+        "ms": 157,
+        "missed_deg": 4.7,
+        "kind": "lag-stuck"
+       },
+       {
+        "joint": "K",
+        "frame": 145,
+        "ms": 157,
+        "missed_deg": 4.7,
+        "kind": "lag-stuck"
+       },
+       {
+        "joint": "J1",
+        "frame": 111,
+        "ms": 67,
+        "missed_deg": 4.3,
+        "kind": "lag-stuck"
+       },
+       {
+        "joint": "J1",
+        "frame": 97,
+        "ms": 60,
+        "missed_deg": 4.0,
+        "kind": "lag-stuck"
+       },
+       {
+        "joint": "J1",
+        "frame": 145,
+        "ms": 60,
+        "missed_deg": 4.0,
+        "kind": "lag-stuck"
+       },
+       {
+        "joint": "J2",
+        "frame": 108,
+        "ms": 169,
+        "missed_deg": 3.8,
+        "kind": "lag-stuck"
+       },
+       {
+        "joint": "J1",
+        "frame": 108,
+        "ms": 81,
+        "missed_deg": 2.9,
+        "kind": "lag-stuck"
+       }
+      ]
+     },
+     "drive": {
+      "frames_over_felt": 0.0,
+      "frames_over_lock": 0.0,
+      "first_lock_frame": null,
+      "drives": true
+     },
+     "contact": {
+      "touch": false,
+      "peak_N": 0.0,
+      "time_s": 0.0,
+      "pairs": {},
+      "min_gap_mm": null,
+      "planned_overlap_mm": {},
+      "adjacent_pairs_checked": 0
+     },
+     "worst": [
+      {
+       "frame": 105,
+       "t_s": 3.489,
+       "pose": [
+        78.1,
+        143.1,
+        -67.1,
+        118.1
+       ],
+       "moment_gh_Nm": 0.101,
+       "moment_gh_axial_Nm": 0.1,
+       "force_N": 0.154430608640826,
+       "amp_qs": 2.147033347435185,
+       "friction_qs_Nm": 0.002,
+       "cond_U": 5.0,
+       "joint_speed_dps": [
+        -0.3,
+        -0.0,
+        -0.0,
+        0.3,
+        0.2,
+        0.2
+       ],
+       "arm_speed_dps": 1.1,
+       "twist_deg": 3.328181073782678
+      },
+      {
+       "frame": 153,
+       "t_s": 5.089,
+       "pose": [
+        78.1,
+        143.1,
+        -67.1,
+        118.1
+       ],
+       "moment_gh_Nm": 0.101,
+       "moment_gh_axial_Nm": 0.1,
+       "force_N": 0.1544306086410869,
+       "amp_qs": 2.1470333474351873,
+       "friction_qs_Nm": 0.002,
+       "cond_U": 5.0,
+       "joint_speed_dps": [
+        -0.3,
+        -0.0,
+        -0.0,
+        0.3,
+        0.2,
+        0.2
+       ],
+       "arm_speed_dps": 1.1,
+       "twist_deg": 3.328181073782681
+      },
+      {
+       "frame": 0,
+       "t_s": 0.0,
+       "pose": [
+        30.0,
+        4.0,
+        -30.0,
+        15.0
+       ],
+       "moment_gh_Nm": 0.055,
+       "moment_gh_axial_Nm": 0.015,
+       "force_N": 0.24454363644282248,
+       "amp_qs": 0.0,
+       "friction_qs_Nm": 0.0,
+       "cond_U": 5.0,
+       "joint_speed_dps": [
+        0.0,
+        0.0,
+        -0.0,
+        -0.0,
+        0.0,
+        0.0
+       ],
+       "arm_speed_dps": 0.0,
+       "twist_deg": 0.4946747199684189
+      }
+     ],
+     "slaved": {
+      "K": {
+       "law_err_deg": 0.126,
+       "law_err_driven_deg": 0.126,
+       "plan_err_deg": 5.414,
+       "driven_share": 0.155,
+       "liftoff_share_of_driven": 0.0,
+       "lift_max_deg": 0.0,
+       "drive_torque_peak_Nm": 0.0326,
+       "driver_reaction_peak_Nm": 0.0702,
+       "closure": "force"
+      }
+     },
+     "on_limit_share": {
+      "K": 1.0,
+      "J2": 0.0
+     },
+     "joints": [
+      "J1",
+      "K",
+      "J2",
+      "J3",
+      "pin a",
+      "pin b"
+     ],
+     "load_friction": {
+      "mu_eff": 0.005,
+      "tau0_Nm": 0.001,
+      "tilt_ref": "hub",
+      "tilt_peak_Nm": [
+       0.133,
+       0.147,
+       0.117,
+       0.103,
+       0.102,
+       0.101
+      ],
+      "friction_peak_Nm": [
+       0.002,
+       0.002,
+       0.002,
+       0.002,
+       0.002,
+       0.002
+      ]
+     }
+    },
+    "Reach a high shelf": {
+     "duration_s": 5.2,
+     "held_share": 0.0,
+     "force_N": {
+      "peak": 0.6538543107737026,
+      "rms": 0.2575782821661451
+     },
+     "cuff_pressure_kPa": {
+      "peak": 0.096,
+      "rms": 0.038,
+      "axial_shear_peak": 0.311
+     },
+     "moment_cuff_Nm": {
+      "peak": 0.138,
+      "rms": 0.1,
+      "axial_peak": 0.133
+     },
+     "moment_gh_Nm": {
+      "peak": 0.145,
+      "rms": 0.107,
+      "perp_peak": 0.145,
+      "axial_peak": 0.133
+     },
+     "joint_speed_dps": [
+      68.1,
+      52.2,
+      59.9,
+      132.2,
+      53.7,
+      56.2
+     ],
+     "arm_speed_dps": 136.5,
+     "speed_ratio_max": 1.4609155760597876,
+     "joint_acc_dps2": [
+      10183,
+      10943,
+      11510,
+      9331,
+      3437,
+      3869
+     ],
+     "tracking_deg": {
+      "peak": 4.435437955715836,
+      "rms": 3.186663710953915,
+      "twist_peak": 4.431441851531282,
+      "swing_peak": 0.19326044687010827
+     },
+     "gate_raw": {
+      "twist_peak_deg": 4.431441851531282,
+      "moment_gh_peak_Nm": 0.14492704719751046,
+      "moment_gh_rms_Nm": 0.10696763049824846,
+      "force_peak_N": 0.6538543107737026
+     },
+     "config_dev_deg": [
+      8.844441481909199,
+      6.723665689944174,
+      3.1085411807067267,
+      2.8434468505671395,
+      1.5112207933243393,
+      1.7990360045848408
+     ],
+     "amp_qs": {
+      "p95": 4.353843145626396,
+      "max": 4.627692237904914
+     },
+     "cond_U_max": 5.0,
+     "stalls": {
+      "events": 4,
+      "lags_over_10deg": 0,
+      "worst_ms": 121,
+      "worst_missed_deg": 4.7,
+      "list": [
+       {
+        "joint": "K",
+        "frame": 29,
+        "ms": 121,
+        "missed_deg": 4.7,
+        "kind": "lag-stuck"
+       },
+       {
+        "joint": "K",
+        "frame": 126,
+        "ms": 108,
+        "missed_deg": 4.3,
+        "kind": "lag-stuck"
+       },
+       {
+        "joint": "J2",
+        "frame": 126,
+        "ms": 114,
+        "missed_deg": 3.4,
+        "kind": "lag-stuck"
+       },
+       {
+        "joint": "J2",
+        "frame": 30,
+        "ms": 74,
+        "missed_deg": 1.5,
+        "kind": "lag-stuck"
+       }
+      ]
+     },
+     "drive": {
+      "frames_over_felt": 0.0,
+      "frames_over_lock": 0.0,
+      "first_lock_frame": null,
+      "drives": true
+     },
+     "contact": {
+      "touch": false,
+      "peak_N": 0.0,
+      "time_s": 0.0,
+      "pairs": {},
+      "min_gap_mm": null,
+      "planned_overlap_mm": {},
+      "adjacent_pairs_checked": 0
+     },
+     "worst": [
+      {
+       "frame": 147,
+       "t_s": 4.908,
+       "pose": [
+        60.8,
+        8.5,
+        -60.8,
+        34.0
+       ],
+       "moment_gh_Nm": 0.145,
+       "moment_gh_axial_Nm": 0.01,
+       "force_N": 0.6538543107737026,
+       "amp_qs": 0.9085448212412667,
+       "friction_qs_Nm": 0.001,
+       "cond_U": 5.0,
+       "joint_speed_dps": [
+        -29.4,
+        8.6,
+        0.4,
+        -52.2,
+        10.8,
+        -0.0
+       ],
+       "arm_speed_dps": 38.0,
+       "twist_deg": 0.014845887711028311
+      },
+      {
+       "frame": 72,
+       "t_s": 2.399,
+       "pose": [
+        82.0,
+        131.6,
+        -82.0,
+        6.3
+       ],
+       "moment_gh_Nm": 0.136,
+       "moment_gh_axial_Nm": 0.133,
+       "force_N": 0.15639321180753243,
+       "amp_qs": 4.364413465640604,
+       "friction_qs_Nm": 0.004,
+       "cond_U": 4.7,
+       "joint_speed_dps": [
+        -2.9,
+        2.5,
+        -1.2,
+        5.6,
+        3.2,
+        3.2
+       ],
+       "arm_speed_dps": 7.3,
+       "twist_deg": 4.429304538479347
+      },
+      {
+       "frame": 81,
+       "t_s": 2.707,
+       "pose": [
+        82.0,
+        132.0,
+        -82.0,
+        6.0
+       ],
+       "moment_gh_Nm": 0.134,
+       "moment_gh_axial_Nm": 0.132,
+       "force_N": 0.1741502390845678,
+       "amp_qs": 0.0,
+       "friction_qs_Nm": 0.0,
+       "cond_U": 4.7,
+       "joint_speed_dps": [
+        -0.0,
+        0.0,
+        -0.0,
+        0.0,
+        0.0,
+        0.0
+       ],
+       "arm_speed_dps": 0.0,
+       "twist_deg": 4.410169078908277
+      }
+     ],
+     "slaved": {
+      "K": {
+       "law_err_deg": 0.111,
+       "law_err_driven_deg": 0.111,
+       "plan_err_deg": 6.724,
+       "driven_share": 0.752,
+       "liftoff_share_of_driven": 0.0,
+       "lift_max_deg": 0.0,
+       "drive_torque_peak_Nm": 0.0349,
+       "driver_reaction_peak_Nm": 0.0752,
+       "closure": "force"
+      }
+     },
+     "on_limit_share": {
+      "K": 0.293,
+      "J2": 0.0
+     },
+     "joints": [
+      "J1",
+      "K",
+      "J2",
+      "J3",
+      "pin a",
+      "pin b"
+     ],
+     "load_friction": {
+      "mu_eff": 0.005,
+      "tau0_Nm": 0.001,
+      "tilt_ref": "hub",
+      "tilt_peak_Nm": [
+       0.183,
+       0.195,
+       0.148,
+       0.137,
+       0.136,
+       0.135
+      ],
+      "friction_peak_Nm": [
+       0.002,
+       0.002,
+       0.002,
+       0.002,
+       0.002,
+       0.002
+      ]
+     }
+    },
+    "Wash opposite shoulder": {
+     "duration_s": 6.4,
+     "held_share": 0.0,
+     "force_N": {
+      "peak": 0.6703494382800104,
+      "rms": 0.40382911404653293
+     },
+     "cuff_pressure_kPa": {
+      "peak": 0.099,
+      "rms": 0.059,
+      "axial_shear_peak": 0.169
+     },
+     "moment_cuff_Nm": {
+      "peak": 0.076,
+      "rms": 0.042,
+      "axial_peak": 0.073
+     },
+     "moment_gh_Nm": {
+      "peak": 0.148,
+      "rms": 0.093,
+      "perp_peak": 0.148,
+      "axial_peak": 0.073
+     },
+     "joint_speed_dps": [
+      131.1,
+      58.9,
+      56.6,
+      95.2,
+      18.1,
+      22.5
+     ],
+     "arm_speed_dps": 128.4,
+     "speed_ratio_max": 2.3776327974863776,
+     "joint_acc_dps2": [
+      4010,
+      6487,
+      9829,
+      8627,
+      1987,
+      340
+     ],
+     "tracking_deg": {
+      "peak": 2.407730291287075,
+      "rms": 1.302163521561096,
+      "twist_peak": 2.405279282970574,
+      "swing_peak": 0.12922850258031462
+     },
+     "gate_raw": {
+      "twist_peak_deg": 2.405279282970574,
+      "moment_gh_peak_Nm": 0.14785453140236274,
+      "moment_gh_rms_Nm": 0.09280576088674676,
+      "force_peak_N": 0.6703494382800104
+     },
+     "config_dev_deg": [
+      1.6238889886807717,
+      2.851558047906497,
+      1.3093133769307597,
+      1.0001973722307445,
+      0.37526727439453583,
+      0.3945753844436923
+     ],
+     "amp_qs": {
+      "p95": 4.361104796257736,
+      "max": 4.464775546574047
+     },
+     "cond_U_max": 5.0,
+     "stalls": {
+      "events": 2,
+      "lags_over_10deg": 0,
+      "worst_ms": 70,
+      "worst_missed_deg": 1.5,
+      "list": [
+       {
+        "joint": "K",
+        "frame": 155,
+        "ms": 65,
+        "missed_deg": 1.5,
+        "kind": "lag-stuck"
+       },
+       {
+        "joint": "J2",
+        "frame": 155,
+        "ms": 70,
+        "missed_deg": 1.3,
+        "kind": "lag-stuck"
+       }
+      ]
+     },
+     "drive": {
+      "frames_over_felt": 0.0,
+      "frames_over_lock": 0.0,
+      "first_lock_frame": null,
+      "drives": true
+     },
+     "contact": {
+      "touch": false,
+      "peak_N": 0.0,
+      "time_s": 0.0,
+      "pairs": {},
+      "min_gap_mm": null,
+      "planned_overlap_mm": {},
+      "adjacent_pairs_checked": 0
+     },
+     "worst": [
+      {
+       "frame": 34,
+       "t_s": 1.147,
+       "pose": [
+        97.5,
+        23.5,
+        -66.3,
+        93.2
+       ],
+       "moment_gh_Nm": 0.148,
+       "moment_gh_axial_Nm": 0.004,
+       "force_N": 0.6703494382800104,
+       "amp_qs": 3.9642056904372684,
+       "friction_qs_Nm": 0.004,
+       "cond_U": 5.0,
+       "joint_speed_dps": [
+        -101.0,
+        32.3,
+        -7.7,
+        -3.2,
+        3.2,
+        3.2
+       ],
+       "arm_speed_dps": 51.7,
+       "twist_deg": 0.1563108974553806
+      },
+      {
+       "frame": 105,
+       "t_s": 3.506,
+       "pose": [
+        140.1,
+        59.3,
+        -50.7,
+        114.1
+       ],
+       "moment_gh_Nm": 0.133,
+       "moment_gh_axial_Nm": 0.071,
+       "force_N": 0.5179926594510994,
+       "amp_qs": 3.931258332460634,
+       "friction_qs_Nm": 0.004,
+       "cond_U": 4.9,
+       "joint_speed_dps": [
+        -13.2,
+        12.1,
+        -5.6,
+        -5.0,
+        0.0,
+        0.0
+       ],
+       "arm_speed_dps": 11.7,
+       "twist_deg": 2.3597738353346114
+      },
+      {
+       "frame": 78,
+       "t_s": 2.605,
+       "pose": [
+        144.7,
+        45.9,
+        -69.5,
+        119.1
+       ],
+       "moment_gh_Nm": 0.125,
+       "moment_gh_axial_Nm": 0.05,
+       "force_N": 0.5346256298086156,
+       "amp_qs": 4.386444380309606,
+       "friction_qs_Nm": 0.004,
+       "cond_U": 4.7,
+       "joint_speed_dps": [
+        -6.3,
+        1.1,
+        -0.5,
+        3.6,
+        0.9,
+        0.9
+       ],
+       "arm_speed_dps": 6.3,
+       "twist_deg": 1.6643777662579258
+      }
+     ],
+     "slaved": {
+      "K": {
+       "law_err_deg": 0.113,
+       "law_err_driven_deg": 0.113,
+       "plan_err_deg": 2.852,
+       "driven_share": 0.663,
+       "liftoff_share_of_driven": 0.0,
+       "lift_max_deg": 0.0,
+       "drive_torque_peak_Nm": 0.0374,
+       "driver_reaction_peak_Nm": 0.0805,
+       "closure": "force"
+      }
+     },
+     "on_limit_share": {
+      "K": 0.373,
+      "J2": 0.0
+     },
+     "joints": [
+      "J1",
+      "K",
+      "J2",
+      "J3",
+      "pin a",
+      "pin b"
+     ],
+     "load_friction": {
+      "mu_eff": 0.005,
+      "tau0_Nm": 0.001,
+      "tilt_ref": "hub",
+      "tilt_peak_Nm": [
+       0.211,
+       0.229,
+       0.181,
+       0.136,
+       0.09,
+       0.085
+      ],
+      "friction_peak_Nm": [
+       0.002,
+       0.002,
+       0.002,
+       0.002,
+       0.001,
+       0.001
+      ]
+     }
+    },
+    "Reach back pocket": {
+     "duration_s": 4.8,
+     "held_share": 0.0,
+     "force_N": {
+      "peak": 0.4567501440599944,
+      "rms": 0.2710774928494769
+     },
+     "cuff_pressure_kPa": {
+      "peak": 0.067,
+      "rms": 0.04,
+      "axial_shear_peak": 0.216
+     },
+     "moment_cuff_Nm": {
+      "peak": 0.096,
+      "rms": 0.052,
+      "axial_peak": 0.093
+     },
+     "moment_gh_Nm": {
+      "peak": 0.126,
+      "rms": 0.073,
+      "perp_peak": 0.087,
+      "axial_peak": 0.093
+     },
+     "joint_speed_dps": [
+      107.0,
+      70.6,
+      119.2,
+      88.2,
+      33.3,
+      26.6
+     ],
+     "arm_speed_dps": 69.6,
+     "speed_ratio_max": 2.87940789775005,
+     "joint_acc_dps2": [
+      24833,
+      15122,
+      10925,
+      8670,
+      4395,
+      3076
+     ],
+     "tracking_deg": {
+      "peak": 3.0240108451714494,
+      "rms": 1.6182551419432178,
+      "twist_peak": 3.0213752005863452,
+      "swing_peak": 0.15929049636087936
+     },
+     "gate_raw": {
+      "twist_peak_deg": 3.0213752005863452,
+      "moment_gh_peak_Nm": 0.12646934911964153,
+      "moment_gh_rms_Nm": 0.07252989291458212,
+      "force_peak_N": 0.4567501440599944
+     },
+     "config_dev_deg": [
+      6.632603744690899,
+      3.597491145209632,
+      1.8718675136348986,
+      1.4090434138484722,
+      0.8388036927453735,
+      0.4653204245055569
+     ],
+     "amp_qs": {
+      "p95": 3.910375616466349,
+      "max": 4.280831476558122
+     },
+     "cond_U_max": 5.0,
+     "stalls": {
+      "events": 4,
+      "lags_over_10deg": 0,
+      "worst_ms": 102,
+      "worst_missed_deg": 7.1,
+      "list": [
+       {
+        "joint": "J1",
+        "frame": 56,
+        "ms": 102,
+        "missed_deg": 7.1,
+        "kind": "lag-reversal"
+       },
+       {
+        "joint": "K",
+        "frame": 57,
+        "ms": 73,
+        "missed_deg": 3.0,
+        "kind": "lag-stuck"
+       },
+       {
+        "joint": "J2",
+        "frame": 56,
+        "ms": 90,
+        "missed_deg": 2.2,
+        "kind": "lag-stuck"
+       },
+       {
+        "joint": "K",
+        "frame": 110,
+        "ms": 56,
+        "missed_deg": 2.0,
+        "kind": "lag-stuck"
+       }
+      ]
+     },
+     "drive": {
+      "frames_over_felt": 0.0,
+      "frames_over_lock": 0.0,
+      "first_lock_frame": null,
+      "drives": true
+     },
+     "contact": {
+      "touch": false,
+      "peak_N": 0.0,
+      "time_s": 0.0,
+      "pairs": {},
+      "min_gap_mm": null,
+      "planned_overlap_mm": {},
+      "adjacent_pairs_checked": 0
+     },
+     "worst": [
+      {
+       "frame": 60,
+       "t_s": 1.991,
+       "pose": [
+        -75.0,
+        39.5,
+        92.2,
+        73.0
+       ],
+       "moment_gh_Nm": 0.126,
+       "moment_gh_axial_Nm": 0.092,
+       "force_N": 0.4541884083643746,
+       "amp_qs": 3.9608125045798057,
+       "friction_qs_Nm": 0.004,
+       "cond_U": 5.0,
+       "joint_speed_dps": [
+        -24.3,
+        24.6,
+        -11.4,
+        -0.0,
+        -1.2,
+        0.0
+       ],
+       "arm_speed_dps": 28.6,
+       "twist_deg": 2.858540774015365
+      },
+      {
+       "frame": 70,
+       "t_s": 2.336,
+       "pose": [
+        -79.9,
+        39.0,
+        100.9,
+        69.3
+       ],
+       "moment_gh_Nm": 0.113,
+       "moment_gh_axial_Nm": 0.081,
+       "force_N": 0.37149853453630066,
+       "amp_qs": 4.239726577945487,
+       "friction_qs_Nm": 0.004,
+       "cond_U": 4.7,
+       "joint_speed_dps": [
+        -3.4,
+        2.8,
+        -1.3,
+        0.0,
+        0.4,
+        0.0
+       ],
+       "arm_speed_dps": 2.4,
+       "twist_deg": 2.7004939416852545
+      },
+      {
+       "frame": 79,
+       "t_s": 2.649,
+       "pose": [
+        -80.0,
+        39.0,
+        101.1,
+        69.2
+       ],
+       "moment_gh_Nm": 0.112,
+       "moment_gh_axial_Nm": 0.081,
+       "force_N": 0.3723167825101515,
+       "amp_qs": 0.0,
+       "friction_qs_Nm": 0.0,
+       "cond_U": 4.7,
+       "joint_speed_dps": [
+        -0.0,
+        0.0,
+        -0.0,
+        0.0,
+        0.0,
+        -0.0
+       ],
+       "arm_speed_dps": 0.0,
+       "twist_deg": 2.6880607931878893
+      }
+     ],
+     "slaved": {
+      "K": {
+       "law_err_deg": 0.104,
+       "law_err_driven_deg": 0.104,
+       "plan_err_deg": 3.597,
+       "driven_share": 0.375,
+       "liftoff_share_of_driven": 0.0,
+       "lift_max_deg": 0.0,
+       "drive_torque_peak_Nm": 0.0351,
+       "driver_reaction_peak_Nm": 0.0755,
+       "closure": "force"
+      }
+     },
+     "on_limit_share": {
+      "K": 0.646,
+      "J2": 0.0
+     },
+     "joints": [
+      "J1",
+      "K",
+      "J2",
+      "J3",
+      "pin a",
+      "pin b"
+     ],
+     "load_friction": {
+      "mu_eff": 0.005,
+      "tau0_Nm": 0.001,
+      "tilt_ref": "hub",
+      "tilt_peak_Nm": [
+       0.18,
+       0.184,
+       0.153,
+       0.123,
+       0.103,
+       0.112
+      ],
+      "friction_peak_Nm": [
+       0.002,
+       0.002,
+       0.002,
+       0.002,
+       0.002,
+       0.002
+      ]
+     }
+    },
+    "Wave": {
+     "duration_s": 5.7,
+     "held_share": 0.0,
+     "force_N": {
+      "peak": 0.24342634324630777,
+      "rms": 0.17721206376618018
+     },
+     "cuff_pressure_kPa": {
+      "peak": 0.036,
+      "rms": 0.026,
+      "axial_shear_peak": 0.12
+     },
+     "moment_cuff_Nm": {
+      "peak": 0.051,
+      "rms": 0.026,
+      "axial_peak": 0.051
+     },
+     "moment_gh_Nm": {
+      "peak": 0.057,
+      "rms": 0.039,
+      "perp_peak": 0.049,
+      "axial_peak": 0.051
+     },
+     "joint_speed_dps": [
+      155.3,
+      0.1,
+      283.0,
+      126.0,
+      56.4,
+      65.8
+     ],
+     "arm_speed_dps": 181.9,
+     "speed_ratio_max": 2.0438523090663425,
+     "joint_acc_dps2": [
+      2483,
+      13,
+      4387,
+      1997,
+      1383,
+      1486
+     ],
+     "tracking_deg": {
+      "peak": 1.6458102778571546,
+      "rms": 0.8613459626025114,
+      "twist_peak": 1.645731879705413,
+      "swing_peak": 0.035365132298109794
+     },
+     "gate_raw": {
+      "twist_peak_deg": 1.645731879705413,
+      "moment_gh_peak_Nm": 0.05702448217745927,
+      "moment_gh_rms_Nm": 0.039292943273988724,
+      "force_peak_N": 0.24342634324630777
+     },
+     "config_dev_deg": [
+      2.9653202177622227,
+      0.042430376689356154,
+      5.266103880518862,
+      2.3336287385344043,
+      1.2227483512487909,
+      1.3335688376162556
+     ],
+     "amp_qs": {
+      "p95": 3.711058069374734,
+      "max": 4.085693523944397
+     },
+     "cond_U_max": 4.9,
+     "stalls": {
+      "events": 0,
+      "lags_over_10deg": 0,
+      "worst_ms": 0,
+      "worst_missed_deg": 0.0,
+      "list": []
+     },
+     "drive": {
+      "frames_over_felt": 0.0,
+      "frames_over_lock": 0.0,
+      "first_lock_frame": null,
+      "drives": true
+     },
+     "contact": {
+      "touch": false,
+      "peak_N": 0.0,
+      "time_s": 0.0,
+      "pairs": {},
+      "min_gap_mm": null,
+      "planned_overlap_mm": {},
+      "adjacent_pairs_checked": 0
+     },
+     "worst": [
+      {
+       "frame": 67,
+       "t_s": 2.227,
+       "pose": [
+        15.0,
+        94.3,
+        -71.8,
+        95.0
+       ],
+       "moment_gh_Nm": 0.057,
+       "moment_gh_axial_Nm": 0.051,
+       "force_N": 0.1617723317309194,
+       "amp_qs": 3.2424166393370273,
+       "friction_qs_Nm": 0.003,
+       "cond_U": 4.4,
+       "joint_speed_dps": [
+        99.5,
+        -0.0,
+        170.2,
+        -82.4,
+        -38.8,
+        -44.4
+       ],
+       "arm_speed_dps": 113.8,
+       "twist_deg": 1.5972891267793474
+      },
+      {
+       "frame": 91,
+       "t_s": 3.027,
+       "pose": [
+        15.0,
+        94.3,
+        -71.8,
+        95.0
+       ],
+       "moment_gh_Nm": 0.057,
+       "moment_gh_axial_Nm": 0.051,
+       "force_N": 0.16169666523401843,
+       "amp_qs": 3.2424559779875,
+       "friction_qs_Nm": 0.003,
+       "cond_U": 4.4,
+       "joint_speed_dps": [
+        99.7,
+        -0.0,
+        170.5,
+        -82.5,
+        -38.9,
+        -44.4
+       ],
+       "arm_speed_dps": 113.8,
+       "twist_deg": 1.5983940496743982
+      },
+      {
+       "frame": 115,
+       "t_s": 3.828,
+       "pose": [
+        15.0,
+        94.3,
+        -75.3,
+        95.0
+       ],
+       "moment_gh_Nm": 0.051,
+       "moment_gh_axial_Nm": 0.046,
+       "force_N": 0.14694896203436597,
+       "amp_qs": 3.3260822345760492,
+       "friction_qs_Nm": 0.003,
+       "cond_U": 4.5,
+       "joint_speed_dps": [
+        59.5,
+        -0.0,
+        99.6,
+        -52.1,
+        -25.1,
+        -28.3
+       ],
+       "arm_speed_dps": 66.6,
+       "twist_deg": 1.4682757254196128
+      }
+     ],
+     "slaved": {
+      "K": {
+       "law_err_deg": 0.042,
+       "law_err_driven_deg": 0.0,
+       "plan_err_deg": 0.042,
+       "driven_share": 0.0,
+       "liftoff_share_of_driven": 0.0,
+       "lift_max_deg": 0.0,
+       "drive_torque_peak_Nm": 0.0,
+       "driver_reaction_peak_Nm": 0.0,
+       "closure": "force"
+      }
+     },
+     "on_limit_share": {
+      "K": 1.0,
+      "J2": 0.0
+     },
+     "joints": [
+      "J1",
+      "K",
+      "J2",
+      "J3",
+      "pin a",
+      "pin b"
+     ],
+     "load_friction": {
+      "mu_eff": 0.005,
+      "tau0_Nm": 0.001,
+      "tilt_ref": "hub",
+      "tilt_peak_Nm": [
+       0.038,
+       0.06,
+       0.072,
+       0.051,
+       0.052,
+       0.052
+      ],
+      "friction_peak_Nm": [
+       0.001,
+       0.001,
+       0.001,
+       0.001,
+       0.001,
+       0.001
+      ]
+     }
+    },
+    "Walking arm swing": {
+     "duration_s": 3.6000000000000005,
+     "held_share": 0.0,
+     "force_N": {
+      "peak": 0.5541315986892895,
+      "rms": 0.48331384848641
+     },
+     "cuff_pressure_kPa": {
+      "peak": 0.081,
+      "rms": 0.071,
+      "axial_shear_peak": 0.115
+     },
+     "moment_cuff_Nm": {
+      "peak": 0.052,
+      "rms": 0.039,
+      "axial_peak": 0.049
+     },
+     "moment_gh_Nm": {
+      "peak": 0.119,
+      "rms": 0.108,
+      "perp_peak": 0.116,
+      "axial_peak": 0.049
+     },
+     "joint_speed_dps": [
+      29.3,
+      15.6,
+      7.2,
+      61.2,
+      2.6,
+      8.7
+     ],
+     "arm_speed_dps": 65.8,
+     "speed_ratio_max": 1.0105911450778722,
+     "joint_acc_dps2": [
+      574,
+      538,
+      248,
+      899,
+      329,
+      343
+     ],
+     "tracking_deg": {
+      "peak": 1.6308742454689615,
+      "rms": 1.2080342942068907,
+      "twist_peak": 1.6289958070210164,
+      "swing_peak": 0.08919057084494336
+     },
+     "gate_raw": {
+      "twist_peak_deg": 1.6289958070210164,
+      "moment_gh_peak_Nm": 0.11866022782659522,
+      "moment_gh_rms_Nm": 0.10767735133600502,
+      "force_peak_N": 0.5541315986892895
+     },
+     "config_dev_deg": [
+      0.774761817561386,
+      1.040911073990049,
+      0.4690220175919341,
+      0.8494214997080034,
+      0.40396748137995925,
+      0.2638943945064753
+     ],
+     "amp_qs": {
+      "p95": 4.240676045787593,
+      "max": 4.243435057439802
+     },
+     "cond_U_max": 4.8,
+     "stalls": {
+      "events": 0,
+      "lags_over_10deg": 0,
+      "worst_ms": 0,
+      "worst_missed_deg": 0.0,
+      "list": []
+     },
+     "drive": {
+      "frames_over_felt": 0.0,
+      "frames_over_lock": 0.0,
+      "first_lock_frame": null,
+      "drives": true
+     },
+     "contact": {
+      "touch": false,
+      "peak_N": 0.0,
+      "time_s": 0.0,
+      "pairs": {},
+      "min_gap_mm": null,
+      "planned_overlap_mm": {},
+      "adjacent_pairs_checked": 0
+     },
+     "worst": [
+      {
+       "frame": 75,
+       "t_s": 2.504,
+       "pose": [
+        90.0,
+        4.7,
+        -90.0,
+        18.5
+       ],
+       "moment_gh_Nm": 0.119,
+       "moment_gh_axial_Nm": 0.023,
+       "force_N": 0.554070253121701,
+       "amp_qs": 4.243154307420589,
+       "friction_qs_Nm": 0.004,
+       "cond_U": 4.8,
+       "joint_speed_dps": [
+        -5.2,
+        2.0,
+        -0.9,
+        12.8,
+        -0.0,
+        -0.0
+       ],
+       "arm_speed_dps": 14.8,
+       "twist_deg": 0.7734634589148774
+      },
+      {
+       "frame": 39,
+       "t_s": 1.304,
+       "pose": [
+        90.0,
+        4.7,
+        -90.0,
+        18.5
+       ],
+       "moment_gh_Nm": 0.119,
+       "moment_gh_axial_Nm": 0.023,
+       "force_N": 0.5540702531216221,
+       "amp_qs": 4.243154307420589,
+       "friction_qs_Nm": 0.004,
+       "cond_U": 4.8,
+       "joint_speed_dps": [
+        -5.2,
+        2.0,
+        -0.9,
+        12.8,
+        -0.0,
+        -0.0
+       ],
+       "arm_speed_dps": 14.8,
+       "twist_deg": 0.7734634589148847
+      },
+      {
+       "frame": 3,
+       "t_s": 0.104,
+       "pose": [
+        90.0,
+        4.7,
+        -90.0,
+        18.5
+       ],
+       "moment_gh_Nm": 0.119,
+       "moment_gh_axial_Nm": 0.023,
+       "force_N": 0.5437324363673152,
+       "amp_qs": 4.243144462754188,
+       "friction_qs_Nm": 0.004,
+       "cond_U": 4.8,
+       "joint_speed_dps": [
+        -5.1,
+        2.0,
+        -0.9,
+        12.8,
+        -0.0,
+        0.0
+       ],
+       "arm_speed_dps": 14.8,
+       "twist_deg": 0.7734930542394054
+      }
+     ],
+     "slaved": {
+      "K": {
+       "law_err_deg": 0.032,
+       "law_err_driven_deg": 0.032,
+       "plan_err_deg": 1.041,
+       "driven_share": 1.0,
+       "liftoff_share_of_driven": 0.0,
+       "lift_max_deg": 0.0,
+       "drive_torque_peak_Nm": 0.0315,
+       "driver_reaction_peak_Nm": 0.0678,
+       "closure": "force"
+      }
+     },
+     "on_limit_share": {
+      "K": 0.0,
+      "J2": 0.0
+     },
+     "joints": [
+      "J1",
+      "K",
+      "J2",
+      "J3",
+      "pin a",
+      "pin b"
+     ],
+     "load_friction": {
+      "mu_eff": 0.005,
+      "tau0_Nm": 0.001,
+      "tilt_ref": "hub",
+      "tilt_peak_Nm": [
+       0.163,
+       0.167,
+       0.124,
+       0.093,
+       0.057,
+       0.055
+      ],
+      "friction_peak_Nm": [
+       0.002,
+       0.002,
+       0.002,
+       0.001,
+       0.001,
+       0.001
+      ]
+     }
+    }
+   },
+   "worst_clip": "Wash opposite shoulder",
+   "force_peak_N": 0.6703494382800104,
+   "force_rms_max_N": 0.48331384848641,
+   "moment_gh_peak_Nm": 0.148,
+   "moment_gh_rms_max_Nm": 0.108,
+   "moment_cuff_peak_Nm": 0.138,
+   "twist_peak_deg": 4.431441851531282,
+   "tracking_peak_deg": 4.435437955715836,
+   "joint_speed_peak_dps": 283.0,
+   "speed_ratio_max": 3.2466858229663234,
+   "joint_acc_peak_dps2": 24833,
+   "stall_events": 27,
+   "lags_over_10deg": 0,
+   "worst_missed_deg": 8.1,
+   "lock_clips": [],
+   "frames_over_lock_max": 0.0,
+   "frames_over_felt_max": 0.0,
+   "contact_touch": false,
+   "cuff_pressure_peak_kPa": 0.099,
+   "contact_peak_N": 0.0,
+   "amp_qs_max": 4.627692237904914,
+   "gate_raw": {
+    "twist_peak_deg": 4.431441851531282,
+    "moment_gh_peak_Nm": 0.14785453140236274,
+    "moment_gh_rms_Nm": 0.10767735133600502,
+    "force_peak_N": 0.6703494382800104
+   },
+   "slaved_law_err_max_deg": 0.126,
+   "slaved_liftoff_share_max": 0.0,
+   "slaved_plan_err_max_deg": 6.724,
+   "slaved_drive_torque_peak_Nm": 0.0374,
+   "friction_peak_Nm": 0.002,
+   "tilt_peak_Nm": 0.229
+  }
+ },
+ "errors": [],
+ "chain": {
+  "kind": "general serial chain from the clips' own member frames (dynamics-2026-10-16): base -> l1a -> l1b -> l2 -> l3 -> l4 -> arm",
+  "joints": [
+   "J1",
+   "K",
+   "J2",
+   "J3",
+   "pin a",
+   "pin b"
+  ],
+  "hinge_fit": {
+   "base-l1a": {
+    "rot_residual_deg": 0.0001,
+    "point_residual_mm": 0.0,
+    "axis_child": [
+     -0.035363,
+     -0.926512,
+     -0.374601
+    ],
+    "point_child_mm": [
+     1.878,
+     49.212,
+     19.897
+    ],
+    "travel_deg": [
+     -107.55654988519444,
+     98.34648468361914
+    ]
+   },
+   "l1a-l1b": {
+    "rot_residual_deg": 0.0001,
+    "point_residual_mm": 0.0,
+    "axis_child": [
+     0.314412,
+     -0.944796,
+     -0.092227
+    ],
+    "point_child_mm": [
+     -20.949,
+     62.952,
+     6.145
+    ],
+    "travel_deg": [
+     -1.507418614931875,
+     27.80230430587842
+    ]
+   },
+   "l1b-l2": {
+    "rot_residual_deg": 0.0001,
+    "point_residual_mm": 0.0,
+    "axis_child": [
+     -0.465446,
+     0.616819,
+     0.63474
+    ],
+    "point_child_mm": [
+     -32.99,
+     43.718,
+     44.989
+    ],
+    "travel_deg": [
+     -12.910897981328187,
+     73.60056620251888
+    ]
+   },
+   "l2-l3": {
+    "rot_residual_deg": 0.0001,
+    "point_residual_mm": 0.0002,
+    "axis_child": [
+     -0.139116,
+     -0.220619,
+     0.965388
+    ],
+    "point_child_mm": [
+     -12.149,
+     -31.541,
+     75.998
+    ],
+    "travel_deg": [
+     -59.165200615109555,
+     104.65046660921315
+    ]
+   },
+   "l3-l4": {
+    "rot_residual_deg": 0.0001,
+    "point_residual_mm": 0.0003,
+    "axis_child": [
+     -0.139115,
+     -0.22062,
+     0.965388
+    ],
+    "point_child_mm": [
+     -8.572,
+     -117.249,
+     68.272
+    ],
+    "travel_deg": [
+     -0.5892108281487916,
+     31.94434617802456
+    ]
+   },
+   "l4-cuff": {
+    "rot_residual_deg": 0.0,
+    "point_residual_mm": 0.0001,
+    "axis_child": [
+     0.139115,
+     0.22062,
+     -0.965388
+    ],
+    "point_child_mm": [
+     -33.083,
+     -117.13,
+     67.72
+    ],
+    "travel_deg": [
+     -0.02954716940223583,
+     41.39495134979123
+    ]
+   }
+  },
+  "limits_deg": {
+   "K": [
+    -1.507,
+    61.342
+   ],
+   "J2": [
+    -22.519,
+    95.489
+   ]
+  },
+  "springs": {
+   "K": {
+    "rate_Nm_per_rad": 0.016943409013893594,
+    "preload_Nm_at_stop_A": 0.0904,
+    "preload_source": "design.json build_fixes.spring.preload",
+    "rates_run": [
+     0.016943409013893594,
+     0.011295606009262398
+    ]
+   }
+  },
+  "knuckle": {
+   "joint": "K",
+   "sign_vs_dK": -1.0,
+   "stop_A_deg": -1.507,
+   "stop_B_deg": 61.342,
+   "frames_K_open": 459,
+   "fit_dK_max_err_deg": 0.0005
+  },
+  "q2_stops": {
+   "joint": "J2",
+   "slope": 1.000001,
+   "residual_deg": 0.0005
+  },
+  "spare_joints": [],
+  "slaved": [
+   {
+    "joint": "K",
+    "driver": "J2",
+    "closure": "force",
+    "law_rows": 234,
+    "law_x_judge_deg": [
+     -22.519,
+     0.7
+    ],
+    "law_y_judge_deg": [
+     -1.507,
+     48.492
+    ],
+    "rest_judge_deg": -1.507,
+    "push_sense": 1.0,
+    "x_map": {
+     "key": "q.1",
+     "slope": 1.000001,
+     "offset_deg": -6.5787,
+     "residual_deg": 0.0005
+    },
+    "y_map": {
+     "key": "knuckle.dK",
+     "slope": -0.999996,
+     "offset_deg": -1.5074,
+     "residual_deg": 0.0006,
+     "note": null
+    },
+    "law_vs_clips_max_err_deg": 0.0007,
+    "clip_frames_driven": 471,
+    "source": "build.json slaved"
+   }
+  ],
+  "drive_groups": {
+   "dk": {
+    "mount": "l1b",
+    "mass_g": 8.618438431073915,
+    "turns_on_mount_max_deg": 11.61622755622038,
+    "declared": true
+   }
+  },
+  "slaved_rule": "joint equality on the declared law's tangent, re-linearised every step; force closure = unilateral (on while the drive pushes); drive bodies lumped on their mount; drive bearing friction not modelled",
+  "arm_member": "the humerus (canonical frame at GH), joined to the last member by its hinge and to the bone by the soft-tissue cuff",
+  "contact": "member-member contact not modelled in the general chain (R6 judges part interference geometrically: 0.0 mm on these designs); stops are joint limits",
+  "notes": [
+   "the knee stop (149.5 deg) is not in the CAD and not modelled; the knee pins are free",
+   "joint friction on every hinge incl. K and the knee pins (rolling-bearing law; iglidur knee pins share it - an optimistic note for the plain-bearing pins, see the plain-bearing comparison cases)",
+   "bearing centre for the load-dependent friction = the hinge's anchor at the hub stack centre (not a point on a GH ray)"
+  ]
+ },
+ "verdict": {
+  "moves_freely_nominal": true,
+  "drives_nominal": true,
+  "rule": "moves freely: |M_GH| peak <= 1.0 N.m and rms <= 0.5, cuff force <= 5.0 N, cuff twist <= 5.0 deg, no stall missing >= 10.0 deg of planned joint travel, 4R spare drift <= 5.0 deg, a slaved joint within 5.0 deg of its law; drives: never |M_GH| > 10.0 N.m or cuff force > 150.0 N (ISO/TS 15066 upper arm)",
+  "nominal_case": "passive|mu0.005|t0.001|s1|hub",
+  "cuff_pressure_nominal_kPa": {
+   "peak": 0.099,
+   "budget_for_exo": 7.5,
+   "with_arm_parts_weight": 0.262
+  },
+  "per_case": {
+   "passive|mu0.005|t0.001|s1|hub": {
+    "moment_gh_peak_Nm": 0.148,
+    "force_peak_N": 0.6703776715833698,
+    "twist_peak_deg": 4.539896185152806,
+    "lags_over_10deg": 0,
+    "contact": false,
+    "spare_drift_deg": null,
+    "lock_clips": [],
+    "free": true,
+    "drives": true,
+    "slaved_law_err_deg": 0.126,
+    "slaved_liftoff_share": 0.0,
+    "cuff_pressure_peak_kPa": 0.099,
+    "within_pressure_budget": true,
+    "under_iso_15066": true
+   },
+   "passive|mu0.005|t0.001|s1|hub|krate0.0112956": {
+    "moment_gh_peak_Nm": 0.148,
+    "force_peak_N": 0.6703494382800104,
+    "twist_peak_deg": 4.431441851531282,
+    "lags_over_10deg": 0,
+    "contact": false,
+    "spare_drift_deg": null,
+    "lock_clips": [],
+    "free": true,
+    "drives": true,
+    "slaved_law_err_deg": 0.126,
+    "slaved_liftoff_share": 0.0,
+    "cuff_pressure_peak_kPa": 0.099,
+    "within_pressure_budget": true,
+    "under_iso_15066": true
+   }
+  }
+ }
+}
