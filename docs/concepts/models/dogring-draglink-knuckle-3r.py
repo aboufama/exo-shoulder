@@ -50,8 +50,8 @@ PA_GATE = 42.0; RATE_MAX = 3.45; RUNG = 0.15; EYE_R = 4.0; ARM_W = 6.0; DL_W = 6
 RING_RI, RING_RO = 10.2, 12.5
 
 # cell seeds: the judge's 34/46 (spec, arm along link 1b) and the beside-arm synthesis rows (arm on the far side of link 1b)
-SEED = dict(bk1=34.0, bk2=46.0, a1max=74.5, smhi=22.0, a1=30.22, t1=61.6, a3=14.53, t3=-9.98, root_off=-12.0,
-            ring_layer=0, hl=0.0, zr=0.0, dl_a=1, dl_h=1, sector_gap=0.5)
+SEED = dict(bk1=34.0, bk2=46.0, a1max=74.5, smhi=22.0, dr_a1=34.93, dr_t1=42.73, dr_a3=14.04, dr_t3=-22.57, root_off=-30.0,
+            ring_layer=0, dr_hl=0.0, dr_zr=0.0, dl_a=1, dl_h=1, dl_lift=0.0, sector_gap=0.5)
 PARAMS = dict(LS.PARAMS); PARAMS.update(SEED)
 for k_ in ("La", "r_h", "beta", "gam", "s_arm", "r_lobe", "kK", "kA", "kB"): PARAMS.pop(k_, None)
 PARAMS.update(La=20.0, r_h=15.0, beta=-112.0, gam=0.0, s_arm=4.0, r_lobe=7.5, kK=2.0)   # inert: the parent's clamp reads them
@@ -65,9 +65,9 @@ def _clamp(p):
     p["bk1"] = _c(p["bk1"], 26.0, 40.0); p["bk2"] = _c(p["bk2"], 38.0, 56.0)
     p["a1max"] = min(float(p.get("a1max", 99.0)), float(p["bk1"]) + float(p["bk2"]) - 5.5)
     p["smhi"] = _c(p["smhi"], 12.0, 28.0)
-    p["a1"] = _c(p["a1"], 20.0, 40.0); p["t1"] = _c(p["t1"], -90.0, 90.0); p["a3"] = _c(p["a3"], 12.0, 20.0)
-    p["t3"] = _c(p["t3"], -180.0, 180.0); p["root_off"] = _c(p.get("root_off", 0.0), -30.0, 30.0)
-    p["hl"] = _c(p.get("hl", 0.0), 0.0, 3.15); p["zr"] = _c(p.get("zr", 0.0), 0.0, 3.0)
+    p["dr_a1"] = _c(p["dr_a1"], 20.0, 40.0); p["dr_t1"] = _c(p["dr_t1"], -120.0, 120.0); p["dr_a3"] = _c(p["dr_a3"], 12.0, 20.0)
+    p["dr_t3"] = _c(p["dr_t3"], -180.0, 180.0); p["root_off"] = _c(p.get("root_off", 0.0), -60.0, 30.0)
+    p["dr_hl"] = _c(p.get("dr_hl", 0.0), 0.0, 9.0); p["dl_lift"] = _c(p.get("dl_lift", 0.0), 0.0, 8.0); p["dr_zr"] = _c(p.get("dr_zr", 0.0), 0.0, 3.0)
     p["ring_layer"] = int(round(_c(p.get("ring_layer", 0), 0, 1)))
     p["dl_a"] = 1 if float(p.get("dl_a", 1)) >= 0 else -1; p["dl_h"] = 1 if float(p.get("dl_h", 1)) >= 0 else -1
     p["sector_gap"] = _c(p.get("sector_gap", 0.5), 0.15, 3.0)
@@ -110,7 +110,7 @@ def dog4r(D):
     (PA <= 42, phi monotone in the push direction s_q, no branch jump)"""
     if getattr(D, "_dog", None) is not None: return D._dog
     P = D.p; u1, u2, u3 = D.u; uK = D.uK; sp = float(np.sign(D.psiA)) or 1.0
-    c1_0 = pin_dir(u2, uK, float(P["a1"]), float(P["t1"])); c2_0 = pin_dir(uK, u2, float(P["a3"]), float(P["t3"]))
+    c1_0 = pin_dir(u2, uK, float(P["dr_a1"]), float(P["dr_t1"])); c2_0 = pin_dir(uK, u2, float(P["dr_a3"]), float(P["dr_t3"]))
     res = solve4r(u2, uK, sp, c1_0, c2_0)
     sg = D.q2sgn; q2hi = D._q2_at(D.th_hi, sg)
 
@@ -233,7 +233,7 @@ class DRModel(LS.LSModel):
             dd = (np.arccos(np.clip(Dp @ L1bU.T, -1, 1)) * L1bN[None, :]).min(1).reshape(na, 4)
             beside &= dd.min(1) >= WOK
         jn = np.argmin(np.arccos(np.clip(Ca.reshape(-1, 3) @ L1bU.T, -1, 1)), axis=1); base = L1bN[jn]
-        lvl = np.where(beside, base + float(P["zr"]), base + S.T_LINK + RUNG)
+        lvl = np.where(beside, base + float(P["dr_zr"]), base + S.T_LINK + 1.0)   # stacked over link 1b: non-adjacent, 1 mm
         # near hub 2 the arm is the sector's own body (ring layer) - the root stays at zring out to r 14.5
         rr_ = np.array([math.sin(math.acos(max(-1, min(1, float(c @ u2))))) * 62.0 for c in Ca])
         lvl = np.where(rr_ <= 14.5, zring, lvl)
@@ -252,11 +252,11 @@ class DRModel(LS.LSModel):
                 sec.append(u2 * zring + rr * d)
         sec = np.array(sec); sec_mid = sec + 1.5 * u2
         # ---- horn on link 1a: from hub K's rim to r_h + EYE_R along c2's azimuth about uK, level fK + hl
-        lvK = fK + float(P["hl"]); ek = unit(c2_0 - (c2_0 @ uK) * uK); bk = unit(np.cross(uK, ek))
-        rh = float(lvK * math.tan(math.radians(float(P["a3"]))))
+        lvK = fK + float(P["dr_hl"]); ek = unit(c2_0 - (c2_0 @ uK) * uK); bk = unit(np.cross(uK, ek))
+        rh = float(lvK * math.tan(math.radians(float(P["dr_a3"]))))
         horn = np.array([uK * lvK + r_ * ek + w_ * bk for r_ in np.arange(S.HUB_R + 0.5, rh + EYE_R + 1e-6, 2.0) for w_ in (-3.0, -1.0, 1.0, 3.0)])
         # ---- drag link: eye over / under the arm tip and the horn, joggled strap between
-        la = lv_tip + float(P["dl_a"]) * (S.T_LINK + RUNG); lh = lvK + float(P["dl_h"]) * (S.T_LINK + RUNG)
+        la = lv_tip + float(P["dl_a"]) * (S.T_LINK + RUNG) + float(P["dl_lift"]); lh = lvK + float(P["dl_h"]) * (S.T_LINK + RUNG) + float(P["dl_lift"])
         dl, Cd = _strap(unit(c1_0), unit(c2_0), la, lh, DL_W)
         eyes = np.concatenate([_disc(unit(c1_0), la, EYE_R), _disc(unit(c2_0), lh, EYE_R)])
         dl_all = np.concatenate([dl, eyes]); dl_mid = dl_all + 1.5 * unit(dl_all)
