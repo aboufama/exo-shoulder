@@ -1,0 +1,1531 @@
+{
+ "tag": "bench",
+ "nose_r_flank": 1.1839,
+ "nose_r_claim": 1.1839,
+ "mu_claim": 0.087,
+ "f2": 62.043247235042166,
+ "fK": 55.11693437315412,
+ "g": 2.3934,
+ "kK": 2.1534,
+ "r_c": 15.3739,
+ "beta": -176.684,
+ "lift": 0.7882,
+ "hl": 1.9442,
+ "dK_lim_deg": 49.75,
+ "dK_taken_max_deg": 45.62,
+ "dR_to_u2_deg": 14.78,
+ "uK_to_u2_deg": 38.03,
+ "dR_to_uK_deg": 23.26,
+ "pivot_on_dR_mm": 62.82,
+ "roller_centre_from_GH_mm": 61.31,
+ "cam_resynth_vs_model_pa_horn_maxdiff_deg": 0.0,
+ "pressure_angle_table": [
+  {
+   "dK": 0,
+   "pa_horn": 23.46,
+   "pa_crank": 29.5,
+   "m_horn_mm": 13.65,
+   "m_crank_mm": 32.68,
+   "contact_r_mm": 14.88
+  },
+  {
+   "dK": 10,
+   "pa_horn": 6.97,
+   "pa_crank": 5.88,
+   "m_horn_mm": 15.61,
+   "m_crank_mm": 37.35,
+   "contact_r_mm": 15.72
+  },
+  {
+   "dK": 20,
+   "pa_horn": 17.76,
+   "pa_crank": 0.78,
+   "m_horn_mm": 15.69,
+   "m_crank_mm": 37.54,
+   "contact_r_mm": 16.47
+  },
+  {
+   "dK": 30,
+   "pa_horn": 25.81,
+   "pa_crank": 2.27,
+   "m_horn_mm": 15.68,
+   "m_crank_mm": 37.52,
+   "contact_r_mm": 17.41
+  },
+  {
+   "dK": 40,
+   "pa_horn": 32.47,
+   "pa_crank": 4.68,
+   "m_horn_mm": 15.64,
+   "m_crank_mm": 37.42,
+   "contact_r_mm": 18.53
+  },
+  {
+   "dK": 44,
+   "pa_horn": 34.84,
+   "pa_crank": 5.55,
+   "m_horn_mm": 15.61,
+   "m_crank_mm": 37.37,
+   "contact_r_mm": 19.02
+  },
+  {
+   "dK": 45,
+   "pa_horn": 35.41,
+   "pa_crank": 5.77,
+   "m_horn_mm": 15.61,
+   "m_crank_mm": 37.36,
+   "contact_r_mm": 19.15
+  },
+  {
+   "dK": 45.62,
+   "pa_horn": 35.74,
+   "pa_crank": 5.89,
+   "m_horn_mm": 15.6,
+   "m_crank_mm": 37.35,
+   "contact_r_mm": 19.23
+  },
+  {
+   "dK": 46.17,
+   "pa_horn": 36.05,
+   "pa_crank": 6.01,
+   "m_horn_mm": 15.6,
+   "m_crank_mm": 37.34,
+   "contact_r_mm": 19.3
+  },
+  {
+   "dK": 46.25,
+   "pa_horn": 36.1,
+   "pa_crank": 6.03,
+   "m_horn_mm": 15.6,
+   "m_crank_mm": 37.34,
+   "contact_r_mm": 19.31
+  },
+  {
+   "dK": 47,
+   "pa_horn": 36.52,
+   "pa_crank": 6.19,
+   "m_horn_mm": 15.6,
+   "m_crank_mm": 37.33,
+   "contact_r_mm": 19.41
+  },
+  {
+   "dK": 48,
+   "pa_horn": 37.06,
+   "pa_crank": 6.4,
+   "m_horn_mm": 15.59,
+   "m_crank_mm": 37.31,
+   "contact_r_mm": 19.54
+  },
+  {
+   "dK": 49,
+   "pa_horn": 37.59,
+   "pa_crank": 6.61,
+   "m_horn_mm": 15.58,
+   "m_crank_mm": 37.3,
+   "contact_r_mm": 19.67
+  },
+  {
+   "dK": 50,
+   "pa_horn": 38.11,
+   "pa_crank": 6.81,
+   "m_horn_mm": 15.58,
+   "m_crank_mm": 37.28,
+   "contact_r_mm": 19.8
+  },
+  {
+   "dK": 51,
+   "pa_horn": 38.63,
+   "pa_crank": 7.02,
+   "m_horn_mm": 15.57,
+   "m_crank_mm": 37.27,
+   "contact_r_mm": 19.93
+  }
+ ],
+ "dK_at_pa_horn": {
+  "43": null,
+  "44": null,
+  "45": null,
+  "50": null,
+  "55": null
+ },
+ "model_clear_past_lim": [
+  {
+   "dK": 48.0,
+   "arm_hubK": 5.44,
+   "roller_hubK": 7.37,
+   "arm_hub2": 5.28
+  },
+  {
+   "dK": 49.0,
+   "arm_hubK": 5.58,
+   "roller_hubK": 7.49,
+   "arm_hub2": 5.03
+  },
+  {
+   "dK": 50.0,
+   "arm_hubK": 5.72,
+   "roller_hubK": 7.61,
+   "arm_hub2": 5.07
+  },
+  {
+   "dK": 51.0,
+   "arm_hubK": 5.87,
+   "roller_hubK": 7.74,
+   "arm_hub2": 5.1
+  },
+  {
+   "dK": 52.0,
+   "arm_hubK": 6.01,
+   "roller_hubK": 7.86,
+   "arm_hub2": 5.14
+  },
+  {
+   "dK": 53.0,
+   "arm_hubK": 6.16,
+   "roller_hubK": 7.99,
+   "arm_hub2": 5.17
+  },
+  {
+   "dK": 54.0,
+   "arm_hubK": 6.31,
+   "roller_hubK": 8.12,
+   "arm_hub2": 5.21
+  },
+  {
+   "dK": 55.0,
+   "arm_hubK": 6.45,
+   "roller_hubK": 8.25,
+   "arm_hub2": 5.24
+  }
+ ],
+ "hubK_clear_where": {
+  "arm_min": 1.31,
+  "arm_at_dK": 0.0,
+  "roller_min": 3.92,
+  "roller_at_dK": 0.0
+ },
+ "flank_extrude_roller_edge_gap_mm": [
+  -0.0223,
+  0.0199
+ ],
+ "flank": {
+  "length_mm": 6.03,
+  "built_to_dK": 51.75,
+  "rulings_through_GH_offset_mm": 1.1839,
+  "machine_axis_zc": [
+   -0.212561719259999,
+   0.963082583089519,
+   -0.16519519864346363
+  ],
+  "wire_taper_deg": [
+   0.14,
+   2.74
+  ],
+  "straight_extrude_err_mm_at_pm1p5": 0.0718,
+  "straight_extrude_err_mm_over_roller_pm1p25": 0.0598,
+  "roller_edge_misalignment_on_extrude_deg": 1.04,
+  "rho_min_mm": 1.27,
+  "rho_min_at_dK": 0.1,
+  "rho_concave_min_mm": 1.27,
+  "rho_convex_min_mm": null,
+  "contact_r_from_uK_mm": [
+   14.88,
+   20.03
+  ],
+  "mid_plane_h_on_zc_mm": 61.287,
+  "sketch_frame": {
+   "origin": "GH",
+   "ex": [
+    -0.40046187690902535,
+    0.06834929861317401,
+    0.9137607227943143
+   ],
+   "ey": [
+    0.8913180131960389,
+    0.2603849295345395,
+    0.3711494144189898
+   ],
+   "ez": [
+    -0.212561719259999,
+    0.963082583089519,
+    -0.16519519864346363
+   ]
+  }
+ },
+ "flank_arcs": [
+  {
+   "p0": [
+    2.1024,
+    -1.4605
+   ],
+   "pm": [
+    1.6546,
+    -1.6122
+   ],
+   "p1": [
+    1.3515,
+    -1.6386
+   ],
+   "centre": [
+    1.3627,
+    -0.014
+   ],
+   "r": 1.625,
+   "err_mm": 0.003,
+   "dK": [
+    0.0,
+    8.55
+   ]
+  },
+  {
+   "p0": [
+    1.3515,
+    -1.6386
+   ],
+   "pm": [
+    0.7651,
+    -1.5936
+   ],
+   "p1": [
+    0.0494,
+    -1.4274
+   ],
+   "centre": [
+    1.3926,
+    2.7333
+   ],
+   "r": 4.372,
+   "err_mm": 0.003,
+   "dK": [
+    8.55,
+    24.35
+   ]
+  },
+  {
+   "p0": [
+    0.0494,
+    -1.4274
+   ],
+   "pm": [
+    -0.9536,
+    -1.0398
+   ],
+   "p1": [
+    -2.1134,
+    -0.3919
+   ],
+   "centre": [
+    2.6246,
+    6.7282
+   ],
+   "r": 8.553,
+   "err_mm": 0.003,
+   "dK": [
+    24.35,
+    42.8
+   ]
+  },
+  {
+   "p0": [
+    -2.1134,
+    -0.3919
+   ],
+   "pm": [
+    -2.7113,
+    0.025
+   ],
+   "p1": [
+    -3.3335,
+    0.5218
+   ],
+   "centre": [
+    4.312,
+    9.4601
+   ],
+   "r": 11.762,
+   "err_mm": 0.0003,
+   "dK": [
+    42.8,
+    51.75
+   ]
+  }
+ ],
+ "law": {
+  "kK_eff": 2.1534,
+  "t_lim_deg": 23.103,
+  "q2_onset_deg": 7.279,
+  "q2_at_dKlim_deg": -15.824,
+  "phi_crank_at_dKlim_deg": 20.79,
+  "q2_stops_deg": [
+   5848.058,
+   417.039
+  ]
+ },
+ "follower_neck_level_d_mm": 18.33,
+ "follower_n_feasible": 19,
+ "follower_options": [
+  {
+   "pa_max": 25.6,
+   "rr": 3.0,
+   "part": "MR63ZZ (3x6x2.5) on an O3 pin",
+   "a_s": 8.0,
+   "psi": 222.0,
+   "dwell_r": 10.21,
+   "nose_r": 13.05,
+   "drift": 0.58,
+   "rc_min": 10.6
+  },
+  {
+   "pa_max": 23.1,
+   "rr": 3.0,
+   "part": "MR63ZZ (3x6x2.5) on an O3 pin",
+   "a_s": 7.5,
+   "psi": 222.0,
+   "dwell_r": 10.43,
+   "nose_r": 13.09,
+   "drift": 0.55,
+   "rc_min": 11.41
+  },
+  {
+   "pa_max": 25.1,
+   "rr": 3.0,
+   "part": "MR63ZZ (3x6x2.5) on an O3 pin",
+   "a_s": 7.5,
+   "psi": 225.0,
+   "dwell_r": 10.8,
+   "nose_r": 13.48,
+   "drift": 0.57,
+   "rc_min": 11.66
+  },
+  {
+   "pa_max": 18.7,
+   "rr": 3.0,
+   "part": "MR63ZZ (3x6x2.5) on an O3 pin",
+   "a_s": 7.0,
+   "psi": 219.0,
+   "dwell_r": 10.35,
+   "nose_r": 12.76,
+   "drift": 0.49,
+   "rc_min": 12.32
+  },
+  {
+   "pa_max": 20.7,
+   "rr": 3.0,
+   "part": "MR63ZZ (3x6x2.5) on an O3 pin",
+   "a_s": 7.0,
+   "psi": 222.0,
+   "dwell_r": 10.67,
+   "nose_r": 13.13,
+   "drift": 0.51,
+   "rc_min": 12.34
+  },
+  {
+   "pa_max": 16.1,
+   "rr": 3.0,
+   "part": "MR63ZZ (3x6x2.5) on an O3 pin",
+   "a_s": 6.5,
+   "psi": 216.0,
+   "dwell_r": 10.35,
+   "nose_r": 12.52,
+   "drift": 0.43,
+   "rc_min": 13.25
+  },
+  {
+   "pa_max": 16.4,
+   "rr": 3.0,
+   "part": "MR63ZZ (3x6x2.5) on an O3 pin",
+   "a_s": 6.5,
+   "psi": 219.0,
+   "dwell_r": 10.63,
+   "nose_r": 12.86,
+   "drift": 0.45,
+   "rc_min": 13.27
+  },
+  {
+   "pa_max": 23.7,
+   "rr": 2.5,
+   "part": "IKO CFS2.5 stud cam follower (O5 x 3)",
+   "a_s": 8.0,
+   "psi": 219.0,
+   "dwell_r": 10.32,
+   "nose_r": 13.13,
+   "drift": 0.56,
+   "rc_min": 10.27
+  },
+  {
+   "pa_max": 25.6,
+   "rr": 2.5,
+   "part": "IKO CFS2.5 stud cam follower (O5 x 3)",
+   "a_s": 8.0,
+   "psi": 222.0,
+   "dwell_r": 10.71,
+   "nose_r": 13.55,
+   "drift": 0.58,
+   "rc_min": 10.6
+  },
+  {
+   "pa_max": 19.1,
+   "rr": 2.5,
+   "part": "IKO CFS2.5 stud cam follower (O5 x 3)",
+   "a_s": 7.5,
+   "psi": 216.0,
+   "dwell_r": 10.24,
+   "nose_r": 12.8,
+   "drift": 0.5,
+   "rc_min": 11.18
+  }
+ ],
+ "follower_chosen": {
+  "a_s": 8.0,
+  "psi_deg": 222.0,
+  "rr": 3.0,
+  "pa_deg": [
+   11.9,
+   25.6
+  ],
+  "pitch_r": [
+   13.31,
+   16.05
+  ],
+  "profile_r": [
+   10.31,
+   13.05
+  ],
+  "m_f_mm": [
+   7.21,
+   7.83
+  ],
+  "drift_mm": 0.58,
+  "pitch_rc_min": 10.6,
+  "follower_centre_onset": [
+   -26.597,
+   53.299,
+   38.185
+  ],
+  "s_on_dR": 70.3
+ },
+ "sliding": {
+  "v_slide_mm_per_rad": [
+   1.414,
+   9.224
+  ],
+  "at_rest": 1.414,
+  "slide_per_stroke_mm": 4.23,
+  "normal_rel_vel_max": 0.0
+ },
+ "contact_travel": {
+  "on_flank_mm": 4.961,
+  "on_nose_arc_deg": 35.4,
+  "on_nose_arc_mm": 0.731,
+  "flank_contact_speed_at_rest": 10.559,
+  "nose_contact_speed_at_rest": 9.142
+ },
+ "loads": {
+  "spring 0.08 N.m + 0.015 N.m/rad": {
+   "mu 0.0": {
+    "Fn_out_N": [
+     5.28,
+     5.89
+    ],
+    "Fn_return_N": [
+     5.28,
+     5.89
+    ],
+    "crank_T_out_Nmm": [
+     191.5,
+     220.0
+    ],
+    "crank_T_return_Nmm": [
+     191.5,
+     220.0
+    ],
+    "eta_out": [
+     1.0,
+     1.0
+    ],
+    "eta_return": [
+     1.0,
+     1.0
+    ],
+    "J2_T_out_Nm": [
+     0.172,
+     0.198
+    ],
+    "J2_T_return_Nm": [
+     0.172,
+     0.198
+    ],
+    "J2_hysteresis_Nm_max": 0.0,
+    "hertz_p0_MPa_real_flank": 228.0,
+    "hertz_half_width_um": 27.4,
+    "hertz_p0_MPa_if_flat_flank": 241.0
+   },
+   "mu 0.087": {
+    "Fn_out_N": [
+     5.27,
+     6.29
+    ],
+    "Fn_return_N": [
+     5.24,
+     6.09
+    ],
+    "crank_T_out_Nmm": [
+     193.1,
+     232.1
+    ],
+    "crank_T_return_Nmm": [
+     189.7,
+     209.4
+    ],
+    "eta_out": [
+     0.948,
+     0.991
+    ],
+    "eta_return": [
+     0.952,
+     0.991
+    ],
+    "J2_T_out_Nm": [
+     0.174,
+     0.209
+    ],
+    "J2_T_return_Nm": [
+     0.171,
+     0.188
+    ],
+    "J2_hysteresis_Nm_max": 0.02,
+    "hertz_p0_MPa_real_flank": 236.0,
+    "hertz_half_width_um": 26.9,
+    "hertz_p0_MPa_if_flat_flank": 249.0
+   },
+   "mu 0.12": {
+    "Fn_out_N": [
+     5.26,
+     6.45
+    ],
+    "Fn_return_N": [
+     5.21,
+     6.18
+    ],
+    "crank_T_out_Nmm": [
+     193.7,
+     237.1
+    ],
+    "crank_T_return_Nmm": [
+     189.0,
+     205.7
+    ],
+    "eta_out": [
+     0.928,
+     0.988
+    ],
+    "eta_return": [
+     0.935,
+     0.987
+    ],
+    "J2_T_out_Nm": [
+     0.174,
+     0.213
+    ],
+    "J2_T_return_Nm": [
+     0.17,
+     0.185
+    ],
+    "J2_hysteresis_Nm_max": 0.028,
+    "hertz_p0_MPa_real_flank": 239.0,
+    "hertz_half_width_um": 26.7,
+    "hertz_p0_MPa_if_flat_flank": 252.0
+   },
+   "mu 0.15": {
+    "Fn_out_N": [
+     5.25,
+     6.6
+    ],
+    "Fn_return_N": [
+     5.18,
+     6.27
+    ],
+    "crank_T_out_Nmm": [
+     194.3,
+     241.9
+    ],
+    "crank_T_return_Nmm": [
+     188.3,
+     202.4
+    ],
+    "eta_out": [
+     0.91,
+     0.986
+    ],
+    "eta_return": [
+     0.92,
+     0.983
+    ],
+    "J2_T_out_Nm": [
+     0.175,
+     0.218
+    ],
+    "J2_T_return_Nm": [
+     0.169,
+     0.182
+    ],
+    "J2_hysteresis_Nm_max": 0.036,
+    "hertz_p0_MPa_real_flank": 242.0,
+    "hertz_half_width_um": 26.5,
+    "hertz_p0_MPa_if_flat_flank": 255.0
+   }
+  },
+  "spring + MVP1 0.033 N.m": {
+   "mu 0.0": {
+    "Fn_out_N": [
+     7.4,
+     8.28
+    ],
+    "Fn_return_N": [
+     7.4,
+     8.28
+    ],
+    "crank_T_out_Nmm": [
+     270.5,
+     299.0
+    ],
+    "crank_T_return_Nmm": [
+     270.5,
+     299.0
+    ],
+    "eta_out": [
+     1.0,
+     1.0
+    ],
+    "eta_return": [
+     1.0,
+     1.0
+    ],
+    "J2_T_out_Nm": [
+     0.243,
+     0.269
+    ],
+    "J2_T_return_Nm": [
+     0.243,
+     0.269
+    ],
+    "J2_hysteresis_Nm_max": 0.0,
+    "hertz_p0_MPa_real_flank": 266.0,
+    "hertz_half_width_um": 32.5,
+    "hertz_p0_MPa_if_flat_flank": 286.0
+   },
+   "mu 0.087": {
+    "Fn_out_N": [
+     7.41,
+     8.54
+    ],
+    "Fn_return_N": [
+     7.32,
+     8.6
+    ],
+    "crank_T_out_Nmm": [
+     272.8,
+     315.4
+    ],
+    "crank_T_return_Nmm": [
+     267.9,
+     284.6
+    ],
+    "eta_out": [
+     0.948,
+     0.991
+    ],
+    "eta_return": [
+     0.952,
+     0.991
+    ],
+    "J2_T_out_Nm": [
+     0.245,
+     0.284
+    ],
+    "J2_T_return_Nm": [
+     0.241,
+     0.256
+    ],
+    "J2_hysteresis_Nm_max": 0.028,
+    "hertz_p0_MPa_real_flank": 275.0,
+    "hertz_half_width_um": 31.9,
+    "hertz_p0_MPa_if_flat_flank": 291.0
+   },
+   "mu 0.12": {
+    "Fn_out_N": [
+     7.4,
+     8.76
+    ],
+    "Fn_return_N": [
+     7.26,
+     8.73
+    ],
+    "crank_T_out_Nmm": [
+     273.6,
+     322.2
+    ],
+    "crank_T_return_Nmm": [
+     266.9,
+     279.5
+    ],
+    "eta_out": [
+     0.928,
+     0.988
+    ],
+    "eta_return": [
+     0.935,
+     0.987
+    ],
+    "J2_T_out_Nm": [
+     0.246,
+     0.29
+    ],
+    "J2_T_return_Nm": [
+     0.24,
+     0.251
+    ],
+    "J2_hysteresis_Nm_max": 0.038,
+    "hertz_p0_MPa_real_flank": 279.0,
+    "hertz_half_width_um": 31.7,
+    "hertz_p0_MPa_if_flat_flank": 294.0
+   },
+   "mu 0.15": {
+    "Fn_out_N": [
+     7.39,
+     8.97
+    ],
+    "Fn_return_N": [
+     7.19,
+     8.85
+    ],
+    "crank_T_out_Nmm": [
+     274.4,
+     328.7
+    ],
+    "crank_T_return_Nmm": [
+     266.0,
+     275.1
+    ],
+    "eta_out": [
+     0.91,
+     0.986
+    ],
+    "eta_return": [
+     0.92,
+     0.983
+    ],
+    "J2_T_out_Nm": [
+     0.247,
+     0.296
+    ],
+    "J2_T_return_Nm": [
+     0.239,
+     0.248
+    ],
+    "J2_hysteresis_Nm_max": 0.048,
+    "hertz_p0_MPa_real_flank": 282.0,
+    "hertz_half_width_um": 31.5,
+    "hertz_p0_MPa_if_flat_flank": 298.0
+   }
+  }
+ },
+ "pa_friction": {
+  "mu 0.087": {
+   "friction_deg": 4.97,
+   "horn_eff_max": 40.71,
+   "crank_eff_max": 34.47,
+   "margin_to_43": 2.29,
+   "margin_to_45": 4.29,
+   "margin_to_lock_90": 49.29,
+   "mu_at_43": 0.127,
+   "mu_lock": 1.39
+  },
+  "mu 0.12": {
+   "friction_deg": 6.84,
+   "horn_eff_max": 42.58,
+   "crank_eff_max": 36.34,
+   "margin_to_43": 0.42,
+   "margin_to_45": 2.42,
+   "margin_to_lock_90": 47.42,
+   "mu_at_43": 0.127,
+   "mu_lock": 1.39
+  },
+  "mu 0.15": {
+   "friction_deg": 8.53,
+   "horn_eff_max": 44.27,
+   "crank_eff_max": 38.03,
+   "margin_to_43": -1.27,
+   "margin_to_45": 0.73,
+   "margin_to_lock_90": 45.73,
+   "mu_at_43": 0.127,
+   "mu_lock": 1.39
+  },
+  "taken_stroke_deg": 45.6
+ },
+ "flank_curvature_taken": {
+  "rho_min_mm": 1.267,
+  "at_dK": 0.1,
+  "concave_share": 1.0,
+  "convex_rho_min": null,
+  "concave_rho_min": 1.267,
+  "pocket_clearance_min_mm": 0.083,
+  "R_equiv_min_mm": 1.32,
+  "rest_rho_mm": 2.529,
+  "rest_concave": true,
+  "table": [
+   {
+    "dK": 0.0,
+    "rho": 2.529,
+    "concave": true,
+    "R_eq": 2.23
+   },
+   {
+    "dK": 2.5,
+    "rho": 1.468,
+    "concave": true,
+    "R_eq": 6.12
+   },
+   {
+    "dK": 5.0,
+    "rho": 1.829,
+    "concave": true,
+    "R_eq": 3.36
+   },
+   {
+    "dK": 7.5,
+    "rho": 2.307,
+    "concave": true,
+    "R_eq": 2.43
+   },
+   {
+    "dK": 10.0,
+    "rho": 2.858,
+    "concave": true,
+    "R_eq": 2.02
+   },
+   {
+    "dK": 12.5,
+    "rho": 3.448,
+    "concave": true,
+    "R_eq": 1.8
+   },
+   {
+    "dK": 15.0,
+    "rho": 4.054,
+    "concave": true,
+    "R_eq": 1.67
+   },
+   {
+    "dK": 17.5,
+    "rho": 4.666,
+    "concave": true,
+    "R_eq": 1.59
+   },
+   {
+    "dK": 20.0,
+    "rho": 5.278,
+    "concave": true,
+    "R_eq": 1.53
+   },
+   {
+    "dK": 22.5,
+    "rho": 5.887,
+    "concave": true,
+    "R_eq": 1.48
+   },
+   {
+    "dK": 25.0,
+    "rho": 6.492,
+    "concave": true,
+    "R_eq": 1.45
+   },
+   {
+    "dK": 27.5,
+    "rho": 7.093,
+    "concave": true,
+    "R_eq": 1.42
+   },
+   {
+    "dK": 30.0,
+    "rho": 7.69,
+    "concave": true,
+    "R_eq": 1.4
+   },
+   {
+    "dK": 32.5,
+    "rho": 8.283,
+    "concave": true,
+    "R_eq": 1.38
+   },
+   {
+    "dK": 35.0,
+    "rho": 8.874,
+    "concave": true,
+    "R_eq": 1.37
+   },
+   {
+    "dK": 37.5,
+    "rho": 9.463,
+    "concave": true,
+    "R_eq": 1.35
+   },
+   {
+    "dK": 40.0,
+    "rho": 10.051,
+    "concave": true,
+    "R_eq": 1.34
+   },
+   {
+    "dK": 42.5,
+    "rho": 10.638,
+    "concave": true,
+    "R_eq": 1.33
+   },
+   {
+    "dK": 45.0,
+    "rho": 11.225,
+    "concave": true,
+    "R_eq": 1.32
+   }
+  ]
+ },
+ "edge_loading": {
+  "F_worst_N": 8.54,
+  "R_eq_there_mm": 1.32,
+  "aligned_p0_MPa": 275.0,
+  "aligned_half_width_um": 9.0,
+  "aligned_approach_um": 0.18,
+  "straight_extrude_edge_mismatch_um": 22.3,
+  "mismatch_2um": {
+   "p0_peak_MPa": 626.0,
+   "contact_len_mm": 0.89
+  },
+  "mismatch_5um": {
+   "p0_peak_MPa": 796.0,
+   "contact_len_mm": 0.55
+  },
+  "mismatch_10um": {
+   "p0_peak_MPa": 955.0,
+   "contact_len_mm": 0.38
+  },
+  "mismatch_20um": {
+   "p0_peak_MPa": 1144.0,
+   "contact_len_mm": 0.26
+  },
+  "mismatch_20um_on_convex_worstcase_Rnose": {
+   "p0_peak_MPa": 1212.0,
+   "contact_len_mm": 0.26
+  }
+ },
+ "contact_limits": {
+  "Ti64_yield_MPa": 830.0,
+  "p0_substrate_yield_line_MPa": 1383.0,
+  "dlc_eggshell_design_p0_MPa": 1000,
+  "sigma_vm_max_frictionless_factor": 0.557,
+  "z_max_shear_over_b": 0.786,
+  "note": "Tresca onset in the Ti under line contact at p0 = sigma_y / (2 x 0.30) = 1.67 sigma_y; a 2-3 um a-C:H coating on Ti needs p0 well under that (eggshell): 1.0 GPa design limit; sliding at mu <= 0.15 raises the peak von Mises ~10-20 % and moves it toward the surface"
+ },
+ "crank_pair_layouts": {
+  "MVP1, mu 0.087": {
+   "A: 2x MR63ZZ (3x6x2.5) in the O10 x 6 boss, 1 mm spacer": {
+    "worst_radial_N": 52.9,
+    "axial_N": 8.0,
+    "C0r_N": 73.0,
+    "SF_static": 1.38
+   },
+   "B: 2x 683ZZ (3x7x3) in an O10 x 6 boss, no spacer": {
+    "worst_radial_N": 59.4,
+    "axial_N": 8.0,
+    "C0r_N": 120.0,
+    "SF_static": 2.02
+   },
+   "C: 2x MR63ZZ straddling the follower, boss O10 x 9.5": {
+    "worst_radial_N": 36.9,
+    "axial_N": 8.0,
+    "C0r_N": 73.0,
+    "SF_static": 1.98
+   },
+   "D: 2x 683ZZ straddling the follower, boss O10 x 10": {
+    "worst_radial_N": 38.7,
+    "axial_N": 8.0,
+    "C0r_N": 120.0,
+    "SF_static": 3.1
+   },
+   "F_follower_N": [
+    34.8,
+    43.3
+   ],
+   "hertz_follower_lobe_MPa": 546.0
+  },
+  "MVP1, mu 0.15": {
+   "A: 2x MR63ZZ (3x6x2.5) in the O10 x 6 boss, 1 mm spacer": {
+    "worst_radial_N": 51.7,
+    "axial_N": 8.7,
+    "C0r_N": 73.0,
+    "SF_static": 1.41
+   },
+   "B: 2x 683ZZ (3x7x3) in an O10 x 6 boss, no spacer": {
+    "worst_radial_N": 57.9,
+    "axial_N": 8.7,
+    "C0r_N": 120.0,
+    "SF_static": 2.07
+   },
+   "C: 2x MR63ZZ straddling the follower, boss O10 x 9.5": {
+    "worst_radial_N": 38.5,
+    "axial_N": 8.7,
+    "C0r_N": 73.0,
+    "SF_static": 1.9
+   },
+   "D: 2x 683ZZ straddling the follower, boss O10 x 10": {
+    "worst_radial_N": 40.2,
+    "axial_N": 8.7,
+    "C0r_N": 120.0,
+    "SF_static": 2.98
+   },
+   "F_follower_N": [
+    35.0,
+    45.1
+   ],
+   "hertz_follower_lobe_MPa": 557.0
+  }
+ },
+ "arm": {
+  "load_case": "MVP1 0.113 N.m + spring rate, outward stroke at mu claim",
+  "polyline_len_mm": 58.8,
+  "n_pts": 27,
+  "section": "6.0 x 3.0 Ti-6Al-4V",
+  "I_thick_mm4": 13.5,
+  "J_mm4": 37.08,
+  "defl_along_n_mm": [
+   0.0497,
+   0.0532
+  ],
+  "stub_defl_mm": 7e-05,
+  "K_error_from_arm_deg": 0.223,
+  "K_change_over_stroke_deg": 0.015,
+  "root_stress_MPa": 34.0,
+  "nose_root_MPa": 12.0
+ },
+ "K_error_deg_per_10um": {
+  "flank_or_roller_normal": [
+   0.037,
+   0.042
+  ],
+  "lobe_or_follower_normal": [
+   0.152,
+   0.219
+  ],
+  "crank_pair_tilt_per_10um_radial_over_span": 0.45,
+  "crank_pair_tilt_per_10um_over_7mm_span": 0.225,
+  "lever_roller_from_dR_mm": 37.55,
+  "m_horn_mm": [
+   13.65,
+   15.69
+  ],
+  "m_crank_mm": [
+   32.68,
+   37.55
+  ]
+ },
+ "fold_vs_K_offset": {
+  "bench": {
+   "-0.5": {
+    "min": 5.138,
+    "lt5": 0,
+    "n": 371
+   },
+   "-0.3": {
+    "min": 5.158,
+    "lt5": 0,
+    "n": 371
+   },
+   "-0.2": {
+    "min": 5.164,
+    "lt5": 0,
+    "n": 371
+   },
+   "-0.1": {
+    "min": 5.174,
+    "lt5": 0,
+    "n": 371
+   },
+   "-0.05": {
+    "min": 5.177,
+    "lt5": 0,
+    "n": 371
+   },
+   "0.0": {
+    "min": 5.18,
+    "lt5": 0,
+    "n": 371
+   },
+   "0.1": {
+    "min": 5.19,
+    "lt5": 0,
+    "n": 371
+   },
+   "0.25": {
+    "min": 5.203,
+    "lt5": 0,
+    "n": 371
+   },
+   "0.5": {
+    "min": 5.222,
+    "lt5": 0,
+    "n": 371
+   }
+  },
+  "note": "K offset in deg, + = K more open than the law (a lead), - = a lag; verifier th_margin: 5.181 bench / 5.006 held"
+ },
+ "spring": {
+  "strip": "5.0 x 0.3 1.4310",
+  "length_mm_for_0p015": 144.7,
+  "windup_at_stopA_deg": 306.0,
+  "torque_stopB_Nm": 0.0922,
+  "bend_stress_max_MPa": 1229.0,
+  "note": "spiral (clock) spring in K's cap, the lead's part unchanged (custom from strip)"
+ },
+ "return_stroke": {
+  "mu 0.087, spring alone": {
+   "eta_return": [
+    0.952,
+    0.991
+   ],
+   "crank_T_avail_Nmm": [
+    189.7,
+    209.4
+   ],
+   "SF_vs_crank_drag": 158.1,
+   "K_accel_limit_rad_s2": 159.0,
+   "q2_accel_limit_rad_s2": 73.6
+  },
+  "mu 0.087, spring vs MVP1 0.033 opening": {
+   "eta_return": [
+    0.952,
+    0.991
+   ],
+   "crank_T_avail_Nmm": [
+    111.4,
+    134.2
+   ],
+   "SF_vs_crank_drag": 92.9,
+   "K_accel_limit_rad_s2": 93.0,
+   "q2_accel_limit_rad_s2": 43.2
+  },
+  "mu 0.12, spring alone": {
+   "eta_return": [
+    0.935,
+    0.987
+   ],
+   "crank_T_avail_Nmm": [
+    189.0,
+    205.7
+   ],
+   "SF_vs_crank_drag": 157.5,
+   "K_accel_limit_rad_s2": 158.0,
+   "q2_accel_limit_rad_s2": 73.3
+  },
+  "mu 0.12, spring vs MVP1 0.033 opening": {
+   "eta_return": [
+    0.935,
+    0.987
+   ],
+   "crank_T_avail_Nmm": [
+    111.0,
+    131.9
+   ],
+   "SF_vs_crank_drag": 92.5,
+   "K_accel_limit_rad_s2": 93.0,
+   "q2_accel_limit_rad_s2": 43.1
+  },
+  "mu 0.15, spring alone": {
+   "eta_return": [
+    0.92,
+    0.983
+   ],
+   "crank_T_avail_Nmm": [
+    188.3,
+    202.4
+   ],
+   "SF_vs_crank_drag": 156.9,
+   "K_accel_limit_rad_s2": 157.0,
+   "q2_accel_limit_rad_s2": 73.1
+  },
+  "mu 0.15, spring vs MVP1 0.033 opening": {
+   "eta_return": [
+    0.92,
+    0.983
+   ],
+   "crank_T_avail_Nmm": [
+    110.6,
+    129.8
+   ],
+   "SF_vs_crank_drag": 92.2,
+   "K_accel_limit_rad_s2": 92.0,
+   "q2_accel_limit_rad_s2": 42.9
+  }
+ },
+ "return_stroke_note": "eta_return = the share of the spring's work that reaches the crank through the sliding nose; lock-up at eta 0 (PA + atan(mu) -> 90 on the driving side). Drag 1.2 N.mm at the crank is a pessimistic 2 x 683ZZ (ZZ, greased) + follower. Acceleration limit: the spring's net torque through eta over the gen-5 inertia 5e-4 kg m2 about uK",
+ "wear_1e6": {
+  "greased (K_DLC 1e-9, K_440C 1e-8)": {
+   "flank_DLC_depth_um": 0.01,
+   "at_flank_mm": 4.92,
+   "nose_depth_um": 2.649,
+   "at_nose_arc_mm": 0.01,
+   "K_lag_from_both_deg": 0.011,
+   "DLC_through_if_2um": false
+  },
+  "dry, typical a-C:H vs steel (K_DLC 1e-7, K_440C 1e-7)": {
+   "flank_DLC_depth_um": 1.038,
+   "at_flank_mm": 4.92,
+   "nose_depth_um": 26.494,
+   "at_nose_arc_mm": 0.01,
+   "K_lag_from_both_deg": 0.116,
+   "DLC_through_if_2um": false
+  },
+  "pessimistic / grease lost, abrasive (K_DLC 1e-6, K_440C 1e-6)": {
+   "flank_DLC_depth_um": 10.375,
+   "at_flank_mm": 4.92,
+   "nose_depth_um": 264.943,
+   "at_nose_arc_mm": 0.01,
+   "K_lag_from_both_deg": 1.155,
+   "DLC_through_if_2um": true
+  }
+ },
+ "wear_note": "Archard per surface point: depth per pass = K x w x v_slide / v_contact (the contact's own sweep speed on that surface; spread over at least the Hertz width 2b); 2 passes per cycle, 1e6 full-stroke cycles at the MVP1 load (worst). Friction work per stroke = mu x int(Fn v_s dK).",
+ "friction_work_per_stroke_mJ": 2.9525,
+ "dowel": {
+  "d": 2.5,
+  "L_press": 3.0,
+  "boss_O": 6.0,
+  "fits": {
+   "H7/m6 (hole 0/+10, pin +2/+8 um): transition": {
+    "interference_um": [
+     -8.0,
+     8.0
+    ],
+    "p_MPa": [
+     0.0,
+     168.0
+    ],
+    "hoop_bore_MPa_max": 239.0,
+    "pullout_N": [
+     0.0,
+     475.0
+    ]
+   },
+   "N7/m6 (hole -4/-14)": {
+    "interference_um": [
+     6.0,
+     22.0
+    ],
+    "p_MPa": [
+     126.0,
+     462.0
+    ],
+    "hoop_bore_MPa_max": 656.0,
+    "pullout_N": [
+     356.0,
+     1307.0
+    ]
+   },
+   "P7/m6 (hole -6/-16)": {
+    "interference_um": [
+     8.0,
+     24.0
+    ],
+    "p_MPa": [
+     168.0,
+     504.0
+    ],
+    "hoop_bore_MPa_max": 716.0,
+    "pullout_N": [
+     475.0,
+     1426.0
+    ]
+   },
+   "reamed 2.495-2.500 / m6": {
+    "interference_um": [
+     2.0,
+     13.0
+    ],
+    "p_MPa": [
+     42.0,
+     273.0
+    ],
+    "hoop_bore_MPa_max": 388.0,
+    "pullout_N": [
+     119.0,
+     772.0
+    ]
+   }
+  },
+  "retaining_compound_pullout_N": 353.0,
+  "bending_root_MPa": 12.0,
+  "defl_tip_um": 0.074,
+  "bearing_on_hole_MPa": 1.1,
+  "axial_load_N_max": 0.45,
+  "note": "pull-out with mu_s 0.12 (440C in Ti, dry after press); retaining compound 15 MPa shear on the 3 mm engagement"
+ },
+ "skin_bench": {
+  "taken": {
+   "E": {
+    "min_mm": 0.749,
+    "lt0p3": 0,
+    "lt1": 1,
+    "lt2": 17,
+    "at": {
+     "kind": "ws",
+     "plane": 105.0,
+     "elev": 30.0,
+     "axial": -120.0
+    }
+   },
+   "boss": {
+    "min_mm": 2.489,
+    "lt0p3": 0,
+    "lt1": 0,
+    "lt2": 0,
+    "at": {
+     "kind": "ws",
+     "plane": -60.0,
+     "elev": 60.0,
+     "axial": 105.0
+    }
+   },
+   "crank": {
+    "min_mm": 1.994,
+    "lt0p3": 0,
+    "lt1": 0,
+    "lt2": 1,
+    "at": {
+     "kind": "ws",
+     "plane": 60.0,
+     "elev": 15.0,
+     "axial": -120.0
+    }
+   },
+   "horn": {
+    "min_mm": 2.482,
+    "lt0p3": 0,
+    "lt1": 0,
+    "lt2": 0,
+    "at": {
+     "kind": "ws",
+     "plane": 15.0,
+     "elev": 135.0,
+     "axial": -60.0
+    }
+   },
+   "hub1": {
+    "min_mm": 1.989,
+    "lt0p3": 0,
+    "lt1": 0,
+    "lt2": 3,
+    "at": {
+     "kind": "clip",
+     "plane": 30.0,
+     "elev": 150.0,
+     "axial": -60.0
+    }
+   },
+   "hub2": {
+    "min_mm": 1.017,
+    "lt0p3": 0,
+    "lt1": 0,
+    "lt2": 1,
+    "at": {
+     "kind": "ws",
+     "plane": 15.0,
+     "elev": 90.0,
+     "axial": 30.0
+    }
+   },
+   "hub3": {
+    "min_mm": 0.893,
+    "lt0p3": 0,
+    "lt1": 1,
+    "lt2": 7,
+    "at": {
+     "kind": "ws",
+     "plane": 105.0,
+     "elev": 30.0,
+     "axial": -120.0
+    }
+   },
+   "hubK": {
+    "min_mm": 2.441,
+    "lt0p3": 0,
+    "lt1": 0,
+    "lt2": 0,
+    "at": {
+     "kind": "ws",
+     "plane": 15.0,
+     "elev": 75.0,
+     "axial": 75.0
+    }
+   },
+   "knee": {
+    "min_mm": 4.312,
+    "lt0p3": 0,
+    "lt1": 0,
+    "lt2": 0,
+    "at": {
+     "kind": "ws",
+     "plane": -60.0,
+     "elev": 60.0,
+     "axial": 105.0
+    }
+   },
+   "pad": {
+    "min_mm": 1.67,
+    "lt0p3": 0,
+    "lt1": 0,
+    "lt2": 1,
+    "at": {
+     "kind": "ws",
+     "plane": -60.0,
+     "elev": 60.0,
+     "axial": 105.0
+    }
+   },
+   "roller": {
+    "min_mm": 6.763,
+    "lt0p3": 0,
+    "lt1": 0,
+    "lt2": 0,
+    "at": {
+     "kind": "ws",
+     "plane": 15.0,
+     "elev": 135.0,
+     "axial": -60.0
+    }
+   }
+  },
+  "contact_poses": [
+   {
+    "plane": 15.0,
+    "elev": 165.0,
+    "axial": -60.0,
+    "kind": "ws",
+    "parts": {
+     "crank": -8.5,
+     "horn": -7.07,
+     "hubK": -2.65,
+     "roller": -4.16
+    }
+   },
+   {
+    "plane": 30.0,
+    "elev": 165.0,
+    "axial": -60.0,
+    "kind": "ws",
+    "parts": {
+     "crank": -0.26,
+     "horn": -5.34
+    }
+   }
+  ]
+ }
+}

@@ -245,6 +245,7 @@ Cold start, one read order (the line-3 list above with the state inserted after 
 (Felix Rieseberg, *How to be more ambitious: A tutorial for humans with models*,
 https://felixrieseberg.com/how-to-be-more-ambitious-a-tutorial-for-humans-with-models/) -> docs/HANDOFF.md ->
 docs/OPERATIONS.md -> README.md -> REQUIREMENTS.md -> docs/PLAN.md -> docs/FINDINGS.md -> docs/concepts/ROUNDS.md.
-The work lives on branch `claude/trusting-pasteur-6czobp` (main stopped on 2026-10-14); if your environment assigned
+The work lives on branch `claude/exciting-albattani-94w8cp` since 2026-10-17 (`claude/trusting-pasteur-6czobp` stopped at
+40dea1a, 2026-10-16 23:13; main stopped on 2026-10-14); if your environment assigned
 another branch, merge this branch into yours, then push yours (HANDOFF "Branch"). Workflow scripts need your own `branch` and
 `trailer` in their args. Git commit times are the clock.

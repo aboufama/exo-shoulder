@@ -17,8 +17,9 @@ ask if missing). Everything else - rules, numbers, models, rows, findings, the u
    this page inserted after METHOD): CLAUDE.md -> METHOD.md -> HANDOFF.md -> this page -> README.md -> REQUIREMENTS.md
    -> PLAN.md -> FINDINGS.md (newest sections) -> `docs/concepts/ROUNDS.md` (the last "Round N plan" / "Round N
    results") -> `docs/ALIGNMENT.md` if present. CAD_STANDARD.md before touching a part, PIPELINE.md before running.
-2. **Git**: the work lives on branch `claude/trusting-pasteur-6czobp` (HANDOFF "Branch"); `main` is ~935 commits behind.
-   If your environment assigned you another branch: `git fetch origin claude/trusting-pasteur-6czobp && git merge
+2. **Git**: the work lives on branch `claude/exciting-albattani-94w8cp` since 2026-10-17 (HANDOFF "Branch";
+   `claude/trusting-pasteur-6czobp` stopped at 40dea1a); `main` is far behind.
+   If your environment assigned you another branch: `git fetch origin claude/exciting-albattani-94w8cp && git merge
    FETCH_HEAD`, then work on and push to YOUR branch (the environment's branch wins) and update HANDOFF "Branch". Then
    `git status --short; git pull --rebase --autostash; git log --format='%h %ci %s' -15` (agents commit all the time;
    the log is the activity feed, and its commit times are the clock: time stamps agents write inside files ran up to

@@ -1,0 +1,44 @@
+[
+ {
+  "key": "S1",
+  "level": "watch",
+  "reason": "HELD_S1_PLACEHOLDER",
+  "evidence": "docs/alignment/remeasure/trimlug-k165-knuckle-3r_vs_sidecar-longdyad-knuckle-3r_paired_claim.json (paired bootstrap, claim dumps on both sides); docs/alignment/remeasure/trimlug-k165-knuckle-3r_bench_perpose.json, _held_perpose.json (this audit, frozen 18.51 / held reproduced); docs/alignment/remeasure/sidecar-longdyad-knuckle-3r_bench_perpose_claim.json / _held_perpose_claim.json; docs/concepts/rows/sidecar-longdyad-knuckle-3r.json held_out (22.67, near1 25.75, near2 37.24); docs/concepts/rows/trimlug-k165-knuckle-3r.json held_out (23.47, near1 26.56, near2 36.97)."
+ },
+ {
+  "key": "T5",
+  "level": "watch",
+  "reason": "T5_PLACEHOLDER",
+  "evidence": "docs/alignment/remeasure/trimlug-k165-knuckle-3r_bench_perpose.json and _held_perpose.json (this audit); docs/alignment/remeasure/slipper-nose-knuckle-3r_bench_perpose.json / _held_perpose.json; docs/alignment/remeasure/sidecar-longdyad-knuckle-3r_*_perpose_claim.json; docs/alignment/remeasure/trimlug-k165-knuckle-3r_vs_*_paired_claim.json (depth blocks); docs/concepts/trimlug-k165-knuckle-3r.md two-pose table."
+ },
+ {
+  "key": "M5",
+  "level": "watch",
+  "reason": "Carried unchanged from the lead (upheld by the lead's skeptic): one clock spring (0.08 N.m + 0.03 N.m/rad) force-closes the drive through a SLIDING O2.37 nose on the DLC flank at mu 0.087 (assumed, wear test pending); return-stroke crank pressure angle 29.5 deg kinematic + 4.97 deg friction = 34.47 deg, horn 35.8 + 4.97 = 40.77 deg against the 43 cap. No R17 / dynamics / preload number is on file for the lead or for this design; the score assumes K on its cam law at all 167 taken bench poses where K moves. The trim cuts lug metal BEHIND the flank only: the flank face, nose, cam table and dK_lim 49.8 are the lead's (verifier T1: contact line on retained metal, edge margin 2.53 mm taken / 1.99 mm full stroke; pa_eff_horn_max 40.77, pa_eff_crank_max 34.47 identical to the lead control), so the risk is exactly the lead's, neither bought nor reduced here. Not a gaming of the score; an unmeasured risk to 'K genuinely tracks the arm unpowered'.",
+  "evidence": "docs/concepts/verify/trimlug-k165-knuckle-3r_v_bench_frozen.json extra.pa_rule and trim.T1; _v_bench_lead.json (same pa_rule); docs/alignment/slipper-nose-knuckle-3r.findings.json M5 and slipper-nose-knuckle-3r.rulings.json (upheld); docs/alignment/remeasure/trimlug-k165-knuckle-3r_probe_bench.json extras (dK_taken_max_deg 45.62)."
+ },
+ {
+  "key": "G4",
+  "level": "watch",
+  "reason": "G4_PLACEHOLDER",
+  "evidence": "docs/alignment/remeasure/trimlug-k165-knuckle-3r_msub_rest_bench.json (this audit, tools/alignment_msub_rest_probe_model.py, model unchanged) vs slipper-nose-knuckle-3r_msub_rest_bench.json; docs/alignment/remeasure/trimlug-k165-knuckle-3r_probe_bench.json extras (th_margin_own_state min 5.181, lt5p5 2; knee_ang_taken [86.21, 151.92], window [25.22, 154.78]); docs/concepts/verify/trimlug-k165-knuckle-3r_v_held_frozen.json (th 5.006 held); docs/alignment/slipper-nose-knuckle-3r.findings.json G4 (upheld)."
+ },
+ {
+  "key": "NEW-ws-inband",
+  "level": "watch",
+  "reason": "WS_PLACEHOLDER",
+  "evidence": "docs/alignment/remeasure/trimlug-k165-knuckle-3r_probe_bench.json probe.ws_elev90_140 / ws_unscored / ws_overhead140 and _probe_held.json (this audit); docs/alignment/remeasure/slipper-nose-knuckle-3r_probe_bench.json; docs/alignment/slipper-nose-knuckle-3r.findings.json NEW-ws-inband (upheld)."
+ },
+ {
+  "key": "NEW-stale-complexity-ruler",
+  "level": "watch",
+  "reason": "Carried from the lead record (upheld by the lead's skeptic), reporting against the design, not for it. The row's mechanism is the lead's copied unchanged (the trim is a cut on an existing custom part: 0 added parts, joints, bodies). It still charges the cuff knee's closure loop in mechanism.closed_loops 3 (cuff_knee has no closed_loops field), so tools/simplicity.py v2.2 reads 22.25; with the knee loop recorded the way roller-longdyad-knuckle-3r records it (cuff_knee.closed_loops 1, which simplicity v2.1+ frees) the same record reads 18.25 (recomputed in this audit). The dashboard shows 22.25 against roller-longdyad's 20.25, i.e. this family 2.0 MORE complex where like-for-like it is 2.0 simpler; the round-11 event line itself says '22.25 (18.25 like-for-like)'.",
+  "evidence": "python3 tools/simplicity.py --score '<row mechanism>' -> 22.25; same with mechanism.cuff_knee.closed_loops = 1 -> 18.25 ('2 closed loops in the mechanism x 4'); docs/concepts/rows/roller-longdyad-knuckle-3r.json (complexity 20.25, cuff_knee.closed_loops 1); docs/dashboard/data/morphs.json (trimlug 22.25); docs/concepts/events.jsonl 2026-10-17T09:57:50Z."
+ },
+ {
+  "key": "R1",
+  "level": "watch",
+  "reason": "The row's own text over-states and under-documents in places (beyond the tool's 'reporting' check, which already flags the 'screened -' verdict on a verified row and the 13.02 / score 95.27 fast sweep best shown on the dashboard, above the user's golden 95 line, against the verified 93.27): (1) the row verdict says the 10 held-out contacts include '5 of them the lug, each 1.2-1.7 mm shallower'; the design doc lists 4 and the verifier's per-pose reading agrees with 4 (verifier note in the row); (2) the headline 'gap' 13.02 / 'reach' 0.775 are the fit bench Bench(60,160) fast numbers, a bench that has NO contact pose, i.e. a bench on which the design's whole subject (the two elev-165 contacts) is invisible; (3) the limiter calls pose 237 'hub K's own disc plus the crank' while the trimmed lug is also 8.35 mm in the skin there; (4) n_configs 45 against 31 entries in docs/concepts/sweeps/trimlug-k165-knuckle-3r.json, all with one timestamp (the 14 two-pose exact checks are not in the sweep file). None of these moves the verified number, and the design is filed as 'not a lead change' everywhere; watch for the record's accuracy only.",
+  "evidence": "docs/concepts/rows/trimlug-k165-knuckle-3r.json verdict / limiter / note (verifier's 'Reporting issues'); docs/concepts/trimlug-k165-knuckle-3r.md (4 lug-deepest held contacts listed); docs/concepts/sweeps/trimlug-k165-knuckle-3r.json (31 entries); docs/dashboard/data/sweeps.json (trimlug rows 13.00-13.06); docs/alignment/trimlug-k165-knuckle-3r.json check 'reporting'."
+ }
+]
