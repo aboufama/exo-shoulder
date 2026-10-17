@@ -364,7 +364,7 @@
   {
    "k": 32,
    "group": "l3",
-   "name": "J3 stop dowel (ISO 8734 O2 m6 440C, ground l 3.95, pressed H7/m6 through hub 3's lower plate at r 7.5, F+0..F+3.95: 0.8 mm into link 2's groove; stops J3's own angle q3' at -111.90 / 122.74 deg)",
+   "name": "J3 stop dowel (ISO 8734 2 m6 x 5, 440C grade, ground to 3.90; pressed in a reamed O2.000 -0.005/0 hole through hub 3's lower plate at r 7.5, F+0.10..F+4.00: 0.85 mm into link 2's groove, tip 0.15 off its floor; stops J3's own angle q3' at -111.90 / 122.74 deg)",
    "vol_cm3": 0.012,
    "material": "steel",
    "mass_g": 0.1,

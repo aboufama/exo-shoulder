@@ -1,6 +1,6 @@
 {
  "id": "l1_conecut-knee",
- "source": "docs/concepts/conecut-knee-knuckle-3r.md (the verified config: docs/concepts/rows/conecut-knee-knuckle-3r.json best_params on the claim model's PARAMS (SN_CELL=lead) = docs/concepts/verify/conecut-knee-knuckle-3r.py BEST, ang_min 25.2189, nose_r 1.1839, mu 0.087), fit on Bench(60,160) fast at fold margin 5.0 = the shape the verifier wore frozen on Bench(110,360) exact (v_gap 18.49, score 93.28, envelope-corrected 18.44; held out 23.45; min fold margin th 5.006)",
+ "source": "docs/concepts/conecut-knee-knuckle-3r.md (the verified config: docs/concepts/rows/conecut-knee-knuckle-3r.json best_params on the claim model's PARAMS (SN_CELL=lead; = docs/concepts/verify/conecut-knee-knuckle-3r.py BEST): the gen-7 lead slipper-nose-knuckle-3r row + the re-proportioned knee (stk 6.0 MR63ZZ pairs, lE 97.1443, lc 24.3508, phiE 0.7526, phib -91.8041, ang_min 25.2189) + the J3 hard stop on q3' in [-111.9036, 122.7417]), fit on Bench(60,160) fast at fold margin 5 = the shape the verifier wore frozen on Bench(110,360) exact (v_gap 18.28, score 93.35; held out 22.38)",
  "params": {
   "g": 2.3934,
   "beta": -176.684,
@@ -67,7 +67,8 @@
     25.2189,
     154.7811
    ],
-   "part": "tooth on the knee link vs the E strap's side (physical stop at 180 - ang_min; ang_min side never reached, the fold side of the knee)"
+   "part": "tooth on the knee link vs the E strap's side (physical stop at 180 - ang_min; ang_min side never reached, the fold side of the knee)",
+   "note": "conecut's knee runs 59.27..107.07 deg held out: 11.42 / 13.18 mm in d inside the window (gen 7: 0.33 mm)"
   }
  },
  "joints": [
@@ -91,7 +92,7 @@
   },
   {
    "joint": "J3",
-   "part": "O20 x 12.25 v5 hub, MR117-2RS pair, encoder",
+   "part": "O20 x 12.25 v5 hub, MR117-2RS pair, encoder; HARD STOP on J3's own angle q3' (link 2 -> member 3) at -111.90 / 122.74 deg: ISO 8734 O2 m6 440C dowel pressed through hub 3's lower plate at r 7.5, in a 2.1 x 1 arc groove (249.97 deg, web 110.03 deg) under link 2's ring - inside the O20 stack",
    "axis_offset_mm": 13.84
   }
  ],
@@ -371,8 +372,8 @@
   "chain": "slipper_nose_knuckle",
   "note": "base rides the scapula on the user's scapula handler, carried directly at the J1 hub ring (no tab)"
  },
- "built_with": "pipeline/concept_l1/build_slipper_l1.py (L1 keep-out meshes: O20 hub keep-outs incl. hub K's 6 mm taller cap, link 1a line/arc chain, fitted 8 x 3 straps 1b / 2, stop dowels + arc slots, the lobe / bell crank boss / bent arm / nose dowel / pin / flank lug drive (crank posed), E strap + boss, knee link + MR63ZZ-pair bearing bosses + knee stop, arm pad, pin retainers)",
- "label": "slipper-nose-knuckle-3r (verified config, ang_min 25.2189, fit Bench(60,160), fold margin 5), L1 keep-out",
+ "built_with": "pipeline/concept_l1/build_conecut_l1.py (imports build_slipper_l1.py unchanged: every gen-7 L1 part from THIS model's fit) + the J3 stop: groove ring under link 2's J3 upper boss + the O2 dowel in hub 3's lower plate",
+ "label": "conecut-knee-knuckle-3r (verified config, knee re-proportioned + J3 stop [-111.90, 122.74], fit Bench(60,160), fold margin 5), L1 keep-out",
  "fit_bench": [
   60,
   160
@@ -385,7 +386,12 @@
   "knee_stop_deg": 154.7811,
   "ang_min": 25.2189,
   "knee_pins": "MR63ZZ pairs",
-  "link1a": "line/arc chain (gen-6 fix)"
+  "link1a": "line/arc chain (gen-6 fix)",
+  "j3_stop": true,
+  "knee": "re-proportioned (conecut)",
+  "d1_fits_dup_removed": true,
+  "d2_rss": true,
+  "d3_spacer_note": true
  },
  "fits": [
   {
@@ -446,11 +452,15 @@
   },
   {
    "where": "J3 stop dowel in hub 3's lower plate",
-   "fit": "ISO 8734 2 x 5 m6 440C (58 HRC), ground to l 3.95, pressed H7/m6 (O2 H7 0..+0.010 / m6 +0.002..+0.008) through the 3 mm plate, flush with the skin face (F+0), 0.95 proud = 0.15 running gap + 0.80 into the groove; hole true position +-0.02 mm at r 7.50 from J3's axis"
+   "fit": "ISO 8734 (DIN 6325) 2 m6 x 5 (or x 4), 440C grade >= 56 HRC with cert, surface-ground to 3.90 +-0.02, edges re-broken; through hole reamed O2.000 -0.005/0 (2-13 um interference: H7/m6 is a transition fit), at r 7.500, true position 0.02 (+-0.01 tangential) to the J3 bore and member 3's angular datum, perpendicular 0.01 to the J3 face, 0.1 x 45 top chamfer; pressed from the top to a gauge: top 0.85 +-0.02 above the plate (F+4.00), skin end recessed 0.10 (never proud)"
   },
   {
    "where": "J3 stop groove under link 2's ring",
-   "fit": "arc groove 2.10 +0.02/0 wide x 1.00 +0.05/0 deep at r 7.50 +-0.01 in the J3 upper boss underside, milled with an O1.5 end mill on a contour path; ends full radius R1.05 about end centres on r 7.50; end-centre angles 0.36 deg beyond the stop angle (the O2 m6 dowel meets the R1.05 end at a 0.047 mm centre offset), end position +-0.02 mm (+-0.15 deg); 0.2 mm dowel-end clearance at the groove floor"
+   "fit": "arc slot 2.10 +0.02/0 wide x 1.00 +0.05/0 deep (F+3.15..4.15) at centre radius 7.500, walls concentric to the J3 bore within 0.02 (dowel floats 0.046 per side, >= 0.026 running), FULL R1.05 ends; end-arc centres 0.382 deg beyond the dowel-centre stop angles, true position 0.02 (+-0.01 tangential); 3+2-axis from below with an O2.0 / O1.5 end mill; cut BEFORE the bearing-1 seat finish bore (0.95 wall)"
+  },
+  {
+   "where": "J3 stop acceptance + rating",
+   "fit": "assembled stop -112.40 <= J3MIN <= -111.25 and 119.85 <= J3MAX <= 123.78 deg on the J3 encoder (the windows that keep the verified bench and held numbers); stop rated 1.8 N.m about J3 (J3 bearing-1 s0 = 1); dowel / groove good to 10 N.m (dowel shear SF 2.6, bending 1.95, groove-end bearing 1.66) - docs/research/conecut_mechanism_redteam.md"
   }
  ],
  "faces_mm": [
@@ -890,5 +900,199 @@
   "contact": 0.0,
   "inband10": 0.5719
  },
- "note": "R17's dynamics judge orders posed groups as a serial chain (base, l<k>[a-z], cuff); the drive's side member dk rides link 1b (build.json 'slaved', drive_groups)"
+ "note": "R17's dynamics judge orders posed groups as a serial chain (base, l<k>[a-z], cuff); the drive's side member dk rides link 1b (build.json 'slaved', drive_groups)",
+ "j3_stop": {
+  "window_deg": [
+   -111.9036,
+   122.7417
+  ],
+  "dowel_home_angle_deg": 201.0,
+  "groove_deg": [
+   81.434,
+   331.404
+  ],
+  "groove_arc_deg": 249.97,
+  "web_deg": 110.03,
+  "dowel_touch_half_deg": 7.662,
+  "r_mm": 7.5,
+  "dowel_d_mm": 2.0,
+  "groove_w_mm": 2.1,
+  "groove_depth_mm": 1.0,
+  "groove_layer_mm": [
+   3.15,
+   4.15
+  ],
+  "dowel_z_mm": [
+   0.1,
+   4.0
+  ],
+  "dowel_into_groove_mm": 0.85,
+  "groove_floor_clear_mm": 0.15,
+  "bearing_od_r_mm": 5.5,
+  "rim_r_mm": 10.0,
+  "clearance_to_link2_strap_deg": 21.8,
+  "link2_strap_samples_in_band": 224,
+  "frame": "angles in frame_of(u3); dowel centre in link 2's frame = home angle + q3' (C1: R2^T R3 = rot(u3, q3'), offset 0)",
+  "end_shape": "L1 mesh: radial groove ends where the O2 dowel touches at the window edge; drawing: full-radius R1.05 ends, end centres 0.36 deg past the stop angle",
+  "sweep": {
+   "rule": "dowel (member 3) vs link 2's groove ring / boss / strap over q3' (signed mm, < 0 = metal in metal)",
+   "inside_window_min_mm": 0.0324,
+   "at_J3MIN": {
+    "J3 upper boss groove ring": 3.216901579338527e-05,
+    "J3 upper boss + cap": 0.14999446109263315,
+    "link 2 strap": 3.795647744139702
+   },
+   "at_J3MAX": {
+    "J3 upper boss groove ring": 0.0001805951437820401,
+    "J3 upper boss + cap": 0.14999439037084228,
+    "link 2 strap": 3.742435804859416
+   },
+   "past_J3MIN_0p25": {
+    "J3 upper boss groove ring": -0.03236505207530981,
+    "J3 upper boss + cap": 0.1499943201621231,
+    "link 2 strap": 3.763478324322777
+   },
+   "past_J3MAX_0p25": {
+    "J3 upper boss groove ring": -0.032169379784934546,
+    "J3 upper boss + cap": 0.14999450622945612,
+    "link 2 strap": 3.70954748097399
+   },
+   "inside_0p25": {
+    "lo": {
+     "J3 upper boss groove ring": 0.03242938903759186,
+     "J3 upper boss + cap": 0.14999460199863296,
+     "link 2 strap": 3.8278644509992175
+    },
+    "hi": {
+     "J3 upper boss groove ring": 0.032530566725918905,
+     "J3 upper boss + cap": 0.14999427448848493,
+     "link 2 strap": 3.775348107541256
+    }
+   },
+   "past_2deg": {
+    "lo": {
+     "J3 upper boss groove ring": -0.25908697900733174,
+     "J3 upper boss + cap": 0.1499941120669583,
+     "link 2 strap": 3.53617481002154
+    },
+    "hi": null
+   },
+   "verdict": "stop"
+  },
+  "tolerance": {
+   "drawing": "true position 0.02 (+-0.01 tangential) on the dowel hole and both groove end-arc centres, relative to the J3 bore and each part's angular datum; groove walls concentric to the J3 bore within 0.02",
+   "random_deg": {
+    "dowel_hole_true_position_10um": 0.076,
+    "groove_end_centre_true_position_10um": 0.076,
+    "pin_a_bore_member3_datum": 0.012,
+    "link2_J2_J3_bores": 0.019
+   },
+   "bias_deg": {
+    "groove_width_2p10_plus0p02": [
+     0.0,
+     0.0764
+    ],
+    "dowel_m6_radius": [
+     -0.03056,
+     -0.00764
+    ]
+   },
+   "rss_deg": 0.11,
+   "worst_in_deg": 0.214,
+   "worst_out_deg": 0.26,
+   "at_pm0p02_worst_deg": 0.41,
+   "at_iso2768f_worst_deg": 0.87,
+   "margin_held_low_deg": [
+    0.74,
+    0.585
+   ],
+   "margin_held_high_deg": [
+    2.99,
+    1.13
+   ],
+   "acceptance": "-112.40 <= J3MIN <= -111.25 and 119.85 <= J3MAX <= 123.78, read on the J3 encoder at assembly",
+   "verdict": "fits: worst 0.21 in / 0.26 out inside the 0.74 / 0.585 held margins at +-0.01; +-0.02 (0.41) still fits; ISO 2768-f (0.87) fails",
+   "source": "docs/research/conecut_mechanism_redteam.md section 4 (stack) / verdict 3 (acceptance bands)"
+  },
+  "dowel_calc": {
+   "6Nm": {
+    "F_N": 800.0,
+    "shear_MPa": 255.0,
+    "bending_MPa": 586.0,
+    "bearing_on_Ti_groove_MPa": 471.0,
+    "SF_shear_vs_0p58x1900": 4.33,
+    "SF_bending_vs_1900": 3.24,
+    "SF_bearing_vs_Ti_880": 1.87,
+    "J3_bearing1_s0": 0.3
+   },
+   "10Nm": {
+    "F_N": 1333.0,
+    "shear_MPa": 424.0,
+    "bending_MPa": 976.0,
+    "bearing_on_Ti_groove_MPa": 784.0,
+    "SF_shear_vs_0p58x1900": 2.6,
+    "SF_bending_vs_1900": 1.95,
+    "SF_bearing_vs_Ti_880": 1.12,
+    "J3_bearing1_s0": 0.18
+   },
+   "note": "440C 58 HRC yield ~1900 MPa (shear 0.58 x); bearing on the Ti-6Al-4V groove end over the 0.85 mm engagement (projected; the red team rates it on Fbry ~1.3 GPa: SF 1.66 at 10 N.m); the single-dowel force returns through J3's MR117 pair as a radial load, 155 N per N.m on bearing 1 (C0r ~280 N): s0 = 1 at 1.81 N.m about J3 - the stop's rating; the cuff (slips ~1.06 N.m) is the torque fuse (docs/research/conecut_mechanism_redteam.md section 1-2; the same caveat as every gen-4..7 single-dowel stop)"
+  },
+  "dowel_part": "J3 stop dowel (ISO 8734 2 m6 x 5, 440C grade, ground to 3.90; pressed in a reamed O2.000 -0.005/0 hole through hub 3's lower plate at r 7.5, F+0.10..F+4.00: 0.85 mm into link 2's groove, tip 0.15 off its floor; stops J3's own angle q3' at -111.90 / 122.74 deg)",
+  "patched": "dowel rewritten to the red team's spec by build_conecut_l1.py --patch-j3 (glb node, parts_full.json, this block)"
+ },
+ "verified": {
+  "bench": {
+   "gap": 18.28,
+   "score": 93.35,
+   "reach": 0.7278,
+   "follow": 1.0,
+   "inband14": 0.9012,
+   "inband10": 0.5739,
+   "contact": 0.0106
+  },
+  "held": {
+   "gap": 22.38,
+   "reach": 0.6922,
+   "follow": 1.0,
+   "inband14": 0.9,
+   "contact": 0.016
+  },
+  "knee": {
+   "ang_bench": [
+    59.27,
+    105.94
+   ],
+   "ang_held": [
+    59.27,
+    107.07
+   ],
+   "margin_mm": [
+    11.42,
+    13.18
+   ],
+   "knee_N_per_Nm_max": 12.0
+  },
+  "j3": {
+   "q3p_bench": [
+    -109.2,
+    116.1
+   ],
+   "q3p_held": [
+    -111.16,
+    119.44
+   ],
+   "margin_held_deg": [
+    0.74,
+    3.3
+   ],
+   "stopped_bench": 6,
+   "stopped_held": 19
+  },
+  "c1_offset_deg": 0.0,
+  "harness": "docs/concepts/verify/conecut-knee-knuckle-3r.py",
+  "dumps": [
+   "docs/concepts/verify/conecut-knee-knuckle-3r_v_bench_frozen.json",
+   "docs/concepts/verify/conecut-knee-knuckle-3r_v_held_frozen.json"
+  ]
+ }
 }
