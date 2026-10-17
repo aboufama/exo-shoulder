@@ -8428,5 +8428,205 @@
 }
 },
 "secs": 7.9
+},
+{
+"k": 87,
+"t": "2026-10-17T19:43:43Z",
+"params": {
+"r_c": 16.297,
+"beta": -177.979,
+"nose_r2": 0.75,
+"wall2": 1.0,
+"kslot": 46.5,
+"boss_r": 2.75,
+"glev": -0.75,
+"blend": 10.0,
+"a_s": 9.527,
+"psi": 150.07,
+"mu": 0.15
+},
+"tag": "g2-focused-mu0.15",
+"s1_read": "built",
+"stage2": "B",
+"inband14": 0.8903,
+"inband10": 0.5589,
+"reach": 0.775,
+"follow": 1.0,
+"contact": 0.0,
+"gap": 13.47,
+"near1": 14.63,
+"obj": 19.26,
+"honest": true,
+"fail": null,
+"why": {
+"fold": 31,
+"slide": 0,
+"flip": 0,
+"closure": 0,
+"skin": 0,
+"parts": 0,
+"contact": 0
+},
+"dK_lim": 46.5,
+"why_lim": "slot-end",
+"min_metal": 0.2,
+"s2": {
+"slot_len_mm": 3.63,
+"pa_horn_max": 31.04,
+"pa_crank_max": 29.76,
+"dK_lim_pa_by_mu": {
+"0.087": 64.5,
+"0.120": 64.5,
+"0.135": 64.5,
+"0.150": 64.5,
+"0.200": 61.25
+},
+"clear_plate_hubK": 1.36,
+"clear_lowarm_boss": 20.38,
+"boss_hubK_margin": 3.55,
+"seat_rK": 16.3
+},
+"s1": {
+"pa_pin_max": 33.4,
+"pa_cap_max": 34.77,
+"rc_min": 0.98,
+"ridge_mm": 0.224,
+"r_out": 10.96,
+"lim_by_gate": {
+"pitch": 54.5,
+"pa_pin": 48.0,
+"pa_cap": 0.0,
+"drift": null,
+"radius": 0.25
+}
+},
+"slop": {
+"slop_max": 0.0475,
+"slop_at": [
+2.5,
+-1
+],
+"pocket_pa_max_horn": 24.9,
+"pocket_pa_max_crank": 30.0,
+"pocket_pa_fail_K0": null
+},
+"ovh": {
+"ws": 12,
+"reach": 0.1667,
+"clip": 5,
+"follow": 1.0,
+"inband14": 0.9009,
+"inband10": 0.6556,
+"why_not": {
+"fold": 7,
+"slide": 0,
+"flip": 0,
+"closure": 0,
+"skin": 0,
+"parts": 0,
+"contact": 0
+}
+},
+"secs": 7.5
+},
+{
+"k": 88,
+"t": "2026-10-17T19:43:51Z",
+"params": {
+"r_c": 16.433,
+"beta": -177.342,
+"nose_r2": 1.0,
+"wall2": 0.8,
+"kslot": 46.5,
+"boss_r": 2.75,
+"glev": -0.5,
+"blend": 18.0,
+"a_s": 9.575,
+"psi": 149.97,
+"mu": 0.15
+},
+"tag": "g2-focused-mu0.15",
+"s1_read": "built",
+"stage2": "B",
+"inband14": 0.8895,
+"inband10": 0.5593,
+"reach": 0.775,
+"follow": 1.0,
+"contact": 0.0,
+"gap": 13.55,
+"near1": 14.71,
+"obj": 20.52,
+"honest": true,
+"fail": null,
+"why": {
+"fold": 31,
+"slide": 0,
+"flip": 0,
+"closure": 0,
+"skin": 0,
+"parts": 0,
+"contact": 0
+},
+"dK_lim": 46.5,
+"why_lim": "slot-end",
+"min_metal": 0.2,
+"s2": {
+"slot_len_mm": 3.74,
+"pa_horn_max": 32.78,
+"pa_crank_max": 31.1,
+"dK_lim_pa_by_mu": {
+"0.087": 64.5,
+"0.120": 64.5,
+"0.135": 64.5,
+"0.150": 64.5,
+"0.200": 0.0
+},
+"clear_plate_hubK": 1.34,
+"clear_lowarm_boss": 20.39,
+"boss_hubK_margin": 3.68,
+"seat_rK": 16.43
+},
+"s1": {
+"pa_pin_max": 33.48,
+"pa_cap_max": 34.85,
+"rc_min": 1.05,
+"ridge_mm": 0.289,
+"r_out": 11.01,
+"lim_by_gate": {
+"pitch": 55.75,
+"pa_pin": 48.0,
+"pa_cap": 0.0,
+"drift": null,
+"radius": 9.0
+}
+},
+"slop": {
+"slop_max": 0.0525,
+"slop_at": [
+2.5,
+-1
+],
+"pocket_pa_max_horn": 26.0,
+"pocket_pa_max_crank": 32.0,
+"pocket_pa_fail_K0": null
+},
+"ovh": {
+"ws": 12,
+"reach": 0.1667,
+"clip": 5,
+"follow": 1.0,
+"inband14": 0.9001,
+"inband10": 0.6562,
+"why_not": {
+"fold": 7,
+"slide": 0,
+"flip": 0,
+"closure": 0,
+"skin": 0,
+"parts": 0,
+"contact": 0
+}
+},
+"secs": 8.3
 }
 ]
