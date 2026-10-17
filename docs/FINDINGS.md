@@ -2642,3 +2642,113 @@ worn bench (`klaw_claim.py`).
 * **Tolerances now on the drawing:** K phase +0.75 +0.15 / -0.10 deg; knee stop tooth and E strap side +-0.02 (stop
   154.78 +- 0.34 vs the workspace's 153.16); crank running faces +-0.02 (stack 0.04 < the 0.086 gap that 2768-f could
   close); wear-test pass mu <= 0.105.
+
+## Round 12: no lead change - the re-centred knee + J3 dowel verifies at 18.28 (a measured tie), the spring-free desmo drive verifies at 18.95 at complexity 15.75, and both long-dyad drives die on a seat-bound binder (2026-10-17, discovery round 12, closer)
+
+Raw data:
+- rows: `docs/concepts/rows/{conecut-knee-knuckle-3r,desmo-slipper-knuckle-3r,spiral-lobe-longdyad-knuckle-3r,desmo-vrocker-longdyad-knuckle-3r}.json`;
+- models: `docs/concepts/models/<id>.py`; verifier harnesses and outputs: `docs/concepts/verify/<id>.py`,
+  `docs/concepts/verify/<id>_v_*`, `docs/concepts/verify/desmo-slipper-knuckle-3r_groove_scan*.{py,json}`;
+- per-pose dumps and paired comparisons: `docs/alignment/remeasure/<id>_{bench,held}_perpose.json`,
+  `<id>_vs_slipper-nose-knuckle-3r_paired.json`, and the closer's
+  `conecut-knee-knuckle-3r_vs_desmo-slipper-knuckle-3r_paired.json`;
+- the audits, skeptic rulings and re-wears: `docs/alignment/{conecut-knee-knuckle-3r,desmo-slipper-knuckle-3r}.md`,
+  `docs/alignment/<id>.rulings.json`, `docs/alignment/remeasure/desmo-slipper-knuckle-3r_{mu_cliff,skeptic_mu_blend}.json`,
+  `docs/alignment/remeasure/conecut-knee-knuckle-3r_skeptic_why_held.json`, `docs/alignment/ledger.jsonl`;
+- the round table: `docs/concepts/ROUNDS.md` "Round 12 results".
+
+All numbers are frozen exact on Bench(110,360), fitted on Bench(60,160), and re-measured by an independent verifier.
+No bench, judge or kit file changed this round. Ledger re-read at 17:59 UTC: conecut-knee and desmo-slipper WATCH;
+spiral-lobe and desmo-vrocker not audited (dead); none gamed. The farm sat at its budget line, so everything ran locally.
+
+**What was measured**
+
+* **conecut-knee-knuckle-3r: VERIFIED 18.28 (score 93.35), held out 22.38, complexity 18.5, ledger WATCH - the round
+  winner, a measured tie with the lead, not a lead change** (slipper-nose-knuckle-3r stays at 18.49 / 23.45).
+  * The lead's chain and drive with a re-centred two-pin knee (lE 97.14, lc 24.35, MR63ZZ pairs at stk 6.0) and a 2 mm
+    440C dowel stop on J3's own angle, [-111.90, 122.74] on q3' (r 7.5 in hub 3's lower plate, 250.7-deg groove).
+  * Reach 0.7278 (262/360: the lead's 261 + pose 203), overhead 8/28, ib14 0.9012, contact 0.0106 (4 poses).
+  * Paired against the lead: bench -0.20 (CI90 [-1.05, +0.80]), held -1.08 ([-1.86, +0.06]), pooled -0.82
+    ([-1.46, +0.09]): every interval includes 0. At equal E-strap sample count the bench reads 18.67 (0.18 behind);
+    held out 22.90 (0.55 ahead).
+  * Holds up: knee window margin 11.4 / 13.2 mm (lead 0.33), 0 held knee slides (lead 32), knee-link force 12 N per
+    N.m (lead 31.6), dowel 133 N per N.m (shear safety factor 2.6 at 10 N.m).
+* **desmo-slipper-knuckle-3r: VERIFIED 18.95 (score 93.11), held out 23.90, complexity 15.75 (lead 18.25), ledger
+  WATCH.** The lead with no clock spring, no stop-A pin and no stage-1 roller: an O1.5 pin in a 3-D groove under hub 2's
+  cap ring and the O2.5 nose in a two-walled slot. The claim (a_s 9.25 / psi 154: 18.63 / 23.59) failed its own
+  0.25-deg crank-free slop gate under a 223-point scan (0.273 deg at K 42, inside the taken range); the verifier's
+  placement a_s 9.5 / psi 150 passes (0.241) at +0.36. Paired against the lead: +0.46 bench, +0.45 held, all in-band,
+  identical takes and contacts, P(desmo better) 0.00. Against conecut: pooled +1.28 behind (CI90 of conecut - desmo
+  [-1.90, -0.13]).
+* **spiral-lobe-longdyad-knuckle-3r (lens 1): DEAD at gate 0, death upheld and found worse.** Best of 12 law cells
+  (34/48, lin kK 2.8, onset margin 14): ghost 17.86 with 8 contacts (bar <= 17.5 with <= 4). With its own drive metal
+  (pick3's placement): 38.56, reach 0.692, follow 0.891, 40 contacts (horn 29, rod 18, hub 2 / ear 4; 88.1 mm summed).
+* **desmo-vrocker-longdyad-knuckle-3r (pick 4): DEAD at gate 3, death upheld.** Best of 14 ghost cells (32/48, kK 2.4,
+  onset 14, cap 56): 17.23 with 6 contacts; <= 4-contact cells 18.85-18.87; ghost max 270 taken < the gate-4 274. The
+  J3-stop column does not rescue it (best knife-edge window 17.71 with 5 contacts). Gate 1: 0 conjugate pairs as
+  specified with O2.5 pins; pairs exist only with track B on top and the base ring relieved to r 7.0.
+
+**What failed and why**
+
+1. **The long-dyad knuckle's reach is capped by its seats.** The same five chain contacts (117 / 127 / 129 / 139 at
+   plane -90..-60, elev 45-60, axial 105-135; 316 at 60 / 150 / -105; link 2 to -7.7 mm, hub 2's rim to -3.8 mm)
+   appear in every cell at onset 12-14 on 30/49, 32/48 and 34/48, at gains 2.3-2.8 and caps 56-64, and two of them
+   deepen as K falls. It is link 2's route over the posterior deltoid at pick3's seats, not over-opening; no law,
+   stop, cap or drive moves it. Best ghost on file: 17.23 (6 contacts), not the 17.86 the lead directive quoted.
+2. **On a slaved K, stop B is a th cut.** Chain contacts (K 29.5-64.8) and takes share the K range. The least-opening
+   law sheds all 12 contacts but folds 14-15 stretched poses at th 110-115 (cause open).
+3. **A J3 stop relabels, it never takes.** The dowel's 1.10 points (no-stop control 19.38) come from poses whose metal
+   would be 0.95-14.5 mm in the skin (E strap vs link 2, hub 2, K housing). The lead's knee window relabels the same
+   held poses as slides, so the skeptic refuted the one-sided relabel penalty.
+4. **Strap dilution.** In-band is sample-weighted: 104 -> 164 E-strap samples is worth 0.39 bench points (18.28 vs
+   18.67) while the chain's own in-band falls (0.859 vs 0.869; hub 2 0.912 vs 0.953). Dense wall sampling read 0.31
+   lower fast on desmo. Proposed catalogue entry S6: compare in-band at equal sample counts.
+5. **A desmodromic groove's determinacy needs dense, enforced gates.** Crank-free K play = g c / |v_F . e_r|; the
+   follower needs ~40 deg of radial velocity in the dwell (spec psi 184: 1.12 deg dwell, 2.2-3.7 at the corner). The
+   claim's 9-point scan missed 0.273 deg at K 42; the declared groove-radius gate was never enforced (0.37 mm at the
+   claim, a 0.23 mm ridge at the verified placement); the PA gate read the linear law, not the built groove.
+6. **A sliding pair in place of a rolling one moves a friction cliff into range.** The spring-free stage 1 jams at
+   mu 0.14 (dK_lim 0, fast 86.71) and holds at 0.135 (44.5, 14.84); the lead's rolling stage 1 holds dK_lim 43.0 at
+   mu 0.15. Deleting the clock spring changes no bench number (the cap is never skin-facing): its value is 3
+   complexity points and the M5 risk.
+7. **The knee must be sized held out.** lE 101 / lc 31 takes 20 held contacts (9 arm pad / knee link) at elev 15,
+   axial -135..-165, poses the fast bench never samples. A long knee link needs MR63ZZ stk 6.0 (stk 4.85: knee-vs-E clash
+   on 329 poses).
+8. **Process holes, measured again.** The verify template still bars against 68.93 / 75.94; pair coverage missed
+   desmo's short arm / pin vs the hub-2 stack (M3); the models carry no slop state (fold margin under K play is an
+   estimate); desmo's best_params kept the refuted placement. Reach did not move for the third round (best 262 takes).
+
+**Alignment (watch reasons carried, with the numbers)**
+
+* **conecut-knee-knuckle-3r, WATCH (10 upheld, 1 refuted: NEW-stop-relabel):** dominance (+0.21 plain, -1.82 at
+  2 mm; report only); reporting (verdict text reads as a screen; sweep best 12.5 shown as 95.45 vs verified 18.28);
+  T1 (bench edge = pose 203 at 0.26 mm cmin, worth 0.55; held edge on 11 poses at 0.76-3.68 mm, 6 under 2 mm; taken
+  under 1 / 2 / 3 mm 3 / 33 / 105 vs 3 / 30 / 100; 2 mm near-touch bench 34.84 vs 33.02, held 37.10 vs 36.95);
+  NEW-strap-dilution (equal strap 18.67 bench / 22.90 held; chain-only in-band 0.859 vs 0.869); T5 (bench 4 contacts
+  20.24 mm, deepest 8.93 at (15, 165, -60), x3.25 / +14.01 mm vs sidecar-longdyad's 6.23; new 205 hub 2 -4.28, 316 link
+  2 -1.23; held 14 / 60.97 mm, deepest 9.86, new 835 -3.55 and 978 -1.33 on pad / knee-link metal); NEW-tie-headline
+  (the dashboard crowns the tie until the lead writes leader_ruling citing ledger 2026-10-17T17:57:13Z); M5 (the
+  lead's spring / law / drive; R17 forward bound fails the unrounded 5.0 gate by 0.0008 deg at mu 0.15; new knee runs
+  59-107 deg, its cuff twist and R17 unmeasured); G4 (carried: m_sub < 5 on 106 of 204 rest poses, < 1 on 50); T3 (held
+  th 5.006, a +-0.3 deg K-phase error crosses it); NEW-ws-inband (elev 90-140: 83.2 % in band, 16.8 % above 14 mm,
+  max 30.74; held 84.8 / 14.9 %; better than the lead's 80.0 / 19.9 %). Skeptic: the upper stop cuts 5 held would-be
+  contacts, not 3; T6 must be applied to both designs.
+* **desmo-slipper-knuckle-3r, WATCH (9 upheld, 0 refuted):** reporting / R2 (sweep best 12.79 shown as 95.35, a
+  dense-wall fast number between two refuted placements, 6.16 under the verified 18.95); NEW-friction-cliff (cap-side
+  PA 35.25 deg at the dwell exit; holds to mu 0.135, jams from 0.14; 188 of 371 taken poses cross it);
+  NEW-silent-check (RC_MIN 1.5 declared, never enforced: 0.37 mm at the claim, 0.99-1.0 mm at the verified placement,
+  a 0.23 mm ridge); NEW-refuted-best-params (best_params / 13.19 / "paired TIE" belong to the refuted placement); T3
+  (K play ~0.36 deg nominal, 0.48 worst, ~0.1 deg of th: held 5.006 falls under 5, estimated); M3 (the 9.5 mm arm and
+  O1.5 pin inside hub 2's O20 footprint, unchecked; a ~5 x 4 x 1.5 mm relief pocket assumed); T5 (the lead's contacts:
+  9.01 + 5.72 = 14.72 mm bench, x2.36; held 10 contacts 46.14 mm, deepest 9.05); NEW-ws-inband (elev 90-140 in-band
+  0.8009, p95 19.98 mm; lead 0.8004). Skeptic: the stage-1 PA gate reads the linear law; on the built (blended) groove
+  the cap-side angle is 89 deg at the dwell exit and over the claim-mu gate up to K 8.1 - either the mu cliff is an
+  artefact or the design fails its own gate at mu 0.087; transmission at the dwell exit under friction is unshown.
+* **spiral-lobe-longdyad / desmo-vrocker-longdyad:** not in the ledger (dead). Verifier notes: spiral's convergence gate
+  moved only law settings; its unmeasured ">= 18.5 with metal" is now 38.56; desmo-vrocker's gate 1 was not
+  independently re-derived (gates 3 and 4 each kill it alone).
+
+**Next:** one knuckle lens on complexity - the spring-free drive stacked on the conecut knee (cx ~16.0) with the slop,
+groove-radius, built-groove PA and mu 0.15 gates enforced in the model and the arm pocket checked; reach in this family
+only through a J2-seat / K-axis chain-ghost gate (<= 17.5 with <= 4 contacts and >= 274 takes), at the lead's call; the
+machinery (template bar, pair-coverage probe, flood, slop state, mu column, S6) before the next claim.
