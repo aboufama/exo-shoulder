@@ -169,11 +169,16 @@ def wear(P, which="bench", flood=False, dump=None):
 
 
 if __name__ == "__main__":
-    P = dict(BEST); retarget(P)
+    P = dict(BEST)
+    for i_, a_ in enumerate(sys.argv):                         # --set k=v (the fixed placement: --set a_s=9.75 --set psi=148)
+        if a_ == "--set": k_, v_ = sys.argv[i_ + 1].split("=", 1); P[k_] = float(v_)
+    retarget(P)
     if sys.argv[1] == "fast":
         old = os.environ.pop("CB_EXACT", None); B = CB.Bench(n_clip=60, n_ws=160); t = time.time()
         r, M = DS._report(B, dict(P))
-        print(json.dumps(dict(blend=BLEND, gap=r["gap"], plain=r.get("plain"), near1=r.get("gap_near1"), ib10=r.get("inband10"), l2=r.get("l2"), reach=r["reach"], follow=r["follow"], inband14=r["inband14"], contact=r["contact"], why=r.get("why"),
+        cf = (((r.get("cam") or {}).get("desmo") or {}).get("slop") or {}).get("crank_free", {})
+        print(json.dumps(dict(blend=BLEND, set={k: P[k] for k in ("a_s", "psi", "mu")}, dK_lim=(r.get("cam") or {}).get("dK_lim"), why_lim=(r.get("cam") or {}).get("why_lim"),
+                              free_max=cf.get("max_deg"), gap=r["gap"], plain=r.get("plain"), near1=r.get("gap_near1"), ib10=r.get("inband10"), l2=r.get("l2"), reach=r["reach"], follow=r["follow"], inband14=r["inband14"], contact=r["contact"], why=r.get("why"),
                               honest=r.get("honest"), desmo_fail=r.get("desmo_fail"), blend_ik=dict(_BL), secs=round(time.time() - t, 1)), default=float)); sys.exit()
     if sys.argv[1] == "wear":
         which, path = sys.argv[2], sys.argv[3]
