@@ -142,7 +142,7 @@ the fit bench still does not want the long dyad: the long-dyad lever is not a me
   costs 0.29 points** (was 7.57): crank 0.29 (in band 0.71, median 13.2: the radial arm's mid-span r 5-15 mm still
   climbs over link 1b's strap, in band 0.23-0.26 there), sockets 0.22, rod 0.03, the ear -0.52 (it helps: 1.00 in band
   at 9.5 mm), horn -0.08. The 3 contact poses are not the drive's: they stay with the drive deleted (the overhead pose 237
-  presses hub K / horn / rod together, 9.7 mm).
+  presses hub K / horn / rod together, 9.7 mm; slipper-nose loses the same pose at 9.0 mm).
 - **Paired per pose vs slipper-nose** (`paired.py`, 4000 paired bootstraps within kind): bench +0.39 (90 % CI [-0.28,
   +1.54], P better 0.22; 1 workspace pose fewer, 1 contact more at 0.04 mm), held **-0.24** ([-0.68, +0.17], P 0.77; 1
   / 1 discordant taken poses, 1 contact fewer), pooled -0.06 ([-0.44, +0.39], P 0.55). **Parity, not a lead.** The
@@ -178,8 +178,9 @@ row's top-level fit number (16.47) and so finds no dump that reproduces it; the 
   fails as stated: off the strap the pivot lands on link 1b's hub-2 eye, 3.5 mm higher.
 - **The hard goal is not met:** frozen 18.87 / held 23.21 (robust 18.83 / 23.16) against <= 18.0 / <= 22.0. **No part's
   metal makes it impossible any more** (all drive metal deleted: 18.58). The wall is the CHAIN under leak-free selection:
-  the fit bench picks the short dyad 26 / 38 / 59 at kK 1.79 (fold 88 = slipper-nose's 88, K used 45.8), and the steep-law
-  long dyad that made the ghost 18.25 / 21.11 ranks worse on the fit objective (18.45-18.60 vs 16.47).
+  the fit bench picks the short dyad 26 / 38 / 59 at kK 1.79 (fold 88 = slipper-nose's 88, K used 45.8), and the steep law
+  that made the ghost 18.25 / 21.11 ranks worse on the fit objective (cma1 a / d, seeded on the k30 / k27b long dyads:
+  18.45-18.60 vs 16.47, both walk back to 26 / 38-40).
 - **Against the leader: parity** (pooled paired -0.06, CI [-0.44, +0.39]) at +6.25 complexity; held-out contact depth
   halved (23.2 vs 46.1 mm summed). Not a new leader.
 - **New knowledge.** (1) A stacked bell crank costs ~3.7 points by itself and its height comes from the stack, not the
