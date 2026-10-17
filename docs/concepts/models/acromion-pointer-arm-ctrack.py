@@ -36,7 +36,7 @@ SWEEP_JSON = os.path.join(REPO, "docs", "concepts", "sweeps", f"{ID}.json")
 E = K.unit(np.array([-0.02273058, -0.98614607, 0.16431446]))          # GH -> elbow (body_pose humerus frame)
 LAT = np.array([0.004, 0.164, 0.986]); LAT = K.unit(LAT - (LAT @ E) * E); POST = np.cross(E, LAT)
 PARAMS = dict(az=30.0, el=0.0, sigma=1, al12=90.0, al23=90.0, s_t=40.0, tc=-10.0, tw=200.0, thc=-5.5, car=24.0,
-              circ=1, margin=K.FOLD_MARGIN, width=12.0, t_link=3.0, q=0.95, qt=0.95)
+              circ=1, twin=70.0, fork=1, margin=K.FOLD_MARGIN, width=12.0, t_link=3.0, q=0.95, qt=0.95)
 CAR_H = 7.0                                                   # carriage body: skin face -> top (mm)
 
 

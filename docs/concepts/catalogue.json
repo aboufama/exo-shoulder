@@ -2957,7 +2957,7 @@
   "name": "Acromion-pole relay 4R: a plain O20 spherical 3R whose J1 walks the acromion-cap rim on a spring-centred J0 at the cap pole (plain-host control + corrected-flood re-measure of the stop-relay class)",
   "family": "redundant spherical 4R with a scapular spare, clamp (spring + stops) or twin-spring determination",
   "lens": "round101:scapular spare relay (Keemink 2018 redundant 4R), plain host control + instrument; 4 DOF, the user prefers 3",
-  "status": "ideated",
+  "status": "dead",
   "t_ideated": "2026-10-17T17:29:15Z",
   "source": "round 101 (J1) judge (docs/concepts/round101_ideation.md)",
   "merged_from": [
