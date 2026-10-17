@@ -6,6 +6,7 @@
                    every ear sample within 1.42 mm (sqrt(2) x half the 2 mm spacing) of an earlier ear sample, so the
                    overlap is sampled once; the strip and the disc keep their own 2 mm grids elsewhere.
   --er X           the ball-link socket ring radius SC.ER (model 3.5 = O7; the catalogue igus KBRM-02 head O9 -> 4.5)
+  --zb Z           the horn-end ball centre's height over the lug top SC.ZB (model 3.0; a spacer raises it)
   --set k=v        a parameter override on the config (e.g. r_h=15.9, the sidecar red team's fix for the ROD-hubK pair)
   --fitonly        only the fit bench Bench(60,160) FAST reading (seconds; a screen, not a claim)
 
@@ -67,9 +68,10 @@ def main():
         if x == "--set": k, v = a[i + 1].split("="); sets[k] = float(v)
     P.update(sets)
     if "--er" in a: SC.ER = float(a[a.index("--er") + 1])
+    if "--zb" in a: SC.ZB = float(a[a.index("--zb") + 1])      # ball centre over the lug top (a spacer under the stud)
     if "--dedup-ear" in a: install_dedup()
     tmp = outp.replace(".json", "_params.json"); json.dump(dict(params=P), open(tmp, "w"), indent=1)
-    meta = dict(src=src, sets=sets, er=SC.ER, dedup_ear="--dedup-ear" in a, margin=EP.KIT.FOLD_MARGIN,
+    meta = dict(src=src, sets=sets, er=SC.ER, zb=SC.ZB, dedup_ear="--dedup-ear" in a, margin=EP.KIT.FOLD_MARGIN,
                 noprice=os.environ.get("ENVP_NOPRICE") == "1")
     if "--fitonly" in a:
         Pp, pinfo = EP.priced(EP.params_of(tmp))
