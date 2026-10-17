@@ -196,8 +196,8 @@ Continuity flood on the claim: static 21.27 = connected full 21.27 (0 dropped), 
   at the 5 deg dyad margin (on the 77-deg config: 10 poses at th 110-121 with law dK 53-68, all 'closure' or knee), and
   a steeper law (kK 2.7+) dies at the lobe's base circle. kK 2.3 would close 272 instead of 267, and is reachable only
   with r_lobe ~8.5, s_arm 4 and g ~1.8, where the crank swings more and sits higher.
-- **The drive metal is the second cost.** Even the ghost lever (perfect parking) is +1.01 worse on the frozen bench
-  (better held out: -0.76). The real rod drive adds ~1.8 bench points: its bell crank (median 14.0 mm, in band 0.50)
+- **The drive metal is the second cost.** At the CMA's own law slope (kK ~2) even the ghost lever (perfect parking) is
+  +1.01 worse on the frozen bench (better held out: -0.76); with the law steepened it beats the reference (section 8). The real rod drive adds ~1.8 bench points: its bell crank (median 14.0 mm, in band 0.50)
   and ball links (0.67) sit over the band, and its horn / rod make the 3 bench contacts (max depth 12.8 mm).
 
 ## 5. Red team (the claim s65n2d)
@@ -215,26 +215,35 @@ Continuity flood on the claim: static 21.27 = connected full 21.27 (0 dropped), 
 gamed finding): not verified yet; sample-weighted in-band 0.873 vs part-weighted 0.878; crank mostly out of band (0.50,
 median 14.0 mm).
 
-## 6. Verdict and what it means for the planner
+## 6. Verdict and what it means for the planner (revised after section 8)
 
-- **Delivered:** a K drive that turns K 65-77 deg with every pressure angle <= 42 (the phased RSSR; measured, robust to
-  +-1 deg / +-0.25 mm), and a spherical-4R reading of it with no chord lean (78.5 deg kinematically, complexity 28.0).
-- **Not delivered:** a score gain. Best long-stroke claim 21.27 frozen / 26.19 held vs slipper-nose 18.49 / 23.45. The
-  hard goal (reach >= 0.78, overhead >= 12/28, in-band >= 0.88, held out < 23.45) is not met by any measured config.
+- **Delivered:** a K drive that turns K 65-77 deg with every pressure angle <= 42 (the phased RSSR; its stroke is robust
+  to +-1 deg / +-0.25 mm), and a spherical-4R reading of it with no chord lean (78.5 deg kinematically, complexity 28.0).
+- **Not delivered:** a score gain with real metal. Best long-stroke claim with the real rod drive: 21.27 frozen / 26.19
+  held (s65n2d) against slipper-nose's 18.49 / 23.45. The hard goal (reach >= 0.78, overhead >= 12/28, in-band >= 0.88,
+  held out < 23.45) is not met by any measured config with drive metal.
+- **The lever is real but the drive's metal is the blocker:** with the lobe law at its PA-42 limit (kK 3.0) and the
+  drive's metal deleted, the long-dyad chain measures **18.25 frozen / 21.11 held** (fold 88 -> 77; held 2.34 better than
+  the reference). Through the rod drive's real metal the same law is 25.83, and the steep-law CMA (cma5) cannot park the
+  rod (in-band 0.85; section 8).
 - **New knowledge.**
   1. One-sided contacts (nose, roller, groove) cap at 41-52 deg at PA 42: the involute arc of action. Long stroke needs a
      linkage (or a much bigger cam on the skin).
   2. A straight rod between members turning about axes through GH leans 10-30 deg out of their planes; a spherical
      coupler removes that lean.
-  3. **After the stroke, the K LAW is the stretched wall:** the hub-2 lobe's pressure angle caps the law slope
-     (kK <= tan(42) g r_lobe / s_arm ~ 2.0), and at kK <= 2 the poses past th ~109 fail the 5 deg closure. A drive stroke
-     past ~50 deg is idle until the law is steepened. The fold analysis' parking test assumes the IDEAL law (K opens just
-     enough) and the parts' clip levels; the real chain has neither.
-  4. Even with the drive metal deleted, the long-stroke chain is not a bench gain (19.50 vs 18.49; held 22.69 vs 23.45).
-- **Next (cheapest first):** (a) a steeper law at lobe PA <= 42: a bigger lobe base (r_lobe 8.5-9 inside a wider hub-2
-  skirt) or a smaller follower arm, re-measured with the ghost drive first (`LS_GHOST=1`, `stroke_curve.py`), because
-  if the ghost does not gain, no drive will; (b) only then the drive: the spherical coupler on radial pins with the
-  crank's arm kept at link 1b's level (its in-band, not its stroke, is the cost).
+  3. **After the stroke, the K LAW is the stretched wall.** Along a lobe law, th rises ~1.9 deg per q2 degree while a1e
+     rises 1.5 -> 0.9 (the K sub-dyad's efficiency falls as K opens), so the 5 deg margin is lost at th ~109 (kK 2) /
+     ~114 (kK 3.0, the lobe's PA-42 limit). The chain can use ~52-54 deg of K, not 75. The fold analysis' parking test
+     assumes the ideal law (a1e = th - a2 + 5); a q2-driven lobe cannot follow it.
+  4. Searching on the drive's stroke is not searching on reach: a stroke constraint was met vacuously (range 65, use 42).
+- **Next (cheapest first):**
+  (a) a drive whose metal PARKS under the steep law: the bell crank's arm kept at link 1b's level (the 40-55 deg crank
+  swing keeps it stacked today, in band 0.5-0.6) - e.g. the spherical coupler at strap level, or the crank pivot moved
+  off link 1b's strap; gate it with the ghost first (`LS_GHOST=1`: 18.25 / 21.11 is the ceiling to chase);
+  (b) a law that steepens as K opens (the lobe's PA falls 40 -> 32 along the stroke, so there is room late; a two-slope
+  law died at its slope jump, so the profile must be smooth);
+  (c) the nose drive on the steep-law dyad (complexity 22.25) did not synthesise from the 28 / 50 seeds; it needs its own
+  sweep, and its ~46-50 deg cap is close to the ~52 the chain uses.
 
 ## 7. What a verifier must re-run
 
