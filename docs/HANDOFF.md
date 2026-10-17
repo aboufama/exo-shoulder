@@ -464,6 +464,11 @@ designs (dipped-law-groove-knuckle-3r, seed-offset-3r-slides); every leader is w
      nothing and the family's ceiling is measured (ghost 17.86). Its generation CAD = the gen-7 builder with conecut's
      re-centred never-binding knee (lE 97.1 / lc 24.4) + the J3 dowel stop, queued for when the gen-7 fix pass
      (wf_788f3848-0a6) finishes its check - the box is saturated (load ~17) and the jump track has priority.
+   - *Lead, 18:35 UTC:* conecut-knee became the verified lead (18.28 / 22.38, user's plain-gap rule; the lead's CI tie
+     rule withdrawn and put to the user). Gen-7 fix pass DONE (R1 81.18 slipper / 81.30 trimlug, verifier NOT refuted;
+     its last judges run as scratchpad/fix/judge_rest.sh). Gen-8 CAD of conecut-knee launched (wf_5f217f1a-14b, local,
+     no render) from the gen-7 builders, closing the verifier's D1 / D2 / D3 / O3 items. Lead ruling O4: link 2 is
+     machined from solid (3+2-axis), so CLAUDE.md CAD ruling (2) allows its up-to-70-deg drop at J2, stated on the part.
 2. **Reach is the gap.**
    - The lead's gap is reach 17.50 of 18.49 (ROUNDS round 10 results). **Score 95 is gap <= 13.75**: +18 workspace
      poses at the lead's in-band and contact, 0.278 points each (ROUNDS round 11 plan).

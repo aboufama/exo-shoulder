@@ -1,0 +1,198 @@
+[
+ {
+  "id": "R1",
+  "name": "Proximity: covered skin 2-14 mm from the metal while following (user 2026-10-15: pass at 14 mm, aim for 10)",
+  "value": 0.8129588333425007,
+  "unit": null,
+  "target": ">= 0.9",
+  "status": "FAIL",
+  "judge": "full-exo/score_design.py BAND_HI=14 (exact posed skin, 30 fps clips)"
+ },
+ {
+  "id": "R1-aim",
+  "name": "Aim: the same at 2-10 mm (the 1 cm rule)",
+  "value": 0.4757221908278806,
+  "unit": null,
+  "target": ">= 0.9",
+  "status": "FAIL",
+  "judge": "full-exo/score_design.py (exact posed skin, 30 fps clips)"
+ },
+ {
+  "id": "R2",
+  "name": "No part enters the body, any frame of any clip",
+  "value": 24.87,
+  "unit": "mm",
+  "target": "<= 0.5 mm",
+  "status": "FAIL",
+  "judge": "judge/body_contact.py (exact signed distance)"
+ },
+ {
+  "id": "R3",
+  "name": "Follows the arm (frames tracked, not held at a limit)",
+  "value": 1.0,
+  "unit": null,
+  "target": ">= 0.95",
+  "status": "PASS",
+  "judge": "full-exo/score_design.py"
+ },
+ {
+  "id": "R4",
+  "name": "Overhead works (Raise overhead clip score) (14 mm band)",
+  "value": 0.7337651754074966,
+  "unit": null,
+  "target": ">= 0.8",
+  "status": "FAIL",
+  "judge": "full-exo/score_design.py"
+ },
+ {
+  "id": "R5",
+  "name": "Shoulder-chain DOF from the scapula base to the arm, counted kinematically (cap 4; the user's scapula handler is a separate part)",
+  "value": 3,
+  "unit": null,
+  "target": "<= 4",
+  "status": "PASS",
+  "judge": "design.json"
+ },
+ {
+  "id": "R5-aim",
+  "name": "Aim: exactly 3 DOF, the minimum (user 2026-10-15)",
+  "value": 3,
+  "unit": null,
+  "target": "<= 3",
+  "status": "PASS",
+  "judge": "design.json"
+ },
+ {
+  "id": "R6",
+  "name": "No interference between parts that move relative to each other",
+  "value": 0.0,
+  "unit": "mm",
+  "target": "<= 0.15 mm",
+  "status": "PASS",
+  "judge": "judge/part_contact.py (geometry only)"
+ },
+ {
+  "id": "R7",
+  "name": "Every custom part is one valid closed solid",
+  "value": true,
+  "unit": null,
+  "target": "== True",
+  "status": "PASS",
+  "judge": "judge/part_validity.py (OCC BRepCheck on the exported STEP)"
+ },
+ {
+  "id": "R8",
+  "name": "Custom-part mass budget (user: 500 g for the shoulder)",
+  "value": 216.2,
+  "unit": "g",
+  "target": "<= 500 g",
+  "status": "PASS",
+  "judge": "parts_full.json (mesh volume x density)"
+ },
+ {
+  "id": "R9",
+  "name": "Strength at the MVP2 design load (arm gravity support + margin: 10 N.m about GH from a 50 N cuff force at 200 mm, worst direction; was 25 N.m): min yield SF over the load-path parts; fatigue (Goodman, 1e7 cycles, fully reversed) and chain deflection (sum of the parts' GH-point motion) within the 2 mm floor and the min skin gap",
+  "value": null,
+  "unit": "SF",
+  "target": ">= 1.5 SF and fatigue SF >= 1.0 and deflection within the floor == True and every load-path part analysed == True and joint hardware at the D1F tilt (bearing static s0 >= 1, pin / threads SF >= 1.5) == True and fall on the elbow (2 x D1F) below fracture >= 1.0",
+  "status": "NOT RUN",
+  "judge": "judge/fea.py (CalculiX 2.21 C3D10 on gmsh tet10 of the STEP parts, validated on a cantilever and a thick ring within 2 %: judge/fea_validation.json; t/2 + t/3 mesh-convergence pair per part; red team: worst direction, overhead, 2x fall, smallest section, joint bearings / pin / threads (hand calcs on the FE wrench); sizing by re-solving the mapped mesh: judge/fea_sizing.py)"
+ },
+ {
+  "id": "R10",
+  "name": "Base rides the scapula on the user's scapula handler: worst GH-centre misalignment from the handler slipping over the bone (4 mm, confirmed)",
+  "value": null,
+  "unit": "mm",
+  "target": "<= 4.0 mm",
+  "status": "NOT RUN",
+  "judge": "judge/base_mount.py + judge/base_slip.py (girdle mount: literature skin-slip model, central law; acromion-cluster vs bone errors Karduna 2001 / van Andel 2009 / Lempereur 2014, lever from the OpenSim Seth 2016 scapula; docs/research/base_slip_model.md). Thorax mounts keep the three-girdle-law check"
+ },
+ {
+  "id": "R11",
+  "name": "Interface pressure, simulation part: worst mean cuff pressure the exo adds (incl. the arm parts' weight) over the MVP1 rolling-bearing cases, within the all-day budget and the ISO/TS 15066 upper-arm limits; the prototype pressure-film check remains",
+  "value": 0.26,
+  "unit": "kPa",
+  "target": "<= 7.5 kPa and ISO/TS 15066 (150 N, 190 N/cm2 at 2x edge peak) == True",
+  "status": "PASS",
+  "judge": "judge/dynamics.py (MuJoCo cuff force) -> judge/scorecard.py interface_pressure(): 7.5 kPa = 14 kPa sustained (Kermavnar; Van Vlerken 15 kPa) - 6.5 kPa strap preload; ISO/TS 15066 Annex A Table A.2; then pressure film / FSRs on a prototype",
+  "details": {
+   "exo_kPa_worst": 0.26,
+   "worst_case": "passive|mu0.005|t0.001|s2|hub",
+   "per_case_kPa": {
+    "passive|mu0.002|t0.001|s1|hub": 0.253,
+    "passive|mu0.002|t0.001|s2|hub": 0.259,
+    "passive|mu0.005|t0.001|s1|hub": 0.254,
+    "passive|mu0.005|t0.001|s1|hub|krate0.01": 0.254,
+    "passive|mu0.005|t0.001|s2|hub": 0.26
+   },
+   "total_with_strap_kPa_worst": 6.76,
+   "budget_exo_kPa": 7.5,
+   "sustained_budget_kPa": 14.0,
+   "strap_preload_kPa": 6.5,
+   "area_cm2": 68.0,
+   "arm_parts_weight_N": 1.15,
+   "iso_ok": true,
+   "iso": {
+    "force_N_worst": 1.77,
+    "force_limit_N": 150.0,
+    "local_peak_kPa_est": 0.52,
+    "pressure_limit_kPa": 1900.0,
+    "basis": "ISO/TS 15066:2016 Annex A Table A.2, upper arm and elbow: 150 N; deltoid 190 / humerus 220 N/cm2"
+   },
+   "aim_capillary_kPa": 4.3,
+   "exo_under_capillary": true,
+   "plain_bearing_worst_kPa": 74.79,
+   "note": "mean pressure on the cuff's skin side (dynamics.py rule); the forearm cuff shares the load (upper-cuff values are upper bounds); base-side (scapula handler) pressure is not simulated; the prototype pressure-film / FSR check remains part of R11"
+  }
+ },
+ {
+  "id": "R12",
+  "name": "CAD standard: G2 surfaces, flat seats under every seat, no visible screws or seams",
+  "value": null,
+  "target": "",
+  "status": "PARTIAL",
+  "judge": "zebra / curvature check (full-exo/parts.html) + user review"
+ },
+ {
+  "id": "R13",
+  "name": "Manufacturable",
+  "value": null,
+  "target": "",
+  "status": "NOT DONE",
+  "judge": "supplier DFM review + quote (CNC Ti / 7075, SLM AlSi10Mg)"
+ },
+ {
+  "id": "R14",
+  "name": "Generalises: holds on motions and body shapes never used to design it",
+  "value": null,
+  "target": "",
+  "status": "NO DATA",
+  "judge": "held-out OpenCap / AMASS clips and SMPL-X bodies (data/raw)"
+ },
+ {
+  "id": "R15",
+  "name": "Works on real bodies",
+  "value": null,
+  "target": "",
+  "status": "NOT DONE",
+  "judge": "printed prototype on the user + one very different body: OpenCap reach vs bare arm, zero skin-contact on FSR strips"
+ },
+ {
+  "id": "R16",
+  "name": "Follows the functional everyday workspace (built design: chain closes, no body contact, no part interference)",
+  "value": 0.6417,
+  "unit": null,
+  "target": ">= 0.9",
+  "status": "FAIL",
+  "judge": "judge/workspace.py (L1 CAD over the functional workspace poses; user: 90 % range first)"
+ },
+ {
+  "id": "R17",
+  "name": "Moves freely unpowered (MVP1): the arm drives the chain through every clip, peak <= 1 N.m about the shoulder, <= 5 N and <= 5 deg at the cuff, no stall, no undriven spare joint",
+  "value": true,
+  "unit": null,
+  "target": "== True",
+  "status": "PASS",
+  "judge": "judge/dynamics.py (MuJoCo 3.16; rolling bearings mu 0.005; load-dependent friction; validated in judge/test_dynamics.py)"
+ }
+]
