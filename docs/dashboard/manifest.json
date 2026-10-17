@@ -104,9 +104,9 @@
   "title": "Data build info",
   "description": "When tools/dash_build.py last gathered the data, the repo commit, and any warnings it printed.",
   "file": "data/meta.json",
-  "sha256": "0b736bf98b41e57b5a93a33b81bd8bc301f5ebfba1c65911a48a20739717a692",
+  "sha256": "6b96a570aa572d7440b2182e499306c48254722ed5ce2ef505cfb455289408e5",
   "rows": 1,
   "bytes": 2089,
-  "updated": "2026-10-17T15:43:31Z"
+  "updated": "2026-10-17T15:44:19Z"
  }
 ]
