@@ -384,7 +384,7 @@
   {
    "k": 31,
    "group": "l2",
-   "name": "D9-02 drive lobe ring: 17-4PH H900, wire-EDM (taper 14.8 deg along the follower axis), profile r 10.66 -> 12.62 mm (6 3-point arcs), dwell r 10.21, bore O20 on the J2 cap skirt, band F+6.99..F+10.02, keyed by an O1 dowel at the onset + 0.23 deg (K bias)",
+   "name": "D9-02 drive lobe ring: 17-4PH H900, wire-EDM (taper 14.8 deg along the follower axis), profile r 10.66 -> 12.62 mm (6 3-point arcs), dwell r 10.21, bore O20 on the J2 cap skirt, band F+6.99..F+10.02, keyed by an O1 dowel at the onset phase + 0.35 deg of q2 (the +0.75 deg K lead, +0.15 / -0.10 deg K; the CAD draws the nominal phase = the loaded state)",
    "vol_cm3": 0.097,
    "material": "17-4PH",
    "mass_g": 0.75,
@@ -528,7 +528,7 @@
   {
    "k": 43,
    "group": "l3",
-   "name": "pin a: ISO 8734 3 m6 x 9.2 440C (1.4125) pressed H7/m6 in the E boss over its full 2.18 mm, O2.3 x 0.6 e-clip groove with a 0.3 mm land (polished)",
+   "name": "knee pin a ISO 8734 3 m6 x 10 faced to 9.2: 440C (1.4125) pressed H7/m6 in the E boss over its full 2.18 mm, O2.3 x 0.6 e-clip groove with a 0.3 mm land (polished)",
    "vol_cm3": 0.063,
    "material": "stainless (polished)",
    "mass_g": 0.5,
@@ -540,7 +540,7 @@
   {
    "k": 44,
    "group": "l3",
-   "name": "pin a: inner-ring spacer O3.1 x O4.5 x 0.5 (stainless, polished)",
+   "name": "knee pin a spacer: inner-ring spacer O3.1 x O4.5 x 0.5 (stainless, polished)",
    "vol_cm3": 0.004,
    "material": "stainless (polished)",
    "mass_g": 0.03,
@@ -552,7 +552,7 @@
   {
    "k": 45,
    "group": "l4",
-   "name": "pin a: knee bearing 1 of 2 MR63ZZ 3x6x2.5 (J6 housing, the pin's free length j5) (polished)",
+   "name": "knee pin a bearing 1 MR63ZZ: knee bearing 1 of 2 MR63ZZ 3x6x2.5 (J6 housing, the pin's free length j5) (polished)",
    "vol_cm3": 0.053,
    "material": "bearing steel",
    "mass_g": 0.41,
@@ -564,7 +564,7 @@
   {
    "k": 46,
    "group": "l4",
-   "name": "pin a: knee bearing 2 of 2 MR63ZZ 3x6x2.5 (J6 housing, the pin's free length j5) (polished)",
+   "name": "knee pin a bearing 2 MR63ZZ: knee bearing 2 of 2 MR63ZZ 3x6x2.5 (J6 housing, the pin's free length j5) (polished)",
    "vol_cm3": 0.053,
    "material": "bearing steel",
    "mass_g": 0.41,
@@ -576,7 +576,7 @@
   {
    "k": 47,
    "group": "l3",
-   "name": "pin a: shim O3.1 x O4.5 x 0.1 under the clip (stainless, polished)",
+   "name": "knee pin a shim: O3.1 x O4.5 x 0.1 under the e-clip (stainless, polished)",
    "vol_cm3": 0.001,
    "material": "stainless (polished)",
    "mass_g": 0.01,
@@ -588,7 +588,7 @@
   {
    "k": 48,
    "group": "l3",
-   "name": "pin a: retaining e-clip DIN 6799 RS 2.3 (A2 stainless, polished)",
+   "name": "knee pin a e-clip DIN 6799 RS 2.3: retaining e-clip (A2 stainless, polished)",
    "vol_cm3": 0.012,
    "material": "stainless (polished)",
    "mass_g": 0.09,
@@ -624,7 +624,7 @@
   {
    "k": 51,
    "group": "H",
-   "name": "pin b: ISO 8734 3 m6 x 9.2 440C (1.4125) pressed H7/m6 in the arm pad over its full 2.18 mm, O2.3 x 0.6 e-clip groove with a 0.3 mm land (polished)",
+   "name": "knee pin b ISO 8734 3 m6 x 10 faced to 9.2: 440C (1.4125) pressed H7/m6 in the arm pad over its full 2.18 mm, O2.3 x 0.6 e-clip groove with a 0.3 mm land (polished)",
    "vol_cm3": 0.063,
    "material": "stainless (polished)",
    "mass_g": 0.5,
@@ -636,7 +636,7 @@
   {
    "k": 52,
    "group": "H",
-   "name": "pin b: inner-ring spacer O3.1 x O4.5 x 0.5 (stainless, polished)",
+   "name": "knee pin b spacer: inner-ring spacer O3.1 x O4.5 x 0.5 (stainless, polished)",
    "vol_cm3": 0.004,
    "material": "stainless (polished)",
    "mass_g": 0.03,
@@ -648,7 +648,7 @@
   {
    "k": 53,
    "group": "l4",
-   "name": "pin b: knee bearing 1 of 2 MR63ZZ 3x6x2.5 (J6 housing, the pin's free length j5) (polished)",
+   "name": "knee pin b bearing 1 MR63ZZ: knee bearing 1 of 2 MR63ZZ 3x6x2.5 (J6 housing, the pin's free length j5) (polished)",
    "vol_cm3": 0.053,
    "material": "bearing steel",
    "mass_g": 0.41,
@@ -660,7 +660,7 @@
   {
    "k": 54,
    "group": "l4",
-   "name": "pin b: knee bearing 2 of 2 MR63ZZ 3x6x2.5 (J6 housing, the pin's free length j5) (polished)",
+   "name": "knee pin b bearing 2 MR63ZZ: knee bearing 2 of 2 MR63ZZ 3x6x2.5 (J6 housing, the pin's free length j5) (polished)",
    "vol_cm3": 0.053,
    "material": "bearing steel",
    "mass_g": 0.41,
@@ -672,7 +672,7 @@
   {
    "k": 55,
    "group": "H",
-   "name": "pin b: shim O3.1 x O4.5 x 0.1 under the clip (stainless, polished)",
+   "name": "knee pin b shim: O3.1 x O4.5 x 0.1 under the e-clip (stainless, polished)",
    "vol_cm3": 0.001,
    "material": "stainless (polished)",
    "mass_g": 0.01,
@@ -684,7 +684,7 @@
   {
    "k": 56,
    "group": "H",
-   "name": "pin b: retaining e-clip DIN 6799 RS 2.3 (A2 stainless, polished)",
+   "name": "knee pin b e-clip DIN 6799 RS 2.3: retaining e-clip (A2 stainless, polished)",
    "vol_cm3": 0.012,
    "material": "stainless (polished)",
    "mass_g": 0.09,

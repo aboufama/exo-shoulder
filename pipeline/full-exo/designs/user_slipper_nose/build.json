@@ -172,7 +172,8 @@
   "back_mm": 6.0,
   "web_bottom_over_fK_mm": 1.944,
   "lug_valid": true,
-  "web_valid": true
+  "web_valid": true,
+  "trim": null
  },
  "links": {
   "link 1a": {
@@ -321,7 +322,8 @@
    "pocket": 0,
    "valid": true,
    "solids": 1,
-   "slivers": "no zero-area faces"
+   "slivers": "no zero-area faces",
+   "margin_mm": 0.1
   },
   "link 2": {
    "split": "4 strips of 2.00 mm glued side by side (exact glue + re-sewn without its zero-area faces; STEP round trip 0 bad faces, 0 zero-area (tried: exact glue: 0 bad faces after STEP, 5 zero-area; exact glue + re-sewn without its zero-area faces: 0 bad faces after STEP, 0 zero-area))",
@@ -331,7 +333,7 @@
      "vertices": 61,
      "radii": [
       0.5,
-      1.854,
+      2.0,
       2.0,
       2.0,
       0.5,
@@ -356,7 +358,7 @@
       0.5,
       2.0,
       2.0,
-      0.821,
+      0.75,
       2.0,
       2.0,
       2.0,
@@ -375,67 +377,8 @@
       2.0,
       2.0,
       2.0,
-      0.751,
-      1.814
-     ],
-     "rounded_edges": true,
-     "max_climb": 59.47,
-     "stations_raised_for_the_60deg_ramp": [
-      2,
-      28,
-      29
-     ],
-     "over_L1_min": -0.21567320821743863,
-     "over_L1_mean": 0.14645437251421142,
-     "over_L1_max": 0.8317844783172532,
-     "over_L1_max_outside_footprints": 0.8317844783172532,
-     "process": "machined from solid Ti-6Al-4V (2.5-D: ONE side-view sketch of lines + tangent arcs through the model's strap stations, extruded 2 mm; 3+2-axis or wire EDM), rounds R2 / R0.5 in the profile"
-    },
-    {
-     "stations": 29,
-     "vertices": 61,
-     "radii": [
-      0.5,
-      1.706,
-      2.0,
-      0.5,
-      2.0,
-      0.5,
-      2.0,
-      0.5,
-      0.5,
-      0.5,
-      0.5,
-      0.5,
-      0.5,
-      0.5,
-      0.5,
-      0.5,
-      0.5,
-      0.5,
-      1.685,
-      2.0,
-      0.5,
-      2.0,
-      2.0,
-      0.43,
-      2.0,
-      2.0,
-      2.0,
-      2.0,
-      2.0,
-      2.0,
-      2.0,
-      2.0,
-      2.0,
-      2.0,
-      2.0,
-      2.0,
-      2.0,
-      2.0,
-      2.0,
-      0.788,
-      1.786
+      0.7,
+      1.824
      ],
      "rounded_edges": true,
      "max_climb": 59.45,
@@ -444,10 +387,10 @@
       28,
       29
      ],
-     "over_L1_min": -0.21567472792141018,
-     "over_L1_mean": 0.14757793049726775,
-     "over_L1_max": 0.853557589225332,
-     "over_L1_max_outside_footprints": 0.7334453322992971,
+     "over_L1_min": -0.21567320821743863,
+     "over_L1_mean": 0.06361498083452034,
+     "over_L1_max": 0.8342267784864248,
+     "over_L1_max_outside_footprints": 0.8342267784864248,
      "process": "machined from solid Ti-6Al-4V (2.5-D: ONE side-view sketch of lines + tangent arcs through the model's strap stations, extruded 2 mm; 3+2-axis or wire EDM), rounds R2 / R0.5 in the profile"
     },
     {
@@ -455,15 +398,10 @@
      "vertices": 61,
      "radii": [
       0.5,
-      1.693,
+      1.847,
       2.0,
       0.5,
       2.0,
-      0.5,
-      0.5,
-      0.5,
-      0.5,
-      0.5,
       0.5,
       2.0,
       0.5,
@@ -472,22 +410,17 @@
       0.5,
       0.5,
       0.5,
-      2.0,
-      2.0,
       0.5,
       0.5,
+      0.5,
+      0.5,
+      0.5,
+      1.649,
+      2.0,
+      0.5,
       2.0,
       2.0,
-      0.591,
-      1.469,
-      2.0,
-      2.0,
-      2.0,
-      2.0,
-      2.0,
-      2.0,
-      2.0,
-      2.0,
+      0.392,
       2.0,
       2.0,
       2.0,
@@ -495,11 +428,80 @@
       2.0,
       2.0,
       2.0,
-      0.703,
-      1.753
+      2.0,
+      2.0,
+      2.0,
+      2.0,
+      2.0,
+      2.0,
+      2.0,
+      2.0,
+      0.74,
+      1.798
      ],
      "rounded_edges": true,
-     "max_climb": 59.46,
+     "max_climb": 59.44,
+     "stations_raised_for_the_60deg_ramp": [
+      2,
+      28,
+      29
+     ],
+     "over_L1_min": -0.21567472792141018,
+     "over_L1_mean": 0.06473204988947893,
+     "over_L1_max": 0.853557589225332,
+     "over_L1_max_outside_footprints": 0.735035371598741,
+     "process": "machined from solid Ti-6Al-4V (2.5-D: ONE side-view sketch of lines + tangent arcs through the model's strap stations, extruded 2 mm; 3+2-axis or wire EDM), rounds R2 / R0.5 in the profile"
+    },
+    {
+     "stations": 29,
+     "vertices": 61,
+     "radii": [
+      0.5,
+      1.832,
+      2.0,
+      0.5,
+      2.0,
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      2.0,
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      2.0,
+      2.0,
+      0.5,
+      0.5,
+      2.0,
+      2.0,
+      0.684,
+      1.364,
+      2.0,
+      2.0,
+      2.0,
+      2.0,
+      2.0,
+      2.0,
+      2.0,
+      2.0,
+      2.0,
+      2.0,
+      2.0,
+      2.0,
+      2.0,
+      2.0,
+      2.0,
+      0.659,
+      1.766
+     ],
+     "rounded_edges": true,
+     "max_climb": 59.44,
      "stations_raised_for_the_60deg_ramp": [
       2,
       27,
@@ -507,9 +509,9 @@
       29
      ],
      "over_L1_min": -0.21567472880751382,
-     "over_L1_mean": 0.17323012066983573,
+     "over_L1_mean": 0.0939366711381261,
      "over_L1_max": 1.0482313118948525,
-     "over_L1_max_outside_footprints": 0.9318445581680947,
+     "over_L1_max_outside_footprints": 0.9334345974791205,
      "process": "machined from solid Ti-6Al-4V (2.5-D: ONE side-view sketch of lines + tangent arcs through the model's strap stations, extruded 2 mm; 3+2-axis or wire EDM), rounds R2 / R0.5 in the profile"
     },
     {
@@ -517,7 +519,7 @@
      "vertices": 61,
      "radii": [
       0.5,
-      1.691,
+      1.83,
       2.0,
       0.5,
       2.0,
@@ -539,7 +541,8 @@
       0.5,
       2.0,
       2.0,
-      0.62,
+      0.71,
+      1.976,
       2.0,
       2.0,
       2.0,
@@ -554,12 +557,11 @@
       2.0,
       2.0,
       2.0,
-      2.0,
-      0.669,
-      1.739
+      0.626,
+      1.753
      ],
      "rounded_edges": true,
-     "max_climb": 59.47,
+     "max_climb": 59.45,
      "stations_raised_for_the_60deg_ramp": [
       2,
       27,
@@ -567,21 +569,22 @@
       29
      ],
      "over_L1_min": -0.21566844010490627,
-     "over_L1_mean": 0.18673304034759758,
+     "over_L1_mean": 0.10743934533086189,
      "over_L1_max": 1.2420484952225337,
-     "over_L1_max_outside_footprints": 1.1274681208784472,
+     "over_L1_max_outside_footprints": 1.1290581602023906,
      "process": "machined from solid Ti-6Al-4V (2.5-D: ONE side-view sketch of lines + tangent arcs through the model's strap stations, extruded 2 mm; 3+2-axis or wire EDM), rounds R2 / R0.5 in the profile"
     }
    ],
-   "over_L1_max_outside_footprints": 1.1274681208784472,
-   "max_climb": 59.47,
+   "over_L1_max_outside_footprints": 1.1290581602023906,
+   "max_climb": 59.45,
    "process": "machined from solid Ti-6Al-4V (2.5-D: 4 side-view sketches side by side of lines + tangent arcs through the model's strap stations, extruded 2 mm; 3+2-axis milling - a wire cannot cut strips of different profiles side by side), rounds R2 / R0.5 in the profile",
    "seat_mm": 11.0,
    "pad_round_mm": 2.0,
    "u3_lean_out_of_plane_deg": 4.7434634168615615,
    "valid": true,
    "solids": 1,
-   "slivers": "1 zero-area faces removed by re-sewing"
+   "slivers": "1 zero-area faces removed by re-sewing",
+   "margin_mm": 0.0
   }
  },
  "lobe": {
@@ -935,50 +938,7 @@
   "rule": "base at the J1 hub ring, no tab (user 2026-10-16); NO ears: link 1 sweeps every ear heading (see diag)",
   "interface": "the handler's bracket threads onto the J1 M18 x 0.5 spigot in place of the dome cap (retains the upper outer ring)",
   "built_vs_posed_link1_mm": 0.14993432073009963,
-  "diag": [
-   {
-    "rule": "strict",
-    "dz": 0.0,
-    "headings_clear_of_link1": 0,
-    "skin_feasible": 0,
-    "best_skin": []
-   },
-   {
-    "rule": "strict",
-    "dz": 1.3,
-    "headings_clear_of_link1": 0,
-    "skin_feasible": 0,
-    "best_skin": []
-   },
-   {
-    "rule": "strict",
-    "dz": 2.6,
-    "headings_clear_of_link1": 0,
-    "skin_feasible": 0,
-    "best_skin": []
-   },
-   {
-    "rule": "relaxed",
-    "dz": 0.0,
-    "headings_clear_of_link1": 0,
-    "skin_feasible": 0,
-    "best_skin": []
-   },
-   {
-    "rule": "relaxed",
-    "dz": 1.3,
-    "headings_clear_of_link1": 0,
-    "skin_feasible": 0,
-    "best_skin": []
-   },
-   {
-    "rule": "relaxed",
-    "dz": 2.6,
-    "headings_clear_of_link1": 0,
-    "skin_feasible": 0,
-    "best_skin": []
-   }
-  ],
+  "diag": [],
   "valid": true,
   "solids": 1
  },
@@ -1198,32 +1158,32 @@
    "zero_area_faces": 0,
    "solids_after_step": 1
   },
-  "pin a: ISO 8734 3 m6 x 9.2 440C (1.4125) pressed H7/m6 in th": {
+  "knee pin a ISO 8734 3 m6 x 10 faced to 9.2: 440C (1.4125) pr": {
    "bad_faces_after_step": 0,
    "zero_area_faces": 0,
    "solids_after_step": 1
   },
-  "pin a: inner-ring spacer O3.1 x O4.5 x 0.5 (stainless, polis": {
+  "knee pin a spacer: inner-ring spacer O3.1 x O4.5 x 0.5 (stai": {
    "bad_faces_after_step": 0,
    "zero_area_faces": 0,
    "solids_after_step": 1
   },
-  "pin a: knee bearing 1 of 2 MR63ZZ 3x6x2.5 (J6 housing, the p": {
+  "knee pin a bearing 1 MR63ZZ: knee bearing 1 of 2 MR63ZZ 3x6x": {
    "bad_faces_after_step": 0,
    "zero_area_faces": 0,
    "solids_after_step": 1
   },
-  "pin a: knee bearing 2 of 2 MR63ZZ 3x6x2.5 (J6 housing, the p": {
+  "knee pin a bearing 2 MR63ZZ: knee bearing 2 of 2 MR63ZZ 3x6x": {
    "bad_faces_after_step": 0,
    "zero_area_faces": 0,
    "solids_after_step": 1
   },
-  "pin a: shim O3.1 x O4.5 x 0.1 under the clip (stainless, pol": {
+  "knee pin a shim: O3.1 x O4.5 x 0.1 under the e-clip (stainle": {
    "bad_faces_after_step": 0,
    "zero_area_faces": 0,
    "solids_after_step": 1
   },
-  "pin a: retaining e-clip DIN 6799 RS 2.3 (A2 stainless, polis": {
+  "knee pin a e-clip DIN 6799 RS 2.3: retaining e-clip (A2 stai": {
    "bad_faces_after_step": 0,
    "zero_area_faces": 0,
    "solids_after_step": 1
@@ -1238,32 +1198,32 @@
    "zero_area_faces": 0,
    "solids_after_step": 1
   },
-  "pin b: ISO 8734 3 m6 x 9.2 440C (1.4125) pressed H7/m6 in th": {
+  "knee pin b ISO 8734 3 m6 x 10 faced to 9.2: 440C (1.4125) pr": {
    "bad_faces_after_step": 0,
    "zero_area_faces": 0,
    "solids_after_step": 1
   },
-  "pin b: inner-ring spacer O3.1 x O4.5 x 0.5 (stainless, polis": {
+  "knee pin b spacer: inner-ring spacer O3.1 x O4.5 x 0.5 (stai": {
    "bad_faces_after_step": 0,
    "zero_area_faces": 0,
    "solids_after_step": 1
   },
-  "pin b: knee bearing 1 of 2 MR63ZZ 3x6x2.5 (J6 housing, the p": {
+  "knee pin b bearing 1 MR63ZZ: knee bearing 1 of 2 MR63ZZ 3x6x": {
    "bad_faces_after_step": 0,
    "zero_area_faces": 0,
    "solids_after_step": 1
   },
-  "pin b: knee bearing 2 of 2 MR63ZZ 3x6x2.5 (J6 housing, the p": {
+  "knee pin b bearing 2 MR63ZZ: knee bearing 2 of 2 MR63ZZ 3x6x": {
    "bad_faces_after_step": 0,
    "zero_area_faces": 0,
    "solids_after_step": 1
   },
-  "pin b: shim O3.1 x O4.5 x 0.1 under the clip (stainless, pol": {
+  "knee pin b shim: O3.1 x O4.5 x 0.1 under the e-clip (stainle": {
    "bad_faces_after_step": 0,
    "zero_area_faces": 0,
    "solids_after_step": 1
   },
-  "pin b: retaining e-clip DIN 6799 RS 2.3 (A2 stainless, polis": {
+  "knee pin b e-clip DIN 6799 RS 2.3: retaining e-clip (A2 stai": {
    "bad_faces_after_step": 0,
    "zero_area_faces": 0,
    "solids_after_step": 1
@@ -1654,7 +1614,7 @@
   {
    "k": 31,
    "group": "l2",
-   "name": "D9-02 drive lobe ring: 17-4PH H900, wire-EDM (taper 14.8 deg along the follower axis), profile r 10.66 -> 12.62 mm (6 3-point arcs), dwell r 10.21, bore O20 on the J2 cap skirt, band F+6.99..F+10.02, keyed by an O1 dowel at the onset + 0.23 deg (K bias)",
+   "name": "D9-02 drive lobe ring: 17-4PH H900, wire-EDM (taper 14.8 deg along the follower axis), profile r 10.66 -> 12.62 mm (6 3-point arcs), dwell r 10.21, bore O20 on the J2 cap skirt, band F+6.99..F+10.02, keyed by an O1 dowel at the onset phase + 0.35 deg of q2 (the +0.75 deg K lead, +0.15 / -0.10 deg K; the CAD draws the nominal phase = the loaded state)",
    "vol_cm3": 0.097,
    "material": "17-4PH",
    "mass_g": 0.75,
@@ -1798,7 +1758,7 @@
   {
    "k": 43,
    "group": "l3",
-   "name": "pin a: ISO 8734 3 m6 x 9.2 440C (1.4125) pressed H7/m6 in the E boss over its full 2.18 mm, O2.3 x 0.6 e-clip groove with a 0.3 mm land (polished)",
+   "name": "knee pin a ISO 8734 3 m6 x 10 faced to 9.2: 440C (1.4125) pressed H7/m6 in the E boss over its full 2.18 mm, O2.3 x 0.6 e-clip groove with a 0.3 mm land (polished)",
    "vol_cm3": 0.063,
    "material": "stainless (polished)",
    "mass_g": 0.5,
@@ -1810,7 +1770,7 @@
   {
    "k": 44,
    "group": "l3",
-   "name": "pin a: inner-ring spacer O3.1 x O4.5 x 0.5 (stainless, polished)",
+   "name": "knee pin a spacer: inner-ring spacer O3.1 x O4.5 x 0.5 (stainless, polished)",
    "vol_cm3": 0.004,
    "material": "stainless (polished)",
    "mass_g": 0.03,
@@ -1822,7 +1782,7 @@
   {
    "k": 45,
    "group": "l4",
-   "name": "pin a: knee bearing 1 of 2 MR63ZZ 3x6x2.5 (J6 housing, the pin's free length j5) (polished)",
+   "name": "knee pin a bearing 1 MR63ZZ: knee bearing 1 of 2 MR63ZZ 3x6x2.5 (J6 housing, the pin's free length j5) (polished)",
    "vol_cm3": 0.053,
    "material": "bearing steel",
    "mass_g": 0.41,
@@ -1834,7 +1794,7 @@
   {
    "k": 46,
    "group": "l4",
-   "name": "pin a: knee bearing 2 of 2 MR63ZZ 3x6x2.5 (J6 housing, the pin's free length j5) (polished)",
+   "name": "knee pin a bearing 2 MR63ZZ: knee bearing 2 of 2 MR63ZZ 3x6x2.5 (J6 housing, the pin's free length j5) (polished)",
    "vol_cm3": 0.053,
    "material": "bearing steel",
    "mass_g": 0.41,
@@ -1846,7 +1806,7 @@
   {
    "k": 47,
    "group": "l3",
-   "name": "pin a: shim O3.1 x O4.5 x 0.1 under the clip (stainless, polished)",
+   "name": "knee pin a shim: O3.1 x O4.5 x 0.1 under the e-clip (stainless, polished)",
    "vol_cm3": 0.001,
    "material": "stainless (polished)",
    "mass_g": 0.01,
@@ -1858,7 +1818,7 @@
   {
    "k": 48,
    "group": "l3",
-   "name": "pin a: retaining e-clip DIN 6799 RS 2.3 (A2 stainless, polished)",
+   "name": "knee pin a e-clip DIN 6799 RS 2.3: retaining e-clip (A2 stainless, polished)",
    "vol_cm3": 0.012,
    "material": "stainless (polished)",
    "mass_g": 0.09,
@@ -1894,7 +1854,7 @@
   {
    "k": 51,
    "group": "H",
-   "name": "pin b: ISO 8734 3 m6 x 9.2 440C (1.4125) pressed H7/m6 in the arm pad over its full 2.18 mm, O2.3 x 0.6 e-clip groove with a 0.3 mm land (polished)",
+   "name": "knee pin b ISO 8734 3 m6 x 10 faced to 9.2: 440C (1.4125) pressed H7/m6 in the arm pad over its full 2.18 mm, O2.3 x 0.6 e-clip groove with a 0.3 mm land (polished)",
    "vol_cm3": 0.063,
    "material": "stainless (polished)",
    "mass_g": 0.5,
@@ -1906,7 +1866,7 @@
   {
    "k": 52,
    "group": "H",
-   "name": "pin b: inner-ring spacer O3.1 x O4.5 x 0.5 (stainless, polished)",
+   "name": "knee pin b spacer: inner-ring spacer O3.1 x O4.5 x 0.5 (stainless, polished)",
    "vol_cm3": 0.004,
    "material": "stainless (polished)",
    "mass_g": 0.03,
@@ -1918,7 +1878,7 @@
   {
    "k": 53,
    "group": "l4",
-   "name": "pin b: knee bearing 1 of 2 MR63ZZ 3x6x2.5 (J6 housing, the pin's free length j5) (polished)",
+   "name": "knee pin b bearing 1 MR63ZZ: knee bearing 1 of 2 MR63ZZ 3x6x2.5 (J6 housing, the pin's free length j5) (polished)",
    "vol_cm3": 0.053,
    "material": "bearing steel",
    "mass_g": 0.41,
@@ -1930,7 +1890,7 @@
   {
    "k": 54,
    "group": "l4",
-   "name": "pin b: knee bearing 2 of 2 MR63ZZ 3x6x2.5 (J6 housing, the pin's free length j5) (polished)",
+   "name": "knee pin b bearing 2 MR63ZZ: knee bearing 2 of 2 MR63ZZ 3x6x2.5 (J6 housing, the pin's free length j5) (polished)",
    "vol_cm3": 0.053,
    "material": "bearing steel",
    "mass_g": 0.41,
@@ -1942,7 +1902,7 @@
   {
    "k": 55,
    "group": "H",
-   "name": "pin b: shim O3.1 x O4.5 x 0.1 under the clip (stainless, polished)",
+   "name": "knee pin b shim: O3.1 x O4.5 x 0.1 under the e-clip (stainless, polished)",
    "vol_cm3": 0.001,
    "material": "stainless (polished)",
    "mass_g": 0.01,
@@ -1954,7 +1914,7 @@
   {
    "k": 56,
    "group": "H",
-   "name": "pin b: retaining e-clip DIN 6799 RS 2.3 (A2 stainless, polished)",
+   "name": "knee pin b e-clip DIN 6799 RS 2.3: retaining e-clip (A2 stainless, polished)",
    "vol_cm3": 0.012,
    "material": "stainless (polished)",
    "mass_g": 0.09,
@@ -3033,1680 +2993,5 @@
   "f2": 62.043247235042166,
   "follower_check_mm": 3.817914306160712e-12
  },
- "drive_posed": {
-  "drive lobe follower roller | D9-02": [
-   -0.038,
-   -1.17
-  ],
-  "drive nose dowel | D8-02a": [
-   -0.025,
-   0.0
-  ],
-  "D9-01 | D8-02a": [
-   0.108,
-   0.0
-  ],
-  "D9-01 | D9-02": [
-   0.379,
-   -15.75
-  ],
-  "D9-01 | D8-02b": [
-   0.086,
-   0.0
-  ],
-  "D9-01 | D8-03": [
-   0.123,
-   0.0
-  ],
-  "D9-01 | J2 cap": [
-   1.339,
-   0.0
-  ],
-  "D9-01 | K clock-spring cap": [
-   2.882,
-   0.0
-  ],
-  "drive lobe follower roller | J2 cap": [
-   0.676,
-   0.0
-  ],
-  "drive lobe follower roller | D8-03": [
-   0.552,
-   0.0
-  ],
-  "drive follower pin | D9-02": [
-   1.422,
-   -1.17
-  ],
-  "drive follower inner-ring shim | D9-02": [
-   0.783,
-   -29.31
-  ],
-  "drive nose dowel | K clock-spring cap": [
-   5.103,
-   0.0
-  ],
-  "drive nose dowel | D8-02b": [
-   3.885,
-   0.0
-  ],
-  "D8-02a | D8-02b": [
-   0.15,
-   -29.31
-  ],
-  "D8-02a | K clock-spring cap": [
-   0.2,
-   -29.31
-  ],
-  "D8-02a | D8-01": [
-   0.15,
-   -29.31
-  ],
-  "drive crank pivot pin clip | D9-01": [
-   0.52,
-   -29.31
-  ],
-  "D9-02 | D8-02b": [
-   3.615,
-   -15.75
-  ],
-  "drive crank bearing 1 | D8-02b": [
-   0.158,
-   -29.31
-  ],
-  "contact drive lobe follower roller | D9-02 (driven frames: min, max of the per-frame min)": [
-   42,
-   -0.042,
-   0.001
-  ],
-  "contact drive nose dowel | D8-02a (driven frames: min, max of the per-frame min)": [
-   42,
-   -0.026,
-   -0.001
-  ]
- },
- "check": [
-  {
-   "label": "arm at side",
-   "bench_pose": 60,
-   "pose": [
-    -90.0,
-    0.0,
-    75.0
-   ],
-   "taken": true,
-   "state": 1,
-   "joint_features_max_mm": 0.143,
-   "rigid_non_drive_max_mm": 1.3491,
-   "strap_samples_outside_hub_zones_max_mm": 1.0586,
-   "drive_samples_mm": {
-    "crank": [
-     7.5353,
-     6.7855,
-     7.5353
-    ],
-    "roller": [
-     0.1,
-     0.0695,
-     0.0029
-    ],
-    "horn": [
-     0.9847,
-     0.9357,
-     0.9847
-    ]
-   },
-   "within_0p5": true,
-   "per_part": {
-    "hub1": [
-     0.143,
-     0.0,
-     0.143
-    ],
-    "hubK (slot band)": [
-     1.4185,
-     56
-    ],
-    "hubK": [
-     0.0,
-     0.0,
-     0.0
-    ],
-    "hub2 (slot band)": [
-     1.42,
-     56
-    ],
-    "hub2": [
-     0.0,
-     0.0,
-     0.0
-    ],
-    "hub3": [
-     0.0,
-     0.0,
-     0.0
-    ],
-    "E": [
-     0.524,
-     0.4766,
-     0.524
-    ],
-    "boss": [
-     0.0,
-     0.0,
-     0.0
-    ],
-    "pad": [
-     0.0,
-     0.0,
-     0.0
-    ],
-    "knee": [
-     1.3491,
-     0.0001,
-     1.3491
-    ],
-    "crank": [
-     7.5353,
-     6.7855,
-     7.5353
-    ],
-    "roller": [
-     0.1,
-     0.0695,
-     0.0029
-    ],
-    "horn": [
-     0.9847,
-     0.9357,
-     0.9847
-    ],
-    "L1a": [
-     1.1232,
-     1.1232,
-     0.0
-    ],
-    "L1a outside hub zones": [
-     null,
-     0,
-     null,
-     null
-    ],
-    "L1b": [
-     0.7051,
-     0.5829,
-     0.7051
-    ],
-    "L1b outside hub zones": [
-     0.7051,
-     24,
-     0.8333,
-     0.2542
-    ],
-    "L2": [
-     2.0824,
-     0.9505,
-     2.0824
-    ],
-    "L2 outside hub zones": [
-     1.0586,
-     108,
-     0.7222,
-     0.2266
-    ]
-   },
-   "frame_dev_mm": 7.6e-05,
-   "res_deg": 0.0001,
-   "knee_angle": 86.6,
-   "stops": {
-    "K": {
-     "angle_deg": -8.795,
-     "from_stop_lo_deg": 54.054,
-     "to_stop_hi_deg": 8.795,
-     "inside": true
-    },
-    "J2": {
-     "angle_deg": 3.194,
-     "from_stop_lo_deg": 19.019,
-     "to_stop_hi_deg": 98.874,
-     "inside": true
-    }
-   }
-  },
-  {
-   "label": "first",
-   "bench_pose": 0,
-   "pose": [
-    30.0,
-    3.0,
-    -30.0
-   ],
-   "taken": true,
-   "state": 1,
-   "joint_features_max_mm": 0.1424,
-   "rigid_non_drive_max_mm": 1.349,
-   "strap_samples_outside_hub_zones_max_mm": 1.0586,
-   "drive_samples_mm": {
-    "crank": [
-     7.5354,
-     6.7855,
-     7.5354
-    ],
-    "roller": [
-     0.1,
-     0.0695,
-     0.0029
-    ],
-    "horn": [
-     0.9847,
-     0.9357,
-     0.9847
-    ]
-   },
-   "within_0p5": true,
-   "per_part": {
-    "hub1": [
-     0.1424,
-     0.0,
-     0.1424
-    ],
-    "hubK (slot band)": [
-     1.4185,
-     56
-    ],
-    "hubK": [
-     0.0,
-     0.0,
-     0.0
-    ],
-    "hub2 (slot band)": [
-     1.42,
-     56
-    ],
-    "hub2": [
-     0.0,
-     0.0,
-     0.0
-    ],
-    "hub3": [
-     0.0001,
-     0.0001,
-     0.0
-    ],
-    "E": [
-     0.524,
-     0.4766,
-     0.524
-    ],
-    "boss": [
-     0.0,
-     0.0,
-     0.0
-    ],
-    "pad": [
-     0.0,
-     0.0,
-     0.0
-    ],
-    "knee": [
-     1.349,
-     0.0,
-     1.349
-    ],
-    "crank": [
-     7.5354,
-     6.7855,
-     7.5354
-    ],
-    "roller": [
-     0.1,
-     0.0695,
-     0.0029
-    ],
-    "horn": [
-     0.9847,
-     0.9357,
-     0.9847
-    ],
-    "L1a": [
-     1.1232,
-     1.1232,
-     0.0
-    ],
-    "L1a outside hub zones": [
-     null,
-     0,
-     null,
-     null
-    ],
-    "L1b": [
-     0.7051,
-     0.5829,
-     0.7051
-    ],
-    "L1b outside hub zones": [
-     0.7051,
-     24,
-     0.8333,
-     0.2542
-    ],
-    "L2": [
-     2.0823,
-     0.9504,
-     2.0823
-    ],
-    "L2 outside hub zones": [
-     1.0586,
-     108,
-     0.7222,
-     0.2266
-    ]
-   },
-   "frame_dev_mm": 6.3e-05,
-   "res_deg": 0.0,
-   "knee_angle": 87.2,
-   "stops": {
-    "K": {
-     "angle_deg": -1.507,
-     "from_stop_lo_deg": 61.342,
-     "to_stop_hi_deg": 1.507,
-     "inside": true
-    },
-    "J2": {
-     "angle_deg": 6.579,
-     "from_stop_lo_deg": 22.403,
-     "to_stop_hi_deg": 95.489,
-     "inside": true
-    }
-   }
-  },
-  {
-   "label": "middle",
-   "bench_pose": 97,
-   "pose": [
-    0.0,
-    45.0,
-    -30.0
-   ],
-   "taken": true,
-   "state": 0,
-   "joint_features_max_mm": 0.1444,
-   "rigid_non_drive_max_mm": 1.3491,
-   "strap_samples_outside_hub_zones_max_mm": 1.0585,
-   "drive_samples_mm": {
-    "crank": [
-     7.5354,
-     6.7855,
-     7.5354
-    ],
-    "roller": [
-     0.1,
-     0.0695,
-     0.0029
-    ],
-    "horn": [
-     0.9847,
-     0.9357,
-     0.9847
-    ]
-   },
-   "within_0p5": true,
-   "per_part": {
-    "hub1": [
-     0.1444,
-     0.0037,
-     0.1444
-    ],
-    "hubK (slot band)": [
-     1.4185,
-     56
-    ],
-    "hubK": [
-     0.0,
-     0.0,
-     0.0
-    ],
-    "hub2 (slot band)": [
-     1.42,
-     56
-    ],
-    "hub2": [
-     0.0,
-     0.0,
-     0.0
-    ],
-    "hub3": [
-     0.0,
-     0.0,
-     0.0
-    ],
-    "E": [
-     0.524,
-     0.4766,
-     0.524
-    ],
-    "boss": [
-     0.0,
-     0.0,
-     0.0
-    ],
-    "pad": [
-     0.0,
-     0.0,
-     0.0
-    ],
-    "knee": [
-     1.3491,
-     0.0,
-     1.3491
-    ],
-    "crank": [
-     7.5354,
-     6.7855,
-     7.5354
-    ],
-    "roller": [
-     0.1,
-     0.0695,
-     0.0029
-    ],
-    "horn": [
-     0.9847,
-     0.9357,
-     0.9847
-    ],
-    "L1a": [
-     1.1232,
-     1.1232,
-     0.0
-    ],
-    "L1a outside hub zones": [
-     null,
-     0,
-     null,
-     null
-    ],
-    "L1b": [
-     0.7052,
-     0.5829,
-     0.7052
-    ],
-    "L1b outside hub zones": [
-     0.7052,
-     24,
-     0.8333,
-     0.2543
-    ],
-    "L2": [
-     2.0824,
-     0.9505,
-     2.0824
-    ],
-    "L2 outside hub zones": [
-     1.0585,
-     108,
-     0.7222,
-     0.2266
-    ]
-   },
-   "frame_dev_mm": 5.2e-05,
-   "res_deg": 0.0001,
-   "knee_angle": 86.3,
-   "stops": {
-    "K": {
-     "angle_deg": 0.0,
-     "from_stop_lo_deg": 62.849,
-     "to_stop_hi_deg": 0.0,
-     "inside": true
-    },
-    "J2": {
-     "angle_deg": 54.647,
-     "from_stop_lo_deg": 70.471,
-     "to_stop_hi_deg": 47.421,
-     "inside": true
-    }
-   }
-  },
-  {
-   "label": "highest",
-   "bench_pose": 140,
-   "pose": [
-    45.0,
-    165.0,
-    -90.0
-   ],
-   "taken": true,
-   "state": 1,
-   "joint_features_max_mm": 0.1412,
-   "rigid_non_drive_max_mm": 1.3491,
-   "strap_samples_outside_hub_zones_max_mm": 1.0586,
-   "drive_samples_mm": {
-    "crank": [
-     7.5353,
-     6.7855,
-     7.5353
-    ],
-    "roller": [
-     0.1,
-     0.0695,
-     0.0029
-    ],
-    "horn": [
-     0.9847,
-     0.9357,
-     0.9847
-    ]
-   },
-   "within_0p5": true,
-   "per_part": {
-    "hub1": [
-     0.1412,
-     0.0,
-     0.1412
-    ],
-    "hubK (slot band)": [
-     1.4185,
-     56
-    ],
-    "hubK": [
-     0.0,
-     0.0,
-     0.0
-    ],
-    "hub2 (slot band)": [
-     1.42,
-     56
-    ],
-    "hub2": [
-     0.0,
-     0.0,
-     0.0
-    ],
-    "hub3": [
-     0.0,
-     0.0,
-     0.0
-    ],
-    "E": [
-     0.524,
-     0.4766,
-     0.524
-    ],
-    "boss": [
-     0.0,
-     0.0,
-     0.0
-    ],
-    "pad": [
-     0.0,
-     0.0,
-     0.0
-    ],
-    "knee": [
-     1.3491,
-     0.0001,
-     1.3491
-    ],
-    "crank": [
-     7.5353,
-     6.7855,
-     7.5353
-    ],
-    "roller": [
-     0.1,
-     0.0695,
-     0.0029
-    ],
-    "horn": [
-     0.9847,
-     0.9357,
-     0.9847
-    ],
-    "L1a": [
-     1.1232,
-     1.1232,
-     0.0
-    ],
-    "L1a outside hub zones": [
-     null,
-     0,
-     null,
-     null
-    ],
-    "L1b": [
-     0.7051,
-     0.5829,
-     0.7051
-    ],
-    "L1b outside hub zones": [
-     0.7051,
-     24,
-     0.8333,
-     0.2542
-    ],
-    "L2": [
-     2.0824,
-     0.9505,
-     2.0824
-    ],
-    "L2 outside hub zones": [
-     1.0586,
-     108,
-     0.7222,
-     0.2266
-    ]
-   },
-   "frame_dev_mm": 8.7e-05,
-   "res_deg": 0.0002,
-   "knee_angle": 146.5,
-   "stops": {
-    "K": {
-     "angle_deg": -3.906,
-     "from_stop_lo_deg": 58.943,
-     "to_stop_hi_deg": 3.906,
-     "inside": true
-    },
-    "J2": {
-     "angle_deg": 5.465,
-     "from_stop_lo_deg": 21.289,
-     "to_stop_hi_deg": 96.603,
-     "inside": true
-    }
-   }
-  },
-  {
-   "label": "2nd highest",
-   "bench_pose": 152,
-   "pose": [
-    60.0,
-    165.0,
-    -90.0
-   ],
-   "taken": true,
-   "state": 1,
-   "joint_features_max_mm": 0.1441,
-   "rigid_non_drive_max_mm": 1.3491,
-   "strap_samples_outside_hub_zones_max_mm": 1.0586,
-   "drive_samples_mm": {
-    "crank": [
-     7.5354,
-     6.7855,
-     7.5354
-    ],
-    "roller": [
-     0.1,
-     0.0695,
-     0.0029
-    ],
-    "horn": [
-     0.9847,
-     0.9357,
-     0.9847
-    ]
-   },
-   "within_0p5": true,
-   "per_part": {
-    "hub1": [
-     0.1441,
-     0.0029,
-     0.1441
-    ],
-    "hubK (slot band)": [
-     1.4185,
-     56
-    ],
-    "hubK": [
-     0.0,
-     0.0,
-     0.0
-    ],
-    "hub2 (slot band)": [
-     1.42,
-     56
-    ],
-    "hub2": [
-     0.0,
-     0.0,
-     0.0
-    ],
-    "hub3": [
-     0.0001,
-     0.0001,
-     0.0001
-    ],
-    "E": [
-     0.5241,
-     0.4767,
-     0.5241
-    ],
-    "boss": [
-     0.0001,
-     0.0001,
-     0.0001
-    ],
-    "pad": [
-     0.0,
-     0.0,
-     0.0
-    ],
-    "knee": [
-     1.3491,
-     0.0,
-     1.3491
-    ],
-    "crank": [
-     7.5354,
-     6.7855,
-     7.5354
-    ],
-    "roller": [
-     0.1,
-     0.0695,
-     0.0029
-    ],
-    "horn": [
-     0.9847,
-     0.9357,
-     0.9847
-    ],
-    "L1a": [
-     1.1232,
-     1.1232,
-     0.0
-    ],
-    "L1a outside hub zones": [
-     null,
-     0,
-     null,
-     null
-    ],
-    "L1b": [
-     0.7051,
-     0.5829,
-     0.7051
-    ],
-    "L1b outside hub zones": [
-     0.7051,
-     24,
-     0.8333,
-     0.2542
-    ],
-    "L2": [
-     2.0824,
-     0.9505,
-     2.0824
-    ],
-    "L2 outside hub zones": [
-     1.0586,
-     108,
-     0.7222,
-     0.2266
-    ]
-   },
-   "frame_dev_mm": 7.2e-05,
-   "res_deg": 0.0002,
-   "knee_angle": 151.9,
-   "stops": {
-    "K": {
-     "angle_deg": -21.592,
-     "from_stop_lo_deg": 41.258,
-     "to_stop_hi_deg": 21.592,
-     "inside": true
-    },
-    "J2": {
-     "angle_deg": -2.748,
-     "from_stop_lo_deg": 13.076,
-     "to_stop_hi_deg": 104.816,
-     "inside": true
-    }
-   }
-  },
-  {
-   "label": "behind the back",
-   "bench_pose": 62,
-   "pose": [
-    -90.0,
-    30.0,
-    105.0
-   ],
-   "taken": true,
-   "state": 1,
-   "joint_features_max_mm": 0.1439,
-   "rigid_non_drive_max_mm": 1.3492,
-   "strap_samples_outside_hub_zones_max_mm": 1.0585,
-   "drive_samples_mm": {
-    "crank": [
-     7.5353,
-     6.7855,
-     7.5353
-    ],
-    "roller": [
-     0.1,
-     0.0695,
-     0.0029
-    ],
-    "horn": [
-     0.9847,
-     0.9358,
-     0.9847
-    ]
-   },
-   "within_0p5": true,
-   "per_part": {
-    "hub1": [
-     0.1439,
-     0.0065,
-     0.1439
-    ],
-    "hubK (slot band)": [
-     1.4185,
-     56
-    ],
-    "hubK": [
-     0.0,
-     0.0,
-     0.0
-    ],
-    "hub2 (slot band)": [
-     1.42,
-     56
-    ],
-    "hub2": [
-     0.0,
-     0.0,
-     0.0
-    ],
-    "hub3": [
-     0.0,
-     0.0,
-     0.0
-    ],
-    "E": [
-     0.524,
-     0.4766,
-     0.524
-    ],
-    "boss": [
-     0.0,
-     0.0,
-     0.0
-    ],
-    "pad": [
-     0.0,
-     0.0,
-     0.0
-    ],
-    "knee": [
-     1.3492,
-     0.0001,
-     1.3492
-    ],
-    "crank": [
-     7.5353,
-     6.7855,
-     7.5353
-    ],
-    "roller": [
-     0.1,
-     0.0695,
-     0.0029
-    ],
-    "horn": [
-     0.9847,
-     0.9358,
-     0.9847
-    ],
-    "L1a": [
-     1.1232,
-     1.1232,
-     0.0
-    ],
-    "L1a outside hub zones": [
-     null,
-     0,
-     null,
-     null
-    ],
-    "L1b": [
-     0.7051,
-     0.5829,
-     0.7051
-    ],
-    "L1b outside hub zones": [
-     0.7051,
-     24,
-     0.8333,
-     0.2542
-    ],
-    "L2": [
-     2.0824,
-     0.9505,
-     2.0824
-    ],
-    "L2 outside hub zones": [
-     1.0585,
-     108,
-     0.7222,
-     0.2266
-    ]
-   },
-   "frame_dev_mm": 0.000117,
-   "res_deg": 0.0001,
-   "knee_angle": 103.9,
-   "stops": {
-    "K": {
-     "angle_deg": -12.358,
-     "from_stop_lo_deg": 50.492,
-     "to_stop_hi_deg": 12.358,
-     "inside": true
-    },
-    "J2": {
-     "angle_deg": 1.54,
-     "from_stop_lo_deg": 17.364,
-     "to_stop_hi_deg": 100.528,
-     "inside": true
-    }
-   }
-  },
-  {
-   "label": "across the body",
-   "bench_pose": 214,
-   "pose": [
-    150.0,
-    45.0,
-    -60.0
-   ],
-   "taken": true,
-   "state": 1,
-   "joint_features_max_mm": 0.1418,
-   "rigid_non_drive_max_mm": 1.3491,
-   "strap_samples_outside_hub_zones_max_mm": 1.0585,
-   "drive_samples_mm": {
-    "crank": [
-     7.5354,
-     6.7855,
-     7.5354
-    ],
-    "roller": [
-     0.1,
-     0.0695,
-     0.0029
-    ],
-    "horn": [
-     0.9847,
-     0.9357,
-     0.9847
-    ]
-   },
-   "within_0p5": true,
-   "per_part": {
-    "hub1": [
-     0.1418,
-     0.007,
-     0.1418
-    ],
-    "hubK (slot band)": [
-     1.4185,
-     56
-    ],
-    "hubK": [
-     0.0,
-     0.0,
-     0.0
-    ],
-    "hub2 (slot band)": [
-     1.42,
-     56
-    ],
-    "hub2": [
-     0.0,
-     0.0,
-     0.0
-    ],
-    "hub3": [
-     0.0,
-     0.0,
-     0.0
-    ],
-    "E": [
-     0.524,
-     0.4766,
-     0.524
-    ],
-    "boss": [
-     0.0,
-     0.0,
-     0.0
-    ],
-    "pad": [
-     0.0,
-     0.0,
-     0.0
-    ],
-    "knee": [
-     1.3491,
-     0.0,
-     1.3491
-    ],
-    "crank": [
-     7.5354,
-     6.7855,
-     7.5354
-    ],
-    "roller": [
-     0.1,
-     0.0695,
-     0.0029
-    ],
-    "horn": [
-     0.9847,
-     0.9357,
-     0.9847
-    ],
-    "L1a": [
-     1.1232,
-     1.1232,
-     0.0
-    ],
-    "L1a outside hub zones": [
-     null,
-     0,
-     null,
-     null
-    ],
-    "L1b": [
-     0.7051,
-     0.5829,
-     0.7051
-    ],
-    "L1b outside hub zones": [
-     0.7051,
-     24,
-     0.8333,
-     0.2542
-    ],
-    "L2": [
-     2.0824,
-     0.9505,
-     2.0824
-    ],
-    "L2 outside hub zones": [
-     1.0585,
-     108,
-     0.7222,
-     0.2266
-    ]
-   },
-   "frame_dev_mm": 4.2e-05,
-   "res_deg": 0.0002,
-   "knee_angle": 86.8,
-   "stops": {
-    "K": {
-     "angle_deg": -20.243,
-     "from_stop_lo_deg": 42.606,
-     "to_stop_hi_deg": 20.243,
-     "inside": true
-    },
-    "J2": {
-     "angle_deg": -2.122,
-     "from_stop_lo_deg": 13.702,
-     "to_stop_hi_deg": 104.19,
-     "inside": true
-    }
-   }
-  },
-  {
-   "label": "overhead raise peak",
-   "bench_pose": 5,
-   "pose": [
-    30.0,
-    150.0,
-    -60.0
-   ],
-   "taken": true,
-   "state": 0,
-   "joint_features_max_mm": 0.143,
-   "rigid_non_drive_max_mm": 1.3491,
-   "strap_samples_outside_hub_zones_max_mm": 1.0586,
-   "drive_samples_mm": {
-    "crank": [
-     7.5353,
-     6.7855,
-     7.5353
-    ],
-    "roller": [
-     0.1,
-     0.0695,
-     0.0029
-    ],
-    "horn": [
-     0.9847,
-     0.9357,
-     0.9847
-    ]
-   },
-   "within_0p5": true,
-   "per_part": {
-    "hub1": [
-     0.143,
-     0.0,
-     0.143
-    ],
-    "hubK (slot band)": [
-     1.4185,
-     56
-    ],
-    "hubK": [
-     0.0,
-     0.0,
-     0.0
-    ],
-    "hub2 (slot band)": [
-     1.42,
-     56
-    ],
-    "hub2": [
-     0.0,
-     0.0,
-     0.0
-    ],
-    "hub3": [
-     0.0,
-     0.0,
-     0.0
-    ],
-    "E": [
-     0.524,
-     0.4766,
-     0.524
-    ],
-    "boss": [
-     0.0,
-     0.0,
-     0.0
-    ],
-    "pad": [
-     0.0,
-     0.0,
-     0.0
-    ],
-    "knee": [
-     1.3491,
-     0.0,
-     1.3491
-    ],
-    "crank": [
-     7.5353,
-     6.7855,
-     7.5353
-    ],
-    "roller": [
-     0.1,
-     0.0695,
-     0.0029
-    ],
-    "horn": [
-     0.9847,
-     0.9357,
-     0.9847
-    ],
-    "L1a": [
-     1.1232,
-     1.1232,
-     0.0
-    ],
-    "L1a outside hub zones": [
-     null,
-     0,
-     null,
-     null
-    ],
-    "L1b": [
-     0.7051,
-     0.5829,
-     0.7051
-    ],
-    "L1b outside hub zones": [
-     0.7051,
-     24,
-     0.8333,
-     0.2542
-    ],
-    "L2": [
-     2.0824,
-     0.9505,
-     2.0824
-    ],
-    "L2 outside hub zones": [
-     1.0586,
-     108,
-     0.7222,
-     0.2266
-    ]
-   },
-   "frame_dev_mm": 0.000102,
-   "res_deg": 0.0002,
-   "knee_angle": 123.2,
-   "stops": {
-    "K": {
-     "angle_deg": 0.0,
-     "from_stop_lo_deg": 62.849,
-     "to_stop_hi_deg": 0.0,
-     "inside": true
-    },
-    "J2": {
-     "angle_deg": 68.637,
-     "from_stop_lo_deg": 84.461,
-     "to_stop_hi_deg": 33.431,
-     "inside": true
-    }
-   }
-  },
-  {
-   "label": "K most open, taken (drive extreme)",
-   "bench_pose": 174,
-   "pose": [
-    90.0,
-    120.0,
-    -90.0
-   ],
-   "taken": true,
-   "state": 1,
-   "joint_features_max_mm": 0.1431,
-   "rigid_non_drive_max_mm": 1.349,
-   "strap_samples_outside_hub_zones_max_mm": 1.0585,
-   "drive_samples_mm": {
-    "crank": [
-     7.5353,
-     6.7855,
-     7.5353
-    ],
-    "roller": [
-     0.1,
-     0.0695,
-     0.0029
-    ],
-    "horn": [
-     0.9847,
-     0.9357,
-     0.9847
-    ]
-   },
-   "within_0p5": true,
-   "per_part": {
-    "hub1": [
-     0.1431,
-     0.0,
-     0.1431
-    ],
-    "hubK (slot band)": [
-     1.4185,
-     56
-    ],
-    "hubK": [
-     0.0,
-     0.0,
-     0.0
-    ],
-    "hub2 (slot band)": [
-     1.42,
-     56
-    ],
-    "hub2": [
-     0.0,
-     0.0,
-     0.0
-    ],
-    "hub3": [
-     0.0,
-     0.0,
-     0.0
-    ],
-    "E": [
-     0.524,
-     0.4766,
-     0.524
-    ],
-    "boss": [
-     0.0,
-     0.0,
-     0.0
-    ],
-    "pad": [
-     0.0,
-     0.0,
-     0.0
-    ],
-    "knee": [
-     1.349,
-     0.0,
-     1.349
-    ],
-    "crank": [
-     7.5353,
-     6.7855,
-     7.5353
-    ],
-    "roller": [
-     0.1,
-     0.0695,
-     0.0029
-    ],
-    "horn": [
-     0.9847,
-     0.9357,
-     0.9847
-    ],
-    "L1a": [
-     1.1232,
-     1.1232,
-     0.0
-    ],
-    "L1a outside hub zones": [
-     null,
-     0,
-     null,
-     null
-    ],
-    "L1b": [
-     0.7051,
-     0.5829,
-     0.7051
-    ],
-    "L1b outside hub zones": [
-     0.7051,
-     24,
-     0.8333,
-     0.2542
-    ],
-    "L2": [
-     2.0824,
-     0.9505,
-     2.0824
-    ],
-    "L2 outside hub zones": [
-     1.0585,
-     108,
-     0.7222,
-     0.2266
-    ]
-   },
-   "frame_dev_mm": 6.2e-05,
-   "res_deg": 0.0002,
-   "knee_angle": 133.1,
-   "stops": {
-    "K": {
-     "angle_deg": -46.248,
-     "from_stop_lo_deg": 16.602,
-     "to_stop_hi_deg": 46.248,
-     "inside": true
-    },
-    "J2": {
-     "angle_deg": -14.198,
-     "from_stop_lo_deg": 1.626,
-     "to_stop_hi_deg": 116.266,
-     "inside": true
-    }
-   }
-  }
- ],
- "kinematics_exact": {
-  "poses": 9,
-  "all_within_0p5": true,
-  "max_frame_dev_mm": 0.000117,
-  "max_joint_feature_mm": 0.1444,
-  "dowels_in_slots": true
- },
- "drive_skin": {
-  "rule": ">= 0.3 mm on every frame (gen-5 lobe ring: -0.26)",
-  "frames": 1337,
-  "every": 1,
-  "min_mm": 1.901,
-  "where": "D8-02a link 1a: 8x3 bar on ONE line/arc : Raise overhead frame 78",
-  "passes": true,
-  "per_part": {
-   "drive nose dowel ISO 8734 2.5 m6 x 6 typ": {
-    "min_mm": 7.122,
-    "at": "Comb hair frame 105",
-    "frames_lt_0p3": 0,
-    "frames_lt_2": 0
-   },
-   "drive follower pin O3 h5 17-4PH H900 x 1": {
-    "min_mm": 13.703,
-    "at": "Reach a high shelf frame 75",
-    "frames_lt_0p3": 0,
-    "frames_lt_2": 0
-   },
-   "drive follower inner-ring shim 2 O3.1 x ": {
-    "min_mm": 19.134,
-    "at": "Raise overhead frame 78",
-    "frames_lt_0p3": 0,
-    "frames_lt_2": 0
-   },
-   "drive follower inner-ring shim 1 O3.1 x ": {
-    "min_mm": 17.095,
-    "at": "Reach a high shelf frame 75",
-    "frames_lt_0p3": 0,
-    "frames_lt_2": 0
-   },
-   "drive lobe follower roller MR63ZZ 3x6x2.": {
-    "min_mm": 17.176,
-    "at": "Reach a high shelf frame 75",
-    "frames_lt_0p3": 0,
-    "frames_lt_2": 0
-   },
-   "drive crank bearing 2 683ZZ 3x7x3, wave-": {
-    "min_mm": 15.96,
-    "at": "Raise overhead frame 78",
-    "frames_lt_0p3": 0,
-    "frames_lt_2": 0
-   },
-   "drive crank bearing 1 683ZZ 3x7x3 (polis": {
-    "min_mm": 13.738,
-    "at": "Reach a high shelf frame 75",
-    "frames_lt_0p3": 0,
-    "frames_lt_2": 0
-   },
-   "D9-01 drive bell crank (Ti-6Al-4V, 5-axi": {
-    "min_mm": 4.95,
-    "at": "Comb hair frame 92",
-    "frames_lt_0p3": 0,
-    "frames_lt_2": 0
-   },
-   "D9-02 drive lobe ring: 17-4PH H900, wire": {
-    "min_mm": 2.046,
-    "at": "Raise overhead frame 78",
-    "frames_lt_0p3": 0,
-    "frames_lt_2": 0
-   },
-   "D8-02a link 1a: 8x3 bar on ONE line/arc ": {
-    "min_mm": 1.901,
-    "at": "Raise overhead frame 78",
-    "frames_lt_0p3": 0,
-    "frames_lt_2": 41
-   }
-  },
-  "per_clip": {
-   "Raise overhead": 1.901,
-   "Drink from a cup": 3.626,
-   "Comb hair": 3.09,
-   "Reach a high shelf": 3.417,
-   "Wash opposite shoulder": 3.638,
-   "Reach back pocket": 3.317,
-   "Wave": 3.342,
-   "Walking arm swing": 3.739
-  }
- },
- "working_end": {
-  "poses": 116,
-  "dK_range": [
-   29.39,
-   46.27
-  ],
-  "pairs": {
-   "drive lobe follower roller | D9-02": [
-    -0.023,
-    -45.88
-   ],
-   "drive nose dowel | D8-02a": [
-    -0.01,
-    -44.34
-   ],
-   "D9-01 | D8-02a": [
-    0.103,
-    -40.52
-   ],
-   "D9-01 | D9-02": [
-    0.509,
-    -29.44
-   ],
-   "D9-01 | D8-02b": [
-    0.15,
-    -29.73
-   ],
-   "D9-01 | D8-03": [
-    1.316,
-    -29.39
-   ],
-   "D9-01 | J2 cap": [
-    2.452,
-    -29.39
-   ],
-   "D9-01 | K clock-spring cap": [
-    4.907,
-    -29.39
-   ],
-   "drive lobe follower roller | J2 cap": [
-    1.876,
-    -29.39
-   ],
-   "drive lobe follower roller | D8-03": [
-    1.728,
-    -29.39
-   ],
-   "drive follower pin | D9-02": [
-    1.473,
-    -46.25
-   ],
-   "drive follower inner-ring shim | D9-02": [
-    0.727,
-    -46.17
-   ],
-   "drive nose dowel | K clock-spring cap": [
-    6.749,
-    -29.39
-   ],
-   "drive nose dowel | D8-02b": [
-    5.41,
-    -29.39
-   ],
-   "D8-02a | D8-02b": [
-    0.15,
-    -44.87
-   ],
-   "D8-02a | K clock-spring cap": [
-    0.2,
-    -44.87
-   ],
-   "D8-02a | D8-01": [
-    0.15,
-    -44.87
-   ],
-   "drive crank pivot pin clip | D9-01": [
-    0.52,
-    -44.87
-   ],
-   "D9-02 | D8-02b": [
-    3.622,
-    -29.73
-   ],
-   "drive crank bearing 1 | D8-02b": [
-    0.158,
-    -44.87
-   ],
-   "contact drive lobe follower roller | D9-02 (driven frames: min, max of the per-frame min)": [
-    58,
-    -0.026,
-    -0.004
-   ],
-   "contact drive nose dowel | D8-02a (driven frames: min, max of the per-frame min)": [
-    58,
-    -0.01,
-    -0.002
-   ]
-  },
-  "skin": {
-   "rule": ">= 0.3 mm on every frame (gen-5 lobe ring: -0.26)",
-   "frames": 116,
-   "every": 1,
-   "min_mm": 1.851,
-   "where": "D9-01 drive bell crank (Ti-6Al-4V, 5-axi: workspace frame 56",
-   "passes": true,
-   "per_part": {
-    "drive nose dowel ISO 8734 2.5 m6 x 6 typ": {
-     "min_mm": 6.662,
-     "at": "workspace frame 43",
-     "frames_lt_0p3": 0,
-     "frames_lt_2": 0
-    },
-    "drive follower pin O3 h5 17-4PH H900 x 1": {
-     "min_mm": 11.062,
-     "at": "workspace frame 84",
-     "frames_lt_0p3": 0,
-     "frames_lt_2": 0
-    },
-    "drive follower inner-ring shim 2 O3.1 x ": {
-     "min_mm": 17.013,
-     "at": "workspace frame 84",
-     "frames_lt_0p3": 0,
-     "frames_lt_2": 0
-    },
-    "drive follower inner-ring shim 1 O3.1 x ": {
-     "min_mm": 14.357,
-     "at": "workspace frame 84",
-     "frames_lt_0p3": 0,
-     "frames_lt_2": 0
-    },
-    "drive lobe follower roller MR63ZZ 3x6x2.": {
-     "min_mm": 14.426,
-     "at": "workspace frame 84",
-     "frames_lt_0p3": 0,
-     "frames_lt_2": 0
-    },
-    "drive crank bearing 2 683ZZ 3x7x3, wave-": {
-     "min_mm": 18.307,
-     "at": "workspace frame 84",
-     "frames_lt_0p3": 0,
-     "frames_lt_2": 0
-    },
-    "drive crank bearing 1 683ZZ 3x7x3 (polis": {
-     "min_mm": 11.454,
-     "at": "workspace frame 84",
-     "frames_lt_0p3": 0,
-     "frames_lt_2": 0
-    },
-    "D9-01 drive bell crank (Ti-6Al-4V, 5-axi": {
-     "min_mm": 1.851,
-     "at": "workspace frame 56",
-     "frames_lt_0p3": 0,
-     "frames_lt_2": 3
-    },
-    "D9-02 drive lobe ring: 17-4PH H900, wire": {
-     "min_mm": 4.558,
-     "at": "workspace frame 5",
-     "frames_lt_0p3": 0,
-     "frames_lt_2": 0
-    },
-    "D8-02a link 1a: 8x3 bar on ONE line/arc ": {
-     "min_mm": 3.27,
-     "at": "workspace frame 34",
-     "frames_lt_0p3": 0,
-     "frames_lt_2": 0
-    }
-   },
-   "per_clip": {
-    "workspace": 1.851
-   }
-  }
- }
+ "checks": "not run in this pass (--no-checks): run --checks-only on this design"
 }

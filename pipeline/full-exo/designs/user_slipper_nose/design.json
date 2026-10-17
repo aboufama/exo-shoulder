@@ -430,7 +430,19 @@
   },
   {
    "where": "K phase (assembly; docs/HANDOFF.md 14:30 + docs/research/slipper_flank_robust.md)",
-   "fit": "build the +0.75 deg K lead: lobe-ring key dowel at the onset phase + 0.35 deg of q2, J2 stop B slot end at q2 -15.47 (the CAD draws the nominal -15.82 = the loaded state); keep the verified flank (beta -176.684, no beta step); nose hole / crank pivot / lobe profile +-0.02 mm true position, r_c +-0.1 mm; assembly note: K phase at the onset +0.75 +-0.3 deg, shim the key dowel"
+   "fit": "build the +0.75 deg K lead: lobe-ring key dowel at the onset phase + 0.35 deg of q2, J2 stop B slot end at q2 -15.47 (the CAD draws the nominal -15.82 = the loaded state); keep the verified flank (beta -176.684, no beta step); nose hole / crank pivot / lobe profile +-0.02 mm true position, r_c +-0.1 mm; assembly note: K phase at the onset +0.75 +0.15 / -0.10 deg (was +-0.3: wider than the red team's stack covers; docs/research/user_slipper_nose_fix.md), shim the key dowel"
+  },
+  {
+   "where": "wear-test pass line (nose on the DLC flank; docs/HANDOFF.md section 9, docs/alignment/slipper-nose-knuckle-3r.md 15:17 audit)",
+   "fit": "PASS only if the measured nose / flank friction mu <= 0.105 over the wear test (the horn's 43-deg pressure-angle rule caps mu at 0.108-0.113; the R17 forward bound at mu 0.15 is 5.00081 deg raw = FAIL on the unrounded gate (judge/dynamics.py 8f69bd6), at mu 0.12 4.78 deg); verified at mu 0.087"
+  },
+  {
+   "where": "knee stop tooth (knee link) against the E strap's side face",
+   "fit": "stop at knee angle 180 - ang_min = 154.78 deg, 1.62 deg above the workspace's largest knee angle 153.16 (clips <= 130.6): tooth face and the E strap's side face profile +-0.02 mm each (EDM / ground) -> +-0.04 mm stack at the 6.8 mm contact radius = +-0.34 deg, stop 154.44..155.12, >= 1.28 deg margin; ISO 2768-f (+-0.05 each) would leave 0.78 deg"
+  },
+  {
+   "where": "crank running faces (D9-01 against links 1a / 1b / 2; the posed drive check's 0.086-0.123 mm running gaps)",
+   "fit": "the crank's two boss faces + arm sides and the facing pads of links 1a / 1b / 2: profile +-0.02 mm (worst two-face stack 0.04 < the 0.086 mm smallest gap); ISO 2768-f (+-0.05, stack 0.10) could close the 0.086 gap - never leave these faces to the general tolerance"
   }
  ],
  "faces_mm": [
@@ -747,12 +759,25 @@
   "inband10": 0.5128
  },
  "note": "R17's dynamics judge orders posed groups as a serial chain (base, l<k>[a-z], cuff); the drive's side member dk rides link 1b (build.json 'slaved', drive_groups)",
+ "row_id": "slipper-nose-knuckle-3r",
  "level": "L2 user-style (full CAD of the generation-7 winner)",
+ "build_fixes_2026_10_17": {
+  "link_margin_mm": {
+   "l1b": 0.1,
+   "l2": 0.0
+  },
+  "e_underside": "hull",
+  "lug_trim_wall_mm": null,
+  "note": "docs/research/user_slipper_nose_fix.md"
+ },
  "l1_design": "l1_slipper-nose",
  "drive_build": {
   "kind": "slipper-nose (docs/research/slipper_mechanism_redteam.md section 6): lobe ring (l2) -> MR63ZZ follower at a_s 6.5 / psi 216 between the two 683ZZ of the straddle bell crank (dk, O3 pin in link 1b) -> bent arm -> ISO 8734 O2.5 nose (DLC, mu 0.087) sliding on the r 1.25 conjugate flank (4 arcs, UV wire EDM, DLC) on link 1a's lug (l1a); one clock spring in K's cap closes both pairs",
   "nose_r": 1.25,
   "mu": 0.087,
+  "wear_test_pass_mu_max": 0.105,
+  "wear_test_note": "PASS only at measured mu <= 0.105: the horn's 43-deg rule caps mu at 0.108-0.113; the R17 forward bound at mu 0.15 is 5.00081 deg raw = FAIL on the unrounded gate (judge/dynamics.py 8f69bd6); mu 0.12 4.78",
+  "lug_trim": null,
   "crank_raise_mm": 3.974,
   "follower_shift_mm": 1.312,
   "kK": 2.1534,
