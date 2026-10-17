@@ -1,0 +1,68 @@
+[
+ {
+  "key": "NEW-pa-reread",
+  "level": "watch",
+  "reason": "The design's headline advantage ('passes every drive gate at mu 0.15 on BOTH stages ... the first desmo-family drive that does', row verdict) rests on a gate the screener re-read for this design. Stage 1 is read on the built blended groove: the cap (back-drive) side is gated only outside the blend, and the blend is BLEND_PLACEHOLDER. Under the family's linear reading, the same claim placement has the cap side at 35.05 deg at K 0 against the mu 0.15 gate of 34.47 and fails at K 0 (fast 86.52); it passes at mu 0.135 (gate 35.31, fast 13.31), so its linear-read friction limit is mu ~0.139 (tan(43 - 35.05)), the same as desmo-slipper's measured jam at mu 0.14. The score does not move: fast 13.31 at mu 0.087 or 0.135 on the linear read equals the claim (docs/alignment/remeasure/desmo-conecut-knuckle-3r_s1read_check.json; docs/concepts/verify/desmo-conecut-knuckle-3r_v_probe_fast.json). The genuine gain is stage 2: the inverted slot keeps its PA stroke 64.5 deg of K up to mu 0.15 (61.0 at 0.20). Not gamed: no number ranks the design above a better one; the friction claim is a label.",
+  "evidence": "docs/alignment/remeasure/desmo-conecut-knuckle-3r_s1read_check.json (claim: s1_linear pa_cap_max 35.05, lim_by_gate.pa_cap 0.0; s1_built half_blend_K_deg 10.767, cap_inside_blend [28.47, 89.98]; claim_linear_mu15 plain 86.52 s1-pa-cap; claim_linear_mu135 plain 13.31 slot-end; s2_lim_pa_by_mu 64.5 to 0.15); docs/alignment/remeasure/desmo-conecut-knuckle-3r_blendband_bench.json; docs/concepts/models/desmo-conecut-knuckle-3r.py lines 215-245"
+ },
+ {
+  "key": "NEW-friction-cliff",
+  "level": "watch",
+  "reason": "Carried from desmo-slipper (upheld there). At mu 0.15 the claim sits 0.07 mm from a binding stage-1 forward pressure angle: a_s 9.60 (+0.07 mm) binds at K 44.75 (fast 14.56, +1.25), a_s 9.65 at K 43.0 (15.17), psi +0.5 deg at K 46.0 (13.94), mu 0.17 at K 45.5 (14.56). The held stroke needs K 46.27 and the nominal bind is at 47.5, 1.2 deg above it. The same a_s 9.60 and psi 149.3 are flat at mu 0.087. A wearer whose build lands 0.07 mm off, or whose groove runs dry, meets a drive that stops K before the slot end: lost poses, not a jam the model sees.",
+  "evidence": "docs/concepts/verify/desmo-conecut-knuckle-3r_v_probe_fast.json; row verification.friction_probe; docs/concepts/desmo-conecut-knuckle-3r.md 'Red team'"
+ },
+ {
+  "key": "NEW-silent-check",
+  "level": "watch",
+  "reason": "Carried from desmo-slipper (upheld there). The model declares the groove centreline-radius gate RC_MIN 1.5 mm but never cuts on it: at the claim it fails at K 0.25 (stage1_linear_lim_by_gate.radius 0.25; rc_min 1.01, ridge 0.247 mm). Enforced, it would cut the drive at K 0.25 and lose every forced pose. The screener answered it outside the model (a pressed 440C ring insert for ~1.5 GPa line-contact Hertz at 25 N; rc 1.01 > pin radius 0.75, so the pin can follow). Also: the worst-tolerance crank-free slop (groove c 0.015) is 0.281 deg on the dense scan, over the claim's own 0.25 deg determinacy gate (nominal 0.187).",
+  "evidence": "docs/concepts/verify/desmo-conecut-knuckle-3r_v_bench_frozen_blend.json v1_fit_gates (stage1_rc_min 1.01, stage1_ridge_mm 0.247, stage1_linear_lim_by_gate.radius 0.25); row verification.gates (worst_tol_c015_dense_deg 0.281, dense_groove_worst_deg 0.187); docs/concepts/models/desmo-slipper-knuckle-3r.py line 71 (RC_MIN 1.5) and the cut list in desmo-conecut-knuckle-3r.py lines 236-245 (no radius entry)"
+ },
+ {
+  "key": "M3",
+  "level": "watch",
+  "reason": "Two clashes are cleared by the model only nominally or not at all. (1) Carried from desmo-slipper (upheld): the stage-1 short arm (a_s 9.529) and the O1.5 pin pass through hub 2's O20 footprint in the layer of link 1b's J2 seat; l2_check keeps only r > HUB_R + 1.5, so nothing checks them against the hub-2 stack; the 5 x 4 x 1.5 mm relief pocket is assumed, not modelled. (2) New metal: the verifier's new solids check finds the crank-tip plate riding 0.150 mm radially over link 1a's boss / root on all 372 bench poses (plate underside R 63.164, horn top R 63.014): a designed running gap that a 0.1-0.15 mm stack tolerance closes into a rubbing contact the model carries no friction for. The plate clears hub K's O20 by 1.23 mm; a ~0.25 mm crank-pivot error takes it to the 1.0 mm gate.",
+  "evidence": "docs/concepts/verify/desmo-conecut-knuckle-3r_v_bench_frozen_blend.json v2_plate_horn (min_radial_gap_mm 0.15 at i 204, poses_overlapping 372); row verification.gates.plate_hubK_mm 1.23; docs/alignment/desmo-slipper-knuckle-3r.rulings.json M3; docs/concepts/models/desmo-slipper-knuckle-3r.py line 358 l2_check"
+ },
+ {
+  "key": "T3",
+  "level": "watch",
+  "reason": "The fold margin is read with K exactly on its law, but K has play. Held out the min th margin is 5.006 deg at pose 1054 (ws 135/30/-135), forced at dK 46.27 with dth/dK 0.403; bench 5.181 at pose 313 (dK 45.62). The dense nominal K play (held + free) is 0.227 deg, which moves th by ~0.09 deg: held ~4.92 under the 5 deg rule; at the worst-tolerance groove (0.281 deg) ~4.89. Same as desmo-slipper and conecut (5.006 / 5.181); the lowest-margin poses are the ones at the slot end.",
+  "evidence": "docs/concepts/verify/desmo-conecut-knuckle-3r_v_held_frozen_blend.json v3_th_margin (min 5.006, n 861, lt5 0, lowest i 1054 dK 46.27 dth_dK 0.403); _v_bench_frozen_blend.json v3_th_margin min 5.181; row verification.gates.held_plus_free_dense_deg 0.227"
+ },
+ {
+  "key": "S2",
+  "level": "watch",
+  "reason": "The new metal is thinly sampled and mostly near the band's top. Re-measured part in-band (share, median mm, samples): crank-tip plate 0.719 / 12.3 / 8, desmo cap-ring sector (ring2) 0.542 / 13.8 / 19, L1a 0.981 / 10.1 / 8, against the crank 0.802 / 11.2 / 133. Sample-weighted in-band 0.892 vs part-weighted 0.884: the sample weighting flatters this design by 0.79 gap points, where it under-reads the reference rows (conecut 0.901 vs 0.925, -2.37; desmo-slipper 0.890 vs 0.898, -0.73; slipper-nose 0.895 vs 0.924, -2.87). No rank changes: the design is already behind all three on the plain gap.",
+  "evidence": "docs/alignment/remeasure/desmo-conecut-knuckle-3r_bench.json parts_ib14; docs/alignment/desmo-conecut-knuckle-3r.json sampling; docs/alignment/{conecut-knee,desmo-slipper,slipper-nose}-knuckle-3r.json sampling"
+ },
+ {
+  "key": "T1",
+  "level": "watch",
+  "reason": "Reported only (user 2026-10-17: near-touch is not a gate). 33 taken bench poses have metal under 2 mm (3 under 1 mm; closest 0.072 mm at pose 139, plane -60 / elev 60 / axial 105) and 105 under 3 mm; counting metal under 2 mm as contact adds 16.09 gap points (plain 19.04 on the claim's linear-IK wear, 1 mm 20.68, 2 mm 35.13, 3 mm 87.13; band read 3-14 mm 19.23). Held: 71 under 2 mm, 13 under 1 mm, closest 0.325 mm. Identical counts to conecut (33 / 71) and close to slipper-nose (30 / 67). The overhead p10 of the lowest metal is 1.83 mm. Metal at 0.07-2 mm on the model is metal on a real, bulging arm.",
+  "evidence": "docs/alignment/remeasure/desmo-conecut-knuckle-3r_bench.json deep (gap_near1/2/3, near2_poses 33, min_metal_mm 0.072, overhead_min_metal_p10 1.83); docs/alignment/remeasure/desmo-conecut-knuckle-3r+blend_{bench,held}_perpose.json (min over min_mm, cmin of taken poses)"
+ },
+ {
+  "key": "G4",
+  "level": "watch",
+  "reason": "Carried, same chain as conecut / slipper-nose: the re-measured m_sub span over taken poses is [10.8052, 99.0], identical to both; on conecut the sub-dyad margin at K rest is under 1 deg on 50 of 205 rest poses (p10 0.267 deg). A near-singular sub-dyad at rest is a posture where small arm motions swing the links fast. Not re-measured at rest for this row.",
+  "evidence": "docs/alignment/remeasure/desmo-conecut-knuckle-3r_bench.json deep.coord_spans.msub; docs/alignment/remeasure/conecut-knee-knuckle-3r_msub_rest_bench.json m_sub_rest"
+ },
+ {
+  "key": "G3",
+  "level": "watch",
+  "reason": "Missing measurement. The design has no spring (no G2), but nothing measures what the wearer feels: no L1 / L2 CAD, no dynamics (R17) run, no cuff twist, no drag of two sliding pairs at 0.01 mm clearance and mu 0.15. The drive is a closed chain; where its stage-1 back-drive self-locks (see NEW-pa-reread) the force has to come through the other path, and no judge measures that force flow.",
+  "evidence": "no pipeline/full-exo/designs entry or judge output names desmo-conecut-knuckle-3r (grep); docs/concepts/desmo-conecut-knuckle-3r.md 'Next'"
+ },
+ {
+  "key": "R1",
+  "level": "watch",
+  "reason": "The row's top-level verdict still reads as the screen ('SCREENED, not a new lead: ... passes every drive gate at mu 0.15 on BOTH stages ... the first desmo-family drive that does'), while the verifier wrote 'mu 0.15 nominal only (a_s +0.07 mm binds stage 1 at K 44.75)' and the stage-1 reading under NEW-pa-reread. The dashboard (rebuilt 20:27, before the 20:48 verification) shows status 'screened', v_gap null and a sweep best of 86.19 (reach 0.344, a failing linear-read record). The ranking reads v_gap, so this is a label, not a rank.",
+  "evidence": "docs/concepts/rows/desmo-conecut-knuckle-3r.json verdict and verification.verdict; docs/dashboard/data/morphs.json (commit 336bc2d 20:27)"
+ },
+ {
+  "key": "P2",
+  "level": "watch",
+  "reason": "Negligible effect, recorded for hygiene. The slot length (kslot 46.5, stop B) is argued in the concept doc from 'the stroke the taken poses need (bench 45.62, held 46.27 deg of K)': a held-out stroke (from the predecessor's held wear) named as a reason for a design parameter. The value equals the displaced lead's own verified dK_lim 46.5, and stage 1's forward PA binds at 47.5 anyway; a bench-only cut at ~45.75 would lose at least the 3 held poses on file forced at dK 45.88-46.27 (1068, 274, 1054), at least +0.3 held points (a full held dK histogram was not measured). The bench claim does not depend on it.",
+  "evidence": "docs/concepts/desmo-conecut-knuckle-3r.md line 15; docs/concepts/verify/desmo-conecut-knuckle-3r_v_held_frozen_blend.json v3_th_margin.lowest (dK 46.27 / 46.17 / 45.88); docs/concepts/rows/slipper-nose-knuckle-3r.json dK_lim 46.5"
+ }
+]
