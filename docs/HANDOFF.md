@@ -473,6 +473,12 @@ designs (dipped-law-groove-knuckle-3r, seed-offset-3r-slides); every leader is w
      J3 stop's acceptance window (-112.40 <= J3MIN <= -111.25) from HELD-OUT q3' values - a held-out leak into a part
      spec. The window must come from the fit / envelope benches (fit evidence allows -112.79 to -98.43; the exact bench
      prefers -110.9) and the held margin is then reported, not designed to. Fix in the gen-8 CAD's fix pass.
+   - *Lead, 21:35 UTC:* main loop rounds 10-13 (wf_9b682834-6df) DONE. Round 13 winner desmo-conecut-knuckle-3r
+     (verified 18.98 / held 23.19, cx 16.5, spring-free, WATCH) - not a lead (lead conecut 18.28). Measured: the knuckle
+     family caps at 269-271 takes; the plain 3R's kinematic bound at the back seat is 250; only the cap pole shows a
+     kinematic path to 95 (281 / 360) = the jump track's J2. Main loop relaunched as rounds 14-16 (wf_f06588fd-4d1) with
+     the closer's focus (complexity on desmo-conecut; the 4 shared overhead contacts). Desmo-conecut's polish is skipped
+     (family ceiling); its generation CAD (gen-8 builder + the desmo drive) waits behind the gen-8 conecut CAD.
 2. **Reach is the gap.**
    - The lead's gap is reach 17.50 of 18.49 (ROUNDS round 10 results). **Score 95 is gap <= 13.75**: +18 workspace
      poses at the lead's in-band and contact, 0.278 points each (ROUNDS round 11 plan).

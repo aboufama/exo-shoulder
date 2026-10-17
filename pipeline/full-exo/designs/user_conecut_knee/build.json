@@ -3243,5 +3243,80 @@
    "child_status": 11
   }
  ],
- "checks": "not run in this pass (--no-checks): run --checks-only on this design"
+ "j3_stop_built": {
+  "rule": "exported dowel (member 3) vs exported link 2 + J3 hub parts riding link 2, turned by q3' about J3 (signed mm, < 0 = metal in metal)",
+  "inside_window_min_mm": 0.0324,
+  "at_J3MIN_mm": -0.0,
+  "at_J3MAX_mm": -0.0004,
+  "past_0p25_mm": [
+   -0.0328,
+   -0.0332
+  ],
+  "inside_0p25_mm": [
+   0.0325,
+   0.0324
+  ],
+  "past_2deg_mm": [
+   -0.2625,
+   -0.178
+  ],
+  "others_min_mm": {
+   "J3 cap O20, torispherical dome R63.6 / R": 4.843,
+   "J3 outer spacer 17-4PH": 2.8888,
+   "J3 bearing 2 MR117-2RS 7x11x3": 3.4475,
+   "J3 bearing 1 MR117-2RS 7x11x3": 1.0
+  },
+  "verdict": "stop"
+ },
+ "stop_engagement_built": {
+  "rule": "exported dowel turned about its joint's bearing axis vs the slotted part; engagement = first contact past the window (bisection, 0.0002 deg); target: K / J2 0.02 mm past (0.15 deg at r 7.75), J3 0 (exactly at J3MIN / J3MAX)",
+  "K dowel 1": {
+   "lo": {
+    "window_deg": -62.849,
+    "engages_deg": -62.989,
+    "past_window_deg": 0.14
+   },
+   "hi": {
+    "window_deg": 0.0,
+    "engages_deg": 0.141,
+    "past_window_deg": 0.141
+   }
+  },
+  "K dowel 2": {
+   "lo": {
+    "window_deg": -62.849,
+    "engages_deg": -62.989,
+    "past_window_deg": 0.14
+   },
+   "hi": {
+    "window_deg": 0.0,
+    "engages_deg": 0.141,
+    "past_window_deg": 0.141
+   }
+  },
+  "J2 dowel": {
+   "lo": {
+    "window_deg": -15.94,
+    "engages_deg": -16.084,
+    "past_window_deg": 0.144
+   },
+   "hi": {
+    "window_deg": 102.068,
+    "engages_deg": 102.209,
+    "past_window_deg": 0.141
+   }
+  },
+  "J3 dowel": {
+   "lo": {
+    "window_deg": -111.9036,
+    "engages_deg": -111.903,
+    "past_window_deg": -0.0
+   },
+   "hi": {
+    "window_deg": 122.7417,
+    "engages_deg": 122.738,
+    "past_window_deg": -0.003
+   }
+  }
+ }
 }
