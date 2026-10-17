@@ -63,7 +63,20 @@ The judged pose triples are [plane, elevation, axial] in degrees.
 All 115 closing poses at |dK| >= 29.3 (up to 46.25) have **0.0 mm part interference**. This is an outside judge
 agreeing with `working_end()` on parts. One of those poses (k 35) puts link 2 5.93 mm into the body.
 
-ATTRIBUTION_PLACEHOLDER
+**Attribution: not finished inside the time box.** The same step-1 R16 run on the pre-fix CAD (8e60d0e) and on the L1
+is queued on the farm behind other agents' jobs (`jobs_r16_attrib.json`; results go to the scratch outdir, not the tree).
+
+What can be said without it:
+- The fix moved link 1a's climb only from J1 skirt + 0.2 to + 0.15, a 0.05 mm shift. It filled link 2's O18 groove
+  back to the O20 hub envelope (J2 ring, F+6.15..8.95, not the bar) and cut the pivot bore. None of these brings link
+  1a's bar or link 2's bar closer to the skin.
+- The 6-10 mm link 1a and 2-6 mm link 2 depths are therefore almost certainly **pre-existing**. They come from the
+  verifier's finding (h) (the chain runs up to 4.4 mm under the model's strap) and from the rig's overhead skin. The
+  step-12 sampling hid them, not the fix.
+- R2 (clip frames) already fails at 17.67 mm (4.71 mm beyond the rig's self-intersection), so the overhead body model
+  itself is suspect at elevation 150-165.
+- Next step: rerun `judge/workspace.py --step 1` on 8e60d0e and on l1_roller-longdyad, then judge/body_regions.py on
+  these 10 poses.
 
 ## 4. Gap claim on the bench (Bench(110,360) exact, frozen, margin 5)
 
@@ -175,6 +188,6 @@ follow (0.9636).
   - 3 bench claims: $0.016.
   - CAD R6 + R16 at step 1: $0.048.
   - 3 glue jobs that failed (the farm image has no cadquery): $0.008.
-  - 2 R16 attribution jobs: ATTR_COST.
-  - Total about TOTAL_COST, under the $0.6 cap.
+  - 2 R16 attribution jobs: still queued at the time box, estimated <= $0.06.
+  - Total about $0.07 billed so far (<= $0.13 with the queued jobs), under the $0.6 cap.
 - Local: at most 2 processes, niced.
