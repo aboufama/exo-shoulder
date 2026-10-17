@@ -151,5 +151,105 @@
  },
  "loses_against_L1": [
   "R1"
- ]
+ ],
+ "R1_attribution": {
+  "method": "score_design.py's own covered-skin rule (nearest shoulder metal along the skin normal, cos >= 0.8, within 60 mm; same skin samples and seeds) with the nearest metal sample's PART recorded, every 9th clip frame (154 following frames), both designs; scratch script, not committed",
+  "L1": {
+   "covered": 3621234,
+   "in_band_2_14": 2845486,
+   "under2": 6,
+   "over14": 775742,
+   "frame_mean_share": 0.8242
+  },
+  "full": {
+   "covered": 3660858,
+   "in_band_2_14": 2844566,
+   "under2": 14,
+   "over14": 816278,
+   "frame_mean_share": 0.8152
+  },
+  "over14_delta_by_group": {
+   "base": 1076,
+   "dk": -946,
+   "l1a": 3904,
+   "l1b": 921,
+   "l2": 25274,
+   "l3": 5204,
+   "l4": 5103
+  },
+  "in_band_delta_by_group": {
+   "base": 1,
+   "dk": -213,
+   "l1a": 4906,
+   "l1b": 4186,
+   "l2": -16490,
+   "l3": -105,
+   "l4": 6795
+  },
+  "reading": "the in-band skin is the SAME (-920 of 2.85 M); the full CAD COVERS ~40 k more skin samples at > 14 mm (+1.1 %), which is the -0.9 point. By group: link 2 (l2) +25 k - its 4-strip machined bar sits MARGIN 0.1 + rounds above the model strap (underside over the L1 strap mean +0.15..0.19, max +0.83..1.24 mm at stations 27-29 / 2, raised by the user's <= 60-deg ramp ruling where the model strap drops 68 deg after J2 and before J3; 7.2 % of its surface lies 0.5-2.05 mm outside the L1 keep-outs, 98 % of that farther from GH): skin 13-14 mm under the model strap goes just out of band; member 3 (l3) +5 k (E strap side-view sketch, 13.8 % of its surface outside the L1 keep-out, median +2.0 mm); knee (l4) +5 k; link 1a (l1a) +4 k (the flank lug's back offset / web riser up to 13 mm over the L1's lug band); base +1 k; link 1b +1 k. The gen-6 cause (the CHORD arm: dk -15.6 k in band) is FIXED by the profile arm through the model's stations: dk in band 168.1 k vs the L1's 168.4 k, over-14 -0.9 k.",
+  "fix_route": "NOT fixed in this time box (a rebuild + R1 / R6 / R16 re-judge is ~50 min): (1) link 2 - MARGIN 0 and the model's 68-deg drops kept at J2 / J3 (link 2 is machined from solid: a tighter transition is allowed when stated, CAD ruling 2026-10-16), (2) member 3's E strap top and (3) link 1a's lug web riser trimmed to the L1 keep-out envelope; re-judge R1 / R6 / R16 against the L1."
+ },
+ "R16_step1": {
+  "L1": {
+   "share": 0.7032,
+   "fails": {
+    "chain_does_not_close": 0.2884,
+    "body_contact": 0.0084,
+    "part_interference": 0.0
+   }
+  },
+  "full": {
+   "share": 0.7039,
+   "fails": {
+    "chain_does_not_close": 0.2884,
+    "body_contact": 0.0077,
+    "part_interference": 0.0
+   }
+  },
+  "delta": 0.07
+ },
+ "M5_R17": {
+  "return_mu0.087": {
+   "pass_": true,
+   "twist": 3.61,
+   "cuff_N": 0.5,
+   "M_GH": 0.111,
+   "K_vs_law": 0.133,
+   "liftoff": 0.0
+  },
+  "return_mu0.120": {
+   "pass_": true,
+   "twist": 3.46,
+   "cuff_N": 0.48,
+   "M_GH": 0.106,
+   "K_vs_law": 0.131,
+   "liftoff": 0.0006
+  },
+  "return_mu0.150": {
+   "pass_": true,
+   "twist": 3.32,
+   "cuff_N": 0.45,
+   "M_GH": 0.102,
+   "K_vs_law": 0.129,
+   "liftoff": 0.0
+  },
+  "forward_bound_mu0.120": {
+   "pass_": true,
+   "twist": 4.78,
+   "cuff_N": 0.71,
+   "M_GH": 0.158,
+   "K_vs_law": 0.124,
+   "liftoff": 0.0
+  },
+  "forward_bound_mu0.150": {
+   "pass_": true,
+   "twist": 5.0,
+   "cuff_N": 0.75,
+   "M_GH": 0.166,
+   "K_vs_law": 0.126,
+   "liftoff": 0.0
+  },
+  "L1_reference": "return proxy 3.58 / 3.42 / 3.28 deg twist; forward bound (rate + preload) at mu 0.15: 4.97 deg (skeptic 14:20)",
+  "method": "return: design.json build_fixes.spring.preload = 0.08 x eta (0.890 / 0.851 / 0.815), judge/dynamics.py full, on the farm (the L1's proxy); forward: preload 0.08 / eta AND rates / eta (the skeptic's bound), --quick, local. The judge does not model the nose's sliding friction directly: both are bounds."
+ }
 }

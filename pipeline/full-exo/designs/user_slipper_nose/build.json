@@ -4536,5 +4536,177 @@
    "Wave": 3.342,
    "Walking arm swing": 3.739
   }
+ },
+ "working_end": {
+  "poses": 116,
+  "dK_range": [
+   29.39,
+   46.27
+  ],
+  "pairs": {
+   "drive lobe follower roller | D9-02": [
+    -0.023,
+    -45.88
+   ],
+   "drive nose dowel | D8-02a": [
+    -0.01,
+    -44.34
+   ],
+   "D9-01 | D8-02a": [
+    0.103,
+    -40.52
+   ],
+   "D9-01 | D9-02": [
+    0.509,
+    -29.44
+   ],
+   "D9-01 | D8-02b": [
+    0.15,
+    -29.73
+   ],
+   "D9-01 | D8-03": [
+    1.316,
+    -29.39
+   ],
+   "D9-01 | J2 cap": [
+    2.452,
+    -29.39
+   ],
+   "D9-01 | K clock-spring cap": [
+    4.907,
+    -29.39
+   ],
+   "drive lobe follower roller | J2 cap": [
+    1.876,
+    -29.39
+   ],
+   "drive lobe follower roller | D8-03": [
+    1.728,
+    -29.39
+   ],
+   "drive follower pin | D9-02": [
+    1.473,
+    -46.25
+   ],
+   "drive follower inner-ring shim | D9-02": [
+    0.727,
+    -46.17
+   ],
+   "drive nose dowel | K clock-spring cap": [
+    6.749,
+    -29.39
+   ],
+   "drive nose dowel | D8-02b": [
+    5.41,
+    -29.39
+   ],
+   "D8-02a | D8-02b": [
+    0.15,
+    -44.87
+   ],
+   "D8-02a | K clock-spring cap": [
+    0.2,
+    -44.87
+   ],
+   "D8-02a | D8-01": [
+    0.15,
+    -44.87
+   ],
+   "drive crank pivot pin clip | D9-01": [
+    0.52,
+    -44.87
+   ],
+   "D9-02 | D8-02b": [
+    3.622,
+    -29.73
+   ],
+   "drive crank bearing 1 | D8-02b": [
+    0.158,
+    -44.87
+   ],
+   "contact drive lobe follower roller | D9-02 (driven frames: min, max of the per-frame min)": [
+    58,
+    -0.026,
+    -0.004
+   ],
+   "contact drive nose dowel | D8-02a (driven frames: min, max of the per-frame min)": [
+    58,
+    -0.01,
+    -0.002
+   ]
+  },
+  "skin": {
+   "rule": ">= 0.3 mm on every frame (gen-5 lobe ring: -0.26)",
+   "frames": 116,
+   "every": 1,
+   "min_mm": 1.851,
+   "where": "D9-01 drive bell crank (Ti-6Al-4V, 5-axi: workspace frame 56",
+   "passes": true,
+   "per_part": {
+    "drive nose dowel ISO 8734 2.5 m6 x 6 typ": {
+     "min_mm": 6.662,
+     "at": "workspace frame 43",
+     "frames_lt_0p3": 0,
+     "frames_lt_2": 0
+    },
+    "drive follower pin O3 h5 17-4PH H900 x 1": {
+     "min_mm": 11.062,
+     "at": "workspace frame 84",
+     "frames_lt_0p3": 0,
+     "frames_lt_2": 0
+    },
+    "drive follower inner-ring shim 2 O3.1 x ": {
+     "min_mm": 17.013,
+     "at": "workspace frame 84",
+     "frames_lt_0p3": 0,
+     "frames_lt_2": 0
+    },
+    "drive follower inner-ring shim 1 O3.1 x ": {
+     "min_mm": 14.357,
+     "at": "workspace frame 84",
+     "frames_lt_0p3": 0,
+     "frames_lt_2": 0
+    },
+    "drive lobe follower roller MR63ZZ 3x6x2.": {
+     "min_mm": 14.426,
+     "at": "workspace frame 84",
+     "frames_lt_0p3": 0,
+     "frames_lt_2": 0
+    },
+    "drive crank bearing 2 683ZZ 3x7x3, wave-": {
+     "min_mm": 18.307,
+     "at": "workspace frame 84",
+     "frames_lt_0p3": 0,
+     "frames_lt_2": 0
+    },
+    "drive crank bearing 1 683ZZ 3x7x3 (polis": {
+     "min_mm": 11.454,
+     "at": "workspace frame 84",
+     "frames_lt_0p3": 0,
+     "frames_lt_2": 0
+    },
+    "D9-01 drive bell crank (Ti-6Al-4V, 5-axi": {
+     "min_mm": 1.851,
+     "at": "workspace frame 56",
+     "frames_lt_0p3": 0,
+     "frames_lt_2": 3
+    },
+    "D9-02 drive lobe ring: 17-4PH H900, wire": {
+     "min_mm": 4.558,
+     "at": "workspace frame 5",
+     "frames_lt_0p3": 0,
+     "frames_lt_2": 0
+    },
+    "D8-02a link 1a: 8x3 bar on ONE line/arc ": {
+     "min_mm": 3.27,
+     "at": "workspace frame 34",
+     "frames_lt_0p3": 0,
+     "frames_lt_2": 0
+    }
+   },
+   "per_clip": {
+    "workspace": 1.851
+   }
+  }
  }
 }
