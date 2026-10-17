@@ -260,3 +260,118 @@ it touches no more poses (paired, held out).
 - **The gap with the dip kept and msub enforced** (dipped poses counted as lost): this would need a changed model.
   The D=0 control, 19.33, stands in as the rule-consistent number.
 - **Kneeless control cell:** not run, by the designer either.
+
+## Skeptic (2026-10-17 06:20-06:50 UTC, ledger entry 2026-10-17T06:48:22Z, `by skeptic`, run `skeptic:dipped-law-groove-knuckle-3r`)
+
+**Final verdict (computed by `tools/alignment_ledger.py`): GAMED.** All 12 reasons were upheld and none was refuted.
+The rulings with their full evidence are in `docs/alignment/dipped-law-groove-knuckle-3r.rulings.json`.
+
+How the skeptic worked:
+- Every count was re-derived from the per-pose dumps and the verifier JSONs.
+- One local re-run was added: `tools/alignment_msub_rest_probe.py` (new).
+  - It loads the verifier and the model unchanged, and wraps `th_margin` to record m_sub on every taken pose, with K at
+    rest as well as off it.
+  - It ran on the claim and on its D=0 control: Bench(110,360) exact, frozen, CB_EXACT=1, OMP_NUM_THREADS=1, nice, 2
+    processes.
+  - It reproduces 18.64 and 19.33, and the fold minima 0.204 and 5.181.
+  - Outputs: `docs/alignment/remeasure/dipped-law-groove-knuckle-3r_skeptic_msub_bench.json` and
+    `..._D0control_skeptic_msub_bench.json`.
+- No farm was used.
+
+### Rulings
+
+- **dominance (watch): upheld.**
+  - The gap is 18.64 against 18.67 plain, and near-2 is 35.69 against 33.10, on the same harness.
+  - Taken poses with metal under 2 mm: 34 against 30.
+  - Overhead taken poses under 2 mm: 5 of 8 against 4 of 8.
+- **fold_margin (gamed): upheld.**
+  - The 0.184 (held out) and 0.204 (bench) readings are correct. The formula is the lead verifier's, copied unchanged,
+    and TH `fold_min` 5 is applied to its minimum.
+  - Measured context, which is not a refutation (see below): the dip does not create the near-fold geometry.
+- **T3 (gamed): upheld.** Every number re-checks, and so does every rule citation. Two more points:
+  - Round 10 itself killed the cam-slaved two-rise lobe on msub 2.14 (`round10_ideation.md` line 605). The family
+    applied msub to a cam-slaved K in this very round.
+  - Small corrections that change nothing:
+    - the phrase "spec correction (2)" is not in the model file, but the waiver is in its docstring;
+    - the coupled reading's code entered in the WIP commit 125be85, and its outputs in 35afc38.
+- **P1 (gamed): upheld, and re-derived.**
+  - The control differs only in dipD (1.0 against 0.0).
+  - Held out: 12 workspace poses are taken only by the control and 0 only by the dip. The 17 contact poses are the same
+    in both.
+  - Several of the 12 lost held-out poses are in band on the control: 2.19-6.66 mm.
+- **P4 (watch): upheld.** The waiver is in the model (5d587f5 / c177c28). The coupled code is in the verifier (125be85),
+  with its outputs in 35afc38. No kit, bench or judge file changed.
+- **NEW-contact-for-inband (watch): upheld.**
+  - Contact: 4 against 2 on the bench, and 17 against 10 held out.
+  - Held-out discordance: 7 only here, 0 only in the lead.
+  - Summed depth held out: 81.20 against 49.88 mm.
+- **T1 (watch): upheld.**
+  - Pose 203 sits at 0.477 mm.
+  - 17.05 points of the gap are in the 1-2 mm shell.
+  - Taken poses under 3 mm: 147 / 334, against the lead's 133 / 273.
+- **M5 (watch): upheld.** No closure-force, preload or R17 number is on file. One part of the reason is not specific to
+  the dip: "free on a sub-chain 0.18-0.20 deg from its fold if the follower lifts". The control's K-at-rest poses go down
+  to m_sub 0.0 with K held by the same spring.
+- **NEW-sub-tolerance-feature (watch): upheld.**
+  - The lobe dip is 0.068 mm, and K moves 0.35 deg per 10 um against a 2.37 deg floor.
+  - Stop A is at -3.0 deg, so K's rest through the dwell rides on the lobe.
+- **G4 (watch): upheld.**
+  - The horn pressure angle is 43.0 against its 43 cap, and the hub-K clearance is 1.04 mm against 1 mm. Both are inside
+    their rules, and the cap is family-wide (the control reads 42.7 and is also limited by `pressure_horn`).
+  - The 2.5 deg of stroke the dip spends is a real cost: it is the 12 held-out poses and bench pose 316.
+- **NEW-preview-not-claim (watch): upheld, and sharper than reported.** The preview module's parameters hold no dip at
+  all (see the missed list).
+- **S5 (watch): upheld.**
+  - Full flood: 18.64, 0 poses dropped. Knn flood: 20.32, 6 dropped. Bench-graph flood: 50.2, 112 dropped.
+  - The lead reads 18.67 / 20.34 / 50.29, so this is family-wide and does not separate the row from the lead.
+
+### Measured context for proposal B1 (the msub ruling)
+
+The sub-chain margin m_sub is already low on these poses before the dip, with K at rest on its stop.
+
+| | the claim (dipped) | the D=0 control |
+|---|---|---|
+| taken bench poses with K at rest | 121; m_sub min 0.0, 23 under 5 deg | 204; m_sub min 0.0, median 4.77, 106 under 5 deg, 50 under 1 deg |
+| dipped taken poses | 84; m_sub 0.204-4.86, median 1.42 | none |
+
+- The control passes the family reading (5.181) only because that reading does not read m_sub while K sits on stop A.
+- Of the 84 dipped bench poses:
+  - 83 are taken by the control with K at rest, and m_sub is already under 5 deg there (min 0.205, median 1.675).
+  - The dip lowers m_sub by only 0.00-0.33 deg (median 0.11).
+- The lowest readings sit at the dip's edge. For example, m_sub is 0.204 at dK -0.008 deg, a pose 0.008 deg away from a
+  rest pose that the family reading passes.
+- So the dip does not move the wearer's arm toward a singular posture. What changes on those 84 poses is what holds K:
+  a dowel stop A becomes a spring-closed, 0.068 mm lobe dip.
+- What this means for the user's ruling:
+  - The physical question is B2 (does the slaving hold under load), not the geometry.
+  - Until the user rules, the claim still rests on a reading the design chose for itself, so the verdict stands.
+
+### Missed by the auditor (for the next audit; not counted in this verdict)
+
+1. **Half of the dip's bench contact gain is a pose it no longer reaches.**
+   - The two contacts the dip "removes" against its control are:
+     - pose 203 (0, 90, 45), cleared to 0.477 mm;
+     - pose 316 (60, 150, -105), overhead. The control reaches it at -1.237 mm (contact). The dip does not evaluate it
+       at all (`ev` false): the stroke it spends truncates the pose.
+   - `CB.report()` takes the contact share over evaluated poses only. So losing an overhead pose scores better than
+     reaching it with metal on the arm.
+   - The dip also loses pose 313 (60, 120, -105), which the control takes at 3.77 mm, in band. That is the 1-for-1 swap
+     of taken workspace poses: an in-band raised-arm pose for one at 0.48 mm.
+   - Evidence: the `bench_perpose` dumps, poses 203, 313 and 316.
+   - Proposed catalogue entry, "contact cured by losing the pose". Detect: paired, the poses that are in contact in the
+     reference and not evaluated here.
+2. **The dashboard motion preview shows no dip at all**, not th_c 50 / w 8.
+   - In `docs/concepts/viz/concepts/dipped-law-groove-knuckle-3r.js`, `const P` (line 11) has no `dipD`, `dip_thc`,
+     `dip_w` or `dip_ref`.
+   - `dipOf()` (line 22) returns 0 when `P.dipD` is undefined.
+   - `P` also carries `law_mode` 'seg' (`best_params` say 'lin'), and it lacks `g`, `beta`, `r_c` and `s_arm`.
+   - The motion preview in `docs/dashboard/data/motion.json` is built from this module by `thumbs.mjs`, so it shows the
+     D=0 mechanism under the dipped row's name.
+3. **Of the dip's two named targets, only one clears.** Bench pose 182 (-15, 90, 45) is still in contact with the dip:
+   -0.89 mm, against -1.675 mm for the control. Only pose 203 clears, and it ends at 0.477 mm.
+
+### Not obtained by the skeptic
+
+- The paired bootstrap was not re-run. The strict 0 / 12 discordance held out is enough for "strictly dominated".
+- There is no held-out m_sub-at-rest probe; this audit covers the bench only.
+- There is no spring-closure or R17 run.
