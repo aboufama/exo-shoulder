@@ -1,0 +1,294 @@
+{
+ "id": "deltoid-crest-j3-3r",
+ "name": "Deltoid-crest J3 equal-arc 3R (O20, margin 5; zero passive, complexity 0)",
+ "lens": "round14:carried round-4 pick (closing screen; lens plain-crest-j3-cap seed; crest-knee-3r's no-knee control)",
+ "family": "spherical 3R (zero passive), deltoid-crest J3 seat basin",
+ "active_dof": 3,
+ "passive_dof": 0,
+ "passive_translations": 0,
+ "status": "dead",
+ "t_ideated": null,
+ "t_screened": "2026-10-17T22:35:24Z",
+ "reach": 0.6562,
+ "follow": 0.8667,
+ "inband14": 0.879,
+ "inband10": 0.5624,
+ "contact": 0.0309,
+ "gap": 37.9,
+ "bench": "Bench(60,160) fast, zc-frontier verified checks (top faces, crowns, near-touch, hub F <= 140, 1 mm radial K6)",
+ "v_reach": null,
+ "v_follow": null,
+ "v_inband14": null,
+ "v_inband10": null,
+ "v_gap": null,
+ "n_configs": 2160,
+ "best_params": {
+  "az": 103.4879,
+  "el": 65.8246,
+  "a1": 38.1218,
+  "a2": 51.4912,
+  "wd": 103.0802,
+  "wa": -7.02940000000001,
+  "sigma": -1,
+  "inv2": 1,
+  "inv3": 1,
+  "q": 0.9428,
+  "end_extra": 3.0134
+ },
+ "near_gap": 69.09,
+ "frozen_exact": {
+  "protocol": "fit Bench(60,160) fast, every level frozen, worn Bench(110,360) exact",
+  "gap": 47.88,
+  "score": 82.59,
+  "reach": 0.5778,
+  "follow": 0.8727,
+  "inband14": 0.8795,
+  "inband10": 0.5682,
+  "contact": 0.0588,
+  "near_touch_gap": 72.17,
+  "min_metal_all_faces_mm": 0.01,
+  "honest": true,
+  "hub_F": {
+   "hub1": 50.0,
+   "hub2": 59.55,
+   "hub3": 62.0
+  },
+  "inband_member": {
+   "hub1": 0.9938,
+   "hub2": 1.0,
+   "hub3": 0.9349,
+   "link2": 0.9843,
+   "link1": 0.6114,
+   "neck": 0.8727
+  },
+  "overhead": {
+   "n_ws": 28,
+   "reach": 0.1429,
+   "n_clip": 10,
+   "follow": 0.6,
+   "n_taken": 10,
+   "inband14": 0.8421,
+   "inband10": 0.6258
+  },
+  "attribution": {
+   "ws": {
+    "n": 360,
+    "taken": 208,
+    "fold_folded": 15,
+    "fold_stretched": 90,
+    "jam_K2": 0,
+    "parts": 32,
+    "contact": 15
+   },
+   "clip": {
+    "n": 110,
+    "taken": 96,
+    "fold_folded": 0,
+    "fold_stretched": 10,
+    "jam_K2": 0,
+    "parts": 0,
+    "contact": 4
+   },
+   "overhead": {
+    "n": 28,
+    "taken": 4,
+    "fold_folded": 0,
+    "fold_stretched": 14,
+    "jam_K2": 0,
+    "parts": 5,
+    "contact": 5
+   },
+   "across": {
+    "n": 68,
+    "taken": 16,
+    "fold_folded": 0,
+    "fold_stretched": 51,
+    "jam_K2": 0,
+    "parts": 1,
+    "contact": 0
+   },
+   "behind": {
+    "n": 25,
+    "taken": 17,
+    "fold_folded": 0,
+    "fold_stretched": 8,
+    "jam_K2": 0,
+    "parts": 0,
+    "contact": 0
+   }
+  },
+  "contact_by_member": {
+   "link2": 9,
+   "hub2": 7,
+   "hub1": 3
+  },
+  "binders": [
+   {
+    "asked": [
+     -75,
+     60,
+     60
+    ],
+    "pose": [
+     -75.0,
+     60.0,
+     60.0
+    ],
+    "i": 128,
+    "result": "taken",
+    "th": 42.7,
+    "j2_exit_mm": 53.0,
+    "hub2_level": 59.6,
+    "min_mm": 2.01
+   },
+   {
+    "asked": [
+     0,
+     150,
+     0
+    ],
+    "pose": [
+     0.0,
+     150.0,
+     -15.0
+    ],
+    "i": 209,
+    "result": "parts",
+    "th": 48.7,
+    "j2_exit_mm": 50.0,
+    "hub2_level": 59.6,
+    "min_mm": null
+   },
+   {
+    "asked": [
+     30,
+     150,
+     0
+    ],
+    "pose": [
+     30.0,
+     135.0,
+     0.0
+    ],
+    "i": 262,
+    "result": "parts",
+    "th": 32.4,
+    "j2_exit_mm": 54.0,
+    "hub2_level": 59.6,
+    "min_mm": null
+   },
+   {
+    "asked": [
+     0,
+     105,
+     0
+    ],
+    "pose": [
+     0.0,
+     105.0,
+     15.0
+    ],
+    "i": 205,
+    "result": "parts",
+    "th": 38.6,
+    "j2_exit_mm": 60.0,
+    "hub2_level": 59.6,
+    "min_mm": null
+   },
+   {
+    "asked": [
+     30,
+     149,
+     -59
+    ],
+    "pose": [
+     30.0,
+     135.0,
+     -60.0
+    ],
+    "i": 261,
+    "result": "taken",
+    "th": 54.6,
+    "j2_exit_mm": 55.0,
+    "hub2_level": 59.6,
+    "min_mm": 2.03
+   },
+   {
+    "asked": [
+     30,
+     124,
+     -54
+    ],
+    "pose": [
+     30.0,
+     135.0,
+     -60.0
+    ],
+    "i": 261,
+    "result": "taken",
+    "th": 54.6,
+    "j2_exit_mm": 55.0,
+    "hub2_level": 59.6,
+    "min_mm": 2.03
+   },
+   {
+    "asked": [
+     30,
+     135,
+     -45
+    ],
+    "pose": [
+     30.0,
+     135.0,
+     -60.0
+    ],
+    "i": 261,
+    "result": "taken",
+    "th": 54.6,
+    "j2_exit_mm": 55.0,
+    "hub2_level": 59.6,
+    "min_mm": 2.03
+   }
+  ],
+  "file": "docs/concepts/verify/deltoid-crest-j3-3r_frozen_exact.json"
+ },
+ "frozen_exact_gap": 47.88,
+ "convergence": {
+  "n": 2160,
+  "best": 37.9,
+  "gain_2nd_half": 0.742,
+  "gain_last_third": 0.149,
+  "top5": [
+   37.9,
+   37.92,
+   38.31,
+   38.42,
+   38.57
+  ],
+  "top5_spread": 0.244,
+  "passed": true
+ },
+ "verdict": "DEAD (closing screen at O20 / margin 5): best fast 37.90 (score 86.22) on Bench(60,160) -> frozen exact Bench(110,360) 47.88 (score 82.59; reach 0.578 = 208/360, follow 0.873, ib14 0.880, contact 0.059, near-touch 72.17, overhead 4/28). Misses the spec's kill bar (j3-neck-over-3r 32.10 frozen), the zc-frontier optimum (31.04 frozen) and the lead (18.28). Dominated: the zc optimum below the crest (wd 85.7) reads 30.69 fast through the same code; moved onto the crest (wd 95 / 100) it loses 7.7 / 10.3.",
+ "limiter": "the J2 fold (stretched side): the crest J3 seat widens the J1-J3 angle range to 20-143 deg (p5-p95, Bench(110,360)) against the dyad window 18.4-84.6 at the best arcs 38.1 / 51.5 -> 90 of 360 ws lost stretched (overhead 14 / 28, across 51 / 68); the arcs that widen the window (a1 >= 44) lift hub 2 to 69-83 mm, 0.02-0.07 in band at O20 (the round-4 equal-arc basin was an O15 / margin-10 artefact). Secondary: part-part at the cap binders (link 1 on hub 2's cap plate), near-touch (min metal 0.01 mm).",
+ "note": "Closing screen (round 14 carried pick; lens plain-crest-j3-cap seed; crest-knee-3r's no-knee control). Model = zc-frontier-3r's build + verifier checks unchanged, search clamped to the crest box (J1 bvec az 30-120 / el 48-80 in ruling 4, J3 wdir wd 95-120 / wa -20..20, a1 34-64, a2 38-70, sigma +-1, inv2 / inv3 0/1, q 0.85-1, end_extra 0-6). Local only (farm closed), niced, <= 2 processes. Sweep: 493 Sobol + CMA s1 (441, from Sobol best 48.05) + s2 (369, long-a1 cap basin, pinned at the box edges a1 64 / el 79: 44.62) + s3 (289, 37.90) + s4 (257, 0 gain) + s5 (311, 0 gain) [+ s6 wide restart]. CONVERGENCE GATE (score points, sweep in evaluation order, n 2160): gain over 2nd half 0.742, over last third 0.149, top-5 spread 0.244 -> PASSED; the converging chain s3+s4 alone 0.149 / 0.0. Seeds at O20 / margin 5: A 71.21, B 69.65, cap cell 60.39 (judge 62.80). Hub 2 in band by a1: 34-40 0.95 (F 61), 40-46 0.07, 46-52 0.03 (F 80), 52-58 0.02, 58-64 0.76. Best gap by wd: 95-100 40.30, 100-105 37.90, 105-110 45.19, 110-115 60.39, 115-120 77.06. Control (same code, fast): zc optimum 30.69 at wd 85.74 -> 38.43 / 41.01 / 74.85 at wd 95 / 100 / 103.08 (docs/concepts/verify/deltoid-crest-j3-3r_wd_slice.json). Red team: near-touch gap 69.09 fast / 72.17 frozen (min metal 0.12 / 0.01 mm, q 0.943 sets levels at the 94th percentile); no K2 jam; contacts link 2 / hub 2 / hub 1; cap binders (0,150,-15), (30,135,0), (0,105,15) lost to part-part (link 1 on hub 2's cap plate), J2 exits 50-60 mm there (hub 2 F 59.6): the short a1 fixes hub 2 and pays in the fold. Spec corrections: O15 -> O20, margin 10 -> 5, no base stub (CAD ruling 1: handler carries the base at the J1 hub ring). 0 passive translations, complexity 0.",
+ "doc": "docs/concepts/deltoid-crest-j3-3r.md",
+ "mechanism": {
+  "active_dof": 3,
+  "passive_trans": 0,
+  "crossed_rails": false,
+  "passive_rot": 0,
+  "moving_bodies": 3,
+  "joints": 3,
+  "closed_loops": 0,
+  "sliding_pairs": 0,
+  "rolling_pairs": 3,
+  "sensed_passive": 0,
+  "springs_or_flexures": 0,
+  "custom_parts": 7,
+  "catalogue_parts": 6,
+  "notes": "plain spherical 3R (three active pins whose axes meet at GH; J3 on the deltoid crest), O20 v5 hub at every joint (MR117-2RS pair each); bodies: link 1, link 2, arm-end (member 3: hub-3 plate + K7 neck rigid on BOTTOM; the stack orders inv2 / inv3 change the plate order, not the part count); base carried by the scapula handler at the J1 hub ring (CAD ruling 1). No slides, springs, loops or sensed passives. custom: base ring, 2 links, arm-end plate + neck, 3 hub shafts (est.); catalogue: 3 x MR117 pair (est., fasteners excluded).",
+  "source": "docs/concepts/models/deltoid-crest-j3-3r.py:1-20 (chain, freedoms, rules)",
+  "confidence": "counted"
+ },
+ "complexity": 0
+}

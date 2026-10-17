@@ -60,6 +60,7 @@ docs/concepts/sweeps/deltoid-crest-j3-3r.json (every configuration in evaluation
 | CMA s1 from the Sobol best (sigma 0.5) | 441 | 39.94 (85.48) | 0.644 / 0.867 / 0.871 / 0.031 | a1 36.6 / a2 53.5, wd 102.0 |
 | CMA s2 from the long-a1 cap basin (Sobol #2, 57.43) | 369 | 44.62 | 0.631 / 0.917 / 0.822 / 0.066 | pinned at the box edges a1 64, el 79 |
 | CMA s3 from s1's best (sigma 0.3) | 289 | **37.90 (86.22)** | 0.656 / 0.867 / 0.879 / 0.031 | a1 38.1 / a2 51.5, wd 103.1 |
+| CMA s4 / s5 from s3's best (sigma 0.25 / 0.4) | 257 + 311 | 37.90 (no gain) | | converged |
 
 **Best (fast, Bench(60,160)): gap 37.90, score 86.22**, near-touch gap 69.09; J1 bvec(103.49, 65.82) (acromion top),
 J3 wdir(103.08, -7.03) (crest), a1 38.12 / a2 51.49, branch -1, inv2 1 (link 1 on hub 2's cap plate, bridging over link
@@ -92,3 +93,90 @@ J3 wdir(103.08, -7.03) (crest), a1 38.12 / a2 51.49, branch -1, inv2 1 (link 1 o
   60.39 -> 77.06), and the global zero-complexity optimum (zc-frontier-3r, 15394 evaluations, all seats) sits BELOW the
   crest at wdir(85.7, -16.2) with 28.85 fast / 31.04 frozen exact. CMA s1 / s3 walked wd 105 -> 102-103 and s2 pinned
   at the box edges: the gradient points out of the morphology.
+
+### Control: the crest vs the zero-complexity optimum through the same code today (Bench(60,160) fast, single changes)
+
+| configuration | wd 85.74 | wd 95 | wd 100 | wd 103.08 | wd 110 |
+|---|---|---|---|---|---|
+| zc-frontier optimum (a1 36.7 / a2 69.1, J1 bvec(109.4, 65.9)) gap / near | **30.69** / 39.16 | 38.43 / 43.41 | 41.01 / 47.18 | 74.85 / 79.95 (hub 2 0.04) | 86.26 / 104.32 |
+| this screen's best (a1 38.1 / a2 51.5) gap / near | 55.23 / 65.03 | 55.55 / 72.75 | 47.87 / 69.27 | **37.90** / 69.09 | 48.48 / 75.03 |
+
+Moving the zc optimum's J3 up onto the crest costs 7.7 points at wd 95 and 10.3 at wd 100; re-optimised on the crest
+(this screen, 1849 configs) it recovers to 37.90, still 7.2 gap points (2.6 score points) behind the zc optimum's 30.69
+through the identical code, and its near-touch gap is 30 points worse (69.09 vs 39.16). Data:
+the slice is reproducible with the model file (`ZC.evaluate` with `wd` replaced).
+
+### Where the best loses (fast, Bench(60,160), `--attr`)
+
+* Workspace 105 / 160 taken: fold stretched 37, folded 6, part-part 9, contact 3. Clips 52 / 60: stretched 6, contact 2.
+* The fold window is [18.4, 84.6] deg (a1 + a2 - 5 = 84.6) against J1-J3 angles of 22.9-126.8 deg (p5-p95 over the
+  workspace) at these seats: the crest J3 makes the stretched side the binder (37 of 55 lost ws poses).
+* Overhead (elev >= 140): 0 of 12 ws poses (9 stretched, 3 part-part), 3 of 5 clip frames. Across the body 12 / 31
+  (17 stretched). Behind 6 / 10.
+* In band per member: hub 1 0.99, hub 2 1.00, hub 3 0.95, link 2 0.99, link 1 0.60 (inv2 puts link 1 on hub 2's cap
+  plate, bridging over link 2: it rides ~3-5 mm higher), neck 0.87.
+* Contacts: link 2 (4 poses), hub 2 (1).
+
+## Red team (own best)
+
+* **The optimistic number: the plain gap hides near-touch.** Near-touch gap 69.09 vs plain 37.90: q 0.943 sets every
+  level at the 94th percentile of the fit poses, so metal sits < 1 mm from the skin on enough taken poses to cost 31
+  points when near-touch counts. The min metal over all faces is 0.12 mm. The zc optimum pays 8.5 for the same.
+* **The pose that jams:** none jam (K2 jam 0); the chain leaves the workspace on the stretched fold, a hard kinematic
+  wall, overhead first (0 / 12). An unpowered MVP1 would hit J2's 5-deg margin stop there.
+* **The point that pinches:** link 2's underside over the posterior-lateral acromion (4 of the 5 contact poses) and
+  hub 2's rim once.
+* **Abduction bulge under hub 3:** hub 3 sits at F 62 mm on the crest, 0.95 in band - the deltoid crest is not a bad
+  seat for the hub; it is a bad seat for the KINEMATICS (it widens the J1-J3 angle range the dyad must span).
+
+## Frozen exact on the verification bench (lesson c)
+
+Fit Bench(60,160) fast, every level frozen, worn on Bench(110,360) EXACT (libigl), same checks
+(docs/concepts/verify/deltoid-crest-j3-3r_frozen_exact.json; `CB_EXACT=1 python3 docs/concepts/models/deltoid-crest-j3-3r.py frozen '<best>' out.json`):
+
+| | gap | score | reach | follow | ib14 | ib10 | contact | near-touch gap | min metal | overhead ws |
+|---|---|---|---|---|---|---|---|---|---|---|
+| fit, Bench(60,160) fast | 37.90 | 86.22 | 0.656 | 0.867 | 0.879 | 0.562 | 0.031 | 69.09 | 0.12 mm | 0 / 12 |
+| **frozen, Bench(110,360) exact** | **47.88** | **82.59** | 0.578 (208/360) | 0.873 | 0.880 | 0.568 | 0.059 | 72.17 | 0.01 mm | 4 / 28 |
+
+Losses on the big bench: workspace 208 / 360 taken - fold stretched 90, folded 15, part-part 32, contact 15 (link 2 9,
+hub 2 7, hub 1 3). Clips 96 / 110 (stretched 10, contact 4). Overhead 4 / 28 (stretched 14, parts 5, contact 5); across
+the body 16 / 68 (stretched 51); behind 17 / 25. J1-J3 angle p5-p95 20.3-143.0 deg against the window 18.4-84.6.
+Kinematic closure 0.708 of the workspace (overhead 0.50). In band: hub 1 0.99, hub 2 1.00, hub 3 0.93, link 2 0.98,
+link 1 0.61, neck 0.87.
+
+Red-team pose list (nearest Bench(110,360) workspace pose; J2 exit = the K3 march along the J2 ray):
+
+| asked (plane, elev, axial) | bench pose | result | J1-J3 | J2 exit vs hub 2 F |
+|---|---|---|---|---|
+| (-75, 60, +60) cap binder | (-75, 60, 60) | taken, min 2.01 mm | 42.7 | 53 vs 59.6 |
+| (0, 150, 0) cap binder | (0, 150, -15) | part-part | 48.7 | 50 vs 59.6 |
+| (30, 150, 0) cap binder | (30, 135, 0) | part-part | 32.4 | 54 vs 59.6 |
+| (0, 105, 0) cap binder | (0, 105, 15) | part-part | 38.6 | 60 vs 59.6 |
+| crest binders (30, 149, -59) / (30, 124, -54) / (30, 135, -45) | (30, 135, -60) | taken, min 2.03 mm | 54.6 | 55 vs 59.6 |
+
+The short first arc fixes the cap pole's hub-2 problem (the J2 ray exits 50-60 mm at every binder, hub 2 is 1.00 in
+band) - and pays for it with the fold: 90 stretched workspace poses. The binders that hub 2 used to lose are now lost to
+part-part clearance (link 1 bridging over link 2 at the overhead poses).
+
+## Verdict: DEAD (closing screen)
+
+Convergence gate (score points, the whole sweep in evaluation order, n 2160 before the s6 wide restart): gain over the
+second half 0.742 (< 1), over the last third 0.149 (< 0.5), top-5 spread 0.244 (< 3): passed. The converging chain
+s3 + s4 alone reads 0.149 / 0.0; s4 (257) and s5 (311) found nothing below 37.90.
+
+Frozen exact 47.88 (score 82.59) against the spec's own kill bar (beat j3-neck-over-3r's 32.10 frozen), the
+zero-complexity optimum's 31.04 frozen exact and the lead's 18.28. 1849+ configurations on Bench(60,160) (493 Sobol over
+the crest box x branch x both stack orders, CMA streams s1-s5); best fast 37.90.
+
+Limiter (measured): the deltoid-crest J3 seat widens the J1-J3 angle range the J2 dyad must span (p95 143 deg on the big
+bench), so the plain spherical dyad loses the stretched side (90 / 360 workspace, 14 / 28 overhead, 51 / 68 across);
+the only arcs that open the window (a1 >= 44) lift hub 2 to 69-83 mm (0.02-0.07 in band) at O20. The round-4 "crest
+basin" (hub 2 0.82-0.997 at equal arcs) was an O15 / margin-10 artefact. The crest is strictly dominated by the
+zc-frontier optimum below it (wd 85.7): 30.69 vs 37.90 fast through the same code; the zc optimum moved up to wd 95 /
+100 loses 7.7 / 10.3.
+
+What this predicts beyond the morphology: for a plain spherical 3R at O20 the J3 seat height is a FOLD lever, not a
+proximity lever - raising J3 toward the acromion widens the J1-J3 range the dyad must cover; any crest-seat design
+needs a second fold window (knuckle, relay, 4th joint). As lens 3's no-knee control (crest-knee-3r): the knee must buy
+> 30 points on the stretched side at these seats to matter.
