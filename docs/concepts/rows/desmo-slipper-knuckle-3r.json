@@ -1,0 +1,587 @@
+{
+ "id": "desmo-slipper-knuckle-3r",
+ "name": "Desmo slipper: the lead with no clock spring, stop A or stage-1 roller - a crowned O1.5 pin in a groove under hub 2's cap ring + the O2.5 nose in a two-walled swept-envelope slot (positive both ways)",
+ "lens": "round12:spring-free-drive (lens 3; merged pinned-horn-desmo-knuckle-3r as cell B - not built)",
+ "family": "slaved-knuckle 3R, positive-motion drive (lead family, pin knee)",
+ "active_dof": 3,
+ "passive_dof": 4,
+ "passive_translations": 0,
+ "status": "screened",
+ "t_ideated": "2026-10-17T15:19:07Z",
+ "t_screened": "2026-10-17T15:38:36Z",
+ "reach": 0.775,
+ "follow": 1.0,
+ "inband14": 0.8962,
+ "inband10": 0.5245,
+ "contact": 0.0,
+ "gap": 12.88,
+ "v_reach": null,
+ "v_follow": null,
+ "v_inband14": null,
+ "v_inband10": null,
+ "v_gap": null,
+ "n_configs": 76,
+ "complexity": 15.75,
+ "mechanism": {
+  "active_dof": 3,
+  "passive_trans": 0,
+  "crossed_rails": 0,
+  "passive_rot": 4,
+  "moving_bodies": 5,
+  "joints": 8,
+  "closed_loops": 3,
+  "sensed_passive": 0,
+  "custom_parts": 12,
+  "sliding_pairs": 2,
+  "rolling_pairs": 0,
+  "springs_or_flexures": 0,
+  "catalogue_parts": 13,
+  "cuff_knee": {
+   "pins": 2,
+   "sensed": false,
+   "passive_rot": 2,
+   "moving_bodies": 2,
+   "joints": 2,
+   "custom_parts": 4,
+   "catalogue_parts": 6,
+   "rule": "user 2026-10-17: no encoders on the knee pins (pose from the hub encoders) -> no added complexity; counts = docs/concepts/skin-normal-3r-pin-knee.md line 584",
+   "closed_loops": 1,
+   "rule_loop": "simplicity v2.1 (2026-10-17): the knee's closure loop is free, as on roller-longdyad / groove-desmo / sidecar-*; added by the lead 2026-10-17 14:25 UTC after the alignment audit's NEW-stale-complexity-ruler (this row charged it, the lead's record did not)"
+  },
+  "notes": "the verified lead slipper-nose-knuckle-3r with the clock spring, its cap, the stop-A pin and the stage-1 MR63ZZ lobe roller deleted: stage 1 = a crowned 440C O1.5 pin (ISO 8734 1.5 m6 blank, ground crown) on the crank's short arm sliding in a 1.52 x 1.5 groove in hub 2's cap ring (sliding pair 2), stage 2 = the verified O2.5 nose in a two-walled swept-envelope slot (sliding pair 1). Lead record convention (its stage-1 roller was not a separate body / joint in the record): springs 1 -> 0, rolling 1 -> 0, sliding 1 -> 2, bought 15 -> 13 (- MR63ZZ, - clock spring, - stop-A dowel, + O1.5 pin) = 15.75 (lead 18.25 like-for-like). If the roller's spin is counted as the lead's 4th passive rotation / 8th joint, this design is 13.75.",
+  "source": "desmo-slipper-knuckle-3r screen 2026-10-17",
+  "confidence": "medium"
+ },
+ "best_params": {
+  "a_s": 9.25,
+  "psi": 154.0,
+  "glev": -0.5,
+  "blend": 10.0,
+  "capK": 0.0,
+  "c_slot": 0.01,
+  "rho_e": 1.0,
+  "nose_r": 1.25,
+  "mu": 0.087,
+  "g": 2.3934,
+  "beta": -176.684,
+  "r_c": 15.3739,
+  "lift": 0.7882,
+  "hl": 1.9442,
+  "zr": 4.0293,
+  "s_arm": 4.0,
+  "r_lobe": 8.2661,
+  "az2": 45.8211,
+  "el2": 41.0855,
+  "lE": 67.832,
+  "phiE": -2.7863,
+  "lc": 21.1499,
+  "phib": -58.8084,
+  "a1max": 58.7678,
+  "kK": 2.1534,
+  "smhi": 16.8433,
+  "bk1": 26.0,
+  "bk2": 38.0336
+ },
+ "fast": {
+  "plain": {
+   "gap": 12.88,
+   "reach": 0.775,
+   "follow": 1.0,
+   "inband14": 0.8962,
+   "contact": 0.0
+  },
+  "near1": 14.04,
+  "near2": 16.47,
+  "min_metal_mm": 0.22,
+  "why": {
+   "fold": 31,
+   "slide": 5,
+   "flip": 0,
+   "closure": 0,
+   "skin": 0,
+   "parts": 0,
+   "contact": 0
+  },
+  "overhead140": {
+   "ws": 12,
+   "reach": 0.1667,
+   "clip": 5,
+   "follow": 1.0,
+   "inband14": 0.9102,
+   "inband10": 0.6401,
+   "why_not": {
+    "fold": 7,
+    "slide": 3,
+    "flip": 0,
+    "closure": 0,
+    "skin": 0,
+    "parts": 0,
+    "contact": 0
+   }
+  },
+  "l2": {
+   "n": 184,
+   "clear_min": 13.65,
+   "lost": 0
+  },
+  "control_lead_same_code": {
+   "plain": 13.0,
+   "near2": 16.47,
+   "note": "DS_CONTROL=1 (this file, desmo off, capK 6) reproduces the lead's 13.00 / 16.47"
+  }
+ },
+ "drive": {
+  "calib": {
+   "s_th": -0.4644,
+   "inv_kK": 0.4644,
+   "q_on_deg": 7.28,
+   "dwell_deg": [
+    7.7,
+    90.9
+   ],
+   "fit_rms_deg": 0.0,
+   "n": 90
+  },
+  "stage1": {
+   "a_s": 9.25,
+   "psi": 154.0,
+   "pitch": [
+    9.078,
+    9.078
+   ],
+   "r_out": 10.64,
+   "pa_pin_max": 37.91,
+   "pa_cap_max": 31.37,
+   "pa_gate": 38.03,
+   "drift_max": 0.229,
+   "tilt_max_deg": 4.84,
+   "crown_needed": true,
+   "rc_min": 0.37,
+   "rc_onset": 0.72,
+   "blend_K_lead_deg": 2.614,
+   "arm_from_axis": 9.25,
+   "n_ring_rigid": 9,
+   "ring_az_deg": 98.2,
+   "lim_by_gate": {
+    "pitch": null,
+    "pa_pin": 49.75,
+    "pa_cap": 53.25,
+    "drift": null,
+    "radius": 0.25
+   }
+  },
+  "wall2": {
+   "n": 111,
+   "pa_crank_max": 29.5,
+   "pa_horn_max": 32.16,
+   "clear_lowarm": 20.56
+  },
+  "slop": {
+   "slop_max": {
+    "1.0": 0.115,
+    "3.5": 0.265
+   },
+   "slop_at": {
+    "1.0": [
+     6.5,
+     1
+    ],
+    "3.5": [
+     18.0,
+     1
+    ]
+   },
+   "pa_eng_max": {
+    "1.0": 19.8,
+    "3.5": 19.8
+   },
+   "k0_grid_deg": 0.5,
+   "rows_rho1_K0_0_10": [
+    [
+     0.0,
+     1,
+     0.0375,
+     2.1,
+     4.6
+    ],
+    [
+     0.0,
+     -1,
+     0.0425,
+     26.1,
+     19.8
+    ],
+    [
+     0.5,
+     1,
+     0.0475,
+     5.5,
+     7.6
+    ],
+    [
+     0.5,
+     -1,
+     0.0425,
+     23.5,
+     16.7
+    ],
+    [
+     1.0,
+     1,
+     0.055,
+     5.8,
+     7.6
+    ],
+    [
+     1.0,
+     -1,
+     0.04,
+     20.8,
+     13.7
+    ],
+    [
+     1.5,
+     1,
+     0.0625,
+     6.1,
+     7.6
+    ],
+    [
+     1.5,
+     -1,
+     0.04,
+     21.1,
+     13.7
+    ],
+    [
+     2.0,
+     1,
+     0.07,
+     6.4,
+     7.6
+    ],
+    [
+     2.0,
+     -1,
+     0.04,
+     18.4,
+     10.6
+    ],
+    [
+     2.5,
+     1,
+     0.075,
+     6.8,
+     7.6
+    ],
+    [
+     2.5,
+     -1,
+     0.04,
+     15.8,
+     7.6
+    ],
+    [
+     3.0,
+     1,
+     0.08,
+     7.1,
+     7.6
+    ],
+    [
+     3.0,
+     -1,
+     0.04,
+     16.1,
+     7.6
+    ],
+    [
+     3.5,
+     1,
+     0.085,
+     7.4,
+     7.5
+    ],
+    [
+     3.5,
+     -1,
+     0.04,
+     13.4,
+     4.7
+    ],
+    [
+     4.0,
+     1,
+     0.0875,
+     7.8,
+     7.5
+    ],
+    [
+     4.0,
+     -1,
+     0.04,
+     13.8,
+     4.7
+    ],
+    [
+     4.5,
+     1,
+     0.09,
+     8.1,
+     7.5
+    ],
+    [
+     4.5,
+     -1,
+     0.04,
+     11.1,
+     1.9
+    ],
+    [
+     5.0,
+     1,
+     0.0925,
+     8.4,
+     7.5
+    ],
+    [
+     5.0,
+     -1,
+     0.0375,
+     11.4,
+     1.9
+    ],
+    [
+     5.5,
+     1,
+     0.0925,
+     8.7,
+     7.5
+    ],
+    [
+     5.5,
+     -1,
+     0.04,
+     11.7,
+     1.9
+    ],
+    [
+     6.0,
+     1,
+     0.1025,
+     9.0,
+     7.5
+    ],
+    [
+     6.0,
+     -1,
+     0.0375,
+     9.0,
+     1.9
+    ],
+    [
+     6.5,
+     1,
+     0.115,
+     6.4,
+     4.6
+    ],
+    [
+     6.5,
+     -1,
+     0.0375,
+     9.4,
+     1.9
+    ],
+    [
+     7.0,
+     1,
+     0.1125,
+     6.7,
+     4.6
+    ],
+    [
+     7.0,
+     -1,
+     0.0375,
+     9.7,
+     1.9
+    ],
+    [
+     7.5,
+     1,
+     0.11,
+     7.0,
+     4.6
+    ],
+    [
+     7.5,
+     -1,
+     0.0375,
+     7.0,
+     4.6
+    ],
+    [
+     8.0,
+     1,
+     0.1075,
+     7.3,
+     4.6
+    ],
+    [
+     8.0,
+     -1,
+     0.0375,
+     7.3,
+     4.6
+    ],
+    [
+     8.5,
+     1,
+     0.1,
+     7.6,
+     4.6
+    ],
+    [
+     8.5,
+     -1,
+     0.0375,
+     7.6,
+     4.6
+    ],
+    [
+     9.0,
+     1,
+     0.0925,
+     8.0,
+     4.6
+    ],
+    [
+     9.0,
+     -1,
+     0.04,
+     8.0,
+     4.6
+    ],
+    [
+     9.5,
+     1,
+     0.1,
+     8.3,
+     4.6
+    ],
+    [
+     9.5,
+     -1,
+     0.0375,
+     5.3,
+     7.5
+    ],
+    [
+     10.0,
+     1,
+     0.1125,
+     8.6,
+     4.6
+    ],
+    [
+     10.0,
+     -1,
+     0.0375,
+     5.6,
+     7.5
+    ]
+   ],
+   "slop_K0_0": [
+    [
+     0.0,
+     1,
+     0.0375,
+     2.1,
+     4.6
+    ],
+    [
+     0.0,
+     -1,
+     0.0425,
+     26.1,
+     19.8
+    ]
+   ],
+   "crank_free": {
+    "c_mm": 0.010000000000000009,
+    "dwell_deg": 0.19,
+    "rise_deg": 0.188,
+    "corner": {
+     "max": 0.245,
+     "rows": [
+      [
+       -4.0,
+       1.064,
+       0.176,
+       0.164
+      ],
+      [
+       -2.0,
+       1.786,
+       0.159,
+       0.158
+      ],
+      [
+       -1.0,
+       2.217,
+       0.154,
+       0.154
+      ],
+      [
+       0.0,
+       2.693,
+       0.156,
+       0.151
+      ],
+      [
+       1.0,
+       3.216,
+       0.164,
+       0.151
+      ],
+      [
+       2.0,
+       3.785,
+       0.176,
+       0.15
+      ],
+      [
+       4.0,
+       5.065,
+       0.214,
+       0.154
+      ],
+      [
+       8.0,
+       8.179,
+       0.245,
+       0.154
+      ],
+      [
+       15.0,
+       15.0,
+       0.161,
+       0.159
+      ]
+     ],
+     "note": "(x0 deg of the K law from the onset, K, +K play, -K play), deg of K"
+    },
+    "max_deg": 0.245,
+    "worst_tol_c015_deg": 0.367,
+    "held_plus_free_deg": 0.36
+   }
+  },
+  "fail": []
+ },
+ "verdict": "screening (claims running)",
+ "limiter": "",
+ "note": "",
+ "doc": "docs/concepts/desmo-slipper-knuckle-3r.md",
+ "model_file": "docs/concepts/models/desmo-slipper-knuckle-3r.py"
+}

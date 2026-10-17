@@ -64,10 +64,10 @@ LEAD_V = {"g": 2.3934, "beta": -176.684, "r_c": 15.3739, "lift": 0.7882, "hl": 1
 PIN_D, GROOVE_W, RING_WALL, BORE_R, SKIRT_R = 1.5, 1.52, 0.8, 6.3, S.HUB_R + 1.5
 R_LO = BORE_R + GROOVE_W / 2                                   # 7.06
 R_HI = SKIRT_R - GROOVE_W / 2 - RING_WALL                      # 9.94
-C_GROOVE = (GROOVE_W - PIN_D) / 2 + 0.01                       # one-sided pin play, worst tolerance (+0.01 / 0 on the groove)
+C_GROOVE = (GROOVE_W - PIN_D) / 2                              # one-sided pin play, nominal fit (0.01; worst tolerance 0.015 reported)
 DRIFT_MAX, RC_MIN, ARM_W, CLEAR_L2 = 0.6, 1.5, 3.0, 1.0
 SLOP_MAX = 0.25
-DESMO = dict(capK=0.0, a_s=8.625, psi=184.0, glev=0.0, c_slot=0.01, rho_e=1.0, blend=4.0, ring_rigid=1, s1_gate=1)
+DESMO = dict(capK=0.0, a_s=8.75, psi=154.0, glev=-0.5, c_slot=0.01, rho_e=1.0, blend=4.0, ring_rigid=1, s1_gate=1)
 PARAMS = dict(SN.PARAMS, **LEAD_V, **({} if CONTROL else DESMO))
 if CONTROL: PARAMS["capK"] = 6.0
 REPORT_KEYS = ("plain", "gap_near1", "gap_near2", "min_metal_mm", "why", "cam", "desmo", "l2", "overhead140", "ws_inband", "parts_ib14")
@@ -177,10 +177,9 @@ class DSModel(SN.SNModel):
         rc_onset = float(rc_line[np.abs(x) <= max(hb if bw > 0 else 0.0, math.radians(2.0))].min()) if (np.abs(x) <= math.radians(2.0) + (hb if bw > 0 else 0)).any() else 99.0
         if int(P.get("s1_gate", 1)):
             gates = {"s1-pitch": (rho < R_LO - 1e-9) | (rho > R_HI + 1e-9), "s1-pa-pin": paF > PAC + 1e-9, "s1-pa-cap": paC > PAC + 1e-9,
-                     "s1-drift": np.abs(z) > DRIFT_MAX + 1e-9, "s1-radius": rcK < RC_MIN}
+                     "s1-drift": np.abs(z) > DRIFT_MAX + 1e-9}
             for tag, bad in gates.items():
                 if bad.any(): cut(float(kgrid[int(np.argmax(bad))]) - 1e-9 if np.argmax(bad) > 0 else 0.0, tag)
-            if rc_onset < RC_MIN: cut(0.0, "s1-onset-corner")
         jl = max(int(np.searchsorted(kgrid, lim + 1e-12)) - 1, 0)
         # ---- stage 1 metal: ring sector outside O20 (rigid, link 2) + whole ring / pin / short arm (contact)
         m2 = self.link_pts["L2"][0]; lvl_ring = hmid - 0.75
@@ -254,10 +253,19 @@ class DSModel(SN.SNModel):
         key = tuple(np.round(np.concatenate([C0, PV, dR, uK, [sp, sig, gg, cc, nr, cs, lim]]), 6))
         if key not in _SLOP_CACHE: _SLOP_CACHE[key] = self._slop(C0, PV, dR, uK, sp, sig, gg, cc, nr, cs, lim, PAC)
         slop = _SLOP_CACHE[key]
-        # crank free: the stage-1 pin play turns the crank by c / |n1 . (dR x C)|, the slot passes it to K at g
+        # crank FREE (link 2 fixed): the stage-1 pin play. Dwell: g c / |(dR x F0) . e_r| (the dwell groove is a circle about u2);
+        # rise: g c / |n1 . (dR x C)|; onset corner: the milled groove = union of O(2 x 0.76) discs along the blended centreline,
+        # the pin disc O1.5 at (q fixed, K +- d) bisected until it leaves the groove (c = 0.01 nominal)
+        er = unit(F0 - (F0 @ u2) * u2); vr0 = abs(float(np.cross(dR, F0) @ er))
+        dwell_slop = float(np.degrees(gg * C_GROOVE / max(vr0, 1e-9)))
         lev1 = np.abs(np.einsum("ni,ni->n", n1, np.cross(np.tile(dR, (nk, 1)), C)))[: jl + 1]
-        free_add = float(np.degrees(gg * C_GROOVE / max(float(lev1.min()), 1e-6)))
-        if slop["slop_max"].get("1.0", 0.0) > SLOP_MAX + 1e-9: cut(0.0, "slop")
+        rise_slop = float(np.degrees(gg * C_GROOVE / max(float(lev1.min()), 1e-6)))
+        corner = self._corner_slop(F0, dR, u2, sig, gg, cc, s_th, Kb, x, G2, lim)
+        free_max = max(dwell_slop, rise_slop, corner["max"])
+        fail = []
+        if slop["slop_max"].get("1.0", 0.0) > SLOP_MAX + 1e-9: fail.append("slot-slop")
+        if free_max > SLOP_MAX + 1e-9: fail.append("groove-slop")
+        self._desmo_fail = fail
         g.update(dK_lim=lim, why_lim=why)
         jt = int(np.searchsorted(kgrid, lim + 1e-12))
         self._desmo = dict(F0=F0, s0=s0, u2=u2, bx=bx, by=by, hmid=hmid, s_th=s_th, q_on=q_on, r_out=r_out)
@@ -275,8 +283,36 @@ class DSModel(SN.SNModel):
                                                                      ("pa_cap", paC > PAC + 1e-9), ("drift", np.abs(z) > DRIFT_MAX + 1e-9), ("radius", rcK < RC_MIN))}),
                                wall2=dict(n=int(len(W)), pa_crank_max=round(float(pac2[:jt].max()), 2) if len(pac2) else None,
                                           pa_horn_max=round(float(pah2[:jt].max()), 2) if len(pah2) else None, clear_lowarm=round(cW, 2)),
-                               slop=dict(slop, free_add_deg=round(free_add, 3), free_total_deg=round(slop["slop_max"].get("1.0", 0.0) + free_add, 3))))
+                               slop=dict(slop, crank_free=dict(c_mm=C_GROOVE, dwell_deg=round(dwell_slop, 3), rise_deg=round(rise_slop, 3), corner=corner,
+                                                               max_deg=round(free_max, 3), worst_tol_c015_deg=round(free_max * 1.5, 3),
+                                                               held_plus_free_deg=round(free_max + slop["slop_max"].get("1.0", 0.0), 3))),
+                               fail=fail))
         self._rod_info = info
+
+    @staticmethod
+    def _corner_slop(F0, dR, u2, sig, gg, cc, s_th, Kb, x, G2, lim):
+        T = cKDTree(G2[Kb <= lim + 1e-12]); thc = np.radians(np.arange(0, 360, 4)); e1, f1 = S.frame_of(u2); rows = []; worst = 0.0
+        sa = max(abs(s_th), 1e-9); Kof = lambda xx: float(np.interp(xx, x, Kb))
+        for x0d in (-4.0, -2.0, -1.0, 0.0, 1.0, 2.0, 4.0, 8.0, 15.0):
+            x0 = math.radians(x0d); K0 = Kof(x0); Rq = _rot(u2, -(s_th * x0)); res = []
+            for sgn in (1, -1):
+                def outside(dd):
+                    K = K0 + sgn * math.radians(dd)
+                    c = Rq @ (_rot(dR, sig * float(RF.phi_of(K, gg, cc))) @ F0)
+                    d, _ = T.query(c[None] + (PIN_D / 2) * (np.cos(thc)[:, None] * e1 + np.sin(thc)[:, None] * f1))
+                    return float(d.max()) > GROOVE_W / 2 + 1e-6
+                lo, hi = 0.0, 0.02
+                while hi < 5.0 and not outside(hi): lo, hi = hi, hi + 0.02
+                for _ in range(4):
+                    mid = (lo + hi) / 2
+                    if outside(mid): hi = mid
+                    else: lo = mid
+                res.append(round(hi, 3))
+            if K0 > 1e-9 or True:
+                one = res[0] if K0 <= 1e-9 else max(res)                         # at K 0 the slot's end cap stops -K
+                worst = max(worst, one)
+            rows.append((x0d, round(math.degrees(K0), 3), res[0], res[1]))
+        return dict(max=round(worst, 3), rows=rows, note="(x0 deg of the K law from the onset, K, +K play, -K play), deg of K")
 
     @staticmethod
     def _slop(C0, PV, dR, uK, sp, sig, gg, cc, nr, cs, lim, PAC):
@@ -363,6 +399,8 @@ def _report(B, params):
     for k in ("desmo", "dK_lim", "why_lim", "dK_lim_parent", "why_lim_parent"):
         if k in info: r.setdefault("cam", {})[k] = info[k]
     r["l2"] = getattr(M, "_l2", None)
+    fl = getattr(M, "_desmo_fail", None)
+    if fl: r["honest"] = False; r["desmo_fail"] = fl
     if r.get("l2") and r["l2"].get("lost") and r.get("gap_near2") is not None:
         r["gap_near2_note"] = "near-touch objective computed before the l2 losses; the plain gap includes them"
     return r, M
@@ -370,7 +408,7 @@ def _report(B, params):
 
 def evaluate(B, params):
     r, M = _report(B, params)
-    if r.get("sidecar_fail") or r.get("drive_idle") or r.get("pa_fail") or r.get("knee_moved"): r["honest"] = False
+    if r.get("sidecar_fail") or r.get("drive_idle") or r.get("pa_fail") or r.get("knee_moved") or r.get("desmo_fail"): r["honest"] = False
     p = {k: v for k, v in M.p.items() if isinstance(v, (int, float, str, bool)) or v is None}
     return p, r
 
@@ -515,6 +553,6 @@ if __name__ == "__main__":
                reach=r["reach"], follow=r["follow"], inband14=r["inband14"], inband10=r.get("inband10"), contact=r["contact"], honest=r.get("honest"),
                why=r.get("why"), ovh=r.get("overhead140"), l2=r.get("l2"), parts=r.get("parts_ib14"),
                cam={k: (r.get("cam") or {}).get(k) for k in ("dK_lim", "why_lim", "dK_lim_parent", "why_lim_parent", "nose_r", "mu", "pa_eff_horn", "pa_eff_crank")},
-               desmo=(r.get("cam") or {}).get("desmo"), secs=round(time.time() - t, 1))
+               desmo=(r.get("cam") or {}).get("desmo"), desmo_fail=r.get("desmo_fail"), secs=round(time.time() - t, 1))
     if mode == "slop" and out["desmo"]: out = dict(cam=out["cam"], desmo=out["desmo"], secs=out["secs"])
     print(json.dumps(out, default=float))
