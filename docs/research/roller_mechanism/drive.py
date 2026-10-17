@@ -60,6 +60,9 @@ ck = np.degrees(g["kgrid"])
 res["model_clear_past_lim"] = [dict(dK=round(float(ck[j]), 2), arm_hubK=round(float(g["ct_clear_hubK"][j]), 2), roller_hubK=round(float(g["ct_clear_roll_hubK"][j]), 2),
                                     arm_hub2=round(float(g["ct_clear_hub2"][j]), 2)) for j in range(len(ck)) if D(dK_lim) - 2 <= ck[j] <= D(dK_lim) + 6.01 and j % 4 == 0]
 
+cK, cR = g["ct_clear_hubK"], g["ct_clear_roll_hubK"]; inr = ck <= D(dK_lim) + 1e-6
+res["hubK_clear_where"] = dict(arm_min=round(float(cK[inr].min()), 2), arm_at_dK=round(float(ck[inr][np.argmin(cK[inr])]), 2),
+                               roller_min=round(float(cR[inr].min()), 2), roller_at_dK=round(float(ck[inr][np.argmin(cR[inr])]), 2))
 # ---------------- 2. the flank: ruled developable surface Q1 + s unit(P1); machining + CAD ----------------
 J = np.arange(0, min(at(D(dK_lim) + 2.0), nk - 1) + 1)            # built flank: used stroke + 2 deg run-out
 rul = unit(P1[J]); zc = unit(rul.mean(axis=0))
@@ -79,6 +82,14 @@ def pl_dist(Pts, Poly):
     return np.array(out)
 err_ext = max(float(pl_dist(top, mid).max()), float(pl_dist(bot, mid).max()))
 err_roll = max(float(pl_dist(section(1.25), mid).max()), float(pl_dist(section(-1.25), mid).max()))
+def edge_gap():
+    out = []
+    for q, j in enumerate(J):
+        for s_ in (-1.25, 1.25):
+            X = P1[j] + s_ * rul[q]; t = (h0 - X @ zc); Xp = X + t * zc; p2 = np.array([[Xp @ ex, Xp @ ey]])
+            out.append(float(pl_dist(p2, mid)[0]) - ROLL_R)
+    return np.array(out)
+eg = edge_gap(); res["flank_extrude_roller_edge_gap_mm"] = [round(float(eg.min()), 4), round(float(eg.max()), 4)]
 mis = np.array([D(math.asin(min(1.0, abs(float(r @ unit(np.cross(zc, np.cross(n_, zc)))))))) for r, n_ in zip(rul, N1[J])])
 # curvature of the flank section (mid plane) -> tool / wire radius limit
 x, y = mid[:, 0], mid[:, 1]; s_ = np.r_[0, np.cumsum(np.hypot(np.diff(x), np.diff(y)))]
@@ -148,6 +159,7 @@ for rr, part in ((3.0, "MR63ZZ (3x6x2.5) on an O3 pin"), (2.5, "IKO CFS2.5 stud 
             F = follower(a_s, psi, rr, hmid)
             dwell = F["rho"][0] - rr - 0.1; nose = float(F["rho"].max() - rr)
             if not (10.1 <= dwell <= 10.8): continue
+            if float(F["rho"].min()) - rr < 10.1: continue                  # the profile never dips into hub 2's O20 housing (ring bore O18)
             if a_s < 3.0 + rr + 0.3: continue
             if nose > d_lvl - 3.0 - 0.5: continue
             if float(np.abs(F["z"] - F["z"][0]).max()) > 0.6: continue
@@ -180,41 +192,41 @@ kk_t = kg[kidx]
 f_m = np.interp(kk_t, kks, m_f); f_pa = np.interp(kk_t, kks, FF["pa"]); f_rc = np.interp(kk_t, kks, np.abs(FF["rc"]))
 Fdir = np.array([np.interp(kk_t, kks, FF["n"][:, c]) for c in range(3)]).T; Fdir = unit(Fdir)
 Fpt = np.array([np.interp(kk_t, kks, FF["C"][:, c]) for c in range(3)]).T
-SPAN = float(os.environ.get("SPAN", 2.5))          # bearing centre distance of the crank pair (2 x MR63ZZ back to back in the O10 x 5 boss)
-loads = {}
+LAYOUTS = {"A: 2x MR63ZZ (3x6x2.5) in the O10 x 6 boss, 1 mm spacer (as modelled)": (1.25, 4.75, 73.0),
+           "B: 2x 683ZZ (3x7x3) in an O10 x 6 boss, no spacer": (1.5, 4.5, 120.0),
+           "C: 2x MR63ZZ straddling the follower, boss O10 x 9.5": (1.25, 8.25, 73.0),
+           "D: 2x 683ZZ straddling the follower, boss O10 x 10": (1.5, 8.5, 120.0)}
+def pair(Fs, Xs, a, b):
+    """exact two-support statics on the crank axis dR: supports at PV + a dR and PV + b dR (bearing centres), loads Fs at Xs;
+    returns the worst radial reaction per bearing (N) and the axial load (N)"""
+    A = PV + a * dR; M = sum(np.cross(X - A, F_) for F_, X in zip(Fs, Xs)); M = M - (M @ dR) * dR
+    Ft = sum(Fs); Fp = Ft - (Ft @ dR) * dR; Rb = np.cross(dR, M) / (b - a); Ra = -Fp - Rb
+    return max(float(np.linalg.norm(Ra)), float(np.linalg.norm(Rb))), abs(float(Ft @ dR))
+loads = {}; lay = {}
 for case, T0 in (("spring 0.08 N.m + 0.015 N.m/rad", 0.08), ("spring + MVP1 0.033 N.m", 0.113), ("low preload 0.05 + MVP1", 0.083)):
     TK = T0 + 0.015 * kk_t
     Fn = TK / (mH[kidx] / 1000)                                               # roller normal force (N)
     Froll = -Fn[:, None] * ng[kidx]                                           # on the roller (link 1b frame)
-    Mroll = np.cross(Qg[kidx] - PV, Froll)                                    # about the pivot point (N.mm)
-    Tc = np.einsum("ni,i->n", Mroll, dR)                                      # crank torque (N.mm)
+    Tc = np.einsum("ni,i->n", np.cross(Qg[kidx] - PV, Froll), dR)             # crank torque from the roller (N.mm)
     Ff = np.abs(Tc) / f_m                                                     # lobe follower normal force (N)
-    Ffv = Ff[:, None] * Fdir * np.sign(-np.einsum("ni,ni->n", np.cross(Fpt - PV, Fdir), np.tile(dR, (len(kidx), 1))) * Tc)[:, None]
-    Mf = np.cross(Fpt - PV, Ffv)
-    Mtot = Mroll + Mf; Mperp = Mtot - np.outer(Mtot @ dR, dR); Ftot = Froll + Ffv; Fr = Ftot - np.outer(Ftot @ dR, dR)
-    # bearing radial loads: the net radial force split + the tilting couple over the span (worst bearing)
-    Rb = np.linalg.norm(Fr, axis=1) / 2 + np.linalg.norm(Mperp, axis=1) / SPAN
+    sgn = -np.sign(np.einsum("ni,ni->n", np.cross(Fpt - PV, Fdir), np.tile(dR, (len(kidx), 1))) * Tc)
+    Ffv = (Ff * sgn)[:, None] * Fdir
     TJ2 = TK * kK
+    lay[case] = {}
+    for nm, (a, b, c0) in LAYOUTS.items():
+        rr_ = [pair([Froll[q], Ffv[q]], [Qg[kidx][q], Fpt[q]], a, b) for q in range(len(kidx))]
+        rw = max(x[0] for x in rr_); ax_ = max(x[1] for x in rr_)
+        lay[case][nm] = dict(worst_radial_N=round(rw, 1), axial_N=round(ax_, 1), C0r_N=c0, SF_static=round(c0 / rw, 2))
     loads[case] = dict(F_roller_N=[round(float(Fn.min()), 2), round(float(Fn.max()), 2)], crank_torque_Nmm=[round(float(np.abs(Tc).min()), 1), round(float(np.abs(Tc).max()), 1)],
                        crank_torque_check_TKxg_Nmm=[round(float((TK * gg * 1000).min()), 1), round(float((TK * gg * 1000).max()), 1)],
                        F_follower_N=[round(float(Ff.min()), 1), round(float(Ff.max()), 1)], J2_torque_Nm=[round(float(TJ2.min()), 3), round(float(TJ2.max()), 3)],
-                       tilt_moment_on_crank_pair_Nmm=round(float(np.linalg.norm(Mperp, axis=1).max()), 1), axial_on_pair_N=round(float(np.abs(Ftot @ dR).max()), 1),
-                       bearing_radial_worst_N=round(float(Rb.max()), 1),
-                       hertz_roller_flank_MPa=round(max(hertz_line(fn, ROLL_R, (rh if sd > 0 else 1e9), ROLL_W - 0.4, E1=E_ST, E2=E_TI)
-                                                        for fn, rh, sd in zip(Fn, np.interp(kk_t, kg[J], rho), np.ones(len(Fn)))), 0),
-                       hertz_follower_lobe_MPa=round(max(hertz_line(ff, RR, max(rc - RR, 0.5), 2.2) for ff, rc in zip(Ff, f_rc)), 0))
+                       hertz_roller_flank_MPa=round(max(hertz_line(fn, ROLL_R, 1e9, ROLL_W - 0.4, E1=E_ST, E2=E_TI) for fn in Fn), 0),
+                       hertz_follower_lobe_MPa=round(max(hertz_line(ff, RR, max(rc - RR, 0.5), 2.2) for ff, rc in zip(Ff, f_rc)), 0),
+                       follower_axial_from_PV_mm=round(float(((Fpt - PV) @ dR).mean()), 2), roller_axial_from_PV_mm=round(float(((Qg[kidx] - PV) @ dR).mean()), 2))
     if case.startswith("spring 0.08"):
-        Fn0, Mperp0, Tc0, Ff0, Rb0, TK0 = Fn, Mperp, Tc, Ff, Rb, TK
-res["loads"] = loads
-res["loads_note"] = f"crank pair span {SPAN} mm (bearing centres); Hertz roller-flank uses the convex flank radius (worst) and Ti-6Al-4V flank"
-# MR63ZZ ratings (NMB/Minebea DDL-630ZZ class; to confirm with the supplier): Cr ~ 0.21 kN, C0r ~ 0.07-0.09 kN
-res["crank_pair_C0r_N"] = 73.0; res["crank_pair_SF_static"] = round(73.0 / float(Rb0.max()), 2)
-spans = {}
-for sp_ in (2.5, 4.0, 6.0, 8.0):
-    w = (np.linalg.norm((np.cross(Qg[kidx] - PV, -Fn0[:, None] * ng[kidx]) - np.outer(np.cross(Qg[kidx] - PV, -Fn0[:, None] * ng[kidx]) @ dR, dR)), axis=1))
-    spans[str(sp_)] = round(float((np.linalg.norm(Mperp0, axis=1) / sp_ + 30.0).max()), 1)
-res["bearing_radial_vs_span_N_approx"] = spans
-
+        Fn0, Tc0, Ff0, TK0 = Fn, Tc, Ff, TK
+res["loads"] = loads; res["crank_pair_layouts"] = lay
+res["loads_note"] = "Hertz roller-flank on a flat Ti-6Al-4V flank (conservative vs the concave r 6.1-13.6 arcs); C0r: MR63ZZ 73 N (NMB 673ZZ class, as the sidecar red team), 683ZZ ~120 N (to confirm)"
 # ---------------- 5. stiffness: the bent arm (unit-load method on its polyline), the stub, the crank pair ----------------
 arm = g["armPts"]                                                              # boss -> straight -> arc -> roller (link 1b frame, K 0)
 seg = np.diff(arm, axis=0); Ls = np.linalg.norm(seg, axis=1); mids = 0.5 * (arm[1:] + arm[:-1]); tt = unit(seg)
@@ -245,7 +257,7 @@ res["arm"] = dict(polyline_len_mm=round(float(Ls.sum()), 1), n_pts=int(len(arm))
 mHmin, mHmax = float(mH[kidx].min()), float(mH[kidx].max()); lever_roll = float(np.linalg.norm(C0 - PV - ((C0 - PV) @ dR) * dR))
 res["K_error_deg_per_10um"] = dict(flank_or_roller_normal=[round(D(0.01 / mHmax), 3), round(D(0.01 / mHmin), 3)],
                                    lobe_or_follower_normal=[round(D(0.01 / float(m_f.max()) * float(mC[kidx].min()) / mHmax), 3), round(D(0.01 / float(m_f.min()) * float(mC[kidx].max()) / mHmin), 3)],
-                                   crank_pair_tilt_per_10um_radial_over_span=round(D(0.01 / SPAN * lever_roll / mHmin), 3),
+                                   crank_pair_tilt_per_10um_radial_over_span=round(D(0.01 / 3.5 * lever_roll / mHmin), 3), crank_pair_tilt_per_10um_over_7mm_span=round(D(0.01 / 7.0 * lever_roll / mHmin), 3),
                                    lever_roller_from_dR_mm=round(lever_roll, 2), m_horn_mm=[round(mHmin, 2), round(mHmax, 2)],
                                    m_crank_mm=[round(float(mC[kidx].min()), 2), round(float(mC[kidx].max()), 2)])
 
