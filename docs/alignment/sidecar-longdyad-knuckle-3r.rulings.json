@@ -1,47 +1,52 @@
 [
  {
-  "key": "near_touch",
+  "key": "complexity",
   "refuted": false,
-  "evidence": "Re-measured this session: alignment_audit remeasure (unchanged, output to the scratchpad), CB_EXACT=1, HEAD e99f42f, 232 s: 18.91 / 1 mm 20.00 / 2 mm 34.03 / 3 mm 155.98, band 3-14 19.22, near1 2 poses (0.28, 0.38 mm), near2 26, near3 178, why fold 86 / slide 7 / parts 2 / contact 4. Matches remeasure/_bench.json to the digit. Threshold: TH shell2_watch 15.0, applied to deep.gap_near2 - plain = 15.12, the same quantity the section-5 calibration (15-31) used. Label correction: 15.12 is the 0-2 mm shell. Read strictly as 1-2 mm (gap_near2 - gap_near1) it is 14.03, under 15; the watch crosses the line by 0.12 only through the 2 poses under 1 mm (+1.09). Held out: 14.57 (0-2 mm) and 11.49 (1-2 mm). Redefining the shell would be a measurement change, so it is not used here. The wearer cost is real (ALIGNMENT section 1 item 1): 24 taken bench poses at 1-2 mm and 2 at 0.28 / 0.38 mm. Stands."
+  "evidence": "Re-derived: docs/concepts/rows/sidecar-longdyad-knuckle-3r.json:complexity = 49.0; tools/simplicity.py score(mechanism) = 29.5 (4 prot 4, 3 loops 12, 2 bodies 2, 5 joints 5, 1 spring 3, 5 made 2.5, 4 bought 1.0, knee 0). The v1 record (cuff_knee removed, sensed_passive 2) scores 49.0 exactly, so the top-level field is the v1 number left in place. Threshold: tools/alignment_audit.py c_complexity, |row - recomputed| > 0.01 -> watch, applied to these two numbers; mechanism.confidence = 'hand count'. docs/dashboard/data/morphs.json complexity reads 29.5, so the user sees v2. No wearer cost; a records mismatch. Stands."
  },
  {
   "key": "reporting",
   "refuted": false,
-  "evidence": "Confirmed after the 02:13 UTC dashboard refresh (fc0f574). docs/dashboard/data/morphs.json for this id has gap 10.3, sweep_gap 10.3 and reach 0.8, with the verdict 'SCREENED, a candidate for the verifier...'; the row verdict is the same. 100 (1 - 10.3 / 275) = 96.25 and 18.91 - 10.3 = 8.61. Also stale: row t_verified is null and v_contact is null, although verification.contact is 0.0107. Stands."
+  "evidence": "docs/dashboard/data/morphs.json for this id: gap 10.3, sweep_gap 10.3, reach 0.8, v_gap 18.91, verdict starts 'SCREENED, a candidate for the verifier'. Row gap 10.3 / reach 0.8 / verdict the same. 100(1 - 10.3/275) = 96.25; 18.91 - 10.3 = 8.61. Stands."
+ },
+ {
+  "key": "judgement:G5",
+  "refuted": false,
+  "evidence": "Numbers reproduce (simplicity.py): v2 29.5, kneeless twin 28.0, roller-longdyad 24.25, kneeless-roller 23.75; twin delta prot 2 / joints 2 / bodies 1 / loops 1 / made 2 / bought 4. Correction to the reasoning, not the level: the template's 2 bodies / 4 made / 6 bought match the built CAD (pipeline/full-exo/designs/l1_sidecar-longdyad/parts_full.json k24 E boss, k25 knee link, k26 arm pad = pin b plate 'arm-fixed', k27-28 stop tooth/web, k29-30 retainers), and the template's 0 loops matches skin-normal's own record for the same serial knee (EXAMPLES: bodies 5, joints 5, loops 0). The row lists 7 bodies for L1a, L1b, L2, crank, rod, member 3, knee link, arm pad (8) while the twin counts the rod (6 bodies: 5 + rod, loops 2 = 8 - 6). With the rod counted, the row's own Euler count is loops 10 - 8 = 2: the 'knee closure' loop is a body-count slip, not a knee loop. Template-faithful record (bodies 8, loops 2) scores 26.5 (topology check clean), 3.0 below the recorded 29.5. So the recorded number is not the faithful one, in the unflattering direction; both rows remain hand counts. Not refuted: the mismatch the reason names exists, its size is 3.0 (not 1.5 / 2.5)."
+ },
+ {
+  "key": "judgement:NEW-law-dependent-sensing",
+  "refuted": false,
+  "evidence": "Re-measured independently with a new instrument (tools/alignment_knee_ghdrift_skeptic.py; exact Bench(110,360) frozen, gap 18.91, 375 taken poses, 206.7 s; output docs/alignment/remeasure/sidecar-longdyad-knuckle-3r_skeptic_ghdrift_bench.json). K's law slope regressed in SCREW convention (rot_angle L1a->L1b about uK vs q2): 1.6232 deg/deg, residual 0.0 deg, so the slaving row's sign is right (the audit's 1.6232 from the model's dK). Linear-solve form: the passive block [pin a, pin b, GH rot] has rank [5] at every pose, sigma_min min 0.1125 (screw scale 1/50 mm, a different normalisation from the audit's null-space 0.310, so the two are not comparable numerically; both say determined). The condition stands as a missing measurement: K is held on its law only by the clock spring and R17 / K lag has no output on file (design.json note: R17's dynamics judge has no place for the drive members dk / dr). A second condition the reason does not name, also measured here: GH drift (see missed): J3 reading 0.8472 deg/mm median, 1.5158 max; estimated arm rotation error 0.7304 median, 2.4102 max deg/mm. Stands."
  },
  {
   "key": "judgement:S1",
   "refuted": false,
-  "evidence": "Every number confirmed. Rows: v_gap 18.67 / 18.91 / 19.13; v_reach 0.725 / 0.725 / 0.7194; v_inband14 0.8937 / 0.8966 / 0.9049. verify/*_v_held_frozen.json, all mode exact, n 1154: 23.73 / 22.67 / 22.03. Row held_out at 1 mm: 26.83 / 25.75 / 24.44; parallelogram at 2 mm 48.71. One workspace pose = 100/360 = 0.278. git diff --stat 63167c0 HEAD over the bench, kit, env bench, simplicity, judge/, body_pose, split.json, band poses, both verify helpers, this model, its frontload parent and the pin-knee model: judge/dynamics.py only. Paired file: 8 / 8 discordant, CI90 [-2.62, 1.77], pooled p_A_better 0.287. Own re-wear reproduces 18.91. The bench 1 mm reading reverses the order again: this design 20.00, parallelogram 20.22, roller-longdyad 20.30 (remeasure deep.gap_near1). This strengthens the finding. Stands."
- },
- {
-  "key": "judgement:NEW-sensed-knee-pins",
-  "refuted": false,
-  "evidence": "Recomputed with tools/simplicity.py score() from each row's mechanism, with the 2 sensed pins moved to active_dof and out of passive_rot: this design 49 -> 87 (89 if passive_rot is kept), 5 DOF; roller-longdyad 43.75 -> 81.75; parallelogram 49 -> 87; roller-flank 45.25 -> 83.25; frontload 49 -> 87. The kneeless rows have sensed_passive 0 and stay at 23.75 / 28.0. grep of CLAUDE.md, REQUIREMENTS.md, HANDOFF.md and ROUNDS.md finds no user ruling on the knee pins, only proposals (HANDOFF line 222; ROUNDS lines 527-528 and 738, 'need the user's say'). The question is open. Stands."
+  "evidence": "Row v_gap 18.91; held_out.gap 22.67 (rows file); remeasure _bench.json deep.gap_near1 20.0. Trio and reversals as stated (prior skeptic re-checked the other two rows' files; unchanged since). One workspace pose = 100/360 = 0.278. Tie-break: v2 roller 24.25 vs this 29.5 (5.25); v1 43.75 vs 49.0 (5.25). With this row's template-faithful 26.5 (G5 correction) the margin is 2.25: still no flip. Stands."
  },
  {
   "key": "judgement:NEW-catalogue-drive",
   "refuted": false,
-  "evidence": "Confirmed in remeasure/_rh155cap354_bench.json: 19.76 / 1 mm 20.85, fold 89, 368 taken. _rh155cap354_held.json: 23.53 / 26.63, 850 taken vs 859. _rh155_bench.json control: 18.92. ls pipeline/full-exo/designs/l1_sidecar-longdyad/ lists build.json, design.json, exo.glb and parts_full.json, with no judge/; grep finds no judge output for it anywhere. Correction: the '1.2 behind' figure uses roller-longdyad's envelope-corrected 18.56, which the roller audit's S2 says never to quote. Like-for-like against the claim 18.67, the gap is 1.09. Roller-longdyad has no ball links (mechanism notes), so the issue is this design's own. The catalogue reading itself still samples the O7 socket at ZB 3.0 (see missed). Stands."
+  "evidence": "remeasure/sidecar-longdyad-knuckle-3r_rh155cap354_bench.json frozen.gap 19.76, _held.json 23.53 (cap_deg 35.4, r_h 15.5 vs 14.87). ls pipeline/full-exo/designs/l1_sidecar-longdyad/: build.json, design.json, exo.glb, parts_full.json, no judge/. Stands."
  },
  {
   "key": "judgement:NEW-unpriced-stops",
   "refuted": false,
-  "evidence": "best_params: smlo 5.0, and a1max 63.1774 = bk1 28.9414 + bk2 39.236 - 5 exactly. final_polish.min_th_margin 5.232. final_polish.priced: 19.36 / held 23.29, min th 5.513. Roller-longdyad has smlo 5.0 and a1max 58.7678 against bk1 + bk2 - 5 = 59.0336 (0.27 inside), so the comparison is like-for-like within 0.3 deg. Wearer cost: a built stop at exactly 5 deg with +-0.5 tolerance lets J2 come to 4.5 deg of the fold (ALIGNMENT section 1 item 3, near-singular). Pricing it costs 0.45 bench / 0.62 held. Stands."
+  "evidence": "rows file best_params: smlo 5.0, a1max 63.1774 = bk1 28.9414 + bk2 39.236 - 5 exactly; final_polish.min_th_margin 5.232; final_polish.priced bench_gap 19.36, held_gap 23.29, min_th_margin 5.513. Stands."
  },
  {
   "key": "judgement:G1",
   "refuted": false,
-  "evidence": "remeasure/_probe.json: clip_overhead140 poses_floor_lt2 8/10 (all 10 < 3 mm); ws_overhead140 poses_floor_lt2 5/8, lt1 1. Own re-wear: overhead_min_metal_p10 1.02 and near3 178; _held.json 0.64 and 427. Roller-longdyad near3 133 / 274. Correction: the shell figures mix definitions. Bench 15.12 is gap_near2 - plain, but its own parenthesis 20.00 -> 34.03 is 14.03. Held 11.49 is gap_near2 - gap_near1, and the 0-2 mm held figure is 14.57. Like-for-like: 14.03 / 11.49 (1-2 mm) or 15.12 / 14.57 (0-2 mm). The wearer facts (overhead metal under 2 mm) stand."
+  "evidence": "remeasure/sidecar-longdyad-knuckle-3r_bench.json deep: n_taken 371, near2_poses 26, near1_poses 2, min_metal_mm 0.278, near3_poses 178, overhead_min_metal_p10 1.02; audit.near_touch_low 0.28 mm at ws (45, 150, -45) and 0.38 at ws (15, 90, 30). Reported, not gated (CLAUDE.md decision 3). Wearer cost real (ALIGNMENT section 1: metal at 1-2 mm on the model is metal on a real arm). Stands."
  },
  {
   "key": "judgement:M5",
   "refuted": false,
-  "evidence": "Missing measurement. pipeline/full-exo/designs/l1_sidecar-longdyad/ has no judge/. grep for sidecar-longdyad / l1_sidecar in judge/ and pipeline/full-exo/designs/*/judge finds no output. docs/research/sidecar_mechanism_redteam.md only plans R17. The 0.08 N.m preload and the J2 step 0.13-0.20 N.m are confirmed at red team line 27. K lag, lift-off and cuff twist are not on file. Stands."
+  "evidence": "Missing measurement: no R17 / K-lag / lift-off output for this design anywhere (grep of every json naming sidecar-longdyad; pipeline/full-exo/designs/l1_sidecar-longdyad/design.json note: 'R17's dynamics judge orders posed groups as a serial chain ... the drive's side members dk / dr have no place in it'; docs/research/sidecar_mechanism_redteam.md line 112: R17 judge fix in progress). Stands."
  },
  {
   "key": "judgement:R1",
   "refuted": false,
-  "evidence": "Confirmed. docs/HANDOFF.md line 81 still says 'round 8 not yet closed (no polish, no CAD)' and line 97 'The best 3-active design is now within 0.51 of it'; HANDOFF has been unchanged since 4e5b038 (22:15 UTC), but the polish closed at b3d426a (22:03) and the gen-6 CAD exists. The row and the dashboard verdict still open with 'SCREENED'. morphs.json gap 10.3 / reach 0.8. Stands."
+  "evidence": "Row complexity 49.0 vs v2 29.5; morphs.json gap 10.3 / reach 0.8, verdict 'SCREENED'; docs/concepts/ROUNDS.md lines 1227-1228 'halves complexity (49 -> 24-27)'. Under v2: 29.5 - 28.0 = 1.5 (sidecar), 24.25 - 23.75 = 0.5 (roller). With the G5 body-count correction the knee row (26.5) would read below its own kneeless twin (28.0), so the lesson is not merely smaller but of the wrong sign on hand counts. Stands."
  }
 ]
