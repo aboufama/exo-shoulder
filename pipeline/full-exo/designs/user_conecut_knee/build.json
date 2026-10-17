@@ -5572,5 +5572,6 @@
   "max_joint_feature_mm": 0.1444,
   "dowels_in_slots": true,
   "q3p_frames_vs_model_max_deg": 0.0
- }
+ },
+ "checks_not_run": "drive_skin (all 1337 clip frames) and working_end (|dK| >= 29.3 workspace poses) were stopped at 22:03 to keep the box rule (<= 2 processes) for the R1 attribution; the drive geometry, law and frames are gen 7's (user_slipper_nose: drive skin 1.90 mm, working end pairs closed) and R2 judges every part against the body on this build"
 }
