@@ -49,6 +49,8 @@ def _clamp(p):
     p = SN._clamp(p)
     p["J3MIN"] = min(max(float(j3min), -180.0), -60.0); p["J3MAX"] = float(j3max)
     p["ang_min"] = max(float(p.get("ang_min", 25.2189)), 25.2189)    # the rule's lower bound (never below)
+    p["lE"] = min(max(float(p["lE"]), 40.0), 110.0)               # E end boss stays above the cuff (cuff centre ~155 mm down the arm)
+    p["lc"] = min(max(float(p["lc"]), 15.0), 45.0)
     return p
 
 
