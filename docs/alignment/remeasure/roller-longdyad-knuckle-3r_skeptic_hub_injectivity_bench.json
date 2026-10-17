@@ -1,0 +1,146 @@
+{
+ "id": "roller-longdyad-knuckle-3r",
+ "wear": "bench",
+ "n_taken": 371,
+ "all_ok": true,
+ "taken_source": "docs/alignment/remeasure/roller-longdyad-knuckle-3r_bench_perpose_claim.json",
+ "min_hub_diff_deg_for_arm_diff_gt_5": {
+  "hub_diff": 3.275,
+  "arm_diff": 5.5,
+  "poses": [
+   {
+    "plane": 49.4,
+    "elev": 9.6,
+    "axial": -40.4
+   },
+   {
+    "plane": 35.4,
+    "elev": 6.7,
+    "axial": -31.0
+   }
+  ],
+  "knee": [
+   87.5,
+   87.4
+  ]
+ },
+ "min_hub_diff_deg_for_arm_diff_gt_10": {
+  "hub_diff": 4.028,
+  "arm_diff": 15.48,
+  "poses": [
+   {
+    "plane": 30.0,
+    "elev": 4.0,
+    "axial": -30.0
+   },
+   {
+    "plane": -90.0,
+    "elev": 0.0,
+    "axial": 75.0
+   }
+  ],
+  "knee": [
+   87.1,
+   86.6
+  ]
+ },
+ "min_hub_diff_deg_for_arm_diff_gt_20": {
+  "hub_diff": 5.941,
+  "arm_diff": 20.05,
+  "poses": [
+   {
+    "plane": -15.0,
+    "elev": 0.0,
+    "axial": 75.0
+   },
+   {
+    "plane": 75.0,
+    "elev": 15.0,
+    "axial": 0.0
+   }
+  ],
+  "knee": [
+   93.9,
+   95.3
+  ]
+ },
+ "finite_amp_arm_per_hub_deg": {
+  "max": 2.197,
+  "p99": 1.898,
+  "median": 0.787,
+  "n_pairs": 1012,
+  "worst": [
+   {
+    "plane": 30.0,
+    "elev": 137.6,
+    "axial": -57.5
+   },
+   {
+    "plane": 45.0,
+    "elev": 150.0,
+    "axial": -45.0
+   }
+  ],
+  "worst_arm_hub": [
+   12.32,
+   5.609
+  ]
+ },
+ "min_hub_diff2_deg_for_arm_diff_gt_5": {
+  "hub_diff2": 4.094,
+  "arm_diff": 5.55,
+  "poses": [
+   {
+    "plane": 35.4,
+    "elev": 6.7,
+    "axial": -31.0
+   },
+   {
+    "plane": -1.1,
+    "elev": 4.6,
+    "axial": 1.3
+   }
+  ]
+ },
+ "min_hub_diff2_deg_for_arm_diff_gt_10": {
+  "hub_diff2": 6.215,
+  "arm_diff": 10.26,
+  "poses": [
+   {
+    "plane": 45.0,
+    "elev": 150.0,
+    "axial": -90.0
+   },
+   {
+    "plane": 60.0,
+    "elev": 165.0,
+    "axial": -75.0
+   }
+  ]
+ },
+ "min_hub_diff2_deg_for_arm_diff_gt_20": {
+  "hub_diff2": 7.355,
+  "arm_diff": 20.05,
+  "poses": [
+   {
+    "plane": -15.0,
+    "elev": 0.0,
+    "axial": 75.0
+   },
+   {
+    "plane": 75.0,
+    "elev": 15.0,
+    "axial": 0.0
+   }
+  ]
+ },
+ "finite_amp2_arm_per_hub_deg": {
+  "max": 1.651,
+  "p99": 1.355,
+  "median": 0.652
+ },
+ "global_amp2_arm_per_hub_deg_all_pairs": {
+  "max": 3.066,
+  "p999": 2.323
+ }
+}

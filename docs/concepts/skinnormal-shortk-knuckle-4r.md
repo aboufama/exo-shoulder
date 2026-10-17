@@ -150,3 +150,50 @@ Overhead (elev >= 140, frozen): 6-8 of 28 for every config - the knuckle does no
 - **Optimistic numbers in this record**: every fast number (in-sample on the 160 fit poses). The held-out wear and the
   per-part contact attribution (docs/concepts/verify/minarc-pick1-redteam.py attr, 1154 poses exact) are listed below
   only where they finished inside the time box.
+
+### Held out (1154 poses never used: fit Bench(60,160) fast, worn exact, same harness)
+
+| config | held gap | score | near1 | reach | overhead | follow | ib14 | ib10 | contact | lost fold / slide / contact | min own margin |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| pick1 (control, verified) | 22.69 | 91.75 | 26.73 | 0.720 | - | 1.0 | 0.892 | 0.563 | 0.038 | 209 / 23 / 35 | - |
+| skinnormal (repaired) | **22.43** | 91.84 | **25.45** | 0.711 | 18/71 | 1.0 | 0.891 | 0.568 | **0.027** | 221 / 30 / 24 | 5.589 |
+
+skinnormal ties pick1: +0.18 on the bench, -0.26 held out, near-touch -3.16 / -1.28, contact poses 8 / 24 vs 11 / 35. It
+does what it was picked for (margin) and nothing more: the fold losses it adds (+4 bench, +12 held) eat the contact it saves.
+
+## Verdict
+
+**Killed by the lead's rule (every seed and every sweep pick >= pick1's 18.40 frozen); the sweep's gate passed.** Best
+frozen: the repaired skinnormal seed, **18.58 on Bench(110,360) exact frozen (score 93.24), held out 22.43, near1 20.20**,
+reach 0.742 (overhead 8/28), follow 1.0, ib14 0.893, ib10 0.570, contact 0.021, min th margin 5.90 (bench) / 5.59 (held),
+0 islands in the continuity flood. Best frozen reach: k33 0.769 (= the 95-point reach target) at contact 0.048 and follow
+0.9455 -> 18.61. It is a 4-joint design (4 active, cx 32.5 vs the lead's 24.25), level with pick1 within 0.3 points, so it
+cannot earn its 4th joint; it is never the 3-joint lead (roller-longdyad 18.67 with 3 active).
+
+## New knowledge (predicts beyond this morphology)
+
+1. **The fast bench has stopped ranking the 4R class.** Six frozen claims: fast 12.18-16.14 -> frozen 18.58-21.05 with
+   the order scrambled. The law-only reach on Bench(110,360) (1.5 s per config) bounds frozen reach from above (frozen =
+   law-only - 19..28 poses); the leak grows with how far K opens. Any further 4R search must score frozen or use a
+   K-open-aware contact proxy; CMA on Bench(60,160) will polish noise.
+2. **Fold-for-contact is 1:1 in the K-open (stretched) states**: each extra pose the knuckle reaches past the 3R wall
+   costs ~one contact pose on the envelope (skinnormal -> stopb80 -> k33 -> k56). The knuckle moves the stretched wall to
+   th = a1max + a2 - 5.5 (measured on every config) but the metal it swings there is in the skin.
+3. **The folded state never takes a workspace pose** in this layout (all seeds, pick1, a two-way centred K spring
+   included): the folded-side wall th_lo = |a1 - a2| + smlo is a 3R wall the knuckle cannot move.
+4. **A K stop B within 5.5 deg of the K dyad's stretch (a1max > bk1 + bk2 - 5.5) refuses every pose at the verifier's
+   reading** while it scores normally at the default 5.0 - fast reproductions at margin 5.0 miss it. The model caps it.
+
+## Files
+
+- model `docs/concepts/models/skinnormal-shortk-knuckle-4r.py` (`python3 ... '<json>'`, `... viz '<json>'`)
+- sweep `docs/concepts/sweeps/skinnormal-shortk-knuckle-4r.json` (123 configs, in order, with kin360)
+- frozen claims `docs/concepts/verify/skinnormal-shortk-knuckle-4r/c_*_fit60_{bench,held}.json` (+ `_params.json` = the
+  priced design worn, `_conn.json` = the continuity flood), nominal inputs `seed_*.json`, `cand_k*.json`
+- preview `docs/concepts/viz/concepts/skinnormal-shortk-knuckle-4r.js` (the repaired skinnormal seed; test.mjs: 239 / 239
+  frames close, 207 in range, residual 0.0004 mm)
+
+Not run inside the time box (the CPU farm batch was refused by the permission policy; everything ran locally): the
+independent verifier docs/concepts/verify/minarc-final-polish-verify.py (contact-aware continuity, knee window) and the
+per-part held-out contact attribution (minarc-pick1-redteam.py attr); the R17 hold with the thorax tilted; the
+workspace in-band at elev 90-140.

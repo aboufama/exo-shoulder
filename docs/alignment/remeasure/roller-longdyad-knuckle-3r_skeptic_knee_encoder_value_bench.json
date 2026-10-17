@@ -1,0 +1,37 @@
+{
+ "id": "roller-longdyad-knuckle-3r",
+ "wear": "bench",
+ "n": 371,
+ "taken_source": "docs/alignment/remeasure/roller-longdyad-knuckle-3r_bench_perpose_claim.json",
+ "kK": 2.1534,
+ "one_over_1_plus_kK": 0.3171,
+ "forced": 167,
+ "hubs": {
+  "min": 0.3172,
+  "amp_max": 3.152,
+  "median": 0.6521,
+  "forced_min": 0.3172,
+  "unforced_min": 0.606
+ },
+ "hubs_pins": {
+  "min": 0.318,
+  "amp_max": 3.144,
+  "median": 0.6877,
+  "forced_min": 0.318,
+  "unforced_min": 0.6736
+ },
+ "hubs_K": {
+  "min": 0.5744,
+  "amp_max": 1.741,
+  "median": 0.6521,
+  "forced_min": 0.5744,
+  "unforced_min": 0.606
+ },
+ "hubs_K_pins": {
+  "min": 0.6306,
+  "amp_max": 1.586,
+  "median": 0.6877,
+  "forced_min": 0.6306,
+  "unforced_min": 0.6736
+ }
+}

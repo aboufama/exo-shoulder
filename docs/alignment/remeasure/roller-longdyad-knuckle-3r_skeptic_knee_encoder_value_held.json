@@ -1,0 +1,37 @@
+{
+ "id": "roller-longdyad-knuckle-3r",
+ "wear": "held",
+ "n": 851,
+ "taken_source": "docs/alignment/remeasure/roller-longdyad-knuckle-3r_held_perpose_claim.json",
+ "kK": 2.1534,
+ "one_over_1_plus_kK": 0.3171,
+ "forced": 399,
+ "hubs": {
+  "min": 0.3178,
+  "amp_max": 3.146,
+  "median": 0.6316,
+  "forced_min": 0.3178,
+  "unforced_min": 0.5861
+ },
+ "hubs_pins": {
+  "min": 0.318,
+  "amp_max": 3.144,
+  "median": 0.681,
+  "forced_min": 0.318,
+  "unforced_min": 0.6675
+ },
+ "hubs_K": {
+  "min": 0.5672,
+  "amp_max": 1.763,
+  "median": 0.6444,
+  "forced_min": 0.5672,
+  "unforced_min": 0.5861
+ },
+ "hubs_K_pins": {
+  "min": 0.6305,
+  "amp_max": 1.586,
+  "median": 0.681,
+  "forced_min": 0.6305,
+  "unforced_min": 0.6675
+ }
+}
