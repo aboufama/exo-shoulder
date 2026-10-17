@@ -1228,3 +1228,135 @@ shoulder, inside the allowed seats; (c) for the knee-free class (complexity ~24-
 bracket costs. Target: frozen reach >= 0.775, overhead >= 14/28 at in-band14 >= 0.88, contact <= 0.01; score >= 95
 (gap <= 13.75). Report plain gap, held out, complexity (2 mm near-touch no longer required). Dead directions: HANDOFF
 section 5 and twin-k2.
+
+## Round 10 plan (2026-10-17, track main, lead verified gap 18.67)
+
+### State
+
+- **Lead (best verified gap, not gamed):** roller-longdyad-knuckle-3r **18.67** (score 93.21), Bench(110,360) exact
+  frozen, margin 5, O20, fit Bench(60,160).
+  - Reach 0.725 (261/360), follow 1.0, in-band14 0.8937, in-band10 0.513, contact 0.0054. Gap = in-band 0.63 + reach
+    17.5 + contact 0.54.
+  - Lost 99: fold 88, slide (knee) 9, contact 2. Overhead 8/28 (lost fold 14, slide 4, contact 2).
+  - Held out 23.73 (lead-before 22.67). Flood full 18.67 / knn 20.34. Min th margin 5.18 (0 poses under 5).
+  - Drive: dK taken 45.6 of dK_lim 46.25, horn PA 42.7.
+  - 3 active, 0 passive translations, complexity 43.75. Parts in band: hub 3 0.739, L2 0.736, crank 0.797, rest >= 0.93.
+  - **Ledger: watch** (`alignment_ledger.py get` exit 0; audit re-running). Carry these reasons:
+    - its 0.24 over sidecar-longdyad is 2 contact poses (0.86 of a pose), with identical reach (261, overhead 8);
+    - it is worse held out (-1.06) and at 1 mm (-0.30);
+    - it fails the 1-point rule, so its "win" is noise, not a better exo;
+    - continuity / fold-margin records are missing from the audited row.
+- **Same protocol, verified:**
+
+  | design | gap | held out | cx | ledger / note |
+  |---|---|---|---|---|
+  | sidecar-longdyad-knuckle-3r | 18.91 | 22.67 | 49 | watch: 15.12 points in the 1-2 mm shell; 3 mm 155.98 |
+  | sidecar-parallelogram | 19.13 | 22.03 | 49 | watch (continuity knn 22.21) |
+  | sidecar-roller-flank | 20.08 | 22.35 | 45.25 | watch |
+  | kneeless-roller-knuckle-3r | 21.07 | 24.59 | 23.75 | **gamed**: idle check reads the deleted knee's constant angle; skeptic pending |
+  | kneeless-sidecar-knuckle-3r | 21.11 | 25.34 | 28 | no entry; workspace in-band 0.809 / 0.740 at elev 90-140, below the lead's 0.874 / 0.841 (pattern L2) |
+  | H1 pin knee | 27.20 | - | 19.5 | |
+  | zero-complexity ceiling | 31.04 | - | 0 | |
+  | minarc pick1 | 18.40 | - | 33 | 4 active (sensed K): not a 3-joint lead |
+
+- **95 arithmetic.** Gap 13.75 needs reach 0.774 at the lead's in-band and contact: +18 workspace poses
+  (0.278 points each). At in-band 0.88: reach 0.788 (+23).
+  - In-band is scored on the clips only. Every lens must also report the unscored workspace in-band, which may not
+    fall below 0.874 overall / 0.841 at elev 90-140.
+- **Where the 88 fold poses sit** (round-9 judge, sidecar lead, same walls on the roller):
+  - 22 below the folded wall (th < 30.5 = a2 - a1 + 5);
+  - ~64 above the drive-stroke wall (th ~109.5-112);
+  - the overhead set spans th 18-146: 7-9 folded at th 24-37, 10 stretched at 110-142;
+  - raising the stretched wall gains +6 / +13 / +16 / +27 poses at th 113.5 / 117.6 / 120.2 / 129.4, but only +1 to +3
+    of them are overhead;
+  - poses past th ~132 need a1e 76-100.
+- **Closed with measured reasons (do not rescreen):**
+  - J1 re-seats (back 20.29 / 61.21 / 73.21 vs control 10.30; eave 27.92; crown-lateral 25.29). Round 9's "Next
+    focus (b)" re-lists the back seat, but round9_ideation.md measured it dead.
+  - The J3 twist / wide window (K range dK 82; no strap-level drive carries more than 52).
+  - The long-stroke flank: the dK 55-57.5 boss sits on the deltoid (88-94 contact poses), and co-fits walk back to
+    dK 42-47.
+  - Twin K2 (67.32 frozen; hub K2 0.09-0.57 in band).
+  - K-law shape, stop B, dyad length, two-rise and folded-side lobes, hubs on link 2.
+  - In-sample and env-fit polishes (no pick travels).
+- **What is still open, from the data:**
+  - (1) The 4-joint class is the only class with frozen reach >= 0.77 (arm-parked-knee-4r 0.772 at in-band 0.799,
+    contact 0.035; park4 0.750 at 0.864). minarc's free K cut fold losses to 56 (vs 88), but it pays a knee window of
+    16 and contact 9. The redundant 4R's kinematic headroom is ~1.0; the cost is entirely parking (hub 4 0.51, link 3
+    0.32 when the 4th hub sits on the deltoid).
+  - (2) The lead's non-fold losses (knee slide 9, of which 4 overhead, plus contact 2) are 3.1 points that no lever
+    has targeted on the knuckle. The pin knee's longer lc measured 0, but only on H1.
+  - (3) The first drive-wall step (+6 poses at th 113.5, needing dK ~48-50) is inside the roller's measured PA 43 if
+    the flank contact stays within r ~24 mm of hub K's axis. The dK 55+ flank that died ran to r 30-33.
+  - (4) Simplicity: deleting the knee costs ~2.2 frozen points (the b3 tilt: hub 3 at 0.50-0.55 in band on a GH ray,
+    plus E-L2 parts 8 frozen / 17 held out) and halves complexity. The drive is ~14-16 of the knuckle's points.
+- **Fresh container:** the local .cache bench is rebuilding (~20 min). Gates run first on the CPU farm
+  (tools/cloud_run.py). RunPod balance ~$34: keep each batch small and set workersMin to 0 after it.
+
+### Lenses
+
+1. **fourth-joint-window (reach, Keemink 2018 TNSRE 26(4) inside the 4-joint cap).** Target: frozen reach >= 0.78,
+   in-band14 >= 0.88, workspace in-band >= 0.874 / 0.841, contact <= 0.01, gap <= 13.75.
+   - **Topology:** the knuckle chain J1-K-J2-J3 as a redundant non-orthogonal 4R. K is a joint: sensed, 4 active. It
+     is determined for MVP1 by a centring spring and stops acting on its own angle, scored with the continuity flood.
+   - **The Keemink step nobody has run:** free all four axis rest angles (bk1, bk2, a2, J3 tilt / seat) jointly, so the
+     fold set lands outside the workspace. Resolve the redundancy by the spring's static law: no per-pose-free K.
+   - **Park every hub:** no hub on the deltoid (park4's failure). Use the lead's strap-level hardware.
+   - **Gate, <= 25 min:** law-only per-pose reach with the static K law on Bench(110,360), plus per-part parking. It
+     passes at kinematic >= 0.82 with hub 2 / hub K / hub 3 / L2 >= 0.80 in band.
+   - **Labelling:** 4 joints. The user wants 3 first, so it is reported as the 4-joint route to 95, never as a 3-joint
+     lead, with complexity by tools/simplicity.py.
+   - **Red team:** the spring's two feasible arcs (arm-parked snap events), drift under gravity across the thorax
+     (pick1 4.1-7.7 deg), and the stop feel.
+2. **knee-window-and-first-wall (reach, 3 joints, small sure steps; suggested id: kneewin-roller-knuckle-3r).**
+   Target: frozen gap <= 15.5 at in-band >= 0.885, held out <= 22.67; stretch 13.75.
+   - **Regain the in-window losses first:** split the lead's 9 slide + 2 contact poses by the binding knee constraint
+     (pin-a / pin-b limit, knee closure, E-L2 clearance). Re-cut the knee window (lc, phib, ang_min, pin offsets, knee
+     stops) on the knuckle. The lc lever measured 0 only on H1.
+   - **Then lift the stroke wall one step:** dK 48-50 at bk2 39-41 with the conjugate flank held inside r <= 24 mm of
+     hub K's axis and PA <= 43. That is +6 poses at th 113.5.
+   - **Gate:** law-only plus parking on Bench(110,360), >= +9 of these poses kept with metal on.
+   - **Kill:** report the per-pose binding constraint and stop.
+   - **Red team:** the overhead axial -135 / 0 families; the knee at its window edges under a 3 mm GH offset.
+3. **simplest-fold (low complexity at the lead's reach; suggested id: bare-roller-knuckle-3r).** Target: complexity
+   <= 22 at verified gap <= 19.9 (stretch <= 18.67), workspace in-band >= 0.874 / 0.841, 0 sensed passives,
+   0 passive translations.
+   - **Base:** kneeless-sidecar (cx 28, not gamed) or kneeless-roller (cx 23.75; its 'gamed' idle finding must be
+     resolved by the skeptic before it is called a base).
+   - **Regain the 2.2 points the knee bought:**
+     - a J3 seat where the GH ray meets the deltoid at <= 16 deg (0.82 in band), priced against the overhead cost;
+     - route the bracket's E leg off link 2 (E-L2 0.15 mm costs 8 frozen / 17 held-out poses).
+   - **Cut complexity:**
+     - drop the K spring with a positive (desmodromic) double flank or a stop that is also the lobe;
+     - merge lobe, stop and hub cap;
+     - every merge priced by tools/simplicity.py.
+   - **Carry the kneeless watch reasons:** GH-centre liner misfit (38.7 % within 3 mm), workspace in-band, the
+     unproven spring-closed cam, and the drive PA 42.5 / 43.
+   - **Gate, <= 20 min, fit bench:** cx <= 24 and fast within +1 of kneeless-roller's 16.70. Else report and stop.
+
+**Every lens:**
+- takes a new id;
+- writes its motion preview (docs/concepts/viz/concepts/<id>.js, test.mjs and thumbs) before the row is called
+  screened;
+- reports plain gap fast and frozen exact, held out, the full + knn flood, overhead x/28, per-part and workspace
+  in-band, min th margin and tools/simplicity.py. The 2 mm near-touch is optional; contact stays metal < 1 mm;
+- searches on the envelope bench, fits the shape on the claim's fit bench and claims held out;
+- runs `tools/alignment_audit.py audit <id> --ref roller-longdyad-knuckle-3r` before its verifier;
+- has a 75-min modelling box. On a kill it reports the measured reason and stops.
+
+### Carried over (catalogue, ideated, never screened)
+
+None. The round-4 picks stay closed:
+- deltoid-crest-j3-3r and crest-knee-3r: the crest seat is an option inside lens 3;
+- slotted-eccentric-pin-knee-3r: its sibling was refuted at 115.21.
+
+breathing-hubs (a radial lift of hub 2, the relay's parking fix) fails the standing-slide rule: 8-15 mm of travel plus
+the block puts metal out of band in the low state. offset-axis-skin-hubs needs 3 passive translations. The rest are
+families dead in rounds 1-2.
+
+### Elsewhere, not to be duplicated
+
+- roller-longdyad-knuckle-3r: the alignment re-audit (uncommitted docs/alignment files), its final polish (claim held
+  out) and the generation-winner CAD + stills.
+- kneeless-roller-knuckle-3r: the skeptic ruling on the idle 'gamed' finding.
+- sidecar-longdyad-knuckle-3r: the gen-6 CAD, which was never built.
