@@ -1,0 +1,26 @@
+[
+ {
+  "tag": "ls-claimE-s65n2d_rh+025_bench",
+  "cmd": "mkdir -p docs/research/longstroke_drive/farm/claimE && python3 docs/concepts/models/longstroke-slipper-knuckle-3r.py claims '[{\"tag\": \"s65n2d_rh+025_bench\", \"drive\": \"rssr\", \"mode\": \"frozen\", \"params\": {\"La\": 19.654, \"s_arm\": 4.0, \"r_h\": 14.9189, \"beta\": -124.0829, \"gam\": 14.5934, \"hl\": 3.15, \"zr\": 0.0, \"kK\": 1.957, \"r_lobe\": 7.0, \"bk1\": 26.0, \"bk2\": 47.2225, \"a1max\": 68.2225, \"smhi\": 12.1012}}]' docs/research/longstroke_drive/farm/claimE > docs/research/longstroke_drive/farm/claimE/s65n2d_rh+025_bench.run.log 2>&1; tail -2 docs/research/longstroke_drive/farm/claimE/s65n2d_rh+025_bench.log",
+  "out": [
+   "docs/research/longstroke_drive/farm/claimE/s65n2d_rh+025_bench*"
+  ],
+  "env": {
+   "OMP_NUM_THREADS": "1",
+   "IGL_NUM_THREADS": "1"
+  },
+  "timeout": 3600
+ },
+ {
+  "tag": "ls-claimE-s65n2d_rh+025_held",
+  "cmd": "mkdir -p docs/research/longstroke_drive/farm/claimE && python3 docs/concepts/models/longstroke-slipper-knuckle-3r.py claims '[{\"tag\": \"s65n2d_rh+025_held\", \"drive\": \"rssr\", \"mode\": \"held\", \"params\": {\"La\": 19.654, \"s_arm\": 4.0, \"r_h\": 14.9189, \"beta\": -124.0829, \"gam\": 14.5934, \"hl\": 3.15, \"zr\": 0.0, \"kK\": 1.957, \"r_lobe\": 7.0, \"bk1\": 26.0, \"bk2\": 47.2225, \"a1max\": 68.2225, \"smhi\": 12.1012}}]' docs/research/longstroke_drive/farm/claimE > docs/research/longstroke_drive/farm/claimE/s65n2d_rh+025_held.run.log 2>&1; tail -2 docs/research/longstroke_drive/farm/claimE/s65n2d_rh+025_held.log",
+  "out": [
+   "docs/research/longstroke_drive/farm/claimE/s65n2d_rh+025_held*"
+  ],
+  "env": {
+   "OMP_NUM_THREADS": "1",
+   "IGL_NUM_THREADS": "1"
+  },
+  "timeout": 3600
+ }
+]
