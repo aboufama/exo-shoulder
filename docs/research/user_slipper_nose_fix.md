@@ -90,4 +90,33 @@ reads only `--set=k=v`, so that run was the control - noted so nobody repeats it
 
 ## 3. Rebuild and judges
 
-(filled below)
+Both rebuilt by the same builder, `--link-margin 0 --l1b-margin 0.1 --skip-base-search --no-checks` (the base search's v1
+outcome was "no ear level clears link 1's sweep: the J1 upper member alone", which is exactly what the skip builds), then
+`SKIP_FEA=1 tools/judge_all.sh <id> fast` locally (the vs-L1 rule's judges and steps). trimlug adds `--lug-trim 1.5
+--id trimlug-k165-knuckle-3r`: r_trim 21.30 mm (contact max 19.80 + 1.5; the model's 21.27), 22.4 mm3 of lug + web
+removed, link 1a 2.827 -> 2.805 cm3, the flank face untouched (its contacts end at r_K 20.07 over the built dK 0-51.75).
+The posed drive check (`posed_drive_check`, 60 clip frames + the largest |dK|) on the rebuilt slipper is identical to v1
+pair by pair (crank to link 1b 0.086, link 2 0.123, link 1a 0.108; nose and follower closed), so the running-gap item is
+closed by the drawing tolerance, not by metal.
+
+| judge | L1 (l1_slipper-nose) | v1 user_slipper_nose | **fixed user_slipper_nose** | **user_trimlug_k165** | kind |
+|---|---|---|---|---|---|
+| R1 (2-14) | 82.03 % | 81.09 % | **81.18 %** (+0.09) | **81.30 %** (+0.21) | design |
+| R1-aim (2-10) | 48.65 % | 47.43 % | 47.54 % | 47.57 % | design |
+| R4 (Raise overhead) | 74.48 % | 73.08 % | 73.15 % | 73.38 % | design |
+| R7 | PASS | PASS (52) | PASS (52 custom parts, none missing; names fixed) | see judge/ | - |
+| R2 / R6 / R16 / R17 | 24.87 / 0.0 / 64.2 / PASS | 24.87 / 0.0 / 64.2 / PASS | running at this commit | running at this commit | - |
+
+**Target R1 >= 82.0: NOT met** (81.18 / 81.30). Section 1 says why: the margin was 0.08 of the 0.94; the 60-deg ramp rule
+costs 0.16 (needs a ruling to relax on a machined part); the rest is over-14 coverage by real metal the L1 does not draw
+(link 2's pads / rings, the MR63ZZ knee bosses, the E strap cap). No judged requirement was traded.
+
+## 4. What next
+
+- The lead / user: allow link 2's J2 drop at the model's 68 deg on this 2.5-D machined part (+0.16 R1 measured, no metal
+  nearer the skin than the model)? It is a CAD-standard question, not a fit question.
+- `--checks-only` on both designs (kinematics table with the renamed flag, drive skin, working end) and the R16 step-1
+  attribution were not run inside the box (the box ran at load 17-18 from other agents); the post-export checks change
+  nothing judged (the posed drive pairs are identical to v1).
+- trimlug's CAD lowers the lug only where the model trims it; its overhead contact depth is a model quantity (13.18 vs
+  14.74 at the elev-165 pair), not a CAD judge, so the R2 / R16 rows above are the CAD's reading of it.

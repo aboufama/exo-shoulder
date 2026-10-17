@@ -964,7 +964,7 @@ def main():
         user = n.startswith(USER); hwr = not n.startswith(("D8-", "D9-")) and any(k in n.lower() for k in ("screw", "m4x6", "clip"))
         if not user and not hwr:
             cq.exporters.export(cq.Workplane().add(s), os.path.join(dd, "step", f"{i:02d}_{n.split(':')[0].replace('/', '_').replace(' ', '_')[:40]}.step"))
-        elif hwr:
+        elif hwr and not user:                                                               # our stock hardware only (never the user's own screws)
             cq.exporters.export(cq.Workplane().add(s), os.path.join(sd_stock, f"{i:02d}_{n.split(':')[0].replace('/', '_').replace(' ', '_').replace('.', 'p')[:60]}.step"))
         trep = {}; m = tess_safe(s, fine=not user, report=trep)
         sc.add_geometry(m, node_name=f"{g}|{n}|{i}", geom_name=f"{g}|{n}|{i}")

@@ -2620,3 +2620,25 @@ worn bench (`klaw_claim.py`).
   * bench 18.46 (min th 5.244); held out 23.43 (min th 5.068, 11 poses under 5.5); contact unchanged.
   * horn effective 41.2 at mu 0.087, 43.0 at mu 0.12 held.
   * 5.5 would need about +6 deg of lead (0.084 deg of margin per deg of K): only the stops (the priced reading) give it.
+
+## Gen-7 full CAD fix pass: the CAD's R1 loss against its L1 is link 2 riding high, and trims inside the rules recover only 0.1-0.2 of it (2026-10-17, docs/research/user_slipper_nose_fix.md)
+
+* **Attribution** (tools/r1_attrib.py, step 9, CAD minus L1 per group): link 2's group -16.5 k samples in band, +25.3 k
+  over 14 mm - the whole -0.94. The other groups net to ~0 (link 1a / knee link gain in band what they add over 14; the
+  E strap adds +5.2 k over 14, ~0.1 pt). The 4-strip machined bar sits 0.15-0.19 mm over the model strap on average
+  (0.10 = the builder's MARGIN) and up to 1.24 mm where the 60-deg ramp ruling lifts the low end of the model's 68-deg
+  drop after J2's footprint.
+* **Measured link-2 levers** (spliced into the v1 glb, same attribution): margin 0 **+0.08** (adopted); 8 strips
+  **-1.26** (rejected); margin 0 + a 68-deg drop **+0.24** (link 2 in band = the L1's) - outside the lead's 60-deg ramp
+  ruling, so it is a question for the lead / user, not a fix.
+* **Judged** (judge_all fast, local): user_slipper_nose R1 81.09 -> **81.18**, R1-aim 47.43 -> 47.54, R4 73.08 -> 73.15,
+  R7 PASS 52/52; the round-11 CAD user_trimlug_k165 (one cylinder cut on the lug at r_K 21.30) **R1 81.30**, R1-aim 47.57,
+  R4 73.38. L1 82.03: the remainder is over-14 coverage by real metal the L1 does not draw (link 2's pads / rings, the
+  MR63ZZ knee bosses, the E strap cap). Lesson: an L1 that draws only straps and keep-out cylinders over-states R1 by
+  ~0.7 pt against the honest hardware; compare CAD-to-CAD, not CAD-to-L1, once the bars match the model.
+* **The stock r 1.25 nose stands held out:** 23.45 (inband10 0.5148, 852 taken, 0 failing) = the claim's r 1.1839 in a
+  same-session control; its horn-PA drive limit is 49.5 vs 49.75, 3.2 deg past the taken 46.25. (The harness reads only
+  `--set=k=v`; a `--set k=v` run silently wears the claim's nose.)
+* **Tolerances now on the drawing:** K phase +0.75 +0.15 / -0.10 deg; knee stop tooth and E strap side +-0.02 (stop
+  154.78 +- 0.34 vs the workspace's 153.16); crank running faces +-0.02 (stack 0.04 < the 0.086 gap that 2768-f could
+  close); wear-test pass mu <= 0.105.
