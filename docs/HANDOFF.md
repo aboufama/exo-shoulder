@@ -479,6 +479,12 @@ designs (dipped-law-groove-knuckle-3r, seed-offset-3r-slides); every leader is w
      kinematic path to 95 (281 / 360) = the jump track's J2. Main loop relaunched as rounds 14-16 (wf_f06588fd-4d1) with
      the closer's focus (complexity on desmo-conecut; the 4 shared overhead contacts). Desmo-conecut's polish is skipped
      (family ceiling); its generation CAD (gen-8 builder + the desmo drive) waits behind the gen-8 conecut CAD.
+   - *Lead, 22:27 UTC:* gen-8 full CAD user_conecut_knee built + judged: 8/19 = its L1 (R1 81.6 vs L1 81.9, R16 66.7,
+     R17 PASS; M5 forward bound 4.54 / 4.67 / 4.77 deg at mu 0.087 / 0.105 / 0.12 - the margin is back vs slipper's
+     5.0008 fail at 0.15); D1 / D2 / D3 / O3 / O4 closed. NEW defect found and fixed in user_style_conecut.py: the slot
+     cutter shared since gen 4 put slot-end centres beyond the stop angles, so built K / J2 stops engaged 0.88 deg late
+     and J3 0.76 deg late (outside the held margin). Every earlier full CAD (gen 4-7) carries it; any rebuild of those
+     must use the gen-8 cutter. Its independent verifier is running.
 2. **Reach is the gap.**
    - The lead's gap is reach 17.50 of 18.49 (ROUNDS round 10 results). **Score 95 is gap <= 13.75**: +18 workspace
      poses at the lead's in-band and contact, 0.278 points each (ROUNDS round 11 plan).

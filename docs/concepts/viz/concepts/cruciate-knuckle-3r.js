@@ -8,12 +8,15 @@
  * at each end (a dowel on crank A's own angle). Per frame th = angle(J1, arm's J3 axis) -> theta by interpolation on the
  * run (monotone, so unique: no branch choice), then J1 turns phi to carry c onto w, then J3 turns q3. Outside the window
  * the knuckle stays at the run's end and the frame shows red. 3 ACTIVE (J1, A0, J3) + 3 PASSIVE pins (B0, A1, B1),
- * 0 passive translations. All six pins are O20 v5 stacks (Keep O20 only). Drawn at the screen's best honest config. */
+ * 0 passive translations. All six pins are O20 v5 stacks (Keep O20 only). Drawn at the screen's best HONEST config
+ * (sweep k25: kit gap 86.95 on Bench(60,160) fast, W 76.6 deg, th window [33.5, 110.1]; DEAD at gate 0, plain cap 3R
+ * 63.18 through the same code). Hub levels = the per-pose maxima of the K3 march for that config (J1 55, A0 79, B0 129,
+ * A1 109, B1 68, J3 70 mm): A0 / B0 / crank B are driven up by the overhead binder poses (0..15, 150, 0). */
 (function () {
   const K = (typeof window !== 'undefined' ? window : globalThis).KIN, V = K.V, M = K.M, D2R = K.D2R;
   const P = { az: 43.15, el: 59.93, wd: 92.03, wa: -9.03,
-              th0: 21.46, dA0: 46.64, pA0: 21.88, dB0: 26.79, pB0: 49.2, dA1: 34.95, pA1: 8.6, dB1: 61.7, pB1: 16.06, MU: 30, MARGIN: 5,
-              lv: { J1: 55, A0: 150, B0: 65, A1: 101, B1: 164, J3: 70 }, hub_r: 10, stack: 12.25, neck_deg: 25, cuff_at: 165 };
+              th0: 113.146, dA0: 21.991, pA0: -10.129, dB0: 42.537, pB0: -26.186, dA1: 42.26, pA1: 27.24, dB1: 25.022, pB1: -11.892, MU: 30, MARGIN: 5,
+              lv: { J1: 55, A0: 79, B0: 129, A1: 109, B1: 68, J3: 70 }, hub_r: 10, stack: 12.25, neck_deg: 25, cuff_at: 165 };
   const ID = 'cruciate-knuckle-3r', NAME = 'Cruciate knuckle J2: crossed four-bar at the cap pole (3R)';
 
   const ang = (u, v) => V.angle(u, v);
