@@ -2024,3 +2024,45 @@ Raw data: `docs/research/sidecar_env_polish/` (CMA rows, picks, re-scores, claim
 - the Comb hair -0.83 attribution (drive parts);
 - a bar-only / hubs-only swap of link 2;
 - then the re-shoot, if the user says yes.
+
+## roller-longdyad-knuckle-3r final polish: the farm search did not run; the audit's four watches measured on the verified config (2026-10-17, docs/research/roller-longdyad-knuckle-3r_final_polish.md)
+
+**Not run.** The envelope polish of the generation-6 winner was blocked:
+* the farm batch (8 CMA runs + 2 env re-scores, est. $0.4) was refused at launch by the session's permission policy;
+* the env fast caches live only on the farm volume, and rebuilding them here would take about 2 h at load 11-21.
+
+**No polished config and no held-out gain is claimed. The verified config stays the CAD config.** The tool
+(`tools/roller_env_polish.py`) and the farm batch are ready.
+
+**The objective applies the sidecar polish's lesson.** It scores BOTH shapes: the env-fitted shape in-sample and the
+Bench(60,160)-fitted shape (the CAD's) worn frozen on env. It also prices each of the alignment audit's watches:
+* knee window ang_min >= 26.88;
+* drive read at PA_MAX 42;
+* a contact-depth guard;
+* workspace in-band at elevation 90-140 logged.
+
+**Measured** (claim harness, local, exact; the wrapper reproduces the verified 18.67 / 20.30 / 33.10 and the auditor's
+per-pose dump on 470 / 470 poses):
+* **Knee window.** Closing it to 26.88 costs nothing (auditor: 18.67 / 23.72).
+* **Audit-compliant reading** (built stops +0.5, margin 5.5, PA 42, knee 26.88): **19.25** on the verified protocol
+  (score 93.00) and **24.91** held out (+0.58 / +1.18, measurement changes). Held reach falls 0.6817 -> 0.6691 (fold
+  261 -> 272). The taken K opening falls to 43.7-43.9 deg. The fold rule binds before the drive.
+* **Transmission.** One flank change, beta -173.46 -> -178.0, moves the drive end 44 -> 48 deg and the taken horn
+  pressure angle to 39.9-40.2 deg (5 under the 45 gate), at 19.32 / 24.86: within noise of 19.25 / 24.91. The PA watch
+  is free to fix. The flank is a knife edge: 22 of 27 nearby cuts fail the cam synthesis at rest.
+* **Contact depth** held out: 49.88 mm verified -> 39.0 mm priced, deepest 8.45. Still deeper than the lead's 35.66.
+  3 of the 9 presses are a below-shoulder cluster behind the body (elevation 60, plane -75 / -90, axial 105-120: 5.5,
+  3.5, 1.6 mm), separate from the overhead presses at 150-165.
+* **Raised-arm workspace in-band** (elevation 90-140): 0.798 -> 0.802 bench (lead 0.841).
+* **GH-offset within-liner share**, 3 mm misfit, knee-equivalent: 0.666 bench / 0.614 held (5 mm: 0.360 / 0.337),
+  the same as the twin.
+
+**Hard goal** (held out <= 20 at depth <= 35.66): 4.9 points and 3.4 mm short at the audit-compliant reading. The two
+env polishes so far moved held out by +1.49 and -0.31 on the CAD's fit, so a polish alone will not close it. The fold
+(272 of 952) is the limiter.
+
+**Next:**
+1. Run `docs/research/roller_env_polish/farm/jobs_cma.json` when the farm is permitted (about $0.5 with the claim
+   batch).
+2. Carry beta -178 (the PA fix) into the CAD's flank.
+3. Attribute the below-shoulder press cluster to a part.
