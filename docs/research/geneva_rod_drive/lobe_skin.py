@@ -81,6 +81,7 @@ REAL = [("R0 real parts, no lobe fix (a_c 9, r_h 2.493)", dict()),
         ("(v) thinner band 6.65-8.75 (2.1)", dict(band=(6.65, 8.75))), ("(v) thinner band 7.15-8.75 (1.6)", dict(band=(7.15, 8.75))),
         ("(iii) crank 12, horn r 2.0", dict(a_c=12.0, r_h=2.0)), ("(iii) crank 13, horn r 2.0", dict(a_c=13.0, r_h=2.0)),
         ("(iii) crank 14, horn r 2.493", dict(a_c=14.0)), ("(iii) crank 14, horn r 1.8", dict(a_c=14.0, r_h=1.8))]
+# the every-frame check (real all) runs the LOBE_SHORT labels (";"-separated substrings), e.g. LOBE_SHORT="dwell r 9.6" + the as-built v2 ring
 
 
 def real_mode(every_frame):
@@ -103,7 +104,8 @@ def real_mode(every_frame):
             g, n = node.split("|")[:2]
             if g == "l2" and n.startswith("D9-01"):
                 T_, gn = src.graph[node]; m = src.geometry[gn].copy(); m.apply_transform(T_); P = np.concatenate([trimesh.sample.sample_surface(m, 40000, seed=1)[0], m.vertices])
-                dvv = dv_variant(a_c=14.0, r_h=1.8); h, r, az = polar(dvv, P); keep = r > 10.05
+                lf = json.load(open(os.path.join(dv2, "build.json")))["gen5_fix"]["lobe_fix"]           # the build's own drive parameters
+                dvv = dv_variant(**{k: lf[k] for k in ("a_f", "a_c", "rr", "r_h", "r_base", "side") if k in lf}); h, r, az = polar(dvv, P); keep = r > 10.05
                 cands.append(dict(label="user_geneva_rod_v2 as built (exo.glb)", P=P[keep], h=h[keep], r=r[keep], az=az[keep], info={}, rep={}, worst=(9.0,), n2=0, flank=9.0, dwell=9.0))
     fl = list(frames(1)) if every_frame else (list(frames(1, ["Raise overhead"])) + list(frames(4, ["Reach a high shelf", "Comb hair"])) +
                                               list(frames(8, ["Drink from a cup", "Wash opposite shoulder", "Reach back pocket", "Wave", "Walking arm swing"])))

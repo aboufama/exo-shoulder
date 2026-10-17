@@ -177,6 +177,7 @@ frames, so the swapped group sits where the L1 put it.
 |---|---|---|---|---|---|---|---|---|
 | full CAD minus all drive metal (section 4 above) | 80.48 | 49.89 | 71.68 | 88.30 | 65.94 | 86.97 | - | - |
 | ... with **link 2's group (l2) from the L1** | **81.01** | **50.55** | 72.68 | 88.53 | 66.94 | 88.02 | 60.35 | 96.45 |
+| ... with **link 1b's group (l1b) from the L1** | 80.44 | 50.18 | 71.54 | 88.31 | 65.81 | 86.96 | 59.80 | 96.37 |
 | L1 (l1_geneva-rod, with its drive keep-outs) | 81.10 | 51.10 | 72.97 | 88.38 | 66.85 | 88.09 | 60.38 | 97.08 |
 
 - **Link 2's group carries 0.53 of the 0.62 non-drive points** (85 %), and 0.66 of R1-aim. With l2 swapped, the CAD sits
@@ -189,7 +190,8 @@ frames, so the swapped group sits where the L1 put it.
 - **The fix is not local to this builder.** The bar comes from user_style_minarc.py's strip builder, imported unchanged by
   every gen-4 / gen-5 CAD. Its hub-zone ramp follows the user's 2026-10-16 ruling (ramps up to 60 deg near a hub, bend
   radius >= 15 mm). Lowering it is a change to the shared bar builder that every user-style CAD would inherit, so it
-  needs its own judged run on all of them, not a patch inside the geneva fix. The l1b swap was started and stopped to
-  free the CPU for the judges. With l2 at 0.53, the other groups share at most 0.09.
+  needs its own judged run on all of them, not a patch inside the geneva fix.
+- Link 1b's group is worth -0.04 R1 (+0.29 R1-aim): nothing. The l1a and base swaps were stopped unfinished to free the
+  CPU for the judges. With l2 at 0.53 and l1b at -0.04, they and l3 / l4 share the remaining 0.13.
 
 V2_SECTION
