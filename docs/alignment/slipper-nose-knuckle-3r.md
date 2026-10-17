@@ -1,248 +1,218 @@
 # Alignment audit: slipper-nose-knuckle-3r
 
-Auditor run 2026-10-17 15:03-15:12 UTC (the hourly audit). Ledger entry 2026-10-17T15:09:56Z, `by auditor`, run
-`audit:slipper-nose-knuckle-3r`. Checks: `docs/alignment/slipper-nose-knuckle-3r.json` (13 checks). Findings:
-`docs/alignment/slipper-nose-knuckle-3r.findings.json` (9).
+Auditor run 2026-10-17 16:03-16:20 UTC (the hourly audit). Ledger entries 2026-10-17T16:15:36Z and 16:16:00Z (the second
+corrects the T1 reason with the full CAD's numbers), `by auditor`, run `audit:slipper-nose-knuckle-3r`. Checks:
+`docs/alignment/slipper-nose-knuckle-3r.json` (13 checks). Findings: `docs/alignment/slipper-nose-knuckle-3r.findings.json` (7).
 
 This hour audits two things:
-- **(A)** the lead's own bookkeeping commit 3d9dc71 (14:21): the complexity record fix, the dashboard's inferred
-  v_contact, and the slipper row's new verdict text. The lead must not grade its own metric change.
-- **(B)** whether the gen-7 full CAD user_slipper_nose carries the lead's 14:30 carry-overs, and whether any of its
-  judges ran weaker than at L1. It was not re-judged; its own verifier runs later.
+- **(A)** the lead's judge change 8f69bd6 (15:21): judge/dynamics.py now gates R17 on unrounded values. The lead must
+  not grade its own measurement change.
+- **(B)** the gen-7 CAD fix pass's new file docs/concepts/verify/slipper-nose-knuckle-3r_v_held_r125.json: does the
+  stock r 1.25 nose that the CAD builds hold the verified held-out 23.45? (The claim's nose is r 1.1839.)
 
 ## Verdict: WATCH (ledger tool verdict watch; tool checks alone watch)
 
 - **The claim:** v_gap 18.49 (score 93.28), frozen exact Bench(110,360), verified 06:22 UTC.
-- **No re-wear.** 3d9dc71 changed only the row's verdict text, its `v_contact` and `mechanism.cuff_knee`.
-  `best_params` and every measured field are unchanged since the 07:03 re-wear (bench 18.49, held out 23.45), so that
-  re-wear still stands for the same configuration.
+- **No re-wear.** The row's last commit (8f69bd6, 15:21) changed only `complexity` (22.25 -> 18.25) and the verdict
+  text. `best_params` and every measured field are unchanged since the 07:03 re-wear (bench 18.49, held out 23.45), so
+  that re-wear still stands for the claimed configuration.
 - **No gamed reason.**
-  - The lead's complexity fix applies the v2.1 rule to the same knee topology. It does not flatter the leader.
-  - The inferred v_contact reproduces the verifier's own contact on every row that has a verifier file.
-  - The full CAD carries every carry-over, and its judges ran at the L1 steps.
-- **One check moved, ok to watch:** complexity, "recomputed 18.25 vs row 22.25; MISMATCH". The lead freed the loop in
-  the mechanism record but left the row's `complexity` field and its verdict text at 22.25.
-- **One margin is newly measured on the build:** R17's forward-stroke cuff twist at mu 0.15 is 5.00 deg against the
-  5.0 deg limit.
+  - The judge change is right, only ever stricter, and flips no built design's R17.
+  - The stock r 1.25 nose holds 23.45 held out, pose for pose.
+- **Two findings closed since 15:03:**
+  - NEW-stale-complexity-ruler: the row field now reads 18.25, and the tool's complexity check is ok.
+  - NEW-synthesis-cliff: the 14:20 and 15:20 skeptics refuted it with as-built numbers (crank cliff at r_c -0.4 to
+    -0.5 mm, 4-5x outside the drawn +-0.1 mm).
 
-## (A) The lead's metric and display change, judged
+## (A) The lead's judge change 8f69bd6, judged
 
-### (A1) The knee closure loop on 5 rows
+### Is the code right?
 
-- **Each of the 5 rows has the same knee topology as the rows that already carry the key.**
-  - slipper-nose and trimlug-k165 are roller-longdyad minus the roller: bodies 6 -> 5, joints 9 -> 8, loops 3 -> 3.
-    roller-longdyad names its loops "drive, knee closure, K dyad stop".
-  - dipped-law-groove (6 / 9 / 3) has roller-longdyad's own count.
-  - inband-rssr names its 3 loops "the wearer loop, the lobe loop, the RSSR loop".
-  - longstroke-slipper says "loops unchanged" from slipper-nose.
-  - All 5 therefore charged the same loop that roller-longdyad, groove-desmo and sidecar-* freed in v2.1 at 04:55.
-    That loop closes through the wearer's arm, and docs/SIMPLICITY.md section 4 says that loop is never counted.
-    Freeing it removes a double count.
-- **The fix is half applied.**
-  - The dashboard computes complexity from the record and shows 18.25 / 18.25 / 20.25 / 24.5 / 26.5.
-  - Each row's own `complexity` field still reads 22.25 / 22.25 / 24.25 / 28.5 / 30.5.
-  - The slipper's verdict text still says "Complexity 22.25 vs 24.25" (it would now read 18.25 vs 20.25).
-  - The audit tool reads the row field, hence its MISMATCH.
-- **Is it uneven the other way?** Only on dead rows.
-  - split-knuckle-twosided-3r lists its bodies without the arm pad, so its 5 loops are 4 drive loops plus the knee
-    closure. It would read 45.0, not 49.0.
-  - rim-lobe-arm-knuckle-3r has 2 loops by the same count (cam loop and knee closure). It would read 12.0, not 16.0.
-  - Both are dead, so no live comparison moves.
-  - cam-unfold-4th's one loop is its own cam-pushrod loop. minarc-stop-knuckle-4r, skinnormal-shortk-knuckle-4r,
-    raglan-knee-3r and skin-normal-3r-pin-knee record 0 loops. All of these are correct without the key.
-- **Ranking and headline:** unchanged. Complexity is shown and never scored.
+- **Four gates are now read raw.** `summarise()` stores `gate_raw` (twist peak, M_GH peak, M_GH rms, cuff force peak)
+  unrounded from the same arrays the display fields round (`tw`, `Mgn`, `Fn`). `free()` compares these against
+  THRESH (5.0 deg, 1.0 N.m, 0.5 N.m, 5.0 N).
+- **The rollup is right.** Each of the four is a peak (or a per-clip rms), and the rollup takes the max over clips.
+  That is the same max the rounded fields already took (`moment_gh_rms_max_Nm` is also the max of per-clip rms).
+- **Two gate quantities are still read rounded.**
+  - `spare_drift_max_deg` (2 decimals, gate <= 5.0) and `slaved_law_err_max_deg` (3 decimals, gate <= 5.0) feed the
+    same `free()` test.
+  - Effect today: none. The highest values on any built design are spare drift 3.72 deg (user_minarc_pick1; the
+    99.88 / 45.11 deg rows already fail) and law error 0.156 deg (user_geneva_rod).
+  - Proposal P-R17a below.
+- **The other gates were already read raw.** Stalls compare the unrounded missed travel (`miss >= LAG_DEG`), and the
+  lock test uses unrounded `Mgn` and `Fn`.
+- **The fallback, and when it applies.**
+  - `x.get("gate_raw") or <rounded fields>`. The rollup writes `gate_raw` only when every clip carries it, so a mixed
+    set falls back to the rounded values for the whole case.
+  - `verdict()` runs only inside `main()` on fresh results (line 1170). Nothing reloads an old dynamics.json and
+    re-gates it: judge/scorecard.py reads the stored `verdict.moves_freely_nominal`.
+  - So the fallback is dead code in practice. Old files keep the verdict they were written with until they are
+    re-judged. The lead's event 15:23 ("older files ... fallback") slightly overstates what happens: nothing is
+    re-gated.
 
-### (A2) The dashboard's inferred v_contact
+### Is it only ever stricter?
 
-- **How it works.** tools/dash_build.py lines 433-439 infer v_contact as (v_gap minus the plain formula of v_inband14,
-  v_follow and v_reach) / 100 for a verified row that has none. It accepts the result when it lies in
-  [-0.0002, 0.3].
-- **Rows affected:** 11 verified rows on today's board (inband-rssr's 0.0027 comes from its polished bench, not the
-  inference).
-- **10 of the 11 match the verifier's own contact exactly:**
-  - from their `_v_bench_frozen` or `_corr_bench_frozen` files: dipped-law-groove 0.0107, dwell-fourbar 0.0087,
-    geneva-tail 0.0106, groove-desmo 0.0056, j3-neck-over 0.0582, kneeless-roller 0.0262, kneeless-sidecar 0.0134,
-    sidecar-longdyad 0.0107, sidecar-parallelogram 0.0107;
-  - from the row's verification block: zc-frontier 0.0299.
-- **1 cannot be checked:** seed-offset-3r-slides shows 0.0964 (v_gap 66.47, no verifier file). Its fast contact was
-  0.11, so the value is plausible, and the row is far from any ranking.
-- **Effect on rankings:** none. The board ranks by v_gap. Contact appears only in bench.js's tooltip and its sortable
-  Contact column. Before the change, these rows showed 0.0 there (the fast bench's contact).
-- **The hole that remains.** The accept band would silently turn a v_gap that is not the plain formula into "contact".
-  Examples are a near-touch v_gap, a priced v_gap, or a connected-set reach under a static v_reach. For example, the
-  slipper's 1 mm near-touch gap 20.12 would display as contact 0.0217 (7.8 poses) instead of 0.0054 (2 poses). No row
-  does this today. Proposal P-A2 below.
-- **Not a finding on this design:** the slipper row carries an explicit v_contact.
+Yes. Python's `round` is monotone, and every threshold is exact at its display precision (5.00, 1.000, 0.500, 5.00).
+So raw <= T implies round(raw) <= T: every raw pass was a rounded pass. Only a rounded value sitting exactly on a
+threshold can flip, and it can only flip from PASS to FAIL.
 
-### (A3) The slipper row's new verdict text and v_contact
+### Which built verdicts can flip? (a measurement change, reported apart from design changes)
 
-- **v_contact 0.0054** equals `frozen.contact` in docs/concepts/verify/slipper-nose-knuckle-3r_v_bench_frozen.json
-  (gap 18.49, reach 0.725, follow 1.0, in-band 0.8955).
-- **"held out 23.45"** equals `frozen.gap` in `_v_held_frozen.json` (reach 0.6828, in-band 0.8943, contact 0.0116).
-- **"ledger WATCH"** was true at 14:21 and is still true.
-- **What is stale:** the text's complexity numbers, as in (A1). The tool's reporting check no longer flags a
-  self-measured screen.
+- **Scan:** all 34 `pipeline/full-exo/designs/*/judge*/{dynamics*,forward_bound*}.json`. None was written with
+  `gate_raw`.
+- **Nominal cases (what R17 reads): none at a threshold.** Among passing designs the highest nominal values are twist
+  4.33 deg (l1_rail-elbow), M_GH 0.217 N.m, rms 0.098 and force 0.72 N. The 5 failing designs fail by a wide margin
+  (twist 11.49 / 11.11 / 9.99 / 5.85 deg, spare drift 99.88 / 45.11 deg).
+- **Two non-nominal plain-bearing cases read force 5.0.** Both are `passive|f0.05|s2`, on l1_skin-normal-3r-pin-knee-h1
+  and user_pinknee_h1b. They already fail on twist (7.76 / 7.67 deg) and 16 stalls, so they cannot flip.
+- **One bound sits on a threshold:** the gen-7 full CAD's M5 forward-stroke bound at mu 0.15
+  (`user_slipper_nose/judge_m5/forward_bound_mu150.json`, twist 5.0).
+  - Re-run locally with the lead's code unchanged on disk: niced, 1 process, 55 s, a scratch copy of the design with
+    preload 0.0982 and rates / 0.815 through the builder's K_RATES wrapper, and no rounding patch.
+  - Result: `gate_raw` twist **5.000812 deg**, `moves_freely` **False** (the builder's file reads True on the rounded
+    5.0). Every displayed digit equals the builder's file. The krate 0.0123 case (4.887) passes.
+  - File: docs/alignment/remeasure/slipper-nose-knuckle-3r_r17_newgate_fb150.json. This reproduces the 15:20
+    skeptic's wrapper reading (5.00081) with the judge's own new path.
+- **Scorecards and requirement counts: unchanged on every built design.** R17 = `dynamics.verdict.moves_freely_nominal`
+  (judge/requirements.json). The full CAD's own skeptic re-ran all 19 cases on the new gate: nominal twist 4.0425,
+  PASS, every per-case row identical (VERIFY.md, R17 notes). user_slipper_nose stays 8/19.
+- **Bench gaps:** untouched. v_gap does not read judge/dynamics.py.
+- **Bundling (A9, process only):** the judge change shares commit 8f69bd6 with 5 rows' complexity refresh, the
+  vfy_slipper_nose CAD and HANDOFF notes. It moved no number of the rows it touched, and it was stated as a
+  measurement change (event 15:23), so `judge_change` is rightly ok.
 
-## (B) The gen-7 full CAD user_slipper_nose: carry-overs and judge strength (not re-judged)
+## (B) The stock r 1.25 nose, held out
 
-### Carry-overs (docs/HANDOFF.md section 9, lead 14:30)
+The CAD builds the stock ISO 8734 O2.5 dowel (r 1.25), not the claimed r 1.1839.
 
-All are present in pipeline/full-exo/designs/user_slipper_nose:
-- **Verified flank:** build.json `fit.params.beta` -176.684, with the arc ending at -176.68. design.json fits: "keep
-  the verified flank (beta -176.684, no beta step)".
-- **+0.75 deg K lead:**
-  - design.json fits: "lobe-ring key dowel at the onset phase + 0.35 deg of q2, J2 stop B slot end at q2 -15.47 (the
-    CAD draws the nominal -15.82 = the loaded state)".
-  - build.json lobe ring: "O1 dowel key at the onset phase + 0.35 deg of q2".
-  - Assembly note: "K phase at the onset +0.75 +-0.3 deg, shim the key dowel".
-- **Tolerance notes:** "nose hole / crank pivot / lobe profile +-0.02 mm true position, r_c +-0.1 mm".
-- **Knee pins:** MR63ZZ pairs, 2 at pin a and 2 at pin b (build.json part list).
-- **Knee stop:** `ang_stop` 154.7811 (= 180 - ang_min 25.2189). Checked on 27 poses with 0.0 deg error. One valid
-  solid.
-
-### Judge strength against L1
-
-- **Same steps:** judge/vs_l1.json states the rule (R1 step 3, R2 6, R6 3, R16 12, R17 full; FEA skipped on both).
-- **R2:** the same 24.87 mm headline (the user's forearm cuff).
-  - The project's own parts now read 4.71 mm beyond the rig's self-intersection, where L1 read 0.0.
-  - This is a relabel, not new metal. The 4.71 mm is the user's BOTTOM bar at the same frame (Comb hair, frame 162).
-    At L1 that bar was a user part (BOTTOM 17.59 / 4.71 attributable). On the full CAD it is merged into D8-06 (BOTTOM
-    + arm pad + pad mount), which is "ours".
-  - The upper arm cuff is the project's own on every full CAD (user_roller_longdyad, user_minarc_*, user_geneva_rod*,
-    ...), so it is not new here.
-- **R17:** the same judge and cases.
-  - Nominal: twist 4.04 deg (L1 4.01), M_GH 0.129 N.m (L1 0.127).
-  - The same stale note ("knee stop (149.5 deg) is not in the CAD and not modelled; the knee pins are free") is in
-    both, now with a 154.78 deg stop built.
-- **R16:** 64.2 % = L1.
-- **R1, R1-aim and R4 lose against L1:** R1 81.1 vs 82.0, R1-aim 47.4 vs 48.6, R4 73.1 vs 74.5. The builder's own file
-  flags it (`loses_against_L1: ["R1"]`), and attribution is pending in its workflow.
-- **No judge ran weaker than at L1.**
+- **The held-out wear holds 23.45.** `_v_held_r125.json` (fix pass wf_788f3848, read, not re-run):
+  - frozen gap 23.45, reach 0.6828, in-band 0.8943 / 0.5148, contact 0.0116; 1 mm near-touch 26.54 (14 poses), 2 mm
+    36.95 (67); th min 5.006 at (135, 30, -135); overhead 0.2535.
+  - The why-not counts, the five lowest near-touch poses, the per-part in-band table, min clearance and head are
+    identical to `_v_held_frozen.json` (r 1.1839). On the bench, `_v_bench_r125.json` (verifier, 06:18) reads 18.49 with
+    in-band10 0.5162 vs 0.5163.
+- **What changes is drive margin, not score.**
+  - Horn pressure angle: +0.2 deg (held 36.1 -> 36.3, bench 35.8 -> 35.9).
+  - Stroke cap: dK 49.75 -> 49.5 against 46.27 taken.
+  - Flank radius of curvature at rest: 1.285 -> 1.351 mm.
+- **New measurement: the built nose at mu 0.12.** Same verifier, unchanged, `--set=nose_r=1.25 --set=mu=0.12`, held,
+  local, niced, 402 s:
+  - held out **23.66** (+0.21). The horn cap shortens the stroke to dK 46.0, below the 46.27 the poses need, so 2 more
+    held-out poses fold (260 -> 262).
+  - Contact, in-band, near-touch and overhead are unchanged; th min 5.078.
+  - File: docs/alignment/remeasure/slipper-nose-knuckle-3r_held_r125_mu12.json.
+  - So the row's "holds its fast number to mu 0.12" (bench, r 1.1839) does not quite carry to the built nose held out.
+    That nose's horn edge is mu 0.1175 by the verifier's held-out PA, and 0.108-0.113 by the as-built study. The lead's
+    wear-test pass line, mu <= 0.105, sits under both.
 
 ## What the wearer gets (measured)
 
-Measured on Bench(110,360) exact, frozen, from the 07:03 re-wear and probe of the same configuration; held out in
-brackets.
+Measured on Bench(110,360) exact, frozen, from the 07:03 re-wear and probe of the claimed configuration; held out in
+brackets. The r 1.25 nose reproduces each held-out aggregate.
 
 - **Overhead (elevation >= 140):** 8 of 28 workspace poses taken (18 of 71).
   - Full CAD R4: 73.1 % (FAIL against 80; L1 74.5).
 - **Raised arm:** reach is 26/51 at elevation 90-120 and 12/34 at 120-140. Workspace reach in all is 0.725 (0.683).
   - R16 on the full CAD: 64.2 %.
 - **Taken poses with metal under 2 mm:** 30 of 371 (66-67 of 852).
-  - Under 1 mm: 3 (14).
-  - The lowest is 0.072 mm at (-60, 60, 105).
+  - Under 1 mm: 2 by the claim dump's per-pose minimum (0.072 mm at (-60, 60, 105), 0.749 mm); 3 by the 1 mm
+    near-touch count (14 held out).
 - **Deepest contact:** 9.01 mm at (15, 165, -60) overhead, from the crank arm and flank lug; summed 14.75 mm over 2
   bench poses. Held out: 10 poses, summed 46.12 mm, deepest 9.05 mm at (30, 165, -45).
+  - The full CAD presses 0.27-0.52 mm deeper on 9 of its 11 body contacts, all of them the claim's own scored contacts.
 - **Workspace in-band (unscored):** 0.856 over all taken poses, and 0.800 at elevation 90-140 (0.199 of the metal above
   14 mm).
   - Full CAD R1 81.1 %, R1-aim (2-10 mm) 47.4 %.
 - **Spring, cuff twist and arm load (R17 on the full CAD, MuJoCo, rolling bearings mu 0.005):**
-  - Nominal: twist 4.04 deg against 5.0, M_GH 0.129 N.m, cuff force 0.58 N. K on its law to 0.139 deg, lift-off 0.000.
-  - Return stroke at mu 0.087 / 0.12 / 0.15: 3.61 / 3.46 / 3.32 deg.
-  - Forward-stroke bound at mu 0.12 / 0.15: **4.78 / 5.00 deg** (M_GH 0.158 / 0.166 N.m).
-  - Plain-bearing cases (f 0.05 and up) fail as at L1. That is why the knee and hubs are rolling bearings.
+  - Nominal: twist 4.04 deg against 5.0 (raw 4.0425, PASS on the new gate), M_GH 0.129 N.m, cuff force 0.58 N. K on its
+    law to 0.139 deg, lift-off 0.000.
+  - Forward-stroke bound at mu 0.12: 4.78 deg, pass. At mu 0.15: **5.000812 deg, FAIL on the new gate** (M_GH 0.166 N.m).
+  - Friction envelope for the built r 1.25 nose: horn edge mu 0.108-0.118, R17 edge between mu 0.12 and 0.15. The
+    wear-test pass line is mu <= 0.105.
 - **Stops and fold margin:**
-  - th margin minimum 5.181 bench (5.006 held out).
-  - The +0.75 deg K lead that covers the as-built K lag is on the full CAD's drawing.
+  - th margin minimum 5.181 bench (5.006 held out, also at r 1.25).
+  - The +0.75 deg K lead is on the drawing, but its +-0.3 deg tolerance is wider than the red team's stack covers.
   - The knee stop is built at 154.78 deg.
 - **Singular postures:** with K at rest, m_sub is under 1 deg on 50 of 371 bench poses. This is family-wide (G4), and
   B1 is open with the user.
-- **DOF and complexity:** 3 active, 0 passive translations, O20 hubs. Complexity is 18.25 by the record and the
-  dashboard, and 22.25 in the row field.
+- **DOF and complexity:** 3 active, 0 passive translations, O20 hubs. Complexity 18.25 in the row, by the record and on
+  the dashboard.
 
 ## Findings (each watch; none is gamed)
 
-1. **M5: the spring holds, at the limit on the build at mu 0.15.**
-   - **Evidence:** the builder ran the audit's forward-stroke bound on the full CAD
-     (judge_m5/forward_bound_mu120/150.json, 15:00 UTC). Twist reads 4.78 / 5.00 deg against 5.0; L1 read 4.90 / 4.97.
-   - **Why it matters:** R17 passes, but with 0.00 deg of margin at mu 0.15. The bench number does not depend on it.
-   - **Action:** report R17 at mu 0.15 as "at the limit". Run the nose wear test to confirm mu stays at 0.12 or below.
-     Keep the preload at 0.08 N.m or below.
-2. **NEW-one-sided-proxy: carried, half fixed.**
-   - **Evidence:** the build now runs both strokes. The L1 EVOLUTION row still shows only the return stroke, where
-     twist falls as friction rises.
-   - **Action:** close this when the gen-7 EVOLUTION row reports the forward stroke as the binding number.
-3. **T3: the fold margin needs the K lead, which is now on the drawing.**
-   - **Evidence:** held out 5.006 deg. The as-built K lag would put 1-2 held-out poses under 5. The K lead and its
-     assembly note are in design.json fits.
-   - **Action:** keep this at watch until a built part shows the K phase.
-4. **NEW-synthesis-cliff: the tolerance is now on the drawing.**
-   - **Evidence:** as built, the cliff is at r_c -0.4 to -0.5 mm (design-space scan -0.20). The build carries r_c
-     +-0.1 mm and +-0.02 mm true position, and the verified beta.
-   - **Why the exo is not worse:** the score does not stand on the cliff.
-5. **T1: carried from the L1.**
-   - **Evidence:** the 11 R16 step-1 body contacts are the claim's own scored contacts. The build adds 0.60-1.45 mm on
-     8 of 12.
-   - Full-CAD step-1 attribution is pending.
-6. **G4: carried.** m_sub is under 1 deg on 50 of 371 bench poses with K at rest. B1 is open with the user.
-7. **T5: carried.**
-   - **Evidence:** 2 bench contacts, 14.75 mm summed, 9.01 mm deepest. That is 2.37x sidecar-longdyad's depth, which
-     this design ranks above.
+1. **M5: the spring holds on the judged R17. The friction edge is now measured on the built nose.**
+   - **Evidence:** the mu 0.15 forward bound fails the new gate by 0.0008 deg (this audit's run). The built nose at
+     mu 0.12 loses 2 held-out poses (23.66).
+   - **Why the exo is not worse than claimed:** the claim runs mu 0.087, and the bench number does not depend on
+     friction.
+   - **Action:** keep the wear-test pass line at mu <= 0.105 and print it on the drawing. Report mu 0.15 as FAIL.
+2. **NEW-one-sided-proxy: mostly closed.**
+   - **Evidence:** the EVOLUTION row reports the forward bound, but still reads "5.00 deg at mu 0.15 = the limit".
+   - **Action:** reword it to "fails the gate by 0.0008 deg at mu 0.15; pass line mu <= 0.105".
+3. **T3: carried.**
+   - **Evidence:** held-out th 5.006 at both nose sizes. The K-lead tolerance (+-0.3 deg) is wider than the red team
+     covers.
+   - **Action:** tighten it to about +0.75 +0.15/-0.1 deg in the next CAD fix pass (lead's 15:35 item).
+4. **T1: carried, with full-CAD numbers.**
+   - **Evidence:** 11 body contacts, all the claim's own. The build is 0.27-0.52 mm deeper on 9 of them.
+5. **G4: carried.** m_sub is under 1 deg on 50 of 371 bench poses with K at rest. B1 is open with the user.
+6. **T5: carried.**
+   - **Evidence:** 2 bench contacts, 14.75 mm summed, 2.37x sidecar-longdyad's depth, which this design ranks above.
    - Mixed for the wearer: sidecar-longdyad is worse plain and at 2 / 3 mm.
-8. **NEW-ws-inband: carried.**
-   - **Evidence:** 0.800 in-band at elevation 90-140, and R1-aim 47.4 % on the full CAD.
-   - The full CAD also loses R1 (-0.94), R1-aim (-1.22) and R4 (-1.39) against its own L1, as its builder already
-     flags.
-9. **NEW-stale-complexity-ruler: the lead's fix is right, but the row field and verdict text still read 22.25.**
-   - **Evidence:** see (A1).
-   - **Why the exo is not worse:** the stale field is reporting hygiene against the design, not for it.
-   - **Action:** refresh `complexity` on the 5 rows. Fix the verdict's "22.25 vs 24.25". Record split-knuckle and
-     rim-lobe-arm's knee loop the same way if they are ever revived.
+7. **NEW-ws-inband: carried.**
+   - **Evidence:** 0.800 in-band at elevation 90-140. R1-aim is 47.4 % on the full CAD, and R1 is -0.94 against its own
+     L1 (attributed, fix route listed).
 
-The tool's other watch reasons are carried and unchanged:
-- **idle:** the knee is asserted rigid by the model's honesty flag, but it moves as a free knee by design. This is the
-  family's known wording.
-- **reporting:** the sweep best is 13.0 fast against 18.49 verified. It is shown as a sweep, not as a claim.
+The tool's other watch reasons are carried, and both skeptics have ruled on them:
+- **idle:** refuted as an instrument false positive (the knee's designed motion).
+- **reporting:** the sweep best 13.0 sits 5.49 under the verified 18.49. It is a pipeline-wide label.
 
 ## Patterns walked (each against this design and the goal)
 
-- **T1 (metal just past a cutoff):** watch, finding 5. **T2 (near-touch):** check ok, 1 mm 20.12 / 2 mm 33.02 on file.
-  **T3 (margin read on another angle):** watch, finding 3. **T4 (bound walking to a singular posture):** the synthesis
-  cliff (finding 4) and G4.
-- **S1-S5 (sampling):** check ok. Bench and held out are both re-measured; the held-out drop is +4.96 (family-typical).
+- **T1:** finding 4. **T2 (near-touch):** check ok; 1 mm 20.12 / 2 mm 33.02 bench, 26.54 / 36.95 held out at both nose
+  sizes. **T3:** finding 3. **T4 (bound walking to a singular posture):** the polish adopted nothing, and the PA
+  caps are rule values, not searched bounds. G4 covers the singular-posture side. **T5:** finding 6.
+- **S1-S5 (sampling):** check ok. Held out is re-measured at +4.96, family-typical. The flood: static 18.49, connected
+  18.49, knn 20.16.
 - **M1-M5 (model):**
-  - Components are real: O20 hubs, MR63ZZ knee pairs, an ISO 8734 nose dowel.
-  - No zero-size part: the envelope-corrected value is 18.44, close to 18.49.
-  - M5 (spring): finding 1.
+  - The parts are real: O20 hubs, MR63ZZ knee pairs, and now the stock ISO 8734 O2.5 nose the CAD builds. It scores
+    the claim.
+  - M5 is finding 1.
 - **P1-P4 (protocol):**
-  - The polish adopted nothing, so there is no in-sample tuning in the claim.
-  - The held-out split is untouched.
-  - No re-measuring until lucky: one claim, verified once, re-worn once.
+  - The r 1.25 held-out run tests one pre-set stock size. It does not choose among configurations by their held-out
+    number (no P2).
+  - One verification, one re-wear (no P3).
+  - P4: the judge change moved no bench number, and it is stricter.
 - **R1-R4 (reporting):**
-  - The verdict text now says VERIFIED with its true numbers. Its complexity numbers are stale (finding 9).
-  - The board's v_contact is now right for this row.
-  - New pattern for the catalogue: the inferred-field hole (P-A2).
+  - The verdict text now carries both complexity numbers with their dates.
+  - The EVOLUTION row's wording is finding 2.
 - **G1-G6 (gaming):**
-  - The judge did not change with the design: 3d9dc71 touched only the display and the complexity record, and the
-    judge_change check is ok.
-  - Hidden complexity: the opposite holds here (the row field over-reads by 4).
-  - Best-of-many: the convergence gate passes and the spread is on file.
+  - G1 is T1 / T5. G2 (stiff spring): preload 0.08 N.m, M_GH 0.129 N.m nominal against 1.0. G3 (cuff twist): 4.04 deg
+    nominal, M5. G4 is finding 5.
+  - G5 (complexity hidden by the count) and G6: none. 3 active joints and 0 sensed passives; the knee pins sit outside
+    the count by the user's rule.
+- **New:** none this hour.
 
-## Proposals (not applied; each a reporting or catalogue change for the lead)
+## Proposals (not applied; judge or reporting changes for the lead and the user)
 
-- **P-A1 (row hygiene):** refresh the stored `complexity` of every row whose record carries `cuff_knee.closed_loops`
-  from tools/simplicity.py. Or drop the stored field and read the record, as the dashboard already does. Measured
-  effect: 5 rows, 4.0 points each toward simpler. No score or rank moves.
-- **P-A2 (inferred contact, reporting):** in tools/dash_build.py, mark an inferred v_contact as inferred (for example
-  a `v_contact_src` field). Cross-check it against the row's `docs/concepts/verify/<id>_v_bench_frozen.json` when one
-  exists, and warn when they differ by more than 0.0003. Measured effect today: 0 of the 10 checkable rows differ.
-  seed-offset-3r-slides cannot be checked.
-  - Proposed catalogue entry R6: "a display field derived from another field (inferred, not measured), shown as a
-    measurement".
-- **P-B1 (judge note):** judge/dynamics.py's note "knee stop (149.5 deg) is not in the CAD" is stale on every
-  slipper-family build: the stop is built at 154.78. Either model the knee stop as a joint limit in the dynamics case,
-  or update the note. This is a judge change, so it is the lead's and the user's call.
-- **P-B2 (R2 attribution):** report the merged BOTTOM part's attributable depth with the source of each depth, user bar
-  or project geometry, so a 0.0 -> 4.71 mm "ours" step that is only a relabel is not read as new metal.
+- **P-R17a (judge completeness, a measurement change):** add `spare_drift_deg` and the slaved `law_err_deg` to
+  `gate_raw` (both are `free()` gates at 5.0 deg, read at 2 and 3 decimals). Measured effect today: 0 built designs.
+  The highest readings are 3.72 deg and 0.156 deg.
+- **P-R17b (bound files):** write the M5 bound files (forward_bound_mu*.json) through the new judge, so their stored
+  `free` matches the gate. Today forward_bound_mu150.json stores True and the gate reads False.
+- **P-R17c (the event wording):** "older dynamics.json files fall back to rounded values" should read "older files keep
+  their stored verdict until re-judged; none of the 28 dynamics.json nominal cases sits on a threshold" (this scan).
+- **Carried:** P-A2 (mark inferred v_contact as inferred), P-B1 (the stale "knee stop not in the CAD" note in the
+  dynamics judge), P-B2 (R2 attribution source), B1 (m_sub reading).
 
 ## Numbers not obtained, and why
 
-- **No new re-wear or probe:** the configuration is unchanged since the 07:03 re-wear (only verdict text, v_contact and
-  the complexity record moved). The 07:03 numbers stand.
-- **Full-CAD R16 step-1 attribution:** in progress in the builder's workflow. Not re-judged, by instruction.
-- **The full CAD's forward-bound files** are the builder's uncommitted WIP (15:00 UTC). They are read as found and
-  could still change.
-- **seed-offset-3r-slides' true contact:** no verifier file in the repo.
+- **No new bench re-wear or probe:** the claimed configuration is unchanged since 07:03.
+- **No per-pose dump for r 1.25:** its aggregates and the stored pose-level fields equal the r 1.1839 dump. A dump would
+  add the per-pose depths only.
+- **Not run:** the nominal R17 of the full CAD on the new gate (its skeptic did, at 15:46: 4.0425, PASS), and the
+  re-judging of other built designs (no nominal value sits at a threshold).
+- **The farm is closed** (budget line). Everything ran locally, niced, with at most 2 processes.
 
 ---
 
