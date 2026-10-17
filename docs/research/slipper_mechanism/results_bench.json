@@ -476,33 +476,33 @@
   }
  ],
  "follower_chosen": {
-  "a_s": 8.0,
-  "psi_deg": 222.0,
+  "a_s": 6.5,
+  "psi_deg": 216.0,
   "rr": 3.0,
   "pa_deg": [
-   11.9,
-   25.6
+   10.8,
+   16.1
   ],
   "pitch_r": [
-   13.31,
-   16.05
+   13.45,
+   15.52
   ],
   "profile_r": [
-   10.31,
-   13.05
+   10.45,
+   12.52
   ],
   "m_f_mm": [
-   7.21,
-   7.83
+   6.24,
+   6.38
   ],
-  "drift_mm": 0.58,
-  "pitch_rc_min": 10.6,
+  "drift_mm": 0.43,
+  "pitch_rc_min": 13.25,
   "follower_centre_onset": [
-   -26.597,
-   53.299,
-   38.185
+   -27.887,
+   53.439,
+   37.104
   ],
-  "s_on_dR": 70.3
+  "s_on_dR": 70.48
  },
  "sliding": {
   "v_slide_mm_per_rad": [
@@ -1029,65 +1029,65 @@
  "crank_pair_layouts": {
   "MVP1, mu 0.087": {
    "A: 2x MR63ZZ (3x6x2.5) in the O10 x 6 boss, 1 mm spacer": {
-    "worst_radial_N": 52.9,
-    "axial_N": 8.0,
+    "worst_radial_N": 81.0,
+    "axial_N": 10.4,
     "C0r_N": 73.0,
-    "SF_static": 1.38
+    "SF_static": 0.9
    },
    "B: 2x 683ZZ (3x7x3) in an O10 x 6 boss, no spacer": {
-    "worst_radial_N": 59.4,
-    "axial_N": 8.0,
+    "worst_radial_N": 91.3,
+    "axial_N": 10.4,
     "C0r_N": 120.0,
-    "SF_static": 2.02
+    "SF_static": 1.31
    },
    "C: 2x MR63ZZ straddling the follower, boss O10 x 9.5": {
-    "worst_radial_N": 36.9,
-    "axial_N": 8.0,
+    "worst_radial_N": 40.5,
+    "axial_N": 10.4,
     "C0r_N": 73.0,
-    "SF_static": 1.98
+    "SF_static": 1.8
    },
    "D: 2x 683ZZ straddling the follower, boss O10 x 10": {
-    "worst_radial_N": 38.7,
-    "axial_N": 8.0,
+    "worst_radial_N": 39.1,
+    "axial_N": 10.4,
     "C0r_N": 120.0,
-    "SF_static": 3.1
+    "SF_static": 3.07
    },
    "F_follower_N": [
-    34.8,
-    43.3
+    43.7,
+    49.9
    ],
-   "hertz_follower_lobe_MPa": 546.0
+   "hertz_follower_lobe_MPa": 582.0
   },
   "MVP1, mu 0.15": {
    "A: 2x MR63ZZ (3x6x2.5) in the O10 x 6 boss, 1 mm spacer": {
-    "worst_radial_N": 51.7,
-    "axial_N": 8.7,
+    "worst_radial_N": 79.9,
+    "axial_N": 11.2,
     "C0r_N": 73.0,
-    "SF_static": 1.41
+    "SF_static": 0.91
    },
    "B: 2x 683ZZ (3x7x3) in an O10 x 6 boss, no spacer": {
-    "worst_radial_N": 57.9,
-    "axial_N": 8.7,
+    "worst_radial_N": 90.0,
+    "axial_N": 11.2,
     "C0r_N": 120.0,
-    "SF_static": 2.07
+    "SF_static": 1.33
    },
    "C: 2x MR63ZZ straddling the follower, boss O10 x 9.5": {
-    "worst_radial_N": 38.5,
-    "axial_N": 8.7,
+    "worst_radial_N": 40.0,
+    "axial_N": 11.2,
     "C0r_N": 73.0,
-    "SF_static": 1.9
+    "SF_static": 1.83
    },
    "D: 2x 683ZZ straddling the follower, boss O10 x 10": {
-    "worst_radial_N": 40.2,
-    "axial_N": 8.7,
+    "worst_radial_N": 39.4,
+    "axial_N": 11.2,
     "C0r_N": 120.0,
-    "SF_static": 2.98
+    "SF_static": 3.05
    },
    "F_follower_N": [
-    35.0,
-    45.1
+    44.0,
+    52.0
    ],
-   "hertz_follower_lobe_MPa": 557.0
+   "hertz_follower_lobe_MPa": 595.0
   }
  },
  "arm": {
@@ -1113,8 +1113,8 @@
    0.042
   ],
   "lobe_or_follower_normal": [
-   0.152,
-   0.219
+   0.187,
+   0.252
   ],
   "crank_pair_tilt_per_10um_radial_over_span": 0.45,
   "crank_pair_tilt_per_10um_over_7mm_span": 0.225,
@@ -1130,6 +1130,11 @@
  },
  "fold_vs_K_offset": {
   "bench": {
+   "-0.7": {
+    "min": 5.122,
+    "lt5": 0,
+    "n": 371
+   },
    "-0.5": {
     "min": 5.138,
     "lt5": 0,
@@ -1172,6 +1177,16 @@
    },
    "0.5": {
     "min": 5.222,
+    "lt5": 0,
+    "n": 371
+   },
+   "0.75": {
+    "min": 5.246,
+    "lt5": 0,
+    "n": 371
+   },
+   "1.0": {
+    "min": 5.265,
     "lt5": 0,
     "n": 371
    }

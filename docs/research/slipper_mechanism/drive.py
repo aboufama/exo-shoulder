@@ -374,7 +374,7 @@ def fold_rows(Zx, offs):
             own.append(float(mf[jj]))
         own = np.array(own); out[off] = dict(min=round(float(own.min()), 3), lt5=int((own < 5 - 1e-6).sum()), n=int(len(own)))
     return out
-OFFS = (-0.5, -0.3, -0.2, -0.1, -0.05, 0.0, 0.1, 0.25, 0.5)
+OFFS = (-0.7, -0.5, -0.3, -0.2, -0.1, -0.05, 0.0, 0.1, 0.25, 0.5, 0.75, 1.0)
 res["fold_vs_K_offset"] = dict(bench=fold_rows(g, OFFS), note="K offset in deg, + = K more open than the law (a lead), - = a lag; verifier th_margin: 5.181 bench / 5.006 held")
 if ZH is not None: res["fold_vs_K_offset"]["held"] = fold_rows({k: ZH[k] for k in ZH.files}, OFFS)
 

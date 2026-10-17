@@ -1,0 +1,55 @@
+{
+ "A": "trimlug-k165-knuckle-3r",
+ "B": "slipper-nose-knuckle-3r",
+ "note": "diff = gap A - gap B (negative: A better); paired bootstrap over poses within kind (tools/alignment_paired.compare_sets)",
+ "bench": {
+  "gap_A": 18.5,
+  "gap_B": 18.48,
+  "diff": 0.02,
+  "split": {
+   "reach": 0.0,
+   "follow": 0.0,
+   "inband": 0.02,
+   "contact": 0.0
+  },
+  "discordant": {
+   "ws_taken_A_only": 0,
+   "ws_taken_B_only": 0,
+   "contact_A_only": 0,
+   "contact_B_only": 0,
+   "contact_both": 2
+  },
+  "boot": {
+   "n": 4000,
+   "ci90": [
+    0.0,
+    0.03
+   ],
+   "sd": 0.01,
+   "p_A_better": 0.001
+  },
+  "model_frozen": {
+   "A": 18.51,
+   "B": 18.49
+  },
+  "depth": {
+   "A": {
+    "n": 2,
+    "sum_mm": 13.19,
+    "max_mm": 9.01,
+    "gt3": 2
+   },
+   "B": {
+    "n": 2,
+    "sum_mm": 14.75,
+    "max_mm": 9.01,
+    "gt3": 2
+   }
+  },
+  "files": [
+   "trimlug-k165-knuckle-3r_bench_perpose.json",
+   "slipper-nose-knuckle-3r_bench_perpose.json"
+  ]
+ },
+ "held": "missing dump"
+}

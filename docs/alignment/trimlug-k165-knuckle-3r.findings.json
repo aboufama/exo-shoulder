@@ -20,7 +20,7 @@
  {
   "key": "G4",
   "level": "watch",
-  "reason": "G4_PLACEHOLDER",
+  "reason": "Carried unchanged from the lead (upheld by the lead's skeptic), re-measured here pose by pose: with K at rest on stop A (204 of the 371 taken bench poses) the J1-K-J3 sub-chain margin m_sub is under 5 deg on 106 poses, under 2 deg on 65, under 1 deg on 50, minimum 0.000 deg at pose 227 (plane 15, elev 75, axial 15); with K moved (167 poses) m_sub >= 10.805. The family reading the claim reports (min th margin 5.181 bench / 5.006 held; 2 bench poses under 5.5) reads m_plain at rest (min 5.389), not m_sub (the dipped-law skeptic's B1 point, awaiting the user's ruling). Max |m_sub(trimlug) - m_sub(slipper-nose)| over the 371 shared taken poses = 0.000 deg: the trim edits metal only, so none of this is bought by this design. Knee 86.21-151.92 deg against its 25.22-154.78 window (2.86 deg from the stop), as the lead. Drive transmission: horn 35.8 + 4.97 = 40.77 deg effective against the 43 cap, stroke taken 45.62 of 49.8 deg, as the lead.",
   "evidence": "docs/alignment/remeasure/trimlug-k165-knuckle-3r_msub_rest_bench.json (this audit, tools/alignment_msub_rest_probe_model.py, model unchanged) vs slipper-nose-knuckle-3r_msub_rest_bench.json; docs/alignment/remeasure/trimlug-k165-knuckle-3r_probe_bench.json extras (th_margin_own_state min 5.181, lt5p5 2; knee_ang_taken [86.21, 151.92], window [25.22, 154.78]); docs/concepts/verify/trimlug-k165-knuckle-3r_v_held_frozen.json (th 5.006 held); docs/alignment/slipper-nose-knuckle-3r.findings.json G4 (upheld)."
  },
  {
