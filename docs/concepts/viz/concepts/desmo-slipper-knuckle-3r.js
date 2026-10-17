@@ -1,11 +1,12 @@
 /* desmo-slipper-knuckle-3r: the verified lead slipper-nose-knuckle-3r (same seats, dyad 26/38.03, law kK 2.1534, drive
  * g 2.3934 / beta -176.684 / r_c 15.374, O2.5 nose, pin knee, O20 stacks) made POSITIVE BOTH WAYS and spring-free. No clock
  * spring (plain O20 cap on K, capK 0), no stop-A pin, no stage-1 roller. A crowned O1.5 pin on the crank's short arm
- * (a_s 8.75, psi 154) runs in a 1.52 x 1.5 groove under hub 2's cap ring (pitch r 9.41, outer wall r 10.96, inside the lead's
+ * (a_s 9.25, psi 154) runs in a 1.52 x 1.5 groove under hub 2's cap ring (pitch r 9.08, outer wall r 10.64, inside the lead's
  * O20 + 1.5 skirt; onset corner blended over 10 deg of q2). The nose runs in a two-walled swept-envelope slot in link 1a's
  * boss (stop A = the slot's end cap). Same kinematics as the lead: the preview draws the lead's chain and crank at this
  * geometry, and K is driven by q2 both ways.
- * Measured: fast Bench(60,160) plain 13.30 (lead 13.00). Slop: crank held 0.115 deg, crank free <= 0.23 deg.
+ * Best (a_s 9.25, psi 154, glev -0.5, blend 10): fast plain 13.19 (lead 13.00), frozen exact Bench(110,360) 18.63 (lead 18.49
+ * through the same code: a paired tie), complexity 15.75 (lead 18.25). Slop: crank held 0.115 deg, crank free <= 0.245 deg.
  * Geometry from docs/concepts/models/slipper-nose-knuckle-3r.py (SN_CELL=lead, mode viz) at the shared drive. */
 (function () {
   const K = (typeof window !== 'undefined' ? window : globalThis).KIN, V = K.V, M = K.M, D2R = Math.PI / 180;

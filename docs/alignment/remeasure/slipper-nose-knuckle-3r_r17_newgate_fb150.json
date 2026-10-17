@@ -1,0 +1,54 @@
+{
+ "what": "hourly audit 2026-10-17 16:03 UTC: the lead's judge change 8f69bd6 (R17 gates on unrounded values) run end-to-end on the ONE built dynamics result whose rounded gate value sits exactly at a threshold: the gen-7 full CAD's M5 forward-stroke bound at mu 0.15 (twist 5.0 rounded). Scan of all 34 pipeline/full-exo/designs/*/judge*/{dynamics*,forward_bound*}.json: no NOMINAL case has twist 5.0 / M_GH 1.000 / rms 0.500 / force 5.00 / spare drift 5.00 / law err 5.000; two non-nominal plain-bearing cases (l1_skin-normal-3r-pin-knee-h1 and user_pinknee_h1b 'passive|f0.05|s2', force 5.0) already fail on twist 7.76 / 7.67 deg and 16 stalls, so they cannot flip.",
+ "judge_commit": "8f69bd6 (judge/dynamics.py unchanged on disk)",
+ "design_copy": "scratch copy of pipeline/full-exo/designs/user_slipper_nose (build.json, clips.json, design.json, parts_full.json, workspace.json, exo.glb, score.json, step/) at git b216a33, design.json build_fixes.spring.preload 0.0982 (= 0.08 / 0.815), as forward_bound_mu150.json m5_forward_bound.method states",
+ "cmd": "OMP_NUM_THREADS=1 nice -n 10 python3 <wrapper> 0.815 <repo> <copy> --quick --no-validate --general --jobs 1 --out <out>",
+ "wrapper": "spec_from_file_location('dynamics', judge/dynamics.py); exec; m.K_RATES = (0.015/eta, 0.010/eta); m.GenDesign.__init__.__defaults__ = (m.K_RATES[0],); sys.argv = [...]; m.main(). No rounding patch: the judge's own gate_raw path decides.",
+ "springs": null,
+ "per_case": {
+  "passive|mu0.005|t0.001|s1|hub": {
+   "display": {
+    "twist_peak_deg": 5.0,
+    "moment_gh_peak_Nm": 0.166,
+    "moment_gh_rms_max_Nm": 0.124,
+    "force_peak_N": 0.75,
+    "slaved_law_err_max_deg": 0.126
+   },
+   "gate_raw": {
+    "twist_peak_deg": 5.000811524309784,
+    "moment_gh_peak_Nm": 0.1662844433930418,
+    "moment_gh_rms_Nm": 0.12364842875746937,
+    "force_peak_N": 0.7509966702001976
+   },
+   "free_new_gate": false,
+   "free_in_builder_file_old_gate": true,
+   "display_identical_to_builder_file": true
+  },
+  "passive|mu0.005|t0.001|s1|hub|krate0.0122699": {
+   "display": {
+    "twist_peak_deg": 4.89,
+    "moment_gh_peak_Nm": 0.166,
+    "moment_gh_rms_max_Nm": 0.122,
+    "force_peak_N": 0.75,
+    "slaved_law_err_max_deg": 0.126
+   },
+   "gate_raw": {
+    "twist_peak_deg": 4.886592493621904,
+    "moment_gh_peak_Nm": 0.16628031394823733,
+    "moment_gh_rms_Nm": 0.12239826747514111,
+    "force_peak_N": 0.7509781906962888
+   },
+   "free_new_gate": true,
+   "free_in_builder_file_old_gate": true,
+   "display_identical_to_builder_file": true
+  }
+ },
+ "verdict_new_gate": {
+  "moves_freely_nominal": false
+ },
+ "verdict_old_gate_builder_file": {
+  "moves_freely_nominal": true
+ },
+ "reading": "The new judge code reads the bound's twist 5.000812 deg raw and returns moves_freely False (was True on the rounded 5.0): PASS -> FAIL by 0.0008 deg, reproducing the 15:20 skeptic's wrapper reading (5.00081) with the lead's code instead of a rounding patch. Every displayed digit equals the builder's file. The krate 0.0123 case (4.887 deg) passes on both gates. This is a red-team bound, not the R17 metric: R17 reads judge/dynamics.json verdict.moves_freely_nominal (nominal twist 4.04 deg), which no gate change can flip. Scorecards and requirement counts: unchanged on every built design.",
+ "secs": 69
+}
