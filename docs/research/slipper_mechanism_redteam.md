@@ -89,8 +89,9 @@ follower and the crank pair would see kN. Not an MVP1 issue, and not modelled (C
   (3 mm), nose end disc (model) 60.06. An O2.5 x 6 dowel flush with the arm's outer face ends at 59.96.
 - Nose radius for the flank: the claim's 1.1839 (`NR` default). **Build with the stock O2.5 (r 1.25)** and the flank re-cut
   for it (`NR=1.25`; the verifier measured 18.49 for that column, identical to the claim): pocket radius 1.333 mm,
-  clearance 0.083, p0 267 MPa aligned, horn PA + friction 42.74 at mu 0.12 (vs 42.58). The arcs below are for r 1.1839;
-  rerun `NR=1.25 ... drive.py` for the O2.5 export (same command, same frame).
+  clearance 0.083, p0 267 MPa aligned, horn PA + friction 40.87 / 42.74 at mu 0.087 / 0.12 (vs 40.71 / 42.58). Its exports
+  are the `*_bench_r125.*` files (same frame): mid-plane arcs **R 1.688 / 4.424 / 8.606 / 11.824** over dK 0-8.5 / -24.3 /
+  -42.75 / -51.75. The arcs below are the claim's r 1.1839.
 
 **Flank (link 1a lug, Ti-6Al-4V, a-C:H DLC)**
 - Ruled surface: rulings parallel to the nose axis (radial lines through GH) offset by the nose radius; wire taper
@@ -191,9 +192,9 @@ crank at elevation 150-165 (the T5 watch's depth); 3 contact poses have no rigid
 
 ## 6. Build spec for the CAD agent (pipeline/concept_l1/build_slipper_l1.py, user_style_slipper.py)
 
-1. **Config.** The verified best_params (rows/slipper-nose-knuckle-3r.json, mu 0.087, ang_min 25.2189). Nose: stock O2.5
-   (r 1.25) with the flank re-cut for it (`NR=1.25 A_S=6.5 PSI=216 RR=3.0 python3 docs/research/slipper_mechanism/drive.py
-   geo_bench.npz bench_r125`), or the claim's r 1.1839 exports as they are; state which.
+1. **Config.** The verified best_params (rows/slipper-nose-knuckle-3r.json, mu 0.087, ang_min 25.2189). Nose: **stock O2.5
+   (r 1.25) with the flank re-cut for it: `results_bench_r125.json` / `flank_bench_r125.csv` / `spec_points_bench_r125.json`**
+   (verified column 18.49), or the claim's r 1.1839 exports (`*_bench.*`); state which.
 2. **Nose.** ISO 8734 2.5 m6 x 6 type C, DLC, pressed 3 mm into an O6 tip boss of the crank arm, flush with the arm's outer
    face, axis radial through GH at `nose_centre_rest`. No head, no retaining part. Drawing note: "reamed O2.495-2.500
    (2-13 um interference with m6), Loctite 648, press with anti-seize".
