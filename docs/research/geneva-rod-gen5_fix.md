@@ -255,14 +255,15 @@ before-scorecard (a full run, partly on the farm). None of them is a design effe
 | R3 | 100 % | 100 % | - |
 | R5 / R5-aim | 3 / 3 | 3 / 3 | - |
 | R6 | 0.0 mm | 0.0 mm | step 1 -> 3 (gen-5 at step 3: 0.0) |
-R7_ROW
+| R7 | FAIL (link 1a: 2 faces fail BRepCheck after tessellation) | **PASS** (link 1a repaired; 59 custom parts each one valid solid, STEP coverage complete) | design. The first v2 judge run failed R7 on coverage only: the new shim washer had no STEP. The builder now exports it, and the rebuild's exo.glb, clips.json, workspace.json and parts_full.json are byte-identical (sha256), so only R7 was re-run |
 | R8 | 242.6 g | 244.1 g | design (+1.5 g: the 6 mm igubals, the 3.8 mm horn hub, the clips, the shim) |
 | R10 | NOT RUN | NOT RUN | base_slip.py handles spherical chains only |
 | R11 | 0.254 kPa PASS | NOT RUN | environment (no mujoco here) |
 | R16 | 72.6 % (358 poses) | 68.3 % (120 poses) = gen-5 on the same 120 | sampling (measurement) |
 | R17 | PASS | NOT RUN | environment (no mujoco here) |
 
-PASS_COUNT
+**6 of 19 pass (gen-5: 7).** R7 is newly PASS. R11 and R17 were not run in this container. No requirement regressed on a
+measurement.
 
 **What the numbers say.**
 - The lobe fix does what it was for. The ring clears the judges' skin by 0.41 mm on every frame, and Raise overhead's
