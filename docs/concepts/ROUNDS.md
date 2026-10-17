@@ -1944,7 +1944,7 @@ pick3 18.33 is ruled a tie), 95 needs 13.75. Reach stays first: +18 workspace po
   rule (paired pooled 90 % CI including 0 = tie); (3) the continuity flood (2-deg slerp, `connected()` in
   docs/concepts/models/stop-relay-rocker-3r.py) is a hard verifier step (the trimlug verifier skipped it). Until the lead
   lands (1)-(3) in the tools, every lens and verifier below does them by hand.
-- **Farm:** RunPod ~$34; small batches on exo-cpu1, `tools/runpod_guard.py audit` before and after, workersMin 0. The
+- **Farm:** [LEAD 13:56 UTC: STALE - the CLAUDE.md (7) budget is spent at balance $24.63 vs the $24.40 line; run LOCALLY, <= 2 niced processes, no new farm batches unless the user renews] RunPod ~$34; small batches on exo-cpu1, `tools/runpod_guard.py audit` before and after, workersMin 0. The
   local .cache bench is rebuilding: gates run on the farm first.
 
 ### Lenses

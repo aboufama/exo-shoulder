@@ -1,0 +1,422 @@
+[
+ {
+  "ok": false,
+  "n_fail": 3,
+  "min_dK_lim": 0.0,
+  "dK_need": 43.4,
+  "rows": [
+   {
+    "k": "beta",
+    "d": -1.0,
+    "dK_lim": 0.0,
+    "why": "pressure_crank",
+    "pa_horn": 33.7,
+    "pa_crank": 38.8,
+    "honest": false,
+    "ok": false
+   },
+   {
+    "k": "beta",
+    "d": 1.0,
+    "dK_lim": 48.8,
+    "why": "pressure_horn",
+    "pa_horn": 35.1,
+    "pa_crank": 23.7,
+    "honest": true,
+    "ok": true
+   },
+   {
+    "k": "r_c",
+    "d": -0.25,
+    "dK_lim": 0.0,
+    "why": "pressure_crank",
+    "pa_horn": 34.4,
+    "pa_crank": 40.2,
+    "honest": false,
+    "ok": false
+   },
+   {
+    "k": "r_c",
+    "d": 0.25,
+    "dK_lim": 48.5,
+    "why": "pressure_horn",
+    "pa_horn": 35.2,
+    "pa_crank": 16.4,
+    "honest": true,
+    "ok": true
+   },
+   {
+    "k": "g",
+    "d": -0.05,
+    "dK_lim": 0.0,
+    "why": "pressure_crank",
+    "pa_horn": 43.8,
+    "pa_crank": 49.0,
+    "honest": false,
+    "ok": false
+   },
+   {
+    "k": "g",
+    "d": 0.05,
+    "dK_lim": 46.8,
+    "why": "pressure_horn",
+    "pa_horn": 36.2,
+    "pa_crank": 7.5,
+    "honest": true,
+    "ok": true
+   }
+  ],
+  "which": "BEST",
+  "secs": 19.5
+ },
+ {
+  "ok": false,
+  "n_fail": 1,
+  "min_dK_lim": 0.0,
+  "dK_need": 43.4,
+  "rows": [
+   {
+    "k": "beta",
+    "d": -1.0,
+    "dK_lim": 49.8,
+    "why": "pressure_horn",
+    "pa_horn": 34.5,
+    "pa_crank": 29.5,
+    "honest": true,
+    "ok": true
+   },
+   {
+    "k": "beta",
+    "d": 1.0,
+    "dK_lim": 47.8,
+    "why": "pressure_horn",
+    "pa_horn": 35.6,
+    "pa_crank": 19.9,
+    "honest": true,
+    "ok": true
+   },
+   {
+    "k": "r_c",
+    "d": -0.25,
+    "dK_lim": 49.8,
+    "why": "pressure_horn",
+    "pa_horn": 34.4,
+    "pa_crank": 33.2,
+    "honest": true,
+    "ok": true
+   },
+   {
+    "k": "r_c",
+    "d": 0.25,
+    "dK_lim": 47.8,
+    "why": "pressure_horn",
+    "pa_horn": 35.8,
+    "pa_crank": 13.0,
+    "honest": true,
+    "ok": true
+   },
+   {
+    "k": "g",
+    "d": -0.05,
+    "dK_lim": 0.0,
+    "why": "pressure_crank",
+    "pa_horn": 35.4,
+    "pa_crank": 41.6,
+    "honest": false,
+    "ok": false
+   },
+   {
+    "k": "g",
+    "d": 0.05,
+    "dK_lim": 46.0,
+    "why": "pressure_horn",
+    "pa_horn": 36.7,
+    "pa_crank": 7.7,
+    "honest": true,
+    "ok": true
+   }
+  ],
+  "which": "docs/research/slipper_flank_robust/beta_175.684.json",
+  "secs": 21.2
+ },
+ {
+  "ok": true,
+  "n_fail": 0,
+  "min_dK_lim": 45.0,
+  "dK_need": 43.4,
+  "rows": [
+   {
+    "k": "beta",
+    "d": -1.0,
+    "dK_lim": 48.8,
+    "why": "pressure_horn",
+    "pa_horn": 35.1,
+    "pa_crank": 23.7,
+    "honest": true,
+    "ok": true
+   },
+   {
+    "k": "beta",
+    "d": 1.0,
+    "dK_lim": 47.0,
+    "why": "pressure_horn",
+    "pa_horn": 36.1,
+    "pa_crank": 17.2,
+    "honest": true,
+    "ok": true
+   },
+   {
+    "k": "r_c",
+    "d": -0.25,
+    "dK_lim": 49.0,
+    "why": "pressure_horn",
+    "pa_horn": 34.9,
+    "pa_crank": 28.2,
+    "honest": true,
+    "ok": true
+   },
+   {
+    "k": "r_c",
+    "d": 0.25,
+    "dK_lim": 46.8,
+    "why": "pressure_horn",
+    "pa_horn": 36.3,
+    "pa_crank": 10.9,
+    "honest": true,
+    "ok": true
+   },
+   {
+    "k": "g",
+    "d": -0.05,
+    "dK_lim": 50.5,
+    "why": "pressure_horn",
+    "pa_horn": 34.0,
+    "pa_crank": 36.0,
+    "honest": true,
+    "ok": true
+   },
+   {
+    "k": "g",
+    "d": 0.05,
+    "dK_lim": 45.0,
+    "why": "pressure_horn",
+    "pa_horn": 37.2,
+    "pa_crank": 7.8,
+    "honest": true,
+    "ok": true
+   }
+  ],
+  "which": "docs/research/slipper_flank_robust/beta_174.684.json",
+  "secs": 21.5
+ },
+ {
+  "ok": true,
+  "n_fail": 0,
+  "min_dK_lim": 44.0,
+  "dK_need": 43.4,
+  "rows": [
+   {
+    "k": "beta",
+    "d": -1.0,
+    "dK_lim": 47.8,
+    "why": "pressure_horn",
+    "pa_horn": 35.6,
+    "pa_crank": 19.9,
+    "honest": true,
+    "ok": true
+   },
+   {
+    "k": "beta",
+    "d": 1.0,
+    "dK_lim": 46.0,
+    "why": "pressure_horn",
+    "pa_horn": 36.6,
+    "pa_crank": 15.2,
+    "honest": true,
+    "ok": true
+   },
+   {
+    "k": "r_c",
+    "d": -0.25,
+    "dK_lim": 48.0,
+    "why": "pressure_horn",
+    "pa_horn": 35.5,
+    "pa_crank": 24.5,
+    "honest": true,
+    "ok": true
+   },
+   {
+    "k": "r_c",
+    "d": 0.25,
+    "dK_lim": 45.8,
+    "why": "pressure_horn",
+    "pa_horn": 36.7,
+    "pa_crank": 9.5,
+    "honest": true,
+    "ok": true
+   },
+   {
+    "k": "g",
+    "d": -0.05,
+    "dK_lim": 49.5,
+    "why": "pressure_horn",
+    "pa_horn": 34.5,
+    "pa_crank": 31.6,
+    "honest": true,
+    "ok": true
+   },
+   {
+    "k": "g",
+    "d": 0.05,
+    "dK_lim": 44.0,
+    "why": "pressure_horn",
+    "pa_horn": 37.7,
+    "pa_crank": 7.8,
+    "honest": true,
+    "ok": true
+   }
+  ],
+  "which": "docs/research/slipper_flank_robust/beta_173.684.json",
+  "secs": 22.6
+ },
+ {
+  "ok": true,
+  "n_fail": 0,
+  "min_dK_lim": 43.2,
+  "dK_need": 43.4,
+  "rows": [
+   {
+    "k": "beta",
+    "d": -1.0,
+    "dK_lim": 47.0,
+    "why": "pressure_horn",
+    "pa_horn": 36.1,
+    "pa_crank": 17.2,
+    "honest": true,
+    "ok": true
+   },
+   {
+    "k": "beta",
+    "d": 1.0,
+    "dK_lim": 45.2,
+    "why": "pressure_horn",
+    "pa_horn": 37.1,
+    "pa_crank": 13.8,
+    "honest": true,
+    "ok": true
+   },
+   {
+    "k": "r_c",
+    "d": -0.25,
+    "dK_lim": 47.2,
+    "why": "pressure_horn",
+    "pa_horn": 36.0,
+    "pa_crank": 21.7,
+    "honest": true,
+    "ok": true
+   },
+   {
+    "k": "r_c",
+    "d": 0.25,
+    "dK_lim": 45.0,
+    "why": "pressure_horn",
+    "pa_horn": 37.2,
+    "pa_crank": 8.5,
+    "honest": true,
+    "ok": true
+   },
+   {
+    "k": "g",
+    "d": -0.05,
+    "dK_lim": 48.8,
+    "why": "pressure_horn",
+    "pa_horn": 35.0,
+    "pa_crank": 28.2,
+    "honest": true,
+    "ok": true
+   },
+   {
+    "k": "g",
+    "d": 0.05,
+    "dK_lim": 43.2,
+    "why": "pressure_horn",
+    "pa_horn": 38.0,
+    "pa_crank": 7.9,
+    "honest": true,
+    "ok": true
+   }
+  ],
+  "which": "docs/research/slipper_flank_robust/beta_172.684.json",
+  "secs": 24.4
+ },
+ {
+  "ok": false,
+  "n_fail": 1,
+  "min_dK_lim": 42.2,
+  "dK_need": 43.4,
+  "rows": [
+   {
+    "k": "beta",
+    "d": -1.0,
+    "dK_lim": 46.0,
+    "why": "pressure_horn",
+    "pa_horn": 36.6,
+    "pa_crank": 15.2,
+    "honest": true,
+    "ok": true
+   },
+   {
+    "k": "beta",
+    "d": 1.0,
+    "dK_lim": 44.2,
+    "why": "pressure_horn",
+    "pa_horn": 37.5,
+    "pa_crank": 12.6,
+    "honest": true,
+    "ok": true
+   },
+   {
+    "k": "r_c",
+    "d": -0.25,
+    "dK_lim": 46.2,
+    "why": "pressure_horn",
+    "pa_horn": 36.4,
+    "pa_crank": 19.6,
+    "honest": true,
+    "ok": true
+   },
+   {
+    "k": "r_c",
+    "d": 0.25,
+    "dK_lim": 44.0,
+    "why": "pressure_horn",
+    "pa_horn": 37.7,
+    "pa_crank": 7.8,
+    "honest": true,
+    "ok": true
+   },
+   {
+    "k": "g",
+    "d": -0.05,
+    "dK_lim": 47.8,
+    "why": "pressure_horn",
+    "pa_horn": 35.5,
+    "pa_crank": 25.5,
+    "honest": true,
+    "ok": true
+   },
+   {
+    "k": "g",
+    "d": 0.05,
+    "dK_lim": 42.2,
+    "why": "pressure_horn",
+    "pa_horn": 37.9,
+    "pa_crank": 7.8,
+    "honest": true,
+    "ok": false
+   }
+  ],
+  "which": "docs/research/slipper_flank_robust/beta_171.684.json",
+  "secs": 22.7
+ }
+]
