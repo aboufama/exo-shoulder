@@ -485,6 +485,13 @@ designs (dipped-law-groove-knuckle-3r, seed-offset-3r-slides); every leader is w
      cutter shared since gen 4 put slot-end centres beyond the stop angles, so built K / J2 stops engaged 0.88 deg late
      and J3 0.76 deg late (outside the held margin). Every earlier full CAD (gen 4-7) carries it; any rebuild of those
      must use the gen-8 cutter. Its independent verifier is running.
+   - *Lead, 23:10 UTC:* gen-8 workflow wf_5f217f1a-14b DONE - user_conecut_knee NOT REFUTED (VERIFY.md: every re-run
+     judge matched to the digit; R17 nominal twist 3.99 deg; knee 47.7 deg under its stop vs gen-7's 1.6). Open small
+     items: E strap rides 1.33 mm over the model (gen 7: 0.52); hub K / hub 2 slot-band 1.42 mm missing from the
+     builder's summary; spacer O4.5 vs the 683ZZ / MR63ZZ inner-ring abutment diameter unchecked; wave washer has no part
+     number; L1 Walking-arm-swing R1 97.6 -> 81.4 unattributed; verify the slot-cutter claim on user_slipper_nose with
+     stops_cc.py. Desmo-conecut's generation CAD (round 13 winner, not a lead) is DEFERRED while both discovery loops
+     need the 4 local cores (farm closed); start it when a loop ends or the farm reopens. Stills wait for the user.
 2. **Reach is the gap.**
    - The lead's gap is reach 17.50 of 18.49 (ROUNDS round 10 results). **Score 95 is gap <= 13.75**: +18 workspace
      poses at the lead's in-band and contact, 0.278 points each (ROUNDS round 11 plan).

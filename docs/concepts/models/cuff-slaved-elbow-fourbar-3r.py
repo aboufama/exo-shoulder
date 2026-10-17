@@ -129,16 +129,17 @@ def build(B, F, p):
         # layers (K6 by construction, `over` processed in list order): link 1, crank B, the arm-end tab B1 -> J3 and the
         # neck low (crank B is the lower member at B0 and B1, the arm end lower at J3, link 1 lower at A0); crank A over
         # link 1 / crank B / the J1 stack (upper at A0, B0); the coupler on top (upper at A1 and J3) over everything it
-        # crosses, incl. hub B1's stack next to J3. Measured on arm seed 1 without it: crank A vs link 1 137/154,
-        # hub B1 vs coupler 105/154 closing poses collide.
+        # crosses, incl. hub B1's stack next to J3 and hub A0's stack (measured on arm seed 1 without it: crank A vs link 1
+        # 137/154, hub B1 vs coupler 105/154 closing poses collide; on the kinematic best, hub A0 vs coupler 54/139).
         mem += [strap("crankB", B0, B1, ("B0", "B1"), p, (("hubB0", 0.0), ("hubB1", 0.0)), over=[("hubJ1", 1.0)]),
                 strap("tab", B1, J3, ("B1", "J3"), p, (("hubB1", S_), ("hubJ3", 0.0))),
                 K.neck_member(F, J3, joints=("J3",), ramps=(("hubJ3", 0.0), (None, 0))),
-                strap("link1", J1, A0, ("J1", "A0"), p, (("hubJ1", S_), ("hubA0", 0.0))),
+                strap("link1", J1, A0, ("J1", "A0"), p, (("hubJ1", S_), ("hubA0", 0.0)), over=[("crankB", 1.0), ("tab", 1.0), ("hubA1", 1.0)]),
                 polystrap("crankA", [A1, A0, B0], ("A1", "A0", "B0"), p, [("hubA1", 0.0), ("hubA0", S_), ("hubB0", S_)],
-                          over=[("hubJ1", 1.0), ("link1", 1.0), ("crankB", 1.0)]),
+                          over=[("hubJ1", 1.0), ("link1", 1.0), ("crankB", 1.0), ("hubB1", 1.0)]),
                 strap("coupler", A1, J3, ("A1", "J3"), p, (("hubA1", S_), ("hubJ3", S_)),
-                      over=[("neck", 1.0), ("tab", 1.0), ("crankB", 1.0), ("crankA", 1.0), ("link1", 1.0), ("hubB1", 1.0)])]
+                      over=[("neck", 1.0), ("tab", 1.0), ("crankB", 1.0), ("crankA", 1.0), ("link1", 1.0), ("hubB1", 1.0),
+                            ("hubA0", 1.0), ("hubB0", 1.0), ("hubJ1", 1.0)])]
     else:
         mem += [strap("tether", B0, B1, ("B0", "B1"), p, (("hubB0", S_), ("hubB1", 0.0)), over=[("hubJ1", 1.0)]),
                 K.neck_member(F, J3, joints=("J3",), ramps=(("hubJ3", 0.0), (None, 0))),
