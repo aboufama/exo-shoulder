@@ -1200,3 +1200,31 @@ None.
   - sidecar-roller-flank-knuckle-3r: no held-out number on file.
 - Every round-9 claim goes through the A1 dominance gate: it must beat the lead plain AND at 2 mm. roller-longdyad's self-measured 18.67 / 2 mm 33.10 passes that gate but is worse at 1 mm (20.30) and held out (23.73).
 - Audit run wf_2c9de6ed-0a4 covers four designs: roller-longdyad, the lead, kneeless-roller, and geneva-rod's new R17 slaved-coordinate judge change.
+
+## Round 9 results (2026-10-16 ~20:35-23:36 UTC; the closer never ran - the session hit its usage limit; written by the 2026-10-17 lead from the rows, events and ledger)
+
+| design | verified gap (score) | held out | complexity | ledger | note |
+|---|---|---|---|---|---|
+| roller-longdyad-knuckle-3r | **18.67 (93.21)** | 23.73 | see row | watch | lead's long dyad with a roller drive for K; envelope-corrected 18.56 |
+| sidecar-longdyad-knuckle-3r (round-8 lead) | 18.91 (93.12) | 22.67 | 49 | watch | reference |
+| kneeless-roller-knuckle-3r | 21.07 (92.34) | 24.59 | 23.75 | **gamed** (idle: re-measured K.ang span 0.0 deg) - skeptic pending | knee -> rigid bracket |
+| kneeless-sidecar-knuckle-3r | 21.11 (92.32) | 25.34 | ~27 | - | knee -> rigid 3 mm bracket |
+| twin-k2-sidecar-knuckle-3r | dead (60.86 fast / 67.32 frozen) | - | - | - | second knuckle hub cannot sit close to the skin |
+
+**Winner (rule: best verified gap, not gamed): roller-longdyad-knuckle-3r 18.67 (score 93.21)**, by 0.24 over the
+round-8 lead. The user retired the 2 mm A1 dominance gate on 2026-10-17 (CLAUDE.md), so the plain verified gap decides.
+Honest caveat: it is worse held out (23.73 vs 22.67), so the gain does not generalise yet; its final polish must claim
+held out. The user ruled the same day that a sensed joint is a joint: minarc pick1 (18.40) is a 4-active design, so
+the 3-joint designs are the leaders.
+
+**Lessons.** (1) Replacing the pin knee by one rigid bracket costs ~2.2 gap points and halves complexity (49 -> 24-27):
+the knee buys little reach. (2) The K drive's form (sidecar RSSR vs roller flank) moves the gap by <= 0.3: K's law is
+worked out; reach at the J2 fold (86 of 360 workspace poses, 20 of 28 overhead) is still the whole gap to 95.
+
+**Next focus (round 10).** Reach first, simplicity second (the user: fewer joints and parts matter because the final
+product drives and tracks every joint - planner context only, all work stays kinematic). Attack the fold geometry, not
+K's law: (a) the a2 wall - poses past th ~132 need a1e 76-100 at a2 62; (b) the J1 seat toward the back of the
+shoulder, inside the allowed seats; (c) for the knee-free class (complexity ~24-27), regain the ~2.2 points the rigid
+bracket costs. Target: frozen reach >= 0.775, overhead >= 14/28 at in-band14 >= 0.88, contact <= 0.01; score >= 95
+(gap <= 13.75). Report plain gap, held out, complexity (2 mm near-touch no longer required). Dead directions: HANDOFF
+section 5 and twin-k2.
