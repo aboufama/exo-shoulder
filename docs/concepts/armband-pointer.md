@@ -53,3 +53,44 @@ r_face + sec <= r1. "Per-pose bore" lets each pose choose its own ring (an upper
 "fixed bore" is one ring. Reach and follow can only FALL when hubs, spar, continuity and collisions are added, so
 gap >= 100 (max(0, .95 - follow_ub) + max(0, .90 - reach_ub)) for every configuration of the morphology.
 
+Results (Bench(60, 160) fast grid cache; `python3 docs/concepts/models/armband-pointer.py bound '{...}'` reproduces them;
+stations 160-300 mm, axis tilts 0 and 8 deg toward lateral / anterior / medial / posterior, any bore 30-112 mm):
+
+| J3 axis, station | per-pose bore (sec 8, clr 0): follow ceiling / reach ceiling | gap lower bound | arm meets body (no gap at all) |
+|---|---|---|---|
+| humerus axis, s 160 | 0.217 / 0.388 | 124.5 | |
+| humerus axis, s 200 | 0.500 / 0.456 | 89.4 | |
+| humerus axis, s 220 | 0.533 / 0.531 | 78.6 | |
+| humerus axis, s 240 | 0.583 / 0.644 | 62.3 | 0.268 |
+| humerus axis, s 260 | 0.467 / 0.675 | 70.8 | 0.250 |
+| humerus axis, s 280 | 0.517 / 0.688 | 64.6 | 0.241 |
+| humerus axis, s 300 | 0.583 / 0.000 (the flexed forearm sits inside every ring) | 126.7 | |
+| 8 deg lateral, s 280 | 0.617 / 0.725 | 50.8 | 0.186 |
+| 8 deg medial, s 280 | 0.767 / 0.744 | 34.0 | 0.150 |
+| 8 deg medial, s 300 (most generous cell) | 0.800 / 0.844 | **20.6** | |
+
+**One rigid ring (fixed bore) - the bound that a real design obeys: gap >= 58.7** at the best cell (8 deg lateral,
+s 280, ring face at 82 mm, follow <= 0.550, reach <= 0.713; 9.35 mm section: 60.0); the next cells are 64.6-69.4. With
+both lattice errors given to the ring (arm exit 2 mm earlier, section 6 mm): **>= 55.8**. The per-pose-bore cells above
+need a different ring in every pose, so 20.6 is not reachable by any mechanism; even it sits above the 17.5 bar.
+Hubs, the spar, continuity and collisions can only lower reach and follow further.
+
+Agreement: the J1 proposer's independent raw-skin scan (round101_ideation.md, KA045XP0 at s 205-240 in contact on
+169-204 / 220 poses incl. all 85 arm-down poses) - the same wall, measured with other code.
+
+Red team of the ring alone (named poses, humerus axis; "bore >= x" = the arm's 2-mm-clear radius, "free < y" = the
+first other skin):
+
+| pose (plane, elev, axial) | s 220 | s 260 | s 280 |
+|---|---|---|---|
+| rest (0, 4, 0), clip | **blocked**: medial arm on the flank 130-220 deg | **no ring**: bore >= 56, flank at 42 | **no ring**: bore >= 54, flank at 50 |
+| rest + IR 75 | **blocked** 180-280 deg | **blocked** 190-270 | **blocked** 200-270 |
+| across low (120, 45, -30) | **blocked** 80-210 deg | **blocked** 100-210 | **blocked** 100-210 |
+| across body (135, 90, -45) | **no ring**: bore >= 74, chest at 62 | ring 68-94 | ring 64-116 |
+| abduction 45 / 90, extension | ring >= 62-64 | ring >= 58-60 | ring >= 58 |
+| overhead abduction 150 | ring >= 62 | ring >= 60 | ring >= 58 |
+| overhead flexion 165 + IR 90 | ring 66-98 (head) | ring 60-108 | ring 58-124 |
+| behind the back (-75, 30, 165) | ring 64-96 (back) | ring 60-134 | ring >= 60 |
+
+The ring is lost exactly where the arm is near the body - rest, walking-like clip frames, internal rotation at the side,
+reaching across low - i.e. the poses the wearer spends most time in (follow ceiling 0.55-0.62), not overhead.

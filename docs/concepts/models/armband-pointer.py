@@ -100,6 +100,17 @@ def fixed_member(name, X, joints, t):
     return m
 
 
+def strap(name, u, v, joints, width=12.0, t=3.0, ramp_to=(), r_ref=70.0, **kw):
+    """K.strap_member with the sample layout made at r_ref (2 x 2 mm there): hub 2 / link 2 ride 90-160 mm from GH in this
+    design, where the kit's 70-mm layout spaces samples 4-11 mm apart (the audit's sparse-sampling flag)"""
+    D = K.strap_dirs(u, v, None, width=width, r_ref=r_ref); ns, nc = D.shape[1:3]
+    n_end = int(math.ceil((K.HUB_R + 2.0) * r_ref / 70.0 / 2.0)) + 1; sidx = np.repeat(np.arange(ns), nc); ramps = []
+    for (h, dz), m in zip(ramp_to, (sidx < n_end, sidx >= ns - n_end)):
+        if h: ramps.append((m, h, dz))
+    return K.Member(name, D.reshape(len(D), -1, 3), t=t, width=width, joints=tuple(joints), grid=(ns, nc), climb_deg=60.0,
+                    ramps=ramps, strap=True, r_ref=r_ref, **kw)
+
+
 def kin(F, p):
     a1 = F.S(K.bvec(p["az"], p["el"])); d3 = F.HG(K.wdir(p["tilt"], p["tilt_a"]))
     p2, ok, margin = K.closure(a1, d3, p["A1"], p["A2"], p["sigma"], margin_deg=K.FOLD_MARGIN)
@@ -158,11 +169,12 @@ def build_chain(B, F, p):
     a1, p2, d3, xP, yP, q3, th, ok, margin = kin(F, p)
     D = design(B, p); w, t = p["width"], p["t_link"]
     hubs = [K.hub_member("hub1", a1, "J1"), K.hub_member("hub2", p2, "J2")]
-    link1 = K.strap_member("link1", a1, p2, ("J1", "J2"), width=w, t=t, ramp_to=(("hub1", K.STACK), ("hub2", 0.0)))
+    rr = p.get("r_ref", 140.0)
+    link1 = strap("link1", a1, p2, ("J1", "J2"), width=w, t=t, ramp_to=(("hub1", K.STACK), ("hub2", 0.0)), r_ref=rr)
     cr = math.radians(p["c"]); cdir = math.cos(cr) * xP + math.sin(cr) * yP
     att = K.unit(p["s0"] * d3 + 45.0 * cdir)
-    link2a = K.strap_member("link2a", p2, att, ("J2", "J3"), width=w, t=t, ramp_to=(("hub2", K.STACK), (None, 0.0)),
-                            over=[("link1", 1.0)])
+    link2a = strap("link2a", p2, att, ("J2", "J3"), width=w, t=t, ramp_to=(("hub2", K.STACK), (None, 0.0)),
+                   over=[("link1", 1.0)], r_ref=rr)
     members = hubs + [link1, link2a]
     if D is not None:
         Xs = circ(d3, xP, yP, D["rows"], D["cols"], D["prof"])
@@ -256,6 +268,17 @@ if __name__ == "__main__":
     if a[0] == "check":
         import time; t0 = time.time(); r = bench_eval(B, p); print(round(time.time() - t0, 1), "s")
         print({k: r.get(k) for k in ("gap", "reach", "follow", "inband14", "inband10", "contact", "closure", "honest", "outer_contact_poses", "inband_member", "residual_deg", "min_margin", "th_min", "th_max", "audit")})
+        L = B._kit_last; tk = L["ok"] & ~L["hit"]; Pi = np.nonzero(tk)[0]
+        cs = {}
+        for m in L["chain"].members:
+            X = L["pts"][m.name][Pi]; d = K.dist_many(B, np.repeat(Pi, X.shape[1]), X.reshape(-1, 3)).reshape(len(Pi), -1)
+            cs[m.name] = (int((d.min(1) < 0).sum()), round(float(np.median(d)), 1))
+        print("closing + K6-clear poses", len(Pi), "| per member: (poses with it inside the skin, median skin distance mm):", cs)
+        ov = [i for i in range(len(B.res)) if B.res[i] is not None and np.min(B.res[i]) < 0]
+        pz = np.array([(q["plane"], q["elev"], q["axial"]) for q in B.poses])
+        print("contact poses", len(ov), "| of them elev < 40:", int(sum(pz[i, 1] < 40 for i in ov)), "| overhead taken (ws elev >= 140):",
+              int(sum(1 for i in range(len(B.res)) if B.kind[i] == "ws" and pz[i, 1] >= 140 and B.res[i] is not None and np.min(B.res[i]) >= 0)),
+              "/", int(sum(1 for i in range(len(B.res)) if B.kind[i] == "ws" and pz[i, 1] >= 140)))
     elif a[0] == "sweep":                     # sweep '{}' configs.json : append every evaluated config to the sweep file, in order
         SW = os.path.join(REPO, "docs", "concepts", "sweeps", f"{ID}.json")
         for cfg in json.load(open(a[2])):

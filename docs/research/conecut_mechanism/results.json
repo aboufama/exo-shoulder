@@ -1,0 +1,578 @@
+{
+ "deg_per_um_at_rd": 0.00764,
+ "s3": {
+  "max": 0.8398,
+  "min": 0.3151,
+  "n": 35,
+  "note": "J3 moment per N.m of GH moment through the stopped chain (stopped + kin-ok poses within 6 deg of J3MIN)"
+ },
+ "cuff_slip_Nm": {
+  "mu0.5_p6.5kPa": 1.06,
+  "mu0.5_p14kPa": 2.28,
+  "mu1.0_p6.5kPa": 2.12,
+  "mu1.0_p14kPa": 4.57
+ },
+ "impact_model": {
+  "I3_kgm2": 6.66e-05,
+  "I_pad": 0.00029400000000000004,
+  "I_arm": 0.065,
+  "k_stop_Nm_rad": 460.4,
+  "k_lin_N_mm": 8184.0,
+  "k_knee_Nm_rad": 464.7,
+  "k_tissue": 1.72,
+  "knee_twist_deg_per_Nm": 0.123
+ },
+ "impact": {
+  "30dps": {
+   "free": [
+    0.197,
+    6.0
+   ],
+   "slip_1p1": [
+    0.197,
+    6.0
+   ],
+   "inertia_only_Nm": 0.092
+  },
+  "90dps": {
+   "free": [
+    0.59,
+    17.9
+   ],
+   "slip_1p1": [
+    0.59,
+    17.9
+   ],
+   "inertia_only_Nm": 0.275
+  },
+  "152.5dps": {
+   "free": [
+    1.0,
+    30.3
+   ],
+   "slip_1p1": [
+    1.0,
+    30.3
+   ],
+   "inertia_only_Nm": 0.466
+  },
+  "286dps": {
+   "free": [
+    1.876,
+    56.8
+   ],
+   "slip_1p1": [
+    1.753,
+    57.0
+   ],
+   "inertia_only_Nm": 0.874
+  }
+ },
+ "impact_note": "J3 speed: nominal-case clip peaks of the closest built design (user_slipper_nose dynamics.json): 42.6-152.5 dps (Comb hair 152.5); 286 dps = the judge's all-joint peak. The 4347 dps reading is the mu 0.37 plain-bearing stick-slip case, not a swing. No fit-clip frame comes within 49 deg of the stop (clips q3' -62.4..101.4).",
+ "cases": {
+  "felt (judge free-moment line 1 N.m at GH x s3)": {
+   "M3_Nm": 0.84,
+   "e0.85": {
+    "F_dowel_N": 112.0,
+    "F_knee_N": 10.1,
+    "dowel_shear_MPa": 35.6,
+    "SF_shear": 30.92,
+    "dowel_bend_MPa": 82.0,
+    "SF_bend": 23.18,
+    "groove_proj_MPa": 65.9,
+    "SF_groove": 19.74,
+    "hertz_p0_MPa": 402.0,
+    "hertz_b_mm": 0.209,
+    "pad_hole_MPa": 24.3,
+    "J3_brg1_N": 129.7,
+    "J3_brg2_N": -7.6,
+    "s0_brg1": 2.16,
+    "J12_tilt_per_brg_N": 166.7
+   },
+   "e1.35": {
+    "F_dowel_N": 112.0,
+    "F_knee_N": 10.1,
+    "dowel_shear_MPa": 35.6,
+    "SF_shear": 30.92,
+    "dowel_bend_MPa": 117.6,
+    "SF_bend": 16.15,
+    "groove_proj_MPa": 41.5,
+    "SF_groove": 31.35,
+    "hertz_p0_MPa": 319.0,
+    "hertz_b_mm": 0.166,
+    "pad_hole_MPa": 24.3,
+    "J3_brg1_N": 124.6,
+    "J3_brg2_N": -2.5,
+    "s0_brg1": 2.25,
+    "J12_tilt_per_brg_N": 166.7
+   },
+   "e1.85": {
+    "F_dowel_N": 112.0,
+    "F_knee_N": 10.1,
+    "dowel_shear_MPa": 35.6,
+    "SF_shear": 30.92,
+    "dowel_bend_MPa": 153.3,
+    "SF_bend": 12.4,
+    "groove_proj_MPa": 30.3,
+    "SF_groove": 42.96,
+    "hertz_p0_MPa": 272.0,
+    "hertz_b_mm": 0.141,
+    "pad_hole_MPa": 24.3,
+    "J3_brg1_N": 119.5,
+    "J3_brg2_N": 2.5,
+    "s0_brg1": 2.34,
+    "J12_tilt_per_brg_N": 166.7
+   }
+  },
+  "cuff slip, fabric liner at strap preload (mu 0.5, 6.5 kPa)": {
+   "M3_Nm": 1.06,
+   "e0.85": {
+    "F_dowel_N": 141.3,
+    "F_knee_N": 12.7,
+    "dowel_shear_MPa": 45.0,
+    "SF_shear": 24.5,
+    "dowel_bend_MPa": 103.5,
+    "SF_bend": 18.36,
+    "groove_proj_MPa": 83.1,
+    "SF_groove": 15.64,
+    "hertz_p0_MPa": 451.0,
+    "hertz_b_mm": 0.234,
+    "pad_hole_MPa": 30.6,
+    "J3_brg1_N": 163.7,
+    "J3_brg2_N": -9.6,
+    "s0_brg1": 1.71,
+    "J12_tilt_per_brg_N": 210.4
+   },
+   "e1.35": {
+    "F_dowel_N": 141.3,
+    "F_knee_N": 12.7,
+    "dowel_shear_MPa": 45.0,
+    "SF_shear": 24.5,
+    "dowel_bend_MPa": 148.5,
+    "SF_bend": 12.8,
+    "groove_proj_MPa": 52.3,
+    "SF_groove": 24.83,
+    "hertz_p0_MPa": 358.0,
+    "hertz_b_mm": 0.186,
+    "pad_hole_MPa": 30.6,
+    "J3_brg1_N": 157.2,
+    "J3_brg2_N": -3.2,
+    "s0_brg1": 1.78,
+    "J12_tilt_per_brg_N": 210.4
+   },
+   "e1.85": {
+    "F_dowel_N": 141.3,
+    "F_knee_N": 12.7,
+    "dowel_shear_MPa": 45.0,
+    "SF_shear": 24.5,
+    "dowel_bend_MPa": 193.4,
+    "SF_bend": 9.82,
+    "groove_proj_MPa": 38.2,
+    "SF_groove": 34.03,
+    "hertz_p0_MPa": 306.0,
+    "hertz_b_mm": 0.159,
+    "pad_hole_MPa": 30.6,
+    "J3_brg1_N": 150.8,
+    "J3_brg2_N": 3.2,
+    "s0_brg1": 1.86,
+    "J12_tilt_per_brg_N": 210.4
+   }
+  },
+  "cuff slip, silicone liner at the 14 kPa budget (mu 1.0)": {
+   "M3_Nm": 4.57,
+   "e0.85": {
+    "F_dowel_N": 609.3,
+    "F_knee_N": 54.7,
+    "dowel_shear_MPa": 194.0,
+    "SF_shear": 5.68,
+    "dowel_bend_MPa": 446.1,
+    "SF_bend": 4.26,
+    "groove_proj_MPa": 358.4,
+    "SF_groove": 3.63,
+    "hertz_p0_MPa": 937.0,
+    "hertz_b_mm": 0.487,
+    "pad_hole_MPa": 132.0,
+    "J3_brg1_N": 705.6,
+    "J3_brg2_N": -41.5,
+    "s0_brg1": 0.4,
+    "J12_tilt_per_brg_N": 907.0
+   },
+   "e1.35": {
+    "F_dowel_N": 609.3,
+    "F_knee_N": 54.7,
+    "dowel_shear_MPa": 194.0,
+    "SF_shear": 5.68,
+    "dowel_bend_MPa": 640.1,
+    "SF_bend": 2.97,
+    "groove_proj_MPa": 225.7,
+    "SF_groove": 5.76,
+    "hertz_p0_MPa": 744.0,
+    "hertz_b_mm": 0.386,
+    "pad_hole_MPa": 132.0,
+    "J3_brg1_N": 677.9,
+    "J3_brg2_N": -13.8,
+    "s0_brg1": 0.41,
+    "J12_tilt_per_brg_N": 907.0
+   },
+   "e1.85": {
+    "F_dowel_N": 609.3,
+    "F_knee_N": 54.7,
+    "dowel_shear_MPa": 194.0,
+    "SF_shear": 5.68,
+    "dowel_bend_MPa": 834.0,
+    "SF_bend": 2.28,
+    "groove_proj_MPa": 164.7,
+    "SF_groove": 7.89,
+    "hertz_p0_MPa": 635.0,
+    "hertz_b_mm": 0.33,
+    "pad_hole_MPa": 132.0,
+    "J3_brg1_N": 650.2,
+    "J3_brg2_N": 13.8,
+    "s0_brg1": 0.43,
+    "J12_tilt_per_brg_N": 907.0
+   }
+  },
+  "lock (judge lock line 10 N.m at GH x s3)": {
+   "M3_Nm": 8.398,
+   "e0.85": {
+    "F_dowel_N": 1119.7,
+    "F_knee_N": 100.6,
+    "dowel_shear_MPa": 356.4,
+    "SF_shear": 3.09,
+    "dowel_bend_MPa": 819.8,
+    "SF_bend": 2.32,
+    "groove_proj_MPa": 658.7,
+    "SF_groove": 1.97,
+    "hertz_p0_MPa": 1271.0,
+    "hertz_b_mm": 0.66,
+    "pad_hole_MPa": 242.6,
+    "J3_brg1_N": 1296.6,
+    "J3_brg2_N": -76.3,
+    "s0_brg1": 0.22,
+    "J12_tilt_per_brg_N": 1666.7
+   },
+   "e1.35": {
+    "F_dowel_N": 1119.7,
+    "F_knee_N": 100.6,
+    "dowel_shear_MPa": 356.4,
+    "SF_shear": 3.09,
+    "dowel_bend_MPa": 1176.2,
+    "SF_bend": 1.62,
+    "groove_proj_MPa": 414.7,
+    "SF_groove": 3.13,
+    "hertz_p0_MPa": 1008.0,
+    "hertz_b_mm": 0.524,
+    "pad_hole_MPa": 242.6,
+    "J3_brg1_N": 1245.7,
+    "J3_brg2_N": -25.4,
+    "s0_brg1": 0.22,
+    "J12_tilt_per_brg_N": 1666.7
+   },
+   "e1.85": {
+    "F_dowel_N": 1119.7,
+    "F_knee_N": 100.6,
+    "dowel_shear_MPa": 356.4,
+    "SF_shear": 3.09,
+    "dowel_bend_MPa": 1532.6,
+    "SF_bend": 1.24,
+    "groove_proj_MPa": 302.6,
+    "SF_groove": 4.3,
+    "hertz_p0_MPa": 861.0,
+    "hertz_b_mm": 0.447,
+    "pad_hole_MPa": 242.6,
+    "J3_brg1_N": 1194.9,
+    "J3_brg2_N": 25.4,
+    "s0_brg1": 0.23,
+    "J12_tilt_per_brg_N": 1666.7
+   }
+  },
+  "abuse / sizing (claim): 10 N.m about J3": {
+   "M3_Nm": 10.0,
+   "e0.85": {
+    "F_dowel_N": 1333.3,
+    "F_knee_N": 119.8,
+    "dowel_shear_MPa": 424.4,
+    "SF_shear": 2.6,
+    "dowel_bend_MPa": 976.2,
+    "SF_bend": 1.95,
+    "groove_proj_MPa": 784.3,
+    "SF_groove": 1.66,
+    "hertz_p0_MPa": 1387.0,
+    "hertz_b_mm": 0.72,
+    "pad_hole_MPa": 288.9,
+    "J3_brg1_N": 1543.9,
+    "J3_brg2_N": -90.8,
+    "s0_brg1": 0.18,
+    "J12_tilt_per_brg_N": 1984.6
+   },
+   "e1.35": {
+    "F_dowel_N": 1333.3,
+    "F_knee_N": 119.8,
+    "dowel_shear_MPa": 424.4,
+    "SF_shear": 2.6,
+    "dowel_bend_MPa": 1400.6,
+    "SF_bend": 1.36,
+    "groove_proj_MPa": 493.8,
+    "SF_groove": 2.63,
+    "hertz_p0_MPa": 1100.0,
+    "hertz_b_mm": 0.571,
+    "pad_hole_MPa": 288.9,
+    "J3_brg1_N": 1483.4,
+    "J3_brg2_N": -30.3,
+    "s0_brg1": 0.19,
+    "J12_tilt_per_brg_N": 1984.6
+   },
+   "e1.85": {
+    "F_dowel_N": 1333.3,
+    "F_knee_N": 119.8,
+    "dowel_shear_MPa": 424.4,
+    "SF_shear": 2.6,
+    "dowel_bend_MPa": 1825.0,
+    "SF_bend": 1.04,
+    "groove_proj_MPa": 360.4,
+    "SF_groove": 3.61,
+    "hertz_p0_MPa": 940.0,
+    "hertz_b_mm": 0.488,
+    "pad_hole_MPa": 288.9,
+    "J3_brg1_N": 1422.8,
+    "J3_brg2_N": 30.3,
+    "s0_brg1": 0.2,
+    "J12_tilt_per_brg_N": 1984.6
+   }
+  }
+ },
+ "M3_at_s0_1_J3_brg1_Nm": 1.81,
+ "M_GH_at_C0r_J1J2_tilt_Nm": 1.68,
+ "press_fit": {
+  "H7_m6_loose (-8 um clearance .. )": {
+   "p_MPa": 0.0,
+   "pull_N": 0.0
+  },
+  "ream 1.995-2.000 min (2 um)": {
+   "p_MPa": 53.5,
+   "hoop_MPa": 73.9,
+   "SF_hoop": 11.24,
+   "pull_N_mu0p2": 202.0,
+   "pull_N_mu0p3": 302.0
+  },
+  "ream max (13 um)": {
+   "p_MPa": 347.7,
+   "hoop_MPa": 480.1,
+   "SF_hoop": 1.73,
+   "pull_N_mu0p2": 1311.0,
+   "pull_N_mu0p3": 1966.0
+  }
+ },
+ "axial_load_on_dowel_N": "~0 by design: the contact force is tangential; axial only by friction during axial play (preloaded DB pair: none). Upward the groove floor caps it at 0.15 mm.",
+ "groove_vs_boss": {
+  "r_in": 6.45,
+  "r_out": 8.55,
+  "wall_to_bearing_seat_mm": 0.95,
+  "wall_to_rim_mm": 1.45,
+  "e0.85": {
+   "depth": 1.0,
+   "z_bottom": 4.15,
+   "overlap_bearing1_seat_mm": 0.5,
+   "boss_section_removed": 0.082
+  },
+  "e1.35": {
+   "depth": 1.5,
+   "z_bottom": 4.65,
+   "overlap_bearing1_seat_mm": 1.0,
+   "boss_section_removed": 0.124
+  },
+  "e1.85": {
+   "depth": 2.0,
+   "z_bottom": 5.15,
+   "overlap_bearing1_seat_mm": 1.5,
+   "boss_section_removed": 0.165
+  }
+ },
+ "window": {
+  "bench110": {
+   "lo_kin_ok_deepest": [
+    205,
+    [
+     0.0,
+     105.0,
+     15.0
+    ],
+    -110.997
+   ],
+   "lo_stopped_nearest": [
+    182,
+    [
+     -15.0,
+     90.0,
+     45.0
+    ],
+    -115.696
+   ],
+   "hi_kin_ok_deepest": [
+    316,
+    [
+     60.0,
+     150.0,
+     -105.0
+    ],
+    119.213
+   ]
+  },
+  "held": {
+   "lo_kin_ok_deepest": [
+    393,
+    [
+     -15.0,
+     90.0,
+     75.0
+    ],
+    -111.159
+   ],
+   "lo_stopped_nearest": [
+    392,
+    [
+     -15.0,
+     90.0,
+     30.0
+    ],
+    -112.488
+   ],
+   "hi_kin_ok_deepest": [
+    683,
+    [
+     45.0,
+     165.0,
+     -30.0
+    ],
+    119.752
+   ],
+   "hi_stopped_nearest": [
+    897,
+    [
+     90.0,
+     165.0,
+     -75.0
+    ],
+    123.872
+   ]
+  },
+  "fit_bench": {
+   "lo_kin_ok_deepest": [
+    91,
+    [
+     -15.0,
+     75.0,
+     90.0
+    ],
+    -98.431
+   ],
+   "lo_stopped_nearest": [
+    92,
+    [
+     -15.0,
+     90.0,
+     60.0
+    ],
+    -112.791
+   ],
+   "hi_kin_ok_deepest": [
+    152,
+    [
+     60.0,
+     165.0,
+     -90.0
+    ],
+    116.771
+   ],
+   "hi_stopped_nearest": [
+    164,
+    [
+     75.0,
+     165.0,
+     -90.0
+    ],
+    124.862
+   ]
+  }
+ },
+ "E_L2": {
+  "clear_at_J3MIN": 0.6307376000000005,
+  "q3p_at_ADJ_0p15": -114.5,
+  "q3p_at_touch": -115.25,
+  "clear_at_J3MAX": 7.343077000000001
+ },
+ "tolerance_stack_deg": {
+  "contributors": [
+   [
+    "dowel hole true position in the pad, tangential, +-10 um",
+    0.076,
+    0.0,
+    0.0
+   ],
+   [
+    "groove end (end-arc centre) position in the boss, tangential, +-10 um",
+    0.076,
+    0.0,
+    0.0
+   ],
+   [
+    "groove width 2.10 +0.02/0 -> end radius 1.05..1.06 (stop later)",
+    0.0,
+    0.0,
+    0.076
+   ],
+   [
+    "dowel m6 2.002..2.008 -> radius +1..+4 um (stop earlier)",
+    0.0,
+    -0.031,
+    -0.008
+   ],
+   [
+    "pin a bore position +-0.02 at lE 97 (member 3's angular datum)",
+    0.012,
+    0.0,
+    0.0
+   ],
+   [
+    "link 2 J2 / J3 bore angular relation, +-0.02 over ~60 mm",
+    0.019,
+    0.0,
+    0.0
+   ],
+   [
+    "J3 DB pair radial play (preloaded: 0) / unloaded deflection",
+    0.0,
+    0.0,
+    0.0
+   ]
+  ],
+  "rss": 0.11,
+  "worst_linear": 0.184,
+  "bias": [
+   -0.031,
+   0.069
+  ],
+  "worst_in": 0.214,
+  "worst_out": 0.252,
+  "worst_linear_at_pm5um": 0.183,
+  "worst_linear_at_pm20um": 0.412,
+  "worst_linear_at_pm50um": 0.871
+ },
+ "cad": {
+  "frame": "link-2 local; origin hub-3 axis, e = unit(a3 x x) / f = a3 x e; positive = right-handed about a3 (the J3 axis, lower -> upper)",
+  "L2_root_deg": 24.75,
+  "E_root_at_q3p0_deg": -177.43,
+  "q3p_sense": 1,
+  "dowel_theta_in_member3_rel_E_root_deg": 16.76,
+  "dowel_theta_l2frame_at_q3p0_deg": -160.67,
+  "dowel_centre_at_J3MIN_l2frame_deg": 87.43,
+  "dowel_centre_at_J3MAX_l2frame_deg": 322.07,
+  "end_arc_centre_lo_deg": 87.044,
+  "end_arc_centre_hi_deg": 322.453,
+  "end_arc_offset_deg": 0.382,
+  "groove_half_width_deg": 8.02,
+  "groove_total_arc_deg": 251.45,
+  "web_deg": 108.55,
+  "E_vs_L2_root_at_J3MIN_deg": 45.92
+ }
+}
