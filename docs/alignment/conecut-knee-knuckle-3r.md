@@ -443,3 +443,72 @@ reasons are upheld and 1 (T5) is refuted. Rulings: `docs/alignment/conecut-knee-
   - the incumbent's [-0.40, 0.00] is seed-dependent (see above).
 
 **Final verdict: WATCH.**
+
+---
+
+## Skeptic (2026-10-17, 19:14-19:21 UTC, hourly audit of 19:03)
+
+Ledger: 2026-10-17T19:20:18Z, by skeptic, run `skeptic:conecut-knee-knuckle-3r`. **Final verdict: WATCH** (10 reasons
+upheld, 0 refuted; none gamed). Rulings file: `docs/alignment/conecut-knee-knuckle-3r.rulings.json`. Re-derived from
+the per-pose dumps (`remeasure/conecut-knee-knuckle-3r_{bench,held}_perpose.json`, which recompute to 18.29 / 22.38),
+the tool code, the probe files and the design's scratch scripts. No model re-run (load 10-13 on 4 cores, farm closed).
+
+### Rulings
+
+1. **reporting - upheld.** The row's verdict still begins "SCREENED - a measured TIE"; `morphs.json` gap / sweep_gap
+   12.5 against v_gap 18.28, 5.78 apart, over the documented 5-point line (`c_reporting`, line 711).
+2. **NEW-self-reference - upheld.** `DEPTH_REF` = this row (line 301), `ref == rid` returns ok (lines 419-420),
+   dominance reads "no reference". My own run of `c_contact_depth` over the 24 verified rows with depth on file, with
+   the reference at conecut / slipper-nose / sidecar-longdyad: 2 / 2 / 11 watch, 0 rows change level between the first
+   two. Against slipper-nose this row's T5 stays ok (x1.37 / x1.32), but its dominance reads watch (+0.21 plain, -1.82
+   at 2 mm), a watch the default run hides. A real hole; no number moves today.
+3. **T1 - upheld, with an attribution.** Bench < 2 mm 34.84 against 33.02, held 37.11 against 36.95 (my
+   re-derivation: a taken pose with min(min_mm, cmin) < X becomes untaken + contact). Taken poses < 1 / 2 / 3 mm:
+   bench 3 / 33 / 105 against 3 / 30 / 100; held 13 / 71 / 217 against 14 / 67 / 199 (the auditor's 218 / 200 at 3 mm
+   are 1 off). Pose 203 taken, min_mm 0.716, cmin 0.263; pose 205 contact -4.28. **New:** the whole 2 mm deficit is
+   cuff-side metal (cmin). Counting chain metal only (min_mm), < 2 mm reads 30.79 against 30.97 bench and 34.88
+   against 36.02 held, so this row is better there. At 1 mm it is better on both wears (19.92 / 20.12, 25.23 / 26.55).
+   The 1-2 mm metal is the re-centred knee / pad side. Report-only watch stands.
+4. **T3 - upheld.** `th` margin 5.006 deg held (`extra.th_margin.min`, lt5 0). The fit-flat interval checks out: in
+   `docs/research/conecut_mechanism/stop_geo.json` the nearest fit-bench q3' values are -112.79 and -98.43, with
+   nothing strictly between them. The stop-window tool stops inward poses only (exact). Bench 18.02-18.30, held
+   22.38-23.44, and the claim is the held-best end.
+5. **P2 - upheld, and broader than stated.** `heldleak_check.json`: 0 of 352 flips, but held binds the margin on 218
+   configs. The design's scratch scripts read held beyond the knee prefilter (see missed 1).
+6. **NEW-strap-dilution - upheld.** From the sampling parts table (E 0.979 over 164 samples): sample-weighted 0.9011.
+   With E at the lead's 104 samples it is 0.8961, so the bench reads 18.68 (auditor 18.67), behind 18.49.
+   Part-weighted 0.9249. Paired bench split: in-band -0.45 of a -0.20 diff.
+7. **M5 - upheld (missing).** No R17 or cuff twist for this knee. The L1 build exists
+   (`pipeline/full-exo/designs/l1_conecut-knee/`, 18:51-18:53: design.json, build.json, exo.glb) but no judge output;
+   `results.json` holds only an impact-model `knee_twist_deg_per_Nm` 0.123, not the R17 reading.
+8. **G4 - upheld (missing).** Only the displaced lead's m_sub at rest is on file (lt1 50 of 204); no conecut msub file.
+   Not run: the probe took 465 s on the lead, and the box is saturated.
+9. **NEW-ws-inband - upheld.** Probe `ws_elev90_140` in-band 0.8315 bench / 0.8478 held, over14 0.168 / 0.149, d_max
+   30.74 / 31.46; slipper-nose 0.8004.
+10. **R1 - upheld.** The verdict text is unchanged on the row and the board; 203's 0.72 mm in the text is min_mm 0.716,
+    and the cuff side is at 0.263 mm.
+
+### Missed by the auditor (for the next audit; not in this verdict)
+
+1. **P2 is wider than the knee prefilter.** In the design's scratch (`scratchpad/cone/`, 13:34-14:22):
+   - `q3.py` (14:05) printed the held-out poses each candidate J3 stop excludes (-100 / -105 / -110);
+   - `full_j3stop.py` with `HELD=1` wore a J3-stopped config held out: `full_kw25stop_held.json`, J3MIN -105, held
+     22.79, 14:22. That was before the 16:06 sweep that set the LHS J3MIN range to -112..-100;
+   - `stopc.py` printed the held cuts of a q1 stop.
+
+   The auditor's "the J3 stop was not tuned on held" holds for the final J3MIN, which is a fit-search output. The
+   stop's range, though, was scoped with held counts in view. That effect is not measured; it needs the sweep re-run
+   with J3MIN bounds set blind (e.g. -120..-95).
+2. **A forward held-out leak in the row doc.** "What next" item 1 (`docs/concepts/conecut-knee-knuckle-3r.md` lines
+   261-263) says "Add 764 / 835 / 907 / 978 / 1047 to the envelope search bench". Those are held-out pose indices: in
+   the held dump, 3 are taken at 0.51-1.13 mm and 2 are contacts. Followed, it would put held poses into the family's
+   next searches. Propose: strike or rewrite the item to name the envelope region (elev 15, axial -135 to -165), never
+   held indices.
+3. **T1's 2 mm deficit is cuff-side, not chain.** See ruling 3. The next audit should split near-touch by part (min_mm
+   chain, cmin cuff) when it compares with the reference.
+4. **On file, though listed as not got:** the displaced lead's ws in-band over all taken poses.
+   `remeasure/slipper-nose-knuckle-3r_probe_bench.json` probe.ws_unscored inband14 reads 0.856, against 0.868 here.
+5. **M5 is runnable now.** The L1 build of this knee landed at 18:51-18:53, so "no CAD" is stale. The R17 and
+   cuff-twist judges can run on `l1_conecut-knee`.
+
+**Final verdict (ledger): WATCH.**
