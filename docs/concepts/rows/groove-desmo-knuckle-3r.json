@@ -6,7 +6,7 @@
  "active_dof": 3,
  "passive_dof": 5,
  "passive_translations": 0,
- "status": "screened",
+ "status": "verified",
  "t_ideated": null,
  "t_screened": "2026-10-17T05:43:59Z",
  "reach": 0.7562,
@@ -15,15 +15,15 @@
  "inband10": 0.5258,
  "contact": 0.0,
  "gap": 14.67,
- "v_reach": null,
- "v_follow": null,
- "v_inband14": null,
- "v_inband10": null,
- "v_gap": null,
+ "v_reach": 0.6806,
+ "v_follow": 1.0,
+ "v_inband14": 0.8986,
+ "v_inband10": 0.5296,
+ "v_gap": 22.64,
  "n_configs": 4215,
  "verdict": "SCREENED - a complexity / hold Pareto point, not a lead change. The spring-free positive K drive exists: the groove at hub 2 passes gate 0 (pitch window, real pressure angle 30.5, link 2 clear by >= 1.22 mm on every taken pose of all three benches), but the two-walled slot at K only with the roller moved off the crank/link-1a relative-rotation pole, which caps the drive stroke at 41.2 deg (horn PA) instead of 46.2. Frozen exact Bench(110,360) 19.29 (score 92.99) vs the lead's 18.67 through the same protocol (+0.62), held out 24.96 vs 23.73 (+1.23), overhead 8/28 = lead; complexity 18.25 vs 20.25 (v2.1), K held both ways (slop +-0.54 deg vs the spring's 4-8 deg tilted drift).",
  "limiter": "the slot's outer wall: the CMA-optimal flank keeps the roller 1.5 mm from the relative-rotation pole (path radius 1.03-1.84 mm at K 0-7 deg), so a second wall is undercut there; moving the roller >= ~2 mm off the pole makes it cusp-free but the horn pressure angle then ends the stroke at 41.2 deg; frozen loss 103/360 = fold 92 (lead 88), slide 9, contact 2 (horn boss + crank on the deltoid at elev 165, as the lead)",
- "note": "Model docs/concepts/models/groove-desmo-knuckle-3r.py = the lead (GD_CELL=lead) / kneeless-roller (GD_CELL=kneeless) loaded unchanged + capK 0, MR52 roller (O3.5 head), and four drive limiters in the parent's cam loop: groove fit (crest <= 8.44), real groove pressure angle with the 16-mm-off crank pivot (<= 37.3), the slot's outer wall (cusp / convex >= 3.5, metal sampled into horn / contact / HORN strap / low-arm check), plus the link-2 planform check per taken pose (>= 1 mm) and the dowel + short arm as contact metal. GD_CONTROL=1 reproduces the verified lead exactly (fast 13.19 / 16.57, frozen 18.67 / 20.30 / 33.10). Search: 2 gate-0 configs, 1,191 drive-only cam cells (pole maps), 288-config farm LHS (wide drive box, best 2 mm 44.9), 3 farm CMA streams x ~850 (2,595 evals; none improved on the cusp-free start: plateau 17.21 at 2 mm); kneeless: 1 cusp-free cell benched (fast 18.57), its farm CMA 1,329 evals: best 2 mm 20.94 fast (reach 0.775, ib14 0.893, contact 0.042), gate 0.20/0.04/0.20. Red team (frozen exact): min metal 0.07 mm at (-60, 60, 105) = the lead's pose (not the drive); 2 contact poses at elev 165 = the lead's; tightest link-2 planform 0.28 mm at (0, 90, 0), a pose lost to the fold; onset corner of the groove (~85 deg in the cap frame: the lin law's kink; needs a blended onset, < 1 deg of K, unmodelled); groove ring must be hardened steel or DLC Ti (sliding). New knowledge: (1) the family's lobe pressure-angle formula assumes a radial follower; with the crank pivot d ~ 16 mm off hub 2's axis the real angle is set by the match of the follower's tangential speed to the cap's: matched pitch radius r* = lam d cos(theta_F) / (1 + lam), lam = kK / g (lead: r* ~ 8.2 = its lobe, real angle ~2 deg; at the groove's capped 7.06 base: 30.5; kneeless at pitch 7.06: 54). (2) A positive (spring-free) cam pair needs the follower >= R + RHO_MIN off the relative pole over the whole stroke; the spring-loaded optimum sits 1.5 mm from it, so in this family going spring-free costs ~5 deg of stroke (~0.6 frozen points); a conjugate RETURN roller ~16 mm from the main one (return wall concave, PA <= 35.4, 15 mm off hub K) is the geometric route back to 48.5 deg, unbenched. Core clamp keeps s_arm >= 4.0 (parent component limit) in both cells; the groove-fit limiter uses the worn value.",
+ "note": "Model docs/concepts/models/groove-desmo-knuckle-3r.py = the lead (GD_CELL=lead) / kneeless-roller (GD_CELL=kneeless) loaded unchanged + capK 0, MR52 roller (O3.5 head), and four drive limiters in the parent's cam loop: groove fit (crest <= 8.44), real groove pressure angle with the 16-mm-off crank pivot (<= 37.3), the slot's outer wall (cusp / convex >= 3.5, metal sampled into horn / contact / HORN strap / low-arm check), plus the link-2 planform check per taken pose (>= 1 mm) and the dowel + short arm as contact metal. GD_CONTROL=1 reproduces the verified lead exactly (fast 13.19 / 16.57, frozen 18.67 / 20.30 / 33.10). Search: 2 gate-0 configs, 1,191 drive-only cam cells (pole maps), 288-config farm LHS (wide drive box, best 2 mm 44.9), 3 farm CMA streams x ~850 (2,595 evals; none improved on the cusp-free start: plateau 17.21 at 2 mm); kneeless: 1 cusp-free cell benched (fast 18.57), its farm CMA 1,329 evals: best 2 mm 20.94 fast (reach 0.775, ib14 0.893, contact 0.042), gate 0.20/0.04/0.20. Red team (frozen exact): min metal 0.07 mm at (-60, 60, 105) = the lead's pose (not the drive); 2 contact poses at elev 165 = the lead's; tightest link-2 planform 0.28 mm at (0, 90, 0), a pose lost to the fold; onset corner of the groove (~85 deg in the cap frame: the lin law's kink; needs a blended onset, < 1 deg of K, unmodelled); groove ring must be hardened steel or DLC Ti (sliding). New knowledge: (1) the family's lobe pressure-angle formula assumes a radial follower; with the crank pivot d ~ 16 mm off hub 2's axis the real angle is set by the match of the follower's tangential speed to the cap's: matched pitch radius r* = lam d cos(theta_F) / (1 + lam), lam = kK / g (lead: r* ~ 8.2 = its lobe, real angle ~2 deg; at the groove's capped 7.06 base: 30.5; kneeless at pitch 7.06: 54). (2) A positive (spring-free) cam pair needs the follower >= R + RHO_MIN off the relative pole over the whole stroke; the spring-loaded optimum sits 1.5 mm from it, so in this family going spring-free costs ~5 deg of stroke (~0.6 frozen points); a conjugate RETURN roller ~16 mm from the main one (return wall concave, PA <= 35.4, 15 mm off hub K) is the geometric route back to 48.5 deg, unbenched. Core clamp keeps s_arm >= 4.0 (parent component limit) in both cells; the groove-fit limiter uses the worn value. VERIFICATION (independent, Bench(110,360) exact frozen): corrected v_gap 22.64 (score 91.77) - the claim's 19.29 reproduced, then stop B moved from 41.25 to 32.25 deg because the true 3-D groove crest (crank axis tilted 14.78 deg from hub 2's, dowel drift 15.6 deg) reaches 8.93 vs the claim's own 8.44 window; held out 28.90; flood full 22.64 / knn 24.04; overhead 8/28. Champion through the same bench: 75.94 (risley-turret verifier; the added checks apply only to the K drive, which the plain 3R has not). Straight dowel binds (tilt 4.2 deg): groove 1.61 or a crowned dowel, K slop +-1.6-2.0 deg.",
  "doc": "docs/concepts/groove-desmo-knuckle-3r.md",
  "model_file": "docs/concepts/models/groove-desmo-knuckle-3r.py",
  "complexity": 18.25,
@@ -271,5 +271,37 @@
    "r_lobe": 7.06,
    "stk": 4.8534
   }
+ },
+ "verification": {
+  "by": "independent verifier (skeptic), docs/concepts/verify/groove-desmo-knuckle-3r.py",
+  "t": "2026-10-17T06:50:00Z",
+  "bench": "Bench(110,360) exact, claim protocol (fit Bench(60,160) fast -> frozen -> worn)",
+  "claim_reproduced": {
+   "frozen": 19.29,
+   "held": 24.96,
+   "flood_full": 19.29,
+   "flood_knn": 21.52
+  },
+  "corrected": {
+   "gap": 22.64,
+   "score": 91.77,
+   "reach": 0.6806,
+   "follow": 1.0,
+   "inband14": 0.8986,
+   "inband10": 0.5296,
+   "contact": 0.0056,
+   "overhead_taken": "8/28",
+   "near1": 23.76,
+   "near2": 35.06,
+   "min_metal_mm": 0.07,
+   "flood_full": 22.64,
+   "flood_knn": 24.04,
+   "held_out": 28.9,
+   "envelope": 22.5
+  },
+  "finding": "the claim's groove-fit gate is planar and linear (crest = r_lobe + s_arm K / g = 8.24 at dK_lim 41.25); the crank turns about dR, a line through GH tilted 14.78 deg from hub 2's axis, and the dowel drifts 15.6 deg in azimuth about hub 2, so its real radial lever grows from s_arm 4.05 to ~8 mm/rad: the TRUE crest is 8.93 at 41.25 (8.89 on taken poses) vs the claim's own window 8.44 (0.8-mm outer wall: the real wall would be 0.31 mm). Stop B moves to K 32.25 deg (true window); 12 taken poses of Bench(110,360) (37 held out) need more. Re-run of the claim protocol with that stop: 22.64, 0 failing poses.",
+  "other_checks": "roller-flank (closure 0.0 mm, roller-lug 2.805, PA crank 13.9 / horn 42.6, 0 wrong sense), frames (< 0.0001 deg), fold margin 5.39, groove pressure angle in 3-D 36.17 (gate 37.29; claim 30.5), groove centreline self-clear 2.40 (>= 2.02), true link-2 planform 1.217 (>= 1.0), dowel axial travel 0.23 mm: pass. Dowel tilt 4.2 deg across the rise groove = 0.108-mm run-out over 1.5 engagement vs the 0.02 clearance: a straight dowel binds; groove 1.61 wide (K slop +-1.6-2.0 deg, not +-0.54) or a crowned dowel. Envelope (slot outer wall first row + lug edge strip restored): 19.15 / corrected 22.50, no new contact or parts pose.",
+  "champion_same_bench": 75.94,
+  "verdict": "VERIFIED (not refuted): 22.64 vs champion 75.94 on Bench(110,360) exact; no hard rule broken once stop B sits at the true window. The claimed 19.29 does not survive (+3.35): vs the lead 18.67 it is +3.97, so the Pareto trade is 2 complexity points for ~4 gap points."
  }
 }

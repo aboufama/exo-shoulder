@@ -238,3 +238,74 @@ Frozen exact Bench(110,360): **19.29, with 0 failing taken poses out of 367**:
 - real lobe pressure angle by the verifier's radial formula: 26.6. The groove's own off-axis value is 30.5.
 - the drive is not idle (dK 40.5 of 41.25);
 - corrected gap 19.29.
+
+## Verification (independent skeptic, 2026-10-17)
+
+Harness: `docs/concepts/verify/groove-desmo-knuckle-3r.py`. It loads the claim's model unchanged (GD_CELL=lead) and wears it
+by the claim's own protocol: fit on Bench(60,160) fast, freeze the shape, wear it on Bench(110,360) exact or held out.
+Outputs are in `docs/concepts/verify/groove-desmo-knuckle-3r_v_*.json`. All runs were on the CPU farm.
+
+**Verdict: VERIFIED, not refuted.** The corrected gap is **22.64** (score 91.77). The champion scores 75.94 on the same
+bench. The claimed 19.29 does not survive: +3.35.
+
+### The finding: the groove does not fit its own window
+
+The claim's groove-fit gate is planar and linear: crest = r_lobe + s_arm·K/g, which gives 8.24 at dK_lim 41.25. Two
+things make the real path different:
+
+- The crank turns about dR, a line through GH tilted **14.78 deg** from hub 2's axis.
+- The dowel drifts **15.6 deg** in azimuth about hub 2 (from -14.6 to -30.2 deg) over the stroke.
+
+So the dowel's real radial lever grows from 4.05 to about 8 mm/rad. Read from the worn frames (path vs frames 0.000 mm),
+the true crest is **8.93 at K 41.25** and 8.89 on taken poses. The claim's own window is 8.44, set by a 0.8 mm outer
+wall. At 8.93 that wall would be 0.31 mm.
+
+The groove end is stop B, so stop B moves to **K 32.25 deg**, where the true crest meets 8.44. The claim's own limiter
+was cutting at 48.2.
+
+### Corrected numbers
+
+| bench | claim (reproduced) | corrected | what changed |
+|---|---|---|---|
+| Bench(110,360) exact, frozen | 19.29 | **22.64** (reach 0.6806, follow 1.0, ib14 0.8986, ib10 0.5296, contact 0.0056) | the claim protocol re-run with stop B at 32.25 (`--truewin`): 0 failing poses. Dropping the 12 taken poses past the window gives the same 22.64 |
+| 1 mm / 2 mm | 20.94 / 33.68 | 23.76 / 35.06 | |
+| held out, frozen | 24.96 | **28.90** | 37 poses past the window dropped |
+| flood full / knn | 19.29 / 21.52 | 22.64 / 24.04 | |
+| envelope (`--env`) | 19.15 | 22.50 | the slot outer wall's first row and the lug edge strip, which the claim's chord filter deletes, restored: no new contact or parts pose |
+| overhead (elev >= 140) | 8/28 | 8/28 | none of the cut poses is overhead |
+
+Against the lead's 18.67 this is +3.97, not +0.62. The Pareto trade becomes 2 complexity points (18.25 vs 20.25) for
+about 4 gap points.
+
+### Checks that pass on every taken pose
+
+- **Roller-flank** (the round's verifier, copied):
+  - cam closure 0.0 mm;
+  - roller to lug and slot 2.805-3.31 mm (2.798 with the envelope);
+  - pressure angles: crank 13.9, horn 42.6 (39.0 at stop 32.25);
+  - K sense always right.
+- **Frames:** J2 and J3 axes and K agree to < 0.0001 deg.
+- **Fold margin:** min 5.39.
+- **Groove in 3-D:**
+  - pressure angle 36.17 deg against the 37.29 gate (the claim's planar value was 30.5; margin now 1.1 deg);
+  - the "with" arrangement confirmed from the frames (dq2/dK -0.464);
+  - centreline self-clearance 2.40 mm (rule >= 2.02, so the channels do not merge);
+  - dowel axial travel 0.23 mm.
+- **Link 2 vs the true dowel and short arm** (3-D crank, boss point carried by the crank): >= 1.217 mm.
+
+### Not on the bench, but corrects the claim
+
+- **Dowel tilt binds a straight dowel.** The dowel axis tilts up to 4.2 deg against hub 2's axis, across the near-radial
+  rise groove. Over the 1.5 mm engagement that is 0.108 mm of run-out, against a 0.02 mm clearance.
+  - A straight O1.5 dowel binds.
+  - Fix 1: a 1.61-wide groove. K slop is then about ±1.6-2.0 deg, not the claimed ±0.54. That is still better than the
+    spring's 4-8 deg drift.
+  - Fix 2: a crowned or ball-ended dowel.
+- **Short arm vs link 1b's plate.** The dowel's base sits at link 2's boss underside (U0). The 3 mm short arm therefore
+  runs in link 1b's plate levels inside hub 2's footprint and needs a pocket there. This is not modelled. The parent's
+  rim-lobe follower has the same issue.
+
+### Champion through the same bench
+
+75.94 (Bench(110,360) exact, the risley-turret verifier). The checks added here apply only to the K drive and the
+knuckle frames, which the plain spherical 3R does not have.
