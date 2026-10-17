@@ -2309,3 +2309,37 @@ No bench, judge or kit file changed this round.
 - Leader decisions today: round-10 winner slipper-nose 18.49 (score 93.28, held out 23.45, WATCH, 0 gamed); its
   generation CAD is deferred until the long-stroke row is measured (it would replace slipper-nose's drive); the gen-6
   CAD of the tied sibling roller-longdyad (7/19) carries the shared chain.
+
+## Long-stroke K drive, measured (2026-10-17 08:10 UTC, longstroke-slipper-knuckle-3r; docs/research/longstroke_drive.md)
+
+**Result: the drive exists, the lever does not pay in this family.** Best long-stroke claim: frozen exact
+Bench(110,360) **21.27** (score 92.27) / held out **26.19**, against slipper-nose's 18.49 / 23.45, at complexity 30.5
+against 22.25. Not a lead change; the hard goal (reach >= 0.78, overhead >= 12/28) is not met by any measured config.
+
+What was measured (farm, ~15,200 configurations, <= $1.10):
+
+1. **Stroke at every PA <= 42 (friction in), K dyad 28 / 50, 240-config sweeps per drive.**
+   * One-sided contacts cap: slipper nose (mu 0.087) **46.5**, MR63ZZ roller **51.8**; the long ones run the contact out
+     to r 31 mm (lug 34 mm, on the skin). This is the involute arc of action of a single tooth (0.90 rad for PA 0 -> 42).
+   * A phased **RSSR rod** (O3 Ti + 2 M2 ball links, transmission >= 48 at both ends) reaches **77.2**. Its crank-tip PA
+     never drops under ~25: the straight rod leans 10-30 deg out of the members' planes. A **spherical coupler** (an arc
+     on two radial pins) removes the lean: 78.5 kinematically on the same seats, complexity 28.0 vs 30.5.
+2. **No search uses the stroke.** 15 CMA runs (free; stroke held >= 65; 2 mm and 1 mm objectives): every optimum takes no
+   pose needing more than 42-49 deg of K. Held at >= 65 the constraint is met vacuously (range 65, use 41.6).
+3. **The next stretched wall is the K LAW.** The hub-2 lobe at PA <= 42 caps the law slope at
+   kK <= tan(42) g r_lobe / s_arm (~2.0); at that slope the stretched poses past th ~109 fail the 5 deg closure (law-only
+   kinematics: 267 / 360 at kK 1.96, 272 at 2.3; kK >= 2.7 kills the law at the lobe base circle). The fold analysis'
+   parking estimate (0.775-0.778) assumes the ideal law and the parts' clip levels; the real chain has neither.
+4. **Attribution (drive metal deleted, LS_GHOST=1, never a claim):** 19.50 frozen / 22.69 held. Even a perfectly parked
+   drive is not a bench gain (+1.01), only a held-out one (-0.76). The real rod drive adds ~1.8 points: its bell crank sits
+   at a median 14.0 mm (in band 0.50), its ball links at 0.67, and its horn / rod make the 3 contact poses (max 12.8 mm).
+5. **Red team.** No jam inside the range (used PA <= 28.5 / 25.2); the rod stage cannot lift off, the lobe stage is
+   spring-held as the lead (factor 2.4), the spring is felt as 1.2-1.6 N at the cuff. Knife edge: the stroke survives
+   +-1 deg / +-0.25 mm (61.5-66.8), the parking does not (9 / 33 neighbours hit the ROD-hubK 1 mm pair); r_h +0.25 is the
+   robust build at no cost. Alignment tool: WATCH, no gamed finding.
+6. **Control:** slipper-nose's verified config through this model at every PA <= 42 reproduces 18.49 exactly.
+
+**For the round-11 planner:** do not spend a round on K drives for the stretched wall until the LAW can follow: first a
+steeper lobe law at PA <= 42 (bigger lobe base / smaller follower arm, hub-2 skirt), measured with the ghost drive
+(`LS_GHOST=1`, `docs/research/longstroke_drive/stroke_curve.py`); if the ghost does not gain, no drive will. A stroke
+constraint is not a reach constraint: gate on the K the taken poses USE.

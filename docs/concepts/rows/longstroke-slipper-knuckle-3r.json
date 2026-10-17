@@ -640,5 +640,89 @@
   },
   "passes": true
  },
- "cost_usd": "~1.2-1.4 of the 1.50 share (exo-cpu1: 5 sweeps, 4 CMA batches, 5 claim batches)"
+ "cost_usd": "~1.2-1.4 of the 1.50 share (exo-cpu1: 5 sweeps, 4 CMA batches, 5 claim batches)",
+ "flood": {
+  "static": {
+   "gap": 21.27,
+   "reach": 0.7222,
+   "follow": 1.0,
+   "inband14": 0.8731,
+   "contact": 0.008
+  },
+  "connected_full": {
+   "gap": 21.27,
+   "reach": 0.7222,
+   "dropped": 0,
+   "dropped_forced": 0,
+   "forced_taken": 102,
+   "forced_taken_connected": 102,
+   "envelope": {
+    "env_ok": 1022,
+    "env_forced_ok": 396,
+    "env_forced_connected": 396
+   }
+  },
+  "connected_knn": {
+   "gap": 24.08,
+   "reach": 0.6944,
+   "dropped": 10,
+   "dropped_forced": 10,
+   "forced_taken": 102,
+   "forced_taken_connected": 92
+  },
+  "connected_bench": {
+   "gap": 43.43,
+   "reach": 0.5028,
+   "dropped": 79,
+   "dropped_forced": 79,
+   "forced_taken": 102,
+   "forced_taken_connected": 23,
+   "dropped_with_no_taken_neighbour": 18
+  },
+  "source": "docs/research/longstroke_drive/farm/claimF/s65n2d_flood.json"
+ },
+ "red_team": {
+  "knife_edge": {
+   "neighbours": 33,
+   "source": "docs/research/longstroke_drive/res_tol_s65n2d.json",
+   "stroke_dK_lim_range": [
+    61.5,
+    66.8
+   ],
+   "stroke_used": 41.7,
+   "failures": "9 of 33 (r_h -0.25 and 8 corners) lose every pose to the ROD-hubK 1 mm part pair (the claim parks the horn ball 0.25 mm from it); 1 corner (r_lobe -0.25, s_arm +0.25) kills the law at the lobe base circle (pa > 42)",
+   "robust_variant": {
+    "params_change": "r_h +0.25 (14.919)",
+    "frozen": {
+     "gap": 21.27,
+     "reach": 0.7222,
+     "follow": 1.0,
+     "inband14": 0.8731,
+     "inband10": 0.5298,
+     "contact": 0.008
+    },
+    "held": 26.2,
+    "note": "identical to the claim (21.27 / 26.20): the robust build costs nothing"
+   }
+  },
+  "liftoff": {
+   "stage2": "rod with two ball links: bilateral, cannot lift off",
+   "stage1": "lobe follower held by the K clock spring as the lead (0.08 N.m preload + 0.015 N.m/rad): static factor 0.08 / 0.033 (exo weight about K) = 2.4",
+   "cuff_feel_N": "reflected J2 torque kK x tau_K = 1.957 x (0.08 + 0.015 x 0.73 rad at the taken max) = 0.18 N.m -> 1.2-1.5 N at a 120-150 mm cuff lever (<= 2.5 N); 1.3-1.6 N at the full 65 deg range",
+   "cuff_force_static": "a force at the cuff cannot drive the chain self-motion (K vs q2 at a fixed arm pose), so it never loads the closure statically; the opening load is the chain weight + inertia"
+  },
+  "jam": {
+   "pa_used_max": {
+    "crank_tip": 28.5,
+    "horn": 25.2
+   },
+   "pa_at_range_end": {
+    "crank_tip": 41.97,
+    "horn": 40.84,
+    "dK": 65.0
+   },
+   "toggle": "none in [0, 65]: the range scan stops at transmission 48 before any dead centre"
+  },
+  "pose_that_pinches": "contact poses 3 (bench) / 13 (held): horn lug + hub K + rod / ball link, summed depth 18.5 / 54.3 mm, max 12.8 mm"
+ }
 }

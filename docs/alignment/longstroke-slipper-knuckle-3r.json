@@ -6,10 +6,7 @@
  "verdict": "watch",
  "reasons": [
   "held_out: no verified bench gap on the row",
-  "near_touch: no near-touch measurement on file (rule since 2026-10-16: claims report plain and near-touch)",
-  "dominance: cannot compare with slipper-nose-knuckle-3r at 2 mm",
-  "continuity: passive / sprung / sensed coordinates but no continuity flood on file (rule 2026-10-16)",
-  "sampling: per-part sample counts not on file (fractions only); mostly out-of-band parts: crank 0.50 (row frozen)"
+  "sampling: sample-weighted in-band 0.873 vs part-weighted 0.878 (-0.48 points); thinly sampled parts: L1a 8; mostly out-of-band parts: crank (0.50 in band, median 14.0 mm, 6.9 % of samples) (row frozen)"
  ],
  "checks": [
   {
@@ -24,8 +21,17 @@
   },
   {
    "check": "near_touch",
-   "level": "watch",
-   "reason": "no near-touch measurement on file (rule since 2026-10-16: claims report plain and near-touch)"
+   "level": "ok",
+   "reason": "plain 21.27, <1 mm 25.2, <2 mm 41.58, 20.31 points live in the 1-2 mm shell (row frozen)",
+   "shell2": 20.31,
+   "plain": 21.27,
+   "n1": 25.2,
+   "n2": 41.58,
+   "n3": null,
+   "band3": null,
+   "hist": null,
+   "minmm": 0.27,
+   "source": "row frozen"
   },
   {
    "check": "contact_depth",
@@ -37,13 +43,20 @@
   },
   {
    "check": "dominance",
-   "level": "watch",
-   "reason": "cannot compare with slipper-nose-knuckle-3r at 2 mm"
+   "level": "ok",
+   "reason": "vs slipper-nose-knuckle-3r: plain -2.78, 2 mm -8.56",
+   "ref": "slipper-nose-knuckle-3r",
+   "gain_plain": -2.78,
+   "gain_2mm": -8.56
   },
   {
    "check": "continuity",
-   "level": "watch",
-   "reason": "passive / sprung / sensed coordinates but no continuity flood on file (rule 2026-10-16)"
+   "level": "ok",
+   "reason": "static 21.27, connected full 21.27, knn 24.08, bench 43.43 (row flood)",
+   "static": 21.27,
+   "connected_full": 21.27,
+   "connected_knn": 24.08,
+   "connected_bench": 43.43
   },
   {
    "check": "fold_margin",
@@ -66,7 +79,7 @@
      41.52
     ],
     [
-     "row:frozen.dK_taken_max",
+     "row:frozen.th_margin.dK_taken_max",
      41.62
     ],
     [
@@ -93,23 +106,83 @@
   {
    "check": "sampling",
    "level": "watch",
-   "reason": "per-part sample counts not on file (fractions only); mostly out-of-band parts: crank 0.50 (row frozen)",
+   "reason": "sample-weighted in-band 0.873 vs part-weighted 0.878 (-0.48 points); thinly sampled parts: L1a 8; mostly out-of-band parts: crank (0.50 in band, median 14.0 mm, 6.9 % of samples) (row frozen)",
    "parts": {
-    "hub1": 0.999,
-    "hubK": 0.985,
-    "hub2": 0.946,
-    "hub3": 0.739,
-    "E": 0.965,
-    "boss": 0.987,
-    "pad": 1.0,
-    "knee": 0.941,
-    "crank": 0.499,
-    "horn": 0.965,
-    "rod": 0.769,
-    "rodends": 0.677,
-    "L1a": 0.982,
-    "L1b": 0.94,
-    "L2": 0.774
+    "hub1": [
+     0.999,
+     8.6,
+     80
+    ],
+    "hubK": [
+     0.985,
+     7.2,
+     80
+    ],
+    "hub2": [
+     0.946,
+     11.1,
+     80
+    ],
+    "hub3": [
+     0.739,
+     11.5,
+     80
+    ],
+    "E": [
+     0.965,
+     6.5,
+     104
+    ],
+    "boss": [
+     0.987,
+     8.5,
+     32
+    ],
+    "pad": [
+     1.0,
+     8.1,
+     32
+    ],
+    "knee": [
+     0.941,
+     10.7,
+     85
+    ],
+    "crank": [
+     0.499,
+     14.0,
+     61
+    ],
+    "horn": [
+     0.965,
+     5.5,
+     20
+    ],
+    "rod": [
+     0.769,
+     11.7,
+     19
+    ],
+    "rodends": [
+     0.677,
+     11.5,
+     32
+    ],
+    "L1a": [
+     0.982,
+     9.7,
+     8
+    ],
+    "L1b": [
+     0.94,
+     7.4,
+     52
+    ],
+    "L2": [
+     0.774,
+     11.0,
+     124
+    ]
    }
   },
   {
@@ -127,7 +200,7 @@
   {
    "check": "judge_change",
    "level": "ok",
-   "reason": "no bench / judge / metric file changed in the 0 commits that touched the row"
+   "reason": "no bench / judge / metric file changed in the 1 commits that touched the row"
   },
   {
    "check": "rules",
@@ -140,7 +213,7 @@
   "held": false
  },
  "verifier_files": [],
- "git": "06f7b8d",
+ "git": "c57ad8d",
  "tool_version": "2026-10-17.2",
- "t": "2026-10-17T07:59:21Z"
+ "t": "2026-10-17T08:07:46Z"
 }

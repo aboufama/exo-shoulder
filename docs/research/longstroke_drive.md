@@ -148,6 +148,113 @@ the extra stretched poses it buys are 7.5 % of the workspace on either bench (12
 claim bench, th 106.6-121.4), and under the 2 mm objective a pose that closes with metal near the skin costs more than a
 pose lost to the fold.
 
-__CLAIMS__
+**cma3 (stroke held >= 65: a config whose drive range is shorter scores +100; 5 runs, 5,149 evaluations).** The search
+keeps the range but stops USING it:
+
+| run | objective | best obj | plain | reach | in-band | dK_lim | K the taken poses use | dyad | gate |
+|---|---|---|---|---|---|---|---|---|---|
+| s65n2a | 2 mm | 26.37 | 18.26 | 0.775 | 0.859 | 65.2 | - | 27.1 / 48.1 | 0.09 / 0.04 / 0.00 pass |
+| s65n2b | 2 mm | 20.16 | 17.74 | 0.763 | 0.860 | 68.0 | - | 27.8 / 39.3 | 0.25 / 0.10 / 0.01 pass |
+| **s65n2d (the claim)** | 2 mm | **19.37** | **14.54** | 0.781 | 0.873 | 65.0 | **41.7** | 26.0 / 47.2 | 0.03 / 0.01 / 0.00 pass |
+| s65n1a (alternative) | 1 mm | 15.76 | 14.59 | 0.788 | 0.867 | 65.5 | 47.1 | 27.7 / 42.6 | 0.27 / 0.16 / 0.03 pass |
+| s65n1b | 1 mm | 16.20 | 15.05 | 0.794 | 0.866 | 65.8 | - | 27.3 / 43.7 | 0.38 / 0.35 / 0.04 pass |
+
+**cma4 (ATTRIBUTION, never a claim: the drive's own metal deleted, LS_GHOST=1, stroke held >= 65; 2 runs, 1,034
+evaluations).** What the long stroke is worth on the real chain (hubs, links, pin knee, cuff, the greedy level fit) if the
+drive parked perfectly: best 2 mm 15.60, plain 12.23, reach 0.794, in-band 0.884, dyad 30.0 / 42.9, gate passes. On the
+same objective slipper-nose is 16.47 / 13.00. So a perfect drive buys ~0.8 fast points; the real rod drive costs ~3.8.
+
+## 4. Claim columns (frozen protocol: fit Bench(60,160) fast, shape frozen, worn on Bench(110,360) exact / 952 held out)
+
+The pick was committed before any frozen number (`picks.json`, 07:50 UTC): s65n2d, the 2 mm objective's best at stroke
+>= 65; s65n1a reported alongside. Farm jobs in `docs/research/longstroke_drive/farm/claim{A..F}/`.
+
+| config | drive range / K used | frozen exact Bench(110,360) | reach (overhead) | in-band | contact (poses, summed / max depth) | near 1 / 2 mm | min th margin | held out (952) |
+|---|---|---|---|---|---|---|---|---|
+| slipper-nose verified (reference) | 49.8 / 46 | **18.49** | 0.725 (8/28) | 0.8955 | 0.0054 (2) | 20.12 / 33.02 | 5.006 | **23.45** |
+| control: slipper-nose's config through THIS model, every PA <= 42 | 49.8 / 46 | 18.49 (fold 88, slide 9, contact 2: identical) | 0.725 | 0.8955 | 0.0054 | 20.12 / 33.02 | - | - |
+| **claim s65n2d (RSSR, 26.0 / 47.2)** | 65.0 / **41.6** | **21.27** (score 92.27) | 0.722 (7/28) | 0.873 | 0.008 (3, 18.5 / 12.8 mm) | 25.20 / 41.58 | 5.036 | **26.19** (0.682; contact 13, 54.3 / 12.4 mm) |
+| s65n2d, r_h +0.25 (the knife-edge-robust build) | 64.5 / 41.6 | 21.27 | 0.722 | 0.873 | 0.008 (3, 18.7 / 12.9 mm) | 25.20 / - | - | 26.20 |
+| alt s65n1a (RSSR, 27.7 / 42.6) | 65.5 / 47.1 | 22.07 | 0.725 (8/28) | 0.868 | 0.013 (5, 18.6 / 12.9 mm) | 23.70 / 42.34 | 5.389 | 24.86 |
+| free cma2 r75d (RSSR, 26.5 / 47.6) | 48.8 / - | 22.65 | 0.722 | 0.867 | 0.016 (6) | 26.22 / 39.04 | - | 26.18 |
+| free cma2 r75a (RSSR, 26 / 38) | 52.0 / - | 20.86 | 0.719 | 0.880 | 0.008 (3) | 21.94 / 35.39 | - | - |
+| free cma1 rs1 (RSSR, 26 / 47.3) | 37.5 / - | 21.79 | 0.714 | 0.876 | 0.008 (3) | 25.72 / 42.65 | - | - |
+| **ghost g65d (ATTRIBUTION: drive metal deleted, 30.0 / 42.9)** | 66.8 / 42.1 | 19.50 | 0.731 (8/28) | 0.885 | 0.011 (4, 11.7 / 7.1 mm) | 21.68 / 33.06 | 5.334 | **22.69** (0.698) |
+
+Continuity flood on the claim: static 21.27 = connected full 21.27 (0 dropped), knn 24.08, bench grid 43.43 (slipper:
+18.49 / 20.16 / 50.11).
+
+**Reading.**
+
+- **No long-stroke configuration beats the reference.** The best real one is 2.78 points worse on the frozen bench
+  and 2.74 worse held out, at +8.25 complexity. Reach does not move (0.722 vs 0.725): the poses the stroke was for are
+  not taken.
+- **The stroke is idle.** Every searched optimum, free or held at >= 65, takes no workspace pose that needs more than
+  42-49 deg of K (th <= 107-110). The parking estimate's window to th 121 never opens on the real chain.
+- **Why (measured, `stroke_curve*.json`):** the next wall is the LAW. The hub-2 lobe caps its slope at
+  kK <= tan(42) g r_lobe / s_arm (~2.0 at the searched seats); with kK <= 2 the stretched poses past th ~109 fail closure
+  at the 5 deg dyad margin (on the 77-deg config: 10 poses at th 110-121 with law dK 53-68, all 'closure' or knee), and
+  a steeper law (kK 2.7+) dies at the lobe's base circle. kK 2.3 would close 272 instead of 267, and is reachable only
+  with r_lobe ~8.5, s_arm 4 and g ~1.8, where the crank swings more and sits higher.
+- **The drive metal is the second cost.** Even the ghost lever (perfect parking) is +1.01 worse on the frozen bench
+  (better held out: -0.76). The real rod drive adds ~1.8 bench points: its bell crank (median 14.0 mm, in band 0.50)
+  and ball links (0.67) sit over the band, and its horn / rod make the 3 bench contacts (max depth 12.8 mm).
+
+## 5. Red team (the claim s65n2d)
+
+| attack | result |
+|---|---|
+| **The pose that jams** | None inside the range: the RSSR range scan stops at transmission 48 (PA 42) before any dead centre. Over the K the taken poses use (0-41.6) the pressure angles peak at 28.5 (crank tip) / 25.2 (horn); at the range end (dK 65) 41.97 / 40.84. A two-force rod with ball ends has no friction lean. |
+| **Lift-off under ~2.5 N at the cuff** | Stage 2 (the rod) is bilateral: it cannot lift off. Stage 1 (lobe follower) is held by K's clock spring as on the lead (0.08 N.m + 0.015 N.m/rad): static factor 0.08 / 0.033 (the exo's own weight about K) = 2.4. A force at the cuff cannot drive the chain's self-motion (K vs q2 at a fixed arm pose), so it never loads the closure statically. The spring's reflected J2 torque, kK x tau_K = 1.957 x 0.091 = 0.18 N.m, is felt as 1.2-1.5 N at a 120-150 mm cuff lever (1.3-1.6 N at the full 65 deg): under 2.5 N. |
+| **The knife edge** (+-1 deg on beta / gam, +-0.25 mm on La, r_h, s_arm, hl, zr, r_lobe; 17 one-at-a-time + 16 corners, `res_tol_s65n2d.json`) | The STROKE is robust: every neighbour still synthesises 61.5-66.8 deg (>= the 41.7 used). The PARKING is not: **9 of 33 neighbours (r_h -0.25 and 8 corners) lose every pose to the ROD-hubK 1 mm part pair** - the claim parks the horn ball 0.25 mm from it - and 1 corner (r_lobe -0.25 with s_arm +0.25) kills the law at the lobe base circle. The robust build r_h +0.25 measures **identical** (21.27 / 26.20). |
+| **Does the gain survive held out?** | There is no gain to survive: held out 26.19 vs slipper's 23.45. The ghost attribution is the only held-out improvement (22.69, -0.76), and it has no drive. |
+| **The optimistic number** | The fold analysis' 0.775-0.778 at 75 deg: on the real chain the window it counts does not open (law + 5 deg closure + knee), so the parking estimate is an upper bound for this family, not a target. The cma3 constraint "stroke >= 65" was satisfied vacuously (range 65, use 42): a stroke constraint is not a reach constraint. |
+| **Point that pinches** | 3 bench / 13 held contact poses: horn lug + hub K + rod / ball link (depth max 12.8 mm); near-touch at 2 mm 41.58 vs slipper's 33.02. |
+
+`python3 tools/alignment_audit.py audit longstroke-slipper-knuckle-3r --ref slipper-nose-knuckle-3r`: **WATCH** (no
+gamed finding): not verified yet; sample-weighted in-band 0.873 vs part-weighted 0.878; crank mostly out of band (0.50,
+median 14.0 mm).
+
+## 6. Verdict and what it means for the planner
+
+- **Delivered:** a K drive that turns K 65-77 deg with every pressure angle <= 42 (the phased RSSR; measured, robust to
+  +-1 deg / +-0.25 mm), and a spherical-4R reading of it with no chord lean (78.5 deg kinematically, complexity 28.0).
+- **Not delivered:** a score gain. Best long-stroke claim 21.27 frozen / 26.19 held vs slipper-nose 18.49 / 23.45. The
+  hard goal (reach >= 0.78, overhead >= 12/28, in-band >= 0.88, held out < 23.45) is not met by any measured config.
+- **New knowledge.**
+  1. One-sided contacts (nose, roller, groove) cap at 41-52 deg at PA 42: the involute arc of action. Long stroke needs a
+     linkage (or a much bigger cam on the skin).
+  2. A straight rod between members turning about axes through GH leans 10-30 deg out of their planes; a spherical
+     coupler removes that lean.
+  3. **After the stroke, the K LAW is the stretched wall:** the hub-2 lobe's pressure angle caps the law slope
+     (kK <= tan(42) g r_lobe / s_arm ~ 2.0), and at kK <= 2 the poses past th ~109 fail the 5 deg closure. A drive stroke
+     past ~50 deg is idle until the law is steepened. The fold analysis' parking test assumes the IDEAL law (K opens just
+     enough) and the parts' clip levels; the real chain has neither.
+  4. Even with the drive metal deleted, the long-stroke chain is not a bench gain (19.50 vs 18.49; held 22.69 vs 23.45).
+- **Next (cheapest first):** (a) a steeper law at lobe PA <= 42: a bigger lobe base (r_lobe 8.5-9 inside a wider hub-2
+  skirt) or a smaller follower arm, re-measured with the ghost drive first (`LS_GHOST=1`, `stroke_curve.py`), because
+  if the ghost does not gain, no drive will; (b) only then the drive: the spherical coupler on radial pins with the
+  crank's arm kept at link 1b's level (its in-band, not its stroke, is the cost).
+
+## 7. What a verifier must re-run
+
+```bash
+# the claim (farm or local; LS_DRIVE=rssr, CB_EXACT=1 for the worn benches)
+P="$(python3 -c "import json;print(json.dumps(json.load(open('docs/research/longstroke_drive/picks.json'))['claim_s65n2d']))")"
+LS_DRIVE=rssr CB_EXACT=1 python3 docs/concepts/models/longstroke-slipper-knuckle-3r.py frozen "$P" out_bench.json   # 21.27
+LS_DRIVE=rssr CB_EXACT=1 python3 docs/concepts/models/longstroke-slipper-knuckle-3r.py held "$P" out_held.json      # 26.19
+LS_DRIVE=rssr python3 docs/concepts/models/longstroke-slipper-knuckle-3r.py flood "$P" out_flood.json               # 21.27 / 24.08 / 43.43
+# the control (must reproduce slipper-nose's verified 18.49 through this model)
+LS_DRIVE=nose CB_EXACT=1 python3 docs/concepts/models/longstroke-slipper-knuckle-3r.py frozen '{"bk1": 26.0, "bk2": 38.0336, "a1max": 58.7678}'
+# the attribution (drive metal deleted) and the stroke / law tables
+LS_GHOST=1 LS_DRIVE=rssr CB_EXACT=1 python3 docs/concepts/models/longstroke-slipper-knuckle-3r.py frozen "<cma4 g65d params from the row>"
+LS_DRIVE=rssr python3 docs/research/longstroke_drive/stroke_curve.py "$P"; LS_DRIVE=rssr python3 docs/research/longstroke_drive/pa_map.py "$P"
+# per-pose dump for the contact-depth check (lead's rule): tools/alignment_paired.py dump longstroke-slipper-knuckle-3r bench|held
+```
+
+Cost: exo-cpu1 only, never GPU: 6 sweeps, 4 CMA batches (15 runs), 6 claim batches. `tools/runpod_guard.py audit`
+before (06:56 UTC, balance $30.55) and after (08:08 UTC, balance $29.45, workersMin 0, queue empty): $1.10 for every
+agent on the account in that window, so at most $1.10 for this task (the client's own billing lines sum to ~$1.0-1.1).
+
 
 

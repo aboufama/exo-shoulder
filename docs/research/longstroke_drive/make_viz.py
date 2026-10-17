@@ -9,6 +9,7 @@ par = sys.argv[1]; note = sys.argv[2] if len(sys.argv) > 2 else ""
 o = subprocess.run([sys.executable, os.path.join(REPO, "docs/concepts/models/longstroke-slipper-knuckle-3r.py"), "viz", par],
                    capture_output=True, text=True, env=dict(os.environ, LS_DRIVE="rssr", OMP_NUM_THREADS="1")).stdout
 X = json.loads(o[o.find("{"):]); P, G = X["P"], X["G"]
+P = dict(json.loads(par), **P)                                # the drive params the exporter leaves out (La, gam, ...)
 uK = G["uK"]; H = G["rodB"]; hz = sum(a * b for a, b in zip(H, uK)); rr = [h - hz * u for h, u in zip(H, uK)]
 nr = sum(x * x for x in rr) ** 0.5; G["hornA"] = [round(hz * u + 10.5 * x / nr, 3) for u, x in zip(uK, rr)]; G["hornB"] = [round(x, 3) for x in H]
 src = open(os.path.join(REPO, "docs/concepts/viz/concepts/sidecar-longdyad-knuckle-3r.js")).read()
