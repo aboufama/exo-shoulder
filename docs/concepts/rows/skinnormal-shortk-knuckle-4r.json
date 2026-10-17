@@ -44,11 +44,11 @@
  "inband10": 0.5653,
  "contact": 0.0106,
  "gap": 12.49,
- "v_reach": null,
- "v_follow": null,
- "v_inband14": null,
- "v_inband10": null,
- "v_gap": null,
+ "v_reach": 0.7417,
+ "v_follow": 1.0,
+ "v_inband14": 0.8933,
+ "v_inband10": 0.5699,
+ "v_gap": 18.58,
  "n_configs": 123,
  "verdict": "KILLED by the lead's rule: every seed and every sweep pick is >= pick1's 18.40 frozen. Best frozen = the repaired skinnormal seed: 18.58 Bench(110,360) exact frozen (score 93.24), held out 22.43 (pick1 22.69), near1 20.20 (pick1 23.36), reach 0.742 (overhead 8/28), follow 1.0, ib14 0.893, contact 0.021, min th margin 5.90; ties pick1 within 0.3 and cannot earn its 4th joint (cx 32.5); best frozen reach k33 0.769 at contact 0.048 / follow 0.9455 -> 18.61. 4 active, 2 passive pins, 0 passive translations.",
  "limiter": "1:1 fold-for-contact exchange in the K-open (stretched) states on the 360-pose envelope: skinnormal 74 fold / 8 contact (reach 0.742) -> stopb80 59 / 19 (0.761) -> k33 55 / 19 (0.769) -> k56 50 / 24 (0.767), net flat at ~18.6; the stretched wall sits at th = a1max + a2 - 5.5; the folded state takes 0 poses (folded wall |a1 - a2| + smlo is untouched by K); overhead 6-8/28 for every config.",
@@ -298,5 +298,44 @@
   "gain_last_third": 0.0,
   "top5_spread": 0.16,
   "passed": true
+ },
+ "audit": {
+  "t": "2026-10-17T06:05:00Z",
+  "refuted": false,
+  "bench": "Bench(110,360) exact, frozen repaired skinnormal seed (fit Bench(60,160) fast, priced, CB_FOLD_MARGIN 5.5), tools/env_polish.py claim fit60 bench",
+  "v_gap": 18.58,
+  "v_score": 93.24,
+  "near_touch_1mm": 20.2,
+  "min_metal_mm": 0.002,
+  "states_taken": {
+   "A": 251,
+   "stretched": 126,
+   "folded": 0
+  },
+  "reproduced": "exactly (18.58 / near1 20.20 / reach 0.7417 / follow 1.0 / ib14 0.8933 / ib10 0.5699 / contact 0.0208)",
+  "controls": {
+   "pick1_4R_same_harness_cited": {
+    "gap": 18.4,
+    "near1": 23.36,
+    "held": 22.69
+   },
+   "lead_3R_roller_longdyad_cited": {
+    "gap": 18.67,
+    "near1": 20.3,
+    "held": 23.73,
+    "cx": 24.25
+   },
+   "champion_3R_fast": 68.93
+  },
+  "gate": {
+   "n": 123,
+   "gain_second_half": 0.0,
+   "gain_last_third": 0.0,
+   "top5_spread_score": 0.16,
+   "verdict": "converged on fast; fast does not rank frozen (7 frozen claims 18.58-21.05), the 5 lowest-contact frozen picks sit within 0.57"
+  },
+  "fold_probe": "docs/concepts/verify/skinnormal-shortk-knuckle-4r/audit_kwin.py: with J2 locked on its folded stop, the smallest J1-J3 angle K reaches with every kit margin >= 5.5 is |bk1 - cK| + 5.5 (cK = arc K->J3 through the locked J2), 32.8 deg for the seed vs th_lo 29.7, either turning direction - the forced sub-chain J1-K-J3 sits at its own fold. It falls below th_lo only for long bk2 (bk1 29.65 / bk2 56: 23.1 deg), the same direction that swings K metal into the skin (k56 contact 0.059). Geometry, not a bug.",
+  "reason": "Death stands: reproduced at 18.58 frozen (score 93.24), level with pick1 (18.40) and the 3-joint lead (18.67) within 0.3 but with a 4th active joint (cx 32.5 vs 24.25); every reach pose K wins in the stretched state costs about one contact pose, and the folded wall is the K sub-chain's own fold.",
+  "file": "docs/concepts/verify/skinnormal-shortk-knuckle-4r/audit_skinnormal_r_fit60_bench.json"
  }
 }

@@ -197,3 +197,44 @@ Not run inside the time box (the CPU farm batch was refused by the permission po
 independent verifier docs/concepts/verify/minarc-final-polish-verify.py (contact-aware continuity, knee window) and the
 per-part held-out contact attribution (minarc-pick1-redteam.py attr); the R17 hold with the thorax tilted; the
 workspace in-band at elev 90-140.
+
+## Audit (2026-10-17 ~06:05 UTC, independent re-measure): the death STANDS
+
+The design is level with pick1 and with the 3-joint lead, and far ahead of the 3R champion (68.93). It gets there only by
+adding a 4th active joint, so it is not a lead.
+
+- **Convergence gate** (re-computed from the sweep file, 123 configurations in order, Bench(60,160) fast): the best
+  gained 0.00 score points over the second half and 0.00 over the last third; the top-5 spread is 0.16. It has converged on
+  the fast objective. The agent's caveat holds: fast does not rank this class. The 7 frozen claims run 18.58-21.05 and the
+  order is scrambled. The 5 lowest-contact frozen picks sit within 0.57 of each other (18.58-19.15).
+- **Ranges**: a1 35-42, a2 56-61, bk1 28-37.7, bk2 37.4-56, dK_B 56-82, smhi 7-16, smlo 5.1-8.9, az1 94-106,
+  el1 65-69. The box is tight around the lead's seats by design, because the lens moves only the knuckle. The fast-best
+  k33 sits on dK_B 82 (the upper bound), but the frozen claims at longer K opening (stopb80, k56) only trade fold for
+  contact. The only missed direction is long bk2; the fold probe below covers it.
+- **Modelling check (fold probe, `verify/skinnormal-shortk-knuckle-4r/audit_kwin.py`, kinematic only)**: the claim that
+  the folded state takes 0 poses is correct, and the reason is exact. With J2 locked on its folded q2 stop, the forced
+  sub-chain J1-K-J3 sits at its own fold. The smallest J1-J3 angle K can reach with every kit margin >= 5.5 is
+  |bk1 - cK| + 5.5, where cK is the arc from K to J3 through the locked J2. For the seed that is 32.8 deg against
+  th_lo 29.7, turning either way, so a two-way spring cannot help. It falls below th_lo only for long bk2 (bk1 29.65 /
+  bk2 56: 23.1 deg; stretched one-way 123.5). That is the same direction that swings the K metal into the skin
+  (k56: contact 0.059, near1 26.76). This is geometry, not a bug. No convention error was found either: the model
+  imports pick1's verified kitrule harness unchanged, and the stop-B repair (a1max <= bk1 + bk2 - 5.5) is the verifier's
+  own rule.
+- **Re-measured** (claim harness `tools/env_polish.py claim fit60 bench`, CB_EXACT=1, CB_FOLD_MARGIN 5.5, local, one
+  process; log `verify/skinnormal-shortk-knuckle-4r/audit_skinnormal_r_fit60_bench.json`):
+
+| config | frozen gap (score) | near-touch 1 mm | reach | follow | ib14 | ib10 | contact | min metal | active / cx |
+|---|---|---|---|---|---|---|---|---|---|
+| skinnormal (repaired), audit | **18.58** (93.24) | 20.20 | 0.742 | 1.000 | 0.893 | 0.570 | 0.021 | 0.002 mm | 4 / 32.5 |
+| skinnormal (repaired), agent | 18.58 | 20.20 | 0.742 | 1.000 | 0.893 | 0.570 | 0.021 | 0.002 mm | 4 / 32.5 |
+| pick1 (same harness, cited, not re-run) | 18.40 | 23.36 | 0.750 | - | - | - | - | - | 4 / - |
+| 3-joint lead roller-longdyad (cited) | 18.67 | 20.30 | 0.725 | 1.000 | 0.894 | 0.513 | 0.005 | 0.07 mm | 3 / 24.25 |
+
+States taken: A 251, stretched 126, folded 0. Islands 0, minimum own-state th margin 5.90. Held out (agent's, not re-run):
+22.43 (pick1 22.69, lead 23.73).
+
+Measured reason in one line: reproduced at 18.58 frozen, level within 0.3 with pick1 (18.40) and the 3-joint lead
+(18.67) but at 4 active joints. Every stretched pose K wins costs about one contact pose, and the folded wall is the
+K sub-chain's own fold |bk1 - cK| + 5.5, so a 4th joint buys nothing here. Next, if anyone reopens the folded wall:
+the probe says K must sit where cK ~ bk1 at the folded stop without a long bk2. That is
+a different morphology and is not measured here.
