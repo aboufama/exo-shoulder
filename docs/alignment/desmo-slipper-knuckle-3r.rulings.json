@@ -1,0 +1,47 @@
+[
+ {
+  "key": "reporting",
+  "refuted": false,
+  "evidence": "Upheld. docs/dashboard/data/morphs.json desmo row: status verified, v_gap 18.95, sweep_gap 12.79; 18.95 - 12.79 = 6.16 > 5, the documented trigger (tools/alignment_audit.py c_reporting: sg < vg - 5). The sweep best is docs/concepts/sweeps/desmo-slipper-knuckle-3r.json k 128 (gap 12.79, a_s 9.2141, psi 152.944, slop_free_deg 0.22 sparse). Ranking reads v_gap, so it is a label, as a watch reports."
+ },
+ {
+  "key": "judgement:NEW-friction-cliff",
+  "refuted": false,
+  "evidence": "Measurement reproduced with the model unchanged (check mode, fast Bench(60,160), row best_params + a_s 9.5 / psi 150, only mu changed; docs/alignment/remeasure/desmo-slipper-knuckle-3r_skeptic_mu_blend.json rerun_mu): mu 0.135 dK_lim 44.5 (pressure_horn), plain 14.84, pa_cap_max 35.25 vs gate 35.31; mu 0.14 dK_lim 0.0 (s1-pa-cap), plain 86.71, reach 0.3438, follow 0.65, gate 35.03. Lead reference docs/alignment/remeasure/slipper-nose-knuckle-3r_bench_r125_mu15.json: mu 0.15 fit_fast 14.88 (frozen 19.05). Gate 43 - atan(mu) is the model's own (desmo .py line 135). Not refuted, but the cliff's LOCATION is a reading artifact and the real exposure is wider: my probe (tools/alignment_skeptic_blend_pa.py, same file blend_probe) evaluates the same two angles on the BLENDED onset groove the model builds: the cap-side angle is 89.19 at K 0.003 and stays above the claim-mu gate 38.03 up to K 8.11 (above 35.03 to K 8.58), while the 35.25 the gate reads sits at the linear law's K 0 corner the built groove does not have; the pin-side (forward-drive) angle peaks 30.94, under 43 - atan(mu) to mu 0.214 (0.25 on the judge's 45 rule). So either the cap-side gate does not govern at a dwell exit (then the mu 0.136 cliff is an artifact and the forward drive holds to ~0.21) or the built groove fails its own gate at the claim's mu 0.087 as well. Either way no one has shown the dwell exit transmits under friction; the watch stands until a force analysis with friction (both load paths) through the blend is on file. See missed[0]."
+ },
+ {
+  "key": "judgement:NEW-silent-check",
+  "refuted": false,
+  "evidence": "Upheld from the code and a re-run. docs/concepts/models/desmo-slipper-knuckle-3r.py: RC_MIN 1.5 (line 71), the docstring says the radius gate cuts dK_lim, but the cut list 'gates' in _desmo_build holds only s1-pitch, s1-pa-pin, s1-pa-cap, s1-drift; 'radius' (rcK < RC_MIN) appears only in lim_by_gate (report). My re-run at the verified placement (mu 0.135): stage1.rc_onset 0.99, rc_min 0.99, lim_by_gate.radius 0.5 deg, dK_lim 44.5 (skeptic_mu_blend.json rerun_mu.0.135). Ridge radius 0.99 - 1.52/2 = 0.23 mm (GROOVE_W 1.52, line 67). blend 10.0 is the _clamp upper bound (_c(blend, 0.0, 10.0)). No wear / contact-stress number on file."
+ },
+ {
+  "key": "judgement:NEW-refuted-best-params",
+  "refuted": false,
+  "evidence": "Upheld. docs/concepts/rows/desmo-slipper-knuckle-3r.json best_params a_s 9.25 / psi 154 with gap 13.19 and verdict 'paired TIE with the lead ... 18.63'; verification.verified_config a_s 9.5 / psi 150 ('re-placed ... so the claim's OWN 0.25-deg crank-free slop gate holds'); verification.dense_slop_scan.claim_config worst 0.273 deg at K 42, 10 points over 0.25, centreline radius 0.37 mm. The per-pose dumps that carry v_gap 18.95 (remeasure/desmo-slipper-knuckle-3r_bench_perpose.json params a_s 9.5 / psi 150) confirm the verified number belongs to the other placement."
+ },
+ {
+  "key": "judgement:R2",
+  "refuted": false,
+  "evidence": "Upheld. morphs.json desmo sweep_gap 12.79 vs the lead's 13.0 (lead skeptic's reading of the same file) while v_gap 18.95 vs 18.49; paired file remeasure/desmo-slipper-knuckle-3r_vs_slipper-nose-knuckle-3r_paired.json bench diff +0.46 (all in-band), held +0.45, p_A_better 0.0. Sweep k 128 (12.79) records no wall_rows; rows fast.dense_wall_sweep_convention states 'the sweep / ES ran with it' and measured -0.31 (12.88 dense vs 13.19 standard). Its placement a_s 9.2141 / psi 152.944 has only the sparse slop_free_deg 0.22 on file; the dense scans on file at 9.25/154 (0.273) and 9.25/150 (0.252) both fail. A label, not a ranking move: watch."
+ },
+ {
+  "key": "judgement:T3",
+  "refuted": false,
+  "evidence": "Missing measurement stands. docs/concepts/verify/desmo-slipper-knuckle-3r_v_held_frozen_fix.json extra.th_margin min 5.006 (lowest ws 135/30/-135, forced), bench _v_bench_frozen_fix.json 5.181; TH fold_min 5.0. The play-offset reading (~0.1 deg of th from 0.36-0.48 deg of K play, verification.watch[2]) is the verifier's estimate; no per-pose fold margin with K offset by its play is on file and I did not measure it (the models carry no slop state)."
+ },
+ {
+  "key": "judgement:M3",
+  "refuted": false,
+  "evidence": "Missing measurement stands. desmo .py l2_check keeps only link-2 points with rr > S.HUB_R + 1.5 (line 363), so the arm / pin inside r 11.5 is never checked against the hub-2 stack; no L1 / L2 CAD of this design exists (no pipeline/full-exo/designs entry, no pipeline JSON names it). The 5 x 4 x 1.5 mm relief pocket is only in rows verification.watch[0]."
+ },
+ {
+  "key": "judgement:T5",
+  "refuted": false,
+  "evidence": "Re-derived from the per-pose dumps with my own sum (depth = -min(min_mm, cmin) over contact poses): remeasure/desmo-slipper-knuckle-3r_bench_perpose.json (params a_s 9.5 / psi 150, frozen 18.95, recomputed 18.94) 2 contacts 9.005 (ws 15/165/-60) + 5.718 (30/165/-60) = 14.72 mm; held _held_perpose.json (23.90 / 23.91) 10 contacts 46.14 mm, deepest 9.055 at (30,165,-45). Reference at the tool's documented DEPTH_REF (tools/alignment_audit.py), same dump harness: sidecar-longdyad-knuckle-3r_bench_perpose_claim.json 4 contacts 6.23 mm. Ratio 2.36 >= TH depth_ratio 2.0 and +8.49 >= depth_floor_mm 5.0: the documented rule fires. Same reading the lead's skeptic upheld (slipper-nose rulings T5 / contact_depth: 14.75 vs 6.23). The wearer cost is real (9 mm into the arm at elev 165) though shared with the lead."
+ },
+ {
+  "key": "judgement:NEW-ws-inband",
+  "refuted": false,
+  "evidence": "Upheld. remeasure/desmo-slipper-knuckle-3r_probe_bench.json (params_override a_s 9.5 / psi 150, exact, model_frozen 19.0): probe.ws_elev90_140 n 85, taken 38, inband14 0.8009, over14 0.1983, d_p95 19.98, d_max 30.8; probe.clip_scored inband14 0.8904. Lead remeasure/slipper-nose-knuckle-3r_probe_bench.json ws_elev90_140 inband14 0.8004, over14 0.1987. Metal 14-31 mm off the raised arm is against the 1 cm goal and unscored."
+ }
+]

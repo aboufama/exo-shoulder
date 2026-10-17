@@ -161,3 +161,56 @@ is the desmo model's own allowance (SKIRT_R = HUB_R + 1.5), not metal on the lea
   verified numbers. Effect on the verified rows today: only this row has verification.verified_config.
 - **P-3:** sweep rows (docs/concepts/sweeps/*.json) record their metal-sampling convention, and the dashboard shows a
   sweep best only with that convention, or re-read at the claim's density.
+
+## Skeptic (2026-10-17 ~17:55 UTC, skeptic:desmo-slipper-knuckle-3r)
+
+Final verdict (tools/alignment_ledger.py skeptic): **WATCH**. 0 of 9 reasons refuted; all upheld with re-derived
+numbers. Rulings: `docs/alignment/desmo-slipper-knuckle-3r.rulings.json`. New raw material:
+`docs/alignment/remeasure/desmo-slipper-knuckle-3r_skeptic_mu_blend.json` (my mu re-runs and the blended-groove
+probe), tool `tools/alignment_skeptic_blend_pa.py` (new file; the model is unchanged, its `_desmo_build` is re-run in
+memory with one read-only block). Local only, niced, OMP_NUM_THREADS=1, at most 2 processes. No farm.
+
+| key | ruling | evidence |
+|---|---|---|
+| reporting | upheld | morphs.json: sweep_gap 12.79, v_gap 18.95. The gap of 6.16 is over the documented trigger (sg < vg - 5). |
+| NEW-friction-cliff | upheld | Re-run with the model unchanged at the verified placement. mu 0.135: dK_lim 44.5, plain 14.84, gate 35.31. mu 0.14: dK_lim 0 (s1-pa-cap), plain 86.71, reach 0.344, follow 0.65. Lead at mu 0.15: fit_fast 14.88. The cliff's location is a reading artifact (see missed[0]), but the exposure is wider than the audit says, not narrower. |
+| NEW-silent-check | upheld | The cut list `gates` in `_desmo_build` holds pitch, pa-pin, pa-cap and drift. `radius` appears only in `lim_by_gate`. Re-run: rc_onset 0.99, lim_by_gate.radius 0.5 deg. Ridge 0.99 - 0.76 = 0.23 mm. blend 10.0 is the `_clamp` bound. |
+| NEW-refuted-best-params | upheld | Row best_params is a_s 9.25 / psi 154 (gap 13.19); verified_config is 9.5 / 150. The per-pose dumps behind 18.95 carry 9.5 / 150. |
+| R2 | upheld | sweep k 128: 12.79 at 9.2141 / 152.944. Only the sparse slop reading (0.22) is on file. The dense-wall convention is -0.31 (row fast.dense_wall_sweep_convention). Paired: +0.46 bench / +0.45 held, p 0.0. |
+| T3 | upheld (missing measurement) | Held th min 5.006, bench 5.181. No per-pose fold margin with K offset by its play is on file; I did not measure one. |
+| M3 | upheld (missing measurement) | l2_check keeps only rr > HUB_R + 1.5. No L1/L2 CAD of this design exists. |
+| T5 | upheld | My own sum over the dumps: bench 9.005 + 5.718 = 14.72 mm; held 10 contacts, 46.14 mm. Against the tool's DEPTH_REF sidecar-longdyad (6.23 mm): x2.36 and +8.49, over both TH limits. The lead's skeptic made the same ruling. |
+| NEW-ws-inband | upheld | probe_bench (9.5 / 150, exact 19.0): ws elev 90-140 in-band 0.8009, over14 0.1983, p95 19.98. Lead: 0.8004 / 0.1987. Clip: 0.8904. |
+
+### Missed (for the next audit; not counted in this verdict)
+
+0. **The stage-1 pressure-angle gate reads a groove the design does not build.**
+   * What the model gates: `paC` and `paF` (`43 - atan(mu)`, per K step) are computed on the linear K law over
+     `kgrid`, K >= 0.
+   * What the model builds and samples: a groove whose onset is blended over 10 deg of q2 (`Kb`, half-width 10.77 deg
+     of K).
+   * Measured on the built groove (verified placement, mu 0.087; `tools/alignment_skeptic_blend_pa.py`):
+     * The cap-side angle is 89.19 deg at K 0.003, 57.1 at K 3.8, 41.8 at K 7.2 and 29.37 at the end of the blend.
+     * It stays above the claim-mu gate of 38.03 from K 0 to 8.11, and above 35.03 to K 8.58.
+     * The 35.25 that the gate trips on sits at the linear law's K 0 corner, which the built groove does not have.
+     * The pin-side (forward-drive) angle peaks at 30.94. That is under `43 - atan(mu)` up to mu 0.214, and up to
+       0.25 on the judge's 45 rule.
+   * Two readings follow, and neither leaves the claim as stated:
+     * (a) The cap-side gate does not govern at a dwell exit, where a dwell locks back-drive by design. Then the audit's
+       mu 0.136 cliff is an artifact, and the forward drive holds to about mu 0.21.
+     * (b) The cap-side gate does govern. Then the built groove fails the model's own gate at the claim's mu 0.087,
+       and the claim's dK_lim of 49.5 exists only because the gate reads the un-blended law. Enforced on the built
+       geometry, the gate would cut dK_lim to about 0 at every mu.
+   * Nobody has shown that the dwell exit transmits under friction on either load path: groove to pin, and horn/arm
+     load through the pin to the cap.
+   * Action: a static force analysis with friction through the blended onset, on both paths. The gate must be read on
+     the built groove (`Kb`), not on the law.
+   * This is the same class as NEW-silent-check: a declared per-step gate that is not applied to the geometry that is
+     sampled and scored.
+
+**Proposal (measurement change, not an input to this verdict):** evaluate every stage-1 gate (pressure angles and
+centreline radius) on the built, blended groove. Measured effect on the one row it touches:
+* Under reading (b), the cap-side gate cuts this row's dK_lim to 0 at every mu. The fast bench reads 86.71 at the
+  verified placement, the same as the mu 0.14 run, where dK_lim is also 0.
+* Under reading (a), the cap-side gate is dropped at the dwell exit and nothing moves.
+* No other verified row has a blended stage-1 groove.
