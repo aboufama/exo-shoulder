@@ -1,0 +1,155 @@
+{
+ "rule": "the full CAD must not lose R1 / R6 / R16 against its own L1 (same judges, same steps: judge_all fast - R1 step 3, R2 6, R6 3, R16 12, R17 full; FEA skipped as the L1)",
+ "L1": "l1_slipper-nose",
+ "full": "user_slipper_nose",
+ "R1": {
+  "L1": 0.8203059124508549,
+  "full": 0.8109500242966065,
+  "L1_status": "FAIL",
+  "full_status": "FAIL",
+  "delta": -0.94
+ },
+ "R1-aim": {
+  "L1": 0.4864932334363774,
+  "full": 0.47431306960132746,
+  "L1_status": "FAIL",
+  "full_status": "FAIL",
+  "delta": -1.22
+ },
+ "R2": {
+  "L1": 24.87,
+  "full": 24.87,
+  "L1_status": "FAIL",
+  "full_status": "FAIL",
+  "delta": 0.0
+ },
+ "R3": {
+  "L1": 1.0,
+  "full": 1.0,
+  "L1_status": "PASS",
+  "full_status": "PASS",
+  "delta": 0.0
+ },
+ "R4": {
+  "L1": 0.7447736340013118,
+  "full": 0.7308386334122786,
+  "L1_status": "FAIL",
+  "full_status": "FAIL",
+  "delta": -1.39
+ },
+ "R6": {
+  "L1": 0.0,
+  "full": 0.0,
+  "L1_status": "PASS",
+  "full_status": "PASS",
+  "delta": 0.0
+ },
+ "R7": {
+  "L1": true,
+  "full": true,
+  "L1_status": "PASS",
+  "full_status": "PASS"
+ },
+ "R8": {
+  "L1": 112.0,
+  "full": 216.2,
+  "L1_status": "PASS",
+  "full_status": "PASS",
+  "delta": 104.2
+ },
+ "R11": {
+  "L1": 0.388,
+  "full": 0.26,
+  "L1_status": "PASS",
+  "full_status": "PASS",
+  "delta": -0.13
+ },
+ "R16": {
+  "L1": 0.6417,
+  "full": 0.6417,
+  "L1_status": "FAIL",
+  "full_status": "FAIL",
+  "delta": 0.0
+ },
+ "R17": {
+  "L1": true,
+  "full": true,
+  "L1_status": "PASS",
+  "full_status": "PASS"
+ },
+ "passing": {
+  "L1": 8,
+  "full": 8
+ },
+ "R1_by_clip_14mm": {
+  "Raise overhead": [
+   74.5,
+   73.1
+  ],
+  "Drink from a cup": [
+   87.1,
+   85.1
+  ],
+  "Comb hair": [
+   90.9,
+   90.3
+  ],
+  "Reach a high shelf": [
+   90.4,
+   90.1
+  ],
+  "Wash opposite shoulder": [
+   60.1,
+   59.3
+  ],
+  "Reach back pocket": [
+   95.8,
+   95.4
+  ],
+  "Wave": [
+   69.7,
+   68.4
+  ],
+  "Walking arm swing": [
+   97.6,
+   97.4
+  ]
+ },
+ "R1aim_by_clip_10mm": {
+  "Raise overhead": [
+   40.5,
+   39.3
+  ],
+  "Drink from a cup": [
+   41.4,
+   39.7
+  ],
+  "Comb hair": [
+   59.1,
+   57.9
+  ],
+  "Reach a high shelf": [
+   63.3,
+   62.4
+  ],
+  "Wash opposite shoulder": [
+   28.9,
+   27.9
+  ],
+  "Reach back pocket": [
+   66.9,
+   65.4
+  ],
+  "Wave": [
+   36.6,
+   35.7
+  ],
+  "Walking arm swing": [
+   63.4,
+   62.0
+  ]
+ },
+ "loses_against_L1": [
+  "R1"
+ ]
+}
