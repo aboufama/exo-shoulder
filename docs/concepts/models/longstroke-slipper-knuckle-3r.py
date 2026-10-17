@@ -203,6 +203,31 @@ def _frozen_model(P, nc, nw):
     return fit, M1, M, B, r
 
 
+def _ang(a, b): return float(np.degrees(np.arccos(np.clip(float(np.dot(a, b)), -1, 1))))
+def _dm(th, a, b): return min(th - abs(a - b), min(a + b, 360 - a - b) - th)
+
+
+def th_margin(M, B):
+    """the lead verifier's own-state fold margin (docs/concepts/verify/roller-longdyad-knuckle-3r.py th_margin, copied
+    verbatim): per taken pose the th distance from the dyad's fold, read on the effective arcs when K is forced"""
+    D = M.D; u1, u2, u3 = D.u; uK = D.uK; a1, a2 = math.degrees(D.a1) if D.a1 < 4 else D.a1, math.degrees(D.a2) if D.a2 < 4 else D.a2
+    taken = [i for i in range(len(B.idx)) if B.res[i] is not None and float(np.min(B.res[i])) >= 0]; rows = []
+    dK = np.asarray(M.dK, float)
+    for i in taken:
+        R1, _ = M.T(1, i); R1b, _ = M.T(7, i); R2, _ = M.T(2, i)
+        jK = R1 @ uK; j2 = R1b @ u2; j3 = R2 @ u3
+        th = _ang(u1, j3); a1e = _ang(u1, j2); a2e = _ang(j2, j3); b1 = _ang(u1, jK); c = _ang(jK, j3)
+        forced = abs(float(dK[i])) > 1e-6
+        m_plain = _dm(th, a1, a2); m_eff = _dm(th, a1e, a2e); m_sub = _dm(th, b1, c)
+        rows.append((min(m_sub, m_eff) if forced else m_plain, forced, m_plain, m_eff, m_sub, i, th))
+    if not rows: return dict(min=None, n=0)
+    own = [r[0] for r in rows]; lo = min(rows)
+    return dict(min=round(min(own), 3), n=len(rows), lt5=int(sum(1 for x in own if x < 5 - 1e-6)),
+                forced=int(sum(r[1] for r in rows)), th_max_taken=round(max(r[6] for r in rows), 2),
+                dK_taken_max=round(float(np.degrees(np.max(np.abs(dK[[r[5] for r in rows]])))), 2),
+                lowest=dict(own=round(lo[0], 3), forced=bool(lo[1]), kind=B.kind[lo[5]], **{k: B.poses[lo[5]][k] for k in ("plane", "elev", "axial")}))
+
+
 def frozen(P, nc=110, nw=360):
     fit, M1, M, B, r = _frozen_model(P, nc, nw)
     rep = {k: r[k] for k in ("gap", "reach", "follow", "inband14", "inband10", "contact")}
@@ -212,12 +237,9 @@ def frozen(P, nc=110, nw=360):
     info = getattr(M1, "_sc_info", None) or {}
     # contact DEPTH (lead's rule 2026-10-17): per contact pose the deepest metal under the skin (mm), summed
     depth = [round(-float(mins[j]), 3) for j in range(len(B.idx)) if np.isfinite(mins[j]) and mins[j] < 0]
-    # fold margin over the taken poses: th's distance from the dyad's two walls (|a1e - a2| + 0 and a1e + a2)
-    D = M.D; thm = None
-    try:
-        a1e = np.asarray(D._a1e, float) if hasattr(D, "_a1e") else None
-    except Exception: a1e = None
-    out = dict(cell=CELL, drive=DRIVE, fit_fast=fit, frozen=rep, mode=B.mode, bench=[nc, nw], why=r.get("why"), parts_pairs=r.get("parts_pairs"),
+    try: thm = th_margin(M, B)
+    except Exception as e: thm = dict(error=repr(e)[:300])
+    out = dict(cell=CELL, drive=DRIVE, fit_fast=fit, frozen=rep, mode=B.mode, bench=[nc, nw], why=r.get("why"), parts_pairs=r.get("parts_pairs"), th_margin=thm,
                parts_ib14=r.get("parts_ib14"), audit=PK.audit(M, B), ws_inband=RL.ws_inband(B), split=RL.contact_split(M, B),
                overhead=dict(ws=int(ov.sum()), taken=int((ov & (mins >= 0)).sum())),
                contact_depth=dict(n=len(depth), sum_mm=round(float(np.sum(depth)), 3), max_mm=round(float(np.max(depth)), 3) if depth else 0.0, per_pose=depth),
@@ -273,7 +295,7 @@ if __name__ == "__main__":
         a = out.get("audit", {})
         print(json.dumps(dict(drive=DRIVE, fit=out.get("fit_fast"), frozen=out["frozen"], why=out.get("why"), near1=a.get("gap_near1"),
                               near2=a.get("gap_near2"), minmetal=a.get("near_touch_min_mm"), ovh=out.get("overhead"), cam=out.get("cam"),
-                              depth={k: v for k, v in (out.get("contact_depth") or {}).items() if k != "per_pose"},
+                              depth={k: v for k, v in (out.get("contact_depth") or {}).items() if k != "per_pose"}, th_margin=out.get("th_margin"),
                               connected=out.get("connected"), secs=out["secs"]), default=float)); sys.exit()
     B = CB.Bench(n_clip=60, n_ws=160); t = time.time()
     r, M = _report(B, par)
