@@ -4,20 +4,20 @@
   "title": "Concept bench morphologies",
   "description": "One row per morphology in the swarm's catalogue: status, the agent's claimed bench numbers, the verifier's re-measured numbers (v_), its best sweep configuration so far, and the 3R baseline once (is_baseline), and the complexity count (the simplicity number, never part of the gap or score): complexity = points, lower = simpler, 0 = three pins on bearing pairs and three links; complexity_items = where the points come from; passive_trans = passive translations (more than 2 = not buildable); mechanism_confidence = counted or estimated. alignment = the alignment auditor's latest verdict (clean / watch / gamed; gamed = the number is not evidence of a better exo, so the design cannot be called verified, a winner or a leader; empty = never audited), alignment_stage = audit (skeptic pending) or skeptic (final), alignment_reasons = the reasons at that level, alignment_t = when, alignment_claim = the number it audited, alignment_stale = the row's claim moved since (a re-audit is due); from docs/alignment/ledger.jsonl (tools/alignment_ledger.py, docs/ALIGNMENT.md). Built from docs/concepts/catalogue.json, families.json, rows/*.json (complexity: tools/simplicity.py on each row's mechanism record, docs/SIMPLICITY.md) and sweeps/*.json.",
   "file": "data/morphs.json",
-  "sha256": "05e177470e674211e6d8735d9721e1a4dac3658db7962f9370b18e5474e79a57",
+  "sha256": "36d84c3bf5049fc0ea2a33d23319140dca02094a09689d47a472f0da746ed26a",
   "rows": 124,
-  "bytes": 275260,
-  "updated": "2026-10-17T05:29:25Z"
+  "bytes": 277078,
+  "updated": "2026-10-17T05:42:29Z"
  },
  {
   "id": "sweeps",
   "title": "Concept bench sweeps",
   "description": "Every configuration a morphology agent evaluated on the concept bench, with its time, gap, its morphology's best gap so far (best_gap) and the record over all morphologies so far (record_gap); passed_over marks a configuration its agent measured before its claimed row and rejected (better than the claim), which counts for no best. Built from docs/concepts/sweeps/*.json; a morphology with more than 1500 configurations is thinned for the page (every running-best and record row, its 300 best gaps and an even sample of the rest), while best_gap, record_gap and n_configs come from the full set.",
   "file": "data/sweeps.json",
-  "sha256": "0433e1b1428023b3625d821b76a21bb0cce4bfd3a45b4e3771bca776d382c365",
-  "rows": 25087,
-  "bytes": 6350488,
-  "updated": "2026-10-17T05:29:25Z"
+  "sha256": "a06777e614dbaf91afaed1a44883ae1eb9c816b6090335d4bd81d8715f21a390",
+  "rows": 25297,
+  "bytes": 6401827,
+  "updated": "2026-10-17T05:42:29Z"
  },
  {
   "id": "cad",
@@ -64,10 +64,10 @@
   "title": "Event log",
   "description": "What happened and when: the swarm's own log (docs/concepts/events.jsonl), one milestone per judged design and every new built-CAD R1 record (from the judge outputs).",
   "file": "data/events.json",
-  "sha256": "7c05faa4a1cf9cb362dd672b10cb03505448073d3735528dd9f6d340b1b650c9",
-  "rows": 604,
-  "bytes": 229970,
-  "updated": "2026-10-17T05:29:25Z"
+  "sha256": "9e965e7d3382823d64c3c1fc6a6e156f6567ee28815ecb4c596dda7e13abde21",
+  "rows": 605,
+  "bytes": 230405,
+  "updated": "2026-10-17T05:42:29Z"
  },
  {
   "id": "spend",
@@ -104,9 +104,9 @@
   "title": "Data build info",
   "description": "When tools/dash_build.py last gathered the data, the repo commit, and any warnings it printed.",
   "file": "data/meta.json",
-  "sha256": "ef59760914c4a15ee10df8d7489483850cab1ee0eb581029059676a40d4a142c",
+  "sha256": "98bd71bd63d7dd72754db342aa59ce859ba639a5c8f0b3533702843fa029df80",
   "rows": 1,
   "bytes": 2089,
-  "updated": "2026-10-17T05:29:25Z"
+  "updated": "2026-10-17T05:42:29Z"
  }
 ]
