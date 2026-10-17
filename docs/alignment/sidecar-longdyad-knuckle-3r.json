@@ -52,10 +52,7 @@
   {
    "check": "dominance",
    "level": "ok",
-   "reason": "vs frontload-lobe-stopb-knuckle-3r: plain +3.81, 2 mm +9.95",
-   "ref": "frontload-lobe-stopb-knuckle-3r",
-   "gain_plain": 3.81,
-   "gain_2mm": 9.95
+   "reason": "no reference"
   },
   {
    "check": "continuity",
@@ -76,20 +73,8 @@
   {
    "check": "idle",
    "level": "ok",
-   "reason": "declared drive moves: smallest recorded span 31.6 (docs/concepts/verify/sidecar-longdyad-knuckle-3r_v_held_frozen.json:sidecar.phi_max_taken)",
+   "reason": "declared drive moves: smallest recorded span 31.6 (docs/concepts/verify/sidecar-longdyad-knuckle-3r_v_bench_frozen.json:sidecar.phi_max_taken)",
    "spans": [
-    [
-     "docs/concepts/verify/sidecar-longdyad-knuckle-3r_v_held_frozen.json:fit_fast.extra.dK_taken_max_deg",
-     38.13
-    ],
-    [
-     "docs/concepts/verify/sidecar-longdyad-knuckle-3r_v_held_frozen.json:extra.dK_taken_max_deg",
-     38.47
-    ],
-    [
-     "docs/concepts/verify/sidecar-longdyad-knuckle-3r_v_held_frozen.json:sidecar.phi_max_taken",
-     31.6
-    ],
     [
      "docs/concepts/verify/sidecar-longdyad-knuckle-3r_v_bench_frozen.json:fit_fast.extra.dK_taken_max_deg",
      38.13
@@ -100,6 +85,18 @@
     ],
     [
      "docs/concepts/verify/sidecar-longdyad-knuckle-3r_v_bench_frozen.json:sidecar.phi_max_taken",
+     31.6
+    ],
+    [
+     "docs/concepts/verify/sidecar-longdyad-knuckle-3r_v_held_frozen.json:fit_fast.extra.dK_taken_max_deg",
+     38.13
+    ],
+    [
+     "docs/concepts/verify/sidecar-longdyad-knuckle-3r_v_held_frozen.json:extra.dK_taken_max_deg",
+     38.47
+    ],
+    [
+     "docs/concepts/verify/sidecar-longdyad-knuckle-3r_v_held_frozen.json:sidecar.phi_max_taken",
      31.6
     ],
     [
@@ -222,9 +219,9 @@
   "held": true
  },
  "verifier_files": [
-  "docs/concepts/verify/sidecar-longdyad-knuckle-3r_v_held_frozen.json",
-  "docs/concepts/verify/sidecar-longdyad-knuckle-3r_v_bench_frozen.json"
+  "docs/concepts/verify/sidecar-longdyad-knuckle-3r_v_bench_frozen.json",
+  "docs/concepts/verify/sidecar-longdyad-knuckle-3r_v_held_frozen.json"
  ],
- "git": "5bc1adf",
- "t": "2026-10-16T22:51:30Z"
+ "git": "ebfd87c",
+ "t": "2026-10-17T01:51:54Z"
 }

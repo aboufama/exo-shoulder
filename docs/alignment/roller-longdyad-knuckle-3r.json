@@ -1,24 +1,29 @@
 {
  "id": "roller-longdyad-knuckle-3r",
- "status": "screened",
- "v_gap": null,
+ "status": "verified",
+ "v_gap": 18.67,
  "complexity": 43.75,
  "verdict": "watch",
  "reasons": [
-  "held_out: no verified bench gap on the row",
-  "continuity: passive / sprung / sensed coordinates but no continuity flood on file (rule 2026-10-16)",
   "fold_margin: no min-th margin over taken poses on file (rule: each claim reports it)"
  ],
  "checks": [
   {
    "check": "held_out",
-   "level": "watch",
-   "reason": "no verified bench gap on the row"
+   "level": "ok",
+   "reason": "held out 23.73 vs bench 18.67 (+5.06; re-measured (this audit))",
+   "held_gap": 23.73,
+   "v_gap": 18.67,
+   "drop": 5.06,
+   "source": "re-measured (this audit)"
   },
   {
    "check": "fast_frozen",
    "level": "ok",
-   "reason": "no pair"
+   "reason": "self/fast 13.19 -> verified 18.67 (+5.48)",
+   "fast": 13.19,
+   "verified": 18.67,
+   "drop": 5.48
   },
   {
    "check": "near_touch",
@@ -53,8 +58,12 @@
   },
   {
    "check": "continuity",
-   "level": "watch",
-   "reason": "passive / sprung / sensed coordinates but no continuity flood on file (rule 2026-10-16)"
+   "level": "ok",
+   "reason": "static 18.67, connected full 18.67, knn 20.34, bench 50.29 (docs/concepts/verify/roller-longdyad-knuckle-3r_v_bench_frozen.json)",
+   "static": 18.67,
+   "connected_full": 18.67,
+   "connected_knn": 20.34,
+   "connected_bench": 50.29
   },
   {
    "check": "fold_margin",
@@ -64,22 +73,46 @@
   {
    "check": "idle",
    "level": "ok",
-   "reason": "declared drive moves: smallest recorded span 45.61 (re-measured dK span)",
+   "reason": "declared drive moves: smallest recorded span 18.7 (docs/concepts/verify/roller-longdyad-knuckle-3r_v_held_frozen.json:sidecar.phi_max_taken)",
    "spans": [
     [
-     "re-measured dK span",
-     45.61
+     "row:verification.drive.dK_taken_max",
+     45.62
     ],
     [
-     "re-measured K.ang span",
-     65.71
+     "docs/concepts/verify/roller-longdyad-knuckle-3r_v_held_frozen.json:fit_fast.extra.dK_taken_max_deg",
+     46.25
+    ],
+    [
+     "docs/concepts/verify/roller-longdyad-knuckle-3r_v_held_frozen.json:extra.dK_taken_max_deg",
+     46.17
+    ],
+    [
+     "docs/concepts/verify/roller-longdyad-knuckle-3r_v_held_frozen.json:sidecar.phi_max_taken",
+     18.7
+    ],
+    [
+     "docs/concepts/verify/roller-longdyad-knuckle-3r_v_bench_frozen_env.json:fit_fast.extra.dK_taken_max_deg",
+     46.25
+    ],
+    [
+     "docs/concepts/verify/roller-longdyad-knuckle-3r_v_bench_frozen_env.json:extra.dK_taken_max_deg",
+     45.62
+    ],
+    [
+     "docs/concepts/verify/roller-longdyad-knuckle-3r_v_bench_frozen_env.json:sidecar.phi_max_taken",
+     18.7
+    ],
+    [
+     "docs/concepts/verify/roller-longdyad-knuckle-3r_v_bench_frozen.json:fit_fast.extra.dK_taken_max_deg",
+     46.25
     ]
    ]
   },
   {
    "check": "sampling",
    "level": "ok",
-   "reason": "sample-weighted in-band 0.894 vs part-weighted 0.923 (-2.87 points); thinly sampled parts: L1a 8 (re-measured)",
+   "reason": "sample-weighted in-band 0.894 vs part-weighted 0.922 (-2.87 points); thinly sampled parts: L1a 8 (re-measured)",
    "parts": {
     "hub1": [
      0.999,
@@ -168,7 +201,7 @@
   {
    "check": "judge_change",
    "level": "ok",
-   "reason": "no bench / judge / metric file changed in the 2 commits that touched the row"
+   "reason": "no bench / judge / metric file changed in the 3 commits that touched the row"
   },
   {
    "check": "rules",
@@ -180,7 +213,11 @@
   "bench": true,
   "held": true
  },
- "verifier_files": [],
- "git": "67e8480",
- "t": "2026-10-16T22:53:06Z"
+ "verifier_files": [
+  "docs/concepts/verify/roller-longdyad-knuckle-3r_v_held_frozen.json",
+  "docs/concepts/verify/roller-longdyad-knuckle-3r_v_bench_frozen_env.json",
+  "docs/concepts/verify/roller-longdyad-knuckle-3r_v_bench_frozen.json"
+ ],
+ "git": "b3a24be",
+ "t": "2026-10-17T01:42:57Z"
 }
