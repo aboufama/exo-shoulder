@@ -120,7 +120,7 @@ combined convergence gate passes (cma1 4566 evaluations 0.00 / 0.00 / 0.32; cma2
 | | **p (s65n2d) = THE PICK** | **radial** | 2 mm | **16.47** | **12.79** | **26 / 38 / 59** | **1.79** | ties slipper-nose's 16.47 (plain 13.00) on the same objective |
 | cma1 / cma2 (law floor 2.7, stroke >= 55; leaky seed) | f | axial | 2 mm | **16.35** | 11.71 | 26 / 38 / 59 | 2.70 | the secondary |
 | | g / j | radial | 2 mm | 16.62 / 16.70 | 12.07 / 13.23 | 26 / 38.2 / 59.2 | 3.17 / 2.70 | |
-| | a / d (k30 / k27b seeds) | axial | 2 mm | 18.60 / 18.45 | 13.86 / 14.76 | 26-? / 38-? | 2.7-3.1 | the steep-law long dyad loses on the fit objective |
+| | a / d (k30 / k27b long-dyad seeds) | axial | 2 mm | 18.60 / 18.45 | 13.86 / 14.76 | 26 / 38 / 59, 26 / 39.9 / 59.3 | 2.70 / 3.12 | seeded on the long dyad, both walk back to 26 / 38-40; the steep law costs ~2 points on the fit objective |
 
 Every run, leak-free or not, walks the K dyad back to the parents' 26 / 38 clamp. With the drive's metal now nearly free,
 the fit bench still does not want the long dyad: the long-dyad lever is not a metal problem.
@@ -161,7 +161,7 @@ the fit bench still does not want the long dyad: the long-dyad lever is not a me
 | **Knife edge** (+-1 deg beta / gam / eta, +-0.25 mm La / r_h / s_arm / hl / zc / r_lobe, 16 corners; `out/tol_p.jsonl`) | the pick parks the horn ball 0.25 mm from a 1 mm part pair: r_h -0.25 and its 9 corners lose every pose; eta -1 costs +7.1 (the pivot leaves link 1b's low strap for the higher hub-2 eye). **The robust build (r_h +0.25, eta +1) passes all 34 neighbours** (2 mm 16.47-17.64, plain 12.50-13.05; `out/tol_rob.jsonl`) and measures 18.83 / 23.16. |
 | **Held out survives** | +4.34 bench -> held (reference +4.96); the held-out edge over slipper-nose is -0.24 with a CI crossing 0. |
 | **The optimistic number** | the ghost's 18.25 / 21.11: with leak-free selection the same family measures 18.87 / 23.21 with metal and 18.58 frozen without the drive's metal. |
-| **Point that pinches** | bench pose 237 (elev 165, plane 15, axial -60): hub K + horn + rod press 9.7 mm (slipper-nose has the same pose at 9.0); held 9 contact poses, deepest 8.7 mm, half slipper-nose's summed depth. |
+| **Point that pinches** | bench pose 237 (elev 165, plane 15, axial -60): hub K + horn + rod press 9.7 mm (slipper-nose loses the same pose at 9.0 mm and pose 264 at 5.7 mm, where this row touches 0.09 mm); held 9 contact poses, deepest 8.7 mm, half slipper-nose's summed depth. |
 
 `python3 tools/alignment_audit.py audit inband-rssr-knuckle-3r --ref slipper-nose-knuckle-3r`: **WATCH, 0 gamed** (only
 "held_out: no verified bench gap on the row" - it is not verified yet); near-touch ok (plain 18.87, 1 mm 19.96, 2 mm
