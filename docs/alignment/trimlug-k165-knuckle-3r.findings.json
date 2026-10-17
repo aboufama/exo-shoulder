@@ -2,13 +2,13 @@
  {
   "key": "S1",
   "level": "watch",
-  "reason": "HELD_S1_PLACEHOLDER",
+  "reason": "New, and it applies to the whole slipper family (the lead slipper-nose too): the bench order against sidecar-longdyad-knuckle-3r flips held out, and the bench lead is bought by the depth-blind contact count. Paired per pose on the claim dumps of both (tools/alignment_paired.compare_sets, 4000 bootstrap resamples within kind): bench trimlug - sidecar = -0.40 (trimlug ahead), split reach 0.00 / in-band +0.13 / contact -0.53 (2 contact poses vs 4), 90 % interval [-2.74, +1.67], P(trimlug better) 0.64; held out +0.81 (behind), split reach +0.74 (21 poses taken by trimlug only, 28 by sidecar only) / in-band +0.07 / contact +0.01, interval [-0.68, +2.16], P 0.19; pooled bench + held +0.47 (behind), interval [-0.77, +1.62], P 0.27. So the leaderboard ranks trimlug (18.51) and its parent (18.49) above sidecar-longdyad (18.91) on a bench gap whose whole margin is two fewer contact poses, while those two contacts are deep (13.19 mm summed against sidecar's 6.23 over 4) and the order reverses out of sample (23.47 vs 22.67 held; 1 mm 26.56 vs 25.75). Not gamed: neither interval excludes 0, and sidecar-longdyad is not better for the wearer on every count (2 mm near-touch 34.03 vs 33.02 bench and 37.24 vs 36.97 held favour trimlug; bench contact poses 4 vs 2). The rank between the two is a coin flip that the pooled data tilt toward sidecar-longdyad (P 0.73).",
   "evidence": "docs/alignment/remeasure/trimlug-k165-knuckle-3r_vs_sidecar-longdyad-knuckle-3r_paired_claim.json (paired bootstrap, claim dumps on both sides); docs/alignment/remeasure/trimlug-k165-knuckle-3r_bench_perpose.json, _held_perpose.json (this audit, frozen 18.51 / held reproduced); docs/alignment/remeasure/sidecar-longdyad-knuckle-3r_bench_perpose_claim.json / _held_perpose_claim.json; docs/concepts/rows/sidecar-longdyad-knuckle-3r.json held_out (22.67, near1 25.75, near2 37.24); docs/concepts/rows/trimlug-k165-knuckle-3r.json held_out (23.47, near1 26.56, near2 36.97)."
  },
  {
   "key": "T5",
   "level": "watch",
-  "reason": "T5_PLACEHOLDER",
+  "reason": "Depth-blind contact, carried from the lead family and IMPROVED by this design (the score does not see the improvement and charges +0.02 for it). Per-pose dumps of this audit's re-wear: bench 2 contact poses, 237 (15, 165, -60) 9.01 mm (crank; the trimmed lug is also 8.35 mm in), 264 (30, 165, -60) 4.18 mm (lug top; the lead 5.74), sum 13.19 mm against the lead's 14.75; held out 10 contacts (the lead's same 10 poses), sum 40.58 mm against 46.12 (sparse lead dump; 46.35 dense, the verifier's like-for-like), deepest 9.05 mm at (30, 165, -45), 7 deeper than 3 mm. Four held contacts get shallower by the trim (15,150,-60 7.07 -> 6.13; 60,165,-30 6.87 -> 5.15; 45,165,-45 5.80 -> 4.18; 30,150,-45 5.33 -> 4.07), not five as the row says. Against sidecar-longdyad-knuckle-3r, which it outranks (18.51 vs 18.91), it presses 13.19 vs 6.23 mm on the bench (x2.12, +6.96 mm, past the tool's own T5 margin of 2x and 5 mm) and 40.58 vs 35.66 held (x1.14); the bench rank over it comes entirely from the contact count (-0.53, see S1). Mixed for the wearer (sidecar-longdyad is worse at 2 mm), so watch; T5 never gives gamed (user 2026-10-17).",
   "evidence": "docs/alignment/remeasure/trimlug-k165-knuckle-3r_bench_perpose.json and _held_perpose.json (this audit); docs/alignment/remeasure/slipper-nose-knuckle-3r_bench_perpose.json / _held_perpose.json; docs/alignment/remeasure/sidecar-longdyad-knuckle-3r_*_perpose_claim.json; docs/alignment/remeasure/trimlug-k165-knuckle-3r_vs_*_paired_claim.json (depth blocks); docs/concepts/trimlug-k165-knuckle-3r.md two-pose table."
  },
  {
@@ -26,7 +26,7 @@
  {
   "key": "NEW-ws-inband",
   "level": "watch",
-  "reason": "WS_PLACEHOLDER",
+  "reason": "Carried unchanged from the lead (upheld by the lead's skeptic): the gap reads in-band on clip frames only. On the taken WORKSPACE poses at elevation 90-140 (38 of 85 bench, 96 of 229 held) this design holds 0.8002 of its metal in 2-14 mm and 0.1988 above 14 mm (p95 20.16 mm, max 30.8 mm) on the bench, 0.8218 / 0.1762 held out; the lead reads 0.8004 / 0.1987 and 0.8218 / 0.1762, sidecar-longdyad 0.841 / 0.157 on the bench. It ranks above sidecar-longdyad while its raised-arm metal stands further off the skin; the trim changes nothing here (-0.0002). Mixed for the wearer (fewer poses under 3 mm than sidecar-longdyad on the lead's audit), so watch.",
   "evidence": "docs/alignment/remeasure/trimlug-k165-knuckle-3r_probe_bench.json probe.ws_elev90_140 / ws_unscored / ws_overhead140 and _probe_held.json (this audit); docs/alignment/remeasure/slipper-nose-knuckle-3r_probe_bench.json; docs/alignment/slipper-nose-knuckle-3r.findings.json NEW-ws-inband (upheld)."
  },
  {

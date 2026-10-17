@@ -51,5 +51,80 @@
    "slipper-nose-knuckle-3r_bench_perpose.json"
   ]
  },
- "held": "missing dump"
+ "held": {
+  "gap_A": 23.48,
+  "gap_B": 23.45,
+  "diff": 0.02,
+  "split": {
+   "reach": 0.0,
+   "follow": 0.0,
+   "inband": 0.02,
+   "contact": 0.0
+  },
+  "discordant": {
+   "ws_taken_A_only": 0,
+   "ws_taken_B_only": 0,
+   "contact_A_only": 0,
+   "contact_B_only": 0,
+   "contact_both": 10
+  },
+  "boot": {
+   "n": 4000,
+   "ci90": [
+    0.0,
+    0.03
+   ],
+   "sd": 0.01,
+   "p_A_better": 0.0
+  },
+  "model_frozen": {
+   "A": 23.47,
+   "B": 23.45
+  },
+  "depth": {
+   "A": {
+    "n": 10,
+    "sum_mm": 40.58,
+    "max_mm": 9.05,
+    "gt3": 7
+   },
+   "B": {
+    "n": 10,
+    "sum_mm": 46.12,
+    "max_mm": 9.05,
+    "gt3": 7
+   }
+  },
+  "files": [
+   "trimlug-k165-knuckle-3r_held_perpose.json",
+   "slipper-nose-knuckle-3r_held_perpose.json"
+  ]
+ },
+ "pooled_bench_plus_held": {
+  "gap_A": 22.08,
+  "gap_B": 22.06,
+  "diff": 0.02,
+  "split": {
+   "reach": 0.0,
+   "follow": 0.0,
+   "inband": 0.02,
+   "contact": 0.0
+  },
+  "discordant": {
+   "ws_taken_A_only": 0,
+   "ws_taken_B_only": 0,
+   "contact_A_only": 0,
+   "contact_B_only": 0,
+   "contact_both": 12
+  },
+  "boot": {
+   "n": 4000,
+   "ci90": [
+    0.0,
+    0.03
+   ],
+   "sd": 0.01,
+   "p_A_better": 0.0
+  }
+ }
 }

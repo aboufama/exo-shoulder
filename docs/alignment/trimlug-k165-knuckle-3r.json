@@ -13,11 +13,11 @@
   {
    "check": "held_out",
    "level": "ok",
-   "reason": "held out 23.47 vs bench 18.51 (+4.96; row held_out)",
+   "reason": "held out 23.47 vs bench 18.51 (+4.96; re-measured (this audit))",
    "held_gap": 23.47,
    "v_gap": 18.51,
    "drop": 4.96,
-   "source": "row held_out"
+   "source": "re-measured (this audit)"
   },
   {
    "check": "fast_frozen",
@@ -53,7 +53,7 @@
   {
    "check": "contact_depth",
    "level": "ok",
-   "reason": "the score counts contact poses, not depth (report only, score unchanged): v_gap 18.51: bench 2 contact poses, sum 13.19 mm, deepest 9.01 mm at ['ws', 15.0, 165.0, -60.0], 2 deeper than 3 mm vs slipper-nose-knuckle-3r 14.75 mm over 2 (-1.56 mm, x0.89); held depths not on file",
+   "reason": "the score counts contact poses, not depth (report only, score unchanged): v_gap 18.51: bench 2 contact poses, sum 13.19 mm, deepest 9.01 mm at ['ws', 15.0, 165.0, -60.0], 2 deeper than 3 mm vs slipper-nose-knuckle-3r 14.75 mm over 2 (-1.56 mm, x0.89); held 10 contact poses, sum 40.58 mm, deepest 9.05 mm at ['ws', 30.0, 165.0, -45.0], 7 deeper than 3 mm vs slipper-nose-knuckle-3r 46.12 mm over 10 (-5.54 mm, x0.88)",
    "depths": {
     "v_gap 18.51": {
      "bench": {
@@ -78,6 +78,29 @@
        ],
        "agree": true
       }
+     },
+     "held": {
+      "n": 10,
+      "sum_mm": 40.58,
+      "max_mm": 9.05,
+      "n_deeper3": 7,
+      "overhead140": 6,
+      "deepest": [
+       "ws",
+       30.0,
+       165.0,
+       -45.0
+      ],
+      "gap": 23.47,
+      "src": "docs/alignment/remeasure/trimlug-k165-knuckle-3r_held_perpose.json",
+      "cross_check": {
+       "files": 2,
+       "sums": [
+        40.58,
+        40.59
+       ],
+       "agree": true
+      }
      }
     }
    },
@@ -90,6 +113,15 @@
      "ref_sum": 14.75,
      "excess": -1.56,
      "ratio": 0.89,
+     "watch": false
+    },
+    {
+     "claim": "v_gap 18.51",
+     "wear": "held",
+     "sum": 40.58,
+     "ref_sum": 46.12,
+     "excess": -5.54,
+     "ratio": 0.88,
      "watch": false
     }
    ]
@@ -270,7 +302,7 @@
  ],
  "remeasured": {
   "bench": true,
-  "held": false
+  "held": true
  },
  "verifier_files": [
   "docs/concepts/verify/trimlug-k165-knuckle-3r_v_bench_lead.json",
@@ -278,7 +310,7 @@
   "docs/concepts/verify/trimlug-k165-knuckle-3r_v_held_frozen.json",
   "docs/concepts/verify/trimlug-k165-knuckle-3r_v_bench_frozen.json"
  ],
- "git": "4402a08",
+ "git": "a3b0434",
  "tool_version": "2026-10-17.2",
- "t": "2026-10-17T12:56:04Z"
+ "t": "2026-10-17T13:06:14Z"
 }

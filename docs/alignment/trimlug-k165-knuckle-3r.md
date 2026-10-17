@@ -1,6 +1,6 @@
 # Alignment audit: trimlug-k165-knuckle-3r
 
-Auditor run 2026-10-17 12:46-13:20 UTC (discovery round 11, slice r11-B). Ledger entry `by auditor`, run
+Auditor run 2026-10-17 12:46-13:07 UTC (discovery round 11, slice r11-B). Ledger entry 2026-10-17T13:06:57Z, `by auditor`, run
 `audit:trimlug-k165-knuckle-3r`. Checks: `docs/alignment/trimlug-k165-knuckle-3r.json` (tool VERSION 2026-10-17.2,
 `--ref slipper-nose-knuckle-3r`). Findings: `docs/alignment/trimlug-k165-knuckle-3r.findings.json`.
 
@@ -13,10 +13,10 @@ Auditor run 2026-10-17 12:46-13:20 UTC (discovery round 11, slice r11-B). Ledger
   once per bench through the three audit readers; CB_EXACT=1; bench local, held out on the farm):
   - bench 18.51 (reach 0.725 = 261/360, follow 1.0, ib14 0.8953, contact 0.0054 = 2 poses), the claim to the digit
     (`docs/alignment/remeasure/trimlug-k165-knuckle-3r_bench.json`);
-  - held out HELD_GAP_PLACEHOLDER (`..._held.json`);
+  - held out 23.47 (reach 0.6828, 10 contact poses; farm, 744 s, ~$0.07; `..._held.json`), near-touch 26.56 / 36.97 / 79.28;
   - near-touch at 1 / 2 / 3 mm: 20.14 / 33.02 / 83.17 (3 / 30 / 100 taken poses); in-band read as 3-14 mm: 18.66.
 - **Against the lead, pose by pose** (`docs/alignment/remeasure/trimlug-k165-knuckle-3r_vs_slipper-nose-knuckle-3r_paired_claim.json`):
-  - the two take the SAME poses: 0 of 470 bench poses differ in taken or contact (and PAIRED_LEAD_HELD_PLACEHOLDER);
+  - the two take the SAME poses: 0 of 470 bench poses differ in taken or contact (and 0 of 1154 held out; the same 10 held contact poses);
   - the metal floor rises on 60 bench poses (+0.06 to +1.56 mm) and falls on none;
   - the +0.02 gap is all in-band: 3 of the 23 scored lug samples are cut, and they were in band.
 - **Reasons, all watch:** 3 tool checks (`continuity`, `idle`, `reporting`) and 7 judgement findings (S1, T5, M5, G4,
@@ -25,7 +25,7 @@ Auditor run 2026-10-17 12:46-13:20 UTC (discovery round 11, slice r11-B). Ledger
   measured below (`continuity`: the flood is clean; `idle`: the known knee false positive).
 
 What the trim buys is real and the score cannot see it: contact DEPTH. Pose 264 (30, 165, -60) presses 4.18 mm into the
-arm instead of 5.74; the held-out contacts sum HELD_T5_PLACEHOLDER. The score charges the design 0.02 for it, so the
+arm instead of 5.74; the held-out contacts sum 40.58 mm instead of 46.12 (the same 10 poses; 4 of them 0.9-1.7 mm shallower). The score charges the design 0.02 for it, so the
 design sits second, behind its own parent. Nothing here ranks it above a design that is better for the wearer.
 
 ## What the wearer gets (measured, Bench(110,360) exact unless stated)
@@ -40,10 +40,10 @@ design sits second, behind its own parent. Nothing here ranks it above a design 
 | all taken poses with metal < 1 / 2 / 3 mm | 3 / 30 / 100 of 371 | 3 / 30 / 100 | `remeasure/..._bench.json` deep |
 | min metal over taken poses | 0.072 mm | 0.07 | same |
 | contact poses (bench) | 2: 237 (15,165,-60) 9.01 mm (crank; lug 8.35; hub K 2.65), 264 (30,165,-60) 4.18 mm (lug top) | 2: 9.01, 5.74 | `..._bench_perpose.json`, row t5 |
-| contact depth sum, bench / held | 13.19 mm / HELD_T5_PLACEHOLDER | 14.75 / 46.12 | per-pose dumps |
+| contact depth sum, bench / held | 13.19 mm / 40.58 mm (10 poses, deepest 9.05 at (30,165,-45), 7 deeper than 3 mm) | 14.75 / 46.12 | per-pose dumps |
 | workspace in-band, all taken ws (unscored) | 0.8559, 14.2 % of metal above 14 mm | 0.8560 | `ws_unscored` |
 | raised-arm in-band (unscored, elev 90-140) | 0.8002, 19.9 % above 14 mm, p95 20.16 mm, max 30.8 mm | 0.8004 | `ws_elev90_140` |
-| held out: in-band of the raised arm | WS_HELD_PLACEHOLDER | 0.822 | `..._probe_held.json` |
+| held out: raised-arm in-band; overhead taken; overhead poses under 2 / 3 mm | 0.8218; 18 / 71; 10 / 18 of 18 | 0.8218; 18 / 71; 10 / 18 | `..._probe_held.json` |
 | continuity flood (rule 2026-10-16) | full 18.51 (0 dropped), knn 20.18 (6 forced poses), literal bench graph 50.13 | full 18.49, knn 20.16 | `remeasure/trimlug-k165-knuckle-3r_flood_bench.json` |
 | fold margin (family reading, th) | 5.181 deg bench (2 poses under 5.5), 5.006 held | same | probe extras; `verify/..._v_held_frozen.json` |
 | J1-K-J3 sub-chain margin with K at rest | 106 of 204 rest poses under 5 deg, 50 under 1 deg, min 0.000 (pose 227) | identical pose by pose (max difference 0.000 deg) | `remeasure/..._msub_rest_bench.json` |
@@ -59,11 +59,39 @@ the m_sub rest probe held out (bench only, time box); contact depth under a bulg
 
 ### S1 (watch, new; applies to the lead too): the bench order against sidecar-longdyad flips held out
 
-SEE_S1_PLACEHOLDER
+Paired per pose on the claim dumps of both designs
+(`remeasure/trimlug-k165-knuckle-3r_vs_sidecar-longdyad-knuckle-3r_paired_claim.json`, 4000 bootstrap resamples within
+kind; diff = trimlug - sidecar-longdyad, negative = trimlug better):
+
+| wear | diff | reach | in-band | contact | 90 % interval | P(trimlug better) |
+|---|---|---|---|---|---|---|
+| bench | -0.40 | 0.00 | +0.13 | **-0.53** (2 contact poses vs 4) | [-2.74, +1.67] | 0.64 |
+| held out | **+0.81** | +0.74 (21 poses only trimlug takes, 28 only sidecar) | +0.07 | +0.01 | [-0.68, +2.16] | 0.19 |
+| pooled bench + held | +0.47 | +0.53 | +0.09 | -0.15 | [-0.77, +1.62] | 0.27 |
+
+- **Why it matters:** the leaderboard puts the slipper family (18.49 / 18.51) above sidecar-longdyad (18.91). The whole
+  bench margin is two fewer contact poses, and those two press deep (13.19 mm summed against 6.23 mm over 4, see T5).
+  Out of sample the order reverses (23.47 against 22.67; at 1 mm 26.56 against 25.75), and the pooled data favour
+  sidecar-longdyad with P 0.73.
+- **Why it is only watch:** neither interval excludes 0, and sidecar-longdyad is not better on every count for the
+  wearer: at 2 mm it is worse (34.03 against 33.02 bench, 37.24 against 36.97 held) and it touches on 4 bench poses.
+- **Action:** the round planner and the closer should read the pooled bench + held order between the slipper family
+  and sidecar-longdyad before naming a winner; the next audit of slipper-nose should carry this finding.
 
 ### T5 (watch, carried, improved here): depth-blind contact
 
-T5_MD_PLACEHOLDER
+- **Bench** (per-pose dump of this re-wear): 2 contacts, 237 (15, 165, -60) 9.01 mm (the crank; the trimmed lug is
+  also 8.35 mm in, hub K's disc 2.65) and 264 (30, 165, -60) 4.18 mm (the lug top; the lead 5.74). Sum 13.19 mm against
+  the lead's 14.75.
+- **Held out:** the lead's same 10 contact poses, sum 40.58 mm against 46.12; deepest 9.05 mm at (30, 165, -45), the
+  crank, untouched; 7 deeper than 3 mm. Four get shallower: (15, 150, -60) 7.07 -> 6.13, (60, 165, -30) 6.87 -> 5.15,
+  (45, 165, -45) 5.80 -> 4.18, (30, 150, -45) 5.33 -> 4.07. Four, not the row's five.
+- **Why it matters:** the score is blind to depth both ways. It does not reward this design for pressing 1.56 / 5.54 mm
+  less (it charges +0.02), and it ranks the family above sidecar-longdyad, which presses 6.23 mm over 4 bench poses
+  (x2.12, +6.96 mm: past the tool's own T5 margin) and 35.66 held (x1.14).
+- **Why it is only watch:** T5 never gives gamed (user 2026-10-17), and sidecar-longdyad is worse at 2 mm.
+- **Action:** none for this design; it is the depth fix the family needed. Pose 264 needs the lug to end at r_K ~18
+  (dK ~35, the stroke wall), a 0.5 mm narrower crank tip and a 0.3 mm flat on hub 2, per the design's own limiter.
 
 ### M5 (watch, carried): one clock spring against a sliding nose, not measured
 
@@ -86,7 +114,7 @@ against a 154.78 stop. Action: the user's ruling on B1, which applies to the who
 
 The gap reads in-band on clip frames only. On the taken workspace poses at elev 90-140 (38 of 85) this design holds
 0.8002 of its metal in 2-14 mm and 19.9 % above 14 mm (p95 20.16 mm, max 30.8 mm): the lead 0.8004, sidecar-longdyad
-0.841. Held out WS_HELD_PLACEHOLDER. The trim does not touch it. Action: none for this design; the proposal stands on
+0.841. Held out 0.8218 / 17.6 % above 14 mm (the lead 0.8218). The trim does not touch it. Action: none for this design; the proposal stands on
 the lead's audit.
 
 ### NEW-stale-complexity-ruler (watch, carried): the record understates the simplification
@@ -118,7 +146,7 @@ text; keep fit-bench numbers out of the headline columns (proposal R-a below).
 - `near_touch` ok: re-measured 18.51 / 20.14 / 33.02 / 83.17; 14.51 points live in the 0-2 mm shell (watch at 15).
   Before the re-wear this check read the verifier's LEAD CONTROL file (`_v_bench_lead.json`, 18.49), not the claim's
   (proposal I-a).
-- `contact_depth` ok: bench 13.19 mm over 2 poses vs the lead's 14.75 (x0.89); CD_HELD_PLACEHOLDER.
+- `contact_depth` ok: bench 13.19 mm over 2 poses vs the lead's 14.75 (x0.89); held 40.58 mm over 10 vs 46.12 (x0.88).
 - `dominance` ok: vs the lead plain -0.02, 2 mm +0.00.
 - `continuity` watch: no flood "on file" in a shape the tool reads. Measured here: full 18.51, 0 poses dropped (knn 20.18,
   6 forced poses dropped; the lead 18.49 / 20.16). The taken set is the lead's pose for pose and the kinematics are the
@@ -145,7 +173,7 @@ text; keep fit-bench numbers out of the headline columns (proposal R-a below).
   designed 0.15 running gap over the lug), nose 0.424 mm (its own sliding pair), everything else >= 20.96 mm.
 - M4: K 45.6 deg, crank 19.3 deg.
 - P1: the trim was designed on the two claim-bench contact poses (237 / 264), but its depth gain travels held out
-  (HELD_T5_DELTA_PLACEHOLDER), and the pick (wall 1.5) is not the best-T5 column (wall 1.0: 12.67 / 38.71) - it was chosen on the
+  (held out -5.54 mm on the same 10 poses, against -1.56 on the bench), and the pick (wall 1.5) is not the best-T5 column (wall 1.0: 12.67 / 38.71) - it was chosen on the
   wall, not on a number.
 - P2: no search touched the held-out set; five configs were worn held out as columns and the pick is not the held best.
 - P3: farm + local verifier repeat identical; this audit's re-wear identical (18.51).
@@ -193,7 +221,7 @@ text; keep fit-bench numbers out of the headline columns (proposal R-a below).
 ## What happens next
 
 - The trim is worth keeping in the lead's CAD (a cut, no part, no joint): pose 264 presses 1.56 mm less; held out the
-  contacts sum HELD_T5_DELTA2_PLACEHOLDER less. It does not clear 264 (the lug band behind the stroke end, the crank's
+  contacts sum 5.54 mm less (46.12 -> 40.58). It does not clear 264 (the lug band behind the stroke end, the crank's
   side wall and hub 2's housing all stay in), so overhead stays 8 / 28.
 - The S1 flip is the family's: the next audit of slipper-nose should carry it, and the round planner should read the
   pooled bench + held order before naming a winner between the slipper family and sidecar-longdyad.
