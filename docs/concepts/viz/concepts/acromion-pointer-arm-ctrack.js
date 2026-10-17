@@ -1,17 +1,17 @@
-/* acromion-pointer-arm-ctrack - the user's own decomposition, as SCREENED (round J1, GATE 0; dead at ~80 on
- * Bench(60,160) fast). A 2-DOF gimbal at the shoulder POINTS the humerus, the humeral rotation is a third active joint
- * on the arm. J1 O20 hub at the BACK of the shoulder (a1 = bvec(-20, -10), scapula-fixed, through GH; the spec's
- * acromion-top seat needs a 20-60 % wider twist window, measured) -> L1 strap (90 deg) -> J2 O20 hub (90 deg from the
+/* acromion-pointer-arm-ctrack - the user's own decomposition, as SCREENED (round J1, GATE 0; dead at 58.71 on
+ * Bench(60,160) fast, k474). A 2-DOF gimbal at the shoulder POINTS the humerus, the humeral rotation is a third active joint
+ * on the arm. J1 O20 hub at the BACK of the shoulder (a1 = bvec(-16.1, -20), scapula-fixed, through GH; the spec's
+ * acromion-top seat needs a 20-60 % wider twist window, measured) -> L1 strap (92.8 deg) -> J2 O20 hub (97.4 deg from the
  * arm axis, branch +1: posterolateral at rest) -> L2 pointing yoke (follows the arm direction, not its twist) carrying
- * TWO shoes 70 deg apart on a fork (one tine each, merged at hub 2) -> an ARM-FIXED C-track at s 70 mm (deltoid) whose top is a CIRCULAR race about the humeral
- * axis, span -57.5..57.5 deg (the arm's torso-free arc, measured ~105 deg at every station), body skin-fitted under it,
+ * TWO shoes 79 deg apart on a fork (one tine each, merged at hub 2) -> an ARM-FIXED C-track at s 60.5 mm (deltoid) whose top is a CIRCULAR race about the humeral
+ * axis, span -50.6..60.8 deg (the arm's torso-free arc, measured ~105 deg at every station), body skin-fitted under it,
  * merged into a shortened BOTTOM. Whichever shoe is on the race holds the twist (an open ring bearing with a carriage
  * pair spanning its gap). Active: J1, J2, the twist. Passive: NONE (the spec's radial slide + swivel need 20-34 mm of
  * skin-normal travel: replaced by the circular race). Out of range: gimbal within 5 deg of its fold, both shoes off the
  * track. Skin radius schematic. */
 (function () {
   const K = (typeof window !== 'undefined' ? window : globalThis).KIN, V = K.V, M = K.M, D2R = K.D2R, R2D = K.R2D;
-  const P = { az1: -20, el1: -10, a12: 90, a23: 90, branch: 1, s_t: 70, span: [-57.5, 57.5], car_deg: 27.5, twin: 70,
+  const P = { az1: -16.1, el1: -20, a12: 92.8, a23: 97.4, branch: 1, s_t: 60.5, span: [-50.6, 60.8], car_deg: 27.5, twin: 79.2,
               F1: 62, F2: 60, hub_r: 10, stack: 12.25, car: [24, 16, 7], margin: 5, cuff_at: 165 };
   P.take = [P.span[0] + P.car_deg / 2, P.span[1] - P.car_deg / 2];
   const e = [0, -1, 0], l = [0, 0, 1], bk = [-1, 0, 0];
@@ -66,11 +66,11 @@
       return [
         { kind: 'plate', role: 'fixed-scapula', name: 'base plate (to the scapula handler)', c: V.madd(V.scale(B1, P.F1 - 3), ctx.attach.scapDir([-1, 0, 0]), 14), z: B1, x: ctx.attach.scapDir([-1, 0, 0]), size: [44, 24], t: 3 },
         { kind: 'hub', role: 'active', name: 'J1 (back of the shoulder)', c: V.scale(B1, P.F1), axis: B1, r: P.hub_r, h: P.stack },
-        { kind: 'arc', role: 'link', name: 'L1 strap (87.7 deg)', u: B1, v: U2, r0: P.F1 + 7, r1: P.F2 + 2, r: 2.5 },
+        { kind: 'arc', role: 'link', name: 'L1 strap (92.8 deg)', u: B1, v: U2, r0: P.F1 + 7, r1: P.F2 + 2, r: 2.5 },
         { kind: 'hub', role: 'active', name: 'J2', c: V.scale(U2, P.F2), axis: U2, r: P.hub_r, h: P.stack },
         { kind: 'arc', role: 'link', name: 'L2 fork tine 1 (to shoe 1)', u: U2, v: V.scale(carTop, 1 / V.norm(carTop)), r0: P.F2 + 9, r1: V.norm(carTop) + 2, r: 2.8 },
         { kind: 'carriage', role: 'active', name: 'shoe 1 on the circular race: position = humeral rotation', c: carC, x: tg, z: n, size: P.car },
-        { kind: 'carriage', role: 'active', name: 'shoe 2 (rigid on L2, 70 deg on): holds the race when shoe 1 is off it', c: A(racePt(th + P.twin, P.car[2] / 2)), x: A(nrm(th + P.twin + 90)), z: A(nrm(th + P.twin)), size: P.car },
+        { kind: 'carriage', role: 'active', name: 'shoe 2 (rigid on L2, 79 deg on): holds the race when shoe 1 is off it', c: A(racePt(th + P.twin, P.car[2] / 2)), x: A(nrm(th + P.twin + 90)), z: A(nrm(th + P.twin)), size: P.car },
         { kind: 'arc', role: 'link', name: 'L2 fork tine 2 (to shoe 2)', u: U2, v: V.scale(A(racePt(th + P.twin, P.car[2])), 1 / V.norm(A(racePt(th + P.twin, P.car[2])))), r0: P.F2 + 9, r1: V.norm(A(racePt(th + P.twin, P.car[2]))) + 2, r: 2.8 },
         { kind: 'arc', role: 'fixed-arm', name: 'arm-fixed C-track: circular race', pts: race, r: 2 },
         { kind: 'arc', role: 'fixed-arm', name: 'track body skin face (saddle)', pts: body, r: 1.5 },

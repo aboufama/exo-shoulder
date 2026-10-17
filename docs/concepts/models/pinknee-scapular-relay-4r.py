@@ -39,7 +39,7 @@ H1 = {"rad1": 10.0, "rad2": 10.0, "rad3": 10.0, "az1": 101.1634, "el1": 63.8986,
       "wd": 70.3931, "wa": -8.1248, "b3": 0.2842, "lE": 59.5534, "lc": 28.2401, "phiE": -5.8107, "phib": -54.914,
       "ang_min": 30.4611, "stk": 5.6815}
 PARAMS = dict(PK.PARAMS); PARAMS.update(H1)
-PARAMS.update(a0=35.0, phi=90.0,           # J0 axis c = J1 rest axis tilted a0 about a normal turned phi (back cell)
+PARAMS.update(a0=35.0, phi=90.0, azu=None,           # J0 axis c = J1 rest axis tilted a0 about a normal turned phi (back cell)
               T=40.0, m_lo=5.0, m_hi=5.0, m_sw=5.0, policy=0, k2=4.0, W0=12.0, connect=1, kneeflood=1)
 WS_JUMP = 10.0
 
@@ -57,7 +57,11 @@ def seat_ok(U):
 
 
 def make_cfg(P, D):
-    u1r = D.u[0]; c = SF.tilt_pivot(u1r, float(P["a0"]), float(P["phi"]))
+    u1r = D.u[0]
+    if P.get("azu") is not None:        # J0 axis at angle a0 from J1, azimuth azu about J1 (e = unit(u1 x y), f = u1 x e;
+        e = unit(np.cross(u1r, [0.0, 1.0, 0.0])); f = np.cross(u1r, e); a, b = math.radians(float(P["a0"])), math.radians(float(P["azu"]))
+        c = unit(math.cos(a) * u1r + math.sin(a) * (math.cos(b) * e + math.sin(b) * f))   # hub 2's orbit leaves azu 120-270 free)
+    else: c = SF.tilt_pivot(u1r, float(P["a0"]), float(P["phi"]))
     a1, a2 = (math.degrees(x) for x in D.A)
     # T cut to the largest symmetric travel keeping J1 inside the seat rule (a design step, reported as T_eff)
     qs = np.arange(0.0, float(P["T"]) + 0.01, 0.5); Teff = float(P["T"])

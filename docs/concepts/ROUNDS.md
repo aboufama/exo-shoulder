@@ -2431,7 +2431,7 @@ closer sent to the lead; everything that moves the base or replaces J3 belongs t
   lesson for the next jump: move hub 2 itself, not the base.
 - Lead: generation-12 CAD (slipper-nose CAD + conecut knee + dowel), user_trimlug_k165 R16 judging, desmo best_params.
 
-## LEAD NOTE (2026-10-17 ~18:30 UTC): leader change by the user's rule
+## LEAD NOTE (2026-10-17 ~18:21 UTC): leader change by the user's rule
 
 - **conecut-knee-knuckle-3r is the verified lead: 18.28 (score 93.35), held out 22.38**, complexity 18.5, ledger
   WATCH. The lead's "tie" ruling (CI includes 0) is withdrawn: the 18:21 skeptic showed it was the lead's own rule,
