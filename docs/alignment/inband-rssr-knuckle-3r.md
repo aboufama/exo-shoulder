@@ -186,6 +186,100 @@ The spring is static only. There is no dynamics, R17 or CAD run for this id, and
   Its audit is running in the discovery loop, and I did not duplicate it.
 - **Cuff twist, dynamics and the leader read priced:** as in the 12:28 audit, out of scope and out of budget.
 
+## Skeptic (2026-10-17 13:10-13:30 UTC, hourly audit 13:03 / display change a510cfe): final verdict WATCH
+
+Rulings: `docs/alignment/inband-rssr-knuckle-3r.rulings.json`, which replaces the 12:45 rulings; those stay in git
+history. Ledger: `by skeptic`, run `skeptic:inband-rssr-knuckle-3r`. Of the 9 reasons, 2 are refuted with evidence and
+7 are upheld. The ledger computes the worst upheld level: **watch**. No leader change, and nothing hidden on the
+dashboard today.
+
+**What I re-measured.** Models unchanged, local only (nice, OMP_NUM_THREADS=1, at most 2 processes), $0 farm.
+
+- **Gaps and wearer counts:** my own gap code (not `tools/alignment_paired.py`, not the audit tool) on the per-pose
+  dumps. pick3 priced 18.33 / 22.87, unpriced at margin 5.0 18.32 / 23.54, the leader 18.48 / 23.45. All the
+  auditor's wearer counts reproduce.
+- **Paired bootstrap against the leader** (4000 draws, seed 7, resampled within kind, poses matched by
+  kind / plane / elev / axial). Negative means pick3 is better.
+
+  | reading | bench | held |
+  |---|---|---|
+  | priced | -0.16, 90 % CI [-2.15, +1.65] | -0.59, CI [-1.59, +0.31], P(better) 0.84 |
+  | unpriced, margin 5 | -0.17, CI [-1.99, +1.68] | +0.08, CI [-0.84, +1.31], P(better) 0.38 |
+
+- **The CAD config with the catalogue head, measured directly.** `picks/pick3_rh025.json` (r_h 15.0125) went through
+  `tools/alignment_inband_rescore.py fit60 bench --fitonly`. With `--er 4.5` (KBRM-02, O9) it reads 275.0 with
+  `why.parts` 183. With the model's O7 socket it reads 19.45, the verifier's `fit_fast`.
+- **The headline what-ifs, re-implemented in Python** (not the auditor's probe) on `morphs.json`. The results agree
+  with the probe, and I added one case: 'no lead' written on the leader's row.
+
+### Rulings
+
+- **held_out: REFUTED.** This is the same tool false positive as before. The check reads the empty top-level `v_gap`.
+  - The verifier's files are `verify/claim_pick3_fit60_{bench,held}.json` with `final.gap` 18.33 / 22.86, a drop of
+    +4.53.
+  - Under the leader's protocol the drop is +5.22, and on the env-fit leg it is +5.24. Both are under TH held_watch
+    6.0. The leader drops +4.97.
+- **idle: REFUTED.** The knee is the two-pin cuff knee, which moves by design.
+  - The row has `mechanism.cuff_knee` pins 2 and joints 2.
+  - The model only reads `knee_moved` (line 291). The flag is set only in the two kneeless models.
+  - K moves 47.47 / 47.68 / 49.34 deg (`dK_taken_max`), and the crank moves 33.7-34.8 deg (`cam.phi_max_taken`).
+    Both are far above TH idle 2 deg.
+- **NEW-stale-tie: UPHELD.**
+  - The code is the same on both pages.
+  - The what-ifs reproduce. If slipper-nose is flagged or refuted, the headline goes to trimlug 18.51 and the 18.33
+    row is not named. A leading space puts the 18.33 row in the headline.
+  - My extra case: 'no lead' written on slipper-nose sends the headline to trimlug, and both slipper-nose and
+    inband-rssr sit below it unnamed.
+  - `dash_build` copies the ruling with no trim.
+- **NEW-freetext-promotion: UPHELD.**
+  - The promotion is a `startswith('CONFIRMED')` test on hand-written text. No workflow writes `polished_status`.
+  - The page shows 'Verified' unless the ledger says gamed. In my what-if, an unaudited row at 18.0 with status
+    verified takes the headline.
+  - `c_reporting` tests verifier files only when the row itself says 'verified'.
+  - Today the shown v_* equal the verifier's file to the digit.
+- **R3: UPHELD.**
+  - The row is the lowest verified-basis gap on the board.
+  - It is the best of 3 committed picks: 19.15 / 19.49 / 18.33.
+  - Its paired bench edge is noise: -0.16, CI [-2.15, +1.65].
+  - The board shows no spread and no held-out number.
+- **NEW-reading-mismatch: UPHELD.** The held-out sign flips with the reading, from P(better) 0.84 priced to 0.38
+  unpriced. The tie ruling correctly uses the unpriced reading, and the board shows only the priced bench.
+- **P2: UPHELD.** On the env-fit held leg the picks read 22.43 / 23.46 / 23.57, so pick3 is worst and behind the
+  leader's 23.45. It is best only on the fit60 legs. No held-out search was found, so this stays at watch.
+- **M2: UPHELD, now measured at the CAD r_h.** The CAD config (r_h 15.0125) reads 275.0 with the O9 head. It lives
+  from r_h 15.65. The row's `polished_params_cad.r_h` is still 15.0125.
+- **M5: UPHELD.** This is a missing measurement. No file under `judge/` or `pipeline/` names this id, so there is no
+  dynamics, R17 or cuff-twist run.
+
+### Missed by the auditor (for the next audit; not counted in this verdict)
+
+1. **M2's cited file was worn at the claim's r_h, not the CAD's.**
+   - `fit_O9.json` ran on `picks/pick3.json` (r_h 14.7625, `sets` {}). The CAD config is r_h 15.0125.
+   - The conclusion holds: measured directly, 15.0125 with O9 reads 275.0 (parts 183).
+   - The polish verifier has no bench claim for the CAD variant. `polished_bench` holds pick3 (r_h 14.7625) and
+     row_pick only. Only the held leg `verify/claim_pick3rh_fit60_held.json` covers r_h 15.0125, at 22.86, identical
+     to pick3.
+   - So the board's 18.33 is a config the CAD does not build. Neither config is buildable with the catalogue head.
+2. **Overhead contact elevations are misstated in the wearer section.** The held-out overhead contacts are 3 at
+   elevation 150 and 1 at 165, both priced and unpriced (`farm/claim_pick3_fit60_held_perpose.json`,
+   `remeasure/inband_pick3/claim_O7nominal_unpriced_held_perpose.json`). The section says all 4 are at 150. The
+   leader has 3 at 150 and 3 at 165.
+3. **The ruling field has no authority check.**
+   - `leader_ruling` is copied from any row with no test of who wrote it or which ledger entry it rests on.
+   - A 'no lead' (or 'tie: X') written on the true leader's row removes it from the headline. The headline gives no
+     trace; the pill shows it only on hover.
+   - The auditor covered stale rulings on the ruled row. This is the other direction: a competitor's row can be
+     dropped.
+   - Proposal (not applied): a ruling counts only when it names the time of a skeptic entry for that row in
+     `docs/alignment/ledger.jsonl` (ledger entries carry `time` and the HEAD at write time in `git`, not the commit that
+     recorded them).
+   - Measured effect today if applied strictly: the one ruling cites commit 48be5d5 and "12:45 UTC". The ledger's
+     matching entry is the 12:36:27Z skeptic, with `git` b391a5f. So a strict check drops the ruling, and the page
+     puts this row in the headline at 18.33 (probe run D). The ruling text would need the entry's time, so this is a
+     process change for the lead to decide, not a defect in today's ruling.
+
+**Final verdict (ledger, skeptic): WATCH.**
+
 ---
 
 *Earlier sections below: the skeptic of the 12:28 pick3 leader-change audit (12:30-12:45 UTC) and the 11:03 audit's
