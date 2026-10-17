@@ -3055,7 +3055,7 @@
   "name": "Cuff-slaved elbow: 4R path J1-A0-A1-J3 at the cap pole with the elbow slaved by a crank from the elbow crank to an arm-cuff pin (no second coupler pin in the J2 zone); base-tethered slave merged as cell B",
   "family": "virtual-joint 3R (4R path with a slaved elbow, one closed loop, pins only)",
   "lens": "round102:virtual-j2 (lens 1, the binder-driven variant; merged scapula-tether-elbow-3r as cell B)",
-  "status": "screening",
+  "status": "dead",
   "t_ideated": "2026-10-17T21:34:34Z",
   "source": "round 102 (J2) judge (docs/concepts/round102_ideation.md)",
   "merged_from": [

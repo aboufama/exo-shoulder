@@ -6,45 +6,45 @@
  "active_dof": 3,
  "passive_dof": 3,
  "passive_trans": 0,
- "status": "screened",
+ "status": "dead",
  "t_ideated": null,
- "t_screened": "2026-10-17T23:02:03Z",
- "reach": 0.35,
- "follow": 0.7667,
- "inband14": 0.305,
- "inband10": 0.2067,
- "contact": 0.0097,
- "gap": 133.8,
- "gap_nt": 133.81,
+ "t_screened": "2026-10-17T23:57:11Z",
+ "reach": 0.7688,
+ "follow": 0.7,
+ "inband14": 0.2051,
+ "inband10": 0.0847,
+ "contact": 0.0,
+ "gap": 107.61,
+ "gap_nt": 107.61,
  "v_reach": null,
  "v_follow": null,
  "v_inband14": null,
  "v_inband10": null,
  "v_gap": null,
- "n_configs": 57,
- "verdict": "in progress: gate-0 screen running",
- "limiter": "closure + rigid levels (in progress)",
- "note": "Preliminary (search running). Convergence gate (score points, 57 honest configs): gain over the 2nd half 0.0, over the last third 0.0, top-5 spread 5.785.",
+ "n_configs": 779,
+ "verdict": "DEAD at gate 0 (converged): best honest 107.61 fast (score 60.87) vs the plain cap-pole 3R 63.18 through the same kit; frozen exact Bench(110,360) 117.08 (score 57.43) vs the control's 56.40. The lead's kill test fails on all three counts over 5729 kinematic layouts (ws closure max 0.789 < 0.80, dense follow max 0.833 < 0.95, every part <= 75 mm only at closure <= 0.68). Tether cell B best 132.86.",
+ "limiter": "The slave loop's root vanishes along internally rotated climbs (Reach a high shelf 5/9 lost), cross-body (Wash opposite shoulder 7/9) and behind-back motions (dense K2) and on 53 ws poses; the 4R path's own window (elbow 2R open on 43-49 ws poses); the elbow parts (A0, A1, B0, crank A, link 1, coupler) 0-4 % in band at 97-137 mm because they roam the shoulder dome (O20 disc edges: the proxy's centre rays read 62-75). Overhead 5/28 frozen.",
+ "note": "Honest kit (K3 march, K2 dense, K6, audit; q 1.0), Bench(60,160) fast; near-touch gap = plain gap at the best (min metal 1.54 mm). Arm seeds 119.23 / 171.13, tether seeds 216.14 / 239.82 (proxy 41.84 / 48.36 / 44.10 / 47.61: the +20 calibration is +77 for this loop). Sweep entries tagged v1 predate the layering fix. 0 passive translations, 3 passive pins, cx est. 15.5. Convergence gate (score points, 697 honest configs): gain over the 2nd half 0.909, over the last third 0.0, top-5 spread 0.665.",
  "doc": "docs/concepts/cuff-slaved-elbow-fourbar-3r.md",
  "best_params": {
-  "d0": 25.989973149665364,
-  "L": 42.14445513321649,
-  "d1": 45.0,
-  "sb": -29.04025129872798,
-  "db": 64.10608060045323,
-  "rho": 53.45525671314115,
-  "bx": 112.73024156952135,
-  "by": 85.0,
-  "home": 41.14616580594242,
-  "mode": "tether",
-  "s2": 1,
+  "d0": 30.08528134498793,
+  "L": 29.850104541134424,
+  "d1": 73.72654562110246,
+  "sb": 40.52471547701572,
+  "db": 44.167096467627914,
+  "rho": 60.673535487144676,
+  "bx": -166.2867871061564,
+  "by": 22.0,
+  "home": 95.86981392190694,
+  "mode": "arm",
+  "s2": -1,
   "sgn": -1
  },
  "gate": {
-  "n": 57,
-  "gain_2nd_half": 0.0,
+  "n": 697,
+  "gain_2nd_half": 0.909,
   "gain_last_third": 0.0,
-  "top5_spread": 5.785
+  "top5_spread": 0.665
  },
  "honest": false,
  "checks": {
@@ -72,5 +72,101 @@
   "notes": "4R path J1-A0-A1-J3 with the elbow slaved by crank B from a third pin B0 on crank A to a pin B1 on the arm end. bodies: link 1, crank A (L-plate: A0, A1, B0), coupler (A1, J3), crank B, arm end (hub-3 lower plate + B1 tab + K7 neck). joints: J1, A0, J3 ACTIVE O20; A1, B0, B1 PASSIVE O20 pins; 1 loop (crank A - coupler - arm - crank B, a spherical four-bar in the arm frame; spherical Grubler 3 (6 - 1) - 2 x 6 = 3). Passives set by one loop root + the closed-form 2R: not sensed. custom: base, link 1, crank A, coupler, crank B, arm-end tab/neck, 6 hub shafts (est.); catalogue: 6 x MR117 pair (est.).",
   "source": "docs/concepts/models/cuff-slaved-elbow-fourbar-3r.py (solve, build)",
   "confidence": "counted"
- }
+ },
+ "frozen_exact_110": {
+  "reach": 0.7056,
+  "follow": 0.6727,
+  "inband14": 0.21,
+  "inband10": 0.088,
+  "contact": 0.0091,
+  "poses": {
+   "clip": 110,
+   "ws": 360
+  },
+  "mode": "exact",
+  "gap": 117.08,
+  "near_touch": {
+   "gap_nt": 117.66,
+   "reach_nt": 0.7028,
+   "contact_nt": 0.0121,
+   "min_metal_mm": -2.07
+  },
+  "flips": 32,
+  "closure_ws": 0.7556,
+  "overhead": {
+   "n": 28,
+   "taken": 5
+  },
+  "collide": 0.0489
+ },
+ "binder": [
+  {
+   "pose": [
+    -75,
+    60,
+    60
+   ],
+   "idx": 128,
+   "bench_pose": [
+    -75.0,
+    60.0,
+    60.0
+   ],
+   "closes": true,
+   "cont": true,
+   "collide": true,
+   "taken": false
+  },
+  {
+   "pose": [
+    0,
+    150,
+    0
+   ],
+   "idx": 209,
+   "bench_pose": [
+    0.0,
+    150.0,
+    -15.0
+   ],
+   "closes": false,
+   "cont": false,
+   "collide": false,
+   "taken": false
+  },
+  {
+   "pose": [
+    30,
+    150,
+    0
+   ],
+   "idx": 262,
+   "bench_pose": [
+    30.0,
+    135.0,
+    0.0
+   ],
+   "closes": false,
+   "cont": false,
+   "collide": false,
+   "taken": false
+  },
+  {
+   "pose": [
+    0,
+    105,
+    0
+   ],
+   "idx": 205,
+   "bench_pose": [
+    0.0,
+    105.0,
+    15.0
+   ],
+   "closes": true,
+   "cont": true,
+   "collide": true,
+   "taken": false
+  }
+ ]
 }
