@@ -163,3 +163,60 @@ converged. Per run: clampC 0.36 / 0.36 / 0.13, clampA 1.30 / 0.77 / 0.80 (best 4
 | best, static (connect 0) | 42.74 | 0.875 | 0.503 | the flood drops nothing |
 | **control: best with T 0 (relay locked = plain 3R)** | **51.58** | 0.788 | 0.502 | the relay is worth 8.84 gap points, all of it reach (+14 ws poses) |
 | twin cell k2 0.5 / 2 / 8 at the best | 45.73 / 52.28 / 55.60 | 0.875-0.881 | 0.468 / 0.439 / 0.396 | J0 moves on 189-192 taken poses, hub 1 in band falls to 0.79 / 0.43, worse at every k2 |
+
+## The binder, measured on the raw skin
+
+Each pose's hub-2 requirement comes from the K3 march along hub 2's axis, over the taken Bench(60,160) poses at the
+best config. The T 0 control is evaluated through the same code.
+
+| | hub 2 fitted level F | link 1 / link 2 max level | hub 2 requirement p50 / p90 / max | hub 2 in band |
+|---|---|---|---|---|
+| best (relay on) | **124 mm** | 124 / 128 | 60 / 82 / 116 mm | 0.01 (ray proxy), 0.06 (all disc samples) |
+| control T 0 | **124 mm** | 124 / 128 | 60 / 83 / 116 mm | 0.01 |
+
+The poses that set hub 2's level:
+
+| pose (plane, elevation, axial) | J2 position (S frame, az / el) | requirement |
+|---|---|---|
+| ws (-75, 60, +60), behind the body | 32 / 10 (posterior-lateral, low) | 116 mm |
+| ws (0..30, 150, 0), overhead | 112-124 / 35-42 | 107-113 mm |
+| ws (0, 105, 0) | | 110 mm |
+| clip (30, 150, -60) | -37 / 42 | 109 mm |
+
+**q0 = 0 on every one of them.** The binding poses sit inside the plain J2 window, where the spring holds J0 at rest
+by construction. The relay never engages there, and the levels are identical with T = 0. A base-side spare cannot
+move this binder:
+
+- It acts only where J2 is on a stop.
+- Where it does act, it slides J2 along its a2-circle about the humerus-fixed J3.
+- Hub 2's level is set by mode-A poses in which J2 crosses the deltoid / acromion skin 107-116 mm out.
+
+The relay's whole worth is reach: 0.788 -> 0.875, worth 8.84 gap points. It moves neither the in-band (0.502 ->
+0.503) nor hub 2.
+
+The champion-family numbers make the same point. At the stop-relay's back-of-shoulder seat, a 41.8 / 72.3 dyad keeps
+hub 2 0.70 in band but reaches only 0.675. At the cap pole, a 50 / 60 dyad reaches 0.875 with hub 2 at 0.06. On
+these two cells, the plain O20 3R trades reach against hub 2's height. The spare buys reach on top of either one;
+it does not break the trade.
+
+## Red team (own best config)
+
+- **The pose that pinches.** ws (-75, 60, +60), behind the body with external rotation: metal 0.63 mm from the skin.
+  It is the same pose that sets hub 2's level. The overhead poses (plane 0-75, elevation 150-165) are taken at
+  1.58-2.06 mm, at the lower edge of the band.
+- **The poses that jam** (not closable at margin 5). Across the body at elevation 90 with IR (plane 105-120, axial
+  -120), and overhead at plane 90-120, elevation 150-165. These are the J2 fold windows that the relay's
+  sub-chain margin (>= 5) refuses to relay through.
+- **The motion preview** (docs/concepts/viz/concepts/acromion-relay-4r.js, `node docs/concepts/viz/test.mjs`) runs
+  the rest -> raise -> overhead -> abduction -> across -> behind loop. It flags 3 frames where J2 sits on its low stop
+  and J0 cannot relay (the J0-J1-J3 sub-chain is within 5 deg of its own fold). It also flags 1 least-|q0| root switch
+  that a real J0 cannot follow. Both are drawn red, not smoothed. The flood applies the same rule to the ws grid, and
+  the bench's ws relay poses were all reachable (0 islands).
+- **The optimistic number.** The fit-bench 42.74 reads 44.63 with K6 at 1 mm radial clearance (the frozen protocol).
+  The frozen exact Bench(110,360) wear is below.
+- **Feel.** Max |q0| over taken poses is 38.5 deg. With the clock-spring pair (0.08 N.m preload, 0.015 N.m/rad),
+  J0 needs 0.090 N.m, which is 0.69 N at the cuff (130 mm) while J2 sits on a stop. The twin cell is felt
+  continuously: J0 moves on 189-192 / 201 taken poses.
+- **Not done (time box).** The per-pose hub-2 table on the lead's 88 fold losses
+  (docs/research/fold_ceiling/lost_poses_roller-longdyad-knuckle-3r.json). The binder table above answers the same
+  question on this chain's own fit poses: the relay does not engage where hub 2 is bound.

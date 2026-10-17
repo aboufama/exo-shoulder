@@ -131,6 +131,16 @@ def build(B, F, p):
 FIXED = ("track", "carriage", "carriage2", "bridge")                                # placed by the model: profile 1 (D holds the points)
 
 
+def collide(ch, pts, ok):
+    """K6 on every member pair, except the two tines of the fork yoke (one rigid body, merged at hub 2): each tine is
+    checked against every other member"""
+    names = [m.name for m in ch.members]
+    if "yoke2" not in names: return K.collisions(ch, pts, ok)
+    a = K.Chain(members=[m for m in ch.members if m.name != "yoke2"], ok=ok, joints=ch.joints)
+    b = K.Chain(members=[m for m in ch.members if m.name != "yoke"], ok=ok, joints=ch.joints)
+    return K.collisions(a, pts, ok) | K.collisions(b, pts, ok)
+
+
 def evaluate(B, p, verbose=False, q=None):
     """K.evaluate's pipeline with the two model-placed parts: K2 dense, kit fit of hubs / link 1 / yoke, the yoke
     raised over link 1 + track + carriage (K6 by construction), K6 on every pair, bench scoring of every sample"""
@@ -153,7 +163,7 @@ def evaluate(B, p, verbose=False, q=None):
         ns, nc = yk.grid; R2 = r.reshape(ns, nc); x = np.arange(ns) * yk.step_mm; sl = math.tan(yk.climb_deg * K.D2R)
         prof[yk.name] = (R2[None, :, :] - sl * np.abs(x[:, None, None] - x[None, :, None])).max(1).ravel()
     pts = {m.name: K.member_points(m, prof[m.name]) for m in ch.members}
-    hit = K.collisions(ch, pts, ok); take = ok & ~hit; Pi = np.nonzero(take)[0]
+    hit = collide(ch, pts, ok); take = ok & ~hit; Pi = np.nonzero(take)[0]
     allp = np.concatenate([pts[m.name][Pi] for m in ch.members], 1)
     dd = K.dist_many(B, np.repeat(Pi, allp.shape[1]), allp.reshape(-1, 3)).reshape(len(Pi), allp.shape[1])
     B.reset()
@@ -199,7 +209,7 @@ def wear(Bs, Bb, p):
             r = np.stack([np.interp(x1, x0, R2[:, j]) for j in range(m.grid[1])], 1).ravel()
         prof[m.name] = r
     pts = {m.name: K.member_points(m, prof[m.name]) for m in ch.members}
-    hit = K.collisions(ch, pts, ok); take = ok & ~hit; Pi = np.nonzero(take)[0]
+    hit = collide(ch, pts, ok); take = ok & ~hit; Pi = np.nonzero(take)[0]
     allp = np.concatenate([pts[m.name][Pi] for m in ch.members], 1)
     dd = K.dist_many(Bb, np.repeat(Pi, allp.shape[1]), allp.reshape(-1, 3)).reshape(len(Pi), allp.shape[1])
     Bb.reset()
