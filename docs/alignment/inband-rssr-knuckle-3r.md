@@ -213,6 +213,100 @@ claim`) unchanged and overrides only in memory. Local, nice, OMP_NUM_THREADS=1, 
   since 11:06 (the row moved only in `polished_*`), and the moved claim was re-worn through its own harness instead.
 
 
+## Skeptic (2026-10-17 12:30-12:45 UTC, pick3 leader-change audit): final verdict WATCH
+
+Rulings: `docs/alignment/inband-rssr-knuckle-3r.rulings.json`, which replaces the 11:30 rulings; those stay in git
+history. Ledger: `by skeptic`, run `skeptic:inband-rssr-knuckle-3r`. Of the 9 reasons, 4 are refuted with evidence and
+5 are upheld. The ledger computes the worst upheld level: **watch**. **No leader change:** the honest held-out number
+(23.54 as claimed, 23.62 buildable and de-duplicated) does not beat 23.45.
+
+**What I re-measured.** No new runs of the models: everything was re-derived from the per-pose dumps already on file,
+with my own gap and paired-bootstrap code (scratch, not committed). That code does not import `tools/alignment_paired.py`
+or the audit tool. It uses 4000 draws, seed 1, with poses resampled within kind. Local only, $0 farm.
+
+- **pick3 as claimed, priced:** `farm/claim_pick3_fit60_*` gives 18.33 / 22.87.
+- **Under the leader's protocol (unpriced, margin 5):** `remeasure/inband_pick3/claim_O7nominal_unpriced_*` gives
+  18.32 / 23.54.
+- **Catalogue O9 head, ear de-duplicated, unpriced:** 18.32 / 23.62.
+- **The leader:** `remeasure/slipper-nose-knuckle-3r_*` gives 18.48 / 23.45.
+- **The claim harness is the row's protocol.** `farm/claim_PICKnominal_fit60_held_perpose.json` matches the row's own
+  claim dump (`inband_drive/farm/claimA/`) pose by pose: 0 of 1154 poses differ.
+- **Paired against the leader (gap A - B, negative means pick3 is better):**
+
+| reading | bench | held |
+|---|---|---|
+| priced | -0.16, 90 % CI [-2.10, +1.66] | -0.59, CI [-1.60, +0.32], P(better) 0.84 |
+| unpriced | -0.17, CI [-1.95, +1.72] | **+0.08**, CI [-0.83, +1.31], P(better) 0.38 |
+| O9, ear de-duplicated, unpriced | -0.17 | +0.16, CI [-0.70, +1.32] |
+
+### Rulings
+
+- **held_out: REFUTED.** The check reads only the empty top-level `v_gap`. The verified numbers are on file:
+  - row `polished_gap` 18.33 and `polished_held_out.fit60.pick3.gap` 22.86;
+  - the verifier's re-runs `verify/claim_pick3_fit60_{bench,held}.json` `final.gap` 18.33 / 22.86.
+
+  The drop is +4.53, and +5.22 under the leader's protocol (env fit: +5.24). All are under TH held_watch 6.0. The
+  leader drops +4.96.
+- **idle: REFUTED.** This is the same instrument false positive as before, re-checked on the current files.
+  - The model only reads `knee_moved` (line 291). The flag is set only in the two kneeless models.
+  - CELL = 'lead' is the pin knee, and the row has `cuff_knee.pins` 2.
+  - K moves 49.34 deg (`claim_O7nominal_unpriced_bench.json` `dK_taken_max`).
+  - The crank's "no span on file" is answered by `cam.phi_max_taken`, 34.8 / 36.1 deg. Both joints move far above
+    TH idle_deg 2.
+- **NEW-reading-mismatch: UPHELD.** The numbers are confirmed, and the comparison is like for like (the harness is
+  the row's protocol, 0 / 1154 pose mismatches). Pricing moves 4 held-out contact poses into fold losses (contact 12
+  poses / 33.27 mm -> 8 / 21.16 mm), and the held-out sign flips at the same reading.
+- **M2: UPHELD.**
+  - `fit_O9.json`: 275.0, parts 183. `fit_O9_rh15.4.json`: 275.0. `fit_O9_rh15.65.json` / `_rh15.9.json`: 20.62,
+    parts 0.
+  - The rim formula reproduces -0.22 / -0.49 mm.
+  - `docs/research/sidecar_mechanism_redteam.md` row 2 independently names the KBRM-02 (O9 x 4) and the 0.6 mm
+    spacer.
+  - The row has no "KBRM" string, and its `polished_params_cad.r_h` 15.0125 is dead with the catalogue head.
+- **P2: UPHELD, and slightly worse.**
+  - The commit order is confirmed (28b9bb4 11:27:29 before 482d4a1 11:50:28).
+  - The envsel rule (`sel_mean_near1` 25.905 / 26.225 / 26.295) puts pick3 last.
+  - fit60 claims: bench 19.15 / 19.49 / 18.33, held 22.86 for pick3 (best).
+  - **On the env-fit held leg pick3 is the worst of the three:** 22.43 / 23.46 / 23.57 (recomputed from
+    `farm/claim_pick*_env_held_perpose.json`).
+  - pick3 also had the deepest contact on the selection draw: `sel_depth` 14.78 mm against 3.62 / 5.64.
+- **R3: UPHELD.**
+  - `morphs.json` shows v_gap 18.33 for a row whose status is 'screened'. It ranks first, above minarc 18.40,
+    slipper-nose 18.49 and trimlug 18.51.
+  - `v_reach`, `v_follow`, `v_inband14` and `v_contact` are all null. The cause is `tools/dash_build.py` line 402,
+    which reads `polished_bench['pick1']`; this row has 'pick3' and 'row_pick'.
+  - The same card's verdict text still says "at PARITY with slipper-nose, not ahead".
+- **NEW-inband-padding: REFUTED (below every documented threshold, no claim effect).**
+  - The ear holds 44 samples, unchanged by the polish (`fit_base` / `fit_O9` `density.ear.n`).
+  - De-duplicating it costs 0.0015 in-band (0.15 points), against TH part_weight_watch 3.0.
+  - The tool's sampling check on this row reads ok, at -1.54 points: sampling penalises the design overall.
+  - The claimed 18.33 / 22.86 is unchanged de-duplicated. The one reading it moves (unpriced held 23.54 -> 23.62)
+    does not change the leader decision.
+- **G1: REFUTED as a level, not as a count.** The counts are confirmed: under 1 mm, 6 / 25 against the leader's
+  2 / 14, or 7 / 25 against 3 / 14 counting the model's extra walls.
+  - These are near-touch readings. ALIGNMENT.md section 6 entry 2026-10-17.2 and `c_near_touch` (lvl 'ok') make them
+    report-only, as do CLAUDE.md user decisions (3) and (6).
+  - On the scored contact the O9 build is shallower than the leader: bench 1 pose / 0.22 mm against 2 / 14.75 mm;
+    held 8 / 21.16 mm against 10 / 46.12 mm.
+  - The counts stay reported, and M2 carries the O9 head.
+- **M5: UPHELD.** This is a missing measurement: no dynamics, R17 or CAD run exists for this id. The static value
+  reproduces: 1.8622 x (0.08 + 0.015 x 0.832) = 0.172 N.m.
+
+### Missed by the auditor (for the next audit; not counted in this verdict)
+
+1. **The claim's pick depends on which held leg is read.** On the env-fit held leg pick3 is the worst of the three
+   committed picks (22.43 / 23.46 / 23.57), and its 23.57 is behind the leader's 23.45 even priced. The pre-registered
+   pick1 has the best env-fit held number of any pick (22.43). The claim headlines fit60 (22.86), the only leg where
+   pick3 is best. P2's "best of 3 on both claim sets" holds only for the fit60 legs.
+2. **The dashboard card shows the polished number without its terms.** `tools/dash_build.py` line 402 hard-codes
+   `polished_bench['pick1']`. For this row (keys 'pick3' and 'row_pick'), `morphs.json` carries v_gap 18.33 with every
+   `v_*` term null. Its verdict text still describes the 18.87 parity row. Any future polish whose pick is not named
+   pick1 will show the same way.
+3. **The 2 mm counts in the "tie" argument leave out the model's extra walls (`cmin`).** Counting them, pick3
+   unpriced held has 64 taken poses under 2 mm against the leader's 67 (not 52 against 62); bench is 26 against 30.
+   The tie conclusion stands, but pick3's 2 mm advantage shrinks from 10 poses to 3.
+
+
 ---
 
 *Earlier audit of this row (auditor 11:03-11:35 UTC, final WATCH); its skeptic section is kept below unchanged. Its auditor sections are replaced by the run above and remain in git history (commit before this one).*
