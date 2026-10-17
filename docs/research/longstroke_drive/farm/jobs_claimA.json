@@ -1,0 +1,26 @@
+[
+ {
+  "tag": "ls-claimA-ctrl_sn42_bench",
+  "cmd": "mkdir -p docs/research/longstroke_drive/farm/claimA && python3 docs/concepts/models/longstroke-slipper-knuckle-3r.py claims '[{\"tag\": \"ctrl_sn42_bench\", \"drive\": \"nose\", \"mode\": \"frozen\", \"params\": {\"bk1\": 26.0, \"bk2\": 38.0336, \"a1max\": 58.7678}}]' docs/research/longstroke_drive/farm/claimA > docs/research/longstroke_drive/farm/claimA/ctrl_sn42_bench.run.log 2>&1; tail -2 docs/research/longstroke_drive/farm/claimA/ctrl_sn42_bench.log",
+  "out": [
+   "docs/research/longstroke_drive/farm/claimA/ctrl_sn42_bench*"
+  ],
+  "env": {
+   "OMP_NUM_THREADS": "1",
+   "IGL_NUM_THREADS": "1"
+  },
+  "timeout": 3600
+ },
+ {
+  "tag": "ls-claimA-rs1_bench",
+  "cmd": "mkdir -p docs/research/longstroke_drive/farm/claimA && python3 docs/concepts/models/longstroke-slipper-knuckle-3r.py claims '[{\"tag\": \"rs1_bench\", \"drive\": \"rssr\", \"mode\": \"frozen\", \"params\": {\"La\": 22.1975, \"s_arm\": 4.0, \"r_h\": 15.8726, \"beta\": -99.7207, \"gam\": 3.9288, \"hl\": 3.15, \"zr\": 0.413, \"kK\": 1.8877, \"r_lobe\": 8.5, \"bk1\": 26.0, \"bk2\": 47.2694, \"a1max\": 68.26939999999999, \"smhi\": 10.7681}}]' docs/research/longstroke_drive/farm/claimA > docs/research/longstroke_drive/farm/claimA/rs1_bench.run.log 2>&1; tail -2 docs/research/longstroke_drive/farm/claimA/rs1_bench.log",
+  "out": [
+   "docs/research/longstroke_drive/farm/claimA/rs1_bench*"
+  ],
+  "env": {
+   "OMP_NUM_THREADS": "1",
+   "IGL_NUM_THREADS": "1"
+  },
+  "timeout": 3600
+ }
+]

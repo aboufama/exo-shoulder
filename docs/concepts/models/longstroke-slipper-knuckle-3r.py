@@ -47,7 +47,7 @@ BM = importlib.util.module_from_spec(_sp); _sp.loader.exec_module(BM)
 RF, SC, FL, PK, S = BM.RF, BM.SC, BM.FL, BM.PK, BM.S
 RL = BM
 SCBase = RF.RFModel.__bases__[0]                             # the RSSR sidecar class (sidecar-longdyad-knuckle-3r.SCModel)
-REPORT_KEYS = ("plain", "gap_near1", "gap_near2", "min_metal_mm", "why", "cam", "overhead140", "ws_inband", "parts_ib14")
+REPORT_KEYS = ("plain", "gap_near1", "gap_near2", "min_metal_mm", "why", "cam", "overhead140", "ws_inband", "parts_ib14", "stroke_short")
 NOSE = dict(mu=0.087, nose_r=1.1839)
 if DRIVE == "rssr":
     PARAMS = dict(BM.PARAMS, **SN_BEST); PARAMS.update(RSSR_SEED); PARAMS.update(LONG_K)
@@ -154,9 +154,15 @@ def _report(B, params):
     return r, M
 
 
+STROKE_MIN = float(os.environ.get("LS_STROKE_MIN", "0"))      # search constraint: the drive's own range must stay >= this
+OBJ = os.environ.get("LS_OBJ", "near2")                        # search objective: near2 (the round-9 rule) | near1
+
+
 def evaluate(B, params):
     r, M = _report(B, params)
     if r.get("sidecar_fail") or r.get("drive_idle") or r.get("pa_fail") or r.get("knee_moved"): r["honest"] = False
+    if STROKE_MIN > 0 and float((r.get("cam") or {}).get("dK_lim") or 0.0) < STROKE_MIN: r["honest"] = False; r["stroke_short"] = True
+    if OBJ == "near1" and r.get("gap_near1") is not None: r["gap"] = r["gap_near1"]
     p = {k: v for k, v in M.p.items() if isinstance(v, (int, float, str, bool)) or v is None}
     return p, r
 

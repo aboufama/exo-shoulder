@@ -2293,3 +2293,19 @@ No bench, judge or kit file changed this round.
 2. Stack the nose and the re-fit arm on the result.
 3. Fix the slipper's record (verdict text, v_contact, like-for-like complexity) and get the user's B1 ruling before
    any claim that rests on m_sub at K's rest.
+
+## In flight, 2026-10-17 07:27 UTC (lead note for the round-11 planner): the ~75 deg K stroke is already being built
+
+- `longstroke-slipper-knuckle-3r` (lead's background agent, started 06:45 UTC; docs/research/longstroke_drive.md, model
+  docs/concepts/models/longstroke-slipper-knuckle-3r.py, scripts docs/research/longstroke_drive/): the round-10 winner
+  slipper-nose with the K sub-dyad re-seated to the fold analysis' long dyad and an RSSR drive. Measured so far: one-sided
+  cams cap at 46.5 / 51.8 deg; the RSSR reaches 77.2 deg with every PA <= 42 and transmission >= 48; CMA on the farm is
+  running. Its report will give frozen exact + held out + contact depth + complexity, gated by
+  docs/research/fold_ceiling/parking_k.py, and an alignment-tool verdict.
+- Round 11 should not build the same drive twice: take this row as the in-family candidate (its verifier and audit are
+  round 11's job when it lands) and spend the round's own lenses on what it cannot do - the folded wall at hub 2
+  (reach >= 0.80 needs both walls moved, docs/research/fold_ceiling.md) and alternative long-stroke drives the agent
+  did not cover (two-stage cam-linkage, toggle / dwell).
+- Leader decisions today: round-10 winner slipper-nose 18.49 (score 93.28, held out 23.45, WATCH, 0 gamed); its
+  generation CAD is deferred until the long-stroke row is measured (it would replace slipper-nose's drive); the gen-6
+  CAD of the tied sibling roller-longdyad (7/19) carries the shared chain.

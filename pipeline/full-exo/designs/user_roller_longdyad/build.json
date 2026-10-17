@@ -3963,5 +3963,85 @@
   "max_frame_dev_mm": 0.000116,
   "max_joint_feature_mm": 0.1444,
   "dowels_in_slots": true
+ },
+ "drive_skin": {
+  "rule": ">= 0.3 mm on every frame (gen-5 lobe ring: -0.26)",
+  "frames": 1337,
+  "every": 1,
+  "min_mm": 1.836,
+  "where": "D9-02 drive lobe ring: 17-4PH H900, wire: Raise overhead frame 78",
+  "passes": true,
+  "per_part": {
+   "drive flank roller pin ISO 2341-B 3x8 he": {
+    "min_mm": 5.562,
+    "at": "Comb hair frame 105",
+    "frames_lt_0p3": 0,
+    "frames_lt_2": 0
+   },
+   "drive flank roller MR63ZZ 3x6x2.5, radia": {
+    "min_mm": 6.363,
+    "at": "Comb hair frame 105",
+    "frames_lt_0p3": 0,
+    "frames_lt_2": 0
+   },
+   "drive follower pin clip DIN 6799 RS 2.3 ": {
+    "min_mm": 18.51,
+    "at": "Raise overhead frame 78",
+    "frames_lt_0p3": 0,
+    "frames_lt_2": 0
+   },
+   "drive follower pin O3 h6 17-4PH H900 wit": {
+    "min_mm": 16.704,
+    "at": "Reach a high shelf frame 75",
+    "frames_lt_0p3": 0,
+    "frames_lt_2": 0
+   },
+   "drive lobe follower roller MR63ZZ 3x6x2.": {
+    "min_mm": 18.564,
+    "at": "Raise overhead frame 78",
+    "frames_lt_0p3": 0,
+    "frames_lt_2": 0
+   },
+   "drive crank bearing 2 683ZZ 3x7x3, 0.1 m": {
+    "min_mm": 16.703,
+    "at": "Reach a high shelf frame 75",
+    "frames_lt_0p3": 0,
+    "frames_lt_2": 0
+   },
+   "drive crank bearing 1 683ZZ 3x7x3 (polis": {
+    "min_mm": 13.738,
+    "at": "Reach a high shelf frame 75",
+    "frames_lt_0p3": 0,
+    "frames_lt_2": 0
+   },
+   "D9-01 drive bell crank (Ti-6Al-4V, 5-axi": {
+    "min_mm": 5.435,
+    "at": "Comb hair frame 92",
+    "frames_lt_0p3": 0,
+    "frames_lt_2": 0
+   },
+   "D9-02 drive lobe ring: 17-4PH H900, wire": {
+    "min_mm": 1.836,
+    "at": "Raise overhead frame 78",
+    "frames_lt_0p3": 0,
+    "frames_lt_2": 41
+   },
+   "D8-02a link 1a: 8x3 bar on ONE line/arc ": {
+    "min_mm": 1.901,
+    "at": "Raise overhead frame 78",
+    "frames_lt_0p3": 0,
+    "frames_lt_2": 41
+   }
+  },
+  "per_clip": {
+   "Raise overhead": 1.836,
+   "Drink from a cup": 3.061,
+   "Comb hair": 2.854,
+   "Reach a high shelf": 2.796,
+   "Wash opposite shoulder": 3.209,
+   "Reach back pocket": 3.047,
+   "Wave": 3.343,
+   "Walking arm swing": 3.197
+  }
  }
 }
