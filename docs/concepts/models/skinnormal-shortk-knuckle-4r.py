@@ -32,6 +32,7 @@ CB, KIT = EP.CB, EP.KIT
 _sp = importlib.util.spec_from_file_location("kr_for_shortk", os.path.join(HERE, "minarc-stop-knuckle-4r-kitrule.py"))
 KR = importlib.util.module_from_spec(_sp); _sp.loader.exec_module(KR)
 D2R = math.pi / 180
+KMARGIN = 5.5                                                # K-dyad margin at stop B, the priced reading
 ID = "skinnormal-shortk-knuckle-4r"
 
 # pick1's priced base (pin knee lE / lc / phiE / phib / stk / ang_min unchanged) + the skinnormal seed, UNROUNDED (the judge's
@@ -88,6 +89,12 @@ def full(params):
         az2, el2, res = solve_seat(P, a1, a2); P.update(az2=az2, el2=el2); info["seat"] = dict(az2=round(az2, 4), el2=round(el2, 4), res=res)
     if dKB is not None:
         P["a1max"] = a1max_from_dKB(P, float(dKB)); info["a1max_nominal"] = round(P["a1max"], 4)
+    # REPAIR (measured 2026-10-17): the K dyad (bk1, bk2) must keep the margin read at CB_FOLD_MARGIN 5.5 (the verifier's
+    # priced reading) at stop B: a1max <= bk1 + bk2 - 5.5. The skinnormal seed drew stop B at a1max 65.35 (priced 64.95)
+    # > 70.35 - 5.5 = 64.85, so at 5.5 KRDesign.k_ok is False and EVERY pose is refused (gap 275); stop B is drawn 0.1 deg
+    # earlier instead (dK_B 75.84 -> ~75.6).
+    cap = float(P["bk1"]) + float(P["bk2"]) - KMARGIN - 0.01
+    if float(P["a1max"]) > cap: info["a1max_capped"] = [round(float(P["a1max"]), 4), round(cap, 4)]; P["a1max"] = cap
     return P, info
 
 
