@@ -78,8 +78,21 @@ def _clamp(p):
         p["r_lobe"] = _c(p["r_lobe"], 7.0, 8.5); p["hl"] = _c(p["hl"], 0.0, 3.15); p["zr"] = max(float(p["zr"]), 0.0)
         p["gam"] = _c(p.get("gam", 0.0), -60.0, 60.0)
         p["i_rock"] = p["La"] / p["s_arm"]; p["r_horn"] = p["r_h"]
-        p["kK"] = max(float(p["kK"]), 0.0); p["kA"] = p["kB"] = p["kK"]; p["t1"] = 6.0; p["law_mode_in"] = "lin"; p["law_mode"] = "seg"
-        p["smt"] = max(float(p.get("smt", 12.0)), 5.2)
+        # the hub-2 lobe is cut to the law, so its shape is a design freedom (law_in): 'lin' dK = kK t (the parents' default),
+        # 'seg' two slopes kA (t < t1) / kB, 'track' the least opening that holds the dyad margin m3e >= smt (frontload's
+        # law, integrated with the gain clipped to the lobe's pressure-angle cap); every law keeps the parents' per-t gates
+        # (th monotone, rate, lobe pressure angle <= pa_max, lift-off, stop B, skirt)
+        law_in = p.get("law_in", "lin")
+        if law_in == "track":
+            p["law_mode"] = "track"; p["law_mode_in"] = "track"; p["smt"] = max(float(p.get("smt", 6.0)), 5.2)
+            p["kK"] = max(float(p["kK"]), 0.0); p["kA"] = p["kB"] = p["kK"]; p["t1"] = 6.0
+        elif law_in == "seg":
+            p["law_mode"] = "seg"; p["law_mode_in"] = "seg"
+            p["kA"] = max(float(p.get("kA", p["kK"])), 0.0); p["kB"] = max(float(p.get("kB", p["kK"])), 0.0); p["t1"] = max(float(p.get("t1", 6.0)), 0.5)
+            p["smt"] = max(float(p.get("smt", 12.0)), 5.2)
+        else:
+            p["kK"] = max(float(p["kK"]), 0.0); p["kA"] = p["kB"] = p["kK"]; p["t1"] = 6.0; p["law_mode_in"] = "lin"; p["law_mode"] = "seg"
+            p["smt"] = max(float(p.get("smt", 12.0)), 5.2)
         p["a1max"] = min(float(p["a1max"]), float(p["bk1"]) + float(p["bk2"]) - 5.0)
         return p
     p["g"] = _c(p["g"], 1.2, 3.0); p["r_c"] = _c(p["r_c"], 13.0, 22.0)
