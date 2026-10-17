@@ -1,0 +1,57 @@
+[
+ {
+  "key": "fold_margin",
+  "refuted": true,
+  "evidence": "The margin is on file 3 times, all >= TH fold_min 5.0: rows/kneeless-roller-knuckle-3r.json verification.checks.th_margin_min_deg 5.408 / th_margin_min_held_deg 5.091; verify/kneeless-roller-knuckle-3r_v_bench_head.json extra.th_margin {min 5.408, n 371, lt5 0}; _v_held_frozen.json extra.th_margin {min 5.091, n 863, lt5 0}; row fast.kit_min_th_margin_deg 5.14. Tool read miss: c_fold_margin's key regex ends at th_margin$, so th_margin_min_deg is skipped and the dict th_margin gives no number."
+ },
+ {
+  "key": "idle",
+  "refuted": true,
+  "evidence": "The declared drive moves far above TH idle_deg 2.0. Own exact re-wear 2026-10-17 at fc0f574 (alignment_audit remeasure, model unchanged, CB_EXACT=1): 21.07 / 23.23 / 32.25 / 87.37 reproduced; deep.coord_spans dK -0.7597..0 rad = 43.53 deg. Held: dK 45.78 deg (remeasure _held.json). K moves on 148/371 bench and 364/863 held taken poses (verify extra.dK_sign_counts); crank phi_max_taken 20.5. K.ang (93.1213, span 0) is the knee dict: roller-longdyad model line 151 Kn = D.knee(s), dK = D._dK. No knee is a declared joint (mechanism.notes). M4 absent."
+ },
+ {
+  "key": "reporting",
+  "refuted": false,
+  "evidence": "Checked rows/kneeless-roller-knuckle-3r.json: status 'verified' and t_verified are set, but the verdict still reads '(self-measured, NOT verified)'. The row and docs/concepts/kneeless-roller-knuckle-3r.md also still say 'fails the A1 dominance gate', a rule retired 2026-10-17. The fact is right. It understates rather than flatters, so the wearer loses nothing, but a stale record is not refuted by a number. Watch stands."
+ },
+ {
+  "key": "judgement:NEW-idle-check-false-positive",
+  "refuted": true,
+  "evidence": "Every fact confirmed. What it describes is a defect of tools/alignment_audit.py (c_idle reads the knee dict K.*; c_fold_margin's regex), not a pattern of this design. The design-side numbers it cites are ok on file and re-measured this session: dK 43.53 bench / 45.78 held (> TH idle_deg 2); th margin 5.408 / 5.091 (>= TH fold_min 5); own fast re-run knee_rigid ang_ptp 0.0 deg, s_max 0.0 mm, ang 93.12; plain 16.70 reproduces row.gap. Proposal T-a (tool fix) stays open as a tool action, not a design watch."
+ },
+ {
+  "key": "judgement:NEW-free-deletion",
+  "refuted": false,
+  "evidence": "Numbers confirmed in remeasure/kneeless-roller-knuckle-3r_ghoffset.json: 3 mm within_liner 0.387 vs knee_equiv 0.666, slide 0.402; 5 mm 0.177 vs 0.362. Knee worth on the same exact harness: 21.07 - 18.67 = +2.40 (n 470), 24.59 - 23.73 = +0.86 held (n 1154). ROUNDS.md lines 1220-1227 confirmed. Not apples to apples: 0.666 is this model's ideal planar knee, not the knee rows' own models. Also unmeasured: a two-axis cross slide at the cuff, which CLAUDE.md scope allows outside the count. No number refutes the misfit, so the wearer cost (cuff pressure and twist) stands."
+ },
+ {
+  "key": "judgement:NEW-contact-depth",
+  "refuted": false,
+  "evidence": "Confirmed in remeasure/_probe.json probe.contact_poses: 10 poses, summed -44.0 mm, deepest -12.0 at (15,165,-60); 5 at elev 90-105 (-5.86, -4.42, -3.01, -2.85, -0.71). Lead _probe.json: 4 poses, -6.23, deepest -4.61. Held-out why: 26 contact + 12 parts (roller-longdyad 10 + 0, lead 10 + 5); all exact, same n. Wording only: planes -15..15 are side raise near plane 0, not the scapular plane. roller-longdyad has no probe file, so its depth is not on file. Stands."
+ },
+ {
+  "key": "judgement:T1",
+  "refuted": false,
+  "evidence": "Re-measured this session (exact, fc0f574): near1_poses 4, gap_near1 23.23, near_touch_low 0.01 / 0.55 / 0.78 / 0.84 mm. Held _held.json: 12 poses, 27.20. Own fast re-run: near1 17.84 and min metal 0.72, matching row.fast. The threshold is the user's line (CLAUDE.md: contact stays metal < 1 mm). ALIGNMENT.md section 1 says metal at 1-2 mm on the model is metal on a real arm, so a pose taken at 0.01 mm costs the wearer. Stands as watch."
+ },
+ {
+  "key": "judgement:M5",
+  "refuted": false,
+  "evidence": "Missing measurement. grep finds no dynamics or R17 output for this id in judge/, pipeline/ or docs/; the only files are the row, doc, model, verify and dashboard data. Stop-A share confirmed: verify _v_held_frozen.json extra.dK_sign_counts zero 499 of 863 (bench 223 of 371). Stands."
+ },
+ {
+  "key": "judgement:G4",
+  "refuted": false,
+  "evidence": "Values confirmed in row verification.checks: pa_horn_max_held 42.5, dK 45.78 / lim 46.75, th 5.091, E_L2_min_held 1.4. Partly overstated: PA_MAX 43 is already 2 deg under the 45 gate with ~0.6 deg slop plus flank tolerance inside (roller-longdyad model line 19). The verifier's at-45 re-check removes 0 poses on bench and held (extra.at_pa45.poses_failing 0). dK_lim is where the horn reaches 43, and the flank law runs to 51.1 (cam.law_dK_max). No force or tolerance file exists for the flank at 42.5, so the watch stands."
+ },
+ {
+  "key": "judgement:NEW-inband-padding",
+  "refuted": false,
+  "evidence": "Recomputed from remeasure _bench.json parts_ib14 (968 samples): sample-weighted in-band 0.8907. With roller-longdyad's E and bracket counts (104 / 85) it is 0.8871 (+0.363 gap), with the lead's (104 / 95) +0.245, and with E alone +0.129. verify _v_bench_head.json frozen.gap 20.95. The parts are real and in band, so this is a proxy credit, not wearer harm. No number refutes it. Watch stands."
+ },
+ {
+  "key": "judgement:NEW-confounded-lesson",
+  "refuted": false,
+  "evidence": "Confirmed same objective: roller-longdyad doc line 78 (2 mm objective), kneeless doc lines 24 / 51. roller-longdyad row gap 13.19, v_gap 18.67 (+5.48), held 23.73 (+5.06); this row 16.70, 21.07 (+4.37), held 24.59 (+3.52). Doc lines 139-140 still credit the knee with '+4.4 here vs +8.4-9.0'. Stands."
+ }
+]

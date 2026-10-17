@@ -254,3 +254,66 @@ tracking-error budget.
 - **Held-out workspace in-band and reach by elevation:** the probe was run on the bench wear only.
 - **A GH-offset misfit for the knee rows from their own models:** the 66.6 % comes from this model's planar-knee
   equivalent, not from a re-wear of a knee row.
+
+## Skeptic (2026-10-17, 02:05-02:20 UTC, git fc0f574)
+
+The skeptic was a separate agent. It edited no bench, judge, kit, model, row, dashboard page or CLAUDE.md, and
+changed no score. It used local compute only: nice, OMP_NUM_THREADS=1, one process at a time. The farm was not used.
+
+**Re-measured this session (model unchanged).**
+- **Exact re-wear.** `tools/alignment_audit.py` `remeasure`, unchanged, with its output dir redirected to the
+  scratchpad. CB_EXACT=1, Bench(110,360), 214 s. It reproduces frozen **21.07** / 1 mm 23.23 / 2 mm 32.25 /
+  3 mm 87.37, with why = fold 86, parts 3, contact 10.
+  - coord_spans: dK -0.7597..0 rad (**43.53 deg**). Every K.* entry is constant (K.ang 93.1213).
+- **Fast check.** `docs/concepts/models/kneeless-roller-knuckle-3r.py check <best_params>` reproduces row.fast:
+  plain 16.70 / 1 mm 17.84 / 2 mm 20.02, min metal 0.72 mm.
+  - knee_rigid: ang_ptp 0.0 deg, s_max 0.0 mm, ang 93.12. phi_max_taken 20.5.
+  - honest True, drive_idle not set.
+
+**Rulings** (also in `docs/alignment/kneeless-roller-knuckle-3r.rulings.json`):
+
+| key | refuted | evidence |
+|---|---|---|
+| fold_margin (watch) | **yes** | The margin is on file three times, all >= TH fold_min 5.0. Row `verification.checks.th_margin_min_deg` 5.408 / `th_margin_min_held_deg` 5.091. verify `_v_bench_head.json` `extra.th_margin` {min 5.408, n 371, lt5 0}. `_v_held_frozen.json` `extra.th_margin` {min 5.091, n 863, lt5 0}. Row `fast.kit_min_th_margin_deg` 5.14. The tool's key regex ends at `th_margin$`, so it skips `th_margin_min_deg`, and the dict `th_margin` gives no number. |
+| idle (gamed) | **yes** | The declared drive moves far above TH idle_deg 2.0: dK 43.53 deg (own re-wear) and 45.78 held out (`remeasure/_held.json`). K moves on 148/371 bench and 364/863 held-out taken poses (verify `extra.dK_sign_counts`). Crank phi 20.5 deg. K.ang is the knee dict: `roller-longdyad-knuckle-3r.py` line 151 has `Kn = D.knee(s)` beside `dK = D._dK`. The knee is not a declared joint (`mechanism.notes`: "no knee pins, no knee encoders"). M4 is absent. |
+| reporting (watch) | no | Row status is verified, but its verdict still reads "(self-measured, NOT verified)". Row and doc still say "fails the A1 dominance gate", a rule retired 2026-10-17. The fact is right. It understates rather than flatters, but a stale record is not refuted by a number. |
+| NEW-idle-check-false-positive (watch) | **yes** | Every fact is confirmed. It describes a defect of `tools/alignment_audit.py`, not a pattern of this design. The design-side numbers it cites are ok, both on file and re-measured (above). Proposal T-a stays open as a tool action. |
+| NEW-free-deletion (watch) | no | `_ghoffset.json` confirmed: at 3 mm, 0.387 within the liner vs 0.666 for the knee equivalent (one along-arm slide: 0.402). At 5 mm, 0.177 vs 0.362. Knee worth on the same exact harness: +2.40 bench, +0.86 held out. ROUNDS.md lines 1220-1227 confirmed. Not apples to apples: 0.666 comes from this model's ideal planar knee, not from the knee rows' own models. A two-axis cuff cross slide (allowed outside the count by the 2026-10-15 scope) is also unmeasured. No number refutes the misfit, so the reason stands. |
+| NEW-contact-depth (watch) | no | `_probe.json` confirmed: 10 poses, -44.0 mm summed, deepest -12.0 mm at (15,165,-60), 5 at elev 90-105. Lead: 4 poses, -6.23 mm, deepest -4.61 mm. Held out: 26 contact + 12 parts (the knee rows 10 + 0 and 10 + 5). Wording: planes -15..15 are the side raise near plane 0, not the scapular plane. roller-longdyad has no probe file, so its depth is not on file. |
+| T1 (watch) | no | Re-measured: 4 taken poses under 1 mm (0.01 / 0.55 / 0.78 / 0.84 mm), worth +2.16. Held out: 12 poses, +2.61. The user's line is "contact stays metal < 1 mm", and ALIGNMENT section 1 says model metal at 1-2 mm is metal on a real arm. |
+| M5 (watch) | no | Missing measurement: there is no dynamics or R17 output for this id anywhere in judge/, pipeline/ or docs/. Stop A confirmed: 499/863 held out, 223/371 on the bench (`dK_sign_counts.zero`). |
+| G4 (watch) | no | Values confirmed. Partly overstated: PA_MAX 43 already sits 2 deg under the 45 gate with the slop and tolerance inside, and the at-45 re-check removes 0 poses on the bench and held out (`extra.at_pa45.poses_failing` 0). dK_lim is where the horn reaches 43; the flank law runs to 51.1 (`cam.law_dK_max`). No force or tolerance check of the flank at 42.5 deg exists, so the watch stands. |
+| NEW-inband-padding (watch) | no | Recomputed from `parts_ib14` (968 samples): 0.8907. With roller-longdyad's E / bracket counts it is 0.8871 (+0.363 gap). With the lead's counts, +0.245; E alone, +0.129. `--head` 20.95. A proxy credit, not wearer harm. Stands. |
+| NEW-confounded-lesson (watch) | no | Same objective confirmed (2 mm, roller-longdyad doc line 78; this doc lines 24 / 51). roller-longdyad +5.48 / +5.06, this design +4.37 / +3.52. Doc lines 139-140 still credit the knee. |
+
+**Missed by the audit** (not counted in this verdict; for the next audit):
+1. **Hub 3 just clears the tool's out-of-band line.**
+   - Hub 3 is in band 0.505 on the bench and 0.503 held out (`remeasure/_bench.json`, `_held.json` `parts_ib14`).
+     c_sampling's "mostly out-of-band part" watch fires below 0.5, so hub 3 misses it by 0.005 / 0.003.
+   - Its median is 13.9 / 14.0 mm. roller-longdyad's hub 3 is 0.739 at a median of 11.5 mm; the lead's is 0.599 at
+     13.0 mm.
+   - For the wearer, the biggest hub rides at or beyond the 14 mm pass edge on half its samples, about 4 mm prouder
+     than the 10 mm aim. This is the profile price of b3 = 0 (J3 on a GH ray), which the knee deletion needs.
+   - It is not search gaming, because the search never saw the tool's 0.5 line.
+   - Reporting proposal (no score moves): report each hub's median and its share > 14 mm next to the claim.
+2. **"The knee buys little reach" hides where the knee's losses go.**
+   - All three top rows lose exactly 99 of 470 bench poses (reach 0.725 each), from `why` in the `remeasure/*_bench.json`
+     files:
+     - this design: fold 86, parts 3, contact 10;
+     - roller-longdyad: fold 88, slide 9, contact 2;
+     - lead: fold 86, slide 7, parts 2, contact 4.
+   - So deleting the knee trades the knee rows' 7-9 knee-window (slide) losses for about 8 more skin-contact poses
+     and 3 part clashes, at equal reach.
+   - The 2.40 gap difference to roller-longdyad is contact (2.62 vs 0.54) plus in-band (0.95 vs 0.63).
+   - ROUNDS lesson (1), "the knee buys little reach", is literally true but leaves out that the knee's job shows up as
+     fewer contact poses (44.0 vs 6.23 mm summed depth against the lead).
+3. **A third fold-margin spelling and an evidence gap.**
+   - `fast.kit_min_th_margin_deg` is a third spelling c_fold_margin misses. T-a should read all three.
+   - The NEW-contact-depth comparison with roller-longdyad has no probe file behind it, so roller-longdyad's contact
+     depth is not on file.
+
+**Final verdict (ledger, skeptic entry 2026-10-17T02:18:29Z): WATCH.**
+- Refuted with evidence: idle, fold_margin and the idle-check finding.
+- Upheld as watch: reporting, free-deletion, contact-depth, T1, M5, G4, inband-padding and confounded-lesson.
+- The 23:10 / 01:49 'gamed' rested only on the tool's idle false positive. It no longer blocks the row.
+- The row is still not the leader: plain 21.07 vs 18.67 / 18.91, and held out 24.59 vs 23.73 / 22.67.
