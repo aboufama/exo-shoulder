@@ -3,66 +3,19 @@
  "tol_mm": 0.15,
  "frames_checked": 451,
  "pairs": 2804,
- "seconds": 125,
- "setup_seconds": 17,
- "jobs": 1,
- "cpu_seconds": 124,
- "cpu_s_per_frame": 0.237,
- "violations": {
-  "l1a|link 1a strap keep-out (8 x 3 mm Ti, fitted underside, J1 -> K)  IN  base|J1 upper boss + cap keep-out (O20, F+3.15..F+12.25; base = J1's upper member, carried directly by the scapula handler at the hub ring)": {
-   "max_depth": 0.63,
-   "frames": 451,
-   "worst": [
-    "Raise overhead",
-    0
-   ],
-   "worst_point": "face",
-   "per_frame": {
-    "Raise overhead|0": 0.63,
-    "Raise overhead|3": 0.63,
-    "Raise overhead|6": 0.63,
-    "Raise overhead|9": 0.63,
-    "Raise overhead|12": 0.63,
-    "Raise overhead|15": 0.63,
-    "Raise overhead|18": 0.63,
-    "Raise overhead|21": 0.63,
-    "Raise overhead|24": 0.63,
-    "Raise overhead|27": 0.63,
-    "Raise overhead|30": 0.63,
-    "Raise overhead|33": 0.63
-   }
-  },
-  "base|J1 upper boss + cap keep-out (O20, F+3.15..F+12.25; base = J1's upper member, carried directly by the scapula handler at the hub ring)  IN  l1a|link 1a strap keep-out (8 x 3 mm Ti, fitted underside, J1 -> K)": {
-   "max_depth": 0.98,
-   "frames": 451,
-   "worst": [
-    "Raise overhead",
-    0
-   ],
-   "worst_point": "vertex",
-   "per_frame": {
-    "Raise overhead|0": 0.98,
-    "Raise overhead|3": 0.98,
-    "Raise overhead|6": 0.98,
-    "Raise overhead|9": 0.98,
-    "Raise overhead|15": 0.98,
-    "Raise overhead|18": 0.98,
-    "Raise overhead|24": 0.98,
-    "Raise overhead|30": 0.98,
-    "Raise overhead|33": 0.98,
-    "Raise overhead|36": 0.98,
-    "Raise overhead|42": 0.98,
-    "Raise overhead|45": 0.98
-   }
-  }
- },
+ "seconds": 36,
+ "setup_seconds": 8,
+ "jobs": 4,
+ "cpu_seconds": 118,
+ "cpu_s_per_frame": 0.245,
+ "violations": {},
  "open_parts_not_tested_as_container": [],
  "open_parts": {},
  "reoriented_parts": [],
  "samples": {
   "h_mm": 1.0,
   "sharp_deg": 30.0,
-  "total": 966215,
+  "total": 990114,
   "per_part": {
    "H|M4x6 ISO 10642 countersunk (upper cuff)": 6087,
    "H|UPPER ARM CUFF (conformal G2 shell, AlSi10Mg bead blasted)": 62921,
@@ -124,12 +77,12 @@
    "l1b|K stop dowel 2 of 2 (ISO 8734 O3 m6 hardened, r 7.75 mm, F+0.5..F+6.15, pressed in the K upper boss)": 1922,
    "l1b|K stop dowel 1 of 2 (ISO 8734 O3 m6 hardened, r 7.75 mm, F+0.5..F+6.15, pressed in the K upper boss)": 1922,
    "l1a|K lower plate keep-out (O20 x 3, link 1a) with the K stop slots (an opposed pair) (r 7.75 mm, 3.1 wide, 62.8 deg of travel + the dowel; its ends = the stops)": 11629,
-   "l1a|link 1a strap keep-out (8 x 3 mm Ti, fitted underside, J1 -> K)": 1356,
+   "l1a|link 1a strap keep-out (8 x 3 mm Ti, J1 -> K: the full CAD's line/arc chain, climb from J1's skirt + 0.15 on a 60-deg ramp, R2 bends)": 25255,
    "l1a|J1 lower plate keep-out (O20 x 3, link 1a)": 6018,
    "base|J1 upper boss + cap keep-out (O20, F+3.15..F+12.25; base = J1's upper member, carried directly by the scapula handler at the hub ring)": 10498
   },
   "rule": "every vertex + sharp/boundary edges at <= h/2 + longest-edge bisection of every face to edges <= h (midpoints)"
  },
  "inside": "dense surface samples of A (vertices, sharp edges, faces), both ways; integer winding number on welded tessellations (judge/sdist.py grid + segment crossings), depth = exact distance to B's closest point (libigl AABB)",
- "max_depth": 0.98
+ "max_depth": 0.0
 }

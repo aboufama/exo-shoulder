@@ -2,9 +2,7 @@
  "poses": 120,
  "step": 12,
  "share_passing": 0.6417,
- "static_fits_left_to_R6": [
-  "J1 upper boss + cap keep-out (O20, F+3.1 IN link 1a strap keep-out (8 x 3 mm Ti, fit"
- ],
+ "static_fits_left_to_R6": [],
  "arm_near_mm": 110.0,
  "fails": {
   "chain_does_not_close": 0.3583,
@@ -17,7 +15,7 @@
  ],
  "tol_body_mm": 0.5,
  "tol_parts_mm": 0.15,
- "seconds": 72,
+ "seconds": 14,
  "per_pose": [
   {
    "k": 0,
@@ -30,11 +28,9 @@
    "closes": true,
    "body_mm": 0.0,
    "body_part": null,
-   "parts_mm": 0.98,
-   "parts_pair": "J1 upper boss + cap keep-out (O20, F+3.1 IN link 1a strap keep-out (8 x 3 mm Ti, fit",
-   "pairs": {
-    "J1 upper boss + cap keep-out (O20, F+3.1 IN link 1a strap keep-out (8 x 3 mm Ti, fit": 0.98
-   },
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
    "parts_motion_mm": 0.0
   },
   {
@@ -48,11 +44,9 @@
    "closes": true,
    "body_mm": 0.0,
    "body_part": null,
-   "parts_mm": 0.98,
-   "parts_pair": "J1 upper boss + cap keep-out (O20, F+3.1 IN link 1a strap keep-out (8 x 3 mm Ti, fit",
-   "pairs": {
-    "J1 upper boss + cap keep-out (O20, F+3.1 IN link 1a strap keep-out (8 x 3 mm Ti, fit": 0.98
-   },
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
    "parts_motion_mm": 0.0
   },
   {
@@ -66,11 +60,9 @@
    "closes": true,
    "body_mm": 0.0,
    "body_part": null,
-   "parts_mm": 0.98,
-   "parts_pair": "J1 upper boss + cap keep-out (O20, F+3.1 IN link 1a strap keep-out (8 x 3 mm Ti, fit",
-   "pairs": {
-    "J1 upper boss + cap keep-out (O20, F+3.1 IN link 1a strap keep-out (8 x 3 mm Ti, fit": 0.98
-   },
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
    "parts_motion_mm": 0.0
   },
   {
@@ -98,11 +90,9 @@
    "closes": true,
    "body_mm": 0.0,
    "body_part": null,
-   "parts_mm": 0.98,
-   "parts_pair": "J1 upper boss + cap keep-out (O20, F+3.1 IN link 1a strap keep-out (8 x 3 mm Ti, fit",
-   "pairs": {
-    "J1 upper boss + cap keep-out (O20, F+3.1 IN link 1a strap keep-out (8 x 3 mm Ti, fit": 0.98
-   },
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
    "parts_motion_mm": 0.0
   },
   {
@@ -116,11 +106,9 @@
    "closes": true,
    "body_mm": 0.0,
    "body_part": null,
-   "parts_mm": 0.98,
-   "parts_pair": "J1 upper boss + cap keep-out (O20, F+3.1 IN link 1a strap keep-out (8 x 3 mm Ti, fit",
-   "pairs": {
-    "J1 upper boss + cap keep-out (O20, F+3.1 IN link 1a strap keep-out (8 x 3 mm Ti, fit": 0.98
-   },
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
    "parts_motion_mm": 0.0
   },
   {
@@ -134,11 +122,9 @@
    "closes": true,
    "body_mm": 0.0,
    "body_part": null,
-   "parts_mm": 0.98,
-   "parts_pair": "J1 upper boss + cap keep-out (O20, F+3.1 IN link 1a strap keep-out (8 x 3 mm Ti, fit",
-   "pairs": {
-    "J1 upper boss + cap keep-out (O20, F+3.1 IN link 1a strap keep-out (8 x 3 mm Ti, fit": 0.98
-   },
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
    "parts_motion_mm": 0.0
   },
   {
@@ -152,11 +138,9 @@
    "closes": true,
    "body_mm": 0.0,
    "body_part": null,
-   "parts_mm": 0.98,
-   "parts_pair": "J1 upper boss + cap keep-out (O20, F+3.1 IN link 1a strap keep-out (8 x 3 mm Ti, fit",
-   "pairs": {
-    "J1 upper boss + cap keep-out (O20, F+3.1 IN link 1a strap keep-out (8 x 3 mm Ti, fit": 0.98
-   },
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
    "parts_motion_mm": 0.0
   },
   {
@@ -170,11 +154,9 @@
    "closes": true,
    "body_mm": 0.0,
    "body_part": null,
-   "parts_mm": 0.98,
-   "parts_pair": "J1 upper boss + cap keep-out (O20, F+3.1 IN link 1a strap keep-out (8 x 3 mm Ti, fit",
-   "pairs": {
-    "J1 upper boss + cap keep-out (O20, F+3.1 IN link 1a strap keep-out (8 x 3 mm Ti, fit": 0.98
-   },
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
    "parts_motion_mm": 0.0
   },
   {
@@ -188,11 +170,9 @@
    "closes": true,
    "body_mm": 0.0,
    "body_part": null,
-   "parts_mm": 0.98,
-   "parts_pair": "J1 upper boss + cap keep-out (O20, F+3.1 IN link 1a strap keep-out (8 x 3 mm Ti, fit",
-   "pairs": {
-    "J1 upper boss + cap keep-out (O20, F+3.1 IN link 1a strap keep-out (8 x 3 mm Ti, fit": 0.98
-   },
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
    "parts_motion_mm": 0.0
   },
   {
@@ -206,11 +186,9 @@
    "closes": true,
    "body_mm": 0.0,
    "body_part": null,
-   "parts_mm": 0.98,
-   "parts_pair": "J1 upper boss + cap keep-out (O20, F+3.1 IN link 1a strap keep-out (8 x 3 mm Ti, fit",
-   "pairs": {
-    "J1 upper boss + cap keep-out (O20, F+3.1 IN link 1a strap keep-out (8 x 3 mm Ti, fit": 0.98
-   },
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
    "parts_motion_mm": 0.0
   },
   {
@@ -224,11 +202,9 @@
    "closes": true,
    "body_mm": 0.0,
    "body_part": null,
-   "parts_mm": 0.98,
-   "parts_pair": "J1 upper boss + cap keep-out (O20, F+3.1 IN link 1a strap keep-out (8 x 3 mm Ti, fit",
-   "pairs": {
-    "J1 upper boss + cap keep-out (O20, F+3.1 IN link 1a strap keep-out (8 x 3 mm Ti, fit": 0.98
-   },
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
    "parts_motion_mm": 0.0
   },
   {
@@ -242,11 +218,9 @@
    "closes": true,
    "body_mm": 0.0,
    "body_part": null,
-   "parts_mm": 0.98,
-   "parts_pair": "J1 upper boss + cap keep-out (O20, F+3.1 IN link 1a strap keep-out (8 x 3 mm Ti, fit",
-   "pairs": {
-    "J1 upper boss + cap keep-out (O20, F+3.1 IN link 1a strap keep-out (8 x 3 mm Ti, fit": 0.98
-   },
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
    "parts_motion_mm": 0.0
   },
   {
@@ -260,11 +234,9 @@
    "closes": true,
    "body_mm": 0.0,
    "body_part": null,
-   "parts_mm": 0.98,
-   "parts_pair": "J1 upper boss + cap keep-out (O20, F+3.1 IN link 1a strap keep-out (8 x 3 mm Ti, fit",
-   "pairs": {
-    "J1 upper boss + cap keep-out (O20, F+3.1 IN link 1a strap keep-out (8 x 3 mm Ti, fit": 0.98
-   },
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
    "parts_motion_mm": 0.0
   },
   {
@@ -278,11 +250,9 @@
    "closes": true,
    "body_mm": 0.0,
    "body_part": null,
-   "parts_mm": 0.98,
-   "parts_pair": "J1 upper boss + cap keep-out (O20, F+3.1 IN link 1a strap keep-out (8 x 3 mm Ti, fit",
-   "pairs": {
-    "J1 upper boss + cap keep-out (O20, F+3.1 IN link 1a strap keep-out (8 x 3 mm Ti, fit": 0.98
-   },
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
    "parts_motion_mm": 0.0
   },
   {
@@ -296,11 +266,9 @@
    "closes": true,
    "body_mm": 0.0,
    "body_part": null,
-   "parts_mm": 0.98,
-   "parts_pair": "J1 upper boss + cap keep-out (O20, F+3.1 IN link 1a strap keep-out (8 x 3 mm Ti, fit",
-   "pairs": {
-    "J1 upper boss + cap keep-out (O20, F+3.1 IN link 1a strap keep-out (8 x 3 mm Ti, fit": 0.98
-   },
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
    "parts_motion_mm": 0.0
   },
   {
@@ -328,11 +296,9 @@
    "closes": true,
    "body_mm": 0.0,
    "body_part": null,
-   "parts_mm": 0.98,
-   "parts_pair": "J1 upper boss + cap keep-out (O20, F+3.1 IN link 1a strap keep-out (8 x 3 mm Ti, fit",
-   "pairs": {
-    "J1 upper boss + cap keep-out (O20, F+3.1 IN link 1a strap keep-out (8 x 3 mm Ti, fit": 0.98
-   },
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
    "parts_motion_mm": 0.0
   },
   {
@@ -346,11 +312,9 @@
    "closes": true,
    "body_mm": 0.0,
    "body_part": null,
-   "parts_mm": 0.98,
-   "parts_pair": "J1 upper boss + cap keep-out (O20, F+3.1 IN link 1a strap keep-out (8 x 3 mm Ti, fit",
-   "pairs": {
-    "J1 upper boss + cap keep-out (O20, F+3.1 IN link 1a strap keep-out (8 x 3 mm Ti, fit": 0.98
-   },
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
    "parts_motion_mm": 0.0
   },
   {
@@ -364,11 +328,9 @@
    "closes": true,
    "body_mm": 0.0,
    "body_part": null,
-   "parts_mm": 0.98,
-   "parts_pair": "J1 upper boss + cap keep-out (O20, F+3.1 IN link 1a strap keep-out (8 x 3 mm Ti, fit",
-   "pairs": {
-    "J1 upper boss + cap keep-out (O20, F+3.1 IN link 1a strap keep-out (8 x 3 mm Ti, fit": 0.98
-   },
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
    "parts_motion_mm": 0.0
   },
   {
@@ -382,11 +344,9 @@
    "closes": true,
    "body_mm": 0.0,
    "body_part": null,
-   "parts_mm": 0.98,
-   "parts_pair": "J1 upper boss + cap keep-out (O20, F+3.1 IN link 1a strap keep-out (8 x 3 mm Ti, fit",
-   "pairs": {
-    "J1 upper boss + cap keep-out (O20, F+3.1 IN link 1a strap keep-out (8 x 3 mm Ti, fit": 0.98
-   },
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
    "parts_motion_mm": 0.0
   },
   {
@@ -400,11 +360,9 @@
    "closes": true,
    "body_mm": 0.0,
    "body_part": null,
-   "parts_mm": 0.98,
-   "parts_pair": "J1 upper boss + cap keep-out (O20, F+3.1 IN link 1a strap keep-out (8 x 3 mm Ti, fit",
-   "pairs": {
-    "J1 upper boss + cap keep-out (O20, F+3.1 IN link 1a strap keep-out (8 x 3 mm Ti, fit": 0.98
-   },
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
    "parts_motion_mm": 0.0
   },
   {
@@ -418,11 +376,9 @@
    "closes": true,
    "body_mm": 0.0,
    "body_part": null,
-   "parts_mm": 0.98,
-   "parts_pair": "J1 upper boss + cap keep-out (O20, F+3.1 IN link 1a strap keep-out (8 x 3 mm Ti, fit",
-   "pairs": {
-    "J1 upper boss + cap keep-out (O20, F+3.1 IN link 1a strap keep-out (8 x 3 mm Ti, fit": 0.98
-   },
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
    "parts_motion_mm": 0.0
   },
   {
@@ -464,11 +420,9 @@
    "closes": true,
    "body_mm": 0.0,
    "body_part": null,
-   "parts_mm": 0.98,
-   "parts_pair": "J1 upper boss + cap keep-out (O20, F+3.1 IN link 1a strap keep-out (8 x 3 mm Ti, fit",
-   "pairs": {
-    "J1 upper boss + cap keep-out (O20, F+3.1 IN link 1a strap keep-out (8 x 3 mm Ti, fit": 0.98
-   },
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
    "parts_motion_mm": 0.0
   },
   {
@@ -482,11 +436,9 @@
    "closes": true,
    "body_mm": 0.0,
    "body_part": null,
-   "parts_mm": 0.98,
-   "parts_pair": "J1 upper boss + cap keep-out (O20, F+3.1 IN link 1a strap keep-out (8 x 3 mm Ti, fit",
-   "pairs": {
-    "J1 upper boss + cap keep-out (O20, F+3.1 IN link 1a strap keep-out (8 x 3 mm Ti, fit": 0.98
-   },
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
    "parts_motion_mm": 0.0
   },
   {
@@ -500,11 +452,9 @@
    "closes": true,
    "body_mm": 0.0,
    "body_part": null,
-   "parts_mm": 0.98,
-   "parts_pair": "J1 upper boss + cap keep-out (O20, F+3.1 IN link 1a strap keep-out (8 x 3 mm Ti, fit",
-   "pairs": {
-    "J1 upper boss + cap keep-out (O20, F+3.1 IN link 1a strap keep-out (8 x 3 mm Ti, fit": 0.98
-   },
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
    "parts_motion_mm": 0.0
   },
   {
@@ -518,11 +468,9 @@
    "closes": true,
    "body_mm": 0.0,
    "body_part": null,
-   "parts_mm": 0.98,
-   "parts_pair": "J1 upper boss + cap keep-out (O20, F+3.1 IN link 1a strap keep-out (8 x 3 mm Ti, fit",
-   "pairs": {
-    "J1 upper boss + cap keep-out (O20, F+3.1 IN link 1a strap keep-out (8 x 3 mm Ti, fit": 0.98
-   },
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
    "parts_motion_mm": 0.0
   },
   {
@@ -536,11 +484,9 @@
    "closes": true,
    "body_mm": 0.0,
    "body_part": null,
-   "parts_mm": 0.98,
-   "parts_pair": "J1 upper boss + cap keep-out (O20, F+3.1 IN link 1a strap keep-out (8 x 3 mm Ti, fit",
-   "pairs": {
-    "J1 upper boss + cap keep-out (O20, F+3.1 IN link 1a strap keep-out (8 x 3 mm Ti, fit": 0.98
-   },
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
    "parts_motion_mm": 0.0
   },
   {
@@ -554,11 +500,9 @@
    "closes": true,
    "body_mm": 0.0,
    "body_part": null,
-   "parts_mm": 0.98,
-   "parts_pair": "J1 upper boss + cap keep-out (O20, F+3.1 IN link 1a strap keep-out (8 x 3 mm Ti, fit",
-   "pairs": {
-    "J1 upper boss + cap keep-out (O20, F+3.1 IN link 1a strap keep-out (8 x 3 mm Ti, fit": 0.98
-   },
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
    "parts_motion_mm": 0.0
   },
   {
@@ -614,11 +558,9 @@
    "closes": true,
    "body_mm": 0.0,
    "body_part": null,
-   "parts_mm": 0.98,
-   "parts_pair": "J1 upper boss + cap keep-out (O20, F+3.1 IN link 1a strap keep-out (8 x 3 mm Ti, fit",
-   "pairs": {
-    "J1 upper boss + cap keep-out (O20, F+3.1 IN link 1a strap keep-out (8 x 3 mm Ti, fit": 0.98
-   },
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
    "parts_motion_mm": 0.0
   },
   {
@@ -632,11 +574,9 @@
    "closes": true,
    "body_mm": 0.0,
    "body_part": null,
-   "parts_mm": 0.98,
-   "parts_pair": "J1 upper boss + cap keep-out (O20, F+3.1 IN link 1a strap keep-out (8 x 3 mm Ti, fit",
-   "pairs": {
-    "J1 upper boss + cap keep-out (O20, F+3.1 IN link 1a strap keep-out (8 x 3 mm Ti, fit": 0.98
-   },
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
    "parts_motion_mm": 0.0
   },
   {
@@ -650,11 +590,9 @@
    "closes": true,
    "body_mm": 0.0,
    "body_part": null,
-   "parts_mm": 0.98,
-   "parts_pair": "J1 upper boss + cap keep-out (O20, F+3.1 IN link 1a strap keep-out (8 x 3 mm Ti, fit",
-   "pairs": {
-    "J1 upper boss + cap keep-out (O20, F+3.1 IN link 1a strap keep-out (8 x 3 mm Ti, fit": 0.98
-   },
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
    "parts_motion_mm": 0.0
   },
   {
@@ -668,11 +606,9 @@
    "closes": true,
    "body_mm": 0.0,
    "body_part": null,
-   "parts_mm": 0.98,
-   "parts_pair": "J1 upper boss + cap keep-out (O20, F+3.1 IN link 1a strap keep-out (8 x 3 mm Ti, fit",
-   "pairs": {
-    "J1 upper boss + cap keep-out (O20, F+3.1 IN link 1a strap keep-out (8 x 3 mm Ti, fit": 0.98
-   },
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
    "parts_motion_mm": 0.0
   },
   {
@@ -686,11 +622,9 @@
    "closes": true,
    "body_mm": 0.0,
    "body_part": null,
-   "parts_mm": 0.97,
-   "parts_pair": "J1 upper boss + cap keep-out (O20, F+3.1 IN link 1a strap keep-out (8 x 3 mm Ti, fit",
-   "pairs": {
-    "J1 upper boss + cap keep-out (O20, F+3.1 IN link 1a strap keep-out (8 x 3 mm Ti, fit": 0.97
-   },
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
    "parts_motion_mm": 0.0
   },
   {
@@ -704,11 +638,9 @@
    "closes": true,
    "body_mm": 0.0,
    "body_part": null,
-   "parts_mm": 0.98,
-   "parts_pair": "J1 upper boss + cap keep-out (O20, F+3.1 IN link 1a strap keep-out (8 x 3 mm Ti, fit",
-   "pairs": {
-    "J1 upper boss + cap keep-out (O20, F+3.1 IN link 1a strap keep-out (8 x 3 mm Ti, fit": 0.98
-   },
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
    "parts_motion_mm": 0.0
   },
   {
@@ -764,11 +696,9 @@
    "closes": true,
    "body_mm": 0.0,
    "body_part": null,
-   "parts_mm": 0.97,
-   "parts_pair": "J1 upper boss + cap keep-out (O20, F+3.1 IN link 1a strap keep-out (8 x 3 mm Ti, fit",
-   "pairs": {
-    "J1 upper boss + cap keep-out (O20, F+3.1 IN link 1a strap keep-out (8 x 3 mm Ti, fit": 0.97
-   },
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
    "parts_motion_mm": 0.0
   },
   {
@@ -782,11 +712,9 @@
    "closes": true,
    "body_mm": 0.0,
    "body_part": null,
-   "parts_mm": 0.97,
-   "parts_pair": "J1 upper boss + cap keep-out (O20, F+3.1 IN link 1a strap keep-out (8 x 3 mm Ti, fit",
-   "pairs": {
-    "J1 upper boss + cap keep-out (O20, F+3.1 IN link 1a strap keep-out (8 x 3 mm Ti, fit": 0.97
-   },
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
    "parts_motion_mm": 0.0
   },
   {
@@ -800,11 +728,9 @@
    "closes": true,
    "body_mm": 0.0,
    "body_part": null,
-   "parts_mm": 0.97,
-   "parts_pair": "J1 upper boss + cap keep-out (O20, F+3.1 IN link 1a strap keep-out (8 x 3 mm Ti, fit",
-   "pairs": {
-    "J1 upper boss + cap keep-out (O20, F+3.1 IN link 1a strap keep-out (8 x 3 mm Ti, fit": 0.97
-   },
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
    "parts_motion_mm": 0.0
   },
   {
@@ -818,11 +744,9 @@
    "closes": true,
    "body_mm": 0.0,
    "body_part": null,
-   "parts_mm": 0.98,
-   "parts_pair": "J1 upper boss + cap keep-out (O20, F+3.1 IN link 1a strap keep-out (8 x 3 mm Ti, fit",
-   "pairs": {
-    "J1 upper boss + cap keep-out (O20, F+3.1 IN link 1a strap keep-out (8 x 3 mm Ti, fit": 0.98
-   },
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
    "parts_motion_mm": 0.0
   },
   {
@@ -836,11 +760,9 @@
    "closes": true,
    "body_mm": 0.0,
    "body_part": null,
-   "parts_mm": 0.98,
-   "parts_pair": "J1 upper boss + cap keep-out (O20, F+3.1 IN link 1a strap keep-out (8 x 3 mm Ti, fit",
-   "pairs": {
-    "J1 upper boss + cap keep-out (O20, F+3.1 IN link 1a strap keep-out (8 x 3 mm Ti, fit": 0.98
-   },
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
    "parts_motion_mm": 0.0
   },
   {
@@ -854,11 +776,9 @@
    "closes": true,
    "body_mm": 0.0,
    "body_part": null,
-   "parts_mm": 0.97,
-   "parts_pair": "J1 upper boss + cap keep-out (O20, F+3.1 IN link 1a strap keep-out (8 x 3 mm Ti, fit",
-   "pairs": {
-    "J1 upper boss + cap keep-out (O20, F+3.1 IN link 1a strap keep-out (8 x 3 mm Ti, fit": 0.97
-   },
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
    "parts_motion_mm": 0.0
   },
   {
@@ -872,11 +792,9 @@
    "closes": true,
    "body_mm": 0.0,
    "body_part": null,
-   "parts_mm": 0.98,
-   "parts_pair": "J1 upper boss + cap keep-out (O20, F+3.1 IN link 1a strap keep-out (8 x 3 mm Ti, fit",
-   "pairs": {
-    "J1 upper boss + cap keep-out (O20, F+3.1 IN link 1a strap keep-out (8 x 3 mm Ti, fit": 0.98
-   },
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
    "parts_motion_mm": 0.0
   },
   {
@@ -918,11 +836,9 @@
    "closes": true,
    "body_mm": 0.0,
    "body_part": null,
-   "parts_mm": 0.98,
-   "parts_pair": "J1 upper boss + cap keep-out (O20, F+3.1 IN link 1a strap keep-out (8 x 3 mm Ti, fit",
-   "pairs": {
-    "J1 upper boss + cap keep-out (O20, F+3.1 IN link 1a strap keep-out (8 x 3 mm Ti, fit": 0.98
-   },
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
    "parts_motion_mm": 0.0
   },
   {
@@ -936,11 +852,9 @@
    "closes": true,
    "body_mm": 0.0,
    "body_part": null,
-   "parts_mm": 0.98,
-   "parts_pair": "J1 upper boss + cap keep-out (O20, F+3.1 IN link 1a strap keep-out (8 x 3 mm Ti, fit",
-   "pairs": {
-    "J1 upper boss + cap keep-out (O20, F+3.1 IN link 1a strap keep-out (8 x 3 mm Ti, fit": 0.98
-   },
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
    "parts_motion_mm": 0.0
   },
   {
@@ -954,11 +868,9 @@
    "closes": true,
    "body_mm": 0.0,
    "body_part": null,
-   "parts_mm": 0.98,
-   "parts_pair": "J1 upper boss + cap keep-out (O20, F+3.1 IN link 1a strap keep-out (8 x 3 mm Ti, fit",
-   "pairs": {
-    "J1 upper boss + cap keep-out (O20, F+3.1 IN link 1a strap keep-out (8 x 3 mm Ti, fit": 0.98
-   },
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
    "parts_motion_mm": 0.0
   },
   {
@@ -972,11 +884,9 @@
    "closes": true,
    "body_mm": 0.0,
    "body_part": null,
-   "parts_mm": 0.98,
-   "parts_pair": "J1 upper boss + cap keep-out (O20, F+3.1 IN link 1a strap keep-out (8 x 3 mm Ti, fit",
-   "pairs": {
-    "J1 upper boss + cap keep-out (O20, F+3.1 IN link 1a strap keep-out (8 x 3 mm Ti, fit": 0.98
-   },
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
    "parts_motion_mm": 0.0
   },
   {
@@ -990,11 +900,9 @@
    "closes": true,
    "body_mm": 0.0,
    "body_part": null,
-   "parts_mm": 0.98,
-   "parts_pair": "J1 upper boss + cap keep-out (O20, F+3.1 IN link 1a strap keep-out (8 x 3 mm Ti, fit",
-   "pairs": {
-    "J1 upper boss + cap keep-out (O20, F+3.1 IN link 1a strap keep-out (8 x 3 mm Ti, fit": 0.98
-   },
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
    "parts_motion_mm": 0.0
   },
   {
@@ -1008,11 +916,9 @@
    "closes": true,
    "body_mm": 0.0,
    "body_part": null,
-   "parts_mm": 0.98,
-   "parts_pair": "J1 upper boss + cap keep-out (O20, F+3.1 IN link 1a strap keep-out (8 x 3 mm Ti, fit",
-   "pairs": {
-    "J1 upper boss + cap keep-out (O20, F+3.1 IN link 1a strap keep-out (8 x 3 mm Ti, fit": 0.98
-   },
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
    "parts_motion_mm": 0.0
   },
   {
@@ -1026,11 +932,9 @@
    "closes": true,
    "body_mm": 0.0,
    "body_part": null,
-   "parts_mm": 0.98,
-   "parts_pair": "J1 upper boss + cap keep-out (O20, F+3.1 IN link 1a strap keep-out (8 x 3 mm Ti, fit",
-   "pairs": {
-    "J1 upper boss + cap keep-out (O20, F+3.1 IN link 1a strap keep-out (8 x 3 mm Ti, fit": 0.98
-   },
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
    "parts_motion_mm": 0.0
   },
   {
@@ -1044,11 +948,9 @@
    "closes": true,
    "body_mm": 0.0,
    "body_part": null,
-   "parts_mm": 0.97,
-   "parts_pair": "J1 upper boss + cap keep-out (O20, F+3.1 IN link 1a strap keep-out (8 x 3 mm Ti, fit",
-   "pairs": {
-    "J1 upper boss + cap keep-out (O20, F+3.1 IN link 1a strap keep-out (8 x 3 mm Ti, fit": 0.97
-   },
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
    "parts_motion_mm": 0.0
   },
   {
@@ -1062,11 +964,9 @@
    "closes": true,
    "body_mm": 0.0,
    "body_part": null,
-   "parts_mm": 0.98,
-   "parts_pair": "J1 upper boss + cap keep-out (O20, F+3.1 IN link 1a strap keep-out (8 x 3 mm Ti, fit",
-   "pairs": {
-    "J1 upper boss + cap keep-out (O20, F+3.1 IN link 1a strap keep-out (8 x 3 mm Ti, fit": 0.98
-   },
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
    "parts_motion_mm": 0.0
   },
   {
@@ -1080,11 +980,9 @@
    "closes": true,
    "body_mm": 0.0,
    "body_part": null,
-   "parts_mm": 0.98,
-   "parts_pair": "J1 upper boss + cap keep-out (O20, F+3.1 IN link 1a strap keep-out (8 x 3 mm Ti, fit",
-   "pairs": {
-    "J1 upper boss + cap keep-out (O20, F+3.1 IN link 1a strap keep-out (8 x 3 mm Ti, fit": 0.98
-   },
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
    "parts_motion_mm": 0.0
   },
   {
@@ -1098,11 +996,9 @@
    "closes": true,
    "body_mm": 0.0,
    "body_part": null,
-   "parts_mm": 0.98,
-   "parts_pair": "J1 upper boss + cap keep-out (O20, F+3.1 IN link 1a strap keep-out (8 x 3 mm Ti, fit",
-   "pairs": {
-    "J1 upper boss + cap keep-out (O20, F+3.1 IN link 1a strap keep-out (8 x 3 mm Ti, fit": 0.98
-   },
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
    "parts_motion_mm": 0.0
   },
   {
@@ -1116,11 +1012,9 @@
    "closes": true,
    "body_mm": 0.0,
    "body_part": null,
-   "parts_mm": 0.98,
-   "parts_pair": "J1 upper boss + cap keep-out (O20, F+3.1 IN link 1a strap keep-out (8 x 3 mm Ti, fit",
-   "pairs": {
-    "J1 upper boss + cap keep-out (O20, F+3.1 IN link 1a strap keep-out (8 x 3 mm Ti, fit": 0.98
-   },
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
    "parts_motion_mm": 0.0
   },
   {
@@ -1134,11 +1028,9 @@
    "closes": true,
    "body_mm": 0.0,
    "body_part": null,
-   "parts_mm": 0.98,
-   "parts_pair": "J1 upper boss + cap keep-out (O20, F+3.1 IN link 1a strap keep-out (8 x 3 mm Ti, fit",
-   "pairs": {
-    "J1 upper boss + cap keep-out (O20, F+3.1 IN link 1a strap keep-out (8 x 3 mm Ti, fit": 0.98
-   },
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
    "parts_motion_mm": 0.0
   },
   {
@@ -1152,11 +1044,9 @@
    "closes": true,
    "body_mm": 0.0,
    "body_part": null,
-   "parts_mm": 0.98,
-   "parts_pair": "J1 upper boss + cap keep-out (O20, F+3.1 IN link 1a strap keep-out (8 x 3 mm Ti, fit",
-   "pairs": {
-    "J1 upper boss + cap keep-out (O20, F+3.1 IN link 1a strap keep-out (8 x 3 mm Ti, fit": 0.98
-   },
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
    "parts_motion_mm": 0.0
   },
   {
@@ -1184,11 +1074,9 @@
    "closes": true,
    "body_mm": 0.0,
    "body_part": null,
-   "parts_mm": 0.98,
-   "parts_pair": "J1 upper boss + cap keep-out (O20, F+3.1 IN link 1a strap keep-out (8 x 3 mm Ti, fit",
-   "pairs": {
-    "J1 upper boss + cap keep-out (O20, F+3.1 IN link 1a strap keep-out (8 x 3 mm Ti, fit": 0.98
-   },
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
    "parts_motion_mm": 0.0
   },
   {
@@ -1202,11 +1090,9 @@
    "closes": true,
    "body_mm": 0.0,
    "body_part": null,
-   "parts_mm": 0.98,
-   "parts_pair": "J1 upper boss + cap keep-out (O20, F+3.1 IN link 1a strap keep-out (8 x 3 mm Ti, fit",
-   "pairs": {
-    "J1 upper boss + cap keep-out (O20, F+3.1 IN link 1a strap keep-out (8 x 3 mm Ti, fit": 0.98
-   },
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
    "parts_motion_mm": 0.0
   },
   {
@@ -1220,11 +1106,9 @@
    "closes": true,
    "body_mm": 0.0,
    "body_part": null,
-   "parts_mm": 0.98,
-   "parts_pair": "J1 upper boss + cap keep-out (O20, F+3.1 IN link 1a strap keep-out (8 x 3 mm Ti, fit",
-   "pairs": {
-    "J1 upper boss + cap keep-out (O20, F+3.1 IN link 1a strap keep-out (8 x 3 mm Ti, fit": 0.98
-   },
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
    "parts_motion_mm": 0.0
   },
   {
@@ -1238,11 +1122,9 @@
    "closes": true,
    "body_mm": 0.0,
    "body_part": null,
-   "parts_mm": 0.98,
-   "parts_pair": "J1 upper boss + cap keep-out (O20, F+3.1 IN link 1a strap keep-out (8 x 3 mm Ti, fit",
-   "pairs": {
-    "J1 upper boss + cap keep-out (O20, F+3.1 IN link 1a strap keep-out (8 x 3 mm Ti, fit": 0.98
-   },
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
    "parts_motion_mm": 0.0
   },
   {
@@ -1256,11 +1138,9 @@
    "closes": true,
    "body_mm": 0.0,
    "body_part": null,
-   "parts_mm": 0.98,
-   "parts_pair": "J1 upper boss + cap keep-out (O20, F+3.1 IN link 1a strap keep-out (8 x 3 mm Ti, fit",
-   "pairs": {
-    "J1 upper boss + cap keep-out (O20, F+3.1 IN link 1a strap keep-out (8 x 3 mm Ti, fit": 0.98
-   },
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
    "parts_motion_mm": 0.0
   },
   {
@@ -1274,11 +1154,9 @@
    "closes": true,
    "body_mm": 0.0,
    "body_part": null,
-   "parts_mm": 0.97,
-   "parts_pair": "J1 upper boss + cap keep-out (O20, F+3.1 IN link 1a strap keep-out (8 x 3 mm Ti, fit",
-   "pairs": {
-    "J1 upper boss + cap keep-out (O20, F+3.1 IN link 1a strap keep-out (8 x 3 mm Ti, fit": 0.97
-   },
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
    "parts_motion_mm": 0.0
   },
   {
@@ -1292,11 +1170,9 @@
    "closes": true,
    "body_mm": 0.0,
    "body_part": null,
-   "parts_mm": 0.97,
-   "parts_pair": "J1 upper boss + cap keep-out (O20, F+3.1 IN link 1a strap keep-out (8 x 3 mm Ti, fit",
-   "pairs": {
-    "J1 upper boss + cap keep-out (O20, F+3.1 IN link 1a strap keep-out (8 x 3 mm Ti, fit": 0.97
-   },
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
    "parts_motion_mm": 0.0
   },
   {
@@ -1338,11 +1214,9 @@
    "closes": true,
    "body_mm": 0.0,
    "body_part": null,
-   "parts_mm": 0.98,
-   "parts_pair": "J1 upper boss + cap keep-out (O20, F+3.1 IN link 1a strap keep-out (8 x 3 mm Ti, fit",
-   "pairs": {
-    "J1 upper boss + cap keep-out (O20, F+3.1 IN link 1a strap keep-out (8 x 3 mm Ti, fit": 0.98
-   },
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
    "parts_motion_mm": 0.0
   },
   {
@@ -1356,11 +1230,9 @@
    "closes": true,
    "body_mm": 0.0,
    "body_part": null,
-   "parts_mm": 0.98,
-   "parts_pair": "J1 upper boss + cap keep-out (O20, F+3.1 IN link 1a strap keep-out (8 x 3 mm Ti, fit",
-   "pairs": {
-    "J1 upper boss + cap keep-out (O20, F+3.1 IN link 1a strap keep-out (8 x 3 mm Ti, fit": 0.98
-   },
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
    "parts_motion_mm": 0.0
   },
   {
@@ -1388,11 +1260,9 @@
    "closes": true,
    "body_mm": 0.0,
    "body_part": null,
-   "parts_mm": 0.98,
-   "parts_pair": "J1 upper boss + cap keep-out (O20, F+3.1 IN link 1a strap keep-out (8 x 3 mm Ti, fit",
-   "pairs": {
-    "J1 upper boss + cap keep-out (O20, F+3.1 IN link 1a strap keep-out (8 x 3 mm Ti, fit": 0.98
-   },
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
    "parts_motion_mm": 0.0
   },
   {
@@ -1406,11 +1276,9 @@
    "closes": true,
    "body_mm": 0.0,
    "body_part": null,
-   "parts_mm": 0.98,
-   "parts_pair": "J1 upper boss + cap keep-out (O20, F+3.1 IN link 1a strap keep-out (8 x 3 mm Ti, fit",
-   "pairs": {
-    "J1 upper boss + cap keep-out (O20, F+3.1 IN link 1a strap keep-out (8 x 3 mm Ti, fit": 0.98
-   },
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
    "parts_motion_mm": 0.0
   },
   {
@@ -1424,11 +1292,9 @@
    "closes": true,
    "body_mm": 0.0,
    "body_part": null,
-   "parts_mm": 0.98,
-   "parts_pair": "J1 upper boss + cap keep-out (O20, F+3.1 IN link 1a strap keep-out (8 x 3 mm Ti, fit",
-   "pairs": {
-    "J1 upper boss + cap keep-out (O20, F+3.1 IN link 1a strap keep-out (8 x 3 mm Ti, fit": 0.98
-   },
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
    "parts_motion_mm": 0.0
   },
   {
@@ -1484,11 +1350,9 @@
    "closes": true,
    "body_mm": 0.0,
    "body_part": null,
-   "parts_mm": 0.98,
-   "parts_pair": "J1 upper boss + cap keep-out (O20, F+3.1 IN link 1a strap keep-out (8 x 3 mm Ti, fit",
-   "pairs": {
-    "J1 upper boss + cap keep-out (O20, F+3.1 IN link 1a strap keep-out (8 x 3 mm Ti, fit": 0.98
-   },
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
    "parts_motion_mm": 0.0
   },
   {
@@ -1530,11 +1394,9 @@
    "closes": true,
    "body_mm": 0.0,
    "body_part": null,
-   "parts_mm": 0.98,
-   "parts_pair": "J1 upper boss + cap keep-out (O20, F+3.1 IN link 1a strap keep-out (8 x 3 mm Ti, fit",
-   "pairs": {
-    "J1 upper boss + cap keep-out (O20, F+3.1 IN link 1a strap keep-out (8 x 3 mm Ti, fit": 0.98
-   },
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
    "parts_motion_mm": 0.0
   },
   {
@@ -1548,11 +1410,9 @@
    "closes": true,
    "body_mm": 0.0,
    "body_part": null,
-   "parts_mm": 0.98,
-   "parts_pair": "J1 upper boss + cap keep-out (O20, F+3.1 IN link 1a strap keep-out (8 x 3 mm Ti, fit",
-   "pairs": {
-    "J1 upper boss + cap keep-out (O20, F+3.1 IN link 1a strap keep-out (8 x 3 mm Ti, fit": 0.98
-   },
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
    "parts_motion_mm": 0.0
   },
   {
@@ -1664,11 +1524,9 @@
    "closes": true,
    "body_mm": 0.0,
    "body_part": null,
-   "parts_mm": 0.98,
-   "parts_pair": "J1 upper boss + cap keep-out (O20, F+3.1 IN link 1a strap keep-out (8 x 3 mm Ti, fit",
-   "pairs": {
-    "J1 upper boss + cap keep-out (O20, F+3.1 IN link 1a strap keep-out (8 x 3 mm Ti, fit": 0.98
-   },
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
    "parts_motion_mm": 0.0
   },
   {
@@ -1794,11 +1652,9 @@
    "closes": true,
    "body_mm": 0.0,
    "body_part": null,
-   "parts_mm": 0.98,
-   "parts_pair": "J1 upper boss + cap keep-out (O20, F+3.1 IN link 1a strap keep-out (8 x 3 mm Ti, fit",
-   "pairs": {
-    "J1 upper boss + cap keep-out (O20, F+3.1 IN link 1a strap keep-out (8 x 3 mm Ti, fit": 0.98
-   },
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
    "parts_motion_mm": 0.0
   },
   {
@@ -1812,11 +1668,9 @@
    "closes": true,
    "body_mm": 0.0,
    "body_part": null,
-   "parts_mm": 0.98,
-   "parts_pair": "J1 upper boss + cap keep-out (O20, F+3.1 IN link 1a strap keep-out (8 x 3 mm Ti, fit",
-   "pairs": {
-    "J1 upper boss + cap keep-out (O20, F+3.1 IN link 1a strap keep-out (8 x 3 mm Ti, fit": 0.98
-   },
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
    "parts_motion_mm": 0.0
   },
   {
@@ -1830,11 +1684,9 @@
    "closes": true,
    "body_mm": 0.0,
    "body_part": null,
-   "parts_mm": 0.97,
-   "parts_pair": "J1 upper boss + cap keep-out (O20, F+3.1 IN link 1a strap keep-out (8 x 3 mm Ti, fit",
-   "pairs": {
-    "J1 upper boss + cap keep-out (O20, F+3.1 IN link 1a strap keep-out (8 x 3 mm Ti, fit": 0.97
-   },
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
    "parts_motion_mm": 0.0
   },
   {
@@ -1876,11 +1728,9 @@
    "closes": true,
    "body_mm": 0.0,
    "body_part": null,
-   "parts_mm": 0.98,
-   "parts_pair": "J1 upper boss + cap keep-out (O20, F+3.1 IN link 1a strap keep-out (8 x 3 mm Ti, fit",
-   "pairs": {
-    "J1 upper boss + cap keep-out (O20, F+3.1 IN link 1a strap keep-out (8 x 3 mm Ti, fit": 0.98
-   },
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
    "parts_motion_mm": 0.0
   },
   {
@@ -1908,11 +1758,9 @@
    "closes": true,
    "body_mm": 0.0,
    "body_part": null,
-   "parts_mm": 0.98,
-   "parts_pair": "J1 upper boss + cap keep-out (O20, F+3.1 IN link 1a strap keep-out (8 x 3 mm Ti, fit",
-   "pairs": {
-    "J1 upper boss + cap keep-out (O20, F+3.1 IN link 1a strap keep-out (8 x 3 mm Ti, fit": 0.98
-   },
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
    "parts_motion_mm": 0.0
   },
   {
@@ -1926,11 +1774,9 @@
    "closes": true,
    "body_mm": 0.0,
    "body_part": null,
-   "parts_mm": 0.98,
-   "parts_pair": "J1 upper boss + cap keep-out (O20, F+3.1 IN link 1a strap keep-out (8 x 3 mm Ti, fit",
-   "pairs": {
-    "J1 upper boss + cap keep-out (O20, F+3.1 IN link 1a strap keep-out (8 x 3 mm Ti, fit": 0.98
-   },
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
    "parts_motion_mm": 0.0
   },
   {
@@ -1972,11 +1818,9 @@
    "closes": true,
    "body_mm": 0.0,
    "body_part": null,
-   "parts_mm": 0.98,
-   "parts_pair": "J1 upper boss + cap keep-out (O20, F+3.1 IN link 1a strap keep-out (8 x 3 mm Ti, fit",
-   "pairs": {
-    "J1 upper boss + cap keep-out (O20, F+3.1 IN link 1a strap keep-out (8 x 3 mm Ti, fit": 0.98
-   },
+   "parts_mm": 0.0,
+   "parts_pair": null,
+   "pairs": {},
    "parts_motion_mm": 0.0
   },
   {

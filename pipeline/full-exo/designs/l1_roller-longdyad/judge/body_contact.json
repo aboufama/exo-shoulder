@@ -2,8 +2,8 @@
  "step": 6,
  "tol_mm": 0.5,
  "frames_checked": 228,
- "seconds": 359,
- "jobs": 1,
+ "seconds": 63,
+ "jobs": 4,
  "body_model": "rig",
  "inside": "integer winding number (grid + segment crossings), depth = exact distance to the nearest surface (judge/sdist.py)",
  "parts": {
@@ -767,7 +767,7 @@
    "attributable_worst": null,
    "attributable_kind": null
   },
-  "l1a|link 1a strap keep-out (8 x 3 mm Ti, fitted underside, J1 -> K)": {
+  "l1a|link 1a strap keep-out (8 x 3 mm Ti, J1 -> K: the full CAD's line/arc chain, climb from J1's skirt + 0.15 on a 60-deg ramp, R2 bends)": {
    "owner": "ours",
    "max_depth": 0.0,
    "frames": 0,
