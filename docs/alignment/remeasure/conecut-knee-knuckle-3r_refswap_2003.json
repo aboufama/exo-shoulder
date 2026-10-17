@@ -1,0 +1,303 @@
+{
+ "t": "2026-10-17T20:06:52Z",
+ "tool_version": "2026-10-17.6",
+ "DEPTH_REF": "conecut-knee-knuckle-3r",
+ "PREV_LEAD": "slipper-nose-knuckle-3r",
+ "note": "read-only probe of the 2026-10-17.6 T5 swap and of the dominance default reference (proposal measurement; no tool, row or score changed)",
+ "rows_checked": 87,
+ "swap_fires_on": [
+  {
+   "id": "conecut-knee-knuckle-3r",
+   "ref_in": "conecut-knee-knuckle-3r",
+   "ref_used": "slipper-nose-knuckle-3r",
+   "level": "ok"
+  },
+  {
+   "id": "conecut-knee-knuckle-3r",
+   "ref_in": null,
+   "ref_used": "slipper-nose-knuckle-3r",
+   "level": "ok"
+  }
+ ],
+ "this_is_the_reference_branch_with_PREV_LEAD_patched_to_lead": {
+  "level": "ok",
+  "reason_tail": "mm, held 14 contact poses, sum 60.97 mm, deepest 9.86 mm (this is the reference)"
+ },
+ "selftest_mutation_reference_vs_itself_now_compares": {
+  "rid": "conecut-knee-knuckle-3r",
+  "ref_used": "slipper-nose-knuckle-3r",
+  "level": "ok"
+ },
+ "dominance_proposal": [
+  {
+   "id": "arm-parked-knee-4r",
+   "v_gap": 26.71,
+   "now": "ok",
+   "proposed": "watch",
+   "ref": "conecut-knee-knuckle-3r",
+   "gain_plain": null,
+   "gain_2mm": null,
+   "reason": "cannot compare with conecut-knee-knuckle-3r at 2 mm"
+  },
+  {
+   "id": "cam-unfold-4th",
+   "v_gap": 26.7,
+   "now": "ok",
+   "proposed": "watch",
+   "ref": "conecut-knee-knuckle-3r",
+   "gain_plain": null,
+   "gain_2mm": null,
+   "reason": "cannot compare with conecut-knee-knuckle-3r at 2 mm"
+  },
+  {
+   "id": "conecut-knee-knuckle-3r",
+   "v_gap": 18.28,
+   "now": "ok",
+   "proposed": "watch",
+   "ref": "slipper-nose-knuckle-3r",
+   "gain_plain": 0.21,
+   "gain_2mm": -1.82,
+   "reason": "beats slipper-nose-knuckle-3r by 0.21 plain but loses by 1.82 at 2 mm: part of the gain is metal moved into the 1-2 mm shell (A1 gate retired 2026-10-17)"
+  },
+  {
+   "id": "desmo-slipper-knuckle-3r",
+   "v_gap": 18.95,
+   "now": "ok",
+   "proposed": "ok",
+   "ref": "conecut-knee-knuckle-3r",
+   "gain_plain": -0.72,
+   "gain_2mm": 1.34,
+   "reason": "vs conecut-knee-knuckle-3r: plain -0.72, 2 mm +1.34"
+  },
+  {
+   "id": "dipped-law-groove-knuckle-3r",
+   "v_gap": 18.64,
+   "now": "ok",
+   "proposed": "ok",
+   "ref": "conecut-knee-knuckle-3r",
+   "gain_plain": -0.36,
+   "gain_2mm": -0.85,
+   "reason": "vs conecut-knee-knuckle-3r: plain -0.36, 2 mm -0.85"
+  },
+  {
+   "id": "dwell-fourbar-knee-3r",
+   "v_gap": 37.66,
+   "now": "ok",
+   "proposed": "watch",
+   "ref": "conecut-knee-knuckle-3r",
+   "gain_plain": null,
+   "gain_2mm": null,
+   "reason": "cannot compare with conecut-knee-knuckle-3r at 2 mm"
+  },
+  {
+   "id": "frontload-lobe-stopb-knuckle-3r",
+   "v_gap": 22.82,
+   "now": "ok",
+   "proposed": "ok",
+   "ref": "conecut-knee-knuckle-3r",
+   "gain_plain": -4.54,
+   "gain_2mm": -9.24,
+   "reason": "vs conecut-knee-knuckle-3r: plain -4.54, 2 mm -9.24"
+  },
+  {
+   "id": "geneva-tail-knuckle-pinknee-3r",
+   "v_gap": 23.57,
+   "now": "ok",
+   "proposed": "ok",
+   "ref": "conecut-knee-knuckle-3r",
+   "gain_plain": -5.09,
+   "gain_2mm": -3.79,
+   "reason": "vs conecut-knee-knuckle-3r: plain -5.09, 2 mm -3.79"
+  },
+  {
+   "id": "groove-desmo-knuckle-3r",
+   "v_gap": 22.64,
+   "now": "ok",
+   "proposed": "ok",
+   "ref": "conecut-knee-knuckle-3r",
+   "gain_plain": -4.36,
+   "gain_2mm": -0.22,
+   "reason": "vs conecut-knee-knuckle-3r: plain -4.36, 2 mm -0.22"
+  },
+  {
+   "id": "j3-neck-over-3r",
+   "v_gap": 28.46,
+   "now": "ok",
+   "proposed": "watch",
+   "ref": "conecut-knee-knuckle-3r",
+   "gain_plain": null,
+   "gain_2mm": null,
+   "reason": "cannot compare with conecut-knee-knuckle-3r at 2 mm"
+  },
+  {
+   "id": "k-rim-lobe-stub-knuckle-3r",
+   "v_gap": 44.79,
+   "now": "ok",
+   "proposed": "ok",
+   "ref": "conecut-knee-knuckle-3r",
+   "gain_plain": -26.51,
+   "gain_2mm": -36.84,
+   "reason": "vs conecut-knee-knuckle-3r: plain -26.51, 2 mm -36.84"
+  },
+  {
+   "id": "kneeless-roller-knuckle-3r",
+   "v_gap": 21.07,
+   "now": "ok",
+   "proposed": "ok",
+   "ref": "conecut-knee-knuckle-3r",
+   "gain_plain": -2.79,
+   "gain_2mm": 2.59,
+   "reason": "vs conecut-knee-knuckle-3r: plain -2.79, 2 mm +2.59"
+  },
+  {
+   "id": "kneeless-sidecar-knuckle-3r",
+   "v_gap": 21.11,
+   "now": "ok",
+   "proposed": "ok",
+   "ref": "conecut-knee-knuckle-3r",
+   "gain_plain": -2.83,
+   "gain_2mm": 1.69,
+   "reason": "vs conecut-knee-knuckle-3r: plain -2.83, 2 mm +1.69"
+  },
+  {
+   "id": "minarc-stop-knuckle-4r",
+   "v_gap": 19.54,
+   "now": "ok",
+   "proposed": "ok",
+   "ref": "conecut-knee-knuckle-3r",
+   "gain_plain": -1.26,
+   "gain_2mm": -6.85,
+   "reason": "vs conecut-knee-knuckle-3r: plain -1.26, 2 mm -6.85"
+  },
+  {
+   "id": "offset-skin-normal-3r",
+   "v_gap": 41.02,
+   "now": "ok",
+   "proposed": "watch",
+   "ref": "conecut-knee-knuckle-3r",
+   "gain_plain": null,
+   "gain_2mm": null,
+   "reason": "cannot compare with conecut-knee-knuckle-3r at 2 mm"
+  },
+  {
+   "id": "raglan-knee-3r",
+   "v_gap": 27.82,
+   "now": "ok",
+   "proposed": "watch",
+   "ref": "conecut-knee-knuckle-3r",
+   "gain_plain": null,
+   "gain_2mm": null,
+   "reason": "cannot compare with conecut-knee-knuckle-3r at 2 mm"
+  },
+  {
+   "id": "roller-longdyad-knuckle-3r",
+   "v_gap": 18.67,
+   "now": "ok",
+   "proposed": "ok",
+   "ref": "conecut-knee-knuckle-3r",
+   "gain_plain": -0.39,
+   "gain_2mm": 1.74,
+   "reason": "vs conecut-knee-knuckle-3r: plain -0.39, 2 mm +1.74"
+  },
+  {
+   "id": "seed-offset-3r-slides",
+   "v_gap": 66.47,
+   "now": "ok",
+   "proposed": "watch",
+   "ref": "conecut-knee-knuckle-3r",
+   "gain_plain": null,
+   "gain_2mm": null,
+   "reason": "cannot compare with conecut-knee-knuckle-3r at 2 mm"
+  },
+  {
+   "id": "sidecar-longdyad-knuckle-3r",
+   "v_gap": 18.91,
+   "now": "ok",
+   "proposed": "ok",
+   "ref": "conecut-knee-knuckle-3r",
+   "gain_plain": -0.63,
+   "gain_2mm": 0.81,
+   "reason": "vs conecut-knee-knuckle-3r: plain -0.63, 2 mm +0.81"
+  },
+  {
+   "id": "sidecar-parallelogram-knuckle-3r",
+   "v_gap": 19.13,
+   "now": "watch",
+   "proposed": "ok",
+   "ref": "conecut-knee-knuckle-3r",
+   "gain_plain": -0.85,
+   "gain_2mm": -15.3,
+   "reason": "vs conecut-knee-knuckle-3r: plain -0.85, 2 mm -15.30"
+  },
+  {
+   "id": "sidecar-roller-flank-knuckle-3r",
+   "v_gap": 20.08,
+   "now": "watch",
+   "proposed": "ok",
+   "ref": "conecut-knee-knuckle-3r",
+   "gain_plain": -1.8,
+   "gain_2mm": -11.98,
+   "reason": "vs conecut-knee-knuckle-3r: plain -1.80, 2 mm -11.98"
+  },
+  {
+   "id": "skin-normal-3r-knuckle-cufflink",
+   "v_gap": 29.1,
+   "now": "ok",
+   "proposed": "watch",
+   "ref": "conecut-knee-knuckle-3r",
+   "gain_plain": null,
+   "gain_2mm": null,
+   "reason": "cannot compare with conecut-knee-knuckle-3r at 2 mm"
+  },
+  {
+   "id": "skin-normal-3r-pin-knee",
+   "v_gap": 27.2,
+   "now": "ok",
+   "proposed": "ok",
+   "ref": "conecut-knee-knuckle-3r",
+   "gain_plain": -8.92,
+   "gain_2mm": -12.01,
+   "reason": "vs conecut-knee-knuckle-3r: plain -8.92, 2 mm -12.01"
+  },
+  {
+   "id": "slipper-nose-knuckle-3r",
+   "v_gap": 18.49,
+   "now": "ok",
+   "proposed": "ok",
+   "ref": "conecut-knee-knuckle-3r",
+   "gain_plain": -0.21,
+   "gain_2mm": 1.82,
+   "reason": "vs conecut-knee-knuckle-3r: plain -0.21, 2 mm +1.82"
+  },
+  {
+   "id": "spine-parked-j2-3r",
+   "v_gap": 41.0,
+   "now": "ok",
+   "proposed": "watch",
+   "ref": "conecut-knee-knuckle-3r",
+   "gain_plain": null,
+   "gain_2mm": null,
+   "reason": "cannot compare with conecut-knee-knuckle-3r at 2 mm"
+  },
+  {
+   "id": "trimlug-k165-knuckle-3r",
+   "v_gap": 18.51,
+   "now": "ok",
+   "proposed": "ok",
+   "ref": "conecut-knee-knuckle-3r",
+   "gain_plain": -0.23,
+   "gain_2mm": 1.82,
+   "reason": "vs conecut-knee-knuckle-3r: plain -0.23, 2 mm +1.82"
+  },
+  {
+   "id": "zc-frontier-3r",
+   "v_gap": 33.51,
+   "now": "ok",
+   "proposed": "watch",
+   "ref": "conecut-knee-knuckle-3r",
+   "gain_plain": null,
+   "gain_2mm": null,
+   "reason": "cannot compare with conecut-knee-knuckle-3r at 2 mm"
+  }
+ ]
+}
