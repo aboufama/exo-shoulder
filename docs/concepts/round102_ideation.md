@@ -223,6 +223,16 @@ non-knuckle number under the bar, at complexity 15-16 against the lead's 18.5.
   - The own-angle stop lever is closed (crest-stopcarved 51.28 / 54.97 fast; the planner's stop-box scan).
   - The instrument-cell four-bar is infeasible as stated (1.1).
 
-## 7. Bench(110,360) J2-exit for the antcrest seats
+## 7. Bench(110,360) J2-exit (exact path, `j2exit_110.log`)
 
-(pending `j2exit_110.log`; appended when the exact-path run lands)
+| cell | ws closing | J2 exit p5 / 50 / 95 / max (ws) | > 75 mm ws | > 75 mm clips | abs(axial) >= 150 ws |
+|---|---|---|---|---|---|
+| cap control 50.2/60.3 | 281/360 (the planner's 281 reproduced) | 54 / 61 / 107 / 215 | 51 (0.181) | 10/110 | 10 closing, 1 > 75 mm |
+
+The verification bench widens the cap pole's hub-2 tail: 0.181 of closing ws poses exit > 75 mm, against 0.156 on the
+fit bench. The planner's 0.164-0.268 band holds. The two antcrest cells did not finish inside the judge's time box
+(exact path, ~10 min per cell). crest-knee-3r's screen runs them before any search:
+
+`OMP_NUM_THREADS=1 nice -n 10 python3 .../scratchpad/judge102/j2exit.py 110 360`
+
+The forwarded number to beat is the fit bench's 8-9 / 160.
