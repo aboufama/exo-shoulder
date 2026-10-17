@@ -1,0 +1,670 @@
+{
+ "design": "pipeline/full-exo/designs/user_geneva_rod_v2",
+ "step": 1,
+ "frames": 1,
+ "seconds": 1,
+ "parts": {
+  "l1b|D8-02b link 1b: 8x3 bar on a line/arc chain, K upper pad + O20 ring + M18 spigot + bore (2 dowel holes), J2 pad (carries the rocker post bush) + integral O7 pin with the 115.2-deg q2 stop slot (machined from solid Ti-6Al-4V (2.5-D: 4 side-view sketches side by side of lines + tangent arcs through the model's strap stations, extruded 2 mm; 3+2-axis milling - a wire cannot cut strips of different profiles side by side), rounds R2 / R0.5 in the profile)": {
+   "min_sd": -2.629,
+   "where": [
+    "workspace",
+    0,
+    [
+     -41.42,
+     30.71,
+     32.9
+    ]
+   ],
+   "frames_neg": 1,
+   "frames_lt03": 1
+  },
+  "l2|D9-01 drive lobe ring: 17-4PH H900, wire-EDM, the exact RSSR profile r 10.19 -> 12.21 mm (8 3-point arcs), R3 concave into the O20.2 dwell, bore O18 on link 2's turned ring, keyed by an O1 dowel at the onset q2 -5.011 deg, F+6.15..F+8.75": {
+   "min_sd": -0.519,
+   "where": [
+    "workspace",
+    0,
+    [
+     -45.46,
+     33.06,
+     37.37
+    ]
+   ],
+   "frames_neg": 1,
+   "frames_lt03": 1
+  },
+  "l2|D8-03 link 2: 8x3 bar on a line/arc chain + J2 / J3 O20 rings, J2 dowel hole, upper ring turned to O18 over F+6.15..8.95 for the lobe ring, flies over the knee and the pad (machined from solid Ti-6Al-4V (2.5-D: 4 side-view sketches side by side of lines + tangent arcs through the model's strap stations, extruded 2 mm; 3+2-axis milling - a wire cannot cut strips of different profiles side by side), rounds R2 / R0.5 in the profile)": {
+   "min_sd": -0.279,
+   "where": [
+    "workspace",
+    0,
+    [
+     -42.98,
+     33.12,
+     34.46
+    ]
+   ],
+   "frames_neg": 1,
+   "frames_lt03": 1
+  },
+  "l2|J2 stop dowel: ISO 8734 O3 x 6 m6 hardened (stock length), faced to 5.65 mm (q2 stops -21.81 / 93.40 deg), pressed 3 mm in the J2 upper boss, polished; stop push limit 4.3 N.m (J2 MR117 pair s0 1.0)": {
+   "min_sd": 1.999,
+   "where": [
+    "workspace",
+    0,
+    [
+     -36.8,
+     39.3,
+     29.06
+    ]
+   ],
+   "frames_neg": 0,
+   "frames_lt03": 0
+  },
+  "l2|J2 cap O20, torispherical dome R63.6 / R1 (tangent arcs), threaded M18x0.5 (Ti-6Al-4V)": {
+   "min_sd": 2.739,
+   "where": [
+    "workspace",
+    0,
+    [
+     -46.69,
+     36.42,
+     36.88
+    ]
+   ],
+   "frames_neg": 0,
+   "frames_lt03": 0
+  },
+  "l2|J2 bearing 1 MR117-2RS 7x11x3": {
+   "min_sd": 2.898,
+   "where": [
+    "workspace",
+    0,
+    [
+     -44.18,
+     35.0,
+     30.58
+    ]
+   ],
+   "frames_neg": 0,
+   "frames_lt03": 0
+  },
+  "l1a|D8-02a link 1a: 8x3 bar on a line/arc chain, J1 / K pads + integral O7 pins, K pin continued as the O5 spring arbor (0.4 mm slit, DD O3 tip for the horn hub; no magnet: K is slaved, never read); K's two opposed 53.6-deg stop slots in the K pad, both clear of the bar root (machined from solid Ti-6Al-4V (2.5-D: 4 side-view sketches side by side of lines + tangent arcs through the model's strap stations, extruded 2 mm; 3+2-axis milling - a wire cannot cut strips of different profiles side by side), rounds R2 / R0.5 in the profile)": {
+   "min_sd": 3.228,
+   "where": [
+    "workspace",
+    0,
+    [
+     -26.68,
+     42.93,
+     4.99
+    ]
+   ],
+   "frames_neg": 0,
+   "frames_lt03": 0
+  },
+  "l2|J2 outer spacer 17-4PH": {
+   "min_sd": 5.118,
+   "where": [
+    "workspace",
+    0,
+    [
+     -45.95,
+     37.03,
+     31.95
+    ]
+   ],
+   "frames_neg": 0,
+   "frames_lt03": 0
+  },
+  "l2|J2 bearing 2 MR117-2RS 7x11x3": {
+   "min_sd": 5.546,
+   "where": [
+    "workspace",
+    0,
+    [
+     -45.49,
+     38.2,
+     32.49
+    ]
+   ],
+   "frames_neg": 0,
+   "frames_lt03": 0
+  },
+  "l1b|J2 inner spacer (ground, preload)": {
+   "min_sd": 6.047,
+   "where": [
+    "workspace",
+    0,
+    [
+     -45.97,
+     37.81,
+     30.79
+    ]
+   ],
+   "frames_neg": 0,
+   "frames_lt03": 0
+  },
+  "base|D8-01 scapula base AT THE J1 RING: the J1 upper member alone (O20 ring + seat disc + M18 x 0.5 spigot); the user's scapula handler bracket threads onto the spigot in place of the dome cap - no ears, no tab (Ti-6Al-4V, 5-axis machined)": {
+   "min_sd": 6.252,
+   "where": [
+    "workspace",
+    0,
+    [
+     -28.23,
+     45.69,
+     5.15
+    ]
+   ],
+   "frames_neg": 0,
+   "frames_lt03": 0
+  },
+  "l1b|K stop dowel 1 of 2: ISO 8734 O3 x 6 m6 hardened (stock length), faced to 5.65 mm (stop A dK 0 / stop B dK -53.64), pressed 3 mm in the K upper boss, polished": {
+   "min_sd": 6.479,
+   "where": [
+    "workspace",
+    0,
+    [
+     -47.31,
+     28.29,
+     -21.47
+    ]
+   ],
+   "frames_neg": 0,
+   "frames_lt03": 0
+  },
+  "base|J1 bearing 1 MR117-2RS 7x11x3": {
+   "min_sd": 7.572,
+   "where": [
+    "workspace",
+    0,
+    [
+     -26.89,
+     46.59,
+     0.76
+    ]
+   ],
+   "frames_neg": 0,
+   "frames_lt03": 0
+  },
+  "l1b|drive rocker post bush: Ti-6Al-4V O9 x 3.5, in link 1b's J2 pad (bonded; the post is pressed through bush and pad)": {
+   "min_sd": 7.667,
+   "where": [
+    "workspace",
+    0,
+    [
+     -47.77,
+     36.5,
+     14.57
+    ]
+   ],
+   "frames_neg": 0,
+   "frames_lt03": 0
+  },
+  "l1b|J2 ring nut M7x0.5 (Ti-6Al-4V)": {
+   "min_sd": 8.258,
+   "where": [
+    "workspace",
+    0,
+    [
+     -48.21,
+     40.06,
+     32.52
+    ]
+   ],
+   "frames_neg": 0,
+   "frames_lt03": 0
+  },
+  "l1b|drive rocker post: O5 x 15.4 17-4PH H900, pressed through link 1b's J2 pad + boss, axis ": {
+   "min_sd": 8.659,
+   "where": [
+    "workspace",
+    0,
+    [
+     -48.11,
+     37.07,
+     12.68
+    ]
+   ],
+   "frames_neg": 0,
+   "frames_lt03": 0
+  },
+  "dk|drive follower roller MR63ZZ 3x6x2.5, inner race pressed on the pin (polished)": {
+   "min_sd": 8.958,
+   "where": [
+    "workspace",
+    0,
+    [
+     -53.7,
+     34.26,
+     21.78
+    ]
+   ],
+   "frames_neg": 0,
+   "frames_lt03": 0
+  },
+  "l1b|K stop dowel 2 of 2: ISO 8734 O3 x 6 m6 hardened (stock length), faced to 5.65 mm (stop A dK 0 / stop B dK -53.64), pressed 3 mm in the K upper boss, polished": {
+   "min_sd": 9.368,
+   "where": [
+    "workspace",
+    0,
+    [
+     -48.57,
+     32.76,
+     -6.52
+    ]
+   ],
+   "frames_neg": 0,
+   "frames_lt03": 0
+  },
+  "dk|drive roller pin O3 m6 hardened, pressed (polished)": {
+   "min_sd": 9.777,
+   "where": [
+    "workspace",
+    0,
+    [
+     -54.31,
+     34.52,
+     20.38
+    ]
+   ],
+   "frames_neg": 0,
+   "frames_lt03": 0
+  },
+  "l1b|K bearing 1 MR117-2RS 7x11x3": {
+   "min_sd": 9.858,
+   "where": [
+    "workspace",
+    0,
+    [
+     -51.67,
+     29.27,
+     -17.53
+    ]
+   ],
+   "frames_neg": 0,
+   "frames_lt03": 0
+  },
+  "l3|D8-04 member 3: J3 disc + integral O7 pin, E strap (one side-view sketch of lines and tangent arcs, 8 x 3, its top stepping to the boss), E boss O12 x 2.1767 + integral O4 pin a (Ti-6Al-4V)": {
+   "min_sd": 10.368,
+   "where": [
+    "workspace",
+    0,
+    [
+     5.24,
+     89.78,
+     68.52
+    ]
+   ],
+   "frames_neg": 0,
+   "frames_lt03": 0
+  },
+  "dk|D9-02 drive bell crank (Ti-6Al-4V): tube O10 on the post, follower arm 9.00 mm, crank arm 9.00 mm + crank-pin boss tilted 23.5 deg (square to the rod)": {
+   "min_sd": 10.473,
+   "where": [
+    "workspace",
+    0,
+    [
+     -50.64,
+     38.22,
+     16.5
+    ]
+   ],
+   "frames_neg": 0,
+   "frames_lt03": 0
+  },
+  "base|J1 outer spacer 17-4PH": {
+   "min_sd": 10.515,
+   "where": [
+    "workspace",
+    0,
+    [
+     -28.22,
+     49.27,
+     0.57
+    ]
+   ],
+   "frames_neg": 0,
+   "frames_lt03": 0
+  },
+  "l1a|J1 inner spacer (ground, preload)": {
+   "min_sd": 10.787,
+   "where": [
+    "workspace",
+    0,
+    [
+     -27.38,
+     49.61,
+     -0.5
+    ]
+   ],
+   "frames_neg": 0,
+   "frames_lt03": 0
+  },
+  "dk|drive bell crank bearing 1 MR85ZZ 5x8x2.5": {
+   "min_sd": 11.057,
+   "where": [
+    "workspace",
+    0,
+    [
+     -50.6,
+     38.85,
+     15.66
+    ]
+   ],
+   "frames_neg": 0,
+   "frames_lt03": 0
+  },
+  "base|J1 bearing 2 MR117-2RS 7x11x3": {
+   "min_sd": 11.103,
+   "where": [
+    "workspace",
+    0,
+    [
+     -28.48,
+     49.81,
+     0.53
+    ]
+   ],
+   "frames_neg": 0,
+   "frames_lt03": 0
+  },
+  "base|J1 cap O20, torispherical dome R63.6 / R1 (tangent arcs), threaded M18x0.5 (Ti-6Al-4V)": {
+   "min_sd": 11.809,
+   "where": [
+    "workspace",
+    0,
+    [
+     -30.22,
+     51.01,
+     5.1
+    ]
+   ],
+   "frames_neg": 0,
+   "frames_lt03": 0
+  },
+  "l4|D8-05 knee link: flat plate 37.8 x 10 x 2.1767 (lines + R1 arcs), O5.5 sleeve bores, O8 x 0.7 clip counterbores + knee stop tooth behind pin a (its face meets the E strap's side at knee angle 152.146 deg) (Ti-6Al-4V)": {
+   "min_sd": 11.872,
+   "where": [
+    "workspace",
+    0,
+    [
+     -7.17,
+     94.61,
+     77.72
+    ]
+   ],
+   "frames_neg": 0,
+   "frames_lt03": 0
+  },
+  "l1b|K outer spacer 17-4PH": {
+   "min_sd": 12.698,
+   "where": [
+    "workspace",
+    0,
+    [
+     -53.89,
+     31.07,
+     -18.52
+    ]
+   ],
+   "frames_neg": 0,
+   "frames_lt03": 0
+  },
+  "l4|pin b: iglidur G sleeve bearing igus GSM-0405-03 (4 x 5.5 x 3) faced to 1.48, pressed in the knee link": {
+   "min_sd": 12.936,
+   "where": [
+    "workspace",
+    0,
+    [
+     -13.13,
+     95.57,
+     79.28
+    ]
+   ],
+   "frames_neg": 0,
+   "frames_lt03": 0
+  },
+  "l3|pin a: iglidur thrust washer 4 x 8 x 0.5 (igus GTM-0408-005 class, in the 0.5 mm running gap; confirm the size, else cut from iglidur sheet)": {
+   "min_sd": 12.953,
+   "where": [
+    "workspace",
+    0,
+    [
+     5.26,
+     91.94,
+     66.5
+    ]
+   ],
+   "frames_neg": 0,
+   "frames_lt03": 0
+  },
+  "l1a|K inner spacer (ground, preload)": {
+   "min_sd": 13.154,
+   "where": [
+    "workspace",
+    0,
+    [
+     -53.66,
+     31.91,
+     -17.36
+    ]
+   ],
+   "frames_neg": 0,
+   "frames_lt03": 0
+  },
+  "l1b|K bearing 2 MR117-2RS 7x11x3": {
+   "min_sd": 13.266,
+   "where": [
+    "workspace",
+    0,
+    [
+     -54.37,
+     31.4,
+     -18.65
+    ]
+   ],
+   "frames_neg": 0,
+   "frames_lt03": 0
+  },
+  "l1b|K clock-spring cap O20 x crown F+18.25 (6 mm taller), FLAT crown with the O10 x 1.2 horn-hub counterbore and an O5.6 arbor bore; spring chamber O16 x 5.2, outer-hook slot, threaded M18x0.5, pinned to link 1b's ring at assembly (spring preload index) (Ti-6Al-4V)": {
+   "min_sd": 13.507,
+   "where": [
+    "workspace",
+    0,
+    [
+     -56.85,
+     29.12,
+     -22.01
+    ]
+   ],
+   "frames_neg": 0,
+   "frames_lt03": 0
+  },
+  "l4|pin a: iglidur G sleeve bearing igus GSM-0405-03 (4 x 5.5 x 3) faced to 1.48, pressed in the knee link": {
+   "min_sd": 13.832,
+   "where": [
+    "workspace",
+    0,
+    [
+     5.14,
+     92.44,
+     65.25
+    ]
+   ],
+   "frames_neg": 0,
+   "frames_lt03": 0
+  },
+  "l1a|J1 ring nut M7x0.5 (Ti-6Al-4V)": {
+   "min_sd": 14.279,
+   "where": [
+    "workspace",
+    0,
+    [
+     -29.08,
+     52.79,
+     -0.58
+    ]
+   ],
+   "frames_neg": 0,
+   "frames_lt03": 0
+  },
+  "l3|pin a: retaining E-clip DIN 6799 - 3.2 (groove O3.2 on the O4 pin, O7.3 x 0.6), A2 stainless (polished), seated in the knee link's O8 x 0.7 counterbore": {
+   "min_sd": 14.948,
+   "where": [
+    "workspace",
+    0,
+    [
+     5.54,
+     93.89,
+     66.11
+    ]
+   ],
+   "frames_neg": 0,
+   "frames_lt03": 0
+  },
+  "l1a|drive horn pin clip DIN 6799 RS 2.3 (polished)": {
+   "min_sd": 99.0,
+   "where": null,
+   "frames_neg": 0,
+   "frames_lt03": 0
+  },
+  "l1a|drive horn screw 2 M1.6x4 ISO 7046 countersunk (polished)": {
+   "min_sd": 99.0,
+   "where": null,
+   "frames_neg": 0,
+   "frames_lt03": 0
+  },
+  "l1a|drive horn screw 1 M1.6x4 ISO 7046 countersunk (polished)": {
+   "min_sd": 99.0,
+   "where": null,
+   "frames_neg": 0,
+   "frames_lt03": 0
+  },
+  "l1a|drive horn pin O3 h6 hardened, pressed + staked, DIN 6799 groove (polished)": {
+   "min_sd": 99.0,
+   "where": null,
+   "frames_neg": 0,
+   "frames_lt03": 0
+  },
+  "l1a|D9-05 drive horn plate: Ti-6Al-4V O13 x 1.4, horn pin at r 2.493 mm, 2x +-5 deg trim slots for M1.6 countersunk": {
+   "min_sd": 99.0,
+   "where": null,
+   "frames_neg": 0,
+   "frames_lt03": 0
+  },
+  "l1a|D9-04 drive horn hub: Ti-6Al-4V O9.4 x 3.8, DD bore pressed on link 1a's arbor tip, 2x M1.6 tapped blind": {
+   "min_sd": 99.0,
+   "where": null,
+   "frames_neg": 0,
+   "frames_lt03": 0
+  },
+  "l1a|drive igubal ball at the horn (iglidur, igus KGLM-03, 6 wide)": {
+   "min_sd": 99.0,
+   "where": null,
+   "frames_neg": 0,
+   "frames_lt03": 0
+  },
+  "dr|drive igubal housing at the horn (iglidur, pressed, igus KGLM-03 O10 x 6)": {
+   "min_sd": 99.0,
+   "where": null,
+   "frames_neg": 0,
+   "frames_lt03": 0
+  },
+  "dr|drive igubal housing at the crank (iglidur, pressed, igus KGLM-03 O10 x 6)": {
+   "min_sd": 99.0,
+   "where": null,
+   "frames_neg": 0,
+   "frames_lt03": 0
+  },
+  "dr|D9-03 drive pushrod: Ti-6Al-4V dog-bone, O3 shank, centres 37.74 +- 0.02 mm, two O13 x 6 eyes": {
+   "min_sd": 99.0,
+   "where": null,
+   "frames_neg": 0,
+   "frames_lt03": 0
+  },
+  "dk|drive igubal ball at the crank (iglidur, igus KGLM-03, 6 wide)": {
+   "min_sd": 99.0,
+   "where": null,
+   "frames_neg": 0,
+   "frames_lt03": 0
+  },
+  "dk|drive crank pin clip DIN 6799 RS 2.3 (polished)": {
+   "min_sd": 99.0,
+   "where": null,
+   "frames_neg": 0,
+   "frames_lt03": 0
+  },
+  "dk|drive crank pin O3 h6 hardened, DIN 6799 groove (polished)": {
+   "min_sd": 99.0,
+   "where": null,
+   "frames_neg": 0,
+   "frames_lt03": 0
+  },
+  "l1b|drive post clip DIN 6799 RS 4 (polished)": {
+   "min_sd": 99.0,
+   "where": null,
+   "frames_neg": 0,
+   "frames_lt03": 0
+  },
+  "l1b|drive post shim washer O5.1/O6.5 x 0.3 stainless (polished)": {
+   "min_sd": 99.0,
+   "where": null,
+   "frames_neg": 0,
+   "frames_lt03": 0
+  },
+  "dk|drive bell crank bearing 2 MR85ZZ 5x8x2.5 (wave-washer preloaded against the post clip)": {
+   "min_sd": 99.0,
+   "where": null,
+   "frames_neg": 0,
+   "frames_lt03": 0
+  },
+  "l2|J3 cap O20, torispherical dome R63.6 / R1 (tangent arcs), threaded M18x0.5 (Ti-6Al-4V)": {
+   "min_sd": 99.0,
+   "where": null,
+   "frames_neg": 0,
+   "frames_lt03": 0
+  },
+  "l3|J3 ring nut M7x0.5 (Ti-6Al-4V)": {
+   "min_sd": 99.0,
+   "where": null,
+   "frames_neg": 0,
+   "frames_lt03": 0
+  },
+  "l3|J3 inner spacer (ground, preload)": {
+   "min_sd": 99.0,
+   "where": null,
+   "frames_neg": 0,
+   "frames_lt03": 0
+  },
+  "l2|J3 outer spacer 17-4PH": {
+   "min_sd": 99.0,
+   "where": null,
+   "frames_neg": 0,
+   "frames_lt03": 0
+  },
+  "l2|J3 bearing 2 MR117-2RS 7x11x3": {
+   "min_sd": 99.0,
+   "where": null,
+   "frames_neg": 0,
+   "frames_lt03": 0
+  },
+  "l2|J3 bearing 1 MR117-2RS 7x11x3": {
+   "min_sd": 99.0,
+   "where": null,
+   "frames_neg": 0,
+   "frames_lt03": 0
+  },
+  "l1b|K clock spring: 0.3 x 5 mm 1.4310 +C1900 strip, 145.6 mm, 9 half-turns R2.75..R7.55, outer hook in the cap slot, inner end in the arbor slit; 0.015 N.m/rad, 0.08 N.m preload on stop A = the drive's closing spring (polished spring steel)": {
+   "min_sd": 99.0,
+   "where": null,
+   "frames_neg": 0,
+   "frames_lt03": 0
+  },
+  "l1a|K ring nut M7x0.5 (Ti-6Al-4V)": {
+   "min_sd": 99.0,
+   "where": null,
+   "frames_neg": 0,
+   "frames_lt03": 0
+  }
+ }
+}

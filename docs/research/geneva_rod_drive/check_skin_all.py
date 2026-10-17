@@ -3,7 +3,7 @@
 judges' convention), against the judges' posed skin (avg/body_pose), every frame of every clip.
    python3 docs/research/geneva_rod_drive/check_skin_all.py <design dir> <out.json> [step=1] [groups=all|g1,g2]
    env: CLIPS="Raise overhead;Comb hair" (clip filter), NAMES="D9-01;MR63ZZ" (part-name substrings),
-        SRC=workspace (the design's workspace.json poses that close, instead of the clips)
+        SRC=workspace (the design's workspace.json poses that close, instead of the clips), POSES=379,614 (their indices)
 Per part: min signed distance (mm), frames inside (< 0), frames under 0.3 mm, where. Written for
 docs/research/geneva-rod-gen5_fix_check.md (independent check of user_geneva_rod_v2)."""
 import json, os, sys, time
@@ -25,7 +25,7 @@ for node in src.graph.nodes_geometry:
 parts = {k: np.concatenate(v) for k, v in parts.items()}
 BF = np.ascontiguousarray(BP.F, np.int64); C = json.load(open(os.path.join(DD, "clips.json")))
 if os.environ.get("SRC") == "workspace":
-    W = json.load(open(os.path.join(DD, "workspace.json"))); C = dict(clips=[dict(name="workspace", frames=[f for f in W["poses"] if f.get("closes")])])
+    W = json.load(open(os.path.join(DD, "workspace.json"))); C = dict(clips=[dict(name="workspace", frames=[f for i, f in enumerate(W["poses"]) if f.get("closes") and (not os.environ.get("POSES") or i in [int(x) for x in os.environ["POSES"].split(",")])])])
     print("workspace poses closing:", len(C["clips"][0]["frames"]), "of", len(W["poses"]), flush=True)
 res = {f"{g}|{n}": dict(min_sd=99.0, where=None, frames_neg=0, frames_lt03=0) for g, n in parts}
 t0 = time.time(); nf = 0
