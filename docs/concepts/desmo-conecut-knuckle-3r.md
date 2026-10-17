@@ -236,7 +236,7 @@ is closed).
 | claim reproduced, linear-law IK, bench | 19.04 | 93.08 | 0.7278 | 0.8924 | 0.5625 | 4 poses (0.0106) | 8/28 | 19.04 (0 dropped) |
 | **blended-law IK (verified), bench** | **18.98** | **93.10** | 0.7278 | 0.8930 | 0.5629 | 4 poses (0.0106) | 8/28 | 18.98 (0 dropped) |
 | claim reproduced, linear-law IK, held out | 23.24 | 91.55 | 0.6922 | 0.8914 | 0.5617 | 14 poses (0.016) | 18/71 | 23.24 (0 dropped) |
-| blended-law IK, held out | HELD_BLEND |
+| blended-law IK, held out | 23.19 | 91.57 | 0.6922 | 0.8919 | 0.5621 | 14 poses (0.016) | 18/71 | 23.19 (0 dropped) |
 
 What was checked, and what it found:
 
@@ -263,7 +263,7 @@ What was checked, and what it found:
    gap, never less. **Passes.**
 6. **Own-state fold margin th.** Bench min 5.181 (0 of 372 under 5). The lowest is pose 313, forced at dK 45.62, where
    dth/dK = 0.405. The dense nominal K play of 0.227 deg moves th by about 0.09 deg there, so the margin still holds
-   on the bench. HELD_TH
+   on the bench. Held out the min is 5.006 (0 of 861 under 5), at pose 1054, forced at dK 46.27 with dth/dK 0.403. The same play would take it to about 4.92: a WATCH item, as on desmo-slipper (T3), not a refutation (the nominal margin holds everywhere).
 7. **Takes, contacts, contact depth (T5).** Taken and contact poses are identical to conecut's (372 / 4 on the bench:
    205, 237, 264, 316). Depths: 237 at -9.47 (conecut -8.93), 264 at -1.17 (conecut -5.80), 205 at -4.28, 316 at -1.23.
    Per-pose dumps: `docs/alignment/remeasure/desmo-conecut-knuckle-3r{,+blend}_{bench,held}_perpose.json`. Each one's

@@ -3006,7 +3006,7 @@
   "name": "Desmo-conecut knuckle with a pinned-horn stage 2 (spring-free, roller-free K drive on the conecut knee; cells A / B / C)",
   "family": "slaved-knuckle 3R with an unsensed pin knee",
   "lens": "round13:complexity-desmo-conecut (the round's one knuckle lens, the planner's id; merged hornpin-desmo-conecut-knuckle-3r as the claim cell B and lowring-hornpin-conecut-knuckle-3r as the regear column C; cell A = the measured control)",
-  "status": "screened",
+  "status": "verified",
   "t_ideated": "2026-10-17T19:23:12Z",
   "source": "round 13 judge (docs/concepts/round13_ideation.md)",
   "merged_from": [
