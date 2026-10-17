@@ -484,6 +484,19 @@ def viz_export(par):
 if __name__ == "__main__":
     mode = sys.argv[1] if len(sys.argv) > 1 else "check"
     par = json.loads(sys.argv[2]) if len(sys.argv) > 2 else {}
+    if mode == "claims":
+        # one farm job, the claim columns in parallel: argv[2] = [{"tag", "mode" (frozen|held|flood|gate), "params", "env"}]
+        import subprocess
+        od = sys.argv[3] if len(sys.argv) > 3 else "cp_out"; os.makedirs(od, exist_ok=True); procs = []
+        for c in par:
+            env = dict(os.environ, CB_EXACT="1" if c.get("mode", "frozen") != "gate" else "0", OMP_NUM_THREADS="1", IGL_NUM_THREADS="1", CB_QUIET_EXACT="1")
+            env.update({k: str(v) for k, v in (c.get("env") or {}).items()})
+            if c.get("mode") == "gate": env.pop("CB_EXACT", None)
+            lg = open(os.path.join(od, c["tag"] + ".log"), "w")
+            procs.append(subprocess.Popen([sys.executable, os.path.abspath(__file__), c.get("mode", "frozen"), json.dumps(c.get("params", {})),
+                                           os.path.join(od, c["tag"] + ".json")], env=env, stdout=lg, stderr=subprocess.STDOUT))
+        for pr in procs: pr.wait()
+        print("claims done", [pr.returncode for pr in procs]); sys.exit()
     if mode == "synth":
         out = synth(par, n=int(os.environ.get("CP_SYN_N", "8000")), seed=int(os.environ.get("CP_SYN_SEED", "3"))); print(json.dumps(dict(n=out["n"], top=out["rows"]))); sys.exit()
     if mode == "gate":
