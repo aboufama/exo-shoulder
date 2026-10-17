@@ -265,7 +265,7 @@ def rotm(ax, a):
 
 def l1b_top_under(body, ax, r, z_lo, z_hi):
     """highest point (along ax, through GH) of a solid within radius r of the axis line, between z_lo and z_hi (tessellation)"""
-    vs, fs = body.tessellate(0.05, 0.3); V = np.array([[v.x, v.y, v.z] for v in vs]); m = trimesh.Trimesh(V, np.array(fs), process=False)
+    vs, fs = body.copy().tessellate(0.05, 0.3); V = np.array  # (a copy: a triangulated part exports a STEP that fails BRepCheck)([[v.x, v.y, v.z] for v in vs]); m = trimesh.Trimesh(V, np.array(fs), process=False)
     P = np.r_[V, trimesh.sample.sample_surface_even(m, 60000, seed=3)[0]]; h = P @ ax; w = P - np.outer(h, ax); rr = np.linalg.norm(w, axis=1)
     sel = (rr < r) & (h > z_lo) & (h < z_hi)
     return float(h[sel].max()) if sel.any() else None
