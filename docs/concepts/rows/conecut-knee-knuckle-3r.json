@@ -22,13 +22,13 @@
  "gap": 12.5,
  "n_configs": 200,
  "best_params": {
-  "lE": 97.5052,
-  "lc": 23.5369,
-  "phiE": -2.1514,
-  "phib": -91.1337,
-  "J3MIN": -111.6556,
-  "J3MAX": 121.9926,
-  "stk": 6.0
+  "stk": 6.0,
+  "lE": 97.1443,
+  "lc": 24.3508,
+  "phiE": 0.7526,
+  "phib": -91.8041,
+  "J3MIN": -111.9036,
+  "J3MAX": 122.7417
  },
  "verdict": "IN PROGRESS: coarse sweep 200 configs on Bench(60,160) fast; CMA running; exact columns next",
  "limiter": "reach 0.775 fixed by the lead's chain (fold 31 fast); the knee moves only member-3 metal",

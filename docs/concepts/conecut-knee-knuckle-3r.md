@@ -122,3 +122,15 @@ calls them "slide" and this row calls them "j3stop". Both are blocked. Without a
 poses into contact. The proposer's per-pose diagnosis, without the stop, found hub 2 and the K-housing member 7 0.03 to
 7.9 mm into the skin at 182 / 184 / 203 / 205. That is chain metal the knee cannot move, so the stop is the honest
 end, not a lever for reach.
+
+## Red team: the stop placed to admit one pose (found by the CMA, rejected)
+
+The two-sided CMA found plain 11.88 fast (reach 0.7812, one more ws pose than every other row of this sweep, 0
+contacts). It got there by moving J3MIN to -112.8 .. -113.4. The deepest taken pose then sits 0.17-0.46 deg inside the
+stop. The pose it admits is one of the stopped cone poses. On the exact bench without a stop (proposer's
+`cone/fz_kw25.json`) the cone poses read 182 hub 2 -1.67 mm, 203 hub 2 -0.03 mm, 205 -4.48 mm, 184 parts (E vs link 2
+-0.9), and 208 / 209 / 211 / 238 hub 2 and K housing 12-22 mm into the skin. On the fast bench, the 203-type pose clears
+by a hair. A stop that sits 0.2 deg from a taken pose to admit a pose whose metal is 0.03 mm from the skin on the exact
+bench is tuned to the sample. The search objective therefore charges every degree of stop margin under 4 deg
+(`stop_pen` in the sweep rows). Those configurations score 16.6-22.8 on the objective and are not the row's best. They
+are in the sweep file (cma2s-g3-2, g6-2, g6-3, g7-3) for the verifier.

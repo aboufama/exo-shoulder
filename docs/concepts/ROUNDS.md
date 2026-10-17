@@ -2049,3 +2049,13 @@ keeps rolling-cone-3r closed.
 
 - **B1:** does m_sub at K's rest, or the coupled reading, decide the fold rule? It decides G4 for the whole family;
   no lens here rests on the lenient reading.
+
+## LEAD DIRECTIVE (2026-10-17 ~16:20 UTC, after the user: "I didn't see any progress overnight, please keep pushing, I hate stagnation")
+
+- The slaved-knuckle 3R family's ceiling is MEASURED: the long-dyad ghost (ideal drive, no drive metal) reads 17.86 at
+  best (spiral-lobe-longdyad gate 0, 15:47; with <= 4 contacts <= 260 taken = 19.4-19.7). The binder is hub 2 / link 2
+  in the posterior deltoid at K 29-65. Score 95 (gap 13.75) is not inside the family at these seats.
+- A second loop runs on **track jump** (workflow wf_b950a9cb-03e, rounds 101-103, written here as "Round J1-J3"):
+  new morphology classes that remove the binder, each gated by a ghost bound before any hardware modelling.
+- **Main track, round 13 onward:** spend at most ONE lens inside the knuckle family (complexity or overhead contact
+  depth, not reach), and do not duplicate the jump track's lenses - read its plan here first.
