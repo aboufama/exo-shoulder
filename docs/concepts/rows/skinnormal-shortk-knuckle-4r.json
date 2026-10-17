@@ -35,9 +35,9 @@
  "passive_dof": 2,
  "passive_translations": 0,
  "complexity": 32.5,
- "status": "screened",
+ "status": "dead",
  "t_ideated": null,
- "t_screened": "2026-10-17T04:03:18Z",
+ "t_screened": "2026-10-17T04:42:48Z",
  "reach": 0.7937,
  "follow": 1.0,
  "inband14": 0.892,
@@ -49,10 +49,10 @@
  "v_inband14": null,
  "v_inband10": null,
  "v_gap": null,
- "n_configs": 10,
- "verdict": "IN PROGRESS: seeds priced and measured; frozen exact claims running",
- "limiter": "(measuring)",
- "note": "(measuring)",
+ "n_configs": 123,
+ "verdict": "KILLED by the lead's rule: every seed and every sweep pick is >= pick1's 18.40 frozen. Best frozen = the repaired skinnormal seed: 18.58 Bench(110,360) exact frozen (score 93.24), held out 22.43 (pick1 22.69), near1 20.20 (pick1 23.36), reach 0.742 (overhead 8/28), follow 1.0, ib14 0.893, contact 0.021, min th margin 5.90; ties pick1 within 0.3 and cannot earn its 4th joint (cx 32.5); best frozen reach k33 0.769 at contact 0.048 / follow 0.9455 -> 18.61. 4 active, 2 passive pins, 0 passive translations.",
+ "limiter": "1:1 fold-for-contact exchange in the K-open (stretched) states on the 360-pose envelope: skinnormal 74 fold / 8 contact (reach 0.742) -> stopb80 59 / 19 (0.761) -> k33 55 / 19 (0.769) -> k56 50 / 24 (0.767), net flat at ~18.6; the stretched wall sits at th = a1max + a2 - 5.5; the folded state takes 0 poses (folded wall |a1 - a2| + smlo is untouched by K); overhead 6-8/28 for every config.",
+ "note": "Spec corrections: the skinnormal seed as specified refuses every pose at CB_FOLD_MARGIN 5.5 (stop B a1max 64.95 priced > bk1 + bk2 - 5.5 = 64.85: K dyad not ok) - repaired by drawing stop B 0.1 deg earlier (fast 12.49 unchanged); earlystop's az2 = el2 = 42.70 is not a slip (arcs 40.78 / 59.45). The near-touch hypothesis for the fast-to-frozen loss is refuted: the judge's near1-calibrated estimate 14.9 missed by 3.7, the plain-calibrated 19.3 by 0.7. Fast no longer ranks the class (fast 12.18-16.14 -> frozen 18.58-21.05, order scrambled); law-only Bench(110,360) reach bounds frozen reach (leak 19-28 poses). Gate (Bench(60,160) fast, 123 configs: 3 seeds, 60 LHS, 16 wall family, 4 hybrids, 40 CMA): gain 2nd half 0.00, last third 0.00, top-5 spread 0.16 -> passed. All runs local (the CPU farm batch was refused by the session's permission policy). Not run: minarc-final-polish-verify.py contact-aware pass, per-part attr, R17 tilted hold.",
  "doc": "docs/concepts/skinnormal-shortk-knuckle-4r.md",
  "model_file": "docs/concepts/models/skinnormal-shortk-knuckle-4r.py",
  "best_params": {
@@ -67,6 +67,236 @@
   "az1": 94.89664439400039,
   "el1": 68.01689176746288,
   "a1": 35.404398015083125,
-  "a2": 58.63575348776402
+  "a2": 58.63575348776402,
+  "note": "the repaired skinnormal seed (stop B a1max 64.84 = bk1 + bk2 - 5.5); nominal design in docs/concepts/verify/skinnormal-shortk-knuckle-4r/seed_skinnormal_r.json, priced design worn in docs/concepts/verify/skinnormal-shortk-knuckle-4r/c_skinnormal_r_fit60_bench_params.json"
+ },
+ "best_k": 0,
+ "frozen_exact": {
+  "skinnormal_r": {
+   "gap": 18.58,
+   "score": 93.24,
+   "gap_near1": 20.2,
+   "reach": 0.7417,
+   "follow": 1.0,
+   "inband14": 0.8933,
+   "inband10": 0.5699,
+   "contact": 0.0208,
+   "min_metal_mm": 0.002,
+   "why": {
+    "fold": 74,
+    "slide": 11,
+    "flip": 0,
+    "closure": 0,
+    "skin": 0,
+    "parts": 0,
+    "contact": 8
+   },
+   "overhead140": {
+    "ws": 28,
+    "taken": 8
+   },
+   "min_th_margin": 5.895,
+   "file": "docs/concepts/verify/skinnormal-shortk-knuckle-4r/c_skinnormal_r_fit60_bench.json"
+  },
+  "stopb80": {
+   "gap": 19.1,
+   "score": 93.05,
+   "gap_near1": 23.93,
+   "reach": 0.7611,
+   "follow": 0.9545,
+   "inband14": 0.8956,
+   "inband10": 0.5399,
+   "contact": 0.0477,
+   "min_metal_mm": 0.337,
+   "why": {
+    "fold": 59,
+    "slide": 13,
+    "flip": 0,
+    "closure": 0,
+    "skin": 0,
+    "parts": 0,
+    "contact": 19
+   },
+   "overhead140": {
+    "ws": 28,
+    "taken": 6
+   },
+   "min_th_margin": 6.053,
+   "file": "docs/concepts/verify/skinnormal-shortk-knuckle-4r/c_stopb80_fit60_bench.json"
+  },
+  "earlystop": {
+   "gap": 19.15,
+   "score": 93.04,
+   "gap_near1": 22.87,
+   "reach": 0.7528,
+   "follow": 1.0,
+   "inband14": 0.8936,
+   "inband10": 0.5139,
+   "contact": 0.0379,
+   "min_metal_mm": 0.219,
+   "why": {
+    "fold": 61,
+    "slide": 13,
+    "flip": 0,
+    "closure": 0,
+    "skin": 0,
+    "parts": 0,
+    "contact": 15
+   },
+   "overhead140": {
+    "ws": 28,
+    "taken": 6
+   },
+   "min_th_margin": 6.274,
+   "file": "docs/concepts/verify/skinnormal-shortk-knuckle-4r/c_earlystop_fit60_bench.json"
+  },
+  "k8": {
+   "gap": 18.88,
+   "score": 93.13,
+   "gap_near1": 23.69,
+   "reach": 0.7444,
+   "follow": 1.0,
+   "inband14": 0.9044,
+   "inband10": 0.5649,
+   "contact": 0.0332,
+   "min_metal_mm": 0.188,
+   "why": {
+    "fold": 64,
+    "slide": 15,
+    "flip": 0,
+    "closure": 0,
+    "skin": 0,
+    "parts": 0,
+    "contact": 13
+   },
+   "overhead140": {
+    "ws": 28,
+    "taken": 8
+   },
+   "min_th_margin": 6.754,
+   "file": "docs/concepts/verify/skinnormal-shortk-knuckle-4r/c_k8_fit60_bench.json"
+  },
+  "k20": {
+   "gap": 21.05,
+   "score": 92.35,
+   "gap_near1": 25.4,
+   "reach": 0.7389,
+   "follow": 1.0,
+   "inband14": 0.8939,
+   "inband10": 0.5661,
+   "contact": 0.0433,
+   "min_metal_mm": 0.251,
+   "why": {
+    "fold": 63,
+    "slide": 14,
+    "flip": 0,
+    "closure": 0,
+    "skin": 0,
+    "parts": 0,
+    "contact": 17
+   },
+   "overhead140": {
+    "ws": 28,
+    "taken": 7
+   },
+   "min_th_margin": 7.976,
+   "file": "docs/concepts/verify/skinnormal-shortk-knuckle-4r/c_k20_fit60_bench.json"
+  },
+  "k33": {
+   "gap": 18.61,
+   "score": 93.23,
+   "gap_near1": 23.36,
+   "reach": 0.7694,
+   "follow": 0.9455,
+   "inband14": 0.8965,
+   "inband10": 0.5433,
+   "contact": 0.0475,
+   "min_metal_mm": 0.092,
+   "why": {
+    "fold": 55,
+    "slide": 15,
+    "flip": 0,
+    "closure": 0,
+    "skin": 0,
+    "parts": 0,
+    "contact": 19
+   },
+   "overhead140": {
+    "ws": 28,
+    "taken": 6
+   },
+   "min_th_margin": 5.906,
+   "file": "docs/concepts/verify/skinnormal-shortk-knuckle-4r/c_k33_fit60_bench.json"
+  },
+  "k56": {
+   "gap": 19.72,
+   "score": 92.83,
+   "gap_near1": 26.76,
+   "reach": 0.7667,
+   "follow": 0.9455,
+   "inband14": 0.9008,
+   "inband10": 0.5662,
+   "contact": 0.0594,
+   "min_metal_mm": 0.092,
+   "why": {
+    "fold": 50,
+    "slide": 16,
+    "flip": 0,
+    "closure": 0,
+    "skin": 0,
+    "parts": 0,
+    "contact": 24
+   },
+   "overhead140": {
+    "ws": 28,
+    "taken": 6
+   },
+   "min_th_margin": 7.966,
+   "file": "docs/concepts/verify/skinnormal-shortk-knuckle-4r/c_k56_fit60_bench.json"
+  }
+ },
+ "held_out": {
+  "gap": 22.43,
+  "score": 91.84,
+  "gap_near1": 25.45,
+  "reach": 0.7111,
+  "follow": 1.0,
+  "inband14": 0.8912,
+  "inband10": 0.5684,
+  "contact": 0.0266,
+  "min_metal_mm": 0.287,
+  "why": {
+   "fold": 221,
+   "slide": 30,
+   "flip": 0,
+   "closure": 0,
+   "skin": 0,
+   "parts": 0,
+   "contact": 24
+  },
+  "overhead140": {
+   "ws": 71,
+   "taken": 18
+  },
+  "min_th_margin": 5.589,
+  "file": "docs/concepts/verify/skinnormal-shortk-knuckle-4r/c_skinnormal_r_fit60_held.json"
+ },
+ "held_out_gap": 22.43,
+ "frozen_gap": 18.58,
+ "frozen_score": 93.24,
+ "control_pick1": {
+  "frozen_gap": 18.4,
+  "held_gap": 22.69,
+  "frozen_near1": 23.36,
+  "held_near1": 26.73,
+  "source": "docs/research/minarc_final_polish/verify/v_pick1_fit60_{bench,held}.json"
+ },
+ "gate": {
+  "n": 123,
+  "best_score": 95.57,
+  "gain_second_half": 0.0,
+  "gain_last_third": 0.0,
+  "top5_spread": 0.16,
+  "passed": true
  }
 }

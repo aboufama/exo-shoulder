@@ -2655,7 +2655,7 @@
   "name": "Near-touch-robust redundant 4R: pick1's sensed knuckle re-placed by a Keemink scan (short knuckle on the lead's J1 seat; far-opening stop-B-80 and symmetric early-stop seeds merged)",
   "family": "redundant 4R, determined spare (Keemink layout)",
   "lens": "round10:fourth-joint-window (the 4-joint route inside the DOF cap, Keemink 2018 TNSRE 26(4); K is sensed, so 4 active = 4 DOF under the user's 2026-10-17 ruling: never a 3-joint lead)",
-  "status": "ideated",
+  "status": "dead",
   "t_ideated": "2026-10-17T03:50:33Z",
   "source": "round 10 judge (docs/concepts/round10_ideation.md)",
   "merged_from": [
