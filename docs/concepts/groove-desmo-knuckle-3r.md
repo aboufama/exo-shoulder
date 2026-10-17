@@ -218,7 +218,7 @@ would restore the 48.5-deg MR52 stroke, at the price of a second flank on the de
 
 **Kneeless control:** the same wall again. Its farm CMA (1,329 evaluations, from the cusp-free cell) reached a 2 mm gap
 of 20.94: reach 0.775, in-band 14 0.893, contact 0.042 (plain about 17.5), against the lead cell's 17.21 / 14.67. Its
-gate: 0.20 / 0.04 / 0.20, which passes. Worn frozen on Bench(110,360) exact it scores **24.0**: reach 0.711, follow 0.955, in-band 14 0.894, contact 0.045, and 17 contact plus 3 parts poses (link 2 vs the short arm). Its parent kneeless-roller scores 21.07. The kneeless cell stays the worse cell, as its parent is.
+gate: 0.20 / 0.04 / 0.20, which passes. Worn frozen on Bench(110,360) exact it scores **24.0**: reach 0.711, follow 0.955, in-band 14 0.894, contact 0.045, and 17 contact plus 3 parts poses (the parent's part-pair clearances; link 2 vs the short arm loses none, planform >= 1.08 mm). Its parent kneeless-roller scores 21.07. The kneeless cell stays the worse cell, as its parent is.
 
 The core's component clamp holds the short arm's radial lever at s_arm >= 4.0 in both cells. That is the parent's
 4-6 limit, and the groove does not need it. The groove-fit limiter uses the value actually worn, so every claim
