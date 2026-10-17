@@ -259,8 +259,11 @@ knee slides against 32, and the J3 end is a clean dowel stop at 133 N per N m.
 **What next (for the knee column the long-dyad picks wear).**
 
 1. Cap the knee's size by the held-out low-elevation extreme-rotation poses, not by the fast bench. lE ~82 / lc ~27
-   (the spec) had 14 held contacts against 20 for lE 101 / lc 31. Add 764 / 835 / 907 / 978 / 1047 to the envelope
-   search bench.
+   (the spec) had 14 held contacts against 20 for lE 101 / lc 31. ~~Add 764 / 835 / 907 / 978 / 1047 to the envelope
+   search bench.~~ **STRUCK by the lead 2026-10-17 (alignment skeptic 19:20): those are HELD-OUT pose indices; adding
+   them to any search bench leaks the held-out split (CLAUDE.md "Keep the held-out split held out"). Use fresh
+   low-elevation extreme-rotation poses drawn for the envelope bench instead (tools/env_bench.py, >= 2 deg from every
+   held-out pose).**
 2. Do not place J3MIN to admit the 203 / 205 pair. On the exact bench they straddle any stop: 203 is taken at 0.72 mm
    and 205 is a contact at -4.28 mm, both chain metal. A stop at -105 (spec) blocks both.
 3. The verifier: re-run the paired CI, the flood, the clip q3' table, and the per-pose T5 against the lead. Dumps are in

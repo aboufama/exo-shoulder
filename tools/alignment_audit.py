@@ -55,7 +55,7 @@ OUT = os.path.join(REPO, "docs", "alignment")
 REM = os.path.join(OUT, "remeasure")
 sys.path.insert(0, os.path.join(REPO, "tools"))
 
-VERSION = "2026-10-17.5"   # bump on every change of a check, threshold or reading: a change of the instrument (docs/ALIGNMENT.md section 6)
+VERSION = "2026-10-17.6"   # bump on every change of a check, threshold or reading: a change of the instrument (docs/ALIGNMENT.md section 6)
 ROUND8 = ["sidecar-longdyad-knuckle-3r", "sidecar-parallelogram-knuckle-3r", "sidecar-roller-flank-knuckle-3r", "twist-long-a2-knuckle-3r"]
 # thresholds (gap points unless stated); calibrated on the verified rows, docs/ALIGNMENT.md "Thresholds"
 TH = dict(held_watch=6.0, held_gamed=10.0, shell2_watch=15.0, shell2_gamed=25.0, dom_gamed=0.0, conn_watch=1.0, conn_gamed=3.0,
@@ -300,6 +300,8 @@ def c_dominance(row, V, rem_b, ref):
 # ------------------------------------------------------------------------------------------------------------------
 DEPTH_REF = "conecut-knee-knuckle-3r"     # the verified 3-active lead (docs/ALIGNMENT.md section 5: the CURRENT lead; was
                                          # sidecar-longdyad, stale since 2026-10-17 05:00 - skeptic 18:21); --ref overrides
+PREV_LEAD = "slipper-nose-knuckle-3r"    # the lead DEPTH_REF displaced: the lead's own T5 compares with it ("did contact
+                                         # get deeper with the lead change?" - skeptic 19:20, NEW-self-reference)
 RULINGS_DEPTH_REF = "sidecar-longdyad-knuckle-3r"   # the reference every T5 ruling on file was made against: the selftest
                                                    # replays them on it (a ruling is a judgement under its own reference)
 
@@ -406,6 +408,7 @@ def c_contact_depth(row, ref=None):
     5 mm into the arm is beyond a 2-3 mm liner); (3) 2x: a doubled total is a pattern, not one pose's bookkeeping.
     Never 'gamed': depth is not in the score by the user's ruling; this check reports what the score cannot see."""
     rid = row["id"]; ref = ref or DEPTH_REF
+    if ref == rid and rid == DEPTH_REF and PREV_LEAD != rid: ref = PREV_LEAD    # never the lead against itself
     try:
         mine = _claim_depths(rid, row)
     except Exception as e:

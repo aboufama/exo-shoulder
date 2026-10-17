@@ -537,3 +537,6 @@ Each line is a measurement change: verdicts that move because of it moved becaus
   (section 5; it had stayed sidecar-longdyad since ~05:00, so every challenger fired T5 against the shallowest row);
   the selftest replays rulings on RULINGS_DEPTH_REF (sidecar-longdyad, the reference they were made against). SELFTEST
   PASS. A measurement change: T5 readings after it compare with the current lead.
+- **2026-10-17.6** (lead, from the 19:20 skeptic's NEW-self-reference): the current lead's own T5 compares with the lead it
+  displaced (PREV_LEAD, slipper-nose), never with itself. Measured by the skeptic: x1.37 bench / x1.32 held, ok; no
+  verified row changes level.
