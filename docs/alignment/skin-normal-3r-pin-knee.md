@@ -289,3 +289,70 @@ Patterns checked and not found:
 - Ranking: `docs/alignment/remeasure/skin-normal-3r-pin-knee_simplicity_v1v2.json`.
 - New adapter, no model edits: `tools/alignment_pinknee_adapter.py`. It gives the model module PK = itself, so
   remeasure, dump and the wear probe can wrap its own `audit()`.
+
+## Skeptic (2026-10-17 04:40-04:55 UTC, ledger `by skeptic`, run `skeptic:skin-normal-3r-pin-knee`)
+
+**Final verdict (computed by tools/alignment_ledger.py): WATCH.** 4 of the 12 reasons are refuted with evidence:
+held_out, continuity, fold_margin and M3. 8 stand: reporting, G5, NEW-caveat-dropped, NEW-closure-as-cuff, P4, G1,
+G4 and R2. Rulings: `docs/alignment/skin-normal-3r-pin-knee.rulings.json`.
+
+**New measurement: the claim worn held out under its own protocol.**
+- Tool: `tools/alignment_pinknee_fit60_held.py` (new). It imports the polish harness unchanged and runs on the farm,
+  CB_EXACT=1, fold margin 5, O20, about $0.014. Output:
+  `docs/alignment/remeasure/skin-normal-3r-pin-knee_fit60_held_skeptic.json`.
+- The fit on Bench(60,160) fast reproduces the claim's fit to the digit: 23.64.
+- The frozen shape, worn exact on the disjoint held set (1154 poses), gives **31.39**: reach 0.6197, follow 0.9653,
+  in-band14 0.8937, contact 0.0273. Against 27.20 that is +4.19, under the 6.0 watch line.
+- Near-touch: near1 34.66 and near2 55.61, so shell2 is 24.22, 0.78 under the gamed line of 25.
+- Contact: 22 poses, depth sum 20.31 mm, deepest 4.39 mm at ws (-90, 60, 105).
+- Fold margin is at least 5.32. The taken knee range is [103.0, 147.3].
+- Overhead: workspace reach 9 of 71, clip follow 12 of 19.
+
+### Rulings
+
+| key | refuted | evidence (short; full text in the rulings file) |
+|---|---|---|
+| held_out | **yes** | Measured above: held 31.39 against 27.20, +4.19 <= TH held_watch 6.0. It agrees with the polish-protocol held numbers on file (29.12 / 28.55; +4.09 / +4.07 against their own in-sample numbers). |
+| continuity | **yes** | `docs/research/rebase/verify_pkH1_cont_taken_m5.json`: fit60 with H1's params, bench110_360 237 / 237 connected, connected_reach 0.6583 = static_reach; grid 913 / 913, 0 islands, 742 / 742 edges, one knee branch. d = 0 <= TH conn_watch 1.0. The tool read the scalar row field as a note. |
+| fold_margin | **yes** | `docs/research/rebase/verify_pkH1_m5.json` windows.fold_margin_min_taken 5.49 (fold_margin_lt_rule 0; same params, corrected gap 27.2); held out 5.32 (this skeptic). Both >= TH fold_min 5.0. The tool's FOLD_KEY does not match `fold_margin_min_taken`. |
+| reporting | no | morphs.json: sweep_gap 19.72, v_gap 27.2, complexity 0.0. The row verdict text is still the k4598 screen (30.35). |
+| G5 | no | Re-derived from the per-pose sensing rows: bench 0.3919 / 2.33, held kinematic 0.3738 / 2.42. GH drift 1.781 / 1.895 deg per mm max, about 1.01 median; with R10 <= 4 mm (REQUIREMENTS.md line 81) that is up to 7.6 deg. simplicity v1 19.5, v2 0, encoders only 9.5 (recomputed). Correction: the held minimum is at ws (60, 165, -45), which the claim does not take held out (it presses 0.90 mm). |
+| NEW-caveat-dropped | no | Doc lines 565-568 verbatim: "with GH known ... (9.5 if the user accepts hub-only sensing / a cuff IMU)". CLAUDE.md lines 28-31 were written by the agent in 3ceacea, and they drop the condition. The user's words are only the quoted sentence. |
+| NEW-closure-as-cuff | no | offset-skin-normal-3r is 17.75 under v1 and v2. Fronts recomputed: v1 dominated by geneva (12.0, 23.57); v2 at the zero end in place of zc-frontier. Count correction: over the 21 status-verified rows, 5 are overtaken and it ties 3 (raglan-knee, spine-parked, zc-frontier). The auditor's 21 / 4 is over 51 rows with a v_gap. The direction is the same. |
+| P4 | no | `git show --stat 3ceacea` changes the metric and the record in one commit. It is declared. judge_change follows gap moves only. |
+| G1 | no | Recomputed from the per-pose dump: 8 / 27 / 92 under 1 / 2 / 3 mm, min 0.086 mm; 27.20 / 31.75 / 46.85 / 95.88; shell2 19.65 > 15. Overhead workspace poses at 1.62, 0.56, 0.31, 0.96 and 1.04 mm. Contact 9 poses, 8.38 mm. Held out: shell2 24.22, 22 contacts, 20.31 mm. |
+| G4 | no | Stands with corrections. (1) The 149.48 deg knee is on the held kinematic set at a pose the claim presses and does not take; the held taken range is [103.0, 147.3]. (2) The overhead clip follow of 0.60 comes from 4 contact frames ((30, 150, -60) three times at -0.074 mm, plus -0.024 mm), not from the knee window. The window's 7 losses are workspace poses (17 held out). There is still no stop part, and sigma falls with knee angle. |
+| M3 | **yes** | The H1 L1 CAD (`pipeline/full-exo/designs/l1_skin-normal-3r-pin-knee-h1`) carries the hardware: build.json stack.full_pin_stack_mm 7.082, and pin a / b retainer keep-outs (DIN 6799 e-clip over the GTM washer). R6 part_contact.json: 1337 frames x 1140 pairs, violations {}. R16 part_interference covers only strap-strap pairs. Caveat: that L1 uses H1's polish fit (m -10.03 against the claim's -9.21). |
+| R2 | no | Confirmed as above; SIMPLICITY.md lines 90-93 still describe v1. |
+
+### Missed by the auditor (for the next audit; not counted in this verdict)
+
+1. **An R17 run of H1 is on file, and it passes only with rolling-bearing friction on the iglidur knee pins.** The
+   report's "Not measured: cuff twist and pin friction, no R17 run of H1" is wrong.
+   - File: `pipeline/full-exo/designs/l1_skin-normal-3r-pin-knee-h1/judge/dynamics.json` (01:34 UTC, H1 with the
+     polish fit).
+   - The nominal case `passive|mu0.005|t0.001|s1|hub` applies the rolling model to all 5 joints: mu_eff 0.005, basis
+     "pair of shielded deep-groove / needle bearings at the hub". Pins a and b are included, although the row specifies
+     them as iglidur plain bearings (GSM sleeve + 2 GTM washers).
+   - That case passes: cuff twist 1.5-2.5 deg, |M_GH| 0.05-0.09 N.m.
+   - The plain-bearing cases (mu_eff 0.06, tau0 0.05 at every joint) fail R17's rule: twist 9.29-10.49 deg (> 5),
+     cuff force 8.38-12.7 N (> 5), |M_GH| 0.65-1.03 N.m. At mu 0.15 they reach 13-24 deg and 21-30 N.
+   - The scorecard's R11 note: "a plain-bearing build would reach 53.44 kPa", against a 7.5 kPa budget.
+   - The mixed case (rolling hubs, plain knee pins) is not on file.
+   - So "moves freely / no cuff twist" for the knee as specified is unmeasured, and the PASS rests on a friction
+     model that does not match the specified part.
+   - Proposal (a measurement change, not an input to this verdict): run R17 with plain friction on pins a and b only.
+2. **G4's causes are misattributed** (see its ruling). The overhead clip follow of 0.60 comes from contact at
+   (30, 150, -60), not from the knee window. The held knee at 149.48 is on a non-taken contact pose.
+3. **The held-out near-touch is close to the gamed line.** On the claim's own held wear, shell2 is 24.22 against the
+   gamed line of 25, and the bench reads 19.65. Metal under 2 mm on 71 of 785 taken held poses.
+4. **The ranking counts use a wide row set.** "51 verified rows" means every row with a v_gap, dead rows included.
+   Over status-verified rows the effect is 5 rows overtaken and 3 ties (one of them raglan-knee-3r, itself a pin
+   knee). The finding stands either way.
+
+### Question for the user (added to the four above)
+
+5. The R17 dynamics check that "moves freely" passes for this design treats the two iglidur knee pins as ball
+   bearings. With plain-bearing friction at every joint it fails: about 10 deg of cuff twist and about 10 N at the
+   cuff. Should the knee pins be built as small ball bearings, or should R17 be re-run with plain friction on the
+   pins before this design counts as "moves freely"?
