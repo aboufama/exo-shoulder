@@ -18,6 +18,7 @@
  "dR_to_uK_deg": 23.26,
  "pivot_on_dR_mm": 62.82,
  "roller_centre_from_GH_mm": 61.31,
+ "dK_taken_max_held_deg": 46.27,
  "cam_resynth_vs_model_pa_horn_maxdiff_deg": 0.0,
  "pressure_angle_table": [
   {
@@ -1191,7 +1192,69 @@
     "n": 371
    }
   },
-  "note": "K offset in deg, + = K more open than the law (a lead), - = a lag; verifier th_margin: 5.181 bench / 5.006 held"
+  "note": "K offset in deg, + = K more open than the law (a lead), - = a lag; verifier th_margin: 5.181 bench / 5.006 held",
+  "held": {
+   "-0.7": {
+    "min": 4.95,
+    "lt5": 2,
+    "n": 852
+   },
+   "-0.5": {
+    "min": 4.966,
+    "lt5": 2,
+    "n": 852
+   },
+   "-0.3": {
+    "min": 4.982,
+    "lt5": 1,
+    "n": 852
+   },
+   "-0.2": {
+    "min": 4.988,
+    "lt5": 1,
+    "n": 852
+   },
+   "-0.1": {
+    "min": 4.998,
+    "lt5": 1,
+    "n": 852
+   },
+   "-0.05": {
+    "min": 5.001,
+    "lt5": 0,
+    "n": 852
+   },
+   "0.0": {
+    "min": 5.008,
+    "lt5": 0,
+    "n": 852
+   },
+   "0.1": {
+    "min": 5.013,
+    "lt5": 0,
+    "n": 852
+   },
+   "0.25": {
+    "min": 5.026,
+    "lt5": 0,
+    "n": 852
+   },
+   "0.5": {
+    "min": 5.049,
+    "lt5": 0,
+    "n": 852
+   },
+   "0.75": {
+    "min": 5.068,
+    "lt5": 0,
+    "n": 852
+   },
+   "1.0": {
+    "min": 5.087,
+    "lt5": 0,
+    "n": 852
+   }
+  }
  },
  "spring": {
   "strip": "5.0 x 0.3 1.4310",
@@ -1540,6 +1603,236 @@
      "crank": -0.26,
      "horn": -5.34
     }
+   }
+  ]
+ },
+ "skin_held": {
+  "taken": {
+   "E": {
+    "min_mm": 0.33,
+    "lt0p3": 0,
+    "lt1": 9,
+    "lt2": 38,
+    "at": {
+     "kind": "ws",
+     "plane": 150.0,
+     "elev": 15.0,
+     "axial": -180.0
+    }
+   },
+   "boss": {
+    "min_mm": 2.741,
+    "lt0p3": 0,
+    "lt1": 0,
+    "lt2": 0,
+    "at": {
+     "kind": "ws",
+     "plane": -45.0,
+     "elev": 60.0,
+     "axial": 105.0
+    }
+   },
+   "crank": {
+    "min_mm": 1.844,
+    "lt0p3": 0,
+    "lt1": 0,
+    "lt2": 2,
+    "at": {
+     "kind": "ws",
+     "plane": 75.0,
+     "elev": 15.0,
+     "axial": -135.0
+    }
+   },
+   "horn": {
+    "min_mm": 2.599,
+    "lt0p3": 0,
+    "lt1": 0,
+    "lt2": 0,
+    "at": {
+     "kind": "ws",
+     "plane": 15.0,
+     "elev": 120.0,
+     "axial": -45.0
+    }
+   },
+   "hub1": {
+    "min_mm": 1.391,
+    "lt0p3": 0,
+    "lt1": 0,
+    "lt2": 12,
+    "at": {
+     "kind": "ws",
+     "plane": 30.0,
+     "elev": 165.0,
+     "axial": -75.0
+    }
+   },
+   "hub2": {
+    "min_mm": 1.986,
+    "lt0p3": 0,
+    "lt1": 0,
+    "lt2": 1,
+    "at": {
+     "kind": "ws",
+     "plane": 90.0,
+     "elev": 150.0,
+     "axial": -75.0
+    }
+   },
+   "hub3": {
+    "min_mm": 0.569,
+    "lt0p3": 0,
+    "lt1": 6,
+    "lt2": 18,
+    "at": {
+     "kind": "ws",
+     "plane": 150.0,
+     "elev": 15.0,
+     "axial": -180.0
+    }
+   },
+   "hubK": {
+    "min_mm": 0.892,
+    "lt0p3": 0,
+    "lt1": 1,
+    "lt2": 3,
+    "at": {
+     "kind": "ws",
+     "plane": 45.0,
+     "elev": 90.0,
+     "axial": 45.0
+    }
+   },
+   "knee": {
+    "min_mm": 4.724,
+    "lt0p3": 0,
+    "lt1": 0,
+    "lt2": 0,
+    "at": {
+     "kind": "ws",
+     "plane": -90.0,
+     "elev": 60.0,
+     "axial": 90.0
+    }
+   },
+   "pad": {
+    "min_mm": 2.124,
+    "lt0p3": 0,
+    "lt1": 0,
+    "lt2": 0,
+    "at": {
+     "kind": "ws",
+     "plane": -75.0,
+     "elev": 60.0,
+     "axial": 90.0
+    }
+   },
+   "roller": {
+    "min_mm": 6.107,
+    "lt0p3": 0,
+    "lt1": 0,
+    "lt2": 0,
+    "at": {
+     "kind": "ws",
+     "plane": 15.0,
+     "elev": 120.0,
+     "axial": -45.0
+    }
+   }
+  },
+  "contact_poses": [
+   {
+    "plane": -90.0,
+    "elev": 60.0,
+    "axial": 105.0,
+    "kind": "ws",
+    "parts": {}
+   },
+   {
+    "plane": -90.0,
+    "elev": 60.0,
+    "axial": 120.0,
+    "kind": "ws",
+    "parts": {
+     "hub2": -0.73
+    }
+   },
+   {
+    "plane": -75.0,
+    "elev": 60.0,
+    "axial": 105.0,
+    "kind": "ws",
+    "parts": {}
+   },
+   {
+    "plane": 15.0,
+    "elev": 105.0,
+    "axial": 15.0,
+    "kind": "ws",
+    "parts": {
+     "hub2": -1.07
+    }
+   },
+   {
+    "plane": 15.0,
+    "elev": 150.0,
+    "axial": -60.0,
+    "kind": "ws",
+    "parts": {
+     "crank": -1.32,
+     "horn": -7.07,
+     "roller": -0.48
+    }
+   },
+   {
+    "plane": 30.0,
+    "elev": 150.0,
+    "axial": -45.0,
+    "kind": "ws",
+    "parts": {
+     "crank": -0.2,
+     "horn": -4.45
+    }
+   },
+   {
+    "plane": 30.0,
+    "elev": 165.0,
+    "axial": -45.0,
+    "kind": "ws",
+    "parts": {
+     "crank": -7.98,
+     "horn": -6.62,
+     "hubK": -1.34,
+     "roller": -3.86
+    }
+   },
+   {
+    "plane": 45.0,
+    "elev": 165.0,
+    "axial": -45.0,
+    "kind": "ws",
+    "parts": {
+     "crank": -0.18,
+     "horn": -5.3
+    }
+   },
+   {
+    "plane": 60.0,
+    "elev": 165.0,
+    "axial": -30.0,
+    "kind": "ws",
+    "parts": {
+     "crank": -1.0,
+     "horn": -6.2
+    }
+   },
+   {
+    "plane": 75.0,
+    "elev": 150.0,
+    "axial": -90.0,
+    "kind": "ws",
+    "parts": {}
    }
   ]
  }

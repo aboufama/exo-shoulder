@@ -26,7 +26,9 @@ Scripts and outputs: `docs/research/slipper_mechanism/`.
 **Reproduced (bench):** frozen exact Bench(110,360) **18.49** (reach 0.725, ib14 0.8955, contact 0.0054; near-touch 1 mm
 20.12, 2 mm 33.02, min metal 0.07 mm), th margin min **5.181** (forced pose plane 60 / elev 120 / axial -105), N2 undercut 0 of
 913 steps, the re-synthesised cam = the model's horn pressure angle to 0.000 deg. **Held out: 23.45** (reach 0.6828, ib14
-0.8943, contact 0.0116). HELD_LINE
+0.8943, contact 0.0116; 1 / 2 mm 26.54 / 36.95; min metal 0.33 mm), th margin min **5.006** (forced pose plane 135 /
+elev 30 / axial -135), taken dK max 46.27, horn PA + friction 41.07, N2 undercut 0 of 926 steps. Both reproduce the
+verifier's JSON to the digit.
 
 ## Verdict
 
@@ -57,14 +59,14 @@ r 10.79 -> 12.77, PA <= 16.2 deg.
 |---|---|---|
 | 1 | **Contact stress is low when aligned.** MVP1 load (0.113 N.m + 0.015 N.m/rad at K) on the outward stroke: Fn **7.4-8.5 N** at mu 0.087 (8.97 at mu 0.15); spring alone 5.3-6.3 N. 440C (E 200) on DLC-on-Ti (substrate E 114), line 2.2 mm (the 2.5 mm band minus the dowel's end form): **p0 275 MPa** worst (mu 0.087), 282 at mu 0.15; half-width 9-32 um, so the max shear (0.786 b = 7-25 um deep) sits in the Ti, under the 2-3 um coating: tau_max 83 MPa against Ti's 415. Fatigue: sigma_vm ~0.557 p0 x 1.2 (sliding) = 184 MPa, far under Ti-6Al-4V's ~500 MPa endurance: infinite-life class. | Nothing at the contact itself; see 2 for the alignment it needs. |
 | 2 | **A straight extrude edge-loads the nose.** Rulings converge on GH, wire taper 0.14-2.74 deg over the stroke; a straight extrude along z_c leaves the nose line ends -22.3 / +19.9 um off. Slicing the 2.2 mm line (0.01 mm slices, 2D approach per slice): mismatch 2 / 5 / 10 / 20 um gives p0 626 / 796 / 955 / 1144 MPa on 0.89 / 0.55 / 0.38 / 0.26 mm of contact. | **Cut the exact ruled flank: 4-axis (XY-UV) wire EDM** with the top and bottom contours in `flank_bench.csv` (+-1.5 mm about the mid plane along z_c), skim pass. Specify a **parallelism of the flank rulings to the nose axis <= 5 um over the line** (hole perpendicularity in the arm 0.05 deg, taper accuracy, hub tilt). The CAD keeps the straight constant-section extrude as its geometry (no-loft rule) and puts the true ruled surface on the drawing. Fallback if 4-axis wire is not available: a duplex substrate (plasma-nitrided Ti + CrN interlayer + a-C:H) lifts the allowable to ~1.5 GPa. |
-| 3 | **The flank is concave toward the nose over 100 % of the stroke; never convex** (the auditor's open sign question). Radius: **1.27 mm pocket at dK 0.1** (the verifier read 1.285 at 0.5 on its grid), 1.47 at 2.5, 2.9 at 10, 5.3 at 20, 8.9 at 35, 11.2 at 45. Pocket clearance to the nose 0.083 mm. No undercut (N2: 0 of 913 steps). The hand calculation's "3.5 mm convex" was wrong in the safe direction: equivalent radius 1.32 mm (end of stroke) to 18 mm (pocket). | None. Any wire (O0.1-0.25) makes R >= 1.27 concave. Keep >= 0.05 mm pocket clearance after wear (finding 6). |
+| 3 | **The flank is concave toward the nose over 100 % of the stroke; never convex** (the auditor's open sign question). Radius: **1.27 mm pocket at dK 0.1** (the verifier read 1.285 at 0.5 on its grid), 1.47 at 2.5, 2.9 at 10, 5.3 at 20, 8.9 at 35, 11.2 at 45. Pocket clearance to the nose 0.083 mm. No undercut (N2: 0 of 913 steps). The hand calculation's "3.5 mm convex" was wrong in the safe direction: equivalent radius 1.32 mm (end of stroke) to 18 mm (pocket). | None. Any wire (O0.1-0.25) makes R >= 1.27 concave. Tolerances eat the pocket clearance from one side only: a flank cut 0.02 fat and an m6 nose at +4 um on the radius leave **0.059 mm**, still > 0, so the nose never wedges in the pocket; the dry-wear flat (26 um) does not reach it either. |
 | 4 | **Friction on both strokes (M5).** Kinematic horn PA 35.74 (bench taken) / 36.05 (held taken), crank 29.5 at rest, 5.9 at the end. With friction (horn, the binding side): **40.71 / 42.58 / 44.27 deg** at mu 0.087 / 0.12 / 0.15 (held taken: 41.02 / 42.89 / 44.58). Margin to the 43 design rule: 2.29 / 0.42 / -1.27; to the 45 gate: 4.29 / 2.42 / 0.73. The 43 rule is reached at **mu 0.127** (held 0.122). **True lock-up (PA + friction angle = 90) needs mu 1.39**: there is no jam at any real friction. Efficiency: outward 0.91-0.99, **return 0.92-0.99** (mu 0.15 worst). | Nothing to change at mu <= 0.12. At mu 0.15 the 43 rule is broken by 1.3 deg (the 45 gate is not): that is the "grease lost" case, so the grease is a maintenance item (finding 6). |
 | 5 | **The spring returns the crank with a wide margin.** On the return stroke the spring delivers 189-209 N.mm to the crank (spring alone) and 111-134 N.mm against the MVP1 opening load, against a pessimistic crank drag of 1.2 N.mm (2 x 683ZZ greased + follower): **factor 92-158** at every mu. The friction lowers the q2 acceleration the spring can follow from 43.7 (roller) to **42.9-43.2 rad/s2** (MVP1, gen-5 inertia 5e-4 kg m2). J2 torque the wearer feels: outward 0.174-0.209 N.m (spring) / 0.245-0.284 (MVP1); return 0.171-0.188 / 0.241-0.256; **friction hysteresis <= 0.020 N.m** at mu 0.087, 0.036 at 0.15 (spring); 0.028 / 0.048 with MVP1. | None for MVP1. R17 (dynamics, return stroke, mu 0.087 / 0.12 / 0.15) still runs on the CAD, as M5 asks: this note is quasi-static. |
 | 6 | **Wear over 1e6 full-stroke cycles (2 passes each, MVP1 load).** Sliding 4.23 mm per stroke; the contact travels 4.96 mm on the flank and 35.4 deg (0.73 mm) round the nose, with a turning point where it dwells. Archard per surface point: | **DLC-coat the nose too** (a-C:H on the 440C dowel, same batch as the flank): the steel member stops being the soft one. Grease at assembly (a PAO grease without EP additives, e.g. Kluber Isoflex Topas NB 52) and at service. |
 |   | greased (K_DLC 1e-9, K_440C 1e-8 mm3/N.m): flank 0.01 um, **nose 2.6 um**, K lag 0.011 deg; dry typical (1e-7 / 1e-7): flank 1.0 um, **nose 26 um**, K lag 0.116 deg; grease lost + abrasive (1e-6 / 1e-6): flank 10 um (**DLC worn through**), nose 265 um, K lag 1.16 deg. The flank coating (2-3 um) survives the first two. | |
 | 7 | **The dowel.** ISO 8734 2.5 m6 x 6 pressed 3 mm (the arm's thickness) into an O6 tip boss: flush on the arm's outer face, its end reaches 59.96 mm from GH, 0.10 mm past the modelled end disc and 0.15 mm above the lug's skin-side face (59.81). **H7/m6 is a transition fit** (-8 / +8 um): 0 N pull-out at its loose end. P7 / N7 give 6-24 um but up to 716 MPa hoop in the 1.75 mm Ti wall (yield 830). Nose root bending 12 MPa, deflection 0.07 um, axial load <= 0.45 N (a 3 deg tilt of an 8.5 N force). | **Ream the tip hole 2.495-2.500 (2-13 um interference): hoop <= 388 MPa (factor 2.1), pull-out 119-772 N**, plus Loctite 648 (about 350 N on its own) so the loose end of the band still holds; press with anti-seize, chamfered hole, slow. Pull-out need <= 0.45 N axial: factor > 250. |
 | 8 | **Play stack (systematic lag, all one-sided under the spring):** arm compliance -0.223 deg (0.053 mm along the normal, MVP1; 6 x 3 Ti, 58.8 mm polyline); follower MR63ZZ radial clearance up to -0.19 (10 um x 0.187-0.252 deg / 10 um); wear -0.011 (greased) to -0.116 (dry). Sum **-0.42 to -0.53 deg**. Random: flank profile +-20 um = **+-0.084 deg** (0.037-0.042 deg per 10 um, m_horn 13.65-15.69 mm); nose hole position +-10 um = +-0.042; lobe form, follower-pin and PV positions at +-5 um = +-0.125 each; RSS **+-0.24 deg** (+-0.44 at +-10 um on the lobe side). Nose m6 diameter (+1..+4 um on the radius) = +0.004..+0.017 (a lead). | **Pre-set a +0.75 deg K lead**: advance the lobe ring's dowel phase by **+0.35 deg of q2** (0.75 / kK 2.1534). Hold the crank's three bores (PV, follower pin, nose) and the lobe profile to **+-5 um** (one wire-EDM / jig-grind setup each). Preload the crank pair. |
-| 9 | **Fold margin (the one th metric, per taken pose, exact re-solve on the slaved law).** Bench: lag -0.7 / -0.5 / -0.3 / -0.1 deg -> 5.122 / 5.138 / 5.158 / 5.174; lead +0.25 / +0.5 / +0.75 / +1.0 -> 5.203 / 5.222 / 5.246 / 5.265 (slope 0.084 deg of margin per deg of K; 0 poses under 5 on the bench at any offset). FOLD_HELD | The +0.75 deg lead of finding 8 puts the worst lag build (systematic -0.53, random -0.24) at about -0.02 deg, i.e. th held out >= ~5.00 and bench >= 5.18; the nominal build sits at +0.2-0.5 deg (bench 5.20-5.22). Cost at the worst LEAD build (new, spring-only arm lag -0.16, follower clearance 5 um, random +0.24: +0.74 deg): horn PA +0.39 deg -> 41.1 bench / 41.4 held at mu 0.087, 43.3 held at mu 0.12 (over the 43 rule by 0.3, under the 45 gate); taken dK 46.9 < dK_lim 49.75. |
+| 9 | **Fold margin (the one th metric, per taken pose, exact re-solve on the slaved law).** Bench: lag -0.7 / -0.5 / -0.3 / -0.1 deg -> 5.122 / 5.138 / 5.158 / 5.174; lead +0.25 / +0.5 / +0.75 / +1.0 -> 5.203 / 5.222 / 5.246 / 5.265 (slope 0.084 deg of margin per deg of K; 0 poses under 5 on the bench at any offset). **Held out** (852 taken, 400 forced): lag -0.05 / -0.1 / -0.3 / -0.5 / -0.7 -> 5.001 / **4.998 (1 pose under 5)** / 4.982 / 4.966 / 4.950 (2 poses); lead +0.25 / +0.5 / +0.75 / +1.0 -> 5.026 / 5.049 / 5.068 / 5.087 (slope ~0.08). The re-solve reads 5.008 at zero offset (verifier 5.006). **A K lag of 0.07-0.1 deg puts a held-out pose under 5.** | The +0.75 deg lead of finding 8 puts the worst lag build (systematic -0.53, random -0.24) at about -0.02 deg: held out >= 5.003 (0 poses under 5), bench >= 5.18; the nominal build sits at +0.2-0.5 deg (held out 5.025-5.049, bench 5.20-5.22). Without the lead the worst build (-0.77 deg) reads ~4.95 held out, 2 poses under 5. Cost at the worst LEAD build (new, spring-only arm lag -0.16, follower clearance 5 um, random +0.24: +0.74 deg): horn PA +0.39 deg -> 41.1 bench / 41.4 held at mu 0.087, 43.3 held at mu 0.12 (over the 43 rule by 0.3, under the 45 gate); taken dK 46.9 < dK_lim 49.75. |
 
 **MVP2.** As for the roller and the sidecar: a powered K load through this train multiplies by g = 2.39 at the crank; the
 follower and the crank pair would see kN. Not an MVP1 issue, and not modelled (CLAUDE.md: kinematic proof only).
@@ -131,6 +133,9 @@ follower and the crank pair would see kN. Not an MVP1 issue, and not modelled (C
   static factor 0.080 / 0.033 = **2.4-2.8** (the gen-5 MVP1 bound), as for the roller.
 - **Friction does not change that, and does not jam.** The return-stroke efficiency is 0.92-0.99 at mu up to 0.15; true
   lock-up needs mu 1.39. The spring has 90-160 x the crank's drag left on the return stroke.
+- **At rest the crank floats.** Before the onset K sits on stop A, so the spring's torque goes into the stop, not the nose; the
+  crank is held only between the flank pocket (0.083 mm clearance) and the follower's 0.1 mm dwell gap: about +-0.9 deg of
+  crank, K unaffected. The crank pair's preload drag keeps it from rattling; the onset pickup is a 0.1 mm tap, as gen 6.
 - **Dynamic.** The q2 acceleration the spring can follow without the follower leaving the lobe: 43.2 rad/s2 at mu 0.087,
   42.9 at 0.15 (MVP1; gen-5 inertia). A throw exceeds it; everyday motion does not. R17 on the CAD replaces both the load
   and the inertia estimate.
@@ -154,7 +159,15 @@ Systematic lag **-0.42 to -0.53 deg**; random RSS **+-0.24 deg** (+-0.44 if the 
 K error is a tracked-humerus error about uK (about 0.2 deg after the lead, 0.8 deg without it) that the cuff knee absorbs.
 
 **Fold margin.** The flank's own +-0.02 mm moves the margin by +-0.007 deg: bench 5.181 -> 5.174 at worst, held out 5.006 ->
-4.999. Everything else in the stack is bigger, so the K lead is what keeps th >= 5 (finding 9). FOLD_HELD2
+4.999. Everything else in the stack is bigger, so the K lead is what keeps th >= 5 (finding 9).
+
+| K offset (deg) | -0.7 | -0.5 | -0.3 | -0.1 | -0.05 | 0 | +0.25 | +0.5 | +0.75 | +1.0 |
+|---|---|---|---|---|---|---|---|---|---|---|
+| bench min th margin (371 taken) | 5.122 | 5.138 | 5.158 | 5.174 | 5.177 | 5.180 | 5.203 | 5.222 | 5.246 | 5.265 |
+| held-out min (852 taken) | 4.950 (2) | 4.966 (2) | 4.982 (1) | 4.998 (1) | 5.001 | 5.008 | 5.026 | 5.049 | 5.068 | 5.087 |
+
+(poses under 5 in brackets; per taken pose, exact re-solve of q2 on the slaved law at the pose's own th; rest poses keep
+K on stop A and do not move.)
 
 ## 5. Skin (signed distance on the bench's exact skin, taken poses)
 
@@ -170,7 +183,11 @@ All drive parts pass the 0.3 mm rule by >= 1.7 mm on taken poses. The 2 bench co
 and scored as contact: (15, 165, -60) crank -8.50, horn -7.07, **nose -4.16**, hub K -2.65 mm; (30, 165, -60) crank -0.26,
 horn -5.34 mm. The nose is in the first one (the roller was -5.29 there). Unsampled by the model: the real lobe ring (r up to
 12.77) and the follower plate, and the 10 mm straddle boss (+4 mm along dR over the 6 mm one) - the CAD sweep decides them.
-SKIN_HELD
+
+**Held out (852 taken):** nose >= **6.11 mm**, crank 1.84, horn 2.60, boss 2.74, hub K 0.89 (one pose under 1 mm: plane 45 /
+elev 90 / axial 45). Of the 10 held-out contact poses the nose is in 2: (15, 150, -60) nose -0.48 with horn -7.07 / crank
+-1.32, and (30, 165, -45) nose -3.86 with crank -7.98 / horn -6.62 / hub K -1.34. The other drive presses are horn and
+crank at elevation 150-165 (the T5 watch's depth); 3 contact poses have no rigid drive sample under 0 (link metal).
 
 ## 6. Build spec for the CAD agent (pipeline/concept_l1/build_slipper_l1.py, user_style_slipper.py)
 
