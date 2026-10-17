@@ -707,20 +707,20 @@
   }
  },
  "lobe": {
-  "base_r": 10.1,
+  "base_r": 9.6,
   "profile_r": [
-   10.515,
-   12.762
+   10.186,
+   12.207
   ],
   "profile_az_deg": [
-   -21.88,
-   -5.79
+   48.27,
+   61.34
   ],
   "arcs": 8,
-  "arc_chain_dev_max_mm": 4e-05,
-  "flank_to_roller_at_stopB_mm": 0.078,
-  "flank_end_az_deg": 2.21,
-  "past_O20_skirt_max_mm": 2.762,
+  "arc_chain_dev_max_mm": 3e-05,
+  "flank_to_roller_at_stopB_mm": 0.076,
+  "flank_end_az_deg": 69.34,
+  "past_O20_skirt_max_mm": 2.207,
   "band_mm": [
    6.15,
    8.75
@@ -728,7 +728,7 @@
   "valid": true
  },
  "rod": {
-  "centres_mm": 37.742,
+  "centres_mm": 37.743,
   "eye": "O13 x 6",
   "housing_open_r_mm": 1.803,
   "rod_valid": true,
@@ -761,10 +761,10 @@
  "bell crank": {
   "post": [
    60.54,
-   75.96
+   75.93
   ],
-  "post_length_mm": 17.29,
-  "post_free_mm": 11.72,
+  "post_length_mm": 17.26,
+  "post_free_mm": 11.69,
   "boss": [
    60.74,
    64.24
@@ -772,11 +772,13 @@
   "model_rocker_base_h": 58.66,
   "tube": [
    64.54,
-   73.72
+   73.69
   ],
-  "eye_low_over_post_clip_zone": 76.46,
+  "eye_low_over_post_clip_zone": 76.43,
   "post_end_below_eye_mm": 0.5,
   "follower_arm_mm": 9.0,
+  "follower_eye_r_mm": 2.25,
+  "follower_eye_to_u2_at_dwell_mm": 10.35,
   "crank_arm_mm": 9.0,
   "crank_pin_tilt_deg": 23.53,
   "rocker_axis_to_u2_mm": 15.96,
@@ -1095,18 +1097,18 @@
   "clips": {
    "frames": 1337,
    "beta_deg": [
-    -0.001,
-    4.127
+    -4.743,
+    0.001
    ],
    "closure_max_mm": 1.4210854715202004e-14
   },
   "workspace": {
    "frames": 1432,
    "beta_deg": [
-    -0.001,
-    12.311
+    -12.473,
+    0.001
    ],
-   "closure_max_mm": 1.4210854715202004e-14
+   "closure_max_mm": 7.105427357601002e-15
   }
  },
  "mass_g": {
@@ -2137,10 +2139,10 @@
   {
    "k": 106,
    "group": "l2",
-   "name": "D9-01 drive lobe ring: 17-4PH H900, wire-EDM, the exact RSSR profile r 10.52 -> 12.76 mm (8 3-point arcs), R3 concave into the O20.2 dwell, bore O18 on link 2's turned ring, keyed by an O1 dowel at the onset q2 -5.011 deg, F+6.15..F+8.75",
-   "vol_cm3": 0.189,
+   "name": "D9-01 drive lobe ring: 17-4PH H900, wire-EDM, the exact RSSR profile r 10.19 -> 12.21 mm (8 3-point arcs), R3 concave into the O20.2 dwell, bore O18 on link 2's turned ring, keyed by an O1 dowel at the onset q2 -5.011 deg, F+6.15..F+8.75",
+   "vol_cm3": 0.107,
    "material": "17-4PH",
-   "mass_g": 1.48,
+   "mass_g": 0.83,
    "valid": true,
    "faces": 14,
    "solids": 1,
@@ -2152,7 +2154,7 @@
    "name": "drive rocker post: O5 x 15.4 17-4PH H900, pressed through link 1b's J2 pad + boss, axis || J2, DIN 6799 RS 4 groove at the top",
    "vol_cm3": 0.297,
    "material": "17-4PH",
-   "mass_g": 2.32,
+   "mass_g": 2.31,
    "valid": true,
    "faces": 7,
    "solids": 1,
@@ -2174,9 +2176,9 @@
    "k": 109,
    "group": "dk",
    "name": "D9-02 drive bell crank (Ti-6Al-4V): tube O10 on the post, follower arm 9.00 mm, crank arm 9.00 mm + crank-pin boss tilted 23.5 deg (square to the rod)",
-   "vol_cm3": 0.585,
+   "vol_cm3": 0.578,
    "material": "Ti-6Al-4V",
-   "mass_g": 2.59,
+   "mass_g": 2.56,
    "valid": true,
    "faces": 29,
    "solids": 1,
@@ -2425,7 +2427,7 @@
    {
     "t_deg": 1.2,
     "dK_deg": 3.82,
-    "beta_deg": 0.908,
+    "beta_deg": -1.111,
     "beta_vs_redteam_deg": 0.0,
     "roller_vs_pitch_mm": 0.0,
     "closure_mm": 0.0
@@ -2433,7 +2435,7 @@
    {
     "t_deg": 2.4,
     "dK_deg": 7.63,
-    "beta_deg": 1.857,
+    "beta_deg": -2.228,
     "beta_vs_redteam_deg": 0.0,
     "roller_vs_pitch_mm": 0.0,
     "closure_mm": 0.0
@@ -2441,7 +2443,7 @@
    {
     "t_deg": 3.6,
     "dK_deg": 11.45,
-    "beta_deg": 2.845,
+    "beta_deg": -3.347,
     "beta_vs_redteam_deg": 0.0,
     "roller_vs_pitch_mm": 0.0,
     "closure_mm": 0.0
@@ -2449,7 +2451,7 @@
    {
     "t_deg": 4.8,
     "dK_deg": 15.26,
-    "beta_deg": 3.865,
+    "beta_deg": -4.463,
     "beta_vs_redteam_deg": 0.0,
     "roller_vs_pitch_mm": 0.0,
     "closure_mm": 0.0
@@ -2457,7 +2459,7 @@
    {
     "t_deg": 6.0,
     "dK_deg": 19.08,
-    "beta_deg": 4.915,
+    "beta_deg": -5.572,
     "beta_vs_redteam_deg": 0.0,
     "roller_vs_pitch_mm": 0.0,
     "closure_mm": 0.0
@@ -2465,7 +2467,7 @@
    {
     "t_deg": 7.2,
     "dK_deg": 22.89,
-    "beta_deg": 5.989,
+    "beta_deg": -6.67,
     "beta_vs_redteam_deg": 0.0,
     "roller_vs_pitch_mm": 0.0,
     "closure_mm": 0.0
@@ -2473,7 +2475,7 @@
    {
     "t_deg": 8.4,
     "dK_deg": 26.71,
-    "beta_deg": 7.082,
+    "beta_deg": -7.752,
     "beta_vs_redteam_deg": 0.0,
     "roller_vs_pitch_mm": 0.0,
     "closure_mm": 0.0
@@ -2481,7 +2483,7 @@
    {
     "t_deg": 9.6,
     "dK_deg": 30.52,
-    "beta_deg": 8.191,
+    "beta_deg": -8.814,
     "beta_vs_redteam_deg": 0.0,
     "roller_vs_pitch_mm": 0.0,
     "closure_mm": 0.0
@@ -2489,7 +2491,7 @@
    {
     "t_deg": 10.8,
     "dK_deg": 34.34,
-    "beta_deg": 9.311,
+    "beta_deg": -9.853,
     "beta_vs_redteam_deg": 0.0,
     "roller_vs_pitch_mm": 0.0,
     "closure_mm": 0.0
@@ -2497,7 +2499,7 @@
    {
     "t_deg": 12.0,
     "dK_deg": 38.16,
-    "beta_deg": 10.437,
+    "beta_deg": -10.864,
     "beta_vs_redteam_deg": 0.0,
     "roller_vs_pitch_mm": 0.0,
     "closure_mm": 0.0
@@ -2505,7 +2507,7 @@
    {
     "t_deg": 13.2,
     "dK_deg": 41.97,
-    "beta_deg": 11.564,
+    "beta_deg": -11.843,
     "beta_vs_redteam_deg": 0.0,
     "roller_vs_pitch_mm": 0.0,
     "closure_mm": 0.0
@@ -2513,7 +2515,7 @@
    {
     "t_deg": 14.4,
     "dK_deg": 45.79,
-    "beta_deg": 12.688,
+    "beta_deg": -12.787,
     "beta_vs_redteam_deg": 0.0,
     "roller_vs_pitch_mm": 0.0,
     "closure_mm": 0.0
@@ -2521,7 +2523,7 @@
    {
     "t_deg": 15.6,
     "dK_deg": 49.6,
-    "beta_deg": 13.804,
+    "beta_deg": -13.692,
     "beta_vs_redteam_deg": 0.0,
     "roller_vs_pitch_mm": 0.0,
     "closure_mm": 0.0
@@ -2529,7 +2531,7 @@
    {
     "t_deg": 16.8,
     "dK_deg": 53.42,
-    "beta_deg": 14.908,
+    "beta_deg": -14.555,
     "beta_vs_redteam_deg": 0.0,
     "roller_vs_pitch_mm": 0.0,
     "closure_mm": 0.0

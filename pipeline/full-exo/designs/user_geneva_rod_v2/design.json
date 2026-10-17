@@ -906,8 +906,8 @@
  "l1_design": "l1_geneva-rod",
  "drive_build": {
   "kind": "V0 side +1 (docs/research/geneva_rod_drive_redteam.md): lobe ring (l2) -> MR63ZZ roller on the bell crank (dk, on a post on link 1b) -> dog-bone pushrod with 2 igubal spherical bearings (dr) -> horn pin at r 2.493 on the horn plate (l1a, on the arbor)",
-  "rod_centres_mm": 37.742,
-  "post_mm": 17.29,
+  "rod_centres_mm": 37.743,
+  "post_mm": 17.26,
   "kK": 3.1796,
   "igubal": "igus KGLM-03 at 6 mm",
   "horn_hub_mm": 3.8,
@@ -917,8 +917,9 @@
    "rr": 3.0,
    "dz": 0.0,
    "r_h": 2.493,
-   "r_base": 10.1,
-   "side": -1
+   "r_base": 9.6,
+   "side": 1,
+   "arm_half": 2.25
   }
  }
 }
