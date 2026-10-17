@@ -4058,5 +4058,49 @@
   "closes": 0.7116,
   "feasible_kin_parts": 0.7116,
   "driven_feasible": 515
+ },
+ "drive_skin": {
+  "rule": ">= 0.3 mm on every frame (gen-5 lobe ring: -0.26)",
+  "frames": 1337,
+  "every": 1,
+  "min_mm": 3.156,
+  "where": "drive flank lug keep-out (link 1a: the c: Reach a high shelf frame 34",
+  "passes": true,
+  "per_part": {
+   "drive flank lug keep-out (link 1a: the c": {
+    "min_mm": 3.156,
+    "at": "Reach a high shelf frame 34",
+    "frames_lt_0p3": 0,
+    "frames_lt_2": 0
+   },
+   "drive nose dowel keep-out (ISO 8734 O2.5": {
+    "min_mm": 7.15,
+    "at": "Comb hair frame 105",
+    "frames_lt_0p3": 0,
+    "frames_lt_2": 0
+   },
+   "drive bell crank bent arm keep-out (6 x ": {
+    "min_mm": 4.965,
+    "at": "Comb hair frame 92",
+    "frames_lt_0p3": 0,
+    "frames_lt_2": 0
+   },
+   "drive lobe keep-out (hub-2 rim lobe on l": {
+    "min_mm": 4.199,
+    "at": "Raise overhead frame 77",
+    "frames_lt_0p3": 0,
+    "frames_lt_2": 0
+   }
+  },
+  "per_clip": {
+   "Raise overhead": 3.587,
+   "Drink from a cup": 3.356,
+   "Comb hair": 3.431,
+   "Reach a high shelf": 3.156,
+   "Wash opposite shoulder": 3.448,
+   "Reach back pocket": 3.342,
+   "Wave": 4.498,
+   "Walking arm swing": 3.447
+  }
  }
 }
