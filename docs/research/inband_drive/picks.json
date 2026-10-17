@@ -1,0 +1,6 @@
+{
+ "rule_committed": "2026-10-17T09:40Z, before any cma3 result and before any frozen / held-out number of this row",
+ "primary_claim_rule": "the configuration with the LOWEST 2 mm near-touch objective (gap_near2) on the FIT bench (Bench(60,160) fast, honest report) over every configuration evaluated by the leak-free runs cma3 k-p (law free: no LS_KK_MIN floor, no LS_STROKE_MIN; seeds = the long-stroke row's own fit-bench CMA bests g65d / s65n2d / r75a with the crank moved to its ear); near1 runs' configs enter by their recorded gap_near2. The fit bench decides alone; the claim bench and the held-out poses are worn once, after the pick is committed.",
+ "secondary_rule": "the best fit-bench gap_near2 of cma1 / cma2 (law floor kK >= 2.7 and stroke >= 55, seeded at the hand-picked k30 / k27b law): reported alongside, NOT the claim - its law floor and seed come from the long-stroke law table that counted held-out poses (lead correction 2026-10-17 after the longstroke audit).",
+ "reference": "slipper-nose-knuckle-3r verified 18.49 frozen / 23.45 held"
+}
