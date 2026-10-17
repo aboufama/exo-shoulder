@@ -192,3 +192,78 @@ Paired near-touch gaps, from the two re-wears (this row against the lead):
 - **C4. Headline needs a ruling when the paired CI spans 0.** The board takes the headline only when the paired
   bench CI90 excludes 0, or after a lead ruling. Effect: this row stays off the headline until the ruling. The lead's
   headline is unchanged.
+
+## Skeptic (2026-10-17, 17:50-17:58 UTC)
+
+Ledger entry 2026-10-17T17:57:13Z, by skeptic, run `skeptic:conecut-knee-knuckle-3r`.
+
+**Final verdict: WATCH.** The ledger tool takes the worst level among the reasons not refuted with evidence. 10 of 11
+reasons are upheld and 1 is refuted. Rulings: `docs/alignment/conecut-knee-knuckle-3r.rulings.json`.
+
+**How I checked.**
+- I re-derived every number from the raw per-pose dumps with my own scripts. I did not import the audit tool.
+- New tool: `tools/alignment_skeptic_why_labels.py`. It leaves the models unchanged and reads kinematic labels only,
+  under the frozen protocol. Its fit gaps, 13.0 and 12.5, reproduce both fast claims.
+- New evidence: `docs/alignment/remeasure/conecut-knee-knuckle-3r_skeptic_why_held.json`.
+- Local only: niced, OMP_NUM_THREADS=1, 2 processes, about 15 s each. The farm was not used.
+
+### Rulings
+
+1. **dominance: upheld.**
+   - Re-derived from the dumps: plain 18.28 against 18.49, and at 2 mm 34.84 against 33.02.
+   - Both sides use the same harness: exact, frozen protocol, Bench(110,360).
+   - The c_dominance rule gives watch, capped (A1 is retired). This is report-only.
+2. **reporting: upheld.**
+   - The row's verdict begins "SCREENED" while its status is verified.
+   - morphs.json (17:43) has sweep_gap 12.5 against v_gap 18.28, 5.78 apart. 12.5 reads as score 95.45.
+3. **T1: upheld.**
+   - Pose 203: cmin 0.263 mm, min_mm 0.716 mm. The lead does not evaluate it.
+   - Against the lead, 203 is worth 0.29, not 0.55 (0.55 is the value against the no-stop control). Without it the
+     bench reads 18.57, behind the lead's 18.49, so the conclusion stands.
+   - Held out: the 11 new poses sit at 0.758-3.68 mm, 6 of them under 2 mm.
+   - Correction: the held 3 mm column recomputes to 82.52 / 79.04 (+3.48), not 83.12 / 79.25 (+3.87).
+4. **NEW-strap-dilution: upheld.**
+   - With the strap reweighted to the lead's count (verifier C4 rule), the bench reads 18.67 and the held wear 22.90.
+   - Chain-only in-band (no E, boss, pad or knee) is 0.859 against 0.869.
+   - Excluding only E, it is 0.8855 against 0.8864. The knee group gained in band, and hub 2 and the crank lost.
+5. **NEW-stop-relabel: REFUTED, on apples to apples and wearer cost.**
+   - Under the frozen protocol the lead labels held 752, 897 and 965 'slide'. The same goes for the lower-stop poses
+     392 and 530. 'Slide' is the lead's knee-window stop (CLAUDE.md (5)). The lead's slide count is 32, equal to its
+     verifier's.
+   - The lead's dump has ev false at all five poses, so its 23.45 also charges them as reach only.
+   - Charging them as contacts here (22.72) but not on the lead is a one-sided adjustment. Like for like, the held edge
+     at these poses is 0.
+   - The wearer meets a hard stop at these poses in both designs.
+   - Correction to the count: J3MIN also cuts 392 and 530 (q3' -112.49 / -114.49). Both pass the parts check
+     (clearance 1.31 mm, equal to the taken minimum 1.3146) and would be contacts at -1.11 / -9.68 mm. A one-sided T6
+     count is therefore 5 poses (+0.56), not 3.
+6. **T5: upheld.**
+   - Bench: 4 contact poses, 20.24 mm summed. Against DEPTH_REF sidecar-longdyad (6.23 mm) that is x3.25 and +14.01 mm,
+     past both the 2x and the 5 mm lines.
+   - Held out: 14 poses, 60.97 mm, against the lead's 10 and 46.12 mm.
+   - New contacts on the hanging, rotated arm: 835 (-3.55 mm) and 978 (-1.33 mm), where the lead's metal clears the
+     skin by 0.81 / 0.62 mm.
+7. **NEW-tie-headline: upheld, and live now.**
+   - My copy of the page's headline rule, run on morphs.json at HEAD, picks this row (18.28, no ruling).
+   - Citation fix: "NOT a leader" is in the row's `note`. `verification.verdict` does not exist.
+8. **M5: upheld.** No judge or pipeline file mentions conecut. The knee's K.psi and K.ang spans are new, so the cuff
+   path is unmeasured.
+9. **G4: upheld.** The coordinate spans of dK, a1e and msub equal the lead's. The lead's m_sub at rest is under 1 deg
+   on 50 of 204 rest poses.
+10. **T3: upheld.** The held th_margin minimum is 5.006 deg with 0 poses under 5. The C1 residual is 0.015 deg.
+11. **NEW-ws-inband: upheld.** At elevation 90-140, 16.8 % of the metal is above 14 mm on the bench and 14.9 % held
+    out, with a maximum of 31.46 mm.
+
+### Missed by the auditor (for the next audit; not in this verdict)
+
+- **The stop count is short.** The held relabel count is 5, not 3. 392 and 530 are lower-stop poses that pass the
+  parts check and would be contacts, at -1.11 and -9.68 mm. The audit called every lower-stop pose a parts clash, but
+  that holds on the bench only.
+- **Proposal C3 (T6) has to be symmetric.** Every 'not evaluated' kinematic label removes a pose from the contact
+  denominator in the same way: fold, the knee-window 'slide' and 'j3stop'. Applying T6 to one row's dowel and not to
+  the reference's knee window penalises only one side. Its measured effect therefore needs the reference's slide poses
+  re-evaluated without the stop too (32 held on the lead).
+- **Two corrections.** The held 3 mm near-touch reads +3.48, not +3.87. Pose 203 is worth 0.29 against the lead, not
+  0.55. Neither changes a conclusion.
+
+**Final verdict: WATCH.**
