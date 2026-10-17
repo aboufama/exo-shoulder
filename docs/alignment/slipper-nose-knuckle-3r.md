@@ -623,3 +623,89 @@ Missed by the audit (for the next audit; not counted in this verdict):
    dashboard number cites them, and compare body contacts against this file's 11.
 
 No gaming found. Final verdict: **WATCH**.
+
+## Skeptic (2026-10-17, ~17:12-17:20 UTC, on the 17:03 hourly audit)
+
+Final verdict (ledger tool, `alignment_ledger.py skeptic`, entry 2026-10-17T17:15:26Z): **WATCH**. 0 of 10 reasons
+refuted; all 10 upheld. No gaming found. Nothing the score counts was found wrong.
+
+**What I re-derived:** no model re-ran (the box is saturated, load 16.7-17.8; the claim is unchanged since 06:22).
+- My own script re-read the per-pose claim dumps. The depth is -min(min_mm, cmin) on contact poses; near-touch counts
+  are on taken poses.
+- All four dumps reproduce their claims within +-0.05:
+  - slipper bench 18.49 / 18.48;
+  - slipper held out 23.45 / 23.45;
+  - sidecar-longdyad bench 18.91 / 18.91;
+  - sidecar-longdyad held out 22.67 / 22.67.
+- I re-read every other number from the raw file the reason names.
+
+### Rulings
+
+The full evidence is in `docs/alignment/slipper-nose-knuckle-3r.rulings.json`.
+
+- **contact_depth: upheld.**
+  - Bench: 9.005 + 5.741 = 14.75 mm, both at elevation 165, against sidecar-longdyad's 6.23 mm over 4 poses. That is
+    x2.37 and +8.52 mm, past TH depth_ratio 2.0 AND depth_floor_mm 5.0 (tools/alignment_audit.py line 63, rule at
+    line 435).
+  - Held out: 46.12 vs 35.66 mm (x1.29).
+- **reporting: upheld.**
+  - morphs.json: sweep_gap 13.0 against v_gap 18.49. The 5.49 difference is past the 5.0 trigger (lines 708-710).
+  - It is a label only; the ranking reads v_gap.
+- **M5: upheld.**
+  - `r17_newgate_fb150.json`: gate_raw twist 5.000811524 > THRESH 5.0 (judge/dynamics.py line 99). free() reads
+    gate_raw first (lines 1227-1231), so the bound FAILS.
+  - The nominal judged twist is 4.04 (judge/dynamics.json).
+  - At the stock r 1.25 nose: bench 18.49, held out 23.45.
+- **NEW-one-sided-proxy: upheld.** EVOLUTION line 52 still says "5.00 deg at mu 0.15 = the limit". Its last commit is
+  c93c86a at 15:13, and no commit since 16:00 touches the line.
+- **T3: upheld, and narrowed less than the auditor says.**
+  - Held-out th minimum 5.006; design.json now draws "+0.75 +0.15 / -0.10 deg".
+  - Re-derived against the red team's findings 8-9 (`docs/research/slipper_mechanism_redteam.md` line 69): the band's
+    low end is +0.65. Minus the worst lag (systematic -0.53, random -0.24), that nets **-0.12 deg** of K.
+  - The finding-9 held-out table (-0.1 gives 4.998 with 1 pose under 5; -0.3 gives 4.982) interpolates to **~4.996,
+    with 1 held-out pose under 5**.
+  - Only an RSS stack keeps th >= 5: sqrt(0.24^2 + 0.10^2) = 0.26, net -0.04, about 5.004.
+- **T1: upheld.**
+  - Under 2 mm: 30 of 371 bench (67 of 852 held out). Under 1 mm: 3 (14). Minimum 0.072 mm (0.33).
+  - Near-touch gap 20.12 / 33.02 (`_bench.json` deep).
+- **G4: upheld.**
+  - `msub_rest_bench.json`: m_sub at rest is under 1 deg on 50 of 204 poses, minimum 0.0 at (15,75,15).
+  - The user's open B1 decides whether it counts (HANDOFF section 7 item 3). No number on file settles it.
+- **T5: upheld, with one wording correction.**
+  - Same depths as contact_depth.
+  - Mixed, re-read from `{slipper-nose,sidecar-longdyad}_{bench,held}.json` deep. On the bench sidecar-longdyad is worse
+    plain (18.91 vs 18.49), at 2 mm (34.03 vs 33.02) and at 3 mm (155.98 vs 83.15), but better at 1 mm (20.00 vs 20.12).
+  - Correction: **held out, this design is the worse one on the plain gap** (23.45 vs 22.67) and at 1 mm (26.54 vs
+    25.75). It is better only at 2 mm and 3 mm. So "sidecar-longdyad is worse on the plain gap" holds on the bench only.
+  - Nit: the held-out deepest is 9.055 mm, written 9.05 in one place and 9.06 in another.
+- **NEW-ws-inband: upheld.**
+  - probe_bench ws_elev90_140: in-band 0.8004, over 14 mm 0.1987, max 30.8 mm.
+  - Held out: 0.8218 / 0.1762.
+  - The pre-fix scorecard reads R1 0.811, R1-aim 0.474.
+- **NEW-unjudged-rebuild: upheld at 17:13.**
+  - The build files are 16:29. The judge/, judge_m5/ and judge_r16s1/ files are 14:37-15:13; only posed_drive.json is
+    16:37. cad.json still cites R1 0.811 from 13:28.
+  - The re-judge has started but is not done. `score_design.py designs/user_slipper_nose 3` runs at nice 19 (35 min
+    elapsed at 17:12) and its log is still empty. R7, R16 step 1 and the M5 bounds have not started.
+
+### Missed by the audit (for the next audit; not counted in this verdict)
+
+1. **T3's close condition is too loose.** The audit would close T3 once the 16:29 build is re-judged.
+   - The re-judge does not test the K-phase stack: R17 and score_design run at nominal K.
+   - The drawn band holds th >= 5 held out only on an RSS stack. On the red team's own worst-case linear stack it nets
+     -0.12 deg, about 4.996 held out with 1 pose under 5 (see the T3 ruling).
+   - Proposal, a measurement question for the lead, not a verdict input: close T3 only when either
+     - the drawing states the stack method (RSS), or
+     - the low end is tightened to -0.02 deg (+0.75 +0.15 / -0.02), so worst case nets -0.04 and reads about 5.004
+       held out.
+   - Effect on every verified row: 0 score change. This is a tolerance on one built part.
+2. **The T5 wording favours the design held out.** "sidecar-longdyad is worse on the plain gap" holds on the bench only.
+   Held out, this design is worse plain by 0.78 and at 1 mm by 0.79. It does not change the level (still mixed).
+3. **For the next audit:** the rebuild's re-judge is running (`score_design.py`, nice 19, started ~16:37). When it
+   lands:
+   - compare the new judge/scorecard.json R1 / R1-aim / R2 with the pre-fix 0.811 / 0.474 / 24.87;
+   - check that the fix note's predicted R1 change of +0.08 (link margin 0; `docs/research/user_slipper_nose_fix.md`
+     table) is what the judge reads;
+   - confirm that EVOLUTION / cad.json are refreshed from those files, not from the proxy.
+
+No gaming found. Final verdict: **WATCH**.
