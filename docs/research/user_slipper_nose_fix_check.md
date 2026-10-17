@@ -4,8 +4,13 @@
 only: niced, at most 2 of my own processes, OMP_NUM_THREADS=1; no farm, no GPU. Judges and the fix pass's files not edited.
 Scratch: `/tmp/claude-0/-home-user-exo-shoulder/55c580fc-1103-56e5-9e17-3e425f438838/scratchpad/vfix/`.
 
-**Verdict: NOT REFUTED on the numbers (R1_RESULT_LINE). Not ready for a render: 2 drawing defects and 3 open items below.**
-None of them is a judge failure. All of them are drawing or record gaps that the fix pass says it closed and did not.
+**Verdict: NOT REFUTED on the numbers. R1 reproduces exactly: 81.1814 / 81.2959, and R1-aim 47.5356 / 47.5722.**
+
+**Not ready for a render: 3 defects and 3 open items below.**
+
+- The defects are two drawing contradictions and one crank stack that does not hold the running gaps it claims.
+
+None of them is a judge failure. Each one sits on an item the fix pass reports as closed.
 
 ## 1. Re-run of the failing judge (R1, both CADs)
 
@@ -13,7 +18,17 @@ None of them is a judge failure. All of them are drawing or record gaps that the
 clips.json. The copies keep the judge from overwriting the design's own score files. sha1: user_slipper_nose c4a05605,
 user_trimlug_k165 ed3b1b58, L1 9e17f5f8.
 
-R1_TABLE
+| design | R1 2-14 committed | R1 2-14 re-run | R1-aim 2-10 committed / re-run | per clip | wall time |
+|---|---|---|---|---|---|
+| user_slipper_nose (fixed) | 81.1814 | **81.1814** | 47.5356 / 47.5356 | all 8 identical (max diff 0.0) | 3813 s |
+| user_trimlug_k165 | 81.2959 | **81.2959** | 47.5722 / 47.5722 | all 8 identical | 3812 s |
+
+The trimlug glb differs from the fixed slipper's in exactly one of its 102 nodes:
+
+- link 1a, 2826.58 to 2804.83 mm3 in the mesh (22.39 in B-rep);
+- every other node has the same volume, transform and face count.
+
+So it is slipper-nose plus one cut, as claimed.
 
 The L1 (82.03) and v1 (81.09, glb from 5a74d30^) were read from their committed score files, not re-run. score_design.py
 has not changed since the L1 was judged.
@@ -37,7 +52,7 @@ Per clip, min gap (read from the committed score files, step 3):
   resampling: one point per 1.5 mm2, seed 3 per part. Cutting the lug changes link 1a's sample positions.
   - So the R1 deltas of +0.09 (margin 0) and +0.12 (lug trim) sit at the scale where resampling could move them.
   - A metal-seed paired test (v1 against the fix at seed 4) was prepared (`vfix/score_design_seed.py`) but not run: the
-    box was at load 15-18 and one R1 run took about 45 min.
+    box was at load 15-19 and one R1 run took 64 min.
   - Neither delta is used to claim anything beyond "no worse". The fix pass claims only that, and that stands.
 
 ## 2. Is each fix a real component at a real size?
@@ -98,7 +113,7 @@ The fix pass makes no new bench gap claim. The r 1.25 held-out claim is checked 
 | link 2 margin 0 (link 1b kept 0.1) | yes (`LINK_MARGIN`) | yes: build.json `links.link 2.margin_mm 0.0`, `link 1b 0.1` |
 | trimlug cut | yes (`lug_trim_radius`, one cylinder) | yes: r_trim 21.304, removed 22.39 mm3, lug and web 1 solid each |
 | knee pins "x 10 faced to 9.2", part names (spacer, bearing 1/2 MR63ZZ, shim, e-clip) | yes | yes, in parts_full.json |
-| stock STEPs to step/stock/ (R7 judges custom parts only) | yes | yes: 9 hardware STEPs plus the 6 M4x6 upper-cuff screws, which are ours (the [ours] cuff) |
+| stock STEPs to step/stock/ (R7 judges custom parts only) | yes | yes: 7 hardware STEPs (pin clip, 2 knee pins, 2 shims, 2 e-clips) plus the 6 M4x6 upper-cuff screws, which are ours (the [ours] cuff) |
 | lobe-ring name "+0.35 deg of q2" | yes | yes |
 | wear-test pass mu <= 0.105 | yes | yes: fits + `drive_build.wear_test_pass_mu_max` 0.105 |
 | knee stop tooth +-0.02, crank faces +-0.02, K phase +0.15/-0.10 | yes | yes, **but see D1 and D2** |
@@ -126,18 +141,37 @@ The drawn "+0.75 +0.15 / -0.10 deg" was committed at 17:22, after the 17:17 HAND
 must state RSS, or the low end becomes -0.02 deg". Section 3 reproduces the 4.996 worst case. One of the two must go on the
 drawing.
 
-### O1. The running-gap stack counts only the two face profiles
+### D3. Nothing in the crank stack holds the crank's axial position, so the running gaps are not set by the faces (defect, from v1)
 
-The posed pairs (crank to link 1b 0.086, link 1a 0.108, link 2 0.123 mm, all at dK 0) are fixed by +-0.02 on each face
-(0.04). The following are not in the stack:
+The fix pass closed the running-gap item with +-0.02 face profiles (stack 0.04 against the 0.086 gap). Here is the
+builder's own crank stack (`drive_layout()` line 307 and the crank build, lines 545-560):
 
-- the crank's location on its pivot: 2 x 683ZZ width tolerance and axial play, against a 5-10 N wave washer;
-- the pivot pin's perpendicularity in link 1b's H7 bore;
-- the K hub stack's axial play, for the link 1a pair.
+- **Boss underside.** zb = link 1b's top under the O10 footprint + 0.15. The lower 683ZZ seat is cut open through that
+  underside, so the lower bearing's faces are flush with it at zb.
+- **Pivot pin.** The pin is a plain O3 cylinder, h5 under slip-on 683ZZ inner rings, with no shoulder and no step. The
+  parts list has no inner-ring spacer under the lower bearing (the knee and the follower both have one).
+- **Wave washer.** The 5-10 N wave washer is not modelled. It gets 0.15 mm between the upper inner ring (ztop) and the
+  e-clip (ztop + 0.15). A DIN 137 B M3 wave washer is about 0.3 mm stock with about 0.8 mm free height (catalogue values, to confirm on the part).
 
-The 0.046 mm left can be eaten by bearing axial play alone if the 0.086 gap lies along the crank axis. This was not
-measured here. The next step is to read the gap direction against dR in `posed_drive_check`. If it is axial, put a
-running shim or a >= 0.15 gap on the 1b side.
+The washer's load path runs from the upper inner ring, through the balls and the outer ring, to the crank's seat floors.
+From there it goes through the lower outer ring and balls to the lower inner ring, which has nothing under it but the
+0.15 mm air gap to link 1b.
+
+So the preload slides the whole crank 0.15 mm down the pin until the lower inner ring lands on link 1b:
+
+- The rotating boss annulus (r 3.5-5) and the outer ring land on link 1b's top, give or take the bearing's axial play.
+- The 0.086 (1b) gap goes to about 0. The 0.108 (1a) and 0.123 (2) gaps each shift by about 0.15 along dR. The
+  reachable geometry does not tell which of those two close.
+- The +-0.02 face profiles do not control any of this.
+
+**Fix (drawing and two stock parts, no judge change):**
+
+- a ground inner-ring spacer, O3.1 x O4.5 x 0.15-0.20, between link 1b and the lower 683ZZ inner ring;
+- real axial room for the wave washer under the clip (or a shim with a measured end float);
+- then re-run the posed drive pairs.
+
+The stack then becomes spacer +-0.01 plus the bearing's axial play, not the faces. This is not a judge item: the CAD
+is judged as drawn, so R1 / R6 do not move.
 
 ### O2. The trimlug "1.5 mm wall" holds at the mid-plane only
 
@@ -172,19 +206,27 @@ in a milled side profile is an ordinary 2.5-D feature.
 The +0.16 R1 (proxy +0.24 with margin 0) the fix pass left for a ruling may already be allowed if stated on the part. That
 is the lead's reading to make, not the user's.
 
-## 7. What is still pending (not claimed by the fix pass, not checked here)
+## 7. The fix pass's single-worker chain (read at 18:40, not re-run here)
 
-- R16, R17 and the M5 forward bounds at mu 0.087 / 0.105 / 0.12.
-- trimlug's R2, R6, R16 and posed drive pairs.
-- The evolution snapshots.
+The chain is `scratchpad fix/judge_rest.sh`. Its results are in each design's judge/ folder:
 
-All of these are in the fix pass's single-worker chain (`scratchpad fix/judge_rest.sh`). At 18:20 it was on the slipper's
-R16.
+| | user_slipper_nose | user_trimlug_k165 |
+|---|---|---|
+| R6 (part contact) | 0.0 mm, PASS | 0.0 mm, PASS |
+| R16 | 64.2 % (fails only on chain_does_not_close 35.8 %; body 0, parts 0) | 64.2 % (same) |
+| R17 | PASS | PASS |
+| R10 | not run (base_slip.py handles a spherical chain only) | not run (same) |
+| scorecard | 8 / 19 | 8 / 19 |
+
+These equal the v1 build's and the L1's values. The trimlug claim "keeps R1 / R16" holds on these files.
+
+The M5 forward bound on the slipper at mu 0.087 reads a twist of 4.45 deg. The runs at mu 0.105 and 0.12 were still going
+at 18:40, so the wear line's "forward twist < 4.78 at mu 0.105" is not yet on file for the rebuilt CAD.
 
 ## Next
 
 1. Apply D1 and D2 (fits only) and regenerate design.json.
-2. Run `--checks-only` on both designs (O3).
-3. Read the 0.086 gap's direction (O1).
+2. Apply D3: add the crank inner-ring spacer and real wave-washer room, then re-run `posed_drive_check`.
+3. Run `--checks-only` on both designs (O3).
 4. Let the chain finish, then read R16 / R17 / M5.
 5. Then the stills, after the user's yes.
