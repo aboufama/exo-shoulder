@@ -8,7 +8,7 @@
  "passive_translations": 0,
  "status": "screened",
  "t_ideated": null,
- "t_screened": "2026-10-17T05:34:43Z",
+ "t_screened": "2026-10-17T05:45:50Z",
  "reach": 0.775,
  "follow": 1.0,
  "inband14": 0.895,
@@ -75,7 +75,7 @@
  },
  "verdict": "screened - a Pareto move of the lead, not a reach move. The roller is deleted and the flank re-fit at the honest friction (mu 0.087, PA_kin 38): frozen exact Bench(110,360) 18.49 (score 93.28) vs the lead roller's 18.67 through the same Frozen class. Same reach (261/360, overhead 8/28) and the same 2 contact poses; +0.0018 in-band from the re-cut arm. Complexity 22.25 vs 24.25, one bought bearing fewer, 0 passive translations. With the lead's drive left unchanged the nose costs +0.10 at mu 0.05 and +1.23 at mu 0.087; the re-fit flank holds its fast number to mu 0.12. The +0.18 is below the 1-point rule: claim it as a simplification at equal score, not as a new lead by points. Kneeless + wedge control reproduced (21.18 flat / 20.12 wedged at mu 0.05; 21.76 / 20.70 at 0.087). The planar wedge cannot drop on the pin-knee lead (hub 3 already passes 0.38 mm over the skin at a fit pose).",
  "limiter": "Measured on the frozen claim: the lead's own walls. Fold 88 (overhead 14): K's dyad window a1max binds before the drive; the re-fit flank reaches dK 49.8, and even 52.8-60 at lower mu buys 0 poses. Knee slide 9 (overhead 4). Contact 2: the horn lug on hub K / the crank, at the lead's poses. Gap = reach 17.50 + in-band 0.45 + contact 0.54. Parts in band: hub3 0.739, L2 0.736, crank 0.818. Near-touch: 0.07 mm at the lead's pose (plane -60, elev 60, axial 105).",
- "note": "Search: the 160-config farm sweep (coarse1: nose radius x friction, wedge tau x psi, a random drive re-fit at mu 0.087), then CMA-ES on the farm. A = drive + nose at mu 0.087, 993 evals; B = + 11 seats, 1617; C = drive + nose at mu 0.05, 993. Convergence gate (2 mm objective, score points): A 0.00 / 0.00 / 0.00, B 0.36 / 0.31 / 0.12, C 0.00 / 0.00 / 0.00 - all pass. Friction enters as PA_kin = 43 - atan(mu) on both sides. A smaller nose lowers the horn PA at a given dK (~+2.3 deg of stroke per -0.5 mm of radius). Claim columns, frozen exact: lead drive mu 0 / 0.05 / 0.087 = 18.75 / 18.77 / 19.90; held out (mu 0.05) 23.73 = the lead's; A at mu 0.087 = 18.49. The mechanism record counts the ISO 8734 dowel as a bought part (22.25; the spec's 22.0 left it out). Loads, MVP1 (unpowered): clock spring 0.08 N.m + 0.03 N.m/rad gives ~9 N normal at r 15 mm. Hertz on O2.4 vs a convex 3.5 mm flank: ~340 MPa. Friction drag ~0.01-0.02 N.m vs R17's 1 N.m. Wear (Archard, k 1e-7, 1e6 cycles): ~1 um on the flank, ~14 um on the nose generatrix. Wear test at 5-15 N before CAD. The nose on DLC-coated Ti carries ~175 N static vs the MR63ZZ's ~70 N.",
+ "note": "Search: the 160-config farm sweep (coarse1: nose radius x friction, wedge tau x psi, a random drive re-fit at mu 0.087), then CMA-ES on the farm. A = drive + nose at mu 0.087, 993 evals; B = + 11 seats, 1617; C = drive + nose at mu 0.05, 993. Convergence gate (2 mm objective, score points): A 0.00 / 0.00 / 0.00, B 0.36 / 0.31 / 0.12, C 0.00 / 0.00 / 0.00 - all pass. Friction enters as PA_kin = 43 - atan(mu) on both sides. A smaller nose lowers the horn PA at a given dK (~+2.3 deg of stroke per -0.5 mm of radius). Claim columns, frozen exact: lead drive mu 0 / 0.05 / 0.087 = 18.75 / 18.77 / 19.90; held out (mu 0.05) 23.73 = the lead's; A at mu 0.087 = 18.49. The mechanism record counts the ISO 8734 dowel as a bought part (22.25; the spec's 22.0 left it out). Loads, MVP1 (unpowered): clock spring 0.08 N.m + 0.03 N.m/rad gives ~9 N normal at r 15 mm. Hertz on O2.4 vs a convex 3.5 mm flank: ~340 MPa. Friction drag ~0.01-0.02 N.m vs R17's 1 N.m. Wear (Archard, k 1e-7, 1e6 cycles): ~1 um on the flank, ~14 um on the nose generatrix. Wear test at 5-15 N before CAD. The nose on DLC-coated Ti carries ~175 N static vs the MR63ZZ's ~70 N. Frozen columns (farm sn_claims3, identical to the local run): A at mu 0.05 18.46; C (re-fit at mu 0.05) 18.55; B (seats re-fit too) 19.81 / held out 24.78 - the seat refit tunes to the fit sample (round-3 lesson c), so the seats stay the lead's; A flood: full 18.49, knn 20.16 (lead 18.67 / 20.34).",
  "doc": "docs/concepts/slipper-nose-knuckle-3r.md",
  "fast": {
   "gap": 13.0,
@@ -1051,6 +1051,69 @@
    ],
    "connected": null
   },
+  "A_mu050": {
+   "cell": "lead",
+   "fit_fast": 12.97,
+   "frozen": {
+    "gap": 18.46,
+    "reach": 0.725,
+    "follow": 1.0,
+    "inband14": 0.8958,
+    "inband10": 0.5173,
+    "contact": 0.0054
+   },
+   "why": {
+    "fold": 88,
+    "slide": 9,
+    "flip": 0,
+    "closure": 0,
+    "skin": 0,
+    "parts": 0,
+    "contact": 2
+   },
+   "near1": 20.09,
+   "near2": 33.02,
+   "min_metal": 0.07,
+   "overhead": {
+    "ws": 28,
+    "taken": 8
+   },
+   "ws_inband": {
+    "all": [
+     0.8561,
+     0.5101
+    ],
+    "e90_140": [
+     0.8004,
+     0.4927
+    ],
+    "ovh140": [
+     0.9402,
+     0.6537
+    ]
+   },
+   "dK_lim": 54.0,
+   "pa_horn": 36.1,
+   "pa_eff_horn": 39.0,
+   "wedge": null,
+   "crown": {
+    "crown_mm": {
+     "median": 20.2,
+     "min": 12.7,
+     "max": 37.4
+    },
+    "underside_min_mm": {
+     "median": 8.9,
+     "min": 0.9
+    }
+   },
+   "hub3": [
+    0.739,
+    11.5,
+    80
+   ],
+   "connected": null
+  },
   "A_mu087": {
    "cell": "lead",
    "fit_fast": 13.0,
@@ -1114,6 +1177,70 @@
    ],
    "connected": null
   },
+  "A_mu087_flood": {
+   "cell": "lead",
+   "fit_fast": null,
+   "frozen": {
+    "gap": 18.49,
+    "reach": 0.725,
+    "follow": 1.0,
+    "inband14": 0.8955,
+    "inband10": 0.5163,
+    "contact": 0.0054
+   },
+   "why": null,
+   "near1": null,
+   "near2": null,
+   "min_metal": null,
+   "overhead": null,
+   "ws_inband": null,
+   "dK_lim": null,
+   "pa_horn": null,
+   "pa_eff_horn": null,
+   "wedge": null,
+   "crown": null,
+   "hub3": null,
+   "connected": {
+    "static": {
+     "gap": 18.49,
+     "reach": 0.725,
+     "follow": 1.0,
+     "inband14": 0.8955,
+     "contact": 0.0054
+    },
+    "connected_bench": {
+     "gap": 50.11,
+     "reach": 0.4111,
+     "dropped": 113,
+     "dropped_forced": 113,
+     "forced_taken": 128,
+     "forced_taken_connected": 15,
+     "dropped_with_no_taken_neighbour": 18
+    },
+    "connected_knn": {
+     "gap": 20.16,
+     "reach": 0.7083,
+     "dropped": 6,
+     "dropped_forced": 6,
+     "forced_taken": 128,
+     "forced_taken_connected": 122
+    },
+    "connected_full": {
+     "gap": 18.49,
+     "reach": 0.725,
+     "dropped": 0,
+     "dropped_forced": 0,
+     "forced_taken": 128,
+     "forced_taken_connected": 128,
+     "envelope": {
+      "env_ok": 1019,
+      "env_forced_ok": 515,
+      "env_forced_connected": 515
+     }
+    },
+    "secs": 1.0
+   }
+  },
   "A_mu087_held": {
    "cell": "lead",
    "fit_fast": 13.0,
@@ -1176,6 +1303,258 @@
     80
    ],
    "connected": null
+  },
+  "Ap_mu087": {
+   "cell": "lead",
+   "fit_fast": 12.71,
+   "frozen": {
+    "gap": 18.18,
+    "reach": 0.725,
+    "follow": 1.0,
+    "inband14": 0.8986,
+    "inband10": 0.5295,
+    "contact": 0.0054
+   },
+   "why": {
+    "fold": 88,
+    "slide": 9,
+    "flip": 0,
+    "closure": 0,
+    "skin": 0,
+    "parts": 0,
+    "contact": 2
+   },
+   "near1": 19.81,
+   "near2": 33.02,
+   "min_metal": 0.07,
+   "overhead": {
+    "ws": 28,
+    "taken": 8
+   },
+   "ws_inband": {
+    "all": [
+     0.8594,
+     0.5211
+    ],
+    "e90_140": [
+     0.8036,
+     0.5037
+    ],
+    "ovh140": [
+     0.9442,
+     0.6653
+    ]
+   },
+   "dK_lim": 47.5,
+   "pa_horn": 37.3,
+   "pa_eff_horn": 42.3,
+   "wedge": null,
+   "crown": {
+    "crown_mm": {
+     "median": 20.2,
+     "min": 12.7,
+     "max": 37.4
+    },
+    "underside_min_mm": {
+     "median": 8.9,
+     "min": 0.9
+    }
+   },
+   "hub3": [
+    0.739,
+    11.5,
+    80
+   ],
+   "connected": null
+  },
+  "B_mu087": {
+   "cell": "lead",
+   "fit_fast": 14.52,
+   "frozen": {
+    "gap": 19.81,
+    "reach": 0.7139,
+    "follow": 1.0,
+    "inband14": 0.8934,
+    "inband10": 0.5338,
+    "contact": 0.0054
+   },
+   "why": {
+    "fold": 94,
+    "slide": 7,
+    "flip": 0,
+    "closure": 0,
+    "skin": 0,
+    "parts": 0,
+    "contact": 2
+   },
+   "near1": 20.91,
+   "near2": 34.88,
+   "min_metal": 0.19,
+   "overhead": {
+    "ws": 28,
+    "taken": 8
+   },
+   "ws_inband": {
+    "all": [
+     0.8571,
+     0.5241
+    ],
+    "e90_140": [
+     0.8221,
+     0.5007
+    ],
+    "ovh140": [
+     0.9383,
+     0.6701
+    ]
+   },
+   "dK_lim": 44.0,
+   "pa_horn": 37.9,
+   "pa_eff_horn": 42.9,
+   "wedge": null,
+   "crown": {
+    "crown_mm": {
+     "median": 20.2,
+     "min": 12.6,
+     "max": 37.3
+    },
+    "underside_min_mm": {
+     "median": 8.9,
+     "min": 0.8
+    }
+   },
+   "hub3": [
+    0.739,
+    11.5,
+    80
+   ],
+   "connected": null
+  },
+  "B_mu087_held": {
+   "cell": "lead",
+   "fit_fast": 14.52,
+   "frozen": {
+    "gap": 24.78,
+    "reach": 0.6723,
+    "follow": 1.0,
+    "inband14": 0.8916,
+    "inband10": 0.5324,
+    "contact": 0.0117
+   },
+   "why": {
+    "fold": 275,
+    "slide": 27,
+    "flip": 0,
+    "closure": 0,
+    "skin": 0,
+    "parts": 0,
+    "contact": 10
+   },
+   "near1": 27.9,
+   "near2": 37.72,
+   "min_metal": 0.33,
+   "overhead": {
+    "ws": 71,
+    "taken": 18
+   },
+   "ws_inband": {
+    "all": [
+     0.8589,
+     0.5211
+    ],
+    "e90_140": [
+     0.8326,
+     0.5061
+    ],
+    "ovh140": [
+     0.9279,
+     0.6445
+    ]
+   },
+   "dK_lim": 44.0,
+   "pa_horn": 37.9,
+   "pa_eff_horn": 42.9,
+   "wedge": null,
+   "crown": {
+    "crown_mm": {
+     "median": 20.3,
+     "min": 12.1,
+     "max": 37.0
+    },
+    "underside_min_mm": {
+     "median": 9.2,
+     "min": 0.6
+    }
+   },
+   "hub3": [
+    0.733,
+    11.5,
+    80
+   ],
+   "connected": null
+  },
+  "C_mu050": {
+   "cell": "lead",
+   "fit_fast": 13.09,
+   "frozen": {
+    "gap": 18.55,
+    "reach": 0.725,
+    "follow": 1.0,
+    "inband14": 0.8949,
+    "inband10": 0.5155,
+    "contact": 0.0054
+   },
+   "why": {
+    "fold": 88,
+    "slide": 9,
+    "flip": 0,
+    "closure": 0,
+    "skin": 0,
+    "parts": 0,
+    "contact": 2
+   },
+   "near1": 20.18,
+   "near2": 33.02,
+   "min_metal": 0.07,
+   "overhead": {
+    "ws": 28,
+    "taken": 8
+   },
+   "ws_inband": {
+    "all": [
+     0.8555,
+     0.5087
+    ],
+    "e90_140": [
+     0.7999,
+     0.4914
+    ],
+    "ovh140": [
+     0.9397,
+     0.6526
+    ]
+   },
+   "dK_lim": 52.8,
+   "pa_horn": 36.7,
+   "pa_eff_horn": 39.6,
+   "wedge": null,
+   "crown": {
+    "crown_mm": {
+     "median": 20.2,
+     "min": 12.7,
+     "max": 37.4
+    },
+    "underside_min_mm": {
+     "median": 8.9,
+     "min": 0.9
+    }
+   },
+   "hub3": [
+    0.739,
+    11.5,
+    80
+   ],
+   "connected": null
   }
  },
  "convergence_gate": {
@@ -1205,7 +1584,8 @@
   "lead_roller": 23.73,
   "lead_drive_mu050": 23.73,
   "lead_drive_mu087": 25.23,
-  "lead_drive_mu087_O2": 24.83
+  "lead_drive_mu087_O2": 24.83,
+  "B_mu087": 24.78
  },
  "flood": {
   "lead_drive_mu050": {
@@ -1216,6 +1596,40 @@
   "lead_roller": {
    "full": 18.67,
    "knn": 20.34
+  },
+  "A_mu087": {
+   "full": 18.49,
+   "knn": 20.16,
+   "bench": 50.11
   }
+ },
+ "alt_plain_selected": {
+  "params": {
+   "g": 2.3684,
+   "beta": -173.8945,
+   "r_c": 15.5011,
+   "lift": 0.3804,
+   "hl": 1.7355,
+   "zr": 3.8693,
+   "s_arm": 4.0,
+   "r_lobe": 8.0058,
+   "nose_r": 1.106,
+   "az2": 45.8211,
+   "el2": 41.0855,
+   "lE": 67.832,
+   "phiE": -2.7863,
+   "lc": 21.1499,
+   "phib": -58.8084,
+   "a1max": 58.7678,
+   "kK": 2.1534,
+   "smhi": 16.8433,
+   "bk1": 26.0,
+   "bk2": 38.0336,
+   "mu": 0.087
+  },
+  "fast_plain": 12.71,
+  "fast_near2": 17.64,
+  "frozen": 18.18,
+  "note": "the CMA-A evaluation with the best PLAIN fast gap (nose_r 1.106); worn frozen alongside A before either result was seen; 18.18 frozen (ib14 0.8986, same reach / contact / near-touch); held out not run. The primary claim stays A (selected by the declared objective) so the frozen bench is not used to choose."
  }
 }

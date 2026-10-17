@@ -222,3 +222,35 @@ was 13.00.
 The held-out column for A is held-out clips only (never used in a fit): 23.45 (reach 0.683, ib14 0.8943, contact
 0.0116; lost fold 260, slide 32, contact 10; overhead 18/71; min metal 0.33 mm). The lead roller scores 23.73 on the
 same column.
+
+## Last claim columns (farm job sn_claims3: the same numbers as the local run)
+
+| configuration | frozen exact | held out | flood (full / knn / bench) |
+|---|---|---|---|
+| A at mu 0.087 (the claim) | **18.49** | 23.45 | 18.49 / 20.16 / 50.11 (lead 18.67 / 20.34 / -) |
+| A worn at mu 0.05 | 18.46 | - | - |
+| C (drive re-fit at mu 0.05) | 18.55 | - | - |
+| B (drive + 11 seats re-fit, mu 0.087) | 19.81 | 24.78 | - |
+| A' (CMA A's best PLAIN fast eval, nose_r 1.106, mu 0.087) | 18.18 | not run | - |
+
+- **B confirms round-3 lesson (c).** The seat re-fit wins on the fast bench (2 mm 15.57 vs 16.47) and loses frozen
+  (19.81, 6 fold poses more) and held out. The seats stay the lead's.
+- **A' is not claimed.** It was worn alongside A before either result was seen, and it scores 18.18. Choosing it now
+  would use the frozen bench to select. The claim stays A, the CMA objective's own best. A' is recorded in the row for
+  the verifier.
+
+## Verdict
+
+**Screened: a Pareto move of the lead.**
+
+- **The claim.** Delete the drive roller, slide a hardened O2.4 nose on a flank re-fit at the honest friction (mu
+  0.087), and the lead's frozen 18.67 becomes **18.49** (held out 23.73 -> 23.45, flood knn 20.34 -> 20.16).
+- **What it costs and saves.** Complexity 24.25 -> 22.25, one bought bearing fewer, 0 passive translations, 3 active.
+- **What it does not do: move the wall.** Reach is the lead's 261/360 and overhead 8/28. Every lost pose is the lead's
+  (fold 88 at K's dyad window, knee slide 9, horn contact 2).
+- **The nose with the lead's drive left unchanged** is honest only at mu <= 0.05 (18.77). At mu 0.087 it costs 1.23
+  points until the flank is re-fit.
+- **The wedge.** It is a kneeless-only, in-band-only lever (-1.06) with an unmoved crown, and it does not exist on the
+  lead.
+- **Next.** Wear test of the 440C / DLC pair at 5-15 N to pin mu. Then CAD of the re-cut flank: its 1.3 mm concave
+  pocket and the O2.4 pin seat in the 3 mm Ti arm tip.
