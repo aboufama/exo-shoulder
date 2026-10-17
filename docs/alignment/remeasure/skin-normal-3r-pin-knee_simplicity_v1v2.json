@@ -366,5 +366,119 @@
    "order_v2": 0
   }
  ],
- "note": "order = sign(pin knee cx - other cx): 1 pin knee more complex, 0 tie, -1 simpler"
+ "note": "order = sign(pin knee cx - other cx): 1 pin knee more complex, 0 tie, -1 simpler",
+ "proposal_encoders_only_out": [
+  {
+   "id": "raglan-knee-3r",
+   "v1": 19.5,
+   "encoders_only_out": 9.5,
+   "v2": 0.0,
+   "v_gap": 27.82,
+   "status": "verified"
+  },
+  {
+   "id": "skin-normal-3r-pin-knee",
+   "v1": 19.5,
+   "encoders_only_out": 9.5,
+   "v2": 0.0,
+   "v_gap": 27.2,
+   "status": "verified"
+  },
+  {
+   "id": "cam-unfold-4th",
+   "v1": 33.75,
+   "encoders_only_out": 23.75,
+   "v2": 14.25,
+   "v_gap": 26.7,
+   "status": "verified"
+  },
+  {
+   "id": "rim-lobe-arm-knuckle-3r",
+   "v1": 35.25,
+   "encoders_only_out": 25.25,
+   "v2": 16.0,
+   "v_gap": 20.57,
+   "status": "dead"
+  },
+  {
+   "id": "coupler-path-j1",
+   "v1": 29.0,
+   "encoders_only_out": 29.0,
+   "v2": 22.0,
+   "v_gap": 28.98,
+   "status": "dead"
+  },
+  {
+   "id": "roller-longdyad-knuckle-3r",
+   "v1": 43.75,
+   "encoders_only_out": 33.75,
+   "v2": 24.25,
+   "v_gap": 18.67,
+   "status": "verified"
+  },
+  {
+   "id": "sidecar-roller-flank-knuckle-3r",
+   "v1": 45.25,
+   "encoders_only_out": 35.25,
+   "v2": 25.75,
+   "v_gap": 20.08,
+   "status": "verified"
+  },
+  {
+   "id": "frontload-lobe-stopb-knuckle-3r",
+   "v1": 49.0,
+   "encoders_only_out": 39.0,
+   "v2": 29.5,
+   "v_gap": 22.82,
+   "status": "verified"
+  },
+  {
+   "id": "sidecar-longdyad-knuckle-3r",
+   "v1": 49.0,
+   "encoders_only_out": 39.0,
+   "v2": 29.5,
+   "v_gap": 18.91,
+   "status": "verified"
+  },
+  {
+   "id": "sidecar-parallelogram-knuckle-3r",
+   "v1": 49.0,
+   "encoders_only_out": 39.0,
+   "v2": 29.5,
+   "v_gap": 19.13,
+   "status": "verified"
+  },
+  {
+   "id": "minarc-stop-knuckle-4r",
+   "v1": 52.0,
+   "encoders_only_out": 42.0,
+   "v2": 32.5,
+   "v_gap": 19.54,
+   "status": "verified"
+  },
+  {
+   "id": "skinnormal-shortk-knuckle-4r",
+   "v1": 42.0,
+   "encoders_only_out": 42.0,
+   "v2": 32.5,
+   "v_gap": 12.49,
+   "status": "screened"
+  },
+  {
+   "id": "split-knuckle-twosided-3r",
+   "v1": 68.5,
+   "encoders_only_out": 58.5,
+   "v2": 49.0,
+   "v_gap": 34.18,
+   "status": "dead"
+  },
+  {
+   "id": "twin-k2-sidecar-knuckle-3r",
+   "v1": 75.0,
+   "encoders_only_out": 65.0,
+   "v2": 55.5,
+   "v_gap": 67.32,
+   "status": "dead"
+  }
+ ]
 }
