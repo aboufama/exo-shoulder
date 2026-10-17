@@ -29,8 +29,7 @@ def dv_variant(r_h=2.493, a_f=9.0, a_c=9.0, rr=3.0, r_base=10.1, side=+1, dk_end
     if dk_end is not None:
         n = int(np.searchsorted(DV.kK * np.degrees(arr["ts"]), dk_end + 1e-9)); arr = {k: (v[:n] if hasattr(v, "__len__") and len(v) == len(DV.ts) else v) for k, v in arr.items()}
         r = dict(r, lobe_r_end=round(float(arr["rprof"][-1]), 2), dK_end=round(float(DV.kK * np.degrees(arr["ts"][-1])), 2), pa_deg=[round(float(arr["pa"].min()), 1), round(float(arr["pa"].max()), 1)])
-    u2 = DV.u2; bx = USG.unit(DV.axis_off); by = np.cross(u2, bx)
-    if side < 0: by = -by          # mirrored drive: the profile runs the other way round u2; lobe_ring draws it in the mirrored (bx, -by) frame
+    u2 = DV.u2; bx = USG.unit(DV.axis_off); by = np.cross(u2, bx)       # (a mirrored follower, side -1, still advances the profile the same way round u2: q2 sets it)
     return dict(rep=r, arr=arr, u2=u2, uK=DV.uK, bx=bx, by=by, PT=DV.axis_off + DV.hT * u2, PL=DV.axis_off + DV.hL * u2,
                 A0=arr["As"][0], B0=arr["Bs"][0], C0=arr["Cs"][0], axis=DV.axis_off, f2=DV.f2, fK=DV.fK)
 

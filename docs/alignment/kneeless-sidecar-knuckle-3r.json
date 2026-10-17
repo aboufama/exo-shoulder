@@ -1,0 +1,220 @@
+{
+ "id": "kneeless-sidecar-knuckle-3r",
+ "status": "verified",
+ "v_gap": 21.11,
+ "complexity": 28.0,
+ "verdict": "watch",
+ "reasons": [
+  "fold_margin: no min-th margin over taken poses on file (rule: each claim reports it)",
+  "reporting: verdict text still reads as a self-measured screen"
+ ],
+ "checks": [
+  {
+   "check": "held_out",
+   "level": "ok",
+   "reason": "held out 25.34 vs bench 21.11 (+4.23; row held_out)",
+   "held_gap": 25.34,
+   "v_gap": 21.11,
+   "drop": 4.23,
+   "source": "row held_out"
+  },
+  {
+   "check": "fast_frozen",
+   "level": "ok",
+   "reason": "self/fast 15.63 -> verified 21.11 (+5.48)",
+   "fast": 15.63,
+   "verified": 21.11,
+   "drop": 5.48
+  },
+  {
+   "check": "near_touch",
+   "level": "ok",
+   "reason": "plain 21.11, <1 mm 22.75, <2 mm 33.15, 12.04 points live in the 1-2 mm shell (docs/concepts/verify/kneeless-sidecar-knuckle-3r_v_bench_frozen.json)",
+   "shell2": 12.04,
+   "plain": 21.11,
+   "n1": 22.75,
+   "n2": 33.15,
+   "n3": null,
+   "band3": null,
+   "hist": null,
+   "minmm": 0.48,
+   "source": "docs/concepts/verify/kneeless-sidecar-knuckle-3r_v_bench_frozen.json"
+  },
+  {
+   "check": "dominance",
+   "level": "ok",
+   "reason": "vs sidecar-longdyad-knuckle-3r: plain -2.20, 2 mm +0.88",
+   "ref": "sidecar-longdyad-knuckle-3r",
+   "gain_plain": -2.2,
+   "gain_2mm": 0.88
+  },
+  {
+   "check": "continuity",
+   "level": "ok",
+   "reason": "static 21.11, connected full 21.11, knn 23.65, bench 44.84 (docs/concepts/verify/kneeless-sidecar-knuckle-3r_v_bench_frozen.json)",
+   "static": 21.11,
+   "connected_full": 21.11,
+   "connected_knn": 23.65,
+   "connected_bench": 44.84
+  },
+  {
+   "check": "fold_margin",
+   "level": "watch",
+   "reason": "no min-th margin over taken poses on file (rule: each claim reports it)"
+  },
+  {
+   "check": "idle",
+   "level": "ok",
+   "reason": "declared drive moves: smallest recorded span 34.1 (row:fast.rssr.phi_max_taken)",
+   "spans": [
+    [
+     "row:fast.rssr.phi_max_taken",
+     34.1
+    ],
+    [
+     "row:verification.added_checks.dK_taken_max_deg",
+     35.77
+    ],
+    [
+     "docs/concepts/verify/kneeless-sidecar-knuckle-3r_v_bench_frozen.json:extra.dK_taken_max_deg",
+     35.77
+    ],
+    [
+     "docs/concepts/verify/kneeless-sidecar-knuckle-3r_v_bench_frozen.json:sidecar.phi_max_taken",
+     34.1
+    ],
+    [
+     "docs/concepts/verify/kneeless-sidecar-knuckle-3r_v_held_frozen.json:extra.dK_taken_max_deg",
+     36.34
+    ],
+    [
+     "docs/concepts/verify/kneeless-sidecar-knuckle-3r_v_held_frozen.json:sidecar.phi_max_taken",
+     34.1
+    ],
+    [
+     "docs/concepts/verify/kneeless-sidecar-knuckle-3r_v_fitexact.json:extra.dK_taken_max_deg",
+     36.64
+    ],
+    [
+     "docs/concepts/verify/kneeless-sidecar-knuckle-3r_v_fitexact.json:sidecar.phi_max_taken",
+     34.1
+    ]
+   ]
+  },
+  {
+   "check": "sampling",
+   "level": "ok",
+   "reason": "sample-weighted in-band 0.889 vs part-weighted 0.904 (-1.57 points); thinly sampled parts: rod 14, L1a 12 (docs/concepts/verify/kneeless-sidecar-knuckle-3r_v_bench_frozen.json)",
+   "parts": {
+    "hub1": [
+     1.0,
+     9.1,
+     80
+    ],
+    "hubK": [
+     0.978,
+     7.8,
+     80
+    ],
+    "hub2": [
+     0.99,
+     10.5,
+     80
+    ],
+    "hub3": [
+     0.555,
+     13.5,
+     80
+    ],
+    "E": [
+     0.867,
+     9.0,
+     104
+    ],
+    "boss": [
+     0.954,
+     8.4,
+     32
+    ],
+    "pad": [
+     0.972,
+     10.0,
+     32
+    ],
+    "knee": [
+     0.971,
+     9.0,
+     85
+    ],
+    "crank": [
+     0.832,
+     12.9,
+     53
+    ],
+    "horn": [
+     0.919,
+     7.4,
+     20
+    ],
+    "rod": [
+     0.869,
+     12.5,
+     14
+    ],
+    "rodends": [
+     0.949,
+     11.6,
+     32
+    ],
+    "L1a": [
+     0.97,
+     9.5,
+     12
+    ],
+    "L1b": [
+     0.96,
+     8.4,
+     40
+    ],
+    "L2": [
+     0.778,
+     10.9,
+     92
+    ]
+   }
+  },
+  {
+   "check": "complexity",
+   "level": "ok",
+   "reason": "recomputed 28.0 vs row 28.0; hand count (not derived from the model)",
+   "recomputed": 28.0,
+   "row": 28.0
+  },
+  {
+   "check": "reporting",
+   "level": "watch",
+   "reason": "verdict text still reads as a self-measured screen"
+  },
+  {
+   "check": "judge_change",
+   "level": "ok",
+   "reason": "no bench / judge / metric file changed in the 2 commits that touched the row"
+  },
+  {
+   "check": "rules",
+   "level": "ok",
+   "reason": "O20, margin >= 5, translations <= 2 as recorded"
+  }
+ ],
+ "remeasured": {
+  "bench": false,
+  "held": false
+ },
+ "verifier_files": [
+  "docs/concepts/verify/kneeless-sidecar-knuckle-3r_v_bench_frozen.json",
+  "docs/concepts/verify/kneeless-sidecar-knuckle-3r_v_held_frozen.json",
+  "docs/concepts/verify/kneeless-sidecar-knuckle-3r_v_fitexact.json"
+ ],
+ "git": "d69723b",
+ "t": "2026-10-17T01:59:07Z"
+}

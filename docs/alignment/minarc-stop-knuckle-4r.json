@@ -6,9 +6,11 @@
  "verdict": "watch",
  "reasons": [
   "near_touch: plain 19.54, <1 mm 26.44, 2 mm near-touch not measured (row polished_bench.BDp_same_harness.gap_near1)",
+  "dominance: cannot compare with sidecar-longdyad-knuckle-3r at 2 mm",
   "continuity: continuity record without the connected numbers (row kitrule_continuity)",
   "sampling: no per-part in-band record: unsampled bodies cannot be ruled out",
-  "reporting: dashboard sweep best 6.19 (score 97.75) sits 13.35 below the verified number"
+  "complexity: recomputed 52.0 vs row 33.0; MISMATCH; info: 4 active + 2 sensed passive coordinates = 6 read coordinates (cuff-side passives are outside the count by the user's ruling)",
+  "reporting: dashboard v_gap 18.4 vs verifier 19.54 (-1.14; the dashboard flatters the design); dashboard sweep best 6.19 (score 97.75) sits 13.35 below the verified number"
  ],
  "checks": [
   {
@@ -44,8 +46,8 @@
   },
   {
    "check": "dominance",
-   "level": "ok",
-   "reason": "no reference"
+   "level": "watch",
+   "reason": "cannot compare with sidecar-longdyad-knuckle-3r at 2 mm"
   },
   {
    "check": "continuity",
@@ -73,20 +75,20 @@
   },
   {
    "check": "complexity",
-   "level": "ok",
-   "reason": "recomputed 33.0 vs row 33.0; info: 3 active + 3 sensed passive coordinates = 6 read coordinates (cuff-side passives are outside the count by the user's ruling)",
-   "recomputed": 33.0,
+   "level": "watch",
+   "reason": "recomputed 52.0 vs row 33.0; MISMATCH; info: 4 active + 2 sensed passive coordinates = 6 read coordinates (cuff-side passives are outside the count by the user's ruling)",
+   "recomputed": 52.0,
    "row": 33.0
   },
   {
    "check": "reporting",
    "level": "watch",
-   "reason": "dashboard sweep best 6.19 (score 97.75) sits 13.35 below the verified number"
+   "reason": "dashboard v_gap 18.4 vs verifier 19.54 (-1.14; the dashboard flatters the design); dashboard sweep best 6.19 (score 97.75) sits 13.35 below the verified number"
   },
   {
    "check": "judge_change",
    "level": "ok",
-   "reason": "no bench / judge / metric file changed in the 11 commits that touched the row"
+   "reason": "no bench / judge / metric file changed in the 12 commits that touched the row"
   },
   {
    "check": "rules",
@@ -99,6 +101,6 @@
   "held": false
  },
  "verifier_files": [],
- "git": "c932f10",
- "t": "2026-10-16T20:26:28Z"
+ "git": "d69723b",
+ "t": "2026-10-17T01:59:29Z"
 }
