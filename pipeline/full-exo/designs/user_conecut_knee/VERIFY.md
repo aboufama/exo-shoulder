@@ -150,4 +150,16 @@ STOPS_PLACEHOLDER
 
 ## Findings for the fix list (before any render)
 
-FINDINGS_PLACEHOLDER
+1. **The bars are not within 0.5 mm of the model's straps** (L2 1.63 / E 1.33 / horn 1.01 / knee 0.85 / L1b 0.70 mm, all
+   outward). This is the disclosed cause of R1 -0.39 against the L1. The E strap is new against gen 7 (0.52 -> 1.33, the lE 97
+   strap under member 3's upper hull at r 125-134 from GH). The builder's fix route (lower link 2 onto the strap stations at
+   r 63-72) addresses the larger half.
+2. **The summary table understates hub K / hub 2** (0.0 there, 1.42 in the stop-slot bands); build.json has the band numbers.
+   Write them in the summary, as the gen-7 check did.
+3. **Check the O4.5 OD of the inner-ring spacer and shims** against the 683ZZ / MR63ZZ maximum inner-ring abutment
+   diameter (a shield rub risk), and give the wave washer a supplier part number (disclosed).
+4. **Two builder checks are still not on file** for this build (disclosed): the drive-to-skin distance over all 1337 frames
+   and the working-end pairs. The drive geometry is gen 7's (1.90 / 1.85 mm there); R2 judged every part against the body.
+5. **R16 was not re-run here**, and nothing judges the full CAD with the knee stop's own tolerance; at 47.7 deg of margin the
+   knee stop no longer matters.
+6. **No stills**: criterion (5) waits for the user's yes on a GPU render.
