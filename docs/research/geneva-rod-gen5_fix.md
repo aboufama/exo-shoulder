@@ -85,7 +85,19 @@ LOBE_TABLE
 
 ## 3. Real parts
 
-PARTS_TABLE
+Catalogue data, and what the fix builder (`pipeline/conformal/param_cad/user_style_geneva_fix.py`) now builds. "Gen-5" is
+`user_geneva_rod` as committed; "v2" is this fix.
+
+| part | catalogue data | gen-5 as built | v2 (real size) |
+|---|---|---|---|
+| 2x rod-end spherical bearing | igus igubal **KGLM-03**: bore 3, OD 10, **6 mm** high, 200-550 N static, 32 deg swivel, iglidur W300 ball in an igumid G housing (igus product page; distributor listings) | O10 housing in an O13 x **4** eye, ball 3.9 mm | O10 x **6** housing pressed in an O13 x 6 eye, ball truncated at +-3.0. The rod line rises **3.6 mm** at the horn (1.0 for the wider eye, 2.6 for the taller horn hub below). The RSSR, the crank-pin tilt (24.6 deg) and the lobe are re-solved for that height |
+| clip on the O3 crank pin and horn pin | **DIN 6799 RS 2.3**: shaft 3-4, groove O2.3 x **0.64**, s 0.6, d3 max 6.3, land **n >= 1.0** | no groove; the clip overlaps the pin; land 0.5 / 0.6 | groove O2.3 x 0.64 cut 0.15 past the eye face, clip in it, land 1.0 |
+| bell crank retention on the O5 post | **DIN 6799 RS 4**: shaft 5-7, groove O4 x **0.74**, s 0.7, d3 max **9.3**, land **n >= 1.2** | none: nothing reacts the wave-washer preload | 0.3 mm shim on the top MR85ZZ inner ring + RS 4 in an O4 x 0.74 groove. **Land 1.2, O9.3 clip (this run; the earlier fix draft used 1.0 and O9.0, under DIN's n min)** |
+| follower roller | **MR63ZZ** 3 x 6 x 2.5. Static rating about 0.07-0.10 kN (distributor figure 16 lbf, the red team's 0.09-0.10 kN; the maker's datasheet is still to confirm) | no retention below the roller | inner race pressed on an O3 m6 pin + retaining compound, pin pressed in the follower arm (stated; no geometry change) |
+| bell crank bearings | **MR85ZZ** 5 x 8 x 2.5 (2x, wave-washer preloaded) | no reaction for the preload | reacted by the shim + RS 4 clip |
+| horn clamp screws | **ISO 7046-1 M1.6** countersunk: P 0.35, head O3.0 max x 1.0, 90 deg; tapped blind O1.25 | M1.6 in a 1.2 mm hub: 1.2 mm of thread (0.75 d) | hub 3.8 mm. **M1.6 x 4 (this run; the draft's x 5 ended 0.05 mm above the hole floor and left no tap lead):** 2.6 mm of thread (1.6 d), 1.05 mm (3 P) for the tap lead |
+| K and J2 stops | ISO 8734 O3 x 6 dowels, m6 | as built | unchanged |
+| hubs | v5 O20 stack, MR117-2RS 7 x 11 x 3 pair, M7 x 0.5 ring nut | as built | unchanged |
 
 ## 4. Where the full CAD's -0.8 R1 points go (against the L1)
 
