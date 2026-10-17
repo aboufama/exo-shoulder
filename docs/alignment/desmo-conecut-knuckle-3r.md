@@ -1,9 +1,10 @@
 # Alignment audit: desmo-conecut-knuckle-3r
 
 First audit of this row (discovery round 13, slice r13-A: screened 20:09, verified 20:48 UTC 2026-10-17). Run
-20:49-21:15 UTC on the box (at most 2 niced processes; the farm was not used).
+20:49-21:18 UTC on the box (at most 2 niced processes; the farm was not used).
 
-- **Ledger entry:** LEDGER_PLACEHOLDER
+- **Ledger entry:** 2026-10-17T21:17:26Z, by auditor, run `audit:desmo-conecut-knuckle-3r`. Verdict **watch**, tool
+  verdict watch, claim v_gap 18.98. Reasons: 2 tool reasons (continuity, reporting) and 12 judgement findings, all watch.
 - **Checks:** `docs/alignment/desmo-conecut-knuckle-3r.json` (tool VERSION 2026-10-17.6, `--ref slipper-nose-knuckle-3r`).
 - **Findings:** `docs/alignment/desmo-conecut-knuckle-3r.findings.json` (11, all watch).
 - **Re-wears and probes written by this audit** (the model ran unchanged; only its `audit()` was wrapped, or its
@@ -14,8 +15,10 @@ First audit of this row (discovery round 13, slice r13-A: screened 20:09, verifi
   - `remeasure/desmo-conecut-knuckle-3r_probe_bench.json`: `tools/alignment_wear_probe_model.py` (unscored workspace
     in-band, standoff, clearance floor, reach by elevation, own-state fold margin).
   - `remeasure/desmo-conecut-knuckle-3r_s1read_check.json`: the stage-1 reading probe (fast Bench(60,160), five cells).
-  - `remeasure/desmo-conecut-knuckle-3r_blendband_bench.json`: the new probe `tools/alignment_blend_band_probe.py`
-    (built-groove back-drive pressure angle through the blend; taken poses' K histogram on the frozen wear).
+  - `remeasure/desmo-conecut-knuckle-3r_blendband_fast.json`: the new probe `tools/alignment_blend_band_probe.py
+    --no-wear` (the built-groove back-drive pressure angle through the blend, read from the model's own arrays with a
+    return-trace). Its frozen-wear part (the taken poses' K histogram) was stopped at 21:16 after 11 CPU-minutes on a
+    box at load 6-8, to keep the time box.
 
 ## Verdict: WATCH, claim v_gap 18.98 (score 93.10), held out 23.19
 
@@ -34,9 +37,32 @@ Neither changes the score: at mu 0.087 or 0.135 on the linear reading the fast g
 ## Ruling asked of the auditor: the built-groove stage-1 reading
 
 The concept doc (Next, item 2) asks the auditor to rule on reading stage 1 on the built blended groove. My ruling, from
-the model's own arrays (`tools/alignment_blend_band_probe.py`, `remeasure/desmo-conecut-knuckle-3r_blendband_bench.json`):
+the model's own arrays (`tools/alignment_blend_band_probe.py`, `remeasure/desmo-conecut-knuckle-3r_blendband_fast.json`):
 
-BLEND_RULING_PLACEHOLDER
+- **Where the reading applies.** The blend runs over K 0 to 10.72 deg (half-blend 10.77 deg of the linear law's K), a
+  quarter of the 46.5 deg stroke. Through it the built cap-side (back-drive: the pin pushing link 2's cap ring)
+  pressure angle falls from 89.9 deg at K 0 to 31.8 at K 9.8 (rows: K 0.25 82.7, 1.0 74.6, 2.2 65.7, 3.3 59.3,
+  4.6 52.7, 6.1 45.9, 7.8 38.9, 8.8 35.3).
+- **What is a lock and what is not.** At mu 0.15 the back-drive self-locks above 81.47 deg (90 - atan mu): only for
+  K < 0.33 deg. That is the dwell lock, and exempting it is right: every blended dwell-rise groove has it, and a lock
+  that holds K at rest against the cuff's load is the slaved coordinate's job. From K 0.33 to 9.0 the back-drive is
+  NOT locked; it runs at 34.5-81 deg, above the family's 43 - atan(mu) margin gate, and the built reading leaves it
+  ungated. The rest pose (dK 4.6, ~52.7 deg) and the taken overhead pose at axial -135 (dK 5.8, ~47 deg) live there.
+- **Ruling.** The built reading is the right place to read the groove: it is the groove that is cut, and the linear
+  law's kink is not (the linear read's 35.05 deg at K 0 is a kink artefact). Exempting the true lock (K < 0.33 here) is
+  right. But no blended groove can pass the family's 43 - atan(mu) back-drive gate next to its dwell, because the cap
+  angle goes to 90 as the law's slope goes to 0; so the exemption the screener chose (the whole blend, K 0-10.72) is a
+  convention, not a measurement, and under it the back-drive from K 0.33 to 9.0 runs at 35-81 deg ungated. Neither
+  reading measures whether the wearer feels that. The honest friction label is therefore: **stage 2 (the inverted
+  slot) holds mu 0.15 with margin, a real gain over desmo-slipper's flank (43-44.5 deg of K at mu 0.135-0.15); stage 1
+  is desmo-slipper's, with the first 9 deg of back-drive ungated under either reading, and its forward side 0.07 mm
+  from a bind at mu 0.15.** "The first desmo-family drive holding mu 0.15 on both stages" compares a built-read claim
+  with desmo-slipper's linear-read jam (mu 0.14); the same stage 1 on the same reading would read the same.
+- **Score.** Unaffected: fast 13.31 at mu 0.087 and at mu 0.135 on the linear reading, equal to the claim
+  (`remeasure/desmo-conecut-knuckle-3r_s1read_check.json`). A watch on a label, never a refutation of 18.98.
+- **Equal-placement control.** Not available: cell A (the desmo stage 2 unchanged) at the claim's seat r_c 16.176
+  fails its flank cusp at K 0 at any mu (fast 86.44 at mu 0.15 and 0.087, same file), so the inversion cannot be
+  compared with the flank at this placement.
 
 ## What the wearer gets (measured)
 
@@ -73,7 +99,8 @@ All on the frozen claim (exact Bench(110,360) unless stated). Sources: `remeasur
 
 1. **NEW-pa-reread (proposed catalogue entry T6, "a gate re-read for the design that carries the claim").**
    - *Looks like:* a claim passes a gate its family failed, because the claimant re-defined where the gate applies.
-   - *Here:* stage 1's cap (back-drive) side is gated only outside the blend. BLEND_FINDING_PLACEHOLDER On the
+   - *Here:* stage 1's cap (back-drive) side is gated only outside the blend. Inside the blend (K 0-10.72) the back-drive is above the gate from K 0 to 9.0
+     and self-locking only to K 0.33. On the
      family's linear reading the claim placement fails at K 0 at mu 0.15 (cap 35.05 vs 34.47) and holds mu ~0.139.
    - *Why not better:* the wearer gets the same stage 1 as desmo-slipper; the "first desmo drive at mu 0.15" is half a
      reading. Stage 2's inversion (PA stroke 64.5 to mu 0.15) is a real gain.
@@ -148,9 +175,11 @@ All on the frozen claim (exact Bench(110,360) unless stated). Sources: `remeasur
    "not measured" to ok (bench 16.15 mm vs 14.75, held 43.84 vs 46.12). On every other verified row: no change (no
    other row has a `+` dump whose gap is its v_gap; desmo-slipper's `+blend` / `+claim` dumps are 18.59 / other
    placements, not its 18.95). Until then a verifier should also write the verified config under `<id>_vblend_...`.
-2. **One friction reading for the desmo family** (a measurement change; the user's or the lead's call). Gate stage 1's
-   cap (back-drive) side on the built groove wherever the pin moves, at the same 43 - atan(mu), and report the dwell
-   lock separately; or keep the built reading and report every desmo row's friction limit under BOTH readings. Measured
+2. **One friction reading for the desmo family** (a measurement change; the user's or the lead's call). Read stage 1 on
+   the built groove for every desmo row (desmo-slipper included); exempt only the self-locking band (cap angle above
+   90 - atan(mu)), and report, not gate, the back-drive angle between that band and the blend's end, as a profile
+   (K, angle), next to the forward-side bind K and its a_s / psi tolerance. A 43 - atan(mu) back-drive gate next to a
+   dwell is unsatisfiable for any blended groove, so it should not be the rule; the feel question goes to proposal 4. Measured
    effect on the verified rows: none on any score (the frozen claims run at their own mu, and this row's score is the
    same 13.31 fast at mu 0.087 / 0.135); it changes only the friction label: this row "holds mu 0.15 (built) / 0.139
    (linear)", desmo-slipper "jams at 0.14 (linear)". No other verified row has a desmo stage 1.
