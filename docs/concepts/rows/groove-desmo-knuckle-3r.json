@@ -20,10 +20,10 @@
  "v_inband14": null,
  "v_inband10": null,
  "v_gap": null,
- "n_configs": 2886,
+ "n_configs": 4215,
  "verdict": "SCREENED - a complexity / hold Pareto point, not a lead change. The spring-free positive K drive exists: the groove at hub 2 passes gate 0 (pitch window, real pressure angle 30.5, link 2 clear by >= 1.22 mm on every taken pose of all three benches), but the two-walled slot at K only with the roller moved off the crank/link-1a relative-rotation pole, which caps the drive stroke at 41.2 deg (horn PA) instead of 46.2. Frozen exact Bench(110,360) 19.29 (score 92.99) vs the lead's 18.67 through the same protocol (+0.62), held out 24.96 vs 23.73 (+1.23), overhead 8/28 = lead; complexity 18.25 vs 20.25 (v2.1), K held both ways (slop +-0.54 deg vs the spring's 4-8 deg tilted drift).",
  "limiter": "the slot's outer wall: the CMA-optimal flank keeps the roller 1.5 mm from the relative-rotation pole (path radius 1.03-1.84 mm at K 0-7 deg), so a second wall is undercut there; moving the roller >= ~2 mm off the pole makes it cusp-free but the horn pressure angle then ends the stroke at 41.2 deg; frozen loss 103/360 = fold 92 (lead 88), slide 9, contact 2 (horn boss + crank on the deltoid at elev 165, as the lead)",
- "note": "Model docs/concepts/models/groove-desmo-knuckle-3r.py = the lead (GD_CELL=lead) / kneeless-roller (GD_CELL=kneeless) loaded unchanged + capK 0, MR52 roller (O3.5 head), and four drive limiters in the parent's cam loop: groove fit (crest <= 8.44), real groove pressure angle with the 16-mm-off crank pivot (<= 37.3), the slot's outer wall (cusp / convex >= 3.5, metal sampled into horn / contact / HORN strap / low-arm check), plus the link-2 planform check per taken pose (>= 1 mm) and the dowel + short arm as contact metal. GD_CONTROL=1 reproduces the verified lead exactly (fast 13.19 / 16.57, frozen 18.67 / 20.30 / 33.10). Search: 2 gate-0 configs, 1,191 drive-only cam cells (pole maps), 288-config farm LHS (wide drive box, best 2 mm 44.9), 3 farm CMA streams x ~850 (2,595 evals; none improved on the cusp-free start: plateau 17.21 at 2 mm); kneeless: 1 cusp-free cell benched (fast 18.57), its farm CMA stream pending at write time. Red team (frozen exact): min metal 0.07 mm at (-60, 60, 105) = the lead's pose (not the drive); 2 contact poses at elev 165 = the lead's; tightest link-2 planform 0.28 mm at (0, 90, 0), a pose lost to the fold; onset corner of the groove (~85 deg in the cap frame: the lin law's kink; needs a blended onset, < 1 deg of K, unmodelled); groove ring must be hardened steel or DLC Ti (sliding). New knowledge: (1) the family's lobe pressure-angle formula assumes a radial follower; with the crank pivot d ~ 16 mm off hub 2's axis the real angle is set by the match of the follower's tangential speed to the cap's: matched pitch radius r* = lam d cos(theta_F) / (1 + lam), lam = kK / g (lead: r* ~ 8.2 = its lobe, real angle ~2 deg; at the groove's capped 7.06 base: 30.5; kneeless at pitch 7.06: 54). (2) A positive (spring-free) cam pair needs the follower >= R + RHO_MIN off the relative pole over the whole stroke; the spring-loaded optimum sits 1.5 mm from it, so in this family going spring-free costs ~5 deg of stroke (~0.6 frozen points); a conjugate RETURN roller ~16 mm from the main one (return wall concave, PA <= 35.4, 15 mm off hub K) is the geometric route back to 48.5 deg, unbenched.",
+ "note": "Model docs/concepts/models/groove-desmo-knuckle-3r.py = the lead (GD_CELL=lead) / kneeless-roller (GD_CELL=kneeless) loaded unchanged + capK 0, MR52 roller (O3.5 head), and four drive limiters in the parent's cam loop: groove fit (crest <= 8.44), real groove pressure angle with the 16-mm-off crank pivot (<= 37.3), the slot's outer wall (cusp / convex >= 3.5, metal sampled into horn / contact / HORN strap / low-arm check), plus the link-2 planform check per taken pose (>= 1 mm) and the dowel + short arm as contact metal. GD_CONTROL=1 reproduces the verified lead exactly (fast 13.19 / 16.57, frozen 18.67 / 20.30 / 33.10). Search: 2 gate-0 configs, 1,191 drive-only cam cells (pole maps), 288-config farm LHS (wide drive box, best 2 mm 44.9), 3 farm CMA streams x ~850 (2,595 evals; none improved on the cusp-free start: plateau 17.21 at 2 mm); kneeless: 1 cusp-free cell benched (fast 18.57), its farm CMA 1,329 evals: best 2 mm 20.94 fast (reach 0.775, ib14 0.893, contact 0.042), gate 0.20/0.04/0.20. Red team (frozen exact): min metal 0.07 mm at (-60, 60, 105) = the lead's pose (not the drive); 2 contact poses at elev 165 = the lead's; tightest link-2 planform 0.28 mm at (0, 90, 0), a pose lost to the fold; onset corner of the groove (~85 deg in the cap frame: the lin law's kink; needs a blended onset, < 1 deg of K, unmodelled); groove ring must be hardened steel or DLC Ti (sliding). New knowledge: (1) the family's lobe pressure-angle formula assumes a radial follower; with the crank pivot d ~ 16 mm off hub 2's axis the real angle is set by the match of the follower's tangential speed to the cap's: matched pitch radius r* = lam d cos(theta_F) / (1 + lam), lam = kK / g (lead: r* ~ 8.2 = its lobe, real angle ~2 deg; at the groove's capped 7.06 base: 30.5; kneeless at pitch 7.06: 54). (2) A positive (spring-free) cam pair needs the follower >= R + RHO_MIN off the relative pole over the whole stroke; the spring-loaded optimum sits 1.5 mm from it, so in this family going spring-free costs ~5 deg of stroke (~0.6 frozen points); a conjugate RETURN roller ~16 mm from the main one (return wall concave, PA <= 35.4, 15 mm off hub K) is the geometric route back to 48.5 deg, unbenched. Core clamp keeps s_arm >= 4.0 (parent component limit) in both cells; the groove-fit limiter uses the worn value.",
  "doc": "docs/concepts/groove-desmo-knuckle-3r.md",
  "model_file": "docs/concepts/models/groove-desmo-knuckle-3r.py",
  "complexity": 18.25,
@@ -193,5 +193,83 @@
    "C_drive_seats": "0.00 / 0.00 / 1.09"
   },
   "evals": 2595
+ },
+ "verification_self": {
+  "harness": "docs/concepts/verify/sidecar-roller-flank-knuckle-3r.py retargeted at this model (scratchpad verify_gd.py; class GDModel, clamp, params, ROLL_R 2.5)",
+  "bench_frozen_exact": {
+   "gap": 19.29,
+   "reach": 0.7139,
+   "inband14": 0.8986,
+   "contact": 0.0054
+  },
+  "n_taken": 367,
+  "closure_max_mm": 0.0,
+  "roller_lug_min_mm": 2.805,
+  "pa_crank_max": 13.9,
+  "pa_horn_max": 42.6,
+  "wrong_sense": 0,
+  "poses_failing": 0,
+  "dK_taken_max": 40.52,
+  "dK_lim": 41.25
+ },
+ "kneeless_cell": {
+  "cma_evals": 1329,
+  "best_near2_fast": 20.94,
+  "reach": 0.775,
+  "inband14": 0.8926,
+  "contact": 0.0423,
+  "plain_fast_est": 17.47,
+  "gate": "0.20 / 0.04 / 0.20",
+  "frozen_exact": {
+   "gap": 24.0,
+   "reach": 0.7111,
+   "follow": 0.9545,
+   "inband14": 0.8939,
+   "inband10": 0.6117,
+   "contact": 0.045
+  },
+  "frozen_why": {
+   "fold": 89,
+   "slide": 0,
+   "flip": 0,
+   "closure": 0,
+   "skin": 0,
+   "parts": 3,
+   "contact": 17
+  },
+  "frozen_l2": {
+   "n": 361,
+   "clear_min": 1.08,
+   "az_abs_min": 68.9,
+   "n_lt60": 0,
+   "lost": 0
+  },
+  "parent_kneeless_roller_frozen": 21.07,
+  "best_params": {
+   "az1": 94.353,
+   "el1": 65.9804,
+   "az2": 42.103,
+   "el2": 42.0512,
+   "wd": 74.9631,
+   "wa": -7.9709,
+   "lE": 92.2196,
+   "phiE": -1.1428,
+   "lc": 28.705,
+   "phib": -73.7078,
+   "a1max": 55.0737,
+   "kK": 1.7384,
+   "smhi": 16.2807,
+   "bk1": 27.2292,
+   "bk2": 37.0571,
+   "g": 2.3446,
+   "beta": -168.4344,
+   "r_c": 16.6565,
+   "lift": 1.7558,
+   "hl": 1.0017,
+   "zr": 3.3611,
+   "s_arm": 4.0,
+   "r_lobe": 7.06,
+   "stk": 4.8534
+  }
  }
 }

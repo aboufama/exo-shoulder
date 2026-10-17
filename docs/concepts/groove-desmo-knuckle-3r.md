@@ -216,5 +216,25 @@ deg of tilted drift).
 **Open lever, measured geometrically but not benched:** a conjugate return roller about 16 mm from the main roller. It
 would restore the 48.5-deg MR52 stroke, at the price of a second flank on the deltoid.
 
-**Kneeless control:** the same wall, a 35.2-deg cusp-free stroke, fast 18.57. Its farm CMA stream was still pending
-when this was written.
+**Kneeless control:** the same wall again. Its farm CMA (1,329 evaluations, from the cusp-free cell) reached a 2 mm gap
+of 20.94: reach 0.775, in-band 14 0.893, contact 0.042 (plain about 17.5), against the lead cell's 17.21 / 14.67. Its
+gate: 0.20 / 0.04 / 0.20, which passes. Worn frozen on Bench(110,360) exact it scores **24.0**: reach 0.711, follow 0.955, in-band 14 0.894, contact 0.045, and 17 contact plus 3 parts poses (link 2 vs the short arm). Its parent kneeless-roller scores 21.07. The kneeless cell stays the worse cell, as its parent is.
+
+The core's component clamp holds the short arm's radial lever at s_arm >= 4.0 in both cells. That is the parent's
+4-6 limit, and the groove does not need it. The groove-fit limiter uses the value actually worn, so every claim
+respects the window.
+
+## Independent check (the round's roller-flank verifier, retargeted at this model)
+
+Script: `docs/concepts/verify/sidecar-roller-flank-knuckle-3r.py`. It is retargeted the same way the lead's verifier
+retargets it, at this model's class, clamp, params and roller radius 2.5.
+
+Frozen exact Bench(110,360): **19.29, with 0 failing taken poses out of 367**:
+
+- cam closure 0.0 mm;
+- roller to lug metal (the slot's outer wall included) 2.805-3.312 mm, never inside;
+- K sense always the drive's (0 wrong);
+- pressure angles: crank 13.9, horn 42.6 (<= 43);
+- real lobe pressure angle by the verifier's radial formula: 26.6. The groove's own off-axis value is 30.5.
+- the drive is not idle (dK 40.5 of 41.25);
+- corrected gap 19.29.
