@@ -63,6 +63,11 @@ w 12, with the bent arm built at the dip floor. Against the control:
 - The recovered pose 203 sits at 0.48 mm. At 1 mm counted as contact, the dip gives 20.81 against the lead's 20.30, and
   the 2 mm gap is 35.69 against the lead's 33.10.
 - Deeper dips lose: dipD 4 gives 21.10.
+- **Held out, the dip loses.** dipD 1 gives 24.07 against its own D = 0 control at 22.97 (fold 261 -> 273, contacts 17
+  = 17) and the lead's 23.73. The bench gain is the two poses 182 and 203. The stroke cost carries over to the held-out
+  set; the contact gain does not.
+- Side finding: the centred-knee control (kneewin), rejected on the bench at 19.33 against 18.67, is 0.76 better than the
+  lead held out (22.97 against 23.73).
 
 The one roller and flank must carry K both ways. The flank's usable stroke under the 43-degree pressure-angle rule is
 ~46 deg of K, counted from where the bent arm is built. A dip of D degrees of a1e needs ~2.35 D degrees of K below the old

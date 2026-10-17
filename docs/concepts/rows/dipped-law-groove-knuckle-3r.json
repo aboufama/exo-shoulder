@@ -320,15 +320,52 @@
   "near2": 33.1,
   "held_out": 23.73
  },
- "held_out": null,
+ "held_out": {
+  "bench": "held-out set (verify/skin-normal-3r-pin-knee-polish.py held_bench), fit-60 shape frozen, exact",
+  "best_D1": {
+   "gap": 24.07,
+   "reach": 0.6807,
+   "follow": 1.0,
+   "inband14": 0.8982,
+   "inband10": 0.5188,
+   "contact": 0.0196,
+   "why": {
+    "fold": 273,
+    "parts": 14,
+    "contact": 17
+   },
+   "near1": 26.94,
+   "near2": 38.72,
+   "min_metal_mm": 0.33,
+   "overhead_reach": 0.2535
+  },
+  "control_D0": {
+   "gap": 22.97,
+   "reach": 0.6933,
+   "follow": 1.0,
+   "inband14": 0.8963,
+   "inband10": 0.5145,
+   "contact": 0.0193,
+   "why": {
+    "fold": 261,
+    "parts": 14,
+    "contact": 17
+   },
+   "near1": 26.26,
+   "near2": 37.52,
+   "min_metal_mm": 0.33,
+   "overhead_reach": 0.2535
+  },
+  "lead": 23.73
+ },
  "convergence_gate": {
   "gain_second_half": 0.0,
   "gain_last_third": 0.0,
   "top5_spread_score": 0.23,
   "scope": "10-config 1-D trade sweep (dipD 1-3 x 3 band shapes at dip_ref 1 + D=0 control) and 4 local probes; the 242-config farm LHS co-fitting the drive did not return in the time box (farm showed 16 jobs in progress, 0 completions for 30+ min) - NOT a converged search of the drive co-fit, so not called dead"
  },
- "verdict": "Level with the lead, not a lead change. Frozen exact Bench(110,360) at the best dip (dipD 1, th_c 53, w 12, arm built at the dip floor) is 18.64 (score 93.22) against the lead's 18.67 and its own D=0 control (kneewin centred knee) 19.33. The dip recovers 2 contact poses (6 -> 4), but the shared flank stroke costs 2 fold poses (88 -> 90, dK_lim 46.2 -> 43.8). Reach stays 0.725 and overhead 8/28. That is -0.03, under the 1-point rule. The recovered 203 sits at 0.48 mm (near-1 20.81 vs the lead's 20.30). Deeper dips lose: dipD 4 gives 21.10.",
+ "verdict": "Level with the lead, not a lead change. Frozen exact Bench(110,360) at the best dip (dipD 1, th_c 53, w 12, arm built at the dip floor) is 18.64 (score 93.22) against the lead's 18.67 and its own D=0 control (kneewin centred knee) 19.33. The dip recovers 2 contact poses (6 -> 4), but the shared flank stroke costs 2 fold poses (88 -> 90, dK_lim 46.2 -> 43.8). Reach stays 0.725 and overhead 8/28. That is -0.03, under the 1-point rule. The recovered 203 sits at 0.48 mm (near-1 20.81 vs the lead's 20.30). Held out, the dip LOSES: 24.07 vs its own D=0 control 22.97 (fold 261 -> 273, contacts 17 = 17) and the lead's 23.73. The bench gain is the two poses 182 / 203; the stroke cost generalises and the contact gain does not. Deeper dips lose on the bench too: dipD 4 gives 21.10.",
  "limiter": "The roller-flank's pressure-angle-capped K stroke (~46 deg, counted from the arm's build phase) is shared by the dip and the stretched rise: a dip of D deg of a1e costs ~2.35 D deg of K off dK_lim (46.2 -> 43.8 / 41.2 / 38.8 / 36.5 at D 1 / 2 / 3 / 4), at ~1 fold pose per deg of K on Bench(110,360). Built at the old rest, the bent arm closes on hub K at 0.18 mm per deg of backward swing (CRK-hubK < 1 mm at -0.75 deg) and the flank cusps below -5 deg, so the arm must be built at the dip floor. Measured on the lead cell, frozen exact Bench(110,360), workspace poses at th ~109-112 (the stretched drive wall).",
- "note": "Model: the lead's code loaded unchanged. A DipDesign subclass changes the state-A IK to a1e = a1 - D (1-x^2)^2 on the design's own closure branch; a DipModel subclass synthesises the drive over the closing range and puts the crank on the SIGNED opening. Spec corrections: (1) a C1 bump instead of the parabola, which kinks at the band edges; (2) msub (the stretched law's free-K rule) is not required on dipped poses: state-A poses sit at msub 0.2-0.6 and requiring it dropped all 41 dipped fit poses; (3) the cam is checked on q2: monotone, rate <= 1.9 (limit 3.45), lobe pressure angle <= 25 at D 8, lobe dip 0.07-0.53 mm. Frozen exact Bench(110,360): D 0 19.33 (control), D 1 18.64, D 4 21.10; the lead 18.67. Held out: see held_out (filled if it finished in the time box). Red team: the 0.07 mm pinch at (-60, 60, 105) is unchanged; the recovered 203 is at 0.48 mm; at D 4, 83 poses sit under 2 mm (near-2 78.38); the arm vs hub K at the dip floor is 1.04 mm, the edge of the rule. Prediction: a 4-deg dip on top of the lead's 46-deg stretched stroke needs ~55.6 deg of flank in total, which is the round-9 long-flank regime measured dead (boss on the deltoid), so co-fitting the drive should not rescue the deep dip. The lever needs an independent K input below stop A (embodiment 2, groove + nose, after groove-desmo's fit gate). Kneeless control cell (b) not run: kneeless imports its own copy of the lead's module, and the patch did not fit the time box.",
+ "note": "Model: the lead's code loaded unchanged. A DipDesign subclass changes the state-A IK to a1e = a1 - D (1-x^2)^2 on the design's own closure branch; a DipModel subclass synthesises the drive over the closing range and puts the crank on the SIGNED opening. Spec corrections: (1) a C1 bump instead of the parabola, which kinks at the band edges; (2) msub (the stretched law's free-K rule) is not required on dipped poses: state-A poses sit at msub 0.2-0.6 and requiring it dropped all 41 dipped fit poses; (3) the cam is checked on q2: monotone, rate <= 1.9 (limit 3.45), lobe pressure angle <= 25 at D 8, lobe dip 0.07-0.53 mm. Frozen exact Bench(110,360): D 0 19.33 (control), D 1 18.64, D 4 21.10; the lead 18.67. Held out: D 1 24.07, D 0 control 22.97, lead 23.73. Side finding for the planner: the centred-knee control (kneewin), rejected on the bench at 19.33 vs 18.67, is 0.76 BETTER than the lead held out (22.97 vs 23.73). Red team: the 0.07 mm pinch at (-60, 60, 105) is unchanged; the recovered 203 is at 0.48 mm; at D 4, 83 poses sit under 2 mm (near-2 78.38); the arm vs hub K at the dip floor is 1.04 mm, the edge of the rule. Prediction: a 4-deg dip on top of the lead's 46-deg stretched stroke needs ~55.6 deg of flank in total, which is the round-9 long-flank regime measured dead (boss on the deltoid), so co-fitting the drive should not rescue the deep dip. The lever needs an independent K input below stop A (embodiment 2, groove + nose, after groove-desmo's fit gate). Kneeless control cell (b) not run: kneeless imports its own copy of the lead's module, and the patch did not fit the time box.",
  "doc": "docs/concepts/dipped-law-groove-knuckle-3r.md"
 }
