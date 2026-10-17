@@ -79,7 +79,7 @@ def _c(v, lo, hi): return min(max(float(v), lo), hi)
 def _clamp(p):
     p = SN._clamp(p)
     if CONTROL: return p
-    p["capK"] = 0.0
+    p["capK"] = 6.0 if p.get("keep_cap") else 0.0                      # keep_cap: decomposition only (the 6 mm spring cap back)
     p["a_s"] = _c(p.get("a_s", 8.625), 5.0, 12.0); p["psi"] = float(p.get("psi", 184.0)) % 360.0
     p["glev"] = _c(p.get("glev", 0.0), -1.0, 1.5); p["c_slot"] = _c(p.get("c_slot", 0.01), 0.005, 0.05)
     p["rho_e"] = _c(p.get("rho_e", 1.0), 0.5, 4.0); p["blend"] = _c(p.get("blend", 4.0), 0.0, 10.0)
@@ -224,14 +224,14 @@ class DSModel(SN.SNModel):
         pick = [0]; acc = 0.0
         for j in range(1, len(kk)):
             acc += float(np.linalg.norm(P1[j] - P1[j - 1]))
-            if acc >= 1.5: pick.append(j); acc = 0.0
+            if acc >= float(P.get("wall_step", 2.0)): pick.append(j); acc = 0.0
         if pick[-1] != len(kk) - 1: pick.append(len(kk) - 1)
-        rw = nr + cs
-        wall = [plane(P1[pick] - (rw + s) * N1[pick]) for s in (0.3, 1.0, 1.5)]
+        rw = nr + cs; rows_ = [float(v) for v in str(P.get("wall_rows", "0.75")).split(",")]
+        wall = [plane(P1[pick] - (rw + s) * N1[pick]) for s in rows_]
         caps = []
         for jj in (0, len(kk) - 1):
             c_ = P1[jj]; cn = unit(c_); e_ = unit(N1[jj] - (N1[jj] @ cn) * cn); f_ = np.cross(cn, e_)
-            for rad in (rw + 0.3, rw + 1.0, rw + 1.5):
+            for rad in [rw + v for v in rows_]:
                 for a_ in np.linspace(0, 2 * math.pi, 24, endpoint=False): caps.append(c_ + rad * (math.cos(a_) * e_ + math.sin(a_) * f_))
         W = np.concatenate(wall + [plane(np.array(caps))])
         dpath = cKDTree(P1).query(W + 1.5 * unit(W))[0]; W = W[dpath >= nr + 0.3 - 1e-6]
