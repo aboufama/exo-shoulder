@@ -206,7 +206,13 @@
     "part_interference": 0.0
    }
   },
-  "delta": 0.07
+  "delta": 0.07,
+  "body_contact_attribution": {
+   "file": "pipeline/full-exo/designs/user_slipper_nose/judge_r16s1/body_attrib_step1.json",
+   "poses": 11,
+   "L1_poses": 12,
+   "reading": "11 body-contact poses (L1 12; the L1's near-touch k 116 [-60,60,105] no longer fails). At EVERY one the verified model's own metal is already inside the body at the same frame, 1.07-8.50 mm (link 2 behind the back at [-90..-75, 60, 105..120]: L2 1.6-5.5 mm; hub 2 at [15,105,15]: 1.07; the flank lug / crank overhead at elev 150-165: 4.45-8.50), so the bench already counts them lost: no pose is lost by the build. The tool's 'build excess' (7 of 11) is the built part 0.52-1.38 mm deeper than the model's sample rows at those already-lost poses (the 8-wide strap / lug back / crank boss edges past the model's samples). The gen-6 note 'link 1a overhead 6.4-10.4 mm' is the flank lug on link 1a + the crank arm."
+  }
  },
  "M5_R17": {
   "return_mu0.087": {
