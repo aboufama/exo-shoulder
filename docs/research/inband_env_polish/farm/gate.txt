@@ -1,0 +1,11 @@
+cma_ibp-s1.json {'n': 113, 'best': 23.017, 'gain_2nd_half': 0.0, 'gain_last_third': 0.0, 'top5_spread': 0.216, 'passes': True}
+cma_ibp-s2.json {'n': 73, 'best': 22.58, 'gain_2nd_half': 0.175, 'gain_last_third': 0.0, 'top5_spread': 0.379, 'passes': True}
+cma_ibp-w3.json {'n': 105, 'best': 22.083, 'gain_2nd_half': 0.0, 'gain_last_third': 0.0, 'top5_spread': 1.352, 'passes': True}
+cma_ibp-r1.json {'n': 145, 'best': 22.351, 'gain_2nd_half': 0.299, 'gain_last_third': 0.299, 'top5_spread': 0.163, 'passes': True}
+cma_ibp-L1.json {'n': 241, 'best': 25.011, 'gain_2nd_half': 2.27, 'gain_last_third': 1.065, 'top5_spread': 0.421, 'passes': False}
+cma_ibp-L2.json {'n': 257, 'best': 23.887, 'gain_2nd_half': 2.775, 'gain_last_third': 0.331, 'top5_spread': 0.638, 'passes': False}
+cma_ibp-L3.json {'n': 89, 'best': 25.266, 'gain_2nd_half': 6.951, 'gain_last_third': 6.951, 'top5_spread': 4.606, 'passes': False}
+cma_ibp-L4.json {'n': 89, 'best': 29.406, 'gain_2nd_half': 0.46, 'gain_last_third': 0.058, 'top5_spread': 0.67, 'passes': True}
+cma_ibp-H1.json {'n': 145, 'best': 28.455, 'gain_2nd_half': 3.917, 'gain_last_third': 3.108, 'top5_spread': 0.521, 'passes': False}
+cma_ibp-H2.json {'n': 145, 'best': 27.788, 'gain_2nd_half': 2.944, 'gain_last_third': 2.304, 'top5_spread': 1.81, 'passes': False}
+combined (by generation) {'n': 1402, 'best': 22.083, 'gain_2nd_half': 0.0, 'gain_last_third': 0.0, 'top5_spread': 0.416, 'passes': True}

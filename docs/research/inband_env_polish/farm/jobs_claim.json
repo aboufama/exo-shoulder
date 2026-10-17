@@ -1,0 +1,229 @@
+[
+ {
+  "tag": "ibc-PICK-env-held",
+  "cmd": "mkdir -p docs/research/inband_env_polish/farm && eval \"$(python3 tools/env_bench.py use env)\" && eval \"$(python3 tools/env_bench.py use envsel)\" && python3 tools/inband_env_polish.py claim env held PICK docs/research/inband_env_polish/farm/claim_PICK_env_held.json > docs/research/inband_env_polish/farm/claim_PICK_env_held.log 2>&1; tail -c 1500 docs/research/inband_env_polish/farm/claim_PICK_env_held.log",
+  "out": [
+   "docs/research/inband_env_polish/farm/claim_PICK_env_held*"
+  ],
+  "env": {
+   "OMP_NUM_THREADS": "1",
+   "IGL_NUM_THREADS": "2",
+   "CB_EXACT": "1",
+   "CB_FOLD_MARGIN": "5.5",
+   "CB_QUIET_EXACT": "1"
+  },
+  "timeout": 3300
+ },
+ {
+  "tag": "ibc-PICK-fit60-bench",
+  "cmd": "mkdir -p docs/research/inband_env_polish/farm && eval \"$(python3 tools/env_bench.py use env)\" && eval \"$(python3 tools/env_bench.py use envsel)\" && python3 tools/inband_env_polish.py claim fit60 bench PICK docs/research/inband_env_polish/farm/claim_PICK_fit60_bench.json > docs/research/inband_env_polish/farm/claim_PICK_fit60_bench.log 2>&1; tail -c 1500 docs/research/inband_env_polish/farm/claim_PICK_fit60_bench.log",
+  "out": [
+   "docs/research/inband_env_polish/farm/claim_PICK_fit60_bench*"
+  ],
+  "env": {
+   "OMP_NUM_THREADS": "1",
+   "IGL_NUM_THREADS": "2",
+   "CB_EXACT": "1",
+   "CB_FOLD_MARGIN": "5.5",
+   "CB_QUIET_EXACT": "1"
+  },
+  "timeout": 3300
+ },
+ {
+  "tag": "ibc-PICK-fit60-held",
+  "cmd": "mkdir -p docs/research/inband_env_polish/farm && eval \"$(python3 tools/env_bench.py use env)\" && eval \"$(python3 tools/env_bench.py use envsel)\" && python3 tools/inband_env_polish.py claim fit60 held PICK docs/research/inband_env_polish/farm/claim_PICK_fit60_held.json > docs/research/inband_env_polish/farm/claim_PICK_fit60_held.log 2>&1; tail -c 1500 docs/research/inband_env_polish/farm/claim_PICK_fit60_held.log",
+  "out": [
+   "docs/research/inband_env_polish/farm/claim_PICK_fit60_held*"
+  ],
+  "env": {
+   "OMP_NUM_THREADS": "1",
+   "IGL_NUM_THREADS": "2",
+   "CB_EXACT": "1",
+   "CB_FOLD_MARGIN": "5.5",
+   "CB_QUIET_EXACT": "1"
+  },
+  "timeout": 3300
+ },
+ {
+  "tag": "ibc-pick1-env-held",
+  "cmd": "mkdir -p docs/research/inband_env_polish/farm && eval \"$(python3 tools/env_bench.py use env)\" && eval \"$(python3 tools/env_bench.py use envsel)\" && python3 tools/inband_env_polish.py claim env held docs/research/inband_env_polish/picks/pick1.json docs/research/inband_env_polish/farm/claim_pick1_env_held.json > docs/research/inband_env_polish/farm/claim_pick1_env_held.log 2>&1; tail -c 1500 docs/research/inband_env_polish/farm/claim_pick1_env_held.log",
+  "out": [
+   "docs/research/inband_env_polish/farm/claim_pick1_env_held*"
+  ],
+  "env": {
+   "OMP_NUM_THREADS": "1",
+   "IGL_NUM_THREADS": "2",
+   "CB_EXACT": "1",
+   "CB_FOLD_MARGIN": "5.5",
+   "CB_QUIET_EXACT": "1"
+  },
+  "timeout": 3300
+ },
+ {
+  "tag": "ibc-pick1-fit60-bench",
+  "cmd": "mkdir -p docs/research/inband_env_polish/farm && eval \"$(python3 tools/env_bench.py use env)\" && eval \"$(python3 tools/env_bench.py use envsel)\" && python3 tools/inband_env_polish.py claim fit60 bench docs/research/inband_env_polish/picks/pick1.json docs/research/inband_env_polish/farm/claim_pick1_fit60_bench.json > docs/research/inband_env_polish/farm/claim_pick1_fit60_bench.log 2>&1; tail -c 1500 docs/research/inband_env_polish/farm/claim_pick1_fit60_bench.log",
+  "out": [
+   "docs/research/inband_env_polish/farm/claim_pick1_fit60_bench*"
+  ],
+  "env": {
+   "OMP_NUM_THREADS": "1",
+   "IGL_NUM_THREADS": "2",
+   "CB_EXACT": "1",
+   "CB_FOLD_MARGIN": "5.5",
+   "CB_QUIET_EXACT": "1"
+  },
+  "timeout": 3300
+ },
+ {
+  "tag": "ibc-pick1-fit60-held",
+  "cmd": "mkdir -p docs/research/inband_env_polish/farm && eval \"$(python3 tools/env_bench.py use env)\" && eval \"$(python3 tools/env_bench.py use envsel)\" && python3 tools/inband_env_polish.py claim fit60 held docs/research/inband_env_polish/picks/pick1.json docs/research/inband_env_polish/farm/claim_pick1_fit60_held.json > docs/research/inband_env_polish/farm/claim_pick1_fit60_held.log 2>&1; tail -c 1500 docs/research/inband_env_polish/farm/claim_pick1_fit60_held.log",
+  "out": [
+   "docs/research/inband_env_polish/farm/claim_pick1_fit60_held*"
+  ],
+  "env": {
+   "OMP_NUM_THREADS": "1",
+   "IGL_NUM_THREADS": "2",
+   "CB_EXACT": "1",
+   "CB_FOLD_MARGIN": "5.5",
+   "CB_QUIET_EXACT": "1"
+  },
+  "timeout": 3300
+ },
+ {
+  "tag": "ibc-pick2-env-held",
+  "cmd": "mkdir -p docs/research/inband_env_polish/farm && eval \"$(python3 tools/env_bench.py use env)\" && eval \"$(python3 tools/env_bench.py use envsel)\" && python3 tools/inband_env_polish.py claim env held docs/research/inband_env_polish/picks/pick2.json docs/research/inband_env_polish/farm/claim_pick2_env_held.json > docs/research/inband_env_polish/farm/claim_pick2_env_held.log 2>&1; tail -c 1500 docs/research/inband_env_polish/farm/claim_pick2_env_held.log",
+  "out": [
+   "docs/research/inband_env_polish/farm/claim_pick2_env_held*"
+  ],
+  "env": {
+   "OMP_NUM_THREADS": "1",
+   "IGL_NUM_THREADS": "2",
+   "CB_EXACT": "1",
+   "CB_FOLD_MARGIN": "5.5",
+   "CB_QUIET_EXACT": "1"
+  },
+  "timeout": 3300
+ },
+ {
+  "tag": "ibc-pick2-fit60-bench",
+  "cmd": "mkdir -p docs/research/inband_env_polish/farm && eval \"$(python3 tools/env_bench.py use env)\" && eval \"$(python3 tools/env_bench.py use envsel)\" && python3 tools/inband_env_polish.py claim fit60 bench docs/research/inband_env_polish/picks/pick2.json docs/research/inband_env_polish/farm/claim_pick2_fit60_bench.json > docs/research/inband_env_polish/farm/claim_pick2_fit60_bench.log 2>&1; tail -c 1500 docs/research/inband_env_polish/farm/claim_pick2_fit60_bench.log",
+  "out": [
+   "docs/research/inband_env_polish/farm/claim_pick2_fit60_bench*"
+  ],
+  "env": {
+   "OMP_NUM_THREADS": "1",
+   "IGL_NUM_THREADS": "2",
+   "CB_EXACT": "1",
+   "CB_FOLD_MARGIN": "5.5",
+   "CB_QUIET_EXACT": "1"
+  },
+  "timeout": 3300
+ },
+ {
+  "tag": "ibc-pick2-fit60-held",
+  "cmd": "mkdir -p docs/research/inband_env_polish/farm && eval \"$(python3 tools/env_bench.py use env)\" && eval \"$(python3 tools/env_bench.py use envsel)\" && python3 tools/inband_env_polish.py claim fit60 held docs/research/inband_env_polish/picks/pick2.json docs/research/inband_env_polish/farm/claim_pick2_fit60_held.json > docs/research/inband_env_polish/farm/claim_pick2_fit60_held.log 2>&1; tail -c 1500 docs/research/inband_env_polish/farm/claim_pick2_fit60_held.log",
+  "out": [
+   "docs/research/inband_env_polish/farm/claim_pick2_fit60_held*"
+  ],
+  "env": {
+   "OMP_NUM_THREADS": "1",
+   "IGL_NUM_THREADS": "2",
+   "CB_EXACT": "1",
+   "CB_FOLD_MARGIN": "5.5",
+   "CB_QUIET_EXACT": "1"
+  },
+  "timeout": 3300
+ },
+ {
+  "tag": "ibc-pick3-env-held",
+  "cmd": "mkdir -p docs/research/inband_env_polish/farm && eval \"$(python3 tools/env_bench.py use env)\" && eval \"$(python3 tools/env_bench.py use envsel)\" && python3 tools/inband_env_polish.py claim env held docs/research/inband_env_polish/picks/pick3.json docs/research/inband_env_polish/farm/claim_pick3_env_held.json > docs/research/inband_env_polish/farm/claim_pick3_env_held.log 2>&1; tail -c 1500 docs/research/inband_env_polish/farm/claim_pick3_env_held.log",
+  "out": [
+   "docs/research/inband_env_polish/farm/claim_pick3_env_held*"
+  ],
+  "env": {
+   "OMP_NUM_THREADS": "1",
+   "IGL_NUM_THREADS": "2",
+   "CB_EXACT": "1",
+   "CB_FOLD_MARGIN": "5.5",
+   "CB_QUIET_EXACT": "1"
+  },
+  "timeout": 3300
+ },
+ {
+  "tag": "ibc-pick3-fit60-bench",
+  "cmd": "mkdir -p docs/research/inband_env_polish/farm && eval \"$(python3 tools/env_bench.py use env)\" && eval \"$(python3 tools/env_bench.py use envsel)\" && python3 tools/inband_env_polish.py claim fit60 bench docs/research/inband_env_polish/picks/pick3.json docs/research/inband_env_polish/farm/claim_pick3_fit60_bench.json > docs/research/inband_env_polish/farm/claim_pick3_fit60_bench.log 2>&1; tail -c 1500 docs/research/inband_env_polish/farm/claim_pick3_fit60_bench.log",
+  "out": [
+   "docs/research/inband_env_polish/farm/claim_pick3_fit60_bench*"
+  ],
+  "env": {
+   "OMP_NUM_THREADS": "1",
+   "IGL_NUM_THREADS": "2",
+   "CB_EXACT": "1",
+   "CB_FOLD_MARGIN": "5.5",
+   "CB_QUIET_EXACT": "1"
+  },
+  "timeout": 3300
+ },
+ {
+  "tag": "ibc-pick3-fit60-held",
+  "cmd": "mkdir -p docs/research/inband_env_polish/farm && eval \"$(python3 tools/env_bench.py use env)\" && eval \"$(python3 tools/env_bench.py use envsel)\" && python3 tools/inband_env_polish.py claim fit60 held docs/research/inband_env_polish/picks/pick3.json docs/research/inband_env_polish/farm/claim_pick3_fit60_held.json > docs/research/inband_env_polish/farm/claim_pick3_fit60_held.log 2>&1; tail -c 1500 docs/research/inband_env_polish/farm/claim_pick3_fit60_held.log",
+  "out": [
+   "docs/research/inband_env_polish/farm/claim_pick3_fit60_held*"
+  ],
+  "env": {
+   "OMP_NUM_THREADS": "1",
+   "IGL_NUM_THREADS": "2",
+   "CB_EXACT": "1",
+   "CB_FOLD_MARGIN": "5.5",
+   "CB_QUIET_EXACT": "1"
+  },
+  "timeout": 3300
+ },
+ {
+  "tag": "ibc-PICKnom-fit60-bench",
+  "cmd": "mkdir -p docs/research/inband_env_polish/farm && eval \"$(python3 tools/env_bench.py use env)\" && eval \"$(python3 tools/env_bench.py use envsel)\" && python3 tools/inband_env_polish.py claim fit60 bench PICK docs/research/inband_env_polish/farm/claim_PICKnominal_fit60_bench.json > docs/research/inband_env_polish/farm/claim_PICKnominal_fit60_bench.log 2>&1; tail -c 1500 docs/research/inband_env_polish/farm/claim_PICKnominal_fit60_bench.log",
+  "out": [
+   "docs/research/inband_env_polish/farm/claim_PICKnominal_fit60_bench*"
+  ],
+  "env": {
+   "OMP_NUM_THREADS": "1",
+   "IGL_NUM_THREADS": "2",
+   "CB_EXACT": "1",
+   "CB_FOLD_MARGIN": "5",
+   "CB_QUIET_EXACT": "1",
+   "ENVP_NOPRICE": "1"
+  },
+  "timeout": 3300
+ },
+ {
+  "tag": "ibc-PICKnom-fit60-held",
+  "cmd": "mkdir -p docs/research/inband_env_polish/farm && eval \"$(python3 tools/env_bench.py use env)\" && eval \"$(python3 tools/env_bench.py use envsel)\" && python3 tools/inband_env_polish.py claim fit60 held PICK docs/research/inband_env_polish/farm/claim_PICKnominal_fit60_held.json > docs/research/inband_env_polish/farm/claim_PICKnominal_fit60_held.log 2>&1; tail -c 1500 docs/research/inband_env_polish/farm/claim_PICKnominal_fit60_held.log",
+  "out": [
+   "docs/research/inband_env_polish/farm/claim_PICKnominal_fit60_held*"
+  ],
+  "env": {
+   "OMP_NUM_THREADS": "1",
+   "IGL_NUM_THREADS": "2",
+   "CB_EXACT": "1",
+   "CB_FOLD_MARGIN": "5",
+   "CB_QUIET_EXACT": "1",
+   "ENVP_NOPRICE": "1"
+  },
+  "timeout": 3300
+ },
+ {
+  "tag": "ibc-ROBUST-fit60-held",
+  "cmd": "mkdir -p docs/research/inband_env_polish/farm && eval \"$(python3 tools/env_bench.py use env)\" && eval \"$(python3 tools/env_bench.py use envsel)\" && python3 tools/inband_env_polish.py claim fit60 held ROBUST docs/research/inband_env_polish/farm/claim_ROBUST_fit60_held.json > docs/research/inband_env_polish/farm/claim_ROBUST_fit60_held.log 2>&1; tail -c 1500 docs/research/inband_env_polish/farm/claim_ROBUST_fit60_held.log",
+  "out": [
+   "docs/research/inband_env_polish/farm/claim_ROBUST_fit60_held*"
+  ],
+  "env": {
+   "OMP_NUM_THREADS": "1",
+   "IGL_NUM_THREADS": "2",
+   "CB_EXACT": "1",
+   "CB_FOLD_MARGIN": "5.5",
+   "CB_QUIET_EXACT": "1"
+  },
+  "timeout": 3300
+ }
+]
