@@ -82,7 +82,15 @@ Preview: `docs/concepts/viz/concepts/acromion-pointer-arm-ctrack.js`. Round J1 (
 | single-shoe race: frozen wear k15 on Bench(110, 360) EXACT | 1 | **116.71** | reach 0.533, follow 0.845, ib14 0.417, 77 contact poses (track 58, link 1 24), overhead 2/28, min th margin 6.28 deg |
 | **twin shoes** (2 shoes `twin` deg apart on L2, bridge along the race) | 6 | 89.55 (k132) | kinematic reach 0.54 -> 0.92-0.96 at the same 115-deg race |
 | twin, frozen wear k132 on Bench(110, 360) EXACT | 1 | **93.65** | reach 0.728, follow 0.955, ib14 0.305, 75 contact poses (track 40, link 1 32, yoke 17, hub 2 15), overhead 5/28, min th margin 6.11 |
-| **fork yoke** (shoe 2 on its own skin-fitted tine from hub 2, no bridge) | 2 + CMA | 80.15 (k159) | see row for the CMA result |
+| **fork yoke** (shoe 2 on its own skin-fitted tine from hub 2, no bridge) | 2 | 80.15 (k159) | |
+| CMA-ES, fork yoke, 11 dims (+ twin), broad (sigma 0.25) and local (0.035-0.07) starts | ~440 | **58.71 (k474)** | reach 0.825, follow 0.967, ib14 0.443, contact 0.055 (score 78.65); NOT converged (gate: +4.45 / +1.92 / 0.48) |
+| **fork k474, frozen wear on Bench(110, 360) EXACT** | 1 | **65.66** | reach 0.783 (282/360), follow 0.982, ib14 0.440, ib10 0.291, contact 0.080 = 34 poses (track 19, link 1 13, hub 2 6), overhead 4/28, min th margin 5.89 deg, near-touch gap 75.41, deepest -17.4 mm |
+
+Best configuration (k474): J1 a1 = bvec(-16.1, -20.0) (back of the shoulder, the CMA box's lower elevation bound),
+al12 92.84, al23 97.38, branch +1; C-track at s 60.5 mm, arc 5.1 +- 55.7 deg (-50.6..60.8), circular race at the
+arc's highest skin face (61-90 mm), two shoes 79.2 deg apart on a fork yoke (thc -74.3), q 0.983 (moving parts),
+qt 0.987 (track). Score 78.65 on Bench(60, 160) fast; per member in band: hub 2 0.85, track 0.82, link 1 0.48,
+tines 0.47 / 0.32, hub 1 0.02 (floats over the infraspinatus), shoes 0.00 / 0.06.
 
 ## Spec fixes and improvements made while modelling (each measured)
 
@@ -101,7 +109,16 @@ Preview: `docs/concepts/viz/concepts/acromion-pointer-arm-ctrack.js`. Round J1 (
 4. **Fork yoke** (new, measured): shoe 2 on its own tine from hub 2 (kit strap, skin-fitted) instead of a bridge along
    the race (which floats 30+ mm): +11.6 in-band points, gap 89.55 -> 80.15.
 
-## Red team (Bench(60, 160), named poses, twin-shoe config k132; the fork config's own list is in the row)
+## Red team of the best (k474, Bench(60, 160), named poses)
+
+Attribution of the 160 workspace poses: taken 132; both shoes off the race 11; gimbal within 5 deg of its fold 6;
+link 1 into the deltoid 4; torso on the race 4; hub 2 2; hub 1 1. Clip frames 58 / 60 (2 shoes off the race).
+abduction 150: link 1 -5.0 mm into the deltoid, hub 1 0.0 (contact); flexion 165 + IR 90: fold (-0.6 deg margin);
+across the body (135 / 90): taken, link 1 1.7 mm (near-touch); behind the back: shoes off the race, the race -1.7 mm
+into the back; abduction 60 + IR 60: taken, race 0.3 mm (near-touch); rest / rest + IR 75 / abduction 90 / abduction
+75 + ER 90: taken (shoe 1 floats 29-32 mm, the tines 3.5-18 mm).
+
+### Earlier red team (twin shoes on a bridge, k132)
 
 Attribution of the 160 workspace poses: taken 119; torso on the arm-fixed track 14; both shoes off the race 12;
 link 1 into the deltoid 12; yoke 2; gimbal fold 1. Clip frames: 58 / 60 (2 yoke contacts).
@@ -125,8 +142,10 @@ skin face over its arc (q 0.95 of the arm's own skin) - a fatter arm (muscle bul
 
 ## Verdict (GATE 0, round J1)
 
-**Dead with its number.** Best 80-81 on Bench(60, 160) fast (fork-yoke twin shoes, 0 passive joints; score ~71),
-frozen exact on Bench(110, 360) in the row - far above the gate (<= 15, dies above 17.5) and the lead (18.49). The
+**Dead with its number.** Best 58.71 on Bench(60, 160) fast (fork-yoke twin shoes, 0 passive joints; score 78.65),
+65.66 frozen exact on Bench(110, 360) (reach 0.783, 34 contact poses, overhead 4/28) - far above the gate (<= 15,
+dies above 17.5) and the lead (18.49). The sweep had not converged (last third +1.92 score points) but it is 41 gap
+points short and its limiters are structural (below). The
 user's own decomposition does not fail on kinematics (the twin-shoe race carries the twist for 0.92-0.96 of the
 workspace with the gimbal >= 5 deg from its poles) - it fails on WHERE the metal can be: an arm-fixed track only has
 ~105 deg of arm that the torso never touches, the twist joint's shoes must ride a circle about the humeral axis over a
