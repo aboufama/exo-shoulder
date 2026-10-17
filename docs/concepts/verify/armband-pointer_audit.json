@@ -1,0 +1,174 @@
+{
+ "bench": "Bench(60,160) fast (cache 0089c747c10f)",
+ "t": "2026-10-17T19:55:00Z",
+ "k15_reproduced": {
+  "gap": 212.62,
+  "reach": 0.5813,
+  "follow": 0.3667,
+  "inband14": 0.1458,
+  "inband10": 0.0983,
+  "contact": 0.47,
+  "inband_member": {
+   "hub1": 1.0,
+   "hub2": 0.0,
+   "link1": 0.3888,
+   "link2a": 0.0142,
+   "spar": 0.0,
+   "ring": 0.1136
+  },
+  "outer_contact_poses": 87,
+  "min_margin": 6.37,
+  "th": [
+   78.1,
+   173.6
+  ]
+ },
+ "cells_ring_only": [
+  {
+   "cell": [
+    8,
+    -45,
+    280
+   ],
+   "perfect_stops": 57.7,
+   "no_stops": 90.9,
+   "contact_lb": 0.332,
+   "r_face": 72,
+   "ring_face_ib14": 0.229
+  },
+  {
+   "cell": [
+    0,
+    0,
+    260
+   ],
+   "perfect_stops": 75.0,
+   "no_stops": 115.5
+  },
+  {
+   "cell": [
+    8,
+    0,
+    280
+   ],
+   "perfect_stops": 60.0,
+   "no_stops": 94.1,
+   "ring_face_ib14": 0.201
+  },
+  {
+   "cell": [
+    8,
+    -45,
+    240
+   ],
+   "perfect_stops": 63.7,
+   "no_stops": 101.7
+  },
+  {
+   "cell": [
+    8,
+    -45,
+    220
+   ],
+   "perfect_stops": 72.9,
+   "no_stops": 115.6
+  },
+  {
+   "cell": [
+    8,
+    -45,
+    200
+   ],
+   "perfect_stops": 83.1,
+   "no_stops": 131.8
+  },
+  {
+   "cell": [
+    8,
+    0,
+    220
+   ],
+   "perfect_stops": 66.2,
+   "no_stops": 107.2
+  },
+  {
+   "cell": [
+    12,
+    -45,
+    260
+   ],
+   "perfect_stops": 66.2,
+   "no_stops": 102.6
+  }
+ ],
+ "stop_aware_ring_only": [
+  {
+   "cell": [
+    8,
+    -45,
+    280
+   ],
+   "gap_lb": 72.2,
+   "r_face": 72,
+   "cap_axis": [
+    0.15,
+    -0.85,
+    -0.51
+   ],
+   "half": 35,
+   "twist": "free",
+   "follow": 0.567,
+   "reach": 0.706,
+   "contact": 0.145
+  },
+  {
+   "cell": [
+    8,
+    0,
+    280
+   ],
+   "gap_lb": 75.7,
+   "r_face": 82,
+   "follow": 0.55,
+   "reach": 0.7,
+   "contact": 0.157
+  },
+  {
+   "cell": [
+    0,
+    0,
+    280
+   ],
+   "gap_lb": 84.5,
+   "r_face": 62,
+   "follow": 0.45,
+   "reach": 0.688,
+   "contact": 0.133
+  },
+  {
+   "cell": [
+    8,
+    -45,
+    240
+   ],
+   "gap_lb": 76.0,
+   "r_face": 84,
+   "follow": 0.567,
+   "reach": 0.619,
+   "contact": 0.095
+  },
+  {
+   "cell": [
+    12,
+    0,
+    280
+   ],
+   "gap_lb": 74.7,
+   "r_face": 100,
+   "follow": 0.567,
+   "reach": 0.694,
+   "contact": 0.157
+  }
+ ],
+ "convention": "ring-only bounds: every other part ideal (in-band 0.90, no hub / spar / link loss). perfect_stops = the claim's bound (a pose where no ring fits is simply not taken). no_stops = a closed ring cannot vanish, so each such pose is a contact pose too (bench: not taken AND contact). stop_aware = J1/J2 stops excluding ANY spherical cap of arm directions (600 axes x half-angle 5-120) plus a twist window on the axial angle; remaining non-fit poses are contact."
+}

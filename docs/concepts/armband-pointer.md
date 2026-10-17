@@ -182,3 +182,37 @@ The humerus-axial lever is closed on both sides (axis on the arm: this bound; ax
 The loop moves on to the round planner's other lever - move hub 2 itself (ROUNDS.md, J1 lesson) - with this bound
 available as a one-call pre-screen for any arm-encircling idea (`python3 docs/concepts/models/armband-pointer.py bound2
 '{"stations":[...],"tilts":[[d,a]]}'`).
+
+## Audit (independent auditor, 2026-10-17, Bench(60, 160) fast)
+
+**Verdict: the death stands (not refuted).** Measured reason, one line: no rigid closed ring about any GH axis fits
+between the medial arm and the flank (or the folded forearm) on >= 43 % of clip frames / 29 % of the workspace, and a
+ring cannot vanish, so even with ideal stops and every other part ideal the gap is >= 72.2 (no stops >= 90.9) - versus
+the 17.5 gate, the lead's 18.49 and the refutation line 78.93 (champion 68.93 + 10), before link 2's twist-free float.
+
+- **Reproduced**: k15 re-run through the model file gives gap 212.62, reach 0.5813, follow 0.3667, in-band 14 0.1458,
+  in-band 10 0.0983, contact 0.47, 87 outer-face contact poses, th 78.1-173.6, min margin 6.37: identical to the claim.
+- **Convergence gate**: NOT met (17 configs; best gain over the 2nd half 7.19 score points, over the last third 0.00 by
+  the k-order split - the claim's 5.80 used another split - top-5 spread 7.19). The farm is closed, so no CMA was run.
+  The death is accepted on the bounds below, which cover every ring parameter (station, tilt, bore, section), not on
+  the sweep.
+- **The claim's bound is design-favourable**: ring_bound2 drops a pose where no ring fits without charging contact. A
+  closed ring is always round the arm, so on such a pose it is in the body unless a stop keeps the arm out:
+  - no stops (closed ring, fold window only): gap >= **90.9** at the claim's best cell (8 deg posterolateral, s 280,
+    face 72; contact >= 0.332); 94.1-131.8 elsewhere;
+  - generous stops (J1 / J2 stops excluding ANY spherical cap of arm directions - 600 axes x half-angle 5-120 deg - plus
+    a twist window on the axial angle; the remaining ring-less poses are contact): gap >= **72.2** at the best cell (the
+    best stop is a 35-deg cap about the adducted arm-down direction; contact still 0.145), 74.7-84.5 at 8 deg lateral /
+    humerus axis / s 240 / 12 deg lateral. All with every other part ideal (in-band 0.90, no hub / spar / link loss).
+- **Coverage gap closed**: the claim bounded tilted axes only at s 240-300. Proximal tilted cells are worse (perfect
+  stops): s 220 at 8 deg posterolateral 72.9, s 200 83.1, s 220 at 8 deg lateral 66.2.
+- **Over-strict check? One, and it does not matter**: the ring's skin face is modelled as a circle (in band 0.11; 0.20-0.23
+  at the best cells). The rotor housing is arm-fixed, so its bore could be contoured to the arm section (ring in band up
+  to ~0.9). That leaves the 72.2 ring-only floor and the twist-free link 2 (spar + strap in the pointing frame over a
+  58-74 mm posterior / 34-46 mm medial arm section: 0.00-0.37 in band in all 17 configs) and hub 2 (0.00-0.03). Reaching
+  78.93 would need in-band >= ~0.83 with no hub / link contact on top of the 72.2 floor.
+- **Reporting note**: the median skin distance 31.8 mm shown for hub 2 / link 2a / spar is the fast cache clamp (+31.75),
+  not a measured distance (those parts are farther out).
+- Harness: `docs/concepts/verify/armband-pointer-audit-stops.py` (stop-aware and no-stop bounds),
+  `docs/concepts/verify/armband-pointer-audit-cells.py` (cells + circular ring-face in-band), numbers in
+  `docs/concepts/verify/armband-pointer_audit.json`.

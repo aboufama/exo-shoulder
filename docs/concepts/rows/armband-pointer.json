@@ -14,11 +14,11 @@
  "inband10": 0.0983,
  "contact": 0.47,
  "gap": 212.62,
- "v_reach": null,
- "v_follow": null,
- "v_inband14": null,
- "v_inband10": null,
- "v_gap": null,
+ "v_reach": 0.5813,
+ "v_follow": 0.3667,
+ "v_inband14": 0.1458,
+ "v_inband10": 0.0983,
+ "v_gap": 212.62,
  "n_configs": 17,
  "verdict": "DEAD at GATE 0 by a parameter-free anatomical bound: no rigid closed ring about any GH axis (humerus axis or tilted <= 16 deg, s 240-300, any bore <= 112 mm, section >= 8 mm) exists on more than 0.567 of clip frames / 0.706 of the workspace (medial arm on the flank at rest, walking-like frames, IR at the side, across-low; the flexed forearm near the elbow) -> gap >= 57.7 on Bench(60,160) (per-pose ring 51.9; Bench(110,360) exact humerus axis >= 67.0) vs the 15 / 17.5 bar and the lead 18.49. Faithful kit model best honest 212.62 (score 22.68, k15; 17 configs; 0 passive translations, complexity 0.5).",
  "note": "Bench(60,160) fast, K3 march, K2 dense, K6, ring outer cylinder + side annuli contact-checked; best honest k15 (J1 bvec(30,70), sigma -1, 90/90, KA055XP0 at s 260 on the humerus axis, spar c +40, q 0.9): gap 212.62 reach 0.581 follow 0.367 ib14 0.146 ib10 0.098 contact 0.47 (87 poses ring outer face in the body); k11 200.43 (A1 110 / A2 70) flagged sparse (hub 2 parked > 250 mm out) - not the claim. GATE (17 configs): 2nd-half gain 7.19, last-third gain 5.80, top-5 spread 7.19 - not converged; the verdict rests on the bound (ring_bound2 in the model: 35 cells, every ring parameter at its best), which no further search can beat. Frozen exact Bench(110,360) wear of the model not run (pointless at 212); the bound was re-measured there instead (humerus axis s 240-280: >= 67.0-74.1). Spec fixes: J1 at the acromion top (seat rule), O20 hubs, fold margin 5 in th, bore 69.85 (KA045XP0's 57.15 is inside the triceps). Forwarded from the J1 ring scan (169-204/220 contact) - agrees.",
@@ -88,5 +88,29 @@
  "audit": [],
  "hubless": [
   "J3"
- ]
+ ],
+ "v_contact": 0.47,
+ "auditor": {
+  "t": "2026-10-17T19:58:00Z",
+  "refuted": false,
+  "bench": "Bench(60,160) fast",
+  "champion_same_bench": 68.93,
+  "reproduced": "k15 re-run through the model file: gap 212.62, reach 0.5813, follow 0.3667, ib14 0.1458, ib10 0.0983, contact 0.47, outer-face contact 87 poses - identical to the claim",
+  "gate": "sweep NOT converged (17 configs: best gain over the 2nd half 7.19 score points, over the last third 0.00 by the k-order split [the claim's 5.80 used another split], top-5 spread 7.19); farm closed, no CMA run - the death rests on ring bounds that cover every ring parameter, not on the sweep",
+  "bounds": "the claim's 57.7 is OPTIMISTIC for the design (a pose with no ring is simply dropped). A closed ring cannot vanish: no stops -> every such pose is contact too: >= 90.9 at the best cell (contact >= 0.332). Generous stops (J1/J2 excluding ANY cap of arm directions, 600 axes x 5-120 deg, plus a twist window): >= 72.2 at the best cell (8 deg posterolateral, s 280, face 72; best stop = a 35-deg cap about the adducted arm-down direction; contact still 0.145), 74.7-84.5 at the other cells - all with every other part ideal (in-band 0.90). Proximal stations the claim did not bound with a tilt: s 200 / 220 at 8 deg posterolateral 83.1 / 72.9, s 220 8 deg lateral 66.2 (perfect stops) - worse, the claim's coverage gap closes",
+  "why_not_within_10": "to reach gap <= 78.93 the rest of the metal may cost <= 6.7 points over the 72.2 ring-only stop-aware floor, i.e. in-band >= ~0.83 with no hub / link contact; the twist-free link 2 (spar + strap, pointing frame over a 58-74 posterior / 34-46 medial arm section) measured 0.00-0.37 in band in all 17 configs and the circular ring face 0.20-0.23 at the best cells",
+  "issues": [
+   "convergence gate not met; accepted only because the ring bound covers station, tilt, bore and section",
+   "claim's bound treats ring-less poses as dropped without contact (design-favourable); honest no-stop 90.9, generous stop-aware 72.2",
+   "the ring's skin face is modelled circular; an arm-fixed rotor housing could be contoured to the arm (ring in-band 0.11 -> ~0.9) - unexplored but cannot close the gap (ring-only floor 72.2 + twist-free link 2)",
+   "median skin distance 31.8 mm reported for hub2 / link2a / spar is the fast cache clamp (+31.75), not a measurement",
+   "frozen exact Bench(110,360) wear of the model not run (bound re-measured there instead; acceptable at 212)"
+  ],
+  "files": [
+   "docs/concepts/verify/armband-pointer-audit-stops.py",
+   "docs/concepts/verify/armband-pointer-audit-cells.py",
+   "docs/concepts/verify/armband-pointer_audit.json"
+  ],
+  "verdict": "DEATH STANDS: no closed rigid ring about any GH axis fits between the medial arm and the flank / the folded forearm on >= 43 % of clip frames and >= 29 % of the workspace; even with ideal stops and every other part ideal the gap is >= 72.2 (no stops >= 90.9) vs the 17.5 gate and the lead's 18.49"
+ }
 }
