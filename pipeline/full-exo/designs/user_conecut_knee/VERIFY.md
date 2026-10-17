@@ -21,7 +21,29 @@ ran at load 11-16 from other agents' jobs the whole time.
 
 ## Verdict
 
-VERDICT_PLACEHOLDER
+**NOT REFUTED.** R1 81.6 / R1-aim 52.7 / R4 74.1 reproduce to the digit.
+
+- **Re-run judges reproduce the scorecard exactly:**
+  - R6 0.0 mm (451 frames x 7002 pairs);
+  - R7 PASS (55 custom parts, none missing);
+  - R17 PASS, with all 19 dynamics cases identical to the committed file (nominal M_GH 0.126 N.m, 0.57 N, twist 3.99 deg).
+- **The kinematics are the verified model's to 0.002 deg.** CAD bearing axes against the judged frames: <= 0.0014 deg and
+  0.0002 mm on 2372 frames. K equals the law to 0.0017 deg, the crank angle / |dK| = 1/g, q3' = q3 + phi to 0.001 deg, and
+  knee pin a sits on its bearing pair to 0.0003 mm.
+- **The J3 hard stop is real as built.** The exported dowel engages the groove ends within 0.02 deg of J3MIN / J3MAX; the
+  workspace keeps 0.745 / 2.99 deg of margin and the clips 49.5 / 21.3. The K / J2 stops engage 0.16 deg past (the 0.02 mm
+  design clearance), so the slot-end correction is real.
+- **The re-proportioned knee does what the claim says:** the knee angle tops out at 107.1 deg on the workspace, 47.7 deg
+  under the knee stop (gen 7: 1.6).
+- **No loft reaches an exported part.** The B-spline surfaces in the links' STEP files come from the 0.5 mm edge fillets.
+- **Every bought part has its catalogue size.** The D1 / D2 / D3 / O3 / O4 items, the knee stop +-0.02, the wear line
+  mu <= 0.105 and the J3 dowel / groove fits are on the drawing.
+- **Against the CAD's own goals, as disclosed:**
+  - the bars ride 0.70-1.63 mm outside the model's straps, all outward, so criterion (1) fails for the bars and holds for
+    joints, frames and laws;
+  - R1 is -0.39 against the L1;
+  - two builder checks (drive skin over all frames, working end) are not on file.
+- **No stills exist**, so criterion (5) cannot be checked.
 
 ## 1. Posed parts against the verified model
 
@@ -127,7 +149,9 @@ are the same at every pose. "Outside" = distance to the CAD part for samples NOT
 
 | Req | claim | re-run | match |
 |---|---|---|---|
-R1_ROWS_PLACEHOLDER
+| R1 | 81.6 % | 81.5559 % (score_design BANDS 10,14, step 3; 38 min at load 13-16) | yes, to the digit |
+| R1-aim | 52.7 % | 52.7206 % | yes |
+| R4 | 74.1 % | 74.1314 % (Raise overhead at 14 mm); every clip's score identical to score.json / score_14mm.json | yes |
 | R6 | 0.0 mm (step 3, 451 frames x 7002 pairs) | 0.0 mm: 451 frames x 7002 ordered pairs, 1 599 578 samples, 0 > 0.15 mm (654 s) | yes |
 | R7 | PASS (55 custom, none missing) | all_ok True, 55 custom parts (3 arm-fixed), missing STEP none | yes |
 | R16 | 66.7 % | not re-run (stopped to keep the 2-process cap for the stop check; the claim equals the L1's) | - |
@@ -138,7 +162,21 @@ R1_ROWS_PLACEHOLDER
 
 ## 5. Stops as built (stops_cc.py, on the exported meshes)
 
-STOPS_PLACEHOLDER
+Each dowel was turned about its own joint's bearing axis against the slotted part in 0.01-deg steps from 1.5 deg inside the
+window. "Engage" is the first angle with depth > 2 um.
+
+| stop (dowel -> slotted part) | window (deg) | engage past the window | depth 0.25 / 2 deg past | clearance 1 deg inside |
+|---|---|---|---|---|
+| K dowel 1 and 2 -> link 1a | -62.849 / 0.000 | 0.16 / 0.16 deg | 0.015 / 0.251 mm | 0.046 mm |
+| J2 dowel -> link 1b | -15.94 / 102.068 | 0.16 / 0.16 deg | 0.014-0.015 / 0.251 mm | 0.046-0.047 mm |
+| J3 dowel -> link 2 groove | -111.9036 / 122.7417 | 0.02 / 0.02 deg (= my step) | 0.033 / 0.262 mm | 0.047 mm |
+
+- **The builder's stop claim holds.** K and J2 engage the 0.02 mm design clearance past their windows (the builder: 0.14;
+  my 0.16 is my 2 um threshold plus a 0.01 step). The J3 groove engages at the stop angle within my step, so it is a real
+  hard stop well inside the 0.585 / 0.74 deg held margins. The R1.05 ends really are drawn INSIDE the stop angles.
+- Inside the windows every dowel floats 0.044-0.049 mm clear (the 0.05 per-side running clearance).
+- I did NOT re-measure the builder's new finding that the shared `USM.arc_slot_cutter` makes the gen-4..7 CADs' stops engage
+  about 0.88 deg late. `stops_cc.py` runs on any design dir and can check user_slipper_nose next.
 
 ## 6. Stills
 
