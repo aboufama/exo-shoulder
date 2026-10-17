@@ -2,7 +2,7 @@
  "step": 6,
  "tol_mm": 0.5,
  "frames_checked": 228,
- "seconds": 128,
+ "seconds": 688,
  "jobs": 4,
  "body_model": "rig",
  "inside": "integer winding number (grid + segment crossings), depth = exact distance to the nearest surface (judge/sdist.py)",
@@ -467,7 +467,7 @@
    "attributable_worst": null,
    "attributable_kind": null
   },
-  "H|pin b: retaining e-clip DIN 6799 RS 2.3 (A2 stainless, polished)": {
+  "H|knee pin b e-clip DIN 6799 RS 2.3: retaining e-clip (A2 stainless, polished)": {
    "owner": "ours",
    "max_depth": 0.0,
    "frames": 0,
@@ -477,7 +477,7 @@
    "attributable_worst": null,
    "attributable_kind": null
   },
-  "H|pin b: shim O3.1 x O4.5 x 0.1 under the clip (stainless, polished)": {
+  "H|knee pin b shim: O3.1 x O4.5 x 0.1 under the e-clip (stainless, polished)": {
    "owner": "ours",
    "max_depth": 0.0,
    "frames": 0,
@@ -487,7 +487,7 @@
    "attributable_worst": null,
    "attributable_kind": null
   },
-  "l4|pin b: knee bearing 2 of 2 MR63ZZ 3x6x2.5 (J6 housing, the pin's free length j5) (polished)": {
+  "l4|knee pin b bearing 2 MR63ZZ: knee bearing 2 of 2 MR63ZZ 3x6x2.5 (J6 housing, the pin's free length j5) (polished)": {
    "owner": "ours",
    "max_depth": 0.0,
    "frames": 0,
@@ -497,7 +497,7 @@
    "attributable_worst": null,
    "attributable_kind": null
   },
-  "l4|pin b: knee bearing 1 of 2 MR63ZZ 3x6x2.5 (J6 housing, the pin's free length j5) (polished)": {
+  "l4|knee pin b bearing 1 MR63ZZ: knee bearing 1 of 2 MR63ZZ 3x6x2.5 (J6 housing, the pin's free length j5) (polished)": {
    "owner": "ours",
    "max_depth": 0.0,
    "frames": 0,
@@ -507,7 +507,7 @@
    "attributable_worst": null,
    "attributable_kind": null
   },
-  "H|pin b: inner-ring spacer O3.1 x O4.5 x 0.5 (stainless, polished)": {
+  "H|knee pin b spacer: inner-ring spacer O3.1 x O4.5 x 0.5 (stainless, polished)": {
    "owner": "ours",
    "max_depth": 0.0,
    "frames": 0,
@@ -517,7 +517,7 @@
    "attributable_worst": null,
    "attributable_kind": null
   },
-  "H|pin b: ISO 8734 3 m6 x 9.2 440C (1.4125) pressed H7/m6 in the arm pad over its full 2.18 mm, O2.3 x 0.6 e-clip groove with a 0.3 mm land (polished)": {
+  "H|knee pin b ISO 8734 3 m6 x 10 faced to 9.2: 440C (1.4125) pressed H7/m6 in the arm pad over its full 2.18 mm, O2.3 x 0.6 e-clip groove with a 0.3 mm land (polished)": {
    "owner": "ours",
    "max_depth": 0.0,
    "frames": 0,
@@ -567,7 +567,7 @@
    "attributable_worst": null,
    "attributable_kind": null
   },
-  "l3|pin a: retaining e-clip DIN 6799 RS 2.3 (A2 stainless, polished)": {
+  "l3|knee pin a e-clip DIN 6799 RS 2.3: retaining e-clip (A2 stainless, polished)": {
    "owner": "ours",
    "max_depth": 0.0,
    "frames": 0,
@@ -577,7 +577,7 @@
    "attributable_worst": null,
    "attributable_kind": null
   },
-  "l3|pin a: shim O3.1 x O4.5 x 0.1 under the clip (stainless, polished)": {
+  "l3|knee pin a shim: O3.1 x O4.5 x 0.1 under the e-clip (stainless, polished)": {
    "owner": "ours",
    "max_depth": 0.0,
    "frames": 0,
@@ -587,7 +587,7 @@
    "attributable_worst": null,
    "attributable_kind": null
   },
-  "l4|pin a: knee bearing 2 of 2 MR63ZZ 3x6x2.5 (J6 housing, the pin's free length j5) (polished)": {
+  "l4|knee pin a bearing 2 MR63ZZ: knee bearing 2 of 2 MR63ZZ 3x6x2.5 (J6 housing, the pin's free length j5) (polished)": {
    "owner": "ours",
    "max_depth": 0.0,
    "frames": 0,
@@ -597,7 +597,7 @@
    "attributable_worst": null,
    "attributable_kind": null
   },
-  "l4|pin a: knee bearing 1 of 2 MR63ZZ 3x6x2.5 (J6 housing, the pin's free length j5) (polished)": {
+  "l4|knee pin a bearing 1 MR63ZZ: knee bearing 1 of 2 MR63ZZ 3x6x2.5 (J6 housing, the pin's free length j5) (polished)": {
    "owner": "ours",
    "max_depth": 0.0,
    "frames": 0,
@@ -607,7 +607,7 @@
    "attributable_worst": null,
    "attributable_kind": null
   },
-  "l3|pin a: inner-ring spacer O3.1 x O4.5 x 0.5 (stainless, polished)": {
+  "l3|knee pin a spacer: inner-ring spacer O3.1 x O4.5 x 0.5 (stainless, polished)": {
    "owner": "ours",
    "max_depth": 0.0,
    "frames": 0,
@@ -617,7 +617,7 @@
    "attributable_worst": null,
    "attributable_kind": null
   },
-  "l3|pin a: ISO 8734 3 m6 x 9.2 440C (1.4125) pressed H7/m6 in the E boss over its full 2.18 mm, O2.3 x 0.6 e-clip groove with a 0.3 mm land (polished)": {
+  "l3|knee pin a ISO 8734 3 m6 x 10 faced to 9.2: 440C (1.4125) pressed H7/m6 in the E boss over its full 2.18 mm, O2.3 x 0.6 e-clip groove with a 0.3 mm land (polished)": {
    "owner": "ours",
    "max_depth": 0.0,
    "frames": 0,
@@ -737,7 +737,7 @@
    "attributable_worst": null,
    "attributable_kind": null
   },
-  "l2|D9-02 drive lobe ring: 17-4PH H900, wire-EDM (taper 14.8 deg along the follower axis), profile r 10.66 -> 12.62 mm (6 3-point arcs), dwell r 10.21, bore O20 on the J2 cap skirt, band F+6.99..F+10.02, keyed by an O1 dowel at the onset + 0.23 deg (K bias)": {
+  "l2|D9-02 drive lobe ring: 17-4PH H900, wire-EDM (taper 14.8 deg along the follower axis), profile r 10.66 -> 12.62 mm (6 3-point arcs), dwell r 10.21, bore O20 on the J2 cap skirt, band F+6.99..F+10.02, keyed by an O1 dowel at the onset phase + 0.35 deg of q2 (the +0.75 deg K lead, +0.15 / -0.10 deg K; the CAD draws the nominal phase = the loaded state)": {
    "owner": "ours",
    "max_depth": 0.0,
    "frames": 0,

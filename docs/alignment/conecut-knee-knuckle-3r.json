@@ -1,0 +1,275 @@
+{
+ "id": "conecut-knee-knuckle-3r",
+ "status": "verified",
+ "v_gap": 18.28,
+ "complexity": 18.5,
+ "verdict": "watch",
+ "reasons": [
+  "reporting: verdict text still reads as a self-measured screen; dashboard shows no verified number (row v_gap 18.28); dashboard sweep best 12.5 (score 95.45) sits 5.78 below the verified number; dashboard status 'screened' vs row 'verified'"
+ ],
+ "checks": [
+  {
+   "check": "held_out",
+   "level": "ok",
+   "reason": "held out 22.38 vs bench 18.28 (+4.10; docs/concepts/verify/conecut-knee-knuckle-3r_v_held_frozen.json)",
+   "held_gap": 22.38,
+   "v_gap": 18.28,
+   "drop": 4.1,
+   "source": "docs/concepts/verify/conecut-knee-knuckle-3r_v_held_frozen.json"
+  },
+  {
+   "check": "fast_frozen",
+   "level": "ok",
+   "reason": "self/fast 12.5 -> verified 18.28 (+5.78)",
+   "fast": 12.5,
+   "verified": 18.28,
+   "drop": 5.78
+  },
+  {
+   "check": "near_touch",
+   "level": "ok",
+   "reason": "plain 19.38, <1 mm 20.47, <2 mm 29.4, 10.02 points live in the 1-2 mm shell (docs/concepts/verify/conecut-knee-knuckle-3r_v_bench_nostop.json)",
+   "shell2": 10.02,
+   "plain": 19.38,
+   "n1": 20.47,
+   "n2": 29.4,
+   "n3": null,
+   "band3": null,
+   "hist": null,
+   "minmm": 0.05,
+   "source": "docs/concepts/verify/conecut-knee-knuckle-3r_v_bench_nostop.json"
+  },
+  {
+   "check": "contact_depth",
+   "level": "ok",
+   "reason": "the score counts contact poses, not depth (report only, score unchanged): v_gap 18.28: bench 4 contact poses, sum 20.24 mm, deepest 8.93 mm at ['ws', 15.0, 165.0, -60.0], 3 deeper than 3 mm vs slipper-nose-knuckle-3r 14.75 mm over 2 (+5.49 mm, x1.37); held 14 contact poses, sum 60.97 mm, deepest 9.86 mm at ['ws', 45.0, 165.0, -30.0], 9 deeper than 3 mm vs slipper-nose-knuckle-3r 46.12 mm over 10 (+14.85 mm, x1.32)",
+   "depths": {
+    "v_gap 18.28": {
+     "bench": {
+      "n": 4,
+      "sum_mm": 20.24,
+      "max_mm": 8.93,
+      "n_deeper3": 3,
+      "overhead140": 3,
+      "deepest": [
+       "ws",
+       15.0,
+       165.0,
+       -60.0
+      ],
+      "gap": 18.28,
+      "src": "docs/alignment/remeasure/conecut-knee-knuckle-3r_bench_perpose.json",
+      "cross_check": {
+       "files": 1,
+       "sums": [
+        20.24
+       ],
+       "agree": true
+      }
+     },
+     "held": {
+      "n": 14,
+      "sum_mm": 60.97,
+      "max_mm": 9.86,
+      "n_deeper3": 9,
+      "overhead140": 7,
+      "deepest": [
+       "ws",
+       45.0,
+       165.0,
+       -30.0
+      ],
+      "gap": 22.38,
+      "src": "docs/alignment/remeasure/conecut-knee-knuckle-3r_held_perpose.json",
+      "cross_check": {
+       "files": 1,
+       "sums": [
+        60.97
+       ],
+       "agree": true
+      }
+     }
+    }
+   },
+   "ref": "slipper-nose-knuckle-3r",
+   "compare": [
+    {
+     "claim": "v_gap 18.28",
+     "wear": "bench",
+     "sum": 20.24,
+     "ref_sum": 14.75,
+     "excess": 5.49,
+     "ratio": 1.37,
+     "watch": false
+    },
+    {
+     "claim": "v_gap 18.28",
+     "wear": "held",
+     "sum": 60.97,
+     "ref_sum": 46.12,
+     "excess": 14.85,
+     "ratio": 1.32,
+     "watch": false
+    }
+   ]
+  },
+  {
+   "check": "dominance",
+   "level": "ok",
+   "reason": "vs slipper-nose-knuckle-3r: plain -0.89, 2 mm +3.62",
+   "ref": "slipper-nose-knuckle-3r",
+   "gain_plain": -0.89,
+   "gain_2mm": 3.62
+  },
+  {
+   "check": "continuity",
+   "level": "ok",
+   "reason": "static 18.28, connected full 18.28, knn 19.97, bench 50.13 (docs/concepts/verify/conecut-knee-knuckle-3r_v_bench_frozen.json)",
+   "static": 18.28,
+   "connected_full": 18.28,
+   "connected_knn": 19.97,
+   "connected_bench": 50.13
+  },
+  {
+   "check": "fold_margin",
+   "level": "ok",
+   "reason": "min fold margin on file 5.006 deg (docs/concepts/verify/conecut-knee-knuckle-3r_v_held_frozen.json:extra.th_margin.min; 3 readings)",
+   "min_margin": 5.006,
+   "where": "docs/concepts/verify/conecut-knee-knuckle-3r_v_held_frozen.json:extra.th_margin.min"
+  },
+  {
+   "check": "idle",
+   "level": "ok",
+   "reason": "knee: declared moving, no span on file",
+   "spans": [
+    [
+     "docs/concepts/verify/conecut-knee-knuckle-3r_v_held_frozen.json:extra.dK_taken_max_deg",
+     46.27
+    ],
+    [
+     "docs/concepts/verify/conecut-knee-knuckle-3r_v_bench_nostop.json:extra.dK_taken_max_deg",
+     45.62
+    ],
+    [
+     "docs/concepts/verify/conecut-knee-knuckle-3r_v_bench_frozen.json:extra.dK_taken_max_deg",
+     45.62
+    ]
+   ],
+   "declared": [
+    "knee"
+   ],
+   "rigid": []
+  },
+  {
+   "check": "sampling",
+   "level": "ok",
+   "reason": "sample-weighted in-band 0.894 vs part-weighted 0.920 (-2.52 points); thinly sampled parts: L1a 8 (docs/concepts/verify/conecut-knee-knuckle-3r_v_bench_nostop.json)",
+   "parts": {
+    "hub1": [
+     0.999,
+     8.6,
+     80
+    ],
+    "hubK": [
+     0.992,
+     7.9,
+     80
+    ],
+    "hub2": [
+     0.953,
+     11.1,
+     80
+    ],
+    "hub3": [
+     0.609,
+     13.0,
+     80
+    ],
+    "E": [
+     0.975,
+     6.3,
+     164
+    ],
+    "boss": [
+     1.0,
+     7.5,
+     32
+    ],
+    "pad": [
+     1.0,
+     6.2,
+     32
+    ],
+    "knee": [
+     0.999,
+     9.7,
+     90
+    ],
+    "crank": [
+     0.818,
+     11.2,
+     129
+    ],
+    "roller": [
+     0.938,
+     10.0,
+     19
+    ],
+    "horn": [
+     0.956,
+     7.4,
+     23
+    ],
+    "L1a": [
+     0.981,
+     10.1,
+     8
+    ],
+    "L1b": [
+     0.931,
+     8.2,
+     36
+    ],
+    "L2": [
+     0.724,
+     12.1,
+     128
+    ]
+   }
+  },
+  {
+   "check": "complexity",
+   "level": "ok",
+   "reason": "recomputed 18.5 vs row 18.5",
+   "recomputed": 18.5,
+   "row": 18.5
+  },
+  {
+   "check": "reporting",
+   "level": "watch",
+   "reason": "verdict text still reads as a self-measured screen; dashboard shows no verified number (row v_gap 18.28); dashboard sweep best 12.5 (score 95.45) sits 5.78 below the verified number; dashboard status 'screened' vs row 'verified'"
+  },
+  {
+   "check": "judge_change",
+   "level": "ok",
+   "reason": "no bench / judge / metric file changed in the 4 commits that touched the row"
+  },
+  {
+   "check": "rules",
+   "level": "ok",
+   "reason": "O20, margin >= 5, translations <= 2 as recorded"
+  }
+ ],
+ "remeasured": {
+  "bench": false,
+  "held": false
+ },
+ "verifier_files": [
+  "docs/concepts/verify/conecut-knee-knuckle-3r_v_held_frozen.json",
+  "docs/concepts/verify/conecut-knee-knuckle-3r_v_bench_nostop.json",
+  "docs/concepts/verify/conecut-knee-knuckle-3r_v_bench_frozen.json"
+ ],
+ "git": "84b190f",
+ "tool_version": "2026-10-17.4",
+ "t": "2026-10-17T17:26:52Z"
+}

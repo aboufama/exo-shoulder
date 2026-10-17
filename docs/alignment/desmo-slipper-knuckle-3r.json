@@ -1,0 +1,288 @@
+{
+ "id": "desmo-slipper-knuckle-3r",
+ "status": "verified",
+ "v_gap": 18.95,
+ "complexity": 15.75,
+ "verdict": "watch",
+ "reasons": [
+  "reporting: dashboard shows no verified number (row v_gap 18.95); dashboard sweep best 12.79 (score 95.35) sits 6.16 below the verified number; dashboard status 'screened' vs row 'verified'"
+ ],
+ "checks": [
+  {
+   "check": "held_out",
+   "level": "ok",
+   "reason": "held out 23.9 vs bench 18.95 (+4.95; docs/concepts/verify/desmo-slipper-knuckle-3r_v_held_frozen_fix.json)",
+   "held_gap": 23.9,
+   "v_gap": 18.95,
+   "drop": 4.95,
+   "source": "docs/concepts/verify/desmo-slipper-knuckle-3r_v_held_frozen_fix.json"
+  },
+  {
+   "check": "fast_frozen",
+   "level": "ok",
+   "reason": "self/fast 13.19 -> verified 18.95 (+5.76)",
+   "fast": 13.19,
+   "verified": 18.95,
+   "drop": 5.76
+  },
+  {
+   "check": "near_touch",
+   "level": "ok",
+   "reason": "plain 18.95, <1 mm 20.58, <2 mm 33.45, 14.5 points live in the 1-2 mm shell (docs/concepts/verify/desmo-slipper-knuckle-3r_v_bench_frozen_fix.json)",
+   "shell2": 14.5,
+   "plain": 18.95,
+   "n1": 20.58,
+   "n2": 33.45,
+   "n3": null,
+   "band3": null,
+   "hist": null,
+   "minmm": 0.07,
+   "source": "docs/concepts/verify/desmo-slipper-knuckle-3r_v_bench_frozen_fix.json"
+  },
+  {
+   "check": "contact_depth",
+   "level": "ok",
+   "reason": "the score counts contact poses, not depth (report only, score unchanged): v_gap 18.95: bench 2 contact poses, sum 14.72 mm, deepest 9.01 mm at ['ws', 15.0, 165.0, -60.0], 2 deeper than 3 mm vs slipper-nose-knuckle-3r 14.75 mm over 2 (-0.03 mm, x1.0); held 10 contact poses, sum 46.14 mm, deepest 9.05 mm at ['ws', 30.0, 165.0, -45.0], 7 deeper than 3 mm vs slipper-nose-knuckle-3r 46.12 mm over 10 (+0.02 mm, x1.0)",
+   "depths": {
+    "v_gap 18.95": {
+     "bench": {
+      "n": 2,
+      "sum_mm": 14.72,
+      "max_mm": 9.01,
+      "n_deeper3": 2,
+      "overhead140": 2,
+      "deepest": [
+       "ws",
+       15.0,
+       165.0,
+       -60.0
+      ],
+      "gap": 18.95,
+      "src": "docs/alignment/remeasure/desmo-slipper-knuckle-3r_bench_perpose.json",
+      "cross_check": {
+       "files": 1,
+       "sums": [
+        14.72
+       ],
+       "agree": true
+      }
+     },
+     "held": {
+      "n": 10,
+      "sum_mm": 46.14,
+      "max_mm": 9.05,
+      "n_deeper3": 7,
+      "overhead140": 6,
+      "deepest": [
+       "ws",
+       30.0,
+       165.0,
+       -45.0
+      ],
+      "gap": 23.9,
+      "src": "docs/alignment/remeasure/desmo-slipper-knuckle-3r_held_perpose.json",
+      "cross_check": {
+       "files": 1,
+       "sums": [
+        46.14
+       ],
+       "agree": true
+      }
+     }
+    }
+   },
+   "ref": "slipper-nose-knuckle-3r",
+   "compare": [
+    {
+     "claim": "v_gap 18.95",
+     "wear": "bench",
+     "sum": 14.72,
+     "ref_sum": 14.75,
+     "excess": -0.03,
+     "ratio": 1.0,
+     "watch": false
+    },
+    {
+     "claim": "v_gap 18.95",
+     "wear": "held",
+     "sum": 46.14,
+     "ref_sum": 46.12,
+     "excess": 0.02,
+     "ratio": 1.0,
+     "watch": false
+    }
+   ]
+  },
+  {
+   "check": "dominance",
+   "level": "ok",
+   "reason": "vs slipper-nose-knuckle-3r: plain -0.46, 2 mm -0.43",
+   "ref": "slipper-nose-knuckle-3r",
+   "gain_plain": -0.46,
+   "gain_2mm": -0.43
+  },
+  {
+   "check": "continuity",
+   "level": "ok",
+   "reason": "static 18.95, connected full 18.95, knn 20.62, bench 51.97 (docs/concepts/verify/desmo-slipper-knuckle-3r_v_bench_frozen_fix.json)",
+   "static": 18.95,
+   "connected_full": 18.95,
+   "connected_knn": 20.62,
+   "connected_bench": 51.97
+  },
+  {
+   "check": "fold_margin",
+   "level": "ok",
+   "reason": "min fold margin on file 5.006 deg (verification.v_held_frozen_exact.th_margin_min; 6 readings)",
+   "min_margin": 5.006,
+   "where": "verification.v_held_frozen_exact.th_margin_min"
+  },
+  {
+   "check": "idle",
+   "level": "ok",
+   "reason": "K moves: smallest recorded span 45.62 deg (docs/concepts/verify/desmo-slipper-knuckle-3r_v_bench_frozen_fix.json:extra.dK_taken_max_deg); crank: declared moving, no span on file",
+   "spans": [
+    [
+     "row:frozen_self.dK_taken_max",
+     45.62
+    ],
+    [
+     "row:frozen_self.held.dK_taken_max",
+     46.27
+    ],
+    [
+     "docs/concepts/verify/desmo-slipper-knuckle-3r_v_held_frozen_fix.json:extra.dK_taken_max_deg",
+     46.27
+    ],
+    [
+     "docs/concepts/verify/desmo-slipper-knuckle-3r_v_bench_frozen_fix.json:extra.dK_taken_max_deg",
+     45.62
+    ]
+   ],
+   "declared": [
+    "K",
+    "crank"
+   ],
+   "rigid": []
+  },
+  {
+   "check": "sampling",
+   "level": "ok",
+   "reason": "sample-weighted in-band 0.891 vs part-weighted 0.898 (-0.75 points); thinly sampled parts: L1a 8 (docs/concepts/verify/desmo-slipper-knuckle-3r_v_bench_frozen_fix.json)",
+   "parts": {
+    "hub1": [
+     0.999,
+     8.6,
+     80
+    ],
+    "hubK": [
+     0.992,
+     7.9,
+     80
+    ],
+    "hub2": [
+     0.955,
+     11.1,
+     80
+    ],
+    "hub3": [
+     0.739,
+     11.5,
+     80
+    ],
+    "E": [
+     0.966,
+     6.5,
+     104
+    ],
+    "boss": [
+     0.988,
+     8.5,
+     32
+    ],
+    "pad": [
+     1.0,
+     8.1,
+     32
+    ],
+    "knee": [
+     0.941,
+     10.7,
+     85
+    ],
+    "crank": [
+     0.819,
+     11.2,
+     129
+    ],
+    "roller": [
+     0.938,
+     10.0,
+     19
+    ],
+    "horn": [
+     0.95,
+     8.6,
+     61
+    ],
+    "ring2": [
+     0.54,
+     13.8,
+     19
+    ],
+    "L1a": [
+     0.981,
+     10.1,
+     8
+    ],
+    "L1b": [
+     0.931,
+     8.1,
+     36
+    ],
+    "L2": [
+     0.737,
+     12.0,
+     124
+    ]
+   }
+  },
+  {
+   "check": "complexity",
+   "level": "ok",
+   "reason": "recomputed 15.75 vs row 15.75",
+   "recomputed": 15.75,
+   "row": 15.75
+  },
+  {
+   "check": "reporting",
+   "level": "watch",
+   "reason": "dashboard shows no verified number (row v_gap 18.95); dashboard sweep best 12.79 (score 95.35) sits 6.16 below the verified number; dashboard status 'screened' vs row 'verified'"
+  },
+  {
+   "check": "judge_change",
+   "level": "ok",
+   "reason": "no bench / judge / metric file changed in the 3 commits that touched the row"
+  },
+  {
+   "check": "rules",
+   "level": "ok",
+   "reason": "O20, margin >= 5, translations <= 2 as recorded"
+  }
+ ],
+ "remeasured": {
+  "bench": false,
+  "held": false
+ },
+ "verifier_files": [
+  "docs/concepts/verify/desmo-slipper-knuckle-3r_groove_scan_fix.json",
+  "docs/concepts/verify/desmo-slipper-knuckle-3r_groove_scan_claim.json",
+  "docs/concepts/verify/desmo-slipper-knuckle-3r_v_held_frozen_fix.json",
+  "docs/concepts/verify/desmo-slipper-knuckle-3r_v_bench_frozen_fix.json",
+  "docs/concepts/verify/desmo-slipper-knuckle-3r_v_bench_frozen_blend.json",
+  "docs/concepts/verify/desmo-slipper-knuckle-3r_v_bench_frozen.json"
+ ],
+ "git": "d943974",
+ "tool_version": "2026-10-17.4",
+ "t": "2026-10-17T17:22:03Z"
+}
