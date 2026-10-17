@@ -2581,3 +2581,42 @@ The claim wrapper reproduces the lead's 18.49 / 20.12 / 33.02 to the digit.
 * The fold is untouched: across-body 41-43 / 175, abs(axial) >= 150 24-26 / 105, overhead 15-18 / 71 taken held out on
   every config. This is the fourth env polish of the K-drive family that leaves the fold where it was.
 * Cost $0.30 (cpu3c) / $0.35 (cpu5c) against $0.30; balance $24.69 after, above the $24.40 line.
+
+## slipper-nose flank robustness: the crank-side cliff is a synthesis artefact; no beta step; the K phase is the toleranced dimension (2026-10-17, docs/research/slipper_flank_robust.md)
+
+Self-measured, local only (2 niced processes, $0 farm). The verified lead's flank was held FIXED as synthesised and the
+crank built with each error. The real contact was solved: the spring closes K onto the nose
+(`slipper_flank_robust/asbuilt.py`). Gaps were claimed through the verifier's harness, with the as-built K law on the
+worn bench (`klaw_claim.py`).
+
+* **A: the cliff is not physical.** The errors that zero the re-synthesised drive (r_c -0.2 mm, g -0.02, beta -1 deg)
+  leave the built drive working:
+  * crank PA 34.8 / 29.5 / 23.6 against the 38.03 cap;
+  * stroke 49.65 / 50.17 / 48.77;
+  * no jam, no dead drive, the contact stays on the built flank.
+  * The physical crank PA rises about 1.6 deg per -0.1 mm of r_c (no cliff). It keeps 2 deg to -0.25 mm and reaches the
+    cap at -0.4..-0.5 mm.
+  * The polish's 6-neighbour `robust` check tests whether a neighbouring DESIGN synthesises, not whether the built part
+    tolerates errors. The knife edge is in the design space (auditor topic). It is not a CAD blocker.
+* **What does need a tolerance is K's phase.** Every as-built error appears as a K offset:
+  * nose position about K's axis: 3.7 deg of K per mm;
+  * crank pivot across the arm: 3.6 deg per mm;
+  * lobe-lift scale: 0.38 deg at dK 45 per 0.02 of g.
+  * A lag of ~0.07 deg puts a held-out pose under th 5.
+  * The stacked +-0.05 mm lag is -0.83 deg: held out 23.67 (paired -0.23, CI [-0.53, -0.01], 2 poses lost to the fold
+    rule). With the +0.75 lead it is 23.55 (-0.10, 1 pose).
+  * The +-0.02 mm stack (-0.35 deg) sits inside the lead.
+  * CAD tolerance: nose hole, crank pivot and lobe profile at +-0.02 mm true position; r_c +-0.1 mm.
+* **B: no beta step (pre-registered, commit 0761f77).** Stepping beta from -176.684 toward -171 moves the margin from the
+  crank side to the horn side:
+  * crank PA 29.5 -> 13.8;
+  * horn effective at mu 0.087: 40.7 -> 41.3-42.7 (margin 2.29 -> 0.33-1.73).
+  * -174.684 to -172.684 pass 6 / 6 neighbours but miss the 2-deg horn margin, so no grid beta passes.
+  * All tie on the gap. -174.684, paired gain on every reading +0.02, CI [-0.0, +0.03]:
+    * verified protocol 18.46 unpriced / 19.02 priced;
+    * held out 23.43 / 24.61.
+  * The CAD keeps the verified flank (`slipper_flank_robust/recommended.json`).
+* **C: the +0.75 deg K lead is free and thin.**
+  * bench 18.46 (min th 5.244); held out 23.43 (min th 5.068, 11 poses under 5.5); contact unchanged.
+  * horn effective 41.2 at mu 0.087, 43.0 at mu 0.12 held.
+  * 5.5 would need about +6 deg of lead (0.084 deg of margin per deg of K): only the stops (the priced reading) give it.

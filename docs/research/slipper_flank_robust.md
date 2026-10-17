@@ -40,8 +40,9 @@ these dimensions need a tolerance (per tolerance unit: K error / held-out min th
 
 * The stacked worst LAG at +-0.05 mm (r_c -0.05, beta -0.25 deg, pivot e2 -0.05, g +0.02) is **-0.83 deg of K**:
   - fold re-solve: held min th 4.936 (2 poses under 5), bench 5.110;
-  - claimed on held out through the verifier's harness with that law: **gap 23.67 (+0.22, 2 poses lost to the fold
-    rule)**, contact unchanged.
+  - claimed on held out through the verifier's harness with that law: **gap 23.67, paired -0.23 (CI [-0.53, -0.01]),
+    2 workspace poses lost to the fold rule**, contact unchanged;
+  - with the +0.75 lead on top: 23.55, paired -0.10 (CI [-0.31, +0.01]), still 1 pose lost.
 * The same stack at +-0.02 mm is -0.35 deg (held 4.979, 1 pose under 5).
 * The red team's systematic lag (arm compliance, follower clearance, wear: -0.42 to -0.53 deg) comes on top.
 * **Tolerances for the CAD:**
@@ -64,7 +65,7 @@ these dimensions need a tolerance (per tolerance unit: K error / held-out min th
   - paired CI90 of the gain [-0.0, +0.07] for -175.684 to -172.684.
 * -174.684 (the closest flank that passes 6 / 6), report only:
   - held out unpriced 23.43 (lead 23.45);
-  - priced and bench-priced claims: see the B table below.
+  - held out priced 24.61 (lead 24.63), bench priced 19.02 (lead 19.05): paired gain +0.02, CI [-0.0, +0.03], on every reading.
 * No flank gives margin on both sides; the A result shows the crank side does not need it.
 * `recommended.json` therefore records the verified flank unchanged, plus the K lead and the tolerances.
 
@@ -77,8 +78,11 @@ harness, with the lead law on the worn bench:
 
 The margin rises 0.084 deg per deg of K, so **5.006 -> 5.5 would need about +6 deg of lead**. That is not available: the
 horn cap and the a1max window bind first. The 5.5 reading is the stops' job: the polish's priced reading moves smlo
-+0.5, held out 24.63. With the +0.75 lead, the stacked +-0.05 mm lag of A is held to 5.0. The claimed held-out min th is
-in the B/C table below.
++0.5, held out 24.63.
+
+**The lead covers a +-0.02 mm build, not a +-0.05 mm one.** The stacked +-0.02 mm lag (-0.35 deg) sits inside the lead.
+The stacked +-0.05 mm lag (-0.83 deg) loses 1 held-out pose even with the lead: 23.55, paired -0.10. Without the lead
+it loses 2: 23.67, -0.23.
 
 ## What the gen-7 CAD should change
 
@@ -91,7 +95,8 @@ in the B/C table below.
    - lobe profile: +-0.02 mm;
    - r_c: +-0.1 mm.
    - Add a drawing note: "K phase at the onset +0.75 +-0.3 deg, measured at assembly (shim the lobe-ring dowel)".
-     The stacked +-0.05 mm lag (-0.83 deg) is the case the lead is for.
+   - The lead covers a +-0.02 mm build (-0.35 deg) fully. A +-0.05 mm build (-0.83 deg) still loses a held-out pose
+     with it (-0.10).
 4. Nothing in A is a BLOCKER.
 
 ## A. Method (`asbuilt.py`, `asbuilt.json`, `asbuilt_extra.json`)
@@ -162,7 +167,7 @@ Full table (taken stroke K <= 47.05; PA margins to 38.03 crank, to 43 - atan(mu)
 |---|---|---|---|---|---|---|---|
 | -176.684 (lead) | 3 / 6 fail (cliff) | 18.49 (row) | 29.5 / 35.8 | 40.7 (+2.29) / 42.6 | - | 23.45 | 19.05 / 24.63 (polish) |
 | -175.684 | 5 / 6 (g -0.05: crank cliff) | 18.48 (+0.01, [-0.0, +0.02]) | 23.7 / 36.3 | 41.3 (+1.73) / 43.1 | fail | - | - |
-| **-174.684** (closest 6 / 6) | **6 / 6 (45.0)** | 18.46 (+0.02, [-0.0, +0.03]) | 19.9 / 36.8 | 41.8 (+1.23) / 43.6 | **fail (horn)** | **23.43** | B_P174 |
+| **-174.684** (closest 6 / 6) | **6 / 6 (45.0)** | 18.46 (+0.02, [-0.0, +0.03]) | 19.9 / 36.8 | 41.8 (+1.23) / 43.6 | **fail (horn)** | **23.43** | 19.02 / 24.61 (paired +0.02 / +0.02, CI [-0.0, +0.03]) |
 | -173.684 | 6 / 6 (44.0) | 18.44 (+0.05, [-0.0, +0.07]) | 17.2 / 37.2 | 42.2 (+0.83) / 44.0 | fail | - | - |
 | -172.684 | 6 / 6 (43.2) | 18.43 (+0.05, [-0.0, +0.07]) | 15.2 / 37.7 | 42.7 (+0.33) / 44.5 | fail | - | - |
 | -171.684 | 5 / 6 (g +0.05 short) | 18.70 (-0.22, [-0.79, +0.08]) | 13.8 / 37.1 | 42.1 (+0.93) / 43.9 | fail | - | - |
@@ -180,9 +185,9 @@ Full table (taken stroke K <= 47.05; PA margins to 38.03 crank, to 43 - atan(mu)
 | lead, bench (row) | 18.49 | - | 5.181 | 2 | 2 / 14.75 (9.01) | 35.8 |
 | **+0.75 lead, bench** | **18.46** | +0.02 ([-0.0, +0.03]) | **5.244** | 2 | 2 / 14.75 (9.01) | 35.9 |
 | lead, held out (row) | 23.45 | - | 5.006 | - | 10 / 46.12 (9.05) | 36.05 |
-| **+0.75 lead, held out** | **23.43** | C_HELD_CI | **5.068** | 11 | 10 / 46.28 (9.06) | 36.2 |
-| stack lag -0.83 deg (+-0.05 mm), no lead, held out | 23.67 | STACK0_CI | 5.009 (2 poses dropped by the fold rule) | - | 10 / 45.98 | 35.8 |
-| stack lag -0.83 deg + the +0.75 lead, held out | STACK75 | STACK75_CI | STACK75_TH | - | STACK75_C | - |
+| **+0.75 lead, held out** | **23.43** | +0.02 ([-0.0, +0.03]) | **5.068** | 11 | 10 / 46.28 (9.06) | 36.2 |
+| stack lag -0.83 deg (+-0.05 mm), no lead, held out | 23.67 | **-0.23 ([-0.53, -0.01]), 2 workspace poses lost** | 5.009 (2 poses dropped by the fold rule) | - | 10 / 45.98 | 35.8 |
+| stack lag -0.83 deg + the +0.75 lead, held out | 23.55 | -0.10 ([-0.31, +0.01]), 1 workspace pose lost | 5.025 | - | 10 / 46.14 | 36.0 |
 
 ## Red team
 

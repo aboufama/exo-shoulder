@@ -1,0 +1,218 @@
+{
+ "b171.684_bench_u": {
+  "gain": -0.22,
+  "gap_cand": 18.7,
+  "gap_lead": 18.48,
+  "ci90_gain": [
+   -0.79,
+   0.08
+  ],
+  "p_cand_better": 0.238,
+  "discordant": {
+   "ws_taken_A_only": 0,
+   "ws_taken_B_only": 1,
+   "contact_A_only": 0,
+   "contact_B_only": 0,
+   "contact_both": 2
+  },
+  "lead_ref": "docs/research/slipper_env_polish/local/claim_BEST_fit60_bench_u_perpose.json"
+ },
+ "b172.684_bench_u": {
+  "gain": 0.05,
+  "gap_cand": 18.43,
+  "gap_lead": 18.48,
+  "ci90_gain": [
+   -0.0,
+   0.07
+  ],
+  "p_cand_better": 0.641,
+  "discordant": {
+   "ws_taken_A_only": 0,
+   "ws_taken_B_only": 0,
+   "contact_A_only": 0,
+   "contact_B_only": 0,
+   "contact_both": 2
+  },
+  "lead_ref": "docs/research/slipper_env_polish/local/claim_BEST_fit60_bench_u_perpose.json"
+ },
+ "b173.684_bench_u": {
+  "gain": 0.05,
+  "gap_cand": 18.43,
+  "gap_lead": 18.48,
+  "ci90_gain": [
+   -0.0,
+   0.07
+  ],
+  "p_cand_better": 0.641,
+  "discordant": {
+   "ws_taken_A_only": 0,
+   "ws_taken_B_only": 0,
+   "contact_A_only": 0,
+   "contact_B_only": 0,
+   "contact_both": 2
+  },
+  "lead_ref": "docs/research/slipper_env_polish/local/claim_BEST_fit60_bench_u_perpose.json"
+ },
+ "b174.684_bench_p": {
+  "gain": 0.02,
+  "gap_cand": 19.02,
+  "gap_lead": 19.04,
+  "ci90_gain": [
+   -0.0,
+   0.03
+  ],
+  "p_cand_better": 0.64,
+  "discordant": {
+   "ws_taken_A_only": 0,
+   "ws_taken_B_only": 0,
+   "contact_A_only": 0,
+   "contact_B_only": 0,
+   "contact_both": 2
+  },
+  "lead_ref": "docs/research/slipper_env_polish/farm/claim_BEST_fit60_bench_p_perpose.json"
+ },
+ "b174.684_bench_u": {
+  "gain": 0.02,
+  "gap_cand": 18.46,
+  "gap_lead": 18.48,
+  "ci90_gain": [
+   -0.0,
+   0.03
+  ],
+  "p_cand_better": 0.64,
+  "discordant": {
+   "ws_taken_A_only": 0,
+   "ws_taken_B_only": 0,
+   "contact_A_only": 0,
+   "contact_B_only": 0,
+   "contact_both": 2
+  },
+  "lead_ref": "docs/research/slipper_env_polish/local/claim_BEST_fit60_bench_u_perpose.json"
+ },
+ "b174.684_held_p": {
+  "gain": 0.02,
+  "gap_cand": 24.6,
+  "gap_lead": 24.62,
+  "ci90_gain": [
+   -0.0,
+   0.03
+  ],
+  "p_cand_better": 0.75,
+  "discordant": {
+   "ws_taken_A_only": 0,
+   "ws_taken_B_only": 0,
+   "contact_A_only": 0,
+   "contact_B_only": 0,
+   "contact_both": 10
+  },
+  "lead_ref": "docs/research/slipper_env_polish/local/claim_BEST_fit60_held_p_perpose.json"
+ },
+ "b174.684_held_u": {
+  "gain": 0.02,
+  "gap_cand": 23.43,
+  "gap_lead": 23.45,
+  "ci90_gain": [
+   -0.0,
+   0.03
+  ],
+  "p_cand_better": 0.75,
+  "discordant": {
+   "ws_taken_A_only": 0,
+   "ws_taken_B_only": 0,
+   "contact_A_only": 0,
+   "contact_B_only": 0,
+   "contact_both": 10
+  },
+  "lead_ref": "docs/alignment/remeasure/slipper-nose-knuckle-3r_held_perpose.json"
+ },
+ "b175.684_bench_u": {
+  "gain": 0.01,
+  "gap_cand": 18.47,
+  "gap_lead": 18.48,
+  "ci90_gain": [
+   -0.0,
+   0.02
+  ],
+  "p_cand_better": 0.638,
+  "discordant": {
+   "ws_taken_A_only": 0,
+   "ws_taken_B_only": 0,
+   "contact_A_only": 0,
+   "contact_B_only": 0,
+   "contact_both": 2
+  },
+  "lead_ref": "docs/research/slipper_env_polish/local/claim_BEST_fit60_bench_u_perpose.json"
+ },
+ "klead075_bench_u": {
+  "gain": 0.02,
+  "gap_cand": 18.46,
+  "gap_lead": 18.48,
+  "ci90_gain": [
+   -0.0,
+   0.03
+  ],
+  "p_cand_better": 0.641,
+  "discordant": {
+   "ws_taken_A_only": 0,
+   "ws_taken_B_only": 0,
+   "contact_A_only": 0,
+   "contact_B_only": 0,
+   "contact_both": 2
+  },
+  "lead_ref": "docs/research/slipper_env_polish/local/claim_BEST_fit60_bench_u_perpose.json"
+ },
+ "klead075_held_u": {
+  "gain": 0.02,
+  "gap_cand": 23.43,
+  "gap_lead": 23.45,
+  "ci90_gain": [
+   -0.0,
+   0.03
+  ],
+  "p_cand_better": 0.75,
+  "discordant": {
+   "ws_taken_A_only": 0,
+   "ws_taken_B_only": 0,
+   "contact_A_only": 0,
+   "contact_B_only": 0,
+   "contact_both": 10
+  },
+  "lead_ref": "docs/alignment/remeasure/slipper-nose-knuckle-3r_held_perpose.json"
+ },
+ "stacklag075_held_u": {
+  "gain": -0.1,
+  "gap_cand": 23.55,
+  "gap_lead": 23.45,
+  "ci90_gain": [
+   -0.31,
+   0.01
+  ],
+  "p_cand_better": 0.268,
+  "discordant": {
+   "ws_taken_A_only": 0,
+   "ws_taken_B_only": 1,
+   "contact_A_only": 0,
+   "contact_B_only": 0,
+   "contact_both": 10
+  },
+  "lead_ref": "docs/alignment/remeasure/slipper-nose-knuckle-3r_held_perpose.json"
+ },
+ "stacklag0_held_u": {
+  "gain": -0.23,
+  "gap_cand": 23.68,
+  "gap_lead": 23.45,
+  "ci90_gain": [
+   -0.53,
+   -0.01
+  ],
+  "p_cand_better": 0.0,
+  "discordant": {
+   "ws_taken_A_only": 0,
+   "ws_taken_B_only": 2,
+   "contact_A_only": 0,
+   "contact_B_only": 0,
+   "contact_both": 10
+  },
+  "lead_ref": "docs/alignment/remeasure/slipper-nose-knuckle-3r_held_perpose.json"
+ }
+}
