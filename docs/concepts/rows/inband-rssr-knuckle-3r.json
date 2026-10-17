@@ -1077,5 +1077,33 @@
   "cost": "$0 farm; local 2 processes, about 18 min"
  },
  "polished_verdict": "CONFIRMED: pick3 (CAD: r_h +0.25) priced 18.33 on Bench(110,360) vs the row's pick 19.43 (+1.10) and 22.86 held out vs 24.38 (+1.52, fit60; env fit 23.57 vs 24.75, +1.18). Hard goal: 18.33 meets <= 18.5, 22.86 misses <= 22.0. Against the leader slipper-nose (18.49 / 23.45, unpriced) it is an edge, not a clear lead (paired held -0.59, CI crosses 0).",
- "leader_ruling": "tie: slipper-nose-knuckle-3r | lead's ruling 2026-10-17 12:45 UTC after the leader-change audit (48be5d5, final WATCH): read under the leader's protocol (unpriced, margin 5) pick3 is 18.32 bench / 23.54 held vs the leader's 18.49 / 23.45 - ahead on the bench, behind held out, paired held CI [-0.83, +1.31]: a tie, not a lead. pick3 was chosen best of 3 after the claim numbers were known (the pre-registered envsel #1, pick1, reads 19.15 bench); with the catalogue igus KBRM-02 O9 head it needs r_h >= 15.65 (build 15.9: 18.32 / 23.62). No leader change."
+ "leader_ruling": "tie: slipper-nose-knuckle-3r | ledger 2026-10-17T13:18:02Z | lead's ruling 2026-10-17 after the leader-change audits (skeptic entries 12:36:27Z and 13:18:02Z, final WATCH): under the leader's protocol (unpriced, margin 5) pick3 reads 18.32 bench / 23.54 held vs the leader's 18.49 / 23.45 - ahead on the bench, behind held out, paired held P(better) 0.38: a tie, not a lead. pick3 was chosen best of 3 after the claim numbers were known (the pre-registered pick1 reads 19.15 bench; on the env-fit held leg pick3 is the worst of 3). Buildable with the catalogue O9 head only from r_h 15.65 (polished_params_cad_catalogue, r_h 15.9: 18.32 / 23.62 unpriced). No leader change.",
+ "polished_params_cad_catalogue": {
+  "bk1": 26.0374,
+  "bk2": 38.0,
+  "a1max": 59.2432,
+  "kK": 1.8622,
+  "La": 20.004,
+  "s_arm": 4.0945,
+  "r_h": 15.9,
+  "beta": -140.3619,
+  "gam": 11.9079,
+  "hl": 3.15,
+  "zc": 0.8878,
+  "eta": -11.1256,
+  "r_lobe": 7.1615,
+  "smhi": 19.4639,
+  "smlo": 5.0333,
+  "az1": 95.3275,
+  "el1": 67.6601,
+  "az2": 46.3741,
+  "el2": 41.5718,
+  "wd": 66.0692,
+  "wa": -10.7812,
+  "b3": 0.3246,
+  "ang_min": 25.2189,
+  "lc": 21.5474,
+  "phib": -57.916
+ },
+ "polished_params_cad_catalogue_note": "lead 2026-10-17 13:30 UTC from the alignment audits (ledger 2026-10-17T12:36:27Z and 13:18:02Z, M2): polished_params_cad (r_h 15.0125, O7 sockets) loses every pose with the catalogue igus KBRM-02 O9 head (275.0, parts 183); the design lives from r_h 15.65. BUILD THIS config (r_h 15.9, O9 head, ear de-duplicated, ~0.6 mm spacer under the head rim): priced 18.33 / held 22.86, unpriced margin 5 18.32 / 23.62 (docs/alignment/remeasure/inband_pick3/claim_O9rh15.9_dedup*.json); transmission 52.2 deg; 18 of 18 knife-edge neighbours pass. The board's 18.33 is the r_h 14.7625 pick3 (polished_bench), which no CAD builds."
 }

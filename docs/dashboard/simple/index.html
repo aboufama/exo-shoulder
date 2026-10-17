@@ -232,8 +232,8 @@ dash.calc('leader', {
     // user 2026-10-17: a sensed joint is a joint and the goal is 3 joints, so the headline is the best verified design with <= 3 active joints
     // a row the lead ruled a tie after a leader-change audit ('tie: <leader id> | why') keeps its board place but not the headline
     const ok3 = (r) => !r.is_baseline && r.state === 'Verified' && r.basis === 'verified' && (r.active_dof == null || r.active_dof <= 3);
-    const b = board.find((r) => ok3(r) && !/^(tie|no lead)/i.test(r.leader_ruling || '')) || {};
-    const ties = board.filter((r) => !r.is_baseline && r.basis === 'verified' && /^tie/i.test(r.leader_ruling || '') && r.leader_ruling.slice(4).split('|')[0].trim() === b.id);
+    const b = board.find((r) => ok3(r) && !/^(tie|no lead)/i.test((r.leader_ruling || '').trim())) || {};
+    const ties = board.filter((r) => !r.is_baseline && r.basis === 'verified' && /^tie/i.test((r.leader_ruling || '').trim()) && r.leader_ruling.trim().slice(4).split('|')[0].trim() === b.id);
     const sc = (g) => (g == null ? null : Math.max(0, Math.round((1 - g / 275) * 1000) / 10));
     const short = b.short == null ? null : ties.length ? `${b.short} (tied with ${ties.map((t) => t.short).join(', ')})` : b.short;
     return [{ id: b.id ?? null, short, score: sc(b.gap), state: b.state ?? null, complexity: b.complexity ?? null }];

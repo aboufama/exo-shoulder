@@ -317,6 +317,18 @@ def alignment_latest():
     return {mid: e for mid, (k, e) in best.items()}
 
 
+def alignment_skeptic_times():
+    """{id: {time: (verdict, claim)}} of the ledger's skeptic entries - what a lead's leader_ruling must cite"""
+    out = {}
+    if not os.path.exists(ALIGN_LEDGER): return out
+    for line in open(ALIGN_LEDGER):
+        try: e = json.loads(line)
+        except Exception: continue
+        if isinstance(e, dict) and e.get("id") and e.get("stage") == "skeptic":
+            out.setdefault(slug(e["id"]), {})[str(e.get("time") or "")] = (str(e.get("verdict") or ""), num(e.get("claim")))
+    return out
+
+
 def claim_of(rw):
     """the number a row claims, as tools/alignment_ledger.py claim_of reads it: a CONFIRMED polish, else v_gap, else gap"""
     if str(rw.get("polished_status") or "").upper().startswith("CONFIRMED") and num(rw.get("polished_gap")) is not None: return num(rw["polished_gap"])
@@ -342,8 +354,8 @@ COMPLEXITY = ("complexity", "complexity_items", "passive_trans", "mechanism_conf
 
 def morphs(S):
     by, mech, raw = {}, {}, {}                                         # raw: each row file as written (fields merge() drops)
-    try: AL = alignment_latest()
-    except Exception as e: AL = {}; warn(f"alignment ledger unreadable ({e}); alignment fields left blank")
+    try: AL, SK = alignment_latest(), alignment_skeptic_times()
+    except Exception as e: AL, SK = {}, {}; warn(f"alignment ledger unreadable ({e}); alignment fields left blank")
     for e in as_list(load(os.path.join(CONCEPTS, "catalogue.json")), "morphologies", "items"):
         if isinstance(e, dict) and e.get("id"):
             mid = slug(e["id"]); by[mid] = merge(by.get(mid) or blank(mid), dict(e, id=mid))
@@ -409,8 +421,15 @@ def morphs(S):
                 for k in ("reach", "follow", "inband14", "inband10", "contact"):
                     if pb.get(k) is not None: m["v_" + k] = share(pb[k])
                 m["v_config"] = str(rw.get("polished_id") or "polished").split(" ")[0]
-                # its number IS an independent verifier's: the board must not call it "Checking" (screened rows only)
-                if m["status"] in ("ideated", "modelling", "screened"): m["status"] = "verified"
+                # its number IS an independent verifier's, so the board need not call it "Checking" - but only once the
+                # auditor has ruled on THAT number (alignment audit 2026-10-17 13:10, inband NEW-freetext-promotion: a
+                # self-written "CONFIRMED" must not show as Verified and take the headline before any audit): the latest
+                # ledger entry is a skeptic ruling, not gamed, on the same claim
+                le = AL.get(mid) or {}
+                if m["status"] in ("ideated", "modelling", "screened") and le.get("stage") == "skeptic" and \
+                        le.get("verdict") != "gamed" and num(le.get("claim")) is not None and \
+                        abs(num(le["claim"]) - m["v_gap"]) <= 0.005:
+                    m["status"] = "verified"
             # a self-measured FROZEN EXACT claim (not verified) - shown as such, never as a fast number
             fz = rw.get("frozen_exact")
             # rows store the frozen exact claim under several keys (frozen_exact / frozen / claim.frozen); the first number
@@ -421,7 +440,17 @@ def morphs(S):
             m["frozen_gap"] = next((num(c) for c in cands if num(c) is not None), None)
             # the lead's ruling after a leader-change audit (e.g. "tie: slipper-nose-knuckle-3r | ..."): a row ruled a tie or no
             # lead stays on the board at its verified number but does not take the headline (docs/OPERATIONS.md section 4)
-            m["leader_ruling"] = str(rw.get("leader_ruling") or "")
+            # a ruling counts only when it cites a skeptic entry of the ledger for this row ("... | ledger <time> | ...")
+            # that is not gamed (alignment audit 2026-10-17 13:18, skeptic: a free-text ruling on the true leader's row
+            # would drop it from the headline with no trace)
+            lr = str(rw.get("leader_ruling") or "").strip()
+            if lr:
+                cite = re.search(r"ledger (\d{4}-\d\d-\d\dT\d\d:\d\d:\d\dZ)", lr)
+                sk = (SK.get(mid) or {}).get(cite.group(1)) if cite else None
+                if not sk or sk[0] == "gamed":
+                    warn(f"{mid}: leader_ruling ignored - it must cite a non-gamed skeptic entry of the ledger ('ledger <time>')")
+                    lr = ""
+            m["leader_ruling"] = lr
             m["n_configs"] = len(sw) or to_int(m.get("n_configs"), 0) or 0
             scored = [s for s in sw if s["gap"] is not None and not s["passed_over"]]
             if scored:
