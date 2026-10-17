@@ -48,3 +48,100 @@ exactly as before.
    - The round's roller-flank verifier, docs/concepts/verify/roller-longdyad-knuckle-3r.py. It checks cam closure, the
      pressure angles, and K inside the drive's range.
    - A red-team pose list: 182, 203, 205 and 230, the dip-band clip frames, and the deep pair 208 / 211.
+
+## Verdict (screened 2026-10-17 ~04:45 UTC)
+
+**Not a lead change.** The dip works the way the judge predicted: it lifts hub 2 and removes skin contacts. But the
+roller-flank drive pays for it with the stretched stroke.
+
+The one roller and flank must carry K both ways. The flank's usable stroke under the 43-degree pressure-angle rule is
+~46 deg of K, counted from where the bent arm is built. A dip of D degrees of a1e needs ~2.35 D degrees of K below the old
+stop A, and that comes straight off the stretched end. The arm cannot be built at the old rest and swung backward:
+
+- it closes on hub K's cylinder at 0.18 mm per degree of backward swing (1.14 mm at rest, under 1 mm by -0.75 deg);
+- the flank cusps below about -5 deg.
+
+So the arm has to be built at the dip floor (dip_ref 1), and that moves the whole pressure-angle curve up.
+
+| lead cell (lead + kneewin centred knee), same code | fast plain | fast near-2 mm | dK_lim | frozen exact Bench(110,360) |
+|---|---|---|---|---|
+| dipD 0 (control = kneewin) | 14.28 | 20.20 | 46.2 | 19.33 (kneewin, reproduced fast to the digit) |
+| dipD 1, th_c 53, w 12, arm at floor | 15.39 | 23.71 | 43.8 | see below |
+| dipD 1, th_c 50, w 8 (best D > 0, fast) | 15.26 | 28.11 | 43.5 | |
+| dipD 2 (3 band shapes) | 15.90 | 34.5-35.6 | 41.0-41.2 | |
+| dipD 3 (3 band shapes) | 17.17 | 48.3-51.8 | 38.5-38.8 | |
+| dipD 4, th_c 53, w 12, arm at floor | 16.64 | 60.58 | 36.5 | **21.10** |
+| lead roller-longdyad-knuckle-3r (verified) | 13.19 | | 46.25 | 18.67 |
+
+Frozen exact Bench(110,360), dipD 4, compared with its own D = 0 control (kneewin 19.33):
+
+- Contact poses 6 -> 3. This is the dip's gain, about the 2-3 poses the judge sized.
+- Fold losses 88 -> 101. The stretched drive wall drops with dK_lim (46.2 -> 36.5).
+- Reach 0.725 -> 0.697. Overhead (elev >= 140) stays at 8/28. In-band 14 0.8976 -> 0.9031; in-band 10 0.5152 -> 0.5316.
+- Parts: 5 E-L2 jams, the centred knee's (unchanged).
+- Minimum metal 0.07 mm at workspace (-60, 60, 105), the same pose and depth as the lead.
+- Near-touch: 2 mm gap 78.38 (83 poses under 2 mm), 1 mm gap 22.75.
+
+## What was measured
+
+1. **Faithful model on the lead's code** (docs/concepts/models/dipped-law-groove-knuckle-3r.py).
+   - The state-A branch of the design's own IK runs on a1e(th) = a1 - D b(x).
+   - The design's closure branch is used, not twosided.py's elevation rule.
+   - D = 0 reproduces kneewin's fast numbers exactly: 14.28 / 0.7812 / 0.8972 / 0.0212.
+   - Spec fixes:
+     - The parabola is replaced by a C1 bump (the parabola kinks at the band edges).
+     - msub is not required on dipped poses. It is the stretched law's free-K rule. State-A poses sit at msub 0.2-0.6, and
+       requiring it threw away every dipped pose.
+     - The cam is checked as a function of q2: monotone, rate <= 1.9 against 3.45, lobe pressure angle <= 25 at D 8.
+       The lobe dip is only 0.07-0.53 mm deep.
+2. **The drive over the closing range.**
+   - The roller-flank synthesis now runs over [-D_K - 1, dK_lim].
+   - Built at the old rest (dip_ref 0), the dip stops at -0.75 deg (CRK-hubK) and the flank cusps at -5 to -8 deg. Every
+     dipped pose past -0.75 is truncated: fast plain 39.45 at D 4.
+   - r_c 16-18 clears hub K (2.3-3.2 mm), but at rest the flank cusps or the horn pressure angle reaches 40-102 deg.
+     The flank is sharply tuned at the lead's r_c 15.22.
+   - Built at the dip floor (dip_ref 1), the closing side is clean down to the floor at every D tried (1-4). dK_lim then
+     falls about 1:1 with the floor: 46.2 -> 43.8 / 41.2 / 38.8 / 36.5 at floors -2.4 / -4.7 / -7.1 / -9.4.
+3. **What else the dip moves.** Fast bench, D 4, dip_ref 1, all 41 dipped poses kept:
+   - Hub 2 is farther on 21 poses and closer on 15. The fitted hub-2 level changes too, so the judge's "never closer"
+     check, which held the geometry fixed, does not carry over.
+   - Crank, roller and horn are closer on 20-25 poses, by up to 1.8 mm. Hub K is closer on 10.
+   - Links 1a and 1b barely move.
+   - In-band 14 rises slightly (0.8972 -> 0.9018). There are 25 clip frames in th 36-72 on the fit bench.
+4. **The farm.** A 242-configuration LHS co-fitting the drive (r_c, beta, g, lift, hl, s_arm, zr, kK) with the dip at
+   dip_ref 0 went out at 04:03 UTC. The endpoint showed 16 jobs in progress and no completions for over 30 min, so it had
+   not returned when the time box closed. The 1-D trade above (10 configurations) ran locally, one process.
+
+## Red team (own best)
+
+- **The pose that jams.** No jam comes from the dip: the 5 E-L2 jams are the centred knee's (184, 208, 209, 211, 238).
+  The drive's tightest clearance moves to the arm vs hub K at the dip floor: 1.04 mm at -10 deg, the edge of the 1 mm
+  rule.
+- **The point that pinches.** 0.07 mm at (-60, 60, 105), unchanged from the lead. With the dip, 83 poses carry metal
+  under 2 mm (near-2 gap 78.38). The crank's built-at-floor phase lowers the arm over the deltoid on the dipped poses.
+- **The optimistic number.** The judge's 18.24 (= 19.33 - 2 x 0.548) assumed nothing else moves. The flank stroke moves:
+  -9.4 deg of dK_lim at D 4 is 13 more fold poses. Even D 1 (floor -2.4 deg) costs 2.4 deg of stroke, about 2-4 poses
+  of the 360 bench, which is about the 1-2 hub-2 poses it can lift.
+
+## New knowledge (predicts beyond this morphology)
+
+- **On a single slaved flank, any non-monotone K law spends the same stroke as the stretched rise.** The roller-flank's
+  PA-capped stroke (~46 deg at the lead's seats) is a budget measured from the arm's build phase, not from stop A.
+  A dip floor at -k costs k of stretched stroke, at ~2.35 deg of K per deg of a1e on the lead's dyad (bk1 26, bk2 38).
+- **The dip needs the total stroke the round-9 long flank was refuted at.** Keeping the lead's 46 deg on the stretched
+  side and adding a 4-deg dip needs ~55.6 deg in total. That is exactly the 55-57.5 deg regime where the flank boss sits
+  on the deltoid (roller-longdyad-knuckle-3r: 88-94 contact poses, co-fits walk back to 42-47). So co-fitting the drive
+  is predicted not to rescue this embodiment.
+- **The lever needs a second, independent K input below stop A.** Two candidates: a groove + nose desmodromic pair on
+  hub 2's cap (embodiment 2: its stroke is not the flank's), or a dip in stop A itself. Either pays for the dip outside
+  the flank's budget.
+- **The bent arm concentric with hub K is a one-sided design.** Backward swing closes on hub K at 0.18 mm/deg. Any law
+  that runs the crank below its build phase must move the build phase.
+
+## Files
+
+- Model: docs/concepts/models/dipped-law-groove-knuckle-3r.py. Modes: check / split / frozen / held / flood / viz.
+- Sweep: docs/concepts/sweeps/dipped-law-groove-knuckle-3r.json.
+- Row: docs/concepts/rows/dipped-law-groove-knuckle-3r.json.
+- Preview: docs/concepts/viz/concepts/dipped-law-groove-knuckle-3r.js (best D > 0 config: dipD 1, th_c 50, w 8, arm at
+  the floor).

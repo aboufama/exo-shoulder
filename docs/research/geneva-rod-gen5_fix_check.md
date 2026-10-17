@@ -2,10 +2,10 @@
 
 Independent skeptic of the result in `docs/research/geneva-rod-gen5_fix.md` sections 2-5 (commit dfa93be). Time box
 45 min, local only (niced, at most 2 processes of mine; the machine ran at load 10-14 from other agents), $0 farm.
-Scratch tools: `docs/research/geneva_rod_drive/check_skin_all.py` (copied in with this check).
+Tool: `docs/research/geneva_rod_drive/check_skin_all.py` (new, mine); outputs in `docs/research/geneva_rod_drive/check/`.
 
 **Verdict: NOT REFUTED** on the claim that matters - the D9-01 lobe ring no longer enters the judges' skin. Measured
-from the outside on the as-built `exo.glb`, every frame of every clip, the ring clears the skin by RESULT_LOBE. The
+from the outside on the as-built `exo.glb`, every frame of every clip, the ring clears the skin by **+0.442 mm** at its nearest (the claim: +0.409). The
 gen-5 failure reproduces. The judges' R1 / R4 re-run on v2 reproduces the scorecard. Six corrections and four red-team
 findings below; none of them reverses the fix.
 
@@ -19,12 +19,35 @@ all vertices per part to the judges' posed skin (`pipeline/avg/body_pose.py`). N
 every ring point at r <= 10.05 from J2's axis (`keep = r > 10.05`), which in v2 is the whole 9.6 dwell; this check keeps
 it.
 
-RESULT_TABLE
+v2, groups l2 / dk / dr / l1a / l1b (the drive and every member it rides on), **all 1337 frames**, 2023 s
+(`check/v2_clips_every_frame.json`):
+
+| part (v2 as built) | min signed distance (mm) | where | frames inside | frames < 0.3 mm |
+|---|---|---|---|---|
+| **D9-01 lobe ring** | **+0.442** | Raise overhead 78 | **0** | **0** |
+| link 1a bar (D8-02a) | +1.130 | Raise overhead 78 | 0 | 0 |
+| link 2 bar (D8-03) | +1.706 | Reach back pocket 99 | 0 | 0 |
+| J2 cap | +2.250 | Raise overhead 102 | 0 | 0 |
+| link 1b bar (D8-02b) | +2.358 | Raise overhead 134 | 0 | 0 |
+| pushrod D9-03 | +4.750 | Raise overhead 78 | 0 | 0 |
+| every other part of these groups (igubals, bell crank, roller, clips, pins, post, horn set, bearings, dowels) | >= +5.18 | | 0 | 0 |
+
+The claim (`lobe_skin.py real all`, the re-made ring, profile points only): +0.409 mm at Raise overhead 78, r 12.2.
+Same frame, same place, 0.03 mm apart (different samples). **The lobe fix holds on the as-built part.** It is still the
+nearest metal on the design to the skin, with link 1a's bar next at 1.13 mm.
 
 **(b) The judges' score_design.py on v2** (BANDS 10,14, step 3, a scratch copy of the design dir so the tree was not
 written):
 
-SCORE_TABLE
+| | stored v2 scorecard (the claim) | my re-run | gen-5 (stored) |
+|---|---|---|---|
+| R1 (2-14 mm) | 80.17 % | **80.17 %** (0.801734, bit-identical) | 80.30 % |
+| R1-aim (2-10 mm) | 49.77 % | **49.77 %** (identical) | 49.80 % |
+| R4 Raise overhead | 74.06 %, min gap 0.719 | **74.06 %, min gap 0.719** | 73.83 %, min gap 0.242 |
+| Comb hair | 86.28 % | 86.28 % | 87.11 % |
+
+Every clip's score and min gap match to the last digit (`check/v2_score_1{0,4}mm_rerun.json`). The judges' R4 min gap
+(0.72) is unsigned and reads covered skin samples only; the signed number is section 1(a)'s +0.44.
 
 ## 2. The failure cost reproduces (one case)
 

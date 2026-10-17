@@ -1,0 +1,300 @@
+{
+ "design": "pipeline/full-exo/designs/user_geneva_rod",
+ "step": 1,
+ "frames": 181,
+ "seconds": 139,
+ "parts": {
+  "l2|D9-01 drive lobe ring: 17-4PH H900, wire-EDM, the exact RSSR profile r 10.74 -> 12.87 mm (8 3-point arcs), R3 concave into the O20.2 dwell, bore O18 on link 2's turned ring, keyed by an O1 dowel at the onset q2 -5.011 deg, F+6.15..F+8.75": {
+   "min_sd": -0.23,
+   "where": [
+    "Raise overhead",
+    78,
+    [
+     -40.73,
+     9.43,
+     -56.36
+    ]
+   ],
+   "frames_neg": 43,
+   "frames_lt03": 51
+  },
+  "l2|J2 cap O20, torispherical dome R63.6 / R1 (tangent arcs), threaded M18x0.5 (Ti-6Al-4V)": {
+   "min_sd": 2.25,
+   "where": [
+    "Raise overhead",
+    102,
+    [
+     -40.8,
+     13.28,
+     -57.31
+    ]
+   ],
+   "frames_neg": 0,
+   "frames_lt03": 0
+  },
+  "l2|D8-03 link 2: 8x3 bar on a line/arc chain + J2 / J3 O20 rings, J2 dowel hole, upper ring turned to O18 over F+6.15..8.95 for the lobe ring, flies over the knee and the pad (machined from solid Ti-6Al-4V (2.5-D: 4 side-view sketches side by side of lines + tangent arcs through the model's strap stations, extruded 2 mm; 3+2-axis milling - a wire cannot cut strips of different profiles side by side), rounds R2 / R0.5 in the profile)": {
+   "min_sd": 2.517,
+   "where": [
+    "Raise overhead",
+    78,
+    [
+     -38.34,
+     11.74,
+     -53.84
+    ]
+   ],
+   "frames_neg": 0,
+   "frames_lt03": 0
+  },
+  "dr|D9-03 drive pushrod: Ti-6Al-4V dog-bone, O3 shank, centres 36.94 +- 0.02 mm, two O13 x 4 eyes": {
+   "min_sd": 5.066,
+   "where": [
+    "Raise overhead",
+    102,
+    [
+     -35.98,
+     34.42,
+     -72.51
+    ]
+   ],
+   "frames_neg": 0,
+   "frames_lt03": 0
+  },
+  "dr|drive igubal housing at the crank (iglidur, pressed, KGLM-03 class O10)": {
+   "min_sd": 6.565,
+   "where": [
+    "Raise overhead",
+    78,
+    [
+     -35.99,
+     35.32,
+     -71.31
+    ]
+   ],
+   "frames_neg": 0,
+   "frames_lt03": 0
+  },
+  "l2|J2 bearing 2 MR117-2RS 7x11x3": {
+   "min_sd": 6.76,
+   "where": [
+    "Raise overhead",
+    78,
+    [
+     -41.48,
+     16.9,
+     -54.7
+    ]
+   ],
+   "frames_neg": 0,
+   "frames_lt03": 0
+  },
+  "l2|J2 outer spacer 17-4PH": {
+   "min_sd": 6.941,
+   "where": [
+    "Raise overhead",
+    102,
+    [
+     -39.97,
+     15.8,
+     -52.32
+    ]
+   ],
+   "frames_neg": 0,
+   "frames_lt03": 0
+  },
+  "l2|J2 bearing 1 MR117-2RS 7x11x3": {
+   "min_sd": 6.978,
+   "where": [
+    "Raise overhead",
+    78,
+    [
+     -39.61,
+     15.62,
+     -51.87
+    ]
+   ],
+   "frames_neg": 0,
+   "frames_lt03": 0
+  },
+  "l2|J2 stop dowel: ISO 8734 O3 x 6 m6 hardened (stock length), faced to 5.65 mm (q2 stops -21.81 / 93.40 deg), pressed 3 mm in the J2 upper boss, polished; stop push limit 4.3 N.m (J2 MR117 pair s0 1.0)": {
+   "min_sd": 7.018,
+   "where": [
+    "Raise overhead",
+    102,
+    [
+     -42.71,
+     13.86,
+     -41.66
+    ]
+   ],
+   "frames_neg": 0,
+   "frames_lt03": 0
+  },
+  "dk|drive igubal ball at the crank (iglidur, KGLM-03 class)": {
+   "min_sd": 8.113,
+   "where": [
+    "Raise overhead",
+    78,
+    [
+     -35.37,
+     34.79,
+     -69.0
+    ]
+   ],
+   "frames_neg": 0,
+   "frames_lt03": 0
+  },
+  "dk|drive crank pin clip DIN 6799 RS 2.3 (polished)": {
+   "min_sd": 8.545,
+   "where": [
+    "Raise overhead",
+    102,
+    [
+     -36.54,
+     37.46,
+     -70.42
+    ]
+   ],
+   "frames_neg": 0,
+   "frames_lt03": 0
+  },
+  "dk|D9-02 drive bell crank (Ti-6Al-4V): tube O10 on the post, follower arm 9.00 mm, crank arm 9.00 mm + crank-pin boss tilted 29.0 deg (square to the rod)": {
+   "min_sd": 9.027,
+   "where": [
+    "Raise overhead",
+    78,
+    [
+     -34.21,
+     33.63,
+     -67.04
+    ]
+   ],
+   "frames_neg": 0,
+   "frames_lt03": 0
+  },
+  "dk|drive crank pin O3 h6 hardened (polished)": {
+   "min_sd": 10.037,
+   "where": [
+    "Raise overhead",
+    102,
+    [
+     -36.76,
+     38.72,
+     -69.49
+    ]
+   ],
+   "frames_neg": 0,
+   "frames_lt03": 0
+  },
+  "l2|J3 bearing 1 MR117-2RS 7x11x3": {
+   "min_sd": 10.471,
+   "where": [
+    "Raise overhead",
+    0,
+    [
+     -11.51,
+     -39.05,
+     77.72
+    ]
+   ],
+   "frames_neg": 0,
+   "frames_lt03": 0
+  },
+  "dk|drive follower roller MR63ZZ 3x6x2.5 (polished)": {
+   "min_sd": 11.629,
+   "where": [
+    "Raise overhead",
+    141,
+    [
+     -39.24,
+     45.74,
+     -30.97
+    ]
+   ],
+   "frames_neg": 0,
+   "frames_lt03": 0
+  },
+  "dk|drive roller pin O3 h6 hardened (polished)": {
+   "min_sd": 12.278,
+   "where": [
+    "Raise overhead",
+    102,
+    [
+     -32.79,
+     26.8,
+     -57.94
+    ]
+   ],
+   "frames_neg": 0,
+   "frames_lt03": 0
+  },
+  "l2|J3 outer spacer 17-4PH": {
+   "min_sd": 13.293,
+   "where": [
+    "Raise overhead",
+    0,
+    [
+     -11.79,
+     -39.64,
+     80.65
+    ]
+   ],
+   "frames_neg": 0,
+   "frames_lt03": 0
+  },
+  "dk|drive bell crank bearing 1 MR85ZZ 5x8x2.5": {
+   "min_sd": 13.772,
+   "where": [
+    "Raise overhead",
+    37,
+    [
+     -35.87,
+     51.07,
+     -21.22
+    ]
+   ],
+   "frames_neg": 0,
+   "frames_lt03": 0
+  },
+  "l2|J3 cap O20, torispherical dome R63.6 / R1 (tangent arcs), threaded M18x0.5 (Ti-6Al-4V)": {
+   "min_sd": 13.851,
+   "where": [
+    "Raise overhead",
+    0,
+    [
+     -12.4,
+     -44.58,
+     81.81
+    ]
+   ],
+   "frames_neg": 0,
+   "frames_lt03": 0
+  },
+  "l2|J3 bearing 2 MR117-2RS 7x11x3": {
+   "min_sd": 13.857,
+   "where": [
+    "Raise overhead",
+    0,
+    [
+     -11.85,
+     -39.75,
+     81.24
+    ]
+   ],
+   "frames_neg": 0,
+   "frames_lt03": 0
+  },
+  "dr|drive igubal housing at the horn (iglidur, pressed, KGLM-03 class O10)": {
+   "min_sd": 99.0,
+   "where": null,
+   "frames_neg": 0,
+   "frames_lt03": 0
+  },
+  "dk|drive bell crank bearing 2 MR85ZZ 5x8x2.5 (wave-washer preloaded)": {
+   "min_sd": 99.0,
+   "where": null,
+   "frames_neg": 0,
+   "frames_lt03": 0
+  }
+ }
+}
