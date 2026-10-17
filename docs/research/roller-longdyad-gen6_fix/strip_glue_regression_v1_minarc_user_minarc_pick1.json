@@ -1,0 +1,44 @@
+[
+ {
+  "part": "D8-02a link 1a: 8x3 bar on a line/arc chain, J1 / K pads + i",
+  "valid": true,
+  "step_bad_faces": 0,
+  "zero_area": 0,
+  "solids_after_step": 1
+ },
+ {
+  "part": "D8-02b link 1b: 8x3 bar on a line/arc chain, K upper pad + O",
+  "valid": true,
+  "step_bad_faces": 0,
+  "zero_area": 0,
+  "solids_after_step": 1
+ },
+ {
+  "part": "K stop dowel 1 of 2: ISO 8734 O3 x 6 m6 hardened (stock leng",
+  "valid": true,
+  "step_bad_faces": 0,
+  "zero_area": 0,
+  "solids_after_step": 1
+ },
+ {
+  "part": "K stop dowel 2 of 2: ISO 8734 O3 x 6 m6 hardened (stock leng",
+  "valid": true,
+  "step_bad_faces": 0,
+  "zero_area": 0,
+  "solids_after_step": 1
+ },
+ {
+  "part": "J2 stop dowel: ISO 8734 O3 x 6 m6 hardened (stock length), f",
+  "valid": true,
+  "step_bad_faces": 0,
+  "zero_area": 0,
+  "solids_after_step": 1
+ },
+ {
+  "part": "D8-03 link 2: 8x3 bar on a line/arc chain + J2 / J3 O20 ring",
+  "valid": true,
+  "step_bad_faces": 0,
+  "zero_area": 3,
+  "solids_after_step": 1
+ }
+]

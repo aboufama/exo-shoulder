@@ -1,0 +1,58 @@
+[
+ {
+  "tag": "ib-attr3-attr_k30_parent_bench",
+  "cmd": "mkdir -p docs/research/inband_drive/farm/attr3 && python3 docs/concepts/models/inband-rssr-knuckle-3r.py claims '[{\"tag\": \"attr_k30_parent_bench\", \"mode\": \"attr\", \"which\": \"bench\", \"params\": {\"La\": 25.7026, \"s_arm\": 4.0, \"r_h\": 15.491, \"beta\": -147.3923, \"gam\": 22.4633, \"hl\": 2.929, \"zr\": 2.091, \"r_lobe\": 8.5, \"bk1\": 30.0377, \"bk2\": 42.9378, \"a1max\": 67.9755, \"smhi\": 15.2738, \"kK\": 3.0}}]' docs/research/inband_drive/farm/attr3 > docs/research/inband_drive/farm/attr3/attr_k30_parent_bench.run.log 2>&1; tail -c 2500 docs/research/inband_drive/farm/attr3/attr_k30_parent_bench.log",
+  "out": [
+   "docs/research/inband_drive/farm/attr3/attr_k30_parent_bench*"
+  ],
+  "env": {
+   "OMP_NUM_THREADS": "1",
+   "IGL_NUM_THREADS": "1",
+   "LS_DRIVE": "rssr",
+   "CB_QUIET_EXACT": "1"
+  },
+  "timeout": 3000
+ },
+ {
+  "tag": "ib-attr3-attr_k30_parent_held",
+  "cmd": "mkdir -p docs/research/inband_drive/farm/attr3 && python3 docs/concepts/models/inband-rssr-knuckle-3r.py claims '[{\"tag\": \"attr_k30_parent_held\", \"mode\": \"attr\", \"which\": \"held\", \"params\": {\"La\": 25.7026, \"s_arm\": 4.0, \"r_h\": 15.491, \"beta\": -147.3923, \"gam\": 22.4633, \"hl\": 2.929, \"zr\": 2.091, \"r_lobe\": 8.5, \"bk1\": 30.0377, \"bk2\": 42.9378, \"a1max\": 67.9755, \"smhi\": 15.2738, \"kK\": 3.0}}]' docs/research/inband_drive/farm/attr3 > docs/research/inband_drive/farm/attr3/attr_k30_parent_held.run.log 2>&1; tail -c 2500 docs/research/inband_drive/farm/attr3/attr_k30_parent_held.log",
+  "out": [
+   "docs/research/inband_drive/farm/attr3/attr_k30_parent_held*"
+  ],
+  "env": {
+   "OMP_NUM_THREADS": "1",
+   "IGL_NUM_THREADS": "1",
+   "LS_DRIVE": "rssr",
+   "CB_QUIET_EXACT": "1"
+  },
+  "timeout": 3000
+ },
+ {
+  "tag": "ib-attr3-attr_k30_ear_bench",
+  "cmd": "mkdir -p docs/research/inband_drive/farm/attr3 && python3 docs/concepts/models/inband-rssr-knuckle-3r.py claims '[{\"tag\": \"attr_k30_ear_bench\", \"mode\": \"attr\", \"which\": \"bench\", \"params\": {\"La\": 25.7026, \"s_arm\": 4.0, \"r_h\": 15.491, \"beta\": -147.3923, \"gam\": 22.4633, \"hl\": 2.929, \"zr\": 2.091, \"r_lobe\": 8.5, \"bk1\": 30.0377, \"bk2\": 42.9378, \"a1max\": 67.9755, \"smhi\": 15.2738, \"kK\": 3.0, \"clay\": 1}}]' docs/research/inband_drive/farm/attr3 > docs/research/inband_drive/farm/attr3/attr_k30_ear_bench.run.log 2>&1; tail -c 2500 docs/research/inband_drive/farm/attr3/attr_k30_ear_bench.log",
+  "out": [
+   "docs/research/inband_drive/farm/attr3/attr_k30_ear_bench*"
+  ],
+  "env": {
+   "OMP_NUM_THREADS": "1",
+   "IGL_NUM_THREADS": "1",
+   "LS_DRIVE": "rssr",
+   "CB_QUIET_EXACT": "1"
+  },
+  "timeout": 3000
+ },
+ {
+  "tag": "ib-attr3-attr_k30_earrad_bench",
+  "cmd": "mkdir -p docs/research/inband_drive/farm/attr3 && python3 docs/concepts/models/inband-rssr-knuckle-3r.py claims '[{\"tag\": \"attr_k30_earrad_bench\", \"mode\": \"attr\", \"which\": \"bench\", \"params\": {\"La\": 25.7026, \"s_arm\": 4.0, \"r_h\": 15.491, \"beta\": -147.3923, \"gam\": 22.4633, \"hl\": 2.929, \"zr\": 2.091, \"r_lobe\": 8.5, \"bk1\": 30.0377, \"bk2\": 42.9378, \"a1max\": 67.9755, \"smhi\": 15.2738, \"kK\": 3.0, \"clay\": 1, \"bl_c\": 2}}]' docs/research/inband_drive/farm/attr3 > docs/research/inband_drive/farm/attr3/attr_k30_earrad_bench.run.log 2>&1; tail -c 2500 docs/research/inband_drive/farm/attr3/attr_k30_earrad_bench.log",
+  "out": [
+   "docs/research/inband_drive/farm/attr3/attr_k30_earrad_bench*"
+  ],
+  "env": {
+   "OMP_NUM_THREADS": "1",
+   "IGL_NUM_THREADS": "1",
+   "LS_DRIVE": "rssr",
+   "CB_QUIET_EXACT": "1"
+  },
+  "timeout": 3000
+ }
+]

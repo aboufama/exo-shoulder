@@ -50,14 +50,17 @@ def table(M, B, reg=None):
     labs = contact_labels(M, reg); rows = {}
     for i in range(len(B.idx)):
         if B.res[i] is None: continue                       # not kinematically valid / part clash: no metal recorded
-        rig = {nm: B.dist(i, M.world(m, i, X)) for nm, (m, X) in M.rigid.items() if len(X)}
-        con = {}
-        for (m, X), lab in zip(M.contact, labs):
-            if not len(X): continue
-            d = B.dist(i, M.world(m, i, X)); k0 = 0
-            for nm, n in lab:
+        # ONE distance call per pose (the exact path costs per call), split back by part
+        blocks = [(("R", nm), M.world(m, i, X)) for nm, (m, X) in M.rigid.items() if len(X)]
+        blocks += [(("C", j), M.world(m, i, X)) for j, (m, X) in enumerate(M.contact) if len(X)]
+        dd = B.dist(i, np.concatenate([X for _, X in blocks])); k = 0; rig = {}; con = {}
+        for (typ, key), X in blocks:
+            d = dd[k:k + len(X)]; k += len(X)
+            if typ == "R": rig[key] = d; continue
+            k0 = 0
+            for nm, n in labs[key]:
                 if n > 0: con.setdefault(nm, []).append(d[k0:k0 + n]); k0 += n
-        rows[i] = (rig, {k: np.concatenate(v) for k, v in con.items()})
+        rows[i] = (rig, {kk: np.concatenate(v) for kk, v in con.items()})
     return rows
 
 
