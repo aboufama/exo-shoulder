@@ -44,7 +44,7 @@ gen-6 CAD did or the model assumed, each cheap:
    **236-282 MPa**. Combined tilt between nose axis and flank rulings must stay <= ~5 um over the 2.2 mm line (0.13 deg):
    p0 <= 800 MPa.
 2. **A K lead of +0.75 deg must be built in** (lobe-ring dowel phase +0.35 deg of q2 early), because the held-out fold
-   margin is 5.006: a K lag of only 0.07 deg puts a held-out pose under 5, and the drive's systematic lag is 0.42-0.53 deg
+   margin is 5.006: a K lag of only 0.08 deg puts a held-out pose under 5, and the drive's systematic lag is 0.42-0.53 deg
    with +-0.24 deg random. The +-0.02 mm flank tolerance alone is +-0.08 deg of K.
 3. **Coat the nose too** (same a-C:H batch) and grease at assembly. Uncoated 440C against DLC is the wearing member: 26 um at
    one spot of the nose after 1e6 dry cycles (2.6 um greased), because the contact dwells at a turning point on the nose.
