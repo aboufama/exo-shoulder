@@ -234,7 +234,13 @@ More from the frozen wear:
 - Min th margin 5.00, min sub-chain margin 5.57. q0 range -36.5..44.0.
 - Per member in band: hub 2 0.057, link 1 0.23, link 2 0.05.
 - For reference: the lead is 18.49, and the champion through the same checks is 66.97-75.94.
-@@T0@@
+
+**Control, same shape with T 0 (J0 locked = plain O20 3R), frozen exact:** 56.40 plain / 58.56 near-touch, reach 0.742,
+overhead 10 / 28, ib14 0.502, contact 0.008.
+
+On the big bench the relay is worth **4.57 gap points**: +17 ws poses of reach, **0 overhead poses**, and in-band
+unchanged. The relay poses are stretched / IR-across poses, not overhead. Where the folded overhead poses are
+lost, J2's stop sub-chain cannot relay them at margin 5.
 
 ## Verdict
 
@@ -254,7 +260,8 @@ What the class taught (new knowledge, beyond this morphology):
    - The relay engages only where J2 is on a stop.
    - The plain 3R's in-band binder (hub 2 / links 1-2 out at 124-128 mm) is set by mode-A poses: behind the body
      with ER, and overhead in the scapular plane. The spring holds J0 at rest there.
-   - So reach +0.09 (8.8 gap points), in-band +0.001. The twin spring, which moves J0 everywhere, costs hub 1 / link 0
+   - So reach +0.09 on the fit bench (8.8 gap points), and +0.047 frozen exact (4.6 points, 0 overhead poses);
+     in-band +0.001. The twin spring, which moves J0 everywhere, costs hub 1 / link 0
      in-band and loses 3-13 points.
    - This bounds pinknee-scapular-relay-4r too. The relay can add at most the host's fold-limited reach. Whether
      that survives depends on the host's hub 2 staying at its own level on the relay poses (the judge's 0.53-0.68
