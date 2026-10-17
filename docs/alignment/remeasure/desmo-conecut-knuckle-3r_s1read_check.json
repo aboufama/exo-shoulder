@@ -1,0 +1,186 @@
+[
+ {
+  "cell": "claim",
+  "ov": {},
+  "gap": 19.1,
+  "plain": 13.31,
+  "reach": 0.775,
+  "dK_lim": 46.5,
+  "why_lim": "slot-end",
+  "s1_linear": {
+   "pa_pin_max": 33.74,
+   "pa_cap_max": 35.05,
+   "pa_gate": 34.47,
+   "lim_by_gate": {
+    "pitch": 52.5,
+    "pa_pin": 47.5,
+    "pa_cap": 0.0,
+    "drift": null,
+    "radius": 0.25
+   }
+  },
+  "s1_built": {
+   "read": "built",
+   "half_blend_K_deg": 10.767,
+   "pin_max_moving": 62.07,
+   "cap_max_outside_blend": 54.17,
+   "cap_inside_blend": [
+    28.47,
+    89.98
+   ],
+   "pin_first_fail_K": 47.504,
+   "cap_first_fail_K": 58.529,
+   "note": "cap side gated for x >= half-blend (outside the blend); inside it the cap side is the dwell lock (reported) - a re-reading of desmo-slipper's linear-law gate, stated for the auditor"
+  },
+  "s2_lim_pa_by_mu": {
+   "0.087": 64.5,
+   "0.120": 64.5,
+   "0.135": 64.5,
+   "0.150": 64.5,
+   "0.200": 61.0
+  },
+  "secs": 6.4
+ },
+ {
+  "cell": "claim_linear_mu15",
+  "ov": {
+   "s1_read": "linear"
+  },
+  "gap": 95.61,
+  "plain": 86.52,
+  "reach": 0.3438,
+  "dK_lim": 0.0,
+  "why_lim": "s1-pa-cap",
+  "s1_linear": {
+   "pa_pin_max": 26.15,
+   "pa_cap_max": 35.05,
+   "pa_gate": 34.47,
+   "lim_by_gate": {
+    "pitch": 52.5,
+    "pa_pin": 47.5,
+    "pa_cap": 0.0,
+    "drift": null,
+    "radius": 0.25
+   }
+  },
+  "s1_built": {
+   "read": "linear",
+   "half_blend_K_deg": 10.767,
+   "pin_max_moving": 62.07,
+   "cap_max_outside_blend": 54.17,
+   "cap_inside_blend": [
+    28.47,
+    89.98
+   ],
+   "pin_first_fail_K": 47.504,
+   "cap_first_fail_K": 58.529,
+   "note": "cap side gated for x >= half-blend (outside the blend); inside it the cap side is the dwell lock (reported) - a re-reading of desmo-slipper's linear-law gate, stated for the auditor"
+  },
+  "s2_lim_pa_by_mu": {
+   "0.087": 64.5,
+   "0.120": 64.5,
+   "0.135": 64.5,
+   "0.150": 64.5,
+   "0.200": 61.0
+  },
+  "secs": 3.3
+ },
+ {
+  "cell": "claim_linear_mu135",
+  "ov": {
+   "s1_read": "linear",
+   "mu": 0.135
+  },
+  "gap": 19.1,
+  "plain": 13.31,
+  "reach": 0.775,
+  "dK_lim": 46.5,
+  "why_lim": "slot-end",
+  "s1_linear": {
+   "pa_pin_max": 33.74,
+   "pa_cap_max": 35.05,
+   "pa_gate": 35.31,
+   "lim_by_gate": {
+    "pitch": 52.5,
+    "pa_pin": 48.75,
+    "pa_cap": 59.0,
+    "drift": null,
+    "radius": 0.25
+   }
+  },
+  "s1_built": {
+   "read": "linear",
+   "half_blend_K_deg": 10.767,
+   "pin_max_moving": 62.07,
+   "cap_max_outside_blend": 54.17,
+   "cap_inside_blend": [
+    28.47,
+    89.98
+   ],
+   "pin_first_fail_K": 48.538,
+   "cap_first_fail_K": 58.831,
+   "note": "cap side gated for x >= half-blend (outside the blend); inside it the cap side is the dwell lock (reported) - a re-reading of desmo-slipper's linear-law gate, stated for the auditor"
+  },
+  "s2_lim_pa_by_mu": {
+   "0.087": 64.5,
+   "0.120": 64.5,
+   "0.135": 64.5,
+   "0.150": 64.5,
+   "0.200": 61.0
+  },
+  "secs": 5.8
+ },
+ {
+  "cell": "cellA_built_mu15",
+  "ov": {
+   "stage2": "A"
+  },
+  "gap": 95.62,
+  "plain": 86.44,
+  "reach": 0.3438,
+  "dK_lim": 0.0,
+  "why_lim": "flank_cusp",
+  "s1_linear": {
+   "pa_pin_max": 26.15,
+   "pa_cap_max": 35.05,
+   "pa_gate": 34.47,
+   "lim_by_gate": {
+    "pitch": 52.5,
+    "pa_pin": 47.5,
+    "pa_cap": 0.0,
+    "drift": null,
+    "radius": null
+   }
+  },
+  "s1_built": {},
+  "s2_lim_pa_by_mu": null,
+  "secs": 3.4
+ },
+ {
+  "cell": "cellA_built_mu087",
+  "ov": {
+   "stage2": "A",
+   "mu": 0.087
+  },
+  "gap": 95.62,
+  "plain": 86.44,
+  "reach": 0.3438,
+  "dK_lim": 0.0,
+  "why_lim": "flank_cusp",
+  "s1_linear": {
+   "pa_pin_max": 26.15,
+   "pa_cap_max": 35.05,
+   "pa_gate": 38.03,
+   "lim_by_gate": {
+    "pitch": 52.5,
+    "pa_pin": 51.5,
+    "pa_cap": 59.75,
+    "drift": null,
+    "radius": null
+   }
+  },
+  "s1_built": {},
+  "s2_lim_pa_by_mu": null,
+  "secs": 2.9
+ }
+]
