@@ -39,3 +39,45 @@ crank's tip. Cell A (the desmo stage 2 unchanged) is the measured control; cell 
    * The red-team list: rest, overhead, across the body, behind the back, the stretched-wall poses at dK ~46, the
      closed end of the slot (stop A) and the slot's far end (stop B).
 
+## What was built
+
+docs/concepts/models/desmo-conecut-knuckle-3r.py loads desmo-slipper-knuckle-3r.py (which loads the verified lead
+slipper-nose-knuckle-3r, SN_CELL=lead) unchanged. It then adds three things:
+
+* conecut's J3 dowel stop on q3' = q3 + knee phi;
+* conecut's verified knee (lE 97.14, lc 24.35, phiE 0.75, phib -91.80, ang_min 25.22, MR63ZZ stk 6.0);
+* a cell switch `stage2`.
+
+**Cell A** (`stage2 "A"`) is desmo-slipper's drive unchanged: the lead's flank lug band plus desmo's outer wall, with the
+nose on the crank. It reproduces the proposer's fast plain gap exactly: 13.18 (reach 0.775, ib14 0.8932, dK_lim 49.75,
+pressure_horn).
+
+**Cell B** (`stage2 "B"`, the claim cell) inverts stage 2:
+
+* The parent's flank synthesis still builds the crank arm, the K grid and the crank-vs-hub clearances. Its flank-only
+  gates are switched off (flank PA, lift-off, cusp, contact-off-lug, roller-vs-hub K). The flank lug band, desmo's outer
+  wall and the crank-borne nose are deleted, both as metal and as contact / strap entries.
+* The nose is pressed in a boss on link 1a at the drive's contact seat C0 (beta, r_c). The boss is an O(2 boss_r) x 3
+  disc on the lug sphere, rooted to hub K's rim. Its path in the crank frame, Z = Rc^T Rk^T C0, is the slot. The slot
+  is cut in a Ti plate at the crank's arm-tip layer (underside R0 + 1.65), as a stadium of half-width
+  nose_r2 + c_slot2 + wall2 around Z.
+* Gates, per 0.25 deg of K:
+  * both pressure angles at the nose centre <= 43 - atan(mu) (`wall2B-pa`);
+  * the slot is cut to `kslot`, and its far end is stop B (`slot-end`);
+  * plate vs hub K and hub 2 >= 1.0 mm (`PLATE-hubK` / `PLATE-hub2`);
+  * crank low arm vs boss >= 1.0 mm (`CRK-BOSS`, also checked per pose by the parent's collide());
+  * boss vs hub K's O20: rK(C0) - boss_r >= 11 (`boss-hubK`).
+* The built pocket is the union of nose discs (nose_r2 + 0.01) along the 0.02-deg path. With the crank held, K is
+  bisected for the slop (gate 0.25 deg). The exit direction is the contact normal, so the pressure angles are read on
+  the pocket itself (`pocket-pa`, gate 43 - atan(mu) for K0 >= 0.5; K0 = 0 is stop A and is reported).
+* **Stage 1 is read on the BUILT blended groove** (`s1_read "built"`, the default in cell B). This is a measurement
+  change for the auditor, made as the planner's gate (a) asks:
+  * the forward (pin-side) pressure angle is gated wherever the pin moves (K > 0);
+  * the cap side is gated outside the blend (x >= half-blend);
+  * inside the blend the cap side is the dwell lock (up to 90 deg) and is reported, not gated.
+
+  `s1_read "linear"` restores desmo-slipper's reading. Measured at the verified a_s 9.5 / psi 150 under that reading:
+  stage 1's cap side is 35.25 deg at the dwell exit, which fails at mu 0.15 at K 0, for both cell A (sweep k 55) and
+  cell B (k 59). At a_s 9.0 / psi 154, stage 1 passes the linear reading at mu 0.15, but cell A's flank then binds at
+  dK 43.25 (fast plain 15.13, k 58; the proposer's number).
+
