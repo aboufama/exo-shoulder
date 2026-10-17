@@ -2572,3 +2572,89 @@ fixed races, base-side spares / relays on O20 hosts with a1 >= 40.
   - fix the simplicity mechanism records for acromion-relay-4r and pinknee-scapular-relay-4r;
   - relabel skin-normal-3r-pin-knee's row to 23.64 under the current checks;
   - every claim message's numbers come from the row file.
+
+## Round 102 plan (Round J2, track jump; 2026-10-17 ~20:00 UTC, lead verified gap 18.28)
+
+### State
+
+- **Lead (best verified, not gamed): conecut-knee-knuckle-3r 18.28** (score 93.35) frozen exact Bench(110,360), held
+  22.38, reach 0.7278 (262/360), ib14 0.9012, follow 1.0, contact 0.0106, overhead 8/28, cx 18.5. Ledger WATCH:
+  bench edge mostly E-strap dilution (18.67 at equal strap), T5 contact depth unscored (bench 4 poses / 20.24 mm), held
+  th margin 5.006, NEW-self-reference (T5 reference is now this row), reporting (sweep 12.5 shown as 95.45). Next:
+  slipper-nose 18.49, desmo-slipper 18.95 (cx 15.75, friction cliff at mu 0.14). Gamed: dipped-law-groove (fold margin
+  0.184), seed-offset-3r-slides. Lenses must not buy points through unscored depth, a margin read in another angle,
+  strap dilution or a per-pose policy without the continuity flood.
+- **The 95 arithmetic, corrected** (gap_of, tools/concept_bench.py line 53): at the lead's ib14 0.90 and contact 0.0106,
+  95 needs reach 0.7731 (279/360, +17 poses); at ib14 0.88 and 0 contact, 0.7825 (282/360). The J1 closer's
+  "0.8025 / 289" carries a 2-point slip.
+- **Planner measurement (Bench(110,360) ws, closure at the 5-deg margin, no metal, no flood; 1 min):** the plain 3R's
+  KINEMATIC reach, an upper bound on the hub-2-free ceiling at fixed dyads. Back seat bvec(97.3, 64.6) 41.7/72.1:
+  250/360 (0.694; folded 44, stretched 66) -> gap >= 20.6 at perfect in-band: dead for 95 whatever hub 2 does. Cap pole
+  J1 bvec(43.2, 59.9) 50.2/60.3, J3 wdir(92.0, -9.0): 281/360 (0.781; folded 8, stretched 71) -> gap >= 11.9; the same
+  seats with metal frozen read 267/360 (T-0 control 56.40). Best-placed th window at the cap seats: W 90 -> 0.803,
+  W 100 -> 0.844, W 110 -> 0.878, W 120 -> 0.911 (W = 2 min(a1, a2) - 10). So 95 is open at the cap pole only with a
+  window >= ~95 deg (min(a1, a2) >= ~53) AND J2 metal that is in band - exactly what every revolute J2 has failed.
+- **Why a revolute J2 fails there:** at the cap pole hub 2's level is set by mode-A poses whose J2 ray exits the
+  deltoid / acromion skin 107-116 mm from GH ((-75, 60, +60) 116; (0..30, 150, 0) 107-113; (0, 105, 0) 110): metal ON
+  the J2 axis must sit there. Over 668 cap-pole configs hub 2 <= 0.12 in band, ib14 <= 0.68. A radial per-pose lift
+  does not escape it: by the manufacturable-joints rule a skin-normal slide stands up by travel + block, so a ~45 mm
+  lift rides 60 mm tall at every pose. The lever left is a J2 with NO metal on its axis (virtual J2).
+- **Virtual J2, what is on file (round 1-2, FINDINGS ~line 975):** virtual-pole-4bar-j2 at zc seats 52/70: a link-1 pin
+  28 mm off the w-line parks 0.958 in band at 53 mm, a link-2 pin 0.969 at 63 mm (hub 2 on the ray: 0.03 at 123 mm).
+  It died at 103.68 (22 configs, "not a ceiling yet"; coarse 145.94 vs plain 51.97) because the crank / knee PLATES
+  were swept round the virtual axis at one level (94 mm, 0 % in band). The four-bar SHIFTS the fold window (span 81.9 vs
+  80.7), it does not widen it. Arc-rail and ring J2s are dead (j2-arc-sector 66.3, annular-ring 77.99).
+- **Main track measurement to build on, not duplicate:** proximal-j3-geodesic-knuckle-3r (J3 seat up the lateral
+  deltoid, knuckle ghost with an ideal drive): 11.44 fast (reach 0.806, ib14 0.905) after a knee re-fit; frozen exact
+  16.72 unrefit. First evidence that a J3 seat move takes poses; it still carries the knuckle drive.
+- **Dead classes (J1, closed in the catalogue):** rigid arm-encircling parts (>= 72.2 with ideal stops); 2R pointer +
+  arm-axial J3 and pointing-frame spars (hub 2 0-0.03 in band; sleeve ghost 101.02); arm-fixed races (ghost 44.53);
+  base-side spares / relays on O20 hosts with a1 >= 40 (reach only: ghost 18.30 / 18.62; acromion-relay +17 ws, ib
+  +0.001). Knuckle drive / law / flank / lobe variants belong to neither lens here (track rule).
+- **Machinery (open, the lead's or the first free agent's, before the next claim):** verify template's bar -> 18.28
+  (still 68.93 + 10); build the local Bench(110,360) fast cache once, niced (`concept_bench --build 110 360`; 3 of 5
+  frozen wears died in J1's box); simplicity mechanism records for acromion-relay-4r (reads cx 0, 3 active; should be
+  4 active) and pinknee-scapular-relay-4r (tool 40.5 vs row 31.5); skin-normal-3r-pin-knee row -> 23.64 / 0.95 /
+  0.0343 under the current checks; every claim message's numbers come from its row file.
+- **Compute:** farm closed; local only, niced, <= 2 processes per agent, OMP_NUM_THREADS=1.
+
+### Lenses
+
+0. **Instrument first (30 min, no hardware; the J1 closer's step 1, now narrowed):** wear the cap-pole plain O20 3R
+   frozen exact on Bench(110,360) with hub 2 and links 1-2 removed (ideal), hub 1, hub 3 and the neck at their real
+   metal, the continuity flood on, at windows 90 / 100 / 110 (dyads 50/60, 55/65, 60/70, J3 re-fit per dyad on
+   Bench(60,160) fast). Report taken / 360, overhead / 28, contacts, losses by cause, and the per-pose J2-ray skin exit
+   (K3 march on the J2 ray): the share of taken poses whose J2 ray exits > 75 mm is the share no revolute J2 can serve.
+   Lenses 1-2 start on the current numbers and switch when this lands.
+1. **LENS virtual-j2 (reach >= 0.78 at ib14 >= 0.88; suggested id remote-pole-fourbar-j2-3r).** J2 as an OPEN
+   spherical four-bar (all four pin axes through GH) whose instant pole is the J2 axis and lies OUTSIDE the linkage, so
+   no metal sits on the J2 ray. The two link-1 pins and two coupler pins are O20 stacks parked on the low skin off the
+   ray (round 1: 0.958 / 0.969 in band at 53 / 63 mm). The cranks are 3 mm bent bars at their real height with climb
+   ramps (60 deg, inner radius >= 15 mm), never plates swept round the pole (round 1's death). Seats: the cap pole
+   (window >= 95). This is the orthotic polycentric hinge, built as orthotists build it: the pole path (centrode) is the
+   design variable. Gate 0 (30-45 min): ghost fit on Bench(60,160) fast, frozen exact Bench(110,360), all four pin
+   stacks + cranks as metal, continuity flood, transmission angle >= 30 deg over the taken J2 range. Bar: reach >= 0.80
+   or gap <= 15 with <= 4 contacts; > 17.5 dies with its number and the binding part. Report overhead / 28, min th margin
+   (in th, the coupler's effective J1-J3 angle), complexity (tools/simplicity.py: 1 closed loop + 2 bodies + 3 pins,
+   0 passive translations, no spring). Red team: the pose where the pole leaves the linkage's working range (the
+   four-bar's own fold), donning, crank flutter at the transmission limit.
+2. **LENS plain-crest-j3 (low complexity, cx ~0, at the same reach; suggested id cap-crest-j3-plain-3r, seeded by the
+   round-4 pick deltoid-crest-j3-3r).** A PLAIN O20 3R (three pins on bearing pairs, no drive, no knee spring, no lobe)
+   at the cap-pole / acromion-top seats with J3 moved up the lateral deltoid (the crest) - main round 13's measured
+   lever, without the knuckle. Question: how much of proximal-j3's 11.44 fast survives with a fixed a1 and a window
+   >= 95? Distinct from round 13 (knuckle drive, back-of-shoulder J1) and from deltoid-crest-j3's O15 seeds (26.35 fast
+   / 35.90 frozen; re-measure at O20). Gate 0 as lens 1; same bar. Per-pose table of the cap pole's binder poses
+   ((-75, 60, +60), (0..30, 150, 0), (0, 105, 0)) and every new loss. Red team: J3's stack on the deltoid crest under
+   abduction bulge; the near-gimbal-lock at the stretched wall.
+
+### Carried (ideated, never screened)
+
+- deltoid-crest-j3-3r (round-4 pick; lens 2's seed, re-measure at O20).
+- cruciate-knuckle-3r (crossed four-bar joints): only as lens 1's crossed cell with O20 pins (hubless rolling joints
+  stay out under "Keep O20 only"); round 1 measured the crossed knee plates at 0 % in band, so it runs only if the open
+  cell passes.
+
+### Elsewhere, not to be duplicated
+
+- Main round 13: proximal-j3-geodesic-knuckle-3r (CMA on the knuckle ghost), desmo-conecut-knuckle-3r (pre-registered
+  claim, cell B). Lead: generation-12 CAD (slipper-nose CAD + conecut knee + dowel).
