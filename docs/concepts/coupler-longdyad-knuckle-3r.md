@@ -97,3 +97,35 @@ puts its arm 55-110 deg sideways of link 1b; there the skin rises up to ~33 mm a
 drive is either in contact or off band. Bringing the arm back over link 1b's corridor (t1 ~25) keeps it in band only by
 shortening the PA-legal stroke to 60-65 deg - the stroke the lead already has. The long K dyad's window needs a drive
 that stays INSIDE link 1b's corridor (coaxial on u2 / uK, or stacked along link 1b), not beside it.
+
+## Audit (2026-10-17 12:26-12:50 UTC, auditor; death NOT refuted)
+
+**Verdict: the death stands.** Measured reason: the drive metal costs more than the long K dyad buys - frozen exact
+Bench(110,360) 23.87 vs the lead's 18.49 (+5 reach poses = -1.4 gap, against -3.9 in-band and +2.8 contact from the
+crank / coupler / horn), and every way out of the pick's corner is measured worse below.
+
+* **Reproduced** (Bench(60,160) fast, local, the row's frozen pick): plain gap 18.58 (reach 0.7812, follow 1.0, ib14
+  0.8542, contact 0.0212), near1 27.89, min metal 0.18 mm, drive in-band 0.697 (crank 0.723, coupler 0.626, horn 0.794),
+  dK_lim 65 (4R table, pressure), law end 'skirt' at dK 63, 1 K-open workspace drive contact. Same numbers as the row.
+* **Convergence gate re-read** (score points, plain gap): the full sweep in run order 2.15 / 1.45 / 0.39 (not passed:
+  five batches concatenated). Per CMA run: A 0.07 / 0.00 / 0.32, B 0.55 / 0.45 / 0.41, D 0.12 / 0.12 / 0.07 (passed);
+  C 1.45 / 0.00 / 0.39 - fails only the 2nd-half test (best at evaluation 195 of 321, nothing in the last 126). On the
+  CMA's own objective (near1 + 2 x K-open): C 2.93 / 0.00 / 0.77, D 0.99 / 0.53 / 0.26, as the row says.
+* **Bounds the pick presses** (cr_a1 34, cr_zr 8, r_base 11.2: all at their clamps) - re-measured past the clamps with
+  a relaxed clamp in a scratch harness (model file unchanged): cr_zr 8.5 / 9 / 10 / 12 / 14 -> 18.94 / 19.26 / 21.49 /
+  22.67 / 23.53 (drive in-band 0.678 -> 0.513: lifting the arm takes it off band); cr_a1 36 / 38 / 40 -> 22.73 / 27.16 /
+  39.32 (the PA-legal table shortens to dK 59.8 / 54 / 48); horn arc at the row's own floor a3 14.7 / 15.5 -> 21.17 /
+  21.13. No better region outside the clamps.
+* **The pick sits on a constraint edge**: cr_zr 7.9 -> 144.98 (reach 0.36): the crank arm passes over hub K's crown at
+  1.01 mm on 118 bench poses (pair CRK-hubK; 0.993 mm at 7.9 loses 116 poses to the 1 mm part rule). The optimum
+  is pinned between hub K's crown (below) and the band (above); 0.1 mm of build error in the arm's height is the
+  difference between 18.58 and 145.
+* **Kill-rule wording**: the sweep does hold configurations with drive in-band >= 0.755 and 0 K-open contacts (k 100,
+  108, 112, 120 ...), but all score gap >= 225 (the chain takes almost no frames). Among working configurations (gap < 60):
+  best drive in-band at <= 1 K-open contact 0.718 (k 1094, 19.25), at <= 2: 0.729 (k 1147, 31.97), at 0: 0.65 (k 1336,
+  22.94). The rule holds for every working configuration.
+* **Model read**: gap formula = concept_bench's 100 x (max(0, .90 - ib14) + max(0, .95 - follow) + max(0, .90 - reach)) + 100 x contact,
+  checked digit for digit; the drive parts are rigid metal in the pooled in-band, the skin contact and the part-part
+  checks (crank / coupler / horn vs hubs and links, CRK-hubK included); swept drive clearances + per-pose collide; K-open
+  contacts read on the bench's own distances. No modelling bug or convention error that inflates the gap was found. The
+  stated gaps stay: the lobe band itself is not sampled, the coarse batch's honest flags used the old crest rule.

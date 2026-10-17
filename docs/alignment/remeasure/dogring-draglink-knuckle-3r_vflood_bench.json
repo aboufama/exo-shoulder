@@ -1,0 +1,141 @@
+{
+ "design": "dogring-draglink-knuckle-3r",
+ "wear": "bench",
+ "harness": "docs/concepts/verify/dogring-draglink-knuckle-3r.py wear --ring",
+ "verifier": {
+  "frozen": {
+   "gap": 22.64,
+   "reach": 0.7333,
+   "follow": 1.0,
+   "inband14": 0.8638,
+   "inband10": 0.5198,
+   "contact": 0.0235
+  },
+  "corrected": {
+   "gap": 97.83,
+   "reach": 0.3472,
+   "follow": 0.6,
+   "inband14": 0.8695,
+   "inband10": 0.4992,
+   "contact": 0.045
+  },
+  "corrected_overhead": {
+   "ws": 28,
+   "taken": 4,
+   "reach_ovh": 0.1429
+  },
+  "poses_failing": 183,
+  "why_failing": {
+   "m9_L1b": 183
+  }
+ },
+ "flood": {
+  "corrected": {
+   "n_none": 270,
+   "connected": {
+    "static": {
+     "gap": 97.83,
+     "reach": 0.3472,
+     "follow": 0.6,
+     "inband14": 0.8695,
+     "contact": 0.045
+    },
+    "connected_bench": {
+     "gap": 99.03,
+     "reach": 0.3361,
+     "dropped": 4,
+     "dropped_forced": 4,
+     "forced_taken": 7,
+     "forced_taken_connected": 3,
+     "dropped_with_no_taken_neighbour": 1
+    },
+    "connected_knn": {
+     "gap": 97.83,
+     "reach": 0.3472,
+     "dropped": 0,
+     "dropped_forced": 0,
+     "forced_taken": 7,
+     "forced_taken_connected": 7
+    },
+    "connected_full": {
+     "gap": 97.83,
+     "reach": 0.3472,
+     "dropped": 0,
+     "dropped_forced": 0,
+     "forced_taken": 7,
+     "forced_taken_connected": 7,
+     "envelope": {
+      "env_ok": 1062,
+      "env_forced_ok": 607,
+      "env_forced_connected": 607
+     }
+    },
+    "secs": 1.1
+   }
+  },
+  "claim": {
+   "n_none": 87,
+   "connected": {
+    "static": {
+     "gap": 22.64,
+     "reach": 0.7333,
+     "follow": 1.0,
+     "inband14": 0.8638,
+     "contact": 0.0235
+    },
+    "connected_bench": {
+     "gap": 59.37,
+     "reach": 0.3778,
+     "dropped": 128,
+     "dropped_forced": 128,
+     "forced_taken": 146,
+     "forced_taken_connected": 18,
+     "dropped_with_no_taken_neighbour": 22
+    },
+    "connected_knn": {
+     "gap": 25.47,
+     "reach": 0.7056,
+     "dropped": 10,
+     "dropped_forced": 10,
+     "forced_taken": 146,
+     "forced_taken_connected": 136
+    },
+    "connected_full": {
+     "gap": 22.64,
+     "reach": 0.7333,
+     "dropped": 0,
+     "dropped_forced": 0,
+     "forced_taken": 146,
+     "forced_taken_connected": 146,
+     "envelope": {
+      "env_ok": 1062,
+      "env_forced_ok": 607,
+      "env_forced_connected": 607
+     }
+    },
+    "secs": 1.4
+   }
+  }
+ },
+ "n_audit_calls": 2,
+ "secs": 113.1,
+ "exact": true,
+ "params": {
+  "dr_a1": 26.324,
+  "dr_t1": 3.687,
+  "dr_a3": 17.707,
+  "dr_t3": -43.936,
+  "bk1": 34.0,
+  "bk2": 46.0,
+  "a1max": 74.5,
+  "smhi": 20.132,
+  "root_off": -59.3,
+  "dl_a": 1,
+  "dl_h": -1,
+  "dl_lift": 0,
+  "dr_hl": 7.715,
+  "ring_layer": 0,
+  "dr_zr": 0,
+  "arm_up": 1
+ }
+}
