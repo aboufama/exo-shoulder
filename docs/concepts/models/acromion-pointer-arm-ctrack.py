@@ -116,6 +116,11 @@ def evaluate(B, p, verbose=False):
     for m in ch.members:
         s = pts[m.name].shape[1]; dm = dk[clip & good, o:o + s]; o += s
         per[m.name] = round(float(((dm >= 2) & (dm <= 14)).mean()), 4) if dm.size else 0.0
+    cmem = {}; o = 0
+    for m in ch.members:
+        s_ = pts[m.name].shape[1]; cmem[m.name] = round(float((dk[:, o:o + s_].min(1) < 0).mean()), 3) if len(Pi) else 0.0; o += s_
+    cmem["carriage"] = round(float((dc.min(1) < 0).mean()), 3) if len(Pi) else 0.0
+    hmem = {m.name: round(float(np.median(prof[m.name])), 1) for m in ch.members}
     dm = dc[clip & good]; per["carriage"] = round(float(((dm >= 2) & (dm <= 14)).mean()), 4) if dm.size else 0.0
     # radial slide: yoke tip underside (last strap row, centre) vs the carriage top under it
     yk = ch.members[3]; ns, nc = yk.grid; tip = prof["yoke"].reshape(ns, nc)[-1].max()
@@ -124,12 +129,12 @@ def evaluate(B, p, verbose=False):
     taken = np.array([B.res[i] is not None and float(np.min(B.res[i])) >= 0 for i in range(len(B.res))])
     ws = np.array(B.kind) == "ws"; ov = np.array([B.poses[i]["elev"] >= 140 for i in range(len(B.poses))])
     rep.update({k: r[k] for k in ("reach", "follow", "inband14", "inband10", "contact", "gap")})
-    rep.update(inband_member=per, slide_travel=round(float(col.max() - col.min()), 1) if len(col) else None,
+    rep.update(inband_member=per, contact_member=cmem, rho_member=hmem, slide_travel=round(float(col.max() - col.min()), 1) if len(col) else None,
                slide_min_col=round(float(col.min()), 1) if len(col) else None,
                overhead=f"{int((taken & ws & ov).sum())}/{int((ws & ov).sum())}",
                min_metal=round(float(min(dk.min(), dc.min())), 2) if len(Pi) else None,
                near1=round(float(np.mean([np.min(B.res[i]) < 1 for i in Pi])) if len(Pi) else 0, 4))
-    if verbose: print({k: rep[k] for k in ("gap", "reach", "follow", "inband14", "inband10", "contact", "inband_member", "slide_travel", "slide_min_col", "overhead", "min_metal", "closure", "flips", "collide", "min_margin", "honest", "audit")})
+    if verbose: print({k: rep[k] for k in ("gap", "reach", "follow", "inband14", "inband10", "contact", "inband_member", "contact_member", "rho_member", "slide_travel", "slide_min_col", "overhead", "min_metal", "closure", "flips", "collide", "min_margin", "honest", "audit")})
     return rep
 
 
