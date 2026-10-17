@@ -25,6 +25,12 @@ RUNS3 = [
     ("s65n1a", "rssr", 31, RUNS2[0][3], {"LS_STROKE_MIN": "65", "LS_OBJ": "near1"}),
     ("s65n1b", "rssr", 32, RUNS2[1][3], {"LS_STROKE_MIN": "65", "LS_OBJ": "near1"}),
 ]
+# cma4 (ATTRIBUTION, never a claim): the drive's own metal deleted (LS_GHOST=1), stroke held >= 65: what the long stroke is
+# worth on the real chain (hubs, links, knee, cuff, the greedy level fit) if the drive parked perfectly
+RUNS4 = [
+    ("g65a", "rssr", 41, RUNS2[0][3], {"LS_STROKE_MIN": "65", "LS_OBJ": "near2", "LS_GHOST": "1"}),
+    ("g65d", "rssr", 44, RUNS2[3][3], {"LS_STROKE_MIN": "65", "LS_OBJ": "near2", "LS_GHOST": "1"}),
+]
 RUNS = [
     ("rs1", "rssr", 1, dict(DY, La=17.5685, s_arm=4.0646, r_h=15.3454, beta=-126.3626, gam=26.7611, hl=2.5388, zr=3.4996, kK=1.7034, r_lobe=8.0629, smhi=16.8433)),
     ("rs2", "rssr", 2, dict(DY, La=22.4301, s_arm=4.6007, r_h=16.1034, beta=-145.2303, gam=51.0384, hl=0.3119, zr=3.2236, kK=1.6825, r_lobe=7.3108, smhi=16.8433)),
@@ -32,7 +38,7 @@ RUNS = [
     ("ns1", "nose", 4, dict(DY, g=2.9101, beta=-178.9001, r_c=17.1802, lift=2.329, hl=1.6266, zr=4.3117, kK=1.6356, s_arm=4.0108, r_lobe=7.7695, nose_r=1.0203, smhi=16.8433)),
 ]
 jobs = []
-SEL = RUNS3 if name.startswith("cma3") else [r + ({},) for r in (RUNS2 if name.startswith("cma2") else RUNS)]
+SEL = RUNS4 if name.startswith("cma4") else RUNS3 if name.startswith("cma3") else [r + ({},) for r in (RUNS2 if name.startswith("cma2") else RUNS)]
 for tag, drive, seed, x0, xenv in SEL:
     sc = RS_SC if drive == "rssr" else CAM_SC
     sc = {k: v for k, v in sc.items() if k in x0}

@@ -1,0 +1,34 @@
+[
+ {
+  "tag": "ls-cma4-g65a",
+  "cmd": "mkdir -p docs/research/longstroke_drive/farm && python3 tools/concept_cma.py docs/concepts/models/longstroke-slipper-knuckle-3r.py --x0 '{\"bk1\": 28.0, \"bk2\": 50.0, \"a1max\": 73.0, \"La\": 21.623, \"s_arm\": 4.204, \"r_h\": 16.8264, \"beta\": -132.0686, \"gam\": 10.2237, \"hl\": 2.8907, \"zr\": 2.1898, \"kK\": 1.7146, \"r_lobe\": 7.6066, \"smhi\": 16.8433}' --scales '{\"La\": 3.0, \"s_arm\": 0.5, \"r_h\": 2.0, \"beta\": 15.0, \"gam\": 15.0, \"hl\": 0.8, \"zr\": 1.0, \"kK\": 0.25, \"r_lobe\": 0.4, \"bk1\": 2.0, \"bk2\": 3.0, \"a1max\": 3.0, \"smhi\": 2.0}' --sigma 0.5 --popsize 8 --jobs 2 --budget-s 1200 --max-gen 400 --seed 41 --label ls-cma4-g65a --out docs/research/longstroke_drive/farm/cma_cma4_g65a.json > docs/research/longstroke_drive/farm/cma_cma4_g65a.log 2>&1; tail -3 docs/research/longstroke_drive/farm/cma_cma4_g65a.log",
+  "out": [
+   "docs/research/longstroke_drive/farm/cma_cma4_g65a*"
+  ],
+  "env": {
+   "OMP_NUM_THREADS": "1",
+   "IGL_NUM_THREADS": "1",
+   "LS_DRIVE": "rssr",
+   "LS_STROKE_MIN": "65",
+   "LS_OBJ": "near2",
+   "LS_GHOST": "1"
+  },
+  "timeout": 1800.0
+ },
+ {
+  "tag": "ls-cma4-g65d",
+  "cmd": "mkdir -p docs/research/longstroke_drive/farm && python3 tools/concept_cma.py docs/concepts/models/longstroke-slipper-knuckle-3r.py --x0 '{\"bk1\": 32.0, \"bk2\": 48.0, \"a1max\": 75.0, \"La\": 22.0352, \"s_arm\": 4.4924, \"r_h\": 16.0364, \"beta\": -139.9978, \"gam\": 17.4855, \"hl\": 2.925, \"zr\": 1.5, \"kK\": 1.6, \"r_lobe\": 7.402, \"smhi\": 16.8433}' --scales '{\"La\": 3.0, \"s_arm\": 0.5, \"r_h\": 2.0, \"beta\": 15.0, \"gam\": 15.0, \"hl\": 0.8, \"zr\": 1.0, \"kK\": 0.25, \"r_lobe\": 0.4, \"bk1\": 2.0, \"bk2\": 3.0, \"a1max\": 3.0, \"smhi\": 2.0}' --sigma 0.5 --popsize 8 --jobs 2 --budget-s 1200 --max-gen 400 --seed 44 --label ls-cma4-g65d --out docs/research/longstroke_drive/farm/cma_cma4_g65d.json > docs/research/longstroke_drive/farm/cma_cma4_g65d.log 2>&1; tail -3 docs/research/longstroke_drive/farm/cma_cma4_g65d.log",
+  "out": [
+   "docs/research/longstroke_drive/farm/cma_cma4_g65d*"
+  ],
+  "env": {
+   "OMP_NUM_THREADS": "1",
+   "IGL_NUM_THREADS": "1",
+   "LS_DRIVE": "rssr",
+   "LS_STROKE_MIN": "65",
+   "LS_OBJ": "near2",
+   "LS_GHOST": "1"
+  },
+  "timeout": 1800.0
+ }
+]

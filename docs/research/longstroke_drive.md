@@ -117,5 +117,37 @@ metal comes within 1 mm of hub K / hub 2 / link 1b. Complexity by `tools/simplic
   pins instead of 2 ball links (complexity 28.0 vs 30.5). It is the right CAD embodiment of C3 and the next row; it is
   priced here kinematically only (no metal), so it is a recommendation, not a claim.
 
-__REST__
+## 3. The search (farm CMA-ES, `tools/concept_cma.py`, Bench(60,160) fast, 2 mm near-touch objective unless stated)
+
+Free variables: the drive (La, s_arm, r_h, beta, gam, hl, zr, r_lobe; for the nose g, r_c, lift, nose_r), the lobe law
+(kK, smhi) and the K dyad (bk1, bk2, a1max); the verified seats, stop A (a1 37.55) and a2 (57.22) are held.
+Summaries: `python3 docs/research/longstroke_drive/cma_summary.py docs/research/longstroke_drive/farm/cma_<batch>_*.json`.
+
+**cma1 / cma2 (free; 8 runs, 8,024 evaluations): the search gives the stroke back.** Started from the sweeps' long-stroke
+points (dK 48-77), every run walked the drive range DOWN to 35.5-52 deg, and two of the four cma2 runs walked the K dyad
+back to the parents' 26 / 38 clamp:
+
+| run | start (2 mm) | best (2 mm) | best plain | reach | in-band | dK_lim | dyad | gate (2nd half / last third / top-5, pts) |
+|---|---|---|---|---|---|---|---|---|
+| cma1 ns1 (nose) | 54.11 | 19.03 | 17.84 | 0.744 | 0.903 | 35.5 (horn PA) | 26 / 47.4 | 0.45 / 0.00 / 0.11 pass |
+| cma1 rs1 (rod) | 40.37 | 19.17 | 16.65 | 0.756 | 0.877 | 37.5 (trans.) | 26 / 47.3 | 0.08 / 0.05 / 0.00 pass |
+| cma1 rs2 | 63.85 | 19.88 | 17.78 | 0.756 | 0.872 | 42.5 | 26.7 / 48.8 | 1.05 / 0.89 / 0.07 (not yet) |
+| cma1 rs3 | 41.67 | 19.33 | 16.82 | 0.756 | 0.876 | 35.5 | 27.2 / 47.9 | 0.14 / 0.04 / 0.00 pass |
+| cma2 r75a | 49.41 | **18.14** | 15.80 | 0.763 | 0.880 | 52.0 (ROD-hub2) | **26 / 38** | 0.67 / 0.23 / 0.15 pass |
+| cma2 r75b | 45.06 | 18.53 | 14.90 | 0.775 | 0.876 | 48.2 | **26 / 38** | 1.10 / 0.23 / 0.07 (not yet) |
+| cma2 r75c | 40.55 | 19.16 | 16.61 | 0.756 | 0.878 | 45.2 (law) | 26 / 47.3 | 0.37 / 0.15 / 0.04 pass |
+| cma2 r75d | 123.36 | 19.36 | **14.53** | **0.788** | 0.867 | 48.8 | 26.5 / 47.6 | 0.00 / 0.00 / 0.11 pass |
+
+Combined gate over each batch: 0.00 / 0.00 / 0.05-0.14, passes. Slipper-nose on the same objective: 16.47 (plain 13.00).
+
+Why the search drops the stroke (measured on the best configs' per-part in-band, `parts_ib14`): the rod drive's bell
+crank sits at a median 13.8-15.3 mm over the skin (in band 0.21-0.60) and its ball links at 12.1-15.2 mm (0.42-0.82).
+The crank's long arm may joggle down to link 1b's layer only where it clears link 1b's strap over the WHOLE swing, and a
+75 deg K stroke swings it 40-55 deg, over link 1b, so it stays stacked. Every extra degree of stroke costs crank in-band;
+the extra stretched poses it buys are 7.5 % of the workspace on either bench (12 / 160 on the fit bench, 26 / 360 on the
+claim bench, th 106.6-121.4), and under the 2 mm objective a pose that closes with metal near the skin costs more than a
+pose lost to the fold.
+
+__CLAIMS__
+
 

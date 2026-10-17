@@ -110,7 +110,9 @@ class LSModel(BM.RLModel):
     def _rod_metal(self):
         if DRIVE == "rssr":
             SC.TRANS_MIN = TRANS_MIN_RSSR
-            SCBase._rod_metal(self); return
+            SCBase._rod_metal(self)
+            if GHOST: self._ghost()
+            return
         P = self.D.p; mu = float(P.get("mu", 0.087)); nr = float(P.get("nose_r", 1.5))
         RF.ROLL_R = nr; RF.PA_MAX = pa_kin(mu)
         if DRIVE == "roller": BM.RLModel._rod_metal(self)        # roller + its stub head (rolling friction 0)
@@ -119,6 +121,16 @@ class LSModel(BM.RLModel):
         i.update(nose_r=nr, mu=mu, friction_deg=round(fr, 2), pa_kin_max=round(RF.PA_MAX, 2),
                  pa_eff_horn=round(i["pa_horn_max_taken"] + fr, 1), pa_eff_crank=round(i["pa_crank_max_taken"] + fr, 1))
         self._rod_info = i
+
+    def _ghost(self):
+        """ATTRIBUTION ONLY (LS_GHOST=1, never a claim): the drive keeps its kinematics (law, stroke dK_lim, truncation) but
+        its own metal (crank, rod, ball links, horn lug / roller, flank lug) is deleted, so the bench prices the long stroke
+        on the real chain (hubs, links, knee, cuff) as if the drive parked perfectly"""
+        nh = len(self.rigid["horn"][1]) if "horn" in self.rigid else -1
+        for k_ in ("crank", "rod", "rodends", "horn", "roller"): self.rigid.pop(k_, None)
+        self.contact = [(m, X) for (m, X) in self.contact if m not in (8, 9) and not (m == 1 and len(X) == nh)]
+        for k_ in ("ROD", "CRK", "HORN"): self.strap.pop(k_, None)
+        self._sc_info["ghost"] = True
 
     def _sc_pose(self):
         if DRIVE == "rssr": return SCBase._sc_pose(self)
@@ -154,6 +166,7 @@ def _report(B, params):
     return r, M
 
 
+GHOST = os.environ.get("LS_GHOST", "0") == "1"                # attribution only: drive metal deleted (see LSModel._ghost)
 STROKE_MIN = float(os.environ.get("LS_STROKE_MIN", "0"))      # search constraint: the drive's own range must stay >= this
 OBJ = os.environ.get("LS_OBJ", "near2")                        # search objective: near2 (the round-9 rule) | near1
 
