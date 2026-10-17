@@ -1,0 +1,37 @@
+[
+ {
+  "key": "held_out",
+  "refuted": true,
+  "evidence": "Measured, not missing. Both wears are on file, exact, frozen protocol, model unchanged: docs/alignment/remeasure/inband-rssr-knuckle-3r_bench.json frozen.gap 18.87 and _held.json frozen.gap 23.21, so the held-out drop is +4.34, under TH held_watch 6.0 (docs/ALIGNMENT.md section 5; the leader slipper-nose drops +4.96: remeasure/slipper-nose-knuckle-3r_{bench,held}_perpose.json 18.49 / 23.45). Re-derived here without the audit tool from the per-pose dumps (remeasure/inband-rssr-knuckle-3r_{bench,held}_perpose.json, byte-identical to farm/claimA/): bench ws 260/360 = 0.7222, clip 110/110, in-band 0.8971, contact 3/373 -> 18.87; held reach 0.6828, follow 1.0, in-band 0.8956, contact 9/861 -> 23.21. No leak into the selection: pick rule in b6cfa9b (09:36:11), pick f8fd767 (10:10:20), tol_rob.jsonl first committed 3e2124c (10:13:10), p_held.json first committed 1ed2aad (10:26:59)."
+ },
+ {
+  "key": "idle",
+  "refuted": true,
+  "evidence": "Instrument false positive, re-derived. The 'rigid knee' comes from tools/alignment_audit.py _declared_joints line 570 (regex 'knee_moved' anywhere in the model source); docs/concepts/models/inband-rssr-knuckle-3r.py line 291 only READS r.get('knee_moved'), which is SET only in kneeless-roller-knuckle-3r.py:166 and kneeless-sidecar-knuckle-3r.py:150. The row runs the lead cell: longstroke-slipper-knuckle-3r.py line 34 CELL = 'lead', line 45 loads roller-longdyad-knuckle-3r.py (pin knee); rows/inband-rssr-knuckle-3r.json mechanism.cuff_knee.pins 2. So K.qa's 66.82 deg is the pin knee's designed motion. The declared drives move far above TH idle_deg 2.0: K = remeasure/_bench.json deep.coord_spans.dK [-0.7998, 0] rad = 45.83 deg (held 46.44); crank measured here from the model's own RSSR grid (fit bench, fast, model unchanged; scratch script, 1 process): phi 33.71 deg at K 45.83 and 34.15 deg at K 46.44 (ratio 0.696-0.748), matching remeasure/_probe_bench.json extras.sc_info.phi_max_taken 34.1."
+ },
+ {
+  "key": "judgement:M2",
+  "refuted": false,
+  "evidence": "Measurement confirmed by my own re-wears (frozen exact Bench(110,360), model unchanged, constant overridden in memory, tools/alignment_const_probe.py --tag skeptic): SC.ER 4.5 (O9) -> 275.0, why.parts 373 (remeasure/inband-rssr-knuckle-3r_skeptic_bench_SC.ER4.5.json); SC.ER 4.0 (O8) -> 275.0, parts 373 (_skeptic_bench_SC.ER4.json); SC.ER 4.5 with r_h 15.9 -> 18.83, transmission 49.8 deg, contact 3 poses 9.93 mm, th margin 5.231 (_skeptic-cat-rh15.9_bench_SC.ER4.5.json), the auditor's numbers to the digit. Arithmetic agrees: hub-K clearance = r_h - ER - HUB_R = 14.62 - 3.5 - 10 = 1.12 mm (re-worn clear span [1.062, 1.181]); O9 leaves 0.12 mm. Cone: _bench_CONE25.json cam.dK_lim 0.0, why_lim 'cone', and the model's scan (lines 162-176, 228-241) starts at K = 0 and stops at the first bad step, so the 25.5 deg peak is at rest (sc_info tilt_max_taken[0] = tilt_max_range[0] = 25.5). Not refuted: the catalogue-headed design scores 18.83 (the number is not inflated), but the recorded best_params (r_h 14.6248) cannot be assembled with the KBRM-02 the repo names, and the row records neither the part nor r_h 15.9. A further catalogue-head clash is unmodelled (see missed: the O9 rim against its own horn lug)."
+ },
+ {
+  "key": "judgement:NEW-pair-knife-edge",
+  "refuted": false,
+  "evidence": "Confirmed, with the count corrected. docs/research/inband_drive/out/tol_p.jsonl has 34 neighbours: 10 (not 11) lose every pose (plain and gap 275.0), and all 10 have r_h - 0.25 = 14.3748; 5 cost +6.48 / +6.53 / +6.83 / +7.31 / +7.35 plain against the centre 12.79. tol_rob.jsonl: 0 of 34 dead, plain 12.50-13.05. Robust build on file: rows/inband-rssr-knuckle-3r.json claims.robust_build bench.frozen.gap 18.83 (contact 3 / 9.83 mm, th 5.231), held 23.16. Re-worn clear span [1.0622, 1.1814] bench, [1.0568, 1.1812] held (remeasure _bench/_held.json deep.coord_spans.clear). The edge buys no points (robust is 0.04 / 0.05 better), so the score is not inflated, but best_params, which is what a CAD build takes, is the knife-edge shape. Stands as a record defect."
+ },
+ {
+  "key": "judgement:NEW-inband-padding",
+  "refuted": false,
+  "evidence": "Confirmed and sharpened. farm/claimA/p_attr_bench.json ghost.none 18.87, ghost.ear 19.39 (in-band 0.8919), ghost.crank 18.58. Measured here (model unchanged, fit bench, rigid point sets): the ear carries 0.50 samples per mm2 (44 on 87.6 mm2) against 0.29-0.42 for every other plate (hubs 0.29, knee 0.33, E 0.34, boss / pad 0.35, crank 0.39, horn 0.42). The reason is that the pivot disc S.disc(6, 2) and the 2 mm strip that starts at the pivot (model lines 199-206) sample the same area twice. At the other plates' median 0.342 per mm2 the ear would carry about 30 samples, and in-band would be about 0.8955 bench (gap about 19.03) and 0.8940 held (about 23.37). That is an arithmetic estimate, not a re-wear. It equals the leader's 0.8955 (remeasure/slipper-nose-knuckle-3r_bench.json): the row's in-band edge over the leader is the ear's excess sampling. Counter-evidence that does not refute: the samples per pose total 914 against the leader's 912, and the out-of-band samples per pose are 94.0 against 95.3 on the bench and 95.5 against 96.4 held (parts_ib14); the ear's size is fixed in the model, not searched; the row's doc reports ear -0.52 (docs/research/inband_drive.md line 144)."
+ },
+ {
+  "key": "judgement:R4",
+  "refuted": false,
+  "evidence": "Confirmed and sharper. docs/dashboard/data/morphs.json (refresh dd70a82, 11:27:57) row 52: gap 12.79, frozen_gap null, v_gap null; tools/dash_build.py lines 408-409 read only frozen_exact_gap / frozen_exact; the row keeps its claim under claim.gap 18.87 / frozen. docs/dashboard/leader.js line 73 best() falls back to gap when v_gap is null. Recomputing that list over morphs.json puts this row FIRST in 'Below the baseline now' at 12.79 ('claimed'), ahead of every verified row (minarc 18.40, slipper-nose 18.49), with trimlug-k165 13.02 second. This is worse than the auditor's 12.79 against 13.00. The row's top-level gap 16.47 is the fit-bench 2 mm objective: my own fit-bench run of best_params gives fit gap 16.47."
+ },
+ {
+  "key": "judgement:M5",
+  "refuted": false,
+  "evidence": "Missing measurement; no number on file. grep for inband-rssr in judge/ and pipeline/ finds nothing, and pipeline/full-exo/designs/ has no inband design (no CAD). rows/inband-rssr-knuckle-3r.json spring_R17.R17 says 'dynamic twist not measured (judge/dynamics.py needs the CAD)'. The static arithmetic reproduces: 1.79 x (0.08 + 0.015 x 0.811) = 0.165 N.m, which is 1.10 / 1.37 N at 150 / 120 mm. The precedent pick1 lag of 9.28 deg is in docs/ALIGNMENT.md M5."
+ }
+]

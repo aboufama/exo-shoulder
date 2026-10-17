@@ -228,3 +228,116 @@ Probe: `remeasure/inband-rssr-knuckle-3r_probe_bench.json` (`..._probe_held.json
 - **P-C: catalogue sizes as named constants per row.** The ball-link head (O9 x 4) and cone (30 deg) should come from
   one catalogue file, so a model cannot sample a smaller socket than the part list buys. Effect measured here: the
   pick and the robust build go 18.87 / 18.83 -> 275 until r_h >= 15.9, and at r_h 15.9 the bench is 18.83 again.
+
+## Skeptic (2026-10-17 11:30-11:40 UTC): final verdict WATCH
+
+Rulings: `docs/alignment/inband-rssr-knuckle-3r.rulings.json`. Ledger: `by skeptic`, run `skeptic:inband-rssr-knuckle-3r`.
+Two reasons are refuted with evidence and five are upheld, so the verdict is the worst upheld level: **watch**.
+
+**What I re-measured.** Everything ran locally, nice, OMP_NUM_THREADS=1, at most 2 processes, models unchanged, no
+farm spend.
+- Frozen exact Bench(110,360) re-wears through `tools/alignment_const_probe.py --tag skeptic` (the constant is
+  overridden in memory only):
+  - `remeasure/inband-rssr-knuckle-3r_skeptic_bench_SC.ER4.5.json`;
+  - `..._skeptic_bench_SC.ER4.json`;
+  - `..._skeptic-cat-rh15.9_bench_SC.ER4.5.json`.
+- New read-only probe `tools/alignment_part_density.py`. It reports samples per mm2 of each part and the crank angle
+  along the model's own K grid.
+- The gaps and contact depths, re-derived by hand from the per-pose dumps.
+
+### Rulings
+
+- **held_out: refuted.**
+  - Both wears are measured, exact and frozen: `remeasure/_bench.json` 18.87 and `_held.json` 23.21. The drop is
+    +4.34, under TH held_watch 6.0. The leader drops +4.96.
+  - Re-derived from the per-pose dumps without the audit tool:
+    - bench: ws 260/360, clip 110/110, in-band 0.8971, contact 3/373, giving 18.87;
+    - held out: reach 0.6828, in-band 0.8956, contact 9/861, giving 23.21.
+  - Timing:
+    - pick rule `b6cfa9b` 09:36:11;
+    - pick `f8fd767` 10:10:20;
+    - `tol_rob.jsonl` first committed 10:13:10;
+    - `p_held.json` first committed 10:26:59.
+
+    No leak.
+- **idle: refuted (instrument false positive).**
+  - The "rigid knee" comes from the tool's regex for `knee_moved` anywhere in the model source. This model only reads
+    the flag (line 291). The flag is set only by kneeless-roller and kneeless-sidecar.
+  - The row runs the lead cell: longstroke `CELL = "lead"` loads roller-longdyad, and `cuff_knee.pins` is 2.
+  - K moves 45.83 deg (`deep.coord_spans.dK`). The crank, measured here from the model's RSSR grid, turns 33.71 deg
+    at K 45.83 and 34.15 deg at K 46.44. Both are far above the 2 deg threshold.
+- **judgement:M2: upheld.** My re-wears reproduce the auditor to the digit:
+  - O9 (SC.ER 4.5): 275.0, parts 373;
+  - O8 (SC.ER 4.0): 275.0, parts 373;
+  - O9 at r_h 15.9: 18.83, transmission 49.8 deg, contact 3 poses / 9.93 mm, fold margin 5.231.
+
+  The arithmetic agrees: r_h - ER - HUB_R = 14.62 - 3.5 - 10 = 1.12 mm, and the O9 head leaves 0.12. The cone peaks at
+  rest (the scan starts at K = 0; CONE25 gives dK_lim 0, `cone`). The number is not inflated, since the catalogue
+  build measures 18.83. But the recorded `best_params` cannot be assembled from the KBRM-02 the repo names, and the row
+  records neither the part nor r_h 15.9.
+- **judgement:NEW-pair-knife-edge: upheld, count corrected.**
+  - `tol_p.jsonl`: **10** of 34 neighbours lose every pose (the auditor said 11). All 10 sit at r_h - 0.25 = 14.3748.
+    Five more cost +6.48 to +7.35 plain.
+  - `tol_rob.jsonl`: 0 of 34 dead.
+  - The robust build is 18.83 / 23.16 (`claims.robust_build`).
+  - No points are bought, but `best_params`, which a CAD build would take, is the knife-edge shape.
+- **judgement:NEW-inband-padding: upheld, sharper.** The attribution reproduces from `p_attr_bench.json`: ear deleted
+  19.39, crank deleted 18.58.
+  - **New measurement:** the ear is sampled at **0.50 samples/mm2** (44 on 87.6 mm2). Every other plate is at
+    0.29-0.42:
+
+    | part | samples / mm2 |
+    |---|---|
+    | hubs | 0.29 |
+    | knee | 0.33 |
+    | E | 0.34 |
+    | boss, pad | 0.35 |
+    | crank | 0.39 |
+    | horn | 0.42 |
+    | **ear** | **0.50** |
+
+    The cause: the pivot disc `S.disc(6, 2)` and the 2 mm strip that starts at the pivot (model lines 199-206) sample
+    the same area twice.
+  - At the plates' median 0.342/mm2 the ear would carry about 30 samples. In-band would then be about 0.8955 on the
+    bench (about 19.03) and 0.8940 held out (about 23.37). This is arithmetic, not a re-wear.
+  - That is the leader's in-band (0.8955). **The row's in-band edge over the leader is the ear's excess sampling.**
+  - Not refuting: per pose the row has 914 samples against the leader's 912, and fewer out-of-band samples (94.0 vs
+    95.3 bench, 95.5 vs 96.4 held). The ear's size is fixed in code, not searched.
+- **judgement:R4: upheld, sharper.**
+  - `morphs.json` row 52: gap 12.79, frozen_gap null, v_gap null.
+  - `dash_build.py` lines 408-409 read only `frozen_exact*`.
+  - `leader.js` line 73 falls back to `gap` when `v_gap` is null. So the "Below the baseline now" list ranks this row
+    **#1 at 12.79 ("claimed")**, ahead of every verified row (minarc 18.40, slipper-nose 18.49); trimlug-k165 13.02 is
+    #2.
+  - My fit-bench run gives 16.47, the row's top-level gap.
+- **judgement:M5: upheld (missing measurement).** No dynamics, R17 or CAD output exists for this id in judge/,
+  pipeline/ or pipeline/full-exo/designs/. The static 0.165 N.m (1.10 / 1.37 N) reproduces.
+
+### Missed by the auditor (for the next audit; not counted in this verdict)
+
+1. **Tolerance count.** 10 of 34 neighbours die, not 11. All 10 are the r_h -0.25 side (`tol_p.jsonl`).
+2. **Ear double-sampling** (above). It is a per-part density artefact worth about 0.16 points. It is the whole of the
+   row's in-band edge over the leader.
+   - **Proposal (a measurement change, not applied):** sample every plate on one de-duplicated 2 mm grid. Estimated
+     effect on this row: about +0.16 bench and held out. Other rows were not measured.
+3. **Dashboard ranking.** The side list puts the in-sample 12.79 first among all live rows, above the verified leaders
+   (R4 understated it as 12.79 vs 13.00).
+4. **Catalogue head against its own horn lug (unmodelled).** This is the sidecar red team's own geometry (finding 2b):
+   ball centre ZB 3.0 mm over the lug, head O9 x 4. The rim's height over the lug top is 3 - 2 cos t - 4.5 sin t; this
+   formula reproduces the red team's -0.58 mm at 22.6 deg.
+   - At this row's horn tilt it gives **-0.10 mm at the taken maximum 15.1 deg** and -0.38 mm at the range maximum
+     19.4 deg (`probe extras.sc_info.tilt_max_taken[1]`, `tilt_max_range[1]`).
+   - With the modelled O7 it is +0.16 mm.
+   - So even at r_h 15.9 the catalogue-headed build needs a spacer of about 0.1-0.4 mm. This is a hand calculation, not
+     re-worn.
+5. **For the envelope polish (wf_d261725f-27c), in addition to the auditor's 7 items:**
+   - The ear's pivot disc / strip overlap. A polish that moves `zc` / `clay` or enlarges the ear gains sample-weighted
+     in-band from the double-sampled area.
+   - With the catalogue head, transmission is 49.8 deg against the 48 deg gate: the bound must not be walked.
+
+**Final verdict (ledger): WATCH.** The number is real: 18.87 / 23.21 reproduce, and the catalogue-headed robust number
+18.83 is no worse. What stands against the record:
+- `best_params` is not buildable with the named part and sits on a part-pair knife edge;
+- the dashboard ranks the in-sample 12.79 first;
+- the in-band edge over the leader is the ear's double sampling;
+- the spring's dynamic hold is unmeasured.
