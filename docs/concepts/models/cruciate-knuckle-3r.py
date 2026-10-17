@@ -43,7 +43,9 @@ D2R = math.pi / 180
 MU, PINSEP = 30.0, 22.0                          # transmission window [MU, 180 - MU]; min pin separation (deg)
 SEAT = dict(az=43.15, el=59.93, wd=92.03, wa=-9.03, zeta=0.0, at=2)   # cap pole J1 / J3 (round-102 planner, rp4 SEAT)
 PARAMS = dict(SEAT, a1=60.0, a2=60.0, beta=70.0, psiA=30.0, psiB=-30.0, dA0=24.0, dA1=-30.0, dB0=24.0, dB1=-30.0,
-              width=12.0, t_link=3.0, q=1.0)
+              width=12.0, t_link=3.0, q=1.0,
+              ovh=1)   # 1: link 1 / the coupler pass OVER the other body's pin hubs where they meet (K6 by construction);
+                       # 0: they do not (no lift), and K6 rejects the poses where they would meet
 ang, mv, rot = VP.ang, VP.mv, VP.rot
 
 
@@ -102,7 +104,7 @@ def curve(p):
         crossed = bool(all(xs))                         # the cranks cross (X) over the WHOLE run: a cruciate cell
         if gg[-1] < gg[0]: th, gg, cc = th[::-1], gg[::-1], cc[::-1]          # th ascending along the run
         lo, hi = float(gg[0]) + K.FOLD_MARGIN, float(gg[-1]) - K.FOLD_MARGIN
-        out.update(th=th, g=gg, c=cc, lo=lo, hi=hi, W=hi - lo, crossed=crossed, valid=bool(hi > lo and sep >= PINSEP and crossed),
+        out.update(th=th, g=gg, c=cc, lo=lo, hi=hi, W=hi - lo, crossed=crossed, valid=bool(hi > lo and sep >= PINSEP - 0.01 and crossed),
                    mgmin=float(mg[min(s, e):max(s, e) + 1].min()))
     if len(_CACHE) > 64: _CACHE.clear()
     _CACHE[key] = out; return out
@@ -143,10 +145,10 @@ def build(B, F, p):
                        over=[("crankA", 1.0)]),
         VP.polystrap("link1", [J1, Xg, Xo], ("J1", g_name, o_name), w_, t_,
                      ramps=[("hubJ1", K.STACK), (f"hub{g_name}", K.STACK), (f"hub{o_name}", K.STACK)],
-                     over=[("crankA", 1.0), ("crankB", 1.0), ("hubA1", 1.0), ("hubB1", 1.0)]),
+                     over=[("crankA", 1.0), ("crankB", 1.0)] + ([("hubA1", 1.0), ("hubB1", 1.0)] if p.get("ovh", 1) else [])),
         VP.polystrap("coupler", [Y, X, J3], (y_name, near, "J3"), w_, t_,
                      ramps=[(f"hub{y_name}", K.STACK), (f"hub{near}", K.STACK), ("hubJ3", K.STACK)],
-                     over=[("neck", 1.0), ("crankA", 1.0), ("crankB", 1.0), ("hubA0", 1.0), ("hubB0", 1.0), ("hubJ1", 1.0)]),
+                     over=[("neck", 1.0), ("crankA", 1.0), ("crankB", 1.0)] + ([("hubA0", 1.0), ("hubB0", 1.0), ("hubJ1", 1.0)] if p.get("ovh", 1) else [])),
         K.neck_member(F, J3, joints=("J3",), ramps=(("hubJ3", 0.0), (None, 0)))]
     okr = ok & (res < 0.5)
     info = dict(residual_deg=round(float(res[okr].max()), 5) if okr.any() else None, pin_sep_deg=round(cv["sep"], 1),
