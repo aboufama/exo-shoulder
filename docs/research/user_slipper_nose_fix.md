@@ -105,7 +105,16 @@ closed by the drawing tolerance, not by metal.
 | R1-aim (2-10) | 48.65 % | 47.43 % | 47.54 % | 47.57 % | design |
 | R4 (Raise overhead) | 74.48 % | 73.08 % | 73.15 % | 73.38 % | design |
 | R7 | PASS | PASS (52) | PASS (52 custom parts, none missing; names fixed) | see judge/ | - |
-| R2 / R6 / R16 / R17 | 24.87 / 0.0 / 64.2 / PASS | 24.87 / 0.0 / 64.2 / PASS | running at this commit | running at this commit | - |
+| R2 (rig body: user's / ours) | 24.87 / - | 24.87 / 17.67 | **24.87 / 17.67** (unchanged) | running | - |
+| R6 / R16 / R17, M5 bounds | 0.0 / 64.2 / PASS | 0.0 / 64.2 / PASS / mu 0.12 4.78 | running (one-worker chain) | running | - |
+
+The rest of the judges were first started through `tools/judge_all.sh`, whose body / part / workspace / dynamics judges
+fork 4 workers each by default - over this task's 2-process cap on a box already at load 17-18. They were stopped (by PID)
+after R2 and re-queued as ONE sequential chain with `--jobs 1` (`scratchpad fix/judge_rest.sh`: R6 step 3, base mount,
+R16 step 12, R17, scorecard for both designs; then the M5 forward bound at mu 0.087 / 0.105 / 0.12 on the rebuilt slipper,
+eta = (1 - mu tan 36.1)(1 - mu tan 29.5) on preload and rate, twist read unrounded; evolution snapshots; trimlug's posed
+drive pairs). Their numbers land in each design's `judge/scorecard.md`, `judge_m5/forward_bound_mu*.json` and
+`pipeline/evolution/<id>/` - not read by this pass, so not claimed here.
 
 **Target R1 >= 82.0: NOT met** (81.18 / 81.30). Section 1 says why: the margin was 0.08 of the 0.94; the 60-deg ramp rule
 costs 0.16 (needs a ruling to relax on a machined part); the rest is over-14 coverage by real metal the L1 does not draw
