@@ -2066,3 +2066,67 @@ env polishes so far moved held out by +1.49 and -0.31 on the CAD's fit, so a pol
    batch).
 2. Carry beta -178 (the PA fix) into the CAD's flank.
 3. Attribute the below-shoulder press cluster to a part.
+
+## The fold is two walls: the stretched one is the K drive's stroke, not hub 2; the family's ceiling is not kinematic (2026-10-17, docs/research/fold_ceiling.md)
+
+Raw per-pose data for the verified roller-longdyad-knuckle-3r config: frozen Bench(110,360) exact, and the 952
+held-out workspace poses. The model's own IK was re-run per pose, and an exact-skin K3 march was run per rigid part.
+Scripts are in `docs/research/fold_ceiling/`. No rule, bench or verified row was changed.
+
+**Where the 88 bench fold losses are**
+
+* **73 stretched-side poses** (th 107-176):
+  * 64 are internal rotation >= 90 deg across the body (axial <= -90, plane >= 60);
+  * internal rotation swings the humerus-fixed J3 away from J1;
+  * held out: 211 of 261.
+* **15 folded-side poses** (th 7.7-22): scapular-plane abduction overhead (plane -20..45, elevation 90-165,
+  axial -60..0); held out 50.
+* Of the roller's 88, sidecar-longdyad loses 80, kneeless-roller 86 and the old pin knee 86.
+* **The clip frames never leave th 41-96.** In-band never sees either side. A wider window costs in-band only
+  through the part levels that the new workspace poses force.
+
+**The stretched wall is the K drive**
+
+* It is not stop B and not the dyad.
+* The taken poses end at th 106.3: a1e 54.3 at dK 45.6 of the drive's 46.25.
+* Stop B (a1max 58.8, th 111) is never reached.
+* Closed form, with a one-sided K and a1 <= a2:
+  * window = [a2 - a1 + 5, a1e(dK_max) + a2 - 5];
+  * cos a1e = cos bk1 cos bk2 + sin bk1 sin bk2 cos(psiA + dK);
+  * the width is a1 + a1e_max - 10, and a2 only slides the window.
+
+**Hub 2 does not cap the stretched side at these seats**
+
+* Exact skin, best J2 ray: 47 of the 73 stretched-lost poses put hub 2 within its fitted 62.0 mm level (clip band
+  52-62). Held out: 142 of 211.
+* **The folded side IS a hub-2 clearance trade:** 4 of 15 clear (held out 21 of 46); the median need is 71 mm.
+* The margin accounts for 22 of the 88: they would close at margin 0, which the user's rule forbids.
+
+**Kinematics is not the family's ceiling**
+
+* Over all 247,860 seat pairs the user's ruling allows, a window >= 80 deg wide holds 0.99 of the 360 poses (held
+  out 0.97-0.99 on the same seats).
+* At the leader's seats, the best placement holds 0.797 at its width and 0.872 at 105.
+* The 360-pose optimum puts a2 at ~62, not 57.2 (+10 poses kinematically).
+
+**Realisability, exact (`parking_k.py`; every hub and link sample at ONE level, clearing every closed pose)**
+
+* A K dyad of 28 / 50 (a1max 73) at the leader's seats admits **+14 poses**, R_est 0.739 -> 0.778. The parts' clip
+  in-band stays at 0.768 -> 0.760.
+* Link 1b (K -> J2) is the binding part.
+* **But K must turn 78-89 deg.** The leader's drive turns 46; the round-9 flank caps at 55-57.5 at pressure angle
+  <= 43.
+* With 57.5 deg: th_hi ~115, reach ~0.76-0.77, score ~94.5-95 at best, before the drive's own metal.
+* **Score 95 in the family is therefore not provably impossible, and it is not reached.** The gate is a 60-90 deg K
+  drive whose metal parks. Above ~0.80 reach the folded wall (hub 2) must move too.
+
+**An instrument that failed**
+
+* A per-part parking relaxation over the whole family looked like a family bound. It was calibrated exactly on the
+  leader (fast 0.775). It drops the workspace poses that do not clear.
+* Its optima (0.84-0.89 fast) were refuted by a paired kit model: worse than the control under every fitting policy,
+  with hub 2 and link 2 floating.
+* Dropping uncleared poses is not available to a rigid chain: they are contact.
+* Use the clear-every-closed-pose test (`parking_k.py`) as the gate.
+
+__SHIFT_F__
