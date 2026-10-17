@@ -21,7 +21,7 @@
  "v_inband10": 0.5128,
  "v_gap": 20.08,
  "n_configs": 8717,
- "complexity": 45.25,
+ "complexity": 21.75,
  "mechanism": {
   "active_dof": 3,
   "passive_trans": 0,
@@ -45,7 +45,8 @@
    "joints": 2,
    "custom_parts": 4,
    "catalogue_parts": 6,
-   "rule": "user 2026-10-17: no encoders on the knee pins (pose from the hub encoders) -> no added complexity; counts = docs/concepts/skin-normal-3r-pin-knee.md line 584"
+   "rule": "user 2026-10-17: no encoders on the knee pins (pose from the hub encoders) -> no added complexity; counts = docs/concepts/skin-normal-3r-pin-knee.md line 584",
+   "closed_loops": 1
   }
  },
  "best_params": {

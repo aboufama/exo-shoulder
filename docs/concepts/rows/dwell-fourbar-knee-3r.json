@@ -43,6 +43,6 @@
   "source": "docs/concepts/models/dwell-fourbar-knee-3r.py:1-25 (chain, loop, declared pins)",
   "confidence": "counted"
  },
- "complexity": 19.0,
+ "complexity": 16.0,
  "honest": true
 }

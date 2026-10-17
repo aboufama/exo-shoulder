@@ -6,7 +6,7 @@
  "active_dof": 3,
  "passive_dof": 4,
  "passive_translations": 0,
- "complexity": 68.5,
+ "complexity": 49.0,
  "status": "dead",
  "t_ideated": null,
  "t_screened": "2026-10-16T16:35:39Z",

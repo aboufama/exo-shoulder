@@ -226,3 +226,8 @@ A 4th active DOF is never a simplification: 25 points.
   are dropped (sensed_passive - 2) on the 13 standard pin-knee rows. Kutzbach / topology still read the full mechanism.
   Not applied: closure-set-arc-knee-3r (a different, trunnion knee) and acromial-rocker-3r (3 sensed, unclear split).
   Effect: skin-normal-3r-pin-knee 19.5 -> 0, roller-longdyad 43.75 -> 24.25, sidecar-longdyad 49 -> 29.5.
+- **v2.1 (2026-10-17)**, after the metric-change audit (wf_7b555b78-fca, all WATCH, ruling premise holds: the 3 hub
+  encoders fix the pose at every taken pose, sigma_min 0.25-0.39): the free knee also frees its 'knee closure' loop
+  (`cuff_knee.closed_loops: 1` on the 6 knuckle rows that charged it; skin-normal-3r-pin-knee never did). Row
+  `complexity` fields refreshed. roller-longdyad 20.25, sidecar-longdyad 25.5, kneeless twins 23.75 / 28.0. Known
+  residual: the template knee differs from a row's own knee by <= 1.5 made-part points (skeptic, roller-longdyad).

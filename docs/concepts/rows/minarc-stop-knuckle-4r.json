@@ -133,7 +133,7 @@
   "source": "docs/concepts/models/minarc-stop-knuckle-4r-pinknee.py",
   "confidence": "counted"
  },
- "complexity": 33.0,
+ "complexity": 32.5,
  "complexity_B": 33.0,
  "best_params_B_margin_reading": {
   "az1": 97.7672,

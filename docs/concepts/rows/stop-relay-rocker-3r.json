@@ -124,7 +124,7 @@
   "src": "farm-cma-C",
   "why_not_headline": "its 7 relay poses are islands: no continuous motion reaches them (31.92 with continuity)"
  },
- "complexity": 13.5,
+ "complexity": 12.5,
  "honest": true,
  "relay_off_same_shape": {
   "k": 12331,

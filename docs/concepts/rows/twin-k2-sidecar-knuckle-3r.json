@@ -61,7 +61,7 @@
   "note": "drive-2 metal OFF (drv2 0): not a buildable embodiment, a bound on both rod and flank"
  },
  "n_configs": 8080,
- "complexity": 75.0,
+ "complexity": 51.5,
  "mechanism": {
   "active_dof": 3,
   "passive_trans": 0,
@@ -87,7 +87,8 @@
    "joints": 2,
    "custom_parts": 4,
    "catalogue_parts": 6,
-   "rule": "user 2026-10-17: no encoders on the knee pins (pose from the hub encoders) -> no added complexity; counts = docs/concepts/skin-normal-3r-pin-knee.md line 584"
+   "rule": "user 2026-10-17: no encoders on the knee pins (pose from the hub encoders) -> no added complexity; counts = docs/concepts/skin-normal-3r-pin-knee.md line 584",
+   "closed_loops": 1
   }
  },
  "best_params": {
