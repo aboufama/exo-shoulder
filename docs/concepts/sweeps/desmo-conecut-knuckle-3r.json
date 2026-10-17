@@ -8628,5 +8628,305 @@
 }
 },
 "secs": 8.3
+},
+{
+"k": 89,
+"t": "2026-10-17T19:43:59Z",
+"params": {
+"r_c": 16.238,
+"beta": -176.212,
+"nose_r2": 0.75,
+"wall2": 0.9,
+"kslot": 46.5,
+"boss_r": 2.75,
+"glev": -0.5,
+"blend": 10.0,
+"a_s": 9.443,
+"psi": 150.09,
+"mu": 0.15
+},
+"tag": "g2-focused-mu0.15",
+"s1_read": "built",
+"stage2": "B",
+"inband14": 0.89,
+"inband10": 0.561,
+"reach": 0.775,
+"follow": 1.0,
+"contact": 0.0,
+"gap": 13.5,
+"near1": 14.66,
+"obj": 19.3,
+"honest": true,
+"fail": null,
+"why": {
+"fold": 31,
+"slide": 0,
+"flip": 0,
+"closure": 0,
+"skin": 0,
+"parts": 0,
+"contact": 0
+},
+"dK_lim": 46.5,
+"why_lim": "slot-end",
+"min_metal": 0.2,
+"s2": {
+"slot_len_mm": 3.87,
+"pa_horn_max": 25.4,
+"pa_crank_max": 13.78,
+"dK_lim_pa_by_mu": {
+"0.087": 64.5,
+"0.120": 64.5,
+"0.135": 64.5,
+"0.150": 64.5,
+"0.200": 59.75
+},
+"clear_plate_hubK": 1.15,
+"clear_lowarm_boss": 20.03,
+"boss_hubK_margin": 3.49,
+"seat_rK": 16.24
+},
+"s1": {
+"pa_pin_max": 30.18,
+"pa_cap_max": 35.47,
+"rc_min": 0.98,
+"ridge_mm": 0.22,
+"r_out": 11.06,
+"lim_by_gate": {
+"pitch": null,
+"pa_pin": 51.75,
+"pa_cap": 0.0,
+"drift": null,
+"radius": 0.5
+}
+},
+"slop": {
+"slop_max": 0.04,
+"slop_at": [
+1.0,
+-1
+],
+"pocket_pa_max_horn": 26.1,
+"pocket_pa_max_crank": 32.0,
+"pocket_pa_fail_K0": null
+},
+"ovh": {
+"ws": 12,
+"reach": 0.1667,
+"clip": 5,
+"follow": 1.0,
+"inband14": 0.9,
+"inband10": 0.6568,
+"why_not": {
+"fold": 7,
+"slide": 0,
+"flip": 0,
+"closure": 0,
+"skin": 0,
+"parts": 0,
+"contact": 0
+}
+},
+"secs": 7.6
+},
+{
+"k": 90,
+"t": "2026-10-17T19:44:03Z",
+"params": {
+"r_c": 16.121,
+"beta": -176.346,
+"nose_r2": 0.75,
+"wall2": 1.0,
+"kslot": 49.75,
+"boss_r": 2.75,
+"glev": -0.5,
+"blend": 18.0,
+"a_s": 9.541,
+"psi": 149.77,
+"mu": 0.15
+},
+"tag": "g2-focused-mu0.15",
+"s1_read": "built",
+"stage2": "B",
+"inband14": 0.8887,
+"inband10": 0.5405,
+"reach": 0.3438,
+"follow": 0.65,
+"contact": 0.0,
+"gap": 86.75,
+"near1": 86.75,
+"obj": 95.85,
+"honest": true,
+"fail": null,
+"why": {
+"fold": 121,
+"slide": 0,
+"flip": 0,
+"closure": 0,
+"skin": 0,
+"parts": 0,
+"contact": 0
+},
+"dK_lim": 0.0,
+"why_lim": "PLATE-hubK",
+"min_metal": 1.2,
+"s2": {
+"slot_len_mm": 0.0,
+"pa_horn_max": 10.63,
+"pa_crank_max": 8.3,
+"dK_lim_pa_by_mu": {
+"0.087": 64.5,
+"0.120": 64.5,
+"0.135": 64.5,
+"0.150": 64.5,
+"0.200": 60.5
+},
+"clear_plate_hubK": 0.58,
+"clear_lowarm_boss": 22.66,
+"boss_hubK_margin": 3.37,
+"seat_rK": 16.12
+},
+"s1": {
+"pa_pin_max": 25.48,
+"pa_cap_max": 35.32,
+"rc_min": 99.0,
+"ridge_mm": 98.24,
+"r_out": 11.06,
+"lim_by_gate": {
+"pitch": 58.0,
+"pa_pin": 49.5,
+"pa_cap": 0.0,
+"drift": null,
+"radius": 9.25
+}
+},
+"slop": {
+"slop_max": 0.0375,
+"slop_at": [
+0.0,
+1
+],
+"pocket_pa_max_horn": 0.0,
+"pocket_pa_max_crank": 0.0,
+"pocket_pa_fail_K0": null
+},
+"ovh": {
+"ws": 12,
+"reach": 0.0,
+"clip": 5,
+"follow": 0.6,
+"inband14": 0.7943,
+"inband10": 0.4721,
+"why_not": {
+"fold": 11,
+"slide": 0,
+"flip": 0,
+"closure": 0,
+"skin": 0,
+"parts": 0,
+"contact": 0
+}
+},
+"secs": 4.2
+},
+{
+"k": 91,
+"t": "2026-10-17T19:44:11Z",
+"params": {
+"r_c": 16.473,
+"beta": -175.843,
+"nose_r2": 1.0,
+"wall2": 0.9,
+"kslot": 46.5,
+"boss_r": 2.5,
+"glev": -0.75,
+"blend": 10.0,
+"a_s": 9.43,
+"psi": 150.38,
+"mu": 0.15
+},
+"tag": "g2-focused-mu0.15",
+"s1_read": "built",
+"stage2": "B",
+"inband14": 0.8904,
+"inband10": 0.5594,
+"reach": 0.775,
+"follow": 1.0,
+"contact": 0.0,
+"gap": 13.46,
+"near1": 14.62,
+"obj": 20.43,
+"honest": true,
+"fail": null,
+"why": {
+"fold": 31,
+"slide": 0,
+"flip": 0,
+"closure": 0,
+"skin": 0,
+"parts": 0,
+"contact": 0
+},
+"dK_lim": 46.5,
+"why_lim": "slot-end",
+"min_metal": 0.2,
+"s2": {
+"slot_len_mm": 3.96,
+"pa_horn_max": 26.4,
+"pa_crank_max": 22.36,
+"dK_lim_pa_by_mu": {
+"0.087": 64.5,
+"0.120": 64.5,
+"0.135": 64.5,
+"0.150": 64.0,
+"0.200": 58.0
+},
+"clear_plate_hubK": 1.06,
+"clear_lowarm_boss": 19.96,
+"boss_hubK_margin": 3.97,
+"seat_rK": 16.47
+},
+"s1": {
+"pa_pin_max": 31.36,
+"pa_cap_max": 34.93,
+"rc_min": 0.96,
+"ridge_mm": 0.197,
+"r_out": 10.97,
+"lim_by_gate": {
+"pitch": 59.5,
+"pa_pin": 50.25,
+"pa_cap": 0.0,
+"drift": null,
+"radius": 0.25
+}
+},
+"slop": {
+"slop_max": 0.045,
+"slop_at": [
+1.5,
+-1
+],
+"pocket_pa_max_horn": 26.1,
+"pocket_pa_max_crank": 32.0,
+"pocket_pa_fail_K0": null
+},
+"ovh": {
+"ws": 12,
+"reach": 0.1667,
+"clip": 5,
+"follow": 1.0,
+"inband14": 0.9006,
+"inband10": 0.657,
+"why_not": {
+"fold": 7,
+"slide": 0,
+"flip": 0,
+"closure": 0,
+"skin": 0,
+"parts": 0,
+"contact": 0
+}
+},
+"secs": 7.8
 }
 ]
