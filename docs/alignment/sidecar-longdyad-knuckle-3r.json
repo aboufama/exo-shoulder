@@ -5,7 +5,7 @@
  "complexity": 49.0,
  "verdict": "watch",
  "reasons": [
-  "near_touch: plain 18.91, <1 mm 20.0, <2 mm 34.03, <3 mm 155.98, band read 3-14 mm 19.22, 15.12 points live in the 1-2 mm shell (re-measured (this audit))",
+  "complexity: recomputed 29.5 vs row 49.0; MISMATCH; hand count (not derived from the model)",
   "reporting: verdict text still reads as a self-measured screen; dashboard sweep best 10.3 (score 96.25) sits 8.61 below the verified number"
  ],
  "checks": [
@@ -28,7 +28,7 @@
   },
   {
    "check": "near_touch",
-   "level": "watch",
+   "level": "ok",
    "reason": "plain 18.91, <1 mm 20.0, <2 mm 34.03, <3 mm 155.98, band read 3-14 mm 19.22, 15.12 points live in the 1-2 mm shell (re-measured (this audit))",
    "shell2": 15.12,
    "plain": 18.91,
@@ -262,9 +262,9 @@
   },
   {
    "check": "complexity",
-   "level": "ok",
-   "reason": "recomputed 49.0 vs row 49.0; hand count (not derived from the model); info: 3 active + 2 sensed passive coordinates = 5 read coordinates (cuff-side passives are outside the count by the user's ruling)",
-   "recomputed": 49.0,
+   "level": "watch",
+   "reason": "recomputed 29.5 vs row 49.0; MISMATCH; hand count (not derived from the model)",
+   "recomputed": 29.5,
    "row": 49.0
   },
   {
@@ -275,7 +275,7 @@
   {
    "check": "judge_change",
    "level": "ok",
-   "reason": "no bench / judge / metric file changed in the 4 commits that touched the row"
+   "reason": "no bench / judge / metric file changed in the 5 commits that touched the row"
   },
   {
    "check": "rules",
@@ -291,7 +291,7 @@
   "docs/concepts/verify/sidecar-longdyad-knuckle-3r_v_bench_frozen.json",
   "docs/concepts/verify/sidecar-longdyad-knuckle-3r_v_held_frozen.json"
  ],
- "git": "59539d6",
- "tool_version": "2026-10-17.1",
- "t": "2026-10-17T03:17:33Z"
+ "git": "5d587f5",
+ "tool_version": "2026-10-17.2",
+ "t": "2026-10-17T04:04:01Z"
 }

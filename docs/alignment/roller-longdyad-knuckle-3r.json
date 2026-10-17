@@ -5,7 +5,8 @@
  "complexity": 43.75,
  "verdict": "watch",
  "reasons": [
-  "contact_depth: the score counts contact poses, not depth (report only, score unchanged): v_gap 18.67: bench 2 contact poses, sum 16.46 mm, deepest 10.55 mm at ['ws', 15.0, 165.0, -60.0], 2 deeper than 3 mm vs sidecar-longdyad-knuckle-3r 6.23 mm over 4 (+10.23 mm, x2.64) - CLEARLY DEEPER; held 10 contact poses, sum 49.88 mm, deepest 9.54 mm at ['ws', 30.0, 165.0, -45.0], 7 deeper than 3 mm vs sidecar-longdyad-knuckle-3r 35.66 mm over 10 (+14.22 mm, x1.4)"
+  "contact_depth: the score counts contact poses, not depth (report only, score unchanged): v_gap 18.67: bench 2 contact poses, sum 16.46 mm, deepest 10.55 mm at ['ws', 15.0, 165.0, -60.0], 2 deeper than 3 mm vs sidecar-longdyad-knuckle-3r 6.23 mm over 4 (+10.23 mm, x2.64) - CLEARLY DEEPER; held 10 contact poses, sum 49.88 mm, deepest 9.54 mm at ['ws', 30.0, 165.0, -45.0], 7 deeper than 3 mm vs sidecar-longdyad-knuckle-3r 35.66 mm over 10 (+14.22 mm, x1.4)",
+  "complexity: recomputed 24.25 vs row 43.75; MISMATCH"
  ],
  "checks": [
   {
@@ -278,9 +279,9 @@
   },
   {
    "check": "complexity",
-   "level": "ok",
-   "reason": "recomputed 43.75 vs row 43.75; info: 3 active + 2 sensed passive coordinates = 5 read coordinates (cuff-side passives are outside the count by the user's ruling)",
-   "recomputed": 43.75,
+   "level": "watch",
+   "reason": "recomputed 24.25 vs row 43.75; MISMATCH",
+   "recomputed": 24.25,
    "row": 43.75
   },
   {
@@ -291,7 +292,7 @@
   {
    "check": "judge_change",
    "level": "ok",
-   "reason": "no bench / judge / metric file changed in the 3 commits that touched the row"
+   "reason": "no bench / judge / metric file changed in the 4 commits that touched the row"
   },
   {
    "check": "rules",
@@ -308,7 +309,7 @@
   "docs/concepts/verify/roller-longdyad-knuckle-3r_v_bench_frozen_env.json",
   "docs/concepts/verify/roller-longdyad-knuckle-3r_v_bench_frozen.json"
  ],
- "git": "59539d6",
- "tool_version": "2026-10-17.1",
- "t": "2026-10-17T03:17:33Z"
+ "git": "5d587f5",
+ "tool_version": "2026-10-17.2",
+ "t": "2026-10-17T04:03:58Z"
 }
