@@ -64,10 +64,10 @@
   "title": "Event log",
   "description": "What happened and when: the swarm's own log (docs/concepts/events.jsonl), one milestone per judged design and every new built-CAD R1 record (from the judge outputs).",
   "file": "data/events.json",
-  "sha256": "ee4df83c9f628e7ab4fcd1cd5c5c0d3af8a6cfd05b95248e3174fa2fe2d25a57",
-  "rows": 652,
-  "bytes": 256962,
-  "updated": "2026-10-17T13:21:05Z"
+  "sha256": "23e659ca5609e02c1b4f422635e24083d4ecc6afe82a5eba708009e58ff06ac6",
+  "rows": 653,
+  "bytes": 258040,
+  "updated": "2026-10-17T13:27:51Z"
  },
  {
   "id": "spend",
@@ -104,9 +104,9 @@
   "title": "Data build info",
   "description": "When tools/dash_build.py last gathered the data, the repo commit, and any warnings it printed.",
   "file": "data/meta.json",
-  "sha256": "787d1ea6ca5b146a130f1972ca8c0a9e48b3c93ab9db9848f1738624b5d861cc",
+  "sha256": "268f6e289683ef00ad94827ec5fc4e0d1848f5026fec555111f096c5cf63c055",
   "rows": 1,
   "bytes": 2089,
-  "updated": "2026-10-17T13:21:05Z"
+  "updated": "2026-10-17T13:27:51Z"
  }
 ]

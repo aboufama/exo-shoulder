@@ -433,6 +433,11 @@ designs (dipped-law-groove-knuckle-3r, seed-offset-3r-slides); every leader is w
 ## 9. Next steps, in priority order
 
 1. **Keep the loop running and close round 11** (section 8): trimlug's audit, the closer, then round 12 at once.
+   - *Lead, 13:30 UTC (commit time):* round 11 closed with trimlug-k165 as its winner (18.51 / 23.47, WATCH, not a lead
+     change). trimlug IS slipper-nose plus one cut on link 1a (the horn lug trimmed at the flank's farthest contact + 1.5
+     mm wall: T5 contact depth bench 14.74 -> 13.18 mm, held 46.35 -> 40.59 mm, same params and complexity). So its
+     generation CAD is the gen-7 slipper-nose CAD (wf_ecb7b6f8-d22) with that cut applied - a judged design change on
+     user_slipper_nose, not a third builder - and its final polish is slipper-nose's (wf_f38de10b-cb2, same params).
 2. **Reach is the gap.**
    - The lead's gap is reach 17.50 of 18.49 (ROUNDS round 10 results). **Score 95 is gap <= 13.75**: +18 workspace
      poses at the lead's in-band and contact, 0.278 points each (ROUNDS round 11 plan).
