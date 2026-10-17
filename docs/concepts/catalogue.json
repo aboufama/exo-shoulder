@@ -2748,7 +2748,7 @@
   "name": "Dog-ring drag-link knuckle: a lost-motion ring coaxial with J2 drives K through a short spherical drag link (no lobe, no follower, no crank boss); judge: re-aimed at layering - the ring and drag link as specified cost +5.0-5.5 gap points of pooled in-band (merged dogring-equidyad-knuckle-3r as the 38/42 cell)",
   "family": "slaved-knuckle 3R (lead family with the free pin knee), long K dyad, positive linkage drive with a coaxial lost-motion dwell",
   "lens": "round11:coupler-longstroke (lens 1; merged dogring-equidyad-knuckle-3r, the 38/42 B1-exposure cell)",
-  "status": "ideated",
+  "status": "screened",
   "t_ideated": "2026-10-17T09:57:50Z",
   "source": "round 11 judge (docs/concepts/round11_ideation.md)",
   "merged_from": [

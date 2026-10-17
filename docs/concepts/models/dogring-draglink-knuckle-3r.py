@@ -68,7 +68,7 @@ def _clamp(p):
     p["a1max"] = min(float(p.get("a1max", 99.0)), float(p["bk1"]) + float(p["bk2"]) - 5.5)
     p["smhi"] = _c(p["smhi"], 12.0, 28.0)
     p["dr_a1"] = _c(p["dr_a1"], 20.0, 40.0); p["dr_t1"] = _c(p["dr_t1"], -120.0, 120.0); p["dr_a3"] = _c(p["dr_a3"], 12.0, 20.0)
-    p["dr_t3"] = _c(p["dr_t3"], -180.0, 180.0); p["root_off"] = _c(p.get("root_off", 0.0), -60.0, 30.0)
+    p["dr_t3"] = _c(p["dr_t3"], -180.0, 180.0); p["root_off"] = _c(p.get("root_off", 0.0), -110.0, 30.0)
     p["dr_hl"] = _c(p.get("dr_hl", 0.0), 0.0, 9.0); p["dl_lift"] = _c(p.get("dl_lift", 0.0), 0.0, 8.0); p["dr_zr"] = _c(p.get("dr_zr", 0.0), 0.0, 3.0)
     p["ring_layer"] = int(round(_c(p.get("ring_layer", 0), -1, 1)))
     p["dl_a"] = 1 if float(p.get("dl_a", 1)) >= 0 else -1; p["dl_h"] = 1 if float(p.get("dl_h", 1)) >= 0 else -1
