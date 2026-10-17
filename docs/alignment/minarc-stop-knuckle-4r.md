@@ -38,7 +38,57 @@ and only wraps the harness's `near_touch` to capture the worn bench), and the ve
 
 Each finding is in `docs/alignment/minarc-stop-knuckle-4r.findings.json` with its evidence. All are 'watch'.
 
-FINDINGS-LIST
+1. **G6, a 4th sensed joint against 3 active joints.**
+   - Evidence: plain, pick1 is 18.40 against roller-longdyad 18.67 (+0.27, under one workspace pose = 0.278) and
+     sidecar-longdyad 18.91 (+0.51). On the same held-out protocol (fit Bench(60,160), wear the 1154 held-out poses
+     exact) it is 22.69 against sidecar-parallelogram 22.03, sidecar-longdyad 22.67 and roller-longdyad 23.73. At
+     1 mm it is 23.36 against 20.00 / 20.22 / 20.30 on the bench, and 26.73 against 25.75 / 24.44 / 26.83 held out.
+   - Why it is not a better exo: the 4th joint buys 9 workspace poses on the bench (reach 0.750 vs 0.725), none
+     overhead (7 of 28 vs sidecar-longdyad's 8 of 28). It costs a joint, complexity 52 vs 49, and contact
+     (11 vs 4 bench poses with metal inside the skin, deepest -13.17 vs -4.61 mm).
+   - Action: none on the score. README's "Best verified overall" line should say the lead it holds is plain-only and
+     within one to two poses; the user's ruling already names the 3-joint rows as the leaders.
+2. **NEW-overhead-traded, the polish gained reach away from overhead.**
+   - Evidence: pick1 replaced BDp (19.54 -> 18.40 bench, 24.18 -> 22.69 held out) but takes fewer overhead workspace
+     poses (elevation >= 140): bench 7 vs 8 of 28; held out 12 vs 16 of 71 (fit-60 shape), 16 vs 17 (env-fit shape).
+     Its gain is about 35 held-out workspace poses at mid and low elevation (reach 0.7195 vs 0.6828). The polish
+     note's "overhead grid nodes rise from 32 to 44" counts kinematic closures, not poses the wearer takes.
+   - Why it is not a better exo: the goal puts overhead first; the gap weighs every workspace pose equally.
+   - Action: proposal B1. Not gamed, because BDp loses about 35 held-out workspace poses.
+3. **NEW-depth-blind-contact, the new reach comes with deeper metal in the arm next to it.**
+   - Evidence: contact poses bench 11 vs BDp 4 (deepest -13.17 vs -6.41 mm, both overhead at elevation 165); held
+     out 35 vs 13 (fit-60), 28 vs 9 (env fit); deepest -14.61 vs -7.27 mm. The deepest is the side wall of hub K's
+     18.25 mm stack in the raised deltoid; next is the knee link and pad 10 mm into the chest wall with the arm across
+     the body. R1-aim (in-band 2-10) held out 0.563 vs 0.593. In-band never samples hub K's cap.
+   - Why it is not a better exo: "never touching" is the first line of the goal; the score charges a 14.6 mm press and
+     a 0.1 mm graze the same, and both only as poses not taken.
+   - Action: proposal B2. Not gamed: no clip frame touches, and BDp cannot close 19 of pick1's 28 env-fit contact poses.
+4. **G5, complexity hidden by a stale field.** The row's `complexity` is still 33.0 (and its mechanism note and HANDOFF
+   lines 79-80 say 33) after the record was changed to 4 active; `tools/simplicity.py` gives 52.0, which the
+   dashboard shows. The knee's 2 sensed pins are the same open question as in the sidecar-longdyad audit: counted as
+   joints, this design reads 6 coordinates, over the cap of 4. Action: proposal B4; the knee-pin question is the
+   user's.
+5. **R2, stale leader text and a mixed row.** The row's and the dashboard's verdict strings still open with "VERIFIED
+   LEADER" (BDp 19.54). The dashboard pairs pick1's v_gap 18.40 with BDp's verdict, held-out and complexity text. The
+   sweep record is still the refuted 6.19. The tool's reason "the dashboard flatters the design" (18.4 vs 19.54) is
+   partly a false positive: 18.40 is independently confirmed, only stored in `polished_gap`, not `v_gap`.
+6. **NEW-mixed-protocol, held-out numbers from two protocols side by side.** README shows pick1 "held out 21.31"
+   (env fit) next to sidecar-longdyad "held out 22.67" (fit 60). On one protocol they tie (22.69 vs 22.67). The env
+   fit flatters minarc by 1.38 and makes sidecar-longdyad's verified config 2.59 worse
+   (`docs/research/sidecar-longdyad-knuckle-3r_final_polish.md`). Minor P2 note: 2 env poses sit 1.66 / 1.97 deg
+   from held-out poses; the fit-60 protocol does not use env, so pick1's +1.49 over BDp stands. Action: proposal B3.
+7. **T4, the knee window below the polish lesson.** The polish's ang_min floor was BDp's 24.95; pick1 sits at 26.14,
+   below the >= 30 FINDINGS set for polishes after the GPU-knee case. Held out the knee reaches 152.75 deg (27.3 deg
+   from straight; window margin 1.11 deg), with 4 taken held-out poses past H1's 149.5. The CAD's 30.5 stop removes
+   them, and the verified held-out number was not re-scored for it (about 0.4 points). Action: proposal B5.
+8. **G4, near-singular postures.** 107 of 380 taken bench poses sit under 10 deg of J1-J3 margin; in the 86 forced
+   poses the plain dyad is 22.8 deg past its fold, so the margin depends on K opening freely; J1 swings up to 31 deg
+   per 10-fps frame at the clips' peak arm speed. Action: the MuJoCo feel check before the spring is frozen.
+9. **M5 / G3, a spring with a narrow window.** The score treats K as geometry. As built, 0.04 N.m passes R17 only
+   upright (drift 3.72 deg); with gravity across the thorax it drifts 4.12-7.70 deg (fails in 3 of 4 directions) and
+   the cuff twists up to 3.83 deg. 0.08 N.m lags 9.28 deg upright. pick1's K moves 15.8 deg at 52 deg/s on "Reach a
+   high shelf" where BDp's moves 0.85 deg. Action: a posture sweep in R17 (proposal in pick1_k_hold_check.md).
+T1-ITEM
 
 ## Checks of the tool (`docs/alignment/minarc-stop-knuckle-4r.json`)
 
