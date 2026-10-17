@@ -173,3 +173,40 @@ comes entirely from in-band, from the extra in-band wall samples, so it is a mea
     at plane 120 / elev 90 (horn 3.38).
   * Lost: overhead axial 0 (knee slide), plane-90 overhead, extreme internal rotation, behind the back, abduction 90 and
     extreme external rotation (all fold, the lead's walls).
+
+## Claim at standard density (the number this row reports)
+
+Configuration: a_s 9.25, psi 154, glev -0.5, blend 10 deg of q2, outer wall one row at 0.75 mm every 2.0 mm (about
+1 pt / 3 mm^2). Run locally, niced, after the farm hit the 12-hour budget line (balance $24.22, exo-cpu1 workersMax 0).
+
+| | lead through this file | **desmo** | delta |
+|---|---|---|---|
+| fast Bench(60,160) plain / near2 objective | 13.00 / 16.47 | 13.19 / 16.63 | +0.19 |
+| **frozen exact Bench(110,360)** | 18.49 (score 93.28) | **18.63 (score 93.23)** | **+0.14** |
+| reach / follow / ib14 / ib10 / contact | 0.725 / 1.0 / 0.8955 / 0.5162 / 0.0054 | 0.725 / 1.0 / 0.8941 / 0.5182 / 0.0054 | in-band only |
+| held out | 23.45 | 23.59 | +0.14 |
+| near1 (metal < 1 mm = contact), bench / held | 20.12 / 26.54 | 20.26 / 26.68 | +0.14 |
+| why lost (bench): fold / slide / contact | 88 / 9 / 2 | 88 / 9 / 2 | 0 |
+| overhead taken (elev >= 140) | 8 / 28 | 8 / 28 | 0 |
+| flood full / knn (kinematics unchanged) | 18.49 / 20.16 | 18.25 / 19.92 at dense sampling (full = static, 0 dropped) | same drops as the lead |
+| complexity (tools/simplicity.py v2.2, the lead's record convention) | 18.25 | **15.75** | -2.5 |
+
+**Verdict: a paired tie with the lead.** It loses 0.14 gap points, all of it from in-band: 9 ring-sector samples at
+51 % in band, plus the outer wall. In return it removes the clock spring, the spring cap, stop A and the stage-1
+roller, so complexity falls from 18.25 to 15.75. With no spring, the ledger's M5 watch (a spring force-closing a
+sliding nose) and the spring-lag problem in the fold margin both go away. In their place come 0.245 deg of K play at
+nominal fit (0.36 in series with the slot) and an onset blend the bench does not model.
+
+## What happens next (for the verifier and the loop)
+
+1. **Verifier.** Retarget docs/concepts/verify/slipper-nose-knuckle-3r.py at DSModel.
+   * Re-measure the crank-free play with the real groove tolerance.
+   * **Put the blended onset law (10 deg of q2, up to a 2.61 deg K lead) into the IK.** This is the one unmodelled
+     effect.
+   * Run the paired tie rule against 18.49 on the same poses, and the T5 per-pose dump
+     (`python3 tools/alignment_paired.py dump`).
+2. **The slop margin.** A larger lever (a_s 9.5-9.75, psi 148-152) brings the crank-free play down to 0.16-0.18 deg.
+   The cost is r_out 10.9-11.3 (more ring metal, about +0.2-0.3 fast). Pick it if the verifier counts tolerance.
+3. **Cell B (pinned horn), not built.** It deletes the 6 mm lug band, which is the lowest part on 71 taken poses.
+   That is the only lever here that could make this design better than a tie on the bench.
+4. **L1 CAD.** Use the lead's builder: swap the stage-1 roller for a pin, cut the cap groove, add the slot's outer wall.

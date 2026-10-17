@@ -3404,5 +3404,32 @@
 "slop_free_deg": 0.187,
 "slop_held_deg": 0.0375,
 "r_out": 12.07
+},
+{
+"k": 136,
+"t": "2026-10-17T15:55:00Z",
+"params": {
+"a_s": 9.25,
+"psi": 154.0,
+"glev": -0.5,
+"blend": 10.0,
+"wall_rows": "0.75",
+"wall_step": 2.0
+},
+"inband14": 0.8931,
+"inband10": 0.5145,
+"reach": 0.775,
+"follow": 1.0,
+"contact": 0.0,
+"gap": 13.19,
+"gap_plain": 13.19,
+"objective_near2": 16.63,
+"honest": true,
+"fail": null,
+"dK_lim": 49.5,
+"slop_free_deg": 0.245,
+"slop_held_deg": 0.115,
+"r_out": 10.64,
+"note": "the claim configuration at the standard wall sampling density"
 }
 ]
