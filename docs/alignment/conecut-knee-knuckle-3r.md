@@ -2,6 +2,9 @@
 
 This audit ran on 2026-10-17 from 17:27 to about 17:55 UTC. It was due because discovery round 12 (slice r12-B) screened
 the design and its verifier verified it (commit d943974, 17:20).
+- Ledger entry: 2026-10-17T17:48:48Z, by auditor, run `audit:conecut-knee-knuckle-3r`. Verdict **watch**. Tool
+  reasons: dominance (+0.21 plain, -1.82 at 2 mm against the lead) and reporting (the row's verdict text still reads
+  "SCREENED"; dashboard sweep best 12.5 sits 5.78 under the verified number). Plus 9 judgement findings, all watch.
 - Checks: `docs/alignment/conecut-knee-knuckle-3r.json` (13 checks, tool 2026-10-17.4), with reference
   slipper-nose-knuckle-3r.
 - Findings: `docs/alignment/conecut-knee-knuckle-3r.findings.json` (9, all watch).
@@ -51,6 +54,8 @@ the design and its verifier verified it (commit d943974, 17:20).
 | contact poses, held | 14 (60.97 mm, 9.86 mm at ws 45/165/-30; 9 deeper than 3 mm) | 10 (46.12 mm, 9.05 mm) | same |
 | clip in-band 2-14 (scored) / chain only | 0.9012 / 0.859 | 0.8955 / 0.869 | row `frozen.dilution`, verifier C4 |
 | ws in-band, unscored, all / elev 90-140 (bench) | 0.868 / 0.832 (16.8 % > 14 mm, max 30.7 mm) | 0.856 / 0.800 (19.9 %) | probe |
+| the same, held out | 0.871 / 0.848 (14.9 % > 14 mm, max 31.5 mm) | 0.861 / 0.822 (17.6 %) | probe |
+| why overhead is lost, held | fold 36, J3 stop 10, contact 7 | - | `_probe_held.json` |
 | knee angle over taken poses (window 25.2-154.8) | 59.3-107.1 deg | 86.2-152.2 deg | deep `K.ang` |
 | knee-link force per N m about J3 | 12.0 N | 31.6 N | row `frozen.knee` |
 | J3 stop | 2 mm 440C dowel; held margin 0.74 deg; 19 held poses stopped | none (knee slides: 9 bench, 32 held) | verifier C2 / C3 |

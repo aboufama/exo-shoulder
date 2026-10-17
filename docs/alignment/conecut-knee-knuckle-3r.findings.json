@@ -50,7 +50,7 @@
  {
   "key": "NEW-ws-inband",
   "level": "watch",
-  "reason": "Carried from the lead, and slightly better here. The gap reads in-band on clip frames only. On the taken bench workspace poses at elevation 90-140, 83.2 % of the metal is in 2-14 mm and 16.8 % is above 14 mm (p95 20.04 mm, max 30.74 mm). The lead has 80.0 % and 19.9 %. Over all taken workspace poses in-band is 0.868 (lead 0.856). Overhead (elev >= 140) is 8 of 28 taken at 0.936 in band, the same poses as the lead.",
+  "reason": "Carried from the lead, and slightly better here. The gap reads in-band on clip frames only. On taken workspace poses at elevation 90-140, bench, 83.2 % of the metal is in 2-14 mm and 16.8 % is above 14 mm (p95 20.04 mm, max 30.74 mm); the lead has 80.0 % and 19.9 %. Held out it is 84.8 % and 14.9 % (max 31.46 mm), against the lead's 82.2 % and 17.6 %. Over all taken workspace poses in-band is 0.868 on the bench and 0.871 held out (lead 0.856 / 0.861). Overhead (elev >= 140) is 8 of 28 on the bench and 18 of 71 held out, the same counts as the lead; the held losses are fold 36, J3 stop 10 and contact 7.",
   "evidence": "docs/alignment/remeasure/conecut-knee-knuckle-3r_probe_bench.json (and _probe_held.json) vs slipper-nose-knuckle-3r_probe_{bench,held}.json"
  }
 ]
