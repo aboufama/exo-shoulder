@@ -24,7 +24,7 @@ def load(path):
     m = importlib.util.module_from_spec(sp); sp.loader.exec_module(m); return m
 
 
-def contact_labels(M):
+def contact_labels(M, reg=None):
     """label every contact-only sample: the drive's member 8 (ball-link sockets first 64 pts, then the rod), member 9
     (crank boss wall + arm top), the horn lug's top (member 1, the horn's length); a model may also carry its own
     labels (M._contact_labels: list of (label, n) per contact entry)"""
@@ -37,16 +37,17 @@ def contact_labels(M):
     out = []
     for m, X in M.contact:
         n = len(X)
-        if m == 8: out.append([("rodends", 64), ("rod", n - 64)])
+        if reg and id(X) in reg: out.append(list(reg[id(X)]))
+        elif m == 8: out.append([("rodends", 64), ("rod", n - 64)])
         elif m == 9: out.append([("crank", n)])
         elif m == 1 and n == nh: out.append([("horn", n)])
         else: out.append([("chain:m%d" % m, n)])
     return out
 
 
-def table(M, B):
+def table(M, B, reg=None):
     """per pose i (valid = the bench evaluated it): {part: distances} for rigid metal (in-band) and contact-only samples"""
-    labs = contact_labels(M); rows = {}
+    labs = contact_labels(M, reg); rows = {}
     for i in range(len(B.idx)):
         if B.res[i] is None: continue                       # not kinematically valid / part clash: no metal recorded
         rig = {nm: B.dist(i, M.world(m, i, X)) for nm, (m, X) in M.rigid.items() if len(X)}
@@ -143,7 +144,7 @@ def main():
     t = time.time(); MOD = load(mpath)
     nc, nw = (-1, -1) if which == "held" else (110, 360)
     fit, M1, M, B, r = MOD._frozen_model(P, nc, nw)
-    rows = table(M, B)
+    rows = table(M, B, getattr(MOD, "DRIVE_LABELS", None))
     base = score(B, rows, M.why)
     parts_present = sorted({nm for rig, con in rows.values() for nm in list(rig) + list(con) if nm in DRIVE_PARTS})
     ghosts = {"none": score(B, rows, M.why)}

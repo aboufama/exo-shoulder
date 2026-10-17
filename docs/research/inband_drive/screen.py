@@ -20,7 +20,7 @@ with open(outp, "a") as fo:
             row = dict(ov=ov, gap=r["gap"], plain=(r.get("plain") or {}).get("gap"), near1=r.get("gap_near1"), reach=r["reach"], inband14=r["inband14"],
                        contact=r["contact"], honest=r.get("honest"), why=r.get("why"),
                        dK_lim=(r.get("cam") or {}).get("dK_lim"), why_lim=(r.get("cam") or {}).get("why_lim"),
-                       boss=(r.get("cam") or {}).get("boss_level"), lev=(r.get("cam") or {}).get("lev_L1b"),
+                       boss=(r.get("cam") or {}).get("boss_level"), tilt=(r.get("cam") or {}).get("tilt_max_range"), trans=(r.get("cam") or {}).get("trans_min_taken"), lev=(r.get("cam") or {}).get("lev_L1b"),
                        parts={k: pr.get(k) for k in ("crank", "rod", "rodends", "horn", "ear", "hub2", "L1b")}, secs=round(time.time() - t, 1))
         except Exception as e:
             row = dict(ov=ov, error=repr(e)[:400])

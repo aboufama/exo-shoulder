@@ -45,10 +45,13 @@ SCBase = LS.SCBase
 unit = S.unit; D2R = math.pi / 180
 ID = "inband-rssr-knuckle-3r"
 DRIVE = "rssr"
+REPORT_KEYS = LS.REPORT_KEYS
 DRIVE_LABELS = {}                                            # id(contact array) -> [(part, n), ...] (attribution)
 GHOST = [g for g in os.environ.get("IB_GHOST", "").split(",") if g]
 if GHOST == ["all"]: GHOST = ["crank", "rod", "rodends", "horn", "ear"]
 IB_DEFAULTS = dict(eta=0.0, clay=0, zc=0.0, bl_c=0, bl_h=0)
+STUD = 3.5                                                   # M2 ball stud: ball centre beyond the end face it screws into (mm)
+CONE = 30.0                                                  # M2 ball link: socket tilt off its stud's normal plane (deg)
 PARAMS = dict(LS.PARAMS, **IB_DEFAULTS)
 _ls_clamp = LS._clamp
 
@@ -58,7 +61,7 @@ def _clamp(p):
     p["eta"] = min(max(float(p.get("eta", 0.0)), -120.0), 120.0)
     p["clay"] = 1 if float(p.get("clay", 0)) >= 0.5 else 0
     p["zc"] = min(max(float(p.get("zc", 0.0)), 0.0), 3.15)
-    for k in ("bl_c", "bl_h"): p[k] = 1 if float(p.get(k, 0)) >= 0.5 else 0
+    for k in ("bl_c", "bl_h"): p[k] = int(min(max(round(float(p.get(k, 0))), 0), 2))
     return p
 
 
@@ -110,9 +113,14 @@ class IBModel(LS.LSModel):
         rs = np.arange(0.0, La + 1e-6, 2.0); ws_ = np.array([-3.0, -1.0, 1.0, 3.0])
         L_ = D.law(); dKmax = math.radians(float(L_.get("dK_max", 0.0)) + 2.0) if L_.get("ok") else 0.2
         sp = float(np.sign(D.psiA)) or 1.0
-        zc_s = -1.0 if int(P.get("bl_c", 0)) or P.get("ball_low") else 1.0
-        zh_s = -1.0 if int(P.get("bl_h", 0)) or P.get("ball_low") else 1.0
-        lvK = fK + float(P["hl"]); H0 = uK * (lvK + (S.T_LINK + SC.ZB if zh_s > 0 else -SC.ZB)) + RH * sK
+        mc, mh = int(P.get("bl_c", 0)), int(P.get("bl_h", 0))
+        if P.get("ball_low"): mc = mh = 1
+        zc_s = -1.0 if mc == 1 else 1.0; zh_s = -1.0 if mh == 1 else 1.0
+        lvK = fK + float(P["hl"])
+        # ball centre: 0 = on a stud above the lug / arm (+T_LINK + ZB), 1 = below (-ZB), 2 = on a RADIAL stud screwed into the
+        # lug's / arm's end face (ball centre in its mid-plane, STUD mm beyond the end face; the M2 ball link's socket axis is
+        # then the stud's, so the rod's tilt off the plane normal to the stud is the socket's cone, gated at CONE)
+        H0 = uK * (lvK + S.T_LINK / 2) + RH * sK if mh == 2 else uK * (lvK + (S.T_LINK + SC.ZB if zh_s > 0 else -SC.ZB)) + RH * sK
         k = math.tan(S.RAMP * D2R)
         lvl_clear = (lev + float(P["zr"])) if clay == 0 else zboss
 
@@ -130,7 +138,9 @@ class IBModel(LS.LSModel):
                 else: lvl[j] = zboss if (clear or r_ <= 5.0) else max(zboss, zstack)
             return np.max(lvl[None, :] - k * np.abs(rs[:, None] - rs[None, :]), axis=1)
 
-        def tip_of(lvl): return dR * (lvl[-1] + (S.T_LINK + SC.ZB if zc_s > 0 else -SC.ZB)) + La * sR
+        def tip_of(lvl):
+            if mc == 2: return dR * (lvl[-1] + S.T_LINK / 2) + La * sR
+            return dR * (lvl[-1] + (S.T_LINK + SC.ZB if zc_s > 0 else -SC.ZB)) + La * sR
 
         def phi_end(tip0):
             Lr = float(np.linalg.norm(H0 - tip0)); pg_ = np.radians(np.arange(-100.0, 100.0 + 1e-6, 0.1))
@@ -139,12 +149,14 @@ class IBModel(LS.LSModel):
             return float(pg_[sgn][np.argmin(np.abs(pg_[sgn] - (RH * dKmax / La)))]) if len(sgn) else RH * dKmax / La
         lvl = np.full(len(rs), zboss); pe = phi_end(tip_of(lvl)); pe = phi_end(tip_of(arm_levels(np.linspace(0, pe, 7))))
         lvl = arm_levels(np.linspace(0, pe * 1.05, 9))
-        arm = np.array([dR * lvl[j] + r_ * sR + w_ * bnR for j, r_ in enumerate(rs) for w_ in ws_])
+        arm = np.array([dR * lvl[j] + r_ * sR + w_ * bnR for j, r_ in enumerate(rs) for w_ in ws_ if mc != 2 or r_ <= La - STUD + 1e-6])
         e, f = S.frame_of(dR); dd = S.disc(5.0, 2.0)
         boss = PV + dd[:, :1] * e + dd[:, 1:] * f
         tip0 = tip_of(lvl)
         bnK = unit(np.cross(uK, sK))
-        horn = np.array([uK * lvK + r_ * sK + w_ * bnK for r_ in np.arange(S.HUB_R + 0.5, RH + 4.0 + 1e-6, 2.0) for w_ in (-3.0, -1.0, 1.0, 3.0)])
+        hend = RH - STUD if mh == 2 else RH + 4.0
+        horn = np.array([uK * lvK + r_ * sK + w_ * bnK for r_ in np.arange(S.HUB_R + 0.5, hend + 1e-6, 2.0) for w_ in (-3.0, -1.0, 1.0, 3.0)])
+        tilt = np.zeros((len(np.radians(np.arange(0.0, max(math.degrees(dKmax), 5.0) + 1e-6, 0.25))), 2))
         Lrod = float(np.linalg.norm(H0 - tip0))
         kgrid = np.radians(np.arange(0.0, max(math.degrees(dKmax), 5.0) + 1e-6, 0.25)); phig = np.zeros(len(kgrid)); trans = np.full(len(kgrid), 90.0)
         pg = np.radians(np.arange(-100.0, 100.0 + 1e-6, 0.05)); Rg = S.rotm(dR, pg); TPg = np.einsum("nij,j->ni", Rg, tip0 - PV) + PV
@@ -159,6 +171,8 @@ class IBModel(LS.LSModel):
             tp = S.rotm(dR, ph)[0] @ (tip0 - PV) + PV; rod = unit(H - tp)
             vt = unit(np.cross(dR, tp - PV)); vh = unit(np.cross(uK, H))
             trans[j] = 90.0 - max(math.degrees(math.acos(min(1, abs(float(rod @ vt))))), math.degrees(math.acos(min(1, abs(float(rod @ vh))))))
+            axc = S.rotm(dR, ph)[0] @ sR if mc == 2 else dR; axh = S.rotm(uK, sp * kk)[0].T @ sK if mh == 2 else uK
+            tilt[j] = [math.degrees(math.asin(min(1, abs(float(rod @ axc))))), math.degrees(math.asin(min(1, abs(float(rod @ axh)))))]
         ratio = np.gradient(phig, kgrid) if len(kgrid) > 2 else np.ones(len(kgrid))
         self._scg = dict(PV=PV, dR=dR, tip0=tip0, H0=H0, uK=uK, sp=sp, kgrid=kgrid, phig=phig); self._sc = None
         dKp = np.abs(np.asarray(self.dK, float)); dKsave = self.dK
@@ -171,7 +185,13 @@ class IBModel(LS.LSModel):
         def ends(c, ax_, s_):
             return (_ring(c - SC.ZB * ax_, SC.ER, ax_), _ring(c + 3.5 * ax_, SC.ER, ax_)) if s_ > 0 else \
                    (_ring(c - 3.5 * ax_, SC.ER, ax_), _ring(c + SC.ZB * ax_, SC.ER, ax_))
-        bC, tC = ends(tip0, dR, zc_s); bH, tH = ends(H0, uK, zh_s)
+        def ends_radial(c, st_, up_):
+            # socket body O7 x 7 on a radial stud: rings about the stud axis at the ball centre and +-3 along it; its
+            # skin-facing half (below the mid-plane) is metal in the band, the rest contact-only
+            R3 = [_ring(c + o * st_, SC.ER, st_) for o in (-3.0, 0.0, 3.0)]; A = np.concatenate(R3); lo = (A - c) @ up_ <= 0.01
+            return A[lo], A[~lo]
+        bC, tC = ends_radial(tip0, sR, dR) if mc == 2 else ends(tip0, dR, zc_s)
+        bH, tH = ends_radial(H0, sK, uK) if mh == 2 else ends(H0, uK, zh_s)
         endsB = np.concatenate([bC, bH]); endsT = np.concatenate([tC, tH])
         self.rigid["rodends"] = (8, endsB)
         self.rigid.pop("rocker", None)
@@ -213,7 +233,8 @@ class IBModel(LS.LSModel):
             dh2 = float(self.sd_cyl(XR, cen2, ax2, r=r2).min())
             dl1b = float(treeL1b.query(farX(XR, 4.0))[0].min()) - S.T_LINK / 2 if treeL1b is not None and len(farX(XR, 4.0)) else 99.0
             XCf = farX(XC, 6.5); dc2 = float(self.sd_cyl(XCf, cen2, ax2, r=r2).min()) - S.T_LINK / 2 if len(XCf) else 99.0
-            bad = {"transmission": trans[j] < SC.TRANS_MIN, "ROD-hub2": dh2 < 1.0, "ROD-L1b": dl1b < 1.0, "CRK-hub2": dc2 < 1.0}
+            bad = {"transmission": trans[j] < SC.TRANS_MIN, "ROD-hub2": dh2 < 1.0, "ROD-L1b": dl1b < 1.0, "CRK-hub2": dc2 < 1.0,
+                   "cone": (mc == 2 and tilt[j, 0] > CONE) or (mh == 2 and tilt[j, 1] > CONE)}
             if len(ear):                                         # the rod and its sockets keep 1 mm off the ear (same body as link 1b)
                 bad["ROD-ear"] = float(cKDTree(ear).query(XR)[0].min()) - S.T_LINK / 2 < 1.0
             if any(bad.values()):
@@ -230,7 +251,10 @@ class IBModel(LS.LSModel):
                              ratio_small_angle=round(RH / La, 3), phi_max_taken=round(math.degrees(float(np.interp(kmax_t, kgrid, phig))), 1),
                              crest_exact=round(float(P["r_lobe"]) + float(P["s_arm"]) * abs(float(np.interp(kmax_t, kgrid, phig))), 2),
                              dK_lim=round(math.degrees(lim), 1), why_lim=why_lim, eta=round(eta, 2), clay=clay, bl_c=int(zc_s < 0), bl_h=int(zh_s < 0),
-                             ear_pts=int(len(ear)), pivot_off_hub2_mm=round(float(np.linalg.norm(np.cross(PV, u2))), 2))
+                             ear_pts=int(len(ear)), pivot_off_hub2_mm=round(float(np.linalg.norm(np.cross(PV, u2))), 2),
+                             tilt_max_taken=[round(float(tilt[:jt, 0].max()), 1), round(float(tilt[:jt, 1].max()), 1)],
+                             tilt_max_range=[round(float(tilt[:max(int(np.searchsorted(kgrid, lim)) + 1, 1), 0].max()), 1),
+                                             round(float(tilt[:max(int(np.searchsorted(kgrid, lim)) + 1, 1), 1].max()), 1)])
         self._rod_info = self._sc_info
 
     def collide(self, i):
@@ -268,7 +292,7 @@ def evaluate(B, params):
     if STROKE_MIN > 0 and float((r.get("cam") or {}).get("dK_lim") or 0.0) < STROKE_MIN: r["honest"] = False; r["stroke_short"] = True
     if OBJ == "near1" and r.get("gap_near1") is not None: r["gap"] = r["gap_near1"]
     info = getattr(M, "_sc_info", None) or {}
-    r.setdefault("cam", {}).update({k: info.get(k) for k in ("eta", "clay", "bl_c", "bl_h", "boss_level", "lev_L1b", "arm_tip_level", "pivot_off_hub2_mm")})
+    r.setdefault("cam", {}).update({k: info.get(k) for k in ("eta", "clay", "bl_c", "bl_h", "boss_level", "lev_L1b", "arm_tip_level", "pivot_off_hub2_mm", "tilt_max_taken", "tilt_max_range")})
     p = {k: v for k, v in M.p.items() if isinstance(v, (int, float, str, bool)) or v is None}
     return p, r
 
@@ -276,7 +300,7 @@ def evaluate(B, params):
 def bench_eval(B, params):
     r, M = _report(B, params); r.pop("params", None); r["drive_kind"] = DRIVE
     info = getattr(M, "_sc_info", None) or {}
-    r.setdefault("cam", {}).update({k: info.get(k) for k in ("eta", "clay", "bl_c", "bl_h", "boss_level", "lev_L1b", "arm_tip_level")})
+    r.setdefault("cam", {}).update({k: info.get(k) for k in ("eta", "clay", "bl_c", "bl_h", "boss_level", "lev_L1b", "arm_tip_level", "tilt_max_taken", "tilt_max_range", "trans_min_taken")})
     return r
 
 

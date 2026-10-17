@@ -27,7 +27,7 @@ elif kind == "cma":
         lab = f"ib-{name}-{r['tag']}"
         sc = r["scales"]
         cmd = (f"mkdir -p {OUT} && python3 tools/concept_cma.py {MODEL} --x0 '{json.dumps(r['x0'])}' --scales '{json.dumps(sc)}' "
-               f"--sigma {r.get('sigma', 0.5)} --popsize 8 --jobs 2 --budget-s {budget:.0f} --max-gen 400 --seed {r['seed']} --label {lab} "
+               f"--base '{json.dumps(r.get('base', {}))}' --sigma {r.get('sigma', 0.5)} --popsize 8 --jobs 2 --budget-s {budget:.0f} --max-gen 400 --seed {r['seed']} --label {lab} "
                f"--out {OUT}/cma_{name}_{r['tag']}.json > {OUT}/cma_{name}_{r['tag']}.log 2>&1; tail -3 {OUT}/cma_{name}_{r['tag']}.log")
         jobs.append(dict(tag=lab, cmd=cmd, out=[f"{OUT}/cma_{name}_{r['tag']}*"], env=dict(ENV, **r.get("env", {})), timeout=budget + 600))
 elif kind == "claim":

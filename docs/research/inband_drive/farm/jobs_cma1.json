@@ -1,0 +1,104 @@
+[
+ {
+  "tag": "ib-cma1-a",
+  "cmd": "mkdir -p docs/research/inband_drive/farm && python3 tools/concept_cma.py docs/concepts/models/inband-rssr-knuckle-3r.py --x0 '{\"La\": 25.7026, \"s_arm\": 4.0, \"r_h\": 15.491, \"beta\": -147.3923, \"gam\": 22.4633, \"hl\": 2.929, \"r_lobe\": 8.5, \"bk1\": 30.0377, \"bk2\": 42.9378, \"a1max\": 67.9755, \"smhi\": 15.2738, \"kK\": 3.0, \"zc\": 0.0, \"eta\": 0.0}' --scales '{\"La\": 3.0, \"s_arm\": 0.5, \"r_h\": 2.0, \"beta\": 15.0, \"gam\": 15.0, \"hl\": 0.8, \"zc\": 0.8, \"kK\": 0.25, \"r_lobe\": 0.4, \"bk1\": 2.0, \"bk2\": 3.0, \"a1max\": 3.0, \"smhi\": 2.0, \"eta\": 10.0}' --base '{\"clay\": 1, \"bl_c\": 0, \"bl_h\": 0, \"zr\": 0.0}' --sigma 0.5 --popsize 8 --jobs 2 --budget-s 1500 --max-gen 400 --seed 61 --label ib-cma1-a --out docs/research/inband_drive/farm/cma_cma1_a.json > docs/research/inband_drive/farm/cma_cma1_a.log 2>&1; tail -3 docs/research/inband_drive/farm/cma_cma1_a.log",
+  "out": [
+   "docs/research/inband_drive/farm/cma_cma1_a*"
+  ],
+  "env": {
+   "OMP_NUM_THREADS": "1",
+   "IGL_NUM_THREADS": "1",
+   "LS_DRIVE": "rssr",
+   "CB_QUIET_EXACT": "1",
+   "LS_STROKE_MIN": "55",
+   "LS_KK_MIN": "2.7",
+   "LS_OBJ": "near2"
+  },
+  "timeout": 2100.0
+ },
+ {
+  "tag": "ib-cma1-b",
+  "cmd": "mkdir -p docs/research/inband_drive/farm && python3 tools/concept_cma.py docs/concepts/models/inband-rssr-knuckle-3r.py --x0 '{\"La\": 25.7026, \"s_arm\": 4.0, \"r_h\": 15.491, \"beta\": -147.3923, \"gam\": 22.4633, \"hl\": 2.929, \"r_lobe\": 8.5, \"bk1\": 30.0377, \"bk2\": 42.9378, \"a1max\": 67.9755, \"smhi\": 15.2738, \"kK\": 3.0, \"zc\": 0.0, \"eta\": 0.0}' --scales '{\"La\": 3.0, \"s_arm\": 0.5, \"r_h\": 2.0, \"beta\": 15.0, \"gam\": 15.0, \"hl\": 0.8, \"zc\": 0.8, \"kK\": 0.25, \"r_lobe\": 0.4, \"bk1\": 2.0, \"bk2\": 3.0, \"a1max\": 3.0, \"smhi\": 2.0, \"eta\": 10.0}' --base '{\"clay\": 1, \"bl_c\": 0, \"bl_h\": 0, \"zr\": 0.0}' --sigma 0.5 --popsize 8 --jobs 2 --budget-s 1500 --max-gen 400 --seed 62 --label ib-cma1-b --out docs/research/inband_drive/farm/cma_cma1_b.json > docs/research/inband_drive/farm/cma_cma1_b.log 2>&1; tail -3 docs/research/inband_drive/farm/cma_cma1_b.log",
+  "out": [
+   "docs/research/inband_drive/farm/cma_cma1_b*"
+  ],
+  "env": {
+   "OMP_NUM_THREADS": "1",
+   "IGL_NUM_THREADS": "1",
+   "LS_DRIVE": "rssr",
+   "CB_QUIET_EXACT": "1",
+   "LS_STROKE_MIN": "55",
+   "LS_KK_MIN": "2.7",
+   "LS_OBJ": "near1"
+  },
+  "timeout": 2100.0
+ },
+ {
+  "tag": "ib-cma1-c",
+  "cmd": "mkdir -p docs/research/inband_drive/farm && python3 tools/concept_cma.py docs/concepts/models/inband-rssr-knuckle-3r.py --x0 '{\"La\": 25.7026, \"s_arm\": 4.0, \"r_h\": 15.491, \"beta\": -147.3923, \"gam\": 22.4633, \"hl\": 2.929, \"r_lobe\": 8.5, \"bk1\": 30.0377, \"bk2\": 42.9378, \"a1max\": 67.9755, \"smhi\": 15.2738, \"kK\": 3.0, \"zc\": 0.0, \"eta\": 0.0}' --scales '{\"La\": 3.0, \"s_arm\": 0.5, \"r_h\": 2.0, \"beta\": 15.0, \"gam\": 15.0, \"hl\": 0.8, \"zc\": 0.8, \"kK\": 0.25, \"r_lobe\": 0.4, \"bk1\": 2.0, \"bk2\": 3.0, \"a1max\": 3.0, \"smhi\": 2.0, \"eta\": 10.0}' --base '{\"clay\": 1, \"bl_c\": 1, \"bl_h\": 0, \"zr\": 0.0}' --sigma 0.5 --popsize 8 --jobs 2 --budget-s 1500 --max-gen 400 --seed 63 --label ib-cma1-c --out docs/research/inband_drive/farm/cma_cma1_c.json > docs/research/inband_drive/farm/cma_cma1_c.log 2>&1; tail -3 docs/research/inband_drive/farm/cma_cma1_c.log",
+  "out": [
+   "docs/research/inband_drive/farm/cma_cma1_c*"
+  ],
+  "env": {
+   "OMP_NUM_THREADS": "1",
+   "IGL_NUM_THREADS": "1",
+   "LS_DRIVE": "rssr",
+   "CB_QUIET_EXACT": "1",
+   "LS_STROKE_MIN": "55",
+   "LS_KK_MIN": "2.7",
+   "LS_OBJ": "near2"
+  },
+  "timeout": 2100.0
+ },
+ {
+  "tag": "ib-cma1-d",
+  "cmd": "mkdir -p docs/research/inband_drive/farm && python3 tools/concept_cma.py docs/concepts/models/inband-rssr-knuckle-3r.py --x0 '{\"La\": 22.8723, \"s_arm\": 4.0, \"r_h\": 15.9448, \"beta\": -149.8132, \"gam\": 29.1695, \"hl\": 2.27, \"kK\": 2.7, \"r_lobe\": 8.4846, \"bk1\": 28.7724, \"bk2\": 41.9799, \"a1max\": 60.8797, \"smhi\": 13.4632, \"zc\": 0.0, \"eta\": 0.0}' --scales '{\"La\": 3.0, \"s_arm\": 0.5, \"r_h\": 2.0, \"beta\": 15.0, \"gam\": 15.0, \"hl\": 0.8, \"zc\": 0.8, \"kK\": 0.25, \"r_lobe\": 0.4, \"bk1\": 2.0, \"bk2\": 3.0, \"a1max\": 3.0, \"smhi\": 2.0, \"eta\": 10.0}' --base '{\"clay\": 1, \"bl_c\": 0, \"bl_h\": 0, \"zr\": 0.0}' --sigma 0.5 --popsize 8 --jobs 2 --budget-s 1500 --max-gen 400 --seed 64 --label ib-cma1-d --out docs/research/inband_drive/farm/cma_cma1_d.json > docs/research/inband_drive/farm/cma_cma1_d.log 2>&1; tail -3 docs/research/inband_drive/farm/cma_cma1_d.log",
+  "out": [
+   "docs/research/inband_drive/farm/cma_cma1_d*"
+  ],
+  "env": {
+   "OMP_NUM_THREADS": "1",
+   "IGL_NUM_THREADS": "1",
+   "LS_DRIVE": "rssr",
+   "CB_QUIET_EXACT": "1",
+   "LS_STROKE_MIN": "55",
+   "LS_KK_MIN": "2.7",
+   "LS_OBJ": "near2"
+  },
+  "timeout": 2100.0
+ },
+ {
+  "tag": "ib-cma1-e",
+  "cmd": "mkdir -p docs/research/inband_drive/farm && python3 tools/concept_cma.py docs/concepts/models/inband-rssr-knuckle-3r.py --x0 '{\"La\": 25.7026, \"s_arm\": 4.0, \"r_h\": 15.491, \"beta\": -147.3923, \"gam\": 22.4633, \"hl\": 2.929, \"r_lobe\": 8.5, \"bk1\": 30.0377, \"bk2\": 42.9378, \"a1max\": 67.9755, \"smhi\": 15.2738, \"kK\": 3.0, \"zc\": 0.0, \"eta\": 0.0}' --scales '{\"La\": 3.0, \"s_arm\": 0.5, \"r_h\": 2.0, \"beta\": 15.0, \"gam\": 15.0, \"hl\": 0.8, \"zc\": 0.8, \"kK\": 0.25, \"r_lobe\": 0.4, \"bk1\": 2.0, \"bk2\": 3.0, \"a1max\": 3.0, \"smhi\": 2.0, \"eta\": 10.0}' --base '{\"clay\": 1, \"bl_c\": 1, \"bl_h\": 0, \"zr\": 0.0}' --sigma 0.5 --popsize 8 --jobs 2 --budget-s 1500 --max-gen 400 --seed 65 --label ib-cma1-e --out docs/research/inband_drive/farm/cma_cma1_e.json > docs/research/inband_drive/farm/cma_cma1_e.log 2>&1; tail -3 docs/research/inband_drive/farm/cma_cma1_e.log",
+  "out": [
+   "docs/research/inband_drive/farm/cma_cma1_e*"
+  ],
+  "env": {
+   "OMP_NUM_THREADS": "1",
+   "IGL_NUM_THREADS": "1",
+   "LS_DRIVE": "rssr",
+   "CB_QUIET_EXACT": "1",
+   "LS_STROKE_MIN": "55",
+   "LS_KK_MIN": "2.7",
+   "LS_OBJ": "near1"
+  },
+  "timeout": 2100.0
+ },
+ {
+  "tag": "ib-cma1-f",
+  "cmd": "mkdir -p docs/research/inband_drive/farm && python3 tools/concept_cma.py docs/concepts/models/inband-rssr-knuckle-3r.py --x0 '{\"La\": 25.7026, \"s_arm\": 4.0, \"r_h\": 15.491, \"beta\": -147.3923, \"gam\": 15.0, \"hl\": 2.929, \"r_lobe\": 8.5, \"bk1\": 30.0377, \"bk2\": 42.9378, \"a1max\": 67.9755, \"smhi\": 15.2738, \"kK\": 3.0, \"zc\": 0.0, \"eta\": 12.0}' --scales '{\"La\": 3.0, \"s_arm\": 0.5, \"r_h\": 2.0, \"beta\": 15.0, \"gam\": 15.0, \"hl\": 0.8, \"zc\": 0.8, \"kK\": 0.25, \"r_lobe\": 0.4, \"bk1\": 2.0, \"bk2\": 3.0, \"a1max\": 3.0, \"smhi\": 2.0, \"eta\": 10.0}' --base '{\"clay\": 1, \"bl_c\": 0, \"bl_h\": 0, \"zr\": 0.0}' --sigma 0.5 --popsize 8 --jobs 2 --budget-s 1500 --max-gen 400 --seed 66 --label ib-cma1-f --out docs/research/inband_drive/farm/cma_cma1_f.json > docs/research/inband_drive/farm/cma_cma1_f.log 2>&1; tail -3 docs/research/inband_drive/farm/cma_cma1_f.log",
+  "out": [
+   "docs/research/inband_drive/farm/cma_cma1_f*"
+  ],
+  "env": {
+   "OMP_NUM_THREADS": "1",
+   "IGL_NUM_THREADS": "1",
+   "LS_DRIVE": "rssr",
+   "CB_QUIET_EXACT": "1",
+   "LS_STROKE_MIN": "55",
+   "LS_KK_MIN": "2.7",
+   "LS_OBJ": "near2"
+  },
+  "timeout": 2100.0
+ }
+]
