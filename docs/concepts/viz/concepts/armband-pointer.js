@@ -1,16 +1,16 @@
 /* armband-pointer - a 2R donut "pointer" over the shoulder points the arm, and a CLOSED thin-section ring bearing round
- * the distal upper arm, just above the user's cuff, takes the humeral twist (catalogue armband-pointer; ideated, no bench
- * model yet). Spherical 3R with a3 = the humerus axis t: J1 donut about a1 = p* = bvec(120, 46) (S-fixed, anterior
- * acromion), J2 donut about a2 = unit(a1 x t) (90 deg from a1 and from the arm), link 2 = a long LATERAL SPAR down the
+ * the distal upper arm, just above the user's cuff, takes the humeral twist (catalogue armband-pointer; screened DEAD,
+ * models/armband-pointer.py). Spherical 3R with a3 = the humerus axis t: J1 O20 hub about a1 = bvec(30, 70) (S-fixed,
+ * acromion top: the user's seat rule), J2 about a2 = unit(a1 x t) (90 deg from a1 and from the arm), link 2 = a long LATERAL SPAR down the
  * outside of the arm in the pointing frame P = [a2 x t, a2, t] (it follows the arm's direction, not its twist) to the
- * ring's stator; J3 = the ring's rotor, bolted to the cuff (KA045XP0 class: bore 114.3, 6.35 section, housings to
- * r_in + 10, 10 mm wide) at s_r 205 mm. q3 = the arm-fixed lateral's angle in P; a closed ring has no travel limit, so
+ * ring's stator; J3 = the ring's rotor, bolted to the cuff (KA055XP0 class: bore 139.7, 6.35 section, 1.5 mm housings,
+ * 10 mm wide) at s_r 260 mm (the station and bore of the bench's best fixed-bore ring). q3 = the arm-fixed lateral's angle in P; a closed ring has no travel limit, so
  * the only limit is the pointer's pole (arm within 15 deg of +-a1). Spar angle c = the arm-lateral's mean angle in P
  * over this loop; donut radii and the spar height (64 mm off the axis) are schematic, as in pointer-cslide.
  * 3 active, 0 passive; closed form. */
 (function () {
   const K = (typeof window !== 'undefined' ? window : globalThis).KIN, V = K.V, M = K.M, D2R = K.D2R;
-  const P = { az: 120, el: 46, sigma: 1, sing: 15, R1: 56, R2: 64, donut_r: 17.5, donut_t: 9, s_r: 205, r_in: 57.15,
+  const P = { az: 30, el: 70, sigma: 1, sing: 5, R1: 51, R2: 60, donut_r: 10, donut_t: 12.25, s_r: 260, r_in: 69.85,
               ring_w: 10, ring_h: 10, spar_r: 64, cuff_r: 45 };
   const a1L = K.bvec(P.az, P.el), latL = [0, 0, 1];
   /** pointer frame of a pose (closed form): a1, p2, t, xP, yP, the arm-fixed lateral, q */
@@ -56,10 +56,10 @@
       const brk = s => { const d = V.scale(f.lat, s); return { kind: 'link', role: 'fixed-arm', name: 'rotor to cuff bracket',
         a: V.madd(V.scale(f.t, P.s_r + P.ring_w / 2), d, P.r_in + 1), b: V.madd(cuffC, d, P.cuff_r + 1), r: 3 }; };
       return [
-        { kind: 'plate', role: 'fixed-scapula', name: 'bracket (anterior acromion)', c: V.scale(f.a1, P.R1 - 3), z: f.a1, x: ctx.attach.scapDir([1, 0, 0]), size: [44, 40], t: 3 },
-        { kind: 'ring', role: 'active', name: 'J1 donut', c: V.scale(f.a1, P.R1 + P.donut_t / 2), axis: f.a1, r: P.donut_r, t: P.donut_t / 2, h: P.donut_t },
+        { kind: 'plate', role: 'fixed-scapula', name: 'bracket (acromion top)', c: V.scale(f.a1, P.R1 - 3), z: f.a1, x: ctx.attach.scapDir([1, 0, 0]), size: [44, 40], t: 3 },
+        { kind: 'ring', role: 'active', name: 'J1 O20 hub', c: V.scale(f.a1, P.R1 + P.donut_t / 2), axis: f.a1, r: P.donut_r, t: P.donut_t / 2, h: P.donut_t },
         { kind: 'arc', role: 'link', name: 'link 1 (90 deg)', u: f.a1, v: f.p2, r0: P.R1 + P.donut_t, r1: P.R2, r: 2.5 },
-        { kind: 'ring', role: 'active', name: 'J2 donut', c: V.scale(f.p2, P.R2 + P.donut_t / 2), axis: f.p2, r: P.donut_r, t: P.donut_t / 2, h: P.donut_t },
+        { kind: 'ring', role: 'active', name: 'J2 O20 hub', c: V.scale(f.p2, P.R2 + P.donut_t / 2), axis: f.p2, r: P.donut_r, t: P.donut_t / 2, h: P.donut_t },
         { kind: 'arc', role: 'link', name: 'lateral spar (link 2, no twist)', pts: sparPts, r: 3 },
         // the closed ring as full-circle tubes (rail 0..360: the harness samples its circle, not only its centre)
         { kind: 'rail', role: 'link', name: 'ring stator + housing (on the spar)', c: o, axis: f.t, ref: dc, rho: P.r_in + 7, a0: 0, a1: 360, r: 3.2 },

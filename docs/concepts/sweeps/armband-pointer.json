@@ -1,0 +1,50 @@
+[
+ {
+  "k": 0,
+  "t": "2026-10-17T18:45:05Z",
+  "params": {
+   "az": 30.0,
+   "el": 70.0,
+   "sigma": 1,
+   "A1": 90.0,
+   "A2": 90.0,
+   "tilt": 0.0,
+   "tilt_a": 0.0,
+   "s": 260.0,
+   "bore": 69.85,
+   "ring_w": 10.0,
+   "c": 0.0,
+   "s0": 80.0,
+   "q": 0.9,
+   "q_spar": 1.0,
+   "r_block": 110.0,
+   "width": 12.0,
+   "t_link": 3.0,
+   "w_spar": 16.0,
+   "t_spar": 4.0
+  },
+  "inband14": 0.0753,
+  "inband10": 0.0364,
+  "reach": 0.1625,
+  "follow": 0.1333,
+  "contact": 0.8433,
+  "gap": 322.22,
+  "closure": 1.0,
+  "honest": false,
+  "kmode": "march",
+  "outer_contact_poses": 87,
+  "inband_member": {
+   "hub1": 1.0,
+   "hub2": 0.0,
+   "link1": 0.0,
+   "link2a": 0.0,
+   "spar": 0.0185,
+   "ring": 0.1037
+  },
+  "min_margin": 6.37,
+  "audit": [
+   "link1: sparse sampling (11.05 mm median spacing > 4 mm)",
+   "link2a: sparse sampling (11.43 mm median spacing > 4 mm)"
+  ]
+ }
+]

@@ -212,8 +212,45 @@ def metal(pose, frames, params):
     return np.concatenate([L["pts"][m.name][pose] for m in L["chain"].members], 0)
 
 
+def ring_bound(B, F, stations=(160, 180, 200, 220, 240, 260, 280, 300), tilts=((0, 0),), secs=(8.0, 9.35), rmax=120.0):
+    """PARAMETER-FREE bound for ANY closed ring about a GH axis (the J3 axis wdir(tilt)): per pose and station, march the
+    skin distance out from the axis every 10 deg to rmax; r0 = max over angles of the first radius with dist >= clr (arm
+    cleared; clr 0 = the most generous), r1 = min over angles of the first radius beyond it with dist < 0 (trunk, axilla,
+    forearm, head). A ring of radial section sec fits iff r0 <= r_face and r_face + sec <= r1. Prints per-pose-bore
+    and best fixed-bore shares (clip = follow ceiling, ws = reach ceiling) and the gap lower bound from them."""
+    P = len(B.poses); kind = np.array(B.kind); ANG = np.arange(0, 360, 10.0); R = np.arange(0, rmax + 1e-6, 2.0); out = []
+    for (td, ta) in tilts:
+        d3 = F.HG(K.wdir(td, ta)); E1 = F.HG(np.array([0, 0, 1.0])); E1 = K.unit(E1 - (E1 * d3).sum(-1, keepdims=True) * d3)
+        E2 = np.cross(E1, d3); a = np.radians(ANG); U = np.cos(a)[None, :, None] * E1[:, None] + np.sin(a)[None, :, None] * E2[:, None]
+        for s in stations:
+            X = s * d3[:, None, None] + R[None, None, :, None] * U[:, :, None]
+            D = K.dist_many(B, np.repeat(np.arange(P), X[0].size // 3), X.reshape(-1, 3)).reshape(P, len(ANG), len(R))
+            idx = np.arange(len(R))[None, None]; o0 = D >= 0; f0 = np.where(o0.any(-1), o0.argmax(-1), len(R) - 1)
+            r1 = np.where(((D < 0) & (idx > f0[..., None])).any(-1), R[((D < 0) & (idx > f0[..., None])).argmax(-1)], 999).min(1)
+            for clr in (0.0, 2.0):
+                o = D >= clr; r0 = np.where(o.any(-1), R[np.where(o.any(-1), o.argmax(-1), 0)], 999).max(1)
+                for sec in secs:
+                    pp = r0 + sec <= r1; best = None
+                    for rf in np.arange(30, rmax - sec + 1e-6, 0.5):
+                        fit = (r0 <= rf) & (rf + sec <= r1); fo, re = fit[kind == "clip"].mean(), fit[kind == "ws"].mean()
+                        g = 100 * (max(0, .95 - fo) + max(0, .90 - re))
+                        if best is None or g < best[0]: best = (g, rf, fo, re)
+                    row = dict(tilt=(td, ta), s=s, clr=clr, sec=sec, pp_clip=round(float(pp[kind == "clip"].mean()), 3),
+                               pp_ws=round(float(pp[kind == "ws"].mean()), 3),
+                               pp_gap_lb=round(100 * (max(0, .95 - pp[kind == "clip"].mean()) + max(0, .90 - pp[kind == "ws"].mean())), 1),
+                               fixed_gap_lb=round(best[0], 1), r_face=best[1], follow_ub=round(float(best[2]), 3), reach_ub=round(float(best[3]), 3),
+                               arm_meets_body=round(float((r0 >= 999).mean()), 3))
+                    out.append(row); print(json.dumps(row), flush=True)
+    return out
+
+
 if __name__ == "__main__":
     a = sys.argv[1:] or ["check"]
+    if a[0] == "bound":                       # bound '{"nc":60,"nw":160,"stations":[...],"tilts":[[0,0]]}'  (CB_EXACT=1 for the exact path)
+        o = json.loads(a[1]) if len(a) > 1 else {}
+        B = K.bench(o.get("nc", 60), o.get("nw", 160)); F = K.frames(B)
+        ring_bound(B, F, stations=o.get("stations", (160, 180, 200, 220, 240, 260, 280, 300)), tilts=[tuple(t) for t in o.get("tilts", [[0, 0]])])
+        sys.exit(0)
     B = K.bench(60, 160); B._kitF = K.frames(B)
     p = dict(PARAMS, **(json.loads(a[1]) if len(a) > 1 else {}))
     if a[0] == "check":

@@ -29,3 +29,27 @@ with the humerus at station s (stator on the spar, rotor bolted into the user's 
    configuration's gap: reach and follow can only fall when hubs, spar and continuity are added), the independent
    J1 ring scan already in the repo (agreement check), the verifier harness and the alignment auditor; a red-team pose
    list (rest, walking-like arm-down clip frames, across-body, behind-back, overhead, elbow flexed 120+).
+
+## Spec fixes (made before measuring)
+
+- **J1 seat**: the spec's p* = [0.36, 0.72, 0.60] / bvec(120, 46) is the anterior acromion, outside the user's seat rule
+  (back of the shoulder + acromion top only). The model seeds J1 at bvec(30, 70) (acromion top, the planner's
+  narrowest-th seat: th 78.1-173.6 over the workspace) and bvec(0, 60) / bvec(60, 60).
+- **Hubs**: O20 at every joint ("Keep O20 only"), not the spec's donuts.
+- **Fold margin**: K.FOLD_MARGIN (5 deg) in th = angle(a1, J3 axis), the metric every verified row uses (the spec's 32-deg
+  pole limit is pointer-cslide's, not this design's).
+- **Ring bore**: the spec's KA045XP0 (bore radius 57.15) cannot hold this arm - the arm's 2-mm-clear radius about the
+  humeral axis is 58-74 mm posteriorly (triceps) at s 220-280 in most poses (p50 of the per-pose maximum: 72 at s 220,
+  64 at s 260). The sweep uses KA055XP0 (bore radius 69.85) and the bound takes ANY bore.
+
+## Parameter-free bound: where can a closed ring exist at all? (raw posed skin, Bench(60, 160) fast)
+
+Method (scratchpad probe, reproducible with the model's frames): for every bench pose, every station s along the J3
+axis, every 10 deg about it, march the signed distance to the posed skin from the axis out to 120-140 mm. r0 = the
+largest radius at which the arm is cleared (dist >= 0 or >= 2), over the angles; r1 = the smallest radius beyond the
+arm at which skin starts again (trunk, axilla, folded forearm, head). A closed ring of radial section sec (KA..XP0
+6.35 + two 1.5 mm housings = 9.35; the thinnest real 4.76 section + housings = 8) fits a pose iff r0 <= r_face and
+r_face + sec <= r1. "Per-pose bore" lets each pose choose its own ring (an upper bound no rigid design reaches);
+"fixed bore" is one ring. Reach and follow can only FALL when hubs, spar, continuity and collisions are added, so
+gap >= 100 (max(0, .95 - follow_ub) + max(0, .90 - reach_ub)) for every configuration of the morphology.
+
