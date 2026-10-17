@@ -1,0 +1,66 @@
+[
+{
+"k": 0,
+"t": "2026-10-17T19:27:54Z",
+"tag": "seat-0",
+"params": {
+"wd": 69.0,
+"wa": -22.0
+},
+"inband14": 0.8937,
+"inband10": 0.5213,
+"reach": 0.7312,
+"follow": 1.0,
+"contact": 0.038,
+"gap": 21.31,
+"gap_near1": 21.31,
+"gap_near2": 38.22,
+"min_metal_mm": 1.28,
+"honest": true,
+"why": {
+"fold": 31,
+"slide": 5,
+"flip": 0,
+"closure": 0,
+"skin": 7,
+"parts": 0,
+"contact": 0
+},
+"ovh140": 0.0833,
+"obj": 21.31,
+"secs": 6.8,
+"a2": null
+},
+{
+"k": 1,
+"t": "2026-10-17T19:27:54Z",
+"tag": "seat-1",
+"params": {
+"wd": 69.0,
+"wa": -17.0
+},
+"inband14": 0.9063,
+"inband10": 0.5326,
+"reach": 0.7625,
+"follow": 1.0,
+"contact": 0.0319,
+"gap": 16.94,
+"gap_near1": 20.41,
+"gap_near2": 33.23,
+"min_metal_mm": 0.27,
+"honest": true,
+"why": {
+"fold": 26,
+"slide": 6,
+"flip": 0,
+"closure": 0,
+"skin": 6,
+"parts": 0,
+"contact": 0
+},
+"ovh140": 0.0833,
+"obj": 20.41,
+"secs": 7.0,
+"a2": null
+}
+]

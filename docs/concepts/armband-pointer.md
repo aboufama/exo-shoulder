@@ -107,3 +107,72 @@ climb, laid out 2 x 2 mm at 140 mm from GH since hub 2 rides 90-160 mm out), the
 underside per sample = the radial requirement about J3 at its P-angle over the closing poses, so it clears the arm at
 every twist), the ring (skin face at bore - 1.5 all the way round, 10 mm wide, K6 member; the outer cylinder and both
 side annuli contact-checked). Sweep file docs/concepts/sweeps/armband-pointer.json (every configuration, in order).
+
+| batch | configs | best gap | what it measured |
+|---|---|---|---|
+| A: ring KA055XP0 (bore radius 69.85) at s 260 on the humerus axis; J1 bvec(30, 70) / (0, 60) / (60, 60); sigma +-1; A1/A2 90/90, 110/70; q 0.9 | k0-k4 | 220.19 (k1) | sigma +1 parks hub 2 on a GH ray into the neck / trunk (K3 requirement infinite on > 10 % of poses): 310-330 |
+| B: the bound's best ring (8 deg lateral, s 280, KA065XP0, face 81), sigma -1; q 0.9 / 1.0; spar angle c -40 / 0 / +40 | k5-k8 | 244.48 | ring face in band 0.20 (vs 0.11), but its outer face sits in the trunk / forearm on 77 poses |
+| C: links laid out at 140 mm (the audit's sparse-sampling flag), batch A's ring, sigma -1: q 0.95, A1/A2 110/70 and 70/110, seats, el 80, c +40 | k9-k16 | **212.62 honest (k15)**; 200.43 (k11) flagged | k11 (A1 110 / A2 70) parks hub 2 so far out that link 2a is sampled 5.1 mm apart: not an honest number |
+
+Best honest configuration k15 (score 22.68): J1 bvec(30, 70), sigma -1, A1 = A2 = 90, ring KA055XP0 at s 260 on the
+humerus axis, spar at c +40, q 0.9: **gap 212.62, reach 0.581, follow 0.367, in-band 14 0.146, in-band 10 ~0.10,
+contact 0.47**, 87 poses with the ring's outer face inside the trunk / forearm; per member in band: hub 1 1.00, hub 2
+0.00, link 1 0.39, link 2 strap 0.01, spar 0.00, ring 0.11. Min th margin 6.37 deg (the fold is not the limiter).
+Convergence gate (17 configs): best gained 7.19 score points over the second half, 5.80 over the last third, top-5
+spread 7.19 - NOT converged, and it does not need to be: the verdict rests on the bound, which already takes the best
+of every ring parameter and still sits 38 points above the bar; the sweep only shows how much more the real metal
+loses (hub 2, spar, ring float) on top of it.
+
+## Red team of the best configuration (k15)
+
+- **The pose that jams**: none kinematically - the closed ring has no travel limit and the pointer's th stays 78-174 deg
+  (min margin 6.37); the chain closes on 100 % of the bench. Every loss is metal against skin.
+- **The point that pinches**: the ring's medial arc between the arm and the flank at rest, in walking-like clip frames,
+  in internal rotation at the side and reaching across low (table above: no ring of any bore exists there), and the
+  folded forearm at s >= 280 when the elbow is flexed (s 300: no ring fits any workspace pose, all of which have the
+  elbow at 90). 87 of the taken poses carry the ring's outer face inside the body.
+- **The optimistic number**: k11's 200.43 (link 2's strap sampled 5.1 mm apart because hub 2 is parked > 250 mm out) -
+  reported as flagged, not as the best. And the bound's per-pose-bore cells (they need a new ring every pose).
+- **Donning**: the hand must pass through a 139.7 mm bore (fine) but the rotor is bolted into the cuff around the arm -
+  a closed rotor housing needs a split cuff; the bearing cannot be split.
+
+## Verdict (GATE 0, round J1 jump track)
+
+**Dead with its number, by a parameter-free bound.** No rigid closed ring about any axis through GH (humerus axis or
+tilted up to 16 deg, any station s 240-300, any bore, the thinnest real section) exists on more than ~0.55-0.57 of the
+clip frames and ~0.71-0.74 of the workspace, because the medial upper arm meets the flank (rest, walking-like frames,
+IR at the side, across-low) and the folded forearm fills the ring plane near the elbow. That alone is gap >= 56
+(Bench(60, 160) fast; Bench(110, 360) exact 56.5) against the gate's 15 / 17.5, before any hub, spar or float. The
+faithful kit model scores 212.62 honest (score 22.68; reach 0.581, follow 0.367, in-band 0.146): hub 2 of the 90/90
+pointer is never in band, the twist-free spar floats over a 2:1 elliptical arm (0.00 in band), the ring face floats 20+
+mm off the medial skin (0.11 in band). Passive translations: 0. Complexity 0.5 (tools/simplicity.py v2.2) - the
+simplest mechanism screened, and the one the anatomy rules out. Lead 18.49.
+
+## New knowledge (predicts beyond this morphology)
+
+1. **Nothing rigid may close around the upper arm.** On this body a closed metal loop about the arm (ring bearing,
+   ring gear, closed cuff shell) is impossible on >= 43 % of clip frames and >= 26 % of workspace poses at every
+   station 160-300 mm and every axis within 16 deg of the humerus: the medial arm meets the flank (19-27 % of poses
+   have no gap at all), and near the elbow the flexed forearm fills the ring plane. A cuff's medial arc must be soft
+   (strap / liner); every arm-fixed metal part lives on the ~105-deg torso-free lateral arc (acromion-pointer-arm-ctrack
+   measured it). This rules out ARMin / NESM-style closed humeral rings for this wearer.
+2. **The humerus axis is eccentric in the arm**: the 2-mm-clear radius about it is 58-74 mm posteriorly (triceps) vs
+   34-46 mm medially / anteriorly at s 220-280, so any coaxial ring's face is >= 20 mm off the medial skin (ring in band
+   0.08-0.11 at a ring that holds the arm; the in-band-best ring face, 54-58 mm, fits only 2-5 % of poses).
+3. **Conservation, measured on the coaxial side** (planner lesson, round 101): putting J3 on the arm axis makes th
+   twist-free (th 78.1-173.6, margin >= 6.37 everywhere) but moves the full twist under link 2: the pointing-frame spar
+   must clear the arm at every axial angle and sits 0.00-0.06 in band.
+4. **A 90/90 pointer's hub 2 is off the skin by construction**: J2 is 90 deg from both J1 and the arm, i.e. on the great
+   circle 90 deg from the J1 pole; from the acromion top that circle runs through the neck and the trunk, so hub 2's
+   GH ray never clears skin in > 10 % of poses (sigma +1) or rides 90-190 mm out (sigma -1): 0.00 in band in all 17
+   configurations.
+5. **Tool fix for anyone bounding arm-encircling parts**: test the annulus on every ray AND that the ring encloses the
+   humerus line (models/armband-pointer.py `ring_bound2`); a march-from-the-centre test (`ring_bound`) mis-scores tilted
+   axes whose centre leaves the arm (it "fits" small rings beside the arm: per-pose 0.98 at 12 deg - an artefact).
+
+## What happens next
+
+The humerus-axial lever is closed on both sides (axis on the arm: this bound; axis off the arm: the lead's fold losses).
+The loop moves on to the round planner's other lever - move hub 2 itself (ROUNDS.md, J1 lesson) - with this bound
+available as a one-call pre-screen for any arm-encircling idea (`python3 docs/concepts/models/armband-pointer.py bound2
+'{"stations":[...],"tilts":[[d,a]]}'`).
