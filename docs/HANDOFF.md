@@ -456,6 +456,9 @@ designs (dipped-law-groove-knuckle-3r, seed-offset-3r-slides); every leader is w
      running-gap tolerances, knee-stop tolerance, r 1.25 nose has no held-out wear, drawing names). Fix pass running
      LOCALLY as wf_788f3848-0a6 (template redteam-fix.js, $0): those items + the 15:23 items + the round-11 winner's CAD
      user_trimlug_k165 (same builder with the lug cut). Stills still wait for the user's yes.
+   - *Lead, 17:20 UTC (audit 17:15):* the drawn K-phase band +0.75 +0.15/-0.10 deg holds held-out th >= 5 only on an
+     RSS stack; on the red team's worst-case linear stack it nets -0.12 deg (~4.996 held out, 1 pose under 5). The
+     drawing must state RSS, or the low end becomes -0.02 deg. Close T3 only after the fix pass re-judges the 16:29 build.
 2. **Reach is the gap.**
    - The lead's gap is reach 17.50 of 18.49 (ROUNDS round 10 results). **Score 95 is gap <= 13.75**: +18 workspace
      poses at the lead's in-band and contact, 0.278 points each (ROUNDS round 11 plan).

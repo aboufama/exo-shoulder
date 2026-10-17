@@ -529,3 +529,7 @@ Each line is a measurement change: verdicts that move because of it moved becaus
   record check (`complexity`) whose row field has since been fixed counts as RESOLVED, not a lost true positive, and a
   new mutation (stale complexity field +4 -> watch) keeps that check's sensitivity. SELFTEST PASS on the 5 leaders.
   A tool change: audits before and after it read 'idle' differently on slipper-family rows.
+- **2026-10-17.4** (lead, from the 17:15 skeptic's proposals P-I1 / P-I3): a 'resolved' record finding is never a hard-rule
+  finding (DOF cap, passive translations); new mutations: stale complexity field +0.25 -> watch, 5 active DOF -> gamed,
+  3 passive translations -> gamed. SELFTEST PASS. P-I2 / P-I4 (rulings store the ruled record; `reporting` as a record
+  check) are open: they change the ruling format the skeptic writes.

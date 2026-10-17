@@ -55,7 +55,7 @@ OUT = os.path.join(REPO, "docs", "alignment")
 REM = os.path.join(OUT, "remeasure")
 sys.path.insert(0, os.path.join(REPO, "tools"))
 
-VERSION = "2026-10-17.3"   # bump on every change of a check, threshold or reading: a change of the instrument (docs/ALIGNMENT.md section 6)
+VERSION = "2026-10-17.4"   # bump on every change of a check, threshold or reading: a change of the instrument (docs/ALIGNMENT.md section 6)
 ROUND8 = ["sidecar-longdyad-knuckle-3r", "sidecar-parallelogram-knuckle-3r", "sidecar-roller-flank-knuckle-3r", "twist-long-a2-knuckle-3r"]
 # thresholds (gap points unless stated); calibrated on the verified rows, docs/ALIGNMENT.md "Thresholds"
 TH = dict(held_watch=6.0, held_gamed=10.0, shell2_watch=15.0, shell2_gamed=25.0, dom_gamed=0.0, conn_watch=1.0, conn_gamed=3.0,
@@ -834,7 +834,9 @@ def selftest(ids=None, hard=LEADERS, verbose=True):
                 ok_ = (lv != "gamed") if refuted else (lv == "gamed")
             else:
                 ok_ = (lv == "ok") if refuted else (lv != "ok")
-            if not refuted and not ok_ and chk in RECORD_CHECKS: rs += 1; continue     # resolved by a record fix
+            # resolved by a record fix - never a hard-rule finding (DOF cap, passive translations: skeptic 17:15, P-I1)
+            if not refuted and not ok_ and chk in RECORD_CHECKS and not re.search(r"DOF|cap 4|passive translation", str(r.get("evidence", ""))):
+                rs += 1; continue
             if refuted and ok_: tn += 1
             elif refuted: fp += 1; bad.append(f"FALSE POSITIVE {k} -> {chk} {lv} (skeptic refuted)")
             elif ok_: tp += 1
@@ -871,6 +873,12 @@ def selftest(ids=None, hard=LEADERS, verbose=True):
     mut("kneeless-roller fold margin 4.8 (kit_min_th_margin_deg)", "kneeless-roller-knuckle-3r", thin_fold, "fold_margin", ("gamed",))
     def stale_cx(row, V, rb): row["complexity"] = float(row.get("complexity") or 0) + 4.0; return row, V, rb
     mut("roller-longdyad stale complexity field (+4)", "roller-longdyad-knuckle-3r", stale_cx, "complexity", ("watch", "gamed"))
+    def stale_cx_q(row, V, rb): row["complexity"] = float(row.get("complexity") or 0) + 0.25; return row, V, rb
+    mut("roller-longdyad stale complexity field (+0.25)", "roller-longdyad-knuckle-3r", stale_cx_q, "complexity", ("watch", "gamed"))
+    def dof5(row, V, rb): row["mechanism"]["active_dof"] = 5; return row, V, rb
+    mut("slipper-nose 5 active DOF", "slipper-nose-knuckle-3r", dof5, "complexity", ("gamed",))
+    def pt3(row, V, rb): row["mechanism"]["passive_trans"] = 3; return row, V, rb
+    mut("slipper-nose 3 passive translations", "slipper-nose-knuckle-3r", pt3, "complexity", ("gamed",))
     ref_self = c_contact_depth(_row(DEPTH_REF), DEPTH_REF)["level"]
     rep.append(f"{'mut  ' if ref_self == 'ok' else 'MUT! '}reference vs itself: contact_depth {ref_self} (want ok)")
     if ref_self != "ok": fails.append("contact_depth fires on the reference itself")
