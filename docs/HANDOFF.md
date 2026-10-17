@@ -370,7 +370,9 @@ page does not show it yet.
 
 ## 10. Infrastructure facts that still hold
 
-- **Python deps:** `bash tools/setup.sh`, then `python3 -m pip install libigl`.
+- **Python deps:** `bash tools/setup.sh` (installs libigl too). On a Python 3.13 cloud container it builds a uv 3.12 venv at
+  `/opt/exo-venv` and puts `python3` / `python` wrappers in `~/.local/bin` (2026-10-17: the pinned scipy 1.13 and
+  cadquery-ocp 7.7 have no 3.13 wheels).
 - **The bench cache** (`.cache/`) is git-ignored, so a new machine rebuilds it:
   - locally: `nice python3 tools/concept_bench.py --build 60 160 --jobs 2` (~20 min on an idle 4-core box; 2 jobs = the
     local process cap);
