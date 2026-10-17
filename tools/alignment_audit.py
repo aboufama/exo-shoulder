@@ -296,6 +296,19 @@ def c_continuity(row, V):
     if C is None:
         for f, d in V:
             if isinstance(d.get("connected"), dict): C, src = d["connected"], f; break
+    if C is None:                       # a re-measure whose own gap reproduces the claim and states its flood drops
+        vg = _num(row.get("v_gap"))
+        for f in sorted(glob.glob(os.path.join(REM, row["id"] + "_*bench*.json"))):
+            try:
+                d = json.load(open(f))
+            except Exception:
+                continue
+            for k in ("contact_aware_verifier", "final_verifier"):
+                x = d.get(k) if isinstance(d, dict) else None
+                if isinstance(x, dict) and vg is not None and _num(x.get("gap")) is not None and abs(_num(x["gap"]) - vg) <= 0.05 \
+                        and any(kk.startswith("dropped") for kk in x):
+                    C, src = x, os.path.relpath(f, REPO) + ":" + k; break
+            if C is not None: break
     if C is None:
         for k, v in row.items():
             if "connect" in k.lower() or "continuity" in k.lower() or "flood" in k.lower():
