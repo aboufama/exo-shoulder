@@ -1,0 +1,194 @@
+{
+ "PICK_cone30": {
+  "near1": 14.04,
+  "near2": 16.58,
+  "plain": 14.04,
+  "dK_lim": 63.5,
+  "why_lim": "law",
+  "tilt_taken": [
+   25.5,
+   14.5
+  ],
+  "tilt_range": [
+   25.5,
+   18.9
+  ],
+  "why": {
+   "fold": 33,
+   "slide": 5,
+   "flip": 0,
+   "closure": 0,
+   "skin": 0,
+   "parts": 0,
+   "contact": 0
+  }
+ },
+ "PICK_cone27": {
+  "near1": 14.04,
+  "near2": 16.58,
+  "plain": 14.04,
+  "dK_lim": 63.5,
+  "why_lim": "law",
+  "tilt_taken": [
+   25.5,
+   14.5
+  ],
+  "tilt_range": [
+   25.5,
+   18.9
+  ],
+  "why": {
+   "fold": 33,
+   "slide": 5,
+   "flip": 0,
+   "closure": 0,
+   "skin": 0,
+   "parts": 0,
+   "contact": 0
+  }
+ },
+ "PICK_cone25": {
+  "near1": 98.59,
+  "near2": 108.88,
+  "plain": 98.59,
+  "dK_lim": 0.0,
+  "why_lim": "cone",
+  "tilt_taken": [
+   25.5,
+   14.5
+  ],
+  "tilt_range": [
+   25.5,
+   5.3
+  ],
+  "why": {
+   "fold": 130,
+   "slide": 5,
+   "flip": 0,
+   "closure": 0,
+   "skin": 0,
+   "parts": 0,
+   "contact": 0
+  }
+ },
+ "PICK_cone22": {
+  "near1": 98.59,
+  "near2": 108.88,
+  "plain": 98.59,
+  "dK_lim": 0.0,
+  "why_lim": "cone",
+  "tilt_taken": [
+   25.5,
+   14.5
+  ],
+  "tilt_range": [
+   25.5,
+   5.3
+  ],
+  "why": {
+   "fold": 130,
+   "slide": 5,
+   "flip": 0,
+   "closure": 0,
+   "skin": 0,
+   "parts": 0,
+   "contact": 0
+  }
+ },
+ "ROBUST_cone30": {
+  "near1": 14.01,
+  "near2": 16.58,
+  "plain": 14.01,
+  "dK_lim": 63.5,
+  "why_lim": "law",
+  "tilt_taken": [
+   25.9,
+   14.5
+  ],
+  "tilt_range": [
+   25.9,
+   19.0
+  ],
+  "why": {
+   "fold": 33,
+   "slide": 5,
+   "flip": 0,
+   "closure": 0,
+   "skin": 0,
+   "parts": 0,
+   "contact": 0
+  }
+ },
+ "ROBUST_cone27": {
+  "near1": 14.01,
+  "near2": 16.58,
+  "plain": 14.01,
+  "dK_lim": 63.5,
+  "why_lim": "law",
+  "tilt_taken": [
+   25.9,
+   14.5
+  ],
+  "tilt_range": [
+   25.9,
+   19.0
+  ],
+  "why": {
+   "fold": 33,
+   "slide": 5,
+   "flip": 0,
+   "closure": 0,
+   "skin": 0,
+   "parts": 0,
+   "contact": 0
+  }
+ },
+ "ROBUST_cone25": {
+  "near1": 98.55,
+  "near2": 108.88,
+  "plain": 98.55,
+  "dK_lim": 0.0,
+  "why_lim": "cone",
+  "tilt_taken": [
+   25.9,
+   14.5
+  ],
+  "tilt_range": [
+   25.9,
+   5.3
+  ],
+  "why": {
+   "fold": 130,
+   "slide": 5,
+   "flip": 0,
+   "closure": 0,
+   "skin": 0,
+   "parts": 0,
+   "contact": 0
+  }
+ },
+ "ROBUST_cone22": {
+  "near1": 98.55,
+  "near2": 108.88,
+  "plain": 98.55,
+  "dK_lim": 0.0,
+  "why_lim": "cone",
+  "tilt_taken": [
+   25.9,
+   14.5
+  ],
+  "tilt_range": [
+   25.9,
+   5.3
+  ],
+  "why": {
+   "fold": 130,
+   "slide": 5,
+   "flip": 0,
+   "closure": 0,
+   "skin": 0,
+   "parts": 0,
+   "contact": 0
+  }
+ }
+}
