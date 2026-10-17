@@ -62,7 +62,14 @@ geo = []                                                    # per option: closed
 for opt in OPTS:
     if isinstance(opt, dict): bk1, bk2, a1, a2 = opt["bk1"], opt["bk2"], opt.get("a1", a1_0), opt.get("a2", a2_0)
     else: (bk1, bk2), a1, a2 = opt, a1_0, a2_0
-    amax = bk1 + bk2 - 5.0; hi = amax + a2 - 5.0; lo = abs(a1 - a2) + 5.0
+    amax = bk1 + bk2 - 5.0
+    dkmax = opt.get("dkmax") if isinstance(opt, dict) else None
+    if dkmax is not None:                                     # the K drive's stroke caps a1e through the K sub-dyad law
+        r_ = math.radians; cpsi = (math.cos(r_(a1)) - math.cos(r_(bk1)) * math.cos(r_(bk2))) / (math.sin(r_(bk1)) * math.sin(r_(bk2)))
+        psiA = math.degrees(math.acos(max(-1.0, min(1.0, cpsi)))); ps = min(180.0, psiA + float(dkmax))
+        a1e_dk = math.degrees(math.acos(math.cos(r_(bk1)) * math.cos(r_(bk2)) + math.sin(r_(bk1)) * math.sin(r_(bk2)) * math.cos(r_(ps))))
+        amax = min(amax, a1e_dk)
+    hi = amax + a2 - 5.0; lo = abs(a1 - a2) + 5.0
     a1e = np.where(th <= a1 + a2 - 5.0, a1, th - a2 + 5.0)
     clos = (th >= lo) & (th <= hi) & (abs(bk1 - bk2) + 5.0 <= a1)
     c = np.clip((U1 * w).sum(-1), -1, 1); n = K.unit(np.cross(U1, w)); A1, A2 = np.radians(a1e), math.radians(a2)
@@ -71,7 +78,7 @@ for opt in OPTS:
     u2 = K.unit(p0 - 1.0 * np.sqrt(np.clip(h2, 0, None))[:, None] * n); clos &= h2 > 0          # branch -1 (the leader's)
     uK, okK, _ = K.closure(U1, u2, bk1, bk2, sK, margin_deg=0.0); clos &= okK
     axes = [uK, u2, slerp(U1, uK, 0.5), slerp(uK, u2, 0.5), w, slerp(u2, w, 1 / 3), slerp(u2, w, 2 / 3)]
-    geo.append(dict(bk1=bk1, bk2=bk2, a1=a1, a2=a2, amax=amax, lo=lo, hi=hi, clos=clos, axes=axes))
+    geo.append(dict(bk1=bk1, bk2=bk2, a1=a1, a2=a2, amax=amax, lo=lo, hi=hi, clos=clos, axes=axes, dkmax=dkmax))
 # pose-major: ONE exact signed-distance call per pose for every part of every option
 REQ = [np.full((len(PARTN), len(th)), np.nan) for _ in geo]
 for i in range(len(th)):
@@ -88,7 +95,7 @@ for i in range(len(th)):
 for g, Rq in zip(geo, REQ):
     clos = g["clos"]; I = np.nonzero(clos)[0]; ck = kind[I] == "clip"; new = (kind[I] == "ws") & ~taken[I]; old = (kind[I] == "ws") & taken[I]
     PARTS = [(nm, Rq[k, I]) for k, nm in enumerate(PARTN)]
-    res = dict(bk1=g["bk1"], bk2=g["bk2"], a1=g["a1"], a2=g["a2"], a1max=g["amax"], window=[round(g["lo"], 2), round(g["hi"], 2)],
+    res = dict(bk1=g["bk1"], bk2=g["bk2"], a1=g["a1"], a2=g["a2"], dkmax=g["dkmax"], a1max=round(g["amax"], 2), window=[round(g["lo"], 2), round(g["hi"], 2)],
                n_closed_ws=int((kind[I] == "ws").sum()), n_new_ws=int(new.sum()), n_clip=int(ck.sum()), in_window_ws=int(((kind == "ws") & clos).sum()))
     for nm, r in PARTS:
         res[nm] = dict(clip=np.percentile(r[ck], [0, 50, 100]).round(1).tolist(), old_ws_max=round(float(r[old].max()), 1) if old.any() else None,

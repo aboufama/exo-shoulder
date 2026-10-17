@@ -109,6 +109,13 @@ By region:
 - Knee 32; in-window other 10.
 - Overhead: 18 of 71 taken.
 
+**The second leader has the same wall** (`lost_poses_sidecar-longdyad-knuckle-3r.json`; sidecar-longdyad, rod drive).
+
+- Its stop B (a1max 63.2) would put the wall at th 120.1.
+- Its taken poses stop at th 109.2: a1e 52.6 at dK 37.8, with dK_lim 43.
+- 16 of its stretched losses sit on the law / drive wall, inside stop B.
+- Fold: 64 stretched + 22 folded.
+
 **The same poses on every leader.** Of the roller's 88 fold poses:
 
 - sidecar-longdyad loses 80;
@@ -130,6 +137,9 @@ force on the parts.
 - **The stretched side is NOT a hub-2 clearance trade.** Script `parking.py`: exact skin, the most favourable J2 ray
   with a1e scanned to +15.
   - **47 of the 73** stretched-lost poses put hub 2 within the leader's own level, 62.0 mm (clip band 52-62).
+  - That count takes the best J2 ray per pose (a1e opened 0-15 deg past the minimum). With the minimal-opening law
+    of section 3: 17 of the 40 poses a 28 / 50 dyad closes clear at the clip level, 26 at +4. How far K opens past
+    the minimum is itself a parking variable.
   - 58 of 73 at +4 mm.
   - Held out: **142 of 211**, and 159 at +4 mm.
   - Raising F2 has a cliff: at +4 mm, 26 % of clip frames take hub 2 out of band; at +6 mm, 76 %.
@@ -156,8 +166,14 @@ One-sided knuckle (every leader): K stays on stop A while th <= a1 + a2 - 5, the
 | 105 | 0.872 | 0.848 |
 
 - The leader's own window [24.67, 106.6] holds 272: 261 taken + 9 knee + 2 contact.
-- At the leader's width, the 360-pose optimum is a2 ~ 62 (+10 poses). The 160-pose fit bench put it at 57.2: the
-  winner's curse already measured in docs/research/reach_attribution.md.
+- **The window re-placement lever is refuted.**
+  - At the stop-B width (86.3) the 360-pose optimum would be a2 ~ 62 (+10 poses).
+  - The real wall is the drive's (width 81.8), and there the shift buys nothing: a2 60 holds 271 in the window
+    against 272.
+  - Measured on the real leader model (`shift_a2.py`: J2's rest axis turned about J1, every check unchanged), a2
+    59.98 is **worse**:
+    - frozen exact 20.84 against 18.67: reach 0.714, in-band 0.886, contact 0.008;
+    - fold 89, slide 11, contact 3.
 
 **Over every seat pair the user's ruling allows** (J1 on the back of the shoulder or the acromion top; J3 anywhere on
 the arm; 247,860 pairs):
@@ -246,6 +262,31 @@ taken.
 The 75-90 deg row is still below the hard goal's 0.80 at the same in-band. **Above ~0.80 the family needs a wider
 window on the folded side too**, and there hub 2 IS the wall: only 4 of 15 clear.
 
+### 4b. The drive-stroke curve (exact kinematics; parking in the next table)
+
+Leader's seats; K stays on stop A while th <= a1 + a2 - 5. The window top is a1e(dK_max) + a2 - 5.
+
+| K dyad bk1 / bk2 | K stroke dK_max | a1e_max | window | in window, bench 360 | held 952 | overhead in window |
+|---|---|---|---|---|---|---|
+| 26 / 38 (leader) | 46.25 (leader's roller) | 54.4 | 24.7-106.7 | 272 = 261 taken + 11 | 0.726 | 14 / 28 |
+| 26 / 38 | 57.5 (round-9 flank, PA 43) | 57.5 | 24.7-109.7 | 275 | 0.742 | 14 |
+| 26 / 38, a2 60 | 46.25 | 54.4 | 27.4-109.4 | 271 | 0.735 | 13 |
+| 28 / 50 | 46.25 | 58.6 | 24.7-110.8 | 277 | 0.749 | 14 |
+| **28 / 50** | **57.5** | **63.1** | **24.7-115.3** | **290 (+18)** | **0.767** | **16** |
+| 28 / 50 | 75 | 69.2 | 24.7-121.4 | 298 (+26) | 0.801 | 17 |
+| 32 / 48 | 57.5 | 65.4 | 24.7-117.6 | 292 (+20) | 0.779 | 16 |
+| 32 / 48 | 75 | 71.7 | 24.7-123.9 | 300 (+28) | 0.810 | 17 |
+
+**Why a longer K dyad helps at the same stroke.** It turns more of K's rotation into a1e.
+
+- 26 / 38: 16.8 deg of a1e for 46 deg of K.
+- 28 / 50: 25.6 deg of a1e for 57.5 deg of K.
+
+**The arithmetic.** +18 window poses on the leader's 261 is reach 0.775: gap ~13.7, score 95, IF every one of them
+parks and the drive's own metal adds no loss. The exact parking of these windows is in the farm table below.
+
+(Farm table pending: `parking_k_{bench,held}_{lead,k2850,k3248}.json`, exo-cpu1.)
+
 ## 5. The family-wide relaxation, and why it is not a bound (red team of my own instrument)
 
 **The relaxation.**
@@ -286,13 +327,26 @@ Bench(60,160) fast):
 | Fold margin read on another angle | The walls use th, the user's ONE metric. The 5 "law" poses at th 107-110 are the drive wall (a1e 54.3 at dK 46), not a margin reading. |
 | Optimistic sampling | Every kinematic optimum is re-counted on the 952 held-out poses at the same seats and window (0.97-0.99 / 0.766-0.848). The exact parking is on the frozen bench AND held out (142 / 211 against 47 / 73: the same share, 0.67 / 0.64). |
 | The brute march | Equals `concept_kit.requirement` to 0.0 mm on 900 rays (3 poses). |
-| Hub-2 parking optimism | The J2 ray is the BEST of a1e + 0 / 3 / 6 / 10 / 15 per pose. The real law opens on a fixed schedule, so 47 is an upper count. |
+| Hub-2 parking optimism | The J2 ray is the BEST of a1e + 0 / 3 / 6 / 10 / 15 per pose. The real law opens on a fixed schedule, so 47 / 73 is an upper count. With the minimal-opening law: 17 / 40 at the clip level, 26 / 40 at +4 (section 3 uses this law). |
 | Hub 3 read on the J3 ray | The leader's J3 is tilted (b3) and offset, so hub3_ray / link 2 are approximations. Hub 3 never binds in section 3. |
 | The relaxation | Its optima fail the paired kit test (section 5). It is reported as an instrument failure, not as headroom. |
 | The pose that jams | The long K dyad's extra poses all sit at a1e 59-73. There K turns 77-89 deg: a drive at pressure angle <= 43 over that stroke is the unbuilt part. Without it the chain stops at the drive wall, a stop, not a jam. |
 | Bench artefact | The fold split equals the verified `why` (88 / 9 / 2) pose for pose. The clip frames never leave th 41-96 on either bench. |
 
-__SHIFT__
+### Measured on the real leader model: the window re-placement (`shift_a2.py`, `shift_a2_60_frozen.json`)
+
+- The kinematic counts first suggested a cheap lever: slide the window up (a2 57.2 -> ~60-62), with seats, drive and
+  every check unchanged.
+- The real model refutes it:
+
+  | a2 | fast plain | frozen exact Bench(110,360) | why |
+  |---|---|---|---|
+  | 57.22 (verified) | 13.19 | 18.67 | fold 88, slide 9, contact 2 |
+  | 59.98 | 14.66 | **20.84** (reach 0.714, in-band 0.886, contact 0.008, near1 23.62, near2 32.16) | fold 89, slide 11, contact 3 |
+
+- The reason is the drive wall. At the drive's real width (81.8, not stop B's 86.3) the shifted window holds 271
+  poses against 272, and the refit loses in-band.
+- So the window must be WIDENED (K's stroke), not moved.
 
 ## 7. For the round-11 planner
 
@@ -309,8 +363,7 @@ The fold is two walls with two different causes, and both are now measured.
   deltoid. Candidates are a K-on-K four-bar or a two-stage roller.
 - Gate every drive with `parking_k.py` plus its own metal, never with a per-part relaxation that drops poses
   (section 5).
-- Separately, the leader's window is mis-placed for the 360 / held poses (a2 57 -> ~62 is worth +10 poses
-  kinematically): the env-polish should find it.
+- Do not spend a round on re-placing the window: a2 +2.8 on the real model measured 20.84 against 18.67.
 
 **Folded wall: 15 bench, 50 held.**
 
