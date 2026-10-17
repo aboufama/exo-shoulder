@@ -148,10 +148,12 @@ def build(B, F, p):
 
 
 def jac(p):
-    """mobility check: numeric 3x3 Jacobian of the arm's rotation w.r.t. (phi, theta, q3) on the run; sigma_min/sigma_max"""
+    """mobility check: numeric 3x3 Jacobian of the arm's rotation w.r.t. (phi, theta, q3) over the th WINDOW (the run
+    minus the 5-deg stops); sigma_min/sigma_max per sample"""
     p = dict(PARAMS, **p); cv = curve(p); fb = cv["fb"]; out = []
     if not cv["valid"]: return np.array([])
-    for t in np.linspace(cv["th"][2], cv["th"][-3], 30):
+    inw = (cv["g"] >= cv["lo"]) & (cv["g"] <= cv["hi"]); tw_ = cv["th"][inw]
+    for t in np.linspace(tw_[0], tw_[-1], 30):
         def R(phi, theta, q3):
             return rot(cv["j"], phi) @ fb.at(np.array([theta]))[2][0] @ rot(cv["carried"], q3)
         x0 = np.array([10.0, float(t), 5.0]); R0 = R(*x0); J = []
@@ -170,7 +172,7 @@ if __name__ == "__main__":
     par = json.loads(sys.argv[2]) if len(sys.argv) > 2 else {}
     if isinstance(par, list): par = iso(par)
     if mode == "jac":
-        r = jac(par); print("sigma_min/sigma_max over the run: min", r.min() if len(r) else None, "median", np.median(r) if len(r) else None, len(r)); sys.exit()
+        r = jac(par); print("sigma_min/sigma_max over the th window: min", r.min() if len(r) else None, "median", np.median(r) if len(r) else None, len(r)); sys.exit()
     B = K.bench(60, 160); t0 = time.time(); rep = K.evaluate(B, build, dict(PARAMS, **par))
     print({k: rep.get(k) for k in ("gap", "reach", "follow", "inband14", "inband10", "contact", "closure", "flips", "collide",
                                     "honest", "audit", "residual_deg", "pin_sep_deg", "th_window", "W", "min_th_margin",

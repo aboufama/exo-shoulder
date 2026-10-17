@@ -72,3 +72,38 @@ fixed arc; their azimuth about J3 is one function of theta, and J3 must also abs
 law that cools four poses heats others. The step-0 table is therefore a necessary test only; the gate-0 number below
 is the decision.
 
+## Step 0 generalised: the FULL-POSE binder test (new)
+
+Same minimax, but over EVERY taken Bench(60,160) pose: minimise the worst K3 level (max over the taken poses) of the
+pins A0, B0, A1, B1 and the crank / coupler / link-1 strap centre lines, subject to W >= 85 and kinematic reach
+(Bench(110,360) ws) >= 0.75 (rpf/fbopt.py, ~0.3 s per layout, 1938 layouts, 8 min, seeds = lens 1's ES optima and
+the step-0 layout).
+
+**Best: x = [86.43, 23.97, -93.12, 72.58, -37.48, 22.24, -99.15, -0.74, 17.45], W 91.8, kinematic reach 0.794, every
+four-bar member <= 76 mm over every taken pose** (max A0 58, B0 69, A1 76, B1 74, crank A 68, crank B 71, coupler 76,
+link 1 66; p90 56-66). Four of the top five restarts land in the same cell (77-86 mm). So on centre lines the binder
+IS escapable at all poses, against the judge's "expected to die at step 0": the cell is a COMPACT cluster - all four
+pins within ~22-30 deg of J1 on the acromion top (dA0 20-29, dA1 73-80 from J3 with th0 85-90, i.e. A1 / B1 sit back
+near J1), so the polycentric J2 is built where the skin is lowest and the coupler is a long arm (~73-80 deg) from the
+cluster to J3. That is new knowledge for the virtual-J2 track: the cool place for a four-bar J2 at the cap pole is
+next to J1, not near the J2 ray.
+
+**Through the kit it dies on layering, not skin: 274.37** (collide 0.9948). K6 rejects 99.5 % of closing poses on crank A
+vs link 1 next to the shared A0 stack (~17 mm from the A0 axis, both at ~87 mm): the cluster puts link 1, both cranks
+and the coupler's root over the same ~25 deg patch, so four bodies must stack at one spot, and the O20 discs (hub levels
+85-96 mm vs the 58-76 mm of their centre rays) and the coupler's lift over three stacks (152 mm) follow. The honest kit
+CMA from the six best cluster layouts (sigma 0.06) has not yet found a cluster neighbour that both closes K6 and stays in
+band (best 112.16, numbers below).
+
+Kit note (measured, reported for the kit owner, not used for any number here): part of that K6 rejection is the kit's
+single-pass `over` lift. `fit_profiles` runs ramps -> `_over` -> the climb limit once; `_over` judges "near" at the
+member's pre-climb radius, the climb then raises link 1 into crank A's layer: at the hit samples link 1 sits at 87.5 mm
+over crank A's 87.0 (top 90.0), and `K._over` re-run on the FINAL profile asks for 91.0 mm there. Orienting the pair
+upper-first in K6 changes nothing (0.9948 both ways), so it is the pass order, not the pair orientation. A fixed-point
+lift (ramps / over / climb until nothing rises) is a kit MEASUREMENT change that would touch every model using `over`;
+this screen keeps the kit as it is. Side experiment (rpf/fixpt.py, the kit's own functions with the lift iterated to a
+fixed point, not used for any claim): the cluster layout goes 274.37 -> **133.04** (collide 0.995 -> 0.272, reach 0.638,
+follow 0.60, ib14 0.189), the best honest iso config is unchanged (90.59 both ways). So the kit quirk is real and worth
+fixing, but it does not rescue the cluster: with a correct lift it is still 70 gap points behind the plain cap 3R
+(63.18): four bodies stacked on one 25-deg patch put the coupler over three O20 stacks, in band 0.19.
+
