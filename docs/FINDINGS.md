@@ -2417,3 +2417,44 @@ constraint is not a reach constraint: gate on the K the taken poses USE.
 - Transmission with the catalogue head is 49.8 deg against the 48 deg gate - must not be walked.
 - Dashboard fix (tools/dash_build.py): rows that store the frozen exact claim under `frozen` / `claim` now show it as
   self-measured instead of the in-sample fit gap (inband-rssr was listed at 12.79).
+
+## inband-rssr-knuckle-3r final polish on the envelope bench: pick3 gains +1.18 / +1.52 held out and +1.10 on the verified protocol; verifier due (2026-10-17, docs/research/inband-rssr-knuckle-3r_final_polish.md)
+
+Self-measured, not verified. The screened winner (leak-free pick cma3 p: 18.87 frozen exact / 23.21 held, a tie with
+slipper-nose's 18.49 / 23.45) was polished with a new tool, `tools/inband_env_polish.py`. It ran on the representative
+envelope bench `env`:
+* 10 CMA runs, 1402 evaluations;
+* the objective averages the env-fit and the Bench(60,160)-fit near-touch readings;
+* stops are priced at +0.5 and read at margin 5.5;
+* the full-grid flood continuity is on.
+
+The picks were committed before any claim and ranked on the independent `envsel` draw. They were claimed in one
+15-job farm batch. The claim wrapper reproduces the row's 18.87 / 23.21 to the digit.
+
+* **pick3 gains under every protocol at the same pricing.**
+  * held out: 24.38 -> **22.86** (fit Bench(60,160)) and 24.75 -> 23.57 (fit env);
+  * the verified protocol: 19.43 -> **18.33**;
+  * 1 mm and 2 mm near-touch: better or equal everywhere;
+  * contact depth: less everywhere (bench 9.9 -> 0.2 mm).
+  * The robust held-out gain (the worse fit) is **+1.18 >= 1, so the independent verifier is due.** It should also wear
+    pick3 + r_h 0.25: pick3 fails the r_h -0.25 tolerance neighbour, and that robust build passes 18 / 18.
+  * Paired against the leader, read unpriced, pick3 is -0.59 held out (P better 0.82) and -0.46 pooled
+    (CI [-1.46, +0.44]): an edge, not a clear lead.
+  * Hard goal: 18.33 meets <= 18.5; 22.86 misses <= 22.0.
+* **The built-stop pricing is a measurement change worth 0.56 frozen / 1.17 held out** on the row's pick
+  (18.87 / 23.21 -> 19.43 / 24.38): its min th margin is 5.045, so a 5.5 reading drops 11 held-out poses to the fold.
+* **The long K dyad loses on the representative bench too.**
+  * Long-dyad CMA seeds (bk2 47-48) walk back to 42.7-46.7. With bk2 held at 48 the objective is 27.8-28.5, against
+    22.1 for the short dyad.
+  * Over every evaluated row the best objective rises with bk2: +2 at 45, +4.7 at 48.
+  * A report-only long-dyad row (29.0 / 44.6 / 68.1, kK 2.82) regains 20 held-out fold poses (251 vs 271). It gives them
+    back in overhead contact depth (29.3 mm summed vs 10.8) and in-band. It reads 23.72 / 20.44.
+  * So the fit bench's 2.5 % stretched-pose share was not what kept the dyad short. The long dyad's overhead press is.
+* **The radial crank stud's socket tilt is a cliff, and the crank phase removes it.**
+  * At the row's pick the tilt peaks at rest (25.5 deg; 27.2 at a tolerance neighbour). With a 25 deg socket the drive
+    cannot move: the fit-bench gap goes 14.0 -> 98.6.
+  * Raising gam by 3 deg drops the tilt to 22.2 at no cost (near1 14.01 -> 13.81).
+  * All 3 picks run at 18-21 deg, inside a short-neck M2 ball link.
+* **The horn ball's 1 mm part-pair edge (r_h -0.25 loses every pose or most of them) is the family's knife edge.**
+  Every config in this family, picks included, needs r_h +0.25 over its nominal to be buildable.
+* Cost $1.05 / $1.23 (cpu3c / cpu5c) against the $1.2 budget.
