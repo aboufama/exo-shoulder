@@ -24,10 +24,10 @@
   "title": "Built CAD judge results",
   "description": "One row per judged design and requirement: value, threshold and pass from the outside judges, timed by the judge output (score files: the earliest of their commit, their file time and the first commit whose docs report the design; scorecard-only values: the scorecard's commit). Built from tools/judged_history.py, judge/scorecard.json files and judge/requirements.json.",
   "file": "data/cad.json",
-  "sha256": "e9dfec7d1529a92e8ee9cb07f113f9deb8dc7e15d35f0809c417966bf5a27f63",
-  "rows": 383,
-  "bytes": 120208,
-  "updated": "2026-10-17T04:57:21Z"
+  "sha256": "ccbe146f0d13ab872161bbeff23b59bbf39510e253603508a4807739e347cfa4",
+  "rows": 390,
+  "bytes": 122547,
+  "updated": "2026-10-17T05:12:31Z"
  },
  {
   "id": "gpu_evals",
@@ -54,20 +54,20 @@
   "title": "Requirement board",
   "description": "Latest status of R1-R17 (with R1-aim and R5-aim) for the best judged 3-DOF design (most passes on its scorecard, then R1), with the best value any 3-DOF design reached under the current judging rules. Built from judge/scorecard.json files and judge/requirements.json.",
   "file": "data/reqs.json",
-  "sha256": "2f4a98857981f62155bca635c017e40860a59eba858adc7e8f36a5ad227091e0",
+  "sha256": "8b6936bf0e27892b2c10d819224da301f1115b55962053eeb69ee6a9201ee0b3",
   "rows": 19,
   "bytes": 8044,
-  "updated": "2026-10-17T04:57:21Z"
+  "updated": "2026-10-17T05:12:31Z"
  },
  {
   "id": "events",
   "title": "Event log",
   "description": "What happened and when: the swarm's own log (docs/concepts/events.jsonl), one milestone per judged design and every new built-CAD R1 record (from the judge outputs).",
   "file": "data/events.json",
-  "sha256": "7989e05e9ac6d2d6c94ce17311d0cbbd6083c6ba29661c24f3dc4b30a6a8d630",
-  "rows": 600,
-  "bytes": 227925,
-  "updated": "2026-10-17T04:57:21Z"
+  "sha256": "3fd7b50ebed7dc4d46eaf315a7e93299e5a889979b9f3240be86d648b7ce61d4",
+  "rows": 601,
+  "bytes": 228585,
+  "updated": "2026-10-17T05:12:31Z"
  },
  {
   "id": "spend",
@@ -84,10 +84,10 @@
   "title": "Arm reach in 3-D",
   "description": "One row per built design and everyday arm pose of the R16 workspace judge: where the upper arm points and whether the built design reaches it, with the reason if not. Built by tools/coverage3d.py from judge/workspace.json files (newest 8 designs).",
   "file": "data/cov3d.json",
-  "sha256": "572f758049587c3c54c1358c06fbcd82c22fe04a6f30b5d9acd9e40013974f1f",
+  "sha256": "97d81f13fa506464f17ad0208c57566f95b66914c700a65c8c86c53ec7b54edd",
   "rows": 1674,
-  "bytes": 513713,
-  "updated": "2026-10-17T03:58:12Z"
+  "bytes": 506126,
+  "updated": "2026-10-17T05:12:31Z"
  },
  {
   "id": "motion",
@@ -104,9 +104,9 @@
   "title": "Data build info",
   "description": "When tools/dash_build.py last gathered the data, the repo commit, and any warnings it printed.",
   "file": "data/meta.json",
-  "sha256": "66e9c565e0e0f3ddb0723e6970984a0f496df39f80c610868a50b1d944b8869b",
+  "sha256": "a60c30d5be52c5d5772c1dc457f12674d5ef3ce66fae6662db4854123eb8478a",
   "rows": 1,
   "bytes": 2089,
-  "updated": "2026-10-17T04:57:21Z"
+  "updated": "2026-10-17T05:12:31Z"
  }
 ]
