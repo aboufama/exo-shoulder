@@ -1,0 +1,384 @@
+{
+ "A": "roller-longdyad-knuckle-3r",
+ "B": "sidecar-longdyad-knuckle-3r",
+ "protocol": "claim: frozen shape fit on Bench(60,160) FAST (grid cache 0089c747c10f present), worn exact; skeptic 2026-10-17",
+ "note": "diff = gap A - gap B (negative: A better); paired bootstrap over poses within kind (tools/alignment_paired.compare_sets, seed 0)",
+ "bench": {
+  "gap_A": 18.66,
+  "gap_B": 18.91,
+  "diff": -0.25,
+  "split": {
+   "reach": 0.0,
+   "follow": 0.0,
+   "inband": 0.29,
+   "contact": -0.53
+  },
+  "discordant": {
+   "ws_taken_A_only": 8,
+   "ws_taken_B_only": 8,
+   "contact_A_only": 1,
+   "contact_B_only": 3,
+   "contact_both": 1
+  },
+  "boot": {
+   "n": 4000,
+   "ci90": [
+    -2.62,
+    1.73
+   ],
+   "sd": 1.35,
+   "p_A_better": 0.605
+  },
+  "model_frozen": {
+   "A": 18.67,
+   "B": 18.91
+  },
+  "contact_depth": {
+   "roller-longdyad-knuckle-3r": {
+    "n": 2,
+    "sum_mm": 16.46,
+    "max_mm": -10.55,
+    "n_deeper3": 2,
+    "below150": [],
+    "all": [
+     [
+      -10.55,
+      15.0,
+      165.0,
+      -60.0
+     ],
+     [
+      -5.91,
+      30.0,
+      165.0,
+      -60.0
+     ]
+    ]
+   },
+   "sidecar-longdyad-knuckle-3r": {
+    "n": 4,
+    "sum_mm": 6.23,
+    "max_mm": -4.61,
+    "n_deeper3": 1,
+    "below150": [
+     [
+      -0.74,
+      -60.0,
+      60.0,
+      105.0
+     ],
+     [
+      -0.11,
+      15.0,
+      135.0,
+      -60.0
+     ]
+    ],
+    "all": [
+     [
+      -4.61,
+      30.0,
+      165.0,
+      -60.0
+     ],
+     [
+      -0.77,
+      60.0,
+      150.0,
+      -105.0
+     ],
+     [
+      -0.74,
+      -60.0,
+      60.0,
+      105.0
+     ],
+     [
+      -0.11,
+      15.0,
+      135.0,
+      -60.0
+     ]
+    ]
+   }
+  },
+  "taken_lt2": {
+   "roller-longdyad-knuckle-3r": {
+    "incl_cmin": 30,
+    "metal_only": 25,
+    "lt1_incl_cmin": 3
+   },
+   "sidecar-longdyad-knuckle-3r": {
+    "incl_cmin": 26,
+    "metal_only": 25,
+    "lt1_incl_cmin": 2
+   }
+  }
+ },
+ "held": {
+  "gap_A": 23.73,
+  "gap_B": 22.67,
+  "diff": 1.06,
+  "split": {
+   "reach": 0.84,
+   "follow": 0.0,
+   "inband": 0.21,
+   "contact": 0.01
+  },
+  "discordant": {
+   "ws_taken_A_only": 21,
+   "ws_taken_B_only": 29,
+   "contact_A_only": 3,
+   "contact_B_only": 3,
+   "contact_both": 7
+  },
+  "boot": {
+   "n": 4000,
+   "ci90": [
+    -0.47,
+    2.39
+   ],
+   "sd": 0.87,
+   "p_A_better": 0.135
+  },
+  "model_frozen": {
+   "A": 23.73,
+   "B": 22.67
+  },
+  "contact_depth": {
+   "roller-longdyad-knuckle-3r": {
+    "n": 10,
+    "sum_mm": 49.88,
+    "max_mm": -9.54,
+    "n_deeper3": 7,
+    "below150": [
+     [
+      -5.51,
+      -90.0,
+      60.0,
+      120.0
+     ],
+     [
+      -3.49,
+      -90.0,
+      60.0,
+      105.0
+     ],
+     [
+      -1.6,
+      -75.0,
+      60.0,
+      105.0
+     ],
+     [
+      -1.22,
+      15.0,
+      105.0,
+      15.0
+     ]
+    ],
+    "all": [
+     [
+      -9.54,
+      30.0,
+      165.0,
+      -45.0
+     ],
+     [
+      -8.86,
+      15.0,
+      150.0,
+      -60.0
+     ],
+     [
+      -7.29,
+      60.0,
+      165.0,
+      -30.0
+     ],
+     [
+      -6.15,
+      30.0,
+      150.0,
+      -45.0
+     ],
+     [
+      -6.04,
+      45.0,
+      165.0,
+      -45.0
+     ],
+     [
+      -5.51,
+      -90.0,
+      60.0,
+      120.0
+     ],
+     [
+      -3.49,
+      -90.0,
+      60.0,
+      105.0
+     ],
+     [
+      -1.6,
+      -75.0,
+      60.0,
+      105.0
+     ],
+     [
+      -1.22,
+      15.0,
+      105.0,
+      15.0
+     ],
+     [
+      -0.18,
+      75.0,
+      150.0,
+      -90.0
+     ]
+    ]
+   },
+   "sidecar-longdyad-knuckle-3r": {
+    "n": 10,
+    "sum_mm": 35.67,
+    "max_mm": -8.37,
+    "n_deeper3": 5,
+    "below150": [
+     [
+      -5.94,
+      -90.0,
+      60.0,
+      120.0
+     ],
+     [
+      -3.97,
+      -90.0,
+      60.0,
+      105.0
+     ],
+     [
+      -2.31,
+      -75.0,
+      60.0,
+      105.0
+     ],
+     [
+      -0.9,
+      15.0,
+      105.0,
+      15.0
+     ],
+     [
+      -0.31,
+      -90.0,
+      60.0,
+      90.0
+     ]
+    ],
+    "all": [
+     [
+      -8.37,
+      15.0,
+      150.0,
+      -60.0
+     ],
+     [
+      -6.34,
+      60.0,
+      165.0,
+      -30.0
+     ],
+     [
+      -5.94,
+      -90.0,
+      60.0,
+      120.0
+     ],
+     [
+      -5.06,
+      45.0,
+      165.0,
+      -45.0
+     ],
+     [
+      -3.97,
+      -90.0,
+      60.0,
+      105.0
+     ],
+     [
+      -2.31,
+      -75.0,
+      60.0,
+      105.0
+     ],
+     [
+      -1.31,
+      105.0,
+      150.0,
+      -75.0
+     ],
+     [
+      -1.16,
+      60.0,
+      150.0,
+      -30.0
+     ],
+     [
+      -0.9,
+      15.0,
+      105.0,
+      15.0
+     ],
+     [
+      -0.31,
+      -90.0,
+      60.0,
+      90.0
+     ]
+    ]
+   }
+  },
+  "taken_lt2": {
+   "roller-longdyad-knuckle-3r": {
+    "incl_cmin": 66,
+    "metal_only": 61,
+    "lt1_incl_cmin": 14
+   },
+   "sidecar-longdyad-knuckle-3r": {
+    "incl_cmin": 63,
+    "metal_only": 58,
+    "lt1_incl_cmin": 14
+   }
+  }
+ },
+ "pooled_bench_plus_held": {
+  "gap_A": 22.31,
+  "gap_B": 21.62,
+  "diff": 0.69,
+  "split": {
+   "reach": 0.61,
+   "follow": 0.0,
+   "inband": 0.24,
+   "contact": -0.15
+  },
+  "discordant": {
+   "ws_taken_A_only": 29,
+   "ws_taken_B_only": 37,
+   "contact_A_only": 4,
+   "contact_B_only": 6,
+   "contact_both": 8
+  },
+  "boot": {
+   "n": 4000,
+   "ci90": [
+    -0.56,
+    1.83
+   ],
+   "sd": 0.73,
+   "p_A_better": 0.191
+  }
+ }
+}

@@ -81,7 +81,51 @@ baseline reproduces the as-built ring (-0.264 vs -0.258 mm).
 Raise overhead frames 78-83. 1.2 % of the ring's samples are within 0.3 mm. The flank behind the peak is +0.23 mm and the
 dwell +2.2 mm. So trimming the dwell or the flank (i) cannot fix it: the offending metal is the law's contact surface.
 
-LOBE_TABLE
+**Round 3 (this run): every candidate on the REAL-SIZE drive.** Rounds 1-2 (`lobe_skin_candidates_*.json`) solved the
+drive with the gen-5 rod-end height. The real igubal (6 mm eyes) and the 3.8 mm horn hub (section 3) raise the rod end at
+the horn by 3.6 mm, and that alone moves the lobe. So I re-ran every candidate with that height (`lobe_skin.py real`, the
+posed skin cached per frame, 375 frames as above, 27 min, one process; `lobe_skin_real.json`). Pass = >= 0.3 mm on every
+frame. Forces are the red team's spring case (0.08 N.m + 0.015 N.m/rad on K) and spring + the MVP1 opening bound
+(0.033 N.m), through the solved arms. Every candidate has the same part list, so tools/simplicity.py stays at 12.0.
+
+| candidate (least change first) | min skin distance (mm), where | frames < 2 mm | lobe profile r (mm) | cost | verdict |
+|---|---|---|---|---|---|
+| gen-5 as built (old rod-end height) | -0.258, Raise overhead 78 | 71 | 10.74 -> 12.87 | - | FAIL |
+| real parts only (no lobe fix) | -0.091, Raise overhead 78, profile end (r 12.68, az 60.6) | 69 | 10.68 -> 12.68 | - | FAIL |
+| (i) stop B at dK 50 (a1max 57.12) | -0.039 | 69 | -> 12.59 | bench 23.57 -> **23.57** | FAIL |
+| (i) stop B at dK 47 | +0.016 | 69 | -> 12.51 | (between) | FAIL |
+| (i) stop B at dK 44 (a1max 54.97) | +0.060 | 69 | -> 12.42 | bench **23.85** (+0.28), reach 0.7306 -> 0.7278 | FAIL |
+| (i) stop B at dK 40 (a1max 53.46) | +0.155 | 67 | -> 12.30 | bench **24.77** (+1.20), reach 0.7139 | FAIL |
+| (i) stop B at dK 35 | +0.258 | 65 | -> 12.14 | > +1.2 | FAIL |
+| (v) thinner band 2.1 / 1.6 mm (top kept) | -0.094 / -0.096 | 69 | unchanged | - | FAIL: the end enters over the whole height |
+| (iv) radial offset: dwell r 9.6 | **+0.409** | 65 | 10.19 -> 12.21 | forces unchanged; the follower-arm eye comes **0.1 mm** off the J2 cap skirt (r 10 from F2+8.8; was 0.6) and the roller top sits 0.1 mm under it | passes the skin, not buildable at normal tolerance |
+| (iv) radial offset: dwell r 9.1 | +0.902 | 59 | 9.69 -> 11.73 | the eye 0.4 mm INTO the J2 cap | infeasible |
+| **(iv) phase: mirrored follower (side -1)** | **+2.255** (the dwell, r 10.1) | **0** | 10.52 -> 12.76 at az -21.9 -> -5.8 (was 47.9 -> 60.6) | rod 42 / 59 N, roller 46 / 63 N (both LOWER); pressure angle 26.5-38.2 deg (limit 45); horn misalignment 12.8-15.0 deg (igubal swivel 32 deg) | **chosen** |
+| (iii) crank 12, horn r 2.0 | +0.931 | 57 | 10.36 -> 11.57 | roller **85 / 114 N** | passes the skin, overloads the roller |
+| (iii) crank 13, horn r 2.0 | +1.046 | 57 | 10.32 -> 11.44 | roller **94 / 127 N** | same |
+| (iii) crank 14, horn r 2.493 | +0.864 | 59 | 10.39 -> 11.64 | roller **84 / 113 N** | same |
+| (iii) crank 14, horn r 1.8 (the earlier v2 draft) | +1.260 | 53 | 10.26 -> 11.20 | rod 82 / 110 N, roller **115 / 155 N**; K error 2.4-3.5 deg per 0.05 mm of lobe (baseline 1.2-1.5) | same |
+| baseline for the forces (a_c 9, r_h 2.493) | | | | rod 53 / 71 N, roller 48 / 65 N | |
+
+What the table says:
+- **Stop B cannot buy 0.3 mm.** Moving it costs nothing down to dK 50. It costs 0.28 points at 44 and 1.20 at 40, and
+  even 35 deg leaves the ring 0.04 mm short. Bench runs: `stopb_bench.py` = the verifier's harness with only a1max
+  changed (frozen exact Bench(110,360), flood fill), `stopb_bench_<a1max>.json`. The as-verified run reproduces 23.57.
+- **A thinner band does nothing**, as section 2's probe predicted.
+- **The ratio fixes (iii) pass the skin by buying a smaller lift with a higher mechanical advantage.** That multiplies the
+  roller load: 85-155 N against the MR63ZZ's static rating of about 0.07-0.10 kN. They are out until a bigger roller fits,
+  and none does: the follower arm must stay >= 8.3 mm (round 2). The earlier v2 draft in the tree (crank 14, horn r 1.8)
+  was one of these, and this run replaces it.
+- **The radial offset passes the skin but not the shop.** At r 9.6 the follower-arm eye runs 0.1 mm from the J2 cap skirt.
+- **The mirrored follower moves the profile 70 deg round link 2, away from the deltoid.** It does not shrink the profile
+  away from the skin. At the overhead peak the ring's nearest metal is then the O20.2 dwell (+2.26 mm), and no sampled
+  frame has the ring under 2 mm. It changes no part count and no law: same lobe law, same K, same frames for every chain
+  group. Only the bell crank's follower arm points the other way round the rocker post. Its forces are lower and its
+  pressure angle higher (still 7 deg under the 45 deg limit). The horn's misalignment rises to 15.0 deg. That is within
+  the KGLM-03's 32 deg swivel if the swivel is the full angle, with 1 deg spare if it is +-16. A horn pin tilted to the
+  mid-stroke rod line, as the crank pin already is, would take that back. That is a later refinement, stated here.
+
+LOBE_ALL
 
 ## 3. Real parts
 

@@ -21,8 +21,9 @@ The changes (each closes an item of the independent check, pipeline/full-exo/des
              slaved, never read; the arbor ends in the DD O3 tip for the horn hub).
 
     OMP_NUM_THREADS=1 nice -n 10 python3 pipeline/conformal/param_cad/user_style_geneva_fix.py [--src user_geneva_rod] [--out user_geneva_rod_v2]
-        [--a-f 9.0] [--a-c 9.0] [--r-h 2.493] [--rr 3.0] [--dz 0.0] [--r-base 10.1] [--hub-h 3.8] [--eye-h 6.0]
-    gen-5 fix as built: --a-c 14 --r-h 1.8 (the lobe fix measured in docs/research/geneva_rod_drive/lobe_skin.py)
+        [--a-f 9.0] [--a-c 9.0] [--r-h 2.493] [--rr 3.0] [--dz 0.0] [--r-base 10.1] [--side 1] [--hub-h 3.8] [--eye-h 6.0]
+    gen-5 fix as built: --side -1 (the mirrored follower: the lobe fix measured in docs/research/geneva_rod_drive/lobe_skin.py real;
+    the earlier draft --a-c 14 --r-h 1.8 cleared the skin by 1.26 mm but loads the MR63ZZ roller to 115-155 N, over its static rating)
 """
 import argparse, json, math, os, shutil, sys, time
 MY_ARGV = sys.argv[1:]; sys.argv = sys.argv[:1]
@@ -127,6 +128,7 @@ def main():
     ap.add_argument("--a-f", type=float, default=9.0); ap.add_argument("--a-c", type=float, default=9.0); ap.add_argument("--rr", type=float, default=3.0); ap.add_argument("--r-h", type=float, default=2.493)
     ap.add_argument("--dz", type=float, default=0.0); ap.add_argument("--hub-h", type=float, default=3.8); ap.add_argument("--eye-h", type=float, default=6.0)
     ap.add_argument("--r-base", type=float, default=10.1)                                        # the lobe's dwell radius (radial offset of the whole profile)
+    ap.add_argument("--side", type=int, default=+1)                                              # follower side about the rocker axis (-1: mirrored, the lobe's phase moves)
     a = ap.parse_args(MY_ARGV); t0 = time.time()
     src = os.path.join(FULL, "designs", a.src); dd = os.path.join(FULL, "designs", a.out)
     if os.path.exists(dd): shutil.rmtree(dd)
@@ -135,7 +137,7 @@ def main():
     USG.EYE_H = a.eye_h; USG.A_F, USG.A_C, USG.RR, USG.R_HORN = a.a_f, a.a_c, a.rr, a.r_h
     USG.LOBE_Z = tuple(z + a.dz for z in USG.LOBE_Z); USG.ROLLER_Z = tuple(z + a.dz for z in USG.ROLLER_Z); USG.ARM_F_Z = tuple(z + a.dz for z in USG.ARM_F_Z)
     hub0 = USG.HORN["hub_z"][0]; USG.HORN["hub_z"] = (hub0, hub0 + a.hub_h); USG.HORN["plate_z"] = (hub0 + a.hub_h, hub0 + a.hub_h + 1.4)
-    _run0 = DV.run; DV.run = lambda **kw: _run0(**dict(kw, r_base=a.r_base))                     # drive_solution() calls DV.run without r_base
+    _run0 = DV.run; DV.run = lambda **kw: _run0(**dict(kw, r_base=a.r_base, side=a.side))       # drive_solution() calls DV.run(side=+1) without r_base
     rise = (a.eye_h - 4.0) / 2 + (a.hub_h - 1.2)                                                  # rod-end centre over the old one (eye 0.5 over the plate kept)
     DV.hB = DV.hB + rise; DV.hL = DV.hL + a.dz
     M, rep0 = GL1.fit(); lg = GL1.law_geom(M); M._lg = lg
@@ -220,7 +222,7 @@ def main():
     D = json.load(open(os.path.join(src, "design.json"))); D.update(id=a.out, label=D["label"] + " - gen-5 fix (real igubal width, retained drive, lobe fix, link 1a repaired)",
                                                                      built_with="pipeline/conformal/param_cad/user_style_geneva_fix.py on " + a.src + " (drive parts rebuilt, link 1a repaired, every other part copied)")
     D["drive_build"] = dict(D.get("drive_build", {}), rod_centres_mm=round(dv["L"], 3), post_mm=bc_info["post_length_mm"], igubal="igus KGLM-03 at 6 mm", horn_hub_mm=a.hub_h,
-                            lobe_fix=dict(a_f=a.a_f, a_c=a.a_c, rr=a.rr, dz=a.dz, r_h=a.r_h, r_base=a.r_base))
+                            lobe_fix=dict(a_f=a.a_f, a_c=a.a_c, rr=a.rr, dz=a.dz, r_h=a.r_h, r_base=a.r_base, side=a.side))
     json.dump(D, open(os.path.join(dd, "design.json"), "w"), indent=1, default=float)
     B = json.load(open(os.path.join(src, "build.json")))
     B.update(lobe=lobe_info, rod=rod_info, horn=horn_info, posing=posing, parts=pf, link_1a_fix=dict(l1a_info, name="renamed: no magnet pocket"))
@@ -230,7 +232,7 @@ def main():
     json.dump(B, open(os.path.join(dd, "build.json"), "w"), indent=1, default=float)
     B["drive_posed"] = USG.posed_drive_check(dd, dv, n=400)
     spec = importlib_spec(os.path.join(USG.REPO, "docs", "research", "geneva_rod_drive", "declare_slaved.py")); B["slaved"] = [spec.declaration(B)]
-    B["gen5_fix"] = dict(src=a.src, rise_rod_end_B_mm=rise, eye_h=a.eye_h, hub_h=a.hub_h, lobe_fix=dict(a_f=a.a_f, a_c=a.a_c, rr=a.rr, dz=a.dz, r_h=a.r_h, r_base=a.r_base), drive_rep=dv["rep"], seconds=round(time.time() - t0))
+    B["gen5_fix"] = dict(src=a.src, rise_rod_end_B_mm=rise, eye_h=a.eye_h, hub_h=a.hub_h, lobe_fix=dict(a_f=a.a_f, a_c=a.a_c, rr=a.rr, dz=a.dz, r_h=a.r_h, r_base=a.r_base, side=a.side), drive_rep=dv["rep"], seconds=round(time.time() - t0))
     json.dump(B, open(os.path.join(dd, "build.json"), "w"), indent=1, default=float)
     print(f"done -> {dd}: invalid {B['invalid_or_multi_solid'] or 'none'}; drive_kin max roller dev {B['drive_kin']['max_roller_dev_mm']} closure {B['drive_kin']['max_closure_mm']}; "
           f"posed {B['drive_posed']} ({time.time() - t0:.0f} s)", flush=True)
