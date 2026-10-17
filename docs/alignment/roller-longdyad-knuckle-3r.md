@@ -1,272 +1,280 @@
 # Alignment audit: roller-longdyad-knuckle-3r
 
-Hourly audit, 2026-10-16 22:45-22:55 UTC (ledger entry 22:53:06Z, `by auditor`, run `audit:roller-longdyad-knuckle-3r`).
-Reference design for every comparison: the verified lead, sidecar-longdyad-knuckle-3r.
+Audit of 2026-10-17 01:42-02:05 UTC (ledger entry 2026-10-17T01:56:25Z, `by auditor`, run
+`audit:roller-longdyad-knuckle-3r`). It replaces the screen-time audit of 2026-10-16 22:54 UTC.
 
-## Verdict: WATCH
+Why it ran: the design is now verified (v_gap 18.67, score 93.21) and ROUNDS.md "Round 9 results" names it the
+round-9 winner, by 0.24 over the round-8 lead sidecar-longdyad-knuckle-3r (18.91). It is worse held out (23.73 against
+22.67). The question was whether the 0.24 is a real gain or a bench artifact.
 
-- **What the row claims.** Status screened, self-measured. The headline field `gap` is the fast Bench(60,160) number,
-  13.19. The frozen exact claim on Bench(110,360) is 18.67 plain, 20.30 at 1 mm and 33.10 at 2 mm. Held out it is
-  23.73. Complexity is 43.75.
-- **Re-measured.** Every one of those numbers reproduces to the digit. The model was run unchanged, on the farm, in
-  exact mode.
-- **Verdict.** The ledger tool computed **watch**: 3 tool checks plus 7 judgement findings, all at watch level. None is
-  gamed.
-- **Not a lead change.** The design's own verdict says the same thing. Against the lead it passes the A1 dominance gate
-  (plain AND 2 mm) on a margin smaller than one workspace pose, and it loses held out under the same harness.
-- **What it really is.** A level-score, lower-complexity point (43.75 vs 49) with a much better 3 mm clearance floor.
-  Its raised-arm workspace standoff is worse, and its two contact poses are deeper.
+The user's 2026-10-17 rulings apply:
+- The 2 mm near-touch A1 dominance gate is retired, and the plain verified gap decides. This audit cites the 2 mm reading
+  as information only.
+- A sensed joint is a joint.
+- All checks stay kinematic.
 
-| Frozen exact (this audit) | plain | 1 mm | 2 mm | 3 mm | band 3-14 | held out | held 1 mm | held 2 mm | held 3 mm | cx |
-|---|---|---|---|---|---|---|---|---|---|---|
-| roller-longdyad (F2) | 18.67 | 20.30 | 33.10 | 107.65 | 18.84 | 23.73 | 26.83 | 37.02 | 101.03 | 43.75 |
-| lead sidecar-longdyad | 18.91 | 20.00 | 34.03 | 155.98 | 19.22 | 22.67 | 25.75 | 37.24 | 163.09 | 49 |
+## Verdict: WATCH (the 0.24 is a tie, not a gain)
 
-Sources:
-- This design: `docs/alignment/remeasure/roller-longdyad-knuckle-3r_bench.json` and `_held.json`.
-- The lead: `docs/alignment/remeasure/sidecar-longdyad-knuckle-3r_bench.json`, plus
-  `docs/alignment/live_audit_2026-10-16/ref_sidecar-longdyad-knuckle-3r_held_same_harness.json`. The lead's held-out
-  run was re-worn by this audit through the same `alignment_audit remeasure` path and reproduces the verifier's
-  22.67 / 25.75 / 37.24.
+- **The claim.** The verified gap is 18.67 (score 93.21), frozen exact on Bench(110,360). The verifier also measured 1 mm
+  20.30, 2 mm 33.10 and held out 23.73. The claim reproduced to the digit in the 2026-10-16 re-wear
+  (`docs/alignment/remeasure/roller-longdyad-knuckle-3r_bench.json` and `_held.json`). The claimed parameters have not
+  changed since: `best_params` is identical in commits 31e8446 and 70c2230.
+- **The ledger verdict is watch:** 1 tool check plus 8 judgement findings, none of them gamed.
+- **The 0.24 is not a measurable gain.**
+  - On the bench, the paired per-pose noise of the gap difference is SD 1.36 points, and the difference's 90 % interval
+    is [-2.62, +1.77].
+  - The 2.6x larger held-out set leans the other way: the lead is better by 1.06 on the claim protocol and by 0.69 on a
+    perturbed fit.
+  - Pooled over bench and held out, the lead is better by 0.41-0.7. The probability that this design is the better
+    one is 0.23-0.29.
+  - None of these intervals excludes zero.
+- **Why this is not "gamed":**
+  - Neither design is measurably better on the score.
+  - This design is simpler: complexity 43.75 against 49.
+  - It has far fewer poses with metal at 2-3 mm.
+  - So the ranking does not demonstrably put it above a design that is better for the wearer.
+- **What to call it.** Under the plain-gap rule the label "winner" follows mechanically, but it rests on noise. It
+  should read as a tie and a complexity Pareto point, and its 0.24 is not progress toward 95.
 
-The comparison is unpriced against unpriced. The lead's priced reading, with the build tolerance on its stops, is
-19.36 plain / 23.29 held out. Its gen-6 r_h 15.5 reading is 18.92 / 22.69. This design has no priced reading on file.
+## What the wearer gets
 
-## What the wearer gets (measured, frozen exact Bench(110,360); held-out set in brackets)
+All numbers below are measured on the claim protocol (frozen exact Bench(110,360)), with the held-out set in
+brackets, unless marked.
 
 **Reach**
-- Overall reach is 0.725, 261 of 360 workspace poses, the same as the lead (held out 0.6817, 649 of 952; the lead
-  657).
-- Overhead (elev >= 140): 8 of 28 taken, the same as the lead (held out 18 of 71). The 20 overhead poses are lost to
-  fold 14, slide 4 and contact 2.
-- Raised arm (elev >= 90): 46 of 113, against the lead's 45 (held out 114 of 300).
-- By elevation band, taken / total:
+- Overall: 261 of 360 workspace poses (0.725), equal to the lead. Held out it is 649 of 952 (0.6817), against the
+  lead's 657.
+- Overhead (elev >= 140): 8 of 28 taken (18 of 71 held out). Of the 20 overhead poses lost, 14 are lost to the fold,
+  4 to the slide and 2 to contact.
+- Raised arm (elev >= 90): 46 of 113 (114 of 300 held out).
+- Paired re-wear, perturbed fit: the held-out shortfall comes from below elevation 90. There the lead takes 18 poses
+  this design misses, against 8 the other way. At elevation 90-140 this design takes 12 the lead misses, against 9.
+  Overhead is 1 against 1.
 
-  | elevation (deg) | taken / total |
-  |---|---|
-  | 0-60 | 158 / 172 |
-  | 60-90 | 57 / 75 |
-  | 90-120 | 26 / 51 |
-  | 120-140 | 12 / 34 |
-  | 140-160 | 5 / 13 |
-  | 160-200 | 3 / 15 |
-
-**Clearance floor**
-- Taken poses with metal under 1 mm: 3 of 371, against the lead's 2 (held out 14 of 851).
-- Under 2 mm: 30, against the lead's 26: 5 clip and 25 workspace poses. Held out it is 66.
-- Under 3 mm: 133, against the lead's 178 (held out 274 vs 427). This is the design's real gain.
-- 10th-percentile per-pose minimum metal overhead: 1.82 mm, against the lead's 1.02 (held out 1.50 vs 0.64).
-- Lowest metal on a taken pose: 0.07 mm, at workspace pose (plane -60, elev 60, axial 105).
+**Metal under 2 mm on taken poses**
+- 30 on the bench (5 clip, 25 workspace), against the lead's 26. Held out it is 66.
+- In the paired re-wear (perturbed fit): 26 against 23 on the bench and 66 against 56 held out.
+- Under 1 mm: 3 (14 held out).
+- Under 3 mm: 133, against the lead's 178 (274 against 427 held out). This is the design's real clearance gain, and it
+  lives only in the 2-3 mm shell.
 
 **Contact**
-- 2 contact poses. They are -10.55 mm at (15, 165, -60) and -5.91 mm at (30, 165, -60).
-- The lead has 4, at -4.61 / -0.77 / -0.74 / -0.11 mm.
-- Held out there are 10, the deepest -9.54 mm at (30, 165, -45). All the deep ones are overhead.
-- Which part presses was not measured.
+- 2 contact poses on the bench, the deepest -10.55 mm at (plane 15, elev 165, axial -60), then -5.91 mm.
+- The lead has 4, at -4.61, -0.77, -0.74 and -0.11 mm.
+- Held out, in the paired re-wear: 10 poses with a depth sum of 49.88 mm, the deepest -9.58 mm. The lead has 11 poses
+  with a depth sum of 35.25 mm, the deepest -8.31 mm.
+- All deep presses are overhead.
 
-**In-band**
-- Scored (clip frames): in-band14 0.8937, against the lead's 0.8966.
-- Unscored workspace: 0.854 overall, against the lead's 0.874.
-- At elev 90-140: 0.798, against the lead's 0.841.
+**Workspace in-band (unscored)**
+- 0.854 overall, against the lead's 0.874.
+- At elevation 90-140: 0.798, against the lead's 0.841.
 - Overhead: 0.937, against the lead's 0.926.
-- Clip metal histogram: 0.01 % of samples at 1-2 mm and 0.18 % at 2-3 mm; 10.6 % sit above 14 mm.
 
-**Mechanism feel**
-- Springs: one clock-spring cap on K. It force-closes both rolling pairs (the lobe follower and the roller on the
-  flank). No R17 or dynamics run exists, so the spring torque, K lag and cuff twist are unmeasured.
-- Stops: J2 smlo 5.0 / smhi 16.84; K stop B a1max 58.77.
-- Fold margin, own-state, in `th`: minimum 5.181 deg over 371 taken poses. No pose is under 5 and 2 are under 5.5. The
-  lowest is the forced workspace pose (60, 120, -105). The lead's is 5.232.
-- Near-singular postures:
-  - The horn pressure angle reaches 43.0 (= PA_MAX) at the last taken K step, dK 45.62 of 46.2.
-  - The knee reaches 151.92 deg on the bench (153.16 held out), against the lead's 146.14 (150.86).
-- Continuity flood:
-  - full grid: 18.67, 0 dropped;
-  - knn: 20.34, 6 dropped (the lead's is 21.72);
-  - bench graph: 50.29, 113 forced poses dropped (the lead's is 43.4).
+Source: `docs/alignment/live_audit_2026-10-16/probe_*`.
 
-  Full and knn are within the rule. The lead's own bench-graph flood is also far off, so the rule names the full
-  flood. Source: `docs/alignment/remeasure/roller-longdyad-knuckle-3r_flood.json`.
-- Drive: K moves 45.62 deg over the taken poses. It is not idle.
-- Smallest hardware clearances: bent arm to hub K 1.14 mm, roller to hub K 2.02 mm.
+**Springs and stops**
+- One clock-spring cap on K force-closes both rolling pairs. The lead's RSSR has the same cap.
+- Stops: J2 at 5.0 / 16.84, and K stop B at a1max 58.77.
+- Cuff twist and spring lag: not measured (no dynamics run, and all checks stay kinematic).
 
-Probe files:
-- `docs/alignment/live_audit_2026-10-16/probe_roller-longdyad-knuckle-3r.json`;
-- `_held.json`;
-- `_th.json`: th margin, knee span and drive info, through the new adapter `tools/alignment_wear_probe_model.py`.
+**Near-singular postures**
+- The horn pressure angle reaches 43.0, exactly PA_MAX, at the last taken K step (dK 45.62 of 46.25).
+- The knee reaches 151.92 deg (153.16 held out).
+- The fold margin in th is at least 5.181 (5.031 held out), with no pose under 5.
+- The continuity flood keeps 18.67 on the full grid and gives 20.34 on knn.
 
-## Findings
+**Complexity:** 43.75, recomputed equal. Joints: 3 active, K slaved by the cam (not read), and 2 sensed knee pins at
+the cuff.
 
-### P1: the A1 dominance pass is a sub-pose margin that reverses held out (watch)
+## Findings (`docs/alignment/roller-longdyad-knuckle-3r.findings.json`)
 
-- **Evidence.** The plain gain is +0.24, which is 0.86 of one workspace pose at 0.278 points per pose. All of it is
-  contact-pose count: 2 contact poses against 4 is worth +0.53, and the in-band loss costs -0.29. Reach is identical.
-  The 2 mm gain is +0.93. At 1 mm the design is behind by -0.30. Held out under the same harness it is behind by -1.06
-  (8 fewer taken poses) and by -1.08 at 1 mm; at 2 mm it is +0.22.
-- **Why the exo is not better by this number.** These differences are pose-sampling noise in both directions. The
-  design does have a real, wearer-relevant advantage: 45 fewer bench poses and 153 fewer held-out poses with metal
-  under 3 mm. The score does not see that advantage, so the lead is not shown to be better for the wearer either.
-- **Action.** Do not promote on these numbers: the gain is below the 1-point rule. If it goes to a verifier, it goes
-  as a complexity Pareto point (cx 43.75 vs 49 at a level score), and the verifier reports 3 mm and held out next to
-  plain and 2 mm.
+### S1 (watch): the "win by 0.24" is inside the bench's noise and reverses held out
 
-### R1: the dashboard shows only the fast 13.19, score 95.20 (watch)
+**Evidence on the claim protocol**
+- On the bench, the 0.24 splits as follows:
+  - 2 fewer contact poses: +0.53;
+  - in-band: -0.29;
+  - reach: equal.
+- Held out, the lead is better by 1.06: 8 more of 952 poses reached, contact equal at 10 against 10, in-band -0.21.
 
-- **Evidence.** The row's frozen exact claim (18.67, score 93.21) sits under the key `frozen`. `tools/dash_build.py`
-  line 409 reads only `frozen_exact` / `frozen_exact_gap`. So `docs/dashboard/data/morphs.json` has `frozen_gap` null,
-  and the public and simple boards fall back to basis 'fast'.
-- **Effect.** The board shows a best-of-7236 fast number above the golden 95 line. It is labelled 'fast' and sorted
-  below the verified rows, so it does not outrank them.
-- **The row name.** It still advertises the lever ("lift the lead's drive-stroke wall"). The row's own verdict calls
-  that lever dead, and the claimed config's taken th max is 106.3 against the lead's 109.22.
-- **Action.** For the lead: expose the self-measured frozen number on the board (proposal C), and rename the row or
-  add the verdict to its name. This auditor edits no row or dashboard.
+**Evidence from the new paired tool**
+- The tool is `tools/alignment_paired.py`. It dumps both designs pose by pose on the same poses, with the models
+  unchanged, run on the farm.
+- The farm had no fast grid cache, so the fit-60 shape was fitted on exact distances. That is a perturbed fit, not the
+  claim protocol.
+- Results:
 
-### NEW-contact-depth: depth-blind contact (watch; proposed catalogue entry T5, live audit L6)
-
-- **Evidence.** The plain gain is exactly 2 fewer contact poses, but the remaining contact is 2.3x deeper: -10.55 mm
-  against the lead's -4.61 mm, and a depth sum of 16.46 mm against 6.23 mm. Held out there are 10 poses, the deepest
-  -9.54 mm.
-- **Why it is not better.** A 10 mm press at elev 165 is felt, and possibly bruises, in the region the user ranks
-  first.
-- **Action.** Report contact depths with every claim (proposal B), and attribute these two poses to a part.
-- **Proposed catalogue entry T5. Depth-blind contact.**
-  - Looks like: a plain gain that comes from fewer contact poses while the remaining ones go deeper.
-  - Detect: the max and summed contact depth against the reference.
-  - Here: roller-longdyad -10.55 / 16.46 mm against the lead's -4.61 / 6.23 mm; pick1 -14.6 mm (live audit L6).
-
-### NEW-ws-inband: worse raised-arm standoff, which the score does not see (watch; live audit L2)
-
-- **Evidence.** On the claim bench, the workspace in-band is 0.854 against 0.874. At elev 90-140 it is 0.798 against
-  0.841. The design doc reported only the fit-bench reading (0.825 / 0.757 vs 0.837 / 0.762, "no hidden gain"), which
-  under-states the raised-arm deficit by about 3.8 points.
-- **Action.** Claims report the workspace in-band on the claim bench, not the fit bench.
-
-### G4: the drive at its transmission cap (watch)
-
-- **Evidence.** The horn pressure angle is 43.0 = PA_MAX at the last taken K step. The K stroke is limited by the
-  pressure angle (dK_lim 46.2, taken 45.62). The 2-degree cushion under 45 is exactly the allowance for K slop and the
-  flank tolerance. The clearances are 1.14 / 2.02 mm to hub K.
-- **Action.** Before any CAD, the R17 slaved coupling plus a force check at that step. A sensitivity run at PA_MAX 41
-  would show what the cushion buys.
-
-### T4: the knee window walked toward straight, but the score does not depend on it (watch)
-
-- **Evidence.** ang_min has no bound in the model's `_clamp` chain. The search moved it from 26.88 (the lead's
-  verified value) to 25.22. The taken knee runs 5.8 deg further toward straight than the lead's.
-- **Re-wear.**
-
-  | ang_min | plain | 1 mm | 2 mm | reach | overhead |
+  | set | this design | lead | difference | paired bootstrap | P(this design better) |
   |---|---|---|---|---|---|
-  | 25.22 (claimed) | 18.67 | 20.30 | 33.10 | 0.725 | 8 / 28 |
-  | 26.88 (the lead's) | 18.67 | 20.30 | 33.10 | 0.725 | 8 / 28 |
-  | 30.46 (H1's) | 18.71 | 20.36 | 36.76 | 0.7167 | 7 / 28 |
+  | bench | 19.34 | 19.66 | this design ahead by 0.32 | SD 1.36, 90 % interval [-2.62, +1.77] | 0.61 |
+  | held out | 24.28 | 23.60 | lead ahead by 0.69 | 90 % interval [-0.80, +2.09] | 0.23 |
+  | pooled | 22.90 | 22.49 | lead ahead by 0.41 | 90 % interval [-0.78, +1.61] | 0.29 |
 
-  So the walk buys nothing against the lead. Files: `docs/alignment/remeasure/roller-longdyad-knuckle-3r_angmin*.json`.
-- **Action.** Bound ang_min at 26.88 in the family (proposal E). This claim is unchanged by it.
+- On the bench, the equal reach hides 8 + 8 discordant poses.
+- The perturbed fit by itself moves each design by 0.67-0.92 points, which is 3 times the margin. The bench-ahead /
+  held-behind pattern reproduces under it.
+- Files: `docs/alignment/remeasure/roller-longdyad-knuckle-3r_vs_sidecar-longdyad-knuckle-3r_paired_exactfit.json`,
+  plus the four `*_perpose.json` files.
 
-### M5: K's hold is a single clock spring closing two rolling pairs, with no dynamics check (watch)
+**Why the exo is not shown to be better.** Neither design is measurably better on the score. Out of sample, the lead
+is more likely the better one.
 
-- **Evidence.** K is scored at its slaved value. The cam synthesis checks lift-off kinematically, but no R17 run exists
-  for this id. The new slaved-coordinate coupling in `judge/dynamics.py` (5d6b819, 9f28755) is the instrument.
-- **Action.** Required before any CAD.
+**Action**
+- Report the design as tied with the lead: a complexity Pareto point.
+- Its next polish claims held out (as ROUNDS.md already says), and so does any polish of the lead.
+- Not gamed, for the reasons in the verdict.
 
-## Tool checks (`docs/alignment/roller-longdyad-knuckle-3r.json`, with `--ref sidecar-longdyad-knuckle-3r`)
+### NEW-contact-depth (watch): proposed catalogue entry T5, depth-blind contact
 
-**At watch**
-- `held_out`: the row has no verified gap, because it is screened. Measured held out is 23.73, +5.06 over its own
-  frozen bench.
-- `continuity`: the tool does not read the flood that this audit measured.
-- `fold_margin`: the tool does not read the th margin that this audit measured (5.181).
+**Evidence**
+- The whole contact-term gain is 2 fewer contact poses, but the presses that remain are deeper:
+  - bench: depth sum 16.46 mm against 6.23 mm, deepest -10.55 mm against -4.61 mm;
+  - held out: sum 49.88 mm against 35.25 mm, deepest -9.58 mm against -8.31 mm.
+- All of them are at elevation 150-165.
 
-**Ok**
-- `near_touch`: 14.43 points live in the 1-2 mm shell, against the lead's 15.12; band 3-14 gives 18.84.
-- `dominance`: +0.24 plain / +0.93 at 2 mm.
-- `idle`: the dK span is 45.6 deg.
-- `sampling`:
-  - sample-weighted in-band 0.894 against part-weighted 0.923;
-  - L1a is thinly sampled (8 samples, 0.981 in band);
-  - the crank is 0.797 in band on 129 samples (the lead's crank is 0.91);
-  - L2 is 0.736.
-- `complexity`: recomputed 43.75. The mechanism record carries confidence "medium", so it is a hand count.
-- `reporting`: ok as far as the tool can see; the dashboard defect is finding R1.
-- `judge_change`: none.
-- `rules`: O20 MR117-2RS hubs, 0 passive translations, 3 active DOF.
+**Action.** Report the depth sum and the maximum depth with every claim. Attribute the press to a part: not done here,
+because the dump has no per-part split.
+
+### NEW-ws-inband (watch): the raised-arm standoff is worse, and the score does not see it
+
+**Evidence**
+- Workspace in-band at elevation 90-140 is 0.798 against 0.841.
+- The scored clip in-band is lower on both sets: 0.8937 against 0.8966, and 0.8926 against 0.8947.
+- Metal under 2 mm is level or worse: 66 against 56 held out on the perturbed fit, and 66 against 63 on the claim
+  protocol.
+
+**Action.** Claims report the workspace in-band on the claim bench.
+
+### S2 (watch): a more real envelope improves the number
+
+**Evidence**
+- The verifier's envelope correction adds 19 real metal points: the O5 roller head and the lug's flank-edge strip.
+- The gap goes from 18.67 to 18.56, because in-band14 rises from 0.8937 to 0.8948.
+- ROUNDS.md prints "envelope-corrected 18.56" beside the winner. The lead has no envelope-corrected reading.
+- Source: `docs/concepts/verify/roller-longdyad-knuckle-3r_v_bench_frozen_env.json`.
+
+**Why it matters.** Adding real metal should never be a gain. A 0.11 sampling choice is half the margin.
+
+**Action.** Never quote 18.56 as the claim. See proposal D.
+
+### G4 (watch): the drive sits at its transmission cap
+
+The horn pressure angle is 43.0 = PA_MAX at dK 45.62 of 46.25. The tightest clearances are 1.14 mm (bent arm to hub K)
+and 2.02 mm (roller to hub K). This is a geometric margin; the dynamics of the step are outside the metrics by the
+user's ruling.
+
+### T4 (watch, measured harmless): search bounds hit
+
+- ang_min walked from 26.88 to 25.22. Re-worn at 26.88, the claim is identical.
+- bk1 sits on its lower bound (26) and bk2 next to its own (38.03).
+- a1max sits 0.26 under bk1 + bk2 - 5. The lead also sits on that limit.
+- The K dyad keeps an interior angle of about 133 deg, and the th margin holds (5.181).
+- So no singular margin is spent. The optimum may lie outside the box.
+
+### M5 (watch): one clock spring force-closes two rolling pairs
+
+Closure is checked only kinematically (0.0 mm). The lead shares the same cap, so this does not rank the two designs.
+It is for MVP1 and the CAD.
+
+### G5 (watch): the sensed knee pins after the 2026-10-17 ruling
+
+- The mechanism record lists the 2 encoded knee pins as `sensed_passive`. The complexity check treats them as cuff-side
+  passives outside the DOF count, which gives 3 + 2 = 5 read coordinates.
+- The CLAUDE.md exemption names passive self-aligning slides at the cuff. Whether encoded pins also stay outside the
+  count is not covered by "a sensed joint is a joint".
+- The knee is identical to the lead's, so this changes no ranking.
+- It is the user's question, and it applies to the whole knuckle family.
+
+## Tool checks (`docs/alignment/roller-longdyad-knuckle-3r.json`, `--ref sidecar-longdyad-knuckle-3r`)
+
+**Ok:** held_out (+5.06), fast_frozen (+5.48), near_touch (14.43 points in the 1-2 mm shell), dominance (reported
+only, as the gate is retired), continuity (full 18.67, knn 20.34), idle (dK 45.62), sampling (L1a has 8 samples),
+complexity (43.75), reporting, judge_change and rules.
+
+**Watch:** fold_margin. The tool does not read the row's `verification.th_margin_min` (bench 5.181, held out 5.031,
+no pose under 5). The design meets the rule; the tool misses the record.
 
 ## Patterns walked and found clean
 
-- **T1 / G1 / T2.** Shell and band: see the checks above.
-- **T3.** Own-state th min is 5.181, with 0 poses under 5.
-- **S1 / P1.** Covered by finding P1.
-- **S2 / S3.** Every declared moving body has a sampled group, including the roller's stub head.
-- **S5.** The full flood loses 0 and the knn flood 1.67.
-- **M1 / M2.** Every joint maps to a real part: MR117-2RS hubs, an MR63ZZ roller and crank pair, and iglidur knee
-  pins. The conjugate flank is 5-axis or wire-EDM, which is plausible.
-- **M3.** Pair clearances are in the model: 1.14 mm minimum.
-- **M4.** The drive moves.
-- **P2.** The search uses only the fast bench; `frozen_held` appears only in the 'held' mode.
-- **P3 / R3.** 7236 configs; the row reports a top-5 spread of 0.05, convergence 0.00 / 0.00, and fast to frozen
-  +5.48.
-- **P4.** The row's 2 commits touch no measurement file.
-- **G5 / G6.** Complexity is recomputed equal. The sensed passives are the 2 knee pins, the same as the lead's. The
-  merges (the lug into link 1a, the lobe into hub 2's cap, the roller pin into the crank) trade part count for 5-axis
-  or EDM machining. That is noted, not flagged.
+| pattern | why it is clean |
+|---|---|
+| T1 / G1 | The 1-2 mm shell holds 14.43 points, under the watch threshold. |
+| T2 | Band 3-14 gives 18.84. |
+| T3 | The th margin is 5.181, with no pose under 5. |
+| S3 | Every moving body is sampled, including the roller's stub head. |
+| S5 | The full flood loses 0. |
+| M1 / M2 | Real parts at O20, with MR117-2RS and MR63ZZ bearings. |
+| M3 | Pair clearances are in the model. |
+| M4 | The drive moves. |
+| P2 | `frozen_held` is only a wear mode. |
+| P3 / R3 | Top-5 spread 0.05; a single frozen wear. |
+| P4 | No measurement file changed in the row's 3 commits. |
+| R1 / R4 | The dashboard now shows v_gap 18.67. The fast-only defect of 2026-10-16 is gone. |
+| R2 | Not applicable. |
+
+## New pattern (proposed catalogue entry P5): a re-wear environment that silently changes the protocol
+
+**Looks like:** a re-measurement run where the frozen protocol's fast fit bench has no grid cache. The model then fits
+the frozen shape on exact distances. The re-wear prints a warning, then reports different numbers as if they were the
+claim.
+
+**Why it matters:** this is how "re-measure until lucky" happens by accident. In this audit it moved the numbers as
+follows:
+
+| design | bench | held out |
+|---|---|---|
+| this design | 18.67 -> 19.34 | 23.73 -> 24.28 |
+| the lead | 18.91 -> 19.66 | 22.67 -> 23.60 |
+
+**Cause:** in this fresh container the local `.cache/concept_bench` is empty. `tools/cloud_run.py` links only the
+local cache files, so the farm jobs had no cache either.
+
+**Detect:** a re-wear is valid as a claim reproduction only if its `fit_fast` equals the row's `fast.plain`.
+
+## Proposals (not applied; measurement or reporting changes for the lead or the user)
+
+**A. A lead change needs a gain outside the paired noise.** Two forms:
+- the pooled bench + held-out paired 90 % interval excludes 0; or
+- more simply, the held-out gap under the same harness is not worse.
+
+Measured effect:
+- On this design: the round-9 lead change is blocked (pooled P(better) 0.29, held out worse by 1.06).
+- longdyad over frontload still passes: held out 22.67 against 26.65.
+- No other verified row is a lead candidate.
+
+This would tighten a rule the user set on 2026-10-17, so it is the user's call.
+
+**B. Report contact depth beside the contact count** (maximum, sum, and count deeper than 3 mm).
+
+| design | bench (max / sum) | held out (max / sum) |
+|---|---|---|
+| this design | 10.55 / 16.46 mm | 9.58 / 49.88 mm |
+| the lead | 4.61 / 6.23 mm | 8.31 / 35.25 mm |
+
+Other rows are not measured.
+
+**C. Retire the `dominance` check's "gamed" level in `tools/alignment_audit.py`** to match the user's ruling, keeping
+it as a reported reading.
+- Effect: sidecar-parallelogram and roller-flank lose the dominance part of their gamed verdicts. Their near_touch
+  readings stay.
+- ALIGNMENT.md section 4 A1 and G5 should carry the 2026-10-17 rulings. This audit's attempt to annotate ALIGNMENT.md
+  was refused by the session's permission policy, so the lead should make that edit.
+
+**D. Score in-band per part area, not per sample count,** so that a correction adding real metal cannot lower the gap.
+- Effect here: the 18.67 / 18.56 pair collapses to one number.
+- Other rows are not measured.
+
+**E. Farm re-wears ship or fetch the fit-bench cache, and refuse to run a frozen claim on the exact fit path**
+(pattern P5).
+- Effect: none on any score. It only stops non-protocol numbers being read as claims.
 
 ## Numbers not obtained
 
-- The per-part attribution of the 2 bench and 10 held-out contact poses: the probe has no part split for the claimed
-  config.
-- The lead's held-out contact depths: the lead's held-out probe was not run.
-- The spring torque, K lag and cuff twist (R17): no dynamics run exists for this id.
-- A priced reading of this design (stop build tolerance, as the lead's 19.36): not run.
+- **The paired per-pose comparison on the exact claim protocol.** The fast cache is missing locally and on the farm
+  link. The paired numbers above are on the perturbed fit; the claim-protocol totals come from the 2026-10-16 re-wear
+  files.
+- **The part attribution of the contact presses:** the dump records no per-part split.
+- **The lead's held-out workspace in-band at elevation 90-140:** no probe for it exists.
+- **Spring torque, K lag and cuff twist:** out of scope by the kinematic ruling, and not run.
 
-## Proposals (not applied; each is a measurement or reporting change for the lead / the user)
-
-**A. Tighten the A1 dominance gate.** A lead change needs a plain gain AND a 2 mm gain of at least 1 point each (the
-polish rule), and a held-out gap under the same harness that is not worse.
-
-| comparison | plain | 2 mm | held out | today's A1 | proposed gate |
-|---|---|---|---|---|---|
-| roller-longdyad vs the lead | +0.24 | +0.93 | -1.06 | passes | blocked |
-| longdyad vs frontload | +3.81 to +3.91 | +9.95 | +4.08 | passes | still passes |
-| parallelogram vs longdyad | -0.22 | | | fails (not a lead) | fails (not a lead) |
-
-The longdyad plain gain is +3.81 in the audit tool's reading and +3.91 in ROUNDS.md line 891. The other verified rows
-have no 2 mm reading on file.
-
-**B. Report contact depth beside the contact count** (max, sum, count deeper than 3 mm; live audit P5).
-
-| design | contact poses | max depth | depth sum | poses deeper than 3 mm |
-|---|---|---|---|---|
-| this design | 2 | 10.55 mm | 16.46 mm | 2 |
-| the lead | 4 | 4.61 mm | 6.23 mm | 1 |
-
-Other rows are not measured here.
-
-**C. Show self-measured frozen claims on the board.** Rows put their self-measured frozen exact claim under
-`frozen_exact`, or `tools/dash_build.py` also reads `frozen.gap` when `frozen.bench` names an exact Bench(110,360).
-- Effect: this row's board number moves from 95.20 (fast) to 93.21 (self).
-- No score changes.
-
-**D. Let the audit tool read the measurements this audit made.** `tools/alignment_audit.py` reads
-`docs/alignment/remeasure/<id>_flood.json` and the probe's th margin.
-- Effect on this row: `continuity` becomes ok (full flood = static 18.67, knn +1.67) and `fold_margin` becomes ok
-  (5.181).
-- This is a tool change, not a metric change.
-
-**E. Bound ang_min in the knuckle family at the lead's verified 26.88,** or report the taken knee maximum with every
-claim.
-- Effect on this row: none (18.67 / 20.30 / 33.10 identical).
-- Other rows are not re-worn here.
-
-## Next
-
-The design is not promotable as a lead on these numbers. If the loop wants it as a complexity Pareto point, the steps
-are:
-
-1. An independent verifier.
-2. The R17 slaved-coupling run.
-3. A part attribution of the -10.55 mm overhead contact.
-4. A PA_MAX 41 sensitivity run.
-
-Re-audit when any of those lands, or when the row changes.
+Farm cost of this audit: 4 jobs, about 500 worker-s, $0.04.
