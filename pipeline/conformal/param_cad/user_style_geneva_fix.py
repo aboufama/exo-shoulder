@@ -32,8 +32,9 @@ import numpy as np, cadquery as cq, trimesh                                     
 DV, GL1, USP, US = USG.DV, USG.GL1, USG.USP, USG.US
 FULL, disc, rev, unit, prism = USG.FULL, USG.disc, USG.rev, USG.unit, USG.prism
 PIN_R = USG.PIN_R
-CLIP23 = dict(groove_r=1.15, groove_w=0.64, s=0.6, outer_r=3.15, gap=0.15, land=1.0)      # DIN 6799 RS 2.3 (shaft 3-4)
-CLIP4 = dict(groove_r=2.0, groove_w=0.74, s=0.7, outer_r=4.5, shim=0.3, land=1.0)          # DIN 6799 RS 4 (shaft 5-7) + 0.3 shim O5.1/O6.5
+SCREW_L = 4.0          # ISO 7046 M1.6 x 4 (was x 5): 2.6 mm (1.6 d) of thread in the 3.65 mm blind hole leaves 1.05 mm (3 P) for the tap lead
+CLIP23 = dict(groove_r=1.15, groove_w=0.64, s=0.6, outer_r=3.15, gap=0.15, land=1.0)      # DIN 6799 RS 2.3 (shaft 3-4; m 0.64, n min 1.0, d3 max 6.3)
+CLIP4 = dict(groove_r=2.0, groove_w=0.74, s=0.7, outer_r=4.65, shim=0.3, land=1.2)         # DIN 6799 RS 4 (shaft 5-7; n min 1.2, d3 max 9.3) + 0.3 shim O5.1/O6.5
 
 
 def grooved_pin(c, e, z0, face):
@@ -88,7 +89,7 @@ def bell_crank_fix(dv):
                 eye_low_over_post_clip_zone=round(lo(over), 2) if len(over) else None, post_end_below_eye_mm=round(lo(over) - post_end, 2) if len(over) else None,
                 follower_arm_mm=round(Lf, 3), crank_arm_mm=round(Lc, 3),
                 crank_pin_tilt_deg=round(math.degrees(math.acos(float(np.clip(dv["pin"] @ u2, -1, 1)))), 2), rocker_axis_to_u2_mm=round(float(np.linalg.norm(ax)), 3),
-                post_retention="0.3 shim O5.1/O6.5 on the top MR85ZZ inner ring + DIN 6799 RS 4 in an O4 x 0.74 groove, 1.0 mm land",
+                post_retention=f"0.3 shim O5.1/O6.5 on the top MR85ZZ inner ring + DIN 6799 RS 4 in an O4 x 0.74 groove, {k4['land']:.1f} mm land (DIN n min 1.2)",
                 crank_pin=cinfo, roller_retention="MR63ZZ inner race pressed on the O3 m6 pin (+ retaining compound); pin pressed in the follower arm",
                 valid=dict(crank=crank.isValid(), crank_solids=len(crank.Solids()), post=post.isValid()))
     return dict(post=post, boss=boss, crank=crank, brg=brg, roller=roller, rpin=rpin, cpin=cpin, clipA=clipA, shim=shim, pclip=pclip), info
@@ -102,7 +103,7 @@ def horn_parts_fix(dv, M):
         prism((F + h["hub_z"][0] - 0.2) * uK, e, f, [(-h["tip_flat"], -3), (h["tip_flat"], -3), (h["tip_flat"], 3), (-h["tip_flat"], 3)], [0] * 4, h["hub_z"][1] - h["hub_z"][0] + 0.4))
     hub = hub.cut(dd)
     plate = disc(np.zeros(3), uK, h["plate_r"], F + h["plate_z"][0], F + h["plate_z"][1]); pinP = USG.R_HORN * e
-    plate = plate.cut(disc(pinP, uK, PIN_R, F + h["plate_z"][0] - 0.1, F + h["plate_z"][1] + 0.1)); screws = []; L = 5.0
+    plate = plate.cut(disc(pinP, uK, PIN_R, F + h["plate_z"][0] - 0.1, F + h["plate_z"][1] + 0.1)); screws = []; L = SCREW_L
     for s_ in (+1, -1):
         a = s_ * math.pi / 2; cs = h["screw_r"] * (math.cos(a) * e + math.sin(a) * f)
         plate = plate.cut(USG.trim_slot(uK, e, f, a - math.radians(h["screw_half_deg"]), a + math.radians(h["screw_half_deg"]), F + h["plate_z"][0] - 0.1, F + h["plate_z"][1] + 0.1, h["screw_r"], h["slot_w"]))
@@ -113,7 +114,8 @@ def horn_parts_fix(dv, M):
     pin, clipB, pinfo = grooved_pin(pinP, uK, F + h["plate_z"][0], face + 0.5 * USG.EYE_H)
     eng = (F + h["hub_z"][1]) - (F + h["plate_z"][1] - L)
     info = dict(pin_r_mm=USG.R_HORN, plate=f"O{2 * h['plate_r']:g} x {h['plate_z'][1] - h['plate_z'][0]:.1f} at F+{h['plate_z'][0]:.2f}..F+{h['plate_z'][1]:.2f}",
-                hub=f"O{2 * h['hub_r']:g} x {h['hub_z'][1] - h['hub_z'][0]:.1f}, DD bore", trim_deg=h["screw_half_deg"], screws="2x M1.6 x 5 ISO 7046",
+                hub=f"O{2 * h['hub_r']:g} x {h['hub_z'][1] - h['hub_z'][0]:.1f}, DD bore", trim_deg=h["screw_half_deg"], screws=f"2x M1.6 x {SCREW_L:g} ISO 7046",
+                tap_lead_mm=round((h["hub_z"][1] - h["hub_z"][0] - 0.15) - eng, 2),
                 thread_engagement_mm=round(eng, 2), thread_engagement_d=round(eng / 1.6, 2), horn_pin=pinfo,
                 eye_B_bottom_over_plate_mm=round(float((dv["B0"] - 0.5 * USG.EYE_H * dv["eB"]) @ uK - (F + h["plate_z"][1])), 3),
                 valid=dict(hub=hub.isValid(), plate=plate.isValid(), pin=pin.isValid()))
@@ -176,7 +178,7 @@ def main():
            ("l1a", f"D9-04 drive horn hub: Ti-6Al-4V O9.4 x {a.hub_h:.1f}, DD bore pressed on link 1a's arbor tip, 2x M1.6 tapped blind", hp["hub"]),
            ("l1a", f"D9-05 drive horn plate: Ti-6Al-4V O13 x 1.4, horn pin at r {USG.R_HORN} mm, 2x +-5 deg trim slots for M1.6 countersunk", hp["plate"]),
            ("l1a", "drive horn pin O3 h6 hardened, pressed + staked, DIN 6799 groove (polished)", hp["pin"]),
-           ("l1a", "drive horn screw 1 M1.6x5 ISO 7046 countersunk (polished)", hp["screws"][0]), ("l1a", "drive horn screw 2 M1.6x5 ISO 7046 countersunk (polished)", hp["screws"][1]),
+           ("l1a", f"drive horn screw 1 M1.6x{SCREW_L:g} ISO 7046 countersunk (polished)", hp["screws"][0]), ("l1a", f"drive horn screw 2 M1.6x{SCREW_L:g} ISO 7046 countersunk (polished)", hp["screws"][1]),
            ("l1a", "drive horn pin clip DIN 6799 RS 2.3 (polished)", hp["clipB"])]
     # ---- splice: every source part except the drive set and link 1a, then link 1a (fixed) + the new drive set
     P0 = json.load(open(os.path.join(src, "parts_full.json"))); pf_src = P0["parts"]
