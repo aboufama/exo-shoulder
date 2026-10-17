@@ -368,10 +368,10 @@
    "file": "26_D8-02b_link_1b.step",
    "valid": false,
    "solids": 1,
-   "faces": 265,
+   "faces": 269,
    "bad_faces": 3,
    "watertight": false,
-   "volume_cm3": 3.12,
+   "volume_cm3": 3.117,
    "bbox_mm": [
     30.0,
     34.0,

@@ -1,0 +1,225 @@
+{
+ "id": "groove-desmo-knuckle-3r",
+ "status": "verified",
+ "v_gap": 22.64,
+ "complexity": 18.25,
+ "verdict": "watch",
+ "reasons": [
+  "reporting: verdict text still reads as a self-measured screen; dashboard shows no verified number (row v_gap 22.64); dashboard sweep best 17.21 (score 93.74) sits 5.43 below the verified number; dashboard status 'screened' vs row 'verified'"
+ ],
+ "checks": [
+  {
+   "check": "held_out",
+   "level": "ok",
+   "reason": "held out 24.96 vs bench 22.64 (+2.32; row held_out)",
+   "held_gap": 24.96,
+   "v_gap": 22.64,
+   "drop": 2.32,
+   "source": "row held_out"
+  },
+  {
+   "check": "fast_frozen",
+   "level": "ok",
+   "reason": "self/fast 14.67 -> verified 22.64 (+7.97)",
+   "fast": 14.67,
+   "verified": 22.64,
+   "drop": 7.97
+  },
+  {
+   "check": "near_touch",
+   "level": "ok",
+   "reason": "plain 22.64, <1 mm 23.76, <2 mm 35.06, 12.42 points live in the 1-2 mm shell (docs/concepts/verify/groove-desmo-knuckle-3r_v_bench_frozen_truewin.json)",
+   "shell2": 12.42,
+   "plain": 22.64,
+   "n1": 23.76,
+   "n2": 35.06,
+   "n3": null,
+   "band3": null,
+   "hist": null,
+   "minmm": 0.07,
+   "source": "docs/concepts/verify/groove-desmo-knuckle-3r_v_bench_frozen_truewin.json"
+  },
+  {
+   "check": "contact_depth",
+   "level": "ok",
+   "reason": "no per-pose contact depths on file that reproduce the claim (tools/alignment_paired.py dump groove-desmo-knuckle-3r bench|held, or tools/alignment_wear_probe*.py); not measured",
+   "depths": {
+    "v_gap 22.64": {}
+   }
+  },
+  {
+   "check": "dominance",
+   "level": "ok",
+   "reason": "vs roller-longdyad-knuckle-3r: plain -3.97, 2 mm -1.96",
+   "ref": "roller-longdyad-knuckle-3r",
+   "gain_plain": -3.97,
+   "gain_2mm": -1.96
+  },
+  {
+   "check": "continuity",
+   "level": "ok",
+   "reason": "static 22.64, connected full 22.64, knn 24.04, bench 49.8 (docs/concepts/verify/groove-desmo-knuckle-3r_v_bench_frozen_truewin.json)",
+   "static": 22.64,
+   "connected_full": 22.64,
+   "connected_knn": 24.04,
+   "connected_bench": 49.8
+  },
+  {
+   "check": "fold_margin",
+   "level": "ok",
+   "reason": "min fold margin on file 5.389 deg (docs/concepts/verify/groove-desmo-knuckle-3r_v_bench_frozen_truewin.json:th_margin.min; 4 readings)",
+   "min_margin": 5.389,
+   "where": "docs/concepts/verify/groove-desmo-knuckle-3r_v_bench_frozen_truewin.json:th_margin.min"
+  },
+  {
+   "check": "idle",
+   "level": "ok",
+   "reason": "knee: rigid by design, not a joint (model asserts the knee angle constant (knee_moved -> dishonest)); no span on file; K moves: smallest recorded span 32.02 deg (docs/concepts/verify/groove-desmo-knuckle-3r_v_bench_frozen_truewin.json:roller.dK_taken_max_deg); crank: declared moving, no span on file",
+   "spans": [
+    [
+     "row:frozen.dK_taken_max",
+     40.52
+    ],
+    [
+     "row:verification_self.dK_taken_max",
+     40.52
+    ],
+    [
+     "docs/concepts/verify/groove-desmo-knuckle-3r_v_bench_frozen_truewin.json:roller.dK_taken_max_deg",
+     32.02
+    ],
+    [
+     "docs/concepts/verify/groove-desmo-knuckle-3r_v_held_frozen.json:roller.dK_taken_max_deg",
+     40.97
+    ],
+    [
+     "docs/concepts/verify/groove-desmo-knuckle-3r_v_bench_frozen_env.json:roller.dK_taken_max_deg",
+     40.52
+    ],
+    [
+     "docs/concepts/verify/groove-desmo-knuckle-3r_v_bench_frozen.json:roller.dK_taken_max_deg",
+     40.52
+    ]
+   ],
+   "declared": [
+    "K",
+    "crank"
+   ],
+   "rigid": [
+    "knee"
+   ]
+  },
+  {
+   "check": "sampling",
+   "level": "ok",
+   "reason": "sample-weighted in-band 0.899 vs part-weighted 0.923 (-2.42 points); thinly sampled parts: L1a 8 (docs/concepts/verify/groove-desmo-knuckle-3r_v_bench_frozen_truewin.json)",
+   "parts": {
+    "hub1": [
+     0.999,
+     8.6,
+     80
+    ],
+    "hubK": [
+     0.992,
+     7.9,
+     80
+    ],
+    "hub2": [
+     0.953,
+     11.1,
+     80
+    ],
+    "hub3": [
+     0.739,
+     11.5,
+     80
+    ],
+    "E": [
+     0.966,
+     6.5,
+     104
+    ],
+    "boss": [
+     0.988,
+     8.5,
+     32
+    ],
+    "pad": [
+     1.0,
+     8.1,
+     32
+    ],
+    "knee": [
+     0.941,
+     10.7,
+     85
+    ],
+    "crank": [
+     0.804,
+     11.3,
+     129
+    ],
+    "roller": [
+     0.939,
+     9.7,
+     29
+    ],
+    "horn": [
+     0.949,
+     8.8,
+     109
+    ],
+    "L1a": [
+     0.981,
+     10.1,
+     8
+    ],
+    "L1b": [
+     0.931,
+     8.2,
+     36
+    ],
+    "L2": [
+     0.736,
+     12.0,
+     124
+    ]
+   }
+  },
+  {
+   "check": "complexity",
+   "level": "ok",
+   "reason": "recomputed 18.25 vs row 18.25",
+   "recomputed": 18.25,
+   "row": 18.25
+  },
+  {
+   "check": "reporting",
+   "level": "watch",
+   "reason": "verdict text still reads as a self-measured screen; dashboard shows no verified number (row v_gap 22.64); dashboard sweep best 17.21 (score 93.74) sits 5.43 below the verified number; dashboard status 'screened' vs row 'verified'"
+  },
+  {
+   "check": "judge_change",
+   "level": "ok",
+   "reason": "no bench / judge / metric file changed in the 4 commits that touched the row"
+  },
+  {
+   "check": "rules",
+   "level": "ok",
+   "reason": "O20, margin >= 5, translations <= 2 as recorded"
+  }
+ ],
+ "remeasured": {
+  "bench": false,
+  "held": false
+ },
+ "verifier_files": [
+  "docs/concepts/verify/groove-desmo-knuckle-3r_v_bench_frozen_truewin.json",
+  "docs/concepts/verify/groove-desmo-knuckle-3r_v_held_frozen.json",
+  "docs/concepts/verify/groove-desmo-knuckle-3r_v_bench_frozen_env.json",
+  "docs/concepts/verify/groove-desmo-knuckle-3r_v_bench_frozen.json"
+ ],
+ "git": "725a696",
+ "tool_version": "2026-10-17.2",
+ "t": "2026-10-17T06:51:13Z"
+}

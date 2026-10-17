@@ -263,11 +263,11 @@ level:
 a1e(dK) is the K sub-dyad law above. Every pose up to there that all rigid parts clear at their clip levels can be
 taken.
 
-| K drive stroke (dK_max, deg) | reach estimate | th_hi with the 28 / 50 K dyad |
-|---|---|---|
-| 46 | 0.725, measured | - |
-| 57.5 | 0.764 (exact parking, calibrated) | 115.3 |
-| 75 | see the farm rows in 4b | 121.4 |
+| K drive stroke (dK_max, deg) | best K dyad | est. reach (bench), exact parking, calibrated | est. score | held delta |
+|---|---|---|---|---|
+| 46 (today's roller) | 26 / 38 (verified) | 0.725 | 93.2 | 0 |
+| 57.5 (round-9 flank, PA 43) | 32 / 48 | 0.767 | ~94.9 | +0.037 (28 / 50) |
+| 75 | 32 / 48 | 0.778 | ~95.1 | +0.067 (28 / 50) |
 
 The ~90 deg stroke (uncapped, a1max 73) gives R_est 0.778 at the same in-band: still below the hard goal's 0.80. **Above ~0.80 the family needs a wider
 window on the folded side too**, and there hub 2 IS the wall: only 4 of 15 clear.
@@ -313,7 +313,40 @@ clearing every closed pose; R_est = the share of workspace poses closed and clea
   config that is reach ~0.764, gap ~14.8, score ~94.6, before the drive's own metal.
 - Going to +8 mm adds 6 more poses but halves the parts' in-band. Not a trade.
 
-__FARMTABLE__
+**The full stroke table** (farm exo-cpu1, `parking_k_{bench,held}_{lead,k2850,k3248}.json`). The farm reproduces the
+local rows exactly (0.761 / 0.732).
+
+Policy: every modelled part at its clip max + 4 mm, the policy that reproduces the leader. Each delta is against the
+leader's calibration row on the same wear.
+
+| K dyad | stroke | bench: in window | bench: R_est +4 | bench: delta | held: R_est +4 | held: delta | parts in-band +4 | est. verified reach (bench) | est. score |
+|---|---|---|---|---|---|---|---|---|---|
+| 26 / 38 (leader) | 46.25 | 272 | 0.722 | 0 | 0.695 | 0 | 0.768 | 0.725 (verified) | 93.2 |
+| 26 / 38 | 57.5 | 275 | 0.728 | +0.006 | 0.709 | +0.014 | 0.768 | 0.731 | ~93.8 |
+| 28 / 50 | 46.25 | 277 | 0.733 | +0.011 | 0.716 | +0.021 | 0.760 | 0.736 | ~94.2 |
+| 28 / 50 | 57.5 | 290 | 0.761 | +0.039 | 0.732 | +0.037 | 0.760 | 0.764 | ~94.6 |
+| 28 / 50 | 75 | 298 | 0.772 | +0.050 | 0.762 | +0.067 | 0.760 | 0.775 | ~95.0 |
+| 32 / 48 | 57.5 | 292 | 0.764 | +0.042 | - | - | 0.762 | 0.767 | ~94.9 |
+| **32 / 48** | **75** | 300 | **0.775** | **+0.053** | - | - | 0.762 | **0.778** | **~95.1** |
+| 28 / 50, a2 60 | 57.5 | 289 | 0.767 | +0.045 | - | - | **0.549** | - | in-band collapses |
+| 26 / 38, a2 60 | 46.25 | 271 | 0.728 | +0.006 | 0.711 | +0.016 | **0.629** | - | in-band collapses |
+
+How the last two columns are read:
+
+- est. verified reach = 0.725 + the bench delta.
+- est. score = 100 - gap / 2.75, with the leader's in-band 0.894 and contact 0.005 held fixed. These are estimates
+  before the knee, the part collisions and the drive's own metal; they are not claims.
+
+**Reading.**
+
+- **Score 95 inside the family needs a ~75 deg K stroke on a 28-32 / 48-50 K dyad.** Today's drives stop at
+  43-57.5 deg.
+  - With <= 57.5 deg, the family tops out at about 94.6-94.9 at these seats.
+- **Even the 75 deg row stays under the hard goal** (reach 0.80): 0.775 at +4.
+  - At +8 it would reach 0.797, but the parts' in-band halves.
+- **The re-cut flank on the leader's own dyad (26 / 38 at 57.5) is worth +0.006.** This is why round 9's
+  roller-longdyad lever measured level with the lead.
+- **Sliding the window (a2 60) collapses the parts' in-band**, which matches the real-model refutation in section 6.
 
 ## 5. The family-wide relaxation, and why it is not a bound (red team of my own instrument)
 
@@ -360,6 +393,9 @@ Bench(60,160) fast):
 | The relaxation | Its optima fail the paired kit test (section 5). It is reported as an instrument failure, not as headroom. |
 | The pose that jams | The long K dyad's extra poses all sit at a1e 59-73. There K turns 77-89 deg: a drive at pressure angle <= 43 over that stroke is the unbuilt part. Without it the chain stops at the drive wall, a stop, not a jam. |
 | Bench artefact | The fold split equals the verified `why` (88 / 9 / 2) pose for pose. The clip frames never leave th 41-96 on either bench. |
+| Conditioning at the new wall | Same 5-deg th margin. J2's interior angle at the wall is 153.7 deg (28 / 50, stroke 57.5) against 151.5 (leader). K stays 71 deg from its own fold (psi 108.7). |
+| Overhead | In the window: 16 / 28 (leader 14 / 28). But the leader loses 6 of its in-window overhead poses to the knee and to deep contact (10.5 / 5.9 mm at elevation 165). Expect ~10 / 28: the hard goal's 14 / 28 is not met by this lever alone. |
+| The +4 mm policy | Chosen because it reproduces the leader (0.722 against 0.725 bench; +0.014 held). A design that needs +8 mm halves the parts' in-band. |
 
 ### Measured on the real leader model: the window re-placement (`shift_a2.py`, `shift_a2_60_frozen.json`)
 

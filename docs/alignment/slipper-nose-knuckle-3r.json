@@ -1,0 +1,245 @@
+{
+ "id": "slipper-nose-knuckle-3r",
+ "status": "verified",
+ "v_gap": 18.49,
+ "complexity": 22.25,
+ "verdict": "watch",
+ "reasons": [
+  "dominance: beats roller-longdyad-knuckle-3r by 0.31 plain but loses by 1.56 at 2 mm: part of the gain is metal moved into the 1-2 mm shell (A1 gate retired 2026-10-17)",
+  "reporting: verdict text still reads as a self-measured screen; dashboard sweep best 13.0 (score 95.27) sits 5.49 below the verified number"
+ ],
+ "checks": [
+  {
+   "check": "held_out",
+   "level": "ok",
+   "reason": "held out 23.45 vs bench 18.49 (+4.96; docs/concepts/verify/slipper-nose-knuckle-3r_v_held_frozen.json)",
+   "held_gap": 23.45,
+   "v_gap": 18.49,
+   "drop": 4.96,
+   "source": "docs/concepts/verify/slipper-nose-knuckle-3r_v_held_frozen.json"
+  },
+  {
+   "check": "fast_frozen",
+   "level": "ok",
+   "reason": "self/fast 13.0 -> verified 18.49 (+5.49)",
+   "fast": 13.0,
+   "verified": 18.49,
+   "drop": 5.49
+  },
+  {
+   "check": "near_touch",
+   "level": "ok",
+   "reason": "plain 18.36, <1 mm 19.99, <2 mm 34.66, 16.3 points live in the 1-2 mm shell (docs/concepts/verify/slipper-nose-knuckle-3r_v_roller_at_A.json)",
+   "shell2": 16.3,
+   "plain": 18.36,
+   "n1": 19.99,
+   "n2": 34.66,
+   "n3": null,
+   "band3": null,
+   "hist": null,
+   "minmm": 0.07,
+   "source": "docs/concepts/verify/slipper-nose-knuckle-3r_v_roller_at_A.json"
+  },
+  {
+   "check": "contact_depth",
+   "level": "ok",
+   "reason": "no per-pose contact depths on file that reproduce the claim (tools/alignment_paired.py dump slipper-nose-knuckle-3r bench|held, or tools/alignment_wear_probe*.py); not measured",
+   "depths": {
+    "v_gap 18.49": {}
+   }
+  },
+  {
+   "check": "dominance",
+   "level": "watch",
+   "reason": "beats roller-longdyad-knuckle-3r by 0.31 plain but loses by 1.56 at 2 mm: part of the gain is metal moved into the 1-2 mm shell (A1 gate retired 2026-10-17)",
+   "ref": "roller-longdyad-knuckle-3r",
+   "gain_plain": 0.31,
+   "gain_2mm": -1.56
+  },
+  {
+   "check": "continuity",
+   "level": "ok",
+   "reason": "static 18.49, connected full 18.49, knn 20.16, bench 50.11 (docs/concepts/verify/slipper-nose-knuckle-3r_v_bench_frozen.json)",
+   "static": 18.49,
+   "connected_full": 18.49,
+   "connected_knn": 20.16,
+   "connected_bench": 50.11
+  },
+  {
+   "check": "fold_margin",
+   "level": "ok",
+   "reason": "min fold margin on file 5.006 deg (docs/concepts/verify/slipper-nose-knuckle-3r_v_held_frozen.json:extra.th_margin.min; 10 readings)",
+   "min_margin": 5.006,
+   "where": "docs/concepts/verify/slipper-nose-knuckle-3r_v_held_frozen.json:extra.th_margin.min"
+  },
+  {
+   "check": "idle",
+   "level": "ok",
+   "reason": "knee: rigid by design, not a joint (model asserts the knee angle constant (knee_moved -> dishonest)); no span on file; K moves: smallest recorded span 45.62 deg (docs/concepts/verify/slipper-nose-knuckle-3r_v_bench_mu12.json:extra.dK_taken_max_deg); crank moves: smallest recorded span 19.3 deg (docs/concepts/verify/slipper-nose-knuckle-3r_v_bench_mu12.json:sidecar.phi_max_taken)",
+   "spans": [
+    [
+     "docs/concepts/verify/slipper-nose-knuckle-3r_v_bench_mu12.json:fit_fast.extra.dK_taken_max_deg",
+     46.25
+    ],
+    [
+     "docs/concepts/verify/slipper-nose-knuckle-3r_v_bench_mu12.json:extra.dK_taken_max_deg",
+     45.62
+    ],
+    [
+     "docs/concepts/verify/slipper-nose-knuckle-3r_v_bench_r100.json:fit_fast.extra.dK_taken_max_deg",
+     46.25
+    ],
+    [
+     "docs/concepts/verify/slipper-nose-knuckle-3r_v_bench_r100.json:extra.dK_taken_max_deg",
+     45.62
+    ],
+    [
+     "docs/concepts/verify/slipper-nose-knuckle-3r_v_bench_r125.json:fit_fast.extra.dK_taken_max_deg",
+     46.25
+    ],
+    [
+     "docs/concepts/verify/slipper-nose-knuckle-3r_v_bench_r125.json:extra.dK_taken_max_deg",
+     45.62
+    ],
+    [
+     "docs/concepts/verify/slipper-nose-knuckle-3r_v_roller_at_A.json:sidecar.phi_max_taken",
+     19.3
+    ],
+    [
+     "docs/concepts/verify/slipper-nose-knuckle-3r_v_bench_mu12.json:sidecar.phi_max_taken",
+     19.3
+    ],
+    [
+     "docs/concepts/verify/slipper-nose-knuckle-3r_v_bench_r100.json:sidecar.phi_max_taken",
+     19.3
+    ],
+    [
+     "docs/concepts/verify/slipper-nose-knuckle-3r_v_bench_r125.json:sidecar.phi_max_taken",
+     19.3
+    ]
+   ],
+   "declared": [
+    "K",
+    "crank"
+   ],
+   "rigid": [
+    "knee"
+   ]
+  },
+  {
+   "check": "sampling",
+   "level": "ok",
+   "reason": "sample-weighted in-band 0.897 vs part-weighted 0.924 (-2.75 points); thinly sampled parts: L1a 8 (docs/concepts/verify/slipper-nose-knuckle-3r_v_roller_at_A.json)",
+   "parts": {
+    "hub1": [
+     0.999,
+     8.6,
+     80
+    ],
+    "hubK": [
+     0.992,
+     7.9,
+     80
+    ],
+    "hub2": [
+     0.953,
+     11.1,
+     80
+    ],
+    "hub3": [
+     0.739,
+     11.5,
+     80
+    ],
+    "E": [
+     0.966,
+     6.5,
+     104
+    ],
+    "boss": [
+     0.988,
+     8.5,
+     32
+    ],
+    "pad": [
+     1.0,
+     8.1,
+     32
+    ],
+    "knee": [
+     0.941,
+     10.7,
+     85
+    ],
+    "crank": [
+     0.818,
+     11.2,
+     129
+    ],
+    "roller": [
+     0.937,
+     9.7,
+     37
+    ],
+    "horn": [
+     0.958,
+     6.8,
+     29
+    ],
+    "L1a": [
+     0.981,
+     10.1,
+     8
+    ],
+    "L1b": [
+     0.931,
+     8.2,
+     36
+    ],
+    "L2": [
+     0.736,
+     12.0,
+     124
+    ]
+   }
+  },
+  {
+   "check": "complexity",
+   "level": "ok",
+   "reason": "recomputed 22.25 vs row 22.25",
+   "recomputed": 22.25,
+   "row": 22.25
+  },
+  {
+   "check": "reporting",
+   "level": "watch",
+   "reason": "verdict text still reads as a self-measured screen; dashboard sweep best 13.0 (score 95.27) sits 5.49 below the verified number"
+  },
+  {
+   "check": "judge_change",
+   "level": "ok",
+   "reason": "no bench / judge / metric file changed in the 4 commits that touched the row"
+  },
+  {
+   "check": "rules",
+   "level": "ok",
+   "reason": "O20, margin >= 5, translations <= 2 as recorded"
+  }
+ ],
+ "remeasured": {
+  "bench": false,
+  "held": false
+ },
+ "verifier_files": [
+  "docs/concepts/verify/slipper-nose-knuckle-3r_v_roller_at_A.json",
+  "docs/concepts/verify/slipper-nose-knuckle-3r_v_bench_mu12.json",
+  "docs/concepts/verify/slipper-nose-knuckle-3r_v_bench_r100.json",
+  "docs/concepts/verify/slipper-nose-knuckle-3r_v_bench_r125.json",
+  "docs/concepts/verify/slipper-nose-knuckle-3r_v_held_frozen.json",
+  "docs/concepts/verify/slipper-nose-knuckle-3r_v_bench_edge.json",
+  "docs/concepts/verify/slipper-nose-knuckle-3r_v_bench_frozen.json"
+ ],
+ "git": "725a696",
+ "tool_version": "2026-10-17.2",
+ "t": "2026-10-17T06:51:15Z"
+}
