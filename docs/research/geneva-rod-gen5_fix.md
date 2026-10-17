@@ -130,7 +130,11 @@ What the table says:
   (0.143 mm in that build's posed check). It now overlaps the skirt radially by 0.4 mm. An open MR63 (3 x 6 x 2) would
   give 0.6 mm there if the build wants more.
 
-LOBE_ALL
+**Every frame, the chosen fix.** `LOBE_SHORT="dwell r 9.6" lobe_skin.py real all` (every frame of every clip: 1337):
+min **+0.409 mm** (Raise overhead frame 78, the profile end, r 12.21), 65 frames under 2 mm, the return flank +0.90 mm,
+the dwell +2.17 mm (`lobe_skin_real_all.json`, 6 min). The built ring is this ring: the build ran the same `lobe_ring()`
+with the same drive (profile r 10.186 -> 12.207, az 48.27 -> 61.34 deg in both). The judges' Raise-overhead minimum gap
+says the same from the outside: 0.24 -> 0.72 mm (section 5).
 
 ## 3. Real parts
 
