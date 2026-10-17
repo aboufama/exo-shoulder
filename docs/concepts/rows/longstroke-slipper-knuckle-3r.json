@@ -1,0 +1,644 @@
+{
+ "id": "longstroke-slipper-knuckle-3r",
+ "name": "Long-stroke knuckle: slipper-nose chain with the K sub-dyad re-seated long and a phased RSSR K drive (every pressure angle <= 42)",
+ "lens": "fold-ceiling lever (docs/research/fold_ceiling.md): a 60-75 deg K stroke at PA <= 42",
+ "family": "slaved-knuckle 3R (lead family, pin knee)",
+ "active_dof": 3,
+ "passive_dof": 4,
+ "passive_translations": 0,
+ "status": "screened",
+ "t_ideated": "2026-10-17T06:45:00Z",
+ "t_screened": "2026-10-17T08:05:00Z",
+ "reach": 0.7812,
+ "follow": 1.0,
+ "inband14": 0.8734,
+ "inband10": 0.526,
+ "contact": 0.0,
+ "gap": 19.37,
+ "gap_plain_fast": 14.54,
+ "v_reach": null,
+ "v_follow": null,
+ "v_inband14": null,
+ "v_inband10": null,
+ "v_gap": null,
+ "claim": {
+  "bench": "Bench(110,360) exact, frozen shape fit on Bench(60,160) fast (farm, docs/research/longstroke_drive/farm/claimC)",
+  "gap": 21.27,
+  "score": 92.27,
+  "frozen": {
+   "gap": 21.27,
+   "reach": 0.7222,
+   "follow": 1.0,
+   "inband14": 0.8731,
+   "inband10": 0.5299,
+   "contact": 0.008
+  },
+  "why": {
+   "fold": 87,
+   "slide": 10,
+   "flip": 0,
+   "closure": 0,
+   "skin": 0,
+   "parts": 0,
+   "contact": 3
+  },
+  "near1": 25.2,
+  "near2": 41.58,
+  "min_metal_mm": 0.27,
+  "overhead": {
+   "ws": 28,
+   "taken": 7
+  },
+  "contact_depth": {
+   "n": 3,
+   "sum_mm": 18.537,
+   "max_mm": 12.798,
+   "per_pose": [
+    0.277,
+    12.798,
+    5.462
+   ]
+  },
+  "th_margin_min": 5.036,
+  "th_max_taken": 107.39,
+  "dK_taken_max": 41.62,
+  "dK_lim": 65.0,
+  "split": {
+   "n": 3,
+   "by_part": {
+    "m1:hubK/horn": 3,
+    "horn": 2,
+    "m8:rod/rodends": 2,
+    "rodends": 2,
+    "hubK": 2,
+    "rod": 2,
+    "m7:hub2": 1
+   }
+  },
+  "parts_ib14": {
+   "hub1": 0.999,
+   "hubK": 0.985,
+   "hub2": 0.946,
+   "hub3": 0.739,
+   "E": 0.965,
+   "boss": 0.987,
+   "pad": 1.0,
+   "knee": 0.941,
+   "crank": 0.499,
+   "horn": 0.965,
+   "rod": 0.769,
+   "rodends": 0.677,
+   "L1a": 0.982,
+   "L1b": 0.94,
+   "L2": 0.774
+  }
+ },
+ "held_out": {
+  "claim": 26.19,
+  "claim_detail": {
+   "frozen": {
+    "gap": 26.19,
+    "reach": 0.6817,
+    "follow": 1.0,
+    "inband14": 0.8714,
+    "inband10": 0.529,
+    "contact": 0.015
+   },
+   "why": {
+    "fold": 258,
+    "slide": 32,
+    "flip": 0,
+    "closure": 0,
+    "skin": 0,
+    "parts": 0,
+    "contact": 13
+   },
+   "near1": 30.17,
+   "near2": 45.28,
+   "min_metal_mm": 0.27,
+   "overhead": {
+    "ws": 71,
+    "taken": 16
+   },
+   "contact_depth": {
+    "n": 13,
+    "sum_mm": 54.252,
+    "max_mm": 12.383,
+    "per_pose": [
+     2.707,
+     5.793,
+     1.051,
+     1.293,
+     0.356,
+     8.817,
+     6.402,
+     12.383,
+     5.493,
+     0.538,
+     6.488,
+     2.098,
+     0.833
+    ]
+   },
+   "th_margin_min": 5.058,
+   "th_max_taken": 107.32,
+   "dK_taken_max": 41.52,
+   "dK_lim": 65.0,
+   "split": {
+    "n": 13,
+    "by_part": {
+     "m1:hubK/horn": 6,
+     "hubK": 6,
+     "rodends": 5,
+     "horn": 5,
+     "m8:rod/rodends": 5,
+     "rod": 4,
+     "m2:?": 2,
+     "hub2": 2,
+     "m7:hub2": 2
+    }
+   },
+   "parts_ib14": {
+    "hub1": 0.999,
+    "hubK": 0.985,
+    "hub2": 0.944,
+    "hub3": 0.733,
+    "E": 0.965,
+    "boss": 0.987,
+    "pad": 1.0,
+    "knee": 0.942,
+    "crank": 0.497,
+    "horn": 0.963,
+    "rod": 0.766,
+    "rodends": 0.671,
+    "L1a": 0.981,
+    "L1b": 0.941,
+    "L2": 0.769
+   }
+  },
+  "alt_s65n1a": 24.86,
+  "ghost_g65d": 22.69,
+  "slipper_nose": 23.45
+ },
+ "n_configs": 15200,
+ "complexity": 30.5,
+ "mechanism": {
+  "active_dof": 3,
+  "passive_trans": 0,
+  "crossed_rails": 0,
+  "passive_rot": 9,
+  "moving_bodies": 6,
+  "joints": 10,
+  "closed_loops": 3,
+  "sliding_pairs": 0,
+  "rolling_pairs": 1,
+  "sensed_passive": 0,
+  "springs_or_flexures": 1,
+  "custom_parts": 14,
+  "catalogue_parts": 16,
+  "notes": "C3 (longstroke-slipper-knuckle-3r rssr): slipper-nose's crank on link 1b (MR63ZZ pair) with the nose / flank sliding pair replaced by an O3 Ti rod with 2 M2 ball links (catalogue) to a lateral horn lug of link 1a at hub K (RSSR, transmission >= 48 deg at both ball ends): +1 moving body (rod), +2 joints (ball links, 3 rotations each = +6 passive rotations minus the rod's idle spin about its own axis = +5), -1 sliding pair, custom +2 (rod, horn lug), catalogue -1 dowel +2 ball links; loops unchanged (the drive loop lobe-crank-rod-horn replaces lobe-crank-nose-flank)",
+  "source": "longstroke-slipper-knuckle-3r 2026-10-17",
+  "confidence": "hand count (ball links 3 rotations each minus the rod idle spin)",
+  "cuff_knee": {
+   "pins": 2,
+   "sensed": false,
+   "passive_rot": 2,
+   "moving_bodies": 2,
+   "joints": 2,
+   "custom_parts": 4,
+   "catalogue_parts": 6,
+   "rule": "user 2026-10-17: no encoders on the knee pins (pose from the hub encoders) -> no added complexity; counts = docs/concepts/skin-normal-3r-pin-knee.md line 584"
+  }
+ },
+ "best_params": {
+  "La": 19.654,
+  "s_arm": 4.0,
+  "r_h": 14.6689,
+  "beta": -124.0829,
+  "gam": 14.5934,
+  "hl": 3.15,
+  "zr": 0.0,
+  "kK": 1.957,
+  "r_lobe": 7.0,
+  "bk1": 26.0,
+  "bk2": 47.2225,
+  "a1max": 68.2225,
+  "smhi": 12.1012
+ },
+ "verdict": "SCREENED - the lever does not pay in this family. The drive exists: a phased RSSR rod (O3 Ti, 2 M2 ball links) turns K 65-77 deg with every pressure angle <= 42 (transmission >= 48 at both ball ends; one-sided cams cap at 46.5 (nose, mu 0.087) / 51.8 (roller)). But no search uses it: 13 farm CMA runs (14,207 evaluations, free, stroke-constrained >= 65, 2 mm and 1 mm objectives) settle on configs whose taken poses turn K only 42-49 deg. Claim (s65n2d, committed before its frozen number): frozen exact Bench(110,360) 21.27 (score 92.27) vs slipper-nose 18.49; held out 26.19 vs 23.45; complexity 30.5 vs 22.25. Attribution: the same lever with the drive metal DELETED (ghost) gives 19.50 frozen / 22.69 held - the drive metal costs ~1.8 bench points (crank and ball links over the band), and even a perfectly parked drive is not a bench gain (+1.01) though it is a held-out gain (-0.76).",
+ "limiter": "The LAW, not the stroke: the hub-2 lobe caps the law slope at kK <= tan(42) g r_lobe / s_arm (~2.0 at the searched seats), and with kK <= 2 the stretched poses past th ~109 fail closure at the 5 deg margin, so K is never asked for more than ~42-49 deg; the extra stroke is idle. Then the drive metal: the bell crank (median 13.8-15.3 mm, in band 0.50) and the ball links (0.67) sit over the band because a 40-55 deg crank swing keeps the arm stacked over link 1b; the claim parks the rod 0.25 mm from its 1 mm ROD-hubK clearance (knife edge). Frozen loss 100/360 = fold 87, slide 10, contact 3 (horn / hub K / rod, depth max 12.8 mm).",
+ "note": "Model docs/concepts/models/longstroke-slipper-knuckle-3r.py (LS_DRIVE nose|roller|rssr; LS_STROKE_MIN, LS_OBJ, LS_GHOST for the searches / attribution). Control: slipper-nose verified config through this model at every PA <= 42 = 18.49 frozen (identical: the 42 rule does not bind there). Research note docs/research/longstroke_drive.md.",
+ "doc": "docs/concepts/longstroke-slipper-knuckle-3r.md",
+ "frozen": {
+  "bench": "Bench(110,360) exact, frozen shape fit on Bench(60,160) fast",
+  "gap": 21.27,
+  "reach": 0.7222,
+  "follow": 1.0,
+  "inband14": 0.8731,
+  "inband10": 0.5299,
+  "contact": 0.008,
+  "score": 92.27,
+  "near_touch_gap": 25.2,
+  "near_touch_2mm": 41.58,
+  "min_metal_mm": 0.27,
+  "why": {
+   "fold": 87,
+   "slide": 10,
+   "flip": 0,
+   "closure": 0,
+   "skin": 0,
+   "parts": 0,
+   "contact": 3
+  },
+  "overhead_taken": "7/28",
+  "parts_ib14": {
+   "hub1": [
+    0.999,
+    8.6,
+    80
+   ],
+   "hubK": [
+    0.985,
+    7.2,
+    80
+   ],
+   "hub2": [
+    0.946,
+    11.1,
+    80
+   ],
+   "hub3": [
+    0.739,
+    11.5,
+    80
+   ],
+   "E": [
+    0.965,
+    6.5,
+    104
+   ],
+   "boss": [
+    0.987,
+    8.5,
+    32
+   ],
+   "pad": [
+    1.0,
+    8.1,
+    32
+   ],
+   "knee": [
+    0.941,
+    10.7,
+    85
+   ],
+   "crank": [
+    0.499,
+    14.0,
+    61
+   ],
+   "horn": [
+    0.965,
+    5.5,
+    20
+   ],
+   "rod": [
+    0.769,
+    11.7,
+    19
+   ],
+   "rodends": [
+    0.677,
+    11.5,
+    32
+   ],
+   "L1a": [
+    0.982,
+    9.7,
+    8
+   ],
+   "L1b": [
+    0.94,
+    7.4,
+    52
+   ],
+   "L2": [
+    0.774,
+    11.0,
+    124
+   ]
+  },
+  "parts_pairs": {},
+  "contact_depth": {
+   "n": 3,
+   "sum_mm": 18.537,
+   "max_mm": 12.798,
+   "per_pose": [
+    0.277,
+    12.798,
+    5.462
+   ]
+  },
+  "th_margin": {
+   "min": 5.036,
+   "n": 370,
+   "lt5": 0,
+   "forced": 125,
+   "th_max_taken": 107.39,
+   "dK_taken_max": 41.62,
+   "lowest": {
+    "own": 5.036,
+    "forced": true,
+    "kind": "ws",
+    "plane": 135.0,
+    "elev": 120.0,
+    "axial": -75.0
+   }
+  },
+  "dK_lim": 65.0,
+  "why_lim": "transmission",
+  "contact_split": {
+   "n": 3,
+   "by_part": {
+    "m1:hubK/horn": 3,
+    "horn": 2,
+    "m8:rod/rodends": 2,
+    "rodends": 2,
+    "hubK": 2,
+    "rod": 2,
+    "m7:hub2": 1
+   }
+  },
+  "fit_fast": {
+   "gap": 14.54,
+   "reach": 0.7812,
+   "follow": 1.0,
+   "inband14": 0.8734,
+   "inband10": 0.526,
+   "contact": 0.0
+  },
+  "ws_inband": {
+   "all": [
+    0.8498,
+    0.5163
+   ],
+   "e90_140": [
+    0.8125,
+    0.5051
+   ],
+   "ovh140": [
+    0.9375,
+    0.6396
+   ]
+  }
+ },
+ "claims": {
+  "alt_s65n1a": {
+   "bench": {
+    "frozen": {
+     "gap": 22.07,
+     "reach": 0.725,
+     "follow": 1.0,
+     "inband14": 0.8676,
+     "inband10": 0.5114,
+     "contact": 0.0133
+    },
+    "why": {
+     "fold": 83,
+     "slide": 9,
+     "flip": 0,
+     "closure": 0,
+     "skin": 0,
+     "parts": 2,
+     "contact": 5
+    },
+    "near1": 23.7,
+    "near2": 42.34,
+    "min_metal_mm": 0.25,
+    "overhead": {
+     "ws": 28,
+     "taken": 8
+    },
+    "contact_depth": {
+     "n": 5,
+     "sum_mm": 18.648,
+     "max_mm": 12.877,
+     "per_pose": [
+      3.61,
+      0.416,
+      12.877,
+      0.877,
+      0.868
+     ]
+    },
+    "th_margin_min": 5.389,
+    "th_max_taken": 108.55,
+    "dK_taken_max": 47.14,
+    "dK_lim": 65.5,
+    "split": {
+     "n": 5,
+     "by_part": {
+      "m7:hub2": 3,
+      "m0:hub1": 2,
+      "horn": 2,
+      "m1:hubK/horn": 2,
+      "hub2": 1,
+      "m2:?": 1,
+      "m8:rod/rodends": 1,
+      "hubK": 1,
+      "rodends": 1,
+      "rod": 1,
+      "hub1": 1
+     }
+    },
+    "parts_ib14": {
+     "hub1": 0.993,
+     "hubK": 0.989,
+     "hub2": 0.985,
+     "hub3": 0.594,
+     "E": 0.951,
+     "boss": 0.989,
+     "pad": 1.0,
+     "knee": 0.942,
+     "crank": 0.744,
+     "horn": 0.959,
+     "rod": 0.707,
+     "rodends": 0.657,
+     "L1a": 0.975,
+     "L1b": 0.958,
+     "L2": 0.707
+    }
+   },
+   "held": 24.86
+  },
+  "ghost_g65d_ATTRIBUTION_ONLY": {
+   "bench": {
+    "frozen": {
+     "gap": 19.5,
+     "reach": 0.7306,
+     "follow": 1.0,
+     "inband14": 0.885,
+     "inband10": 0.5259,
+     "contact": 0.0106
+    },
+    "why": {
+     "fold": 85,
+     "slide": 8,
+     "flip": 0,
+     "closure": 0,
+     "skin": 0,
+     "parts": 0,
+     "contact": 4
+    },
+    "near1": 21.68,
+    "near2": 33.06,
+    "min_metal_mm": 0.15,
+    "overhead": {
+     "ws": 28,
+     "taken": 8
+    },
+    "contact_depth": {
+     "n": 4,
+     "sum_mm": 11.674,
+     "max_mm": 7.109,
+     "per_pose": [
+      3.666,
+      7.109,
+      0.09,
+      0.809
+     ]
+    },
+    "th_margin_min": 5.334,
+    "th_max_taken": 108.55,
+    "dK_taken_max": 42.11,
+    "dK_lim": 66.8,
+    "split": {
+     "n": 4,
+     "by_part": {
+      "m7:hub2": 2,
+      "m2:?": 1,
+      "hub2": 1,
+      "m1:hubK": 1,
+      "hubK": 1
+     }
+    },
+    "parts_ib14": {
+     "hub1": 0.999,
+     "hubK": 0.976,
+     "hub2": 0.951,
+     "hub3": 0.601,
+     "E": 0.95,
+     "boss": 0.988,
+     "pad": 1.0,
+     "knee": 0.941,
+     "L1a": 0.976,
+     "L1b": 0.949,
+     "L2": 0.713
+    }
+   },
+   "held": {
+    "frozen": {
+     "gap": 22.69,
+     "reach": 0.6975,
+     "follow": 1.0,
+     "inband14": 0.8836,
+     "inband10": 0.5248,
+     "contact": 0.008
+    },
+    "why": {
+     "fold": 248,
+     "slide": 33,
+     "flip": 0,
+     "closure": 0,
+     "skin": 0,
+     "parts": 0,
+     "contact": 7
+    },
+    "near1": 24.01,
+    "near2": 32.92,
+    "min_metal_mm": 0.0,
+    "overhead": {
+     "ws": 71,
+     "taken": 21
+    },
+    "contact_depth": {
+     "n": 7,
+     "sum_mm": 22.091,
+     "max_mm": 7.81,
+     "per_pose": [
+      3.231,
+      6.088,
+      1.449,
+      1.233,
+      1.255,
+      1.025,
+      7.81
+     ]
+    },
+    "th_margin_min": 5.003,
+    "th_max_taken": 109.36,
+    "dK_taken_max": 43.33,
+    "dK_lim": 66.8,
+    "split": {
+     "n": 7,
+     "by_part": {
+      "m1:hubK": 3,
+      "hubK": 3,
+      "m2:?": 2,
+      "hub2": 2,
+      "m7:hub2": 2
+     }
+    },
+    "parts_ib14": {
+     "hub1": 0.999,
+     "hubK": 0.973,
+     "hub2": 0.95,
+     "hub3": 0.596,
+     "E": 0.949,
+     "boss": 0.988,
+     "pad": 1.0,
+     "knee": 0.942,
+     "L1a": 0.975,
+     "L1b": 0.949,
+     "L2": 0.711
+    }
+   }
+  },
+  "control_slipper_at_pa42": {
+   "frozen": {
+    "gap": 18.49,
+    "reach": 0.725,
+    "follow": 1.0,
+    "inband14": 0.8955,
+    "inband10": 0.5163,
+    "contact": 0.0054
+   },
+   "why": {
+    "fold": 88,
+    "slide": 9,
+    "flip": 0,
+    "closure": 0,
+    "skin": 0,
+    "parts": 0,
+    "contact": 2
+   }
+  }
+ },
+ "convergence_gate": {
+  "objective": "2 mm near-touch gap (and 1 mm for s65n1*), Bench(60,160) fast",
+  "claim_run_s65n2d": {
+   "evals": 1385,
+   "gain_2nd_half_pts": 0.03,
+   "gain_last_third_pts": 0.01,
+   "top5_spread_pts": 0.0
+  },
+  "cma3_combined": {
+   "evals": 5149,
+   "gain_2nd_half_pts": 0.0,
+   "gain_last_third_pts": 0.0,
+   "top5_spread_pts": 0.03
+  },
+  "passes": true
+ },
+ "cost_usd": "~1.2-1.4 of the 1.50 share (exo-cpu1: 5 sweeps, 4 CMA batches, 5 claim batches)"
+}

@@ -2,14 +2,14 @@
  "id": "cam-unfold-4th",
  "status": "verified",
  "v_gap": 26.7,
- "complexity": 33.75,
+ "complexity": 14.25,
  "verdict": "watch",
  "reasons": [
   "held_out: no held-out measurement on file: the claim has never been worn off its own bench",
-  "near_touch: plain 26.7, <1 mm 28.4, 2 mm near-touch not measured (row frozen_exact.gap_near1)",
+  "dominance: cannot compare with slipper-nose-knuckle-3r at 2 mm",
   "continuity: passive / sprung / sensed coordinates but no continuity flood on file (rule 2026-10-16)",
   "fold_margin: no min-th margin over taken poses on file (rule: each claim reports it)",
-  "idle: a drive is declared but no range of it over the taken poses is on file",
+  "idle: a drive is declared but no range of it over the taken poses is on file; K: declared moving, no span on file; crank: declared moving, no span on file; knee: declared moving, no span on file",
   "sampling: sample-weighted in-band 0.889 vs part-weighted 0.840 (+4.86 points); thinly sampled parts: L2a 4; mostly out-of-band parts: L2a (0.17 in band, median 15.2 mm, 0.6 % of samples) (docs/concepts/verify/cam-unfold-4th/local_claim.json)",
   "reporting: verdict text still reads as a self-measured screen"
  ],
@@ -30,8 +30,8 @@
   },
   {
    "check": "near_touch",
-   "level": "watch",
-   "reason": "plain 26.7, <1 mm 28.4, 2 mm near-touch not measured (row frozen_exact.gap_near1)",
+   "level": "ok",
+   "reason": "plain 26.7, <1 mm 28.4, 2 mm near-touch not measured (not required since 2026-10-17) (row frozen_exact.gap_near1)",
    "shell2": null,
    "plain": 26.7,
    "n1": 28.4,
@@ -43,9 +43,17 @@
    "source": "row frozen_exact.gap_near1"
   },
   {
-   "check": "dominance",
+   "check": "contact_depth",
    "level": "ok",
-   "reason": "no reference"
+   "reason": "no per-pose contact depths on file that reproduce the claim (tools/alignment_paired.py dump cam-unfold-4th bench|held, or tools/alignment_wear_probe*.py); not measured",
+   "depths": {
+    "v_gap 26.7": {}
+   }
+  },
+  {
+   "check": "dominance",
+   "level": "watch",
+   "reason": "cannot compare with slipper-nose-knuckle-3r at 2 mm"
   },
   {
    "check": "continuity",
@@ -60,8 +68,14 @@
   {
    "check": "idle",
    "level": "watch",
-   "reason": "a drive is declared but no range of it over the taken poses is on file",
-   "spans": []
+   "reason": "a drive is declared but no range of it over the taken poses is on file; K: declared moving, no span on file; crank: declared moving, no span on file; knee: declared moving, no span on file",
+   "spans": [],
+   "declared": [
+    "K",
+    "crank",
+    "knee"
+   ],
+   "rigid": []
   },
   {
    "check": "sampling",
@@ -128,9 +142,9 @@
   {
    "check": "complexity",
    "level": "ok",
-   "reason": "recomputed 33.75 vs row 33.75; info: 3 active + 2 sensed passive coordinates = 5 read coordinates (cuff-side passives are outside the count by the user's ruling)",
-   "recomputed": 33.75,
-   "row": 33.75
+   "reason": "recomputed 14.25 vs row 14.25",
+   "recomputed": 14.25,
+   "row": 14.25
   },
   {
    "check": "reporting",
@@ -140,7 +154,7 @@
   {
    "check": "judge_change",
    "level": "ok",
-   "reason": "no bench / judge / metric file changed in the 3 commits that touched the row"
+   "reason": "no bench / judge / metric file changed in the 5 commits that touched the row"
   },
   {
    "check": "rules",
@@ -157,6 +171,7 @@
   "docs/concepts/verify/cam-unfold-4th/farm_hw.json",
   "docs/concepts/verify/cam-unfold-4th/farm_claim.json"
  ],
- "git": "c932f10",
- "t": "2026-10-16T20:26:27Z"
+ "git": "06f7b8d",
+ "tool_version": "2026-10-17.2",
+ "t": "2026-10-17T08:03:42Z"
 }

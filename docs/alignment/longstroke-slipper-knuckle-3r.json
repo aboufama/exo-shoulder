@@ -1,0 +1,146 @@
+{
+ "id": "longstroke-slipper-knuckle-3r",
+ "status": "screened",
+ "v_gap": null,
+ "complexity": 30.5,
+ "verdict": "watch",
+ "reasons": [
+  "held_out: no verified bench gap on the row",
+  "near_touch: no near-touch measurement on file (rule since 2026-10-16: claims report plain and near-touch)",
+  "dominance: cannot compare with slipper-nose-knuckle-3r at 2 mm",
+  "continuity: passive / sprung / sensed coordinates but no continuity flood on file (rule 2026-10-16)",
+  "sampling: per-part sample counts not on file (fractions only); mostly out-of-band parts: crank 0.50 (row frozen)"
+ ],
+ "checks": [
+  {
+   "check": "held_out",
+   "level": "watch",
+   "reason": "no verified bench gap on the row"
+  },
+  {
+   "check": "fast_frozen",
+   "level": "ok",
+   "reason": "no pair"
+  },
+  {
+   "check": "near_touch",
+   "level": "watch",
+   "reason": "no near-touch measurement on file (rule since 2026-10-16: claims report plain and near-touch)"
+  },
+  {
+   "check": "contact_depth",
+   "level": "ok",
+   "reason": "no per-pose contact depths on file that reproduce the claim (tools/alignment_paired.py dump longstroke-slipper-knuckle-3r bench|held, or tools/alignment_wear_probe*.py); not measured",
+   "depths": {
+    "gap 19.37": {}
+   }
+  },
+  {
+   "check": "dominance",
+   "level": "watch",
+   "reason": "cannot compare with slipper-nose-knuckle-3r at 2 mm"
+  },
+  {
+   "check": "continuity",
+   "level": "watch",
+   "reason": "passive / sprung / sensed coordinates but no continuity flood on file (rule 2026-10-16)"
+  },
+  {
+   "check": "fold_margin",
+   "level": "ok",
+   "reason": "min fold margin on file 5.003 deg (claims.ghost_g65d_ATTRIBUTION_ONLY.held.th_margin_min; 6 readings)",
+   "min_margin": 5.003,
+   "where": "claims.ghost_g65d_ATTRIBUTION_ONLY.held.th_margin_min"
+  },
+  {
+   "check": "idle",
+   "level": "ok",
+   "reason": "knee: rigid by design, not a joint (model asserts the knee angle constant (knee_moved -> dishonest)); no span on file; K moves: smallest recorded span 41.52 deg (row:held_out.claim_detail.dK_taken_max); crank: declared moving, no span on file",
+   "spans": [
+    [
+     "row:claim.dK_taken_max",
+     41.62
+    ],
+    [
+     "row:held_out.claim_detail.dK_taken_max",
+     41.52
+    ],
+    [
+     "row:frozen.dK_taken_max",
+     41.62
+    ],
+    [
+     "row:claims.alt_s65n1a.bench.dK_taken_max",
+     47.14
+    ],
+    [
+     "row:claims.ghost_g65d_ATTRIBUTION_ONLY.bench.dK_taken_max",
+     42.11
+    ],
+    [
+     "row:claims.ghost_g65d_ATTRIBUTION_ONLY.held.dK_taken_max",
+     43.33
+    ]
+   ],
+   "declared": [
+    "K",
+    "crank"
+   ],
+   "rigid": [
+    "knee"
+   ]
+  },
+  {
+   "check": "sampling",
+   "level": "watch",
+   "reason": "per-part sample counts not on file (fractions only); mostly out-of-band parts: crank 0.50 (row frozen)",
+   "parts": {
+    "hub1": 0.999,
+    "hubK": 0.985,
+    "hub2": 0.946,
+    "hub3": 0.739,
+    "E": 0.965,
+    "boss": 0.987,
+    "pad": 1.0,
+    "knee": 0.941,
+    "crank": 0.499,
+    "horn": 0.965,
+    "rod": 0.769,
+    "rodends": 0.677,
+    "L1a": 0.982,
+    "L1b": 0.94,
+    "L2": 0.774
+   }
+  },
+  {
+   "check": "complexity",
+   "level": "ok",
+   "reason": "recomputed 30.5 vs row 30.5; hand count (not derived from the model)",
+   "recomputed": 30.5,
+   "row": 30.5
+  },
+  {
+   "check": "reporting",
+   "level": "ok",
+   "reason": "row, verifier files and dashboard agree"
+  },
+  {
+   "check": "judge_change",
+   "level": "ok",
+   "reason": "no bench / judge / metric file changed in the 0 commits that touched the row"
+  },
+  {
+   "check": "rules",
+   "level": "ok",
+   "reason": "O20, margin >= 5, translations <= 2 as recorded"
+  }
+ ],
+ "remeasured": {
+  "bench": false,
+  "held": false
+ },
+ "verifier_files": [],
+ "git": "06f7b8d",
+ "tool_version": "2026-10-17.2",
+ "t": "2026-10-17T07:59:21Z"
+}

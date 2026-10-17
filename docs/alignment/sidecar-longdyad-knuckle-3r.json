@@ -2,10 +2,9 @@
  "id": "sidecar-longdyad-knuckle-3r",
  "status": "verified",
  "v_gap": 18.91,
- "complexity": 49.0,
+ "complexity": 25.5,
  "verdict": "watch",
  "reasons": [
-  "complexity: recomputed 29.5 vs row 49.0; MISMATCH; hand count (not derived from the model)",
   "reporting: verdict text still reads as a self-measured screen; dashboard sweep best 10.3 (score 96.25) sits 8.61 below the verified number"
  ],
  "checks": [
@@ -52,7 +51,7 @@
   {
    "check": "contact_depth",
    "level": "ok",
-   "reason": "v_gap 18.91: bench 4 contact poses, sum 6.23 mm, deepest 4.61 mm, held 10 contact poses, sum 35.66 mm, deepest 8.37 mm (this is the reference)",
+   "reason": "the score counts contact poses, not depth (report only, score unchanged): v_gap 18.91: bench 4 contact poses, sum 6.23 mm, deepest 4.61 mm at ['ws', 30.0, 165.0, -60.0], 1 deeper than 3 mm vs slipper-nose-knuckle-3r 14.75 mm over 2 (-8.52 mm, x0.42); held 10 contact poses, sum 35.66 mm, deepest 8.37 mm at ['ws', 15.0, 150.0, -60.0], 5 deeper than 3 mm vs slipper-nose-knuckle-3r 46.12 mm over 10 (-10.46 mm, x0.77)",
    "depths": {
     "v_gap 18.91": {
      "bench": {
@@ -102,12 +101,35 @@
      }
     }
    },
-   "ref": "sidecar-longdyad-knuckle-3r"
+   "ref": "slipper-nose-knuckle-3r",
+   "compare": [
+    {
+     "claim": "v_gap 18.91",
+     "wear": "bench",
+     "sum": 6.23,
+     "ref_sum": 14.75,
+     "excess": -8.52,
+     "ratio": 0.42,
+     "watch": false
+    },
+    {
+     "claim": "v_gap 18.91",
+     "wear": "held",
+     "sum": 35.66,
+     "ref_sum": 46.12,
+     "excess": -10.46,
+     "ratio": 0.77,
+     "watch": false
+    }
+   ]
   },
   {
    "check": "dominance",
    "level": "ok",
-   "reason": "no reference"
+   "reason": "vs slipper-nose-knuckle-3r: plain -0.42, 2 mm -1.01",
+   "ref": "slipper-nose-knuckle-3r",
+   "gain_plain": -0.42,
+   "gain_2mm": -1.01
   },
   {
    "check": "continuity",
@@ -262,10 +284,10 @@
   },
   {
    "check": "complexity",
-   "level": "watch",
-   "reason": "recomputed 29.5 vs row 49.0; MISMATCH; hand count (not derived from the model)",
-   "recomputed": 29.5,
-   "row": 49.0
+   "level": "ok",
+   "reason": "recomputed 25.5 vs row 25.5; hand count (not derived from the model)",
+   "recomputed": 25.5,
+   "row": 25.5
   },
   {
    "check": "reporting",
@@ -275,7 +297,7 @@
   {
    "check": "judge_change",
    "level": "ok",
-   "reason": "no bench / judge / metric file changed in the 5 commits that touched the row"
+   "reason": "no bench / judge / metric file changed in the 6 commits that touched the row"
   },
   {
    "check": "rules",
@@ -291,7 +313,7 @@
   "docs/concepts/verify/sidecar-longdyad-knuckle-3r_v_bench_frozen.json",
   "docs/concepts/verify/sidecar-longdyad-knuckle-3r_v_held_frozen.json"
  ],
- "git": "22422c3",
+ "git": "06f7b8d",
  "tool_version": "2026-10-17.2",
- "t": "2026-10-17T04:14:33Z"
+ "t": "2026-10-17T08:03:52Z"
 }

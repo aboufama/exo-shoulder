@@ -2,11 +2,12 @@
  "id": "sidecar-parallelogram-knuckle-3r",
  "status": "verified",
  "v_gap": 19.13,
- "complexity": 49.0,
- "verdict": "gamed",
+ "complexity": 25.5,
+ "verdict": "watch",
  "reasons": [
-  "near_touch: plain 19.13, <1 mm 20.22, <2 mm 50.14, <3 mm 150.75, band read 3-14 mm 19.13, 31.01 points live in the 1-2 mm shell (re-measured (this audit))",
-  "dominance: beats frontload-lobe-stopb-knuckle-3r by 3.59 plain but loses by 6.16 at 2 mm: the gain is metal moved into the 1-2 mm shell"
+  "continuity: static 19.13, connected full 19.13, knn 22.21, bench 45.03 (row continuity); the knn flood (no envelope stepping stones) loses 3.08",
+  "fold_margin: no min-th margin over taken poses on file (rule: each claim reports it)",
+  "reporting: verdict text still reads as a self-measured screen; dashboard sweep best 10.63 (score 96.13) sits 8.50 below the verified number"
  ],
  "checks": [
   {
@@ -28,7 +29,7 @@
   },
   {
    "check": "near_touch",
-   "level": "gamed",
+   "level": "ok",
    "reason": "plain 19.13, <1 mm 20.22, <2 mm 50.14, <3 mm 150.75, band read 3-14 mm 19.13, 31.01 points live in the 1-2 mm shell (re-measured (this audit))",
    "shell2": 31.01,
    "plain": 19.13,
@@ -50,12 +51,20 @@
    "source": "re-measured (this audit)"
   },
   {
+   "check": "contact_depth",
+   "level": "ok",
+   "reason": "no per-pose contact depths on file that reproduce the claim (tools/alignment_paired.py dump sidecar-parallelogram-knuckle-3r bench|held, or tools/alignment_wear_probe*.py); not measured",
+   "depths": {
+    "v_gap 19.13": {}
+   }
+  },
+  {
    "check": "dominance",
-   "level": "gamed",
-   "reason": "beats frontload-lobe-stopb-knuckle-3r by 3.59 plain but loses by 6.16 at 2 mm: the gain is metal moved into the 1-2 mm shell",
-   "ref": "frontload-lobe-stopb-knuckle-3r",
-   "gain_plain": 3.59,
-   "gain_2mm": -6.16
+   "level": "ok",
+   "reason": "vs slipper-nose-knuckle-3r: plain -0.64, 2 mm -17.12",
+   "ref": "slipper-nose-knuckle-3r",
+   "gain_plain": -0.64,
+   "gain_2mm": -17.12
   },
   {
    "check": "continuity",
@@ -74,12 +83,8 @@
   {
    "check": "idle",
    "level": "ok",
-   "reason": "declared drive moves: smallest recorded span 35.87 (docs/concepts/verify/sidecar-parallelogram-knuckle-3r_v_bench_zb45.json:fit_fast.extra.dK_taken_max_deg)",
+   "reason": "K moves: smallest recorded span 35.87 deg (docs/concepts/verify/sidecar-parallelogram-knuckle-3r_v_bench_frozen.json:fit_fast.extra.dK_taken_max_deg); crank moves: smallest recorded span 36.3 deg (docs/concepts/verify/sidecar-parallelogram-knuckle-3r_v_bench_frozen.json:sidecar.phi_max_taken); knee moves: smallest recorded span 52.68 deg (re-measured K.qb span)",
    "spans": [
-    [
-     "row:frozen.drive.phi_max_taken",
-     36.3
-    ],
     [
      "row:verification.added_checks.dK_taken_max_deg",
      37.31
@@ -93,10 +98,6 @@
      37.31
     ],
     [
-     "docs/concepts/verify/sidecar-parallelogram-knuckle-3r_v_bench_zb45.json:sidecar.phi_max_taken",
-     36.3
-    ],
-    [
      "docs/concepts/verify/sidecar-parallelogram-knuckle-3r_v_bench_zb4.json:fit_fast.extra.dK_taken_max_deg",
      35.87
     ],
@@ -105,10 +106,32 @@
      37.31
     ],
     [
-     "docs/concepts/verify/sidecar-parallelogram-knuckle-3r_v_bench_zb4.json:sidecar.phi_max_taken",
+     "docs/concepts/verify/sidecar-parallelogram-knuckle-3r_v_held_frozen.json:fit_fast.extra.dK_taken_max_deg",
+     35.87
+    ],
+    [
+     "docs/concepts/verify/sidecar-parallelogram-knuckle-3r_v_held_frozen.json:extra.dK_taken_max_deg",
+     37.06
+    ],
+    [
+     "docs/concepts/verify/sidecar-parallelogram-knuckle-3r_v_bench_frozen.json:fit_fast.extra.dK_taken_max_deg",
+     35.87
+    ],
+    [
+     "docs/concepts/verify/sidecar-parallelogram-knuckle-3r_v_bench_frozen.json:extra.dK_taken_max_deg",
+     37.31
+    ],
+    [
+     "row:frozen.drive.phi_max_taken",
      36.3
     ]
-   ]
+   ],
+   "declared": [
+    "K",
+    "crank",
+    "knee"
+   ],
+   "rigid": []
   },
   {
    "check": "sampling",
@@ -195,19 +218,19 @@
   {
    "check": "complexity",
    "level": "ok",
-   "reason": "recomputed 49.0 vs row 49.0; hand count (not derived from the model); info: 3 active + 2 sensed passive coordinates = 5 read coordinates (cuff-side passives are outside the count by the user's ruling)",
-   "recomputed": 49.0,
-   "row": 49.0
+   "reason": "recomputed 25.5 vs row 25.5; hand count (not derived from the model)",
+   "recomputed": 25.5,
+   "row": 25.5
   },
   {
    "check": "reporting",
    "level": "watch",
-   "reason": "verdict text still reads as a self-measured screen; dashboard v_gap 18.06 vs verifier 19.13 (-1.07; the dashboard flatters the design); dashboard sweep best 10.63 (score 96.13) sits 8.50 below the verified number"
+   "reason": "verdict text still reads as a self-measured screen; dashboard sweep best 10.63 (score 96.13) sits 8.50 below the verified number"
   },
   {
    "check": "judge_change",
    "level": "ok",
-   "reason": "no bench / judge / metric file changed in the 2 commits that touched the row"
+   "reason": "no bench / judge / metric file changed in the 4 commits that touched the row"
   },
   {
    "check": "rules",
@@ -225,6 +248,7 @@
   "docs/concepts/verify/sidecar-parallelogram-knuckle-3r_v_held_frozen.json",
   "docs/concepts/verify/sidecar-parallelogram-knuckle-3r_v_bench_frozen.json"
  ],
- "git": "c932f10",
- "t": "2026-10-16T20:26:29Z"
+ "git": "06f7b8d",
+ "tool_version": "2026-10-17.2",
+ "t": "2026-10-17T08:03:54Z"
 }

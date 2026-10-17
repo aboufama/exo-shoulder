@@ -1,0 +1,68 @@
+{
+ "cell": "lead",
+ "drive": "rssr",
+ "frozen": {
+  "gap": 21.27,
+  "reach": 0.7222,
+  "follow": 1.0,
+  "inband14": 0.8731,
+  "inband10": 0.5299,
+  "contact": 0.008
+ },
+ "connected": {
+  "static": {
+   "gap": 21.27,
+   "reach": 0.7222,
+   "follow": 1.0,
+   "inband14": 0.8731,
+   "contact": 0.008
+  },
+  "connected_bench": {
+   "gap": 43.43,
+   "reach": 0.5028,
+   "dropped": 79,
+   "dropped_forced": 79,
+   "forced_taken": 102,
+   "forced_taken_connected": 23,
+   "dropped_with_no_taken_neighbour": 18
+  },
+  "connected_knn": {
+   "gap": 24.08,
+   "reach": 0.6944,
+   "dropped": 10,
+   "dropped_forced": 10,
+   "forced_taken": 102,
+   "forced_taken_connected": 92
+  },
+  "connected_full": {
+   "gap": 21.27,
+   "reach": 0.7222,
+   "dropped": 0,
+   "dropped_forced": 0,
+   "forced_taken": 102,
+   "forced_taken_connected": 102,
+   "envelope": {
+    "env_ok": 1022,
+    "env_forced_ok": 396,
+    "env_forced_connected": 396
+   }
+  },
+  "secs": 1.8
+ },
+ "params": {
+  "La": 19.654,
+  "s_arm": 4.0,
+  "r_h": 14.6689,
+  "beta": -124.0829,
+  "gam": 14.5934,
+  "hl": 3.15,
+  "zr": 0.0,
+  "kK": 1.957,
+  "r_lobe": 7.0,
+  "bk1": 26.0,
+  "bk2": 47.2225,
+  "a1max": 68.2225,
+  "smhi": 12.1012
+ },
+ "secs": 184.1
+}

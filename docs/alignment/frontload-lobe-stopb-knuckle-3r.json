@@ -2,12 +2,11 @@
  "id": "frontload-lobe-stopb-knuckle-3r",
  "status": "verified",
  "v_gap": 22.82,
- "complexity": 49.0,
+ "complexity": 25.5,
  "verdict": "watch",
  "reasons": [
-  "near_touch: plain 22.72, <1 mm 24.36, <2 mm 43.98, 21.26 points live in the 1-2 mm shell (docs/concepts/verify/frontload-lobe-stopb-knuckle-3r_claim_bench_frozen.json)",
   "fold_margin: no min-th margin over taken poses on file (rule: each claim reports it)",
-  "sampling: sample-weighted in-band 0.856 vs part-weighted 0.798 (+5.73 points); thinly sampled parts: rod 14; mostly out-of-band parts: rod (0.00 in band, median 22.2 mm, 1.7 % of samples); rodends (0.00 in band, median 22.5 mm, 3.8 % of samples) (docs/concepts/verify/frontload-lobe-stopb-knuckle-3r_claim_bench_frozen.json)",
+  "sampling: sample-weighted in-band 0.855 vs part-weighted 0.798 (+5.63 points); thinly sampled parts: rod 15; mostly out-of-band parts: rod (0.00 in band, median 28.3 mm, 1.8 % of samples); rodends (0.00 in band, median 28.0 mm, 3.8 % of samples) (docs/concepts/verify/frontload-lobe-stopb-knuckle-3r_corr_bench_frozen.json)",
   "reporting: verdict text still reads as a self-measured screen; dashboard sweep best 15.57 (score 94.34) sits 7.25 below the verified number"
  ],
  "checks": [
@@ -30,22 +29,33 @@
   },
   {
    "check": "near_touch",
-   "level": "watch",
-   "reason": "plain 22.72, <1 mm 24.36, <2 mm 43.98, 21.26 points live in the 1-2 mm shell (docs/concepts/verify/frontload-lobe-stopb-knuckle-3r_claim_bench_frozen.json)",
+   "level": "ok",
+   "reason": "plain 22.82, <1 mm 24.46, <2 mm 44.08, 21.26 points live in the 1-2 mm shell (docs/concepts/verify/frontload-lobe-stopb-knuckle-3r_corr_bench_frozen.json)",
    "shell2": 21.26,
-   "plain": 22.72,
-   "n1": 24.36,
-   "n2": 43.98,
+   "plain": 22.82,
+   "n1": 24.46,
+   "n2": 44.08,
    "n3": null,
    "band3": null,
    "hist": null,
    "minmm": 0.3,
-   "source": "docs/concepts/verify/frontload-lobe-stopb-knuckle-3r_claim_bench_frozen.json"
+   "source": "docs/concepts/verify/frontload-lobe-stopb-knuckle-3r_corr_bench_frozen.json"
+  },
+  {
+   "check": "contact_depth",
+   "level": "ok",
+   "reason": "no per-pose contact depths on file that reproduce the claim (tools/alignment_paired.py dump frontload-lobe-stopb-knuckle-3r bench|held, or tools/alignment_wear_probe*.py); not measured",
+   "depths": {
+    "v_gap 22.82": {}
+   }
   },
   {
    "check": "dominance",
    "level": "ok",
-   "reason": "no reference"
+   "reason": "vs slipper-nose-knuckle-3r: plain -4.33, 2 mm -11.06",
+   "ref": "slipper-nose-knuckle-3r",
+   "gain_plain": -4.33,
+   "gain_2mm": -11.06
   },
   {
    "check": "continuity",
@@ -64,26 +74,32 @@
   {
    "check": "idle",
    "level": "ok",
-   "reason": "declared drive moves: smallest recorded span 44.3 (docs/concepts/verify/frontload-lobe-stopb-knuckle-3r_claim_bench_frozen.json:drive.dK_taken_max)",
+   "reason": "K moves: smallest recorded span 44.3 deg (docs/concepts/verify/frontload-lobe-stopb-knuckle-3r_claim_bench_frozen.json:drive.dK_taken_max); crank: declared moving, no span on file; knee: declared moving, no span on file",
    "spans": [
     [
-     "docs/concepts/verify/frontload-lobe-stopb-knuckle-3r_corr_held_frozen.json:drive.dK_taken_max",
-     44.6
+     "docs/concepts/verify/frontload-lobe-stopb-knuckle-3r_corr_bench_frozen.json:drive.dK_taken_max",
+     44.3
     ],
     [
      "docs/concepts/verify/frontload-lobe-stopb-knuckle-3r_claim_bench_frozen.json:drive.dK_taken_max",
      44.3
     ],
     [
-     "docs/concepts/verify/frontload-lobe-stopb-knuckle-3r_corr_bench_frozen.json:drive.dK_taken_max",
-     44.3
+     "docs/concepts/verify/frontload-lobe-stopb-knuckle-3r_corr_held_frozen.json:drive.dK_taken_max",
+     44.6
     ]
-   ]
+   ],
+   "declared": [
+    "K",
+    "crank",
+    "knee"
+   ],
+   "rigid": []
   },
   {
    "check": "sampling",
    "level": "watch",
-   "reason": "sample-weighted in-band 0.856 vs part-weighted 0.798 (+5.73 points); thinly sampled parts: rod 14; mostly out-of-band parts: rod (0.00 in band, median 22.2 mm, 1.7 % of samples); rodends (0.00 in band, median 22.5 mm, 3.8 % of samples) (docs/concepts/verify/frontload-lobe-stopb-knuckle-3r_claim_bench_frozen.json)",
+   "reason": "sample-weighted in-band 0.855 vs part-weighted 0.798 (+5.63 points); thinly sampled parts: rod 15; mostly out-of-band parts: rod (0.00 in band, median 28.3 mm, 1.8 % of samples); rodends (0.00 in band, median 28.0 mm, 3.8 % of samples) (docs/concepts/verify/frontload-lobe-stopb-knuckle-3r_corr_bench_frozen.json)",
    "parts": {
     "hub1": [
      0.993,
@@ -132,12 +148,12 @@
     ],
     "rod": [
      0.0,
-     22.2,
-     14
+     28.3,
+     15
     ],
     "rodends": [
      0.0,
-     22.5,
+     28.0,
      32
     ],
     "L1a": [
@@ -160,9 +176,9 @@
   {
    "check": "complexity",
    "level": "ok",
-   "reason": "recomputed 49.0 vs row 49.0; hand count (not derived from the model); info: 3 active + 2 sensed passive coordinates = 5 read coordinates (cuff-side passives are outside the count by the user's ruling)",
-   "recomputed": 49.0,
-   "row": 49.0
+   "reason": "recomputed 25.5 vs row 25.5; hand count (not derived from the model)",
+   "recomputed": 25.5,
+   "row": 25.5
   },
   {
    "check": "reporting",
@@ -172,7 +188,7 @@
   {
    "check": "judge_change",
    "level": "ok",
-   "reason": "no bench / judge / metric file changed in the 5 commits that touched the row"
+   "reason": "no bench / judge / metric file changed in the 7 commits that touched the row"
   },
   {
    "check": "rules",
@@ -185,10 +201,11 @@
   "held": false
  },
  "verifier_files": [
-  "docs/concepts/verify/frontload-lobe-stopb-knuckle-3r_corr_held_frozen.json",
+  "docs/concepts/verify/frontload-lobe-stopb-knuckle-3r_corr_bench_frozen.json",
   "docs/concepts/verify/frontload-lobe-stopb-knuckle-3r_claim_bench_frozen.json",
-  "docs/concepts/verify/frontload-lobe-stopb-knuckle-3r_corr_bench_frozen.json"
+  "docs/concepts/verify/frontload-lobe-stopb-knuckle-3r_corr_held_frozen.json"
  ],
- "git": "c932f10",
- "t": "2026-10-16T20:26:27Z"
+ "git": "06f7b8d",
+ "tool_version": "2026-10-17.2",
+ "t": "2026-10-17T08:03:44Z"
 }

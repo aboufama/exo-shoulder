@@ -7,6 +7,7 @@
  "reasons": [
   "held_out: no held-out measurement on file: the claim has never been worn off its own bench",
   "near_touch: no near-touch measurement on file (rule since 2026-10-16: claims report plain and near-touch)",
+  "dominance: cannot compare with slipper-nose-knuckle-3r at 2 mm",
   "continuity: passive / sprung / sensed coordinates but no continuity flood on file (rule 2026-10-16)",
   "fold_margin: no min-th margin over taken poses on file (rule: each claim reports it)"
  ],
@@ -31,9 +32,17 @@
    "reason": "no near-touch measurement on file (rule since 2026-10-16: claims report plain and near-touch)"
   },
   {
-   "check": "dominance",
+   "check": "contact_depth",
    "level": "ok",
-   "reason": "no reference"
+   "reason": "no per-pose contact depths on file that reproduce the claim (tools/alignment_paired.py dump raglan-knee-3r bench|held, or tools/alignment_wear_probe*.py); not measured",
+   "depths": {
+    "v_gap 27.82": {}
+   }
+  },
+  {
+   "check": "dominance",
+   "level": "watch",
+   "reason": "cannot compare with slipper-nose-knuckle-3r at 2 mm"
   },
   {
    "check": "continuity",
@@ -48,8 +57,12 @@
   {
    "check": "idle",
    "level": "ok",
-   "reason": "no slaved drive declared",
-   "spans": []
+   "reason": "knee: declared moving, no span on file",
+   "spans": [],
+   "declared": [
+    "knee"
+   ],
+   "rigid": []
   },
   {
    "check": "sampling",
@@ -106,8 +119,8 @@
   {
    "check": "complexity",
    "level": "ok",
-   "reason": "recomputed 19.5 vs row None; info: 3 active + 2 sensed passive coordinates = 5 read coordinates (cuff-side passives are outside the count by the user's ruling)",
-   "recomputed": 19.5,
+   "reason": "recomputed 0.0 vs row None",
+   "recomputed": 0.0,
    "row": null
   },
   {
@@ -118,7 +131,7 @@
   {
    "check": "judge_change",
    "level": "ok",
-   "reason": "no bench / judge / metric file changed in the 12 commits that touched the row"
+   "reason": "no bench / judge / metric file changed in the 13 commits that touched the row"
   },
   {
    "check": "rules",
@@ -131,9 +144,10 @@
   "held": false
  },
  "verifier_files": [
-  "docs/concepts/verify/raglan-knee-3r.results.json",
-  "docs/concepts/verify/raglan-knee-3r_big_frozen.json"
+  "docs/concepts/verify/raglan-knee-3r_big_frozen.json",
+  "docs/concepts/verify/raglan-knee-3r.results.json"
  ],
- "git": "c932f10",
- "t": "2026-10-16T20:26:29Z"
+ "git": "06f7b8d",
+ "tool_version": "2026-10-17.2",
+ "t": "2026-10-17T08:03:50Z"
 }

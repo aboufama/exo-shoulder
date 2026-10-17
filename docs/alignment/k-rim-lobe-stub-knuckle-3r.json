@@ -2,10 +2,13 @@
  "id": "k-rim-lobe-stub-knuckle-3r",
  "status": "verified",
  "v_gap": 44.79,
- "complexity": 34.0,
- "verdict": "gamed",
+ "complexity": 4.0,
+ "verdict": "watch",
  "reasons": [
-  "near_touch: plain 44.79, <1 mm 53.51, <2 mm 71.68, 26.89 points live in the 1-2 mm shell (docs/concepts/verify/k-rim-lobe-stub-knuckle-3r_corr_bench_frozen.json)"
+  "held_out: no held-out measurement on file: the claim has never been worn off its own bench",
+  "fold_margin: no min-th margin over taken poses on file (rule: each claim reports it)",
+  "sampling: sample-weighted in-band 0.826 vs part-weighted 0.753 (+7.25 points); thinly sampled parts: roller 9; mostly out-of-band parts: roller (0.18 in band, median 19.7 mm, 1.0 % of samples); lobe (0.00 in band, median 19.6 mm, 5.2 % of samples); LT (0.12 in band, median 21.4 mm, 3.7 % of samples) (docs/concepts/verify/k-rim-lobe-stub-knuckle-3r_corr_bench_frozen.json)",
+  "reporting: verdict text still reads as a self-measured screen; dashboard sweep best 36.82 (score 86.61) sits 7.97 below the verified number"
  ],
  "checks": [
   {
@@ -24,7 +27,7 @@
   },
   {
    "check": "near_touch",
-   "level": "gamed",
+   "level": "ok",
    "reason": "plain 44.79, <1 mm 53.51, <2 mm 71.68, 26.89 points live in the 1-2 mm shell (docs/concepts/verify/k-rim-lobe-stub-knuckle-3r_corr_bench_frozen.json)",
    "shell2": 26.89,
    "plain": 44.79,
@@ -37,9 +40,20 @@
    "source": "docs/concepts/verify/k-rim-lobe-stub-knuckle-3r_corr_bench_frozen.json"
   },
   {
+   "check": "contact_depth",
+   "level": "ok",
+   "reason": "no per-pose contact depths on file that reproduce the claim (tools/alignment_paired.py dump k-rim-lobe-stub-knuckle-3r bench|held, or tools/alignment_wear_probe*.py); not measured",
+   "depths": {
+    "v_gap 44.79": {}
+   }
+  },
+  {
    "check": "dominance",
    "level": "ok",
-   "reason": "no reference"
+   "reason": "vs slipper-nose-knuckle-3r: plain -26.30, 2 mm -38.66",
+   "ref": "slipper-nose-knuckle-3r",
+   "gain_plain": -26.3,
+   "gain_2mm": -38.66
   },
   {
    "check": "continuity",
@@ -58,13 +72,18 @@
   {
    "check": "idle",
    "level": "ok",
-   "reason": "declared drive moves: smallest recorded span 24.5 (docs/concepts/verify/k-rim-lobe-stub-knuckle-3r_corr_bench_frozen.json:drive.dK_taken_max)",
+   "reason": "K moves: smallest recorded span 24.5 deg (docs/concepts/verify/k-rim-lobe-stub-knuckle-3r_corr_bench_frozen.json:drive.dK_taken_max); crank: declared moving, no span on file",
    "spans": [
     [
      "docs/concepts/verify/k-rim-lobe-stub-knuckle-3r_corr_bench_frozen.json:drive.dK_taken_max",
      24.5
     ]
-   ]
+   ],
+   "declared": [
+    "K",
+    "crank"
+   ],
+   "rigid": []
   },
   {
    "check": "sampling",
@@ -145,10 +164,10 @@
   },
   {
    "check": "complexity",
-   "level": "watch",
-   "reason": "recomputed 4.0 vs row 34.0; MISMATCH",
+   "level": "ok",
+   "reason": "recomputed 4.0 vs row 4.0",
    "recomputed": 4.0,
-   "row": 34.0
+   "row": 4.0
   },
   {
    "check": "reporting",
@@ -158,7 +177,7 @@
   {
    "check": "judge_change",
    "level": "ok",
-   "reason": "no bench / judge / metric file changed in the 2 commits that touched the row"
+   "reason": "no bench / judge / metric file changed in the 3 commits that touched the row"
   },
   {
    "check": "rules",
@@ -173,6 +192,7 @@
  "verifier_files": [
   "docs/concepts/verify/k-rim-lobe-stub-knuckle-3r_corr_bench_frozen.json"
  ],
- "git": "c932f10",
- "t": "2026-10-16T20:26:28Z"
+ "git": "06f7b8d",
+ "tool_version": "2026-10-17.2",
+ "t": "2026-10-17T08:03:47Z"
 }
