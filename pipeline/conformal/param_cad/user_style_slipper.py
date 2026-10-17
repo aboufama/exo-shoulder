@@ -88,9 +88,14 @@ FITS[3] = dict(where="crank pivot bearings (2 x 683ZZ straddling the follower in
                "housings O7 J6 at both boss ends with 0.5 mm floors to the follower pocket, wave washer 5-10 N preload under the DIN 6799 RS 2.3 clip")
 FITS[4] = dict(where="lobe follower (MR63ZZ in the crank's clevis pocket)", fit="pin O3 h5 pressed H7/m6 through both clevis prongs (flush), 2 x 0.2 mm "
                "inner-ring shims, pocket 3.0 x O7 (0.25 axial, 0.5 radial running)")
+FITS[2] = dict(where="crank pivot pin in link 1b", fit="O3 17-4PH H900 pin, ground m6 over its 3 mm press length in link 1b (H7) and h5 over the 683ZZ inner rings; DIN 6799 RS 2.3 e-clip in a groove with a 0.3 mm land, wave washer under it")
 FITS.append(dict(where="lobe ring on hub 2", fit="bore O20 H7 on the J2 upper ring / cap skirt O20 g6, keyed by an O1 dowel at the onset phase + 0.35 deg of q2 "
                  "(the red team's +0.75 deg K lead)"))
 FITS.append(dict(where="knee pin e-clips", fit="DIN 6799 RS 2.3 in a O2.3 x 0.6 groove (H13) with a 0.3 mm land to the pin end, 0.1 mm shim under the clip"))
+FITS.append(dict(where="K phase (assembly; docs/HANDOFF.md 14:30 + docs/research/slipper_flank_robust.md)", fit="build the +0.75 deg K lead: lobe-ring key dowel at the "
+                 "onset phase + 0.35 deg of q2, J2 stop B slot end at q2 -15.47 (the CAD draws the nominal -15.82 = the loaded state); keep the verified flank "
+                 "(beta -176.684, no beta step); nose hole / crank pivot / lobe profile +-0.02 mm true position, r_c +-0.1 mm; assembly note: K phase at the "
+                 "onset +0.75 +-0.3 deg, shim the key dowel"))
 
 
 # ---------------------------------------------------------------------------------------------------- link 1a

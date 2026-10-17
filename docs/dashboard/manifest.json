@@ -24,10 +24,10 @@
   "title": "Built CAD judge results",
   "description": "One row per judged design and requirement: value, threshold and pass from the outside judges, timed by the judge output (score files: the earliest of their commit, their file time and the first commit whose docs report the design; scorecard-only values: the scorecard's commit). Built from tools/judged_history.py, judge/scorecard.json files and judge/requirements.json.",
   "file": "data/cad.json",
-  "sha256": "c8cdf0b95c332d91125af3466df0d2fb756953ac1c0c3a96817a569a0b4bf57f",
-  "rows": 440,
-  "bytes": 138467,
-  "updated": "2026-10-17T14:42:45Z"
+  "sha256": "609c11c6e66a996f96ec55178fc1eb0bb8e1f39846758e183c4c47b716640d4d",
+  "rows": 441,
+  "bytes": 138791,
+  "updated": "2026-10-17T14:57:36Z"
  },
  {
   "id": "gpu_evals",
@@ -54,10 +54,10 @@
   "title": "Requirement board",
   "description": "Latest status of R1-R17 (with R1-aim and R5-aim) for the best judged 3-DOF design (most passes on its scorecard, then R1), with the best value any 3-DOF design reached under the current judging rules. Built from judge/scorecard.json files and judge/requirements.json.",
   "file": "data/reqs.json",
-  "sha256": "d340d22d2c38871efc88775ac83a43da13a8631eb4cac03aa7ec77f31b28307d",
+  "sha256": "d0eae8fe6361c86b76756b38073fb1b2d3cbfc46e987f7aacbd43cb67654ed43",
   "rows": 19,
-  "bytes": 8035,
-  "updated": "2026-10-17T14:42:45Z"
+  "bytes": 8037,
+  "updated": "2026-10-17T14:57:36Z"
  },
  {
   "id": "events",
@@ -104,9 +104,9 @@
   "title": "Data build info",
   "description": "When tools/dash_build.py last gathered the data, the repo commit, and any warnings it printed.",
   "file": "data/meta.json",
-  "sha256": "4b91f0783801ae4f476ede6502ada379211c5214f47dc81a8a5160d8a1b47f4d",
+  "sha256": "1062d337028f6ba04e9f90cfddb3bec9a14c36fe3067e34e82a7212a49674252",
   "rows": 1,
   "bytes": 2089,
-  "updated": "2026-10-17T14:42:45Z"
+  "updated": "2026-10-17T14:57:36Z"
  }
 ]

@@ -394,7 +394,7 @@
   },
   {
    "where": "crank pivot pin in link 1b",
-   "fit": "O3 H7/m6 press (ISO 8734 3 m6), pin through the crank boss; DIN 6799 RS 2.3 e-clip groove on the pin end"
+   "fit": "O3 17-4PH H900 pin, ground m6 over its 3 mm press length in link 1b (H7) and h5 over the 683ZZ inner rings; DIN 6799 RS 2.3 e-clip in a groove with a 0.3 mm land, wave washer under it"
   },
   {
    "where": "crank pivot bearings (2 x 683ZZ straddling the follower in the O10 x 10 boss)",
@@ -427,6 +427,10 @@
   {
    "where": "knee pin e-clips",
    "fit": "DIN 6799 RS 2.3 in a O2.3 x 0.6 groove (H13) with a 0.3 mm land to the pin end, 0.1 mm shim under the clip"
+  },
+  {
+   "where": "K phase (assembly; docs/HANDOFF.md 14:30 + docs/research/slipper_flank_robust.md)",
+   "fit": "build the +0.75 deg K lead: lobe-ring key dowel at the onset phase + 0.35 deg of q2, J2 stop B slot end at q2 -15.47 (the CAD draws the nominal -15.82 = the loaded state); keep the verified flank (beta -176.684, no beta step); nose hole / crank pivot / lobe profile +-0.02 mm true position, r_c +-0.1 mm; assembly note: K phase at the onset +0.75 +-0.3 deg, shim the key dowel"
   }
  ],
  "faces_mm": [
