@@ -220,3 +220,42 @@ it does not break the trade.
 - **Not done (time box).** The per-pose hub-2 table on the lead's 88 fold losses
   (docs/research/fold_ceiling/lost_poses_roller-longdyad-knuckle-3r.json). The binder table above answers the same
   question on this chain's own fit poses: the relay does not engage where hub 2 is bound.
+
+## Frozen exact wear (Bench(110,360), CB_EXACT=1, levels fitted on Bench(60,160), K6 at 1 mm radial)
+
+(running at commit time; see the row's note when it lands)
+
+## Verdict
+
+**DEAD at gate 0.** The near-touch gap is 42.74 (plain 41.62, score 84.46) on Bench(60,160) fast, after 555
+configurations. The sweep is converged, and the number is well above the lead's 30 kill line at 300 evaluations. The
+judge expected 38-45; this is inside it.
+
+What the class taught (new knowledge, beyond this morphology):
+
+1. **The continuity instrument.**
+   - A spring-centred base spare's static relay poses are reachable by continuous motion once the flood runs on the
+     full 1432-node envelope grid: stop-relay 0.764 = static on Bench(110,360), and 0 islands at this chain's best.
+   - The stop-relay's "islands" were the 360-node graph: 157 components, 47.75 -> 43.09 on its C best at O20.
+   - Every future redundant / relay / spring design should use `tools/spare_flood.py` (or the minarc verifier's
+     `flood(grid="full")`), never a flood over the bench poses alone.
+2. **A base-side spare buys reach only.**
+   - The relay engages only where J2 is on a stop.
+   - The plain 3R's in-band binder (hub 2 / links 1-2 out at 124-128 mm) is set by mode-A poses: behind the body
+     with ER, and overhead in the scapular plane. The spring holds J0 at rest there.
+   - So reach +0.09 (8.8 gap points), in-band +0.001. The twin spring, which moves J0 everywhere, costs hub 1 / link 0
+     in-band and loses 3-13 points.
+   - This bounds pinknee-scapular-relay-4r too. The relay can add at most the host's fold-limited reach. Whether
+     that survives depends on the host's hub 2 staying at its own level on the relay poses (the judge's 0.53-0.68
+     survival).
+3. **The plain O20 3R's reach / hub-2 trade at two seats.**
+   - Back-of-shoulder seat, 41.8 / 72.3 dyad: hub 2 0.70 in band, reach 0.68.
+   - Acromion-cap pole, 50 / 60 dyad: hub 2 0.06 in band, reach 0.88.
+   - Neither seat gets both. The lead's knuckle family is what breaks the trade.
+
+**What happens next (altitude).**
+
+- Nothing more on this class. The flood is shared: pinknee-scapular-relay-4r uses `tools/spare_flood.py` with its own
+  q0 policy.
+- The open lever this control points at is the one the round plan lists first: remove th's axial dependence with a
+  humerus-axial J3, which changes which poses bind hub 2. A base-side relay does not change them.
