@@ -255,7 +255,7 @@
   {
    "check": "judge_change",
    "level": "ok",
-   "reason": "no bench / judge / metric file changed in the 5 commits that touched the row"
+   "reason": "no bench / judge / metric file changed in the 7 commits that touched the row"
   },
   {
    "check": "rules",
@@ -272,7 +272,7 @@
   "docs/concepts/verify/conecut-knee-knuckle-3r_v_bench_nostop.json",
   "docs/concepts/verify/conecut-knee-knuckle-3r_v_bench_frozen.json"
  ],
- "git": "75bd3ef",
+ "git": "9e4e845",
  "tool_version": "2026-10-17.5",
- "t": "2026-10-17T18:23:21Z"
+ "t": "2026-10-17T19:04:01Z"
 }

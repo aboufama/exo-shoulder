@@ -75,6 +75,11 @@ both lattice errors given to the ring (arm exit 2 mm earlier, section 6 mm): **>
 need a different ring in every pose, so 20.6 is not reachable by any mechanism; even it sits above the 17.5 bar.
 Hubs, the spar, continuity and collisions can only lower reach and follow further.
 
+**The same bound on Bench(110, 360) EXACT** (libigl path, 470 poses; axis tilts 0 and 8 deg lateral, s 240-280, section
+8, arm clearance 0): fixed bore >= **56.5** at the best cell (8 deg lateral, s 280, ring face 82: follow <= 0.555,
+reach <= 0.731), 64.9-74.1 elsewhere; per-pose bore 46.3-68.3; the arm meets the body (no gap at all along some ray from
+the axis) on 19.6-26 % of the poses. Bench(60, 160) fast and Bench(110, 360) exact agree within 2.2 points.
+
 Agreement: the J1 proposer's independent raw-skin scan (round101_ideation.md, KA045XP0 at s 205-240 in contact on
 169-204 / 220 poses incl. all 85 arm-down poses) - the same wall, measured with other code.
 
@@ -94,3 +99,11 @@ first other skin):
 
 The ring is lost exactly where the arm is near the body - rest, walking-like clip frames, internal rotation at the side,
 reaching across low - i.e. the poses the wearer spends most time in (follow ceiling 0.55-0.62), not overhead.
+
+## The faithful model (kit, Bench(60, 160) fast, K3 march, K2 dense, K6, ring outer faces contact-checked)
+
+docs/concepts/models/armband-pointer.py: O20 hubs 1-2, link 1 and link 2's shoulder strap (12 x 3, K3 fitted, 60-deg
+climb, laid out 2 x 2 mm at 140 mm from GH since hub 2 rides 90-160 mm out), the spar (16 x 4, in the pointing frame,
+underside per sample = the radial requirement about J3 at its P-angle over the closing poses, so it clears the arm at
+every twist), the ring (skin face at bore - 1.5 all the way round, 10 mm wide, K6 member; the outer cylinder and both
+side annuli contact-checked). Sweep file docs/concepts/sweeps/armband-pointer.json (every configuration, in order).

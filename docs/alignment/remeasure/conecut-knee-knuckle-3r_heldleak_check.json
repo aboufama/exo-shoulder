@@ -1,0 +1,74 @@
+{
+ "configs": {
+  "verified": {
+   "bench_nf": {
+    "n": 382,
+    "amin": 59.27,
+    "amax": 126.37,
+    "margin": 28.41
+   },
+   "held_nf": {
+    "n": 894,
+    "amin": 59.27,
+    "amax": 128.33,
+    "margin": 26.45
+   },
+   "clips": {
+    "n": 356,
+    "amin": 59.27,
+    "amax": 91.81,
+    "margin": 34.05
+   },
+   "margin_noheld": 28.41,
+   "margin_all": 26.45
+  },
+  "kneewin25": {
+   "bench_nf": {
+    "n": 382,
+    "amin": 54.16,
+    "amax": 113.37,
+    "margin": 28.94
+   },
+   "held_nf": {
+    "n": 894,
+    "amin": 54.16,
+    "amax": 114.79,
+    "margin": 28.94
+   },
+   "clips": {
+    "n": 356,
+    "amin": 54.16,
+    "amax": 83.03,
+    "margin": 28.94
+   },
+   "margin_noheld": 28.94,
+   "margin_all": 28.94
+  },
+  "lead": {
+   "bench_nf": {
+    "n": 382,
+    "amin": 86.21,
+    "amax": 180.0,
+    "margin": -25.22
+   },
+   "held_nf": {
+    "n": 894,
+    "amin": 86.21,
+    "amax": 180.0,
+    "margin": -25.22
+   },
+   "clips": {
+    "n": 356,
+    "amin": 86.21,
+    "amax": 130.55,
+    "margin": 24.23
+   },
+   "margin_noheld": -25.22,
+   "margin_all": -25.22
+  }
+ },
+ "n": 352,
+ "flips": [],
+ "held_binds": 218,
+ "method": "auditor 2026-10-17 19:0x UTC: knee-window angle (two-circle closure, the design's own kopt.py formula) over the design's drift cloud (scratch cone/drift.json, written by cone/k2.py, which imports the polish verifier's held_bench()): bench non-fold, held non-fold, fit-clip frames. margin = min(ang_min - 25.22, 154.78 - ang_max) deg. flips = sweep configs whose >= 10 deg prefilter verdict changes when the held poses are dropped. The sweep objective's own kmargin is over the 184 fit-bench poses only (sweep entries knee.n = 184)."
+}

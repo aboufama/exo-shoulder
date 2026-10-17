@@ -19,7 +19,8 @@ MR63ZZ-pair bosses, knee stop tooth, pad, retainers, BOTTOM cut, pad mount) from
   * chain(): the gen-7 chain + the J3 stop (a frame past [J3MIN, J3MAX] in q3' is not taken: clips hold it as 'j3stop', the
     workspace pose does not close) - the same rule CCModel applies before fit / run;
   * build_parts(): the J3 upper boss split into its 1.0 mm groove ring (F+3.15..F+4.15, the arc groove cut through it: one valid
-    genus-1 solid) + the boss above it (F+4.15..F+12.25), and the stop dowel (F+0..F+3.95, 0.8 mm into the groove); the groove's
+    genus-1 solid) + the boss above it (F+4.15..F+12.25), and the stop dowel (F+0.10..F+4.00, 0.85 mm into the groove, 0.15 off its
+    floor: the J3 red team's build spec, docs/research/conecut_mechanism_redteam.md section 6); the groove's
     home angle is placed so the dowel's swept arc keeps the most angle from link 2's own strap root in the groove layer;
   * the J3 stop checks: dowel vs groove ends over the window (contact at J3MIN / J3MAX, penetration past them = a real stop),
     dowel-in-groove at every check pose from the posed member frames, the stop tolerance stack vs the 0.74 deg held margin, a
@@ -31,6 +32,7 @@ MR63ZZ-pair bosses, knee stop tooth, pad, retainers, BOTTOM cut, pad mount) from
 
     SN_CELL=lead OMP_NUM_THREADS=1 nice -n 10 python3 pipeline/concept_l1/build_conecut_l1.py [--out l1_conecut-knee] [--jobs 2] [--no-clips]
     ... --post-only     (re-run the J3-stop post-processing on an existing build: clip relabel, design.json, build.json)
+    ... --patch-j3      (rewrite only the J3 dowel of an existing build to the current spec, re-run its sweep, then --post-only)
 """
 import json, math, os, sys, time
 import numpy as np, trimesh
@@ -49,7 +51,10 @@ if isinstance(BEST, str): BEST = json.loads(BEST)
 CFG = dict(CC.LEAD_ROW, **BEST); CFG["ang_min"] = float(CC.PARAMS["ang_min"])  # the verified config (the verifier's: CC.PARAMS + BEST)
 S = CC.S; unit = S.unit; UP, CROWN, T_LINK, W_LINK = S.UP, S.CROWN, S.T_LINK, S.W_LINK
 J3MIN, J3MAX = float(CFG["J3MIN"]), float(CFG["J3MAX"])
-J3_RS, J3_DR, J3_GW, J3_GD, J3_DTOP, J3_END_R = float(CC.DOWEL_R), 1.0, 2.1, 1.0, 0.8, 1.05   # r 7.5, O2 dowel, groove 2.1 x 1.0, dowel 0.8 into it
+J3_RS, J3_DR, J3_GW, J3_GD, J3_DTOP, J3_DBOT, J3_END_R = float(CC.DOWEL_R), 1.0, 2.1, 1.0, 0.85, 0.10, 1.05
+# r 7.5, O2 dowel, groove 2.1 x 1.0 (F+3.15..4.15), dowel F+0.10..F+4.00 (top 0.85 above the boss underside: 0.15 tip clearance), R1.05 ends -
+# the J3 red team's build spec (docs/research/conecut_mechanism_redteam.md section 6)
+REDTEAM = "docs/research/conecut_mechanism_redteam.md"
 VERIFIED = dict(bench=dict(gap=18.28, score=93.35, reach=0.7278, follow=1.0, inband14=0.9012, inband10=0.5739, contact=0.0106),
                 held=dict(gap=22.38, reach=0.6922, follow=1.0, inband14=0.9, contact=0.016),
                 knee=dict(ang_bench=[59.27, 105.94], ang_held=[59.27, 107.07], margin_mm=[11.42, 13.18], knee_N_per_Nm_max=12.0),
@@ -71,11 +76,16 @@ FITS += [
     dict(where="knee stop tooth vs E strap side", fit="+-0.02 mm on the tooth face and the E strap side face (stop at 180 - ang_min = 154.78 deg; conecut's taken knee "
          "max 107.07 deg held out: 47.7 deg / 12.8 mm in d below it)"),
     dict(where="slipper nose / DLC flank wear test", fit="pass line mu <= 0.105 after the wear run (the claim's PA budget at mu 0.087; R17 / M5 re-run at 0.087 / 0.105 / 0.12)"),
-    dict(where="J3 stop dowel in hub 3's lower plate", fit="ISO 8734 2 x 5 m6 440C (58 HRC), ground to l 3.95, pressed H7/m6 (O2 H7 0..+0.010 / m6 +0.002..+0.008) through "
-         "the 3 mm plate, flush with the skin face (F+0), 0.95 proud = 0.15 running gap + 0.80 into the groove; hole true position +-0.02 mm at r 7.50 from J3's axis"),
-    dict(where="J3 stop groove under link 2's ring", fit="arc groove 2.10 +0.02/0 wide x 1.00 +0.05/0 deep at r 7.50 +-0.01 in the J3 upper boss underside, milled "
-         "with an O1.5 end mill on a contour path; ends full radius R1.05 about end centres on r 7.50; end-centre angles 0.36 deg beyond the stop angle (the O2 m6 "
-         "dowel meets the R1.05 end at a 0.047 mm centre offset), end position +-0.02 mm (+-0.15 deg); 0.2 mm dowel-end clearance at the groove floor"),
+    dict(where="J3 stop dowel in hub 3's lower plate", fit="ISO 8734 (DIN 6325) 2 m6 x 5 (or x 4), 440C grade >= 56 HRC with cert, surface-ground to 3.90 +-0.02, "
+         "edges re-broken; through hole reamed O2.000 -0.005/0 (2-13 um interference: H7/m6 is a transition fit), at r 7.500, true position 0.02 (+-0.01 "
+         "tangential) to the J3 bore and member 3's angular datum, perpendicular 0.01 to the J3 face, 0.1 x 45 top chamfer; pressed from the top to a gauge: "
+         "top 0.85 +-0.02 above the plate (F+4.00), skin end recessed 0.10 (never proud)"),
+    dict(where="J3 stop groove under link 2's ring", fit="arc slot 2.10 +0.02/0 wide x 1.00 +0.05/0 deep (F+3.15..4.15) at centre radius 7.500, walls concentric "
+         "to the J3 bore within 0.02 (dowel floats 0.046 per side, >= 0.026 running), FULL R1.05 ends; end-arc centres 0.382 deg beyond the dowel-centre stop "
+         "angles, true position 0.02 (+-0.01 tangential); 3+2-axis from below with an O2.0 / O1.5 end mill; cut BEFORE the bearing-1 seat finish bore (0.95 wall)"),
+    dict(where="J3 stop acceptance + rating", fit="assembled stop -112.40 <= J3MIN <= -111.25 and 119.85 <= J3MAX <= 123.78 deg on the J3 encoder (the windows "
+         "that keep the verified bench and held numbers); stop rated 1.8 N.m about J3 (J3 bearing-1 s0 = 1); dowel / groove good to 10 N.m (dowel shear SF 2.6, "
+         "bending 1.95, groove-end bearing 1.66) - docs/research/conecut_mechanism_redteam.md"),
 ]
 GROUPS = SL.GROUPS
 
@@ -169,19 +179,26 @@ def j3_stop_parts(M, parts):
     ring_name = (f"J3 upper boss groove ring keep-out (O20 x {J3_GD:g}, F+{UP:.2f}..F+{UP + J3_GD:.2f}, link 2: the J3 stop's arc groove {J3_GW:g} wide at r {J3_RS:g} over "
                  f"{math.degrees(a_hi - a_lo):.1f} deg; its ends = the stops at q3' {J3MIN:.2f} / {J3MAX:.2f} deg)")
     pd = H3 + J3_RS * (math.cos(th) * e + math.sin(th) * f)
-    dowel = REF.cyl(pd, u3, 0.0, UP + J3_DTOP, r=J3_DR)
-    dname = (f"J3 stop dowel (ISO 8734 O2 m6 440C, ground l {UP + J3_DTOP:.2f}, pressed H7/m6 through hub 3's lower plate at r {J3_RS:g}, F+0..F+{UP + J3_DTOP:.2f}: "
-             f"{J3_DTOP:g} mm into link 2's groove; stops J3's own angle q3' at {J3MIN:.2f} / {J3MAX:.2f} deg)")
+    dowel, dname = j3_dowel(pd, u3)
     parts = list(parts[:k]) + [("l2", 2, up_name, REF.cyl(H3, u3, UP + J3_GD, CROWN, r=R3), "ti"), ("l2", 2, ring_name, ring, "ti")] + list(parts[k + 1:])
     parts.append(("l3", 3, dname, dowel, "steel"))
     info = dict(window_deg=[J3MIN, J3MAX], dowel_home_angle_deg=round(math.degrees(th), 2), groove_deg=[round(math.degrees(a_lo), 3), round(math.degrees(a_hi), 3)],
                 groove_arc_deg=round(math.degrees(a_hi - a_lo), 2), web_deg=round(360 - math.degrees(a_hi - a_lo), 2), dowel_touch_half_deg=round(math.degrees(d_touch), 3),
-                r_mm=J3_RS, dowel_d_mm=2 * J3_DR, groove_w_mm=J3_GW, groove_depth_mm=J3_GD, groove_layer_mm=[UP, UP + J3_GD], dowel_z_mm=[0.0, UP + J3_DTOP],
+                r_mm=J3_RS, dowel_d_mm=2 * J3_DR, groove_w_mm=J3_GW, groove_depth_mm=J3_GD, groove_layer_mm=[UP, UP + J3_GD], dowel_z_mm=[J3_DBOT, UP + J3_DTOP],
                 dowel_into_groove_mm=J3_DTOP, groove_floor_clear_mm=round(J3_GD - J3_DTOP, 3), bearing_od_r_mm=5.5, rim_r_mm=R3,
                 clearance_to_link2_strap_deg=round(clr_deg, 2), link2_strap_samples_in_band=nb,
                 frame="angles in frame_of(u3); dowel centre in link 2's frame = home angle + q3' (C1: R2^T R3 = rot(u3, q3'), offset 0)",
                 end_shape="L1 mesh: radial groove ends where the O2 dowel touches at the window edge; drawing: full-radius R1.05 ends, end centres 0.36 deg past the stop angle")
     return parts, info
+
+
+def j3_dowel(pd, u3):
+    """the stop dowel keep-out (member 3, home frame) and its part name: the red team's spec - ISO 8734 2 m6 x 5 ground to 3.90, F+0.10..F+4.00"""
+    m = REF.cyl(pd, u3, J3_DBOT, UP + J3_DTOP, r=J3_DR)
+    nm = (f"J3 stop dowel (ISO 8734 2 m6 x 5, 440C grade, ground to {UP + J3_DTOP - J3_DBOT:.2f}; pressed in a reamed O2.000 -0.005/0 hole through hub 3's lower plate "
+          f"at r {J3_RS:g}, F+{J3_DBOT:.2f}..F+{UP + J3_DTOP:.2f}: {J3_DTOP:g} mm into link 2's groove, tip 0.15 off its floor; stops J3's own angle q3' at "
+          f"{J3MIN:.2f} / {J3MAX:.2f} deg)")
+    return m, nm
 
 
 def j3_sweep(M, parts, info, dq=1.0):
@@ -210,16 +227,21 @@ def j3_sweep(M, parts, info, dq=1.0):
 
 
 def j3_tolerance():
-    """the stop-angle stack (deg at r 7.5) vs the verified held-out margin (0.74 deg at J3MIN, 3.3 at J3MAX)"""
-    r = J3_RS; deg = lambda mm: math.degrees(mm / r)
-    terms = dict(groove_end_position=deg(0.02), dowel_hole_position=deg(0.02), dowel_diameter_m6=deg(0.003),
-                 groove_width_end_radius=math.degrees(2 * math.asin(0.01 / (2 * r))), groove_radius=deg(0.01) * math.tan(math.radians(8.0)))
-    lin = sum(terms.values()); rss = math.sqrt(sum(v * v for v in terms.values()))
-    return dict(terms_deg={k: round(v, 3) for k, v in terms.items()}, linear_deg=round(lin, 3), rss_deg=round(rss, 3), held_margin_deg=[0.74, 3.3],
-                spare_linear_deg=[round(0.74 - lin, 3), round(3.3 - lin, 3)],
-                verdict="the worst-case linear stack fits inside the 0.74 deg held margin at J3MIN" if lin < 0.74 else "TIGHT",
-                note="nominal stop at the model's window edge; the stop may engage up to the linear stack early or late: early never reaches the held "
-                     "set's taken q3' (-111.16 vs -111.90 + %.2f); late lets through poses the verifier counted lost (they bind on hub 2 / K-housing metal)" % lin)
+    """the stop-angle stack (deg at r 7.5, 0.00764 deg per um) vs the window that keeps the verified numbers - the J3 red team's table
+    (docs/research/conecut_mechanism_redteam.md section 4), restated: held low side must take pose 393 at -111.159 and must stop
+    pose 392 at -112.488 (margin 0.74 in / 0.585 out of the nominal -111.904); held high side 2.99 in / 1.13 out"""
+    um = 0.00764
+    rnd = dict(dowel_hole_true_position_10um=10 * um, groove_end_centre_true_position_10um=10 * um, pin_a_bore_member3_datum=0.012, link2_J2_J3_bores=0.019)
+    bias = dict(groove_width_2p10_plus0p02=[0.0, 10 * um], dowel_m6_radius=[-4 * um, -1 * um])
+    rss = math.sqrt(sum(v * v for v in rnd.values())); lin_in = sum(rnd.values()) + 4 * um; lin_out = sum(rnd.values()) + 10 * um
+    return dict(drawing="true position 0.02 (+-0.01 tangential) on the dowel hole and both groove end-arc centres, relative to the J3 bore and each part's "
+                        "angular datum; groove walls concentric to the J3 bore within 0.02",
+                random_deg={k: round(v, 3) for k, v in rnd.items()}, bias_deg=bias, rss_deg=round(rss, 3), worst_in_deg=round(lin_in, 3), worst_out_deg=round(lin_out, 3),
+                at_pm0p02_worst_deg=0.41, at_iso2768f_worst_deg=0.87, margin_held_low_deg=[0.74, 0.585], margin_held_high_deg=[2.99, 1.13],
+                acceptance="-112.40 <= J3MIN <= -111.25 and 119.85 <= J3MAX <= 123.78, read on the J3 encoder at assembly",
+                verdict=("fits: worst %.2f in / %.2f out inside the 0.74 / 0.585 held margins at +-0.01; +-0.02 (0.41) still fits; ISO 2768-f (0.87) fails"
+                         % (lin_in, lin_out)),
+                source=REDTEAM + " section 4 (stack) / verdict 3 (acceptance bands)")
 
 
 def j3_dowel_calc():
@@ -230,9 +252,11 @@ def j3_dowel_calc():
         lever = 0.15 + J3_DTOP / 2; sb = F * lever / Z; tau = F / A; bear = F / (d * J3_DTOP)
         out[f"{T:g}Nm"] = dict(F_N=round(F, 0), shear_MPa=round(tau, 0), bending_MPa=round(sb, 0), bearing_on_Ti_groove_MPa=round(bear, 0),
                                SF_shear_vs_0p58x1900=round(0.58 * 1900 / tau, 2), SF_bending_vs_1900=round(1900 / sb, 2), SF_bearing_vs_Ti_880=round(880 / bear, 2),
-                               MR117_pair_s0=round(280.0 / (F / 2), 2))
-    out["note"] = ("440C 58 HRC yield ~1900 MPa; bearing on the Ti-6Al-4V groove wall over the 0.8 mm engagement; the single-dowel force is carried radially "
-                   "by J3's MR117 pair (C0 ~0.28 kN each): s0 < 1 at these pushes - the same caveat as every gen-4..7 single-dowel stop (MIN.dowel_check)")
+                               J3_bearing1_s0=round(280.0 / (155.0 * T), 2))
+    out["note"] = ("440C 58 HRC yield ~1900 MPa (shear 0.58 x); bearing on the Ti-6Al-4V groove end over the 0.85 mm engagement (projected; the red team "
+                   "rates it on Fbry ~1.3 GPa: SF 1.66 at 10 N.m); the single-dowel force returns through J3's MR117 pair as a radial load, 155 N per N.m on "
+                   "bearing 1 (C0r ~280 N): s0 = 1 at 1.81 N.m about J3 - the stop's rating; the cuff (slips ~1.06 N.m) is the torque fuse "
+                   "(docs/research/conecut_mechanism_redteam.md section 1-2; the same caveat as every gen-4..7 single-dowel stop)")
     return out
 
 
@@ -359,13 +383,15 @@ def relabel_clips(M, dd):
     """clip frames held because of the J3 stop: why 'fold' -> 'j3stop' (make_clips knows only ok / kok); build.json clip reasons updated"""
     Cp = os.path.join(dd, "clips.json"); C = json.load(open(Cp)); Bp = os.path.join(dd, "build.json"); BJ = json.load(open(Bp)); tot = 0; per = {}
     for cl in C["clips"]:
+        prev = sum(1 for f in cl["frames"] if f["held"] and f.get("why") == "j3stop")
+        if prev: per[cl["name"]] = prev; tot += prev
         idx = [k for k, f in enumerate(cl["frames"]) if f["held"] and f.get("why") == "fold"]
         if not idx: continue
         want = np.array([cl["frames"][k]["want"] for k in idx], float); K = chain(M, want); n = 0
         for j, k in enumerate(idx):
             if K["j3stop"][j]: cl["frames"][k]["why"] = "j3stop"; n += 1
         if n:
-            per[cl["name"]] = n; tot += n; r = BJ.get("clips", {}).get(cl["name"], {}).get("reasons")
+            per[cl["name"]] = per.get(cl["name"], 0) + n; tot += n; r = BJ.get("clips", {}).get(cl["name"], {}).get("reasons")
             if r is not None: r["fold"] = r.get("fold", 0) - n; r["j3stop"] = n; r.pop("fold") if r["fold"] == 0 else None
     json.dump(C, open(Cp, "w"), separators=(",", ":"))
     BJ["j3stop_clip_frames"] = dict(total=tot, per_clip=per); json.dump(BJ, open(Bp, "w"), indent=1, default=float)
@@ -427,6 +453,41 @@ SL.chain = MIN.chain = BASE.chain = chain
 SL.build_parts, SL.set_adjacent, SL.check_frames = build_parts, set_adjacent, check_frames
 
 
+def patch_j3(dd):
+    """rewrite ONLY the J3 stop dowel in an existing build to the red team's spec (exo.glb geometry + name, parts_full.json, build.json
+    stops.J3 incl. the sweep re-run on the glb meshes); every other part is untouched (the gen-8 build ran with the claim's first dowel
+    F+0..F+3.95: 0.05 mm lower tip, 0.10 mm longer at the skin end - inside the plate)"""
+    M, _ = fit(); BJ = json.load(open(os.path.join(dd, "build.json"))); st = BJ["stack"]["stops"]["J3"] if "stack" in BJ else BJ["stops"]["J3"]
+    u3, H3, e, f, R3 = j3_frame(M); th = math.radians(st["dowel_home_angle_deg"]); pd = H3 + J3_RS * (math.cos(th) * e + math.sin(th) * f)
+    dw, dname = j3_dowel(pd, u3)
+    sc = trimesh.load(os.path.join(dd, "exo.glb")); old = [g for g in sc.geometry if g.split("|")[1].startswith("J3 stop dowel")]
+    assert len(old) == 1, old
+    k = old[0].split("|")[2]; new = f"l3|{dname}|{k}"
+    node = next(n for n in sc.graph.nodes_geometry if sc.graph[n][1] == old[0]); T_ = sc.graph[node][0]
+    assert np.allclose(T_, np.eye(4)), T_
+    sc.delete_geometry(old[0]); sc.add_geometry(dw, node_name=new, geom_name=new); sc.export(os.path.join(dd, "exo.glb"))
+    PF = json.load(open(os.path.join(dd, "parts_full.json")))
+    for p in PF["parts"]:
+        if p["name"].startswith("J3 stop dowel"):
+            mm = dw.copy(); mm.merge_vertices(); vol = abs(mm.volume)
+            p.update(name=dname, vol_cm3=round(vol / 1000, 3), mass_g=round(vol / 1000 * BASE.STEEL, 2), valid=bool(mm.is_watertight and mm.is_volume),
+                     pieces=int(len(mm.split(only_watertight=False))), faces=len(dw.faces))
+    json.dump(PF, open(os.path.join(dd, "parts_full.json"), "w"), indent=1)
+    sc2 = trimesh.load(os.path.join(dd, "exo.glb")); parts = []
+    for g in sc2.geometry:
+        gp, nm = g.split("|")[:2]
+        if nm.startswith(("J3 stop dowel", "J3 upper boss", "link 2 strap")): parts.append((gp, {"l2": 2, "l3": 3}[gp], nm, sc2.geometry[g], "ti"))
+    st.update(dowel_z_mm=[J3_DBOT, UP + J3_DTOP], dowel_into_groove_mm=J3_DTOP, groove_floor_clear_mm=round(J3_GD - J3_DTOP, 3),
+              dowel_part=dname, sweep=j3_sweep(M, parts, st), tolerance=j3_tolerance(), dowel_calc=j3_dowel_calc(),
+              patched="dowel rewritten to the red team's spec by build_conecut_l1.py --patch-j3 (glb node, parts_full.json, this block)")
+    for key in ("stack", None):
+        tgt = BJ[key]["stops"] if key else BJ.get("stops")
+        if tgt is not None: tgt["J3"] = st
+    json.dump(BJ, open(os.path.join(dd, "build.json"), "w"), indent=1, default=float); _J3.update(st)
+    print(f"patched J3 dowel -> {dname}; sweep {json.dumps(st['sweep'], default=float)[:600]}", flush=True)
+    return M
+
+
 def main():
     out = "l1_conecut-knee"
     if "--out" in sys.argv: out = sys.argv[sys.argv.index("--out") + 1]
@@ -434,6 +495,8 @@ def main():
     dd = os.path.join(BASE.FULL, "designs", out)
     if "--post-only" in sys.argv:
         post(dd); return
+    if "--patch-j3" in sys.argv:
+        M = patch_j3(dd); post(dd, M); return
     t0 = time.time()
     SL.main()
     post(dd)
