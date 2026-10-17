@@ -200,7 +200,7 @@
   {
    "check": "judge_change",
    "level": "ok",
-   "reason": "no bench / judge / metric file changed in the 1 commits that touched the row"
+   "reason": "no bench / judge / metric file changed in the 3 commits that touched the row"
   },
   {
    "check": "rules",
@@ -213,7 +213,7 @@
   "held": false
  },
  "verifier_files": [],
- "git": "4962afd",
+ "git": "e6b3131",
  "tool_version": "2026-10-17.2",
- "t": "2026-10-17T10:26:00Z"
+ "t": "2026-10-17T11:04:59Z"
 }
