@@ -2933,7 +2933,7 @@
   "name": "Pin-knee 3R on a scapular relay: the verified pin-knee chain (in-band 0.895, gap = J2 fold) with its J1 seat carried by a spring-centred O20 J0 on bony cap / infraspinous skin",
   "family": "redundant 4R with a scapular spare on a verified 3-active host (skin-normal pin-knee chain)",
   "lens": "round101:scapular spare relay (Keemink 2018 redundant 4R) on a verified host; 4 DOF, the user prefers 3",
-  "status": "ideated",
+  "status": "dead",
   "t_ideated": "2026-10-17T17:29:15Z",
   "source": "round 101 (J1) judge (docs/concepts/round101_ideation.md)",
   "merged_from": [
