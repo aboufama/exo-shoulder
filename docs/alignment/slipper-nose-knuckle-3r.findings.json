@@ -1,0 +1,38 @@
+[
+ {
+  "key": "M5",
+  "level": "watch",
+  "reason": "A spring that may not hold, now against sliding friction (not measured). One clock spring (0.08 N.m + 0.03 N.m/rad, the lead's) force-closes the lobe follower and, here, a SLIDING nose instead of the lead's rolling MR63ZZ. On the return stroke the spring drives the crank through the horn at a crank pressure angle of 29.5 deg kinematic + 4.97 deg friction = 34.47 deg (the lead's crank side: 8.2 deg, rolling). The score assumes K on its cam law at all 167 bench / 400 held-out taken poses where K moves. No R17 / dynamics / preload number is on file for this design; the only evidence is the claim's hand calculation (friction drag ~0.01-0.02 N.m against the 0.08 N.m preload). Friction: mu 0.087 is assumed (DLC-coated flank + grease, wear test pending); the number holds to mu 0.12 (verified frozen 18.49, horn 42.64 deg effective <= 43) and the claim's own fast table loses 3 poses at mu 0.15 (14.90). Not a gaming of the score; an unmeasured risk to 'K genuinely tracks the arm unpowered' (MVP1).",
+  "evidence": "docs/concepts/rows/slipper-nose-knuckle-3r.json note (loads, mu table); docs/concepts/verify/slipper-nose-knuckle-3r_v_bench_frozen.json extra.pa_rule (pa_eff_crank_max 34.47, pa_eff_horn_max 40.77); _v_bench_mu12.json (mu 0.12: 18.49, horn 42.64); docs/alignment/remeasure/slipper-nose-knuckle-3r_probe_bench.json extras.sc_info (pa_crank_max_taken 29.5, friction_deg 4.97); docs/concepts/slipper-nose-knuckle-3r.md 'The flank re-fit takes back everything friction cost' (mu 0.15: 14.90, 3 poses lost); lead crank PA 8.2 deg (same doc)."
+ },
+ {
+  "key": "G4",
+  "level": "watch",
+  "reason": "Family-wide near-singular sub-chain with K at rest, identical pose by pose to the lead (not bought by this design). With K at rest on stop A (204 of 371 taken bench poses) the J1-K-J3 sub-chain margin m_sub is under 5 deg on 106 poses, under 1 deg on 50, minimum 0.000 deg (pose 227: plane 15, elev 75, axial 15). The family reading the claim reports (min th margin 5.181 bench / 5.006 held) reads m_plain there, not m_sub (the dipped-law skeptic's B1 point, awaiting the user's ruling). Max |m_sub(slipper) - m_sub(lead)| over the 371 shared poses = 0.000 deg. Knee: 151.92 deg on the bench (153.16 held out) against its 154.78 window, as the lead. The slipper IMPROVES the drive's own transmission margin: horn 35.8 + 4.97 = 40.77 deg effective against the 43 cap, stroke taken 45.62 of 49.75 deg (the lead sat at 43.0 = its cap, 0.08 deg from it).",
+  "evidence": "docs/alignment/remeasure/slipper-nose-knuckle-3r_msub_rest_bench.json and roller-longdyad-knuckle-3r_msub_rest_bench.json (new probe tools/alignment_msub_rest_probe_model.py, models unchanged, Bench(110,360) exact, frozen = 18.49 / 18.67); docs/alignment/remeasure/slipper-nose-knuckle-3r_probe_bench.json extras (knee_ang_taken [86.21, 151.92], window [25.22, 154.78]); docs/alignment/dipped-law-groove-knuckle-3r.md 'Measured context for proposal B1'."
+ },
+ {
+  "key": "T5",
+  "level": "watch",
+  "reason": "Depth-blind contact, carried from the lead family. The slipper keeps the lead's 2 bench contact poses, both overhead at elev 165: 9.01 mm and 5.74 mm into the arm (sum 14.75 mm); held out 10 contacts, sum 46.12 mm, deepest 9.05 mm (plane 30, elev 165, axial -45), 7 deeper than 3 mm. Against the lead it is SHALLOWER (16.46 / 49.88 mm). But it ranks above sidecar-longdyad-knuckle-3r (18.49 vs 18.91), which presses 6.23 mm summed over 4 bench poses (deepest 4.61): 2.37x and +8.52 mm, beyond the tool's own T5 margin (2x and 5 mm); held out 46.12 vs 35.66 mm (1.29x, inside the margin). Mixed for the wearer (sidecar-longdyad is worse plain, at 2 mm 34.03 vs 33.02 and at 3 mm), so watch, not gamed.",
+  "evidence": "docs/alignment/remeasure/slipper-nose-knuckle-3r_vs_roller-longdyad-knuckle-3r_paired_claim.json (contact_depth); docs/alignment/remeasure/sidecar-longdyad-knuckle-3r_bench_perpose_claim.json / _held_perpose_claim.json; docs/alignment/remeasure/slipper-nose-knuckle-3r_probe_bench.json probe.contact_poses."
+ },
+ {
+  "key": "NEW-ws-inband",
+  "level": "watch",
+  "reason": "Unscored raised-arm standoff, carried from the lead family. The gap reads in-band on clip frames only. On the taken WORKSPACE poses at elevation 90-140 (38 of 85 taken) the slipper holds 0.800 of its metal in 2-14 mm and 0.199 above 14 mm (p95 20.15 mm, max 30.8 mm): the lead 0.798 / 0.201, sidecar-longdyad 0.841 / 0.157. Held out 0.822 (lead 0.819). It ranks above sidecar-longdyad on the score while its raised-arm metal stands further off the skin; it has fewer poses under 3 mm (100 vs 178 bench), so the wearer comparison is mixed.",
+  "evidence": "docs/alignment/remeasure/slipper-nose-knuckle-3r_probe_bench.json probe.ws_elev90_140 and _probe_held.json; docs/alignment/live_audit_2026-10-16/probe_roller-longdyad-knuckle-3r.json, probe_sidecar-longdyad-knuckle-3r.json."
+ },
+ {
+  "key": "NEW-stale-complexity-ruler",
+  "level": "watch",
+  "reason": "The complexity shown is computed on a record written to a different convention from the lead's, and it UNDERSTATES this design's simplification. The row's 22.25 charges the cuff knee's closure loop (mechanism.closed_loops 3, cuff_knee has no closed_loops field); the lead's record lists that loop under cuff_knee.closed_loops 1, which simplicity v2.1 (ec77d25, 04:55 UTC, before this screen at 05:34) frees: the lead reads 20.25. With the knee loop recorded the lead's way the slipper scores 18.25 (tools/simplicity.py --score, v2.2): -2.0 against the lead, as the claim says, but the dashboard shows 22.25 vs 20.25 (the slipper 2.0 MORE complex), and the doc compares with a stale 'lead 24.25'. Reporting hygiene against the design, not for it.",
+  "evidence": "docs/concepts/rows/slipper-nose-knuckle-3r.json mechanism (closed_loops 3, cuff_knee without closed_loops); docs/concepts/rows/roller-longdyad-knuckle-3r.json mechanism.cuff_knee.closed_loops 1, complexity 20.25; python3 tools/simplicity.py --score '<slipper record with cuff_knee.closed_loops 1>' -> 18.25; docs/dashboard/data/morphs.json (22.25 vs 20.25)."
+ },
+ {
+  "key": "NEW-filler-metal",
+  "level": "watch",
+  "reason": "Ruling the design doc hands to the auditor (NOT in the claimed 18.49, which has no wedge). The kneeless control's hub-3 wedge gains 1.06 points (21.18 flat -> 20.12 wedged at mu 0.05; 21.76 -> 20.70 at 0.087) purely in the in-band term: hub 3 in band 0.505 -> 0.799 because 4.73 g of metal is added under the hub (mean 3.4 mm, max 7.61 mm deeper), while hub 3's crown, the bump the wearer feels, stays at a median 21.9 mm (min 13.0, max 37.3) above the skin in both columns and the lowest underside goes 1.9 -> 1.8 mm. The exo is not lower, it is heavier and its metal sits closer to the arm: the score's sample-share in-band rewards filling under an unmoved crown. The wedged columns must not be claimed as an improvement.",
+  "evidence": "docs/concepts/rows/slipper-nose-knuckle-3r.json claims.kl_mu050_flat / kl_mu050_w25 / kl_mu087_flat / kl_mu087_w25 (frozen gap, hub3, crown, underside_min_mm, wedge.mass_g); docs/concepts/slipper-nose-knuckle-3r.md 'The wedge, both columns'."
+ }
+]

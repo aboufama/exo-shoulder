@@ -5,18 +5,18 @@
  "complexity": 22.25,
  "verdict": "watch",
  "reasons": [
-  "dominance: beats roller-longdyad-knuckle-3r by 0.31 plain but loses by 1.56 at 2 mm: part of the gain is metal moved into the 1-2 mm shell (A1 gate retired 2026-10-17)",
+  "idle: knee: asserted rigid by design (model asserts the knee angle constant (knee_moved -> dishonest)) but moves 65.71 deg (re-measured K.qa span) > 0.5; K moves: smallest recorded span 45.61 deg (re-measured dK span); crank moves: smallest recorded span 19.3 deg (docs/concepts/verify/slipper-nose-knuckle-3r_v_bench_mu12.json:sidecar.phi_max_taken)",
   "reporting: verdict text still reads as a self-measured screen; dashboard sweep best 13.0 (score 95.27) sits 5.49 below the verified number"
  ],
  "checks": [
   {
    "check": "held_out",
    "level": "ok",
-   "reason": "held out 23.45 vs bench 18.49 (+4.96; docs/concepts/verify/slipper-nose-knuckle-3r_v_held_frozen.json)",
+   "reason": "held out 23.45 vs bench 18.49 (+4.96; re-measured (this audit))",
    "held_gap": 23.45,
    "v_gap": 18.49,
    "drop": 4.96,
-   "source": "docs/concepts/verify/slipper-nose-knuckle-3r_v_held_frozen.json"
+   "source": "re-measured (this audit)"
   },
   {
    "check": "fast_frozen",
@@ -29,32 +29,109 @@
   {
    "check": "near_touch",
    "level": "ok",
-   "reason": "plain 18.36, <1 mm 19.99, <2 mm 34.66, 16.3 points live in the 1-2 mm shell (docs/concepts/verify/slipper-nose-knuckle-3r_v_roller_at_A.json)",
-   "shell2": 16.3,
-   "plain": 18.36,
-   "n1": 19.99,
-   "n2": 34.66,
-   "n3": null,
-   "band3": null,
-   "hist": null,
-   "minmm": 0.07,
-   "source": "docs/concepts/verify/slipper-nose-knuckle-3r_v_roller_at_A.json"
+   "reason": "plain 18.49, <1 mm 20.12, <2 mm 33.02, <3 mm 83.15, band read 3-14 mm 18.64, 14.53 points live in the 1-2 mm shell (re-measured (this audit))",
+   "shell2": 14.53,
+   "plain": 18.49,
+   "n1": 20.12,
+   "n2": 33.02,
+   "n3": 83.15,
+   "band3": 18.64,
+   "hist": {
+    "0-1": 0.0,
+    "1-2": 0.0001,
+    "2-3": 0.0015,
+    "3-4": 0.0091,
+    "4-6": 0.0899,
+    "6-10": 0.4157,
+    "10-14": 0.3793,
+    ">14": 0.1044
+   },
+   "minmm": 0.072,
+   "source": "re-measured (this audit)"
   },
   {
    "check": "contact_depth",
    "level": "ok",
-   "reason": "no per-pose contact depths on file that reproduce the claim (tools/alignment_paired.py dump slipper-nose-knuckle-3r bench|held, or tools/alignment_wear_probe*.py); not measured",
+   "reason": "the score counts contact poses, not depth (report only, score unchanged): v_gap 18.49: bench 2 contact poses, sum 14.75 mm, deepest 9.01 mm at ['ws', 15.0, 165.0, -60.0], 2 deeper than 3 mm vs roller-longdyad-knuckle-3r 16.46 mm over 2 (-1.71 mm, x0.9); held 10 contact poses, sum 46.12 mm, deepest 9.05 mm at ['ws', 30.0, 165.0, -45.0], 7 deeper than 3 mm vs roller-longdyad-knuckle-3r 49.88 mm over 10 (-3.76 mm, x0.92)",
    "depths": {
-    "v_gap 18.49": {}
-   }
+    "v_gap 18.49": {
+     "bench": {
+      "n": 2,
+      "sum_mm": 14.75,
+      "max_mm": 9.01,
+      "n_deeper3": 2,
+      "overhead140": 2,
+      "deepest": [
+       "ws",
+       15.0,
+       165.0,
+       -60.0
+      ],
+      "gap": 18.49,
+      "src": "docs/alignment/remeasure/slipper-nose-knuckle-3r_bench_perpose.json",
+      "cross_check": {
+       "files": 2,
+       "sums": [
+        14.74,
+        14.75
+       ],
+       "agree": true
+      }
+     },
+     "held": {
+      "n": 10,
+      "sum_mm": 46.12,
+      "max_mm": 9.05,
+      "n_deeper3": 7,
+      "overhead140": 6,
+      "deepest": [
+       "ws",
+       30.0,
+       165.0,
+       -45.0
+      ],
+      "gap": 23.45,
+      "src": "docs/alignment/remeasure/slipper-nose-knuckle-3r_held_perpose.json",
+      "cross_check": {
+       "files": 2,
+       "sums": [
+        46.12,
+        46.13
+       ],
+       "agree": true
+      }
+     }
+    }
+   },
+   "ref": "roller-longdyad-knuckle-3r",
+   "compare": [
+    {
+     "claim": "v_gap 18.49",
+     "wear": "bench",
+     "sum": 14.75,
+     "ref_sum": 16.46,
+     "excess": -1.71,
+     "ratio": 0.9,
+     "watch": false
+    },
+    {
+     "claim": "v_gap 18.49",
+     "wear": "held",
+     "sum": 46.12,
+     "ref_sum": 49.88,
+     "excess": -3.76,
+     "ratio": 0.92,
+     "watch": false
+    }
+   ]
   },
   {
    "check": "dominance",
-   "level": "watch",
-   "reason": "beats roller-longdyad-knuckle-3r by 0.31 plain but loses by 1.56 at 2 mm: part of the gain is metal moved into the 1-2 mm shell (A1 gate retired 2026-10-17)",
+   "level": "ok",
+   "reason": "vs roller-longdyad-knuckle-3r: plain +0.18, 2 mm +0.08",
    "ref": "roller-longdyad-knuckle-3r",
-   "gain_plain": 0.31,
-   "gain_2mm": -1.56
+   "gain_plain": 0.18,
+   "gain_2mm": 0.08
   },
   {
    "check": "continuity",
@@ -74,8 +151,8 @@
   },
   {
    "check": "idle",
-   "level": "ok",
-   "reason": "knee: rigid by design, not a joint (model asserts the knee angle constant (knee_moved -> dishonest)); no span on file; K moves: smallest recorded span 45.62 deg (docs/concepts/verify/slipper-nose-knuckle-3r_v_bench_mu12.json:extra.dK_taken_max_deg); crank moves: smallest recorded span 19.3 deg (docs/concepts/verify/slipper-nose-knuckle-3r_v_bench_mu12.json:sidecar.phi_max_taken)",
+   "level": "watch",
+   "reason": "knee: asserted rigid by design (model asserts the knee angle constant (knee_moved -> dishonest)) but moves 65.71 deg (re-measured K.qa span) > 0.5; K moves: smallest recorded span 45.61 deg (re-measured dK span); crank moves: smallest recorded span 19.3 deg (docs/concepts/verify/slipper-nose-knuckle-3r_v_bench_mu12.json:sidecar.phi_max_taken)",
    "spans": [
     [
      "docs/concepts/verify/slipper-nose-knuckle-3r_v_bench_mu12.json:fit_fast.extra.dK_taken_max_deg",
@@ -129,7 +206,7 @@
   {
    "check": "sampling",
    "level": "ok",
-   "reason": "sample-weighted in-band 0.897 vs part-weighted 0.924 (-2.75 points); thinly sampled parts: L1a 8 (docs/concepts/verify/slipper-nose-knuckle-3r_v_roller_at_A.json)",
+   "reason": "sample-weighted in-band 0.895 vs part-weighted 0.924 (-2.87 points); thinly sampled parts: L1a 8 (re-measured)",
    "parts": {
     "hub1": [
      0.999,
@@ -177,14 +254,14 @@
      129
     ],
     "roller": [
-     0.937,
-     9.7,
-     37
+     0.938,
+     10.0,
+     19
     ],
     "horn": [
-     0.958,
-     6.8,
-     29
+     0.956,
+     7.4,
+     23
     ],
     "L1a": [
      0.981,
@@ -227,8 +304,8 @@
   }
  ],
  "remeasured": {
-  "bench": false,
-  "held": false
+  "bench": true,
+  "held": true
  },
  "verifier_files": [
   "docs/concepts/verify/slipper-nose-knuckle-3r_v_roller_at_A.json",
@@ -239,7 +316,7 @@
   "docs/concepts/verify/slipper-nose-knuckle-3r_v_bench_edge.json",
   "docs/concepts/verify/slipper-nose-knuckle-3r_v_bench_frozen.json"
  ],
- "git": "725a696",
+ "git": "0d91d4c",
  "tool_version": "2026-10-17.2",
- "t": "2026-10-17T06:51:15Z"
+ "t": "2026-10-17T07:05:59Z"
 }
