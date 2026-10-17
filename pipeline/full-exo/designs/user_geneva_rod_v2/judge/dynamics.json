@@ -1,0 +1,582 @@
+{
+ "version": "dynamics-2026-10-16 (MVP1: unpowered; rolling bearings main, plain bearings comparison; general N-member chain for offset / split / knee designs; slaved coordinates from build.json)",
+ "design": "user_geneva_rod_v2",
+ "n_joints": 6,
+ "seconds": 3,
+ "jobs": 1,
+ "model": {
+  "frame": "thorax rig frame (x anterior, y up, z right, origin GH); gravity -y",
+  "timestep_s": 0.0002,
+  "integrator": "implicitfast, Newton, noslip 20 (exact Coulomb joint friction)",
+  "scapula": "ball joint at GH, prescribed: body_pose.scap law with the 20 deg kink rounded over 1.5 deg (softplus)",
+  "arm": "humerus follows the clip's followed pose p (PCHIP through the clip's knots), cuff on its axis",
+  "cuff_mm": 200.0,
+  "tissue": {
+   "k_perp": 3500.0,
+   "k_ax": 2100.0,
+   "kr_perp": 11.459155902616464,
+   "kr_ax": 1.7188733853924696,
+   "c_t": 20.0,
+   "cr_perp": 0.1,
+   "cr_ax": 0.02,
+   "source": "Schiebl et al. 2025, Sensors 25(15):4605 (upper-arm interface, median stiffness); damping assumed"
+  },
+  "link_mass_g": {
+   "l1a": 49.45,
+   "l1b": 71.56,
+   "l2": 28.34,
+   "l3": 12.71,
+   "l4": 3.36
+  },
+  "link_volume_cm3": {
+   "l1a": 11.236,
+   "l1b": 16.692,
+   "l2": 6.396,
+   "l3": 2.882,
+   "l4": 0.78
+  },
+  "link_com_mm": {
+   "l1a": [
+    -13.4,
+    55.6,
+    9.6
+   ],
+   "l1b": [
+    -28.5,
+    53.7,
+    18.4
+   ],
+   "l2": [
+    -22.1,
+    2.6,
+    61.9
+   ],
+   "l3": [
+    -11.1,
+    -60.3,
+    72.9
+   ],
+   "l4": [
+    -20.6,
+    -94.5,
+    69.8
+   ]
+  },
+  "link_inertia_about_gh_kgm2": {
+   "l1a": 0.0001777,
+   "l1b": 0.0003128,
+   "l2": 0.0001721,
+   "l3": 0.0001237,
+   "l4": 4.83e-05
+  },
+  "arm_parts_mass_g": 117.2,
+  "forearm_parts_mass_g": 362.3,
+  "densities_g_cm3": {
+   "ti": 4.43,
+   "iglidur": 1.46,
+   "magnet": 7.5,
+   "pcb": 1.85,
+   "ic": 2.0,
+   "steel": 7.9,
+   "alsi10mg": 2.67,
+   "7075": 2.81,
+   "user": 2.8
+  },
+  "cases_run": [
+   "passive"
+  ],
+  "mvp1": "unpowered (user, 2026-10-15): every joint passive, no motor / gear / cable; motor and servo cases exist only as --cases options",
+  "cuff_pressure": {
+   "area_cm2": 68.0,
+   "strap_preload_kPa": 6.5,
+   "sustained_budget_kPa": 14.0,
+   "rule": "mean pressure = cuff force / skin-side shell area; the budget left for the exo is COMFORT - STRAP (edge peaks ~2x the mean)",
+   "arm_parts_weight_N": 1.15
+  },
+  "contact": {
+   "mu": 0.2,
+   "primitives": {
+    "base": 0,
+    "l1a": 0,
+    "l1b": 0,
+    "l2": 0,
+    "l3": 0,
+    "l4": 0,
+    "cuff": 0
+   },
+   "hub_r_mm": 10.0,
+   "margin_mm": 0.0,
+   "near_miss_band_mm": 2.0,
+   "rule": "every member pair incl. adjacent ones; at a shared joint the bearing (hub on hub, hub on the other member's hub-side ribbon root) is the hinge, not a contact"
+  }
+ },
+ "load_friction": {
+  "model": "tau_f,i = tau0 + mu_eff |M_perp,i| each step (red team G6, pipeline/redteam/rt_wedge.py); M_perp from cfrc_int one step behind",
+  "rolling": {
+   "mu_eff": [
+    0.002,
+    0.005
+   ],
+   "tau0_Nm": 0.001,
+   "tilt_ref": "hub",
+   "speeds": [
+    1.0,
+    2.0
+   ],
+   "basis": "pair of shielded deep-groove / needle bearings at the hub, bore d ~10 mm, spacing L ~5 mm: the tilt couple is a force couple M/L, SKF simplified friction M_f = 0.5 mu P d per bearing (mu 0.0015 deep groove, 0.0025 needle) -> mu_eff = mu d / L = 0.003-0.005; tau0 = grease drag of 2 shielded bearings"
+  },
+  "plain": {
+   "mu_eff": [
+    0.06,
+    0.15,
+    0.25,
+    0.37
+   ],
+   "tau0_Nm": 0.05,
+   "tilt_refs": [
+    "hub",
+    "gh"
+   ],
+   "speed": 1.0
+  },
+  "cases": [
+   "passive"
+  ],
+  "tilt_ref_note": "hub: moment about the hub stack's mid-height on the axis (the pin carries the force); gh: about the GH centre, rt_wedge.py's model without R x F",
+  "bearing_r_mm": {
+   "1": 52.5,
+   "2": 69.5,
+   "3": 66.9,
+   "4": 89.4,
+   "5": 126.0,
+   "6": 125.7
+  }
+ },
+ "chain_vs_clip_G_max_deg": {
+  "l1a": 0.0001,
+  "l1b": 0.0001,
+  "l2": 0.0001,
+  "l3": 0.0001,
+  "l4": 0.0001,
+  "cuff": 0.0,
+  "l1a_mm": 0.0,
+  "l1b_mm": 0.0,
+  "l2_mm": 0.0,
+  "l3_mm": 0.0001,
+  "l4_mm": 0.0002,
+  "cuff_mm": 0.0001
+ },
+ "thresholds": {
+  "free_moment_gh_peak_Nm": 1.0,
+  "free_moment_gh_rms_Nm": 0.5,
+  "free_force_peak_N": 5.0,
+  "free_twist_peak_deg": 5.0,
+  "free_spare_drift_deg": 5.0,
+  "iso_ts_15066_upper_arm_N": 150.0,
+  "lock_moment_gh_Nm": 10.0
+ },
+ "nominal": "passive|mu0.005|t0.001|s1|hub",
+ "cases": {},
+ "errors": [
+  "passive|f0.05|s1 Raise overhead: ModuleNotFoundError: No module named 'mujoco'",
+  "passive|f0.05|s1 Drink from a cup: ModuleNotFoundError: No module named 'mujoco'",
+  "passive|f0.05|s1 Comb hair: ModuleNotFoundError: No module named 'mujoco'",
+  "passive|f0.05|s1 Reach a high shelf: ModuleNotFoundError: No module named 'mujoco'",
+  "passive|f0.05|s1 Wash opposite shoulder: ModuleNotFoundError: No module named 'mujoco'",
+  "passive|f0.05|s1 Reach back pocket: ModuleNotFoundError: No module named 'mujoco'",
+  "passive|f0.05|s1 Wave: ModuleNotFoundError: No module named 'mujoco'",
+  "passive|f0.05|s1 Walking arm swing: ModuleNotFoundError: No module named 'mujoco'",
+  "passive|f0.05|s2 Raise overhead: ModuleNotFoundError: No module named 'mujoco'",
+  "passive|f0.05|s2 Drink from a cup: ModuleNotFoundError: No module named 'mujoco'",
+  "passive|f0.05|s2 Comb hair: ModuleNotFoundError: No module named 'mujoco'",
+  "passive|f0.05|s2 Reach a high shelf: ModuleNotFoundError: No module named 'mujoco'",
+  "passive|f0.05|s2 Wash opposite shoulder: ModuleNotFoundError: No module named 'mujoco'",
+  "passive|f0.05|s2 Reach back pocket: ModuleNotFoundError: No module named 'mujoco'",
+  "passive|f0.05|s2 Wave: ModuleNotFoundError: No module named 'mujoco'",
+  "passive|f0.05|s2 Walking arm swing: ModuleNotFoundError: No module named 'mujoco'",
+  "passive|f0.2|s1 Raise overhead: ModuleNotFoundError: No module named 'mujoco'",
+  "passive|f0.2|s1 Drink from a cup: ModuleNotFoundError: No module named 'mujoco'",
+  "passive|f0.2|s1 Comb hair: ModuleNotFoundError: No module named 'mujoco'",
+  "passive|f0.2|s1 Reach a high shelf: ModuleNotFoundError: No module named 'mujoco'",
+  "passive|f0.2|s1 Wash opposite shoulder: ModuleNotFoundError: No module named 'mujoco'",
+  "passive|f0.2|s1 Reach back pocket: ModuleNotFoundError: No module named 'mujoco'",
+  "passive|f0.2|s1 Wave: ModuleNotFoundError: No module named 'mujoco'",
+  "passive|f0.2|s1 Walking arm swing: ModuleNotFoundError: No module named 'mujoco'",
+  "passive|f0.2|s2 Raise overhead: ModuleNotFoundError: No module named 'mujoco'",
+  "passive|f0.2|s2 Drink from a cup: ModuleNotFoundError: No module named 'mujoco'",
+  "passive|f0.2|s2 Comb hair: ModuleNotFoundError: No module named 'mujoco'",
+  "passive|f0.2|s2 Reach a high shelf: ModuleNotFoundError: No module named 'mujoco'",
+  "passive|f0.2|s2 Wash opposite shoulder: ModuleNotFoundError: No module named 'mujoco'",
+  "passive|f0.2|s2 Reach back pocket: ModuleNotFoundError: No module named 'mujoco'",
+  "passive|f0.2|s2 Wave: ModuleNotFoundError: No module named 'mujoco'",
+  "passive|f0.2|s2 Walking arm swing: ModuleNotFoundError: No module named 'mujoco'",
+  "passive|f0.5|s1 Raise overhead: ModuleNotFoundError: No module named 'mujoco'",
+  "passive|f0.5|s1 Drink from a cup: ModuleNotFoundError: No module named 'mujoco'",
+  "passive|f0.5|s1 Comb hair: ModuleNotFoundError: No module named 'mujoco'",
+  "passive|f0.5|s1 Reach a high shelf: ModuleNotFoundError: No module named 'mujoco'",
+  "passive|f0.5|s1 Wash opposite shoulder: ModuleNotFoundError: No module named 'mujoco'",
+  "passive|f0.5|s1 Reach back pocket: ModuleNotFoundError: No module named 'mujoco'",
+  "passive|f0.5|s1 Wave: ModuleNotFoundError: No module named 'mujoco'",
+  "passive|f0.5|s1 Walking arm swing: ModuleNotFoundError: No module named 'mujoco'",
+  "passive|f0.5|s2 Raise overhead: ModuleNotFoundError: No module named 'mujoco'",
+  "passive|f0.5|s2 Drink from a cup: ModuleNotFoundError: No module named 'mujoco'",
+  "passive|f0.5|s2 Comb hair: ModuleNotFoundError: No module named 'mujoco'",
+  "passive|f0.5|s2 Reach a high shelf: ModuleNotFoundError: No module named 'mujoco'",
+  "passive|f0.5|s2 Wash opposite shoulder: ModuleNotFoundError: No module named 'mujoco'",
+  "passive|f0.5|s2 Reach back pocket: ModuleNotFoundError: No module named 'mujoco'",
+  "passive|f0.5|s2 Wave: ModuleNotFoundError: No module named 'mujoco'",
+  "passive|f0.5|s2 Walking arm swing: ModuleNotFoundError: No module named 'mujoco'",
+  "passive|mu0.002|t0.001|s1|hub Raise overhead: ModuleNotFoundError: No module named 'mujoco'",
+  "passive|mu0.002|t0.001|s1|hub Drink from a cup: ModuleNotFoundError: No module named 'mujoco'",
+  "passive|mu0.002|t0.001|s1|hub Comb hair: ModuleNotFoundError: No module named 'mujoco'",
+  "passive|mu0.002|t0.001|s1|hub Reach a high shelf: ModuleNotFoundError: No module named 'mujoco'",
+  "passive|mu0.002|t0.001|s1|hub Wash opposite shoulder: ModuleNotFoundError: No module named 'mujoco'",
+  "passive|mu0.002|t0.001|s1|hub Reach back pocket: ModuleNotFoundError: No module named 'mujoco'",
+  "passive|mu0.002|t0.001|s1|hub Wave: ModuleNotFoundError: No module named 'mujoco'",
+  "passive|mu0.002|t0.001|s1|hub Walking arm swing: ModuleNotFoundError: No module named 'mujoco'",
+  "passive|mu0.002|t0.001|s2|hub Raise overhead: ModuleNotFoundError: No module named 'mujoco'",
+  "passive|mu0.002|t0.001|s2|hub Drink from a cup: ModuleNotFoundError: No module named 'mujoco'",
+  "passive|mu0.002|t0.001|s2|hub Comb hair: ModuleNotFoundError: No module named 'mujoco'",
+  "passive|mu0.002|t0.001|s2|hub Reach a high shelf: ModuleNotFoundError: No module named 'mujoco'",
+  "passive|mu0.002|t0.001|s2|hub Wash opposite shoulder: ModuleNotFoundError: No module named 'mujoco'",
+  "passive|mu0.002|t0.001|s2|hub Reach back pocket: ModuleNotFoundError: No module named 'mujoco'",
+  "passive|mu0.002|t0.001|s2|hub Wave: ModuleNotFoundError: No module named 'mujoco'",
+  "passive|mu0.002|t0.001|s2|hub Walking arm swing: ModuleNotFoundError: No module named 'mujoco'",
+  "passive|mu0.005|t0.001|s1|hub Raise overhead: ModuleNotFoundError: No module named 'mujoco'",
+  "passive|mu0.005|t0.001|s1|hub Drink from a cup: ModuleNotFoundError: No module named 'mujoco'",
+  "passive|mu0.005|t0.001|s1|hub Comb hair: ModuleNotFoundError: No module named 'mujoco'",
+  "passive|mu0.005|t0.001|s1|hub Reach a high shelf: ModuleNotFoundError: No module named 'mujoco'",
+  "passive|mu0.005|t0.001|s1|hub Wash opposite shoulder: ModuleNotFoundError: No module named 'mujoco'",
+  "passive|mu0.005|t0.001|s1|hub Reach back pocket: ModuleNotFoundError: No module named 'mujoco'",
+  "passive|mu0.005|t0.001|s1|hub Wave: ModuleNotFoundError: No module named 'mujoco'",
+  "passive|mu0.005|t0.001|s1|hub Walking arm swing: ModuleNotFoundError: No module named 'mujoco'",
+  "passive|mu0.005|t0.001|s2|hub Raise overhead: ModuleNotFoundError: No module named 'mujoco'",
+  "passive|mu0.005|t0.001|s2|hub Drink from a cup: ModuleNotFoundError: No module named 'mujoco'",
+  "passive|mu0.005|t0.001|s2|hub Comb hair: ModuleNotFoundError: No module named 'mujoco'",
+  "passive|mu0.005|t0.001|s2|hub Reach a high shelf: ModuleNotFoundError: No module named 'mujoco'",
+  "passive|mu0.005|t0.001|s2|hub Wash opposite shoulder: ModuleNotFoundError: No module named 'mujoco'",
+  "passive|mu0.005|t0.001|s2|hub Reach back pocket: ModuleNotFoundError: No module named 'mujoco'",
+  "passive|mu0.005|t0.001|s2|hub Wave: ModuleNotFoundError: No module named 'mujoco'",
+  "passive|mu0.005|t0.001|s2|hub Walking arm swing: ModuleNotFoundError: No module named 'mujoco'",
+  "passive|mu0.06|t0.05|s1|hub Raise overhead: ModuleNotFoundError: No module named 'mujoco'",
+  "passive|mu0.06|t0.05|s1|hub Drink from a cup: ModuleNotFoundError: No module named 'mujoco'",
+  "passive|mu0.06|t0.05|s1|hub Comb hair: ModuleNotFoundError: No module named 'mujoco'",
+  "passive|mu0.06|t0.05|s1|hub Reach a high shelf: ModuleNotFoundError: No module named 'mujoco'",
+  "passive|mu0.06|t0.05|s1|hub Wash opposite shoulder: ModuleNotFoundError: No module named 'mujoco'",
+  "passive|mu0.06|t0.05|s1|hub Reach back pocket: ModuleNotFoundError: No module named 'mujoco'",
+  "passive|mu0.06|t0.05|s1|hub Wave: ModuleNotFoundError: No module named 'mujoco'",
+  "passive|mu0.06|t0.05|s1|hub Walking arm swing: ModuleNotFoundError: No module named 'mujoco'",
+  "passive|mu0.15|t0.05|s1|hub Raise overhead: ModuleNotFoundError: No module named 'mujoco'",
+  "passive|mu0.15|t0.05|s1|hub Drink from a cup: ModuleNotFoundError: No module named 'mujoco'",
+  "passive|mu0.15|t0.05|s1|hub Comb hair: ModuleNotFoundError: No module named 'mujoco'",
+  "passive|mu0.15|t0.05|s1|hub Reach a high shelf: ModuleNotFoundError: No module named 'mujoco'",
+  "passive|mu0.15|t0.05|s1|hub Wash opposite shoulder: ModuleNotFoundError: No module named 'mujoco'",
+  "passive|mu0.15|t0.05|s1|hub Reach back pocket: ModuleNotFoundError: No module named 'mujoco'",
+  "passive|mu0.15|t0.05|s1|hub Wave: ModuleNotFoundError: No module named 'mujoco'",
+  "passive|mu0.15|t0.05|s1|hub Walking arm swing: ModuleNotFoundError: No module named 'mujoco'",
+  "passive|mu0.25|t0.05|s1|hub Raise overhead: ModuleNotFoundError: No module named 'mujoco'",
+  "passive|mu0.25|t0.05|s1|hub Drink from a cup: ModuleNotFoundError: No module named 'mujoco'",
+  "passive|mu0.25|t0.05|s1|hub Comb hair: ModuleNotFoundError: No module named 'mujoco'",
+  "passive|mu0.25|t0.05|s1|hub Reach a high shelf: ModuleNotFoundError: No module named 'mujoco'",
+  "passive|mu0.25|t0.05|s1|hub Wash opposite shoulder: ModuleNotFoundError: No module named 'mujoco'",
+  "passive|mu0.25|t0.05|s1|hub Reach back pocket: ModuleNotFoundError: No module named 'mujoco'",
+  "passive|mu0.25|t0.05|s1|hub Wave: ModuleNotFoundError: No module named 'mujoco'",
+  "passive|mu0.25|t0.05|s1|hub Walking arm swing: ModuleNotFoundError: No module named 'mujoco'",
+  "passive|mu0.37|t0.05|s1|hub Raise overhead: ModuleNotFoundError: No module named 'mujoco'",
+  "passive|mu0.37|t0.05|s1|hub Drink from a cup: ModuleNotFoundError: No module named 'mujoco'",
+  "passive|mu0.37|t0.05|s1|hub Comb hair: ModuleNotFoundError: No module named 'mujoco'",
+  "passive|mu0.37|t0.05|s1|hub Reach a high shelf: ModuleNotFoundError: No module named 'mujoco'",
+  "passive|mu0.37|t0.05|s1|hub Wash opposite shoulder: ModuleNotFoundError: No module named 'mujoco'",
+  "passive|mu0.37|t0.05|s1|hub Reach back pocket: ModuleNotFoundError: No module named 'mujoco'",
+  "passive|mu0.37|t0.05|s1|hub Wave: ModuleNotFoundError: No module named 'mujoco'",
+  "passive|mu0.37|t0.05|s1|hub Walking arm swing: ModuleNotFoundError: No module named 'mujoco'",
+  "passive|mu0.06|t0.05|s1|gh Raise overhead: ModuleNotFoundError: No module named 'mujoco'",
+  "passive|mu0.06|t0.05|s1|gh Drink from a cup: ModuleNotFoundError: No module named 'mujoco'",
+  "passive|mu0.06|t0.05|s1|gh Comb hair: ModuleNotFoundError: No module named 'mujoco'",
+  "passive|mu0.06|t0.05|s1|gh Reach a high shelf: ModuleNotFoundError: No module named 'mujoco'",
+  "passive|mu0.06|t0.05|s1|gh Wash opposite shoulder: ModuleNotFoundError: No module named 'mujoco'",
+  "passive|mu0.06|t0.05|s1|gh Reach back pocket: ModuleNotFoundError: No module named 'mujoco'",
+  "passive|mu0.06|t0.05|s1|gh Wave: ModuleNotFoundError: No module named 'mujoco'",
+  "passive|mu0.06|t0.05|s1|gh Walking arm swing: ModuleNotFoundError: No module named 'mujoco'",
+  "passive|mu0.15|t0.05|s1|gh Raise overhead: ModuleNotFoundError: No module named 'mujoco'",
+  "passive|mu0.15|t0.05|s1|gh Drink from a cup: ModuleNotFoundError: No module named 'mujoco'",
+  "passive|mu0.15|t0.05|s1|gh Comb hair: ModuleNotFoundError: No module named 'mujoco'",
+  "passive|mu0.15|t0.05|s1|gh Reach a high shelf: ModuleNotFoundError: No module named 'mujoco'",
+  "passive|mu0.15|t0.05|s1|gh Wash opposite shoulder: ModuleNotFoundError: No module named 'mujoco'",
+  "passive|mu0.15|t0.05|s1|gh Reach back pocket: ModuleNotFoundError: No module named 'mujoco'",
+  "passive|mu0.15|t0.05|s1|gh Wave: ModuleNotFoundError: No module named 'mujoco'",
+  "passive|mu0.15|t0.05|s1|gh Walking arm swing: ModuleNotFoundError: No module named 'mujoco'",
+  "passive|mu0.25|t0.05|s1|gh Raise overhead: ModuleNotFoundError: No module named 'mujoco'",
+  "passive|mu0.25|t0.05|s1|gh Drink from a cup: ModuleNotFoundError: No module named 'mujoco'",
+  "passive|mu0.25|t0.05|s1|gh Comb hair: ModuleNotFoundError: No module named 'mujoco'",
+  "passive|mu0.25|t0.05|s1|gh Reach a high shelf: ModuleNotFoundError: No module named 'mujoco'",
+  "passive|mu0.25|t0.05|s1|gh Wash opposite shoulder: ModuleNotFoundError: No module named 'mujoco'",
+  "passive|mu0.25|t0.05|s1|gh Reach back pocket: ModuleNotFoundError: No module named 'mujoco'",
+  "passive|mu0.25|t0.05|s1|gh Wave: ModuleNotFoundError: No module named 'mujoco'",
+  "passive|mu0.25|t0.05|s1|gh Walking arm swing: ModuleNotFoundError: No module named 'mujoco'",
+  "passive|mu0.37|t0.05|s1|gh Raise overhead: ModuleNotFoundError: No module named 'mujoco'",
+  "passive|mu0.37|t0.05|s1|gh Drink from a cup: ModuleNotFoundError: No module named 'mujoco'",
+  "passive|mu0.37|t0.05|s1|gh Comb hair: ModuleNotFoundError: No module named 'mujoco'",
+  "passive|mu0.37|t0.05|s1|gh Reach a high shelf: ModuleNotFoundError: No module named 'mujoco'",
+  "passive|mu0.37|t0.05|s1|gh Wash opposite shoulder: ModuleNotFoundError: No module named 'mujoco'",
+  "passive|mu0.37|t0.05|s1|gh Reach back pocket: ModuleNotFoundError: No module named 'mujoco'",
+  "passive|mu0.37|t0.05|s1|gh Wave: ModuleNotFoundError: No module named 'mujoco'",
+  "passive|mu0.37|t0.05|s1|gh Walking arm swing: ModuleNotFoundError: No module named 'mujoco'",
+  "passive|mu0.005|t0.001|s1|hub|krate0.01 Raise overhead: ModuleNotFoundError: No module named 'mujoco'",
+  "passive|mu0.005|t0.001|s1|hub|krate0.01 Drink from a cup: ModuleNotFoundError: No module named 'mujoco'",
+  "passive|mu0.005|t0.001|s1|hub|krate0.01 Comb hair: ModuleNotFoundError: No module named 'mujoco'",
+  "passive|mu0.005|t0.001|s1|hub|krate0.01 Reach a high shelf: ModuleNotFoundError: No module named 'mujoco'",
+  "passive|mu0.005|t0.001|s1|hub|krate0.01 Wash opposite shoulder: ModuleNotFoundError: No module named 'mujoco'",
+  "passive|mu0.005|t0.001|s1|hub|krate0.01 Reach back pocket: ModuleNotFoundError: No module named 'mujoco'",
+  "passive|mu0.005|t0.001|s1|hub|krate0.01 Wave: ModuleNotFoundError: No module named 'mujoco'",
+  "passive|mu0.005|t0.001|s1|hub|krate0.01 Walking arm swing: ModuleNotFoundError: No module named 'mujoco'",
+  "passive|nofric|s1 Raise overhead: ModuleNotFoundError: No module named 'mujoco'",
+  "passive|nofric|s1 Drink from a cup: ModuleNotFoundError: No module named 'mujoco'",
+  "passive|nofric|s1 Comb hair: ModuleNotFoundError: No module named 'mujoco'",
+  "passive|nofric|s1 Reach a high shelf: ModuleNotFoundError: No module named 'mujoco'",
+  "passive|nofric|s1 Wash opposite shoulder: ModuleNotFoundError: No module named 'mujoco'",
+  "passive|nofric|s1 Reach back pocket: ModuleNotFoundError: No module named 'mujoco'",
+  "passive|nofric|s1 Wave: ModuleNotFoundError: No module named 'mujoco'",
+  "passive|nofric|s1 Walking arm swing: ModuleNotFoundError: No module named 'mujoco'",
+  "passive|nofric|nograv|s1 Raise overhead: ModuleNotFoundError: No module named 'mujoco'",
+  "passive|nofric|nograv|s1 Drink from a cup: ModuleNotFoundError: No module named 'mujoco'",
+  "passive|nofric|nograv|s1 Comb hair: ModuleNotFoundError: No module named 'mujoco'",
+  "passive|nofric|nograv|s1 Reach a high shelf: ModuleNotFoundError: No module named 'mujoco'",
+  "passive|nofric|nograv|s1 Wash opposite shoulder: ModuleNotFoundError: No module named 'mujoco'",
+  "passive|nofric|nograv|s1 Reach back pocket: ModuleNotFoundError: No module named 'mujoco'",
+  "passive|nofric|nograv|s1 Wave: ModuleNotFoundError: No module named 'mujoco'",
+  "passive|nofric|nograv|s1 Walking arm swing: ModuleNotFoundError: No module named 'mujoco'",
+  "passive|nofric|s2 Raise overhead: ModuleNotFoundError: No module named 'mujoco'",
+  "passive|nofric|s2 Drink from a cup: ModuleNotFoundError: No module named 'mujoco'",
+  "passive|nofric|s2 Comb hair: ModuleNotFoundError: No module named 'mujoco'",
+  "passive|nofric|s2 Reach a high shelf: ModuleNotFoundError: No module named 'mujoco'",
+  "passive|nofric|s2 Wash opposite shoulder: ModuleNotFoundError: No module named 'mujoco'",
+  "passive|nofric|s2 Reach back pocket: ModuleNotFoundError: No module named 'mujoco'",
+  "passive|nofric|s2 Wave: ModuleNotFoundError: No module named 'mujoco'",
+  "passive|nofric|s2 Walking arm swing: ModuleNotFoundError: No module named 'mujoco'",
+  "passive|nofric|nograv|s2 Raise overhead: ModuleNotFoundError: No module named 'mujoco'",
+  "passive|nofric|nograv|s2 Drink from a cup: ModuleNotFoundError: No module named 'mujoco'",
+  "passive|nofric|nograv|s2 Comb hair: ModuleNotFoundError: No module named 'mujoco'",
+  "passive|nofric|nograv|s2 Reach a high shelf: ModuleNotFoundError: No module named 'mujoco'",
+  "passive|nofric|nograv|s2 Wash opposite shoulder: ModuleNotFoundError: No module named 'mujoco'",
+  "passive|nofric|nograv|s2 Reach back pocket: ModuleNotFoundError: No module named 'mujoco'",
+  "passive|nofric|nograv|s2 Wave: ModuleNotFoundError: No module named 'mujoco'",
+  "passive|nofric|nograv|s2 Walking arm swing: ModuleNotFoundError: No module named 'mujoco'"
+ ],
+ "chain": {
+  "kind": "general serial chain from the clips' own member frames (dynamics-2026-10-16): base -> l1a -> l1b -> l2 -> l3 -> l4 -> arm",
+  "joints": [
+   "J1",
+   "K",
+   "J2",
+   "J3",
+   "pin a",
+   "pin b"
+  ],
+  "hinge_fit": {
+   "base-l1a": {
+    "rot_residual_deg": 0.0001,
+    "point_residual_mm": 0.0,
+    "axis_child": [
+     -0.023862,
+     -0.92297,
+     -0.384132
+    ],
+    "point_child_mm": [
+     1.252,
+     48.422,
+     20.153
+    ],
+    "travel_deg": [
+     -104.26,
+     112.91
+    ]
+   },
+   "l1a-l1b": {
+    "rot_residual_deg": 0.0001,
+    "point_residual_mm": 0.0,
+    "axis_child": [
+     0.375355,
+     -0.926608,
+     -0.022508
+    ],
+    "point_child_mm": [
+     -26.099,
+     64.429,
+     1.565
+    ],
+    "travel_deg": [
+     -0.0,
+     16.22
+    ]
+   },
+   "l1b-l2": {
+    "rot_residual_deg": 0.0001,
+    "point_residual_mm": 0.0,
+    "axis_child": [
+     -0.475818,
+     0.643179,
+     0.599932
+    ],
+    "point_child_mm": [
+     -31.825,
+     43.019,
+     40.127
+    ],
+    "travel_deg": [
+     -15.37,
+     82.41
+    ]
+   },
+   "l2-l3": {
+    "rot_residual_deg": 0.0001,
+    "point_residual_mm": 0.0001,
+    "axis_child": [
+     -0.099506,
+     -0.236536,
+     0.966514
+    ],
+    "point_child_mm": [
+     -10.693,
+     -38.133,
+     80.179
+    ],
+    "travel_deg": [
+     -65.52,
+     103.54
+    ]
+   },
+   "l3-l4": {
+    "rot_residual_deg": 0.0001,
+    "point_residual_mm": 0.0002,
+    "axis_child": [
+     -0.099507,
+     -0.236535,
+     0.966514
+    ],
+    "point_child_mm": [
+     -10.776,
+     -90.197,
+     72.305
+    ],
+    "travel_deg": [
+     -0.97,
+     47.96
+    ]
+   },
+   "l4-cuff": {
+    "rot_residual_deg": 0.0,
+    "point_residual_mm": 0.0001,
+    "axis_child": [
+     0.099506,
+     0.236535,
+     -0.966514
+    ],
+    "point_child_mm": [
+     -33.917,
+     -100.53,
+     67.394
+    ],
+    "travel_deg": [
+     -0.31,
+     55.06
+    ]
+   }
+  },
+  "limits_deg": {
+   "K": [
+    0.0,
+    53.637
+   ],
+   "J2": [
+    -27.071,
+    88.138
+   ]
+  },
+  "springs": {
+   "K": {
+    "rate_Nm_per_rad": 0.015,
+    "preload_Nm_at_stop_A": 0.08,
+    "preload_source": "judge default K_PRELOAD",
+    "rates_run": [
+     0.015,
+     0.01
+    ]
+   }
+  },
+  "knuckle": {
+   "joint": "K",
+   "sign_vs_dK": -1.0,
+   "stop_A_deg": 0.0,
+   "stop_B_deg": 53.637,
+   "frames_K_open": 213,
+   "fit_dK_max_err_deg": 0.0005
+  },
+  "q2_stops": {
+   "joint": "J2",
+   "slope": 1.000001,
+   "residual_deg": 0.0005
+  },
+  "spare_joints": [],
+  "slaved": [
+   {
+    "joint": "K",
+    "driver": "J2",
+    "closure": "force",
+    "law_rows": 15,
+    "law_x_judge_deg": [
+     -27.071,
+     -10.271
+    ],
+    "law_y_judge_deg": [
+     -0.0,
+     53.42
+    ],
+    "rest_judge_deg": -0.0,
+    "push_sense": 1.0,
+    "x_map": {
+     "key": "q.1",
+     "slope": 1.000001,
+     "offset_deg": -5.26,
+     "residual_deg": 0.0005
+    },
+    "y_map": {
+     "key": "knuckle.dK",
+     "slope": -1.000001,
+     "offset_deg": -0.0,
+     "residual_deg": 0.0005,
+     "note": null
+    },
+    "law_vs_clips_max_err_deg": 0.0051,
+    "clip_frames_driven": 213,
+    "source": "build.json slaved"
+   }
+  ],
+  "drive_groups": {
+   "dk": {
+    "mount": "l1b",
+    "mass_g": 4.05,
+    "turns_on_mount_max_deg": 4.74,
+    "declared": true
+   },
+   "dr": {
+    "mount": "l1b",
+    "mass_g": 4.52,
+    "turns_on_mount_max_deg": 0.7,
+    "declared": true
+   }
+  },
+  "slaved_rule": "joint equality on the declared law's tangent, re-linearised every step; force closure = unilateral (on while the drive pushes); drive bodies lumped on their mount; drive bearing friction not modelled",
+  "arm_member": "the humerus (canonical frame at GH), joined to the last member by its hinge and to the bone by the soft-tissue cuff",
+  "contact": "member-member contact not modelled in the general chain (R6 judges part interference geometrically: 0.0 mm on these designs); stops are joint limits",
+  "notes": [
+   "the knee stop (149.5 deg) is not in the CAD and not modelled; the knee pins are free",
+   "joint friction on every hinge incl. K and the knee pins (rolling-bearing law; iglidur knee pins share it - an optimistic note for the plain-bearing pins, see the plain-bearing comparison cases)",
+   "bearing centre for the load-dependent friction = the hinge's anchor at the hub stack centre (not a point on a GH ray)"
+  ]
+ },
+ "validation": {
+  "ok": null,
+  "note": "general chain: transmission.py / rt_wedge.py assume the spherical az/el/a chain; the general construction is cross-checked by running it on a spherical 3R (python3 judge/test_dynamics.py --general) against the original path"
+ }
+}
