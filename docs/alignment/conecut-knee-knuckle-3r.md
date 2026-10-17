@@ -466,3 +466,102 @@ the tool code, the probe files and the design's scratch scripts. No model re-run
    cuff-twist judges can run on `l1_conecut-knee`.
 
 **Final verdict (ledger): WATCH.**
+
+## Skeptic (2026-10-17, 20:09-20:17 UTC, hourly audit of 20:03)
+
+Ledger: 2026-10-17T20:15:35Z, by skeptic, run `skeptic:conecut-knee-knuckle-3r`. **Final verdict: WATCH** (10 reasons
+upheld, 0 refuted; none gamed). Rulings file: `docs/alignment/conecut-knee-knuckle-3r.rulings.json`.
+
+What I used:
+- my own re-derivation from the per-pose dumps, which recompute to 18.29 / 22.38;
+- the tool's own `c_dominance` / `c_contact_depth`, run in memory (write=False);
+- the stop-window, probe and sweep files, and the L1 build directory;
+- the board after its 20:13:38 rebuild (9a3e0c5).
+
+**New measurement:** m_sub at rest for THIS row. I ran `tools/alignment_msub_rest_probe_model.py` (CB_EXACT=1,
+nice, 1 process, 244 s). It reproduces the frozen claim to the digit: 18.28, reach 0.7278, in-band 0.9012, contact
+0.0106. Output: `remeasure/conecut-knee-knuckle-3r_msub_rest_bench.json`.
+
+### Rulings
+
+1. **reporting: upheld.**
+   - After the rebuild, `morphs.json` still has gap / sweep_gap 12.5 against v_gap 18.28. That is 5.78 apart, over
+     the 5-point line (`c_reporting` line 715; R2 class).
+   - The board labels `gap` as "Claimed gap" (`docs/dashboard/bench.js` line 131). So this row shows a *claimed*
+     score of 95.45, over the 95 golden line, beside a verified 93.35.
+2. **NEW-self-reference: upheld.**
+   - The tool's `c_dominance` with no reference reads "no reference". Against PREV_LEAD it reads watch: +0.21 plain,
+     -1.82 at 2 mm. My dumps give the same (2 mm: 34.84 vs 33.02).
+   - The line 411 swap needs `rid == DEPTH_REF`, so it can fire on this row only. Line 757 gives a default reference
+     only to `sidecar-` ids (3 of the 89 rows now).
+   - Selftest line 888 is re-routed by line 411 to slipper-nose, so the "reference vs itself" branch is no longer
+     exercised.
+   - `LEADERS` holds neither this row nor slipper-nose.
+3. **R1: upheld in part; one sub-item is resolved.**
+   - Still true: the screen note's "203 at 0.72 mm". Pose 203 has min_mm 0.716 but cmin **0.263**.
+   - Still true: 12.5 beside 18.28, and `frozen_gap` null.
+   - **Resolved at 20:13:38:** `alignment_reasons` now quote the 20:07:38 entry (`alignment_t` 20:07:38Z,
+     `alignment_stale` false).
+4. **P2: upheld, and wider than stated.**
+   - ROUNDS.md (mtime 20:02:39) still carries line 1858 "selected held out" and lines 2178-2179 ("764 / 835 / 907 /
+     978 / 1047 ... belong in the envelope search bench"), both unstruck.
+   - desmo-conecut doc lines 22-24 take held-out joint angles as drive input. Its model file has no `held_bench` call.
+   - New: the build spec reads held out too (missed 1).
+   - Score effect nil: 0 of 352 flips.
+5. **T1: upheld.**
+   - Bench: shell 16.56 (34.84 - 18.28, over TH watch 15). Against slipper-nose: +1.82 at 2 mm bench, +0.16 held out.
+   - Taken poses under 1 / 2 / 3 mm: bench 3 / 33 / 105 against 3 / 30 / 100; held out 13 / 71 / 217 against
+     14 / 67 / 199. The auditor's 218 is 1 off.
+   - Correction: the claim (sweep index 204) is the objective best under `stop_pen`, at fast 12.50 / 13.66 / 18.80. It
+     is not the sweep's raw plain best. That is 11.88 (cma2s-g6-2), rejected by `stop_pen` (row doc lines 126-136).
+6. **T3: upheld.**
+   - Held-out `th` minimum 5.006 deg, lt5 0.
+   - Fit-bench q3' values: -112.791 and -98.431, with nothing between them. Held-out q3' values: -112.488 and
+     -111.159.
+   - Held-out sweep: 22.38 down to just above -111.1, then 22.49. Bench: 18.29 there, and 18.02 at -110.9.
+   - The L1 build keeps the held number only through an acceptance window, -112.40 to -111.25. The fragility is
+     written into the build spec, not removed.
+   - The ±0.3 deg K-phase crossing is the auditor's arithmetic; I did not re-measure it.
+7. **NEW-strap-dilution: upheld.** Sample-weighted in-band is 0.90113. With E at slipper-nose's 104 samples it is
+   0.89605, so the bench reads **18.67**, behind 18.49. Held-out in-band is 0.89999.
+8. **M5: upheld (missing).**
+   - No R17 or cuff-twist result for this knee exists. `l1_conecut-knee/` holds build files only.
+   - The running `score_design.py` writes R1 `score.json`, not R17.
+   - `build.json` dowel_check s0 0.73 is the inherited J2-stop hand calc, identical in all 7 L1 builds. It is not this
+     knee's number.
+9. **G4: upheld, now measured on this row.**
+   - m_sub at rest: n 205, min 0.0, p10 0.267, under 1 / 2 / 5 deg on 50 / 65 / 107 (39 ws + 11 clip under 1 deg;
+     ws 227 / 224 / 283 at 0.000-0.002 deg).
+   - This is identical to the displaced lead (50 of 204). The re-centred knee and the J3 stop leave the sub-dyad's
+     rest posture as it was.
+   - m_plain at rest has min 5.389, and the family reading min 5.181, so the scored fold metric is clean. The
+     near-singular sub-dyad at rest is real.
+10. **NEW-ws-inband: upheld.**
+    - Bench: unscored ws in-band 0.8676, and 0.8315 at elev 90-140 (over 14 mm 0.168, d_max 30.74).
+    - Held out: 0.8712 / 0.8478 (d_max 31.46).
+    - Scored in-band is 0.9012.
+
+### Missed by the auditor (for the next audit; not in this verdict)
+
+1. **The L1 build's J3 stop acceptance window is set from the held-out split.**
+   - `pipeline/concept_l1/build_conecut_l1.py` line 86 specifies "assembled stop -112.40 <= J3MIN <= -111.25 ... (the
+     windows that keep the verified bench and held numbers)".
+   - The held-out q3' neighbours -112.488 / -111.159 (`stop_geo.json` held) bound the window.
+   - On fit evidence, J3MIN could sit anywhere in the 14-deg fit-flat interval (-112.79 to -98.43). The exact bench
+     even prefers -110.9 (18.02).
+   - So the held-out split now sets a build tolerance. Score effect today: nil. It is P2's pattern moved into the part
+     spec, and it hides T3's fragility as a tolerance.
+   - Proposal: the build spec states the fit-evidence window, and quotes the held number as a consequence, not as an
+     acceptance target.
+2. **The board's "Claimed gap" column shows the fast self-measure as the claim.**
+   - `bench.js` line 131 labels `gap` "Claimed gap". 10 verified rows read score >= 95 there, 95.20-97.75 (gap
+     6.19-13.19), against verified 18.28-20.08.
+   - `c_reporting` reads only `sweep_gap`, so a row whose `gap` and `sweep_gap` differ escapes the check
+     (inband-rssr: gap 12.79, sweep null).
+   - This is systemic (R3 class), not this row's doing. Proposal: `c_reporting` also compares `gap` with `v_gap` on
+     verified rows, and the board labels it "self-measured (fast)".
+3. **The tool's G4 note can be closed with a number.** This row's m_sub at rest is now on file (not a miss: the number did not exist at
+   20:03). The next audit should quote 50 / 205, not "not re-measured".
+
+**Final verdict (ledger): WATCH.** The claim is reproduced exactly: 18.28 / 22.38 from the dumps, and 18.28 in this
+probe's frozen re-run. Every reason measured true. Nothing is gamed.
