@@ -1,0 +1,52 @@
+{
+ "wear": "bench",
+ "n_taken": 381,
+ "own_min_taken": 0.764,
+ "states_taken": {
+  "0": 283,
+  "1": 70,
+  "2": 28
+ },
+ "taken_own_lt5": 4,
+ "taken_own_lt5p5": 4,
+ "taken_kin_refused": 4,
+ "lt5": [
+  {
+   "i": 12,
+   "kind": "clip",
+   "state": 2,
+   "own": 0.76,
+   "plane": 30.0,
+   "elev": 142.3291778564453,
+   "axial": -58.43452453613281
+  },
+  {
+   "i": 49,
+   "kind": "clip",
+   "state": 2,
+   "own": 1.93,
+   "plane": 70.30000305175781,
+   "elev": 137.8000030517578,
+   "axial": -63.54999923706055
+  },
+  {
+   "i": 47,
+   "kind": "clip",
+   "state": 2,
+   "own": 4.28,
+   "plane": 73.8067626953125,
+   "elev": 140.18280029296875,
+   "axial": -65.14602661132812
+  },
+  {
+   "i": 52,
+   "kind": "clip",
+   "state": 2,
+   "own": 4.28,
+   "plane": 73.8067626953125,
+   "elev": 140.18280029296875,
+   "axial": -65.14602661132812
+  }
+ ],
+ "note": "own = RM.kin_nodes margin (forced states: min(dmargin(th, b1, angle(jK, j3)), dmargin(th, a1e, a2e)); state A: dmargin(th, a1, a2)); taken = the connected per-pose dump of this adapter"
+}

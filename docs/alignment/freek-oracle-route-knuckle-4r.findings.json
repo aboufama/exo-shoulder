@@ -1,0 +1,50 @@
+[
+ {
+  "key": "P1",
+  "level": "gamed",
+  "reason": "The rank under the lead is a claim-bench gain that does not hold out. Cell B's J3 stop was placed from the claim bench's own failing poses: binder_q3.json lists q3 of Bench(110,360) exact poses 316 / 343 / 369 / 423 (IR binders at q3 99-113, rescued at 77-82) and the doc concludes 'q3max ~ 78-82 deg is where a cell-B groove end would go'; the build itself was triggered by the per-pose free-K oracle run on that same bench (17.25 <= 17.78); q3max 86 was then picked on Bench(60,160) fast (rows k 61-68, 9.56 best of 8) and worn on the claim bench at 80 and 86 only. Re-worn unchanged by this audit (tools/alignment_remeasure_freek.py, dumps recompute 17.35 / 22.66): cell B's gain over its own k33 kit is 1.26 on the claim bench (18.61 -> 17.35 connected) and 0.70 held out (23.37 -> 22.67). Paired against the 3-DOF lead under the same frozen-exact harness on identical pose sets (docs/alignment/remeasure/freek-oracle-route-knuckle-4r_conn_vs_conecut-knee-knuckle-3r_paired.json): bench -0.93 (CI90 [-4.08, +4.09], P(better) 0.56), held out +0.29 WORSE (CI90 [-1.96, +2.99], P(better) 0.40), pooled -0.08 (P 0.51). The split shows what the 0.93 is: reach -3.89 bought with contact +2.72 (13 contact poses only this design has vs 2 only the lead has; held 37 vs 4). The lead is better for the wearer on the readings the plain score does not weigh: 4 vs 15 bench contacts (20.24 vs 78.55 mm summed depth), 8 vs 5 overhead poses taken (held 18 vs 8 of 71), 3 counted joints vs 4, complexity 18.5 vs 33.25. Same pattern and size as lowarm-halfring-knuckle-3r's P1 (held +0.32, P 0.26; gamed, skeptic upheld). Resolve by claiming the held number (22.67, behind the lead) or a leader_ruling 'not a lead: held behind, coin-flip bench lead', not by a new bench wear.",
+  "evidence": "docs/alignment/remeasure/freek-oracle-route-knuckle-4r_conn_vs_conecut-knee-knuckle-3r_paired.json; docs/alignment/remeasure/freek-oracle-route-knuckle-4r_bench.json / _held.json; docs/concepts/verify/freek-oracle-route-knuckle-4r/binder_q3.json; docs/concepts/sweeps/freek-oracle-route-knuckle-4r.json k 61-68; docs/concepts/freek-oracle-route-knuckle-4r.md lines 147-184"
+ },
+ {
+  "key": "T3",
+  "level": "watch",
+  "reason": "The fold margin is read two ways inside one claim. The model's reading (the effective dyad m3e in th, kitrule) holds on every taken pose: min 5.91 deg bench (stretched pose 363, plane 90 elev 90 axial -120), 6.50 held; J3-stop poses min 9.60 / 8.62. But the model sets m_sub = 99 for every J3-stop pose (models/freek-oracle-route-knuckle-4r.py _ik_phys: self._msub[idx] = 99.0), while the continuity flood that makes the CONNECTED claim applies the family reading (RM.kin_nodes 'own' = min(m_sub, m_eff) wherever K is off its rest, the reading of the lead verifier and of the dipped-law T3 ruling) and drops 4 taken ws poses for it - 291, 315, 317, 344, three of them overhead poses the lead takes (static overhead 8/28 -> connected 5/28). The flood only tests workspace grid nodes, so the same rule is never applied to clip poses: 4 taken bench clip frames (12, 47, 49, 52; overhead, elev 137-142, all J3-stop) sit at 0.76 / 1.93 / 4.28 / 4.28 deg under it, and 6 held clip frames at 0.32-4.28 deg (remeasure/*_familymargin.json). Read consistently with the flood the claim is 20.68 bench (+2.39 behind the lead) and 24.56 held (+2.19); read consistently with the model it is nearer the static 16.20. Watch, not gamed: m_sub is the J1-K-J3 sub-chain margin of a LOCKED J2 and its physical meaning with J2 free and J3 on its stop is unproven; the state-2 singularity that does matter (the J1-K-J2 wrist with J3 locked: u1, K axis, J2 axis coplanar) is measured by neither reading. The verifier must settle which reading the claim keeps and report min th per state.",
+  "evidence": "docs/alignment/remeasure/freek-oracle-route-knuckle-4r_bench_familymargin.json, _held_familymargin.json, _bench.json fold_margin_th + flood.dropped_poses; docs/concepts/verify/minarc-bdp-remeasure.py kin_nodes lines 235-251"
+ },
+ {
+  "key": "NEW-stop-refusal",
+  "level": "watch",
+  "reason": "Half of the 0.93 lead is two poses turned from 'metal on skin' into 'arm stopped by a dowel'. Bench poses 343 (plane 75, elev 150, axial -105) and 423 (plane 120, elev 135, axial -90) were contacts in the kit (-0.19 / -1.33 mm at stop B) and are now refused by the J3 dowel with K on stop B (labelled 'fold' in the model's why counts). The bench drops a refused pose from the contact denominator and its reach was already lost, so the refusal is pure gain: read as the contacts they were, cell B is 17.83 connected (lead 18.28), so 0.48 of the 0.93 is these two refusals. The design doc says the same: cell B beats the free-K oracle's static bound (16.20 vs 16.96, 'the ceiling of every K law') because 'a stop may REFUSE a pose'. For the wearer both are failures of 'free range': the kit pressed 0.2-1.3 mm (inside a liner's compliance), cell B jams the overhead internal-rotation reach on a 2 mm dowel at r 7.5 that then carries the arm's torque. Proposed catalogue entry below (docs/alignment/freek-oracle-route-knuckle-4r.md).",
+  "evidence": "docs/alignment/remeasure/freek-oracle-route-knuckle-4r_bench_conn_perpose.json (343 / 423 ev false); docs/concepts/verify/freek-oracle-route-knuckle-4r/wear3_r0.json binders; doc lines 174-181"
+ },
+ {
+  "key": "T5",
+  "level": "watch",
+  "reason": "Depth-blind contact, measured on the claim's own dumps (the tool's check could not read them because the ledger's claim is the row's fast 9.56, see R4): bench 15 contact poses, summed penetration 78.55 mm, deepest 20.88 mm at pose 237 (plane 15, elev 165, axial -60), 6 deeper than 3 mm, 8 of them overhead; the lead 4 poses, 20.24 mm, deepest 8.93 mm at the same pose (x3.88, +58.31 mm). Held out: 47 poses, 232.2 mm, deepest 19.9 mm (pose 610, plane 30 elev 165 axial -45), 22 deeper than 3 mm, 20 overhead; the lead 14 poses, 60.97 mm (x3.81, +171.2 mm). Both wears clear the 2x / 5 mm watch rule by far. The design reaches 14 more workspace poses than the lead (276 vs 262) and presses metal 4x deeper into the arm, overhead most.",
+  "evidence": "docs/alignment/remeasure/freek-oracle-route-knuckle-4r_bench_conn_perpose.json, _held_conn_perpose.json; docs/alignment/remeasure/conecut-knee-knuckle-3r_bench_perpose.json, _held_perpose.json"
+ },
+ {
+  "key": "G1",
+  "level": "watch",
+  "reason": "Metal hugging (T1 / G1, reported only since the user's 2026-10-17 ruling): plain 17.35, <1 mm 22.19, <2 mm 45.90, <3 mm 140.21 (the lead 18.28 / 19.92 / 34.84 / 86.16); 43 taken bench poses with metal under 2 mm vs the lead's 33, 9 under 1 mm vs 3; held <2 mm 47.88 with 86 poses. The overhead poses it does take sit at 1.12-2.14 mm (316, 318, 345, 371, 289; the lead's 8 sit at 1.71-2.88), overhead p10 metal 1.03 mm (lead 1.83), held 0.16 mm. The 0.93 plain lead is a 2.27 deficit at 1 mm and 11.06 at 2 mm.",
+  "evidence": "docs/alignment/remeasure/freek-oracle-route-knuckle-4r_bench.json deep; docs/alignment/remeasure/conecut-knee-knuckle-3r_bench.json deep; docs/alignment/freek-oracle-route-knuckle-4r.json dominance"
+ },
+ {
+  "key": "M5",
+  "level": "watch",
+  "reason": "A spring-held coordinate scored at its planned value with no hold check. In cell B the K clock spring is reacted by the new J3 dowel (K opens to the first K where q3 = 86) on 32 taken bench poses (61 held), dK 0.4-81.5 deg, J2 off its stop. The equilibrium (spring pulls K closed, dq3/ddK ~ -0.67 so the stop sees ~1.5x the spring torque about the arm axis = a cuff twist load whenever the stop is engaged), the R17 lag / preload sweep that failed pick1 at 0.08 N.m, the dowel force at r 7.5 when K reaches stop B, and the verifier's spring-equilibrium scan (checks_B 'lower_inside', which assumes J2 on a stop) are all not run (doc lines 182-183).",
+  "evidence": "docs/alignment/remeasure/freek-oracle-route-knuckle-4r_bench.json states_taken / spans_taken; docs/concepts/freek-oracle-route-knuckle-4r.md lines 150-157, 182-183"
+ },
+ {
+  "key": "G6",
+  "level": "watch",
+  "reason": "A 4th counted joint ranked against the 3-DOF lead on a coin-flip margin. The row counts K honestly (active_dof 4, complexity 33.25, hand count 0.75 above tools/simplicity.py's 32.5 for the dowel and groove - the mismatch goes against the design, nothing hidden). But the user asked for exactly 3 DOF ('push for 3 before settling for 4'), and cell B buys its 0.93 bench lead (P 0.56) with one more joint, +14.75 complexity, a spring and a new stop, while losing held out. Listing it as 'the first 4-DOF row under the lead' without the held / DOF context invites a leader change the user's own rule would not make.",
+  "evidence": "docs/concepts/rows/freek-oracle-route-knuckle-4r.json mechanism; docs/concepts/rows/conecut-knee-knuckle-3r.json complexity 18.5; CLAUDE.md user decisions 2026-10-15 / 2026-10-17 (1)"
+ },
+ {
+  "key": "R4",
+  "level": "watch",
+  "reason": "The reporting pipeline loses the number the design holds. The row stores its frozen claim as frozen_gap 17.35 and frozen_exact.cellB_q3max86.connected.gap, keys tools/dash_build.py lines 444-447 do not read (frozen_exact_gap, frozen_exact.gap, frozen.gap, claim.gap), so docs/dashboard/data/morphs.json (v118, built 06:57 after the row's 06:26 update) shows the row at gap 9.56 / sweep_gap 9.56 (score 96.52, above the 95 golden line) with frozen_gap null. 9.56 is the best of 8 q3max values on Bench(60,160) fast, the fit bench (fit = wear, spread 9.56-16.72); the design holds 17.35 frozen exact (+7.79). The ledger's claim is read the same way (v_gap null -> gap 9.56), which is why the tool's T5 check could not match the claim's dumps.",
+  "evidence": "docs/dashboard/data/morphs.json row freek-oracle-route-knuckle-4r; tools/dash_build.py 440-447; docs/concepts/rows/freek-oracle-route-knuckle-4r.json gap / frozen_gap"
+ }
+]

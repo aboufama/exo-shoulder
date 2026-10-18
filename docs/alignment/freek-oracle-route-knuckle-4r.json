@@ -6,10 +6,8 @@
  "verdict": "watch",
  "reasons": [
   "held_out: no verified bench gap on the row",
-  "near_touch: no near-touch measurement on file (rule since 2026-10-16: claims report plain and near-touch)",
-  "dominance: cannot compare with conecut-knee-knuckle-3r at 2 mm",
+  "dominance: beats conecut-knee-knuckle-3r by 0.93 plain but loses by 11.06 at 2 mm: part of the gain is metal moved into the 1-2 mm shell (A1 gate retired 2026-10-17)",
   "fold_margin: no min-th margin over taken poses on file (rule: each claim reports it)",
-  "idle: a drive is declared but no range of it over the taken poses is on file; K: declared moving, no span on file; knee: declared moving, no span on file",
   "sampling: no per-part in-band record: unsampled bodies cannot be ruled out",
   "complexity: recomputed 32.5 vs row 33.25; MISMATCH"
  ],
@@ -26,8 +24,26 @@
   },
   {
    "check": "near_touch",
-   "level": "watch",
-   "reason": "no near-touch measurement on file (rule since 2026-10-16: claims report plain and near-touch)"
+   "level": "ok",
+   "reason": "plain 17.35, <1 mm 22.19, <2 mm 45.9, <3 mm 140.21, band read 3-14 mm 17.75, 28.55 points live in the 1-2 mm shell (re-measured (this audit))",
+   "shell2": 28.55,
+   "plain": 17.35,
+   "n1": 22.19,
+   "n2": 45.9,
+   "n3": 140.21,
+   "band3": 17.75,
+   "hist": {
+    "0-1": 0.0,
+    "1-2": 0.0002,
+    "2-3": 0.0039,
+    "3-4": 0.0106,
+    "4-6": 0.0634,
+    "6-10": 0.4645,
+    "10-14": 0.3553,
+    ">14": 0.1021
+   },
+   "minmm": 0.092,
+   "source": "re-measured (this audit)"
   },
   {
    "check": "contact_depth",
@@ -40,12 +56,15 @@
   {
    "check": "dominance",
    "level": "watch",
-   "reason": "cannot compare with conecut-knee-knuckle-3r at 2 mm"
+   "reason": "beats conecut-knee-knuckle-3r by 0.93 plain but loses by 11.06 at 2 mm: part of the gain is metal moved into the 1-2 mm shell (A1 gate retired 2026-10-17)",
+   "ref": "conecut-knee-knuckle-3r",
+   "gain_plain": 0.93,
+   "gain_2mm": -11.06
   },
   {
    "check": "continuity",
    "level": "ok",
-   "reason": "static None, connected None: the flood drops 0 claim poses (islands 0; docs/concepts/verify/freek-oracle-route-knuckle-4r/kit_k33_held.json)",
+   "reason": "static None, connected None: the flood drops 0 claim poses (islands 0; docs/concepts/verify/freek-oracle-route-knuckle-4r/verify_repro_q3max86_bench.json)",
    "static": null,
    "connected_full": null
   },
@@ -56,9 +75,26 @@
   },
   {
    "check": "idle",
-   "level": "watch",
-   "reason": "a drive is declared but no range of it over the taken poses is on file; K: declared moving, no span on file; knee: declared moving, no span on file",
-   "spans": [],
+   "level": "ok",
+   "reason": "K moves: smallest recorded span 81.49 deg (re-measured dK span); knee moves: smallest recorded span 40.81 deg (re-measured K.qb span)",
+   "spans": [
+    [
+     "re-measured dK span",
+     81.49
+    ],
+    [
+     "re-measured K.ang span",
+     61.53
+    ],
+    [
+     "re-measured K.qa span",
+     61.52
+    ],
+    [
+     "re-measured K.qb span",
+     40.81
+    ]
+   ],
    "declared": [
     "K",
     "knee"
@@ -94,10 +130,11 @@
   }
  ],
  "remeasured": {
-  "bench": false,
-  "held": false
+  "bench": true,
+  "held": true
  },
  "verifier_files": [
+  "docs/concepts/verify/freek-oracle-route-knuckle-4r/verify_repro_q3max86_bench.json",
   "docs/concepts/verify/freek-oracle-route-knuckle-4r/kit_k33_held.json",
   "docs/concepts/verify/freek-oracle-route-knuckle-4r/cellB_q3max86_held.json",
   "docs/concepts/verify/freek-oracle-route-knuckle-4r/cellB_q3max80_bench.json",
@@ -108,7 +145,7 @@
   "docs/concepts/verify/freek-oracle-route-knuckle-4r/wear3_r0_perpose.json",
   "docs/concepts/verify/freek-oracle-route-knuckle-4r/wear3_r0.json"
  ],
- "git": "1d0d2e1",
+ "git": "8d4590e",
  "tool_version": "2026-10-17.6",
- "t": "2026-10-18T07:04:47Z"
+ "t": "2026-10-18T07:25:52Z"
 }
