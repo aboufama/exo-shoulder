@@ -27,7 +27,8 @@
     "reach": 0.8187,
     "inband14": 0.8954,
     "contact": 0.0359
-   }
+   },
+   "rule": "v1 scan (max-min skin distance of members 1/1b/2 only; superseded)"
   }
  },
  {
@@ -62,7 +63,8 @@
     "reach": 0.825,
     "inband14": 0.8907,
     "contact": 0.0308
-   }
+   },
+   "rule": "v1 scan (max-min skin distance of members 1/1b/2 only; superseded)"
   }
  },
  {
@@ -97,7 +99,8 @@
     "reach": 0.825,
     "inband14": 0.8917,
     "contact": 0.0308
-   }
+   },
+   "rule": "v1 scan (max-min skin distance of members 1/1b/2 only; superseded)"
   }
  },
  {
@@ -132,7 +135,8 @@
     "reach": 0.825,
     "inband14": 0.8918,
     "contact": 0.0308
-   }
+   },
+   "rule": "v1 scan (max-min skin distance of members 1/1b/2 only; superseded)"
   }
  },
  {
@@ -167,7 +171,8 @@
     "reach": 0.8187,
     "inband14": 0.8913,
     "contact": 0.0359
-   }
+   },
+   "rule": "v1 scan (max-min skin distance of members 1/1b/2 only; superseded)"
   }
  },
  {
@@ -202,7 +207,8 @@
     "reach": 0.8187,
     "inband14": 0.8925,
     "contact": 0.0359
-   }
+   },
+   "rule": "v1 scan (max-min skin distance of members 1/1b/2 only; superseded)"
   }
  },
  {
@@ -237,7 +243,8 @@
     "reach": 0.8187,
     "inband14": 0.8923,
     "contact": 0.0359
-   }
+   },
+   "rule": "v1 scan (max-min skin distance of members 1/1b/2 only; superseded)"
   }
  },
  {
@@ -272,7 +279,8 @@
     "reach": 0.8187,
     "inband14": 0.8926,
     "contact": 0.0359
-   }
+   },
+   "rule": "v1 scan (max-min skin distance of members 1/1b/2 only; superseded)"
   }
  },
  {
@@ -307,7 +315,8 @@
     "reach": 0.8187,
     "inband14": 0.8929,
     "contact": 0.0359
-   }
+   },
+   "rule": "v1 scan (max-min skin distance of members 1/1b/2 only; superseded)"
   }
  },
  {
@@ -342,7 +351,8 @@
     "reach": 0.8187,
     "inband14": 0.8914,
     "contact": 0.0359
-   }
+   },
+   "rule": "v1 scan (max-min skin distance of members 1/1b/2 only; superseded)"
   }
  },
  {
@@ -377,7 +387,8 @@
     "reach": 0.825,
     "inband14": 0.8888,
     "contact": 0.0308
-   }
+   },
+   "rule": "v1 scan (max-min skin distance of members 1/1b/2 only; superseded)"
   }
  },
  {
@@ -410,7 +421,8 @@
     "reach": 0.8,
     "inband14": 0.9055,
     "contact": 0.0208
-   }
+   },
+   "rule": "v2a (refused K allowed to dodge a contact: optimistic, superseded by v2b)"
   }
  },
  {
@@ -443,7 +455,8 @@
     "reach": 0.8,
     "inband14": 0.895,
     "contact": 0.0259
-   }
+   },
+   "rule": "v2a (refused K allowed to dodge a contact: optimistic, superseded by v2b)"
   }
  },
  {
@@ -476,7 +489,8 @@
     "reach": 0.8125,
     "inband14": 0.8992,
     "contact": 0.0361
-   }
+   },
+   "rule": "v2a (refused K allowed to dodge a contact: optimistic, superseded by v2b)"
   }
  },
  {
@@ -509,7 +523,8 @@
     "reach": 0.7937,
     "inband14": 0.892,
     "contact": 0.0106
-   }
+   },
+   "rule": "v2a (refused K allowed to dodge a contact: optimistic, superseded by v2b)"
   }
  },
  {
@@ -542,7 +557,8 @@
     "reach": 0.8125,
     "inband14": 0.8953,
     "contact": 0.0361
-   }
+   },
+   "rule": "v2a (refused K allowed to dodge a contact: optimistic, superseded by v2b)"
   }
  },
  {
@@ -575,7 +591,8 @@
     "reach": 0.8125,
     "inband14": 0.8923,
     "contact": 0.0206
-   }
+   },
+   "rule": "v2a (refused K allowed to dodge a contact: optimistic, superseded by v2b)"
   }
  },
  {
@@ -610,7 +627,8 @@
     "reach": 0.8187,
     "inband14": 0.8956,
     "contact": 0.0359
-   }
+   },
+   "rule": "v2a (refused K allowed to dodge a contact: optimistic, superseded by v2b)"
   }
  },
  {
@@ -645,7 +663,8 @@
     "reach": 0.8187,
     "inband14": 0.8925,
     "contact": 0.0359
-   }
+   },
+   "rule": "v2a (refused K allowed to dodge a contact: optimistic, superseded by v2b)"
   }
  },
  {
@@ -680,7 +699,8 @@
     "reach": 0.825,
     "inband14": 0.8843,
     "contact": 0.0308
-   }
+   },
+   "rule": "v2a (refused K allowed to dodge a contact: optimistic, superseded by v2b)"
   }
  },
  {
@@ -715,7 +735,8 @@
     "reach": 0.8187,
     "inband14": 0.8655,
     "contact": 0.0359
-   }
+   },
+   "rule": "v2a (refused K allowed to dodge a contact: optimistic, superseded by v2b)"
   }
  },
  {
@@ -750,7 +771,8 @@
     "reach": 0.8187,
     "inband14": 0.9007,
     "contact": 0.0359
-   }
+   },
+   "rule": "v2a (refused K allowed to dodge a contact: optimistic, superseded by v2b)"
   }
  },
  {
@@ -785,7 +807,8 @@
     "reach": 0.8187,
     "inband14": 0.8941,
     "contact": 0.0359
-   }
+   },
+   "rule": "v2a (refused K allowed to dodge a contact: optimistic, superseded by v2b)"
   }
  },
  {
@@ -820,7 +843,8 @@
     "reach": 0.8187,
     "inband14": 0.893,
     "contact": 0.0359
-   }
+   },
+   "rule": "v2a (refused K allowed to dodge a contact: optimistic, superseded by v2b)"
   }
  },
  {
@@ -855,7 +879,8 @@
     "reach": 0.8187,
     "inband14": 0.8951,
     "contact": 0.0359
-   }
+   },
+   "rule": "v2a (refused K allowed to dodge a contact: optimistic, superseded by v2b)"
   }
  },
  {
@@ -890,7 +915,8 @@
     "reach": 0.8187,
     "inband14": 0.8911,
     "contact": 0.0359
-   }
+   },
+   "rule": "v2a (refused K allowed to dodge a contact: optimistic, superseded by v2b)"
   }
  },
  {
@@ -923,7 +949,8 @@
     "reach": 0.8187,
     "inband14": 0.8954,
     "contact": 0.0359
-   }
+   },
+   "rule": "v2a (refused K allowed to dodge a contact: optimistic, superseded by v2b)"
   }
  },
  {
@@ -956,7 +983,8 @@
     "reach": 0.8187,
     "inband14": 0.8954,
     "contact": 0.0359
-   }
+   },
+   "rule": "v2a (refused K allowed to dodge a contact: optimistic, superseded by v2b)"
   }
  },
  {
@@ -992,7 +1020,8 @@
     "reach": 0.8187,
     "inband14": 0.8941,
     "contact": 0.0359
-   }
+   },
+   "rule": "v2a (refused K allowed to dodge a contact: optimistic, superseded by v2b)"
   }
  },
  {
@@ -1028,7 +1057,8 @@
     "reach": 0.8187,
     "inband14": 0.8957,
     "contact": 0.0359
-   }
+   },
+   "rule": "v2a (refused K allowed to dodge a contact: optimistic, superseded by v2b)"
   }
  },
  {
@@ -1064,7 +1094,8 @@
     "reach": 0.8125,
     "inband14": 0.897,
     "contact": 0.041
-   }
+   },
+   "rule": "v2a (refused K allowed to dodge a contact: optimistic, superseded by v2b)"
   }
  },
  {
@@ -1100,7 +1131,8 @@
     "reach": 0.8187,
     "inband14": 0.8806,
     "contact": 0.0359
-   }
+   },
+   "rule": "v2a (refused K allowed to dodge a contact: optimistic, superseded by v2b)"
   }
  },
  {
@@ -1136,7 +1168,8 @@
     "reach": 0.8187,
     "inband14": 0.8956,
     "contact": 0.0359
-   }
+   },
+   "rule": "v2a (refused K allowed to dodge a contact: optimistic, superseded by v2b)"
   }
  },
  {
@@ -1172,7 +1205,8 @@
     "reach": 0.8187,
     "inband14": 0.8851,
     "contact": 0.0359
-   }
+   },
+   "rule": "v2a (refused K allowed to dodge a contact: optimistic, superseded by v2b)"
   }
  },
  {
@@ -1208,7 +1242,8 @@
     "reach": 0.8187,
     "inband14": 0.9002,
     "contact": 0.0359
-   }
+   },
+   "rule": "v2a (refused K allowed to dodge a contact: optimistic, superseded by v2b)"
   }
  },
  {
@@ -1244,7 +1279,8 @@
     "reach": 0.8187,
     "inband14": 0.8815,
     "contact": 0.0359
-   }
+   },
+   "rule": "v2a (refused K allowed to dodge a contact: optimistic, superseded by v2b)"
   }
  },
  {
@@ -1280,7 +1316,8 @@
     "reach": 0.8187,
     "inband14": 0.8878,
     "contact": 0.0359
-   }
+   },
+   "rule": "v2a (refused K allowed to dodge a contact: optimistic, superseded by v2b)"
   }
  },
  {
@@ -1316,7 +1353,8 @@
     "reach": 0.8125,
     "inband14": 0.8866,
     "contact": 0.041
-   }
+   },
+   "rule": "v2a (refused K allowed to dodge a contact: optimistic, superseded by v2b)"
   }
  },
  {
@@ -1352,7 +1390,8 @@
     "reach": 0.8187,
     "inband14": 0.891,
     "contact": 0.0359
-   }
+   },
+   "rule": "v2a (refused K allowed to dodge a contact: optimistic, superseded by v2b)"
   }
  },
  {
@@ -1388,7 +1427,8 @@
     "reach": 0.8187,
     "inband14": 0.8936,
     "contact": 0.0359
-   }
+   },
+   "rule": "v2a (refused K allowed to dodge a contact: optimistic, superseded by v2b)"
   }
  },
  {
@@ -1424,7 +1464,8 @@
     "reach": 0.8187,
     "inband14": 0.8932,
     "contact": 0.0359
-   }
+   },
+   "rule": "v2a (refused K allowed to dodge a contact: optimistic, superseded by v2b)"
   }
  },
  {
@@ -1460,7 +1501,8 @@
     "reach": 0.8187,
     "inband14": 0.8942,
     "contact": 0.0359
-   }
+   },
+   "rule": "v2a (refused K allowed to dodge a contact: optimistic, superseded by v2b)"
   }
  },
  {
@@ -1496,7 +1538,8 @@
     "reach": 0.8187,
     "inband14": 0.8979,
     "contact": 0.0359
-   }
+   },
+   "rule": "v2a (refused K allowed to dodge a contact: optimistic, superseded by v2b)"
   }
  },
  {
@@ -1532,7 +1575,8 @@
     "reach": 0.8187,
     "inband14": 0.8963,
     "contact": 0.0359
-   }
+   },
+   "rule": "v2a (refused K allowed to dodge a contact: optimistic, superseded by v2b)"
   }
  },
  {
@@ -1568,7 +1612,8 @@
     "reach": 0.8187,
     "inband14": 0.8965,
     "contact": 0.0359
-   }
+   },
+   "rule": "v2a (refused K allowed to dodge a contact: optimistic, superseded by v2b)"
   }
  },
  {
@@ -1604,7 +1649,8 @@
     "reach": 0.8187,
     "inband14": 0.899,
     "contact": 0.0359
-   }
+   },
+   "rule": "v2a (refused K allowed to dodge a contact: optimistic, superseded by v2b)"
   }
  },
  {
@@ -1640,7 +1686,8 @@
     "reach": 0.8187,
     "inband14": 0.8928,
     "contact": 0.0359
-   }
+   },
+   "rule": "v2a (refused K allowed to dodge a contact: optimistic, superseded by v2b)"
   }
  },
  {
@@ -1676,7 +1723,8 @@
     "reach": 0.8187,
     "inband14": 0.9004,
     "contact": 0.0359
-   }
+   },
+   "rule": "v2a (refused K allowed to dodge a contact: optimistic, superseded by v2b)"
   }
  },
  {
@@ -1712,7 +1760,82 @@
     "reach": 0.8187,
     "inband14": 0.8987,
     "contact": 0.0359
-   }
+   },
+   "rule": "v2a (refused K allowed to dodge a contact: optimistic, superseded by v2b)"
+  }
+ },
+ {
+  "k": 49,
+  "t": "2026-10-18T06:00:51Z",
+  "params": {
+   "seed": "k33",
+   "rA": -6.45,
+   "rsp": 16.74,
+   "rsr": 42.22
+  },
+  "bench": "Bench(60,160) fast, oracle K (bound), ES k33",
+  "inband14": 0.9007,
+  "inband10": 0.5565,
+  "reach": 0.8313,
+  "follow": 0.95,
+  "contact": 0.0206,
+  "gap": 8.93,
+  "extra": {
+   "plain": 8.93,
+   "ws_taken": 133,
+   "near1_poses": 0,
+   "min_mm": 1.089,
+   "moved": 13,
+   "why": {
+    "contact": 4,
+    "slide": 6,
+    "fold": 20
+   },
+   "kit": {
+    "gap": 11.72,
+    "plain": 11.72,
+    "reach": 0.8187,
+    "inband14": 0.9,
+    "contact": 0.0359
+   },
+   "rule": "v2a (refused K allowed to dodge a contact: optimistic, superseded by v2b)"
+  }
+ },
+ {
+  "k": 50,
+  "t": "2026-10-18T06:01:09Z",
+  "params": {
+   "seed": "k33",
+   "rA": -9.92,
+   "rsp": 16.41,
+   "rsr": 44.93
+  },
+  "bench": "Bench(60,160) fast, oracle K (bound), ES k33",
+  "inband14": 0.8938,
+  "inband10": 0.5464,
+  "reach": 0.8313,
+  "follow": 0.95,
+  "contact": 0.0206,
+  "gap": 9.55,
+  "extra": {
+   "plain": 9.55,
+   "ws_taken": 133,
+   "near1_poses": 0,
+   "min_mm": 1.089,
+   "moved": 13,
+   "why": {
+    "contact": 4,
+    "slide": 6,
+    "fold": 20
+   },
+   "kit": {
+    "gap": 12.41,
+    "plain": 12.41,
+    "reach": 0.8187,
+    "inband14": 0.8931,
+    "contact": 0.0359
+   },
+   "rule": "v2a (refused K allowed to dodge a contact: optimistic, superseded by v2b)"
   }
  }
 ]

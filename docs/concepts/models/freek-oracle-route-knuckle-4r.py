@@ -234,14 +234,32 @@ def pick(res, cap=None):
     return tab
 
 
+KIN_REFUSED = ("fold", "slide", "flip", "closure", "parts")
+
+
 def _rec(M, B, i):
     """one pose's outcome in a model run: (score, taken, dmin, why)"""
     r = B.res[i]
     if r is None: return (-50.0, False, None, str(M.why[i]))
     d = min(float(np.min(r)), float(getattr(M, "cmin", {}).get(i, 1e9)))
     if d < 0: return (-100.0 + d, False, d, "contact")
-    inb = float(np.mean((r >= 2.0) & (r <= 14.0))) if B.kind[i] == "clip" else 0.0
-    return (min(d, CAP) + 1e-3 * inb, True, d, "")
+    return (min(d, CAP), True, d, "")
+
+
+def pick_rows(rows, ref):
+    """the oracle's pick for one pose from [(dK, taken, dmin, why)] (row 0 = the kit): ONLY configurations the mechanism can
+    physically be in compete (not refused for fold / slide / flip / closure / a part jam): a refused K is not a place the
+    mechanism can park to dodge a contact (2026-10-18 red team: the first rule let 5 contact poses 'escape' to a refused floor
+    sample and read as lost poses instead of contacts - 15.27 was optimistic). Taken-and-clear beats contact; among taken,
+    the larger min(distance, CAP); ties -> nearest the kit's K. No legal row -> the kit's state stands."""
+    def sc(x):
+        if x[1]: return min(x[2], CAP)
+        if x[3] == "contact": return -100.0 + x[2]
+        return None
+    legal = [x for x in rows if x[0] is not None and x[3] not in KIN_REFUSED and sc(x) is not None]
+    if not legal: return None
+    best = max(legal, key=lambda x: (round(sc(x), 3), -abs(x[0] - ref)))
+    return None if best is rows[0] else best[0]
 
 
 def sub_bench(B, sub):
@@ -270,21 +288,30 @@ def oracle_runs(Mk, B, ns=9, sub=True):
         print(f"  oracle sample {j + 1}/{ns} done", flush=True)
     ODesign.TAB = None; tab = {}
     for i, rr in recs.items():
-        ref = rr[0][0] if rr[0][0] is not None else float(fl[list(cand).index(i)])
-        best = max(rr, key=lambda x: (round(x[1][0], 3), -abs((x[0] if x[0] is not None else ref) - ref)))
-        if best is not rr[0]: tab[i] = best[0]
+        rows = [(x[0], x[1][1], x[1][2], x[1][3]) for x in rr]
+        ref = rows[0][0] if rows[0][0] is not None else float(fl[list(cand).index(i)])
+        pk = pick_rows(rows, ref)
+        if pk is not None: tab[i] = pk
     res = {i: dict(th=float(th[i]), kit=rr[0][0], floor=float(fl[list(cand).index(i)]), dKB=dkb,
                    rows=[(x[0], x[1][1], x[1][2], x[1][3]) for x in rr]) for i, rr in recs.items()}
     return res, tab
 
 
-def run_oracle(fitB, B, P, frozen=True, how="runs"):
+def run_oracle(fitB, B, P, frozen=True, how="runs", pre=None):
     """fit (kit K) on fitB, oracle on B with that shape, composed run; returns the reports"""
     t0 = time.time(); ODesign.TAB = None; P = dict(P); seed = P.pop("_seed", "k33")
     Mk, fitr, M1, keys = RM.freeze(fitB, B, dict(P), KModel)          # frozen shape on B (fitB itself for the fast sweep)
-    rk = Mk.run(); kit = {k: rk[k] for k in KEYS}; ntk = RM.near_touch(Mk, B); whyk = {k: int((Mk.why == k).sum()) for k in set(Mk.why.tolist()) if k}
-    tk_kit = [i for i in RM.taken_list(B)]
-    if how == "runs": res, tab = oracle_runs(Mk, B, ns=NSR if B.mode != "fast" else 9)
+    if pre is not None:                                       # compose only: re-pick from saved per-pose sample records (same frozen shape)
+        kit = dict(pre.get("kit", {})); ntk = dict(gap_near1=kit.get("near")); whyk = kit.get("why"); tk_kit = []
+        res = {int(i): v for i, v in pre["res"].items()}; tab = {}
+        for i, r_ in res.items():
+            rows = [tuple(x) for x in r_["rows"]]; pk = pick_rows(rows, rows[0][0] if rows[0][0] is not None else r_["floor"])
+            if pk is not None: tab[i] = pk
+    else:
+        rk = Mk.run(); kit = {k: rk[k] for k in KEYS}; ntk = RM.near_touch(Mk, B); whyk = {k: int((Mk.why == k).sum()) for k in set(Mk.why.tolist()) if k}
+        tk_kit = [i for i in RM.taken_list(B)]
+    if pre is not None: pass
+    elif how == "runs": res, tab = oracle_runs(Mk, B, ns=NSR if B.mode != "fast" else 9)
     else: res = scan(Mk, B); tab = pick(res)
     ODesign.TAB = {qkeys(Mk.Q[[i]])[0]: v for i, v in tab.items()}
     Mo = type(Mk)(B, dict(Mk.p)); ro = Mo.run(); orc = {k: ro[k] for k in KEYS}; nto = RM.near_touch(Mo, B)
@@ -311,7 +338,8 @@ def run_oracle(fitB, B, P, frozen=True, how="runs"):
         conn = dict(file=os.path.relpath(cf, REPO), dropped=len(drop), **{k: rc[k] for k in KEYS}, near=ntc["gap_near1"],
                     ws_taken=sum(1 for i in tk if B.kind[i] == "ws") - len(drop))
     ODesign.TAB = None
-    return dict(conn=conn, fit=fitr, kit=dict(**kit, near=ntk["gap_near1"], ws_taken=sum(1 for i in tk_kit if B.kind[i] == "ws"), why=whyk),
+    if pre is None: kit = dict(**kit, near=ntk["gap_near1"], ws_taken=sum(1 for i in tk_kit if B.kind[i] == "ws"), why=whyk)
+    return dict(conn=conn, fit=fitr, kit=kit,
                 oracle=dict(**orc, near=nto["gap_near1"], near1_poses=nto["near1_poses"], min_mm=nto["min_mm"], ws_taken=sum(1 for i in tk if B.kind[i] == "ws"),
                             clear02=sum(1 for i in tk if low[i] >= 0.2), clear1=sum(1 for i in tk if low[i] >= 1.0), why=whyo,
                             moved=len(tab), state_free_taken=int(sum(1 for i in tk if Mo.kstate[i] == 2))),
@@ -349,7 +377,10 @@ if __name__ == "__main__":
     P = params(over); CAP = float(over.get("cap", CAP))
     fitB = RM.PV.fast_bench(60, 160)
     B = fitB if mode == "fast" else CB.Bench(n_clip=110, n_ws=360)
-    r = run_oracle(fitB, B, P, how=os.environ.get("FO_HOW", "runs"))
+    pre = None
+    if os.environ.get("FO_PRE"):                             # compose mode: FO_PRE=<saved OUT.json> (its _perpose.json holds the sample records)
+        pre = json.load(open(os.environ["FO_PRE"].replace(".json", "_perpose.json"))); pre["kit"] = json.load(open(os.environ["FO_PRE"]))["kit"]
+    r = run_oracle(fitB, B, P, how=os.environ.get("FO_HOW", "runs"), pre=pre)
     o = r["oracle"]; k = r["kit"]
     bind = {}
     if mode == "wear":
