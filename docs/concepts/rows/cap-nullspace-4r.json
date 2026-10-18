@@ -46,40 +46,25 @@
   "wa": -14.235323616842141,
   "sB": 1,
   "sig": -1,
-  "m": 4.216648134599367,
+  "m": 5.0,
   "T": 180.0,
   "nq": 360,
   "policy": "spring",
   "k": [
-   0.189,
+   0.6486,
    0.0,
-   0.0,
-   0.261
+   0.0756,
+   0.2616
   ],
   "r": [
-   8.0,
-   0.0,
-   0.0,
-   -115.0
+   -9.45,
+   -3.15,
+   44.18,
+   -143.35
   ],
   "q": 0.9788580455234306,
   "connect": 1,
-  "L1": 60.0,
-  "L2": 62.0,
-  "Ll0": 66.0,
-  "Ll1": 66.0,
-  "Ll2": 72.0,
-  "q1min": 40.0,
-  "sigma3": -1,
-  "dmax": 170,
-  "k0": 0.6485520365245306,
-  "k1": 0.0,
-  "k2": 0.07557101969037763,
-  "k3": 0.26159573494163,
-  "r0": -9.445264518247381,
-  "r1": -3.1537727533644695,
-  "r2": 44.17777352227466,
-  "r3": -143.34753188954096
+  "dmax": 170
  },
  "claim_bench": "Bench(110,360) exact frozen (Bench(60,160) levels, K6 1 mm, full-grid flood)",
  "frozen_exact": {
@@ -173,5 +158,6 @@
   "best1": 59.44,
   "best2": 59.05,
   "best3_wrapped_law": 57.87
- }
+ },
+ "best_params_note": "effective (snapped) params of the claim cell: the fold margin m snaps to the 5-deg rule; k / r = spring stiffness ratios (J0, J1, J2, J3) and rests (deg)"
 }
