@@ -120,3 +120,53 @@ that does not hold on 360 new poses (near-touch gap 56.28 fast / 66.40 frozen).
    oracle ghost (bound, 44.97-48.55 fast in-sample, K2 off) was ever better fast, and nothing in it is buildable unpowered.
 3. **Fast-bench improvements of a spring cell decouple from the frozen number** after ~400 tries (fast -4.2, frozen
    -0.4): stop the fast search on a frozen plateau, not on the fast gate alone.
+
+## Audit (2026-10-18, independent auditor): the death STANDS
+
+The measured reason in one line: **the claim reproduces to the digit and its sweep passed the gate. The binder is the
+J2 circle, not the spring law. A skin-reading oracle puts hub 2 in band only 0.04 at the claim geometry. Short links
+that do put hub 2 in band drop reach to 0.29-0.40. Even with hub 2 and links 1-2 perfect in band, the frozen gap is
+19.84, over the 17.5 kill line and the lead's 18.28.**
+
+Script and data: `docs/concepts/verify/cap-nullspace-4r-audit.py`, `docs/concepts/verify/cap-nullspace-4r-audit.json`.
+
+1. **The claim reproduces.** The claim cell was re-worn by the auditor through the model's own `evaluate`: fit on
+   Bench(60,160) fast, levels frozen, worn on Bench(110,360) exact, K6 at 1 mm, full-grid flood (397 s).
+   - Frozen exact: gap **57.70**, reach 0.7444, follow 1.0, ib14 0.5476, ib10 0.3593, contact 0.069.
+   - Near-touch 64.51, overhead 11/28, 1 island dropped, fold margins 5.04 / 5.00.
+   - This matches the row to the digit.
+   - Fast: 46.97, the same as the doc's "K6 1 mm + flood" number. The row's headline 46.32 is the sweep-time
+     number, 0.65 apart. Minor.
+2. **Convergence gate.** The auditor recomputed it from the sweep file in order, with failed and dishonest rows set
+   to 275.
+   - dmax-170 sweep (262 configs): 0.27 / 0.11 / 0.12 score points.
+   - All spring sweeps (1069 configs): 0.88 / 0.06 / 0.13.
+   - Control (198 configs): 0.71 / 0.48 / 0.48.
+   - All three converged, so no CMA run was needed.
+3. **Is the bad number a modelling choice, meaning the spring policy?** It is not.
+   - At the claim geometry the oracle ghost (`policy band`) reads the skin to pick the null-space state per pose.
+     With K2 off it scores 71.01 fast, with hub 2 in band only **0.037** (link 1 0.19, link 2 0.36).
+   - With K2 on it cannot be followed at all: follow 0.13, gap 158.89.
+   - No choice of J1 on its circle about J0 keeps hub 2 in band. The binder is geometric.
+4. **What the binder costs (frozen exact, upper bounds).** For each bound, the named members' samples are set to
+   8 mm on every taken pose and their skin contacts are forgiven. The crown-check column is kept.
+
+   | bound | frozen gap |
+   |---|---|
+   | hub 2 deleted | 53.10 |
+   | hub 2 ideal | 50.25 |
+   | hub 2 + links 1-2 ideal | **19.84** (reach 0.758, contact 0.057) |
+   | every member ideal | 18.26 |
+   | in-band perfect, reach + contact only | 22.46 |
+
+   - Contact poses by member: link 2 15, hub 2 16, link 1 15, hub 1 12, link 0 7, hub 3 6, neck 7 (28 poses).
+   - Even a perfect J2 side stays over the 17.5 kill line, and so does the lead's 18.28.
+   - On the fit bench the same bound is 8.27, which shows again that fast gains here do not survive frozen.
+5. **Missed region?** The 4R and the control both searched only a1 >= 45 and a2 >= 54.
+   - The auditor ran the oracle ghost (K2 off) on a1 35 / 40 / 45 x a2 45 / 52 / 58 at the claim's seat and springs.
+   - Short links do put hub 2 in band: 0.56-0.64 at a1 35 / a2 45-52.
+   - The cost is the fold: reach falls to 0.29-0.40 and the gap to 94-116.
+   - The best oracle cell in the region is 83.31 (a1 45, a2 58). The claim is 46.97.
+   - The region is dead even with an oracle.
+6. **Template bar.** The round-3 bar (within 10 of 68.93 on Bench(60,160)) is passed trivially. The death is judged
+   against the round-103 17.5 kill line, the lead's 18.28 and the design's own control (60.61 frozen), and it stands.
