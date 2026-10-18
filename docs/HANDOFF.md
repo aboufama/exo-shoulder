@@ -659,6 +659,13 @@ designs (dipped-law-groove-knuckle-3r, seed-offset-3r-slides); every leader is w
    - *14:00:* the blocker's option 1 (test the posteromedial J1 seat first) is answered: DEAD (fa4db10). The best frozen
      exact is 202.93, with no honest drive at any seat in the box (the drive's PA is 75-88 deg there) and the metal off
      the curved back. The user was told; options 2-4 remain (4th joint / front-clavicle seats / accept ~93-94).
+   - *15:00:* round 106 (jump J6): offset-shortcar-relay-4r is VERIFIED by the round's verifier (7bbc017): 14.76 chain-only
+     buildable gate (score 94.63; plain 13.74), held 17.77, both reproduced. It is **the best verified 4-joint design**:
+     the best held-out number on file, paired better than the lead, freek and proxtrack (P 1.00). 4 DOF, cx 52.5, 13
+     contacts vs the lead's 4.
+     - Red team: a TOLERANCE CLIFF. The offset delta at 5.0 instead of 4.5 reads 27.53 (37 E-over-carriage jams), so
+       the cliff is ~0.5 deg away. A bump +0.2 mm tolerance reads 14.88.
+     - Its in-loop alignment audit is pending. The user was told the option-2 number moved: 94.63 verified, unaudited.
 2. **Reach is the gap.**
    - The lead's gap is reach 17.50 of 18.49 (ROUNDS round 10 results). **Score 95 is gap <= 13.75**: +18 workspace
      poses at the lead's in-band and contact, 0.278 points each (ROUNDS round 11 plan).
