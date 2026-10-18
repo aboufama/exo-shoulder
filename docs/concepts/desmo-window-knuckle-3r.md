@@ -226,3 +226,56 @@ The gate passes. The morphology's free parameters cannot move the limiter:
   * The next lever is the drive geometry: the crank axis dR, the ratio g, or the PA budget. The seat is not the lever.
 * The J2-first stop order costs nothing in reach. It needs the stage-2 slot to run 0.55-1.0 deg of K past J2's window,
   and hub K's O20 caps that at ~48.0 at r_c 16.18.
+
+## Audit (death audit, 2026-10-18)
+
+The auditor's job was to try to refute the death. The death **stands**, but the measured cause is about 3.5x smaller than
+the screen said. Most of the 1.45-point "lift cost" is a sampling-density artefact inherited from the parent's ring
+sampler.
+
+**Convergence gate.** Reproduced from the sweep at 0.007 / 0.007 / 0.011 score points (18 legal rows of 32). It passes.
+The sweep is narrow (lev 3.9 in every legal row, a_s 9.7-9.98, psi 149.4-150.6), but the stack and the pin scan force
+that narrowness: lev is pinned by link 1b's plate top + 0.15, and only 2 pins are legal at mid 3.9. No region was missed.
+
+**Finding: ring2 is sampled 4x denser than every other member (new).**
+* tools/concept_bench.py asks for skin-facing metal sampled evenly at ~1 pt / 4 mm2, and the kit's cell is 4.0 mm2
+  (tools/concept_kit.py line 293). Hubs follow it: 80 samples on an O20 crown of 314 mm2.
+* The stage-1 ring sector (docs/concepts/models/desmo-conecut-knuckle-3r.py lines 252-261, inherited unchanged) steps
+  0.5 mm radially x 2.0 mm of arc, which is 1 pt / 1 mm2. At this design's r_out 11.41 that gives 29 samples (rings r
+  10.25 / 10.75 / 11.25) on a sector of ~28 mm2. The kit's density gives ~7.
+* in-band is a share of samples, so the 15 %-in-band sector weighs 4x in ib14.
+* The honesty audit flags only sparse sampling (< 1 pt / 16 mm2), never over-dense sampling, so nothing caught it. The
+  same check could be gamed the other way, by over-sampling well-placed metal.
+
+**Measured at the kit's density.** ringfix keeps the sampled ring nearest the sector's mid radius at 2 mm of arc: 10
+samples, which is still denser than the kit and so conservative. Reach, follow and contact are untouched, because only
+the rigid in-band samples change.
+
+| measurement | as screened | kit density |
+|---|---|---|
+| fast, worn k4, near-touch | 20.52 (ib14 0.8782) | 19.02 (ib14 0.8924) |
+| frozen exact bench (re-weighting of the saved per-part in-band) | 20.43 | 19.01 (10 samples) / 18.80 (area-exact 7) |
+| frozen exact held (re-weighting) | 24.61 | 23.20 / 23.00 |
+| parent desmo-conecut+blend bench (re-weighting) | 18.99 | 18.57 / 18.49 |
+| parent held | 23.18 | 22.76 / 22.68 |
+
+Sources:
+* docs/alignment/remeasure/desmo-window-knuckle-3r_ringfix_fast.json and _ringorig_fast.json;
+* docs/alignment/remeasure/desmo-window-knuckle-3r_ringdensity_reweight.json;
+* the full frozen exact re-wear through the verifier harness: docs/concepts/verify/desmo-window-knuckle-3r_ringfix_audit.py
+  (results below when it lands).
+
+**What the correction changes.**
+* **The lift cost.** Like for like with the parent at the kit's density, raising stage 1 by 3.04 mm costs +0.31..0.44 on
+  the bench and +0.32..0.44 held, not +1.45 / +1.42.
+* **The bench kill line passes.** The bench sits at 18.80-19.01, under the pre-registered 19.45.
+* **The held kill line still fails, so the death stands.** Held is 23.00-23.20 against the lead's 22.38: +0.62..+0.82,
+  past the 0.5 line. Takes and contacts are identical to the lead (0 discordant), so all of that gap is in-band. The
+  window design sits at ib14 0.892-0.895 against the lead's 0.901 even after the fix.
+* **The family moves too (a measurement change, not a design change).** The parent desmo-conecut (verified 18.98) would
+  read 18.49-18.57 at the kit's density. desmo-slipper-knuckle-3r's model (line 283) and its descendants use the same
+  sampler. The lead should re-wear those rows at the kit's density before ranking the desmo family against the lead.
+
+**One-line reason.** The buildable stack loses on held-out in-band, +0.62..0.82 over the lead at the corrected density
+(identical takes and contacts). The screen's 1.45-point lift cost was mostly ring2's 4x over-sampling: the true cost is
+0.3-0.44.

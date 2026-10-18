@@ -1,0 +1,168 @@
+{
+ "id": "desmo-window-knuckle-3r",
+ "audit": "ring2 sampling density (death audit 2026-10-18)",
+ "rule": "tools/concept_bench.py docstring: skin-facing surfaces sampled evenly, ~1 pt / 4 mm2; tools/concept_kit.py line 293 cell 4.0 mm2. ring2 (docs/concepts/models/desmo-conecut-knuckle-3r.py lines 252-261) steps 0.5 mm radially x 2.0 mm of arc = 1 pt / 1 mm2.",
+ "method": "exact re-weighting of the saved per-part in-band (parts_ib14 [frac, mean mm, n]) with ring2's count set to the area-exact n (sector area / 4 mm2) or to the measured kit-density subsample (10 = the r 10.75 ring at 2 mm arc, conservative); reach / follow / contact unchanged (ring2 is rigid in-band metal only; its contact samples ring_all are untouched)",
+ "rows": [
+  {
+   "case": "window bench",
+   "file": "docs/concepts/verify/desmo-window-knuckle-3r_v_bench_frozen.json",
+   "frozen": {
+    "gap": 20.43,
+    "reach": 0.7278,
+    "follow": 1.0,
+    "inband14": 0.8785,
+    "inband10": 0.5622,
+    "contact": 0.0106
+   },
+   "ring2": [
+    0.151,
+    16.8,
+    29
+   ],
+   "n_total": 991,
+   "variants": {
+    "as_sampled": {
+     "n_ring2": 29,
+     "inband14": 0.8785,
+     "gap": 20.43
+    },
+    "kit_subsample_10": {
+     "n_ring2": 10,
+     "inband14": 0.8927,
+     "gap": 19.01
+    },
+    "area_exact": {
+     "n_ring2": 7.25,
+     "inband14": 0.8948,
+     "gap": 18.8
+    },
+    "ring_removed": {
+     "n_ring2": 0,
+     "inband14": 0.9004,
+     "gap": 18.28
+    }
+   }
+  },
+  {
+   "case": "window held",
+   "file": "docs/concepts/verify/desmo-window-knuckle-3r_v_held_frozen.json",
+   "frozen": {
+    "gap": 24.62,
+    "reach": 0.6922,
+    "follow": 1.0,
+    "inband14": 0.8776,
+    "inband10": 0.5614,
+    "contact": 0.016
+   },
+   "ring2": [
+    0.156,
+    16.8,
+    29
+   ],
+   "n_total": 991,
+   "variants": {
+    "as_sampled": {
+     "n_ring2": 29,
+     "inband14": 0.8777,
+     "gap": 24.61
+    },
+    "kit_subsample_10": {
+     "n_ring2": 10,
+     "inband14": 0.8918,
+     "gap": 23.2
+    },
+    "area_exact": {
+     "n_ring2": 7.25,
+     "inband14": 0.8938,
+     "gap": 23.0
+    },
+    "ring_removed": {
+     "n_ring2": 0,
+     "inband14": 0.8994,
+     "gap": 22.44
+    }
+   }
+  },
+  {
+   "case": "parent desmo-conecut+blend bench",
+   "file": "docs/concepts/verify/desmo-conecut-knuckle-3r_v_bench_frozen_blend.json",
+   "frozen": {
+    "gap": 18.98,
+    "reach": 0.7278,
+    "follow": 1.0,
+    "inband14": 0.893,
+    "inband10": 0.5629,
+    "contact": 0.0106
+   },
+   "ring2": [
+    0.55,
+    13.8,
+    19
+   ],
+   "n_total": 993,
+   "variants": {
+    "as_sampled": {
+     "n_ring2": 19,
+     "inband14": 0.8929,
+     "gap": 18.99
+    },
+    "kit_subsample_10": {
+     "n_ring2": 7,
+     "inband14": 0.8971,
+     "gap": 18.57
+    },
+    "area_exact": {
+     "n_ring2": 4.75,
+     "inband14": 0.8979,
+     "gap": 18.49
+    },
+    "ring_removed": {
+     "n_ring2": 0,
+     "inband14": 0.8996,
+     "gap": 18.32
+    }
+   }
+  },
+  {
+   "case": "parent desmo-conecut+blend held",
+   "file": "docs/concepts/verify/desmo-conecut-knuckle-3r_v_held_frozen_blend.json",
+   "frozen": {
+    "gap": 23.19,
+    "reach": 0.6922,
+    "follow": 1.0,
+    "inband14": 0.8919,
+    "inband10": 0.5621,
+    "contact": 0.016
+   },
+   "ring2": [
+    0.549,
+    13.8,
+    19
+   ],
+   "n_total": 993,
+   "variants": {
+    "as_sampled": {
+     "n_ring2": 19,
+     "inband14": 0.892,
+     "gap": 23.18
+    },
+    "kit_subsample_10": {
+     "n_ring2": 7,
+     "inband14": 0.8962,
+     "gap": 22.76
+    },
+    "area_exact": {
+     "n_ring2": 4.75,
+     "inband14": 0.897,
+     "gap": 22.68
+    },
+    "ring_removed": {
+     "n_ring2": 0,
+     "inband14": 0.8987,
+     "gap": 22.51
+    }
+   }
+  }
+ ]
+}
