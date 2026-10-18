@@ -1,0 +1,32 @@
+[
+ {
+  "k": 0,
+  "t": "2026-10-18T13:38:30Z",
+  "params": {
+   "r_c": 16.176,
+   "beta": -177.169,
+   "nose_r2": 0.75,
+   "wall2": 0.9,
+   "boss_r": 2.5,
+   "glev": 2.039,
+   "blend": 10.0,
+   "kslot": 46.9,
+   "a_s": 9.8,
+   "psi": 150.0,
+   "mu": 0.15,
+   "owd_margin": 2.0,
+   "zr": 2.0,
+   "l2_lift": 0.0,
+   "bench": "Bench(60,160) fast fit (the frozen protocol's fit model)",
+   "dwell_delta": 0.0
+  },
+  "inband14": 0.896,
+  "inband10": 0.5687,
+  "reach": 0.775,
+  "follow": 1.0,
+  "contact": 0.0,
+  "gap": 12.9,
+  "gap_near1": 14.06,
+  "note": "fit model only; kslot 46.9 -> dK_lim 46.75 in the fit; the J2 dowel at 46.35 is applied in the frozen wears"
+ }
+]
