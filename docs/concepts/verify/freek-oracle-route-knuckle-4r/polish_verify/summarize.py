@@ -32,9 +32,14 @@ for prot in ("envh_held", "fit60_held", "fit60_bench"):
 for prot, wear in (("fit60_held", "held"), ("fit60_bench", "bench")):
     a = pp(f"VER_{prot}"); f = os.path.join(REM, f"freek-oracle-route-knuckle-4r_{wear}_perpose.json")
     if a and os.path.exists(f): out["paired"][f"VER_{prot}_vs_on_file_verified_dump"] = CS(a, json.load(open(f))["poses"])
+    a = pp(f"pick1_{prot}")
+    if a and os.path.exists(f): out["paired"][f"pick1_{prot}_vs_VER_verified_dump"] = CS(a, json.load(open(f))["poses"])
     for k in ("pick1",):
         a = pp(f"{k}_{prot}"); f2 = os.path.join(REPO, "docs", "research", "freek_env_polish", "local", f"claim_{k}_{prot}_perpose.json")
         if a and os.path.exists(f2): out["paired"][f"{k}_{prot}_vs_polisher_dump"] = CS(a, json.load(open(f2))["poses"])
+for k in ("pick1", "VER"):
+    a = pp(f"{k}_envh_held"); f2 = os.path.join(REPO, "docs", "research", "freek_env_polish", "local", f"claim_{k}_env_held_perpose.json")
+    if a and os.path.exists(f2): out["paired"][f"{k}_envh_held_vs_polisher_dump"] = CS(a, json.load(open(f2))["poses"])
 json.dump(out, open(os.path.join(HERE, "summary.json"), "w"), indent=1, default=float)
 for k, v in out["claims"].items(): print(k, json.dumps({kk: v[kk] for kk in ("gap", "static", "recomputed", "near", "contact_poses", "depth", "overhead", "kin_dropped", "contact_aware", "member_margins", "q3own_engaged", "refused", "refused_kit_contacts", "gap_refusals_as_contacts")}, default=float))
 for k, v in out["paired"].items(): print(k, json.dumps({kk: v.get(kk) for kk in ("gap_A", "gap_B", "diff", "boot", "discordant", "error")}, default=float))
