@@ -174,8 +174,8 @@ def th_margin(M, B):
                 lowest=[dict(own=round(r[0], 3), i=r[1], pose=[B.poses[r[1]][k] for k in ("plane", "elev", "axial")]) for r in sorted(rows)[:5]])
 
 
-def price(variants, outp):
-    t0 = time.time(); S = PT.prepare(CLAIM, 110, 360, exact=True); OUT["prepare_secs"] = round(time.time() - t0, 1); res = {}
+def price(variants, outp, held=False):
+    t0 = time.time(); S = PT.prepare(CLAIM, -1, -1, exact=True) if held else PT.prepare(CLAIM, 110, 360, exact=True); OUT["prepare_secs"] = round(time.time() - t0, 1); res = {}
     for v in variants:
         PT.bump_amounts, PT.rerecord, PT.relay_points = _ORIG["bump_amounts"], _ORIG["rerecord"], _ORIG["relay_points"]
         if v.startswith("rigid"):
@@ -190,7 +190,7 @@ def price(variants, outp):
         keep = {k: o[k] for k in ("wear", "gate_gap", "ib14_gate", "near1_gap", "near2_gap", "ws_taken", "overhead", "relayed", "why", "min_metal_taken", "secs")}
         keep["jams"] = len(o["hw"]["jams"]); keep["ib14_chain_only"] = o["hw"]["ib14_chain_only"]; keep["bump_max_mm"] = o["hw"]["bump_max_mm"]
         keep["contacts"] = o["contacts"]; keep["jam_list"] = o["hw"]["jams"]; keep["continuity_dropped"] = (o["continuity"] or {}).get("dropped_relayed")
-        if v == "base":
+        if v == "base" and not held:
             try: keep["th_margin"] = th_margin(S["M"], S["B"])
             except Exception as ex: keep["th_margin"] = dict(err=repr(ex)[:200])
             try:
@@ -230,4 +230,5 @@ def diag(outp):
 
 if __name__ == "__main__":
     if sys.argv[1] == "price": price(sys.argv[2].split(","), sys.argv[3])
+    elif sys.argv[1] == "held": price(sys.argv[2].split(","), sys.argv[3], held=True)
     else: diag(sys.argv[2])
