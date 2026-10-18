@@ -3079,3 +3079,114 @@ surplus belongs to the plain 3R (281 vs 250), and the back-seat knuckle already 
 **The cap-pole bound for the planner:** the best real-model cap knuckle is 32.08 frozen / 35.16 held in the paired kit,
 1.1-1.5 points behind the lead's own seats. Reach for 95 has to come from somewhere other than re-seating the knuckle's
 J1 or J3 (back seat 277 kinematic, cap 275-299 kinematic but <= 248 on metal).
+
+## Round 14: no lead change - the cx-0 crest pin knee verifies at 32.84 (round winner), the half-ring knuckle's 17.96 is GAMED (picked on the claim bench, held 22.70 vs 22.38), and the cap and crest seats close the main track's 3-joint seat question (2026-10-18, discovery round 14, closer)
+
+Raw data:
+- rows: `docs/concepts/rows/{crest-knee-3r,lowarm-halfring-knuckle-3r,cap-plateau-knuckle-3r,deltoid-crest-j3-3r,slotted-eccentric-pin-knee-3r}.json`;
+- sweeps, models and docs: `docs/concepts/sweeps/<id>.json`, `docs/concepts/models/<id>.py`, `docs/concepts/<id>.md`;
+- verifier harnesses and outputs: `docs/concepts/verify/{crest-knee-3r,lowarm-halfring-knuckle-3r}.py` and their
+  `_v_*` files, `docs/concepts/verify/deltoid-crest-j3-3r_audit_*`, `docs/concepts/verify/cap-plateau-knuckle-3r_*`;
+- per-pose dumps: `docs/alignment/remeasure/{crest-knee-3r,lowarm-halfring-knuckle-3r}_{bench,held}_perpose.json` and
+  `lowarm-halfring-knuckle-3r_vs_conecut-knee-knuckle-3r_paired.json`;
+- audits and rulings: `docs/alignment/<id>{.md,.json,.rulings.json}`, `docs/alignment/ledger.jsonl`;
+- the round table: `docs/concepts/ROUNDS.md` "Round 14 results".
+
+All numbers are frozen exact on Bench(110,360) and were re-measured by an independent verifier. No bench, judge or kit
+file changed. The ledger was re-read at 03:05 UTC: crest-knee, slotted-eccentric and deltoid-crest WATCH; lowarm-halfring
+GAMED; cap-plateau not audited (dead). The farm was closed, so everything ran locally.
+
+**What was measured**
+
+* **crest-knee-3r: VERIFIED 32.84 (score 88.06), held out 29.81, complexity 0, 0 passive translations, WATCH - the
+  round winner, not a lead.**
+  * A plain O20 3R with the two-pin MR63ZZ cuff knee at the crest seats: J1 on the acromion top, J3 on the deltoid crest,
+    and a J3 own-angle window frozen from search to claim.
+  * Reach 0.6333 (228/360), ib14 0.8529, contact 5 poses (deepest -2.77 mm), overhead 5/28.
+  * It trails H1 (27.20) by 5.64 on the same bench and the lead by 14.56. It is over its lens's kill line of 23.64.
+* **lowarm-halfring-knuckle-3r: VERIFIED 17.96 (score 93.47), but GAMED (P1). Not a lead.**
+  * The link-2 root lift was the minimum of 794 configs scanned on Bench(110,360) itself.
+  * Held out it is 22.70, 0.32 worse than the lead paired.
+  * The bench edge is one pose: 316, cleared by 0.048 mm.
+  * Cell A (half ring + low arm) ties the lead at 18.28 with the same 262 takes, at cx 16.5 vs 18.5. But its hard-pad
+    dwell hold reads 0.638 deg of K play against the 0.25 gate.
+* **cap-plateau-knuckle-3r: DEAD at gate 0, 32.08 / held 35.16 (paired kit, ghost drive).**
+  * It takes 247 vs the 279 bar; the lead-seat control in the same kit takes 259 (30.59 / 34.03).
+* **deltoid-crest-j3-3r: DEAD at 34.98** (audit re-wear, s12 basin; claim config 40.17), vs the kill bar of 32.10.
+* **slotted-eccentric-pin-knee-3r: 201.20 frozen**, a paired deficit of +142.7 against its own locked control (58.53).
+
+**What failed and why**
+
+1. **Re-seating a 3-joint O20 chain does not reach 95 at any legal seat measured.**
+   * Back of shoulder: knuckle ghost 269-271 takes.
+   * Cap pole: 275 kinematic and 247 on metal. In the same kit, the lead's seats take 277 kinematic.
+   * Crest: pin knee 228, no knee 218.
+   * At 271 takes, zero contact and ib14 >= 0.90 the gap floor is 14.72 (score 94.65). 95 needs 275 takes at zero
+     contact (+13) or 279 at the lead's contact (+17).
+2. **Kinematic surplus is paid back in proximity.**
+   * Cap: a metal search started at the box's 299-kinematic config walked back to 275 and ended 4 points worse.
+   * Crest: the fold gain (48 -> 16-24 of 220 lost) returns as J3-window stops (5 -> 17), where member 3 sweeps over the
+     crest. Total losses stay at 48-55 of 220 against H1's 51.
+3. **A flat two-pin knee needs its pin sites over skin of one height.**
+   * At the crest's fold-free end the E boss and the arm pad cannot both be in band: 0.43 / 0.85 at wa -0.99, or 0.88 /
+     0.04 at wa -0.72.
+   * The fix is a joggled knee link, bounded at about 25-27 frozen.
+4. **At the crest, the knee buys about 2 frozen points:** 32.84 vs the no-knee 34.98 at neighbouring acromion-top seats.
+5. **A one-part groove wall replaced by a pad stop loses its precision through the drive ratio.**
+   * 17.6 deg of K per mm at the stage-1 pin, with a pad lever of at most 12.3 mm, gives 0.638 deg of K play (0.292 at
+     5-10 microns).
+   * So the half ring's "+0.67" needs a preloaded pad whose drag nobody has measured.
+6. **Radial lifts are dead for link 2.** At pose 316 the skin runs parallel under ~18 mm of the bar. A root lift grazes
+   it (0.048 mm), and a robust 0.2 mm clear costs in-band 1:1 (18.41).
+7. **The slotted eccentric on a J2 crank is geometrically closed.**
+   * The roller track lies in the annulus [b - dG, b + dG] around J2 that the knee hub sweeps. At O20, 88-100 % of
+     closing poses collide.
+   * At the parent's seats the O20 knee is the killer: O10 reads 70.07 fast, O20 209.85.
+8. **Fold-limited seats invert the fast ranking.**
+   * deltoid-crest: 26.78 fast -> 40.17 frozen, while 29.59 fast -> 34.98.
+   * A J3 window fitted on 160 poses stops twice as many on 360 (15-17 of 220 vs 29-32 of 470).
+
+**Instruments (new)**
+
+* The frozen-exact per-sample surrogate replaces one part's distance segment per pose and re-runs Bench.report. It costs
+  about 0.1 s per config and matches the full model to 0.00, so it screens contact levers about 1000x faster than full
+  frozen runs.
+  * It must scan the envelope-selection draw, never Bench(110,360) or held out. That is the P1 lesson.
+* The fast Bench(60,160) holds none of the family's four contact poses (205 / 237 / 264 / 316), so a fast search is
+  blind to them.
+* The convergence gate needs >= 2 independent starts. Cap-plateau's chained streams passed it on one basin.
+* Model box edges must equal the rule bounds both ways: deltoid-crest's end_extra 6 vs the rule's 8 cost 0.64 frozen.
+* The dashboard must read the honest flag: slotted-eccentric's sweep best of 97.45 is a model-flagged dishonest probe.
+
+**Alignment (carried, with numbers; full list in ROUNDS.md "Round 14 results").**
+* **crest-knee-3r, WATCH:**
+  * reporting / R2: the sweep shows 26.34 (score 90.42) against the verified 32.84; the verdict text is still the screen's.
+  * G1 (report-only): overhead takes at 0.59-2.10 mm on the bench, 0.02-1.45 mm held out; the 1-2 mm shell holds 25.14
+    points.
+  * NEW-ws-inband: 0.793 bench / 0.775 held, the lowest of 18 probes.
+  * Refuted: continuity (959 of 959 connected) and P2 (clean held 28.13).
+* **lowarm-halfring-knuckle-3r, GAMED (P1)**, plus watch:
+  * continuity / S5: kNN flood held 30.93, -8.23.
+  * T1: every winning scan config clears 316 by 0.014-0.197 mm.
+  * R3: p10 18.07 / median 18.42 never shown.
+  * M5: K play 0.638 vs 0.25.
+  * M3: V5 never run.
+  * S3: the stop pad is unsampled.
+  * G4: m_sub < 1 deg on 50 of 205 rest poses.
+* **slotted-eccentric-pin-knee-3r, WATCH:**
+  * fast_frozen +47.71 (+34.98 of it the search's 0.5 mm part rule).
+  * No flood on file; the slot end at th 74 blocks the rest region.
+  * Hub 2 0.00 in band.
+  * The dishonest sweep best of 97.45 is shown.
+  * The cuff knee in the name is not in the model.
+* **deltoid-crest-j3-3r, WATCH (47.86 claim):** sweep 26.78 shown as 90.26; plain-gap metal parked past 0 mm; overhead
+  metal at 0.13-1.34 mm.
+* **The lead, unchanged, WATCH:** reporting, T1, T3 (held th 5.006), strap dilution, M5, self-reference, G4.
+
+**Next (round 15, main):**
+1. Write the 3-joint take bound per seat family as one table, against which the jump track's 4-joint gates report. If
+   no family reaches 275 metal takes, the "95 at 3 DOF" question goes to the user.
+2. Complexity at the lead's number: lowarm cell A with a real preloaded dwell (cx counted, drag measured), claimed held
+   out and paired against the lead.
+3. Fix the machinery: P1 selection guard, the dashboard's honest flag, verify bar 18.28, row verdict rewrite, a
+   two-start convergence gate.
