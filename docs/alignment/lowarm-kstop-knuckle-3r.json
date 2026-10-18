@@ -1,0 +1,164 @@
+{
+ "id": "lowarm-kstop-knuckle-3r",
+ "status": "verified",
+ "v_gap": 18.69,
+ "complexity": null,
+ "verdict": "watch",
+ "reasons": [
+  "held_out: no held-out measurement on file: the claim has never been worn off its own bench",
+  "near_touch: no near-touch measurement on file (rule since 2026-10-16: claims report plain and near-touch)",
+  "dominance: cannot compare with conecut-knee-knuckle-3r at 2 mm",
+  "continuity: passive / sprung / sensed coordinates but no continuity flood on file (rule 2026-10-16)",
+  "fold_margin: no min-th margin over taken poses on file (rule: each claim reports it)",
+  "sampling: no per-part in-band record: unsampled bodies cannot be ruled out",
+  "reporting: verdict text still reads as a self-measured screen"
+ ],
+ "checks": [
+  {
+   "check": "held_out",
+   "level": "watch",
+   "reason": "no held-out measurement on file: the claim has never been worn off its own bench",
+   "v_gap": 18.69
+  },
+  {
+   "check": "fast_frozen",
+   "level": "ok",
+   "reason": "self/fast 18.69 -> verified 18.69 (+0.00)",
+   "fast": 18.69,
+   "verified": 18.69,
+   "drop": 0.0
+  },
+  {
+   "check": "near_touch",
+   "level": "watch",
+   "reason": "no near-touch measurement on file (rule since 2026-10-16: claims report plain and near-touch)"
+  },
+  {
+   "check": "contact_depth",
+   "level": "ok",
+   "reason": "the score counts contact poses, not depth (report only, score unchanged): v_gap 18.69: bench 4 contact poses, sum 16.62 mm, deepest 9.64 mm at ['ws', 15.0, 165.0, -60.0], 2 deeper than 3 mm (no bench depth of conecut-knee-knuckle-3r on file); held 14 contact poses, sum 44.95 mm, deepest 10.62 mm at ['ws', 45.0, 165.0, -30.0], 5 deeper than 3 mm (no held depth of conecut-knee-knuckle-3r on file)",
+   "depths": {
+    "v_gap 18.69": {
+     "bench": {
+      "n": 4,
+      "sum_mm": 16.62,
+      "max_mm": 9.64,
+      "n_deeper3": 2,
+      "overhead140": 3,
+      "deepest": [
+       "ws",
+       15.0,
+       165.0,
+       -60.0
+      ],
+      "gap": 18.69,
+      "src": "docs/alignment/remeasure/lowarm-kstop-knuckle-3r_bench_perpose.json",
+      "cross_check": {
+       "files": 1,
+       "sums": [
+        16.62
+       ],
+       "agree": true
+      }
+     },
+     "held": {
+      "n": 14,
+      "sum_mm": 44.95,
+      "max_mm": 10.62,
+      "n_deeper3": 5,
+      "overhead140": 7,
+      "deepest": [
+       "ws",
+       45.0,
+       165.0,
+       -30.0
+      ],
+      "gap": 22.88,
+      "src": "docs/alignment/remeasure/lowarm-kstop-knuckle-3r_held_perpose.json",
+      "cross_check": {
+       "files": 1,
+       "sums": [
+        44.95
+       ],
+       "agree": true
+      }
+     }
+    }
+   },
+   "ref": "conecut-knee-knuckle-3r",
+   "compare": []
+  },
+  {
+   "check": "dominance",
+   "level": "watch",
+   "reason": "cannot compare with conecut-knee-knuckle-3r at 2 mm"
+  },
+  {
+   "check": "continuity",
+   "level": "watch",
+   "reason": "passive / sprung / sensed coordinates but no continuity flood on file (rule 2026-10-16)"
+  },
+  {
+   "check": "fold_margin",
+   "level": "watch",
+   "reason": "no min-th margin over taken poses on file (rule: each claim reports it)"
+  },
+  {
+   "check": "idle",
+   "level": "ok",
+   "reason": "no moving drive / joint declared",
+   "spans": [
+    [
+     "row:verification.dK_taken_max",
+     45.615
+    ],
+    [
+     "row:verification.held.dK_taken_max",
+     46.268
+    ]
+   ],
+   "declared": [],
+   "rigid": []
+  },
+  {
+   "check": "sampling",
+   "level": "watch",
+   "reason": "no per-part in-band record: unsampled bodies cannot be ruled out"
+  },
+  {
+   "check": "density",
+   "level": "ok",
+   "reason": "per-part density not measured (python3 tools/sample_density.py measure <id>)"
+  },
+  {
+   "check": "complexity",
+   "level": "ok",
+   "reason": "recomputed 16.75 vs row None",
+   "recomputed": 16.75,
+   "row": null
+  },
+  {
+   "check": "reporting",
+   "level": "watch",
+   "reason": "verdict text still reads as a self-measured screen"
+  },
+  {
+   "check": "judge_change",
+   "level": "ok",
+   "reason": "no bench / judge / metric file changed in the 5 commits that touched the row"
+  },
+  {
+   "check": "rules",
+   "level": "ok",
+   "reason": "O20, margin >= 5, translations <= 2 as recorded"
+  }
+ ],
+ "remeasured": {
+  "bench": false,
+  "held": false
+ },
+ "verifier_files": [],
+ "git": "96a2b54",
+ "tool_version": "2026-10-18.1",
+ "t": "2026-10-18T15:58:44Z"
+}

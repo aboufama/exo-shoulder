@@ -1,0 +1,260 @@
+{
+ "id": "conecut-h2facet-knuckle-3r",
+ "status": "verified",
+ "v_gap": 18.28,
+ "complexity": 18.5,
+ "verdict": "watch",
+ "reasons": [
+  "continuity: passive / sprung / sensed coordinates but no continuity flood on file (rule 2026-10-16)",
+  "complexity: recomputed 0.0 vs row 18.5; MISMATCH",
+  "reporting: verdict text still reads as a self-measured screen; dashboard sweep best 12.5 (score 95.45) sits 5.78 below the verified number"
+ ],
+ "checks": [
+  {
+   "check": "held_out",
+   "level": "ok",
+   "reason": "held out 22.16 vs bench 18.28 (+3.88; docs/concepts/verify/conecut-h2facet-knuckle-3r_v_held_frozen_chamferonly.json)",
+   "held_gap": 22.16,
+   "v_gap": 18.28,
+   "drop": 3.88,
+   "source": "docs/concepts/verify/conecut-h2facet-knuckle-3r_v_held_frozen_chamferonly.json"
+  },
+  {
+   "check": "fast_frozen",
+   "level": "ok",
+   "reason": "self/fast 12.5 -> verified 18.28 (+5.78)",
+   "fast": 12.5,
+   "verified": 18.28,
+   "drop": 5.78
+  },
+  {
+   "check": "near_touch",
+   "level": "ok",
+   "reason": "plain 18.28, <1 mm 19.38, <2 mm 34.84, 16.56 points live in the 1-2 mm shell (docs/concepts/verify/conecut-h2facet-knuckle-3r_v_bench_frozen_chamferonly.json)",
+   "shell2": 16.56,
+   "plain": 18.28,
+   "n1": 19.38,
+   "n2": 34.84,
+   "n3": null,
+   "band3": null,
+   "hist": null,
+   "minmm": 0.07,
+   "source": "docs/concepts/verify/conecut-h2facet-knuckle-3r_v_bench_frozen_chamferonly.json"
+  },
+  {
+   "check": "contact_depth",
+   "level": "ok",
+   "reason": "the score counts contact poses, not depth (report only, score unchanged): v_gap 18.28: bench 4 contact poses, sum 19.86 mm, deepest 8.93 mm at ['ws', 15.0, 165.0, -60.0], 3 deeper than 3 mm (no bench depth of conecut-knee-knuckle-3r on file); held 13 contact poses, sum 60.5 mm, deepest 9.86 mm at ['ws', 45.0, 165.0, -30.0], 9 deeper than 3 mm (no held depth of conecut-knee-knuckle-3r on file)",
+   "depths": {
+    "v_gap 18.28": {
+     "bench": {
+      "n": 4,
+      "sum_mm": 19.86,
+      "max_mm": 8.93,
+      "n_deeper3": 3,
+      "overhead140": 3,
+      "deepest": [
+       "ws",
+       15.0,
+       165.0,
+       -60.0
+      ],
+      "gap": 18.28,
+      "src": "docs/alignment/remeasure/conecut-h2facet-knuckle-3r_bench_perpose.json",
+      "cross_check": {
+       "files": 1,
+       "sums": [
+        19.86
+       ],
+       "agree": true
+      }
+     },
+     "held": {
+      "n": 13,
+      "sum_mm": 60.5,
+      "max_mm": 9.86,
+      "n_deeper3": 9,
+      "overhead140": 7,
+      "deepest": [
+       "ws",
+       45.0,
+       165.0,
+       -30.0
+      ],
+      "gap": 22.16,
+      "src": "docs/alignment/remeasure/conecut-h2facet-knuckle-3r_held_perpose.json",
+      "cross_check": {
+       "files": 1,
+       "sums": [
+        60.5
+       ],
+       "agree": true
+      }
+     }
+    }
+   },
+   "ref": "conecut-knee-knuckle-3r",
+   "compare": []
+  },
+  {
+   "check": "dominance",
+   "level": "ok",
+   "reason": "vs conecut-knee-knuckle-3r: plain +0.00, 2 mm +0.00",
+   "ref": "conecut-knee-knuckle-3r",
+   "gain_plain": 0.0,
+   "gain_2mm": 0.0
+  },
+  {
+   "check": "continuity",
+   "level": "watch",
+   "reason": "passive / sprung / sensed coordinates but no continuity flood on file (rule 2026-10-16)"
+  },
+  {
+   "check": "fold_margin",
+   "level": "ok",
+   "reason": "min fold margin on file 5.006 deg (verification.held.th_margin_min; 6 readings)",
+   "min_margin": 5.006,
+   "where": "verification.held.th_margin_min"
+  },
+  {
+   "check": "idle",
+   "level": "ok",
+   "reason": "no moving drive / joint declared",
+   "spans": [
+    [
+     "docs/concepts/verify/conecut-h2facet-knuckle-3r_v_held_frozen_chamferonly.json:extra.dK_taken_max_deg",
+     46.27
+    ],
+    [
+     "docs/concepts/verify/conecut-h2facet-knuckle-3r_v_held_frozen.json:extra.dK_taken_max_deg",
+     46.27
+    ]
+   ],
+   "declared": [],
+   "rigid": []
+  },
+  {
+   "check": "sampling",
+   "level": "ok",
+   "reason": "sample-weighted in-band 0.901 vs part-weighted 0.925 (-2.37 points); thinly sampled parts: L1a 8 (docs/concepts/verify/conecut-h2facet-knuckle-3r_v_bench_frozen_chamferonly.json)",
+   "parts": {
+    "hub1": [
+     1.0,
+     8.6,
+     80
+    ],
+    "hubK": [
+     0.992,
+     7.9,
+     80
+    ],
+    "hub2": [
+     0.912,
+     11.6,
+     80
+    ],
+    "hub3": [
+     0.742,
+     11.5,
+     80
+    ],
+    "E": [
+     0.979,
+     6.0,
+     164
+    ],
+    "boss": [
+     1.0,
+     7.5,
+     32
+    ],
+    "pad": [
+     1.0,
+     6.2,
+     32
+    ],
+    "knee": [
+     0.999,
+     9.7,
+     90
+    ],
+    "crank": [
+     0.801,
+     11.3,
+     133
+    ],
+    "roller": [
+     0.938,
+     10.0,
+     19
+    ],
+    "horn": [
+     0.955,
+     7.5,
+     23
+    ],
+    "L1a": [
+     0.981,
+     10.1,
+     8
+    ],
+    "L1b": [
+     0.918,
+     8.2,
+     36
+    ],
+    "L2": [
+     0.731,
+     12.0,
+     124
+    ]
+   }
+  },
+  {
+   "check": "density",
+   "level": "ok",
+   "reason": "over-dense parts roller 4.55x; ",
+   "over": {
+    "roller": 4.549
+   },
+   "src": "remeasure/sample_density_conecut-h2facet-knuckle-3r.json"
+  },
+  {
+   "check": "complexity",
+   "level": "watch",
+   "reason": "recomputed 0.0 vs row 18.5; MISMATCH",
+   "recomputed": 0.0,
+   "row": 18.5
+  },
+  {
+   "check": "reporting",
+   "level": "watch",
+   "reason": "verdict text still reads as a self-measured screen; dashboard sweep best 12.5 (score 95.45) sits 5.78 below the verified number"
+  },
+  {
+   "check": "judge_change",
+   "level": "ok",
+   "reason": "no bench / judge / metric file changed in the 3 commits that touched the row"
+  },
+  {
+   "check": "rules",
+   "level": "ok",
+   "reason": "O20, margin >= 5, translations <= 2 as recorded"
+  }
+ ],
+ "remeasured": {
+  "bench": false,
+  "held": false
+ },
+ "verifier_files": [
+  "docs/concepts/verify/conecut-h2facet-knuckle-3r_v_sampling.json",
+  "docs/concepts/verify/conecut-h2facet-knuckle-3r_v_partsnear.json",
+  "docs/concepts/verify/conecut-h2facet-knuckle-3r_v_held_frozen_chamferonly.json",
+  "docs/concepts/verify/conecut-h2facet-knuckle-3r_v_held_frozen.json",
+  "docs/concepts/verify/conecut-h2facet-knuckle-3r_v_bench_frozen_chamferonly.json",
+  "docs/concepts/verify/conecut-h2facet-knuckle-3r_v_bench_frozen.json"
+ ],
+ "git": "ab49849",
+ "tool_version": "2026-10-18.1",
+ "t": "2026-10-18T15:59:33Z"
+}
