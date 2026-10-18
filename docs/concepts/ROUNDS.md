@@ -3885,3 +3885,127 @@ optimistic ceiling for the whole relay cell is 14.29 fit against the lead's 12.5
 - The 4-joint question, answered like-for-like: no 4-DOF design on file beats the 3-joint lead (best 19.54; this
   round 22.18-57.70). Round 15 lens A's table carries the 3-joint side; the blocker message goes to the user from there.
 - The transmission guard [30, 150], the J1 seat rule and the 5-deg fold margin stay as they are; no lens relaxed them.
+
+## Round 104 plan (Round J4, track jump; 2026-10-18 ~04:00 UTC, lead verified gap 18.28)
+
+Planner's read at 03:45-04:00 UTC: ROUNDS.md (round 103 results, round 15 plan), FINDINGS.md (J3; "The fold is two
+walls"; "Long-stroke K drive, measured"), rows/*.json, catalogue.json, events.jsonl tail (to 03:51Z),
+docs/research/manufacturability_audit.md, docs/research/fold_ceiling/lost_poses_roller-longdyad-knuckle-3r.json,
+tools/workflows/exo-screen.js. Ledger (`tools/alignment_ledger.py latest`): **gamed** = lowarm-halfring-knuckle-3r (P1),
+dipped-law-groove-knuckle-3r (fold margin 0.184), seed-offset-3r-slides (3 passive translations); every other audited
+row WATCH. No bench, judge or kit file changed since round 103 closed.
+
+### State
+
+- **Lead (best verified, not gamed): conecut-knee-knuckle-3r 18.28** (score 93.35) frozen exact Bench(110,360), held
+  22.38; reach 0.7278 (262/360), ib14 0.9012, follow 1.0, contact 0.0106 (4 poses), overhead 8/28; 3 active, 0 passive
+  translations, cx 18.5. **The bar for every claim this round is 18.28** (the verify template still defaults to 68.93 /
+  75.94 / lead 30.35, tools/workflows/exo-screen.js line 24: every verifier states 18.28 by hand and says so). WATCH
+  reasons carried (no lens may buy points the same way): reporting (sweep 12.5 shown as 95.45); T1 (16.56 points in the
+  1-2 mm shell, pose 203 taken at 0.263 mm); T3 (held th margin 5.006; ~0.23 deg K play takes it near 4.92);
+  NEW-strap-dilution (18.67 at equal strap sampling); M5 (J3 stop 155 N per N.m through MR117 bearing 1);
+  NEW-self-reference; G4 (B1).
+- **95 arithmetic:** 13.75 = 279/360 takes at the lead's ib14 and contact (+17), or 275 at zero contact. One take
+  +0.28; a contact turned into a take +0.54. Zero contact at 262 takes = 17.22.
+- **Where the lead loses its 98 poses:** fold 88 = stretched 73 (th 107-176, 64 of them internal rotation >= 90 across
+  the body) + folded 15 (scapular-plane overhead, hub-2 clearance, median need 71 mm vs 62); J3 stop 6; contact 4 (237
+  crank -9.42, 205 hub 2 -4.28, 316 link 2 -1.23, 264 hub K -1.17).
+- **How far the stretched wall must move (counted from the roller-longdyad per-pose file above; same family, max th
+  taken 106.3):** raising th_hi by +5 / +10 / +15 / +20 deg returns 7 / 19 / 25 / 30 of the 73 stretched poses
+  kinematically (held 22 / 47 / 72 / 87 of 211). +17 takes needs th_hi ~ +10 deg AND those poses clean of metal.
+- **The second wall behind the stretched one (measured three ways, the decisive limiter now):**
+  - free K (K as a sensed 4th joint, no law): minarc-stop-knuckle-4r 19.54 verified / 18.40 polished;
+    skinnormal-shortk-knuckle-4r 18.58 frozen, fold-for-contact 1:1 (74 fold / 8 contact -> k33 55 / 19 -> k56 50 /
+    24; best frozen reach 0.769 at contact 0.048);
+  - ideal K law, drive metal deleted, kK 3.0: 18.25 frozen (fold 88 -> 77; the lobe at PA <= 42 caps kK ~2.0, law-only
+    267 takes at 1.96, 272 at 2.3);
+  - desmo-vrocker ghost 17.23 (269 takes, 6 contacts): the same 5 poses go into the skin in every cell at onset 12-14
+    whatever the gain: 117 / 127 / 129 / 139 (plane -90..-60, elev 45-60, axial 105-135: link 2 to -7.7 mm, hub 2's rim
+    to -3.5) and 316 (60/150/-105). 129 binds radially across link 2's full width over the lateral-deltoid crest (a
+    +-1.5 mm bar offset moves it <= 0.4 mm).
+  - **So every K-side lever (any drive, any law, a free K) is bounded at ~18.2-18.6 frozen at these seats: once K opens,
+    link 2 and hub 2 meet the skin.** Kinematics are not the cap (twist-long-a2 law-only reach 0.814-0.825;
+    split-knuckle-twosided passes its law gate); every death is metal parking.
+- **4-DOF on file (all dead or behind):** relays under the lead 22.18 / 32.13 / 32.92 (ghost 16.07-18.22, relay gain
+  <= ~2), cap null-space 57.70, minarc 19.54, arm-parked-knee 26.71, skinnormal-shortk 18.58 (killed). Any 4th DOF +25
+  cx. No 4-DOF row beats 18.28.
+- **The length-changing chain priced at plan time (lens a of the J3 closer), before any ghost:**
+  - th, a1e and a2 are angles between joint-AXIS DIRECTIONS; the arm's orientation is the product of the revolute
+    rotations only. A straight guide (inside link 2, or as the counted cuff slide) changes no axis direction, so it
+    moves neither wall: **0 kinematic takes** on the 73 stretched poses. On file: offset-skin-normal-3r's limiter "J2
+    fold ... orientation-level, untouched by offsets or slides" (47 of 220). The cuff knee's pins are parallel to J3,
+    so they do not change th either. A guide that breaks axis concurrency also needs the knee + guide to close a 3D
+    offset (3R + P + 2 pins = 6 for 6), which buys nothing on the fold.
+  - The guide variants that DO change an angle are all dead or bounded: a GH-concentric arc = a virtual revolute with one
+    radius over its travel (trombone-arc 88.29, seed-arc-rails 73.0, j2-arc-sector 71.53 / 66.3 vs its own hub control
+    57.75, short-a2-arc-slide 41.19 frozen self / v 55.3: hub 3 0.31-0.33 in band on the slot); a guide as the
+    follower of a slider-crank K drive or a spherical lazy-tongs link 1 = a K law, bounded by the free-K numbers above;
+    a radial guide lifting hub 2 at the folded wall stands block + travel (RSR3M 12 + ~9 = ~21 mm, 1.5x the band;
+    manufacturability_audit finding 1).
+- **Dead, do not rescreen:** everything on round 15's list (cap-pole knuckle cells, crest seats, crest no-knee, slotted
+  eccentrics, link-2 root / whole-bar radial lifts, hard-pad dwell, two-lobe ghost drives, back-seat J3 / hub-K / link-2
+  seat moves, long-stroke K drives 23.31 / 27.67, relays under the lead, cap null-space); the dog drive (dogring
+  refuted 97.83 on a -0.18 mm dog / link-1b overlap); four-bar and coupler K drives (51.75 / 23.87); the arm-side K2
+  (split-knuckle-twosided 34.18: K2's hub 70-116 mm); straight-guide length changes (above).
+- **Process:** farm CLOSED (local, niced, <= 2 processes, OMP_NUM_THREADS=1, judges --jobs 1; load 9-11). Near-touch
+  objective in every search (cap-nullspace's plain-gap search doubled its contact frozen). The auditor writes a ledger
+  entry for the round winner, dead or not. Quote only numbers in saved outputs.
+
+### Lenses
+
+**A. guide-price-close (lens a, closed or kept on a measured survivor; 1 slot, <= 30 min, analysis + one kit check).**
+- Run the price-first gate on the length-changing class and write the closure to FINDINGS: (1) on the paired kit, wear
+  the lead frozen with a real catalogue guide (RSR3M class: block 12 x 8 x 4, rail 3 x 2.6, rail = travel + block) in
+  link 2 at travel 0 / 10 / 20 mm and show th per bench pose unchanged and the takes unchanged (0 gain), with the
+  guide's metal priced (+0.2 points per mm of bar out of band); (2) the arc / slider-crank / lazy-tongs / radial-guide
+  variants close by the numbers in the state.
+- A variant survives only if it changes an axis direction AND its priced metal leaves >= 17 takes, with the free-K
+  bound (~18.2-18.6) beaten on paper. Gate 0 if one survives: ghost with the real envelope, Bench(60,160) fit, frozen
+  exact Bench(110,360), kill > 17.5. No 4th guide, never a second cuff slide.
+
+**B. second-wall-route (reach >= 0.77 at ib14 >= 0.88; suggested id freek-route-knuckle-4r as the bound, never a
+claim; 1 slot, <= 90 min).** The measured binder is link 2 + hub 2 at the K-open stretched states (117 / 127 / 129 /
+139 / 316), not the K law. Attack it with a route change, not a lift:
+- On the free-K kit (minarc / skinnormal-shortk, K sensed: the upper bound for any K law), change where link 2 runs:
+  enter hub 3 from the other (posterior) side, phase hub 3 about its own axis, or bend link 2 in planform around the
+  crest (line / tangent-arc bars, ramps <= 60 deg, bend radius >= 15 mm). All metal real, O20 only, J1 seats legal.
+- Price first: an added bar out of band costs ~+0.2 points per mm; a route that crosses a swept ring rides 22-30 mm.
+- **Gate (pre-registered):** with K free, >= 279 takes at <= 4 contacts (or >= 275 at 0) on frozen exact
+  Bench(110,360) after a Bench(60,160) fit with the near-touch objective, and the 5 binder poses cleared by >= 0.2 mm
+  (not grazes). Kill otherwise, with the per-pose distances.
+- If the bound passes, the same route goes on the lead's coupled K (3 joints) and is claimed on the protocol. If it
+  fails, the number is the jump track's answer to round 15's take-bound table: no K lever reaches 95 at these seats
+  with O20.
+- Not main round 15 lens C: C moves only 264 / 316 on the frozen lead by small lateral offsets; this changes link 2's
+  route under a free K.
+
+**C. low-cx-same-reach (complexity; 1 slot, <= 60 min).** Desmo-slipper is 18.95 at cx 15.75 (12 made, 13 catalogue,
+2 sliding pairs, 3 loops, 0 springs); the lead is 18.5. Price the coaxial dog drive's return (no lobe, follower or
+sliding pair; refuted only on a -0.18 mm dog / link-1b root-ramp overlap) on the lead's chain:
+- First the cx with tools/simplicity.py and the clash relief as metal (link 1b's root ramp relieved, or the dog
+  re-phased). Dead before modelling if cx >= 15.75 or the relief costs more than it can return.
+- **Pre-registered:** kill if frozen exact > 18.95 + 0.5 or held out paired worse than the lead by > 0.5; pass at
+  frozen exact <= 18.95 with cx < 15.75 (a Pareto point, not a lead change).
+- Select on envsel (tools/env_bench.py), wear frozen exact once, report plain and near-touch gap, min th margin, and
+  the dog's engagement at PA <= 42 on every K-open pose.
+- Not main round 15 lens B (lowarm A0L / A-adj on the conecut groove).
+
+**Feed to main round 15 lens A (take-bound table) and the user's blocker:** the 4-DOF row is 22.18 real vs 16.07-16.22
+ghost (relays) and the free-K bound 18.40-18.58 (minarc / skinnormal-shortk); this round adds lens A's 0-take result
+for straight guides and lens B's free-K route bound.
+
+### Carried (ideated, never screened)
+
+None. The 21 ideated catalogue entries fall under measured closures (round 15's list). lazy-tongs-j2 and
+pauldron-lame-telescope are angle-changing length changes on link 1 / J2: K-law class, bounded by the free-K numbers;
+tape-spool-humeral, telescopes and tripods are translations (0 fold takes) or passive-translation counts > 2.
+
+### Elsewhere, not to be duplicated
+
+- Main round 15: take_bound_3dof (lens A), lowarm-adjpad-knuckle-3r (lens B), conecut-sidestep-knuckle-3r (lens C).
+- The gen-9 desmo-conecut-knuckle-3r L2 CAD (user_style_desmo.py; judging in the lead's slot).
+
+### Needs the user's say
+
+- The 3-DOF ceiling and the 4-joint answer (round 15 lens A's table, then the blocker message).
+- The transmission guard, the J1 seat rule and the 5-deg fold margin stay; no lens relaxes them.
