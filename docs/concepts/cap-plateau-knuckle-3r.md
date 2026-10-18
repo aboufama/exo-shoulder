@@ -37,6 +37,59 @@ A (routed U-law, a2 70), B (short stop A, one-sided plateau), C (two-sided dwell
    * The red-team list: rest, overhead (elev >= 140), across the body, behind the back, and the low-th poses of cell C's
      folded lobe.
 
-## Measurements
+## Instrument and honesty
 
-(filled in as they land; see below)
+The fold-ceiling paired kit (docs/research/fold_ceiling/kit_paired.py) is used with only the K law replaced
+(docs/concepts/models/cap-plateau-knuckle-3r.py `build`). It has:
+
+- O20 hubs (12.25 mm stack, cap discs);
+- K3-march skin-fitted 3 x 12 mm Ti straps, with link 2 over link 1a and the neck;
+- the 14 x 6 neck to BOTTOM;
+- K2 dense continuity and K6 part collisions;
+- the exact signed distance of every metal sample;
+- the fold margin read on th = angle(J1, J3) at m = 5 + 0.23 deg (K play inside the margin);
+- K's own dyad with both stops >= 5 deg from its folds.
+
+It does NOT have the K drive (all cells are ghosts, with K set by the ideal law) or the cuff knee (every axis passes
+through GH). The CONTROL is the lead's seats and law in the same model. It reproduces the round-102 judge's control,
+26.24 fast at q 0.97 (judge: 26.27). It is the only number this row is compared with: the kit omits the same things in
+both arms, and it sits ~15 points above the lead's verified 18.28, because the real lead carries the J3 dowel, the knee
+and the near-touch-tuned metal.
+
+## Gate 0, kinematic half (fold + closure + K dyad; metal only removes takes) - Bench(110,360), m 5.23
+
+| cell | ws taken / 360 | clips / 110 | overhead / 28 | min th margin | a1e range |
+|---|---|---|---|---|---|
+| A U-law (a2 70) | 294 | 98 | 17 | 5.28 | 40-62 |
+| B short stop A | 270 | 110 | 16 | 5.24 | 31.2-56.0 |
+| C two-sided dwell | 275 | 110 | 18 | 5.29 | 28.0-52.5 |
+| CONTROL (lead seats / law) | **277** | 110 | 14 | 5.24 | 37.6-58.4 |
+
+**New: the cap seat has no kinematic surplus over the lead's knuckle.** At the back-of-shoulder seat, the lead's own
+knuckle law already takes 277/360 kinematically. That beats cells B (270) and C (275) at the cap. The cap's "surplus"
+(281 plain at the cap vs 250 plain at the back seat) is the plain 3R's: the knuckle at the back seat already recovers
+it. Only cell A's a2-70 U-law clears the 279-take bar (294). It pays with hub 2 and with the overhead clip (98/110
+clips), as below. The "back-of-shoulder ceiling 269-271" is a REAL-MODEL number (J3 stop + metal), not a kinematic one.
+So the cap proposals compared a kinematic count against a metal count.
+
+## Real-model numbers (paired kit; fit Bench(60,160) fast, shape frozen, worn on Bench(110,360) EXACT)
+
+| config | fast plain | frozen exact plain | near 1 mm | ws taken | why (fold / parts / contact) | overhead | in band: hub K / hub 2 / link 1b / link 2 | depth max |
+|---|---|---|---|---|---|---|---|---|
+| CONTROL, q 1.0 | 74.45 | 80.98 | 80.46 | 275 | 83 / 0 / 2 | 12/28 | 0.00 / 0.00 / 0.00 / 0.01 | 7.68 |
+| C proxy config, q 1.0 | 96.65 | 98.76 | 97.20 | 269 | 85 / 0 / 6 | 14/28 | 0.00 / 0.04 / 0.00 / 0.00 | 63.94 |
+| **CONTROL, q 0.97** | **26.24** | **33.19** | 33.43 | 260 | 83 / 3 / 14 | 7/28 | 1.00 / 0.86 / 0.95 / 0.46 | 14.40 |
+| C proxy config, q 0.97 | 39.43 | 43.77 | 43.10 | 240 | 85 / 25 / 10 | 7/28 | 0.75 / 0.98 / 0.68 / 0.30 | 16.48 |
+| B proxy config, q 0.97 | 44.98 | 47.76 | 48.49 | 235 | 90 / 17 / 18 | 5/28 | 0.57 / 0.79 / 0.58 / 0.55 | 15.65 |
+| A routed U-law, q 0.97 | 75.47 | 76.59 | 72.95 | 259 | 66 / 8 / 27 | 3/28 | 0.35 / **0.04** / 0.24 / 0.44 | 16.33 |
+| C search best (stream 1, 61 tries) | 29.64 | 34.25 | 31.85 | 247 | 83 / 18 / 12 | 8/28 | 0.91 / 0.98 / 0.90 / 0.47 | 15.12 |
+
+- q = 1.0 (the kit default) puts every hub at the worst fit pose's level. In the cap cell C, J3 at wdir(100, -4)
+  points up the arm, and on overhead poses its ray grazes the neck. Hub 3, link 2 and the neck end up 150-250 mm out,
+  and the overhead folded-lobe poses (209 / 211 / 238 / 265, elevation 150-165) go 30-64 mm into the skin: the
+  1197 g, 98.76 reading. q 0.97 (the judge's control setting) lets the 3 % worst fit poses be charged as contact. It
+  is the comparable setting.
+- Cell A reproduces the routed kill: hub 2 is 0.04 in band, follow 0.85 and contact 0.071. The exact J2-RAY exit is
+  modest (ws p50 58, p90 67.7, p95 70, 11 / 294 > 75 mm). The O20 DISC is what binds: its far edge, 10 mm off the
+  ray, reaches the bunched deltoid. A hub-2 one-level test on the ray reads 260 ws clear at level 66 mm with 0.86 in
+  band. So even the optimistic ray loses 34 kinematic takes to a single level, against the gate's <= 10.

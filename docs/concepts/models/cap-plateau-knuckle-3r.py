@@ -162,6 +162,8 @@ BOX = {  # the pre-registered sweep boxes (catalogue sweep_params); every bound 
     "C": dict(az1=(56, 66), el1=(60, 67), d3=(96, 104), a3=(-8, 0), lo=(26, 31), f=(26, 34), cap=(50, 56), a2=(43, 48), bk1=(25, 30),
               doff=(6, 8), q=(0.95, 0.99)),
     "B": dict(az1=(52, 62), el1=(58, 66), d3=(88, 98), a3=(-14, -4), lo=(29, 34), a2=(48, 54), cap=(52, 60), bk1=(28, 34), q=(0.95, 0.99)),
+    # equal-effort red team of the PAIRING: the control (lead seats / law) searched in a box of the same widths around it
+    "control": dict(az1=(90, 100), el1=(64, 71), d3=(73, 81), a3=(-12, -4), lo=(35, 40), a2=(54, 60), cap=(56, 62), bk1=(24, 28), q=(0.95, 0.99)),
 }
 STEP = dict(az1=2.0, el1=2.0, d3=2.0, a3=2.0, lo=1.0, f=1.5, cap=1.5, a2=1.5, bk1=1.0, doff=0.5, q=0.01)
 
@@ -209,6 +211,8 @@ def frozen(cell, over=None, which="bench"):
 if __name__ == "__main__":
     a = sys.argv[1:]; mode = a[0] if a else "kin"; cell = a[1] if len(a) > 1 else "C"
     over = json.loads(a[2]) if len(a) > 2 and a[2].strip().startswith("{") else None
+    if over and "doff" in over: over = dict(over, off=over.get("a2", CELLS[cell]["a2"]) - over["doff"])
+    if over and cell == "C" and "cap" in over and "bk1" in over: over = dict(over, bk2=over["cap"] + 5.0 - over["bk1"] + 0.45)
     if mode == "kin": print(json.dumps(kin(cell, over)))
     elif mode == "jrate": print(json.dumps(jrate(cell, over)))
     elif mode == "j2exit":
@@ -216,7 +220,7 @@ if __name__ == "__main__":
         if dst: json.dump(o, open(dst, "w"), indent=0)
         print(json.dumps({k: v for k, v in o.items() if k != "per_pose"}))
     elif mode == "search":
-        x, f = search(cell, int(a[2]), int(a[3]), a[4]); print("BEST", f, json.dumps(x))
+        x, f = search(cell, int(a[2]), int(a[3]), a[4], json.loads(a[5]) if len(a) > 5 else None); print("BEST", f, json.dumps(x))
     elif mode == "levels": print(json.dumps(levels(cell, over), default=float))
     elif mode == "fit":
         r = K.evaluate(K.bench(60, 160), build, P_of(cell, over))
