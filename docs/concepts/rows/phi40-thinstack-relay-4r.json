@@ -1,6 +1,6 @@
 {
  "id": "phi40-thinstack-relay-4r",
- "name": "Longer one-sided over-pass relay (PHI 40-44) on the thin stack: lug coil 12 x 10, band 8, bump 1.2, 1.0 mm shell, lean carriage, L-lug bracket (lugcoil-lbracket as its PHI 35 cell)",
+ "name": "Longer one-sided over-pass relay (PHI 40) on the thin stack: lug coil 12 x 10, band 8, bump 1.2, 1.0 mm shell, lean carriage, L-lug bracket (lugcoil-lbracket as its PHI 35 cell)",
  "lens": "round107:A relay-95 (fallback to the under-pass, run in parallel)",
  "family": "one-sided arm-fixed cuff relay on the verified lead (4 joints, over-pass bump)",
  "active_dof": 4,
@@ -8,21 +8,464 @@
  "passive_translations": 0,
  "status": "screened",
  "t_ideated": null,
- "t_screened": "2026-10-18T19:41:00Z",
- "reach": 0.8,
+ "t_screened": "2026-10-18T20:08:00Z",
+ "reach": 0.8056,
  "follow": 1.0,
  "inband14": 0.8946,
- "inband10": 0.5738,
- "contact": 0.0363,
- "gap": 14.17,
+ "inband10": 0.5765,
+ "contact": 0.0408,
+ "gap": 14.06,
  "v_reach": null,
  "v_follow": null,
  "v_inband14": null,
  "v_inband10": null,
  "v_gap": null,
- "n_configs": 2,
- "verdict": "IN PROGRESS: envsel selection running (PHI 40 d3.5 14.46, PHI 42 d3.5 14.17); claim not read yet",
- "limiter": "reach (envsel 0.80) and chain-only in-band 0.8946",
- "note": "partial: envsel only",
- "doc": "docs/concepts/phi40-thinstack-relay-4r.md"
+ "n_configs": 11,
+ "verdict": "SCREENED, between the lens-A lines (pass <= 13.75 missed by 0.31; kill > 14.76 / held > 18.27 not hit): claim 14.06 (score 94.89) chain-only gate on frozen exact Bench(110,360), read ONCE at the pre-registered envsel pick PHI 40 / delta 3.5; held 16.69 (best held on file; parent 17.77). Beats the verified 4-joint offset-shortcar-relay-4r by 0.70 bench / 1.08 held, but the PHI 35-40 band buys reach with deep contacts (263 -15.37, 459 -13.78 mm at phi ~39.5; claim contact depth 74.93 mm = x1.62 parent, x3.70 lead). Needs an independent verifier.",
+ "limiter": "reach 0.8056 (290/360: 48 fold, 5 J3 stop, 17 contacts) = 9.44 of 14.06; contact 4.08 (17 poses: 12 inherited chain contacts, 4 relayed at phi > 35, 466 on the posterior shell end at -4.0 deg); in-band chain-only 0.8946 (0.54). The posterior shell end (lean zero end + delta 3.5) is a pose-sample cliff (259 envsel, 466 claim, 977/225 held); the anterior end clears envsel 119 to ~+51.3 deg but held 211 (behind-back ER) touches it at +48.9 (-0.49 mm).",
+ "note": "Model: offset-shortcar-relay-4r imported read-only (buildable stack in every reading) + thin shell (tsh 1.0: R_t = R_liner + tsh, pre-arc floors re-read at the thin R_t - spec fix: the proposer's patch read them at R_liner + 1.5), lug coil 12 x 10, band 8, bump 1.2, lean (h_c 1.4, slot-end PHI stop, one dowel), L-lug bracket at the pad azimuth (no planform turn), PHI 40 (new prepare + new continuity flood flood_PHI40_t12_a235_s1: 177 relayed nodes, 174 connected). SELECTION on envsel exact only, pre-registered cells (docs/concepts/phi40-thinstack-relay-4r.md): PHI 40 d3.5 14.46 / d5.0 14.58 / d4.0 14.50; PHI 41 d3.5 14.17 / d5.0 14.81; PHI 42 d3.5 14.17 / d5.0 14.81. Pick rule (lowest gate with 0 jams whose delta+1.5 partner is 0 jams and within +0.5): PHI 41/42 fail (partner +0.64: 119 onto the anterior shell end at +51.9, -0.67 mm), PHI 40 d3.5 passes (+0.12). Not read (time box, stated before reading): PHI 38, PHI 35 cell, PHI 40 d5.5, the proposer-reproduction control; PHI 44 stopped unread (its end lies past 119's contact point). CONVERGENCE GATE on this discrete pre-registered hardware grid (not CMA; each wear 2-6 min, the farm is closed): gain over the 2nd half of the 7 envsel readings 0.00 score points, over the last third 0.00, top-5 spread 0.41 gap = 0.15 score points. CLAIM (frozen exact Bench(110,360), once): gate 14.06, plain 13.52, near1 18.18, near2 38.82 (no crown sets), ib14 chain 0.8946 / pooled 0.9169, reach 0.8056 (290/360), follow 1.0, 17 contacts, 0 jams, overhead 9/28, continuity 0 relayed dropped, min th 5.000 (0 of 400 below 5), min metal taken 0.072, T5 dump reproduces plain 13.52. HELD: gate 16.69, plain 16.02, ib14 chain 0.8933, reach 0.7878 (750/952), 48 contacts, 0 jams, overhead 22/71, min th 5.000 (952), dump reproduces 16.02. POST-CLAIM DIAGNOSTICS (cannot change the pick): claim-bench delta 5.0 13.67 (0 jams; 466 clears at 0.41 mm), delta 6.0 14.02 with 5 E-over-carriage jams at 0.88 mm - the claim bench's legal delta window is ~[4.5, 5.5] vs envsel's [3.5, 5.0]. R17 inherited (gravity check at phi 0 depends on the axis only): preload 0.063 N.m, coil >= 0.79 N; CF coil 2.0 N vs 1.38-1.78 N with friction. complexity re-read with tools/simplicity.py: 51.25.",
+ "doc": "docs/concepts/phi40-thinstack-relay-4r.md",
+ "complexity": 51.25,
+ "mechanism": {
+  "active_dof": 4,
+  "passive_trans": 0,
+  "crossed_rails": 0,
+  "passive_rot": 4,
+  "moving_bodies": 6,
+  "joints": 9,
+  "closed_loops": 3,
+  "sliding_pairs": 2,
+  "rolling_pairs": 1,
+  "sensed_passive": 0,
+  "springs_or_flexures": 2,
+  "custom_parts": 14,
+  "catalogue_parts": 19,
+  "notes": "offset-shortcar-relay-4r's record with the lean flag (carriage / L-lug bracket / T-flange integral with BOTTOM: -2 made parts; one zero dowel, the slot end is the PHI stop: -1 catalogue part) = the judge's ~51.25: the lead conecut-knee-knuckle-3r + the relay (a counted 4th joint: 14 x 14 Ti T-nut carriage, h_c 1.4, in a 1.0 mm slotted circular Ti shell on iglidur tape, 31 mm proximal of the pad, resting 3.5 deg anterior, PHI 40), a constant-force coil (12 x 10) on the carriage's posterior-proximal lug, 1 ISO 8734 dowel + iglidur tape (catalogue); the E strap and knee link carry the rigid local bump with the knee link raised over the boss (buildable stack)",
+  "source": "phi40-thinstack-relay-4r screen 2026-10-18",
+  "confidence": "medium",
+  "cuff_knee": {
+   "pins": 2,
+   "sensed": false,
+   "passive_rot": 2,
+   "moving_bodies": 2,
+   "joints": 2,
+   "custom_parts": 4,
+   "catalogue_parts": 6,
+   "rule": "user 2026-10-17: no encoders on the knee pins (pose from the hub encoders) -> no added complexity; counts = docs/concepts/skin-normal-3r-pin-knee.md line 584",
+   "closed_loops": 1,
+   "rule_loop": "simplicity v2.1 (2026-10-17): the knee's closure loop is free, as on roller-longdyad / groove-desmo / sidecar-*; added by the lead 2026-10-17 14:25 UTC after the alignment audit's NEW-stale-complexity-ruler (this row charged it, the lead's record did not)"
+  }
+ },
+ "best_params": {
+  "PHI": 40.0,
+  "tilt": 12,
+  "taz": 235,
+  "sgn": 1,
+  "hw": 1,
+  "hwv": "plain",
+  "ds": 31.0,
+  "liner": 4.0,
+  "plate": 1.5,
+  "flange": 1,
+  "rt_extra": 1.5,
+  "pre": 0.0,
+  "bump": 1.2,
+  "band": 8.0,
+  "ramp": 6.0,
+  "flood": 1,
+  "delta": 3.5,
+  "carw": 14.0,
+  "coil": "lug",
+  "lean": 1,
+  "h_c": 1.7,
+  "coilD": 12.0,
+  "coilL": 10.0,
+  "tsh": 1.0,
+  "lbr": 1
+ },
+ "frozen_exact": {
+  "bench": "Bench(110,360) exact frozen (fit Bench(60,160) fast, phi 0)",
+  "gate_chain_only": 14.06,
+  "plain": 13.52,
+  "near1": 18.18,
+  "near2": 38.82,
+  "inband14_pooled": 0.9169,
+  "inband14_chain_only": 0.8946,
+  "ws_taken": 290,
+  "overhead": [
+   9,
+   28
+  ],
+  "contacts": 17,
+  "contacts_by_cause": {
+   "chain": 15,
+   "hardware": 1,
+   "chain+hw": 1
+  },
+  "contact_list": [
+   [
+    182,
+    [
+     -15.0,
+     90.0,
+     45.0
+    ],
+    11.3,
+    -0.71,
+    "chain",
+    27.5
+   ],
+   [
+    205,
+    [
+     0.0,
+     105.0,
+     15.0
+    ],
+    0.0,
+    -4.28,
+    "chain",
+    34.6
+   ],
+   [
+    206,
+    [
+     0.0,
+     120.0,
+     -15.0
+    ],
+    17.4,
+    -6.07,
+    "chain",
+    34.6
+   ],
+   [
+    233,
+    [
+     15.0,
+     120.0,
+     -30.0
+    ],
+    35.3,
+    -1.27,
+    "chain",
+    33.2
+   ],
+   [
+    237,
+    [
+     15.0,
+     165.0,
+     -60.0
+    ],
+    0.0,
+    -8.93,
+    "chain",
+    21.7
+   ],
+   [
+    262,
+    [
+     30.0,
+     135.0,
+     0.0
+    ],
+    11.3,
+    -9.79,
+    "chain",
+    33.2
+   ],
+   [
+    263,
+    [
+     30.0,
+     150.0,
+     -30.0
+    ],
+    39.7,
+    -15.37,
+    "chain",
+    31.8
+   ],
+   [
+    264,
+    [
+     30.0,
+     165.0,
+     -60.0
+    ],
+    0.0,
+    -5.8,
+    "chain",
+    21.7
+   ],
+   [
+    316,
+    [
+     60.0,
+     150.0,
+     -105.0
+    ],
+    0.0,
+    -1.23,
+    "chain",
+    20.3
+   ],
+   [
+    343,
+    [
+     75.0,
+     150.0,
+     -105.0
+    ],
+    8.4,
+    -1.73,
+    "chain",
+    26.0
+   ],
+   [
+    372,
+    [
+     90.0,
+     165.0,
+     -90.0
+    ],
+    19.4,
+    -0.07,
+    "chain",
+    27.5
+   ],
+   [
+    421,
+    [
+     120.0,
+     120.0,
+     -120.0
+    ],
+    39.9,
+    -0.95,
+    "chain",
+    11.7
+   ],
+   [
+    423,
+    [
+     120.0,
+     135.0,
+     -90.0
+    ],
+    16.0,
+    -0.7,
+    "chain",
+    11.7
+   ],
+   [
+    448,
+    [
+     135.0,
+     135.0,
+     -90.0
+    ],
+    29.4,
+    -1.92,
+    "chain",
+    11.7
+   ],
+   [
+    457,
+    [
+     150.0,
+     45.0,
+     -105.0
+    ],
+    15.1,
+    -2.0,
+    "chain",
+    -2.6
+   ],
+   [
+    459,
+    [
+     150.0,
+     60.0,
+     -120.0
+    ],
+    39.3,
+    -13.78,
+    "chain+hw",
+    -4.0
+   ],
+   [
+    466,
+    [
+     150.0,
+     105.0,
+     -105.0
+    ],
+    28.0,
+    -0.33,
+    "hardware",
+    -4.0
+   ]
+  ],
+  "contact_depth_sum_mm": 74.93,
+  "jams": 0,
+  "min_metal_taken": 0.072,
+  "shell_min_taken": {
+   "i": 139,
+   "mm": 0.98,
+   "az_rel": -4.0
+  },
+  "relayed": {
+   "n": 41,
+   "taken": 28,
+   "contact": 13,
+   "jam": 0,
+   "clip_relayed": 0,
+   "phi_max": 39.88
+  },
+  "continuity_dropped": 0,
+  "th_margin": 5.0,
+  "arc_rel_th0": [
+   -4.01,
+   49.58
+  ],
+  "R_t": 80.1,
+  "R_b": 82.7,
+  "shell_end_bins_taken": {
+   "-6": [
+    0.98,
+    139
+   ],
+   "-4": [
+    1.03,
+    139
+   ],
+   "+36": [
+    4.07,
+    201
+   ],
+   "+38": [
+    4.57,
+    201
+   ],
+   "+40": [
+    4.88,
+    201
+   ],
+   "+42": [
+    5.8,
+    201
+   ],
+   "+44": [
+    6.19,
+    201
+   ],
+   "+46": [
+    4.88,
+    214
+   ],
+   "+48": [
+    3.52,
+    451
+   ]
+  },
+  "perpose": "docs/concepts/verify/phi40-thinstack-relay-4r/claim_phi40_pick_perpose.json"
+ },
+ "held_out_gap": 16.69,
+ "held_out_gap_plain": 16.02,
+ "held_out": {
+  "gate": 16.69,
+  "plain": 16.02,
+  "near1": 22.58,
+  "near2": 41.31,
+  "reach": 0.7878,
+  "follow": 1.0,
+  "ib14_chain_only": 0.8933,
+  "contacts": 48,
+  "contact_depth_sum_mm": 197.8,
+  "jams": 0,
+  "overhead": [
+   22,
+   71
+  ],
+  "th_margin": 5.0,
+  "hardware_contacts": [
+   [
+    211,
+    [
+     -90.0,
+     15.0,
+     165.0
+    ],
+    -0.49,
+    "hardware",
+    48.9
+   ],
+   [
+    224,
+    [
+     -90.0,
+     60.0,
+     105.0
+    ],
+    -3.49,
+    "chain+hw",
+    0.3
+   ],
+   [
+    225,
+    [
+     -90.0,
+     60.0,
+     120.0
+    ],
+    -5.51,
+    "chain+hw",
+    -2.6
+   ],
+   [
+    252,
+    [
+     -75.0,
+     60.0,
+     105.0
+    ],
+    -1.6,
+    "chain+hw",
+    -1.1
+   ],
+   [
+    977,
+    [
+     120.0,
+     15.0,
+     -180.0
+    ],
+    -6.28,
+    "chain+hw",
+    -4.0
+   ],
+   [
+    1134,
+    [
+     150.0,
+     75.0,
+     -105.0
+    ],
+    -9.3,
+    "chain+hw",
+    -1.1
+   ]
+  ],
+  "perpose": "docs/concepts/verify/phi40-thinstack-relay-4r/held_pick_perpose.json"
+ },
+ "diagnostics_post_claim": {
+  "claim_delta5": {
+   "gate": 13.67,
+   "plain": 13.01,
+   "contacts": 16,
+   "jams": 0
+  }
+ }
 }
