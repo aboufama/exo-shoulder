@@ -4255,5 +4255,46 @@
   "relay_contact": 2,
   "relay_parts": 0,
   "n_windows": 21
+ },
+ {
+  "k": 79,
+  "t": "2026-10-18T02:30:21Z",
+  "params": {
+   "a0": 14.0,
+   "azu": 150.0,
+   "lo": 0.0,
+   "hi": 32.0,
+   "r0": 87.75,
+   "h_lift": 54.15,
+   "q0": "policy (ii) relay"
+  },
+  "bench": "Bench(60,160) fast",
+  "inband14": 0.7493,
+  "reach": 0.8,
+  "contact": 0.0105,
+  "gap": 26.12,
+  "inband10": 0.4699,
+  "follow": 1.0,
+  "ghost_gap": 11.05,
+  "ghost_best": {
+   "lo": 0.0,
+   "hi": 32.0,
+   "gap": 26.12,
+   "ghost": 11.05,
+   "reach": 0.8,
+   "inband14": 0.7493,
+   "contact": 0.0105,
+   "ws_taken": 128,
+   "contacts": 2,
+   "relay_taken": 4,
+   "relay_contact": 2,
+   "relay_parts": 0
+  },
+  "q0_zero_gap": 27.57,
+  "cand": 10,
+  "relay_taken": 4,
+  "relay_contact": 2,
+  "relay_parts": 0,
+  "n_windows": 24
  }
 ]
