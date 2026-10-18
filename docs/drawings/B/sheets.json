@@ -1,0 +1,85 @@
+{
+ "set": "B",
+ "design": "skin-normal-3r-pin-knee H1b",
+ "pdf": "B_drawings.pdf",
+ "sheets": [
+  {
+   "file": "01_KIN.png",
+   "title": "Pin knee H1b, kinematic layout"
+  },
+  {
+   "file": "02_GA.png",
+   "title": "Pin knee H1b, general arrangement"
+  },
+  {
+   "file": "03_HUB.png",
+   "title": "\u00d820 hub stack, section"
+  },
+  {
+   "pn": "D8-01",
+   "title": "Scapula base (J1 upper member)",
+   "ends": [
+    "J1"
+   ],
+   "scale": "2:1",
+   "file": "04_D8-01.png"
+  },
+  {
+   "pn": "D8-02",
+   "title": "Link 1 (J1 to J2)",
+   "ends": [
+    "J1",
+    "J2"
+   ],
+   "scale": "2:1",
+   "file": "05_D8-02.png"
+  },
+  {
+   "pn": "D8-03",
+   "title": "Link 2 (J2 to J3)",
+   "ends": [
+    "J2",
+    "J3"
+   ],
+   "scale": "1:1",
+   "file": "06_D8-03.png"
+  },
+  {
+   "pn": "D8-04",
+   "title": "Member 3 (J3 disc + E strap)",
+   "ends": [
+    "J3",
+    "pin a"
+   ],
+   "scale": "2:1",
+   "file": "07_D8-04.png"
+  },
+  {
+   "pn": "D8-05",
+   "title": "Knee link",
+   "ends": [
+    "pin a",
+    "pin b"
+   ],
+   "scale": "2:1",
+   "file": "08_D8-05.png"
+  },
+  {
+   "pn": "D8-06",
+   "title": "Arm pad + pad mount + BOTTOM (one part)",
+   "ends": [
+    "pin b"
+   ],
+   "scale": "1:2",
+   "file": "09_D8-06.png"
+  },
+  {
+   "pn": "D8-07",
+   "title": "Upper-arm cuff plate",
+   "scale": "1:1",
+   "features": 6,
+   "mass_g": 36.57,
+   "file": "10_D8-07.png"
+  }
+ ]
+}
