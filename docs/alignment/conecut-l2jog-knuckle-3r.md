@@ -230,3 +230,73 @@ Patterns walked and found absent:
 4. **Dashboard complexity for delta records.** Have tools/dash_build.py follow a delta record's `source` and add the
    `record_delta`, so conecut-h2facet, conecut-l2jog and lowarm-kphase-notch show the lead's 18.5 and not 0.
    - **Measured effect here:** this row dominates 12 of 36 verified rows, not 33.
+
+## Skeptic (2026-10-18 ~16:50-17:15 UTC)
+
+**Final ledger verdict: GAMED.** The ledger computes it (`python3 tools/alignment_ledger.py get conecut-l2jog-knuckle-3r`,
+stage skeptic, 17:13:36Z). I refuted 2 of the 18 reasons with evidence (fold_margin and G1). The other 16 stand, and
+NEW-hidden-lift stands as gamed.
+
+What I measured or re-derived myself (models unchanged):
+- **Probes from all six committed per-pose dumps** (tools/alignment_paired.py gap_parts; a taken pose with
+  min(min_mm, cmin) < X counts as contact). Every number in the auditor's table reproduces:
+  - bench +0.2: modelled 18.29 against true cut / lead 18.83;
+  - held: 22.44 against 22.38 at every probe level.
+- **Status:** the three dumps share their pose keys. Status (taken / contact) differs on 0 poses, model vs lead and
+  true cut vs lead, on both wears.
+- **m_sub-at-rest probe on this row** (new file docs/alignment/remeasure/conecut-l2jog-knuckle-3r_skeptic_msub_rest_bench.json;
+  CB_EXACT=1, nice, 1 process, 136 s):
+  - It reproduces the frozen claim (18.28 / reach 0.7278 / ib14 0.9005). The family th reading is 5.181, lt5 0.
+  - m_sub at rest: min 0.0, p10 0.267, lt1 50 of 205.
+  - Chain coordinates (th, dK, m_plain, m_eff, m_sub) equal the lead's on all 372 taken rows. Only min_mm differs, at
+    139 (0.072 -> 0.602) and 345 (1.709 -> 1.606).
+
+| key | ruling | evidence (short; full text in conecut-l2jog-knuckle-3r.rulings.json) |
+|---|---|---|
+| continuity | upheld (watch) | The flood is on file (remeasure/_flood_*.json). By c_continuity's rule the bench reads ok (full 0, knn +1.69) and held reads WATCH (knn 30.69 vs 22.45: +8.24 > 3; 77 of 332 forced dropped). |
+| fold_margin | **refuted** | On file: _flood_bench.json:extra.th_margin.min 5.181, _flood_held.json 5.006, lt5 0. My msub probe re-measures 5.181. c_fold_margin reads ok (gamed only < 4.95). |
+| complexity | upheld | tools/simplicity.py gives this id 0 and the lead 18.5; the row says 18.5; morphs.json shows 0. |
+| reporting | upheld | morphs.json: gap / sweep_gap 12.5, v_gap 18.28, verdict 'SCREENED ...' on a verified row. |
+| NEW-hidden-lift | upheld (**gamed**) | Probes re-derived (above). Lift on file: verify/..._v_truecut_scan_bench.json waist_truecut model_lift_mm [-0.298, 0.951]. ROUNDS.md 4603-4604 ranks at the probe; the plain gap ties and both designs have 0 passive translations, so the probe decides the tie with an artifact. **It is already being used:** lowarm-kstop-knuckle-3r.md lines 117 / 200 / 229 / 288-289 plan the combined cell on l2jog's modelled 139 readings (0.487 at dl 1.0, 0.602). Corrections, level unchanged: (a) as the stated cut the design is status-identical to the lead, not identical pose for pose (on held, 5 pose minima are 0-0.40 mm higher; summed contact depth 60.09 vs 60.97 mm); (b) the modelled field is mixed (-0.30 to +0.95 mm). |
+| R2 | upheld | Also unlisted: rows:spec_jog.frozen_exact p139 0.726 / probe02 18.28 (true cut 0.059). Doc line 127 still says 'held 898 1.67 (unchanged)', but the dump reads 1.528. Lesson (3) at doc lines 173-175 is unstruck. |
+| R1 | upheld | 'SCREENED' verdict; gap 12.5 = the lead's fit_fast number; alignment ''. |
+| G5 | upheld | Recount from morphs.json: dominates 33 of 36 verified rows at the shown 0, 12 of 36 at 18.5. |
+| P1 | upheld | JB = 13 (pose 139's binder, line 54); dl box 0..1.6 (line 63), best 1.6; pre-registered 139 >= 0.4 on the claim bench; held 22.45 vs 22.38. |
+| T1 | upheld (report-only) | Shell 16.55 > 15. The tool's near_touch is report-only by the user's 2026-10-17 ruling (alignment_audit.py lines 279-282). |
+| G1 | **refuted** | No in-band gain (0.9012 -> 0.9005; held 0.9000 -> 0.8993), and near2 is identical (34.84 / 37.11). The 'held overhead p10 1.50 -> 1.42' does not reproduce: per-pose p10 over the 18 taken overhead poses is 1.431 / 1.196 on both the lead and the model. Only 898 (-0.14) and 345 (-0.10) move, and both return as the stated cut (1.691 / 1.710). They belong to NEW-hidden-lift. |
+| NEW-ws-inband | upheld | probe_bench.json 0.8665 / 0.8309 / 0.9341 vs the lead's 0.8676 / 0.8315 / 0.9359; L2 part 0.726 / 0.723. |
+| NEW-strap-dilution | upheld | c4_inband 18.74 / 22.97, chain-only 0.8581, held ib14 0.8993. |
+| T3 | upheld | th 5.181 / 5.006; held J3 dowel margin_lo 0.74, 19 stopped. |
+| M5 | upheld (watch), corrected | R17 / cuff twist ARE measured on the lead's CAD: user_conecut_knee/judge/scorecard.md R17 PASS; dynamics.json twist 3.99 deg, 0.57 N, 0.126 N.m. The waisted link 2's strength is unchecked. With the measured narrowing (5.87 -> 4.54) its out-of-plane modulus drops 22.7 % (not 27 %), and its in-plane modulus 40 %. |
+| G4 | upheld, now measured | m_sub at rest lt1 50 of 205, p10 0.267: identical to the lead. |
+| P2 | upheld (carried) | Inherited chain; zero measured effect (lead heldleak_check). |
+| S5 | upheld | Held knn 30.69, 255 of 332 forced connected. |
+
+### Missed by the audit (for the next audit; these do not change this verdict)
+
+1. **The artifact is propagating into another row's claim.** docs/concepts/lowarm-kstop-knuckle-3r.md does two things:
+   - Line 117: '139 at the probes ... fails at +0.1: the claim needs conecut-l2jog (dl 1.0 planform: 0.487)'.
+   - Lines 200, 229 and 288-289: plans the next combined cell 'kstop + conecut-h2facet + conecut-l2jog' on 'l2jog reads
+     139 at 0.602'.
+
+   docs/concepts/round15_ideation.md line 210 still calls l2jog 'a 0-cx probe hardener ... 18.83 -> ~18.28'. A combined
+   cell built on the modelled waist would inherit the 0.95 mm edge lift and read the probe gain again. As a true cut,
+   139 is 0.073 at dl 1.6 (and 0.059 for the spec jog), which hardens nothing.
+
+   Action: the combined cell's claim must use the true-cut waist (verify/conecut-l2jog-knuckle-3r.py true_disp), or
+   price the lift as a machined edge zone.
+2. **A second refuted record on the row:** spec_jog.frozen_exact (p139 0.726, probe02 18.28). It has the same artifact
+   (verification.truecut.jog_truecut_bench_p139 0.059), and R2 did not list it.
+3. **'Built as stated = the lead pose for pose' is slightly overstated.** The true-cut held dump moves 5 pose minima by
+   0 to +0.40 mm against the lead (the 224 / 225 / 252 contact cluster, plus 305). The summed held contact depth is
+   60.09 vs 60.97 mm. Status, plain gap and probes are equal. This is a small real benefit of the true cut, not gaming.
+4. **The modelled waist is not a pure lift.** The true-cut scan's model_lift_mm is [-0.298, +0.951]. Some moved samples
+   sit up to 0.30 mm below the original underside, so as modelled part of the edge zone also sinks. This matters for
+   the auditor's proposed M6 detector, which should flag both signs.
+5. **G1 and M5 measurement slips in the audit:**
+   - the held overhead p10 '1.50 -> 1.42' does not reproduce from the dumps;
+   - the 27 % section-modulus cut uses the row's refuted 1.6 mm narrowing. The measured narrowing is 1.33 mm, giving
+     22.7 % out of plane and 40 % in plane.
+
+Files: docs/alignment/conecut-l2jog-knuckle-3r.rulings.json; docs/alignment/remeasure/conecut-l2jog-knuckle-3r_skeptic_msub_rest_bench.json;
+ledger entry `skeptic:conecut-l2jog-knuckle-3r` (final verdict **gamed**).
