@@ -1,0 +1,57 @@
+[
+ {
+  "key": "fast_frozen",
+  "refuted": false,
+  "evidence": "Confirmed, and it is the right number for the pattern. Row gap 153.49 (best of n_configs 915), v_gap 201.20; re-measured frozen.gap 201.2 in docs/alignment/remeasure/slotted-eccentric-pin-knee-3r_bench.json and again 201.2 in this skeptic's run (_partcounts.json gap). +47.71 > TH ff_watch 14 (tools/alignment_audit.py line 62). Split: 153.49 -> 188.47 (row exact_frozen.fit.gap, same params, same Bench(60,160) fast) = +34.98 is the search's 0.5 mm radial part-part overlap vs the 1 mm rule (docs/concepts/slotted-eccentric-pin-knee-3r.md line 107; frozen(overlap=1.0), slotted-eccentric-j2-3r.py line 336): metal-to-metal clearance the headline does not hold. 188.47 -> 201.20 = +12.73 is the freeze + exact wear, inside the documented 4.6-14 range. Unlike dogring's refuted case, the bulk of the drop is not separately ruled anywhere: stands."
+ },
+ {
+  "key": "continuity",
+  "refuted": false,
+  "evidence": "No flood on file: no docs/concepts/verify/ file for this id (ls: 0), no connect / continuity / flood key in the row, none in the remeasure files. Measured here (new tools/alignment_benchgraph_flood.py on the re-wear per-pose dumps): connected()'s bench graph (stop-relay-rocker-3r.py lines 196-229: taken ws nodes, grid-neighbour edges), seeds = taken ws at elevation <= 30, edges NOT closure-checked (an upper bound): <= 27 of 65 taken bench poses connect (reach 0.181 -> <= 0.075, loss >= 10.56 points); held <= 39 of 69 (loss >= 8.33). The bench graph is sparse (1.13 bench neighbours per ws cell, 52 of 360 cells with none; 360 of 4488 grid cells), so this is not the rule's envelope flood, but it cannot show a loss <= TH conn_watch 1. Stands."
+ },
+ {
+  "key": "fold_margin",
+  "refuted": true,
+  "evidence": "Measured. Recomputed from the per-pose th of docs/alignment/remeasure/slotted-eccentric-pin-knee-3r_bench_perpose.json with the model's own a2e_of(th) and mg = min(th - |a1 - a2e|, a1 + a2e - th, 360 - a1 - a2e - th) at row best_params (docs/concepts/models/slotted-eccentric-j2-3r.py lines 70-81; tools/concept_kit.py lines 25-30 with a2 = the per-pose J2-J3 angle a2e that closure_v builds p2 with): minimum over the 71 taken poses 15.801 deg (held, 76 taken: 17.303), matching the remeasure kin.fold_margin_th_min_taken [15.801, 51.104] / held [17.303, 51.287] to 0.001 deg. Above TH fold_min 5.0 by 10.8 deg; the binding side is a1 + a2e - th at th 123.0, a2e 87.4. (Read at the control's fixed a2 68.26 the same th would give -3.32, but that is not this chain's J2-J3 angle.) The number is on file and correct; only the tool's reader does not look at the remeasure file."
+ },
+ {
+  "key": "sampling",
+  "refuted": false,
+  "evidence": "Counts now measured (new tools/alignment_slotted_partcounts.py, model unchanged through its own frozen(), CB_EXACT=1; output docs/alignment/remeasure/slotted-eccentric-pin-knee-3r_partcounts.json; per-member fractions re-derived from the samples equal the kit's inband_member exactly, sample-weighted 0.6042 = the claim's inband14). Every part has 168-2100 clip samples (>= TH part_min_samples 16), none zero; sample-weighted 0.6042 vs part-weighted 0.6958 (-9.16 points, so no part_weight watch). The documented 'mostly out-of-band' trigger (< 0.5 in band, c_sampling) still fires with counts: hub2 0.00 (486 samples, median clearance 18.07 mm), crank 0.3611 (756, median 20.16 mm), L2b 0.269 (2100, median 15.89 mm). Metal riding 16-20 mm off the skin is outside the 14 mm pass line. Stands."
+ },
+ {
+  "key": "reporting",
+  "refuted": false,
+  "evidence": "Confirmed. docs/dashboard/data/morphs.json row slotted-eccentric-pin-knee-3r: sweep_gap 97.45, sweep_t 2026-10-18T01:58:00Z, sweep_inband14 0.2095, against v_gap 201.2 (103.75 apart). Stands."
+ },
+ {
+  "key": "judgement:NEW-dishonest-sweep-best",
+  "refuted": false,
+  "evidence": "Confirmed in the raw files. docs/concepts/sweeps/slotted-eccentric-pin-knee-3r.json (1027 entries now): tag AUD-g9-2, k 1013, stream AUD, gap 97.45, honest False, collide 0.1232, inband14 0.2095; 150 entries carry honest False and their best is exactly 97.45; 9 entries with params.lock = 1 (stream paired, t 2026-10-18T01:13:30) best 30.24. tools/dash_build.py has no read of 'honest' (grep: 0 hits) and sweep_file_rows() (lines 188-209) keeps max(file gap, recomputed) only. The repo-wide 10-of-98 count was not re-run by this skeptic. Stands."
+ },
+ {
+  "key": "judgement:S3",
+  "refuted": false,
+  "evidence": "Confirmed. Model docstring docs/concepts/models/slotted-eccentric-pin-knee-3r.py lines 9-15: 'Member 3 is the kit's neck in both arms of the pair'. This skeptic's wear lists the sampled members: hub1-3, pinK, studG, link1, spoke, trk1-5, neck, crank, L2b, armG (16 groups, _partcounts.json parts) - no pin, knee link or arm pad of mechanism.cuff_knee (2 moving bodies). The comparison 36.83 (kit neck, this harness) vs 27.20 (pin knee, its own verifier harness) is not apples to apples, so 'pessimistic' is not proven either; the watch rests on the unsampled cuff bodies, which is a fact. Stands."
+ },
+ {
+  "key": "judgement:S2",
+  "refuted": true,
+  "evidence": "Measured: the S2 pattern (sparse sampling of bad metal hidden by sample weighting) is absent. docs/alignment/remeasure/slotted-eccentric-pin-knee-3r_partcounts.json: the out-of-band parts are the HEAVILY sampled ones - hub2 486, crank 756, L2b 2100 of 10902 clip samples (30.7 %; L2b alone 19.3 %, the largest share of any part) - so sample-weighted in-band 0.6042 is 9.16 points BELOW part-weighted 0.6958: the weighting penalises the bad metal, it does not hide it (TH part_weight_watch is +3). Correction to the reason: hub 2's '71.2 mm' is its fitted level from GH, not its clearance; its measured median clearance is 18.07 mm (4 mm over the band top), not tens of millimetres. The felt-part concern itself stays under 'sampling' (upheld)."
+ },
+ {
+  "key": "judgement:G1",
+  "refuted": true,
+  "evidence": "Counts confirmed from the per-pose dumps (bench taken 71: min_mm < 1 / 2 / 3 = 7 / 20 / 31, min 0.089; held taken 76: 3 / 15 / 21, min 0.075; remeasure deep gap_near1/2/3 222.88 / 242.94 / 259.92). But the documented level for near-touch is report-only: docs/alignment/slotted-eccentric-pin-knee-3r.json near_touch level 'ok'; tools/alignment_audit.py c_near_touch lines 277-279 ('report-only ... the level stays ok', user 2026-10-17, CLAUDE.md decision 3) and dominance never 'gamed' (A1 retired). The reason itself says 'Report only' and 'no ranking depends on it'. Same ruling as docs/alignment/dogring-draglink-knuckle-3r.rulings.json judgement:G1. Numbers stay reported in the .md."
+ },
+ {
+  "key": "judgement:S5",
+  "refuted": false,
+  "evidence": "Confirmed. Per-pose dumps: 82 of 110 clip frames have th < 74.0 (bench and held); 72 of 128 bench ws poses at elevation <= 30 have th < 74 (held 63 of 129); knee (psi) over taken poses min 72.681 bench / 71.305 held. No flood on file. The bench-graph upper bound (tools/alignment_benchgraph_flood.py) loses >= 10.56 points bench / >= 8.33 held; the envelope flood is still owed. Stands."
+ },
+ {
+  "key": "judgement:R1",
+  "refuted": true,
+  "evidence": "Measured: the harm R1 guards against (a self-measured number that an outside measurement does not reproduce, shown as verified) is absent. The v_gap 201.20 has been reproduced to the digit by three independent wears of the unchanged model: the 02:08 death audit (row audit.reproduced.frozen_exact_Bench110_360 201.2), the auditor's re-wear (docs/alignment/remeasure/slotted-eccentric-pin-knee-3r_bench.json frozen.gap 201.2, reach 0.1806 follow 0.0545 ib14 0.6042 contact 0.1013) and this skeptic's run (docs/alignment/remeasure/slotted-eccentric-pin-knee-3r_partcounts.json gap 201.2, inband14 0.6042). Held out it reads 194.02 (_held.json frozen.gap). It is pessimistic vs the 153.49 headline. What remains is the status label 'screened', which ranks nothing."
+ }
+]

@@ -243,3 +243,87 @@ audit and this one.
 
 The next loop step is unchanged. This design stays screened and far behind; nothing here moves it, and no new leader is
 involved.
+
+## Skeptic (2026-10-18 02:41-02:51 UTC)
+
+Run `skeptic:slotted-eccentric-pin-knee-3r`, rulings in `docs/alignment/slotted-eccentric-pin-knee-3r.rulings.json`,
+ledger entry 2026-10-18T02:50:50Z. **Final verdict (computed by `tools/alignment_ledger.py skeptic`): WATCH.**
+Refuted 4 of 11 (fold_margin, S2, G1, R1); upheld 7.
+
+**What this skeptic measured (models unchanged):**
+- A third wear of the claim, through the model's own `frozen()`, CB_EXACT=1, niced, 1 process, with a new read-only tool
+  `tools/alignment_slotted_partcounts.py`. It gave fit 188.47 and frozen exact 201.20 (ib14 0.6042), the claim to the
+  digit. Output: `docs/alignment/remeasure/slotted-eccentric-pin-knee-3r_partcounts.json`. Per-member fractions
+  re-derived from the samples equal the kit's `inband_member` exactly.
+- Per-part sample counts on Bench(110,360) exact. These are clip frames that are taken and not in contact; there are
+  only 6 such frames.
+
+  | part | clip samples | in band 2-14 | median clearance (mm) |
+  |---|---|---|---|
+  | hub1 | 486 | 1.00 | 7.95 |
+  | hub2 | 486 | 0.00 | 18.07 |
+  | hub3 | 486 | 0.51 | 13.75 |
+  | pinK | 1182 | 0.78 | 13.21 |
+  | studG | 894 | 0.83 | 5.88 |
+  | link1 | 1344 | 0.75 | 7.94 |
+  | spoke | 510 | 0.53 | 12.67 |
+  | trk1 | 168 | 0.64 | 10.01 |
+  | trk2 | 168 | 1.00 | 5.37 |
+  | trk3 | 168 | 1.00 | 6.36 |
+  | trk4 | 168 | 1.00 | 6.54 |
+  | trk5 | 168 | 1.00 | 6.06 |
+  | neck | 1248 | 0.67 | 10.69 |
+  | crank | 756 | 0.36 | 20.16 |
+  | L2b | 2100 | 0.27 | 15.89 |
+  | armG | 570 | 0.79 | 11.48 |
+
+  Sample-weighted in-band is 0.6042 and part-weighted is 0.6958 (-9.16 points). No part has fewer than 168 samples.
+- Fold margin, recomputed from the per-pose th with the model's own `a2e_of()` and the kit formula at the per-pose
+  J2-J3 angle a2e: 15.801 deg on the bench (71 taken) and 17.303 held out (76 taken). Both match the remeasure `kin`
+  to within 0.001.
+- A bench-graph flood upper bound, from the new tool `tools/alignment_benchgraph_flood.py` on the per-pose dumps. It
+  uses connected()'s graph without the edge closure checks, seeded at taken ws poses with elevation <= 30.
+  - Bench: at most 27 of 65 taken poses connect (reach 0.181 -> <= 0.075), a loss of >= 10.56 points.
+  - Held out: at most 39 of 69 connect, a loss of >= 8.33 points.
+  - The bench graph is sparse: 1.13 neighbours per ws cell, and 52 of 360 cells have none. So this is not the rule's
+    envelope flood.
+
+**Rulings**
+
+| key | refuted | evidence (short; full text in the rulings file) |
+|---|---|---|
+| fast_frozen | no | +47.71 > ff_watch 14. Of it, +34.98 is the search's 0.5 mm part-part overlap vs the 1 mm rule (153.49 -> fit 188.47, same bench, doc line 107), and +12.73 is the freeze + exact wear. No other ruling covers the bulk. |
+| continuity | no | No flood on file. The bench-graph upper bound loses >= 10.56 (bench) / >= 8.33 (held) points, so it cannot show <= 1. |
+| fold_margin | **yes** | Measured 15.801 / 17.303 deg (>= TH fold_min 5.0). On file in remeasure `kin.fold_margin_th_min_taken`; the tool's reader only misses it. |
+| sampling | no | Counts measured: no thin and no zero-sample parts, part-weighted -9.16. The documented < 0.5 trigger still fires: hub2 0.00 (18.07 mm median), crank 0.36 (20.16 mm), L2b 0.27 (15.89 mm). |
+| reporting | no | morphs.json sweep_gap 97.45 vs v_gap 201.20 confirmed. |
+| NEW-dishonest-sweep-best | no | Sweep file AUD-g9-2, k 1013, honest False, gap 97.45 = the best of 150 dishonest entries. 9 lock=1 entries best 30.24. dash_build.py never reads `honest`. |
+| S3 | no | Model lines 9-15: member 3 is the kit neck. The 16 sampled groups contain no cuff-knee body. The 36.83 vs 27.20 comparison crosses harnesses, so "pessimistic" is not proven either. |
+| S2 | **yes** | The out-of-band parts are the heavily sampled ones: 3342 of 10902 samples, with L2b the largest share at 19.3 %. Sample weighting therefore lowers in-band by 9.16 points rather than hiding them. Hub 2's 71.2 mm is its level from GH; its clearance median is 18.07 mm. |
+| G1 | **yes** | Counts confirmed (7/20/31 of 71; 3/15/21 of 76). The documented level is report-only: near_touch reads ok, c_near_touch lines 277-279. Same ruling as dogring. |
+| S5 | no | Confirmed: 82/110 clip frames and 72/128 ws poses at elevation <= 30 have th < 74, and psi min is 72.68. No flood on file; the bench-graph loss is >= 10.56. |
+| R1 | **yes** | 201.20 reproduced to the digit by three independent wears: the death audit, the auditor's re-wear and this skeptic's run. It is pessimistic, and only the status label remains. |
+
+**Missed by the auditor (for the next audit; this verdict does not change):**
+1. **Continuity is probably worse than watch.** On connected()'s bench graph, the static reach keeps at most 27 of 65
+   poses (bench) and 39 of 69 (held). That is a loss of >= 10.56 / 8.33 points, against conn_gamed 3.
+   - The bench graph is sparse, so only the envelope flood (connected_full) can decide.
+   - If that flood confirms a loss > 3, continuity reads `gamed`. That would not move the rank, which is already 201.
+   - The flood is owed before any connected-reach claim.
+2. **The headline gap is at a laxer part-part rule.** +34.98 of the fast -> frozen drop is the kit's 0.5 mm radial
+   part-part overlap in the search, against the 1 mm rule that frozen() applies.
+   - The dashboard's "claimed" column can therefore mix part-part rules across kit models.
+   - Check other kit rows' headline gaps for the same split (fit at 1 mm vs search number).
+3. **The scored in-band rests on 6 clip frames.** The inband14 0.604, and every per-part fraction, is a mean over the
+   6 of 110 clip frames that are taken and contact-free. It is corroborated by the unscored workspace in-band, 0.652
+   over 65 poses.
+   - This is a fragility, not a flattery.
+   - Proposal: report the pose count behind the in-band beside it.
+4. **Auditor misreading (S2).** Hub 2's "71.2 mm ... tens of millimetres above the band" is its fitted level from GH.
+   The measured clearance median is 18.07 mm.
+5. **Tool reader gap (proposal, not a tightening).** `c_fold_margin` does not read
+   `docs/alignment/remeasure/<id>_bench.json` `kin.fold_margin_th_min_taken`. Adding that key to the reader would turn
+   this row's fold_margin ok (15.80). On every other row it changes nothing unless the row has a kit re-wear on file.
+   Bump VERSION if applied.
+
+**Final verdict: WATCH.**
